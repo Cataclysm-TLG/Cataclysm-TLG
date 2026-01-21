@@ -1134,7 +1134,7 @@
   },
   {
     "id": "jacket_leather_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather jacket" },
     "copy-from": "jacket_leather",
@@ -1142,7 +1142,7 @@
   },
   {
     "id": "vest_leather_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather vest" },
     "copy-from": "vest_leather",
@@ -1150,7 +1150,7 @@
   },
   {
     "id": "vest_leather_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather vest" },
     "copy-from": "vest_leather",
@@ -1158,7 +1158,7 @@
   },
   {
     "id": "vest_leather_mod_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "armored leather vest" },
     "copy-from": "vest_leather_mod",
@@ -1166,7 +1166,7 @@
   },
   {
     "id": "vest_leather_mod_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "armored leather vest" },
     "copy-from": "vest_leather_mod",
@@ -1174,7 +1174,7 @@
   },
   {
     "id": "coat_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur coat" },
     "description": "A warm jacket made of animal fur, once a symbol of wealth.",
@@ -1187,7 +1187,7 @@
   },
   {
     "id": "coat_fur_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur coat" },
     "copy-from": "coat_fur",
@@ -1195,7 +1195,7 @@
   },
   {
     "id": "coat_fur_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur coat" },
     "copy-from": "coat_fur",
@@ -1203,7 +1203,7 @@
   },
   {
     "id": "coat_faux_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "faux fur coat" },
     "description": "A jacket made of fake animal fur.  While not as fancy as a fur coat, its garish appearance still makes quite a statement.",
@@ -1214,7 +1214,7 @@
   },
   {
     "id": "coat_faux_fur_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "faux fur coat" },
     "copy-from": "coat_faux_fur",
@@ -1222,7 +1222,7 @@
   },
   {
     "id": "coat_faux_fur_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "faux fur coat" },
     "copy-from": "coat_faux_fur",
@@ -1230,7 +1230,7 @@
   },
   {
     "id": "vest_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur vest" },
     "description": "A warm vest made of animal fur.",
@@ -1243,7 +1243,7 @@
   },
   {
     "id": "vest_fur_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur vest" },
     "copy-from": "vest_fur",
@@ -1252,7 +1252,7 @@
   },
   {
     "id": "vest_fur_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur vest" },
     "copy-from": "vest_fur",
@@ -1261,7 +1261,7 @@
   },
   {
     "id": "vest_faux_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "faux fur vest" },
     "description": "A warm vest made of fake animal fur.",
@@ -1272,7 +1272,7 @@
   },
   {
     "id": "vest_faux_fur_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur vest" },
     "copy-from": "vest_fur",
@@ -1281,7 +1281,7 @@
   },
   {
     "id": "vest_faux_fur_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur vest" },
     "copy-from": "vest_fur",
@@ -1290,7 +1290,7 @@
   },
   {
     "id": "gosling_jacket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "nylon bomber jacket" },
     "description": "A lightweight nylon bomber jacket.",
@@ -2273,7 +2273,7 @@
   },
   {
     "id": "sleeveless_longcoat_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "XL sleeveless longcoat" },
     "copy-from": "sleeveless_longcoat",
@@ -2282,7 +2282,7 @@
   },
   {
     "id": "sleeveless_longcoat_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "sleeveless_longcoat",
     "name": { "str": "XS sleeveless longcoat" },
@@ -2366,7 +2366,7 @@
   },
   {
     "id": "sleeveless_longcoat_fur_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "XL sleeveless fur longcoat" },
     "copy-from": "sleeveless_longcoat_fur",
@@ -2375,7 +2375,7 @@
   },
   {
     "id": "sleeveless_longcoat_fur_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "sleeveless_longcoat_fur",
     "name": { "str": "XS sleeveless fur longcoat" },
@@ -2384,7 +2384,7 @@
   },
   {
     "id": "sleeveless_longcoat_faux_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "sleeveless_longcoat_fur",
     "name": { "str": "sleeveless faux fur longcoat" },
@@ -2395,7 +2395,7 @@
   },
   {
     "id": "sleeveless_longcoat_faux_fur_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "XL sleeveless faux fur longcoat" },
     "copy-from": "sleeveless_longcoat_faux_fur",
@@ -2404,7 +2404,7 @@
   },
   {
     "id": "sleeveless_longcoat_faux_fur_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "sleeveless_longcoat_faux_fur",
     "name": { "str": "XS sleeveless faux fur longcoat" },
@@ -2413,7 +2413,7 @@
   },
   {
     "id": "sleeveless_longcoat_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sleeveless leather longcoat" },
     "description": "A thick leather full-length longcoat without sleeves, leaving your arms unencumbered.  Has plenty of storage space due to its many pockets.",
@@ -2487,7 +2487,7 @@
   },
   {
     "id": "sleeveless_longcoat_leather_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "XL sleeveless leather longcoat" },
     "copy-from": "sleeveless_longcoat_leather",
@@ -2496,7 +2496,7 @@
   },
   {
     "id": "sleeveless_longcoat_leather_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "sleeveless_longcoat_leather",
     "name": { "str": "XS sleeveless leather longcoat" },
@@ -2871,7 +2871,7 @@
   },
   {
     "id": "tacjacket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tactical jacket" },
     "description": "A jacket with a hood and several pockets.",

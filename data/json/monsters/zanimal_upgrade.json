@@ -279,7 +279,7 @@
     "extend": { "flags": [ "ACIDPROOF", "ACID_BLOOD" ] },
     "death_function": { "message": "The %s's body leaks acid.", "effect": { "id": "death_acid", "hit_self": true } }
   },
-    {
+  {
     "id": "mon_zombie_horse_lame",
     "type": "MONSTER",
     "name": { "str": "lame zombie horse" },

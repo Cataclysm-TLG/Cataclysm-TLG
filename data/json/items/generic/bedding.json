@@ -47,7 +47,7 @@
   },
   {
     "id": "sheet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bedsheet" },
     "description": "A big rectangle of fabric.  It could be used as a curtain, worn for warmth, placed somewhere for bedding, or cut up for a bunch of smaller sheets.",
@@ -76,7 +76,7 @@
   },
   {
     "id": "blanket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "blanket" },
     "description": "Hiding under here will not protect you from the monsters.",
@@ -105,7 +105,7 @@
   },
   {
     "id": "down_blanket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "down-filled blanket" },
     "description": "Hiding under here will not protect you from the monsters, but it'll keep you warm.",
@@ -134,7 +134,7 @@
   },
   {
     "id": "fur_blanket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur blanket" },
     "description": "A heavy fur blanket that covers most of your body.",
@@ -163,7 +163,7 @@
   },
   {
     "id": "quilt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "quilt" },
     "description": "A big, comfy quilt made of thick wool in a triangle pattern.  Extremely cozy!",
@@ -191,7 +191,7 @@
   },
   {
     "id": "quilt_patchwork",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "quilt",
     "name": { "str": "patchwork quilt" },
@@ -211,7 +211,7 @@
   },
   {
     "id": "emer_blanket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
@@ -239,7 +239,7 @@
   },
   {
     "id": "sleeping_bag",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sleeping bag" },
     "description": "A large sleeping bag that covers you head to toe, with a strap for carrying it on your back when not in use.  This one is medium weight.  It is currently unrolled; activate it to roll it up for easy storage.",
@@ -269,7 +269,7 @@
   },
   {
     "id": "sleeping_bag_improvised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "improvised sleeping bag" },
     "description": "You might think it is bizarre to sleep in a body bag stuffed with dead plants.  However, the thought of sleeping in the cold is far more uncomfortable.",
@@ -292,7 +292,7 @@
   },
   {
     "id": "grass_sheet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "grass sheet" },
     "description": "Some grass yarn woven into a crude sheet.  It's not enough to keep the rain out, but it might be better than nothing.",
@@ -320,7 +320,7 @@
   },
   {
     "id": "grass_blanket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "grass blanket" },
     "description": "Some grass sheets sewn together. It's itchy, but water resistant and more comfortable than the cold.",

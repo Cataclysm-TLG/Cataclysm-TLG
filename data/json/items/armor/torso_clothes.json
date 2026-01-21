@@ -1,7 +1,7 @@
 [
   {
     "id": "waist_apron_long",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "long waist apron" },
     "description": "A long cloth apron that haings from the waist.",
@@ -43,7 +43,7 @@
   },
   {
     "id": "waist_apron_short",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "short waist apron" },
     "description": "A short cloth apron that hangs from the waist.",
@@ -78,7 +78,7 @@
   },
   {
     "id": "apron_cotton",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "cotton apron" },
     "description": "An cloth apron that covers the front of the body.",
@@ -93,7 +93,7 @@
   },
   {
     "id": "apron_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather apron" },
     "description": "A leather apron that covers the front of the body.",
@@ -139,7 +139,7 @@
   },
   {
     "id": "apron_plastic",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plastic apron" },
@@ -153,7 +153,7 @@
   },
   {
     "id": "apron_cut_resistant",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "cut-resistant apron" },
@@ -167,7 +167,7 @@
   },
   {
     "id": "blazer",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "blazer" },
     "description": "A professional-looking wool blazer.",
@@ -205,7 +205,7 @@
   },
   {
     "id": "cheerleader_dress",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "cheerleader dress", "str_pl": "cheerleader dresses" },
     "description": "A light and breezy cheerleader dress.  It's blue and white with the word \"Cheers\" printed at the top.",
@@ -227,7 +227,7 @@
   },
   {
     "id": "combat_shirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "combat shirt" },
     "description": "An oddly balanced long-sleeved shirt with a thin, breathable torso and thicker arms more appropriate for a jacket.  The arms are covered in a camouflage pattern and have two shoulder pockets.  It has a pocket for your pen!",
@@ -272,7 +272,7 @@
   },
   {
     "id": "dress",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "dress", "str_pl": "dresses" },
     "description": "A long cotton dress.",
@@ -292,7 +292,7 @@
   },
   {
     "id": "denim_shirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "denim shirt" },
     "description": "A long sleeved button-down shirt made from denim.",
@@ -324,7 +324,7 @@
   },
   {
     "id": "dress_shirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "dress shirt" },
     "description": "A white button-down shirt with long sleeves.  Looks professional!",
@@ -375,7 +375,7 @@
   },
   {
     "id": "dress_wedding",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wedding dress", "str_pl": "wedding dresses" },
     "description": "A beautiful white wedding dress.  What good will it be now?",
@@ -398,7 +398,7 @@
   },
   {
     "id": "flag_shirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "flag t-shirt" },
     "description": "A t-shirt embroidered with an American flag pattern.",
@@ -425,7 +425,7 @@
   },
   {
     "id": "flotation_vest",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "flotation vest" },
     "description": "A brightly-colored vest designed to keep you upright and floating in water.",
@@ -446,7 +446,7 @@
   },
   {
     "id": "flotation_vest_ms",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "makeshift flotation vest" },
     "description": "A flotation vest made of inflated animal skins.",
@@ -467,7 +467,7 @@
   },
   {
     "id": "gown",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "evening gown" },
     "description": "A luxurious evening gown.  It accentuates your curves, or lack thereof.",
@@ -486,7 +486,7 @@
   },
   {
     "id": "halter_top",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "halter top" },
     "description": "A short top made from cotton.",
@@ -506,7 +506,7 @@
   },
   {
     "id": "hoodie",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "hoodie" },
     "description": "A sweatshirt with a hood and a \"kangaroo pocket\" in the front for storage.",
@@ -537,7 +537,7 @@
   },
   {
     "id": "jersey",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sports jersey" },
     "//": "Genuine team merch, and priced like it!",
@@ -557,7 +557,7 @@
   },
   {
     "id": "leotard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leotard" },
     "description": "A skin-tight spandex garment, covering the body from the groin to the shoulders.  With its deep scoop-cut back and high waist cuts, this garment is perfect for showcasing your physique on the stage.",
@@ -575,7 +575,7 @@
   },
   {
     "id": "longshirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "long-sleeved t-shirt" },
     "description": "A soft cotton shirt with long sleeves.",
@@ -597,7 +597,7 @@
   },
   {
     "id": "longshirt_costume",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "long-sleeved shirt" },
     "description": "A long-sleeved cotton shirt.",
@@ -614,7 +614,7 @@
   },
   {
     "id": "shirt_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin shirt" },
     "description": "An overshirt made of very thin, lightweight leather.",
@@ -638,7 +638,7 @@
   },
   {
     "id": "shirt_leather_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin shirt" },
     "copy-from": "shirt_leather",
@@ -648,7 +648,7 @@
   },
   {
     "id": "shirt_leather_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "shirt_leather",
     "looks_like": "shirt_leather",
@@ -658,7 +658,7 @@
   },
   {
     "id": "vest_leather_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin vest" },
     "description": "A vest made of very thin, lightweight leather.",
@@ -681,7 +681,7 @@
   },
   {
     "id": "vest_leather_light_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin vest" },
     "copy-from": "vest_leather_light",
@@ -691,7 +691,7 @@
   },
   {
     "id": "vest_leather_light_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "vest_leather_light",
     "looks_like": "vest_leather_light",
@@ -701,7 +701,7 @@
   },
   {
     "id": "polo_shirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "polo shirt" },
     "description": "A short-sleeved cotton shirt, slightly thicker than a t-shirt.",
@@ -737,7 +737,7 @@
   },
   {
     "id": "postman_shirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "mail carrier shirt" },
     "description": "A light blue button down shirt with a couple of pockets in front and the US postal service logo embroidered on it.",
@@ -786,7 +786,7 @@
   },
   {
     "id": "santa_dress",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "Santa dress", "str_pl": "Santa dresses" },
     "description": {
@@ -819,7 +819,7 @@
   },
   {
     "id": "santa_dress_long",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "luxury Santa dress", "str_pl": "luxury Santa dresses" },
     "description": "A long red dress with full sleeves and white faux fur trim.  A dress for a queen of the north pole.",
@@ -843,7 +843,7 @@
   },
   {
     "id": "santa_dress_short",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "short Santa dress", "str_pl": "short Santa dresses" },
     "description": {
@@ -875,7 +875,7 @@
   },
   {
     "id": "shirt_western",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "western shirt" },
     "description": "A long-sleeved shirt with snap buttons down the front, a style traditionally associated with the Old West.",
@@ -923,7 +923,7 @@
   },
   {
     "id": "shirt_straw",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "grass shirt" },
     "description": "A crude and bulky short-sleeved shirt woven from grass.  Definitely not the most comfortable thing to wear.",
@@ -950,7 +950,7 @@
   },
   {
     "id": "dress_costume",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "costume dress", "str_pl": "costume dresses" },
     "description": { "str": "A long-sleeved gown made of cheap costumey material." },
@@ -993,7 +993,7 @@
   },
   {
     "id": "dress_costume_skimpy",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "skimpy costume dress", "str_pl": "skimpy costume dresses" },
     "description": { "str": "A scandalously short dress, the sort of thing young women wear for halloween." },
@@ -1065,7 +1065,7 @@
   },
   {
     "id": "sundress",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sundress", "str_pl": "sundresses" },
     "description": "A light and breezy cotton dress.",
@@ -1091,7 +1091,7 @@
   },
   {
     "id": "sweater",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sweater" },
     "description": "A warm wool sweater.",
@@ -1110,7 +1110,7 @@
   },
   {
     "id": "sweatshirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sweatshirt" },
     "description": "A thick cotton shirt.",
@@ -1129,7 +1129,7 @@
   },
   {
     "id": "technician_shirt_gray",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "work t-shirt" },
     "description": "A t-shirt with a small front pocket.",
@@ -1171,7 +1171,7 @@
   },
   {
     "id": "tshirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "t-shirt" },
     "description": "A short-sleeved cotton shirt.",
@@ -1198,7 +1198,7 @@
   },
   {
     "id": "tallit_katan",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "tallit katan" },
     "description": "A shirt with four tassels worn by observant Jews in deference to Deuteronomy 22:12, which commands the wearing of fringes on the corner of one's garments.",
@@ -1225,7 +1225,7 @@
   },
   {
     "id": "uttarasanga",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "uttarasanga" },
     "description": "A traditional Buddhist shirt, covering most of the upper body, but not the arms.",
@@ -1245,7 +1245,7 @@
   },
   {
     "id": "vest_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather vest" },
     "description": "A vest made from thick leather.",
@@ -1289,7 +1289,7 @@
   },
   {
     "id": "wool_hoodie",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wool hoodie" },
     "description": "A hooded wool shirt with a kangaroo pocket in the front.",
@@ -1320,7 +1320,7 @@
   },
   {
     "id": "suit_bostonchan",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "Boston-Chan suit" },
     "description": "A professional-looking bright blue wool suit for the Boston-Chan costume.",

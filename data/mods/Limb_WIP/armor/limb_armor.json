@@ -2,7 +2,7 @@
   {
     "id": "debug_belt_tail",
     "repairs_like": "scarf",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "debug tail belt" },
     "description": "An example armor for testing custom limb/armor interactions.  100 coverage on the first sublimb of your debug tail with little encumbrance",
@@ -21,7 +21,7 @@
   },
   {
     "id": "debug_belt_tail_weighted",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "debug_belt_tail",
     "name": { "str": "first weighted debug tail belt" },
@@ -36,7 +36,7 @@
     ]
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "id": "debug_helmet_dragonfly",
     "name": { "str": "debug dragonfly helmet" },
@@ -53,7 +53,7 @@
   },
   {
     "id": "armor_bio_arms_basic",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "bionic plating - arms" },
@@ -102,7 +102,7 @@
   },
   {
     "id": "armor_bio_arm_l",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "bionic plating - left arm" },
     "copy-from": "armor_bio_arms_basic",
@@ -131,7 +131,7 @@
   },
   {
     "id": "armor_bio_arm_r",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "bionic plating - right arm" },
     "copy-from": "armor_bio_arms_basic",
@@ -160,7 +160,7 @@
   },
   {
     "id": "armor_bio_legs_basic",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "bionic plating - legs" },
@@ -211,7 +211,7 @@
   },
   {
     "id": "armor_bio_leg_l",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "bionic plating - left leg" },
     "copy-from": "armor_bio_legs_basic",
@@ -241,7 +241,7 @@
   },
   {
     "id": "armor_bio_leg_r",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "bionic plating - right leg" },
     "copy-from": "armor_bio_legs_basic",
@@ -271,7 +271,7 @@
   },
   {
     "id": "armor_bio_treads",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "bionic plating - tank treads" },

@@ -1,7 +1,7 @@
 [
   {
     "id": "arm_warmers",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "arm warmers", "str_pl": "pairs of arm warmers" },
     "description": "Snug, soft cloth sleeves to keep your arms warm.",
@@ -27,7 +27,7 @@
   },
   {
     "id": "xl_arm_warmers",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "arm warmers", "str_pl": "pairs of arm warmers" },
     "weight": "49 g",
@@ -37,7 +37,7 @@
   },
   {
     "id": "xs_arm_warmers",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "arm_warmers",
     "name": { "str": "arm warmers", "str_pl": "pairs of arm warmers" },
@@ -46,7 +46,7 @@
   },
   {
     "id": "bellyband",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "belly band" },
     "description": "A piece of clothing designed to be worn around the belly, called Haramaki in Japan.  This one is made from wool, comfortable and warm.",
@@ -65,7 +65,7 @@
   },
   {
     "id": "bellywrap",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "belly wrap" },
     "description": "Rags wrapped around the belly.  Usually worn in combination with a chestwrap.",
@@ -84,7 +84,7 @@
   },
   {
     "id": "bellywrap_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur belly wrap" },
     "description": "Fur pelts wrapped around the belly.  Usually worn in combination with a chestwrap.  Provides negligible protection against punches to your stomach.",
@@ -100,7 +100,7 @@
   },
   {
     "id": "bellywrap_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather belly wrap" },
     "description": "Leather patches wrapped around the belly.  Usually worn in combination with a chestwrap.",
@@ -116,7 +116,7 @@
   },
   {
     "id": "bellywrap_wool",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wool belly wrap" },
     "description": "Felt patches wrapped around the belly.  Usually worn in combination with a chestwrap.",
@@ -130,7 +130,7 @@
   },
   {
     "id": "bikini_top_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur bikini top" },
     "description": "A simple fur bikini top.",
@@ -149,7 +149,7 @@
   },
   {
     "id": "bikini_top_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather bikini top" },
     "description": "A simple leather bikini top.",
@@ -168,7 +168,7 @@
   },
   {
     "id": "binder_top",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "binder" },
     "description": "A binder, meant to bind the chest close to the body to keep a persons chest flat.",
@@ -187,7 +187,7 @@
   },
   {
     "id": "xl_binder_top",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "binder_top",
     "name": { "str": "binder" },
@@ -196,7 +196,7 @@
   },
   {
     "id": "xs_binder_top",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "binder_top",
     "name": { "str": "binder" },
@@ -205,7 +205,7 @@
   },
   {
     "id": "boxer_briefs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "boxer briefs", "str_pl": "pairs of boxer briefs" },
     "description": "The age-old question, boxers or briefs?  Your answer?  Yes.",
@@ -224,7 +224,7 @@
   },
   {
     "id": "xlboxer_briefs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "boxer briefs", "str_pl": "pairs of boxer briefs" },
     "weight": "50 g",
@@ -234,7 +234,7 @@
   },
   {
     "id": "xsboxer_briefs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "boxer_briefs",
     "name": { "str": "boxer briefs", "str_pl": "pairs of boxer briefs" },
@@ -243,7 +243,7 @@
   },
   {
     "id": "boxer_shorts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "boxer shorts", "str_pl": "pairs of boxer shorts" },
     "description": "Men's boxer shorts.  More fashionable than briefs and just as comfortable.",
@@ -265,7 +265,7 @@
   },
   {
     "id": "xlboxer_shorts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "boxer shorts", "str_pl": "pairs of boxer shorts" },
     "weight": "72 g",
@@ -275,7 +275,7 @@
   },
   {
     "id": "xsboxer_shorts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "boxer_shorts",
     "name": { "str": "boxer shorts", "str_pl": "pairs of boxer shorts" },
@@ -284,7 +284,7 @@
   },
   {
     "id": "boy_shorts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "boy shorts", "str_pl": "pairs of boy shorts" },
     "description": "Female underwear similar to men's boxer shorts, but much more close-fitting.",
@@ -306,7 +306,7 @@
   },
   {
     "id": "xlboy_shorts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "boy shorts", "str_pl": "pairs of boy shorts" },
     "weight": "72 g",
@@ -316,7 +316,7 @@
   },
   {
     "id": "xsboy_shorts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "boy_shorts",
     "name": { "str": "boy shorts", "str_pl": "pairs of boy shorts" },
@@ -325,7 +325,7 @@
   },
   {
     "id": "bra",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bra" },
     "description": "A simple bra.  For protecting those bits you don't want zombies to look at.",
@@ -344,7 +344,7 @@
   },
   {
     "id": "xl_bra",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "bra",
     "name": { "str": "bra" },
@@ -353,7 +353,7 @@
   },
   {
     "id": "xs_bra",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "bra",
     "name": { "str": "bra" },
@@ -362,7 +362,7 @@
   },
   {
     "id": "briefs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "briefs", "str_pl": "pairs of briefs" },
     "description": "A pair of briefs.  Comfortable underwear worn by men.",
@@ -381,7 +381,7 @@
   },
   {
     "id": "camisole",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "camisole" },
     "description": "A small camisole made from silk.  Typically used as an undergarment, it is light and easy to wear.",
@@ -403,7 +403,7 @@
   },
   {
     "id": "chestwrap",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chestwrap" },
     "description": "Rags wrapped around the chest.  Preserves your modesty and keeps things out of the way, but not good for much else.",
@@ -422,7 +422,7 @@
   },
   {
     "id": "chestwrap_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur chestwrap" },
     "description": "Fur pelts wrapped around the chest.  Preserves your modesty and keeps things out of the way, but not good for much else.",
@@ -441,7 +441,7 @@
   },
   {
     "id": "chestwrap_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather chestwrap" },
     "description": "Leather patches wrapped around the chest.  Preserves your modesty and keeps things out of the way, but not good for much else.",
@@ -460,7 +460,7 @@
   },
   {
     "id": "chestwrap_wool",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wool chestwrap" },
     "description": "Felt patches wrapped around the chest.  Preserves your modesty and keeps things out of the way, but not good for much else.",
@@ -479,7 +479,7 @@
   },
   {
     "id": "corset",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather corset" },
     "description": "A snug leather corset.  Has no pockets, but its thick material provides good protection from harm.  Use it to loosen it if you want to wear it over normal clothing.",
@@ -505,7 +505,7 @@
   {
     "id": "corset_loose",
     "copy-from": "corset",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather corset (loose)", "str_pl": "leather corsets (loose)" },
     "description": "A leather corset with the strings loosened.  Has no pockets, but its thick material provides good protection from harm.  Use it to wear it tighter and close to the skin.",
@@ -520,7 +520,7 @@
   },
   {
     "id": "corset_waist",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather waist cincher" },
     "description": "A snug leather waist corset.  Use it to loosen it if you want to wear it over normal clothing.",
@@ -535,7 +535,7 @@
   {
     "id": "corset_waist_loose",
     "copy-from": "corset_waist",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather waist cincher (loose)", "str_pl": "leather waist cinchers (loose)" },
     "description": "A leather waist corset with the strings loosened.  Use it to wear it tighter and close to the skin.",
@@ -552,7 +552,7 @@
   },
   {
     "id": "garter_belt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "garter belt" },
     "description": "A black, decorated undergarment commonly used in combination with stockings.  They don't cover much, but they do help you feel sexy.",
@@ -570,7 +570,7 @@
   },
   {
     "id": "leg_warmers",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leg warmers", "str_pl": "pairs of leg warmers" },
     "description": "Snug, soft cloth sleeves to keep your legs warm.",
@@ -597,7 +597,7 @@
   },
   {
     "id": "leg_warmers_f",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur leggings", "str_pl": "pairs of fur leggings" },
     "description": "Snug fur sleeves to keep your legs warm.  Simple yet effective since prehistoric times.",
@@ -624,7 +624,7 @@
   },
   {
     "id": "leg_warmers_xlf",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fetlock furs", "str_pl": "pairs of fetlock furs" },
     "description": "Snug fur sleeves to keep your fetlocks warm.",
@@ -650,7 +650,7 @@
   },
   {
     "id": "leg_warmers_xsf",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "leg_warmers_f",
     "name": { "str": "fur leggings", "str_pl": "pairs of fur leggings" },
@@ -659,7 +659,7 @@
   },
   {
     "id": "leg_warmers_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leg warmers", "str_pl": "pairs of leg warmers" },
     "description": "Large, soft, snug cloth sleeves to keep your exotic anatomy warm.",
@@ -686,7 +686,7 @@
   },
   {
     "id": "leg_warmers_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "leg_warmers",
     "name": { "str": "leg warmers", "str_pl": "pairs of leg warmers" },
@@ -695,7 +695,7 @@
   },
   {
     "id": "long_underpants",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "long underwear bottom" },
     "description": "A pair of long underwear that help to maintain body temperature.",
@@ -714,7 +714,7 @@
   },
   {
     "id": "long_undertop",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "long underwear top" },
     "description": "A long underwear top that helps to maintain body temperature.",
@@ -741,7 +741,7 @@
   },
   {
     "id": "long_undertop_sleeveless",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sleeveless underwear top" },
     "description": "A sleeveless underwear top that helps to maintain body temperature.",
@@ -762,7 +762,7 @@
   },
   {
     "id": "panties",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "panties" },
     "description": "Underwear designed to be worn by women.  Preserves your modesty in desperate times.",
@@ -781,7 +781,7 @@
   },
   {
     "id": "thermal_shirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "thermal shirt" },
     "description": "A lightweight, form-fitting long-sleeved spandex undershirt that helps maintains body temperature.",
@@ -802,7 +802,7 @@
   },
   {
     "id": "sports_bra",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sports bra" },
     "description": "A sturdy nylon bra to provide additional support during physical movement.  Typically worn when exercising, it clings to the skin and is easy to wear.",
@@ -821,7 +821,7 @@
   },
   {
     "id": "xlsports_bra",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sports bra" },
     "weight": "160 g",
@@ -831,7 +831,7 @@
   },
   {
     "id": "xssports_bra",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "sports_bra",
     "name": { "str": "sports bra" },
@@ -840,7 +840,7 @@
   },
   {
     "id": "tank_top",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tank top" },
     "description": "A sleeveless cotton shirt.  Very easy to move in.",
@@ -883,7 +883,7 @@
   },
   {
     "id": "tights",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tights", "str_pl": "pairs of tights" },
     "description": "A pair of thin, stretchy hose that cover the legs and feet.",
@@ -902,7 +902,7 @@
   },
   {
     "id": "under_armor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "compression top" },
     "description": "Synthetic sportswear that clings to your chest and wicks away sweat.",
@@ -921,7 +921,7 @@
   },
   {
     "id": "under_armor_shorts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "compression shorts" },
     "description": "Synthetic sportswear that clings to your upper legs, aiding muscle tone and wicking away sweat.",
@@ -943,7 +943,7 @@
   },
   {
     "id": "undershirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "undershirt" },
     "description": "A simple white undershirt.  Worn beneath your regular clothes, it provides a little extra warmth.",
@@ -965,7 +965,7 @@
   },
   {
     "id": "unitard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "unitard" },
     "description": "A skin-tight spandex garment resembling a crew-necked leotard combined with leggings.  Commonly used by gymnasts, dancers and equestrian vaulters, the unitard provides overall coverage with great flexibility.",

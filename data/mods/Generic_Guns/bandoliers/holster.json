@@ -2,7 +2,7 @@
   {
     "id": "western_holster",
     "copy-from": "western_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "western holster" },
     "pocket_data": [

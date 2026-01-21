@@ -1,7 +1,7 @@
 [
   {
     "id": "back_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "back holster" },
     "description": "A leather holster, big enough for a rifle or other large gun.  Designed to be strapped to the back.  Activate to holster/draw a gun.",
@@ -32,7 +32,7 @@
   },
   {
     "id": "baldric_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "baldric holsters" },
     "description": "A leather harness which can hold up to six pistol-sized guns in total, available for quick drawing.  Historically, similar harnesses were used by pirates to carry multiple loaded flintlock pistols at once, as reloading them is a lengthy process.  Activate to holster/draw a gun.",
@@ -113,7 +113,7 @@
   },
   {
     "id": "bootstrap",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "ankle holster" },
     "description": "A small concealed holster worn on the ankle.  It is awkward to use without practice.  Activate to holster/draw a small pistol.",
@@ -154,7 +154,7 @@
   },
   {
     "id": "bow_sling",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bow sling" },
     "description": "A somewhat complicated set of straps and fabric to keep your bow close to hand and (mostly) out of harm's way.  Activate to holster/draw your bow.",
@@ -185,7 +185,7 @@
   },
   {
     "id": "single_sling",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "single point sling" },
     "description": "A harness going over your shoulder and across your chest.  Designed to connect to a rifle at a single point with the rifle hanging off your front.  Great for fighting, not great for travel.  Activate to holster/draw your weapon.",
@@ -217,7 +217,7 @@
   },
   {
     "id": "holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "holster" },
     "description": "A leather strap worn on the hip for holding pistol-sized guns.  Activate to holster/draw a gun.",
@@ -256,7 +256,7 @@
   },
   {
     "id": "nylon_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "nylon holster" },
     "description": "Holster made from nylon, rather than leather.  A bit stronger and lighter, but not as fashionable.  Activate to draw/holster a gun.",
@@ -295,7 +295,7 @@
   },
   {
     "id": "western_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "western gun belt" },
     "description": "A Western-style gun belt as worn by cowboys and gunfighters in the movies and on TV. Has loops across the back to hold spare ammo.  Activate to holster/draw a gun.",
@@ -370,7 +370,7 @@
   {
     "id": "sholster",
     "copy-from": "holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fast draw holster" },
     "description": "A comfortable quick-draw holster for small guns.  Activate to holster/draw a gun.",
@@ -401,7 +401,7 @@
   {
     "id": "shoulder_holster",
     "copy-from": "holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "shoulder holster" },
     "description": "A comfortable quick-draw holster for larger pistols.  One side holsters a gun, and the other side holds two magazines.  Activate to holster/draw a gun.",
@@ -436,7 +436,7 @@
   {
     "id": "bholster",
     "copy-from": "holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "deep concealment holster" },
     "description": "An elastic band with numerous provisions for concealing a very small pistol close to the body.  It is awkward to use without practice.  Activate to holster/draw a gun.",
@@ -471,7 +471,7 @@
   {
     "id": "bbholster",
     "copy-from": "holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "belly band holster" },
     "description": "A wide elastic belly belt with a built-in holster for a pistol and a spare magazine.  It is very awkward to use without practice.  Activate to holster/draw a gun.",
@@ -509,7 +509,7 @@
   },
   {
     "id": "side_double_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "side-by-side double holster" },
     "description": "Two holsters attached together by a strap, right next to each other.  The placement means that drawing guns out of either one is slower than a regular holster.  Activate to holster/draw a gun.",
@@ -558,7 +558,7 @@
   },
   {
     "id": "FB_double_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "front-to-back double holster" },
     "description": "Two holsters attached together by a strap, one in front of the other.  The placement means that drawing a gun out of the front holster is slower than the other holster.  Activate to holster/draw a gun.",
@@ -607,7 +607,7 @@
   },
   {
     "id": "side_nylon_double_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "nylon side-by-side double holster" },
     "description": "Two nylon holsters attached together by a strap, right next to each other.  The placement means that drawing guns out of either one is slower than a regular holster.  Activate to holster/draw a gun.",
@@ -656,7 +656,7 @@
   },
   {
     "id": "FB_nylon_double_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "nylon front-to-back double holster" },
     "description": "Two nylon holsters attached together by a strap, one in front of the other.  The placement means that drawing a gun out of the front holster is slower than the other holster.  Activate to holster/draw a gun.",
@@ -705,7 +705,7 @@
   },
   {
     "id": "XL_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "large holster" },
     "description": "A belt holster consisting of a loop and strap intended for use with larger firearms.  Slightly more cumbersome than a standard holster due to the straps that hold it flat against your leg.  Activate to holster/draw a gun.",
@@ -743,7 +743,7 @@
   },
   {
     "id": "XL_nylon_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "large nylon holster" },
     "description": "A belt holster consisting of a loop and strap intended for use with larger firearms, but made with nylon instead of leather.  Activate to holster/draw a gun",
@@ -781,7 +781,7 @@
   },
   {
     "id": "XS_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "holster",
     "name": { "str": "holster" },
@@ -790,7 +790,7 @@
   },
   {
     "id": "XS_nylon_holster",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "nylon_holster",
     "name": { "str": "nylon holster" },
@@ -799,7 +799,7 @@
   },
   {
     "id": "robofac_robotrig",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "drone-tech harness" },
     "description": "A modified army harness, repurposed to carry several small and a single medium sized drone alongside the tools to maintain them.",

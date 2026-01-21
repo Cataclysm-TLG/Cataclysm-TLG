@@ -1,7 +1,7 @@
 [
   {
     "id": "pot_helmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "pot helmet" },
@@ -46,7 +46,7 @@
   },
   {
     "id": "stockpot_helmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "pot great helm" },
@@ -111,7 +111,7 @@
   },
   {
     "id": "headgear",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "head guard" },
     "description": "Lightweight sports headgear designed to protect the head while sparring, a frequent sight in boxing gyms and dojos.",
@@ -166,7 +166,7 @@
   },
   {
     "id": "helmet_army",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "army helmet" },
@@ -270,7 +270,7 @@
   {
     "id": "helmet_army_outdated",
     "repairs_like": "helmet_barbute",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "flak helmet" },
@@ -307,7 +307,7 @@
   },
   {
     "id": "helmet_soviet_tanker",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "soviet tanker helmet" },
@@ -339,7 +339,7 @@
   },
   {
     "id": "tac_fullhelmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tactical full helmet" },
@@ -380,7 +380,7 @@
   },
   {
     "id": "tac_helmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tactical helmet" },
@@ -482,7 +482,7 @@
   },
   {
     "id": "firehelmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "firefighter helmet" },
@@ -525,7 +525,7 @@
   },
   {
     "id": "helmet_ball",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "baseball helmet" },
@@ -572,7 +572,7 @@
   },
   {
     "id": "helmet_barbute",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "barbute helm" },
@@ -618,7 +618,7 @@
   },
   {
     "id": "xl_helmet_barbute",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_barbute",
     "name": { "str": "barbute helm" },
@@ -627,7 +627,7 @@
   },
   {
     "id": "helmet_barbute_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_barbute",
     "name": { "str": "barbute helm" },
@@ -636,7 +636,7 @@
   },
   {
     "id": "helmet_bike",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "bike helmet" },
@@ -702,7 +702,7 @@
   },
   {
     "id": "helmet_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chitin helmet" },
@@ -754,7 +754,7 @@
   },
   {
     "id": "xl_helmet_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_chitin",
     "name": { "str": "chitin helmet" },
@@ -763,7 +763,7 @@
   },
   {
     "id": "helmet_chitin_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_chitin",
     "looks_like": "helmet_chitin",
@@ -773,7 +773,7 @@
   },
   {
     "id": "helmet_conical",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "conical helm" },
@@ -810,7 +810,7 @@
   },
   {
     "id": "xl_helmet_conical",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_conical",
     "name": { "str": "conical helm" },
@@ -819,7 +819,7 @@
   },
   {
     "id": "helmet_conical_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_conical",
     "looks_like": "helmet_conical",
@@ -831,7 +831,7 @@
     "id": "helmet_acidchitin",
     "copy-from": "helmet_chitin",
     "looks_like": "helmet_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin helmet" },
     "description": "A helmet crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
@@ -841,7 +841,7 @@
   },
   {
     "id": "xl_helmet_acidchitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_acidchitin",
     "name": { "str": "biosilicified chitin helmet" },
@@ -850,7 +850,7 @@
   },
   {
     "id": "helmet_acidchitin_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_acidchitin",
     "looks_like": "helmet_acidchitin",
@@ -860,7 +860,7 @@
   },
   {
     "id": "helmet_football",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "football helmet" },
@@ -918,7 +918,7 @@
   },
   {
     "id": "helmet_galea",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "galea", "str_pl": "galeae" },
@@ -963,7 +963,7 @@
   },
   {
     "id": "xl_helmet_galea",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_galea",
     "name": { "str": "galea", "str_pl": "galeae" },
@@ -972,7 +972,7 @@
   },
   {
     "id": "helmet_galea_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_galea",
     "name": { "str": "galea", "str_pl": "galeae" },
@@ -981,7 +981,7 @@
   },
   {
     "id": "helmet_kabuto",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "kabuto" },
@@ -1035,7 +1035,7 @@
   },
   {
     "id": "xl_helmet_kabuto",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_kabuto",
     "name": { "str_sp": "kabuto" },
@@ -1044,7 +1044,7 @@
   },
   {
     "id": "helmet_kabuto_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_kabuto",
     "looks_like": "helmet_kabuto",
@@ -1054,7 +1054,7 @@
   },
   {
     "id": "leather_helmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather helmet" },
@@ -1085,7 +1085,7 @@
   },
   {
     "id": "leather_helmet_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "leather_helmet",
     "name": { "str": "leather helmet" },
@@ -1094,7 +1094,7 @@
   },
   {
     "id": "leather_helmet_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "leather_helmet",
     "name": { "str": "leather helmet" },
@@ -1103,7 +1103,7 @@
   },
   {
     "id": "helmet_skull",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "skull helmet" },
     "description": "The top part of a large animal skull, equipped with leather straps to secure it on your head.",
@@ -1135,7 +1135,7 @@
   },
   {
     "id": "helmet_liner",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "helmet liner" },
     "description": "A cloth liner worn inside a helmet to help keep your head warm in cold climates.  It might also provide some padding against helmets that didn't have any.",
@@ -1371,7 +1371,7 @@
   },
   {
     "id": "helmet_riding_peakless",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_riding",
     "name": { "str": "jockey skull cap" },
@@ -1382,7 +1382,7 @@
   },
   {
     "id": "helmet_nasal",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "nasal helm" },
@@ -1426,7 +1426,7 @@
   },
   {
     "id": "xl_helmet_nasal",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_nasal",
     "name": { "str": "nasal helm" },
@@ -1435,7 +1435,7 @@
   },
   {
     "id": "xs_helmet_nasal",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_nasal",
     "name": { "str": "nasal helm" },
@@ -1444,7 +1444,7 @@
   },
   {
     "id": "platemail_great_helm",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "great helm" },
@@ -1471,7 +1471,7 @@
   },
   {
     "id": "platemail_great_helm_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_great_helm",
     "name": { "str": "great helm" },
@@ -1480,7 +1480,7 @@
   },
   {
     "id": "platemail_great_helm_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_great_helm",
     "name": { "str": "great helm" },
@@ -1489,7 +1489,7 @@
   },
   {
     "id": "platemail_kettle_helm",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "kettle helm" },
@@ -1520,7 +1520,7 @@
   },
   {
     "id": "platemail_kettle_helm_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_kettle_helm",
     "name": { "str": "kettle helm" },
@@ -1529,7 +1529,7 @@
   },
   {
     "id": "platemail_kettle_helm_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_kettle_helm",
     "name": { "str": "kettle helm" },
@@ -1538,7 +1538,7 @@
   },
   {
     "id": "sheet_metal_helmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sheet metal helmet" },
@@ -1574,7 +1574,7 @@
   },
   {
     "id": "helmet_skid",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "skid lid" },
@@ -1604,7 +1604,7 @@
   },
   {
     "id": "pickelhaube",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "pickelhaube", "str_pl": "pickelhauben" },
@@ -1663,7 +1663,7 @@
   },
   {
     "id": "helmet_corinthian",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "Corinthian helm" },
@@ -1715,7 +1715,7 @@
   },
   {
     "id": "xl_helmet_corinthian",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_corinthian",
     "name": { "str": "Corinthian helm" },
@@ -1724,7 +1724,7 @@
   },
   {
     "id": "helmet_corinthian_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_corinthian",
     "name": { "str": "Corinthian helm" },
@@ -1733,7 +1733,7 @@
   },
   {
     "id": "helmet_bronze",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "bronze helmet" },
@@ -1765,7 +1765,7 @@
   },
   {
     "id": "xl_helmet_bronze",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_bronze",
     "name": { "str": "bronze helmet" },
@@ -1774,7 +1774,7 @@
   },
   {
     "id": "xs_helmet_bronze",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_bronze",
     "name": { "str": "bronze helmet" },
@@ -1783,7 +1783,7 @@
   },
   {
     "id": "pot_xlhelmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "pot helmet" },
     "description": "A huge makeshift helmet made from a canning pot.",
@@ -1823,7 +1823,7 @@
   },
   {
     "id": "pot_helmet_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "pot_helmet",
     "name": { "str": "pot helmet" },
@@ -1833,7 +1833,7 @@
   },
   {
     "id": "platemail_visored_helm",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "visored plate helm" },
@@ -1891,7 +1891,7 @@
   {
     "id": "platemail_visored_helm_raised",
     "copy-from": "platemail_visored_helm",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "visored plate helm (raised)", "str_pl": "visored plate helm (raised)" },
     "description": "A medieval helmet made of steel platemail.  It provides excellent coverage for the head and neck, though at the moment not the face.  Activate it to lower the visor.",
@@ -1912,7 +1912,7 @@
   },
   {
     "id": "platemail_visored_helm_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "visored plate helm" },
     "copy-from": "platemail_visored_helm",
@@ -1927,7 +1927,7 @@
   },
   {
     "id": "platemail_visored_helm_xl_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "visored plate helm (raised)", "str_pl": "visored plate helm (raised)" },
     "copy-from": "platemail_visored_helm_raised",
@@ -1942,7 +1942,7 @@
   },
   {
     "id": "airsoft_helmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "airsoft helmet" },
@@ -2051,7 +2051,7 @@
   },
   {
     "id": "turban_helmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "turban helmet" },
@@ -2095,7 +2095,7 @@
   },
   {
     "id": "turban_helmet_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "turban_helmet",
     "name": { "str": "turban helmet" },
@@ -2104,7 +2104,7 @@
   },
   {
     "id": "turban_helmet_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "turban_helmet",
     "name": { "str": "turban helmet" },

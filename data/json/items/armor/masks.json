@@ -1,7 +1,7 @@
 [
   {
     "id": "balaclava",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "balaclava" },
     "description": "A warm covering that protects the head and face from the cold.",
@@ -21,7 +21,7 @@
   },
   {
     "id": "balaclava_skull",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "balaclava",
     "name": { "str": "skull balaclava" },
@@ -29,7 +29,7 @@
   },
   {
     "id": "balaclava_cut_resistant",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "cut-resistant balaclava" },
@@ -65,7 +65,7 @@
   },
   {
     "id": "bondage_mask",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bondage mask" },
     "description": "A tight mask made of black leather.  The eyes and mouth can be closed using zippers.",
@@ -93,7 +93,7 @@
   {
     "id": "bondage_mask_zipped",
     "copy-from": "bondage_mask",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bondage mask (zipped)", "str_pl": "bondage masks (zipped)" },
     "description": "A tight mask made of black leather.  The eyes and mouth have been zipped closed.",
@@ -108,7 +108,7 @@
   },
   {
     "id": "fencing_mask",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fencing mask" },
     "description": "A tough hood made of steel mesh used by fencers.",
@@ -150,7 +150,7 @@
   },
   {
     "id": "mask_bal",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "ballistic mask" },
@@ -172,7 +172,7 @@
   },
   {
     "id": "mask_dust",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "dust mask" },
     "description": "A simple piece of cotton that straps over the mouth.  Provides a small amount of protection from airborne illness and dust.",
@@ -193,7 +193,7 @@
   },
   {
     "id": "mask_guy_fawkes",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "Guy Fawkes mask" },
@@ -215,7 +215,7 @@
   },
   {
     "id": "mask_hockey",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "hockey mask" },
@@ -238,7 +238,7 @@
   },
   {
     "id": "mask_rioter",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "rioter mask" },
     "description": "A t-shirt with the sleeves tied behind the back of one's head.  These are usually worn by rioters to hide their identity.",
@@ -259,7 +259,7 @@
   {
     "id": "mask_skull",
     "//": "the mask_skull was here first so i'm just expanding it with mask variants.",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "skull mask" },
@@ -319,7 +319,7 @@
   },
   {
     "id": "santa_beard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "white beard" },
     "description": "A fake white beard that straps over the mouth.  Perfect for your Santa costume!",
@@ -340,7 +340,7 @@
   },
   {
     "id": "face_veil",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "face veil" },
     "description": "A simple piece of fabric that covers your face.",
@@ -361,7 +361,7 @@
   },
   {
     "id": "pumpkin_mask",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "pumpkin mask" },
     "description": "A flimsy plastic pumpkin mask to wear over your head.",
@@ -380,7 +380,7 @@
   },
   {
     "id": "zombie_mask",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "zombie mask" },
     "description": "A flimsy rubber zombie mask.  When zombies were still works of fiction.",

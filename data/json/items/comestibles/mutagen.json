@@ -131,7 +131,7 @@
   {
     "id": "iv_mutagen_cephalopod",
     "copy-from": "iv_mutagen_flavor",
-     "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str_sp": "cephalopod infusion" },
     "description": "A processed mutagenic infusion as black as ink.",

@@ -1,7 +1,7 @@
 [
   {
     "id": "attachable_ear_muffs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "attachable ear muffs" },
@@ -34,7 +34,7 @@
   },
   {
     "id": "attachable_ear_muffs_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "attachable ear muffs (on)" },
     "description": "A pair of ear muffs attachable to a hard hat or helmet to reduce noise exposures to safe levels.  Activate to put ear muffs into a standby position, letting you clearly hear again.",
@@ -50,7 +50,7 @@
   },
   {
     "id": "ballistic_mandible_guard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "ballistic mandible guard" },
@@ -68,7 +68,7 @@
   },
   {
     "id": "plastic_mandible_guard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "plastic mandible guard" },
@@ -86,7 +86,7 @@
   },
   {
     "id": "plastic_chin_guard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "plastic chin guard" },
@@ -104,7 +104,7 @@
   },
   {
     "id": "counterweight_pouch",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "counterweight pouch" },
@@ -131,7 +131,7 @@
   },
   {
     "id": "sun_shield",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sun shield" },
@@ -147,7 +147,7 @@
   },
   {
     "id": "shield_visor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "shield visor" },
@@ -165,7 +165,7 @@
   },
   {
     "id": "face_shield",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "face shield" },
@@ -183,7 +183,7 @@
   },
   {
     "id": "face_shield_eod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "EOD face shield" },
@@ -201,7 +201,7 @@
   },
   {
     "id": "face_shield_plastic",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plastic face shield" },
@@ -412,7 +412,7 @@
   },
   {
     "id": "nape_protector",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "nape protector" },
@@ -438,7 +438,7 @@
   },
   {
     "id": "mesh_nape_protector",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "mesh nape protector" },
@@ -463,7 +463,7 @@
   },
   {
     "id": "kevlar_nape_protector",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "Kevlar nape protector" },

@@ -1,7 +1,7 @@
 [
   {
     "id": "beekeeping_hood",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "beekeeping hood" },
     "description": "A beekeeping hood.  Keeps the bees out, but lets fresh air in.",
@@ -23,7 +23,7 @@
   },
   {
     "id": "hood_rain",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "rain hood" },
     "description": "A waterproof hood made to be worn in bad weather.",
@@ -42,7 +42,7 @@
   },
   {
     "id": "hood_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather hood" },
@@ -70,7 +70,7 @@
   },
   {
     "id": "hood_leather_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "hood_leather",
     "name": { "str": "leather hood" },
@@ -79,7 +79,7 @@
   },
   {
     "id": "hood_leather_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "hood_leather",
     "name": { "str": "leather hood" },
@@ -88,7 +88,7 @@
   },
   {
     "id": "nomex_hood",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "flame-resistant cowl" },
     "description": "A snug fitting garment that protects your head and neck, made from lightweight Nomex fire-resistant fabric.  Tough yet breathable, it is light and comfortable to wear under clothing.",
@@ -109,7 +109,7 @@
   },
   {
     "id": "hood_gut",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "gutskin hood" },
     "description": "A hood sewn from treated and split intestines, the perfect companion for a gutskin parka.",
@@ -128,7 +128,7 @@
   },
   {
     "id": "hood_ninja",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "ninja cowl" },
     "description": "A cloth hood that covers the mouth, leaving only the wearer's eyes exposed.",
@@ -150,7 +150,7 @@
   },
   {
     "id": "chainmail_coif",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail coif" },
@@ -199,7 +199,7 @@
   },
   {
     "id": "chainmail_coif_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "XL chainmail coif" },
     "copy-from": "chainmail_coif",
@@ -208,7 +208,7 @@
   },
   {
     "id": "chainmail_coif_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_coif",
     "name": { "str": "XS chainmail coif" },
@@ -217,7 +217,7 @@
   },
   {
     "id": "chainmail_junk_coif",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_coif",
     "replace_materials": { "steel_chain": "budget_steel_chain" },

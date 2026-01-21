@@ -1,6 +1,6 @@
 [
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
     "id": "kevlar_harness",
     "symbol": "[",
@@ -52,7 +52,7 @@
     "melee_damage": { "bash": 5 }
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
     "id": "acidchitin_harness_dog",
     "copy-from": "kevlar_harness",
@@ -66,7 +66,7 @@
     "environmental_protection": 7
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
     "id": "chitin_harness_dog",
     "copy-from": "acidchitin_harness_dog",
@@ -78,7 +78,7 @@
     "environmental_protection": 4
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
     "id": "chainmail_harness_dog",
     "copy-from": "kevlar_harness",
@@ -95,7 +95,7 @@
     "material_thickness": 0.5
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
     "id": "leather_harness_dog",
     "copy-from": "kevlar_harness",
@@ -109,7 +109,7 @@
     "extend": { "flags": [ "NO_SALVAGE" ] }
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
     "id": "leatherbone_harness_dog",
     "copy-from": "leather_harness_dog",
@@ -121,7 +121,7 @@
     "weight": "2645 g"
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
     "id": "rubber_harness_dog",
     "copy-from": "kevlar_harness",

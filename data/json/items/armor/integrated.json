@@ -1,7 +1,7 @@
 [
   {
     "id": "integrated_plantskin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "phelloderm" },
@@ -32,7 +32,7 @@
   },
   {
     "id": "integrated_bark",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "protective bark" },
@@ -59,7 +59,7 @@
   },
   {
     "id": "integrated_bark2_a",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "distributed bark" },
@@ -86,7 +86,7 @@
   },
   {
     "id": "integrated_bark2_b",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "consolidated bark" },
@@ -132,7 +132,7 @@
   },
   {
     "id": "integrated_bark2_c",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "latticed bark" },
@@ -178,7 +178,7 @@
   },
   {
     "id": "integrated_feathers",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "feathers" },
@@ -217,7 +217,7 @@
   },
   {
     "id": "integrated_lightfur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "light fur" },
@@ -243,7 +243,7 @@
   },
   {
     "id": "integrated_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "fur" },
@@ -281,7 +281,7 @@
   },
   {
     "id": "integrated_ursine_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "shaggy fur" },
@@ -319,7 +319,7 @@
   },
   {
     "id": "integrated_ursine_fur_summer",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "scruffy fur" },
@@ -357,7 +357,7 @@
   },
   {
     "id": "integrated_lupine_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "gray fur" },
@@ -402,7 +402,7 @@
   },
   {
     "id": "integrated_lupine_fur_summer",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "summer coat" },
@@ -447,7 +447,7 @@
   },
   {
     "id": "integrated_feline_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sleek fur" },
@@ -485,7 +485,7 @@
   },
   {
     "id": "integrated_lynx_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "lynx fur" },
@@ -512,7 +512,7 @@
   },
   {
     "id": "integrated_patchskin1",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "jumbled skin" },
@@ -566,7 +566,7 @@
   },
   {
     "id": "integrated_patchskin2",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "patchwork skin" },
@@ -621,7 +621,7 @@
   },
   {
     "id": "integrated_patchskin3",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "patchwork armor" },
@@ -681,7 +681,7 @@
   },
   {
     "id": "integrated_mandibles",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "mandibles" },
@@ -719,7 +719,7 @@
   },
   {
     "id": "integrated_fangs_spider",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "folding fangs" },
@@ -756,7 +756,7 @@
   },
   {
     "id": "integrated_barbed_tongue",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "barbed tongue" },
@@ -793,7 +793,7 @@
   },
   {
     "id": "integrated_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "epicuticle" },
@@ -831,7 +831,7 @@
   },
   {
     "id": "integrated_chitin2",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chitin carapace" },
@@ -907,7 +907,7 @@
   },
   {
     "id": "integrated_chitin2_molted",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "fresh chitin carapace" },
@@ -983,7 +983,7 @@
   },
   {
     "id": "integrated_carapace",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "sclerotized carapace" },
@@ -1064,7 +1064,7 @@
   },
   {
     "id": "integrated_carapace_molted",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "fresh sclerotized carapace" },
@@ -1144,7 +1144,7 @@
   },
   {
     "id": "integrated_giant_pincer",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "sclerotin right pincer" },
@@ -1176,7 +1176,7 @@
   },
   {
     "id": "integrated_shell",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "shell" },
@@ -1223,7 +1223,7 @@
   },
   {
     "id": "integrated_shell2",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "roomy shell" },
@@ -1279,7 +1279,7 @@
   },
   {
     "id": "integrated_shell3",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "nacreous shell" },
@@ -1335,7 +1335,7 @@
   },
   {
     "id": "integrated_reticulae",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "reticulae" },
@@ -1370,7 +1370,7 @@
   },
   {
     "id": "integrated_sparse_scales",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "sparse scales" },
@@ -1411,7 +1411,7 @@
   },
   {
     "id": "integrated_scales",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "scales" },
@@ -1460,7 +1460,7 @@
   },
   {
     "id": "integrated_fishscales",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "sleek scales" },
@@ -1505,7 +1505,7 @@
   },
   {
     "id": "integrated_reptilescales",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "thick scales" },
@@ -1576,7 +1576,7 @@
   },
   {
     "id": "armor_bio_eyes",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "protective lenses" },
@@ -1620,7 +1620,7 @@
   },
   {
     "id": "integrated_lidless_eyes",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "ocular scales" },
@@ -1649,7 +1649,7 @@
   },
   {
     "id": "integrated_eyestalks_rigid",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "rigid eyestalks" },
@@ -1680,7 +1680,7 @@
   },
   {
     "id": "integrated_compound_eyes",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "compound eyes" },
@@ -1721,7 +1721,7 @@
   },
   {
     "id": "integrated_nails",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "nails" },
@@ -1758,7 +1758,7 @@
   },
   {
     "id": "integrated_fingertip_razors",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "fingertip razors" },
@@ -1798,7 +1798,7 @@
   },
   {
     "id": "integrated_claws",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "claws" },
@@ -1837,7 +1837,7 @@
   },
   {
     "id": "integrated_sucker_hooks",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "sucker hooks" },
@@ -1875,7 +1875,7 @@
   },
   {
     "id": "integrated_sharkteeth",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "shark teeth" },
@@ -1903,7 +1903,7 @@
   },
   {
     "id": "integrated_fangs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "fangs" },
@@ -1941,7 +1941,7 @@
   },
   {
     "id": "integrated_vampire_fangs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "vampire fangs" },
@@ -1969,7 +1969,7 @@
   },
   {
     "id": "integrated_saber_teeth",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "saber teeth" },
@@ -1997,7 +1997,7 @@
   },
   {
     "id": "integrated_incisors",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "incisors" },
@@ -2030,7 +2030,7 @@
   },
   {
     "id": "integrated_wide_mouth",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "wide mouth" },
@@ -2056,7 +2056,7 @@
   },
   {
     "id": "integrated_beak",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "crushing beak" },
@@ -2093,7 +2093,7 @@
   },
   {
     "id": "integrated_drill_beak",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "drill beak" },
@@ -2130,7 +2130,7 @@
   },
   {
     "id": "integrated_hooves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "hooves" },
@@ -2176,7 +2176,7 @@
   },
   {
     "id": "integrated_toe_talons",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "toe talons" },
@@ -2217,7 +2217,7 @@
   },
   {
     "id": "integrated_toe_claws",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "toe claws" },
@@ -2255,7 +2255,7 @@
   },
   {
     "id": "integrated_horns",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "horns" },
@@ -2282,7 +2282,7 @@
   },
   {
     "id": "integrated_antlers_fresh",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "fresh antlers" },
@@ -2309,7 +2309,7 @@
   },
   {
     "id": "integrated_horns_curled",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "curled horns" },
@@ -2348,7 +2348,7 @@
   },
   {
     "id": "integrated_horns_long",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "long horns" },
@@ -2387,7 +2387,7 @@
   },
   {
     "id": "integrated_antlers",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "antlers" },
@@ -2426,7 +2426,7 @@
   },
   {
     "id": "integrated_cranial_reinforcement_cbm",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "cranial reinforcement" },

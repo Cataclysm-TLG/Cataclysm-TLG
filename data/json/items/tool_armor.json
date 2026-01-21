@@ -1,7 +1,7 @@
 [
   {
     "id": "arm_splint",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "arm splint" },
     "description": "A tool to help set arm bones and hold them in place.",
@@ -21,7 +21,7 @@
   },
   {
     "id": "arm_xlsplint",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "arm splint", "str_pl": "arm splints" },
     "description": "A tool to help set arm bones and hold them in place.  It is specifically designed to fit huge survivors.",
@@ -36,7 +36,7 @@
   },
   {
     "id": "arm_xs_splint",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "arm splint", "str_pl": "arm splint" },
     "description": "A tool to help set arm bones and hold them in place.  It is specifically designed to fit tiny survivors.",
@@ -50,7 +50,7 @@
   },
   {
     "id": "tourniquet_upper",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tourniquet (arm)", "str_pl": "tourniquets (arm)" },
     "description": "A first aid device used to apply pressure to a limb or extremity in order to limit blood flow.  Should be employed only to manage heavy bleeding, because prolonged use will harm the limb.  It can be adjusted in size to fit different limbs.",
@@ -71,7 +71,7 @@
   },
   {
     "id": "tourniquet_upper_XL",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tourniquet (arm)", "str_pl": "tourniquets (arm)" },
     "description": "A first aid device used to apply pressure to a limb or extremity in order to limit blood flow.  Should be employed only to manage heavy bleeding, because prolonged use will harm the limb.  It can be adjusted in size to fit different limbs.",
@@ -83,7 +83,7 @@
   },
   {
     "id": "tourniquet_upper_XS",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tourniquet (arm)", "str_pl": "tourniquets (arm)" },
     "description": "A first aid device used to apply pressure to a limb or extremity in order to limit blood flow.  Should be employed only to manage heavy bleeding, because prolonged use will harm the limb.  It can be adjusted in size to fit different limbs.",
@@ -96,7 +96,7 @@
   },
   {
     "id": "tourniquet_lower",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tourniquet (leg)", "str_pl": "tourniquets (leg)" },
     "description": "A first aid device used to apply pressure to a limb or extremity in order to limit blood flow.  Should be employed only to manage heavy bleeding, because prolonged use will harm the limb.  It can be adjusted in size to fit different limbs.",
@@ -110,7 +110,7 @@
   },
   {
     "id": "tourniquet_lower_XL",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tourniquet (leg)", "str_pl": "tourniquets (leg)" },
     "description": "A first aid device used to apply pressure to a limb or extremity in order to limit blood flow.  Should be employed only to manage heavy bleeding, because prolonged use will harm the limb.  It can be adjusted in size to fit different limbs.",
@@ -122,7 +122,7 @@
   },
   {
     "id": "tourniquet_lower_XS",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tourniquet (leg)", "str_pl": "tourniquets (leg)" },
     "description": "A first aid device used to apply pressure to a limb or extremity in order to limit blood flow.  Should be employed only to manage heavy bleeding, because prolonged use will harm the limb.  It can be adjusted in size to fit different limbs.",
@@ -134,7 +134,7 @@
   },
   {
     "id": "makeshift_blindfold",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "makeshift blindfold" },
     "description": "A crude eye covering woven from blades of grass with string attached to fasten it.  Useful for sleeping in bright areas.  Use to raise it.",
@@ -155,7 +155,7 @@
   },
   {
     "id": "makeshift_blindfold_up",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "makeshift blindfold (raised)", "str_pl": "makeshift blindfolds (raised)" },
     "description": "A crude eye covering woven from blades of grass with string attached to fasten it.  It's currently raised, letting you see.  Use to lower it.",
@@ -175,7 +175,7 @@
   },
   {
     "id": "blindfold",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "blindfold" },
     "//": "A folded bandana still takes up some space on the head.",
@@ -197,7 +197,7 @@
   },
   {
     "id": "blindfold_up",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "blindfold (raised)", "str_pl": "blindfolds (raised)" },
     "description": "A simple fabric covering tied over the eyes to block sight.  It's currently raised, letting you see.  Use to lower it.",
@@ -217,7 +217,7 @@
   },
   {
     "id": "blindfold_duct",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "duct tape blindfold" },
     "//": "A folded bandana still takes up some space on the head.",
@@ -239,7 +239,7 @@
   },
   {
     "id": "blindfold_duct_up",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "duct tape blindfold (raised)", "str_pl": "duct tape blindfolds (raised)" },
     "description": "A simple covering tied over the eyes to block sight, made out of duct tape.  It's currently raised, letting you see.  Use to lower it.",
@@ -259,7 +259,7 @@
   },
   {
     "id": "ear_plugs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "ear plugs", "str_pl": "pairs of ear plugs" },
     "description": "Industrial-grade ear plugs.  They fit inside the ears.",
@@ -276,7 +276,7 @@
   },
   {
     "id": "gobag",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "go bag" },
     "description": "A huge duffel bag with a backpack attached, both packed to the gills.  Judging by the feel, a National Guardsman could have packed this to be ready for deployment.  Activate to unpack and enjoy.",
@@ -304,7 +304,7 @@
   },
   {
     "id": "personal_gobag",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "personal go bag" },
     "description": "A huge duffel bag with a backpack attached, both packed to the gills.  You packed this to be ready for deployment.  Activate to unpack and enjoy.",
@@ -314,7 +314,7 @@
   },
   {
     "id": "leg_splint",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leg splint" },
     "description": "A tool to help set leg bones and hold them in place.",
@@ -334,7 +334,7 @@
   },
   {
     "id": "leg_xlsplint",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leg splint" },
     "description": "A tool to help set leg bones and hold them in place.  It is specifically designed to fit Huge people.",
@@ -348,7 +348,7 @@
   },
   {
     "id": "leg_xs_splint",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leg splint" },
     "description": "A tool to help set leg bones and hold them in place.  It is specifically designed to fit Tiny people.",
@@ -361,7 +361,7 @@
   },
   {
     "id": "welding_mask",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "welding mask" },
     "description": "A plastic mask with a very dark visor, meant to protect the entire face while welding.  It also serves as somewhat good armor, but makes it hard to see.  Activate it to push it up your head.",
@@ -393,7 +393,7 @@
   },
   {
     "id": "welding_mask_crude",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "crude welding mask" },
     "description": "A crude welding mask made from shaped steel.  It will keep your face safe while welding, but it's a bit less comfortable than the real deal.  Activate it to push it up your head.",
@@ -429,7 +429,7 @@
   },
   {
     "id": "welding_mask_crude_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "crude welding mask (raised)", "str_pl": "crude welding masks (raised)" },
     "description": "A crude welding mask made from shaped steel.  It's less dark than a proper welding mask, and therefore less difficult to see in, but also less protective when welding.  Activate it to lower it over your face.",
@@ -453,7 +453,7 @@
   },
   {
     "id": "welding_mask_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "welding mask (raised)", "str_pl": "welding masks (raised)" },
     "description": "A plastic mask with a very dark visor, meant to protect the entire face while welding.  It also serves as somewhat good armor, but makes it hard to see.  Activate it to lower it over your face.",
@@ -507,7 +507,7 @@
     "tool_ammo": "battery"
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "id": "smart_watch",
     "name": { "str": "smart watch", "str_pl": "smart watches" },
@@ -554,7 +554,7 @@
     "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "id": "fitness_band",
     "name": { "str": "fitness band" },
@@ -575,7 +575,7 @@
   },
   {
     "id": "holo_cloak",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "hologram cloak" },
     "description": "A cloak woven with metallic fibers and covered with hexagonal sheets of reflective carbide.  When activated, it will create a holographic decoy of its wearer.",
@@ -613,7 +613,7 @@
     "tool_ammo": "battery"
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "id": "fedora",
@@ -635,7 +635,7 @@
   },
   {
     "id": "thermal_socks",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -673,7 +673,7 @@
   {
     "id": "thermal_socks_on",
     "copy-from": "thermal_socks",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "thermal electric socks (on)", "str_pl": "pairs of thermal electric socks (on)" },
     "description": "A pair of socks with internal battery-powered heating elements.  They are currently on, and continually draining batteries.  Use it to turn them off.",
@@ -691,7 +691,7 @@
   },
   {
     "id": "thermal_suit",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -729,7 +729,7 @@
   {
     "id": "thermal_suit_on",
     "copy-from": "thermal_suit",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "thermal electric suit (on)", "str_pl": "thermal electric suits (on)" },
     "description": "A full-body suit of thin thermal underwear equipped with internal battery-powered heating elements.  It is currently on, and continually draining batteries.  Use it to turn it off.",
@@ -747,7 +747,7 @@
   },
   {
     "id": "thermal_gloves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -785,7 +785,7 @@
   {
     "id": "thermal_gloves_on",
     "copy-from": "thermal_gloves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "thermal electric gloves (on)", "str_pl": "pairs of thermal electric gloves (on)" },
     "description": "A pair of gloves with internal battery-powered heating elements.  They are currently on, and continually draining batteries.  Use it to turn them off.",
@@ -803,7 +803,7 @@
   },
   {
     "id": "thermal_mask",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -841,7 +841,7 @@
   {
     "id": "thermal_mask_on",
     "copy-from": "thermal_mask",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "thermal electric balaclava (on)", "str_pl": "thermal electric balaclavas (on)" },
     "description": "A snug cloth mask with internal battery-powered heating elements.  It is are currently on, and continually draining batteries.  Use it to turn it off.",
@@ -859,7 +859,7 @@
   },
   {
     "id": "binoculars",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "tools",
     "symbol": ";",
@@ -882,7 +882,7 @@
   },
   {
     "id": "wearable_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -920,7 +920,7 @@
   {
     "id": "wearable_camera",
     "copy-from": "abstract_camera",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -942,7 +942,7 @@
   {
     "id": "wearable_camera_pro",
     "copy-from": "abstract_camera",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -974,7 +974,7 @@
   {
     "id": "wearable_light_on",
     "copy-from": "wearable_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "headlamp (on)", "str_pl": "headlamps (on)" },
     "description": "An LED headlamp with an adjustable strap so as to be comfortably worn on your head or attached to your helmet.  It is turned on, and continually draining batteries.  Use it to turn it off.",
@@ -992,7 +992,7 @@
   },
   {
     "id": "wearable_atomic_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -1029,7 +1029,7 @@
   {
     "id": "wearable_atomic_light_off",
     "copy-from": "wearable_atomic_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "looks_like": "wearable_light",
     "name": { "str": "atomic headlamp (covered)", "str_pl": "atomic headlamps (covered)" },
@@ -1045,7 +1045,7 @@
   },
   {
     "id": "ar_glasses_basic",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "name": { "str": "basic AR glasses", "str_pl": "pairs of basic AR glasses" },
@@ -1080,7 +1080,7 @@
   },
   {
     "id": "ar_glasses_advanced",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "name": { "str": "advanced AR glasses", "str_pl": "pairs of advanced AR glasses" },
@@ -1135,7 +1135,7 @@
   },
   {
     "id": "helmet_eod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "EOD helmet" },
@@ -1200,7 +1200,7 @@
   },
   {
     "id": "helmet_eod_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "helmet_eod",
     "name": { "str": "EOD helmet (on)", "str_pl": "EOD helmets (on)" },
@@ -1211,7 +1211,7 @@
   },
   {
     "id": "dimensional_anchor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -1249,7 +1249,7 @@
   {
     "id": "dimensional_anchor_on",
     "copy-from": "dimensional_anchor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "5-point anchor (on)", "str_pl": "5-point anchors (on)" },
     "looks_like": "dimensional_anchor",
@@ -1268,7 +1268,7 @@
   {
     "id": "broken_dimensional_anchor",
     "copy-from": "dimensional_anchor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "malfunctioning 5-point anchor" },
     "description": "A battered, disc-shaped device mounted on a harness.  The inscriptions \"X.E.D.R.A\" and \"5-point anchor\" are barely legible on its radiation-stained front and back.",
@@ -1283,7 +1283,7 @@
   },
   {
     "id": "phase_immersion_suit",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "looks_like": "rm13_armor",
@@ -1434,7 +1434,7 @@
   {
     "id": "phase_immersion_suit_on",
     "copy-from": "phase_immersion_suit",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "phase immersion suit (on)", "str_pl": "phase immersion suits (on)" },
     "looks_like": "phase_immersion_suit",
@@ -1477,7 +1477,7 @@
   },
   {
     "id": "rebreather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -1519,7 +1519,7 @@
   {
     "id": "rebreather_on",
     "copy-from": "rebreather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "material": [ "plastic", "aluminum" ],
     "name": { "str": "rebreather mask (on)", "str_pl": "rebreather masks (on)" },
@@ -1535,7 +1535,7 @@
   },
   {
     "id": "rebreather_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -1577,7 +1577,7 @@
   {
     "id": "rebreather_xl_on",
     "copy-from": "rebreather_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "rebreather mask (on)", "str_pl": "rebreather masks (on)" },
     "material": [ "plastic", "aluminum" ],
@@ -1599,7 +1599,7 @@
   },
   {
     "id": "rebreather_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -1642,7 +1642,7 @@
   {
     "id": "rebreather_xs_on",
     "copy-from": "rebreather_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "rebreather mask (on)", "str_pl": "rebreather masks (on)" },
     "description": "A mask worn over your mouth which, when loaded with the proper filters, recycles your exhaled breath for rebreathing while underwater.  This model has been shrunk dramatically to fit a smaller face.  It is turned on, and continually consuming its filter.  Use it to turn it off.",
@@ -1664,7 +1664,7 @@
   },
   {
     "id": "mask_filter",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "filter mask" },
     "category": "clothing",
@@ -1706,7 +1706,7 @@
   },
   {
     "id": "mask_gas",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "gas mask" },
     "category": "clothing",
@@ -1748,7 +1748,7 @@
   },
   {
     "id": "mask_gas_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "gas mask" },
     "category": "clothing",
@@ -1790,7 +1790,7 @@
   },
   {
     "id": "mask_gas_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "gas mask" },
     "category": "clothing",
@@ -1832,7 +1832,7 @@
   },
   {
     "id": "mask_gas_half",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "half-face gas mask" },
     "category": "clothing",
@@ -1873,7 +1873,7 @@
   },
   {
     "id": "mask_fsurvivor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "survivor firemask" },
@@ -1924,7 +1924,7 @@
   },
   {
     "id": "mask_fsurvivor_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_fsurvivor",
     "looks_like": "mask_fsurvivor",
@@ -1934,7 +1934,7 @@
   },
   {
     "id": "mask_fsurvivor_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_fsurvivor",
     "looks_like": "mask_fsurvivor",
@@ -1944,7 +1944,7 @@
   },
   {
     "id": "mask_bunker",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "symbol": "[",
@@ -1995,7 +1995,7 @@
   },
   {
     "id": "mask_hsurvivor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "heavy survivor mask" },
@@ -2049,7 +2049,7 @@
   },
   {
     "id": "mask_hsurvivor_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_hsurvivor",
     "looks_like": "mask_hsurvivor",
@@ -2059,7 +2059,7 @@
   },
   {
     "id": "mask_hsurvivor_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_hsurvivor",
     "looks_like": "mask_hsurvivor",
@@ -2069,7 +2069,7 @@
   },
   {
     "id": "mask_lsurvivor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "survivor half mask" },
@@ -2110,7 +2110,7 @@
   },
   {
     "id": "mask_lsurvivor_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_lsurvivor",
     "looks_like": "mask_lsurvivor",
@@ -2120,7 +2120,7 @@
   },
   {
     "id": "mask_lsurvivor_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_lsurvivor",
     "looks_like": "mask_lsurvivor",
@@ -2130,7 +2130,7 @@
   },
   {
     "id": "mask_survivor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "survivor mask" },
@@ -2178,7 +2178,7 @@
   },
   {
     "id": "mask_survivor_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_survivor",
     "looks_like": "mask_survivor",
@@ -2188,7 +2188,7 @@
   },
   {
     "id": "mask_survivor_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_survivor",
     "looks_like": "mask_survivor",
@@ -2198,7 +2198,7 @@
   },
   {
     "id": "goggles_nv",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -2239,7 +2239,7 @@
   {
     "id": "goggles_nv_on",
     "copy-from": "goggles_nv",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str_pl": "pairs of light amp goggles (on)", "str": "light amp goggles (on)" },
     "description": "A pair of battery-powered goggles that use a infrared LED in conjunction with a IR camera, allowing you to see in the dark.  It is turned on, and continually draining batteries.  Use it to turn them off.",
@@ -2254,7 +2254,7 @@
   },
   {
     "id": "goggles_ir",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -2295,7 +2295,7 @@
   {
     "id": "goggles_ir_on",
     "copy-from": "goggles_ir",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "infrared goggles (on)", "str_pl": "pairs of infrared goggles (on)" },
     "description": "A pair of battery-powered goggles that grant infrared vision, allowing you to see warm-blooded creatures in the dark.  Use it to turn them off.",
@@ -2309,7 +2309,7 @@
   },
   {
     "id": "wearable_rx12",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -2340,7 +2340,7 @@
   },
   {
     "id": "rx11_stimpack",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -2372,7 +2372,7 @@
   },
   {
     "id": "mask_h2osurvivor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "symbol": "[",
@@ -2434,7 +2434,7 @@
   {
     "id": "mask_h2osurvivor_on",
     "copy-from": "mask_h2osurvivor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "survivor divemask (on)", "str_pl": "survivor divemasks (on)" },
     "description": "A custom-built, armored rebreather mask that covers the face and eyes.  Provides excellent protection from harm as well providing breathing gas while underwater.  It is turned on, and continually consuming its filter.  Use it to turn it off.",
@@ -2452,7 +2452,7 @@
   },
   {
     "id": "mask_h2osurvivor_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_h2osurvivor",
     "looks_like": "mask_h2osurvivor",
@@ -2471,7 +2471,7 @@
   },
   {
     "id": "mask_h2osurvivor_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_h2osurvivor",
     "looks_like": "mask_h2osurvivor",
@@ -2491,7 +2491,7 @@
   {
     "id": "mask_h2osurvivor_xl_on",
     "copy-from": "mask_h2osurvivor_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "survivor divemask (on)", "str_pl": "survivor divemasks (on)" },
     "description": "A custom-built, armored rebreather mask that covers the face and eyes regardless of your state of mutation.  Provides excellent protection from harm as well providing breathing gas while underwater.  It is turned on, and continually consuming its filter.  Use it to turn it off.",
@@ -2519,7 +2519,7 @@
   },
   {
     "id": "mask_h2osurvivor_xs_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "mask_h2osurvivor",
     "looks_like": "mask_h2osurvivor",
@@ -2550,7 +2550,7 @@
   },
   {
     "id": "hairpin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "symbol": "[",
@@ -2568,7 +2568,7 @@
   },
   {
     "id": "fc_hairpin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "hairpin",
     "color": "pink",
@@ -2583,7 +2583,7 @@
   },
   {
     "id": "towel",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "symbol": ",",
     "color": "cyan",
@@ -2602,7 +2602,7 @@
   },
   {
     "id": "towel_wet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "symbol": ",",
     "color": "blue",
@@ -2621,7 +2621,7 @@
     "armor": [ { "coverage": 50, "covers": [ "torso", "leg_l", "leg_r" ] } ]
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "id": "straw_fedora",
     "category": "clothing",
@@ -2643,7 +2643,7 @@
   },
   {
     "id": "turtleneck",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "turtleneck" },
     "description": "A tasteful wool turtleneck, modeled after cashmere.  Unencumbering and warm, but lacking storage.",
@@ -2667,7 +2667,7 @@
   },
   {
     "id": "turtleneck_shirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "turtleneck shirt" },
     "description": "A tasteful shirt with a high rolled collar.  It's too thin to be called a sweater.",
@@ -2690,7 +2690,7 @@
     ]
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "id": "mask_ski",
     "name": { "str": "ski mask" },
@@ -2730,7 +2730,7 @@
     ]
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "id": "mask_ski_loose",
     "name": { "str": "ski mask (collar)", "str_pl": "ski masks (collar)" },
@@ -2757,7 +2757,7 @@
     "armor": [ { "encumbrance": 4, "coverage": 20, "covers": [ "head" ], "specifically_covers": [ "head_nape", "head_throat" ] } ]
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "id": "whistle",
     "name": { "str": "whistle" },
@@ -2785,7 +2785,7 @@
   },
   {
     "id": "powered_earmuffs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "symbol": "[",
@@ -2822,7 +2822,7 @@
   },
   {
     "id": "powered_earmuffs_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "symbol": "[",
@@ -2861,7 +2861,7 @@
   },
   {
     "id": "powered_earplugs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "symbol": "[",
@@ -2900,7 +2900,7 @@
   },
   {
     "id": "powered_earplugs_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "powered_earplugs",
     "symbol": "[",
@@ -2921,7 +2921,7 @@
   },
   {
     "id": "stethoscope",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "symbol": "y",
     "color": "dark_gray",
@@ -2937,7 +2937,7 @@
   },
   {
     "id": "makeshift_stethoscope",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "symbol": "y",
     "color": "dark_gray",
@@ -2953,7 +2953,7 @@
   },
   {
     "id": "solarpack",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "solar backpack (folded)", "str_pl": "solar backpacks (folded)" },
     "description": "A personal portable charging system consisting of an array of solar panels neatly folded into the form of a large backpack.  It can be worn like a normal backpack, and has an integrated cable to plug it into a cable charger system CBM.",
@@ -2973,7 +2973,7 @@
   },
   {
     "id": "solarpack_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "solar backpack (unfolded)", "str_pl": "solar backpacks (unfolded)" },
     "description": "An unfolded array of portable solar panels, ready to push some power into an active cable charger system CBM.",
@@ -2994,7 +2994,7 @@
   },
   {
     "id": "helmet_riot",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "riot helmet" },
@@ -3050,7 +3050,7 @@
   },
   {
     "id": "helmet_riot_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "riot helmet (raised visor)", "str_pl": "riot helmets (raised visor)" },
@@ -3084,7 +3084,7 @@
   },
   {
     "id": "helmet_sallet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sallet helm" },
@@ -3111,7 +3111,7 @@
   },
   {
     "id": "helmet_sallet_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sallet helm (raised)", "str_pl": "sallet helms (raised)" },
@@ -3140,7 +3140,7 @@
   },
   {
     "id": "helmet_armet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "armet helm" },
@@ -3168,7 +3168,7 @@
   },
   {
     "id": "helmet_armet_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "armet helm (raised)", "str_pl": "armet helms (raised)" },
@@ -3192,7 +3192,7 @@
   },
   {
     "id": "scuba_tank",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "name": { "str": "diving cylinder" },
@@ -3220,7 +3220,7 @@
   },
   {
     "id": "scuba_tank_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "name": { "str": "diving cylinder (on)", "str_pl": "diving cylinders (on)" },
@@ -3254,7 +3254,7 @@
   },
   {
     "id": "small_scuba_tank",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "name": { "str": "small diving cylinder" },
@@ -3282,7 +3282,7 @@
   },
   {
     "id": "small_scuba_tank_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "name": { "str": "small diving cylinder (on)", "str_pl": "small diving cylinders (on)" },
@@ -3316,7 +3316,7 @@
   },
   {
     "id": "electric_blanket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "electric blanket" },
     "description": "A heated blanket made of polyester.  Its power drain is usually negligible, but without being able to plug it into a wall, it chews through batteries insanely quickly.",
@@ -3365,7 +3365,7 @@
   },
   {
     "id": "electric_blanket_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "name": { "str": "electric blanket (on)", "str_pl": "electric blankets (on)" },
     "description": "A polyester blanket with an electric heating unit inside.  It's turned on, making it nice and toasty while it lasts.",
@@ -3385,7 +3385,7 @@
   },
   {
     "id": "attached_ear_plugs_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "attached ear plugs (in)", "str_pl": "pairs of attached ear plugs (in)" },
     "description": "A pair of industrial-grade ear plugs attached together by some string.  They are inside your ears, activate them to take them out.",
@@ -3400,7 +3400,7 @@
   },
   {
     "id": "attached_ear_plugs_off",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "attached ear plugs (out)", "str_pl": "pairs of attached ear plugs (out)" },
     "description": "A pair of industrial-grade ear plugs, they are attached together by some string.  They hang around your neck, use them to plug them in.",
@@ -3416,7 +3416,7 @@
   },
   {
     "id": "makeshift_ear_plugs_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "makeshift ear plugs (in)", "str_pl": "pairs of makeshift ear plugs (in)" },
     "description": "A pair of makeshift ear plugs made from lumps of wax on the ends of a piece of string.  They are inside your ears, activate them to take them out.",
@@ -3432,7 +3432,7 @@
   },
   {
     "id": "makeshift_ear_plugs_off",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "makeshift ear plugs (out)", "str_pl": "pairs of makeshift ear plugs (out)" },
     "description": "A pair of makeshift ear plugs made from lumps of wax on the ends of a piece of string.  They hang around your neck, use them to plug them in.",
@@ -3449,7 +3449,7 @@
   },
   {
     "id": "flight_helmet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "military flight helmet" },
@@ -3516,7 +3516,7 @@
   },
   {
     "id": "flight_helmet_on",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "military flight helmet (on)", "str_pl": "military flight helmets (on)" },
@@ -3561,7 +3561,7 @@
     "melee_damage": { "bash": 6 }
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "clothing",
     "id": "combo_cover",

@@ -1,7 +1,7 @@
 [
   {
     "id": "beekeeping_gloves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "beekeeping gloves", "str_pl": "pairs of beekeeping gloves" },
     "description": "A pair of white beekeeping gloves made out of smooth leather.",
@@ -23,7 +23,7 @@
   },
   {
     "id": "boxing_gloves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "boxing gloves", "str_pl": "pairs of boxing gloves" },
     "description": "A pair of big, red, 8 oz. boxing gloves made from thick vinyl and foam.",
@@ -44,7 +44,7 @@
   },
   {
     "id": "chainmail_gloves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail gloves", "str_pl": "pairs of chainmail gloves" },
@@ -72,7 +72,7 @@
   },
   {
     "id": "chainmail_gloves_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail gloves", "str_pl": "pairs of chainmail gloves" },
     "copy-from": "chainmail_gloves",
@@ -81,7 +81,7 @@
   },
   {
     "id": "chainmail_gloves_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_gloves",
     "name": { "str": "chainmail gloves", "str_pl": "pairs of chainmail gloves" },
@@ -90,7 +90,7 @@
   },
   {
     "id": "chainmail_junk_gloves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_gloves",
     "name": { "str": "chainmail gloves", "str_pl": "pairs of chainmail gloves" },
@@ -99,7 +99,7 @@
   },
   {
     "id": "fire_gauntlets",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "fire gauntlets", "str_pl": "pairs of fire gauntlets" },
@@ -122,7 +122,7 @@
   },
   {
     "id": "platemail_gauntlets",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate gauntlets", "str_pl": "pairs of plate gauntlets" },
@@ -159,7 +159,7 @@
   },
   {
     "id": "platemail_gauntlets_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "plate gauntlets", "str_pl": "pairs of plate gauntlets" },
     "copy-from": "platemail_gauntlets",
@@ -168,7 +168,7 @@
   },
   {
     "id": "platemail_gauntlets_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_gauntlets",
     "name": { "str": "plate gauntlets", "str_pl": "pairs of plate gauntlets" },
@@ -177,7 +177,7 @@
   },
   {
     "id": "gauntlets_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chitin gauntlets", "str_pl": "pairs of chitin gauntlets" },
@@ -213,7 +213,7 @@
   },
   {
     "id": "xl_gauntlets_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chitin gauntlets", "str_pl": "pairs of chitin gauntlets" },
     "copy-from": "gauntlets_chitin",
@@ -222,7 +222,7 @@
   },
   {
     "id": "xs_gauntlets_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gauntlets_chitin",
     "name": { "str": "chitin gauntlets", "str_pl": "pairs of chitin gauntlets" },
@@ -232,7 +232,7 @@
   {
     "id": "gauntlets_acidchitin",
     "copy-from": "gauntlets_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin gauntlets", "str_pl": "pairs of biosilicified chitin gauntlets" },
     "description": "A pair of fingerless gauntlets crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
@@ -242,7 +242,7 @@
   },
   {
     "id": "xl_gauntlets_acidchitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin gauntlets", "str_pl": "pairs of biosilicified chitin gauntlets" },
     "copy-from": "gauntlets_acidchitin",
@@ -251,7 +251,7 @@
   },
   {
     "id": "xs_gauntlets_acidchitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gauntlets_acidchitin",
     "name": { "str": "biosilicified chitin gauntlets", "str_pl": "pairs of biosilicified chitin gauntlets" },
@@ -260,7 +260,7 @@
   },
   {
     "id": "gloves_claws",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "claw gloves", "str_pl": "pairs of claw gloves" },
     "description": "A pair of well-made black stretch vinyl gloves with black steel claws connected to the fingers.  Used in BDSM performances or as part of a costume, they're not likely to help in a fight.",
@@ -280,7 +280,7 @@
   },
   {
     "id": "gauntlet_fencing",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fencing gauntlet" },
     "description": "A single suede glove with a sturdy cloth wrist, padded back, and well-fitting fingers.",
@@ -300,7 +300,7 @@
   },
   {
     "id": "gauntlet_fencing_l",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fencing gauntlet (left)", "str_pl": "fencing gauntlets (left)" },
     "description": "A single suede glove with a sturdy cloth wrist, padded back, and well-fitting fingers.  This one is left-handed.",
@@ -320,7 +320,7 @@
   },
   {
     "id": "leather_gauntlets",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather gauntlets", "str_pl": "pairs of leather gauntlets" },
@@ -365,7 +365,7 @@
   },
   {
     "id": "leather_gauntlets_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather gauntlets", "str_pl": "pairs of leather gauntlets" },
     "copy-from": "leather_gauntlets",
@@ -374,7 +374,7 @@
   },
   {
     "id": "leather_gauntlets_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "leather_gauntlets",
     "name": { "str": "leather gauntlets", "str_pl": "pairs of leather gauntlets" },
@@ -383,7 +383,7 @@
   },
   {
     "id": "gloves_bag",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bag mitts", "str_pl": "pairs of bag mitts" },
     "description": "A pair of disposable plastic bags, adapted to be used as gloves.",
@@ -403,7 +403,7 @@
   },
   {
     "id": "gloves_fingerless",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fingerless leather gloves", "str_pl": "pairs of fingerless leather gloves" },
     "description": "A pair of leather gloves without fingers.",
@@ -437,7 +437,7 @@
   },
   {
     "id": "gloves_fingerless_mod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "armored fingerless leather gloves", "str_pl": "pairs of armored fingerless leather gloves" },
@@ -491,7 +491,7 @@
   },
   {
     "id": "gloves_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur gloves", "str_pl": "pairs of fur gloves" },
     "description": "A pair of warm fur gloves.",
@@ -512,7 +512,7 @@
   },
   {
     "id": "xl_gloves_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur gloves", "str_pl": "pairs of fur gloves" },
     "copy-from": "gloves_fur",
@@ -521,7 +521,7 @@
   },
   {
     "id": "xs_gloves_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gloves_fur",
     "looks_like": "gloves_fur",
@@ -531,7 +531,7 @@
   },
   {
     "id": "gloves_faux_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "faux fur gloves", "str_pl": "pairs of faux fur gloves" },
     "description": "A pair of warm faux fur gloves.",
@@ -552,7 +552,7 @@
   },
   {
     "id": "xl_gloves_faux_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "faux fur gloves", "str_pl": "pairs of faux fur gloves" },
     "copy-from": "gloves_faux_fur",
@@ -561,7 +561,7 @@
   },
   {
     "id": "xs_gloves_faux_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gloves_faux_fur",
     "looks_like": "gloves_fur",
@@ -571,7 +571,7 @@
   },
   {
     "id": "gloves_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather gloves", "str_pl": "pairs of leather gloves" },
     "description": "A thin pair of black leather gloves.",
@@ -592,7 +592,7 @@
   },
   {
     "id": "xl_gloves_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather gloves", "str_pl": "pairs of leather gloves" },
     "copy-from": "gloves_leather",
@@ -601,7 +601,7 @@
   },
   {
     "id": "xs_gloves_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gloves_leather",
     "looks_like": "gloves_leather",
@@ -611,7 +611,7 @@
   },
   {
     "id": "gloves_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "light gloves", "str_pl": "pairs of light gloves" },
     "description": "A pair of cloth gloves.",
@@ -631,7 +631,7 @@
   },
   {
     "id": "xl_gloves_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "light gloves", "str_pl": "pairs of light gloves" },
     "copy-from": "gloves_light",
@@ -640,7 +640,7 @@
   },
   {
     "id": "xs_gloves_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gloves_light",
     "looks_like": "gloves_light",
@@ -650,7 +650,7 @@
   },
   {
     "id": "gloves_liner",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "glove liners", "str_pl": "pairs of glove liners" },
     "description": "A pair of thin cloth gloves.  Often used as a liner beneath other gloves.",
@@ -670,7 +670,7 @@
   },
   {
     "id": "xl_gloves_liner",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "glove liners", "str_pl": "pairs of glove liners" },
     "copy-from": "gloves_liner",
@@ -679,7 +679,7 @@
   },
   {
     "id": "xs_gloves_liner",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gloves_liner",
     "looks_like": "gloves_liner",
@@ -689,7 +689,7 @@
   },
   {
     "id": "gloves_medical",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "medical gloves", "str_pl": "pairs of medical gloves" },
     "description": "A pair of thin nitrile gloves, designed to limit the spread of disease.  Too fragile to protect you from much else.",
@@ -708,7 +708,7 @@
   },
   {
     "id": "gloves_black",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "black gloves", "str_pl": "pairs of black gloves" },
     "description": "A pair of black cotton gloves.",
@@ -728,7 +728,7 @@
   },
   {
     "id": "gloves_rubber",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "rubber gloves", "str_pl": "pairs of rubber gloves" },
     "description": "A pair of rubber gloves, often used while cleaning with caustic materials.",
@@ -750,7 +750,7 @@
   },
   {
     "id": "gloves_tactical",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tactical gloves", "str_pl": "pairs of tactical gloves" },
@@ -773,7 +773,7 @@
   },
   {
     "id": "gloves_winter",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "winter gloves", "str_pl": "pairs of winter gloves" },
     "description": "A pair of padded cotton gloves.  Toasty!",
@@ -793,7 +793,7 @@
   },
   {
     "id": "gloves_wool",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wool gloves", "str_pl": "pairs of wool gloves" },
     "description": "A warm pair of wool gloves.",
@@ -812,7 +812,7 @@
   },
   {
     "id": "xl_gloves_wool",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wool gloves", "str_pl": "pairs of wool gloves" },
     "copy-from": "gloves_wool",
@@ -821,7 +821,7 @@
   },
   {
     "id": "xs_gloves_wool",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gloves_wool",
     "looks_like": "gloves_wool",
@@ -831,7 +831,7 @@
   },
   {
     "id": "gloves_wool_fingerless",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fingerless wool gloves", "str_pl": "pairs of fingerless wool gloves" },
     "description": "A warm pair of wool gloves without fingers.  Less encumbering, but provides significantly less warmth.",
@@ -863,7 +863,7 @@
   },
   {
     "id": "xl_gloves_wool_fingerless",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fingerless wool gloves", "str_pl": "pairs of fingerless wool gloves" },
     "copy-from": "gloves_wool_fingerless",
@@ -872,7 +872,7 @@
   },
   {
     "id": "xs_gloves_wool_fingerless",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "gloves_wool_fingerless",
     "name": { "str": "fingerless wool gloves", "str_pl": "pairs of fingerless wool gloves" },
@@ -881,7 +881,7 @@
   },
   {
     "id": "gloves_work",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "work gloves", "str_pl": "pairs of work gloves" },
     "description": "A tough pair of gloves, for tough everyday work.",
@@ -903,7 +903,7 @@
   },
   {
     "id": "gloves_cut_resistant",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "cut-resistant gloves", "str_pl": "pairs of cut-resistant gloves" },
@@ -925,7 +925,7 @@
   },
   {
     "id": "gloves_wraps",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "hand wraps", "str_pl": "pairs of hand wraps" },
     "description": "Long pieces of cloth that are meant to be wrapped around the hands.",
@@ -946,7 +946,7 @@
   },
   {
     "id": "gloves_wraps_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur hand wraps", "str_pl": "pairs of fur hand wraps" },
     "description": "Pieces of animal pelt that are meant to be wrapped around the hands.",
@@ -967,7 +967,7 @@
   },
   {
     "id": "gloves_wraps_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather hand wraps", "str_pl": "pairs of leather hand wraps" },
     "description": "Pieces of leather that are meant to be wrapped around your hands.",
@@ -988,7 +988,7 @@
   },
   {
     "id": "gloves_wraps_wool",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wool hand wraps", "str_pl": "pairs of wool hand wraps" },
     "description": "Long pieces of wool that are meant to be wrapped around the hands.",
@@ -1008,7 +1008,7 @@
   },
   {
     "id": "long_glove_white",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "opera gloves", "str_pl": "pairs of opera gloves" },
     "description": "Thin gloves which extend up past the elbows.",
@@ -1037,7 +1037,7 @@
   },
   {
     "id": "mittens",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "mittens", "str_pl": "pairs of mittens" },
     "description": "A pair of warm but cumbersome mittens.",
@@ -1057,7 +1057,7 @@
   },
   {
     "id": "mittens_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "mittens", "str_pl": "pairs of mittens" },
     "description": "A pair of mittens sized for a preschooler.",
@@ -1077,7 +1077,7 @@
   },
   {
     "id": "mittens_nylon",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "snow mittens", "str_pl": "pairs of snow mittens" },
     "description": "A pair of mittens with a water-resistant nylon shell, perfect for skiing.",
@@ -1108,7 +1108,7 @@
   },
   {
     "id": "nomex_gloves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "flame-resistant gloves", "str_pl": "pairs of flame-resistant gloves" },
     "description": "A snug-fitting pair of gloves made from thin and lightweight Nomex fabric.",
@@ -1129,7 +1129,7 @@
   },
   {
     "id": "santa_gloves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "Santa gloves", "str_pl": "pairs of Santa gloves" },
     "description": "A pair of red gloves with white faux fur trim.  Keeps your hands warm and your holiday spirit bright.",
@@ -1148,7 +1148,7 @@
   },
   {
     "id": "sockmitts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wrist warmers", "str_pl": "pairs of wrist warmers" },
     "description": "A pair of cloth mitts that cover the wrists and palms but leave the fingers free.",
@@ -1174,7 +1174,7 @@
   },
   {
     "id": "wool_sockmitts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "sockmitts",
     "name": { "str": "wool wrist warmers", "str_pl": "pairs of wool wrist warmers" },
@@ -1195,7 +1195,7 @@
   },
   {
     "id": "nomex_sockmitts",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "sockmitts",
     "name": { "str": "Nomex wrist warmers", "str_pl": "pairs of Nomex wrist warmers" },
@@ -1219,7 +1219,7 @@
   },
   {
     "id": "stockings_tent_arms",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tentacle sleeves", "str_pl": "pairs of tentacle sleeves" },
     "description": "Long cloth tubes sized to fit over tentacles and help protect them from the cold.",
@@ -1238,7 +1238,7 @@
   },
   {
     "id": "winter_gloves_army",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "army winter gloves", "str_pl": "pairs of army winter gloves" },
     "description": "A pair of padded gloves of the sort issued by the military.",
@@ -1258,7 +1258,7 @@
   },
   {
     "id": "gloves_white",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "white gloves", "str_pl": "pairs of white gloves" },
     "description": "A pair of white costume gloves made out of cotton.",
@@ -1270,7 +1270,7 @@
   },
   {
     "id": "gloves_skeleton",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "skeleton gloves", "str_pl": "pairs of skeleton gloves" },
     "description": "A pair of black costume gloves with a skeletal hand pattern printed on them.",
@@ -1284,7 +1284,7 @@
   },
   {
     "id": "gloves_golf",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "golfing gloves", "str_pl": "pairs of golfing gloves" },
     "description": "A thin pair of leather golfing gloves.",
@@ -1312,7 +1312,7 @@
   },
   {
     "id": "gloves_eod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "EOD overhand protectors", "str_pl": "pairs of EOD overhand protectors" },
@@ -1339,7 +1339,7 @@
   },
   {
     "id": "gloves_airsoft",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "airsoft gloves", "str_pl": "pairs of airsoft gloves" },

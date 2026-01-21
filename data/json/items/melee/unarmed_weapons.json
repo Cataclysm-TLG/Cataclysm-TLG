@@ -1,6 +1,6 @@
 [
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "id": "cestus",
     "symbol": "3",
@@ -51,7 +51,7 @@
   },
   {
     "id": "xl_cestus",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "cestus", "str_pl": "cesti" },
     "copy-from": "cestus",
@@ -60,7 +60,7 @@
   },
   {
     "id": "xs_cestus",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "cestus", "str_pl": "cesti" },
     "copy-from": "cestus",
@@ -68,7 +68,7 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "id": "bagh_nakha",
     "name": { "str": "bagh nakh", "str_pl": "pairs of bagh nakh" },
@@ -99,7 +99,7 @@
   },
   {
     "id": "bagh_nakha_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bagh nakh", "str_pl": "pairs of bagh nakh" },
     "copy-from": "bagh_nakha",
@@ -108,7 +108,7 @@
   },
   {
     "id": "bagh_nakha_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bagh nakh", "str_pl": "pairs of bagh nakh" },
     "copy-from": "bagh_nakha",
@@ -116,7 +116,7 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "id": "knuckle_brass",
     "symbol": "3",
@@ -143,7 +143,7 @@
   },
   {
     "id": "xl_knuckle_brass",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "brass knuckles", "str_pl": "pairs of brass knuckles" },
     "copy-from": "knuckle_brass",
@@ -152,7 +152,7 @@
   },
   {
     "id": "xs_knuckle_brass",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "brass knuckles", "str_pl": "pairs of brass knuckles" },
     "copy-from": "knuckle_brass",
@@ -160,7 +160,7 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "id": "knuckle_nail",
     "symbol": "]",
@@ -187,7 +187,7 @@
   },
   {
     "id": "xl_knuckle_nail",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "nail knuckles", "str_pl": "pairs of nail knuckles" },
     "copy-from": "knuckle_nail",
@@ -196,7 +196,7 @@
   },
   {
     "id": "xs_knuckle_nail",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "nail knuckles", "str_pl": "pairs of nail knuckles" },
     "copy-from": "knuckle_nail",
@@ -204,7 +204,7 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "id": "knuckle_steel",
     "symbol": "3",
@@ -232,7 +232,7 @@
   },
   {
     "id": "xl_knuckle_steel",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "scrap knuckles", "str_pl": "pairs of scrap knuckles" },
     "copy-from": "knuckle_steel",
@@ -241,7 +241,7 @@
   },
   {
     "id": "xs_knuckle_steel",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "scrap knuckles", "str_pl": "pairs of scrap knuckles" },
     "copy-from": "knuckle_steel",
@@ -249,7 +249,7 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "id": "knuckle_steel_forged",
     "symbol": "3",
@@ -278,7 +278,7 @@
   },
   {
     "id": "xl_knuckle_steel_forged",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "steel knuckles", "str_pl": "pairs of steel knuckles" },
     "copy-from": "knuckle_steel_forged",
@@ -287,7 +287,7 @@
   },
   {
     "id": "xs_knuckle_steel_forged",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "steel knuckles", "str_pl": "pairs of steel knuckles" },
     "copy-from": "knuckle_steel_forged",
@@ -296,7 +296,7 @@
   },
   {
     "id": "gloves_studded",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "studded gloves", "str_pl": "pairs of studded gloves" },
     "description": "A pair of gloves with studded metal knuckles and a thin back plating.",
@@ -352,7 +352,7 @@
   },
   {
     "id": "xl_gloves_studded",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "studded gloves", "str_pl": "pairs of studded gloves" },
     "copy-from": "gloves_studded",
@@ -361,7 +361,7 @@
   },
   {
     "id": "xs_gloves_studded",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "studded gloves", "str_pl": "pairs of studded gloves" },
     "copy-from": "gloves_studded",
@@ -370,7 +370,7 @@
   },
   {
     "id": "knuckle_impact",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "impact knuckles" },
     "description": "A pair of thick steel plates to wear over the knuckles.",
@@ -398,7 +398,7 @@
   },
   {
     "id": "xl_knuckle_impact",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "impact knuckles" },
     "copy-from": "knuckle_impact",
@@ -407,7 +407,7 @@
   },
   {
     "id": "xs_knuckle_impact",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "impact knuckles" },
     "copy-from": "knuckle_impact",
@@ -416,7 +416,7 @@
   },
   {
     "id": "knuckle_skewer",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "skewer knuckles" },
     "description": "A pair of metal braces, each with a single sturdy spike attached.  When strapped to your hands, the spikes protrude 5 centimeters past your clenched fists.",
@@ -436,7 +436,7 @@
   },
   {
     "id": "xl_knuckle_skewer",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "skewer knuckles" },
     "copy-from": "knuckle_skewer",
@@ -445,7 +445,7 @@
   },
   {
     "id": "xs_knuckle_skewer",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "skewer knuckles" },
     "copy-from": "knuckle_skewer",

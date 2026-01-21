@@ -1,7 +1,7 @@
 [
   {
     "id": "cowl_wool",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "knit cowl" },
     "description": "A snuggly woolen cowl, essentially a really bulky neck gaiter, but it fits more loosely.",
@@ -22,7 +22,7 @@
   },
   {
     "id": "headscarf",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "headscarf" },
     "description": "A loose cloth worn over the head and around the neck.",
@@ -43,7 +43,7 @@
   },
   {
     "id": "keffiyeh",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "keffiyeh" },
     "description": "A type of headdress traditionally used in the Middle East.  It can be used in different ways to protect the head and mouth from the elements.",
@@ -762,7 +762,7 @@
   },
   {
     "id": "marloss_scarf",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "keffiyeh",
     "looks_like": "scarf",
@@ -772,7 +772,7 @@
   },
   {
     "id": "grass_keffiyeh",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "grass keffiyeh" },
     "description": "A grass sheet with cords to wear it like a Middle Eastern headdress.  It's a bit itchy, but can keep your head and mouth a bit warmer if there's nothing in the way.",
@@ -793,7 +793,7 @@
   },
   {
     "id": "nun_wimple",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wimple" },
     "description": "A loose cloth headwrap and veil.  Typically worn by Christian nuns.",
@@ -841,7 +841,7 @@
   },
   {
     "id": "neck_gaiter_kevlar",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "Kevlar neck gaiter" },
@@ -871,7 +871,7 @@
   },
   {
     "id": "neck_gaiter_kevlar_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "Kevlar neck gaiter" },
     "copy-from": "neck_gaiter_kevlar",
@@ -887,7 +887,7 @@
   },
   {
     "id": "neck_gaiter_kevlar_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "neck_gaiter_kevlar",
     "name": { "str": "Kevlar neck gaiter" },
@@ -903,7 +903,7 @@
   },
   {
     "id": "neck_gaiter_kevlar_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "Kevlar neck gaiter (raised)" },
@@ -936,7 +936,7 @@
   },
   {
     "id": "neck_gaiter_kevlar_xl_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "Kevlar neck gaiter (raised)" },
     "copy-from": "neck_gaiter_kevlar_raised",
@@ -952,7 +952,7 @@
   },
   {
     "id": "neck_gaiter_kevlar_xs_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "neck_gaiter_kevlar_raised",
     "name": { "str": "Kevlar neck gaiter (raised)" },
@@ -968,7 +968,7 @@
   },
   {
     "id": "neck_gaiter",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "neck gaiter" },
     "color": "dark_gray",
@@ -987,7 +987,7 @@
   },
   {
     "id": "neck_gaiter_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "neck_gaiter",
     "name": { "str": "neck gaiter" },
@@ -1003,7 +1003,7 @@
   },
   {
     "id": "neck_gaiter_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "neck_gaiter",
     "name": { "str": "neck gaiter" },
@@ -1019,7 +1019,7 @@
   },
   {
     "id": "neck_gaiter_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "neck_gaiter_kevlar_raised",
     "name": { "str": "neck gaiter (raised)" },
@@ -1038,7 +1038,7 @@
   },
   {
     "id": "neck_gaiter_xs_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "neck_gaiter_raised",
     "name": { "str": "neck gaiter (raised)" },
@@ -1054,7 +1054,7 @@
   },
   {
     "id": "neck_gaiter_xl_raised",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "neck_gaiter_raised",
     "name": { "str": "neck gaiter (raised)" },
@@ -1070,7 +1070,7 @@
   },
   {
     "id": "chainmail_aventail",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail aventail" },
@@ -1099,7 +1099,7 @@
   },
   {
     "id": "chainmail_aventail_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "XL chainmail aventail" },
     "copy-from": "chainmail_aventail",
@@ -1108,7 +1108,7 @@
   },
   {
     "id": "chainmail_aventail_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_aventail",
     "name": { "str": "XS chainmail aventail" },
@@ -1117,7 +1117,7 @@
   },
   {
     "id": "platemail_aventail",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate aventail" },
@@ -1146,7 +1146,7 @@
   },
   {
     "id": "platemail_aventail_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "XL plate aventail" },
     "copy-from": "platemail_aventail",
@@ -1155,7 +1155,7 @@
   },
   {
     "id": "platemail_aventail_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_aventail",
     "name": { "str": "XS plate aventail" },
@@ -1166,7 +1166,7 @@
     "id": "chainmail_junk_aventail",
     "copy-from": "chainmail_aventail",
     "replace_materials": { "steel_chain": "budget_steel_chain" },
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail aventail" },
     "description": "Poor-quality armor made from a sheet of interlocking steel rings which secures around the neck."

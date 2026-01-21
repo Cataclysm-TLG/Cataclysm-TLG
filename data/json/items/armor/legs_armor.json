@@ -1,7 +1,7 @@
 [
   {
     "id": "2byshin_guard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "2-by-shin guards", "str_pl": "pairs of 2-by-shin guards" },
@@ -31,7 +31,7 @@
   },
   {
     "id": "carpet_legguards",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "carpet leg guards", "str_pl": "pairs of carpet leg guards" },
@@ -65,7 +65,7 @@
   },
   {
     "id": "carpet_greaves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "carpet greaves", "str_pl": "pairs of carpet greaves" },
@@ -99,7 +99,7 @@
   },
   {
     "id": "legguard_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
@@ -131,7 +131,7 @@
   {
     "id": "xl_legguard_chitin",
     "copy-from": "legguard_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
     "material": [ "chitin" ],
@@ -140,7 +140,7 @@
   },
   {
     "id": "xs_legguard_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "legguard_chitin",
     "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
@@ -151,7 +151,7 @@
     "id": "legguard_acidchitin",
     "copy-from": "legguard_chitin",
     "looks_like": "legguard_chitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "price_postapoc": "12 USD 50 cent",
     "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified greaves" },
@@ -171,7 +171,7 @@
   {
     "id": "xl_legguard_acidchitin",
     "copy-from": "legguard_acidchitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified chitin greaves" },
     "material": [ "acidchitin" ],
@@ -181,7 +181,7 @@
   {
     "id": "xs_legguard_acidchitin",
     "copy-from": "legguard_acidchitin",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified chitin greaves" },
     "material": [ "acidchitin" ],
@@ -190,7 +190,7 @@
   },
   {
     "id": "bunker_pants",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "turnout trousers" },
@@ -244,7 +244,7 @@
   },
   {
     "id": "chainmail_chausses",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
@@ -287,7 +287,7 @@
   },
   {
     "id": "chainmail_chausses_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_chausses",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
@@ -296,7 +296,7 @@
   },
   {
     "id": "chainmail_chausses_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_chausses",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
@@ -305,7 +305,7 @@
   },
   {
     "id": "chainmail_junk_chausses",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_chausses",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
@@ -315,7 +315,7 @@
   },
   {
     "id": "chainmail_skirt",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail skirt" },
@@ -364,7 +364,7 @@
   },
   {
     "id": "chainmail_skirt_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt",
     "name": { "str": "chainmail skirt" },
@@ -379,7 +379,7 @@
   },
   {
     "id": "chainmail_skirt_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt",
     "name": { "str": "chainmail skirt" },
@@ -394,7 +394,7 @@
   },
   {
     "id": "chainmail_skirt_budget",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt",
     "replace_materials": { "steel_chain": "budget_steel_chain" },
@@ -409,7 +409,7 @@
   },
   {
     "id": "chainmail_skirt_loose",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt",
     "name": { "str": "chainmail skirt (loose)" },
@@ -425,7 +425,7 @@
   },
   {
     "id": "chainmail_skirt_loose_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt_xs",
     "name": { "str": "chainmail skirt (loose)" },
@@ -441,7 +441,7 @@
   },
   {
     "id": "chainmail_skirt_loose_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt_xl",
     "name": { "str": "chainmail skirt (loose)" },
@@ -457,7 +457,7 @@
   },
   {
     "id": "chainmail_skirt_budget_loose",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt_budget",
     "name": { "str": "chainmail skirt (loose)" },
@@ -472,7 +472,7 @@
   },
   {
     "id": "chaps_leather",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "leather chaps" },
     "description": "A pair of tough leather chaps, meant to tie on over pants for extra protection.",
@@ -501,7 +501,7 @@
   },
   {
     "id": "chaps_cut_resistant",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "chainsaw chaps" },
@@ -553,7 +553,7 @@
   },
   {
     "id": "fencing_pants",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "fencing pants" },
     "description": "A pair of reinforced pants used by fencers to prevent injuries.  They don't cover the lower leg.",
@@ -588,7 +588,7 @@
   },
   {
     "id": "knee_pads",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "knee pads", "str_pl": "pairs of knee pads" },
@@ -621,7 +621,7 @@
   },
   {
     "id": "bronze_greaves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
@@ -651,7 +651,7 @@
   },
   {
     "id": "bronze_greaves_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "bronze_greaves",
     "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
@@ -660,7 +660,7 @@
   },
   {
     "id": "bronze_greaves_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "bronze_greaves",
     "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
@@ -669,7 +669,7 @@
   },
   {
     "id": "legguard_hard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plastic shin guards", "str_pl": "pairs of plastic shin guards" },
@@ -704,7 +704,7 @@
   },
   {
     "id": "tire_tasset",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tire tasset" },
@@ -748,7 +748,7 @@
   },
   {
     "id": "tire_tasset_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset",
     "name": { "str": "tire tasset" },
@@ -763,7 +763,7 @@
   },
   {
     "id": "tire_tasset_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset",
     "name": { "str": "tire tasset" },
@@ -778,7 +778,7 @@
   },
   {
     "id": "tire_tasset_loose",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset",
     "name": { "str": "tire tasset (loose)" },
@@ -795,7 +795,7 @@
   },
   {
     "id": "tire_tasset_loose_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset_loose",
     "name": { "str": "tire tasset (loose)" },
@@ -810,7 +810,7 @@
   },
   {
     "id": "tire_tasset_loose_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset_loose",
     "name": { "str": "tire tasset (loose)" },
@@ -825,7 +825,7 @@
   },
   {
     "id": "platemail_tasset",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate tasset" },
@@ -869,7 +869,7 @@
   },
   {
     "id": "platemail_tasset_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset",
     "name": { "str": "plate tasset" },
@@ -884,7 +884,7 @@
   },
   {
     "id": "platemail_tasset_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset",
     "name": { "str": "plate tasset" },
@@ -899,7 +899,7 @@
   },
   {
     "id": "platemail_tasset_loose",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset",
     "name": { "str": "plate tasset (loose)" },
@@ -916,7 +916,7 @@
   },
   {
     "id": "platemail_tasset_loose_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset_loose",
     "name": { "str": "plate tasset (loose)" },
@@ -931,7 +931,7 @@
   },
   {
     "id": "platemail_tasset_loose_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset_loose",
     "name": { "str": "plate tasset (loose)" },
@@ -946,7 +946,7 @@
   },
   {
     "id": "platemail_leg_guards",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
@@ -988,7 +988,7 @@
   },
   {
     "id": "platemail_leg_guards_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_leg_guards",
     "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
@@ -997,7 +997,7 @@
   },
   {
     "id": "platemail_leg_guards_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_leg_guards",
     "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
@@ -1006,7 +1006,7 @@
   },
   {
     "id": "paper_greaves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "paper greaves", "str_pl": "pairs of paper greaves" },
@@ -1036,7 +1036,7 @@
   },
   {
     "id": "tire_greaves",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tire greaves", "str_pl": "pairs of tire greaves" },
@@ -1066,7 +1066,7 @@
   },
   {
     "id": "tire_greaves_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "tire_greaves",
     "name": { "str": "tire leg guards", "str_pl": "pairs of tire leg guards" },
@@ -1075,7 +1075,7 @@
   },
   {
     "id": "tire_greaves_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "tire_greaves",
     "name": { "str": "tire leg guards", "str_pl": "pairs of tire leg guards" },
@@ -1084,7 +1084,7 @@
   },
   {
     "id": "motorbike_pants",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "motorcycle jeans", "str_pl": "pairs of motorcycle jeans" },
     "description": "A pair of thick jeans interwoven with Kevlar for added durability and sporting integrated kneepads and flank protection, typically worn by motorcyclists to protect from road rash.",
@@ -1161,7 +1161,7 @@
   },
   {
     "id": "jeans_mod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "armored jeans", "str_pl": "pairs of armored jeans" },
     "description": "A pair of jeans reinforced with extra fabric and metal sheets.  It's not the most durable armor, but it offers decent protection.",
@@ -1234,7 +1234,7 @@
   },
   {
     "id": "trousers_eod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "EOD trousers" },
@@ -1267,7 +1267,7 @@
   },
   {
     "id": "trousers_eod_light",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "tactical EOD trousers" },
@@ -1300,7 +1300,7 @@
   },
   {
     "id": "armor_riot_leg",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "riot shin guards", "str_pl": "pairs of riot shin guards" },
@@ -1343,7 +1343,7 @@
   },
   {
     "id": "leather_leg_guards",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
@@ -1365,7 +1365,7 @@
   },
   {
     "id": "leather_leg_guards_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
     "copy-from": "leather_leg_guards",
@@ -1374,7 +1374,7 @@
   },
   {
     "id": "leather_leg_guards_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "leather_leg_guards",
     "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },

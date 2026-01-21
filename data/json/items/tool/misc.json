@@ -831,7 +831,7 @@
   },
   {
     "id": "teleumbrella",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "tools",
     "name": { "str": "telescoping umbrella (collapsed)", "str_pl": "telescoping umbrellas (collapsed)" },

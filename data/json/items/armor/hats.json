@@ -1,7 +1,7 @@
 [
   {
     "id": "10gal_hat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "ten-gallon hat" },
     "description": "These may not be the Great Plains, but you can still be the Boss with this high-crowned, wide-brimmed hat.",
@@ -54,7 +54,7 @@
   },
   {
     "id": "beret",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "beret" },
     "description": "A soft cap that fits snugly about the head with a bit of slack on top.",
@@ -80,7 +80,7 @@
   },
   {
     "id": "beret_wool",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "wool beret" },
     "description": "A soft felt cap that fits snugly about the head with a bit of slack on top.",
@@ -106,7 +106,7 @@
   },
   {
     "id": "bowhat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bowler hat" },
     "description": "An old-fashioned gentleman's cap with a domed crown and a short, rounded brim.",
@@ -133,7 +133,7 @@
   },
   {
     "id": "chaplet",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chaplet" },
     "description": "A wreath headdress made from plant material woven into a ring.",
@@ -158,7 +158,7 @@
   },
   {
     "id": "cowboy_hat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "cowboy hat" },
     "description": "Whether yer hunting varmints, fixing up the ranch, or heading into the sunset, this is the hat for the job.",
@@ -185,7 +185,7 @@
   },
   {
     "id": "drinking_hat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
@@ -214,7 +214,7 @@
   },
   {
     "id": "eboshi",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "eboshi" },
     "description": "A high, black cap with a very narrow top.  Traditionally worn by Shinto priests.",
@@ -240,7 +240,7 @@
   },
   {
     "id": "hat_navy",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "eight point cap" },
     "description": "Also known as a utility cover or utility cap, this is an eight pointed hat with a baseball-style visor at the front.  Commonly worn by Marines and sailors, this hat is the standard headwear of both the United States Marine Corps and Navy.",
@@ -267,7 +267,7 @@
   },
   {
     "id": "hat_field",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "patrol cap" },
     "description": "A simple round cap in a camouflage pattern.  Often used by the military when helmets aren't needed.  Its brim helps keep the sun out of your eyes.",
@@ -294,7 +294,7 @@
   },
   {
     "id": "hat_boonie",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "boonie hat" },
     "description": "Also called a \"bucket hat.\" Often used in the military.  Its wide brim helps keep the sun out of your eyes.",
@@ -321,7 +321,7 @@
   },
   {
     "id": "hat_ball",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "baseball cap" },
     "//": "Head encumbrance stops you from wearing additional headgear.  No helmet over a ballcap, sorry.  But brimmed gear gets the anti-glare flag!",
@@ -349,7 +349,7 @@
   },
   {
     "id": "hat_chef",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "toque" },
     "description": "A traditional chef's hat, standing tall and proud against the vulgarities of the world.",
@@ -375,7 +375,7 @@
   },
   {
     "id": "hat_cotton",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "beanie" },
     "description": "A warm knit hat.",
@@ -402,7 +402,7 @@
   },
   {
     "id": "hat_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fur hat" },
     "description": "A hat made from the pelts of animals.  Extremely warm.",
@@ -428,7 +428,7 @@
   },
   {
     "id": "hat_faux_fur",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "hat_fur",
     "looks_like": "hat_fur",
@@ -439,7 +439,7 @@
   },
   {
     "id": "hat_hard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "hard hat" },
     "description": "A hard plastic hat worn at construction and industrial sites.  Provides excellent protection from cuts and percussion.",
@@ -533,7 +533,7 @@
   },
   {
     "id": "hat_hard_hooded",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "summer hard hat" },
@@ -607,7 +607,7 @@
   },
   {
     "id": "hat_hunting",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "hunting cap" },
     "description": "A red plaid hunting cap with ear flaps.  Notably warm.",
@@ -634,7 +634,7 @@
   },
   {
     "id": "hat_knit",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "knit hat" },
     "description": "A snug-fitting wool hat.  Very warm.",
@@ -661,7 +661,7 @@
   },
   {
     "id": "hat_newsboy",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "newsboy cap" },
     "description": "A slouching wool cap with a short front brim, traditionally associated with newspaper delivery boys.  Quite warm.",
@@ -688,7 +688,7 @@
   },
   {
     "id": "hat_noise_cancelling",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "noise canceling headgear" },
     "description": "Padding over your ears, kept in place by some string.  Blocks incoming sounds.",
@@ -714,7 +714,7 @@
   },
   {
     "id": "hat_sombrero",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "sombrero" },
     "//": "Not a real sombrero, but a felt imitation.",
@@ -742,7 +742,7 @@
   },
   {
     "id": "kippah",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "kippah" },
     "description": "A thin, rounded skullcap.  A traditional headdress in Judaism.",
@@ -762,7 +762,7 @@
   },
   {
     "id": "zucchetto",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "zucchetto" },
     "description": "A small, crimson skullcap.  Traditionally worn by Catholic priests.",
@@ -782,7 +782,7 @@
   },
   {
     "id": "kufi",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "kufi cap" },
     "description": "A brimless, short and rounded cap.",
@@ -808,7 +808,7 @@
   },
   {
     "id": "maid_hat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "French maid hat" },
     "description": "A frilly white headpiece.",
@@ -834,7 +834,7 @@
   },
   {
     "id": "porkpie",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "porkpie hat" },
     "description": "A flat-topped hat with circular indent and a narrow brim.  Most popular in the 40s and 50s, still common among those in the mod scene, hipsters, and people named Heisenberg.",
@@ -861,7 +861,7 @@
   },
   {
     "id": "postman_hat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "mail carrier hat" },
     "description": "A traditional mail carrier's cap, with the US postal service logo embroidered on the front above the plastic brim.  A symbol of a bygone world.",
@@ -888,7 +888,7 @@
   },
   {
     "id": "santa_hat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "Santa hat" },
     "description": "A red hat with white faux fur trim, commonly used by bearded men on Christmas.",
@@ -915,7 +915,7 @@
   },
   {
     "id": "straw_hat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "straw hat" },
     "description": "A hat woven out of straw.  Its brim helps keep the sun out of your eyes.",
@@ -942,7 +942,7 @@
   },
   {
     "id": "tinfoil_hat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "aluminum foil hat" },
@@ -968,7 +968,7 @@
   },
   {
     "id": "tophat",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "top hat" },
     "description": "The only hat for a gentleman.  Look exquisite while laughing in the face of danger!",
@@ -995,7 +995,7 @@
   },
   {
     "id": "tricorne",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tricorne" },
     "description": "A design that goes back to the founding of the thirteen colonies, this is a wide-brimmed oiled leather hat pinned up on three sides to make a distinctive three-pointed design.",
@@ -1023,7 +1023,7 @@
   },
   {
     "id": "turban",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "turban" },
     "description": "Cloth wound around the head, worn by people of many cultures worldwide.",
@@ -1051,7 +1051,7 @@
   },
   {
     "id": "hat_golf",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "golf cap" },
     "description": "A flat, short-brimmed cap, commonly worn by golfers.",
@@ -1078,7 +1078,7 @@
   },
   {
     "id": "wizard_hat_costume",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": "wizard hat",
     "description": "A pointed blue hat with stars stitched into it.",

@@ -1,7 +1,7 @@
 [
   {
     "id": "paper_breastplate",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "crude paper breastplate" },
@@ -40,7 +40,7 @@
   },
   {
     "id": "paper_breastplate_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "crude paper breastplate", "str_pl": "crude paper breastplate" },
     "copy-from": "paper_breastplate",
@@ -49,7 +49,7 @@
   },
   {
     "id": "paper_breastplate_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "paper_breastplate",
     "name": { "str": "crude paper breastplate", "str_pl": "crude paper breastplate" },
@@ -58,7 +58,7 @@
   },
   {
     "id": "bronze_cuirass",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bronze cuirass", "str_pl": "bronze cuirasses" },
     "category": "armor",
@@ -81,7 +81,7 @@
   },
   {
     "id": "bronze_cuirass_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bronze cuirass", "str_pl": "bronze cuirasses" },
     "copy-from": "bronze_cuirass",
@@ -90,7 +90,7 @@
   },
   {
     "id": "bronze_cuirass_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bronze cuirass", "str_pl": "bronze cuirasses" },
     "copy-from": "bronze_cuirass",
@@ -99,7 +99,7 @@
   },
   {
     "id": "carpet_cuirass",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "carpet cuirass", "str_pl": "carpet cuirasses" },
     "description": "A rectangular length of tough carpet with a hole cut out for your head and tied around the waist.  It's decently protective for its weight and quite the fashion statement.",
@@ -152,7 +152,7 @@
   },
   {
     "id": "armor_lorica",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "lorica segmentata" },
     "description": "Body armor in the ancient roman style, made of overlapping metal strips connected to internal leather straps.",
@@ -197,7 +197,7 @@
   },
   {
     "id": "xl_armor_lorica",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "lorica segmentata" },
     "copy-from": "armor_lorica",
@@ -206,7 +206,7 @@
   },
   {
     "id": "xs_armor_lorica",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "armor_lorica",
     "name": { "str_sp": "lorica segmentata" },
@@ -215,7 +215,7 @@
   },
   {
     "id": "cloth_shirt_padded",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "padded sweatshirt" },
@@ -255,7 +255,7 @@
   },
   {
     "id": "cloth_vest_padded",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "padded vest" },
@@ -286,7 +286,7 @@
   },
   {
     "id": "chestguard_hard",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "hard chest guard" },
@@ -309,7 +309,7 @@
   },
   {
     "id": "platemail_cuirass",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate cuirass", "str_pl": "plate cuirasses" },
@@ -338,7 +338,7 @@
   },
   {
     "id": "platemail_cuirass_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "plate cuirass", "str_pl": "plate cuirasses" },
     "copy-from": "platemail_cuirass",
@@ -347,7 +347,7 @@
   },
   {
     "id": "platemail_cuirass_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_cuirass",
     "name": { "str": "plate cuirass", "str_pl": "plate cuirasses" },
@@ -356,7 +356,7 @@
   },
   {
     "id": "tire_cuirass",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tire cuirass", "str_pl": "tire cuirass" },
@@ -378,7 +378,7 @@
   },
   {
     "id": "tire_cuirass_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tire cuirass", "str_pl": "tire cuirasses" },
     "copy-from": "tire_cuirass",
@@ -387,7 +387,7 @@
   },
   {
     "id": "tire_cuirass_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "tire_cuirass",
     "looks_like": "tire_cuirass",
@@ -397,7 +397,7 @@
   },
   {
     "id": "fencing_jacket",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "fencing jacket" },
     "description": "A padded jacket with a zipper on the back, used by fencers to prevent accidents.",
@@ -416,7 +416,7 @@
   },
   {
     "id": "jacket_leather_mod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "armored riding jacket" },
     "description": "A heavy-duty leather jacket with sheet metal plates secured over it for increased protection.",
@@ -474,7 +474,7 @@
   },
   {
     "id": "jacket_jean_mod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "armored jean jacket" },
     "description": "A denim jacket reinforced with sheet metal plates.",
@@ -531,7 +531,7 @@
   },
   {
     "id": "vest_jean_mod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "armored jean vest" },
     "description": "A denim vest reinforced with sheet metal plates.",
@@ -577,7 +577,7 @@
   },
   {
     "id": "jacket_leather_tire",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "tire armor jacket" },
     "description": "A heavy leather jacket reinforced with chunks of thick rubber tire.  Thick and highly resistant to blunt force.",
@@ -615,7 +615,7 @@
   },
   {
     "id": "lame",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "lamé", "str_pl": "lamés" },
     "description": "A thin, lightweight conductive vest with the zipper on the back used by fencers for electronic scoring.  Its outer layer is a woven mix of sturdy cotton and stainless steel strands.",
@@ -633,7 +633,7 @@
   },
   {
     "id": "football_armor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "football armor" },
@@ -676,7 +676,7 @@
   },
   {
     "id": "motorbike_armor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "motorcycle armor" },
     "description": "A light jacket made of a stretch mesh covered in plastic pads meant for motorcyclists.  Made to be much more comfortable to wear than leather alternatives, but the underlying spandex isn't protective at all.",
@@ -716,7 +716,7 @@
   },
   {
     "id": "plastron_fencing",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "underarm protector" },
     "description": "A sturdy cotton plastron that protects much of the torso, the dominant shoulder, and underarm while fencing.",
@@ -743,7 +743,7 @@
   },
   {
     "id": "vest_leather_mod",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "armored leather vest" },
     "description": "An armored vest made from thick leather and metal plates.",
@@ -791,7 +791,7 @@
   },
   {
     "id": "armor_riot_torso",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "riot guard" },
@@ -845,7 +845,7 @@
   },
   {
     "id": "leather_cuirass",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather cuirass", "str_pl": "leather cuirasses" },
@@ -875,7 +875,7 @@
   },
   {
     "id": "leather_cuirass_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "leather cuirass", "str_pl": "leather cuirasses" },
     "copy-from": "leather_cuirass",
@@ -884,7 +884,7 @@
   },
   {
     "id": "leather_cuirass_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "leather_cuirass",
     "name": { "str": "leather cuirass", "str_pl": "leather cuirasses" },
@@ -893,7 +893,7 @@
   },
   {
     "id": "mirror_armor",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "mirror armor", "str_pl": "sets of mirror armor" },
@@ -925,7 +925,7 @@
   },
   {
     "id": "mirror_armor_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "mirror armor", "str_pl": "sets of mirror armor" },
     "copy-from": "mirror_armor",
@@ -935,7 +935,7 @@
   },
   {
     "id": "mirror_armor_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "mirror_armor",
     "looks_like": "mirror_armor",
@@ -945,7 +945,7 @@
   },
   {
     "id": "chainmail_vest",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail vest" },
@@ -986,7 +986,7 @@
   },
   {
     "id": "chainmail_vest_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail vest" },
     "copy-from": "chainmail_vest",
@@ -1001,7 +1001,7 @@
   },
   {
     "id": "chainmail_vest_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_vest",
     "name": { "str": "chainmail vest" },
@@ -1016,7 +1016,7 @@
   },
   {
     "id": "chainmail_vest_loose",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_vest",
     "name": { "str": "chainmail vest (loose)" },
@@ -1032,7 +1032,7 @@
   },
   {
     "id": "chainmail_vest_loose_xl",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail vest (loose)" },
     "copy-from": "chainmail_vest_loose",
@@ -1047,7 +1047,7 @@
   },
   {
     "id": "chainmail_vest_loose_xs",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_vest_loose",
     "name": { "str": "chainmail vest (loose)" },
@@ -1064,7 +1064,7 @@
     "id": "chainmail_junk_vest",
     "copy-from": "chainmail_vest",
     "replace_materials": { "steel_chain": "budget_steel_chain" },
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail vest" },
     "description": "A vest made of countless links of low-quality steel chain.  It's lightweight enough to fit under outerwear, and can be adjusted for a closer fit.",
@@ -1079,7 +1079,7 @@
   {
     "id": "chainmail_junk_vest_loose",
     "copy-from": "chainmail_junk_vest",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail vest (loose)" },
     "use_action": {
