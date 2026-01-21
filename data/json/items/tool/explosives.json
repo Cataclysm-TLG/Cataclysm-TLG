@@ -1,7 +1,8 @@
 [
   {
     "id": "acidbomb",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "acid bomb" },
     "description": "A fragile container filled with acid.  Throw it to spill out a pool of potent acid.  It could also be used in a staff sling with a modified cradle.",

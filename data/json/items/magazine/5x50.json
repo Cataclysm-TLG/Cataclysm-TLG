@@ -2,7 +2,8 @@
   {
     "id": "5x50_40_mag",
     "looks_like": "mp5mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "5x50mm 40-round magazine" },
     "description": "An extended 40-round box magazine for use with 5x50mm flechette firearms.  Designated as RMFB40.",
     "weight": "280 g",
@@ -20,7 +21,8 @@
   {
     "id": "5x50_20_mag",
     "looks_like": "mp5mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "5x50mm 20-round magazine" },
     "description": "A 20-round box magazine for use with 5x50mm flechette firearms.  Designated as RMFB20.",
     "weight": "140 g",

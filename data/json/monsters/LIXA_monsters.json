@@ -1,7 +1,8 @@
 [
   {
     "id": "LIXA_spit_light",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "copy-from": "fake_item",
     "name": { "str": "photonic gun" },
     "description": "Horks up a glob of congealed light.",
@@ -69,7 +70,8 @@
   },
   {
     "id": "LIXA_vector_volley",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "copy-from": "fake_item",
     "name": { "str": "coordinate rotation volley" },
     "description": "Fake gun that fires, uh.  Coordinate transform matrices?",

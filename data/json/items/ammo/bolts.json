@@ -1,6 +1,7 @@
 [
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "bolt_crude",
     "name": { "str": "crude wooden bolt" },
     "symbol": "=",
@@ -21,7 +22,8 @@
     "melee_damage": { "stab": 2 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "bolt_simple_wood",
     "name": { "str": "simple wooden bolt" },
     "symbol": "=",
@@ -43,7 +45,8 @@
     "melee_damage": { "stab": 2 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "bolt_wood",
     "name": { "str": "wooden broadhead bolt" },
     "symbol": "=",
@@ -65,7 +68,8 @@
     "melee_damage": { "stab": 4 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "bolt_wood_bodkin",
     "name": { "str": "wooden bodkin bolt" },
     "symbol": "=",
@@ -86,7 +90,8 @@
     "melee_damage": { "stab": 4 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "bolt_wood_tooth",
     "name": { "str": "monster tooth bolt" },
     "symbol": "=",
@@ -107,7 +112,8 @@
     "melee_damage": { "stab": 5 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "bolt_steel",
     "name": { "str": "aluminum broadhead bolt" },
     "symbol": "=",
@@ -129,7 +135,8 @@
     "melee_damage": { "stab": 4 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "bolt_steel_bodkin",
     "name": { "str": "aluminum bodkin bolt" },
     "symbol": "=",
@@ -151,7 +158,8 @@
     "melee_damage": { "stab": 4 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "bolt_cf",
     "name": { "str": "carbon fiber hunting bolt" },
     "symbol": "=",

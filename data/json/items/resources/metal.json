@@ -183,7 +183,8 @@
   },
   {
     "id": "magnesium",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "spare_parts",
     "name": { "str_sp": "magnesium powder" },
     "description": "A handful of powdered magnesium, a highly flammable alkaline earth metal.  Useful for constructing flares and similar items.",
@@ -316,7 +317,8 @@
     "to_hit": -2
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "tin",
     "category": "spare_parts",
     "price": "7 USD 50 cent",
@@ -333,7 +335,8 @@
     "stack_size": 200
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "solder_wire",
     "category": "spare_parts",
     "price": "50 USD",

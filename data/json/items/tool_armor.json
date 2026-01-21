@@ -1284,7 +1284,7 @@
   {
     "id": "phase_immersion_suit",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR", "TOOL", "ARTIFACT" ],
     "category": "clothing",
     "looks_like": "rm13_armor",
     "symbol": "[",
@@ -1429,13 +1429,14 @@
         "rigid_layer_only": true
       }
     ],
-    "tool_ammo": "battery"
+    "tool_ammo": "battery",
+    "passive_effects": [ { "id": "ench_climate_control_all" } ]
   },
   {
     "id": "phase_immersion_suit_on",
     "copy-from": "phase_immersion_suit",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR", "TOOL", "ARTIFACT" ],
     "name": { "str": "phase immersion suit (on)", "str_pl": "phase immersion suits (on)" },
     "looks_like": "phase_immersion_suit",
     "description": "Covered in interlocking plates of reflective metal, this advanced suit resembles both plate armor and an astronaut's spacesuit.  It is turned on, and continually draining power.  Use it to turn it off.",
@@ -2199,7 +2200,7 @@
   {
     "id": "goggles_nv",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR", "TOOL", "ARTIFACT" ],
     "category": "clothing",
     "symbol": "[",
     "color": "dark_gray",
@@ -2232,15 +2233,15 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "relic_data": { "passive_effects": [ { "id": "nvg_bad" } ] },
     "armor": [ { "encumbrance": 40, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ],
-    "tool_ammo": "battery"
+    "tool_ammo": "battery",
+    "passive_effects": [ { "id": "nvg_bad" } ]
   },
   {
     "id": "goggles_nv_on",
     "copy-from": "goggles_nv",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR", "TOOL", "ARTIFACT" ],
     "name": { "str_pl": "pairs of light amp goggles (on)", "str": "light amp goggles (on)" },
     "description": "A pair of battery-powered goggles that use a infrared LED in conjunction with a IR camera, allowing you to see in the dark.  It is turned on, and continually draining batteries.  Use it to turn them off.",
     "material": [ "plastic", "steel" ],
@@ -2255,7 +2256,7 @@
   {
     "id": "goggles_ir",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "TOOL", "ARMOR", "ARTIFACT" ],
     "category": "clothing",
     "symbol": "[",
     "color": "dark_gray",
@@ -2280,7 +2281,6 @@
     "warmth": 10,
     "environmental_protection": 3,
     "material_thickness": 2,
-    "relic_data": { "passive_effects": [ { "id": "THERMAL_VISION_GOOD" } ] },
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -2290,7 +2290,8 @@
       }
     ],
     "armor": [ { "encumbrance": 40, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ],
-    "tool_ammo": "battery"
+    "tool_ammo": "battery",
+    "passive_effects": [ { "id": "THERMAL_VISION_GOOD" } ]
   },
   {
     "id": "goggles_ir_on",

@@ -1,7 +1,8 @@
 [
   {
     "id": "bullet_crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "green",
@@ -32,7 +33,8 @@
   {
     "id": "pistol_crossbow",
     "looks_like": "crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "green",
@@ -73,7 +75,8 @@
   {
     "id": "hand_crossbow",
     "looks_like": "crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "green",
@@ -112,7 +115,8 @@
   {
     "id": "crossbow",
     "//": "Tileset whitelist for crossbows",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 2,
     "symbol": "(",
     "color": "green",
@@ -145,7 +149,8 @@
   },
   {
     "id": "latchet_crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 3,
     "symbol": "(",
     "looks_like": "crossbow",
@@ -179,7 +184,8 @@
   {
     "id": "compcrossbow",
     "looks_like": "crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "symbol": "(",
     "color": "green",
     "name": { "str": "compound crossbow" },
@@ -220,7 +226,8 @@
   {
     "id": "huge_crossbow",
     "looks_like": "crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "green",
@@ -253,7 +260,8 @@
   {
     "id": "rep_crossbow",
     "looks_like": "crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "green",
@@ -285,7 +293,8 @@
   {
     "id": "rep_compcrossbow",
     "looks_like": "crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "green",
@@ -327,7 +336,8 @@
   {
     "id": "double_crossbow",
     "looks_like": "crossbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "symbol": "(",
     "name": { "str": "double-string crossbow" },
     "description": "A slender medieval crossbow with four steel limbs and two bowstrings.  With the aid of a foot stirrup, it may be loaded with two bolts and fired twice in succession.",

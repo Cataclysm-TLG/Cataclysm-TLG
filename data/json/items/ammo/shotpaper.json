@@ -1,7 +1,8 @@
 [
   {
     "abstract": "shot_paper_abstract",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str_sp": "paper cartridge base" },
     "weight": "26 g",
     "volume": "250 ml",
@@ -20,7 +21,8 @@
   {
     "id": "shot_paper_bird",
     "copy-from": "shot_paper_abstract",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": "birdshot paper cartridge" },
     "description": "A paper cartridge containing a premeasured amount of black powder and an equal volume of birdshot.  Used mostly for hunting small game or fowl.",
     "damage": { "damage_type": "bullet", "amount": 50 },
@@ -33,7 +35,8 @@
   {
     "id": "shot_paper_dragon",
     "copy-from": "shot_paper_abstract",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": "pyrotechnic paper cartridge" },
     "description": "A paper cartridge containing a premeasured amount of black powder and an equal volume of flammable metals.  When fired, burning chunks of metal and sparks will shoot out of the barrel, igniting everything in their path.",
     "damage": { "damage_type": "bullet", "amount": 8 },
@@ -46,7 +49,8 @@
   {
     "id": "shot_paper_00",
     "copy-from": "shot_paper_abstract",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": "buckshot paper cartridge" },
     "description": "A paper cartridge containing a premeasured amount of black powder and an equal volume of 00 buckshot.",
     "range": 12,
@@ -59,7 +63,8 @@
   {
     "id": "shot_paper_slug",
     "copy-from": "shot_paper_abstract",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": ".62 paper cartridge" },
     "description": "A paper cartridge containing a premeasured amount of black powder and a .605 inch lead ball.",
     "range": 24,

@@ -1,7 +1,8 @@
 [
   {
     "id": "60mm_shell_m720a1",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": "M720A1 60mm mortar shell", "str_pl": "M720A1 60mm mortar shells" },
     "description": "A high explosive cartridge with a tapered nose and fins at the base.  It is designed to be fired from a mortar and used at long range against troops or light vehicles.",
     "weight": "1700 g",
@@ -21,7 +22,8 @@
   {
     "id": "60mm_shell_m768",
     "copy-from": "60mm_shell_m720a1",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": "M768 60mm mortar shell", "str_pl": "M768 60mm mortar shells" },
     "description": "A high explosive cartridge with a tapered nose and fins at the base.  It is designed to be fired from a mortar and used at long range against troops or light vehicles.  The M768 is a modern update to the older, less effective M720A1.",
     "weight": "1655 g",
