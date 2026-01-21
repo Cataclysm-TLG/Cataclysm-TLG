@@ -2898,8 +2898,8 @@ void map::drop_furniture( const tripoint_bub_ms &p )
             return;
         }
 
-        critter->add_msg_player_or_npc( m_bad, _( "Falling %s hits you!" ),
-                                        _( "Falling %s hits <npcname>" ),
+        critter->add_msg_player_or_npc( m_bad, _( "You are struck by a falling %s!" ),
+                                        _( "<npcname> is struck by a falling %s!" ),
                                         furn_name );
         // TODO: A chance to dodge/uncanny dodge
         Character *pl = critter->as_character();
@@ -3028,16 +3028,9 @@ void map::drop_items( const tripoint_bub_ms &p )
                 creature_below->deal_damage( nullptr, hit_part, damage_instance( damage_bash, damage ) );
             }
         }
-
-        // Bash items at bottom since currently bash_items only bash glass items
-        // FIXME: Hardcoded damage type!
-        int chance = static_cast<int>( 200 * i.resist( damage_bash, true ) / damage + 1 );
-        if( one_in( chance ) ) {
-            i.inc_damage();
-        }
     }
 
-    // Bash terain, furniture and vehicles on tile below
+    // Bash terain, furniture, items (including this one!) and vehicles on tile below
     bash( below, damage_total / 2 );
     i_clear( p );
 }
