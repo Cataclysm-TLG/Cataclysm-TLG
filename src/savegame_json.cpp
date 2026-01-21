@@ -2802,26 +2802,6 @@ static void load_legacy_craft_data( io::JsonObjectOutputArchive &, T & )
 {
 }
 
-static std::set<itype_id> charge_removal_blacklist;
-
-void load_charge_removal_blacklist( const JsonObject &jo, const std::string_view/*src*/ )
-{
-    jo.allow_omitted_members();
-    std::set<itype_id> new_blacklist;
-    jo.read( "list", new_blacklist );
-    charge_removal_blacklist.insert( new_blacklist.begin(), new_blacklist.end() );
-}
-
-static std::set<itype_id> temperature_removal_blacklist;
-
-void load_temperature_removal_blacklist( const JsonObject &jo, const std::string_view/*src*/ )
-{
-    jo.allow_omitted_members();
-    std::set<itype_id> new_blacklist;
-    jo.read( "list", new_blacklist );
-    temperature_removal_blacklist.insert( new_blacklist.begin(), new_blacklist.end() );
-}
-
 template<typename Archive>
 void item::io( Archive &archive )
 {
@@ -3003,26 +2983,15 @@ void item::io( Archive &archive )
     // Former comestibles that no longer need temperature tracking
     if( !has_temperature() && ( last_temp_check != calendar::turn_zero || has_own_flag( flag_HOT ) ||
                                 has_own_flag( flag_COLD ) || has_own_flag( flag_FROZEN ) ) ) {
-        bool abort = false;
         if( active ) {
-            if( temperature_removal_blacklist.count( type->get_id() ) != 0 ) {
-                // list of items that are safe for straightforward deactivation
-                // NOTE: items that may be active for additional reasons other than temperature tracking
-                // should be handled in separate special cases containing item-specific deactivation logic
+            if( has_flag( flag_NO_TEMP ) ) {
                 active = false;
-            } else {
-                // warn and bail in unexpected cases -- should be investigated
-                debugmsg( "Item %s is active and tracking temperature, but it should not!", type->get_id().str() );
-                // erroneous unsetting of last_temp_check/flags is hard to detect/rectify, so do not proceed
-                abort = true;
             }
         }
-        if( !abort ) {
-            last_temp_check = calendar::turn_zero;
-            unset_flag( flag_HOT );
-            unset_flag( flag_COLD );
-            unset_flag( flag_FROZEN );
-        }
+        last_temp_check = calendar::turn_zero;
+        unset_flag( flag_HOT );
+        unset_flag( flag_COLD );
+        unset_flag( flag_FROZEN );
     }
 
     std::string mode;
@@ -3078,18 +3047,16 @@ void item::io( Archive &archive )
         // Types that are known to have charges, but should not have them.
         // We fix it here, but it's expected from bugged saves and does not require a message.
         bool still_has_charges = false;
-        if( charge_removal_blacklist.count( type->get_id() ) == 0 ) {
-            for( int i = 0; i < charges - 1; i++ ) {
-                item copy( type );
-                if( copy.charges != 0 ) {
-                    still_has_charges = true;
-                    copy.charges = 0;
-                }
-                put_in( copy, pocket_type::MIGRATION );
+        for( int i = 0; i < charges - 1; i++ ) {
+            item copy( type );
+            if( copy.charges != 0 ) {
+                still_has_charges = true;
+                copy.charges = 0;
             }
-            if( still_has_charges ) {
-                debugmsg( "Item %s can't have charges, but still had them after migration.", type->get_id().str() );
-            }
+            put_in( copy, pocket_type::MIGRATION );
+        }
+        if( still_has_charges ) {
+            debugmsg( "Item %s can't have charges, but still had them after migration.", type->get_id().str() );
         }
         charges = 0;
     }

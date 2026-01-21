@@ -1641,7 +1641,4 @@ struct itype {
         void load_slots( const JsonObject &jo, bool was_loaded );
 };
 
-void load_charge_removal_blacklist( const JsonObject &jo, std::string_view src );
-void load_temperature_removal_blacklist( const JsonObject &jo, std::string_view src );
-
 #endif // CATA_SRC_ITYPE_H
