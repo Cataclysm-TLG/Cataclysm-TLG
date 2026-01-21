@@ -1567,7 +1567,7 @@ struct itype {
         std::string nname( unsigned int quantity ) const;
 
         // Allow direct access to the type id for the few cases that need it.
-        const itype_id &get_id() const {
+        itype_id get_id() const {
             return id;
         }
 
