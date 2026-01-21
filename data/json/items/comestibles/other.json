@@ -353,6 +353,7 @@
   },
   {
     "type": "COMESTIBLE",
+    "subtypes": [ "SEED" ],
     "id": "dry_beans",
     "name": { "str_sp": "dried beans" },
     "weight": "56 g",
@@ -371,7 +372,11 @@
     "vitamins": [ [ "calcium", 56 ], [ "iron", 22 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD" ],
     "flags": [ "NO_TEMP", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ],
-    "seed_data": { "plant_name": "beans", "fruit": "raw_beans", "seeds": false, "byproducts": [ "withered" ], "grow": "91 days" }
+    "plant_name": "beans",
+    "fruit": "raw_beans",
+    "seeds": false,
+    "byproducts": [ "withered" ],
+    "grow": "91 days"
   },
   {
     "type": "COMESTIBLE",
@@ -451,6 +456,7 @@
   },
   {
     "type": "COMESTIBLE",
+    "subtypes": [ "SEED", "MILLING" ],
     "comestible_type": "FOOD",
     "id": "soybean",
     "name": { "str_sp": "raw soybeans" },
@@ -468,19 +474,19 @@
     "fun": -5,
     "vitamins": [ [ "iron", 25 ], [ "vitC", 1 ], [ "calcium", 3 ], [ "vegetable_allergen", 1 ] ],
     "smoking_result": "dry_soybean",
-    "milling": { "into": "paste_nut", "recipe": "paste_nut_mill_5_1" },
-    "seed_data": {
-      "plant_name": "soybean",
-      "fruit": "soybean",
-      "seeds": false,
-      "byproducts": [ "withered", "raw_edamame" ],
-      "grow": "91 days"
-    },
     "petfood": [ "CATTLEFOOD" ],
-    "flags": [ "EDIBLE_FROZEN", "SMOKABLE", "NUTRIENT_OVERRIDE", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ]
+    "flags": [ "EDIBLE_FROZEN", "SMOKABLE", "NUTRIENT_OVERRIDE", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ],
+    "plant_name": "soybean",
+    "fruit": "soybean",
+    "seeds": false,
+    "byproducts": [ "withered", "raw_edamame" ],
+    "grow": "91 days",
+    "into": "paste_nut",
+    "recipe": "paste_nut_mill_5_1"
   },
   {
     "type": "COMESTIBLE",
+    "subtypes": [ "SEED", "MILLING" ],
     "comestible_type": "FOOD",
     "id": "dry_soybean",
     "name": { "str_sp": "dried soybeans" },
@@ -495,18 +501,17 @@
     "price_postapoc": "50 cent",
     "material": [ "vegetable" ],
     "fun": -5,
-    "milling": { "into": "flour_wheat_free", "recipe": "flour_wheat_free_mill_1_1" },
     "vitamins": [ [ "iron", 25 ], [ "vitC", 1 ], [ "calcium", 3 ], [ "vegetable_allergen", 1 ] ],
-    "seed_data": {
-      "plant_name": "soybean",
-      "fruit": "soybean",
-      "seeds": false,
-      "byproducts": [ "withered", "raw_edamame" ],
-      "grow": "91 days"
-    },
     "petfood": [ "CATTLEFOOD" ],
     "smoking_result": "soy_nuts",
-    "flags": [ "NO_TEMP", "SMOKABLE", "NUTRIENT_OVERRIDE", "SMOKED", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ]
+    "flags": [ "NO_TEMP", "SMOKABLE", "NUTRIENT_OVERRIDE", "SMOKED", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ],
+    "plant_name": "soybean",
+    "fruit": "soybean",
+    "seeds": false,
+    "byproducts": [ "withered", "raw_edamame" ],
+    "grow": "91 days",
+    "into": "flour_wheat_free",
+    "recipe": "flour_wheat_free_mill_1_1"
   },
   {
     "type": "COMESTIBLE",
@@ -970,6 +975,7 @@
   },
   {
     "type": "COMESTIBLE",
+    "subtypes": [ "BREWABLE" ],
     "id": "acid_soaked_hide",
     "name": { "str_sp": "acid soaked hide" },
     "description": "Raw hide soaking in a dilute acid solution to extract collagen.  After 24 hours the solution can be strained to extract fresh gelatin.",
@@ -988,7 +994,8 @@
     "phase": "liquid",
     "comestible_type": "DRINK",
     "flags": [ "NUTRIENT_OVERRIDE" ],
-    "brewable": { "brew_time": "24 hours", "brew_results": [ "gelatin_extracted" ] }
+    "brew_time": "24 hours",
+    "brew_results": [ "gelatin_extracted" ]
   },
   {
     "type": "COMESTIBLE",

@@ -516,6 +516,7 @@
   },
   {
     "type": "COMESTIBLE",
+    "subtypes": [ "SEED" ],
     "id": "garlic_clove",
     "name": { "str": "garlic clove" },
     "weight": "3 g",
@@ -531,7 +532,12 @@
     "fun": -3,
     "price": "2 cent",
     "price_postapoc": "8 cent",
-    "vitamins": [ [ "vitC", "900 μg" ], [ "iron", "100 μg" ], [ "calcium", "5400 μg" ], [ "vegetable_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "900 μg" ], [ "iron", "100 μg" ], [ "calcium", "5400 μg" ], [ "vegetable_allergen", 1 ] ],
+    "flags": [ "SMOKABLE" ],
+    "plant_name": "garlic",
+    "fruit": "garlic",
+    "byproducts": [ "withered" ],
+    "grow": "65 days"
   },
   {
     "type": "COMESTIBLE",
@@ -1028,6 +1034,7 @@
   },
   {
     "type": "COMESTIBLE",
+    "subtypes": [ "SEED" ],
     "id": "raw_beans",
     "name": { "str": "handful of raw beans", "str_pl": "handfuls of raw beans" },
     "color": "brown",
@@ -1046,7 +1053,11 @@
     "vitamins": [ [ "vitC", "71 mg" ], [ "iron", "1 mg" ], [ "calcium", "31 mg" ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD" ],
     "flags": [ "EDIBLE_FROZEN", "SMOKABLE", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ],
-    "seed_data": { "plant_name": "beans", "fruit": "raw_beans", "seeds": false, "byproducts": [ "withered" ], "grow": "91 days" }
+    "plant_name": "beans",
+    "fruit": "raw_beans",
+    "seeds": false,
+    "byproducts": [ "withered" ],
+    "grow": "91 days"
   },
   {
     "type": "COMESTIBLE",
