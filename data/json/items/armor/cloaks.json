@@ -1,7 +1,8 @@
 [
   {
     "id": "american_flag",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "American flag" },
     "description": "A large banner decorated with red and white striped representing the thirteen colonies, and fifty white stars representing the states over a field of blue.",
     "weight": "3200 g",
@@ -31,7 +32,8 @@
   },
   {
     "id": "debug_energy_shield",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "weak energy shield" },
     "description": "A weak energy shield that protects against ballistic damage.",
     "weight": "1 g",
@@ -61,7 +63,8 @@
   },
   {
     "id": "pride_flag",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "pride flag" },
     "description": "A large rainbow flag, The colors reflect the diversity of the LGBT community and the spectrum of human sexuality and gender.",
     "copy-from": "american_flag",
@@ -183,7 +186,8 @@
   {
     "id": "national_flag",
     "name": { "str": "national flag" },
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "description": "A large flag, made to fly in even the worst conditions.",
     "copy-from": "american_flag",
     "symbol": "[",
@@ -1545,7 +1549,8 @@
   },
   {
     "id": "state_flag",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "state flag" },
     "description": "A large white flag with a shield featuring an American Native and a star which represents the state of Massachusetts.",
     "copy-from": "american_flag",
@@ -1594,7 +1599,8 @@
   },
   {
     "id": "organization_flag",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "US organization flag" },
     "description": "A large flag, made to fly in even the worst conditions.",
     "copy-from": "american_flag",
@@ -1645,7 +1651,8 @@
   },
   {
     "id": "protest_flag",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "protest flag" },
     "description": "A flag displaying a potentially inflammatory political symbol.",
     "copy-from": "american_flag",
@@ -1815,7 +1822,8 @@
   },
   {
     "id": "cape_catholic",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "ferraiolo" },
     "description": "A long, crimson cape that reaches the ankles.  Worn by Catholic priests for ceremonious occasions.",
     "weight": "1500 g",
@@ -1843,7 +1851,8 @@
   },
   {
     "id": "grass_cloak",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "grass poncho" },
     "description": "A simple primitive cape made of woven grass.",
     "weight": "710 g",
@@ -1871,7 +1880,8 @@
   },
   {
     "id": "cloak",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "cloak" },
     "description": "A long hooded cape that covers much of the body.",
     "weight": "1175 g",
@@ -1900,7 +1910,8 @@
   },
   {
     "id": "cloak_denim",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "denim cloak" },
     "description": "A heavy denim cape worn over the body.  It is warm, sturdy, and comes with a hood.",
     "//": "16.5 oz.",
@@ -1929,7 +1940,8 @@
   },
   {
     "id": "cape_costume",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "costume cape" },
     "description": "A cheap rayon cloak, the kind you'd see vampires and witches wearing on halloween.",
     "weight": "90 g",
@@ -1972,7 +1984,8 @@
   },
   {
     "id": "cloak_costume",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "costume cloak" },
     "description": "A cheap rayon cloak with a hood, the kind you'd see vampires and witches wearing on halloween.",
     "weight": "100 g",
@@ -2015,7 +2028,8 @@
   },
   {
     "id": "cloak_fur",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "fur cloak" },
     "description": "A long and heavy fur cape with a hood.",
     "weight": "1735 g",
@@ -2044,7 +2058,8 @@
   },
   {
     "id": "cloak_leather",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather cloak" },
     "description": "A heavy leather cape that offers a degree of protection as well as warmth.",
     "weight": "2060 g",
@@ -2073,7 +2088,8 @@
   },
   {
     "id": "cloak_wool",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "wool cloak" },
     "description": "A heavy woolen cape for inclement weather.",
     "weight": "900 g",
@@ -2102,7 +2118,8 @@
   },
   {
     "id": "optical_cloak",
-    "type": "TOOL_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "name": { "str": "FB51 optical cloak" },
     "description": "A plastic cloak embedded with cameras and LEDs that will render you fully invisible to normal vision when powered and worn.  You must be carrying a unified power supply, or UPS, to use it.  Activate to toggle visibility.",
     "weight": "2552 g",
@@ -2142,7 +2159,8 @@
     "id": "optical_cloak_on",
     "copy-from": "optical_cloak",
     "looks_like": "optical_cloak",
-    "type": "TOOL_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "name": { "str": "FB51 optical cloak (on)", "str_pl": "FB51 optical cloaks (on)" },
     "description": "A plastic cloak embedded with cameras and LEDs that will render you fully invisible to normal vision when powered and worn.  It is turned on, and continually draining power from a UPS.  Use it to turn it off.",
     "flags": [
@@ -2170,7 +2188,8 @@
   },
   {
     "id": "poncho",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "wool poncho" },
     "description": "A simple wool garment worn over the torso and upper arms.",
     "weight": "907 g",
@@ -2206,7 +2225,8 @@
   },
   {
     "id": "poncho_makeshift",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "black",
@@ -2225,7 +2245,8 @@
   },
   {
     "id": "folding_poncho",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "white",
@@ -2275,7 +2296,8 @@
   },
   {
     "id": "coat_straw",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "straw cloak" },
     "description": "A long, mantled cape made of layers of dry grass strung together and carefully draped over each other.  It looks like something out of a samurai film.",
     "weight": "907 g",
@@ -2304,7 +2326,8 @@
   },
   {
     "id": "snuggie",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "snuggie" },
     "description": "A fuzzy housecoat, halfway between a blanket and a bathrobe.  It's quite warm.",
     "weight": "625 g",

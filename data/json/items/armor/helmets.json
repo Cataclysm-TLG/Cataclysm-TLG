@@ -1,7 +1,8 @@
 [
   {
     "id": "pot_helmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "pot helmet" },
     "description": "A helmet made from a soup pot.  It's not very good protection, but it's better than nothing.",
@@ -45,7 +46,8 @@
   },
   {
     "id": "stockpot_helmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "pot great helm" },
     "description": "An enclosed helmet made from a stock pot with a blanket stuffed inside to cushion it.  There are strings tied to the handles to help fasten it to your body, but it's hot and unwieldy.",
@@ -109,7 +111,8 @@
   },
   {
     "id": "headgear",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "head guard" },
     "description": "Lightweight sports headgear designed to protect the head while sparring, a frequent sight in boxing gyms and dojos.",
     "weight": "500 g",
@@ -163,7 +166,8 @@
   },
   {
     "id": "helmet_army",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "army helmet" },
     "description": "A heavy helmet that provides excellent protection from all sorts of damage.  It is labeled as an advanced combat helmet.",
@@ -266,7 +270,8 @@
   {
     "id": "helmet_army_outdated",
     "repairs_like": "helmet_barbute",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "flak helmet" },
     "description": "A simple helmet meant to protect the head from fragmentation and impacts.  Its simple steel construction renders it outdated by modern military standards.",
@@ -302,7 +307,8 @@
   },
   {
     "id": "helmet_soviet_tanker",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "soviet tanker helmet" },
     "description": "A Soviet era tanker helmet.  Its distinctive foam pads are meant to protect a tank driver from bumps against the cramped interior.",
@@ -333,7 +339,8 @@
   },
   {
     "id": "tac_fullhelmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tactical full helmet" },
     "description": "An all-encompassing black helmet that covers your entire face and neck, providing excellent protection from all sorts of damage.",
@@ -373,7 +380,8 @@
   },
   {
     "id": "tac_helmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tactical helmet" },
     "description": "A lightweight black helmet that provides excellent protection from all sorts of damage.  It has a military rail system for attachments.",
@@ -474,7 +482,8 @@
   },
   {
     "id": "firehelmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "firefighter helmet" },
     "description": "A distinctive helmet worn by firefighters to protect from falling debris.  More than just a piece of firefighting equipment, it serves as a badge of honor and respect.",
@@ -516,7 +525,8 @@
   },
   {
     "id": "helmet_ball",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "baseball helmet" },
     "description": "A hard plastic helmet that covers the head and ears, designed to protect against a baseball to the head.",
@@ -562,7 +572,8 @@
   },
   {
     "id": "helmet_barbute",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "barbute helm" },
     "description": "A medieval helmet that provides excellent protection for the head, with a Y shaped opening for the face.",
@@ -607,7 +618,8 @@
   },
   {
     "id": "xl_helmet_barbute",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_barbute",
     "name": { "str": "barbute helm" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -615,7 +627,8 @@
   },
   {
     "id": "helmet_barbute_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_barbute",
     "name": { "str": "barbute helm" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -623,7 +636,8 @@
   },
   {
     "id": "helmet_bike",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "bike helmet" },
     "description": "A thick foam helmet.  Designed to protect against concussion.",
@@ -688,7 +702,8 @@
   },
   {
     "id": "helmet_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chitin helmet" },
     "description": "A helmet made from the exoskeletons of insects.  Covers the entire head; very light and durable.",
@@ -739,7 +754,8 @@
   },
   {
     "id": "xl_helmet_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_chitin",
     "name": { "str": "chitin helmet" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -747,7 +763,8 @@
   },
   {
     "id": "helmet_chitin_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_chitin",
     "looks_like": "helmet_chitin",
     "name": { "str": "chitin helmet" },
@@ -756,7 +773,8 @@
   },
   {
     "id": "helmet_conical",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "conical helm" },
     "description": "A conical iron helm with additional protection for the neck, associated with the Mongol Empire.",
@@ -792,7 +810,8 @@
   },
   {
     "id": "xl_helmet_conical",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_conical",
     "name": { "str": "conical helm" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -800,7 +819,8 @@
   },
   {
     "id": "helmet_conical_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_conical",
     "looks_like": "helmet_conical",
     "name": { "str": "conical helm" },
@@ -811,7 +831,8 @@
     "id": "helmet_acidchitin",
     "copy-from": "helmet_chitin",
     "looks_like": "helmet_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin helmet" },
     "description": "A helmet crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
     "price_postapoc": "17 USD 50 cent",
@@ -820,7 +841,8 @@
   },
   {
     "id": "xl_helmet_acidchitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_acidchitin",
     "name": { "str": "biosilicified chitin helmet" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -828,7 +850,8 @@
   },
   {
     "id": "helmet_acidchitin_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_acidchitin",
     "looks_like": "helmet_acidchitin",
     "name": { "str": "biosilicified chitin helmet" },
@@ -837,7 +860,8 @@
   },
   {
     "id": "helmet_football",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "football helmet" },
     "description": "A heavy polycarbonate helmet normally worn by football players.  It comes with a visor to protect the eyes.",
@@ -894,7 +918,8 @@
   },
   {
     "id": "helmet_galea",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "galea", "str_pl": "galeae" },
     "description": "An Imperial Roman helmet, with distinct projections protecting the sides of the head.",
@@ -938,7 +963,8 @@
   },
   {
     "id": "xl_helmet_galea",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_galea",
     "name": { "str": "galea", "str_pl": "galeae" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -946,7 +972,8 @@
   },
   {
     "id": "helmet_galea_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_galea",
     "name": { "str": "galea", "str_pl": "galeae" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -954,7 +981,8 @@
   },
   {
     "id": "helmet_kabuto",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "kabuto" },
     "//": "Leaving this at $500 as it's either antique/priceless or player-made/Bartered, leastwise on the initial search.",
@@ -1007,7 +1035,8 @@
   },
   {
     "id": "xl_helmet_kabuto",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_kabuto",
     "name": { "str_sp": "kabuto" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -1015,7 +1044,8 @@
   },
   {
     "id": "helmet_kabuto_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_kabuto",
     "looks_like": "helmet_kabuto",
     "name": { "str_sp": "kabuto" },
@@ -1024,7 +1054,8 @@
   },
   {
     "id": "leather_helmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather helmet" },
     "description": "A helmet made of shaped and hardened leather.",
@@ -1054,7 +1085,8 @@
   },
   {
     "id": "leather_helmet_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "leather_helmet",
     "name": { "str": "leather helmet" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -1062,7 +1094,8 @@
   },
   {
     "id": "leather_helmet_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "leather_helmet",
     "name": { "str": "leather helmet" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1070,7 +1103,8 @@
   },
   {
     "id": "helmet_skull",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "skull helmet" },
     "description": "The top part of a large animal skull, equipped with leather straps to secure it on your head.",
     "weight": "1 kg",
@@ -1101,7 +1135,8 @@
   },
   {
     "id": "helmet_liner",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "helmet liner" },
     "description": "A cloth liner worn inside a helmet to help keep your head warm in cold climates.  It might also provide some padding against helmets that didn't have any.",
     "weight": "110 g",
@@ -1121,7 +1156,7 @@
   },
   {
     "id": "helmet_motor",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "category": "armor",
     "name": { "str": "full-face motorcycle helmet" },
     "description": "A helmet that covers the entire head along with glareproof visors, offering the best protection for when you ride around on your motorcycle.  Activate to raise the visor.",
@@ -1215,7 +1250,7 @@
   {
     "id": "helmet_motor_raised",
     "looks_like": "helmet_motor",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "category": "armor",
     "name": { "str": "full-face motorcycle helmet (raised visor)", "str_pl": "full-face motorcycle helmets (raised visor)" },
     "description": "A helmet that covers the entire head along with glareproof visors, offering the best protection when you ride around on your motorcycle.  The visor is raised.  Activate to put down the visor.",
@@ -1289,7 +1324,7 @@
   {
     "id": "helmet_riding",
     "repairs_like": "nomex_hood",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "category": "armor",
     "name": { "str": "riding helmet" },
     "description": "A helmet designed to protect from falls and kicks involving horses, has a small peak to protect from glare.",
@@ -1336,7 +1371,8 @@
   },
   {
     "id": "helmet_riding_peakless",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_riding",
     "name": { "str": "jockey skull cap" },
     "description": "A helmet designed to protect from falls and kicks involving horses.",
@@ -1346,7 +1382,8 @@
   },
   {
     "id": "helmet_nasal",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "nasal helm" },
     "description": "An early medieval helmet with a projection guarding the nose, to better protect the face without obstructing vision.  Proper Viking gear, unlike the stereotypical horned helm.",
@@ -1389,7 +1426,8 @@
   },
   {
     "id": "xl_helmet_nasal",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_nasal",
     "name": { "str": "nasal helm" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -1397,7 +1435,8 @@
   },
   {
     "id": "xs_helmet_nasal",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_nasal",
     "name": { "str": "nasal helm" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1405,7 +1444,8 @@
   },
   {
     "id": "platemail_great_helm",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "great helm" },
     "description": "A medieval helmet that provides excellent protection to the entire head, at the cost of great encumbrance.",
@@ -1431,7 +1471,8 @@
   },
   {
     "id": "platemail_great_helm_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_great_helm",
     "name": { "str": "great helm" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -1439,7 +1480,8 @@
   },
   {
     "id": "platemail_great_helm_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_great_helm",
     "name": { "str": "great helm" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1447,7 +1489,8 @@
   },
   {
     "id": "platemail_kettle_helm",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "kettle helm" },
     "description": "A helmet fashioned in the shape of a cap with a wide brim.  It leaves the face and neck exposed, but offers a bit of cover from glare and rain.",
@@ -1477,7 +1520,8 @@
   },
   {
     "id": "platemail_kettle_helm_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_kettle_helm",
     "name": { "str": "kettle helm" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -1485,7 +1529,8 @@
   },
   {
     "id": "platemail_kettle_helm_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_kettle_helm",
     "name": { "str": "kettle helm" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1493,7 +1538,8 @@
   },
   {
     "id": "sheet_metal_helmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sheet metal helmet" },
     "description": "A helmet that looks like a crude bucket with the face cut out.  It comes with a bevor to distribute some of the weight to your shoulders, as well as cloth padding to keep your bell from being rung.",
@@ -1528,7 +1574,8 @@
   },
   {
     "id": "helmet_skid",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "skid lid" },
     "description": "Also called a crash helmet, this piece of headgear is often worn by bikers and extreme sportsmen who prefer to keep their faces uncovered.",
@@ -1557,7 +1604,8 @@
   },
   {
     "id": "pickelhaube",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "pickelhaube", "str_pl": "pickelhauben" },
     "description": "A spiked helmet once worn by German military officers.  The spike is ornamental.",
@@ -1615,7 +1663,8 @@
   },
   {
     "id": "helmet_corinthian",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "Corinthian helm" },
     "description": "An ancient Greek bronze helmet that provides excellent protection for the head, with slits for the eyes and mouth.",
@@ -1666,7 +1715,8 @@
   },
   {
     "id": "xl_helmet_corinthian",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_corinthian",
     "name": { "str": "Corinthian helm" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -1674,7 +1724,8 @@
   },
   {
     "id": "helmet_corinthian_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_corinthian",
     "name": { "str": "Corinthian helm" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1682,7 +1733,8 @@
   },
   {
     "id": "helmet_bronze",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "bronze helmet" },
     "description": "A solid, single piece closed bronze helmet with a slit for the eyes.",
@@ -1713,7 +1765,8 @@
   },
   {
     "id": "xl_helmet_bronze",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_bronze",
     "name": { "str": "bronze helmet" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -1721,7 +1774,8 @@
   },
   {
     "id": "xs_helmet_bronze",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "helmet_bronze",
     "name": { "str": "bronze helmet" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1729,7 +1783,8 @@
   },
   {
     "id": "pot_xlhelmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "pot helmet" },
     "description": "A huge makeshift helmet made from a canning pot.",
     "weight": "6425 g",
@@ -1768,7 +1823,8 @@
   },
   {
     "id": "pot_helmet_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "pot_helmet",
     "name": { "str": "pot helmet" },
     "description": "A helmet made from a soup pot.  It's not very good protection, but it's better than nothing.",
@@ -1777,7 +1833,8 @@
   },
   {
     "id": "platemail_visored_helm",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "visored plate helm" },
     "description": "A medieval helmet made of steel platemail.  It provides excellent coverage for the head and neck.  Activate it to raise the visor.",
@@ -1834,7 +1891,8 @@
   {
     "id": "platemail_visored_helm_raised",
     "copy-from": "platemail_visored_helm",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "visored plate helm (raised)", "str_pl": "visored plate helm (raised)" },
     "description": "A medieval helmet made of steel platemail.  It provides excellent coverage for the head and neck, though at the moment not the face.  Activate it to lower the visor.",
     "use_action": { "type": "transform", "msg": "You lower the helm's visor.", "target": "platemail_visored_helm", "menu_text": "Lower" },
@@ -1854,7 +1912,8 @@
   },
   {
     "id": "platemail_visored_helm_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "visored plate helm" },
     "copy-from": "platemail_visored_helm",
     "use_action": {
@@ -1868,7 +1927,8 @@
   },
   {
     "id": "platemail_visored_helm_xl_raised",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "visored plate helm (raised)", "str_pl": "visored plate helm (raised)" },
     "copy-from": "platemail_visored_helm_raised",
     "use_action": {
@@ -1882,7 +1942,8 @@
   },
   {
     "id": "airsoft_helmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "airsoft helmet" },
     "description": "A lightweight helmet that is fashioned to look like a real military helmet, but is made of plastic and only protects against BB's and other light threats.  It has a military rail system for attachments.",
@@ -1990,7 +2051,8 @@
   },
   {
     "id": "turban_helmet",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "turban helmet" },
     "description": "A style of helmet once used in the Middle East, cylindrical on the top with protection for the nose and ears but nothing lower.",
@@ -2033,7 +2095,8 @@
   },
   {
     "id": "turban_helmet_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "turban_helmet",
     "name": { "str": "turban helmet" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -2041,7 +2104,8 @@
   },
   {
     "id": "turban_helmet_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "turban_helmet",
     "name": { "str": "turban helmet" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },

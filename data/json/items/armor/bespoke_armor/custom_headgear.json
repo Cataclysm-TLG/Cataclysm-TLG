@@ -1,7 +1,8 @@
 [
   {
     "id": "hood_survivor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "survivor hood" },
     "description": "A custom waterproof hood lined with kevlar and leather padding, it offers a comfortable layer of protection for the head.",
@@ -44,7 +45,8 @@
   },
   {
     "id": "hood_fsurvivor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "survivor firehood" },
     "description": "A custom padded hood with Nomex facing to resist fire and chemical attacks.",
@@ -86,7 +88,8 @@
   },
   {
     "id": "hood_wsurvivor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "winter survivor hood" },
     "description": "A custom waterproof hood lined with kevlar and leather padding, it offers a comfortable layer of protection for the head.  It's very warm thanks to its fur lining",
@@ -130,7 +133,8 @@
   },
   {
     "id": "hood_wsurvivor_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "hood_wsurvivor",
     "name": { "str": "winter survivor hood" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -138,7 +142,8 @@
   },
   {
     "id": "hood_wsurvivor_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "hood_wsurvivor",
     "name": { "str": "winter survivor hood" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -146,7 +151,8 @@
   },
   {
     "id": "hood_survivor_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "hood_survivor",
     "name": { "str": "survivor hood" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -154,7 +160,8 @@
   },
   {
     "id": "hood_survivor_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "hood_survivor",
     "name": { "str": "survivor hood" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -162,7 +169,8 @@
   },
   {
     "id": "hood_fsurvivor_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "hood_survivor",
     "name": { "str": "survivor firehood" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -170,7 +178,8 @@
   },
   {
     "id": "hood_fsurvivor_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "hood_survivor",
     "name": { "str": "survivor firehood" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -178,7 +187,8 @@
   },
   {
     "id": "hood_wsurvivor_nofur",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "faux fur winter survivor hood" },
     "description": "A customized armored hood, chemical-resistant and padded with Kevlar.  It's also warm thanks to the faux fur lining.",
     "copy-from": "hood_wsurvivor",
@@ -215,7 +225,8 @@
   },
   {
     "id": "hood_wsurvivor_nofur_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "hood_wsurvivor_nofur",
     "name": { "str": "faux fur winter survivor hood" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
@@ -223,7 +234,8 @@
   },
   {
     "id": "hood_wsurvivor_nofur_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "hood_wsurvivor_nofur",
     "name": { "str": "faux fur winter survivor hood" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },

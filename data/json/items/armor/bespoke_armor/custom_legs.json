@@ -1,7 +1,8 @@
 [
   {
     "id": "pants_survivor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "survivor cargo pants" },
     "description": "A heavy-duty pair of pants custom armored with a kevlar liner and a rubberized coating, offering all-around protection from the myriad threats of the Cataclysm.",
@@ -88,7 +89,8 @@
   },
   {
     "id": "pants_survivor_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "pants_survivor",
     "name": { "str_sp": "survivor cargo pants" },
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -96,7 +98,8 @@
   },
   {
     "id": "pants_survivor_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "pants_survivor",
     "name": { "str_sp": "survivor cargo pants" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },

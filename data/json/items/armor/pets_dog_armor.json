@@ -1,6 +1,7 @@
 [
   {
-    "type": "PET_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "PET_ARMOR" ],
     "id": "kevlar_harness",
     "symbol": "[",
     "looks_like": "tacvest",
@@ -51,7 +52,8 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "type": "PET_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "PET_ARMOR" ],
     "id": "acidchitin_harness_dog",
     "copy-from": "kevlar_harness",
     "color": "green",
@@ -64,7 +66,8 @@
     "environmental_protection": 7
   },
   {
-    "type": "PET_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "PET_ARMOR" ],
     "id": "chitin_harness_dog",
     "copy-from": "acidchitin_harness_dog",
     "name": { "str": "chitin dog mesh harness", "str_pl": "chitin dog mesh harnesses" },
@@ -75,7 +78,8 @@
     "environmental_protection": 4
   },
   {
-    "type": "PET_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "PET_ARMOR" ],
     "id": "chainmail_harness_dog",
     "copy-from": "kevlar_harness",
     "color": "light_red",
@@ -91,7 +95,8 @@
     "material_thickness": 0.5
   },
   {
-    "type": "PET_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "PET_ARMOR" ],
     "id": "leather_harness_dog",
     "copy-from": "kevlar_harness",
     "color": "brown",
@@ -104,7 +109,8 @@
     "extend": { "flags": [ "NO_SALVAGE" ] }
   },
   {
-    "type": "PET_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "PET_ARMOR" ],
     "id": "leatherbone_harness_dog",
     "copy-from": "leather_harness_dog",
     "name": { "str": "leather dog harness with bones", "str_pl": "leather dog harnesses with bones" },
@@ -115,7 +121,8 @@
     "weight": "2645 g"
   },
   {
-    "type": "PET_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "PET_ARMOR" ],
     "id": "rubber_harness_dog",
     "copy-from": "kevlar_harness",
     "color": "dark_gray",

@@ -1,7 +1,8 @@
 [
   {
     "id": "fireman_belt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "firefighter belt" },
     "description": "A stout firefighter's belt.  Useful for keeping your bunker gear up, it also doubles as an equipment belt with a reinforced loop for holding a large tool.",
     "weight": "210 g",
@@ -65,7 +66,8 @@
   },
   {
     "id": "martial_arts_belt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "martial arts belt" },
     "description": "A simple cloth belt that ties about the waist.  Its color indicates the wearer's rank.",
     "weight": "200 g",
@@ -133,7 +135,8 @@
   },
   {
     "id": "leather_belt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather belt" },
     "description": "A leather belt.  Designed to look good and hold up a pair of pants, but you should be able to attach a small tool or weapon to one of the belt loops.",
     "weight": "150 g",
@@ -174,7 +177,8 @@
   },
   {
     "id": "obi_gi",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "obi" },
     "description": "A broad, decorative sash wrapped around the waist, usually to secure a kimono.",
     "weight": "200 g",
@@ -200,7 +204,8 @@
   },
   {
     "id": "police_belt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "police duty belt" },
     "description": "A black leather belt used by police officers.  It has several pouches and a holder for a baton.",
     "weight": "250 g",
@@ -275,7 +280,8 @@
   },
   {
     "id": "santa_belt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "broad belt" },
     "description": "A broad, buckled leather belt.",
     "weight": "150 g",
@@ -305,7 +311,8 @@
   },
   {
     "id": "tool_belt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "tool belt" },
     "description": "A common belt with pockets, loops and sheaths to store up to seven tools or blades.  Widely used by handymen and electricians.",
     "weight": "1000 g",
@@ -399,7 +406,8 @@
   },
   {
     "id": "webbing_belt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "MOLLE webbing belt" },
     "description": "A 2-inch nylon webbing belt commonly used by military forces.  MOLLE-compatible pouches can be attached to the webbing for extra storage.",
     "weight": "210 g",
@@ -480,7 +488,8 @@
   },
   {
     "id": "suspenders_cloth",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "suspenders", "str_pl": "pairs of suspenders" },
     "description": "A pair of black suspenders, which reach over the wearer's shoulders and hook to their waist.  Gives a wonderful western feel!",
     "weight": "250 g",
@@ -498,7 +507,8 @@
   },
   {
     "id": "suspenders_leather",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather suspenders", "str_pl": "pairs of leather suspenders" },
     "description": "A pair of leather suspenders, which reach over the wearer's shoulders and hook to their waist.  Gives a wonderful western feel!",
     "material": [ "leather", "steel" ],
@@ -507,7 +517,8 @@
   },
   {
     "id": "suspenders_holster",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "holster suspenders", "str_pl": "pairs of holster suspenders" },
     "description": "A pair of leather suspenders with a holster placed near the stomach.",
     "copy-from": "suspenders_leather",

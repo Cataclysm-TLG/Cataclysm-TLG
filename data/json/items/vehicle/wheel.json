@@ -485,7 +485,8 @@
   {
     "id": "wheel_small_pair",
     "category": "veh_parts",
-    "type": "WHEEL",
+    "type": "ITEM",
+    "subtypes": [ "WHEEL" ],
     "name": { "str": "small wheels", "str_pl": "pairs of small wheels" },
     "description": "Two small plastic wheels snapped onto a simple wire axle, the kind you'd see on a child's wagon or a rolling trash can.",
     "weight": "575 g",

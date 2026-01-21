@@ -1,7 +1,8 @@
 [
   {
     "id": "bondage_suit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "bondage suit" },
     "description": "A bodysuit of snug black leather.  It has no pockets, but does feature an abundance of unusually located straps and zippers.",
     "weight": "1000 g",
@@ -25,7 +26,8 @@
   },
   {
     "id": "bodysuit_spandex",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "spandex bodysuit" },
     "description": "A tight-fitting spandex bodysuit which covers the whole body from neck to toe.",
     "weight": "408 g",
@@ -114,7 +116,8 @@
   },
   {
     "id": "denim_overalls",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "denim overalls", "str_pl": "pairs of denim overalls" },
     "description": "A pair of denim pants with a front apron and shoulder straps across the back.  They're tough and have plenty of storage space.",
     "//": "16.5 oz heavy denim overalls, modeled after the work overalls despite the description.",
@@ -187,7 +190,8 @@
   },
   {
     "id": "jumpsuit_long",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "long-sleeved jumpsuit" },
     "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
     "weight": "558 g",
@@ -271,7 +275,8 @@
   },
   {
     "id": "jumpsuit_long_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "long-sleeved jumpsuit" },
     "copy-from": "jumpsuit_long",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -288,7 +293,8 @@
   },
   {
     "id": "jumpsuit_long_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "long-sleeved jumpsuit" },
     "copy-from": "jumpsuit_long",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -305,7 +311,8 @@
   },
   {
     "id": "jumpsuit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "jumpsuit" },
     "description": "A lightweight short-sleeved bodysuit.  It's comfortable and has a decent amount of pocket space.",
     "weight": "610 g",
@@ -344,7 +351,8 @@
   },
   {
     "id": "jumpsuit_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "jumpsuit" },
     "copy-from": "jumpsuit",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -352,7 +360,8 @@
   },
   {
     "id": "jumpsuit_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "jumpsuit" },
     "copy-from": "jumpsuit",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -360,7 +369,8 @@
   },
   {
     "id": "technician_coveralls",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "work coveralls" },
     "description": "A long-sleeved jumpsuit made of chemical-resistant synthetics.  Offers solid protection from everyday dangers on the job and plenty of pockets for easy storage.",
     "weight": "1328 g",
@@ -472,7 +482,8 @@
   },
   {
     "id": "technician_coveralls_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "XL work coveralls" },
     "copy-from": "technician_coveralls",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -480,7 +491,8 @@
   },
   {
     "id": "technician_coveralls_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "XS work coveralls" },
     "copy-from": "technician_coveralls",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -488,7 +500,8 @@
   },
   {
     "id": "subsuit_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "subject suit" },
     "description": "A short-sleeved yellow garment resembling a hospital gown.  A variety of plastic snaps pin its two halves together around the body and could seemingly be adjusted to fit just about anyone, or anything...",
     "weight": "810 g",
@@ -515,7 +528,8 @@
   },
   {
     "id": "subsuit_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "XS subject suit" },
     "description": "A short-sleeved yellow garment resembling a hospital gown, sized for a very young child.  A variety of plastic snaps pin its two halves together around the body and could seemingly be adjusted to fit just about anyone, or anything...",
     "weight": "810 g",
@@ -542,7 +556,8 @@
   },
   {
     "id": "union_suit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "union suit" },
     "description": "An old-fashioned one-piece suit of full-body long underwear that helps to maintain body temperature.",
     "weight": "168 g",
@@ -563,7 +578,8 @@
   },
   {
     "id": "fursuit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "fursuit" },
     "description": "A full-body costume in the form of an anthropomorphic animal.  It is quite encumbering and has little storage but is very warm.",
     "weight": "7033 g",
@@ -697,7 +713,8 @@
   },
   {
     "id": "mascot_suit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "mascot suit" },
     "description": "A full-body costume in the form of a cartoon character.  It is quite encumbering and very warm.",
     "weight": "7033 g",
@@ -776,7 +793,8 @@
   },
   {
     "id": "wool_suit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "thick wool onesie" },
     "description": "An encumbering wool suit covered in nice patterns.  It looks like full body armor but it only protects against cold, sadly.",
     "weight": "883 g",
@@ -800,7 +818,8 @@
   },
   {
     "id": "zentai",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "zentai" },
     "description": "Short for 'zenshin taitsu', a zentai is a form-fitting full-body spandex garment.  Though it covers your face, you can see through the thin fabric.  With a couple of these and some friends, you could put on some kabuki or harass a rival sports team.",
     "weight": "600 g",

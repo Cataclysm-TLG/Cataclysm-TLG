@@ -57,7 +57,8 @@
     "items": [ { "item": "warptoken", "prob": 100, "count": [ 1, 6 ] } ]
   },
   {
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "id": "warpbag_base",
     "name": { "str": "warped bag" },
     "symbol": "[",
@@ -93,7 +94,8 @@
     ]
   },
   {
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "id": "warpwoodbag",
     "name": { "str": "warped lumberjack's bag" },
     "copy-from": "warpbag_base",
@@ -130,7 +132,8 @@
     ]
   },
   {
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "id": "warpdirtbag",
     "name": { "str": "warped excavator's bag" },
     "copy-from": "warpbag_base",
@@ -168,7 +171,8 @@
     ]
   },
   {
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "id": "warpmetalbag",
     "name": { "str": "warped scrapper's bag" },
     "copy-from": "warpbag_base",
@@ -219,7 +223,8 @@
     ]
   },
   {
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "id": "warphaulbag",
     "name": { "str": "warped hauler's harness", "str_pl": "warped hauler's harnesses" },
     "copy-from": "warpbag_base",

@@ -288,10 +288,7 @@
     "encumbrance": [ [ "torso", 2 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "//": "Should conflict with anything that dramatically alters the torso's shape/internal anatomy or stuffs it full of something else.",
-    "mutation_conflicts": [
-      "FAT",
-      "AMORPHOUS"
-    ]
+    "mutation_conflicts": [ "FAT", "AMORPHOUS" ]
   },
   {
     "id": "bio_batteries",

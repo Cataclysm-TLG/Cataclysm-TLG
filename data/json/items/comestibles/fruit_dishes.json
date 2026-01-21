@@ -495,7 +495,7 @@
   },
   {
     "type": "ITEM",
-    "subtypes": ["COMESTIBLE"],
+    "subtypes": [ "COMESTIBLE" ],
     "id": "fruit_canned",
     "name": { "str_sp": "canned fruit" },
     "conditional_names": [

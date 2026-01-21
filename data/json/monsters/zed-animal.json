@@ -762,7 +762,7 @@
     ],
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
-    {
+  {
     "id": "mon_zombie_deer_frail",
     "type": "MONSTER",
     "name": { "str_sp": "frail zombie deer" },

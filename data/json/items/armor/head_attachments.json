@@ -1,7 +1,8 @@
 [
   {
     "id": "attachable_ear_muffs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "attachable ear muffs" },
     "description": "A pair of ear muffs attachable to a hard hat or helmet to reduce noise exposures to safe levels.  Activate to put ear muffs into a working position, blocking most sounds.",
@@ -33,7 +34,8 @@
   },
   {
     "id": "attachable_ear_muffs_on",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "attachable ear muffs (on)" },
     "description": "A pair of ear muffs attachable to a hard hat or helmet to reduce noise exposures to safe levels.  Activate to put ear muffs into a standby position, letting you clearly hear again.",
     "copy-from": "attachable_ear_muffs",
@@ -48,7 +50,8 @@
   },
   {
     "id": "ballistic_mandible_guard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "ballistic mandible guard" },
     "description": "A ballistic jaw guard designed to be attached on a military helmet, but easily adjustable to helmets with any kind of rail system installed.",
@@ -65,7 +68,8 @@
   },
   {
     "id": "plastic_mandible_guard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "plastic mandible guard" },
     "description": "A plastic jaw guard designed to be strapped to any common hard hat or helmet, it was probably part of some costume before the world ended.",
@@ -82,7 +86,8 @@
   },
   {
     "id": "plastic_chin_guard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "plastic chin guard" },
     "description": "A common plastic chin guard designed to be attached to the straps of any common hard hat or helmet.",
@@ -99,7 +104,8 @@
   },
   {
     "id": "counterweight_pouch",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "counterweight pouch" },
     "description": "A counterweight pouch attachable to the back of a hard hat or helmet to balance the weight on your head.  You can store batteries or some other very small items in it.",
@@ -125,7 +131,8 @@
   },
   {
     "id": "sun_shield",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sun shield" },
     "description": "A common sun shield intended to be put over a hard hat to protect the user from the sun.",
@@ -140,7 +147,8 @@
   },
   {
     "id": "shield_visor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "shield visor" },
     "description": "A common shield visor intended to be attached on a hard hat or helmet.",
@@ -157,7 +165,8 @@
   },
   {
     "id": "face_shield",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "face shield" },
     "description": "A thermoplastic face shield with a mounting bracket intended to be attached over a hard hat or helmet.",
@@ -174,7 +183,8 @@
   },
   {
     "id": "face_shield_eod",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "EOD face shield" },
     "description": "A thick polycarbonate and plexiglass face shield with a mounting bracket intended to be attached to a ballistic helmet for protection from blast and fragmentation in 'non-permissive environments'.",
@@ -191,7 +201,8 @@
   },
   {
     "id": "face_shield_plastic",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plastic face shield" },
     "description": "A plastic face shield with a mounting bracket intended to be attached over a hard hat or helmet.  It doesn't protects you as much as one made from thermoplastic, but it's cheaper and more common.",
@@ -208,7 +219,7 @@
   },
   {
     "id": "military_nvg",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "category": "armor",
     "name": { "str_sp": "night vision goggles" },
     "description": "Last generation double-tube night vision device, designed to be mounted on a compatible helmet.  Currently raised up and out of the way.",
@@ -248,7 +259,7 @@
   },
   {
     "id": "military_nvg_on",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "copy-from": "military_nvg",
     "name": { "str_sp": "night vision goggles (on)" },
     "description": "Last generation single-tube night vision device, designed to be mounted on a compatible helmet.  Limited field of view while activated.  It is turned on, and continually draining batteries.  Use it to turn it off.",
@@ -267,7 +278,7 @@
   },
   {
     "id": "advanced_gpnvg",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "category": "armor",
     "name": { "str_sp": "panoramic night vision goggles" },
     "description": "Advanced GPNVG with four image intensifier tubes, allowing for a large field of view at night, designed to be mounted on a compatible helmet.  Currently raised up and out of the way.",
@@ -312,7 +323,7 @@
   },
   {
     "id": "advanced_gpnvg_on",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "copy-from": "advanced_gpnvg",
     "name": { "str_sp": "panoramic night vision goggles (on)" },
     "description": "Advanced GPNVG with four image intensifier tubes, allowing for a large field of view at night, designed to be mounted on a compatible helmet.  It is turned on, and continually draining batteries.  Use it to turn it off.",
@@ -334,7 +345,7 @@
   },
   {
     "id": "enhanced_nvg",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "category": "armor",
     "name": { "str_sp": "enhanced night vision goggles" },
     "description": "New and rare high-resolution thermal NVG device, designed to be mounted on a compatible helmet.  Lets you see in the dark, and detects heat signatures emitted by (un)living organisms.  Currently raised up and out of the way.",
@@ -379,7 +390,7 @@
   },
   {
     "id": "enhanced_nvg_on",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "copy-from": "enhanced_nvg",
     "name": { "str_sp": "enhanced night vision goggles (on)" },
     "description": "New and rare high-resolution thermal NVG device, designed to be mounted on a compatible helmet.  Lets you see in the dark, and detects heat signatures emitted by (un)living organisms.  It is turned on, and continually draining batteries.  Use it to turn it off.",
@@ -401,7 +412,8 @@
   },
   {
     "id": "nape_protector",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "nape protector" },
     "description": "A common nape protector intended to be attached on a hard hat or helmet to protect against the sun and dust.",
@@ -426,7 +438,8 @@
   },
   {
     "id": "mesh_nape_protector",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "mesh nape protector" },
     "description": "A common mesh nape protector intended to be attached on a hard hat or helmet to protect against the sun while letting the cold wind refresh your nape.",
@@ -450,7 +463,8 @@
   },
   {
     "id": "kevlar_nape_protector",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "Kevlar nape protector" },
     "description": "A custom-made Kevlar strengthened nape protector intended to be attached on a hard hat or helmet to protect your nape against cuts and slashing attacks.",

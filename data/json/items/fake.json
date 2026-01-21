@@ -42,7 +42,7 @@
   },
   {
     "id": "integrated_ar",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "copy-from": "fake_item",
     "name": { "str": "Integrated AR System" },
     "description": "A MicroLED display affixed directly to the corneas, this device serves as a digital assistant, multimedia player, and more - all on an interface that only the user can see.",

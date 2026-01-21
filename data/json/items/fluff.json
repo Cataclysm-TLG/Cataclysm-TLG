@@ -69,7 +69,8 @@
     "color": "light_gray"
   },
   {
-    "type": "TOOL_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "id": "pom_poms",
     "name": { "str": "pom poms", "str_pl": "pairs of pom poms" },
     "category": "other",
@@ -93,9 +94,7 @@
     "price_postapoc": "20 cent",
     "material": [ "plastic" ],
     "volume": "250 ml",
-    "longest_side": "10 cm",
-    "flags": [ "SLEEP_IGNORE" ],
-    "material_thickness": 0.1
+    "longest_side": "10 cm"
   },
   {
     "id": "polaroid_photo",
@@ -1390,7 +1389,8 @@
   },
   {
     "id": "xedra_seismograph",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "portable seismograph" },
     "description": "A sturdy steel briefcase, containing what appears to be an old-fashioned drum seismograph.  The stenciled acronyms of its outer case imply it was used as some sort of recording device.\n\nThin parallel lines cover both ends of the drum, but as they approach the middle their vibrations intensify, until the ink fuses into a thick red stain.",
     "weight": "5000 g",
