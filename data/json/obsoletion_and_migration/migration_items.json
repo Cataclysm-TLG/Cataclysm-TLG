@@ -3792,5 +3792,15 @@
     "type": "MIGRATION",
     "id": "medium_plus_battery_cell",
     "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "candy3gator",
+    "replace": "candy3"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cow_candy",
+    "replace": "candy3"
   }
 ]

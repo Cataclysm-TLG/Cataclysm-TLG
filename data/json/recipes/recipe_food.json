@@ -6090,13 +6090,11 @@
     "components": [
       [
         [ "candy3", 5 ],
-        [ "candy3gator", 5 ],
         [ "maltballs", 1 ],
         [ "mintpatties", 2 ],
         [ "honey_glassed", 2 ],
         [ "honeycomb", 1 ],
         [ "homeopathic_pills", 120 ],
-        [ "cow_candy", 2 ],
         [ "candycigarette", 3 ],
         [ "maple_candy", 7 ],
         [ "powder_candy", 2 ]

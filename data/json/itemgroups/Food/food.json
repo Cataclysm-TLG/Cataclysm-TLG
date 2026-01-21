@@ -500,7 +500,6 @@
       { "group": "candy2_bag_plastic_3", "prob": 70 },
       { "group": "candy3_bag_plastic_3", "prob": 70 },
       { "group": "candy4_bag_plastic_3", "prob": 70 },
-      { "group": "cow_candy_bag_plastic_3", "prob": 20 },
       { "group": "maltballs_box_snack_4", "prob": 60 },
       { "group": "mintpatties_bag_plastic_3", "prob": 60 },
       { "group": "neccowafers_bag_plastic_3", "prob": 55 },
@@ -1230,14 +1229,6 @@
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bag_plastic_small",
     "entries": [ { "item": "candy4", "container-item": "null", "count": 3 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "cow_candy_bag_plastic_3",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "bag_plastic_small",
-    "entries": [ { "item": "cow_candy", "container-item": "null", "count": 3 } ]
   },
   {
     "type": "item_group",
