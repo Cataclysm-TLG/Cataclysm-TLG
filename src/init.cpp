@@ -384,8 +384,6 @@ void DynamicDataLoader::initialize()
         item_controller->load_migration( jo );
     } );
 
-    add( "charge_removal_blacklist", load_charge_removal_blacklist );
-    add( "temperature_removal_blacklist", load_temperature_removal_blacklist );
     add( "test_data", &test_data::load );
 
     add( "MONSTER", []( const JsonObject & jo, const std::string & src ) {
