@@ -119,7 +119,7 @@
     "material": [ "sugar" ],
     "volume": "6 ml",
     "calories": 19,
-    "flags": [ "EDIBLE_FROZEN", "NUTRIENT_OVERRIDE", "WATER_DISSOLVE" ]
+    "flags": [ "NO_TEMP", "NUTRIENT_OVERRIDE", "WATER_DISSOLVE" ]
   },
   {
     "type": "COMESTIBLE",

@@ -352,10 +352,9 @@
     "material": [ "powder", "milk" ],
     "primary_material": "powder",
     "volume": "25 ml",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP", "NO_AUTO_CONSUME", "WATER_DISSOLVE" ],
     "vitamins": [ [ "calcium", 16 ], [ "milk_allergen", 1 ] ],
-    "fun": -1,
-    "freezing_point": -459
+    "fun": -1
   },
   {
     "type": "COMESTIBLE",
@@ -415,10 +414,9 @@
     "material": [ "powder", "milk" ],
     "primary_material": "powder",
     "volume": "62 ml",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_AUTO_CONSUME", "NO_TEMP", "WATER_DISSOLVE" ],
     "vitamins": [ [ "vitC", 1 ], [ "calcium", 7 ], [ "milk_allergen", 1 ] ],
-    "fun": -5,
-    "freezing_point": -459
+    "fun": -5
   },
   {
     "type": "COMESTIBLE",

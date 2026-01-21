@@ -865,9 +865,8 @@
     "material": [ "powder", "egg" ],
     "primary_material": "powder",
     "volume": "15 ml",
-    "flags": [ "EDIBLE_FROZEN", "NO_AUTO_CONSUME" ],
+    "flags": [ "NO_TEMP", "NO_AUTO_CONSUME", "WATER_DISSOLVE" ],
     "fun": -4,
-    "freezing_point": -274,
     "vitamins": [ [ "egg_allergen", 1 ] ]
   },
   {

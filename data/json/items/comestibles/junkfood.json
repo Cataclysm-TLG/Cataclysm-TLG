@@ -207,7 +207,7 @@
   {
     "type": "COMESTIBLE",
     "id": "candy3",
-    "name": { "str_sp": "chewy candy" },
+    "name": { "str_sp": "hard candy" },
     "weight": "33 g",
     "color": "yellow",
     "spoils_in": "360 days",
@@ -216,13 +216,13 @@
     "symbol": "%",
     "healthy": -1,
     "calories": 85,
-    "description": "A handful of colorful fruit-flavored chewy candies.",
+    "description": "A handful of candy drops made primarily of sugar, boiled until rock hard.",
     "price": "60 cent",
     "price_postapoc": "66 cent",
     "material": [ "junk" ],
     "volume": "30 ml",
-    "flags": [ "EDIBLE_FROZEN" ],
-    "fun": 3,
+    "flags": [ "NO_TEMP" ],
+    "fun": 2,
     "vitamins": [ [ "junk_allergen", 1 ] ]
   },
   {
@@ -237,7 +237,7 @@
     "symbol": "%",
     "healthy": -1,
     "calories": 85,
-    "description": "A handful of colorful fruit- and soda-flavored gummy candies.",
+    "description": "A handful of gummy candies made from sugar and gelatin.",
     "price": "60 cent",
     "price_postapoc": "66 cent",
     "material": [ "junk", "flesh" ],
@@ -249,7 +249,7 @@
   {
     "type": "COMESTIBLE",
     "id": "candy5",
-    "name": { "str_sp": "gummy candy" },
+    "name": { "str_sp": "vegan gummy candy" },
     "weight": "33 g",
     "color": "light_green",
     "spoils_in": "360 days",
@@ -258,30 +258,14 @@
     "symbol": "%",
     "healthy": -1,
     "calories": 85,
-    "description": "A handful of colorful fruit- and soda-flavored vegan gummy candies made from agar instead of animal gelatin.  They have kind of a strange texture, but they're still tasty.",
+    "description": "A handful of gummy candies made using invert sugar instead of gelatin.",
     "price": "60 cent",
     "price_postapoc": "66 cent",
-    "material": [ "junk", "vegetable" ],
+    "material": [ "junk" ],
     "volume": "30 ml",
     "flags": [ "EDIBLE_FROZEN" ],
-    "fun": 4,
-    "vitamins": [ [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "candy3gator",
-    "name": { "str_sp": "chewy reptilian candy" },
-    "copy-from": "candy3",
-    "description": "A handful of colorful fruit-flavored chewy candies shaped in a reptilian fashion.  Made by SugarRush."
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "cow_candy",
-    "name": { "str_sp": "candy cattle" },
-    "description": "A handful of chocolate candies shaped like cows.",
-    "symbol": "*",
-    "copy-from": "candy2",
-    "color": "brown"
+    "fun": 3,
+    "vitamins": [ [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -300,7 +284,7 @@
     "quench": -1,
     "calories": 135,
     "stim": 1,
-    "fun": 7,
+    "fun": 3,
     "flags": [ "EDIBLE_FROZEN" ],
     "vitamins": [ [ "junk_allergen", 1 ] ]
   },
@@ -321,7 +305,7 @@
     "price_postapoc": "60 cent",
     "material": [ "junk" ],
     "volume": "50 ml",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "fun": 6,
     "vitamins": [ [ "junk_allergen", 1 ] ]
   },
@@ -333,7 +317,7 @@
     "color": "yellow",
     "description": "A candy bracelet made by stringing candies onto a thread.  In theory, you could both wear and eat the bracelet.",
     "copy-from": "candy4",
-    "flags": [ "EDIBLE_FROZEN", "BELTED", "OVERSIZE", "UNRESTRICTED" ],
+    "flags": [ "NO_TEMP", "BELTED", "OVERSIZE", "UNRESTRICTED" ],
     "material": [ "junk" ],
     "armor_data": {
       "sided": true,
@@ -359,7 +343,7 @@
     "price_postapoc": "25 cent",
     "material": [ "junk" ],
     "volume": "50 ml",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "fun": 10,
     "vitamins": [ [ "junk_allergen", 1 ] ]
   },
@@ -380,16 +364,9 @@
     "price_postapoc": "37 cent",
     "material": [ "wheat", "junk" ],
     "volume": "93 ml",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "vitamins": [ [ "calcium", 4 ], [ "iron", 6 ], [ "wheat_allergen", 1 ], [ "junk_allergen", 1 ] ],
     "fun": 2
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "grahmcrackers_roe",
-    "name": { "str_sp": "graham cracker chunks" },
-    "copy-from": "grahmcrackers",
-    "description": "These dry, sugary cracker pellets will leave you thirsty, and they're not the right size to make s'mores with.  Made by SugarRush!"
   },
   {
     "type": "COMESTIBLE",
@@ -409,16 +386,9 @@
     "material": [ "wheat", "junk" ],
     "volume": "58 ml",
     "//": "dimensions are picked from oreo",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "vitamins": [ [ "calcium", 2 ], [ "iron", 6 ], [ "wheat_allergen", 1 ], [ "junk_allergen", 1 ] ],
     "fun": 7
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "cookies_egg",
-    "name": { "str": "cookie egg" },
-    "copy-from": "cookies",
-    "description": "A sweet, delicious cookie, shaped like an egg.  Made by SugarRush!"
   },
   {
     "type": "COMESTIBLE",
@@ -605,7 +575,7 @@
     "price_postapoc": "33 cent",
     "material": [ "junk" ],
     "volume": "13 ml",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "fun": 4,
     "vitamins": [ [ "junk_allergen", 1 ] ]
   },
@@ -695,7 +665,7 @@
     "type": "COMESTIBLE",
     "id": "nachos",
     "name": { "str_sp": "tortilla chips" },
-    "weight": "60 g",
+    "weight": "28 g",
     "color": "yellow",
     "spoils_in": "30 days",
     "container": "bag_plastic_small",
@@ -708,7 +678,7 @@
     "price_postapoc": "50 cent",
     "material": [ "junk" ],
     "volume": "83 ml",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "vitamins": [ [ "calcium", 5 ], [ "iron", 3 ], [ "junk_allergen", 1 ] ],
     "fun": 8
   },
@@ -1304,7 +1274,7 @@
     "price_postapoc": "10 cent",
     "material": [ "flesh", "junk" ],
     "volume": "250ml",
-    "flags": [ "EATEN_COLD" ],
+    "flags": [ "NO_TEMP" ],
     "fun": -2,
     "vitamins": [ [ "meat_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
@@ -1421,47 +1391,5 @@
     "flags": [ "EDIBLE_FROZEN" ],
     "vitamins": [ [ "calcium", 10 ], [ "iron", 6 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ],
     "fun": 8
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "crepe_plain",
-    "name": { "str": "plain crepe" },
-    "description": "Krampouezh, known worldwide as 'crepe' is a traditional, thin Breton pancake.",
-    "symbol": "%",
-    "color": "brown",
-    "looks_like": "pancakes",
-    "price": "2 USD",
-    "price_postapoc": "20 cent",
-    "weight": "80 g",
-    "volume": "85 ml",
-    "comestible_type": "FOOD",
-    "material": [ "wheat", "milk" ],
-    "primary_material": "wheat",
-    "flags": [ "EATEN_HOT" ],
-    "spoils_in": "7 days",
-    "calories": 150,
-    "fun": 3,
-    "vitamins": [ [ "calcium", 6 ], [ "iron", 4 ], [ "wheat_allergen", 1 ], [ "milk_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "crepe",
-    "name": { "str": "crepe" },
-    "description": "Krampouezh, known worldwide as 'crepe' is a traditional, thin Breton pancake.",
-    "symbol": "%",
-    "color": "brown",
-    "looks_like": "pancakes",
-    "price": "2 USD",
-    "price_postapoc": "20 cent",
-    "weight": "80 g",
-    "volume": "85 ml",
-    "comestible_type": "FOOD",
-    "material": [ "wheat", "milk" ],
-    "primary_material": "wheat",
-    "flags": [ "EATEN_HOT" ],
-    "spoils_in": "7 days",
-    "calories": 180,
-    "fun": 3,
-    "vitamins": [ [ "calcium", 6 ], [ "iron", 4 ], [ "wheat_allergen", 1 ], [ "milk_allergen", 1 ] ]
   }
 ]
