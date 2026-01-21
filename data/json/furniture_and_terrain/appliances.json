@@ -918,7 +918,7 @@
     "description": "A car battery wired into a static power grid.",
     "item": "battery_car",
     "breaks_into": [
-      { "item": "lead", "count": [ 1680, 2380 ] },
+      { "item": "lead", "count": [ 450, 900 ] },
       { "item": "chem_sulphuric_acid", "count": [ 5, 8 ], "container-item": "null" },
       { "item": "plastic_chunk", "count": [ 14, 20 ] },
       { "item": "scrap", "count": [ 2, 3 ] },
@@ -939,7 +939,7 @@
     "description": "A motorbike battery wired into a static power grid.",
     "item": "battery_motorbike",
     "breaks_into": [
-      { "item": "lead", "count": [ 149, 159 ] },
+      { "item": "lead", "count": [ 85, 175 ] },
       { "item": "chem_sulphuric_acid", "count": [ 0, 1 ], "container-item": "null" },
       { "item": "plastic_chunk", "count": [ 2, 3 ] },
       { "item": "scrap", "count": [ 0, 1 ] },
@@ -960,7 +960,7 @@
     "description": "A small motorbike battery wired into a static power grid.",
     "item": "battery_motorbike_small",
     "breaks_into": [
-      { "item": "lead", "count": [ 69, 79 ] },
+      { "item": "lead", "count": [ 45, 90 ] },
       { "item": "chem_sulphuric_acid", "count": [ 0, 1 ], "container-item": "null" },
       { "item": "plastic_chunk" },
       { "item": "scrap", "count": [ 0, 1 ] },
