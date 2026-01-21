@@ -1,7 +1,8 @@
 [
   {
     "abstract": "cereal_tpl",
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "name": { "str_sp": "cereal" },
     "weight": "40 g",
     "volume": "250 ml",
@@ -22,7 +23,8 @@
     "fun": 8
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cereal",
     "name": { "str_sp": "sugary cereal" },
     "weight": "38 g",
@@ -42,7 +44,8 @@
     "fun": 10
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cereal2",
     "name": { "str_sp": "wheat cereal" },
     "weight": "52 g",
@@ -55,7 +58,8 @@
     "copy-from": "cereal_tpl"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cereal3",
     "name": { "str_sp": "corn cereal" },
     "weight": "39 g",
@@ -73,6 +77,6 @@
     "volume": "62 ml",
     "flags": [ "EDIBLE_FROZEN" ],
     "vitamins": [ [ "iron", 42 ], [ "junk_allergen", 1 ] ],
-    "fun": 6
+    "fun": 3
   }
 ]

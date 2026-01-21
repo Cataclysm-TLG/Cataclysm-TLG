@@ -1,7 +1,8 @@
 [
   {
     "id": "mag_unarmed",
-    "type": "BOOK",
+    "type": "ITEM",
+    "subtypes": [ "BOOK" ],
     "category": "manuals",
     "name": { "str": "MMA Monthly", "str_pl": "issues of MMA Monthly" },
     "description": "An exciting monthly magazine about mixed martial arts.  There are lots of large, colorful photos of matches and interviews with fighters and trainers.",
@@ -21,7 +22,8 @@
   },
   {
     "id": "manual_brawl",
-    "type": "BOOK",
+    "type": "ITEM",
+    "subtypes": [ "BOOK" ],
     "category": "manuals",
     "name": { "str": "101 Wrestling Moves", "str_pl": "copies of 101 Wrestling Moves" },
     "description": "It seems to be a wrestling manual, poorly photocopied and released on spiral-bound paper.  Still, there are lots of useful tips for unarmed combat.",

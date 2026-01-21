@@ -1,8 +1,8 @@
 [
   {
     "abstract": "bone_abstract",
-    "type": "COMESTIBLE",
-    "subtypes": [ "MILLING" ],
+    "type": "ITEM",
+    "subtypes": [ "MILLING", "COMESTIBLE" ],
     "name": { "str": "bone" },
     "description": "A bone from some creature or other.  Could be used in cooking and crafting.",
     "weight": "290 g",
@@ -19,10 +19,10 @@
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
     "id": "bone",
     "name": { "str": "bone" },
-    "subtypes": [ "MILLING" ],
+    "subtypes": [ "MILLING", "COMESTIBLE" ],
     "copy-from": "bone_abstract",
     "weight": "225 g",
     "symbol": "%",
@@ -37,7 +37,8 @@
     "recipe": "meal_bone_mill_1_4"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "large_bone",
     "name": { "str": "large bone" },
     "description": "A tremendous bone taken from some gigantic creature.",
@@ -59,8 +60,8 @@
     "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ]
   },
   {
-    "type": "COMESTIBLE",
-    "subtypes": [ "MILLING" ],
+    "type": "ITEM",
+    "subtypes": [ "MILLING", "COMESTIBLE" ],
     "id": "bone_tainted",
     "category": "other",
     "name": { "str": "tainted bone" },
@@ -80,7 +81,8 @@
     "recipe": "meal_bone_tainted_mill_1_4"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "bone_human",
     "copy-from": "bone",
     "name": { "str": "human bone" },
@@ -89,7 +91,8 @@
     "vitamins": [ [ "calcium", "25588 mg" ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "meal_bone",
     "name": { "str_sp": "bone meal" },
     "weight": "60 g",
@@ -105,7 +108,8 @@
     "fun": -10
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "meal_bone_tainted",
     "name": { "str_sp": "tainted bone meal" },
     "weight": "60 g",

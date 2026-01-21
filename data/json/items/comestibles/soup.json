@@ -1,6 +1,7 @@
 [
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "broth",
     "looks_like": "water",
     "name": { "str_sp": "vegetable broth" },
@@ -24,7 +25,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "broth_meat",
     "looks_like": "water",
     "name": { "str_sp": "meat broth" },
@@ -49,7 +51,8 @@
     "vitamins": [ [ "vitC", "1 mg" ], [ "iron", "1 mg" ], [ "calcium", "19 mg" ], [ "meat_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "broth_bone",
     "looks_like": "broth",
     "name": { "str_sp": "bone broth" },
@@ -75,7 +78,8 @@
     "vitamins": [ [ "calcium", 7 ], [ "iron", "200 μg" ], [ "meat_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_vegetable",
     "looks_like": "water",
     "name": { "str_sp": "vegetable soup" },
@@ -99,7 +103,8 @@
     "fun": 3
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_three_sisters",
     "looks_like": "water",
     "name": { "str_sp": "three sisters stew" },
@@ -123,7 +128,8 @@
     "fun": 4
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_meat",
     "looks_like": "water",
     "name": { "str_sp": "meat soup" },
@@ -151,7 +157,8 @@
     "fun": 4
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_fish",
     "looks_like": "soup_meat",
     "name": { "str_sp": "fish soup" },
@@ -175,7 +182,8 @@
     "fun": 1
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "curry_vegetable",
     "looks_like": "soup_vegetable",
     "name": { "str_sp": "curry" },
@@ -199,7 +207,8 @@
     "fun": 5
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "curry_meat",
     "looks_like": "soup_meat",
     "name": { "str_sp": "curry with meat" },
@@ -224,7 +233,8 @@
     "fun": 6
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_woods",
     "looks_like": "soup_vegetable",
     "name": { "str_sp": "woods meat soup" },
@@ -249,7 +259,8 @@
     "fun": 2
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_woods_egg",
     "looks_like": "soup_woods",
     "name": { "str_sp": "woods egg soup" },
@@ -274,7 +285,8 @@
     "fun": 2
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "hellfire_stew",
     "looks_like": "soup_woods",
     "name": { "str_sp": "hellfire stew" },
@@ -297,7 +309,8 @@
     "vitamins": [ [ "calcium", 2 ], [ "iron", 15 ], [ "meat_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_chicken",
     "looks_like": "soup_meat",
     "name": { "str_sp": "chicken noodle soup" },
@@ -322,7 +335,8 @@
     "fun": 2
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_mushroom",
     "looks_like": "soup_vegetable",
     "name": { "str_sp": "mushroom soup" },
@@ -346,7 +360,8 @@
     "vitamins": [ [ "calcium", 2 ], [ "iron", 2 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_blood",
     "looks_like": "tomato_juice",
     "name": { "str_sp": "blood soup" },
@@ -371,7 +386,8 @@
     "vitamins": [ [ "meat_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_tomato",
     "looks_like": "tomato_juice",
     "name": { "str_sp": "tomato soup" },
@@ -396,7 +412,8 @@
     "fun": 2
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_dumplings",
     "looks_like": "soup_meat",
     "name": { "str_sp": "chicken and dumplings" },
@@ -421,7 +438,8 @@
     "fun": 3
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_cullenskink",
     "looks_like": "soup_fish",
     "name": { "str_sp": "Cullen skink" },
@@ -445,7 +463,8 @@
     "fun": 3
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_lobsterstew",
     "looks_like": "soup_fish",
     "name": { "str_sp": "lobster stew" },
@@ -469,7 +488,8 @@
     "fun": 10
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_instant_chicken_noodle_prepared",
     "looks_like": "soup_chicken",
     "name": { "str_sp": "instant chicken noodle soup" },
@@ -493,7 +513,8 @@
     "fun": 1
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_instant_chicken_noodle_powder",
     "name": { "str_sp": "instant chicken noodle soup powder" },
     "looks_like": "meal_bone",
@@ -515,7 +536,8 @@
     "fun": -10
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_instant_vegetable_prepared",
     "looks_like": "soup_vegetable",
     "name": { "str_sp": "instant spring vegetable soup" },
@@ -539,7 +561,8 @@
     "fun": 1
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "soup_instant_vegetable_powder",
     "name": { "str_sp": "instant spring vegetable soup powder" },
     "looks_like": "meal_bone",

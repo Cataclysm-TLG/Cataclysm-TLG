@@ -1,6 +1,7 @@
 [
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cooking_oil",
     "name": { "str_sp": "vegetable cooking oil" },
     "weight": "15 g",
@@ -24,7 +25,8 @@
     "freezing_point": -26
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "shortening_vegetable",
     "name": { "str_sp": "vegetable shortening" },
     "weight": "18 g",
@@ -46,7 +48,8 @@
     "fun": -18
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cooking_oil_coconut",
     "name": { "str_sp": "coconut oil" },
     "weight": "18 g",
@@ -68,7 +71,8 @@
     "fun": -17
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "fat",
     "name": { "str": "chunk of fat", "str_pl": "chunks of fat" },
     "weight": "220 g",
@@ -88,7 +92,8 @@
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "tallow",
     "//": "todo: make this have lard as a special name if it's made from pigs.",
     "name": { "str_sp": "tallow" },
@@ -111,7 +116,8 @@
   },
   {
     "id": "mutant_fat",
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "copy-from": "fat",
     "name": { "str": "chunk of mutant fat", "str_pl": "chunks of mutant fat" },
     "description": "A chunk of raw fat butchered from a heavily-mutated animal.  It smells, if anything, even more disgusting than the rest of the mutant.  There are little puddles of unidentified oils dripping from it.",
@@ -121,7 +127,8 @@
   },
   {
     "id": "mutant_tallow",
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "copy-from": "tallow",
     "name": { "str_sp": "mutant tallow" },
     "description": "A smooth white block of cleaned and rendered fat, sourced from a mutant animal.  It will remain edible for a very long time, and can be used as an ingredient in many foods and projects.",
@@ -131,7 +138,8 @@
   },
   {
     "id": "mutant_human_fat",
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "copy-from": "mutant_fat",
     "name": { "str": "chunk of mutant humanoid fat", "str_pl": "chunks of mutant humanoid fat" },
     "description": "Raw fat butchered from a heavily-mutated humanoid.",
@@ -139,7 +147,8 @@
     "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "mutant_human_tallow",
     "name": { "str_sp": "mutant humanoid tallow" },
     "copy-from": "mutant_tallow",
@@ -149,15 +158,17 @@
   },
   {
     "id": "human_fat",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "copy-from": "fat",
-    "type": "COMESTIBLE",
     "name": { "str": "chunk of human fat", "str_pl": "chunks of human fat" },
     "description": "A chunk of raw fat, harvested from a human body.",
     "material": [ "hflesh" ],
     "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "human_tallow",
     "name": { "str_sp": "human tallow" },
     "copy-from": "tallow",
@@ -168,7 +179,8 @@
     "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "fat_tainted",
     "category": "other",
     "name": { "str": "chunk of tainted fat", "str_pl": "chunks of tainted fat" },
