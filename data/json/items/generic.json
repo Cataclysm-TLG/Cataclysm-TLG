@@ -337,6 +337,7 @@
     "type": "GENERIC",
     "id": "chitin_piece",
     "category": "spare_parts",
+    "subtypes": [ "MILLING" ],
     "symbol": ",",
     "color": "light_gray",
     "name": { "str": "chunk of chitin", "str_pl": "chunks of chitin" },

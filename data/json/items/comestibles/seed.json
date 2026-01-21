@@ -264,6 +264,7 @@
     "id": "seed_tomato",
     "copy-from": "seed",
     "price": "50 cent",
+    "subtypes": [ "SEED" ],
     "name": { "str_sp": "tomato seeds" },
     "description": "Some tomato seeds.",
     "flags": [ "PLANTABLE_SEED", "NUTRIENT_OVERRIDE", "INEDIBLE" ],
@@ -550,6 +551,7 @@
   {
     "type": "COMESTIBLE",
     "id": "seed_potato_raw",
+    "subtypes": [ "SEED" ],
     "copy-from": "potato",
     "category": "seeds",
     "calories": 48,
@@ -1355,7 +1357,8 @@
     "fruit": "eggplant",
     "seeds": false,
     "byproducts": [ "withered" ],
-    "grow": "60 days"  },
+    "grow": "60 days"
+  },
   {
     "type": "COMESTIBLE",
     "id": "seed_mutant",
@@ -1363,17 +1366,19 @@
     "name": { "str_sp": "mutant seed" },
     "description": "A single rock-hard seed shaped like a kidney bean.  Two dark spots on one end look a bit like a pair of eyes.",
     "category": "seeds",
+    "comestible_type": "FOOD",
     "volume": "2 ml",
     "weight": "1 g",
     "price": "1 cent",
     "price_postapoc": "1 cent",
     "material": [ "vegetable", "bone" ],
     "symbol": ".",
-    "flags": [ "TRADER_AVOID" ],
+    "flags": [ "TRADER_AVOID", "INEDIBLE" ],
     "vitamins": [ [ "human_flesh_vitamin", 10 ] ],
     "color": "brown",
     "plant_name": "mutant",
     "fruit": "null",
-    "required_terrain_flag": "TREE_PLANTABLE"
+    "required_terrain_flag": "TREE_PLANTABLE",
+    "grow": "60 days"
   }
 ]
