@@ -360,7 +360,8 @@
     "vitamins": [ [ "calcium", 1 ], [ "iron", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "hardtack",
     "name": { "str_sp": "hardtack" },
     "weight": "80 g",

@@ -1,7 +1,8 @@
 [
   {
     "abstract": "holybook_abstract",
-    "type": "BOOK",
+    "type": "ITEM",
+    "subtypes": [ "BOOK" ],
     "name": { "str": "holybook abstract" },
     "description": "theoretically this isn't a book at all",
     "price": "5 USD 50 cent",

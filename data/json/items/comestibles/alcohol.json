@@ -905,7 +905,8 @@
     "vitamins": [ [ "junk_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "drink_gintonic",
     "looks_like": "gin",
     "name": { "str_sp": "gin and tonic" },
