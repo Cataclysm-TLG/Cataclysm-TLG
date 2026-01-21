@@ -28,7 +28,8 @@
   },
   {
     "id": "bandana_head",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "category": "clothing",
     "name": { "str": "kerchief" },
     "description": "A cotton bandana worn over the head.  It can be adjusted to cover the mouth and nose instead.",

@@ -166,7 +166,8 @@
     "ammo_type": "nitrogen"
   },
   {
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "id": "betavoltaic",
     "category": "spare_parts",
     "price": "100 USD",
@@ -180,7 +181,8 @@
     "weight": "160 g"
   },
   {
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "id": "RTG_coffee",
     "category": "spare_parts",
     "price": "200 USD",

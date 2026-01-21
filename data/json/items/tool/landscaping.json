@@ -1,7 +1,7 @@
 [
   {
     "id": "digging_stick",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "digging stick" },
     "category": "tools",
     "description": "A large stick with the end carved into a broad blade for digging.  It could be used to dig shallow pits, but not deep ones.",
@@ -20,7 +20,8 @@
   },
   {
     "id": "g_shovel",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "trowel" },
     "description": "A small, sharp gardening shovel, perfect for digging up grubs and worms.",
     "weight": "280 g",
@@ -39,7 +40,8 @@
   },
   {
     "id": "hoe",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "hoe" },
     "description": "A farming implement.  You can use it to turn tillable land into a slow-to-cross pile of dirt, or dig a shallow pit.",
     "weight": "1088 g",
@@ -60,7 +62,8 @@
   },
   {
     "id": "bronze_hoe",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "bronze hoe" },
     "description": "A farming implement made from bronze.  The added heft and durability should let you till soil for farming more easily as well.",
     "weight": "3100 g",
@@ -82,7 +85,8 @@
   },
   {
     "id": "primitive_shovel",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "wooden shovel" },
     "description": "A crude shovel with a shovelhead made from wood, historically used as an alternative to metal shovels when metal was too expensive.  It works passably well, but really can't compare to a metal shovel.",
     "weight": "1581 g",
@@ -98,7 +102,8 @@
   },
   {
     "id": "rake",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "metal rake" },
     "description": "A sturdy metal rake, a must-have during autumn.",
     "weight": "1500 g",
@@ -115,7 +120,8 @@
   },
   {
     "id": "rake_plastic",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "plastic rake" },
     "description": "A cheap plastic rake.  Will break quite quickly if used for anything other than raking leaves.",
     "weight": "1000 g",
@@ -132,7 +138,8 @@
   },
   {
     "id": "scythe",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "scythe" },
     "description": "An old-fashioned farming tool used to cut tall grass.  Despite being a giant blade on the end of a stick, it is incredibly awkward to use for anything but its intended purpose.",
     "weight": "1700 g",
@@ -152,7 +159,8 @@
   },
   {
     "id": "shovel",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "shovel" },
     "description": "A digging tool.  Use it to dig pits adjacent to your location.",
     "weight": "2032 g",
@@ -172,7 +180,8 @@
   {
     "id": "shovel_snow",
     "looks_like": "shovel",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "snow shovel" },
     "description": "A sturdy metal shovel used for picking up snow and moving it somewhere else.  It was useful before the cataclysm, but now it's useless.",
     "weight": "2200 g",
@@ -192,7 +201,8 @@
   {
     "id": "shovel_snow_plastic",
     "looks_like": "shovel",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "plastic snow shovel" },
     "description": "A cheap plastic shovel used for picking up snow and moving it somewhere else.  It was useful before the cataclysm, but now it's useless.",
     "weight": "1500 g",
@@ -210,7 +220,8 @@
   },
   {
     "id": "sickle_stone",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "stone sickle" },
     "description": "A primitive tool for cutting grass.  The sharp, crescent-shaped stone at the end of the handle is barely good enough for the job.",
     "weight": "470 g",
@@ -230,7 +241,8 @@
   },
   {
     "id": "sickle",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "sickle" },
     "description": "An old-fashioned farming tool for cutting tall grass.",
     "weight": "907 g",
@@ -250,7 +262,8 @@
   },
   {
     "id": "bronze_sickle",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "bronze sickle" },
     "description": "A handheld grass-cutting tool with a cast bronze blade, fastened to a wood handle wrapped with leather.",
     "weight": "1 kg",
@@ -270,7 +283,8 @@
   },
   {
     "id": "trimmer_off",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "hedge trimmer (off)", "str_pl": "hedge trimmers (off)" },
     "description": "A cordless, double-sided, gasoline-powered hedge trimmer.  A long line of sharp-edged teeth extends from the engine; turning the trimmer on will make them rapidly vibrate.  The poor man's chainsaw as far as the zombies are concerned.",
     "weight": "4500 g",
@@ -312,7 +326,8 @@
   {
     "id": "trimmer_on",
     "copy-from": "trimmer_off",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "hedge trimmer (on)", "str_pl": "hedge trimmers (on)" },
     "description": "A cordless, double-sided, gasoline-powered hedge trimmer.  It is currently on, ready to do some zombie topiary; use this item to turn it off.",
     "power_draw": "500 W",

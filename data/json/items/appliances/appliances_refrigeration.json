@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "apartment_fridge",
     "looks_like": "fridge",
     "symbol": "F",
@@ -20,7 +20,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "311 L", "max_contains_weight": "800 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "minifridge",
     "name": { "str": "minifridge" },
     "description": "A disconnected minifridge, similar to ones in some luxury limousines.  Activate to deploy and connect to your electric grid.",
@@ -38,7 +38,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "96 L", "max_contains_weight": "300 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "glass_fridge",
     "looks_like": "fridge",
     "symbol": "F",
@@ -58,7 +58,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "347 L", "max_contains_weight": "800 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "glass_fridge_double",
     "looks_like": "fridge",
     "symbol": "F",
@@ -78,7 +78,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "991 L", "max_contains_weight": "3000 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "heavy_duty_fridge",
     "looks_like": "fridge",
     "symbol": "F",
@@ -97,7 +97,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "700 L", "max_contains_weight": "2500 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "display_fridge",
     "looks_like": "fridge",
     "symbol": "F",
@@ -116,7 +116,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "600 L", "max_contains_weight": "1200 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "apartment_freezer",
     "looks_like": "fridge",
     "symbol": "F",
@@ -136,7 +136,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "122 L", "max_contains_weight": "350 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "minifreezer",
     "name": { "str": "minifreezer" },
     "description": "A compact version of an upright freezer, designed as a mobile solution for freezing food.  Activate to deploy and connect to your electric grid.",
@@ -153,7 +153,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "90 L", "max_contains_weight": "300 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chest_minifreezer",
     "name": { "str": "chest minifreezer" },
     "description": "A compact version of a chest freezer, designed as a mobile solution for freezing food, but it's pretty tricky to pull anything out from the bottom.  Perfect choice to put in your closet and forget for a year.  Activate to deploy and connect to your electric grid.",
@@ -170,10 +170,10 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "99 L", "max_contains_weight": "300 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chest_freezer",
     "name": { "str": "chest freezer" },
-    "description": "A hefty chest freezer, designed to store plenty of perishables for a minuscule amount of power.  Activate to deploy and connect to your electric grid.",
+    "description": "A hefty chest freezer, designed to store plenty of perishables for less power than a standing unit.  Activate to deploy and connect to your electric grid.",
     "//": "Prodis Arctic AR350SS, 850 x 1030 x 750 mm, gross capacity 350L, 0.724 kwh/day, 30kwh",
     "use_action": { "type": "deploy_appliance", "base": "chest_freezer" },
     "weight": "50 kg",
@@ -186,7 +186,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "350 L", "max_contains_weight": "1100 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "heavy_duty_freezer",
     "name": { "str": "heavy-duty freezer" },
     "description": "A heavy-duty upright freezer.  Big as a closet, heavy as a tank, can probably fit enough meat to feed a little colony for a week, but consumes power like no other.  Activate to deploy and connect to your electric grid.",
@@ -202,7 +202,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "745 L", "max_contains_weight": "2500 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "glass_freezer",
     "looks_like": "fridge",
     "symbol": "F",
@@ -222,7 +222,7 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "400 L", "max_contains_weight": "1200 kg" } ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "display_freezer",
     "looks_like": "fridge",
     "symbol": "F",

@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "kanabo_wood",
     "name": { "str_sp": "kanabō" },
     "description": "A two-handed war club used in feudal Japan by samurai against armored opponents, it's made from hardwood studded with metal.",
@@ -21,7 +21,7 @@
     "melee_damage": { "bash": 34 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bat",
     "name": { "str": "baseball bat" },
     "description": "A sturdy wooden cudgel once essential to the great American pastime.",
@@ -40,7 +40,7 @@
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bat_metal",
     "name": { "str": "aluminum bat" },
     "description": "An aluminum version of the tapered club used to play baseball.  It's lighter, stronger, and hits harder than the wooden variety.",
@@ -60,7 +60,7 @@
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bat_nerf",
     "name": { "str": "foam rubber bat" },
     "description": "A baseball bat made of foam rubber with a plastic handle.  Light and easy to wield, but almost completely ineffective if your goal is to hurt someone.",
@@ -78,7 +78,7 @@
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "baton",
     "category": "weapons",
     "name": { "str": "expandable baton (collapsed)", "str_pl": "expandable batons (collapsed)" },
@@ -97,7 +97,7 @@
     "melee_damage": { "bash": 4 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "baton-extended",
     "category": "weapons",
     "name": { "str": "expandable baton (extended)", "str_pl": "expandable batons (extended)" },
@@ -119,7 +119,7 @@
   },
   {
     "id": "blackjack",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "dark_gray",
     "name": { "str": "blackjack" },
@@ -139,7 +139,7 @@
   },
   {
     "id": "bokken",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "brown",
     "name": { "str_sp": "bokken" },
@@ -158,7 +158,7 @@
     "melee_damage": { "bash": 18 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bowling_pin",
     "name": { "str": "bowling pin" },
     "description": "A standard bowling pin.  This could make a decent weapon, if it came to that.",
@@ -176,7 +176,7 @@
     "melee_damage": { "bash": 15 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bwirebat",
     "name": { "str": "barbed wire bat" },
     "description": "A baseball bat wrapped with barbed wire, giving it a little extra oomph without compromising its durability.",
@@ -195,7 +195,7 @@
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "cane",
     "name": { "str": "walking cane" },
     "description": "A walking stick designed to lean on, whether for mobility assistance or puttin' on the ritz.",
@@ -214,7 +214,7 @@
     "melee_damage": { "bash": 12 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "cane_toy",
     "name": { "str": "plastic toy cane" },
     "description": "A sinister looking cane made of plastic.  It has a shiny red orb gripped by claws at the handle.",
@@ -251,7 +251,7 @@
   },
   {
     "id": "crutch",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "dark_gray",
     "name": { "str": "aluminum crutch", "str_pl": "aluminum crutches" },
@@ -271,7 +271,7 @@
   },
   {
     "id": "crutches",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "dark_gray",
     "name": { "str": "aluminum crutches", "str_pl": "pairs of aluminum crutches" },
@@ -289,7 +289,7 @@
   },
   {
     "id": "crutch_wooden",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "dark_gray",
     "name": { "str": "wooden crutch", "str_pl": "wooden crutches" },
@@ -309,7 +309,7 @@
   },
   {
     "id": "crutches_wooden",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "dark_gray",
     "name": { "str": "wooden crutches", "str_pl": "pairs of wooden crutches" },
@@ -327,7 +327,7 @@
   },
   {
     "id": "crutches_mismatched",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "dark_gray",
     "name": { "str": "mismatched crutches", "str_pl": "pairs of mismatched crutches" },
@@ -344,7 +344,7 @@
     "melee_damage": { "bash": 9 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "id": "cudgel",
     "name": { "str": "cudgel" },
@@ -363,7 +363,7 @@
     "melee_damage": { "bash": 17 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "id": "cudgel_spiked",
     "name": { "str": "spiked cudgel" },
@@ -382,7 +382,7 @@
     "melee_damage": { "bash": 16, "stab": 4 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "golf_club",
     "symbol": ";",
     "color": "light_gray",
@@ -401,7 +401,7 @@
     "melee_damage": { "bash": 20 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "hammer_sledge",
     "name": { "str": "sledgehammer" },
     "description": "A heavy steel head on a long shaft, designed for demolition work.  It's a very hard-hitting melee weapon, but slow to swing and will probably exhaust you quickly.",
@@ -421,7 +421,7 @@
     "melee_damage": { "bash": 65 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "hammer_sledge_engineer",
     "name": { "str": "lump hammer" },
     "description": "A stout and hefty hammer, more akin to a mini sledge than a claw or ball-peen.  It's useful for portable demolition work, but unwieldy as a weapon.",
@@ -441,7 +441,7 @@
     "melee_damage": { "bash": 28 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "hockey_stick",
     "symbol": ";",
     "color": "white",
@@ -460,7 +460,7 @@
     "melee_damage": { "bash": 14 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "macuahuitl_glass",
     "name": { "str": "glass-bladed macuahuitl" },
     "description": "A flat wooden club with sharpened flakes of stone, ceramic, or glass stuck to both sides, a reasonable facsimile of the weapons once used by Aztec warriors.",
@@ -479,7 +479,7 @@
     "melee_damage": { "bash": 16, "cut": 10 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "macuahuitl_teeth",
     "name": { "str": "tooth-bladed macuahuitl" },
     "description": "A flat wooden club with impossibly-sharp teeth stuck to both sides, a postapocalyptic facsimile of the weapons once used by Aztec warriors.",
@@ -498,7 +498,7 @@
     "melee_damage": { "bash": 16, "cut": 20 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "macuahuitl_steel",
     "name": { "str": "steel bladed macuahuitl" },
     "description": "A modern reimagining of the ancient Aztec weapon, made of a flat wooden club inset along its edges with steel razor blades.",
@@ -517,7 +517,7 @@
     "melee_damage": { "bash": 16, "cut": 14 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "i_staff",
     "symbol": "/",
     "color": "brown",
@@ -539,7 +539,7 @@
     "melee_damage": { "bash": 19 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "warhammer",
     "name": { "str": "war hammer" },
     "description": "A medieval hammer with a spike on one end, made for battle.  Its odd shape and balance make it an excellent weapon, but an ineffective tool.",
@@ -560,7 +560,7 @@
   },
   {
     "id": "lucerne_hammer",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "lucerne hammer" },
@@ -581,7 +581,7 @@
     "melee_damage": { "bash": 33, "stab": 28 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "mace",
     "name": { "str": "mace" },
     "description": "A medieval weapon consisting of a wooden handle with a knob-shaped steel head.",
@@ -603,7 +603,7 @@
     "melee_damage": { "bash": 30 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "staff_pipe",
     "name": { "str": "pipe staff" },
     "description": "Two steel pipes fitted end-to-end in a clumsy facsimile of a quarterstaff.",
@@ -623,7 +623,7 @@
     "melee_damage": { "bash": 21 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "mace_bronze",
     "name": { "str": "bronze mace" },
     "description": "A stick with a lump of bronze at one end.  While not as durable as steel, its heft makes it every bit as effective.",
@@ -644,7 +644,7 @@
     "melee_damage": { "bash": 30 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "mjolnir",
     "name": { "str": "Mjölnir" },
     "description": "A large hammer, forged from the heart of a dying star.  It bears the inscription:\n\nWhosoever holds this hammer,\nIf he be worthy,\nShall possess the power to…\nCRUSH!'",
@@ -663,7 +663,7 @@
     "melee_damage": { "bash": 9999 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "morningstar",
     "name": { "str": "morningstar" },
     "description": "A medieval weapon consisting of a wood handle with a spiked metal ball on the end.  It is bigger and heavier than a typical mace, and its spikes can deal serious damage to soft targets.",
@@ -684,7 +684,7 @@
     "melee_damage": { "bash": 36, "stab": 7 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "nailbat",
     "name": { "str": "nail bat" },
     "description": "A baseball bat with several nails driven through it.  The spikes look dangerous, but they're sure to make it less durable.",
@@ -703,7 +703,7 @@
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "nailboard",
     "name": { "str": "nail board" },
     "description": "A hefty plank of wood.  The nails driven through one end look nasty enough, but it remains a very awkward weapon.",
@@ -721,7 +721,7 @@
     "melee_damage": { "bash": 15, "stab": 3 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "pool_cue",
     "name": { "str": "pool cue" },
     "description": "A hardwood stick designed for hitting colorful balls around a felt table.  Truly, the coolest of sports.",
@@ -742,7 +742,7 @@
     "//2": "Based on https://www.amazon.com/dp/B08183YH7Q"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "walking_stick",
     "symbol": "/",
     "color": "brown",
@@ -762,7 +762,7 @@
     "melee_damage": { "bash": 16 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "q_staff",
     "symbol": "/",
     "color": "brown",
@@ -782,7 +782,7 @@
     "melee_damage": { "bash": 18 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bo",
     "symbol": "/",
     "color": "brown",
@@ -804,7 +804,7 @@
   },
   {
     "id": "shillelagh",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "brown",
     "name": { "str": "shillelagh" },
@@ -824,7 +824,7 @@
   },
   {
     "id": "shillelagh_weighted",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "looks_like": "shillelagh",
     "color": "brown",
@@ -845,7 +845,7 @@
   },
   {
     "id": "club_war",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "brown",
     "name": { "str": "wooden war club" },
@@ -866,7 +866,7 @@
   },
   {
     "id": "club_war_stone",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "brown",
     "name": { "str": "stone war club" },
@@ -887,7 +887,8 @@
   },
   {
     "id": "shock_staff",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "powered quarterstaff", "str_pl": "powered quarterstaves" },
     "copy-from": "i_staff",
     "description": "An ironshod quarterstaff that has a high-voltage stun gun built into the handle.  The stun gun is wired to the metal caps at either end of the staff, allowing you to zap a dangerous opponent should beating them senseless with it prove too hazardous.",
@@ -919,7 +920,8 @@
   },
   {
     "id": "shocktonfa_off",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "tactical tonfa (off)", "str_pl": "tactical tonfas (off)" },
     "description": "A reinforced plastic tonfa; the core is filled with capacitors and a high-yield rechargeable storage battery.  When a switch on the handle is pressed, a high-voltage current is transmitted to the two electrodes mounted in the end of the tonfa, and by extension to anyone unfortunate enough to be in contact with them.  It also has a nifty flashlight, which is off at the moment.",
@@ -951,7 +953,8 @@
   {
     "id": "shocktonfa_on",
     "copy-from": "shocktonfa_off",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "tactical tonfa (on)", "str_pl": "tactical tonfas (on)" },
     "description": "A reinforced plastic tonfa; the core is filled with capacitors and a high-yield rechargeable storage battery.  When a switch on the handle is pressed, a high-voltage current is transmitted to the two electrodes mounted in the end of the weapon, and by extension to anyone unfortunate enough to be in contact with them.  The integral flashlight is turned on, continually draining power and lighting the surrounding area.",
     "power_draw": "15 W",
@@ -962,7 +965,7 @@
     "weapon_category": [ "BATONS", "KARATE_WEAPONS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "tonfa",
     "name": { "str": "tonfa" },
     "description": "A hard plastic truncheon commonly employed by police.  Originally an Okinawan weapon, it consists of a stick with a perpendicular handle attached a third of the way down its length.",
@@ -981,7 +984,7 @@
     "melee_damage": { "bash": 15 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "tonfa_wood",
     "name": { "str": "wooden tonfa" },
     "description": "A stout wooden truncheon of the sort commonly employed by police.  Originally an Okinawan weapon, it consists of a stick with a perpendicular handle attached a third of the way down its length.",

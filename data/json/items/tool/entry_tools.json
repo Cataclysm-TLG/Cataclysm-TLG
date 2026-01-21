@@ -1,7 +1,8 @@
 [
   {
     "id": "crowbar",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "crowbar" },
     "description": "A long prying tool with a slender wedge at either end.  Use it to open locked doors without destroying them, or to lift manhole covers.",
     "weight": "1884 g",
@@ -22,7 +23,8 @@
   },
   {
     "id": "emergency_lockpick",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "rudimentary lockpick" },
     "description": "A pair of thin pieces of metal, one bent in an 'L' shape to push tumblers and the other acting as a torsion wrench.  These tools are almost totally inadequate for picking locks, but when you've got nothing else, it might work.",
     "weight": "25 g",
@@ -36,7 +38,8 @@
   },
   {
     "id": "crude_picklock",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "improvised lockpick" },
     "description": "An improvised pick and torsion wrench made from scrap metal.  You'll need MacGyver-like skills to open locks with these as they are brittle, but they lower the chances of alarms being set off.",
     "weight": "23 g",
@@ -50,7 +53,8 @@
   },
   {
     "id": "iceaxe",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "ice axe" },
     "description": "A short ice axe with a spiked head and a small hammer on the other end, a multi-purpose hiking and climbing tool used by mountaineers.  It is sturdy enough to lift manhole covers.",
     "weight": "300 g",
@@ -71,7 +75,8 @@
   },
   {
     "id": "makeshift_crowbar",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "makeshift crowbar" },
     "description": "A pipe with both ends bent and hammered flat to resemble a crowbar.  It's a poor weapon and a terrible prying tool, but sometimes you have to make do.",
     "copy-from": "pipe",
@@ -92,7 +97,8 @@
   },
   {
     "id": "picklocks",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "locksmith kit" },
     "description": "A locksmith's set of sturdy steel lockpicks and torsion wrenches.  It is essential for silently and quickly opening locks, provided you have some lockpicking and mechanical skills.",
     "weight": "544 g",
@@ -106,7 +112,8 @@
   },
   {
     "id": "pseudo_bio_picklock",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "bio lockpick" },
     "description": "this a pseudo item",
     "volume": "0 ml",

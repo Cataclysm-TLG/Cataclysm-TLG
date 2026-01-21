@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "sheet_metal",
     "name": { "str_sp": "sheet metal" },
     "description": "A thin sheet of metal.",
@@ -20,7 +20,7 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "wood_plate",
     "name": { "str": "wooden armor kit" },
     "description": "A bundle of planks prepared to be used as vehicle armor.",
@@ -36,7 +36,7 @@
     "melee_damage": { "bash": 10 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "steel_plate",
     "name": { "str_sp": "steel plating" },
     "description": "A piece of vehicle armor plating made of steel.",
@@ -54,7 +54,7 @@
     "melee_damage": { "bash": 6 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "alloy_plate",
     "name": { "str_sp": "superalloy plating" },
     "description": "A piece of vehicle armor plating made of sturdy superalloy.",
@@ -72,7 +72,7 @@
     "melee_damage": { "bash": 6 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "alloy_sheet",
     "name": { "str": "superalloy sheet" },
     "description": "A sheet of sturdy superalloy; incredibly hard, yet incredibly malleable.",
@@ -89,7 +89,7 @@
     "use_action": [ "HEAT_SOLID_ITEMS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "spiked_plate",
     "name": { "str_sp": "spiked plating" },
     "description": "A piece of vehicle armor plating made of steel.  It is covered with menacing spikes.",
@@ -108,7 +108,7 @@
     "melee_damage": { "bash": 6, "stab": 3 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "hard_plate",
     "name": { "str": "hard plating" },
     "description": "A piece of very thick vehicle armor plating made of tempered steel.  Can be used as a makeshift anvil.",
@@ -126,7 +126,7 @@
     "melee_damage": { "bash": 6 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "mil_plate",
     "name": { "str": "military composite plating" },
     "description": "A thick sheet of military-grade armor; the best bullet-stopper you can stick on a vehicle.",
@@ -145,7 +145,7 @@
     "melee_damage": { "bash": 8 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chitin_plate",
     "symbol": "]",
     "color": "yellow",
@@ -161,7 +161,7 @@
     "melee_damage": { "bash": 8 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "acidchitin_plate",
     "copy-from": "chitin_plate",
     "name": { "str": "biosilicified chitin armor kit" },
@@ -169,7 +169,7 @@
     "material": [ "acidchitin" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "counterweight",
     "name": { "str": "counterweight" },
     "description": "A heavy block of steel used for balancing other heavy things.  Can be used as a makeshift anvil.",

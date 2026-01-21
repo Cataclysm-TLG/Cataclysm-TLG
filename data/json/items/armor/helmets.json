@@ -1156,7 +1156,8 @@
   },
   {
     "id": "helmet_motor",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "category": "armor",
     "name": { "str": "full-face motorcycle helmet" },
     "description": "A helmet that covers the entire head along with glareproof visors, offering the best protection for when you ride around on your motorcycle.  Activate to raise the visor.",
@@ -1250,7 +1251,8 @@
   {
     "id": "helmet_motor_raised",
     "looks_like": "helmet_motor",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "category": "armor",
     "name": { "str": "full-face motorcycle helmet (raised visor)", "str_pl": "full-face motorcycle helmets (raised visor)" },
     "description": "A helmet that covers the entire head along with glareproof visors, offering the best protection when you ride around on your motorcycle.  The visor is raised.  Activate to put down the visor.",
@@ -1324,7 +1326,8 @@
   {
     "id": "helmet_riding",
     "repairs_like": "nomex_hood",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "category": "armor",
     "name": { "str": "riding helmet" },
     "description": "A helmet designed to protect from falls and kicks involving horses, has a small peak to protect from glare.",

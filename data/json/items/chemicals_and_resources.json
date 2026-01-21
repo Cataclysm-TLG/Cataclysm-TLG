@@ -203,7 +203,7 @@
     "stack_size": 1
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "material_shrd_limestone",
     "symbol": ",",
     "color": "light_gray",
@@ -219,7 +219,7 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "material_rocksalt",
     "category": "food",
     "price": "50 cent",
@@ -234,7 +234,7 @@
     "melee_damage": { "bash": 1 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "material_rhodonite",
     "category": "chems",
     "price": "2 USD 50 cent",
@@ -250,7 +250,7 @@
     "melee_damage": { "bash": 1 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "material_zincite",
     "category": "chems",
     "price": "2 USD 50 cent",
@@ -446,7 +446,7 @@
     "fun": -15
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "insecticide",
     "category": "chems",
     "name": { "str_sp": "insecticide" },
@@ -899,7 +899,7 @@
     "container": "bottle_glass"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "plutonium",
     "name": { "str_sp": "plutonium" },
     "category": "chems",
@@ -915,7 +915,7 @@
     "weight": "990 g"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "uranium",
     "name": { "str_sp": "uranium" },
     "category": "chems",
@@ -1214,7 +1214,7 @@
     "variables": { "water_per_tablet": "4" }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "hickory_root",
     "symbol": "/",
     "color": "brown",
@@ -1228,7 +1228,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "hickory_nut",
     "category": "food",
     "symbol": "%",
@@ -1243,7 +1243,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "pecan",
     "category": "food",
     "symbol": "%",
@@ -1258,7 +1258,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "pistachio",
     "category": "food",
     "symbol": "%",
@@ -1273,7 +1273,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "almond",
     "category": "food",
     "symbol": "%",
@@ -1288,7 +1288,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "peanut",
     "category": "food",
     "symbol": "%",
@@ -1303,7 +1303,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "hazelnut",
     "category": "food",
     "symbol": "%",
@@ -1318,7 +1318,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chestnut",
     "category": "food",
     "symbol": "%",
@@ -1333,7 +1333,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "walnut",
     "category": "food",
     "symbol": "%",
@@ -1348,7 +1348,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "butternut",
     "category": "food",
     "symbol": "%",
@@ -1363,7 +1363,7 @@
     "to_hit": -2
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "butternut_husk",
     "category": "food",
     "symbol": "%",
@@ -1675,7 +1675,7 @@
     "phase": "liquid"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chem_peptone_broth",
     "category": "chems",
     "price": "1 cent",
@@ -1691,7 +1691,7 @@
     "weight": "1 g"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chem_agar",
     "category": "chems",
     "price": "1 cent",
@@ -1707,7 +1707,7 @@
     "weight": "1 g"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chem_acrylamide",
     "category": "chems",
     "price": "1 cent",
@@ -1724,7 +1724,7 @@
   },
   {
     "id": "steel_grille",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "other",
     "name": { "str": "steel grille" },
     "description": "A metal grille.  It can be used as a framework for making a chemical catalyst.",
@@ -1742,7 +1742,7 @@
   },
   {
     "id": "cobalt_60",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "other",
     "price": "10 USD",
     "price_postapoc": "50 cent",
@@ -1851,7 +1851,7 @@
     "looks_like": "milk"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chem_citric_acid",
     "category": "chems",
     "price": "1 cent",

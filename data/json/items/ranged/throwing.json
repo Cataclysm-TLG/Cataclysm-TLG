@@ -18,7 +18,7 @@
     "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "disc_golf",
     "category": "weapons",
     "price": "10 USD",
@@ -34,7 +34,7 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "frisbee",
     "category": "weapons",
     "price": "10 USD",
@@ -67,7 +67,7 @@
     "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "lawn_dart",
     "category": "weapons",
     "price": "10 USD",
@@ -85,7 +85,7 @@
     "melee_damage": { "cut": 8 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "weighted_dart",
     "category": "weapons",
     "price": "10 USD",
@@ -104,7 +104,7 @@
     "melee_damage": { "cut": 8 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "throwing_axe",
     "category": "weapons",
     "price": "124 USD",
@@ -123,7 +123,7 @@
     "melee_damage": { "bash": 10, "cut": 17 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "throwing_knife",
     "category": "weapons",
     "price": "52 USD",
@@ -159,7 +159,7 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "javelin_fletched",
     "name": { "str": "iron war dart" },
     "description": "An iron-tipped fletched throwing spear with a throwing loop for extra range.",
@@ -179,7 +179,7 @@
     "melee_damage": { "bash": 5, "stab": 18 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "javelin_fletched_bronze",
     "name": { "str": "bronze war dart" },
     "description": "A bronze-tipped fletched throwing spear with a throwing loop for extra range.",

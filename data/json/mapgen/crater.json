@@ -11,7 +11,8 @@
   },
   {
     "id": "crater_bomb",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "AGM-114 Hellfire missile" },
     "description": "This item is used to make a hole for a crater.  It should not otherwise appear in game.",

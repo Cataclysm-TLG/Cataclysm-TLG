@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "broken_yrax_trifacet",
     "symbol": ",",
     "color": "light_gray",
@@ -17,7 +17,7 @@
   },
   {
     "id": "broken_golden_monolith",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "I",
     "name": { "str": "golden monolith" },
     "description": "A large golden monolith.  Carefully carved asymmetric edges betray its artificial origin.",
@@ -33,7 +33,7 @@
   },
   {
     "id": "broken_yrax_delta",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": ",",
     "name": { "str": "inert delta" },
     "description": "A small piece of inscrutable alloy shaped like an arrow's broadhead.  It doesn't look like much of a robot once dead.",
