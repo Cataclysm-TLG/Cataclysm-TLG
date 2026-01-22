@@ -1854,22 +1854,6 @@ static std::pair<std::string, use_function> use_function_reader_helper(
     return std::make_pair( "", use_function() );
 }
 
-void Item_factory::add_item_type( const itype &def )
-{
-    if( m_runtimes.count( def.id ) > 0 ) {
-        // Do NOT allow overwriting it, it's undefined behavior.
-        debugmsg( "Tried to add runtime type %s, but it exists already", def.id.c_str() );
-        return;
-    }
-
-    auto &new_item_ptr = m_runtimes[ def.id ];
-    new_item_ptr = std::make_unique<itype>( def );
-    if( frozen ) {
-        finalize_pre( *new_item_ptr );
-        finalize_post( *new_item_ptr );
-    }
-}
-
 // Reads use_function as either an object, array, or string into a map.
 class use_function_reader_map : public generic_typed_reader<use_function_reader_map>
 {
