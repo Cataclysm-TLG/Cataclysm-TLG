@@ -107,7 +107,8 @@
   {
     "id": "feral_rifle",
     "copy-from": "feral_militia_gun",
-    "type": "GUN",
+        "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "name": { "str": "mad militias' rifle" },
     "description": "A fake semi-auto rifle for feral militiamen (because monster aiming is too lethal).",
     "ammo": [ "ammo_rifle" ],
