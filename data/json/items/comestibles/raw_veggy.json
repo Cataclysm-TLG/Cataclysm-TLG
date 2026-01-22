@@ -520,7 +520,7 @@
   },
   {
     "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
+    "subtypes": [ "COMESTIBLE", "SEED" ],
     "id": "garlic",
     "name": { "str": "garlic bulb" },
     "weight": "18 g",
@@ -539,7 +539,10 @@
     "flags": [ "RAW", "PLANTABLE_SEED" ],
     "vitamins": [ [ "vitC", "5400 μg" ], [ "iron", "600 μg" ], [ "calcium", "32400 μg" ], [ "vegetable_allergen", 1 ] ],
     "//": "Who in their right mind would eat an entire garlic bulb raw?",
-    "seed_data": { "plant_name": "garlic", "fruit": "garlic", "byproducts": [ "withered" ], "grow": "65 days" }
+    "plant_name": "garlic",
+    "fruit": "garlic",
+    "byproducts": [ "withered" ],
+    "grow": "65 days"
   },
   {
     "type": "ITEM",

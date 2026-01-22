@@ -388,7 +388,7 @@
     "material": [ "steel" ],
     "symbol": "(",
     "color": "dark_gray",
-    "ammo": "10mm",
+    "ammo": [ "10mm" ],
     "dispersion": 460,
     "durability": 6,
     "min_cycle_recoil": 570,

@@ -1345,7 +1345,6 @@
       "NO_UNLOAD",
       "COMBAT_TOGGLEABLE"
     ],
-    "relic_data": { "passive_effects": [ { "id": "ench_climate_control_all" } ] },
     "armor": [
       {
         "material": [

@@ -210,7 +210,7 @@
     "id": "modular_m27_assault_rifle",
     "looks_like": "modular_ar15",
     "type": "ITEM",
-    "subtypes": [ "GUN" ],
+    "subtypes": [ "GUN"],
     "copy-from": "rifle_auto",
     "name": { "str": "M27 assault rifle" },
     "description": "Designed to replace the M4 Carbine, the M27 assault rifle features most of the former's strengths, while being considerably more durable.  It is chambered in 5.56x45mm and accepts STANAG magazines.",

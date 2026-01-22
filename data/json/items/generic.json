@@ -2903,17 +2903,15 @@
       }
     ],
     "material": [ "paper" ],
-    "armor_data": {
-      "warmth": 6,
-      "armor": [
-        {
-          "material": [ { "type": "paper", "covered_by_mat": 100, "thickness": 0.1 } ],
-          "encumbrance": 25,
-          "coverage": 70,
-          "covers": [ "mouth" ]
-        }
-      ]
-    },
+    "warmth": 6,
+    "armor": [
+      {
+        "material": [ { "type": "paper", "covered_by_mat": 100, "thickness": 0.1 } ],
+        "encumbrance": 25,
+        "coverage": 70,
+        "covers": [ "mouth" ]
+      }
+    ],
     "flags": [ "LITCIG", "LIGHT_2", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
   },
   {
@@ -2952,17 +2950,15 @@
       }
     ],
     "material": [ "paper" ],
-    "armor_data": {
-      "warmth": 3,
-      "armor": [
-        {
-          "material": [ { "type": "paper", "covered_by_mat": 100, "thickness": 0.1 } ],
-          "encumbrance": 15,
-          "coverage": 25,
-          "covers": [ "mouth" ]
-        }
-      ]
-    },
+    "warmth": 3,
+    "armor": [
+      {
+        "material": [ { "type": "paper", "covered_by_mat": 100, "thickness": 0.1 } ],
+        "encumbrance": 15,
+        "coverage": 25,
+        "covers": [ "mouth" ]
+      }
+    ],
     "flags": [ "LITCIG", "LIGHT_2", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
   },
   {
@@ -3001,17 +2997,15 @@
       }
     ],
     "material": [ "paper" ],
-    "armor_data": {
-      "warmth": 3,
-      "armor": [
-        {
-          "material": [ { "type": "paper", "covered_by_mat": 100, "thickness": 0.1 } ],
-          "encumbrance": 15,
-          "coverage": 25,
-          "covers": [ "mouth" ]
-        }
-      ]
-    },
+    "warmth": 3,
+    "armor": [
+      {
+        "material": [ { "type": "paper", "covered_by_mat": 100, "thickness": 0.1 } ],
+        "encumbrance": 15,
+        "coverage": 25,
+        "covers": [ "mouth" ]
+      }
+    ],
     "flags": [ "LITCIG", "LIGHT_2", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
   },
   {
