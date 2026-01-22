@@ -287,12 +287,11 @@ static std::set<tripoint_bub_ms> spell_effect_cone_range_override(
     if( !params.ignore_walls ) {
         map &here = get_map();
         for( const tripoint_bub_ms &ep : end_points ) {
-            tripoint_bub_ms last_point = source; // FIX: reset per ray
+            tripoint_bub_ms last_point = source; // reset per ray
             const std::vector<tripoint_bub_ms> trajectory = line_to( source, ep );
             for( const tripoint_bub_ms &tp : trajectory ) {
-                if( !here.obstructed_by_vehicle_rotation( tp, last_point ) ||
-                    here.coverage( tp ) == 0 ||
-                    rng( 1, 100 ) > here.coverage( tp ) ) {
+                if( !here.obstructed_by_vehicle_rotation( last_point, tp ) &&
+                    ( here.coverage( tp ) == 0 || rng( 1, 100 ) > here.coverage( tp ) ) ) {
                     targets.emplace( tp );
                 } else {
                     break;
@@ -322,9 +321,10 @@ static bool test_always_true( const tripoint_bub_ms &, const tripoint_bub_ms & )
 static bool test_coverage( const tripoint_bub_ms &p, const tripoint_bub_ms &prev )
 {
     map &here = get_map();
-    return here.coverage( p ) == 0 ||
-           rng( 1, 100 ) > here.coverage( p ) ||
-           !here.obstructed_by_vehicle_rotation( prev, p );
+    const int cover = here.coverage( p );
+    return
+        ( cover == 0 || rng( 1, 100 ) > cover ) &&
+        !here.obstructed_by_vehicle_rotation( prev, p );
 }
 
 std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parameters &params,
@@ -930,7 +930,6 @@ int area_expander::run( const tripoint_bub_ms &center )
         for( size_t i = 0; i < 8; i++ ) {
             const tripoint_bub_ms pt = best.position + point( x_offset[ i ], y_offset[ i ] );
 
-            // Cheap, deterministic rejects first
             float center_range = static_cast<float>( rl_dist( center, pt ) );
             if( max_range > 0 && center_range > max_range ) {
                 continue;
@@ -940,7 +939,6 @@ int area_expander::run( const tripoint_bub_ms &center )
                 continue;
             }
 
-            // Expensive / stochastic checks last
             const int cover = here.coverage( pt );
             if( ( cover > 0 && rng( 1, 100 ) <= cover ) ||
                 here.obstructed_by_vehicle_rotation( best.position, pt ) ) {
