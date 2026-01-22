@@ -813,7 +813,7 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
     ui.show();
     for( const named_entry &e : entries ) {
         e.second();
-                ui.proceed();
+        ui.proceed();
     }
 
     if( !get_option<bool>( "SKIP_VERIFICATION" ) ) {
@@ -920,8 +920,8 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
     ui.show();
     for( const named_entry &e : entries ) {
         e.second();
-        
+
         ui.proceed();
-        
+
     }
 }
