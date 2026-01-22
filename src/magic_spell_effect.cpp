@@ -240,7 +240,7 @@ static bool in_spell_aoe( const tripoint_bub_ms &start, const tripoint_bub_ms &e
     const std::vector<tripoint_bub_ms> trajectory = line_to( start, end );
     for( const tripoint_bub_ms &pt : trajectory ) {
         if( ( here.coverage( pt ) > 0 && rng( 1, 100 ) <= here.coverage( pt ) ) ||
-            here.obstructed_by_vehicle_rotation( pt, last_point ) ) {
+            here.obstructed_by_vehicle_rotation( last_point, pt ) ) {
             return false;
         }
         last_point = pt;
@@ -261,7 +261,6 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_blast( const override_param
     }
     return targets;
 }
-
 static std::set<tripoint_bub_ms> spell_effect_cone_range_override(
     const spell_effect::override_parameters &params, const tripoint_bub_ms &source,
     const tripoint_bub_ms &target )
@@ -272,7 +271,7 @@ static std::set<tripoint_bub_ms> spell_effect_cone_range_override(
     const units::angle start_angle = initial_angle - half_width;
     const units::angle end_angle = initial_angle + half_width;
     std::set<tripoint_bub_ms> end_points;
-    tripoint_bub_ms last_point = source;
+
     for( units::angle angle = start_angle; angle <= end_angle; angle += 1_degrees ) {
         for( int range = 1; range <= params.range; range++ ) {
             tripoint potential;
@@ -288,10 +287,11 @@ static std::set<tripoint_bub_ms> spell_effect_cone_range_override(
     if( !params.ignore_walls ) {
         map &here = get_map();
         for( const tripoint_bub_ms &ep : end_points ) {
-            std::vector<tripoint_bub_ms> trajectory = line_to( source, ep );
+            tripoint_bub_ms last_point = source; // reset per ray
+            const std::vector<tripoint_bub_ms> trajectory = line_to( source, ep );
             for( const tripoint_bub_ms &tp : trajectory ) {
-                if( !here.obstructed_by_vehicle_rotation( tp, last_point ) || here.coverage( tp ) == 0 ||
-                    rng( 1, 100 ) > here.coverage( tp ) ) {
+                if( !here.obstructed_by_vehicle_rotation( last_point, tp ) &&
+                    ( here.coverage( tp ) == 0 || rng( 1, 100 ) > here.coverage( tp ) ) ) {
                     targets.emplace( tp );
                 } else {
                     break;
@@ -300,6 +300,7 @@ static std::set<tripoint_bub_ms> spell_effect_cone_range_override(
             }
         }
     }
+
     // we don't want to hit ourselves in the blast!
     targets.erase( source );
     return targets;
@@ -320,8 +321,10 @@ static bool test_always_true( const tripoint_bub_ms &, const tripoint_bub_ms & )
 static bool test_coverage( const tripoint_bub_ms &p, const tripoint_bub_ms &prev )
 {
     map &here = get_map();
-    return here.coverage( p ) == 0 || rng( 1, 100 ) > here.coverage( p ) ||
-           !here.obstructed_by_vehicle_rotation( prev, p );
+    const int cover = here.coverage( p );
+    return
+        ( cover == 0 || rng( 1, 100 ) > cover ) &&
+        !here.obstructed_by_vehicle_rotation( prev, p );
 }
 
 std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parameters &params,
@@ -907,7 +910,6 @@ bool area_expander::enqueue( const tripoint_bub_ms &from, const tripoint_bub_ms 
     return true;
 }
 
-// Run wave propagation
 int area_expander::run( const tripoint_bub_ms &center )
 {
     enqueue( center, center, 0.0 );
@@ -923,14 +925,10 @@ int area_expander::run( const tripoint_bub_ms &center )
         int best_index = frontier.top();
         frontier.pop();
 
-        for( size_t i = 0; i < 8; i++ ) {
-            node &best = area[best_index];
-            const tripoint_bub_ms &pt = best.position + point( x_offset[ i ], y_offset[ i ] );
+        node &best = area[best_index];
 
-            if( ( here.coverage( pt ) > 0 && rng( 1, 100 ) <= here.coverage( pt ) ) ||
-                here.obstructed_by_vehicle_rotation( best.position, pt ) ) {
-                continue;
-            }
+        for( size_t i = 0; i < 8; i++ ) {
+            const tripoint_bub_ms pt = best.position + point( x_offset[ i ], y_offset[ i ] );
 
             float center_range = static_cast<float>( rl_dist( center, pt ) );
             if( max_range > 0 && center_range > max_range ) {
@@ -938,6 +936,12 @@ int area_expander::run( const tripoint_bub_ms &center )
             }
 
             if( max_expand > 0 && expanded > max_expand && contains( pt ) ) {
+                continue;
+            }
+
+            const int cover = here.coverage( pt );
+            if( ( cover > 0 && rng( 1, 100 ) <= cover ) ||
+                here.obstructed_by_vehicle_rotation( best.position, pt ) ) {
                 continue;
             }
 
