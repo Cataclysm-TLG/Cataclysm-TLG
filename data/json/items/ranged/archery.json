@@ -3,7 +3,7 @@
     "id": "selfbow",
     "looks_like": "longbow",
     "type": "ITEM",
-    "subtypes": [ "GUN" ],
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "survival bow" },
@@ -32,17 +32,15 @@
     "volume": "2500 ml",
     "longest_side": "140 cm",
     "price_postapoc": "50 cent",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
-          "encumbrance": 12,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 12,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "ranged_damage": { "damage_type": "stab", "amount": 2 },
     "range": 12,
     "dispersion": 1250,
@@ -58,7 +56,7 @@
     "id": "shortbow",
     "looks_like": "longbow",
     "type": "ITEM",
-    "subtypes": [ "GUN" ],
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "wooden short bow" },
@@ -85,17 +83,15 @@
     "volume": "1500 ml",
     "longest_side": "132 cm",
     "price_postapoc": "5 USD",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
-          "encumbrance": 14,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 14,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "reload_noise_volume": 4,
     "loudness": 8,
     "ranged_damage": { "damage_type": "stab", "amount": 4 },
@@ -197,7 +193,7 @@
     "id": "compositebow",
     "looks_like": "longbow",
     "type": "ITEM",
-    "subtypes": [ "GUN" ],
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "composite bow", "str_pl": "composite bows" },
@@ -224,20 +220,18 @@
     "volume": "1750 ml",
     "longest_side": "132 cm",
     "price_postapoc": "30 USD",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [
-            { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 },
-            { "type": "keratin", "covered_by_mat": 100, "thickness": 1.0 }
-          ],
-          "encumbrance": 14,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [
+          { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "keratin", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 14,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "reload_noise_volume": 4,
     "loudness": 8,
     "ranged_damage": { "damage_type": "stab", "amount": 12, "armor_penetration": 2 },
@@ -255,7 +249,7 @@
     "id": "recurbow",
     "looks_like": "longbow",
     "type": "ITEM",
-    "subtypes": [ "GUN" ],
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "fiberglass recurve bow" },
@@ -282,20 +276,18 @@
     "volume": "2500 ml",
     "longest_side": "132 cm",
     "price_postapoc": "20 USD",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [
-            { "type": "steel", "covered_by_mat": 100, "thickness": 1.0 },
-            { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
-          ],
-          "encumbrance": 14,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 14,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "reload_noise_volume": 3,
     "loudness": 8,
     "ranged_damage": { "damage_type": "stab", "amount": 8 },
@@ -352,7 +344,7 @@
   {
     "id": "longbow",
     "type": "ITEM",
-    "subtypes": [ "GUN" ],
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "wooden target bow" },
@@ -380,17 +372,15 @@
     "volume": "3500 ml",
     "longest_side": "183 cm",
     "price_postapoc": "30 USD",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
-          "encumbrance": 18,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 18,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "reload_noise_volume": 3,
     "loudness": 8,
     "ranged_damage": { "damage_type": "stab", "amount": 6 },
@@ -408,7 +398,7 @@
     "id": "woodgreatbow",
     "copy-from": "longbow",
     "type": "ITEM",
-    "subtypes": [ "GUN" ],
+    "subtypes": [ "GUN", "ARMOR" ],
     "name": { "str": "wooden war bow" },
     "description": "A long bow as tall as a man, this is a convincing reproduction of the weapons that ruled the battlefield prior to the invention of gunpowder.  The incredible draw weight is too much for the average person, but in the right hands it could be devastating.",
     "price": "1500 USD",
@@ -419,17 +409,15 @@
     "longest_side": "198 cm",
     "price_postapoc": "20 USD",
     "weapon_category": [ "LONG_BOWS" ],
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
-          "encumbrance": 18,
-          "coverage": 14,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 18,
+        "coverage": 14,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "durability": 8,
     "reload_noise_volume": 5,
     "loudness": 16,

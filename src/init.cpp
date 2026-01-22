@@ -1,14 +1,18 @@
 #include "init.h"
 
+#include <algorithm>
 #include <cstddef>
+#include <filesystem>
 #include <memory>
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include "achievement.h"
 #include "activity_type.h"
+#include "addiction.h"
 #include "ammo.h"
 #include "ammo_effect.h"
 #include "anatomy.h"
@@ -30,6 +34,7 @@
 #include "construction_group.h"
 #include "crafting_gui.h"
 #include "creature.h"
+#include "damage.h"
 #include "debug.h"
 #include "dialogue.h"
 #include "disease.h"
@@ -42,7 +47,9 @@
 #include "field_type.h"
 #include "filesystem.h"
 #include "flag.h"
+#include "flexbuffer_json.h"
 #include "gates.h"
+#include "global_vars.h"
 #include "harvest.h"
 #include "help.h"
 #include "input.h"
@@ -61,8 +68,8 @@
 #include "mapgen.h"
 #include "martialarts.h"
 #include "material.h"
-#include "mission.h"
 #include "math_parser_jmath.h"
+#include "mission.h"
 #include "mod_tileset.h"
 #include "monfaction.h"
 #include "mongroup.h"
@@ -70,10 +77,12 @@
 #include "mood_face.h"
 #include "morale_types.h"
 #include "move_mode.h"
+#include "mtype.h"
 #include "mutation.h"
 #include "npc.h"
 #include "npc_class.h"
 #include "omdata.h"
+#include "options.h"
 #include "overlay_ordering.h"
 #include "overmap.h"
 #include "overmap_connection.h"
@@ -89,13 +98,15 @@
 #include "rotatable_symbols.h"
 #include "scenario.h"
 #include "scent_map.h"
-#include "sdltiles.h" // IWYU pragma: keep
+#include "shop_cons_rate.h"
 #include "skill.h"
 #include "skill_boost.h"
 #include "sounds.h"
 #include "speech.h"
 #include "speed_description.h"
 #include "start_location.h"
+#include "string_formatter.h"
+#include "subbodypart.h"
 #include "test_data.h"
 #include "text_snippets.h"
 #include "translations.h"
@@ -108,6 +119,10 @@
 #include "weather_type.h"
 #include "widget.h"
 #include "worldfactory.h"
+
+#if defined(TILES)
+#include "sdltiles.h"
+#endif
 
 DynamicDataLoader::DynamicDataLoader()
 {
@@ -228,7 +243,7 @@ void DynamicDataLoader::add( const std::string &type,
 void DynamicDataLoader::add( const std::string &type,
                              const std::function<void( const JsonObject & )> &f )
 {
-    add( type, [f]( const JsonObject & obj, const std::string_view,  const cata_path &,
+    add( type, [f]( const JsonObject & obj, std::string_view,  const cata_path &,
     const cata_path & ) {
         f( obj );
     } );
@@ -327,55 +342,6 @@ void DynamicDataLoader::initialize()
     } );
     add( "trap", &trap::load_trap );
     add( "trap_migration", &trap_migrations::load );
-
-    add( "AMMO", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_ammo( jo, src );
-    } );
-    add( "GUN", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_gun( jo, src );
-    } );
-    add( "ARMOR", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_armor( jo, src );
-    } );
-    add( "PET_ARMOR", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_pet_armor( jo, src );
-    } );
-    add( "TOOL", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_tool( jo, src );
-    } );
-    add( "TOOLMOD", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_toolmod( jo, src );
-    } );
-    add( "TOOL_ARMOR", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_tool_armor( jo, src );
-    } );
-    add( "BOOK", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_book( jo, src );
-    } );
-    add( "COMESTIBLE", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_comestible( jo, src );
-    } );
-    add( "ENGINE", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_engine( jo, src );
-    } );
-    add( "WHEEL", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_wheel( jo, src );
-    } );
-    add( "GUNMOD", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_gunmod( jo, src );
-    } );
-    add( "MAGAZINE", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_magazine( jo, src );
-    } );
-    add( "BATTERY", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_battery( jo, src );
-    } );
-    add( "GENERIC", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_generic( jo, src );
-    } );
-    add( "BIONIC_ITEM", []( const JsonObject & jo, const std::string & src ) {
-        item_controller->load_bionic( jo, src );
-    } );
 
     add( "ITEM", &items::load );
     add( "ITEM_CATEGORY", &item_category::load_item_cat );
@@ -583,13 +549,13 @@ void DynamicDataLoader::load_mod_interaction_files_from_path( const cata_path &p
                     is_mod_loaded = true;
                 }
             }
+
             if( is_mod_loaded ) {
                 const std::vector<cata_path> interaction_files = get_files_from_path( ".json", f, true, true );
                 files.insert( files.end(), interaction_files.begin(), interaction_files.end() );
             }
         }
     }
-
     // iterate over each file
     for( const cata_path &file : files ) {
         try {
@@ -622,8 +588,6 @@ void DynamicDataLoader::load_all_from_json( const JsonValue &jsin, const std::st
     }
     inp_mngr.pump_events();
 }
-
-
 
 void DynamicDataLoader::unload_data()
 {
@@ -803,7 +767,6 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
             { _( "Overmap locations" ), &overmap_locations::finalize },
             { _( "Cities" ), &city::finalize },
             { _( "Math functions" ), &jmath_func::finalize },
-            { _( "Math expressions" ), &finalize_conditions },
             { _( "Start locations" ), &start_locations::finalize_all },
             { _( "Vehicle part migrations" ), &vpart_migration::finalize },
             { _( "Vehicle prototypes" ), &vehicles::finalize_prototypes },
@@ -839,6 +802,7 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
 #if defined(TILES)
             { _( "Tileset" ), &load_tileset },
 #endif
+            { _( "Math expressions" ), &finalize_conditions },
         }
     };
 
@@ -861,7 +825,6 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
 void DynamicDataLoader::check_consistency( loading_ui &ui )
 {
     ui.new_context( _( "Verifying" ) );
-
     using named_entry = std::pair<std::string, std::function<void()>>;
     const std::vector<named_entry> entries = {{
             { _( "Flags" ), &json_flag::check_consistency },
@@ -874,7 +837,7 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
             },
             { _( "Vitamins" ), &vitamin::check_consistency },
             { _( "Weather types" ), &weather_types::check_consistency },
-            { _( "Weapon Categories" ), &weapon_category::verify_weapon_categories },
+            { _( "Weapon categories" ), &weapon_category::verify_weapon_categories },
             { _( "Effect on conditions" ), &effect_on_conditions::check_consistency },
             { _( "Field types" ), &field_types::check_consistency },
             { _( "Field type migrations" ), &field_type_migrations::check },
@@ -950,12 +913,15 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
     };
 
     for( const named_entry &e : entries ) {
+
         ui.add_entry( e.first );
     }
 
     ui.show();
     for( const named_entry &e : entries ) {
         e.second();
+
         ui.proceed();
+
     }
 }

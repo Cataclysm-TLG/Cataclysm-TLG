@@ -1137,7 +1137,7 @@
     "id": "hide_bag",
     "copy-from": "raw_leather",
     "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
+    "subtypes": [ "COMESTIBLE", "ARMOR" ],
     "category": "clothing",
     "name": { "str": "hide bag" },
     "description": "The raw skin of an animal, quickly turned into a makeshift bag for storage.  It will still rot, and needs to be cured and tanned.",
@@ -1145,18 +1145,16 @@
     "looks_like": "plastic_shopping_bag",
     "color": "pink",
     "proportional": { "weight": 6.0, "volume": 6.0, "price": 6.0, "quench": 6.0, "calories": 6.0, "healthy": 6.0, "fun": 6.0 },
-    "armor_data": {
-      "sided": true,
-      "armor": [
-        {
-          "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 } ],
-          "encumbrance": 10,
-          "volume_encumber_modifier": 0.5,
-          "coverage": 5,
-          "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ]
-        }
-      ]
-    },
+    "sided": true,
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 } ],
+        "encumbrance": 10,
+        "volume_encumber_modifier": 0.5,
+        "coverage": 5,
+        "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ]
+      }
+    ],
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -1172,7 +1170,7 @@
     "id": "hide_tainted_bag",
     "copy-from": "raw_tainted_leather",
     "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
+    "subtypes": [ "COMESTIBLE", "ARMOR" ],
     "category": "clothing",
     "name": { "str": "tainted hide bag" },
     "description": "The raw skin of a monster, quickly turned into a makeshift bag for storage.  It will still rot, and needs to be cured and tanned.",
@@ -1181,18 +1179,16 @@
     "color": "pink",
     "price_postapoc": "10 cent",
     "proportional": { "weight": 6.0, "volume": 6.0, "price": 6.0, "quench": 6.0, "calories": 6.0, "healthy": 6.0, "fun": 6.0 },
-    "armor_data": {
-      "sided": true,
-      "armor": [
-        {
-          "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 } ],
-          "encumbrance": 10,
-          "volume_encumber_modifier": 0.5,
-          "coverage": 5,
-          "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ]
-        }
-      ]
-    },
+    "sided": true,
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 } ],
+        "encumbrance": 10,
+        "volume_encumber_modifier": 0.5,
+        "coverage": 5,
+        "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ]
+      }
+    ],
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",

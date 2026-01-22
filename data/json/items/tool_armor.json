@@ -934,12 +934,8 @@
     "weight": "943 g",
     "volume": "256 ml",
     "use_action": [ "CAMERA", { "type": "link_up", "cable_length": 3, "charge_rate": "20 W" } ],
-    "pocket_data": [ 
-      {
-        "pocket_type": "MAGAZINE",
-        "rigid": true,
-        "ammo_restriction": { "battery": 50 }
-      },
+    "pocket_data": [
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 50 } },
       {
         "pocket_type": "E_FILE_STORAGE",
         "rigid": true,
@@ -980,12 +976,8 @@
     "weight": "2304 g",
     "volume": "1256 ml",
     "use_action": [ "CAMERA", { "type": "link_up", "cable_length": 3, "charge_rate": "50 W" } ],
-    "pocket_data": [ 
-      {
-        "pocket_type": "MAGAZINE",
-        "rigid": true,
-        "ammo_restriction": { "battery": 100 }
-      },
+    "pocket_data": [
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 100 } },
       {
         "pocket_type": "E_FILE_STORAGE",
         "rigid": true,
@@ -1353,7 +1345,6 @@
       "NO_UNLOAD",
       "COMBAT_TOGGLEABLE"
     ],
-    "relic_data": { "passive_effects": [ { "id": "ench_climate_control_all" } ] },
     "armor": [
       {
         "material": [

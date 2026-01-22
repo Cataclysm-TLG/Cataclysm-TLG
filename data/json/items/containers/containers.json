@@ -25,17 +25,15 @@
         "max_contains_weight": "5 kg"
       }
     ],
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 } ],
-          "encumbrance": 4,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_front" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 4,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_front" ]
+      }
+    ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "COLLAPSE_CONTENTS" ],
     "melee_damage": { "bash": 1 }
   },
@@ -1606,19 +1604,17 @@
         "max_contains_weight": "20 kg"
       }
     ],
-    "armor_data": {
-      "armor": [
-        {
-          "material": [
-            { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
-            { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 }
-          ],
-          "coverage": 30,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "coverage": 30,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "flags": [ "BELTED", "COLLAPSE_CONTENTS", "OVERSIZE" ],
     "melee_damage": { "bash": 1 }
   },
@@ -1845,18 +1841,16 @@
         "max_contains_weight": "3 kg"
       }
     ],
-    "armor_data": {
-      "sided": true,
-      "armor": [
-        {
-          "encumbrance": 2,
-          "coverage": 5,
-          "covers": [ "leg_l", "leg_r" ],
-          "specifically_covers": [ "leg_hip_r", "leg_hip_l" ],
-          "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 } ]
-        }
-      ]
-    },
+    "sided": true,
+    "armor": [
+      {
+        "encumbrance": 2,
+        "coverage": 5,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_r", "leg_hip_l" ],
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 } ]
+      }
+    ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "COLLAPSE_CONTENTS" ]
   },
   {
@@ -2256,17 +2250,15 @@
         "max_contains_weight": "1 kg"
       }
     ],
-    "armor_data": {
-      "sided": true,
-      "armor": [
-        {
-          "material": [ { "type": "iron", "covered_by_mat": 100, "thickness": 1.0 } ],
-          "coverage": 2,
-          "covers": [ "leg_l", "leg_r" ],
-          "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
-        }
-      ]
-    },
+    "sided": true,
+    "armor": [
+      {
+        "material": [ { "type": "iron", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "coverage": 2,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      }
+    ],
     "qualities": [ [ "BOIL", 1 ] ],
     "use_action": [ "HEAT_LIQUID_ITEMS" ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "COLLAPSE_CONTENTS" ],
@@ -2655,17 +2647,15 @@
         "max_contains_weight": "3 kg"
       }
     ],
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
-          "encumbrance": 5,
-          "coverage": 5,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_front" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 5,
+        "coverage": 5,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_front" ]
+      }
+    ],
     "flags": [ "BELTED", "WATER_FRIENDLY" ]
   },
   {
@@ -2774,17 +2764,15 @@
         "max_contains_weight": "3 kg"
       }
     ],
-    "armor_data": {
-      "sided": true,
-      "armor": [
-        {
-          "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
-          "coverage": 5,
-          "covers": [ "leg_l", "leg_r" ],
-          "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
-        }
-      ]
-    },
+    "sided": true,
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 5,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      }
+    ],
     "flags": [ "BELTED", "WATER_FRIENDLY" ],
     "melee_damage": { "bash": 1 }
   },
@@ -2813,16 +2801,14 @@
         "max_contains_weight": "6 kg"
       }
     ],
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_front" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_front" ]
+      }
+    ],
     "flags": [ "BELTED", "WATER_FRIENDLY" ],
     "melee_damage": { "bash": 2 }
   },
@@ -2851,16 +2837,14 @@
         "max_contains_weight": "10 kg"
       }
     ],
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
-          "coverage": 40,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_front" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 40,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_front" ]
+      }
+    ],
     "flags": [ "BELTED", "WATER_FRIENDLY" ],
     "melee_damage": { "bash": 3 }
   },
@@ -4107,17 +4091,15 @@
         "sealed_data": { "spoil_multiplier": 0.9 }
       }
     ],
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
-          "encumbrance": 3,
-          "coverage": 8,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_front" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 3,
+        "coverage": 8,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_front" ]
+      }
+    ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ]
   },
   {
