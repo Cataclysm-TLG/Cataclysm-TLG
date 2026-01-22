@@ -83,6 +83,20 @@ def items_of_type(data, type):
     return result
 
 
+def items_of_subtype(data, subtype):
+    result = []
+    for i in data:
+        if 'type' not in i:
+            dump = util.CDDAJSONWriter(i).dumps()
+            print("json entry has no 'type' field: " + dump)
+            sys.exit(1)
+        if i['type'] == "ITEM":
+            if 'subtypes' in i:
+                if subtype in i['subtypes']:
+                    result.append(i)
+    return result
+
+
 def get_ids(items):
     result = set()
     for i in items:
