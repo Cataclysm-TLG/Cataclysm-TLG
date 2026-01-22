@@ -121,7 +121,8 @@
   {
     "id": "feral_pistol",
     "copy-from": "feral_m9",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "name": { "str_sp": "Beretta M9A1" },
     "description": "A poorly maintained and inaccurate version of the M9 for feral security guards, feral preppers, etc.",
     "ammo": [ "ammo_pistol" ],
