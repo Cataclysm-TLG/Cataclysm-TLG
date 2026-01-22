@@ -397,7 +397,8 @@
   },
   {
     "id": "waterproof_gunmod",
-    "type": "GUNMOD",
+    "type": "ITEM",
+    "subtypes": [ "GUNMOD" ],
     "name": { "str": "firearm waterproofing" },
     "description": "A set of seals and gaskets that will allow a firearm to operate reliably while submerged in water.",
     "weight": "220 g",
@@ -416,7 +417,8 @@
   },
   {
     "id": "gun_crossbow",
-    "type": "GUNMOD",
+    "type": "ITEM",
+    "subtypes": [ "GUNMOD" ],
     "name": { "str": "rail-mounted crossbow" },
     "description": "A kit to attach a pair of crossbow arms and a firing rail to the barrel of a long firearm.  It allows crossbow bolts to be fired.",
     "weight": "1450 g",
@@ -447,6 +449,7 @@
     "id": "makeshift_bayonet",
     "copy-from": "spike",
     "type": "ITEM",
+    "subtypes": [ "GUNMOD" ],
     "name": { "str": "makeshift bayonet" },
     "description": "A makeshift version of a bayonet that consists of a mere spike with some string.",
     "longest_side": "12 cm",

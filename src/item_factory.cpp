@@ -9,11 +9,13 @@
 #include <memory>
 #include <optional>
 #include <stdexcept>
+#include <tuple>
 #include <unordered_set>
 #include <variant>
 
 #include "ammo.h"
 #include "assign.h"
+#include "body_part_set.h"
 #include "bodypart.h"
 #include "cached_options.h"
 #include "calendar.h"
@@ -22,14 +24,17 @@
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "color.h"
+#include "coords_fwd.h"
 #include "damage.h"
 #include "debug.h"
 #include "effect_on_condition.h"
 #include "enum_conversions.h"
 #include "enums.h"
 #include "explosion.h"
+#include "fault.h"
 #include "flag.h"
 #include "flat_set.h"
+#include "flexbuffer_json.h"
 #include "game_constants.h"
 #include "generic_factory.h"
 #include "input.h"
@@ -39,9 +44,12 @@
 #include "item_pocket.h"
 #include "itype.h"
 #include "iuse_actor.h"
+#include "make_static.h"
+#include "mapdata.h"
 #include "material.h"
 #include "math_parser_diag_value.h"
 #include "options.h"
+#include "output.h"
 #include "pocket_type.h"
 #include "proficiency.h"
 #include "recipe.h"
@@ -51,7 +59,9 @@
 #include "ret_val.h"
 #include "stomach.h"
 #include "string_formatter.h"
+#include "subbodypart.h"
 #include "text_snippets.h"
+#include "translation.h"
 #include "translations.h"
 #include "try_parse_integer.h"
 #include "ui.h"
@@ -59,6 +69,7 @@
 #include "value_ptr.h"
 #include "veh_type.h"
 #include "vitamin.h"
+#include "weighted_list.h"
 
 template <typename T> struct enum_traits;
 
@@ -75,7 +86,6 @@ static const damage_type_id damage_bullet( "bullet" );
 
 static const flag_id json_flag_NO_RELOAD( "NO_RELOAD" );
 static const flag_id json_flag_NO_UNLOAD( "NO_UNLOAD" );
-
 
 static const gun_mode_id gun_mode_DEFAULT( "DEFAULT" );
 static const gun_mode_id gun_mode_MELEE( "MELEE" );
@@ -253,6 +263,25 @@ static bool is_physical( const itype &type )
            !type.has_flag( flag_ZERO_WEIGHT );
 }
 
+template<typename T>
+bool load_min_max( std::pair<T, T> &pa, const JsonObject &obj, const std::string &name )
+{
+    bool result = false;
+    if( obj.has_array( name ) ) {
+        // An array means first is min, second entry is max. Both are mandatory.
+        JsonArray arr = obj.get_array( name );
+        result |= arr.read_next( pa.first );
+        result |= arr.read_next( pa.second );
+    } else {
+        // Not an array, should be a single numeric value, which is set as min and max.
+        result |= obj.read( name, pa.first );
+        result |= obj.read( name, pa.second );
+    }
+    result |= obj.read( name + "-min", pa.first );
+    result |= obj.read( name + "-max", pa.second );
+    return result;
+}
+
 void Item_factory::finalize_pre( itype &obj )
 {
     //a gunmod slot needs a toolmod slot even if one wasn't loaded
@@ -315,11 +344,13 @@ void Item_factory::finalize_pre( itype &obj )
             }
         }
     }
+
     for( const auto &e : obj.use_methods ) {
         if( e.first == "GUN_REPAIR" ) {
             obj.ammo_scale.emplace( e.first, 0 );
         }
     }
+
     if( obj.mod ) {
         std::string func = obj.gunmod ? "GUNMOD_ATTACH" : "TOOLMOD_ATTACH";
         emplace_usage( obj.use_methods, func );
@@ -883,7 +914,6 @@ void Item_factory::finalize_post( itype &obj )
             }
         }
     }
-
 }
 
 void Item_factory::finalize_post_armor( itype &obj )
@@ -1038,6 +1068,7 @@ void Item_factory::finalize_post_armor( itype &obj )
                     if( it.covers->test( bp ) ) {
                         found = true;
                         // modify the values with additional info
+
                         it.encumber += sub_armor.encumber;
                         it.max_encumber += sub_armor.max_encumber;
 
@@ -1052,6 +1083,7 @@ void Item_factory::finalize_post_armor( itype &obj )
                         float it_scale = it.max_coverage( bp ) / 100.0;
 
                         it.coverage += sub_armor.coverage * scale;
+
                         // these values need to be averaged based on proportion covered
                         it.avg_thickness = ( sub_armor.avg_thickness * scale + it.avg_thickness * it_scale ) /
                                            ( scale + it_scale );
@@ -1493,10 +1525,6 @@ void Item_factory::finalize()
             it->recipes.push_back( p.first );
         }
     }
-    for( auto &e : m_template_groups ) {
-        auto &isd = e.second;
-        isd->finalize( itype_id::NULL_ID() );
-    }
 }
 void item_blacklist_t::clear()
 {
@@ -1827,7 +1855,7 @@ use_function Item_factory::read_use_function( const JsonObject &jo,
 //reads a single use_function from the provided JsonValue
 static std::pair<std::string, use_function> use_function_reader_helper(
     std::map<std::string, int> &ammo_scale,
-    const std::string_view &src, const JsonValue &val )
+    std::string_view src, const JsonValue &val )
 {
     if( val.test_object() ) {
         JsonObject use_obj = val.get_object();
@@ -1854,26 +1882,26 @@ static std::pair<std::string, use_function> use_function_reader_helper(
     return std::make_pair( "", use_function() );
 }
 
-// Reads use_function as either an object, array, or string into a map.
+//reads use_function as either an object, array, or string into a map
 class use_function_reader_map : public generic_typed_reader<use_function_reader_map>
 {
     public:
         std::map<std::string, int> &ammo_scale;
-        const std::string_view &src;
-        use_function_reader_map( std::map<std::string, int> &ammo_scale, const std::string_view &src ) :
+        std::string_view src;
+        use_function_reader_map( std::map<std::string, int> &ammo_scale, std::string_view src ) :
             ammo_scale( ammo_scale ), src( src ) {};
         std::pair<std::string, use_function> get_next( const JsonValue &val ) const {
             return use_function_reader_helper( ammo_scale, src, val );
         }
 };
 
-// Reads use_function as either an object, array, or string.
+//reads use_function as either an object, array, or string
 class use_function_reader_single : public generic_typed_reader<use_function_reader_single>
 {
     public:
         std::map<std::string, int> &ammo_scale;
-        const std::string_view &src;
-        use_function_reader_single( std::map<std::string, int> &ammo_scale, const std::string_view &src ) :
+        std::string_view src;
+        use_function_reader_single( std::map<std::string, int> &ammo_scale, std::string_view src ) :
             ammo_scale( ammo_scale ), src( src ) {
         };
         use_function get_next( const JsonValue &val ) const {
@@ -2127,8 +2155,8 @@ class snippet_reader : public generic_typed_reader<snippet_reader>
 {
     public:
         const itype &def;
-        const std::string_view &src;
-        explicit snippet_reader( const itype &def, const std::string_view &src ) : def( def ),
+        std::string_view src;
+        explicit snippet_reader( const itype &def, std::string_view src ) : def( def ),
             src( src ) {};
         std::string get_next( const JsonValue &val ) const {
             if( val.test_array() ) {
@@ -3137,7 +3165,7 @@ static void get_optional( const JsonObject &jo, bool was_loaded, const std::stri
 }
 
 template<typename T>
-static void get_relative( const JsonObject &jo, const std::string_view member,
+static void get_relative( const JsonObject &jo, std::string_view member,
                           std::optional<T> &value,
                           T default_val )
 {
@@ -3147,7 +3175,7 @@ static void get_relative( const JsonObject &jo, const std::string_view member,
 }
 
 template<typename T>
-static void get_proportional( const JsonObject &jo, const std::string_view member,
+static void get_proportional( const JsonObject &jo, std::string_view member,
                               std::optional<T> &value, T default_val )
 {
     if( jo.has_member( member ) ) {
@@ -3322,7 +3350,7 @@ class vitamins_reader : public generic_typed_reader<vitamins_reader>
 
 void islot_comestible::deserialize( const JsonObject &jo )
 {
-    std::string src = "tlg";
+    std::string src = "dda";
 
     mandatory( jo, was_loaded, "comestible_type", comesttype );
     optional( jo, was_loaded, "tool", tool, itype_id::NULL_ID() );
@@ -3898,7 +3926,7 @@ class melee_accuracy_reader : public generic_typed_reader<melee_accuracy_reader>
             val.throw_error( "melee_accuracy_reader element must be object or int" );
             return 0;
         }
-        bool do_relative( const JsonObject &jo, const std::string_view name, int &member ) const {
+        bool do_relative( const JsonObject &jo, std::string_view name, int &member ) const {
             if( jo.has_object( "relative" ) ) {
                 JsonObject relative = jo.get_object( "relative" );
                 relative.allow_omitted_members();
@@ -3973,7 +4001,7 @@ static void replace_materials( const JsonObject &jo, itype &def )
     }
 }
 
-void itype::load( const JsonObject &jo, const std::string_view src )
+void itype::load( const JsonObject &jo, std::string_view src )
 {
     units_bound_reader<units::mass> not_negative_mass{ 0_milligram };
     units_bound_reader<units::money> not_negative_money{ 0_cent };
@@ -3992,9 +4020,8 @@ void itype::load( const JsonObject &jo, const std::string_view src )
     optional( jo, was_loaded, "longest_side", longest_side, -1_mm );
     optional( jo, was_loaded, "price", price, not_negative_money, 0_cent );
     optional( jo, was_loaded, "price_postapoc", price_post, not_negative_money, -1_cent );
-
-    optional( jo, was_loaded, "stack_max", stack_max );
     optional( jo, was_loaded, "stackable", stackable_ );
+    optional( jo, was_loaded, "stack_max", stack_max );
     optional( jo, was_loaded, "integral_volume", integral_volume, not_negative_volume, -1_ml );
     optional( jo, was_loaded, "integral_longest_side", integral_longest_side, not_negative_length,
               -1_mm );
@@ -4355,26 +4382,7 @@ static Item_group *make_group_or_throw(
 }
 
 template<typename T>
-bool load_min_max( std::pair<T, T> &pa, const JsonObject &obj, const std::string &name )
-{
-    bool result = false;
-    if( obj.has_array( name ) ) {
-        // An array means first is min, second entry is max. Both are mandatory.
-        JsonArray arr = obj.get_array( name );
-        result |= arr.read_next( pa.first );
-        result |= arr.read_next( pa.second );
-    } else {
-        // Not an array, should be a single numeric value, which is set as min and max.
-        result |= obj.read( name, pa.first );
-        result |= obj.read( name, pa.second );
-    }
-    result |= obj.read( name + "-min", pa.first );
-    result |= obj.read( name + "-max", pa.second );
-    return result;
-}
-
-template<typename T>
-bool load_str_arr( std::vector<T> &arr, const JsonObject &obj, const std::string_view name )
+bool load_str_arr( std::vector<T> &arr, const JsonObject &obj, std::string_view name )
 {
     if( obj.has_array( name ) ) {
         for( const std::string str : obj.get_array( name ) ) {
@@ -4449,7 +4457,7 @@ bool Item_factory::load_sub_ref( std::unique_ptr<Item_spawn_data> &ptr, const Js
 }
 
 bool Item_factory::load_string( std::vector<std::string> &vec, const JsonObject &obj,
-                                const std::string_view name )
+                                std::string_view name )
 {
     bool result = false;
     std::string temp;
