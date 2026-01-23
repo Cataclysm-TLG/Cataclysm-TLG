@@ -447,7 +447,7 @@ bool map_shoot_info::load( const JsonObject &jsobj, const std::string_view membe
 furn_workbench_info::furn_workbench_info() : multiplier( 1.0f ), allowed_mass( units::mass::max() ),
     allowed_volume( units::volume::max() ) {}
 
-bool furn_workbench_info::load( const JsonObject &jsobj, const std::string_view member )
+bool furn_workbench_info::load( const JsonObject &jsobj, std::string_view member )
 {
     JsonObject j = jsobj.get_object( member );
 
@@ -461,7 +461,7 @@ bool furn_workbench_info::load( const JsonObject &jsobj, const std::string_view 
 plant_data::plant_data() : transform( furn_str_id::NULL_ID() ), base( furn_str_id::NULL_ID() ),
     growth_multiplier( 1.0f ), harvest_multiplier( 1.0f ) {}
 
-bool plant_data::load( const JsonObject &jsobj, const std::string_view member )
+bool plant_data::load( const JsonObject &jsobj, std::string_view member )
 {
     JsonObject j = jsobj.get_object( member );
 
@@ -581,7 +581,7 @@ void map_data_common_t::load_symbol_color( const JsonObject &jo, const std::stri
     const bool no_copy_symbol_color = jo.has_member( "copy-from" );
 
     load_season_array( jo, "symbol", context, no_copy_symbol_color,
-    symbol_, [&jo]( const std::string_view str ) {
+    symbol_, [&jo]( std::string_view str ) {
         if( str.length() != 1 ) {
             jo.throw_error_at( "symbol", "Symbol string must be exactly 1 character long." );
         }
@@ -594,7 +594,7 @@ void map_data_common_t::load_symbol_color( const JsonObject &jo, const std::stri
         jo.throw_error( "Found both color and bgcolor, only one of these is allowed." );
     } else if( has_color ) {
         load_season_array( jo, "color", context, no_copy_symbol_color,
-        color_, []( const std::string_view str ) {
+        color_, []( std::string_view str ) {
             // has to use a lambda because of default params
             return color_from_string( str );
         } );

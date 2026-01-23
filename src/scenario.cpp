@@ -56,7 +56,7 @@ void scenario::load_scenario( const JsonObject &jo, const std::string &src )
     all_scenarios.load( jo, src );
 }
 
-void scenario::load( const JsonObject &jo, const std::string_view )
+void scenario::load( const JsonObject &jo, std::string_view )
 {
     // TODO: pretty much the same as in profession::load, but different contexts for pgettext.
     // TODO: maybe combine somehow?
@@ -360,12 +360,12 @@ bool scenario::scen_is_blacklisted() const
     return sc_blacklist.scenarios.count( id ) != 0;
 }
 
-void scen_blacklist::load_scen_blacklist( const JsonObject &jo, const std::string_view src )
+void scen_blacklist::load_scen_blacklist( const JsonObject &jo, std::string_view src )
 {
     sc_blacklist.load( jo, src );
 }
 
-void scen_blacklist::load( const JsonObject &jo, const std::string_view )
+void scen_blacklist::load( const JsonObject &jo, std::string_view )
 {
     if( !scenarios.empty() ) {
         DebugLog( D_INFO, DC_ALL ) <<
