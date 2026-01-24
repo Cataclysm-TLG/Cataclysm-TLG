@@ -2675,6 +2675,11 @@
   },
   {
     "type": "vehicle_part_migration",
+    "from": "atomic_lamp",
+    "to": "atomic_light"
+  },
+  {
+    "type": "vehicle_part_migration",
     "from": "xl_water_wheel",
     "to": "solar_panel"
   },
