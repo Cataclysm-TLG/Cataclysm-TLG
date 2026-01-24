@@ -2059,7 +2059,6 @@
       [ "recipe_caseless", 1 ],
       { "group": "used_laptops", "prob": 30, "contents-group": "civilian_laptop_efiles" },
       [ "atomic_light", 3 ],
-      [ "atomic_lamp", 3 ],
       { "item": "smart_lamp", "prob": 5, "charges": [ 0, 100 ] },
       { "group": "civilian_phones", "prob": 61 },
       { "group": "civilian_eink_tablet_pcs", "prob": 15 },

@@ -3802,5 +3802,15 @@
     "type": "MIGRATION",
     "id": "cow_candy",
     "replace": "candy3"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "atomic_lamp",
+    "replace": "atomic_light"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "atomic_lamp_off",
+    "replace": "atomic_light_off"
   }
 ]

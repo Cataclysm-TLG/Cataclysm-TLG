@@ -22,10 +22,10 @@
     "variants": [ { "symbols": "*", "symbols_broken": "*" } ]
   },
   {
-    "id": "atomic_lamp",
+    "id": "atomic_light",
     "type": "vehicle_part",
     "name": { "str": "atomic lamp" },
-    "item": "atomic_lamp",
+    "item": "atomic_light",
     "location": "on_ceiling",
     "categories": [ "lighting" ],
     "color": "light_blue",
@@ -44,11 +44,11 @@
   },
   {
     "id": "atomic_light",
-    "copy-from": "atomic_lamp",
+    "copy-from": "atomic_light",
     "type": "vehicle_part",
     "name": { "str": "atomic nightlight" },
     "item": "atomic_light",
-    "description": "A very dim light, self-powered by an atomic decay reaction that never stops.  When turned on, it illuminates a single square inside the vehicle that isn't suitable for crafting.",
+    "description": "A very dim light, self-powered by an atomic decay reaction that never stops.  When the cover is open, it will dimly light a small area.",
     "bonus": 5,
     "folded_volume": "500 ml"
   },
