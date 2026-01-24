@@ -29,7 +29,6 @@
 #include "damage.h"
 #include "debug.h"
 #include "enums.h"
-#include "fault.h"
 #include "field_type.h"
 #include "flag.h"
 #include "flexbuffer_json-inl.h"
@@ -63,7 +62,6 @@
 #include "trap.h"
 #include "type_id.h"
 #include "units.h"
-#include "value_ptr.h"
 #include "vehicle.h"
 #include "vpart_position.h"
 
@@ -934,10 +932,13 @@ void emp_blast( const tripoint_bub_ms &p )
             // Render any electronic stuff in player's possession non-functional
             if( it->has_flag( flag_ELECTRONIC ) && !it->is_broken() &&
                 !player_character.has_flag( json_flag_EMP_IMMUNE ) ) {
-                add_msg( m_bad, _( "The EMP blast fries your %s!" ), it->tname() );
+                add_msg( m_bad, _( "The electromagnetic pulse fries your %s!" ), it->tname() );
                 it->deactivate();
-                it->faults.insert( get_option<bool>( "GAME_EMP" ) ? fault_emp_reboot :
-                                   faults::random_of_type( "shorted" ) );
+                if( one_in ( 4 ) ) {
+                    it->set_random_fault_of_type( "shorted" );
+                } else {
+                    it->set_fault( fault_emp_reboot );
+                }
             }
         }
     }
@@ -946,11 +947,14 @@ void emp_blast( const tripoint_bub_ms &p )
         // Render any electronic stuff on the ground non-functional
         if( it.has_flag( flag_ELECTRONIC ) && !it.is_broken() ) {
             if( sight ) {
-                add_msg( _( "The EMP blast fries the %s!" ), it.tname() );
+                add_msg( _( "The electromagnetic pulse fries the %s!" ), it.tname() );
             }
             it.deactivate();
-            it.set_fault( get_option<bool>( "GAME_EMP" ) ? fault_emp_reboot :
-                          faults::random_of_type( "shorted" ) );
+            if( one_in( 3 ) ) {
+                it.set_random_fault_of_type( "shorted" );
+            } else {
+                it.set_fault( fault_emp_reboot );
+            }
             //map::make_active adds the item to the active item processing list, so that it can reboot without further interaction
             item_location loc = item_location( map_cursor( p ), &it );
             here.make_active( loc );

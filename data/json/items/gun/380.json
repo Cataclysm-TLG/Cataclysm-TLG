@@ -189,7 +189,7 @@
       [ "sights mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "NO_TURRET", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "380": 1 } } ],
     "melee_damage": { "bash": 10 }
@@ -238,6 +238,14 @@
       [ "underbarrel", 1 ]
     ],
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
+    "faults": [
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" },
+      { "fault": "fault_gun_chamber_spent" },
+      { "fault": "fault_fail_to_feed" },
+      { "fault": "fault_stovepipe" },
+      { "fault": "fault_double_feed" }
+    ],
     "pocket_data": [ { "magazine_well": "236 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "hpt3895mag_10rd" ] } ],
     "melee_damage": { "bash": 10 }
   }

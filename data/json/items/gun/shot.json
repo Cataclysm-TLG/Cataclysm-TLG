@@ -24,7 +24,7 @@
     "clip_size": 1,
     "reload": 80,
     "valid_mod_locations": [  ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "flags": [ "ALLOWS_BODY_BLOCK", "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 1 } } ],
     "melee_damage": { "bash": 6 }

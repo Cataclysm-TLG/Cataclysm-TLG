@@ -22,7 +22,7 @@
     "durability": 6,
     "clip_size": 2,
     "blackpowder_tolerance": 80,
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "grip", 1 ],

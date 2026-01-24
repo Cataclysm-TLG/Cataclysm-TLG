@@ -266,6 +266,7 @@ void DynamicDataLoader::initialize()
     add( "connect_group", &connect_group::load );
     add( "fault", &faults::load_fault );
     add( "fault_fix", &faults::load_fix );
+    add( "fault_group", &faults::load_group );
     add( "relic_procgen_data", &relic_procgen_data::load_relic_procgen_data );
     add( "effect_on_condition", &effect_on_conditions::load );
     add( "field_type", &field_types::load );
@@ -798,7 +799,6 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
             { _( "Achievements" ), &achievement::finalize },
             { _( "Damage info orders" ), &damage_info_order::finalize_all },
             { _( "Widgets" ), &widget::finalize },
-            { _( "Faults" ), &faults::finalize },
 #if defined(TILES)
             { _( "Tileset" ), &load_tileset },
 #endif

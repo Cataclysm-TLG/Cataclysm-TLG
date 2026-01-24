@@ -27,7 +27,7 @@
     "blackpowder_tolerance": 60,
     "clip_size": 2,
     "reload": 200,
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "RELOAD_EJECT", "EASY_CLEAN", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "38": 2 } } ],
     "melee_damage": { "bash": 3 }
@@ -63,7 +63,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "357mag": 4, "38": 4 } } ],
     "melee_damage": { "bash": 3 }
@@ -173,7 +173,7 @@
     "barrel_volume": "360 ml",
     "barrel_length": "600 mm",
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ] ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "NO_TURRET", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "38": 1 } } ],
     "melee_damage": { "bash": 10 }
