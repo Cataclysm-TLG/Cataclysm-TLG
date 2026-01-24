@@ -270,6 +270,7 @@ enum class ter_furn_flag : int {
     TFLAG_CURRENT,
     TFLAG_THIN_ICE,
     TFLAG_THICK_ICE,
+    TFLAG_SWIM_UNDER,
     TFLAG_HARVESTED,
     TFLAG_PERMEABLE,
     TFLAG_AUTO_WALL_SYMBOL,

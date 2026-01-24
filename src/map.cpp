@@ -4535,6 +4535,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
     const bool will_collapse = smash_ter &&
                                has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p ) && !has_flag( ter_furn_flag::TFLAG_INDOORS, p );
     const bool tent = smash_furn && !bash->tent_centers.empty();
+    bool phased = false;
 
     // Special code to collapse the tent if destroyed
     if( tent ) {
@@ -4608,9 +4609,9 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
         debugmsg( "data/json/terrain.json does not have %s.bash.ter_set set!",
                   ter( p ).obj().id.c_str() );
     } else if( has_original_terrain_at( p ) && ter( p )->has_flag( "PHASE_BACK" ) ) {
-        // If we have original terrain saved and the current terrain signals PHASE_BACK,
         const ter_id orig = get_original_terrain_at( p );
         ter_set( p, orig );
+        phased = true;
     } else if( params.bashing_from_above && ter_bash.ter_set_bashed_from_above ) {
         // If this terrain is being bashed from above and this terrain
         // has a valid post-destroy bashed-from-above terrain, set it
@@ -4643,7 +4644,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
     }
     // Regenerates roofs for tiles that should be walkable from above.
     if( zlevels && smash_ter && ter( p )->has_flag( "EMPTY_SPACE" ) &&
-        ter( below )->has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) ) {
+        ter( below )->has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) && !phased ) {
         const ter_str_id roof = get_roof( below, params.bash_floor && ter( below ).obj().movecost != 0 );
         ter_set( p, roof );
     }
