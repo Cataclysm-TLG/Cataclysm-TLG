@@ -146,6 +146,7 @@ static const efftype_id effect_shakes( "shakes" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_weed_high( "weed_high" );
 
+static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 static const fault_id fault_overheat_safety( "fault_overheat_safety" );
 
 static const furn_str_id furn_f_metal_smoking_rack_active( "f_metal_smoking_rack_active" );
@@ -13243,7 +13244,8 @@ int item::processing_speed() const
 
     if( active || ethereal || wetness || has_link_data() ||
         has_flag( flag_RADIO_ACTIVATION ) || has_relic_recharge() ||
-        has_fault_flag( flag_BLACKPOWDER_FOULING_DAMAGE ) || get_var( "gun_heat", 0 ) > 0 ) {
+        has_fault_flag( flag_BLACKPOWDER_FOULING_DAMAGE ) || get_var( "gun_heat", 0 ) > 0 ||
+        has_fault( fault_emp_reboot ) ) {
         // Unless otherwise indicated, update every turn.
         return 1;
     }
@@ -14840,7 +14842,6 @@ bool item::process_internal( map &here, Character *carrier, const tripoint_bub_m
             return false;
         }
     }
-
     return false;
 }
 

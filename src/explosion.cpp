@@ -78,6 +78,7 @@ static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_teleglow( "teleglow" );
 
 static const flag_id json_flag_ACTIVATE_ON_PLACE( "ACTIVATE_ON_PLACE" );
+static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 
 static const furn_str_id furn_f_machinery_electronic( "f_machinery_electronic" );
 
@@ -929,9 +930,9 @@ void emp_blast( const tripoint_bub_ms &p )
 
         for( item_location &it : player_character.all_items_loc() ) {
             // Render any electronic stuff in player's possession non-functional
-            if( it->has_flag( flag_ELECTRONIC ) && !it->is_broken() ) &&
-                !player_character.has_flag( json_flag_EMP_IMMUNE ) {
-                add_msg( m_bad, _( "The EMP blast fries your %s!" ), it->tname() );
+            if( it->has_flag( flag_ELECTRONIC ) && !it->is_broken() &&
+                !player_character.has_flag( json_flag_EMP_IMMUNE ) ) {
+                add_msg( m_bad, _( "The electromagnetic pulse fries your %s!" ), it->tname() );
                 it->deactivate();
                 if( one_in ( 4 ) ) {
                     it->set_random_fault_of_type( "shorted" );
@@ -946,7 +947,7 @@ void emp_blast( const tripoint_bub_ms &p )
         // Render any electronic stuff on the ground non-functional
         if( it.has_flag( flag_ELECTRONIC ) && !it.is_broken() ) {
             if( sight ) {
-                add_msg( _( "The EMP blast fries the %s!" ), it.tname() );
+                add_msg( _( "The electromagnetic pulse fries the %s!" ), it.tname() );
             }
             it.deactivate();
             if( one_in( 3 ) ) {
