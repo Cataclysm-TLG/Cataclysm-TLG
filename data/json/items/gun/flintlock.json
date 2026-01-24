@@ -66,6 +66,7 @@
     "blackpowder_tolerance": 96,
     "clip_size": 1,
     "reload": 2000,
+    "use_action": [ "GUN_REPAIR" ],
     "valid_mod_locations": [ [ "grip mount", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ], [ "underbarrel mount", 1 ] ],
     "flags": [ "ALLOWS_BODY_BLOCK", "NEVER_JAMS", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "flintlock": 1 } } ],
@@ -97,6 +98,7 @@
     "blackpowder_tolerance": 96,
     "clip_size": 1,
     "reload": 2250,
+    "use_action": [ "GUN_REPAIR" ],
     "valid_mod_locations": [
       [ "sling", 1 ],
       [ "bayonet lug", 1 ],
