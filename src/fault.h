@@ -6,12 +6,9 @@
 #include <memory>
 #include <set>
 #include <string>
-<<<<<<< HEAD
-=======
 #include <string_view>
 #include <tuple>
 #include <vector>
->>>>>>> Expand faults (#80585)
 
 #include "calendar.h"
 #include "math_parser_diag_value.h"

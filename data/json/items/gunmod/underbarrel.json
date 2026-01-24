@@ -264,7 +264,7 @@
     "name": { "str": "KSG-25 second magazine" },
     "symbol": ":",
     "color": "light_red",
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "ranged_damage": { "damage_type": "bullet", "amount": 1 },
     "id": "ksg25_aux_shotgun",
     "copy-from": "underbarrel_base",
@@ -576,7 +576,7 @@
     "min_skills": [ [ "weapon", 1 ], [ "launcher", 1 ] ],
     "flags": [ "RELOAD_EJECT" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "40x46mm": 1 } } ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ]
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ]
   },
   {
     "id": "pistol_bayonet",
