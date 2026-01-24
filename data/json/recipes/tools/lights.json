@@ -238,7 +238,7 @@
     "reversible": true,
     "using": [ [ "soldering_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" } ],
-    "book_learn": [ [ "textbook_electronics", 4 ], [ "advanced_electronics", 4 ] ],
+    "book_learn": [ [ "advanced_electronics", 4 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "SCREW", "level": 1 } ],
     "components": [
       [ [ "betavoltaic", 4 ] ],
