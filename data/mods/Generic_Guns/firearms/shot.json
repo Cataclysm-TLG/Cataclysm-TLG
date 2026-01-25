@@ -97,7 +97,7 @@
   {
     "id": "feral_shotgun",
     "copy-from": "feral_jackboot_gun",
-        "type": "ITEM",
+    "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "feral bikers' shotgun" },
     "description": "A fake shotgun for feral bikers (because monster aiming is too lethal).",

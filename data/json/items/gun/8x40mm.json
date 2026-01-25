@@ -32,7 +32,12 @@
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" }, { "fault": "fault_fail_to_feed" }, { "fault": "fault_double_feed" } ],
+    "faults": [
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" },
+      { "fault": "fault_fail_to_feed" },
+      { "fault": "fault_double_feed" }
+    ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "magazine_well": "250 ml", "item_restriction": [ "8x40_10_mag", "8x40_25_mag" ] } ],
     "melee_damage": { "bash": 12 }
   },
@@ -72,7 +77,12 @@
       [ "sling", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" }, { "fault": "fault_fail_to_feed" }, { "fault": "fault_double_feed" } ],
+    "faults": [
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" },
+      { "fault": "fault_fail_to_feed" },
+      { "fault": "fault_double_feed" }
+    ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "8x40_10_mag", "8x40_25_mag" ] } ],
     "melee_damage": { "bash": 10 }
   },
@@ -109,7 +119,12 @@
       [ "stock accessory", 1 ],
       [ "underbarrel", 1 ]
     ],
-     "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" }, { "fault": "fault_fail_to_feed" }, { "fault": "fault_double_feed" } ],
+    "faults": [
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" },
+      { "fault": "fault_fail_to_feed" },
+      { "fault": "fault_double_feed" }
+    ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "8x40_25_mag", "8x40_10_mag" ] } ],
     "melee_damage": { "bash": 11 }
   },
@@ -144,7 +159,12 @@
       [ "stock accessory", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" }, { "fault": "fault_fail_to_feed" }, { "fault": "fault_double_feed" } ],
+    "faults": [
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" },
+      { "fault": "fault_fail_to_feed" },
+      { "fault": "fault_double_feed" }
+    ],
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "8x40_50_mag", "8x40_100_mag" ] } ],
     "melee_damage": { "bash": 12 }

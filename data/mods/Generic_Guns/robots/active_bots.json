@@ -8,8 +8,8 @@
     "starting_ammo": { "pistol_ball": 30 },
     "special_attacks": [
       {
-            "type": "ITEM",
-    "subtypes": [ "GUN" ],
+        "type": "ITEM",
+        "subtypes": [ "GUN" ],
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "pistol_smg",
@@ -38,8 +38,8 @@
     "starting_ammo": { "rifle_huge_ball": 400 },
     "special_attacks": [
       {
-            "type": "ITEM",
-    "subtypes": [ "GUN" ],
+        "type": "ITEM",
+        "subtypes": [ "GUN" ],
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "rifle_huge_hmg",
@@ -68,8 +68,8 @@
     "starting_ammo": { "rifle_ball": 1000 },
     "special_attacks": [
       {
-            "type": "ITEM",
-    "subtypes": [ "GUN" ],
+        "type": "ITEM",
+        "subtypes": [ "GUN" ],
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "rifle_lmg",
@@ -103,8 +103,8 @@
     "starting_ammo": { "rifle_ball": 30 },
     "special_attacks": [
       {
-            "type": "ITEM",
-    "subtypes": [ "GUN" ],
+        "type": "ITEM",
+        "subtypes": [ "GUN" ],
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "rifle_assault",
@@ -133,8 +133,8 @@
     "starting_ammo": { "grenade_ammo_hedp": 6 },
     "special_attacks": [
       {
-            "type": "ITEM",
-    "subtypes": [ "GUN" ],
+        "type": "ITEM",
+        "subtypes": [ "GUN" ],
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "grenade_revolver",
@@ -164,8 +164,8 @@
     "special_attacks": [
       {
         "//": "For later: needs the ability to preferentially target legs and arms",
-            "type": "ITEM",
-    "subtypes": [ "GUN" ],
+        "type": "ITEM",
+        "subtypes": [ "GUN" ],
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "grenade_revolver",

@@ -106,10 +106,7 @@
     "difficulty": 4,
     "charges": 1,
     "time": "20 m",
-    "book_learn": {
-      "cookbook_italian": { "skill_level": 3 },
-      "cookbook_foodfashions": { "skill_level": 4, "recipe_name": "Spaghetti Luchetto" }
-    },
+    "book_learn": { "cookbook_italian": { "skill_level": 3 }, "cookbook_foodfashions": { "skill_level": 4 } },
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
     "tools": [ [ [ "surface_heat", 7, "LIST" ] ] ],
     "//": "There are ways to cook pasta that don't require boiling the water, and they are a lot more efficient, so this uses surface_heat",
