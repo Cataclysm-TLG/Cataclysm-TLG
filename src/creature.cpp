@@ -14,6 +14,7 @@
 #include <unordered_map>
 
 #include "anatomy.h"
+#include "bionics.h"
 #include "body_part_set.h"
 #include "cached_options.h"
 #include "calendar.h"
@@ -154,7 +155,10 @@ static const material_id material_wool( "wool" );
 static const morale_type morale_pyromania_nofire( "morale_pyromania_nofire" );
 static const morale_type morale_pyromania_startfire( "morale_pyromania_startfire" );
 
+static const species_id species_CYBORG( "CYBORG" );
 static const species_id species_ROBOT( "ROBOT" );
+static const species_id species_ROBOT_FLYING( "ROBOT_FLYING" );
+static const species_id species_ZOMBIE( "ZOMBIE" );
 
 static const trait_id trait_DEBUG_CLOAK( "DEBUG_CLOAK" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
@@ -1151,14 +1155,42 @@ void projectile::apply_effects_damage( Creature &target, Creature *source,
     }
 
     if( proj_effects.count( ammo_effect_ROBOT_DAZZLE ) ) {
-        if( critical && target.in_species( species_ROBOT ) ) {
-            time_duration duration = rng( 6_turns, 8_turns );
-            target.add_effect( effect_source( source ), effect_stunned, duration );
-            target.add_effect( effect_source( source ), effect_sensor_stun, duration );
-            add_msg( source->is_avatar() ?
-                     _( "You land a clean shot on the %1$s sensors, stunning it." ) :
-                     _( "The %1$s is stunned!" ),
-                     target.disp_name( true ) );
+        if( critical ) {
+
+            if( ( target.in_species( species_ROBOT ) || target.in_species( species_ROBOT_FLYING ) ||
+                  target.in_species( species_CYBORG ) ) ) {
+                bool zombie = target.in_species( species_ZOMBIE );
+                if( zombie ) {
+                    time_duration duration = rng( 3_turns, 6_turns );
+                    target.add_effect( effect_source( source ), effect_stunned, duration );
+                    target.add_effect( effect_source( source ), effect_sensor_stun, duration );
+                    add_msg_if_player_sees( target, _( "The %1$s spasms as its electronics are briefly overloaded!" ),
+                                            target.disp_name() );
+                } else {
+                    time_duration duration = rng( 6_turns, 12_turns );
+                    target.add_effect( effect_source( source ), effect_stunned, duration );
+                    target.add_effect( effect_source( source ), effect_sensor_stun, duration );
+                    add_msg_if_player_sees( target, _( "The %1$s is briefly overloaded by interference!" ),
+                                            target.disp_name() );
+                }
+            }
+            if( !target.is_monster() ) {
+                bool deactivated = false;
+                for( bionic &bi : *target.as_character()->my_bionics ) {
+                    if( !bi.powered ) {
+                        continue;
+                    }
+                    if( one_in( 2 ) ) {
+                        deactivated = true;
+                        target.as_character()->deactivate_bionic( bi );
+                    }
+                }
+                if( deactivated ) {
+                    target.add_msg_if_player( _( "A burst of interference plays havoc with your bionics." ) );
+                    // Stun in lieu of adding a restart timer and a bunch of bespoke effects for specific bionics.
+                    target.add_effect( effect_source( source ), effect_stunned, 2_turns );
+                }
+            }
         }
     }
 
