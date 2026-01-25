@@ -4245,6 +4245,31 @@ std::function<bool( const tripoint_bub_ms & )> monster::get_path_avoid() const
     };
 }
 
+static void add_item_overlay_id( const item &item,
+                                 std::vector<std::pair<std::string, std::string>> &overlay_ids,
+                                 const std::vector<std::string> &suffixes )
+{
+    const std::string overlay_id = "worn_" + item.typeId().str();
+    for( const std::string &suffix : suffixes ) {
+        std::string full_id = overlay_id;
+        full_id += "_";
+        full_id += suffix;
+        overlay_ids.emplace_back( std::move( full_id ), "" );
+    }
+}
+
+static void add_generic_overlay_id( const std::string &base_id,
+                                    std::vector<std::pair<std::string, std::string>> &overlay_ids,
+                                    const std::vector<std::string> &suffixes )
+{
+    for( const std::string &suffix : suffixes ) {
+        std::string full_id = base_id;
+        full_id += "_";
+        full_id += suffix;
+        overlay_ids.emplace_back( std::move( full_id ), "" );
+    }
+}
+
 std::vector<std::pair<std::string, std::string>> monster::get_overlay_ids() const
 {
     std::vector<std::pair<std::string, std::string>> rval;
@@ -4258,6 +4283,25 @@ std::vector<std::pair<std::string, std::string>> monster::get_overlay_ids() cons
         for( const auto &eff_pr : *effects ) {
             rval.emplace_back( "effect_" + eff_pr.first.str(), "" );
         }
+    }
+
+    std::vector<std::string> overlay_suffixes;
+    if( !type->bodytype.empty() ) {
+        overlay_suffixes.emplace_back( type->bodytype );
+    }
+    const std::string mon_id = type->id.str();
+    if( !mon_id.empty() ) {
+        overlay_suffixes.emplace_back( mon_id );
+    }
+
+    if( armor_item ) {
+        add_item_overlay_id( *armor_item, rval, overlay_suffixes );
+    }
+    if( tack_item ) {
+        add_generic_overlay_id( "worn_tack", rval, overlay_suffixes );
+    }
+    if( storage_item ) {
+        add_generic_overlay_id( "worn_storage", rval, overlay_suffixes );
     }
 
     return rval;
