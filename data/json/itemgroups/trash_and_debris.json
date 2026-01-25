@@ -343,7 +343,7 @@
       { "item": "brick", "prob": 20, "count": [ 10, 20 ], "damage": [ 0, 3 ] },
       { "item": "pipe", "prob": 5, "count": [ 2, 6 ], "damage": [ 0, 3 ] },
       { "item": "nail", "prob": 2, "count": [ 0, 1 ], "charges": [ 3, 15 ] },
-      { "item": "wire", "prob": 3, "count": [ 2, 6 ], "damage": [ 0, 3 ]  },
+      { "item": "wire", "prob": 3, "count": [ 2, 6 ], "damage": [ 0, 3 ] },
       { "item": "charcoal", "prob": 3, "charges": [ 3, 7 ] },
       { "item": "copper_fragment", "prob": 2, "count": [ 2, 4 ], "damage": [ 0, 3 ] },
       { "item": "sheet_metal", "prob": 2, "count": [ 1, 4 ], "damage": [ 0, 3 ] },
