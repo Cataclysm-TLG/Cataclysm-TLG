@@ -184,7 +184,7 @@
     "subtypes": [ "GUN" ],
     "copy-from": "laser_rifle",
     "name": { "str": "hm12 dazzle rifle" },
-    "description": "This bulky anti-drone gun molded from black polymer was once beloved on all sides of the Eastern European theatre.  It disrupts navigation and communcation systems by firing a powerful electromagnetic pulse and will temporarily stun robots, if you manage to hit their sensors with a clean shot.",
+    "description": "This bulky anti-drone gun molded from black polymer was once beloved on all sides of the Eastern European theater.  It disrupts navigation and communcation systems by firing a brief but powerful burst of microwave energy.  A direct hit may cause robots, drones, and even cyborgs to malfunction for a short time.",
     "price_postapoc": "150 USD",
     "ranged_damage": { "damage_type": "pure", "amount": 1 },
     "energy_drain": "20 kJ",

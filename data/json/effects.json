@@ -614,9 +614,9 @@
   {
     "type": "effect_type",
     "id": "sensor_stun",
-    "name": [ "Sensor scrambling" ],
-    "desc": [ "Your artificial senses are scrambled and report false readings." ],
-    "apply_message": "You're stunned!",
+    "name": [ "EM Interference" ],
+    "desc": [ "Your artificial senses are overloaded." ],
+    "apply_message": "ERROR!",
     "rating": "bad",
     "show_in_info": true
   },
