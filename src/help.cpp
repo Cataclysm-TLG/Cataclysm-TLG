@@ -51,7 +51,7 @@ void help::reset_instance()
 
 void help::load_object( const JsonObject &jo, const std::string &src )
 {
-    if( src == "dda" ) {
+    if( src == "tlg" ) {
         jo.throw_error( string_format( "Vanilla help must be located in %s",
                                        PATH_INFO::jsondir().generic_u8string() ) );
     }
