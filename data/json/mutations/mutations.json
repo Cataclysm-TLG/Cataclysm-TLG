@@ -3169,7 +3169,7 @@
   {
     "type": "mutation",
     "id": "BARK",
-    "flags": [ "BARKY" ],
+    "flags": [ "BARKY", "TOUGH_FEET" ],
     "name": { "str": "Protective Bark" },
     "points": 5,
     "visibility": 10,
