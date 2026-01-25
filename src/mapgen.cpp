@@ -4938,7 +4938,7 @@ mapgen_palette mapgen_palette::load_internal( const JsonObject &jo, std::string_
         const std::string &context, bool require_id, bool allow_recur )
 {
     mapgen_palette new_pal;
-    bool extending = src != "dda" && jo.has_bool( "extending" ) && jo.get_bool( "extending" );
+    bool extending = src != "tlg" && jo.has_bool( "extending" ) && jo.get_bool( "extending" );
     require_id |= extending;
     mapgen_palette::placing_map &format_placings = new_pal.format_placings;
     auto &keys_with_terrain = new_pal.keys_with_terrain;
@@ -5180,7 +5180,7 @@ bool mapgen_function_json_base::setup_common( const JsonObject &jo )
     }
 
     // just like mapf::basic_bind("stuff",blargle("foo", etc) ), only json input and faster when applying
-    mapgen_palette palette = mapgen_palette::load_temp( jo, "dda", context_ );
+    mapgen_palette palette = mapgen_palette::load_temp( jo, "tlg", context_ );
     auto &keys_with_terrain = palette.keys_with_terrain;
     mapgen_palette::placing_map &format_placings = palette.format_placings;
 
