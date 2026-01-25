@@ -20,7 +20,7 @@
   {
     "type": "skill",
     "id": "firstaid",
-    "name": { "str": "health care" },
+    "name": { "str": "medicine" },
     "description": "Your skill in effecting medical treatment.  Higher levels allow better use of medicines and items like bandages and first aid kits, and reduce the failure and complication rates of medical procedures.",
     "companion_survival_rank_factor": 1,
     "companion_industry_rank_factor": 1,
@@ -84,7 +84,7 @@
   {
     "type": "skill",
     "id": "cooking",
-    "name": { "str": "food handling" },
+    "name": { "str": "cooking" },
     "description": "Your skill in combining food ingredients to make other, tastier food items.  Also includes food preservation and safety, brewing, butchery, and more.",
     "companion_industry_rank_factor": 1,
     "display_category": "display_crafting",
@@ -299,8 +299,8 @@
   {
     "type": "skill",
     "id": "chemistry",
-    "name": { "str": "applied science" },
-    "description": "Your skill in general 'bench science', applying any of a wide range of precision techniques based on your overall understanding of scientific principles.  This is not a research skill, but about using the results of others' research.",
+    "name": { "str": "science" },
+    "description": "Your ability to safely and methodically handle the practical side of laboratory work, as well as your general understanding of the principles of the physical sciences, particularly chemistry.",
     "companion_industry_rank_factor": 1,
     "display_category": "display_crafting",
     "sort_rank": 19000,
