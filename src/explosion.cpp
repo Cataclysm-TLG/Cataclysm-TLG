@@ -934,7 +934,7 @@ void emp_blast( const tripoint_bub_ms &p )
                 !player_character.has_flag( json_flag_EMP_IMMUNE ) ) {
                 add_msg( m_bad, _( "The electromagnetic pulse fries your %s!" ), it->tname() );
                 it->deactivate();
-                if( one_in ( 4 ) ) {
+                if( one_in( 4 ) ) {
                     it->set_random_fault_of_type( "shorted" );
                 } else {
                     it->set_fault( fault_emp_reboot );

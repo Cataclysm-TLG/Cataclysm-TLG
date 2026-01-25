@@ -5550,6 +5550,7 @@ void Character::update_needs( int rate_multiplier )
         }
     } else if( asleep ) {
         if( rates.recovery > 0.0f ) {
+
             int recovered = roll_remainder( rates.recovery * rate_multiplier );
             if( get_fatigue() - recovered < -20 ) {
                 // Should be wake up, but that could prevent some retroactive regeneration
@@ -5573,7 +5574,6 @@ void Character::update_needs( int rate_multiplier )
                 if( has_effect( effect_melatonin ) ) {
                     rest_modifier += 1;
                 }
-
                 const int comfort = get_comfort_at( pos_bub() ).comfort;
                 if( comfort >= comfort_data::COMFORT_VERY_COMFORTABLE ) {
                     rest_modifier *= 3;
@@ -5590,35 +5590,14 @@ void Character::update_needs( int rate_multiplier )
                 } else if( get_fatigue() >= fatigue_levels::EXHAUSTED ) {
                     rest_modifier = ( rest_modifier > 2 ) ? rest_modifier - 2 : 1;
                 }
-
                 // Recovered is multiplied by 2 as well, since we spend 1/3 of the day sleeping
                 mod_sleep_deprivation( -rest_modifier * ( recovered * 2 ) );
 
             }
         }
         map &here = get_map();
-        if( calendar::once_every( 10_minutes ) && ( has_trait( trait_CHLOROMORPH ) ||
-                has_trait( trait_M_SKIN3 ) || has_trait( trait_WATERSLEEP ) ) &&
+        if( calendar::once_every( 10_minutes ) && has_trait( trait_M_SKIN3 ) &&
             here.is_outside( pos_bub() ) ) {
-            if( has_trait( trait_CHLOROMORPH ) ) {
-                // Hunger and thirst fall before your Chloromorphic physiology!
-                if( incident_sun_irradiance( get_weather().weather_id, calendar::turn ) > irradiance::low ) {
-                    if( has_active_mutation( trait_CHLOROMORPH ) && ( get_fatigue() <= 25 ) ) {
-                        set_fatigue( 25 );
-                    }
-                    if( get_hunger() >= -30 ) {
-                        mod_hunger( -5 );
-                        // photosynthesis warrants absorbing kcal directly
-                        mod_stored_kcal( 43 );
-                    }
-                }
-                if( get_thirst() >= -40 ) {
-                    mod_thirst( -5 );
-                }
-                // Assuming eight hours of sleep, this will take care of Iron and Calcium needs
-                vitamin_mod( vitamin_iron, 2 );
-                vitamin_mod( vitamin_calcium, 2 );
-            }
             if( has_trait( trait_M_SKIN3 ) ) {
                 // Spores happen!
                 if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() ) ) {
@@ -5629,9 +5608,6 @@ void Character::update_needs( int rate_multiplier )
                         spores(); // spawn some P O O F Y   B O I S
                     }
                 }
-            }
-            if( has_trait( trait_WATERSLEEP ) ) {
-                mod_fatigue( -3 ); // Fish get better sleep in water
             }
         }
     }
@@ -9129,7 +9105,6 @@ void Character::rooted()
 // This assumes that daily Iron, Calcium, and Thirst needs should be filled at the same rate.
 // Baseline humans need 96 Iron and Calcium, and 288 Thirst per day.
 // Thirst level -40 puts it right in the middle of the 'Hydrated' zone.
-// TODO: The rates for iron, calcium, and thirst should probably be pulled from the nutritional data rather than being hardcoded here, so that future balance changes don't break this.
 {
     if( ( has_trait( trait_ROOTS2 ) || has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
         get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) && is_barefoot() ) {
@@ -9137,10 +9112,12 @@ void Character::rooted()
         if( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) {
             time_to_full += -14400;    // -4 hours
         }
+        if( in_sleep_state() ) {
+            time_to_full += -3600;    // -1 hour
+        }
         if( x_in_y( 96, time_to_full ) ) {
             vitamin_mod( vitamin_iron, 1 );
             vitamin_mod( vitamin_calcium, 1 );
-            mod_daily_health( 5, 50 );
         }
         if( get_thirst() > -40 && x_in_y( 288, time_to_full ) ) {
             mod_thirst( -1 );
@@ -9523,7 +9500,7 @@ void Character::resume_backlog_activity()
 
 void Character::fall_asleep()
 {
-    // Communicate to the player that they are using items on the floor
+    // Communicate to the player that they are using items on the floor.
     std::string item_name = is_snuggling();
     if( item_name == "many" ) {
         if( one_in( 15 ) ) {
@@ -9538,9 +9515,7 @@ void Character::fall_asleep()
             add_msg_if_player( _( "You use your %s to keep warm." ), item_name );
         }
     }
-
     get_comfort_at( pos_bub() ).add_sleep_msgs( *this );
-
     if( has_active_bionic( bio_sleep_shutdown ) ) {
         add_msg_if_player( _( "Sleep Mode activated.  Disabling sensory response." ) );
     }
@@ -9556,7 +9531,12 @@ void Character::fall_asleep()
         // In practice, the fatigue from filling the tank from (no msg) to Time For Bed
         // will last about 8 days.
     } else {
-        fall_asleep( 10_hours );    // default max sleep time.
+        /* Fall asleep for a max of 10 hours by default. This time can be longer if we have
+        a mutation like Sleepy. We will automatically wake up when we're no longer tired,
+        so shorter naps are already handled. */
+        int sleep_hours = std::max( enchantment_cache->modify_value( enchant_vals::mod::FATIGUE,
+                                    sleep_hours ), 36000.0 );
+        fall_asleep( time_duration::from_turns( sleep_hours ) );
     }
 }
 
