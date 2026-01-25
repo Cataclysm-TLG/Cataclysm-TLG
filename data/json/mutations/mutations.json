@@ -685,7 +685,7 @@
     "changes_to": [ "EASYSLEEPER2" ],
     "starting_trait": true,
     "cancels": [ "INSOMNIA" ],
-    "category": [ "MOUSE", "INSECT", "GASTROPOD", "RABBIT" ],
+    "category": [ "MOUSE", "INSECT", "GASTROPOD", "RABBIT", "FELINE" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SLEEPY", "add": 24 } ] } ]
   },
   {

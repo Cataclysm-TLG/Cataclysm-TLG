@@ -5,7 +5,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str": "melatonin tablet" },
-    "description": "An over-the-counter melatonin supplement, commonly prescribed to treat sleep deprivation and to mitigate its effects.  One tablet a day combined with a good night's sleep will help you recover faster.",
+    "description": "An over-the-counter melatonin supplement.  One tablet before bed is commonly recommended to improve sleep quality, especially for those suffering from sleep deprivation.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "8 ml",

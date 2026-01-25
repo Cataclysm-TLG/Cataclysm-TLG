@@ -3673,7 +3673,6 @@
   {
     "type": "effect_type",
     "id": "lying_down",
-    "apply_message": "You lie down to go to sleep…",
     "rating": "neutral",
     "max_duration": "50 m",
     "flags": [ "PREVENT_TRAINING" ]
