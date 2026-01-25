@@ -187,7 +187,7 @@ class Item_spawn_data
         }
 
         int get_probability( bool skip_event_check ) const;
-        void set_probablility( int prob ) {
+        void set_probability( int prob ) {
             probability = prob;
         }
         bool is_event_based() const {
