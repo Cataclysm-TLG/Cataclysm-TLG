@@ -2524,7 +2524,7 @@ int Character::footstep_sound() const
             volume = calculate_by_enchantment( volume, enchant_vals::mod::FOOTSTEP_NOISE );
         }
     }
-    return std::round( volume );
+    return static_cast<int>( std::round( volume ) );
 }
 
 int Character::clatter_sound() const
@@ -2539,7 +2539,7 @@ void Character::make_footstep_noise() const
     }
 
     const int volume = footstep_sound();
-    if( volume <= 0 ) {
+    if( volume < 1 ) {
         return;
     }
     if( is_mounted() ) {
@@ -2557,7 +2557,7 @@ void Character::make_clatter_sound() const
 {
 
     const int volume = clatter_sound();
-    if( volume <= 0 ) {
+    if( volume < 1 ) {
         return;
     }
     sounds::sound( pos_bub(), volume, sounds::sound_t::movement, _( "clattering equipment" ), true,
