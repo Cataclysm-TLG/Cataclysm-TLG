@@ -266,8 +266,8 @@ static int sound_distance( const tripoint_bub_ms &source, const tripoint_bub_ms 
     }
     // Regardless of underground effects, scale the vertical distance by 5x.
     vertical_attenuation *= 5;
-    return static_cast<int>( std::round( trig_dist_z_adjust( source.xy(),
-                                         sink.xy() ) ) ) + vertical_attenuation;
+    return trig_dist( source.xy(),
+                      sink.xy() ) + vertical_attenuation;
 }
 
 static std::string season_str( const season_type &season )

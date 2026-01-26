@@ -765,20 +765,16 @@ void monster::plan()
 
 /**
  * Method to make monster movement speed consistent in the face of staggering behavior and
- * differing distance metrics.
- * It works by scaling the cost to take a step by
- * how much that step reduces the distance to your goal.
- * Since it incorporates the current distance metric,
- * it also scales for diagonal vs orthogonal movement.
+ * differing distance metrics. It works by scaling the cost to take a step by
+ * how much that step reduces the distance to your goal, scaled correctly for diagonals.
  **/
 static float get_stagger_adjust( const tripoint_bub_ms &source, const tripoint_bub_ms &destination,
                                  const tripoint_bub_ms &next_step )
 {
-    // TODO: push this down into rl_dist
     const float initial_dist =
-        trig_dist_z_adjust( source, destination );
+        trig_dist( source, destination );
     const float new_dist =
-        trig_dist_z_adjust( next_step, destination );
+        trig_dist_precise( next_step, destination );
     // If we return 0, it wil cancel the action.
     return std::max( 0.01f, initial_dist - new_dist );
 }
@@ -1441,8 +1437,8 @@ void monster::footsteps( const tripoint_bub_ms &p )
     if( volume == 0 ) {
         return;
     }
-    int dist = static_cast<int>( std::round( trig_dist_z_adjust( p,
-                                 get_player_character().pos_bub() ) ) );
+    int dist = trig_dist( p,
+                          get_player_character().pos_bub() );
     sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
 }
 

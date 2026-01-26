@@ -161,38 +161,45 @@ std::vector<point> line_to( const point &p1, const point &p2, int t = 0 );
 std::vector<tripoint> line_to( const tripoint &loc1, const tripoint &loc2, int t = 0, int t2 = 0 );
 // sqrt(dX^2 + dY^2)
 
-inline float trig_dist( const tripoint &loc1, const tripoint &loc2 )
+inline int trig_dist( const tripoint &loc1, const tripoint &loc2 )
 {
-    return std::sqrt( static_cast<double>( ( loc1.x - loc2.x ) * ( loc1.x - loc2.x ) ) +
-                      ( ( loc1.y - loc2.y ) * ( loc1.y - loc2.y ) ) +
-                      ( ( loc1.z - loc2.z ) * ( loc1.z - loc2.z ) ) );
+    return static_cast<int>( std::round( std::sqrt( static_cast<double>( ( loc1.x - loc2.x ) *
+                                         ( loc1.x - loc2.x ) ) +
+                                         ( ( loc1.y - loc2.y ) * ( loc1.y - loc2.y ) ) +
+                                         ( ( loc1.z - loc2.z ) * ( loc1.z - loc2.z ) ) ) ) );
 }
-float trig_dist( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 );
-inline float trig_dist( const point &loc1, const point &loc2 )
+int trig_dist( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 );
+inline int trig_dist( const point &loc1, const point &loc2 )
 {
     return trig_dist( tripoint( loc1, 0 ), tripoint( loc2, 0 ) );
 }
-float trig_dist( const point_bub_ms &loc1, const point_bub_ms &loc2 );
+int trig_dist( const point_bub_ms &loc1, const point_bub_ms &loc2 );
 
-inline float trig_dist_z_adjust( const tripoint &loc1, const tripoint &loc2 )
+
+/* Used when we actually want the float, like when calculating diagonal movecost
+   or similar */
+inline float trig_dist_precise( const tripoint &loc1, const tripoint &loc2 )
 {
     return std::sqrt( static_cast<double>( ( loc1.x - loc2.x ) * ( loc1.x - loc2.x ) ) +
                       ( ( loc1.y - loc2.y ) * ( loc1.y - loc2.y ) ) +
                       ( ( 2 * ( loc1.z - loc2.z ) ) * ( 2 * ( loc1.z - loc2.z ) ) ) );
 }
-float trig_dist_z_adjust( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 );
-inline float trig_dist_z_adjust( const point &loc1, const point &loc2 )
+float trig_dist_precise( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 );
+inline float trig_dist_precise( const point &loc1, const point &loc2 )
 {
-    return trig_dist_z_adjust( tripoint( loc1, 0 ), tripoint( loc2, 0 ) );
+    return trig_dist_precise( tripoint( loc1, 0 ), tripoint( loc2, 0 ) );
 }
-float trig_dist_z_adjust( const point_bub_ms &loc1, const point_bub_ms &loc2 );
+float trig_dist_precise( const point_bub_ms &loc1, const point_bub_ms &loc2 );
 
-// Roguelike distance; maximum of dX and dY
+
+
+// Maximum of dX and dY
 inline int square_dist( const tripoint &loc1, const tripoint &loc2 )
 {
     const tripoint d = ( loc1 - loc2 ).abs();
     return std::max( { d.x, d.y, d.z } );
 }
+
 inline int square_dist( const point &loc1, const point &loc2 )
 {
     const point d = ( loc1 - loc2 ).abs();
@@ -202,11 +209,9 @@ inline int square_dist( const point &loc1, const point &loc2 )
 // Choose between the above two according to the "circular distances" option
 inline int rl_dist( const tripoint &loc1, const tripoint &loc2 )
 {
-    if( trigdist ) {
-        return trig_dist( loc1, loc2 );
-    }
-    return square_dist( loc1, loc2 );
+    return trig_dist( loc1, loc2 );
 }
+
 inline int rl_dist( const point &a, const point &b )
 {
     return rl_dist( tripoint( a, 0 ), tripoint( b, 0 ) );
@@ -271,10 +276,7 @@ FastDistanceApproximation square_dist_fast( const tripoint_bub_ms &loc1,
 inline FastDistanceApproximation rl_dist_fast( const tripoint_bub_ms &loc1,
         const tripoint_bub_ms &loc2 )
 {
-    if( trigdist ) {
-        return trig_dist_fast( loc1, loc2 );
-    }
-    return square_dist_fast( loc1, loc2 );
+    return trig_dist_fast( loc1, loc2 );
 }
 FastDistanceApproximation rl_dist_fast( const point_bub_ms &a, const point_bub_ms &b );
 

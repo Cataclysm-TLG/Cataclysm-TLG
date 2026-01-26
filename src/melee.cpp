@@ -153,6 +153,7 @@ static const skill_id skill_unarmed( "unarmed" );
 static const trait_id trait_CLUMSY( "CLUMSY" );
 static const trait_id trait_DEBUG_NIGHTVISION( "DEBUG_NIGHTVISION" );
 static const trait_id trait_DEFT( "DEFT" );
+static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_POISONOUS( "POISONOUS" );
 static const trait_id trait_POISONOUS2( "POISONOUS2" );
 static const trait_id trait_VINES2( "VINES2" );
@@ -385,7 +386,9 @@ float Character::hit_roll() const
     }
 
     // Fighting in the dark is hard.
-    if( !sight_impaired() && fine_detail_vision_mod() >= 7.0f ) {
+    // TODO: sees_with_specials should help, but we'd need to pass the target to this function.
+    if( ( sight_impaired() || fine_detail_vision_mod() >= 7.0f ) &&
+        !( has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() ) ) {
         hit -= 1.0f;
     }
 

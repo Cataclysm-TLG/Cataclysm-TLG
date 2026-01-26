@@ -7564,7 +7564,7 @@ void game::zones_manager()
                         colorLine = zone.get_enabled() ? c_light_green : c_green;
                     }
 
-                    //Draw Zone name
+                    // Draw Zone name.
                     mvwprintz( w_zones, point( 3, iNum - start_index ), colorLine,
                                //~ "P: <Zone Name>" represents a personal zone
                                trim_by_length( ( zone.get_is_personal() ? _( "P: " ) : "" ) + zone.get_name(),
@@ -7572,13 +7572,13 @@ void game::zones_manager()
 
                     tripoint_abs_ms center = zone.get_center_point();
 
-                    //Draw direction + distance
+                    // Draw direction + distance.
                     mvwprintz( w_zones, point( zone_ui_width - 13, iNum - start_index ), colorLine, "%*d %s",
-                               5, static_cast<int>( trig_dist( player_absolute_pos, center ) ),
+                               5, trig_dist( player_absolute_pos, center ),
                                direction_name_short( direction_from( player_absolute_pos,
                                                      center ) ) );
 
-                    //Draw Vehicle Indicator
+                    // Draw Vehicle Indicator.
                     mvwprintz( w_zones, point( zone_ui_width - 4, iNum - start_index ), colorLine,
                                zone.get_is_vehicle() ? "*" : "" );
                 }

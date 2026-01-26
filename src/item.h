@@ -2078,7 +2078,7 @@ class item : public visitable
 
         /**How much of the specified vitamin is there?*/
         int get_vitamin_amount( const vitamin_id &vitamin ) const;
-        
+
         std::string get_fault_description( const fault_id &f_id ) const;
 
         /** Does this item have the specified fault? */
