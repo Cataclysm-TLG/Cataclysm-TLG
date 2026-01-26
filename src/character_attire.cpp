@@ -2116,7 +2116,7 @@ std::unordered_set<bodypart_id> outfit::where_discomfort( const Character &guy )
 
     for( const item &i : worn ) {
         // check each sublimb individually
-        for( const sub_bodypart_id &sbp : i.get_covered_sub_body_parts() ) {
+        for( const sub_bodypart_id &sbp : i.get_covered_sub_body_parts( &guy ) ) {
             if( i.is_bp_comfortable( sbp ) ) {
                 covered_sbps.insert( sbp );
             }
