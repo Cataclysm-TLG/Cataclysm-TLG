@@ -167,7 +167,7 @@ bool leap_actor::call( monster &z ) const
                            candidate.to_string_writable() );
             continue;
         }
-        float leap_dist = trig_dist( z.pos_bub(), candidate );
+        int leap_dist = trig_dist( z.pos_bub(), candidate );
         add_msg_debug( debugmode::DF_MATTACK,
                        "Candidate coordinates %s, distance %.1f, min range %.1f, max range %.1f",
                        candidate.to_string_writable(), leap_dist, min_range, max_range );
@@ -313,8 +313,7 @@ bool mon_spellcasting_actor::call( monster &mon ) const
 
     // Bail out if the target is out of range.
     if( !spell_data.self &&
-        static_cast<int>( std::round( trig_dist_z_adjust( mon.pos_bub(),
-                                      target ) > spell_instance.range( mon ) ) ) ) {
+        trig_dist( mon.pos_bub(), target ) > spell_instance.range( mon ) ) {
         return false;
     }
 
@@ -1231,7 +1230,7 @@ bool gun_actor::call( monster &z ) const
         }
     }
 
-    const int dist = static_cast<int>( std::round( trig_dist_z_adjust( z.pos_bub(), aim_at ) ) );
+    const int dist = trig_dist( z.pos_bub(), aim_at );
     if( target ) {
         add_msg_debug( debugmode::DF_MATTACK, "Target %s at range %d", target->disp_name(), dist );
     } else {

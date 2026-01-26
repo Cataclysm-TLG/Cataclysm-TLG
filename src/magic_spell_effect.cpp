@@ -226,7 +226,7 @@ void spell_effect::pain_split( const spell &sp, Creature &caster, const tripoint
 static bool in_spell_aoe( const tripoint_bub_ms &start, const tripoint_bub_ms &end,
                           const int &radius, const bool ignore_walls )
 {
-    if( static_cast<int>( std::round( trig_dist_z_adjust( start, end ) ) ) > radius ) {
+    if( trig_dist( start, end ) > radius ) {
         return false;
     }
     if( ignore_walls ) {
