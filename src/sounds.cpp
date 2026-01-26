@@ -585,10 +585,10 @@ void sounds::process_sound_markers( Character *you )
 
         // The felt volume of a sound is not affected by negative multipliers, such as already
         // deafened players or players with sub-par hearing to begin with.
-        int felt_volume = static_cast<int>( raw_volume * std::min( 1.0f,
-                                            volume_multiplier ) ) - distance_to_sound;
+        int felt_volume = static_cast<int>( std::round( ( raw_volume * std::min( 1.0f,
+                                            volume_multiplier ) ) - distance_to_sound ) );
         if( you->has_flag( json_flag_HEARING_PROTECTION ) ) {
-            felt_volume /= 2;
+            felt_volume = static_cast<int>( std::round( felt_volume /= 2 ) );
         }
         // Deafening is based on the felt volume, as a player may be too deaf to
         // hear the deafening sound but still suffer additional hearing loss.
@@ -619,10 +619,10 @@ void sounds::process_sound_markers( Character *you )
         }
 
         // The heard volume of a sound is the player heard volume, regardless of true volume level.
-        const int heard_volume = static_cast<int>( ( raw_volume - weather_vol ) *
-                                 volume_multiplier ) - distance_to_sound;
+        const int heard_volume = static_cast<int>( std::round( ( ( raw_volume - weather_vol ) *
+                                 volume_multiplier ) - distance_to_sound ) );
 
-        if( heard_volume <= 0 && pos != you->pos_bub() ) {
+        if( heard_volume < 1 && pos != you->pos_bub() ) {
             continue;
         }
 
@@ -1454,48 +1454,49 @@ void sfx::sound_thread::operator()() const
     const std::string seas_str = season_str( seas );
     const bool indoors = !is_creature_outside( get_player_character() );
     const bool night = is_night( calendar::turn );
-
-    if( weapon_skill == skill_bashing && weapon_volume <= 8 ) {
-        variant_used = "small_bash";
-        play_variant_sound( "melee_swing", "small_bash", seas_str, indoors, night,
-                            vol_src, ang_src, 0.8, 1.2 );
-    } else if( weapon_skill == skill_bashing && weapon_volume >= 9 ) {
-        variant_used = "big_bash";
-        play_variant_sound( "melee_swing", "big_bash", seas_str, indoors, night,
-                            vol_src, ang_src, 0.8, 1.2 );
-    } else if( ( weapon_skill == skill_cutting || weapon_skill == skill_stabbing ) &&
-               weapon_volume <= 6 ) {
-        variant_used = "small_cutting";
-        play_variant_sound( "melee_swing", "small_cutting", seas_str, indoors, night,
-                            vol_src, ang_src, 0.8, 1.2 );
-    } else if( ( weapon_skill == skill_cutting || weapon_skill == skill_stabbing ) &&
-               weapon_volume >= 7 ) {
-        variant_used = "big_cutting";
-        play_variant_sound( "melee_swing", "big_cutting", seas_str, indoors, night,
-                            vol_src, ang_src, 0.8, 1.2 );
-    } else {
-        variant_used = "default";
-        play_variant_sound( "melee_swing", "default", seas_str, indoors, night,
-                            vol_src, ang_src, 0.8, 1.2 );
-    }
-    if( hit ) {
-        if( targ_mon ) {
-            if( material == "steel" ) {
-                std::this_thread::sleep_for( std::chrono::milliseconds( rng( weapon_volume * 12,
-                                             weapon_volume * 16 ) ) );
-                play_variant_sound( "melee_hit_metal", variant_used, seas_str, indoors,
-                                    night, vol_targ, ang_targ, 0.8, 1.2 );
+    if( std::chrono::duration_cast<std::chrono::milliseconds> ( sfx_time ).count() > 400 ) {
+        if( weapon_skill == skill_bashing && weapon_volume <= 8 ) {
+            variant_used = "small_bash";
+            play_variant_sound( "melee_swing", "small_bash", seas_str, indoors, night,
+                                vol_src, ang_src, 0.8, 1.2 );
+        } else if( weapon_skill == skill_bashing && weapon_volume >= 9 ) {
+            variant_used = "big_bash";
+            play_variant_sound( "melee_swing", "big_bash", seas_str, indoors, night,
+                                vol_src, ang_src, 0.8, 1.2 );
+        } else if( ( weapon_skill == skill_cutting || weapon_skill == skill_stabbing ) &&
+                weapon_volume <= 6 ) {
+            variant_used = "small_cutting";
+            play_variant_sound( "melee_swing", "small_cutting", seas_str, indoors, night,
+                                vol_src, ang_src, 0.8, 1.2 );
+        } else if( ( weapon_skill == skill_cutting || weapon_skill == skill_stabbing ) &&
+                weapon_volume >= 7 ) {
+            variant_used = "big_cutting";
+            play_variant_sound( "melee_swing", "big_cutting", seas_str, indoors, night,
+                                vol_src, ang_src, 0.8, 1.2 );
+        } else {
+            variant_used = "default";
+            play_variant_sound( "melee_swing", "default", seas_str, indoors, night,
+                                vol_src, ang_src, 0.8, 1.2 );
+        }
+        if( hit ) {
+            if( targ_mon ) {
+                if( material == "steel" ) {
+                    std::this_thread::sleep_for( std::chrono::milliseconds( rng( weapon_volume * 12,
+                                                weapon_volume * 16 ) ) );
+                    play_variant_sound( "melee_hit_metal", variant_used, seas_str, indoors,
+                                        night, vol_targ, ang_targ, 0.8, 1.2 );
+                } else {
+                    std::this_thread::sleep_for( std::chrono::milliseconds( rng( weapon_volume * 12,
+                                                weapon_volume * 16 ) ) );
+                    play_variant_sound( "melee_hit_flesh", variant_used, seas_str, indoors,
+                                        night, vol_targ, ang_targ, 0.8, 1.2 );
+                }
             } else {
-                std::this_thread::sleep_for( std::chrono::milliseconds( rng( weapon_volume * 12,
-                                             weapon_volume * 16 ) ) );
+                std::this_thread::sleep_for( std::chrono::milliseconds( rng( weapon_volume * 9,
+                                            weapon_volume * 12 ) ) );
                 play_variant_sound( "melee_hit_flesh", variant_used, seas_str, indoors,
                                     night, vol_targ, ang_targ, 0.8, 1.2 );
             }
-        } else {
-            std::this_thread::sleep_for( std::chrono::milliseconds( rng( weapon_volume * 9,
-                                         weapon_volume * 12 ) ) );
-            play_variant_sound( "melee_hit_flesh", variant_used, seas_str, indoors,
-                                night, vol_targ, ang_targ, 0.8, 1.2 );
         }
     }
 }
@@ -1506,7 +1507,11 @@ void sfx::do_projectile_hit( const Creature &target )
         return;
     }
 
+    if( std::chrono::duration_cast<std::chrono::milliseconds> ( sfx_time ).count() > 400 ) {
     const int heard_volume = sfx::get_heard_volume( target.pos_bub() );
+    if( heard_volume < 1 ) {
+        return;
+    }
     const units::angle angle = get_heard_angle( target.pos_bub() );
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
@@ -1541,6 +1546,7 @@ void sfx::do_projectile_hit( const Creature &target )
     }
     play_variant_sound( "bullet_hit", "hit_flesh", seas_str, indoors, night,
                         heard_volume, angle, 0.8, 1.2 );
+    }
 }
 
 void sfx::do_player_death_hurt( const Character &target, bool death )
@@ -1549,11 +1555,15 @@ void sfx::do_player_death_hurt( const Character &target, bool death )
         return;
     }
 
+    if( std::chrono::duration_cast<std::chrono::milliseconds> ( sfx_time ).count() > 400 ) {
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
     const bool indoors = !is_creature_outside( get_player_character() );
     const bool night = is_night( calendar::turn );
     int heard_volume = get_heard_volume( target.pos_bub() );
+    if( heard_volume < 1 ) {
+        return;
+    }
     const bool male = target.male;
     if( !male && !death ) {
         play_variant_sound( "deal_damage", "hurt_f", seas_str, indoors, night, heard_volume );
@@ -1563,6 +1573,7 @@ void sfx::do_player_death_hurt( const Character &target, bool death )
         play_variant_sound( "clean_up_at_end", "death_f", seas_str, indoors, night, heard_volume );
     } else if( male && death ) {
         play_variant_sound( "clean_up_at_end", "death_m", seas_str, indoors, night, heard_volume );
+    }
     }
 }
 
@@ -1746,6 +1757,9 @@ void sfx::do_footstep()
     if( std::chrono::duration_cast<std::chrono::milliseconds> ( sfx_time ).count() > 400 ) {
         const Character &player_character = get_player_character();
         int heard_volume = sfx::get_heard_volume( player_character.pos_bub() );
+        if( heard_volume < 1 ) {
+            return;
+        }
         const auto terrain = here.ter( player_character.pos_bub() ).id();
         static const std::set<ter_str_id> grass = {
             ter_t_grass,
@@ -1895,6 +1909,7 @@ void sfx::do_obstacle( const std::string &obst )
         return;
     }
 
+    if( std::chrono::duration_cast<std::chrono::milliseconds> ( sfx_time ).count() > 400 ) {
     end_sfx_timestamp = std::chrono::high_resolution_clock::now();
     sfx_time = end_sfx_timestamp - start_sfx_timestamp;
     if( std::chrono::duration_cast<std::chrono::milliseconds> ( sfx_time ).count() > 400 ) {
@@ -1904,6 +1919,9 @@ void sfx::do_obstacle( const std::string &obst )
         const bool indoors = !is_creature_outside( player_character );
         const bool night = is_night( calendar::turn );
         int heard_volume = sfx::get_heard_volume( player_character.pos_bub() );
+        if( heard_volume < 1 ) {
+            return;
+        }
         if( sfx::has_variant_sound( "plmove", obst, seas_str, indoors, night ) ) {
             play_variant_sound( "plmove", obst, seas_str, indoors, night,
                                 heard_volume, 0_degrees, 0.8, 1.2 );
@@ -1918,6 +1936,7 @@ void sfx::do_obstacle( const std::string &obst )
         }
         // prevent footsteps from triggering
         start_sfx_timestamp = std::chrono::high_resolution_clock::now();
+    }
     }
 }
 

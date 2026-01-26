@@ -58,12 +58,12 @@
       {
         "//": "Ninjutsu   ------------------------------------------",
         "condition": { "u_has_effect": "mabuff:buff_ninjutsu_static1" },
-        "id": "buff_sojutsu_static",
+        "id": "buff_ninjutsu_static1",
         "text": "Ninjutsu Stance"
       },
       {
         "condition": { "u_has_effect": "mabuff:buff_ninjutsu_static2" },
-        "id": "buff_sojutsu_static",
+        "id": "buff_ninjutsu_static2",
         "text": "Sneak Attack"
       },
       {

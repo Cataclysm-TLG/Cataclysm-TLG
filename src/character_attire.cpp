@@ -2716,7 +2716,7 @@ int outfit::clatter_sound() const
             }
         }
     }
-    return std::round( max_volume );
+    return static_cast<int>( std::round( max_volume ) );
 }
 
 float outfit::clothing_wetness_mult( const bodypart_id &bp ) const

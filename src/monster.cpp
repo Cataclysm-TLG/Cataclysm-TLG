@@ -3980,9 +3980,9 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
     }
 
     const bool goodhearing = has_flag( mon_flag_GOODHEARING );
-    const int volume = goodhearing ? 2 * vol - dist : vol - dist;
+    const int volume = static_cast<int>( std::round( goodhearing ? 2 * vol - dist : vol - dist ) );
     // Error is based on volume, louder sound = less error
-    if( volume <= 0 ) {
+    if( volume < 1 ) {
         return;
     }
 
@@ -4007,7 +4007,7 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
                              rng( -max_error, max_error ) );
     // target_z will require some special check due to soil muffling sounds
 
-    const int wander_turns = volume * ( goodhearing ? 6 : 1 );
+    const int wander_turns = static_cast<int>( std::round( volume * ( goodhearing ? 6 : 1 ) ) );
     // again, already following a more interesting sound
     if( wander_turns < wandf ) {
         return;
