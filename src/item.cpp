@@ -941,6 +941,11 @@ void item::set_damage( int qty )
     damage_ = std::clamp( qty, degradation_, max_damage() );
 }
 
+void item::force_set_damage( int qty )
+{
+    damage_ = std::clamp( qty, degradation_, max_damage() );
+}
+
 void item::set_degradation( int qty )
 {
     if( type->degrade_increments() > 0 ) {
@@ -948,7 +953,8 @@ void item::set_degradation( int qty )
     } else {
         degradation_ = 0;
     }
-    set_damage( damage_ );
+    // Maybe should use set_damage() instead, but we trust damage is set before the degradation.
+    force_set_damage( damage_ );
 }
 
 item item::split( int qty )
@@ -9166,7 +9172,7 @@ bool item::mod_damage( int qty )
     } else {
         const int dmg_before = damage_;
         const bool destroy = ( damage_ + qty ) > max_damage();
-        set_damage( damage_ + qty );
+        force_set_damage( damage_ + qty );
 
         if( qty > 0 && !destroy ) { // apply automatic degradation
             set_degradation( degradation_ + get_degrade_amount( *this, damage_, dmg_before ) );
@@ -9174,7 +9180,9 @@ bool item::mod_damage( int qty )
 
         // TODO: think about better way to telling the game what faults should be applied when
         if( qty > 0 ) {
-            set_random_fault_of_type( "mechanical_damage" );
+            for( int i = 0; i <= qty; i += itype::damage_scale ) {
+                set_random_fault_of_type( "mechanical_damage" );
+            }
         }
 
         return destroy;
