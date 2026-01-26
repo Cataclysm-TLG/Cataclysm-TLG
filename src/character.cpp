@@ -7022,10 +7022,12 @@ void Character::mend_item( item_location &&obj, bool interactive )
             for( const fault_id &fid : fix.faults_added ) {
                 descr += string_format( _( "Adds fault: <color_yellow>%s</color>\n" ), fid->name() );
             }
-            if( fix.mod_damage > 0 ) {
-                descr += string_format( _( "<color_green>Repairs</color> %d damage.\n" ), fix.mod_damage );
-            } else if( fix.mod_damage < 0 ) {
-                descr += string_format( _( "<color_red>Applies</color> %d damage.\n" ), -fix.mod_damage );
+            if( fix.mod_damage < 0 ) {
+                descr += string_format( _( "<color_green>Repairs</color> %d damage.\n" ),
+                                        -fix.mod_damage / itype::damage_scale );
+            } else if( fix.mod_damage > 0 ) {
+                descr += string_format( _( "<color_red>Applies</color> %d damage.\n" ),
+                                        fix.mod_damage / itype::damage_scale );
             }
 
             opt.time_to_fix = fix.time;
@@ -7868,9 +7870,10 @@ void Character::signal_nemesis()
 
 void Character::vomit()
 {
+    const units::volume stomach_contents_before_vomit = stomach.contains();
     get_event_bus().send<event_type::throws_up>( getID() );
 
-    if( stomach.contains() != 0_ml ) {
+    if( stomach_contents_before_vomit != 0_ml ) {
         get_map().add_field( adjacent_tile(), fd_bile, 1 );
         add_msg_player_or_npc( m_bad, _( "You throw up heavily!" ), _( "<npcname> throws up heavily!" ) );
     }
@@ -7902,7 +7905,7 @@ void Character::vomit()
     remove_effect( effect_pkill2 );
     remove_effect( effect_pkill3 );
     // Don't wake up when just retching
-    if( stomach.contains() > 0_ml ) {
+    if( stomach_contents_before_vomit > 0_ml ) {
         wake_up();
     }
 }

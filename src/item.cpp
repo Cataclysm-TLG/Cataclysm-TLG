@@ -5367,7 +5367,7 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
             info.emplace_back( "DESCRIPTION", _( "<bold>Techniques when wielded</bold>: " ) +
             enumerate_as_string( all_tec_sorted, []( const matec_id & tid ) {
                 return string_format( "<stat>%s</stat>: <info>%s</info> <info>%s</info>", tid.obj().name,
-                                      tid.obj().description, tid.obj().condition_desc );
+                                      tid.obj().description, _( tid.obj().condition_desc ) );
             } ) );
         }
     }
@@ -9170,6 +9170,11 @@ bool item::mod_damage( int qty )
 
         if( qty > 0 && !destroy ) { // apply automatic degradation
             set_degradation( degradation_ + get_degrade_amount( *this, damage_, dmg_before ) );
+        }
+
+        // TODO: think about better way to telling the game what faults should be applied when
+        if( qty > 0 ) {
+            set_random_fault_of_type( "mechanical_damage" );
         }
 
         return destroy;
@@ -13969,7 +13974,7 @@ bool item::has_no_links() const
 
 std::string item::link_name() const
 {
-    return has_flag( flag_CABLE_SPOOL ) ? label( 1 ) : string_format( " %s's cable", label( 1 ) );
+    return has_flag( flag_CABLE_SPOOL ) ? label( 1 ) : string_format( _( " %s's cable" ), label( 1 ) );
 }
 
 ret_val<void> item::link_to( const optional_vpart_position &linked_vp, link_state link_type )
@@ -14252,8 +14257,8 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
                            link().length, link().max_length );
         }
         if( link().length > link().max_length ) {
-            std::string cable_name = is_cable_item ? string_format( "over-extended %s", label( 1 ) ) :
-                                     string_format( "%s's over-extended cable", label( 1 ) );
+            std::string cable_name = is_cable_item ? string_format( _( "over-extended %s" ), label( 1 ) ) :
+                                     string_format( _( "%s's over-extended cable" ), label( 1 ) );
             if( carrier != nullptr ) {
                 carrier->add_msg_if_player( m_bad, _( "Your %s breaks loose!" ), cable_name );
             } else {
