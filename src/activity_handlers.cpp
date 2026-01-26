@@ -990,7 +990,7 @@ static std::vector<item> create_charge_items( const itype *drop, int count,
             obj.set_flag( flg );
         }
         for( const fault_id &flt : entry.faults ) {
-            obj.faults.emplace( flt );
+            obj.set_fault( flt );
         }
         if( !you.backlog.empty() && you.backlog.front().id() == ACT_MULTIPLE_BUTCHER ) {
             obj.set_var( "activity_var", you.name );
@@ -1236,7 +1236,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                     obj.set_flag( flg );
                 }
                 for( const fault_id &flt : entry.faults ) {
-                    obj.faults.emplace( flt );
+                    obj.remove_fault( flt );
                 }
 
                 // If we're not bleeding the animal we don't care about the blood being wasted
@@ -1268,7 +1268,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                     obj.set_flag( flg );
                 }
                 for( const fault_id &flt : entry.faults ) {
-                    obj.faults.emplace( flt );
+                    obj.remove_fault( flt );
                 }
                 if( !you.backlog.empty() && you.backlog.front().id() == ACT_MULTIPLE_BUTCHER ) {
                     obj.set_var( "activity_var", you.name );
@@ -2805,10 +2805,10 @@ void activity_handlers::mend_item_finish( player_activity *act, Character *you )
     you->invalidate_crafting_inventory();
 
     for( const ::fault_id &id : fix.faults_removed ) {
-        target.faults.erase( id );
+        target.remove_fault( id );
     }
     for( const ::fault_id &id : fix.faults_added ) {
-        target.set_fault( id );
+        target.set_fault( id, true, false );
     }
     for( const auto &[var_name, var_value] : fix.set_variables ) {
         target.set_var( var_name, var_value );

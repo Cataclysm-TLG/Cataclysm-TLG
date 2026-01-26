@@ -302,6 +302,11 @@ class item : public visitable
         void set_damage( int qty );
 
         /**
+        * Same as set_damage, but bypasses any checks and just sets value to desired level
+        */
+        void force_set_damage( int qty );
+
+        /**
         * Sets item's degradation constrained by [0 and @ref max_damage]
         * If item damage is lower it is raised up to @ref degradation
         */
@@ -1714,11 +1719,7 @@ class item : public visitable
         /** What faults can potentially occur with this item? */
         std::set<fault_id> faults_potential() const;
 
-        bool can_have_fault_type( const std::string &fault_type ) const;
-
         std::set<fault_id> faults_potential_of_type( const std::string &fault_type ) const;
-
-        void apply_fault();
 
         /** Returns the total area of this wheel or 0 if it isn't one. */
         int wheel_area() const;
@@ -2045,17 +2046,22 @@ class item : public visitable
         /** Idempotent filter setting an item specific flag. */
         item &set_flag( const flag_id &flag );
 
-        /** Idempotent filter setting an item specific fault. */
-        void set_fault( const fault_id &fault_id );
+        /** Check if item can have a fault, and if yes, applies it. This version do not print a message, use item_location version instead
+         * `force`, if true, bypasses the check and applies the fault item do not define
+         */
+        bool set_fault( const fault_id &f_id, bool force = false, bool message = true );
 
-        void set_random_fault_of_type( const std::string &fault_type, const bool &force = false );
+        /** Check if item can have any fault of type, and if yes, applies it. This version do not print a message, use item_location version instead
+        * `force`, if true, bypasses the check and applies the fault item do not define
+        */
+        void set_random_fault_of_type( const std::string &fault_type, bool force = false,
+                                       bool message = true );
 
-        weighted_int_list<fault_id> all_potential_faults() const;
+        /** Checks all the faults in item, and if there is any of this type, removes it. */
+        void remove_single_fault_of_type( const std::string &fault_type );
 
-        weighted_int_list<fault_id> all_potential_faults_of_type( const std::string
-                &fault_type ) const;
-
-        const fault_id &random_potential_fault_of_type( const std::string &fault_type ) const;
+        // Check if adding this fault is possible
+        bool can_have_fault( const fault_id &f_id );
 
         /** Idempotent filter removing an item specific flag */
         item &unset_flag( const flag_id &flag );
@@ -2072,12 +2078,19 @@ class item : public visitable
 
         /**How much of the specified vitamin is there?*/
         int get_vitamin_amount( const vitamin_id &vitamin ) const;
+        
+        std::string get_fault_description( const fault_id &f_id ) const;
 
-        /**Does this item have the specified fault*/
+        /** Does this item have the specified fault? */
         bool has_fault( const fault_id &fault ) const;
+
+        bool has_fault_of_type( const std::string &fault_type ) const;
 
         /** Does this item part have a fault with this flag */
         bool has_fault_flag( const std::string &searched_flag ) const;
+
+        /** Removes the fault from the item, if it has it. */
+        void remove_fault( const fault_id &fault_id );
 
         /**
          * @name Item properties
