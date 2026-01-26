@@ -161,6 +161,11 @@ std::string fault::item_suffix() const
     return item_suffix_.translated();
 }
 
+std::string fault::message() const
+{
+    return message_.translated();
+}
+
 double fault::price_mod() const
 {
     return price_modifier;

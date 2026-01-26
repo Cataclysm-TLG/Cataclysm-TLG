@@ -82,6 +82,7 @@ class fault
         std::string description() const;
         std::string item_prefix() const;
         std::string item_suffix() const;
+        std::string message() const;
         double price_mod() const;
         // having this faults adds this much of temporary (will be removed when fault is fixed) degradation
         int degradation_mod() const;
@@ -100,7 +101,7 @@ class fault
         bool was_loaded = false; // used by generic_factory
         friend class generic_factory<fault>;
         friend class fault_fix;
-
+        translation message_;
         std::string type_;
         translation name_;
         translation description_;

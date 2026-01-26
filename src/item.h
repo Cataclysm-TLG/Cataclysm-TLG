@@ -2092,11 +2092,11 @@ class item : public visitable
         /** Does this item have the specified fault? */
         bool has_fault( const fault_id &fault ) const;
 
-        /**Does this item have the specified fault*/
-        bool has_fault( const fault_id &fault ) const;
-
         /** Does this item part have a fault with this flag */
         bool has_fault_flag( const std::string &searched_flag ) const;
+
+        /** Removes the fault from the item, if it has it. */
+        void remove_fault( const fault_id &fault_id );
 
         /**
          * @name Item properties

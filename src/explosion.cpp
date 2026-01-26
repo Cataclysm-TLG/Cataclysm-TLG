@@ -952,13 +952,12 @@ void emp_blast( const tripoint_bub_ms &p )
                 add_msg( _( "The electromagnetic pulse fries the %s!" ), it.tname() );
             }
             it.deactivate();
-            item_location loc = item_location( map_cursor( p ), &it );
             if( one_in( 4 ) ) {
                 it.set_random_fault_of_type( "shorted", true, false );
             } else {
                 it.set_fault( fault_emp_reboot, true, false );
             }
-            //map::make_active adds the item to the active item processing list, so that it can reboot without further interaction
+            // map::make_active adds the item to the active item processing list, so that it can reboot without further interaction.
             item_location loc = item_location( map_cursor( p ), &it );
             here.make_active( loc );
         }
