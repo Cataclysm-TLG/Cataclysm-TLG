@@ -839,7 +839,7 @@
     "description": "It takes a lot to bring you down.  You get a 10% bonus to all hit points.",
     "starting_trait": true,
     "types": [ "DURABILITY" ],
-    "changes_to": [ "TOUGH2", "MUT_TOUGH2" ],
+    "changes_to": [ "TOUGH2", "MUT_TOUGH" ],
     "category": [ "URSINE", "CATTLE", "CHIMERA", "BEAST", "LIZARD", "CRUSTACEAN", "MEDICAL" ],
     "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3" ],
     "social_modifiers": { "intimidate": 2 },
@@ -4843,13 +4843,14 @@
   {
     "type": "mutation",
     "id": "MUT_TOUGH",
-    "name": { "str": "Resilient" },
+    "name": { "str": "Durable" },
     "points": 2,
     "description": "You can survive injuries that would incapacitate humans: you get a 20% bonus to all hit points.",
     "social_modifiers": { "intimidate": 2 },
     "types": [ "DURABILITY" ],
     "prereqs": [ "LARGE", "LARGE_OK", "HUGE", "HUGE_OK", "STR_UP", "STR_UP_2", "STR_UP_3", "STR_UP_4" ],
     "changes_to": [ "MUT_TOUGH2" ],
+    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
     "category": [ "URSINE", "CATTLE", "CHIMERA", "BEAST", "LIZARD", "CRUSTACEAN" ],
     "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.2 } ] } ]
   },
@@ -4863,6 +4864,7 @@
     "prereqs": [ "MUT_TOUGH" ],
     "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE", "THRESH_CHIMERA", "THRESH_CRUSTACEAN" ],
     "changes_to": [ "MUT_TOUGH3" ],
+    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
     "category": [ "URSINE", "CATTLE", "CHIMERA", "CRUSTACEAN" ],
     "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.3 } ] } ]
   },
