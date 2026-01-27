@@ -4003,7 +4003,8 @@ void activity_handlers::spellcasting_finish( player_activity *act, Character *yo
                     if( spell_being_cast.get_level() != old_level ) {
                         // Level 0-1 message is printed above - notify player when leveling up further
                         if( old_level > 0 ) {
-                            you->add_msg_if_player( m_good, _( "You improve your ability to use %s!" ), spell_being_cast.name() );
+                            you->add_msg_if_player( m_good, _( "You improve your ability to use %s!" ),
+                                                    spell_being_cast.name() );
                         }
                     }
                 }

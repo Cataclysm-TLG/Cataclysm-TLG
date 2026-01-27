@@ -176,8 +176,8 @@ inline int trig_dist( const tripoint &loc1, const tripoint &loc2 )
     const int dz = z_weight * ( loc1.z - loc2.z );
 
     return static_cast<int>( std::lround(
-        std::sqrt( static_cast<double>( dx * dx + dy * dy + dz * dz ) )
-    ) );
+                                 std::sqrt( static_cast<double>( dx * dx + dy * dy + dz * dz ) )
+                             ) );
 }
 
 int trig_dist( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 );
@@ -192,15 +192,15 @@ int trig_dist( const point_bub_ms &loc1, const point_bub_ms &loc2 );
    or similar */
 inline float trig_dist_precise( const tripoint &loc1, const tripoint &loc2 )
 {
-constexpr int z_weight = 2;
+    constexpr int z_weight = 2;
 
-const int dx = loc1.x - loc2.x;
-const int dy = loc1.y - loc2.y;
-const int dz = z_weight * ( loc1.z - loc2.z );
+    const int dx = loc1.x - loc2.x;
+    const int dy = loc1.y - loc2.y;
+    const int dz = z_weight * ( loc1.z - loc2.z );
 
-return std::sqrt(
-    static_cast<double>( dx * dx + dy * dy + dz * dz )
-);
+    return std::sqrt(
+               static_cast<double>( dx * dx + dy * dy + dz * dz )
+           );
 }
 float trig_dist_precise( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 );
 inline float trig_dist_precise( const point &loc1, const point &loc2 )

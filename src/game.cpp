@@ -10958,7 +10958,8 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
             add_msg( m_warning, _( "You move into the %s, releasing it." ), grabbed_vehicle->name );
             u.grab( object_type::NONE );
         }
-    } else if( grabbed && !u.has_effect_with_flag( json_flag_GRAB_FILTER ) && u.get_grab_type() != object_type::FURNITURE_ON_VEHICLE ) {
+    } else if( grabbed && !u.has_effect_with_flag( json_flag_GRAB_FILTER ) &&
+               u.get_grab_type() != object_type::FURNITURE_ON_VEHICLE ) {
         // We were grabbing something weird, let's pretend we weren't.
         grabbed = false;
     }

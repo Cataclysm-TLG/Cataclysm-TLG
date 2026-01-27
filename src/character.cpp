@@ -9543,8 +9543,9 @@ void Character::fall_asleep()
         a mutation like Sleepy. We will automatically wake up when we're no longer tired,
         so shorter naps are already handled. */
         int sleep_hours = 36000;
-        sleep_hours = static_cast<int>( std::max( enchantment_cache->modify_value( enchant_vals::mod::FATIGUE,
-                                    sleep_hours ), 36000.0 ) );
+        sleep_hours = static_cast<int>( std::max( enchantment_cache->modify_value(
+                                            enchant_vals::mod::FATIGUE,
+                                            sleep_hours ), 36000.0 ) );
         fall_asleep( time_duration::from_turns( sleep_hours ) );
     }
 }
