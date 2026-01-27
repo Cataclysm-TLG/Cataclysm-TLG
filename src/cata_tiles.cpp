@@ -3997,9 +3997,8 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                     height_3d = height_3d_temp;
                 }
                 if( ret && !vd.carried_furn.empty() ) {
-                    draw_from_id_string( vd.carried_furn,
-                                         TILE_CATEGORY::FURNITURE, empty_string, p, 0, angle_to_dir4( 0_degrees ), ll, nv_goggles_activated,
-                                         height_3d );
+                    draw_from_id_string( vd.carried_furn, TILE_CATEGORY::FURNITURE, empty_string, p, subtile,
+                                          angle_to_dir4( 0_degrees ), ll, nv_goggles_activated, height_3d, 1.0f, 1.0f );
                 }
                 return ret;
             }
