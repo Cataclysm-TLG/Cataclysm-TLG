@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gun_4" ],
     "weight": 300,
     "object": {
@@ -52,7 +51,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gun_2ndfloor_4",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -89,7 +87,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gun_roof_4",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -124,7 +121,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gun_4_looted" ],
     "weight": 300,
     "object": {

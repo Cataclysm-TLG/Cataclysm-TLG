@@ -14,7 +14,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "skate_park" ],
     "weight": 100,
     "object": {
@@ -61,7 +60,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "skate_park_up" ],
     "weight": 100,
     "object": {
@@ -107,7 +105,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "skate_park_down" ],
     "weight": 100,
     "object": {

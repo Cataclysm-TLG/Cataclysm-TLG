@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "roadstop" ],
     "weight": 333,
     "object": {
@@ -54,7 +53,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "roadstop_roof",
     "object": {
       "fill_ter": "t_tar_flat_roof",
@@ -90,7 +88,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "roadstop_a" ],
     "weight": 333,
     "object": {
@@ -150,7 +147,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "roadstop_a_roof",
     "object": {
       "fill_ter": "t_tar_flat_roof",
@@ -186,7 +182,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "roadstop_b" ],
     "weight": 333,
     "object": {
@@ -265,7 +260,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "roadstop_b_roof",
     "object": {
       "fill_ter": "t_tar_flat_roof",

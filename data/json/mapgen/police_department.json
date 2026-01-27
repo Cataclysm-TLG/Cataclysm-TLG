@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "police_dept_u000", "police_dept_u100" ], [ "police_dept_u010", "police_dept_u110" ] ],
     "weight": 100,
     "object": {
@@ -96,7 +95,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "police_dept_u001", "police_dept_u101" ], [ "police_dept_u011", "police_dept_u111" ] ],
     "weight": 100,
     "object": {
@@ -201,7 +199,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "police_dept_u002", "police_dept_u102" ], [ "police_dept_u012", "police_dept_u112" ] ],
     "weight": 100,
     "object": {
@@ -275,7 +272,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "police_dept_b10", "police_dept_b00" ], [ "police_dept_b11", "police_dept_b01" ] ],
     "weight": 100,
     "object": {
@@ -361,7 +357,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "police_dept_d100", "police_dept_d000" ], [ "police_dept_d110", "police_dept_d010" ] ],
     "weight": 100,
     "object": {
@@ -474,7 +469,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "police_dept_d101", "police_dept_d001" ], [ "police_dept_d111", "police_dept_d011" ] ],
     "weight": 100,
     "object": {
@@ -591,7 +585,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "police_dept_d102", "police_dept_d002" ], [ "police_dept_d112", "police_dept_d012" ] ],
     "weight": 100,
     "object": {
@@ -664,7 +657,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "police_dept_skyway" ],
     "weight": 100,
     "object": {
@@ -702,7 +694,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "police_dept_skyway_roof" ],
     "weight": 100,
     "object": {

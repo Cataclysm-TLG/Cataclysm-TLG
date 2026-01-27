@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "large_storage_units_1",
     "weight": 500,
     "object": {
@@ -88,7 +87,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "large_storage_units_roof_1",
     "object": {
       "fill_ter": "t_tar_flat_roof",
@@ -124,7 +122,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "large_storage_units_2",
     "weight": 500,
     "object": {
@@ -178,7 +175,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "large_storage_units_roof_2",
     "object": {
       "fill_ter": "t_tar_flat_roof",
@@ -214,7 +210,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "large_storage_units_3",
     "object": {
       "fill_ter": "t_thconc_floor",
@@ -300,7 +295,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "large_storage_units_roof_3",
     "object": {
       "fill_ter": "t_tar_flat_roof",

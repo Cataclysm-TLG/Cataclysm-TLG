@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "silo" ],
     "weight": 400,
     "object": {
@@ -57,7 +56,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "silo_roof" ],
     "weight": 400,
     "object": {
@@ -94,7 +92,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "silo_1" ],
     "weight": 400,
     "object": {
@@ -177,7 +174,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "silo_2" ],
     "weight": 400,
     "object": {
@@ -276,7 +272,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "silo_3" ],
     "weight": 400,
     "object": {
@@ -353,7 +348,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "silo_4" ],
     "weight": 400,
     "object": {
@@ -437,7 +431,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "silo_finale" ],
     "weight": 400,
     "object": {

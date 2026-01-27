@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "2farm_4", "2farm_3", "2farm_2", "2farm_1" ], [ "2farm_8", "2farm_7", "2farm_6", "2farm_5" ] ],
     "weight": 250,
     "object": {
@@ -107,7 +106,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "2farm_roof_4", "2farm_loft_3" ] ],
     "weight": 250,
     "object": {
@@ -152,7 +150,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "2farm_roof_3" ],
     "weight": 250,
     "object": {
@@ -189,7 +186,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "2farm_6_1" ] ],
     "weight": 250,
     "object": {
@@ -226,7 +222,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "2farm_6_2" ] ],
     "weight": 250,
     "object": {
@@ -263,7 +258,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "2farm_6_3" ] ],
     "weight": 250,
     "object": {
@@ -300,7 +294,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [ "null", "null", "2farm_10", "2farm_9" ],
       [ "2farm_16", "2farm_15", "2farm_14", "2farm_13" ],
@@ -413,7 +406,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "2farm_12", "2farm_11" ] ],
     "weight": 250,
     "object": {
@@ -463,7 +455,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "2farm_roof_11" ],
     "weight": 250,
     "object": {

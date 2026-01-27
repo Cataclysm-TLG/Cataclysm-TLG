@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "small_storage_units" ],
     "weight": 100,
     "object": {
@@ -76,7 +75,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "small_storage_units_roof",
     "object": {
       "fill_ter": "t_tar_flat_roof",
@@ -112,7 +110,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "small_storage_units_1" ],
     "weight": 100,
     "object": {
@@ -160,7 +157,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "small_storage_units_roof_1",
     "object": {
       "fill_ter": "t_tar_flat_roof",

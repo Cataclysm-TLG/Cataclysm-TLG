@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "om_terrain": "lab_health_z-2_A",
     "type": "mapgen",
     "weight": 200,
@@ -40,7 +39,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "lab_health_z-3_A",
     "type": "mapgen",
     "weight": 200,
@@ -95,7 +93,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "lab_health_z-3_B",
     "type": "mapgen",
     "weight": 200,
@@ -141,7 +138,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "lab_health_z-2_B",
     "type": "mapgen",
     "weight": 200,

@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_weldingstore" ],
     "weight": 300,
     "object": {
@@ -38,7 +37,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_weldingstore_roof" ],
     "weight": 300,
     "object": {

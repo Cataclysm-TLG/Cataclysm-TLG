@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "field" ],
     "object": {
       "fill_ter": "t_region_groundcover",

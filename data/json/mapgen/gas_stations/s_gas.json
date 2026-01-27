@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gas" ],
     "object": {
       "fill_ter": "t_pavement",
@@ -54,7 +53,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gas_1" ],
     "weight": 200,
     "object": {
@@ -152,7 +150,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gas_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -202,7 +199,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gas_rural" ],
     "//": "Rural Gas Station",
     "weight": 333,
@@ -310,7 +306,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gas_rural_roof",
     "object": {
       "fill_ter": "t_flat_roof",

@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lab_train_depot", "central_lab_train_depot" ],
     "weight": 250,
     "object": {
@@ -60,7 +59,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_train_subway_east",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -100,7 +98,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_train_subway_west",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -140,7 +137,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_train_subway_north",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -180,7 +176,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_train_subway_south",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -220,7 +215,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_train_entrance_north",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -256,7 +250,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_train_entrance_south",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -292,7 +285,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_train_entrance_east",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -328,7 +320,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_train_entrance_west",
     "object": {
       "mapgensize": [ 24, 24 ],

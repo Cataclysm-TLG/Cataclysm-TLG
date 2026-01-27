@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "forest_trail_end",
     "weight": { "global_val": "vanilla_trail_intersection_weight", "default": 1000 },
     "object": {
@@ -22,7 +21,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_end_basic",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -57,7 +55,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_end_spread",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -92,7 +89,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_end_split",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -127,7 +123,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "forest_trail_straight",
     "//": "Only includes field temporarily while horse farm spawned trail can spawn over field",
     "object": {
@@ -145,7 +140,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_forest",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -169,7 +163,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_swamp",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -191,7 +184,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_basic",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -226,7 +218,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_meander",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -261,7 +252,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_meander_1",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -296,7 +286,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_fallen_tree",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -332,7 +321,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_sett",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -384,7 +372,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_steep",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -420,7 +407,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_mud",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -456,7 +442,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_straight_mud_split",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -492,7 +477,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "forest_trail_curved",
     "object": {
       "fallback_predecessor_mapgen": "forest_thick",
@@ -511,7 +495,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_curved_basic",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -546,7 +529,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_curved_shrubs",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -582,7 +564,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_curved_diag",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -617,7 +598,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "forest_trail_tee",
     "weight": { "global_val": "vanilla_trail_intersection_weight", "default": 1000 },
     "object": {
@@ -637,7 +617,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_tee_basic",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -672,7 +651,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_tee_split",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -707,7 +685,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "forest_trail_four_way",
     "weight": { "global_val": "vanilla_trail_intersection_weight", "default": 1000 },
     "object": {
@@ -723,7 +700,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_four_way_basic",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -758,7 +734,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "24x24_forest_trail_four_way_high_low",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -793,7 +768,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "forest_trail_intersection",
     "weight": { "global_val": "vanilla_trail_intersection_weight", "default": 1000 },
     "//": "For placing the intersection as part of a special",

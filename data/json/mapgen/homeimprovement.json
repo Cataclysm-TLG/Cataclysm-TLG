@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "home_improvement" ],
     "weight": 10000,
     "object": {
@@ -90,7 +89,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "home_improvement_roof",
     "object": {
       "fill_ter": "t_flat_roof",

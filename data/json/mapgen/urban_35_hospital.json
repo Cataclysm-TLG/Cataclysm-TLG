@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "urban_35_1", "urban_35_2" ], [ "urban_35_3", "urban_35_4" ] ],
     "weight": 250,
     "object": {
@@ -128,7 +127,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "urban_35_5", "urban_35_6", "urban_35_34" ], [ "urban_35_7", "urban_35_8", "urban_35_35" ] ],
     "weight": 250,
     "object": {
@@ -258,7 +256,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "urban_35_9", "urban_35_10" ], [ "urban_35_11", "urban_35_12" ] ],
     "//": "patient floor",
     "weight": 250,
@@ -367,7 +364,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "urban_35_13", "urban_35_14" ], [ "urban_35_15", "urban_35_16" ] ],
     "//": "patient floor",
     "weight": 250,
@@ -478,7 +474,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "//": "surgical floor",
     "om_terrain": [ [ "urban_35_17", "urban_35_18" ], [ "urban_35_19", "urban_35_20" ] ],
     "weight": 250,
@@ -589,7 +584,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "//": "maternity floor",
     "om_terrain": [ [ "urban_35_21", "urban_35_22" ], [ "urban_35_23", "urban_35_24" ] ],
     "weight": 250,
@@ -712,7 +706,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "//": "admin and cafe floor",
     "om_terrain": [ [ "urban_35_25", "urban_35_26" ], [ "urban_35_27", "urban_35_28" ] ],
     "weight": 250,
@@ -822,7 +815,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "urban_35_29", "urban_35_30" ], [ "urban_35_31", "urban_35_32" ] ],
     "weight": 250,
     "object": {
@@ -902,7 +894,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "urban_35_33" ],
     "weight": 250,
     "object": {

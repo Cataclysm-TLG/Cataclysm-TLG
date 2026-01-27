@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_cosmetic" ],
     "weight": 100,
     "object": {
@@ -76,7 +75,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_cosmetic_roof",
     "weight": 100,
     "object": {

@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "microlab_generic_hallway_end",
     "object": {
       "fill_ter": "t_strconc_floor",
@@ -33,7 +32,6 @@
   {
     "type": "mapgen",
     "nested_mapgen_id": "microlab_generic_end_tile",
-    "method": "json",
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -68,7 +66,6 @@
   {
     "type": "mapgen",
     "nested_mapgen_id": "microlab_generic_end_tile",
-    "method": "json",
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -103,7 +100,6 @@
   {
     "type": "mapgen",
     "nested_mapgen_id": "microlab_generic_end_tile",
-    "method": "json",
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -138,7 +134,6 @@
   {
     "type": "mapgen",
     "nested_mapgen_id": "microlab_generic_end_tile",
-    "method": "json",
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -173,7 +168,6 @@
   {
     "type": "mapgen",
     "om_terrain": [ [ "microlab_generic_hallway_blind_end" ] ],
-    "method": "json",
     "object": {
       "fill_ter": "t_strconc_floor",
       "rows": [

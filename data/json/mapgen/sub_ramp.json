@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "sub_ramp_above" ],
     "weight": 250,
     "object": {
@@ -45,7 +44,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "sub_ramp_below" ],
     "weight": 250,
     "object": {

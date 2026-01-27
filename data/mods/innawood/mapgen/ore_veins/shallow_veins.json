@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "innawood_ore_vein_surface_indicator" ],
     "object": {
       "rows": [
@@ -42,7 +41,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "innawood_ore_vein_subsurface" ],
     "object": {
       "rows": [
@@ -77,7 +75,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "innawood_ore_vein_surface_z2_left_side",
@@ -117,7 +114,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "innawood_ore_vein_surface_z3_left_side",

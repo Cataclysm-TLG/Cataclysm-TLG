@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "stripclub",
     "weight": 100,
     "object": {
@@ -110,7 +109,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "stripclub_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -157,7 +155,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "stripclub_1",
     "type": "mapgen",
     "weight": 100,
@@ -284,7 +281,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "stripclub_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -332,7 +328,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "stripclub_2",
     "weight": 100,
     "object": {
@@ -435,7 +430,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "stripclub_roof_2",
     "object": {
       "fill_ter": "t_flat_roof",

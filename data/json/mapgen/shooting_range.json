@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "type": "mapgen",
     "om_terrain": [ [ "shootingrange_1a" ], [ "shootingrange_2a" ] ],
     "weight": 100,
@@ -135,7 +134,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "shootingrange_1a_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",

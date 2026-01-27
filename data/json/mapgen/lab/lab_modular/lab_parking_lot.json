@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "lab_surface_parking_blockA0",
@@ -110,7 +109,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lab_surface_parking_blockE2" ],
     "object": {
       "fill_ter": "t_strconc_floor",
@@ -152,7 +150,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lab_surface_parking_blockA2" ],
     "object": {
       "fill_ter": "t_strconc_floor",

@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_teashop" ],
     "weight": 250,
     "object": {
@@ -93,7 +92,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_teashop_roof",
     "weight": 200,
     "object": {
@@ -137,7 +135,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_teashop_1" ],
     "weight": 250,
     "object": {
@@ -227,7 +224,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_teashop_roof_1",
     "weight": 200,
     "object": {
@@ -280,7 +276,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_teashop_upper_roof_1",
     "weight": 200,
     "object": {

@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_09" ],
     "//": "uses bionic_basement",
     "weight": 300,
@@ -44,7 +43,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_09_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",

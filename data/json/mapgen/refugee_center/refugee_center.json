@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "evac_center_1", "evac_center_2", "evac_center_3", "evac_center_4", "evac_center_5" ] ],
     "weight": 100,
     "object": {
@@ -54,7 +53,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "evac_center_6", "evac_center_7", "evac_center_8", "evac_center_9", "evac_center_10" ] ],
     "weight": 100,
     "object": {
@@ -156,7 +154,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "evac_center_11", "evac_center_12", "evac_center_13", "evac_center_14", "evac_center_15" ] ],
     "weight": 100,
     "object": {
@@ -237,7 +234,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "evac_center_16", "evac_center_17", "evac_center_18", "evac_center_19", "evac_center_20" ] ],
     "weight": 100,
     "object": {
@@ -356,7 +352,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "evac_center_21", "evac_center_22", "evac_center_23", "evac_center_24", "evac_center_25" ] ],
     "weight": 100,
     "object": {

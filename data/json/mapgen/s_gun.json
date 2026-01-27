@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gun" ],
     "weight": 300,
     "object": {
@@ -40,7 +39,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gun_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -104,7 +102,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gun_upper_roof",
     "object": {
       "rows": [
@@ -138,7 +135,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gun_looted" ],
     "//": "Looted version of s_gun. Uses same roof as s_gun.",
     "weight": 300,
@@ -201,7 +197,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gun_1" ],
     "//": "Home defense gun store",
     "weight": 300,
@@ -244,7 +239,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gun_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -306,7 +300,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gun_upper_roof_1",
     "object": {
       "rows": [
@@ -340,7 +333,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gun_2" ],
     "//": "Public holdout based on Home Defense Gunstore. Uses same roof as s_gunstore_1.",
     "weight": 100,
@@ -399,7 +391,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "s_gun_3",
     "type": "mapgen",
     "weight": 200,
@@ -438,7 +429,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_gun_roof_3",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -485,7 +475,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "s_gun_3_looted",
     "type": "mapgen",
     "weight": 200,

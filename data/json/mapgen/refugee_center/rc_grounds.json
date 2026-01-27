@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "refctr_field" ] ],
     "weight": 100,
     "object": {
@@ -37,7 +36,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "refctr_fence_NW", "refctr_fence_NE" ], [ "refctr_fence_SW", "refctr_fence_SE" ] ],
     "weight": 100,
     "object": {
@@ -97,7 +95,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "refctr_fence_v" ] ],
     "weight": 100,
     "object": {
@@ -133,7 +130,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "refctr_fence_h" ] ],
     "weight": 100,
     "object": {
@@ -169,7 +165,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "refctr_fence_entrance_L", "refctr_road", "refctr_fence_entrance_R" ] ],
     "weight": 100,
     "object": {
@@ -205,7 +200,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "refctr_S3e" ] ],
     "//": "Temporary map until I unhardcode the locate mission",
     "weight": 100,

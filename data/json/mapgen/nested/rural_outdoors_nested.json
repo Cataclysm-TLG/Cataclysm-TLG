@@ -1,13 +1,11 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "desolate_shingle_roof_chunk",
     "object": { "mapgensize": [ 1, 1 ], "rows": [ "." ], "terrain": { ".": [ [ "t_shingle_flat_roof", 90 ], [ "t_open_air", 10 ] ] } }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_front",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -25,7 +23,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_front",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -41,7 +38,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_front",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -58,7 +54,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_junk",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -78,7 +73,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_junk",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -95,7 +89,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_junk",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -114,7 +107,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_camp",
     "//": "Survivor holdout camp",
     "object": {
@@ -140,7 +132,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_camp",
     "//": "Survivor holdout camp",
     "object": {
@@ -166,7 +157,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_camp",
     "//": "Survivor holdout camp",
     "object": {
@@ -192,7 +182,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_camp",
     "//": "Survivor holdout camp",
     "object": {
@@ -218,7 +207,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_camp",
     "//": "Single bandit camp",
     "object": {
@@ -247,7 +235,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_camp",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -272,7 +259,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_NPCs",
     "//": "A friendly NPC holdout lives here.",
     "object": {
@@ -299,7 +285,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_NPCs",
     "//": "A less-than-friendly NPC holdout lives here.",
     "object": {
@@ -326,7 +311,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_NPCs",
     "//": "A depressed NPC holdout lives here.",
     "object": {
@@ -353,7 +337,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_NPCs",
     "//": "A friendly NPC trader holdout lives here.",
     "object": {
@@ -380,7 +363,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_NPCs",
     "//": "An angry crazed hermit lives in this place.",
     "object": {
@@ -407,7 +389,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_NPCs",
     "//": "A friendly pair of survivors lives here.",
     "object": {
@@ -434,7 +415,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_4x4_NPCs",
     "//": "A group of bandits lives here.",
     "object": {
@@ -464,7 +444,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_8x8_yard",
     "//": "yard with well",
     "object": {
@@ -487,7 +466,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_8x8_yard",
     "//": "yard with tractor",
     "object": {
@@ -510,7 +488,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_8x8_yard",
     "//": "yard with rusty tanks",
     "object": {
@@ -533,7 +510,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ruins_8x8_yard",
     "//": "yard with ruined shed",
     "object": {
@@ -556,7 +532,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "small_camp_8x8_tent_roof",
     "//": "a tent and firepit",
     "object": {
@@ -576,7 +551,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "small_camp_8x8",
     "//": "a tent and firepit",
     "object": {
@@ -606,7 +580,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "gone_fishing_3x3",
     "//": "fishing stuff",
     "object": {
@@ -627,7 +600,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_3x3_roof",
     "object": {
       "mapgensize": [ 3, 3 ],
@@ -641,7 +613,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_3x3_S",
     "object": {
       "mapgensize": [ 3, 3 ],
@@ -658,7 +629,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_3x3_E",
     "object": {
       "mapgensize": [ 3, 3 ],
@@ -675,7 +645,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_3x3_N",
     "object": {
       "mapgensize": [ 3, 3 ],
@@ -692,7 +661,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_3x3_W",
     "object": {
       "mapgensize": [ 3, 3 ],
@@ -709,7 +677,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_5x5_roof",
     "object": {
       "mapgensize": [ 5, 5 ],
@@ -725,7 +692,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_5x5_S",
     "object": {
       "mapgensize": [ 5, 5 ],
@@ -744,7 +710,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_5x5_E",
     "object": {
       "mapgensize": [ 5, 5 ],
@@ -763,7 +728,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "leather_tent_5x5_S",
     "//": "Canvas roof since we don't have a skin/leather one",
     "object": {
@@ -788,7 +752,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_5x5_N",
     "object": {
       "mapgensize": [ 5, 5 ],
@@ -807,7 +770,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_5x5_W",
     "object": {
       "mapgensize": [ 5, 5 ],
@@ -826,7 +788,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_b_3x3_S",
     "//": "No roof due to the ruined state. Could make chunks to sync roof and wall/floor, but too insignificant to bother",
     "object": {
@@ -848,7 +809,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_b_3x3_E",
     "//": "No roof due to the ruined state. Could make chunks to sync roof and wall/floor, but too insignificant to bother",
     "object": {
@@ -870,7 +830,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_b_3x3_N",
     "//": "No roof due to the ruined state. Could make chunks to sync roof and wall/floor, but too insignificant to bother",
     "object": {
@@ -892,7 +851,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_b_3x3_W",
     "//": "No roof due to the ruined state. Could make chunks to sync roof and wall/floor, but too insignificant to bother",
     "object": {
@@ -914,7 +872,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_b_5x5_S",
     "//": "No roof due to the ruined state. Could make chunks to sync roof and wall/floor, but too insignificant to bother",
     "object": {
@@ -938,7 +895,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_b_5x5_E",
     "//": "No roof due to the ruined state. Could make chunks to sync roof and wall/floor, but too insignificant to bother",
     "object": {
@@ -962,7 +918,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_b_5x5_N",
     "//": "No roof due to the ruined state. Could make chunks to sync roof and wall/floor, but too insignificant to bother",
     "object": {
@@ -986,7 +941,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "tent_b_5x5_W",
     "//": "No roof due to the ruined state. Could make chunks to sync roof and wall/floor, but too insignificant to bother",
     "object": {

@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "om_terrain": "dollarstore",
     "type": "mapgen",
     "weight": 100,
@@ -90,7 +89,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dollarstore_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -151,7 +149,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "dollarstore_1",
     "type": "mapgen",
     "weight": 100,
@@ -241,7 +238,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dollarstore_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",

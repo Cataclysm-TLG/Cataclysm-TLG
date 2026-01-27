@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_bookstore" ],
     "weight": 500,
     "object": {
@@ -98,7 +97,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bookstore_roof",
     "weight": 200,
     "object": {
@@ -167,7 +165,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bookstore_upper_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -202,7 +199,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_bookstore_1" ],
     "weight": 500,
     "object": {
@@ -288,7 +284,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bookstore_roof_1",
     "weight": 200,
     "object": {
@@ -363,7 +358,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bookstore_upper_roof_1",
     "object": {
       "fill_ter": "t_tar_flat_roof",
@@ -399,7 +393,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_bookstore_2" ],
     "weight": 3000,
     "object": {
@@ -516,7 +509,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bookstore_roof_2",
     "weight": 200,
     "object": {

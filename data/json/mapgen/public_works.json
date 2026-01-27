@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "public_works_NW", "public_works_NE" ], [ "public_works_SW", "public_works_SE" ] ],
     "weight": 250,
     "object": {
@@ -144,7 +143,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "public_works_NW_roof", "public_works_NE_roof" ], [ "public_works_SW_roof", "public_works_SE_roof" ] ],
     "object": {
       "fill_ter": "t_flat_roof",

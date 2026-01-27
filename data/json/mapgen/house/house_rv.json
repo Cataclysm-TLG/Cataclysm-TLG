@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_rv" ],
     "weight": 300,
     "object": {
@@ -50,7 +49,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_rv_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -86,7 +84,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_rv_basement",
     "weight": 190,
     "object": {
@@ -133,7 +130,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_rv_basement",
     "weight": 10,
     "object": {

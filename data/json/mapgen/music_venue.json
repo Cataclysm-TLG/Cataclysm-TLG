@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "music_venue",
     "weight": 100,
     "object": {
@@ -109,7 +108,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "music_venue_roof",
     "weight": 100,
     "object": {
@@ -153,7 +151,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "music_venue_1",
     "weight": 100,
     "object": {
@@ -256,7 +253,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "music_venue_1_roof",
     "weight": 100,
     "object": {
@@ -298,7 +294,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "music_venue_1_roof_top",
     "weight": 100,
     "object": {

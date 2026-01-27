@@ -3,7 +3,6 @@
     "type": "mapgen",
     "nested_mapgen_id": "fema_mid_02_roof",
     "//": "middle area",
-    "method": "json",
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -40,7 +39,6 @@
     "om_terrain": "FEMA_mid",
     "//": "middle area",
     "weight": 250,
-    "method": "json",
     "object": {
       "fill_ter": "t_floor",
       "rows": [

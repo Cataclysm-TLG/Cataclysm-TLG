@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "smallscrapyard",
     "weight": 100,
     "object": {
@@ -102,7 +101,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "smallscrapyard_2_roof",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -137,7 +135,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "smallscrapyard",
     "weight": 100,
     "object": {
@@ -235,7 +232,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "smallscrapyard",
     "weight": 100,
     "object": {

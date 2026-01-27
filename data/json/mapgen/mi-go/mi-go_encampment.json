@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "mi-go_camp1", "mi-go_camp2" ] ],
     "weight": 100,
     "object": {
@@ -56,7 +55,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "mi-go_camp1-1", "mi-go_camp2-1" ] ],
     "weight": 100,
     "object": {
@@ -92,7 +90,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "mi-go_camp2-2" ],
     "weight": 100,
     "object": {
@@ -128,7 +125,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "mi-go_camp2-3" ],
     "weight": 100,
     "object": {

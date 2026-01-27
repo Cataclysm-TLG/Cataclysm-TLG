@@ -41,7 +41,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "cemetery_4square_00", "cemetery_4square_10" ], [ "cemetery_4square_01", "cemetery_4square_11" ] ],
     "weight": 100,
     "object": {
@@ -145,7 +144,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "cemetery_4square_11_roof" ],
     "weight": 100,
     "object": {

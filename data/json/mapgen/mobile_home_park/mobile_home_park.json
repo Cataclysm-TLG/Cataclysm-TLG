@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_hub_10" ],
     "weight": 100,
     "object": {
@@ -40,7 +39,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_hub_10_roof" ],
     "weight": 100,
     "object": {
@@ -115,7 +113,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "trailer_hub_00", "null" ], [ "trailer_hub_01", "trailer_hub_11" ] ],
     "weight": 100,
     "object": {
@@ -183,7 +180,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "trailer_caravan_00", "trailer_caravan_10" ], [ "trailer_caravan_01", "trailer_caravan_11" ] ],
     "weight": 100,
     "object": {
@@ -254,7 +250,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "trailer_commercial_00", "trailer_commercial_10" ] ],
     "weight": 100,
     "object": {
@@ -340,7 +335,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "trailer_commercial_00_roof", "trailer_commercial_10_roof" ] ],
     "weight": 100,
     "object": {
@@ -376,7 +370,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "trailer_public_00", "trailer_public_10" ] ],
     "weight": 100,
     "object": {
@@ -426,7 +419,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "trailer_public_00_roof", "trailer_public_10_roof" ] ],
     "weight": 100,
     "object": {
@@ -462,7 +454,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_road" ],
     "weight": 100,
     "object": {
@@ -499,7 +490,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_road" ],
     "weight": 50,
     "object": {
@@ -536,7 +526,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_road_1parkway" ],
     "weight": 100,
     "object": {
@@ -574,7 +563,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_road_2parkway" ],
     "weight": 100,
     "object": {
@@ -612,7 +600,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_road_turn" ],
     "weight": 100,
     "object": {
@@ -649,7 +636,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_road_3way" ],
     "weight": 100,
     "object": {
@@ -686,7 +672,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "trailer_road_3way" ],
     "weight": 33,
     "object": {

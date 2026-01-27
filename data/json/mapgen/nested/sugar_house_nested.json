@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "sugar_house_parking_lot",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -51,7 +50,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "sugar_house_normal",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -159,7 +157,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "sugar_house_roach",
     "object": {
       "mapgensize": [ 24, 24 ],
@@ -283,7 +280,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "sugar_house_rat",
     "object": {
       "mapgensize": [ 24, 24 ],

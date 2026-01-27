@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "gym" ],
     "weight": 1000,
     "object": {
@@ -84,7 +83,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "gym_roof",
     "weight": 200,
     "object": {
@@ -149,7 +147,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "gym_upper_roof",
     "weight": 200,
     "object": {

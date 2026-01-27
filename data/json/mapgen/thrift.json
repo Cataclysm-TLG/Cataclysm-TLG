@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_thrift" ],
     "weight": 500,
     "object": {
@@ -90,7 +89,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_thrift_roof",
     "object": {
       "fill_ter": "t_flat_roof",

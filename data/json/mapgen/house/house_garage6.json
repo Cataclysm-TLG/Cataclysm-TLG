@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_garage6" ],
     "weight": 200,
     "//": "two bedroom one bath single garage home.",
@@ -85,7 +84,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_garage6_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -121,7 +119,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_garage6_basement",
     "object": {
       "fill_ter": "t_thconc_floor",

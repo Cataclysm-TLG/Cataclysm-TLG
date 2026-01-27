@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "godco_3", "godco_2", "godco_1" ], [ "godco_6", "godco_5", "godco_4" ], [ "godco_9", "godco_8", "godco_7" ] ],
     "weight": 250,
     "object": {
@@ -156,7 +155,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [ "godco_3_1", "godco_2_1", "godco_1_1" ],
       [ "godco_6_1", "godco_5_1", "godco_4_1" ],
@@ -294,7 +292,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "godco_2_2", "godco_1_2" ] ],
     "weight": 250,
     "object": {
@@ -335,7 +332,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "godco_enter" ],
     "weight": 100,
     "object": {

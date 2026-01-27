@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "microlab_sub_connector", "microlab_sub_connector_ratkin" ],
     "weight": 1000,
     "object": {
@@ -37,7 +36,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "microlab_sub_station" ],
     "object": {
       "fill_ter": "t_strconc_floor",
@@ -81,7 +79,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "microlab_sub_station_ratkin" ],
     "object": {
       "fill_ter": "t_strconc_floor",
@@ -126,7 +123,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "ratkin_sewer_entrance",
     "object": {
       "mapgensize": [ 8, 8 ],
@@ -145,7 +141,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "microlab_generic_sub_entry", "microlab_ratkin_sub_entry" ],
     "weight": 1000,
     "object": {
@@ -193,7 +188,6 @@
   {
     "type": "mapgen",
     "om_terrain": [ "microlab_generic_surface_connector", "microlab_ratkin_surface_connector" ],
-    "method": "json",
     "object": {
       "fill_ter": "t_strconc_floor",
       "rows": [
@@ -240,7 +234,6 @@
   {
     "type": "mapgen",
     "om_terrain": [ "microlab_generic_vent_shaft_connector", "microlab_ratkin_vent_shaft_connector" ],
-    "method": "json",
     "object": {
       "fill_ter": "t_strconc_floor",
       "rows": [
@@ -284,7 +277,6 @@
   {
     "type": "mapgen",
     "om_terrain": [ [ "microlab_generic_surface" ] ],
-    "method": "json",
     "object": {
       "fill_ter": "t_concrete",
       "rows": [
@@ -328,7 +320,6 @@
   {
     "type": "mapgen",
     "om_terrain": [ [ "microlab_generic_surface_roof" ] ],
-    "method": "json",
     "object": {
       "fill_ter": "t_concrete",
       "rows": [

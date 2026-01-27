@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "icecream_shop" ],
     "weight": 100,
     "object": {
@@ -107,7 +106,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "icecream_shop_roof",
     "object": {
       "fill_ter": "t_flat_roof",

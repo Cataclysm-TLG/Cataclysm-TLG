@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bike_shop",
     "object": {
       "fill_ter": "t_thconc_floor",
@@ -47,7 +46,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bike_shop_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -99,7 +97,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bike_shop_1",
     "object": {
       "fill_ter": "t_thconc_floor",
@@ -140,7 +137,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bike_shop_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -192,7 +188,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_bike_shop_roof_1_shack_roof",
     "object": {
       "fill_ter": "t_flat_roof",

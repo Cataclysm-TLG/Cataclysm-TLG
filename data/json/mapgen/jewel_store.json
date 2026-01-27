@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_jewelry" ],
     "weight": 500,
     "object": {
@@ -96,7 +95,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_jewelry_roof",
     "object": {
       "fill_ter": "t_flat_roof",

@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "sub_station" ],
     "weight": 250,
     "object": {
@@ -38,7 +37,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "sub_station_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -73,7 +71,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "sewer_sub_station" ],
     "weight": 250,
     "object": {
@@ -112,7 +109,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "underground_sub_station" ],
     "weight": 250,
     "object": {
