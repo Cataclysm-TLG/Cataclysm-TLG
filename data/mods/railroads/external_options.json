@@ -12,5 +12,11 @@
     "info": "Defines whether to place railroads before roads.",
     "stype": "bool",
     "value": true
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "OVERMAP_PLACE_HIGHWAYS",
+    "stype": "bool",
+    "value": false
   }
 ]

@@ -78,8 +78,7 @@
       "assign_mission_target": {
         "om_terrain": "dairy_farm_isherwood_W",
         "om_special": "Isherwood Farm Mutable",
-        "reveal_radius": 3,
-        "search_range": 240
+        "reveal_radius": 3
       }
     },
     "end": {

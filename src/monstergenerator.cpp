@@ -37,6 +37,7 @@
 #include "type_id.h"
 #include "units.h"
 #include "weakpoint.h"
+#include "weighted_dbl_or_var_list.h"
 
 static const material_id material_flesh( "flesh" );
 

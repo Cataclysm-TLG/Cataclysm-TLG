@@ -216,7 +216,6 @@
     "price": "40 USD",
     "price_postapoc": "5 USD",
     "install_time": "0 s",
-    "to_hit": -1,
     "material": [ "steel" ],
     "symbol": ":",
     "color": "light_gray",
@@ -233,7 +232,8 @@
     "is_bayonet": true,
     "qualities": [ [ "CUT", 1 ], [ "COOK", 1 ], [ "BUTCHER", -18 ] ],
     "flags": [ "SLOW_WIELD", "IRREMOVABLE", "ALLOWS_REMOTE_USE" ],
-    "melee_damage": { "stab": 10 }
+    "melee_damage": { "stab": 10 },
+    "to_hit_mod": 1
   },
   {
     "id": "inter_bayonet_folded",
@@ -589,7 +589,7 @@
     "price": "40 USD",
     "price_postapoc": "10 USD",
     "install_time": "5 m",
-    "to_hit": -4,
+    "to_hit": -3,
     "material": [ "steel" ],
     "symbol": ":",
     "color": "light_gray",
@@ -599,7 +599,8 @@
     "min_skills": [ [ "weapon", 1 ], [ "melee", 1 ] ],
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 15 ] ],
     "flags": [  ],
-    "melee_damage": { "stab": 6 }
+    "melee_damage": { "stab": 6 },
+    "to_hit_mod": 1
   },
   {
     "id": "u_shotgun",
