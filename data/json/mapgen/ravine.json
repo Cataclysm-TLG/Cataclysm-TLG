@@ -1,1 +1,12 @@
-[{"type": "mapgen", "om_terrain": ["ravine"], "object": {"fill_ter": "t_open_air"}}, {"type": "mapgen", "om_terrain": ["ravine_floor"], "object": {"fill_ter": "t_region_groundcover"}}]
+[
+  {
+    "type": "mapgen",
+    "om_terrain": [ "ravine" ],
+    "object": { "fill_ter": "t_open_air" }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ "ravine_floor" ],
+    "object": { "fill_ter": "t_region_groundcover" }
+  }
+]

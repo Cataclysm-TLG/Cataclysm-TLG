@@ -1,1 +1,16 @@
-[{"type": "mapgen", "update_mapgen_id": "mx_specimen_van", "//": "This van was transporting a mutant to or from a lab. It crashed and the mutant broke out, and either escaped or is still hanging around.", "object": {"place_vehicles": [{"vehicle": "specimen_van", "x": 7, "y": 12, "chance": 100, "rotation": 330}], "place_monster": [{"monster": "mon_mutant_experimental", "x": 1, "y": 3, "chance": 80}], "place_loot": [{"group": "map_extra_science_corpse_painful", "x": 7, "y": 12, "chance": 90}, {"group": "map_extra_security_corpse_bloody", "x": 2, "y": 2, "chance": 90}, {"item": "corpse_halved_upper", "x": 4, "y": 6, "chance": 90}]}}]
+[
+  {
+    "type": "mapgen",
+    "update_mapgen_id": "mx_specimen_van",
+    "//": "This van was transporting a mutant to or from a lab. It crashed and the mutant broke out, and either escaped or is still hanging around.",
+    "object": {
+      "place_vehicles": [ { "vehicle": "specimen_van", "x": 7, "y": 12, "chance": 100, "rotation": 330 } ],
+      "place_monster": [ { "monster": "mon_mutant_experimental", "x": 1, "y": 3, "chance": 80 } ],
+      "place_loot": [
+        { "group": "map_extra_science_corpse_painful", "x": 7, "y": 12, "chance": 90 },
+        { "group": "map_extra_security_corpse_bloody", "x": 2, "y": 2, "chance": 90 },
+        { "item": "corpse_halved_upper", "x": 4, "y": 6, "chance": 90 }
+      ]
+    }
+  }
+]
