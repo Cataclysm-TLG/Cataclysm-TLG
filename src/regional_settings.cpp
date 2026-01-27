@@ -434,8 +434,7 @@ static void load_overmap_ocean_settings( const JsonObject &jo,
         const bool strict, const bool overlay )
 {
     // TODO: External options for oceans and highways. See DDA 81550
-    // if( !jo.has_object( "overmap_ocean_settings" ) && get_option<bool>( "OVERMAP_PLACE_OCEANS" ) ) {
-    if( !jo.has_object( "overmap_ocean_settings" ) ) {
+    if( !jo.has_object( "overmap_ocean_settings" ) && get_option<bool>( "OVERMAP_PLACE_OCEANS" ) ) {
         if( strict ) {
             jo.throw_error( "OVERMAP_PLACE_OCEANS set to true, but \"overmap_ocean_settings\" not defined in region_settings" );
         }

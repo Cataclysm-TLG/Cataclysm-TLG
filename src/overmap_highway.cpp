@@ -756,7 +756,7 @@ std::vector<Highway_path> overmap::place_highways(
     }
 
     if( c_seperation == 0 && r_seperation == 0 ) {
-        debugmsg( "Use the external option OVERMAP_PLACE_HIGHWAYS to disable highways instead" );
+        debugmsg( "Use the option OVERMAP_PLACE_HIGHWAYS to disable highways instead" );
         return paths;
     }
 
