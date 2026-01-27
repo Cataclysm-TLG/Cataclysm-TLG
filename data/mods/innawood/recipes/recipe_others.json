@@ -176,7 +176,7 @@
     "autolearn": true,
     "using": [ [ "forging_standard", 45 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "DIGGING", "level": 2 } ],
+    "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "DIG", "level": 2 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "components": [ [ [ "bronze_fragment", 90 ] ] ]
   },
