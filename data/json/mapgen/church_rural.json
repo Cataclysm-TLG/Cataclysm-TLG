@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "rural_church_parking", "rural_church" ] ],
     "//": "This is a rural church, with a basement and a gravel parking lot",
     "object": {
@@ -50,7 +49,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "rural_church_parking_massacre", "rural_church_massacre" ] ],
     "//": "This is a rural church, with a basement and a gravel parking lot.  Someone gathered people up here and killed them with a machine gun.",
     "object": {
@@ -117,7 +115,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "rural_church_steeple" ] ],
     "object": {
       "fill_ter": "t_floor",
@@ -154,7 +151,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "rural_church_steeple_roof" ] ],
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -190,7 +186,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "rural_church_basement" ] ],
     "object": {
       "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },

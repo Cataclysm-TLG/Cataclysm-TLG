@@ -3,7 +3,6 @@
     "type": "mapgen",
     "nested_mapgen_id": "fema_trc_03_roof",
     "//": "top right corner.",
-    "method": "json",
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -41,7 +40,6 @@
     "om_terrain": "FEMA_trc",
     "//": "top right corner.",
     "weight": 200,
-    "method": "json",
     "object": {
       "fill_ter": "t_dirt",
       "rows": [

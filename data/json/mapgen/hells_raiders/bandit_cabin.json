@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "bandit_cabin",
     "weight": 250,
     "object": {
@@ -102,7 +101,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "bandit_cabin_roof",
     "weight": 250,
     "object": {

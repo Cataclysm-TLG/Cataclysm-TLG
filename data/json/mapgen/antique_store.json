@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_antique" ],
     "weight": 500,
     "object": {
@@ -60,7 +59,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_antique_roof" ],
     "weight": 500,
     "object": {

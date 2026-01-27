@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "publicgarden",
     "weight": 100,
     "object": {
@@ -39,7 +38,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "publicgarden_2",
     "weight": 100,
     "object": {

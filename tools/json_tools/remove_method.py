@@ -68,7 +68,7 @@ def readWriteJson(path, jo_function):
         if change:
             with open(path, "w", encoding="utf-8") as jf:
                 json.dump(json_data, jf, ensure_ascii=False)
-            format_json(path)
+            # format_json(path)
 
 
 def remove_method(jo, changed):

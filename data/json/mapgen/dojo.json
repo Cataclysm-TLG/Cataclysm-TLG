@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "dojo" ],
     "weight": 1000,
     "object": {
@@ -75,7 +74,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dojo_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -129,7 +127,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dojo_upper_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -164,7 +161,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "dojo_1" ],
     "weight": 1000,
     "object": {
@@ -256,7 +252,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dojo_roof_1",
     "object": {
       "fill_ter": "t_floor",
@@ -295,7 +290,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dojo_upper_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",

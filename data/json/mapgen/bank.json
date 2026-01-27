@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "bank" ],
     "weight": 100,
     "object": {
@@ -82,7 +81,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "bank_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -124,7 +122,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "bank_1" ],
     "weight": 100,
     "object": {
@@ -218,7 +215,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "bank_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",

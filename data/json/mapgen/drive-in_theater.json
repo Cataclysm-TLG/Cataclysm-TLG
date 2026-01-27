@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "type": "mapgen",
     "weight": 100,
     "om_terrain": [ [ "car_theater_0_0_1", "car_theater_1_0_1", "car_theater_2_0_1" ] ],
@@ -35,7 +34,6 @@
     }
   },
   {
-    "method": "json",
     "type": "mapgen",
     "weight": 100,
     "om_terrain": [ [ "car_theater_0_0_2", "car_theater_1_0_2", "car_theater_2_0_2" ] ],
@@ -70,7 +68,6 @@
     }
   },
   {
-    "method": "json",
     "type": "mapgen",
     "weight": 100,
     "om_terrain": [
@@ -172,7 +169,6 @@
     }
   },
   {
-    "method": "json",
     "type": "mapgen",
     "weight": 100,
     "om_terrain": [ "car_theater_1_2_1" ],
@@ -214,7 +210,6 @@
     }
   },
   {
-    "method": "json",
     "type": "mapgen",
     "weight": 100,
     "om_terrain": [ "car_theater_1_2_2" ],
@@ -250,7 +245,6 @@
     }
   },
   {
-    "method": "json",
     "type": "mapgen",
     "weight": 100,
     "om_terrain": [ [ "car_theater_3_1_1" ], [ "car_theater_3_2_1" ] ],

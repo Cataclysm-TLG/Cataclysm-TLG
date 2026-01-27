@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "bunker_shop_g" ],
     "object": {
       "predecessor_mapgen": "forest",
@@ -52,7 +51,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "bunker_shop_b" ],
     "object": {
       "faction_owner": [ { "id": "wasteland_scavengers", "x": [ 0, 23 ], "y": [ 0, 23 ] } ],

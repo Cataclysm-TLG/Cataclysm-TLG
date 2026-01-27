@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "cs_internet_cafe" ],
     "weight": 1000,
     "object": {
@@ -79,7 +78,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "cs_internet_cafe_roof",
     "object": {
       "fill_ter": "t_thconc_floor",
@@ -151,7 +149,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "cs_internet_cafe_upper_roof",
     "object": {
       "fill_ter": "t_tar_flat_roof",
