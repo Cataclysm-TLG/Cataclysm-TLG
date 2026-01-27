@@ -115,6 +115,7 @@ enum class debug_menu_index : int {
     EDIT_FACTION,
     WRITE_CITY_LIST,
     TALK_TOPIC,
+    VEHICLE_EFFECTS,
     last
 };
 

@@ -12,7 +12,6 @@
         "om_terrain": "haz_sar_b_4",
         "om_special": "Hazardous Waste Sarcophagus",
         "reveal_radius": 1,
-        "search_range": 400,
         "min_distance": 60
       }
     },
@@ -395,7 +394,7 @@
     "item": "software_blood_data",
     "start": {
       "effect": [ { "u_spawn_item": "vacutainer" }, { "u_spawn_item": "usb_drive" } ],
-      "assign_mission_target": { "om_terrain": "hospital_2", "om_special": "hospital", "reveal_radius": 3, "search_range": 400 }
+      "assign_mission_target": { "om_terrain": "hospital_2", "om_special": "hospital", "reveal_radius": 3 }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
     "dialogue": {
@@ -420,7 +419,7 @@
     "value": 150000,
     "item": "etched_skull",
     "start": {
-      "assign_mission_target": { "om_terrain": "cabin_strange", "om_special": "Strange Cabin", "reveal_radius": 3, "search_range": 300 }
+      "assign_mission_target": { "om_terrain": "cabin_strange", "om_special": "Strange Cabin", "reveal_radius": 3 }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
     "followup": "MISSION_INVESTIGATE_PRISON_VISIONARY",
@@ -445,7 +444,7 @@
     "value": 150000,
     "item": "visions_solitude",
     "start": {
-      "assign_mission_target": { "om_terrain": "prison_1_4", "om_special": "Prison", "reveal_radius": 3, "search_range": 240 },
+      "assign_mission_target": { "om_terrain": "prison_1_4", "om_special": "Prison", "reveal_radius": 3 },
       "update_mapgen": { "om_terrain": "prison_1_4", "place_item": [ { "item": "visions_solitude", "x": 15, "y": 22 } ] }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
@@ -726,7 +725,7 @@
     "difficulty": 5,
     "value": 70000,
     "start": {
-      "assign_mission_target": { "om_terrain": "cabin", "om_special": "Cabin", "reveal_radius": 2, "search_range": 120 },
+      "assign_mission_target": { "om_terrain": "cabin", "om_special": "Cabin", "reveal_radius": 2 },
       "effect": "follow",
       "update_mapgen": { "place_npcs": [ { "class": "tracker_gunslinger", "x": 11, "y": 11, "target": true } ] }
     },

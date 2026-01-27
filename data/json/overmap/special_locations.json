@@ -11,6 +11,11 @@
   },
   {
     "type": "overmap_location",
+    "id": "stream",
+    "terrains": [ "stream" ]
+  },
+  {
+    "type": "overmap_location",
     "id": "forest_without_trail",
     "terrains": [ "forest", "forest_thick" ]
   },
@@ -104,6 +109,11 @@
     "type": "overmap_location",
     "id": "highway_water",
     "terrains": [ "hw_reserved_water" ]
+  },
+  {
+    "type": "overmap_location",
+    "id": "highway_ramp",
+    "terrains": [ "hw_reserved_ramp" ]
   },
   {
     "type": "overmap_location",

@@ -24,6 +24,10 @@ class JsonOut;
 class item;
 struct dialogue;
 struct dbl_or_var;
+class monster;
+class vehicle;
+struct const_dialogue;
+
 namespace enchant_vals
 {
 // the different types of values that can be modified by enchantments
@@ -101,6 +105,7 @@ enum class mod : int {
     BIONIC_MANA_PENALTY,
     STEALTH_MODIFIER,
     WEAKNESS_TO_WATER,
+    WEIGHT,
     MENDING_MODIFIER,
     STOMACH_SIZE_MULTIPLIER,
     LEARNING_FOCUS,
@@ -140,6 +145,9 @@ enum class mod : int {
     STAMINA_REGEN_MOD,
     MOVEMENT_EXERTION_MODIFIER,
     WEAKPOINT_ACCURACY,
+    TOTAL_WEIGHT,
+    FUEL_USAGE,
+    TURNING_DIFFICULTY,
     NUM_MOD
 };
 } // namespace enchant_vals
@@ -185,6 +193,11 @@ class enchantment
         bool is_active( const monster &mon ) const;
 
         bool is_monster_relevant() const;
+
+        // same as above except for vehicles. Much more limited.
+        bool is_active( const vehicle &veh, bool active ) const;
+
+        bool is_vehicle_relevant() const;
 
         // this enchantment is active when wielded.
         // shows total conditional values, so only use this when Character is not available
@@ -250,6 +263,7 @@ class enchantment
             std::string id = "infrared_creature";
             nc_color color = c_red;
             std::string symbol = "?";
+            std::string text = "You see a medium figure radiating heat.";
             translation description;
             std::function<bool( const_dialogue const & )> condition;
         };
@@ -290,6 +304,7 @@ class enchant_cache : public enchantment
         units::energy modify_value( enchant_vals::mod mod_val, units::energy value ) const;
         units::mass modify_value( enchant_vals::mod mod_val, units::mass value ) const;
         units::volume modify_value( enchant_vals::mod mod_val, units::volume value ) const;
+        units::power modify_value( enchant_vals::mod mod_val, units::power value ) const;
         units::temperature_delta modify_value( enchant_vals::mod mod_val,
                                                units::temperature_delta value ) const;
         time_duration modify_value( enchant_vals::mod mod_val, time_duration value ) const;
@@ -300,6 +315,7 @@ class enchant_cache : public enchantment
         // adds two enchantments together and ignores their conditions
         void force_add( const enchantment &rhs, const Character &guy );
         void force_add( const enchantment &rhs, const monster &mon );
+        void force_add( const enchantment &rhs, const vehicle &veh );
         void force_add( const enchantment &rhs );
         void force_add( const enchant_cache &rhs );
         void force_add_with_dialogue( const enchantment &rhs, const const_dialogue &d,

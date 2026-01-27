@@ -720,6 +720,8 @@ void map::vehmove()
         vehs.emplace( connected_veh, false ); // add with 'false' if does not exist (off map)
     }
     for( const std::pair<vehicle *const, bool> &veh_pair : vehs ) {
+        veh_pair.first->process_effects();
+        veh_pair.first->recalculate_enchantment_cache();
         veh_pair.first->idle( *this, /* on_map = */ veh_pair.second );
     }
 
@@ -7806,6 +7808,11 @@ bool map::draw_maptile( const catacurses::window &w, const tripoint_bub_ms &p,
                   && veh->get_points().count( ( player_character.pos_abs() +
                                                 player_character.grab_point ) ) ) ) {
             memory_sym = sym;
+        }
+        if( !vd.carried_furn.empty() ) {
+            furn_str_id furn( vd.carried_furn );
+            sym = furn->symbol();
+            tercol = furn->color();
         }
     }
 

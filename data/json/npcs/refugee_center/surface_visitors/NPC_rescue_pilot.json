@@ -232,7 +232,6 @@
         "om_special": "hospital_mission_rescue_pilot",
         "reveal_radius": 1,
         "min_distance": 10,
-        "search_range": 800,
         "z": 5
       }
     },

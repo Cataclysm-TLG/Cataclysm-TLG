@@ -278,6 +278,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_TRANSLUCENT: return "TRANSLUCENT";
         case ter_furn_flag::TFLAG_DEPLOYED_FURNITURE_ABOVE: return "DEPLOYED_FURNITURE_ABOVE";
         case ter_furn_flag::TFLAG_NATURAL_UNDERGROUND: return "NATURAL_UNDERGROUND";
+        case ter_furn_flag::TFLAG_WIRED_WALL: return "WIRED_WALL";
 
         // *INDENT-ON*
         case ter_furn_flag::NUM_TFLAG_FLAGS:
@@ -1104,6 +1105,7 @@ void furn_t::load( const JsonObject &jo, const std::string &src )
     map_data_common_t::load( jo, src );
     mandatory( jo, was_loaded, "move_cost_mod", movecost );
     mandatory( jo, was_loaded, "required_str", move_str_req );
+    optional( jo, was_loaded, "mass", mass, 1000_kilogram );
     int legacy_bonus_fire_warmth_feet = units::to_legacy_bodypart_temp_delta( bonus_fire_warmth_feet );
     optional( jo, was_loaded, "bonus_fire_warmth_feet", legacy_bonus_fire_warmth_feet, 300 );
     bonus_fire_warmth_feet = units::from_legacy_bodypart_temp_delta( legacy_bonus_fire_warmth_feet );

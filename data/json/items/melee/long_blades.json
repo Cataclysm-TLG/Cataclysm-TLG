@@ -459,7 +459,8 @@
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "flags": [ "DURABLE_MELEE", "PUMP_RAIL_COMPATIBLE", "SHEATH_KNIFE" ],
     "weapon_category": [ "SHORT_SWORDS", "FENCING_WEAPONRY" ],
-    "melee_damage": { "bash": 4, "stab": 15 }
+    "melee_damage": { "bash": 4, "stab": 15 },
+    "to_hit_mod": 1
   },
   {
     "id": "tanto",
@@ -1251,7 +1252,8 @@
     "qualities": [ [ "CUT", 1 ], [ "COOK", 1 ], [ "BUTCHER", 7 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE" ],
-    "weapon_category": [ "KNIVES" ]
+    "weapon_category": [ "KNIVES" ],
+    "to_hit_mod": 1
   },
   {
     "id": "arisaka_bayonet",
@@ -1296,7 +1298,8 @@
     "qualities": [ [ "CUT", 2 ], [ "GRASS_CUT", 1 ], [ "BUTCHER", 15 ] ],
     "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE" ],
     "weapon_category": [ "SHORT_SWORDS" ],
-    "melee_damage": { "bash": 5, "cut": 20 }
+    "melee_damage": { "bash": 5, "cut": 20 },
+    "to_hit_mod": 1
   },
   {
     "id": "talwar",
