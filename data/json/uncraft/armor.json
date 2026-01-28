@@ -134,5 +134,181 @@
     "time": "2 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "cotton_patch", 2 ] ], [ [ "wire", 1 ] ], [ [ "button_plastic", 9 ] ] ]
+  },
+  {
+    "result": "wetsuit",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 16 ] ], [ [ "spandex_sheet", 28 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
+    "result": "xs_wetsuit",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "15 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 13 ] ], [ [ "spandex_sheet", 20 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
+    "result": "xl_wetsuit",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "40 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 22 ] ], [ [ "spandex_sheet", 38 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
+    "result": "wetsuit_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "40 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 21 ] ], [ [ "spandex_sheet", 40 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
+    "result": "xs_wetsuit_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "20 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 21 ] ], [ [ "spandex_sheet", 42 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
+    "result": "xl_wetsuit_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "50 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 36 ] ], [ [ "spandex_sheet", 80 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
+    "result": "wetsuit_spring",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 11 ] ], [ [ "spandex_sheet", 18 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
+    "result": "wetsuit_spring_sleeveless",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "20 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 8 ] ], [ [ "spandex_sheet", 12 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
+    "result": "wetsuit_gloves",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 2 ] ], [ [ "spandex_sheet", 3 ] ] ]
+  },
+  {
+    "result": "wetsuit_gloves_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 3 ] ], [ [ "spandex_sheet", 4 ] ] ]
+  },
+  {
+    "result": "wetsuit_hood",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 3 ] ], [ [ "spandex_sheet", 5 ] ] ]
+  },
+  {
+    "result": "xs_wetsuit_hood",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 2 ] ], [ [ "spandex_sheet", 3 ] ] ]
+  },
+  {
+    "result": "xl_wetsuit_hood",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 6 ] ], [ [ "spandex_sheet", 8 ] ] ]
+  },
+  {
+    "result": "wetsuit_hood_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 6 ] ], [ [ "spandex_sheet", 8 ] ] ]
+  },
+  {
+    "result": "xs_wetsuit_hood_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 4 ] ], [ [ "spandex_sheet", 6 ] ] ]
+  },
+  {
+    "result": "xl_wetsuit_hood_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 8 ] ], [ [ "spandex_sheet", 10 ] ] ]
+  },
+  {
+    "result": "wetsuit_booties",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 6 ] ], [ [ "spandex_sheet", 8 ] ], [ [ "sole_rubber", 2 ] ] ]
+  },
+  {
+    "result": "xs_wetsuit_booties",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "20 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 4 ] ], [ [ "spandex_sheet", 6 ] ] ]
+  },
+  {
+    "result": "xl_wetsuit_booties",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 8 ] ], [ [ "spandex_sheet", 10 ] ], [ [ "sole_rubber", 2 ] ] ]
+  },
+  {
+    "result": "wetsuit_booties_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "25 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 7 ] ], [ [ "spandex_sheet", 8 ] ], [ [ "sole_rubber", 2 ] ] ]
+  },
+  {
+    "result": "xs_wetsuit_booties_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "20 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 5 ] ], [ [ "spandex_sheet", 6 ] ] ]
+  },
+  {
+    "result": "xl_wetsuit_booties_thick",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 10 ] ], [ [ "spandex_sheet", 10 ] ], [ [ "sole_rubber", 2 ] ] ]
   }
 ]

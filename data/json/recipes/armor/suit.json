@@ -986,14 +986,14 @@
     "type": "recipe",
     "copy-from": "wetsuit_thick",
     "time": "16 h",
-    "using": [ [ "tailoring_neoprene_sheet", 42 ], [ "tailoring_nylon_sheet", 85 ], [ "fastener_small", 6 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 42 ], [ "tailoring_spandex_sheet", 85 ], [ "fastener_small", 6 ] ]
   },
   {
     "result": "xl_wetsuit_thick",
     "type": "recipe",
     "copy-from": "wetsuit_thick",
     "time": "30 h",
-    "using": [ [ "tailoring_neoprene_sheet", 75 ], [ "tailoring_nylon_sheet", 160 ], [ "fastener_small", 6 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 75 ], [ "tailoring_spandex_sheet", 160 ], [ "fastener_small", 6 ] ]
   },
   {
     "result": "wetsuit_spring",
@@ -1005,7 +1005,7 @@
     "difficulty": 3,
     "time": "6 h 30 m",
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 4 ], [ "tailor_portfolio", 3 ] ],
-    "using": [ [ "tailoring_neoprene_sheet", 22 ] ],
+    "using": [ [ "tailoring_neoprene_sheet", 22 ], [ "tailoring_spandex_sheet", 36 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" }, { "proficiency": "prof_closures_waterproofing" } ],
     "components": [ [ [ "zipper_long_plastic", 1 ] ] ],
     "qualities": [ { "id": "SEW_CURVED", "level": 1 } ]

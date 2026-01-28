@@ -3138,21 +3138,6 @@
     "extend": { "flags": [ "GAS_DISCOUNT", "DISCOUNT_VALUE_3" ] }
   },
   {
-    "type": "ITEM",
-    "id": "neoprene_patch",
-    "symbol": ",",
-    "color": "dark_gray",
-    "name": { "str": "neoprene patch", "str_pl": "neoprene patches" },
-    "description": "A small neoprene patch.  Can be used to repair neoprene clothing.",
-    "price": "10 USD",
-    "price_postapoc": "5 cent",
-    "material": [ "neoprene" ],
-    "flags": [ "NO_SALVAGE" ],
-    "weight": "3 g",
-    "volume": "23 ml",
-    "category": "spare_parts"
-  },
-  {
     "id": "light_bulb",
     "type": "ITEM",
     "name": { "str": "light bulb" },

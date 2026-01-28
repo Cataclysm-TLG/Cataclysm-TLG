@@ -1763,7 +1763,7 @@
     "qualities": [ { "id": "SCREW", "level": 1 } ],
     "components": [
       [ [ "scrap_aluminum", 1 ] ],
-      [ [ "light_battery_cell", 1 ] ],
+      [ [ "medium_battery_cell", 1 ] ],
       [ [ "small_lcd_screen", 1 ] ],
       [ [ "memory_card", 1 ] ],
       [ [ "processor", 1 ] ]
@@ -2006,14 +2006,6 @@
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "felt_patch", 8 ] ] ]
-  },
-  {
-    "result": "nomex_patch",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "2 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "thread_nomex", 8 ] ] ]
   },
   {
     "result": "leather_sheet",
