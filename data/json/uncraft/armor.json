@@ -192,6 +192,14 @@
     "components": [ [ [ "neoprene_sheet", 11 ] ], [ [ "spandex_sheet", 18 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
+    "result": "wetsuit_spring_sleeveless",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "20 m",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 8 ] ], [ [ "spandex_sheet", 12 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+  },
+  {
     "result": "wetsuit_gloves",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
