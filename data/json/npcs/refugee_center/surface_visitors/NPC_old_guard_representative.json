@@ -218,12 +218,7 @@
     "difficulty": 10,
     "value": 300000,
     "start": {
-      "assign_mission_target": {
-        "om_terrain": "bandit_camp_1",
-        "om_special": "bandit_camp",
-        "reveal_radius": 1,
-        "min_distance": 10
-      },
+      "assign_mission_target": { "om_terrain": "bandit_camp_1", "om_special": "bandit_camp", "reveal_radius": 1, "min_distance": 10 },
       "update_mapgen": { "place_npcs": [ { "class": "bandit", "x": 17, "y": 9, "target": true } ] },
       "effect": [
         { "u_spawn_item": "sw629" },

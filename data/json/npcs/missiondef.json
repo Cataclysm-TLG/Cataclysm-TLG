@@ -8,12 +8,7 @@
     "value": 50000,
     "start": {
       "effect": [ "follow", { "u_spawn_item": "sarcophagus_access_code" } ],
-      "assign_mission_target": {
-        "om_terrain": "haz_sar_b_4",
-        "om_special": "Hazardous Waste Sarcophagus",
-        "reveal_radius": 1,
-        "min_distance": 60
-      }
+      "assign_mission_target": { "om_terrain": "haz_sar_b_4", "om_special": "Hazardous Waste Sarcophagus", "reveal_radius": 1, "min_distance": 60 }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
     "destination": "haz_sar_b_4",
@@ -418,9 +413,7 @@
     "difficulty": 2,
     "value": 150000,
     "item": "etched_skull",
-    "start": {
-      "assign_mission_target": { "om_terrain": "cabin_strange", "om_special": "Strange Cabin", "reveal_radius": 3 }
-    },
+    "start": { "assign_mission_target": { "om_terrain": "cabin_strange", "om_special": "Strange Cabin", "reveal_radius": 3 } },
     "origins": [ "ORIGIN_SECONDARY" ],
     "followup": "MISSION_INVESTIGATE_PRISON_VISIONARY",
     "dialogue": {

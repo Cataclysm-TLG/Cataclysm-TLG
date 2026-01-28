@@ -122,79 +122,35 @@
       },
       {
         "u_location_variable": { "global_val": "OM_island_subnw" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "offset_z": -1,
-          "offset_x": -1,
-          "offset_y": -1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": -1, "offset_y": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subn" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "offset_z": -1,
-          "offset_y": -1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_y": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subne" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "offset_z": -1,
-          "offset_x": 1,
-          "offset_y": -1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": 1, "offset_y": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subw" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "offset_z": -1,
-          "offset_x": -1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_sube" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "offset_z": -1,
-          "offset_x": 1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": 1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subsw" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "offset_z": -1,
-          "offset_x": -1,
-          "offset_y": 1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": -1, "offset_y": 1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subs" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "offset_z": -1,
-          "offset_y": 1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_y": 1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subse" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "offset_z": -1,
-          "offset_x": 1,
-          "offset_y": 1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": 1, "offset_y": 1 }
       }
     ]
   },
