@@ -349,8 +349,8 @@
     "armor": [
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r" ],
         "coverage": 100,
@@ -418,8 +418,8 @@
     "armor": [
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 3.0 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 3.0 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "covers": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r" ],
         "coverage": 100,
@@ -488,8 +488,8 @@
     "armor": [
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "encumbrance_modifiers": [ "NONE" ],
         "coverage": 100,
@@ -860,8 +860,8 @@
     "armor": [
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 100,
@@ -870,9 +870,9 @@
       },
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
-          { "type": "nylon", "covered_by_mat": 10, "thickness": 1.5 }
+          { "type": "nylon", "covered_by_mat": 10, "thickness": 1.5 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 50,
@@ -1026,8 +1026,8 @@
     "armor": [
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "torso" ],
         "coverage": 95,
@@ -1036,8 +1036,8 @@
       },
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 100,
@@ -1045,8 +1045,8 @@
       },
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 75,
@@ -1107,15 +1107,15 @@
     "price": "80 USD",
     "price_postapoc": "4 USD 50 cent",
     "to_hit": -2,
-    "material": [ "neoprene" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "wetsuit_spring",
     "color": "blue",
     "armor": [
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "torso" ],
         "coverage": 90,
@@ -1123,8 +1123,8 @@
       },
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 75,
@@ -1351,8 +1351,8 @@
     "armor": [
       {
         "material": [
-          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 },
-          { "type": "neoprene", "covered_by_mat": 80, "thickness": 3.0 }
+          { "type": "neoprene", "covered_by_mat": 80, "thickness": 3.0 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "covers": [ "hand_l", "hand_r" ],
         "coverage": 100,

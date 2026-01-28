@@ -113,6 +113,7 @@
     "type": "ITEM",
     "subtypes": [ "AMMO" ],
     "name": { "str": "long plastic zipper" },
+    "material": [ "plastic" ],
     "description": "A long zipper made from plastic, usually found on clothing.",
     "proportional": { "weight": 3, "volume": 3, "price": 3 }
   },
@@ -127,7 +128,7 @@
     "volume": "4 ml",
     "price": "1 USD",
     "price_postapoc": "10 cent",
-    "material": [ "plastic", "cotton" ],
+    "material": [ "plastic" ],
     "symbol": "=",
     "color": "dark_gray",
     "ammo_type": "components"
