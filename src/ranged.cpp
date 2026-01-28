@@ -1376,8 +1376,7 @@ int Character::throwing_dispersion( const item &to_throw, Creature *critter,
     const float throw_skill = std::min( static_cast<float>( MAX_SKILL ),
                                         get_skill_level( skill_throw ) );
     int dispersion = 10 * throw_difficulty / ( 8 * throw_skill + 4 );
-    // If the target is a creature, it moves around and ruins aim.
-    // TODO: Inform projectile functions if the attacker actually aims for the critter or just the tile
+    // TODO: Decouple this from critter and make it just check the target pos_bub().
     if( critter != nullptr ) {
         // It's easier to dodge at close range (thrower needs to adjust more)
         // Dodge x10 at point blank, x5 at 1 dist, then flat
@@ -1385,25 +1384,25 @@ int Character::throwing_dispersion( const item &to_throw, Creature *critter,
                                 10 - 5 * trig_dist( pos_bub(),
                                         critter->pos_bub() ) );
         dispersion += throw_dispersion_per_dodge( true ) * effective_dodge;
-    }
-    float vision_mod = get_limb_score( limb_score_vision );
-    // If it's dark, cap our vision at night vision, unless we have IR or something.
-    if( fine_detail_vision_mod( critter->pos_bub() ) >= 4.f && !sees_with_specials( *critter ) ) {
-        vision_mod = std::min( vision_mod, get_limb_score( limb_score_night_vis ) );
-    }
-    // Echolocation lets hearing sub in for vision here.
-    bool echolocation = has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() &&
-                        !critter->is_underwater();
-    if( echolocation ) {
-        // todo: hearing_ability() could probably stand in here but idk how it scales.
-        vision_mod = 1.0f;
-    }
-    int perception_mod = std::max( 0, get_per() - 10 );
-    dispersion += std::max( 0, static_cast<int>( std::round( ( ( 1.f - vision_mod ) * 2000 -
-                            ( perception_mod * 100 ) ) ) ) );
-    // The inverse of the below doesn't necessarily mean false, as we could be peek-throwing or something.
-    if( !sees( get_map(), *critter ) && !sees_with_specials( *critter ) && !echolocation ) {
-        is_blind_throw = true;
+        float vision_mod = get_limb_score( limb_score_vision );
+        // If it's dark, cap our vision at night vision, unless we have IR or something.
+        if( fine_detail_vision_mod( critter->pos_bub() ) >= 4.f && !sees_with_specials( *critter ) ) {
+            vision_mod = std::min( vision_mod, get_limb_score( limb_score_night_vis ) );
+        }
+        // Echolocation lets hearing sub in for vision here.
+        bool echolocation = has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() &&
+                            !critter->is_underwater();
+        if( echolocation ) {
+            // todo: hearing_ability() could probably stand in here but idk how it scales.
+            vision_mod = 1.0f;
+        }
+        int perception_mod = std::max( 0, get_per() - 10 );
+        dispersion += std::max( 0, static_cast<int>( std::round( ( ( 1.f - vision_mod ) * 2000 -
+                                ( perception_mod * 100 ) ) ) ) );
+        // The inverse of the below doesn't necessarily mean false, as we could be peek-throwing or something.
+        if( !sees( get_map(), *critter ) && !sees_with_specials( *critter ) && !echolocation ) {
+            is_blind_throw = true;
+        }
     }
     // Blind throws are less accurate.
     if( is_blind_throw ) {
