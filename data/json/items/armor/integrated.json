@@ -1731,6 +1731,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "keratin" ],
+    "weapon_category": [ "CLAWS" ],
     "symbol": ";",
     "color": "dark_gray",
     "flags": [
