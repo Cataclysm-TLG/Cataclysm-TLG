@@ -1107,10 +1107,10 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "skull helmet" },
     "description": "The top part of a large animal skull, equipped with leather straps to secure it on your head.",
-    "weight": "1 kg",
-    "volume": "4 L",
+    "weight": "600 g",
+    "volume": "5 L",
     "price": "14 USD",
-    "price_postapoc": "2 USD",
+    "price_postapoc": "1 USD",
     "material": [ "bone", "leather" ],
     "symbol": "[",
     "color": "dark_gray",
@@ -1118,6 +1118,10 @@
     "flags": [ "WATER_FRIENDLY", "OUTER", "BELTED" ],
     "armor": [
       {
+        "material": [
+          { "type": "bone", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "leather", "covered_by_mat": 5, "thickness": 1.0 }
+        ],
         "encumbrance": 26,
         "coverage": 100,
         "covers": [ "head" ],
@@ -1125,8 +1129,12 @@
         "rigid_layer_only": true
       },
       {
+        "material": [
+          { "type": "bone", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "leather", "covered_by_mat": 5, "thickness": 1.0 }
+        ],
         "encumbrance": 0,
-        "coverage": 60,
+        "coverage": 90,
         "covers": [ "head" ],
         "specifically_covers": [ "head_forehead" ],
         "rigid_layer_only": true

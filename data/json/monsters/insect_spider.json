@@ -968,7 +968,7 @@
     "bodytype": "snake",
     "volume": "1 L",
     "weight": "700 g",
-    "hp": 5,
+    "hp": 8,
     "speed": 15,
     "stomach_size": 150,
     "color": "light_green",
