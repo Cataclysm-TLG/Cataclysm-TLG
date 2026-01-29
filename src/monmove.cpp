@@ -13,9 +13,6 @@
 #include <string>
 #include <unordered_map>
 
-#include "activity_actor_definitions.h"
-#include "activity_handlers.h"
-#include "activity_type.h"
 #include "behavior.h"
 #include "bionics.h"
 #include "cached_options.h"
@@ -57,8 +54,6 @@
 #include "vehicle.h"
 #include "viewer.h"
 #include "vpart_position.h"
-
-static const activity_id ACT_NULL( "ACT_NULL" );
 
 static const damage_type_id damage_cut( "cut" );
 
@@ -1795,13 +1790,9 @@ bool monster::attack_at( const tripoint_bub_ms &p )
 
         Creature::Attitude attitude = attitude_to( mon );
         // mon_flag_ATTACKMON == hulk behavior, whack everything in your way
+        // TODO: Draw monattack here using asynchronous animation if player_character.sees( here, p )
         if( attitude == Attitude::HOSTILE || has_flag( mon_flag_ATTACKMON ) ) {
-            const bool attacked = melee_attack( mon );
-            // TODO: Maybe make this not happen if both attacker and defender are invisible.
-            if( attacked && player_character.sees( here, p ) && !player_character.in_sleep_state() && player_character.has_activity( ACT_NULL ) ) {
-                g->draw_hit_mon( p, mon, mon.is_dead() );
-            }
-            return attacked;
+            return melee_attack( mon );
         }
 
         return false;
