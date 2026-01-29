@@ -406,7 +406,7 @@ float Character::hit_roll() const
         }
         // TODO: This should probably make you wipe out if you suck.
         if( vp_there.part_with_feature( "SEAT_REQUIRES_BALANCE", false ) && !is_on_ground() &&
-        !has_effect_with_flag( json_flag_LEVITATION ) && !has_proficiency( proficiency_prof_skating ) ) {
+            !has_effect_with_flag( json_flag_LEVITATION ) && !has_proficiency( proficiency_prof_skating ) ) {
             hit -= 2.f;
         }
     }

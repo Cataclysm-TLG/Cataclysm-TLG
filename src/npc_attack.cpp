@@ -175,6 +175,10 @@ npc_attack_rating npc_attack_spell::evaluate_tripoint(
     const npc &source, const Creature *target, const tripoint_bub_ms &location ) const
 {
     const map &here = get_map();
+    if( !here.inbounds( source.pos_bub() ) ) {
+        return npc_attack_rating( std::nullopt, location );
+    }
+
 
     const spell &attack_spell = source.magic->get_spell( attack_spell_id );
 
@@ -214,8 +218,13 @@ npc_attack_rating npc_attack_spell::evaluate_tripoint(
         }
         int potential = damage * attitude_mult - distance_to_me + 1;
         if( target && critter == target ) {
-            potential *= npc_attack_constants::target_modifier;
+            const tripoint_bub_ms tpos = target->pos_bub();
+            const tripoint_bub_ms cpos = critter->pos_bub();
+            if( here.inbounds( tpos ) && here.inbounds( cpos ) ) {
+                potential *= npc_attack_constants::target_modifier;
+            }
         }
+
         if( damage >= critter->get_hp() ) {
             potential *= npc_attack_constants::kill_modifier;
             if( att == Creature::Attitude::NEUTRAL ) {
@@ -550,6 +559,11 @@ std::vector<npc_attack_rating> npc_attack_gun::all_evaluations( const npc &sourc
 npc_attack_rating npc_attack_gun::evaluate_tripoint(
     const npc &source, const Creature *target, const tripoint_bub_ms &location ) const
 {
+    map &here = get_map();
+    if( !here.inbounds( source.pos_bub() ) ) {
+        return npc_attack_rating( std::nullopt, location );
+    }
+
     const item &gun = *gunmode.target;
     const int damage = gun.gun_damage().total_damage() * gunmode.qty;
     double potential = damage;
@@ -584,9 +598,14 @@ npc_attack_rating npc_attack_gun::evaluate_tripoint(
     if( damage >= critter->get_hp() ) {
         potential *= npc_attack_constants::kill_modifier;
     }
-    if( target && target->pos_bub() == critter->pos_bub() ) {
-        potential *= npc_attack_constants::target_modifier;
+    if( target ) {
+        const tripoint_bub_ms tpos = target->pos_bub();
+        const tripoint_bub_ms cpos = critter->pos_bub();
+        if( here.inbounds( tpos ) && here.inbounds( cpos ) && tpos == cpos ) {
+            potential *= npc_attack_constants::target_modifier;
+        }
     }
+
     return npc_attack_rating( static_cast<int>( std::round( potential ) ), location );
 }
 
@@ -854,8 +873,13 @@ npc_attack_rating npc_attack_throw::evaluate_tripoint(
     if( potential > 0.0f && critter && damage >= critter->get_hp() ) {
         potential *= npc_attack_constants::kill_modifier;
     }
-    if( potential > 0.0f && target && critter && target->pos_bub() == critter->pos_bub() ) {
-        potential *= npc_attack_constants::target_modifier;
+    if( potential > 0.0f && target && critter ) {
+        const tripoint_bub_ms tpos = target->pos_bub();
+        const tripoint_bub_ms cpos = critter->pos_bub();
+        if( get_map().inbounds( tpos ) && get_map().inbounds( cpos ) && tpos == cpos ) {
+            potential *= npc_attack_constants::target_modifier;
+        }
     }
+
     return npc_attack_rating( static_cast<int>( std::round( potential ) ), location );
 }
