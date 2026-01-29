@@ -1125,5 +1125,78 @@
     "see_cost": "high",
     "vision_levels": "blends_till_outlines",
     "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_ground_NW"
+    ],
+    "name": "pig gene lab parking",
+    "sym": "O",
+    "color": "dark_gray",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_ground_W",
+      "pig_farm_lab_ground_SW",
+      "pig_farm_lab_ground_S"
+    ],
+    "name": "pig gene lab",
+    "sym": "L",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_ground_N",
+      "pig_farm_lab_ground_NE",
+      "pig_farm_lab_ground_M",
+      "pig_farm_lab_ground_E",
+      "pig_farm_lab_ground_SE"
+    ],
+    "name": "pig gene lab farm",
+    "sym": "#",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_roof_W",
+      "pig_farm_lab_roof_SW",
+      "pig_farm_lab_roof_S"
+    ],
+    "name": "pig gene lab roof",
+    "sym": "L",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_roof_NW",
+      "pig_farm_lab_roof_N",
+      "pig_farm_lab_roof_NE",
+      "pig_farm_lab_roof_M",
+      "pig_farm_lab_roof_E",
+      "pig_farm_lab_roof_SE"
+    ],
+    "name": "pig gene lab noroof",
+    "sym": ".",
+    "color": "blue",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
   }
 ]
