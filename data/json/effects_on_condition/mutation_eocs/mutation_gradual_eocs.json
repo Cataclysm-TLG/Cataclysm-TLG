@@ -84,9 +84,7 @@
     "id": "EOC_MUTATING_GRADUAL_PASSED_THRESHOLD",
     "eoc_type": "EVENT",
     "required_event": "crosses_mutation_threshold",
-    "condition": {
-      "and": [ { "math": [ "has_var(u_MUTATING_GRADUAL_vitamin)" ] } ]
-    },
+    "condition": { "and": [ { "math": [ "has_var(u_MUTATING_GRADUAL_vitamin)" ] } ] },
     "effect": [ { "u_message": "You are new born, complete." }, { "run_eocs": "EOC_LOSE_MUTATING_GRADUAL" } ]
   },
   {
@@ -288,9 +286,7 @@
     "type": "effect_on_condition",
     "id": "EOC_CROSSED_THRESHOLD_CLEANUP",
     "//": "Fallback in case we somehow didn't lose gradual mutation when we crossed the threshold.",
-    "condition": {
-      "and": [ { "math": [ "has_var(u_MUTATING_GRADUAL_vitamin)" ] }, { "u_has_flag": "MUTATION_THRESHOLD" } ]
-    },
+    "condition": { "and": [ { "math": [ "has_var(u_MUTATING_GRADUAL_vitamin)" ] }, { "u_has_flag": "MUTATION_THRESHOLD" } ] },
     "recurrence": [ "4 hours", "8 hours" ],
     "effect": [ { "u_message": "You are new born, complete." }, { "run_eocs": "EOC_LOSE_MUTATING_GRADUAL" } ]
   },
