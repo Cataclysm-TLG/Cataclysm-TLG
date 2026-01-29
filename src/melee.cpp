@@ -391,7 +391,25 @@ float Character::hit_roll() const
         !( has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() ) ) {
         hit -= 1.0f;
     }
-
+    // Greatly impaired accuracy when in a vehicle.
+    map &here = get_map();
+    const optional_vpart_position vp_there = here.veh_at( pos_abs() );
+    if( vp_there ) {
+        hit -= 1.f;
+        // Trying to fight inside a vehicle sucks unless you're really small.
+        if( in_vehicle && enum_size() > 2 ) {
+            hit -= enum_size();
+        }
+        vehicle &boarded_vehicle = vp_there->vehicle();
+        if( boarded_vehicle.player_in_control( here, *this ) ) {
+            hit -= 2.f;
+        }
+        // TODO: This should probably make you wipe out if you suck.
+        if( vp_there.part_with_feature( "SEAT_REQUIRES_BALANCE", false ) && !is_on_ground() &&
+        !has_effect_with_flag( json_flag_LEVITATION ) && !has_proficiency( proficiency_prof_skating ) ) {
+            hit -= 2.f;
+        }
+    }
     hit *= get_modifier( character_modifier_melee_attack_roll_mod );
     return melee::melee_hit_range( hit );
 }
