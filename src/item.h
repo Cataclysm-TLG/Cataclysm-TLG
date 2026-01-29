@@ -356,6 +356,10 @@ class item : public visitable
          */
         bool is_corpse() const;
         /**
+         * As can_revive(), but temporary conditions like freezing don't block it.
+         */
+        bool pulpable() const;
+        /**
          * Whether this is a corpse that can be revived.
          */
         bool can_revive() const;

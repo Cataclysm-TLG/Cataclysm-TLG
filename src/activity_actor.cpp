@@ -8650,7 +8650,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
         const tripoint_bub_ms &pos = here.get_bub( *pos_iter );
         map_stack corpse_pile = here.i_at( pos );
         for( item &corpse : corpse_pile ) {
-            if( !corpse.is_corpse() || !corpse.can_revive() ) {
+            if( !corpse.is_corpse() || !corpse.pulpable() ) {
                 // Don't smash non-reviving corpses.
                 continue;
             }
@@ -8659,7 +8659,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
             const bool acid_immune = you.is_immune_damage( damage_acid ) ||
                                      you.is_immune_field( fd_acid );
             if( corpse_mtype->bloodType().obj().has_acid && !corpse.has_flag( flag_BLED ) && ( !acid_immune &&
-                    !pulp_acid ) ) {
+                    !pulp_acid ) && !corpse.has_flag( flag_FROZEN ) ) {
                 // Don't smash acid zombies when auto pulping unprotected.
                 continue;
             }
@@ -8683,11 +8683,11 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
 
                 if( x_in_y( pulp_power, corpse_volume_factor ) ) {
-                    // Splatter some blood around.
+                    // Splatter some blood around, if we have any and we're not frozen.
                     const int radius = mess_radius + x_in_y( pulp_power, 500 ) + x_in_y( pulp_power, 1000 );
                     const tripoint_bub_ms dest( pos + point( rng( -radius, radius ), rng( -radius, radius ) ) );
 
-                    if( !corpse.has_flag( flag_BLED ) ) {
+                    if( !corpse.has_flag( flag_BLED ) && !corpse.has_flag( flag_FROZEN ) ) {
                         const field_type_id type_blood = ( mess_radius > 1 && x_in_y( pulp_power, 10000 ) ) ?
                                                          corpse.get_mtype()->gibType() :
                                                          corpse.get_mtype()->bloodType();

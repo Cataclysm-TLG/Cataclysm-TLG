@@ -8558,6 +8558,15 @@ const std::map<itype_id, int> &item::composting_results() const
     return is_compostable() ? type->compostable->results : nulresult;
 }
 
+bool item::pulpable() const
+{
+    return is_corpse() && ( corpse->has_flag( mon_flag_REVIVES ) || has_var( "zombie_form" ) ) &&
+           damage() < max_damage() &&
+           !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
+              has_flag( flag_QUARTERED ) ||
+              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) || has_flag( flag_GIBBED ) );
+}
+
 bool item::can_revive() const
 {
     return is_corpse() && ( corpse->has_flag( mon_flag_REVIVES ) || has_var( "zombie_form" ) ) &&
@@ -13174,7 +13183,7 @@ bool item::detonate( const tripoint_bub_ms &p, std::vector<item> &drops )
 }
 bool item::has_rotten_away() const
 {
-    if( is_corpse() && !can_revive() ) {
+    if( is_corpse() && !pulpable() ) {
         return get_rot() > 10_days;
     } else {
         return get_relative_rot() > 2.0;

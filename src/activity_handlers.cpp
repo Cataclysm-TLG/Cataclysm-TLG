@@ -741,9 +741,9 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     if( is_human && action == butcher_type::DISSECT && !( you.has_flag( json_flag_CANNIBAL ) ||
             you.has_flag( json_flag_PSYCHOPATH ) || you.has_flag( json_flag_SAPIOVORE ) ) ) {
         if( you.has_proficiency( proficiency_prof_dissect_humans ) ) {
-            //you're either trained for this, densensitized, or both. doesn't bother you.
+            // You're either trained for this, densensitized, or both. doesn't bother you.
             if( you.is_avatar() ) {
-                //this is a dissection, and we are trained for dissection, so no morale penalty, and lighter flavor text.
+                // This is a dissection, and we are trained for dissection, so no morale penalty, and lighter flavor text.
                 switch( rng( 1, 3 ) ) {
                     case 1:
                         you.add_msg_if_player( m_good, _( "You grit your teeth and get to work." ) );
