@@ -1328,7 +1328,6 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
 
     if( action == butcher_type::DISSECT ) {
         you.practice( skill_firstaid, std::max( 0, practice ), mt.size + std::min( tool_quality, 3 ) + 2 );
-        int dissection_learning = static_cast<int>( corpse_item->get_mtype()->size );
         mt.families.practice_dissect( you, static_cast<int>( corpse_item->get_mtype()->size ) );
         const std::vector<Character *> helpers = you.get_crafting_helpers();
         // Helpers learn slightly less than the main dissector.
