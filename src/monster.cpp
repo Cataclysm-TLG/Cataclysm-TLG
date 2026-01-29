@@ -145,6 +145,7 @@ static const flag_id json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
 static const flag_id json_flag_DISABLE_FLIGHT( "DISABLE_FLIGHT" );
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
+static const flag_id json_flag_MUTAGEN_SAMPLE( "MUTAGEN_SAMPLE" );
 static const flag_id json_flag_PIT( "PIT" );
 
 static const itype_id itype_milk( "milk" );
@@ -3808,7 +3809,9 @@ void monster::init_from_item( item &itm )
         const int burnt_penalty = itm.burnt;
         hp = static_cast<int>( hp * 0.7 );
         if( itm.damage_level() > 0 ) {
-            set_speed_base( speed_base / ( itm.damage_level() + 1 ) );
+            if( itm.damage_level() > 1 ) {
+                set_speed_base( speed_base / 2 );
+            }
             hp /= itm.damage_level() + 1;
         }
 
@@ -3834,15 +3837,18 @@ void monster::init_from_item( item &itm )
             inv.push_back( *it );
             itm.remove_item( *it );
         }
-        //Move dissectables (installed bionics, etc)
+        // Move dissectables (installed bionics, etc)
         for( item *dissectable : itm.all_items_top( pocket_type::CORPSE ) ) {
-            dissectable_inv.push_back( *dissectable );
-            itm.remove_item( *dissectable );
+            // Mutagen samples do not survive this process.
+            if( !itm.has_flag( json_flag_MUTAGEN_SAMPLE ) ) {
+                dissectable_inv.push_back( *dissectable );
+                itm.remove_item( *dissectable );
+            }
         }
     } else {
-        // must be a robot
+        // Must be a robot.
         const int damfac = itm.max_damage() - std::max( 0, itm.damage() ) + 1;
-        // One hp at least, everything else would be unfair (happens only to monster with *very* low hp),
+        // One hp at least, everything else would be unfair (happens only to monster with *very* low hp).
         hp = std::max( 1, hp * damfac / ( itm.max_damage() + 1 ) );
     }
 }
