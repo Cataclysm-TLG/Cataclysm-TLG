@@ -301,42 +301,34 @@ enum consumption_result {
 // does not try to consume contents
 static consumption_result try_consume( npc &p, item &it, std::string &reason )
 {
-    // TODO: Unify this with 'player::consume_item()'
     item &to_eat = it;
     if( to_eat.is_null() ) {
         debugmsg( "Null item to try_consume." );
         return REFUSED;
     }
     const auto &comest = to_eat.get_comestible();
-    if( !comest ) {
+    if( !comest || it.is_craft() ) {
         // Don't inform the player that we don't want to eat the lighter
         return REFUSED;
     }
-
     if( !p.will_accept_from_player( it ) ) {
         reason = p.chat_snippets().snip_consume_cant_consume.translated();
         return REFUSED;
     }
-
-    // TODO: Make it not a copy+paste from player::consume_item
     int amount_used = 1;
     if( to_eat.is_food() ) {
         if( !p.can_consume_as_is( to_eat ) ) {
             reason = p.chat_snippets().snip_consume_cant_consume.translated();
             return REFUSED;
-        } else {
-            if( to_eat.rotten() && !p.as_character()->has_trait( trait_SAPROVORE ) ) {
-                //TODO: once npc needs are operational again check npc hunger state and allow eating if desperate
-                reason = p.chat_snippets().snip_consume_rotten.translated();
-                return REFUSED;
-            }
-
-            const time_duration &consume_time = p.get_consume_time( to_eat );
-            p.mod_moves( -to_moves<int>( consume_time ) );
-            p.consume( to_eat );
-            reason = p.chat_snippets().snip_consume_eat.translated();
         }
-
+        if( to_eat.rotten() && !p.as_character()->has_trait( trait_SAPROVORE ) ) {
+            reason = p.chat_snippets().snip_consume_rotten.translated();
+            return REFUSED;
+        }
+        const time_duration &consume_time = p.get_consume_time( to_eat );
+        p.mod_moves( -to_moves<int>( consume_time ) );
+        p.consume( to_eat );
+        reason = p.chat_snippets().snip_consume_eat.translated();
     } else if( to_eat.is_medication() ) {
         if( !comest->tool.is_null() ) {
             bool has = p.has_amount( comest->tool, 1 );
@@ -360,18 +352,16 @@ static consumption_result try_consume( npc &p, item &it, std::string &reason )
             }
             reason = p.chat_snippets().snip_consume_use_med.translated();
         }
-
         p.consume_effects( to_eat );
         to_eat.charges -= amount_used;
         p.mod_moves( -to_moves<int>( 1_seconds ) * 2.5 );
     } else {
         debugmsg( "Unknown comestible type of item: %s\n", to_eat.tname() );
+        return REFUSED;
     }
-
     if( to_eat.charges > 0 ) {
         return CONSUMED_SOME;
     }
-
     // If not consuming contents and charge <= 0, we just ate the last charge from the stack
     return CONSUMED_ALL;
 }
@@ -388,6 +378,9 @@ std::string talker_npc::give_item_to( const bool to_use )
         return me_npc->chat_snippets().snip_give_cancel.translated();
     }
     item &given = *loc;
+    if( given.is_craft() ) {
+        return _( "That in-progress craft isn't finished." );
+    }
 
     if( ( loc == player_character.get_wielded_item() &&
           given.has_flag( STATIC( flag_id( "NO_UNWIELD" ) ) ) ) ||
@@ -424,19 +417,19 @@ std::string talker_npc::give_item_to( const bool to_use )
             } else if( given.is_container() ) {
                 given.on_contents_changed();
             }
-        }// wield it if its a weapon
+        } // Wield it if it is a weapon.
         else if( new_weapon_value > cur_weapon_value ) {
             me_npc->wield( given );
             reason = me_npc->chat_snippets().snip_give_wield.translated();
             taken = true;
-        }// HACK: is_gun here is a hack to prevent NPCs wearing guns if they don't want to use them
+        } // HACK: is_gun here is a hack to prevent NPCs wearing guns if they don't want to use them
         else if( !given.is_gun() && given.is_armor() ) {
-            //if it is impossible to wear return why
+            // If it is impossible to wear, return why.
             ret_val<void> can_wear = me_npc->can_wear( given, true );
             if( !can_wear.success() ) {
                 reason = can_wear.str();
             } else {
-                //if we can wear it with equip changes prompt first
+                // If we can wear it with equip changes, prompt first.
                 can_wear = me_npc->can_wear( given );
                 if( ( can_wear.success() ||
                       query_yn( can_wear.str() + _( " Should I take something off?" ) ) )

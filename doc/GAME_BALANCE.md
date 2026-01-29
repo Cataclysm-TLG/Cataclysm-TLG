@@ -15,8 +15,6 @@
 23-24 Monstrous:  Frightening to behold.  (Capabilities that even the most gullible person could not mistake for human.)<br><br>
 25-26 Impossible:  Tremendously capable.  (At this point you are flipping over small cars and doing calculus without scratch paper.)<br><br>
 27-28 Unbelievable:  Out of this world.  (You get the idea.)<br><br>
-29-30 Transcendant:  Phenomenal.<br><br>
-31+ Post-human:  Beyond what was.
 
 
 # Skill System Scaling:<br><br>
