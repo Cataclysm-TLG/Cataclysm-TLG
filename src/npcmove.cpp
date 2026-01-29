@@ -2753,11 +2753,6 @@ int npc::confident_throw_range( const item &thrown, Creature *target ) const
 bool npc::wont_hit_friend( const tripoint_bub_ms &tar, const item &it, bool throwing ) const
 {
     map &here = get_map();
-    const Creature &ally = *ally_p;
-    const tripoint_bub_ms ally_pos = ally.pos_bub();
-    if( !here.inbounds( ally_pos ) ) {
-        continue;
-    }
     if( !here.inbounds( pos_bub() ) ) {
         return true;
     }
