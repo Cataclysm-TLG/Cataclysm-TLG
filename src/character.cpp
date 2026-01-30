@@ -1943,6 +1943,13 @@ void Character::mount_creature( monster &z )
     z.facing = facing;
     invalidate_tile_eye_level_cache();
     recalc_sight_limits();
+
+    // Switch from potentially invalid crouch or prone to trot.
+    // Trot is sustained and doesn't spend stamina, so it's a good default for animal riding.
+    if( get_steed_type() == steed_type::ANIMAL ) {
+        set_movement_mode( move_mode_run );
+    }
+
     mod_moves( -100 );
 }
 
@@ -10849,7 +10856,18 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
 
     map &here = get_map();
 
+
     if( is_mounted() ) {
+        // Ignore mech movemodes
+        // TODO: Figure what to do with mech movemodes
+        if( get_steed_type() != steed_type::MECH ) {
+            run_cost_effect_mul( 1.0 / get_modifier( character_modifier_move_mode_move_cost_mod ),
+                                 //TODO get these strings from elsewhere
+                                 is_running() ? _( "Running" ) :
+                                 is_crouching() ? _( "Crouching" ) :
+                                 is_prone() ? _( "Prone" ) : _( "Walking" )
+                               );
+        }
         return effects;
     }
 
@@ -10978,7 +10996,6 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
 
     run_cost_effect_mul( 1.0 / get_modifier( character_modifier_stamina_move_cost_mod ),
                          _( "Stamina" ) );
-
     run_cost_effect_mul( 1.0 / get_modifier( character_modifier_move_mode_move_cost_mod ),
                          //TODO get these strings from elsewhere
                          is_running() ? _( "Running" ) :

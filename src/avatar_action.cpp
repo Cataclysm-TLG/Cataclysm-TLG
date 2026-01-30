@@ -266,6 +266,10 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
     if( !is_riding && !is_swimming ) {
         you.set_activity_level( you.enchantment_cache->modify_value(
                                     enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER, you.current_movement_mode()->exertion_level() ) );
+    } else if( you.get_steed_type() == steed_type::ANIMAL ) {
+        you.set_activity_level( you.enchantment_cache->modify_value(
+                                    enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER,
+                                    you.current_movement_mode()->exertion_level_animal_riding() ) );
     }
 
     // If the player is *attempting to* move on the X axis, update facing direction of their sprite to match.
