@@ -142,8 +142,7 @@
     "material": [ "milk" ],
     "volume": "15 ml",
     "flags": [ "NO_AUTO_CONSUME" ],
-    "use_action": [ "BLECH" ],
-    "fun": -1,
+    "fun": -8,
     "vitamins": [ [ "milk_allergen", 1 ] ]
   },
   {

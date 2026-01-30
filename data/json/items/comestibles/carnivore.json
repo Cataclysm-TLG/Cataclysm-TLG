@@ -216,9 +216,21 @@
     "copy-from": "hstomach",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "name": { "str": "large human stomach" },
+    "name": { "str": "mutant human stomach" },
     "description": "The stomach of a large humanoid creature.  It is surprisingly durable.",
-    "proportional": { "weight": 2.0, "volume": 2.0, "price": 1.5, "calories": 2.0 }
+    "proportional": { "weight": 2.0, "volume": 2.0, "price": 1.5, "calories": 2.0 },
+    "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ], [ "mutant_toxin", 50 ] ],
+    "extend": { "flags": [ "BAD_TASTE" ] }
+  },
+  {
+    "id": "mutant_stomach",
+    "copy-from": "stomach",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "name": { "str": "mutant stomach" },
+    "description": "The stomach of a mutated creature.  It is clearly malformed and smells revolting.",
+    "vitamins": [ [ "meat_allergen", 1 ], [ "mutant_toxin", 25 ] ],
+    "extend": { "flags": [ "BAD_TASTE" ] }
   },
   {
     "id": "human_flesh",
