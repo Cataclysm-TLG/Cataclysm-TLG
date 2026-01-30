@@ -174,7 +174,7 @@
     ],
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" } ],
     "time": "30 s",
-    "components": [ [ [ "water_clean", 10 ], [ "bleach", 1 ] ] ]
+    "components": [ [ [ "water_clean", 10 ] ], [ [ "bleach", 1 ] ] ]
   },
   {
     "result": "wintergreen_oil",
