@@ -8156,7 +8156,7 @@
   {
     "type": "mutation",
     "id": "THRESH_FISH",
-    "name": { "str": "Fish" },
+    "name": { "str": "Piscine" },
     "points": 1,
     "description": "Ninety percent of the planet, and it's yours to explore.  And colonize.  And enjoy.  What was that about a surface?",
     "valid": false,
@@ -8186,7 +8186,7 @@
   {
     "type": "mutation",
     "id": "THRESH_LUPINE",
-    "name": { "str": "Lupine" },
+    "name": { "str": "Canine" },
     "points": 1,
     "description": "You're the perfect candidate to lead a pack.",
     "valid": false,
@@ -8206,7 +8206,7 @@
   {
     "type": "mutation",
     "id": "THRESH_CATTLE",
-    "name": { "str": "Bovine" },
+    "name": { "str": "Bovoid" },
     "points": 1,
     "description": "Civilization collapsed?  Great!  You and your kin will never have to worry about a slaughterhouse again.",
     "valid": false,
@@ -8269,7 +8269,7 @@
   {
     "type": "mutation",
     "id": "THRESH_SPIDER",
-    "name": { "str": "Spider" },
+    "name": { "str": "Aranean" },
     "points": 1,
     "description": "Well, maybe you'll just have to make your own worldwide web.",
     "flags": [ "INSECTBLOOD" ],
@@ -8330,7 +8330,7 @@
   {
     "type": "mutation",
     "id": "THRESH_RAPTOR",
-    "name": { "str": "Raptor" },
+    "name": { "str": "Theropod" },
     "points": 1,
     "description": "The chance to undo not one but TWO extinction events.  You're confident you'll do fine.",
     "valid": false,
@@ -8350,7 +8350,7 @@
   {
     "type": "mutation",
     "id": "THRESH_MOUSE",
-    "name": { "str": "Mouse" },
+    "name": { "str": "Murine" },
     "points": 1,
     "description": "So much food, everywhere!  And nobody's even guarding it anymore!  These are good times.",
     "valid": false,

@@ -3842,5 +3842,10 @@
     "type": "MIGRATION",
     "id": "bandages_makeshift_boiled",
     "replace": "bandages_makeshift_sanitized"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lupine_sample",
+    "replace": "canine_sample"
   }
 ]

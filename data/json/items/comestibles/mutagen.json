@@ -268,13 +268,13 @@
     "copy-from": "iv_mutagen_flavor",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "name": { "str_sp": "lupine infusion" },
+    "name": { "str_sp": "canine infusion" },
     "description": "A processed mutagenic infusion as white as a full moon.",
     "looks_like": "iv_mutagen",
     "color": "white",
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You inject the lupine infusion.",
+      "activation_message": "You inject the canine infusion.",
       "tools_needed": { "syringe": -1 },
       "vitamins": [ [ "mutagen_lupine", 220, 320 ] ]
     }
@@ -688,11 +688,11 @@
     "copy-from": "mutagen_flavor",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "name": { "str_sp": "lupine mutagen" },
+    "name": { "str_sp": "canine mutagen" },
     "looks_like": "mutagen",
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You drink the lupine mutagen.",
+      "activation_message": "You drink the canine mutagen.",
       "vitamins": [ [ "mutagen_lupine", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },

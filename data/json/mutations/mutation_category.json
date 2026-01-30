@@ -130,7 +130,7 @@
   {
     "type": "mutation_category",
     "id": "LUPINE",
-    "name": "Lupine",
+    "name": "Canine",
     "threshold_mut": "THRESH_LUPINE",
     "mutagen_message": "You feel an urge to mark your territory.  But then it passes.",
     "memorial_message": "Wolfed out.",

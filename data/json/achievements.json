@@ -628,7 +628,7 @@
     ]
   },
   {
-    "id": "achievement_mutation_threshold_lupine",
+    "id": "achievement_mutation_threshold_canine",
     "type": "achievement",
     "name": "Leader of the pack",
     "requirements": [
@@ -636,7 +636,7 @@
         "event_statistic": "avatar_last_crosses_mutation_threshold",
         "is": "==",
         "target": [ "mutation_category_id", "LUPINE" ],
-        "description": "crossed lupine mutation threshold",
+        "description": "crossed canine mutation threshold",
         "visible": "when_achievement_completed"
       }
     ]
