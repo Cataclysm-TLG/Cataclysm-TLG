@@ -137,7 +137,6 @@
       { "monster": "mon_sewer_snake", "weight": 240, "cost_multiplier": 0 },
       { "monster": "mon_rat", "weight": 310, "cost_multiplier": 0 },
       { "monster": "mon_rat", "weight": 100, "cost_multiplier": 0, "pack_size": [ 3, 6 ] },
-      { "monster": "mon_gator", "weight": 40, "cost_multiplier": 2, "pack_size": [ 1, 2 ] },
       { "monster": "mon_bullfrog", "weight": 40, "cost_multiplier": 0 },
       { "monster": "mon_fly_small", "weight": 60, "cost_multiplier": 0 },
       { "monster": "mon_large_cockroach", "weight": 120, "cost_multiplier": 0, "pack_size": [ 2, 3 ] },
