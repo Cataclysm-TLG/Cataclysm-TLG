@@ -78,9 +78,8 @@
     "autolearn": true,
     "qualities": [ { "id": "BOIL", "level": 1 } ],
     "tools": [ [ [ "water_boiling_heat", 4, "LIST" ] ] ],
-    "result_mult": 9,
     "components": [ [ [ "bandages_makeshift", 1 ] ], [ [ "water_clean", 1 ], [ "water", 1 ] ] ],
-    "byproducts": [ [ "water_clean", 2 ] ]
+    "byproducts": [ [ "water_clean", 1 ] ]
   },
   {
     "result": "bandages_makeshift_sanitized",
@@ -95,7 +94,6 @@
     "time": "5 m",
     "batch_time_factors": [ 95, 4 ],
     "autolearn": true,
-    "result_mult": 9,
     "components": [ [ [ "bandages_makeshift", 1 ] ], [ [ "bleach", 1 ] ], [ [ "water_clean", 1 ], [ "water", 1 ] ] ]
   },
   {
