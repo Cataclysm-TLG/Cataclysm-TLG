@@ -3827,5 +3827,20 @@
     "type": "MIGRATION",
     "id": "dynamite_bomb_act",
     "replace": "dynamite_bundle_act"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "soapy_water",
+    "replace": "water"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bandages_makeshift_bleached",
+    "replace": "bandages_makeshift_sanitized"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bandages_makeshift_boiled",
+    "replace": "bandages_makeshift_sanitized"
   }
 ]

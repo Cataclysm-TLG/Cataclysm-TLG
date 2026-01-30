@@ -2578,6 +2578,12 @@
     "//": "Intended for integrated items like claws. Only contributes its damage if used via an attack vector that has natural: true."
   },
   {
+    "id": "DECAYS",
+    "type": "json_flag",
+    "info": "This will eventually <bad>go bad</bad>.",
+    "//": "Overrides DECAYS_IN_AIR."
+  },
+  {
     "id": "DECAYS_IN_AIR",
     "type": "json_flag",
     "info": "This will eventually <bad>go bad</bad> if left in the open air too long."

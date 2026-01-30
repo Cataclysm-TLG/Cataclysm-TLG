@@ -511,7 +511,7 @@
     "type": "ITEM",
     "id": "javelin_iron",
     "name": { "str": "steel javelin" },
-    "description": "An steel-tipped wooden throwing spear.",
+    "description": "A steel-tipped wooden throwing spear.",
     "weight": "960 g",
     "color": "light_gray",
     "symbol": "/",

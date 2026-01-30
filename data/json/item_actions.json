@@ -736,17 +736,7 @@
   },
   {
     "type": "item_action",
-    "id": "MANAGE_EXOSUIT",
-    "name": { "str": "Manage exosuit modules" }
-  },
-  {
-    "type": "item_action",
     "id": "SEED",
-    "name": { "str": "Consume" }
-  },
-  {
-    "type": "item_action",
-    "id": "SEWAGE",
     "name": { "str": "Consume" }
   },
   {

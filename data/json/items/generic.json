@@ -1513,16 +1513,15 @@
     "id": "paper",
     "name": { "str_sp": "paper" },
     "category": "spare_parts",
-    "weight": "3 g",
+    "weight": "4500 mg",
     "color": "white",
     "symbol": "`",
-    "description": "A piece of paper.  Can be used to start fires.",
+    "description": "A sheet of paper.  It might be useful for starting a fire.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "paper" ],
     "flags": [ "TINDER", "PAPER_SHAPED" ],
     "volume": "6 ml",
-    "longest_side": "297 mm",
     "ammo_type": "paper"
   },
   {
