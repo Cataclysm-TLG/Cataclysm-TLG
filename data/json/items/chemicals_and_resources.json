@@ -504,7 +504,7 @@
     "id": "sewage",
     "name": { "str_sp": "sewage sample" },
     "weight": "280 g",
-    "color": "green",
+    "color": "brown",
     "container": "bottle_plastic",
     "sealed": false,
     "symbol": "~",
@@ -512,7 +512,6 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "volume": "250 ml",
-    "charges": 1,
     "phase": "liquid",
     "category": "chems"
   },
