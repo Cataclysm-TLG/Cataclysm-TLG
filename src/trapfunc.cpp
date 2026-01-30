@@ -834,8 +834,8 @@ bool trapfunc::landmine( const tripoint_bub_ms &p, Creature *c, item * )
         c->add_msg_player_or_npc( m_bad, _( "You trigger a land mine!" ),
                                   _( "<npcname> triggers a land mine!" ) );
     }
-    // Halving the expected casing mass here as the mine (by design) does not function exactly like a grenade.
-    explosion_handler::explosion( c, p, 18.0f, 0.5f, false, 7, 0.02f );
+    // These mines aren't really designed for shrapnel.
+    explosion_handler::explosion( c, p, 25.0f, 0.5f, false, 3, 0.02f );
     get_map().remove_trap( p );
     return true;
 }

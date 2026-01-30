@@ -406,9 +406,18 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
 
         Character *pl = critter->as_character();
         if( pl == nullptr ) {
+                        add_msg_debug(
+                debugmode::DF_EXPLOSION,
+                "EXP dist_map=%.2f force=%.3f",
+                dist_map.at( pt ),
+                force
+            );
             const double dmg = std::max( force - critter->get_armor_type( damage_bash,
                                          bodypart_id( "torso" ) ) / 2.0, 0.0 );
-            const int actual_dmg = std::max( 0.0, rng_float( ( -dmg * 0.5 ) / critter->ranged_target_size(),
+            /* 0.25 here is a magic number that gives us a decent chance to simply not take damage.
+               Explosions are highly unpredictable and it's not uncommon for people to be miraculously
+               unscathed, even very close to a blast. */
+            const int actual_dmg = std::max( 0.0, rng_float( ( -dmg * 0.25 ) / critter->ranged_target_size(),
                                              dmg * 3 ) );
             critter->apply_damage( mutable_source, bodypart_id( "torso" ), actual_dmg );
             critter->check_dead_state( m );
@@ -441,6 +450,12 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         };
 
         for( const blastable_part &blp : blast_parts ) {
+                        add_msg_debug(
+                debugmode::DF_EXPLOSION,
+                "EXP dist_map=%.2f force=%.3f",
+                dist_map.at( pt ),
+                force
+            );
             const int part_dam = rng( force * blp.low_mul, force * blp.high_mul );
             const std::string hit_part_name = body_part_name_accusative( blp.bp );
             // FIXME: Hardcoded damage type
@@ -674,9 +689,10 @@ void _make_explosion( map *m, const Creature *source, const tripoint_bub_ms &p,
     if( ex.distance_factor >= 1.0f ) {
         debugmsg( "called game::explosion with factor >= 1.0 (infinite size)" );
     } else if( ex.distance_factor > 0.0f && ex.power > 0.0f ) {
-        // Power rescaled to mean grams of TNT equivalent, this scales it roughly back to where
-        // it was before until we re-do blasting power to be based on TNT-equivalent directly.
-        do_blast( m, source, p, ex.power / 15.0, ex.distance_factor, ex.fire );
+        /* Power in json is grams of TNT equivalent. Here we divide it by eight
+           to get a reasonable damage result from pure blast (not shrapnel) with
+           that in mind. */
+        do_blast( m, source, p, ex.power / 8.0, ex.distance_factor, ex.fire );
     }
 
     const shrapnel_data &shr = ex.shrapnel;
