@@ -187,7 +187,6 @@
           { "liquid": "motor_oil", "amount": [ 1, 4 ], "chance": 100 },
           { "liquid": "chem_turpentine", "amount": [ 1, 4 ], "chance": 100 },
           { "liquid": "camphine", "amount": [ 1, 4 ], "chance": 100 },
-          { "liquid": "soapy_water", "amount": [ 1, 4 ], "chance": 150 },
           { "liquid": "gasoline", "amount": [ 1, 4 ], "chance": 100 }
         ]
       },

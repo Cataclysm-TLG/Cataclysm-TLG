@@ -108,8 +108,7 @@
         [ "long_knit_scarf_loose", 1 ],
         [ "bandages", 2 ],
         [ "bandages_makeshift", 2 ],
-        [ "bandages_makeshift_bleached", 2 ],
-        [ "bandages_makeshift_boiled", 2 ],
+        [ "bandages_makeshift_sanitized", 2 ],
         [ "cotton_sheet", 1 ]
       ]
     ],

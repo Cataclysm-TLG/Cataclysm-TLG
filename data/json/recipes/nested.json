@@ -952,13 +952,12 @@
     "skill_used": "firstaid",
     "nested_category_data": [
       "bandages",
+      "bandages_makeshift_sanitized_bleached",
+      "bandages_makeshift_sanitized",
       "bandages_makeshift",
-      "bandages_makeshift_with_tool",
-      "bandages_makeshift_bleached",
-      "bandages_makeshift_boiled",
-      "adhesive_bandages",
       "medical_gauze",
-      "medical_gauze_makeshift"
+      "medical_gauze_makeshift",
+      "adhesive_bandages"
     ],
     "difficulty": 1
   },
