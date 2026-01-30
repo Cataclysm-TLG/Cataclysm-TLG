@@ -585,9 +585,9 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
     }
 
     if( has_trait( trait_GOURMAND ) ) {
-        if( fun < -1 ) {
+        if( fun < -1.f ) {
             fun_max = fun;
-            fun /= 2;
+            fun *= 0.75f;
         } else if( fun > 0 ) {
             fun_max *= 3;
             fun = fun * 3 / 2;
@@ -1351,6 +1351,7 @@ void Character::modify_morale( item &food, const int nutr )
                     food.type );
     }
     // We might get sick at the end of this function if the food is too gross.
+    // * -1 because nausea_chance is an x in 100 check, so we need to flip it positive.
     int nausea_chance = fun.first * -1;
     // Morale bonus for eating unspoiled food with chair/table nearby
     // Does not apply to non-ingested consumables like bandages or drugs,

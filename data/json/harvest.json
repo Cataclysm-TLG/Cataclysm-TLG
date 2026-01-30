@@ -140,125 +140,129 @@
   {
     "id": "datura_harv",
     "type": "harvest",
-    "entries": [ { "drop": "datura_seed", "base_num": [ 2, 6 ] }, { "drop": "withered", "base_num": [ 1, 2 ] } ]
+    "entries": [ { "drop": "datura_seed", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.5 ] }, { "drop": "withered", "base_num": [ 1, 2 ] } ]
   },
   {
     "id": "mustard_harv",
     "type": "harvest",
-    "entries": [ { "drop": "seed_mustard", "base_num": [ 2, 6 ] } ]
+    "entries": [ { "drop": "seed_mustard", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.5 ] } ]
   },
   {
     "id": "walnut_harv",
     "type": "harvest",
-    "entries": [ { "drop": "walnut", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "//": "Walnut trees can have insane harvests compared to other nuts.",
+    "entries": [ { "drop": "walnut", "base_num": [ 1, 8 ], "scale_num": [ 0, 0.5 ] } ]
   },
   {
     "id": "butternut_harv",
     "type": "harvest",
-    "entries": [ { "drop": "butternut", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "butternut", "base_num": [ 1, 5 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "fern_harv",
     "type": "harvest",
-    "entries": [ { "drop": "fiddlehead_raw", "base_num": [ 1, 4 ] } ]
+    "entries": [ { "drop": "fiddlehead_raw", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "bamboo_harv",
     "type": "harvest",
-    "entries": [ { "drop": "raw_bamboo", "base_num": [ 4, 8 ] } ]
+    "entries": [ { "drop": "raw_bamboo", "base_num": [ 1, 5 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_rose_harv",
     "type": "harvest",
-    "entries": [ { "drop": "rose_hips", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "rose_hips", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_autumn_olive_harv",
     "type": "harvest",
-    "entries": [ { "drop": "autumn_olive", "base_num": [ 4, 20 ], "scale_num": [ 0, 0.1 ] } ]
+    "entries": [ { "drop": "autumn_olive", "base_num": [ 1, 7 ], "scale_num": [ 0, 0.5 ] } ]
   },
   {
     "id": "shrub_chokeberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "chokeberries", "base_num": [ 6, 12 ], "scale_num": [ 0, 0.1 ] } ]
+    "entries": [ { "drop": "chokeberries", "base_num": [ 1, 7 ], "scale_num": [ 0, 0.5 ] } ]
   },
   {
     "id": "shrub_spicebush_harv",
     "type": "harvest",
-    "entries": [ { "drop": "spicebush_berries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.1 ] } ]
+    "entries": [ { "drop": "spicebush_berries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_grape_harv",
     "type": "harvest",
     "entries": [
-      { "drop": "grapes", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] },
+      { "drop": "grapes", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] },
       { "drop": "grape_leaves", "base_num": [ 1, 4 ] }
     ]
   },
   {
     "id": "shrub_raspberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "raspberries", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "raspberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_huckleberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "huckleberries", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "huckleberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_blackberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "blackberries", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "blackberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_strawberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "strawberries", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "strawberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_blueberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "blueberries", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "blueberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_hobblebush_harv",
     "type": "harvest",
-    "entries": [ { "drop": "hobbleberries", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.1 ] } ]
+    "entries": [ { "drop": "hobbleberries", "base_num": [ 1, 2 ] } ]
   },
   {
     "id": "shrub_peanut_harv",
     "type": "harvest",
-    "entries": [ { "drop": "peanut", "base_num": [ 5, 10 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "peanut", "base_num": [ 1, 5 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "pecan_harv",
     "type": "harvest",
-    "entries": [ { "drop": "pecan", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "//": "We are at the edge of the plant's range, so yields are poor.",
+    "entries": [ { "drop": "pecan", "base_num": [ 0, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "almond_harv",
     "type": "harvest",
-    "entries": [ { "drop": "almond", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "//": "We are outside this plant's range, so yields are very poor.",
+    "entries": [ { "drop": "almond", "base_num": [ 0, 1 ] } ]
   },
   {
     "id": "pistachio_harv",
     "type": "harvest",
-    "entries": [ { "drop": "pistachio", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "//": "We are outside this plant's range, so yields are very poor.",
+    "entries": [ { "drop": "pistachio", "base_num": [ 0, 1 ] } ]
   },
   {
     "id": "hickory_harv",
     "type": "harvest",
-    "entries": [ { "drop": "hickory_nut", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "hickory_nut", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "willow_harv",
     "type": "harvest",
-    "entries": [ { "drop": "willowbark", "base_num": [ 2, 8 ] } ]
+    "entries": [ { "drop": "willowbark", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "birch_harv",
     "type": "harvest",
-    "entries": [ { "drop": "birchbark", "base_num": [ 2, 8 ] } ]
+    "entries": [ { "drop": "birchbark", "base_num": [ 1, 5 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "tree_dead_harv",
@@ -270,109 +274,110 @@
     "type": "harvest",
     "entries": [
       { "drop": "pine_bough", "base_num": [ 2, 8 ] },
-      { "drop": "pinecone", "base_num": [ 1, 4 ] },
+      { "drop": "pinecone", "base_num": [ 1, 3 ] },
       { "drop": "pine_resin", "base_num": [ 1, 3 ] }
     ]
   },
   {
     "id": "elderberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "elderberries", "base_num": [ 8, 20 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "elderberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "nannyberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "nannyberries", "base_num": [ 8, 20 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "nannyberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "tupelo_harv",
     "type": "harvest",
-    "entries": [ { "drop": "tupelo_fruit", "base_num": [ 8, 20 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "tupelo_fruit", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "mulberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "mulberries", "base_num": [ 8, 20 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "mulberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "plum_harv",
     "type": "harvest",
-    "entries": [ { "drop": "plums", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "plums", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "apricot_harv",
     "type": "harvest",
-    "entries": [ { "drop": "apricot", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "apricot", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "peach_harv",
     "type": "harvest",
-    "entries": [ { "drop": "peach", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "peach", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "juniper_harv",
     "type": "harvest",
-    "entries": [ { "drop": "juniper", "base_num": [ 12, 24 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "juniper", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "cherry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "cherries", "base_num": [ 6, 18 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "cherries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "coffee_harv",
     "type": "harvest",
-    "entries": [ { "drop": "coffee_pod", "base_num": [ 4, 10 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "coffee_pod", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "pear_harv",
     "type": "harvest",
-    "entries": [ { "drop": "pear", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "pear", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "apple_harv",
     "type": "harvest",
-    "entries": [ { "drop": "apple", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "apple", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "crabapple_harv",
     "type": "harvest",
-    "entries": [ { "drop": "crabapple", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "crabapple", "base_num": [ 1, 6 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "sassafras_harv",
     "type": "harvest",
-    "entries": [ { "drop": "sassafras_root", "base_num": [ 2, 5 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "sassafras_root", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "oak_harv",
     "type": "harvest",
-    "entries": [ { "drop": "acorns", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "//": "Acorn production varies wildly by year.",
+    "entries": [ { "drop": "acorns", "base_num": [ 1, 6 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "cottonwood_harv",
     "type": "harvest",
-    "entries": [ { "drop": "cottonwood_tree_boll", "base_num": [ 3, 6 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "cottonwood_tree_boll", "base_num": [ 1, 6 ], "scale_num": [ 0, 0.5 ] } ]
   },
   {
     "id": "beech_harv",
     "type": "harvest",
-    "entries": [ { "drop": "beech_nuts", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "beech_nuts", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "hazelnut_harv",
     "type": "harvest",
-    "entries": [ { "drop": "hazelnut", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "hazelnut", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "chestnut_harv",
     "type": "harvest",
-    "entries": [ { "drop": "chestnut", "base_num": [ 5, 12 ], "scale_num": [ 0, 0.5 ] } ]
+    "entries": [ { "drop": "chestnut", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "blackjack_harv",
     "type": "harvest",
-    "entries": [ { "drop": "tanbark", "base_num": [ 1, 2 ] } ]
+    "entries": [ { "drop": "tanbark", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "alder_harv",
@@ -382,7 +387,7 @@
   {
     "id": "young_leaves_harv",
     "type": "harvest",
-    "entries": [ { "drop": "young_leaves", "base_num": [ 2, 5 ], "scale_num": [ 0, 1 ] } ]
+    "entries": [ { "drop": "young_leaves", "base_num": [ 1, 5 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "generic_edible_flower_spring_harv",
@@ -405,7 +410,7 @@
   {
     "id": "dogbane_harv",
     "type": "harvest",
-    "entries": [ { "drop": "dogbane", "base_num": [ 1, 3 ], "scale_num": [ 0, 1 ] } ]
+    "entries": [ { "drop": "dogbane", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "japanese_knotweed_harv",
@@ -420,7 +425,7 @@
   {
     "id": "wintergreen_harv",
     "type": "harvest",
-    "entries": [ { "drop": "wintergreen_berry", "base_num": [ 1, 4 ] }, { "drop": "wintergreen_leaves", "base_num": [ 1, 2 ] } ]
+    "entries": [ { "drop": "wintergreen_berry", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.3 ] }, { "drop": "wintergreen_leaves", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "seaweed_harv",
@@ -646,7 +651,6 @@
   },
   {
     "id": "mutant_mammal_fur",
-    "//": "drops regular stomach",
     "type": "harvest",
     "entries": [
       { "drop": "mutant_meat", "type": "flesh", "mass_ratio": 0.3 },
@@ -657,7 +661,7 @@
       { "drop": "mutant_liver", "type": "offal", "mass_ratio": 0.01 },
       { "drop": "mutant_brain", "type": "offal", "mass_ratio": 0.05 },
       { "drop": "mutant_kidney", "type": "offal", "mass_ratio": 0.002 },
-      { "drop": "stomach", "scale_num": [ 1, 1 ], "max": 1, "type": "offal" },
+      { "drop": "mutant_stomach", "scale_num": [ 1, 1 ], "max": 1, "type": "offal" },
       { "drop": "bone", "type": "bone", "mass_ratio": 0.15 },
       { "drop": "mutant_marrow", "type": "bone", "mass_ratio": 0.005 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 },
@@ -667,7 +671,6 @@
   },
   {
     "id": "mammal_large_fur",
-    "//": "drops large stomach",
     "type": "harvest",
     "entries": [
       { "drop": "meat", "type": "flesh", "mass_ratio": 0.31 },
@@ -689,7 +692,6 @@
   },
   {
     "id": "mammal_large_pig",
-    "//": "drops large stomach & pork belly",
     "type": "harvest",
     "entries": [
       { "drop": "meat", "type": "flesh", "mass_ratio": 0.28 },
@@ -712,7 +714,6 @@
   },
   {
     "id": "mammal_large_boar",
-    "//": "drops large stomach & pork belly & fur",
     "type": "harvest",
     "entries": [
       { "drop": "meat", "type": "flesh", "mass_ratio": 0.28 },
@@ -878,7 +879,7 @@
       { "drop": "mutant_liver", "type": "offal", "mass_ratio": 0.01 },
       { "drop": "mutant_brain", "type": "offal", "mass_ratio": 0.005 },
       { "drop": "mutant_kidney", "type": "offal", "mass_ratio": 0.002 },
-      { "drop": "stomach", "scale_num": [ 1, 1 ], "max": 1, "type": "offal" },
+      { "drop": "mutant_stomach", "scale_num": [ 1, 1 ], "max": 1, "type": "offal" },
       { "drop": "bone", "type": "bone", "mass_ratio": 0.15 },
       { "drop": "mutant_marrow", "type": "bone", "mass_ratio": 0.005 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 },
@@ -979,7 +980,6 @@
       { "drop": "mutant_brain", "type": "flesh", "mass_ratio": 0.005 },
       { "drop": "mutant_kidney", "type": "offal", "mass_ratio": 0.002 },
       { "drop": "mutant_heart", "type": "offal", "mass_ratio": 0.01 },
-      { "drop": "stomach", "scale_num": [ 1, 1 ], "max": 1, "type": "offal" },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 },
       { "drop": "raw_leather", "type": "skin", "mass_ratio": 0.02 },
       { "drop": "mutant_fat", "type": "flesh", "mass_ratio": 0.07 }
@@ -1054,7 +1054,7 @@
       { "drop": "mutant_brain", "type": "flesh", "mass_ratio": 0.005 },
       { "drop": "sweetbread", "type": "flesh", "mass_ratio": 0.002 },
       { "drop": "mutant_kidney", "type": "offal", "mass_ratio": 0.002 },
-      { "drop": "stomach", "scale_num": [ 1, 1 ], "max": 1, "type": "offal" },
+      { "drop": "mutant_stomach", "scale_num": [ 1, 1 ], "max": 1, "type": "offal" },
       { "drop": "bone", "type": "bone", "mass_ratio": 0.15 },
       { "drop": "mutant_marrow", "type": "bone", "mass_ratio": 0.005 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 },
@@ -1499,7 +1499,6 @@
       { "drop": "meat", "type": "flesh", "mass_ratio": 0.05 },
       { "drop": "mutant_meat", "type": "flesh", "mass_ratio": 0.2 },
       { "drop": "meat_scrap", "type": "flesh", "mass_ratio": 0.1 },
-      { "drop": "stomach", "scale_num": [ 0, 1 ], "max": 1, "type": "offal" },
       { "drop": "bone", "type": "bone", "mass_ratio": 0.15 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 }
     ]
@@ -2507,7 +2506,6 @@
       { "drop": "meat", "type": "flesh", "mass_ratio": 0.05 },
       { "drop": "mutant_meat", "type": "flesh", "mass_ratio": 0.2 },
       { "drop": "meat_scrap", "type": "flesh", "mass_ratio": 0.1 },
-      { "drop": "stomach", "scale_num": [ 0, 1 ], "max": 1, "type": "offal" },
       { "drop": "bone", "type": "bone", "mass_ratio": 0.15 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 }
     ]
@@ -2521,7 +2519,6 @@
       { "drop": "meat", "type": "flesh", "mass_ratio": 0.05 },
       { "drop": "mutant_meat", "type": "flesh", "mass_ratio": 0.2 },
       { "drop": "meat_scrap", "type": "flesh", "mass_ratio": 0.1 },
-      { "drop": "stomach", "scale_num": [ 0, 1 ], "max": 1, "type": "offal" },
       { "drop": "bone", "type": "bone", "mass_ratio": 0.15 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 }
     ]
