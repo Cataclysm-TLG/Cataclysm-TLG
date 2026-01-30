@@ -43,7 +43,7 @@
       [ [ "fuse", 1 ] ],
       [ [ "chem_sulphuric_acid", 1 ] ],
       [ [ "chem_nitric_acid", 1 ] ],
-      [ [ "water", 5 ], [ "clean_water", 5 ] ],
+      [ [ "water", 5 ], [ "water_clean", 5 ] ],
       [ [ "chem_ethanol", 2 ], [ "denat_alcohol", 2 ] ],
       [ [ "chem_glycerol", 2 ] ]
     ]

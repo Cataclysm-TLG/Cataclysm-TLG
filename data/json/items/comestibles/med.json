@@ -957,13 +957,15 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str_sp": "Dakin's solution" },
-    "spoils_in": "18 hours",
-    "price_postapoc": "2 USD 50 cent",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
     "copy-from": "disinfectant",
     "description": "A makeshift antiseptic made from bleach and water.  The volatile chlorine compounds break down quickly, so it won't stay good for long.",
-    "flags": [ "NO_INGEST", "WATER_DISSOLVE" ],
+    "flags": [ "NO_INGEST", "WATER_DISSOLVE", "DECAYS" ],
     "//": "Gentler but less effective than ethanol.",
-    "use_action": { "type": "heal", "disinfectant_power": 2, "bite": 0.80, "move_cost": 3000 }
+    "use_action": { "type": "heal", "disinfectant_power": 2, "bite": 0.80, "move_cost": 3000 },
+    "properties": { "decay_hours": "16" },
+    "revert_to": "salt_water"
   },
   {
     "id": "diazepam",

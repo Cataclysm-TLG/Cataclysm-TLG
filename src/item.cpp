@@ -7999,15 +7999,29 @@ void item::calc_rot_while_processing( time_duration processing_duration )
     last_temp_check += processing_duration;
 }
 
+bool item::process_decay( Character *carrier, int decay_hours,
+                                 time_duration time_delta )
+{
+    if( !has_own_flag( flag_FROZEN ) ) {
+        time_duration decay_countdown = time_duration::from_seconds( item_counter ) + time_delta * rng_normal( 0.9, 1.1 );
+        if( decay_countdown >= time_duration::from_hours( decay_hours ) ) {
+            convert( *type->revert_to, carrier );
+            return true;
+        }
+        item_counter = to_seconds<int>( decay_countdown );
+    }
+    return false;
+}
+
 bool item::process_decay_in_air( map &here, Character *carrier, const tripoint_bub_ms &pos,
-                                 int max_air_exposure_hours,
+                                 int decay_hours,
                                  time_duration time_delta )
 {
     if( !has_own_flag( flag_FROZEN ) ) {
         double environment_multiplier = here.is_outside( pos ) ? 2.0 : 1.0;
         time_duration new_air_exposure = time_duration::from_seconds( item_counter ) + time_delta *
                                          rng_normal( 0.9, 1.1 ) * environment_multiplier;
-        if( new_air_exposure >= time_duration::from_hours( max_air_exposure_hours ) ) {
+        if( new_air_exposure >= time_duration::from_hours( decay_hours ) ) {
             convert( *type->revert_to, carrier );
             return true;
         }
@@ -13367,9 +13381,9 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
     time_point time = last_temp_check;
     item_internal::scoped_goes_bad_cache _cache( this );
     const bool process_rot = goes_bad() && spoil_modifier != 0;
-    const bool decays_in_air = !watertight_container && has_flag( flag_DECAYS_IN_AIR ) &&
-                               type->revert_to;
-    int64_t max_air_exposure_hours = decays_in_air ? get_property_int64_t( "max_air_exposure_hours" ) :
+    const bool decays = has_flag( flag_DECAYS ) && type->revert_to;
+    const bool decays_in_air = !watertight_container && has_flag( flag_DECAYS_IN_AIR ) && type->revert_to;
+    int64_t decay_hours = decays_in_air ? get_property_int64_t( "decay_hours" ) :
                                      0;
 
     if( now - time > 1_hours ) {
@@ -13435,8 +13449,10 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
             }
             last_temp_check = time;
 
-            if( decays_in_air &&
-                process_decay_in_air( here, carrier, pos, max_air_exposure_hours, time_delta ) ) {
+            if( decays && process_decay( carrier, decay_hours, time_delta ) ) {
+                return false;
+            } else if( decays_in_air &&
+                process_decay_in_air( here, carrier, pos, decay_hours, time_delta ) ) {
                 return false;
             }
 
@@ -13459,7 +13475,7 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
         last_temp_check = now;
 
         if( decays_in_air &&
-            process_decay_in_air( here, carrier, pos, max_air_exposure_hours, now - time ) ) {
+            process_decay_in_air( here, carrier, pos, decay_hours, now - time ) ) {
             return false;
         }
 
