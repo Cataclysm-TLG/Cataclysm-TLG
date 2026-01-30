@@ -3817,5 +3817,15 @@
     "type": "MIGRATION",
     "id": "atomic_lamp_off",
     "replace": "atomic_light_off"
+  },
+    {
+    "type": "MIGRATION",
+    "id": "dynamite_bomb",
+    "replace": "dynamite_bundle"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "dynamite_bomb_act",
+    "replace": "dynamite_bundle_act"
   }
 ]
