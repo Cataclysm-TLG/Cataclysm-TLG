@@ -165,12 +165,13 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "chemistry",
-    "skills_required": [ "firstaid", 1 ],
-    "difficulty": 1,
+    "skills_required": [ "firstaid", 2 ],
+    "//": "Difficulty is 2 as you need to know enough to make it a safe PH.",
+    "difficulty": 2,
     "book_learn": [
       [ "atomic_survival", 1 ],
-      [ "textbook_firstaid", 3 ],
-      [ "emergency_book", 3 ]
+      [ "textbook_firstaid", 2 ],
+      [ "emergency_book", 2 ]
     ],
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" } ],
     "time": "30 s",
