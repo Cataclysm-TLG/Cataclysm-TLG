@@ -13383,9 +13383,8 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
     const bool process_rot = goes_bad() && spoil_modifier != 0;
     const bool decays = has_flag( flag_DECAYS ) && type->revert_to;
     const bool decays_in_air = !watertight_container && has_flag( flag_DECAYS_IN_AIR ) && type->revert_to;
-    int64_t decay_hours = decays_in_air ? get_property_int64_t( "decay_hours" ) :
+    int64_t decay_hours = ( decays || decays_in_air ) ? get_property_int64_t( "decay_hours" ) :
                                      0;
-
     if( now - time > 1_hours ) {
         // This code is for items that were left out of reality bubble for long time
 
@@ -13473,6 +13472,11 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
     if( now - time > smallest_interval ) {
         calc_temp( temp, insulation, now - time );
         last_temp_check = now;
+
+        if( decays &&
+            process_decay( carrier, decay_hours, now - time ) ) {
+            return false;
+        }
 
         if( decays_in_air &&
             process_decay_in_air( here, carrier, pos, decay_hours, now - time ) ) {
