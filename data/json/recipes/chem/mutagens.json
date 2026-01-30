@@ -693,9 +693,9 @@
     "using": [ [ "mutagen_production_standard", 25 ] ],
     "components": [
       [ [ "mutagen", 1 ] ],
-      [ [ "lupine_sample", 1 ] ],
+      [ [ "canine_sample", 1 ] ],
       [ [ "meat", 5 ], [ "meat_scrap", 50 ] ],
-      [ [ "bone", 5 ], [ "lupine_sample", 1 ] ]
+      [ [ "bone", 5 ], [ "canine_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]
   },
@@ -718,7 +718,7 @@
       { "proficiency": "prof_chem_synth" }
     ],
     "using": [ [ "serum_production_standard", 37 ] ],
-    "components": [ [ [ "mutagen_lupine", 2 ] ], [ [ "lupine_sample", 1 ] ] ],
+    "components": [ [ [ "mutagen_lupine", 2 ] ], [ [ "canine_sample", 1 ] ] ],
     "flags": [ "SECRET" ]
   },
   {
@@ -1432,7 +1432,7 @@
     "using": [ [ "mutagen_production_standard", 10 ] ],
     "components": [
       [ [ "mutagen", 1 ] ],
-      [ [ "feline_sample", 1 ], [ "lupine_sample", 1 ], [ "ursine_sample", 1 ] ],
+      [ [ "feline_sample", 1 ], [ "canine_sample", 1 ], [ "ursine_sample", 1 ] ],
       [ [ "fish_sample", 1 ], [ "lizard_sample", 1 ], [ "bird_sample", 1 ] ],
       [ [ "gastropod_sample", 1 ], [ "insect_sample", 1 ], [ "spider_sample", 1 ] ]
     ],
@@ -1458,9 +1458,9 @@
     ],
     "using": [ [ "serum_production_standard", 20 ] ],
     "components": [
-      [ [ "feline_sample", 1 ], [ "lupine_sample", 1 ], [ "ursine_sample", 1 ] ],
+      [ [ "feline_sample", 1 ], [ "canine_sample", 1 ], [ "ursine_sample", 1 ] ],
       [ [ "feline_sample", 1 ] ],
-      [ [ "lupine_sample", 1 ] ],
+      [ [ "canine_sample", 1 ] ],
       [ [ "ursine_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]

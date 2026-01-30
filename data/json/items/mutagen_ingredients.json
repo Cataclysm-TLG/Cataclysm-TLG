@@ -156,10 +156,10 @@
   },
   {
     "type": "ITEM",
-    "id": "lupine_sample",
+    "id": "canine_sample",
     "copy-from": "mutagen_sample",
     "color": "brown",
-    "name": { "str": "lupine sample" },
+    "name": { "str": "canine sample" },
     "description": "A slurry of community.",
     "looks_like": "medical_sample",
     "material": [ "fur", "flesh", "blood" ]

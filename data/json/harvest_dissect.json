@@ -336,28 +336,28 @@
     "entries": [ { "drop": "lizard_sample_huge", "type": "mutagen_group" } ]
   },
   {
-    "id": "dissect_lupine_sample_single",
+    "id": "dissect_canine_sample_single",
     "type": "harvest",
     "message": "With cuts and pulls equally similar to both extraction and vandalism, you scrape together the most important parts of the creature.",
-    "entries": [ { "drop": "lupine_sample_single", "type": "mutagen_group" } ]
+    "entries": [ { "drop": "canine_sample_single", "type": "mutagen_group" } ]
   },
   {
-    "id": "dissect_lupine_sample_small",
+    "id": "dissect_canine_sample_small",
     "type": "harvest",
     "message": "With cuts and pulls equally similar to both extraction and vandalism, you scrape together the most important parts of the creature.",
-    "entries": [ { "drop": "lupine_sample_small", "type": "mutagen_group" } ]
+    "entries": [ { "drop": "canine_sample_small", "type": "mutagen_group" } ]
   },
   {
-    "id": "dissect_lupine_sample_large",
+    "id": "dissect_canine_sample_large",
     "type": "harvest",
     "message": "With cuts and pulls equally similar to both extraction and vandalism, you scrape together the most important parts of the creature.",
-    "entries": [ { "drop": "lupine_sample_large", "type": "mutagen_group" } ]
+    "entries": [ { "drop": "canine_sample_large", "type": "mutagen_group" } ]
   },
   {
-    "id": "dissect_lupine_sample_huge",
+    "id": "dissect_canine_sample_huge",
     "type": "harvest",
     "message": "With cuts and pulls equally similar to both extraction and vandalism, you scrape together the most important parts of the creature.",
-    "entries": [ { "drop": "lupine_sample_huge", "type": "mutagen_group" } ]
+    "entries": [ { "drop": "canine_sample_huge", "type": "mutagen_group" } ]
   },
   {
     "id": "dissect_medical_sample_single",

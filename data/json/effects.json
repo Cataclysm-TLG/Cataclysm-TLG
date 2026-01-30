@@ -1471,9 +1471,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_lupine",
-    "name": [ "Lupine Mutation", "Lupine Transformation", "Lupine Metamorphosis" ],
+    "name": [ "Canine Mutation", "Canine Transformation", "Canine Metamorphosis" ],
     "desc": [
-      "You consumed lupine mutagen.",
+      "You consumed canine mutagen.",
       "Where's your pack?  How will you survive without them?",
       "You pant, unable to stop pacing and full of hunger."
     ],
@@ -1496,7 +1496,7 @@
     "scaling_mods": { "hunger_tick": [ -175 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Lupine Mutagen"
+    "blood_analysis_description": "Canine Mutagen"
   },
   {
     "type": "effect_type",
@@ -1527,9 +1527,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_mouse",
-    "name": [ "Mouse Mutation", "Mouse Transformation", "Mouse Metamorphosis" ],
+    "name": [ "Murine Mutation", "Murine Transformation", "Murine Metamorphosis" ],
     "desc": [
-      "You consumed mouse mutagen.",
+      "You consumed murine mutagen.",
       "Your heart pounds, knowing that predators could approach at any second!",
       "Your heart hammers away with a rapid, irregular beat."
     ],
@@ -1549,7 +1549,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Mouse Mutagen"
+    "blood_analysis_description": "Murine Mutagen"
   },
   {
     "type": "effect_type",
@@ -1571,9 +1571,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_raptor",
-    "name": [ "Raptor Mutation", "Raptor Transformation", "Raptor Metamorphosis" ],
+    "name": [ "Theropod Mutation", "Theropod Transformation", "Theropod Metamorphosis" ],
     "desc": [
-      "You consumed raptor mutagen.",
+      "You consumed theropod mutagen.",
       "Sharpen your talons and clean your feathers.  Your prey won't give itself easily.",
       "Delusions fill your head… is it true?  Did you die long ago?"
     ],
@@ -1600,9 +1600,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_rabbit",
-    "name": [ "Rabbit Mutation", "Rabbit Transformation", "Rabbit Metamorphosis" ],
+    "name": [ "Lagomorph Mutation", "Lagomorph Transformation", "Lagomorph Metamorphosis" ],
     "desc": [
-      "You consumed rabbit mutagen.",
+      "You consumed lagomorph mutagen.",
       "So much to do!  Better hop to it!",
       "Will you have a future?  Will any new generations be born… your pounding head is full of worry."
     ],
@@ -1621,14 +1621,14 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -15 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Rabbit Mutagen"
+    "blood_analysis_description": "Lagomorph Mutagen"
   },
   {
     "type": "effect_type",
     "id": "mutagen_rat",
-    "name": [ "Rat Mutation", "Rat Transformation", "Rat Metamorphosis" ],
+    "name": [ "Rattine Mutation", "Rattine Transformation", "Rattine Metamorphosis" ],
     "desc": [
-      "You consumed rat mutagen.",
+      "You consumed rattine mutagen.",
       "This place is too open.  Hide!",
       "Dull aches fill your stomach, and every smell seems offensive."
     ],
@@ -1647,7 +1647,7 @@
     "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -2 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Rat Mutagen"
+    "blood_analysis_description": "Rattine Mutagen"
   },
   {
     "type": "effect_type",
