@@ -276,7 +276,7 @@
   {
     "id": "ACT_BLEED",
     "type": "activity_type",
-    "activity_level": "LIGHT_EXERCISE",
+    "activity_level": "MODERATE_EXERCISE",
     "verb": "bleeding",
     "based_on": "speed"
   },

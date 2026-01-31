@@ -666,9 +666,9 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     }
 
     // TODO: Extract this bool into a function
-    const bool is_human = corpse.id == mtype_id::NULL_ID() || ( ( corpse.in_species( species_HUMAN ) ||
-                          corpse.in_species( species_FERAL ) ) &&
-                          !corpse.in_species( species_ZOMBIE ) );
+    const bool is_human = ( corpse.id == mtype_id::NULL_ID() || ( ( corpse.in_species( species_HUMAN ) ||
+                          corpse.in_species( species_FERAL ) ) ) &&
+                          ( !corpse.in_species( species_ZOMBIE ) || ( action != butcher_type::DISSECT && action != butcher_type::BLEED ) ) );
 
     // Applies to all butchery actions except for dissections. Bloodfeeders are OK with draining humans for blood.
     if( is_human &&
@@ -835,7 +835,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
     switch( action ) {
         case butcher_type::QUICK:
         case butcher_type::BLEED:
-            time_to_cut /= 4;
+            time_to_cut /= 2;
             break;
         case butcher_type::FULL:
             if( !corpse_item.has_flag( flag_FIELD_DRESS ) || corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) ) {
@@ -845,7 +845,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
             }
             break;
         case butcher_type::FIELD_DRESS:
-            time_to_cut /= 4;
+            time_to_cut /= 3;
             break;
         case butcher_type::SKIN:
             time_to_cut *= 1.5;
