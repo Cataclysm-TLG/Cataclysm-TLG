@@ -365,7 +365,7 @@
   {
     "id": "beech_harv",
     "type": "harvest",
-    "entries": [ { "drop": "beech_nuts", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
+    "entries": [ { "drop": "beech_nuts", "base_num": [ 1, 6 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "hazelnut_harv",
