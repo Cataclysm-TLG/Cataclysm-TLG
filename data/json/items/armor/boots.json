@@ -519,38 +519,38 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "hiking boots", "str_pl": "pairs of hiking boots" },
-    "description": "Tough yet light leather boots, intended for outdoor activity.",
-    "weight": "1100 g",
+    "description": "Tough yet light boots made of leather facing over sythetic uppers, intended for outdoor activity.",
+    "weight": "980 g",
     "volume": "2500 ml",
     "price": "140 USD",
     "price_postapoc": "5 USD",
     "to_hit": -1,
-    "material": [ "leather", "rubber" ],
+    "material": [ "leather", "nylon", "rubber" ],
     "symbol": "[",
     "looks_like": "boots",
     "color": "brown",
-    "warmth": 30,
+    "warmth": 18,
     "environmental_protection": 2,
     "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
     "armor": [
       {
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "material": [ { "type": "leather", "covered_by_mat": 80, "thickness": 2.0 }, { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 } ],
         "coverage": 98
       },
       {
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "encumbrance": 26,
+        "material": [ { "type": "leather", "covered_by_mat": 40, "thickness": 2.0 }, { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 20,
         "coverage": 100
       },
       {
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
         "material": [
-          { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 },
           { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 }
         ],
         "coverage": 100
@@ -564,7 +564,7 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "rubber boots", "str_pl": "pairs of rubber boots" },
     "description": "A pair of rubber work boots, often used while cleaning with caustic materials.",
-    "weight": "980 g",
+    "weight": "1200 g",
     "volume": "3500 ml",
     "price": "80 USD",
     "price_postapoc": "5 USD",
