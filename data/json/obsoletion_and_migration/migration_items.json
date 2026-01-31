@@ -3818,7 +3818,7 @@
     "id": "atomic_lamp_off",
     "replace": "atomic_light_off"
   },
-    {
+  {
     "type": "MIGRATION",
     "id": "dynamite_bomb",
     "replace": "dynamite_bundle"

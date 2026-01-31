@@ -963,7 +963,7 @@
     "description": "A makeshift antiseptic made from bleach and water.  The volatile chlorine compounds break down quickly, so it won't stay good for long.",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "DECAYS" ],
     "//": "Gentler but less effective than ethanol.",
-    "use_action": { "type": "heal", "disinfectant_power": 2, "bite": 0.80, "move_cost": 3000 },
+    "use_action": { "type": "heal", "disinfectant_power": 2, "bite": 0.8, "move_cost": 3000 },
     "properties": { "decay_hours": "16" },
     "revert_to": "salt_water"
   },
