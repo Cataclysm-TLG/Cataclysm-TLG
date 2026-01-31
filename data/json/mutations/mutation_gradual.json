@@ -38,7 +38,6 @@
     "id": "MUTATING_GRADUAL_ARANEAN",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Aranean Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more aranean traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_ARANEAN" ] }
   },
@@ -47,7 +46,6 @@
     "id": "MUTATING_GRADUAL_AVIAN",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Avian Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more avian traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_AVIAN" ] }
   },
@@ -56,7 +54,6 @@
     "id": "MUTATING_GRADUAL_BATRACHIAN",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Batrachian Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more batrachian traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_BATRACHIAN" ] }
   },
@@ -65,7 +62,6 @@
     "id": "MUTATING_GRADUAL_BOVOID",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Bovoid Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more bovoid traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_BOVOID" ] }
   },
@@ -74,7 +70,6 @@
     "id": "MUTATING_GRADUAL_CANINE",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Canine Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more canine traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_CANINE" ] }
   },
@@ -83,7 +78,6 @@
     "id": "MUTATING_GRADUAL_CEPHALOPOD",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Cephalopod Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more cephalopod traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_CEPHALOPOD" ] }
   },
@@ -92,7 +86,6 @@
     "id": "MUTATING_GRADUAL_CHIROPTERAN",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Chiropteran Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more chiropteran traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_CHIROPTERAN" ] }
   },
@@ -101,7 +94,6 @@
     "id": "MUTATING_GRADUAL_CRUSTACEAN",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Crustacean Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more crustacean traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_CRUSTACEAN" ] }
   },
@@ -110,7 +102,6 @@
     "id": "MUTATING_GRADUAL_FELINE",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Feline Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more feline traits.",
     "delete": { "cancels": [ "MUTAGEN" ] }
   },
@@ -119,7 +110,6 @@
     "id": "MUTATING_GRADUAL_GASTROPOD",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Gastropod Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more gastropod traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_GASTROPOD" ] }
   },
@@ -128,7 +118,6 @@
     "id": "MUTATING_GRADUAL_LAGOMORPH",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Lagomorph Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more lagomorph traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_LAGOMORPH" ] }
   },
@@ -137,7 +126,6 @@
     "id": "MUTATING_GRADUAL_PISCINE",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Piscine Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more piscine traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_PISCINE" ] }
   },
@@ -146,7 +134,6 @@
     "id": "MUTATING_GRADUAL_INSECT",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Insect Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more insect traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_INSECT" ] }
   },
@@ -155,7 +142,6 @@
     "id": "MUTATING_GRADUAL_REPTILIAN",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Reptilian Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more reptilian traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_REPTILIAN" ] }
   },
@@ -164,7 +150,6 @@
     "id": "MUTATING_GRADUAL_MURINE",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Murine Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more murine traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_MURINE" ] }
   },
@@ -173,7 +158,6 @@
     "id": "MUTATING_GRADUAL_PLANT",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Plant Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more plant traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_PLANT" ] }
   },
@@ -182,7 +166,6 @@
     "id": "MUTATING_GRADUAL_RATTINE",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Rattine Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more rattine traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_RATTINE" ] }
   },
@@ -191,7 +174,6 @@
     "id": "MUTATING_GRADUAL_TROGLOBITE",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Troglobite Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more troglobite traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_TROGLOBITE" ] }
   },
@@ -200,7 +182,6 @@
     "id": "MUTATING_GRADUAL_URSINE",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Ursine Evolution" },
-     
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more ursine traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_URSINE" ] }
   },
