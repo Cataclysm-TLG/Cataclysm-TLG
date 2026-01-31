@@ -1508,6 +1508,12 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
             add_msg( m_good, SNIPPET.random_from_category( "harvest_drop_default_bleed" ).value_or(
                          translation() ).translated() );
             corpse_item.set_flag( flag_BLED );
+            // Prevent blood farming.
+            if( corpse->type->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) && one_in( corpse->type->enum_size() * 3 ) ) {
+                add_msg_if_player_sees( you->pos_bub(), _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
+                here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
+                corpse_item.set_flag( flag_PULPED );
+            }
             if( !act->targets.empty() ) {
                 act->targets.pop_back();
             }
