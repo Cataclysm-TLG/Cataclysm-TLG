@@ -57,9 +57,7 @@
     "id": "gun_cleaning_bp",
     "type": "requirement",
     "qualities": [ { "id": "SCREW", "level": 1 } ],
-    "tools": [
-      [ [ "pipe_cleaner", -1 ] ]
-      ],
+    "tools": [ [ [ "pipe_cleaner", -1 ] ] ],
     "components": [
       [ [ "soap", 1 ], [ "liquid_soap", 1 ] ],
       [ [ "water", 3 ] ],

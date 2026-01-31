@@ -406,7 +406,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
 
         Character *pl = critter->as_character();
         if( pl == nullptr ) {
-                        add_msg_debug(
+            add_msg_debug(
                 debugmode::DF_EXPLOSION,
                 "EXP dist_map=%.2f force=%.3f",
                 dist_map.at( pt ),
@@ -450,7 +450,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         };
 
         for( const blastable_part &blp : blast_parts ) {
-                        add_msg_debug(
+            add_msg_debug(
                 debugmode::DF_EXPLOSION,
                 "EXP dist_map=%.2f force=%.3f",
                 dist_map.at( pt ),

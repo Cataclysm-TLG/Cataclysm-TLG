@@ -28,11 +28,7 @@
     "autolearn": true,
     "result_mult": 2,
     "components": [
-      [
-        [ "cotton_sheet", 1 ],
-        [ "bandages_makeshift", 2 ],
-        [ "bandages_makeshift_sanitized", 2 ]
-      ],
+      [ [ "cotton_sheet", 1 ], [ "bandages_makeshift", 2 ], [ "bandages_makeshift_sanitized", 2 ] ],
       [ [ "disinfectant", 5 ], [ "thyme_oil", 1 ], [ "chem_ethanol", 250 ], [ "denat_alcohol", 250 ] ]
     ]
   },
@@ -166,11 +162,7 @@
     "skills_required": [ "firstaid", 2 ],
     "//": "Difficulty is 2 as you need to know enough to make it a safe PH.",
     "difficulty": 2,
-    "book_learn": [
-      [ "atomic_survival", 1 ],
-      [ "textbook_firstaid", 2 ],
-      [ "emergency_book", 2 ]
-    ],
+    "book_learn": [ [ "atomic_survival", 1 ], [ "textbook_firstaid", 2 ], [ "emergency_book", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" } ],
     "time": "30 s",
     "components": [ [ [ "water_clean", 10 ] ], [ [ "bleach", 1 ] ] ]
