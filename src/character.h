@@ -1245,6 +1245,8 @@ class Character : public Creature, public visitable
         float get_hit_weapon( const item &weap ) const;
         /** Check if we can attack upper limbs **/
         bool can_attack_high() const override;
+        /** Check if we can "see" with our other senses **/
+        bool sees_with_echolocation() const;
 
         /** NPC-related item rating functions */
         double weapon_value( const item &weap, int ammo = 10 ) const; // Evaluates item as a weapon

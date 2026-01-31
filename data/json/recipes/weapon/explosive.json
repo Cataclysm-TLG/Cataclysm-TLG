@@ -225,9 +225,7 @@
     "time": "30 s",
     "reversible": true,
     "autolearn": true,
-    "components": [
-      [ [ "dynamite", 8 ] ], [ [ "duct_tape", 20 ], [ "cordage", 1, "LIST" ] ]
-    ]
+    "components": [ [ [ "dynamite", 8 ] ], [ [ "duct_tape", 20 ], [ "cordage", 1, "LIST" ] ] ]
   },
   {
     "result": "smokebomb",

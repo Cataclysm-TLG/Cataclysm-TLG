@@ -3202,7 +3202,7 @@ class item : public visitable
         bool process_tool( Character *carrier, const tripoint_bub_ms &pos );
         // Item breaks down into another type over time unless frozen.
         bool process_decay( Character *carrier, int decay_hours,
-                                   time_duration time_delta );
+                            time_duration time_delta );
         // Item breaks down into another type over time if exposed to air unless frozen.
         bool process_decay_in_air( map &here, Character *carrier, const tripoint_bub_ms &pos,
                                    int decay_hours,

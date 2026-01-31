@@ -153,7 +153,6 @@ static const skill_id skill_unarmed( "unarmed" );
 static const trait_id trait_CLUMSY( "CLUMSY" );
 static const trait_id trait_DEBUG_NIGHTVISION( "DEBUG_NIGHTVISION" );
 static const trait_id trait_DEFT( "DEFT" );
-static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_POISONOUS( "POISONOUS" );
 static const trait_id trait_POISONOUS2( "POISONOUS2" );
 static const trait_id trait_VINES2( "VINES2" );
@@ -365,7 +364,7 @@ float Character::hit_roll() const
         hit -= 2.0f;
     }
     // Farsightedness makes us hit worse
-    if( has_flag( json_flag_HYPEROPIC ) && !worn_with_flag( flag_FIX_FARSIGHT ) &&
+    if( !sees_with_echolocation() && has_flag( json_flag_HYPEROPIC ) && !worn_with_flag( flag_FIX_FARSIGHT ) &&
         !has_effect( effect_contacts ) &&
         !has_effect( effect_transition_contacts ) ) {
         hit -= 2.0f;
@@ -387,8 +386,7 @@ float Character::hit_roll() const
 
     // Fighting in the dark is hard.
     // TODO: sees_with_specials should help, but we'd need to pass the target to this function.
-    if( ( sight_impaired() || fine_detail_vision_mod() >= 7.0f ) &&
-        !( has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() ) ) {
+    if( ( sight_impaired() || fine_detail_vision_mod() >= 7.0f ) && !sees_with_echolocation() ) {
         hit -= 1.0f;
     }
     // Greatly impaired accuracy when in a vehicle.
@@ -432,32 +430,50 @@ void Character::clear_miss_reasons()
 
 std::string Character::get_miss_reason()
 {
-    // everything that lowers accuracy in player::hit_roll()
-    // adding it in hit_roll() might not be safe if it's called multiple times
-    // in one turn
     item_location cur_weapon = used_weapon();
     item cur_weap = cur_weapon ? *cur_weapon : null_item_reference();
-    add_miss_reason(
-        _( "Your torso encumbrance throws you off-balance." ),
-        roll_remainder( avg_encumb_of_limb_type( body_part_type::type::torso ) / 10.0 ) );
+
+    const int enc = avg_encumb_of_limb_type( body_part_type::type::torso );
+    float lowest_ratio = 1.0f;
+    for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
+    float r = get_part_hp_max( bp ) > 0 ? float( get_part_hp_cur( bp ) ) / get_part_hp_max( bp ) : 1.0f;
+        if( r < lowest_ratio ) {
+            lowest_ratio = r;
+        }
+    }
+    // Calculate wound factor: 0 if >75% HP, otherwise we scale to 2 as HP approaches 0.
+    float wound_factor = 0.0f;
+    if( lowest_ratio < 0.75f ) {
+        wound_factor = ( 0.75f - lowest_ratio ) / 0.75f * 2.0f;
+    }
+    if( wound_factor != 0.0f ) {
+        add_miss_reason( _( "Your injuries make it hard to keep fighting." ), wound_factor );
+    }
+    if( enc > 10 ) {
+        const float scaled = enc < 25 ? static_cast<float>( enc ) / 25.0f : static_cast<float>( enc ) / 10.0f;
+        add_miss_reason( _( "Your torso encumbrance throws you off-balance." ), roll_remainder( scaled ) );
+    }
     const int farsightedness = 2 * ( has_flag( json_flag_HYPEROPIC ) &&
                                      !worn_with_flag( flag_FIX_FARSIGHT ) &&
                                      !has_effect( effect_contacts ) &&
-                                     !has_effect( effect_transition_contacts ) );
+                                     !has_effect( effect_transition_contacts ) && !sees_with_echolocation() );
     add_miss_reason(
         _( "You can't hit reliably due to your farsightedness." ),
         farsightedness );
-    add_miss_reason(
-        _( "You struggle to hit reliably while on the ground." ),
-        3 * is_on_ground() );
+    if( !has_flag( json_flag_PSEUDOPOD_GRASP ) ) {
+        add_miss_reason(
+            _( "You struggle to hit reliably while lying prone." ),
+            3 * is_on_ground() );
+    }
     add_miss_reason(
         _( "Using this weapon is awkward at close range." ),
         !reach_attacking &&
         cur_weap.has_flag( flag_POLEARM ) );
-    add_miss_reason(
-        _( "You can't see well enough to fight." ),
-        fine_detail_vision_mod() >= 7 );
-
+    if( !sees_with_echolocation() ) {
+        add_miss_reason(
+            _( "It's hard to fight when you can barely see." ),
+            fine_detail_vision_mod() >= 7 );
+    }
     const std::string *const reason = melee_miss_reasons.pick();
     if( reason == nullptr ) {
         return std::string();
@@ -684,7 +700,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
         const ma_technique miss_recovery = martial_arts_data->get_miss_recovery( *this );
 
-        if( is_avatar() ) { // Only display messages if this is the player
+        if( is_avatar() ) { // Only display messages if this is the player.
 
             if( one_in( 2 ) ) {
                 const std::string reason_for_miss = get_miss_reason();

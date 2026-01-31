@@ -666,9 +666,11 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     }
 
     // TODO: Extract this bool into a function
-    const bool is_human = ( corpse.id == mtype_id::NULL_ID() || ( ( corpse.in_species( species_HUMAN ) ||
-                          corpse.in_species( species_FERAL ) ) ) ) &&
-                          ( !corpse.in_species( species_ZOMBIE ) || ( action != butcher_type::DISSECT && action != butcher_type::BLEED ) );
+    const bool is_human = ( corpse.id == mtype_id::NULL_ID() ||
+                            ( ( corpse.in_species( species_HUMAN ) ||
+                                corpse.in_species( species_FERAL ) ) ) ) &&
+                          ( !corpse.in_species( species_ZOMBIE ) || ( action != butcher_type::DISSECT &&
+                                  action != butcher_type::BLEED ) );
 
     // Applies to all butchery actions except for dissections. Bloodfeeders are OK with draining humans for blood.
     if( is_human &&
@@ -1509,8 +1511,10 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                          translation() ).translated() );
             corpse_item.set_flag( flag_BLED );
             // Prevent blood farming.
-            if( corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) && one_in( corpse->size * 3 ) ) {
-                add_msg_if_player_sees( you->pos_bub(), _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
+            if( corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+                one_in( corpse->size * 3 ) ) {
+                add_msg_if_player_sees( you->pos_bub(),
+                                        _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
                 here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
                 corpse_item.set_flag( flag_PULPED );
             }
