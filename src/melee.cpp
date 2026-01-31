@@ -450,15 +450,17 @@ std::string Character::get_miss_reason()
     add_miss_reason(
         _( "You can't hit reliably due to your farsightedness." ),
         farsightedness );
-    add_miss_reason(
-        _( "You struggle to hit reliably while on the ground." ),
-        3 * is_on_ground() );
+    if( !has_flag( json_flag_PSEUDOPOD_GRASP ) ) {
+        add_miss_reason(
+            _( "You struggle to hit reliably while on the ground." ),
+            3 * is_on_ground() );
+    }
     add_miss_reason(
         _( "Using this weapon is awkward at close range." ),
         !reach_attacking &&
         cur_weap.has_flag( flag_POLEARM ) );
     add_miss_reason(
-        _( "You can't see well enough to fight." ),
+        _( "It's hard to fight when you can barely see." ),
         fine_detail_vision_mod() >= 7 );
 
     const std::string *const reason = melee_miss_reasons.pick();
