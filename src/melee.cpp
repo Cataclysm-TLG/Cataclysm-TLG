@@ -364,7 +364,7 @@ float Character::hit_roll() const
         hit -= 2.0f;
     }
     // Farsightedness makes us hit worse
-    if( has_flag( json_flag_HYPEROPIC ) && !worn_with_flag( flag_FIX_FARSIGHT ) &&
+    if( !sees_with_echolocation() && has_flag( json_flag_HYPEROPIC ) && !worn_with_flag( flag_FIX_FARSIGHT ) &&
         !has_effect( effect_contacts ) &&
         !has_effect( effect_transition_contacts ) ) {
         hit -= 2.0f;
@@ -456,7 +456,7 @@ std::string Character::get_miss_reason()
     const int farsightedness = 2 * ( has_flag( json_flag_HYPEROPIC ) &&
                                      !worn_with_flag( flag_FIX_FARSIGHT ) &&
                                      !has_effect( effect_contacts ) &&
-                                     !has_effect( effect_transition_contacts ) );
+                                     !has_effect( effect_transition_contacts ) && !sees_with_echolocation() );
     add_miss_reason(
         _( "You can't hit reliably due to your farsightedness." ),
         farsightedness );
