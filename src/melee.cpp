@@ -438,9 +438,11 @@ std::string Character::get_miss_reason()
     item_location cur_weapon = used_weapon();
     item cur_weap = cur_weapon ? *cur_weapon : null_item_reference();
     const int enc = avg_encumb_of_limb_type( body_part_type::type::torso );
-    const float scaled = enc < 25 ? static_cast<float>( enc ) / 25.0f : static_cast<float>
-                         ( enc ) / 10.0f;
-    add_miss_reason( _( "Your torso encumbrance throws you off-balance." ), roll_remainder( scaled ) );
+    if( enc > 10 ) {
+        const float scaled = enc < 25 ? static_cast<float>( enc ) / 25.0f : static_cast<float>
+                            ( enc ) / 10.0f;
+        add_miss_reason( _( "Your torso encumbrance throws you off-balance." ), roll_remainder( scaled ) );
+    }
     const int farsightedness = 2 * ( has_flag( json_flag_HYPEROPIC ) &&
                                      !worn_with_flag( flag_FIX_FARSIGHT ) &&
                                      !has_effect( effect_contacts ) &&
