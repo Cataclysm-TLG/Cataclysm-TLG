@@ -460,6 +460,7 @@ static const trait_id trait_DEFT( "DEFT" );
 static const trait_id trait_DISRESISTANT( "DISRESISTANT" );
 static const trait_id trait_DOWN( "DOWN" );
 static const trait_id trait_EATHEALTH( "EATHEALTH" );
+static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_ELFA_FNV( "ELFA_FNV" );
 static const trait_id trait_ELFA_NV( "ELFA_NV" );
 static const trait_id trait_FACIAL_HAIR_NONE( "FACIAL_HAIR_NONE" );
@@ -11171,6 +11172,14 @@ void Character::echo_pulse()
                            "none", "none" );
         }
     }
+}
+
+bool Character::sees_with_echolocation() const
+{
+    if( has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() ) {
+        return true;
+    }
+    return false;
 }
 
 bool Character::knows_trap( const tripoint_bub_ms &pos ) const
