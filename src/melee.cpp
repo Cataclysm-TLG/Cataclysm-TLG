@@ -387,8 +387,7 @@ float Character::hit_roll() const
 
     // Fighting in the dark is hard.
     // TODO: sees_with_specials should help, but we'd need to pass the target to this function.
-    if( ( sight_impaired() || fine_detail_vision_mod() >= 7.0f ) &&
-        !( has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() ) ) {
+    if( ( sight_impaired() || fine_detail_vision_mod() >= 7.0f ) && !sees_with_echolocation() ) {
         hit -= 1.0f;
     }
     // Greatly impaired accuracy when in a vehicle.
@@ -417,6 +416,11 @@ float Character::hit_roll() const
 bool Character::can_attack_high() const
 {
     return !is_on_ground();
+}
+
+bool Character::sees_with_echolocation() const
+{
+    has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater();
 }
 
 void Character::add_miss_reason( const std::string &reason, const unsigned int weight )
@@ -459,9 +463,12 @@ std::string Character::get_miss_reason()
         _( "Using this weapon is awkward at close range." ),
         !reach_attacking &&
         cur_weap.has_flag( flag_POLEARM ) );
-    add_miss_reason(
-        _( "It's hard to fight when you can barely see." ),
-        fine_detail_vision_mod() >= 7 );
+
+    if( !sees_with_echolocation() ) {
+        add_miss_reason(
+            _( "It's hard to fight when you can barely see." ),
+            fine_detail_vision_mod() >= 7 );
+    }
 
     const std::string *const reason = melee_miss_reasons.pick();
     if( reason == nullptr ) {
@@ -689,7 +696,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
         const ma_technique miss_recovery = martial_arts_data->get_miss_recovery( *this );
 
-        if( is_avatar() ) { // Only display messages if this is the player
+        if( is_avatar() ) { // Only display messages if this is the player.
 
             if( one_in( 2 ) ) {
                 const std::string reason_for_miss = get_miss_reason();
