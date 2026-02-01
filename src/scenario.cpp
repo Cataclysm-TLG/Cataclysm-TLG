@@ -609,15 +609,21 @@ void scenario::reset_calendar() const
 
 void scenario::change_start_of_cataclysm( const time_point &t ) const
 {
+    // Enforce start_of_cataclysm <= fall_of_civilization - 1 day.
+    const time_point max_start = _fall_of_civilization - 24_hours;
+    time_point new_start = t <= max_start ? t : max_start;
     scenario *hack = const_cast<scenario *>( this );
-    hack->_start_of_cataclysm = t;
+    hack->_start_of_cataclysm = new_start;
     hack->normalize_calendar();
 }
 
 void scenario::change_fall_of_civilization( const time_point &t ) const
 {
+    // Enforce fall_of_civilization <= start_of_game.
+    const time_point max_fall = _start_of_game;
+    time_point new_fall = t <= max_fall ? t : max_fall;
     scenario *hack = const_cast<scenario *>( this );
-    hack->_fall_of_civilization = t;
+    hack->_fall_of_civilization = new_fall;
     hack->normalize_calendar();
 }
 
@@ -627,6 +633,7 @@ void scenario::change_start_of_game( const time_point &t ) const
     hack->_start_of_game = t;
     hack->normalize_calendar();
 }
+
 
 time_point scenario::start_of_cataclysm() const
 {
