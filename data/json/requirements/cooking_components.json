@@ -514,13 +514,13 @@
     "id": "meat_stomach_large",
     "type": "requirement",
     "//": "Anything you might consider a small raw stomach.",
-    "components": [ [ [ "stomach_large", 1 ], [ "hstomach_large", 1 ] ] ]
+    "components": [ [ [ "stomach_large", 1 ], [ "hstomach_large", 1 ], [ "mutant_stomach_large", 1 ] ] ]
   },
   {
     "id": "meat_stomach_small",
     "type": "requirement",
     "//": "Anything you might consider a small raw stomach.",
-    "components": [ [ [ "stomach", 1 ], [ "hstomach", 1 ] ] ]
+    "components": [ [ [ "stomach", 1 ], [ "hstomach", 1 ], [ "hstomach", 1 ], [ "mutant_stomach", 1 ] ] ]
   },
   {
     "id": "any_cracklins",
