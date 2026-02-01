@@ -3408,7 +3408,8 @@ static std::string assemble_scenario_details( const avatar &u, const input_conte
 
     assembled += string_format(
                      _( "Press <color_light_green>%1$s</color> to change Cataclysm start date, <color_light_green>%2$s</color> to change fall of civilization date, <color_light_green>%3$s</color> to change game start date, <color_light_green>%4$s</color> to reset calendar." ),
-                     ctxt.get_desc( "CHANGE_START_OF_CATACLYSM" ), ctxt.get_desc( "CHANGE_FALL_OF_CIVILIZATION" ),
+                     ctxt.get_desc( "CHANGE_START_OF_CATACLYSM" ),
+                     ctxt.get_desc( "CHANGE_FALL_OF_CIVILIZATION" ),
                      ctxt.get_desc( "CHANGE_START_OF_GAME" ),
                      ctxt.get_desc( "RESET_CALENDAR" ) ) + "\n";
     assembled += "\n" + colorize( _( "Scenario Story:" ), COL_HEADER ) + "\n";
@@ -3914,10 +3915,11 @@ static std::string assemble_description_help( const input_context &ctxt, const b
                          ctxt.get_desc( "RANDOMIZE_CHAR_NAME" ), ctxt.get_desc( "RANDOMIZE_CHAR_DESCRIPTION" ) );
     }
     help_text += string_format(
-                     _( "\nPress <color_light_green>%1$s</color> to change cataclysm start date, "
-                        "<color_light_green>%2$s</color> to change game start date, "
-                        "<color_light_green>%3$s</color> to reset calendar." ),
-                     ctxt.get_desc( "CHANGE_START_OF_CATACLYSM" ), ctxt.get_desc( "CHANGE_START_OF_GAME" ),
+                     _( "\nPress <color_light_green>%1$s</color> to the day the Cataclysm began, "
+                        "<color_light_green>%2$s</color> to change the day civilization fell, "
+                        "<color_light_green>%3$s</color> to change game start date, "
+                        "<color_light_green>%4$s</color> to reset calendar." ),
+                     ctxt.get_desc( "CHANGE_START_OF_CATACLYSM" ), ctxt.get_desc( "CHANGE_FALL_OF_CIVILIZATION" ), ctxt.get_desc( "CHANGE_START_OF_GAME" ),
                      ctxt.get_desc( "RESET_CALENDAR" ) );
     if( !get_option<bool>( "SELECT_STARTING_CITY" ) ) {
         help_text += string_format(

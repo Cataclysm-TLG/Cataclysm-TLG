@@ -1823,7 +1823,7 @@
     "description": "A piece of spongelike pink flesh.  It's nearly as hard as wood at its core, with an armored crust lining the exterior.  The smell suggests it is definitely not edible.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "material": [ "mi-go_flesh" ],
+    "material": [ "migo_flesh" ],
     "volume": "250 ml",
     "fun": -30,
     "flags": [ "TRADER_AVOID", "NUTRIENT_OVERRIDE" ]
@@ -1838,7 +1838,7 @@
     "comestible_type": "DRINK",
     "looks_like": "blood",
     "symbol": "~",
-    "material": "mi-go_blood",
+    "material": "migo_blood",
     "charges": 1,
     "phase": "liquid"
   }

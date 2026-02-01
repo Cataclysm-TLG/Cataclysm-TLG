@@ -3093,13 +3093,13 @@
   },
   {
     "type": "material",
-    "id": "mi-go_flesh",
+    "id": "migo_flesh",
     "name": "Mi-go Flesh",
     "copy-from": "flesh"
   },
   {
     "type": "material",
-    "id": "mi-go_blood",
+    "id": "migo_blood",
     "name": "Mi-go Ichor",
     "copy-from": "water"
   }

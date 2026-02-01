@@ -1603,15 +1603,22 @@
     "type": "keybinding",
     "id": "CHANGE_START_OF_CATACLYSM",
     "category": "NEW_CHAR_DESCRIPTION",
-    "name": "Change cataclysm start date",
+    "name": "Change start date of the Cataclysm",
     "bindings": [ { "input_method": "keyboard_char", "key": "%" }, { "input_method": "keyboard_code", "key": "5", "mod": [ "shift" ] } ]
+  },
+    {
+    "type": "keybinding",
+    "id": "CHANGE_FALL_OF_CIVILIZATION",
+    "category": "NEW_CHAR_DESCRIPTION",
+    "name": "Change the date civilization fell",
+    "bindings": [ { "input_method": "keyboard_char", "key": "^" }, { "input_method": "keyboard_code", "key": "6", "mod": [ "shift" ] } ]
   },
   {
     "type": "keybinding",
     "id": "CHANGE_START_OF_GAME",
     "category": "NEW_CHAR_DESCRIPTION",
     "name": "Change game start date",
-    "bindings": [ { "input_method": "keyboard_char", "key": "^" }, { "input_method": "keyboard_code", "key": "6", "mod": [ "shift" ] } ]
+    "bindings": [ { "input_method": "keyboard_char", "key": "&" }, { "input_method": "keyboard_code", "key": "7", "mod": [ "shift" ] } ]
   },
   {
     "type": "keybinding",

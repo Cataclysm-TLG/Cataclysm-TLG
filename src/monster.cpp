@@ -157,6 +157,7 @@ static const material_id material_bone( "bone" );
 static const material_id material_flesh( "flesh" );
 static const material_id material_hflesh( "hflesh" );
 static const material_id material_iflesh( "iflesh" );
+static const material_id material_migo_flesh( "migo_flesh" );
 static const material_id material_iron( "iron" );
 static const material_id material_steel( "steel" );
 static const material_id material_stone( "stone" );
@@ -167,9 +168,6 @@ static const mfaction_str_id monfaction_ant( "ant" );
 static const mfaction_str_id monfaction_bee( "bee" );
 static const mfaction_str_id monfaction_nether_player_hate( "nether_player_hate" );
 static const mfaction_str_id monfaction_wasp( "wasp" );
-
-static const morale_type morale_killer_has_killed( "morale_killer_has_killed" );
-static const morale_type morale_killer_need_to_kill( "morale_killer_need_to_kill" );
 
 static const species_id species_AMPHIBIAN( "AMPHIBIAN" );
 static const species_id species_CYBORG( "CYBORG" );
@@ -454,7 +452,7 @@ void monster::try_upgrade( bool pin_time )
         return;
     }
 
-    const int current_day = to_days<int>( calendar::turn - calendar::turn_zero );
+    const int current_day = to_days<int>( calendar::turn - calendar::fall_of_civilization );
     //This should only occur when a monster is created or upgraded to a new form
     if( upgrade_time < 0 ) {
         upgrade_time = next_upgrade_time();
@@ -464,10 +462,6 @@ void monster::try_upgrade( bool pin_time )
         if( pin_time || type->age_grow > 0 ) {
             // offset by today, always true for growing creatures
             upgrade_time += current_day;
-        } else {
-            // offset by starting season
-            // TODO: revisit this and make it simpler
-            upgrade_time += to_days<int>( calendar::fall_of_civilization - calendar::turn_zero );
         }
     }
 
@@ -476,12 +470,12 @@ void monster::try_upgrade( bool pin_time )
     // upgrades they'd get if we were simulating whole world.
     while( true ) {
         if( upgrade_time > current_day ) {
-            // not yet
+            // Not yet.
             return;
         }
 
         if( type->upgrade_into ) {
-            //If we upgrade into a blacklisted monster, treat it as though we are non-upgradeable
+            // If we upgrade into a blacklisted monster, treat it as though we are non-upgradeable.
             if( MonsterGroupManager::monster_is_blacklisted( type->upgrade_into ) ) {
                 return;
             }
@@ -493,7 +487,8 @@ void monster::try_upgrade( bool pin_time )
                 std::vector<MonsterGroupResult> res = MonsterGroupManager::GetResultFromGroup(
                         type->upgrade_group, nullptr, nullptr, false, &ret_default );
                 if( !res.empty() && !ret_default ) {
-                    // Set the type to poly the current monster (preserves inventory)
+                    // Set the type to polymorph the current monster (preserves inventory).
+                    // TODO: Destroy clothes if we are growing bigger.
                     new_type = res.front().name;
                     res.front().pack_size--;
                     for( const MonsterGroupResult &mgr : res ) {
@@ -519,7 +514,7 @@ void monster::try_upgrade( bool pin_time )
                 if( new_type ) {
                     poly( new_type );
                 } else {
-                    // "upgrading" to mon_null
+                    // "upgrading" to mon_null. This kills the monster.
                     if( type->upgrade_null_despawn ) {
                         g->remove_zombie( *this );
                     } else {
@@ -531,13 +526,13 @@ void monster::try_upgrade( bool pin_time )
         }
 
         if( !upgrades ) {
-            // upgraded into a non-upgradeable monster
+            // Upgraded into a non-upgradeable monster.
             return;
         }
 
         const int next_upgrade = next_upgrade_time();
         if( next_upgrade < 0 ) {
-            // hit never_upgrade
+            // Hit never_upgrade.
             return;
         }
         upgrade_time += next_upgrade;
@@ -549,7 +544,7 @@ void monster::try_reproduce()
     if( !reproduces ) {
         return;
     }
-    // This can happen if the monster type has changed (from reproducing to non-reproducing monster)
+    // This can happen if the monster type has changed (from reproducing to non-reproducing monster).
     if( !type->baby_timer ) {
         return;
     }
@@ -569,7 +564,7 @@ void monster::try_reproduce()
     bool season_spawn = false;
     bool season_match = true;
 
-    // only 50% of animals should reproduce
+    // Only 50% of animals should reproduce.
     bool female = one_in( 2 );
     for( const std::string &elem : type->baby_flags ) {
         if( elem == "SUMMER" || elem == "WINTER" || elem == "SPRING" || elem == "AUTUMN" ) {
@@ -578,7 +573,7 @@ void monster::try_reproduce()
     }
 
     map &here = get_map();
-    // add a decreasing chance of additional spawns when "catching up" an existing animal.
+    // Add a decreasing chance of additional spawns when "catching up" an existing animal.
     int chance = -1;
     while( true ) {
         if( !baby_timer.has_value() || *baby_timer > calendar::turn ) {
@@ -627,22 +622,22 @@ void monster::refill_udders()
         return;
     }
     if( ammo.empty() ) {
-        // legacy animals got empty ammo map, fill them up now if needed.
+        // Legacy animals got empty ammo map, fill them up now if needed.
         ammo[type->starting_ammo.begin()->first] = type->starting_ammo.begin()->second;
     }
     auto current_milk = ammo.find( itype_milk_raw );
     if( current_milk == ammo.end() ) {
         current_milk = ammo.find( itype_milk );
         if( current_milk != ammo.end() ) {
-            // take this opportunity to update milk udders to raw_milk
+            // Take this opportunity to update milk udders to raw_milk.
             ammo[itype_milk_raw] = current_milk->second;
-            // Erase old key-value from map
+            // Erase old key-value from map.
             ammo.erase( current_milk );
         }
     }
     // if we got here, we got milk.
     if( current_milk->second == type->starting_ammo.begin()->second ) {
-        // already full up
+        // Already full up.
         return;
     }
     if( !has_flag( mon_flag_EATS ) || has_effect( effect_critter_well_fed ) ) {
@@ -684,7 +679,10 @@ void monster::try_biosignature()
     if( is_hallucination() ) {
         return;
     }
-
+    // Keep poops from being uniform, especially when monsters first spawn.
+    if( one_in( 2 ) ) {
+        return;
+    }
     if( !biosignatures ) {
         return;
     }
@@ -694,15 +692,14 @@ void monster::try_biosignature()
     if( has_effect( effect_critter_underfed ) ) {
         return;
     }
-
     if( !biosig_timer ) {
         biosig_timer.emplace( calendar::turn + *type->biosig_timer );
     }
     map &here = get_map();
     int counter = 0;
     while( true ) {
-        // don't catch up too much, otherwise on some scenarios,
-        // we could have years worth of poop just deposited on the floor.
+        /* Don't catch up too much, otherwise in some scenarios, we
+           could have years worth of poop just deposited on the floor. */
         if( *biosig_timer > calendar::turn || counter > 50 ) {
             return;
         }
@@ -759,7 +756,7 @@ std::string monster::name( unsigned int quantity ) const
 std::string monster::name_with_armor() const
 {
     std::string ret;
-    if( made_of( material_iflesh ) ) {
+    if( made_of( material_iflesh ) || made_of( material_migo_flesh ) ) {
         ret = _( "carapace" );
     } else if( made_of( material_vegetable ) ) {
         ret = _( "thick bark" );
