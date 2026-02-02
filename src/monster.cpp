@@ -453,14 +453,14 @@ void monster::try_upgrade( bool pin_time )
     }
 
     const int current_day = to_days<int>( calendar::turn - calendar::fall_of_civilization );
-    //This should only occur when a monster is created or upgraded to a new form
+    // This should only occur when a monster is created or upgraded to a new form.
     if( upgrade_time < 0 ) {
         upgrade_time = next_upgrade_time();
         if( upgrade_time < 0 ) {
             return;
         }
         if( pin_time || type->age_grow > 0 ) {
-            // offset by today, always true for growing creatures
+            // Offset by today, always true for growing creatures
             upgrade_time += current_day;
         }
     }

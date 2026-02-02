@@ -95,6 +95,7 @@ void game::serialize_json( std::ostream &fout )
     json.member( "savegame_loading_version", savegame_version );
     json.member( "turn", calendar::turn );
     json.member( "calendar_start", calendar::start_of_cataclysm );
+    json.member( "monster_evo_start", calendar::fall_of_civilization );
     json.member( "game_start", calendar::start_of_game );
     json.member( "initial_season", static_cast<int>( calendar::initial_season ) );
     json.member( "auto_travel_mode", auto_travel_mode );
@@ -234,12 +235,14 @@ void game::unserialize_impl( const JsonObject &data )
 {
     int tmpturn = 0;
     int tmpcalstart = 0;
+    int tmpmonevostart = 0;
     int tmprun = 0;
     tripoint_om_sm lev;
     point_abs_om com;
 
     data.read( "turn", tmpturn );
     data.read( "calendar_start", tmpcalstart );
+    data.read( "monster_evo_start", tmpmonevostart );
     calendar::initial_season = static_cast<season_type>( data.get_int( "initial_season",
                                static_cast<int>( SPRING ) ) );
 
@@ -258,9 +261,9 @@ void game::unserialize_impl( const JsonObject &data )
 
     calendar::turn = time_point( tmpturn );
     calendar::start_of_cataclysm = time_point( tmpcalstart );
-
+    calendar::fall_of_civilization = time_point( tmpmonevostart );
     if( !data.read( "game_start", calendar::start_of_game ) ) {
-        calendar::start_of_game = calendar::start_of_cataclysm;
+        calendar::start_of_game = calendar::fall_of_civilization;
     }
 
     load_map( project_combine( com, lev ), /*pump_events=*/true );
