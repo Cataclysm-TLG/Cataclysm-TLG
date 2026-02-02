@@ -5800,24 +5800,22 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it )
 
 bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
 {
-    if( !it.is_corpse() ) {
-        debugmsg( "Tried to revive a non-corpse." );
-        return false;
-    }
     // If this is not here, the game may attempt to spawn a monster before the map exists,
     // leading to it querying for furniture, and crashing.
     if( g->new_game ) {
         return false;
     }
+    if( !it.is_corpse() ) {
+        debugmsg( "Tried to revive a non-corpse." );
+        return false;
+    }
     if( !it.can_revive() ) {
         return false;
     }
-
     assing_revive_form( it, p );
-
     shared_ptr_fast<monster> newmon_ptr;
     if( it.has_var( "zombie_form" ) ) {
-        // the monster was not a zombie but turns into one when its corpse is revived
+        // The monster was not a zombie but turns into one when its corpse is revived.
         newmon_ptr = make_shared_fast<monster>( mtype_id( it.get_var( "zombie_form" ) ) );
     } else {
         newmon_ptr = make_shared_fast<monster>( it.get_mtype()->id );
@@ -5825,7 +5823,7 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
     monster &critter = *newmon_ptr;
     critter.init_from_item( it );
     if( critter.get_hp() < 1 ) {
-        // Failed reanimation due to corpse being too burned
+        // Failed reanimation due to corpse being too burned.
         return false;
     }
 

@@ -13776,22 +13776,24 @@ bool item::process_corpse( map &here, Character *carrier, const tripoint_bub_ms 
     if( !ready_to_revive( here, pos ) ) {
         return false;
     }
-    if( carrier == nullptr ) {
-        if( corpse->in_species( species_ROBOT ) ) {
-            add_msg_if_player_sees( pos, m_warning, _( "A nearby robot has repaired itself and stands up!" ) );
+    if( g->revive_corpse( pos, *this ) ) {
+        if( carrier == nullptr ) {
+            if( corpse->in_species( species_ROBOT ) ) {
+                add_msg_if_player_sees( pos, m_warning, _( "A nearby robot has repaired itself and stands up!" ) );
+            } else {
+                add_msg_if_player_sees( pos, m_warning, _( "A nearby corpse rises from the dead!" ) );
+            }
+            return true;
         } else {
-            add_msg_if_player_sees( pos, m_warning, _( "A nearby corpse rises from the dead!" ) );
+            if( corpse->in_species( species_ROBOT ) ) {
+                carrier->add_msg_if_player( m_warning,
+                                            _( "A robot you're carrying has started moving!" ) );
+            } else {
+                carrier->add_msg_if_player( m_warning,
+                                            _( "A corpse you're carrying has started moving!" ) );
+            }
+            return true;
         }
-        return true;
-    } else {
-        if( corpse->in_species( species_ROBOT ) ) {
-            carrier->add_msg_if_player( m_warning,
-                                        _( "A robot you're carrying has started moving!" ) );
-        } else {
-            carrier->add_msg_if_player( m_warning,
-                                        _( "A corpse you're carrying has started moving!" ) );
-        }
-        return true;
     }
     return false;
 }
