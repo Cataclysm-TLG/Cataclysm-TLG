@@ -287,7 +287,7 @@
     "difficulty": 3,
     "time": "280 m",
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 4 ], [ "tailor_portfolio", 3 ] ],
-    "using": [ [ "tailoring_cotton_sheet", 4 ], [ "tailoring_neoprene_sheet", 3 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 4 ], [ "tailoring_neoprene_sheet", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_polymerworking" } ]
   },
   {
@@ -295,15 +295,15 @@
     "type": "recipe",
     "copy-from": "armguard_soft",
     "time": "280 m",
-    "using": [ [ "tailoring_cotton_sheet", 3 ], [ "tailoring_neoprene_sheet", 3 ] ]
+    "using": [ [ "tailoring_spandex_sheet", 3 ], [ "tailoring_neoprene_sheet", 3 ] ]
   },
   {
     "result": "xl_armguard_soft",
     "type": "recipe",
     "copy-from": "armguard_soft",
     "time": "315 m",
-    "byproducts": [ [ "nomex_patch", 2 ] ],
-    "using": [ [ "tailoring_cotton_sheet", 5 ], [ "tailoring_neoprene_sheet", 4 ] ]
+    "byproducts": [ [ "neoprene_patch", 2 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 5 ], [ "tailoring_neoprene_sheet", 4 ] ]
   },
   {
     "result": "elbow_pads",
@@ -316,8 +316,8 @@
     "skills_required": [ [ "tailor", 1 ] ],
     "time": "120 m",
     "autolearn": true,
-    "byproducts": [ [ "cotton_patch", 2 ] ],
-    "using": [ [ "plastic_molding", 1 ], [ "tailoring_cotton_sheet", 2 ] ],
+    "byproducts": [ [ "spandex_patch", 2 ] ],
+    "using": [ [ "plastic_molding", 1 ], [ "tailoring_spandex_sheet", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_plasticworking" } ]
   },
   {

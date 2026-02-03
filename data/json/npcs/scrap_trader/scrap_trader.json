@@ -158,7 +158,7 @@
     "subtype": "collection",
     "items": [
       { "item": "scrap", "count": [ 125, 250 ] },
-      { "item": "nuts_bolts", "count": [ 10, 25 ] },
+      { "item": "nuts_bolts", "charges": [ 10, 25 ] },
       { "item": "sheet_metal_small", "count": [ 50, 100 ] },
       { "item": "steel_fragment", "count": [ 100, 200 ] },
       { "item": "steel_chunk", "count": [ 50, 100 ] },
