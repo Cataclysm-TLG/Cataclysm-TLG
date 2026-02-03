@@ -101,7 +101,7 @@
     "required_skills": [ [ "survival", 0 ] ],
     "time": "60 m",
     "qualities": [ [ { "id": "DIG", "level": 1 } ] ],
-    "byproducts": [ { "item": "shredded_rubber", "count": [ 150, 200 ] } ],
+    "byproducts": [ { "item": "shredded_rubber", "charges": [ 150, 200 ] } ],
     "pre_terrain": "t_rubber_mulch",
     "post_terrain": "t_dirt"
   },

@@ -526,7 +526,7 @@
     "price": "12 USD",
     "price_postapoc": "5 USD",
     "to_hit": 1,
-    "material": [ "neoprene", "cotton" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "arm_warmers",
     "color": "light_red",
@@ -536,6 +536,10 @@
     "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
     "armor": [
       {
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ],
         "covers": [ "arm_l", "arm_r" ],
         "encumbrance": 5,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
@@ -872,13 +876,13 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "elbow pads", "str_pl": "pairs of elbow pads" },
-    "description": "A pair of elbow pads made of stout plastic and cloth.",
+    "description": "A pair of elbow pads made of stout plastic and spandex.",
     "weight": "110 g",
     "volume": "750 ml",
     "price": "35 USD",
     "price_postapoc": "2 USD 50 cent",
     "to_hit": 1,
-    "material": [ "plastic", "nylon" ],
+    "material": [ "plastic", "spandex" ],
     "symbol": "[",
     "looks_like": "armguard_hard",
     "color": "dark_gray",
@@ -888,7 +892,7 @@
       {
         "material": [
           { "type": "plastic", "covered_by_mat": 60, "thickness": 4 },
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1 }
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_elbow_l", "arm_elbow_r" ],

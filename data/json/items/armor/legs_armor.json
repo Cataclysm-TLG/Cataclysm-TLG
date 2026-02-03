@@ -592,13 +592,13 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "knee pads", "str_pl": "pairs of knee pads" },
-    "description": "A pair of knee pads made of stout plastic and cloth.",
+    "description": "A pair of knee pads made of stout plastic and spandex.",
     "weight": "210 g",
     "volume": "1500 ml",
     "price": "25 USD",
     "price_postapoc": "50 cent",
     "to_hit": 1,
-    "material": [ "plastic", "nylon" ],
+    "material": [ "plastic", "spandex" ],
     "symbol": "[",
     "looks_like": "legguard_hard",
     "color": "dark_gray",
@@ -608,7 +608,7 @@
       {
         "material": [
           { "type": "plastic", "covered_by_mat": 60, "thickness": 4 },
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1 }
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
