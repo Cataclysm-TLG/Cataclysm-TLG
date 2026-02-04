@@ -4,8 +4,7 @@
     "id": "milspec_arsenal_40x53_gun&mags&cans",
     "subtype": "collection",
     "items": [
-      { "group": "milspec_arsenal_40x53_gun&ammo", "count": [ 0, 1 ] },
-      { "item": "ammo_can_pa120_40x53_32", "count": [ 0, 4 ] }
+      { "group": "milspec_arsenal_40x53_gun&ammo", "count": [ 0, 1 ] }
     ]
   },
   {

@@ -467,7 +467,7 @@
     "entries": [
       { "group": "police_armory_box_some_9mm", "prob": 30 },
       { "group": "police_armory_box_some_9mm", "prob": 75 },
-      { "item": "ammo_box_2", "count": [ 0, 10 ] },
+      { "item": "ammo_box", "count": [ 0, 10 ] },
       { "group": "police_armory_box_full_9mm", "count": [ 0, 5 ] }
     ]
   },
@@ -478,7 +478,7 @@
     "entries": [
       { "group": "police_armory_box_some_9mmfmj", "prob": 30 },
       { "group": "police_armory_box_some_9mmfmj", "prob": 75 },
-      { "item": "ammo_box_2", "count": [ 0, 10 ] },
+      { "item": "ammo_box", "count": [ 0, 10 ] },
       { "group": "police_armory_box_full_9mmfmj", "count": [ 0, 5 ] }
     ]
   },
@@ -489,7 +489,7 @@
     "entries": [
       { "group": "police_armory_box_some_9mmP", "prob": 30 },
       { "group": "police_armory_box_some_9mmP", "prob": 50 },
-      { "item": "ammo_box_2", "count": [ 0, 10 ] },
+      { "item": "ammo_box", "count": [ 0, 10 ] },
       { "group": "police_armory_box_full_9mmP", "count": [ 0, 2 ] }
     ]
   },
@@ -500,7 +500,7 @@
     "entries": [
       { "group": "police_armory_box_some_9mmP2", "prob": 30 },
       { "group": "police_armory_box_some_9mmP2", "prob": 50 },
-      { "item": "ammo_box_2", "count": [ 0, 10 ] },
+      { "item": "ammo_box", "count": [ 0, 10 ] },
       { "group": "police_armory_box_full_9mmP2", "count": [ 0, 1 ] }
     ]
   },
@@ -508,56 +508,56 @@
     "id": "police_armory_box_full_9mm",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "9mm", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_full_9mmfmj",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "9mmfmj", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_full_9mmP",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "9mmP", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_full_9mmP2",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "9mmP2", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_some_9mm",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "9mm", "charges": [ 1, 60 ] } ]
   },
   {
     "id": "police_armory_box_some_9mmfmj",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "9mmfmj", "charges": [ 1, 60 ] } ]
   },
   {
     "id": "police_armory_box_some_9mmP",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "9mmP", "charges": [ 1, 60 ] } ]
   },
   {
     "id": "police_armory_box_some_9mmP2",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "9mmP2", "charges": [ 1, 60 ] } ]
   },
   {
@@ -611,7 +611,7 @@
     "entries": [
       { "group": "police_armory_box_some_57mm", "prob": 30 },
       { "group": "police_armory_box_some_57mm", "prob": 60 },
-      { "item": "ammo_box_2", "count": [ 0, 10 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 0, 10 ], "prob": 30 },
       { "group": "police_armory_box_full_57mm", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -619,14 +619,14 @@
     "id": "police_armory_box_full_57mm",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "57mm", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_some_57mm",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "57mm", "charges": [ 1, 60 ] } ]
   },
   {
@@ -659,7 +659,7 @@
     "entries": [
       { "group": "police_armory_box_some_46mm", "prob": 30 },
       { "group": "police_armory_box_some_46mm", "prob": 60 },
-      { "item": "ammo_box_2", "count": [ 15, 25 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 15, 25 ], "prob": 30 },
       { "group": "police_armory_box_full_46mm", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -667,14 +667,14 @@
     "id": "police_armory_box_full_46mm",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "46mm", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_some_46mm",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "46mm", "charges": [ 1, 60 ] } ]
   },
   {
@@ -791,7 +791,7 @@
     "entries": [
       { "group": "police_armory_box_some_357sigjhp", "prob": 30 },
       { "group": "police_armory_box_some_357sigjhp", "prob": 65 },
-      { "item": "ammo_box_2", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
       { "group": "police_armory_box_full_357sigjhp", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -802,7 +802,7 @@
     "entries": [
       { "group": "police_armory_box_some_357sigfmj", "prob": 30 },
       { "group": "police_armory_box_some_357sigfmj", "prob": 75 },
-      { "item": "ammo_box_2", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
       { "group": "police_armory_box_full_357sigfmj", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -810,28 +810,28 @@
     "id": "police_armory_box_full_357sigjhp",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "357sig_jhp", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_full_357sigfmj",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "357sig_fmj", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_some_357sigjhp",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "357sig_jhp", "charges": [ 1, 60 ] } ]
   },
   {
     "id": "police_armory_box_some_357sigfmj",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "357sig_fmj", "charges": [ 1, 60 ] } ]
   },
   {
@@ -980,7 +980,7 @@
     "entries": [
       { "group": "police_armory_box_some_40sw", "prob": 30 },
       { "group": "police_armory_box_some_40sw", "prob": 75 },
-      { "item": "ammo_box_2", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
       { "group": "police_armory_box_full_40sw", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -991,7 +991,7 @@
     "entries": [
       { "group": "police_armory_box_some_40fmj", "prob": 30 },
       { "group": "police_armory_box_some_40fmj", "prob": 75 },
-      { "item": "ammo_box_2", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
       { "group": "police_armory_box_full_40fmj", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -999,28 +999,28 @@
     "id": "police_armory_box_full_40sw",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "40sw", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_full_40fmj",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "40fmj", "charges": 60 } ]
   },
   {
     "id": "police_armory_box_some_40sw",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "40sw", "charges": [ 1, 60 ] } ]
   },
   {
     "id": "police_armory_box_some_40fmj",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "40fmj", "charges": [ 1, 60 ] } ]
   },
   {
@@ -1130,7 +1130,7 @@
     "entries": [
       { "group": "police_armory_box_some_45_jhp", "prob": 30 },
       { "group": "police_armory_box_some_45_jhp", "prob": 75 },
-      { "item": "ammo_box_2", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
       { "group": "police_armory_box_full_45_jhp", "count": [ 0, 5 ], "prob": 30 }
     ]
   },
@@ -1141,7 +1141,7 @@
     "entries": [
       { "group": "police_armory_box_some_45_acp", "prob": 30 },
       { "group": "police_armory_box_some_45_acp", "prob": 75 },
-      { "item": "ammo_box_2", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
       { "group": "police_armory_box_full_45_acp", "count": [ 0, 5 ], "prob": 30 }
     ]
   },
@@ -1152,7 +1152,7 @@
     "entries": [
       { "group": "police_armory_box_some_45_super", "prob": 30 },
       { "group": "police_armory_box_some_45_super", "prob": 60 },
-      { "item": "ammo_box_2", "count": [ 3, 15 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 3, 15 ], "prob": 30 },
       { "group": "police_armory_box_full_45_super", "count": [ 0, 2 ], "prob": 30 }
     ]
   },
@@ -1160,42 +1160,42 @@
     "id": "police_armory_box_full_45_acp",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "45_acp", "charges": 45 } ]
   },
   {
     "id": "police_armory_box_full_45_jhp",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "45_jhp", "charges": 45 } ]
   },
   {
     "id": "police_armory_box_full_45_super",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "45_super", "charges": 45 } ]
   },
   {
     "id": "police_armory_box_some_45_acp",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "45_acp", "charges": [ 1, 45 ] } ]
   },
   {
     "id": "police_armory_box_some_45_jhp",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "45_jhp", "charges": [ 1, 45 ] } ]
   },
   {
     "id": "police_armory_box_some_45_super",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "45_super", "charges": [ 1, 45 ] } ]
   },
   {
@@ -1468,7 +1468,7 @@
     "entries": [
       { "group": "police_armory_box_some_223" },
       { "group": "police_armory_box_some_223", "prob": 30 },
-      { "item": "ammo_box_2", "count": [ 50, 75 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 50, 75 ], "prob": 30 },
       { "group": "police_armory_box_full_223", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -1476,7 +1476,7 @@
     "id": "police_armory_box_full_223",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "223", "charges": 30 } ],
     "on_overflow": "spill"
   },
@@ -1484,7 +1484,7 @@
     "id": "police_armory_box_some_223",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "223", "charges": [ 1, 30 ] } ],
     "on_overflow": "spill"
   },
@@ -1495,7 +1495,7 @@
     "entries": [
       { "group": "police_armory_box_some_556_mk262" },
       { "group": "police_armory_box_some_556_mk262", "prob": 30 },
-      { "item": "ammo_box_2", "count": [ 50, 75 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 50, 75 ], "prob": 30 },
       { "group": "police_armory_box_full_556_mk262", "count": [ 0, 5 ], "prob": 30 }
     ]
   },
@@ -1503,7 +1503,7 @@
     "id": "police_armory_box_full_556_mk262",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "556_mk262", "charges": 30 } ],
     "on_overflow": "spill"
   },
@@ -1511,7 +1511,7 @@
     "id": "police_armory_box_some_556_mk262",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "556_mk262", "charges": [ 1, 30 ] } ],
     "on_overflow": "spill"
   },
@@ -1522,7 +1522,7 @@
     "entries": [
       { "group": "police_armory_box_some_556_mk318" },
       { "group": "police_armory_box_some_556_mk318", "prob": 30 },
-      { "item": "ammo_box_2", "count": [ 50, 75 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 50, 75 ], "prob": 30 },
       { "group": "police_armory_box_full_556_mk318", "count": [ 0, 5 ], "prob": 30 }
     ]
   },
@@ -1530,7 +1530,7 @@
     "id": "police_armory_box_full_556_mk318",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "556_mk318", "charges": 30 } ],
     "on_overflow": "spill"
   },
@@ -1538,7 +1538,7 @@
     "id": "police_armory_box_some_556_mk318",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "556_mk318", "charges": [ 1, 30 ] } ],
     "on_overflow": "spill"
   },
@@ -1645,7 +1645,7 @@
     "entries": [
       { "group": "police_armory_box_some_308" },
       { "group": "police_armory_box_some_308", "prob": 30 },
-      { "item": "ammo_box_2", "count": [ 15, 30 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 15, 30 ], "prob": 30 },
       { "group": "police_armory_box_full_308", "count": [ 0, 5 ], "prob": 30 }
     ]
   },
@@ -1653,14 +1653,14 @@
     "id": "police_armory_box_full_308",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "308", "charges": 20 } ]
   },
   {
     "id": "police_armory_box_some_308",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "308", "charges": [ 1, 20 ] } ]
   },
   {
@@ -1670,7 +1670,7 @@
     "entries": [
       { "group": "police_armory_box_some_762_51" },
       { "group": "police_armory_box_some_762_51", "prob": 30 },
-      { "item": "ammo_box_2", "count": [ 3, 20 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 3, 20 ], "prob": 30 },
       { "group": "police_armory_box_full_762_51", "count": [ 0, 4 ], "prob": 30 }
     ]
   },
@@ -1678,14 +1678,14 @@
     "id": "police_armory_box_full_762_51",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "762_51", "charges": 20 } ]
   },
   {
     "id": "police_armory_box_some_762_51",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "762_51", "charges": [ 1, 20 ] } ]
   },
   {
@@ -1706,7 +1706,7 @@
     "entries": [
       { "group": "police_armory_box_some_3006" },
       { "group": "police_armory_box_some_3006", "prob": 30 },
-      { "item": "ammo_box_2", "count": [ 20, 30 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 20, 30 ], "prob": 30 },
       { "group": "police_armory_box_full_3006", "count": [ 0, 3 ], "prob": 30 }
     ]
   },
@@ -1714,14 +1714,14 @@
     "id": "police_armory_box_full_3006",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "3006", "charges": 16 } ]
   },
   {
     "id": "police_armory_box_some_3006",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_2",
+    "container-item": "ammo_box",
     "entries": [ { "item": "3006", "charges": [ 1, 16 ] } ]
   },
   {
@@ -1752,7 +1752,6 @@
     "entries": [
       { "group": "police_armory_box_some_300" },
       { "group": "police_armory_box_some_300", "prob": 30 },
-      { "item": "ammo_box_army_20_300wm", "count": [ 5, 20 ], "prob": 30 },
       { "group": "police_armory_box_full_300", "count": [ 0, 3 ], "prob": 30 }
     ]
   },
@@ -1760,14 +1759,14 @@
     "id": "police_armory_box_full_300",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_army_20_300wm",
+    "container-item": "ammo_box",
     "entries": [ { "item": "300_winmag", "charges": 20 } ]
   },
   {
     "id": "police_armory_box_some_300",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_army_20_300wm",
+    "container-item": "ammo_box",
     "entries": [ { "item": "300_winmag", "charges": [ 1, 20 ] } ]
   },
   {
@@ -1843,7 +1842,6 @@
     "entries": [
       { "group": "police_armory_box_some_338" },
       { "group": "police_armory_box_some_338", "prob": 30 },
-      { "item": "ammo_box_army_10_338", "count": [ 0, 6 ], "prob": 30 },
       { "group": "police_armory_box_full_338", "count": [ 0, 3 ], "prob": 30 }
     ]
   },
@@ -1851,14 +1849,14 @@
     "id": "police_armory_box_full_338",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_army_10_338",
+    "container-item": "ammo_box",
     "entries": [ { "item": "338lapua_hpbt", "charges": 10 } ]
   },
   {
     "id": "police_armory_box_some_338",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_army_10_338",
+    "container-item": "ammo_box",
     "entries": [ { "item": "338lapua_hpbt", "charges": [ 1, 10 ] } ]
   },
   {
@@ -1915,7 +1913,6 @@
     "entries": [
       { "group": "police_armory_box_some_50" },
       { "group": "police_armory_box_some_50", "prob": 30 },
-      { "item": "ammo_box_army_10_50bmg", "count": [ 0, 6 ], "prob": 30 },
       { "group": "police_armory_box_full_50", "count": [ 0, 3 ], "prob": 30 }
     ]
   },
@@ -1923,14 +1920,14 @@
     "id": "police_armory_box_full_50",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_army_10_50bmg",
+    "container-item": "ammo_box_big",
     "entries": [ { "item": "50match", "charges": 10 } ]
   },
   {
     "id": "police_armory_box_some_50",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_army_10_50bmg",
+    "container-item": "ammo_box_big",
     "entries": [ { "item": "50match", "charges": [ 1, 10 ] } ]
   },
   {
@@ -1955,7 +1952,6 @@
       { "group": "police_armory_box_some_shot_beanbag" },
       { "group": "police_armory_box_some_shot_beanbag", "prob": 50 },
       { "group": "police_armory_box_some_shot_00", "prob": 75 },
-      { "item": "ammo_box_4", "count": [ 25, 40 ], "prob": 30 },
       { "group": "police_armory_box_full_shot_beanbag", "count": [ 0, 4 ], "prob": 30 },
       { "group": "police_armory_box_full_shot_00", "count": [ 0, 2 ], "prob": 30 }
     ]
@@ -1964,28 +1960,28 @@
     "id": "police_armory_box_full_shot_beanbag",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_4",
+    "container-item": "ammo_box_big",
     "entries": [ { "item": "shot_beanbag", "charges": 20 } ]
   },
   {
     "id": "police_armory_box_some_shot_beanbag",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_4",
+    "container-item": "ammo_box_big",
     "entries": [ { "item": "shot_beanbag", "charges": [ 1, 20 ] } ]
   },
   {
     "id": "police_armory_box_full_shot_00",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_4",
+    "container-item": "ammo_box_big",
     "entries": [ { "item": "shot_00", "charges": 20 } ]
   },
   {
     "id": "police_armory_box_some_shot_00",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": "ammo_box_4",
+    "container-item": "ammo_box_big",
     "entries": [ { "item": "shot_00", "charges": [ 1, 20 ] } ]
   }
 ]
