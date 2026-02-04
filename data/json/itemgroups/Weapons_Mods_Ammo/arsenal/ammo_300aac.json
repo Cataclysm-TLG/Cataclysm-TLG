@@ -15,18 +15,18 @@
     "id": "ammo_can_300blk_full",
     "container-item": "ammunition_can_30",
     "on_overflow": "spill",
-    "items": [ { "group": "ammo_box_300blk", "count": 24 } ]
+    "items": [ { "group": "ammo_box_300blk", "count": 10 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_300blk_part",
     "container-item": "ammunition_can_30",
-    "items": [ { "group": "ammo_box_300blk", "count": [ 0, 24 ] } ]
+    "items": [ { "group": "ammo_box_300blk", "count": [ 0, 10 ] } ]
   },
   {
     "type": "item_group",
     "id": "ammo_box_300blk",
-    "container-item": "ammo_box_army_30_300blk",
+    "container-item": "ammo_box",
     "on_overflow": "discard",
     "items": [ { "item": "300blk_ss", "count": 1, "charges": 30 } ]
   },
@@ -36,14 +36,14 @@
     "type": "item_group",
     "subtype": "collection",
     "container-item": "ammunition_can_50",
-    "items": [ { "group": "ammo_pouch_300", "count": 7 } ]
+    "items": [ { "group": "ammo_pouch_300", "count": 5 } ]
   },
   {
     "id": "ammo_can_ammo_pouch_300_part",
     "type": "item_group",
     "subtype": "collection",
     "container-item": "ammunition_can_50",
-    "items": [ { "group": "ammo_pouch_300", "count": [ 1, 6 ] } ]
+    "items": [ { "group": "ammo_pouch_300", "count": [ 1, 5 ] } ]
   },
   {
     "id": "ammo_pouch_300",
@@ -55,7 +55,7 @@
   {
     "id": "box_300blk_clips",
     "type": "item_group",
-    "container-item": "ammo_box_army_3_clips",
+    "container-item": "ammo_box",
     "on_overflow": "discard",
     "items": [ { "group": "clip300_10rd_300blk", "count": 3 } ]
   },

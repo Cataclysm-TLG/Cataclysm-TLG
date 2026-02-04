@@ -14,7 +14,7 @@
   {
     "type": "item_group",
     "id": "ammo_box_300",
-    "container-item": "ammo_box_army_20_300wm",
+    "container-item": "ammo_box",
     "items": [ { "item": "300_winmag", "count": 1, "charges": 20 } ]
   }
 ]

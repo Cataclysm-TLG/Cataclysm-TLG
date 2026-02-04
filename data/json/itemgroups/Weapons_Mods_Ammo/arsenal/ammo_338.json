@@ -14,7 +14,7 @@
     "type": "item_group",
     "id": "ammo_can_338lapua_full",
     "container-item": "ammunition_can_30",
-    "items": [ { "group": "ammo_box_338lapua", "count": 20 } ]
+    "items": [ { "group": "ammo_box_338lapua", "count": 10 } ]
   },
   {
     "type": "item_group",
@@ -25,7 +25,7 @@
   {
     "type": "item_group",
     "id": "ammo_box_338lapua",
-    "container-item": "ammo_box_army_10_338",
+    "container-item": "ammo_box",
     "items": [ { "item": "338lapua_fmjbt", "count": 1, "charges": 10 } ]
   },
   {
@@ -33,7 +33,7 @@
     "type": "item_group",
     "id": "ammo_can_338lapua_50_full",
     "container-item": "ammunition_can_50",
-    "items": [ { "group": "ammo_box_338lapua_20", "count": 20 } ]
+    "items": [ { "group": "ammo_box_338lapua_20", "count": 10 } ]
   },
   {
     "type": "item_group",
@@ -44,7 +44,7 @@
   {
     "type": "item_group",
     "id": "ammo_box_338lapua_20",
-    "container-item": "ammo_box_army_20_338",
+    "container-item": "ammo_box_big",
     "items": [ { "item": "338lapua_fmjbt", "count": 1, "charges": 20 } ]
   }
 ]

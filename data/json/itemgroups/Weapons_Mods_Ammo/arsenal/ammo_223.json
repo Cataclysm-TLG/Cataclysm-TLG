@@ -35,14 +35,14 @@
     "type": "item_group",
     "subtype": "collection",
     "container-item": "ammunition_can_50",
-    "items": [ { "group": "ammo_pouch_223", "count": 7 } ]
+    "items": [ { "group": "ammo_pouch_223", "count": 5 } ]
   },
   {
     "id": "ammo_can_ammo_pouch_223_part",
     "type": "item_group",
     "subtype": "collection",
     "container-item": "ammunition_can_50",
-    "items": [ { "group": "ammo_pouch_223", "count": [ 1, 6 ] } ]
+    "items": [ { "group": "ammo_pouch_223", "count": [ 1, 5 ] } ]
   },
   {
     "id": "ammo_pouch_223",
@@ -54,7 +54,7 @@
   {
     "id": "box_223_clips",
     "type": "item_group",
-    "container-item": "ammo_box_army_3_clips",
+    "container-item": "ammo_box",
     "on_overflow": "discard",
     "items": [ { "group": "clip223_10rd_556", "count": 3 } ]
   },
@@ -136,7 +136,7 @@
   {
     "id": "box_223_20_tracer",
     "type": "item_group",
-    "container-item": "ammo_box_army_20_223",
+    "container-item": "ammo_box_small",
     "on_overflow": "discard",
     "items": [ { "item": "556_incendiary", "count": 1, "charges": 20 } ]
   },

@@ -214,44 +214,16 @@
     "symbol": "#"
   },
   {
-    "abstract": "ammo_box_1",
+    "id": "ammo_box_small",
     "type": "ITEM",
-    "name": { "str": "ammo box", "str_pl": "ammo boxes" },
-    "description": "A small, cardboard box for ammo.",
+    "name": { "str": "small ammo box", "str_pl": "small ammo boxes" },
+    "description": "A small cardboard box for storing ammunition.",
     "category": "container",
     "symbol": "#",
     "color": "brown",
-    "material": [ "paper" ],
+    "material": [ "cardboard" ],
     "flags": [ "COLLAPSE_CONTENTS" ],
     "weight": "14 g",
-    "volume": "105 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "100 ml",
-        "max_contains_weight": "1600 g",
-        "max_item_length": "60 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_army_20_223",
-    "type": "ITEM",
-    "copy-from": "ammo_box_1",
-    "name": { "str": "20 5.56mm rounds ammo box", "str_pl": "20 5.56mm rounds ammo boxes" },
-    "description": "Small, plain brown ammo box.  Black text, printed on the front, says \"20 CARTRIDGES 5.56MM TRACER M856\"",
-    "color": "brown",
-    "symbol": "#"
-  },
-  {
-    "id": "ammo_box_army_5_shot",
-    "type": "ITEM",
-    "copy-from": "ammo_box_1",
-    "name": { "str": "5 00 shot ammo box", "str_pl": "5 00 shot ammo boxes" },
-    "description": "Small, plain brown ammo box.  Black text, printed on the front, says \"5 CARTRIDGES 12 GA SHOTSHELL NO. 00 BUCKSHOT\"",
-    "color": "brown",
-    "symbol": "#",
     "volume": "115 ml",
     "pocket_data": [
       {
@@ -264,206 +236,36 @@
     ]
   },
   {
-    "id": "ammo_box_army_5_slug",
-    "type": "ITEM",
-    "copy-from": "ammo_box_1",
-    "name": { "str": "5 slug ammo box", "str_pl": "5 slug ammo boxes" },
-    "description": "Small, plain brown ammo box.  Black text, printed on the front, says \"5 CARTRIDGES 12 GA SHOTSHELL SLUG\"",
-    "color": "brown",
-    "symbol": "#",
-    "volume": "115 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "110 ml",
-        "max_contains_weight": "1600 g",
-        "max_item_length": "90 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_army_5_beanbag",
-    "type": "ITEM",
-    "copy-from": "ammo_box_1",
-    "name": { "str": "5 beanbag ammo box", "str_pl": "5 beanbag ammo boxes" },
-    "description": "Small, plain brown ammo box.  Black text, printed on the front, says \"5 CARTRIDGES 12 GA SHOTSHELL BEANBAG\"",
-    "color": "brown",
-    "symbol": "#",
-    "volume": "115 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "110 ml",
-        "max_contains_weight": "1600 g",
-        "max_item_length": "90 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_2",
+    "id": "ammo_box",
     "type": "ITEM",
     "name": { "str": "ammo box", "str_pl": "ammo boxes" },
-    "//": "20x308mm, 100x9mm, ex ammunition_box_308",
-    "description": "A lightweight box, labelled with a big, shiny image of an ammunition cartridge.",
+    "description": "A cardboard box for storing ammunition.",
     "category": "container",
     "symbol": "#",
     "color": "brown",
-    "material": [ "paper" ],
+    "material": [ "cardboard" ],
     "flags": [ "COLLAPSE_CONTENTS" ],
     "weight": "34 g",
-    "volume": "175 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "170 ml",
-        "max_contains_weight": "1600 g",
-        "max_item_length": "100 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_army_100_9mm_fmj",
-    "type": "ITEM",
-    "weight": "38 g",
-    "volume": "245 ml",
-    "copy-from": "ammo_box_2",
-    "name": { "str": "100 9x19mm FMJ ammo box", "str_pl": "100 9x19mm FMJ ammo boxes" },
-    "description": "Small, plain brown ammo box.  Black text, printed on the front, says \"100 ROUNDS 9x19MM PARA FMJ FULL METAL JACKED 115GR.\"",
-    "color": "brown",
-    "symbol": "#",
+    "volume": "250 ml",
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
         "rigid": true,
         "max_contains_volume": "240 ml",
         "max_contains_weight": "2000 g",
-        "max_item_length": "32 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_army_100_9mm_jhp",
-    "type": "ITEM",
-    "copy-from": "ammo_box_army_100_9mm_fmj",
-    "name": { "str": "100 9x19mm JHP ammo box", "str_pl": "100 9x19mm JHP ammo boxes" },
-    "description": "Small, plain brown ammo box.  Black text, printed on the front, says \"100 ROUNDS 9x19MM PARA JHP JACKED HOLLOW POINT 116GR.\"",
-    "color": "brown",
-    "symbol": "#"
-  },
-  {
-    "abstract": "ammo_box_3",
-    "type": "ITEM",
-    "name": { "str": "ammo box", "str_pl": "ammo boxes" },
-    "//": "30x223 clips or 50x223 or 20x300",
-    "description": "A small, cardboard box for ammo.",
-    "category": "container",
-    "symbol": "#",
-    "color": "brown",
-    "material": [ "paper" ],
-    "flags": [ "COLLAPSE_CONTENTS" ],
-    "weight": "28 g",
-    "volume": "235 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "230 ml",
-        "max_contains_weight": "1600 g",
         "max_item_length": "100 mm"
       }
     ]
   },
   {
-    "id": "ammo_box_army_10_338",
+    "id": "ammo_box_big",
     "type": "ITEM",
-    "copy-from": "ammo_box_3",
-    "name": { "str": "10 .338 Lapua ammo box", "str_pl": "10 .338 Lapua ammo boxes" },
-    "description": "Small, painted in white ammo box.  Black text, printed on the front, says:\n10 CARTRIDGES\n.338 LAPUA MAG.\nSWISS P TARGET\nHPBT",
-    "color": "brown",
-    "symbol": "#",
-    "weight": "20 g",
-    "volume": "170 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "164 ml",
-        "max_contains_weight": "1600 g",
-        "max_item_length": "100 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_army_20_300wm",
-    "type": "ITEM",
-    "copy-from": "ammo_box_3",
-    "name": { "str": "20 .300 win mag ammo box", "str_pl": "20 .300 win mag ammo boxes" },
-    "description": "Small, plain brown ammo box.  Black text, printed on the front, says:\"20 CARTRIDGES  .300 WINCHESTER MAGNUM MATCH MK 248 MOD 1\"",
-    "color": "brown",
-    "symbol": "#"
-  },
-  {
-    "id": "ammo_box_army_30_300blk",
-    "type": "ITEM",
-    "copy-from": "ammo_box_3",
-    "name": { "str": "30 .300 BLK ammo box", "str_pl": "30 .300 BLK ammo boxes" },
-    "description": "Small, plain black ammo box.  White text, printed on the front, says:\"30 CARTRIDGES  .300 AAC BLACKOUT SUBSONIC\"",
-    "color": "brown",
-    "symbol": "#",
-    "weight": "14 g",
-    "volume": "128 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "125 ml",
-        "max_contains_weight": "1600 g",
-        "max_item_length": "60 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_army_3_clips",
-    "type": "ITEM",
-    "copy-from": "ammo_box_3",
-    "name": { "str": "cardboard ammo box", "str_pl": "cardboard ammo boxes" },
-    "description": "Small brown box without cover.",
-    "color": "brown",
-    "symbol": "#"
-  },
-  {
-    "id": "ammo_box_army_20_308",
-    "type": "ITEM",
-    "copy-from": "ammo_box_3",
-    "name": { "str": "20 7.62mm ammo box", "str_pl": "20 7.62mm ammo boxes" },
-    "description": "Small, plain brown ammo box.  Black text, printed on the front, says:\"20 ROUNDS 7.62MM BALL M80\"",
-    "color": "brown",
-    "symbol": "#",
-    "weight": "18 g",
-    "volume": "162 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "160 ml",
-        "max_contains_weight": "1600 g",
-        "max_item_length": "75 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_4",
-    "type": "ITEM",
-    "name": { "str": "small ammo box", "str_pl": "small ammo boxes" },
-    "//": "10x50bmg, 20x12 gauge, ex ammunition_box_50bmg",
-    "description": "A lightweight box, labelled with a big, shiny image of an ammunition cartridge.",
+    "name": { "str": "big ammo box", "str_pl": "big ammo boxes" },
+    "description": "A cardboard box suitable for storing larger cartridges, or maybe a lot of smaller ones.",
     "category": "container",
     "symbol": "#",
     "color": "brown",
-    "material": [ "paper" ],
+    "material": [ "cardboard" ],
     "flags": [ "COLLAPSE_CONTENTS" ],
     "weight": "44 g",
     "volume": "480 ml",
@@ -477,35 +279,6 @@
         "max_item_length": "14 cm"
       }
     ]
-  },
-  {
-    "id": "ammo_box_army_20_338",
-    "type": "ITEM",
-    "copy-from": "ammo_box_4",
-    "name": { "str": "20 .338 Lapua ammo box", "str_pl": "20 .338 Lapua ammo boxes" },
-    "description": "Small, painted in white ammo box.  Black text, printed on the front, says \"20 CARTRIDGES\n.338 LAPUA MAG.\nSWISS P TARGET\nHPBT\"",
-    "color": "brown",
-    "symbol": "#",
-    "weight": "33 g",
-    "volume": "335 ml",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "330 ml",
-        "max_contains_weight": "4000 g",
-        "max_item_length": "100 mm"
-      }
-    ]
-  },
-  {
-    "id": "ammo_box_army_10_50bmg",
-    "type": "ITEM",
-    "copy-from": "ammo_box_4",
-    "name": { "str": "10 .50 ammo box", "str_pl": "10 .50 ammo boxes" },
-    "description": "Small, painted in white ammo box.  Black text, printed on the front, says \"10 CARTRIDGES\n12.7x99MM BALL M33\n(50 Browning)\"",
-    "color": "brown",
-    "symbol": "#"
   },
   {
     "id": "55gal_drum_rubber",

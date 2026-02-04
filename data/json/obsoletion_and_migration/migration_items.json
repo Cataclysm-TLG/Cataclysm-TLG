@@ -3667,5 +3667,90 @@
     "type": "MIGRATION",
     "id": "lupine_sample",
     "replace": "canine_sample"
+  },
+    {
+    "type": "MIGRATION",
+    "id": "ammo_box_1",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_20_223",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_5_shot",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_5_slug",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_5_beanbag",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_2",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_100_9mm_fmj",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_100_9mm_jhp",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_3",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_10_338",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_20_300wm",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_30_300blk",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_3_clips",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_20_308",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_4",
+    "replace": "ammo_box_big"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_20_338",
+    "replace": "ammo_box_big"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_10_50bmg",
+    "replace": "ammo_box_big"
   }
 ]

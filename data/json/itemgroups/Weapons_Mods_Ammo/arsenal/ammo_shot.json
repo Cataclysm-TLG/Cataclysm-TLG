@@ -33,7 +33,7 @@
   {
     "type": "item_group",
     "id": "ammo_box_shot",
-    "container-item": "ammo_box_army_5_shot",
+    "container-item": "ammo_box_small",
     "items": [ { "item": "shot_00", "count": 1, "charges": 5 } ]
   },
   {
@@ -52,7 +52,7 @@
   {
     "type": "item_group",
     "id": "ammo_box_beanbag",
-    "container-item": "ammo_box_army_5_beanbag",
+    "container-item": "ammo_box_small",
     "items": [ { "item": "shot_beanbag", "count": 1, "charges": 5 } ]
   },
   {
@@ -71,7 +71,7 @@
   {
     "type": "item_group",
     "id": "ammo_box_slug",
-    "container-item": "ammo_box_army_5_slug",
+    "container-item": "ammo_box_small",
     "items": [ { "item": "shot_slug", "count": 1, "charges": 5 } ]
   }
 ]
