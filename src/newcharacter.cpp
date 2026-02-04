@@ -3919,7 +3919,8 @@ static std::string assemble_description_help( const input_context &ctxt, const b
                         "<color_light_green>%2$s</color> to change the day civilization fell, "
                         "<color_light_green>%3$s</color> to change game start date, "
                         "<color_light_green>%4$s</color> to reset calendar." ),
-                     ctxt.get_desc( "CHANGE_START_OF_CATACLYSM" ), ctxt.get_desc( "CHANGE_FALL_OF_CIVILIZATION" ), ctxt.get_desc( "CHANGE_START_OF_GAME" ),
+                     ctxt.get_desc( "CHANGE_START_OF_CATACLYSM" ), ctxt.get_desc( "CHANGE_FALL_OF_CIVILIZATION" ),
+                     ctxt.get_desc( "CHANGE_START_OF_GAME" ),
                      ctxt.get_desc( "RESET_CALENDAR" ) );
     if( !get_option<bool>( "SELECT_STARTING_CITY" ) ) {
         help_text += string_format(
