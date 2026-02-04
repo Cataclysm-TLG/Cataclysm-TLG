@@ -1393,12 +1393,12 @@ void suffer::from_radiation( Character &you )
     }
 
     if( calendar::once_every( 1_days ) ) {
-        if( you.get_rad() > 0 ) {
-            int health_modifier = you.get_rad();
+        int lifestyle_modifier = you.get_rad();
+        if( lifestyle_modifier > 0 ) {
             if( you.has_trait( trait_RADIOGENIC ) ) {
-                health_modifier /= 2;
+                lifestyle_modifier /= 2;
             }
-            you.mod_daily_health( -you.get_rad(), -200 );
+            you.mod_daily_health( -lifestyle_modifier, -200 );
         }
     }
 
