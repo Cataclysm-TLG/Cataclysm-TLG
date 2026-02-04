@@ -1606,7 +1606,7 @@
     "name": "Change start date of the Cataclysm",
     "bindings": [ { "input_method": "keyboard_char", "key": "%" }, { "input_method": "keyboard_code", "key": "5", "mod": [ "shift" ] } ]
   },
-    {
+  {
     "type": "keybinding",
     "id": "CHANGE_FALL_OF_CIVILIZATION",
     "category": "NEW_CHAR_DESCRIPTION",

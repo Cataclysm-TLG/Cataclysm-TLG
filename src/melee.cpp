@@ -364,7 +364,8 @@ float Character::hit_roll() const
         hit -= 2.0f;
     }
     // Farsightedness makes us hit worse
-    if( !sees_with_echolocation() && has_flag( json_flag_HYPEROPIC ) && !worn_with_flag( flag_FIX_FARSIGHT ) &&
+    if( !sees_with_echolocation() && has_flag( json_flag_HYPEROPIC ) &&
+        !worn_with_flag( flag_FIX_FARSIGHT ) &&
         !has_effect( effect_contacts ) &&
         !has_effect( effect_transition_contacts ) ) {
         hit -= 2.0f;
@@ -436,7 +437,7 @@ std::string Character::get_miss_reason()
     const int enc = avg_encumb_of_limb_type( body_part_type::type::torso );
     float lowest_ratio = 1.0f;
     for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
-    float r = get_part_hp_max( bp ) > 0 ? float( get_part_hp_cur( bp ) ) / get_part_hp_max( bp ) : 1.0f;
+        float r = get_part_hp_max( bp ) > 0 ? float( get_part_hp_cur( bp ) ) / get_part_hp_max( bp ) : 1.0f;
         if( r < lowest_ratio ) {
             lowest_ratio = r;
         }
@@ -450,7 +451,8 @@ std::string Character::get_miss_reason()
         add_miss_reason( _( "Your injuries make it hard to keep fighting." ), wound_factor );
     }
     if( enc > 10 ) {
-        const float scaled = enc < 25 ? static_cast<float>( enc ) / 25.0f : static_cast<float>( enc ) / 10.0f;
+        const float scaled = enc < 25 ? static_cast<float>( enc ) / 25.0f : static_cast<float>
+                             ( enc ) / 10.0f;
         add_miss_reason( _( "Your torso encumbrance throws you off-balance." ), roll_remainder( scaled ) );
     }
     const int farsightedness = 2 * ( has_flag( json_flag_HYPEROPIC ) &&

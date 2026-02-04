@@ -397,7 +397,8 @@ void suffer::while_grabbed( Character &you )
         !you.has_trait( trait_SLIMESPAWNER ) ) {
         crush_resist -= 4;
     }
-    if( ( you.weight_capacity() > 0_gram ) && 100 * ( you.weight_carried() / you.weight_capacity() ) > 75 ) {
+    if( ( you.weight_capacity() > 0_gram ) &&
+        100 * ( you.weight_carried() / you.weight_capacity() ) > 75 ) {
         crush_resist -= 4;
     }
     if( you.has_trait( trait_TRANSPIRATION ) || you.has_trait( trait_SLIMESPAWNER ) ) {
@@ -412,7 +413,7 @@ void suffer::while_grabbed( Character &you )
         you.oxygen -= rng( 0, 1 );
     } else if( crowd > crush_grabs_req ) {
         if( crowd <= crush_grabs_req * 2 ) {
-        you.oxygen -= 1;
+            you.oxygen -= 1;
         } else if( crowd <= crush_grabs_req * 3 ) {
             you.oxygen -= rng( 1, 2 );
         } else if( crowd <= crush_grabs_req * 4 ) {
@@ -1380,19 +1381,23 @@ void suffer::from_radiation( Character &you )
 
     const bool radiogenic = you.has_trait( trait_RADIOGENIC );
     if( radiogenic && calendar::once_every( 30_minutes ) && you.get_rad() > 0 ) {
-        // At 200 irradiation, twice as fast as REGEN
-        if( x_in_y( you.get_rad(), 200 ) ) {
+        // At 200 radioactivity, we heal about 48 hp/day.
+        if( x_in_y( you.get_rad(), 400 ) ) {
             you.healall( 1 );
             if( rad_mut == 0 ) {
-                // Don't heal radiation if we're generating it naturally
-                // That would counter the main downside of radioactivity
-                you.mod_rad( -5 );
+                // The RADIOACTIVE mutation is gone, but this bit of code was to prevent
+                // losing radioactivity if you had it.
+                you.mod_rad( -3 );
             }
         }
     }
 
     if( calendar::once_every( 1_days ) ) {
-        if( !radiogenic && you.get_rad() > 0 ) {
+        if( you.get_rad() > 0 ) {
+            int health_modifier = you.get_rad();
+            if( you.has_trait( trait_RADIOGENIC ) ) {
+                health_modifier /= 2;
+            }
             you.mod_daily_health( -you.get_rad(), -200 );
         }
     }
@@ -2086,8 +2091,8 @@ void Character::mend( int rate_multiplier )
     // Being healthy helps.
     healing_factor *= 1.0f + get_lifestyle() / 200.0f;
 
-    // Very hungry starts lowering the chance
-    // square rooting the value makes the numbers drop off faster when below 1
+    // Malnourishment reduces healing.
+    // Square rooting the value makes the numbers drop off faster when below 1.
     healing_factor *= std::sqrt( static_cast<float>( get_stored_kcal() ) / static_cast<float>
                                  ( get_healthy_kcal() ) );
     // Similar for thirst - starts at very thirsty, drops to 0 ~halfway between two last statuses
