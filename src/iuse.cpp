@@ -3574,10 +3574,7 @@ std::optional<int> iuse::molotov_lit( Character *p, item *it, const tripoint_bub
         const time_duration target_duration = 1_minutes;
         const time_duration base_age = ( fd_fire->half_life / 2 ) - target_duration;
         for( const tripoint_bub_ms &pt : here.points_in_radius( pos, 2, 0 ) ) {
-            Creature *critter = get_creature_tracker().creature_at( pt, true );
-            if( critter && one_in( 2 ) ) {
-                critter->add_effect( effect_onfire, target_duration );
-            } else if( !here.get_field( pt, fd_fire ) && one_in( 2 ) ) {
+            if( here.clear_path( pos, pt, 2, 1, 100 ) && one_in( 2 ) ) {
                 here.add_field( pt, fd_fire, rng( 1, 2 ), base_age );
             }
         }
