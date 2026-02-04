@@ -222,7 +222,7 @@
     "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ], [ "mutant_toxin", 24 ] ],
     "extend": { "flags": [ "BAD_TASTE" ] }
   },
-    {
+  {
     "id": "mutant_stomach_large",
     "copy-from": "hstomach",
     "type": "ITEM",
