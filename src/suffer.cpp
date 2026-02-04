@@ -1384,9 +1384,9 @@ void suffer::from_radiation( Character &you )
         if( x_in_y( you.get_rad(), 200 ) ) {
             you.healall( 1 );
             if( rad_mut == 0 ) {
-                // Don't heal radiation if we're generating it naturally
-                // That would counter the main downside of radioactivity
-                you.mod_rad( -5 );
+                // The RADIOACTIVE mutation is gone, but this bit of code was to prevent
+                // losing radioactivity if you had it.
+                you.mod_rad( -2 );
             }
         }
     }
