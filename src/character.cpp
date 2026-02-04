@@ -3084,6 +3084,9 @@ std::vector<const item *> Character::get_pseudo_items() const
 bool Character::practice( const skill_id &id, int amount, int cap, bool suppress_warning,
                           bool allow_multilevel )
 {
+    if( amount == 0 ) {
+        return false;
+    }
     SkillLevel &level = get_skill_level_object( id );
     const Skill &skill = id.obj();
     if( in_sleep_state() ||
@@ -3157,7 +3160,7 @@ bool Character::practice( const skill_id &id, int amount, int cap, bool suppress
                      new_theoretical_level );
         }
         if( is_avatar() && new_practical_level > cap ) {
-            //inform player immediately that the current recipe can't be used to train further
+            // Inform player immediately that the current recipe can't be used to train further.
             add_msg( m_info, _( "You feel that %s tasks of this level are becoming trivial." ),
                      skill_name );
         }

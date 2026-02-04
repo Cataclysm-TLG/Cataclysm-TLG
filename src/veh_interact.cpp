@@ -3149,7 +3149,6 @@ void veh_interact::complete_vehicle( map &here, Character &you )
             }
 
             you.add_msg_if_player( m_good, _( "You install a %1$s into the %2$s." ), vp_new.name(), veh.name );
-
             for( const auto &sk : vpinfo.install_skills ) {
                 you.practice( sk.first, veh_utils::calc_xp_gain( vpinfo, sk.first, you ) );
             }
@@ -3312,9 +3311,12 @@ void veh_interact::complete_vehicle( map &here, Character &you )
                         }
                     }
                 }
-                for( const std::pair<const skill_id, int> &sk : vpi.install_skills ) {
-                    // removal is half as educational as installation
-                    you.practice( sk.first, veh_utils::calc_xp_gain( vpi, sk.first, you ) / 2 );
+                // Appliances don't use the regular setup methods, so skip 'em.
+                if( !vpi.has_flag( VPFLAG_APPLIANCE ) ) {
+                    for( const std::pair<const skill_id, int> &sk : vpi.install_skills ) {
+                        // Removal is half as educational as installation.
+                        you.practice( sk.first, veh_utils::calc_xp_gain( vpi, sk.first, you ) / 2 );
+                    }
                 }
             }
 
