@@ -37,14 +37,7 @@
     "copy-from": "solar_panel",
     "id": "folding_solar_panel",
     "name": { "str": "folding solar panel" },
-    "description": "This \"little\" solar panel folds up to carry around, in case you need to charge anything on the go.  Its small size means in might take quite some time to charge, however.",
-    "//": [
-      "Based on https://www.bluettipower.com/products/bluetti-pv120-120w-solar-panel",
-      "53 cm x 47 cm x ~3 cm = 7.5 L (assuming it's folded). Weighs in at 5.7 kg",
-      "'up to' 23.4% efficiency, max power = 120 W (~20 V ~6 A)",
-      "surface area is 53 cm x 165 cm = 0.8754 m^2. 'solar_panel' above is 0.25 m^2",
-      "From relative surface area, we get 175 W. So 120 W seems an alright figure"
-    ],
+    "description": "A portable solar panel which can be easily deployed to charge batteries on the go, though it's less efficient than a stationary panel would be.",
     "weight": "5700 g",
     "volume": "7473 ml",
     "longest_side": "53 cm",
@@ -71,13 +64,8 @@
     "type": "ITEM",
     "copy-from": "folding_solar_panel",
     "id": "folding_solar_panel_v2",
-    "name": { "str": "solar suitcase" },
-    "description": "A large, ready-to-deploy set of solar panels, designed for portable off-the-grid use.",
-    "//": [
-      "Based on https://www.renogy.com/200-watt-12-volt-monocrystalline-foldable-solar-suitcase",
-      "26.4 in x 32.5 in x 2.8 in is 39.4 L, 38.6 lbs = 17.5 kg",
-      "Surface area 0.554 m^2, listed 200 W. Half of solar_panel_v2 for half surface area"
-    ],
+    "name": { "str": "advanced folding solar panel" },
+    "description": "A portable solar panel which can be easily deployed to charge batteries on the go, though it's less efficient than a stationary panel would be.  This is a higher-end monocrystalline model.",
     "weight": "17500 g",
     "volume": "39400 ml",
     "longest_side": "83 cm",
@@ -90,7 +78,7 @@
     "subtypes": [ "MAGAZINE" ],
     "copy-from": "folding_solar_panel_v2",
     "id": "folding_solar_panel_v2_deployed",
-    "name": { "str": "deployed solar suitcase" },
+    "name": { "str": "deployed advanced folding solar panel" },
     "//": [
       "Deployed version of the above. Shouldn't spawn in game.",
       "Has a little hacky battery pocket so it can charge phones and the like"

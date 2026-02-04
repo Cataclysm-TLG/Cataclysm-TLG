@@ -3313,7 +3313,7 @@ void veh_interact::complete_vehicle( map &here, Character &you )
                     }
                 }
                 for( const std::pair<const skill_id, int> &sk : vpi.install_skills ) {
-                    // removal is half as educational as installation
+                    // Removal is half as educational as installation.
                     you.practice( sk.first, veh_utils::calc_xp_gain( vpi, sk.first, you ) / 2 );
                 }
             }
