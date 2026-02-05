@@ -454,7 +454,8 @@ void Character::randomize( const bool random_scenario, bool play_now )
     }
 
     const scenario *scenario_from = is_avatar() ? get_scenario() : scenario::generic();
-    prof = scenario_from->weighted_random_profession();
+    prof = scenario_from->weighted_random_profession( is_npc() );
+    play_name_suffix = prof->gender_appropriate_name( male );
     zero_all_skills();
     init_age = rng( this->prof->age_lower, this->prof->age_upper );
     starting_city = std::nullopt;
@@ -468,9 +469,11 @@ void Character::randomize( const bool random_scenario, bool play_now )
 
     set_body();
     randomize_hobbies();
-    const trait_id background = prof->pick_background();
-    if( !background.is_empty() ) {
-        set_mutation( background );
+    if( is_npc() ) {
+        const trait_id background = prof->pick_background();
+        if( !background.is_empty() ) {
+            set_mutation( background );
+        }
     }
 
     int num_gtraits = 0;
@@ -680,7 +683,7 @@ void Character::add_profession_items()
 void Character::randomize_hobbies()
 {
     hobbies.clear();
-    std::vector<profession_id> choices = get_scenario()->permitted_hobbies();
+    std::vector<profession_id> choices = get_scenario()->permitted_hobbies( is_npc() );
     choices.erase( std::remove_if( choices.begin(), choices.end(),
     [this]( const string_id<profession> &hobby ) {
         return !prof->allows_hobby( hobby );
@@ -4845,15 +4848,15 @@ void Character::add_traits()
 
 trait_id Character::random_good_trait()
 {
-    return get_random_trait( []( const mutation_branch & mb ) {
-        return mb.points > 0 && mb.random_at_chargen;
+    return get_random_trait( [this]( const mutation_branch & mb ) {
+        return mb.points > 0 && ( mb.chargen_allow_npc || is_avatar() );
     } );
 }
 
 trait_id Character::random_bad_trait()
 {
-    return get_random_trait( []( const mutation_branch & mb ) {
-        return mb.points < 0 && mb.random_at_chargen;
+    return get_random_trait( [this]( const mutation_branch & mb ) {
+        return mb.points < 0 && ( mb.chargen_allow_npc || is_avatar() );
     } );
 }
 
