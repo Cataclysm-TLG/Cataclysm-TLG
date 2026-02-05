@@ -8,7 +8,7 @@
     "mixed_effect": true,
     "time": 3600,
     "processed_eocs": [ "EOC_AM_BECOME_MUTANT" ],
-    "chargen_allow_npc": false,
+    "random_at_chargen": false,
     "starting_trait": false,
     "valid": false,
     "cancels": [

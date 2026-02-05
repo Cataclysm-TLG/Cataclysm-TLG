@@ -899,6 +899,7 @@
     "enchantments": [ { "values": [ { "value": "CONSUME_TIME_MOD", "multiply": 0.5 } ] } ],
     "description": "You've been taught proper table manners from your early childhood on; now, you can't even think about eating without being seated at a table and taking your time.  Eating without a table and chair frustrates you, but eating like a civilized person gives you a bigger morale bonus.",
     "starting_trait": true,
+    "random_at_chargen": false,
     "valid": false
   },
   {
@@ -1171,7 +1172,7 @@
     "points": 2,
     "description": "You have a diminished capacity for empathy and feel little remorse for your actions.  This does not necessarily make you predisposed to harming or exploiting others, but your superficial charm and lack of guilt make lying all too easy.",
     "starting_trait": true,
-    "chargen_allow_npc": false,
+    "random_at_chargen": false,
     "valid": false,
     "social_modifiers": { "lie": 10, "persuade": 5 },
     "types": [ "HUMAN_EMPATHY" ],
@@ -1647,6 +1648,7 @@
     "points": -2,
     "description": "You suffer from a minor chemical imbalance, whether mental or physical.  Minor changes to your internal chemistry will manifest themselves on occasion, such as hunger, sleepiness, narcotic effects, etc.",
     "starting_trait": true,
+    "random_at_chargen": false,
     "category": [ "SLIME", "MEDICAL", "CHIMERA", "ELFA" ]
   },
   {
@@ -1688,7 +1690,7 @@
     "points": -3,
     "description": "You periodically suffer from delusions, ranging from minor effects to full visual hallucinations.  Some of these effects may be controlled through the use of antipsychotics.",
     "starting_trait": true,
-    "chargen_allow_npc": false,
+    "random_at_chargen": false,
     "category": [ "MEDICAL" ]
   },
   {
@@ -1698,7 +1700,7 @@
     "points": -3,
     "description": "You randomly fall asleep without any reason.",
     "starting_trait": true,
-    "chargen_allow_npc": false,
+    "random_at_chargen": false,
     "category": [ "MEDICAL" ]
   },
   {
@@ -8428,7 +8430,7 @@
     "points": -2,
     "description": "You have an unhealthy obsession with fire, and you get anxious if you don't light them every now and then or stand near them often.  However, you gain a mood bonus from doing so.",
     "starting_trait": true,
-    "chargen_allow_npc": false
+    "random_at_chargen": false
   },
   {
     "type": "mutation",
