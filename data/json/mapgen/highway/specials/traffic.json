@@ -615,7 +615,7 @@
     "object": {
       "mapgensize": [ 24, 24 ],
       "rotation": [ 0 ],
-      "place_monsters": [ { "monster": "GROUP_ZOMBIE", "x": [ 0, 23 ], "y": [ 0, 23 ] } ]
+      "place_monsters": [ { "monster": "GROUP_ZOMBIE", "x": [ 0, 15 ], "y": [ 0, 23 ] } ]
     }
   },
   {
@@ -624,7 +624,7 @@
     "object": {
       "mapgensize": [ 24, 24 ],
       "rotation": [ 0 ],
-      "place_monsters": [ { "monster": "GROUP_VANILLA_DORMANT", "x": [ 0, 23 ], "y": [ 0, 23 ] } ]
+      "place_monsters": [ { "monster": "GROUP_VANILLA_DORMANT", "x": [ 0, 15 ], "y": [ 0, 23 ] } ]
     }
   }
 ]
