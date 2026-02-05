@@ -934,7 +934,7 @@
     "symbol": "*",
     "color": "green",
     "explode_in_fire": true,
-    "explosion": { "power": 460, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } },
+    "explosion": { "power": 200, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } },
     "use_action": {
       "need_wielding": true,
       "target": "military_explosive_small_grenade_act",
@@ -954,7 +954,7 @@
     "name": { "str": "active military explosive small homemade grenade" },
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
-    "countdown_action": { "type": "explosion", "explosion": { "power": 460, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 200, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
   {
@@ -972,7 +972,7 @@
     "symbol": "*",
     "color": "green",
     "explode_in_fire": true,
-    "explosion": { "power": 920, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } },
+    "explosion": { "power": 920, "shrapnel": { "casing_mass": 300, "fragment_mass": 0.4 } },
     "use_action": {
       "need_wielding": true,
       "target": "military_explosive_grenade_act",
@@ -992,7 +992,7 @@
     "name": { "str": "active military explosive homemade grenade" },
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
-    "countdown_action": { "type": "explosion", "explosion": { "power": 920, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
   {
@@ -1003,9 +1003,8 @@
     "name": { "str": "military explosive pipebomb" },
     "looks_like": "pipebomb",
     "description": "A section of steel pipe filled with military explosives.  Use this item to pull the pin, giving you six seconds to get away from it before it detonates.",
-    "weight": "1140 g",
-    "//": "Only one third (410 g) of a whole pipe is being used",
-    "volume": "280 ml",
+    "weight": "725 g",
+    "volume": "802 ml",
     "longest_side": "229 mm",
     "price": "30 USD",
     "price_postapoc": "30 USD",
@@ -1034,7 +1033,7 @@
     "description": "This pipebomb's pin is pulled, and it will explode any second now.  Throw it immediately!",
     "price": "0 cent",
     "color": "light_gray",
-    "countdown_action": { "type": "explosion", "explosion": { "power": 920, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 400, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
   {
@@ -1187,7 +1186,7 @@
     "symbol": "*",
     "color": "green",
     "explode_in_fire": true,
-    "explosion": { "power": 150, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } },
+    "explosion": { "power": 100, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } },
     "use_action": {
       "need_wielding": true,
       "target": "small_homemade_grenade_act",
@@ -1207,7 +1206,7 @@
     "name": { "str": "active small homemade grenade" },
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
-    "countdown_action": { "type": "explosion", "explosion": { "power": 150, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 100, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
   {
@@ -1223,7 +1222,7 @@
     "symbol": "*",
     "color": "green",
     "explode_in_fire": true,
-    "explosion": { "power": 300, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } },
+    "explosion": { "power": 150, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } },
     "use_action": {
       "need_wielding": true,
       "target": "homemade_grenade_act",
@@ -1243,7 +1242,7 @@
     "name": { "str": "active homemade grenade" },
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
-    "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 150, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
   {
@@ -1254,9 +1253,9 @@
     "name": { "str": "pipebomb" },
     "looks_like": "pipebomb",
     "description": "A section of steel pipe filled with explosives.  Use this item to light the fuse, giving you six seconds to get away from it before it detonates.  You'll need a lighter or some matches to use it.",
-    "weight": "840 g",
-    "//": "Only one third (410 g) of a whole pipe is being used",
-    "volume": "280 ml",
+    "weight": "725 g",
+    "//": "Only one third (480 g) of a whole pipe is being used. The rest is powder, nails, etc.",
+    "volume": "802 ml",
     "price": "15 USD",
     "longest_side": "229 mm",
     "to_hit": 1,
@@ -1264,7 +1263,7 @@
     "symbol": "*",
     "color": "light_gray",
     "explode_in_fire": true,
-    "explosion": { "power": 300, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
+    "explosion": { "power": 200, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
     "use_action": {
       "need_wielding": true,
       "target": "pipebomb_act",
@@ -1285,8 +1284,8 @@
     "name": { "str": "active pipebomb" },
     "looks_like": "pipebomb",
     "description": "This pipebomb's fuse is lit, and it will explode any second now.  Throw it immediately!",
-    "weight": "840 g",
-    "volume": "280 ml",
+    "weight": "725 g",
+    "volume": "802 ml",
     "longest_side": "229 mm",
     "price": "0 cent",
     "to_hit": 1,
@@ -1294,8 +1293,8 @@
     "symbol": "*",
     "color": "light_gray",
     "explode_in_fire": true,
-    "explosion": { "power": 300, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
-    "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
+    "explosion": { "power": 200, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 200, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
     "melee_damage": { "bash": 5 }
   },
