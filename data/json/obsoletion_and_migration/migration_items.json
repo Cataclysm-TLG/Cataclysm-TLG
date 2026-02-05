@@ -3668,7 +3668,7 @@
     "id": "lupine_sample",
     "replace": "canine_sample"
   },
-    {
+  {
     "type": "MIGRATION",
     "id": "ammo_box_1",
     "replace": "ammo_box_small"

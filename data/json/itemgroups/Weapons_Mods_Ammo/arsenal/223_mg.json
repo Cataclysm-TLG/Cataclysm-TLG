@@ -3,9 +3,7 @@
     "type": "item_group",
     "id": "milspec_arsenal_223_mg_gun&mags&cans",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_223_mg_gun&ammo" }
-    ]
+    "items": [ { "group": "milspec_arsenal_223_mg_gun&ammo" } ]
   },
   {
     "type": "item_group",
