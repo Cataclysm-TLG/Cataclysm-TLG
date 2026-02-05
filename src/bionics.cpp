@@ -2138,37 +2138,42 @@ float Character::bionics_adjusted_skill( bool autodoc, int skill_level ) const
 
 int Character::bionics_pl_skill( bool autodoc, int skill_level ) const
 {
-    skill_id most_important_skill;
-    skill_id important_skill;
-    skill_id least_important_skill;
+    float most_important_skill;
+    float important_skill;
+    float least_important_skill;
 
     if( autodoc ) {
-        most_important_skill = skill_firstaid;
-        important_skill = skill_computer;
-        least_important_skill = skill_electronics;
+        // Because the Autodoc is doing the actual work, knowledge can fill in for medicine and electronics skill.
+        // But since we're the one programming it, we need actual skill for computers.
+        most_important_skill = get_greater_skill_or_knowledge_level( skill_firstaid );
+        important_skill = get_skill_level( skill_computer );
+        least_important_skill = get_greater_skill_or_knowledge_level( skill_electronics );
     } else {
-        most_important_skill = skill_electronics;
-        important_skill = skill_firstaid;
-        least_important_skill = skill_mechanics;
+        // TODO: Remove this? NPCs can't do installs this way anymore.
+        most_important_skill = get_skill_level( skill_electronics );
+        important_skill = get_skill_level( skill_firstaid );
+        least_important_skill = get_skill_level( skill_mechanics );
     }
 
     float pl_skill;
     if( skill_level == -1 ) {
-        pl_skill = int_cur                                  * 4 +
-                   get_greater_skill_or_knowledge_level( most_important_skill )  * 4 +
-                   get_greater_skill_or_knowledge_level( important_skill )       * 3 +
-                   get_greater_skill_or_knowledge_level( least_important_skill ) * 1;
+        pl_skill = int_cur               * 4 +
+                   most_important_skill  * 4 +
+                   important_skill       * 3 +
+                   least_important_skill * 1;
     } else {
-        // override chance as though all values were skill_level if it is provided
+        // Override chance as though all values were skill_level if it is provided.
+        // Unsure, but I assume this is for when e.g. the nursebot is removing stuff.
         pl_skill = 12 * skill_level;
     }
 
-    // Medical residents have some idea what they're doing
+    // Medical residents have some idea what they're doing.
+    // TODO: Move this to a learnable proficiency.
     if( has_trait( trait_PROF_MED ) ) {
         pl_skill += 3;
     }
 
-    // People trained in bionics gain an additional advantage towards using it
+    // People trained in bionics gain an additional advantage towards using it.
     if( has_trait( trait_PROF_AUTODOC ) ) {
         pl_skill += 7;
     }
