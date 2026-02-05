@@ -47,7 +47,11 @@
         "       |.......*.......|"
       ],
       "palettes": [ "highway_palette" ],
-      "place_nested": [ { "chunks": [ "24x24_highway_road_bridge_ramp" ], "x": 0, "y": 0, "neighbors": { "above": "hw_road_bridge" } } ],
+      "place_nested": [
+        { "chunks": [ "24x24_highway_road_bridge_ramp" ], "x": 0, "y": 0, "neighbors": { "above": "hw_road_bridge" } },
+        { "chunks": [ "24x24_highway_straight_vehicles" ], "x": 0, "y": 0 },
+        { "chunks": [ "24x24_highway_zombies" ], "x": 0, "y": 0 }
+      ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
@@ -119,7 +123,8 @@
         "       |.......*.......|"
       ],
       "palettes": [ "highway_palette" ],
-      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
+      "place_nested": [ { "chunks": [ "24x24_highway_straight_vehicles" ], "x": 0, "y": 0 } ]
     }
   },
   {
@@ -313,7 +318,8 @@
         ".......*.......*.......|",
         ".......*.......*.......|"
       ],
-      "palettes": [ "highway_palette" ]
+      "palettes": [ "highway_palette" ],
+      "place_nested": [ { "chunks": [ "24x24_highway_straight_vehicles" ], "x": 0, "y": 0 } ]
     }
   },
   {

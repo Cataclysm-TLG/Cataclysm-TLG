@@ -721,7 +721,7 @@
         "                        "
       ],
       "palettes": [ "standard_domestic_palette" ],
-      "nested": { "!": { "chunks": [ [ "mansion_t2d_fungal", 50 ], [ "mansion_t2d_normal", 50 ] ] } }
+      "nested": { "!": { "chunks": [ [ "mansion_t2d_fungal", 30 ], [ "mansion_t2d_normal", 70 ] ] } }
     }
   },
   {
@@ -1545,7 +1545,7 @@
         "                        "
       ],
       "palettes": [ "standard_domestic_palette" ],
-      "nested": { "!": { "chunks": [ [ "mansion_+1_fungal", 50 ], [ "mansion_+1_normal", 50 ] ] } }
+      "nested": { "!": { "chunks": [ [ "mansion_+1_fungal", 20 ], [ "mansion_+1_normal", 80 ] ] } }
     }
   },
   {
@@ -1991,7 +1991,7 @@
         "                        "
       ],
       "palettes": [ "standard_domestic_palette" ],
-      "nested": { "!": { "chunks": [ [ "mansion_+4_fungal", 50 ], [ "mansion_+4_normal", 50 ] ] } }
+      "nested": { "!": { "chunks": [ [ "mansion_+4_fungal", 30 ], [ "mansion_+4_normal", 70 ] ] } }
     }
   },
   {
