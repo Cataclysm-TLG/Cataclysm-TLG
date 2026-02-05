@@ -492,7 +492,8 @@
     "vision_levels": "large_pavement",
     "name": "parking lot",
     "sym": "O",
-    "color": "dark_gray"
+    "color": "dark_gray",
+    "looks_like": "s_lot"
   },
   {
     "type": "overmap_terrain",

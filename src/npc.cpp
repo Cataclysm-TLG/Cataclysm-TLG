@@ -949,7 +949,7 @@ void starting_clothes( npc &who, const npc_class_id &type, bool male )
         }
         if( who.can_wear( it ).success() ) {
             it.on_wear( who );
-            who.worn.wear_item( who, it, false, false );
+            who.worn.wear_item( who, it, false, false, true, true );
             it.set_owner( who );
         }
     }
