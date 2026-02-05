@@ -794,7 +794,7 @@
   {
     "type": "monster_attack",
     "attack_type": "melee",
-    "id": "nether_cucumber_pull",
+    "id": "mutant_cucumber_pull",
     "cooldown": 1,
     "move_cost": 200,
     "accuracy": 6,
@@ -822,7 +822,7 @@
   {
     "type": "monster_attack",
     "attack_type": "melee",
-    "id": "nether_cucumber_lash",
+    "id": "mutant_cucumber_lash",
     "cooldown": 2,
     "move_cost": 100,
     "accuracy": 6,
@@ -842,7 +842,7 @@
   {
     "type": "monster_attack",
     "attack_type": "melee",
-    "id": "nether_cucumber_grab",
+    "id": "mutant_cucumber_grab",
     "cooldown": 1,
     "move_cost": 100,
     "accuracy": 6,
@@ -869,7 +869,7 @@
   {
     "type": "monster_attack",
     "attack_type": "melee",
-    "id": "nether_cucumber_grab_followup",
+    "id": "mutant_cucumber_grab_followup",
     "cooldown": 5,
     "move_cost": 200,
     "accuracy": 8,

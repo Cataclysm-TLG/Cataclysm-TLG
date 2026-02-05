@@ -338,7 +338,7 @@
   {
     "id": "MISSION_ROBOFAC_INTERCOM_2_ADVICE_Convoy",
     "type": "talk_topic",
-    "dynamic_line": "The convoy was composed of vehicles and personnel from the US Army, and it was heavily armed.  Our surveillance of the area has shown that the majority of the slain military personnel have revived, including one wearing a light combat exoskeleton.  Resistance will be heavy, but if possible, you may be able to locate and retrieve the hard case, then exfiltrate without direct combat as long as you can outpace the undead there.  Otherwise, bring a rifle and plenty of ammo."
+    "dynamic_line": "The convoy was composed of vehicles and personnel from the US Army, and it was heavily armed.  Our surveillance of the area has shown that the majority of the slain military personnel have revivified.  Resistance will be heavy, but if possible, you may be able to locate and retrieve the hard case, then exfiltrate without direct combat as long as you can outpace the undead there.  Otherwise, bring a rifle and plenty of ammo."
   },
   {
     "id": "MISSION_ROBOFAC_INTERCOM_2_ADVICE_DARPA",

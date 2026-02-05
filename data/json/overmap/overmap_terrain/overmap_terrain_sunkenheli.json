@@ -19,7 +19,7 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [ "nether_cucumber_lake_bed" ],
+    "id": [ "mutant_cucumber_lake_bed" ],
     "name": "nether cucumber lake bed",
     "sym": "~",
     "color": "light_blue",
