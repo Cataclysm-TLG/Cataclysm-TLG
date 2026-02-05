@@ -64,7 +64,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_pit_shallow",
-      "items": [ { "item": "lc_steel_chunk", "count": [ 10, 22 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 10, 22 ] } ]
     }
   },
   {

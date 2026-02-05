@@ -51,11 +51,13 @@
       "furniture": { "C": "f_metal_crate_c", "o": "f_metal_crate_o", "h": "f_sunkenhelicopter_seat_rotating" },
       "place_items": [
         { "x": 15, "y": 17, "item": "SUS_rivtech_misc", "chance": 66, "repeat": 2 },
-        { "x": 15, "y": 18, "item": "m320", "chance": 100 },
         { "x": 15, "y": 18, "item": "ammo_launcher_grenade", "chance": 100 },
         { "x": 15, "y": 18, "item": "ammo_launcher_grenade", "chance": 66, "repeat": 2 },
         { "x": 15, "y": 17, "item": "SUS_rivtech_misc", "chance": 66, "repeat": 2 },
-        { "x": 15, "y": 17, "item": "bionics_mil", "chance": 66, "repeat": 3 },
+        { "x": 15, "y": 17, "item": "bionics_mil", "chance": 66, "repeat": 3 }
+      ],
+      "place_item": [
+        { "x": 15, "y": 18, "item": "m320", "chance": 100 },
         { "x": 16, "y": 18, "item": "plasma", "chance": 100, "repeat": 2 },
         { "x": 15, "y": 19, "item": "plasma_gun", "chance": 66 }
       ],
@@ -99,10 +101,10 @@
   },
   {
     "type": "mapgen",
-    "om_terrain": [ [ "nether_cucumber_lake_bed" ] ],
+    "om_terrain": [ [ "mutant_cucumber_lake_bed" ] ],
     "object": {
       "predecessor_mapgen": "lake_bed",
-      "place_monster": [ { "monster": "mon_nether_cucumber", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 80, "repeat": 5 } ]
+      "place_monster": [ { "monster": "mon_mutant_cucumber", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 80, "repeat": 5 } ]
     }
   }
 ]
