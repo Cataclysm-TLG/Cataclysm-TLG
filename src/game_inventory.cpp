@@ -2738,7 +2738,7 @@ static item_location autodoc_internal( Character &you, Character &patient,
     std::string hint;
     int drug_count = 0;
 
-    if( !surgeon ) {//surgeon use their own anesthetic, player just need money
+    if( !surgeon ) { // TODO: Is the surgeon bool used anymore?
         if( patient.has_flag( json_flag_PAIN_IMMUNE ) ) {
             hint = _( "<color_yellow>Patient has deadened nerves.  Anesthesia unneeded.</color>" );
         } else if( patient.has_bionic( bio_painkiller ) ) {
