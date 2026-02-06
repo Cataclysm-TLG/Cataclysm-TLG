@@ -23,7 +23,7 @@
 /** How much light moon provides per lit-up quarter (Full-moon light is four times this value) */
 static constexpr float moonlight_per_quarter = 1.5f;
 
-// Divided by 100 to prevent overflowing when converted to moves
+// Divided by 100 to prevent overflowing when converted to moves.
 const int calendar::INDEFINITELY_LONG( std::numeric_limits<int>::max() / 100 );
 static bool is_eternal_season = false;
 static bool is_eternal_night = false;
@@ -31,10 +31,12 @@ static bool is_eternal_day = false;
 static int cur_season_length = 1;
 static lat_long location = { 42.36_degrees, -71.06_degrees };
 
-time_point calendar::start_of_cataclysm = calendar::turn_zero;
-time_point calendar::fall_of_civilization = calendar::turn_zero + 20_days;
-time_point calendar::start_of_game = calendar::fall_of_civilization;
 time_point calendar::turn = calendar::turn_zero;
+// The oldest any perishable items can be.
+time_point calendar::start_of_cataclysm = calendar::turn_zero;
+// Locked to at least 1 week before start as monsters weren't actually born yesterday.
+time_point calendar::fall_of_civilization = calendar::turn_zero + 13_days;
+time_point calendar::start_of_game = calendar::fall_of_civilization + 7_days;
 season_type calendar::initial_season = SPRING;
 
 // The solar altitudes at which light changes in various ways

@@ -3710,7 +3710,7 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
                 scen = get_scenario();
             }
             scen->change_start_of_cataclysm( calendar_ui::select_time_point( scen->start_of_cataclysm(),
-                                             _( "Select Cataclysm start date" ), calendar_ui::granularity::hour ) );
+                                             _( "Cataclysm start date (affects items)" ), calendar_ui::granularity::day ) );
             details_recalc = true;
         } else if( action == "CHANGE_FALL_OF_CIVILIZATION" ) {
             const scenario *scen = sorted_scens[cur_id];
@@ -3718,7 +3718,7 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
                 scen = get_scenario();
             }
             scen->change_fall_of_civilization( calendar_ui::select_time_point( scen->fall_of_civilization(),
-                                               _( "Select fall of civilization date" ), calendar_ui::granularity::hour ) );
+                                               _( "Fall of civilization date (affects monsters)" ), calendar_ui::granularity::day ) );
             details_recalc = true;
         } else if( action == "CHANGE_START_OF_GAME" ) {
             const scenario *scen = sorted_scens[cur_id];
@@ -4589,11 +4589,11 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
         } else if( action == "CHANGE_START_OF_CATACLYSM" ) {
             const scenario *scen = get_scenario();
             scen->change_start_of_cataclysm( calendar_ui::select_time_point( scen->start_of_cataclysm(),
-                                             _( "Select cataclysm start date" ), calendar_ui::granularity::hour ) );
+                                             _( "Cataclysm start date (affects items)" ), calendar_ui::granularity::day ) );
         } else if( action == "CHANGE_FALL_OF_CIVILIZATION" ) {
             const scenario *scen = get_scenario();
             scen->change_fall_of_civilization( calendar_ui::select_time_point( scen->fall_of_civilization(),
-                                               _( "Select fall of civilization date" ), calendar_ui::granularity::hour ) );
+                                               _( "Fall of civilization date (affects monsters)" ), calendar_ui::granularity::day ) );
         } else if( action == "CHANGE_START_OF_GAME" ) {
             const scenario *scen = get_scenario();
             scen->change_start_of_game( calendar_ui::select_time_point( scen->start_of_game(),
