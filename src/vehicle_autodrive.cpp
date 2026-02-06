@@ -837,6 +837,10 @@ void vehicle::autodrive_controller::enqueue_if_ramp( point_queue &ramp_points,
     if( !data.land_ok ) {
         return;
     }
+    // Please don't drive into craters.
+    if( !here.has_flag( ter_furn_flag::TFLAG_ROAD, p ) ) {
+        return;
+    }
     ramp_points.visited.emplace( p );
     if( p.z() < OVERMAP_HEIGHT && here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, p ) ) {
         ramp_points.enqueue( p + tripoint::above );
