@@ -35,7 +35,6 @@
         "id": "modular_m4a1",
         "name": { "str": "C8" },
         "description": "The standard issue carbine for the Canadian armed forces, featuring a 14.5 in. long barrel and full auto capabilities when fed from STANAG magazines.",
-        "ascii_picture": "modular_m4a1",
         "weight": 1
       },
       {
@@ -76,8 +75,7 @@
         "name": { "str": "M1911A1" },
         "description": "An update to the original M1911, featuring an extended tang on the grip safety to prevent hammer bite as well as a shorter trigger for smaller hands."
       }
-    ],
-    "ascii_picture": "m1911"
+    ]
   },
   {
     "type": "ITEM",

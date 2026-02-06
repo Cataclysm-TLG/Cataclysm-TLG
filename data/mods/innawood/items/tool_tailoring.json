@@ -5,7 +5,6 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "pair of Kevlar cutters", "str_pl": "pairs of Kevlar cutters" },
     "description": "These are a pair of heavy-duty shears with a blade suitable for cutting particularly tough materials, from polyaramid fabrics to tough plastics and thin metals.  The blades feature a flat shearing edge and a fine serration.",
-    "ascii_picture": "scissors",
     "weight": "113 g",
     "volume": "145 ml",
     "price": "35 USD",
@@ -129,7 +128,7 @@
   {
     "id": "fibercloth_patch",
     "type": "ITEM",
-    "subtype": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "fibercloth patch", "str_pl": "fibercloth patches" },
     "description": "A 6 inch square fibercloth patch, suitable for use in repairing and tailoring of clothing.",
