@@ -972,7 +972,7 @@
     "symbol": "*",
     "color": "green",
     "explode_in_fire": true,
-    "explosion": { "power": 920, "shrapnel": { "casing_mass": 300, "fragment_mass": 0.4 } },
+    "explosion": { "power": 300, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } },
     "use_action": {
       "need_wielding": true,
       "target": "military_explosive_grenade_act",
