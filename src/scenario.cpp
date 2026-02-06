@@ -129,7 +129,7 @@ void scenario::load( const JsonObject &jo, std::string_view )
                                       ;
 
         int _fall_of_civilization_hour = 0;
-        int _fall_of_civilization_day = 61;
+        int _fall_of_civilization_day = 54;
         season_type _fall_of_civilization_season = SPRING;
         int _fall_of_civilization_year = 1;
         if( jo.has_member( "fall_of_civilization" ) ) {
@@ -582,20 +582,22 @@ bool scenario::get_reveal_locale() const
 void scenario::normalize_calendar() const
 {
     scenario *hack = const_cast<scenario *>( this );
-    // We don't currently allow to start game before cataclysm.
-    if( hack->_default_start_of_game < hack->_default_start_of_cataclysm ) {
-        hack->_default_start_of_game = hack->_default_fall_of_civilization;
+    // Enforce a 7 day head start for monsters and a 20 day head start for items.
+    if( hack->_default_fall_of_civilization < hack->_default_start_of_cataclysm + 13_days ) {
+        hack->_default_fall_of_civilization = hack->_default_start_of_cataclysm + 13_days;
     }
-    if( hack->_start_of_game < hack->_fall_of_civilization ) {
-        hack->_start_of_game = hack->_fall_of_civilization;
+    if( hack->_default_start_of_game < hack->_default_fall_of_civilization + 7_days ) {
+        hack->_default_start_of_game = hack->_default_fall_of_civilization + 7_days;
     }
-    if( hack->_default_fall_of_civilization < hack->_default_start_of_cataclysm ) {
-        hack->_default_fall_of_civilization = hack->_default_start_of_cataclysm;
+    if( hack->_fall_of_civilization < hack->_start_of_cataclysm + 13_days ) {
+        hack->_fall_of_civilization = hack->_start_of_cataclysm + 13_days;
     }
-    // TODO: Let the player start before the fall of civilization. Civilian monsters, less zombies, more NPCs?
-    if( hack->_default_start_of_game < hack->_default_fall_of_civilization ) {
-        hack->_default_start_of_game = hack->_default_fall_of_civilization;
+    if( hack->_start_of_game < hack->_fall_of_civilization + 7_days ) {
+        hack->_start_of_game = hack->_fall_of_civilization + 7_days;
     }
+    // Enforce midnight for these dates. Doesn't matter, but looks odd when it doesn't.
+    hack->_start_of_cataclysm -= time_past_midnight( hack->_start_of_cataclysm );
+    hack->_fall_of_civilization -= time_past_midnight( hack->_fall_of_civilization );
 }
 
 void scenario::reset_calendar() const
@@ -609,8 +611,8 @@ void scenario::reset_calendar() const
 
 void scenario::change_start_of_cataclysm( const time_point &t ) const
 {
-    // Enforce start_of_cataclysm <= fall_of_civilization - 1 day.
-    const time_point max_start = _fall_of_civilization - 24_hours;
+    // Enforce start_of_cataclysm <= fall_of_civilization - 13 days.
+    const time_point max_start = _fall_of_civilization - 13_days;
     time_point new_start = t <= max_start ? t : max_start;
     scenario *hack = const_cast<scenario *>( this );
     hack->_start_of_cataclysm = new_start;
@@ -619,8 +621,8 @@ void scenario::change_start_of_cataclysm( const time_point &t ) const
 
 void scenario::change_fall_of_civilization( const time_point &t ) const
 {
-    // Enforce fall_of_civilization <= start_of_game.
-    const time_point max_fall = _start_of_game;
+    // Enforce fall_of_civilization <= start_of_game - 7 days.
+    const time_point max_fall = _start_of_game - 7_days;
     time_point new_fall = t <= max_fall ? t : max_fall;
     scenario *hack = const_cast<scenario *>( this );
     hack->_fall_of_civilization = new_fall;

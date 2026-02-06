@@ -452,7 +452,7 @@ void monster::try_upgrade( bool pin_time )
     if( !can_upgrade() ) {
         return;
     }
-
+    
     const int current_day = to_days<int>( calendar::turn - calendar::fall_of_civilization );
     // This should only occur when a monster is created or upgraded to a new form.
     if( upgrade_time < 0 ) {
