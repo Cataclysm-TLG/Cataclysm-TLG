@@ -67,6 +67,10 @@
     "clip_size": 1,
     "reload": 2000,
     "use_action": [ "GUN_REPAIR" ],
+    "faults": [
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" }
+    ],
     "valid_mod_locations": [ [ "grip mount", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ], [ "underbarrel mount", 1 ] ],
     "flags": [ "ALLOWS_BODY_BLOCK", "NEVER_JAMS", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "flintlock": 1 } } ],
@@ -107,6 +111,10 @@
       [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "stock mount", 1 ]
+    ],
+    "faults": [
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" }
     ],
     "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "DURABLE_MELEE", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "flintlock": 1 } } ],

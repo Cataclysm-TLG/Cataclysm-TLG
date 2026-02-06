@@ -1,19 +1,6 @@
 [
   {
     "type": "monstergroup",
-    "name": "GROUP_BREATHER",
-    "monsters": [
-      { "monster": "mon_breather", "weight": 990 },
-      { "monster": "mon_breather", "weight": 10, "cost_multiplier": 2, "pack_size": [ 2, 4 ] }
-    ]
-  },
-  {
-    "type": "monstergroup",
-    "name": "GROUP_BREATHER_HUB",
-    "monsters": [ { "monster": "mon_breather_hub" } ]
-  },
-  {
-    "type": "monstergroup",
     "name": "GROUP_CHURCH_BLANK",
     "monsters": [ { "monster": "mon_blank", "cost_multiplier": 0 } ]
   },
