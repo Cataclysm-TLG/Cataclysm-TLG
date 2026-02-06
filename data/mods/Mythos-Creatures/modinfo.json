@@ -12,7 +12,7 @@
   {
     "type": "MONSTER_BLACKLIST",
     "monsters": [
-      "mon_zombie_fungus",
+      "mon_zombie_fungal",
       "mon_boomer_fungus",
       "mon_zombie_child_fungus",
       "mon_zombie_gasbag_fungus",
