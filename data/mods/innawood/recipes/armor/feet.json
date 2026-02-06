@@ -14,7 +14,7 @@
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" }
     ],
-    "using": [ [ "tailoring_leather_sheet_simple", 3 ] ]
+    "using": [ [ "tailoring_leather_sheet", 3 ] ]
   },
   {
     "result": "mocassins",
@@ -28,7 +28,7 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_cobbling" }, { "proficiency": "prof_leatherworking_basic" } ],
     "book_learn": [ [ "textbook_survival", 0 ], [ "pocket_survival", 0 ] ],
-    "using": [ [ "tailoring_leather_sheet_simple", 2 ] ]
+    "using": [ [ "tailoring_leather_sheet", 2 ] ]
   },
   {
     "result": "mocassins_fur",
@@ -46,6 +46,6 @@
       { "proficiency": "prof_furriery" }
     ],
     "book_learn": [ [ "textbook_survival", 0 ], [ "pocket_survival", 0 ] ],
-    "using": [ [ "tailoring_fur_simple", 2 ] ]
+    "using": [ [ "tailoring_fur_sheet", 2 ] ]
   }
 ]
