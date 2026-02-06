@@ -102,6 +102,7 @@
   {
     "id": "BLOCK_WHILE_WORN",
     "type": "json_flag",
+    "//": "Unused in vanialla, left in place for mods.",
     "info": "This item can be used to block attacks when worn."
   },
   {

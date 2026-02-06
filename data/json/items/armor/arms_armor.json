@@ -17,7 +17,6 @@
     "color": "brown",
     "warmth": 5,
     "material_thickness": 3,
-    "techniques": [ "WBLOCK_1" ],
     "flags": [ "OUTER", "WATER_FRIENDLY" ],
     "armor": [
       {
