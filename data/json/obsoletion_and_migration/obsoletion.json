@@ -241,6 +241,10 @@
     "type": "effect_on_condition"
   },
   {
+    "id": "EOC_REFUGEE_CENTER_NPC_MOVEMENT",
+    "type": "effect_on_condition"
+  },
+  {
     "type": "mutation",
     "id": "NO_CBM_INSTALLATION",
     "name": { "str": "Oversensitive System" },
