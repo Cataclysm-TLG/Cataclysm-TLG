@@ -227,7 +227,7 @@
     "copy-from": "hstomach",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "name": { "str": "mutant human stomach" },
+    "name": { "str": "large mutant stomach" },
     "description": "The stomach of a large mutated creature.  It is surprisingly durable.",
     "proportional": { "weight": 2.0, "volume": 2.0, "price": 1.5, "calories": 2.0 },
     "vitamins": [ [ "meat_allergen", 1 ], [ "mutant_toxin", 24 ] ],
