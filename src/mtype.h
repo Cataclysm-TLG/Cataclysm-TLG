@@ -27,6 +27,7 @@
 #include "weakpoint.h"
 
 class Creature;
+class JsonValue;
 class monster;
 struct dealt_projectile_attack;
 template <typename E> struct enum_traits;
@@ -225,6 +226,9 @@ struct mon_effect_data {
 
     mon_effect_data();
     void load( const JsonObject &jo );
+    void deserialize( const JsonObject &jo ) {
+        load( jo );
+    }
 };
 
 /** Pet food data */
@@ -280,12 +284,16 @@ struct mount_item_data {
      * If this monster is a rideable mount that spawns with storage bags, this is the storage item id
      */
     itype_id storage;
+
+    void deserialize( const JsonObject &jo );
 };
 
 struct revive_type {
     std::function<bool( const_dialogue const & )> condition;
     mtype_id revive_mon = mtype_id::NULL_ID();
     mongroup_id revive_monster_group = mongroup_id::NULL_ID();
+
+    void deserialize( const JsonObject &jo );
 };
 struct mtype {
     private:
@@ -424,7 +432,6 @@ struct mtype {
         int agro = 0;           /** chance will attack [-100,100] */
         int morale = 0;         /** initial morale level at spawn */
         int stomach_size = 0;         /** how many times this monster will eat */
-        int amount_eaten = 0;         /** how many times it has eaten */
 
         // how close the monster is willing to approach its target while under the MATT_FOLLOW attitude
         int tracking_distance = 8;

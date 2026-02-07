@@ -669,15 +669,18 @@ Field           | Description
 ## "path_settings"
 (object, optional)
 
-Field                | Description
----                  | ---
-`max_dist`           | (int, default 0) Maximum direct distance of path
-`max_length`         | (int, default -1) Maximum total length of path
-`bash_strength`      | (int, default -1) Monster strength when bashing through an obstacle
-`allow_open_doors`   | (bool, default false) Monster knows how to open doors
-`avoid_traps`        | (bool, default false) Monster avoids stepping into traps
-`allow_climb_stairs` | (bool, default true) Monster may climb stairs
-`avoid_sharp`        | (bool, default false) Monster may avoid sharp things like barbed wire
+Field                    | Description
+---                      | ---
+`max_dist`               | (int, default 0) Maximum direct distance of path
+`max_length`             | (int, default -1) Maximum total length of path
+`bash_strength`          | (int, default -1) Monster strength when bashing through an obstacle
+`allow_open_doors`       | (bool, default false) Monster knows how to open doors
+`avoid_traps`            | (bool, default false) Monster avoids stepping into traps
+`allow_climb_stairs`     | (bool, default true) Monster may climb stairs
+`avoid_sharp`            | (bool, default false) Monster may avoid sharp things like barbed wire
+`avoid_dangerous_fields` | (bool, default false) Monster may avoid dangerous fields like fire or acid
+
+
 
 ## "special_attacks"
 

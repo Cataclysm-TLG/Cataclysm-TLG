@@ -6661,7 +6661,7 @@
     "city_sizes": [ 4, -1 ],
     "occurrences": [ 75, 100 ],
     "priority": 1,
-    "flags": [ "GLOBALLY_UNIQUE", "MAN_MADE", "SAFE_AT_WORLDGEN" ]
+    "flags": [ "GLOBALLY_UNIQUE", "MAN_MADE", "SAFE_AT_WORLDGEN", "NO_ROTATE" ]
   },
   {
     "type": "overmap_special",

@@ -6731,9 +6731,8 @@ float Character::get_bmi_lean() const
 {
     //strength BMIs decrease to zero as you starve (muscle atrophy)
     if( get_bmi_fat() < character_weight_category::normal ) {
-        const int str_penalty = std::floor( ( 1.0f - ( get_bmi_fat() /
-                                              character_weight_category::normal ) ) * str_max );
-        return 12.0f + get_str_base() - str_penalty;
+        const stat_mod wpen = get_weight_penalty();
+        return 12.0f + get_str_base() - wpen.strength;
     }
     return 12.0f + get_str_base();
 }
@@ -13013,6 +13012,17 @@ void Character::set_underwater( bool u )
     }
 }
 
+stat_mod Character::get_weight_penalty() const
+{
+    stat_mod ret;
+    const float bmi = get_bmi_fat();
+    ret.strength = std::floor( ( 1.0f - ( bmi / character_weight_category::normal ) ) * str_max );
+    ret.dexterity = std::floor( ( character_weight_category::normal - bmi ) * 3.0f );
+    ret.intelligence = ret.dexterity;
+    return ret;
+}
+
+
 stat_mod Character::get_pain_penalty() const
 {
     stat_mod ret;
@@ -13636,7 +13646,7 @@ void Character::search_surroundings()
     }
 }
 
-bool Character::wield( item &it, std::optional<int> obtain_cost )
+bool Character::wield( item &it, std::optional<int> obtain_cost, bool combat )
 {
     invalidate_inventory_validity_cache();
     invalidate_leak_level_cache();
@@ -13714,7 +13724,7 @@ bool Character::wield( item &it, std::optional<int> obtain_cost )
     // if fists are wielded get_wielded_item returns item_location::nowhere, which is a nullptr
     if( wielded ) {
         last_item = wielded->typeId();
-        wielded->on_wield( *this );
+        wielded->on_wield( *this, combat );
         inv->update_invlet( *wielded );
         inv->update_cache_with_item( *wielded );
         cata::event e = cata::event::make<event_type::character_wields_item>( getID(), last_item );

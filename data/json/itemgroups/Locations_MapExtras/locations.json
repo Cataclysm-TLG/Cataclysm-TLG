@@ -1548,7 +1548,8 @@
     "items": [
       { "group": "ammo_casings", "prob": 20 },
       { "group": "everyday_corpse", "prob": 1 },
-      { "group": "SUS_trash_floor", "prob": 60 },
+      { "group": "SUS_trash_floor", "prob": 30 },
+      { "group": "SUS_trash_trashcan", "prob": 30 },
       [ "jumper_cable", 5 ],
       [ "pipe", 10 ],
       [ "stereo", 6 ],
@@ -1587,8 +1588,11 @@
       [ "battery_motorbike", 6 ],
       [ "battery_car", 6 ],
       [ "one_year_old_newspaper", 2 ],
-      { "group": "newspaper_recent", "prob": 15 },
-      [ "survnote", 1 ]
+      [ "survnote", 1 ],
+      [ "2x4", 5 ],
+      [ "splinter", 10 ],
+      { "group": "dresser", "prob": 5, "damage": [ 1, 4 ] },
+      { "group": "shoes", "prob": 5, "damage": [ 1, 4 ] }
     ]
   },
   {
