@@ -2231,21 +2231,21 @@ point_bub_ms cata_tiles::screen_to_player(
 bool cata_tiles::draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos,
                                       int subtile,
                                       int rota,
-                                      lit_level ll, bool apply_night_vision_goggles )
+                                      lit_level ll, bool apply_visual_effects )
 {
     int nullint = 0;
     return cata_tiles::draw_from_id_string( id, TILE_CATEGORY::NONE, empty_string, pos, subtile,
-                                            rota, ll, apply_night_vision_goggles, nullint, 0 );
+                                            rota, ll, apply_visual_effects, nullint, 0 );
 }
 
 bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                       const std::string &subcategory, const tripoint_bub_ms &pos,
                                       int subtile, int rota, lit_level ll,
-                                      bool apply_night_vision_goggles )
+                                      bool apply_visual_effects )
 {
     int nullint = 0;
     return cata_tiles::draw_from_id_string( id, category, subcategory, pos, subtile, rota,
-                                            ll, apply_night_vision_goggles, nullint, 0 );
+                                            ll, apply_visual_effects, nullint, 0 );
 }
 
 
@@ -2253,73 +2253,73 @@ bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY categ
 bool cata_tiles::draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos,
                                       int subtile,
                                       int rota,
-                                      lit_level ll, bool apply_night_vision_goggles,
+                                      lit_level ll, bool apply_visual_effects,
                                       int &height_3d )
 {
     return cata_tiles::draw_from_id_string( id, TILE_CATEGORY::NONE, empty_string, pos, subtile,
-                                            rota, ll, apply_night_vision_goggles, height_3d, 0 );
+                                            rota, ll, apply_visual_effects, height_3d, 0 );
 }
 
 // Used by sdltiles.cpp for overmap drawing
 bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                       const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
                                       lit_level ll,
-                                      bool apply_night_vision_goggles, int &height_3d, float scale_x, float scale_y )
+                                      bool apply_visual_effects, int &height_3d, float scale_x, float scale_y )
 {
     return draw_from_id_string( id, category, subcategory, tripoint_bub_ms( pos.raw() ), subtile, rota,
                                 ll,
-                                apply_night_vision_goggles, height_3d, scale_x, scale_y );
+                                apply_visual_effects, height_3d, scale_x, scale_y );
 }
 
 
 bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                       const std::string &subcategory, const tripoint_bub_ms &pos,
                                       int subtile, int rota, lit_level ll,
-                                      bool apply_night_vision_goggles, int &height_3d, int intensity )
+                                      bool apply_visual_effects, int &height_3d, int intensity )
 {
     return cata_tiles::draw_from_id_string_internal( id, category, subcategory, pos, subtile, rota,
-            ll, -1, apply_night_vision_goggles, height_3d, intensity, "", point(), 1.0f, 1.0f );
+            ll, -1, apply_visual_effects, height_3d, intensity, "", point(), 1.0f, 1.0f );
 }
 
 bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                       const std::string &subcategory, const tripoint_bub_ms &pos,
                                       int subtile, int rota, lit_level ll,
-                                      bool apply_night_vision_goggles, int &height_3d, float scale_x, float scale_y )
+                                      bool apply_visual_effects, int &height_3d, float scale_x, float scale_y )
 {
     return cata_tiles::draw_from_id_string_internal( id, category, subcategory, pos, subtile, rota,
-            ll, -1, apply_night_vision_goggles, height_3d, 0, "", point(), scale_x, scale_y );
+            ll, -1, apply_visual_effects, height_3d, 0, "", point(), scale_x, scale_y );
 }
 
 bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                       const std::string &subcategory, const tripoint_bub_ms &pos,
                                       int subtile, int rota, lit_level ll,
-                                      bool apply_night_vision_goggles, int &height_3d,
+                                      bool apply_visual_effects, int &height_3d,
                                       int intensity_level, const std::string &variant )
 {
     return cata_tiles::draw_from_id_string_internal( id, category, subcategory, pos, subtile, rota,
-            ll, -1, apply_night_vision_goggles, height_3d, intensity_level,
+            ll, -1, apply_visual_effects, height_3d, intensity_level,
             variant, point(), 1.0f, 1.0f );
 }
 
 bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                       const std::string &subcategory, const tripoint_bub_ms &pos,
                                       int subtile, int rota, lit_level ll,
-                                      bool apply_night_vision_goggles, int &height_3d,
+                                      bool apply_visual_effects, int &height_3d,
                                       int intensity_level, const std::string &variant,
                                       const point &offset )
 {
     return cata_tiles::draw_from_id_string_internal( id, category, subcategory, pos, subtile, rota,
-            ll, -1, apply_night_vision_goggles, height_3d, intensity_level,
+            ll, -1, apply_visual_effects, height_3d, intensity_level,
             variant, offset, 1.0f, 1.0f );
 }
 bool cata_tiles::draw_from_id_string_internal( const std::string &id, const tripoint_bub_ms &pos,
         int subtile,
         int rota,
-        lit_level ll, int retract, bool apply_night_vision_goggles, int &height_3d )
+        lit_level ll, int retract, bool apply_visual_effects, int &height_3d )
 {
     return cata_tiles::draw_from_id_string_internal( id, TILE_CATEGORY::NONE, empty_string, pos,
             subtile,
-            rota, ll, retract, apply_night_vision_goggles, height_3d, 0, "", point(), 1.0f, 1.0f );
+            rota, ll, retract, apply_visual_effects, height_3d, 0, "", point(), 1.0f, 1.0f );
 }
 
 std::optional<tile_lookup_res>
@@ -2554,11 +2554,11 @@ void cata_tiles::set_disable_occlusion( const bool val )
 bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEGORY category,
         const std::string &subcategory, const tripoint_bub_ms &pos,
         int subtile, int rota, lit_level ll, int retract,
-        bool apply_night_vision_goggles, int &height_3d,
+        bool apply_visual_effects, int &height_3d,
         int intensity_level, const std::string &variant,
         const point &offset, float scale_x, float scale_y )
 {
-    bool nv_color_active = apply_night_vision_goggles && get_option<bool>( "NV_GREEN_TOGGLE" );
+    bool nv_color_active = apply_visual_effects && get_option<bool>( "NV_GREEN_TOGGLE" );
     // If the ID string does not produce a drawable tile
     // it will revert to the "unknown" tile.
     // The "unknown" tile is one that is highly visible so you kinda can't miss it :D
@@ -3006,7 +3006,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
 bool cata_tiles::draw_sprite_at(
     const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
     const point &p, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
-    bool apply_night_vision_goggles, int retract, int &height_3d, const point &offset, float scale_x,
+    bool apply_visual_effects, int retract, int &height_3d, const point &offset, float scale_x,
     float scale_y )
 {
     const std::vector<int> *picked = svlist.pick( loc_rand );
@@ -3048,7 +3048,7 @@ bool cata_tiles::draw_sprite_at(
         if( const texture *ptr = tileset_ptr->get_memory_tile( sprite_index ) ) {
             sprite_tex = ptr;
         }
-    } else if( apply_night_vision_goggles ) {
+    } else if( apply_visual_effects && nv_goggles_activated ) {
         if( ll != lit_level::LOW ) {
             if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
                 sprite_tex = ptr;
@@ -3059,7 +3059,7 @@ bool cata_tiles::draw_sprite_at(
             }
         }
     // TODO: Review if this works for remote view e.g. RC cars.
-    } else if( get_player_character().is_underwater() ) {
+    } else if( apply_visual_effects && get_player_character().is_underwater() ) {
         if( ll != lit_level::LOW ) {
             if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
                 sprite_tex = ptr;
@@ -3187,14 +3187,14 @@ bool cata_tiles::draw_sprite_at(
 
 bool cata_tiles::draw_tile_at(
     const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
-    lit_level ll, bool apply_night_vision_goggles, int retract, int &height_3d,
+    lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
     const point &offset, float scale_x, float scale_y )
 {
     int fake_int = height_3d;
     draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, ll,
-                    apply_night_vision_goggles, retract, fake_int, offset, scale_x, scale_y );
+                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y );
     draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, ll,
-                    apply_night_vision_goggles, retract, height_3d, offset, scale_x, scale_y );
+                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y );
     return true;
 }
 
@@ -3407,7 +3407,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
             return memorize_only
                    ? false
                    : draw_from_id_string( tname, TILE_CATEGORY::TERRAIN, empty_string, p, subtile,
-                                          rotation, ll, nv_goggles_activated, height_3d, 1.0f, 1.0f );
+                                          rotation, ll, true, height_3d, 1.0f, 1.0f );
         }
     }
     if( invisible[0] ? overridden : neighborhood_overridden ) {
@@ -3432,7 +3432,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
             // tile overrides are never memorized
             // tile overrides are always shown with full visibility
             const lit_level lit = overridden ? lit_level::LIT : ll;
-            const bool nv = overridden ? false : nv_goggles_activated;
+            const bool nv = !overridden;
             return memorize_only
                    ? false
                    : draw_from_id_string( tname, TILE_CATEGORY::TERRAIN, empty_string, p, subtile,
@@ -3446,7 +3446,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                    ? false
                    : draw_from_id_string(
                        mt.get_ter_id(), TILE_CATEGORY::TERRAIN, empty_string, p, mt.get_ter_subtile(),
-                       mt.get_ter_rotation(), lit_level::MEMORIZED, nv_goggles_activated, height_3d, 1.0f, 1.0f );
+                       mt.get_ter_rotation(), lit_level::MEMORIZED, true, height_3d, 1.0f, 1.0f );
         }
     }
     return false;
@@ -3498,7 +3498,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
             return memorize_only
                    ? false
                    : draw_from_id_string( fname, TILE_CATEGORY::FURNITURE, empty_string, p, subtile,
-                                          rotation, ll, nv_goggles_activated, height_3d, 1.0f, 1.0f );
+                                          rotation, ll, true, height_3d, 1.0f, 1.0f );
         }
     }
     if( invisible[0] ? overridden : neighborhood_overridden ) {
@@ -3533,7 +3533,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
             // tile overrides are never memorized
             // tile overrides are always shown with full visibility
             const lit_level lit = overridden ? lit_level::LIT : ll;
-            const bool nv = overridden ? false : nv_goggles_activated;
+            const bool nv = !overridden;
             return memorize_only
                    ? false
                    : draw_from_id_string( fname, TILE_CATEGORY::FURNITURE, empty_string, p, subtile,
@@ -3547,7 +3547,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
                    ? false
                    : draw_from_id_string(
                        mt.get_dec_id(), TILE_CATEGORY::FURNITURE, empty_string, p, mt.get_dec_subtile(),
-                       mt.get_dec_rotation(), lit_level::MEMORIZED, nv_goggles_activated, height_3d, 1.0f, 1.0f );
+                       mt.get_dec_rotation(), lit_level::MEMORIZED, true, height_3d, 1.0f, 1.0f );
         }
     }
     return false;
@@ -3591,7 +3591,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
             return memorize_only
                    ? false
                    : draw_from_id_string( trname, TILE_CATEGORY::TRAP, empty_string, p, subtile,
-                                          rotation, ll, nv_goggles_activated, height_3d, 1.0f, 1.0f );
+                                          rotation, ll, true, height_3d, 1.0f, 1.0f );
         }
     }
     if( overridden || ( !invisible[0] && neighborhood_overridden &&
@@ -3619,7 +3619,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
             // tile overrides are never memorized
             // tile overrides are always shown with full visibility
             const lit_level lit = overridden ? lit_level::LIT : ll;
-            const bool nv = overridden ? false : nv_goggles_activated;
+            const bool nv = !overridden;
             return memorize_only
                    ? false
                    : draw_from_id_string( trname, TILE_CATEGORY::TRAP, empty_string, p, subtile,
@@ -3634,7 +3634,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
                    : draw_from_id_string(
                        mt.get_dec_id(), TILE_CATEGORY::TRAP, empty_string, p, mt.get_dec_subtile(),
                        mt.get_dec_rotation(),
-                       lit_level::MEMORIZED, nv_goggles_activated, height_3d, 1.0f, 1.0f );
+                       lit_level::MEMORIZED, true, height_3d, 1.0f, 1.0f );
         }
     }
     return false;
@@ -3701,7 +3701,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
     const lit_level & ll, const field_entry & fe, const std::array<int, 4> &neighborhood ) {
         auto itt = tileset_ptr->field_layer_data.find( terfurn_key );
         if( itt != tileset_ptr->field_layer_data.end() ) {
-            const bool nv = nv_goggles_activated;
+            const bool nv = !fld_overridden;
             int subtile = 0;
             int rotation = 0;
             get_tile_values( fld.to_i(), neighborhood, subtile, rotation, 0 );
@@ -3925,7 +3925,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                                             "corpse_" + mon_id.str() : it_id.str();
                 const std::string it_category = it_type->get_item_type_string();
                 const lit_level lit = it_overridden ? lit_level::LIT : ll;
-                const bool nv = it_overridden ? false : nv_goggles_activated;
+                const bool nv = !it_overridden;;
 
                 ret_draw_items = draw_from_id_string( disp_id, TILE_CATEGORY::ITEM, it_category, p, 0,
                                                       0, lit, nv, height_3d, 0, variant );
@@ -4003,7 +4003,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                                  ? false
                                  : draw_from_id_string( "vp_" + vd.id.str(), TILE_CATEGORY::VEHICLE_PART,
                                                         empty_string, p, subtile, rotation, ll,
-                                                        nv_goggles_activated, height_3d_temp, 0, vd.variant.id );
+                                                        true, height_3d_temp, 0, vd.variant.id );
                 if( ret && vd.has_cargo ) {
                     draw_item_highlight( p, height_3d_temp );
                 }
@@ -4013,7 +4013,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                 }
                 if( ret && !vd.carried_furn.empty() ) {
                     draw_from_id_string( vd.carried_furn, TILE_CATEGORY::FURNITURE, empty_string, p, subtile,
-                                         angle_to_dir4( 0_degrees ), ll, nv_goggles_activated, height_3d, 1.0f, 1.0f );
+                                         angle_to_dir4( 0_degrees ), ll, true, height_3d, 1.0f, 1.0f );
                 }
                 return ret;
             }
@@ -4059,7 +4059,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                    ? false
                    : draw_from_id_string(
                        std::string( tid ), TILE_CATEGORY::VEHICLE_PART, empty_string, p, t.get_dec_subtile(),
-                       t.get_dec_rotation(), lit_level::MEMORIZED, nv_goggles_activated, height_3d_temp, 0,
+                       t.get_dec_rotation(), lit_level::MEMORIZED, true, height_3d_temp, 0,
                        std::string( tvar ) );
         }
     }
@@ -4361,7 +4361,7 @@ bool cata_tiles::draw_zone_mark( const tripoint_bub_ms &p, lit_level ll, int &he
 
         if( option && !option->get_mark().empty() ) {
             return draw_from_id_string( option->get_mark(), TILE_CATEGORY::NONE, empty_string, p,
-                                        0, 0, ll, nv_goggles_activated, height_3d, 1.0f, 1.0f );
+                                        0, 0, ll, true, height_3d, 1.0f, 1.0f );
         }
     }
 
@@ -4815,27 +4815,27 @@ void cata_tiles::draw_explosion_frame()
         rotation = 0;
 
         draw_from_id_string( exp_name, exp_pos + point( -i, -i ),
-                             subtile, rotation++, lit_level::LIT, nv_goggles_activated );
+                             subtile, rotation++, lit_level::LIT, true );
         draw_from_id_string( exp_name, exp_pos + point( -i, i ),
-                             subtile, rotation++, lit_level::LIT, nv_goggles_activated );
+                             subtile, rotation++, lit_level::LIT, true );
         draw_from_id_string( exp_name, exp_pos + point( i, i ),
-                             subtile, rotation++, lit_level::LIT, nv_goggles_activated );
+                             subtile, rotation++, lit_level::LIT, true );
         draw_from_id_string( exp_name, exp_pos + point( i, -i ),
-                             subtile, rotation, lit_level::LIT, nv_goggles_activated );
+                             subtile, rotation, lit_level::LIT, true );
 
         subtile = edge;
         for( int j = 1 - i; j < 0 + i; j++ ) {
             rotation = 0;
             draw_from_id_string( exp_name, exp_pos + point( j, -i ),
-                                 subtile, rotation, lit_level::LIT, nv_goggles_activated );
+                                 subtile, rotation, lit_level::LIT, true );
             draw_from_id_string( exp_name, exp_pos + point( j, i ),
-                                 subtile, rotation, lit_level::LIT, nv_goggles_activated );
+                                 subtile, rotation, lit_level::LIT, true );
 
             rotation = 1;
             draw_from_id_string( exp_name, exp_pos + point( -i, j ),
-                                 subtile, rotation, lit_level::LIT, nv_goggles_activated );
+                                 subtile, rotation, lit_level::LIT, true );
             draw_from_id_string( exp_name, exp_pos + point( i, j ),
-                                 subtile, rotation, lit_level::LIT, nv_goggles_activated );
+                                 subtile, rotation, lit_level::LIT, true );
         }
     }
 }
@@ -4918,7 +4918,7 @@ void cata_tiles::draw_custom_explosion_frame()
         }
 
         draw_from_id_string( explosion_tile_id, p, subtile, rotation, lit_level::LIT,
-                             nv_goggles_activated );
+                             true );
     }
 }
 void cata_tiles::draw_bullet_frame()
@@ -4975,7 +4975,7 @@ void cata_tiles::draw_weather_frame()
         }
         const tripoint_bub_ms pos( point_bub_ms( p ), 0 );
         draw_from_id_string( weather_name, TILE_CATEGORY::WEATHER, empty_string, pos, 0, 0,
-                             lit_level::LIT, nv_goggles_activated );
+                             lit_level::LIT, true );
     }
 }
 
@@ -5047,7 +5047,7 @@ void cata_tiles::draw_async_anim()
         const std::string tile_id = anim.second;
         // Only draw if sprite found
         if( find_tile_looks_like( tile_id, TILE_CATEGORY::NONE, "" ) ) {
-            draw_from_id_string( tile_id, p, 0, 0, lit_level::LIT, nv_goggles_activated );
+            draw_from_id_string( tile_id, p, 0, 0, lit_level::LIT, true );
         }
     }
 }
