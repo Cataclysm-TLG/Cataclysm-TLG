@@ -138,7 +138,6 @@ void weather_animation_t::deserialize( const JsonObject &jo )
     mandatory( jo, false, "factor", factor );
     mandatory( jo, false, "color", color, nc_color_reader{} );
     mandatory( jo, false, "sym", symbol, unicode_codepoint_from_symbol_reader );
-    optional( jo, false, "static_overlay", static_overlay );
 }
 
 void weather_types::reset()
