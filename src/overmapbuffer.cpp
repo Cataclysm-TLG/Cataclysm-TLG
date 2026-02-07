@@ -56,8 +56,6 @@ class map_extra;
 static const oter_type_str_id oter_type_bridgehead_ground( "bridgehead_ground" );
 static const oter_type_str_id oter_type_bridgehead_ramp( "bridgehead_ramp" );
 
-static const int default_search_range = OMAPX * 5;
-
 // Moved from obsolete coordinate_conversions.h to its only remaining user.
 static int omt_to_sm_copy( int a )
 {
@@ -1250,7 +1248,7 @@ tripoint_abs_omt overmapbuffer::find_closest( const tripoint_abs_omt &origin,
     // range.  The actual number is 5 because 1 covers the current overmap,
     // and each additional one expends the search to the next concentric circle of overmaps.
     const int min_dist = params.min_distance;
-    const int max_dist = params.search_range ? params.search_range : default_search_range;
+    const int max_dist = params.search_range ? params.search_range : OMAPX * 5;
 
     std::vector<tripoint_abs_omt> result;
     int found_dist = std::numeric_limits<int>::max();
@@ -2033,8 +2031,6 @@ std::optional<std::vector<tripoint_abs_omt>> overmapbuffer::place_special(
 bool overmapbuffer::place_special( const overmap_special_id &special_id,
                                    const tripoint_abs_omt &center, int radius )
 {
-    const int rad = radius ? radius : default_search_range;
-
     // First find the requested special. If it doesn't exist, we're done here.
     bool found = false;
     overmap_special special;
@@ -2060,7 +2056,7 @@ bool overmapbuffer::place_special( const overmap_special_id &special_id,
 
     // Get all of the overmaps within the defined radius of the center.
     for( overmap * const &om : get_overmaps_near(
-             project_to<coords::sm>( center ), omt_to_sm_copy( rad ) ) ) {
+             project_to<coords::sm>( center ), omt_to_sm_copy( radius ) ) ) {
 
         // Build an overmap_special_batch for the special on this overmap.
         std::vector<const overmap_special *> specials;
@@ -2080,7 +2076,7 @@ bool overmapbuffer::place_special( const overmap_special_id &special_id,
             // rest of it is outside the radius (due to size, rotation, etc), which would
             // then result in us placing the special but then not finding it later if we
             // search using the same radius value we used in placing it.
-            return square_dist( global_sector_point, center.xy() ) <= rad - longest_side;
+            return square_dist( global_sector_point, center.xy() ) <= radius - longest_side;
         } );
         om_special_sectors sectors_in_range {sector_points_in_range, sectors.sector_width};
 

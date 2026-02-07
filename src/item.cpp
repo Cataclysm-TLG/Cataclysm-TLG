@@ -6395,7 +6395,7 @@ int item::on_wield_cost( const Character &you ) const
     return mv;
 }
 
-void item::on_wield( Character &you, bool combat )
+void item::on_wield( Character &you )
 {
     int wield_cost = on_wield_cost( you );
     you.mod_moves( -wield_cost );
@@ -6410,7 +6410,7 @@ void item::on_wield( Character &you, bool combat )
     }
     you.add_msg_if_player( m_neutral, msg, tname() );
 
-    if( combat && !you.martial_arts_data->selected_is_none() ) {
+    if( !you.martial_arts_data->selected_is_none() ) {
         you.martial_arts_data->martialart_use_message( you );
     }
 
@@ -7178,7 +7178,7 @@ units::volume item::corpse_volume( const mtype *corpse ) const
     if( corpse_volume > 0_ml ) {
         return corpse_volume;
     }
-    debugmsg( "invalid monster volume for corpse of %s", corpse->id.str() );
+    debugmsg( "invalid monster volume for corpse" );
     return 0_ml;
 }
 

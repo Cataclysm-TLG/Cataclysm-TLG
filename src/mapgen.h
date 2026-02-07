@@ -197,7 +197,6 @@ struct jmapgen_setmap {
 struct spawn_data {
     std::map<itype_id, jmapgen_int> ammo;
     std::vector<point_rel_ms> patrol_points_rel_ms;
-    void deserialize( const JsonObject &jo );
 };
 
 /**

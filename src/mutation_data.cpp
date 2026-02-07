@@ -8,6 +8,7 @@
 #include <type_traits>
 #include <vector>
 
+#include "assign.h"
 #include "color.h"
 #include "condition.h"
 #include "debug.h"
@@ -191,11 +192,11 @@ bool mut_transform::load( const JsonObject &jsobj, std::string_view member )
 {
     JsonObject j = jsobj.get_object( member );
 
-    optional( j, false, "target", target );
-    optional( j, false, "msg_transform", msg_transform );
-    optional( j, false, "active", active, false );
+    assign( j, "target", target );
+    assign( j, "msg_transform", msg_transform );
+    assign( j, "active", active );
     optional( j, false, "safe", safe, false );
-    optional( j, false, "moves", moves, 0 );
+    assign( j, "moves", moves );
 
     return true;
 }

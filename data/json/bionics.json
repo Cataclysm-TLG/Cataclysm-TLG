@@ -1195,7 +1195,7 @@
     "description": "A small module connected to your brain allows you to interface with nearby devices with wireless capabilities.",
     "occupied_bodyparts": [ [ "head", 2 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
-    "react_cost": "1 kJ",
+    "react_cost": 1,
     "time": "24 s"
   },
   {
@@ -1204,7 +1204,7 @@
     "name": { "str": "Sonic Resonator" },
     "description": "Your entire body may resonate at very high power, creating a short-range shockwave.  While it will not do much damage to creatures, solid objects such as walls and doors will be damaged.",
     "occupied_bodyparts": [ [ "torso", 15 ], [ "head", 1 ], [ "arm_l", 2 ], [ "arm_r", 2 ], [ "leg_l", 4 ], [ "leg_r", 4 ] ],
-    "act_cost": "100 kJ"
+    "act_cost": 100
   },
   {
     "id": "bio_scent_mask",
@@ -1214,8 +1214,8 @@
     "occupied_bodyparts": [ [ "torso", 3 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "active_flags": [ "NO_SCENT" ],
-    "act_cost": "1 kJ",
-    "react_cost": "1 kJ",
+    "act_cost": 1,
+    "react_cost": 1,
     "time": "1 m"
   },
   {
@@ -1235,6 +1235,7 @@
     "flags": [ "BIONIC_TOGGLED" ],
     "active_flags": [ "STOP_SLEEP_DEPRIVATION" ],
     "occupied_bodyparts": [ [ "head", 1 ], [ "torso", 1 ] ],
+    "act_cost": 0,
     "react_cost": "1 kJ",
     "time": "100 s"
   },
@@ -1253,7 +1254,7 @@
     "name": { "str": "Shockwave Generator" },
     "description": "You generate a powerful shockwave, knocking back all nearby creatures.  Targets are stunned briefly, take damage and additional stun upon impact with impassable terrain, and knockback any creatures they collide with.",
     "occupied_bodyparts": [ [ "torso", 20 ] ],
-    "act_cost": "250 kJ"
+    "act_cost": 250
   },
   {
     "id": "bio_sleepy",
@@ -1394,7 +1395,7 @@
     "name": { "str": "Teleportation Unit" },
     "description": "This highly experimental unit folds space over short distances, instantly transporting your body up to 25 feet at the cost of much power.  Note that prolonged or frequent use may have dangerous side effects.",
     "occupied_bodyparts": [ [ "torso", 16 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 4 ], [ "leg_r", 4 ] ],
-    "act_cost": "250 kJ"
+    "act_cost": 250
   },
   {
     "id": "bio_thumbs",
@@ -1423,7 +1424,7 @@
       [ "foot_l", 1 ],
       [ "foot_r", 1 ]
     ],
-    "act_cost": "50 kJ"
+    "act_cost": 50
   },
   {
     "id": "bio_tools",
