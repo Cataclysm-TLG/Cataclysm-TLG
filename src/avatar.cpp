@@ -357,15 +357,6 @@ void avatar::set_active_mission( mission &cur_mission )
     }
 }
 
-void avatar::update_active_mission()
-{
-    if( active_missions.empty() ) {
-        active_mission = nullptr;
-    } else {
-        active_mission = active_missions.front();
-    }
-}
-
 void avatar::on_mission_assignment( mission &new_mission )
 {
     active_missions.push_back( &new_mission );
@@ -394,7 +385,11 @@ void avatar::on_mission_finished( mission &cur_mission )
         active_missions.erase( iter );
     }
     if( &cur_mission == active_mission ) {
-        update_active_mission();
+        if( active_missions.empty() ) {
+            active_mission = nullptr;
+        } else {
+            active_mission = active_missions.front();
+        }
     }
 }
 
@@ -420,7 +415,11 @@ void avatar::remove_active_mission( mission &cur_mission )
     }
 
     if( &cur_mission == active_mission ) {
-        update_active_mission();
+        if( active_missions.empty() ) {
+            active_mission = nullptr;
+        } else {
+            active_mission = active_missions.front();
+        }
     }
 }
 
@@ -1042,12 +1041,14 @@ void avatar::reset_stats()
     // Starvation
     const float bmi = get_bmi_fat();
     if( bmi < character_weight_category::normal ) {
-        const stat_mod wpen = get_weight_penalty();
+        const int str_penalty = std::floor( ( 1.0f - ( get_bmi_fat() /
+                                              character_weight_category::normal ) ) * str_max );
+        const int dexint_penalty = std::floor( ( character_weight_category::normal - bmi ) * 3.0f );
         add_miss_reason( _( "You're weak from hunger." ),
                          static_cast<unsigned>( ( get_starvation() + 300 ) / 1000 ) );
-        mod_str_bonus( -wpen.strength );
-        mod_dex_bonus( -wpen.dexterity );
-        mod_int_bonus( -wpen.intelligence );
+        mod_str_bonus( -1 * str_penalty );
+        mod_dex_bonus( -1 * dexint_penalty );
+        mod_int_bonus( -1 * dexint_penalty );
     }
     // Thirst
     if( get_thirst() >= 200 ) {

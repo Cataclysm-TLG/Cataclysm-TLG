@@ -402,7 +402,6 @@ class avatar : public Character
          * The currently active mission, or null if no mission is currently in progress.
          */
         mission *active_mission;
-        void update_active_mission();
         /**
         * diary to track player progression and to write the players stroy
         */

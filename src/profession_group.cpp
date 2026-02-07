@@ -1,7 +1,6 @@
 #include "profession_group.h"
 
 #include "assign.h"
-#include "debug.h"
 #include "generic_factory.h"
 
 namespace
@@ -28,7 +27,8 @@ void profession_group::load_profession_group( const JsonObject &jo, const std::s
 
 void profession_group::load( const JsonObject &jo, std::string_view )
 {
-    mandatory( jo, was_loaded, "professions", profession_list );
+    assign( jo, "id", id );
+    assign( jo, "professions", profession_list );
 
 }
 

@@ -1199,17 +1199,6 @@ void hacksaw_activity_actor::start( player_activity &act, Character &/*who*/ )
     act.moves_left = act.moves_total;
 }
 
-static void tool_out_of_charges( Character &who, const std::string &tool_name )
-{
-    if( who.is_avatar() ) {
-        who.add_msg_if_player( m_bad, _( "Your %1$s ran out of charges." ), tool_name );
-    } else { // who.is_npc()
-        add_msg_if_player_sees( who.pos_bub(), _( "%1$s %2$s ran out of charges." ), who.disp_name( false,
-                                true ), tool_name );
-    }
-    who.cancel_activity();
-}
-
 void hacksaw_activity_actor::do_turn( player_activity &/*act*/, Character &who )
 {
     map &here = get_map();
@@ -1231,7 +1220,13 @@ void hacksaw_activity_actor::do_turn( player_activity &/*act*/, Character &who )
                 sounds::sound( target, 15, sounds::sound_t::destructive_activity, _( "grnd grnd grnd" ) );
             }
         } else {
-            tool_out_of_charges( who, tool->tname() );
+            if( who.is_avatar() ) {
+                who.add_msg_if_player( m_bad, _( "Your %1$s ran out of charges." ), tool->tname() );
+            } else { // who.is_npc()
+                add_msg_if_player_sees( who.pos_bub(), _( "%1$s %2$s ran out of charges." ), who.disp_name( false,
+                                        true ), tool->tname() );
+            }
+            who.cancel_activity();
         }
     } else {
         map &here = get_map();
@@ -1248,7 +1243,13 @@ void hacksaw_activity_actor::do_turn( player_activity &/*act*/, Character &who )
                 sounds::sound( target, 15, sounds::sound_t::destructive_activity, _( "grnd grnd grnd" ) );
             }
         } else {
-            tool_out_of_charges( who, type.value()->nname( 1 ) );
+            if( who.is_avatar() ) {
+                who.add_msg_if_player( m_bad, _( "Your %1$s ran out of charges." ), type.value()->nname( 1 ) );
+            } else { // who.is_npc()
+                add_msg_if_player_sees( who.pos_bub(), _( "%1$s %2$s ran out of charges." ), who.disp_name( false,
+                                        true ), type.value()->nname( 1 ) );
+            }
+            who.cancel_activity();
         }
     }
 }
@@ -1434,13 +1435,6 @@ std::unique_ptr<activity_actor> bikerack_racking_activity_actor::deserialize( Js
     return actor.clone();
 }
 
-static void finish_gliding( player_activity &act, Character &you )
-{
-    you.remove_effect( effect_gliding );
-    you.gravity_check();
-    act.set_to_null();
-}
-
 void glide_activity_actor::do_turn( player_activity &act, Character &you )
 {
     map &here = get_map();
@@ -1476,7 +1470,9 @@ void glide_activity_actor::do_turn( player_activity &act, Character &you )
         you.add_msg_player_or_npc( m_good,
                                    _( "You come to a gentle landing." ),
                                    _( "<npcname> comes to a gentle landing." ) );
-        finish_gliding( act, you );
+        you.remove_effect( effect_gliding );
+        you.gravity_check();
+        act.set_to_null();
         return;
     }   // Have we crashed into a wall?
     if( here.impassable( checknewpos ) ) {
@@ -1484,11 +1480,15 @@ void glide_activity_actor::do_turn( player_activity &act, Character &you )
                                    _( "You collide with %s, bringing an abrupt halt to your glide." ),
                                    _( "<npcname> collides with %s, bringing an abrupt halt to their glide." ),
                                    here.tername( checknewpos ) );
-        finish_gliding( act, you );
+        you.remove_effect( effect_gliding );
+        you.gravity_check();
+        act.set_to_null();
         return;
     }
     if( !you.can_fly() ) {
-        finish_gliding( act, you );
+        you.remove_effect( effect_gliding );
+        you.gravity_check();
+        act.set_to_null();
         return;
     }
     Creature *creature_ahead = get_creature_tracker().creature_at( newpos );
@@ -1504,7 +1504,9 @@ void glide_activity_actor::do_turn( player_activity &act, Character &you )
             if( creature_ahead->get_size() < creature_size::huge ) {
                 creature_ahead->add_effect( effect_downed, 2_turns, false );
             }
-            finish_gliding( act, you );
+            you.remove_effect( effect_gliding );
+            you.gravity_check();
+            act.set_to_null();
             return;
         }
         you.add_msg_player_or_npc( m_good,
@@ -1590,7 +1592,9 @@ void glide_activity_actor::finish( player_activity &act, Character &you )
     you.add_msg_player_or_npc( m_good,
                                _( "You come to a gentle landing." ),
                                _( "<npcname> comes to a gentle landing." ) );
-    finish_gliding( act, you );
+    you.remove_effect( effect_gliding );
+    you.gravity_check();
+    act.set_to_null();
 }
 
 bikerack_unracking_activity_actor::bikerack_unracking_activity_actor( const vehicle &parent_vehicle,
@@ -2444,7 +2448,13 @@ void boltcutting_activity_actor::do_turn( player_activity &/*act*/, Character &w
     if( tool->ammo_sufficient( &who ) ) {
         tool->ammo_consume( tool->ammo_required(), here, tool.pos_bub( here ), &who );
     } else {
-        tool_out_of_charges( who, tool->tname() );
+        if( who.is_avatar() ) {
+            who.add_msg_if_player( m_bad, _( "Your %1$s ran out of charges." ), tool->tname() );
+        } else { // who.is_npc()
+            add_msg_if_player_sees( who.pos_bub(), _( "%1$s %2$s ran out of charges." ), who.disp_name( false,
+                                    true ), tool->tname() );
+        }
+        who.cancel_activity();
     }
 }
 
@@ -6078,7 +6088,13 @@ void oxytorch_activity_actor::do_turn( player_activity &/*act*/, Character &who 
             sounds::sound( target, 10, sounds::sound_t::destructive_activity, _( "hissssssssss!" ) );
         }
     } else {
-        tool_out_of_charges( who, tool->tname() );
+        if( who.is_avatar() ) {
+            who.add_msg_if_player( m_bad, _( "Your %1$s ran out of charges." ), tool->tname() );
+        } else { // who.is_npc()
+            add_msg_if_player_sees( who.pos_bub(), _( "%1$s %2$s ran out of charges." ), who.disp_name( false,
+                                    true ), tool->tname() );
+        }
+        who.cancel_activity();
     }
 }
 
@@ -6460,7 +6476,13 @@ void prying_activity_actor::do_turn( player_activity &/*act*/, Character &who )
             sfx::play_activity_sound( "tool", "hammer", sfx::get_heard_volume( target ) );
         }
     } else {
-        tool_out_of_charges( who, tool->tname() );
+        if( who.is_avatar() ) {
+            who.add_msg_if_player( m_bad, _( "Your %1$s ran out of charges." ), tool->tname() );
+        } else { // who.is_npc()
+            add_msg_if_player_sees( who.pos_bub(), _( "%1$s %2$s ran out of charges." ), who.disp_name( false,
+                                    true ), tool->tname() );
+        }
+        who.cancel_activity();
     }
 }
 

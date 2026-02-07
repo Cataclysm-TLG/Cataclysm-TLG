@@ -1,12 +1,5 @@
 #include "generic_factory.h"
 
-#include "catacharset.h"
-#include "color.h"
-#include "game_constants.h"
-#include "output.h"
-#include "wcwidth.h"
-
-
 bool one_char_symbol_reader( const JsonObject &jo, std::string_view member_name, int &sym,
                              bool )
 {
@@ -53,18 +46,6 @@ bool unicode_codepoint_from_symbol_reader( const JsonObject &jo,
     return true;
 }
 
-bool unicode_symbol_reader( const JsonObject &jo, const std::string_view member_name,
-                            std::string &member, bool was_loaded )
-{
-    uint32_t codepoint;
-    bool read = unicode_codepoint_from_symbol_reader( jo, member_name, codepoint, was_loaded );
-    if( read ) {
-        member = utf32_to_utf8( codepoint );
-        return true;
-    }
-    return false;
-}
-
 float read_proportional_entry( const JsonObject &jo, std::string_view key )
 {
     if( jo.has_float( key ) ) {
@@ -75,24 +56,4 @@ float read_proportional_entry( const JsonObject &jo, std::string_view key )
         return scalar;
     }
     return 1.0f;
-}
-
-nc_color nc_color_reader::get_next( const JsonValue &jv ) const
-{
-    if( !jv.test_string() ) {
-        jv.throw_error( "invalid format for nc_color" );
-    }
-    return color_from_string( jv.get_string() );
-}
-
-float activity_level_reader::get_next( const JsonValue &jv ) const
-{
-    if( !jv.test_string() ) {
-        jv.throw_error( "Invalid activity level" );
-    }
-    auto it = activity_levels_map.find( jv.get_string() );
-    if( it == activity_levels_map.end() ) {
-        jv.throw_error( "Invalid activity level" );
-    }
-    return it->second;
 }

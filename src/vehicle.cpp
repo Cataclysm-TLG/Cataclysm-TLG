@@ -5237,10 +5237,6 @@ bool vehicle::balanced_wheel_config( map &here ) const
     std::vector<double> angles;
     for( const int &w : wheelcache ) {
         const point_rel_ms &pt = parts[ w ].mount;
-        if( pt == com ) {
-            // if com coincides with a wheel position, it's on the convex hull
-            return true;
-        }
         angles.push_back( std::atan2( pt.y() - com.y(), pt.x() - com.x() ) );
     }
 
