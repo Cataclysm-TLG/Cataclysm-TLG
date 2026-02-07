@@ -474,10 +474,12 @@ void tileset_cache::loader::create_textures_from_tile_atlas( const SDL_Surface_P
 
     /** perform color filter conversion here */
     using tiles_pixel_color_entry = std::tuple<std::vector<texture>*, std::string>;
-    std::array<tiles_pixel_color_entry, 5> tile_values_data = {{
+    std::array<tiles_pixel_color_entry, 7> tile_values_data = {{
             { std::make_tuple( &ts.tile_values, "color_pixel_none" ) },
             { std::make_tuple( &ts.shadow_tile_values, "color_pixel_grayscale" ) },
             { std::make_tuple( &ts.night_tile_values, "color_pixel_nightvision" ) },
+            { std::make_tuple( &ts.underwater_tile_values, "color_pixel_underwater" ) },
+            { std::make_tuple( &ts.underwater_dark_tile_values, "color_pixel_underwater_dark" ) },
             { std::make_tuple( &ts.overexposed_tile_values, "color_pixel_overexposed" ) },
             { std::make_tuple( &ts.memory_tile_values, tilecontext->memory_map_mode ) }
         }
@@ -575,6 +577,8 @@ void tileset_cache::loader::load_tileset( const cata_path &img_path, const bool 
     extend_vector_by( ts.shadow_tile_values, expected_tilecount );
     extend_vector_by( ts.night_tile_values, expected_tilecount );
     extend_vector_by( ts.overexposed_tile_values, expected_tilecount );
+    extend_vector_by( ts.underwater_tile_values, expected_tilecount );
+    extend_vector_by( ts.underwater_dark_tile_values, expected_tilecount );
     extend_vector_by( ts.memory_tile_values, expected_tilecount );
 
     for( const SDL_Rect sub_rect : output_range ) {
@@ -3051,6 +3055,17 @@ bool cata_tiles::draw_sprite_at(
             }
         } else {
             if( const texture *ptr = tileset_ptr->get_night_tile( sprite_index ) ) {
+                sprite_tex = ptr;
+            }
+        }
+    // TODO: Review if this works for remote view e.g. RC cars.
+    } else if( get_player_character().is_underwater() ) {
+        if( ll != lit_level::LOW ) {
+            if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
+                sprite_tex = ptr;
+            }
+        } else {
+            if( const auto ptr = tileset_ptr->get_underwater_dark_tile( sprite_index ) ) {
                 sprite_tex = ptr;
             }
         }
