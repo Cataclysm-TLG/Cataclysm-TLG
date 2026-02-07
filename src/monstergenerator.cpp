@@ -761,8 +761,6 @@ void mtype::load( const JsonObject &jo, const std::string &src )
 
     optional( jo, was_loaded, "description", description );
 
-    optional( jo, was_loaded, "ascii_picture", picture_id );
-
     // Assign a default "flesh" material to prevent crash (#48988)
     optional( jo, was_loaded, "material", mat, weighted_string_id_reader<material_id, int> {1}, {{{material_flesh, 1}}} );
     mat_portion_total = 0;
@@ -1745,21 +1743,4 @@ void pet_food_data::load( const JsonObject &jo )
 void pet_food_data::deserialize( const JsonObject &data )
 {
     load( data );
-}
-
-static void check_for_delete( const JsonObject &jo, const std::string_view name,
-                              std::optional<int> &value )
-{
-    if( !jo.has_member( name ) ) {
-        return;
-    }
-    std::optional<int> scratch;
-    // because this is delete, was_loaded is always true
-    optional( jo, true, name, scratch );
-    if( value.has_value() && scratch.has_value() && *scratch == *value ) {
-        value = std::nullopt;
-        return;
-    }
-    debugmsg( "Delete value for '%s' (%d) does not match existing (%d)", name, scratch.value_or( -1 ),
-              value.value_or( -1 ) );
 }
