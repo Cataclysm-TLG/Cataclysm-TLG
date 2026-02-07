@@ -13998,7 +13998,10 @@ void game::animate_weather()
         // No weather animation, nothing to do
         return;
     }
-
+    if( get_player_character().is_underwater() ) {
+        // Bail out if we're underwater, no animation needed.
+        return;
+    }
     const int dropCount = static_cast<int>( iEnd.x * iEnd.y * weather_info.factor );
 
     weather_printable wPrint;
