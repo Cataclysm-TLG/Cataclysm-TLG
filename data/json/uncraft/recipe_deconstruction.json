@@ -383,7 +383,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 2 } ],
-    "components": [ [ [ "chem_sulphuric_acid", 13 ] ], [ [ "lead", 1061 ] ], [ [ "plastic_chunk", 3 ] ] ]
+    "components": [ [ [ "chem_sulphuric_acid", 13 ] ], [ [ "lead", 900 ] ], [ [ "plastic_chunk", 3 ] ] ]
   },
   {
     "result": "battery_motorbike",
@@ -391,7 +391,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 2 } ],
-    "components": [ [ [ "chem_sulphuric_acid", 3 ] ], [ [ "lead", 159 ] ], [ [ "plastic_chunk", 2 ] ] ]
+    "components": [ [ [ "chem_sulphuric_acid", 3 ] ], [ [ "lead", 175 ] ], [ [ "plastic_chunk", 2 ] ] ]
   },
   {
     "result": "battery_motorbike_small",
@@ -399,7 +399,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 2 } ],
-    "components": [ [ [ "chem_sulphuric_acid", 1 ] ], [ [ "lead", 79 ] ], [ [ "plastic_chunk", 1 ] ] ]
+    "components": [ [ [ "chem_sulphuric_acid", 1 ] ], [ [ "lead", 90 ] ], [ [ "plastic_chunk", 1 ] ] ]
   },
   {
     "result": "bindle",
@@ -507,7 +507,7 @@
     "time": "1 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
-    "components": [ [ [ "spandex_sheet", 1 ] ], [ [ "thread_nomex", 5 ] ] ]
+    "components": [ [ [ "spandex_sheet", 1 ] ], [ [ "thread", 5 ] ] ]
   },
   {
     "result": "bikini_top",
@@ -515,7 +515,7 @@
     "time": "2 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
-    "components": [ [ [ "spandex_sheet", 1 ] ], [ [ "thread_nomex", 5 ] ], [ [ "thread", 10 ] ] ]
+    "components": [ [ [ "spandex_sheet", 1 ] ], [ [ "thread", 10 ] ] ]
   },
   {
     "result": "bikini_top_fur",
@@ -1763,7 +1763,7 @@
     "qualities": [ { "id": "SCREW", "level": 1 } ],
     "components": [
       [ [ "scrap_aluminum", 1 ] ],
-      [ [ "light_battery_cell", 1 ] ],
+      [ [ "medium_battery_cell", 1 ] ],
       [ [ "small_lcd_screen", 1 ] ],
       [ [ "memory_card", 1 ] ],
       [ [ "processor", 1 ] ]
@@ -2006,14 +2006,6 @@
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "felt_patch", 8 ] ] ]
-  },
-  {
-    "result": "nomex_patch",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "2 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "thread_nomex", 8 ] ] ]
   },
   {
     "result": "leather_sheet",
@@ -4035,24 +4027,6 @@
     "components": [ [ [ "nylon_sheet", 8 ] ], [ [ "element", 5 ] ], [ [ "cable", 5 ] ] ]
   },
   {
-    "result": "wearable_light",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "skill_used": "fabrication",
-    "time": "30 s",
-    "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "flashlight", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
-  },
-  {
-    "result": "wearable_big_light",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "skill_used": "fabrication",
-    "time": "30 s",
-    "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "heavy_flashlight", 1 ] ], [ [ "cotton_patch", 4 ] ] ]
-  },
-  {
     "result": "adobe_pallet_done",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
@@ -4848,7 +4822,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "nomex_patch", 8 ] ] ]
+    "components": [ [ [ "neoprene_patch", 8 ] ] ]
   },
   {
     "result": "nomex_sheet",
@@ -5844,7 +5818,7 @@
     "skill_used": "tailor",
     "time": "15 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 20 ] ], [ [ "thread_kevlar", 80 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 26 ] ], [ [ "thread_kevlar", 80 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5854,7 +5828,7 @@
     "skill_used": "tailor",
     "time": "10 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 15 ] ], [ [ "thread_kevlar", 50 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 12 ] ], [ [ "thread_kevlar", 50 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5864,7 +5838,7 @@
     "skill_used": "tailor",
     "time": "20 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 50 ] ], [ [ "thread_kevlar", 150 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 24 ] ], [ [ "thread_kevlar", 150 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {

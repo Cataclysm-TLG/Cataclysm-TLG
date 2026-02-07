@@ -137,7 +137,6 @@
       { "monster": "mon_sewer_snake", "weight": 240, "cost_multiplier": 0 },
       { "monster": "mon_rat", "weight": 310, "cost_multiplier": 0 },
       { "monster": "mon_rat", "weight": 100, "cost_multiplier": 0, "pack_size": [ 3, 6 ] },
-      { "monster": "mon_gator", "weight": 40, "cost_multiplier": 2, "pack_size": [ 1, 2 ] },
       { "monster": "mon_bullfrog", "weight": 40, "cost_multiplier": 0 },
       { "monster": "mon_fly_small", "weight": 60, "cost_multiplier": 0 },
       { "monster": "mon_large_cockroach", "weight": 120, "cost_multiplier": 0, "pack_size": [ 2, 3 ] },
@@ -148,7 +147,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "sewage_treatment_0_0_0", "sewage_treatment_1_0_0" ], [ "sewage_treatment_0_1_0", "sewage_treatment_1_1_0" ] ],
     "weight": 250,
     "object": {
@@ -269,7 +267,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [ "sewage_treatment_0_0_roof", "sewage_treatment_1_0_roof" ],
       [ "sewage_treatment_0_1_roof", "sewage_treatment_1_1_roof" ]
@@ -339,7 +336,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "sewage_treatment_1_0_upper_roof" ],
     "object": {
       "rows": [
@@ -373,7 +369,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [ "sewage_treatment_0_0_-1", "sewage_treatment_1_0_-1", "sewage_treatment_2_0_-1" ],
       [ "sewage_treatment_0_1_-1", "sewage_treatment_1_1_-1", "sewage_treatment_2_1_-1" ]
@@ -492,7 +487,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "sewage_treatment_0_1_-1" ],
     "//": "10% chance of a hidden CHUD lair",
     "weight": 25,
@@ -541,7 +535,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "sewage_treatment_0_1_-1" ],
     "//": "Easter egg - TMNT reference",
     "weight": 1,

@@ -460,6 +460,7 @@ static const trait_id trait_DEFT( "DEFT" );
 static const trait_id trait_DISRESISTANT( "DISRESISTANT" );
 static const trait_id trait_DOWN( "DOWN" );
 static const trait_id trait_EATHEALTH( "EATHEALTH" );
+static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_ELFA_FNV( "ELFA_FNV" );
 static const trait_id trait_ELFA_NV( "ELFA_NV" );
 static const trait_id trait_FACIAL_HAIR_NONE( "FACIAL_HAIR_NONE" );
@@ -2524,7 +2525,7 @@ int Character::footstep_sound() const
             volume = calculate_by_enchantment( volume, enchant_vals::mod::FOOTSTEP_NOISE );
         }
     }
-    return std::round( volume );
+    return static_cast<int>( std::round( volume ) );
 }
 
 int Character::clatter_sound() const
@@ -2539,7 +2540,7 @@ void Character::make_footstep_noise() const
     }
 
     const int volume = footstep_sound();
-    if( volume <= 0 ) {
+    if( volume < 1 ) {
         return;
     }
     if( is_mounted() ) {
@@ -2557,7 +2558,7 @@ void Character::make_clatter_sound() const
 {
 
     const int volume = clatter_sound();
-    if( volume <= 0 ) {
+    if( volume < 1 ) {
         return;
     }
     sounds::sound( pos_bub(), volume, sounds::sound_t::movement, _( "clattering equipment" ), true,
@@ -3083,6 +3084,9 @@ std::vector<const item *> Character::get_pseudo_items() const
 bool Character::practice( const skill_id &id, int amount, int cap, bool suppress_warning,
                           bool allow_multilevel )
 {
+    if( amount == 0 ) {
+        return false;
+    }
     SkillLevel &level = get_skill_level_object( id );
     const Skill &skill = id.obj();
     if( in_sleep_state() ||
@@ -3134,6 +3138,7 @@ bool Character::practice( const skill_id &id, int amount, int cap, bool suppress
         }
     }
     bool level_up = false;
+    // NOTE: Normally always training, this training toggle is just retained for tests
     if( amount > 0 && level.isTraining() ) {
         int old_practical_level = static_cast<int>( get_skill_level( id ) );
         int old_theoretical_level = get_knowledge_level( id );
@@ -3155,14 +3160,15 @@ bool Character::practice( const skill_id &id, int amount, int cap, bool suppress
                      new_theoretical_level );
         }
         if( is_avatar() && new_practical_level > cap ) {
-            //inform player immediately that the current recipe can't be used to train further
+            // Inform player immediately that the current recipe can't be used to train further.
             add_msg( m_info, _( "You feel that %s tasks of this level are becoming trivial." ),
                      skill_name );
         }
 
         // Apex Predators don't think about much other than killing.
         // They don't lose Focus when practicing combat skills.
-        if( !( has_flag( json_flag_PRED4 ) && skill.is_combat_skill() ) ) {
+        const bool predator_training_combat = has_flag( json_flag_PRED4 ) && skill.is_combat_skill();
+        if( skill.training_consumes_focus() && !predator_training_combat ) {
             // Base reduction on the larger of 1% of total, or practice amount.
             // The latter kicks in when long actions like crafting
             // apply many turns of gains at once.
@@ -4414,7 +4420,7 @@ units::mass Character::get_weight() const
     ret += wornWeight;             // Weight of worn items
     ret += weapon.weight();        // Weight of wielded item
     ret += bionics_weight();       // Weight of installed bionics
-    return ret;
+    return enchantment_cache->modify_value( enchant_vals::mod::TOTAL_WEIGHT, ret );
 }
 
 std::pair<int, int> Character::climate_control_strength() const
@@ -5550,6 +5556,7 @@ void Character::update_needs( int rate_multiplier )
         }
     } else if( asleep ) {
         if( rates.recovery > 0.0f ) {
+
             int recovered = roll_remainder( rates.recovery * rate_multiplier );
             if( get_fatigue() - recovered < -20 ) {
                 // Should be wake up, but that could prevent some retroactive regeneration
@@ -5573,7 +5580,6 @@ void Character::update_needs( int rate_multiplier )
                 if( has_effect( effect_melatonin ) ) {
                     rest_modifier += 1;
                 }
-
                 const int comfort = get_comfort_at( pos_bub() ).comfort;
                 if( comfort >= comfort_data::COMFORT_VERY_COMFORTABLE ) {
                     rest_modifier *= 3;
@@ -5590,35 +5596,14 @@ void Character::update_needs( int rate_multiplier )
                 } else if( get_fatigue() >= fatigue_levels::EXHAUSTED ) {
                     rest_modifier = ( rest_modifier > 2 ) ? rest_modifier - 2 : 1;
                 }
-
                 // Recovered is multiplied by 2 as well, since we spend 1/3 of the day sleeping
                 mod_sleep_deprivation( -rest_modifier * ( recovered * 2 ) );
 
             }
         }
         map &here = get_map();
-        if( calendar::once_every( 10_minutes ) && ( has_trait( trait_CHLOROMORPH ) ||
-                has_trait( trait_M_SKIN3 ) || has_trait( trait_WATERSLEEP ) ) &&
+        if( calendar::once_every( 10_minutes ) && has_trait( trait_M_SKIN3 ) &&
             here.is_outside( pos_bub() ) ) {
-            if( has_trait( trait_CHLOROMORPH ) ) {
-                // Hunger and thirst fall before your Chloromorphic physiology!
-                if( incident_sun_irradiance( get_weather().weather_id, calendar::turn ) > irradiance::low ) {
-                    if( has_active_mutation( trait_CHLOROMORPH ) && ( get_fatigue() <= 25 ) ) {
-                        set_fatigue( 25 );
-                    }
-                    if( get_hunger() >= -30 ) {
-                        mod_hunger( -5 );
-                        // photosynthesis warrants absorbing kcal directly
-                        mod_stored_kcal( 43 );
-                    }
-                }
-                if( get_thirst() >= -40 ) {
-                    mod_thirst( -5 );
-                }
-                // Assuming eight hours of sleep, this will take care of Iron and Calcium needs
-                vitamin_mod( vitamin_iron, 2 );
-                vitamin_mod( vitamin_calcium, 2 );
-            }
             if( has_trait( trait_M_SKIN3 ) ) {
                 // Spores happen!
                 if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() ) ) {
@@ -5629,9 +5614,6 @@ void Character::update_needs( int rate_multiplier )
                         spores(); // spawn some P O O F Y   B O I S
                     }
                 }
-            }
-            if( has_trait( trait_WATERSLEEP ) ) {
-                mod_fatigue( -3 ); // Fish get better sleep in water
             }
         }
     }
@@ -6104,11 +6086,13 @@ void Character::toolmod_add( item_location tool, item_location mod )
         return;
     }
 
-    if( !query_yn( _( "Permanently install your %1$s in your %2$s?" ),
-                   colorize( mod->tname(), mod->color_in_inventory() ),
-                   colorize( tool->tname(), tool->color_in_inventory() ) ) ) {
-        add_msg_if_player( _( "Never mind." ) );
-        return; // player canceled installation
+    if( mod->is_irremovable() ) {
+        if( !query_yn( _( "Permanently install your %1$s in your %2$s?" ),
+                       colorize( mod->tname(), mod->color_in_inventory() ),
+                       colorize( tool->tname(), tool->color_in_inventory() ) ) ) {
+            add_msg_if_player( _( "Never mind." ) );
+            return; // player canceled installation
+        }
     }
 
     assign_activity( ACT_TOOLMOD_ADD, 1, -1 );
@@ -6767,7 +6751,8 @@ bool Character::has_calorie_deficit() const
 
 units::mass Character::bodyweight() const
 {
-    return bodyweight_fat() + bodyweight_lean();
+    return std::max( 1_gram, enchantment_cache->modify_value( enchant_vals::mod::WEIGHT,
+                     bodyweight_fat() + bodyweight_lean() ) );
 }
 
 units::mass Character::bodyweight_fat() const
@@ -6951,7 +6936,7 @@ void Character::mend_item( item_location &&obj, bool interactive )
         menu.text = _( "Toggle which fault?" );
         std::vector<std::pair<fault_id, bool>> opts;
         for( const auto &f : obj->faults_potential() ) {
-            opts.emplace_back( f, !!obj->faults.count( f ) );
+            opts.emplace_back( f, obj->has_fault( f ) );
             menu.addentry( -1, true, -1, string_format(
                                opts.back().second ? pgettext( "fault", "Mend: %s" ) : pgettext( "fault", "Set: %s" ),
                                f.obj().name() ) );
@@ -6963,9 +6948,9 @@ void Character::mend_item( item_location &&obj, bool interactive )
         menu.query();
         if( menu.ret >= 0 ) {
             if( opts[menu.ret].second ) {
-                obj->faults.erase( opts[menu.ret].first );
+                obj->remove_fault( opts[menu.ret].first );
             } else {
-                obj->faults.insert( opts[menu.ret].first );
+                obj.set_fault( opts[menu.ret].first, true, false );
             }
         }
         return;
@@ -7035,7 +7020,7 @@ void Character::mend_item( item_location &&obj, bool interactive )
             auto tools = reqs.get_folded_tools_list( fold_width, col, inv );
             auto comps = reqs.get_folded_components_list( fold_width, col, inv, is_crafting_component );
 
-            std::string descr = word_rewrap( opt.fault->description(), 80 ) + "\n\n";
+            std::string descr = word_rewrap( obj.get_item()->get_fault_description( opt.fault ), 80 ) + "\n\n";
             for( const fault_id &fid : fix.faults_removed ) {
                 if( obj->has_fault( fid ) ) {
                     descr += string_format( _( "Removes fault: <color_green>%s</color>\n" ), fid->name() );
@@ -7046,10 +7031,12 @@ void Character::mend_item( item_location &&obj, bool interactive )
             for( const fault_id &fid : fix.faults_added ) {
                 descr += string_format( _( "Adds fault: <color_yellow>%s</color>\n" ), fid->name() );
             }
-            if( fix.mod_damage > 0 ) {
-                descr += string_format( _( "<color_green>Repairs</color> %d damage.\n" ), fix.mod_damage );
-            } else if( fix.mod_damage < 0 ) {
-                descr += string_format( _( "<color_red>Applies</color> %d damage.\n" ), -fix.mod_damage );
+            if( fix.mod_damage < 0 ) {
+                descr += string_format( _( "<color_green>Repairs</color> %d damage.\n" ),
+                                        -fix.mod_damage / itype::damage_scale );
+            } else if( fix.mod_damage > 0 ) {
+                descr += string_format( _( "<color_red>Applies</color> %d damage.\n" ),
+                                        fix.mod_damage / itype::damage_scale );
             }
 
             opt.time_to_fix = fix.time;
@@ -7892,9 +7879,10 @@ void Character::signal_nemesis()
 
 void Character::vomit()
 {
+    const units::volume stomach_contents_before_vomit = stomach.contains();
     get_event_bus().send<event_type::throws_up>( getID() );
 
-    if( stomach.contains() != 0_ml ) {
+    if( stomach_contents_before_vomit != 0_ml ) {
         get_map().add_field( adjacent_tile(), fd_bile, 1 );
         add_msg_player_or_npc( m_bad, _( "You throw up heavily!" ), _( "<npcname> throws up heavily!" ) );
     }
@@ -7926,7 +7914,7 @@ void Character::vomit()
     remove_effect( effect_pkill2 );
     remove_effect( effect_pkill3 );
     // Don't wake up when just retching
-    if( stomach.contains() > 0_ml ) {
+    if( stomach_contents_before_vomit > 0_ml ) {
         wake_up();
     }
 }
@@ -8367,14 +8355,22 @@ ret_val<void> Character::can_wield( const item &it ) const
                                             weapname(), it.tname() );
     }
     monster *mount = mounted_creature.get();
-    if( it.is_two_handed( *this ) && ( !has_two_arms_lifting() ||
-                                       worn_with_flag( flag_RESTRICT_HANDS ) ) &&
-        !( is_mounted() && mount->has_flag( mon_flag_RIDEABLE_MECH ) &&
-           mount->type->mech_weapon && it.typeId() == mount->type->mech_weapon ) ) {
-        if( worn_with_flag( flag_RESTRICT_HANDS ) ) {
+    const itype_id mech_weapon = is_mounted() ? mount->type->mech_weapon : itype_id::NULL_ID();
+    bool mounted_mech = is_mounted() && mount->has_flag( mon_flag_RIDEABLE_MECH ) &&
+                        mech_weapon;
+    bool armor_restricts_hands = worn_with_flag( flag_RESTRICT_HANDS );
+    bool item_twohand = it.has_flag( flag_ALWAYS_TWOHAND );
+    bool missing_arms = !has_two_arms_lifting();
+    bool two_handed = it.is_two_handed( *this );
+
+    if( two_handed &&
+        ( missing_arms || armor_restricts_hands ) &&
+        !( mounted_mech && it.typeId() == mech_weapon ) //ignore this check for mech weapons
+      ) {
+        if( armor_restricts_hands ) {
             return ret_val<void>::make_failure(
                        _( "Something you are wearing hinders the use of both hands." ) );
-        } else if( it.has_flag( flag_ALWAYS_TWOHAND ) ) {
+        } else if( item_twohand ) {
             return ret_val<void>::make_failure( _( "You can't wield the %s with only one arm." ),
                                                 it.tname() );
         } else {
@@ -8382,16 +8378,19 @@ ret_val<void> Character::can_wield( const item &it ) const
                                                 it.tname() );
         }
     }
-    if( is_mounted() && mount->has_flag( mon_flag_RIDEABLE_MECH ) &&
-        mount->type->mech_weapon && it.typeId() != mount->type->mech_weapon ) {
+    if( mounted_mech && it.typeId() != mech_weapon ) {
         return ret_val<void>::make_failure( _( "You cannot wield anything while piloting a mech." ) );
     }
     if( controlling_vehicle ) {
-        if( worn_with_flag( flag_RESTRICT_HANDS ) ) {
+        if( two_handed ) {
+            return ret_val<void>::make_failure( _( "You need both hands to wield the %s but are driving." ),
+                                                it.tname() );
+        }
+        if( armor_restricts_hands ) {
             return ret_val<void>::make_failure(
                        _( "Something you are wearing hinders the use of both hands." ) );
         }
-        if( !has_two_arms_lifting() || it.has_flag( flag_ALWAYS_TWOHAND ) ) {
+        if( missing_arms || item_twohand ) {
             return ret_val<void>::make_failure( _( "You can't wield your %s while driving." ),
                                                 it.tname() );
         }
@@ -9129,7 +9128,6 @@ void Character::rooted()
 // This assumes that daily Iron, Calcium, and Thirst needs should be filled at the same rate.
 // Baseline humans need 96 Iron and Calcium, and 288 Thirst per day.
 // Thirst level -40 puts it right in the middle of the 'Hydrated' zone.
-// TODO: The rates for iron, calcium, and thirst should probably be pulled from the nutritional data rather than being hardcoded here, so that future balance changes don't break this.
 {
     if( ( has_trait( trait_ROOTS2 ) || has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
         get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) && is_barefoot() ) {
@@ -9137,10 +9135,12 @@ void Character::rooted()
         if( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) {
             time_to_full += -14400;    // -4 hours
         }
+        if( in_sleep_state() ) {
+            time_to_full += -3600;    // -1 hour
+        }
         if( x_in_y( 96, time_to_full ) ) {
             vitamin_mod( vitamin_iron, 1 );
             vitamin_mod( vitamin_calcium, 1 );
-            mod_daily_health( 5, 50 );
         }
         if( get_thirst() > -40 && x_in_y( 288, time_to_full ) ) {
             mod_thirst( -1 );
@@ -9523,7 +9523,7 @@ void Character::resume_backlog_activity()
 
 void Character::fall_asleep()
 {
-    // Communicate to the player that they are using items on the floor
+    // Communicate to the player that they are using items on the floor.
     std::string item_name = is_snuggling();
     if( item_name == "many" ) {
         if( one_in( 15 ) ) {
@@ -9538,9 +9538,7 @@ void Character::fall_asleep()
             add_msg_if_player( _( "You use your %s to keep warm." ), item_name );
         }
     }
-
     get_comfort_at( pos_bub() ).add_sleep_msgs( *this );
-
     if( has_active_bionic( bio_sleep_shutdown ) ) {
         add_msg_if_player( _( "Sleep Mode activated.  Disabling sensory response." ) );
     }
@@ -9556,7 +9554,14 @@ void Character::fall_asleep()
         // In practice, the fatigue from filling the tank from (no msg) to Time For Bed
         // will last about 8 days.
     } else {
-        fall_asleep( 10_hours );    // default max sleep time.
+        /* Fall asleep for a max of 10 hours by default. This time can be longer if we have
+        a mutation like Sleepy. We will automatically wake up when we're no longer tired,
+        so shorter naps are already handled. */
+        int sleep_hours = 36000;
+        sleep_hours = static_cast<int>( std::max( enchantment_cache->modify_value(
+                                            enchant_vals::mod::FATIGUE,
+                                            sleep_hours ), 36000.0 ) );
+        fall_asleep( time_duration::from_turns( sleep_hours ) );
     }
 }
 
@@ -10915,7 +10920,7 @@ void Character::place_corpse( map *here )
             cbm.set_flag( flag_FILTHY );
             cbm.set_flag( flag_NO_STERILE );
             cbm.set_flag( flag_NO_PACKED );
-            cbm.faults.emplace( fault_bionic_salvaged );
+            cbm.set_fault( fault_bionic_salvaged );
             body.put_in( cbm, pocket_type::CORPSE );
         }
     }
@@ -11021,7 +11026,7 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
                 }
             }
         }
-        bool in_range = ( is_adjacent( &critter, true ) ) || ( ( posz() == critter.posz() ) && ( static_cast<int>( std::round( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) ) <= range ) ) || ( std::ceil( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range );
+        bool in_range = is_adjacent( &critter, true ) || ( ( posz() == critter.posz() ) && trig_dist( pos_bub(), critter.pos_bub() ) <= range ) || static_cast<int>( std::ceil( trig_dist_precise( pos_bub(), critter.pos_bub() ) ) ) <= range;
         // TODO: get rid of fake npcs (pos() check)
         bool valid_target = this != &critter && pos_bub() != critter.pos_bub() && attitude_to( critter ) != Creature::Attitude::FRIENDLY;
         return valid_target && in_range && can_see;
@@ -11181,6 +11186,14 @@ void Character::echo_pulse()
                            "none", "none" );
         }
     }
+}
+
+bool Character::sees_with_echolocation() const
+{
+    if( has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() ) {
+        return true;
+    }
+    return false;
 }
 
 bool Character::knows_trap( const tripoint_bub_ms &pos ) const

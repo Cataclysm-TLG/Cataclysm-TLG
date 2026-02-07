@@ -570,7 +570,7 @@ void Character::mutation_effect( const trait_id &mut, const bool worn_destroyed_
 
     for( const itype_id &armor : branch.integrated_armor ) {
         item tmparmor( armor );
-        wear_item( tmparmor, false );
+        wear_item( tmparmor, false, true, true, true );
     }
 
     remove_worn_items_with( [&]( item & armor ) {
@@ -875,7 +875,7 @@ void Character::activate_cached_mutation( const trait_id &mut )
 
     if( mut == trait_WEB_WEAVER ) {
         here.add_field( pos_bub(), fd_web, 1 );
-        add_msg_if_player( _( "You start spinning web with your spinnerets!" ) );
+        add_msg_if_player( _( "You begin spinning web with your spinnerets." ) );
     } else if( mut == trait_SNAIL_TRAIL ) {
         here.add_field( pos_bub(), fd_sludge, 1 );
         add_msg_if_player( _( "You start leaving a trail of sludge as you go." ) );

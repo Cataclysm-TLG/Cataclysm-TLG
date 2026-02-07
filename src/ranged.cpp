@@ -146,8 +146,9 @@ static const flag_id json_flag_CROSSBOW( "CROSSBOW" );
 static const flag_id json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const flag_id json_flag_FILTHY( "FILTHY" );
 
-static const limb_score_id limb_score_vision( "vision" );
 static const limb_score_id limb_score_manip( "manip" );
+static const limb_score_id limb_score_night_vis( "night_vis" );
+static const limb_score_id limb_score_vision( "vision" );
 
 static const material_id material_budget_steel( "budget_steel" );
 static const material_id material_case_hardened_steel( "case_hardened_steel" );
@@ -175,6 +176,7 @@ static const skill_id skill_swimming( "swimming" );
 static const skill_id skill_throw( "throw" );
 
 static const trait_id trait_BRAWLER( "BRAWLER" );
+static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
 
 static const trap_str_id tr_practice_target( "tr_practice_target" );
@@ -563,27 +565,25 @@ target_handler::trajectory target_handler::mode_turrets( avatar &you, vehicle &v
         const std::vector<vehicle_part *> &turrets )
 {
     map &here = get_map();
-    // Find radius of a circle centered at u encompassing all points turrets can aim at
-    // FIXME: this calculation is fine for square distances, but results in an underestimation
-    //        when used with real circles
+    // Find radius of a circle centered at you encompassing all points turrets can aim at.
     int range_total = 0;
     for( vehicle_part *t : turrets ) {
         int range = veh.turret_query( *t ).range();
         tripoint_bub_ms pos = veh.bub_part_pos( here, *t );
 
         int res = 0;
-        res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
-                                               pos + point( range,
-                                                       0 ) ) ) ) );
-        res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
-                                               pos + point( -range,
-                                                       0 ) ) ) ) );
-        res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
-                                               pos + point( 0,
-                                                       range ) ) ) ) );
-        res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
-                                               pos + point( 0,
-                                                       -range ) ) ) ) );
+        res = std::max( res, trig_dist( you.pos_bub(),
+                                        pos + point( range,
+                                                0 ) ) );
+        res = std::max( res, trig_dist( you.pos_bub(),
+                                        pos + point( -range,
+                                                0 ) ) );
+        res = std::max( res, trig_dist( you.pos_bub(),
+                                        pos + point( 0,
+                                                range ) ) );
+        res = std::max( res, trig_dist( you.pos_bub(),
+                                        pos + point( 0,
+                                                -range ) ) );
         range_total = std::max( range_total, res );
     }
 
@@ -810,12 +810,12 @@ bool Character::handle_gun_damage( item &it )
         return false;
 
         // Chance for the weapon to suffer a failure, caused by the magazine size, quality, or condition
-    } else if( x_in_y( jam_chance, 1 ) && !it.has_var( "u_know_round_in_chamber" ) &&
-               it.can_have_fault_type( gun_mechanical_simple ) ) {
+    } else if( x_in_y( jam_chance, 1 ) && !it.has_flag( flag_NEVER_JAMS ) &&
+               !it.has_var( "u_know_round_in_chamber" ) ) {
         add_msg_player_or_npc( m_bad, _( "Your %s malfunctions!" ),
                                _( "<npcname>'s %s malfunctions!" ),
                                it.tname() );
-        it.faults.insert( random_entry( it.faults_potential_of_type( gun_mechanical_simple ) ) );
+        it.set_random_fault_of_type( gun_mechanical_simple );
         return false;
 
         // Here we check for a chance for attached mods to get damaged if they are flagged as 'CONSUMABLE'.
@@ -870,7 +870,7 @@ bool Character::handle_gun_damage( item &it )
             add_msg_player_or_npc( m_bad, _( "Your %s fails to cycle!" ),
                                    _( "<npcname>'s %s fails to cycle!" ),
                                    it.tname() );
-            it.faults.insert( fault_gun_chamber_spent );
+            it.set_fault( fault_gun_chamber_spent );
             // Don't return false in this case; this shot happens, follow-up ones won't.
         }
         // These are the dirtying/fouling mechanics
@@ -892,11 +892,11 @@ bool Character::handle_gun_damage( item &it )
             dirt = it.get_var( "dirt", 0 );
             dirt_dbl = static_cast<double>( dirt );
             if( dirt > 0 && !it.has_fault_flag( "NO_DIRTYING" ) ) {
-                it.faults.insert( fault_gun_dirt );
+                it.set_fault( fault_gun_dirt );
             }
             if( dirt > 0 && curammo_effects.count( ammo_effect_BLACKPOWDER ) ) {
-                it.faults.erase( fault_gun_dirt );
-                it.faults.insert( fault_gun_blackpowder );
+                it.remove_fault( fault_gun_dirt );
+                it.set_fault( fault_gun_blackpowder );
             }
             // end fouling mechanics
         }
@@ -945,7 +945,7 @@ bool Character::handle_gun_overheat( item &it )
             add_msg_if_player( m_bad,
                                _( "Your %s displays a warning sequence as its active cooling cycle engages." ),
                                it.tname() );
-            it.faults.insert( fault_overheat_safety );
+            it.set_fault( fault_overheat_safety );
             return false;
         }
 
@@ -958,13 +958,13 @@ bool Character::handle_gun_overheat( item &it )
                                it.tname() );
             add_msg_if_player( m_bad, _( "Your %s detonates!" ),
                                it.tname() );
-            it.faults.insert( fault_overheat_melting );
+            it.set_fault( fault_overheat_melting );
             explosion_handler::explosion( this, this->pos_bub(), 1200, 0.4 );
             return false;
         } else if( it.faults_potential().count( fault_overheat_melting ) && fault_roll > 6 ) {
             add_msg_if_player( m_bad, _( "Acrid smoke pours from your %s as its internals fuse together." ),
                                it.tname() );
-            it.faults.insert( fault_overheat_melting );
+            it.set_fault( fault_overheat_melting );
             return false;
         } else if( it.faults_potential().count( fault_overheat_venting ) && fault_roll > 2 ) {
             map &here = get_map();
@@ -1157,9 +1157,15 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
 
         int qty = gun.gun_recoil( *this, bipod );
         delay  += qty * absorb;
-        // Temporarily scale by 5x as we adjust MAX_RECOIL, factoring in the recoil enchantment also.
-        recoil += enchantment_cache->modify_value( enchant_vals::mod::RECOIL_MODIFIER, 5.0 ) *
-                  ( qty * ( 1.0 - absorb ) );
+        // if shoots multiple barrels simultaneously, do not apply the recoil just yet
+        if( gun.gun_current_mode().flags.count( "VOLLEY" ) ) {
+            delay += enchantment_cache->modify_value( enchant_vals::mod::RECOIL_MODIFIER, 5.0 ) *
+                     ( qty * ( 1.0 - absorb ) );
+        } else {
+            // Temporarily scale by 5x as we adjust MAX_RECOIL, factoring in the recoil enchantment also.
+            recoil += enchantment_cache->modify_value( enchant_vals::mod::RECOIL_MODIFIER, 5.0 ) *
+                      ( qty * ( 1.0 - absorb ) );
+        }
 
         const itype_id current_ammo = gun.ammo_current();
 
@@ -1289,7 +1295,7 @@ int throw_cost( const Character &c, const item &to_throw )
 static double calculate_aim_cap_without_target( const Character &you,
         const tripoint_bub_ms &target )
 {
-    const int range = static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(), target ) ) );
+    const int range = trig_dist( you.pos_bub(), target );
     // Get angle of triangle that spans the target square.
     const double angle = 2 * atan2( 0.5, range );
     // Convert from radians to arcmin.
@@ -1376,21 +1382,35 @@ int Character::throwing_dispersion( const item &to_throw, Creature *critter,
     const float throw_skill = std::min( static_cast<float>( MAX_SKILL ),
                                         get_skill_level( skill_throw ) );
     int dispersion = 10 * throw_difficulty / ( 8 * throw_skill + 4 );
-    // If the target is a creature, it moves around and ruins aim
-    // TODO: Inform projectile functions if the attacker actually aims for the critter or just the tile
+    // TODO: Decouple this from critter and make it just check the target pos_bub().
     if( critter != nullptr ) {
         // It's easier to dodge at close range (thrower needs to adjust more)
         // Dodge x10 at point blank, x5 at 1 dist, then flat
         float effective_dodge = critter->get_dodge() * std::max( 1,
-                                10 - 5 * static_cast<int>( std::round( trig_dist_z_adjust( pos_bub(),
-                                        critter->pos_bub() ) ) ) );
+                                10 - 5 * trig_dist( pos_bub(),
+                                        critter->pos_bub() ) );
         dispersion += throw_dispersion_per_dodge( true ) * effective_dodge;
+        float vision_mod = get_limb_score( limb_score_vision );
+        // If it's dark, cap our vision at night vision, unless we have IR or something.
+        if( fine_detail_vision_mod( critter->pos_bub() ) >= 4.f && !sees_with_specials( *critter ) ) {
+            vision_mod = std::min( vision_mod, get_limb_score( limb_score_night_vis ) );
+        }
+        // Echolocation lets hearing sub in for vision here.
+        bool echolocation = has_trait( trait_ECHOLOCATION ) && !is_deaf() && !is_underwater() &&
+                            !critter->is_underwater();
+        if( echolocation ) {
+            // todo: hearing_ability() could probably stand in here but idk how it scales.
+            vision_mod = 1.0f;
+        }
+        int perception_mod = std::max( 0, get_per() - 10 );
+        dispersion += std::max( 0, static_cast<int>( std::round( ( ( 1.f - vision_mod ) * 2000 -
+                                ( perception_mod * 100 ) ) ) ) );
+        // The inverse of the below doesn't necessarily mean false, as we could be peek-throwing or something.
+        if( !sees( get_map(), *critter ) && !sees_with_specials( *critter ) && !echolocation ) {
+            is_blind_throw = true;
+        }
     }
-    // 1 perception per 1 eye encumbrance
-    ///\EFFECT_PER decreases throwing accuracy penalty from eye encumbrance
-    dispersion += std::max( 0, ( encumb( bodypart_id( "eyes" ) ) - get_per() ) * 10 );
-
-    // Blind throws are less accurate
+    // Blind throws are less accurate.
     if( is_blind_throw ) {
         dispersion *= 4;
     }
@@ -1589,7 +1609,7 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     // Throw from the player's position, unless we're blind throwing.
     const tripoint_bub_ms throw_from = blind_throw_from_pos ? *blind_throw_from_pos : pos_bub();
 
-    float range = static_cast<int>( std::round( trig_dist_z_adjust( throw_from, target ) ) );
+    int range = trig_dist( throw_from, target );
     proj.range = range;
     float skill_lvl = get_skill_level( skill_throw );
 
@@ -1805,11 +1825,11 @@ Target_attributes::Target_attributes( tripoint_bub_ms src, tripoint_bub_ms targe
 
     Creature *target_critter = get_creature_tracker().creature_at( target );
     Creature *shooter = get_creature_tracker().creature_at( src );
-    range = static_cast<int>( std::round( trig_dist_z_adjust( src, target ) ) );
+    range = trig_dist( src, target );
     size = target_critter != nullptr ?
            target_critter->ranged_target_size() :
            here.ranged_target_size( target );
-    size_in_moa = target_size_in_moa( range, size ) ;
+    size_in_moa = target_size_in_moa( range, size );
     light = here.ambient_light_at( target );
     visible = shooter->sees( here, target );
 
@@ -2242,8 +2262,8 @@ static void draw_throw_aim( const target_ui &ui, const Character &you, const cat
     }
 
     const dispersion_sources dispersion( you.throwing_dispersion( weapon, target, is_blind_throw ) );
-    const double range = static_cast<double>( std::round( trig_dist_z_adjust( you.pos_bub(),
-                         target_pos ) ) );
+    const double range = trig_dist( you.pos_bub(),
+                                    target_pos );
 
     const double target_size = target != nullptr ? target->ranged_target_size() : 1.0f;
 
@@ -2285,15 +2305,15 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
     }
     item weapon = null_item_reference();
     const dispersion_sources dispersion( you.throwing_dispersion( weapon, target, false ) );
-    double range = static_cast<double>( std::round( trig_dist_z_adjust( you.grab_1.victim->pos_bub(),
-                                        target_pos ) ) );
+    double range = trig_dist_precise( you.grab_1.victim->pos_bub(),
+                                      target_pos );
     const double target_size = target != nullptr ? target->ranged_target_size() : 1.0f;
     float throwforce = 0.0f;
     if( you.grab_1.victim ) {
         throwforce = you.throwforce( *you.grab_1.victim );
     }
-    range = throwforce / 10;
-    float distance = trig_dist_z_adjust( you.grab_1.victim->pos_bub(), target_pos );
+    range = throwforce / 10.f;
+    float distance = trig_dist_precise( you.grab_1.victim->pos_bub(), target_pos );
     distance /= range;
     throwforce *= distance;
     static const std::vector<confidence_rating> throwforce_config_critter = {{
@@ -2848,6 +2868,12 @@ target_handler::trajectory target_ui::run()
     }
     update_target_list();
 
+    if( mode == TargetMode::Reach && targets.empty() ) {
+        add_msg( m_info, _( "No hostile creature in reach." ) );
+        traj.clear();
+        return traj; // nothing to attack.
+    }
+
     if( activity && activity->abort_if_no_targets && targets.empty() ) {
         // this branch is taken when already shot once and re-entered
         // aiming, if no targets are available we want to abort so
@@ -3240,7 +3266,7 @@ bool target_ui::set_cursor_pos( const tripoint_bub_ms &new_pos )
             }
             if( dist_fn( valid_pos ) > range ) {
                 auto dist_fn_unrounded = [this]( const tripoint_bub_ms & p ) {
-                    return static_cast<int>( std::round( trig_dist_z_adjust( src, p ) ) );
+                    return trig_dist( src, p );
                 };
 
                 bool found = false;
@@ -3403,9 +3429,9 @@ void target_ui::update_target_list()
     }
     std::sort( targets.begin(), targets.end(), [&]( const tripoint_bub_ms lhs,
     const tripoint_bub_ms rhs ) {
-        return static_cast<int>( std::round( trig_dist_z_adjust( lhs,
-                                             you->pos_bub( here ) ) ) ) < static_cast<int>( std::round( trig_dist_z_adjust( rhs,
-                                                     you->pos_bub( here ) ) ) );
+        return trig_dist( lhs,
+                          you->pos_bub( here ) ) < trig_dist( rhs,
+                                  you->pos_bub( here ) );
     } );
 }
 
@@ -3506,11 +3532,10 @@ int target_ui::dist_fn( const tripoint_bub_ms &p )
         }
     }
     if( src.z() == p.z() ) {
-        return static_cast<int>( z_adjust + static_cast<int>( std::round( trig_dist_z_adjust( src,
-                                 p ) ) ) );
+        return z_adjust + trig_dist( src, p );
     } else {
-        // Always round up so that the Z adjustment actually matters.
-        return static_cast<int>( z_adjust + std::ceil( trig_dist_z_adjust( src, p ) ) );
+        // Rounds up so we make sure the Z levels matter.
+        return z_adjust + static_cast<int>( std::ceil( trig_dist_precise( src, p ) ) );
     }
 }
 

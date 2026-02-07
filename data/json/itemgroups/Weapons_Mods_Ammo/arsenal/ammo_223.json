@@ -34,20 +34,19 @@
     "id": "ammo_can_ammo_pouch_223_full",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": { "item": "ammunition_can_50", "variant": "ammunition_can_50_556_m855a1_clipped_840" },
-    "items": [ { "group": "ammo_pouch_223", "count": 7 } ]
+    "container-item": "ammunition_can_50",
+    "items": [ { "group": "ammo_pouch_223", "count": 5 } ]
   },
   {
     "id": "ammo_can_ammo_pouch_223_part",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": { "item": "ammunition_can_50", "variant": "ammunition_can_50_556_m855a1_clipped_840" },
-    "items": [ { "group": "ammo_pouch_223", "count": [ 1, 6 ] } ]
+    "container-item": "ammunition_can_50",
+    "items": [ { "group": "ammo_pouch_223", "count": [ 1, 5 ] } ]
   },
   {
     "id": "ammo_pouch_223",
     "type": "item_group",
-    "//": "TODO: addd 1 stipper clip guide (aka 'spoon') for 223 in this group, when the game will be able to check his using",
     "subtype": "collection",
     "container-item": "cheap_ammo_pouch",
     "items": [ { "group": "box_223_clips", "count": 4 } ]
@@ -55,7 +54,7 @@
   {
     "id": "box_223_clips",
     "type": "item_group",
-    "container-item": "ammo_box_army_3_clips",
+    "container-item": "ammo_box",
     "on_overflow": "discard",
     "items": [ { "group": "clip223_10rd_556", "count": 3 } ]
   },
@@ -69,13 +68,13 @@
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_belt223_full",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_223_1tracer4ball_800" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt223_pouch", "count": 4 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_belt223_part",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_223_1tracer4ball_800" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt223_pouch", "count": [ 0, 3 ] } ]
   },
   {
@@ -96,13 +95,13 @@
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_belt223_ball_full",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_223fmj_800" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt223_ball_pouch", "count": 4 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_belt223_ball_part",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_223fmj_800" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt223_ball_pouch", "count": [ 0, 3 ] } ]
   },
   {
@@ -124,20 +123,20 @@
     "id": "ammo_can_box_223_20tracer_full",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": { "item": "ammunition_can_50", "variant": "ammunition_can_50_556tracer_820" },
+    "container-item": "ammunition_can_50",
     "items": [ { "group": "box_223_20_tracer", "count": 41 } ]
   },
   {
     "id": "ammo_can_box_223_20tracer_part",
     "type": "item_group",
     "subtype": "collection",
-    "container-item": { "item": "ammunition_can_50", "variant": "ammunition_can_50_556tracer_820" },
+    "container-item": "ammunition_can_50",
     "items": [ { "group": "box_223_20_tracer", "count": [ 0, 41 ] } ]
   },
   {
     "id": "box_223_20_tracer",
     "type": "item_group",
-    "container-item": "ammo_box_army_20_223",
+    "container-item": "ammo_box_small",
     "on_overflow": "discard",
     "items": [ { "item": "556_incendiary", "count": 1, "charges": 20 } ]
   },
@@ -145,13 +144,13 @@
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_belt223_4ap_tracer_1_full",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_223_1tracer4ap_800" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt223_4ap_tracer_1_pouch", "count": 4 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_belt223_4ap_tracer_1_part",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_223_1tracer4ap_800" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt223_4ap_tracer_1_pouch", "count": [ 0, 3 ] } ]
   },
   {
@@ -172,13 +171,13 @@
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_belt223_5ap_full",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_223ap_800" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt223_5ap_pouch", "count": 4 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_belt223_5ap_part",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_223ap_800" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt223_5ap_pouch", "count": [ 0, 3 ] } ]
   },
   {

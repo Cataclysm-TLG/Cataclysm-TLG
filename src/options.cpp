@@ -107,7 +107,7 @@ void option_slider::check_consistency()
     }
 }
 
-void option_slider::load( const JsonObject &jo, const std::string_view )
+void option_slider::load( const JsonObject &jo, std::string_view )
 {
     mandatory( jo, was_loaded, "name", _name );
     optional( jo, was_loaded, "default", _default_level, 0 );
@@ -1369,7 +1369,7 @@ std::vector<options_manager::id_and_option> options_manager::get_lang_options()
             { "sr", R"(Српски)" },
             { "tr", R"(Türkçe)" },
             { "uk_UA", R"(Українська)" },
-            { "zh_CN", R"(中文 (天朝))" },
+            { "zh_CN", R"(中文 (中国))" },
             { "zh_TW", R"(中文 (台灣))" },
         }
     };

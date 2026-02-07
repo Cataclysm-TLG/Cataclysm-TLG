@@ -108,8 +108,7 @@
         [ "long_knit_scarf_loose", 1 ],
         [ "bandages", 2 ],
         [ "bandages_makeshift", 2 ],
-        [ "bandages_makeshift_bleached", 2 ],
-        [ "bandages_makeshift_boiled", 2 ],
+        [ "bandages_makeshift_sanitized", 2 ],
         [ "cotton_sheet", 1 ]
       ]
     ],
@@ -2013,7 +2012,7 @@
     "difficulty": 4,
     "time": "2 h",
     "book_learn": [ [ "textbook_tailor", 4 ], [ "manual_tailor", 5 ], [ "tailor_portfolio", 4 ] ],
-    "using": [ [ "tailoring_nylon_sheet", 10 ], [ "tailoring_neoprene_sheet", 6 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 10 ], [ "tailoring_neoprene_sheet", 6 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" }, { "proficiency": "prof_closures_waterproofing" } ]
   },
   {
@@ -2021,14 +2020,14 @@
     "type": "recipe",
     "copy-from": "wetsuit_hood",
     "time": "3 h",
-    "using": [ [ "tailoring_nylon_sheet", 15 ], [ "tailoring_neoprene_sheet", 9 ] ]
+    "using": [ [ "tailoring_spandex_sheet", 15 ], [ "tailoring_neoprene_sheet", 9 ] ]
   },
   {
     "result": "xs_wetsuit_hood",
     "type": "recipe",
     "copy-from": "wetsuit_hood",
     "time": "1 h 30 m",
-    "using": [ [ "tailoring_nylon_sheet", 8 ], [ "tailoring_neoprene_sheet", 5 ] ]
+    "using": [ [ "tailoring_spandex_sheet", 8 ], [ "tailoring_neoprene_sheet", 5 ] ]
   },
   {
     "result": "wetsuit_hood_thick",
@@ -2036,21 +2035,21 @@
     "copy-from": "wetsuit_hood",
     "difficulty": 5,
     "time": "3 h",
-    "using": [ [ "tailoring_nylon_sheet", 20 ], [ "tailoring_neoprene_sheet", 12 ] ]
+    "using": [ [ "tailoring_spandex_sheet", 20 ], [ "tailoring_neoprene_sheet", 12 ] ]
   },
   {
     "result": "xl_wetsuit_hood_thick",
     "type": "recipe",
     "copy-from": "wetsuit_hood_thick",
     "time": "4 h 30 m",
-    "using": [ [ "tailoring_nylon_sheet", 30 ], [ "tailoring_neoprene_sheet", 18 ] ]
+    "using": [ [ "tailoring_spandex_sheet", 30 ], [ "tailoring_neoprene_sheet", 18 ] ]
   },
   {
     "result": "xs_wetsuit_hood_thick",
     "type": "recipe",
     "copy-from": "wetsuit_hood_thick",
     "time": "2 h 15 m",
-    "using": [ [ "tailoring_nylon_sheet", 16 ], [ "tailoring_neoprene_sheet", 10 ] ]
+    "using": [ [ "tailoring_spandex_sheet", 16 ], [ "tailoring_neoprene_sheet", 10 ] ]
   },
   {
     "result": "chainmail_coif",

@@ -212,13 +212,11 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
         }
         dest_target = dest->get_bub( abs_ms );
     }
-    //handles teleporting into solids.
+    // Handles teleporting into solids.
     if( dest->impassable( dest_target ) ) {
         if( force || force_safe ) {
-            std::vector<tripoint_bub_ms> nearest_points = closest_points_first( dest_target, 5 );
+            std::vector<tripoint_bub_ms> nearest_points = closest_points_first( dest_target, 1, 5 );
             nearest_points.erase( nearest_points.begin() );
-            //TODO: Swap for this once #75961 merges
-            //std::vector<tripoint_bub_ms> nearest_points = closest_points_first( dest_target, 1, 5 );
             for( tripoint_bub_ms p : nearest_points ) {
                 if( dest->passable_through( p ) ) {
                     dest_target = p;
@@ -229,7 +227,8 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
         } else {
             if( safe ) {
                 if( c_is_u && display_message ) {
-                    add_msg( m_bad, _( "You cannot teleport safely." ) );
+                    // Failed to pick a safe spot to teleport.
+                    add_msg( m_bad, _( "You feel strange for a moment, but nothing happens." ) );
                 }
                 return false;
             }

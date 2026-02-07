@@ -51,6 +51,7 @@
 #include "options.h"
 #include "output.h"
 #include "overmap.h"
+#include "overmapbuffer.h"
 #include "panels.h"
 #include "player_activity.h"
 #include "point.h"
@@ -176,8 +177,9 @@ static bool check_support_below( const tripoint_bub_ms
                                  & ); // at least two orthogonal supports at the level below or from below
 static bool check_single_support( const tripoint_bub_ms
                                   &p ); // Only support from directly below matters
-static bool check_stable( const tripoint_bub_ms & ); // tile below has a flag SUPPORTS_ROOF
-static bool check_nofloor_above( const tripoint_bub_ms & ); // tile above has a flag NO_FLOOR
+static bool check_stable( const tripoint_bub_ms & ); // tile below has a SUPPORTS_ROOF flag
+static bool check_floor_above( const tripoint_bub_ms & ); // tile above doesn't have a NO_FLOOR flag
+static bool check_nofloor_above( const tripoint_bub_ms & ); // tile above has a NO_FLOOR flag
 static bool check_deconstruct( const tripoint_bub_ms
                                & ); // either terrain or furniture must be deconstructible
 static bool check_up_OK( const tripoint_bub_ms & ); // tile is below OVERMAP_HEIGHT
@@ -1285,7 +1287,11 @@ void place_construction( std::vector<construction_group_str_id> const &groups )
     } else {
         // Use up the components
         for( const std::vector<item_comp> &it : con.requirements->get_components() ) {
-            std::list<item> tmp = player_character.consume_items( it, 1, is_crafting_component );
+            std::list<item> tmp = player_character.consume_items( it, 1, is_crafting_component,
+                                  return_false<itype_id>, true );
+            if( tmp.empty() ) {
+                return;
+            }
             used.splice( used.end(), tmp );
         }
     }
@@ -1413,12 +1419,21 @@ void complete_construction( Character *you )
 bool construct::check_channel( const tripoint_bub_ms &p )
 {
     map &here = get_map();
-    for( const point &offset : four_adjacent_offsets ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_CURRENT, p + offset ) ) {
-            return true;
-        }
+    const std::function<bool( const point & )> has_current = [&p, &here]( const point & offset ) {
+        return here.has_flag( ter_furn_flag::TFLAG_CURRENT, p + offset );
+    };
+    const std::function<bool( const tripoint_abs_omt & )> river_at = []( const tripoint_abs_omt & pt ) {
+        return is_river( overmap_buffer.ter( pt ) );
+    };
+    if( !std::any_of( four_adjacent_offsets.begin(), four_adjacent_offsets.end(), has_current ) ) {
+        return false;
     }
-    return false;
+    tripoint_abs_omt omt_pt = project_to<coords::omt>( here.get_abs( p ) );
+    tripoint_range<tripoint_abs_omt> nearby_omts = points_in_radius<tripoint_abs_omt>( omt_pt, 1 );
+    if( !std::any_of( nearby_omts.begin(), nearby_omts.end(), river_at ) ) {
+        return false;
+    }
+    return true;
 }
 
 bool construct::check_empty_lite( const tripoint_bub_ms &p )
@@ -1504,6 +1519,9 @@ bool construct::check_support_below( const tripoint_bub_ms &p )
             num_supports++;
         }
     }
+
+    //TODO: This doesn't make any sense for the original purpose of check_support and should be seperated
+
     // We want to find "walls" below (including windows and doors), but not open rooms and the like.
     if( here.has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p + tripoint::below ) &&
         ( here.has_flag( ter_furn_flag::TFLAG_WALL, p + tripoint::below ) ||
@@ -1525,6 +1543,11 @@ bool construct::check_single_support( const tripoint_bub_ms &p )
 bool construct::check_stable( const tripoint_bub_ms &p )
 {
     return get_map().has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p + tripoint::below );
+}
+
+bool construct::check_floor_above( const tripoint_bub_ms &p )
+{
+    return !check_nofloor_above( p );
 }
 
 bool construct::check_nofloor_above( const tripoint_bub_ms &p )
@@ -1715,6 +1738,19 @@ void construct::done_wiring( const tripoint_bub_ms &p, Character &who )
     here.partial_con_remove( p );
 
     place_appliance( here, p, vpart_from_item( itype_wall_wiring ), who );
+    if( who.is_avatar() && query_yn( _( "Also reveal all nearby wirings?" ) ) ) {
+        // This is a *really* terrible check to ensure we iterate the current OMT and nothing else.
+        const tripoint_abs_omt current_omt( coords::project_to<coords::omt>( here.get_abs( p ) ) );
+        for( const tripoint_bub_ms &target : here.points_on_zlevel() ) {
+            const tripoint_abs_omt target_omt( coords::project_to<coords::omt>( here.get_abs( target ) ) );
+            if( target_omt != current_omt ) {
+                continue;
+            }
+            if( here.has_flag_ter( ter_furn_flag::TFLAG_WIRED_WALL, target ) && check_no_wiring( target ) ) {
+                place_appliance( here, target, vpart_from_item( itype_wall_wiring ), who );
+            }
+        }
+    }
 }
 
 void construct::done_appliance( const tripoint_bub_ms &p, Character &who )
@@ -2273,6 +2309,7 @@ void load_construction( const JsonObject &jo )
             { "check_support_below", construct::check_support_below },
             { "check_single_support", construct::check_single_support },
             { "check_stable", construct::check_stable },
+            { "check_floor_above", construct::check_floor_above },
             { "check_nofloor_above", construct::check_nofloor_above },
             { "check_deconstruct", construct::check_deconstruct },
             { "check_up_OK", construct::check_up_OK },

@@ -95,6 +95,7 @@ void game::serialize_json( std::ostream &fout )
     json.member( "savegame_loading_version", savegame_version );
     json.member( "turn", calendar::turn );
     json.member( "calendar_start", calendar::start_of_cataclysm );
+    json.member( "monster_evo_start", calendar::fall_of_civilization );
     json.member( "game_start", calendar::start_of_game );
     json.member( "initial_season", static_cast<int>( calendar::initial_season ) );
     json.member( "auto_travel_mode", auto_travel_mode );
@@ -234,12 +235,14 @@ void game::unserialize_impl( const JsonObject &data )
 {
     int tmpturn = 0;
     int tmpcalstart = 0;
+    int tmpmonevostart = 0;
     int tmprun = 0;
     tripoint_om_sm lev;
     point_abs_om com;
 
     data.read( "turn", tmpturn );
     data.read( "calendar_start", tmpcalstart );
+    data.read( "monster_evo_start", tmpmonevostart );
     calendar::initial_season = static_cast<season_type>( data.get_int( "initial_season",
                                static_cast<int>( SPRING ) ) );
 
@@ -258,9 +261,9 @@ void game::unserialize_impl( const JsonObject &data )
 
     calendar::turn = time_point( tmpturn );
     calendar::start_of_cataclysm = time_point( tmpcalstart );
-
+    calendar::fall_of_civilization = time_point( tmpmonevostart );
     if( !data.read( "game_start", calendar::start_of_game ) ) {
-        calendar::start_of_game = calendar::start_of_cataclysm;
+        calendar::start_of_game = calendar::fall_of_civilization;
     }
 
     load_map( project_combine( com, lev ), /*pump_events=*/true );
@@ -445,6 +448,13 @@ void overmap::unserialize( const JsonObject &jsobj )
             mapgen_args_index.emplace( p.first, &*it );
         }
     }
+    if( jsobj.has_member( "omt_stack_arguments_map" ) ) {
+        std::vector<std::pair<point_abs_omt, mapgen_arguments>> flat_omt_stack_arguments_map;
+        jsobj.read( "omt_stack_arguments_map", flat_omt_stack_arguments_map, true );
+        for( const std::pair<point_abs_omt, mapgen_arguments> &p : flat_omt_stack_arguments_map ) {
+            omt_stack_arguments_map.emplace( p );
+        }
+    }
     // Extract layers first so predecessor deduplication can happen.
     if( jsobj.has_member( "layers" ) ) {
         std::unordered_map<tripoint_om_omt, std::string> oter_id_migrations;
@@ -552,6 +562,8 @@ void overmap::unserialize( const JsonObject &jsobj )
                 mandatory( river_json, false, "size", size );
                 rivers.push_back( overmap_river_node{ start_point, end_point, control_1, control_2, static_cast<size_t>( size ) } );
             }
+        } else if( name == "highway_connections" ) {
+            om_member.read( highway_connections );
         } else if( name == "connections_out" ) {
             om_member.read( connections_out );
         } else if( name == "roads_out" ) {
@@ -1312,6 +1324,9 @@ void overmap::serialize( std::ostream &fout ) const
     json.end_array();
     fout << std::endl;
 
+    json.member( "highway_connections", highway_connections );
+    fout << std::endl;
+
     json.member( "connections_out", connections_out );
     fout << std::endl;
 
@@ -1424,6 +1439,17 @@ void overmap::serialize( std::ostream &fout ) const
         auto it = mapgen_arg_storage.get_iterator_from_pointer( p.second );
         int index = mapgen_arg_storage.get_index_from_iterator( it );
         json.write( index );
+        json.end_array();
+    }
+    json.end_array();
+    fout << std::endl;
+
+    json.member( "omt_stack_arguments_map" );
+    json.start_array();
+    for( const std::pair<const point_abs_omt, mapgen_arguments> &p : omt_stack_arguments_map ) {
+        json.start_array();
+        json.write( p.first );
+        p.second.serialize( json );
         json.end_array();
     }
     json.end_array();
@@ -1716,7 +1742,7 @@ void global_variables::serialize( JsonOut &jsout ) const
     jsout.member( "global_vals", global_values );
 }
 
-void global_variables::load_migrations( const JsonObject &jo, const std::string_view & )
+void global_variables::load_migrations( const JsonObject &jo, std::string_view )
 {
     const std::string from( jo.get_string( "from" ) );
     const std::string to = jo.has_string( "to" )
@@ -1826,6 +1852,10 @@ void overmapbuffer::serialize_overmap_global_state( JsonOut &json ) const
     json.write_as_array( placed_unique_specials );
     json.member( "overmap_count", overmap_buffer.overmap_count );
     json.member( "unique_special_count", unique_special_count );
+    json.member( "overmap_highway_intersections", highway_intersections );
+    json.member( "overmap_highway_offset", highway_global_offset );
+    json.member( "major_river_count", major_river_count );
+
     json.end_object();
 }
 
@@ -1839,6 +1869,11 @@ void overmapbuffer::deserialize_overmap_global_state( const JsonObject &json )
     unique_special_count.clear();
     json.read( "unique_special_count", unique_special_count );
     json.read( "overmap_count", overmap_count );
+
+    highway_intersections.clear();
+    json.read( "overmap_highway_intersections", highway_intersections );
+    json.read( "overmap_highway_offset", highway_global_offset );
+    json.read( "major_river_count", major_river_count );
 }
 
 void overmapbuffer::deserialize_placed_unique_specials( const JsonValue &jsin )

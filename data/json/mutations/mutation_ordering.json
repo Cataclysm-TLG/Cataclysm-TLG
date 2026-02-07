@@ -159,10 +159,7 @@
         "id": [ "CLAWS", "CLAWS_RAT", "CLAWS_RETRACT", "LONG_FINGERNAILS", "VINES1", "VINES2", "VINES3", "bio_claws", "CRAB_CLAW" ],
         "order": 3000
       },
-      {
-        "id": [ "bio_blade", "bio_blaster", "bio_emp_armgun", "bio_dis_acid", "bio_evap", "bio_ads" ],
-        "order": 3250
-      },
+      { "id": [ "bio_blade", "bio_blaster", "bio_emp_armgun", "bio_dis_acid", "bio_evap", "bio_ads" ], "order": 3250 },
       {
         "id": [
           "TAIL_CATTLE",

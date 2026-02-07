@@ -96,6 +96,7 @@
     "category": "<zombie_humanoid_harvest_general>",
     "text": [
       "As you make your first cut into its skin, a pressurized jet of decaying blood almost hits your face.",
+      "The tissue is rotting before your eyes, muscle turning to jelly and fat to a clear, reeking slime.  It's as if time is catching up with the cadaver now that it's no longer animated.",
       "The overbearing sweet smell of decay emanating from the carcass forces you to take short breaks during your work to not puke.",
       "As you cut through the muscle, it tenses up in reaction.",
       "You spot a few flies and maggots in the corpse, their chosen carcass not seeming to be very good for them, as most seem moribund.",
@@ -110,6 +111,7 @@
     "category": "<zombie_animal_harvest_general>",
     "text": [
       "As you make your first cut into its skin, a pressurized jet of decaying blood almost hits your face.",
+      "The tissue is rotting before your eyes, muscle turning to jelly and fat to a clear, reeking slime.  It's as if time is catching up with the carcass now that it's no longer animated.",
       "The overbearing sweet smell of decay emanating from the carcass forces you to take short breaks during your work to not puke.",
       "As you cut through the muscle, it tenses up in reaction.",
       "You spot a few flies and maggots in the corpse, their chosen carcass not seeming to be very good for them, as most seem moribund.",
@@ -238,12 +240,11 @@
     "type": "snippet",
     "category": "<zombie_humanoid_harvest_acid_general>",
     "text": [
-      "The sheer pungent acrid odor of the carcass makes you temporarily recoil and reconsider the safety of delving into its entrails.",
-      "The sputters of acid on your gear you earned by digging into this corpse could maybe warrant the use of some water to douse.",
-      "Pressed against the liver is a swollen gland the size of a golfball, still somewhat functioning, pumping out acrid fluids.",
-      "Most cavities in its anatomy seem to have been filled with an acidic solution mixed with a foul black liquid and pieces of its slowly melting tissues.",
-      "You are almost certain that its flesh should not be able to contain such a virulently aggressive liquid, yet, it does.",
-      "You have to step back as a gland you inadvertently cut into seems to perform a neutralization reaction between its contents and the rest of its fluids."
+      "The sheer pungent acrid odor of the corpse makes you temporarily recoil and reconsider the safety of delving into its entrails.",
+      "The stench coming off of this corpse is immediately reminiscent of vomit.",
+      "This person has undergone a horrific mutation.  Their stomach has ballooned outward to fill almost their entire thoracic cavity, crushing the lungs against the ribs.  Even now, the lining oozes a thin, greasy film of acid.",
+      "Every cavity in this creature's anatomy is puddled with a foaming mixture of acid and half-dissolved tissue.  It seems it wasn't entirely immune to its own secretions.",
+      "An accidental cut opens a gland that spurts clear fluid across the creature's flesh, which bubbles and smokes as some of the acid undergoes a neutralizing reaction."
     ]
   },
   {

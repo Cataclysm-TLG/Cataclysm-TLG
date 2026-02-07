@@ -3,7 +3,6 @@
     "type": "mapgen",
     "nested_mapgen_id": "fema_entrance_02_roof",
     "//": "entrance. bottom edge",
-    "method": "json",
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -40,7 +39,6 @@
     "om_terrain": "FEMA_entrance",
     "//": "entrance. bottom edge",
     "weight": 250,
-    "method": "json",
     "object": {
       "fill_ter": "t_floor",
       "rows": [

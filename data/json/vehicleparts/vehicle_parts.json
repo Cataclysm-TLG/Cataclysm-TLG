@@ -1620,11 +1620,11 @@
     "item": "solar_panel",
     "location": "on_roof",
     "requirements": {
-      "install": { "skills": [ [ "mechanics", 4 ] ], "time": "60 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
-      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
+      "install": { "skills": [ [ "electronics", 4 ] ], "time": "30 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
+      "removal": { "skills": [ [ "electronics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": {
         "skills": [ [ "electronics", 6 ] ],
-        "time": "50 m",
+        "time": "30 m",
         "using": [ [ "vehicle_screw", 1 ], [ "solar_panel", 1 ], [ "soldering_standard", 8 ] ]
       }
     },
@@ -1651,6 +1651,8 @@
     "description": "A solar panel with sturdy brackets and wire shielding across its face, trading efficiency for durability.",
     "item": "reinforced_solar_panel",
     "requirements": {
+      "install": { "skills": [ [ "electronics", 4 ] ], "time": "30 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
+      "removal": { "skills": [ [ "electronics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": {
         "skills": [ [ "electronics", 6 ] ],
         "time": "50 m",
@@ -1678,12 +1680,12 @@
     "damage_modifier": 10,
     "durability": 20,
     "requirements": {
-      "install": { "skills": [ [ "mechanics", 6 ] ] },
-      "removal": { "skills": [ [ "mechanics", 4 ] ] },
+      "install": { "skills": [ [ "electronics", 4 ] ], "time": "30 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
+      "removal": { "skills": [ [ "electronics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": {
-        "skills": [ [ "electronics", 8 ] ],
-        "time": "75 m",
-        "using": [ [ "vehicle_screw", 1 ], [ "solar_panel_v2", 1 ], [ "soldering_standard", 16 ] ]
+        "skills": [ [ "electronics", 6 ] ],
+        "time": "30 m",
+        "using": [ [ "vehicle_screw", 1 ], [ "solar_panel_v2", 1 ], [ "soldering_standard", 8 ] ]
       }
     },
     "breaks_into": [
@@ -1706,10 +1708,12 @@
     "description": "A high-performance solar panel with sturdy brackets and wire guards across its face, trading efficiency for durability.",
     "item": "reinforced_solar_panel_v2",
     "requirements": {
+      "install": { "skills": [ [ "electronics", 4 ] ], "time": "30 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
+      "removal": { "skills": [ [ "electronics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": {
-        "skills": [ [ "electronics", 8 ] ],
-        "time": "75 m",
-        "using": [ [ "vehicle_screw", 1 ], [ "solar_panel_v2", 1 ], [ "soldering_standard", 16 ], [ "repair_welding_standard", 1 ] ]
+        "skills": [ [ "electronics", 6 ] ],
+        "time": "50 m",
+        "using": [ [ "vehicle_screw", 1 ], [ "solar_panel_v2", 1 ], [ "soldering_standard", 8 ], [ "repair_welding_standard", 1 ] ]
       }
     },
     "breaks_into": [
@@ -1878,7 +1882,7 @@
       },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "20 m", "using": [ [ "repair_welding_standard", 12 ] ] }
     },
-    "flags": [ "BOARDABLE", "CARGO", "COVERED", "HUGE_OK" ],
+    "flags": [ "BOARDABLE", "CARGO", "COVERED", "HUGE_OK", "FURNITURE_TIEDOWN" ],
     "breaks_into": [
       { "item": "steel_chunk", "count": [ 12, 19 ] },
       { "item": "steel_fragment", "count": [ 7, 12 ] },
@@ -2570,7 +2574,7 @@
       { "item": "e_scrap", "count": [ 2, 6 ] },
       { "item": "cable", "charges": [ 300, 600 ] },
       { "item": "plastic_chunk", "count": [ 1, 2 ] },
-      { "item": "nuts_bolts", "count": [ 2, 5 ] }
+      { "item": "nuts_bolts", "charges": [ 2, 5 ] }
     ],
     "damage_reduction": { "all": 24 },
     "variants": [ { "symbols": "R", "symbols_broken": ";" } ]
@@ -2637,11 +2641,11 @@
       { "item": "steel_chunk", "count": [ 4, 7 ] },
       { "item": "steel_fragment", "count": [ 21, 40 ] },
       { "item": "scrap", "count": [ 108, 215 ] },
-      { "item": "nuts_bolts", "count": [ 7, 15 ] },
+      { "item": "nuts_bolts", "charges": [ 7, 15 ] },
       { "item": "pipe_fittings", "prob": 30 },
       { "item": "rubber_tire_chunk", "prob": 35 },
       { "item": "chunk_rubber", "count": [ 8, 19 ] },
-      { "item": "shredded_rubber", "count": [ 8, 20 ] }
+      { "item": "shredded_rubber", "charges": [ 8, 20 ] }
     ],
     "damage_reduction": { "all": 46 },
     "variants": [ { "symbols": "&", "symbols_broken": "*" } ]
@@ -2679,10 +2683,10 @@
     "breaks_into": [
       { "item": "sheet_metal_small", "count": [ 3, 6 ] },
       { "item": "scrap", "count": [ 10, 21 ] },
-      { "item": "nuts_bolts", "count": [ 3, 6 ] },
+      { "item": "nuts_bolts", "charges": [ 3, 6 ] },
       { "item": "rubber_tire_chunk", "prob": 80 },
       { "item": "chunk_rubber", "count": [ 16, 38 ] },
-      { "item": "shredded_rubber", "count": [ 16, 40 ] }
+      { "item": "shredded_rubber", "charges": [ 16, 40 ] }
     ],
     "damage_reduction": { "all": 16 },
     "variants": [ { "symbols": "8", "symbols_broken": "*" } ]
@@ -2723,10 +2727,10 @@
       { "item": "plastic_chunk", "count": [ 1, 2 ] },
       { "item": "sheet_metal_small", "count": [ 3, 6 ] },
       { "item": "scrap", "count": [ 10, 21 ] },
-      { "item": "nuts_bolts", "count": [ 3, 6 ] },
+      { "item": "nuts_bolts", "charges": [ 3, 6 ] },
       { "item": "rubber_tire_chunk", "prob": 80 },
       { "item": "chunk_rubber", "count": [ 16, 38 ] },
-      { "item": "shredded_rubber", "count": [ 16, 40 ] }
+      { "item": "shredded_rubber", "charges": [ 16, 40 ] }
     ],
     "damage_reduction": { "all": 18 },
     "variants": [ { "symbols": "8", "symbols_broken": "*" } ]
@@ -2765,10 +2769,10 @@
       { "item": "steel_fragment", "count": [ 4, 8 ] },
       { "item": "sheet_metal_small", "count": [ 3, 6 ] },
       { "item": "scrap", "count": [ 15, 30 ] },
-      { "item": "nuts_bolts", "count": [ 3, 6 ] },
+      { "item": "nuts_bolts", "charges": [ 3, 6 ] },
       { "item": "rubber_tire_chunk", "prob": 80 },
       { "item": "chunk_rubber", "count": [ 16, 38 ] },
-      { "item": "shredded_rubber", "count": [ 16, 40 ] }
+      { "item": "shredded_rubber", "charges": [ 16, 40 ] }
     ],
     "damage_reduction": { "all": 10 },
     "variants": [ { "symbols": "/", "symbols_broken": "*" } ]
@@ -2812,10 +2816,10 @@
       { "item": "steel_fragment", "count": [ 4, 8 ] },
       { "item": "sheet_metal_small", "count": [ 3, 6 ] },
       { "item": "scrap", "count": [ 15, 30 ] },
-      { "item": "nuts_bolts", "count": [ 3, 6 ] },
+      { "item": "nuts_bolts", "charges": [ 3, 6 ] },
       { "item": "rubber_tire_chunk", "prob": 80 },
       { "item": "chunk_rubber", "count": [ 16, 38 ] },
-      { "item": "shredded_rubber", "count": [ 16, 40 ] }
+      { "item": "shredded_rubber", "charges": [ 16, 40 ] }
     ],
     "damage_reduction": { "all": 12 },
     "variants": [ { "symbols": "=", "symbols_broken": "*" } ]
@@ -2869,7 +2873,7 @@
       { "item": "bearing", "count": [ 1, 3 ] },
       { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 6, 12 ] },
-      { "item": "nuts_bolts", "count": [ 3, 6 ] }
+      { "item": "nuts_bolts", "charges": [ 3, 6 ] }
     ],
     "damage_reduction": { "all": 54 },
     "variants": [ { "symbols": "X", "symbols_broken": "X" } ]

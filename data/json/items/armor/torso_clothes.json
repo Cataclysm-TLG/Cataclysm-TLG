@@ -1,7 +1,8 @@
 [
   {
     "id": "waist_apron_long",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "long waist apron" },
     "description": "A long cloth apron that haings from the waist.",
     "copy-from": "apron_cotton",
@@ -42,7 +43,8 @@
   },
   {
     "id": "waist_apron_short",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "short waist apron" },
     "description": "A short cloth apron that hangs from the waist.",
     "copy-from": "apron_cotton",
@@ -76,7 +78,8 @@
   },
   {
     "id": "apron_cotton",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "cotton apron" },
     "description": "An cloth apron that covers the front of the body.",
     "copy-from": "apron_leather",
@@ -90,7 +93,8 @@
   },
   {
     "id": "apron_leather",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather apron" },
     "description": "A leather apron that covers the front of the body.",
     "weight": "1925 g",
@@ -135,7 +139,8 @@
   },
   {
     "id": "apron_plastic",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plastic apron" },
     "description": "An apron made of plastic that covers the front of the body, provides some protection against accidental chemical splashes.",
@@ -148,7 +153,8 @@
   },
   {
     "id": "apron_cut_resistant",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "cut-resistant apron" },
     "description": "A Kevlar apron that covers the front of the body.",
@@ -161,7 +167,8 @@
   },
   {
     "id": "blazer",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "blazer" },
     "description": "A professional-looking wool blazer.",
     "weight": "680 g",
@@ -198,7 +205,8 @@
   },
   {
     "id": "cheerleader_dress",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "cheerleader dress", "str_pl": "cheerleader dresses" },
     "description": "A light and breezy cheerleader dress.  It's blue and white with the word \"Cheers\" printed at the top.",
     "weight": "200 g",
@@ -219,7 +227,8 @@
   },
   {
     "id": "combat_shirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "combat shirt" },
     "description": "An oddly balanced long-sleeved shirt with a thin, breathable torso and thicker arms more appropriate for a jacket.  The arms are covered in a camouflage pattern and have two shoulder pockets.  It has a pocket for your pen!",
     "weight": "450 g",
@@ -263,7 +272,8 @@
   },
   {
     "id": "dress",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "dress", "str_pl": "dresses" },
     "description": "A long cotton dress.",
     "weight": "680 g",
@@ -282,7 +292,8 @@
   },
   {
     "id": "denim_shirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "denim shirt" },
     "description": "A long sleeved button-down shirt made from denim.",
     "//": "This is for 12 oz denim shirt, which I found to be average",
@@ -313,7 +324,8 @@
   },
   {
     "id": "dress_shirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "dress shirt" },
     "description": "A white button-down shirt with long sleeves.  Looks professional!",
     "weight": "250 g",
@@ -363,7 +375,8 @@
   },
   {
     "id": "dress_wedding",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "wedding dress", "str_pl": "wedding dresses" },
     "description": "A beautiful white wedding dress.  What good will it be now?",
     "weight": "9333 g",
@@ -385,7 +398,8 @@
   },
   {
     "id": "flag_shirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "flag t-shirt" },
     "description": "A t-shirt embroidered with an American flag pattern.",
     "weight": "158 g",
@@ -411,7 +425,8 @@
   },
   {
     "id": "flotation_vest",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "flotation vest" },
     "description": "A brightly-colored vest designed to keep you upright and floating in water.",
     "weight": "451 g",
@@ -431,7 +446,8 @@
   },
   {
     "id": "flotation_vest_ms",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "makeshift flotation vest" },
     "description": "A flotation vest made of inflated animal skins.",
     "weight": "451 g",
@@ -451,7 +467,8 @@
   },
   {
     "id": "gown",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "evening gown" },
     "description": "A luxurious evening gown.  It accentuates your curves, or lack thereof.",
     "weight": "1800 g",
@@ -469,7 +486,8 @@
   },
   {
     "id": "halter_top",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "halter top" },
     "description": "A short top made from cotton.",
     "weight": "100 g",
@@ -488,7 +506,8 @@
   },
   {
     "id": "hoodie",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "hoodie" },
     "description": "A sweatshirt with a hood and a \"kangaroo pocket\" in the front for storage.",
     "weight": "420 g",
@@ -518,7 +537,8 @@
   },
   {
     "id": "jersey",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "sports jersey" },
     "//": "Genuine team merch, and priced like it!",
     "description": "A shirt made of cotton, printed with the name and logo of a sports team.",
@@ -537,7 +557,8 @@
   },
   {
     "id": "leotard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leotard" },
     "description": "A skin-tight spandex garment, covering the body from the groin to the shoulders.  With its deep scoop-cut back and high waist cuts, this garment is perfect for showcasing your physique on the stage.",
     "weight": "150 g",
@@ -554,7 +575,8 @@
   },
   {
     "id": "longshirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "long-sleeved t-shirt" },
     "description": "A soft cotton shirt with long sleeves.",
     "weight": "146 g",
@@ -575,7 +597,8 @@
   },
   {
     "id": "longshirt_costume",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "long-sleeved shirt" },
     "description": "A long-sleeved cotton shirt.",
     "copy-from": "longshirt",
@@ -591,7 +614,8 @@
   },
   {
     "id": "shirt_leather",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin shirt" },
     "description": "An overshirt made of very thin, lightweight leather.",
     "weight": "500 g",
@@ -614,7 +638,8 @@
   },
   {
     "id": "shirt_leather_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin shirt" },
     "copy-from": "shirt_leather",
     "looks_like": "shirt_leather",
@@ -623,7 +648,8 @@
   },
   {
     "id": "shirt_leather_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "shirt_leather",
     "looks_like": "shirt_leather",
     "name": { "str": "buckskin shirt" },
@@ -632,7 +658,8 @@
   },
   {
     "id": "vest_leather_light",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin vest" },
     "description": "A vest made of very thin, lightweight leather.",
     "weight": "500 g",
@@ -654,7 +681,8 @@
   },
   {
     "id": "vest_leather_light_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin vest" },
     "copy-from": "vest_leather_light",
     "looks_like": "vest_leather_light",
@@ -663,7 +691,8 @@
   },
   {
     "id": "vest_leather_light_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "vest_leather_light",
     "looks_like": "vest_leather_light",
     "name": { "str": "buckskin vest" },
@@ -672,7 +701,8 @@
   },
   {
     "id": "polo_shirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "polo shirt" },
     "description": "A short-sleeved cotton shirt, slightly thicker than a t-shirt.",
     "weight": "136 g",
@@ -707,7 +737,8 @@
   },
   {
     "id": "postman_shirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "mail carrier shirt" },
     "description": "A light blue button down shirt with a couple of pockets in front and the US postal service logo embroidered on it.",
     "weight": "110 g",
@@ -755,7 +786,8 @@
   },
   {
     "id": "santa_dress",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "Santa dress", "str_pl": "Santa dresses" },
     "description": {
       "//NOLINT(cata-text-style)": "The dot after Mrs is not a period",
@@ -787,7 +819,8 @@
   },
   {
     "id": "santa_dress_long",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "luxury Santa dress", "str_pl": "luxury Santa dresses" },
     "description": "A long red dress with full sleeves and white faux fur trim.  A dress for a queen of the north pole.",
     "weight": "1200 g",
@@ -810,7 +843,8 @@
   },
   {
     "id": "santa_dress_short",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "short Santa dress", "str_pl": "short Santa dresses" },
     "description": {
       "//NOLINT(cata-text-style)": "The dot after Mrs is not a period",
@@ -841,7 +875,8 @@
   },
   {
     "id": "shirt_western",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "western shirt" },
     "description": "A long-sleeved shirt with snap buttons down the front, a style traditionally associated with the Old West.",
     "weight": "250 g",
@@ -888,7 +923,8 @@
   },
   {
     "id": "shirt_straw",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "grass shirt" },
     "description": "A crude and bulky short-sleeved shirt woven from grass.  Definitely not the most comfortable thing to wear.",
     "weight": "500 g",
@@ -914,7 +950,8 @@
   },
   {
     "id": "dress_costume",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "costume dress", "str_pl": "costume dresses" },
     "description": { "str": "A long-sleeved gown made of cheap costumey material." },
     "weight": "800 g",
@@ -956,7 +993,8 @@
   },
   {
     "id": "dress_costume_skimpy",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "skimpy costume dress", "str_pl": "skimpy costume dresses" },
     "description": { "str": "A scandalously short dress, the sort of thing young women wear for halloween." },
     "weight": "600 g",
@@ -1027,7 +1065,8 @@
   },
   {
     "id": "sundress",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "sundress", "str_pl": "sundresses" },
     "description": "A light and breezy cotton dress.",
     "weight": "300 g",
@@ -1052,7 +1091,8 @@
   },
   {
     "id": "sweater",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "sweater" },
     "description": "A warm wool sweater.",
     "weight": "550 g",
@@ -1070,7 +1110,8 @@
   },
   {
     "id": "sweatshirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "sweatshirt" },
     "description": "A thick cotton shirt.",
     "weight": "244 g",
@@ -1088,7 +1129,8 @@
   },
   {
     "id": "technician_shirt_gray",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "work t-shirt" },
     "description": "A t-shirt with a small front pocket.",
     "weight": "200 g",
@@ -1129,7 +1171,8 @@
   },
   {
     "id": "tshirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "t-shirt" },
     "description": "A short-sleeved cotton shirt.",
     "weight": "110 g",
@@ -1155,7 +1198,8 @@
   },
   {
     "id": "tallit_katan",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "tallit katan" },
     "description": "A shirt with four tassels worn by observant Jews in deference to Deuteronomy 22:12, which commands the wearing of fringes on the corner of one's garments.",
     "weight": "158 g",
@@ -1181,7 +1225,8 @@
   },
   {
     "id": "uttarasanga",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "uttarasanga" },
     "description": "A traditional Buddhist shirt, covering most of the upper body, but not the arms.",
     "weight": "250 g",
@@ -1200,7 +1245,8 @@
   },
   {
     "id": "vest_leather",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather vest" },
     "description": "A vest made from thick leather.",
     "weight": "997 g",
@@ -1243,7 +1289,8 @@
   },
   {
     "id": "wool_hoodie",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "wool hoodie" },
     "description": "A hooded wool shirt with a kangaroo pocket in the front.",
     "weight": "580 g",
@@ -1273,7 +1320,8 @@
   },
   {
     "id": "suit_bostonchan",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "Boston-Chan suit" },
     "description": "A professional-looking bright blue wool suit for the Boston-Chan costume.",
     "weight": "680 g",

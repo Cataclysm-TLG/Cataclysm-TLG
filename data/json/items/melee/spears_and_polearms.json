@@ -1,7 +1,7 @@
 [
   {
     "id": "brush_axe",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "bush hook" },
     "description": "A long, slightly curved and hooked steel blade on the end of a sturdy shaft, usually used for clearing brush.  Some people call it a kaiser blade.",
     "weight": "2220 g",
@@ -22,7 +22,7 @@
   },
   {
     "id": "bronze_brush_axe",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "bronze bush hook" },
     "description": "A long, slightly curved and hooked bronze blade on the end of a sturdy shaft.  It could be used to thoroughly ruin something's day, or to cut branches and small trees.",
     "weight": "2350 g",
@@ -42,7 +42,7 @@
     "melee_damage": { "bash": 16, "cut": 24 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "pitchfork",
     "name": { "str": "pitchfork" },
     "category": "tools",
@@ -64,7 +64,7 @@
     "melee_damage": { "bash": 5, "stab": 18 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "pointy_stick",
     "symbol": "/",
     "color": "brown",
@@ -83,7 +83,7 @@
     "melee_damage": { "bash": 4, "stab": 9 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "pointy_stick_long",
     "name": { "str": "crude wooden spear" },
     "description": "A stout pole with one end sharpened to a point.",
@@ -104,7 +104,7 @@
     "melee_damage": { "bash": 5, "stab": 13 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "spear_wood",
     "name": { "str": "fire-hardened wooden spear" },
     "description": "A stout wooden pole with a fire-hardened point.",
@@ -125,7 +125,7 @@
     "melee_damage": { "bash": 5, "stab": 15 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "spear_shaft_sharpened",
     "name": { "str": "sharpened spear shaft" },
     "description": "You've gone through the effort of making a proper spear shaft, but instead of attaching something sharp to the end you just whittled a point into the wood.  The peak of pointy stick technology.",
@@ -148,7 +148,8 @@
   },
   {
     "id": "makeshift_scythe_war",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "makeshift war scythe" },
     "description": "This farming tool has been modified into an improvised weapon by rotating its blade 90 degrees, transforming it into a deadly giant blade on the end of a stick.  It's quite fragile, however.",
@@ -169,7 +170,7 @@
   },
   {
     "id": "makeshift_glaive",
-    "type": "GENERIC",
+    "type": "ITEM",
     "weight": "1450 g",
     "volume": "2100 ml",
     "longest_side": "230 cm",
@@ -188,7 +189,7 @@
     "melee_damage": { "bash": 9, "cut": 24 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "spear_knife",
     "name": { "str": "knife spear" },
     "description": "A stout wooden pole with the blade of a knife bolted into place at the end.  The shape of a knife blade isn't ideal for a spear, but it's still very sharp and effective.",
@@ -211,7 +212,7 @@
   },
   {
     "id": "spear_stone",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "stone spear" },
     "description": "A stout wooden pole with a sharp stone spearhead.",
     "weight": "1575 g",
@@ -232,7 +233,7 @@
   },
   {
     "id": "spear_stone_simple",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "simple stone spear" },
     "description": "A long stick with a sharp stone spearhead.",
     "weight": "1200 g",
@@ -253,7 +254,7 @@
     "melee_damage": { "bash": 8, "stab": 20 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "spear_copper",
     "name": { "str": "copper spear" },
     "description": "A stout wooden pole with a spearhead worked from copper.",
@@ -275,7 +276,7 @@
   },
   {
     "id": "spear_bronze",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "bronze spear" },
     "description": "A spear with a bronze head.",
     "weight": "1575 g",
@@ -296,7 +297,7 @@
     "melee_damage": { "bash": 5, "stab": 29 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "spear_steel",
     "name": { "str": "steel spear" },
     "description": "A stout wooden pole with a hand-forged steel spearhead.",
@@ -317,7 +318,7 @@
     "melee_damage": { "bash": 6, "stab": 30 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "spear_short_steel",
     "name": { "str": "steel short spear" },
     "description": "A shorter spear designed for use in close quarters.  Weapons like these were once used by fighting forces around the world, from the Vikings to the Zulu.",
@@ -339,7 +340,7 @@
   },
   {
     "id": "spear_short_bronze",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "bronze short spear" },
     "description": "A shorter spear with a bronze head.  What it lacks in reach it more than makes up for in maneuverability.",
     "weight": "1025 g",
@@ -360,7 +361,7 @@
     "melee_damage": { "bash": 5, "stab": 23 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "fire_poker",
     "symbol": "/",
     "color": "light_gray",
@@ -380,7 +381,7 @@
     "melee_damage": { "bash": 13, "stab": 7 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "sharpened_pipe",
     "symbol": "/",
     "color": "light_gray",
@@ -399,7 +400,7 @@
     "melee_damage": { "bash": 13, "stab": 5 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "qiang",
     "name": { "str_sp": "qiang" },
     "//": "Better balanced and more accurate, but less base damage than a steel spear.",
@@ -423,7 +424,7 @@
   },
   {
     "id": "halberd",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "halberd" },
@@ -445,7 +446,7 @@
   },
   {
     "id": "glaive",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "glaive" },
@@ -464,7 +465,7 @@
     "melee_damage": { "bash": 8, "cut": 35 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "naginata",
     "name": { "str_sp": "naginata" },
     "description": "A lightweight Japanese polearm reminiscent of a sharply curved katana with an exceptionally long handle.  Originally a battlefield tool, they eventually came to be used for home defense, and were widely used for this purpose by women of the samurai class.",
@@ -485,7 +486,7 @@
     "melee_damage": { "cut": 31 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "javelin",
     "name": { "str": "wooden javelin" },
     "description": "A fire-hardened wooden spear honed to a sharper point.",
@@ -507,10 +508,10 @@
     "melee_damage": { "bash": 3, "stab": 10 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "javelin_iron",
     "name": { "str": "steel javelin" },
-    "description": "An steel-tipped wooden throwing spear.",
+    "description": "A steel-tipped wooden throwing spear.",
     "weight": "960 g",
     "color": "light_gray",
     "symbol": "/",
@@ -530,7 +531,7 @@
   },
   {
     "id": "pike_wood",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "name": { "ctxt": "weapon", "str": "wooden pike" },
     "description": "A medieval weapon consisting of a very long wooden shaft with a fire-hardened point.",
@@ -553,7 +554,7 @@
   },
   {
     "id": "pike_copper",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "name": { "ctxt": "weapon", "str": "copper pike" },
     "description": "A medieval weapon consisting of a very long wooden shaft tipped with a copper spearhead.",
@@ -576,7 +577,7 @@
   },
   {
     "id": "pike",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "ctxt": "weapon", "str": "pike" },
     "description": "A medieval weapon consisting of a very long wooden shaft tipped with a steel spearhead.",
     "weight": "3200 g",
@@ -597,7 +598,7 @@
     "melee_damage": { "bash": 9, "stab": 32 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "scythe_war",
     "name": { "str": "war scythe" },
     "description": "A pole weapon with a curving single-edged blade.  Its blade bears some superficial resemblance to that of an agricultural scythe from which it likely evolved.",
@@ -618,7 +619,7 @@
   },
   {
     "id": "poleaxe",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "poleaxe" },
@@ -639,7 +640,7 @@
   },
   {
     "id": "ji",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str_sp": "ji" },
     "description": "A bronze polearm that originated in the Shang dynasty of China, if not earlier.  It combines a long spear head with a perpendicular axe plade shaped like a crescent moon.",
     "weight": "2390 g",

@@ -253,9 +253,33 @@ std::vector <tripoint> line_to( const tripoint &loc1, const tripoint &loc2, int 
     return line;
 }
 
+std::vector<point_abs_om> orthogonal_line_to( const point_abs_om &p1, const point_abs_om &p2 )
+{
+    point diff( p2.x() - p1.x(), p2.y() - p1.y() );
+    point diff_abs = diff.abs();
+    point diff_sign( diff.x > 0 ? 1 : -1, diff.y > 0 ? 1 : -1 );
+
+    point_abs_om iter = p1;
+    std::vector<point_abs_om> points = { iter };
+    point i;
+    for( i.x = 0, i.y = 0; i.x < diff_abs.x || i.y < diff_abs.y; ) {
+        if( ( 0.5 + i.x ) / diff_abs.x < ( 0.5 + i.y ) / diff_abs.y ) {
+            // next step is horizontal
+            iter.x() += diff_sign.x;
+            i.x++;
+        } else {
+            // next step is vertical
+            iter.y() += diff_sign.y;
+            i.y++;
+        }
+        points.emplace_back( iter );
+    }
+    return points;
+}
+
 float rl_dist_exact( const tripoint &loc1, const tripoint &loc2 )
 {
-    return trig_dist( loc1, loc2 );
+    return trig_dist_precise( loc1, loc2 );
 }
 
 int manhattan_dist( const point &loc1, const point &loc2 )
@@ -337,7 +361,7 @@ unsigned make_xyz( const tripoint &p )
 static std::tuple<double, double, double> slope_of( const std::vector<tripoint> &line )
 {
     cata_assert( !line.empty() && line.front() != line.back() );
-    const double len = trig_dist( line.front(), line.back() );
+    const double len = trig_dist_precise( line.front(), line.back() );
     double normDx = ( line.back().x - line.front().x ) / len;
     double normDy = ( line.back().y - line.front().y ) / len;
     double normDz = ( line.back().z - line.front().z ) / len;
@@ -350,7 +374,7 @@ static std::tuple<double, double, double> slope_of( const std::vector<tripoint> 
 static std::tuple<double, double, double> slope_of( const std::vector<tripoint_bub_ms> &line )
 {
     cata_assert( !line.empty() && line.front() != line.back() );
-    const double len = trig_dist( line.front(), line.back() );
+    const double len = trig_dist_precise( line.front(), line.back() );
     double normDx = ( line.back().x() - line.front().x() ) / len;
     double normDy = ( line.back().y() - line.front().y() ) / len;
     double normDz = ( line.back().z() - line.front().z() ) / len;
@@ -998,27 +1022,27 @@ FastDistanceApproximation rl_dist_fast( const point_bub_ms &a, const point_bub_m
     return rl_dist_fast( tripoint_bub_ms( a, 0 ), tripoint_bub_ms( b, 0 ) );
 }
 
-float trig_dist( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 )
+int trig_dist( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 )
 {
-    return std::sqrt( static_cast<double>( ( loc1.x() - loc2.x() ) * ( loc1.x() - loc2.x() ) ) +
-                      ( ( loc1.y() - loc2.y() ) * ( loc1.y() - loc2.y() ) ) +
-                      ( ( loc1.z() - loc2.z() ) * ( loc1.z() - loc2.z() ) ) );
+    return static_cast<int>( std::round( std::sqrt( static_cast<double>( ( loc1.x() - loc2.x() ) *
+                                         ( loc1.x() - loc2.x() ) ) +
+                                         ( ( loc1.y() - loc2.y() ) * ( loc1.y() - loc2.y() ) ) +
+                                         ( ( 2 * ( loc1.z() - loc2.z() ) ) * ( 2 * ( loc1.z() - loc2.z() ) ) ) ) ) );
 }
 
-float trig_dist( const point_bub_ms &loc1, const point_bub_ms &loc2 )
+int trig_dist( const point_bub_ms &loc1, const point_bub_ms &loc2 )
 {
     return trig_dist( tripoint_bub_ms( loc1, 0 ), tripoint_bub_ms( loc2, 0 ) );
 }
 
-float trig_dist_z_adjust( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 )
+float trig_dist_precise( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 )
 {
     return std::sqrt( static_cast<double>( ( loc1.x() - loc2.x() ) * ( loc1.x() - loc2.x() ) ) +
                       ( ( loc1.y() - loc2.y() ) * ( loc1.y() - loc2.y() ) ) +
                       ( ( 2 * ( loc1.z() - loc2.z() ) ) * ( 2 * ( loc1.z() - loc2.z() ) ) ) );
 }
 
-float trig_dist_z_adjust( const point_bub_ms &loc1, const point_bub_ms &loc2 )
+float trig_dist_precise( const point_bub_ms &loc1, const point_bub_ms &loc2 )
 {
-    return trig_dist_z_adjust( tripoint_bub_ms( loc1, 0 ), tripoint_bub_ms( loc2, 0 ) );
+    return trig_dist_precise( tripoint_bub_ms( loc1, 0 ), tripoint_bub_ms( loc2, 0 ) );
 }
-

@@ -3,17 +3,13 @@
     "type": "item_group",
     "id": "milspec_arsenal_50bmg_sniper_gun&mags&cans",
     "subtype": "collection",
-    "items": [ { "group": "milspec_arsenal_50bmg_sniper_gun&ammo" }, { "item": "ammo_can_50_50bmg_fmj_120", "count": [ 0, 4 ] } ]
+    "items": [ { "group": "milspec_arsenal_50bmg_sniper_gun&ammo" } ]
   },
   {
     "type": "item_group",
     "id": "milspec_arsenal_50bmg_sniper_gun&ammo",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_50bmg_sniper_gun&mags" },
-      { "group": "ammo_can_50_any_full", "prob": 30, "count": [ 0, 1 ] },
-      { "group": "ammo_can_50_any_part", "prob": 80, "count": [ 0, 2 ] }
-    ]
+    "items": [ { "group": "milspec_arsenal_50bmg_sniper_gun&mags" } ]
   },
   {
     "type": "item_group",

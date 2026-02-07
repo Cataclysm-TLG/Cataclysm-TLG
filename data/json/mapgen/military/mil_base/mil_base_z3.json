@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "mil_base_3i3" ],
     "weight": 250,
     "object": {

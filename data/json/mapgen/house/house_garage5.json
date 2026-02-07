@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_garage5" ],
     "weight": 200,
     "object": {
@@ -15,7 +14,7 @@
         "..```````#R   ||||||+|#.",
         "..```````#R   +>U|vQQQ#.",
         "`````````#Y   ||||||||#.",
-        "`!```````#    |6664321#.",
+        "`!```````#    |é664321#.",
         "`!```````*    |      5o.",
         "`[%%%%%%%#   AJ  A   Oo.",
         "`##ooooo##   AJ     7F#.",
@@ -49,7 +48,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_garage5_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -85,7 +83,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_garage5_basement",
     "object": {
       "fill_ter": "t_thconc_floor",

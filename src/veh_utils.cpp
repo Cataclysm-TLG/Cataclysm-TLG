@@ -39,19 +39,32 @@ int calc_xp_gain( const vpart_info &vp, const skill_id &sk, const Character &who
         return 0;
     }
 
-    // how many levels are we above the requirement?
-    const int lvl = std::max( static_cast<int>( who.get_skill_level( sk ) ) - iter->second, 1 );
+    // Installation only teaches to 2 ranks above the skill requirement.
+    if( static_cast<int>( who.get_skill_level( sk ) ) > iter->second + 2 ) {
+        return 0;
+    }
 
-    // scale xp gain per hour according to relative level
-    // 0-1: 60 xp /h
+    const int lvl = std::max( static_cast<int>( who.get_skill_level( sk ) ) - iter->second, 0 );
+
+    //  Scale exp gain per hour according to relative level.
+    //   0: 60 xp /h
+    //   1: 30 xp /h
     //   2: 15 xp /h
-    //   3:  6 xp /h
-    //   4:  4 xp /h
-    //   5:  3 xp /h
-    //   6:  2 xp /h
-    //  7+:  1 xp /h
-    return std::ceil( to_moves<double>( vp.install_moves ) /
-                      to_moves<int>( 1_minutes * std::pow( lvl, 2 ) ) );
+
+    /* Some installations are very fast, so we need to ensure that we're not
+       giving an accelerated amount of XP for those. */
+    double exp = to_moves<double>( vp.install_moves ) /
+                to_moves<double>( 1_minutes ) /
+                static_cast<double>( 1 << lvl );
+
+    int exp_int = static_cast<int>( exp );
+    double exp_fraction = exp - exp_int;
+
+    if( rng_float( 0.0, 1.0 ) < exp_fraction ) {
+        exp_int++;
+    }
+
+    return exp_int;
 }
 
 vehicle_part *most_repairable_part( vehicle &veh, Character &who )

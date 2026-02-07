@@ -569,8 +569,8 @@
     "time": "1 m",
     "reversible": true,
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_sheet_simple", 2 ] ],
-    "flags": [ "BLIND_HARD" ]
+    "components": [ [ [ "cotton_sheet", 2 ] ] ],
+    "flags": [ "BLIND_EASY" ]
   },
   {
     "result": "footrags_nomex",
@@ -582,8 +582,8 @@
     "time": "1 m",
     "reversible": true,
     "autolearn": true,
-    "using": [ [ "tailoring_nomex_sheet", 2 ] ],
-    "flags": [ "BLIND_HARD" ]
+    "components": [ [ [ "nomex_sheet", 2 ] ] ],
+    "flags": [ "BLIND_EASY" ]
   },
   {
     "result": "footrags_fur",
@@ -596,7 +596,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "fur_sheet", 2 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_EASY" ]
   },
   {
     "result": "footrags_faux_fur",
@@ -608,7 +608,7 @@
     "time": "1 m 30 s",
     "autolearn": true,
     "components": [ [ [ "faux_fur_sheet", 2 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_EASY" ]
   },
   {
     "result": "footrags_leather",
@@ -621,7 +621,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "leather_sheet", 2 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_EASY" ]
   },
   {
     "result": "footrags_wool",
@@ -634,7 +634,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "felt_sheet", 2 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_EASY" ]
   },
   {
     "result": "leathersandals",
@@ -886,21 +886,21 @@
       { "proficiency": "prof_elastics" },
       { "proficiency": "prof_cobbling" }
     ],
-    "using": [ [ "tailoring_neoprene_sheet", 7 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 10 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 7 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_spandex_sheet", 10 ] ]
   },
   {
     "result": "xs_wetsuit_booties",
     "type": "recipe",
     "copy-from": "wetsuit_booties",
     "time": "5 h",
-    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 8 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_spandex_sheet", 8 ] ]
   },
   {
     "result": "xl_wetsuit_booties",
     "type": "recipe",
     "copy-from": "wetsuit_booties",
     "time": "8 h",
-    "using": [ [ "tailoring_neoprene_sheet", 9 ], [ "shoe_rubber", 2 ], [ "adhesive_rubber", 2 ], [ "tailoring_nylon_sheet", 15 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 9 ], [ "shoe_rubber", 2 ], [ "adhesive_rubber", 2 ], [ "tailoring_spandex_sheet", 15 ] ]
   },
   {
     "result": "wetsuit_booties_thick",
@@ -914,7 +914,12 @@
       { "proficiency": "prof_elastics" },
       { "proficiency": "prof_cobbling" }
     ],
-    "using": [ [ "tailoring_neoprene_sheet", 12 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 20 ] ]
+    "using": [
+      [ "tailoring_neoprene_sheet", 12 ],
+      [ "shoe_rubber", 1 ],
+      [ "adhesive_rubber", 1 ],
+      [ "tailoring_spandex_sheet", 20 ]
+    ]
   },
   {
     "result": "xs_wetsuit_booties_thick",
@@ -922,14 +927,24 @@
     "copy-from": "wetsuit_booties_thick",
     "difficulty": 4,
     "time": "6 h",
-    "using": [ [ "tailoring_neoprene_sheet", 10 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 16 ] ]
+    "using": [
+      [ "tailoring_neoprene_sheet", 10 ],
+      [ "shoe_rubber", 1 ],
+      [ "adhesive_rubber", 1 ],
+      [ "tailoring_spandex_sheet", 16 ]
+    ]
   },
   {
     "result": "xl_wetsuit_booties_thick",
     "type": "recipe",
     "copy-from": "wetsuit_booties_thick",
     "time": "12 h",
-    "using": [ [ "tailoring_neoprene_sheet", 16 ], [ "shoe_rubber", 2 ], [ "adhesive_rubber", 2 ], [ "tailoring_nylon_sheet", 30 ] ]
+    "using": [
+      [ "tailoring_neoprene_sheet", 16 ],
+      [ "shoe_rubber", 2 ],
+      [ "adhesive_rubber", 2 ],
+      [ "tailoring_spandex_sheet", 30 ]
+    ]
   },
   {
     "result": "roller_blades",

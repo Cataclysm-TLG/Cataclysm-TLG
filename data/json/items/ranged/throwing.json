@@ -1,7 +1,8 @@
 [
   {
     "id": "bolas",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "bolas", "str_pl": "bolases" },
     "description": "Some ropes with weights, designed to tangle the legs of a target when thrown, usually at an animal.  Used by the Gauchos of Argentina.",
@@ -18,7 +19,7 @@
     "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "disc_golf",
     "category": "weapons",
     "price": "10 USD",
@@ -34,7 +35,7 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "frisbee",
     "category": "weapons",
     "price": "10 USD",
@@ -51,7 +52,8 @@
   },
   {
     "id": "net",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "net" },
     "description": "A mesh of string and weights, traditionally used to catch fish and to entangle opponents in combat.",
@@ -67,7 +69,7 @@
     "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "lawn_dart",
     "category": "weapons",
     "price": "10 USD",
@@ -85,7 +87,7 @@
     "melee_damage": { "cut": 8 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "weighted_dart",
     "category": "weapons",
     "price": "10 USD",
@@ -104,7 +106,7 @@
     "melee_damage": { "cut": 8 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "throwing_axe",
     "category": "weapons",
     "price": "124 USD",
@@ -117,13 +119,13 @@
     "volume": "3058 ml",
     "weight": "1000 g",
     "longest_side": "43 cm",
-    "to_hit": -1,
+    "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "uneven" },
     "weapon_category": [ "HAND_AXES" ],
     "thrown_damage": [ { "damage_type": "bash", "amount": 6 }, { "damage_type": "cut", "amount": 16 } ],
     "melee_damage": { "bash": 10, "cut": 17 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "throwing_knife",
     "category": "weapons",
     "price": "52 USD",
@@ -143,7 +145,8 @@
   },
   {
     "id": "throwing_stick",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "throwing stick" },
     "description": "A stick carved into a shape suitable for throwing at a target.  It's not a boomerang, so don't expect it to return to your hand.",
@@ -159,7 +162,7 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "javelin_fletched",
     "name": { "str": "iron war dart" },
     "description": "An iron-tipped fletched throwing spear with a throwing loop for extra range.",
@@ -179,7 +182,7 @@
     "melee_damage": { "bash": 5, "stab": 18 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "javelin_fletched_bronze",
     "name": { "str": "bronze war dart" },
     "description": "A bronze-tipped fletched throwing spear with a throwing loop for extra range.",

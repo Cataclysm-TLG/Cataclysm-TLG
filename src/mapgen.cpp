@@ -84,6 +84,7 @@
 #include "vehicle_group.h"
 #include "vpart_position.h"
 #include "vpart_range.h"
+#include "weighted_dbl_or_var_list.h"
 #include "weighted_list.h"
 #include "creature_tracker.h"
 
@@ -190,6 +191,7 @@ static const ter_str_id ter_t_marloss( "t_marloss" );
 static const ter_str_id ter_t_radio_tower( "t_radio_tower" );
 static const ter_str_id ter_t_reinforced_door_glass_c( "t_reinforced_door_glass_c" );
 static const ter_str_id ter_t_reinforced_glass( "t_reinforced_glass" );
+static const ter_str_id ter_t_reinforced_glass_lab( "t_reinforced_glass_lab" );
 static const ter_str_id ter_t_rock_floor( "t_rock_floor" );
 static const ter_str_id ter_t_sewage( "t_sewage" );
 static const ter_str_id ter_t_stairs_down( "t_stairs_down" );
@@ -573,7 +575,10 @@ static void GENERATOR_pre_burn( map &md,
             continue; // failed roll
         }
         for( tripoint_bub_ms current_tile : all_points_in_map ) {
-            if( md.has_flag_ter( ter_furn_flag::TFLAG_NATURAL_UNDERGROUND, current_tile ) ) {
+            if( md.has_flag_ter( ter_furn_flag::TFLAG_NATURAL_UNDERGROUND, current_tile ) ||
+                md.has_flag_ter( ter_furn_flag::TFLAG_GOES_DOWN, current_tile ) ||
+                md.has_flag_ter( ter_furn_flag::TFLAG_GOES_UP, current_tile ) ) {
+                // skip natural underground walls, or any stairs. (Even man-made or wooden stairs)
                 continue;
             }
             if( md.has_flag_ter( ter_furn_flag::TFLAG_WALL, current_tile ) ) {
@@ -1227,29 +1232,19 @@ load_mapgen_function( const JsonObject &jio, const std::string &id_base,
             weight.max.constant() >= INT_MAX ) ) {
         jio.throw_error_at( "weight", "max value out of bounds (0 - max int)" );
     }
-
-    if( jio.get_bool( "disabled", false ) ) {
-        jio.allow_omitted_members();
-        return nullptr; // nothing
-    }
-    const std::string mgtype = jio.get_string( "method" );
-    if( mgtype == "builtin" ) {
-        if( const building_gen_pointer ptr = get_mapgen_cfunction( jio.get_string( "name" ) ) ) {
+    if( jio.has_string( "builtin" ) ) {
+        if( const building_gen_pointer ptr = get_mapgen_cfunction( jio.get_string( "builtin" ) ) ) {
             return std::make_shared<mapgen_function_builtin>( ptr, std::move( weight ) );
         } else {
-            jio.throw_error_at( "name", "function does not exist" );
+            jio.throw_error_at( "builtin", "function does not exist" );
         }
-    } else if( mgtype == "json" ) {
-        if( !jio.has_object( "object" ) ) {
-            jio.throw_error( R"(mapgen with method "json" must define key "object")" );
-        }
-        JsonObject jo = jio.get_object( "object" );
-        jo.allow_omitted_members();
-        return std::make_shared<mapgen_function_json>(
-                   jo, std::move( weight ), "mapgen " + id_base, offset, total );
-    } else {
-        jio.throw_error_at( "method", R"(invalid value: must be "builtin" or "json")" );
+    } else if( !jio.has_object( "object" ) ) {
+        jio.throw_error( R"(mapgen must define key "object" or "builtin")" );
     }
+    JsonObject jo = jio.get_object( "object" );
+    jo.allow_omitted_members();
+    return std::make_shared<mapgen_function_json>( jo, std::move( weight ), "mapgen " + id_base, offset,
+            total );
 }
 
 void load_and_add_mapgen_function( const JsonObject &jio, const std::string &id_base,
@@ -1263,42 +1258,30 @@ void load_and_add_mapgen_function( const JsonObject &jio, const std::string &id_
 
 static void load_nested_mapgen( const JsonObject &jio, const nested_mapgen_id &id_base )
 {
-    const std::string mgtype = jio.get_string( "method" );
-    if( mgtype == "json" ) {
-        if( jio.has_object( "object" ) ) {
-            int weight = jio.get_int( "weight", 1000 );
-            JsonObject jo = jio.get_object( "object" );
-            jo.allow_omitted_members();
-            nested_mapgens[id_base].add(
-                std::make_shared<mapgen_function_json_nested>(
-                    jo, "nested mapgen " + id_base.str() ),
-                weight );
-        } else {
-            debugmsg( "Nested mapgen: Invalid mapgen function (missing \"object\" object)", id_base.c_str() );
-        }
+    if( jio.has_object( "object" ) ) {
+        int weight = jio.get_int( "weight", 1000 );
+        JsonObject jo = jio.get_object( "object" );
+        jo.allow_omitted_members();
+        nested_mapgens[id_base].add(
+            std::make_shared<mapgen_function_json_nested>(
+                jo, "nested mapgen " + id_base.str() ),
+            weight );
     } else {
-        debugmsg( "Nested mapgen: type for id %s was %s, but nested mapgen only supports \"json\"",
-                  id_base.c_str(), mgtype.c_str() );
+        debugmsg( "Nested mapgen: Invalid mapgen function (missing \"object\" object)", id_base.c_str() );
     }
 }
 
 static void load_update_mapgen( const JsonObject &jio, const update_mapgen_id &id_base )
 {
-    const std::string mgtype = jio.get_string( "method" );
-    if( mgtype == "json" ) {
-        if( jio.has_object( "object" ) ) {
-            JsonObject jo = jio.get_object( "object" );
-            jo.allow_omitted_members();
-            update_mapgens[id_base].add(
-                std::make_unique<update_mapgen_function_json>(
-                    jo, "update mapgen " + id_base.str() ) );
-        } else {
-            debugmsg( "Update mapgen: Invalid mapgen function (missing \"object\" object)",
-                      id_base.c_str() );
-        }
+    if( jio.has_object( "object" ) ) {
+        JsonObject jo = jio.get_object( "object" );
+        jo.allow_omitted_members();
+        update_mapgens[id_base].add(
+            std::make_unique<update_mapgen_function_json>(
+                jo, "update mapgen " + id_base.str() ) );
     } else {
-        debugmsg( "Update mapgen: type for id %s was %s, but update mapgen only supports \"json\"",
-                  id_base.c_str(), mgtype.c_str() );
+        debugmsg( "Update mapgen: Invalid mapgen function (missing \"object\" object)",
+                  id_base.c_str() );
     }
 }
 
@@ -1455,7 +1438,7 @@ mapgen_function_json_nested::mapgen_function_json_nested(
 {
 }
 
-jmapgen_int::jmapgen_int( const JsonObject &jo, const std::string_view tag )
+jmapgen_int::jmapgen_int( const JsonObject &jo, std::string_view tag )
 {
     if( jo.has_array( tag ) ) {
         JsonArray sparray = jo.get_array( tag );
@@ -1481,7 +1464,7 @@ jmapgen_int::jmapgen_int( const JsonObject &jo, const std::string_view tag )
     }
 }
 
-jmapgen_int::jmapgen_int( const JsonObject &jo, const std::string_view tag, const int &def_val,
+jmapgen_int::jmapgen_int( const JsonObject &jo, std::string_view tag, const int &def_val,
                           const int &def_valmax )
     : val( def_val )
     , valmax( def_valmax )
@@ -1706,7 +1689,7 @@ static bool is_null_helper( const int_id<T> &id )
     return id.id().is_null();
 }
 
-static bool is_null_helper( const std::string_view )
+static bool is_null_helper( std::string_view )
 {
     return false;
 }
@@ -1764,7 +1747,7 @@ static bool is_valid_helper( const int_id<T> & )
     return true;
 }
 
-static bool is_valid_helper( const std::string_view )
+static bool is_valid_helper( std::string_view )
 {
     return true;
 }
@@ -2175,6 +2158,7 @@ std::string enum_to_string<mapgen_parameter_scope>( mapgen_parameter_scope v )
     switch( v ) {
         // *INDENT-OFF*
         case mapgen_parameter_scope::overmap_special: return "overmap_special";
+        case mapgen_parameter_scope::omt_stack: return "omt_stack";
         case mapgen_parameter_scope::omt: return "omt";
         case mapgen_parameter_scope::nest: return "nest";
         // *INDENT-ON*
@@ -2283,6 +2267,18 @@ mapgen_arguments mapgen_parameters::get_args(
         if( param.scope() == scope ) {
             cata_variant value = md.get_arg_or( param_name, param.get( md ) );
             result.emplace( param_name, value );
+        }
+        if( param.scope() == mapgen_parameter_scope::omt_stack && scope == mapgen_parameter_scope::omt ) {
+            const point_abs_omt &p_scope = md.pos().xy();
+            overmap *om = overmap_buffer.get_existing_om_global( p_scope ).om;
+            std::optional<cata_variant> v = om->get_existing_omt_stack_argument( p_scope, param_name );
+            if( !!v ) {
+                result.emplace( param_name, *v );
+            } else {
+                cata_variant value = md.get_arg_or( param_name, param.get( md ) );
+                om->add_omt_stack_argument( p_scope, param_name, value );
+                result.emplace( param_name, value );
+            }
         }
     }
     return mapgen_arguments{ result };
@@ -2413,7 +2409,7 @@ class jmapgen_field : public jmapgen_piece
         std::vector<int> intensities;
         time_duration age;
         bool remove;
-        jmapgen_field( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_field( const JsonObject &jsi, std::string_view/*context*/ ) :
             ftype( jsi.get_member( "field" ) )
             , age( time_duration::from_turns( jsi.get_int( "age", 0 ) ) )
             , remove( jsi.get_bool( "remove", false ) ) {
@@ -2457,7 +2453,7 @@ class jmapgen_npc : public jmapgen_piece
         bool target;
         std::vector<trait_id> traits;
         std::string unique_id;
-        jmapgen_npc( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_npc( const JsonObject &jsi, std::string_view/*context*/ ) :
             npc_class( jsi.get_member( "class" ) )
             , target( jsi.get_bool( "target", false ) ) {
             if( jsi.has_string( "add_trait" ) ) {
@@ -2513,7 +2509,7 @@ class jmapgen_faction : public jmapgen_piece
 {
     public:
         mapgen_value<faction_id> id;
-        jmapgen_faction( const JsonObject &jsi, const std::string_view/*context*/ )
+        jmapgen_faction( const JsonObject &jsi, std::string_view/*context*/ )
             : id( jsi.get_member( "id" ) ) {
         }
         mapgen_phase phase() const override {
@@ -2548,7 +2544,7 @@ class jmapgen_sign : public jmapgen_piece_with_has_vehicle_collision
     public:
         translation signage;
         std::string snippet;
-        jmapgen_sign( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_sign( const JsonObject &jsi, std::string_view/*context*/ ) :
             snippet( jsi.get_string( "snippet", "" ) ) {
             jsi.read( "signage", signage );
             optional( jsi, false, "furniture", sign_furniture, furn_f_sign );
@@ -2601,7 +2597,7 @@ class jmapgen_graffiti : public jmapgen_piece
     public:
         translation text;
         std::string snippet;
-        jmapgen_graffiti( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_graffiti( const JsonObject &jsi, std::string_view/*context*/ ) :
             snippet( jsi.get_string( "snippet", "" ) ) {
             jsi.read( "text", text );
             if( text.empty() && snippet.empty() ) {
@@ -2649,7 +2645,7 @@ class jmapgen_vending_machine : public jmapgen_piece_with_has_vehicle_collision
         mapgen_value<item_group_id> group_id;
         bool powered;
         bool networked;
-        jmapgen_vending_machine( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_vending_machine( const JsonObject &jsi, std::string_view/*context*/ ) :
             reinforced( jsi.get_bool( "reinforced", false ) )
             , powered( jsi.get_bool( "powered", false ) )
             , networked( jsi.get_bool( "networked", false ) ) {
@@ -2684,7 +2680,7 @@ class jmapgen_toilet : public jmapgen_piece_with_has_vehicle_collision
 {
     public:
         jmapgen_int amount;
-        jmapgen_toilet( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_toilet( const JsonObject &jsi, std::string_view/*context*/ ) :
             amount( jsi, "amount", 0, 0 ) {
         }
         mapgen_phase phase() const override {
@@ -2711,7 +2707,7 @@ class jmapgen_gaspump : public jmapgen_piece_with_has_vehicle_collision
     public:
         jmapgen_int amount;
         mapgen_value<itype_id> fuel;
-        jmapgen_gaspump( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_gaspump( const JsonObject &jsi, std::string_view/*context*/ ) :
             amount( jsi, "amount", 0, 0 ) {
             if( jsi.has_member( "fuel" ) ) {
                 jsi.read( "fuel", fuel );
@@ -2759,7 +2755,7 @@ class jmapgen_liquid_item : public jmapgen_piece
         jmapgen_int amount;
         mapgen_value<itype_id> liquid;
         jmapgen_int chance;
-        jmapgen_liquid_item( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_liquid_item( const JsonObject &jsi, std::string_view/*context*/ ) :
             amount( jsi, "amount", -1, -1 )
             , liquid( jsi.get_member( "liquid" ) )
             , chance( jsi, "chance", 1, 1 ) {
@@ -2813,7 +2809,7 @@ class jmapgen_corpse : public jmapgen_piece
     public:
         mongroup_id group;
         time_duration age;
-        jmapgen_corpse( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_corpse( const JsonObject &jsi, std::string_view/*context*/ ) :
             group( jsi.get_member( "group" ) )
             , age( time_duration::from_days( jsi.get_int( "age", 0 ) ) ) {
         }
@@ -2842,7 +2838,7 @@ class jmapgen_item_group : public jmapgen_piece
         item_group_id group_id;
         jmapgen_int chance;
         std::string faction;
-        jmapgen_item_group( const JsonObject &jsi, const std::string_view context ) :
+        jmapgen_item_group( const JsonObject &jsi, std::string_view context ) :
             chance( jsi, "chance", 100, 100 ) {
             JsonValue group = jsi.get_member( "item" );
             group_id = item_group::load_item_group( group, "collection",
@@ -2907,7 +2903,6 @@ class jmapgen_loot : public jmapgen_piece
             } else {
                 result_group.add_group_entry( group, 100 );
             }
-            result_group.finalize( itype_id::NULL_ID() );
         }
 
         void apply( const mapgendata &dat, const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z,
@@ -2940,7 +2935,7 @@ class jmapgen_monster_group : public jmapgen_piece
         mapgen_value<mongroup_id> id;
         float density;
         jmapgen_int chance;
-        jmapgen_monster_group( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_monster_group( const JsonObject &jsi, std::string_view/*context*/ ) :
             id( jsi.get_member( "monster" ) )
             , density( jsi.get_float( "density", -1.0f ) )
             , chance( jsi, "chance", 1, 1 ) {
@@ -2988,7 +2983,7 @@ class jmapgen_monster : public jmapgen_piece
         bool target;
         bool use_pack_size;
         struct spawn_data data;
-        jmapgen_monster( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_monster( const JsonObject &jsi, std::string_view/*context*/ ) :
             chance( jsi, "chance", 100, 100 )
             , pack_size( jsi, "pack_size", 1, 1 )
             , one_or_none( jsi.get_bool( "one_or_none",
@@ -3160,7 +3155,7 @@ class jmapgen_vehicle : public jmapgen_piece_with_has_vehicle_collision
         int fuel;
         int status;
         std::string faction;
-        jmapgen_vehicle( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_vehicle( const JsonObject &jsi, std::string_view/*context*/ ) :
             type( jsi.get_member( "vehicle" ) )
             , chance( jsi, "chance", 1, 1 )
             //, rotation( jsi.get_int( "rotation", 0 ) ) // unless there is a way for the json parser to
@@ -3343,7 +3338,7 @@ class jmapgen_spawn_item : public jmapgen_piece
         jmapgen_int amount;
         jmapgen_int chance;
         std::set<flag_id> flags;
-        jmapgen_spawn_item( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_spawn_item( const JsonObject &jsi, std::string_view/*context*/ ) :
             type( jsi.get_member( "item" ) )
             , amount( jsi, "amount", 1, 1 )
             , chance( jsi, "chance", 100, 100 )
@@ -3393,7 +3388,7 @@ class jmapgen_trap : public jmapgen_piece_with_has_vehicle_collision
         mapgen_value<trap_id> id;
         bool remove = false;
 
-        jmapgen_trap( const JsonObject &jsi, const std::string_view/*context*/ ) {
+        jmapgen_trap( const JsonObject &jsi, std::string_view/*context*/ ) {
             init( jsi.get_member( "trap" ) );
             remove = jsi.get_bool( "remove", false );
         }
@@ -3441,7 +3436,7 @@ class jmapgen_furniture : public jmapgen_piece_with_has_vehicle_collision
 {
     public:
         mapgen_value<furn_id> id;
-        jmapgen_furniture( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_furniture( const JsonObject &jsi, std::string_view/*context*/ ) :
             jmapgen_furniture( jsi.get_member( "furn" ) ) {}
         explicit jmapgen_furniture( const JsonValue &fid ) : id( fid ) {}
         mapgen_phase phase() const override {
@@ -3476,7 +3471,7 @@ class jmapgen_terrain : public jmapgen_piece_with_has_vehicle_collision
         };
     public:
         mapgen_value<ter_id> id;
-        jmapgen_terrain( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_terrain( const JsonObject &jsi, std::string_view/*context*/ ) :
             jmapgen_terrain( jsi.get_member( "ter" ) ) {}
         explicit jmapgen_terrain( const JsonValue &tid ) : id( mapgen_value<ter_id>( tid ) ) {}
 
@@ -3644,7 +3639,7 @@ class jmapgen_ter_furn_transform: public jmapgen_piece
 {
     public:
         mapgen_value<ter_furn_transform_id> id;
-        jmapgen_ter_furn_transform( const JsonObject &jsi, const std::string_view/*context*/ ) :
+        jmapgen_ter_furn_transform( const JsonObject &jsi, std::string_view/*context*/ ) :
             id( jsi.get_member( "transform" ) ) {}
 
         void apply( const mapgendata &dat, const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z,
@@ -3677,7 +3672,7 @@ class jmapgen_make_rubble : public jmapgen_piece
         bool items = false;
         mapgen_value<ter_id> floor_type = mapgen_value<ter_id>( ter_t_dirt );
         bool overwrite = false;
-        jmapgen_make_rubble( const JsonObject &jsi, const std::string_view/*context*/ ) {
+        jmapgen_make_rubble( const JsonObject &jsi, std::string_view/*context*/ ) {
             if( jsi.has_member( "rubble_type" ) ) {
                 rubble_type = mapgen_value<furn_id>( jsi.get_member( "rubble_type" ) );
             }
@@ -3726,7 +3721,7 @@ class jmapgen_computer : public jmapgen_piece_with_has_vehicle_collision
         std::vector<std::string> chat_topics;
         std::vector<effect_on_condition_id> eocs;
         bool target;
-        jmapgen_computer( const JsonObject &jsi, const std::string_view/*context*/ ) {
+        jmapgen_computer( const JsonObject &jsi, std::string_view/*context*/ ) {
             jsi.read( "name", name );
             jsi.read( "access_denied", access_denied );
             security = jsi.get_int( "security", 0 );
@@ -3923,7 +3918,7 @@ class jmapgen_zone : public jmapgen_piece
         mapgen_value<faction_id> faction;
         std::string name;
         std::string filter;
-        jmapgen_zone( const JsonObject &jsi, const std::string_view/*context*/ )
+        jmapgen_zone( const JsonObject &jsi, std::string_view/*context*/ )
             : zone_type( jsi.get_member( "type" ) )
             , faction( jsi.get_member( "faction" ) ) {
             if( jsi.has_string( "name" ) ) {
@@ -3962,7 +3957,7 @@ class jmapgen_variable : public jmapgen_piece
 {
     public:
         std::string name;
-        jmapgen_variable( const JsonObject &jsi, const std::string_view &/*context*/ ) {
+        jmapgen_variable( const JsonObject &jsi, std::string_view /*context*/ ) {
             name = jsi.get_string( "name" );
         }
         mapgen_phase phase() const override {
@@ -3982,7 +3977,7 @@ class jmapgen_remove_vehicles : public jmapgen_piece
 {
     public:
         std::vector<vproto_id> vehicles_to_remove;
-        jmapgen_remove_vehicles( const JsonObject &jo, const std::string_view/*context*/ ) {
+        jmapgen_remove_vehicles( const JsonObject &jo, std::string_view/*context*/ ) {
             for( std::string vehicle_prototype_id : jo.get_string_array( "vehicles" ) ) {
                 vehicles_to_remove.emplace_back( vehicle_prototype_id );
             }
@@ -4013,7 +4008,7 @@ class jmapgen_remove_npcs : public jmapgen_piece
     public:
         std::string npc_class;
         std::string unique_id;
-        jmapgen_remove_npcs( const JsonObject &jsi, const std::string_view /*context*/ ) {
+        jmapgen_remove_npcs( const JsonObject &jsi, std::string_view /*context*/ ) {
             optional( jsi, false, "class", npc_class );
             optional( jsi, false, "unique_id", unique_id );
         }
@@ -4044,7 +4039,7 @@ class jmapgen_remove_npcs : public jmapgen_piece
 class jmapgen_remove_all : public jmapgen_piece
 {
     public:
-        jmapgen_remove_all( const JsonObject &/*jo*/, const std::string_view/*context*/ ) {
+        jmapgen_remove_all( const JsonObject &/*jo*/, std::string_view/*context*/ ) {
         }
         mapgen_phase phase() const override {
             return mapgen_phase::removal;
@@ -4154,7 +4149,7 @@ class jmapgen_nested : public jmapgen_piece
                     }
                 }
 
-                void check( const std::string_view, const mapgen_parameters & ) const {
+                void check( std::string_view, const mapgen_parameters & ) const {
                     // TODO: check join ids are valid
                 }
 
@@ -4296,15 +4291,15 @@ class jmapgen_nested : public jmapgen_piece
         };
 
     public:
-        weighted_int_list<mapgen_value<nested_mapgen_id>> entries;
-        weighted_int_list<mapgen_value<nested_mapgen_id>> else_entries;
+        weighted_dbl_or_var_list<mapgen_value<nested_mapgen_id>> entries;
+        weighted_dbl_or_var_list<mapgen_value<nested_mapgen_id>> else_entries;
         neighbor_oter_check neighbor_oters;
         neighbor_join_check neighbor_joins;
         neighbor_flag_check neighbor_flags;
         neighbor_flag_any_check neighbor_flags_any;
         predecessor_oter_check predecessors;
         correct_z_level_check correct_z_level;
-        jmapgen_nested( const JsonObject &jsi, const std::string_view/*context*/ )
+        jmapgen_nested( const JsonObject &jsi, std::string_view/*context*/ )
             : neighbor_oters( jsi.get_object( "neighbors" ) )
             , neighbor_joins( jsi.get_object( "joins" ) )
             , neighbor_flags( jsi.get_object( "flags" ) )
@@ -4312,10 +4307,10 @@ class jmapgen_nested : public jmapgen_piece
             , predecessors( jsi.get_array( "predecessors" ) )
             , correct_z_level( jsi.get_array( "check_z" ) ) {
             if( jsi.has_member( "chunks" ) ) {
-                load_weighted_list( jsi.get_member( "chunks" ), entries, 100 );
+                entries.load( jsi.get_member( "chunks" ), 100 );
             }
             if( jsi.has_member( "else_chunks" ) ) {
-                load_weighted_list( jsi.get_member( "else_chunks" ), else_entries, 100 );
+                else_entries.load( jsi.get_member( "else_chunks" ), 100 );
             }
         }
         mapgen_phase phase() const override {
@@ -4339,14 +4334,14 @@ class jmapgen_nested : public jmapgen_piece
                     }
                 }
             };
-            for( const weighted_object<int, mapgen_value<nested_mapgen_id>> &name : entries ) {
+            for( const weighted_object<dbl_or_var, mapgen_value<nested_mapgen_id>> &name : entries ) {
                 merge_from( name.obj );
             }
-            for( const weighted_object<int, mapgen_value<nested_mapgen_id>> &name : else_entries ) {
+            for( const weighted_object<dbl_or_var, mapgen_value<nested_mapgen_id>> &name : else_entries ) {
                 merge_from( name.obj );
             }
         }
-        const weighted_int_list<mapgen_value<nested_mapgen_id>> &get_entries(
+        const weighted_dbl_or_var_list<mapgen_value<nested_mapgen_id>> &get_entries(
         const mapgendata &dat ) const {
             if( neighbor_oters.test( dat ) && neighbor_joins.test( dat ) && neighbor_flags.test( dat ) &&
                 neighbor_flags_any.test( dat ) && predecessors.test( dat ) && correct_z_level.test( dat ) ) {
@@ -4385,10 +4380,10 @@ class jmapgen_nested : public jmapgen_piece
         void check( const std::string &oter_name, const mapgen_parameters &parameters,
                     const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z
                   ) const override {
-            for( const weighted_object<int, mapgen_value<nested_mapgen_id>> &p : entries ) {
+            for( const weighted_object<dbl_or_var, mapgen_value<nested_mapgen_id>> &p : entries ) {
                 p.obj.check( oter_name, parameters );
             }
-            for( const weighted_object<int, mapgen_value<nested_mapgen_id>> &p : else_entries ) {
+            for( const weighted_object<dbl_or_var, mapgen_value<nested_mapgen_id>> &p : entries ) {
                 p.obj.check( oter_name, parameters );
             }
             neighbor_joins.check( oter_name, parameters );
@@ -4407,10 +4402,10 @@ class jmapgen_nested : public jmapgen_piece
                     }
                 }
             };
-            for( const weighted_object<int, mapgen_value<nested_mapgen_id>> &p : entries ) {
+            for( const weighted_object<dbl_or_var, mapgen_value<nested_mapgen_id>> &p : entries ) {
                 add_coords_from( p.obj );
             }
-            for( const weighted_object<int, mapgen_value<nested_mapgen_id>> &p : else_entries ) {
+            for( const weighted_object<dbl_or_var, mapgen_value<nested_mapgen_id>> &p : else_entries ) {
                 add_coords_from( p.obj );
             }
 
@@ -4455,7 +4450,7 @@ class jmapgen_nested : public jmapgen_piece
         }
         ret_val<void> has_vehicle_collision( const mapgendata &dat,
                                              const tripoint_rel_ms &p ) const override {
-            const weighted_int_list<mapgen_value<nested_mapgen_id>> &selected_entries =
+            const weighted_dbl_or_var_list<mapgen_value<nested_mapgen_id>> &selected_entries =
                         get_entries( dat );
             if( selected_entries.empty() ) {
                 return ret_val<void>::make_success();
@@ -4501,7 +4496,7 @@ void jmapgen_objects::add( const jmapgen_place &place,
 }
 
 template<typename PieceType>
-void jmapgen_objects::load_objects( const JsonArray &parray, const std::string_view context )
+void jmapgen_objects::load_objects( const JsonArray &parray, std::string_view context )
 {
     for( JsonObject jsi : parray ) {
         jmapgen_place where( jsi );
@@ -4517,7 +4512,7 @@ void jmapgen_objects::load_objects( const JsonArray &parray, const std::string_v
 
 template<>
 void jmapgen_objects::load_objects<jmapgen_loot>(
-    const JsonArray &parray, const std::string_view/*context*/ )
+    const JsonArray &parray, std::string_view/*context*/ )
 {
     for( JsonObject jsi : parray ) {
         jmapgen_place where( jsi );
@@ -4812,13 +4807,13 @@ void mapgen_palette::check() const
     }
 }
 
-mapgen_palette mapgen_palette::load_temp( const JsonObject &jo, const std::string_view src,
+mapgen_palette mapgen_palette::load_temp( const JsonObject &jo, std::string_view src,
         const std::string &context )
 {
     return load_internal( jo, src, context, false, true );
 }
 
-void mapgen_palette::load( const JsonObject &jo, const std::string_view src )
+void mapgen_palette::load( const JsonObject &jo, std::string_view src )
 {
     mapgen_palette ret = load_internal( jo, src, "", true, false );
     if( ret.id.is_empty() ) {
@@ -4939,7 +4934,7 @@ mapgen_palette mapgen_palette::load_internal( const JsonObject &jo, std::string_
         const std::string &context, bool require_id, bool allow_recur )
 {
     mapgen_palette new_pal;
-    bool extending = src != "dda" && jo.has_bool( "extending" ) && jo.get_bool( "extending" );
+    bool extending = src != "tlg" && jo.has_bool( "extending" ) && jo.get_bool( "extending" );
     require_id |= extending;
     mapgen_palette::placing_map &format_placings = new_pal.format_placings;
     auto &keys_with_terrain = new_pal.keys_with_terrain;
@@ -5181,7 +5176,7 @@ bool mapgen_function_json_base::setup_common( const JsonObject &jo )
     }
 
     // just like mapf::basic_bind("stuff",blargle("foo", etc) ), only json input and faster when applying
-    mapgen_palette palette = mapgen_palette::load_temp( jo, "dda", context_ );
+    mapgen_palette palette = mapgen_palette::load_temp( jo, "tlg", context_ );
     auto &keys_with_terrain = palette.keys_with_terrain;
     mapgen_palette::placing_map &format_placings = palette.format_placings;
 
@@ -8080,7 +8075,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             "---\n"
                                             "|c|\n"
                                             "-=-\n",
-                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass ),
+                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass_lab ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
                 m->place_items( Item_spawn_data_bionics_common, 70, bio,
                                 bio, z, false, calendar::start_of_cataclysm );
@@ -8099,7 +8094,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             "-=-\n"
                                             "|c|\n"
                                             "---\n",
-                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass ),
+                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass_lab ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
                 m->place_items( Item_spawn_data_bionics_common, 70, bio,
                                 bio, z, false, calendar::start_of_cataclysm );
@@ -8119,7 +8114,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             "|-|\n"
                                             "|c=\n"
                                             "|-|\n",
-                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass ),
+                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass_lab ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
                 m->place_items( Item_spawn_data_bionics_common, 70, point_bub_ms( biox, bioy ),
                                 point_bub_ms( biox, bioy ), z, false, calendar::start_of_cataclysm );
@@ -8138,7 +8133,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             "|-|\n"
                                             "=c|\n"
                                             "|-|\n",
-                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass ),
+                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass_lab ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
                 m->place_items( Item_spawn_data_bionics_common, 70, point_bub_ms( biox, bioy ),
                                 point_bub_ms( biox, bioy ), z, false, calendar::turn_zero );

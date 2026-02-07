@@ -3,15 +3,7 @@
     "type": "item_group",
     "id": "milspec_arsenal_84x246_gun&mags&cans",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_84x246_gun&ammo" },
-      {
-        "distribution": [
-          { "item": "ammunition_box_carlgustav_he", "count": [ 0, 4 ] },
-          { "item": "ammunition_box_carlgustav_hedp", "count": [ 0, 4 ] }
-        ]
-      }
-    ]
+    "items": [ { "group": "milspec_arsenal_84x246_gun&ammo" } ]
   },
   {
     "type": "item_group",

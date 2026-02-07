@@ -1,6 +1,7 @@
 [
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "bee_balm",
     "name": { "str_sp": "bee balm" },
     "description": "A snow-white flower also known as wild bergamot.  Smells faintly of mint.",
@@ -20,7 +21,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ], [ "vitC", "136 μg" ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "groundnut",
     "name": { "str": "handful of ground nuts", "str_pl": "handfuls of ground nuts" },
     "comestible_type": "FOOD",
@@ -41,7 +43,8 @@
     "fun": -3
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "wild_sarsaparilla_root",
     "name": { "str": "wild sarsaparilla root" },
     "weight": "40 g",
@@ -61,7 +64,8 @@
     "fun": -3
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "jerusalem_artichoke",
     "name": { "str": "Jerusalem artichoke" },
     "weight": "40 g",
@@ -82,7 +86,8 @@
     "fun": -2
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "wild_garlic",
     "name": { "str_sp": "wild garlic" },
     "comestible_type": "FOOD",
@@ -102,7 +107,8 @@
     "fun": -2
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "broccoli",
     "name": { "str_sp": "broccoli" },
     "weight": "151 g",
@@ -121,7 +127,8 @@
     "vitamins": [ [ "vitC", "134700 μg" ], [ "iron", "1100 μg" ], [ "calcium", "71 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cabbage_head",
     "name": { "str_sp": "cabbage head" },
     "weight": "910 g",
@@ -143,7 +150,8 @@
     "vitamins": [ [ "vitC", "332800 μg" ], [ "iron", "12900 μg" ], [ "calcium", "364 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cabbage",
     "name": { "str": "handful of shredded cabbage", "str_pl": "handfuls of shredded cabbage" },
     "weight": "70 g",
@@ -164,7 +172,8 @@
     "vitamins": [ [ "vitC", "25600 μg" ], [ "iron", "300 μg" ], [ "calcium", "28 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "grape_leaves",
     "looks_like": "lettuce",
     "name": { "str_sp": "grape leaves" },
@@ -183,7 +192,8 @@
     "vitamins": [ [ "vitC", 2 ], [ "calcium", 4 ], [ "iron", 2 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "spinach",
     "name": { "str": "handful of spinach", "str_pl": "handfuls of spinach" },
     "weight": "30 g",
@@ -204,7 +214,8 @@
     "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "29700 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "carrot",
     "name": { "str": "carrot" },
     "weight": "72 g",
@@ -226,7 +237,8 @@
     "vitamins": [ [ "vitC", "4200 μg" ], [ "iron", "200 μg" ], [ "calcium", "23800 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cattail_rhizome",
     "name": { "str": "cattail rhizome" },
     "weight": "209 g",
@@ -245,7 +257,8 @@
     "vitamins": [ [ "iron", 8 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "lotus_rhizome",
     "name": { "str": "lotus root" },
     "weight": "200 g",
@@ -264,7 +277,8 @@
     "vitamins": [ [ "vitC", 94 ], [ "calcium", 9 ], [ "iron", 12 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cattail_stalk",
     "name": { "str": "cattail stalk" },
     "weight": "100 g",
@@ -284,14 +298,16 @@
     "vitamins": [ [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "plant_stalk",
     "name": { "str": "plant stalk" },
     "description": "A stiff, green stalk from a plant.  It is starchy and fibrous, but it would be much better if you cooked it.",
     "copy-from": "cattail_stalk"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "celery",
     "name": { "str_sp": "celery" },
     "weight": "40 g",
@@ -313,7 +329,8 @@
     "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "29700 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cotton_boll",
     "name": { "str": "cotton boll" },
     "category": "other",
@@ -332,7 +349,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "chili_pepper",
     "name": { "str": "chili pepper" },
     "weight": "45 g",
@@ -353,7 +371,8 @@
     "fun": -2
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "chili_pepper_cut",
     "copy-from": "chili_pepper",
     "cooks_like": "chili_pepper",
@@ -364,7 +383,8 @@
     "price_postapoc": "3 cent"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cucumber",
     "name": { "str": "salad cucumber" },
     "weight": "301 g",
@@ -386,7 +406,8 @@
     "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "48200 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "cucumber_cut",
     "name": { "str": "cut salad cucumber" },
     "volume": "274 ml",
@@ -399,7 +420,8 @@
     "price_postapoc": "10 cent"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "dahlia_root",
     "name": { "str": "dahlia root" },
     "weight": "190 g",
@@ -419,7 +441,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "salsify_raw",
     "name": { "str": "salsify root" },
     "weight": "133 g",
@@ -440,7 +463,8 @@
     "vitamins": [ [ "vitC", "10600 μg" ], [ "iron", "900 μg" ], [ "calcium", "79800 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "chicory_raw",
     "name": { "str": "chicory root" },
     "weight": "60 g",
@@ -459,7 +483,8 @@
     "vitamins": [ [ "vitC", "3 mg" ], [ "iron", "500 μg" ], [ "calcium", "24600 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "carrot_wild",
     "//": "Also known as Queen Anne's Lace. It's that boring white flower that grows wild everywhere. Water hemlock looks almost exactly like wild carrot. The easiest way to tell them apart is by their scent. Please don't eat either of them at home, hemlock will kill you deader than Socrates.",
     "name": { "str": "wild root" },
@@ -473,7 +498,8 @@
     "volume": "256 ml"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "dogbane",
     "name": { "str_sp": "dogbane" },
     "description": "A stalk of dogbane.  It has very fibrous stems and is mildly poisonous.",
@@ -493,7 +519,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE", "SEED" ],
     "id": "garlic",
     "name": { "str": "garlic bulb" },
     "weight": "18 g",
@@ -512,10 +539,14 @@
     "flags": [ "RAW", "PLANTABLE_SEED" ],
     "vitamins": [ [ "vitC", "5400 μg" ], [ "iron", "600 μg" ], [ "calcium", "32400 μg" ], [ "vegetable_allergen", 1 ] ],
     "//": "Who in their right mind would eat an entire garlic bulb raw?",
-    "seed_data": { "plant_name": "garlic", "fruit": "garlic", "byproducts": [ "withered" ], "grow": "65 days" }
+    "plant_name": "garlic",
+    "fruit": "garlic",
+    "byproducts": [ "withered" ],
+    "grow": "65 days"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "SEED", "COMESTIBLE" ],
     "id": "garlic_clove",
     "name": { "str": "garlic clove" },
     "weight": "3 g",
@@ -531,10 +562,16 @@
     "fun": -3,
     "price": "2 cent",
     "price_postapoc": "8 cent",
-    "vitamins": [ [ "vitC", "900 μg" ], [ "iron", "100 μg" ], [ "calcium", "5400 μg" ], [ "vegetable_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "900 μg" ], [ "iron", "100 μg" ], [ "calcium", "5400 μg" ], [ "vegetable_allergen", 1 ] ],
+    "flags": [ "SMOKABLE" ],
+    "plant_name": "garlic",
+    "fruit": "garlic",
+    "byproducts": [ "withered" ],
+    "grow": "65 days"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "hops",
     "name": { "str": "hops flower" },
     "weight": "92 g",
@@ -553,7 +590,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "horseradish_root",
     "name": { "str": "horseradish root" },
     "weight": "250 g",
@@ -572,7 +610,8 @@
     "vitamins": [ [ "vitC", "62300 μg" ], [ "iron", "1100 μg" ], [ "calcium", "140 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "lettuce_head",
     "name": { "str_sp": "lettuce head" },
     "weight": "504 g",
@@ -592,7 +631,8 @@
     "vitamins": [ [ "vitC", "14 mg" ], [ "iron", "2100 μg" ], [ "calcium", "91 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "lettuce",
     "name": { "str": "handful of shredded lettuce", "str_pl": "handfuls of shredded lettuce" },
     "weight": "72 g",
@@ -612,7 +652,8 @@
     "vitamins": [ [ "vitC", "2 mg" ], [ "iron", "300 μg" ], [ "calcium", "13 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "mugwort",
     "name": { "str_sp": "mugwort" },
     "description": "A stalk of mugwort.  Smells wonderful.",
@@ -632,7 +673,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "onion",
     "name": { "str": "onion" },
     "weight": "110 g",
@@ -653,7 +695,8 @@
     "vitamins": [ [ "vitC", "8100 μg" ], [ "iron", "200 μg" ], [ "calcium", "25300 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "potato",
     "name": { "str": "raw potato", "str_pl": "raw potatoes" },
     "weight": "213 g",
@@ -674,7 +717,8 @@
     "vitamins": [ [ "vitC", "42 mg" ], [ "iron", "1700 μg" ], [ "calcium", "25600 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "plantain",
     "name": { "str": "cooking banana" },
     "weight": "179 g",
@@ -694,7 +738,8 @@
     "vitamins": [ [ "vitC", "32900 μg" ], [ "iron", "1100 μg" ], [ "calcium", "5400 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "pumpkin",
     "name": { "str": "pumpkin" },
     "weight": "2264 g",
@@ -714,7 +759,8 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "pumpkin_cut",
     "name": { "str_sp": "cut pumpkin" },
     "copy-from": "pumpkin",
@@ -733,7 +779,8 @@
     "melee_damage": { "bash": 0 }
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "horseradish_greens",
     "name": { "str_sp": "horseradish greens" },
     "weight": "70 g",
@@ -753,7 +800,8 @@
     "vitamins": [ [ "vitC", 30 ], [ "calcium", 2 ], [ "iron", 3 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "raw_dandelion",
     "name": { "str_sp": "dandelion" },
     "weight": "68 g",
@@ -773,7 +821,8 @@
     "vitamins": [ [ "vitC", 23 ], [ "calcium", 11 ], [ "iron", 10 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "raw_burdock",
     "name": { "str_sp": "burdock" },
     "weight": "72 g",
@@ -794,7 +843,8 @@
     "vitamins": [ [ "vitC", 1 ], [ "calcium", 23 ], [ "iron", 10 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "raw_bamboo",
     "name": { "str": "handful of bamboo shoots", "str_pl": "handfuls of bamboo shoots" },
     "weight": "151 g",
@@ -815,7 +865,8 @@
     "vitamins": [ [ "vitC", "6 mg" ], [ "iron", "1 mg" ], [ "calcium", "20 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "rhubarb",
     "name": { "str": "rhubarb" },
     "weight": "51 g",
@@ -836,7 +887,8 @@
     "vitamins": [ [ "vitC", "4100 μg" ], [ "iron", "100 μg" ], [ "calcium", "43900 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "sugar_beet",
     "name": { "str": "sugar beet" },
     "weight": "82 g",
@@ -856,7 +908,8 @@
     "vitamins": [ [ "vitC", "4 mg" ], [ "iron", "1 mg" ], [ "calcium", "13 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "tea_raw",
     "name": { "str_sp": "black tea leaves" },
     "weight": "3 g",
@@ -879,7 +932,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "wintergreen_leaves",
     "name": { "str": "pile of wintergreen leaves", "str_pl": "piles of wintergreen leaves" },
     "weight": "5 g",
@@ -906,14 +960,16 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "tea_green_raw",
     "name": { "str_sp": "green tea leaves" },
     "copy-from": "tea_raw",
     "description": "Dried leaves of a tropical plant.  You can boil them into green tea, or you can just eat them raw.  They're pretty gross and not too filling that way, though."
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "tomato",
     "name": { "str": "tomato", "str_pl": "tomatoes" },
     "weight": "123 g",
@@ -933,7 +989,8 @@
     "vitamins": [ [ "vitC", "16900 μg" ], [ "iron", "300 μg" ], [ "calcium", "12300 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "tomato_cut",
     "copy-from": "tomato",
     "name": { "str": "cut tomato", "str_pl": "cut tomatoes" },
@@ -942,7 +999,8 @@
     "description": "A cut-up tomato with the seeds removed."
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "triffid_meat",
     "name": { "str_sp": "triffid flesh" },
     "weight": "119 g",
@@ -961,7 +1019,8 @@
     "vitamins": [ [ "vitC", 36 ], [ "calcium", 4 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ], [ "mutant_toxin", 8 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "vegetable_tainted",
     "//": "Note: Legacy item ID, this is not actually a vegetable at all anymore.",
     "category": "other",
@@ -977,7 +1036,8 @@
     "flags": [ "FUNGAL_VECTOR" ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "vegetable_wild",
     "name": { "str_sp": "wild vegetables" },
     "weight": "119 g",
@@ -998,7 +1058,8 @@
     "smoking_result": "dry_vegetable"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "zucchini",
     "name": { "str": "zucchini" },
     "weight": "196 g",
@@ -1018,7 +1079,8 @@
     "vitamins": [ [ "vitC", "35100 μg" ], [ "iron", "700 μg" ], [ "calcium", "31400 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "zucchini_cut",
     "name": { "str": "cut zucchini" },
     "copy-from": "zucchini",
@@ -1027,7 +1089,8 @@
     "description": "A chopped-up summer squash.  The seeds have been removed."
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "SEED", "COMESTIBLE" ],
     "id": "raw_beans",
     "name": { "str": "handful of raw beans", "str_pl": "handfuls of raw beans" },
     "color": "brown",
@@ -1046,10 +1109,15 @@
     "vitamins": [ [ "vitC", "71 mg" ], [ "iron", "1 mg" ], [ "calcium", "31 mg" ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD" ],
     "flags": [ "EDIBLE_FROZEN", "SMOKABLE", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ],
-    "seed_data": { "plant_name": "beans", "fruit": "raw_beans", "seeds": false, "byproducts": [ "withered" ], "grow": "91 days" }
+    "plant_name": "beans",
+    "fruit": "raw_beans",
+    "seeds": false,
+    "byproducts": [ "withered" ],
+    "grow": "91 days"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "fiddlehead_raw",
     "name": { "str_sp": "fiddleheads" },
     "weight": "50 g",
@@ -1070,7 +1138,8 @@
     "vitamins": [ [ "vitC", 6 ], [ "calcium", 4 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "young_leaves",
     "name": { "str": "handful of young leaves", "str_pl": "handfuls of young leaves" },
     "weight": "20 g",
@@ -1089,7 +1158,8 @@
     "vitamins": [ [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "chicory_leaves",
     "name": { "str": "handful of chicory greens", "str_pl": "handfuls of chicory greens" },
     "copy-from": "young_leaves",
@@ -1102,7 +1172,8 @@
     "vitamins": [ [ "vitC", "7 mg" ], [ "iron", "300 μg" ], [ "calcium", "29 mg" ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "japanese_knotweed_stem",
     "name": { "str_sp": "Japanese knotweed stems" },
     "weight": "60 g",
@@ -1122,7 +1193,8 @@
     "vitamins": [ [ "vitC", 6 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "bell_pepper",
     "name": { "str": "bell pepper" },
     "weight": "119 g",
@@ -1143,7 +1215,8 @@
     "vitamins": [ [ "vitC", "95700 μg" ], [ "iron", "400 μg" ], [ "calcium", "11900 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "bell_pepper_cut",
     "name": { "str": "cut bell pepper" },
     "copy-from": "bell_pepper",
@@ -1153,7 +1226,8 @@
     "fun": 0
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "flour_wheat_free",
     "name": { "str_sp": "wheat-free flour" },
     "weight": "12400 mg",
@@ -1175,7 +1249,8 @@
     "fun": -5
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "raw_bottle_gourd",
     "name": { "str": "raw bottle gourd" },
     "copy-from": "cucumber",
@@ -1194,7 +1269,8 @@
     "vitamins": [ [ "iron", "1 mg" ], [ "calcium", "95890 μg" ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "eggplant",
     "name": { "str": "eggplant" },
     "comestible_type": "FOOD",
@@ -1216,7 +1292,8 @@
     "fun": -8
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "eggplant_cut",
     "name": { "str": "cut eggplant" },
     "comestible_type": "FOOD",
@@ -1238,7 +1315,8 @@
     "fun": -5
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "seaweed",
     "name": { "str_sp": "seaweed" },
     "weight": "30 g",
@@ -1254,7 +1332,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "seaweed_pile",
     "name": { "str_sp": "pile of seaweed" },
     "weight": "600 g",
@@ -1270,7 +1349,8 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "sea_lettuce",
     "name": { "str_sp": "sea lettuce" },
     "weight": "100 g",
@@ -1289,7 +1369,8 @@
     "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "kelp_sugar",
     "name": { "str_sp": "sugar kelp" },
     "weight": "100 g",
@@ -1308,7 +1389,8 @@
     "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "bladderwrack",
     "name": { "str_sp": "bladderwrack" },
     "weight": "100 g",

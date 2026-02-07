@@ -3,17 +3,7 @@
     "type": "item_group",
     "id": "milspec_arsenal_308_mg_gun&mags&cans",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_308_mg_gun&ammo" },
-      {
-        "distribution": [
-          { "item": "ammo_can_30_308_1tracer4ap_200", "count": [ 0, 4 ] },
-          { "item": "ammo_can_30_308_4fmj1tracer_200", "count": [ 0, 4 ], "prob": 10 },
-          { "item": "ammo_can_50_308_600", "count": [ 0, 4 ], "prob": 30 },
-          { "item": "ammo_can_fat_50_308_1tracer4ap_600", "count": [ 0, 4 ], "prob": 10 }
-        ]
-      }
-    ]
+    "items": [ { "group": "milspec_arsenal_308_mg_gun&ammo" } ]
   },
   {
     "type": "item_group",

@@ -22,6 +22,7 @@
         "MUTATING_GRADUAL_PLANT",
         "MUTATING_GRADUAL_RATTINE",
         "MUTATING_GRADUAL_REPTILIAN",
+        "MUTATING_GRADUAL_SLIME",
         "MUTATING_GRADUAL_TROGLOBITE",
         "MUTATING_GRADUAL_URSINE"
       ]
@@ -32,10 +33,9 @@
     "id": "EOC_LOSE_MUTATING_GRADUAL",
     "effect": [
       { "u_message": "The everpresent churning in your tortured flesh finally ceases.  Is it over?" },
-      { "u_lose_trait": "MUTATING_GRADUAL_ABSTRACT" },
       { "u_lose_trait": "MUTATING_GRADUAL_BATRACHIAN" },
-      { "u_lose_trait": "MUTATING_GRADUAL_BIRD" },
-      { "u_lose_trait": "MUTATING_GRADUAL_CATTLE" },
+      { "u_lose_trait": "MUTATING_GRADUAL_AVIAN" },
+      { "u_lose_trait": "MUTATING_GRADUAL_BOVOID" },
       { "u_lose_trait": "MUTATING_GRADUAL_CEPHALOPOD" },
       { "u_lose_trait": "MUTATING_GRADUAL_CHIROPTERAN" },
       { "u_lose_trait": "MUTATING_GRADUAL_CRUSTACEAN" },
@@ -43,6 +43,7 @@
       { "u_lose_trait": "MUTATING_GRADUAL_PISCINE" },
       { "u_lose_trait": "MUTATING_GRADUAL_GASTROPOD" },
       { "u_lose_trait": "MUTATING_GRADUAL_INSECT" },
+      { "u_lose_trait": "MUTATING_GRADUAL_LAGOMORPH" },
       { "u_lose_trait": "MUTATING_GRADUAL_REPTILIAN" },
       { "u_lose_trait": "MUTATING_GRADUAL_CANINE" },
       { "u_lose_trait": "MUTATING_GRADUAL_MURINE" },
@@ -51,7 +52,9 @@
       { "u_lose_trait": "MUTATING_GRADUAL_SLIME" },
       { "u_lose_trait": "MUTATING_GRADUAL_ARANEAN" },
       { "u_lose_trait": "MUTATING_GRADUAL_TROGLOBITE" },
-      { "u_lose_trait": "MUTATING_GRADUAL_URSINE" }
+      { "u_lose_trait": "MUTATING_GRADUAL_URSINE" },
+      { "u_lose_var": "u_MUTATING_GRADUAL_threshold)" },
+      { "u_lose_var": "u_MUTATING_GRADUAL_vitamin)" }
     ]
   },
   {
@@ -81,15 +84,8 @@
     "id": "EOC_MUTATING_GRADUAL_PASSED_THRESHOLD",
     "eoc_type": "EVENT",
     "required_event": "crosses_mutation_threshold",
-    "condition": {
-      "and": [ { "not": { "test_eoc": "EOC_TRAIT_IS_MUTATING_GRADUAL" } }, { "math": [ "has_var(u_MUTATING_GRADUAL_vitamin)" ] } ]
-    },
-    "effect": [
-      {
-        "if": { "math": [ "u_has_trait(u_MUTATING_GRADUAL_threshold)" ] },
-        "then": [ { "u_message": "You are new born, complete." }, { "run_eocs": "EOC_LOSE_MUTATING_GRADUAL" } ]
-      }
-    ]
+    "condition": { "and": [ { "math": [ "has_var(u_MUTATING_GRADUAL_vitamin)" ] } ] },
+    "effect": [ { "u_message": "You are new born, complete." }, { "run_eocs": "EOC_LOSE_MUTATING_GRADUAL" } ]
   },
   {
     "type": "effect_on_condition",
@@ -159,7 +155,7 @@
         "if": { "compare_string": [ { "context_val": "trait" }, "MUTATING_GRADUAL_LAGOMORPH" ] },
         "then": [
           { "u_add_var": "MUTATING_GRADUAL_vitamin", "value": "mutagen_rabbit" },
-          { "u_add_var": "MUTATING_GRADUAL_threshold", "value": "THRESH_FELINE" }
+          { "u_add_var": "MUTATING_GRADUAL_threshold", "value": "THRESH_LAGOMORPH" }
         ]
       },
       {
@@ -285,6 +281,43 @@
         "else": { "math": [ "u_recently_mutated_cooldown -= 1" ] }
       }
     ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_CROSSED_THRESHOLD_CLEANUP",
+    "//": "Fallback in case we somehow didn't lose gradual mutation when we crossed the threshold.",
+    "condition": {
+      "and": [
+        { "math": [ "has_var(u_MUTATING_GRADUAL_vitamin)" ] },
+        { "u_has_flag": "MUTATION_THRESHOLD" },
+        {
+          "or": [
+            { "u_has_trait": "MUTATING_GRADUAL_BATRACHIAN" },
+            { "u_has_trait": "MUTATING_GRADUAL_AVIAN" },
+            { "u_has_trait": "MUTATING_GRADUAL_BOVOID" },
+            { "u_has_trait": "MUTATING_GRADUAL_CEPHALOPOD" },
+            { "u_has_trait": "MUTATING_GRADUAL_CHIROPTERAN" },
+            { "u_has_trait": "MUTATING_GRADUAL_CRUSTACEAN" },
+            { "u_has_trait": "MUTATING_GRADUAL_FELINE" },
+            { "u_has_trait": "MUTATING_GRADUAL_PISCINE" },
+            { "u_has_trait": "MUTATING_GRADUAL_GASTROPOD" },
+            { "u_has_trait": "MUTATING_GRADUAL_INSECT" },
+            { "u_has_trait": "MUTATING_GRADUAL_LAGOMORPH" },
+            { "u_has_trait": "MUTATING_GRADUAL_REPTILIAN" },
+            { "u_has_trait": "MUTATING_GRADUAL_CANINE" },
+            { "u_has_trait": "MUTATING_GRADUAL_MURINE" },
+            { "u_has_trait": "MUTATING_GRADUAL_PLANT" },
+            { "u_has_trait": "MUTATING_GRADUAL_RATTINE" },
+            { "u_has_trait": "MUTATING_GRADUAL_SLIME" },
+            { "u_has_trait": "MUTATING_GRADUAL_ARANEAN" },
+            { "u_has_trait": "MUTATING_GRADUAL_TROGLOBITE" },
+            { "u_has_trait": "MUTATING_GRADUAL_URSINE" }
+          ]
+        }
+      ]
+    },
+    "recurrence": [ "4 hours", "8 hours" ],
+    "effect": [ { "run_eocs": "EOC_LOSE_MUTATING_GRADUAL" } ]
   },
   {
     "type": "effect_on_condition",

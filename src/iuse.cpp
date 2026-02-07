@@ -267,6 +267,7 @@ static const itype_id itype_fire( "fire" );
 static const itype_id itype_firecracker_act( "firecracker_act" );
 static const itype_id itype_firecracker_pack_act( "firecracker_pack_act" );
 static const itype_id itype_geiger_on( "geiger_on" );
+static const itype_id itype_glass_shard( "glass_shard" );
 static const itype_id itype_handrolled_cig( "handrolled_cig" );
 static const itype_id itype_heatpack_used( "heatpack_used" );
 static const itype_id itype_hygrometer( "hygrometer" );
@@ -3307,7 +3308,7 @@ std::optional<int> iuse::teleport( Character *p, item *it, const tripoint_bub_ms
         return std::nullopt;
     }
     p->mod_moves( -to_moves<int>( 1_seconds ) );
-    teleport::teleport_creature( *p );
+    teleport::teleport_creature( *p, 2, 12, true );
     return 1;
 }
 
@@ -3566,11 +3567,16 @@ std::optional<int> iuse::molotov_lit( Character *p, item *it, const tripoint_bub
 {
 
     if( !p ) {
-        // It was thrown or dropped, so burst into flames
+        // It was thrown or dropped, so burst into flames.
         map &here = get_map();
-        for( const tripoint_bub_ms &pt : here.points_in_radius( pos, 1, 0 ) ) {
-            const int intensity = 1 + one_in( 3 ) + one_in( 5 );
-            here.add_field( pt, fd_fire, intensity );
+        // Because fields decay with a half-life, we need to know how long it takes for the field to decay and set the age to slightly before that.
+        // the duration is also used for the effect's timer.
+        const time_duration target_duration = 1_minutes;
+        const time_duration base_age = ( fd_fire->half_life / 2 ) - target_duration;
+        for( const tripoint_bub_ms &pt : here.points_in_radius( pos, 2, 0 ) ) {
+            if( here.clear_path( pos, pt, 2, 1, 100 ) && one_in( 2 ) ) {
+                here.add_field( pt, fd_fire, rng( 1, 2 ), base_age );
+            }
         }
         avatar &player = get_avatar();
         if( player.has_trait( trait_PYROMANIA ) && player.sees( here, pos ) ) {
@@ -3578,6 +3584,7 @@ std::optional<int> iuse::molotov_lit( Character *p, item *it, const tripoint_bub
             player.rem_morale( morale_pyromania_nofire );
             add_msg( m_good, _( "Fire…  Good…" ) );
         }
+        it->convert( itype_glass_shard ).active = false;
         return 1;
     }
 
@@ -5725,7 +5732,7 @@ std::optional<int> iuse::robotcontrol( Character *p, item *it, const tripoint_bu
     return 0;
 }
 
-static int get_quality_from_string( const std::string_view s )
+static int get_quality_from_string( std::string_view s )
 {
     const ret_val<int> try_quality = try_parse_integer<int>( s, false );
     if( try_quality.success() ) {

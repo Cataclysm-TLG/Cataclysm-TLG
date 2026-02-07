@@ -1,7 +1,8 @@
 [
   {
     "id": "fish_trap",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "plastic fish trap" },
     "description": "A makeshift fish trap made from plastic bottles.  It's simple, even primitive, but easy to use.  The principle of action: the fish swims inside to eat the bait, but can't get out.  Not humane and prohibited by law, but there are no cops left to care.",
     "weight": "85 g",
@@ -19,7 +20,8 @@
   },
   {
     "id": "fish_trap_basket",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "basket fish trap" },
     "description": "A long wicker fish trap made from bark, reeds, cordage, or other natural materials.  It's a staple fishing tool in many pre-industrial societies.  The principle of action: the fish swims inside to eat the bait, but can't get out.",
     "weight": "800 g",
@@ -38,7 +40,7 @@
   },
   {
     "id": "fishing_hook_basic",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "fishing hook" },
     "description": "A simple metal fishing hook.",
     "weight": "1 g",
@@ -52,7 +54,7 @@
   },
   {
     "id": "fishing_hook_bone",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "improvised fishing hook" },
     "description": "An improvised fishing hook carved from wood or bone.",
     "weight": "1 g",
@@ -66,7 +68,8 @@
   },
   {
     "id": "fishing_rod_basic",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "basic fishing rod" },
     "description": "'Fishing rod' might be a bit too charitable of a description.  In truth, this is a stick with a piece of string and a hook.",
     "weight": "1700 g",
@@ -84,7 +87,8 @@
   },
   {
     "id": "fishing_rod_professional",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "pro fishing rod" },
     "description": "A professional fishing rod with a matching set of weights.  With this, you should be able to catch 'em all.",
     "weight": "1000 g",
@@ -108,7 +112,8 @@
   },
   {
     "id": "fishing_rod_2pc_packed",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "two-piece fishing rod (packed)", "str_pl": "two-piece fishing rods (packed)" },
     "description": "A commercial two-piece fishing rod that has been disassembled for ease of transport and storage.",
     "weight": "1050 g",
@@ -139,7 +144,8 @@
   {
     "id": "fishing_rod_2pc",
     "copy-from": "fishing_rod_2pc_packed",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "two-piece fishing rod" },
     "description": "A commercial two-piece fishing rod, assembled and ready for use.",
     "volume": "1250 ml",
@@ -158,7 +164,8 @@
   },
   {
     "id": "fishing_rod_tele_packed",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "telescoping fishing rod (packed)", "str_pl": "telescoping fishing rods (packed)" },
     "description": "A commercial telescoping fishing rod that has been retracted for ease of transport and storage.",
     "weight": "1150 g",
@@ -188,7 +195,8 @@
   {
     "id": "fishing_rod_tele",
     "copy-from": "fishing_rod_tele_packed",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "telescoping fishing rod" },
     "description": "A commercial telescoping fishing rod, extended and ready for use.",
     "volume": "1300 ml",
@@ -207,7 +215,8 @@
   },
   {
     "id": "plastichoboreel",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "looks_like": "baton",
     "//": "based on the ka-bar kaster",
     "name": { "str": "plastic hand fishing reel" },
@@ -226,7 +235,8 @@
   },
   {
     "id": "hoboreel",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "looks_like": "pointy_stick",
     "name": { "str": "wooden hand fishing reel" },
     "description": "A short wooden rod with a section on one end with fishing line wrapped around it, with a notch to put the string though to help pull in fish.  It is not as effective as a normal fishing pole, but is much more compact than them.",

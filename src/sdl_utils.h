@@ -37,6 +37,8 @@ inline Uint8 average_pixel_color( const SDL_Color &color )
 SDL_Color color_pixel_grayscale( const SDL_Color &color );
 SDL_Color color_pixel_nightvision( const SDL_Color &color );
 SDL_Color color_pixel_overexposed( const SDL_Color &color );
+SDL_Color color_pixel_underwater( const SDL_Color &color );
+SDL_Color color_pixel_underwater_dark( const SDL_Color &color );
 SDL_Color color_pixel_darken( const SDL_Color &color );
 SDL_Color color_pixel_mixer( const SDL_Color &color, const float &gammav,
                              const SDL_Color &color_a, const SDL_Color &color_b );

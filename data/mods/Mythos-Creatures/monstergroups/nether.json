@@ -1,19 +1,6 @@
 [
   {
     "type": "monstergroup",
-    "name": "GROUP_BREATHER",
-    "monsters": [
-      { "monster": "mon_breather", "weight": 990 },
-      { "monster": "mon_breather", "weight": 10, "cost_multiplier": 2, "pack_size": [ 2, 4 ] }
-    ]
-  },
-  {
-    "type": "monstergroup",
-    "name": "GROUP_BREATHER_HUB",
-    "monsters": [ { "monster": "mon_breather_hub" } ]
-  },
-  {
-    "type": "monstergroup",
     "name": "GROUP_CHURCH_BLANK",
     "monsters": [ { "monster": "mon_blank", "cost_multiplier": 0 } ]
   },
@@ -41,7 +28,6 @@
       { "monster": "mon_yugg", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_gelatin", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_flaming_eye", "weight": 100, "cost_multiplier": 0 },
-      { "monster": "mon_kreck", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_blank", "weight": 100, "cost_multiplier": 0 }
     ]
   },
@@ -58,30 +44,26 @@
       { "monster": "mon_yugg", "weight": 70, "cost_multiplier": 0 },
       { "monster": "mon_gelatin", "weight": 120, "cost_multiplier": 0 },
       { "monster": "mon_flaming_eye", "weight": 120, "cost_multiplier": 0 },
-      { "monster": "mon_kreck", "weight": 210, "cost_multiplier": 0 },
-      { "monster": "mon_gozu", "weight": 25, "cost_multiplier": 0 },
       { "monster": "mon_shoggoth", "weight": 5, "cost_multiplier": 0 }
     ]
   },
   {
     "type": "monstergroup",
     "name": "GROUP_NETHER_CAPTURED",
-    "default": "mon_kreck",
+    "default": "mon_mi_go",
     "monsters": [
       { "monster": "mon_gelatin", "weight": 250, "cost_multiplier": 0 },
       { "monster": "mon_mi_go", "weight": 250, "cost_multiplier": 0 },
-      { "monster": "mon_mi_go_scout", "weight": 250, "cost_multiplier": 0, "starts": "60 days" },
-      { "monster": "mon_kreck", "weight": 250, "cost_multiplier": 0 }
+      { "monster": "mon_mi_go_scout", "weight": 250, "cost_multiplier": 0, "starts": "60 days" }
     ]
   },
   {
     "type": "monstergroup",
     "name": "GROUP_NETHER_PORTAL",
-    "default": "mon_kreck",
+    "default": "mon_blank",
     "monsters": [
       { "monster": "mon_gelatin", "weight": 200, "cost_multiplier": 0 },
       { "monster": "mon_flaming_eye", "weight": 200, "cost_multiplier": 0 },
-      { "monster": "mon_kreck", "weight": 200, "cost_multiplier": 0 },
       { "monster": "mon_unseen_hunter", "weight": 100, "cost_multiplier": 0, "starts": "120 days" },
       { "monster": "mon_blank", "weight": 200, "cost_multiplier": 0 }
     ]

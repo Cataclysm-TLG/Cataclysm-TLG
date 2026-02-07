@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gunstore" ],
     "object": {
       "fill_ter": "t_thconc_floor",
@@ -56,7 +55,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gunstore_2ndfloor" ],
     "object": {
       "fill_ter": "t_floor",
@@ -121,7 +119,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gunstore_roof" ],
     "object": {
       "fill_ter": "t_flat_roof",
@@ -156,7 +153,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_gunstore_looted" ],
     "object": {
       "fill_ter": "t_thconc_floor",
@@ -230,7 +226,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "npc_survivor_gunstore",
     "object": {
       "faction_owner": [ { "id": "no_faction", "x": [ 0, 23 ], "y": [ 0, 23 ] } ],

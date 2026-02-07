@@ -102,6 +102,7 @@
   {
     "id": "BLOCK_WHILE_WORN",
     "type": "json_flag",
+    "//": "Unused in vanialla, left in place for mods.",
     "info": "This item can be used to block attacks when worn."
   },
   {
@@ -2576,6 +2577,12 @@
     "id": "NATURAL_WEAPON",
     "type": "json_flag",
     "//": "Intended for integrated items like claws. Only contributes its damage if used via an attack vector that has natural: true."
+  },
+  {
+    "id": "DECAYS",
+    "type": "json_flag",
+    "info": "This will eventually <bad>go bad</bad>.",
+    "//": "Overrides DECAYS_IN_AIR."
   },
   {
     "id": "DECAYS_IN_AIR",

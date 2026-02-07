@@ -39,6 +39,8 @@
 #include "visitable.h"
 #include "vpart_position.h"
 #include "rng.h"
+#include "weighted_list.h"
+
 class Character;
 class Creature;
 class JsonObject;
@@ -300,6 +302,11 @@ class item : public visitable
         void set_damage( int qty );
 
         /**
+        * Same as set_damage, but bypasses any checks and just sets value to desired level
+        */
+        void force_set_damage( int qty );
+
+        /**
         * Sets item's degradation constrained by [0 and @ref max_damage]
         * If item damage is lower it is raised up to @ref degradation
         */
@@ -348,6 +355,10 @@ class item : public visitable
          * with @ref make_corpse.
          */
         bool is_corpse() const;
+        /**
+         * As can_revive(), but temporary conditions like freezing don't block it.
+         */
+        bool pulpable() const;
         /**
          * Whether this is a corpse that can be revived.
          */
@@ -1379,12 +1390,12 @@ class item : public visitable
         // @see itype::damage_level()
         int damage_level( bool precise = false ) const;
 
-        // modifies melee weapon damage to account for item's damage
-        float damage_adjusted_melee_weapon_damage( float value ) const;
-        // modifies gun damage to account for item's damage
+        /** Modifiy melee weapon damage to account for item's damage. */
+        float damage_adjusted_melee_weapon_damage( float value, const damage_type_id &dt ) const;
+        /** Modifiy gun damage to account for item's damage. */
         float damage_adjusted_gun_damage( float value ) const;
-        // modifies armor resist to account for item's damage
-        float damage_adjusted_armor_resist( float value ) const;
+        /** Modifiy armor resist to account for item's damage. */
+        float damage_adjusted_armor_resist( float value, const damage_type_id &dmg_type ) const;
 
         // @return 0 if item is count_by_charges() or 4000 ( value of itype::damage_max_ )
         int max_damage() const;
@@ -1711,8 +1722,6 @@ class item : public visitable
 
         /** What faults can potentially occur with this item? */
         std::set<fault_id> faults_potential() const;
-
-        bool can_have_fault_type( const std::string &fault_type ) const;
 
         std::set<fault_id> faults_potential_of_type( const std::string &fault_type ) const;
 
@@ -2041,8 +2050,22 @@ class item : public visitable
         /** Idempotent filter setting an item specific flag. */
         item &set_flag( const flag_id &flag );
 
-        /** Idempotent filter setting an item specific fault. */
-        item &set_fault( const fault_id &fault_id );
+        /** Check if item can have a fault, and if yes, applies it. This version do not print a message, use item_location version instead
+         * `force`, if true, bypasses the check and applies the fault item do not define
+         */
+        bool set_fault( const fault_id &f_id, bool force = false, bool message = true );
+
+        /** Check if item can have any fault of type, and if yes, applies it. This version do not print a message, use item_location version instead
+        * `force`, if true, bypasses the check and applies the fault item do not define
+        */
+        void set_random_fault_of_type( const std::string &fault_type, bool force = false,
+                                       bool message = true );
+
+        /** Checks all the faults in item, and if there is any of this type, removes it. */
+        void remove_single_fault_of_type( const std::string &fault_type );
+
+        // Check if adding this fault is possible
+        bool can_have_fault( const fault_id &f_id );
 
         /** Idempotent filter removing an item specific flag */
         item &unset_flag( const flag_id &flag );
@@ -2060,11 +2083,18 @@ class item : public visitable
         /**How much of the specified vitamin is there?*/
         int get_vitamin_amount( const vitamin_id &vitamin ) const;
 
-        /**Does this item have the specified fault*/
+        std::string get_fault_description( const fault_id &f_id ) const;
+
+        /** Does this item have the specified fault? */
         bool has_fault( const fault_id &fault ) const;
+
+        bool has_fault_of_type( const std::string &fault_type ) const;
 
         /** Does this item part have a fault with this flag */
         bool has_fault_flag( const std::string &searched_flag ) const;
+
+        /** Removes the fault from the item, if it has it. */
+        void remove_fault( const fault_id &fault_id );
 
         /**
          * @name Item properties
@@ -2866,7 +2896,12 @@ class item : public visitable
         /** Puts the skill in context of the item */
         skill_id contextualize_skill( const skill_id &id ) const;
 
-        /* Remove a monster from this item and spawn it.
+        // returns itype to_hit, modified by stuff like gunmods
+        // TODO: tie faults here
+        int get_to_hit() const;
+
+        /**
+         * Remove a monster from this item and spawn it.
          * See @game::place_critter for meaning of @p target and @p pos.
          * @return Whether the monster has been spawned (may fail if no space available).
          */
@@ -3165,8 +3200,12 @@ class item : public visitable
         bool process_blackpowder_fouling( Character *carrier );
         bool process_gun_cooling( Character *carrier );
         bool process_tool( Character *carrier, const tripoint_bub_ms &pos );
+        // Item breaks down into another type over time unless frozen.
+        bool process_decay( Character *carrier, int decay_hours,
+                            time_duration time_delta );
+        // Item breaks down into another type over time if exposed to air unless frozen.
         bool process_decay_in_air( map &here, Character *carrier, const tripoint_bub_ms &pos,
-                                   int max_air_exposure_hours,
+                                   int decay_hours,
                                    time_duration time_delta );
 
 

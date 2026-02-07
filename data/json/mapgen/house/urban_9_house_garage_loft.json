@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "urban_9_1", "urban_9_2" ] ],
     "weight": 250,
     "object": {
@@ -86,7 +85,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "urban_9_3", "urban_9_4" ] ],
     "weight": 250,
     "object": {
@@ -133,7 +131,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "urban_9_5", "urban_9_6" ] ],
     "weight": 250,
     "object": {

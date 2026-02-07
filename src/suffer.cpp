@@ -345,12 +345,16 @@ void suffer::while_grabbed( Character &you )
     // TODO: expand the search area - use the same logic as GROUP_BASH?
     map &here = get_map();
     creature_tracker &creatures = get_creature_tracker();
+    // This wouldn't work the same underwater and drowning already exists, so.
+    if( you.is_underwater() ) {
+        return;
+    }
     int crowd = 0;
     int impassable_ter = 0;
     // Medium size == 3.
     int your_size = static_cast<std::underlying_type_t<creature_size>>( you.get_size() );
-    int crush_grabs_req = your_size - 1;
-    // Minimum of 2 grabbers required.
+    int crush_grabs_req = your_size + 1;
+    // Minimum of 2 grabbers required, though for prone tiny characters this can technically be 1.
     crush_grabs_req = std::max( 2, crush_grabs_req );
 
     int crush_resist = 5;
@@ -370,9 +374,11 @@ void suffer::while_grabbed( Character &you )
         }
     }
 
-    add_msg_debug( debugmode::DF_CHARACTER,
-                   "Crowd pressure sum: character size requires %d grabbers, found %d ", crush_grabs_req, crowd );
-    // if we aren't near enough monsters with GROUP_BASH we won't suffocate
+    if( !you.is_on_ground() ) {
+        crowd = std::max( 0, crowd - 1 );
+    }
+
+    // If we aren't near enough monsters with GROUP_BASH we won't suffocate
     if( crowd < crush_grabs_req ) {
         return;
     }
@@ -391,7 +397,8 @@ void suffer::while_grabbed( Character &you )
         !you.has_trait( trait_SLIMESPAWNER ) ) {
         crush_resist -= 4;
     }
-    if( 100 * ( you.weight_carried() / you.weight_capacity() ) > 75 ) {
+    if( ( you.weight_capacity() > 0_gram ) &&
+        100 * ( you.weight_carried() / you.weight_capacity() ) > 75 ) {
         crush_resist -= 4;
     }
     if( you.has_trait( trait_TRANSPIRATION ) || you.has_trait( trait_SLIMESPAWNER ) ) {
@@ -402,17 +409,19 @@ void suffer::while_grabbed( Character &you )
     }
     if( crowd == crush_grabs_req &&
         rng( 1, ( 100 + ( 100 - you.get_limb_score( limb_score_breathing ) ) ) ) <= crush_resist ) {
-        // only a chance to lose breath at minimum grabs
+        // Only a chance to lose breath at minimum grabs.
         you.oxygen -= rng( 0, 1 );
-    } else if( crowd <= crush_grabs_req * 2 ) {
-        you.oxygen -= 1;
-    } else if( crowd <= crush_grabs_req * 3 ) {
-        you.oxygen -= rng( 1, 2 );
-    } else if( crowd <= crush_grabs_req * 4 ) {
-        you.oxygen -= 2;
+    } else if( crowd > crush_grabs_req ) {
+        if( crowd <= crush_grabs_req * 2 ) {
+            you.oxygen -= 1;
+        } else if( crowd <= crush_grabs_req * 3 ) {
+            you.oxygen -= rng( 1, 2 );
+        } else if( crowd <= crush_grabs_req * 4 ) {
+            you.oxygen -= 2;
+        }
     }
 
-    // a few warnings before starting to take damage
+    // A few warnings before starting to take damage.
     if( you.oxygen <= 5 ) {
         you.add_msg_if_player( m_bad, _( "You're being suffocated!" ) );
         if( uistate.distraction_oxygen && you.is_avatar() ) {
@@ -1372,20 +1381,24 @@ void suffer::from_radiation( Character &you )
 
     const bool radiogenic = you.has_trait( trait_RADIOGENIC );
     if( radiogenic && calendar::once_every( 30_minutes ) && you.get_rad() > 0 ) {
-        // At 200 irradiation, twice as fast as REGEN
-        if( x_in_y( you.get_rad(), 200 ) ) {
+        // At 200 radioactivity, we heal about 48 hp/day.
+        if( x_in_y( you.get_rad(), 400 ) ) {
             you.healall( 1 );
             if( rad_mut == 0 ) {
-                // Don't heal radiation if we're generating it naturally
-                // That would counter the main downside of radioactivity
-                you.mod_rad( -5 );
+                // The RADIOACTIVE mutation is gone, but this bit of code was to prevent
+                // losing radioactivity if you had it.
+                you.mod_rad( -2 );
             }
         }
     }
 
     if( calendar::once_every( 1_days ) ) {
-        if( !radiogenic && you.get_rad() > 0 ) {
-            you.mod_daily_health( -you.get_rad(), -200 );
+        int lifestyle_modifier = you.get_rad();
+        if( lifestyle_modifier > 0 ) {
+            if( you.has_trait( trait_RADIOGENIC ) ) {
+                lifestyle_modifier /= 2;
+            }
+            you.mod_daily_health( -lifestyle_modifier, -200 );
         }
     }
 
@@ -2078,8 +2091,8 @@ void Character::mend( int rate_multiplier )
     // Being healthy helps.
     healing_factor *= 1.0f + get_lifestyle() / 200.0f;
 
-    // Very hungry starts lowering the chance
-    // square rooting the value makes the numbers drop off faster when below 1
+    // Malnourishment reduces healing.
+    // Square rooting the value makes the numbers drop off faster when below 1.
     healing_factor *= std::sqrt( static_cast<float>( get_stored_kcal() ) / static_cast<float>
                                  ( get_healthy_kcal() ) );
     // Similar for thirst - starts at very thirsty, drops to 0 ~halfway between two last statuses

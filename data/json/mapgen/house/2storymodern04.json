@@ -3,7 +3,6 @@
     "type": "mapgen",
     "om_terrain": [ [ "2StoryModern04_basement_1", "2StoryModern04_basement_2" ] ],
     "weight": 250,
-    "method": "json",
     "object": {
       "palettes": [ "standard_domestic_palette", "standard_domestic_basement_palette", "parametrized_carpets_palette" ],
       "fill_ter": "t_floor_waxed",
@@ -59,7 +58,6 @@
     "type": "mapgen",
     "om_terrain": [ [ "2StoryModern04_1_1", "2StoryModern04_1_2" ] ],
     "weight": 250,
-    "method": "json",
     "object": {
       "palettes": [
         "standard_domestic_palette",
@@ -81,7 +79,7 @@
         "Ὠ-#````````````N#1~~~~~~||||||  R|L|9~8|d  @@#-Ὠ",
         "Ὠ-#````````````U#2~JOJJ~|FF44|  R||||+||b  @@#-Ὠ",
         "Ὠ-#````````````U#3~~~~~~+~~~~|  R|><|  +    ¤#-Ὠ",
-        "Ὠ-#qq```````````##JJJJ~~||||||  y|  |  ##:::##-Ὠ",
+        "Ὠ-#qqé``````````##JJJJ~~||||||  y|  |  ##:::##-Ὠ",
         "Ὠ-############*###A A   TRRVVV        y:%------Ὠ",
         "Ὠ---------------#y                    y:%------Ὠ",
         "Ὠ...------------¶   h h         ֎H l   #%......Ὠ",
@@ -107,6 +105,7 @@
         "K": "t_sidewalk",
         "U": "t_concrete",
         "N": "t_concrete",
+        "é": "t_concrete",
         "q": "t_concrete"
       },
       "furniture": { "֎": "f_counter", "₸": "f_deckchair" },
@@ -122,7 +121,6 @@
     "type": "mapgen",
     "om_terrain": [ [ "2StoryModern04_2_1", "2StoryModern04_2_2" ] ],
     "weight": 250,
-    "method": "json",
     "object": {
       "palettes": [ "domestic_general_and_variant_palette", "standard_domestic_lino_bathroom" ],
       "fill_ter": "t_floor_waxed",
@@ -173,7 +171,6 @@
     "type": "mapgen",
     "om_terrain": [ [ "2StoryModern04_roof_1", "2StoryModern04_roof_2" ] ],
     "weight": 250,
-    "method": "json",
     "object": {
       "palettes": [ "roof_palette" ],
       "fill_ter": "t_flat_roof",

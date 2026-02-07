@@ -179,7 +179,7 @@ inline tripoint_range<Tripoint> points_on_radius_circ( const Tripoint &center, c
     const tripoint offset( radius, radius, radiusz );
     return tripoint_range<Tripoint>( center - offset,
     center + offset, [center, radius]( const Tripoint & pt ) {
-        float r = trig_dist( center, pt );
+        int r = trig_dist( center, pt );
         return radius - 0.5f < r && r < radius + 0.5f;
     } );
 }

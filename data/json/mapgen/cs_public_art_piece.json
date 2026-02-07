@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "cs_public_art_piece" ],
     "weight": 1000,
     "object": {

@@ -1,7 +1,8 @@
 [
   {
     "id": "boots_survivor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
     "description": "A pair of custom-made boots constructed of thick Kevlar and a chemical resistant layer, featuring steel toes for extra protection.  Keeps your feet safe from the myriad dangers of the apocalypse.",
@@ -53,7 +54,8 @@
   },
   {
     "id": "boots_survivor_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "boots_survivor",
     "proportional": { "weight": 1.4, "volume": 1.4 },
     "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
@@ -61,7 +63,8 @@
   },
   {
     "id": "boots_survivor_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "boots_survivor",
     "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -69,7 +72,8 @@
   },
   {
     "id": "boots_wsurvivor_nofur",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
     "description": "A pair of customized, Kevlar-armored chemical-resistant boots with steel toes.  Warm thanks to the faux-fur lining, and quite protective due to the thick materials, though perhaps a little hard to move in.",
     "copy-from": "boots_wsurvivor",
@@ -114,7 +118,8 @@
   },
   {
     "id": "boots_wsurvivor_nofur_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "boots_wsurvivor_nofur",
     "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
     "proportional": { "weight": 1.3, "volume": 1.3 },
@@ -122,7 +127,8 @@
   },
   {
     "id": "boots_wsurvivor_nofur_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "boots_wsurvivor_nofur",
     "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -130,7 +136,8 @@
   },
   {
     "id": "boots_wsurvivor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
     "description": "A pair of customized, Kevlar-armored boots with a chemical-resistant layer and steel toes.  Warm thanks to the real fur lining, and quite protective due to the thick materials, though perhaps a little hard to move in.",
@@ -185,7 +192,8 @@
   },
   {
     "id": "boots_wsurvivor_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
     "copy-from": "boots_wsurvivor",
     "proportional": { "weight": 1.3, "volume": 1.3 },
@@ -193,7 +201,8 @@
   },
   {
     "id": "boots_wsurvivor_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "boots_wsurvivor",
     "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -201,7 +210,8 @@
   },
   {
     "id": "swim_fins_custom",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "custom swim fin boot attachments" },
     "description": "A pair of rubber flippers worn on the feet, which improve swimming speed while greatly impeding the wearer's ability to walk.  This pair was reduced in volume and weight and has to be attached to diving boots with necessary attachment points.",
     "weight": "420 g",

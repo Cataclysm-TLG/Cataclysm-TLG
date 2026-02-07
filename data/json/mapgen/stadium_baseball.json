@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "stadium_0_0", "stadium_1_0", "stadium_2_0", "stadium_3_0" ] ],
     "weight": 100,
     "object": {
@@ -37,7 +36,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [ "stadium_0_1", "stadium_1_1", "stadium_2_1", "stadium_3_1" ],
       [ "stadium_0_2", "stadium_1_2", "stadium_2_2", "stadium_3_2" ],
@@ -184,7 +182,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [ "stadium_0_1_1", "stadium_1_1_1", "stadium_2_1_1", "stadium_3_1_1" ],
       [ "stadium_0_2_1", "stadium_1_2_1", "stadium_2_2_1", "stadium_3_2_1" ],
@@ -330,7 +327,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [ "stadium_0_1_2", "stadium_1_1_2", "stadium_2_1_2", "stadium_3_1_2" ],
       [ "stadium_0_2_2", "stadium_1_2_2", "stadium_2_2_2", "stadium_3_2_2" ],
@@ -488,7 +484,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "stadium_1_1_3", "stadium_2_1_3" ] ],
     "weight": 100,
     "object": {
@@ -525,7 +520,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "stadium_0_3_3" ],
     "weight": 100,
     "object": {

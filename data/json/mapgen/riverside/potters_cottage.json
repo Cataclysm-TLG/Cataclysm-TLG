@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "pottery_cottage_field" ], [ "pottery_cottage" ] ],
     "weight": 1000,
     "object": {
@@ -97,7 +96,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": [ [ "pottery_cottage_field_2nd" ], [ "pottery_cottage_2nd" ] ],
     "type": "mapgen",
     "object": {
@@ -176,7 +174,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "pottery_cottage_field_roof" ], [ "pottery_cottage_roof" ] ],
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -236,7 +233,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "pottery_cottage_basement",
     "object": {
       "fill_ter": "t_dirtfloor",

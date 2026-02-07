@@ -1930,6 +1930,11 @@ void map::monster_in_field( monster &z )
                     z.add_effect( effect_onfire, 1_turns * rng( dam / 2, dam * 2 ) );
                 }
             }
+            // Remove some lifetime from the fire, to simulate the monster trampling it and spreading/destroying some of the fuel.
+            // Prevents one fire from killing an infinite amount of zombies.
+            if( dam > 0 ) {
+                cur.mod_field_age( 1_minutes * dam );
+            }
         }
         if( cur_field_type == fd_smoke ) {
             if( !z.has_flag( mon_flag_NO_BREATHE ) ) {

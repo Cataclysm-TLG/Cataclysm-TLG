@@ -5690,7 +5690,7 @@ bool deploy_tent_actor::check_intact( const tripoint_bub_ms &center ) const
 void weigh_self_actor::info( const item &, std::vector<iteminfo> &dump ) const
 {
     dump.emplace_back( "DESCRIPTION",
-                       _( "Use this item to weigh yourself.  Includes everything you are wearing." ) );
+                       _( "Use this to weigh yourself and everything you are wearing." ) );
 }
 
 std::optional<int> weigh_self_actor::use( Character *p, item &it, const tripoint_bub_ms &pos ) const

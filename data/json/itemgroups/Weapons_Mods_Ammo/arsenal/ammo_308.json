@@ -34,32 +34,32 @@
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_308_full",
-    "container-item": { "item": "ammunition_can_30", "variant": "ammunition_can_30_308fmj_460" },
-    "items": [ { "group": "ammo_box_308", "count": 23 } ]
+    "container-item": "ammunition_can_30",
+    "items": [ { "group": "ammo_box_308", "count": 12 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_308_part",
-    "container-item": { "item": "ammunition_can_30", "variant": "ammunition_can_30_308fmj_460" },
-    "items": [ { "group": "ammo_box_308", "count": [ 0, 20 ] } ]
+    "container-item": "ammunition_can_30",
+    "items": [ { "group": "ammo_box_308", "count": [ 0, 12 ] } ]
   },
   {
     "type": "item_group",
     "id": "ammo_box_308",
-    "container-item": "ammo_box_army_20_308",
-    "items": [ { "item": "762_51", "count": 1, "charges": 20 } ]
+    "container-item": "ammo_box",
+    "items": [ { "item": "762_51", "count": 1, "charges": 12 } ]
   },
   {
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_belt308_full",
-    "container-item": { "item": "ammunition_can_30", "variant": "ammunition_can_30_308_4fmj1tracer_200" },
+    "container-item": "ammunition_can_30",
     "items": [ { "group": "ammo_can_belt308_pouch", "count": 2 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_belt308_part",
-    "container-item": { "item": "ammunition_can_30", "variant": "ammunition_can_30_308_4fmj1tracer_200" },
+    "container-item": "ammunition_can_30",
     "items": [ { "group": "ammo_can_belt308_pouch", "count": [ 0, 2 ] } ]
   },
   {
@@ -80,13 +80,13 @@
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_belt308_full_4ap_1tracer",
-    "container-item": { "item": "ammunition_can_30", "variant": "ammunition_can_30_308_1tracer4ap_200" },
+    "container-item": "ammunition_can_30",
     "items": [ { "group": "ammo_can_belt308_pouch_4ap_1tracer", "count": 2 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_belt308_part_4ap_1tracer",
-    "container-item": { "item": "ammunition_can_30", "variant": "ammunition_can_30_308_1tracer4ap_200" },
+    "container-item": "ammunition_can_30",
     "items": [ { "group": "ammo_can_belt308_pouch_4ap_1tracer", "count": [ 0, 2 ] } ]
   },
   {
@@ -106,32 +106,32 @@
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_308_ap_full",
-    "container-item": { "item": "ammunition_can_30", "variant": "ammunition_can_30_308ap_240" },
+    "container-item": "ammunition_can_30",
     "items": [ { "group": "ammo_box_ap_308", "count": 12 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_308_ap_part",
-    "container-item": { "item": "ammunition_can_30", "variant": "ammunition_can_30_308ap_240" },
+    "container-item": "ammunition_can_30",
     "items": [ { "group": "ammo_box_ap_308", "count": [ 0, 12 ] } ]
   },
   {
     "type": "item_group",
     "id": "ammo_box_ap_308",
-    "container-item": "ammo_box_army_20_308",
+    "container-item": "ammo_box",
     "items": [ { "item": "762_51_m993", "count": 1, "charges": 20 } ]
   },
   {
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_belt308_ball_full",
-    "container-item": { "item": "ammunition_can_50", "variant": "ammunition_can_50_308_600" },
+    "container-item": "ammunition_can_50",
     "items": [ { "group": "ammo_can_belt308_ball_pouch", "count": 6 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_belt308_ball_part",
-    "container-item": { "item": "ammunition_can_50", "variant": "ammunition_can_50_308_600" },
+    "container-item": "ammunition_can_50",
     "items": [ { "group": "ammo_can_belt308_ball_pouch", "count": [ 0, 5 ] } ]
   },
   {
@@ -152,13 +152,13 @@
     "//": "---------------------------------------------------",
     "type": "item_group",
     "id": "ammo_can_belt308_full_5ap",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_308_1tracer4ap_600" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt308_pouch_5ap", "count": 6 } ]
   },
   {
     "type": "item_group",
     "id": "ammo_can_belt308_part_5ap",
-    "container-item": { "item": "ammunition_can_fat_50", "variant": "ammunition_can_fat_50_308_1tracer4ap_600" },
+    "container-item": "ammunition_can_fat_50",
     "items": [ { "group": "ammo_can_belt308_pouch_5ap", "count": [ 0, 5 ] } ]
   },
   {

@@ -1659,7 +1659,15 @@ Faults can be defined for more specialized damage of an item.
   "name": { "str": "Spent casing in chamber" }, // fault name for display
   "description": "This gun currently...", // fault description
   "item_prefix": "jammed", // optional string, items with this fault will be prefixed with this
+  "item_suffix": "no handle", // optional string, items with this fault will be suffixed with this. The string would be encased in parentheses, like `sword (no handle)`
+  "message": "%s has it's handle broken!", // Message, that would be shown when such fault is applied, unless supressed
+  "fault_type": "gun_mechanical_simple", // type of a fault, code may call for a random fault in a group instead of specific fault
+  "affected_by_degradation": false, // default false. If true, the item degradation value would be added to fault weight on roll
+  "degradation_mod": 50,  // default 0. Having this fault would add this amount of temporary degradation on the item, resulting in higher chance to trigger faults with "affected_by_degradation": true. Such degradation will be removed when fault is fixed
   "price_modifier": 0.4, // (Optional, double) Defaults to 1 if not specified. A multiplier on the price of an item when this fault is present. Values above 1.0 will increase the item's value.
+  "melee_damage_mod": [ { "damage_id": "cut", "add": -5, "multiply": 0.8 } ], // (Optional) alters the melee damage of this type for item, if fault of this type is presented. `damage_id` is mandatory, `add` is 0 by default, `multiply` is 1 by default
+  "armor_mod": [ { "damage_id": "cut", "add": -5, "multiply": 0.8 } ], // (Optional) Same as armor_mod, changes the protection value of damage type of the faulted item if it's presented
+  "block_faults": [ "fault_handle_chipping", "fault_handle_cracked" ], // Faults, that cannot be applied if this fault is already presented on item. If there is already such a fault, it will be removed. Can't have chipped blade if the blade is gone
   "flags": [ "JAMMED_GUN" ] // optional flags, see below
 }
 ```
@@ -1693,6 +1701,24 @@ Fault fixes are methods to fix faults, the fixes can optionally add other faults
 `requirements` is an array of requirements, they can be specified in 2 ways:
 * An array specifying an already defined requirement by it's id and a multiplier, `[ "gun_lubrication", 2 ]` will add `gun_lubrication` requirement and multiply the components and tools ammo required by 2.
 * Inline object specifying the requirement in the same way [recipes define it](#recipe-requirements)
+
+### Item fault groups
+
+Fault group is a combination of a fault and corresponding weight, made so multiples of similar fault groups (handles, blades, cotton pieces of clothes etc) can be combined and reused
+
+```jsonc
+{
+  "type": "fault_group",
+  "id": "handles",
+  "group": [ 
+    { "fault": "fault_broken_handle", "weight": 100 }, // `fault` should be a fault id
+    { "fault": "fault_cracked_handle" }, // default weight is 100, if omitted
+    { "fault": "fault_broken_heart", "weight": 10 } 
+  ]
+}
+```
+
+The list of possible faults, their weight and actual chances can be checked in item info with a debug mode on
 
 ### Materials
 
@@ -2951,6 +2977,7 @@ it is present to help catch errors.
   "tags": [ "combat_skill" ],
   "time_to_attack": { "min_time": 20, "base_time": 30, "time_reduction_per_level": 1 },
   "display_category": "display_ranged",
+  "consumes_focus": true,
   "sort_rank": 11000,
   "teachable": true,
   "companion_skill_practice": [ { "skill": "hunting", "weight": 25 } ]
@@ -2964,6 +2991,7 @@ it is present to help catch errors.
 | `tags`                     | Identifies special cases. Currently valid tags are: "combat_skill" and "contextual_skill". |
 | `time_to_attack`           | Object used to calculate the movecost for firing a gun. |
 | `display_category`         | Category in the character info screen where this skill is displayed. |
+| `consumes_focus`           | (Boolean) Whether focus is consumed when this skill is trained.
 | `sort_rank`                | Order in which the skill is shown. |
 | `teachable`                | Whether it's possible to teach this skill between characters. (Default = true) |
 | `companion_skill_practice` | Determines the priority of this skill within a mision skill category when an NPC gains experience from a companion mission. |
@@ -5095,6 +5123,7 @@ Examples from the actual definitions:
     "deployed_item": "plastic_sheet",
     "light_emitted": 5,
     "required_str": 18,
+    "mass": "60 kg",
     "flags": [ "TRANSPARENT", "BASHABLE", "FLAMMABLE_HARD" ],
     "connect_groups" : [ "WALL" ],
     "connects_to" : [ "WALL" ],
@@ -5265,6 +5294,10 @@ oxytorch: {
 #### `required_str`
 
 Strength required to move the furniture around. Negative values indicate an unmovable furniture.
+
+#### `mass`
+
+(Optional) Defaults 1000 kilograms. The weight of this furniture.
 
 #### `crafting_pseudo_item`
 

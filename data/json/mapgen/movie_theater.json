@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "type": "mapgen",
     "weight": 100,
     "om_terrain": [
@@ -159,7 +158,6 @@
     }
   },
   {
-    "method": "json",
     "type": "mapgen",
     "weight": 100,
     "om_terrain": [
@@ -265,7 +263,6 @@
     }
   },
   {
-    "method": "json",
     "type": "mapgen",
     "om_terrain": [ [ "movietheater_2_2_0" ], [ "movietheater_2_2_1" ] ],
     "object": {

@@ -315,9 +315,7 @@
     "goal": "MGOAL_FIND_ITEM",
     "difficulty": 1,
     "value": 0,
-    "start": {
-      "assign_mission_target": { "om_terrain": "slimepit_z0", "om_special": "Slime Pit", "reveal_radius": 3, "search_range": 400 }
-    },
+    "start": { "assign_mission_target": { "om_terrain": "slimepit_z0", "om_special": "Slime Pit", "reveal_radius": 3 } },
     "item": "slime_scrap",
     "count": 3,
     "origins": [ "ORIGIN_SECONDARY" ],
@@ -396,7 +394,7 @@
     "goal": "MGOAL_FIND_ITEM",
     "difficulty": 3,
     "value": 0,
-    "start": { "assign_mission_target": { "om_terrain": "hive", "om_special": "Bee Hive", "reveal_radius": 3, "search_range": 400 } },
+    "start": { "assign_mission_target": { "om_terrain": "hive", "om_special": "Bee Hive", "reveal_radius": 3 } },
     "item": "bee_sting",
     "count": 1,
     "origins": [ "ORIGIN_SECONDARY" ],
@@ -429,7 +427,7 @@
     "difficulty": 5,
     "value": 0,
     "start": {
-      "assign_mission_target": { "om_terrain": "forest", "reveal_radius": 1, "random": false, "search_range": 40, "min_distance": 5, "z": 0 },
+      "assign_mission_target": { "om_terrain": "forest", "reveal_radius": 1, "min_distance": 5, "z": 0 },
       "update_mapgen": { "place_monster": [ { "monster": "mon_zombie_screecher", "x": 11, "y": 11, "target": true } ] }
     },
     "end": {
@@ -544,9 +542,7 @@
     "difficulty": 1,
     "value": 0,
     "item": "small_relic",
-    "start": {
-      "assign_mission_target": { "om_terrain": "cathedral_1_SE", "om_special": "cathedral", "reveal_radius": 1, "random": false, "search_range": 200 }
-    },
+    "start": { "assign_mission_target": { "om_terrain": "cathedral_1_SE", "om_special": "cathedral", "reveal_radius": 1 } },
     "origins": [ "ORIGIN_SECONDARY" ],
     "followup": "MISSION_GODCO_GREENWOOD_3",
     "dialogue": {
@@ -572,9 +568,7 @@
     "value": 0,
     "item": "holybook_bible1",
     "count": 10,
-    "start": {
-      "assign_mission_target": { "om_terrain": "s_bookstore", "om_special": "s_bookstore", "reveal_radius": 1, "random": false, "search_range": 200 }
-    },
+    "start": { "assign_mission_target": { "om_terrain": "s_bookstore", "om_special": "s_bookstore", "reveal_radius": 1 } },
     "origins": [ "ORIGIN_SECONDARY" ],
     "dialogue": {
       "describe": "I need your help…",
@@ -652,14 +646,7 @@
     "difficulty": 1,
     "value": 0,
     "start": {
-      "assign_mission_target": {
-        "om_terrain": "s_pharm",
-        "om_special": "s_pharm",
-        "reveal_radius": 1,
-        "random": false,
-        "search_range": 1000,
-        "min_distance": 3
-      },
+      "assign_mission_target": { "om_terrain": "s_pharm", "om_special": "s_pharm", "reveal_radius": 1, "min_distance": 3 },
       "update_mapgen": { "place_items": [ { "item": "fertility_supplements", "x": 15, "y": 15 } ] }
     },
     "end": {

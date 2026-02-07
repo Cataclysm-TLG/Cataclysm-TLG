@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "om_terrain": "playground",
     "//": "Playground",
     "type": "mapgen",
@@ -48,7 +47,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "playground_roof",
     "type": "mapgen",
     "weight": 300,
@@ -85,7 +83,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "playground_1",
     "//": "Playground",
     "weight": 500,
@@ -123,7 +120,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dog_park",
     "//": "Dog Park",
     "weight": 500,
@@ -183,7 +179,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "park",
     "//": "Scenic Park",
     "weight": 500,
@@ -224,7 +219,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "park_roof",
     "weight": 500,
     "object": {
@@ -260,7 +254,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "park_2",
     "//": "Scenic Park",
     "weight": 500,
@@ -297,7 +290,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "park_3",
     "//": "Picnic Park",
     "type": "mapgen",
@@ -347,7 +339,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "park_4",
     "//": "Picnic Park",
     "type": "mapgen",
@@ -391,7 +382,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "park_5",
     "//": "Scenic Park",
     "type": "mapgen",
@@ -430,7 +420,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "park_5_roof",
     "type": "mapgen",
     "weight": 300,
@@ -466,7 +455,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "park_6",
     "//": "Scenic Park",
     "type": "mapgen",
@@ -504,7 +492,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "park_7",
     "//": "Pavilion",
     "type": "mapgen",
@@ -544,7 +531,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "park_7_roof",
     "type": "mapgen",
     "weight": 300,
@@ -581,7 +567,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "baskeball_court",
     "//": "Basketball Court",
     "weight": 700,
@@ -620,7 +605,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "tennis_court",
     "//": "Tennis Court",
     "weight": 500,
@@ -658,7 +642,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "volleyball_court",
     "//": "Volleyball Court",
     "weight": 300,

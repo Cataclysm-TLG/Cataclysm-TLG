@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "sealab_small_surface",
     "weight": 250,
     "object": {
@@ -58,7 +57,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "sealab_small_roof",
     "weight": 250,
     "object": {
@@ -95,7 +93,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "sealab_small_-1",
     "weight": 250,
     "object": {
@@ -131,7 +128,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "sealab_small_-2",
     "weight": 250,
     "object": {
@@ -167,7 +163,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "sealab_small_-3",
     "weight": 250,
     "object": {
@@ -236,7 +231,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "sealab_small_-4",
     "weight": 250,
     "object": {
@@ -291,7 +285,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "sealab_small_-5",
     "weight": 250,
     "object": {

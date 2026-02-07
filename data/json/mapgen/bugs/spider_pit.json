@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "spider_pit" ],
     "weight": 250,
     "object": {
@@ -44,7 +43,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "spider_pit_under" ],
     "weight": 250,
     "object": {

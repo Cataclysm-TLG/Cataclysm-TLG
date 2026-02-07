@@ -9,11 +9,13 @@
 #include <memory>
 #include <optional>
 #include <stdexcept>
+#include <tuple>
 #include <unordered_set>
 #include <variant>
 
 #include "ammo.h"
 #include "assign.h"
+#include "body_part_set.h"
 #include "bodypart.h"
 #include "cached_options.h"
 #include "calendar.h"
@@ -22,14 +24,17 @@
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "color.h"
+#include "coords_fwd.h"
 #include "damage.h"
 #include "debug.h"
 #include "effect_on_condition.h"
 #include "enum_conversions.h"
 #include "enums.h"
 #include "explosion.h"
+#include "fault.h"
 #include "flag.h"
 #include "flat_set.h"
+#include "flexbuffer_json.h"
 #include "game_constants.h"
 #include "generic_factory.h"
 #include "input.h"
@@ -39,10 +44,12 @@
 #include "item_pocket.h"
 #include "itype.h"
 #include "iuse_actor.h"
+#include "make_static.h"
+#include "mapdata.h"
 #include "material.h"
 #include "math_parser_diag_value.h"
-#include "mod_tracker.h"
 #include "options.h"
+#include "output.h"
 #include "pocket_type.h"
 #include "proficiency.h"
 #include "recipe.h"
@@ -52,7 +59,9 @@
 #include "ret_val.h"
 #include "stomach.h"
 #include "string_formatter.h"
+#include "subbodypart.h"
 #include "text_snippets.h"
+#include "translation.h"
 #include "translations.h"
 #include "try_parse_integer.h"
 #include "ui.h"
@@ -60,6 +69,7 @@
 #include "value_ptr.h"
 #include "veh_type.h"
 #include "vitamin.h"
+#include "weighted_list.h"
 
 template <typename T> struct enum_traits;
 
@@ -76,7 +86,6 @@ static const damage_type_id damage_bullet( "bullet" );
 
 static const flag_id json_flag_NO_RELOAD( "NO_RELOAD" );
 static const flag_id json_flag_NO_UNLOAD( "NO_UNLOAD" );
-
 
 static const gun_mode_id gun_mode_DEFAULT( "DEFAULT" );
 static const gun_mode_id gun_mode_MELEE( "MELEE" );
@@ -157,25 +166,29 @@ static void migrate_mag_from_pockets( itype &def )
     }
 }
 
-static std::vector<itype>::const_iterator find_template_list_const( const itype_id &it_id )
+static std::optional<std::reference_wrapper<const itype>> find_template_list_const(
+            const itype_id &it_id )
+
 {
-    const std::vector<itype> &itypes = item_controller->get_generic_factory().get_all();
-    return std::find_if( itypes.begin(), itypes.end(), [&it_id]( const itype & def ) {
-        return def.get_id() == it_id;
-    } );
+    generic_factory<itype> &factory = item_controller->get_generic_factory();
+    if( factory.is_valid( it_id ) ) {
+        return factory.obj( it_id );
+    }
+    return std::nullopt;
 }
 
-static std::vector<itype>::iterator find_template_list_mod( const itype_id &it_id )
+static std::optional<std::reference_wrapper<itype>> find_template_list_mod( const itype_id &it_id )
 {
-    std::vector<itype> &itypes = item_controller->get_generic_factory().get_all_mod();
-    return std::find_if( itypes.begin(), itypes.end(), [&it_id]( const itype & def ) {
-        return def.get_id() == it_id;
-    } );
+    std::optional<std::reference_wrapper<const itype>> it = find_template_list_const( it_id );
+    if( it.has_value() ) {
+        return const_cast<itype &>( it->get() );
+    }
+    return std::nullopt;
 }
 
-static std::size_t count_template_list( const itype_id &it_id )
+static bool template_list_contains( const itype_id &it_id )
 {
-    return find_template_list_const( it_id ) != item_controller->get_generic_factory().get_all().end();
+    return find_template_list_const( it_id ).has_value();
 }
 
 template<>
@@ -254,8 +267,32 @@ static bool is_physical( const itype &type )
            !type.has_flag( flag_ZERO_WEIGHT );
 }
 
+template<typename T>
+bool load_min_max( std::pair<T, T> &pa, const JsonObject &obj, const std::string &name )
+{
+    bool result = false;
+    if( obj.has_array( name ) ) {
+        // An array means first is min, second entry is max. Both are mandatory.
+        JsonArray arr = obj.get_array( name );
+        result |= arr.read_next( pa.first );
+        result |= arr.read_next( pa.second );
+    } else {
+        // Not an array, should be a single numeric value, which is set as min and max.
+        result |= obj.read( name, pa.first );
+        result |= obj.read( name, pa.second );
+    }
+    result |= obj.read( name + "-min", pa.first );
+    result |= obj.read( name + "-max", pa.second );
+    return result;
+}
+
 void Item_factory::finalize_pre( itype &obj )
 {
+    //a gunmod slot needs a toolmod slot even if one wasn't loaded
+    if( obj.gunmod && !obj.mod ) {
+        obj.mod = cata::make_value<islot_mod>();
+    }
+
     check_and_create_magazine_pockets( obj );
     add_special_pockets( obj );
 
@@ -286,8 +323,7 @@ void Item_factory::finalize_pre( itype &obj )
     }
 
     if( obj.thrown_damage.empty() ) {
-        obj.thrown_damage.add_damage( damage_bash,
-                                      obj.melee.damage_map[damage_bash] + obj.weight / 1.0_kilogram );
+        obj.thrown_damage.add_damage( damage_bash, obj.melee.damage_map[damage_bash] * 0.75 );
     }
 
     // add usage methods (with default values) based upon qualities
@@ -311,11 +347,13 @@ void Item_factory::finalize_pre( itype &obj )
             }
         }
     }
+
     for( const auto &e : obj.use_methods ) {
         if( e.first == "GUN_REPAIR" ) {
             obj.ammo_scale.emplace( e.first, 0 );
         }
     }
+
     if( obj.mod ) {
         std::string func = obj.gunmod ? "GUNMOD_ATTACH" : "TOOLMOD_ATTACH";
         emplace_usage( obj.use_methods, func );
@@ -837,7 +875,7 @@ void Item_factory::finalize_post( itype &obj )
 
         // check if item can be repaired with any of the actions?
         for( const auto &act : repair_actions ) {
-            const use_function *func = find_template_list_const( tool )->get_use( act );
+            const use_function *func = find_template_list_const( tool )->get().get_use( act );
             if( func == nullptr ) {
                 continue;
             }
@@ -880,6 +918,24 @@ void Item_factory::finalize_post( itype &obj )
         }
     }
 
+    // weight_override, weight_add, weight_mult, group_id
+    for( const std::tuple<int, int, float, std::string> &fault_groups : obj.fault_groups ) {
+        const int weight_override = std::get<0>( fault_groups );
+        fault_group_id fault_g = fault_group_id( std::get<3>( fault_groups ) );
+        if( weight_override == -1 ) {
+            // just add and multiply existing weight
+            const int weight_add = std::get<1>( fault_groups );
+            const float weight_mult = std::get<2>( fault_groups );
+            for( const auto &id_and_weight : fault_g.obj().get_weighted_list() ) {
+                obj.faults.add_or_replace( id_and_weight.obj, ( id_and_weight.weight + weight_add ) * weight_mult );
+            }
+        } else {
+            // weight_override is not -1, override the weight
+            for( const weighted_object<int, fault_id> &id_and_weight : fault_g.obj().get_weighted_list() ) {
+                obj.faults.add( id_and_weight.obj, std::get<0>( fault_groups ) );
+            }
+        }
+    }
 }
 
 void Item_factory::finalize_post_armor( itype &obj )
@@ -1034,6 +1090,7 @@ void Item_factory::finalize_post_armor( itype &obj )
                     if( it.covers->test( bp ) ) {
                         found = true;
                         // modify the values with additional info
+
                         it.encumber += sub_armor.encumber;
                         it.max_encumber += sub_armor.max_encumber;
 
@@ -1048,6 +1105,7 @@ void Item_factory::finalize_post_armor( itype &obj )
                         float it_scale = it.max_coverage( bp ) / 100.0;
 
                         it.coverage += sub_armor.coverage * scale;
+
                         // these values need to be averaged based on proportion covered
                         it.avg_thickness = ( sub_armor.avg_thickness * scale + it.avg_thickness * it_scale ) /
                                            ( scale + it_scale );
@@ -1485,13 +1543,9 @@ void Item_factory::finalize()
         }
         const itype_id &result = rec.result();
         auto it = find_template_list_mod( result );
-        if( it != item_factory.get_all().end() ) {
-            it->recipes.push_back( p.first );
+        if( it.has_value() ) {
+            it->get().recipes.push_back( p.first );
         }
-    }
-    for( auto &e : m_template_groups ) {
-        auto &isd = e.second;
-        isd->finalize( itype_id::NULL_ID() );
     }
 }
 void item_blacklist_t::clear()
@@ -1537,23 +1591,23 @@ void Item_factory::finalize_item_blacklist()
 
     for( const itype_id &blackout : item_blacklist.blacklist ) {
         auto candidate = find_template_list_const( blackout );
-        if( candidate == item_factory.get_all().end() ) {
+        if( !candidate.has_value() ) {
             debugmsg( "item on blacklist %s does not exist", blackout.c_str() );
             continue;
         }
 
         for( std::pair<const item_group_id, std::unique_ptr<Item_spawn_data>> &g : m_template_groups ) {
-            g.second->remove_item( candidate->get_id() );
+            g.second->remove_item( blackout );
         }
 
         // remove any blacklisted items from requirements
         for( const std::pair<const requirement_id, requirement_data> &r : requirement_data::all() ) {
-            const_cast<requirement_data &>( r.second ).blacklist_item( candidate->get_id() );
+            const_cast<requirement_data &>( r.second ).blacklist_item( blackout );
         }
 
         // remove any recipes used to craft the blacklisted item
-        recipe_dictionary::delete_if( [&candidate]( const recipe & r ) {
-            return r.result() == candidate->get_id();
+        recipe_dictionary::delete_if( [&blackout]( const recipe & r ) {
+            return r.result() == blackout;
         } );
     }
     for( const vehicle_prototype &const_prototype : vehicles::get_all_prototypes() ) {
@@ -1588,7 +1642,7 @@ void Item_factory::finalize_item_blacklist()
         if( valid == nullptr ) {
             continue;
         }
-        if( count_template_list( valid->replace ) == 0 ) {
+        if( !template_list_contains( valid->replace ) ) {
             // Errors for missing item templates will be reported below
             continue;
         }
@@ -1606,7 +1660,7 @@ void Item_factory::finalize_item_blacklist()
     for( const std::pair<const itype_id, std::vector<migration>> &migrate : migrations ) {
         const migration *parent = nullptr;
         for( const migration &migrant : migrate.second ) {
-            if( count_template_list( migrant.replace ) == 0 ) {
+            if( !template_list_contains( migrant.replace ) ) {
                 debugmsg( "Replacement item (%s) for migration %s does not exist", migrant.replace.str(),
                           migrate.first.c_str() );
                 continue;
@@ -1637,10 +1691,10 @@ void Item_factory::finalize_item_blacklist()
         // To do that we need to store a map of ammo to the migration replacement thereof.
         auto maybe_ammo = find_template_list_const( migrate.first );
         // If the itype_id is valid and the itype has ammo data
-        if( maybe_ammo != item_factory.get_all().end() && maybe_ammo->ammo ) {
+        if( maybe_ammo.has_value() && maybe_ammo->get().ammo ) {
             auto replacement = find_template_list_const( parent->replace );
-            if( replacement->ammo ) {
-                migrated_ammo.emplace( migrate.first, replacement->ammo->type );
+            if( replacement->get().ammo ) {
+                migrated_ammo.emplace( migrate.first, replacement->get().ammo->type );
             } else {
                 debugmsg( "Replacement item %s for migrated ammo %s is not ammo.",
                           parent->replace.str(), migrate.first.str() );
@@ -1649,9 +1703,9 @@ void Item_factory::finalize_item_blacklist()
 
         // migrate magazines as well
         auto maybe_mag = find_template_list_const( migrate.first );
-        if( maybe_mag != item_factory.get_all().end() && maybe_mag->magazine ) {
+        if( maybe_mag.has_value() && maybe_mag->get().magazine ) {
             auto replacement = find_template_list_const( parent->replace );
-            if( replacement->magazine ) {
+            if( replacement->get().magazine ) {
                 migrated_magazines.emplace( migrate.first, parent->replace );
             } else {
                 debugmsg( "Replacement item %s for migrated magazine %s is not a magazine.",
@@ -1670,7 +1724,7 @@ void Item_factory::finalize_item_blacklist()
                 }
                 const migration *parent = nullptr;
                 for( const migration &migrant : replacement->second ) {
-                    if( count_template_list( migrant.replace ) == 0 ) {
+                    if( !template_list_contains( migrant.replace ) ) {
                         // Error reported above
                         continue;
                     }
@@ -1823,7 +1877,7 @@ use_function Item_factory::read_use_function( const JsonObject &jo,
 //reads a single use_function from the provided JsonValue
 static std::pair<std::string, use_function> use_function_reader_helper(
     std::map<std::string, int> &ammo_scale,
-    const std::string_view &src, const JsonValue &val )
+    std::string_view src, const JsonValue &val )
 {
     if( val.test_object() ) {
         JsonObject use_obj = val.get_object();
@@ -1850,42 +1904,26 @@ static std::pair<std::string, use_function> use_function_reader_helper(
     return std::make_pair( "", use_function() );
 }
 
-void Item_factory::add_item_type( const itype &def )
-{
-    if( m_runtimes.count( def.id ) > 0 ) {
-        // Do NOT allow overwriting it, it's undefined behavior.
-        debugmsg( "Tried to add runtime type %s, but it exists already", def.id.c_str() );
-        return;
-    }
-
-    auto &new_item_ptr = m_runtimes[ def.id ];
-    new_item_ptr = std::make_unique<itype>( def );
-    if( frozen ) {
-        finalize_pre( *new_item_ptr );
-        finalize_post( *new_item_ptr );
-    }
-}
-
-// Reads use_function as either an object, array, or string into a map.
+//reads use_function as either an object, array, or string into a map
 class use_function_reader_map : public generic_typed_reader<use_function_reader_map>
 {
     public:
         std::map<std::string, int> &ammo_scale;
-        const std::string_view &src;
-        use_function_reader_map( std::map<std::string, int> &ammo_scale, const std::string_view &src ) :
+        std::string_view src;
+        use_function_reader_map( std::map<std::string, int> &ammo_scale, std::string_view src ) :
             ammo_scale( ammo_scale ), src( src ) {};
         std::pair<std::string, use_function> get_next( const JsonValue &val ) const {
             return use_function_reader_helper( ammo_scale, src, val );
         }
 };
 
-// Reads use_function as either an object, array, or string.
+//reads use_function as either an object, array, or string
 class use_function_reader_single : public generic_typed_reader<use_function_reader_single>
 {
     public:
         std::map<std::string, int> &ammo_scale;
-        const std::string_view &src;
-        use_function_reader_single( std::map<std::string, int> &ammo_scale, const std::string_view &src ) :
+        std::string_view src;
+        use_function_reader_single( std::map<std::string, int> &ammo_scale, std::string_view src ) :
             ammo_scale( ammo_scale ), src( src ) {
         };
         use_function get_next( const JsonValue &val ) const {
@@ -2139,8 +2177,8 @@ class snippet_reader : public generic_typed_reader<snippet_reader>
 {
     public:
         const itype &def;
-        const std::string_view &src;
-        explicit snippet_reader( const itype &def, const std::string_view &src ) : def( def ),
+        std::string_view src;
+        explicit snippet_reader( const itype &def, std::string_view src ) : def( def ),
             src( src ) {};
         std::string get_next( const JsonValue &val ) const {
             if( val.test_array() ) {
@@ -2427,8 +2465,15 @@ void Item_factory::check_definitions() const
         }
 
         for( const auto &f : type->faults ) {
-            if( !f.is_valid() ) {
-                msg += string_format( "invalid item fault %s\n", f.c_str() );
+            if( !f.obj.is_valid() ) {
+                msg += string_format( "invalid item fault %s\n", f.obj.c_str() );
+            }
+        }
+
+        for( const auto &f : type->fault_groups ) {
+            fault_group_id f_group = fault_group_id( std::get<3>( f ) );
+            if( !f_group.is_valid() ) {
+                msg += string_format( "invalid fault_group %s\n", f_group.c_str() );
             }
         }
 
@@ -2723,11 +2768,11 @@ void Item_factory::check_definitions() const
     }
     for( const auto &e : migrations ) {
         for( const migration &m : e.second ) {
-            if( !count_template_list( m.replace ) ) {
+            if( !template_list_contains( m.replace ) ) {
                 debugmsg( "Invalid migration target: %s", m.replace.c_str() );
             }
             for( const migration::content &c : m.contents ) {
-                if( !count_template_list( c.id ) ) {
+                if( !template_list_contains( c.id ) ) {
                     debugmsg( "Invalid migration contents: %s", c.id.str() );
                 }
             }
@@ -2757,8 +2802,8 @@ const itype *Item_factory::find_template( const itype_id &id ) const
     cata_assert( frozen );
 
     auto found = find_template_list_const( id );
-    if( found != item_factory.get_all().end() ) {
-        return &*found;
+    if( found.has_value() ) {
+        return &found->get();
     }
 
     auto rt = m_runtimes.find( id );
@@ -2792,17 +2837,6 @@ Item_spawn_data *Item_factory::get_group( const item_group_id &group_tag )
 // DATA FILE READING //
 ///////////////////////
 
-//TO-DO: remove when item infrastructure is done
-template<typename SlotType>
-void Item_factory::load_slot( cata::value_ptr<SlotType> &slotptr, const JsonObject &jo,
-                              const std::string &src )
-{
-    if( !slotptr ) {
-        slotptr = cata::make_value<SlotType>();
-    }
-    load( *slotptr, jo, src );
-}
-
 template<typename SlotType>
 void Item_factory::load_slot( const JsonObject &jo, bool was_loaded,
                               cata::value_ptr<SlotType> &slotptr )
@@ -2832,6 +2866,7 @@ void itype::load_slots( const JsonObject &jo, bool was_loaded )
         }
         if( subtype == "GUNMOD" ) {
             Item_factory::load_slot( jo, was_loaded, gunmod );
+            Item_factory::load_slot( jo, was_loaded, mod );
         }
         if( subtype == "AMMO" ) {
             Item_factory::load_slot( jo, was_loaded, ammo );
@@ -2880,45 +2915,14 @@ void itype::load_slots( const JsonObject &jo, bool was_loaded )
         std::find( subtypes.begin(), subtypes.end(), "ARMOR" ) != subtypes.end() ) {
         debugmsg( "PET_ARMOR and ARMOR cannot be simultaneously defined" );
     }
+    if( std::find( subtypes.begin(), subtypes.end(), "GUNMOD" ) != subtypes.end() &&
+        std::find( subtypes.begin(), subtypes.end(), "TOOLMOD" ) != subtypes.end() ) {
+        debugmsg( "GUNMOD is a TOOLMOD; they cannot be simultaneously defined" );
+    }
 
     for( const std::string &subtype : subtypes ) {
         subtype_to_slot( subtype );
     }
-}
-
-bool Item_factory::load_definition( const JsonObject &jo, const std::string &src, itype &def )
-{
-    cata_assert( !frozen );
-
-    if( !jo.has_string( "copy-from" ) ) {
-        // if this is a new definition ensure we start with a clean itype
-        def = itype();
-        return true;
-    }
-
-    itype_id copy_from;
-    jo.read( "copy-from", copy_from, true );
-    auto base = find_template_list_mod( copy_from );
-    if( base != item_controller->get_generic_factory().list.end() ) {
-        def = *base;
-        def.looks_like = copy_from;
-        def.was_loaded = true;
-        return true;
-    }
-
-    auto abstract = item_controller->get_generic_factory().abstracts.find( copy_from.c_str() );
-    if( abstract != item_controller->get_generic_factory().abstracts.end() ) {
-        def = abstract->second;
-        if( def.looks_like.is_empty() ) {
-            def.looks_like = copy_from;
-        }
-        def.was_loaded = true;
-        return true;
-    }
-
-    get_generic_factory().deferred.emplace_back( jo, src );
-    jo.allow_omitted_members();
-    return false;
 }
 
 void islot_milling::deserialize( const JsonObject &jo )
@@ -2970,83 +2974,15 @@ void islot_ammo::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "show_stats", force_stat_display, false );
 }
 
-void Item_factory::load_ammo( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.ammo ) {
-                def.ammo = cata::make_value<islot_ammo>();
-            }
-        } else {
-            def.ammo = cata::make_value<islot_ammo>();
-        }
-        def.ammo->deserialize( jo );
-        def.ammo->was_loaded = true;
-        def.load( jo, src );
-    }
-}
-
 void islot_engine::deserialize( const JsonObject &jo )
 {
     optional( jo, was_loaded, "displacement", displacement );
-}
-
-void Item_factory::load_engine( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.engine ) {
-                def.engine = cata::make_value<islot_engine>();
-            }
-        } else {
-            def.engine = cata::make_value<islot_engine>();
-        }
-        def.engine->deserialize( jo );
-        def.engine->was_loaded = true;
-        def.load( jo, src );
-    }
 }
 
 void islot_wheel::deserialize( const JsonObject &jo )
 {
     optional( jo, was_loaded, "diameter", diameter );
     optional( jo, was_loaded, "width", width );
-}
-
-void Item_factory::load_wheel( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.wheel ) {
-                def.wheel = cata::make_value<islot_wheel>();
-            }
-        } else {
-            def.wheel = cata::make_value<islot_wheel>();
-        }
-        def.wheel->deserialize( jo );
-        def.wheel->was_loaded = true;
-        def.load( jo, src );
-    }
-}
-
-void Item_factory::load_comestible( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.comestible ) {
-                def.comestible = cata::make_value<islot_comestible>();
-            }
-        } else {
-            def.comestible = cata::make_value<islot_comestible>();
-        }
-        def.comestible->deserialize( jo );
-        def.comestible->was_loaded = true;
-        def.load( jo, src );
-    }
 }
 
 void itype_variant_data::deserialize( const JsonObject &jo )
@@ -3146,60 +3082,6 @@ void islot_gun::deserialize( const JsonObject &jo )
               weighted_string_id_reader<gunmod_location, int> {0} );
     optional( jo, was_loaded, "modes", modes, gun_modes_reader {} );
     optional( jo, was_loaded, "hurt_part_when_fired", hurt_part_when_fired );
-}
-
-void Item_factory::load_gun( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.gun ) {
-                def.gun = cata::make_value<islot_gun>();
-            }
-        } else {
-            def.gun = cata::make_value<islot_gun>();
-        }
-        def.gun->deserialize( jo );
-        def.gun->was_loaded = true;
-        def.load( jo, src );
-    }
-}
-
-// TODO: Refactor this with load_tool_armor
-void Item_factory::load_armor( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( def.armor ) {
-                def.armor->was_loaded = true;
-            } else {
-                def.armor = cata::make_value<islot_armor>();
-                def.armor->was_loaded = true;
-            }
-        } else {
-            def.armor = cata::make_value<islot_armor>();
-        }
-        def.armor->deserialize( jo );
-        def.load( jo, src );
-    }
-}
-
-void Item_factory::load_pet_armor( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.pet_armor ) {
-                def.pet_armor = cata::make_value<islot_pet_armor>();
-            }
-        } else {
-            def.pet_armor = cata::make_value<islot_pet_armor>();
-        }
-        def.pet_armor->deserialize( jo );
-        def.pet_armor->was_loaded = true;
-        def.load( jo, src );
-    }
 }
 
 namespace io
@@ -3312,7 +3194,7 @@ static void get_optional( const JsonObject &jo, bool was_loaded, const std::stri
 }
 
 template<typename T>
-static void get_relative( const JsonObject &jo, const std::string_view member,
+static void get_relative( const JsonObject &jo, std::string_view member,
                           std::optional<T> &value,
                           T default_val )
 {
@@ -3322,7 +3204,7 @@ static void get_relative( const JsonObject &jo, const std::string_view member,
 }
 
 template<typename T>
-static void get_proportional( const JsonObject &jo, const std::string_view member,
+static void get_proportional( const JsonObject &jo, std::string_view member,
                               std::optional<T> &value, T default_val )
 {
     if( jo.has_member( member ) ) {
@@ -3425,28 +3307,6 @@ void islot_tool::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "e_ports_banned", e_ports_banned, auto_flags_reader<std::string> {} );
 }
 
-void Item_factory::load_tool( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.tool ) {
-                def.tool = cata::make_value<islot_tool>();
-            }
-        } else {
-            def.tool = cata::make_value<islot_tool>();
-        }
-        def.tool->deserialize( jo );
-        def.tool->was_loaded = true;
-        def.load( jo, src );
-    }
-}
-
-void Item_factory::load( relic &slot, const JsonObject &jo, const std::string_view )
-{
-    slot.load( jo );
-}
-
 /*
 * Reads an array of toolmod ammo-to-itype maps in the following format:
 * [ [ ammotype, [itype1, itype2, ..] ], .. ]
@@ -3472,47 +3332,6 @@ void islot_mod::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "pocket_mods", add_pockets );
 }
 
-void Item_factory::load_toolmod( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.mod ) {
-                def.mod = cata::make_value<islot_mod>();
-            }
-        } else {
-            def.mod = cata::make_value<islot_mod>();
-        }
-        def.mod->deserialize( jo );
-        def.mod->was_loaded = true;
-        def.load( jo, src );
-    }
-}
-
-// TODO: Refactor this with load_armor
-// This function does load_slot( def.tool ), but otherwise they are the same
-void Item_factory::load_tool_armor( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        def.tool = cata::make_value<islot_tool>();
-        def.tool->deserialize( jo );
-        def.tool->was_loaded = true;
-        if( def.was_loaded ) {
-            if( def.armor ) {
-                def.armor->was_loaded = true;
-            } else {
-                def.armor = cata::make_value<islot_armor>();
-                def.armor->was_loaded = true;
-            }
-        } else {
-            def.armor = cata::make_value<islot_armor>();
-        }
-        def.armor->deserialize( jo );
-        def.load( jo, src );
-    }
-}
-
 void islot_book::deserialize( const JsonObject &jo )
 {
     optional( jo, was_loaded, "max_level", level, 0 );
@@ -3528,23 +3347,6 @@ void islot_book::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "generic", generic, false );
     optional( jo, was_loaded, "proficiencies", proficiencies );
     optional( jo, was_loaded, "scannable", is_scannable, true );
-}
-
-void Item_factory::load_book( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.book ) {
-                def.book = cata::make_value<islot_book>();
-            }
-        } else {
-            def.book = cata::make_value<islot_book>();
-        }
-        def.book->deserialize( jo );
-        def.book->was_loaded = true;
-        def.load( jo, src );
-    }
 }
 
 /**
@@ -3656,6 +3458,7 @@ void islot_gunmod::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "damage_modifier", damage );
     optional( jo, was_loaded, "loudness_modifier", loudness );
     optional( jo, was_loaded, "loudness_multiplier", loudness_multiplier, 1 );
+    optional( jo, was_loaded, "to_hit_mod", to_hit_mod, 0 );
     optional( jo, was_loaded, "location", location );
     optional( jo, was_loaded, "dispersion_modifier", dispersion );
     optional( jo, was_loaded, "field_of_view", field_of_view, -1 );
@@ -3691,28 +3494,6 @@ void islot_gunmod::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "add_mod", add_mod, weighted_string_id_reader<gunmod_location, int> {1} );
 }
 
-void Item_factory::load_gunmod( const JsonObject &jo, const std::string &src )
-{
-    //NOTE: this loads both a gunmod and toolmod islot, and is an exception to load_X functions
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.gunmod ) {
-                def.gunmod = cata::make_value<islot_gunmod>();
-                def.mod = cata::make_value<islot_mod>();
-            }
-        } else {
-            def.gunmod = cata::make_value<islot_gunmod>();
-            def.mod = cata::make_value<islot_mod>();
-        }
-        def.gunmod->deserialize( jo );
-        def.gunmod->was_loaded = true;
-        def.mod->deserialize( jo );
-        def.mod->was_loaded = true;
-        def.load( jo, src );
-    }
-}
-
 void islot_magazine::deserialize( const JsonObject &jo )
 {
     numeric_bound_reader not_negative{ 0 };
@@ -3726,43 +3507,9 @@ void islot_magazine::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "linkage", linkage );
 }
 
-void Item_factory::load_magazine( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.magazine ) {
-                def.magazine = cata::make_value<islot_magazine>();
-            }
-        } else {
-            def.magazine = cata::make_value<islot_magazine>();
-        }
-        def.magazine->deserialize( jo );
-        def.magazine->was_loaded = true;
-        def.load( jo, src );
-    }
-}
-
 void islot_battery::deserialize( const JsonObject &jo )
 {
     mandatory( jo, was_loaded, "max_capacity", max_capacity );
-}
-
-void Item_factory::load_battery( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.battery ) {
-                def.battery = cata::make_value<islot_battery>();
-            }
-        } else {
-            def.battery = cata::make_value<islot_battery>();
-        }
-        def.battery->deserialize( jo );
-        def.battery->was_loaded = true;
-        def.load( jo, src );
-    }
 }
 
 void islot_bionic::deserialize( const JsonObject &jo )
@@ -3770,31 +3517,6 @@ void islot_bionic::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "difficulty", difficulty, numeric_bound_reader{0} );
     optional( jo, was_loaded, "is_upgrade", is_upgrade );
     optional( jo, was_loaded, "installation_data", installation_data );
-}
-
-void Item_factory::load_bionic( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        if( def.was_loaded ) {
-            if( !def.bionic ) {
-                def.bionic = cata::make_value<islot_bionic>();
-            }
-        } else {
-            def.bionic = cata::make_value<islot_bionic>();
-        }
-        def.bionic->deserialize( jo );
-        def.bionic->was_loaded = true;
-        def.load( jo, src );
-    }
-}
-
-void Item_factory::load_generic( const JsonObject &jo, const std::string &src )
-{
-    itype def;
-    if( load_definition( jo, src, def ) ) {
-        def.load( jo, src );
-    }
 }
 
 // Adds allergy flags to items with allergenic materials
@@ -4234,7 +3956,7 @@ class melee_accuracy_reader : public generic_typed_reader<melee_accuracy_reader>
             val.throw_error( "melee_accuracy_reader element must be object or int" );
             return 0;
         }
-        bool do_relative( const JsonObject &jo, const std::string_view name, int &member ) const {
+        bool do_relative( const JsonObject &jo, std::string_view name, int &member ) const {
             if( jo.has_object( "relative" ) ) {
                 JsonObject relative = jo.get_object( "relative" );
                 relative.allow_omitted_members();
@@ -4309,7 +4031,7 @@ static void replace_materials( const JsonObject &jo, itype &def )
     }
 }
 
-void itype::load( const JsonObject &jo, const std::string_view src )
+void itype::load( const JsonObject &jo, std::string_view src )
 {
     units_bound_reader<units::mass> not_negative_mass{ 0_milligram };
     units_bound_reader<units::money> not_negative_money{ 0_cent };
@@ -4328,9 +4050,8 @@ void itype::load( const JsonObject &jo, const std::string_view src )
     optional( jo, was_loaded, "longest_side", longest_side, -1_mm );
     optional( jo, was_loaded, "price", price, not_negative_money, 0_cent );
     optional( jo, was_loaded, "price_postapoc", price_post, not_negative_money, -1_cent );
-
-    optional( jo, was_loaded, "stack_max", stack_max );
     optional( jo, was_loaded, "stackable", stackable_ );
+    optional( jo, was_loaded, "stack_max", stack_max );
     optional( jo, was_loaded, "integral_volume", integral_volume, not_negative_volume, -1_ml );
     optional( jo, was_loaded, "integral_longest_side", integral_longest_side, not_negative_length,
               -1_mm );
@@ -4417,86 +4138,44 @@ void itype::load( const JsonObject &jo, const std::string_view src )
     optional( jo, was_loaded, "variables", item_variables );
     optional( jo, was_loaded, "flags", item_tags, auto_flags_reader<flag_id> {} );
     optional( jo, was_loaded, "source_monster", source_monster, mtype_id::NULL_ID() );
-    optional( jo, was_loaded, "faults", faults, auto_flags_reader<fault_id> {} );
 
-    //TO-DO: replace qualities/techniques loading once generic factory is used
-    if( jo.has_member( "qualities" ) ) {
-        qualities.clear();
-        set_qualities_from_json( jo, "qualities", *this );
-    } else {
-        if( jo.has_object( "extend" ) ) {
-            JsonObject tmp = jo.get_object( "extend" );
-            tmp.allow_omitted_members();
-            extend_qualities_from_json( tmp, "qualities", *this );
-        }
-        if( jo.has_object( "delete" ) ) {
-            JsonObject tmp = jo.get_object( "delete" );
-            tmp.allow_omitted_members();
-            delete_qualities_from_json( tmp, "qualities", *this );
-        }
-        if( jo.has_object( "relative" ) ) {
-            JsonObject tmp = jo.get_object( "relative" );
-            tmp.allow_omitted_members();
-            relative_qualities_from_json( tmp, "qualities", *this );
+    if( jo.has_array( "faults" ) ) {
+        for( JsonObject jo_f : jo.get_array( "faults" ) ) {
+            if( jo_f.has_string( "fault" ) ) {
+                const int fault_weight = jo_f.has_float( "weight" ) ? jo_f.get_float( "weight" ) : 100;
+                faults.add( fault_id( jo_f.get_string( "fault" ) ), fault_weight );
+            } else if( jo_f.has_string( "fault_group" ) ) {
+                fault_groups.emplace_back(
+                    jo_f.get_int( "weight_override", -1 ),
+                    jo_f.get_int( "weight_add", 0 ),
+                    static_cast<float>( jo_f.get_float( "weight_mult", 1.0f ) ),
+                    jo_f.get_string( "fault_group" ) );
+            } else {
+                jo_f.throw_error( R"("faults" should specify either a "fault" or a "fault_group")" );
+            }
         }
     }
 
-    if( jo.has_member( "charged_qualities" ) ) {
-        charged_qualities.clear();
-        set_qualities_from_json( jo, "charged_qualities", *this );
-    }
+    optional( jo, was_loaded, "qualities", qualities, weighted_string_id_reader<quality_id, int> {1} );
+    optional( jo, was_loaded, "charged_qualities", charged_qualities,
+              weighted_string_id_reader<quality_id, int> {1} );
 
     optional( jo, was_loaded, "properties", properties );
 
-    if( jo.has_member( "techniques" ) ) {
-        techniques.clear();
-        set_techniques_from_json( jo, "techniques", *this );
-    } else {
-        if( jo.has_object( "extend" ) ) {
-            JsonObject tmp = jo.get_object( "extend" );
-            tmp.allow_omitted_members();
-            extend_techniques_from_json( tmp, "techniques", *this );
-        }
-        if( jo.has_object( "delete" ) ) {
-            JsonObject tmp = jo.get_object( "delete" );
-            tmp.allow_omitted_members();
-            delete_techniques_from_json( tmp, "techniques", *this );
-        }
-    }
+    optional( jo, was_loaded, "techniques", techniques, auto_flags_reader<matec_id> {} );
 
     optional( jo, was_loaded, "countdown_interval", countdown_interval );
     optional( jo, was_loaded, "revert_to", revert_to );
 
+    //First, check for copy-from
+    if( jo.has_member( "copy-from" ) ) {
+        itype_id copy_from_looks_like = itype_id( jo.get_string( "copy-from" ) );
+        if( item_controller->has_template( copy_from_looks_like ) ) {
+            looks_like = copy_from_looks_like;
+        }
+    }
+    //then check for an overriding looks_like field
     jo.read( "looks_like", looks_like );
-
-    //TO-DO: remove assign() slot loading
-    assign( jo, "armor_data", armor, src == "tlg" );
-    assign( jo, "pet_armor_data", pet_armor, src == "tlg" );
-    assign( jo, "book_data", book, src == "tlg" );
-    //this is temporary; gunmods/tools are presently the only types that use gun_data
-    if( gunmod || tool ) {
-        bool gun_loaded = gun ? gun->was_loaded : false;
-        optional( jo, gun_loaded, "gun_data", gun );
-    }
-    assign( jo, "ammo_data", ammo, src == "tlg" );
-    assign( jo, "seed_data", seed, src == "tlg" );
-    assign( jo, "brewable", brewable, src == "tlg" );
-    assign( jo, "compostable", compostable, src == "tlg" );
-    if( jo.has_member( "relic_data" ) ) {
-        assign( jo, "relic_data", relic_data, src == "tlg" );
-    }
-    assign( jo, "milling", milling_data, src == "tlg" );
-    // optional gunmod slot may also specify mod data
-    if( jo.has_member( "gunmod_data" ) ) {
-        //TO-DO: this is temporary, remove it when "type": "ITEM" is figured out
-        JsonObject jo_gunmod = jo.get_object( "gunmod_data" );
-        gunmod = cata::make_value<islot_gunmod>();
-        mod = cata::make_value<islot_mod>();
-        gunmod->deserialize( jo_gunmod );
-        gunmod->was_loaded = true;
-        mod->deserialize( jo_gunmod );
-        mod->was_loaded = true;
-    }
 
     if( jo.has_string( "abstract" ) ) {
         mandatory( jo, was_loaded, "abstract", id );
@@ -4509,13 +4188,7 @@ void itype::load( const JsonObject &jo, const std::string_view src )
 
     optional( jo, was_loaded, "pocket_data", pockets );
 
-    if( jo.has_member( "subtypes" ) ) { //TO-DO: allows both types of item loading, remove this line
-        load_slots( jo, was_loaded );
-    }
-
-    if( jo.get_string( "type" ) != "ITEM" ) {
-        mod_tracker::assign_src( *this, src );
-    }
+    load_slots( jo, was_loaded );
 
     optional( jo, was_loaded, "expand_snippets", expand_snippets );
 
@@ -4523,17 +4196,6 @@ void itype::load( const JsonObject &jo, const std::string_view src )
     JsonObject replace_val = jo.get_object( "replace_materials" );
     replace_val.allow_omitted_members();
     replace_materials( replace_val, *this );
-
-    if( jo.get_string( "type" ) != "ITEM" ) {
-        if( jo.has_string( "abstract" ) ) {
-            item_controller->get_generic_factory().abstracts[id.c_str()] = *this;
-        } else {
-            if( count_template_list( id ) != 0 ) {
-                mod_tracker::check_duplicate_entries( *find_template_list_mod( id ), *this );
-            }
-            item_controller->get_generic_factory().insert( *this );
-        }
-    }
 }
 
 void Item_factory::add_migration( const migration &m )
@@ -4708,102 +4370,6 @@ void Item_factory::migrate_item_from_variant( item &obj, const std::string &from
     }
 }
 
-void itype::set_qualities_from_json( const JsonObject &jo, const std::string &member,
-                                     itype &def )
-{
-    if( jo.has_array( member ) ) {
-        for( JsonArray curr : jo.get_array( member ) ) {
-            const auto quali = std::pair<quality_id, int>( quality_id( curr.get_string( 0 ) ),
-                               curr.get_int( 1 ) );
-            // Populate charged qualities or regular qualities, preventing duplicates
-            if( member == "charged_qualities" ) {
-                if( def.charged_qualities.count( quali.first ) > 0 ) {
-                    curr.throw_error( 0, "Duplicated charged quality" );
-                }
-                def.charged_qualities.insert( quali );
-            } else {
-                if( def.qualities.count( quali.first ) > 0 ) {
-                    curr.throw_error( 0, "Duplicated quality" );
-                }
-                def.qualities.insert( quali );
-            }
-        }
-    } else {
-        jo.throw_error_at( member, "Qualities list is not an array" );
-    }
-}
-
-void itype::extend_qualities_from_json( const JsonObject &jo, const std::string_view member,
-                                        itype &def )
-{
-    for( JsonArray curr : jo.get_array( member ) ) {
-        def.qualities[quality_id( curr.get_string( 0 ) )] = curr.get_int( 1 );
-    }
-}
-
-void itype::delete_qualities_from_json( const JsonObject &jo, const std::string_view member,
-                                        itype &def )
-{
-    for( std::string curr : jo.get_array( member ) ) {
-        const auto iter = def.qualities.find( quality_id( curr ) );
-        if( iter != def.qualities.end() ) {
-            def.qualities.erase( iter );
-        }
-    }
-}
-
-void itype::relative_qualities_from_json( const JsonObject &jo,
-        const std::string_view member, itype &def )
-{
-    for( JsonArray curr : jo.get_array( member ) ) {
-        const quality_id key = quality_id( curr.get_string( 0 ) );
-        if( def.qualities.find( quality_id( key ) ) != def.qualities.end() ) {
-            def.qualities[ key ] += curr.get_int( 1 );
-        } else {
-            jo.throw_error_at( member, "Quality specified wasn't inherited" );
-        }
-    }
-}
-
-void itype::set_techniques_from_json( const JsonObject &jo, const std::string_view &member,
-                                      itype &def )
-{
-    if( jo.has_array( member ) ) {
-        for( std::string curr : jo.get_array( member ) ) {
-            const matec_id tech = matec_id( curr );
-            // Prevent duplicates
-            if( def.techniques.count( tech ) > 0 ) {
-                jo.throw_error_at( member, "Duplicated technique" );
-            }
-            def.techniques.insert( tech );
-        }
-    } else {
-        jo.throw_error_at( member, "Techniques list is not an array" );
-    }
-}
-
-void itype::extend_techniques_from_json( const JsonObject &jo,
-        const std::string_view member,
-        itype &def )
-{
-    for( std::string curr : jo.get_array( member ) ) {
-        def.techniques.insert( matec_id( curr ) );
-    }
-}
-
-void itype::delete_techniques_from_json( const JsonObject &jo,
-        const std::string_view member,
-        itype &def )
-{
-    for( std::string curr : jo.get_array( member ) ) {
-        const matec_id tech = matec_id( curr );
-        const auto iter = def.techniques.find( tech );
-        if( iter != def.techniques.end() ) {
-            def.techniques.erase( tech );
-        }
-    }
-}
-
 void Item_factory::reset()
 {
     clear();
@@ -4862,26 +4428,7 @@ static Item_group *make_group_or_throw(
 }
 
 template<typename T>
-bool load_min_max( std::pair<T, T> &pa, const JsonObject &obj, const std::string &name )
-{
-    bool result = false;
-    if( obj.has_array( name ) ) {
-        // An array means first is min, second entry is max. Both are mandatory.
-        JsonArray arr = obj.get_array( name );
-        result |= arr.read_next( pa.first );
-        result |= arr.read_next( pa.second );
-    } else {
-        // Not an array, should be a single numeric value, which is set as min and max.
-        result |= obj.read( name, pa.first );
-        result |= obj.read( name, pa.second );
-    }
-    result |= obj.read( name + "-min", pa.first );
-    result |= obj.read( name + "-max", pa.second );
-    return result;
-}
-
-template<typename T>
-bool load_str_arr( std::vector<T> &arr, const JsonObject &obj, const std::string_view name )
+bool load_str_arr( std::vector<T> &arr, const JsonObject &obj, std::string_view name )
 {
     if( obj.has_array( name ) ) {
         for( const std::string str : obj.get_array( name ) ) {
@@ -4956,7 +4503,7 @@ bool Item_factory::load_sub_ref( std::unique_ptr<Item_spawn_data> &ptr, const Js
 }
 
 bool Item_factory::load_string( std::vector<std::string> &vec, const JsonObject &obj,
-                                const std::string_view name )
+                                std::string_view name )
 {
     bool result = false;
     std::string temp;
@@ -5065,6 +4612,15 @@ void Item_factory::add_entry( Item_group &ig, const JsonObject &obj,
         use_modifier = true;
     }
 
+    if( obj.has_object( "faults" ) ) {
+        JsonObject jo = obj.get_object( "faults" );
+        int chance = jo.get_int( "chance", 100 );
+        for( std::string ids : jo.get_array( "id" ) ) {
+            modifier.faults.emplace_back( fault_id( ids ), chance );
+        }
+        use_modifier = true;
+    }
+
     if( use_modifier ) {
         sptr->modifier.emplace( std::move( modifier ) );
     }
@@ -5102,15 +4658,23 @@ void Item_factory::load_item_group( const JsonObject &jsobj, const item_group_id
     if( context.empty() ) {
         context = group_id.str();
     }
+    // Check if the copy-from target exists BEFORE we get a reference to it!
+    // std::map's [] operator inserts a reference if one isn't found!
+    const bool already_exists = m_template_groups.find( group_id ) != m_template_groups.end();
     std::unique_ptr<Item_spawn_data> &isd = m_template_groups[group_id];
     // If we copy-from, do copy-from
     // Otherwise, unconditionally overwrite
     if( jsobj.has_member( "copy-from" ) ) {
+        const std::string target_grp_str = jsobj.get_string( "copy-from" );
         // We can only copy-from a group with the same id (for now)
-        if( jsobj.get_string( "copy-from" ) != group_id.str() ) {
+        if( target_grp_str != group_id.str() ) {
             debugmsg( "Item group '%s' tries to copy from different group '%s'", group_id.str(),
-                      jsobj.get_string( "copy-from" ) );
+                      target_grp_str );
             return;
+        }
+        if( !already_exists ) {
+            debugmsg( "%1$s was unable to find item group %2$s to copy-from during loading.  Context: %3$s",
+                      group_id.str(), target_grp_str, context );
         }
     } else {
         isd.reset();
@@ -5318,7 +4882,7 @@ void item_group::debug_spawn()
 
 bool Item_factory::has_template( const itype_id &id ) const
 {
-    return count_template_list( id ) || m_runtimes.count( id );
+    return template_list_contains( id ) || m_runtimes.count( id );
 }
 
 const std::vector<const itype *> &Item_factory::all() const

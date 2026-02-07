@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "craft_shop_1" ],
     "weight": 200,
     "object": {
@@ -103,7 +102,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "craft_shop_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",

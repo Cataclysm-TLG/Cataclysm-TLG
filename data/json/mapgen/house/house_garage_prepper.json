@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_prepper2" ],
     "weight": 100,
     "object": {
@@ -12,7 +11,7 @@
         ".#RRRR   R  R#~~~~~~~&#.",
         ".#L          #q~~~~~~~#.",
         ".#          h#q~~~~~~)#.",
-        ".#a   ff    h#q~~~~~~~#.",
+        ".#a   ff    h#q~~~~~~é#.",
         "%#    ff   h #q~~~~~~U#.",
         "%$          h#~~~~~~~U#.",
         "%$   AAA     #~{{~~~~U#.",
@@ -52,6 +51,7 @@
         "}": "t_thconc_floor",
         "U": "t_thconc_floor",
         ")": "t_thconc_floor",
+        "é": "t_thconc_floor",
         "t": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "S": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "Q": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
@@ -109,7 +109,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_prepper2_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -158,7 +157,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_prepper2_basement",
     "object": {
       "fill_ter": "t_thconc_floor",

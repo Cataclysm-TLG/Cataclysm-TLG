@@ -3,25 +3,13 @@
     "type": "item_group",
     "id": "milspec_arsenal_300blk_gun&mags&cans",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_300blk_gun&ammo" },
-      {
-        "distribution": [
-          { "item": "ammo_can_50_300AAC_otm_840", "count": [ 1, 4 ] },
-          { "item": "ammo_can_30_300AAC_otmss_720", "count": [ 1, 4 ] }
-        ]
-      }
-    ]
+    "items": [ { "group": "milspec_arsenal_300blk_gun&ammo" } ]
   },
   {
     "type": "item_group",
     "id": "milspec_arsenal_300blk_gun&ammo",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_300blk_gun&mags" },
-      { "group": "ammo_can_300AAC_any_full", "prob": 30 },
-      { "group": "ammo_can_300AAC_any_part", "prob": 80, "count": [ 1, 2 ] }
-    ]
+    "items": [ { "group": "milspec_arsenal_300blk_gun&mags" } ]
   },
   {
     "type": "item_group",

@@ -56,11 +56,11 @@
   {
     "id": "gun_cleaning_bp",
     "type": "requirement",
-    "//": "BP requires hot soapy water",
     "qualities": [ { "id": "SCREW", "level": 1 } ],
-    "tools": [ [ [ "pipe_cleaner", -1 ] ], [ [ "water_boiling_heat", 2, "LIST" ] ] ],
+    "tools": [ [ [ "pipe_cleaner", -1 ] ] ],
     "components": [
-      [ [ "soapy_water", 3 ] ],
+      [ [ "soap", 1 ], [ "liquid_soap", 1 ] ],
+      [ [ "water", 3 ] ],
       [
         [ "cotton_patch", 1 ],
         [ "fur_patch", 1 ],

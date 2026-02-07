@@ -1,7 +1,7 @@
 [
   {
     "id": "bullwhip",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "brown",
     "name": { "str": "bullwhip" },
@@ -22,7 +22,7 @@
   {
     "id": "bullwhip_razor",
     "name": { "str": "scourge" },
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "description": "The \"cat 'o nine tails\", a handle with nine short leather whips, each sporting a razor-sharp metal tip.  This ancient instrument of torture can cause bleeding, but by design is inefficient as a weapon.",
     "symbol": "/",
@@ -41,7 +41,7 @@
   },
   {
     "id": "rope_dart",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "brown",
     "name": { "str": "rope dart" },
@@ -60,7 +60,7 @@
     "weapon_category": [ "WHIPS", "KUNG_FU_WEAPONS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "rock_sock",
     "symbol": ";",
     "color": "white",
@@ -79,7 +79,7 @@
   },
   {
     "id": "2h_flail_steel",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "name": { "str": "war flail" },
     "description": "A stout pole with a spiked mace head attached to the end with a chain, a purpose-made combat version of the peasant flail.  It specializes in threshing people in metal armor, rather than grain.",
@@ -99,7 +99,7 @@
   },
   {
     "id": "1h_flail_steel",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "name": { "str": "horseman's flail" },
     "description": "A short pole with a spiked steel ball attached to it by a chain.",
@@ -119,7 +119,7 @@
   },
   {
     "id": "2h_flail_wood",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "name": { "str": "peasant flail" },
     "description": "A stout pole with a wooden club attached to the end with a leather cord.  This farming tool was historically used to thresh grain, but was frequently pressed into service as a weapon.",
@@ -139,7 +139,7 @@
   },
   {
     "id": "nunchaku",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "name": { "str": "nunchaku" },
     "description": "A weapon originating from East Asia consisting of a pair of short sticks connected by a shorter rope or chain.  The design is a bit unwieldy, but fast and deadly in the right hands.",
@@ -158,7 +158,7 @@
     "melee_damage": { "bash": 19 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "whip_chain",
     "category": "weapons",
     "name": { "str": "chain whip" },

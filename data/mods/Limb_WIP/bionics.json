@@ -2,7 +2,8 @@
   {
     "id": "bio_limb_leg_l",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Left Leg CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "CBM which replaces the left leg with a bionic counterpart.",
@@ -14,7 +15,8 @@
   {
     "id": "bio_limb_leg_r",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Right Leg CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "CBM which replaces the left leg with a bionic counterpart.",
@@ -26,7 +28,8 @@
   {
     "id": "bio_limb_arm_l",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Left Arm CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "CBM which replaces the left leg with a bionic counterpart.",
@@ -38,7 +41,8 @@
   {
     "id": "bio_limb_arm_r",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Right Arm CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "CBM which replaces the left leg with a bionic counterpart.",
@@ -50,7 +54,8 @@
   {
     "id": "bio_limb_treads",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Tank Treads CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "CBM which replaces the left leg with a bionic counterpart.",
@@ -61,7 +66,8 @@
   },
   {
     "id": "bio_limb_leg_l",
-    "type": "bionic",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Left Leg" },
     "description": "CBM which replaces your left leg with a bionic counterpart.",
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
@@ -71,7 +77,8 @@
   },
   {
     "id": "bio_limb_leg_r",
-    "type": "bionic",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Right Leg" },
     "description": "CBM which replaces your right leg with a bionic counterpart.",
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
@@ -81,7 +88,8 @@
   },
   {
     "id": "bio_limb_treads",
-    "type": "bionic",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Tank Treads" },
     "description": "CBM which replaces your legs with tank treads.",
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
@@ -91,7 +99,8 @@
   },
   {
     "id": "bio_limb_arm_l",
-    "type": "bionic",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Left Arm" },
     "description": "CBM which replaces your left leg with a bionic counterpart.",
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
@@ -101,7 +110,8 @@
   },
   {
     "id": "bio_limb_arm_r",
-    "type": "bionic",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Limb - Right Arm" },
     "description": "CBM which replaces your right leg with a bionic counterpart.",
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],

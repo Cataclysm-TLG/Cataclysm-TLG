@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_06" ],
     "weight": 300,
     "object": {
@@ -22,7 +21,7 @@
         ".#H        h ff      C#.",
         ".#y xxx       h      yo.",
         ".#||||||             Yo.",
-        ".#yHHT +      sE      #.",
+        ".#yHHT +      sE     é#.",
         ".#     ||||||||||||  R#.",
         ".#d    |t    S|DyR|+||#.",
         ".o@@   +     8|     TE#.",

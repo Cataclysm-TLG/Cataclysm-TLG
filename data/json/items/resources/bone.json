@@ -1,40 +1,47 @@
 [
   {
     "abstract": "bone_abstract",
-    "type": "COMESTIBLE",
-    "comestible_type": "FOOD",
-    "name": { "str": "abstract bone" },
-    "category": "spare_parts",
+    "type": "ITEM",
+    "subtypes": [ "MILLING", "COMESTIBLE" ],
+    "name": { "str": "bone" },
+    "description": "A bone from some creature or other.  Could be used in cooking and crafting.",
+    "weight": "290 g",
+    "volume": "320 ml",
+    "longest_side": "44 cm",
+    "//": "Values based roughly on a male human femur.",
+    "symbol": "%",
     "color": "white",
-    "price": "0 cent",
     "material": [ "bone" ],
-    "weight": "1000 g",
-    "flags": [ "RAW", "NUTRIENT_OVERRIDE", "INEDIBLE" ],
+    "comestible_type": "FOOD",
+    "category": "spare_parts",
+    "price": "0 cent",
+    "flags": [ "RAW", "NUTRIENT_OVERRIDE", "INEDIBLE", "NO_TEMP" ],
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
     "id": "bone",
     "name": { "str": "bone" },
+    "subtypes": [ "MILLING", "COMESTIBLE" ],
     "copy-from": "bone_abstract",
     "weight": "225 g",
     "symbol": "%",
-    "description": "A bone from some creature or other.  Could be used in cooking and crafting.",
+    "description": "A bone from some unfortunate creature.  It doesn't look human.",
     "price_postapoc": "10 cent",
-    "milling": { "into": "meal_bone", "recipe": "meal_bone_mill_1_4" },
-    "volume": "250 ml",
-    "longest_side": "40 cm",
-    "calories": 10,
+    "calories": 171,
     "vitamins": [ [ "calcium", "25588 mg" ], [ "meat_allergen", 1 ] ],
     "melee_damage": { "bash": 3 },
     "to_hit": { "grip": "none", "length": "short", "surface": "any", "balance": "uneven" },
-    "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ]
+    "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ],
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_1_4"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "large_bone",
     "name": { "str": "large bone" },
-    "description": "A huge bone of a large creature.",
+    "description": "A tremendous bone taken from some gigantic creature.",
     "weight": "17700 g",
     "volume": "19550 ml",
     "longest_side": "110 cm",
@@ -53,38 +60,39 @@
     "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "MILLING", "COMESTIBLE" ],
     "id": "bone_tainted",
     "category": "other",
     "name": { "str": "tainted bone" },
     "weight": "212 g",
+    "volume": "320 ml",
     "color": "light_gray",
-    "use_action": [ "POISON" ],
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 17,
     "description": "Gray-brown cracks and gouges mar this bone like decay in an old tooth.",
     "price": "0 cent",
     "price_postapoc": "5 cent",
-    "milling": { "into": "meal_bone_tainted", "recipe": "meal_bone_tainted_mill_1_4" },
-    "//": "Not for use in edible recipes, and should require ~200% as much as normal for applicable inedible recipes except for charcoal.",
-    "material": [ "bone" ],
-    "volume": "250 ml",
+    "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ],
     "fun": -10,
-    "flags": [ "NO_SALVAGE" ],
-    "vitamins": [ [ "meat_allergen", 1 ] ]
+    "//": "Not for use in edible recipes, and should require ~200% as much as normal for applicable inedible recipes except for charcoal.",
+    "into": "meal_bone_tainted",
+    "recipe": "meal_bone_tainted_mill_1_4"
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "bone_human",
     "copy-from": "bone",
     "name": { "str": "human bone" },
-    "description": "A bone from a human being.  Could be used to make some stuff, if you're feeling sufficiently ghoulish.",
+    "description": "A bone from a human being.  It could be used to make some stuff, if you're feeling sufficiently ghoulish.",
     "//": "No extend support for vitamins, we need to overwrite",
     "vitamins": [ [ "calcium", "25588 mg" ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "meal_bone",
     "name": { "str_sp": "bone meal" },
     "weight": "60 g",
@@ -100,7 +108,8 @@
     "fun": -10
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "meal_bone_tainted",
     "name": { "str_sp": "tainted bone meal" },
     "weight": "60 g",
@@ -118,7 +127,8 @@
     "fun": -10
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skewer_bone",
     "symbol": ",",
     "color": "white",
@@ -129,13 +139,13 @@
     "flags": [ "NO_SALVAGE", "TRADER_AVOID" ],
     "weight": "10 g",
     "volume": "25 ml",
-    "to_hit": -5,
-    "milling": { "into": "meal_bone_tainted", "recipe": "meal_bone_tainted_mill_6_1" },
     "qualities": [ [ "COOK", 1 ] ],
-    "use_action": [ "HEAT_SOLID_ITEMS" ]
+    "use_action": [ "HEAT_SOLID_ITEMS" ],
+    "into": "meal_bone_tainted",
+    "recipe": "meal_bone_tainted_mill_6_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "abstract": "skull_abstract",
     "name": { "str": "abstract skull" },
     "description": "This is a dummy item.  If you see it something went wrong.",
@@ -150,14 +160,14 @@
     "material": [ "bone" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_human",
     "name": { "str": "human skull" },
     "description": "The skull of a human being.  Carrying this around probably isn't going to win you any friends.",
     "copy-from": "skull_abstract"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_human_tainted",
     "name": { "str": "tainted human skull" },
     "description": "The stained skull of what was once a human being.  It is rotted and noticeably warped from its lively form.  Carrying this around probably isn't going to win you any friends.",
@@ -166,27 +176,33 @@
     "snippet_category": "skull_human_tainted_desc"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_canis_small",
     "name": { "str": "tiny canine skull" },
     "description": "The skull of a tiny canine, likely a Chihuahua or another similarly sized dog breed.",
     "copy-from": "skull_abstract",
     "weight": "35 g",
     "volume": "270 ml",
-    "longest_side": "7 cm"
+    "longest_side": "7 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_2_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_canis_medium",
     "name": { "str": "small canine skull" },
     "description": "The skull of a small canine, likely a small dog breed.",
     "copy-from": "skull_abstract",
     "weight": "65 g",
     "volume": "500 ml",
-    "longest_side": "12 cm"
+    "longest_side": "12 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_1_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_canis",
     "name": { "str": "large canine skull" },
     "description": "The skull of a wolf or a dog.  Essential material for building an articulated wolf skeleton.",
@@ -196,7 +212,7 @@
     "longest_side": "29 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_canis_triclopean",
     "name": { "str": "triclopean canine skull" },
     "description": "The skull of a what looks like a dog, although it has an extra eye socket.",
@@ -206,27 +222,33 @@
     "longest_side": "12 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_feline_small",
     "name": { "str": "small feline skull" },
     "description": "The skull of a small feline, likely a house cat.",
     "copy-from": "skull_abstract",
     "weight": "40 g",
     "volume": "300 ml",
-    "longest_side": "10 cm"
+    "longest_side": "10 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_2_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_feline_medium",
     "name": { "str": "medium feline skull" },
     "description": "The skull of a medium-sized feline, likely a bobcat.",
     "copy-from": "skull_abstract",
     "weight": "65 g",
     "volume": "500 ml",
-    "longest_side": "13 cm"
+    "longest_side": "13 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_1_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_tiger",
     "name": { "str": "tiger skull" },
     "description": "The skull of a tiger.",
@@ -236,17 +258,20 @@
     "longest_side": "21 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_raccoon",
     "name": { "str": "raccoon skull" },
     "description": "The skull of a raccoon.",
     "copy-from": "skull_abstract",
     "weight": "75 g",
     "volume": "575 ml",
-    "longest_side": "12 cm"
+    "longest_side": "12 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_1_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_bear",
     "name": { "str": "bear skull" },
     "description": "The skull of a bear.",
@@ -256,47 +281,59 @@
     "longest_side": "30 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_opossum",
     "name": { "str": "opossum skull" },
     "description": "The skull of an opossum.",
     "copy-from": "skull_abstract",
     "weight": "45 g",
     "volume": "275 ml",
-    "longest_side": "11 cm"
+    "longest_side": "11 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_2_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_skunk",
     "name": { "str": "skunk skull" },
     "description": "The skull of a skunk.",
     "copy-from": "skull_abstract",
     "weight": "56 g",
     "volume": "300 ml",
-    "longest_side": "8 cm"
+    "longest_side": "8 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_2_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_rodent",
     "name": { "str": "rodent skull" },
     "description": "The skull of a small rodent, most likely a rat.",
     "copy-from": "skull_abstract",
     "weight": "3 g",
     "volume": "20 ml",
-    "longest_side": "5 cm"
+    "longest_side": "5 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_20_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "skull_rabbit",
     "name": { "str": "rabbit skull" },
     "description": "The skull of a rabbit or a hare.",
     "copy-from": "skull_abstract",
     "weight": "90 g",
     "volume": "450 ml",
-    "longest_side": "10 cm"
+    "longest_side": "10 cm",
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_1_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_beaver",
     "name": { "str": "beaver skull" },
     "description": "The skull of a beaver.",
@@ -306,7 +343,7 @@
     "longest_side": "16 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_pig",
     "name": { "str": "pig skull" },
     "description": "The skull of a pig, either a domestic or a wild one.",
@@ -316,7 +353,7 @@
     "longest_side": "30 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_sheep",
     "name": { "str": "sheep skull" },
     "description": "The skull of a domestic sheep.",
@@ -326,7 +363,7 @@
     "longest_side": "25 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_goat",
     "name": { "str": "goat skull" },
     "description": "The skull of a goat with the horns still attached.",
@@ -336,7 +373,7 @@
     "longest_side": "25 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_bovine",
     "name": { "str": "cow skull" },
     "description": "The skull of a bovine, likely a domestic cow, with the horns still attached.",
@@ -346,7 +383,7 @@
     "longest_side": "35 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_equine",
     "name": { "str": "horse skull" },
     "description": "The skull of a horse.  Given the circumstances you can be pretty sure it was a domestic horse.",
@@ -356,7 +393,7 @@
     "longest_side": "55 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_cervine",
     "name": { "str": "deer skull" },
     "description": "The skull of a cervine, either a deer or a reindeer.",
@@ -366,7 +403,7 @@
     "longest_side": "50 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_cervine_spideer",
     "name": { "str": "deer skull" },
     "description": "The skull of a cervine, probably a deer…  But why does it have eight eye sockets?",
@@ -376,7 +413,7 @@
     "longest_side": "40 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_moose",
     "name": { "str": "moose skull" },
     "description": "The skull of a moose.",
@@ -386,7 +423,7 @@
     "longest_side": "65 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_moose_tusked",
     "name": { "str": "tusked moose skull" },
     "description": "The skull of a moose, sporting big curving tusks, like a boar.",
@@ -396,7 +433,7 @@
     "longest_side": "120 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_llama",
     "name": { "str": "llama skull" },
     "description": "The skull of a llama.",

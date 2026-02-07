@@ -666,9 +666,11 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     }
 
     // TODO: Extract this bool into a function
-    const bool is_human = corpse.id == mtype_id::NULL_ID() || ( ( corpse.in_species( species_HUMAN ) ||
-                          corpse.in_species( species_FERAL ) ) &&
-                          !corpse.in_species( species_ZOMBIE ) );
+    const bool is_human = ( corpse.id == mtype_id::NULL_ID() ||
+                            ( ( corpse.in_species( species_HUMAN ) ||
+                                corpse.in_species( species_FERAL ) ) ) ) &&
+                          ( !corpse.in_species( species_ZOMBIE ) || ( action != butcher_type::DISSECT &&
+                                  action != butcher_type::BLEED ) );
 
     // Applies to all butchery actions except for dissections. Bloodfeeders are OK with draining humans for blood.
     if( is_human &&
@@ -741,9 +743,9 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     if( is_human && action == butcher_type::DISSECT && !( you.has_flag( json_flag_CANNIBAL ) ||
             you.has_flag( json_flag_PSYCHOPATH ) || you.has_flag( json_flag_SAPIOVORE ) ) ) {
         if( you.has_proficiency( proficiency_prof_dissect_humans ) ) {
-            //you're either trained for this, densensitized, or both. doesn't bother you.
+            // You're either trained for this, densensitized, or both. doesn't bother you.
             if( you.is_avatar() ) {
-                //this is a dissection, and we are trained for dissection, so no morale penalty, and lighter flavor text.
+                // This is a dissection, and we are trained for dissection, so no morale penalty, and lighter flavor text.
                 switch( rng( 1, 3 ) ) {
                     case 1:
                         you.add_msg_if_player( m_good, _( "You grit your teeth and get to work." ) );
@@ -835,7 +837,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
     switch( action ) {
         case butcher_type::QUICK:
         case butcher_type::BLEED:
-            time_to_cut /= 4;
+            time_to_cut /= 2;
             break;
         case butcher_type::FULL:
             if( !corpse_item.has_flag( flag_FIELD_DRESS ) || corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) ) {
@@ -845,7 +847,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
             }
             break;
         case butcher_type::FIELD_DRESS:
-            time_to_cut /= 4;
+            time_to_cut /= 3;
             break;
         case butcher_type::SKIN:
             time_to_cut *= 1.5;
@@ -990,7 +992,7 @@ static std::vector<item> create_charge_items( const itype *drop, int count,
             obj.set_flag( flg );
         }
         for( const fault_id &flt : entry.faults ) {
-            obj.faults.emplace( flt );
+            obj.set_fault( flt );
         }
         if( !you.backlog.empty() && you.backlog.front().id() == ACT_MULTIPLE_BUTCHER ) {
             obj.set_var( "activity_var", you.name );
@@ -1236,7 +1238,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                     obj.set_flag( flg );
                 }
                 for( const fault_id &flt : entry.faults ) {
-                    obj.faults.emplace( flt );
+                    obj.remove_fault( flt );
                 }
 
                 // If we're not bleeding the animal we don't care about the blood being wasted
@@ -1268,7 +1270,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                     obj.set_flag( flg );
                 }
                 for( const fault_id &flt : entry.faults ) {
-                    obj.faults.emplace( flt );
+                    obj.remove_fault( flt );
                 }
                 if( !you.backlog.empty() && you.backlog.front().id() == ACT_MULTIPLE_BUTCHER ) {
                     obj.set_var( "activity_var", you.name );
@@ -1508,6 +1510,14 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
             add_msg( m_good, SNIPPET.random_from_category( "harvest_drop_default_bleed" ).value_or(
                          translation() ).translated() );
             corpse_item.set_flag( flag_BLED );
+            // Prevent blood farming.
+            if( corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+                one_in( corpse->size * 3 ) ) {
+                add_msg_if_player_sees( you->pos_bub(),
+                                        _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
+                here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
+                corpse_item.set_flag( flag_PULPED );
+            }
             if( !act->targets.empty() ) {
                 act->targets.pop_back();
             }
@@ -2805,10 +2815,10 @@ void activity_handlers::mend_item_finish( player_activity *act, Character *you )
     you->invalidate_crafting_inventory();
 
     for( const ::fault_id &id : fix.faults_removed ) {
-        target.faults.erase( id );
+        target.remove_fault( id );
     }
     for( const ::fault_id &id : fix.faults_added ) {
-        target.faults.insert( id );
+        target.set_fault( id, true, false );
     }
     for( const auto &[var_name, var_value] : fix.set_variables ) {
         target.set_var( var_name, var_value );
@@ -2851,7 +2861,6 @@ void activity_handlers::toolmod_add_finish( player_activity *act, Character *you
     item &mod = *act->targets[1];
     you->add_msg_if_player( m_good, _( "You successfully attached the %1$s to your %2$s." ),
                             mod.tname(), tool.tname() );
-    mod.set_flag( flag_IRREMOVABLE );
     tool.put_in( mod, pocket_type::MOD );
     tool.on_contents_changed();
     act->targets[1].remove_item();
@@ -3945,8 +3954,6 @@ void activity_handlers::spellcasting_finish( player_activity *act, Character *yo
                 if( !spell_being_cast.is_max_level( *you ) && level_override == -1 ) {
                     // still get some experience for trying
                     spell_being_cast.gain_exp( *you, exp_gained / 5 );
-                    you->add_msg_if_player( m_good, _( "You gain %i experience.  New total %i." ), exp_gained / 5,
-                                            spell_being_cast.xp() );
                 }
                 get_event_bus().send<event_type::spellcasting_finish>( you->getID(), false, sp,
                         spell_being_cast.spell_class(), spell_being_cast.get_difficulty( *you ),
@@ -3999,16 +4006,15 @@ void activity_handlers::spellcasting_finish( player_activity *act, Character *yo
                     if( old_level == 0 ) {
                         spell_being_cast.gain_level( *you );
                         you->add_msg_if_player( m_good,
-                                                _( "Something about how this spell works just clicked!  You gained a level!" ) );
+                                                _( "You are now comfortable with the fundamentals of %s." ) );
                     } else {
                         spell_being_cast.gain_exp( *you, exp_gained );
-                        you->add_msg_if_player( m_good, _( "You gain %i experience.  New total %i." ), exp_gained,
-                                                spell_being_cast.xp() );
                     }
                     if( spell_being_cast.get_level() != old_level ) {
                         // Level 0-1 message is printed above - notify player when leveling up further
                         if( old_level > 0 ) {
-                            you->add_msg_if_player( m_good, _( "You gained a level in %s!" ), spell_being_cast.name() );
+                            you->add_msg_if_player( m_good, _( "You improve your ability to use %s!" ),
+                                                    spell_being_cast.name() );
                         }
                     }
                 }

@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_15" ],
     "weight": 200,
     "object": {
@@ -42,7 +41,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_15_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -78,7 +76,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_15_basement",
     "weight": 190,
     "object": {
@@ -128,7 +125,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_15_basement",
     "weight": 10,
     "object": {

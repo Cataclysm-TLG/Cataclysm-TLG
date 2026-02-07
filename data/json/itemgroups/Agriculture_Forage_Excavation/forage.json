@@ -104,7 +104,8 @@
     "id": "forage_winter",
     "type": "item_group",
     "subtype": "distribution",
-    "entries": [ { "item": "wintergreen_berry", "prob": 4, "count": [ 1, 3 ] },
+    "entries": [
+      { "item": "wintergreen_berry", "prob": 4, "count": [ 1, 3 ] },
       { "item": "rock_flaking", "prob": 2, "count": [ 1, 2 ] },
       { "item": "rock", "prob": 8, "count": [ 1, 2 ] },
       { "item": "bone", "prob": 1, "count": [ 1, 2 ] },
@@ -114,7 +115,8 @@
       { "item": "log", "prob": 1 },
       { "item": "leaves", "prob": 5 },
       { "item": "pebble", "prob": 6, "charges": [ 1, 10 ] },
-      { "item": "feather", "prob": 1, "charges": [ 1, 10 ] } ]
+      { "item": "feather", "prob": 1, "charges": [ 1, 10 ] }
+    ]
   },
   {
     "id": "forage_mushroom",

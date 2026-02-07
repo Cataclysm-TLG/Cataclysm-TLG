@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "furniture" ],
     "weight": 300,
     "object": {
@@ -88,7 +87,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "furniture_roof",
     "object": {
       "fill_ter": "t_floor",
@@ -150,7 +148,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "furniture_upper_roof",
     "object": {
       "fill_ter": "t_flat_roof",

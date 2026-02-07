@@ -300,12 +300,12 @@ an exhaustive example...
     "spawns": { "group": "GROUP_FOREST", "population": [ 0, 1 ], "chance": 13 },
     "flags": [ "NO_ROTATE" ],
     "uniform_terrain": "t_grass",
-    "mapgen": [ { "method": "builtin", "name": "bridge" } ],
-    "mapgen_straight": [ { "method": "builtin", "name": "road_straight" } ],
-    "mapgen_curved": [ { "method": "builtin", "name": "road_curved" } ],
-    "mapgen_end": [ { "method": "builtin", "name": "road_end" } ],
-    "mapgen_tee": [ { "method": "builtin", "name": "road_tee" } ],
-    "mapgen_four_way": [ { "method": "builtin", "name": "road_four_way" } ],
+    "mapgen": [ { "builtin": "bridge" } ],
+    "mapgen_straight": [ { "builtin": "road_straight" } ],
+    "mapgen_curved": [ { "builtin": "road_curved" } ],
+    "mapgen_end": [ { "builtin": "road_end" } ],
+    "mapgen_tee": [ { "builtin": "road_tee" } ],
+    "mapgen_four_way": [ { "builtin": "road_four_way" } ],
     "eoc": {
       "id": "EOC_REFUGEE_CENTER_GENERATE", 
       "condition": { "math": [ "refugee_centers", "<", "1" ] }, 
@@ -419,6 +419,9 @@ overmap, specials that failed placement don't get disqualified and can be rolled
 until all sectors are occupied). For specials that are not common enough to warrant appearing more
 than once per overmap please use the "OVERMAP_UNIQUE" flag. For specials that should only have one instance
 per world use "GLOBALLY_UNIQUE".
+
+NOTE: currently, minimum occurences are NOT enforced in-game but ARE enforced by 
+test case `default_overmap_generation_always_succeeds`.
 
 ### Occurrences ( OVERMAP_UNIQUE, GLOBALLY_UNIQUE )
 

@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -54,7 +53,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -104,7 +102,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -151,7 +148,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -189,7 +185,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -227,7 +222,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -288,7 +282,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -356,7 +349,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -406,7 +398,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {
@@ -455,7 +446,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "emptycommerciallot",
     "weight": 100,
     "object": {

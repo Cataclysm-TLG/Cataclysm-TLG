@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "om_terrain": "house_crack1",
     "type": "mapgen",
     "weight": 100,
@@ -77,7 +76,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_crack1_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -124,7 +122,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "house_crack2",
     "type": "mapgen",
     "weight": 100,
@@ -207,7 +204,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": "house_crack3",
     "type": "mapgen",
     "weight": 100,
@@ -294,7 +290,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_crack3_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -330,7 +325,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_crack3_basement",
     "object": {
       "fill_ter": "t_thconc_floor",

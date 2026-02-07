@@ -1,6 +1,7 @@
 [
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "feces_bird",
     "name": { "str_sp": "bird litter" },
     "category": "chems",
@@ -18,10 +19,12 @@
     "material": [ "feces" ],
     "contamination": [ { "disease": "highly_contaminated_food", "probability": 100 } ],
     "volume": "62 ml",
-    "fun": -25
+    "fun": -25,
+    "flags": [ "INEDIBLE" ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "feces_cow",
     "name": { "str": "cow pie" },
     "copy-from": "feces_bird",
@@ -30,14 +33,16 @@
     "description": "A fresh cow pie; this could probably be used to make some great fertilizer."
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "feces_dog",
     "name": { "str": "dog dung" },
     "copy-from": "feces_manure",
     "description": "Droppings from a canine."
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "feces_manure",
     "name": { "str_sp": "manure" },
     "copy-from": "feces_bird",
@@ -46,14 +51,15 @@
     "description": "Common manure, could probably be used to make some great fertilizer."
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "feces_roach",
     "name": { "str_sp": "insect droppings" },
     "copy-from": "feces_bird",
     "description": "Large black pellets of rotting material."
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "fetid_goop",
     "symbol": "~",
     "color": "white",
@@ -68,10 +74,12 @@
       "duration": "1 h",
       "charges_to_use": 1,
       "effects": [ { "id": "fetid_goop", "duration": 3600 } ]
-    }
+    },
+    "flags": [ "INEDIBLE" ]
   },
   {
-    "type": "COMESTIBLE",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "insect_dust",
     "name": { "str_sp": "chitin dust" },
     "category": "spare_parts",
@@ -83,7 +91,7 @@
     "price": "1 cent",
     "price_postapoc": "1 cent",
     "material": [ "chitin" ],
-    "flags": [ "NO_SALVAGE" ],
+    "flags": [ "NO_SALVAGE", "INEDIBLE" ],
     "volume": "62 ml"
   }
 ]

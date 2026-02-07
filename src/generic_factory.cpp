@@ -1,6 +1,6 @@
 #include "generic_factory.h"
 
-bool one_char_symbol_reader( const JsonObject &jo, const std::string_view member_name, int &sym,
+bool one_char_symbol_reader( const JsonObject &jo, std::string_view member_name, int &sym,
                              bool )
 {
     std::string sym_as_string;
@@ -25,7 +25,7 @@ bool one_char_symbol_reader( const JsonObject &jo, const std::string_view member
 }
 
 bool unicode_codepoint_from_symbol_reader( const JsonObject &jo,
-        const std::string_view member_name, uint32_t &member, bool )
+        std::string_view member_name, uint32_t &member, bool )
 {
     int sym_as_int;
     std::string sym_as_string;
@@ -46,7 +46,7 @@ bool unicode_codepoint_from_symbol_reader( const JsonObject &jo,
     return true;
 }
 
-float read_proportional_entry( const JsonObject &jo, const std::string_view &key )
+float read_proportional_entry( const JsonObject &jo, std::string_view key )
 {
     if( jo.has_float( key ) ) {
         float scalar = jo.get_float( key );

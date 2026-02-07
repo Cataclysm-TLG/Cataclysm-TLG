@@ -2,7 +2,8 @@
   {
     "id": "airspeargun",
     "looks_like": "ar15",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "brown",
@@ -34,7 +35,8 @@
   {
     "id": "doublespeargun",
     "looks_like": "ar15",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "brown",
@@ -64,7 +66,8 @@
   {
     "id": "long_speargun",
     "looks_like": "glock_17",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "yellow",
@@ -93,7 +96,8 @@
   {
     "id": "speargun",
     "looks_like": "ar15",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "symbol": "(",
     "color": "brown",

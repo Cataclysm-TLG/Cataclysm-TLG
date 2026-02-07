@@ -720,6 +720,8 @@ void map::vehmove()
         vehs.emplace( connected_veh, false ); // add with 'false' if does not exist (off map)
     }
     for( const std::pair<vehicle *const, bool> &veh_pair : vehs ) {
+        veh_pair.first->process_effects();
+        veh_pair.first->recalculate_enchantment_cache();
         veh_pair.first->idle( *this, /* on_map = */ veh_pair.second );
     }
 
@@ -4880,7 +4882,7 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
     const bool ignite = ammo_effects.count( ammo_effect_IGNITE );
     const bool laser = ammo_effects.count( ammo_effect_LASER );
 
-    int dist = static_cast<int>( std::round( trig_dist_z_adjust( source, p ) ) );
+    int dist = trig_dist( source, p );
     // Manually check coverage sources as coverage() isn't smart enough.
     int furn_coverage = 0;
     if( furn( p ) != f_null ) {
@@ -5308,7 +5310,7 @@ void map::translate_radius( const ter_id &from, const ter_id &to, float radi,
         const tripoint_abs_omt abs_omt_t = coords::project_to<coords::omt>( get_abs( t ) );
         const float radiX = trig_dist( p, t );
         if( ter( t ) == from ) {
-            // within distance, and either no submap limitation or same overmap coords.
+            // Within distance, and either no submap limitation or same overmap coords.
             if( radiX <= radi && ( !same_submap || abs_omt_t == abs_omt_p ) ) {
                 ter_set( t, to );
             }
@@ -7807,6 +7809,11 @@ bool map::draw_maptile( const catacurses::window &w, const tripoint_bub_ms &p,
                                                 player_character.grab_point ) ) ) ) {
             memory_sym = sym;
         }
+        if( !vd.carried_furn.empty() ) {
+            furn_str_id furn( vd.carried_furn );
+            sym = furn->symbol();
+            tercol = furn->color();
+        }
     }
 
     if( param.memorize() && memory_cache_ter_is_dirty( p ) ) {
@@ -8205,11 +8212,12 @@ int map::ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_
         return true;
     } );
 
-    float dist_to_ledge_base = trig_dist( viewer_p, tripoint_bub_ms( ledge_p.x(), ledge_p.y(),
-                                          viewer_p.z() ) );
+    float dist_to_ledge_base = trig_dist_precise( viewer_p, tripoint_bub_ms( ledge_p.x(), ledge_p.y(),
+                               viewer_p.z() ) );
     // Adjustment to ledge distance because ledge is assumed to be between two grids
     dist_to_ledge_base *= ( viewer_p.z() < target_p.z() ) ? -2.0f : 2.0f;
-    const float flat_dist = trig_dist( viewer_p, tripoint_bub_ms( target_p.xy(), viewer_p.z() ) );
+    const float flat_dist = trig_dist_precise( viewer_p, tripoint_bub_ms( target_p.xy(),
+                            viewer_p.z() ) );
     // Similarly adjust relative Z comparisons.
     const float adjusted_viewer_z = viewer_p.z() * 2;
     // "Opposite" of the angle between the viewer level and ledge
@@ -8218,7 +8226,8 @@ int map::ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_
     // Absolute level concealed by ledge, anything below this point is invisible
     const float covered_z = adjusted_viewer_z + ( tangent * flat_dist );
     // Compare adjusted target Z to covered area. Multiply by 100 to compare to eye_level().
-    int ledge_concealment = 100 * ( covered_z - ( target_p.z() * 2 ) );
+    int ledge_concealment = static_cast<int>( std::round( 100 * ( covered_z -
+                            ( target_p.z() * 2 ) ) ) );
     return std::max( ledge_concealment, 0 );
 }
 
@@ -8322,8 +8331,7 @@ std::vector<tripoint_bub_ms> map::find_clear_path( const tripoint_bub_ms &source
     const int max_start_offset = std::abs( ideal_start_offset ) * 2 + 1;
     for( int horizontal_offset = -1; horizontal_offset <= max_start_offset; ++horizontal_offset ) {
         int candidate_offset = horizontal_offset * ( start_sign == 0 ? 1 : start_sign );
-        if( sees( source, destination, static_cast<int>( std::round( trig_dist_z_adjust( source,
-                  destination ) ) ),
+        if( sees( source, destination, trig_dist( source, destination ),
                   candidate_offset, /*with_fields=*/true, /*allow_cached=*/false ) ) {
             return line_to( source, destination, candidate_offset, 0 );
         }
@@ -8533,8 +8541,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     // Ugly `if` for now
     // TODO: Why is it even like this?
     if( f.z() == t.z() ) {
-        if( ( range < static_cast<int>( std::round( trig_dist_z_adjust( f, t ) ) ) ) ||
-            !inbounds( t ) ) {
+        if( !inbounds( t ) || ( range < trig_dist( f, t ) ) ) {
             return false; // Out of range!
         }
         bool is_clear = true;
@@ -8559,8 +8566,8 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
         return is_clear;
     }
 
-    // Handle direct vertical neighbor (1 tile away, different Z)
-    if( static_cast<int>( trig_dist( f.raw(), t.raw() ) ) < 2 && f.z() != t.z() ) {
+    /* Handle direct vertical neighbor (1 tile away, different Z) */
+    if( trig_dist( f.raw(), t.raw() ) < 2 && f.z() != t.z() ) {
         const bool going_up = t.z() > f.z();
         const tripoint_bub_ms &lower = going_up ? f : t;
         const tripoint_bub_ms &upper = going_up ? t : f;
@@ -8580,9 +8587,8 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
         return false;
     }
 
-    // 3D path check
-    if( ( range < static_cast<int>( std::round( trig_dist_z_adjust( f, t ) ) ) ) ||
-        !inbounds( t ) ) {
+    // 3D path check.
+    if( !inbounds( t ) || ( range < trig_dist( f, t ) ) ) {
         return false;
     }
 

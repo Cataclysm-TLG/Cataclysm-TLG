@@ -146,6 +146,7 @@ static const efftype_id effect_shakes( "shakes" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_weed_high( "weed_high" );
 
+static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 static const fault_id fault_overheat_safety( "fault_overheat_safety" );
 
 static const furn_str_id furn_f_metal_smoking_rack_active( "f_metal_smoking_rack_active" );
@@ -871,7 +872,11 @@ int item::damage() const
 
 int item::degradation() const
 {
-    return degradation_;
+    int ret = degradation_;
+    for( fault_id f : faults ) {
+        ret += f.obj().degradation_mod();
+    }
+    return ret;
 }
 
 void item::rand_degradation()
@@ -887,13 +892,24 @@ int item::damage_level( bool precise ) const
     return precise ? damage_ : type->damage_level( damage_ );
 }
 
-float item::damage_adjusted_melee_weapon_damage( float value ) const
+float item::damage_adjusted_melee_weapon_damage( float value, const damage_type_id &dt ) const
 {
     if( type->count_by_charges() ) {
         return value; // count by charges items don't have partial damage
     }
 
-    return value * ( 1.0f - 0.1f * std::max( 0, damage_level() - 1 ) );
+    for( fault_id fault : faults ) {
+        for( const std::tuple<int, float, damage_type_id> &damage_mod : fault.obj().melee_damage_mod() ) {
+            const damage_type_id dmg_type_of_fault = std::get<2>( damage_mod );
+            if( dt == dmg_type_of_fault ) {
+                const int damage_added = std::get<0>( damage_mod );
+                const float damage_mult = std::get<1>( damage_mod );
+                value = ( value + damage_added ) * damage_mult;
+            }
+        }
+    }
+
+    return std::max( 0.0f, value * ( 1.0f - 0.1f * std::max( 0, damage_level() - 1 ) ) );
 }
 
 float item::damage_adjusted_gun_damage( float value ) const
@@ -904,15 +920,32 @@ float item::damage_adjusted_gun_damage( float value ) const
     return value - 2 * std::max( 0, damage_level() - 1 );
 }
 
-float item::damage_adjusted_armor_resist( float value ) const
+float item::damage_adjusted_armor_resist( float value, const damage_type_id &dmg_type ) const
 {
     if( type->count_by_charges() ) {
         return value; // count by charges items don't have partial damage
     }
-    return value * ( 1.0f - std::max( 0, damage_level() - 1 ) * 0.125f );
+
+    for( fault_id fault : faults ) {
+        for( const std::tuple<int, float, damage_type_id> &damage_mod : fault.obj().armor_mod() ) {
+            const damage_type_id dmg_type_of_fault = std::get<2>( damage_mod );
+            if( dmg_type == dmg_type_of_fault ) {
+                const int damage_added = std::get<0>( damage_mod );
+                const float damage_mult = std::get<1>( damage_mod );
+                value = ( value + damage_added ) * damage_mult;
+            }
+        }
+    }
+
+    return std::max( 0.0f, value * ( 1.0f - std::max( 0, damage_level() - 1 ) * 0.125f ) );
 }
 
 void item::set_damage( int qty )
+{
+    damage_ = std::clamp( qty, degradation_, max_damage() );
+}
+
+void item::force_set_damage( int qty )
 {
     damage_ = std::clamp( qty, degradation_, max_damage() );
 }
@@ -924,7 +957,8 @@ void item::set_degradation( int qty )
     } else {
         degradation_ = 0;
     }
-    set_damage( damage_ );
+    // Maybe should use set_damage() instead, but we trust damage is set before the degradation.
+    force_set_damage( damage_ );
 }
 
 item item::split( int qty )
@@ -1739,6 +1773,7 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     bits.set( tname::segments::CUSTOM_ITEM_SUFFIX, bits[tname::segments::TAGS] );
 
     bits.set( tname::segments::FAULTS, faults == rhs.faults );
+    bits.set( tname::segments::FAULTS_SUFFIX, faults == rhs.faults );
     bits.set( tname::segments::TECHNIQUES, techniques == rhs.techniques );
     bits.set( tname::segments::OVERHEAT, overheat_symbol() == rhs.overheat_symbol() );
     bits.set( tname::segments::DIRT, get_var( "dirt", 0 ) == rhs.get_var( "dirt", 0 ) );
@@ -2430,6 +2465,14 @@ void item::debug_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                                    iteminfo::lower_is_better | iteminfo::is_decimal,
                                    units::to_kelvin( get_freeze_point() ) );
             }
+
+            std::string faults;
+            for( const weighted_object<int, fault_id> &fault : type->faults ) {
+                const int weight_percent = static_cast<float>( fault.weight ) / type->faults.get_weight() * 100;
+                faults += colorize( fault.obj.str() + string_format( " (%d, %d%%)\n", fault.weight,
+                                    weight_percent ), has_fault( fault.obj ) ? c_yellow : c_white );
+            }
+            info.emplace_back( "BASE", string_format( "faults: %s", faults ) );
         }
     }
 }
@@ -3417,6 +3460,10 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
     if( get_ranged_pierce( mod ) != 0 && parts->test( iteminfo_parts::GUNMOD_ARMORPIERCE ) ) {
         info.emplace_back( "GUNMOD", _( "Armor-pierce: " ), "", iteminfo::show_plus,
                            pierce );
+    }
+    if( mod.to_hit_mod != 0 && parts->test( iteminfo_parts::GUNMOD_TO_HIT_MODIFIER ) ) {
+        info.emplace_back( "GUNMOD", _( "To-hit modifier: " ), "",
+                           iteminfo::show_plus, mod.to_hit_mod );
     }
     if( mod.range != 0 && parts->test( iteminfo_parts::GUNMOD_RANGE ) ) {
         info.emplace_back( "GUNMOD", _( "Range: " ), "",
@@ -5302,7 +5349,7 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
 
         if( base_tohit ) {
             info.emplace_back( "BASE", space + _( "To-hit bonus: " ), "",
-                               iteminfo::show_plus, type->m_to_hit );
+                               iteminfo::show_plus, get_to_hit() );
         }
 
         if( base_moves ) {
@@ -5330,7 +5377,7 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
             info.emplace_back( "DESCRIPTION", _( "<bold>Techniques when wielded</bold>: " ) +
             enumerate_as_string( all_tec_sorted, []( const matec_id & tid ) {
                 return string_format( "<stat>%s</stat>: <info>%s</info> <info>%s</info>", tid.obj().name,
-                                      tid.obj().description, tid.obj().condition_desc );
+                                      tid.obj().description, _( tid.obj().condition_desc ) );
             } ) );
         }
     }
@@ -5363,7 +5410,7 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
 
     ///\EFFECT_MELEE >2 allows seeing melee damage stats on weapons
     if( ( player_character.get_skill_level( skill_melee ) >= 3 &&
-          ( !dmg_types.empty() || type->m_to_hit > 0 ) ) || debug_mode ) {
+          ( !dmg_types.empty() || get_to_hit() > 0 ) ) || debug_mode ) {
         damage_instance non_crit;
         player_character.roll_all_damage( false, non_crit, true, *this, attack_vector_id::NULL_ID(),
                                           sub_bodypart_str_id::NULL_ID() );
@@ -5413,7 +5460,7 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
         }
         insert_separation_line( info );
     } else if( player_character.get_skill_level( skill_melee ) < 3 &&
-               ( !dmg_types.empty() || type->m_to_hit > 0 ) ) {
+               ( !dmg_types.empty() || get_to_hit() > 0 ) ) {
         insert_separation_line( info );
         if( parts->test( iteminfo_parts::DESCRIPTION_MELEEDMG ) ) {
             info.emplace_back( "DESCRIPTION", _( "<bold>Average melee damage</bold>:" ) );
@@ -5734,7 +5781,7 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         for( const fault_id &e : faults ) {
             //~ %1$s is the name of a fault and %2$s is the description of the fault
             info.emplace_back( "DESCRIPTION", string_format( _( "* <bad>%1$s</bad>.  %2$s" ),
-                               e.obj().name(), e.obj().description() ) );
+                               e.obj().name(), get_fault_description( e ) ) );
         }
     }
 
@@ -5819,7 +5866,7 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
         const auto print_parts = [&info, &player_character](
                                      const std::vector<vpart_info> &vparts,
-                                     const std::string_view install_where,
+                                     std::string_view install_where,
                                      const std::function<bool( const vpart_info & )> &predicate
         ) {
             std::vector<std::string> result_parts;
@@ -6551,7 +6598,7 @@ std::string item::overheat_symbol() const
         modifier += mod->type->gunmod->overheat_threshold_modifier;
         multiplier *= mod->type->gunmod->overheat_threshold_multiplier;
     }
-    if( faults.count( fault_overheat_safety ) ) {
+    if( has_fault( fault_overheat_safety ) ) {
         return string_format( _( "<color_light_green>\u2588VNT </color>" ) );
     }
     switch( std::min( 5, static_cast<int>( get_var( "gun_heat",
@@ -7276,9 +7323,7 @@ int item::damage_melee( const damage_type_id &dt ) const
     if( type->melee.damage_map.count( dt ) > 0 ) {
         res = type->melee.damage_map.at( dt );
     }
-
-
-    res = damage_adjusted_melee_weapon_damage( res );
+    res = damage_adjusted_melee_weapon_damage( res, dt );
 
 
     // apply type specific flags
@@ -7400,6 +7445,16 @@ bool item::has_fault( const fault_id &fault ) const
     return faults.count( fault );
 }
 
+bool item::has_fault_of_type( const std::string &fault_type ) const
+{
+    for( const fault_id &f : faults ) {
+        if( f.obj().type() == fault_type ) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool item::has_fault_flag( const std::string &searched_flag ) const
 {
     for( const fault_id &fault : faults ) {
@@ -7487,10 +7542,83 @@ int item::get_vitamin_amount( const vitamin_id &v ) const
     return 0;
 }
 
-item &item::set_fault( const fault_id &fault_id )
+std::string item::get_fault_description( const fault_id &f_id ) const
 {
-    faults.insert( fault_id );
-    return *this;
+    return string_format( f_id.obj().description(), type->nname( 1 ) );
+}
+
+bool item::can_have_fault( const fault_id &f_id )
+{
+    // f_id fault is not defined in itype
+    if( type->faults.get_specific_weight( f_id ) == 0 ) {
+        return false;
+    }
+
+    // f_id is blocked by some another fault
+    for( const fault_id &faults_of_item : faults ) {
+        for( const fault_id &blocked_fault : faults_of_item.obj().get_block_faults() ) {
+            if( f_id == blocked_fault ) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool item::set_fault( const fault_id &f_id, bool force, bool message )
+{
+    if( !force && !can_have_fault( f_id ) ) {
+        return false;
+    }
+
+    // if f_id fault blocks fault A, we should remove fault A before applying fault f_id
+    // can't have chipped blade if the blade is gone
+    for( const fault_id &f_blocked : f_id.obj().get_block_faults() ) {
+        remove_fault( f_blocked );
+    }
+
+    if( message ) {
+        add_msg( m_bad, f_id.obj().message() );
+    }
+
+    faults.insert( f_id );
+    return true;
+}
+
+void item::set_random_fault_of_type( const std::string &fault_type, bool force, bool message )
+{
+    if( force ) {
+        set_fault( random_entry( faults::all_of_type( fault_type ) ), true, message );
+        return;
+    }
+
+    weighted_int_list<fault_id> faults_by_type;
+    for( const weighted_object<int, fault_id> &f : type->faults ) {
+        if( f.obj.obj().type() == fault_type && can_have_fault( f.obj ) ) {
+            faults_by_type.add( f.obj, f.weight );
+        }
+
+    }
+
+    if( !faults_by_type.empty() ) {
+        set_fault( *faults_by_type.pick(), force, message );
+    }
+}
+
+void item::remove_fault( const fault_id &fault_id )
+{
+    faults.erase( fault_id );
+}
+
+void item::remove_single_fault_of_type( const std::string &fault_type )
+{
+    for( const fault_id f : faults ) {
+        if( f.obj().type() == fault_type ) {
+            faults.erase( f );
+            return;
+        }
+    }
 }
 
 item &item::unset_flag( const flag_id &flag )
@@ -7871,15 +7999,30 @@ void item::calc_rot_while_processing( time_duration processing_duration )
     last_temp_check += processing_duration;
 }
 
+bool item::process_decay( Character *carrier, int decay_hours,
+                          time_duration time_delta )
+{
+    if( !has_own_flag( flag_FROZEN ) ) {
+        time_duration decay_countdown = time_duration::from_seconds( item_counter ) + time_delta *
+                                        rng_normal( 0.9, 1.1 );
+        if( decay_countdown >= time_duration::from_hours( decay_hours ) ) {
+            convert( *type->revert_to, carrier );
+            return true;
+        }
+        item_counter = to_seconds<int>( decay_countdown );
+    }
+    return false;
+}
+
 bool item::process_decay_in_air( map &here, Character *carrier, const tripoint_bub_ms &pos,
-                                 int max_air_exposure_hours,
+                                 int decay_hours,
                                  time_duration time_delta )
 {
     if( !has_own_flag( flag_FROZEN ) ) {
         double environment_multiplier = here.is_outside( pos ) ? 2.0 : 1.0;
         time_duration new_air_exposure = time_duration::from_seconds( item_counter ) + time_delta *
                                          rng_normal( 0.9, 1.1 ) * environment_multiplier;
-        if( new_air_exposure >= time_duration::from_hours( max_air_exposure_hours ) ) {
+        if( new_air_exposure >= time_duration::from_hours( decay_hours ) ) {
             convert( *type->revert_to, carrier );
             return true;
         }
@@ -8430,6 +8573,15 @@ const std::map<itype_id, int> &item::composting_results() const
     return is_compostable() ? type->compostable->results : nulresult;
 }
 
+bool item::pulpable() const
+{
+    return is_corpse() && ( corpse->has_flag( mon_flag_REVIVES ) || has_var( "zombie_form" ) ) &&
+           damage() < max_damage() &&
+           !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
+              has_flag( flag_QUARTERED ) ||
+              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) || has_flag( flag_GIBBED ) );
+}
+
 bool item::can_revive() const
 {
     return is_corpse() && ( corpse->has_flag( mon_flag_REVIVES ) || has_var( "zombie_form" ) ) &&
@@ -8826,7 +8978,7 @@ float item::_resist( const damage_type_id &dmg_type, bool to_self, int resist_va
     float resist = 0.0f;
     float mod = get_clothing_mod_val_for_damage_type( dmg_type );
 
-    const float damage_scale = damage_adjusted_armor_resist( 1.0f );
+    const float damage_scale = damage_adjusted_armor_resist( 1.0f, dmg_type );
 
     if( !bp_null ) {
         // If we have armour portion materials for this body part, use that instead
@@ -9087,11 +9239,19 @@ bool item::mod_damage( int qty )
     } else {
         const int dmg_before = damage_;
         const bool destroy = ( damage_ + qty ) > max_damage();
-        set_damage( damage_ + qty );
+        force_set_damage( damage_ + qty );
 
         if( qty > 0 && !destroy ) { // apply automatic degradation
             set_degradation( degradation_ + get_degrade_amount( *this, damage_, dmg_before ) );
         }
+
+        // TODO: think about better way to telling the game what faults should be applied when
+        if( qty > 0 ) {
+            for( int i = 0; i <= qty; i += itype::damage_scale ) {
+                set_random_fault_of_type( "mechanical_damage" );
+            }
+        }
+
         return destroy;
     }
 }
@@ -10082,27 +10242,18 @@ int item::wind_resist() const
 std::set<fault_id> item::faults_potential() const
 {
     std::set<fault_id> res;
-    res.insert( type->faults.begin(), type->faults.end() );
-    return res;
-}
-
-bool item::can_have_fault_type( const std::string &fault_type ) const
-{
-    std::set<fault_id> res;
-    for( const auto &some_fault : type->faults ) {
-        if( some_fault->type() == fault_type ) {
-            return true;
-        }
+    for( const weighted_object<int, fault_id> &fault_pair : type->faults ) {
+        res.insert( fault_pair.obj );
     }
-    return false;
+    return res;
 }
 
 std::set<fault_id> item::faults_potential_of_type( const std::string &fault_type ) const
 {
     std::set<fault_id> res;
-    for( const auto &some_fault : type->faults ) {
-        if( some_fault->type() == fault_type ) {
-            res.emplace( some_fault );
+    for( const weighted_object<int, fault_id> &some_fault : type->faults ) {
+        if( some_fault.obj->type() == fault_type ) {
+            res.emplace( some_fault.obj );
         }
     }
     return res;
@@ -10419,18 +10570,17 @@ ret_val<void> item::can_contain( const item &it, int &copies_remaining, const bo
             const bool ignore_nested_rigidity =
                 !pkt->settings.accepts_item( it ) ||
                 !pkt->get_pocket_data()->get_flag_restrictions().empty() || pkt->is_holster();
+            units::volume remaining_volume = pkt->remaining_volume();
             for( const item *internal_it : pkt->all_items_top() ) {
-                if( parent_it.where() != item_location::type::invalid && internal_it == parent_it.get_item() ) {
-                    continue;
-                }
-                if( !internal_it->is_container() ) {
-                    continue;
-                }
+                const int copies_remaining_before = copies_remaining;
                 auto ret = internal_it->can_contain( it, copies_remaining, true, ignore_nested_rigidity,
                                                      ignore_pkt_settings, ignore_non_container_pocket, parent_it,
-                                                     pkt->remaining_volume() );
+                                                     remaining_volume );
                 if( copies_remaining <= 0 ) {
                     return ret;
+                }
+                if( copies_remaining_before != copies_remaining ) {
+                    remaining_volume = pkt->remaining_volume();
                 }
             }
         }
@@ -12564,7 +12714,14 @@ bool item::use_amount( const itype_id &it, int &quantity, std::list<item> &used,
     // Remember quantity so that we can unseal self
     int old_quantity = quantity;
     std::vector<item *> removed_items;
-    for( item *contained : all_items_ptr( pocket_type::CONTAINER ) ) {
+    const std::list<item *> temp_contained_list = all_items_ptr( pocket_type::CONTAINER );
+    std::list<item *> contained_list;
+    // Reverse the list, as it's created from the top down, but we have to remove items
+    // from the bottom up in order for the references to remain valid until used.
+    for( item *contained : temp_contained_list ) {
+        contained_list.emplace_front( contained );
+    }
+    for( item *contained : contained_list ) {
         if( contained->use_amount_internal( it, quantity, used, filter ) ) {
             removed_items.push_back( contained );
         }
@@ -12605,7 +12762,7 @@ bool item::use_amount_internal( const itype_id &it, int &quantity, std::list<ite
 
 bool item::allow_crafting_component() const
 {
-    if( ( is_toolmod() && is_irremovable() ) || has_flag( flag_PSEUDO ) ) {
+    if( has_flag( flag_PSEUDO ) ) {
         return false;
     }
 
@@ -13040,7 +13197,7 @@ bool item::detonate( const tripoint_bub_ms &p, std::vector<item> &drops )
 }
 bool item::has_rotten_away() const
 {
-    if( is_corpse() && !can_revive() ) {
+    if( is_corpse() && !pulpable() ) {
         return get_rot() > 10_days;
     } else {
         return get_relative_rot() > 2.0;
@@ -13156,7 +13313,8 @@ int item::processing_speed() const
 
     if( active || ethereal || wetness || has_link_data() ||
         has_flag( flag_RADIO_ACTIVATION ) || has_relic_recharge() ||
-        has_fault_flag( flag_BLACKPOWDER_FOULING_DAMAGE ) || get_var( "gun_heat", 0 ) > 0 ) {
+        has_fault_flag( flag_BLACKPOWDER_FOULING_DAMAGE ) || get_var( "gun_heat", 0 ) > 0 ||
+        has_fault( fault_emp_reboot ) ) {
         // Unless otherwise indicated, update every turn.
         return 1;
     }
@@ -13223,11 +13381,11 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
     time_point time = last_temp_check;
     item_internal::scoped_goes_bad_cache _cache( this );
     const bool process_rot = goes_bad() && spoil_modifier != 0;
+    const bool decays = has_flag( flag_DECAYS ) && type->revert_to;
     const bool decays_in_air = !watertight_container && has_flag( flag_DECAYS_IN_AIR ) &&
                                type->revert_to;
-    int64_t max_air_exposure_hours = decays_in_air ? get_property_int64_t( "max_air_exposure_hours" ) :
-                                     0;
-
+    int64_t decay_hours = ( decays || decays_in_air ) ? get_property_int64_t( "decay_hours" ) :
+                          0;
     if( now - time > 1_hours ) {
         // This code is for items that were left out of reality bubble for long time
 
@@ -13291,8 +13449,10 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
             }
             last_temp_check = time;
 
-            if( decays_in_air &&
-                process_decay_in_air( here, carrier, pos, max_air_exposure_hours, time_delta ) ) {
+            if( decays && process_decay( carrier, decay_hours, time_delta ) ) {
+                return false;
+            } else if( decays_in_air &&
+                       process_decay_in_air( here, carrier, pos, decay_hours, time_delta ) ) {
                 return false;
             }
 
@@ -13314,8 +13474,13 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
         calc_temp( temp, insulation, now - time );
         last_temp_check = now;
 
+        if( decays &&
+            process_decay( carrier, decay_hours, now - time ) ) {
+            return false;
+        }
+
         if( decays_in_air &&
-            process_decay_in_air( here, carrier, pos, max_air_exposure_hours, now - time ) ) {
+            process_decay_in_air( here, carrier, pos, decay_hours, now - time ) ) {
             return false;
         }
 
@@ -13610,22 +13775,24 @@ bool item::process_corpse( map &here, Character *carrier, const tripoint_bub_ms 
     if( !ready_to_revive( here, pos ) ) {
         return false;
     }
-    if( carrier == nullptr ) {
-        if( corpse->in_species( species_ROBOT ) ) {
-            add_msg_if_player_sees( pos, m_warning, _( "A nearby robot has repaired itself and stands up!" ) );
+    if( g->revive_corpse( pos, *this ) ) {
+        if( carrier == nullptr ) {
+            if( corpse->in_species( species_ROBOT ) ) {
+                add_msg_if_player_sees( pos, m_warning, _( "A nearby robot has repaired itself and stands up!" ) );
+            } else {
+                add_msg_if_player_sees( pos, m_warning, _( "A nearby corpse rises from the dead!" ) );
+            }
+            return true;
         } else {
-            add_msg_if_player_sees( pos, m_warning, _( "A nearby corpse rises from the dead!" ) );
+            if( corpse->in_species( species_ROBOT ) ) {
+                carrier->add_msg_if_player( m_warning,
+                                            _( "A robot you're carrying has started moving!" ) );
+            } else {
+                carrier->add_msg_if_player( m_warning,
+                                            _( "A corpse you're carrying has started moving!" ) );
+            }
+            return true;
         }
-        return true;
-    } else {
-        if( corpse->in_species( species_ROBOT ) ) {
-            carrier->add_msg_if_player( m_warning,
-                                        _( "A robot you're carrying has started moving!" ) );
-        } else {
-            carrier->add_msg_if_player( m_warning,
-                                        _( "A corpse you're carrying has started moving!" ) );
-        }
-        return true;
     }
     return false;
 }
@@ -13880,7 +14047,7 @@ bool item::has_no_links() const
 
 std::string item::link_name() const
 {
-    return has_flag( flag_CABLE_SPOOL ) ? label( 1 ) : string_format( " %s's cable", label( 1 ) );
+    return has_flag( flag_CABLE_SPOOL ) ? label( 1 ) : string_format( _( " %s's cable" ), label( 1 ) );
 }
 
 ret_val<void> item::link_to( const optional_vpart_position &linked_vp, link_state link_type )
@@ -14163,8 +14330,8 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
                            link().length, link().max_length );
         }
         if( link().length > link().max_length ) {
-            std::string cable_name = is_cable_item ? string_format( "over-extended %s", label( 1 ) ) :
-                                     string_format( "%s's over-extended cable", label( 1 ) );
+            std::string cable_name = is_cable_item ? string_format( _( "over-extended %s" ), label( 1 ) ) :
+                                     string_format( _( "%s's over-extended cable" ), label( 1 ) );
             if( carrier != nullptr ) {
                 carrier->add_msg_if_player( m_bad, _( "Your %s breaks loose!" ), cable_name );
             } else {
@@ -14540,8 +14707,8 @@ bool item::process_gun_cooling( Character *carrier )
                                  overheat_modifier, 5.0 );
     heat -= std::max( ( type->gun->cooling_value * cooling_multiplier ) + cooling_modifier, 0.5 );
     set_var( "gun_heat", std::max( 0.0, heat ) );
-    if( faults.count( fault_overheat_safety ) && heat < threshold * 0.2 ) {
-        faults.erase( fault_overheat_safety );
+    if( has_fault( fault_overheat_safety ) && heat < threshold * 0.2 ) {
+        remove_fault( fault_overheat_safety );
         if( carrier ) {
             carrier->add_msg_if_player( m_good, _( "Your %s beeps as its cooling cycle concludes." ), tname() );
         }
@@ -14633,9 +14800,9 @@ bool item::process_internal( map &here, Character *carrier, const tripoint_bub_m
 
         if( wetness && has_flag( flag_WATER_BREAK ) ) {
             deactivate();
-            set_fault( faults::random_of_type( "wet" ) );
+            set_random_fault_of_type( "wet", true );
             if( has_flag( flag_ELECTRONIC ) ) {
-                set_fault( faults::random_of_type( "shorted" ) );
+                set_random_fault_of_type( "shorted", true );
             }
         }
 
@@ -14735,8 +14902,24 @@ bool item::process_internal( map &here, Character *carrier, const tripoint_bub_m
         if( get_var( "gun_heat", 0 ) > 0 ) {
             return process_gun_cooling( carrier );
         }
+        if( has_fault( fault_emp_reboot ) ) {
+            if( one_in( 60 ) ) {
+                if( !one_in( 20 ) ) {
+                    remove_fault( fault_emp_reboot );
+                    if( carrier ) {
+                        carrier->add_msg_if_player( m_good, _( "Your %s reboots successfully." ), tname() );
+                    }
+                } else {
+                    remove_fault( fault_emp_reboot );
+                    set_random_fault_of_type( "shorted", true );
+                    if( carrier ) {
+                        carrier->add_msg_if_player( m_bad, _( "Your %s fails to reboot properly." ), tname() );
+                    }
+                }
+            }
+            return false;
+        }
     }
-
     return false;
 }
 
@@ -15214,6 +15397,16 @@ skill_id item::contextualize_skill( const skill_id &id ) const
     }
 
     return id;
+}
+
+int item::get_to_hit() const
+{
+    int to_hit = type->m_to_hit;
+    for( const item *mod : gunmods() ) {
+        to_hit += mod->type->gunmod->to_hit_mod;
+    }
+
+    return to_hit;
 }
 
 bool item::is_filthy() const
@@ -15781,8 +15974,11 @@ void item::combine( const item_contents &read_input, bool convert )
 
 bool is_preferred_component( const item &component )
 {
-    return component.is_container_empty() && !component.has_flag( flag_HIDDEN_POISON ) &&
-           !component.has_flag( flag_HIDDEN_HALLU );
+    const float survival = get_player_character().get_greater_skill_or_knowledge_level(
+                               skill_survival );
+    return component.is_container_empty() &&
+           ( survival < 3 || !component.has_flag( flag_HIDDEN_POISON ) ) &&
+           ( survival < 5 || !component.has_flag( flag_HIDDEN_HALLU ) );
 }
 
 disp_mod_by_barrel::disp_mod_by_barrel() = default;

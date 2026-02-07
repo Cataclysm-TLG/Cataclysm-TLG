@@ -1322,6 +1322,10 @@ Runs a query, allowing you to pick specific tile around. When picked, stores coo
 - type: location string or [variable object](##variable-object)
 - return true if the location is in the bounds of a city at or above z-1
 
+### `map_is_outside`
+- type: location string or [variable object](#variable-object)
+- return true if the location is outside. Currently always returns false if the location is outside the reality bubble.
+
 #### Valid talkers:
 
 No talker is needed.
@@ -1337,16 +1341,21 @@ Check the location is in a city.
 },
 ```
 
-Each time the avatar enters an OMT message them whether they're in a city or not.
-```
+Each time the avatar enters an OMT display a message as to whether or not they're in a city.
+```jsonc
   {
     "type": "effect_on_condition",
     "id": "EOC_TEST_IS_IN_CITY",
     "eoc_type": "EVENT",
     "required_event": "avatar_enters_omt",
-    "condition": { "map_in_city": { "mutator": "u_loc_relative", "target": "(0,0,0)" } },
-    "effect": [ { "u_message": "You are in a city OMT.", "type": "good" } ],
-    "false_effect": [ { "u_message": "You are NOT in a city OMT.", "type": "bad" } ]
+    "effect": [
+      { "u_location_variable": { "context_val": "loc" } },
+      {
+        "if": { "map_in_city": { "context_val": "loc" } },
+        "then": { "u_message": "You are in a city OMT.", "type": "good" },
+        "else": { "u_message": "You are NOT in a city OMT.", "type": "bad" }
+      }
+    ]
   },
 ```
 
@@ -4847,6 +4856,48 @@ You activate beta talker / NPC activates alpha talker. One must be a Character a
 Force you consume drug item
 ```json
 { "u_activate": "consume_drug" }
+```
+
+#### `u_set_fault`, `npc_set_fault`
+Applies a fault on item
+
+| Syntax | Optionality | Value  | Info |
+| ------ | ----------- | ------ | ---- | 
+| "u_set_fault" / "npc_set_fault" | **mandatory** | string or [variable object](#variable-object) | id of a fault applied |
+| "force" | optional | bool | if true, the fault is applied onto item even if item do not define it as possible fault. Default false | 
+| "message" | optional | bool | if truem the fault would print a message defined in fault `message` field. Default true | 
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster | Furniture | Item | Vehicle |
+| ------ | --------- | --------- | ---- | ------- | --- | ---- |
+| ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ |
+
+##### Examples
+Beta talker adds `fault_electronic_blown_capacitor` as it's fault
+```jsonc
+{ "npc_set_fault": "fault_electronic_blown_capacitor" }
+```
+
+#### `u_set_random_fault_of_type`, `npc_set_random_fault_of_type`
+Picks a random fault from a type, and applies it onto item
+
+| Syntax | Optionality | Value  | Info |
+| ------ | ----------- | ------ | ---- | 
+| "u_set_random_fault_of_type" / "npc_set_random_fault_of_type" | **mandatory** | string or [variable object](#variable-object) | type of a fault applied |
+| "force" | optional | bool | if true, the fault is applied onto item even if item do not define it as possible fault. Default false | 
+| "message" | optional | bool | if truem the fault would print a message defined in fault `message` field. Default true | 
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster | Furniture | Item | Vehicle |
+| ------ | --------- | --------- | ---- | ------- | --- | ---- |
+| ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ |
+
+##### Examples
+Beta talker adds a random fault from `shorted` type as it's fault
+```jsonc
+{ "npc_set_random_fault_of_type": "shorted" }
 ```
 
 ## Map effects

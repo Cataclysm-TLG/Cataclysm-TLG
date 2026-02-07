@@ -81,14 +81,8 @@ Each entry can have more values (shown above as `...`).  They allow further prop
 
 ```json
 "damage": <number>|<array>,
-"damage-min": <number>,
-"damage-max": <number>,
 "count": <number>|<array>,
-"count-min": <number>,
-"count-max": <number>,
 "charges": <number>|<array>,
-"charges-min": <number>,
-"charges-max": <number>,
 "components": "<array>",
 "contents-item": "<item-id>" (can be a string or an array of strings),
 "contents-group": "<group-id>" (can be a string or an array of strings),
@@ -103,6 +97,7 @@ Each entry can have more values (shown above as `...`).  They allow further prop
 "artifact": <object>
 "event": <string>
 "snippets": <string>
+"faults": <object>
 ```
 
 `contents` is added as contents of the created item.  It is not checked if they can be put into the item.  This allows water, that contains a book, that contains a steel frame, that contains a corpse.
@@ -123,8 +118,6 @@ Each entry can have more values (shown above as `...`).  They allow further prop
 
 `event`: A reference to a holiday in the `holiday` enum. If specified, the entry only spawns during the specified real holiday. This works the same way as the seasonal title screens, where the holiday is checked against the current system's time. If the holiday matches, the item's spawn probability is taken from the `prob` field. Otherwise, the spawn probability becomes 0.
 
-`snippets`: If item uses `snippet_category` instead of description, and snippets contain ids, allow to pick a specific description of an item to spawn; see [JSON_INFO.md#snippets](JSON_INFO.md#snippets)
-
 Current possible values are:
 - "none" (Not event-based. Same as omitting the "event" field.)
 - "new_year"
@@ -134,6 +127,16 @@ Current possible values are:
 - "thanksgiving"
 - "christmas"
 
+`snippets`: If item uses `snippet_category` instead of description, and snippets contain ids, allow to pick a specific description of an item to spawn; see [JSON_INFO.md#snippets](JSON_INFO.md#snippets)
+
+`faults`: If item can have this fault or faults, it would be spawned with it applied. Possible values are:
+  `id`: array of fault id that should be applied, if possible
+  `chance`: chance to apply any of the faults. Default is 100, always apply
+For example:
+```json
+  { "group": "nested_ar10", "prob": 89, "faults": { "id": [ "fault_stovepipe" ], "chance": 50 } },
+```
+
 `artifact`: This object determines that the item or group that is spawned by this entry will become an artifact. Here is an example:
 ```json
 "artifact": { "procgen_id": "cult", "rules": { "power_level": 1000, "max_attributes": 5, "max_negative_power": -2000 } }
@@ -141,13 +144,12 @@ Current possible values are:
 The procgen_id relates directly to a `relic_procgen_data` object's id. The `rules` object has three parts.  The first is `power_level`, which is the target power level of the spawned artifact; an artifact's power level is the sum of the power levels of all the parts.  The second, `max_negative_power`, is the sum of only negative power levels of the parts.  The third, `max_attributes`, is the number of parts.
 
 ```json
-"damage-min": 0,
-"damage-max": 3,
+"damage": [ 0, 3 ],
 "count": 4
 "charges": [ 10, 100 ]
 ```
 
-This will create 4 items; they can have different damage levels as the damage value is rolled separately for each of these items.  Each item has charges (AKA ammo) in the range of 10 to 100 (inclusive); if the item needs a magazine before it can have charges, that will be taken care of for you.  Using an array (which must have 2 entries) for charges/count/damage is equivalent to writing explicit min and max values.  In other words, `"count": [a,b]` is the same as `"count-min": a, "count-max": b`.
+This will create 4 items; they can have different damage levels as the damage value is rolled separately for each of these items.  Each item has charges (AKA ammo) in the range of 10 to 100 (inclusive); if the item needs a magazine before it can have charges, that will be taken care of for you.  Using an array (which must have 2 entries) for charges/count/damage is equivalent to writing explicit min and max values.  In other words, `"count": [a,b]` is `pick a random value between a and b`.
 
 The container is checked and the item is put inside the container, and the charges of the item are capped/increased to match the size of the container.
 
@@ -167,7 +169,7 @@ be specified for guns and magazines in the entries array to use a non-default am
 
   If any item groups are referenced from your item group, then their ammo/magazine chances are ignored, and yours are used instead.
 
-*  Use `charges`, `charges-min`, or `charges-max` in the entries array.  A default magazine will be added for you if needed.
+*  Use `charges` in the entries array.  A default magazine will be added for you if needed.
 
 ## Shortcuts
 

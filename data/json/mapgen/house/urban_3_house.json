@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "om_terrain": [ [ "urban_3_1", "urban_3_2" ] ],
     "type": "mapgen",
     "weight": 250,
@@ -78,7 +77,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": [ [ "urban_3_3", "urban_3_4" ] ],
     "type": "mapgen",
     "weight": 250,
@@ -125,7 +123,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": [ [ "urban_3_5", "urban_3_6" ] ],
     "type": "mapgen",
     "weight": 250,
@@ -162,7 +159,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": [ [ "urban_3_1_basement", "urban_3_2_basement" ] ],
     "type": "mapgen",
     "object": {

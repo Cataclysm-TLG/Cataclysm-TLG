@@ -119,7 +119,7 @@
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Lagomorph Evolution" },
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more lagomorph traits.",
-    "delete": { "cancels": [ "MUTATING_GRADUAL_PISCINE" ] }
+    "delete": { "cancels": [ "MUTATING_GRADUAL_LAGOMORPH" ] }
   },
   {
     "type": "mutation",

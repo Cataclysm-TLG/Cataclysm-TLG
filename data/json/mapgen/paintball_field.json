@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "object": {
       "fill_ter": "t_floor",
       "furniture": {
@@ -85,7 +84,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "paintball_field_roof",
     "object": {
       "fill_ter": "t_tar_flat_roof",
@@ -120,7 +118,6 @@
     }
   },
   {
-    "method": "json",
     "object": {
       "fill_ter": "t_floor",
       "place_item": [
@@ -211,7 +208,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "paintball_field_roof_1",
     "object": {
       "fill_ter": "t_tar_flat_roof",

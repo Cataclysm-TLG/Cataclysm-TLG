@@ -4,7 +4,6 @@
     "om_terrain": "FEMA_re",
     "//": "right edge",
     "weight": 150,
-    "method": "json",
     "object": {
       "fill_ter": "t_dirt",
       "rows": [

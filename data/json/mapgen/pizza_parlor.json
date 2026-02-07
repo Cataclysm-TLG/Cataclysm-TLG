@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_pizza_parlor" ],
     "weight": 1000,
     "object": {
@@ -110,7 +109,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_pizza_parlor_roof",
     "weight": 200,
     "object": {
@@ -163,7 +161,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_pizza_parlor_1" ],
     "weight": 1000,
     "object": {
@@ -269,7 +266,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_pizza_parlor_roof_1",
     "weight": 200,
     "object": {

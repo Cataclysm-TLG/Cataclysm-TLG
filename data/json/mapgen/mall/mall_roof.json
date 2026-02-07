@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "mall_a_3_roof", "mall_a_4_roof", "mall_a_5_roof" ] ],
     "//": "mall_a_4_roof has freight elevators",
     "object": {
@@ -57,7 +56,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "mall_a_10_roof", "mall_a_11_roof", "mall_a_12_roof", "mall_a_13_roof", "mall_a_14_roof" ] ],
     "object": {
       "fill_ter": "t_thconc_floor",
@@ -115,7 +113,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "mall_a_19_roof",
@@ -163,7 +160,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "mall_a_29_roof",
@@ -218,7 +214,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "mall_a_38_roof",
@@ -264,7 +259,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "mall_a_47_roof",
@@ -345,7 +339,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "mall_a_56_roof",
@@ -392,7 +385,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "mall_a_65_roof",

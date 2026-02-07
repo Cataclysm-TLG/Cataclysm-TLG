@@ -132,6 +132,7 @@
       "NAILS",
       "CLAWS",
       "CLAWS_RETRACT",
+      "CLAWS_RETRACT_active",
       "WEBBED",
       "PATCHSKIN1",
       "PATCHSKIN2",
@@ -288,10 +289,7 @@
     "encumbrance": [ [ "torso", 2 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "//": "Should conflict with anything that dramatically alters the torso's shape/internal anatomy or stuffs it full of something else.",
-    "mutation_conflicts": [
-      "FAT",
-      "AMORPHOUS"
-    ]
+    "mutation_conflicts": [ "FAT", "AMORPHOUS" ]
   },
   {
     "id": "bio_batteries",
@@ -1165,7 +1163,16 @@
     "occupied_bodyparts": [ [ "hand_l", 1 ], [ "hand_r", 1 ] ],
     "toggled_pseudo_items": [ "integrated_fingertip_razors" ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_TOGGLED" ],
-    "mutation_conflicts": [ "BENDY3", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE", "NAILS", "CLAWS", "CLAWS_RETRACT" ]
+    "mutation_conflicts": [
+      "BENDY3",
+      "ARM_TENTACLES",
+      "ARM_TENTACLES_4",
+      "CLAWS_TENTACLE",
+      "NAILS",
+      "CLAWS",
+      "CLAWS_RETRACT",
+      "CLAWS_RETRACT_active"
+    ]
   },
   {
     "id": "bio_recycler",

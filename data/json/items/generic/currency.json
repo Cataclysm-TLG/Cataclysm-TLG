@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "FMCNote",
     "name": { "str_sp": "merch" },
@@ -17,7 +17,7 @@
     "material": [ "paper" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "RobofacCoin",
     "name": { "str": "Hub 01 Gold Coin" },
@@ -34,7 +34,7 @@
     "material": [ "gold" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "FlatCoin",
     "name": { "str": "FlatCoin" },
@@ -50,7 +50,7 @@
     "material": [ "copper" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "signed_chit",
     "name": { "str": "chit" },
@@ -66,7 +66,7 @@
     "material": [ "paper" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "icon",
     "name": { "str": "icon" },
@@ -82,7 +82,7 @@
     "material": [ "paper" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "coin_penny",
     "name": { "str": "penny", "str_pl": "pennies" },
@@ -98,7 +98,7 @@
     "use_action": [ "COIN_FLIP" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "coin_nickel",
     "name": { "str": "nickel" },
@@ -114,7 +114,7 @@
     "use_action": [ "COIN_FLIP" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "coin_dime",
     "name": { "str": "dime" },
@@ -130,7 +130,7 @@
     "use_action": [ "COIN_FLIP" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "coin_quarter",
     "name": { "str": "quarter" },
@@ -146,7 +146,7 @@
     "use_action": [ "COIN_FLIP" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "coin_half_dollar",
     "name": { "str": "half-dollar coin" },
@@ -162,7 +162,7 @@
     "use_action": [ "COIN_FLIP" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "coin_dollar",
     "name": { "str": "dollar coin" },
@@ -178,7 +178,7 @@
     "use_action": [ "COIN_FLIP" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "coin_silver",
     "name": { "str": "Silver Eagle coin" },
@@ -194,7 +194,7 @@
     "use_action": [ "COIN_FLIP" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "coin_gold",
     "name": { "str": "American Buffalo coin" },
@@ -211,7 +211,7 @@
   },
   {
     "id": "coin_wrapper",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "name": { "str": "coin wrapper" },
     "description": "A coin wrapper capable of holding between twenty and fifty coins, depending on denomination, in accordance with American Banking Standards.",
@@ -233,7 +233,7 @@
     ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "money_one",
     "name": { "str": "one-dollar bill" },
@@ -249,7 +249,7 @@
     "flags": [ "OLD_CURRENCY", "BANK_NOTE_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_two",
     "name": { "str": "two-dollar bill" },
     "description": "A two-dollar bill, featuring a portrait of Thomas Jefferson.",
@@ -262,7 +262,7 @@
     "flags": [ "OLD_CURRENCY", "BANK_NOTE_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_five",
     "name": { "str": "five-dollar bill" },
     "description": "A five-dollar bill, featuring a portrait of Abraham Lincoln.",
@@ -275,7 +275,7 @@
     "flags": [ "OLD_CURRENCY", "BANK_NOTE_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_ten",
     "name": { "str": "ten-dollar bill" },
     "description": "A ten-dollar bill, featuring a portrait of Alexander Hamilton.",
@@ -288,7 +288,7 @@
     "flags": [ "OLD_CURRENCY", "BANK_NOTE_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_twenty",
     "name": { "str": "twenty-dollar bill" },
     "description": "A twenty-dollar bill, featuring a portrait of Andrew Jackson.",
@@ -301,7 +301,7 @@
     "flags": [ "OLD_CURRENCY", "BANK_NOTE_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_fifty",
     "name": { "str": "fifty-dollar bill" },
     "description": "A fifty-dollar bill, featuring a portrait of Ulysses S Grant.",
@@ -314,7 +314,7 @@
     "flags": [ "OLD_CURRENCY", "BANK_NOTE_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_hundred",
     "name": { "str": "hundred-dollar bill" },
     "description": "A hundred-dollar bill, featuring a portrait of Benjamin Franklin.",
@@ -327,7 +327,7 @@
     "flags": [ "OLD_CURRENCY", "BANK_NOTE_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "money_strap_one",
     "name": { "str": "one-dollar currency strap" },
@@ -344,7 +344,7 @@
     "flags": [ "OLD_CURRENCY", "BANK_NOTE_STRAP_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_strap_two",
     "name": { "str": "two-dollar currency strap" },
     "description": "A hundred two-dollar bills held together by a green currency strap.",
@@ -356,7 +356,7 @@
     "price_postapoc": "0 cent"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_strap_five",
     "name": { "str": "five-dollar currency strap" },
     "description": "A hundred five-dollar bills held together by a red currency strap.",
@@ -368,7 +368,7 @@
     "price_postapoc": "0 cent"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_strap_ten",
     "name": { "str": "ten-dollar currency strap" },
     "description": "A hundred ten-dollar bills held together by a yellow currency strap.",
@@ -380,7 +380,7 @@
     "price_postapoc": "0 cent"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_strap_twenty",
     "name": { "str": "twenty-dollar currency strap" },
     "description": "A hundred twenty-dollar bills held together by a violet currency strap.",
@@ -392,7 +392,7 @@
     "price_postapoc": "0 cent"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_strap_fifty",
     "name": { "str": "fifty-dollar currency strap" },
     "description": "A hundred fifty-dollar bills held together by a brown currency strap.",
@@ -404,7 +404,7 @@
     "price_postapoc": "1 USD"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_strap_hundred",
     "name": { "str": "hundred-dollar currency strap" },
     "description": "A hundred hundred-dollar bills held together by a mustard currency strap.",
@@ -416,7 +416,7 @@
     "price_postapoc": "1 USD"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_strap_FMCNote",
     "name": { "str": "merch currency strap" },
     "description": "A hundred Free Merchant Certified Notes held together by an improvised currency strap.  This can be exchanged for food, water, and other services through the Free Merchants at the Refugee Center.",
@@ -430,7 +430,7 @@
     "flags": [ "BANK_NOTE_STRAP_SHAPED", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "money_bundle_one",
     "name": { "str": "one-dollar currency bundle" },
@@ -447,7 +447,7 @@
     "flags": [ "OLD_CURRENCY", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_bundle_two",
     "name": { "str": "two-dollar currency bundle" },
     "description": "A thousand two-dollar bills, divided evenly between ten green currency straps, and bundled together with rubber bands.",
@@ -459,7 +459,7 @@
     "price_postapoc": "0 cent"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_bundle_five",
     "name": { "str": "five-dollar currency bundle" },
     "description": "A thousand five-dollar bills, divided evenly between ten red currency straps, and bundled together with rubber bands.",
@@ -471,7 +471,7 @@
     "price_postapoc": "0 cent"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_bundle_ten",
     "name": { "str": "ten-dollar currency bundle" },
     "description": "A thousand ten-dollar bills, divided evenly between ten yellow currency straps, and bundled together with rubber bands.",
@@ -483,7 +483,7 @@
     "price_postapoc": "0 cent"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_bundle_twenty",
     "name": { "str": "twenty-dollar currency bundle" },
     "description": "A thousand twenty-dollar bills, divided evenly between ten violet currency straps, and bundled together with rubber bands.",
@@ -495,7 +495,7 @@
     "price_postapoc": "0 cent"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_bundle_fifty",
     "name": { "str": "fifty-dollar currency bundle" },
     "description": "A thousand fifty-dollar bills, divided evenly between ten brown currency straps, and bundled together with rubber bands.",
@@ -507,7 +507,7 @@
     "price_postapoc": "10 USD"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_bundle_hundred",
     "name": { "str": "hundred-dollar currency bundle" },
     "description": "A thousand hundred-dollar bills, divided evenly between ten mustard currency straps, and bundled together with rubber bands.",
@@ -519,7 +519,7 @@
     "price_postapoc": "10 USD"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "money_bundle_FMCNote",
     "name": { "str": "merch currency bundle" },
     "description": "A thousand Free Merchant Certified Notes, divided evenly between ten improvised currency straps, and bundled together with rubber bands.  This can be exchanged for food, water, and other services through the Free Merchants at the Refugee Center.",
@@ -532,7 +532,7 @@
     "volume": "1129 ml"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "currency",
     "id": "tacoma_drink_token",
     "name": { "str": "Tacoma drink token" },

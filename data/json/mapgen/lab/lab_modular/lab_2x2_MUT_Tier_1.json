@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "om_terrain": [ "lab_2x2_MUT_tier_1_NW" ],
     "type": "mapgen",
     "weight": 200,
@@ -64,7 +63,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": [ "lab_2x2_MUT_tier_1_NE" ],
     "type": "mapgen",
     "weight": 200,
@@ -129,7 +127,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": [ "lab_2x2_MUT_tier_1_SW" ],
     "type": "mapgen",
     "weight": 200,
@@ -198,7 +195,6 @@
     }
   },
   {
-    "method": "json",
     "om_terrain": [ "lab_2x2_MUT_tier_1_SE" ],
     "type": "mapgen",
     "weight": 200,

@@ -153,11 +153,6 @@ class Item_spawn_data
          */
         virtual std::size_t create( ItemList &list, const time_point &birthday, RecursionList &rec,
                                     spawn_flags = spawn_flags::none ) const = 0;
-        /**
-        * Instead of calculating at run-time, give a step to finalize those item_groups that has count-min but not count-max.
-        * The reason is
-        */
-        virtual void finalize( const itype_id & ) = 0;
         std::size_t create( ItemList &list, const time_point &birthday,
                             spawn_flags = spawn_flags::none ) const;
         /**
@@ -187,7 +182,7 @@ class Item_spawn_data
         }
 
         int get_probability( bool skip_event_check ) const;
-        void set_probablility( int prob ) {
+        void set_probability( int prob ) {
             probability = prob;
         }
         bool is_event_based() const {
@@ -283,6 +278,11 @@ class Item_modifier
         std::string variant;
 
         /**
+        * add this faults to item, if possible
+        */
+        std::vector<std::pair<fault_id, int>> faults;
+
+        /**
          * Custom sub set of snippets to be randomly chosen from and then applied to the item.
          */
         std::vector<snippet_id> snippets;
@@ -340,7 +340,6 @@ class Single_item_creator : public Item_spawn_data
 
         std::size_t create( ItemList &list, const time_point &birthday, RecursionList &rec,
                             spawn_flags ) const override;
-        void finalize( const itype_id &container = itype_id::NULL_ID() ) override;
         item create_single( const time_point &birthday, RecursionList &rec ) const override;
         item create_single_without_container( const time_point &birthday, RecursionList &rec ) const;
         void check_consistency( bool actually_spawn ) const override;
@@ -389,7 +388,6 @@ class Item_group : public Item_spawn_data
          * a Single_item_creator or Item_group to @ref items.
          */
         void add_entry( std::unique_ptr<Item_spawn_data> ptr );
-        void finalize( const itype_id &container = itype_id::NULL_ID() )override;
         std::size_t create( ItemList &list, const time_point &birthday, RecursionList &rec,
                             spawn_flags ) const override;
         item create_single( const time_point &birthday, RecursionList &rec ) const override;

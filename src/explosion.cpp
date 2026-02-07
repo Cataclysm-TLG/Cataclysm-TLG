@@ -29,7 +29,6 @@
 #include "damage.h"
 #include "debug.h"
 #include "enums.h"
-#include "fault.h"
 #include "field_type.h"
 #include "flag.h"
 #include "flexbuffer_json-inl.h"
@@ -63,7 +62,6 @@
 #include "trap.h"
 #include "type_id.h"
 #include "units.h"
-#include "value_ptr.h"
 #include "vehicle.h"
 #include "vpart_position.h"
 
@@ -80,6 +78,7 @@ static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_teleglow( "teleglow" );
 
 static const flag_id json_flag_ACTIVATE_ON_PLACE( "ACTIVATE_ON_PLACE" );
+static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 
 static const furn_str_id furn_f_machinery_electronic( "f_machinery_electronic" );
 
@@ -407,9 +406,18 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
 
         Character *pl = critter->as_character();
         if( pl == nullptr ) {
+            add_msg_debug(
+                debugmode::DF_EXPLOSION,
+                "EXP dist_map=%.2f force=%.3f",
+                dist_map.at( pt ),
+                force
+            );
             const double dmg = std::max( force - critter->get_armor_type( damage_bash,
                                          bodypart_id( "torso" ) ) / 2.0, 0.0 );
-            const int actual_dmg = std::max( 0.0, rng_float( ( -dmg * 0.5 ) / critter->ranged_target_size(),
+            /* 0.25 here is a magic number that gives us a decent chance to simply not take damage.
+               Explosions are highly unpredictable and it's not uncommon for people to be miraculously
+               unscathed, even very close to a blast. */
+            const int actual_dmg = std::max( 0.0, rng_float( ( -dmg * 0.25 ) / critter->ranged_target_size(),
                                              dmg * 3 ) );
             critter->apply_damage( mutable_source, bodypart_id( "torso" ), actual_dmg );
             critter->check_dead_state( m );
@@ -442,6 +450,12 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         };
 
         for( const blastable_part &blp : blast_parts ) {
+            add_msg_debug(
+                debugmode::DF_EXPLOSION,
+                "EXP dist_map=%.2f force=%.3f",
+                dist_map.at( pt ),
+                force
+            );
             const int part_dam = rng( force * blp.low_mul, force * blp.high_mul );
             const std::string hit_part_name = body_part_name_accusative( blp.bp );
             // FIXME: Hardcoded damage type
@@ -581,8 +595,7 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
                                "Shrapnel hit %s at %d m/s at a distance of %d",
                                critter->disp_name(),
                                frag.proj.speed,
-                               static_cast<int>( std::round(
-                                                     trig_dist_z_adjust( src, target ) ) ) );
+                               trig_dist( src, target ) );
                 add_msg_debug( debugmode::DF_EXPLOSION,
                                "Shrapnel dealt %d damage", frag.dealt_dam.total_damage() );
 
@@ -676,9 +689,10 @@ void _make_explosion( map *m, const Creature *source, const tripoint_bub_ms &p,
     if( ex.distance_factor >= 1.0f ) {
         debugmsg( "called game::explosion with factor >= 1.0 (infinite size)" );
     } else if( ex.distance_factor > 0.0f && ex.power > 0.0f ) {
-        // Power rescaled to mean grams of TNT equivalent, this scales it roughly back to where
-        // it was before until we re-do blasting power to be based on TNT-equivalent directly.
-        do_blast( m, source, p, ex.power / 15.0, ex.distance_factor, ex.fire );
+        /* Power in json is grams of TNT equivalent. Here we divide it by eight
+           to get a reasonable damage result from pure blast (not shrapnel) with
+           that in mind. */
+        do_blast( m, source, p, ex.power / 8.0, ex.distance_factor, ex.fire );
     }
 
     const shrapnel_data &shr = ex.shrapnel;
@@ -714,7 +728,7 @@ void flashbang( const tripoint_bub_ms &p, bool player_immune )
 {
     draw_explosion( p, 8, c_white );
     Character &player_character = get_player_character();
-    int dist = static_cast<int>( std::round( trig_dist_z_adjust( player_character.pos_bub(), p ) ) );
+    int dist = trig_dist( player_character.pos_bub(), p );
     map &here = get_map();
     if( dist <= 8 && !player_immune ) {
         if( !player_character.has_flag( STATIC( json_character_flag( "IMMUNE_HEARING_DAMAGE" ) ) ) ) {
@@ -743,7 +757,7 @@ void flashbang( const tripoint_bub_ms &p, bool player_immune )
             continue;
         }
         // TODO: can the following code be called for all types of creatures
-        dist = static_cast<int>( std::round( trig_dist_z_adjust( critter.pos_bub(), p ) ) );
+        dist = trig_dist( critter.pos_bub(), p );
         if( dist <= 8 ) {
             if( dist <= 4 ) {
                 critter.add_effect( effect_stunned, time_duration::from_turns( 10 - dist ) );
@@ -772,7 +786,7 @@ void shockwave( const tripoint_bub_ms &p, int radius, int force, int stun, int d
         if( critter.posz() != p.z() ) {
             continue;
         }
-        if( static_cast<int>( std::round( trig_dist_z_adjust( critter.pos_bub(), p ) <= radius ) ) ) {
+        if( trig_dist( critter.pos_bub(), p ) <= radius ) {
             add_msg( _( "%s is caught in the shockwave!" ), critter.name() );
             g->knockback( p, critter.pos_bub(), force, stun, dam_mult );
         }
@@ -782,14 +796,14 @@ void shockwave( const tripoint_bub_ms &p, int radius, int force, int stun, int d
         if( guy.posz() != p.z() ) {
             continue;
         }
-        if( static_cast<int>( std::round( trig_dist_z_adjust( guy.pos_bub(), p ) ) ) <= radius ) {
+        if( trig_dist( guy.pos_bub(), p ) <= radius ) {
             add_msg( _( "%s is caught in the shockwave!" ), guy.get_name() );
             g->knockback( p, guy.pos_bub(), force, stun, dam_mult );
         }
     }
     Character &player_character = get_player_character();
-    if( static_cast<int>( std::round( trig_dist_z_adjust( player_character.pos_bub(),
-                                      p ) ) ) <= radius && !ignore_player &&
+    if( trig_dist( player_character.pos_bub(),
+                   p ) <= radius && !ignore_player &&
         ( !player_character.has_trait( trait_LEG_TENT_BRACE ) ||
           !player_character.is_barefoot() ) ) {
         add_msg( m_bad, _( "You're caught in the shockwave!" ) );
@@ -932,24 +946,35 @@ void emp_blast( const tripoint_bub_ms &p )
         for( item_location &it : player_character.all_items_loc() ) {
             // Render any electronic stuff in player's possession non-functional
             if( it->has_flag( flag_ELECTRONIC ) && !it->is_broken() &&
-                get_option<bool>( "EMP_DISABLE_ELECTRONICS" ) &&
                 !player_character.has_flag( json_flag_EMP_IMMUNE ) ) {
-                add_msg( m_bad, _( "The EMP blast fries your %s!" ), it->tname() );
+                add_msg( m_bad, _( "The electromagnetic pulse fries your %s!" ), it->tname() );
                 it->deactivate();
-                it->faults.insert( faults::random_of_type( "shorted" ) );
+                item &electronic_item = *it.get_item();
+                // Items in inventory might be shielded by even thin clothing, so slightly lower chance.
+                if( one_in( 5 ) ) {
+                    electronic_item.set_random_fault_of_type( "shorted" );
+                } else {
+                    electronic_item.set_fault( fault_emp_reboot );
+                }
             }
         }
     }
 
     for( item &it : here.i_at( p ) ) {
         // Render any electronic stuff on the ground non-functional
-        if( it.has_flag( flag_ELECTRONIC ) && !it.is_broken() &&
-            get_option<bool>( "EMP_DISABLE_ELECTRONICS" ) ) {
+        if( it.has_flag( flag_ELECTRONIC ) && !it.is_broken() ) {
             if( sight ) {
-                add_msg( _( "The EMP blast fries the %s!" ), it.tname() );
+                add_msg( _( "The electromagnetic pulse fries the %s!" ), it.tname() );
             }
             it.deactivate();
-            it.set_fault( faults::random_of_type( "shorted" ) );
+            if( one_in( 4 ) ) {
+                it.set_random_fault_of_type( "shorted", true, false );
+            } else {
+                it.set_fault( fault_emp_reboot, true, false );
+            }
+            // map::make_active adds the item to the active item processing list, so that it can reboot without further interaction.
+            item_location loc = item_location( map_cursor( p ), &it );
+            here.make_active( loc );
         }
     }
     // TODO: Drain NPC energy reserves

@@ -1,7 +1,8 @@
 [
   {
     "id": "2byarm_guard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "2-by-arm guards", "str_pl": "pairs of 2-by-arm guards" },
     "description": "A pair of improvised arm guards made from broken pieces of a plank that are tied to your arms with rags and string.  They offer good protection, but are really uncomfortable to wear.",
@@ -16,7 +17,6 @@
     "color": "brown",
     "warmth": 5,
     "material_thickness": 3,
-    "techniques": [ "WBLOCK_1" ],
     "flags": [ "OUTER", "WATER_FRIENDLY" ],
     "armor": [
       {
@@ -31,7 +31,8 @@
   },
   {
     "id": "carpet_arm_guards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "carpet arm guards", "str_pl": "pairs of carpet arm guards" },
     "description": "Small squares of carpet rolled around your upper and lower arms.  Armor of the truly desperate or crafty.",
@@ -64,7 +65,8 @@
   },
   {
     "id": "carpet_bracers",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "carpet bracers", "str_pl": "pairs of carpet bracers" },
     "description": "Small squares of carpet rolled around your lower arms.  The bare minimum to hopefully stop a bite or two.",
@@ -97,7 +99,8 @@
   },
   {
     "id": "armguard_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chitin arm guards", "str_pl": "pairs of chitin arm guards" },
     "description": "A pair of arm guards made from the exoskeletons of insects.  Light and durable.",
@@ -128,14 +131,16 @@
   {
     "id": "xl_armguard_chitin",
     "copy-from": "armguard_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "chitin arm guards", "str_pl": "pairs of chitin arm guards" },
     "proportional": { "weight": 1.25, "volume": 1.23 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "xs_armguard_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "armguard_chitin",
     "name": { "str": "chitin arm guards", "str_pl": "pairs of chitin arm guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -144,7 +149,8 @@
   {
     "id": "armguard_acidchitin",
     "copy-from": "armguard_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "price_postapoc": "12 USD 50 cent",
     "name": { "str": "biosilicified chitin arm guards", "str_pl": "pairs of biosilicified chitin arm guards" },
     "description": "A pair of arm guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
@@ -163,14 +169,16 @@
   {
     "id": "xl_armguard_acidchitin",
     "copy-from": "armguard_acidchitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin arm guards", "str_pl": "pairs of biosilicified chitin arm guards" },
     "proportional": { "weight": 1.25, "volume": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "xs_armguard_acidchitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "armguard_acidchitin",
     "name": { "str": "biosilicified chitin arm guards", "str_pl": "pairs of biosilicified chitin arm guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -178,7 +186,8 @@
   },
   {
     "id": "cloth_arms_padded",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "cloth-padded sleeves", "str_pl": "pairs of cloth-padded sleeves" },
     "description": "The sleeves of a thick shirt, with a bunch of cloth sewn in to act as extra padding.",
@@ -209,7 +218,8 @@
   },
   {
     "id": "armguard_hard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "hard arm guards", "str_pl": "pairs of hard arm guards" },
     "description": "A pair of neoprene arm sleeves covered with molded plastic sheaths.",
@@ -263,7 +273,8 @@
   },
   {
     "id": "xl_armguard_hard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "hard arm guards", "str_pl": "pairs of hard arm guards" },
     "weight": "550 g",
     "volume": "4 L",
@@ -272,7 +283,8 @@
   },
   {
     "id": "xs_armguard_hard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "armguard_hard",
     "name": { "str": "hard arm guards", "str_pl": "pairs of hard arm guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -280,7 +292,8 @@
   },
   {
     "id": "leather_arm_guards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather arm guards", "str_pl": "pairs of leather arm guards" },
     "description": "A set of tough leather braces and poleyns that provide protection against blades and teeth alike.",
@@ -308,7 +321,8 @@
   },
   {
     "id": "leather_arm_guards_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather arm guards", "str_pl": "pairs of leather arm guards" },
     "copy-from": "leather_arm_guards",
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -316,7 +330,8 @@
   },
   {
     "id": "leather_arm_guards_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "leather_arm_guards",
     "name": { "str": "leather arm guards", "str_pl": "pairs of leather arm guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -324,7 +339,8 @@
   },
   {
     "id": "paper_vambraces",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "paper vambraces", "str_pl": "pairs of paper vambraces" },
     "description": "Bracers made of stacked sheets of paper held together with duct tape.",
@@ -352,7 +368,8 @@
   },
   {
     "id": "tire_bracers",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tire bracers", "str_pl": "pairs of tire bracers" },
     "description": "Improvised forearm guards made of thick chunks of tire held together with duct tape.",
@@ -381,7 +398,8 @@
   },
   {
     "id": "tire_bracers_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "XL tire bracers", "str_pl": "pairs of XL tire bracers" },
     "copy-from": "tire_bracers",
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -389,7 +407,8 @@
   },
   {
     "id": "tire_bracers_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_bracers",
     "name": { "str": "XS tire bracers", "str_pl": "pairs of XS tire bracers" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -397,7 +416,8 @@
   },
   {
     "id": "sheet_metal_bracers",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sheet metal bracers", "str_pl": "pairs of sheet metal bracers" },
     "description": "Leather bracers with sheet metal affixed over them, perfect for a metal concert at the end of the world.",
@@ -429,7 +449,8 @@
   },
   {
     "id": "sheet_metal_bracers_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "sheet metal bracers", "str_pl": "pairs of sheet metal bracers" },
     "copy-from": "sheet_metal_bracers",
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -437,7 +458,8 @@
   },
   {
     "id": "sheet_metal_bracers_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "sheet_metal_bracers",
     "name": { "str": "sheet metal bracers", "str_pl": "pairs of sheet metal bracers" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -445,7 +467,8 @@
   },
   {
     "id": "tire_arm_guards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tire arm guards", "str_pl": "pairs of tire arm guards" },
     "description": "A pair of arm guards made from thick chunks of tire secured by simple strings; the loose collection of rubber plates provides decent but not the most convenient protection.",
@@ -474,7 +497,8 @@
   },
   {
     "id": "tire_arm_guards_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_arm_guards",
     "name": { "str": "tire arm guards", "str_pl": "pairs of tire arm guards" },
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -482,7 +506,8 @@
   },
   {
     "id": "tire_arm_guards_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_arm_guards",
     "name": { "str": "tire arm guards", "str_pl": "pairs of tire arm guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -490,7 +515,8 @@
   },
   {
     "id": "armguard_soft",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "neoprene arm sleeves", "str_pl": "pairs of neoprene arm sleeves" },
     "description": "A pair of soft neoprene arm sleeves.  Often used in contact sports.",
@@ -499,7 +525,7 @@
     "price": "12 USD",
     "price_postapoc": "5 USD",
     "to_hit": 1,
-    "material": [ "neoprene", "cotton" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "arm_warmers",
     "color": "light_red",
@@ -509,6 +535,10 @@
     "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
     "armor": [
       {
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ],
         "covers": [ "arm_l", "arm_r" ],
         "encumbrance": 5,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
@@ -520,7 +550,8 @@
   },
   {
     "id": "xl_armguard_soft",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "neoprene arm sleeves", "str_pl": "pairs of neoprene arm sleeves" },
     "weight": "330 g",
     "volume": "1750 ml",
@@ -529,7 +560,8 @@
   },
   {
     "id": "xs_armguard_soft",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "armguard_soft",
     "name": { "str": "neoprene arm sleeves", "str_pl": "pairs of neoprene arm sleeves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -537,7 +569,8 @@
   },
   {
     "id": "gambeson_sleeve",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "quilted sleeves", "str_pl": "pairs of quilted sleeves" },
     "description": "Medieval cloth armor for the arms consisting of a pair of quilted sleeves stuffed with batting.  Adjustable ties along their length allow them to be worn under or over other gear.  Activate to change thier fit.",
@@ -574,7 +607,8 @@
   },
   {
     "id": "gambeson_sleeve_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "gambeson sleeves", "str_pl": "pairs of gambeson sleeves" },
     "copy-from": "gambeson_sleeve",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -588,7 +622,8 @@
   },
   {
     "id": "gambeson_sleeve_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "gambeson sleeves", "str_pl": "pairs of gambeson sleeves" },
     "copy-from": "gambeson_sleeve",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -602,7 +637,8 @@
   },
   {
     "id": "gambeson_sleeve_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "quilted sleeves", "str_pl": "pairs of quilted sleeves" },
     "description": "Medieval cloth armor for the arms consisting of a pair of quilted sleeves stuffed with batting.  Adjustable ties along their length allow them to be worn under or over other gear.  Activate to change thier fit.",
@@ -639,7 +675,8 @@
   },
   {
     "id": "gambeson_sleeve_xl_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "quilted sleeves (loose)", "str_pl": "pairs of quilted sleeves (loose)" },
     "copy-from": "gambeson_sleeve",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -653,7 +690,8 @@
   },
   {
     "id": "gambeson_sleeve_xs_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "quilted sleeves (loose)", "str_pl": "pairs of quilted sleeves (loose)" },
     "copy-from": "gambeson_sleeve",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -667,7 +705,8 @@
   },
   {
     "id": "chainmail_sleeves",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
     "description": "Protective sleeves made of interlocking links of steel wire.  The fit can be adjusted to allow them to serve as outerwear.",
@@ -723,7 +762,8 @@
   },
   {
     "id": "chainmail_sleeves_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_sleeves",
     "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -737,7 +777,8 @@
   },
   {
     "id": "chainmail_sleeves_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_sleeves",
     "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -751,7 +792,8 @@
   },
   {
     "id": "chainmail_junk_sleeves",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_sleeves",
     "replace_materials": { "steel_chain": "budget_steel_chain" },
     "description": "Protective sleeves made of interlocking links of low-quality steel wire.  The fit can be adjusted to allow them to serve as outerwear.",
@@ -766,7 +808,8 @@
   },
   {
     "id": "chainmail_sleeves_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_sleeves",
     "name": { "str": "chainmail sleeves (loose)", "str_pl": "pairs of chainmail sleeves (loose)" },
     "description": "Protective sleeves made of interlocking links of steel wire.  The fit can be adjusted to fit closer to the body.",
@@ -781,7 +824,8 @@
   },
   {
     "id": "chainmail_sleeves_loose_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_sleeves_xs",
     "name": { "str": "XS chainmail sleeves (loose)", "str_pl": "pairs of XS chainmail sleeves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -796,7 +840,8 @@
   },
   {
     "id": "chainmail_sleeves_loose_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_sleeves_xl",
     "name": { "str": "chainmail sleeves (loose)", "str_pl": "pairs of chainmail sleeves (loose)" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -811,7 +856,8 @@
   },
   {
     "id": "chainmail_junk_sleeves_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_junk_sleeves",
     "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
     "use_action": {
@@ -825,16 +871,17 @@
   },
   {
     "id": "elbow_pads",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "elbow pads", "str_pl": "pairs of elbow pads" },
-    "description": "A pair of elbow pads made of stout plastic and cloth.",
+    "description": "A pair of elbow pads made of stout plastic and spandex.",
     "weight": "110 g",
     "volume": "750 ml",
     "price": "35 USD",
     "price_postapoc": "2 USD 50 cent",
     "to_hit": 1,
-    "material": [ "plastic", "nylon" ],
+    "material": [ "plastic", "spandex" ],
     "symbol": "[",
     "looks_like": "armguard_hard",
     "color": "dark_gray",
@@ -844,7 +891,7 @@
       {
         "material": [
           { "type": "plastic", "covered_by_mat": 60, "thickness": 4 },
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1 }
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_elbow_l", "arm_elbow_r" ],
@@ -857,7 +904,8 @@
   },
   {
     "id": "bronze_vambraces",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "bronze vambraces", "str_pl": "pairs of bronze vambraces" },
     "description": "A pair of bronze bracers with a simple leather lining.",
@@ -886,7 +934,8 @@
   },
   {
     "id": "bronze_vambraces_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "bronze_vambraces",
     "name": { "str": "bronze vambraces", "str_pl": "pairs of bronze vambraces" },
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -894,7 +943,8 @@
   },
   {
     "id": "bronze_vambraces_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "bronze_vambraces",
     "name": { "str": "bronze vambraces", "str_pl": "pairs of bronze vambraces" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -902,7 +952,8 @@
   },
   {
     "id": "leather_vambraces",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather vambraces", "str_pl": "pairs of leather vambraces" },
     "description": "A pair of light leather bracers, often used in archery.",
@@ -931,7 +982,8 @@
   },
   {
     "id": "leather_vambraces_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather vambraces", "str_pl": "pairs of leather vambraces" },
     "weight": "531 g",
     "volume": "1250 ml",
@@ -940,7 +992,8 @@
   },
   {
     "id": "leather_vambraces_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "leather_vambraces",
     "name": { "str": "leather vambraces", "str_pl": "pairs of leather vambraces" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -948,7 +1001,8 @@
   },
   {
     "id": "armguard_cut_resistant",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "cut-resistant arm sleeves", "str_pl": "pairs of cut-resistant arm sleeves" },
     "description": "A long pair of cut-resistant Kevlar sleeves with thumbholes.  These were often used by loggers and landscapers for protection from thorns and chainsaw accidents.",
     "weight": "450 g",
@@ -958,7 +1012,8 @@
   },
   {
     "id": "platemail_arm_guards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate arm guards", "str_pl": "pairs of plate arm guards" },
     "description": "Overlapping steel plates which strap to the upper and lower arms.  They don't cover the shoulders.",
@@ -992,7 +1047,8 @@
   },
   {
     "id": "platemail_arm_guards_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "plate arm guards", "str_pl": "pairs of plate arm guards" },
     "copy-from": "platemail_arm_guards",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1000,7 +1056,8 @@
   },
   {
     "id": "platemail_arm_guards_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "plate arm guards", "str_pl": "pairs of plate arm guards" },
     "copy-from": "platemail_arm_guards",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -1008,7 +1065,8 @@
   },
   {
     "id": "platemail_pauldrons",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate pauldrons", "str_pl": "pairs of plate pauldrons" },
     "description": "Domed steel plates that strap down over the shoulders, offering solid protection at the cost of mobility.",
@@ -1039,7 +1097,8 @@
   },
   {
     "id": "platemail_pauldrons_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "plate pauldrons", "str_pl": "pairs of plate pauldrons" },
     "copy-from": "platemail_pauldrons",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1047,7 +1106,8 @@
   },
   {
     "id": "platemail_pauldrons_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "plate pauldrons", "str_pl": "pairs of plate pauldrons" },
     "copy-from": "platemail_pauldrons",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -1055,7 +1115,8 @@
   },
   {
     "id": "leather_pauldrons",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather pauldrons", "str_pl": "pairs of leather pauldrons" },
     "description": "Shoulder guards made of thick leather.  They're a little restrictive, but provide important protection.",
@@ -1086,7 +1147,8 @@
   },
   {
     "id": "leather_pauldrons_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather pauldrons", "str_pl": "pairs of leather pauldrons" },
     "copy-from": "leather_pauldrons",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1094,7 +1156,8 @@
   },
   {
     "id": "leather_pauldrons_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather pauldrons", "str_pl": "pairs of leather pauldrons" },
     "copy-from": "leather_pauldrons",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -1102,7 +1165,8 @@
   },
   {
     "id": "armor_riot_arm",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "riot bracers", "str_pl": "pairs of riot bracers" },
     "description": "Hard forearm guards used by riot police.",

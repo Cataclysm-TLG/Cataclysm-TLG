@@ -191,6 +191,8 @@ class tileset
         std::vector<texture> shadow_tile_values;
         std::vector<texture> night_tile_values;
         std::vector<texture> overexposed_tile_values;
+        std::vector<texture> underwater_tile_values;
+        std::vector<texture> underwater_dark_tile_values;
         std::vector<texture> memory_tile_values;
 
         std::unordered_set<std::string> duplicate_ids;
@@ -254,6 +256,12 @@ class tileset
         }
         const texture *get_overexposed_tile( const size_t index ) const {
             return get_if_available( index, overexposed_tile_values );
+        }
+        const texture *get_underwater_tile( const size_t index ) const {
+            return get_if_available( index, underwater_tile_values );
+        }
+        const texture *get_underwater_dark_tile( const size_t index ) const {
+            return get_if_available( index, underwater_dark_tile_values );
         }
         const texture *get_memory_tile( const size_t index ) const {
             return get_if_available( index, memory_tile_values );
@@ -484,52 +492,52 @@ class cata_tiles
 
         bool draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll,
-                                  bool apply_night_vision_goggles );
+                                  bool apply_visual_effects );
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                   const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_night_vision_goggles );
+                                  lit_level ll, bool apply_visual_effects );
 
         // TODO: DDA removed this one, find out why. See DDA 78815
         bool draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll,
-                                  bool apply_night_vision_goggles, int &height_3d );
+                                  bool apply_visual_effects, int &height_3d );
 
 
         // used by sdltiles for overmap drawing.
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                   const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
                                   lit_level ll,
-                                  bool apply_night_vision_goggles, int &height_3d, float scale_x, float scale_y );
+                                  bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
 
 
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                   const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_night_vision_goggles, int &height_3d, float scale_x, float scale_y );
+                                  lit_level ll, bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                   const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_night_vision_goggles, int &height_3d, int intensity_level );
+                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level );
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                   const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_night_vision_goggles, int &height_3d, int intensity_level,
+                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level,
                                   const std::string &variant );
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                   const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_night_vision_goggles, int &height_3d, int intensity_level,
+                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level,
                                   const std::string &variant, const point &offset );
         bool draw_from_id_string_internal( const std::string &id, const tripoint_bub_ms &pos, int subtile,
                                            int rota,
-                                           lit_level ll, int retract, bool apply_night_vision_goggles, int &height_3d );
+                                           lit_level ll, int retract, bool apply_visual_effects, int &height_3d );
         bool draw_from_id_string_internal( const std::string &id, TILE_CATEGORY category,
                                            const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                           lit_level ll, int retract, bool apply_night_vision_goggles, int &height_3d, int intensity_level,
+                                           lit_level ll, int retract, bool apply_visual_effects, int &height_3d, int intensity_level,
                                            const std::string &variant, const point &offset, float scale_x, float scale_y );
         bool draw_sprite_at(
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
-            bool apply_night_vision_goggles, int retract, int &height_3d, const point &offset,
+            bool apply_visual_effects, int retract, int &height_3d, const point &offset,
             float scale_x, float scale_y );
         bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
-                           lit_level ll, bool apply_night_vision_goggles, int retract, int &height_3d,
+                           lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
                            const point &offset,
                            float scale_x, float scale_y );
 

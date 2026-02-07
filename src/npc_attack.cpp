@@ -175,6 +175,10 @@ npc_attack_rating npc_attack_spell::evaluate_tripoint(
     const npc &source, const Creature *target, const tripoint_bub_ms &location ) const
 {
     const map &here = get_map();
+    if( !here.inbounds( source.pos_bub() ) ) {
+        return npc_attack_rating( std::nullopt, location );
+    }
+
 
     const spell &attack_spell = source.magic->get_spell( attack_spell_id );
 
@@ -200,8 +204,8 @@ npc_attack_rating npc_attack_spell::evaluate_tripoint(
         if( source.sees( here, *critter ) ) {
             damage = attack_spell.dps( source, *critter );
         }
-        const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( source.pos_bub(),
-                                   potential_target ) ) );
+        const int distance_to_me = trig_dist( source.pos_bub(),
+                                              potential_target );
         const bool friendly_fire = att == Creature::Attitude::FRIENDLY &&
                                    !source.rules.has_flag( ally_rule::avoid_friendly_fire );
         int attitude_mult = 3;
@@ -214,8 +218,13 @@ npc_attack_rating npc_attack_spell::evaluate_tripoint(
         }
         int potential = damage * attitude_mult - distance_to_me + 1;
         if( target && critter == target ) {
-            potential *= npc_attack_constants::target_modifier;
+            const tripoint_bub_ms tpos = target->pos_bub();
+            const tripoint_bub_ms cpos = critter->pos_bub();
+            if( here.inbounds( tpos ) && here.inbounds( cpos ) ) {
+                potential *= npc_attack_constants::target_modifier;
+            }
         }
+
         if( damage >= critter->get_hp() ) {
             potential *= npc_attack_constants::kill_modifier;
             if( att == Creature::Attitude::NEUTRAL ) {
@@ -247,12 +256,12 @@ void npc_attack_melee::use( npc &source, const tripoint_bub_ms &location ) const
         return;
     }
     // TODO: Move this to line.h
-    int target_distance = static_cast<int>( static_cast<int>( std::round( trig_dist_z_adjust(
-            source.pos_bub(),
-            location ) ) ) );
+    int target_distance = trig_dist(
+                              source.pos_bub(),
+                              location );
     if( source.posz() != location.z() ) {
         // Always round up so that the Z adjustment actually matters.
-        target_distance = static_cast<int>( std::ceil( trig_dist_z_adjust( source.pos_bub(),
+        target_distance = static_cast<int>( std::ceil( trig_dist_precise( source.pos_bub(),
                                             location ) ) );
     }
     if( !source.is_adjacent( critter, true ) ) {
@@ -457,10 +466,11 @@ void npc_attack_gun::use( npc &source, const tripoint_bub_ms &location ) const
         return;
     }
 
-    const int dist = static_cast<int>( std::round( trig_dist_z_adjust( source.pos_bub(), location ) ) );
+    const int dist = trig_dist( source.pos_bub(), location );
 
     // Only aim if we aren't in risk of being hit
     // TODO: Get distance to closest enemy
+    // FIXME: NPCs can get stuck here if they're not allowed to move away from the player but can't pick an action other than shooting.
     if( dist > 1 && source.aim_per_move( gun, source.recoil ) > 0 &&
         source.confident_gun_mode_range( gunmode, source.recoil ) < dist ) {
         add_msg_debug( debugmode::debug_filter::DF_NPC, "%s is aiming", source.disp_name() );
@@ -549,6 +559,11 @@ std::vector<npc_attack_rating> npc_attack_gun::all_evaluations( const npc &sourc
 npc_attack_rating npc_attack_gun::evaluate_tripoint(
     const npc &source, const Creature *target, const tripoint_bub_ms &location ) const
 {
+    map &here = get_map();
+    if( !here.inbounds( source.pos_bub() ) ) {
+        return npc_attack_rating( std::nullopt, location );
+    }
+
     const item &gun = *gunmode.target;
     const int damage = gun.gun_damage().total_damage() * gunmode.qty;
     double potential = damage;
@@ -566,8 +581,8 @@ npc_attack_rating npc_attack_gun::evaluate_tripoint(
     }
 
     const bool avoids_friendly_fire = source.rules.has_flag( ally_rule::avoid_friendly_fire );
-    const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( location,
-                               source.pos_bub() ) ) );
+    const int distance_to_me = trig_dist( location,
+                                          source.pos_bub() );
 
     // Make attacks that involve moving to find clear LOS slightly less likely
     if( has_obstruction( source.pos_bub(), location, avoids_friendly_fire ) ) {
@@ -583,9 +598,14 @@ npc_attack_rating npc_attack_gun::evaluate_tripoint(
     if( damage >= critter->get_hp() ) {
         potential *= npc_attack_constants::kill_modifier;
     }
-    if( target && target->pos_bub() == critter->pos_bub() ) {
-        potential *= npc_attack_constants::target_modifier;
+    if( target ) {
+        const tripoint_bub_ms tpos = target->pos_bub();
+        const tripoint_bub_ms cpos = critter->pos_bub();
+        if( here.inbounds( tpos ) && here.inbounds( cpos ) && tpos == cpos ) {
+            potential *= npc_attack_constants::target_modifier;
+        }
     }
+
     return npc_attack_rating( static_cast<int>( std::round( potential ) ), location );
 }
 
@@ -756,8 +776,8 @@ npc_attack_rating npc_attack_throw::evaluate(
         // Calculated for all targetable points, not just those with targets
         if( throw_now ) {
             // TODO: Take into account distance to allies too
-            const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( potential,
-                                       source.pos_bub() ) ) );
+            const int distance_to_me = trig_dist( potential,
+                                                  source.pos_bub() );
             int result = npc_attack_constants::base_throw_now + distance_to_me;
             if( !has_obstruction( source.pos_bub(), potential, avoids_friendly_fire ) ) {
                 // More likely to pick a target tile that isn't obstructed
@@ -838,8 +858,8 @@ npc_attack_rating npc_attack_throw::evaluate_tripoint(
     const float throw_mult = throw_cost( source, single_item ) * source.speed_rating() / 100.0f;
     const int damage = source.thrown_item_total_damage_raw( single_item );
     float dps = damage / throw_mult;
-    const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( location,
-                               source.pos_bub() ) ) );
+    const int distance_to_me = trig_dist( location,
+                                          source.pos_bub() );
     float suitable_item_mult = -0.15f;
     if( distance_to_me > 1 ) {
         if( thrown_item.has_flag( flag_NPC_THROWN ) ) {
@@ -853,8 +873,13 @@ npc_attack_rating npc_attack_throw::evaluate_tripoint(
     if( potential > 0.0f && critter && damage >= critter->get_hp() ) {
         potential *= npc_attack_constants::kill_modifier;
     }
-    if( potential > 0.0f && target && critter && target->pos_bub() == critter->pos_bub() ) {
-        potential *= npc_attack_constants::target_modifier;
+    if( potential > 0.0f && target && critter ) {
+        const tripoint_bub_ms tpos = target->pos_bub();
+        const tripoint_bub_ms cpos = critter->pos_bub();
+        if( get_map().inbounds( tpos ) && get_map().inbounds( cpos ) && tpos == cpos ) {
+            potential *= npc_attack_constants::target_modifier;
+        }
     }
+
     return npc_attack_rating( static_cast<int>( std::round( potential ) ), location );
 }

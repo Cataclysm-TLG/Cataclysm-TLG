@@ -69,7 +69,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dumpsite",
     "weight": 100,
     "object": {
@@ -181,7 +180,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "dumpsite_edge",
     "weight": 100,
     "object": {

@@ -1,7 +1,8 @@
 [
   {
     "id": "thermo_resin_chunk",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "thermoplastic resin chunk" },
     "description": "A piece of tough thermoplastic resin that could be used to craft, repair, or reinforce items.",
@@ -16,7 +17,8 @@
   },
   {
     "id": "epoxy_chunk",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "epoxy chunk" },
     "description": "A hardy and durable piece of epoxy.  You could potentially craft items with it.",
@@ -31,7 +33,8 @@
   },
   {
     "id": "polycarbonate_chunk",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "polycarbonate chunk" },
     "description": "A hardy and durable piece of polycarbonate.  You could potentially craft items with it.",
@@ -46,7 +49,8 @@
   },
   {
     "id": "10l_plastic",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "spare_parts",
     "name": { "str": "10 L plastic block" },
     "description": "A ten-liter block of solid plastic.",
@@ -61,7 +65,8 @@
   },
   {
     "id": "5l_plastic",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "spare_parts",
     "name": { "str": "5 L plastic block" },
     "description": "A five-liter block of solid plastic.",
@@ -76,7 +81,8 @@
   },
   {
     "id": "plastic_chunk",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "plastic chunk" },
     "description": "A piece of plastic.  It could be used to fabricate, repair, or reinforce plastic items.",
@@ -91,40 +97,8 @@
     "flags": [ "NO_SALVAGE" ]
   },
   {
-    "id": "nylon_patch",
-    "type": "TOOL",
-    "category": "spare_parts",
-    "name": { "str": "nylon patch", "str_pl": "nylon patches" },
-    "description": "A palm-sized square of synthetic fabric.",
-    "weight": "5750 mg",
-    "volume": "5 ml",
-    "//": ".25mm thick, 288GSM",
-    "price": "0 cent",
-    "price_postapoc": "10 cent",
-    "material": [ "nylon" ],
-    "symbol": ",",
-    "color": "white",
-    "flags": [ "NO_SALVAGE" ]
-  },
-  {
-    "id": "spandex_patch",
-    "type": "TOOL",
-    "category": "spare_parts",
-    "name": { "str": "spandex patch", "str_pl": "spandex patches" },
-    "description": "A six-inch square patch of synthetic fabric blended with stretchy spandex fibers.  It could be used to make flexible yet strong clothing.  Stylish, but bad for the environment; at least you're recycling it.",
-    "weight": "4 g",
-    "volume": "15 ml",
-    "//": "180GSM, .63mm thick",
-    "price": "0 cent",
-    "price_postapoc": "10 cent",
-    "material": [ "spandex" ],
-    "symbol": ",",
-    "color": "light_blue",
-    "flags": [ "NO_SALVAGE" ]
-  },
-  {
     "id": "plastic_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large plastic sheet" },
     "description": "A large sheet of flexible plastic, the sort that might have been used for commercial wrapping or for weather-sealing a home.",
@@ -141,7 +115,7 @@
   },
   {
     "id": "plastic_sheet_small",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "plastic sheet" },
     "description": "A small sheet of flexible plastic, like a cut-up garbage bag.  It might be useful for waterproofing clothes.",
@@ -155,7 +129,8 @@
   },
   {
     "id": "polycarbonate_sheet",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "ammo_type": "NULL",
     "category": "spare_parts",
     "name": { "str": "polycarbonate sheet" },
@@ -174,7 +149,7 @@
   },
   {
     "id": "rigid_plastic_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "rigid plastic sheet" },
     "description": "A large, rigid sheet of transparent polycarbonate, useful for all manner of things; from construction to art, or even amateur snowboarding.",

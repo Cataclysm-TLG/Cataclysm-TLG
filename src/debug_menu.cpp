@@ -281,6 +281,7 @@ std::string enum_to_string<debug_menu::debug_menu_index>( debug_menu::debug_menu
 		case debug_menu::debug_menu_index::EDIT_FACTION: return "EDIT_FACTION";
 		case debug_menu::debug_menu_index::WRITE_CITY_LIST: return "WRITE_CITY_LIST";
         case debug_menu::debug_menu_index::TALK_TOPIC: return "TALK_TOPIC";
+        case debug_menu::debug_menu_index::VEHICLE_EFFECTS: return "VEHICLE_EFFECTS";
         // *INDENT-ON*
         case debug_menu::debug_menu_index::last:
             break;
@@ -295,11 +296,18 @@ namespace
 {
 struct fake_tripoint { // NOLINT(cata-xy)
     int x = 0, y = 0, z = 0;
+
+    static const fake_tripoint invalid;
 };
 
 struct OM_point { // NOLINT(cata-xy)
     int x = 0, y = 0;
+
+    static const OM_point invalid;
 };
+
+const fake_tripoint fake_tripoint::invalid{ tripoint::invalid.x, tripoint::invalid.y, tripoint::invalid.z };
+const OM_point OM_point::invalid{ point::invalid.x, point::invalid.y };
 
 std::istream &operator>>( std::istream &is, fake_tripoint &pos )
 {
@@ -323,8 +331,9 @@ T _from_fs_string( std::string const &s )
     is.imbue( std::locale::classic() );
     T result;
     is >> result;
-    if( !is ) {
-        return T{};
+    if( !is || !is.eof() ) {
+        debugmsg( "Invalid map/OM coordinate %s", s );
+        return T::invalid;
     }
     return result;
 }
@@ -940,7 +949,8 @@ static int vehicle_uilist()
         { uilist_entry( debug_menu_index::VEHICLE_BATTERY_CHARGE, true, 'b', _( "Change battery charge" ) ) },
         { uilist_entry( debug_menu_index::SPAWN_VEHICLE, true, 's', _( "Spawn a vehicle" ) ) },
         { uilist_entry( debug_menu_index::VEHICLE_DELETE, true, 'd', _( "Delete vehicle" ) ) },
-        { uilist_entry( debug_menu_index::VEHICLE_EXPORT, true, 'e', _( "Export vehicle as prototype" ) ) }
+        { uilist_entry( debug_menu_index::VEHICLE_EXPORT, true, 'e', _( "Export vehicle as prototype" ) ) },
+        { uilist_entry( debug_menu_index::VEHICLE_EFFECTS, true, 'f', _( "Export vehicle effects to file" ) ) }
     };
 
     return uilist( _( "Vehicle…" ), uilist_initializer );
@@ -1960,17 +1970,19 @@ static void character_edit_needs_menu( Character &you )
     smenu.addentry( 5, true, 'f', "%s: %d", _( "Fatigue" ), you.get_fatigue() );
     smenu.addentry( 6, true, 'd', "%s: %d", _( "Sleep Deprivation" ), you.get_sleep_deprivation() );
     smenu.addentry( 7, true, 'w', "%s: %d", _( "Weariness" ), you.weariness() );
-    smenu.addentry( 10, true, 'W', "%s: %d", _( "Weariness tracker" ),
+    smenu.addentry( 8, true, 'W', "%s: %d", _( "Weariness tracker" ),
                     you.activity_history.debug_get_tracker() );
-    smenu.addentry( 8, true, 'a', _( "Reset all basic needs" ) );
-    smenu.addentry( 9, true, 'e', _( "Empty stomach and gut" ) );
+    smenu.addentry( 9, true, 'a', _( "Reset all basic needs" ) );
+    smenu.addentry( 10, true, 'e', _( "Empty stomach and gut" ) );
 
     const auto &vits = vitamin::all();
+    int vitamin_entry_base = 11;
+    int vitamin_idx = 0;
     for( const auto &v : vits ) {
-        smenu.addentry( -1, true, 0, _( "%s: today: %d, overall: %d" ), v.second.name(),
-                        you.get_daily_vitamin( v.first ), you.vitamin_get( v.first ) );
+        smenu.addentry( vitamin_entry_base + vitamin_idx, true, 0, _( "%s: daily %d, overall %d" ),
+                        v.second.name(), you.get_daily_vitamin( v.first ), you.vitamin_get( v.first ) );
+        ++vitamin_idx;
     }
-
     smenu.query();
     int value;
     switch( smenu.ret ) {
@@ -2024,13 +2036,13 @@ static void character_edit_needs_menu( Character &you )
                 you.activity_history.weary_clear();
             }
             break;
-        case 10:
+        case 8:
             if( query_int( value, false, _( "Set weariness tracker to?  Currently: %d" ),
                            you.activity_history.debug_get_tracker() ) ) {
                 you.activity_history.debug_set_tracker( value );
             }
             break;
-        case 8:
+        case 9:
             you.initialize_stomach_contents();
             you.set_hunger( 0 );
             you.set_thirst( 0 );
@@ -2039,13 +2051,14 @@ static void character_edit_needs_menu( Character &you )
             you.set_stored_kcal( you.get_healthy_kcal() );
             you.activity_history.weary_clear();
             break;
-        case 9:
+        case 10:
             you.stomach.empty();
             you.guts.empty();
             break;
         default:
-            if( smenu.ret >= 10 && smenu.ret < static_cast<int>( vits.size() + 10 ) ) {
-                auto iter = std::next( vits.begin(), smenu.ret - 10 );
+            if( smenu.ret >= vitamin_entry_base &&
+                smenu.ret < vitamin_entry_base + static_cast<int>( vits.size() ) ) {
+                auto iter = std::next( vits.begin(), smenu.ret - vitamin_entry_base );
                 if( query_int( value, false, _( "Set %s to?  Currently: %d" ),
                                iter->second.name(), you.vitamin_get( iter->first ) ) ) {
                     you.vitamin_set( iter->first, value );
@@ -3769,6 +3782,30 @@ static void vehicle_export()
     add_msg( m_bad, _( "There's no vehicle there." ) );
 }
 
+static void vehicle_effects()
+{
+    map &here = get_map();
+
+    optional_vpart_position v_part_pos = here.veh_at( player_picks_tile() );
+    if( !v_part_pos ) {
+        add_msg( m_bad, _( "There's no vehicle there." ) );
+        return;
+    }
+
+    write_to_file( "effect_list.output", [&]( std::ostream & testfile ) {
+        testfile << "|;id;duration;intensity;perm;bp" << std::endl;
+
+        for( const effect &eff :  v_part_pos.value().vehicle().get_effects() ) {
+            testfile << "|;" << eff.get_id().str() << ";" << to_string( eff.get_duration() ) << ";" <<
+                     eff.get_intensity() << ";" << ( eff.is_permanent() ? "true" : "false" ) << ";" << std::endl;
+        }
+
+    }, "effect_list" );
+
+    popup( _( "Effect list written to effect_list.output" ) );
+
+}
+
 static void wind_direction()
 {
     uilist wind_direction_menu;
@@ -4303,7 +4340,9 @@ void debug()
         case debug_menu_index::VEHICLE_EXPORT:
             vehicle_export();
             break;
-
+        case debug_menu_index::VEHICLE_EFFECTS:
+            vehicle_effects();
+            break;
         case debug_menu_index::IMPORT_FOLLOWER:
             import_folower();
             break;

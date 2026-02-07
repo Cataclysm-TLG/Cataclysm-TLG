@@ -1,6 +1,5 @@
 [
   {
-    "method": "json",
     "om_terrain": "house_detatched8",
     "type": "mapgen",
     "weight": 100,
@@ -18,7 +17,7 @@
         "....%[.#I |  x H#.%%....",
         ".....%.#d +  x Ho.%[%...",
         ".%..%..#|||    y#%.%....",
-        "..%[%!.o5    2|+##...%..",
+        "..%[%!.o5é   2|+##...%..",
         "...%%%^#F JA 6|-t#^.....",
         "....%[.#O4JA >|BS#%.....",
         ".....%.##o##*#####......",
@@ -73,7 +72,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_detatched8_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -121,7 +119,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_detatched8_basement",
     "object": {
       "fill_ter": "t_thconc_floor",

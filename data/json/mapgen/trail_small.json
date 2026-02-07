@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "small_wooded_trail" ],
     "weight": 100,
     "object": {
@@ -39,7 +38,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "small_wooded_trail_2" ],
     "weight": 100,
     "object": {

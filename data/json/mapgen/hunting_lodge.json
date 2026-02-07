@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "lodge_ground1", "lodge_ground2" ] ],
     "weight": 100,
     "object": {
@@ -50,7 +49,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "lodge_ground_glooscap1", "lodge_ground_glooscap2" ] ],
     "weight": 100,
     "object": {
@@ -89,7 +87,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "lodge_2ndfloor1", "lodge_2ndfloor2" ] ],
     "weight": 100,
     "object": {
@@ -145,7 +142,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "lodge_roof1", "lodge_roof2" ] ],
     "weight": 100,
     "object": {
@@ -186,7 +182,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "lodge_basement_residential1", "lodge_basement_residential2" ] ],
     "weight": 100,
     "object": {
@@ -237,7 +232,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "lodge_basement_residential3", "lodge_basement_residential4" ] ],
     "weight": 100,
     "object": {
@@ -278,7 +272,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lodge_basement_laboratory_entrance" ],
     "//": "doesn't work rebuild later",
     "object": {

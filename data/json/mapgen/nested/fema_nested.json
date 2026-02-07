@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_lodging_20x20_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -32,7 +31,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_lodging",
     "weight": 1000,
     "object": {
@@ -65,7 +63,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_lodging",
     "weight": 1000,
     "object": {
@@ -98,7 +95,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_3x4_lodging_roofs",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -129,7 +125,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_lodging",
     "weight": 750,
     "object": {
@@ -162,7 +157,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_lodging_18x18_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -193,7 +187,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_lodging",
     "weight": 1000,
     "object": {
@@ -226,7 +219,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_sanitary_20x13_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -257,7 +249,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_sanitary",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -292,7 +283,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_sanitary_20x20_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -323,7 +313,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_sanitary",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -362,7 +351,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_corpse_pit",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -399,7 +387,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_mess_hall_9x9_18x8_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -430,7 +417,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_mess_hall",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -465,7 +451,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_mess_hall_16x16_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -496,7 +481,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_mess_hall",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -534,7 +518,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_mess_hall_18x18_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -566,7 +549,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_mess_hall",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -605,7 +587,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_supply_16x16_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -636,7 +617,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_supply",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -686,7 +666,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_supply_20x10_4x4x4_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -718,7 +697,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_supply",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -767,7 +745,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_lab_roof",
     "object": {
       "mapgensize": [ 20, 20 ],
@@ -798,7 +775,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "fema_lab",
     "object": {
       "mapgensize": [ 20, 20 ],

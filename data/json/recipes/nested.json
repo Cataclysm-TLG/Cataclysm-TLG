@@ -952,13 +952,12 @@
     "skill_used": "firstaid",
     "nested_category_data": [
       "bandages",
+      "bandages_makeshift_sanitized_bleached",
+      "bandages_makeshift_sanitized",
       "bandages_makeshift",
-      "bandages_makeshift_with_tool",
-      "bandages_makeshift_bleached",
-      "bandages_makeshift_boiled",
-      "adhesive_bandages",
       "medical_gauze",
-      "medical_gauze_makeshift"
+      "medical_gauze_makeshift",
+      "adhesive_bandages"
     ],
     "difficulty": 1
   },
@@ -1007,7 +1006,7 @@
     "name": "antiseptics",
     "description": "Recipes related to crafting different kinds of antiseptics.",
     "skill_used": "firstaid",
-    "nested_category_data": [ "disinfectant_makeshift", "wintergreen_oil", "thyme_oil", "disinrag", "disincotton_ball", "cattail_jelly" ],
+    "nested_category_data": [ "disinfectant_makeshift", "dakins_solution", "wintergreen_oil", "thyme_oil", "cattail_jelly" ],
     "difficulty": 1
   },
   {

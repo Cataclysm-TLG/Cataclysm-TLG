@@ -2752,15 +2752,17 @@ int npc::confident_throw_range( const item &thrown, Creature *target ) const
 // Index defaults to -1, i.e., wielded weapon
 bool npc::wont_hit_friend( const tripoint_bub_ms &tar, const item &it, bool throwing ) const
 {
+    map &here = get_map();
+    if( !here.inbounds( pos_bub() ) ) {
+        return true;
+    }
     if( !throwing && it.is_gun() && it.empty() ) {
         return false;    // Empty gun is not safe to shoot, prevents nullptr ammo_data
     }
-
-    if( throwing && rl_dist( pos_bub(), tar ) == 1 ) {
+    if( throwing && square_dist( pos_bub(), tar ) == 1 ) {
         return true;    // If we're *really* sure that our aim is dead-on
     }
 
-    map &here = get_map();
     std::vector<tripoint_bub_ms> trajectory = here.find_clear_path( pos_bub(), tar );
 
     units::angle target_angle = coord_to_angle( pos_bub(), tar );
@@ -2773,18 +2775,23 @@ bool npc::wont_hit_friend( const tripoint_bub_ms &tar, const item &it, bool thro
         if( !ally_p || !sees( here, *ally_p ) ) {
             continue;
         }
+
         const Creature &ally = *ally_p;
+        const tripoint_bub_ms ally_pos = ally.pos_bub();
+        if( !here.inbounds( ally_pos ) ) {
+            continue;
+        }
 
         // TODO: When lines are straight again, optimize for small distances
         for( tripoint_bub_ms &p : trajectory ) {
-            if( ally.pos_bub() == p ) {
+            if( ally_pos == p ) {
                 return false;
             }
         }
 
         // TODO: Extract common functions with turret target selection
         units::angle safe_angle_ally = safe_angle;
-        units::angle ally_angle = coord_to_angle( pos_bub(), ally.pos_bub() );
+        units::angle ally_angle = coord_to_angle( pos_bub(), ally_pos );
         units::angle angle_diff = units::fabs( ally_angle - target_angle );
         angle_diff = std::min( 360_degrees - angle_diff, angle_diff );
         if( angle_diff < safe_angle_ally ) {
@@ -3245,10 +3252,8 @@ void npc::avoid_friendly_fire()
     candidates.erase( candidates.begin() );
     std::sort( candidates.begin(), candidates.end(),
     [&tar, &center]( const tripoint_bub_ms & l, const tripoint_bub_ms & r ) {
-        return ( static_cast<int>( std::round( trig_dist_z_adjust( l,
-                                               tar ) ) ) - static_cast<int>( std::round( trig_dist_z_adjust( l, center ) ) ) ) <
-               ( static_cast<int>( std::round( trig_dist_z_adjust( r,
-                                               tar ) ) ) - static_cast<int>( std::round( trig_dist_z_adjust( r, center ) ) ) );
+        return ( trig_dist( l, tar ) - trig_dist( l, center ) ) <
+               ( trig_dist( r, tar ) - trig_dist( r, center ) );
     } );
 
     for( const tripoint_bub_ms &pt : candidates ) {

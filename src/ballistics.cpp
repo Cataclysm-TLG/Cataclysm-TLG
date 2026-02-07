@@ -240,7 +240,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
     const bool do_animation = get_option<bool>( "ANIMATION_PROJECTILES" );
     bool skip_hit = false;
 
-    double range = std::round( trig_dist_z_adjust( source, target_arg ) );
+    double range = trig_dist( source, target_arg );
 
     creature_tracker &creatures = get_creature_tracker();
     Creature *target_critter = creatures.creature_at( target_arg );
@@ -625,7 +625,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 return false;
             }
             // Search for creatures in radius 4 around impact site.
-            if( static_cast<int>( std::round( trig_dist_z_adjust( z.pos_bub( *here ), tp ) ) ) <= 4 &&
+            if( trig_dist( z.pos_bub( *here ), tp ) <= 4 &&
                 here->clear_path( z.pos_bub( *here ), tp, 4, 1, 100 ) && ( z.pos_bub( *here ) != tp ) ) {
                 // Don't hit targets that have already been hit
                 for( const auto &it : attack.targets_hit ) {

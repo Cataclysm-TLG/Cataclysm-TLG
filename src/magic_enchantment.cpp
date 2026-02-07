@@ -22,6 +22,7 @@
 #include "rng.h"
 #include "skill.h"
 #include "units.h"
+#include "vehicle.h"
 
 namespace io
 {
@@ -164,6 +165,10 @@ namespace io
             case enchant_vals::mod::STAMINA_REGEN_MOD: return "STAMINA_REGEN_MOD";
             case enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER: return "MOVEMENT_EXERTION_MODIFIER";
             case enchant_vals::mod::WEAKPOINT_ACCURACY: return "WEAKPOINT_ACCURACY";
+            case enchant_vals::mod::WEIGHT: return "WEIGHT";
+            case enchant_vals::mod::TOTAL_WEIGHT: return "TOTAL_WEIGHT";
+            case enchant_vals::mod::FUEL_USAGE: return "FUEL_USAGE";
+            case enchant_vals::mod::TURNING_DIFFICULTY: return "TURNING_DIFFICULTY";
             case enchant_vals::mod::NUM_MOD: break;
         }
         cata_fatal( "Invalid enchant_vals::mod" );
@@ -190,7 +195,7 @@ bool string_id<enchantment>::is_valid() const
 
 template<typename TKey>
 void load_add_and_multiply( const JsonObject &jo, const bool &is_child,
-                            const std::string_view array_key, const std::string &type_key, std::map<TKey, dbl_or_var> &add_map,
+                            std::string_view array_key, const std::string &type_key, std::map<TKey, dbl_or_var> &add_map,
                             std::map<TKey, dbl_or_var> &mult_map )
 {
     if( !is_child && jo.has_array( array_key ) ) {
@@ -220,7 +225,7 @@ void load_add_and_multiply( const JsonObject &jo, const bool &is_child,
 }
 
 template<typename TKey>
-void load_add_and_multiply( const JsonObject &jo, const std::string_view array_key,
+void load_add_and_multiply( const JsonObject &jo, std::string_view array_key,
                             const std::string &type_key, std::map<TKey, double> &add_map, std::map<TKey, double> &mult_map )
 {
     if( jo.has_array( array_key ) ) {
@@ -253,7 +258,7 @@ void enchantment::reset()
 }
 
 enchantment_id enchantment::load_inline_enchantment( const JsonValue &jv,
-        const std::string_view src,
+        std::string_view src,
         std::string &inline_id )
 {
     if( jv.test_string() ) {
@@ -330,6 +335,28 @@ bool enchantment::is_active( const monster &mon ) const
     return false;
 }
 
+bool enchantment::is_active( const vehicle &veh, const bool active ) const
+{
+    if( active_conditions.second == condition::ALWAYS ) {
+        return true;
+    }
+
+    if( active_conditions.second == condition::ACTIVE ) {
+        return active;
+    }
+
+    if( active_conditions.second == condition::INACTIVE ) {
+        return !active;
+    }
+
+    if( active_conditions.second == condition::DIALOG_CONDITION ) {
+        const_dialogue d( get_talker_for( veh ), nullptr );
+        return dialog_condition( d );
+    }
+
+    return false;
+}
+
 // Returns true if this enchantment is relevant to monsters. Enchantments that are not relevant to monsters are not processed by monsters.
 bool enchantment::is_monster_relevant() const
 {
@@ -340,7 +367,8 @@ bool enchantment::is_monster_relevant() const
             pair_values.first == enchant_vals::mod::REGEN_HP ||
             pair_values.first == enchant_vals::mod::VISION_RANGE ||
             pair_values.first == enchant_vals::mod::SPEED ||
-            pair_values.first == enchant_vals::mod::LUMINATION ) {
+            pair_values.first == enchant_vals::mod::LUMINATION ||
+            pair_values.first == enchant_vals::mod::TOTAL_WEIGHT ) {
             return true;
         }
     }
@@ -352,7 +380,8 @@ bool enchantment::is_monster_relevant() const
             pair_values.first == enchant_vals::mod::REGEN_HP ||
             pair_values.first == enchant_vals::mod::VISION_RANGE ||
             pair_values.first == enchant_vals::mod::SPEED ||
-            pair_values.first == enchant_vals::mod::LUMINATION ) {
+            pair_values.first == enchant_vals::mod::LUMINATION ||
+            pair_values.first == enchant_vals::mod::TOTAL_WEIGHT ) {
             return true;
         }
     }
@@ -360,6 +389,32 @@ bool enchantment::is_monster_relevant() const
     if( !damage_values_add.empty() || !damage_values_multiply.empty() ||
         !armor_values_add.empty() || !armor_values_multiply.empty() ) {
         return true;
+    }
+
+    return false;
+}
+
+// Returns true if this enchantment is relevant to vehicles. Enchantments that are not relevant to vehicles are not processed by vehicles.
+bool enchantment::is_vehicle_relevant() const
+{
+    // Check add values.
+    for( const std::pair<const enchant_vals::mod, dbl_or_var> &pair_values :
+         values_add ) {
+        if( pair_values.first == enchant_vals::mod::TOTAL_WEIGHT ||
+            pair_values.first == enchant_vals::mod::FUEL_USAGE ||
+            pair_values.first == enchant_vals::mod::TURNING_DIFFICULTY ) {
+            return true;
+        }
+    }
+
+    // Check mult values.
+    for( const std::pair<const enchant_vals::mod, dbl_or_var> &pair_values :
+         values_multiply ) {
+        if( pair_values.first == enchant_vals::mod::TOTAL_WEIGHT ||
+            pair_values.first == enchant_vals::mod::FUEL_USAGE ||
+            pair_values.first == enchant_vals::mod::TURNING_DIFFICULTY ) {
+            return true;
+        }
     }
 
     return false;
@@ -394,7 +449,7 @@ void enchantment::bodypart_changes::serialize( JsonOut &jsout ) const
     jsout.end_object();
 }
 
-void enchantment::load( const JsonObject &jo, const std::string_view,
+void enchantment::load( const JsonObject &jo, std::string_view,
                         const std::optional<std::string> &inline_id, bool is_child )
 {
     optional( jo, was_loaded, "id", id, enchantment_id( inline_id.value_or( "" ) ) );
@@ -493,7 +548,7 @@ void enchantment::load( const JsonObject &jo, const std::string_view,
     }
 }
 
-void enchant_cache::load( const JsonObject &jo, const std::string_view,
+void enchant_cache::load( const JsonObject &jo, std::string_view,
                           const std::optional<std::string> &inline_id )
 {
     enchantment::load( jo, "", inline_id, true );
@@ -745,6 +800,7 @@ void enchant_cache::serialize( JsonOut &jsout ) const
         for( const special_vision_descriptions &struc_desc : struc.special_vision_descriptions_vector ) {
             jsout.start_object();
             jsout.member( "id", struc_desc.id );
+            jsout.member( "text", struc_desc.text );
             jsout.end_object();
         }
         jsout.end_array();
@@ -784,7 +840,6 @@ void enchant_cache::force_add_mutation( const enchantment &rhs )
         mutations.push_back( branch );
     }
 }
-
 
 void enchant_cache::force_add( const enchant_cache &rhs )
 {
@@ -880,6 +935,12 @@ void enchant_cache::force_add( const enchantment &rhs, const Character &guy )
 void enchant_cache::force_add( const enchantment &rhs, const monster &mon )
 {
     const_dialogue d( get_const_talker_for( mon ), nullptr );
+    force_add_with_dialogue( rhs, d );
+}
+
+void enchant_cache::force_add( const enchantment &rhs, const vehicle &veh )
+{
+    const_dialogue d( get_talker_for( veh ), nullptr );
     force_add_with_dialogue( rhs, d );
 }
 
@@ -1288,6 +1349,14 @@ units::volume enchant_cache::modify_value( const enchant_vals::mod mod_val,
         units::volume value ) const
 {
     value += units::from_milliliter<double>( get_value_add( mod_val ) );
+    value *= 1.0 + get_value_multiply( mod_val );
+    return value;
+}
+
+units::power enchant_cache::modify_value( const enchant_vals::mod mod_val,
+        units::power value ) const
+{
+    value += units::from_milliwatt<double>( get_value_add( mod_val ) );
     value *= 1.0 + get_value_multiply( mod_val );
     return value;
 }

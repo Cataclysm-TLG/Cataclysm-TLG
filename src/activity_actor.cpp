@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
+#include <cstdlib>
 #include <functional>
 #include <initializer_list>
 #include <iterator>
@@ -371,7 +372,7 @@ bool aim_activity_actor::check_gun_ability_to_shoot( Character &who, item &it )
             who.add_msg_if_player( m_good,
                                    _( "Your %s has some mechanical malfunction.  You tried to quickly fix it, and it works now!" ),
                                    it.tname() );
-            it.faults.erase( faults::random_of_type_item_has( it, gun_mechanical_simple ) );
+            it.remove_single_fault_of_type( gun_mechanical_simple );
             it.set_var( "u_know_round_in_chamber", true );
         } else {
             who.add_msg_if_player( m_bad,
@@ -468,7 +469,8 @@ void aim_activity_actor::finish( player_activity &act, Character &who )
     gun_mode gun = weapon->gun_current_mode();
     who.fire_gun( here, fin_trajectory.back(), gun.qty, *gun, reload_loc );
 
-    if( !get_option<bool>( "AIM_AFTER_FIRING" ) ) {
+    if( !get_option<bool>( "AIM_AFTER_FIRING" ) ||
+        weapon.get_item()->has_fault_of_type( gun_mechanical_simple ) ) {
         restore_view();
         return;
     }
@@ -5023,7 +5025,8 @@ bool disable_activity_actor::can_disable_or_reprogram( const monster &monster )
         return false;
     }
 
-    return ( ( monster.friendly != 0 || monster.has_effect( effect_sensor_stun ) ) &&
+    return ( ( monster.friendly != 0 || ( monster.has_effect( effect_sensor_stun ) &&
+                                          !monster.in_species( species_ZOMBIE ) ) ) &&
              !monster.has_flag( mon_flag_RIDEABLE_MECH ) &&
              !( monster.has_flag( mon_flag_PAY_BOT ) && monster.has_effect( effect_paid ) ) ) &&
            ( !monster.type->revert_to_itype.is_empty() || monster.type->id == mon_manhack );
@@ -5055,6 +5058,147 @@ std::unique_ptr<activity_actor> disable_activity_actor::deserialize( JsonValue &
     data.read( "target", actor.target );
     data.read( "reprogram", actor.reprogram );
     data.read( "moves_total", actor.moves_total );
+
+    return actor.clone();
+}
+
+void move_furniture_on_vehicle_activity_actor::start( player_activity &act, Character &who )
+{
+    map &here = get_map();
+    furn_str_id furn( here.veh_at( who.pos_bub() +
+                                   who.grab_point )->part_with_feature( "FURNITURE_TIEDOWN",
+                                           true )->part().get_base().get_var( "tied_down_furniture" ) );
+    if( !furn.is_valid() ) {
+        debugmsg( "Tried dragging invalid furniture %s", furn.str() );
+        act.set_to_null();
+        return;
+    }
+    int moves = 50;
+    if( furn->move_str_req > who.get_arm_str() ) {
+        moves = std::max<int>( 3000, furn->move_str_req * 10 + std::pow( furn->move_str_req, 2.0 ) * 10 );
+    }
+    act.moves_left = moves;
+    act.moves_total = moves;
+}
+
+bool move_furniture_on_vehicle_activity_actor::can_move_furn_on_veh_to( map &here,
+        const tripoint_bub_ms &dest ) const
+{
+    if( !here.passable( dest ) ) {
+        return false;
+    }
+
+    if( get_creature_tracker().creature_at<npc>( dest ) != nullptr ||
+        get_creature_tracker().creature_at<monster>( dest ) != nullptr ) {
+        return false;
+    }
+
+    if( here.veh_at( dest ) && !here.veh_at( dest )->can_load_furniture() ) {
+        return false;
+    }
+
+    if( !g->can_move_furniture( dest, dp ) ) {
+        return false;
+    }
+
+    return true;
+}
+
+static void transfer_furniture( vpart_position &from, vpart_position &to )
+{
+    vehicle_part &from_part = from.part_with_feature( "FURNITURE_TIEDOWN", true )->part();
+    vehicle_part &to_part = to.part_with_feature( "FURNITURE_TIEDOWN", true )->part();
+    item from_base( from_part.get_base() );
+    item to_base( to_part.get_base() );
+    std::string furn = from_base.get_var( "tied_down_furniture" );
+    from_base.remove_var( "tied_down_furniture" );
+    to_base.set_var( "tied_down_furniture", furn );
+    from_part.set_base( std::move( from_base ) );
+    to_part.set_base( std::move( to_base ) );
+}
+
+static void stop_grab( Character &who )
+{
+    if( avatar *a = dynamic_cast<avatar *>( &who ) ) {
+        a->grab( object_type::NONE );
+    } else {
+        debugmsg( "who in grabbing is not an avatar??" );
+    }
+}
+
+bool move_furniture_on_vehicle_activity_actor::move_furniture( Character &who ) const
+{
+    map &here = get_map();
+    tripoint_bub_ms pos = who.pos_bub() + who.grab_point;
+
+    std::optional<vpart_position> vp = here.veh_at( pos );
+    if( !vp.has_value() || !vp->has_loaded_furniture() ) {
+        add_msg( m_warning, _( "The grabbed furniture has been lost." ) );
+        return true;
+    }
+
+    tripoint_bub_ms dest = pos + dp;
+    if( !can_move_furn_on_veh_to( here, dest ) ) {
+        add_msg( m_warning, _( "Can't drag to there." ) );
+        return true;
+    }
+
+    bool pulling = dp.xy() == -who.grab_point.xy();
+    bool pushing = dp.xy() == who.grab_point.xy();
+    bool shifting = !pushing && !pulling;
+
+    std::optional<vpart_position> vp_dest = here.veh_at( dest );
+    if( vp_dest ) {
+        transfer_furniture( *vp, *vp_dest );
+    } else {
+        vp->part_with_feature( "FURNITURE_TIEDOWN", true )->part().unload_furniture( here, dest );
+        if( avatar *a = dynamic_cast<avatar *>( &who ) ) {
+            a->grab( object_type::FURNITURE, who.grab_point );
+        }
+    }
+    if( shifting ) {
+        tripoint_rel_ms d_sum = who.grab_point + dp;
+        if( std::abs( d_sum.x() ) < 2 && std::abs( d_sum.y() ) < 2 ) {
+            who.grab_point = d_sum;
+        } else {
+            stop_grab( who );
+        }
+        return true;
+    }
+    return false;
+}
+
+void move_furniture_on_vehicle_activity_actor::finish( player_activity &act, Character &who )
+{
+    if( !move_furniture( who ) ) {
+        g->walk_move( who.pos_bub() + dp, via_ramp, true );
+    }
+    act.set_to_null();
+}
+
+void move_furniture_on_vehicle_activity_actor::canceled( player_activity &, Character & )
+{
+    add_msg( m_warning, _( "You let go of the grabbed object." ) );
+    get_avatar().grab( object_type::NONE );
+}
+
+void move_furniture_on_vehicle_activity_actor::serialize( JsonOut &jsout ) const
+{
+    jsout.start_object();
+    jsout.member( "dp", dp );
+    jsout.member( "via_ramp", via_ramp );
+    jsout.end_object();
+}
+
+std::unique_ptr<activity_actor> move_furniture_on_vehicle_activity_actor::deserialize(
+    JsonValue &jsin )
+{
+    move_furniture_on_vehicle_activity_actor actor( tripoint_rel_ms::zero, false );
+
+    JsonObject data = jsin.get_object();
+
+    data.read( "dp", actor.dp );
+    data.read( "via_ramp", actor.via_ramp );
 
     return actor.clone();
 }
@@ -8506,7 +8650,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
         const tripoint_bub_ms &pos = here.get_bub( *pos_iter );
         map_stack corpse_pile = here.i_at( pos );
         for( item &corpse : corpse_pile ) {
-            if( !corpse.is_corpse() || !corpse.can_revive() ) {
+            if( !corpse.is_corpse() || !corpse.pulpable() ) {
                 // Don't smash non-reviving corpses.
                 continue;
             }
@@ -8515,7 +8659,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
             const bool acid_immune = you.is_immune_damage( damage_acid ) ||
                                      you.is_immune_field( fd_acid );
             if( corpse_mtype->bloodType().obj().has_acid && !corpse.has_flag( flag_BLED ) && ( !acid_immune &&
-                    !pulp_acid ) ) {
+                    !pulp_acid ) && !corpse.has_flag( flag_FROZEN ) ) {
                 // Don't smash acid zombies when auto pulping unprotected.
                 continue;
             }
@@ -8539,11 +8683,11 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
 
                 if( x_in_y( pulp_power, corpse_volume_factor ) ) {
-                    // Splatter some blood around.
+                    // Splatter some blood around, if we have any and we're not frozen.
                     const int radius = mess_radius + x_in_y( pulp_power, 500 ) + x_in_y( pulp_power, 1000 );
                     const tripoint_bub_ms dest( pos + point( rng( -radius, radius ), rng( -radius, radius ) ) );
 
-                    if( !corpse.has_flag( flag_BLED ) ) {
+                    if( !corpse.has_flag( flag_BLED ) && !corpse.has_flag( flag_FROZEN ) ) {
                         const field_type_id type_blood = ( mess_radius > 1 && x_in_y( pulp_power, 10000 ) ) ?
                                                          corpse.get_mtype()->gibType() :
                                                          corpse.get_mtype()->bloodType();

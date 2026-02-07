@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [ "prison_alcatraz_5", "prison_alcatraz_4", "prison_alcatraz_3", "prison_alcatraz_2", "prison_alcatraz_1" ],
       [ "prison_alcatraz_10", "prison_alcatraz_9", "prison_alcatraz_8", "prison_alcatraz_7", "prison_alcatraz_6" ],
@@ -100,7 +99,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [
       [
         "prison_alcatraz_5_2f",
@@ -210,7 +208,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "prison_alcatraz_10_3f", "prison_alcatraz_9_3f" ] ],
     "weight": 250,
     "object": {
@@ -246,7 +243,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "prison_alcatraz_6_3f" ],
     "weight": 250,
     "object": {
@@ -282,7 +278,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "prison_alcatraz_15_3f", "prison_alcatraz_14_3f" ] ],
     "weight": 250,
     "object": {
@@ -318,7 +313,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "prison_alcatraz_11_3f" ],
     "weight": 250,
     "object": {

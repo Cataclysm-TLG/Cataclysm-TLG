@@ -114,101 +114,48 @@
       { "u_message": "Mapping island for future construction…" },
       {
         "u_location_variable": { "global_val": "OM_island_center" },
-        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "search_range": 4 }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS" }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subcenter" },
-        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "search_range": 4, "offset_z": -1 }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subnw" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "search_range": 4,
-          "offset_z": -1,
-          "offset_x": -1,
-          "offset_y": -1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": -1, "offset_y": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subn" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "search_range": 4,
-          "offset_z": -1,
-          "offset_y": -1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_y": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subne" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "search_range": 4,
-          "offset_z": -1,
-          "offset_x": 1,
-          "offset_y": -1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": 1, "offset_y": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subw" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "search_range": 4,
-          "offset_z": -1,
-          "offset_x": -1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": -1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_sube" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "search_range": 4,
-          "offset_z": -1,
-          "offset_x": 1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": 1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subsw" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "search_range": 4,
-          "offset_z": -1,
-          "offset_x": -1,
-          "offset_y": 1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": -1, "offset_y": 1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subs" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "search_range": 4,
-          "offset_z": -1,
-          "offset_y": 1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_y": 1 }
       },
       {
         "u_location_variable": { "global_val": "OM_island_subse" },
-        "target_params": {
-          "om_terrain": "sky_island_core",
-          "om_terrain_match_type": "CONTAINS",
-          "search_range": 4,
-          "offset_z": -1,
-          "offset_x": 1,
-          "offset_y": 1
-        }
+        "target_params": { "om_terrain": "sky_island_core", "om_terrain_match_type": "CONTAINS", "offset_z": -1, "offset_x": 1, "offset_y": 1 }
       }
     ]
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_solidstoneoverride",
     "object": {
       "rows": [
@@ -243,7 +190,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_surface_entrance",
     "object": {
       "rows": [
@@ -278,7 +224,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_base1",
     "object": {
       "rows": [
@@ -313,7 +258,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_skylight",
     "object": {
       "rows": [
@@ -348,7 +292,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_skylight2",
     "object": {
       "rows": [
@@ -383,7 +326,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_skylight3",
     "object": {
       "rows": [
@@ -418,7 +360,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_skylight4",
     "object": {
       "rows": [
@@ -453,7 +394,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_a1",
     "object": {
       "rows": [
@@ -488,7 +428,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_a2",
     "object": {
       "rows": [
@@ -523,7 +462,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_a3",
     "object": {
       "rows": [
@@ -558,7 +496,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_a4",
     "object": {
       "rows": [
@@ -616,7 +553,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_w1",
     "object": {
       "rows": [
@@ -651,7 +587,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_w2",
     "object": {
       "rows": [
@@ -686,7 +621,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_w3",
     "object": {
       "rows": [
@@ -721,7 +655,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_w4",
     "object": {
       "rows": [
@@ -756,7 +689,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_e1",
     "object": {
       "rows": [
@@ -791,7 +723,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_e2",
     "object": {
       "rows": [
@@ -826,7 +757,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_e3",
     "object": {
       "rows": [
@@ -861,7 +791,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_e4",
     "object": {
       "rows": [
@@ -896,7 +825,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_n1",
     "object": {
       "rows": [
@@ -931,7 +859,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_n2",
     "object": {
       "rows": [
@@ -966,7 +893,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_n3",
     "object": {
       "rows": [
@@ -1001,7 +927,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "mx_skyisland_n4",
     "object": {
       "rows": [

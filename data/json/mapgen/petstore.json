@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "s_petstore" ],
     "weight": 500,
     "object": {
@@ -84,7 +83,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_petstore_roof",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -137,7 +135,6 @@
     }
   },
   {
-    "method": "json",
     "object": {
       "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "place_item": [
@@ -224,7 +221,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_petstore_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -274,7 +270,6 @@
     }
   },
   {
-    "method": "json",
     "object": {
       "fill_ter": "t_thconc_floor",
       "furniture": {
@@ -373,7 +368,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "s_petstore_roof_2",
     "object": {
       "fill_ter": "t_flat_roof",

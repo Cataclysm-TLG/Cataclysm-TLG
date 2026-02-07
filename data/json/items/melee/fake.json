@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bio_blade_weapon",
     "name": { "str": "monomolecular blade" },
     "description": "A foot-long blade made from high-tech alloy and edged with bonded nanocrystals.",

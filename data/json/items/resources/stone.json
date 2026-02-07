@@ -1,6 +1,7 @@
 [
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "rock_flaking",
     "symbol": "*",
     "color": "light_gray",
@@ -25,14 +26,15 @@
     "melee_damage": { "bash": 7 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "flint",
     "copy-from": "rock_flaking",
     "name": { "str": "flint" },
     "description": "A chunk of flint, the kind of rock that can make sparks if stuck against high-carbon steel.  It also chips in a semi-predictable way if struck, leaving a sharp edge."
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "rock_large",
     "symbol": ";",
     "color": "brown",
@@ -48,7 +50,7 @@
     "melee_damage": { "bash": 28 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "rock_wool_bat",
     "symbol": "#",
     "color": "brown",
@@ -61,7 +63,7 @@
     "volume": "3 L"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bone_plaster",
     "category": "spare_parts",
     "name": { "str": "bone replica" },
@@ -78,7 +80,7 @@
     "melee_damage": { "bash": 7 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "large_bone_plaster",
     "category": "spare_parts",
     "name": { "str": "large bone replica" },
@@ -95,7 +97,7 @@
     "melee_damage": { "bash": 28 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "bone_fossil",
     "category": "spare_parts",
     "name": { "str": "bone fossil" },
@@ -112,7 +114,7 @@
     "melee_damage": { "bash": 7 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "large_bone_fossil",
     "category": "spare_parts",
     "name": { "str": "large bone replica" },

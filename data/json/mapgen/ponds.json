@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "pond_field" ],
     "weight": 100,
     "object": {
@@ -56,7 +55,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "hot_springs" ],
     "weight": 20,
     "object": {

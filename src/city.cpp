@@ -71,7 +71,7 @@ void city::reset()
     get_city_factory().reset();
 }
 
-void city::load( const JsonObject &jo, const std::string_view )
+void city::load( const JsonObject &jo, std::string_view )
 {
 
     mandatory( jo, was_loaded, "id", id );
@@ -99,5 +99,5 @@ city::city( const point_om_omt &P, int const S )
 
 int city::get_distance_from( const tripoint_om_omt &p ) const
 {
-    return std::max( static_cast<int>( trig_dist( p, tripoint_om_omt{ pos, 0 } ) ) - size, 0 );
+    return std::max( trig_dist( p, tripoint_om_omt{ pos, 0 } ) - size, 0 );
 }

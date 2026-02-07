@@ -25,6 +25,7 @@
 #include "event_bus.h"
 #include "explosion.h"
 #include "faction.h"
+#include "field.h"
 #include "field_type.h"
 #include "game.h"
 #include "game_constants.h"
@@ -145,6 +146,7 @@ static const flag_id json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
 static const flag_id json_flag_DISABLE_FLIGHT( "DISABLE_FLIGHT" );
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
+static const flag_id json_flag_MUTAGEN_SAMPLE( "MUTAGEN_SAMPLE" );
 static const flag_id json_flag_PIT( "PIT" );
 
 static const itype_id itype_milk( "milk" );
@@ -156,6 +158,7 @@ static const material_id material_bone( "bone" );
 static const material_id material_flesh( "flesh" );
 static const material_id material_hflesh( "hflesh" );
 static const material_id material_iflesh( "iflesh" );
+static const material_id material_migo_flesh( "migo_flesh" );
 static const material_id material_iron( "iron" );
 static const material_id material_steel( "steel" );
 static const material_id material_stone( "stone" );
@@ -166,9 +169,6 @@ static const mfaction_str_id monfaction_ant( "ant" );
 static const mfaction_str_id monfaction_bee( "bee" );
 static const mfaction_str_id monfaction_nether_player_hate( "nether_player_hate" );
 static const mfaction_str_id monfaction_wasp( "wasp" );
-
-static const morale_type morale_killer_has_killed( "morale_killer_has_killed" );
-static const morale_type morale_killer_need_to_kill( "morale_killer_need_to_kill" );
 
 static const species_id species_AMPHIBIAN( "AMPHIBIAN" );
 static const species_id species_CYBORG( "CYBORG" );
@@ -452,21 +452,17 @@ void monster::try_upgrade( bool pin_time )
     if( !can_upgrade() ) {
         return;
     }
-
-    const int current_day = to_days<int>( calendar::turn - calendar::turn_zero );
-    //This should only occur when a monster is created or upgraded to a new form
+    
+    const int current_day = to_days<int>( calendar::turn - calendar::fall_of_civilization );
+    // This should only occur when a monster is created or upgraded to a new form.
     if( upgrade_time < 0 ) {
         upgrade_time = next_upgrade_time();
         if( upgrade_time < 0 ) {
             return;
         }
         if( pin_time || type->age_grow > 0 ) {
-            // offset by today, always true for growing creatures
+            // Offset by today, always true for growing creatures
             upgrade_time += current_day;
-        } else {
-            // offset by starting season
-            // TODO: revisit this and make it simpler
-            upgrade_time += to_days<int>( calendar::fall_of_civilization - calendar::turn_zero );
         }
     }
 
@@ -475,12 +471,12 @@ void monster::try_upgrade( bool pin_time )
     // upgrades they'd get if we were simulating whole world.
     while( true ) {
         if( upgrade_time > current_day ) {
-            // not yet
+            // Not yet.
             return;
         }
 
         if( type->upgrade_into ) {
-            //If we upgrade into a blacklisted monster, treat it as though we are non-upgradeable
+            // If we upgrade into a blacklisted monster, treat it as though we are non-upgradeable.
             if( MonsterGroupManager::monster_is_blacklisted( type->upgrade_into ) ) {
                 return;
             }
@@ -492,7 +488,8 @@ void monster::try_upgrade( bool pin_time )
                 std::vector<MonsterGroupResult> res = MonsterGroupManager::GetResultFromGroup(
                         type->upgrade_group, nullptr, nullptr, false, &ret_default );
                 if( !res.empty() && !ret_default ) {
-                    // Set the type to poly the current monster (preserves inventory)
+                    // Set the type to polymorph the current monster (preserves inventory).
+                    // TODO: Destroy clothes if we are growing bigger.
                     new_type = res.front().name;
                     res.front().pack_size--;
                     for( const MonsterGroupResult &mgr : res ) {
@@ -518,7 +515,7 @@ void monster::try_upgrade( bool pin_time )
                 if( new_type ) {
                     poly( new_type );
                 } else {
-                    // "upgrading" to mon_null
+                    // "upgrading" to mon_null. This kills the monster.
                     if( type->upgrade_null_despawn ) {
                         g->remove_zombie( *this );
                     } else {
@@ -530,13 +527,13 @@ void monster::try_upgrade( bool pin_time )
         }
 
         if( !upgrades ) {
-            // upgraded into a non-upgradeable monster
+            // Upgraded into a non-upgradeable monster.
             return;
         }
 
         const int next_upgrade = next_upgrade_time();
         if( next_upgrade < 0 ) {
-            // hit never_upgrade
+            // Hit never_upgrade.
             return;
         }
         upgrade_time += next_upgrade;
@@ -548,7 +545,7 @@ void monster::try_reproduce()
     if( !reproduces ) {
         return;
     }
-    // This can happen if the monster type has changed (from reproducing to non-reproducing monster)
+    // This can happen if the monster type has changed (from reproducing to non-reproducing monster).
     if( !type->baby_timer ) {
         return;
     }
@@ -568,7 +565,7 @@ void monster::try_reproduce()
     bool season_spawn = false;
     bool season_match = true;
 
-    // only 50% of animals should reproduce
+    // Only 50% of animals should reproduce.
     bool female = one_in( 2 );
     for( const std::string &elem : type->baby_flags ) {
         if( elem == "SUMMER" || elem == "WINTER" || elem == "SPRING" || elem == "AUTUMN" ) {
@@ -577,7 +574,7 @@ void monster::try_reproduce()
     }
 
     map &here = get_map();
-    // add a decreasing chance of additional spawns when "catching up" an existing animal.
+    // Add a decreasing chance of additional spawns when "catching up" an existing animal.
     int chance = -1;
     while( true ) {
         if( !baby_timer.has_value() || *baby_timer > calendar::turn ) {
@@ -626,22 +623,22 @@ void monster::refill_udders()
         return;
     }
     if( ammo.empty() ) {
-        // legacy animals got empty ammo map, fill them up now if needed.
+        // Legacy animals got empty ammo map, fill them up now if needed.
         ammo[type->starting_ammo.begin()->first] = type->starting_ammo.begin()->second;
     }
     auto current_milk = ammo.find( itype_milk_raw );
     if( current_milk == ammo.end() ) {
         current_milk = ammo.find( itype_milk );
         if( current_milk != ammo.end() ) {
-            // take this opportunity to update milk udders to raw_milk
+            // Take this opportunity to update milk udders to raw_milk.
             ammo[itype_milk_raw] = current_milk->second;
-            // Erase old key-value from map
+            // Erase old key-value from map.
             ammo.erase( current_milk );
         }
     }
     // if we got here, we got milk.
     if( current_milk->second == type->starting_ammo.begin()->second ) {
-        // already full up
+        // Already full up.
         return;
     }
     if( !has_flag( mon_flag_EATS ) || has_effect( effect_critter_well_fed ) ) {
@@ -683,7 +680,10 @@ void monster::try_biosignature()
     if( is_hallucination() ) {
         return;
     }
-
+    // Keep poops from being uniform, especially when monsters first spawn.
+    if( one_in( 2 ) ) {
+        return;
+    }
     if( !biosignatures ) {
         return;
     }
@@ -693,15 +693,14 @@ void monster::try_biosignature()
     if( has_effect( effect_critter_underfed ) ) {
         return;
     }
-
     if( !biosig_timer ) {
         biosig_timer.emplace( calendar::turn + *type->biosig_timer );
     }
     map &here = get_map();
     int counter = 0;
     while( true ) {
-        // don't catch up too much, otherwise on some scenarios,
-        // we could have years worth of poop just deposited on the floor.
+        /* Don't catch up too much, otherwise in some scenarios, we
+           could have years worth of poop just deposited on the floor. */
         if( *biosig_timer > calendar::turn || counter > 50 ) {
             return;
         }
@@ -758,7 +757,7 @@ std::string monster::name( unsigned int quantity ) const
 std::string monster::name_with_armor() const
 {
     std::string ret;
-    if( made_of( material_iflesh ) ) {
+    if( made_of( material_iflesh ) || made_of( material_migo_flesh ) ) {
         ret = _( "carapace" );
     } else if( made_of( material_vegetable ) ) {
         ret = _( "thick bark" );
@@ -1046,7 +1045,7 @@ std::string monster::extended_description() const
 
     using flag_description = std::pair<const mon_flag_id, std::string>;
     const auto describe_flags = [this, &ss](
-                                    const std::string_view format,
+                                    std::string_view format,
                                     const std::vector<flag_description> &flags_names,
     const std::string &if_empty = "" ) {
         std::string flag_descriptions = enumerate_as_string( flags_names.begin(),
@@ -1062,7 +1061,7 @@ std::string monster::extended_description() const
 
     using property_description = std::pair<bool, std::string>;
     const auto describe_properties = [&ss](
-                                         const std::string_view format,
+                                         std::string_view format,
                                          const std::vector<property_description> &property_names,
     const std::string &if_empty = "" ) {
         std::string property_descriptions = enumerate_as_string( property_names.begin(),
@@ -2782,7 +2781,7 @@ void monster::disable_special( const std::string &special_name )
     special_attacks.at( special_name ).enabled = false;
 }
 
-bool monster::special_available( const std::string_view special_name ) const
+bool monster::special_available( std::string_view special_name ) const
 {
     std::map<std::string, mon_special_attack>::const_iterator iter = special_attacks.find(
                 special_name );
@@ -3314,7 +3313,7 @@ void monster::spawn_dissectables_on_death( item *corpse ) const
                 dissectable.set_flag( flg );
             }
             for( const fault_id &flt : entry.faults ) {
-                dissectable.faults.emplace( flt );
+                dissectable.set_fault( flt );
             }
             if( corpse ) {
                 corpse->put_in( dissectable, pocket_type::CORPSE );
@@ -3720,7 +3719,8 @@ creature_size monster::get_size() const
 
 units::mass monster::get_weight() const
 {
-    return units::operator*( type->weight, get_size() / type->size );
+    return enchantment_cache->modify_value( enchant_vals::mod::TOTAL_WEIGHT,
+                                            units::operator*( type->weight, get_size() / type->size ) );
 }
 
 units::mass monster::weight_capacity() const
@@ -3807,7 +3807,9 @@ void monster::init_from_item( item &itm )
         const int burnt_penalty = itm.burnt;
         hp = static_cast<int>( hp * 0.7 );
         if( itm.damage_level() > 0 ) {
-            set_speed_base( speed_base / ( itm.damage_level() + 1 ) );
+            if( itm.damage_level() > 1 ) {
+                set_speed_base( speed_base / 2 );
+            }
             hp /= itm.damage_level() + 1;
         }
 
@@ -3833,15 +3835,18 @@ void monster::init_from_item( item &itm )
             inv.push_back( *it );
             itm.remove_item( *it );
         }
-        //Move dissectables (installed bionics, etc)
+        // Move dissectables (installed bionics, etc)
         for( item *dissectable : itm.all_items_top( pocket_type::CORPSE ) ) {
-            dissectable_inv.push_back( *dissectable );
-            itm.remove_item( *dissectable );
+            // Mutagen samples do not survive this process.
+            if( !itm.has_flag( json_flag_MUTAGEN_SAMPLE ) ) {
+                dissectable_inv.push_back( *dissectable );
+                itm.remove_item( *dissectable );
+            }
         }
     } else {
-        // must be a robot
+        // Must be a robot.
         const int damfac = itm.max_damage() - std::max( 0, itm.damage() ) + 1;
-        // One hp at least, everything else would be unfair (happens only to monster with *very* low hp),
+        // One hp at least, everything else would be unfair (happens only to monster with *very* low hp).
         hp = std::max( 1, hp * damfac / ( itm.max_damage() + 1 ) );
     }
 }
@@ -3980,15 +3985,37 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
     }
 
     const bool goodhearing = has_flag( mon_flag_GOODHEARING );
-    const int volume = goodhearing ? 2 * vol - dist : vol - dist;
+    const int volume = static_cast<int>( std::round( goodhearing ? 2 * vol - dist : vol - dist ) );
     // Error is based on volume, louder sound = less error
-    if( volume <= 0 ) {
+    if( volume < 1 ) {
         return;
     }
 
-    int tmp_provocative = provocative || volume >= normal_roll( 30, 5 );
-    // already following a more interesting sound
-    if( provocative_sound && !tmp_provocative && wandf > 0 ) {
+    /* Prevent zombies from conga-lining into burning buildings.
+       TODO: There are probably other sounds they should ignore. An explosion is interesting, a car crash
+       is interesting, a house falling over is not interesting, because it doesn't obviously imply that
+       people must be there. */
+    bool probably_a_fire = false;
+    map &here = get_map();
+    for( const tripoint_bub_ms &pt : here.points_in_radius( source, 1, 1 ) ) {
+        const field_entry *fire_fld = here.get_field( pt, fd_fire );
+        // Only large, uncontained fires cause sounds to be ignored.
+        // TODO: Exempt some times of sounds.
+        if( fire_fld && fire_fld->get_field_intensity() > 1 &&
+            !here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FIRE_CONTAINER, pt ) ) {
+            probably_a_fire = true;
+            break;
+        }
+    }
+
+    int tmp_provocative = !probably_a_fire && ( provocative || volume >= normal_roll( 30, 5 ) );
+
+    // Not interesting sound, nothing to do here.
+    if( !tmp_provocative ) {
+        return;
+    }
+    // Already following a more interesting sound.
+    if( provocative_sound && wandf > 0 ) {
         return;
     }
 
@@ -4007,7 +4034,7 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
                              rng( -max_error, max_error ) );
     // target_z will require some special check due to soil muffling sounds
 
-    const int wander_turns = volume * ( goodhearing ? 6 : 1 );
+    const int wander_turns = static_cast<int>( std::round( volume * ( goodhearing ? 6 : 1 ) ) );
     // again, already following a more interesting sound
     if( wander_turns < wandf ) {
         return;

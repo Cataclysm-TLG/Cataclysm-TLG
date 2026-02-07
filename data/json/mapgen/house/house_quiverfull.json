@@ -15,7 +15,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_quiverfull" ],
     "weight": 300,
     "object": {
@@ -32,7 +31,7 @@
         "%#       +    +      O#.",
         ".#     |||R  R|J     5o.",
         ".#HHsHH|>    R|n     4o.",
-        ".#|||||| |R  R|JJ  123#.",
+        ".#|||||| |R  R|JJé 123#.",
         ".#q+          ||||+|||#.",
         ".#q+          +      d#.",
         ".#||+|||||||+||D    @@o.",

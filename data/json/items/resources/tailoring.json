@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "grass_yarn",
     "symbol": ",",
     "color": "light_gray",
@@ -14,7 +14,7 @@
   },
   {
     "id": "wool_staple",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "wool staple" },
     "description": "A natural cluster of wool fibers.  It could be processed into felt patches or spun into yarn.",
@@ -28,7 +28,7 @@
     "flags": [ "NO_SALVAGE" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "fur_patch",
     "symbol": ",",
     "color": "brown",
@@ -43,7 +43,7 @@
     "category": "spare_parts"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "faux_fur_patch",
     "copy-from": "fur_patch",
     "color": "pink",
@@ -54,7 +54,7 @@
     "material": [ "faux_fur" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "leather_patch",
     "symbol": ",",
     "color": "brown",
@@ -69,7 +69,7 @@
     "category": "spare_parts"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "felt_patch",
     "symbol": ",",
     "color": "white",
@@ -84,7 +84,7 @@
     "category": "spare_parts"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "nomex_patch",
     "category": "spare_parts",
     "symbol": ",",
@@ -99,7 +99,7 @@
     "volume": "9 ml"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "cured_hide",
     "symbol": ",",
     "color": "white",
@@ -115,7 +115,7 @@
     "to_hit": -1
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "leather_sheet",
     "name": { "str": "leather sheet" },
     "description": "A sheet of tanned animal hide.",
@@ -129,7 +129,7 @@
     "color": "brown"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "cured_pelt",
     "symbol": ",",
     "color": "brown",
@@ -145,7 +145,7 @@
     "to_hit": -1
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "fur_sheet",
     "symbol": ",",
     "color": "brown",
@@ -160,7 +160,7 @@
   },
   {
     "id": "cotton_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "cloth sheet" },
     "description": "A sheet of fabric made from a plant like cotton or linen.  It can be used to stop bleeding, but it would be better to actually make some bandages.",
@@ -177,7 +177,7 @@
   },
   {
     "id": "faux_fur_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "faux fur sheet" },
     "description": "A sheet of synthetic fur.",
@@ -192,7 +192,7 @@
   },
   {
     "id": "felt_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "felt sheet" },
     "description": "A sheet of fabric made from combed wool.",
@@ -208,7 +208,7 @@
   },
   {
     "id": "kevlar_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "Kevlar sheet" },
     "description": "A sheet of loosely-woven Kevlar fabric.  This variety lacks in ballistic protection, but would be great for making cut-resistant garments.",
@@ -223,7 +223,7 @@
   },
   {
     "id": "kevlar_patch",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "Kevlar patch", "str_pl": "Kevlar patches" },
     "description": "A palm-sized square of loosely-woven Kevlar fabric.  This variety lacks in ballistic protection, but would be great for making cut-resistant garments.",
@@ -237,8 +237,24 @@
     "color": "dark_gray"
   },
   {
+    "id": "spandex_patch",
+    "type": "ITEM",
+    "category": "spare_parts",
+    "name": { "str": "spandex patch", "str_pl": "spandex patches" },
+    "description": "A six-inch square patch of synthetic fabric blended with stretchy spandex fibers.  It could be used to make flexible yet strong clothing.  Stylish, but bad for the environment; at least you're recycling it.",
+    "weight": "4 g",
+    "volume": "15 ml",
+    "//": "180GSM, .63mm thick",
+    "price": "0 cent",
+    "price_postapoc": "10 cent",
+    "material": [ "spandex" ],
+    "symbol": ",",
+    "color": "light_blue",
+    "flags": [ "NO_SALVAGE" ]
+  },
+  {
     "id": "spandex_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "spandex sheet" },
     "description": "A sheet of stretchy synthetic fabric made of highly elastic fibers.",
@@ -253,7 +269,7 @@
   },
   {
     "id": "kevlar_sheet_layered",
-    "type": "TOOL",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "ballistic Kevlar panel" },
     "description": "16 layers of ballistic Kevlar sheets quilted together into a soft, flexible panel.  This kind of Kevlar is precision-made by machine and features an extremely tight and uniform weave which cannot be replicated by hand.",
@@ -269,7 +285,7 @@
   },
   {
     "id": "kevlar_plate",
-    "type": "TOOL",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "Kevlar plate" },
     "description": "A compressed panel of layered Kevlar fabric saturated with epoxy or other adhesive to make it stiff as a board.",
@@ -283,15 +299,29 @@
     "color": "green"
   },
   {
+    "type": "ITEM",
+    "id": "neoprene_patch",
+    "symbol": ",",
+    "color": "dark_gray",
+    "name": { "str": "neoprene patch", "str_pl": "neoprene patches" },
+    "description": "A small neoprene patch.  It can be used to repair neoprene clothing.",
+    "price": "1 USD",
+    "price_postapoc": "5 cent",
+    "material": [ "neoprene" ],
+    "flags": [ "NO_SALVAGE" ],
+    "weight": "3 g",
+    "volume": "23 ml",
+    "category": "spare_parts"
+  },
+  {
     "id": "neoprene_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "neoprene sheet" },
     "description": "A sheet of neoprene, a synthetic rubber, suitable for making underwater gear.",
     "weight": "26 g",
     "volume": "186 ml",
-    "//": "110GSM, 1mm thick neoprene",
-    "price": "50 USD",
+    "price": "5 USD",
     "price_postapoc": "35 cent",
     "material": [ "neoprene" ],
     "symbol": "=",
@@ -299,7 +329,7 @@
   },
   {
     "id": "nomex_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "Nomex sheet" },
     "description": "A sheet of Nomex synthetic fabric, suitable for making heat-resistant clothing.",
@@ -313,8 +343,24 @@
     "color": "dark_gray"
   },
   {
+    "id": "nylon_patch",
+    "type": "ITEM",
+    "category": "spare_parts",
+    "name": { "str": "nylon patch", "str_pl": "nylon patches" },
+    "description": "A palm-sized square of synthetic fabric.",
+    "weight": "5750 mg",
+    "volume": "5 ml",
+    "//": ".25mm thick, 288GSM",
+    "price": "0 cent",
+    "price_postapoc": "10 cent",
+    "material": [ "nylon" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [ "NO_SALVAGE" ]
+  },
+  {
     "id": "nylon_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "nylon sheet" },
     "description": "A sheet of synthetic fabric.",
@@ -330,7 +376,7 @@
   },
   {
     "id": "gambeson_batting",
-    "type": "TOOL",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "gambeson batting", "str_pl": "clumps of gambeson batting" },
     "description": "A pile of shredded fabric, dry grass, hair or other cheap materials which could be used to stuff the fabric layers of a gambeson to create armor more cheaply and easily than properly layering and quilting the entire product.",
@@ -343,7 +389,8 @@
     "flags": [ "NO_SALVAGE" ]
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "thread_kevlar",
     "category": "spare_parts",
     "price": "50 USD",
@@ -363,7 +410,8 @@
     "stack_size": 200
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "thread_nomex",
     "category": "spare_parts",
     "price": "50 USD",
@@ -384,7 +432,7 @@
   },
   {
     "id": "denim_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "denim sheet" },
     "description": "A sheet of densely woven cotton.  Denim is usually used for making jeans, but the fabric is both tough and soft enough for a variety of uses.",
@@ -399,7 +447,7 @@
     "color": "dark_gray"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "denim_patch",
     "symbol": ",",
     "color": "white",
@@ -415,7 +463,7 @@
   },
   {
     "id": "canvas_sheet",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "canvas sheet" },
     "description": "A sheet of durable and waterproof waxed canvas fabric, suitable for making tough bags and clothing.",
@@ -430,7 +478,8 @@
     "color": "dark_gray"
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "thread_canvas",
     "category": "spare_parts",
     "price": "12 USD",
@@ -450,7 +499,7 @@
     "stack_size": 200
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "canvas_patch",
     "symbol": ",",
     "color": "white",
@@ -467,7 +516,7 @@
   },
   {
     "id": "strap_cotton",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "fabric strap" },
     "description": "A strip of broad, flat cloth with a metal adjustment buckle threaded in the centre.  Normally used as a shoulder strap for bags, its ends are usually sown about a corresponding container's D-rings.",

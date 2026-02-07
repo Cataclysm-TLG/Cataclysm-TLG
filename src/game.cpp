@@ -5800,24 +5800,22 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it )
 
 bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
 {
-    if( !it.is_corpse() ) {
-        debugmsg( "Tried to revive a non-corpse." );
-        return false;
-    }
     // If this is not here, the game may attempt to spawn a monster before the map exists,
     // leading to it querying for furniture, and crashing.
     if( g->new_game ) {
         return false;
     }
+    if( !it.is_corpse() ) {
+        debugmsg( "Tried to revive a non-corpse." );
+        return false;
+    }
     if( !it.can_revive() ) {
         return false;
     }
-
     assing_revive_form( it, p );
-
     shared_ptr_fast<monster> newmon_ptr;
     if( it.has_var( "zombie_form" ) ) {
-        // the monster was not a zombie but turns into one when its corpse is revived
+        // The monster was not a zombie but turns into one when its corpse is revived.
         newmon_ptr = make_shared_fast<monster>( mtype_id( it.get_var( "zombie_form" ) ) );
     } else {
         newmon_ptr = make_shared_fast<monster>( it.get_mtype()->id );
@@ -5825,7 +5823,7 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
     monster &critter = *newmon_ptr;
     critter.init_from_item( it );
     if( critter.get_hp() < 1 ) {
-        // Failed reanimation due to corpse being too burned
+        // Failed reanimation due to corpse being too burned.
         return false;
     }
 
@@ -6016,14 +6014,16 @@ void game::control_vehicle()
         }
     }
     vehicle *veh = nullptr;
+    bool controls_ok = false;
+    bool reins_ok = false;
     if( const optional_vpart_position vp = here.veh_at( u.pos_bub() ) ) {
         veh = &vp->vehicle();
         const int controls_idx = veh->avail_part_with_feature( vp->mount_pos(), "CONTROLS" );
         const int reins_idx = veh->avail_part_with_feature( vp->mount_pos(), "CONTROL_ANIMAL" );
-        const bool controls_ok = controls_idx >= 0; // controls available to "drive"
-        const bool reins_ok = reins_idx >= 0 // reins + animal available to "drive"
-                              && veh->has_engine_type( fuel_type_animal, false )
-                              && veh->get_harnessed_animal( here );
+        controls_ok = controls_idx >= 0; // controls available to "drive"
+        reins_ok = reins_idx >= 0 // reins + animal available to "drive"
+                   && veh->has_engine_type( fuel_type_animal, false )
+                   && veh->get_harnessed_animal( here );
         if( veh->player_in_control( here, u ) ) {
             // player already "driving" - offer ways to leave
             if( controls_ok ) {
@@ -6077,7 +6077,7 @@ void game::control_vehicle()
             }
         }
     }
-    if( !veh ) { // no controls or animal reins under player position, search nearby
+    if( !controls_ok && !reins_ok ) { // no controls or reins under player position, search nearby
         int num_valid_controls = 0;
         std::optional<tripoint_bub_ms> vehicle_position;
         std::optional<vpart_reference> vehicle_controls;
@@ -7564,7 +7564,7 @@ void game::zones_manager()
                         colorLine = zone.get_enabled() ? c_light_green : c_green;
                     }
 
-                    //Draw Zone name
+                    // Draw Zone name.
                     mvwprintz( w_zones, point( 3, iNum - start_index ), colorLine,
                                //~ "P: <Zone Name>" represents a personal zone
                                trim_by_length( ( zone.get_is_personal() ? _( "P: " ) : "" ) + zone.get_name(),
@@ -7572,13 +7572,13 @@ void game::zones_manager()
 
                     tripoint_abs_ms center = zone.get_center_point();
 
-                    //Draw direction + distance
+                    // Draw direction + distance.
                     mvwprintz( w_zones, point( zone_ui_width - 13, iNum - start_index ), colorLine, "%*d %s",
-                               5, static_cast<int>( trig_dist( player_absolute_pos, center ) ),
+                               5, trig_dist( player_absolute_pos, center ),
                                direction_name_short( direction_from( player_absolute_pos,
                                                      center ) ) );
 
-                    //Draw Vehicle Indicator
+                    // Draw Vehicle Indicator.
                     mvwprintz( w_zones, point( zone_ui_width - 4, iNum - start_index ), colorLine,
                                zone.get_is_vehicle() ? "*" : "" );
                 }
@@ -10936,13 +10936,13 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
         pulling = dp.xy() == -u.grab_point.xy();
     }
 
-    // Now make sure we're actually holding something
+    // Now make sure we're actually holding something.
     if( grabbed && u.get_grab_type() == object_type::FURNITURE ) {
-        // We only care about shifting, because it's the only one that can change our destination
+        // We only care about shifting, because it's the only one that can change our destination.
         if( here.has_furn( pos + u.grab_point ) ) {
             shifting_furniture = !pushing && !pulling;
         } else {
-            // We were grabbing a furniture that isn't there
+            // We were grabbing a furniture that isn't there.
             grabbed = false;
         }
     } else if( grabbed && u.get_grab_type() == object_type::VEHICLE ) {
@@ -10951,14 +10951,15 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
             // We were grabbing a vehicle that isn't there anymore.
             grabbed = false;
         }
-        //can't board vehicle with solid parts while grabbing it
+        // Can't board vehicle with solid parts while grabbing it.
         else if( vp_there && !pushing && !here.impassable( dest_loc ) &&
                  !empty( grabbed_vehicle->get_avail_parts( VPFLAG_OBSTACLE ) ) &&
                  &vp_there->vehicle() == grabbed_vehicle ) {
             add_msg( m_warning, _( "You move into the %s, releasing it." ), grabbed_vehicle->name );
             u.grab( object_type::NONE );
         }
-    } else if( grabbed && !u.has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+    } else if( grabbed && !u.has_effect_with_flag( json_flag_GRAB_FILTER ) &&
+               u.get_grab_type() != object_type::FURNITURE_ON_VEHICLE ) {
         // We were grabbing something weird, let's pretend we weren't.
         grabbed = false;
     }
@@ -11801,15 +11802,30 @@ bool game::can_move_furniture( tripoint_bub_ms fdest, const tripoint_rel_ms &dp 
     bool is_ramp_or_road = here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, fdest ) ||
                            here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, fdest ) ||
                            here.has_flag( ter_furn_flag::TFLAG_ROAD, fdest );
-    return  here.passable( fdest ) &&
-            creatures.creature_at<npc>( fdest ) == nullptr &&
-            creatures.creature_at<monster>( fdest ) == nullptr &&
-            ( !pulling_furniture || is_empty( u.pos_bub() + dp ) ) &&
-            ( !has_floor || here.has_flag( ter_furn_flag::TFLAG_FLAT, fdest ) ||
-              is_ramp_or_road ) &&
-            !here.has_furn( fdest ) &&
-            !here.veh_at( fdest ) &&
-            ( !has_floor || here.tr_at( fdest ).is_null() );
+    if( !here.passable( fdest ) ) {
+        return false;
+    }
+    if( creatures.creature_at<npc>( fdest ) != nullptr ||
+        creatures.creature_at<monster>( fdest ) != nullptr ) {
+        return false;
+    }
+    if( !( !pulling_furniture || is_empty( u.pos_bub() + dp ) ) &&
+        ( !has_floor || here.has_flag( ter_furn_flag::TFLAG_FLAT, fdest ) ||
+          is_ramp_or_road ) ) {
+        return false;
+    }
+    if( here.has_furn( fdest ) ) {
+        return false;
+    }
+    if( here.veh_at( fdest ) ) {
+        if( !here.veh_at( fdest )->can_load_furniture() ) {
+            return false;
+        }
+    }
+    if( !( !has_floor || here.tr_at( fdest ).is_null() ) ) {
+        return false;
+    }
+    return true;
 }
 
 int game::grabbed_furn_move_time( const tripoint_rel_ms &dp )
@@ -12008,9 +12024,24 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
     sounds::sound( fdest, furntype.move_str_req * 2, sounds::sound_t::movement,
                    _( "a scraping noise." ), true, "misc", "scraping" );
 
-    // Actually move the furniture.
-    here.furn_set( fdest, here.furn( fpos ), false, false, true );
-    here.furn_set( fpos, furn_str_id::NULL_ID(), true );
+    if( here.veh_at( fdest ) ) {
+        u.grab( object_type::NONE );
+        here.veh_at( fdest )->part_with_feature( "FURNITURE_TIEDOWN", true )->part().load_furniture( here,
+                fpos );
+        here.furn_set( fpos, furn_str_id::NULL_ID(), true );
+        here.veh_at( fdest )->vehicle().invalidate_mass();
+        add_msg( _( "You load the furniture onto the vehicle." ) );
+        tripoint_rel_ms new_grab_pt( fdest - ( u.pos_bub() +
+                                               ( shifting_furniture ? tripoint_rel_ms::zero : dp ) ) );
+        if( std::abs( new_grab_pt.x() ) < 2 && std::abs( new_grab_pt.y() ) < 2 ) {
+            u.grab( object_type::FURNITURE_ON_VEHICLE, new_grab_pt );
+        }
+        return shifting_furniture;
+    } else {
+        // Actually move the furniture.
+        here.furn_set( fdest, here.furn( fpos ), false, false, true );
+        here.furn_set( fpos, furn_str_id::NULL_ID(), true );
+    }
 
     if( fire_intensity == 1 && !pulling_furniture ) {
         here.remove_field( fpos, fd_fire );
@@ -12097,6 +12128,11 @@ bool game::grabbed_move( const tripoint_rel_ms &dp, const bool via_ramp )
         return true;
     }
 
+    if( u.get_grab_type() == object_type::FURNITURE_ON_VEHICLE ) {
+        u.assign_activity( move_furniture_on_vehicle_activity_actor( dp, via_ramp ) );
+        return true;
+    }
+
     add_msg( m_info, _( "Nothing at grabbed point %d,%d,%d or bad grabbed object type." ),
              u.grab_point.x(), u.grab_point.y(), u.grab_point.z() );
     u.grab( object_type::NONE );
@@ -12173,10 +12209,11 @@ void game::water_affect_items( Character &ch ) const
             loc->deactivate();
             // TODO: Maybe different types of wet faults? But I can't think of any.
             // This just means it's still too wet to use.
-            loc->set_fault( faults::random_of_type( "wet" ) ) ;
+            // TODO2: add fault types to electronics, remove `force` argument from here
+            loc->set_random_fault_of_type( "wet", true );
             // An electronic item in water is also shorted.
             if( loc->has_flag( flag_ELECTRONIC ) ) {
-                loc->set_fault( faults::random_of_type( "shorted" ) );
+                loc->set_random_fault_of_type( "shorted", true );
             }
         } else if( loc->has_flag( flag_WATER_BREAK_ACTIVE ) && !loc->is_broken()
                    && !loc.protected_from_liquids() ) {
@@ -13961,7 +13998,10 @@ void game::animate_weather()
         // No weather animation, nothing to do
         return;
     }
-
+    if( get_player_character().is_underwater() ) {
+        // Bail out if we're underwater, no animation needed.
+        return;
+    }
     const int dropCount = static_cast<int>( iEnd.x * iEnd.y * weather_info.factor );
 
     weather_printable wPrint;

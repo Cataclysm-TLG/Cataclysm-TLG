@@ -3,7 +3,8 @@
     "id": "makarov",
     "copy-from": "pistol_base",
     "looks_like": "glock_17",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "name": { "str": "Makarov pistol" },
     "description": "The Makarov was developed by the Soviet Union to replace the Red Army's obsolete WWII-era handguns.  It uses the 9x18mm cartridge, which remains in use among various former Soviet countries.",
     "variant_type": "gun",
@@ -46,7 +47,8 @@
   {
     "id": "rifle_9x18",
     "looks_like": "modular_ar15",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "name": { "str": "pipe rifle" },
     "description": "A home-made rifle.  It is simply a pipe attached to a stock, with a hammer to strike the single round it holds.",
@@ -70,7 +72,7 @@
     "barrel_volume": "360 ml",
     "barrel_length": "600 mm",
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "NO_TURRET", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "9x18": 1 } } ],
     "melee_damage": { "bash": 10 }

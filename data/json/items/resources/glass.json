@@ -1,6 +1,7 @@
 [
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "glass_shard",
     "ammo_type": "NULL",
     "symbol": ",",
@@ -13,7 +14,8 @@
     "volume": "30 ml"
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "tempered_glass_shard",
     "ammo_type": "NULL",
     "symbol": ",",
@@ -29,7 +31,8 @@
     "to_hit": -2
   },
   {
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "id": "glass_shard_large",
     "symbol": ",",
     "color": "light_cyan",
@@ -46,7 +49,7 @@
     "weapon_category": [ "SHIVS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "glass_sheet",
     "symbol": "]",
     "color": "light_cyan",
@@ -64,7 +67,7 @@
     "melee_damage": { "bash": 4 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "reinforced_glass_sheet",
     "symbol": "]",
     "color": "light_blue",
@@ -81,7 +84,7 @@
     "melee_damage": { "bash": 6 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "reinforced_glass_pane",
     "symbol": "]",
     "color": "light_blue",
@@ -98,7 +101,7 @@
     "melee_damage": { "bash": 4 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "tempered_glass_sheet",
     "symbol": "]",
     "color": "light_cyan",

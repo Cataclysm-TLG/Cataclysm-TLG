@@ -3,7 +3,8 @@
     "id": "hk_mp7",
     "copy-from": "smg_base",
     "looks_like": "hk_mp5",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "name": { "str": "H&K MP7A2 SMG" },
     "description": "Designed as a personal defense weapon, the MP7 fires the high-powered 4.6x30mm round while being lightweight, compact in size, and practically recoil-free.",
     "weight": "1960 g",
@@ -33,6 +34,14 @@
       [ "sling", 1 ],
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
+    ],
+    "faults": [
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" },
+      { "fault": "fault_gun_chamber_spent" },
+      { "fault": "fault_fail_to_feed" },
+      { "fault": "fault_stovepipe" },
+      { "fault": "fault_double_feed" }
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "hk46mag", "hk46bigmag" ] } ],
     "melee_damage": { "bash": 7 }

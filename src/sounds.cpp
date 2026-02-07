@@ -266,8 +266,7 @@ static int sound_distance( const tripoint_bub_ms &source, const tripoint_bub_ms 
     }
     // Regardless of underground effects, scale the vertical distance by 5x.
     vertical_attenuation *= 5;
-    return static_cast<int>( std::round( trig_dist_z_adjust( source.xy(),
-                                         sink.xy() ) ) ) + vertical_attenuation;
+    return trig_dist( source.xy(), sink.xy() ) + vertical_attenuation;
 }
 
 static std::string season_str( const season_type &season )
@@ -585,10 +584,10 @@ void sounds::process_sound_markers( Character *you )
 
         // The felt volume of a sound is not affected by negative multipliers, such as already
         // deafened players or players with sub-par hearing to begin with.
-        int felt_volume = static_cast<int>( raw_volume * std::min( 1.0f,
-                                            volume_multiplier ) ) - distance_to_sound;
+        int felt_volume = static_cast<int>( std::round( ( raw_volume * std::min( 1.0f,
+                                            volume_multiplier ) ) - distance_to_sound ) );
         if( you->has_flag( json_flag_HEARING_PROTECTION ) ) {
-            felt_volume /= 2;
+            felt_volume = static_cast<int>( std::round( felt_volume /= 2 ) );
         }
         // Deafening is based on the felt volume, as a player may be too deaf to
         // hear the deafening sound but still suffer additional hearing loss.
@@ -619,10 +618,10 @@ void sounds::process_sound_markers( Character *you )
         }
 
         // The heard volume of a sound is the player heard volume, regardless of true volume level.
-        const int heard_volume = static_cast<int>( ( raw_volume - weather_vol ) *
-                                 volume_multiplier ) - distance_to_sound;
+        const int heard_volume = static_cast<int>( std::round( ( ( raw_volume - weather_vol ) *
+                                 volume_multiplier ) - distance_to_sound ) );
 
-        if( heard_volume <= 0 && pos != you->pos_bub() ) {
+        if( heard_volume < 1 && pos != you->pos_bub() ) {
             continue;
         }
 
@@ -1002,14 +1001,16 @@ void sfx::do_vehicle_engine_sfx()
         current_gear = previous_gear;
     }
 
-    if( current_gear > previous_gear ) {
-        play_variant_sound( "vehicle", "gear_shift", seas_str, indoors, night,
-                            get_heard_volume( player_character.pos_bub() ), 0_degrees, 0.8, 0.8 );
-        add_msg_debug( debugmode::DF_SOUND, "GEAR UP" );
-    } else if( current_gear < previous_gear ) {
-        play_variant_sound( "vehicle", "gear_shift", seas_str, indoors, night,
-                            get_heard_volume( player_character.pos_bub() ), 0_degrees, 1.2, 1.2 );
-        add_msg_debug( debugmode::DF_SOUND, "GEAR DOWN" );
+    if( !veh->is_autodriving ) {
+        if( current_gear > previous_gear ) {
+            play_variant_sound( "vehicle", "gear_shift", seas_str, indoors, night,
+                                get_heard_volume( player_character.pos_bub() ), 0_degrees, 0.8, 0.8 );
+            add_msg_debug( debugmode::DF_SOUND, "GEAR UP" );
+        } else if( current_gear < previous_gear ) {
+            play_variant_sound( "vehicle", "gear_shift", seas_str, indoors, night,
+                                get_heard_volume( player_character.pos_bub() ), 0_degrees, 1.2, 1.2 );
+            add_msg_debug( debugmode::DF_SOUND, "GEAR DOWN" );
+        }
     }
     double pitch = 1.0;
     if( current_gear != 0 ) {
@@ -1021,7 +1022,7 @@ void sfx::do_vehicle_engine_sfx()
         }
     }
 
-    if( current_speed != previous_speed ) {
+    if( !veh->is_autodriving && current_speed != previous_speed ) {
         Mix_HaltChannel( static_cast<int>( ch ) );
         add_msg_debug( debugmode::DF_SOUND, "STOP speed %d =/= %d", current_speed, previous_speed );
         play_ambient_variant_sound( id_and_variant.first, id_and_variant.second,
@@ -1454,7 +1455,6 @@ void sfx::sound_thread::operator()() const
     const std::string seas_str = season_str( seas );
     const bool indoors = !is_creature_outside( get_player_character() );
     const bool night = is_night( calendar::turn );
-
     if( weapon_skill == skill_bashing && weapon_volume <= 8 ) {
         variant_used = "small_bash";
         play_variant_sound( "melee_swing", "small_bash", seas_str, indoors, night,
@@ -1507,6 +1507,9 @@ void sfx::do_projectile_hit( const Creature &target )
     }
 
     const int heard_volume = sfx::get_heard_volume( target.pos_bub() );
+    if( heard_volume < 1 ) {
+        return;
+    }
     const units::angle angle = get_heard_angle( target.pos_bub() );
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
@@ -1554,6 +1557,9 @@ void sfx::do_player_death_hurt( const Character &target, bool death )
     const bool indoors = !is_creature_outside( get_player_character() );
     const bool night = is_night( calendar::turn );
     int heard_volume = get_heard_volume( target.pos_bub() );
+    if( heard_volume < 1 ) {
+        return;
+    }
     const bool male = target.male;
     if( !male && !death ) {
         play_variant_sound( "deal_damage", "hurt_f", seas_str, indoors, night, heard_volume );
@@ -1746,6 +1752,9 @@ void sfx::do_footstep()
     if( std::chrono::duration_cast<std::chrono::milliseconds> ( sfx_time ).count() > 400 ) {
         const Character &player_character = get_player_character();
         int heard_volume = sfx::get_heard_volume( player_character.pos_bub() );
+        if( heard_volume < 1 ) {
+            return;
+        }
         const auto terrain = here.ter( player_character.pos_bub() ).id();
         static const std::set<ter_str_id> grass = {
             ter_t_grass,
@@ -1904,6 +1913,9 @@ void sfx::do_obstacle( const std::string &obst )
         const bool indoors = !is_creature_outside( player_character );
         const bool night = is_night( calendar::turn );
         int heard_volume = sfx::get_heard_volume( player_character.pos_bub() );
+        if( heard_volume < 1 ) {
+            return;
+        }
         if( sfx::has_variant_sound( "plmove", obst, seas_str, indoors, night ) ) {
             play_variant_sound( "plmove", obst, seas_str, indoors, night,
                                 heard_volume, 0_degrees, 0.8, 1.2 );

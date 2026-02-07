@@ -94,7 +94,8 @@
     "category": "CC_FOOD",
     "id_suffix": "using_tablets",
     "subcategory": "CSC_FOOD_DRINKS",
-    "skill_used": "cooking",
+    "skill_used": "chemistry",
+    "difficulty": 1,
     "time": "5 m",
     "batch_time_factors": [ 90, 2 ],
     "charges": 4,
@@ -126,6 +127,7 @@
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "chemistry",
     "time": "40 m",
+    "difficulty": 1,
     "autolearn": true,
     "batch_time_factors": [ 80, 4 ],
     "charges": 10,
@@ -143,6 +145,7 @@
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "chemistry",
     "time": "200 m",
+    "difficulty": 1,
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_distilling" } ],
     "batch_time_factors": [ 80, 4 ],
@@ -160,8 +163,8 @@
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "chemistry",
     "time": "40 m",
+    "difficulty": 1,
     "autolearn": true,
-    "//": "Too simple for any chemistry knowledge. No actual chemical reactions present.",
     "batch_time_factors": [ 80, 4 ],
     "qualities": [ { "id": "BOIL", "level": 1 } ],
     "tools": [ [ [ "water_boiling_heat", 7, "LIST" ] ] ],
@@ -1248,10 +1251,7 @@
     "subcategory": "CSC_FOOD_VEGGI",
     "skill_used": "cooking",
     "difficulty": 2,
-    "book_learn": {
-      "cookbook_sushi": { "skill_level": 2 },
-      "cookbook_daintydishes": { "skill_level": 3, "recipe_name": "Sticky Rice Hedgerows" }
-    },
+    "book_learn": { "cookbook_sushi": { "skill_level": 2 }, "cookbook_daintydishes": { "skill_level": 3 } },
     "time": "5 m",
     "charges": 3,
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "CONTAIN", "level": 1 } ],
@@ -1461,10 +1461,7 @@
     "subcategory": "CSC_FOOD_MEAT",
     "skill_used": "cooking",
     "difficulty": 4,
-    "book_learn": {
-      "cookbook_sushi": { "skill_level": 4 },
-      "cookbook_foodfashions": { "skill_level": 4, "recipe_name": "Low-Carb Sashimi Donburi" }
-    },
+    "book_learn": { "cookbook_sushi": { "skill_level": 4 }, "cookbook_foodfashions": { "skill_level": 4 } },
     "time": "9 m",
     "charges": 2,
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "CONTAIN", "level": 1 } ],
@@ -1493,6 +1490,7 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "time": "4 m",
     "autolearn": true,
     "flags": [ "BLIND_HARD", "NO_MORALE_OK" ],
@@ -1505,6 +1503,7 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "time": "4 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
@@ -2031,7 +2030,7 @@
       "manual_survival": { "skill_level": 1 },
       "mag_survival": { "skill_level": 1 },
       "family_cookbook": { "skill_level": 1 },
-      "cookbook_daintydishes": { "skill_level": 2, "recipe_name": "Royal Penny Tea" }
+      "cookbook_daintydishes": { "skill_level": 2 }
     },
     "qualities": [ { "id": "COOK", "level": 2 }, { "id": "CUT", "level": 1 } ],
     "tools": [ [ [ "water_boiling_heat", 2, "LIST" ] ] ],
@@ -2072,7 +2071,7 @@
       "manual_survival": { "skill_level": 1 },
       "mag_survival": { "skill_level": 1 },
       "family_cookbook": { "skill_level": 1 },
-      "cookbook_daintydishes": { "skill_level": 2, "recipe_name": "Royal Penny Tea" }
+      "cookbook_daintydishes": { "skill_level": 2 }
     },
     "qualities": [ { "id": "COOK", "level": 2 }, { "id": "CUT", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ], [ [ "frying_oil", 1, "LIST" ] ] ],
@@ -2124,7 +2123,7 @@
       "manual_survival": { "skill_level": 1 },
       "mag_survival": { "skill_level": 1 },
       "family_cookbook": { "skill_level": 1 },
-      "cookbook_daintydishes": { "skill_level": 2, "recipe_name": "Royal Penny Tea" }
+      "cookbook_daintydishes": { "skill_level": 2 }
     },
     "//": "the cooking oil isn't supposed to be expended since you can recycle it after frying the burdocks",
     "qualities": [ { "id": "COOK", "level": 2 }, { "id": "CUT", "level": 1 } ],
@@ -2635,7 +2634,7 @@
       "manual_survival": { "skill_level": 1 },
       "mag_survival": { "skill_level": 1 },
       "family_cookbook": { "skill_level": 1 },
-      "cookbook_daintydishes": { "skill_level": 2, "recipe_name": "Royal Penny Tea" }
+      "cookbook_daintydishes": { "skill_level": 2 }
     },
     "qualities": [ { "id": "BOIL", "level": 1 }, { "id": "CUT", "level": 1 } ],
     "tools": [ [ [ "water_boiling_heat", 2, "LIST" ] ] ],
@@ -2820,7 +2819,7 @@
     "flags": [ "NO_MORALE_OK" ],
     "time": "10 m",
     "autolearn": true,
-    "batch_time_factors": [ 80, 4 ],
+    "batch_time_factors": [ 75, 2 ],
     "qualities": [ { "id": "BOIL", "level": 1 } ],
     "tools": [ [ [ "water_boiling_heat", 1, "LIST" ] ] ],
     "components": [ [ [ "coffee_raw", 1 ], [ "coffee_syrup", 1 ] ], [ [ "water", 1 ], [ "water_clean", 1 ] ] ]
@@ -2834,6 +2833,7 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "time": "2 m",
     "autolearn": true,
     "components": [ [ [ "instant_coffee", 1 ] ], [ [ "water_clean", 1 ] ] ]
@@ -2848,7 +2848,7 @@
     "flags": [ "NO_MORALE_OK" ],
     "time": "10 m",
     "autolearn": true,
-    "batch_time_factors": [ 80, 4 ],
+    "batch_time_factors": [ 75, 2 ],
     "qualities": [ { "id": "BOIL", "level": 1 } ],
     "tools": [ [ [ "water_boiling_heat", 1, "LIST" ] ] ],
     "proficiencies": [ { "proficiency": "prof_forage_cooking" } ],
@@ -2867,7 +2867,7 @@
     "time": "15 m",
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "FINE_GRIND", "level": 1 }, { "id": "STRAIN", "level": 2 } ],
     "autolearn": true,
-    "batch_time_factors": [ 30, 1 ],
+    "batch_time_factors": [ 20, 2 ],
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
     "components": [ [ [ "almond_shelled", 2 ] ], [ [ "water_clean", 3 ] ] ],
     "charges": 3
@@ -2885,7 +2885,7 @@
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "STRAIN", "level": 2 } ],
     "tools": [ [ [ "food_processor", 20 ] ] ],
     "autolearn": true,
-    "batch_time_factors": [ 80, 1 ],
+    "batch_time_factors": [ 20, 2 ],
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
     "components": [ [ [ "almond_shelled", 2 ] ], [ [ "water_clean", 3 ] ] ],
     "charges": 3
@@ -2903,7 +2903,7 @@
     "time": "15 m",
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "FINE_GRIND", "level": 1 }, { "id": "STRAIN", "level": 2 } ],
     "autolearn": true,
-    "batch_time_factors": [ 30, 1 ],
+    "batch_time_factors": [ 20, 2 ],
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
     "components": [ [ [ "hazelnut_shelled", 2 ] ], [ [ "water_clean", 3 ] ] ],
     "charges": 3
@@ -2921,7 +2921,7 @@
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "STRAIN", "level": 2 } ],
     "tools": [ [ [ "food_processor", 20 ] ] ],
     "autolearn": true,
-    "batch_time_factors": [ 80, 1 ],
+    "batch_time_factors": [ 20, 2 ],
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
     "components": [ [ [ "hazelnut_shelled", 2 ] ], [ [ "water_clean", 3 ] ] ],
     "charges": 3
@@ -2939,7 +2939,7 @@
     "time": "15 m",
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "FINE_GRIND", "level": 1 }, { "id": "STRAIN", "level": 2 } ],
     "autolearn": true,
-    "batch_time_factors": [ 30, 1 ],
+    "batch_time_factors": [ 20, 2 ],
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
     "components": [ [ [ "walnut_shelled", 2 ] ], [ [ "water_clean", 3 ] ] ],
     "charges": 3
@@ -2957,7 +2957,7 @@
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "STRAIN", "level": 2 } ],
     "tools": [ [ [ "food_processor", 20 ] ] ],
     "autolearn": true,
-    "batch_time_factors": [ 80, 1 ],
+    "batch_time_factors": [ 20, 2 ],
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
     "components": [ [ [ "walnut_shelled", 2 ] ], [ [ "water_clean", 3 ] ] ],
     "charges": 3
@@ -2974,7 +2974,7 @@
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "STRAIN", "level": 2 } ],
     "tools": [ [ [ "food_processor", 20 ] ], [ [ "surface_heat", 10, "LIST" ] ] ],
     "autolearn": true,
-    "batch_time_factors": [ 25, 2 ],
+    "batch_time_factors": [ 20, 2 ],
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
     "components": [ [ [ "soybean", 2 ] ], [ [ "water_clean", 2 ] ] ]
   },
@@ -3030,6 +3030,7 @@
     "skill_used": "cooking",
     "time": "1 m",
     "autolearn": true,
+    "batch_time_factors": [ 75, 2 ],
     "components": [ [ [ "con_milk", 5 ] ], [ [ "water_clean", 3 ] ] ],
     "charges": 4
   },
@@ -3044,6 +3045,7 @@
     "charges": 4,
     "time": "1 m",
     "autolearn": true,
+    "batch_time_factors": [ 75, 2 ],
     "components": [ [ [ "cheese_powder", 4 ] ], [ [ "water_clean", 1 ], [ "milk_standard", 1, "LIST" ] ] ]
   },
   {
@@ -3163,6 +3165,7 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "difficulty": 1,
     "time": "2 m",
     "autolearn": true,
@@ -3178,6 +3181,7 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "time": "30 s",
     "autolearn": true,
     "components": [ [ [ "lemonade_powder", 1 ] ], [ [ "water_clean", 1 ] ] ]
@@ -3189,6 +3193,7 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "difficulty": 1,
     "time": "30 s",
     "autolearn": true,
@@ -3203,6 +3208,7 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "difficulty": 1,
     "time": "7 m",
     "charges": 1,
@@ -3222,6 +3228,7 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "difficulty": 1,
     "time": "7 m",
     "autolearn": true,
@@ -3242,6 +3249,7 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "difficulty": 1,
     "time": "30 s",
     "autolearn": true,
@@ -3255,6 +3263,7 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "difficulty": 1,
     "time": "30 s",
     "autolearn": true,
@@ -3268,6 +3277,7 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "cooking",
+    "batch_time_factors": [ 75, 2 ],
     "difficulty": 1,
     "time": "30 s",
     "autolearn": true,
@@ -4044,10 +4054,7 @@
     "skill_used": "cooking",
     "difficulty": 5,
     "time": "45 m",
-    "book_learn": {
-      "family_cookbook": { "skill_level": 5 },
-      "cookbook_daintydishes": { "skill_level": 5, "recipe_name": "Sir Tenderloin the Toothsome" }
-    },
+    "book_learn": { "family_cookbook": { "skill_level": 5 }, "cookbook_daintydishes": { "skill_level": 5 } },
     "qualities": [ { "id": "BUTCHER", "level": 20 }, { "id": "COOK", "level": 3 }, { "id": "CUT", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 30, "LIST" ] ] ],
     "//": "vegetable = 2u, oil = 4u, 300g steak = 20u, sugar = 4u",
@@ -4069,10 +4076,7 @@
     "skill_used": "cooking",
     "difficulty": 5,
     "time": "45 m",
-    "book_learn": {
-      "family_cookbook": { "skill_level": 5 },
-      "cookbook_daintydishes": { "skill_level": 5, "recipe_name": "Lobsterman's Delight" }
-    },
+    "book_learn": { "family_cookbook": { "skill_level": 5 }, "cookbook_daintydishes": { "skill_level": 5 } },
     "qualities": [ { "id": "BUTCHER", "level": 20 }, { "id": "COOK", "level": 3 }, { "id": "CUT", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 17, "LIST" ] ] ],
     "//": "lobster = 10u, lemon = 1u, vegetable = 2u, oil = 4u",
@@ -4851,7 +4855,7 @@
       "family_cookbook": { "skill_level": 5 },
       "survival_book": { "skill_level": 3 },
       "textbook_survival": { "skill_level": 3 },
-      "cookbook_foodfashions": { "skill_level": 6, "recipe_name": "Shagbark Nut Ambrosia" }
+      "cookbook_foodfashions": { "skill_level": 6 }
     },
     "qualities": [ { "id": "COOK", "level": 3 }, { "id": "BOIL", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 27, "LIST" ] ] ],
@@ -6136,7 +6140,7 @@
     "book_learn": {
       "adv_chemistry": { "skill_level": 6 },
       "textbook_chemistry": { "skill_level": 6 },
-      "cookbook_foodfashions": { "skill_level": 5, "recipe_name": "Natural Beet Sugar" }
+      "cookbook_foodfashions": { "skill_level": 5 }
     },
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" }, { "proficiency": "prof_inorganic_chemistry" } ],
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "BOIL", "level": 2 }, { "id": "CHEM", "level": 1 } ],
@@ -8019,10 +8023,7 @@
     "difficulty": 3,
     "skills_required": [ "tailor", 1 ],
     "time": "30 m",
-    "book_learn": {
-      "scots_cookbook": { "skill_level": 3 },
-      "cookbook_liverforkids": { "skill_level": 4, "recipe_name": "Leprechaun Sausage" }
-    },
+    "book_learn": { "scots_cookbook": { "skill_level": 3 }, "cookbook_liverforkids": { "skill_level": 4 } },
     "batch_time_factors": [ 50, 4 ],
     "using": [ [ "sewing_standard", 2 ] ],
     "qualities": [ { "id": "BOIL", "level": 1 }, { "id": "COOK", "level": 3 }, { "id": "CUT", "level": 2 } ],

@@ -529,7 +529,6 @@
       [ "switchblade", 3 ],
       [ "balisong", 4 ],
       [ "atomic_light", 1 ],
-      [ "atomic_lamp", 1 ],
       [ "atomic_coffeepot", 1 ],
       [ "flaregun", 10 ],
       [ "signal_flare", 15 ],

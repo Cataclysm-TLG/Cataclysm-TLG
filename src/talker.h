@@ -149,6 +149,9 @@ class const_talker
             return false;
         }
         // stats, skills, traits, bionics, and magic
+        virtual int get_artifact_resonance() const {
+            return 0;
+        }
         virtual int str_cur() const {
             return 0;
         }
@@ -853,6 +856,8 @@ class talker: virtual public const_talker
         virtual void set_all_parts_hp_cur( int ) {}
         virtual void set_degradation( int ) {}
         virtual void die( map * ) {}
+        virtual void set_fault( const fault_id &, bool, bool ) {};
+        virtual void set_random_fault_of_type( const std::string &, bool, bool ) {};
         virtual void set_mana_cur( int ) {}
         virtual void mod_daily_health( int, int ) {}
         virtual void mod_lifestyle( int ) {}

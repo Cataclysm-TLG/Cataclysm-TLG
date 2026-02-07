@@ -8,7 +8,6 @@
     "type": "mapgen",
     "om_terrain": "pool",
     "//": "Outdoor pool",
-    "method": "json",
     "object": {
       "fill_ter": "t_concrete",
       "rows": [
@@ -85,7 +84,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "pool_roof",
     "object": {
       "fill_ter": "t_open_air",
@@ -122,7 +120,6 @@
     "type": "mapgen",
     "om_terrain": "pool_1",
     "//": "Indoor pool",
-    "method": "json",
     "object": {
       "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
@@ -189,7 +186,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "pool_roof_1",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -226,7 +222,6 @@
     "type": "mapgen",
     "om_terrain": "pool_2",
     "//": "Indoor pool",
-    "method": "json",
     "object": {
       "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
       "rows": [
@@ -318,7 +313,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "pool_roof_2",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -355,7 +349,6 @@
     "type": "mapgen",
     "om_terrain": "pool_3",
     "//": "Indoor pool",
-    "method": "json",
     "object": {
       "furniture": { "B": "f_bench", "&": "f_toilet", "P": "f_sign", "S": "f_sink", "b": "f_bench", "t": "f_trashcan", "{": "f_locker" },
       "place_items": [
@@ -420,7 +413,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "pool_roof_3",
     "object": {
       "fill_ter": "t_flat_roof",
@@ -457,7 +449,6 @@
     "type": "mapgen",
     "om_terrain": "pool_4",
     "//": "Indoor pool",
-    "method": "json",
     "object": {
       "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
@@ -539,7 +530,6 @@
   {
     "om_terrain": "pool_roof_4",
     "type": "mapgen",
-    "method": "json",
     "object": {
       "fill_ter": "t_flat_roof",
       "rows": [
@@ -575,7 +565,6 @@
     "type": "mapgen",
     "om_terrain": "pool_5",
     "//": "Outdoor pool",
-    "method": "json",
     "object": {
       "rows": [
         "ssssssssssssssssssssssss",
@@ -612,7 +601,6 @@
     "type": "mapgen",
     "om_terrain": "pool_6",
     "//": "Outdoor pool",
-    "method": "json",
     "object": {
       "rows": [
         "    ss                  ",

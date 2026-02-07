@@ -2,7 +2,8 @@
   {
     "id": "selfbow",
     "looks_like": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "survival bow" },
@@ -31,17 +32,15 @@
     "volume": "2500 ml",
     "longest_side": "140 cm",
     "price_postapoc": "50 cent",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
-          "encumbrance": 12,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 12,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "ranged_damage": { "damage_type": "stab", "amount": 2 },
     "range": 12,
     "dispersion": 1250,
@@ -56,7 +55,8 @@
   {
     "id": "shortbow",
     "looks_like": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "wooden short bow" },
@@ -83,17 +83,15 @@
     "volume": "1500 ml",
     "longest_side": "132 cm",
     "price_postapoc": "5 USD",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
-          "encumbrance": 14,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 14,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "reload_noise_volume": 4,
     "loudness": 8,
     "ranged_damage": { "damage_type": "stab", "amount": 4 },
@@ -110,7 +108,8 @@
   {
     "id": "compbow",
     "looks_like": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "compound hunting bow" },
@@ -153,7 +152,8 @@
   {
     "id": "compbow_high",
     "copy-from": "compbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "name": { "str": "compound hunting bow (high)", "str_pl": "compound hunting bows (high)" },
     "description": "A modern bow with shaped cams and extra cables for high-velocity shots that can be used effectively by very strong archers.  Currently set to a high weight, and ready to cause some real damage - if you can draw it.",
     "//": "80 lb draw weight, efficient, 0.62 slugs of momentum with a 30g arrow.",
@@ -172,7 +172,8 @@
   {
     "id": "compbow_low",
     "copy-from": "compbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "name": { "str": "compound hunting bow (low)", "str_pl": "compound hunting bows (low)" },
     "description": "A modern bow with shaped cams and extra cables for high-velocity shots that can be used effectively by average archers.  Currently set to a low weight, making it much easier to draw.",
     "//": "40 lb draw weight, efficient, 0.45 slugs of momentum with a 30g arrow.",
@@ -191,7 +192,8 @@
   {
     "id": "compositebow",
     "looks_like": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "composite bow", "str_pl": "composite bows" },
@@ -218,20 +220,18 @@
     "volume": "1750 ml",
     "longest_side": "132 cm",
     "price_postapoc": "30 USD",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [
-            { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 },
-            { "type": "keratin", "covered_by_mat": 100, "thickness": 1.0 }
-          ],
-          "encumbrance": 14,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [
+          { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "keratin", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 14,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "reload_noise_volume": 4,
     "loudness": 8,
     "ranged_damage": { "damage_type": "stab", "amount": 12, "armor_penetration": 2 },
@@ -248,7 +248,8 @@
   {
     "id": "recurbow",
     "looks_like": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "fiberglass recurve bow" },
@@ -275,20 +276,18 @@
     "volume": "2500 ml",
     "longest_side": "132 cm",
     "price_postapoc": "20 USD",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [
-            { "type": "steel", "covered_by_mat": 100, "thickness": 1.0 },
-            { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
-          ],
-          "encumbrance": 14,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 14,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "reload_noise_volume": 3,
     "loudness": 8,
     "ranged_damage": { "damage_type": "stab", "amount": 8 },
@@ -314,7 +313,8 @@
   {
     "id": "recurbow_folded",
     "looks_like": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "skill": "archery",
     "symbol": "(",
     "color": "light_gray",
@@ -343,7 +343,8 @@
   },
   {
     "id": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN", "ARMOR" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "wooden target bow" },
@@ -371,17 +372,15 @@
     "volume": "3500 ml",
     "longest_side": "183 cm",
     "price_postapoc": "30 USD",
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
-          "encumbrance": 18,
-          "coverage": 10,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 18,
+        "coverage": 10,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "reload_noise_volume": 3,
     "loudness": 8,
     "ranged_damage": { "damage_type": "stab", "amount": 6 },
@@ -398,7 +397,8 @@
   {
     "id": "woodgreatbow",
     "copy-from": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN", "ARMOR" ],
     "name": { "str": "wooden war bow" },
     "description": "A long bow as tall as a man, this is a convincing reproduction of the weapons that ruled the battlefield prior to the invention of gunpowder.  The incredible draw weight is too much for the average person, but in the right hands it could be devastating.",
     "price": "1500 USD",
@@ -409,17 +409,15 @@
     "longest_side": "198 cm",
     "price_postapoc": "20 USD",
     "weapon_category": [ "LONG_BOWS" ],
-    "armor_data": {
-      "armor": [
-        {
-          "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
-          "encumbrance": 18,
-          "coverage": 14,
-          "covers": [ "torso" ],
-          "specifically_covers": [ "torso_hanging_back" ]
-        }
-      ]
-    },
+    "armor": [
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 18,
+        "coverage": 14,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_hanging_back" ]
+      }
+    ],
     "durability": 8,
     "reload_noise_volume": 5,
     "loudness": 16,
@@ -429,7 +427,8 @@
   {
     "id": "compgreatbow",
     "looks_like": "longbow",
-    "type": "GUN",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
     "symbol": "(",
     "color": "yellow",
     "name": { "str": "compound war bow" },

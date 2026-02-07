@@ -109,7 +109,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "lighthouse_small_ground",
     "object": {
       "fill_ter": "t_floor",
@@ -145,7 +144,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "lighthouse_small_z1",
     "object": {
       "fill_ter": "t_stone_masonry_floor",
@@ -180,7 +178,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "lighthouse_small_z2",
     "object": {
       "fill_ter": "t_stone_masonry_floor",
@@ -215,7 +212,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "lighthouse_small_z3",
     "object": {
       "fill_ter": "t_stone_masonry_floor",
@@ -250,7 +246,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "lighthouse_small_z4",
     "object": {
       "fill_ter": "t_stone_masonry_floor",
@@ -285,7 +280,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "lighthouse_small_roof",
     "object": {
       "fill_ter": "t_open_air",

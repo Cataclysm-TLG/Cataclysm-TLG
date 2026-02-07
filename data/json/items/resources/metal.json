@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "pipe",
     "name": { "str": "pipe" },
     "description": "A steel pipe.  A decent weapon in its own right, it could also be used in a number of crafts.",
@@ -22,7 +22,7 @@
   },
   {
     "id": "scrap",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str_sp": "scrap metal" },
     "description": "A bulky assortment of small bits of scrap steel useful in all kinds of crafting.",
@@ -37,7 +37,7 @@
     "color": "light_gray"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "spike",
     "name": { "str": "spike" },
     "description": "A large and slightly misshapen metal spike, could do some damage mounted on a vehicle.",
@@ -55,7 +55,7 @@
     "weapon_category": [ "SHIVS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "cu_pipe",
     "name": { "str": "copper tubing" },
     "description": "A copper tube; too thin to be much use as a melee weapon, but will do if nothing else is available.  Useful in a few crafting recipes.",
@@ -75,7 +75,7 @@
   },
   {
     "id": "material_aluminium_ingot",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "chunk of aluminum", "str_pl": "chunks of aluminum" },
     "description": "A small chunk of aluminum; light but durable, this could be cast into various shapes for construction or ground down to a powder, for more… high-profile applications.",
@@ -90,7 +90,7 @@
   },
   {
     "id": "bismuth",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str_sp": "bismuth" },
     "description": "A dense but brittle metal often used as an alternative to lead.",
@@ -105,7 +105,7 @@
   },
   {
     "id": "gold_small",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str_sp": "gold" },
     "description": "A soft, shiny metal.  Before the apocalypse this would've been worth a small fortune, but now its value is greatly diminished.",
@@ -120,7 +120,7 @@
   },
   {
     "id": "platinum_small",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str_sp": "platinum" },
     "description": "A soft, shiny metal.  Before the apocalypse this would've been worth a small fortune, but now its value is greatly diminished.",
@@ -135,7 +135,7 @@
   },
   {
     "id": "zinc_metal",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str_sp": "zinc" },
     "description": "A slightly brittle metal.  Apart from being an essential mineral that the body needs, it reacts readily with acids, alkalis, and other non-metals.  It can be crushed to make zinc powder and used in the production of batteries, among other things.",
@@ -150,7 +150,7 @@
   },
   {
     "id": "scrap_brass",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "chunk of brass", "str_pl": "chunks of brass" },
     "description": "Some decent-sized chunks of scrap brass.",
@@ -168,7 +168,7 @@
   },
   {
     "id": "lead",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str_sp": "lead" },
     "description": "A soft, dull metal used since ancient times.  Due to its malleability, it has a wide variety of uses including the manufacture of ammunition.",
@@ -183,7 +183,8 @@
   },
   {
     "id": "magnesium",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "spare_parts",
     "name": { "str_sp": "magnesium powder" },
     "description": "A handful of powdered magnesium, a highly flammable alkaline earth metal.  Useful for constructing flares and similar items.",
@@ -202,7 +203,7 @@
   },
   {
     "id": "silver_small",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str_sp": "silver" },
     "description": "A soft, shiny metal.  Before the Cataclysm it was worth quite a bit, but its value is now greatly diminished.",
@@ -217,7 +218,7 @@
   },
   {
     "id": "sheet_metal_small",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small metal sheet" },
     "description": "A small sheet of metal.",
@@ -236,7 +237,7 @@
   },
   {
     "id": "steel_fragment",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "steel fragment", "str_pl": "steel fragments" },
     "description": "A small piece of steel about the size of a golf ball.",
@@ -252,7 +253,7 @@
   },
   {
     "id": "steel_chunk",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "steel chunk", "str_pl": "steel chunks" },
     "description": "A palm-sized piece of solid steel.",
@@ -269,7 +270,7 @@
   },
   {
     "id": "hinge",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "hinge" },
     "description": "A small metal hinge with two metal plates with screw holes.  Useful for making doors or chests.",
@@ -284,7 +285,7 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "copper_fragment",
     "symbol": ",",
     "color": "light_gray",
@@ -300,7 +301,7 @@
     "melee_damage": { "bash": 1 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "scrap_tin",
     "symbol": ",",
     "color": "light_gray",
@@ -316,7 +317,8 @@
     "to_hit": -2
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "tin",
     "category": "spare_parts",
     "price": "7 USD 50 cent",
@@ -333,7 +335,8 @@
     "stack_size": 200
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "solder_wire",
     "category": "spare_parts",
     "price": "50 USD",
@@ -351,7 +354,7 @@
     "flags": [ "UNRECOVERABLE" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "copper_rod",
     "category": "spare_parts",
     "price": "20 USD",
@@ -368,7 +371,7 @@
   },
   {
     "id": "fanblade_metal",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "metal fan blade assembly", "str_pl": "metal fan blade assemblies" },
     "description": "A multi-bladed metal fan, like you'd find on a larger desk fan or inside a convection oven.",
@@ -383,7 +386,7 @@
   },
   {
     "id": "heavy_wire_rack",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "heavy wire rack" },
     "description": "A durable steel rack, the sort you might find in an oven or on a barbecue.",
@@ -398,7 +401,7 @@
   },
   {
     "id": "1l_aluminum",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small aluminum ingot" },
     "description": "A small bar of solid aluminum.",
@@ -412,7 +415,7 @@
   },
   {
     "id": "5l_aluminum",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "aluminum ingot" },
     "description": "A bar of solid aluminum.",
@@ -426,7 +429,7 @@
   },
   {
     "id": "10l_aluminum",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large aluminum ingot" },
     "description": "A large bar of solid aluminum.",
@@ -440,7 +443,7 @@
   },
   {
     "id": "1l_brass",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small brass ingot" },
     "description": "A small bar of solid brass.",
@@ -454,7 +457,7 @@
   },
   {
     "id": "5l_brass",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "brass ingot" },
     "description": "A bar of solid brass.",
@@ -468,7 +471,7 @@
   },
   {
     "id": "10l_brass",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large brass ingot" },
     "description": "A large bar of solid brass.",
@@ -482,7 +485,7 @@
   },
   {
     "id": "bronze_fragment",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "bronze fragment", "str_pl": "bronze fragments" },
     "description": "A small piece of copper alloyed with another metal such as aluminum or tin.",
@@ -499,7 +502,7 @@
   },
   {
     "id": "1l_bronze",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small bronze ingot" },
     "description": "A small bar of solid bronze.",
@@ -513,7 +516,7 @@
   },
   {
     "id": "5l_bronze",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "bronze ingot" },
     "description": "A bar of solid bronze.",
@@ -527,7 +530,7 @@
   },
   {
     "id": "10l_bronze",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large bronze ingot" },
     "description": "A large bar of solid bronze.",
@@ -541,7 +544,7 @@
   },
   {
     "id": "1l_copper",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "copper ingot" },
     "description": "A small bar of solid copper.",
@@ -555,7 +558,7 @@
   },
   {
     "id": "5l_copper",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "copper ingot" },
     "description": "A bar of solid copper.",
@@ -569,7 +572,7 @@
   },
   {
     "id": "10l_copper",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large copper ingot" },
     "description": "A large bar of solid copper.",
@@ -583,7 +586,7 @@
   },
   {
     "id": "10l_tin",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large tin ingot" },
     "description": "A large bar of solid tin.",
@@ -597,7 +600,7 @@
   },
   {
     "id": "5l_tin",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "tin ingot" },
     "description": "A bar of solid tin.",
@@ -611,7 +614,7 @@
   },
   {
     "id": "1l_tin",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small tin ingot" },
     "description": "A small bar of solid tin.",
@@ -625,7 +628,7 @@
   },
   {
     "id": "10l_zinc",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large zinc ingot" },
     "description": "A large bar of solid zinc.",
@@ -639,7 +642,7 @@
   },
   {
     "id": "5l_zinc",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "zinc ingot" },
     "description": "A bar of solid zinc.",
@@ -653,7 +656,7 @@
   },
   {
     "id": "1l_zinc",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small zinc ingot" },
     "description": "A small bar of solid zinc.",
@@ -668,7 +671,7 @@
   },
   {
     "id": "1l_gold",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small gold ingot" },
     "description": "A small bar of solid gold.",
@@ -682,7 +685,7 @@
   },
   {
     "id": "5l_gold",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "gold ingot" },
     "description": "A bar of solid gold.",
@@ -696,7 +699,7 @@
   },
   {
     "id": "10l_gold",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large gold ingot" },
     "description": "A large bar of solid gold.",
@@ -710,7 +713,7 @@
   },
   {
     "id": "5l_iron",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "iron ingot" },
     "description": "A bar of solid iron.",
@@ -724,7 +727,7 @@
   },
   {
     "id": "10l_iron",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large iron ingot" },
     "description": "A large bar of solid iron.",
@@ -738,7 +741,7 @@
   },
   {
     "id": "1l_lead",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small lead ingot" },
     "description": "A small bar of solid lead.",
@@ -752,7 +755,7 @@
   },
   {
     "id": "5l_lead",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "lead ingot" },
     "description": "A bar of solid lead.",
@@ -766,7 +769,7 @@
   },
   {
     "id": "10l_lead",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large lead ingot" },
     "description": "A large bar of solid lead.",
@@ -780,7 +783,7 @@
   },
   {
     "id": "1l_platinum",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small platinum ingot" },
     "description": "A small bar of solid platinum.",
@@ -794,7 +797,7 @@
   },
   {
     "id": "5l_platinum",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "platinum ingot" },
     "description": "A bar of solid platinum.",
@@ -808,7 +811,7 @@
   },
   {
     "id": "10l_platinum",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large platinum ingot" },
     "description": "A large bar of solid platinum.",
@@ -822,7 +825,7 @@
   },
   {
     "id": "1l_silver",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "small silver ingot" },
     "description": "A small bar of solid silver.",
@@ -836,7 +839,7 @@
   },
   {
     "id": "5l_silver",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "silver ingot" },
     "description": "A bar of solid silver.",
@@ -850,7 +853,7 @@
   },
   {
     "id": "10l_silver",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large silver ingot" },
     "description": "A large bar of solid silver.",
@@ -864,7 +867,7 @@
   },
   {
     "id": "5l_steel",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "steel ingot" },
     "description": "A bar of solid steel.",
@@ -878,7 +881,7 @@
   },
   {
     "id": "10l_steel",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "large steel ingot" },
     "description": "A large bar of solid steel.",
@@ -892,21 +895,21 @@
   },
   {
     "id": "5l_budget_steel",
-    "type": "GENERIC",
+    "type": "ITEM",
     "copy-from": "5l_steel",
     "name": { "str": "budget steel ingot" },
     "material": [ "budget_steel" ]
   },
   {
     "id": "10l_budget_steel",
-    "type": "GENERIC",
+    "type": "ITEM",
     "copy-from": "10l_steel",
     "name": { "str": "large budget steel ingot" },
     "material": [ "budget_steel" ]
   },
   {
     "id": "budget_steel_fragment",
-    "type": "GENERIC",
+    "type": "ITEM",
     "copy-from": "steel_fragment",
     "name": { "str": "budget steel fragment", "str_pl": "budget steel fragments" },
     "description": "A misshapen piece of budget steel.",
@@ -914,7 +917,7 @@
   },
   {
     "id": "budget_steel_chunk",
-    "type": "GENERIC",
+    "type": "ITEM",
     "copy-from": "steel_chunk",
     "name": { "str": "chunk of budget steel", "str_pl": "chunks of budget steel" },
     "description": "A heavy, formed piece of budget steel.  Useful for some crafting recipes.",
@@ -922,7 +925,7 @@
   },
   {
     "id": "slag",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "price": "0 cent",
     "price_postapoc": "0 cent",
@@ -937,7 +940,7 @@
   },
   {
     "id": "railroad_track_item",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "length of railroad track", "str_pl": "lengths of railroad track" },
     "description": "A heavy one-meter length of railroad track with a smooth top, liberated from a now-defunct rail line.  Far too heavy to be useful for much as-is, but perhaps could be shaped into something with some metalworking skill, or cut down into an anvil if sawed in half first.",
@@ -954,7 +957,7 @@
   },
   {
     "id": "railroad_track_item_half",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "half-meter length of railroad track", "str_pl": "half-meter lengths of railroad track" },
     "description": "A heavy half-meter length of railroad track with a smooth top, liberated from a now-defunct rail line.  Could be used as a makeshift anvil, especially with some modifications, or as spare steel.",
@@ -969,7 +972,7 @@
     "qualities": [ [ "ANVIL", 2 ] ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "scrap_aluminum",
     "symbol": ",",
     "color": "light_gray",
@@ -985,7 +988,7 @@
     "melee_damage": { "bash": 1 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "scrap_cast_iron",
     "symbol": ",",
     "color": "light_gray",
@@ -1000,7 +1003,7 @@
     "to_hit": { "grip": "bad", "length": "hand", "surface": "any", "balance": "clumsy" }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "iron_fragment",
     "symbol": ",",
     "color": "light_gray",
@@ -1016,7 +1019,7 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "iron_chunk",
     "symbol": ",",
     "color": "light_gray",

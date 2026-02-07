@@ -3,15 +3,7 @@
     "type": "item_group",
     "id": "milspec_arsenal_223_pouch_gun&mags&cans",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_223_pouch_gun&ammo" },
-      {
-        "distribution": [
-          { "item": "ammo_can_50_556_m855a1_clipped_840", "count": [ 0, 4 ], "prob": 80 },
-          { "item": "ammo_can_50_556tracer_820", "count": [ 0, 4 ], "prob": 5 }
-        ]
-      }
-    ]
+    "items": [ { "group": "milspec_arsenal_223_pouch_gun&ammo" } ]
   },
   {
     "type": "item_group",

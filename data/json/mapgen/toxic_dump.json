@@ -13,7 +13,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "toxic_dump" ],
     "weight": 100,
     "object": {
@@ -78,7 +77,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "toxic_dump_roof" ],
     "object": {
       "fill_ter": "t_thconc_floor",

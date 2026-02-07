@@ -360,28 +360,28 @@
     "entries": [ { "item": "lizard_sample", "count": [ 10, 20 ] } ]
   },
   {
-    "id": "lupine_sample_single",
+    "id": "canine_sample_single",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "item": "lupine_sample" } ]
+    "entries": [ { "item": "canine_sample" } ]
   },
   {
-    "id": "lupine_sample_small",
+    "id": "canine_sample_small",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "item": "lupine_sample", "count": [ 1, 3 ] } ]
+    "entries": [ { "item": "canine_sample", "count": [ 1, 3 ] } ]
   },
   {
-    "id": "lupine_sample_large",
+    "id": "canine_sample_large",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "item": "lupine_sample", "count": [ 3, 6 ] } ]
+    "entries": [ { "item": "canine_sample", "count": [ 3, 6 ] } ]
   },
   {
-    "id": "lupine_sample_huge",
+    "id": "canine_sample_huge",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "item": "lupine_sample", "count": [ 10, 20 ] } ]
+    "entries": [ { "item": "canine_sample", "count": [ 10, 20 ] } ]
   },
   {
     "id": "medical_sample_single",

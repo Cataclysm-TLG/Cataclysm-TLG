@@ -1,7 +1,8 @@
 [
   {
     "id": "2byshin_guard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "2-by-shin guards", "str_pl": "pairs of 2-by-shin guards" },
     "description": "A pair of improvised shin guards made from broken pieces of a plank that are tied to your shins with rags and string.",
@@ -30,7 +31,8 @@
   },
   {
     "id": "carpet_legguards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "carpet leg guards", "str_pl": "pairs of carpet leg guards" },
     "description": "Small squares of carpet rolled around your shins and thighs.  Perfect for wading through the local furniture store.",
@@ -63,7 +65,8 @@
   },
   {
     "id": "carpet_greaves",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "carpet greaves", "str_pl": "pairs of carpet greaves" },
     "description": "Small squares of carpet rolled around your shins.  These might protect you from the corner of a table.",
@@ -96,7 +99,8 @@
   },
   {
     "id": "legguard_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
     "description": "A pair of guards for the lower legs and knees made from the exoskeletons of insects.",
@@ -127,7 +131,8 @@
   {
     "id": "xl_legguard_chitin",
     "copy-from": "legguard_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
     "material": [ "chitin" ],
     "proportional": { "weight": 1.5, "volume": 1.5 },
@@ -135,7 +140,8 @@
   },
   {
     "id": "xs_legguard_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "legguard_chitin",
     "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -145,7 +151,8 @@
     "id": "legguard_acidchitin",
     "copy-from": "legguard_chitin",
     "looks_like": "legguard_chitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "price_postapoc": "12 USD 50 cent",
     "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified greaves" },
     "description": "A pair of leg guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
@@ -164,7 +171,8 @@
   {
     "id": "xl_legguard_acidchitin",
     "copy-from": "legguard_acidchitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified chitin greaves" },
     "material": [ "acidchitin" ],
     "proportional": { "weight": 1.5, "volume": 1.5 },
@@ -173,7 +181,8 @@
   {
     "id": "xs_legguard_acidchitin",
     "copy-from": "legguard_acidchitin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified chitin greaves" },
     "material": [ "acidchitin" ],
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -181,7 +190,8 @@
   },
   {
     "id": "bunker_pants",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "turnout trousers" },
     "//": "Fire-resistant outerwear ain't cheap.",
@@ -234,7 +244,8 @@
   },
   {
     "id": "chainmail_chausses",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
     "description": "Protective leggings made of interlocking links of steel wire, covering from the thighs to the tops of the feet.",
@@ -276,7 +287,8 @@
   },
   {
     "id": "chainmail_chausses_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_chausses",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -284,7 +296,8 @@
   },
   {
     "id": "chainmail_chausses_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_chausses",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -292,7 +305,8 @@
   },
   {
     "id": "chainmail_junk_chausses",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_chausses",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
     "description": "Protective leggings made of interlocking links of low-quality steel wire, covering from the thighs to the tops of the feet.",
@@ -301,7 +315,8 @@
   },
   {
     "id": "chainmail_skirt",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "chainmail skirt" },
     "description": "A knee-length skirt made of interlocking steel rings.  It can be adjusted to be worn as outerwear.",
@@ -349,7 +364,8 @@
   },
   {
     "id": "chainmail_skirt_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt",
     "name": { "str": "chainmail skirt" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -363,7 +379,8 @@
   },
   {
     "id": "chainmail_skirt_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt",
     "name": { "str": "chainmail skirt" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -377,7 +394,8 @@
   },
   {
     "id": "chainmail_skirt_budget",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt",
     "replace_materials": { "steel_chain": "budget_steel_chain" },
     "name": { "str": "chainmail skirt" },
@@ -391,7 +409,8 @@
   },
   {
     "id": "chainmail_skirt_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt",
     "name": { "str": "chainmail skirt (loose)" },
     "description": "A knee-length skirt made of interlocking steel rings.  It can be adjusted to be worn closer to the body.",
@@ -406,7 +425,8 @@
   },
   {
     "id": "chainmail_skirt_loose_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt_xs",
     "name": { "str": "chainmail skirt (loose)" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -421,7 +441,8 @@
   },
   {
     "id": "chainmail_skirt_loose_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt_xl",
     "name": { "str": "chainmail skirt (loose)" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -436,7 +457,8 @@
   },
   {
     "id": "chainmail_skirt_budget_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_skirt_budget",
     "name": { "str": "chainmail skirt (loose)" },
     "use_action": {
@@ -450,7 +472,8 @@
   },
   {
     "id": "chaps_leather",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "leather chaps" },
     "description": "A pair of tough leather chaps, meant to tie on over pants for extra protection.",
     "weight": "1414 g",
@@ -478,7 +501,8 @@
   },
   {
     "id": "chaps_cut_resistant",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "chainsaw chaps" },
     "description": "A pair of tough chaps made of Kevlar.  Chainsaw kickbacks are potentially fatal; personal protective equipment like these chaps help protect your femoral arteries.  The layered Kevlar is designed to fray on contact with the chain and bind up the tool.",
@@ -529,7 +553,8 @@
   },
   {
     "id": "fencing_pants",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "fencing pants" },
     "description": "A pair of reinforced pants used by fencers to prevent injuries.  They don't cover the lower leg.",
     "weight": "450 g",
@@ -563,16 +588,17 @@
   },
   {
     "id": "knee_pads",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "knee pads", "str_pl": "pairs of knee pads" },
-    "description": "A pair of knee pads made of stout plastic and cloth.",
+    "description": "A pair of knee pads made of stout plastic and spandex.",
     "weight": "210 g",
     "volume": "1500 ml",
     "price": "25 USD",
     "price_postapoc": "50 cent",
     "to_hit": 1,
-    "material": [ "plastic", "nylon" ],
+    "material": [ "plastic", "spandex" ],
     "symbol": "[",
     "looks_like": "legguard_hard",
     "color": "dark_gray",
@@ -582,7 +608,7 @@
       {
         "material": [
           { "type": "plastic", "covered_by_mat": 60, "thickness": 4 },
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1 }
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
@@ -595,7 +621,8 @@
   },
   {
     "id": "bronze_greaves",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
     "description": "A pair of bronze shin and knee guards with a simple leather lining.",
@@ -624,7 +651,8 @@
   },
   {
     "id": "bronze_greaves_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "bronze_greaves",
     "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -632,7 +660,8 @@
   },
   {
     "id": "bronze_greaves_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "bronze_greaves",
     "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -640,7 +669,8 @@
   },
   {
     "id": "legguard_hard",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plastic shin guards", "str_pl": "pairs of plastic shin guards" },
     "description": "A pair of polyurethane leg guards with neoprene backing.  These were used in sport, policing, and even on some job sites.",
@@ -674,7 +704,8 @@
   },
   {
     "id": "tire_tasset",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tire tasset" },
     "description": "A skirt made of salvaged chunks of rubber strung together and tied around the waist.  It can be adjusted to fit over bulky armor.",
@@ -717,7 +748,8 @@
   },
   {
     "id": "tire_tasset_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset",
     "name": { "str": "tire tasset" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -731,7 +763,8 @@
   },
   {
     "id": "tire_tasset_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset",
     "name": { "str": "tire tasset" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -745,7 +778,8 @@
   },
   {
     "id": "tire_tasset_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset",
     "name": { "str": "tire tasset (loose)" },
     "description": "A skirt made of salvaged chunks of rubber strung together and tied around the waist.  It can be adjusted to fit closer to the body.",
@@ -761,7 +795,8 @@
   },
   {
     "id": "tire_tasset_loose_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset_loose",
     "name": { "str": "tire tasset (loose)" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -775,7 +810,8 @@
   },
   {
     "id": "tire_tasset_loose_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_tasset_loose",
     "name": { "str": "tire tasset (loose)" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -789,7 +825,8 @@
   },
   {
     "id": "platemail_tasset",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate tasset" },
     "description": "A skirt of steel faulds that hangs over the hips.  It can be adjusted to fit over bulky armor.",
@@ -832,7 +869,8 @@
   },
   {
     "id": "platemail_tasset_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset",
     "name": { "str": "plate tasset" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -846,7 +884,8 @@
   },
   {
     "id": "platemail_tasset_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset",
     "name": { "str": "plate tasset" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -860,7 +899,8 @@
   },
   {
     "id": "platemail_tasset_loose",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset",
     "name": { "str": "plate tasset (loose)" },
     "description": "A skirt of steel faulds that hangs over the hips.  It can be adjusted to fit closer to the body.",
@@ -876,7 +916,8 @@
   },
   {
     "id": "platemail_tasset_loose_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset_loose",
     "name": { "str": "plate tasset (loose)" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -890,7 +931,8 @@
   },
   {
     "id": "platemail_tasset_loose_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_tasset_loose",
     "name": { "str": "plate tasset (loose)" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -904,7 +946,8 @@
   },
   {
     "id": "platemail_leg_guards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
     "description": "A full assembly of platemail for the legs.  Steel cuisses, poleyns, and greaves, with leather straps to secure each piece and connect it as part of a set.",
@@ -945,7 +988,8 @@
   },
   {
     "id": "platemail_leg_guards_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_leg_guards",
     "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -953,7 +997,8 @@
   },
   {
     "id": "platemail_leg_guards_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "platemail_leg_guards",
     "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -961,7 +1006,8 @@
   },
   {
     "id": "paper_greaves",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "paper greaves", "str_pl": "pairs of paper greaves" },
     "description": "Shin guards made of stacked paper sheets held together with duct tape.",
@@ -990,7 +1036,8 @@
   },
   {
     "id": "tire_greaves",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "tire greaves", "str_pl": "pairs of tire greaves" },
     "description": "A pair of improvised shin guards made from thick chunks of rubber strung together and tied over the legs.",
@@ -1019,7 +1066,8 @@
   },
   {
     "id": "tire_greaves_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_greaves",
     "name": { "str": "tire leg guards", "str_pl": "pairs of tire leg guards" },
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -1027,7 +1075,8 @@
   },
   {
     "id": "tire_greaves_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "tire_greaves",
     "name": { "str": "tire leg guards", "str_pl": "pairs of tire leg guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -1035,7 +1084,8 @@
   },
   {
     "id": "motorbike_pants",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "motorcycle jeans", "str_pl": "pairs of motorcycle jeans" },
     "description": "A pair of thick jeans interwoven with Kevlar for added durability and sporting integrated kneepads and flank protection, typically worn by motorcyclists to protect from road rash.",
     "weight": "1340 g",
@@ -1111,7 +1161,8 @@
   },
   {
     "id": "jeans_mod",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "armored jeans", "str_pl": "pairs of armored jeans" },
     "description": "A pair of jeans reinforced with extra fabric and metal sheets.  It's not the most durable armor, but it offers decent protection.",
     "weight": "3810 g",
@@ -1183,7 +1234,8 @@
   },
   {
     "id": "trousers_eod",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "EOD trousers" },
     "description": "This is a heavy pair of trousers armored in Kevlar, Nomex, and foam padding, for use by explosive ordnance disposal technicians.  While it offers near complete coverage in fragmentation resistant materials, it still offers insufficient protection from ballistic threats.",
@@ -1215,7 +1267,8 @@
   },
   {
     "id": "trousers_eod_light",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "tactical EOD trousers" },
     "description": "This is a heavy pair of trousers armored in Kevlar, Nomex, and foam padding, for use by explosive ordnance disposal technicians in 'non-permissive environments'.  While it offers near complete coverage in fragmentation resistant materials, it still offers insufficient protection from ballistic threats.  These trousers are lighter than normal EOD armor to provide more maneuverability.",
@@ -1247,7 +1300,8 @@
   },
   {
     "id": "armor_riot_leg",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "riot shin guards", "str_pl": "pairs of riot shin guards" },
     "description": "Hard armor for the feet and lower legs used by riot police.",
@@ -1289,7 +1343,8 @@
   },
   {
     "id": "leather_leg_guards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
     "description": "A set of soft leather cuisses, poleyns, and greaves that strap on over the legs, providing excellent protection from cutting and stabbing attacks.",
@@ -1310,7 +1365,8 @@
   },
   {
     "id": "leather_leg_guards_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
     "copy-from": "leather_leg_guards",
     "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
@@ -1318,7 +1374,8 @@
   },
   {
     "id": "leather_leg_guards_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "leather_leg_guards",
     "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },

@@ -1,6 +1,7 @@
 [
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "fishspear",
     "price": "40 USD",
     "price_postapoc": "5 USD",
@@ -24,7 +25,8 @@
     "melee_damage": { "bash": 1 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "c_fishspear",
     "price": "320 USD",
     "price_postapoc": "10 USD",
@@ -48,7 +50,8 @@
     "melee_damage": { "bash": 1 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "m_fishspear",
     "price": "160 USD",
     "price_postapoc": "5 USD",
@@ -73,7 +76,8 @@
   },
   {
     "id": "steel_atlatl_spear",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": "steel tipped atlatl spear" },
     "description": "A steal tipped and fletched atlatl spear, ready to throw with an atlatl.  Not suitable for close combat.",
     "weight": "280 g",
@@ -95,7 +99,8 @@
   },
   {
     "id": "bronze_atlatl_spear",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": "bronze tipped atlatl spear" },
     "description": "A bronze tipped and fletched atlatl spear, ready to throw with an atlatl.  Not suitable for close combat.",
     "weight": "280 g",
@@ -117,7 +122,8 @@
   },
   {
     "id": "wood_atlatl_spear",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str": "wooden atlatl spear" },
     "description": "A fletched atlatl spear with a sharpened wooden tip.  Not suitable for close combat.",
     "weight": "230 g",

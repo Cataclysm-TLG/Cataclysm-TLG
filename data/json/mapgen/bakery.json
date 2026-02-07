@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "bakery" ],
     "weight": 100,
     "object": {
@@ -111,7 +110,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "bakery_roof" ],
     "weight": 300,
     "object": {
@@ -165,7 +163,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "bakery_upper_roof" ],
     "weight": 300,
     "object": {

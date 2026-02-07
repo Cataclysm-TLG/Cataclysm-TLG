@@ -2,7 +2,6 @@
   {
     "//": "Autodoc operating theater",
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lab_finale_1level" ],
     "weight": 25,
     "object": {
@@ -87,7 +86,6 @@
   {
     "//": "nano_fabricator room",
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lab_finale_1level" ],
     "weight": 50,
     "object": {
@@ -133,7 +131,6 @@
   {
     "//": "portal room",
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lab_finale_1level" ],
     "weight": 50,
     "object": {
@@ -190,7 +187,6 @@
   {
     "//": "mutagen tank, ~75% chance normal mutagen, ~25% flavored mutagen",
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lab_finale_1level" ],
     "weight": 100,
     "object": {
@@ -284,43 +280,36 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_plant",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_plant" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_insect",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_insect" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_rabbit",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_rabbit" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_spider",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_spider" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_snail",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_snail" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_batrachian",
     "object": {
       "mapgensize": [ 1, 1 ],
@@ -329,37 +318,31 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_fish",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_fish" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_slime",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_slime" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_rat",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_rat" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_beast",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_beast" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_cattle",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_cattle" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_cephalopod",
     "object": {
       "mapgensize": [ 1, 1 ],
@@ -368,19 +351,16 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_bird",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_bird" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_lizard",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_lizard" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_troglobite",
     "object": {
       "mapgensize": [ 1, 1 ],
@@ -389,26 +369,22 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_ursine",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_ursine" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_feline",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_feline" } ] }
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_filltank_mutagen_lupine",
     "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_lupine" } ] }
   },
   {
     "//": "turrets finale",
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "lab_finale_1level" ],
     "weight": 100,
     "object": {
@@ -451,7 +427,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_finale_4x4",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -476,7 +451,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_finale_4x4",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -501,7 +475,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_finale_4x4",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -526,7 +499,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_finale_4x4",
     "object": {
       "mapgensize": [ 4, 4 ],
@@ -551,7 +523,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "lab_finale_4x4",
     "object": {
       "mapgensize": [ 4, 4 ],

@@ -148,7 +148,6 @@ static const itype_id itype_remotevehcontrol( "remotevehcontrol" );
 static const itype_id itype_water_clean( "water_clean" );
 
 static const json_character_flag json_flag_BIONIC_GUN( "BIONIC_GUN" );
-static const json_character_flag json_flag_BIONIC_NPC_USABLE( "BIONIC_NPC_USABLE" );
 static const json_character_flag json_flag_BIONIC_POWER_SOURCE( "BIONIC_POWER_SOURCE" );
 static const json_character_flag json_flag_BIONIC_TOGGLED( "BIONIC_TOGGLED" );
 static const json_character_flag json_flag_BIONIC_WEAPON( "BIONIC_WEAPON" );
@@ -312,7 +311,7 @@ static social_modifiers load_bionic_social_mods( const JsonObject &jo )
     return ret;
 }
 
-void bionic_data::load( const JsonObject &jsobj, const std::string_view src )
+void bionic_data::load( const JsonObject &jsobj, std::string_view src )
 {
 
     mandatory( jsobj, was_loaded, "id", id );
@@ -455,7 +454,7 @@ void bionic_data::load_bionic( const JsonObject &jo, const std::string &src )
 
 std::map<bionic_id, bionic_id> bionic_data::migrations;
 
-void bionic_data::load_bionic_migration( const JsonObject &jo, const std::string_view )
+void bionic_data::load_bionic_migration( const JsonObject &jo, std::string_view )
 {
     const bionic_id from( jo.get_string( "from" ) );
     const bionic_id to = jo.has_string( "to" )
@@ -2138,37 +2137,42 @@ float Character::bionics_adjusted_skill( bool autodoc, int skill_level ) const
 
 int Character::bionics_pl_skill( bool autodoc, int skill_level ) const
 {
-    skill_id most_important_skill;
-    skill_id important_skill;
-    skill_id least_important_skill;
+    float most_important_skill;
+    float important_skill;
+    float least_important_skill;
 
     if( autodoc ) {
-        most_important_skill = skill_firstaid;
-        important_skill = skill_computer;
-        least_important_skill = skill_electronics;
+        // Because the Autodoc is doing the actual work, knowledge can fill in for medicine and electronics skill.
+        // But since we're the one programming it, we need actual skill for computers.
+        most_important_skill = get_greater_skill_or_knowledge_level( skill_firstaid );
+        important_skill = get_skill_level( skill_computer );
+        least_important_skill = get_greater_skill_or_knowledge_level( skill_electronics );
     } else {
-        most_important_skill = skill_electronics;
-        important_skill = skill_firstaid;
-        least_important_skill = skill_mechanics;
+        // TODO: Remove this? NPCs can't do installs this way anymore.
+        most_important_skill = get_skill_level( skill_electronics );
+        important_skill = get_skill_level( skill_firstaid );
+        least_important_skill = get_skill_level( skill_mechanics );
     }
 
     float pl_skill;
     if( skill_level == -1 ) {
-        pl_skill = int_cur                                  * 4 +
-                   get_greater_skill_or_knowledge_level( most_important_skill )  * 4 +
-                   get_greater_skill_or_knowledge_level( important_skill )       * 3 +
-                   get_greater_skill_or_knowledge_level( least_important_skill ) * 1;
+        pl_skill = int_cur               * 4 +
+                   most_important_skill  * 4 +
+                   important_skill       * 3 +
+                   least_important_skill * 1;
     } else {
-        // override chance as though all values were skill_level if it is provided
+        // Override chance as though all values were skill_level if it is provided.
+        // Unsure, but I assume this is for when e.g. the nursebot is removing stuff.
         pl_skill = 12 * skill_level;
     }
 
-    // Medical residents have some idea what they're doing
+    // Medical residents have some idea what they're doing.
+    // TODO: Move this to a learnable proficiency.
     if( has_trait( trait_PROF_MED ) ) {
         pl_skill += 3;
     }
 
-    // People trained in bionics gain an additional advantage towards using it
+    // People trained in bionics gain an additional advantage towards using it.
     if( has_trait( trait_PROF_AUTODOC ) ) {
         pl_skill += 7;
     }
@@ -2341,7 +2345,7 @@ void Character::perform_uninstall( const bionic &bio, int difficulty, int succes
         cbm.set_flag( flag_FILTHY );
         cbm.set_flag( flag_NO_STERILE );
         cbm.set_flag( flag_NO_PACKED );
-        cbm.faults.emplace( fault_bionic_salvaged );
+        cbm.set_fault( fault_bionic_salvaged );
         here.add_item( pos_bub(), cbm );
     } else {
         get_event_bus().send<event_type::fails_to_remove_cbm>( getID(), bio.id );
@@ -2418,7 +2422,7 @@ bool Character::uninstall_bionic( const bionic &bio, monster &installer, Charact
         cbm.set_flag( flag_FILTHY );
         cbm.set_flag( flag_NO_STERILE );
         cbm.set_flag( flag_NO_PACKED );
-        cbm.faults.emplace( fault_bionic_salvaged );
+        cbm.set_fault( fault_bionic_salvaged );
         here.add_item( patient.pos_bub(), cbm );
     } else {
         bionics_uninstall_failure( installer, patient, difficulty, success, adjusted_skill );
@@ -2470,8 +2474,6 @@ ret_val<void> Character::is_installable( const item *it, const bool by_autodoc )
     return has_bionic( b );
     } ) ) {
         return ret_val<void>::make_failure( _( "Superior version installed." ) );
-    } else if( is_npc() && !bid->has_flag( json_flag_BIONIC_NPC_USABLE ) ) {
-        return ret_val<void>::make_failure( _( "CBM not compatible with patient." ) );
     }
 
     return ret_val<void>::make_success( std::string() );
@@ -2761,7 +2763,7 @@ void Character::bionics_install_failure( const bionic_id &bid, const std::string
         item cbm( bid.c_str() );
         cbm.set_flag( flag_NO_STERILE );
         cbm.set_flag( flag_NO_PACKED );
-        cbm.faults.emplace( fault_bionic_salvaged );
+        cbm.set_fault( fault_bionic_salvaged );
         get_map().add_item( patient_pos, cbm );
     }
 }

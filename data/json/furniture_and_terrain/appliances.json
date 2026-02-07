@@ -606,15 +606,23 @@
   {
     "type": "vehicle_part",
     "id": "ap_folding_solar_panel",
-    "name": { "str": "deployed folding solar panel" },
+    "name": { "str": "folding solar panel" },
     "flags": [ "SOLAR_PANEL", "OBSTACLE", "APPLIANCE" ],
-    "description": "This folding solar panel has been unfolded, and it is ready to charge connected devices, if the sun is out.",
+    "description": "This folding solar panel has been unfolded and is ready to charge connected devices using the power of the sun.",
     "copy-from": "solar_panel",
     "color": "light_blue",
     "broken_color": "light_gray",
     "proportional": { "durability": 0.5 },
-    "epower": "120 W",
-    "requirements": { "removal": { "time": "5 s" } },
+    "epower": "25 W",
+    "requirements": {
+      "install": { "time": "30 s" },
+      "removal": { "time": "30 s" },
+      "repair": {
+        "skills": [ [ "electronics", 6 ] ],
+        "time": "30 m",
+        "using": [ [ "vehicle_screw", 1 ], [ "solar_panel", 1 ], [ "soldering_standard", 8 ] ]
+      }
+    },
     "breaks_into": [ { "item": "folding_solar_panel", "damage": [ 5, 5 ] } ],
     "remove_as": "folding_solar_panel",
     "item": "folding_solar_panel_deployed"
@@ -623,12 +631,20 @@
     "type": "vehicle_part",
     "id": "ap_folding_solar_panel_v2",
     "flags": [ "SOLAR_PANEL", "OBSTACLE", "APPLIANCE" ],
-    "name": { "str": "deployed solar suitcase" },
-    "description": "This solar suitcase has been unpacked and is ready to supply power.",
+    "name": { "str": "advanced folding solar panel" },
+    "description": "This high-end solar panel has been unpacked and is ready to supply power, provided it's out in the sun.",
     "copy-from": "ap_folding_solar_panel",
-    "epower": "200 W",
+    "epower": "50 W",
     "breaks_into": [ { "item": "folding_solar_panel_v2", "damage": [ 5, 5 ] } ],
-    "requirements": { "removal": { "time": "1 m" } },
+    "requirements": {
+      "install": { "time": "30 s" },
+      "removal": { "time": "30 s" },
+      "repair": {
+        "skills": [ [ "electronics", 6 ] ],
+        "time": "30 m",
+        "using": [ [ "vehicle_screw", 1 ], [ "solar_panel_v2", 1 ], [ "soldering_standard", 8 ] ]
+      }
+    },
     "remove_as": "folding_solar_panel_v2",
     "item": "folding_solar_panel_v2_deployed"
   },
@@ -918,7 +934,7 @@
     "description": "A car battery wired into a static power grid.",
     "item": "battery_car",
     "breaks_into": [
-      { "item": "lead", "count": [ 1680, 2380 ] },
+      { "item": "lead", "count": [ 450, 900 ] },
       { "item": "chem_sulphuric_acid", "count": [ 5, 8 ], "container-item": "null" },
       { "item": "plastic_chunk", "count": [ 14, 20 ] },
       { "item": "scrap", "count": [ 2, 3 ] },
@@ -939,7 +955,7 @@
     "description": "A motorbike battery wired into a static power grid.",
     "item": "battery_motorbike",
     "breaks_into": [
-      { "item": "lead", "count": [ 149, 159 ] },
+      { "item": "lead", "count": [ 85, 175 ] },
       { "item": "chem_sulphuric_acid", "count": [ 0, 1 ], "container-item": "null" },
       { "item": "plastic_chunk", "count": [ 2, 3 ] },
       { "item": "scrap", "count": [ 0, 1 ] },
@@ -960,7 +976,7 @@
     "description": "A small motorbike battery wired into a static power grid.",
     "item": "battery_motorbike_small",
     "breaks_into": [
-      { "item": "lead", "count": [ 69, 79 ] },
+      { "item": "lead", "count": [ 45, 90 ] },
       { "item": "chem_sulphuric_acid", "count": [ 0, 1 ], "container-item": "null" },
       { "item": "plastic_chunk" },
       { "item": "scrap", "count": [ 0, 1 ] },

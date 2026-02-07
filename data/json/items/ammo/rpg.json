@@ -1,6 +1,7 @@
 [
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "RPG-7_ammo",
     "price": "100 USD",
     "name": { "str": "PG-7VL 93mm rocket" },
@@ -23,7 +24,8 @@
     "effects": [ "COOKOFF", "EXPLOSIVE_PG7VL", "TRAIL", "NEVER_MISFIRES" ]
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "RPG-7_pg7vr",
     "price": "100 USD",
     "name": { "str": "PG-7VR 64mm/105mm rocket" },
@@ -46,7 +48,8 @@
     "effects": [ "COOKOFF", "EXPLOSIVE_PG7VR", "TRAIL", "NEVER_MISFIRES" ]
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "RPG-7_tbg7v",
     "price": "100 USD",
     "name": { "str": "TBG-7V 105mm rocket" },
@@ -69,7 +72,8 @@
     "effects": [ "COOKOFF", "EXPLOSIVE_TBG7V", "TRAIL", "NEVER_MISFIRES" ]
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "RPG-7_og7v",
     "price": "80 USD",
     "name": { "str": "OG-7V 40mm rocket" },

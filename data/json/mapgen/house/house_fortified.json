@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ "house_fortified" ],
     "weight": 50,
     "//": "fortified houses shouldn't be common",
@@ -68,7 +67,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_fortified_roof",
     "object": {
       "fill_ter": "t_shingle_flat_roof",
@@ -104,7 +102,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "house_fortified_basement",
     "object": {
       "fill_ter": "t_thconc_floor",

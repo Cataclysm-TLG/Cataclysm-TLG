@@ -694,5 +694,22 @@
     "proficiencies": [ { "proficiency": "prof_handloading" } ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "chem_black_powder", 15 ] ], [ [ "shotgun_primer", 1 ] ], [ [ "paper", 1 ], [ "aluminum_foil", 1 ] ] ]
+  },
+  {
+    "result": "wax_slug",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_AMMO",
+    "subcategory": "CSC_AMMO_SHOT",
+    "skill_used": "fabrication",
+    "difficulty": 1,
+    "skills_required": [ "shotgun", 3 ],
+    "time": "1 m",
+    "batch_time_factors": [ 60, 5 ],
+    "book_learn": [ [ "manual_shotgun", 3 ] ],
+    "charges": 1,
+    "tools": [ [ [ "surface_heat", 1, "LIST" ] ] ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
+    "components": [ [ [ "shot_bird", 1 ] ], [ [ "wax_any", 1, "LIST" ] ] ]
   }
 ]

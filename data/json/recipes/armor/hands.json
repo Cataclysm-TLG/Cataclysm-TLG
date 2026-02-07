@@ -822,7 +822,7 @@
     "difficulty": 4,
     "time": "6 h",
     "book_learn": [ [ "textbook_tailor", 4 ], [ "manual_tailor", 5 ], [ "tailor_portfolio", 4 ] ],
-    "using": [ [ "tailoring_neoprene_sheet", 4 ], [ "tailoring_nylon_sheet", 5 ] ],
+    "using": [ [ "tailoring_neoprene_sheet", 4 ], [ "tailoring_spandex_sheet", 5 ] ],
     "//": "Should use fabric_neoprene when the tailoring recipe audit is done.",
     "proficiencies": [ { "proficiency": "prof_elastics" }, { "proficiency": "prof_closures_waterproofing" } ],
     "components": [ [ [ "rubber_cement", 1 ] ] ]

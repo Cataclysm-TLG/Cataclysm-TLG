@@ -33,6 +33,7 @@
 #include "type_id.h"
 #include "units.h"
 #include "value_ptr.h"
+#include "weighted_list.h"
 
 class Item_factory;
 class Trait_group;
@@ -910,6 +911,9 @@ struct islot_gunmod : common_ranged_data {
     /** Multiplies base loudness as provided by the currently loaded ammo */
     float loudness_multiplier = 1;
 
+    /** Alters the gun to_hit */
+    int to_hit_mod = 0;
+
     /** How much time does this gunmod take to install? */
     time_duration install_time = 0_seconds;
 
@@ -1402,7 +1406,16 @@ struct itype {
         std::set<itype_id> repair;
 
         /** What faults (if any) can occur */
-        std::set<fault_id> faults;
+        weighted_int_list<fault_id> faults;
+
+        /** used to store fault types on load, when we cannot populate `faults` just yet
+        `faults` is populated with values from this in finalize_post() down the road, and then this var is never used again
+        first int is weight if overriden
+        second int is weight added to original weight
+        third float is multiplier of original weight
+        fourth string is the fault group id
+        */
+        std::vector<std::tuple<int, int, float, std::string>> fault_groups;
 
         /** Magazine types (if any) for each ammo type that can be used to reload this item */
         std::map< ammotype, std::set<itype_id> > magazines;
@@ -1567,7 +1580,7 @@ struct itype {
         std::string nname( unsigned int quantity ) const;
 
         // Allow direct access to the type id for the few cases that need it.
-        itype_id get_id() const {
+        const itype_id &get_id() const {
             return id;
         }
 
@@ -1625,15 +1638,6 @@ struct itype {
 
         // returns true if it is one of the outcomes of cutting
         bool is_basic_component() const;
-
-        //TO-DO: remove all of these
-        void set_qualities_from_json( const JsonObject &jo, const std::string &member, itype &def );
-        void extend_qualities_from_json( const JsonObject &jo, std::string_view member, itype &def );
-        void delete_qualities_from_json( const JsonObject &jo, std::string_view member, itype &def );
-        void relative_qualities_from_json( const JsonObject &jo, std::string_view member, itype &def );
-        void set_techniques_from_json( const JsonObject &jo, const std::string_view &member, itype &def );
-        void extend_techniques_from_json( const JsonObject &jo, std::string_view member, itype &def );
-        void delete_techniques_from_json( const JsonObject &jo, std::string_view member, itype &def );
 
         // used for generic_factory for copy-from
         bool was_loaded = false;

@@ -1,7 +1,8 @@
 [
   {
     "id": "light_minus_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "category": "tool_magazine",
     "name": { "str": "watch battery", "str_pl": "watch batteries" },
     "description": "A coin-shaped battery designed for use in small devices like watches and calculators",
@@ -23,7 +24,8 @@
   {
     "id": "light_minus_disposable_cell",
     "copy-from": "light_minus_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "disposable watch battery", "str_pl": "disposable watch batteries" },
     "description": "A coin-shaped battery designed for use in small devices like watches and calculators.  This one can't be recharged.",
     "//": "cr2032, Lithium-Manganese, duracell CR2032 but they all pretty equal in their range",
@@ -32,7 +34,8 @@
   },
   {
     "id": "light_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "category": "tool_magazine",
     "name": { "str": "disposable dry cell battery", "str_pl": "disposable dry cell batteries" },
     "description": "A small battery, the kind you'd find in a TV remote or an alarm clock.  This one can't be recharged.",
@@ -54,7 +57,8 @@
   {
     "id": "light_cell_rechargeable",
     "copy-from": "light_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "dry cell battery", "str_pl": "dry cell batteries" },
     "description": "A small battery, the kind you'd find in a TV remote or an alarm clock.",
     "//": "AA, Nickel-Metal Hydride, ENERGIZER NH15-2300",
@@ -65,7 +69,8 @@
   },
   {
     "id": "medium_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "category": "tool_magazine",
     "name": { "str": "lithium battery", "str_pl": "lithium batteries" },
     "description": "A rechargeable lithium battery small enough to fit in many handheld devices but powerful enough to run complex electronics.  These are newer and can store much more power than the old dry cell batteries.",
@@ -87,7 +92,8 @@
   {
     "id": "heavy_battery_cell",
     "copy-from": "heavy_plus_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "tool battery", "str_pl": "tool batteries" },
     "description": "A rechargeable battery pack, big enough to run a cordless drill or other handheld power tool.",
     "//": "Li-ion 18V LXT BL1815N",
@@ -101,7 +107,8 @@
   },
   {
     "id": "heavy_plus_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "category": "tool_magazine",
     "name": { "str": "heavy tool battery", "str_pl": "heavy tool batteries" },
     "description": "A heavy battery pack, universally compatible with all kinds of industrial-grade equipment and portable tools.",
@@ -123,7 +130,8 @@
   },
   {
     "id": "heavy_atomic_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "category": "tool_magazine",
     "name": { "str": "heavy plutonium tool battery", "str_pl": "heavy plutonium tool batteries" },
     "description": "A battery that uses a thin plutonium-244 rod to stabilize an exotic nanocompound.  It is universally compatible with all kinds of industrial-grade equipment and large tools.  Although it stores a huge amount of power, it cannot be recharged.",
@@ -143,7 +151,8 @@
   },
   {
     "id": "huge_atomic_battery_cell",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "category": "tool_magazine",
     "name": { "str": "plutonium fuel cell" },
     "description": "A battery that uses a huge plutonium-244 rod to stabilize an exotic nanocompound.  It was used in military mech-suits, was highly experimental, and had no civilian applications.  Although it stores a stupendous amount of power, it cannot be recharged.",

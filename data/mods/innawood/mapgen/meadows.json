@@ -37,7 +37,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "meadow_12x12_shrubs",
     "weight": 350,
     "//": "Patch of cotton growing in a meadow",
@@ -63,7 +62,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "meadow_12x12_shrubs",
     "weight": 350,
     "//": "Patch of spurge growing in a meadow",
@@ -89,7 +87,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "nested_mapgen_id": "meadow_12x12_shrubs",
     "weight": 350,
     "//": "Patch of corn growing in a meadow",

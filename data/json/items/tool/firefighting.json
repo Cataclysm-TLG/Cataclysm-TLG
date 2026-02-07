@@ -1,7 +1,8 @@
 [
   {
     "id": "extinguisher",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "large fire extinguisher" },
     "description": "An emergency fire extinguisher containing five gallons of fire-retardant foam.  Useful for putting out adjacent fires.",
     "weight": "7030 g",
@@ -29,7 +30,8 @@
   },
   {
     "id": "halligan",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "Halligan bar" },
     "description": "A heavy, multiple-use tool commonly carried by firefighters, law enforcement, and military rescue units.  Use it to open locked doors or to lift manhole covers, or just bash enemies with the nasty-looking spike on one end.",
     "weight": "4080 g",
@@ -51,7 +53,8 @@
   },
   {
     "id": "sm_extinguisher",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "small fire extinguisher" },
     "description": "A handheld fire extinguisher containing a liter of highly compressed CO2 gas.  Useful for putting out adjacent fires.",
     "weight": "1133 g",
@@ -80,7 +83,8 @@
   },
   {
     "id": "throw_extinguisher",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "tools",
     "name": { "str": "throwable fire extinguisher" },
     "description": "A fire extinguisher in grenade form.  While not as effective as a regular fire extinguisher, you can use it from a farther distance.  It has a plastic plug that can be pulled, but is primarily activated by heat, so just throw it into the flames.",
@@ -105,7 +109,8 @@
   },
   {
     "id": "throw_extinguisher_act",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "tools",
     "name": { "str": "active throwable fire extinguisher" },
     "description": "An active extinguisher grenade, likely to burst any second now.  Better throw it!",
@@ -124,7 +129,7 @@
   },
   {
     "id": "pike_pole",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "yellow",
     "looks_like": "spear_pipe",
@@ -145,7 +150,7 @@
   },
   {
     "id": "EOD_hotstick",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "yellow",
     "copy-from": "pike_pole",
@@ -154,7 +159,8 @@
   },
   {
     "id": "ny_hook",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "symbol": "/",
     "color": "yellow",
     "looks_like": "iceaxe",

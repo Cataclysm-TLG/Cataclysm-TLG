@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "corpse_neck",
     "weight": 100,
     "object": {
@@ -76,7 +75,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "corpse_neck_center",
     "weight": 150,
     "object": {
@@ -113,7 +111,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "corpse_head_neck_r", "corpse_head_neck_center", "corpse_head_neck_l" ] ],
     "object": {
       "fill_ter": "t_nm_floor_flesh",
@@ -161,7 +158,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "corpse_head_neck_r_decap", "corpse_head_neck_center_decap", "corpse_head_neck_l_decap" ] ],
     "object": {
       "fill_ter": "t_nm_floor_flesh",
@@ -209,7 +205,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "corpse_head",
     "object": {
       "fill_ter": "t_nm_floor_flesh",
@@ -258,7 +253,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "corpse_under_brain",
     "object": {
       "fill_ter": "t_nm_floor_flesh",
@@ -306,7 +300,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "corpse_brain",
     "object": {
       "fill_ter": "t_nm_floor_flesh",
@@ -342,7 +335,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": [ [ "corpse_head_lcorner", "corpse_head_edge", "corpse_head_rcorner" ] ],
     "object": {
       "fill_ter": "t_nm_floor_flesh",
@@ -390,7 +382,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "corpse_head_fin",
     "object": {
       "fill_ter": "t_nm_floor_flesh",
