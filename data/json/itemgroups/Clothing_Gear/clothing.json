@@ -312,8 +312,8 @@
       { "item": "elbow_pads", "prob": 10 },
       { "item": "knee_pads", "prob": 85 },
       {
-        "distribution": [ { "group": "army_helmet_nvg", "prob": 1 }, { "item": "helmet_army", "prob": 199 } ],
-        "prob": 50
+        "distribution": [ { "group": "army_helmet_nvg", "prob": 2 }, { "item": "helmet_army", "prob": 198 } ],
+        "prob": 55
       },
       { "item": "gloves_tactical", "prob": 60 },
       { "group": "military_ballistic_vest", "prob": 90 },
@@ -336,8 +336,8 @@
       { "item": "elbow_pads", "prob": 10 },
       { "item": "knee_pads", "prob": 85 },
       {
-        "distribution": [ { "group": "army_helmet_nvg", "prob": 1 }, { "item": "helmet_army", "prob": 199 } ],
-        "prob": 50
+        "distribution": [ { "group": "army_helmet_nvg", "prob": 2 }, { "item": "helmet_army", "prob": 198 } ],
+        "prob": 55
       },
       { "item": "gloves_tactical", "prob": 60 },
       { "group": "military_ballistic_vest_pristine", "prob": 90 },

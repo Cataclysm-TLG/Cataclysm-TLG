@@ -17,13 +17,13 @@
       {
         "monster": "mon_turret_rifle",
         "weight": 950,
-        "spawn_data": { "ammo": [ { "ammo_id": "556", "qty": [ 100, 1600 ] } ] }
+        "spawn_data": { "ammo": [ { "ammo_id": "556", "qty": [ 100, 400 ] } ] }
       },
       {
         "monster": "mon_turret_bmg",
         "weight": 50,
         "cost_multiplier": 2,
-        "spawn_data": { "ammo": [ { "ammo_id": "50bmg", "qty": [ 50, 400 ] } ] }
+        "spawn_data": { "ammo": [ { "ammo_id": "50bmg", "qty": [ 50, 200 ] } ] }
       }
     ]
   },
