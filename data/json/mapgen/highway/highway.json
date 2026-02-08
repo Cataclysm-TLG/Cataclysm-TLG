@@ -52,6 +52,10 @@
         { "chunks": [ "24x24_highway_straight_vehicles" ], "x": 0, "y": 0 },
         { "chunks": [ "24x24_highway_zombies" ], "x": 0, "y": 0 }
       ],
+      "place_items": [
+        { "item": "SUS_trash_highway_shoulder", "x": [ 0, 9 ], "y": [ 0, 23 ], "chance": 10, "repeat": [ 0, 16 ] },
+        { "item": "road", "x": [ 8, 23 ], "y": [ 0, 23 ], "chance": 20 }
+      ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
