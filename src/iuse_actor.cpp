@@ -1487,7 +1487,7 @@ bool firestarter_actor::prep_firestarter_use( const Character &p, map *here, tri
             if( here->has_flag_ter_or_furn( "FIRE_CONTAINER", query ) ) {
                 if( !query_yn(
                         _( "Are you sure you want to start fire here?  There's a much more appropriate spot adjacent." ) ) ) {
-                    return start_type::NONE;
+                    return false;
                 } else {
                     // Don't ask multiple times if they say no and there are multiple fireplaces
                     break;
