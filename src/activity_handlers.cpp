@@ -873,12 +873,21 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
 static int corpse_damage_effect( int weight, const harvest_drop_type_id &entry_type,
                                  int damage_level )
 {
-    const float slight_damage = 0.9f;
-    const float damage = 0.75f;
-    const float high_damage = 0.5f;
+    const float slight_damage = 0.75f;
+    const float damage = 0.5f;
+    const float high_damage = 0.25f;
     const int destroyed = 0;
 
     switch( damage_level ) {
+        case 1:
+            // "bruised"
+            if( entry_type == harvest_drop_offal ) {
+                return std::round( weight * slight_damage );
+            }
+            if( entry_type == harvest_drop_flesh ) {
+                return std::round( weight * slight_damage );
+            }
+            break;
         case 2:
             // "damaged"
             if( entry_type == harvest_drop_offal ) {
@@ -888,7 +897,7 @@ static int corpse_damage_effect( int weight, const harvest_drop_type_id &entry_t
                 return std::round( weight * damage );
             }
             if( entry_type == harvest_drop_flesh ) {
-                return std::round( weight * slight_damage );
+                return std::round( weight * damage );
             }
             break;
         case 3:
@@ -903,7 +912,7 @@ static int corpse_damage_effect( int weight, const harvest_drop_type_id &entry_t
                 return std::round( weight * slight_damage );
             }
             if( entry_type == harvest_drop_flesh ) {
-                return std::round( weight * damage );
+                return std::round( weight * high_damage );
             }
             break;
         case 4:
@@ -922,7 +931,6 @@ static int corpse_damage_effect( int weight, const harvest_drop_type_id &entry_t
             }
             break;
         default:
-            // "bruised" modifier is almost impossible to avoid; also includes no modifier (zero damage)
             break;
     }
     return weight;
@@ -936,12 +944,12 @@ static int butchery_dissect_skill_level( Character &you, int tool_quality,
         float sk_total = 0;
         int sk_count = 0;
         for( const skill_id &sk : htype->get_harvest_skills() ) {
-            sk_total += you.get_average_skill_level( sk );
+            sk_total += you.get_skill_level( sk );
             sk_count++;
         }
         return round( ( sk_total + tool_quality ) / ( sk_count > 0 ? sk_count : 1 ) );
     }
-    return round( you.get_average_skill_level( skill_survival ) );
+    return round( you.get_skill_level( skill_survival ) );
 }
 
 static int roll_butchery_dissect( int skill_level, int dex, int tool_quality )
@@ -1012,7 +1020,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
 
     //all BUTCHERY types - FATAL FAILURE
     if( action != butcher_type::DISSECT &&
-        roll_butchery_dissect( round( you.get_average_skill_level( skill_survival ) ), you.dex_cur,
+        roll_butchery_dissect( round( you.get_skill_level( skill_survival ) ), std::min( you.per_cur, you.dex_cur ),
                                tool_quality ) <= ( -15 ) && one_in( 2 ) ) {
         return false;
     }
@@ -1059,7 +1067,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
             dissectable_num++;
             const int skill_level = butchery_dissect_skill_level( you, tool_quality,
                                     item->dropped_from );
-            const int butchery = roll_butchery_dissect( skill_level, you.dex_cur, tool_quality );
+            const int butchery = roll_butchery_dissect( skill_level, std::min( you.per_cur, you.dex_cur ), tool_quality );
             dissectable_practice += ( 4 + butchery );
             int roll = butchery - corpse_item->damage_level();
             roll = roll < 0 ? 0 : roll;
@@ -1076,7 +1084,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
     for( const harvest_entry &entry : ( action == butcher_type::DISSECT &&
                                         !mt.dissect.is_empty() ) ? *mt.dissect : *mt.harvest ) {
         const int skill_level = butchery_dissect_skill_level( you, tool_quality, entry.type );
-        const int butchery = roll_butchery_dissect( skill_level, you.dex_cur, tool_quality );
+        const int butchery = roll_butchery_dissect( skill_level, std::min( you.per_cur, you.dex_cur ), tool_quality );
         practice += ( 4 + butchery ) / entry_count;
         const float min_num = entry.base_num.first + butchery * entry.scale_num.first;
         const float max_num = entry.base_num.second + butchery * entry.scale_num.second;
@@ -1205,7 +1213,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
             // divide total dropped weight by drop's weight to get amount
             if( entry.mass_ratio != 0.00f ) {
                 // apply skill before converting to items, but only if mass_ratio is defined
-                roll *= butchery_dissect_yield_mult( skill_level, you.dex_cur, tool_quality );
+                roll *= butchery_dissect_yield_mult( skill_level, std::min( you.per_cur, you.dex_cur ), tool_quality );
                 monster_weight_remaining -= roll;
                 roll = std::ceil( static_cast<double>( roll ) /
                                   to_gram( drop->weight ) );
@@ -1354,7 +1362,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
     if( action != butcher_type::FIELD_DRESS && action != butcher_type::SKIN &&
         action != butcher_type::BLEED ) {
         for( item *content : corpse_item->all_items_top( pocket_type::CONTAINER ) ) {
-            if( ( roll_butchery_dissect( round( you.get_average_skill_level( skill_survival ) ), you.dex_cur,
+            if( ( roll_butchery_dissect( round( you.get_skill_level( skill_survival ) ), std::min( you.per_cur, you.dex_cur ),
                                          tool_quality ) + 10 ) * 5 > rng( 0, 100 ) ) {
                 //~ %1$s - item name, %2$s - monster name
                 you.add_msg_if_player( m_good, _( "You discover a %1$s in the %2$s!" ), content->tname(),
@@ -1450,20 +1458,20 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                                                    corpse->size + 1 ) ) );
         }
 
-        // Ready to move on to the next item, if there is one
+        // Ready to move on to the next item, if there is one.
         act->index = true;
         return;
     }
 
     bool remove = false;
-    //end messages and effects
+    // End messages and effects.
     switch( action ) {
         case butcher_type::QUARTER:
             break;
         case butcher_type::QUICK:
             add_msg( m_good, SNIPPET.random_from_category( "harvest_drop_default_quick_butcher" ).value_or(
                          translation() ).translated() );
-            // Remove the target from the map
+            // Remove the target from the map.
             remove = true;
             if( !act->targets.empty() ) {
                 act->targets.pop_back();
@@ -1480,8 +1488,8 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
             }
             break;
         case butcher_type::FIELD_DRESS: {
-            bool success = roll_butchery_dissect( round( you->get_average_skill_level( skill_survival ) ),
-                                                  you->dex_cur,
+            bool success = roll_butchery_dissect( round( you->get_skill_level( skill_survival ) ),
+                                                  std::min( you->per_cur, you->dex_cur ),
                                                   you->max_quality( qual_BUTCHER, PICKUP_RANGE ) ) > 0;
             add_msg( success ? m_good : m_warning,
                      SNIPPET.random_from_category( success ? "harvest_drop_default_field_dress_success" :
