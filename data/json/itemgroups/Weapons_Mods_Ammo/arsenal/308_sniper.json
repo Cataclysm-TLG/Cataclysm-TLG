@@ -11,8 +11,7 @@
     "subtype": "collection",
     "items": [
       { "group": "milspec_arsenal_308_sniper_gun&mags" },
-      { "group": "ammo_can_308_any_full", "prob": 30, "count": [ 0, 1 ] },
-      { "group": "ammo_can_308_any_part", "prob": 80, "count": [ 0, 2 ] }
+      { "group": "ammo_can_308_any", "prob": 80, "count": [ 0, 2 ] }
     ]
   },
   {
@@ -20,9 +19,8 @@
     "id": "milspec_arsenal_308_sniper_gun&mags",
     "subtype": "collection",
     "items": [
-      { "group": "milspec_arsenal_308_sniper", "count": [ 0, 2 ] },
-      { "group": "milspec_arsenal_308_sniper", "count": [ 0, 2 ], "prob": 40 },
-      { "group": "milspec_arsenal_308_sniper", "count": [ 0, 2 ], "prob": 10 }
+      { "group": "milspec_arsenal_308_sniper" },
+      { "group": "milspec_arsenal_308_sniper", "count": [ 1, 2 ], "prob": 30 }
     ]
   },
   {
@@ -39,7 +37,7 @@
     "id": "nested_m110a1_no_ammo",
     "type": "item_group",
     "subtype": "collection",
-    "items": [ { "item": "m110a1" }, { "group": "m110a1_mags", "count": [ 0, 3 ] } ]
+    "items": [ { "item": "m110a1" }, { "group": "m110a1_mags", "count": [ 0, 2 ] } ]
   },
   {
     "id": "m110a1_mags",
@@ -50,7 +48,7 @@
     "id": "nested_m14ebr_no_ammo",
     "type": "item_group",
     "subtype": "collection",
-    "items": [ { "item": "m14ebr" }, { "group": "m14ebr_mags", "count": [ 0, 3 ] } ]
+    "items": [ { "item": "m14ebr" }, { "group": "m14ebr_mags", "count": [ 0, 2 ] } ]
   },
   {
     "id": "m14ebr_mags",
@@ -67,7 +65,6 @@
     "id": "nested_scar_no_ammo",
     "type": "item_group",
     "subtype": "collection",
-    "//": "TODO: add SCAR H MK 20 SSR here instead of common SCAR.  Or maybe left this one and add another, dunno",
     "items": [ { "item": "scar_h" }, { "group": "scar_mags", "count": [ 0, 3 ] } ]
   },
   {
