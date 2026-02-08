@@ -3462,7 +3462,7 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
                            pierce );
     }
     if( mod.to_hit_mod != 0 && parts->test( iteminfo_parts::GUNMOD_TO_HIT_MODIFIER ) ) {
-        info.emplace_back( "GUNMOD", _( "To-hit modifier: " ), "",
+        info.emplace_back( "GUNMOD", _( "To-hit modifier when installed: " ), "",
                            iteminfo::show_plus, mod.to_hit_mod );
     }
     if( mod.range != 0 && parts->test( iteminfo_parts::GUNMOD_RANGE ) ) {
@@ -3484,8 +3484,8 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
     }
     if( mod.loudness_multiplier != 1.0 && parts->test( iteminfo_parts::GUNMOD_LOUDNESS_MULTIPLIER ) ) {
         info.emplace_back( "GUNMOD", _( "Loudness multiplier: " ), "",
-                           iteminfo::lower_is_better | iteminfo::show_plus,
-                           mod.loudness );
+                           iteminfo::lower_is_better | iteminfo::is_decimal,
+                           mod.loudness_multiplier );
     }
     if( !type->mod->ammo_modifier.empty() && parts->test( iteminfo_parts::GUNMOD_AMMO ) ) {
         for( const ammotype &at : type->mod->ammo_modifier ) {
@@ -11330,7 +11330,7 @@ units::energy item::energy_remaining( const Character *carrier, bool ignoreExter
     if( is_magazine() ) {
         ret += energy;
         for( const item *e : contents.all_items_top( pocket_type::MAGAZINE ) ) {
-            if( e->typeId() == itype_battery ) {
+            if( e->ammo_type() == ammo_battery ) {
                 ret += units::from_kilojoule( static_cast<std::int64_t>( e->charges ) );
             }
         }
