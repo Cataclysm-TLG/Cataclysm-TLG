@@ -157,7 +157,7 @@ bool mapbuffer::submap_exists_approx( const tripoint_abs_sm &p )
                 if( !file_exist( zzip_name ) ) {
                     return false;
                 }
-                std::optional<zzip> z = zzip::load( zzip_name.get_unrelative_path(),
+                std::shared_ptr<zzip> z = zzip::load( zzip_name.get_unrelative_path(),
                                                       ( PATH_INFO::world_base_save_path() / "maps.dict" ).get_unrelative_path() );
                 return z->has_file( std::filesystem::u8path( file_name ) );
             } else {
@@ -376,7 +376,7 @@ submap *mapbuffer::unserialize_submaps( const tripoint_abs_sm &p )
             if( !file_exist( zzip_name ) ) {
                 return false;
             }
-            std::optional<zzip> z = zzip::load( zzip_name.get_unrelative_path(),
+            std::shared_ptr<zzip> z = zzip::load( zzip_name.get_unrelative_path(),
                                                   ( PATH_INFO::world_base_save_path() / "maps.dict" ).get_unrelative_path() );
             if( !z->has_file( file_name_path ) ) {
                 return false;
