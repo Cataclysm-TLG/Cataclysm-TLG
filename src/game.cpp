@@ -3225,11 +3225,10 @@ void game::load_master()
     } );
 }
 
-bool game::load_dimension_data()
+void game::load_dimension_data()
 {
     const cata_path datafile = PATH_INFO::current_dimension_save_path() / SAVE_DIMENSION_DATA;
-    // If dimension_data.gsav doesn't exist, return false
-    return read_from_file_optional( datafile, [this, &datafile]( std::istream & is ) {
+    read_from_file_optional( datafile, [this, &datafile]( std::istream & is ) {
         unserialize_dimension_data( datafile, is );
     } );
 }
@@ -11678,7 +11677,7 @@ void game::place_player_overmap( const tripoint_abs_omt &om_dest, bool move_play
     here.spawn_monsters( true ); // Static monsters
     update_overmap_seen();
     // update weather now as it could be different on the new location
-    weather.set_nextweather( calendar::turn );
+    weather.nextweather = calendar::turn;
     if( move_player ) {
         place_player( player_pos );
     }
@@ -12982,16 +12981,11 @@ bool game::travel_to_dimension( const std::string &new_prefix )
         dimension_prefix.clear();
     }
     // Load in data specific to the dimension (like weather)
-    if( !load_dimension_data() ) {
-        // dimension data file not found/created yet
-        /* handle weather instance switching when I have dimensions with different region settings,
-         right now they're all the same and it's hard to tell if it's working or not. */
-        // weather.set_nextweather( calendar::turn );
-    }
+    load_dimension_data();
     // Ensure the new world has compression files
     world_generator->active_world->assure_compression_files_present();
     MAPBUFFER.clear();
-    // hack to prevent crashes from temperature checks
+    // FIXME hack to prevent crashes from temperature checks
     // This returns to false in 'on_turn()' so it should be fine?
     swapping_dimensions = true;
     overmap_buffer.clear();
@@ -13007,6 +13001,8 @@ bool game::travel_to_dimension( const std::string &new_prefix )
     // Handle static monsters
     here.spawn_monsters( true, true );
     update_overmap_seen();
+    // Update weather now as it could be different on the new location
+    //get_weather().nextweather = calendar::turn;
     return true;
 }
 
