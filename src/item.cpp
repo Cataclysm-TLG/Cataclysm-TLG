@@ -3462,7 +3462,7 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
                            pierce );
     }
     if( mod.to_hit_mod != 0 && parts->test( iteminfo_parts::GUNMOD_TO_HIT_MODIFIER ) ) {
-        info.emplace_back( "GUNMOD", _( "To-hit modifier: " ), "",
+        info.emplace_back( "GUNMOD", _( "To-hit modifier when installed: " ), "",
                            iteminfo::show_plus, mod.to_hit_mod );
     }
     if( mod.range != 0 && parts->test( iteminfo_parts::GUNMOD_RANGE ) ) {
