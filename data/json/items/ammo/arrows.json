@@ -230,7 +230,7 @@
     "count": 1,
     "stack_size": 1,
     "recovery_chance": 80,
-    "flags": [ "FRAGILE_MELEE", "NOGIB" ],
+    "flags": [ "FRAGILE_MELEE", "NOGIB", "MUNDANE" ],
     "use_action": {
       "target": "arrow_flaming",
       "target_timer": "20 seconds",
