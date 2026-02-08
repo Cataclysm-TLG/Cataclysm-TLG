@@ -992,14 +992,14 @@ void tileset_cache::loader::process_variations_after_loading(
     // loop through all of the variations
     for( auto &v : vs ) {
         // in a given variation, erase any invalid sprite ids
-        v.first.erase(
+        v.obj.erase(
             std::remove_if(
-                v.first.begin(),
-                v.first.end(),
+                v.obj.begin(),
+                v.obj.end(),
         [&]( int id ) {
             return id >= offset || id < 0;
         } ),
-        v.first.end()
+        v.obj.end()
         );
     }
     // erase any variations with no valid sprite ids left
@@ -1007,8 +1007,8 @@ void tileset_cache::loader::process_variations_after_loading(
         std::remove_if(
             vs.begin(),
             vs.end(),
-    [&]( const std::pair<std::vector<int>, int> &o ) {
-        return o.first.empty();
+    [&]( const weighted_object<int, std::vector<int>> &o ) {
+        return o.obj.empty();
     }
         ),
     vs.end()
