@@ -87,14 +87,7 @@ int camp_reference::get_distance_from_bounds() const
 
 std::string overmapbuffer::terrain_filename( const point_abs_om &p )
 {
-    std::string dimension_prefix = g->get_dimension_prefix();
-    if( !dimension_prefix.empty() ) {
-        return PATH_INFO::world_base_save_path() / "dimensions" / dimension_prefix /
-               string_format( "o.%d.%d",
-                              p.x(), p.y() );
-    } else {
-        return PATH_INFO::world_base_save_path() / string_format( "o.%d.%d", p.x(), p.y() );
-    }
+    return string_format( "o.%d.%d", p.x(), p.y() );
 }
 
 cata_path overmapbuffer::player_filename( const point_abs_om &p )
@@ -361,9 +354,7 @@ overmap *overmapbuffer::get_existing( const point_abs_om &p )
         path = PATH_INFO::world_base_save_path() / terfilename_path;
     }
 
-    assure_dir_exist( PATH_INFO::world_base_save_path() / "dimensions" /
-                      g->get_dimension_prefix() );
-    if( file_exist( PATH_INFO::world_base_save_path() / terrain_filename( p ) ) ) {
+    if( file_exist( path ) ) {
         // File exists, load it normally (the get function
         // indirectly call overmap::open to do so).
         return &get( p );

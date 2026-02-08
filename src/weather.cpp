@@ -1048,7 +1048,7 @@ units::temperature weather_manager::get_temperature( const tripoint_bub_ms &loca
     //underground temperature = average New England temperature = 43F/6C
     units::temperature temp = location.z() < 0 ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
 
-    if( !g->new_game && !g->swapping_dimensions ) {
+    if( !g->new_game ) {
         units::temperature_delta temp_mod;
         temp_mod = get_heat_radiation( location );
         temp_mod += get_convection_temperature( location );
