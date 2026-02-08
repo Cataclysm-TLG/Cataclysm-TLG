@@ -127,6 +127,7 @@ std::string enum_to_string<spell_flag>( spell_flag data )
 {
     switch( data ) {
         case spell_flag::AIRBORNE: return "AIRBORNE";
+        case spell_flag::CHARM_PET: return "CHARM_PET";
         case spell_flag::CONCENTRATE: return "CONCENTRATE";
         case spell_flag::DODGEABLE: return "DODGEABLE";
         case spell_flag::EXTRA_EFFECTS_FIRST: return "EXTRA_EFFECTS_FIRST";

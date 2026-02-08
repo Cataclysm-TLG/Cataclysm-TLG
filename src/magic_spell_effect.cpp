@@ -73,8 +73,9 @@ static const damage_type_id damage_acid( "acid" );
 
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_corroding( "corroding" );
-static const efftype_id effect_jumping( "jumping" );
 static const efftype_id effect_invisibility( "invisibility" );
+static const efftype_id effect_jumping( "jumping" );
+static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_teleglow( "teleglow" );
 
 static const flag_id json_flag_FIT( "FIT" );
@@ -1669,6 +1670,10 @@ void spell_effect::charm_monster( const spell &sp, Creature &caster, const tripo
             mon->get_hp() <= sp.damage( caster ) ) {
             mon->unset_dest();
             mon->friendly += sp.duration( caster ) / 100;
+            if( mon->friendly != -1 && sp.has_flag( spell_flag::CHARM_PET ) ) {
+                mon->friendly = -1;
+                mon->add_effect( effect_pet, 1_turns, true );
+            }
         }
     }
 }
