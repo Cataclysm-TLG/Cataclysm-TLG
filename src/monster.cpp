@@ -4019,8 +4019,8 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
     if( !tmp_provocative ) {
         return;
     }
-    // Already following a more interesting sound.
-    if( provocative_sound && wandf > 0 ) {
+    // Already following a more interesting sound, 50% chance to follow a new sound instead
+    if( provocative_sound && wandf > 0 && rng( 0, 1 ) ) {
         return;
     }
 
