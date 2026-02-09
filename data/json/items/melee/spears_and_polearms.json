@@ -9,7 +9,7 @@
     "longest_side": "150 cm",
     "price": "55 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ { "type": "steel", "portion": 2 }, { "type": "wood", "portion": 8 }],
+    "material": [ { "type": "steel", "portion": 2 }, { "type": "wood", "portion": 8 } ],
     "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "uneven" },
     "symbol": "/",
     "color": "brown",
