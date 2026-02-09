@@ -1545,10 +1545,9 @@
     "weight": "11556 g",
     "volume": "8255 ml",
     "price": "200 USD",
-    "price_postapoc": "100 USD",
+    "price_postapoc": "2 USD",
     "to_hit": -5,
-    "//": "real bite suits are made with linen, but we don't have linen, so denim is the closest approx. (canvas is always waterproofed and these suits are not)",
-    "material": [ "kevlar", "denim" ],
+    "material": [ "cotton", "kevlar" ],
     "symbol": "[",
     "looks_like": "coat_winter",
     "color": "light_gray",
@@ -1558,8 +1557,8 @@
     "armor": [
       {
         "material": [
-          { "type": "kevlar", "covered_by_mat": 95, "thickness": 4 },
-          { "type": "denim", "covered_by_mat": 100, "thickness": 3 }
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 4 }
         ],
         "covers": [ "torso" ],
         "coverage": 100,
@@ -1567,8 +1566,8 @@
       },
       {
         "material": [
-          { "type": "kevlar", "covered_by_mat": 100, "thickness": 4 },
-          { "type": "denim", "covered_by_mat": 100, "thickness": 3 }
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 4 }
         ],
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_upper_l", "arm_lower_l", "arm_upper_r", "arm_lower_r" ],
