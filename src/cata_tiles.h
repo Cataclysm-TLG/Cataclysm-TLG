@@ -2,7 +2,11 @@
 #ifndef CATA_SRC_CATA_TILES_H
 #define CATA_SRC_CATA_TILES_H
 
+#include <array>
+#include <bitset>
+#include <chrono>
 #include <cstddef>
+#include <deque>
 #include <map>
 #include <memory>
 #include <string>
@@ -692,7 +696,7 @@ class cata_tiles
         void draw_bullet_frame();
         void void_bullet();
 
-        void init_draw_hit( const tripoint_bub_ms &p, std::string name );
+        void init_draw_hit( const Creature &critter );
         void draw_hit_frame();
         void void_hit();
         // Prune expired hit animations.  Returns true if any were removed.
@@ -909,8 +913,11 @@ class cata_tiles
         tripoint_bub_ms bul_pos;
         std::string bul_id;
 
-        tripoint_bub_ms hit_pos;
-        std::string hit_entity_id;
+        struct hit_animation {
+            weak_ptr_fast<Creature> creature_ptr;
+            std::chrono::steady_clock::time_point timestamp;
+        };
+        std::deque<hit_animation> hit_animations;
 
         tripoint_bub_ms line_pos;
         bool is_target_line = false;

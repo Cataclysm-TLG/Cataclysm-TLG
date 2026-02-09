@@ -4709,12 +4709,15 @@ void cata_tiles::init_draw_bullet( const tripoint_bub_ms &p, std::string name )
     bul_pos = p;
     bul_id = std::move( name );
 }
-void cata_tiles::init_draw_hit( const tripoint_bub_ms &p, std::string name )
+void cata_tiles::init_draw_hit( const Creature &critter )
 {
+    hit_animation hit;
+    hit.timestamp = std::chrono::steady_clock::now();
+    hit.creature_ptr = g->shared_from( critter );
     do_draw_hit = true;
-    hit_pos = p;
-    hit_entity_id = std::move( name );
+    hit_animations.push_front( hit );
 }
+
 void cata_tiles::init_draw_line( const tripoint_bub_ms &p, std::vector<tripoint_bub_ms> trajectory,
                                  std::string name, bool target_line )
 {
@@ -4822,9 +4825,15 @@ void cata_tiles::void_bullet()
 }
 void cata_tiles::void_hit()
 {
-    do_draw_hit = false;
-    hit_pos = { -1, -1, -1 };
-    hit_entity_id.clear();
+    const std::chrono::milliseconds max_age = std::chrono::milliseconds( 50 );
+    const std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    while( !hit_animations.empty() && now - hit_animations.back().timestamp > max_age ) {
+        hit_animations.pop_back();
+    }
+
+    if( hit_animations.empty() ) {
+        do_draw_hit = false;
+    }
 }
 bool cata_tiles::expire_hit_animations()
 {
@@ -5096,21 +5105,26 @@ void cata_tiles::draw_hit_frame()
 {
     const std::string hit_overlay = "animation_hit";
     draw_options opts{};
-    opts.category = TILE_CATEGORY::HIT_ENTITY; // overlay/impact type
+    opts.category = TILE_CATEGORY::HIT_ENTITY; // overlay/impact type.
 
-
-
-    int height_3d = 0;
-    draw_from_id_string(
-        hit_overlay,
-        hit_pos,
-        0,
-        0,
-        lit_level::LIT,  // lighting
-        false,
-        height_3d,
-        opts
-    );
+    for( const hit_animation &hit : hit_animations ) {
+        const shared_ptr_fast<Creature> creature = hit.creature_ptr.lock();
+        if( !creature ) {
+            continue; // creature gone, skip this hit.
+        }
+        const tripoint_bub_ms draw_pos = creature->pos_bub();
+        int height_3d = 0;
+        draw_from_id_string(
+            hit_overlay,
+            draw_pos,
+            0,
+            0,
+            lit_level::LIT,  // lighting
+            false,
+            height_3d,
+            opts
+        );
+    }
 }
 void cata_tiles::draw_line()
 {
