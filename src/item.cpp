@@ -6915,6 +6915,10 @@ int item::price_no_contents( bool practical, std::optional<int> price_override )
         price = std::max( price - PRICE_FILTHY_MALUS, 0 );
     }
 
+    if( has_flag( flag_REPLICA_EQUIPMENT ) ) {
+        price /= 10;
+    }
+
     for( fault_id fault : faults ) {
         price *= fault->price_mod();
     }
