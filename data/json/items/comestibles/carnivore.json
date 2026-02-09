@@ -466,8 +466,7 @@
     "looks_like": "meat_scrap",
     "cooks_like": "mutant_meat_scrap_cooked",
     "proportional": { "price_postapoc": 0.2, "calories": 0.5, "parasites": 0.75 },
-    "vitamins": [ [ "mutant_toxin", 2 ], [ "meat_allergen", 1 ] ],
-    "delete": { "flags": [ "SMOKABLE" ] }
+    "vitamins": [ [ "mutant_toxin", 2 ], [ "meat_allergen", 1 ] ]
   },
   {
     "id": "mutant_human_flesh",

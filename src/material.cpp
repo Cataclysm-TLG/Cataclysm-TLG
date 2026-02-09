@@ -13,6 +13,9 @@
 #include "json.h"
 #include "make_static.h"
 
+
+static const damage_type_id damage_heat( "heat" );
+
 namespace
 {
 

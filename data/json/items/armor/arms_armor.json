@@ -866,7 +866,7 @@
       "target": "chainmail_junk_sleeves",
       "menu_text": "Tighten"
     },
-    "delete": { "flags": [ "NORMAL", "STURDY" ] },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {

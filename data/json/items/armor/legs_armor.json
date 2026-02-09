@@ -467,7 +467,7 @@
       "target": "chainmail_skirt_budget",
       "menu_text": "Tighten"
     },
-    "delete": { "flags": [ "NORMAL", "STURDY" ] },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
