@@ -2298,7 +2298,6 @@ void monster::apply_damage( Creature *source, bodypart_id /*bp*/, int dam,
 void monster::die_in_explosion( Creature *source )
 {
     map &here = get_map();
-
     hp = -9999; // huge to trigger explosion and prevent corpse item
     die( &here, source );
 }
@@ -3856,7 +3855,6 @@ item monster::to_item() const
     if( type->revert_to_itype.is_empty() ) {
         return item();
     }
-    // Birthday is wrong, but the item created here does not use it anyway (I hope).
     item result( type->revert_to_itype, calendar::turn );
     const int max_dmg = result.max_damage();
 
