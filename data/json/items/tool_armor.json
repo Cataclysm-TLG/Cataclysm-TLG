@@ -1236,9 +1236,9 @@
     "category": "clothing",
     "symbol": "[",
     "color": "light_gray",
-    "name": { "str": "5-point anchor" },
+    "name": { "str": "five-point anchor" },
     "looks_like": "chestguard_hard",
-    "description": "A featureless, disc-shaped device mounted on a harness.  The words \"X.E.D.R.A\" and \"5-point anchor\" are inscribed on its front and back.",
+    "description": "A featureless, disc-shaped device mounted on a harness.  The words \"5-point anchor\" are inscribed on its front and back.",
     "price": "1500 USD",
     "price_postapoc": "80 USD",
     "material": [ "ceramic", "kevlar" ],
@@ -1262,7 +1262,7 @@
     },
     "warmth": 10,
     "material_thickness": 2,
-    "flags": [ "UNRESTRICTED", "BELTED", "SOFT" ],
+    "flags": [ "UNRESTRICTED", "BELTED", "SOFT", "MUNDANE" ],
     "armor": [ { "encumbrance": 2, "coverage": 50, "covers": [ "torso" ] } ],
     "tool_ammo": "battery"
   },
@@ -1271,9 +1271,9 @@
     "copy-from": "dimensional_anchor",
     "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
-    "name": { "str": "5-point anchor (on)", "str_pl": "5-point anchors (on)" },
+    "name": { "str": "five-point anchor (on)", "str_pl": "five-point anchors (on)" },
     "looks_like": "dimensional_anchor",
-    "description": "The harness' shoulder-mounted LED glows with a soft green hue.  There's no further indication of anything happening.",
+    "description": "The harness's shoulder-mounted LED glows with a soft green hue.  There's no further indication of anything happening.",
     "turns_per_charge": 100,
     "revert_to": "dimensional_anchor",
     "use_action": {
@@ -1283,15 +1283,15 @@
       "msg": "The %s LED light flickers off.",
       "target": "dimensional_anchor"
     },
-    "flags": [ "DIMENSIONAL_ANCHOR", "UNRESTRICTED", "BELTED", "PORTAL_PROOF", "SOFT" ]
+    "flags": [ "DIMENSIONAL_ANCHOR", "UNRESTRICTED", "BELTED", "PORTAL_PROOF", "SOFT", "MUNDANE" ]
   },
   {
     "id": "broken_dimensional_anchor",
     "copy-from": "dimensional_anchor",
     "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
-    "name": { "str": "malfunctioning 5-point anchor" },
-    "description": "A battered, disc-shaped device mounted on a harness.  The inscriptions \"X.E.D.R.A\" and \"5-point anchor\" are barely legible on its radiation-stained front and back.",
+    "name": { "str": "malfunctioning five-point anchor" },
+    "description": "A battered disc-shaped device mounted on a harness.  The words \"5-point anchor\" are inscribed on its front and back.",
     "use_action": {
       "type": "transform",
       "msg": "The %s emits a low-pitched clicking alarm as its mounted LED light flashes yellow.",
@@ -1343,7 +1343,8 @@
       "PADDED",
       "USE_UPS",
       "NO_UNLOAD",
-      "COMBAT_TOGGLEABLE"
+      "COMBAT_TOGGLEABLE",
+      "MUNDANE"
     ],
     "armor": [
       {
@@ -1492,7 +1493,8 @@
       "PADDED",
       "USE_UPS",
       "NO_UNLOAD",
-      "COMBAT_TOGGLEABLE"
+      "COMBAT_TOGGLEABLE",
+      "MUNDANE"
     ]
   },
   {
