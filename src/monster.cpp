@@ -3858,8 +3858,16 @@ item monster::to_item() const
     }
     // Birthday is wrong, but the item created here does not use it anyway (I hope).
     item result( type->revert_to_itype, calendar::turn );
-    const int damfac = std::max( 1, ( result.max_damage() + 1 ) * hp / type->hp );
-    result.set_damage( std::max( 0, ( result.max_damage() + 1 ) - damfac ) );
+    const int max_dmg = result.max_damage();
+
+    // Adjust corpse's damage based on degree of overkill.
+    const int damfac = std::max( 1, ( max_dmg + 1 ) * hp / type->hp );
+    int percent_damage = std::max( 0, ( max_dmg + 1 ) - damfac );
+
+    // Throwing a rock shouldn't gib a rabbit. Let's gate damage for sanity's sake.
+    int allowed_damage = std::clamp( -hp / 5, 0, 5 );
+    int final_damage = std::min( percent_damage, allowed_damage );
+    result.set_damage( final_damage );
     return result;
 }
 
