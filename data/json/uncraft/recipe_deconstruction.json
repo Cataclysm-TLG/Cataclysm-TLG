@@ -5826,9 +5826,29 @@
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "skill_used": "tailor",
-    "time": "10 m",
+    "time": "30 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 12 ] ], [ [ "thread_kevlar", 50 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 10 ] ], [ [ "thread_kevlar", 25 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+    {
+    "result": "armguard_cut_resistant_xs",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "45 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 10 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+    {
+    "result": "armguard_cut_resistant_xl",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "20 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 20 ] ], [ [ "thread_kevlar", 50 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {

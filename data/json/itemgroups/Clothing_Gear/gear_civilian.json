@@ -389,6 +389,7 @@
       { "distribution": [ { "group": "full_survival_kit" }, { "group": "used_survival_kit" } ], "prob": 3 },
       [ "touring_suit", 20 ],
       [ "helmet_motor", 14 ],
+      [ "leggings_cut_resistant", 10 ],
       [ "motorbike_armor", 10 ],
       [ "motorbike_pants", 10 ],
       [ "motorbike_boots", 10 ],

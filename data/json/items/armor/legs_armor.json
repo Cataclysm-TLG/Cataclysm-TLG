@@ -1380,5 +1380,55 @@
     "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "leggings_kevlar",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "description": "A pair of Kevlar leggings designed to protect the legs from abrasion when riding a motorcycle.",
+    "weight": "310 g",
+    "volume": "500 ml",
+    "price": "12 USD",
+    "price_postapoc": "2 USD",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "looks_like": "leggings",
+    "color": "yellow",
+    "warmth": 14,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 6,
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "leggings_kevlar_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "copy-from": "leggings_kevlar",
+    "weight": "620 g",
+    "volume": "800 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "leggings_kevlar_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "copy-from": "leggings_kevlar",
+    "weight": "155 g",
+    "volume": "250 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
   }
 ]
