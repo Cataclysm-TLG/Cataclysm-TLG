@@ -9,19 +9,13 @@
     "type": "item_group",
     "id": "milspec_arsenal_308_sniper_gun&ammo",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_308_sniper_gun&mags" },
-      { "group": "ammo_can_308_any", "prob": 80, "count": [ 0, 2 ] }
-    ]
+    "items": [ { "group": "milspec_arsenal_308_sniper_gun&mags" }, { "group": "ammo_can_308_any", "prob": 80, "count": [ 0, 2 ] } ]
   },
   {
     "type": "item_group",
     "id": "milspec_arsenal_308_sniper_gun&mags",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_308_sniper" },
-      { "group": "milspec_arsenal_308_sniper", "count": [ 1, 2 ], "prob": 30 }
-    ]
+    "items": [ { "group": "milspec_arsenal_308_sniper" }, { "group": "milspec_arsenal_308_sniper", "count": [ 1, 2 ], "prob": 30 } ]
   },
   {
     "type": "item_group",

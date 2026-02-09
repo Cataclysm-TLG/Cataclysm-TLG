@@ -9,10 +9,7 @@
     "type": "item_group",
     "id": "milspec_arsenal_223_mg_gun&ammo",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_223_mg_gun&mags" },
-      { "group": "ammo_can_223_any", "prob": 75, "count": [ 1, 2 ] }
-    ]
+    "items": [ { "group": "milspec_arsenal_223_mg_gun&mags" }, { "group": "ammo_can_223_any", "prob": 75, "count": [ 1, 2 ] } ]
   },
   {
     "type": "item_group",

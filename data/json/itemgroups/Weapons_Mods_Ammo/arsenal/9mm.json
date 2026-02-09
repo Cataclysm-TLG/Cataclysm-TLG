@@ -9,10 +9,7 @@
     "type": "item_group",
     "id": "milspec_arsenal_9mm_gun&ammo",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_9mm_gun&mags" },
-      { "group": "ammo_can_9mm_any", "prob": 75, "count": [ 1, 2 ] }
-    ]
+    "items": [ { "group": "milspec_arsenal_9mm_gun&mags" }, { "group": "ammo_can_9mm_any", "prob": 75, "count": [ 1, 2 ] } ]
   },
   {
     "type": "item_group",

@@ -532,7 +532,7 @@
     "warmth": 20,
     "material_thickness": 2,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
+    "flags": [ "SKINTIGHT", "WATER_FRIENDLY" ],
     "armor": [
       {
         "material": [
@@ -1003,12 +1003,61 @@
     "id": "armguard_cut_resistant",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "cut-resistant arm sleeves", "str_pl": "pairs of cut-resistant arm sleeves" },
-    "description": "A long pair of cut-resistant Kevlar sleeves with thumbholes.  These were often used by loggers and landscapers for protection from thorns and chainsaw accidents.",
-    "weight": "450 g",
-    "copy-from": "armguard_soft",
+    "category": "armor",
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "description": "A long, stretchy pair of Kevlar sleeves with thumbholes.  These were often used by loggers and landscapers for protection from thorns and chainsaw accidents.",
+    "weight": "220 g",
+    "volume": "410 ml",
     "price": "12 USD",
-    "material": [ "kevlar" ]
+    "price_postapoc": "2 USD",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "yellow",
+    "warmth": 10,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 4,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
+        "coverage": 95
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ],
+        "coverage": 100
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_upper_l", "arm_upper_r" ],
+        "coverage": 10
+      }
+    ]
+  },
+  {
+    "id": "armguard_cut_resistant_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "copy-from": "armguard_cut_resistant",
+    "weight": "330 g",
+    "volume": "615 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "armguard_cut_resistant_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "copy-from": "armguard_cut_resistant",
+    "weight": "110 g",
+    "volume": "205 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
   },
   {
     "id": "platemail_arm_guards",

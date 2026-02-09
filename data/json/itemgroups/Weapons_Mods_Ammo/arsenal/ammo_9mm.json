@@ -2,7 +2,11 @@
   {
     "id": "ammo_can_9mm_any",
     "type": "item_group",
-    "items": [ { "group": "ammo_can_9mmP", "prob": 100 }, { "group": "ammo_can_9mmfmj", "prob": 100 }, { "group": "ammo_can_9mm", "prob": 100 } ]
+    "items": [
+      { "group": "ammo_can_9mmP", "prob": 100 },
+      { "group": "ammo_can_9mmfmj", "prob": 100 },
+      { "group": "ammo_can_9mm", "prob": 100 }
+    ]
   },
   {
     "type": "item_group",
@@ -30,7 +34,7 @@
     "on_overflow": "discard",
     "items": [ { "item": "9mmP", "count": 1, "charges": 30 } ]
   },
-    {
+  {
     "type": "item_group",
     "id": "ammo_can_9mm",
     "container-item": "ammunition_can_30",
