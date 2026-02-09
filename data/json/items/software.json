@@ -189,7 +189,6 @@
     "name": "abstract recipe catalog",
     "description": "for any collection of recipes",
     "ememory_size": "4 MB",
-    "delete": { "flags": [ "E_STORABLE" ] },
     "extend": { "flags": [ "E_FILE_COLLECTION", "E_STORABLE_EXCLUSIVE" ] },
     "variables": { "browsed": "false" }
   },

@@ -4,6 +4,7 @@
 
 #include <cstddef>
 #include <iosfwd>
+#include <limits>
 #include <map>
 #include <memory>
 #include <string>
@@ -12,6 +13,7 @@
 #include <utility>
 #include <vector>
 
+#include "cata_assert.h"
 #include "cata_variant.h"
 #include "coords_fwd.h"
 #include "dialogue_helpers.h"
@@ -73,8 +75,6 @@ class mapgen_function_builtin : public virtual mapgen_function
         void generate( mapgendata &mgd ) override;
 };
 
-/////////////////////////////////////////////////////////////////////////////////
-///// json mapgen (and friends)
 /*
  * Actually a pair of integers that can rng, for numbers that will never exceed INT_MAX
  */
@@ -197,7 +197,10 @@ struct jmapgen_setmap {
 struct spawn_data {
     std::map<itype_id, jmapgen_int> ammo;
     std::vector<point_rel_ms> patrol_points_rel_ms;
+
+    void deserialize( const JsonObject &jo );
 };
+
 
 /**
  * Basic mapgen object. It is supposed to place or do something on a specific square on the map.

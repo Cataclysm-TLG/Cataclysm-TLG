@@ -25,7 +25,7 @@
     "valid_mod_locations": [ [ "mechanism", 2 ], [ "sling", 1 ], [ "underbarrel mount", 1 ] ],
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "uneven" },
     "extend": { "flags": [ "ALLOWS_BODY_BLOCK" ] },
-    "delete": { "flags": [ "FIRE_TWOHAND" ], "weapon_category": [ "AUTOMATIC_RIFLES" ] },
+    "delete": { "flags": [ "FIRE_TWOHAND" ] },
     "melee_damage": { "bash": 6 }
   },
   {

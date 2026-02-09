@@ -85,6 +85,9 @@ struct weakpoint_effect {
     // Maybe apply an effect to the target.
     void apply_to( Creature &target, int total_damage, const weakpoint_attack &attack ) const;
     void load( const JsonObject &jo );
+    void deserialize( const JsonObject &jo ) {
+        load( jo );
+    }
 };
 
 struct weakpoint_difficulty {
@@ -93,6 +96,9 @@ struct weakpoint_difficulty {
     explicit weakpoint_difficulty( float default_value );
     float of( const weakpoint_attack &attack ) const;
     void load( const JsonObject &jo );
+    void deserialize( const JsonObject &jo ) {
+        load( jo );
+    }
 };
 
 struct weakpoint_family {
