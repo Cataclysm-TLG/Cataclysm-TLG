@@ -8,7 +8,7 @@
     "description": "A bootleg duplicate of the Rivtech 8x40mm caseless round.",
     "proportional": { "price": 0.7, "damage": { "damage_type": "bullet", "amount": 0.9 } },
     "extend": { "effects": [ "RECYCLED" ], "flags": [ "CASELESS_ROUNDS" ] },
-    "delete": {  "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
+    "delete": { "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
   },
   {
     "id": "8mm_caseless",

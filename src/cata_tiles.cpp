@@ -3058,7 +3058,7 @@ bool cata_tiles::draw_sprite_at(
                 sprite_tex = ptr;
             }
         }
-    // TODO: Review if this works for remote view e.g. RC cars.
+        // TODO: Review if this works for remote view e.g. RC cars.
     } else if( apply_visual_effects && get_player_character().is_underwater() ) {
         if( ll != lit_level::LOW ) {
             if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {

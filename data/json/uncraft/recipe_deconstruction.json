@@ -5831,7 +5831,7 @@
     "components": [ [ [ "kevlar_sheet", 10 ] ], [ [ "thread_kevlar", 25 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
-    {
+  {
     "result": "armguard_cut_resistant_xs",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
@@ -5841,7 +5841,7 @@
     "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 10 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
-    {
+  {
     "result": "armguard_cut_resistant_xl",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
