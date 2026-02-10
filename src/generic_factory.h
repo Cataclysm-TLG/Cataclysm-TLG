@@ -225,6 +225,14 @@ class generic_factory
         // *INDENT-ON* astyle turns templates unreadable
         // End template magic for T::handle_inheritance
 
+        template<typename U, typename = void>
+        struct T_has_finalize : std::false_type {};
+
+        // astyle, please?
+        template<typename U>
+    struct T_has_finalize<U, std::void_t<decltype( std::declval<U &>().finalize() )>> :
+        std::true_type {};
+
         /**
         * Perform JSON inheritance handling for `T def` and returns true if JsonObject is real.
         *
@@ -412,6 +420,9 @@ class generic_factory
             inc_version();
             for( size_t i = 0; i < list.size(); i++ ) {
                 list[i].id.set_cid_version( static_cast<int>( i ), version );
+                if constexpr( T_has_finalize<T>::value ) {
+                    list[i].finalize();
+                }
             }
         }
 
@@ -1377,9 +1388,10 @@ struct T_has_do_delete<T, std::void_t<decltype( &T::do_delete )>> : std::true_ty
 template<typename Derived>
 class generic_typed_reader
 {
+public:
     static constexpr bool read_objects = false;
     static constexpr bool check_extend_delete_copy_from = true;
-public:
+
     template<typename C, typename Fn>
     // I tried using a member function pointer and couldn't work it out
     void apply_all_values( JsonValue &jv, C &container, Fn apply ) const {
@@ -1647,6 +1659,8 @@ template<typename T>
 class json_read_reader : public generic_typed_reader<json_read_reader<T>>
 {
 public:
+    static constexpr bool read_objects = true;
+
     T get_next( const JsonValue &jv ) const {
         T ret;
         if( !jv.read( ret ) ) {

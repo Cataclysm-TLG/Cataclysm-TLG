@@ -2152,6 +2152,12 @@ void debug_spawn_test()
 
 } // namespace MapExtras
 
+// gross
+void map_extra::finalize_all()
+{
+    extras.finalize();
+}
+
 bool map_extra::is_valid_for( const mapgendata &md ) const
 {
     int z = md.zlevel();

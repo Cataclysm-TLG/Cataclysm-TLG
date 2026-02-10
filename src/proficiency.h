@@ -55,6 +55,7 @@ struct proficiency_category {
     bool was_loaded = false;
 
     static void load_proficiency_categories( const JsonObject &jo, const std::string &src );
+    static void finalize_all();
     static void reset();
     void load( const JsonObject &jo, std::string_view src );
     static const std::vector<proficiency_category> &get_all();
@@ -90,6 +91,7 @@ class proficiency
 
     public:
         static void load_proficiencies( const JsonObject &jo, const std::string &src );
+        static void finalize_all();
         static void reset();
         void load( const JsonObject &jo, std::string_view src );
 

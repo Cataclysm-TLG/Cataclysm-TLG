@@ -115,7 +115,6 @@
     "name": { "str": "quarterpanel" },
     "description": "A half-height metal wall.  Keeps zombies outside the vehicle but allows people to see over it.",
     "proportional": { "durability": 0.8 },
-    "delete": { "flags": [ "OPAQUE" ] },
     "extend": { "flags": [ "HALF_BOARD" ] }
   },
   {
@@ -153,7 +152,6 @@
     "name": { "str": "cloth quarterpanel" },
     "description": "A half-height cloth wall.  Keeps zombies outside the vehicle but allows people to see over it.",
     "proportional": { "durability": 0.8 },
-    "delete": { "flags": [ "OPAQUE" ] },
     "extend": { "flags": [ "HALF_BOARD" ] }
   },
   {
@@ -225,7 +223,6 @@
     "name": { "str": "heavy-duty quarterpanel" },
     "description": "A half-height strong metal wall.  Keeps zombies outside the vehicle but allows people to see over it.",
     "proportional": { "durability": 0.8 },
-    "delete": { "flags": [ "OPAQUE" ] },
     "extend": { "flags": [ "HALF_BOARD" ] }
   },
   {
@@ -259,7 +256,6 @@
     "name": { "str": "wooden quarterpanel" },
     "description": "A half-height wooden wall.  Keeps zombies outside the vehicle but allows people to see over it.",
     "proportional": { "durability": 0.8 },
-    "delete": { "flags": [ "OPAQUE" ] },
     "extend": { "flags": [ "HALF_BOARD" ] }
   },
   {
@@ -282,7 +278,6 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "10 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
-    "delete": { "flags": [ "OPAQUE" ] },
     "extend": { "flags": [ "HALF_BOARD" ] },
     "damage_reduction": { "all": 5 }
   },
@@ -304,7 +299,6 @@
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
     "damage_reduction": { "all": 20 },
-    "delete": { "flags": [ "OPAQUE" ] },
     "extend": { "flags": [ "HALF_BOARD" ] }
   }
 ]

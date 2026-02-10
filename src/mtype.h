@@ -70,6 +70,7 @@ struct mon_flag {
 
     void load( const JsonObject &jo, std::string_view src );
     static void load_mon_flags( const JsonObject &jo, const std::string &src );
+    static void finalize_all();
     static void reset();
     static const std::vector<mon_flag> &get_all();
 };

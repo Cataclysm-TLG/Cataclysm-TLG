@@ -213,7 +213,7 @@
     "dissect": "dissect_troglobite_sample_single",
     "upgrades": { "age_grow": 30, "into": "mon_worm" },
     "extend": { "flags": [ "DIGS", "GOODHEARING", "SMALL_HIDER" ] },
-    "delete": { "flags": [ "SEES", "SMELLS", "CLIMBS" ] }
+    "delete": { "flags": [ "SEES", "CLIMBS" ] }
   },
   {
     "id": "mon_large_cockroach",

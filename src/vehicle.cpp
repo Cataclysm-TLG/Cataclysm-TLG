@@ -6540,23 +6540,16 @@ void vehicle::place_spawn_items( map &here )
                     continue;
                 }
 
-                for( const itype_id &e : spawn.item_ids ) {
-                    if( rng_float( 0, 1 ) < 1.0f ) {
-                        item spawn( e );
-                        created.emplace_back( spawn.in_its_container() );
+                for( const std::pair<itype_id, std::string> &e : spawn.item_ids ) {
+                    item spawn( e.first );
+                    if( !e.second.empty() ) {
+                        spawn.set_itype_variant( e.second );
                     }
-                }
-                for( const std::pair<itype_id, std::string> &e : spawn.variant_ids ) {
-                    if( rng_float( 0, 1 ) < 1.0f ) {
-                        item spawn( e.first );
-                        item added = spawn.in_its_container();
-                        added.set_itype_variant( e.second );
-                        created.push_back( added );
-                    }
+                    item added = spawn.in_its_container();
+                    created.push_back( added );
                 }
                 for( const item_group_id &e : spawn.item_groups ) {
-                    item_group::ItemList group_items = item_group::items_from( e, calendar::start_of_cataclysm,
-                                                       spawn_flags::use_spawn_rate );
+                    item_group::ItemList group_items = item_group::items_from( e, calendar::start_of_cataclysm );
                     created.insert( created.end(), group_items.begin(), group_items.end() );
                 }
             }

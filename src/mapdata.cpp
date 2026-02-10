@@ -1,35 +1,53 @@
 #include "mapdata.h"
 
 #include <algorithm>
-#include <cstdlib>
+#include <exception>
 #include <iterator>
 #include <map>
 #include <memory>
 #include <unordered_map>
 #include <utility>
 
-#include "assign.h"
+#include "avatar.h"
 #include "calendar.h"
+#include "character.h"
 #include "color.h"
 #include "debug.h"
 #include "enum_conversions.h"
+#include "flexbuffer_json.h"
+#include "flag.h"
 #include "generic_factory.h"
 #include "harvest.h"
 #include "iexamine.h"
 #include "iexamine_actors.h"
+#include "item.h"
 #include "item_group.h"
-#include "json.h"
+#include "iteminfo_query.h"
+#include "mapdata.h"
+#include "mod_manager.h"
 #include "output.h"
 #include "rng.h"
+#include "skill.h"
 #include "string_formatter.h"
 #include "translations.h"
 #include "trap.h"
 #include "type_id.h"
 
+
 static furn_id f_null;
+
+static const flag_id json_flag_DIGGABLE( "DIGGABLE" );
+static const flag_id json_flag_EASY_DECONSTRUCT( "EASY_DECONSTRUCT" );
+static const flag_id json_flag_FLAT( "FLAT" );
+static const flag_id json_flag_PHASE_BACK( "PHASE_BACK" );
+static const flag_id json_flag_PLOWABLE( "PLOWABLE" );
+
 static const furn_str_id furn_f_null( "f_null" );
 
+
 static const item_group_id Item_spawn_data_EMPTY_GROUP( "EMPTY_GROUP" );
+
+static const skill_id skill_survival( "survival" );
 
 namespace
 {
@@ -454,9 +472,9 @@ bool furn_workbench_info::load( const JsonObject &jsobj, std::string_view member
 {
     JsonObject j = jsobj.get_object( member );
 
-    assign( j, "multiplier", multiplier );
-    assign( j, "mass", allowed_mass );
-    assign( j, "volume", allowed_volume );
+    optional( j, false, "multiplier", multiplier, 1.0f );
+    optional( j, false, "mass", allowed_mass, units::mass::max() );
+    optional( j, false, "volume", allowed_volume, units::volume::max() );
 
     return true;
 }
@@ -468,10 +486,10 @@ bool plant_data::load( const JsonObject &jsobj, std::string_view member )
 {
     JsonObject j = jsobj.get_object( member );
 
-    assign( j, "transform", transform );
-    assign( j, "base", base );
-    assign( j, "growth_multiplier", growth_multiplier );
-    assign( j, "harvest_multiplier", harvest_multiplier );
+    optional( j, false, "transform", transform, furn_str_id::NULL_ID() );
+    optional( j, false, "base", base, furn_str_id::NULL_ID() );
+    optional( j, false, "growth_multiplier", growth_multiplier, 1.0f );
+    optional( j, false, "harvest_multiplier", harvest_multiplier, 1.0f );
 
     return true;
 }
@@ -638,12 +656,22 @@ void load_furniture( const JsonObject &jo, const std::string &src )
     furniture_data.load( jo, src );
 }
 
+void finalize_furniture( )
+{
+    furniture_data.finalize();
+}
+
 void load_terrain( const JsonObject &jo, const std::string &src )
 {
     if( terrain_data.empty() ) { // TODO: This shouldn't live here
         terrain_data.insert( null_terrain_t() );
     }
     terrain_data.load( jo, src );
+}
+
+void finalize_terrain( )
+{
+    terrain_data.finalize();
 }
 
 void map_data_common_t::set_flag( const std::string &flag )
@@ -918,8 +946,8 @@ bool ter_t::is_null() const
 void ter_t::load( const JsonObject &jo, const std::string &src )
 {
     map_data_common_t::load( jo, src );
-    mandatory( jo, was_loaded, "move_cost", movecost );
-    assign( jo, "max_volume", max_volume, src == "tlg" );
+    optional( jo, was_loaded, "move_cost", movecost );
+    optional( jo, was_loaded, "max_volume", max_volume, DEFAULT_TILE_VOLUME );
     optional( jo, was_loaded, "trap", trap_id_str );
     optional( jo, was_loaded, "heat_radiation", heat_radiation );
 

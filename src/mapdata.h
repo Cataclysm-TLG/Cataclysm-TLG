@@ -21,16 +21,17 @@
 #include "units.h"
 #include "value_ptr.h"
 
-struct ter_t;
-
-using ter_str_id = string_id<ter_t>;
-
 class JsonObject;
 class Character;
 struct iexamine_actor;
+struct ter_t;
 struct furn_t;
 struct itype;
 struct tripoint;
+
+
+template<>
+int_id<ter_t> string_id<ter_t>::id() const;
 
 // size of connect groups bitset; increase if needed
 const int NUM_TERCONN = 256;
@@ -748,7 +749,9 @@ struct furn_t : map_data_common_t {
 };
 
 void load_furniture( const JsonObject &jo, const std::string &src );
+void finalize_furniture();
 void load_terrain( const JsonObject &jo, const std::string &src );
+void finalize_terrain();
 
 class ter_furn_migrations
 {
