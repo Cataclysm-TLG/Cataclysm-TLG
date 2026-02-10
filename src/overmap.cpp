@@ -6449,32 +6449,6 @@ void overmap::place_mongroups()
         }
     }
 
-    if( get_option<bool>( "DISABLE_ANIMAL_CLASH" ) ) {
-        // Figure out where swamps are, and place swamp monsters
-        for( int x = 3; x < OMAPX - 3; x += 7 ) {
-            for( int y = 3; y < OMAPY - 3; y += 7 ) {
-                int swamp_count = 0;
-                for( int sx = x - 3; sx <= x + 3; sx++ ) {
-                    for( int sy = y - 3; sy <= y + 3; sy++ ) {
-                        if( ter( { sx, sy, 0 } ) == oter_forest_water ) {
-                            swamp_count += 2;
-                        }
-                    }
-                }
-                if( swamp_count >= 25 ) {
-                    tripoint_om_omt p( x, y, 0 );
-                    float norm_factor = std::abs( GROUP_SWAMP->freq_total / 1000.0f );
-                    unsigned int pop =
-                        std::round( norm_factor * rng( swamp_count * 8, swamp_count * 25 ) );
-                    spawn_mon_group(
-                        mongroup(
-                            GROUP_SWAMP, project_combine( pos(), project_to<coords::sm>( p ) ),
-                            pop ), 3 );
-                }
-            }
-        }
-    }
-
     // Figure out where rivers and lakes are, and place appropriate critters
     for( int x = 3; x < OMAPX - 3; x += 7 ) {
         for( int y = 3; y < OMAPY - 3; y += 7 ) {

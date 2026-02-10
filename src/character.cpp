@@ -2207,7 +2207,8 @@ void Character::on_try_dodge()
 
     consume_dodge_attempts();
 
-    const int base_burn_rate = get_option<int>( STATIC( "PLAYER_BASE_STAMINA_BURN_RATE" ) );
+    // FIXME: Move this to a global constant (deprecated option)
+    const int base_burn_rate = 15;
     const float dodge = get_skill_level( skill_dodge );
     const float dodge_skill_modifier = 1.0f - dodge * 0.03f;
 
@@ -5381,7 +5382,7 @@ int Character::weariness() const
 int Character::weary_threshold() const
 {
     const int bmr = base_bmr();
-    int threshold = bmr * get_option<float>( "WEARY_BMR_MULT" );
+    int threshold = static_cast<int>( std::round( bmr * 0.54 ) );
     // reduce by 1% per 14 points of fatigue after 150 points
     threshold *= 1.0f - ( ( std::max( fatigue, -20 ) - 150 ) / 1400.0f );
     // Each 2 points of morale increase or decrease by 1%
@@ -5396,7 +5397,7 @@ std::pair<int, int> Character::weariness_transition_progress() const
     // Mostly a duplicate of the below function. No real way to clean this up
     int amount = weariness();
     int threshold = weary_threshold();
-    amount -= threshold * get_option<float>( "WEARY_INITIAL_STEP" );
+    amount -= threshold;
     // failsafe if threshold is zero; see #72242
     if( threshold == 0 ) {
         return { std::abs( amount ), threshold };
@@ -5404,7 +5405,7 @@ std::pair<int, int> Character::weariness_transition_progress() const
         while( amount >= 0 ) {
             amount -= threshold;
             if( threshold > 20 ) {
-                threshold *= get_option<float>( "WEARY_THRESH_SCALING" );
+                threshold = static_cast<int>( std::round( threshold *= 0.75 ) );
             }
         }
     }
@@ -5419,7 +5420,7 @@ int Character::weariness_level() const
     int amount = weariness();
     int threshold = weary_threshold();
     int level = 0;
-    amount -= threshold * get_option<float>( "WEARY_INITIAL_STEP" );
+    amount -= threshold;
     // failsafe if threshold is zero; see #72242
     if( threshold == 0 ) {
         return level;
@@ -5427,7 +5428,7 @@ int Character::weariness_level() const
         while( amount >= 0 ) {
             amount -= threshold;
             if( threshold > 20 ) {
-                threshold *= get_option<float>( "WEARY_THRESH_SCALING" );
+                threshold = static_cast<int>( std::round( threshold *= 0.75 ) );
             }
             ++level;
         }
@@ -5441,7 +5442,7 @@ int Character::weariness_transition_level() const
 {
     int amount = weariness();
     int threshold = weary_threshold();
-    amount -= threshold * get_option<float>( "WEARY_INITIAL_STEP" );
+    amount -= threshold;
     // failsafe if threshold is zero; see #72242
     if( threshold == 0 ) {
         return std::abs( amount );
@@ -5449,7 +5450,7 @@ int Character::weariness_transition_level() const
         while( amount >= 0 ) {
             amount -= threshold;
             if( threshold > 20 ) {
-                threshold *= get_option<float>( "WEARY_THRESH_SCALING" );
+                threshold = static_cast<int>( std::round( threshold *= 0.75 ) );
             }
         }
     }
@@ -5668,11 +5669,8 @@ needs_rates Character::calc_needs_rates() const
 
     add_msg_debug_if( is_avatar(), debugmode::DF_CHAR_CALORIES, "Metabolic rate: %.2f", rates.hunger );
 
-    static const std::string player_thirst_rate( "PLAYER_THIRST_RATE" );
-    rates.thirst = get_option< float >( player_thirst_rate );
-
-    static const std::string player_fatigue_rate( "PLAYER_FATIGUE_RATE" );
-    rates.fatigue = get_option< float >( player_fatigue_rate );
+    rates.thirst = 1.f;
+    rates.fatigue = 1.f;
 
     if( asleep ) {
         calc_sleep_recovery_rate( rates );
@@ -6661,8 +6659,7 @@ float Character::healing_rate( float at_rest_quality ) const
 {
     float const rest = clamp( at_rest_quality, 0.0f, 1.0f );
     // TODO: Cache
-    float const base_heal_rate = is_avatar() ? get_option<float>( "PLAYER_HEALING_RATE" )
-                                 : get_option<float>( "NPC_HEALING_RATE" );
+    float const base_heal_rate = 0.0001;
     float const heal_rate = enchantment_cache->modify_value( enchant_vals::mod::REGEN_HP,
                             base_heal_rate );
     float awake_rate = ( 1.0f - rest ) * heal_rate;
@@ -7188,13 +7185,14 @@ int Character::get_stamina_max() const
     // Since adding cardio, 'player_max_stamina' is really 'base max stamina' and gets further modified
     // by your CV fitness.  Name has been kept this way to avoid needing to change the code.
     // Default base maximum stamina and cardio scaling are defined in data/core/game_balance.json
-    static const std::string player_max_stamina( "PLAYER_MAX_STAMINA_BASE" );
-    static const std::string player_cardiofit_stamina_scale( "PLAYER_CARDIOFIT_STAMINA_SCALING" );
+    
+    // FIXME: move these values to global constants.
+    static const int player_max_stamina = 3500;
+    static const int player_cardiofit_stamina_scale = 5;
 
-    // Cardiofit stamina mod defaults to 5, and get_cardiofit() should return a value in the vicinity
-    // of 1000-3000, so this should add somewhere between 3000 to 15000 stamina.
-    int max_stamina = get_option<int>( player_max_stamina ) +
-                      get_option<int>( player_cardiofit_stamina_scale ) * get_cardiofit();
+    // Get_cardiofit() should return a value in the vicinity of 1000-3000,
+    // so this should add somewhere between 3000 to 15000 stamina.
+    int max_stamina = player_max_stamina + player_cardiofit_stamina_scale * get_cardiofit();
     max_stamina = enchantment_cache->modify_value( enchant_vals::mod::MAX_STAMINA, max_stamina );
 
     return max_stamina;
@@ -7351,7 +7349,8 @@ void Character::burn_move_stamina( int moves )
         overburden_percentage = ( current_weight - max_weight ) * 100 / max_weight;
     }
 
-    int burn_ratio = get_option<int>( "PLAYER_BASE_STAMINA_BURN_RATE" );
+    // FIXME: Move this to a global constant (deprecated option)
+    int burn_ratio = 15;
     for( const bionic_id &bid : get_bionic_fueled_with_muscle() ) {
         if( has_active_bionic( bid ) ) {
             burn_ratio = burn_ratio * 2 - 3;
@@ -7388,8 +7387,8 @@ void Character::burn_move_stamina( int moves )
 
 void Character::update_stamina( int turns )
 {
-    static const std::string player_base_stamina_regen_rate( "PLAYER_BASE_STAMINA_REGEN_RATE" );
-    const float base_regen_rate = get_option<float>( player_base_stamina_regen_rate );
+    // FIXME: Move this to a global constant.
+    const float base_regen_rate = 15.f;
     // Your stamina regen rate works as a function of how fit you are compared to your body size.
     // This allows it to scale more quickly than your stamina, so that at higher fitness levels you
     // recover stamina faster.
@@ -10544,13 +10543,11 @@ std::unordered_set<trait_id> Character::get_opposite_traits( const trait_id &fla
 
 float Character::adjust_for_focus( float amount ) const
 {
-    int effective_focus = get_focus();
+    float effective_focus = get_focus();
     effective_focus = enchantment_cache->modify_value( enchant_vals::mod::LEARNING_FOCUS,
                       effective_focus );
-    effective_focus *= 1.0 + ( 0.01f * ( get_int() -
-                                         get_option<int>( "INT_BASED_LEARNING_BASE_VALUE" ) ) *
-                               get_option<int>( "INT_BASED_LEARNING_FOCUS_ADJUSTMENT" ) );
-    effective_focus = std::max( effective_focus, 1 );
+    effective_focus = effective_focus * 1.0 + ( 0.01f * ( get_int() - 8 ) * 5 );
+    effective_focus = std::max( effective_focus, 1.f );
     return amount * ( effective_focus / 100.0f );
 }
 

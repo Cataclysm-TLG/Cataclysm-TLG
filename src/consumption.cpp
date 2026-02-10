@@ -710,20 +710,12 @@ void Character::vitamins_mod( const std::map<vitamin_id, int> &vitamins )
 
 int Character::vitamin_get( const vitamin_id &vit ) const
 {
-    if( get_option<bool>( "NO_VITAMINS" ) && vit->type() == vitamin_type::VITAMIN ) {
-        return 0;
-    }
-
     const auto &v = vitamin_levels.find( vit );
     return v != vitamin_levels.end() ? v->second : 0;
 }
 
 int Character::get_daily_vitamin( const vitamin_id &vit, bool actual ) const
 {
-    if( get_option<bool>( "NO_VITAMINS" ) && vit->type() == vitamin_type::VITAMIN ) {
-        return 0;
-    }
-
     const auto &v = daily_vitamins.find( vit );
     // we didn't find it
     if( v == daily_vitamins.end() ) {
@@ -735,10 +727,6 @@ int Character::get_daily_vitamin( const vitamin_id &vit, bool actual ) const
 
 void Character::reset_daily_vitamin( const vitamin_id &vit )
 {
-    if( get_option<bool>( "NO_VITAMINS" ) && vit->type() == vitamin_type::VITAMIN ) {
-        return;
-    }
-
     daily_vitamins[vit] = { 0, 0 };
 }
 
@@ -753,11 +741,9 @@ void Character::vitamin_set( const vitamin_id &vit, int qty )
 
 float Character::metabolic_rate_base() const
 {
-    static const std::string hunger_rate_string( "PLAYER_HUNGER_RATE" );
-    float hunger_rate = get_option< float >( hunger_rate_string );
-    const float final_hunger_rate = enchantment_cache->modify_value( enchant_vals::mod::METABOLISM,
-                                    hunger_rate );
-    return std::clamp( final_hunger_rate, 0.0f, std::numeric_limits<float>::max() );
+    const float hunger_rate = enchantment_cache->modify_value( enchant_vals::mod::METABOLISM,
+                                    1.f );
+    return std::clamp( hunger_rate, 0.0f, std::numeric_limits<float>::max() );
 }
 
 // TODO: Make this less chaotic to let NPC retroactive catch up work here
