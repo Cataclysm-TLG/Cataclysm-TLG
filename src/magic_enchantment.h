@@ -23,7 +23,6 @@ class JsonObject;
 class JsonOut;
 class item;
 struct dialogue;
-struct dbl_or_var;
 class monster;
 class vehicle;
 struct const_dialogue;
