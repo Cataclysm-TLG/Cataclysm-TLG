@@ -10,11 +10,7 @@
 #include <string>
 #include <utility>
 
-<<<<<<< HEAD
-#include "assign.h"
 #include "bodypart.h"
-=======
->>>>>>> Remove uses of assign in monstergenerator.cpp
 #include "cached_options.h"
 #include "calendar.h"
 #include "cata_utility.h"
