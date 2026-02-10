@@ -863,7 +863,7 @@ static void eff_fun_hypovolemia( Character &u, effect &it )
                     break;
                 case 2:
                     warning = _( "You feel tired and you breathe heavily." );
-                    // Upstream renamed fatigue->sleepiness. We did not. Mind this while backporting.
+                    // Upstream renamed fatigue->fatigue. We did not. Mind this while backporting.
                     u.mod_fatigue( 3 * intense );
                     break;
                 case 3:
