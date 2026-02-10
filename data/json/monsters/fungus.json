@@ -22,7 +22,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_fungaloid_basic", "prof_wp_fungaloid_advanced" ],
     "luminance": 40,
     "harvest": "exempt",
-    "special_attacks": [ [ "FUNGUS_HAZE", 25 ], [ "FUNGUS_HAZE", 60 ] ],
+    "special_attacks": [ [ "FUNGUS_HAZE", 30 ] ],
     "regenerates": 2,
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "HEARS", "GOODHEARING", "NOHEAD", "POISON", "IMMOBILE", "NO_BREATHE" ],

@@ -6164,7 +6164,7 @@
     "autolearn": true,
     "book_learn": [ [ "vacuum_sealing", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
-    "using": [ [ "vacuum_sealing_standard", 1, "LIST" ] ],
+    "using": [ [ "vacuum_sealing_standard", 1 ] ],
     "//": "since vacuum sealed meat is cooked, need 40u surface_heat - sealing in salt is not sufficient to cook it",
     "components": [
       [
@@ -6199,7 +6199,7 @@
     "autolearn": true,
     "book_learn": [ [ "vacuum_sealing", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
-    "using": [ [ "vacuum_sealing_standard", 1, "LIST" ] ],
+    "using": [ [ "vacuum_sealing_standard", 1 ] ],
     "components": [ [ [ "curing_roe", 2 ] ] ]
   },
   {
@@ -6218,7 +6218,7 @@
     "autolearn": true,
     "book_learn": [ [ "vacuum_sealing", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
-    "using": [ [ "vacuum_sealing_standard", 1, "LIST" ] ],
+    "using": [ [ "vacuum_sealing_standard", 1 ] ],
     "components": [ [ [ "fish", 5 ] ], [ [ "salt_preservation", 5, "LIST" ] ] ]
   },
   {
@@ -6237,7 +6237,7 @@
     "autolearn": true,
     "book_learn": [ [ "vacuum_sealing", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
-    "using": [ [ "vacuum_sealing_standard", 1, "LIST" ] ],
+    "using": [ [ "vacuum_sealing_standard", 1 ] ],
     "components": [ [ [ "vegetable_any_uncooked", 2, "LIST" ] ], [ [ "salt_preservation", 2, "LIST" ] ] ]
   },
   {
@@ -6256,7 +6256,7 @@
     "autolearn": true,
     "book_learn": [ [ "vacuum_sealing", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
-    "using": [ [ "vacuum_sealing_standard", 1, "LIST" ] ],
+    "using": [ [ "vacuum_sealing_standard", 1 ] ],
     "components": [ [ [ "water_clean", 1 ] ], [ [ "sweet_fruit", 4, "LIST" ] ], [ [ "sugar_standard", 1, "LIST" ] ] ]
   },
   {
