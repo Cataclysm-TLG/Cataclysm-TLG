@@ -1,23 +1,27 @@
 #include "weather_gen.h"
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <functional>
+#include <memory>
 #include <ostream>
 #include <random>
 #include <string>
 
 #include "avatar.h"
 #include "cata_utility.h"
-#include "condition.h"
 #include "dialogue.h"
+#include "flexbuffer_json.h"
 #include "game_constants.h"
-#include "json.h"
+#include "generic_factory.h"
 #include "math_defines.h"
+#include "pimpl.h"
 #include "point.h"
 #include "rng.h"
 #include "simplexnoise.h"
-#include "translations.h"
+#include "talker.h"
+#include "translation.h"
 #include "weather.h"
 #include "weather_type.h"
 
@@ -384,5 +388,4 @@ void weather_generator::load( const JsonObject &jo, std::string_view )
     if( !weather_black_list.empty() && !weather_white_list.empty() ) {
         jo.throw_error( "weather_black_list and weather_white_list are mutually exclusive" );
     }
-    return ret;
 }
