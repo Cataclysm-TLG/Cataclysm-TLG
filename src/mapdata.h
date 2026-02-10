@@ -21,16 +21,17 @@
 #include "units.h"
 #include "value_ptr.h"
 
-struct ter_t;
-
-using ter_str_id = string_id<ter_t>;
-
 class JsonObject;
 class Character;
 struct iexamine_actor;
+struct ter_t;
 struct furn_t;
 struct itype;
 struct tripoint;
+
+
+template<>
+int_id<ter_t> string_id<ter_t>::id() const;
 
 // size of connect groups bitset; increase if needed
 const int NUM_TERCONN = 256;

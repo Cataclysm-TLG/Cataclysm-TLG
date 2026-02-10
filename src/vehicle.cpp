@@ -6541,18 +6541,15 @@ void vehicle::place_spawn_items( map &here )
                 }
 
                 for( const std::pair<itype_id, std::string> &e : spawn.item_ids ) {
-                    if( rng_float( 0, 1 ) < spawn_rate ) {
-                        item spawn( e.first );
-                        if( !e.second.empty() ) {
-                            spawn.set_itype_variant( e.second );
-                        }
-                        item added = spawn.in_its_container();
-                        created.push_back( added );
+                    item spawn( e.first );
+                    if( !e.second.empty() ) {
+                        spawn.set_itype_variant( e.second );
                     }
+                    item added = spawn.in_its_container();
+                    created.push_back( added );
                 }
                 for( const item_group_id &e : spawn.item_groups ) {
-                    item_group::ItemList group_items = item_group::items_from( e, calendar::start_of_cataclysm,
-                                                       spawn_flags::use_spawn_rate );
+                    item_group::ItemList group_items = item_group::items_from( e, calendar::start_of_cataclysm );
                     created.insert( created.end(), group_items.begin(), group_items.end() );
                 }
             }

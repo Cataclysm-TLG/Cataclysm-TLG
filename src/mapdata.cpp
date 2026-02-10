@@ -23,6 +23,7 @@
 #include "item.h"
 #include "item_group.h"
 #include "iteminfo_query.h"
+#include "mapdata.h"
 #include "mod_manager.h"
 #include "output.h"
 #include "rng.h"
@@ -34,8 +35,6 @@
 
 
 static furn_id f_null;
-
-static const bash_damage_profile_id bash_damage_profile_default( "default" );
 
 static const flag_id json_flag_DIGGABLE( "DIGGABLE" );
 static const flag_id json_flag_EASY_DECONSTRUCT( "EASY_DECONSTRUCT" );
