@@ -20,7 +20,6 @@
 #include "all_enum_values.h"
 #include "auto_note.h"
 #include "avatar.h"
-#include "assign.h"
 #include "cached_options.h"
 #include "cata_assert.h"
 #include "cata_utility.h"
