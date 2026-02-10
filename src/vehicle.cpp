@@ -5454,8 +5454,8 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
         // But only if the player is actually there!
         int eff_load = load / 10;
         int mod = 4 * st; // strain
-        const int base_staminaRegen = static_cast<int>
-                                      ( get_option<float>( "PLAYER_BASE_STAMINA_REGEN_RATE" ) );
+        // FIXME: Move this to a global constant.
+        const int base_staminaRegen = 20;
         const int actual_staminaRegen = static_cast<int>( base_staminaRegen *
                                         driver->get_cardiofit() / driver->get_cardio_acc_base() );
         int base_burn = actual_staminaRegen - 3;

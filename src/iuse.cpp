@@ -3914,13 +3914,11 @@ void iuse::play_music( Character *p, const tripoint_bub_ms &source, const int vo
         lambda_add_music_effects( player_character );
     }
 
-    if( calendar::once_every( time_duration::from_minutes(
-                                  get_option<int>( "DESCRIBE_MUSIC_FREQUENCY" ) ) ) ) {
-        // Every X minutes, describe the music
+    if( calendar::once_every( 8_minutes ) ) {
         const std::string music = get_music_description();
         if( !music.empty() ) {
             sound = music;
-            // descriptions aren't printed for sounds at our position
+            // Descriptions aren't printed for sounds at our position.
             if( lambda_should_do_effects( p ) && p->pos_bub() == source ) {
                 p->add_msg_if_player( _( "You listen to %s" ), music );
             }

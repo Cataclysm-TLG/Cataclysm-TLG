@@ -378,9 +378,6 @@ void Item_factory::finalize_pre( itype &obj )
         }
     }
 
-    if( get_option<bool>( "NO_FAULTS" ) ) {
-        obj.faults.clear();
-    }
 
     // If no category was forced via JSON automatically calculate one now
     if( !obj.category_force.is_valid() || obj.category_force.is_empty() ) {
@@ -756,13 +753,7 @@ void Item_factory::finalize_pre( itype &obj )
 
     if( obj.comestible ) {
         std::map<vitamin_id, int> vitamins = obj.comestible->default_nutrition.vitamins();
-        if( get_option<bool>( "NO_VITAMINS" ) ) {
-            for( auto &vit : vitamins ) {
-                if( vit.first->type() == vitamin_type::VITAMIN ) {
-                    obj.comestible->default_nutrition.set_vitamin( vit.first, 0 );
-                }
-            }
-        } else if( vitamins.empty() && obj.comestible->healthy >= 0 ) {
+        if( vitamins.empty() && obj.comestible->healthy >= 0 ) {
             // Default vitamins of healthy comestibles to their edible base materials if none explicitly specified.
             int healthy = std::max( obj.comestible->healthy, 1 ) * 10;
             auto mat = obj.materials;

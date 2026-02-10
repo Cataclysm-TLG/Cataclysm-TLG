@@ -11,7 +11,6 @@
 #include <utility>
 #include <vector>
 
-#include "assign.h"
 #include "common_types.h"
 #include "coords_fwd.h"
 #include "enums.h"

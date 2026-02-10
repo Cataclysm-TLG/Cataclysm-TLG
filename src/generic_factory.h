@@ -16,7 +16,6 @@
 #include <utility>
 #include <vector>
 
-#include "assign.h"
 #include "cached_options.h"
 #include "catacharset.h"
 #include "calendar.h"
@@ -2155,17 +2154,6 @@ class activity_level_reader : public generic_typed_reader<activity_level_reader>
 {
     public:
         float get_next( const JsonValue &jv ) const;
-};
-
-struct dbl_or_var;
-
-class dbl_or_var_reader : public generic_typed_reader<dbl_or_var>
-{
-    public:
-        bool operator()( const JsonObject &jo, std::string_view member_name,
-                         dbl_or_var &member, bool /*was_loaded*/ ) const;
-    private:
-        dbl_or_var get_next( const JsonValue &jv ) const;
 };
 
 #endif // CATA_SRC_GENERIC_FACTORY_H

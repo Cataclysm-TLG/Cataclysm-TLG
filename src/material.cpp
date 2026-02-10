@@ -5,7 +5,6 @@
 #include <map>
 #include <set>
 
-#include "assign.h"
 #include "calendar.h"
 #include "debug.h"
 #include "generic_factory.h"

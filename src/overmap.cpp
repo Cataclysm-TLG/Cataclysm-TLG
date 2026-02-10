@@ -20,7 +20,6 @@
 #include "all_enum_values.h"
 #include "auto_note.h"
 #include "avatar.h"
-#include "assign.h"
 #include "cached_options.h"
 #include "cata_assert.h"
 #include "cata_utility.h"
@@ -6449,32 +6448,6 @@ void overmap::place_mongroups()
         }
     }
 
-    if( get_option<bool>( "DISABLE_ANIMAL_CLASH" ) ) {
-        // Figure out where swamps are, and place swamp monsters
-        for( int x = 3; x < OMAPX - 3; x += 7 ) {
-            for( int y = 3; y < OMAPY - 3; y += 7 ) {
-                int swamp_count = 0;
-                for( int sx = x - 3; sx <= x + 3; sx++ ) {
-                    for( int sy = y - 3; sy <= y + 3; sy++ ) {
-                        if( ter( { sx, sy, 0 } ) == oter_forest_water ) {
-                            swamp_count += 2;
-                        }
-                    }
-                }
-                if( swamp_count >= 25 ) {
-                    tripoint_om_omt p( x, y, 0 );
-                    float norm_factor = std::abs( GROUP_SWAMP->freq_total / 1000.0f );
-                    unsigned int pop =
-                        std::round( norm_factor * rng( swamp_count * 8, swamp_count * 25 ) );
-                    spawn_mon_group(
-                        mongroup(
-                            GROUP_SWAMP, project_combine( pos(), project_to<coords::sm>( p ) ),
-                            pop ), 3 );
-                }
-            }
-        }
-    }
-
     // Figure out where rivers and lakes are, and place appropriate critters
     for( int x = 3; x < OMAPX - 3; x += 7 ) {
         for( int y = 3; y < OMAPY - 3; y += 7 ) {
@@ -6613,16 +6586,16 @@ void overmap::place_radios()
 void overmap::open( overmap_special_batch &enabled_specials )
 {
     if( world_generator->active_world->has_compression_enabled() ) {
-        assure_dir_exist( PATH_INFO::world_base_save_path() / zzip_overmap_directory );
+        assure_dir_exist( PATH_INFO::current_dimension_save_path() / "overmaps" );
         const std::string terfilename = overmapbuffer::terrain_filename( loc );
         const std::filesystem::path terfilename_path = std::filesystem::u8path( terfilename );
-        const cata_path zzip_path = PATH_INFO::world_base_save_path() /  zzip_overmap_directory /
-                                    terfilename_path +
-                                    zzip_suffix;
+        const cata_path zzip_path = PATH_INFO::current_dimension_save_path() / "overmaps" / terfilename_path
+                                    +
+                                    ".zzip";
         if( file_exist( zzip_path ) ) {
             std::optional<zzip> z = zzip::load( zzip_path.get_unrelative_path(),
-                                                ( PATH_INFO::world_base_save_path() / "overmaps.dict" ).get_unrelative_path()
-                                              );
+                                                  ( PATH_INFO::world_base_save_path() / "overmaps.dict" ).get_unrelative_path()
+                                                );
 
             if( z && read_from_zzip_optional( *z, terfilename_path, [this]( std::string_view sv ) {
             std::istringstream is{ std::string( sv ) };
@@ -6636,7 +6609,8 @@ void overmap::open( overmap_special_batch &enabled_specials )
             }
         }
     } else {
-        const cata_path terfilename = PATH_INFO::world_base_save_path() / overmapbuffer::terrain_filename(
+        const cata_path terfilename = PATH_INFO::current_dimension_save_path() /
+                                      overmapbuffer::terrain_filename(
                                           loc );
 
         if( read_from_file_optional( terfilename, [this, &terfilename]( std::istream & is ) {
@@ -6669,12 +6643,12 @@ void overmap::save() const
     if( world_generator->active_world->has_compression_enabled() ) {
         const std::string terfilename = overmapbuffer::terrain_filename( loc );
         const std::filesystem::path terfilename_path = std::filesystem::u8path( terfilename );
-        const cata_path overmaps_folder = PATH_INFO::world_base_save_path() / zzip_overmap_directory;
+        const cata_path overmaps_folder = PATH_INFO::current_dimension_save_path() / "overmaps";
         assure_dir_exist( overmaps_folder );
-        const cata_path zzip_path = overmaps_folder / terfilename_path + zzip_suffix;
+        const cata_path zzip_path = overmaps_folder / terfilename_path + ".zzip";
         std::optional<zzip> z = zzip::load( zzip_path.get_unrelative_path(),
-                                            ( PATH_INFO::world_base_save_path() / "overmaps.dict" ).get_unrelative_path()
-                                          );
+                                              ( PATH_INFO::world_base_save_path() / "overmaps.dict" ).get_unrelative_path()
+                                            );
         if( !z ) {
             throw std::runtime_error(
                 string_format(
@@ -6697,7 +6671,9 @@ void overmap::save() const
             rename_file( tmp_path, zzip_path );
         }
     } else {
-        write_to_file( PATH_INFO::world_base_save_path() / overmapbuffer::terrain_filename( loc ), [&](
+        write_to_file( PATH_INFO::current_dimension_save_path() /
+                       overmapbuffer::terrain_filename(
+                           loc ), [&](
         std::ostream & stream ) {
             serialize( stream );
         } );

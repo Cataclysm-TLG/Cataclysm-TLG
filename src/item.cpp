@@ -10972,7 +10972,9 @@ int item::gun_dispersion( bool with_ammo, bool with_scaling ) const
     // Dividing dispersion by 15 temporarily as a gross adjustment,
     // will bake that adjustment into individual gun definitions in the future.
     // Absolute minimum gun dispersion is 1.
-    double divider = get_option< float >( "GUN_DISPERSION_DIVIDER" );
+
+    // FIXME: Move divider to global constant gun_dispersion_divider (deprecated option)
+    double divider = 18;
     dispersion_sum = std::max( static_cast<int>( std::round( dispersion_sum / divider ) ), 1 );
 
     return dispersion_sum;
@@ -13400,7 +13402,7 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
 
         units::temperature_delta temp_mod;
         // Toilets and vending machines will try to get the heat radiation and convection during mapgen and segfault.
-        if( !g->new_game ) {
+        if( !g->new_game && !g->swapping_dimensions ) {
             temp_mod = get_heat_radiation( pos );
             temp_mod += get_convection_temperature( pos );
             temp_mod += here.get_temperature_mod( pos );
