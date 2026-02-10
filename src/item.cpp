@@ -10959,7 +10959,7 @@ int item::gun_dispersion( bool with_ammo, bool with_scaling ) const
     for( const item *mod : gunmods() ) {
         dispersion_sum += mod->type->gunmod->dispersion;
     }
-    int dispPerDamage = get_option< int >( "DISPERSION_PER_GUN_DAMAGE" );
+    int dispPerDamage = 30;
     dispersion_sum += damage_level() * dispPerDamage;
     dispersion_sum = std::max( dispersion_sum, 0 );
     if( with_ammo && has_ammo() ) {

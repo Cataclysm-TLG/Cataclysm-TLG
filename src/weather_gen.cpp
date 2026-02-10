@@ -1,23 +1,27 @@
 #include "weather_gen.h"
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <functional>
+#include <memory>
 #include <ostream>
 #include <random>
 #include <string>
 
 #include "avatar.h"
 #include "cata_utility.h"
-#include "condition.h"
 #include "dialogue.h"
+#include "flexbuffer_json.h"
 #include "game_constants.h"
-#include "json.h"
+#include "generic_factory.h"
 #include "math_defines.h"
+#include "pimpl.h"
 #include "point.h"
 #include "rng.h"
 #include "simplexnoise.h"
-#include "translations.h"
+#include "talker.h"
+#include "translation.h"
 #include "weather.h"
 #include "weather_type.h"
 
@@ -37,6 +41,34 @@ constexpr double noise_magnitude_K = 8;
 weather_generator::weather_generator() = default;
 int weather_generator::current_winddir = 1000;
 
+namespace
+{
+generic_factory<weather_generator> weather_generator_factory( "weather_generator" );
+} // namespace
+template<>
+const weather_generator &string_id<weather_generator>::obj() const
+{
+    return weather_generator_factory.obj( *this );
+}
+template<>
+bool string_id<weather_generator>::is_valid() const
+{
+    return weather_generator_factory.is_valid( *this );
+}
+void weather_generator::load_weather_generator( const JsonObject &jo,
+        const std::string &src )
+{
+    weather_generator_factory.load( jo, src );
+}
+void weather_generator::reset()
+{
+    weather_generator_factory.reset();
+}
+
+void weather_generator::finalize_all()
+{
+    weather_generator_factory.finalize();
+}
 struct weather_gen_common {
     double x = 0;
     double y = 0;
@@ -335,27 +367,25 @@ void weather_generator::sort_weather()
     } );
 }
 
-weather_generator weather_generator::load( const JsonObject &jo )
+void weather_generator::load( const JsonObject &jo, std::string_view )
 {
-    weather_generator ret;
-    ret.base_temperature = jo.get_float( "base_temperature", 0.0 );
-    ret.base_humidity = jo.get_float( "base_humidity", 50.0 );
-    ret.base_pressure = jo.get_float( "base_pressure", 0.0 );
-    ret.base_wind = jo.get_float( "base_wind", 0.0 );
-    ret.base_wind_distrib_peaks = jo.get_int( "base_wind_distrib_peaks", 0 );
-    ret.base_wind_season_variation = jo.get_int( "base_wind_season_variation", 0 );
-    ret.summer_temp_manual_mod = jo.get_int( "summer_temp_manual_mod", 0 );
-    ret.spring_temp_manual_mod = jo.get_int( "spring_temp_manual_mod", 0 );
-    ret.autumn_temp_manual_mod = jo.get_int( "autumn_temp_manual_mod", 0 );
-    ret.winter_temp_manual_mod = jo.get_int( "winter_temp_manual_mod", 0 );
-    ret.spring_humidity_manual_mod = jo.get_int( "spring_humidity_manual_mod", 0 );
-    ret.summer_humidity_manual_mod = jo.get_int( "summer_humidity_manual_mod", 0 );
-    ret.autumn_humidity_manual_mod = jo.get_int( "autumn_humidity_manual_mod", 0 );
-    ret.winter_humidity_manual_mod = jo.get_int( "winter_humidity_manual_mod", 0 );
-    ret.weather_black_list = jo.get_string_array( "weather_black_list" );
-    ret.weather_white_list = jo.get_string_array( "weather_white_list" );
-    if( !ret.weather_black_list.empty() && !ret.weather_white_list.empty() ) {
+    mandatory( jo, was_loaded, "base_temperature", base_temperature );
+    mandatory( jo, was_loaded, "base_humidity", base_humidity );
+    mandatory( jo, was_loaded, "base_pressure", base_pressure );
+    mandatory( jo, was_loaded, "base_wind", base_wind );
+    optional( jo, was_loaded, "base_wind_distrib_peaks", base_wind_distrib_peaks );
+    optional( jo, was_loaded, "base_wind_season_variation", base_wind_season_variation );
+    optional( jo, was_loaded, "summer_temp_manual_mod", summer_temp_manual_mod, 0 );
+    optional( jo, was_loaded, "spring_temp_manual_mod", spring_temp_manual_mod, 0 );
+    optional( jo, was_loaded, "autumn_temp_manual_mod", autumn_temp_manual_mod, 0 );
+    optional( jo, was_loaded, "winter_temp_manual_mod", winter_temp_manual_mod, 0 );
+    optional( jo, was_loaded, "spring_humidity_manual_mod", spring_humidity_manual_mod, 0 );
+    optional( jo, was_loaded, "summer_humidity_manual_mod", summer_humidity_manual_mod, 0 );
+    optional( jo, was_loaded, "autumn_humidity_manual_mod", autumn_humidity_manual_mod, 0 );
+    optional( jo, was_loaded, "winter_humidity_manual_mod", winter_humidity_manual_mod, 0 );
+    optional( jo, was_loaded, "weather_black_list", weather_black_list );
+    optional( jo, was_loaded, "weather_white_list", weather_white_list );
+    if( !weather_black_list.empty() && !weather_white_list.empty() ) {
         jo.throw_error( "weather_black_list and weather_white_list are mutually exclusive" );
     }
-    return ret;
 }
