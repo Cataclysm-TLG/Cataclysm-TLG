@@ -910,7 +910,7 @@ std::string effect::disp_desc( bool reduced ) const
     values.emplace_back( get_percentage( "HUNGER", val, reduced ), val, _( "hunger" ),
                          _( "sate" ) );
     val = get_avg_mod( "FATIGUE", reduced );
-    values.emplace_back( get_percentage( "FATIGUE", val, reduced ), val, _( "sleepiness" ),
+    values.emplace_back( get_percentage( "FATIGUE", val, reduced ), val, _( "fatigue" ),
                          _( "rest" ) );
     val = get_avg_mod( "COUGH", reduced );
     values.emplace_back( get_percentage( "COUGH", val, reduced ), val, _( "coughing" ),
