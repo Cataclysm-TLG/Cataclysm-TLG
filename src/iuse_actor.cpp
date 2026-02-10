@@ -827,7 +827,7 @@ void consume_drug_iuse::load( const JsonObject &obj, const std::string & )
     optional( obj, false, "stat_adjustments", stat_adjustments );
     optional( obj, false, "fields_produced", fields_produced );
     optional( obj, false, "moves", moves, 100 );
-    optional( obj, false, "used_up_item", used_up_item, itype_id::NULL_ID() );
+    optional( obj, false, "used_up_item", used_up_item );
 
     optional( obj, false, "vitamins", vitamins, drug_vitamin_reader{} );
 }
