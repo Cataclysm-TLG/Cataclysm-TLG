@@ -18,6 +18,7 @@
 #include "avatar.h"
 #include "bionics.h"
 #include "ballistics.h"
+#include "bodypart.h"
 #include "cached_options.h"
 #include "calendar.h"
 #include "cata_scope_helpers.h"
@@ -1085,8 +1086,8 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         if( !!ammo && !gun.ammo_remaining( ) ) {
             Character &you = get_avatar();
             gun.reload( you, ammo, 1 );
-            you.burn_energy_arms( - gun.get_min_str() * static_cast<int>( 0.006f *
-                                  get_option<int>( "PLAYER_MAX_STAMINA_BASE" ) ) );
+            // FIXME: move the value of 3500 to a gamewide const (it's the player max stamina base)
+            you.burn_energy_arms( - gun.get_min_str() * static_cast<int>( 0.006f * 3500 ) );
         }
 
         if( !handle_gun_damage( gun ) ) {
@@ -2647,12 +2648,14 @@ dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
     // then beginners will rely heavily on high-precision weapons, while experts are not.
     // Obviously this is not true.
     // So use a constant instead.
+    // FIXME: Move divider to global constant gun_dispersion_divider (deprecated option)
+    double divider = 18;
     if( obj.gun_skill() == skill_archery ) {
         dispersion.add_range( dispersion_from_skill( avgSkill,
-                              450 / get_option< float >( "GUN_DISPERSION_DIVIDER" ) ) );
+                              450 / divider ) );
     } else {
         dispersion.add_range( dispersion_from_skill( avgSkill,
-                              300 / get_option< float >( "GUN_DISPERSION_DIVIDER" ) ) );
+                              300 / divider ) );
     }
 
     float disperation_mod = enchantment_cache->modify_value( enchant_vals::mod::WEAPON_DISPERSION,
@@ -3005,8 +3008,8 @@ target_handler::trajectory target_ui::run()
                 if( !relevant->ammo_remaining( ) && activity->reload_loc ) {
                     you->mod_moves( -RAS_time( *you, activity->reload_loc ) );
                     relevant->reload( get_avatar(), activity->reload_loc, 1 );
-                    you->burn_energy_arms( - relevant->get_min_str() * static_cast<int>( 0.006f *
-                                           get_option<int>( "PLAYER_MAX_STAMINA_BASE" ) ) );
+                    // FIXME: move the value of 3500 to a gamewide const (it's the player max stamina base)
+                    you->burn_energy_arms( - relevant->get_min_str() * static_cast<int>( 0.006f * 3500 ) );
                     activity->reload_loc = item_location();
                 }
             }
