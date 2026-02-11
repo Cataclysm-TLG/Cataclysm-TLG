@@ -6946,7 +6946,7 @@ void Character::mend_item( item_location &&obj, bool interactive )
             if( opts[menu.ret].second ) {
                 obj->remove_fault( opts[menu.ret].first );
             } else {
-                obj.set_fault( opts[menu.ret].first, true, false );
+                obj->set_fault( opts[menu.ret].first, true, false );
             }
         }
         return;
@@ -7185,7 +7185,7 @@ int Character::get_stamina_max() const
     // Since adding cardio, 'player_max_stamina' is really 'base max stamina' and gets further modified
     // by your CV fitness.  Name has been kept this way to avoid needing to change the code.
     // Default base maximum stamina and cardio scaling are defined in data/core/game_balance.json
-    
+
     // FIXME: move these values to global constants.
     static const int player_max_stamina = 3500;
     static const int player_cardiofit_stamina_scale = 5;
@@ -10930,7 +10930,7 @@ void Character::place_corpse( const tripoint_abs_omt &om_target )
     bay.load( om_target, false );
     // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
     swap_map swap( *bay.cast_to_map() );
-    point_omt_ms fin( rng( 1, SEEX * 2 - 2 ), rng( 1, SEEX * 2 - 2 ) );
+    point_omt_ms fin = rng_map_point<point_omt_ms>( 1 );
     // This makes no sense at all. It may find a random tile without furniture, but
     // if the first try to find one fails, it will go through all tiles of the map
     // and essentially select the last one that has no furniture.

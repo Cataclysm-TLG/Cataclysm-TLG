@@ -693,7 +693,7 @@ conditional_t::func f_is_wearing( const JsonObject &jo, std::string_view member,
     };
 }
 
-conditional_t::func f_in_dimension( const JsonObject &jo, std::string_view member )
+conditional_t::func current_dimension( const JsonObject &jo, std::string_view member )
 {
     str_or_var dimension_prefix = get_str_or_var( jo.get_member( member ), member, true );
     return [dimension_prefix]( const_dialogue const & d ) {
@@ -2204,7 +2204,7 @@ void string_mutator<translation>::deserialize( JsonValue const &jsin )
         } );
         if( !ret_func ) {
             jo.allow_omitted_members();
-            jo.throw_error( "unrecognized string mutator in " + jo.str() );
+            throw JsonError( "invalid string mutator" );
         }
     }
 }
@@ -2223,7 +2223,7 @@ void string_mutator<std::string>::deserialize( JsonValue const &jsin )
         } );
         if( !ret_func ) {
             jo.allow_omitted_members();
-            jo.throw_error( "unrecognized string mutator in " + jo.str() );
+            throw JsonError( "invalid string mutator" );
         }
     }
 }
@@ -2417,7 +2417,7 @@ void deferred_math::_validate_type() const
 void eoc_math::from_json( const JsonObject &jo, std::string_view member, math_type_t type_ )
 {
     if( !jo.has_array( member ) ) {
-        jo.throw_error( "invalid math object" );
+        throw JsonError( "invalid math object" );
     }
     JsonArray const objects = jo.get_array( member );
     std::string combined;
@@ -2474,7 +2474,7 @@ parsers = {
     {"u_has_part_temp", "npc_has_part_temp", jarg::member | jarg::array, &conditional_fun::f_has_part_temp },
     {"u_is_wearing", "npc_is_wearing", jarg::member, &conditional_fun::f_is_wearing },
     {"is_outside", jarg::member, &conditional_fun::f_tile_is_outside },
-    {"u_in_dimension", jarg::member, &conditional_fun::f_in_dimension },
+    {"current_dimension", jarg::member, &conditional_fun::current_dimension },
     {"u_has_item", "npc_has_item", jarg::member, &conditional_fun::f_has_item },
     {"u_has_item_with_flag", "npc_has_item_with_flag", jarg::member, &conditional_fun::f_has_item_with_flag },
     {"u_has_items", "npc_has_items", jarg::member, &conditional_fun::f_has_items },

@@ -8,6 +8,9 @@
 #include <iosfwd>
 #include <set>
 #include <string>
+#include <string_view>
+#include <utility>
+#include <variant>
 #include <vector>
 
 #include "calendar.h"
@@ -24,6 +27,8 @@
 class JsonObject;
 class Character;
 struct iexamine_actor;
+class JsonValue;
+struct connect_group;
 struct ter_t;
 struct furn_t;
 struct itype;
@@ -310,6 +315,7 @@ enum class ter_furn_flag : int {
     TFLAG_CAN_SIT,
     TFLAG_FLAT_SURF,
     TFLAG_BUTCHER_EQ,
+    TFLAG_GROWTH_SEED,
     TFLAG_GROWTH_SEEDLING,
     TFLAG_GROWTH_MATURE,
     TFLAG_WORKOUT_ARMS,
@@ -746,6 +752,18 @@ struct furn_t : map_data_common_t {
 
     void load( const JsonObject &jo, const std::string &src ) override;
     void check() const override;
+};
+
+//holds either a ter_id OR furn_id (not both!), for loading JSON
+struct ter_furn_id {
+    std::variant<ter_id, furn_id> ter_furn;
+    void deserialize( const JsonValue &jo );
+    ter_furn_id();
+    explicit ter_furn_id( const std::string &name );
+    bool operator==( const ter_furn_id &rhs ) const {
+        return ter_furn == rhs.ter_furn;
+    }
+    bool resolve( const std::string &name );
 };
 
 void load_furniture( const JsonObject &jo, const std::string &src );

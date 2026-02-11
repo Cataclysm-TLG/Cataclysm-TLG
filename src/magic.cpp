@@ -388,17 +388,23 @@ void spell_type::load( const JsonObject &jo, std::string_view src )
               field_intensity_increment_default );
     optional( jo, was_loaded, "field_intensity_variance", field_intensity_variance,
               field_intensity_variance_default );
-    optional( jo, was_loaded, "min_effect_intensity", min_effect_intensity, min_effect_intensity_default );
-    optional( jo, was_loaded, "effect_intensity_increment", effect_intensity_increment, effect_intensity_increment_default );
-    optional( jo, was_loaded, "max_effect_intensity", max_effect_intensity, max_effect_intensity_default );
-    optional( jo, was_loaded, "effect_intensity_variance", effect_intensity_variance, effect_intensity_variance_default );
+    optional( jo, was_loaded, "min_effect_intensity", min_effect_intensity,
+              min_effect_intensity_default );
+    optional( jo, was_loaded, "effect_intensity_increment", effect_intensity_increment,
+              effect_intensity_increment_default );
+    optional( jo, was_loaded, "max_effect_intensity", max_effect_intensity,
+              max_effect_intensity_default );
+    optional( jo, was_loaded, "effect_intensity_variance", effect_intensity_variance,
+              effect_intensity_variance_default );
 
     optional( jo, was_loaded, "min_liquid_volume", min_liquid_volume, min_liquid_volume_default );
-    optional( jo, was_loaded, "liquid_volume_increment", liquid_volume_increment, liquid_volume_increment_default );
+    optional( jo, was_loaded, "liquid_volume_increment", liquid_volume_increment,
+              liquid_volume_increment_default );
     optional( jo, was_loaded, "max_liquid_volume", max_liquid_volume, max_liquid_volume_default );
 
     optional( jo, was_loaded, "min_dodge_training", min_dodge_training, min_dodge_training_default );
-    optional( jo, was_loaded, "dodge_training_increment", dodge_training_increment, dodge_training_increment_default );
+    optional( jo, was_loaded, "dodge_training_increment", dodge_training_increment,
+              dodge_training_increment_default );
     optional( jo, was_loaded, "max_dodge_training", max_dodge_training, max_dodge_training_default );
 
     optional( jo, was_loaded, "min_accuracy", min_accuracy, min_accuracy_default );

@@ -1600,10 +1600,10 @@ std::optional<std::pair<attack_vector_id, sub_bodypart_str_id>>
         if( rng( 0, 2 ) > 0 ) {
             for( const auto &vec : list ) {
                 for( const auto &iterate : storage ) {
-                    if( iterate.first == vec.obj && iterate.first->natural_attack &&
+                    if( iterate.first == vec.first && iterate.first->natural_attack &&
                         !user.natural_attack_restricted_on( iterate.second ) ) {
                         add_msg_debug( debugmode::DF_MELEE,
-                                       "Chose natural attack vector %s for technique %s", vec.obj.c_str(), tech.c_str() );
+                                       "Chose natural attack vector %s for technique %s", vec.first.c_str(), tech.c_str() );
                         return iterate;
                     }
                 }

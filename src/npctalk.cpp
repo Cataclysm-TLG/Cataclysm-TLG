@@ -5010,8 +5010,8 @@ talk_effect_fun_t::func f_forget_recipe( const JsonObject &jo, std::string_view 
     std::optional<str_or_var> forgotten_recipe_subcategory = std::nullopt;
 
     return [forgotten_recipe, is_npc]( dialogue const & d ) {
-            const recipe_id &r = recipe_id( forgotten_recipe.evaluate( d ) );
-            d.actor( is_npc )->forget_recipe( r );
+        const recipe_id &r = recipe_id( forgotten_recipe.evaluate( d ) );
+        d.actor( is_npc )->forget_recipe( r );
     };
 }
 
@@ -5698,7 +5698,7 @@ talk_effect_fun_t::func f_set_fault( const JsonObject &jo, std::string_view memb
     bool msg = jo.get_bool( "message", true );
     return [fault_var, force, msg, is_npc]( dialogue const & d ) {
         item_location &it = *d.actor( is_npc )->get_item();
-        it.set_fault( fault_id( fault_var.evaluate( d ) ), force, msg );
+        it->set_fault( fault_id( fault_var.evaluate( d ) ), force, msg );
     };
 }
 
@@ -5710,7 +5710,7 @@ talk_effect_fun_t::func f_set_random_fault_of_type( const JsonObject &jo, std::s
     bool msg = jo.get_bool( "message", true );
     return [fault_type_var, force, msg, is_npc]( dialogue const & d ) {
         item_location &it = *d.actor( is_npc )->get_item();
-        it.set_random_fault_of_type( fault_type_var.evaluate( d ), force, msg );
+        it->set_random_fault_of_type( fault_type_var.evaluate( d ), force, msg );
     };
 }
 

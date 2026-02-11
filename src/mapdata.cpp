@@ -153,6 +153,37 @@ int_id<furn_t>::int_id( const string_id<furn_t> &id ) : _id( id.id() )
 {
 }
 
+ter_furn_id::ter_furn_id()
+{
+    ter_furn = ter_str_id::NULL_ID().id();
+}
+
+ter_furn_id::ter_furn_id( const std::string &name )
+{
+    resolve( name );
+}
+
+bool ter_furn_id::resolve( const std::string &name )
+{
+    ter_str_id temp_ter( name );
+    furn_str_id temp_furn( name );
+    bool resolved = false;
+    if( temp_ter.is_valid() && !temp_ter.is_null() ) {
+        ter_furn = ter_id( name );
+        resolved = true;
+    } else if( temp_furn.is_valid() && !temp_furn.is_null() ) {
+        ter_furn = furn_id( name );
+        resolved = true;
+    }
+    return resolved;
+}
+
+void ter_furn_id::deserialize( const JsonValue &jo )
+{
+    std::string name = jo.get_string();
+    resolve( name );
+}
+
 namespace io
 {
 
@@ -235,6 +266,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_CAN_SIT: return "CAN_SIT";
         case ter_furn_flag::TFLAG_FLAT_SURF: return "FLAT_SURF";
         case ter_furn_flag::TFLAG_BUTCHER_EQ: return "BUTCHER_EQ";
+        case ter_furn_flag::TFLAG_GROWTH_SEED: return "GROWTH_SEED";
         case ter_furn_flag::TFLAG_GROWTH_SEEDLING: return "GROWTH_SEEDLING";
         case ter_furn_flag::TFLAG_GROWTH_MATURE: return "GROWTH_MATURE";
         case ter_furn_flag::TFLAG_WORKOUT_ARMS: return "WORKOUT_ARMS";

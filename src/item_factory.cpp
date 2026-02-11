@@ -917,12 +917,13 @@ void Item_factory::finalize_post( itype &obj )
             const int weight_add = std::get<1>( fault_groups );
             const float weight_mult = std::get<2>( fault_groups );
             for( const auto &id_and_weight : fault_g.obj().get_weighted_list() ) {
-                obj.faults.add_or_replace( id_and_weight.obj, ( id_and_weight.weight + weight_add ) * weight_mult );
+                obj.faults.add_or_replace( id_and_weight.first,
+                                           ( id_and_weight.second + weight_add ) * weight_mult );
             }
         } else {
             // weight_override is not -1, override the weight
-            for( const weighted_object<int, fault_id> &id_and_weight : fault_g.obj().get_weighted_list() ) {
-                obj.faults.add( id_and_weight.obj, std::get<0>( fault_groups ) );
+            for( const std::pair<fault_id, int> &id_and_weight : fault_g.obj().get_weighted_list() ) {
+                obj.faults.add( id_and_weight.first, std::get<0>( fault_groups ) );
             }
         }
     }
@@ -2459,8 +2460,8 @@ void Item_factory::check_definitions() const
         }
 
         for( const auto &f : type->faults ) {
-            if( !f.obj.is_valid() ) {
-                msg += string_format( "invalid item fault %s\n", f.obj.c_str() );
+            if( !f.first.is_valid() ) {
+                msg += string_format( "invalid item fault %s\n", f.first.c_str() );
             }
         }
 
@@ -2516,8 +2517,10 @@ void Item_factory::check_definitions() const
             }
         }
         if( type->seed ) {
-            if( type->seed->grow < 1_turns ) {
-                msg += "seed growing time is less than 1 turn\n";
+            for( const auto &pair : type->seed->get_growth_stages() ) {
+                if( pair.second < 1_turns ) {
+                    msg += string_format( "Growth for stage %s is less than 1 turn", pair.first.c_str() );
+                }
             }
             if( !has_template( type->seed->fruit_id ) ) {
                 msg += string_format( "invalid fruit id %s\n", type->seed->fruit_id.c_str() );
@@ -3434,10 +3437,11 @@ void islot_compostable::deserialize( const JsonObject &jo )
 
 void islot_seed::deserialize( const JsonObject &jo )
 {
-    optional( jo, was_loaded, "grow", grow, 1_days );
     optional( jo, was_loaded, "fruit_div", fruit_div, 1 );
     mandatory( jo, was_loaded, "plant_name", plant_name );
     mandatory( jo, was_loaded, "fruit", fruit_id );
+    mandatory( jo, was_loaded, "growth_stages", growth_stages,
+               pair_reader<flag_id, time_duration> {} );
     optional( jo, was_loaded, "seeds", spawn_seeds, true );
     optional( jo, was_loaded, "byproducts", byproducts );
     optional( jo, was_loaded, "required_terrain_flag", required_terrain_flag,
@@ -4048,8 +4052,8 @@ void itype::load( const JsonObject &jo, std::string_view src )
     optional( jo, was_loaded, "integral_volume", integral_volume, not_negative_volume, -1_ml );
     optional( jo, was_loaded, "integral_longest_side", integral_longest_side, not_negative_length,
               -1_mm );
-    optional( jo, false, "variant_type", variant_kind, itype_variant_kind::generic );
-    optional( jo, false, "variants", variants );
+    optional( jo, was_loaded, "variant_type", variant_kind, itype_variant_kind::generic );
+    optional( jo, was_loaded, "variants", variants, json_read_reader<itype_variant_data> {} );
     optional( jo, was_loaded, "container", default_container );
     optional( jo, false, "container_variant", default_container_variant );
     optional( jo, was_loaded, "sealed", default_container_sealed, true );

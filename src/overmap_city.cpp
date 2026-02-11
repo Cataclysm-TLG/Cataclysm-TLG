@@ -497,7 +497,8 @@ void overmap::flood_fill_city_tiles()
                 return true;
             };
             // All the points connected to this point that aren't part of a city
-            std::vector<point_om_omt> area = ff::point_flood_fill_4_connected( checked, visited, is_unchecked );
+            std::vector<point_om_omt> area =
+                ff::point_flood_fill_4_connected<std::vector>( checked, visited, is_unchecked );
             if( !enclosed ) {
                 continue;
             }

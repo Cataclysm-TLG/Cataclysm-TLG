@@ -4737,7 +4737,7 @@ void overmap::place_forest_trails()
 
             // Get the contiguous forest from this point.
             std::vector<point_om_omt> forest_points =
-                ff::point_flood_fill_4_connected( seed_point.xy(), visited, is_forest );
+                ff::point_flood_fill_4_connected<std::vector>( seed_point.xy(), visited, is_forest );
 
             // If we don't have enough points to build a trail, move on.
             if( forest_points.empty() ||
@@ -4801,7 +4801,7 @@ void overmap::place_forest_trails()
             // ...and then add our random points.
             int random_point_count = 0;
             std::shuffle( forest_points.begin(), forest_points.end(), rng_get_engine() );
-            for( auto &random_point : forest_points ) {
+            for( const auto &random_point : forest_points ) {
                 if( random_point_count >= max_random_points ) {
                     break;
                 }
@@ -6594,8 +6594,8 @@ void overmap::open( overmap_special_batch &enabled_specials )
                                     ".zzip";
         if( file_exist( zzip_path ) ) {
             std::optional<zzip> z = zzip::load( zzip_path.get_unrelative_path(),
-                                                  ( PATH_INFO::world_base_save_path() / "overmaps.dict" ).get_unrelative_path()
-                                                );
+                                                ( PATH_INFO::world_base_save_path() / "overmaps.dict" ).get_unrelative_path()
+                                              );
 
             if( z && read_from_zzip_optional( *z, terfilename_path, [this]( std::string_view sv ) {
             std::istringstream is{ std::string( sv ) };
@@ -6647,8 +6647,8 @@ void overmap::save() const
         assure_dir_exist( overmaps_folder );
         const cata_path zzip_path = overmaps_folder / terfilename_path + ".zzip";
         std::optional<zzip> z = zzip::load( zzip_path.get_unrelative_path(),
-                                              ( PATH_INFO::world_base_save_path() / "overmaps.dict" ).get_unrelative_path()
-                                            );
+                                            ( PATH_INFO::world_base_save_path() / "overmaps.dict" ).get_unrelative_path()
+                                          );
         if( !z ) {
             throw std::runtime_error(
                 string_format(
