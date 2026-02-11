@@ -306,9 +306,10 @@ class game
         /**
          * Moves the player to an alternate dimension.
          * @param prefix identifies the dimension and its properties.
-         * @param npc_radius if not 0, bring any NPCs within distance with the player
+         * @param npc_travellers vector of NPCs that should be brought along when travelling to another dimension
          */
-        bool travel_to_dimension( const std::string &prefix, const int &npc_radius );
+        bool travel_to_dimension( const std::string &prefix, const std::string &region_type,
+                                  const std::vector<npc *> &npc_travellers );
         /**
          * Retrieve the identifier of the current dimension.
          * TODO: this should be a dereferencable id that gives properties of the dimension.
@@ -665,7 +666,9 @@ class game
         /** Checks whether or not there is a zone of particular type nearby */
         bool check_near_zone( const zone_type_id &type, const tripoint_bub_ms &where ) const;
         bool is_zones_manager_open() const;
-        void zones_manager();
+        void set_zones_manager_open( bool zm_open ) {
+            zones_manager_open = zm_open;
+        };
 
         /// @brief attempt to find a safe route (avoids tiles dangerous to '@ref who').
         /// @param who character to use for evaluating danger tiles and pathfinding start position

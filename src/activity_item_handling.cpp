@@ -1341,6 +1341,8 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
         for( const zone_data &zone : zones ) {
             const plot_options &options = dynamic_cast<const plot_options &>( zone.get_options() );
             const itype_id seed = options.get_seed();
+            ret_val<void>can_plant = !seed.is_empty() ?
+                                     warm_enough_to_plant( src_loc, seed ) : ret_val<void>::make_success();
 
             if( here.has_flag_furn( ter_furn_flag::TFLAG_GROWTH_OVERGROWN, src_loc ) ) {
                 return activity_reason_info::ok( do_activity_reason::NEEDS_CLEARING );
@@ -1378,7 +1380,7 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
                 // If its a farm zone with no specified seed, and we've checked for tilling and harvesting.
                 // then it means no further work can be done here
             } else if( !seed.is_empty() &&
-                       warm_enough_to_plant( src_loc, seed ) &&
+                       can_plant.success() &&
                        here.has_flag_ter_or_furn( seed->seed->required_terrain_flag, src_loc ) ) {
                 if( here.has_items( src_loc ) ) {
                     return activity_reason_info::fail( do_activity_reason::BLOCKING_TILE );
@@ -1394,6 +1396,10 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
                 }
 
             } else {
+                // Extra, specific messaging returned from warm_enough_to_plant()
+                if( !can_plant.success() ) {
+                    you.add_msg_if_player( can_plant.c_str() );
+                }
                 // can't plant, till or harvest
                 return activity_reason_info::fail( do_activity_reason::ALREADY_DONE );
             }
@@ -2334,7 +2340,7 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
         bool unload_mods = false;
         bool unload_molle = false;
         bool unload_sparse_only = false;
-        int unload_sparse_threshold = 20;
+        int unload_sparse_threshold = 0;
         bool unload_always = false;
 
         std::vector<zone_data const *> const zones = mgr.get_zones_at( src, zone_type_UNLOAD_ALL,
@@ -2346,7 +2352,9 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
             unload_molle |= options.unload_molle();
             unload_mods |= options.unload_mods();
             unload_sparse_only |= options.unload_sparse_only();
-            unload_sparse_threshold |= options.unload_sparse_threshold();
+            if( options.unload_sparse_only() && options.unload_sparse_threshold() > unload_sparse_threshold ) {
+                unload_sparse_threshold = options.unload_sparse_threshold();
+            }
             unload_always |= options.unload_always();
         }
 

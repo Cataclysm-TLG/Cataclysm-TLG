@@ -3418,6 +3418,7 @@ void islot_seed::deserialize( const JsonObject &jo )
     mandatory( jo, was_loaded, "fruit", fruit_id );
     mandatory( jo, was_loaded, "growth_stages", growth_stages,
                pair_reader<flag_id, time_duration> {} );
+    optional( jo, was_loaded, "growth_temp", growth_temp, 10_C );
     optional( jo, was_loaded, "seeds", spawn_seeds, true );
     optional( jo, was_loaded, "byproducts", byproducts );
     optional( jo, was_loaded, "required_terrain_flag", required_terrain_flag,
@@ -3461,6 +3462,7 @@ void islot_gunmod::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "reload_modifier", reload_modifier );
     optional( jo, was_loaded, "min_str_required_mod", min_str_required_mod );
     optional( jo, was_loaded, "is_bayonet", is_bayonet );
+    optional( jo, was_loaded, "is_visible_when_installed", is_visible_when_installed );
     optional( jo, was_loaded, "blacklist_mod", blacklist_mod, auto_flags_reader<itype_id> {} );
     optional( jo, was_loaded, "blacklist_slot", blacklist_slot, auto_flags_reader<gunmod_location> {} );
     optional( jo, was_loaded, "barrel_length", barrel_length );
@@ -3713,7 +3715,9 @@ void Item_factory::add_special_pockets( itype &def )
         def.pockets.emplace_back( pocket_type::CORPSE );
     }
     if( ( def.tool || def.gun ) && !has_pocket_type( def.pockets, pocket_type::MOD ) ) {
-        def.pockets.emplace_back( pocket_type::MOD );
+        pocket_data mod_pocket( pocket_type::MOD );
+        mod_pocket.transparent = true;
+        def.pockets.emplace_back( mod_pocket );
     }
     if( !has_pocket_type( def.pockets, pocket_type::MIGRATION ) ) {
         def.pockets.emplace_back( pocket_type::MIGRATION );

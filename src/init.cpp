@@ -87,6 +87,7 @@
 #include "overmap.h"
 #include "overmap_connection.h"
 #include "overmap_location.h"
+#include "overmap_map_data_cache.h"
 #include "profession.h"
 #include "profession_group.h"
 #include "proficiency.h"
@@ -395,6 +396,7 @@ void DynamicDataLoader::initialize()
     add( "overmap_special_migration", &overmap_special_migration::load_migrations );
     add( "city_building", &city_buildings::load );
     add( "map_extra", &MapExtras::load );
+    add( "omt_placeholder", &map_data_placeholders::load );
 
     add( "region_settings", &load_region_settings );
     add( "region_overlay", &load_region_overlay );
@@ -690,6 +692,7 @@ void DynamicDataLoader::unload_data()
     overmap_terrains::reset();
     overmap::reset_oter_id_migrations();
     overmap::reset_oter_id_camp_migrations();
+    map_data_placeholders::reset();
     profession::reset();
     profession_blacklist::reset();
     proficiency::reset();
@@ -868,13 +871,14 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
             { _( "NPC classes" ), &npc_class::finalize_all },
             { _( "Overmap Vision Levels" ), &oter_vision::finalize_all },
             { _( "Overmap Special Migrations" ), &overmap_special_migration::finalize_all },
+            { _( "Overmap placeholders" ), &map_data_placeholders::finalize },
             { _( "Professions" ), &profession::finalize_all },
             { _( "Proficiencies" ), &proficiency::finalize_all },
             { _( "Proficiency Categories" ), &proficiency_category::finalize_all },
             { _( "Qualities" ), &quality::finalize_all },
             { _( "Recipe Groups" ), &recipe_group::finalize },
-            { _( "Region Settings" ), &region_settings::finalize_all },
             { _( "Region Overlays" ), &region_overlay_new::finalize_all },
+            { _( "Region Settings" ), &region_settings::finalize_all },
             { _( "Relic Procedural Generations" ), &relic_procgen_data::finalize_all },
             { _( "Speed Descriptions" ), &speed_description::finalize_all },
             { _( "Species" ), &species_type::finalize_all },

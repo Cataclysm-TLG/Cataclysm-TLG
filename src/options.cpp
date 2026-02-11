@@ -2699,11 +2699,6 @@ void options_manager::add_options_world_default()
     add_option_group( "world_default", Group( "misc_worlddef_opts", to_translation( "Misc Options" ),
                       to_translation( "Miscellaneous options." ) ),
     [&]( const std::string & page_id ) {
-        add( "WANDER_SPAWNS", page_id, to_translation( "Wandering hordes" ),
-             to_translation( "If true, emulates zombie hordes.  Zombies can group together into hordes, which can wander around cities and will sometimes move towards noise.  Note: This feature is still in development, but should be mostly bug-free." ),
-             true
-           );
-
         add( "BLACK_ROAD", page_id, to_translation( "Surrounded start" ),
              to_translation( "If true, spawn zombies at shelters.  Makes the starting game a lot harder." ),
              false

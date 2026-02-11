@@ -51,6 +51,7 @@
 #include "game_constants.h"
 #include "game_ui.h"
 #include "hash_utils.h"
+#include "horde_entity.h"
 #include "input.h"
 #include "json.h"
 #include "line.h"
@@ -917,7 +918,6 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
     const int sight_points = !has_debug_vision ?
                              you.overmap_modified_sight_range( g->light_level( you.posz() ) ) :
                              100;
-    // Removed for being deceptive, may re-add after hordes are updated.
     // const bool showhordes = uistate.overmap_show_hordes;
     const bool show_map_revealed = uistate.overmap_show_revealed_omts;
     std::unordered_set<tripoint_abs_omt> &revealed_highlights = get_avatar().map_revealed_omts;
@@ -935,9 +935,9 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             const tripoint_abs_omt omp = origin + point( col, row );
 
             const om_vision_level vision = overmap_buffer.seen( omp );
-            // const bool los = overmap_buffer.seen_more_than( omp, om_vision_level::details ) &&
-            //                  ( you.overmap_los( omp, sight_points ) || uistate.overmap_debug_mongroup ||
-            //                    you.has_trait( trait_DEBUG_CLAIRVOYANCE ) );
+            //  const bool los = overmap_buffer.seen_more_than( omp, om_vision_level::details ) &&
+            //                   ( you.overmap_los( omp, sight_points ) || uistate.overmap_debug_mongroup ||
+            //                     you.has_trait( trait_DEBUG_CLAIRVOYANCE ) );
 
             // the full string from the ter_id including _north etc.
             std::string id;
@@ -984,58 +984,77 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             }
 
             // if( vision != om_vision_level::unseen ) {
-
-            //     // This stuff needs to go regardless.
-
-            //     // if( draw_overlays && uistate.overmap_debug_mongroup ) {
-            //     //     const std::vector<mongroup *> mgroups = overmap_buffer.monsters_at( omp );
-            //     //     if( !mgroups.empty() ) {
-            //     //         auto mgroup_iter = mgroups.begin();
-            //     //         std::advance( mgroup_iter, rng( 0, mgroups.size() - 1 ) );
-            //     //         draw_from_id_string( ( *mgroup_iter )->type->defaultMonster.str(),
-            //     //                              omp.raw(), 0, 0, lit_level::LIT, false );
-            //     //     }
+            //     if( draw_overlays && uistate.overmap_debug_mongroup ) {
+            //         std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> hordes = overmap_buffer.hordes_at(
+            //                     omp );
+            //         if( !hordes.empty() ) {
+            //             static const std::string empty_string;
+            //             draw_from_id_string( "mon_zombie", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            //         }
             //     }
             //     if( showhordes && los ) {
-            //         const int horde_size = std::min( 10, overmap_buffer.get_horde_size( omp ) );
+            //             static const std::string empty_string;
+            //         const int horde_size = overmap_buffer.get_horde_size( omp );
             //         if( horde_size >= HORDE_VISIBILITY_SIZE ) {
-            //             // a little bit of hardcoded fallbacks for hordes
+            //             // Scale down the range of horde population, which can be 1-576 to a range of 1-10
+            //             // These thresholds are generated with pow( sprite_size, 2.4 ).
+            //             int sprite_size = 1;
+            //             if( horde_size < 5 ) {
+            //                 sprite_size = 1;
+            //             } else if( horde_size < 13 ) {
+            //                 sprite_size = 2;
+            //             } else if( horde_size < 27 ) {
+            //                 sprite_size = 3;
+            //             } else if( horde_size < 47 ) {
+            //                 sprite_size = 4;
+            //             } else if( horde_size < 73 ) {
+            //                 sprite_size = 5;
+            //             } else if( horde_size < 106 ) {
+            //                 sprite_size = 6;
+            //             } else if( horde_size < 147 ) {
+            //                 sprite_size = 7;
+            //             } else if( horde_size < 195 ) {
+            //                 sprite_size = 8;
+            //             } else if( horde_size < 251 ) {
+            //                 sprite_size = 9;
+            //             } else {
+            //                 sprite_size = 10;
+            //             }
+
             //             if( find_tile_with_season( id ) ) {
             //                 // NOLINTNEXTLINE(cata-translate-string-literal)
-            //                 draw_from_id_string( string_format( "overmap_horde_%d", horde_size < 10 ? horde_size : 10 ),
-            //                                      omp.raw(), 0, 0, lit_level::LIT, false );
+            //                 draw_from_id_string( string_format( "overmap_horde_%d", sprite_size ),
+            //                                      TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //             } else {
-            //                 switch( horde_size ) {
-            //                     case HORDE_VISIBILITY_SIZE:
-            //                         draw_from_id_string( "mon_zombie", omp.raw(), 0, 0, lit_level::LIT,
-            //                                              false );
+            //                 // a little bit of hardcoded fallbacks for hordes for
+            //                 // tilesets that don't have overmap_horde_X sprites defined.
+            //                 switch( sprite_size ) {
+            //                     case 1:
+            //                         draw_from_id_string( "mon_zombie", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
-            //                     case HORDE_VISIBILITY_SIZE + 1:
-            //                         draw_from_id_string( "mon_zombie_tough", omp.raw(), 0, 0,
-            //                                              lit_level::LIT, false );
+            //                     case 2:
+            //                         draw_from_id_string( "mon_zombie_tough", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
-            //                     case HORDE_VISIBILITY_SIZE + 2:
-            //                         draw_from_id_string( "mon_zombie_brute", omp.raw(), 0, 0,
-            //                                              lit_level::LIT, false );
+            //                     case 3:
+            //                         draw_from_id_string( "mon_zombie_brute", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
-            //                     case HORDE_VISIBILITY_SIZE + 3:
-            //                         draw_from_id_string( "mon_zombie_hulk", omp.raw(), 0, 0,
-            //                                              lit_level::LIT, false );
+            //                     case 4:
+            //                         draw_from_id_string( "mon_zombie_hulk", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
-            //                     case HORDE_VISIBILITY_SIZE + 4:
-            //                         draw_from_id_string( "mon_zombie_necro", omp.raw(), 0, 0,
-            //                                              lit_level::LIT, false );
+            //                     case 5:
+            //                         draw_from_id_string( "mon_zombie_necro", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
-            //                     default:
-            //                         draw_from_id_string( "mon_zombie_master", omp.raw(), 0, 0,
-            //                                              lit_level::LIT, false );
-            //                         break;
-            //                 }
+            //                     case 6:
+            //                     case 7:
+            //                     case 8:
+            //                     case 9:
+            //                     case 10:
+            //                         draw_from_id_string( "mon_zombie_master", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            //                 };
             //             }
             //         }
             //     }
             // }
-
             if( ( uistate.place_terrain || uistate.place_special ) &&
                 overmap_ui::is_generated_omt( omp.xy() ) ) {
                 // Highlight areas that already have been generated
