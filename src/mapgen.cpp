@@ -173,6 +173,8 @@ static const oter_str_id oter_tower_lab_stairs( "tower_lab_stairs" );
 static const oter_type_str_id oter_type_road( "road" );
 static const oter_type_str_id oter_type_sewer( "sewer" );
 
+static const region_settings_id region_settings_default( "default" );
+
 static const ter_str_id ter_t_bars( "t_bars" );
 static const ter_str_id ter_t_card_science( "t_card_science" );
 static const ter_str_id ter_t_concrete_wall( "t_concrete_wall" );
@@ -771,22 +773,26 @@ void map::generate( const tripoint_abs_omt &p, const time_point &when, bool save
         }
 
         if( any_missing || !save_results ) {
-
+            const region_settings_map_extras settings_mx =
+                region_settings_default->get_settings_map_extras();
             // At some point, we should add region information so we can grab the appropriate extras
-            map_extras &this_ex = region_settings_map["default"].region_extras[terrain_type->get_extras()];
-            map_extras ex = this_ex.filtered_by( dat );
-            if( this_ex.chance > 0 && ex.values.empty() && !this_ex.values.empty() ) {
-                DebugLog( D_WARNING, D_MAP_GEN ) << "Overmap terrain " << terrain_type->get_type_id().str() <<
-                                                 " (extra type \"" << terrain_type->get_extras() <<
-                                                 "\") zlevel = " << p.z() <<
-                                                 " is out of range of all assigned map extras.  Skipping map extra generation.";
-            } else if( ex.chance > 0 && one_in( ex.chance ) ) {
-                map_extra_id *extra = ex.values.pick();
-                if( extra == nullptr ) {
-                    debugmsg( "failed to pick extra for type %s (ter = %s)", terrain_type->get_extras(),
-                              terrain_type->get_type_id().str() );
-                } else {
-                    MapExtras::apply_function( *ex.values.pick(), *this, tripoint_abs_sm( abs_sub ) );
+            auto mx_iter = settings_mx.extras.find( map_extra_collection_id( terrain_type->get_extras() ) );
+            if( mx_iter != settings_mx.extras.end() ) {
+                const map_extra_collection &this_ex = **mx_iter;
+                map_extra_collection ex = this_ex.filtered_by( dat );
+                if( this_ex.chance > 0 && ex.values.empty() && !this_ex.values.empty() ) {
+                    DebugLog( D_WARNING, D_MAP_GEN ) << "Overmap terrain " << terrain_type->get_type_id().str() <<
+                                                     " (extra type \"" << terrain_type->get_extras() <<
+                                                     "\") zlevel = " << p.z() <<
+                                                     " is out of range of all assigned map extras.  Skipping map extra generation.";
+                } else if( ex.chance > 0 && one_in( ex.chance ) ) {
+                    map_extra_id *extra = ex.values.pick();
+                    if( extra == nullptr ) {
+                        debugmsg( "failed to pick extra for type %s (ter = %s)", terrain_type->get_extras(),
+                                  terrain_type->get_type_id().str() );
+                    } else {
+                        MapExtras::apply_function( *ex.values.pick(), *this, tripoint_abs_sm( abs_sub ) );
+                    }
                 }
             }
 
@@ -3484,10 +3490,10 @@ class jmapgen_terrain : public jmapgen_piece_with_has_vehicle_collision
             act_unknown, act_ignore, act_dismantle, act_erase
         };
     public:
-        mapgen_value<ter_id> id;
+        mapgen_value<ter_str_id> id;
         jmapgen_terrain( const JsonObject &jsi, std::string_view/*context*/ ) :
             jmapgen_terrain( jsi.get_member( "ter" ) ) {}
-        explicit jmapgen_terrain( const JsonValue &tid ) : id( mapgen_value<ter_id>( tid ) ) {}
+        explicit jmapgen_terrain( const JsonValue &tid ) : id( mapgen_value<ter_str_id>( tid ) ) {}
 
         bool is_nop() const override {
             return id.is_null();
@@ -3498,7 +3504,7 @@ class jmapgen_terrain : public jmapgen_piece_with_has_vehicle_collision
 
         void apply( const mapgendata &dat, const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z,
                     const std::string &context ) const override {
-            const ter_id &chosen_id = id.get( dat );
+            const ter_id &chosen_id = id.get( dat ).id();
             if( chosen_id.id().is_null() ) {
                 return;
             }

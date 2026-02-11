@@ -961,7 +961,8 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "good" },
     "revert_to": "shocktonfa_off",
     "use_action": [ "SHOCKTONFA_ON" ],
-    "flags": [ "LIGHT_450", "CHARGEDIM", "DURABLE_MELEE", "TRADER_AVOID", "NONCONDUCTIVE", "BELT_CLIP" ],
+    "light": 300,
+    "flags": [ "CHARGEDIM", "DURABLE_MELEE", "TRADER_AVOID", "NONCONDUCTIVE", "BELT_CLIP" ],
     "weapon_category": [ "BATONS", "KARATE_WEAPONS" ]
   },
   {

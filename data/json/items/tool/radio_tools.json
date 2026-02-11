@@ -77,7 +77,8 @@
         "sound_variant": "rc_car_drives"
       }
     ],
-    "flags": [ "LIGHT_15", "RADIO_CONTAINER", "TRADER_AVOID", "RADIOCAR", "WATER_BREAK", "ELECTRONIC" ]
+    "light": 15,
+    "flags": [ "RADIO_CONTAINER", "TRADER_AVOID", "RADIOCAR", "WATER_BREAK", "ELECTRONIC" ]
   },
   {
     "id": "radio_mod",

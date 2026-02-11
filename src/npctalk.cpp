@@ -3,6 +3,8 @@
 #include <array>
 #include <cmath>
 #include <cstddef>
+#include <exception>
+#include <filesystem>
 #include <iterator>
 #include <list>
 #include <map>
@@ -21,6 +23,8 @@
 #include "avatar.h"
 #include "bionics.h"
 #include "calendar.h"
+#include "cata_lazy.h"
+#include "cata_path.h"
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "character.h"
@@ -42,6 +46,8 @@
 #include "explosion.h"
 #include "faction.h"
 #include "faction_camp.h"
+#include "field.h"
+#include "filesystem.h"
 #include "flag.h"
 #include "game.h"
 #include "game_constants.h"
@@ -70,6 +76,8 @@
 #include "npctrade.h"
 #include "output.h"
 #include "overmapbuffer.h"
+#include "path_info.h"
+#include "pickup.h"
 #include "pimpl.h"
 #include "player_activity.h"
 #include "pocket_type.h"
@@ -4623,6 +4631,23 @@ talk_effect_fun_t::func f_place_override( const JsonObject &jo, std::string_view
     };
 }
 
+talk_effect_fun_t::func f_clear_dimension( const JsonObject &jo, std::string_view member,
+        std::string_view )
+{
+    str_or_var target_dimension = get_str_or_var( jo.get_member( member ), member, true );
+
+    return [target_dimension]( dialogue const & d ) {
+        const std::string target_dimension_id = target_dimension.evaluate(
+                d );
+        const std::vector<cata_path> dimensions_query = get_directories_with( target_dimension_id,
+                PATH_INFO::dimensions_save_path() );
+        if( dimensions_query.size() == 1 ) {
+            std::filesystem::remove_all( ( PATH_INFO::dimensions_save_path() /
+                                           target_dimension_id ).get_unrelative_path() );
+        }
+    };
+}
+
 talk_effect_fun_t::func f_mapgen_update( const JsonObject &jo, std::string_view member,
         std::string_view )
 {
@@ -7315,19 +7340,23 @@ talk_effect_fun_t::func f_teleport( const JsonObject &jo, std::string_view membe
     bool force_safe = jo.get_bool( "force_safe", false );
 
     str_or_var dimension_prefix;
-    optional( jo, false, "dimension_prefix", dimension_prefix, "" );
+    optional( jo, false, "dimension_prefix", dimension_prefix, g->get_dimension_prefix() );
+
+    // radius around which NPCs will be teleported with the avatar, if dimension hopping
+    dbl_or_var npc_radius = get_dbl_or_var( jo, "npc_radius", false, 0 );
 
     return [is_npc, target_var, fail_message, success_message, force,
-            force_safe, dimension_prefix]( dialogue const & d ) {
+            force_safe, dimension_prefix, npc_radius]( dialogue const & d ) {
         tripoint_abs_ms target_pos = read_var_value( target_var, d ).tripoint();
         Creature *teleporter = d.actor( is_npc )->get_creature();
         if( teleporter ) {
             std::string prefix = dimension_prefix.evaluate( d );
+            int radius = npc_radius.evaluate( d );
             bool successful_dimension_swap = false;
             // Make sure we don't cause a dimension swap on every
             // short/long range teleport outside the default dimension
             if( !prefix.empty() && prefix != g->get_dimension_prefix() ) {
-                successful_dimension_swap = g->travel_to_dimension( prefix );
+                successful_dimension_swap = g->travel_to_dimension( prefix, radius );
             }
             if( teleport::teleport_to_point( *teleporter, get_map().get_bub( target_pos ), true, false,
                                              false, force, force_safe ) || successful_dimension_swap ) {
@@ -7575,6 +7604,7 @@ parsers = {
     { "set_npc_cbm_reserve_rule", jarg::member, &talk_effect_fun::f_npc_cbm_reserve_rule },
     { "set_npc_cbm_recharge_rule", jarg::member, &talk_effect_fun::f_npc_cbm_recharge_rule },
     { "map_spawn_item", jarg::member, &talk_effect_fun::f_spawn_item },
+    { "clear_dimension", jarg::member, &talk_effect_fun::f_clear_dimension },
     { "mapgen_update", jarg::member, &talk_effect_fun::f_mapgen_update },
     { "alter_timed_events", jarg::member, &talk_effect_fun::f_alter_timed_events },
     { "revert_location", jarg::member, &talk_effect_fun::f_revert_location },
