@@ -2141,9 +2141,9 @@ bool WORLD::set_compression_enabled( bool enabled ) const
 
                     // Each overmap gets put into its own zzip indexed by its own file name.
                     std::optional<zzip> overmap_zzip = zzip::create_from_folder_with_files( (
-                                                       dimension_folder / "overmaps" / overmap_file_name + ".zzip" ).get_unrelative_path(),
-                                                   world_folder_unrelative_path, { overmap_file_path }, 0,
-                                                   overmaps_dict.get_unrelative_path() );
+                                                           dimension_folder / "overmaps" / overmap_file_name + ".zzip" ).get_unrelative_path(),
+                                                       world_folder_unrelative_path, { overmap_file_path }, 0,
+                                                       overmaps_dict.get_unrelative_path() );
                     if( !overmap_zzip ) {
                         return false;
                     }
@@ -2226,7 +2226,7 @@ bool WORLD::set_compression_enabled( bool enabled ) const
                     };
 
                     std::optional<zzip> save_zzip = zzip::load( ( dimension_folder / save_file_name +
-                                                            ".zzip" ).get_unrelative_path() );
+                                                    ".zzip" ).get_unrelative_path() );
                     if( !save_zzip ) {
                         return false;
                     }

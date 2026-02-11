@@ -5010,8 +5010,8 @@ talk_effect_fun_t::func f_forget_recipe( const JsonObject &jo, std::string_view 
     std::optional<str_or_var> forgotten_recipe_subcategory = std::nullopt;
 
     return [forgotten_recipe, is_npc]( dialogue const & d ) {
-            const recipe_id &r = recipe_id( forgotten_recipe.evaluate( d ) );
-            d.actor( is_npc )->forget_recipe( r );
+        const recipe_id &r = recipe_id( forgotten_recipe.evaluate( d ) );
+        d.actor( is_npc )->forget_recipe( r );
     };
 }
 

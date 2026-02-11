@@ -742,7 +742,7 @@ void Character::vitamin_set( const vitamin_id &vit, int qty )
 float Character::metabolic_rate_base() const
 {
     const float hunger_rate = enchantment_cache->modify_value( enchant_vals::mod::METABOLISM,
-                                    1.f );
+                              1.f );
     return std::clamp( hunger_rate, 0.0f, std::numeric_limits<float>::max() );
 }
 

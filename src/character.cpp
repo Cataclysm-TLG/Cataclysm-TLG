@@ -7185,7 +7185,7 @@ int Character::get_stamina_max() const
     // Since adding cardio, 'player_max_stamina' is really 'base max stamina' and gets further modified
     // by your CV fitness.  Name has been kept this way to avoid needing to change the code.
     // Default base maximum stamina and cardio scaling are defined in data/core/game_balance.json
-    
+
     // FIXME: move these values to global constants.
     static const int player_max_stamina = 3500;
     static const int player_cardiofit_stamina_scale = 5;
