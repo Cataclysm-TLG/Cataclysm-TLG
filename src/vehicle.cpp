@@ -3987,7 +3987,8 @@ int64_t vehicle::fuel_left( map &here, const itype_id &ftype,
         if( part.ammo_current() != ftype ||
             // don't count frozen liquid
             ( !part.base.empty() && part.is_tank() &&
-              part.base.legacy_front().made_of( phase_id::SOLID ) ) || !filter( part ) ) {
+              part.base.legacy_front().made_of( phase_id::SOLID ) ) || !filter( part ) ||
+            part.has_flag( vp_flag::carried_flag ) ) {
             continue;
         }
         fl += part.ammo_remaining( );
@@ -4047,7 +4048,8 @@ int vehicle::fuel_capacity( map &here, const itype_id &ftype ) const
     const vehicle_part_range vpr = get_all_parts();
     return std::accumulate( vpr.begin(), vpr.end(), int64_t { 0 },
     [&ftype]( const int64_t &lhs, const vpart_reference & rhs ) {
-        if( rhs.part().ammo_current() == ftype && ftype->ammo ) {
+        if( rhs.part().ammo_current() == ftype && ftype->ammo &&
+            !rhs.part().has_flag( vp_flag::carried_flag ) ) {
             return lhs + rhs.part().ammo_capacity( ftype->ammo->type );
         }
         return lhs;
@@ -6042,7 +6044,7 @@ int64_t vehicle::battery_left( map &here, bool apply_loss ) const
         const float efficiency = 1.0f - ( apply_loss ? pair.second : 0.0f );
         for( const int part_idx : veh.batteries ) {
             const vehicle_part &vp = veh.parts[part_idx];
-            ret += vp.ammo_remaining( ) * efficiency;
+            ret += vp.ammo_remaining() * efficiency;
         }
     }
     return ret;
@@ -6184,15 +6186,19 @@ void vehicle::idle( map &here, bool on_map )
 
     // FIXME/HACK: Always checks buckwheat seeds!
     // Returned string intentionally discarded!
-    ret_val<void>can_plant = warm_enough_to_plant( player_character.pos_bub(), itype_seed_buckwheat );
-    if( !can_plant.success() ) {
-        for( int i : planters ) {
-            vehicle_part &vp = parts[ i ];
-            if( vp.enabled ) {
-                add_msg_if_player_sees( pos_bub( here ),
-                                        _( "The %s's planter turns off due to unsuitable planting conditions." ),
-                                        name );
-                vp.enabled = false;
+    // TODO: move it to planter function that tries to plant, and maybe cache it there
+    // (warm_enough_to_plant() is very expensive)
+    if( !planters.empty() && calendar::once_every( 5_minutes ) ) {
+        ret_val<void>can_plant = warm_enough_to_plant( player_character.pos_bub(), itype_seed_buckwheat );
+        if( !can_plant.success() ) {
+            for( int i : planters ) {
+                vehicle_part &vp = parts[ i ];
+                if( vp.enabled ) {
+                    add_msg_if_player_sees( pos_bub( here ),
+                                            _( "The %s's planter turns off due to unsuitable planting conditions." ),
+                                            name );
+                    vp.enabled = false;
+                }
             }
         }
     }
@@ -6811,7 +6817,7 @@ void vehicle::refresh()
         if( vpi.has_flag( VPFLAG_ROTOR ) ) {
             rotors.push_back( p );
         }
-        if( vp.part().is_battery() ) {
+        if( vp.part().is_battery() && !vp.part().has_flag( vp_flag::carried_flag ) ) {
             batteries.push_back( p );
         }
         if( vp.part().is_fuel_store( false ) ) {
@@ -8017,7 +8023,7 @@ std::map<itype_id, int> vehicle::fuels_left( ) const
 {
     std::map<itype_id, int> result;
     for( const vehicle_part &p : parts ) {
-        if( p.is_fuel_store() && !p.ammo_current().is_null() ) {
+        if( p.is_fuel_store() && !p.ammo_current().is_null() && !p.has_flag( vp_flag::carried_flag ) ) {
             result[ p.ammo_current() ] += p.ammo_remaining( );
         }
     }
@@ -8028,7 +8034,8 @@ std::list<item *> vehicle::fuel_items_left()
 {
     std::list<item *> result;
     for( vehicle_part &p : parts ) {
-        if( p.is_fuel_store() && !p.ammo_current().is_null() && !p.base.is_container_empty() ) {
+        if( p.is_fuel_store() && !p.ammo_current().is_null() && !p.base.is_container_empty() &&
+            !p.has_flag( vp_flag::carried_flag ) ) {
             result.push_back( &p.base.only_item() );
         }
     }

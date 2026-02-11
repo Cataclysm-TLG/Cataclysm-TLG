@@ -538,27 +538,21 @@
     "terrain_furniture": {  }
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "trees_forest_aftershock",
     "copy-from": "trees_forest",
-    "sequence": 0,
-    "chance": 12,
     "types": [ [ "t_region_tree", 128 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "shrubs_and_flowers_forest_aftershock",
     "copy-from": "shrubs_and_flowers_forest",
-    "sequence": 1,
-    "chance": 10,
     "types": [ [ "t_region_shrub", 100 ], [ "f_region_weed", 20 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "clutter_forest_aftershock",
     "copy-from": "clutter_forest",
-    "sequence": 2,
-    "chance": 80,
     "types": [
       [ "f_geo_vent", 128 ],
       [ "t_dirtmound", 128 ],
@@ -571,11 +565,9 @@
     ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "water_forest_aftershock",
     "copy-from": "water_forest",
-    "sequence": 3,
-    "chance": 512,
     "types": [ [ "t_water_sh", 1 ] ]
   },
   {
@@ -596,27 +588,21 @@
     "terrain_furniture": {  }
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "trees_forest_thick_aftershock",
     "copy-from": "trees_forest_thick",
-    "sequence": 0,
-    "chance": 5,
     "types": [ [ "t_region_tree", 100 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "shrubs_and_flowers_forest_thick_aftershock",
     "copy-from": "shrubs_and_flowers_forest_thick",
-    "sequence": 1,
-    "chance": 5,
     "types": [ [ "t_region_shrub", 100 ], [ "f_region_weed", 20 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "clutter_forest_thick_aftershock",
     "copy-from": "clutter_forest_thick",
-    "sequence": 2,
-    "chance": 64,
     "types": [
       [ "f_geo_vent", 14 ],
       [ "t_dirtmound", 24 ],
@@ -629,11 +615,9 @@
     ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "water_forest_thick_aftershock",
     "copy-from": "water_forest_thick",
-    "sequence": 3,
-    "chance": 512,
     "types": [ [ "t_water_sh", 1 ] ]
   },
   {
@@ -654,35 +638,27 @@
     "terrain_furniture": { "t_water_hot": { "chance": 2, "furniture": { "f_region_water_plant": 1 } } }
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "trees_forest_water_aftershock",
     "copy-from": "trees_forest_water",
-    "sequence": 1,
-    "chance": 45,
     "types": [ [ "f_geo_vent", 40 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "shrubs_and_flowers_forest_water_aftershock",
     "copy-from": "shrubs_and_flowers_forest_water",
-    "sequence": 1,
-    "chance": 15,
     "types": [ [ "t_region_shrub", 80 ], [ "f_region_weed", 30 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "clutter_forest_water_aftershock",
     "copy-from": "clutter_forest_water",
-    "sequence": 2,
-    "chance": 75,
     "types": [ [ "t_trunk", 1 ], [ "f_boulder_small", 2 ], [ "f_boulder_medium", 1 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "water_forest_water_aftershock",
     "copy-from": "water_forest_water",
-    "sequence": 3,
-    "chance": 2,
     "types": [ [ "t_water_hot", 12 ] ]
   },
   {
@@ -692,16 +668,17 @@
     "biomes": [ "biome_forest_aftershock", "biome_forest_thick_aftershock", "biome_forest_water_aftershock" ]
   },
   {
-    "type": "region_settings_new",
+    "type": "region_settings",
     "id": "default_aftershock",
     "copy-from": "default",
-    "rivers": "no_rivers",
-    "lakes": "no_lakes",
-    "ocean": "no_ocean",
+    "rivers": null,
+    "lakes": null,
+    "ocean": null,
     "forests": "default_aftershock",
     "ravines": "default_aftershock",
     "forest_trails": "default_aftershock",
     "forest_composition": "default_aftershock",
+    "highways": null,
     "cities": "default_aftershock",
     "map_extras": "default_aftershock",
     "terrain_furniture": "default_aftershock",

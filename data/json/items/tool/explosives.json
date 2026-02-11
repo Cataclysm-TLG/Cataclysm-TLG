@@ -456,8 +456,8 @@
     "color": "green",
     "countdown_action": { "type": "explosion", "explosion": { "power": 240, "shrapnel": { "casing_mass": 217, "fragment_mass": 0.02 } } },
     "countdown_interval": "5 seconds",
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
-    "melee_damage": { "bash": 6 }
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "grenade_emp",
@@ -596,6 +596,7 @@
     "price": "0 USD",
     "price_postapoc": "0 cent",
     "description": "This tear gas grenade has had its pin removed and is (or will shortly be) expelling highly noxious gas.",
+    "use_action": { "type": "message", "message": "You've already pulled the pin, try throwing it instead.", "name": "Pull pin" },
     "emits": [ "emit_tear_gas_stream" ],
     "revert_to": "canister_empty",
     "flags": [ "TRADER_AVOID", "DANGEROUS" ]
@@ -866,6 +867,7 @@
     "description": "This smoke bomb has had its pin removed and is (or will shortly be) expelling thick smoke.",
     "emits": [ "emit_smoke_stream" ],
     "countdown_action": { "type": "transform", "target": "canister_empty" },
+    "revert_to": "canister_empty",
     "flags": [ "TRADER_AVOID" ]
   },
   {

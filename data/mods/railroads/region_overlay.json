@@ -1,9 +1,12 @@
 [
   {
-    "type": "region_overlay_new",
+    "type": "region_overlay",
     "id": "default_railroads",
     "apply_to_tags": [ "all" ],
-    "cities": "default_railroads"
+    "cities": "default_railroads",
+    "highways": null,
+    "place_railroads": true,
+    "place_railroads_before_roads": true
   },
   {
     "type": "region_settings_city",

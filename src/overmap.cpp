@@ -3796,71 +3796,71 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
     std::vector<Highway_path> highway_paths;
     calculate_urbanity();
     calculate_forestosity();
-    if( get_option<bool>( "OVERMAP_POPULATE_OUTSIDE_CONNECTIONS_FROM_NEIGHBORS" ) ) {
+    if( settings->neighbor_connections ) {
         populate_connections_out_from_neighbors( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         place_rivers( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_LAKES" ) ) {
+    if( settings->overmap_lake ) {
         place_lakes( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_OCEANS" ) ) {
+    if( settings->overmap_ocean ) {
         place_oceans( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FORESTS" ) ) {
+    if( settings->overmap_forest ) {
         place_forests();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_SWAMPS" ) ) {
+    if( settings->overmap_forest && settings->place_swamps ) {
         place_swamps();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RAVINES" ) ) {
+    if( settings->overmap_ravine ) {
         place_ravines();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         // Polish rivers now so highways get the correct predecessors rather than river_center
         polish_river( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+    if( settings->overmap_highway ) {
         highway_paths = place_highways( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_CITIES" ) ) {
+    if( settings->city_spec ) {
         place_cities();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+    if( settings->overmap_highway ) {
         place_highway_interchanges( highway_paths );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_CITIES" ) ) {
+    if( settings->city_spec ) {
         build_cities();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FOREST_TRAILS" ) ) {
+    if( settings->forest_trail ) {
         place_forest_trails();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RAILROADS_BEFORE_ROADS" ) ) {
-        if( get_option<bool>( "OVERMAP_PLACE_RAILROADS" ) ) {
+    if( settings->place_railroads_before_roads ) {
+        if( settings->place_railroads ) {
             place_railroads( neighbor_overmaps );
         }
-        if( get_option<bool>( "OVERMAP_PLACE_ROADS" ) ) {
+        if( settings->place_roads ) {
             place_roads( neighbor_overmaps );
         }
     } else {
-        if( get_option<bool>( "OVERMAP_PLACE_ROADS" ) ) {
+        if( settings->place_roads ) {
             place_roads( neighbor_overmaps );
         }
-        if( get_option<bool>( "OVERMAP_PLACE_RAILROADS" ) ) {
+        if( settings->place_railroads ) {
             place_railroads( neighbor_overmaps );
         }
     }
-    if( get_option<bool>( "OVERMAP_PLACE_SPECIALS" ) ) {
+    if( settings->place_specials ) {
         place_specials( enabled_specials );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+    if( settings->overmap_highway ) {
         finalize_highways( highway_paths );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FOREST_TRAILHEADS" ) ) {
+    if( settings->forest_trail ) {
         place_forest_trailheads();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         polish_river( neighbor_overmaps ); // Polish again for placed specials
     }
 
@@ -5186,38 +5186,22 @@ void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps
 
     // At least 3 exit points, to guarantee road continuity across overmaps
     if( roads_out.size() < 3 ) {
-
-        // x and y coordinates for a point on the edge in each direction
-        // -1 represents a variable one dimensional coordinate along that edge
-        // east == point( OMAPX - 1, n ); north == point( n, 0 );
-        static constexpr std::array<int, 4> edge_coords_x = {OMAPX - 1, -1, 0, -1};
-        static constexpr std::array<int, 4> edge_coords_y = {-1, OMAPY - 1, -1, 0};
-
-        // all the points on an edge except the 10 on each end
-        std::array < int, OMAPX - 20 > omap_num;
-        for( int i = 0; i < OMAPX - 20; i++ ) {
-            omap_num[i] = i + 10;
-        }
-
-        std::array < size_t, 4 > dirs = {0, 1, 2, 3};
-        std::shuffle( dirs.begin(), dirs.end(), rng_get_engine() );
-
-        for( size_t dir : dirs ) {
+        for( const om_direction::type dir : om_direction::all ) {
             // only potentially add a new random connection toward ungenerated overmaps
-            if( neighbor_overmaps[dir] == nullptr ) {
-                std::shuffle( omap_num.begin(), omap_num.end(), rng_get_engine() );
-                for( const int &i : omap_num ) {
-                    tripoint_om_omt tmp = tripoint_om_omt(
-                                              edge_coords_x[dir] >= 0 ? edge_coords_x[dir] : i,
-                                              edge_coords_y[dir] >= 0 ? edge_coords_y[dir] : i,
-                                              0 );
+            if( neighbor_overmaps[static_cast<int>( dir )] == nullptr ) {
+                // all the points on an edge except the 10 on each corner
+                std::vector<tripoint_om_omt> border = get_border( dir, 0, 10 );
+                std::shuffle( border.begin(), border.end(), rng_get_engine() );
+                for( const tripoint_om_omt &p : border ) {
                     // Make sure these points don't conflict with rivers.
-                    if( !( is_river( ter( tmp ) ) ||
-                           // avoid adjacent rivers
+                    if( !( is_river( ter( p ) ) ||
+                           // avoid immediately adjacent rivers
                            // east/west of a point on the north/south edge, and vice versa
-                           is_river( ter( tmp + point_rel_omt( four_adjacent_offsets[( dir + 1 ) % 4] ) ) ) ||
-                           is_river( ter( tmp + point_rel_omt( four_adjacent_offsets[( dir + 3 ) % 4] ) ) ) ) ) {
-                        roads_out.push_back( tmp );
+                           is_river( ter( p + point_rel_omt(
+                                              four_adjacent_offsets[static_cast<int>( om_direction::turn_right( dir ) )] ) ) ) ||
+                           is_river( ter( p + point_rel_omt(
+                                              four_adjacent_offsets[static_cast<int>( om_direction::turn_left( dir ) )] ) ) ) ) ) {
+                        roads_out.push_back( p );
                         break;
                     }
                 }
@@ -5346,13 +5330,29 @@ std::vector<tripoint_om_omt> overmap::get_border( const point_rel_om &direction,
     return get_neighbor_border( flip_direction, z, distance_corner );
 }
 
+std::vector<tripoint_om_omt> overmap::get_border( const om_direction::type direction, int z,
+        int distance_corner )
+{
+    return get_border( point_rel_om( four_adjacent_offsets[static_cast<int>( direction )] ), z,
+                       distance_corner );
+}
+
 void overmap::calculate_forestosity()
 {
+    if( !settings->overmap_forest ) {
+        forest_size_adjust = 0;
+        forestosity = 0;
+        return;
+    }
     const region_settings_forest &settings_forest = settings->get_settings_forest();
-    float northern_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_NORTH" );
-    float eastern_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_EAST" );
-    float western_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_WEST" );
-    float southern_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_SOUTH" );
+    float northern_forest_increase = settings_forest.forest_increase[static_cast<int>
+                                     ( om_direction::type::north )];
+    float eastern_forest_increase = settings_forest.forest_increase[static_cast<int>
+                                    ( om_direction::type::east )];
+    float western_forest_increase = settings_forest.forest_increase[static_cast<int>
+                                    ( om_direction::type::west )];
+    float southern_forest_increase = settings_forest.forest_increase[static_cast<int>
+                                     ( om_direction::type::south )];
     const point_abs_om this_om = pos();
     if( western_forest_increase != 0 && this_om.x() < 0 ) {
         forest_size_adjust -= this_om.x() * western_forest_increase;
@@ -5369,9 +5369,8 @@ void overmap::calculate_forestosity()
     forestosity = forest_size_adjust * 25.0f;
     //debugmsg( "forestosity = %1.2f at OM %i, %i", forestosity, this_om.x(), this_om.y() );
     // make sure forest size never totally overwhelms the map
-    forest_size_adjust = std::min( forest_size_adjust,
-                                   get_option<float>( "OVERMAP_FOREST_LIMIT" ) - static_cast<float>
-                                   ( settings_forest.noise_threshold_forest ) );
+    forest_size_adjust = std::min<float>( forest_size_adjust,
+                                          settings_forest.max_forest - settings_forest.noise_threshold_forest );
 }
 
 void overmap::calculate_urbanity()
@@ -5380,10 +5379,12 @@ void overmap::calculate_urbanity()
     if( op_city_size <= 0 ) {
         return;
     }
-    int northern_urban_increase = get_option<int>( "OVERMAP_URBAN_INCREASE_NORTH" );
-    int eastern_urban_increase = get_option<int>( "OVERMAP_URBAN_INCREASE_EAST" );
-    int western_urban_increase = get_option<int>( "OVERMAP_URBAN_INCREASE_WEST" );
-    int southern_urban_increase = get_option<int>( "OVERMAP_URBAN_INCREASE_SOUTH" );
+    int northern_urban_increase = settings->urban_increase[static_cast<int>
+                                  ( om_direction::type::north )];
+    int eastern_urban_increase = settings->urban_increase[static_cast<int>( om_direction::type::east )];
+    int western_urban_increase = settings->urban_increase[static_cast<int>( om_direction::type::west )];
+    int southern_urban_increase = settings->urban_increase[static_cast<int>
+                                  ( om_direction::type::south )];
     if( northern_urban_increase == 0 && eastern_urban_increase == 0 && western_urban_increase == 0 &&
         southern_urban_increase == 0 ) {
         return;
@@ -6645,7 +6646,31 @@ void overmap::place_mongroups()
         }
     }
 
-    if( get_option<bool>( "OVERMAP_PLACE_OCEANS" ) ) {
+    if( settings->overmap_river || settings->overmap_lake ) {
+        // Figure out where rivers and lakes are, and place appropriate critters
+        for( int x = 3; x < OMAPX - 3; x += 7 ) {
+            for( int y = 3; y < OMAPY - 3; y += 7 ) {
+                int river_count = 0;
+                for( int sx = x - 3; sx <= x + 3; sx++ ) {
+                    for( int sy = y - 3; sy <= y + 3; sy++ ) {
+                        if( is_lake_or_river( ter( { sx, sy, 0 } ) ) ) {
+                            river_count++;
+                        }
+                    }
+                }
+                if( river_count >= 25 && is_lake_or_river( ter( { x, y, 0 } ) ) ) {
+                    tripoint_om_omt p( x, y, 0 );
+                    float norm_factor = std::abs( GROUP_RIVER->freq_total / 1000.0f );
+                    unsigned int pop =
+                        std::round( norm_factor * rng( river_count * 8, river_count * 25 ) );
+                    spawn_mon_group(
+                        mongroup( GROUP_RIVER, project_combine( pos(), project_to<coords::sm>( p ) ),
+                                  pop ), 3 );
+                }
+            }
+        }
+    }
+    if( settings->overmap_ocean ) {
         // Now place ocean mongroup. Weights may need to be altered.
         const region_settings_ocean &settings_ocean = settings->get_settings_ocean();
         const om_noise::om_noise_layer_ocean f( global_base_point(), g->get_seed() );

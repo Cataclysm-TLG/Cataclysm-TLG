@@ -1,6 +1,6 @@
 [
   {
-    "type": "region_settings_new",
+    "type": "region_settings",
     "id": "default",
     "rivers": "default",
     "lakes": "default",
@@ -14,6 +14,7 @@
     "map_extras": "default",
     "terrain_furniture": "default",
     "weather": "default",
+    "urbanity_increase": [ 0, 10, 5, 0 ],
     "default_oter": [
       "open_air",
       "open_air",
@@ -58,11 +59,6 @@
     "river_branch_scale_decrease": 1.0
   },
   {
-    "type": "region_settings_river",
-    "id": "no_rivers",
-    "river_scale": 0.0
-  },
-  {
     "type": "region_settings_lake",
     "id": "default",
     "noise_threshold_lake": 0.25,
@@ -77,11 +73,6 @@
     ]
   },
   {
-    "type": "region_settings_lake",
-    "id": "no_lakes",
-    "noise_threshold_lake": 1
-  },
-  {
     "type": "region_settings_ocean",
     "id": "default",
     "noise_threshold_ocean": 0.25,
@@ -92,11 +83,6 @@
     "ocean_start_west": 1000,
     "ocean_start_south": 0,
     "sandy_beach_width": 6
-  },
-  {
-    "type": "region_settings_ocean",
-    "id": "no_ocean",
-    "noise_threshold_ocean": 1
   },
   {
     "type": "region_settings_highway",
@@ -140,16 +126,11 @@
     "id": "default",
     "noise_threshold_forest": 0.2,
     "noise_threshold_forest_thick": 0.25,
+    "forest_threshold_increase": [ 0.04, 0, 0, 0.02 ],
     "noise_threshold_swamp_adjacent_water": 0.3,
     "noise_threshold_swamp_isolated": 0.6,
     "river_floodplain_buffer_distance_min": 3,
     "river_floodplain_buffer_distance_max": 15
-  },
-  {
-    "type": "region_settings_forest",
-    "id": "no_forests",
-    "noise_threshold_forest": 1,
-    "noise_threshold_forest_thick": 1
   },
   {
     "type": "region_settings_forest_trail",
@@ -163,12 +144,6 @@
     "trailhead_chance": 1,
     "trailhead_road_distance": 6,
     "trailheads": [ [ "trailhead_basic", 1 ], [ "trailhead_outhouse", 1 ], [ "trailhead_shack", 1 ] ]
-  },
-  {
-    "type": "region_settings_forest_trail",
-    "id": "no_forest_trails",
-    "copy-from": "default",
-    "chance": 0
   },
   {
     "type": "region_settings_forest_mapgen",
@@ -258,21 +233,21 @@
     "terrain_furniture": { "t_water_murky": { "chance": 2, "furniture": [ [ "f_region_water_plant", 1 ] ] } }
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "trees_forest",
     "sequence": 0,
     "chance": 12,
     "types": [ [ "t_region_tree_forest", 128 ], [ "t_tree_young", 32 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "shrubs_and_flowers_forest",
     "sequence": 1,
     "chance": 10,
     "types": [ [ "t_region_shrub_forest", 120 ], [ "t_tree_young", 10 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "clutter_forest",
     "sequence": 2,
     "chance": 80,
@@ -288,28 +263,28 @@
     ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "water_forest",
     "sequence": 3,
     "chance": 512,
     "types": [ [ "t_puddle", 1 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "trees_forest_thick",
     "copy-from": "trees_forest",
     "chance": 5,
     "types": [ [ "t_region_tree_forest_dense", 100 ], [ "t_tree_young", 5 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "shrubs_and_flowers_forest_thick",
     "copy-from": "shrubs_and_flowers_forest",
     "chance": 5,
     "types": [ [ "t_region_shrub_forest_dense", 130 ], [ "t_tree_young", 10 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "clutter_forest_thick",
     "copy-from": "clutter_forest",
     "chance": 64,
@@ -325,13 +300,13 @@
     ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "water_forest_thick",
     "copy-from": "water_forest",
     "//": "for ease of mod copies"
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "trees_forest_water",
     "copy-from": "trees_forest",
     "chance": 45,
@@ -370,21 +345,21 @@
     ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "shrubs_and_flowers_forest_water",
     "copy-from": "shrubs_and_flowers_forest",
     "chance": 15,
     "types": [ [ "t_region_shrub_swamp", 80 ], [ "f_region_forest_water", 30 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "clutter_forest_water",
     "copy-from": "clutter_forest",
     "chance": 75,
     "types": [ [ "t_trunk", 1 ], [ "f_boulder_small", 2 ], [ "f_boulder_medium", 1 ] ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "water_forest_water",
     "copy-from": "water_forest",
     "chance": 2,
@@ -933,6 +908,7 @@
       [ "mx_mass_grave", 5 ],
       [ "mx_portal", 3 ],
       [ "mx_portal_in", 3 ],
+      [ "mx_mass_grave_jabberwock", 2 ],
       [ "mx_jabberwock", 1 ],
       [ "mx_helicopter", 1 ],
       [ "mx_beehive_natural", 30 ]
@@ -987,6 +963,7 @@
       [ "mx_crater", 150 ],
       [ "mx_nest_wasp", 50 ],
       [ "mx_mass_grave", 50 ],
+      [ "mx_mass_grave_jabberwock", 1 ],
       [ "mx_grave", 50 ],
       [ "mx_Trapdoor_spider_den", 50 ],
       [ "mx_collegekids", 30 ],
@@ -1146,6 +1123,7 @@
       [ "mx_casings", 200 ],
       [ "mx_nest_wasp", 50 ],
       [ "mx_mass_grave", 50 ],
+      [ "mx_mass_grave_jabberwock", 2 ],
       [ "mx_grave", 50 ],
       [ "mx_supplydrop", 2 ],
       [ "mx_Trapdoor_spider_den", 40 ],

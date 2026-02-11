@@ -398,9 +398,6 @@ void DynamicDataLoader::initialize()
     add( "map_extra", &MapExtras::load );
     add( "omt_placeholder", &map_data_placeholders::load );
 
-    add( "region_settings", &load_region_settings );
-    add( "region_overlay", &load_region_overlay );
-
     add( "region_settings_river", &region_settings_river::load_region_settings_river );
     add( "region_settings_lake", &region_settings_lake::load_region_settings_lake );
     add( "region_settings_ocean", &region_settings_ocean::load_region_settings_ocean );
@@ -419,14 +416,14 @@ void DynamicDataLoader::initialize()
          &region_settings_forest_mapgen::load_region_settings_forest_mapgen );
     add( "region_settings_map_extras",
          &region_settings_map_extras::load_region_settings_map_extras );
-    add( "forest_biome_feature",
-         &forest_biome_feature::load_forest_biome_feature );
+    add( "forest_biome_component",
+         &forest_biome_component::load_forest_biome_feature );
     add( "forest_biome_mapgen",
          &forest_biome_mapgen::load_forest_biome_mapgen );
     add( "map_extra_collection",
          &map_extra_collection::load_map_extra_collection );
-    add( "region_settings_new", &region_settings::load_region_settings );
-    add( "region_overlay_new", &region_overlay_new::load_region_overlay_new );
+    add( "region_settings", &region_settings::load_region_settings );
+    add( "region_overlay", &region_overlay::load_region_overlay_new );
 
     add( "ITEM_BLACKLIST", []( const JsonObject & jo ) {
         item_controller->load_item_blacklist( jo );
@@ -712,11 +709,11 @@ void DynamicDataLoader::unload_data()
     region_terrain_furniture::reset();
     region_settings_forest_mapgen::reset();
     region_settings_map_extras::reset();
-    forest_biome_feature::reset();
+    forest_biome_component::reset();
     forest_biome_mapgen::reset();
     map_extra_collection::reset();
     region_settings::reset();
-    region_overlay_new::reset();
+    region_overlay::reset();
     reset_monster_adjustment();
     recipe_dictionary::reset();
     recipe_group::reset();
@@ -731,7 +728,6 @@ void DynamicDataLoader::unload_data()
     reset_mod_tileset();
     reset_overlay_ordering();
     reset_recipe_categories();
-    reset_region_settings();
     reset_scenarios_blacklist();
     reset_speech();
     rotatable_symbols::reset();
@@ -877,7 +873,7 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
             { _( "Proficiency Categories" ), &proficiency_category::finalize_all },
             { _( "Qualities" ), &quality::finalize_all },
             { _( "Recipe Groups" ), &recipe_group::finalize },
-            { _( "Region Overlays" ), &region_overlay_new::finalize_all },
+            { _( "Region Overlays" ), &region_overlay::finalize_all },
             { _( "Region Settings" ), &region_settings::finalize_all },
             { _( "Relic Procedural Generations" ), &relic_procgen_data::finalize_all },
             { _( "Speed Descriptions" ), &speed_description::finalize_all },
@@ -968,7 +964,6 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
             { _( "Climbing aid" ), &climbing_aid::check_consistency },
             { _( "Mutations" ), &mutation_branch::check_consistency },
             { _( "Mutation categories" ), &mutation_category_trait::check_consistency },
-            { _( "Region settings" ), check_region_settings },
             { _( "Overmap land use codes" ), &overmap_land_use_codes::check_consistency },
             { _( "Overmap connections" ), &overmap_connections::check_consistency },
             { _( "Overmap terrain" ), &overmap_terrains::check_consistency },

@@ -501,27 +501,6 @@
   },
   {
     "type": "ITEM",
-    "id": "sewage",
-    "subtypes": [ "COMESTIBLE" ],
-    "name": { "str_sp": "sewage sample" },
-    "material": [ "water", "feces" ],
-    "weight": "280 g",
-    "color": "brown",
-    "container": "bottle_plastic",
-    "sealed": false,
-    "symbol": "~",
-    "description": "A sample of sewage from a treatment plant.  Disgusting, why would anyone want this?",
-    "price": "0 cent",
-    "comestible_type": "INVALID",
-    "flags": [ "INEDIBLE" ],
-    "charges": 1,
-    "price_postapoc": "0 cent",
-    "volume": "250 ml",
-    "phase": "liquid",
-    "category": "chems"
-  },
-  {
-    "type": "ITEM",
     "subtypes": [ "AMMO" ],
     "id": "chem_aluminium_powder",
     "category": "chems",
@@ -2243,6 +2222,9 @@
     "name": { "str_sp": "foul acidic blood" },
     "symbol": "~",
     "color": "red",
+    "//": "weight and freezing temp adjusted assuming the acid is diluted by essentially 50% water",
+    "weight": "352 g",
+    "freezing_point": -18,
     "description": "Blood mixed with acidic compounds, foul-smelling and extremely corrosive, a means of refining this could net some useful chemicals."
   }
 ]

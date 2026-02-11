@@ -111,7 +111,7 @@
     "components": [ "water_forest_water_innawood" ]
   },
   {
-    "type": "forest_biome_feature",
+    "type": "forest_biome_component",
     "id": "water_forest_water_innawood",
     "copy-from": "water_forest_water",
     "types": [ [ "t_swater_sh", 6 ], [ "t_swater_dp", 1 ], [ "t_water_murky", 12 ] ]
@@ -124,13 +124,16 @@
     "extend": { "biomes": [ "biome_forest_water_innawood" ] }
   },
   {
-    "type": "region_settings_new",
+    "type": "region_settings",
     "id": "default_innawood",
     "copy-from": "default",
+    "cities": null,
+    "highways": null,
     "forest_trails": "default_innawood",
     "forest_composition": "default_innawood",
     "map_extras": "default_innawood",
     "terrain_furniture": "default_innawood",
+    "place_roads": false,
     "feature_flag_settings": { "blacklist": [ "LAB", "MAN_MADE", "MILITARY", "URBAN", "FARM", "EXODII" ], "whitelist": [  ] }
   }
 ]

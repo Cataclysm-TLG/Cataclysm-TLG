@@ -26,6 +26,7 @@
 #include "regional_settings.h"
 #include "rng.h"
 #include "simple_pathfinding.h"
+#include "text_snippets.h"
 #include "type_id.h"
 
 static const oter_str_id oter_road_nesw( "road_nesw" );
@@ -66,7 +67,7 @@ void overmap::place_cities()
 {
     int op_city_spacing = get_option<int>( "CITY_SPACING" );
     int op_city_size = get_option<int>( "CITY_SIZE" );
-    int max_urbanity = get_option<int>( "OVERMAP_MAXIMUM_URBANITY" );
+    int max_urbanity = settings->max_urban;
     if( op_city_size <= 0 ) {
         return;
     }
@@ -136,7 +137,7 @@ void overmap::place_cities()
         placement_attempts++;
 
         tripoint_om_omt p;
-        city tmp;
+        city tmp( SNIPPET.expand( settings->get_settings_city().name_snippet ) );
         tmp.pos_om = pos();
         if( use_random_cities ) {
             // randomly make some cities smaller or larger
@@ -281,7 +282,8 @@ overmap_special_id overmap::pick_random_building_to_place( int town_dist, int to
 pf::directed_path<point_om_omt> overmap::lay_out_street( const overmap_connection &connection,
         const point_om_omt &source, om_direction::type dir, size_t len )
 {
-    const int &highway_width = settings->get_settings_highway().width_of_segments;
+    const int &highway_width = settings->overmap_highway ?
+                               settings->get_settings_highway().width_of_segments : 0;
     auto valid_placement = [this]( const overmap_connection & connection, const tripoint_om_omt pos,
     om_direction::type dir ) {
         if( !inbounds( pos, 1 ) ) {

@@ -300,7 +300,7 @@ static const itype_id itype_towel( "towel" );
 static const itype_id itype_towel_wet( "towel_wet" );
 static const itype_id itype_water( "water" );
 static const itype_id itype_water_clean( "water_clean" );
-static const itype_id itype_water_purifying( "water_purifying" );
+static const itype_id itype_water_purifying_active( "water_purifying_active" );
 static const itype_id itype_wax( "wax" );
 static const itype_id itype_weather_reader( "weather_reader" );
 
@@ -1767,18 +1767,19 @@ std::optional<int> iuse::remove_all_mods( Character *p, item *, const tripoint_b
 
 static bool good_fishing_spot( const tripoint_bub_ms &pos, Character *p )
 {
-    std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub( 60, pos );
+    std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub(
+                MAX_VIEW_DISTANCE, pos );
     std::vector<monster *> fishables = g->get_fishable_monsters( fishable_locations );
     map &here = get_map();
     // isolated little body of water with no definite fish population
     const oter_id &cur_omt =
         overmap_buffer.ter( coords::project_to<coords::omt>( here.get_abs( pos ) ) );
-    std::string om_id = cur_omt.id().c_str();
     if( fishables.empty() && !here.has_flag( ter_furn_flag::TFLAG_CURRENT, pos ) &&
         // this is a ridiculous way to find a good fishing spot, but I'm just trying
         // to do oceans right now.  Maybe is_water_body() would be better?
         // if you find this comment still here and it's later than 2025, LOL.
-        om_id.find( "river_" ) == std::string::npos && !cur_omt->is_lake() && !cur_omt->is_ocean() &&
+        is_ot_match( "river_", cur_omt, ot_match_type::contains ) &&
+        !cur_omt->is_lake() && !cur_omt->is_ocean() &&
         !cur_omt->is_lake_shore() && !cur_omt->is_ocean_shore() ) {
         p->add_msg_if_player( m_info, _( "You doubt you will have much luck catching fish here." ) );
         return false;
@@ -1810,7 +1811,7 @@ std::optional<int> iuse::fishing_rod( Character *p, item *it, const tripoint_bub
     p->add_msg_if_player( _( "You cast your line and wait to hook something…" ) );
     p->assign_activity( ACT_FISH, to_moves<int>( 5_hours ), 0, 0, it->tname() );
     p->activity.targets.emplace_back( *p, it );
-    p->activity.coord_set = g->get_fishable_locations_abs( 60, *found );
+    p->activity.coord_set = g->get_fishable_locations_abs( MAX_VIEW_DISTANCE, *found );
     return 0;
 }
 
@@ -1910,7 +1911,8 @@ std::optional<int> iuse::fish_trap_tick( Character *p, item *it, const tripoint_
         }
 
         //get the fishables around the trap's spot
-        std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub( 60, pos );
+        std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub(
+                    MAX_VIEW_DISTANCE, pos );
         std::vector<monster *> fishables = g->get_fishable_monsters( fishable_locations );
         for( int i = 0; i < fishes; i++ ) {
             player.practice( skill_survival, rng( 3, 10 ) );
@@ -2228,7 +2230,8 @@ class exosuit_interact
                 amenu.addentry( -1, true, MENU_AUTOASSIGN, _( "Unload everything from this %s" ),
                                 get_pocket_name( pkt ) );
                 amenu.addentry( -1, true, MENU_AUTOASSIGN, _( "Replace the %s" ), mod_name );
-                amenu.addentry( -1, mod_it->has_relic_activation() || mod_it->type->has_use(), MENU_AUTOASSIGN,
+                amenu.addentry( -1, ( mod_it->has_relic_activation() && mod_it->can_use_relic( c ) ) ||
+                                mod_it->type->has_use(), MENU_AUTOASSIGN,
                                 mod_it->active ? _( "Deactivate the %s" ) : _( "Activate the %s" ), mod_name );
                 amenu.addentry( -1, mod_it->is_reloadable() && c.can_reload( *mod_it ), MENU_AUTOASSIGN,
                                 _( "Reload the %s" ), mod_name );
@@ -2529,7 +2532,8 @@ std::optional<int> iuse::purify_water( Character *p, item *purifier, item_locati
     p->mod_moves( -req_moves );
 
     for( item *water : liquids ) {
-        water->convert( itype_water_purifying, p ).poison = 0;
+        water->convert( itype_water_purifying_active, p ).poison = 0;
+        water->convert( itype_water_purifying_active, p ).active = 1;
         water->set_birthday( calendar::turn );
     }
     // We've already consumed the tablets, so don't try to consume them again
