@@ -21,7 +21,7 @@
 #include "string_formatter.h"
 #include "string_input_popup.h"
 #include "translations.h"
-#include "uilist.h"
+#include "ui.h"
 #include "ui_manager.h"
 
 static const zone_type_id zone_type_LOOT_CUSTOM( "LOOT_CUSTOM" );

@@ -4549,7 +4549,7 @@ void overmap::spawn_mongroup( const tripoint_om_sm &p, const mongroup_id &type, 
                     // Ran out of space on the submap!
                     return;
                 }
-                hordes.spawn_entity( project_combine( pos(), *open_space ), result.id );
+                hordes.spawn_entity( project_combine( pos(), *open_space ), result.name );
             }
         }
     }
