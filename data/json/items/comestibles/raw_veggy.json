@@ -542,7 +542,13 @@
     "plant_name": "garlic",
     "fruit": "garlic",
     "byproducts": [ "withered" ],
-    "grow": "65 days"
+    "growth_stages": [
+      { "GROWTH_SEED": "17 days" },
+      { "GROWTH_SEEDLING": "16 days" },
+      { "GROWTH_MATURE": "16 days" },
+      { "GROWTH_HARVEST": "16 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ]
   },
   {
     "type": "ITEM",
