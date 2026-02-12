@@ -1278,8 +1278,15 @@ double vehicle::hit_probability( const item &it, const vehicle_part *vp_wheel )
        here with volume/length, using rng and a 0.001 multiplier to simulate
        random orientation. Running over stuff isn't dangerous, it's hitting it
        at the wrong angle that blows your tires. */
+
+    // I don't feel like figuring out how to std::max length right now, so guard
+    // against division by zero.
+    units::length length = it.length();
+    if( length < 1_mm ) {
+        length = 1_mm;
+    }
     const double item = ( units::to_milliliter( it.volume() ) * 1000.0 /
-                          std::max( to_millimeter( it.length() ), 1.0 ) ) *
+                          units::to_millimeter( length ) ) *
                         0.001 * rng( 0.5, 1.0 );
 
     return std::min( wheel + item, 1.0 );
