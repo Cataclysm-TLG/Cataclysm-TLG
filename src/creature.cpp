@@ -631,11 +631,11 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     }
 
     // Camouflage or Water Camouflage checks
-    if( has_camouflage && target_range > this->get_eff_per() ) {
+    if( has_camouflage && target_range > this->spot_check() ) {
         return false;
     }
 
-    if( has_water_camouflage && target_range > this->get_eff_per() ) {
+    if( has_water_camouflage && target_range > this->spot_check() ) {
         if( is_underwater ||
             here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, critter.pos_bub( here ) ) ||
             ( here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, critter.pos_bub( here ) ) &&
@@ -2534,7 +2534,7 @@ int Creature::get_speed() const
     return get_speed_base() + get_speed_bonus();
 }
 
-int Creature::get_eff_per() const
+int Creature::spot_check() const
 {
     return 0;
 }

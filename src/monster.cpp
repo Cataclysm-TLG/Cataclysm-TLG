@@ -1737,8 +1737,9 @@ int monster::hp_percentage() const
     return get_hp( bodypart_id( "torso" ) ) * 100 / get_hp_max();
 }
 
-int monster::get_eff_per() const
+int monster::spot_check() const
 {
+    // FIXME: this sucks???
     return std::min( type->vision_night, type->vision_day );
 }
 

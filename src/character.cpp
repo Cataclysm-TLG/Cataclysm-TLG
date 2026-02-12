@@ -4733,11 +4733,16 @@ int Character::get_arm_str() const
     return str_cur * get_modifier( character_modifier_limb_str_mod );
 }
 
-int Character::get_eff_per() const
+int Character::spot_check() const
 {
+    float vision_score = get_limb_score( limb_score_vision );
+    if( fine_detail_vision_mod() > 4 ) {
+        vision_score = std::min( get_limb_score( limb_score_vision ),
+                                 get_limb_score( limb_score_night_vis ) );
+    }
     return ( Character::get_per() + int( Character::has_proficiency(
             proficiency_prof_spotting ) ) *
-             Character::get_per_base() ) * get_limb_score( limb_score_vision ) ;
+             Character::get_per_base() ) * vision_score ;
 }
 
 int Character::ranged_dex_mod() const

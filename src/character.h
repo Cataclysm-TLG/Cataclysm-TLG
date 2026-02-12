@@ -682,7 +682,7 @@ class Character : public Creature, public visitable
         // Strength modified by limb lifting score
         int get_arm_str() const;
         // Defines distance from which CAMOUFLAGE mobs are visible
-        int get_eff_per() const override;
+        int spot_check() const override;
 
         // Penalty modifiers applied for ranged attacks due to low stats
         int ranged_dex_mod() const;

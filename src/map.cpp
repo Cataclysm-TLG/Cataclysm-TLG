@@ -178,6 +178,8 @@ static const material_id material_glass( "glass" );
 
 static const mtype_id mon_zombie( "mon_zombie" );
 
+static const skill_id skill_driving( "driving" );
+
 static const species_id species_FERAL( "FERAL" );
 
 static const ter_str_id ter_t_bars( "t_bars" );
@@ -3956,7 +3958,10 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
             i++;
             continue;
         }
-
+        float driver_skill = 0.f;
+        if( veh->get_driver( *this ) != nullptr ) {
+            driver_skill = veh->get_driver( *this ).get_skill( skill_driving );
+        }
         if( vp_wheel != nullptr && vehicle::hit_probability( *i, vp_wheel ) < rng_float( 0.0, 1.0 ) ) {
             // The wheel missed the item.
             continue;
