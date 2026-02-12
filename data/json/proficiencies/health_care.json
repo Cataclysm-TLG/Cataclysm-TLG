@@ -8,7 +8,7 @@
     "can_learn": true,
     "default_time_multiplier": 2,
     "default_skill_penalty": 0.25,
-    "time_to_learn": "12 h"
+    "time_to_learn": "9 h"
   },
   {
     "type": "proficiency",
@@ -19,8 +19,7 @@
     "can_learn": true,
     "default_time_multiplier": 2,
     "default_skill_penalty": 0.25,
-    "time_to_learn": "12 h",
-    "required_proficiencies": [ "prof_wound_care" ]
+    "time_to_learn": "9 h"
   },
   {
     "type": "proficiency",
