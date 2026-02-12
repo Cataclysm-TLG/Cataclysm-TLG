@@ -91,7 +91,7 @@
       { "monster": "mon_zombie_fiend", "weight": 5, "cost_multiplier": 5 }
     ]
   },
-    {
+  {
     "type": "monstergroup",
     "name": "GROUP_ZOMBIE_HORDE",
     "monsters": [

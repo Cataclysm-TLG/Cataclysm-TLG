@@ -34,8 +34,16 @@
     "extend": {
       "shops": [
         [ "s_hunting", 300 ],
-        [ "s_gun_a", 350 ],
-        [ "s_gun_b", 150 ],
+        [ "s_gun", 100 ],
+        [ "s_gun_looted", 100 ],
+        [ "s_gun_1", 100 ],
+        [ "s_gun_2", 100 ],
+        [ "s_gun_3", 100 ],
+        [ "s_gun_3_looted", 100 ],
+        [ "s_gun_4", 100 ],
+        [ "s_gun_4_looted", 100 ],
+        [ "s_gunstore", 100 ],
+        [ "s_gunstore_looted", 100 ],
         [ "mil_surplus", 20 ],
         [ "mil_surplus_1", 20 ],
         [ "mil_surplus_2", 20 ]

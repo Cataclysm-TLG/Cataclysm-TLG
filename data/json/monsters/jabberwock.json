@@ -88,8 +88,9 @@
     "bleed_rate": 40,
     "vision_day": 50,
     "vision_night": 3,
-    "special_attacks": [ [ "FLESH_GOLEM", 5 ],
-  {
+    "special_attacks": [
+      [ "FLESH_GOLEM", 5 ],
+      {
         "type": "monster_attack",
         "attack_type": "bite",
         "id": "bite_jabberwock_1",
@@ -121,7 +122,8 @@
       },
       { "id": "grab", "cooldown": 4 },
       { "id": "grab_2", "cooldown": 4 },
-      { "id": "grab_3", "cooldown": 4 } ],
+      { "id": "grab_3", "cooldown": 4 }
+    ],
     "zombify_into": "mon_meat_cocoon_large",
     "harvest": "jabberwock",
     "dissect": "dissect_mon_jabberwock",
