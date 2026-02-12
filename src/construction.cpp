@@ -1805,7 +1805,6 @@ void construct::done_deconstruct( const tripoint_bub_ms &p, Character &player_ch
         }
         add_msg( _( "The %s is disassembled." ), f.name() );
         item &item_here = here.i_at( p ).size() != 1 ? null_item_reference() : here.i_at( p ).only_item();
-        std::vector<item *> drop;
         const std::vector<item *> drop = here.spawn_items( p,
                                          item_group::items_from( f.deconstruct->drop_group, calendar::turn ) );
         if( f.deconstruct->skill.has_value() ) {

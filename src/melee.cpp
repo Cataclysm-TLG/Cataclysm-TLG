@@ -2141,7 +2141,7 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
 
         valid_aoe_technique( t, technique, targets );
 
-        //hit only one valid target (pierce through doesn't spread out)
+        // Hit only one valid target (stabbing through doesn't spread out)
         if( technique.aoe == "impale" ) {
             // TODO: what if targets is empty
             Creature *const v = random_entry( targets );
