@@ -66,11 +66,7 @@ void specific_energy::serialize( JsonOut &jsout ) const
 template<>
 void specific_energy::deserialize( const JsonValue &jv )
 {
-    std::optional<double> v = svtod( jv.get_string() );
-    if( !v.has_value() ) {
-        jv.throw_error( "Invalid double" );
-    }
-    *this = units::from_joule_per_gram( v.value() );
+    *this = units::from_joule_per_gram( std::stof( jv.get_string() ) );
 }
 
 // both of these are gross, but they kind of need to be.
@@ -102,12 +98,8 @@ void temperature_delta::deserialize( const JsonValue &jv )
     if( jv.test_int() ) {
         *this = from_legacy_bodypart_temp_delta( jv.get_int() );
     } else {
-        // gross
-        std::optional<double> v = svtod( jv.get_string() );
-        if( !v.has_value() ) {
-            jv.throw_error( "Invalid double" );
-        }
-        *this = from_kelvin_delta( v.value() );
+        // super gross
+        *this = from_kelvin_delta( std::stof( jv.get_string() ) );
     }
 }
 

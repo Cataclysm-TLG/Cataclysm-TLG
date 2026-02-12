@@ -917,7 +917,7 @@ std::string io::enum_to_string<aggregate_type>( aggregate_type agg )
     cata_fatal( "Invalid aggregate type." );
 }
 
-std::optional<double> svtod( std::string_view token, bool debugmsg_on_fail )
+std::optional<double> svtod( std::string_view token )
 {
     char *pEnd = nullptr;
     double const val = std::strtod( token.data(), &pEnd );
@@ -931,9 +931,7 @@ std::optional<double> svtod( std::string_view token, bool debugmsg_on_fail )
         unlocalized[pEnd - token.data()] = block == ',' ? '.' : ',';
         return svtod( unlocalized );
     }
-    if( debugmsg_on_fail ) {
-        debugmsg( R"(Failed to convert string value "%s" to double: %s)", token, std::strerror( errno ) );
-    }
+    debugmsg( R"(Failed to convert string value "%s" to double: %s)", token, std::strerror( errno ) );
 
     errno = 0;
 

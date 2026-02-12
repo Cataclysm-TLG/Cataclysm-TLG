@@ -1,15 +1,3 @@
-#include <algorithm>
-#include <map>
-#include <memory>
-#include <optional>
-#include <ostream>
-#include <set>
-#include <string>
-#include <utility>
-#include <vector>
-
-#include "calendar.h"
-#include "cata_utility.h"
 #include "character.h"
 #include "input_context.h"
 #include "output.h"
@@ -113,14 +101,14 @@ void prof_window::filter()
     }
     float prog_val = 0.0f;
     if( prefix == _prof_filter_prefix::AS_PROGRESS ) {
-        std::optional<double> v = svtod( qry, false );
-        if( !v.has_value() ) {
+        try {
+            prog_val = std::stof( qry );
+        } catch( const std::invalid_argument &e ) {
             // User mistyped query. Not severe enough for debugmsg.
             DebugLog( DebugLevel::D_WARNING, DebugClass::D_GAME ) <<
-                    "Malformed proficiency query \"" << filter_str << "\"";
+                    "Malformed proficiency query \"" << filter_str << "\": " << e.what();
             return;
         }
-        prog_val = v.value();
     }
     for( display_prof_deps &dp : all_profs ) {
         if( prefix == _prof_filter_prefix::AS_PROGRESS ) {

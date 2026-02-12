@@ -362,12 +362,7 @@ void diag_value::deserialize( const JsonValue &jsin )
             // inf and nan
             std::string str;
             jo.read( "dbl", str );
-            std::optional<double> opt = svtod( str );
-            if( !opt.has_value() ) {
-                jo.allow_omitted_members();
-                jo.throw_error( "Invalid dbl value" );
-            }
-            data = opt.value();
+            data = std::stof( str );
         } else {
             jo.allow_omitted_members();
             throw JsonError( "invalid diag_value object" );
