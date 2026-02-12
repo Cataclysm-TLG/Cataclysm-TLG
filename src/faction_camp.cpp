@@ -1358,7 +1358,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
                        "Intensity: Moderate\n"
                        "Time: 1 Min / Plot\n"
                        "Positions: 0/1\n" );
-            
+
             const tripoint_abs_omt target_omt = omt_pos + dir;
             const tripoint_bub_ms target_pnt = get_map().get_bub( project_to<coords::ms>( target_omt ) );
             // FIXME/HACK: Always checks buckwheat seeds!

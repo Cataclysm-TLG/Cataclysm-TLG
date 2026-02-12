@@ -291,6 +291,7 @@ void DynamicDataLoader::initialize()
     add( "profession_item_substitutions", &profession::load_item_substitutions );
     add( "proficiency", &proficiency::load_proficiencies );
     add( "proficiency_category", &proficiency_category::load_proficiency_categories );
+    add( "proficiency_migration", &proficiency_migration::load );
     add( "speed_description", &speed_description::load_speed_descriptions );
     add( "mood_face", &mood_face::load_mood_faces );
     add( "skill", &Skill::load_skill );
@@ -423,7 +424,6 @@ void DynamicDataLoader::initialize()
     add( "map_extra_collection",
          &map_extra_collection::load_map_extra_collection );
     add( "region_settings", &region_settings::load_region_settings );
-    add( "region_overlay", &region_overlay::load_region_overlay_new );
 
     add( "ITEM_BLACKLIST", []( const JsonObject & jo ) {
         item_controller->load_item_blacklist( jo );
@@ -694,6 +694,7 @@ void DynamicDataLoader::unload_data()
     profession_blacklist::reset();
     proficiency::reset();
     proficiency_category::reset();
+    proficiency_migration::reset();
     mood_face::reset();
     speed_description::reset();
     quality::reset();
@@ -713,7 +714,6 @@ void DynamicDataLoader::unload_data()
     forest_biome_mapgen::reset();
     map_extra_collection::reset();
     region_settings::reset();
-    region_overlay::reset();
     reset_monster_adjustment();
     recipe_dictionary::reset();
     recipe_group::reset();
@@ -873,7 +873,6 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
             { _( "Proficiency Categories" ), &proficiency_category::finalize_all },
             { _( "Qualities" ), &quality::finalize_all },
             { _( "Recipe Groups" ), &recipe_group::finalize },
-            { _( "Region Overlays" ), &region_overlay::finalize_all },
             { _( "Region Settings" ), &region_settings::finalize_all },
             { _( "Relic Procedural Generations" ), &relic_procgen_data::finalize_all },
             { _( "Speed Descriptions" ), &speed_description::finalize_all },
@@ -943,6 +942,7 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
             { _( "Items" ), &items::check_consistency },
             { _( "Materials" ), &materials::check },
             { _( "Faults" ), &faults::check_consistency },
+            { _( "Proficiency migration" ), &proficiency_migration::check },
             { _( "Vehicle parts" ), &vehicles::parts::check },
             { _( "Vehicle part migrations" ), &vpart_migration::check },
             { _( "Mapgen definitions" ), &check_mapgen_definitions },

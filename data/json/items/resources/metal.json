@@ -48,7 +48,7 @@
     "symbol": ";",
     "material": [ "steel" ],
     "volume": "250 ml",
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "ALLOWS_BODY_BLOCK", "DAMAGE_VEHICLE_WHEELS" ],
     "qualities": [ [ "BUTCHER", -42 ] ],
     "price_postapoc": "10 cent",
     "melee_damage": { "bash": 2, "stab": 6 },

@@ -2844,7 +2844,7 @@ void item::ammo_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
                                multiplier );
         }
         if( parts->test( iteminfo_parts::AMMO_DAMAGE_AP ) ) {
-            info.emplace_back( "AMMO", space + _( "Armor-pierce: " ), get_ranged_pierce( ammo ) );
+            info.emplace_back( "AMMO", space + _( "Armor penetration: " ), get_ranged_pierce( ammo ) );
         }
         if( parts->test( iteminfo_parts::AMMO_DAMAGE_RANGE ) ) {
             info.emplace_back( "AMMO", _( "Range: " ), "<num>" + space,
@@ -3115,7 +3115,7 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
     }
 
     if( parts->test( iteminfo_parts::GUN_ARMORPIERCE ) ) {
-        info.emplace_back( "GUN", _( "Armor-pierce: " ), "",
+        info.emplace_back( "GUN", _( "Armor penetration: " ), "",
                            iteminfo::no_newline, get_ranged_pierce( gun ) + ammo_pierce );
     }
     info.back().bNewLine = true;
@@ -3415,7 +3415,7 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
     }
     int pierce = get_ranged_pierce( mod );
     if( get_ranged_pierce( mod ) != 0 && parts->test( iteminfo_parts::GUNMOD_ARMORPIERCE ) ) {
-        info.emplace_back( "GUNMOD", _( "Armor-pierce: " ), "", iteminfo::show_plus,
+        info.emplace_back( "GUNMOD", _( "Armor penetration: " ), "", iteminfo::show_plus,
                            pierce );
     }
     if( mod.to_hit_mod != 0 && parts->test( iteminfo_parts::GUNMOD_TO_HIT_MODIFIER ) ) {
