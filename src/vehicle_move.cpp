@@ -1287,7 +1287,7 @@ double vehicle::hit_probability( const item &it, const vehicle_part *vp_wheel )
     }
     const double item = ( units::to_milliliter( it.volume() ) * 1000.0 /
                           units::to_millimeter( length ) ) *
-                        0.001 * rng( 0.5, 1.0 );
+                        0.001 * rng_float( 0.5, 1.0 );
 
     return std::min( wheel + item, 1.0 );
 }

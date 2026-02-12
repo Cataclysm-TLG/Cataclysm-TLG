@@ -3956,11 +3956,11 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
     float driver_skill = 0.f;
     float driver_spot = 0.f;
     float avoidance = 0.f;
-    if( veh != nullptr && veh->get_driver(*this) != nullptr ) {
-        driver_skill = veh->get_driver(*this)->get_skill_level(skill_driving);
-        driver_spot  = veh->get_driver(*this)->spot_check();
+    if( veh != nullptr && veh->get_driver( *this ) != nullptr ) {
+        driver_skill = veh->get_driver( *this )->get_skill_level( skill_driving );
+        driver_spot  = veh->get_driver( *this )->spot_check();
         avoidance = driver_skill * 0.02f + driver_spot * 0.01f;
-        avoidance = std::min(avoidance, 0.75f);
+        avoidance = std::min( avoidance, 0.75f );
     }
 
     for( auto i = items.begin(); i != items.end() && power > 0; ) {
@@ -3971,10 +3971,10 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
 
         if( vp_wheel != nullptr ) {
             // Base chance for the wheel to hit the item.
-            float hit_chance = vehicle::hit_probability(*i, vp_wheel);
-            float effective_hit = hit_chance * (1.f - avoidance);
+            float hit_chance = vehicle::hit_probability( *i, vp_wheel );
+            float effective_hit = hit_chance * ( 1.f - avoidance );
 
-            if( rng_float(0.f, 1.f) >= effective_hit ) {
+            if( rng_float( 0.f, 1.f ) >= effective_hit ) {
                 // The wheel missed the item.
                 i++;
                 continue;
