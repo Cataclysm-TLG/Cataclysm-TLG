@@ -147,6 +147,8 @@ struct bash_params {
     bool destroy = false;
     // Do we want to bash floor if no furn/wall exists?
     bool bash_floor = false;
+    // Is the damage caused by fire? (burns flammable floors but prevents digging holes)
+    bool fire = false;
     /**
      * Value from 0.0 to 1.0 that affects interpolation between str_min and str_max
      * At 0.0, the bash is against str_min of targeted objects
@@ -1207,7 +1209,7 @@ class map
          * @param bashing_vehicle Vehicle that should NOT be bashed (because it is doing the bashing)
          */
         bash_params bash( const tripoint_bub_ms &p, int str, bool silent = false,
-                          bool destroy = false, bool bash_floor = false,
+                          bool destroy = false, bool bash_floor = false, bool fire = false,
                           const vehicle *bashing_vehicle = nullptr, bool crystalline_only = false );
 
         // Effects of attacks/items

@@ -291,24 +291,26 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
 
             if( bashed.count( dest ) == 0 ) {
                 // Up to 200% bonus for shaped charge
-                // But not if the explosion is fiery, then only half the force and no bonus
+                // But not if the explosion is fiery, then only half the force and no bonus.
                 const float bash_force = !fire ?
                                          force + ( 2 * force / empty_neighbors ) :
                                          force / 2;
 
                 if( z_offset[i] == 0 ) {
                     // Horizontal - no floor bashing.
-                    m->bash( dest, bash_force, true, false, false, nullptr );
+                    // Fire remains false for these bash() calls as that bool is for fire ONLY,
+                    // not fiery explosions.
+                    m->bash( dest, bash_force, true, false, false, false, nullptr );
                     record_if_empty_space( dest );
                 } else if( z_offset[i] > 0 ) {
                     // Bash upward through floor.
                     if( dest.z() <= MAX_Z ) {
-                        m->bash( dest, bash_force, true, false, true, nullptr );
+                        m->bash( dest, bash_force, true, false, true, false, nullptr );
                         record_if_empty_space( dest );
                     }
                 } else {
                     if( pt.z() > MIN_Z ) {
-                        m->bash( pt, bash_force, true, false, true, nullptr );
+                        m->bash( pt, bash_force, true, false, true, false, nullptr );
                         record_if_empty_space( pt );
                     }
                 }

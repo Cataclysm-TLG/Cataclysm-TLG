@@ -1083,10 +1083,10 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
         if( ret.type == veh_coll_bashable ) {
             // Something bashable -- use map::bash to determine outcome
             // NOTE: Floor bashing disabled for balance reasons
-            //       Floor values are still used to set damage dealt to vehicle
+            //       Floor values are still used to set damage dealt  to vehicle
             smashed = here.is_bashable_ter_furn( pos, false ) &&
                       here.bash_resistance( pos, bash_floor ) <= obj_dmg &&
-                      here.bash( pos, obj_dmg, false, false, false, this ).success;
+                      here.bash( pos, obj_dmg, false, false, false, false, this ).success;
             if( smashed ) {
                 if( here.is_bashable_ter_furn( pos, bash_floor ) ) {
                     // There's new terrain there to smash
