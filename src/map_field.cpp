@@ -1085,7 +1085,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
             smoke += static_cast<int>( windpower / 5 );
             if( cur.get_field_intensity() > 1 &&
                 one_in( 175 - cur.get_field_intensity() * 50 ) ) {
-                here.bash( p, 999, false, true, true );
+                here.bash( p, 999, false, true, true, true );
             }
 
         } else if( ter_furn_has_flag( ter, frn, ter_furn_flag::TFLAG_FLAMMABLE_HARD ) &&
@@ -1096,7 +1096,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
             smoke += static_cast<int>( windpower / 5 );
             if( cur.get_field_intensity() > 1 &&
                 one_in( 200 - cur.get_field_intensity() * 50 ) ) {
-                here.bash( p, 999, false, true, true );
+                here.bash( p, 999, false, true, true, true );
             }
 
         } else if( ter.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH ) ) {
@@ -1106,7 +1106,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
             smoke += static_cast<int>( windpower / 5 );
             if( cur.get_field_intensity() > 1 &&
                 one_in( 160 - cur.get_field_intensity() * 50 ) ) {
-                here.bash( p, 999, false, true, true );
+                here.bash( p, 999, false, true, true, true );
                 here.spawn_item( p, "ash", 1, rng( 10, 1000 ) );
             }
 

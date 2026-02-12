@@ -72,7 +72,7 @@
     "category": "spare_parts",
     "melee_damage": { "bash": 18 }
   },
-    {
+  {
     "type": "ITEM",
     "id": "soaking_long_pole_active",
     "name": { "str": "soaking long pole" },
@@ -94,7 +94,6 @@
     "qualities": [ [ "HAMMER", 1 ] ],
     "melee_damage": { "bash": 18 }
   },
-
   {
     "type": "ITEM",
     "id": "long_pole",
