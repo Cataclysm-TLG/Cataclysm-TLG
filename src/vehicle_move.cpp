@@ -1272,9 +1272,9 @@ static std::pair<double, double> item_hardness_calc( const item &it )
 
 double vehicle::hit_probability( const item &it, const vehicle_part *vp_wheel )
 {
-    // We don't have item widths, so just go with length. This will cause long narrow items to cover the maximum
-    // extent at all times, rather than account for orientation.
-    const double item_coverage = to_millimeter( it.length() ) / 1000.0;
+    // We don't have item widths, so just go with length. This would cause long narrow items to cover the maximum
+    // extent at all times, so divide it randomly to account for orientation/placement.
+    const double item_coverage = to_millimeter( it.length() ) / 1000.0 / rng( 1.0, 2.0 );
     // wheel width is in inches, so this scales it to a meter, i.e. the nominal width of a tile.
     const double wheel_coverage = vp_wheel->get_base().type->wheel->width * 0.0254;
     return std::min( wheel_coverage + item_coverage, 1.0 );
