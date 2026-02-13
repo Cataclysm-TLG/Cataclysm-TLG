@@ -78,7 +78,7 @@
       }
     ],
     "light": 15,
-    "flags": [ "RADIO_CONTAINER", "TRADER_AVOID", "RADIOCAR", "WATER_BREAK", "ELECTRONIC" ]
+    "flags": [ "RADIO_CONTAINER", "TRADER_AVOID", "RADIOCAR", "WATER_BREAK", "ELECTRONIC", "SPAWN_ACTIVE" ]
   },
   {
     "id": "radio_mod",
@@ -141,7 +141,7 @@
       { "type": "transform", "target": "radio", "ammo_scale": 0, "menu_text": "Turn off" }
     ],
     "tick_action": [ "RADIO_TICK" ],
-    "flags": [ "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC" ]
+    "flags": [ "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "SPAWN_ACTIVE" ]
   },
   {
     "id": "two_way_radio",

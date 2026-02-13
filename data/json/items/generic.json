@@ -289,6 +289,7 @@
     "ammo_type": "super_glue",
     "//": "1 charge of superglue should cover an area of 5mm^2",
     "count": 10,
+    "use_action": { "type": "heal", "bleed": 8, "move_cost": 3000 },
     "flags": [ "UNRECOVERABLE" ]
   },
   {
@@ -2912,7 +2913,7 @@
         "covers": [ "mouth" ]
       }
     ],
-    "flags": [ "LITCIG", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
+    "flags": [ "LITCIG", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE", "SPAWN_ACTIVE" ]
   },
   {
     "type": "ITEM",
@@ -2960,7 +2961,7 @@
         "covers": [ "mouth" ]
       }
     ],
-    "flags": [ "LITCIG", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
+    "flags": [ "LITCIG", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE", "SPAWN_ACTIVE" ]
   },
   {
     "type": "ITEM",
@@ -3008,7 +3009,7 @@
         "covers": [ "mouth" ]
       }
     ],
-    "flags": [ "LITCIG", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
+    "flags": [ "LITCIG", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE", "SPAWN_ACTIVE" ]
   },
   {
     "type": "ITEM",

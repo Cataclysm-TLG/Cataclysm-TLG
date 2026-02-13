@@ -60,6 +60,7 @@
 #include "item.h"
 #include "item_location.h"
 #include "item_pocket.h"
+#include "item_transformation.h"
 #include "iteminfo_query.h"
 #include "itype.h"
 #include "json.h"
@@ -300,6 +301,7 @@ static const itype_id itype_towel( "towel" );
 static const itype_id itype_towel_wet( "towel_wet" );
 static const itype_id itype_water( "water" );
 static const itype_id itype_water_clean( "water_clean" );
+static const itype_id itype_water_murky( "water_murky" );
 static const itype_id itype_water_purifying_active( "water_purifying_active" );
 static const itype_id itype_wax( "wax" );
 static const itype_id itype_weather_reader( "weather_reader" );
@@ -2498,7 +2500,7 @@ std::optional<int> iuse::purify_water( Character *p, item *purifier, item_locati
     }
 
     const std::vector<item *> liquids = water->items_with( []( const item & it ) {
-        return it.typeId() == itype_water;
+        return it.typeId() == itype_water || it.typeId() == itype_water_murky;
     } );
     int charges_of_water = 0;
     for( const item *water : liquids ) {
@@ -2533,7 +2535,6 @@ std::optional<int> iuse::purify_water( Character *p, item *purifier, item_locati
 
     for( item *water : liquids ) {
         water->convert( itype_water_purifying_active, p ).poison = 0;
-        water->convert( itype_water_purifying_active, p ).active = 1;
         water->set_birthday( calendar::turn );
     }
     // We've already consumed the tablets, so don't try to consume them again
@@ -2550,8 +2551,8 @@ std::optional<int> iuse::water_tablets( Character *p, item *it, const tripoint_b
 
     item_location obj = g->inv_map_splice( [&here]( const item_location & e ) {
         return ( !e->empty() && e->has_item_with( []( const item & it ) {
-            return it.typeId() == itype_water;
-        } ) ) || ( e->typeId() == itype_water &&
+            return it.typeId() == itype_water || it.typeId() == itype_water_murky;
+        } ) ) || ( ( e->typeId() == itype_water || e->typeId() == itype_water_murky ) &&
                    here.has_flag_furn( ter_furn_flag::TFLAG_LIQUIDCONT, e.pos_bub( here ) ) );
     }, _( "Purify what?" ), 1, _( "You don't have water to purify." ) );
 
@@ -3993,11 +3994,11 @@ std::optional<int> iuse::dive_tank( Character *p, item *it, const tripoint_bub_m
         if( it->ammo_remaining( ) == 0 ) {
             p->add_msg_if_player( m_bad, _( "Air in your %s runs out." ), it->tname() );
             it->erase_var( "overwrite_env_resist" );
-            it->convert( *it->type->revert_to ).active = false;
+            it->type->transform_into.value().transform( p, *it, true );
         }
     } else { // not worn = off thanks to on-demand regulator
         it->erase_var( "overwrite_env_resist" );
-        it->convert( *it->type->revert_to ).active = false;
+        it->type->transform_into.value().transform( p, *it, true );
     }
 
     return 1;
@@ -4010,7 +4011,7 @@ std::optional<int> iuse::dive_tank_activate( Character *p, item *it, const tripo
     } else if( it->active ) { //off
         p->add_msg_if_player( _( "You turn off the regulator and close the air valve." ) );
         it->erase_var( "overwrite_env_resist" );
-        it->convert( *it->type->revert_to ).active = false;
+        it->type->transform_into.value().transform( p, *it, true );
     } else { //on
         if( !p->is_worn( *it ) ) {
             p->add_msg_if_player( _( "You should wear it first." ) );

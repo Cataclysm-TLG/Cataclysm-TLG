@@ -1075,7 +1075,7 @@
         }
       ]
     },
-    "extend": { "flags": [ "MESSY", "TRADER_AVOID", "POWERED" ] },
+    "extend": { "flags": [ "MESSY", "TRADER_AVOID", "POWERED", "SPAWN_ACTIVE" ] },
     "relative": { "melee_damage": { "cut": 50 } }
   },
   {
@@ -1167,7 +1167,7 @@
         }
       ]
     },
-    "extend": { "flags": [ "MESSY", "TRADER_AVOID", "POWERED" ] },
+    "extend": { "flags": [ "MESSY", "TRADER_AVOID", "POWERED", "SPAWN_ACTIVE" ] },
     "relative": { "melee_damage": { "cut": 50 } }
   },
   {

@@ -1030,7 +1030,7 @@
     "revert_to": "shocktonfa_off",
     "use_action": [ "SHOCKTONFA_ON" ],
     "light": 300,
-    "flags": [ "CHARGEDIM", "DURABLE_MELEE", "TRADER_AVOID", "NONCONDUCTIVE", "BELT_CLIP" ],
+    "flags": [ "CHARGEDIM", "DURABLE_MELEE", "TRADER_AVOID", "NONCONDUCTIVE", "BELT_CLIP", "SPAWN_ACTIVE" ],
     "weapon_category": [ "BATONS", "KARATE_WEAPONS" ]
   },
   {

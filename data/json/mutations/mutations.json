@@ -2713,6 +2713,7 @@
     "description": "You've lost your fluffy undercoat for the summer.  This feels a lot better in the heat, but it's less protective and looks a little bedraggled.",
     "types": [ "SKIN" ],
     "prereqs": [ "FUR" ],
+    "valid": false,
     "integrated_armor": [ "integrated_ursine_fur_summer" ]
   },
   {
@@ -2741,6 +2742,7 @@
     "description": "Your entire body is covered in dense fur, but it's thinned out a bit for the summer, which may provide some relief from the heat at the cost of physical protection.",
     "types": [ "SKIN" ],
     "prereqs": [ "LIGHTFUR" ],
+    "valid": false,
     "integrated_armor": [ "integrated_lupine_fur_summer" ]
   },
   {
@@ -3282,6 +3284,7 @@
     "points": 3,
     "visibility": 5,
     "ugliness": 2,
+    "valid": false,
     "description": "In place of hair, you have long, grassy leaves which have gone dormant for the winter, turning dry and yellow like straw.  They help keep you warm, but that's about it.",
     "types": [ "HAIR" ],
     "leads_to": [ "LEAVES2", "LEAVES2_FALL", "LEAVES2_WINTER", "LEAVES3", "LEAVES3_FALL", "LEAVES3_WINTER" ],
@@ -3314,6 +3317,7 @@
     "points": 6,
     "visibility": 10,
     "ugliness": -1,
+    "valid": false,
     "description": "The leaves growing from your head and arms have taken on fall colors.  While pretty, they can't photosynthesize as well as the green ones.  Reduces wet effects.",
     "types": [ "HAIR" ],
     "threshreq": [ "THRESH_PLANT" ],
@@ -3328,6 +3332,7 @@
     "name": { "str": "Dead Lush Leaves" },
     "points": 6,
     "player_display": false,
+    "valid": false,
     "description": "You have no leaves because it's wintertime.  This keeps you warm by reducing heat loss, but you don't know that because you shouldn't be able to see this.",
     "types": [ "HAIR" ],
     "threshreq": [ "THRESH_PLANT" ],
@@ -3360,6 +3365,7 @@
     "points": 9,
     "visibility": 12,
     "ugliness": -4,
+    "valid": false,
     "description": "Your head and upper limbs are covered in beautiful autumn leaves.  If they're uncovered you'll still be able to photosynthesize, but not as well as in the warmer months.  Reduces wet effects.",
     "types": [ "HAIR" ],
     "threshreq": [ "THRESH_PLANT" ],
@@ -3373,6 +3379,7 @@
     "name": { "str": "Dead Verdant Leaves" },
     "points": 9,
     "player_display": false,
+    "valid": false,
     "description": "It's winter, so all your leaves are gone.  This keeps you warm by reducing heat loss, but you don't know that because you shouldn't be able to see this.",
     "types": [ "HAIR" ],
     "threshreq": [ "THRESH_PLANT" ],
@@ -3423,6 +3430,7 @@
     "points": 2,
     "description": "No flowers in wintertime.  As such this mutation is not supposed to be visible to the player.",
     "types": [ "SCENT" ],
+    "valid": false,
     "threshreq": [ "THRESH_PLANT", "THRESH_ELFA" ],
     "leads_to": [ "ROSEBUDS" ],
     "player_display": false
@@ -3452,6 +3460,7 @@
     "ugliness": -7,
     "description": "Your head is crowned with radiant flowers that spread their petals wide.  The dizzying fragrance attracts people and pollinators alike.",
     "types": [ "SCENT" ],
+    "valid": false,
     "cancels": [ "SMELLY", "SMELLY2" ],
     "threshreq": [ "THRESH_PLANT", "THRESH_ELFA" ],
     "social_modifiers": { "lie": 15, "persuade": 12 }
@@ -3464,6 +3473,7 @@
     "visibility": 12,
     "ugliness": 2,
     "active": true,
+    "valid": false,
     "transform": {
       "target": "ROSEBUDS_FALL_active",
       "msg_transform": "Most of the fruits are beyond consideration, but you pick what you can and discard the rest.",
@@ -3502,7 +3512,8 @@
     "prereqs": [ "FLOWERS" ],
     "cancels": [ "SMELLY", "SMELLY2", "ROSEBUDS_FALL_active" ],
     "threshreq": [ "THRESH_PLANT" ],
-    "player_display": false
+    "player_display": false,
+    "valid": false
   },
   {
     "type": "mutation",
@@ -3514,6 +3525,7 @@
     "prereqs": [ "FLOWERS" ],
     "cancels": [ "SMELLY", "SMELLY2" ],
     "threshreq": [ "THRESH_PLANT", "THRESH_ELFA" ],
+    "valid": false,
     "player_display": false
   },
   {

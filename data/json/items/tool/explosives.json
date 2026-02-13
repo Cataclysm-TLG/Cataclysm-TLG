@@ -82,7 +82,6 @@
       "target": "dynamite_act",
       "msg": "You light the dynamite.",
       "target_timer": "20 seconds",
-      "active": true,
       "need_fire": 1,
       "menu_text": "Ignite",
       "type": "transform"
@@ -98,7 +97,7 @@
     "copy-from": "dynamite",
     "symbol": "*",
     "color": "red",
-    "flags": [ "TRADER_AVOID", "BOMB" ],
+    "flags": [ "TRADER_AVOID", "BOMB", "SPAWN_ACTIVE" ],
     "countdown_action": { "type": "explosion", "explosion": { "power": 135 } }
   },
   {
@@ -123,7 +122,6 @@
       "target": "dynamite_bundle_act",
       "msg": "You light the dynamite.",
       "target_timer": "20 seconds",
-      "active": true,
       "need_fire": 1,
       "menu_text": "Ignite",
       "type": "transform"
@@ -139,7 +137,7 @@
     "copy-from": "dynamite",
     "symbol": "*",
     "color": "red",
-    "flags": [ "TRADER_AVOID", "BOMB" ],
+    "flags": [ "TRADER_AVOID", "BOMB", "SPAWN_ACTIVE" ],
     "countdown_action": { "type": "explosion", "explosion": { "power": 1080 } }
   },
   {
@@ -194,7 +192,7 @@
       "emp_blast_radius": 10,
       "explosion": { "power": 600, "shrapnel": { "casing_mass": 3214, "fragment_mass": 0.5 } }
     },
-    "flags": [ "TRADER_AVOID", "WATER_BREAK" ],
+    "flags": [ "TRADER_AVOID", "WATER_BREAK", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 12 }
   },
   {
@@ -230,7 +228,7 @@
     "color": "red",
     "tick_action": [ { "type": "sound", "sound_message": "ssss…", "sound_volume": 0, "sound_id": "misc", "sound_variant": "lit_fuse" } ],
     "countdown_action": { "type": "sound", "sound_message": "Bang!", "sound_volume": 20, "sound_id": "explosion", "sound_variant": "small" },
-    "flags": [ "TRADER_AVOID" ],
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -265,7 +263,7 @@
     "symbol": "*",
     "color": "red",
     "tick_action": [ "FIRECRACKER_PACK_ACT" ],
-    "flags": [ "TRADER_AVOID" ]
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ]
   },
   {
     "id": "flashbang",
@@ -303,7 +301,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "countdown_action": { "type": "explosion", "do_flashbang": true },
-    "flags": [ "TRADER_AVOID" ]
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ]
   },
   {
     "id": "fungicidalbomb",
@@ -337,7 +335,7 @@
     "description": "This fungicidal bomb has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
     "emits": [ "emit_fungicidal_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "fungicidalbomb_makeshift",
@@ -372,7 +370,7 @@
     "description": "This makeshift fungicidal bomb has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
     "emits": [ "emit_small_fungicidal_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "gasbomb_makeshift",
@@ -410,7 +408,7 @@
     "symbol": "*",
     "color": "dark_gray",
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS" ],
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 6 }
   },
   {
@@ -510,7 +508,7 @@
       "fields_max_intensity": 10,
       "emp_blast_radius": 4
     },
-    "flags": [ "TRADER_AVOID", "WATER_BREAK" ],
+    "flags": [ "TRADER_AVOID", "WATER_BREAK", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -556,7 +554,7 @@
     "color": "light_red",
     "revert_to": "canister_empty",
     "countdown_action": "GRENADE_INC_ACT",
-    "flags": [ "ACT_IN_FIRE", "BOMB", "TRADER_AVOID", "DANGEROUS" ],
+    "flags": [ "ACT_IN_FIRE", "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 6 }
   },
   {
@@ -599,7 +597,7 @@
     "use_action": { "type": "message", "message": "You've already pulled the pin, try throwing it instead.", "name": "Pull pin" },
     "emits": [ "emit_tear_gas_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "insecticidalbomb",
@@ -634,7 +632,7 @@
     "description": "This insecticidal grenade has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
     "emits": [ "emit_insecticidal_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "insecticidalbomb_makeshift",
@@ -669,7 +667,7 @@
     "description": "This makeshift insecticidal grenade has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
     "emits": [ "emit_small_insecticidal_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "LAW_Packed",
@@ -743,7 +741,7 @@
       "fields_max_intensity": 3,
       "explosion": { "power": 9000000 }
     },
-    "flags": [ "LEAK_DAM", "RADIOACTIVE", "TRADER_AVOID" ]
+    "flags": [ "LEAK_DAM", "RADIOACTIVE", "TRADER_AVOID", "SPAWN_ACTIVE" ]
   },
   {
     "id": "molotov",
@@ -765,7 +763,6 @@
       "need_wielding": true,
       "target": "molotov_lit",
       "msg": "You light the Molotov cocktail!",
-      "active": true,
       "moves": 75,
       "need_fire": 1,
       "menu_text": "Ignite",
@@ -792,7 +789,7 @@
     "color": "light_gray",
     "tick_action": [ "MOLOTOV_LIT" ],
     "light": 15,
-    "flags": [ "TRADER_AVOID", "NPC_THROW_NOW", "NO_REPAIR", "WATER_EXTINGUISH" ],
+    "flags": [ "TRADER_AVOID", "NPC_THROW_NOW", "NO_REPAIR", "WATER_EXTINGUISH", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -838,7 +835,7 @@
     "symbol": "*",
     "color": "yellow",
     "countdown_action": { "type": "explosion", "draw_explosion_radius": 4, "draw_explosion_color": "cyan", "scrambler_blast_radius": 4 },
-    "flags": [ "TRADER_AVOID" ],
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -868,7 +865,7 @@
     "emits": [ "emit_smoke_stream" ],
     "countdown_action": { "type": "transform", "target": "canister_empty" },
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID" ]
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ]
   },
   {
     "id": "tool_rocket_candy",
@@ -919,7 +916,7 @@
       "fields_max_intensity": 3,
       "explosion": { "power": 1 }
     },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -958,7 +955,7 @@
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
     "countdown_action": { "type": "explosion", "explosion": { "power": 200, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "military_explosive_grenade",
@@ -996,7 +993,7 @@
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
     "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "military_explosive_pipebomb",
@@ -1037,7 +1034,7 @@
     "price": "0 cent",
     "color": "light_gray",
     "countdown_action": { "type": "explosion", "explosion": { "power": 400, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "military_explosive_bomb",
@@ -1078,7 +1075,7 @@
       "type": "explosion",
       "explosion": { "power": 6970, "shrapnel": { "casing_mass": 3000, "fragment_mass": 0.5, "drop": "scrap", "recovery": 20 } }
     },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "military_explosive_half_barrel_bomb",
@@ -1125,7 +1122,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 100000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 100000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 20 }
   },
   {
@@ -1171,7 +1168,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 200000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 200000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 20 }
   },
   {
@@ -1210,7 +1207,7 @@
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
     "countdown_action": { "type": "explosion", "explosion": { "power": 100, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "homemade_grenade",
@@ -1246,7 +1243,7 @@
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
     "countdown_action": { "type": "explosion", "explosion": { "power": 150, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "pipebomb",
@@ -1298,7 +1295,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 200, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 200, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -1347,7 +1344,7 @@
       "type": "explosion",
       "explosion": { "power": 2320, "shrapnel": { "casing_mass": 3000, "fragment_mass": 0.5, "drop": "scrap", "recovery": 20 } }
     },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "homemade_demolition_charge",
@@ -1394,7 +1391,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 2590 },
     "countdown_action": { "type": "explosion", "explosion": { "power": 2590 } },
-    "flags": [ "TRADER_AVOID" ],
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 4 }
   },
   {
@@ -1440,7 +1437,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 34400, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 34400, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 20 }
   },
   {
@@ -1486,7 +1483,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 69200, "shrapnel": { "casing_mass": 12000, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 69200, "shrapnel": { "casing_mass": 12000, "fragment_mass": 600 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 20 }
   },
   {

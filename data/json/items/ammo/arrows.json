@@ -235,7 +235,6 @@
       "target": "arrow_flaming",
       "target_timer": "20 seconds",
       "msg": "You light the arrow.",
-      "active": true,
       "need_fire": 1,
       "menu_text": "Light arrow",
       "type": "transform"
