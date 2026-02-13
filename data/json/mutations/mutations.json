@@ -6256,13 +6256,14 @@
     "type": "mutation",
     "id": "SLIT_NOSTRILS",
     "name": { "str": "Slit Nostrils" },
+    "description": "You have a flattened nose and thin slits for nostrils, giving you a lizard-like appearance.  This makes breathing slightly difficult and increases mouth encumbrance by 10.",
+    "category": [ "LIZARD", "CEPHALOPOD", "RAPTOR", "CHIROPTERAN" ],
+    "changes_to": [ "LEAFNOSE" ],
     "points": -2,
+    "vitamin_cost": 160,
     "visibility": 7,
     "ugliness": 4,
-    "description": "You have a flattened nose and thin slits for nostrils, giving you a lizard-like appearance.  This makes breathing slightly difficult and increases mouth encumbrance by 10.",
-    "encumbrance_always": [ [ "mouth", 10 ] ],
-    "changes_to": [ "LEAFNOSE" ],
-    "category": [ "LIZARD", "CEPHALOPOD", "RAPTOR", "CHIROPTERAN" ]
+    "enchantments": [ { "ench_effects": [ { "effect": "effect_slit_nostrils_breathing_penalty", "intensity": 1 } ] } ]
   },
   {
     "type": "mutation",
