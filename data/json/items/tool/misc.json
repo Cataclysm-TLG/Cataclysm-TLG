@@ -433,7 +433,6 @@
       {
         "target": "large_space_heater_on",
         "msg": "You turn on the heater.",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The heater needs more charge.",
         "menu_text": "Turn on",
@@ -454,7 +453,7 @@
     "power_draw": "1 kW",
     "emits": [ "emit_hot_air2_blast" ],
     "light": 2,
-    "flags": [ "ALLOWS_REMOTE_USE" ],
+    "flags": [ "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ],
     "revert_to": "large_space_heater",
     "use_action": [
       {
@@ -643,7 +642,6 @@
       {
         "target": "small_space_heater_on",
         "msg": "You turn on the heater.",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The heater needs more charge.",
         "menu_text": "Turn on",
@@ -664,7 +662,7 @@
     "power_draw": "500 W",
     "emits": [ "emit_hot_air2_stream" ],
     "light": 2,
-    "flags": [ "ALLOWS_REMOTE_USE" ],
+    "flags": [ "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ],
     "revert_to": "small_space_heater",
     "use_action": [
       {

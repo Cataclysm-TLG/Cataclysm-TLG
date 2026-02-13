@@ -2913,7 +2913,7 @@
         "covers": [ "mouth" ]
       }
     ],
-    "flags": [ "LITCIG", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
+    "flags": [ "LITCIG", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE", "SPAWN_ACTIVE" ]
   },
   {
     "type": "ITEM",
@@ -2961,7 +2961,7 @@
         "covers": [ "mouth" ]
       }
     ],
-    "flags": [ "LITCIG", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
+    "flags": [ "LITCIG", "TOBACCO", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE", "SPAWN_ACTIVE" ]
   },
   {
     "type": "ITEM",
@@ -3009,7 +3009,7 @@
         "covers": [ "mouth" ]
       }
     ],
-    "flags": [ "LITCIG", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE" ]
+    "flags": [ "LITCIG", "TRADER_AVOID", "FIRESTARTER", "FRAGILE", "OVERSIZE", "SPAWN_ACTIVE" ]
   },
   {
     "type": "ITEM",

@@ -3772,5 +3772,15 @@
     "type": "MIGRATION",
     "id": "water_purifying",
     "replace": "water_clean"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "solarpack",
+    "replace": "backpack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "solarpack_on",
+    "replace": "backpack"
   }
 ]

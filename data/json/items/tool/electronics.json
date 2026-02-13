@@ -164,7 +164,6 @@
       {
         "target": "cell_phone_flashlight",
         "msg": "You light up the screen.",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The cellphone's batteries need more charge.",
         "type": "transform"
@@ -260,7 +259,6 @@
         "menu_text": "Turn on the screen",
         "msg": "You power up the screen.",
         "target": "eink_tablet_pc_on",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The tablet batteries are dead."
       },
@@ -301,7 +299,7 @@
     ],
     "tick_action": [ "EPIC_MUSIC" ],
     "light": 10,
-    "flags": [ "TRADER_AVOID", "WATCH", "WATER_BREAK", "ELECTRONIC", "TRADER_AVOID" ]
+    "flags": [ "TRADER_AVOID", "WATCH", "WATER_BREAK", "ELECTRONIC", "TRADER_AVOID", "SPAWN_ACTIVE" ]
   },
   {
     "id": "usb_drive",
@@ -502,7 +500,7 @@
       "type": "transform"
     },
     "tick_action": [ "GEIGER_ACTIVE" ],
-    "flags": [ "TRADER_AVOID", "WATER_BREAK" ]
+    "flags": [ "TRADER_AVOID", "WATER_BREAK", "SPAWN_ACTIVE" ]
   },
   {
     "id": "resonance_measurement_device",
@@ -608,7 +606,6 @@
         "target": "laptop_screen_lit",
         "msg": "You light up the screen.",
         "menu_text": "Light up the screen",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The laptop's batteries need more charge.",
         "type": "transform"
@@ -651,7 +648,7 @@
     ],
     "tick_action": [ "EPIC_MUSIC" ],
     "light": 10,
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE" ]
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ]
   },
   {
     "id": "mp3",
@@ -684,7 +681,7 @@
     "revert_to": "mp3",
     "tick_action": [ "MP3_ON" ],
     "use_action": [ "MP3_DEACTIVATE", { "type": "link_up", "cable_length": 2, "charge_rate": "5 W" } ],
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC" ]
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "SPAWN_ACTIVE" ]
   },
   {
     "id": "noise_emitter",
@@ -701,13 +698,7 @@
     "symbol": ";",
     "color": "yellow",
     "charges_per_use": 1,
-    "use_action": {
-      "target": "noise_emitter_on",
-      "msg": "You turn the noise emitter on.",
-      "menu_text": "Turn on",
-       ,
-      "type": "transform"
-    },
+    "use_action": { "target": "noise_emitter_on", "msg": "You turn the noise emitter on.", "menu_text": "Turn on", "type": "transform" },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "WATER_BREAK" ],
     "pocket_data": [
       {
@@ -738,7 +729,7 @@
       "type": "transform"
     },
     "tick_action": [ "NOISE_EMITTER_ON" ],
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "TRADER_AVOID", "WATER_BREAK" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "TRADER_AVOID", "WATER_BREAK", "SPAWN_ACTIVE" ]
   },
   {
     "id": "emf_detector",
@@ -760,7 +751,6 @@
       "type": "transform",
       "msg": "You turn the EMF detector on.",
       "target": "emf_detector_on",
-       ,
       "need_charges_msg": "It's dead."
     },
     "flags": [ "WATER_BREAK", "ELECTRONIC" ],
@@ -792,7 +782,7 @@
       "menu_text": "Turn off"
     },
     "tick_action": [ "EMF_PASSIVE_ON" ],
-    "flags": [ "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC" ]
+    "flags": [ "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "SPAWN_ACTIVE" ]
   },
   {
     "id": "portable_game",
@@ -842,7 +832,6 @@
         "target": "smart_phone_flashlight",
         "msg": "You activate the flashlight app.",
         "menu_text": "Turn on flashlight",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The smartphone's charge is too low.",
         "type": "transform"
@@ -918,7 +907,6 @@
         "target": "smart_phone_locked_flashlight",
         "msg": "You activate the flashlight app.",
         "menu_text": "Turn on flashlight",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The smartphone's charge is too low.",
         "type": "transform"
@@ -1052,7 +1040,6 @@
       "ammo_scale": 0,
       "target": "UPS_ON",
       "msg": "You turn the charger on.",
-       ,
       "need_charges": 1,
       "need_charges_msg": "The charger's battery is empty.",
       "type": "transform"

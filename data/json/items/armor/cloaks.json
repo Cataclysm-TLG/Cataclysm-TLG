@@ -2173,7 +2173,8 @@
       "NO_REPAIR",
       "RAINPROOF",
       "POCKETS",
-      "COLLAR"
+      "COLLAR",
+      "SPAWN_ACTIVE"
     ],
     "power_draw": "20 kW",
     "revert_to": "optical_cloak",

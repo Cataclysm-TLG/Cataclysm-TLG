@@ -499,7 +499,7 @@
     "valid": false,
     "player_display": false
   },
-    {
+  {
     "id": "milk_cream_rising",
     "type": "ITEM",
     "category": "food",
@@ -614,7 +614,7 @@
     "longest_side": "132 mm",
     "price": "10 cent",
     "price_postapoc": "10 cent",
-    "material": [ "glass", "veggy" ],
+    "material": [ "glass", "vegetable" ],
     "symbol": "%",
     "color": "white",
     "use_action": {
@@ -641,7 +641,7 @@
     "longest_side": "132 mm",
     "price": "10 cent",
     "price_postapoc": "10 cent",
-    "material": [ "glass", "veggy" ],
+    "material": [ "glass", "vegetable" ],
     "symbol": "%",
     "color": "white",
     "use_action": {

@@ -249,7 +249,6 @@
       {
         "target": "ref_lighter_on",
         "msg": "You flick the lighter.",
-         ,
         "need_charges": 1,
         "need_charges_msg": "Nothing happens.",
         "menu_text": "Light up",
@@ -296,7 +295,7 @@
       }
     ],
     "light": 8,
-    "flags": [ "FIRE", "FIRESTARTER", "FLAMING", "TRADER_AVOID", "WATER_EXTINGUISH" ],
+    "flags": [ "FIRE", "FIRESTARTER", "FLAMING", "TRADER_AVOID", "WATER_EXTINGUISH", "SPAWN_ACTIVE" ],
     "tool_ammo": [ "lamp_oil" ]
   },
   {
@@ -336,7 +335,6 @@
     "use_action": {
       "target": "tinderbox_on",
       "msg": "You light the tinder.",
-       ,
       "need_fire": 1,
       "need_fire_msg": "You need a lighter or fire to light this.",
       "need_charges": 1,
@@ -371,7 +369,7 @@
         "type": "transform"
       }
     ],
-    "flags": [ "FIRESTARTER" ],
+    "flags": [ "FIRESTARTER", "SPAWN_ACTIVE" ],
     "tool_ammo": [ "tinder" ]
   },
   {

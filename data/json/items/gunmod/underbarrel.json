@@ -755,7 +755,6 @@
       "type": "transform",
       "msg": "You turn the weapon light on.",
       "target": "flashlight_mod_on",
-       ,
       "need_charges": 1,
       "need_charges_msg": "The weapon light's batteries are dead."
     },
@@ -786,6 +785,6 @@
       "ammo_scale": 0
     },
     "light": 160,
-    "extend": { "flags": [ "CHARGEDIM", "TRADER_AVOID" ] }
+    "extend": { "flags": [ "CHARGEDIM", "TRADER_AVOID", "SPAWN_ACTIVE" ] }
   }
 ]

@@ -158,7 +158,7 @@
         }
       ]
     },
-    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "WATER_BREAK" ],
+    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "WATER_BREAK", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 2, "cut": 8 }
   },
   {
@@ -608,7 +608,7 @@
     "melee_damage": { "bash": 8 }
   },
   {
-    "id": "milk_cream_rising",
+    "id": "milk_cream_rising_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str": "rising cream jar" },
@@ -621,15 +621,10 @@
     "material": [ "glass" ],
     "symbol": "%",
     "looks_like": "jar_glass_sealed",
+    "countdown_interval": "6 hours",
+    "transform_into": { "target": "milk_cream_jar", "container": "jar_glass_sealed", "target_charges": 8 },
+    "flags": [ "SPAWN_ACTIVE" ],
     "color": "white",
-    "use_action": {
-      "target": "milk_cream_jar",
-      "msg": "You examine the batch and see that the cream has risen to the top, so you seal the jar up for storage.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 21600,
-      "not_ready_msg": "The cream has not risen yet."
-    },
     "melee_damage": { "bash": 8 }
   },
   {

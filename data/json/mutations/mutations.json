@@ -346,7 +346,7 @@
     "name": { "str": "Weak Photophore" },
     "points": 1,
     "description": "A photophore has grown from your head; you can make it glow softly.  This will make you very visible in the dark, ideal for attracting a partner during mating season.",
-     ,
+    "active": true,
     "cost": 9,
     "time": "225 h",
     "kcal": true,

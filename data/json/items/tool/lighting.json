@@ -37,13 +37,7 @@
     "material": [ "plastic", "aluminum" ],
     "symbol": ",",
     "color": "light_green",
-    "use_action": {
-      "target": "atomic_light",
-       ,
-      "msg": "You open the nightlight's cover.",
-      "menu_text": "Open cover",
-      "type": "transform"
-    },
+    "use_action": { "target": "atomic_light", "msg": "You open the nightlight's cover.", "menu_text": "Open cover", "type": "transform" },
     "flags": [ "LEAK_DAM", "RADIOACTIVE", "DURABLE_MELEE", "ALLOWS_REMOTE_USE" ],
     "melee_damage": { "bash": 4 }
   },
@@ -65,14 +59,7 @@
     "color": "white",
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "candle_wax": 100 }, "rigid": true } ],
-    "use_action": {
-      "target": "candle_lit",
-      "msg": "You light the candle.",
-       ,
-      "need_fire": 1,
-      "menu_text": "Light",
-      "type": "transform"
-    },
+    "use_action": { "target": "candle_lit", "msg": "You light the candle.", "need_fire": 1, "menu_text": "Light", "type": "transform" },
     "flags": [ "BURNOUT", "NO_RELOAD", "NO_UNLOAD" ]
   },
   {
@@ -94,7 +81,7 @@
       }
     ],
     "light": 8,
-    "extend": { "flags": [ "WATER_EXTINGUISH", "TRADER_AVOID", "WIND_EXTINGUISH", "FIRESTARTER" ] }
+    "extend": { "flags": [ "WATER_EXTINGUISH", "TRADER_AVOID", "WIND_EXTINGUISH", "FIRESTARTER", "SPAWN_ACTIVE" ] }
   },
   {
     "id": "electric_lantern",
@@ -115,7 +102,6 @@
       {
         "type": "transform",
         "target": "electric_lantern_on",
-         ,
         "msg": "You turn the lamp on.",
         "need_charges": 1,
         "need_charges_msg": "The lantern has no batteries."
@@ -146,7 +132,7 @@
       { "type": "link_up", "cable_length": 2, "charge_rate": "20 W" }
     ],
     "light": 15,
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "RADIO_MODABLE", "RADIO_INVOKE_PROC", "TRADER_AVOID", "ALLOWS_REMOTE_USE" ]
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "RADIO_MODABLE", "SPAWN_ACTIVE", "RADIO_INVOKE_PROC", "TRADER_AVOID", "ALLOWS_REMOTE_USE" ]
   },
   {
     "id": "flashlight",
@@ -169,7 +155,6 @@
       "type": "transform",
       "msg": "You turn the flashlight on.",
       "target": "flashlight_on",
-       ,
       "need_charges": 1,
       "need_charges_msg": "The flashlight's batteries are dead."
     },
@@ -231,7 +216,6 @@
       "type": "transform",
       "msg": "You turn the flashlight on.",
       "target": "diving_flashlight_on",
-       ,
       "need_charges": 1,
       "need_charges_msg": "The flashlight's batteries are dead."
     },
@@ -283,7 +267,6 @@
     "use_action": {
       "target": "gasoline_lantern_on",
       "msg": "You turn the lamp on.",
-       ,
       "need_fire": 1,
       "need_charges": 1,
       "need_charges_msg": "The lamp is empty.",
@@ -313,7 +296,7 @@
       { "type": "firestarter", "moves": 100 }
     ],
     "light": 15,
-    "flags": [ "TRADER_AVOID", "ALLOWS_REMOTE_USE", "FIRESTARTER", "FIRE" ]
+    "flags": [ "TRADER_AVOID", "ALLOWS_REMOTE_USE", "FIRESTARTER", "FIRE", "SPAWN_ACTIVE" ]
   },
   {
     "id": "glowstick",
@@ -330,13 +313,7 @@
     "symbol": ";",
     "color": "light_blue",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "glowstick_juice": 1400 }, "rigid": true } ],
-    "use_action": {
-      "target": "glowstick_lit",
-      "msg": "You activate the glowstick.",
-       ,
-      "menu_text": "Activate",
-      "type": "transform"
-    },
+    "use_action": { "target": "glowstick_lit", "msg": "You activate the glowstick.", "menu_text": "Activate", "type": "transform" },
     "flags": [ "NO_UNLOAD", "NO_RELOAD" ],
     "tool_ammo": "glowstick_juice"
   },
@@ -375,7 +352,7 @@
     "revert_to": "glowstick_dead",
     "revert_msg": "The glowstick fades out.",
     "light": 8,
-    "flags": [ "TRADER_AVOID", "SLEEP_IGNORE", "NO_UNLOAD", "NO_RELOAD" ]
+    "flags": [ "TRADER_AVOID", "SLEEP_IGNORE", "NO_UNLOAD", "NO_RELOAD", "SPAWN_ACTIVE" ]
   },
   {
     "id": "handflare",
@@ -395,7 +372,6 @@
       "menu_text": "Strike the striker",
       "type": "transform",
       "target": "handflare_lit",
-       ,
       "msg": "You strike your flare and light it."
     },
     "flags": [ "NO_UNLOAD", "NO_RELOAD" ],
@@ -414,7 +390,7 @@
     "revert_msg": "The flare sputters out",
     "use_action": { "type": "firestarter", "moves": 50 },
     "light": 240,
-    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD" ]
+    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD", "SPAWN_ACTIVE" ]
   },
   {
     "id": "sigflare_lit",
@@ -429,7 +405,7 @@
     "revert_msg": "The flare sputters out",
     "use_action": { "type": "firestarter", "moves": 50 },
     "light": 720,
-    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD" ]
+    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD", "SPAWN_ACTIVE" ]
   },
   {
     "id": "heavy_flashlight",
@@ -452,7 +428,6 @@
         "type": "transform",
         "msg": "You turn the heavy-duty flashlight on.",
         "target": "heavy_flashlight_on",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The heavy-duty flashlight's battery is dead."
       }
@@ -493,7 +468,7 @@
       }
     ],
     "light": 500,
-    "flags": [ "CHARGEDIM" ]
+    "flags": [ "CHARGEDIM", "SPAWN_ACTIVE" ]
   },
   {
     "id": "lightstrip",
@@ -509,13 +484,7 @@
     "light": 200,
     "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK" ],
     "use_action": [
-      {
-        "target": "lightstrip_inactive",
-        "msg": "You turn off the LED strip.",
-         ,
-        "need_charges": 1,
-        "type": "transform"
-      },
+      { "target": "lightstrip_inactive", "msg": "You turn off the LED strip.", "need_charges": 1, "type": "transform" },
       { "type": "link_up", "cable_length": 10, "charge_rate": "5 W" }
     ]
   },
@@ -534,7 +503,7 @@
     "color": "white",
     "//": "25 feet (7.5 m) + 1.5 meters for plug",
     "use_action": [
-      { "target": "lightstrip", "msg": "You turn on the LED strip.",  , "need_charges": 1, "type": "transform" },
+      { "target": "lightstrip", "msg": "You turn on the LED strip.", "need_charges": 1, "type": "transform" },
       { "type": "link_up", "cable_length": 9, "charge_rate": "5 W" }
     ],
     "tool_ammo": [ "battery" ]
@@ -558,7 +527,6 @@
     "use_action": {
       "target": "oil_lamp_on",
       "msg": "You turn the lamp on.",
-       ,
       "need_fire": 1,
       "need_charges": 1,
       "need_charges_msg": "The lamp is empty.",
@@ -588,7 +556,7 @@
       { "type": "firestarter", "moves": 100 }
     ],
     "light": 10,
-    "flags": [ "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "WATER_EXTINGUISH", "FIRESTARTER" ]
+    "flags": [ "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "WATER_EXTINGUISH", "FIRESTARTER", "SPAWN_ACTIVE" ]
   },
   {
     "id": "oil_lamp_clay",
@@ -608,7 +576,6 @@
     "use_action": {
       "target": "oil_lamp_clay_on",
       "msg": "You light the lamp.",
-       ,
       "need_fire": 1,
       "need_charges": 1,
       "need_charges_msg": "The lamp is empty.",
@@ -640,7 +607,7 @@
       { "type": "firestarter", "moves": 100 }
     ],
     "light": 10,
-    "flags": [ "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "WATER_EXTINGUISH", "WIND_EXTINGUISH", "FIRESTARTER" ]
+    "flags": [ "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE", "WATER_EXTINGUISH", "WIND_EXTINGUISH", "FIRESTARTER" ]
   },
   {
     "id": "oxylamp",
@@ -660,7 +627,6 @@
       "type": "transform",
       "msg": "You light the %s.",
       "target": "oxylamp_on",
-       ,
       "need_charges": 1,
       "need_charges_msg": "The %s must be attached to a gas cylinder to light."
     },
@@ -680,7 +646,7 @@
       { "type": "firestarter", "moves": 100 }
     ],
     "light": 30,
-    "flags": [ "FIRESTARTER", "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE" ]
+    "flags": [ "FIRESTARTER", "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ]
   },
   {
     "id": "reading_light",
@@ -701,7 +667,6 @@
     "use_action": {
       "target": "reading_light_on",
       "msg": "You switch on the reading light.",
-       ,
       "need_charges": 1,
       "need_charges_msg": "The reading light winks out.",
       "type": "transform"
@@ -726,7 +691,7 @@
       "type": "transform"
     },
     "light": 15,
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "CHARGEDIM" ]
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "CHARGEDIM", "SPAWN_ACTIVE" ]
   },
   {
     "id": "smart_lamp",
@@ -748,7 +713,6 @@
       {
         "target": "smart_lamp_on",
         "msg": "You turn the smart lamp on.",
-         ,
         "need_charges": 1,
         "need_charges_msg": "The smart lamp's battery is dead.",
         "type": "transform"
@@ -795,7 +759,8 @@
       "RADIO_INVOKE_PROC",
       "RADIOSIGNAL_2",
       "CHARGEDIM",
-      "TRADER_AVOID"
+      "TRADER_AVOID",
+      "SPAWN_ACTIVE"
     ]
   },
   {
@@ -820,7 +785,6 @@
     "use_action": {
       "target": "torch_lit",
       "msg": "You light the torch.",
-       ,
       "need_fire": 1,
       "menu_text": "Light torch",
       "type": "transform"
@@ -860,7 +824,7 @@
     ],
     "techniques": [ "WBLOCK_1" ],
     "light": 60,
-    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "WATER_EXTINGUISH", "BURNOUT", "TINDER" ],
+    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "WATER_EXTINGUISH", "BURNOUT", "TINDER", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -882,7 +846,6 @@
     "use_action": {
       "target": "propane_lantern_on",
       "msg": "You turn the lamp on.",
-       ,
       "need_charges": 1,
       "need_charges_msg": "The lamp is empty.",
       "type": "transform"
@@ -911,6 +874,6 @@
       { "type": "firestarter", "moves": 100 }
     ],
     "light": 15,
-    "flags": [ "TRADER_AVOID", "ALLOWS_REMOTE_USE", "FIRESTARTER", "FIRE" ]
+    "flags": [ "TRADER_AVOID", "ALLOWS_REMOTE_USE", "FIRESTARTER", "FIRE", "SPAWN_ACTIVE" ]
   }
 ]
