@@ -611,7 +611,7 @@
     "price_postapoc": "100 USD",
     "material": [ { "type": "leather", "portion": 1.1 }, { "type": "steel", "portion": 128 } ],
     "repairs_with": [ "steel" ],
-    "flags": [ "ALWAYS_TWOHAND", "DURABLE_MELEE", "SHEATH_SWORD", "CONDUCTIVE" ],
+    "flags": [ "ALWAYS_TWOHAND", "DURABLE_MELEE", "SHEATH_SWORD", "CONDUCTIVE", "REACH_ATTACK", "POLEARM" ],
     "techniques": [ "WBLOCK_2", "RAPID", "WIDE" ],
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 9 ] ],

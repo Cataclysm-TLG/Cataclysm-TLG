@@ -988,7 +988,7 @@ class Character : public Creature, public visitable
         void update_stomach( const time_point &from, const time_point &to );
         /** Updates the mutations from enchantments */
         void update_cached_mutations();
-        /** Returns true if character needs food, false if character is an NPC with NO_NPC_FOOD set */
+        /** Returns true if character is the player or a member of their faction, otherwise false. */
         bool needs_food() const;
         /** Increases hunger, thirst, fatigue and stimulants wearing off. `rate_multiplier` is for retroactive updates. */
         void update_needs( int rate_multiplier );

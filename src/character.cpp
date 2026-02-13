@@ -5520,8 +5520,7 @@ bool Character::needs_food() const
 {
     return is_avatar() ||
            ( is_npc() && get_faction() != nullptr &&
-             is_ally( get_player_character() ) &&
-             !get_option<bool>( "NO_NPC_FOOD" ) );
+             is_ally( get_player_character() ) );
 }
 
 void Character::update_needs( int rate_multiplier )

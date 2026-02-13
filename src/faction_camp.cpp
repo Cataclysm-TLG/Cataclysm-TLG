@@ -5583,7 +5583,7 @@ void basecamp::feed_workers( const std::vector<std::reference_wrapper <Character
         debugmsg( "feed_workers called without any workers to feed!" );
         return;
     }
-    if( !is_player_meal && get_option<bool>( "NO_NPC_FOOD" ) ) {
+    if( !is_player_meal ) {
         return;
     }
 
