@@ -85,7 +85,6 @@
 #include "sounds.h"
 #include "string_formatter.h"
 #include "string_input_popup.h"
-#include "text.h"
 #include "translation.h"
 #include "translations.h"
 #include "type_id.h"
