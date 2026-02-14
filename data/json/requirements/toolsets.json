@@ -92,7 +92,7 @@
     "id": "earthenware_firing",
     "type": "requirement",
     "//": "Firing various clay shapes to make earthenware",
-    "tools": [ [ [ "fire", -1 ], [ "brick_kiln", 1 ], [ "kiln", 1 ] ] ]
+    "tools": [ [ [ "fire", -1 ], [ "fake_clay_kiln", 1 ], [ "kiln", 1 ] ] ]
   },
   {
     "id": "forging_standard",
@@ -218,7 +218,7 @@
   {
     "id": "welding_alloys",
     "type": "requirement",
-    "//": "Crafting items made of aluminium alloy or installation of vehicle parts, currently making the same assumption for time/coverage as steel",
+    "//": "Crafting items made of aluminum alloy or installation of vehicle parts, currently making the same assumption for time/coverage as steel",
     "//1": "Arc welding is about 85% efficient, acetylene welding is about 40% efficient",
     "qualities": [ { "id": "GLARE", "level": 1 } ],
     "tools": [ [ [ "welder", 20 ], [ "welding_kit", 20 ], [ "welder_crude", 40 ], [ "integrated_welder", 30 ], [ "oxy_torch", 1 ] ] ],
@@ -261,7 +261,7 @@
     ],
     "components": [
       [ [ "welding_rod_alloy", 10 ], [ "welding_wire_alloy", 10 ], [ "brazing_rod_alloy", 10 ] ],
-      [ [ "material_aluminium_ingot", 1 ] ]
+      [ [ "aluminum_chunk", 1 ] ]
     ]
   },
   {

@@ -15,7 +15,7 @@
         " #.........rr.........# ",
         " #.........rr.........# ",
         " #:::::::::rryyyyyyyyy# ",
-        " #.........rr.........# ",
+        " #Ł........rr.........# ",
         " #111111111rrLLLLLLLLL# ",
         " #.........rr.........# ",
         " #.........rr.........# ",
@@ -68,6 +68,7 @@
         "U": { "item": "trash", "chance": 20, "repeat": [ 2, 4 ] },
         "l": [ { "item": "jackets", "chance": 10 }, { "item": "bags", "chance": 10 } ]
       },
+      "vehicles": { "Ł": { "vehicle": "hand_truck", "chance": 25 } },
       "place_items": [
         { "item": "bed", "x": [ 3, 3 ], "y": [ 3, 3 ], "chance": 80 },
         { "item": "bed", "x": [ 5, 5 ], "y": [ 3, 3 ], "chance": 80 },

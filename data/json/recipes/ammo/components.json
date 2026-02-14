@@ -12,7 +12,7 @@
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" }, { "proficiency": "prof_inorganic_chemistry" } ],
     "using": [ [ "surface_heat", 25 ] ],
     "qualities": [ { "id": "CHEM", "level": 1 } ],
-    "components": [ [ [ "magnesium", 100 ], [ "chem_aluminium_powder", 100 ] ], [ [ "oxy_powder", 200 ] ] ]
+    "components": [ [ [ "magnesium", 100 ], [ "aluminum_powder", 100 ] ], [ [ "oxy_powder", 200 ] ] ]
   },
   {
     "result": "gunpowder",

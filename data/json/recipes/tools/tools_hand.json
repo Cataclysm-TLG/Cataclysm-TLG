@@ -1450,7 +1450,7 @@
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
-      [ [ "material_aluminium_ingot", 1 ] ],
+      [ [ "aluminum_chunk", 1 ] ],
       [ [ "filament", 100, "LIST" ] ],
       [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
     ]

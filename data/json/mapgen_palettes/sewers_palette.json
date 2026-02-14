@@ -16,6 +16,7 @@
       "z": "t_metal_floor",
       "Z": "t_metal_floor",
       "6": "t_metal_floor",
+      "Ł": "t_metal_floor",
       "~": "t_sewage_underground",
       "_": [ [ "t_moss", 2 ], [ "t_dirtmound", 4 ], [ "t_sewage_underground", 4 ] ],
       "-": "t_bridge",
@@ -53,6 +54,7 @@
       ".": [ { "item": "trash", "chance": 3, "repeat": [ 1, 2 ] } ],
       "-": [ { "item": "trash", "chance": 1 } ]
     },
+    "vehicles": { "Ł": { "vehicle": "hand_truck", "chance": 15 } },
     "monster": {
       "~": { "group": "GROUP_SEWER", "chance": 2 },
       "z": { "group": "GROUP_ZOMBIE", "chance": 25 },

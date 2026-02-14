@@ -502,7 +502,7 @@
   {
     "type": "ITEM",
     "subtypes": [ "AMMO" ],
-    "id": "chem_aluminium_powder",
+    "id": "aluminum_powder",
     "category": "chems",
     "price": "5 USD",
     "price_postapoc": "5 USD",
@@ -990,7 +990,7 @@
   {
     "type": "ITEM",
     "subtypes": [ "AMMO" ],
-    "id": "chem_aluminium_sulphate",
+    "id": "aluminum_sulfate",
     "category": "chems",
     "price": "3 USD",
     "price_postapoc": "1 USD",
