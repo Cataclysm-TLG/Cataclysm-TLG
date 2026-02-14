@@ -68,7 +68,7 @@ horde_entity *horde_map::entity_at( const tripoint_om_ms &p )
 
 // TODO: if callers want to filter for dormant vs idle vs active, etc we can do it cheaply.
 std::vector < std::unordered_map<tripoint_abs_ms, horde_entity> *> horde_map::entity_group_at(
-    const tripoint_om_omt &p )
+    const tripoint_om_omt &p, int filter )
 {
     // TODO: It might be worthwhile to have a single top level map of per-submap containers,
     // and each entry of that map holds each variant container.
@@ -79,33 +79,44 @@ std::vector < std::unordered_map<tripoint_abs_ms, horde_entity> *> horde_map::en
         for( int x = 0; x <= 1; ++x ) {
             tripoint_om_sm target_submap = project_to<coords::sm>( p ) + point{ x, y };
             std::vector<std::unordered_map<tripoint_abs_ms, horde_entity> *> submap_of_hordes =
-                entity_group_at( target_submap );
+                entity_group_at( target_submap, filter );
             horde_chunk.insert( horde_chunk.end(), submap_of_hordes.begin(), submap_of_hordes.end() );
         }
     }
     return horde_chunk;
 }
 
-// TODO: if callers want to filter for dormant vs idle vs active, etc we can do it cheaply.
 std::vector<std::unordered_map<tripoint_abs_ms, horde_entity> *> horde_map::entity_group_at(
-    const tripoint_om_sm &p )
+    const tripoint_om_sm &p, int filter )
 {
     std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> horde_chunk;
-    auto active_monster_map_iter = active_monster_map.find( p );
-    if( active_monster_map_iter != active_monster_map.end() ) {
-        horde_chunk.push_back( &active_monster_map_iter->second );
+
+    if( filter & horde_map_flavors::active ) {
+        auto active_monster_map_iter = active_monster_map.find( p );
+        if( active_monster_map_iter != active_monster_map.end() ) {
+            horde_chunk.push_back( &active_monster_map_iter->second );
+        }
     }
-    auto idle_monster_map_iter = idle_monster_map.find( p );
-    if( idle_monster_map_iter != idle_monster_map.end() ) {
-        horde_chunk.push_back( &idle_monster_map_iter->second );
+
+    if( filter & horde_map_flavors::idle ) {
+        auto idle_monster_map_iter = idle_monster_map.find( p );
+        if( idle_monster_map_iter != idle_monster_map.end() ) {
+            horde_chunk.push_back( &idle_monster_map_iter->second );
+        }
     }
-    auto dormant_monster_map_iter = dormant_monster_map.find( p );
-    if( dormant_monster_map_iter != dormant_monster_map.end() ) {
-        horde_chunk.push_back( &dormant_monster_map_iter->second );
+
+    if( filter & horde_map_flavors::dormant ) {
+        auto dormant_monster_map_iter = dormant_monster_map.find( p );
+        if( dormant_monster_map_iter != dormant_monster_map.end() ) {
+            horde_chunk.push_back( &dormant_monster_map_iter->second );
+        }
     }
-    auto immobile_monster_map_iter = immobile_monster_map.find( p );
-    if( immobile_monster_map_iter != immobile_monster_map.end() ) {
-        horde_chunk.push_back( &immobile_monster_map_iter->second );
+
+    if( filter & horde_map_flavors::immobile ) {
+        auto immobile_monster_map_iter = immobile_monster_map.find( p );
+        if( immobile_monster_map_iter != immobile_monster_map.end() ) {
+            horde_chunk.push_back( &immobile_monster_map_iter->second );
+        }
     }
     return horde_chunk;
 }
@@ -122,11 +133,14 @@ static bool is_alert( const mtype &type )
 std::unordered_map<tripoint_abs_ms, horde_entity>::iterator horde_map::spawn_entity(
     const tripoint_abs_ms &p, mtype_id id )
 {
+    std::unordered_map<tripoint_abs_ms, horde_entity>::iterator result;
+    if( id.is_null() || !id.is_valid() ) {
+        return result; // Bail out, blacklisted monster or something's wrong.
+    }
     std::unordered_map <tripoint_om_sm, std::unordered_map<tripoint_abs_ms, horde_entity>> &target_map =
                 id->has_flag( mon_flag_DORMANT ) ? dormant_monster_map :
                 is_alert( *id ) ? idle_monster_map :
                 immobile_monster_map;
-    std::unordered_map<tripoint_abs_ms, horde_entity>::iterator result;
     point_abs_om omp;
     tripoint_om_sm sm;
     std::tie( omp, sm ) = project_remain<coords::om>( project_to<coords::sm>( p ) );

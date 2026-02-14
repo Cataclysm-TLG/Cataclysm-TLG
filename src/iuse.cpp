@@ -120,7 +120,6 @@
 #include "weather_gen.h"
 #include "weather_type.h"
 
-static const activity_id ACT_FISH( "ACT_FISH" );
 static const activity_id ACT_GAME( "ACT_GAME" );
 static const activity_id ACT_GENERIC_GAME( "ACT_GENERIC_GAME" );
 static const activity_id ACT_HAND_CRANK( "ACT_HAND_CRANK" );
@@ -1810,9 +1809,8 @@ std::optional<int> iuse::fishing_rod( Character *p, item *it, const tripoint_bub
         return std::nullopt;
     }
     p->add_msg_if_player( _( "You cast your line and wait to hook something…" ) );
-    p->assign_activity( ACT_FISH, to_moves<int>( 5_hours ), 0, 0, it->tname() );
-    p->activity.targets.emplace_back( *p, it );
-    p->activity.coord_set = g->get_fishable_locations_abs( MAX_VIEW_DISTANCE, *found );
+    p->assign_activity( fish_activity_actor( item_location( *p, it ),
+                        g->get_fishable_locations_abs( MAX_VIEW_DISTANCE, *found ), 5_hours ) );
     return 0;
 }
 
@@ -9276,13 +9274,6 @@ ret_val<void> use_function::can_call( const Character &p, const item &it,
     } else if( it.is_broken() ) {
         return ret_val<void>::make_failure( _( "Your %s is broken and won't activate." ),
                                             it.tname() );
-    } else if( actor->type == "GUNMOD_ATTACH" &&
-               it.is_gunmod() && !p.has_item( it ) ) {
-        // this should just check if gunmod is in MOD pocket already
-        // but it requires item_location
-        // so check if character do not have item in CONTAINER pockets
-        return ret_val<void>::make_failure(
-                   _( "Your %s is already installed and needs to be detached first." ), it.tname() );
     }
     return actor->can_use( p, it, here, pos );
 }
