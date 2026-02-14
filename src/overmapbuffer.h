@@ -18,6 +18,8 @@
 #include "coordinates.h"
 #include "enums.h"
 #include "json.h"
+#include "horde_map.h"
+#include "map_scale_constants.h"
 #include "memory_fast.h"
 #include "overmap.h"
 #include "overmap_types.h"
@@ -235,7 +237,8 @@ class overmapbuffer
         bool has_camp( const tripoint_abs_omt &p );
         bool has_vehicle( const tripoint_abs_omt &p );
         bool has_horde( const tripoint_abs_omt &p );
-        int get_horde_size( const tripoint_abs_omt &p );
+        int get_horde_size( const tripoint_abs_omt &p, int filter = horde_map_flavors::active |
+                            horde_map_flavors::idle | horde_map_flavors::dormant | horde_map_flavors::immobile );
         std::vector<om_vehicle> get_vehicle( const tripoint_abs_omt &p );
         std::string get_vehicle_ter_sym( const tripoint_abs_omt &omt );
         std::string get_vehicle_tile_id( const tripoint_abs_omt &omt );
@@ -537,7 +540,8 @@ class overmapbuffer
         void spawn_mongroup( const tripoint_abs_sm &p, const mongroup_id &type, int count );
         horde_entity *entity_at( const tripoint_abs_ms &p );
         std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> hordes_at(
-            const tripoint_abs_omt &p );
+            const tripoint_abs_omt &p, int filter = horde_map_flavors::active | horde_map_flavors::idle |
+                    horde_map_flavors::dormant | horde_map_flavors::immobile );
         /**
          * Find radio station with given frequency, search an unspecified area around
          * the current player location.

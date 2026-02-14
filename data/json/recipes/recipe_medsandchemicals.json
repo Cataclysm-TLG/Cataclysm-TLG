@@ -671,16 +671,18 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "bleach",
+    "result": "dakins_solution",
+    "id_suffix": "electrolysis",
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_CHEMICALS",
     "skill_used": "chemistry",
-    "skills_required": [ "electronics", 2 ],
+    "skills_required": [ [ "electronics", 3 ], [ "firstaid", 3 ] ],
     "difficulty": 4,
     "time": "25 m",
     "batch_time_factors": [ 90, 4 ],
-    "//": "another variation of chloralkali process, now used to produce bleach (sodium hypochlorite - or rather rough, technical grade hypochlorite/hydroxide/chloride mix), note we will not be heating anything and that the (mostly) electrochemical reaction easily scales in size, some hydrogen gas could be recoverable (optional byproduct)",
-    "book_learn": [ [ "adv_chemistry", 3 ], [ "textbook_chemistry", 3 ], [ "recipe_labchem", 3 ] ],
+    "//1": "This method produces 1% concentrated bleach. Our bleach item is 5%.",
+    "//2": "So it's useless unless you know about Dakin's, thus the high requirements.",
+    "book_learn": [ [ "adv_chemistry", 5 ], [ "recipe_labchem", 5 ], [ "atomic_survival", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_intro_chemistry" },
       { "proficiency": "prof_inorganic_chemistry" },
@@ -688,7 +690,7 @@
     ],
     "qualities": [ { "id": "CHEM", "level": 2 } ],
     "tools": [ [ [ "electrolysis_kit", 250 ] ] ],
-    "components": [ [ [ "salt_water", 2 ], [ "saline", 10 ] ] ]
+    "components": [ [ [ "salt_water", 5 ], [ "saline", 5 ] ], [ [ "water_clean", 5 ] ] ]
   },
   {
     "type": "recipe",
