@@ -27,16 +27,16 @@
         "#jΣΣ       ΣΣΣΣΣΣΣΣΣΣΣΣΣΣΣ  ΣΣΣΣΣΣΣΣΣ#--#######................**.......",
         "5                                   Σ#--#LLLLL#.........................",
         "5                                   Σ#--D-----#................**.......",
-        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Π↋  ϗ#--#######................**.......",
-        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Π↋  ϗ#--#LLLLL#++*******.......**.......",
-        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Π↋  ϗ#--D-----#+i*......==............++",
-        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Π↋  ϗ#--#######++*.............**.....++",
-        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Π↋  ϗ#--#-t#-t#+i*..Ú...==.....**.....++",
-        "#δ  ӟΩ  ζж  ӝө  фϖ  әБ  ӵη  цΞ  п↊  ϗ#--#-e#-e#++*.............**.....++",
-        "#δ  ӟΩ  ζж  ӝө  фϖ  әБ  ӵη  цΞ  п↊  ϗ#--#D##D##+i*******==............++",
-        "#δ  ӟΩ  ζж  ӝө  фϖ  әБ  ӵη  цΞ  п↊  ϗ#--D-----#++*.............**.....++",
-        "#δ  ӟΩ  ζж  ӝө  фϖ  әБ  ӵη  цΞ  п↊  ϗ#--#######++*......==.....**.....++",
-        "#δ  ϏϏ  ζж  ӝө  фϖ  ϏϏ  ӵη  цΞ  п↊  ϗ#--#ppddd#+i*..Ú..........**.....++",
+        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Σ↋  ϗ#--#######................**.......",
+        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Σ↋  ϗ#--#LLLLL#++*******.......**.......",
+        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Σ↋  ϗ#--D-----#+i*......==............++",
+        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Σ↋  ϗ#--#######++*.............**.....++",
+        "#ε  ӞΏ  ΔЖ  ӜӨ  Фϕ  ӘΛ  Чξ  Цπ  Σ↋  ϗ#--#-t#-t#+i*..Ú...==.....**.....++",
+        "#δ  ӟΩ  ζж  ӝө  фϖ  әБ  ӵη  цπ  п↊  ϗ#--#-e#-e#++*.............**.....++",
+        "#δ  ӟΩ  ζж  ӝө  фϖ  әБ  ӵη  цπ  п↊  ϗ#--#D##D##+i*******==............++",
+        "#δ  ӟΩ  ζж  ӝө  фϖ  әБ  ӵη  цπ  п↊  ϗ#--D-----#++*.............**.....++",
+        "#δ  ӟΩ  ζж  ӝө  фϖ  әБ  ӵη  цπ  п↊  ϗ#--#######++*......==.....**.....++",
+        "#δ  ϏϏ  ζж  ӝө  фϖ  ϏϏ  ӵη  цπ  п↊  ϗ#--#ppddd#+i*..Ú..........**.....++",
         "#δ                                   5--D--dhu4++*......==............++",
         "#Ш                         ________  5--#----u#+i*******.......**.....++",
         "#Ш  ЏЪ  ЮИ  ϏϏ  ҰΓ  ҐЄ  ЭЯ _ββ__ββ_ λ#--#######++*......==.....**.....++",
@@ -109,10 +109,8 @@
         "η": { "chunks": [ "shelf_commercial_milk" ] },
         "Ц": { "chunks": [ "shelf_commercial_eggs" ] },
         "ц": { "chunks": [ "shelf_commercial_deli" ] },
-        "π": { "chunks": [ "shelf_commercial_meat_beef" ] },
-        "Ξ": { "chunks": [ "shelf_commercial_meat_pork" ] },
-        "Π": { "chunks": [ "shelf_commercial_meat_poultry" ] },
-        "п": { "chunks": [ "shelf_commercial_meat_seafood" ] },
+        "π": { "chunks": [ "shelf_commercial_meat" ] },
+        "п": { "chunks": [ "shelf_commercial_seafood" ] },
         "↋": { "chunks": [ "shelf_commercial_icecream" ] },
         "↊": { "chunks": [ "shelf_commercial_frozen_dessert" ] },
         "ε": { "chunks": [ "shelf_commercial_water" ] },
@@ -305,16 +303,23 @@
         "¢": { "vehicle": "shopping_cart", "rotation": 90 }
       },
       "set": [
-        { "point": "bash", "x": [ 0, 24 ], "y": [ 0, 32 ], "repeat": [ 1, 15 ] },
-        { "point": "bash", "x": [ 25, 48 ], "y": [ 0, 32 ], "repeat": [ 1, 15 ] },
-        { "point": "bash", "x": [ 0, 24 ], "y": [ 33, 64 ], "repeat": [ 1, 15 ] },
-        { "point": "bash", "x": [ 25, 48 ], "y": [ 33, 64 ], "repeat": [ 1, 15 ] },
-        { "point": "bash", "x": [ 1, 36 ], "y": [ 14, 40 ], "repeat": [ 20, 80 ] },
-        { "point": "bash", "x": [ 0, 46 ], "y": [ 46, 47 ], "repeat": [ 3, 12 ] }
+        { "point": "bash", "x": [ 0, 23 ], "y": [ 0, 23 ], "repeat": [ 1, 40 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 0, 23 ], "repeat": [ 1, 40 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 24, 47 ], "repeat": [ 1, 40 ] },
+        { "point": "bash", "x": [ 0, 23 ], "y": [ 24, 47 ], "repeat": [ 1, 40 ] },
+        { "point": "bash", "x": [ 0, 24 ], "y": [ 48, 64 ], "repeat": [ 1, 40 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 48, 64 ], "repeat": [ 1, 40 ] },
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 14, 23 ], "repeat": [ 20, 60 ] },
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 24, 40 ], "repeat": [ 20, 60 ] },
+        { "point": "bash", "x": [ 24, 36 ], "y": [ 14, 23 ], "repeat": [ 20, 60 ] },
+        { "point": "bash", "x": [ 24, 36 ], "y": [ 24, 40 ], "repeat": [ 20, 60 ] },
+        { "point": "bash", "x": [ 0, 23 ], "y": [ 46, 48 ], "repeat": [ 20, 60 ] },
+        { "point": "bash", "x": [ 24, 46 ], "y": [ 46, 48 ], "repeat": [ 20, 60 ] }
       ],
       "place_monster": [
-        { "group": "GROUP_FERAL", "x": [ 10, 12 ], "y": [ 15, 15 ], "repeat": [ 1, 3 ], "chance": 85 },
-        { "group": "GROUP_GROCERY", "x": [ 50, 56 ], "y": [ 12, 18 ], "repeat": [ 1, 5 ], "chance": 85 },
+        { "group": "GROUP_FERAL", "x": [ 10, 16 ], "y": [ 15, 16 ], "repeat": [ 6, 25 ] },
+        { "group": "GROUP_FERAL", "x": [ 10, 16 ], "y": [ 40, 42 ], "repeat": [ 2, 10 ] },
+        { "group": "GROUP_GROCERY", "x": [ 50, 56 ], "y": [ 12, 18 ], "repeat": [ 1, 10 ], "chance": 85 },
         {
           "monster": [ "mon_grocerybot", "mon_grocerybot_busted" ],
           "x": 50,
@@ -409,12 +414,12 @@
         "                                                                        "
       ],
       "palettes": [ "roof_palette" ],
-      "terrain": { "X": "t_flat_roof", "N": "t_flat_roof", "&": "t_flat_roof", "=": "t_flat_roof", "A": "t_flat_roof" }
-    },
-    "place_monster": [
-      { "group": "GROUP_ROOF_ANIMAL", "x": 20, "y": 15, "chance": 60 },
-      { "group": "GROUP_ROOF_ANIMAL", "x": 20, "y": 20, "chance": 60 }
-    ]
+      "terrain": { "X": "t_flat_roof", "N": "t_flat_roof", "&": "t_flat_roof", "=": "t_flat_roof", "A": "t_flat_roof" },
+      "place_monster": [
+        { "group": "GROUP_ROOF_ANIMAL", "x": 20, "y": 15, "chance": 60 },
+        { "group": "GROUP_ROOF_ANIMAL", "x": 20, "y": 20, "chance": 60 }
+      ]
+    }
   },
   {
     "nested_mapgen_id": "shelf_commercial_sauces_dressings",
@@ -422,7 +427,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_sauces_dressings", "x": 0, "y": 0, "chance": 20 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_sauces_dressings", "x": 0, "y": 0, "chance": 30 } ]
     }
   },
   {
@@ -440,7 +445,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_spices_seasoning", "x": 0, "y": 0, "chance": 20 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_spices_seasoning", "x": 0, "y": 0, "chance": 40 } ]
     }
   },
   {
@@ -458,7 +463,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_grains", "x": 0, "y": 0, "chance": 20 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_grains", "x": 0, "y": 0, "chance": 25 } ]
     }
   },
   {
@@ -476,7 +481,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_pasta", "x": 0, "y": 0, "chance": 20 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_pasta", "x": 0, "y": 0, "chance": 25 } ]
     }
   },
   {
@@ -503,7 +508,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_meat", "x": 0, "y": 0, "chance": 20 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_meat", "x": 0, "y": 0, "chance": 25 } ]
     }
   },
   {
@@ -633,12 +638,12 @@
     }
   },
   {
-    "nested_mapgen_id": "shelf_commercial_meat_seafood",
+    "nested_mapgen_id": "shelf_commercial_seafood",
     "type": "mapgen",
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_meat_seafood", "x": 0, "y": 0, "chance": 50 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_seafood", "x": 0, "y": 0, "chance": 50 } ]
     }
   },
   {

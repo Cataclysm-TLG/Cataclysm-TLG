@@ -3802,5 +3802,10 @@
     "type": "MIGRATION",
     "id": "chem_aluminium_sulphate",
     "replace": "aluminum_sulfate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bread_flour",
+    "replace": "flour"
   }
 ]

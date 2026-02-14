@@ -1161,9 +1161,7 @@
       "flour_mortar",
       "flour_wheat_free",
       "flour_wheat_free_with_from_food_processor",
-      "flour_wheat_free_mortar",
-      "bread_flour",
-      "bread_flour_with_from_food_processor"
+      "flour_wheat_free_mortar"
     ],
     "difficulty": 2
   },

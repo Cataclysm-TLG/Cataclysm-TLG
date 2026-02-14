@@ -85,7 +85,16 @@
     "id": "commercial_baking",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "flour", 1 ], [ "bread_flour", 1 ], [ "flour_wheat_free", 1 ], [ "yeast", 1 ], [ "sugar", 1 ] ]
+    "items": [
+      { "group": "flour_various_full", "prob": 6 },
+      [ "milk_evap", 1 ],
+      [ "cornmeal", 2 ],
+      [ "molasses", 1 ],
+      [ "chem_baking_soda", 1 ],
+      { "group": "milk_powder_various_full", "prob": 1 },
+      [ "yeast", 1 ],
+      [ "sugar", 2 ]
+    ]
   },
   {
     "id": "SUS_shelf_commercial_baking",
@@ -121,7 +130,7 @@
     "id": "commercial_canned_fruits",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "can_pineapple", 1 ], [ "apple_canned", 1 ] ]
+    "items": [ [ "can_pineapple", 1 ], [ "fruit_canned", 1 ] ]
   },
   {
     "id": "SUS_shelf_commercial_canned_fruits",
@@ -229,7 +238,7 @@
     "id": "commercial_breakfast_mixes",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "flour", 1 ], [ "chem_baking_soda", 1 ], [ "cocoa_powder", 1 ], [ "cocoa_powder_milk", 1 ] ]
+    "items": [ [ "flour", 3 ], [ "chem_baking_soda", 1 ], [ "syrup", 1 ] ]
   },
   {
     "id": "SUS_shelf_commercial_breakfast_mixes",
@@ -253,7 +262,7 @@
     "id": "commercial_sweet_snacks",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "chocolate", 1 ], [ "protein_bar_zero", 1 ], [ "protein_bar_peanut", 1 ], [ "protein_bar_milk", 1 ] ]
+    "items": [ [ "chocolate", 4 ], [ "protein_bar", 1 ] ]
   },
   {
     "id": "SUS_shelf_commercial_sweet_snacks",
@@ -299,6 +308,24 @@
     ]
   },
   {
+    "id": "any_milk_standard",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [ [ "milk", 20 ], [ "milk_UHT", 80 ] ]
+  },
+  {
+    "id": "any_milk_lactosefree",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [ [ "soy_milk", 33 ], [ "almond_milk", 33 ], [ "hazelnut_milk", 11 ], [ "walnut_milk", 11 ] ]
+  },
+  {
+    "id": "any_milk",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [ { "group": "any_milk_standard", "prob": 71 }, { "group": "any_milk_lactosefree", "prob": 5 } ]
+  },
+  {
     "id": "SUS_shelf_commercial_cheese",
     "type": "item_group",
     "subtype": "collection",
@@ -308,7 +335,7 @@
     "id": "SUS_shelf_commercial_milk",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "milk_in_container_full", "count": [ 0, 10 ] } ]
+    "entries": [ { "group": "any_milk", "count": [ 1, 6 ] } ]
   },
   {
     "id": "commercial_eggs",
@@ -345,19 +372,19 @@
     "id": "SUS_shelf_commercial_meat",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_meat_beef", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_meat", "count": [ 1, 6 ] } ]
   },
   {
-    "id": "commercial_meat_seafood",
+    "id": "commercial_seafood",
     "type": "item_group",
     "subtype": "distribution",
     "items": [ [ "fish", 5 ], [ "lobster", 1 ], [ "mollusk", 1 ] ]
   },
   {
-    "id": "SUS_shelf_commercial_meat_seafood",
+    "id": "SUS_shelf_commercial_seafood",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_meat_seafood", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_seafood", "count": [ 1, 6 ] } ]
   },
   {
     "id": "commercial_icecream",
@@ -384,16 +411,7 @@
     "id": "commercial_frozen_dessert",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [
-      [ "tiramisu", 1 ],
-      [ "milkshake", 1 ],
-      [ "milkshake_fastfood", 1 ],
-      [ "milkshake_choc", 1 ],
-      [ "milkshake_deluxe", 1 ],
-      [ "milkshake_deluxe_choc", 1 ],
-      [ "frozen_lemonade", 1 ],
-      [ "snowcone", 1 ]
-    ]
+    "items": [ [ "tiramisu", 1 ], [ "jihelucake", 1 ], [ "cake2", 1 ], [ "cake3", 1 ], [ "waffles", 3 ], [ "frozen_lemonade", 1 ] ]
   },
   {
     "id": "SUS_shelf_commercial_frozen_dessert",
@@ -418,6 +436,33 @@
     "type": "item_group",
     "subtype": "collection",
     "entries": [ { "group": "soda_in_container_full", "count": [ 1, 6 ] } ]
+  },
+  {
+    "id": "SUS_shelf_commercial_soda",
+    "type": "item_group",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "cola", "prob": 20, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "rootbeer", "prob": 20, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "lemonlime", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "orangesoda", "prob": 15, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "colamdew", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "zerocola", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "zeroorange", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "zerotropical", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "zeromdew", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "tonic_water", "prob": 5, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "cola", "prob": 20, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "rootbeer", "prob": 20, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "lemonlime", "prob": 10, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "orangesoda", "prob": 15, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "colamdew", "prob": 10, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "zerocola", "prob": 10, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "zeroorange", "prob": 10, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "zerotropical", "prob": 10, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "zeromdew", "prob": 10, "container-item": "bottle_twoliter", "sealed": true },
+      { "item": "tonic_water", "prob": 5, "container-item": "bottle_twoliter", "sealed": true }
+    ]
   },
   {
     "id": "commercial_juices",
@@ -447,7 +492,7 @@
     "id": "commercial_snacks_chips",
     "type": "item_group",
     "subtype": "distribution",
-    "entries": [ { "group": "bag_chips" } ]
+    "entries": [ { "group": "chips_bag_plastic_3" } ]
   },
   {
     "id": "SUS_shelf_commercial_chips",
@@ -517,14 +562,7 @@
     "id": "commercial_pet_food",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [
-      [ "dogfood", 1 ],
-      [ "dogfood_raw", 1 ],
-      [ "dogfood_dry", 1 ],
-      [ "catfood", 1 ],
-      [ "catfood_raw", 1 ],
-      [ "catfood_dry", 1 ]
-    ]
+    "items": [ [ "dogfood", 1 ], [ "dogfood_dry", 1 ], [ "catfood", 1 ], [ "catfood_dry", 1 ] ]
   },
   {
     "id": "SUS_shelf_commercial_pet_food",
@@ -539,11 +577,10 @@
     "entries": [
       { "item": "pet_carrier", "prob": 1 },
       { "item": "petpack", "prob": 1 },
-      { "item": "dog_tag_dog", "prob": 1 },
+      { "item": "dog_tag_dog", "prob": 2 },
       { "item": "dog_whistle", "prob": 1 },
-      { "item": "rubber_harness_dog", "prob": 1 },
-      { "item": "leather_harness_dog", "prob": 1 },
-      { "group": "pet_collars", "prob": 4 }
+      { "item": "rubber_harness_dog", "prob": 2 },
+      { "item": "leather_harness_dog", "prob": 1 }
     ]
   },
   {
@@ -660,7 +697,7 @@
     "id": "commercial_cleaning_supplies",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "soap", 2 ], [ "liquid_soap", 4 ], [ "ammonia", 1 ], [ "broom", 1 ], [ "mop", 1 ] ]
+    "items": [ [ "soap", 2 ], [ "liquid_soap", 4 ], [ "ammonia_hydroxide", 1 ], [ "broom", 1 ], [ "mop", 1 ] ]
   },
   {
     "id": "SUS_shelf_commercial_cleaning_supplies",
@@ -858,8 +895,7 @@
       { "group": "pizza_meat_box_small_4", "prob": 1 },
       { "group": "pizza_vegetable_box_small_4", "prob": 1 },
       [ "sushi_veggyroll", 1 ],
-      [ "onion_rings", 1 ],
-      [ "chicken_fried", 1 ]
+      [ "onion_rings", 1 ]
     ]
   },
   {
@@ -915,10 +951,8 @@
       { "group": "SUS_shelf_commercial_milk", "prob": 1 },
       { "group": "SUS_shelf_commercial_eggs", "prob": 1 },
       { "group": "SUS_shelf_commercial_deli", "prob": 1 },
-      { "group": "SUS_shelf_commercial_meat_beef", "prob": 1 },
-      { "group": "SUS_shelf_commercial_meat_pork", "prob": 1 },
-      { "group": "SUS_shelf_commercial_meat_poultry", "prob": 1 },
-      { "group": "SUS_shelf_commercial_meat_seafood", "prob": 1 },
+      { "group": "SUS_shelf_commercial_meat", "prob": 1 },
+      { "group": "SUS_shelf_commercial_seafood", "prob": 1 },
       { "group": "SUS_shelf_commercial_icecream", "prob": 1 },
       { "group": "SUS_shelf_commercial_frozen_dessert", "prob": 1 },
       { "group": "SUS_shelf_commercial_water", "prob": 1 },
@@ -965,10 +999,8 @@
     "type": "item_group",
     "subtype": "distribution",
     "items": [
-      { "group": "SUS_shelf_commercial_meat_beef", "prob": 1 },
-      { "group": "SUS_shelf_commercial_meat_pork", "prob": 1 },
-      { "group": "SUS_shelf_commercial_meat_poultry", "prob": 1 },
-      { "group": "SUS_shelf_commercial_meat_seafood", "prob": 1 },
+      { "group": "SUS_shelf_commercial_meat", "prob": 1 },
+      { "group": "SUS_shelf_commercial_seafood", "prob": 1 },
       { "group": "SUS_shelf_commercial_icecream", "prob": 1 },
       { "group": "SUS_shelf_commercial_frozen_dessert", "prob": 1 },
       { "group": "SUS_shelf_commercial_frozen_meals", "prob": 1 },
