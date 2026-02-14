@@ -74,11 +74,11 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "id": "material_aluminium_ingot",
+    "id": "aluminum_chunk",
     "type": "ITEM",
     "category": "spare_parts",
-    "name": { "str": "chunk of aluminum", "str_pl": "chunks of aluminum" },
-    "description": "A small chunk of aluminum; light but durable, this could be cast into various shapes for construction or ground down to a powder, for more… high-profile applications.",
+    "name": { "str": "aluminum chunk", "str_pl": "aluminum chunks" },
+    "description": "A small piece of aluminum; light but durable, this could be cast into various shapes for construction or ground down to a powder, for more high-profile applications.",
     "weight": "250 g",
     "volume": "100 ml",
     "price": "7 cent",
@@ -189,7 +189,7 @@
     "name": { "str_sp": "magnesium powder" },
     "description": "A handful of powdered magnesium, a highly flammable alkaline earth metal.  Useful for constructing flares and similar items.",
     "weight": "1120 mg",
-    "//": "Weight should be 1.12g because magnesium is 64% less dense than aluminum (1.74g/cm³ vs 2.70g/cm³), at 250ml aluminium powder has a weight of ~0.176kg at 250ml, assuming same particle size => magnesium powder has a weight of ~0.112kg at 250ml",
+    "//": "Weight should be 1.12g because magnesium is 64% less dense than aluminum (1.74g/cm³ vs 2.70g/cm³), at 250ml aluminum powder has a weight of ~0.176kg at 250ml, assuming same particle size => magnesium powder has a weight of ~0.112kg at 250ml",
     "volume": "250 ml",
     "price": "50 USD",
     "price_postapoc": "50 cent",

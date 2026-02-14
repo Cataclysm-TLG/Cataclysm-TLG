@@ -254,13 +254,13 @@
     "move_cost_mod": -1,
     "coverage": 38,
     "concealment": 38,
-    "deconstruct": { "items": [ { "item": "lightstrip_inactive" }, { "item": "material_aluminium_ingot", "count": 4 } ] },
+    "deconstruct": { "items": [ { "item": "lightstrip_inactive" }, { "item": "aluminum_chunk", "count": 4 } ] },
     "bash": {
       "str_min": 18,
       "str_max": 80,
       "sound": "clang!",
       "sound_fail": "ting.",
-      "items": [ { "item": "material_aluminium_ingot", "count": [ 1, 4 ] }, { "item": "e_scrap", "count": [ 1, 4 ] } ]
+      "items": [ { "item": "aluminum_chunk", "count": [ 1, 4 ] }, { "item": "e_scrap", "count": [ 1, 4 ] } ]
     }
   },
   {
@@ -369,7 +369,7 @@
       "str_max": 30,
       "sound": "crunch!",
       "sound_fail": "whack!",
-      "items": [ { "item": "material_aluminium_ingot", "count": [ 4, 8 ] }, { "item": "scrap", "count": [ 2, 6 ] } ]
+      "items": [ { "item": "aluminum_chunk", "count": [ 4, 8 ] }, { "item": "scrap", "count": [ 2, 6 ] } ]
     }
   }
 ]

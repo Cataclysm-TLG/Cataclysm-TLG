@@ -3787,5 +3787,20 @@
     "type": "MIGRATION",
     "id": "brick_kiln",
     "replace": "kiln"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "material_aluminium_ingot",
+    "replace": "aluminum_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "chem_aluminium_powder",
+    "replace": "aluminum_powder"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "chem_aluminium_sulphate",
+    "replace": "aluminum_sulfate"
   }
 ]

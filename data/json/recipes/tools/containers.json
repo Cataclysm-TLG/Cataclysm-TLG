@@ -1357,7 +1357,7 @@
     "using": [ [ "blacksmithing_standard", 64 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
-    "components": [ [ [ "scrap_aluminum", 200 ], [ "material_aluminium_ingot", 40 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 200 ], [ "aluminum_chunk", 40 ] ] ]
   },
   {
     "type": "recipe",
@@ -1372,7 +1372,7 @@
     "using": [ [ "blacksmithing_standard", 40 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
-    "components": [ [ [ "scrap_aluminum", 52 ], [ "material_aluminium_ingot", 11 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 52 ], [ "aluminum_chunk", 11 ] ] ]
   },
   {
     "type": "recipe",

@@ -544,7 +544,7 @@
       [ "wire", 40 ],
       { "item": "sheet_metal", "prob": 5 },
       { "item": "sheet_metal_small", "prob": 5, "count": [ 0, 4 ] },
-      { "item": "material_aluminium_ingot", "prob": 10, "count": [ 1, 5 ] }
+      { "item": "aluminum_chunk", "prob": 10, "count": [ 1, 5 ] }
     ]
   },
   {
@@ -775,7 +775,7 @@
       [ "can_drink", 130 ],
       [ "can_drink", 130 ],
       [ "keg", 15 ],
-      [ "material_aluminium_ingot", 25 ],
+      [ "aluminum_chunk", 25 ],
       [ "xlframe", 10 ],
       [ "survival_kit_box", 1 ],
       [ "wearable_light", 5 ],
@@ -1414,7 +1414,7 @@
       { "group": "tools_toolbox", "prob": 5 },
       [ "apron_plastic", 20 ],
       [ "apron_leather", 2 ],
-      [ "chem_aluminium_sulphate", 20 ],
+      [ "aluminum_sulfate", 20 ],
       [ "plunger_toilet", 10 ],
       [ "plunger_futuristic", 5 ]
     ]
@@ -2299,7 +2299,7 @@
       { "item": "chem_hydrogen_peroxide", "prob": 10, "charges": [ 1, -1 ] },
       { "item": "chem_muriatic_acid", "prob": 5, "charges": [ 1, -1 ] },
       { "prob": 10, "group": "chem_sulphur_bottle_plastic_small_100_inf" },
-      { "item": "chem_aluminium_powder", "prob": 5, "charges": [ 1, 100 ] },
+      { "item": "aluminum_powder", "prob": 5, "charges": [ 1, 100 ] },
       { "item": "chem_zinc_powder", "prob": 10, "charges": [ 100, -1 ] },
       { "item": "chem_zinc_oxide", "prob": 5, "charges": [ 100, -1 ] },
       { "item": "chem_manganese_dioxide", "prob": 10, "charges": [ 100, -1 ] },

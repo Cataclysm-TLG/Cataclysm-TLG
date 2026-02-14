@@ -294,7 +294,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "using": [ [ "vehicle_wrench_2", 1 ] ] }
     },
     "description": "An L-shaped aluminum plate with straps and skid runners.  This could help you move furniture or appliances more safely, but Jevons' Paradox also applies to throwing your back out.",
-    "breaks_into": [ { "item": "sheet_aluminum_small", "count": [ 2, 4 ] }, { "item": "seatbelt", "count": [ 0, 2 ] } ],
+    "breaks_into": [ { "item": "aluminum_chunk", "count": [ 1, 3 ] }, { "item": "scrap_aluminum", "count": [ 1, 4 ] }, { "item": "seatbelt", "count": [ 0, 2 ] } ],
     "qualities": [ [ "LIFT", 1 ], [ "JACK", 1 ] ],
     "folded_volume": "7 L",
     "size": "15000 ml"

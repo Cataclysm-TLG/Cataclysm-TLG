@@ -3057,7 +3057,7 @@
       [ [ "water_faucet", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "30gal_drum", 1 ] ],
-      [ [ "material_aluminium_ingot", 2 ] ]
+      [ [ "aluminum_chunk", 2 ] ]
     ],
     "//": "drum assumed to be from model XE36S06ST45U0 water heater <https://images.thdstatic.com/catalog/pdfImages/2d/2d7ed116-1a8c-439d-b7fe-a62a0a98f806.pdf>"
   },
@@ -3081,7 +3081,7 @@
       [ [ "water_faucet", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "55gal_drum", 1 ] ],
-      [ [ "material_aluminium_ingot", 4 ] ]
+      [ [ "aluminum_chunk", 4 ] ]
     ],
     "//": "drum assumed to be from model XG55T06EC50UO water heater <https://images.thdstatic.com/catalog/pdfImages/7e/7e7928b1-8b4f-472a-8ee8-b48eb1e7932a.pdf>"
   },
@@ -4736,7 +4736,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 6 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 6 ] ] ]
   },
   {
     "result": "guitar_stand",
@@ -4744,7 +4744,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 2 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 2 ] ] ]
   },
   {
     "result": "bat_metal",
@@ -4752,7 +4752,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 3 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 3 ] ] ]
   },
   {
     "result": "cotton_sheet",
@@ -4844,7 +4844,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 63 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 63 ] ] ]
   },
   {
     "result": "esbit_stove",
@@ -5025,7 +5025,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "scrap_aluminum", 3 ] ], [ [ "material_aluminium_ingot", 6 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 3 ] ], [ [ "aluminum_chunk", 6 ] ] ]
   },
   {
     "result": "foldxlframe",
@@ -5033,7 +5033,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "scrap_aluminum", 3 ] ], [ [ "material_aluminium_ingot", 6 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 3 ] ], [ [ "aluminum_chunk", 6 ] ] ]
   },
   {
     "result": "aquarium_medium",
@@ -5060,7 +5060,7 @@
     "flags": [ "BLIND_EASY" ]
   },
   {
-    "result": "material_aluminium_ingot",
+    "result": "aluminum_chunk",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
@@ -5073,7 +5073,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "30 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 20 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 20 ] ] ]
   },
   {
     "result": "crutches",
@@ -5097,7 +5097,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "30 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 1 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 29 ] ], [ [ "cotton_sheet", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 29 ] ], [ [ "cotton_sheet", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
   },
   {
     "result": "stethoscope",
@@ -5515,7 +5515,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "1 h",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "scrap_aluminum", 1 ] ], [ [ "material_aluminium_ingot", 10 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 1 ] ], [ [ "aluminum_chunk", 10 ] ] ]
   },
   {
     "result": "55gal_drum_aluminum",
@@ -5523,7 +5523,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "1 h",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 40 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 40 ] ] ]
   },
   {
     "result": "sweater",

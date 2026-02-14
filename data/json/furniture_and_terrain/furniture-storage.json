@@ -1678,7 +1678,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
-        { "item": "material_aluminium_ingot", "count": [ 3, 8 ] },
+        { "item": "aluminum_chunk", "count": [ 3, 8 ] },
         { "item": "lock", "count": [ 0, 1 ] },
         { "item": "scrap_aluminum", "count": [ 3, 15 ] },
         { "item": "hinge", "count": [ 0, 2 ] },
