@@ -1623,9 +1623,9 @@
   {
     "id": "bio_faulty_grossfood",
     "type": "bionic",
-    "name": { "str": "Taste Fouler" },
-    "occupied_bodyparts": [ [ "head", 1 ], [ "mouth", 1 ] ],
-    "description": "A malfunctioning processor haphazardly interfaced with your taste receptors has given everything you consume a horrid bitter taste.  Food and drink will severely harm your morale.",
+    "name": { "str": "Emetic Inducer" },
+    "occupied_bodyparts": [ [ "torso", 1 ], [ "mouth", 1 ] ],
+    "description": "A malfunctioning bionic attached to your digestive system causes intermittent nausea, making it difficult to keep food down.",
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
