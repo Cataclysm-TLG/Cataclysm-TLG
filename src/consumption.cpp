@@ -601,7 +601,7 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
     }
 
     // Zombie meat doesn't taste good, but it's tolerable for those who can eat it.
-    if( has_trait( trait_EATDEAD ) ) {
+    if( has_trait( trait_EATDEAD ) && comest.poison > 0 ) {
         if( fun < -1.f ) {
             fun_max = fun;
             fun *= 0.25f;
