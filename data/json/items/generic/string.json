@@ -199,15 +199,11 @@
   {
     "id": "stick_fiber",
     "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
     "category": "spare_parts",
     "name": { "str": "fibrous stalk" },
     "symbol": "=",
     "material": [ "dry_plant" ],
     "description": "A rather green stick.  Very fibrous.",
-    "comestible_type": "INVALID",
-    "fun": -100,
-    "healthy": -20,
     "volume": "100 ml",
     "weight": "80 g"
   },
