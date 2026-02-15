@@ -73,7 +73,6 @@
 static const std::string comesttype_DRINK( "DRINK" );
 static const std::string comesttype_FOOD( "FOOD" );
 
-static const bionic_id bio_faulty_grossfood( "bio_faulty_grossfood" );
 static const bionic_id bio_syringe( "bio_syringe" );
 static const bionic_id bio_taste_blocker( "bio_taste_blocker" );
 
@@ -595,14 +594,18 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
         }
     }
 
-    if( has_bionic( bio_faulty_grossfood ) && comest.is_food() ) {
-        fun -= 13;
-    }
-
     if( fun < 0 && has_active_bionic( bio_taste_blocker ) &&
         get_power_level() > units::from_kilojoule( static_cast<std::int64_t>( std::abs(
                     comest.get_comestible_fun() ) ) ) ) {
         fun = 0;
+    }
+
+    // Zombie meat doesn't taste good, but it's tolerable for those who can eat it.
+    if( has_trait( trait_EATDEAD ) && comest.poison > 0 ) {
+        if( fun < -1.f ) {
+            fun_max = fun;
+            fun *= 0.25f;
+        }
     }
 
     return { static_cast< int >( fun ), static_cast< int >( fun_max ) };

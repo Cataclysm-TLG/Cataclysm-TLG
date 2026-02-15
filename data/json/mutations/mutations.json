@@ -4345,7 +4345,7 @@
     "name": { "str": "Saprovore" },
     "points": 2,
     "description": "Your digestive system is specialized to allow you to consume decaying material.  You can eat rotten food, albeit for less nutrition than usual.",
-    "category": [ "TROGLOBITE", "CHIMERA", "GASTROPOD", "INSECT" ],
+    "category": [ "TROGLOBITE", "CHIMERA", "GASTROPOD", "INSECT", "RAT" ],
     "flags": [ "IMMUNE_SPOIL" ]
   },
   {
