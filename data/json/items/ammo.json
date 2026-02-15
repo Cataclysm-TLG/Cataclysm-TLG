@@ -182,7 +182,7 @@
     "subtypes": [ "TOOL" ],
     "id": "betavoltaic",
     "category": "spare_parts",
-    "price": "407 USD 11 cents",
+    "price": "400 USD",
     "price_postapoc": "2 USD",
     "name": { "str": "betavoltaic cell" },
     "symbol": "=",

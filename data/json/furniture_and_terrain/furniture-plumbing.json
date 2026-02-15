@@ -103,8 +103,7 @@
       "str_max": 30,
       "sound": "porcelain breaking!",
       "sound_fail": "whunk!",
-      "items": [ { "item": "ceramic_shard", "count": [ 2, 8 ] }, { "item": "wax_paraffin", "count": 1 } ],
-      "destroyed_field": [ "fd_dirty_water", 4 ]
+      "items": [ { "item": "ceramic_shard", "count": [ 2, 8 ] }, { "item": "wax_paraffin", "count": 1 } ]
     }
   },
   {
