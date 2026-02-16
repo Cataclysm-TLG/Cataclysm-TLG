@@ -11139,7 +11139,7 @@ int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) cons
     }
     // Gun length only becomes a problem if it's > 75% of your height.
     const float threshold = 0.75f;
-    if( length_ratio > threshold ) {
+    if( length_ratio > threshold && !bipod ) {
         awkwardness = length_ratio / threshold;
     }
     // Handling could be either a bonus or penalty dependent upon installed mods.
