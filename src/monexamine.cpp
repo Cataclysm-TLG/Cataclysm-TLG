@@ -703,20 +703,20 @@ bool monexamine::pet_menu( monster &z )
     if( z.has_effect( effect_bleed ) ) {
         amenu.addentry( stop_bleeding, true, 'B', _( "Treat bleeding from %s" ), pet_name );
     }
-        if( z.has_flag( mon_flag_PET_MOUNTABLE ) && player_character.can_mount( z ) ) {
-            amenu.addentry( mount, true, 'r', _( "Mount %s" ), pet_name );
-        } else if( !z.has_flag( mon_flag_PET_MOUNTABLE ) ) {
-            amenu.addentry( mount, false, 'r', _( "%s cannot be mounted" ), pet_name );
-        } else if( z.get_size() <= player_character.get_size() ) {
-            amenu.addentry( mount, false, 'r', _( "%s is too small to carry your weight" ), pet_name );
-        } else if( player_character.get_skill_level( skill_survival ) < 1 ) {
-            amenu.addentry( mount, false, 'r', _( "You require survival skill 1 to ride" ) );
-        } else if( player_character.get_weight() >= z.get_weight() * z.get_mountable_weight_ratio() ) {
-            amenu.addentry( mount, false, 'r', _( "You are too heavy to mount %s" ), pet_name );
-        } else if( !z.has_effect( effect_monster_saddled ) &&
-                   player_character.get_skill_level( skill_survival ) < 4 ) {
-            amenu.addentry( mount, false, 'r', _( "You require survival skill 4 to ride without a saddle" ) );
-        }
+    if( z.has_flag( mon_flag_PET_MOUNTABLE ) && player_character.can_mount( z ) ) {
+        amenu.addentry( mount, true, 'r', _( "Mount %s" ), pet_name );
+    } else if( !z.has_flag( mon_flag_PET_MOUNTABLE ) ) {
+        amenu.addentry( mount, false, 'r', _( "%s cannot be mounted" ), pet_name );
+    } else if( z.get_size() <= player_character.get_size() ) {
+        amenu.addentry( mount, false, 'r', _( "%s is too small to carry your weight" ), pet_name );
+    } else if( player_character.get_skill_level( skill_survival ) < 1 ) {
+        amenu.addentry( mount, false, 'r', _( "You require survival skill 1 to ride" ) );
+    } else if( player_character.get_weight() >= z.get_weight() * z.get_mountable_weight_ratio() ) {
+        amenu.addentry( mount, false, 'r', _( "You are too heavy to mount %s" ), pet_name );
+    } else if( !z.has_effect( effect_monster_saddled ) &&
+               player_character.get_skill_level( skill_survival ) < 4 ) {
+        amenu.addentry( mount, false, 'r', _( "You require survival skill 4 to ride without a saddle" ) );
+    }
     amenu.query();
     int choice = amenu.ret;
 

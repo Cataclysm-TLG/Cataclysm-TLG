@@ -1104,37 +1104,37 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
     item_location weapon = used_weapon();
     if( bash_result.did_bash ) {
         ret.did_smash = true;
-            set_activity_level( EXPLOSIVE_EXERCISE );
-            handle_melee_wear( weapon );
-            weary_mult = 1.0f / exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
+        set_activity_level( EXPLOSIVE_EXERCISE );
+        handle_melee_wear( weapon );
+        weary_mult = 1.0f / exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
 
-            const int mod_sta = std::min( -150, 2 * get_standard_stamina_cost() );
-            burn_energy_arms( mod_sta );
+        const int mod_sta = std::min( -150, 2 * get_standard_stamina_cost() );
+        burn_energy_arms( mod_sta );
 
-            if( weapon ) {
-                const int glass_portion = weapon->made_of( material_glass );
-                float glass_fraction = glass_portion / static_cast<float>( weapon->type->mat_portion_total );
-                if( std::isnan( glass_fraction ) || glass_fraction > 1.f ) {
-                    glass_fraction = 0.f;
-                }
-                const int vol = weapon->volume() * glass_fraction / 250_ml;
-                if( glass_portion && rng( 0, vol + 3 ) < vol ) {
-                    add_msg( m_bad, _( "Your %s shatters!" ), weapon->tname() );
-                    weapon->spill_contents( pos_bub() );
-                    sounds::sound( pos_bub(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
-                                   "glass" );
-                    deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( damage_cut,
-                                 rng( 0,
-                                      vol ) ) );
-                    if( vol > 20 ) {
-                        // Hurt left arm too, if it was big
-                        deal_damage( nullptr, bodypart_id( "hand_l" ), damage_instance( damage_cut,
-                                     rng( 0, static_cast<int>( vol * .5 ) ) ) );
-                    }
-                    remove_weapon();
-                    check_dead_state( &here );
-                }
+        if( weapon ) {
+            const int glass_portion = weapon->made_of( material_glass );
+            float glass_fraction = glass_portion / static_cast<float>( weapon->type->mat_portion_total );
+            if( std::isnan( glass_fraction ) || glass_fraction > 1.f ) {
+                glass_fraction = 0.f;
             }
+            const int vol = weapon->volume() * glass_fraction / 250_ml;
+            if( glass_portion && rng( 0, vol + 3 ) < vol ) {
+                add_msg( m_bad, _( "Your %s shatters!" ), weapon->tname() );
+                weapon->spill_contents( pos_bub() );
+                sounds::sound( pos_bub(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
+                               "glass" );
+                deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( damage_cut,
+                             rng( 0,
+                                  vol ) ) );
+                if( vol > 20 ) {
+                    // Hurt left arm too, if it was big
+                    deal_damage( nullptr, bodypart_id( "hand_l" ), damage_instance( damage_cut,
+                                 rng( 0, static_cast<int>( vol * .5 ) ) ) );
+                }
+                remove_weapon();
+                check_dead_state( &here );
+            }
+        }
         mod_moves( -move_cost * weary_mult );
         recoil = MAX_RECOIL;
 

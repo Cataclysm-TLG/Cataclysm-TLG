@@ -1489,8 +1489,8 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
 
     // Set activity level to 12 * str_ratio, with 12 being max (EXPLOSIVE_EXERCISE)
     // This ratio should never be below 0 and above 1
-        const int stamina_cost = get_standard_stamina_cost( &thrown );
-        mod_stamina( stamina_cost + throwing_skill );
+    const int stamina_cost = get_standard_stamina_cost( &thrown );
+    mod_stamina( stamina_cost + throwing_skill );
 
     const float skill_level = throwing_skill_adjusted( *this );
     add_msg_debug( debugmode::DF_RANGED, "Adjusted throw skill %g", skill_level );

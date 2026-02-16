@@ -3205,15 +3205,30 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
                                iteminfo::lower_is_better | iteminfo::no_name,
                                loaded_mod->gun_recoil( player_character, true ) );
         }
-
+        if( parts->test( iteminfo_parts::GUN_AWKWARDNESS ) ) {
+            info.back().bNewLine = true;
+            float gun_length = ( loaded_mod->length() / 10_mm );
+            float length_ratio = gun_length / get_player_character().height();
+            float awkwardness = 1.f;
+            const float threshold = 0.75f;
+            awkwardness = length_ratio / threshold;
+            int awkward_percent = std::max( 0,
+                                            static_cast<int>( std::round( ( awkwardness - 1.f ) * 100.f ) ) );
+            info.emplace_back(
+                "GUN",
+                _( "Height penalty: " ),
+                string_format( "<neutral>%d%%</neutral>", awkward_percent ),
+                iteminfo::lower_is_better
+            );
+        }
         if( parts->test( iteminfo_parts::GUN_RECOIL_THEORETICAL_MINIMUM ) ) {
             info.back().bNewLine = true;
             info.emplace_back( "GUN", _( "Theoretical minimum recoil: " ), "",
                                iteminfo::no_newline | iteminfo::lower_is_better, loaded_mod->gun_recoil( player_character, true,
                                        true ) );
         }
-        if( parts->test( iteminfo_parts:: GUN_IDEAL_STRENGTH ) ) {
-            info.emplace_back( "GUN", "ideal_strength", _( " (when strength reaches: <num>)" ),
+        if( parts->test( iteminfo_parts::GUN_IDEAL_STRENGTH ) ) {
+            info.emplace_back( "GUN", "ideal_strength", _( " (Requires <num> strength)" ),
                                iteminfo::lower_is_better | iteminfo::no_name,
                                loaded_mod->gun_base_weight() / 333.0_gram );
         }
@@ -11097,10 +11112,11 @@ int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) cons
     if( !is_gun() || ( ammo_required() && !ammo_remaining( ) ) ) {
         return 0;
     }
-
-    ///\ARM_STR improves the handling of heavier weapons
-    // we consider only base weight to avoid exploits
-    // now we need to add weight of receiver
+    float gun_length = ( length() / 10_mm );
+    // Very long guns become awkward for small characters.
+    float length_ratio = gun_length / p.height();
+    float awkwardness = 1.f;
+    ///\ARM_STR improves the handling of heavier weapons.
     double wt = ideal_strength ? gun_base_weight() / 333.0_gram : std::min( gun_base_weight(),
                 p.get_arm_str() * 333_gram ) / 333.0_gram;
 
@@ -11111,22 +11127,26 @@ int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) cons
         }
     }
 
-    // rescale from JSON units which are intentionally specified as integral values
+    // $escale from JSON units which are intentionally specified as integral values.
     handling /= 10;
 
-    // algorithm is biased so heavier weapons benefit more from improved handling
+    // Algorithm is biased so heavier weapons benefit more from improved handling.
     handling = std::pow( wt, 0.8 ) * std::pow( handling, 1.2 );
 
     int qty = type->gun->recoil;
     if( has_ammo() ) {
         qty += ammo_data()->ammo->recoil;
     }
-
-    // handling could be either a bonus or penalty dependent upon installed mods
+    // Gun length only becomes a problem if it's > 75% of your height.
+    const float threshold = 0.75f;
+    if( length_ratio > threshold && !bipod ) {
+        awkwardness = length_ratio / threshold;
+    }
+    // Handling could be either a bonus or penalty dependent upon installed mods.
     if( handling > 1.0 ) {
-        return qty / handling;
+        return static_cast<int>( std::round( qty / handling * awkwardness ) );
     } else {
-        return qty * ( 1.0 + std::abs( handling ) );
+        return static_cast<int>( std::round( qty * ( 1.0 + std::abs( handling ) ) * awkwardness ) );
     }
 }
 
@@ -14534,7 +14554,7 @@ int item::charge_linked_batteries( vehicle &linked_veh, int turns_elapsed )
 
 
 
-    
+
     if( power_in ) {
         int available_charges = linked_veh.battery_power_level( ).first;
         int wanted_charges = ammo_capacity( itype_battery->ammo->type ) - ammo_remaining( );

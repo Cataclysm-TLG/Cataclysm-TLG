@@ -2545,7 +2545,7 @@ steed_type Character::get_steed_type() const
 {
     steed_type steed;
     if( is_mounted() ) {
-            steed = steed_type::ANIMAL;
+        steed = steed_type::ANIMAL;
     } else {
         steed = steed_type::NONE;
     }
