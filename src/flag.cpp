@@ -184,7 +184,6 @@ const flag_id flag_MAG_DESTROY( "MAG_DESTROY" );
 const flag_id flag_MAG_EJECT( "MAG_EJECT" );
 const flag_id flag_MC_HAS_DATA( "MC_HAS_DATA" );
 const flag_id flag_MC_MOBILE( "MC_MOBILE" );
-const flag_id flag_MECH_BAT( "MECH_BAT" );
 const flag_id flag_MELTS( "MELTS" );
 const flag_id flag_MESSY( "MESSY" );
 const flag_id flag_MISSION_ITEM( "MISSION_ITEM" );

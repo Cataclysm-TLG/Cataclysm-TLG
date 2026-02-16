@@ -192,7 +192,6 @@ extern const flag_id flag_MAG_DESTROY;
 extern const flag_id flag_MAG_EJECT;
 extern const flag_id flag_MC_HAS_DATA;
 extern const flag_id flag_MC_MOBILE;
-extern const flag_id flag_MECH_BAT;
 extern const flag_id flag_MELTS;
 extern const flag_id flag_MESSY;
 extern const flag_id flag_MISSION_ITEM;

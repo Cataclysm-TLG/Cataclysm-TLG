@@ -997,16 +997,6 @@ void avatar_action::plthrow( avatar &you, item_location loc,
         add_msg( m_info, _( "You are incapable of throwing anything!" ) );
         return;
     }
-    if( you.is_mounted() ) {
-        monster *mons = get_player_character().mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "Your %s refuses to move as its batteries have been drained." ),
-                         mons->get_name() );
-                return;
-            }
-        }
-    }
 
     // TODO: Move this to Character or ranged. As of this writing, bionics.h can be removed from header at that time.
     if( you.has_effect_with_flag( json_flag_GRAB_FILTER ) ) {

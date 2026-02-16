@@ -138,7 +138,6 @@ std::optional<int> measure_resonance( Character *, item *, const tripoint_bub_ms
 std::optional<int> ebooksave( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> makemound( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> mace( Character *, item *, const tripoint_bub_ms & );
-std::optional<int> manage_exosuit( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> melatonin_tablet( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> mininuke( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> molotov_lit( Character *, item *, const tripoint_bub_ms & );

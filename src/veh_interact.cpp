@@ -611,11 +611,7 @@ void veh_interact::cache_tool_availability()
     crafting_inv = &player_character.crafting_inventory();
 
     cache_tool_availability_update_lifting( player_character.pos_bub() );
-    int mech_jack = 0;
-    if( player_character.is_mounted() ) {
-        mech_jack = player_character.mounted_creature->mech_str_addition() + 10;
-    }
-    int max_quality = std::max( { player_character.max_quality( qual_JACK ), mech_jack,
+    int max_quality = std::max( { player_character.max_quality( qual_JACK ),
                                   map_selector( player_character.pos_bub(), PICKUP_RANGE ).max_quality( qual_JACK ),
                                   vehicle_selector( here, player_character.pos_bub(), 2, true, *veh ).max_quality( qual_JACK )
                                 } );

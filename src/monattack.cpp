@@ -1356,9 +1356,6 @@ void mattack::smash_specific( monster *z, Creature *target )
     if( target == nullptr || !z->is_adjacent( target, false ) ) {
         return;
     }
-    if( z->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        z->use_mech_power( 5_kJ );
-    }
     z->set_dest( target->pos_abs() );
     smash( z );
 }

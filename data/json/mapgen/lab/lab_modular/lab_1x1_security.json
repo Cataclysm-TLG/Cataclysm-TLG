@@ -514,8 +514,7 @@
         { "monster": "GROUP_LAB_MILITARY", "x": [ 16, 20 ], "y": [ 8, 12 ], "chance": 100, "repeat": [ 1, 3 ] }
       ],
       "place_loot": [
-        { "item": "recon_mech_laser_single", "x": 15, "y": [ 15 ], "chance": 85 },
-        { "item": "huge_atomic_battery_cell", "x": 21, "y": [ 15, 16 ], "chance": 85 }
+        { "item": "recon_mech_laser_single", "x": 15, "y": [ 15 ], "chance": 85 }
       ],
       "items": {
         "q": { "item": "guns_milspec", "chance": 40, "repeat": [ 1, 2 ] },

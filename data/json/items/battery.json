@@ -148,26 +148,5 @@
     "looks_like": "battery",
     "flags": [ "NO_SALVAGE", "NO_UNLOAD", "NO_RELOAD", "LEAK_DAM", "RADIOACTIVE", "BATTERY_HEAVY" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 4800 } } ]
-  },
-  {
-    "id": "huge_atomic_battery_cell",
-    "type": "ITEM",
-    "subtypes": [ "MAGAZINE" ],
-    "category": "tool_magazine",
-    "name": { "str": "plutonium fuel cell" },
-    "description": "A battery that uses a huge plutonium-244 rod to stabilize an exotic nanocompound.  It was used in military mech-suits, was highly experimental, and had no civilian applications.  Although it stores a stupendous amount of power, it cannot be recharged.",
-    "weight": "34000 g",
-    "volume": "30 L",
-    "price": "1000 USD",
-    "price_postapoc": "50 USD",
-    "material": [ "superalloy", "plastic" ],
-    "symbol": "=",
-    "color": "red",
-    "ammo_type": [ "battery" ],
-    "count": 100000,
-    "capacity": 100000,
-    "looks_like": "battery",
-    "flags": [ "NO_SALVAGE", "NO_UNLOAD", "NO_RELOAD", "MECH_BAT", "LEAK_DAM", "RADIOACTIVE" ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 100000 } } ]
   }
 ]

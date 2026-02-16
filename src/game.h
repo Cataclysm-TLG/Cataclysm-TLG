@@ -146,7 +146,6 @@ class game
 {
         friend class editmap;
         friend class main_menu;
-        friend class exosuit_interact;
         friend class swap_map;
         friend achievements_tracker &get_achievements();
         friend event_bus &get_event_bus();

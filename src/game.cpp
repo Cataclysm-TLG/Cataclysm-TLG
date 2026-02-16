@@ -6363,10 +6363,6 @@ void game::examine( const tripoint_bub_ms &examp, bool with_pickup )
                 if( monexamine::pet_menu( *mon ) ) {
                     return;
                 }
-            } else if( mon->has_flag( mon_flag_RIDEABLE_MECH ) && !mon->has_effect( effect_pet ) ) {
-                if( monexamine::mech_hack( *mon ) ) {
-                    return;
-                }
             } else if( mon->has_flag( mon_flag_PAY_BOT ) ) {
                 if( monexamine::pay_bot( *mon ) ) {
                     return;
@@ -6391,7 +6387,7 @@ void game::examine( const tripoint_bub_ms &examp, bool with_pickup )
 
     const optional_vpart_position vp = here.veh_at( examp );
     if( vp ) {
-        if( !u.is_mounted() || u.mounted_creature->has_flag( mon_flag_RIDEABLE_MECH ) ) {
+        if( !u.is_mounted() ) {
             if( !vp->vehicle().is_appliance() ) {
                 vp->vehicle().interact_with( &here, examp, with_pickup );
             } else {
@@ -10101,13 +10097,6 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
 
     if( u.is_mounted() ) {
         monster *mons = u.mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "Your %s refuses to move as its batteries have been drained." ),
-                         mons->get_name() );
-                return false;
-            }
-        }
         if( !mons->move_effects( false, dest_loc ) ) {
             add_msg( m_bad, _( "You cannot move as your %s isn't able to move." ), mons->get_name() );
             return false;
@@ -10170,22 +10159,6 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
 
     if( ( !here.passable_skip_fields( dest_loc ) || ( !impassable_field_ids.empty() &&
             !u.is_immune_fields( impassable_field_ids ) ) ) && !pushing && !shifting_furniture ) {
-        if( vp_there && u.mounted_creature && u.mounted_creature->has_flag( mon_flag_RIDEABLE_MECH ) &&
-            vp_there->vehicle().handle_potential_theft( u ) ) {
-            tripoint_rel_ms diff = dest_loc - pos;
-            if( diff.x() < 0 ) {
-                diff.x() -= 2;
-            } else if( diff.x() > 0 ) {
-                diff.x() += 2;
-            }
-            if( diff.y() < 0 ) {
-                diff.y() -= 2;
-            } else if( diff.y() > 0 ) {
-                diff.y() += 2;
-            }
-            u.mounted_creature->shove_vehicle( dest_loc + diff.xy(),
-                                               dest_loc );
-        }
         return false;
     }
     if( vp_there && !vp_there->vehicle().handle_potential_theft( u ) ) {
@@ -10252,19 +10225,17 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     const int previous_moves = u.get_moves();
     if( u.is_mounted() ) {
         auto *crit = u.mounted_creature.get();
-        if( !crit->has_flag( mon_flag_RIDEABLE_MECH ) &&
-            ( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, dest_loc ) ||
+        if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, dest_loc ) ||
               here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_BARRICADABLE_DOOR, dest_loc ) ||
               here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE, dest_loc ) ||
               here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_BARRICADABLE_DOOR_DAMAGED, dest_loc ) ||
-              here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_BARRICADABLE_DOOR_REINFORCED, dest_loc ) ) ) {
+              here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_BARRICADABLE_DOOR_REINFORCED, dest_loc ) ) {
             add_msg( m_warning, _( "You cannot pass obstacles whilst mounted." ) );
             return false;
         }
         const double base_moves = u.run_cost( mcost, diag ) * 100.0 / crit->get_speed();
         const double encumb_moves = u.get_weight() / 4800.0_gram;
         u.mod_moves( -static_cast<int>( std::ceil( base_moves + encumb_moves ) ) );
-        crit->use_mech_power( u.current_movement_mode()->mech_power_use() );
     } else {
         u.mod_moves( -u.run_cost( mcost, diag ) );
         /**
@@ -11725,17 +11696,6 @@ void game::vertical_move( int movez, bool force, bool peeking )
         return;
     }
 
-    if( u.is_mounted() ) {
-        monster *mons = u.mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "Your %s refuses to move as its batteries have been drained." ),
-                         mons->get_name() );
-                return;
-            }
-        }
-    }
-
     map &here = get_map();
     tripoint_bub_ms pos = u.pos_bub( here );
 
@@ -11999,12 +11959,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
         }
     }
 
-    if( u.is_mounted() ) {
-        monster *crit = u.mounted_creature.get();
-        if( crit->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            crit->use_mech_power( u.current_movement_mode()->mech_power_use() + 1_kJ );
-        }
-    } else if( !u.in_vehicle ) {
+    if( !u.in_vehicle ) {
         u.mod_moves( -move_cost );
         u.burn_energy_all( -move_cost );
     }

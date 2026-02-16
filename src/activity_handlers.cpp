@@ -3679,17 +3679,10 @@ void activity_handlers::robot_control_finish( player_activity *act, Character *y
     const float computer_skill = you->get_skill_level( skill_computer );
     const float randomized_skill = rng( 2, you->int_cur ) + computer_skill;
     float success = computer_skill - 3 * z->type->difficulty / randomized_skill;
-    if( z->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        success = randomized_skill - rng( 1, 11 );
-    }
-    // rideable mechs are not hostile, they have no AI, they do not resist control as much.
     if( success >= 0 ) {
         you->add_msg_if_player( _( "You successfully override the %s's IFF protocols!" ),
                                 z->name() );
         z->friendly = -1;
-        if( z->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            z->add_effect( effect_pet, 1_turns, true );
-        }
     } else if( success >= -2 ) {
         //A near success
         you->add_msg_if_player( _( "The %s short circuits as you attempt to reprogram it!" ), z->name() );
