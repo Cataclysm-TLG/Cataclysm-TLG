@@ -82,7 +82,6 @@
     "flags": [
       "SEES",
       "HEARS",
-      "SMELLS",
       "ANIMAL",
       "PATH_AVOID_DANGER",
       "WARM",
@@ -210,7 +209,7 @@
     "reproduction": { "baby_egg": "egg_duck", "baby_count": 3, "baby_timer": 5 },
     "baby_flags": [ "SPRING" ],
     "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 5 },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SWARMS", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SWARMS", "SMALL_HIDER" ]
   },
   {
     "id": "mon_turkey",
@@ -243,7 +242,7 @@
     "reproduction": { "baby_egg": "egg_turkey", "baby_count": 3, "baby_timer": 12 },
     "baby_flags": [ "SPRING", "SUMMER" ],
     "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 8 },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SMALL_HIDER" ]
   },
   {
     "id": "mon_pheasant",
@@ -421,7 +420,8 @@
     "aggro_character": true,
     "aggression": 100,
     "morale": 100,
-    "scents_tracked": [ "sc_human" ],
+    "vision_day": 50,
+    "vision_night": 5,
     "melee_dice": 1,
     "melee_dice_sides": 3,
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
@@ -440,7 +440,6 @@
     "flags": [
       "SEES",
       "HEARS",
-      "SMELLS",
       "PATH_AVOID_DANGER",
       "WARM",
       "FLIES",
@@ -469,11 +468,11 @@
     "color": "dark_gray",
     "aggression": 100,
     "morale": 105,
-    "scents_tracked": [ "sc_human" ],
     "melee_skill": 4,
     "melee_dice": 2,
     "melee_dice_sides": 8,
     "melee_damage": [ { "damage_type": "cut", "amount": 14 } ],
+    "vision_day": 50,
     "vision_night": 5,
     "stomach_size": 800,
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bird" ],
@@ -488,7 +487,7 @@
       [ "EAT_CARRION", 40 ],
       [ "EAT_FOOD", 120 ]
     ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER" ]
+    "flags": [ "SEES", "HEARS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER" ]
   },
   {
     "id": "mon_pigeon",
@@ -542,7 +541,7 @@
       "feed": "The %s seems to like you!  It runs around your legs and seems friendly.",
       "pet": "The %s runs around your leg."
     },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CAN_BE_CULLED", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CAN_BE_CULLED", "SMALL_HIDER" ]
   },
   {
     "id": "mon_goose_chick",
@@ -579,7 +578,7 @@
     "reproduction": { "baby_egg": "egg_woodpecker", "baby_count": 5, "baby_timer": 14 },
     "baby_flags": [ "SPRING" ],
     "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 8 },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SMALL_HIDER" ]
   },
   {
     "id": "mon_woodpecker_chick",
@@ -618,7 +617,7 @@
     "reproduction": { "baby_egg": "egg_coot", "baby_count": 3, "baby_timer": 5 },
     "baby_flags": [ "SPRING" ],
     "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 5 },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SWARMS", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SWARMS", "SMALL_HIDER" ]
   },
   {
     "id": "mon_cormorant",

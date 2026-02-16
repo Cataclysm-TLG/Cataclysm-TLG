@@ -26,6 +26,7 @@
     "bleed_rate": 0,
     "vision_day": 5,
     "vision_night": 5,
+    "scents_tracked": [ "sc_human", "sc_fetid" ],
     "harvest": "zombie_humanoid_mushroom",
     "special_attacks": [ [ "FUNGUS", 200 ], { "type": "bite", "cooldown": 5 } ],
     "death_drops": "default_zombie_death_drops",
@@ -220,6 +221,7 @@
     "vision_night": 5,
     "harvest": "zombie_humanoid_mushroom",
     "special_attacks": [ [ "scratch", 15 ], [ "FUNGUS", 200 ] ],
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "death_drops": {
       "subtype": "collection",
       "groups": [ [ "default_zombie_children_clothes", 100 ], [ "child_items_pockets", 65 ] ],
@@ -257,6 +259,7 @@
     "vision_day": 30,
     "vision_night": 3,
     "harvest": "zombie_humanoid",
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "special_attacks": [ [ "FUNGUS", 100 ], [ "BOOMER", 20 ], [ "scratch", 20 ] ],
     "death_drops": { "subtype": "collection", "groups": [ [ "default_zombie_death_drops", 100 ], [ "explode_zed_fungal", 100 ] ] },
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
@@ -292,6 +295,7 @@
     "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "1 s" } ],
     "bleed_rate": 0,
     "harvest": "zombie_humanoid_mushroom",
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "special_attacks": [
       {
         "type": "spell",
@@ -330,6 +334,7 @@
     "dodge": 3,
     "vision_night": 5,
     "harvest": "zombie_animal_mushroom",
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "special_attacks": [ { "id": "impale", "damage_max_instance": [ { "damage_type": "stab", "amount": 15, "armor_multiplier": 0.6 } ] } ],
     "flags": [
       "SEES",
@@ -376,6 +381,7 @@
     "families": [ "prof_intro_biology", "prof_wp_zombie" ],
     "harvest": "zombie",
     "path_settings": { "max_dist": 4 },
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "special_attacks": [
       { "id": "scratch_humanoid", "cooldown": 10 },
       {
@@ -419,6 +425,7 @@
     "special_attacks": [ { "id": "bite_humanoid" }, { "id": "scratch_humanoid" }, [ "FUNGUS", 210 ] ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "flags": [ "SEES", "SMELLS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
     "armor": { "electric": 1 }
   },
