@@ -1687,7 +1687,8 @@ void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
 
     // Pull creature
 
-    if( c->has_effect( effect_tied ) || c->has_flag( mon_flag_IMMOBILE ) || c->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
+    if( c->has_effect( effect_tied ) || c->has_flag( mon_flag_IMMOBILE ) ||
+        c->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
         add_msg_if_player( _( "%s is immobile and cannot be moved." ), c->disp_name( false, true ) );
         return;
     }
@@ -1719,7 +1720,8 @@ bool Creature::grapple_drag( Creature *c )
     if( !has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
         return false;
     }
-    if( c->has_effect( effect_tied ) || c->has_flag( mon_flag_IMMOBILE ) || c->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
+    if( c->has_effect( effect_tied ) || c->has_flag( mon_flag_IMMOBILE ) ||
+        c->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
         add_msg_if_player( _( "%s is immobile and cannot be moved." ), c->disp_name( false, true ) );
         return false;
     }

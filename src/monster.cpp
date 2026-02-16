@@ -2083,10 +2083,10 @@ bool monster::melee_attack( Creature &target, float accuracy )
                 add_msg( m_bad, _( "%1$s hits your %2$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
                          body_part_name_accusative( dealt_dam.bp_hit ) );
             } else if( target.is_npc() ) {
-                    //~ %1$s: attacker name, %2$s: target NPC name, %3$s: bodypart name in accusative
-                    add_msg( _( "%1$s hits %2$s %3$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
-                             target.disp_name( true ),
-                             body_part_name_accusative( dealt_dam.bp_hit ) );
+                //~ %1$s: attacker name, %2$s: target NPC name, %3$s: bodypart name in accusative
+                add_msg( _( "%1$s hits %2$s %3$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
+                         target.disp_name( true ),
+                         body_part_name_accusative( dealt_dam.bp_hit ) );
             } else {
                 if( get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ) {
                     if( !u_see_me && u_see_target ) {
