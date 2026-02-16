@@ -11,7 +11,7 @@
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
     "proficiencies": [ { "proficiency": "prof_lockpicking", "time_multiplier": 1, "skill_penalty": 0 } ],
     "time": "1 h",
-    "tools": [ [ "lock" ] ],
+    "tools": [ [ "lock", "door_lock", "cargo_lock" ] ],
     "//": "Crude picks will eventually lose their shape",
     "components": [ [ [ "crude_picklock", 1 ] ] ],
     "autolearn": [ [ "traps", 3 ] ],
@@ -32,7 +32,7 @@
     "proficiencies": [ { "proficiency": "prof_lockpicking", "time_multiplier": 1, "skill_penalty": 0 } ],
     "time": "1 h",
     "qualities": [ { "id": "LOCKPICK", "level": 5 } ],
-    "tools": [ [ "lock" ] ],
+    "tools": [ [ "lock", "door_lock", "cargo_lock" ] ],
     "autolearn": [ [ "traps", 3 ] ],
     "book_learn": [ [ "book_lockpick", 1 ] ],
     "flags": [ "BLIND_EASY" ]
