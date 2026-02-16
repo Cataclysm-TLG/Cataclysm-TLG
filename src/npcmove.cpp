@@ -3125,9 +3125,6 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
                                                 diag ) * 100.0 / mounted_creature->get_speed();
             const double encumb_moves = get_weight() / 4800.0_gram;
             mod_moves( -static_cast<int>( std::ceil( base_moves + encumb_moves ) ) );
-            if( mounted_creature->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-                mounted_creature->use_mech_power( 1_kJ );
-            }
         } else {
             mod_moves( -run_cost( here.combined_movecost( pos, p ), diag ) );
         }

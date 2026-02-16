@@ -146,8 +146,6 @@ extern mon_flag_id mon_flag_ACIDPROOF,
        mon_flag_KEENNOSE,
        mon_flag_KEEP_DISTANCE,
        mon_flag_LOUDMOVES,
-       mon_flag_MECH_DEFENSIVE,
-       mon_flag_MECH_RECON_VISION,
        mon_flag_MILKABLE,
        mon_flag_NEMESIS,
        mon_flag_NEVER_WANDER,
@@ -181,7 +179,6 @@ extern mon_flag_id mon_flag_ACIDPROOF,
        mon_flag_RANGED_ATTACKER,
        mon_flag_REVIVES,
        mon_flag_REVIVES_HEALTHY,
-       mon_flag_RIDEABLE_MECH,
        mon_flag_SEES,
        mon_flag_SHORTACIDTRAIL,
        mon_flag_SILENT_DISAPPEAR,
@@ -338,14 +335,6 @@ struct mtype {
          * of this type (if it's friendly).
          */
         itype_id revert_to_itype;
-        /**
-         * If this monster is a rideable mech with built-in weapons, this is the weapons id
-         */
-        itype_id mech_weapon;
-        /**
-         * If this monster is a rideable mech it needs a power source battery type
-         */
-        itype_id mech_battery;
 
         /** Stores effect data for effects placed on attack */
         std::vector<mon_effect_data> atk_effs;
@@ -484,11 +473,6 @@ struct mtype {
 
         // Monster reproduction variables
         int baby_count;
-
-        /**
-         * If this monster is a rideable mech with enhanced strength, this is the strength it gives to the player
-         */
-        int mech_str_bonus = 0;
 
         // Grinding cap for training player's melee skills when hitting this monster, defaults to MAX_SKILL.
         int melee_training_cap;

@@ -59,7 +59,6 @@ static const efftype_id effect_sheared( "sheared" );
 static const efftype_id effect_tied( "tied" );
 
 
-static const flag_id json_flag_MECH_BAT( "MECH_BAT" );
 static const flag_id json_flag_TACK( "TACK" );
 static const flag_id json_flag_TIE_UP( "TIE_UP" );
 
@@ -554,43 +553,6 @@ void shear_animal( monster &z )
     guy.assign_activity( shearing_activity_actor( z.pos_bub(), !monster_tied ) );
 }
 
-void remove_battery( monster &z )
-{
-    get_map().add_item_or_charges( get_player_character().pos_bub(), *z.battery_item );
-    z.battery_item.reset();
-}
-
-void insert_battery( monster &z )
-{
-    if( z.battery_item ) {
-        // already has a battery, shouldn't be called with one, but just in case.
-        return;
-    }
-    Character &player_character = get_player_character();
-    std::vector<item *> bat_inv = player_character.cache_get_items_with( json_flag_MECH_BAT );
-    if( bat_inv.empty() ) {
-        return;
-    }
-    int i = 0;
-    uilist selection_menu;
-    selection_menu.text = string_format( _( "Select an battery to insert into your %s." ),
-                                         z.get_name() );
-    selection_menu.addentry( i++, true, MENU_AUTOASSIGN, _( "Cancel" ) );
-    for( const item *iter : bat_inv ) {
-        selection_menu.addentry( i++, true, MENU_AUTOASSIGN, _( "Use %s" ), iter->tname() );
-    }
-    selection_menu.selected = 1;
-    selection_menu.query();
-    int index = selection_menu.ret;
-    if( index == 0 || index == UILIST_CANCEL || index < 0 ||
-        index > static_cast<int>( bat_inv.size() ) ) {
-        return;
-    }
-    item *bat_item = bat_inv[index - 1];
-    z.battery_item = cata::make_value<item>( *bat_item );
-    player_character.i_rem( bat_item );
-}
-
 } // namespace
 
 bool Character::can_mount( const monster &critter ) const
@@ -633,9 +595,6 @@ bool monexamine::pet_menu( monster &z )
         mount,
         tie,
         untie,
-        remove_bat,
-        insert_bat,
-        check_bat,
         attack,
         talk_to,
         stop_bleeding
@@ -671,7 +630,7 @@ bool monexamine::pet_menu( monster &z )
         if( !z.inv.empty() ) {
             amenu.addentry( drop_all, true, 'd', _( "Remove all items from bag" ) );
         }
-    } else if( !z.has_flag( mon_flag_RIDEABLE_MECH ) ) {
+    } else {
         amenu.addentry( attach_bag, true, 'b', _( "Attach bag to %s" ), pet_name );
     }
     if( z.has_effect( effect_harnessed ) ) {
@@ -679,7 +638,7 @@ bool monexamine::pet_menu( monster &z )
     }
     if( z.has_effect( effect_monster_armor ) ) {
         amenu.addentry( mon_armor_remove, true, 'a', _( "Remove armor from %s" ), pet_name );
-    } else if( !z.has_flag( mon_flag_RIDEABLE_MECH ) ) {
+    } else {
         amenu.addentry( mon_armor_add, true, 'a', _( "Equip %s with armor" ), pet_name );
     }
     if( z.has_effect( effect_tied ) ) {
@@ -689,7 +648,7 @@ bool monexamine::pet_menu( monster &z )
         amenu.addentry( tie, true, 't', _( "Tie" ) );
         amenu.addentry( unleash, true, 'L', _( "Remove leash from %s" ), pet_name );
     }
-    if( !z.has_effect( effect_leashed ) && !z.has_flag( mon_flag_RIDEABLE_MECH ) ) {
+    if( !z.has_effect( effect_leashed ) ) {
         if( player_character.cache_has_item_with( json_flag_TIE_UP ) ) {
             amenu.addentry( leash, true, 't', _( "Attach leash to %s" ), pet_name );
         } else {
@@ -744,7 +703,6 @@ bool monexamine::pet_menu( monster &z )
     if( z.has_effect( effect_bleed ) ) {
         amenu.addentry( stop_bleeding, true, 'B', _( "Treat bleeding from %s" ), pet_name );
     }
-    if( !z.has_flag( mon_flag_RIDEABLE_MECH ) ) {
         if( z.has_flag( mon_flag_PET_MOUNTABLE ) && player_character.can_mount( z ) ) {
             amenu.addentry( mount, true, 'r', _( "Mount %s" ), pet_name );
         } else if( !z.has_flag( mon_flag_PET_MOUNTABLE ) ) {
@@ -759,32 +717,6 @@ bool monexamine::pet_menu( monster &z )
                    player_character.get_skill_level( skill_survival ) < 4 ) {
             amenu.addentry( mount, false, 'r', _( "You require survival skill 4 to ride without a saddle" ) );
         }
-    } else {
-        const itype &type = *item::find_type( z.type->mech_battery );
-        int max_charge = type.magazine->capacity;
-        float charge_percent;
-        if( z.battery_item ) {
-            charge_percent = static_cast<float>( z.battery_item->ammo_remaining( ) ) / max_charge * 100;
-        } else {
-            charge_percent = 0.0;
-        }
-        amenu.addentry( check_bat, false, 'c', _( "%s battery level is %d%%" ), z.get_name(),
-                        static_cast<int>( charge_percent ) );
-        if( !player_character.get_wielded_item() && z.battery_item ) {
-            amenu.addentry( mount, true, 'r', _( "Climb into the mech and take control" ) );
-        } else if( player_character.get_wielded_item() ) {
-            amenu.addentry( mount, false, 'r', _( "You cannot pilot the mech whilst wielding something" ) );
-        } else if( !z.battery_item ) {
-            amenu.addentry( mount, false, 'r', _( "This mech has a dead battery and won't turn on" ) );
-        }
-        if( z.battery_item ) {
-            amenu.addentry( remove_bat, true, 'x', _( "Remove the mech's battery pack" ) );
-        } else if( player_character.has_amount( z.type->mech_battery, 1 ) ) {
-            amenu.addentry( insert_bat, true, 'x', _( "Insert a new battery pack" ) );
-        } else {
-            amenu.addentry( insert_bat, false, 'x', _( "You need a %s to power this mech" ), type.nname( 1 ) );
-        }
-    }
     amenu.query();
     int choice = amenu.ret;
 
@@ -863,14 +795,6 @@ bool monexamine::pet_menu( monster &z )
         case pay:
             pay_bot( z );
             break;
-        case remove_bat:
-            remove_battery( z );
-            break;
-        case insert_bat:
-            insert_battery( z );
-            break;
-        case check_bat:
-            break;
         case attack:
             if( query_yn( _( "You may be attacked!  Proceed?" ) ) ) {
                 get_player_character().melee_attack( z, true );
@@ -886,26 +810,6 @@ bool monexamine::pet_menu( monster &z )
             break;
     }
     return true;
-}
-
-bool monexamine::mech_hack( monster &z )
-{
-    Character &player_character = get_player_character();
-    itype_id card_type = itype_id_military;
-    if( player_character.has_amount( card_type, 1 ) ) {
-        if( query_yn( _( "Swipe your ID card into the mech's security port?" ) ) ) {
-            player_character.mod_moves( -100 );
-            z.add_effect( effect_pet, 1_turns, true );
-            z.friendly = -1;
-            add_msg( m_good, _( "The %s whirs into life and opens its restraints to accept a pilot." ),
-                     z.get_name() );
-            player_character.use_amount( card_type, 1 );
-            return true;
-        }
-    } else {
-        add_msg( m_info, _( "You do not have the required ID card to activate this mech." ) );
-    }
-    return false;
 }
 
 static int prompt_for_amount( const char *const msg, const int max )

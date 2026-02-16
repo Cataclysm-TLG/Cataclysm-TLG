@@ -930,7 +930,7 @@ void monster::move()
         return;
     }
 
-    if( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) ||
+    if( has_flag( mon_flag_IMMOBILE ) ||
         has_flag( json_flag_CANNOT_MOVE ) ) {
         moves = 0;
         return;
@@ -2381,7 +2381,7 @@ bool monster::will_reach( const point_bub_ms &p )
         return false;
     }
 
-    if( ( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) ||
+    if( ( has_flag( mon_flag_IMMOBILE ) ||
           has_flag( json_flag_CANNOT_MOVE ) ) &&
         ( pos_bub().xy() != p ) ) {
         return false;

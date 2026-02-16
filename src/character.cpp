@@ -255,7 +255,6 @@ static const efftype_id effect_jetinjector( "jetinjector" );
 static const efftype_id effect_lack_sleep( "lack_sleep" );
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_masked_scent( "masked_scent" );
-static const efftype_id effect_mech_recon_vision( "mech_recon_vision" );
 static const efftype_id effect_melatonin( "melatonin" );
 static const efftype_id effect_mending( "mending" );
 static const efftype_id effect_meth( "meth" );
@@ -1533,7 +1532,6 @@ int Character::overmap_modified_sight_range( float light_level ) const
     // When adding checks here, also call game::update_overmap_seen at the place they first become true
     const bool has_optic = cache_has_item_with( flag_ZOOM ) ||
                            has_flag( json_flag_ENHANCED_VISION ) ||
-                           ( is_mounted() && mounted_creature->has_flag( mon_flag_MECH_RECON_VISION ) ) ||
                            get_map().veh_at( pos_bub() ).avail_part_with_feature( "ENHANCED_VISION" ).has_value();
 
     const bool has_scoped_gun = cache_has_item_with( "is_gun", &item::is_gun, [&]( const item & gun ) {
@@ -1867,13 +1865,6 @@ void Character::mount_creature( monster &z )
         player_avatar.grab( object_type::NONE );
     }
     add_msg_if_player( m_good, _( "You climb on the %s." ), z.get_name() );
-    if( z.has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        if( !z.type->mech_weapon.is_empty() ) {
-            item mechwep = item( z.type->mech_weapon );
-            set_wielded_item( mechwep );
-        }
-        add_msg_if_player( m_good, _( "You hear your %s whir to life." ), z.get_name() );
-    }
     if( is_avatar() ) {
         if( player_avatar.is_hauling() ) {
             player_avatar.stop_hauling();
@@ -1884,13 +1875,7 @@ void Character::mount_creature( monster &z )
         guy.setpos( here, pnt );
     }
     z.facing = facing;
-    // some rideable mechs have night-vision
     recalc_sight_limits();
-    if( is_avatar() && z.has_flag( mon_flag_MECH_RECON_VISION ) ) {
-        add_effect( effect_mech_recon_vision, 1_turns, true );
-        // mech night-vision counts as optics for overmap sight range.
-        g->update_overmap_seen();
-    }
     mod_moves( -100 );
 }
 
@@ -1993,14 +1978,9 @@ void Character::forced_dismount()
     map &here = get_map();
 
     remove_effect( effect_riding );
-    remove_effect( effect_mech_recon_vision );
     bool mech = false;
     if( mounted_creature ) {
         auto *mon = mounted_creature.get();
-        if( mon->has_flag( mon_flag_RIDEABLE_MECH ) && !mon->type->mech_weapon.is_empty() ) {
-            mech = true;
-            remove_item( weapon );
-        }
         mon->mounted_player_id = character_id();
         mon->remove_effect( effect_ridden );
         mon->add_effect( effect_controlled, 5_turns );
@@ -2111,13 +2091,8 @@ void Character::dismount()
         }
 
         remove_effect( effect_riding );
-        remove_effect( effect_mech_recon_vision );
         monster *critter = mounted_creature.get();
         critter->mounted_player_id = character_id();
-        if( critter->has_flag( mon_flag_RIDEABLE_MECH ) && !critter->type->mech_weapon.is_empty() &&
-            weapon.typeId() == critter->type->mech_weapon ) {
-            remove_item( weapon );
-        }
         avatar &player_character = get_avatar();
         if( is_avatar() && player_character.get_grab_type() != object_type::NONE ) {
             add_msg( m_warning, _( "You let go of the grabbed object." ) );
@@ -2570,11 +2545,7 @@ steed_type Character::get_steed_type() const
 {
     steed_type steed;
     if( is_mounted() ) {
-        if( mounted_creature->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            steed = steed_type::MECH;
-        } else {
             steed = steed_type::ANIMAL;
-        }
     } else {
         steed = steed_type::NONE;
     }
@@ -2951,8 +2922,7 @@ void Character::recalc_sight_limits()
     if( has_nv_goggles() ) {
         vision_mode_cache.set( NV_GOGGLES );
     }
-    if( has_trait( trait_NIGHTVISION3 ) ||
-        ( is_mounted() && mounted_creature->has_flag( mon_flag_MECH_RECON_VISION ) ) ) {
+    if( has_trait( trait_NIGHTVISION3 ) ) {
         vision_mode_cache.set( NIGHTVISION_3 );
     }
     if( has_trait( trait_ELFA_FNV ) ) {
@@ -3645,14 +3615,7 @@ units::mass Character::best_nearby_lifting_assist() const
 units::mass Character::best_nearby_lifting_assist( const tripoint_bub_ms &world_pos ) const
 {
     map &here = get_map();
-    int mech_lift = 0;
-    if( is_mounted() ) {
-        auto *mons = mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            mech_lift = mons->mech_str_addition() + 10;
-        }
-    }
-    int lift_quality = std::max( { this->max_quality( qual_LIFT ), mech_lift,
+    int lift_quality = std::max( { this->max_quality( qual_LIFT ),
                                    map_selector( this->pos_bub(), PICKUP_RANGE ).max_quality( qual_LIFT ),
                                    vehicle_selector( here, world_pos, 4, true, true ).max_quality( qual_LIFT )
                                  } );
@@ -3747,13 +3710,6 @@ units::mass Character::weight_capacity() const
 
     if( ret < 0_gram ) {
         ret = 0_gram;
-    }
-    if( is_mounted() ) {
-        auto *mons = mounted_creature.get();
-        // the mech has an effective strength for other purposes, like hitting.
-        // but for lifting, its effective strength is even higher, due to its sturdy construction, leverage,
-        // and being built entirely for that purpose with hydraulics etc.
-        ret = mons->mech_str_addition() == 0 ? ret : ( mons->mech_str_addition() + 10 ) * 4_kilogram;
     }
     return ret;
 }
@@ -4177,10 +4133,7 @@ int Character::smash_ability() const
 {
     int ret = get_arm_str();
     ///\EFFECT_STR increases smashing capability
-    if( is_mounted() ) {
-        auto *mon = mounted_creature.get();
-        ret += mon->mech_str_addition() + mon->type->melee_dice * mon->type->melee_sides;
-    } else if( get_wielded_item() ) {
+    if( get_wielded_item() ) {
         ret += get_wielded_item()->damage_melee( damage_bash );
         ret = enchantment_cache->modify_melee_damage( damage_bash, ret );
     }
@@ -6343,10 +6296,6 @@ int Character::throw_range( const item &it ) const
     }
     // Increases as weight decreases until 150 g, then decreases again
     /** @ARM_STR increases throwing range, vs item weight (high or low) */
-    if( is_mounted() ) {
-        auto *mons = mounted_creature.get();
-        str = mons->mech_str_addition() != 0 ? mons->mech_str_addition() : str;
-    }
     int ret = ( str * 10 ) / ( tmp.weight() >= 150_gram ? tmp.weight() / 113_gram : 10 -
                                static_cast<int>(
                                    tmp.weight() / 15_gram ) );
@@ -8356,19 +8305,13 @@ ret_val<void> Character::can_wield( const item &it ) const
         return ret_val<void>::make_failure( _( "The %s prevents you from wielding the %s." ),
                                             weapname(), it.tname() );
     }
-    monster *mount = mounted_creature.get();
-    const itype_id mech_weapon = is_mounted() ? mount->type->mech_weapon : itype_id::NULL_ID();
-    bool mounted_mech = is_mounted() && mount->has_flag( mon_flag_RIDEABLE_MECH ) &&
-                        mech_weapon;
     bool armor_restricts_hands = worn_with_flag( flag_RESTRICT_HANDS );
     bool item_twohand = it.has_flag( flag_ALWAYS_TWOHAND );
     bool missing_arms = !has_two_arms_lifting();
     bool two_handed = it.is_two_handed( *this );
 
     if( two_handed &&
-        ( missing_arms || armor_restricts_hands ) &&
-        !( mounted_mech && it.typeId() == mech_weapon ) //ignore this check for mech weapons
-      ) {
+        ( missing_arms || armor_restricts_hands ) ) {
         if( armor_restricts_hands ) {
             return ret_val<void>::make_failure(
                        _( "Something you are wearing hinders the use of both hands." ) );
@@ -8379,9 +8322,6 @@ ret_val<void> Character::can_wield( const item &it ) const
             return ret_val<void>::make_failure( _( "You are too weak to wield the %s with only one arm." ),
                                                 it.tname() );
         }
-    }
-    if( mounted_mech && it.typeId() != mech_weapon ) {
-        return ret_val<void>::make_failure( _( "You cannot wield anything while piloting a mech." ) );
     }
     if( controlling_vehicle ) {
         if( two_handed ) {
@@ -10148,12 +10088,6 @@ units::energy Character::available_ups() const
 {
     units::energy available_charges = 0_kJ;
 
-    if( is_mounted() && mounted_creature.get()->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        auto *mons = mounted_creature.get();
-        available_charges += units::from_kilojoule( static_cast<std::int64_t>
-                             ( mons->battery_item->ammo_remaining( ) ) );
-    }
-
     bool has_bio_powered_ups = false;
     cache_visit_items_with( flag_IS_UPS, [&has_bio_powered_ups]( const item & it ) {
         if( it.has_flag( flag_USES_BIONIC_POWER ) && !has_bio_powered_ups ) {
@@ -10175,13 +10109,6 @@ units::energy Character::available_ups() const
 units::energy Character::consume_ups( units::energy qty, const int radius )
 {
     const units::energy wanted_qty = qty;
-
-    // UPS from mounted mech
-    if( qty != 0_kJ && is_mounted() && mounted_creature.get()->has_flag( mon_flag_RIDEABLE_MECH ) &&
-        mounted_creature.get()->battery_item ) {
-        auto *mons = mounted_creature.get();
-        qty -= mons->use_mech_power( qty );
-    }
 
     // UPS from bionic
     bool has_bio_powered_ups = false;
@@ -14160,10 +14087,6 @@ bool Character::can_lift( item &obj ) const
 {
     // avoid comparing by weight as different objects use differing scales (grams vs kilograms etc)
     int str = get_lift_str();
-    if( mounted_creature ) {
-        auto *const mons = mounted_creature.get();
-        str = mons->mech_str_addition() == 0 ? str : mons->mech_str_addition();
-    }
     const int npc_str = get_lift_assist();
     return str + npc_str >= obj.lift_strength();
 }
@@ -14172,10 +14095,6 @@ bool Character::can_lift( vehicle &veh, map &here ) const
 {
     // avoid comparing by weight as different objects use differing scales (grams vs kilograms etc)
     int str = get_lift_str();
-    if( mounted_creature ) {
-        auto *const mons = mounted_creature.get();
-        str = mons->mech_str_addition() == 0 ? str : mons->mech_str_addition();
-    }
     const int npc_str = get_lift_assist();
     return str + npc_str >= veh.lift_strength( here );
 }

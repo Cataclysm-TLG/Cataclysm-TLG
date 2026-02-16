@@ -3807,5 +3807,10 @@
     "type": "MIGRATION",
     "id": "bread_flour",
     "replace": "flour"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "huge_atomic_battery_cell",
+    "replace": "heavy_atomic_battery_cell"
   }
 ]

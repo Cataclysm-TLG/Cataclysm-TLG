@@ -1052,8 +1052,7 @@ void Creature::deal_melee_hit( Creature *source, int hit_spread, bool critical_h
     if( has_effect( effect_ridden ) ) {
         monster *mons = dynamic_cast<monster *>( this );
         if( mons && mons->mounted_player ) {
-            if( !mons->has_flag( mon_flag_MECH_DEFENSIVE ) &&
-                one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
+            if( one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
                 mons->mounted_player->deal_melee_hit( source, hit_spread, critical_hit, dam, dealt_dam, attack );
                 return;
             }
@@ -1443,8 +1442,7 @@ void Creature::deal_projectile_attack( map *here, Creature *source, dealt_projec
     if( has_effect( effect_ridden ) ) {
         monster *mons = as_monster();
         if( mons && mons->mounted_player ) {
-            if( !mons->has_flag( mon_flag_MECH_DEFENSIVE ) &&
-                one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
+            if( one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
                 mons->mounted_player->deal_projectile_attack( here, source, attack, missed_by, print_messages,
                         wp_attack );
                 return;

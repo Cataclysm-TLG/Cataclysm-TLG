@@ -614,27 +614,6 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         // TODO: Per-NPC tracking? Right now monster hit by either npc or player will draw aggro...
         t.add_effect( effect_hit_by_player, 10_minutes ); // Flag as attacked by us for AI
     }
-    if( is_mounted() ) {
-        auto *mons = mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "The %s has dead batteries and will not move its arms." ),
-                         mons->get_name() );
-                return false;
-            }
-            if( mons->type->has_special_attack( "SMASH" ) && one_in( 3 ) ) {
-                add_msg( m_info, _( "The %s hisses as its hydraulic arm pumps forward!" ),
-                         mons->get_name() );
-                mattack::smash_specific( mons, &t );
-            } else {
-                mons->use_mech_power( 2_kJ );
-                mons->melee_attack( t );
-            }
-            mod_moves( forced_movecost >= 0 ? -forced_movecost : -mons->type->attack_cost );
-            return true;
-        }
-    }
-
     // Fighting is as strenuous as it gets. Melee actions almost always take just a second or
     // two, so we use EXPLOSIVE_EXERCISE to better simulate the exhausting effects of combat.
     set_activity_level( EXPLOSIVE_EXERCISE );

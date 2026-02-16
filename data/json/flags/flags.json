@@ -1559,10 +1559,6 @@
     "type": "json_flag"
   },
   {
-    "id": "MECH_BAT",
-    "type": "json_flag"
-  },
-  {
     "id": "MESSY",
     "type": "json_flag"
   },
@@ -2180,76 +2176,6 @@
     "info": "Allows movement in open air."
   },
   {
-    "id": "EXO_SMALL",
-    "type": "json_flag",
-    "info": "This is meant for a small exosuit hardpoint."
-  },
-  {
-    "id": "EXO_LARGE",
-    "type": "json_flag",
-    "info": "This is meant for a large exosuit hardpoint."
-  },
-  {
-    "id": "EXO_PSU",
-    "type": "json_flag",
-    "info": "This is meant for an exosuit PSU hardpoint."
-  },
-  {
-    "id": "EXO_SMALL_GADGET",
-    "type": "json_flag",
-    "info": "This is meant for small exosuit gadgets, 1 L or less."
-  },
-  {
-    "id": "EXO_HELMET_GADGET",
-    "type": "json_flag",
-    "info": "This is meant for helmet-specific gadgets."
-  },
-  {
-    "id": "EXO_MEDIUM_GADGET",
-    "type": "json_flag",
-    "info": "This is meant for medium exosuit gadgets, between 1 L and 5 L."
-  },
-  {
-    "id": "EXO_LARGE_GADGET",
-    "type": "json_flag",
-    "info": "This is meant for large exosuit gadgets, larger than 5 L."
-  },
-  {
-    "id": "EXO_UNDERLAYER",
-    "type": "json_flag",
-    "info": "This is meant for exosuit underlayers."
-  },
-  {
-    "id": "EXO_HELMET_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit helmet plating."
-  },
-  {
-    "id": "EXO_TORSO_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit torso plating."
-  },
-  {
-    "id": "EXO_ARM_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit arm plating."
-  },
-  {
-    "id": "EXO_GLOVE_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit arm plating."
-  },
-  {
-    "id": "EXO_LEG_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit leg plating."
-  },
-  {
-    "id": "EXO_BOOT_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit foot plating."
-  },
-  {
     "id": "ENERGY_SHIELD",
     "type": "json_flag",
     "info": "This piece of armor is an energy barrier and will break after absorbing a certain amount of damage."
@@ -2336,21 +2262,6 @@
     "id": "VIEW_PHOTOS",
     "type": "json_flag",
     "//": "Any item that can display a list of contained photos"
-  },
-  {
-    "id": "AFS_CS_LOCKER_CARD",
-    "type": "json_flag",
-    "info": "ID card granting access to the crashing ship's locker room."
-  },
-  {
-    "id": "AFS_CS_ARMORY_CARD",
-    "type": "json_flag",
-    "info": "ID card granting access to the crashing ship's armory."
-  },
-  {
-    "id": "AFS_CS_EXOBAY_CARD",
-    "type": "json_flag",
-    "info": "ID card granting access to the crashing ship's exobay."
   },
   {
     "id": "PAPER_SHAPED",

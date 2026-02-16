@@ -5139,7 +5139,6 @@ bool disable_activity_actor::can_disable_or_reprogram( const monster &monster )
 
     return ( ( monster.friendly != 0 || ( monster.has_effect( effect_sensor_stun ) &&
                                           !monster.in_species( species_ZOMBIE ) ) ) &&
-             !monster.has_flag( mon_flag_RIDEABLE_MECH ) &&
              !( monster.has_flag( mon_flag_PAY_BOT ) && monster.has_effect( effect_paid ) ) ) &&
            ( !monster.type->revert_to_itype.is_empty() || monster.type->id == mon_manhack );
 }

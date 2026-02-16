@@ -287,14 +287,6 @@ monster::monster( const mtype_id &id ) : monster()
     if( monster::has_flag( mon_flag_AQUATIC ) ) {
         fish_population = dice( 1, 20 );
     }
-    if( monster::has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        itype_id mech_bat = itype_id( type->mech_battery );
-        const itype &type = *item::find_type( mech_bat );
-        int max_charge = type.magazine->capacity;
-        item mech_bat_item = item( mech_bat, calendar::turn_zero );
-        mech_bat_item.ammo_consume( rng( 0, max_charge ), tripoint_bub_ms::zero, nullptr );
-        battery_item = cata::make_value<item>( mech_bat_item );
-    }
     if( monster::has_flag( mon_flag_PET_MOUNTABLE ) ) {
         if( !type->mount_items.tied.is_empty() ) {
             itype_id tied_item_id = itype_id( type->mount_items.tied );
@@ -2091,24 +2083,11 @@ bool monster::melee_attack( Creature &target, float accuracy )
                 add_msg( m_bad, _( "%1$s hits your %2$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
                          body_part_name_accusative( dealt_dam.bp_hit ) );
             } else if( target.is_npc() ) {
-                if( has_effect( effect_ridden ) && has_flag( mon_flag_RIDEABLE_MECH ) &&
-                    pos_bub() == player_character.pos_bub() ) {
-                    //~ %1$s: name of your mount, %2$s: target NPC name, %3$d: damage value
-                    add_msg( m_good, _( "Your %1$s hits %2$s for %3$d damage!" ), name(), target.disp_name(),
-                             total_dealt );
-                } else {
                     //~ %1$s: attacker name, %2$s: target NPC name, %3$s: bodypart name in accusative
                     add_msg( _( "%1$s hits %2$s %3$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
                              target.disp_name( true ),
                              body_part_name_accusative( dealt_dam.bp_hit ) );
-                }
             } else {
-                if( has_effect( effect_ridden ) && has_flag( mon_flag_RIDEABLE_MECH ) &&
-                    pos_bub() == player_character.pos_bub() ) {
-                    //~ %1$s: name of your mount, %2$s: target creature name, %3$d: damage value
-                    add_msg( m_good, _( "Your %1$s hits %2$s for %3$d damage!" ), get_name(), target.disp_name(),
-                             total_dealt );
-                }
                 if( get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ) {
                     if( !u_see_me && u_see_target ) {
                         add_msg( _( "Something hits the %1$s!" ), target.disp_name() );
@@ -3169,38 +3148,6 @@ void monster::die( map *here, Creature *nkiller )
             }
         }
     }
-}
-
-units::energy monster::use_mech_power( units::energy amt )
-{
-    if( is_hallucination() || !has_flag( mon_flag_RIDEABLE_MECH ) || !battery_item ) {
-        return 0_kJ;
-    }
-    const int max_drain = battery_item->ammo_remaining( );
-    const int consumption = std::min( static_cast<int>( units::to_kilojoule( amt ) ), max_drain );
-    battery_item->ammo_consume( consumption, pos_bub(), nullptr );
-    return units::from_kilojoule( static_cast<std::int64_t>( consumption ) );
-}
-
-int monster::mech_str_addition() const
-{
-    return type->mech_str_bonus;
-}
-
-bool monster::check_mech_powered() const
-{
-    if( is_hallucination() || !has_flag( mon_flag_RIDEABLE_MECH ) || !battery_item ) {
-        return false;
-    }
-    if( battery_item->ammo_remaining( ) <= 0 ) {
-        return false;
-    }
-    const itype &type = *battery_item->type;
-    if( battery_item->ammo_remaining( ) <= type.magazine->capacity / 10 && one_in( 10 ) ) {
-        add_msg( m_bad, _( "Your %s emits a beeping noise as its batteries start to get low." ),
-                 get_name() );
-    }
-    return true;
 }
 
 void monster::generate_inventory( bool disableDrops )

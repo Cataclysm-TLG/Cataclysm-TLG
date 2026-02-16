@@ -1007,25 +1007,10 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
     ret.resistance = -1;
 
     map &here = get_map();
-    if( is_mounted() ) {
-        auto *mons = mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "Your %s refuses to move as its batteries have been drained." ),
-                         mons->get_name() );
-                return ret;
-            }
-        }
-    }
     const int move_cost = !is_armed() ? 80 :
                           get_wielded_item()->attack_time( *this ) * 0.8;
-    bool mech_smash = false;
     int smashskill = smash_ability();
     ret.skill = smashskill;
-    if( is_mounted() ) {
-        mech_smash = true;
-    }
-
     bool smash_floor = false;
     if( smashp.z() != posz() ) {
         if( smashp.z() > posz() ) {
@@ -1039,12 +1024,6 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
 
     get_event_bus().send<event_type::character_smashes_tile>(
         getID(), here.ter( smashp ).id(), here.furn( smashp ).id() );
-    if( is_mounted() ) {
-        monster *crit = mounted_creature.get();
-        if( crit->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            crit->use_mech_power( 3_kJ );
-        }
-    }
     for( std::pair<const field_type_id, field_entry> &fd_to_smsh : here.field_at( smashp ) ) {
         const std::optional<map_fd_bash_info> &bash_info = fd_to_smsh.first->bash_info;
         if( !bash_info ) {
@@ -1125,7 +1104,6 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
     item_location weapon = used_weapon();
     if( bash_result.did_bash ) {
         ret.did_smash = true;
-        if( !mech_smash ) {
             set_activity_level( EXPLOSIVE_EXERCISE );
             handle_melee_wear( weapon );
             weary_mult = 1.0f / exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
@@ -1157,7 +1135,6 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
                     check_dead_state( &here );
                 }
             }
-        }
         mod_moves( -move_cost * weary_mult );
         recoil = MAX_RECOIL;
 
@@ -2453,14 +2430,6 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             }
             break;
         case ACTION_MOVE_DOWN: {
-            if( player_character.is_mounted() ) {
-                auto *mon = player_character.mounted_creature.get();
-                if( !mon->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-                    add_msg( m_info, _( "You can't go down stairs while you're riding." ) );
-                    break;
-                }
-            }
-
             if( has_vehicle_control( player_character ) ) {
                 const optional_vpart_position vp = here.veh_at( player_character.pos_bub() );
                 if( vp->vehicle().is_rotorcraft( here ) ) {
@@ -2502,13 +2471,6 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
         }
 
         case ACTION_MOVE_UP:
-            if( player_character.is_mounted() ) {
-                auto *mon = player_character.mounted_creature.get();
-                if( !mon->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-                    add_msg( m_info, _( "You can't go up stairs while you're riding." ) );
-                    break;
-                }
-            }
             if( !player_character.in_vehicle ) {
                 vertical_move( 1, false );
             } else if( has_vehicle_control( player_character ) ) {
@@ -2524,12 +2486,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_CLOSE:
-            if( player_character.is_mounted() ) {
-                auto *mon = player_character.mounted_creature.get();
-                if( !mon->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-                    add_msg( m_info, _( "You can't close things while you're riding." ) );
-                }
-            } else if( mouse_target ) {
+            if( mouse_target ) {
                 doors::close_door( here, player_character, *mouse_target );
             } else {
                 close();

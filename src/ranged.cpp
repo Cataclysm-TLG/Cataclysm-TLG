@@ -1034,11 +1034,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         debugmsg( "%s is empty and has no ammo for reloading.", gun.tname() );
         return 0;
     }
-    bool is_mech_weapon = false;
-    if( is_mounted() &&
-        mounted_creature->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        is_mech_weapon = true;
-    }
+
 
     // cap our maximum burst size by ammo and energy
     if( !gun.has_flag( flag_VEHICLE ) && !ammo ) {
@@ -1248,11 +1244,6 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
     } else {
         // apply delayed recoil, factor in recoil enchantments
         recoil += enchantment_cache->modify_value( enchant_vals::mod::RECOIL_MODIFIER, delay );
-        if( is_mech_weapon ) {
-            // mechs can handle recoil far better. they are built around their main gun.
-            // TODO: shouldn't this affect only recoil accumulated during this function?
-            recoil = recoil / 2;
-        }
         // Cap
         recoil = std::min( MAX_RECOIL, recoil );
     }
@@ -1419,19 +1410,6 @@ int Character::throwing_dispersion( const item &to_throw, Creature *critter,
     return std::max( 0, dispersion );
 }
 
-static std::optional<int> character_throw_assist( const Character &guy )
-{
-    std::optional<int> throw_assist = std::nullopt;
-    if( guy.is_mounted() ) {
-        auto *mons = guy.mounted_creature.get();
-        if( mons->mech_str_addition() != 0 ) {
-            throw_assist = mons->mech_str_addition();
-            mons->use_mech_power( 3_kJ );
-        }
-    }
-    return throw_assist;
-}
-
 static float throwing_skill_adjusted( const Character &guy )
 {
     float skill_level = std::min( static_cast<float>( MAX_SKILL ), guy.get_skill_level( skill_throw ) );
@@ -1444,16 +1422,13 @@ static float throwing_skill_adjusted( const Character &guy )
 
 int Character::thrown_item_adjusted_damage( const item &thrown ) const
 {
-    const std::optional<int> throw_assist = character_throw_assist( *this );
-    const bool do_railgun = has_active_bionic( bio_railgun ) && thrown.made_of_any( ferric ) &&
-                            !throw_assist;
+    const bool do_railgun = has_active_bionic( bio_railgun ) && thrown.made_of_any( ferric );
 
     // The damage dealt due to item's weight, player's strength, and skill level
     // Up to str/2 or weight/100g (lower), so 10 str is 5 damage before multipliers
     // Railgun doubles the effective strength
     ///\ARM_STR increases throwing damage
-    double stats_mod = do_railgun ? get_str() : ( get_arm_str() / 2.0 );
-    stats_mod = throw_assist ? *throw_assist / 2.0 : stats_mod;
+    double stats_mod = do_railgun ? get_arm_str() : ( get_arm_str() / 2.0 );
     // modify strength impact based on skill level, clamped to [0.15 - 1]
     // mod = mod * [ ( ( skill / max_skill ) * 0.85 ) + 0.15 ]
     stats_mod *= ( std::min( static_cast<float>( MAX_SKILL ),
@@ -1511,14 +1486,11 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     const int throwing_skill = round( get_skill_level( skill_throw ) );
     const units::volume volume = to_throw.volume();
     const units::mass weight = to_throw.weight();
-    const std::optional<int> throw_assist = character_throw_assist( *this );
 
     // Set activity level to 12 * str_ratio, with 12 being max (EXPLOSIVE_EXERCISE)
     // This ratio should never be below 0 and above 1
-    if( !throw_assist ) {
         const int stamina_cost = get_standard_stamina_cost( &thrown );
         mod_stamina( stamina_cost + throwing_skill );
-    }
 
     const float skill_level = throwing_skill_adjusted( *this );
     add_msg_debug( debugmode::DF_RANGED, "Adjusted throw skill %g", skill_level );
@@ -1526,8 +1498,7 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     damage_instance &impact = proj.impact;
     std::set<ammo_effect_str_id> &proj_effects = proj.proj_effects;
 
-    const bool do_railgun = has_active_bionic( bio_railgun ) && thrown.made_of_any( ferric ) &&
-                            !throw_assist;
+    const bool do_railgun = has_active_bionic( bio_railgun ) && thrown.made_of_any( ferric );
 
     impact.add_damage( damage_bash, std::min( weight / 100.0_gram,
                        static_cast<double>( thrown_item_adjusted_damage( thrown ) ) ) );
@@ -4562,20 +4533,10 @@ bool gunmode_checks_weapon( avatar &you, const map &m, std::vector<std::string> 
 
     if( gmode->get_gun_energy_drain() > 0_kJ ) {
         const units::energy energy_drain = gmode->get_gun_energy_drain();
-        bool is_mech_weapon = false;
-        if( you.is_mounted() ) {
-            monster *mons = get_player_character().mounted_creature.get();
-            if( !mons->type->mech_weapon.is_empty() ) {
-                is_mech_weapon = true;
-            }
-        }
 
         if( gmode->energy_remaining( &you ) < energy_drain ) {
             result = false;
-            if( is_mech_weapon ) {
-                messages.push_back( string_format( _( "Your mech has an empty battery, its %s will not fire." ),
-                                                   gmode->tname() ) );
-            } else if( gmode->has_flag( flag_USES_BIONIC_POWER ) ) {
+            if( gmode->has_flag( flag_USES_BIONIC_POWER ) ) {
                 messages.push_back( string_format(
                                         _( "You need at least %2$d kJ of bionic power to fire the %1$s!" ),
                                         gmode->tname(), units::to_kilojoule( energy_drain ) ) );
