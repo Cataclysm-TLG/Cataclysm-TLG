@@ -3207,19 +3207,21 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
         }
         if( parts->test( iteminfo_parts::GUN_AWKWARDNESS ) ) {
             info.back().bNewLine = true;
-            float gun_length = ( loaded_mod->length() / 10_mm );
-            float length_ratio = gun_length / get_player_character().height();
-            float awkwardness = 1.f;
-            const float threshold = 0.75f;
-            awkwardness = length_ratio / threshold;
-            int awkward_percent = std::max( 0,
-                                            static_cast<int>( std::round( ( awkwardness - 1.f ) * 100.f ) ) );
+            int awkward_percent = gun_awkwardness( get_player_character() );
+            if( awkward_percent < 75 ) {
             info.emplace_back(
                 "GUN",
                 _( "Height penalty: " ),
                 string_format( "<neutral>%d%%</neutral>", awkward_percent ),
                 iteminfo::lower_is_better
+            ); } else {
+            info.emplace_back(
+                "GUN",
+                _( "Height penalty: " ),
+                string_format( "<bad>%d%%</bad>", awkward_percent ),
+                iteminfo::lower_is_better
             );
+            }
         }
         if( parts->test( iteminfo_parts::GUN_RECOIL_THEORETICAL_MINIMUM ) ) {
             info.back().bNewLine = true;
@@ -11107,15 +11109,22 @@ units::mass item::gun_base_weight() const
     return base_weight;
 
 }
+
+int item::gun_awkwardness( const Character &p ) const
+{
+    float gun_length = ( length() / 10_mm );
+    float length_ratio = gun_length / p.height();
+    float awkwardness = 1.f;
+    const float threshold = 0.75f;
+    awkwardness = length_ratio / threshold;
+    return std::max( 0, static_cast<int>( std::round( ( awkwardness - 1.f ) * 100.f ) ) );
+}
+
 int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) const
 {
     if( !is_gun() || ( ammo_required() && !ammo_remaining( ) ) ) {
         return 0;
     }
-    float gun_length = ( length() / 10_mm );
-    // Very long guns become awkward for small characters.
-    float length_ratio = gun_length / p.height();
-    float awkwardness = 1.f;
     ///\ARM_STR improves the handling of heavier weapons.
     double wt = ideal_strength ? gun_base_weight() / 333.0_gram : std::min( gun_base_weight(),
                 p.get_arm_str() * 333_gram ) / 333.0_gram;
@@ -11137,10 +11146,11 @@ int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) cons
     if( has_ammo() ) {
         qty += ammo_data()->ammo->recoil;
     }
-    // Gun length only becomes a problem if it's > 75% of your height.
-    const float threshold = 0.75f;
-    if( length_ratio > threshold && !bipod ) {
-        awkwardness = length_ratio / threshold;
+
+    float awkwardness = 1.f;
+    if( !bipod ) {
+        // Divide by 100 to turn the int back into a percent.
+        awkwardness += gun_awkwardness( p ) / 100.f;
     }
     // Handling could be either a bonus or penalty dependent upon installed mods.
     if( handling > 1.0 ) {

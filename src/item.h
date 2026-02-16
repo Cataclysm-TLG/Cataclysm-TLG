@@ -2763,6 +2763,12 @@ class item : public visitable
         int gun_range( bool with_ammo = true ) const;
 
         /**
+         * Ratio (percent given as an int) of gun length to character height minus a 75% allowance.
+         * Creates problems if it's above 75%. At 125% (50% awkwardness) the weapon becomes unusable.
+         */
+        int gun_awkwardness( const Character &p ) const;
+
+        /**
          *  Get effective recoil considering handling, loaded ammo and effects of attached gunmods
          *  @param p player stats such as STR can alter effective recoil
          *  @param bipod whether any bipods should be considered

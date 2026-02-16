@@ -27,7 +27,7 @@ struct weakpoint_attack {
         NONE, // Unusual damage instances, such as falls, spells, and effects.
         MELEE_BASH, // Melee bludgeoning attacks
         MELEE_CUT, // Melee slashing attacks
-        MELEE_STAB, // Melee piercing attacks
+        MELEE_STAB, // Melee stabbing attacks
         PROJECTILE, // Ranged projectile attacks, including throwing weapons and guns
 
         NUM,

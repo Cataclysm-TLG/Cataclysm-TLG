@@ -2808,7 +2808,7 @@
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_PIERCING",
+    "subcategory": "CSC_WEAPON_STABBING",
     "name": "spears",
     "description": "Recipes related to making spears from various materials.",
     "skill_used": "fabrication",
