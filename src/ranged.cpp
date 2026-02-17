@@ -4567,7 +4567,7 @@ bool gunmode_checks_weapon( avatar &you, const map &m, std::vector<std::string> 
         if( gmode->has_flag( flag_BIPOD ) ) {
             map &here = get_map();
             bipod = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, you.pos_bub( here ) ) ||
-                 you.is_prone();
+                    you.is_prone();
             if( !bipod ) {
                 if( const optional_vpart_position vp = here.veh_at( you.pos_abs( ) ) ) {
                     bipod = vp->vehicle().has_part( you.pos_abs( ), "MOUNTABLE" );
@@ -4576,8 +4576,8 @@ bool gunmode_checks_weapon( avatar &you, const map &m, std::vector<std::string> 
         }
         if( !bipod ) {
             messages.push_back( string_format(
-                        _( "You are too small to use the %s." ),
-                        gmode->tname() ) );
+                                    _( "You are too small to use the %s." ),
+                                    gmode->tname() ) );
             return false;
         }
     }

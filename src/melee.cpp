@@ -133,6 +133,7 @@ static const limb_score_id limb_score_grip( "grip" );
 static const limb_score_id limb_score_manip( "manip" );
 static const limb_score_id limb_score_reaction( "reaction" );
 
+static const matec_id tec_aoe_secondary( "tec_aoe_secondary" );
 static const matec_id WBLOCK_1( "WBLOCK_1" );
 static const matec_id WBLOCK_2( "WBLOCK_2" );
 static const matec_id WBLOCK_3( "WBLOCK_3" );
@@ -1073,11 +1074,9 @@ int Character::get_total_melee_stamina_cost( const item *weap ) const
     return std::min<int>( -75, proficiency_multiplier * ( mod_sta + melee - stance_malus ) );
 }
 
-void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
+void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost,
+                              matec_id force_technique )
 {
-    static const matec_id no_technique_id( "" );
-    matec_id force_technique = no_technique_id;
-
     // Fighting is hard work
     set_activity_level( EXPLOSIVE_EXERCISE );
 
@@ -1812,37 +1811,15 @@ bool Character::valid_aoe_technique( Creature const &t, const ma_technique &tech
     }
 
     if( technique.aoe == "impale" ) {
-        // Impale hits the target and a single target behind them
-        // Check if the square cardinally behind our target, or to the left / right,
-        // contains a possible target.
-        tripoint_bub_ms left = t_pos + tripoint_rel_ms( offset_a[lookup], offset_b[lookup], 0 );
-        tripoint_bub_ms target_pos = t_pos + ( t.pos_bub() - pos_bub() );
-        tripoint_bub_ms right = t_pos + tripoint_rel_ms( offset_b[lookup], -offset_b[lookup], 0 );
-
-        monster *const mon_l = creatures.creature_at<monster>( left );
+        // Impale hits the target and a single target orthogonally behind them. Does not work for diagonals.
+        tripoint_bub_ms target_pos = t_pos + ( t_pos - pos );
         monster *const mon_t = creatures.creature_at<monster>( target_pos );
-        monster *const mon_r = creatures.creature_at<monster>( right );
-        if( mon_l && mon_l->friendly == 0 ) {
-            targets.push_back( mon_l );
-        }
-        if( mon_t && mon_t->friendly == 0 ) {
+        if( mon_t && mon_t->friendly == 0 && ( mon_t->pos_bub() != t_pos ) ) {
             targets.push_back( mon_t );
         }
-        if( mon_r && mon_r->friendly == 0 ) {
-            targets.push_back( mon_r );
-        }
-
-        npc *const npc_l = creatures.creature_at<npc>( left );
         npc *const npc_t = creatures.creature_at<npc>( target_pos );
-        npc *const npc_r = creatures.creature_at<npc>( right );
-        if( npc_l && npc_l->is_enemy() ) {
-            targets.push_back( npc_l );
-        }
-        if( npc_t && npc_t->is_enemy() ) {
+        if( npc_t && npc_t->is_enemy() && ( npc_t->pos_bub() != t_pos ) ) {
             targets.push_back( npc_t );
-        }
-        if( npc_r && npc_r->is_enemy() ) {
-            targets.push_back( npc_r );
         }
         if( !targets.empty() ) {
             return true;
@@ -1863,7 +1840,7 @@ bool Character::valid_aoe_technique( Creature const &t, const ma_technique &tech
                 targets.push_back( np );
             }
         }
-        //don't trigger circle for fewer than 2 targets
+        // Don't trigger circle for fewer than 2 targets.
         if( targets.size() < 2 ) {
             targets.clear();
         } else {
@@ -2121,21 +2098,23 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
         valid_aoe_technique( t, technique, targets );
 
         // Hit only one valid target (stabbing through doesn't spread out)
-        if( technique.aoe == "impale" ) {
-            // TODO: what if targets is empty
-            Creature *const v = random_entry( targets );
-            targets.clear();
-            targets.push_back( v );
+        if( technique.aoe == "impale" && !targets.empty() ) {
+            Creature *const v = targets.front();  // first valid behind target
+            reach_attack( v->pos_bub(), -1, tec_aoe_secondary );
+            // Perform the attack and then exclude just v, in the unlikely event we are impaling AND doing some other AOE.
+            targets.erase(
+                std::remove( targets.begin(), targets.end(), v ),
+                targets.end()
+            );
         }
 
-        //hit the targets in the lists (all candidates if wide or burst, or just the unlucky sod if deep)
+        // Hit the targets in the list (all candidates if wide or burst, or just the unlucky sod if deep)
         int count_hit = 0;
         for( Creature *const c : targets ) {
-            melee_attack( *c, false );
+            melee_attack( *c, false, tec_aoe_secondary );
+            count_hit++;
         }
 
-        t.add_msg_if_player( m_good, n_gettext( "%d enemy hit!", "%d enemies hit!", count_hit ),
-                             count_hit );
         // Extra attacks are free of charge (otherwise AoE attacks would SUCK)
         moves = temp_moves;
         set_stamina( temp_stamina );
