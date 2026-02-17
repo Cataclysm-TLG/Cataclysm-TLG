@@ -7132,7 +7132,7 @@
       [ [ "water_clean", 1 ] ],
       [ [ "salt_water", 1 ], [ "saline", 2 ], [ "salt", 2 ] ],
       [ [ "jar_glass_sealed", 1 ] ],
-      [ [ "lettuce", 2 ], [ "veggy_wild", 2 ], [ "cabbage", 2 ] ]
+      [ [ "lettuce", 2 ], [ "vegetable_wild", 2 ], [ "cabbage", 2 ] ]
     ]
   },
   {

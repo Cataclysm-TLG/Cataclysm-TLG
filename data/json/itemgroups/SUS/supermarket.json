@@ -894,7 +894,6 @@
       { "group": "pizza_cheese_box_small_4", "prob": 1 },
       { "group": "pizza_meat_box_small_4", "prob": 1 },
       { "group": "pizza_vegetable_box_small_4", "prob": 1 },
-      [ "sushi_veggyroll", 1 ],
       [ "onion_rings", 1 ]
     ]
   },
