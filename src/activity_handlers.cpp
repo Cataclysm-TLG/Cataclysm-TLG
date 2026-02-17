@@ -1177,13 +1177,13 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
         // Mostly you're just left with organs and bones, the meat and skin are ruined.
         if( action == butcher_type::DISSECT ) {
             if( entry.type == harvest_drop_flesh ) {
-                roll /= 8;
+                roll /= 10;
             } else if( entry.type == harvest_drop_bone ) {
-                roll /= 2;
+                roll /= 3;
             } else if( entry.type == harvest_drop_skin ) {
                 roll = 0;
             } else if( entry.type == harvest_drop_offal ) {
-                roll /= 2;
+                roll /= 3;
             }
         }
 
