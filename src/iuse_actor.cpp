@@ -254,10 +254,9 @@ std::optional<int> iuse_transform::use( Character *p, item &it, map *,
             p->add_msg_if_player( _( "Never mind." ) );
             return std::nullopt;
         }
+        p->add_msg_if_player( n_gettext( "You set the timer to %d second.",
+                                        "You set the timer to %d seconds.", timer_time ), timer_time );
     }
-
-    p->add_msg_if_player( n_gettext( "You set the timer to %d second.",
-                                     "You set the timer to %d seconds.", timer_time ), timer_time );
 
     if( !msg_transform.empty() ) {
         p->add_msg_if_player( m_neutral, msg_transform, it.tname() );

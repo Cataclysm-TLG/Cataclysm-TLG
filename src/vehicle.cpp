@@ -6188,7 +6188,7 @@ void vehicle::idle( map &here, bool on_map )
     // Returned string intentionally discarded!
     // TODO: move it to planter function that tries to plant, and maybe cache it there
     // (warm_enough_to_plant() is very expensive)
-    if( !planters.empty() && calendar::once_every( 5_minutes ) ) {
+    if( !planters.empty() && calendar::once_every( 10_minutes ) ) {
         ret_val<void>can_plant = warm_enough_to_plant( player_character.pos_bub(), itype_seed_buckwheat );
         if( !can_plant.success() ) {
             for( int i : planters ) {

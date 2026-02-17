@@ -719,7 +719,7 @@
       [ "vortex", 5 ],
       { "item": "hotplate_induction", "prob": 5 },
       [ "jar_glass_sealed", 5 ],
-      [ "jar_3l_glass_sealed", 5 ],
+      [ "jar_3l_glass_sealed", 1 ],
       [ "magnifying_glass", 5 ],
       [ "thermometer", 5 ],
       { "item": "geiger_off", "prob": 3, "charges": [ 0, 100 ] },

@@ -165,7 +165,7 @@
       { "group": "fertilizer_commercial_bag_canvas_60", "prob": 10 },
       { "group": "insecticide_bag_plastic", "prob": 10 },
       [ "pot_canning", 5 ],
-      { "item": "jar_3l_glass_sealed", "prob": 25, "count": [ 2, 10 ] },
+      { "item": "jar_3l_glass_sealed", "prob": 5, "count": [ 2, 10 ] },
       { "item": "wooden_barrel", "prob": 20, "count": [ 2, 4 ] }
     ]
   },
