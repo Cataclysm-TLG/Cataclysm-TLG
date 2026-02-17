@@ -143,6 +143,21 @@
   },
   {
     "type": "technique",
+    "id": "tec_aoe_secondary",
+    "name": "Area Attack (secondary)",
+    "//": "Weakened generic hit that serves as the second part of all aoe attacks.",
+    "messages": [ "You catch %s with your attack", "<npcname> catches %s with their attack" ],
+    "melee_allowed": true,
+    "mult_bonuses": [
+      { "stat": "damage", "type": "bash", "scale": 0.5 },
+      { "stat": "damage", "type": "cut", "scale": 0.5 },
+      { "stat": "damage", "type": "stab", "scale": 0.5 },
+      { "stat": "movecost", "scale": 0.0 }
+    ],
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
     "id": "BRUTAL",
     "name": "Brutal Strike",
     "melee_allowed": true,

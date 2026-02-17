@@ -3209,18 +3209,19 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
             info.back().bNewLine = true;
             int awkward_percent = gun_awkwardness( get_player_character() );
             if( awkward_percent < 75 ) {
-            info.emplace_back(
-                "GUN",
-                _( "Height penalty: " ),
-                string_format( "<neutral>%d%%</neutral>", awkward_percent ),
-                iteminfo::lower_is_better
-            ); } else {
-            info.emplace_back(
-                "GUN",
-                _( "Height penalty: " ),
-                string_format( "<bad>%d%%</bad>", awkward_percent ),
-                iteminfo::lower_is_better
-            );
+                info.emplace_back(
+                    "GUN",
+                    _( "Height penalty: " ),
+                    string_format( "<neutral>%d%%</neutral>", awkward_percent ),
+                    iteminfo::lower_is_better
+                );
+            } else {
+                info.emplace_back(
+                    "GUN",
+                    _( "Height penalty: " ),
+                    string_format( "<bad>%d%%</bad>", awkward_percent ),
+                    iteminfo::lower_is_better
+                );
             }
         }
         if( parts->test( iteminfo_parts::GUN_RECOIL_THEORETICAL_MINIMUM ) ) {

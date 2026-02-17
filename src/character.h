@@ -124,6 +124,8 @@ using drop_locations = std::list<drop_location>;
 
 using bionic_uid = unsigned int;
 
+static const matec_id no_technique_id( "" );
+
 constexpr int MAX_CLAIRVOYANCE = 40;
 // kcal in a kilogram of fat, used to convert stored kcal into body weight. 3500kcal/lb * 2.20462lb/kg = 7716.17
 constexpr float KCAL_PER_KG = 3500 * 2.20462;
@@ -1213,7 +1215,8 @@ class Character : public Creature, public visitable
                                     bool allow_unarmed = true, int forced_movecost = -1 );
 
         /** Handles reach melee attacks */
-        void reach_attack( const tripoint_bub_ms &p, int forced_movecost = -1 );
+        void reach_attack( const tripoint_bub_ms &p, int forced_movecost = -1,
+                           matec_id force_technique = no_technique_id );
 
         /**
          * Calls the to other melee_attack function with an empty technique id (meaning no specific
