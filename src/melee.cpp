@@ -2109,10 +2109,8 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
         }
 
         // Hit the targets in the list (all candidates if wide or burst, or just the unlucky sod if deep)
-        int count_hit = 0;
         for( Creature *const c : targets ) {
             melee_attack( *c, false, tec_aoe_secondary );
-            count_hit++;
         }
 
         // Extra attacks are free of charge (otherwise AoE attacks would SUCK)
