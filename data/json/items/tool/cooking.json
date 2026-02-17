@@ -622,7 +622,7 @@
     "symbol": "%",
     "looks_like": "jar_glass_sealed",
     "countdown_interval": "6 hours",
-    "transform_into": { "target": "milk_cream_jar", "container": "jar_glass_sealed", "target_charges": 8 },
+    "transform_into": { "target": "milk_cream_jar", "container": "jar_3l_glass_sealed", "target_charges": 8 },
     "flags": [ "SPAWN_ACTIVE" ],
     "color": "white",
     "melee_damage": { "bash": 8 }
