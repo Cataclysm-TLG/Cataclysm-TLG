@@ -1163,13 +1163,27 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
             }
         }
 
-        // you only get the skin from skinning
+        // You only get the skin from skinning.
         if( action == butcher_type::SKIN ) {
             if( entry.type != harvest_drop_skin ) {
                 continue;
             }
             if( corpse_item->has_flag( flag_FIELD_DRESS_FAILED ) ) {
                 roll = rng( 0, roll );
+            }
+        }
+
+        // Dissection tears the corpse apart in an attempt to understand its anatomy and learn its weaknesses.
+        // Mostly you're just left with organs and bones, the meat and skin are ruined.
+        if( action == butcher_type::DISSECT ) {
+            if( entry.type == harvest_drop_flesh ) {
+                roll /= 8;
+            } else if( entry.type == harvest_drop_bone ) {
+                roll /= 2;
+            } else if( entry.type == harvest_drop_skin ) {
+                roll = 0;
+            } else if( entry.type == harvest_drop_offal ) {
+                roll /= 2;
             }
         }
 
