@@ -86,12 +86,7 @@
     "type": "effect_on_condition",
     "id": "bio_nausea",
     "recurrence": [ "10 minutes", "8 hours" ],
-    "condition": {
-      "and": [
-        { "u_has_bionics": "bio_faulty_grossfood" },
-        { "not": { "u_has_effect": "sleep" } }
-      ]
-    },
+    "condition": { "and": [ { "u_has_bionics": "bio_faulty_grossfood" }, { "not": { "u_has_effect": "sleep" } } ] },
     "deactivate_condition": { "not": { "u_has_bionics": "bio_faulty_grossfood" } },
     "effect": [
       { "u_message": "Your stomach churns and a foul taste crawls up your throat.", "type": "bad" },

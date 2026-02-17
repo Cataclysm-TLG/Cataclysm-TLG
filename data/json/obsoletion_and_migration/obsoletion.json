@@ -683,7 +683,7 @@
       "//": "8 hours"
     }
   },
-    {
+  {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "acorns_blanching",
@@ -709,7 +709,7 @@
       "not_ready_msg": "The acorns are still bitter."
     }
   },
-    {
+  {
     "id": "curing_roe",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
@@ -735,7 +735,7 @@
       "//": "30 minutes"
     }
   },
-   {
+  {
     "type": "ITEM",
     "id": "brew_sake_koji",
     "looks_like": "rice_cooked",

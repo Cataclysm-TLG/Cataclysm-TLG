@@ -69,6 +69,7 @@
     "volume": "320 ml",
     "color": "light_gray",
     "comestible_type": "FOOD",
+    "material": [ "bone" ],
     "symbol": "%",
     "calories": 17,
     "description": "Gray-brown cracks and gouges mar this bone like decay in an old tooth.",
