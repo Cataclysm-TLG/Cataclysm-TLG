@@ -11,9 +11,7 @@
 
 >[!NOTE]
 >If you are looking for specific tileset information or style guides, try the tileset repository:
-> - [Main page](https://github.com/I-am-Erk/CDDA-Tilesets)
-> - [Tilesets documentation](https://github.com/I-am-Erk/CDDA-Tilesets/tree/master/doc)
-> - [Rendered documentation](https://i-am-erk.github.io/CDDA-Tilesets/)
+> - [Main page](https://github.com/Cataclysm-TLG/CTLG-Tilesets)
 
 ## Terminology
 
