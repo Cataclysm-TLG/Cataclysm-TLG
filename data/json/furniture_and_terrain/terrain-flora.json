@@ -3175,7 +3175,7 @@
     "type": "terrain",
     "id": "t_grass_dead",
     "name": "dead grass",
-    "description": "An area of long, shaggy grass that hasn't been cut recently.",
+    "description": "Patchy grass which has withered and died.",
     "looks_like": "t_dirt",
     "symbol": ".",
     "color": "brown",
