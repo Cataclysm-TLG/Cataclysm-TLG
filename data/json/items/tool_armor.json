@@ -1118,6 +1118,7 @@
     ],
     "etransfer_rate": "30 MB",
     "tick_action": [ "EPIC_MUSIC" ],
+    "tool_ammo": [ "battery" ],
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 100 } },
       {
@@ -1144,9 +1145,10 @@
       "PADDED",
       "ELECTRONIC",
       "CAN_USE_IN_DARK",
-      "SKINTIGHT"
-    ],
-    "tool_ammo": "battery"
+      "SKINTIGHT",
+      "NO_UNLOAD",
+      "NO_RELOAD"
+    ]
   },
   {
     "id": "helmet_eod",

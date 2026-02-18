@@ -75,7 +75,9 @@
       "PERSONAL",
       "NO_REPAIR",
       "ALLOWS_NATURAL_ATTACKS",
-      "USES_BIONIC_POWER"
+      "USES_BIONIC_POWER",
+      "NO_UNLOAD",
+      "NO_RELOAD"
     ]
   },
   {
