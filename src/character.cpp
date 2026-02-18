@@ -10681,36 +10681,11 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
         }
     };
 
-    const bool flatground = movecost < 105;
     map &here = get_map();
-    // The "FLAT" tag includes soft surfaces, so not a good fit.
-    const bool on_road = flatground && here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
-    const bool on_fungus = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() );
+
 
     if( is_mounted() ) {
         return effects;
-    }
-
-    if( movecost > 105 ) {
-        float obstacle_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_OBSTACLE_MOD,
-                              1 );
-        run_cost_effect_mul( obstacle_mult, _( "Obstacle Muts." ) );
-
-        if( has_proficiency( proficiency_prof_parkour ) && is_running() ) {
-            run_cost_effect_mul( 0.5, _( "Parkour" ) );
-        }
-
-        if( movecost < 100 ) {
-            run_cost_effect effect { _( "Bonuses Capped" ) };
-            effects.push_back( effect );
-            movecost = 100;
-        }
-    }
-    if( has_trait( trait_M_IMMUNE ) && on_fungus ) {
-        if( movecost > 75 ) {
-            // Mycal characters are faster on their home territory, even through things like shrubs
-            run_cost_effect_add( 75 - movecost, _( "Mycus on Fungus" ) );
-        }
     }
 
     if( is_prone() ) {
@@ -10721,59 +10696,87 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                              _( "Encum./Wounds" ) );
     }
 
-    if( flatground ) {
-        float flatground_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_FLATGROUND_MOD,
-                                1 );
-        run_cost_effect_mul( flatground_mult, _( "Flat Ground Mut." ) );
-    }
-
-    if( worn_with_flag( flag_FIN ) ) {
-        run_cost_effect_mul( 1.5f, _( "Swim Fins" ) );
-    }
-
-    if( worn_with_flag( flag_ROLLER_INLINE ) ) {
-        if( on_road ) {
-            if( is_running() ) {
-                run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
-            } else if( is_walking() ) {
-                run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
-            }
-        } else {
-            run_cost_effect_mul( 1.5f, _( "Inline Skates" ) );
-        }
-    }
-
-    // Quad skates might be more stable than inlines,
-    // but that also translates into a slower speed when on good surfaces.
-    if( worn_with_flag( flag_ROLLER_QUAD ) ) {
-        if( on_road ) {
-            if( is_running() ) {
-                run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
-            } else if( is_walking() ) {
-                run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
-            }
-        } else {
-            run_cost_effect_mul( 1.3f, _( "Roller Skates" ) );
-        }
-    }
-
-    // Skates with only one wheel (roller shoes) are fairly less stable
-    // and fairly slower as well
-    if( worn_with_flag( flag_ROLLER_ONE ) ) {
-        if( on_road ) {
-            if( is_running() ) {
-                run_cost_effect_mul( 0.8f, _( "Heelys" ) );
-            } else if( is_walking() ) {
-                run_cost_effect_mul( 0.8f, _( "Heelys" ) );
-            }
-        } else {
-            run_cost_effect_mul( 1.1f, _( "Heelys" ) );
-        }
-    }
-
-    // Additional move cost for moving barefoot only if we're not swimming or on flat ground.
     if( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ) {
-        if( !here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() ) &&
+        if( worn_with_flag( flag_FIN ) ) {
+            run_cost_effect_mul( 1.5f, _( "Swim Fins" ) );
+        }
+        const bool vehicle_floor = here.has_vehicle_floor( pos_bub() );
+        const bool flatground = movecost < 105;
+        // The "FLAT" tag includes soft surfaces, so not a good fit.
+        const bool on_road = flatground && here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
+        const bool on_fungus = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() );
+        if( flatground ) {
+            float flatground_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_FLATGROUND_MOD,
+                                    1 );
+            run_cost_effect_mul( flatground_mult, _( "Flat Ground Mut." ) );
+        }
+
+
+        if( movecost > 105 ) {
+            float obstacle_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_OBSTACLE_MOD,
+                                  1 );
+            run_cost_effect_mul( obstacle_mult, _( "Obstacle Muts." ) );
+
+            if( has_proficiency( proficiency_prof_parkour ) && is_running() ) {
+                run_cost_effect_mul( 0.5, _( "Parkour" ) );
+            }
+
+            if( movecost < 100 ) {
+                run_cost_effect effect { _( "Bonuses Capped" ) };
+                effects.push_back( effect );
+                movecost = 100;
+            }
+        }
+        if( has_trait( trait_M_IMMUNE ) && on_fungus ) {
+            if( movecost > 75 ) {
+                // Mycal characters are faster on their home territory, even through things like shrubs
+                run_cost_effect_add( 75 - movecost, _( "Mycus on Fungus" ) );
+            }
+        }
+
+        if( worn_with_flag( flag_ROLLER_INLINE ) ) {
+            if( on_road && !vehicle_floor ) {
+                if( is_running() ) {
+                    run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
+                } else if( is_walking() ) {
+                    run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
+                }
+            } else {
+                run_cost_effect_mul( 1.5f, _( "Inline Skates" ) );
+            }
+        }
+
+        // Quad skates might be more stable than inlines,
+        // but that also translates into a slower speed when on good surfaces.
+        if( worn_with_flag( flag_ROLLER_QUAD ) ) {
+            if( on_road && !vehicle_floor ) {
+                if( is_running() ) {
+                    run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
+                } else if( is_walking() ) {
+                    run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
+                }
+            } else {
+                run_cost_effect_mul( 1.3f, _( "Roller Skates" ) );
+            }
+        }
+
+        // Skates with only one wheel (roller shoes) are fairly less stable
+        // and fairly slower as well
+        if( worn_with_flag( flag_ROLLER_ONE ) ) {
+            if( on_road && !vehicle_floor ) {
+                if( is_running() ) {
+                    run_cost_effect_mul( 0.8f, _( "Heelys" ) );
+                } else if( is_walking() ) {
+                    run_cost_effect_mul( 0.8f, _( "Heelys" ) );
+                }
+            } else {
+                run_cost_effect_mul( 1.1f, _( "Heelys" ) );
+            }
+        }
+
+
+        // Additional move cost for moving barefoot only if we're not swimming or on flat ground.
+        if( !on_road && !vehicle_floor &&
             !here.has_flag( ter_furn_flag::TFLAG_RUG, pos_bub() ) ) {
             const bool mutfeet = has_flag( json_flag_TOUGH_FEET ) || worn_with_flag( flag_TOUGH_FEET );
             bool no_left_shoe = false;
@@ -10792,13 +10795,15 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                 run_cost_effect_add( 8, _( "No Right Shoe" ) );
             }
         }
+
+        // ROOTS3 slows you down as your feet are actively trying to root in place.
+        if( ( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) && !vehicle_floor &&
+            here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, pos_bub() ) && is_barefoot() ) {
+            run_cost_effect_add( 10, _( "Roots" ) );
+        }
     }
 
-    // ROOTS3 slows you down as your feet are actively trying to root in place.
-    if( ( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
-        here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, pos_bub() ) && is_barefoot() ) {
-        run_cost_effect_add( 10, _( "Roots" ) );
-    }
+
 
     run_cost_effect_add( enchantment_cache->get_value_add( enchant_vals::mod::MOVE_COST ),
                          _( "Enchantments" ) );
