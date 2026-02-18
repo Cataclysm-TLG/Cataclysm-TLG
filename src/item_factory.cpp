@@ -1007,16 +1007,21 @@ void Item_factory::finalize_post_armor( itype &obj )
             data.avg_thickness = thic_acc;
         }
 
-        // Precalc hardness and comfort for these parts of the armor. uncomfortable material supersedes softness (all rigid materials are assumed to be uncomfy)
-        for( const part_material &m : data.materials ) {
-            if( m.cover > islot_armor::test_threshold ) {
-                if( m.id->soft() ) {
-                    data.comfortable = true;
-                } else {
-                    data.rigid = true;
-                }
-                if( m.id->uncomfortable() ) {
-                    data.comfortable = false;
+        // Precalc hardness and comfort for these parts of the armor.
+        for( armor_portion_data &data : obj.armor->sub_data ) {
+            // If rigid_override is set, don't overwrite it here.
+            if( !data.rigid_override ) {
+                for( const part_material &m : data.materials ) {
+                    if( m.cover > islot_armor::test_threshold ) {
+                        if( m.id->soft() ) {
+                            data.comfortable = true;
+                        } else {
+                            data.rigid = true;
+                        }
+                        if( m.id->uncomfortable() ) {
+                            data.comfortable = false;
+                        }
+                    }
                 }
             }
         }
@@ -3094,9 +3099,18 @@ void armor_portion_data::deserialize( const JsonObject &jo )
     }
     optional( jo, false, "coverage", coverage, 0 );
 
-    // load a breathability override
+    // Load a breathability override.
     breathability_rating temp_enum = breathability_rating::last;
     optional( jo, false, "breathability", temp_enum, breathability_rating::last );
+
+    // Load a rigidity override.
+    bool rigid_override = false;
+    if( jo.has_member( "rigid" ) ) {
+        rigid_override = false;
+        optional( jo, false, "rigid", rigid_override, rigid_override );
+        rigid = rigid_override;
+    }
+
     if( temp_enum != breathability_rating::last ) {
         breathability = material_type::breathability_to_rating( temp_enum );
     }

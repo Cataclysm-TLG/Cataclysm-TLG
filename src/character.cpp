@@ -10699,11 +10699,10 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
             run_cost_effect_mul( 1.5f, _( "Swim Fins" ) );
         }
         const bool vehicle_floor = here.has_vehicle_floor( pos_bub() );
-        const bool flatground = movecost < 105;
-        // The "FLAT" tag includes soft surfaces, so not a good fit.
-        const bool on_road = flatground && here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
+        const bool flatground = here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
+        const bool on_road = here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
         const bool on_fungus = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() );
-        if( flatground ) {
+        if( flatground && !is_on_ground() ) {
             float flatground_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_FLATGROUND_MOD,
                                     1 );
             run_cost_effect_mul( flatground_mult, _( "Flat Ground Mut." ) );

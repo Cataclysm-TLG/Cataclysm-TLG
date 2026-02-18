@@ -38,6 +38,7 @@
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
         "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 2.0 } ],
         "coverage": 90,
+        "rigid": true,
         "layers": [ "OUTER", "NORMAL" ],
         "rigid_layer_only": true
       }
@@ -1554,7 +1555,7 @@
     "symbol": "[",
     "looks_like": "leathersandals",
     "color": "brown",
-    "warmth": 20,
+    "warmth": 12,
     "material_thickness": 1.0,
     "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
     "armor": [
@@ -1575,6 +1576,7 @@
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
         "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "rigid": true,
         "coverage": 100
       }
     ]
@@ -1583,7 +1585,7 @@
     "id": "mocassins_fur",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "moccasins", "str_pl": "pairs of moccasins" },
+    "name": { "str": "fur moccasins", "str_pl": "pairs of fur moccasins" },
     "description": "A type of traditional Native American footwear sewn out of fur.",
     "weight": "230 g",
     "volume": "500 ml",
@@ -1614,7 +1616,8 @@
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4.0 } ],
-        "coverage": 100
+        "coverage": 100,
+        "rigid": true
       }
     ]
   },
@@ -1898,8 +1901,7 @@
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "cotton", "covered_by_mat": 100, "thickness": 1.5 }
         ],
-        "coverage": 100,
-        "rigid_layer_only": true
+        "coverage": 100
       }
     ]
   },
@@ -2016,7 +2018,8 @@
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
         "material": [ { "type": "dry_plant", "covered_by_mat": 100, "thickness": 1.0 } ],
-        "coverage": 100
+        "coverage": 100,
+        "rigid": true
       }
     ]
   },

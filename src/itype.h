@@ -358,6 +358,9 @@ struct armor_portion_data {
      */
     std::vector<part_material> materials;
 
+    // Whether material rigidity is overridden in the armor data.
+    bool rigid_override = false;
+
     // Where does this cover if any
     std::optional<body_part_set> covers;
 
