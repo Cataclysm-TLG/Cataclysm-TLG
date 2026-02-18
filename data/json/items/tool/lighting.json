@@ -482,7 +482,7 @@
     "revert_to": "lightstrip_inactive",
     "revert_msg": "The LED strip fades away.",
     "light": 100,
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK" ],
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "SPAWN_ACTIVE" ],
     "use_action": [
       { "target": "lightstrip_inactive", "msg": "You turn off the LED strip.", "need_charges": 1, "type": "transform" },
       { "type": "link_up", "cable_length": 3, "charge_rate": "5 W" }
