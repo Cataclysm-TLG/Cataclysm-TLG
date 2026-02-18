@@ -52,7 +52,7 @@
       [ [ "cable", 8 ] ],
       [ [ "plastic_chunk", 2 ] ],
       [ [ "circuit", 2 ] ],
-      [ [ "lightstrip_inactive", 1 ], [ "light_bulb", 1 ] ],
+      [ [ "light_bulb", 1 ] ],
       [ [ "amplifier", 1 ] ]
     ]
   },
@@ -78,7 +78,7 @@
         [ "bottle_glass", 1 ],
         [ "plastic_bottles_any", 1, "LIST" ]
       ],
-      [ [ "lightstrip_inactive", 1 ], [ "light_bulb", 1 ] ],
+      [ [ "light_bulb", 1 ] ],
       [ [ "cable", 10 ] ]
     ]
   },
@@ -95,12 +95,7 @@
     "reversible": true,
     "decomp_learn": 1,
     "book_learn": [ [ "manual_electronics", 1 ], [ "mag_electronics", 2 ] ],
-    "components": [
-      [ [ "amplifier", 4 ] ],
-      [ [ "steel_fragment", 2 ], [ "scrap", 6 ] ],
-      [ [ "lightstrip_inactive", 4 ], [ "light_bulb", 4 ] ],
-      [ [ "cable", 10 ] ]
-    ]
+    "components": [ [ [ "amplifier", 4 ] ], [ [ "steel_fragment", 2 ], [ "scrap", 6 ] ], [ [ "light_bulb", 4 ] ], [ [ "cable", 10 ] ] ]
   },
   {
     "type": "recipe",
@@ -115,12 +110,7 @@
     "reversible": true,
     "decomp_learn": 1,
     "book_learn": [ [ "manual_electronics", 1 ], [ "mag_electronics", 2 ] ],
-    "components": [
-      [ [ "amplifier", 4 ] ],
-      [ [ "steel_fragment", 2 ], [ "scrap", 6 ] ],
-      [ [ "lightstrip_inactive", 4 ], [ "light_bulb", 4 ] ],
-      [ [ "cable", 10 ] ]
-    ]
+    "components": [ [ [ "amplifier", 4 ] ], [ [ "steel_fragment", 2 ], [ "scrap", 6 ] ], [ [ "light_bulb", 4 ] ], [ [ "cable", 10 ] ] ]
   },
   {
     "type": "recipe",
@@ -139,7 +129,7 @@
     "components": [
       [ [ "amplifier", 2 ] ],
       [ [ "plastic_chunk", 2 ], [ "scrap", 3 ] ],
-      [ [ "lightstrip_inactive", 2 ], [ "light_bulb", 2 ] ],
+      [ [ "lightstrip_inactive", 3 ], [ "light_bulb", 2 ] ],
       [ [ "cable", 10 ] ]
     ]
   },
@@ -160,7 +150,7 @@
     "components": [
       [ [ "amplifier", 3 ] ],
       [ [ "plastic_chunk", 3 ], [ "scrap", 4 ] ],
-      [ [ "lightstrip_inactive", 3 ], [ "light_bulb", 3 ] ],
+      [ [ "lightstrip_inactive", 4 ], [ "light_bulb", 3 ] ],
       [ [ "cable", 12 ] ]
     ]
   },
