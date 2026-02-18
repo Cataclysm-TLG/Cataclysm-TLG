@@ -15159,32 +15159,27 @@ bool item::is_comfortable() const
 template <typename T>
 bool item::is_bp_rigid( const T &bp ) const
 {
-    // overrides for the item overall
+    // Item flags override all.
     if( has_flag( flag_SOFT ) ) {
         return false;
     } else if( has_flag( flag_HARD ) ) {
         return true;
     }
-
     const armor_portion_data *portion = portion_for_bodypart( bp );
-
     bool is_rigid = false;
-
     if( portion ) {
+        // If the override is set in armor data, that takes precedent over materials.
         is_rigid |= portion->rigid;
     }
 
-    // check if ablative pieces are rigid too
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
                 is_rigid |= ablative_armor.is_bp_rigid( bp );
             }
         }
     }
-
     return is_rigid;
 }
 

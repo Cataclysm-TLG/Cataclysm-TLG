@@ -281,6 +281,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_CLIMB_SIMPLE: return "CLIMB_SIMPLE";
         case ter_furn_flag::TFLAG_NANOFAB_TABLE: return "NANOFAB_TABLE";
         case ter_furn_flag::TFLAG_ROAD: return "ROAD";
+        case ter_furn_flag::TFLAG_RUG: return "RUG";
         case ter_furn_flag::TFLAG_TINY: return "TINY";
         case ter_furn_flag::TFLAG_SHORT: return "SHORT";
         case ter_furn_flag::TFLAG_NOCOLLIDE: return "NOCOLLIDE";

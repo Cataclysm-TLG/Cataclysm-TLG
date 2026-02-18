@@ -5091,7 +5091,7 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
                                  targ->get_name() );
                     }
                 } else if( pos.x() == traj_front.x() && pos.y() == traj_front.y() &&
-                           u.has_trait( trait_LEG_TENT_BRACE ) && u.is_barefoot() ) {
+                           u.has_trait( trait_LEG_TENT_BRACE ) && u.worn.is_barefoot() ) {
                     add_msg( _( "%s collided with you, and barely dislodges your tentacles!" ), targ->get_name() );
                 } else if( pos.x() == traj_front.x() && pos.y() == traj_front.y() ) {
                     add_msg( m_bad, _( "%s collided with you and sent you flying!" ), targ->get_name() );

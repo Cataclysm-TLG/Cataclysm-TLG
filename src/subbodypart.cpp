@@ -71,6 +71,11 @@ void sub_body_part_type::load_bp( const JsonObject &jo, const std::string &src )
     sub_body_part_factory.load( jo, src );
 }
 
+bool sub_body_part_type::has_flag( const json_character_flag &flag ) const
+{
+    return flags.count( flag ) > 0;
+}
+
 void sub_body_part_type::load( const JsonObject &jo, std::string_view )
 {
     mandatory( jo, was_loaded, "id", id );
@@ -85,6 +90,8 @@ void sub_body_part_type::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "locations_under", locations_under, { id } );
     optional( jo, was_loaded, "similar_bodyparts", similar_bodyparts );
     optional( jo, was_loaded, "unarmed_damage", unarmed_damage );
+    optional( jo, was_loaded, "flags", flags );
+    optional( jo, was_loaded, "conditional_flags", conditional_flags );
 }
 
 void sub_body_part_type::reset()

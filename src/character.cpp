@@ -351,7 +351,6 @@ static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 static const json_character_flag json_flag_STEADY( "STEADY" );
 static const json_character_flag json_flag_STOP_SLEEP_DEPRIVATION( "STOP_SLEEP_DEPRIVATION" );
 static const json_character_flag json_flag_SUPER_CLAIRVOYANCE( "SUPER_CLAIRVOYANCE" );
-static const json_character_flag json_flag_TOUGH_FEET( "TOUGH_FEET" );
 static const json_character_flag json_flag_UNCANNY_DODGE( "UNCANNY_DODGE" );
 static const json_character_flag json_flag_VERMINOUS( "VERMINOUS" );
 static const json_character_flag json_flag_WALK_UNDERWATER( "WALK_UNDERWATER" );
@@ -1676,7 +1675,7 @@ int Character::swim_speed() const
     }
     /** @EFFECT_STR increases swim speed bonus from WEBBED_FEET */
     // TODO: Limbify this.
-    if( has_flag( json_flag_WEBBED_FEET ) && is_barefoot() ) {
+    if( has_flag( json_flag_WEBBED_FEET ) && worn.is_barefoot() ) {
         ret -= str_cur * 2.0f;
     }
     /** @EFFECT_SWIMMING increases swim speed */
@@ -6268,7 +6267,7 @@ bool Character::is_rad_immune() const
 bool Character::is_knockdown_immune() const
 {
     // hard code for old tentacle mutation
-    bool knockdown_immune = has_trait( trait_LEG_TENT_BRACE ) && is_barefoot();
+    bool knockdown_immune = has_trait( trait_LEG_TENT_BRACE ) && worn.is_barefoot();
 
     // if we have 1.0 or greater knockdown resist
     knockdown_immune |= calculate_by_enchantment( 0.0, enchant_vals::mod::KNOCKDOWN_RESIST ) >= 1;
@@ -9061,7 +9060,7 @@ void Character::rooted_message() const
 {
     if( ( has_trait( trait_ROOTS2 ) || has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
         get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) &&
-        is_barefoot() ) {
+        worn.is_barefoot() ) {
         add_msg( m_info, _( "You sink your roots into the soil." ) );
     }
 }
@@ -9072,7 +9071,7 @@ void Character::rooted()
 // Thirst level -40 puts it right in the middle of the 'Hydrated' zone.
 {
     if( ( has_trait( trait_ROOTS2 ) || has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
-        get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) && is_barefoot() ) {
+        get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) && worn.is_barefoot() ) {
         int time_to_full = 43200; // 12 hours
         if( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) {
             time_to_full += -14400;    // -4 hours
@@ -10681,39 +10680,13 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
         }
     };
 
-    const bool flatground = movecost < 105;
     map &here = get_map();
-    // The "FLAT" tag includes soft surfaces, so not a good fit.
-    const bool on_road = flatground && here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
-    const bool on_fungus = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() );
 
     if( is_mounted() ) {
         return effects;
     }
 
-    if( movecost > 105 ) {
-        float obstacle_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_OBSTACLE_MOD,
-                              1 );
-        run_cost_effect_mul( obstacle_mult, _( "Obstacle Muts." ) );
-
-        if( has_proficiency( proficiency_prof_parkour ) && is_running() ) {
-            run_cost_effect_mul( 0.5, _( "Parkour" ) );
-        }
-
-        if( movecost < 100 ) {
-            run_cost_effect effect { _( "Bonuses Capped" ) };
-            effects.push_back( effect );
-            movecost = 100;
-        }
-    }
-    if( has_trait( trait_M_IMMUNE ) && on_fungus ) {
-        if( movecost > 75 ) {
-            // Mycal characters are faster on their home territory, even through things like shrubs
-            run_cost_effect_add( 75 - movecost, _( "Mycus on Fungus" ) );
-        }
-    }
-
-    if( is_prone() ) {
+    if( is_prone() && !has_effect_with_flag( json_flag_LEVITATION ) ) {
         run_cost_effect_mul( get_modifier( character_modifier_crawl_speed_movecost_mod ),
                              _( "Crawling" ) );
     } else {
@@ -10721,83 +10694,104 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                              _( "Encum./Wounds" ) );
     }
 
-    if( flatground ) {
-        float flatground_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_FLATGROUND_MOD,
-                                1 );
-        run_cost_effect_mul( flatground_mult, _( "Flat Ground Mut." ) );
-    }
+    if( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) && !has_effect_with_flag( json_flag_LEVITATION ) ) {
+        if( worn_with_flag( flag_FIN ) ) {
+            run_cost_effect_mul( 1.5f, _( "Swim Fins" ) );
+        }
+        const bool vehicle_floor = here.has_vehicle_floor( pos_bub() );
+        const bool flatground = here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
+        const bool on_road = here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
+        const bool on_fungus = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() );
+        if( flatground && !is_on_ground() ) {
+            float flatground_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_FLATGROUND_MOD,
+                                    1 );
+            run_cost_effect_mul( flatground_mult, _( "Flat Ground Mut." ) );
+        }
 
-    if( worn_with_flag( flag_FIN ) ) {
-        run_cost_effect_mul( 1.5f, _( "Swim Fins" ) );
-    }
 
-    if( worn_with_flag( flag_ROLLER_INLINE ) ) {
-        if( on_road ) {
-            if( is_running() ) {
-                run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
-            } else if( is_walking() ) {
-                run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
+        if( movecost > 105 ) {
+            float obstacle_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_OBSTACLE_MOD,
+                                  1 );
+            run_cost_effect_mul( obstacle_mult, _( "Obstacle Muts." ) );
+
+            if( has_proficiency( proficiency_prof_parkour ) && is_running() ) {
+                run_cost_effect_mul( 0.5, _( "Parkour" ) );
             }
-        } else {
-            run_cost_effect_mul( 1.5f, _( "Inline Skates" ) );
-        }
-    }
 
-    // Quad skates might be more stable than inlines,
-    // but that also translates into a slower speed when on good surfaces.
-    if( worn_with_flag( flag_ROLLER_QUAD ) ) {
-        if( on_road ) {
-            if( is_running() ) {
-                run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
-            } else if( is_walking() ) {
-                run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
+            if( movecost < 100 ) {
+                run_cost_effect effect { _( "Bonuses Capped" ) };
+                effects.push_back( effect );
+                movecost = 100;
             }
-        } else {
-            run_cost_effect_mul( 1.3f, _( "Roller Skates" ) );
         }
-    }
-
-    // Skates with only one wheel (roller shoes) are fairly less stable
-    // and fairly slower as well
-    if( worn_with_flag( flag_ROLLER_ONE ) ) {
-        if( on_road ) {
-            if( is_running() ) {
-                run_cost_effect_mul( 0.8f, _( "Heelys" ) );
-            } else if( is_walking() ) {
-                run_cost_effect_mul( 0.8f, _( "Heelys" ) );
+        if( has_trait( trait_M_IMMUNE ) && on_fungus ) {
+            if( movecost > 75 ) {
+                // Mycal characters are faster on their home territory, even through things like shrubs
+                run_cost_effect_add( 75 - movecost, _( "Mycus on Fungus" ) );
             }
-        } else {
-            run_cost_effect_mul( 1.1f, _( "Heelys" ) );
+        }
+
+        if( worn_with_flag( flag_ROLLER_INLINE ) ) {
+            if( on_road && !vehicle_floor ) {
+                if( is_running() ) {
+                    run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
+                } else if( is_walking() ) {
+                    run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
+                }
+            } else {
+                run_cost_effect_mul( 1.5f, _( "Inline Skates" ) );
+            }
+        }
+
+        // Quad skates might be more stable than inlines,
+        // but that also translates into a slower speed when on good surfaces.
+        if( worn_with_flag( flag_ROLLER_QUAD ) ) {
+            if( on_road && !vehicle_floor ) {
+                if( is_running() ) {
+                    run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
+                } else if( is_walking() ) {
+                    run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
+                }
+            } else {
+                run_cost_effect_mul( 1.3f, _( "Roller Skates" ) );
+            }
+        }
+
+        // Skates with only one wheel (roller shoes) are fairly less stable
+        // and fairly slower as well
+        if( worn_with_flag( flag_ROLLER_ONE ) ) {
+            if( on_road && !vehicle_floor ) {
+                if( is_running() ) {
+                    run_cost_effect_mul( 0.8f, _( "Heelys" ) );
+                } else if( is_walking() ) {
+                    run_cost_effect_mul( 0.8f, _( "Heelys" ) );
+                }
+            } else {
+                run_cost_effect_mul( 1.1f, _( "Heelys" ) );
+            }
+        }
+
+
+        // Additional move cost for moving barefoot only if we're not swimming or on flat ground.
+        if( !on_road && !vehicle_floor &&
+            !here.has_flag( ter_furn_flag::TFLAG_RUG, pos_bub() ) ) {
+            const bool left_bare = barefoot_penalty( side::LEFT );
+            const bool right_bare = barefoot_penalty( side::RIGHT );
+            if( left_bare && right_bare ) {
+                run_cost_effect_add( 16, _( "No Shoes" ) );
+            } else if( left_bare || right_bare ) {
+                run_cost_effect_add( 8, left_bare ? _( "No Left Shoe" ) : _( "No Right Shoe" ) );
+            }
+        }
+
+        // ROOTS3 slows you down as your feet are actively trying to root in place.
+        if( ( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) && !vehicle_floor &&
+            here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, pos_bub() ) && worn.is_barefoot() ) {
+            run_cost_effect_add( 10, _( "Roots" ) );
         }
     }
 
-    // Additional move cost for moving barefoot only if we're not swimming
-    if( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ) {
-        // ROOTS3 does slow you down as your roots are probing around for nutrients,
-        // whether you want them to or not.  ROOTS1 is just too squiggly without shoes
-        // to give you some stability.  Plants are a bit of a slow-mover.  Deal.
-        const bool mutfeet = has_flag( json_flag_TOUGH_FEET ) || worn_with_flag( flag_TOUGH_FEET );
-        bool no_left_shoe = false;
-        bool no_right_shoe = false;
-        if( !is_wearing_shoes( side::LEFT ) && !mutfeet ) {
-            no_left_shoe = true;
-        }
-        if( !is_wearing_shoes( side::RIGHT ) && !mutfeet ) {
-            no_right_shoe = true;
-        }
-        if( no_left_shoe && no_right_shoe ) {
-            run_cost_effect_add( 16, _( "No Shoes" ) );
-        } else if( no_left_shoe ) {
-            run_cost_effect_add( 8, _( "No Left Shoe" ) );
-        } else if( no_right_shoe ) {
-            run_cost_effect_add( 8, _( "No Right Shoe" ) );
-        }
-    }
 
-    if( ( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
-        here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, pos_bub() ) && is_barefoot() ) {
-        run_cost_effect_add( 10, _( "Roots" ) );
-    }
 
     run_cost_effect_add( enchantment_cache->get_value_add( enchant_vals::mod::MOVE_COST ),
                          _( "Enchantments" ) );
@@ -10815,7 +10809,7 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                          is_prone() ? _( "Prone" ) : _( "Walking" )
                        );
 
-    if( !is_mounted() && !is_prone() && has_effect( effect_downed ) ) {
+    if( !is_mounted() && !is_prone() && has_effect( effect_downed ) && !has_effect_with_flag( json_flag_LEVITATION ) ) {
         run_cost_effect_mul( get_modifier( character_modifier_crawl_speed_movecost_mod ) * 2.5,
                              _( "Downed" ) );
     }
@@ -11675,8 +11669,8 @@ void Character::stagger_check()
         balance_factor -= 2.0f;
     }
     if( ( ( has_trait( trait_GASTROPOD_BALANCE ) || has_trait( trait_LEG_TENT_BRACE ) ) &&
-          is_barefoot() ) || ( has_flag( json_flag_WEBWALK ) &&
-                               here.get_field( pos_bub(), field_fd_web ) != nullptr ) ) {
+          worn.is_barefoot() ) || ( has_flag( json_flag_WEBWALK ) &&
+                                    here.get_field( pos_bub(), field_fd_web ) != nullptr ) ) {
         balance_factor += 6.0f;
     }
     if( one_in( balance_factor ) ) {

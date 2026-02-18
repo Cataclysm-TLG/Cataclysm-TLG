@@ -330,6 +330,7 @@ enum class ter_furn_flag : int {
     TFLAG_CLIMB_SIMPLE,
     TFLAG_NANOFAB_TABLE,
     TFLAG_ROAD,
+    TFLAG_RUG,
     TFLAG_TINY,
     TFLAG_SHORT,
     TFLAG_NOCOLLIDE,

@@ -3544,15 +3544,15 @@ class Character : public Creature, public visitable
         /** Returns 1 if the player is wearing an item of that count on one foot, 2 if on both,
          *  and zero if on neither */
         int shoe_type_count( const itype_id &it ) const;
-        /** Returns true if the player is wearing something on their feet that is not SKINTIGHT */
-        bool is_wearing_shoes( const side &check_side = side::BOTH ) const;
 
         // Adjusted squeamish penalty for traits and other issues.
         int get_squeamish_penalty( const bodypart_id &bp ) const;
 
-        /** Returns true if the player is not wearing anything that covers the soles of their feet,
-            ignoring INTEGRATED */
-        bool is_barefoot() const;
+        /**
+         * Returns true if the character doesn't have tough feet or anything rigid on their soles.
+         * Integrated items return false if they're rigid, such as hooves.
+         */
+        bool barefoot_penalty( const side &check_side = side::BOTH ) const;
 
         /** Returns true if the worn item is visible (based on layering and coverage) */
         bool is_worn_item_visible( std::list<item>::const_iterator ) const;
