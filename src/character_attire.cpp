@@ -68,6 +68,9 @@ static const flag_id json_flag_ONE_PER_LAYER( "ONE_PER_LAYER" );
 
 static const itype_id itype_shoulder_strap( "shoulder_strap" );
 
+static const json_character_flag json_flag_LIMB_SOLE( "LIMB_SOLE" );
+static const json_character_flag json_flag_TOUGH_FEET( "TOUGH_FEET" );
+
 static const material_id material_acidchitin( "acidchitin" );
 static const material_id material_bone( "bone" );
 static const material_id material_chitin( "chitin" );
@@ -618,11 +621,6 @@ bool Character::wearing_fitting_on( const bodypart_id &bp ) const
     return worn.wearing_fitting_on( bp );
 }
 
-bool Character::is_barefoot() const
-{
-    return worn.is_barefoot();
-}
-
 std::optional<const item *> outfit::item_worn_with_inv_let( const char invlet ) const
 {
     for( const item &i : worn ) {
@@ -633,88 +631,73 @@ std::optional<const item *> outfit::item_worn_with_inv_let( const char invlet ) 
     return std::nullopt;
 }
 
-side outfit::is_wearing_shoes( const bodypart_id &bp ) const
+bool outfit::is_barefoot() const
 {
-    bool any_left_foot_is_covered = false;
-    bool any_right_foot_is_covered = false;
-    const auto exempt = []( const item & worn_item ) {
-        return worn_item.has_flag( flag_BELTED ) ||
-               worn_item.has_flag( flag_PERSONAL ) ||
-               worn_item.has_flag( flag_AURA ) ||
-               worn_item.has_flag( flag_SEMITANGIBLE ) ||
-               worn_item.has_flag( flag_SKINTIGHT );
-    };
-    for( const item &worn_item : worn ) {
-        // ... wearing...
-        if( !worn_item.covers( bp ) ) {
-            continue;
+    for( const item &i : worn ) {
+        if( ( i.covers( sub_body_part_foot_sole_l ) && !i.has_flag( flag_INTEGRATED ) ) ||
+            ( i.covers( sub_body_part_foot_sole_r ) && !i.has_flag( flag_INTEGRATED ) ) ) {
+            return false;
         }
-        // ... a shoe?
-        if( exempt( worn_item ) ) {
-            continue;
-        }
-        any_left_foot_is_covered = bp->part_side == side::LEFT ||
-                                   bp->part_side == side::BOTH ||
-                                   any_left_foot_is_covered;
-        any_right_foot_is_covered = bp->part_side == side::RIGHT ||
-                                    bp->part_side == side::BOTH ||
-                                    any_right_foot_is_covered;
     }
-
-    if( any_left_foot_is_covered && any_right_foot_is_covered ) {
-        return side::BOTH;
-    } else if( any_left_foot_is_covered ) {
-        return side::LEFT;
-    } else if( any_right_foot_is_covered ) {
-        return side::RIGHT;
-    } else {
-        return side::num_sides;
-    }
+    return true;
 }
 
-bool Character::is_wearing_shoes( const side &check_side ) const
+bool Character::barefoot_penalty( const side &check_side ) const
 {
-    side side_covered = side::num_sides;
+    if( has_flag( json_flag_TOUGH_FEET ) ) {
+        return false;
+    }
     bool any_left_foot_is_covered = false;
     bool any_right_foot_is_covered = false;
-
-    for( const bodypart_id &part : get_all_body_parts() ) {
-        // Is any right|left foot...
-        if( !part->has_type( body_part_type::type::foot ) ) {
+    bool found_sole = false;
+    for( const bodypart_id &bp : get_all_body_parts() ) {
+        if( !bp->has_type( body_part_type::type::foot ) ) {
             continue;
         }
-        side_covered = worn.is_wearing_shoes( part );
-
-        // early return if we've found a match
-        switch( side_covered ) {
-            case side::RIGHT:
-                if( check_side == side::RIGHT ) {
-                    return true;
+        for( const sub_bodypart_str_id &sbp_str : bp->sub_parts ) {
+            if( sbp_str->secondary ) {
+                continue;
+            }
+            const sub_bodypart_id sbp = sbp_str.id();
+            if( sbp->has_flag( json_flag_LIMB_SOLE ) ) {
+                found_sole = true;
+                for( const item &it : worn.worn ) {
+                    if( !it.covers( sbp ) ) {
+                        continue;
+                    }
+                    if( it.is_bp_rigid( sbp ) ) {
+                        if( it.get_side() == side::BOTH ) {
+                            any_left_foot_is_covered = true;
+                            any_right_foot_is_covered = true;
+                            break;
+                        }
+                        if( it.get_side() == side::LEFT ) {
+                            any_left_foot_is_covered = true;
+                            break;
+                        }
+                        if( it.get_side() == side::RIGHT ) {
+                            any_right_foot_is_covered = true;
+                            break;
+                        }
+                    }
                 }
-                any_right_foot_is_covered = true;
-                break;
-            case side::LEFT:
-                if( check_side == side::LEFT ) {
-                    return true;
-                }
-                any_left_foot_is_covered = true;
-                break;
-            case side::BOTH:
-                // if we returned both
-                return true;
-                break;
-            case side::num_sides:
-                break;
-        }
-
-        // check if we've found both sides and are looking for both sides
-        if( check_side == side::BOTH && any_right_foot_is_covered && any_left_foot_is_covered ) {
-            return true;
+            }
         }
     }
-
-    // fall through return if we haven't found a match
-    return false;
+    if( !found_sole ) {
+        // Return false so we don't penalize people for not having feet.
+        return false;
+    }
+    if( check_side == side::LEFT && any_left_foot_is_covered ) {
+        return false;
+    }
+    if( check_side == side::RIGHT && any_right_foot_is_covered ) {
+        return false;
+    }
+    if( check_side == side::BOTH && any_left_foot_is_covered && any_right_foot_is_covered ) {
+        return false;
+    }
+    return true;
 }
 
 bool Character::is_worn_item_visible( std::list<item>::const_iterator worn_item ) const
@@ -1130,17 +1113,6 @@ bool outfit::wearing_fitting_on( const bodypart_id &bp ) const
         }
     }
     return false;
-}
-
-bool outfit::is_barefoot() const
-{
-    for( const item &i : worn ) {
-        if( ( i.covers( sub_body_part_foot_sole_l ) && !i.has_flag( flag_INTEGRATED ) ) ||
-            ( i.covers( sub_body_part_foot_sole_r ) && !i.has_flag( flag_INTEGRATED ) ) ) {
-            return false;
-        }
-    }
-    return true;
 }
 
 int outfit::swim_modifier( const int swim_skill ) const

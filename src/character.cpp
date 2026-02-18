@@ -351,7 +351,6 @@ static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 static const json_character_flag json_flag_STEADY( "STEADY" );
 static const json_character_flag json_flag_STOP_SLEEP_DEPRIVATION( "STOP_SLEEP_DEPRIVATION" );
 static const json_character_flag json_flag_SUPER_CLAIRVOYANCE( "SUPER_CLAIRVOYANCE" );
-static const json_character_flag json_flag_TOUGH_FEET( "TOUGH_FEET" );
 static const json_character_flag json_flag_UNCANNY_DODGE( "UNCANNY_DODGE" );
 static const json_character_flag json_flag_VERMINOUS( "VERMINOUS" );
 static const json_character_flag json_flag_WALK_UNDERWATER( "WALK_UNDERWATER" );
@@ -1676,7 +1675,7 @@ int Character::swim_speed() const
     }
     /** @EFFECT_STR increases swim speed bonus from WEBBED_FEET */
     // TODO: Limbify this.
-    if( has_flag( json_flag_WEBBED_FEET ) && is_barefoot() ) {
+    if( has_flag( json_flag_WEBBED_FEET ) && worn.is_barefoot() ) {
         ret -= str_cur * 2.0f;
     }
     /** @EFFECT_SWIMMING increases swim speed */
@@ -6268,7 +6267,7 @@ bool Character::is_rad_immune() const
 bool Character::is_knockdown_immune() const
 {
     // hard code for old tentacle mutation
-    bool knockdown_immune = has_trait( trait_LEG_TENT_BRACE ) && is_barefoot();
+    bool knockdown_immune = has_trait( trait_LEG_TENT_BRACE ) && worn.is_barefoot();
 
     // if we have 1.0 or greater knockdown resist
     knockdown_immune |= calculate_by_enchantment( 0.0, enchant_vals::mod::KNOCKDOWN_RESIST ) >= 1;
@@ -9061,7 +9060,7 @@ void Character::rooted_message() const
 {
     if( ( has_trait( trait_ROOTS2 ) || has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
         get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) &&
-        is_barefoot() ) {
+        worn.is_barefoot() ) {
         add_msg( m_info, _( "You sink your roots into the soil." ) );
     }
 }
@@ -9072,7 +9071,7 @@ void Character::rooted()
 // Thirst level -40 puts it right in the middle of the 'Hydrated' zone.
 {
     if( ( has_trait( trait_ROOTS2 ) || has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
-        get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) && is_barefoot() ) {
+        get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) && worn.is_barefoot() ) {
         int time_to_full = 43200; // 12 hours
         if( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) {
             time_to_full += -14400;    // -4 hours
@@ -10683,7 +10682,6 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
 
     map &here = get_map();
 
-
     if( is_mounted() ) {
         return effects;
     }
@@ -10778,27 +10776,18 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
         // Additional move cost for moving barefoot only if we're not swimming or on flat ground.
         if( !on_road && !vehicle_floor &&
             !here.has_flag( ter_furn_flag::TFLAG_RUG, pos_bub() ) ) {
-            const bool mutfeet = has_flag( json_flag_TOUGH_FEET ) || worn_with_flag( flag_TOUGH_FEET );
-            bool no_left_shoe = false;
-            bool no_right_shoe = false;
-            if( !is_wearing_shoes( side::LEFT ) && !mutfeet ) {
-                no_left_shoe = true;
-            }
-            if( !is_wearing_shoes( side::RIGHT ) && !mutfeet ) {
-                no_right_shoe = true;
-            }
-            if( no_left_shoe && no_right_shoe ) {
+            const bool left_bare = barefoot_penalty( side::LEFT );
+            const bool right_bare = barefoot_penalty( side::RIGHT );
+            if( left_bare && right_bare ) {
                 run_cost_effect_add( 16, _( "No Shoes" ) );
-            } else if( no_left_shoe ) {
-                run_cost_effect_add( 8, _( "No Left Shoe" ) );
-            } else if( no_right_shoe ) {
-                run_cost_effect_add( 8, _( "No Right Shoe" ) );
+            } else if( left_bare || right_bare ) {
+                run_cost_effect_add( 8, left_bare ? _( "No Left Shoe" ) : _( "No Right Shoe" ) );
             }
         }
 
         // ROOTS3 slows you down as your feet are actively trying to root in place.
         if( ( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) && !vehicle_floor &&
-            here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, pos_bub() ) && is_barefoot() ) {
+            here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, pos_bub() ) && worn.is_barefoot() ) {
             run_cost_effect_add( 10, _( "Roots" ) );
         }
     }
@@ -11681,8 +11670,8 @@ void Character::stagger_check()
         balance_factor -= 2.0f;
     }
     if( ( ( has_trait( trait_GASTROPOD_BALANCE ) || has_trait( trait_LEG_TENT_BRACE ) ) &&
-          is_barefoot() ) || ( has_flag( json_flag_WEBWALK ) &&
-                               here.get_field( pos_bub(), field_fd_web ) != nullptr ) ) {
+          worn.is_barefoot() ) || ( has_flag( json_flag_WEBWALK ) &&
+                                    here.get_field( pos_bub(), field_fd_web ) != nullptr ) ) {
         balance_factor += 6.0f;
     }
     if( one_in( balance_factor ) ) {

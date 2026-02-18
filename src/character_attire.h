@@ -105,8 +105,6 @@ class outfit
         bool hands_conductive() const;
         bool can_pickVolume( const item &it, bool ignore_pkt_settings = true,
                              bool ignore_non_container_pocket = false ) const;
-        side is_wearing_shoes( const bodypart_id &bp ) const;
-        bool is_barefoot() const;
         item item_worn_with_flag( const flag_id &f, const bodypart_id &bp ) const;
         item item_worn_with_flag( const flag_id &f ) const;
         item *item_worn_with_id( const itype_id &i );
@@ -254,6 +252,9 @@ class outfit
         std::string get_armor_display( bodypart_id bp ) const;
         void activate_combat_items( npc &guy );
         void deactivate_combat_items( npc &guy );
+
+        // Returns true if the character has nothing covering their soles. Does not count integrated items.
+        bool is_barefoot() const;
 
         bool empty() const;
         item &front();

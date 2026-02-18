@@ -482,7 +482,8 @@
     "side": 1,
     "opposite": "hoof_sole_r",
     "name_multiple": "soles",
-    "name": "left sole"
+    "name": "left sole",
+    "flags": [ "LIMB_SOLE" ]
   },
   {
     "id": "hoof_toe_l",
@@ -522,7 +523,8 @@
     "side": 2,
     "opposite": "hoof_sole_l",
     "name_multiple": "sole",
-    "name": "right sole"
+    "name": "right sole",
+    "flags": [ "LIMB_SOLE" ]
   },
   {
     "id": "hoof_toe_r",

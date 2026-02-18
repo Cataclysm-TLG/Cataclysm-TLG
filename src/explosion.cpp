@@ -798,7 +798,10 @@ void shockwave( const tripoint_bub_ms &p, int radius, int force, int stun, int d
         if( guy.posz() != p.z() ) {
             continue;
         }
-        if( trig_dist( guy.pos_bub(), p ) <= radius ) {
+        if( trig_dist( guy.pos_bub(),
+                       p ) <= radius && !ignore_player &&
+            ( !guy.has_trait( trait_LEG_TENT_BRACE ) ||
+              !guy.worn.is_barefoot() ) ) {
             add_msg( _( "%s is caught in the shockwave!" ), guy.get_name() );
             g->knockback( p, guy.pos_bub(), force, stun, dam_mult );
         }
@@ -807,7 +810,7 @@ void shockwave( const tripoint_bub_ms &p, int radius, int force, int stun, int d
     if( trig_dist( player_character.pos_bub(),
                    p ) <= radius && !ignore_player &&
         ( !player_character.has_trait( trait_LEG_TENT_BRACE ) ||
-          !player_character.is_barefoot() ) ) {
+          !player_character.worn.is_barefoot() ) ) {
         add_msg( m_bad, _( "You're caught in the shockwave!" ) );
         g->knockback( p, player_character.pos_bub(), force, stun, dam_mult );
     }
