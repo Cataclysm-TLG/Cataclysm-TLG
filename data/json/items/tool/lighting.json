@@ -4,7 +4,7 @@
     "type": "ITEM",
     "category": "tools",
     "name": { "str": "atomic lamp" },
-    "description": "Powered by the magic of nuclear decay and low-energy LEDs, this expensive little light will provide just enough light to read by for at least a decade.  It is also available with a cute cartoon bear cover to turn it into a nightlight for a very wealthy child with a fear of the dark.  Use it to close the cover and hide the light.",
+    "description": "Powered by the magic of nuclear decay and low-energy LEDs, this device will provide just enough light to read by for at least a decade.  Use it to close the cover and hide the light.",
     "weight": "560 g",
     "volume": "750 ml",
     "price": "1250 USD",
@@ -481,11 +481,11 @@
     "power_draw": "5 W",
     "revert_to": "lightstrip_inactive",
     "revert_msg": "The LED strip fades away.",
-    "light": 200,
+    "light": 100,
     "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK" ],
     "use_action": [
       { "target": "lightstrip_inactive", "msg": "You turn off the LED strip.", "need_charges": 1, "type": "transform" },
-      { "type": "link_up", "cable_length": 10, "charge_rate": "5 W" }
+      { "type": "link_up", "cable_length": 3, "charge_rate": "5 W" }
     ]
   },
   {
@@ -493,18 +493,17 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "LED strip (inactive)", "str_pl": "LED strips (inactive)" },
-    "description": "25 feet of colorful LED strip, that are often used as house lights or on some holidays.",
-    "weight": "158 g",
+    "description": "A one meter strip of LED lights, usually used for decoration or accent lighting.",
+    "weight": "50 g",
     "volume": "70 ml",
     "price": "10 USD",
     "price_postapoc": "2 cent",
     "symbol": ";",
-    "material": [ { "type": "plastic", "portion": 1 }, { "type": "aluminum", "portion": 9 } ],
+    "material": [ { "type": "plastic", "portion": 1 }, { "type": "aluminum", "portion": 1 }, { "type": "vinyl", "portion": 9 } ],
     "color": "white",
-    "//": "25 feet (7.5 m) + 1.5 meters for plug",
     "use_action": [
       { "target": "lightstrip", "msg": "You turn on the LED strip.", "need_charges": 1, "type": "transform" },
-      { "type": "link_up", "cable_length": 9, "charge_rate": "5 W" }
+      { "type": "link_up", "cable_length": 3, "charge_rate": "5 W" }
     ],
     "tool_ammo": [ "battery" ]
   },

@@ -254,7 +254,7 @@
     "move_cost_mod": -1,
     "coverage": 38,
     "concealment": 38,
-    "deconstruct": { "items": [ { "item": "lightstrip_inactive" }, { "item": "aluminum_chunk", "count": 4 } ] },
+    "deconstruct": { "items": [ { "item": "aluminum_chunk", "count": 4 }, { "item": "e_scrap", "count": [ 1, 4 ] } ] },
     "bash": {
       "str_min": 18,
       "str_max": 80,
