@@ -10771,29 +10771,30 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
         }
     }
 
-    // Additional move cost for moving barefoot only if we're not swimming
+    // Additional move cost for moving barefoot only if we're not swimming or on flat ground.
     if( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ) {
-        // ROOTS3 does slow you down as your roots are probing around for nutrients,
-        // whether you want them to or not.  ROOTS1 is just too squiggly without shoes
-        // to give you some stability.  Plants are a bit of a slow-mover.  Deal.
-        const bool mutfeet = has_flag( json_flag_TOUGH_FEET ) || worn_with_flag( flag_TOUGH_FEET );
-        bool no_left_shoe = false;
-        bool no_right_shoe = false;
-        if( !is_wearing_shoes( side::LEFT ) && !mutfeet ) {
-            no_left_shoe = true;
-        }
-        if( !is_wearing_shoes( side::RIGHT ) && !mutfeet ) {
-            no_right_shoe = true;
-        }
-        if( no_left_shoe && no_right_shoe ) {
-            run_cost_effect_add( 16, _( "No Shoes" ) );
-        } else if( no_left_shoe ) {
-            run_cost_effect_add( 8, _( "No Left Shoe" ) );
-        } else if( no_right_shoe ) {
-            run_cost_effect_add( 8, _( "No Right Shoe" ) );
+        if( !here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() ) &&
+            !here.has_flag( ter_furn_flag::TFLAG_RUG, pos_bub() ) ) {
+            const bool mutfeet = has_flag( json_flag_TOUGH_FEET ) || worn_with_flag( flag_TOUGH_FEET );
+            bool no_left_shoe = false;
+            bool no_right_shoe = false;
+            if( !is_wearing_shoes( side::LEFT ) && !mutfeet ) {
+                no_left_shoe = true;
+            }
+            if( !is_wearing_shoes( side::RIGHT ) && !mutfeet ) {
+                no_right_shoe = true;
+            }
+            if( no_left_shoe && no_right_shoe ) {
+                run_cost_effect_add( 16, _( "No Shoes" ) );
+            } else if( no_left_shoe ) {
+                run_cost_effect_add( 8, _( "No Left Shoe" ) );
+            } else if( no_right_shoe ) {
+                run_cost_effect_add( 8, _( "No Right Shoe" ) );
+            }
         }
     }
 
+    // ROOTS3 slows you down as your feet are actively trying to root in place.
     if( ( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
         here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, pos_bub() ) && is_barefoot() ) {
         run_cost_effect_add( 10, _( "Roots" ) );
