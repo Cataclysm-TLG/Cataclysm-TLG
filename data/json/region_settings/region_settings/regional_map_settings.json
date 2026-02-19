@@ -1227,8 +1227,8 @@
     "replace_with_terrain": [
       [ "t_grass_long", 300 ],
       [ "t_grass_tall", 30 ],
-      [ "t_moss", 200 ],
-      [ "t_dirt", 160 ],
+      [ "t_moss", 500 ],
+      [ "t_dirt", 140 ],
       [ "t_grass_dead", 110 ],
       [ "t_dirt_rocky", 1 ]
     ]
