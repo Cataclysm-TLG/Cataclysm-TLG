@@ -444,6 +444,28 @@
   },
   {
     "type": "terrain",
+    "id": "t_treetop_fruit",
+    "//": "Mostly but not always used for fruit trees.",
+    "name": "treetop",
+    "description": "The upper branches of a tree.  There's just enough room to perch here.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_treetop_nut",
+    "//": "Mostly but not always used for nut trees.",
+    "name": "treetop",
+    "description": "The upper branches of a tree.  There's just enough room to perch here.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+  },
+  {
+    "type": "terrain",
     "id": "t_treetop_giant_fern",
     "name": "giant fern top",
     "description": "The top of some unearthly gigantic fern.  There is enough room to perch up here, but only just.",
