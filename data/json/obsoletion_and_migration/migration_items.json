@@ -3817,5 +3817,10 @@
     "type": "MIGRATION",
     "id": "weather_reader",
     "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "blade_trap",
+    "replace": "blade"
   }
 ]
