@@ -6659,8 +6659,8 @@ float Character::healing_rate_medicine( float at_rest_quality, const bodypart_id
     rate_medicine *= 1.0f + std::max( at_rest_quality, -1.0f );
 
     // increase healing if character has both effects
-    if( has_effect( effect_bandaged ) && has_effect( effect_disinfected ) ) {
-        rate_medicine *= 1.25;
+    if( has_effect( effect_bandaged, bp ) && has_effect( effect_disinfected, bp ) ) {
+        rate_medicine *= 1.1;
     }
 
     if( get_lifestyle() > 0.0f ) {
