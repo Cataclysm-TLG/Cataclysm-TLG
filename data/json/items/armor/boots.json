@@ -2461,7 +2461,7 @@
     "color": "blue",
     "warmth": 30,
     "material_thickness": 0.3,
-    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "flags": [ "VARSIZE", "SKINTIGHT", "NO_SALVAGE" ],
     "armor": [
       {
         "covers": [ "foot_l", "foot_r" ],

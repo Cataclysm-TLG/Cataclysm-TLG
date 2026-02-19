@@ -248,7 +248,9 @@ bool Character::handle_melee_wear( item_location shield, float wear_multiplier )
     }
     int damage_chance = static_cast<int>( ( stat_factor * material_factor /
                                             ( wear_multiplier * enchant_multiplier ) ) );
-    if( shield->has_flag( flag_DURABLE_MELEE ) ) {
+    // STURDY items are also durable for unarmed attack purposes.
+    if( shield->has_flag( flag_DURABLE_MELEE ) || ( unarmed_attack() &&
+            shield->has_flag( flag_STURDY ) ) ) {
         damage_chance *= 2;
     }
 
@@ -601,6 +603,17 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 {
     map &here = get_map();
 
+    // Prevent player from melee-attacking creatures that are underwater under thick ice
+    if( t.is_underwater() ) {
+        const tripoint_bub_ms tpos = t.pos_bub( here );
+        if( here.has_flag( ter_furn_flag::TFLAG_THICK_ICE, tpos ) ) {
+            if( is_avatar() ) {
+                add_msg_if_player( m_info, _( "You can't reach that through the thick ice." ) );
+            }
+            return false;
+        }
+    }
+
     if( !enough_working_legs() ) {
         if( !movement_mode_is( move_mode_prone ) ) {
             add_msg_if_player( m_bad, _( "Your broken legs cannot hold you and you fall down." ) );
@@ -629,7 +642,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         return false;
     }
 
-    if( is_avatar() && move_cost > 1000 && calendar::turn > melee_warning_turn ) {
+    if( is_avatar() && move_cost > 400 && calendar::turn > melee_warning_turn ) {
         const std::string &action = query_popup()
                                     .context( "CANCEL_ACTIVITY_OR_IGNORE_QUERY" )
                                     .message( _( "<color_light_red>Attacking with your %1$s will take a long time.  "
