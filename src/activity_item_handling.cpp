@@ -840,7 +840,7 @@ construction const *_find_prereq( tripoint_bub_ms const &loc, construction_id co
         return it.group != idx->group && !it.post_terrain.empty() &&
                it.post_terrain == idx->pre_terrain &&
                // don't get stuck building and deconstructing the top level post_terrain
-               ( it.pre_terrain.find( top_idx->post_terrain ) == it.pre_terrain.end() )  &&
+               ( it.pre_terrain.find( top_idx->post_terrain ) == std::string::npos ) &&
                ( it.pre_flags.empty() || !has_pre_flags( it, f, t ) );
     } );
 
