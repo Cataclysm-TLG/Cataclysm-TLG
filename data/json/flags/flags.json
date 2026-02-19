@@ -2614,7 +2614,7 @@
     "//": "This character is immune to sewer gas and doesn't mind wearing filthy gear.",
     "type": "json_flag"
   },
-   {
+  {
     "id": "BARRICADABLE_DOOR_DAMAGED",
     "type": "json_flag",
     "//": "Terrain / Furniture flag used in Construction pre_flags field",
@@ -2726,7 +2726,7 @@
     "name": "Phase back",
     "info": "This terrain will phase back to its original terrain when no longer modified."
   },
-    {
+  {
     "id": "SWIM_UNDER",
     "type": "json_flag",
     "info": "Terrain with this flag is treated as having water beneath a covering (e.g. ice); entities may be considered under water for swimming and related mechanics."

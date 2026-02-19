@@ -10694,7 +10694,8 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                              _( "Encum./Wounds" ) );
     }
 
-    if( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) && !has_effect_with_flag( json_flag_LEVITATION ) ) {
+    if( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) &&
+        !has_effect_with_flag( json_flag_LEVITATION ) ) {
         if( worn_with_flag( flag_FIN ) ) {
             run_cost_effect_mul( 1.5f, _( "Swim Fins" ) );
         }
@@ -10809,7 +10810,8 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                          is_prone() ? _( "Prone" ) : _( "Walking" )
                        );
 
-    if( !is_mounted() && !is_prone() && has_effect( effect_downed ) && !has_effect_with_flag( json_flag_LEVITATION ) ) {
+    if( !is_mounted() && !is_prone() && has_effect( effect_downed ) &&
+        !has_effect_with_flag( json_flag_LEVITATION ) ) {
         run_cost_effect_mul( get_modifier( character_modifier_crawl_speed_movecost_mod ) * 2.5,
                              _( "Downed" ) );
     }

@@ -1557,36 +1557,42 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
         movecost = 100;
         // Swimming monsters move super fast in water
     } else if( swims() ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) || here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( f );
         }
-        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) || here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( t );
         }
     } else if( can_submerge() ) {
         // No-breathe monsters have to walk underwater slowly
-        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) || here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( f );
         }
-        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) || here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( t );
         }
         movecost /= 2;
     } else if( climbs() ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, f ) || here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, f ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 150;
         } else {
             movecost += 50 * here.move_cost( f );
         }
-        if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, t ) || here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, t ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 150;
         } else {
             movecost += 50 * here.move_cost( t );
