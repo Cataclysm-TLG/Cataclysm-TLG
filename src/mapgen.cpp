@@ -2845,7 +2845,7 @@ class jmapgen_liquid_item : public jmapgen_piece
                 }
                 if( newliquid.charges > 0 ) {
                     dat.m.add_item_or_charges(
-                        tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), newliquid );
+                        tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), newliquid, true, false );
                 }
             }
         }
@@ -2880,7 +2880,7 @@ class jmapgen_corpse : public jmapgen_piece
             item corpse = item::make_corpse( corpse_type,
                                              std::max( calendar::turn - age, calendar::fall_of_civilization ) );
             dat.m.add_item_or_charges( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ),
-                                       corpse );
+                                       corpse, true, true );
         }
 };
 
@@ -7411,7 +7411,7 @@ std::vector<item *> map::place_items(
         } while( is_valid_terrain( p ) && tries < 20 );
         if( tries < 20 ) {
             auto add_res_itm = [this, &p, &res]( const item & itm ) {
-                item &it = add_item_or_charges( p, itm );
+                item &it = add_item_or_charges( p, itm, true, true );
                 if( !it.is_null() ) {
                     res.push_back( &it );
                 }

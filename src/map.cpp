@@ -5805,11 +5805,11 @@ units::volume map::free_volume( const tripoint_bub_ms &p )
 }
 
 item_location map::add_item_or_charges_ret_loc( const tripoint_bub_ms &pos, item obj,
-        bool overflow )
+        bool overflow, bool force )
 {
     int copies = 1;
     std::pair<item *, tripoint_bub_ms> ret = _add_item_or_charges( pos, std::move( obj ), copies,
-            overflow );
+            overflow, force );
     if( ret.first != nullptr && !ret.first->is_null() ) {
         return item_location{ map_cursor{ get_abs( ret.second ) }, ret.first };
     }
@@ -5817,17 +5817,17 @@ item_location map::add_item_or_charges_ret_loc( const tripoint_bub_ms &pos, item
     return {};
 }
 
-item &map::add_item_or_charges( const tripoint_bub_ms &pos, item obj, bool overflow )
+item &map::add_item_or_charges( const tripoint_bub_ms &pos, item obj, bool overflow, bool force )
 {
     int copies = 1;
-    return *_add_item_or_charges( pos, std::move( obj ), copies, overflow ).first;
+    return *_add_item_or_charges( pos, std::move( obj ), copies, overflow, force ).first;
 }
 
 // clang-tidy is confused and thinks obj can be made into a const reference, but it can't
 // on_drop is not a const function
 // NOLINTNEXTLINE(performance-unnecessary-value-param)
 std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub_ms &pos, item obj,
-        int &copies_remaining, bool overflow )
+        int &copies_remaining, bool overflow, bool force )
 {
     // Checks if item would not be destroyed if added to this tile.
     auto valid_tile = [&]( const tripoint_bub_ms & e ) {
@@ -5887,7 +5887,7 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
 
     std::optional<std::pair<item *, tripoint_bub_ms>> first_added;
     int copies_to_add_here = how_many_copies_fit( pos );
-    if( ( ( !has_flag( ter_furn_flag::TFLAG_NOITEM, pos ) && !has_flag( ter_furn_flag::TFLAG_SEALED, pos ) ) ||
+    if( ( ( !has_flag( ter_furn_flag::TFLAG_NOITEM, pos ) && ( !force && !has_flag( ter_furn_flag::TFLAG_SEALED, pos ) ) ) ||
           ( has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, pos ) && obj.made_of( phase_id::LIQUID ) ) ) &&
         copies_to_add_here > 0 ) {
         // Pass map into on_drop, because this map may not be the global map object (in mapgen, for instance).
@@ -5950,7 +5950,7 @@ if( overflow && copies_remaining > 0 ) {
         first_added = first_added ? first_added : new_item;
     }
     // Patch a potential exploit by allowing revivable corpses to go into SEALED tiles if that's the only way.
-    if( obj.is_corpse() && obj.pulpable() && copies_remaining > 0 ) {
+    if( ( !force && obj.is_corpse() && obj.pulpable() ) && copies_remaining > 0 ) {
         for( const tripoint_bub_ms &e : sealed_tiles ) {
             if( copies_remaining <= 0 ) {
                 break;
@@ -5975,9 +5975,9 @@ if( overflow && copies_remaining > 0 ) {
 }
 
 item &map::add_item_or_charges( const tripoint_bub_ms &pos, item obj, int &copies_remaining,
-                                bool overflow )
+                                bool overflow, bool force )
 {
-    return *_add_item_or_charges( pos, std::move( obj ), copies_remaining, overflow ).first;
+    return *_add_item_or_charges( pos, std::move( obj ), copies_remaining, overflow, force ).first;
 }
 
 float map::item_category_spawn_rate( const item &itm )
