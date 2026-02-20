@@ -965,8 +965,10 @@ static void smash()
     // Little hack: If there's a smashable corpse, it'll always be bashed first. So don't bother warning about
     // terrain smashing unless it's actually possible.
     bool smashable_corpse_at_target = false;
-    for( const item &maybe_corpse : get_map().i_at( smashp ) ) {
-        if( is_smashable_corpse( maybe_corpse ) ) {
+    map &here = get_map();
+    for( const item &maybe_corpse : here.i_at( smashp ) ) {
+        // No smashing corpses you can't actually get to.
+        if( is_smashable_corpse( maybe_corpse ) && !here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
             smashable_corpse_at_target = true;
             break;
         }
@@ -1057,14 +1059,16 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
 
     bool should_pulp = false;
     for( const item &maybe_corpse : here.i_at( smashp ) ) {
-        if( is_smashable_corpse( maybe_corpse ) ) {
-            if( maybe_corpse.get_mtype()->bloodType()->has_acid && !maybe_corpse.has_flag( flag_BLED ) &&
-                !is_immune_field( fd_acid ) ) {
-                if( !query_yn( _( "Are you sure you want to pulp an acid filled corpse?" ) ) ) {
-                    return ret; // Player doesn't want an acid bath
+        if( !here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
+            if( is_smashable_corpse( maybe_corpse ) ) {
+                if( maybe_corpse.get_mtype()->bloodType()->has_acid && !maybe_corpse.has_flag( flag_BLED ) &&
+                    !is_immune_field( fd_acid ) ) {
+                    if( !query_yn( _( "Are you sure you want to pulp an acid filled corpse?" ) ) ) {
+                        return ret; // Player doesn't want an acid bath
+                    }
                 }
+                should_pulp = true; // There is at least one corpse to pulp
             }
-            should_pulp = true; // There is at least one corpse to pulp
         }
     }
 
@@ -1161,7 +1165,7 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
         }
 
     } else {
-        if( !here.has_items( smashp ) ) {
+        if( !here.has_items( smashp ) || here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
             add_msg( _( "There's nothing there to smash!" ) );
         } else {
             sounds::sound( smashp, 8, sounds::sound_t::combat, _( "thump!" ),
