@@ -1,14 +1,17 @@
 #include <algorithm>
 #include <array>
+#include <climits>
 #include <cmath>
 #include <cstdlib>
 #include <memory>
+#include <optional>
 #include <string>
 #include <unordered_set>
 #include <utility>
 #include <vector>
 
 #include "coordinates.h"
+#include "cuboid_rectangle.h"
 #include "debug.h"
 #include "enums.h"
 #include "flood_fill.h"
@@ -261,14 +264,15 @@ void overmap::place_lakes( const std::vector<const overmap *> &neighbor_overmaps
     double noise_threshold = settings_lake.noise_threshold_lake;
     const int lake_depth = settings_lake.lake_depth;
 
+    // For cases where lakes take up most or all of the map, we need to stop the flood-fill
+    // from being unbounded. However, the bounds cannot be simply the overmap edges, or the
+    // shorelines will not be generated properly.
+    inclusive_rectangle<point_om_omt> considered_bounds( point_om_omt( -5, -5 ),
+            point_om_omt( OMAPX + 5, OMAPY + 5 ) );
     const auto is_lake = [&]( const point_om_omt & p ) {
-        return omt_lake_noise_threshold( origin, p, noise_threshold );
+        return considered_bounds.contains( p ) &&
+               settings_lake.invert_lakes ^ omt_lake_noise_threshold( origin, p, noise_threshold );
     };
-
-    const oter_id lake_surface( "lake_surface" );
-    const oter_id lake_shore( "lake_shore" );
-    const oter_id lake_water_cube( "lake_water_cube" );
-    const oter_id lake_bed( "lake_bed" );
 
     // We'll keep track of our visited lake points so we don't repeat the work.
     std::unordered_set<point_om_omt> visited;
@@ -281,7 +285,7 @@ void overmap::place_lakes( const std::vector<const overmap *> &neighbor_overmaps
             }
 
             // It's a lake if it exceeds the noise threshold defined in the region settings.
-            if( !omt_lake_noise_threshold( origin, seed_point, noise_threshold ) ) {
+            if( !is_lake( seed_point ) ) {
                 continue;
             }
 
@@ -350,14 +354,14 @@ void overmap::place_lakes( const std::vector<const overmap *> &neighbor_overmaps
                     }
                 }
 
-                ter_set( tripoint_om_omt( p, 0 ), shore ? lake_shore : lake_surface );
+                ter_set( tripoint_om_omt( p, 0 ), shore ? settings_lake.shore : settings_lake.surface );
 
                 // If this is not a shore, we'll make our subsurface lake cubes and beds.
                 if( !shore ) {
                     for( int z = -1; z > lake_depth; z-- ) {
-                        ter_set( tripoint_om_omt( p, z ), lake_water_cube );
+                        ter_set( tripoint_om_omt( p, z ), settings_lake.interior );
                     }
-                    ter_set( tripoint_om_omt( p, lake_depth ), lake_bed );
+                    ter_set( tripoint_om_omt( p, lake_depth ), settings_lake.bed );
                 }
             }
         }
@@ -368,28 +372,28 @@ void overmap::place_lakes( const std::vector<const overmap *> &neighbor_overmaps
 float overmap::calculate_ocean_gradient( const point_om_omt &p, const point_abs_om this_om )
 {
     const region_settings_ocean &settings_ocean = settings->get_settings_ocean();
-    const int northern_ocean = settings_ocean.ocean_start_north;
-    const int eastern_ocean = settings_ocean.ocean_start_east;
-    const int western_ocean = settings_ocean.ocean_start_west;
-    const int southern_ocean = settings_ocean.ocean_start_south;
+    const int northern_ocean = settings_ocean.ocean_start_north.value_or( INT_MAX );
+    const int eastern_ocean = settings_ocean.ocean_start_east.value_or( INT_MAX );
+    const int western_ocean = settings_ocean.ocean_start_west.value_or( INT_MAX );
+    const int southern_ocean = settings_ocean.ocean_start_south.value_or( INT_MAX );
 
     float ocean_adjust_N = 0.0f;
     float ocean_adjust_E = 0.0f;
     float ocean_adjust_W = 0.0f;
     float ocean_adjust_S = 0.0f;
-    if( northern_ocean > 0 && this_om.y() <= northern_ocean * -1 ) {
+    if( this_om.y() <= northern_ocean * -1 ) {
         ocean_adjust_N = 0.0005f * static_cast<float>( OMAPY - p.y()
                          + std::abs( ( this_om.y() + northern_ocean ) * OMAPY ) );
     }
-    if( eastern_ocean > 0 && this_om.x() >= eastern_ocean ) {
+    if( this_om.x() >= eastern_ocean ) {
         ocean_adjust_E = 0.0005f * static_cast<float>( p.x() + ( this_om.x() - eastern_ocean )
                          * OMAPX );
     }
-    if( western_ocean > 0 && this_om.x() <= western_ocean * -1 ) {
+    if( this_om.x() <= western_ocean * -1 ) {
         ocean_adjust_W = 0.0005f * static_cast<float>( OMAPX - p.x()
                          + std::abs( ( this_om.x() + western_ocean ) * OMAPX ) );
     }
-    if( southern_ocean > 0 && this_om.y() >= southern_ocean ) {
+    if( this_om.y() >= southern_ocean ) {
         ocean_adjust_S = 0.0005f * static_cast<float>( p.y() + ( this_om.y() - southern_ocean ) * OMAPY );
     }
     return std::max( { ocean_adjust_N, ocean_adjust_E, ocean_adjust_W, ocean_adjust_S } );
@@ -398,18 +402,17 @@ float overmap::calculate_ocean_gradient( const point_om_omt &p, const point_abs_
 void overmap::place_oceans( const std::vector<const overmap *> &neighbor_overmaps )
 {
     const region_settings_ocean &settings_ocean = settings->get_settings_ocean();
-    const int northern_ocean = settings_ocean.ocean_start_north;
-    const int eastern_ocean = settings_ocean.ocean_start_east;
-    const int western_ocean = settings_ocean.ocean_start_west;
-    const int southern_ocean = settings_ocean.ocean_start_south;
     const int ocean_depth = settings_ocean.ocean_depth;
+    const bool oceans_disabled = !settings_ocean.ocean_start_north.has_value() &&
+                                 !settings_ocean.ocean_start_east.has_value() &&
+                                 !settings_ocean.ocean_start_west.has_value() && !settings_ocean.ocean_start_south.has_value();
 
     const om_noise::om_noise_layer_ocean f( global_base_point(), g->get_seed() );
     const point_abs_om this_om = pos();
 
     const auto is_ocean = [&]( const point_om_omt & p ) {
         // credit to ehughsbaird for thinking up this inbounds solution to infinite flood fill lag.
-        if( northern_ocean == 0 && eastern_ocean == 0 && western_ocean == 0 && southern_ocean == 0 ) {
+        if( oceans_disabled ) {
             // you know you could just turn oceans off in global_settings.json right?
             return false;
         }

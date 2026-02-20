@@ -271,8 +271,13 @@ struct region_settings_lake {
     double noise_threshold_lake = 0.25;
     int lake_size_min = 20;
     int lake_depth = -5;
+    oter_str_id surface;
+    oter_str_id shore;
+    oter_str_id interior;
+    oter_str_id bed;
     std::vector<oter_str_id> shore_extendable_overmap_terrain;
     std::vector<shore_extendable_overmap_terrain_alias> shore_extendable_overmap_terrain_aliases;
+    bool invert_lakes = false;
 
     bool was_loaded = false;
     void load( const JsonObject &jo, std::string_view );
@@ -280,7 +285,7 @@ struct region_settings_lake {
 
     static void load_region_settings_lake( const JsonObject &jo, const std::string &src );
     static void reset();
-    region_settings_lake() = default;
+    region_settings_lake();
 };
 
 struct region_settings_ocean {
@@ -289,10 +294,10 @@ struct region_settings_ocean {
     double noise_threshold_ocean = 0.25;
     int ocean_size_min = 100;
     int ocean_depth = -9;
-    int ocean_start_north = 0;
-    int ocean_start_east = 10;
-    int ocean_start_west = 0;
-    int ocean_start_south = 0;
+    std::optional<int> ocean_start_north;
+    std::optional<int> ocean_start_east;
+    std::optional<int> ocean_start_west;
+    std::optional<int> ocean_start_south;
     int sandy_beach_width = 2;
 
     bool was_loaded = false;
