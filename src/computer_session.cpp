@@ -67,8 +67,6 @@
 #include "ui.h"
 #include "ui_manager.h"
 
-static const efftype_id effect_amigara( "amigara" );
-
 static const furn_str_id furn_f_centrifuge( "f_centrifuge" );
 static const furn_str_id furn_f_console_broken( "f_console_broken" );
 static const furn_str_id furn_f_counter( "f_counter" );
@@ -853,8 +851,6 @@ void computer_session::action_elevator_on()
 
 void computer_session::action_amigara_log()
 {
-    get_timed_events().add( timed_event_type::AMIGARA_WHISPERS, calendar::turn + 5_minutes );
-
     Character &player_character = get_player_character();
     tripoint_abs_sm abs_loc = get_map().get_abs_sub();
     point_abs_sm abs_sub = abs_loc.xy();
@@ -1642,7 +1638,6 @@ void computer_session::failure_pump_leak()
 void computer_session::failure_amigara()
 {
     get_timed_events().add( timed_event_type::AMIGARA, calendar::turn + 30_seconds );
-    get_player_character().add_effect( effect_amigara, 2_minutes );
     map &here = get_map();
     explosion_handler::explosion( &get_player_character(),
                                   tripoint_bub_ms( rng( 0, MAPSIZE_X ), rng( 0, MAPSIZE_Y ), here.get_abs_sub().z() ), 10, 0.7, false,

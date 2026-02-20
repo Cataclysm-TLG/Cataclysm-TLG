@@ -5888,7 +5888,7 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
     std::optional<std::pair<item *, tripoint_bub_ms>> first_added;
     int copies_to_add_here = how_many_copies_fit( pos );
     // force is used by mapgen to place items in SEALED spots intentionally.
-    if( ( ( !has_flag( ter_furn_flag::TFLAG_NOITEM, pos ) && ( !force && !has_flag( ter_furn_flag::TFLAG_SEALED, pos ) ) ) ||
+    if( ( ( !has_flag( ter_furn_flag::TFLAG_NOITEM, pos ) && ( !has_flag( ter_furn_flag::TFLAG_SEALED, pos ) || force ) ) ||
           ( has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, pos ) && obj.made_of( phase_id::LIQUID ) ) ) &&
         copies_to_add_here > 0 ) {
         // Pass map into on_drop, because this map may not be the global map object (in mapgen, for instance).
@@ -5902,57 +5902,40 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
         first_added = first_added ? first_added : std::make_pair( &place_item( pos, copies_to_add_here ),
                       pos );
     }
-if( overflow && copies_remaining > 0 ) {
-    const int max_dist = 2;
-    std::vector<tripoint_bub_ms> tiles = closest_points_first( pos, max_dist );
-    tiles.erase( tiles.begin() );
-    const int max_path_length = 4 * max_dist;
-    const pathfinding_settings setting( 0, max_dist, max_path_length, 0, false, false, true, false,
-                                        false, false );
-    // Separate tiles into non-SEALED and SEALED candidates.
-    std::vector<tripoint_bub_ms> good_tiles;
-    std::vector<tripoint_bub_ms> sealed_tiles;
-    for( const tripoint_bub_ms &e : tiles ) {
-        if( copies_remaining <= 0 ) {
-            break;
-        }
-        if( !inbounds( e ) ) {
-            continue;
-        }
-        if( route( pos, pathfinding_target::point( e ), setting ).empty() ) {
-            continue;
-        }
+    if( overflow && copies_remaining > 0 ) {
+        const int max_dist = 2;
+        std::vector<tripoint_bub_ms> tiles = closest_points_first( pos, max_dist );
+        tiles.erase( tiles.begin() );
+        const int max_path_length = 4 * max_dist;
+        const pathfinding_settings setting( 0, max_dist, max_path_length, 0, false, false, true, false,
+                                            false, false );
+        // Separate tiles into non-SEALED and SEALED candidates.
+        std::vector<tripoint_bub_ms> good_tiles;
+        std::vector<tripoint_bub_ms> sealed_tiles;
+        for( const tripoint_bub_ms &e : tiles ) {
+            if( copies_remaining <= 0 ) {
+                break;
+            }
+            if( !inbounds( e ) ) {
+                continue;
+            }
+            if( route( pos, pathfinding_target::point( e ), setting ).empty() ) {
+                continue;
+            }
 
-        copies_to_add_here = how_many_copies_fit( e );
-        if( !valid_tile( e ) || copies_to_add_here <= 0 || has_flag( ter_furn_flag::TFLAG_NOITEM, e ) ) {
-            continue;
-        }
+            copies_to_add_here = how_many_copies_fit( e );
+            if( !valid_tile( e ) || copies_to_add_here <= 0 || has_flag( ter_furn_flag::TFLAG_NOITEM, e ) ) {
+                continue;
+            }
 
-        if( has_flag( ter_furn_flag::TFLAG_SEALED, e ) ) {
-            sealed_tiles.push_back( e );
-        } else {
-            good_tiles.push_back( e );
-        }
-    }
-    // Try non-SEALED tiles first.
-    for( const tripoint_bub_ms &e : good_tiles ) {
-        if( copies_remaining <= 0 ) {
-            break;
-        }
-        if( obj.made_of( phase_id::LIQUID ) || !obj.has_flag( flag_DROP_ACTION_ONLY_IF_LIQUID ) ) {
-            if( obj.on_drop( e, *this ) ) {
-                return first_added ? first_added.value() : std::make_pair( &null_item_reference(),
-                        tripoint_bub_ms::invalid );
+            if( has_flag( ter_furn_flag::TFLAG_SEALED, e ) ) {
+                sealed_tiles.push_back( e );
+            } else {
+                good_tiles.push_back( e );
             }
         }
-        copies_to_add_here = how_many_copies_fit( e );
-        copies_remaining -= copies_to_add_here;
-        std::pair<item *, tripoint_bub_ms> new_item = { &place_item( e, copies_to_add_here ), e };
-        first_added = first_added ? first_added : new_item;
-    }
-    // Deleting items is bad, so we can still go in a SEALED spot if that's all that's left.
-    if( ( !force ) && copies_remaining > 0 ) {
-        for( const tripoint_bub_ms &e : sealed_tiles ) {
+        // Try non-SEALED tiles first.
+        for( const tripoint_bub_ms &e : good_tiles ) {
             if( copies_remaining <= 0 ) {
                 break;
             }
@@ -5967,8 +5950,25 @@ if( overflow && copies_remaining > 0 ) {
             std::pair<item *, tripoint_bub_ms> new_item = { &place_item( e, copies_to_add_here ), e };
             first_added = first_added ? first_added : new_item;
         }
+        // Deleting items is bad, so we can still go in a SEALED spot if that's all that's left.
+        if( ( !force ) && copies_remaining > 0 ) {
+            for( const tripoint_bub_ms &e : sealed_tiles ) {
+                if( copies_remaining <= 0 ) {
+                    break;
+                }
+                if( obj.made_of( phase_id::LIQUID ) || !obj.has_flag( flag_DROP_ACTION_ONLY_IF_LIQUID ) ) {
+                    if( obj.on_drop( e, *this ) ) {
+                        return first_added ? first_added.value() : std::make_pair( &null_item_reference(),
+                                tripoint_bub_ms::invalid );
+                    }
+                }
+                copies_to_add_here = how_many_copies_fit( e );
+                copies_remaining -= copies_to_add_here;
+                std::pair<item *, tripoint_bub_ms> new_item = { &place_item( e, copies_to_add_here ), e };
+                first_added = first_added ? first_added : new_item;
+            }
+        }
     }
-}
 
     // If first_added has no value, no items were added due to lack of space at target tile (+/- overflow tiles)
     return first_added ? first_added.value() : std::make_pair( &null_item_reference(),

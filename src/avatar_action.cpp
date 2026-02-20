@@ -66,7 +66,6 @@ static const bionic_id bio_railgun( "bio_railgun" );
 static const character_modifier_id
 character_modifier_melee_stamina_cost_mod( "melee_stamina_cost_mod" );
 
-static const efftype_id effect_amigara( "amigara" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
@@ -330,29 +329,6 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
                 auto *mons = you.mounted_creature.get();
                 mons->facing = FacingDirection::LEFT;
             }
-        }
-    }
-
-    if( you.has_effect( effect_amigara ) ) {
-        int curdist = INT_MAX;
-        int newdist = INT_MAX;
-        const tripoint_bub_ms minp{ 0, 0, you.posz() };
-        const tripoint_bub_ms maxp{ MAPSIZE_X, MAPSIZE_Y, you.posz() };
-        for( const tripoint_bub_ms &pt : m.points_in_rectangle( minp, maxp ) ) {
-            if( m.ter( pt ) == ter_t_fault ) {
-                int dist = rl_dist( pt, you.pos_bub() );
-                if( dist < curdist ) {
-                    curdist = dist;
-                }
-                dist = rl_dist( pt, dest_loc );
-                if( dist < newdist ) {
-                    newdist = dist;
-                }
-            }
-        }
-        if( newdist > curdist ) {
-            add_msg( m_info, _( "You cannot pull yourself away from the faultline…" ) );
-            return false;
         }
     }
 
