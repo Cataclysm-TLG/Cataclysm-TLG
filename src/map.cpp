@@ -5887,6 +5887,7 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
 
     std::optional<std::pair<item *, tripoint_bub_ms>> first_added;
     int copies_to_add_here = how_many_copies_fit( pos );
+    // force is used by mapgen to place items in SEALED spots intentionally.
     if( ( ( !has_flag( ter_furn_flag::TFLAG_NOITEM, pos ) && ( !force && !has_flag( ter_furn_flag::TFLAG_SEALED, pos ) ) ) ||
           ( has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, pos ) && obj.made_of( phase_id::LIQUID ) ) ) &&
         copies_to_add_here > 0 ) {
@@ -5933,7 +5934,7 @@ if( overflow && copies_remaining > 0 ) {
             good_tiles.push_back( e );
         }
     }
-    // Try non-SEALED tiles first
+    // Try non-SEALED tiles first.
     for( const tripoint_bub_ms &e : good_tiles ) {
         if( copies_remaining <= 0 ) {
             break;
@@ -5949,8 +5950,8 @@ if( overflow && copies_remaining > 0 ) {
         std::pair<item *, tripoint_bub_ms> new_item = { &place_item( e, copies_to_add_here ), e };
         first_added = first_added ? first_added : new_item;
     }
-    // Patch a potential exploit by allowing revivable corpses to go into SEALED tiles if that's the only way.
-    if( ( !force && obj.is_corpse() && obj.pulpable() ) && copies_remaining > 0 ) {
+    // Deleting items is bad, so we can still go in a SEALED spot if that's all that's left.
+    if( ( !force ) && copies_remaining > 0 ) {
         for( const tripoint_bub_ms &e : sealed_tiles ) {
             if( copies_remaining <= 0 ) {
                 break;
