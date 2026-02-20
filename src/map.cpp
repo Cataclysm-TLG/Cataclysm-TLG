@@ -5829,19 +5829,19 @@ item &map::add_item_or_charges( const tripoint_bub_ms &pos, item obj, bool overf
 std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub_ms &pos, item obj,
         int &copies_remaining, bool overflow )
 {
-    // Checks if item would not be destroyed if added to this tile
+    // Checks if item would not be destroyed if added to this tile.
     auto valid_tile = [&]( const tripoint_bub_ms & e ) {
         if( !inbounds( e ) ) {
-            dbg( D_INFO ) << e; // should never happen
+            dbg( D_INFO ) << e; // Should never happen.
             return false;
         }
 
-        // Some tiles destroy items (e.g. lava)
+        // Some tiles destroy items (e.g. lava).
         if( has_flag( ter_furn_flag::TFLAG_DESTROY_ITEM, e ) ) {
             return false;
         }
 
-        // Cannot drop liquids into tiles that are comprised of liquid
+        // Cannot drop liquids into tiles that are comprised of liquid.
         if( obj.made_of_from_type( phase_id::LIQUID ) && has_flag( ter_furn_flag::TFLAG_SWIMMABLE, e ) ) {
             return false;
         }
@@ -5849,14 +5849,14 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
         return true;
     };
 
-    // Get how many copies of the item can fit in a tile
+    // Get how many copies of the item can fit in a tile.
     auto how_many_copies_fit = [&]( const tripoint_bub_ms & e ) {
         return std::min( { copies_remaining,
                            obj.volume() == 0_ml ? INT_MAX : free_volume( e ) / obj.volume(),
                            static_cast<int>( MAX_ITEM_IN_SQUARE - i_at( e ).size() ) } );
     };
 
-    // Performs the actual insertion of the object onto the map
+    // Performs the actual insertion of the object onto the map.
     auto place_item = [&]( const tripoint_bub_ms & tile, int &copies ) -> item& {
         if( obj.count_by_charges() )
         {
@@ -5875,20 +5875,19 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
         return { &null_item_reference(), tripoint_bub_ms::invalid };
     }
 
-    // Some items never exist on map as a discrete item (must be contained by another item)
+    // Some items never exist on map as a discrete item (must be contained by another item).
     if( obj.has_flag( flag_NO_DROP ) ) {
         return { &null_item_reference(), tripoint_bub_ms::invalid };
     }
 
-    // If intended drop tile destroys the item then we don't attempt to overflow
+    // If intended drop tile destroys the item then we don't attempt to overflow.
     if( !valid_tile( pos ) ) {
         return { &null_item_reference(), tripoint_bub_ms::invalid };
     }
 
     std::optional<std::pair<item *, tripoint_bub_ms>> first_added;
     int copies_to_add_here = how_many_copies_fit( pos );
-
-    if( ( !has_flag( ter_furn_flag::TFLAG_NOITEM, pos ) ||
+    if( ( ( !has_flag( ter_furn_flag::TFLAG_NOITEM, pos ) && !has_flag( ter_furn_flag::TFLAG_SEALED, pos ) ) ||
           ( has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, pos ) && obj.made_of( phase_id::LIQUID ) ) ) &&
         copies_to_add_here > 0 ) {
         // Pass map into on_drop, because this map may not be the global map object (in mapgen, for instance).
@@ -5897,29 +5896,64 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
                 return { &null_item_reference(), tripoint_bub_ms::invalid };
             }
         }
-        // If tile can contain items place here...
+        // If tile can contain items, place here.
         copies_remaining -= copies_to_add_here;
         first_added = first_added ? first_added : std::make_pair( &place_item( pos, copies_to_add_here ),
                       pos );
     }
-    if( overflow && copies_remaining > 0 ) {
-        // ...otherwise try to overflow to adjacent tiles (if permitted)
-        const int max_dist = 2;
-        std::vector<tripoint_bub_ms> tiles = closest_points_first( pos, max_dist );
-        tiles.erase( tiles.begin() ); // we already tried this position
-        const int max_path_length = 4 * max_dist;
-        const pathfinding_settings setting( 0, max_dist, max_path_length, 0, false, false, true, false,
-                                            false, false );
-        for( const tripoint_bub_ms &e : tiles ) {
+if( overflow && copies_remaining > 0 ) {
+    const int max_dist = 2;
+    std::vector<tripoint_bub_ms> tiles = closest_points_first( pos, max_dist );
+    tiles.erase( tiles.begin() );
+    const int max_path_length = 4 * max_dist;
+    const pathfinding_settings setting( 0, max_dist, max_path_length, 0, false, false, true, false,
+                                        false, false );
+    // Separate tiles into non-SEALED and SEALED candidates.
+    std::vector<tripoint_bub_ms> good_tiles;
+    std::vector<tripoint_bub_ms> sealed_tiles;
+    for( const tripoint_bub_ms &e : tiles ) {
+        if( copies_remaining <= 0 ) {
+            break;
+        }
+        if( !inbounds( e ) ) {
+            continue;
+        }
+        if( route( pos, pathfinding_target::point( e ), setting ).empty() ) {
+            continue;
+        }
+
+        copies_to_add_here = how_many_copies_fit( e );
+        if( !valid_tile( e ) || copies_to_add_here <= 0 || has_flag( ter_furn_flag::TFLAG_NOITEM, e ) ) {
+            continue;
+        }
+
+        if( has_flag( ter_furn_flag::TFLAG_SEALED, e ) ) {
+            sealed_tiles.push_back( e );
+        } else {
+            good_tiles.push_back( e );
+        }
+    }
+    // Try non-SEALED tiles first
+    for( const tripoint_bub_ms &e : good_tiles ) {
+        if( copies_remaining <= 0 ) {
+            break;
+        }
+        if( obj.made_of( phase_id::LIQUID ) || !obj.has_flag( flag_DROP_ACTION_ONLY_IF_LIQUID ) ) {
+            if( obj.on_drop( e, *this ) ) {
+                return first_added ? first_added.value() : std::make_pair( &null_item_reference(),
+                        tripoint_bub_ms::invalid );
+            }
+        }
+        copies_to_add_here = how_many_copies_fit( e );
+        copies_remaining -= copies_to_add_here;
+        std::pair<item *, tripoint_bub_ms> new_item = { &place_item( e, copies_to_add_here ), e };
+        first_added = first_added ? first_added : new_item;
+    }
+    // Patch a potential exploit by allowing revivable corpses to go into SEALED tiles if that's the only way.
+    if( obj.is_corpse() && obj.pulpable() && copies_remaining > 0 ) {
+        for( const tripoint_bub_ms &e : sealed_tiles ) {
             if( copies_remaining <= 0 ) {
                 break;
-            }
-            if( !inbounds( e ) ) {
-                continue;
-            }
-            //must be a path to the target tile
-            if( route( pos, pathfinding_target::point( e ), setting ).empty() ) {
-                continue;
             }
             if( obj.made_of( phase_id::LIQUID ) || !obj.has_flag( flag_DROP_ACTION_ONLY_IF_LIQUID ) ) {
                 if( obj.on_drop( e, *this ) ) {
@@ -5927,17 +5961,13 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
                             tripoint_bub_ms::invalid );
                 }
             }
-
             copies_to_add_here = how_many_copies_fit( e );
-            if( !valid_tile( e ) || copies_to_add_here <= 0 ||
-                has_flag( ter_furn_flag::TFLAG_NOITEM, e ) || has_flag( ter_furn_flag::TFLAG_SEALED, e ) ) {
-                continue;
-            }
             copies_remaining -= copies_to_add_here;
             std::pair<item *, tripoint_bub_ms> new_item = { &place_item( e, copies_to_add_here ), e };
             first_added = first_added ? first_added : new_item;
         }
     }
+}
 
     // If first_added has no value, no items were added due to lack of space at target tile (+/- overflow tiles)
     return first_added ? first_added.value() : std::make_pair( &null_item_reference(),
