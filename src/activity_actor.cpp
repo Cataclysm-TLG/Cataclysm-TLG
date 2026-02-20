@@ -8771,6 +8771,10 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
             } else if( corpse.volume() <= 483750_ml ) {
                 divisor = 125_ml;
             }
+            // Frozen corpses take twice as long to pulp.
+            if( corpse.has_flag( flag_FROZEN ) ) {
+                divisor /= 2;
+            }
             double corpse_volume_factor = corpse.volume() / divisor;
             while( corpse.damage() < corpse.max_damage() ) {
                 // Increase damage as we keep smashing ensuring we do eventually smash the target.

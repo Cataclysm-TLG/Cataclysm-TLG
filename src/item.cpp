@@ -8622,7 +8622,7 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
     if( !can_revive() ) {
         return false;
     }
-    if( here.veh_at( pos ) ) {
+    if( here.veh_at( pos ) && !here.passable( pos ) ) {
         return false;
     }
 
