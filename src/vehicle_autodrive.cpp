@@ -844,6 +844,7 @@ void vehicle::autodrive_controller::enqueue_if_ramp( point_queue &ramp_points,
     }
     // Please don't drive into craters.
     if( !here.has_flag( ter_furn_flag::TFLAG_ROAD, p ) ) {
+        ramp_points.visited.emplace( p );
         return;
     }
     ramp_points.visited.emplace( p );
