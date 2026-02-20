@@ -138,7 +138,6 @@
         ]
       },
       { "clear_dimension": "dimension_sky_island_mission" },
-      { "alter_timed_events": "return_portal_close" },
       { "math": [ "timeawayfromhome = 0 - bonuspulses" ] }
     ]
   },
@@ -397,10 +396,11 @@
       { "math": [ "u_vitamin('blood') = 0" ] },
       { "math": [ "u_pain() = 0" ] },
       { "math": [ "u_val('rad') = 0" ] },
-      { "u_add_effect": "cureall", "duration": "1 s", "intensity": 1 },
+      { "math": [ "u_val('pkill') = 0" ] },
       { "u_add_effect": "panacea", "duration": "30 s", "intensity": 1 },
       {
         "u_lose_effect": [
+          "irradiated",
           "corroding",
           "onfire",
           "dazed",
