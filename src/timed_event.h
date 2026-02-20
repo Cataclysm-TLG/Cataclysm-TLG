@@ -18,7 +18,6 @@ enum class timed_event_type : int {
     ROBOT_ATTACK,
     SPAWN_WYRMS,
     AMIGARA,
-    AMIGARA_WHISPERS,
     ROOTS_DIE,
     DIM,
     ARTIFACT_LIGHT,

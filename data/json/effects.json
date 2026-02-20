@@ -3421,15 +3421,9 @@
   },
   {
     "type": "effect_type",
-    "id": "amigara",
-    "apply_message": "You can't look away from the faultline…",
-    "rating": "bad"
-  },
-  {
-    "type": "effect_type",
     "id": "fearparalyze",
-    "name": [ "Feared" ],
-    "desc": [ "You have been paralyzed by the fear." ],
+    "name": [ "Frightened" ],
+    "desc": [ "You are paralyzed by fear." ],
     "rating": "bad",
     "show_in_info": true
   },
