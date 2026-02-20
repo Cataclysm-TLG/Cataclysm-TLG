@@ -34,8 +34,7 @@
     "sym": "%",
     "color": "dark_gray",
     "looks_like": "empty_rock",
-    "see_cost": "opaque",
-    "travel_cost_type": "basement"
+    "see_cost": "opaque"
   },
   {
     "type": "overmap_terrain",
