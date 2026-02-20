@@ -1350,10 +1350,10 @@ class map
          *  @warning function is relatively expensive and meant for user initiated actions, not mapgen
          */
         item_location add_item_or_charges_ret_loc( const tripoint_bub_ms &pos, item obj,
-                bool overflow = true );
-        item &add_item_or_charges( const tripoint_bub_ms &pos, item obj, bool overflow = true );
+                bool overflow = true, bool force = false );
+        item &add_item_or_charges( const tripoint_bub_ms &pos, item obj, bool overflow = true, bool force = false );
         item &add_item_or_charges( const tripoint_bub_ms &pos, item obj, int &copies_remaining,
-                                   bool overflow = true );
+                                   bool overflow = true, bool force = false );
 
         /**
          * Gets spawn_rate value for item category of 'itm'.
@@ -1647,7 +1647,7 @@ class map
             Map &m, const tripoint_bub_ms &p, const field_type_id &type );
 
         std::pair<item *, tripoint_bub_ms> _add_item_or_charges( const tripoint_bub_ms &pos, item obj,
-                int &copies_remaining, bool overflow = true );
+                int &copies_remaining, bool overflow = true, bool force = false );
     public:
 
         // Splatters of various kind
@@ -2492,16 +2492,16 @@ class tinymap : private map
             return map::add_item( rebase_bub( p ), std::move( new_item ) );
         }
         item &add_item_or_charges( const point_omt_ms &p, const item &obj,
-                                   bool overflow = true ) {
-            return map::add_item_or_charges( tripoint_bub_ms( rebase_bub( p ), abs_sub.z() ), obj, overflow );
+                                   bool overflow = true, bool force = false ) {
+            return map::add_item_or_charges( tripoint_bub_ms( rebase_bub( p ), abs_sub.z() ), obj, overflow, force );
         }
         std::vector<item *> put_items_from_loc(
             const item_group_id &group_id, const tripoint_omt_ms &p,
             const time_point &turn = calendar::start_of_cataclysm ) {
             return map::put_items_from_loc( group_id, rebase_bub( p ), turn );
         }
-        item &add_item_or_charges( const tripoint_omt_ms &pos, item obj, bool overflow = true ) {
-            return map::add_item_or_charges( rebase_bub( pos ), std::move( obj ), overflow );
+        item &add_item_or_charges( const tripoint_omt_ms &pos, item obj, bool overflow = true, bool force = false ) {
+            return map::add_item_or_charges( rebase_bub( pos ), std::move( obj ), overflow, force );
         }
         std::vector<item *> place_items(
             const item_group_id &group_id, int chance, const tripoint_omt_ms &p1, const tripoint_omt_ms &p2,
