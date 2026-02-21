@@ -968,6 +968,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
 
             const lit_level ll = overmap_buffer.is_explored( omp ) ? lit_level::LOW : lit_level::LIT;
             // light level is now used for choosing between grayscale filter and normal lit tiles.
+
             draw_from_id_string( id, category,
                                  category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
                                  omp, subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
@@ -1103,7 +1104,8 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         terrain.get_rotation_and_subtile( rotation, subtile );
         int height_3d = 0;
         draw_options opts{};
-        opts.category = TILE_CATEGORY::NONE;
+        opts.category = TILE_CATEGORY::OVERMAP_TERRAIN;
+        opts.subcategory = "overmap_terrain";
         opts.scale_x = 1.0f;
         opts.scale_y = 1.0f;
 
@@ -1129,11 +1131,11 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 int subtile;
                 terrain.get_rotation_and_subtile( rotation, subtile );
 
-                const std::string overmap_subcat = "overmap_terrain";
+                std::string overmap_subcat = "overmap_terrain";
 
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::OVERMAP_TERRAIN;
-                opts.subcategory = &overmap_subcat;
+                opts.subcategory = overmap_subcat;
                 opts.scale_x = 1.0f;
                 opts.scale_y = 1.0f;
 
@@ -1141,7 +1143,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 draw_from_id_string(
                     id,
                     tripoint_bub_ms( global_omt_to_draw_position( center_pos + rp ) ),
-                    0,
+                    subtile,
                     rotation,
                     lit_level::LOW,
                     true,
