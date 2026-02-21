@@ -1,5 +1,23 @@
 [
   {
+    "id": "TINT_NO_FG",
+    "type": "json_flag",
+    "//": "Do not apply tint to background",
+    "context": [  ]
+  },
+  {
+    "id": "TINT_NO_BG",
+    "type": "json_flag",
+    "//": "Do not apply tint to foreground",
+    "context": [  ]
+  },
+  {
+    "id": "TINT_NONE",
+    "type": "json_flag",
+    "//": "Do not apply tint",
+    "context": [  ]
+  },
+  {
     "id": "DEBUG_ONLY",
     "type": "json_flag",
     "info": "This is not intended to be visible during normal gameplay.  <bad>Please file a bug report</bad> unless you are seeing this in the debug menu."

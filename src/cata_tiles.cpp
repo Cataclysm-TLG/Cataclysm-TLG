@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <tuple>
 #include <unordered_set>
+#include <ranges>
 
 #include "action.h"
 #include "avatar.h"
@@ -29,11 +30,13 @@
 #include "cursesdef.h"
 #include "cursesport.h"
 #include "debug.h"
+#include "dynamic_atlas.h"
 #include "field.h"
 #include "field_type.h"
 #include "filesystem.h"
 #include "game.h"
 #include "game_constants.h"
+#include "hsv_color.h"
 #include "input.h"
 #include "int_id.h"
 #include "item.h"
@@ -76,6 +79,8 @@
 #include "weather.h"
 #include "weighted_list.h"
 
+#include "profile.h"
+
 #define dbg(x) DebugLog((x),D_SDL) << __FILE__ << ":" << __LINE__ << ": "
 
 static const efftype_id effect_ridden( "ridden" );
@@ -88,6 +93,10 @@ static const trap_str_id tr_unfinished_construction( "tr_unfinished_construction
 
 static const std::string ITEM_HIGHLIGHT( "highlight_item" );
 static const std::string ZOMBIE_REVIVAL_INDICATOR( "zombie_revival_indicator" );
+
+static const flag_id flag_TINT_NO_FG( "TINT_NO_FG" );
+static const flag_id flag_TINT_NO_BG( "TINT_NO_BG" );
+static const flag_id flag_TINT_NONE( "TINT_NONE" );
 
 static const std::array<std::string, 8> multitile_keys = {{
         "center",
@@ -408,30 +417,167 @@ static void get_tile_information( const cata_path &config_path, std::string &jso
     }
 }
 
-template<typename PixelConverter>
-static SDL_Surface_Ptr apply_color_filter( const SDL_Surface_Ptr &original,
-        PixelConverter pixel_converter )
+static size_t get_surface_hash( SDL_Surface *surf, const SDL_Rect *rect )
 {
-    cata_assert( original );
-    SDL_Surface_Ptr surf = create_surface_32( original->w, original->h );
-    cata_assert( surf );
-    throwErrorIf( SDL_BlitSurface( original.get(), nullptr, surf.get(), nullptr ) != 0,
-                  "SDL_BlitSurface failed" );
 
-    SDL_Color *pix = static_cast<SDL_Color *>( surf->pixels );
+   if( SDL_MUSTLOCK( surf ) ) {
+        SDL_LockSurface( surf );
+    }
 
-    for( int y = 0, ey = surf->h; y < ey; ++y ) {
-        for( int x = 0, ex = surf->w; x < ex; ++x, ++pix ) {
-            if( pix->a == 0x00 ) {
-                // This check significantly improves the performance since
-                // vast majority of pixels in the tilesets are completely transparent.
-                continue;
-            }
-            *pix = pixel_converter( *pix );
+    SDL_Rect rr;
+    if( rect == nullptr ) {
+        rr = {0, 0, surf->w, surf->h};
+               rect = &rr;
+    }
+
+    size_t hash = 0;
+    cata::hash_combine( hash, rect->w );
+    cata::hash_combine( hash, rect->h );
+
+    const int dx = rect->w;
+    const int dy = rect->h;
+
+    for( int y = 0; y < dy; ++y ) {
+        const auto offset = static_cast<uint32_t>( ( ( y + rect->y ) * surf->w ) + rect->x );
+        auto pData = static_cast<uint32_t *>( surf->pixels ) + offset;
+        for( int x = 0; x < dx; ++x, ++pData ) {
+            cata::hash_combine( hash, *pData );
         }
     }
 
-    return surf;
+    if( SDL_MUSTLOCK( surf ) ) {
+        SDL_LockSurface( surf );
+    }
+
+    return hash;
+}
+
+template<bool SkipTransparent = true, typename FilterFn>
+static void
+apply_color_filter(
+    SDL_Surface *dst, const SDL_Rect &dstRect,
+    SDL_Surface *src, const SDL_Rect &srcRect,
+    FilterFn filter_func )
+{
+    cata_assert( dst );
+
+    if( SDL_MUSTLOCK( dst ) ) {
+        SDL_LockSurface( dst );
+    }
+    if( SDL_MUSTLOCK( src ) ) {
+        SDL_LockSurface( src );
+    }
+
+    const int dx = std::min( dstRect.w, srcRect.w );
+    const int dy = std::min( dstRect.h, srcRect.h );
+
+    for( int y = 0; y < dy; ++y ) {
+
+        const auto dst_offset = static_cast<uint32_t>( ( ( y + dstRect.y ) * dst->w ) + dstRect.x );
+        const auto src_offset = static_cast<uint32_t>( ( ( y + srcRect.y ) * src->w ) + srcRect.x );
+
+        auto pDst = static_cast<SDL_Color *>( dst->pixels ) + dst_offset;
+        auto pSrc = static_cast<SDL_Color *>( src->pixels ) + src_offset;
+
+        for( int x = 0; x < dx; ++x, ++pDst, ++pSrc ) {
+            if constexpr( SkipTransparent ) {
+                if( pSrc->a == 0x00 ) {
+                    *pDst = {0, 0, 0, 0};
+                                   }
+            }
+            *pDst = filter_func( *pSrc );
+        }
+    }
+
+    if( SDL_MUSTLOCK( dst ) ) {
+        SDL_UnlockSurface( dst );
+    }
+    if( SDL_MUSTLOCK( src ) ) {
+        SDL_UnlockSurface( src );
+    }
+}
+
+template<bool SkipTransparent = true, typename BlendFn>
+static void apply_blend_filter(
+    SDL_Surface *dst, const SDL_Rect &dstRect,
+    SDL_Surface *srcA, const SDL_Rect &srcRectA,
+    SDL_Surface *srcB, const SDL_Rect &srcRectB,
+    BlendFn blend_func )
+{
+    cata_assert( dst );
+    cata_assert( srcA );
+    cata_assert( srcB );
+
+    if( SDL_MUSTLOCK( dst ) ) {
+        SDL_LockSurface( dst );
+    }
+    if( SDL_MUSTLOCK( srcA ) ) {
+        SDL_LockSurface( srcA );
+    }
+    if( SDL_MUSTLOCK( srcB ) ) {
+        SDL_LockSurface( srcB );
+    }
+
+    const int dx = std::min( dstRect.w, std::min( srcRectA.w, srcRectB.w ) );
+       const int dy = std::min( dstRect.h, std::min( srcRectA.h, srcRectB.h ) );
+
+    for( int y = 0; y < dy; ++y ) {
+
+        const auto dst_offset = static_cast<uint32_t>( ( ( y + dstRect.y ) * dst->w ) + dstRect.x );
+        const auto srcA_offset = static_cast<uint32_t>( ( ( y + srcRectA.y ) * srcA->w ) + srcRectA.x );
+        const auto srcB_offset = static_cast<uint32_t>( ( ( y + srcRectB.y ) * srcB->w ) + srcRectB.x );
+
+        auto pDst = static_cast<SDL_Color *>( dst->pixels ) + dst_offset;
+        auto pSrcA = static_cast<SDL_Color *>( srcA->pixels ) + srcA_offset;
+        auto pSrcB = static_cast<SDL_Color *>( srcB->pixels ) + srcB_offset;
+
+        for( int x = 0; x < dx; ++x, ++pDst, ++pSrcA, ++pSrcB ) {
+            if constexpr( SkipTransparent ) {
+                if( pSrcA->a == 0x00 || pSrcB->a == 0x00 ) {
+                    *pDst = {0, 0, 0, 0};
+                }
+            }
+            *pDst = blend_func( *pSrcA, *pSrcB );
+        }
+    }
+
+    if( SDL_MUSTLOCK( dst ) ) {
+        SDL_UnlockSurface( dst );
+    }
+    if( SDL_MUSTLOCK( srcA ) ) {
+        SDL_UnlockSurface( srcA );
+    }
+    if( SDL_MUSTLOCK( srcB ) ) {
+        SDL_UnlockSurface( srcB );
+    }
+}
+
+template<bool SkipTransparent = true, typename FilterFn>
+static SDL_Surface_Ptr apply_color_filter_blit_copy(
+    const SDL_Surface_Ptr &src, FilterFn filter_func )
+{
+    cata_assert( src );
+    SDL_Surface_Ptr dst = create_surface_32( src->w, src->h );
+    cata_assert( dst );
+    throwErrorIf(
+        SDL_BlitSurface( src.get(), nullptr, dst.get(), nullptr ) != 0,
+        "SDL_BlitSurface failed"
+    );
+
+    auto pix = static_cast<SDL_Color *>( dst->pixels );
+
+    for( int y = 0, ey = dst->h; y < ey; ++y ) {
+        for( int x = 0, ex = dst->w; x < ex; ++x, ++pix ) {
+            if constexpr( SkipTransparent ) {
+                if( pix->a == 0x00 ) {
+                    continue;
+                }
+            }
+            *pix = filter_func( *pix );
+        }
+    }
+
+    return dst;
 }
 
 static bool is_contained( const SDL_Rect &smaller, const SDL_Rect &larger )
@@ -442,39 +588,628 @@ static bool is_contained( const SDL_Rect &smaller, const SDL_Rect &larger )
            smaller.y + smaller.h <= larger.y + larger.h;
 }
 
-void tileset_cache::loader::copy_surface_to_texture( const SDL_Surface_Ptr &surf,
-        const point &offset, std::vector<texture> &target )
+bool tileset_loader::copy_surface_to_dynamic_atlas(
+    const SDL_Surface_Ptr &surf, const point offset )
 {
+#if !defined(DYNAMIC_ATLAS)
+    return false;
+#else
     cata_assert( surf );
-    const rect_range<SDL_Rect> input_range( sprite_width, sprite_height,
-                                            point( surf->w / sprite_width,
-                                                    surf->h / sprite_height ) );
+    const rect_range<SDL_Rect> input_range(
+        sprite_width,
+        sprite_height,
+        point( surf->w / sprite_width, surf->h / sprite_height )
+    );
 
-    const std::shared_ptr<SDL_Texture> texture_ptr = CreateTextureFromSurface( renderer, surf );
-    cata_assert( texture_ptr );
+    auto [st_tex, st_surf, st_sub_rect] =
+        ts.texture_atlas()->get_staging_area( sprite_width, sprite_height );
 
-    for( const SDL_Rect rect : input_range ) {
+    SDL_SetSurfaceBlendMode( surf.get(), SDL_BLENDMODE_NONE );
+
+    auto state = sdl_save_render_state( renderer.get() );
+    for( const SDL_Rect src_rect : input_range ) {
         cata_assert( offset.x % sprite_width == 0 );
         cata_assert( offset.y % sprite_height == 0 );
-        const point pos( offset + point( rect.x, rect.y ) );
+
+        const point pos( offset + point( src_rect.x, src_rect.y ) );
         cata_assert( pos.x % sprite_width == 0 );
         cata_assert( pos.y % sprite_height == 0 );
-        const size_t index = this->offset + ( pos.x / sprite_width ) + ( pos.y / sprite_height ) *
-                             ( tile_atlas_width / sprite_width );
-        cata_assert( index < target.size() );
-        cata_assert( target[index].dimension() == std::make_pair( 0, 0 ) );
-        target[index] = texture( texture_ptr, rect );
+
+        const int index =
+            this->offset + ( pos.x / sprite_width ) +
+            ( pos.y / sprite_height ) * ( tile_atlas_width / sprite_width );
+
+        SDL_FillRect( st_surf, nullptr, SDL_MapRGBA( st_surf->format, 255, 255, 255, 0 ) );
+        SDL_BlitSurface( surf.get(), &src_rect, st_surf, &st_sub_rect );
+
+        const auto surf_hash = get_surface_hash( st_surf, nullptr );
+        const auto existing = ts.tileset_atlas->id_search( surf_hash );
+
+        atlas_texture atl_tex;
+        if( existing.has_value() ) {
+            atl_tex = existing.value();
+        } else {
+            atl_tex = ts.tileset_atlas->allocate_sprite( sprite_width, sprite_height );
+            ts.tileset_atlas->id_assign( surf_hash, atl_tex );
+
+            SDL_UpdateTexture( st_tex, nullptr, st_surf->pixels, st_surf->pitch );
+            SDL_SetRenderTarget( renderer.get(), atl_tex.first.get() );
+            SDL_RenderCopy( renderer.get(), st_tex, &st_sub_rect, &atl_tex.second );
+        }
+
+        const auto tex_key = tileset_lookup_key{ index, TILESET_NO_MASK, tileset_fx_type::none, TILESET_NO_COLOR };
+        auto& [at_tex, at_rect] = atl_tex;
+        ts.tile_lookup.emplace( tex_key, texture( std::move( at_tex ), at_rect ) );
+    }
+    sdl_restore_render_state( renderer.get(), state );
+
+    return true;
+#endif
+}
+
+static color_pixel_function_pointer get_pixel_function( const tileset_fx_type &type )
+{
+    switch( type ) {
+        case tileset_fx_type::shadow:
+            return get_color_pixel_function( "color_pixel_grayscale" );
+            break;
+        case tileset_fx_type::night:
+            return get_color_pixel_function( "color_pixel_nightvision" );
+            break;
+        case tileset_fx_type::overexposed:
+            return get_color_pixel_function( "color_pixel_overexposed" );
+            break;
+        case tileset_fx_type::underwater:
+            return get_color_pixel_function( "color_pixel_underwater" );
+            break;
+        case tileset_fx_type::underwater_dark:
+            return get_color_pixel_function( "color_pixel_underwater_dark" );
+            break;
+        case tileset_fx_type::memory:
+            return get_color_pixel_function( tilecontext->memory_map_mode );
+            break;
+        case tileset_fx_type::z_overlay:
+            return get_color_pixel_function( "color_pixel_zoverlay" );
+            break;
+        default:
+            return get_color_pixel_function( "color_pixel_copy" );
+            break;
     }
 }
 
-void tileset_cache::loader::create_textures_from_tile_atlas( const SDL_Surface_Ptr &tile_atlas,
-        const point &offset )
+template<typename T, typename U, U max_t = std::numeric_limits<U>::max()>
+static T ilerp( const T a, const T b, const U t )
 {
-    cata_assert( tile_atlas );
+    return ( ( b * t ) + ( a * ( max_t - t ) ) ) / max_t;
+};
+
+static void apply_surf_blend_effect(
+    SDL_Surface *staging, const SDL_Color &color, const bool use_mask,
+    const SDL_Rect &dstRect, const SDL_Rect &srcRect, const SDL_Rect &maskRect )
+{
+    ZoneScoped;
+
+    const HSVColor dest_hsv = rgb2hsv( color );
+    constexpr auto overlay = []( const uint8_t lower, const uint8_t upper ) -> uint8_t {
+        if( lower > 127 )
+        {
+            const auto u = ( 255 - lower ) * 255 / 127;
+            const auto m = lower - ( 255 - lower );
+            const auto o = ( upper * u / 255 ) + m;
+            return std::clamp<uint8_t>( o, 0, 255 );
+        } else
+        {
+            const auto u = ( lower * 255 / 127 );
+            const auto o = upper * u / 255;
+            return std::clamp<uint8_t>( o, 0, 255 );
+        }
+    };
+    if( use_mask ) {
+        auto effect_mask = [&]( const SDL_Color & base_rgb, const SDL_Color & mask_rgb )  -> SDL_Color {
+            HSVColor base_hsv = rgb2hsv( base_rgb );
+            base_hsv.H = dest_hsv.H;
+            base_hsv.S = ilerp<uint16_t>( std::min( base_hsv.S, dest_hsv.S ), dest_hsv.S, mask_rgb.g );
+            base_hsv.V = ilerp( base_hsv.V, overlay( base_hsv.V, dest_hsv.V ), mask_rgb.b );
+
+            RGBColor res = hsv2rgb( base_hsv );
+            res.r = ilerp( base_rgb.r, res.r, mask_rgb.r );
+            res.g = ilerp( base_rgb.g, res.g, mask_rgb.r );
+            res.b = ilerp( base_rgb.b, res.b, mask_rgb.r );
+            return res;
+        };
+        apply_blend_filter(
+            staging, dstRect,
+            staging, srcRect,
+            staging, maskRect,
+            effect_mask
+        );
+    } else {
+        auto effect_no_mask = [&]( const SDL_Color & c )  -> SDL_Color {
+            HSVColor base_hsv = rgb2hsv( c );
+            base_hsv.H = dest_hsv.H;
+            base_hsv.S = ilerp<uint16_t, uint8_t>( std::min( base_hsv.S, dest_hsv.S ), dest_hsv.S, 127 );
+            base_hsv.V = ilerp<uint16_t, uint8_t>( base_hsv.V, overlay( base_hsv.V, dest_hsv.V ), 127 );
+            return hsv2rgb( base_hsv );
+        };
+        apply_color_filter(
+            staging, dstRect,
+            staging, srcRect,
+            effect_no_mask
+        );
+    }
+}
+
+const texture *tileset::get_or_default( const int sprite_index,
+                                        const int mask_index,
+                                        const tileset_fx_type &type,
+                                        const SDL_Color &color ) const
+{
+    ZoneScoped;
+
+#if defined(DYNAMIC_ATLAS)
+
+    const auto base_tex_key = tileset_lookup_key{ sprite_index, TILESET_NO_MASK, tileset_fx_type::none, TILESET_NO_COLOR };
+    const auto mask_tex_key = tileset_lookup_key{ mask_index, TILESET_NO_MASK, tileset_fx_type::none, TILESET_NO_COLOR };
+    const auto mod_tex_key = tileset_lookup_key{ sprite_index, mask_index, type, color };
+
+    if( g->display_overlay_state( ACTION_DISPLAY_TILES_NO_VFX ) ) {
+        const auto base_tex_it = tile_lookup.find( base_tex_key );
+        return base_tex_it == tile_lookup.end()
+               ? nullptr
+               : &base_tex_it->second;
+    }
+
+    const auto mod_tex_it = tile_lookup.find( mod_tex_key );
+    if( mod_tex_it != tile_lookup.end() ) {
+        return &mod_tex_it->second;
+    }
+
+    const auto base_tex_it = tile_lookup.find( base_tex_key );
+    if( base_tex_it == tile_lookup.end() ) {
+        return nullptr;
+    }
+
+    const auto mask_tex_it = tile_lookup.find( mask_tex_key );
+
+    const color_pixel_function_pointer vfx_func = get_pixel_function( type );
+    if( !vfx_func ) {
+        debugmsg( "Error loading visual effect function" );
+    }
+
+    {
+        ZoneScoped;
+
+        const auto &r = get_sdl_renderer();
+        const auto rp = r.get();
+
+        const texture &base_tex = base_tex_it->second;
+        const texture *mask_tex = ( mask_tex_it != tile_lookup.end() ) ? &mask_tex_it->second : nullptr;
+
+        const auto [spr_w, spr_h] = base_tex.dimension();
+        const auto [st_tex, st_surf, st_sub_rect ] =
+            texture_atlas()->get_staging_area( spr_w * 2, spr_h * 2 );
+
+        const auto st_sub_rect_source = SDL_Rect{ st_sub_rect.x + 0, st_sub_rect.y + 0, spr_w, spr_h };
+        const auto st_sub_rect_mask = SDL_Rect{ st_sub_rect.x + spr_w, st_sub_rect.y + 0, spr_w, spr_h };
+        const auto st_sub_rect_tinted = SDL_Rect{ st_sub_rect.x + 0, st_sub_rect.y + spr_h, spr_w, spr_h };
+        const auto st_sub_rect_final = SDL_Rect{ st_sub_rect.x + spr_w, st_sub_rect.y + spr_h, spr_w, spr_h };
+
+        const auto state = sdl_save_render_state( rp );
+
+        SDL_SetRenderTarget( rp, st_tex );
+        SetRenderDrawColor( r, 255, 0, 255, 255 );
+        SDL_RenderClear( rp );
+
+        base_tex.set_blend_mode( SDL_BLENDMODE_NONE );
+        base_tex.render_copy( r, &st_sub_rect_source );
+        base_tex.set_blend_mode( SDL_BLENDMODE_BLEND );
+
+        if( mask_tex ) {
+            mask_tex->set_blend_mode( SDL_BLENDMODE_NONE );
+            mask_tex->render_copy( r, &st_sub_rect_mask );
+            mask_tex->set_blend_mode( SDL_BLENDMODE_BLEND );
+        }
+
+        SDL_RenderReadPixels( rp, nullptr, st_surf->format->format, st_surf->pixels, st_surf->pitch );
+
+        if( color == TILESET_NO_COLOR ) {
+            apply_color_filter( st_surf, st_sub_rect_tinted, st_surf, st_sub_rect_source, color_pixel_copy );
+        } else {
+            apply_surf_blend_effect( st_surf, color, mask_tex, st_sub_rect_tinted,
+                                     st_sub_rect_source, st_sub_rect_mask );
+        }
+
+        apply_color_filter( st_surf, st_sub_rect_final,  st_surf, st_sub_rect_tinted, vfx_func );
+
+        auto surf_hash = get_surface_hash( st_surf, &st_sub_rect_final );
+        auto existing = tileset_atlas->id_search( surf_hash );
+
+        atlas_texture atl_tex;
+        if( existing.has_value() ) {
+            atl_tex = std::move( existing.value() );
+        } else {
+            atl_tex = tileset_atlas->allocate_sprite( spr_w, spr_h );
+            tileset_atlas->id_assign( surf_hash, atl_tex );
+
+            SDL_UpdateTexture( st_tex, nullptr, st_surf->pixels, st_surf->pitch );
+            SDL_SetRenderTarget( rp, atl_tex.first.get() );
+            SDL_RenderCopy( rp, st_tex, &st_sub_rect_final, &atl_tex.second );
+        }
+
+        sdl_restore_render_state( rp, state );
+        auto& [at_tex, at_rect] = atl_tex;
+        auto [entry, ok] = tile_lookup.emplace( mod_tex_key, texture( std::move( at_tex ), at_rect ) );
+        return &entry->second;
+    }
+#else
+    if( sprite_index >= tile_values.size() ) {
+        return nullptr;
+    }
+
+    switch( type ) {
+        case tileset_fx_type::shadow:
+            return &shadow_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::night:
+            return &night_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::overexposed:
+            return &overexposed_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::underwater:
+            return &underwater_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::underwater_dark:
+            return &underwater_dark_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::memory:
+            return &memory_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::z_overlay:
+            return &z_overlay_values[sprite_index];
+            break;
+        default:
+            return &tile_values[sprite_index];
+            break;
+    }
+#endif
+}
+
+bool tileset_loader::copy_surface_to_texture( const SDL_Surface_Ptr &surf, const point offset,
+        std::vector<texture> &target ) const
+{
+    assert( surf );
+    const rect_range<SDL_Rect> input_range(
+        sprite_width, sprite_height,
+        point( surf->w / sprite_width, surf->h / sprite_height ) );
+
+    const std::shared_ptr<SDL_Texture> texture_ptr =
+        CreateTextureFromSurface( renderer, surf );
+    if( !texture_ptr ) {
+        return false;
+    }
+
+    for( const SDL_Rect rect : input_range ) {
+        assert( offset.x % sprite_width == 0 );
+        assert( offset.y % sprite_height == 0 );
+        const point pos( offset + point( rect.x, rect.y ) );
+        assert( pos.x % sprite_width == 0 );
+        assert( pos.y % sprite_height == 0 );
+        const size_t index =
+            this->offset + ( pos.x / sprite_width ) +
+            ( pos.y / sprite_height ) * ( tile_atlas_width / sprite_width );
+        assert( index < target.size() );
+        assert( target[index].dimension() == std::make_pair( 0, 0 ) );
+        target[index] = texture( texture_ptr, rect );
+    }
+    return true;
+}
+
+bool tileset_loader::copy_surface_to_dynamic_atlas(
+    const SDL_Surface_Ptr &surf, const point offset )
+{
+#if !defined(DYNAMIC_ATLAS)
+    return false;
+#else
+    assert( surf );
+    const rect_range<SDL_Rect> input_range(
+        sprite_width,
+        sprite_height,
+        point( surf->w / sprite_width, surf->h / sprite_height )
+    );
+
+    auto [st_tex, st_surf, st_sub_rect] =
+        ts.texture_atlas()->get_staging_area( sprite_width, sprite_height );
+
+    SDL_SetSurfaceBlendMode( surf.get(), SDL_BLENDMODE_NONE );
+
+    auto state = sdl_save_render_state( renderer.get() );
+    for( const SDL_Rect src_rect : input_range ) {
+        assert( offset.x % sprite_width == 0 );
+        assert( offset.y % sprite_height == 0 );
+
+        const point pos( offset + point( src_rect.x, src_rect.y ) );
+        assert( pos.x % sprite_width == 0 );
+        assert( pos.y % sprite_height == 0 );
+
+        const int index =
+            this->offset + ( pos.x / sprite_width ) +
+            ( pos.y / sprite_height ) * ( tile_atlas_width / sprite_width );
+
+        SDL_FillRect( st_surf, nullptr, SDL_MapRGBA( st_surf->format, 255, 255, 255, 0 ) );
+        SDL_BlitSurface( surf.get(), &src_rect, st_surf, &st_sub_rect );
+
+        const auto surf_hash = get_surface_hash( st_surf, nullptr );
+        const auto existing = ts.tileset_atlas->id_search( surf_hash );
+
+        atlas_texture atl_tex;
+        if( existing.has_value() ) {
+            atl_tex = existing.value();
+        } else {
+            atl_tex = ts.tileset_atlas->allocate_sprite( sprite_width, sprite_height );
+            ts.tileset_atlas->id_assign( surf_hash, atl_tex );
+
+            SDL_UpdateTexture( st_tex, nullptr, st_surf->pixels, st_surf->pitch );
+            SDL_SetRenderTarget( renderer.get(), atl_tex.first.get() );
+            SDL_RenderCopy( renderer.get(), st_tex, &st_sub_rect, &atl_tex.second );
+        }
+
+        const auto tex_key = tileset_lookup_key{ index, TILESET_NO_MASK, tileset_fx_type::none, TILESET_NO_COLOR };
+        auto& [at_tex, at_rect] = atl_tex;
+        ts.tile_lookup.emplace( tex_key, texture( std::move( at_tex ), at_rect ) );
+    }
+    sdl_restore_render_state( renderer.get(), state );
+
+    return true;
+#endif
+}
+
+static color_pixel_function_pointer get_pixel_function( const tileset_fx_type &type )
+{
+    switch( type ) {
+        case tileset_fx_type::shadow:
+            return get_color_pixel_function( "color_pixel_grayscale" );
+            break;
+        case tileset_fx_type::night:
+            return get_color_pixel_function( "color_pixel_nightvision" );
+            break;
+        case tileset_fx_type::overexposed:
+            return get_color_pixel_function( "color_pixel_overexposed" );
+            break;
+        case tileset_fx_type::underwater:
+            return get_color_pixel_function( "color_pixel_underwater" );
+            break;
+        case tileset_fx_type::underwater_dark:
+            return get_color_pixel_function( "color_pixel_underwater_dark" );
+            break;
+        case tileset_fx_type::memory:
+            return get_color_pixel_function( tilecontext->memory_map_mode );
+            break;
+        case tileset_fx_type::z_overlay:
+            return get_color_pixel_function( "color_pixel_zoverlay" );
+            break;
+        default:
+            return get_color_pixel_function( "color_pixel_copy" );
+            break;
+    }
+}
+
+template<typename T, typename U, U max_t = std::numeric_limits<U>::max()>
+static T ilerp( const T a, const T b, const U t )
+{
+    return ( ( b * t ) + ( a * ( max_t - t ) ) ) / max_t;
+};
+
+static void apply_surf_blend_effect(
+    SDL_Surface *staging, const SDL_Color &color, const bool use_mask,
+    const SDL_Rect &dstRect, const SDL_Rect &srcRect, const SDL_Rect &maskRect )
+{
+    ZoneScoped;
+
+    const HSVColor dest_hsv = rgb2hsv( color );
+    constexpr auto overlay = []( const uint8_t lower, const uint8_t upper ) -> uint8_t {
+        if( lower > 127 )
+        {
+            const auto u = ( 255 - lower ) * 255 / 127;
+            const auto m = lower - ( 255 - lower );
+            const auto o = ( upper * u / 255 ) + m;
+            return std::clamp<uint8_t>( o, 0, 255 );
+        } else
+        {
+            const auto u = ( lower * 255 / 127 );
+            const auto o = upper * u / 255;
+            return std::clamp<uint8_t>( o, 0, 255 );
+        }
+    };
+    if( use_mask ) {
+        auto effect_mask = [&]( const SDL_Color & base_rgb, const SDL_Color & mask_rgb )  -> SDL_Color {
+            HSVColor base_hsv = rgb2hsv( base_rgb );
+            base_hsv.H = dest_hsv.H;
+            base_hsv.S = ilerp<uint16_t>( std::min( base_hsv.S, dest_hsv.S ), dest_hsv.S, mask_rgb.g );
+            base_hsv.V = ilerp( base_hsv.V, overlay( base_hsv.V, dest_hsv.V ), mask_rgb.b );
+
+            RGBColor res = hsv2rgb( base_hsv );
+            res.r = ilerp( base_rgb.r, res.r, mask_rgb.r );
+            res.g = ilerp( base_rgb.g, res.g, mask_rgb.r );
+            res.b = ilerp( base_rgb.b, res.b, mask_rgb.r );
+            return res;
+        };
+        apply_blend_filter(
+            staging, dstRect,
+            staging, srcRect,
+            staging, maskRect,
+            effect_mask
+        );
+    } else {
+        auto effect_no_mask = [&]( const SDL_Color & c )  -> SDL_Color {
+            HSVColor base_hsv = rgb2hsv( c );
+            base_hsv.H = dest_hsv.H;
+            base_hsv.S = ilerp<uint16_t, uint8_t>( std::min( base_hsv.S, dest_hsv.S ), dest_hsv.S, 127 );
+            base_hsv.V = ilerp<uint16_t, uint8_t>( base_hsv.V, overlay( base_hsv.V, dest_hsv.V ), 127 );
+            return hsv2rgb( base_hsv );
+        };
+        apply_color_filter(
+            staging, dstRect,
+            staging, srcRect,
+            effect_no_mask
+        );
+    }
+}
+
+const texture *tileset::get_or_default( const int sprite_index,
+                                        const int mask_index,
+                                        const tileset_fx_type &type,
+                                        const SDL_Color &color ) const
+{
+    ZoneScoped;
+
+#if defined(DYNAMIC_ATLAS)
+
+    const auto base_tex_key = tileset_lookup_key{ sprite_index, TILESET_NO_MASK, tileset_fx_type::none, TILESET_NO_COLOR };
+    const auto mask_tex_key = tileset_lookup_key{ mask_index, TILESET_NO_MASK, tileset_fx_type::none, TILESET_NO_COLOR };
+    const auto mod_tex_key = tileset_lookup_key{ sprite_index, mask_index, type, color };
+
+    if( g->display_overlay_state( ACTION_DISPLAY_TILES_NO_VFX ) ) {
+        const auto base_tex_it = tile_lookup.find( base_tex_key );
+        return base_tex_it == tile_lookup.end()
+               ? nullptr
+               : &base_tex_it->second;
+    }
+
+    const auto mod_tex_it = tile_lookup.find( mod_tex_key );
+    if( mod_tex_it != tile_lookup.end() ) {
+        return &mod_tex_it->second;
+    }
+
+    const auto base_tex_it = tile_lookup.find( base_tex_key );
+    if( base_tex_it == tile_lookup.end() ) {
+        return nullptr;
+    }
+
+    const auto mask_tex_it = tile_lookup.find( mask_tex_key );
+
+    const color_pixel_function_pointer vfx_func = get_pixel_function( type );
+    if( !vfx_func ) {
+        debugmsg( "Error loading visual effect function" );
+    }
+
+    {
+        ZoneScoped;
+
+        const auto &r = get_sdl_renderer();
+        const auto rp = r.get();
+
+        const texture &base_tex = base_tex_it->second;
+        const texture *mask_tex = ( mask_tex_it != tile_lookup.end() ) ? &mask_tex_it->second : nullptr;
+
+        const auto [spr_w, spr_h] = base_tex.dimension();
+        const auto [st_tex, st_surf, st_sub_rect ] =
+            texture_atlas()->get_staging_area( spr_w * 2, spr_h * 2 );
+
+        const auto st_sub_rect_source = SDL_Rect{ st_sub_rect.x + 0, st_sub_rect.y + 0, spr_w, spr_h };
+        const auto st_sub_rect_mask = SDL_Rect{ st_sub_rect.x + spr_w, st_sub_rect.y + 0, spr_w, spr_h };
+        const auto st_sub_rect_tinted = SDL_Rect{ st_sub_rect.x + 0, st_sub_rect.y + spr_h, spr_w, spr_h };
+        const auto st_sub_rect_final = SDL_Rect{ st_sub_rect.x + spr_w, st_sub_rect.y + spr_h, spr_w, spr_h };
+
+        const auto state = sdl_save_render_state( rp );
+
+        SDL_SetRenderTarget( rp, st_tex );
+        SetRenderDrawColor( r, 255, 0, 255, 255 );
+        SDL_RenderClear( rp );
+
+        base_tex.set_blend_mode( SDL_BLENDMODE_NONE );
+        base_tex.render_copy( r, &st_sub_rect_source );
+        base_tex.set_blend_mode( SDL_BLENDMODE_BLEND );
+
+        if( mask_tex ) {
+            mask_tex->set_blend_mode( SDL_BLENDMODE_NONE );
+            mask_tex->render_copy( r, &st_sub_rect_mask );
+            mask_tex->set_blend_mode( SDL_BLENDMODE_BLEND );
+        }
+
+        SDL_RenderReadPixels( rp, nullptr, st_surf->format->format, st_surf->pixels, st_surf->pitch );
+
+        if( color == TILESET_NO_COLOR ) {
+            apply_color_filter( st_surf, st_sub_rect_tinted, st_surf, st_sub_rect_source, color_pixel_copy );
+        } else {
+            apply_surf_blend_effect( st_surf, color, mask_tex, st_sub_rect_tinted,
+                                     st_sub_rect_source, st_sub_rect_mask );
+        }
+
+        apply_color_filter( st_surf, st_sub_rect_final,  st_surf, st_sub_rect_tinted, vfx_func );
+
+        auto surf_hash = get_surface_hash( st_surf, &st_sub_rect_final );
+        auto existing = tileset_atlas->id_search( surf_hash );
+
+        atlas_texture atl_tex;
+        if( existing.has_value() ) {
+            atl_tex = std::move( existing.value() );
+        } else {
+            atl_tex = tileset_atlas->allocate_sprite( spr_w, spr_h );
+            tileset_atlas->id_assign( surf_hash, atl_tex );
+
+            SDL_UpdateTexture( st_tex, nullptr, st_surf->pixels, st_surf->pitch );
+            SDL_SetRenderTarget( rp, atl_tex.first.get() );
+            SDL_RenderCopy( rp, st_tex, &st_sub_rect_final, &atl_tex.second );
+        }
+
+        sdl_restore_render_state( rp, state );
+        auto& [at_tex, at_rect] = atl_tex;
+        auto [entry, ok] = tile_lookup.emplace( mod_tex_key, texture( std::move( at_tex ), at_rect ) );
+        return &entry->second;
+    }
+#else
+    if( sprite_index >= tile_values.size() ) {
+        return nullptr;
+    }
+
+    switch( type ) {
+        case tileset_fx_type::shadow:
+            return &shadow_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::night:
+            return &night_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::overexposed:
+            return &overexposed_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::underwater:
+            return &underwater_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::underwater_dark:
+            return &underwater_dark_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::memory:
+            return &memory_tile_values[sprite_index];
+            break;
+        case tileset_fx_type::z_overlay:
+            return &z_overlay_values[sprite_index];
+            break;
+        default:
+            return &tile_values[sprite_index];
+            break;
+    }
+#endif
+}
+
+
+
+
+
+
+
+bool tileset_loader::create_textures_from_tile_atlas( const SDL_Surface_Ptr &tile_atlas,
+        point offset )
+{
+    assert( tile_atlas );
+
+#if defined(DYNAMIC_ATLAS)
+    return copy_surface_to_dynamic_atlas( tile_atlas, offset );
+#else
 
     /** perform color filter conversion here */
     using tiles_pixel_color_entry = std::tuple<std::vector<texture>*, std::string>;
-    std::array<tiles_pixel_color_entry, 7> tile_values_data = {{
+    std::array<tiles_pixel_color_entry, 8> tile_values_data = {{
             { std::make_tuple( &ts.tile_values, "color_pixel_none" ) },
             { std::make_tuple( &ts.shadow_tile_values, "color_pixel_grayscale" ) },
             { std::make_tuple( &ts.night_tile_values, "color_pixel_nightvision" ) },
@@ -490,12 +1225,18 @@ void tileset_cache::loader::create_textures_from_tile_atlas( const SDL_Surface_P
                 ( entry ) );
         if( !color_pixel_function ) {
             // TODO: Move it inside apply_color_filter.
-            copy_surface_to_texture( tile_atlas, offset, *tile_values );
+            success = copy_surface_to_texture( tile_atlas, offset, *tile_values );
         } else {
-            copy_surface_to_texture( apply_color_filter( tile_atlas, color_pixel_function ), offset,
-                                     *tile_values );
+            success = copy_surface_to_texture( apply_color_filter_blit_copy( tile_atlas, color_pixel_function ),
+                                               offset,
+                                               *tile_values );
+        }
+        if( !success ) {
+            return false;
         }
     }
+    return true;
+#endif
 }
 
 template<typename T>
@@ -573,6 +1314,7 @@ void tileset_cache::loader::load_tileset( const cata_path &img_path, const bool 
 
     const int expected_tilecount = ( tile_atlas->w / sprite_width ) *
                                    ( tile_atlas->h / sprite_height );
+#if !defined(DYNAMIC_ATLAS)
     extend_vector_by( ts.tile_values, expected_tilecount );
     extend_vector_by( ts.shadow_tile_values, expected_tilecount );
     extend_vector_by( ts.night_tile_values, expected_tilecount );
@@ -580,6 +1322,30 @@ void tileset_cache::loader::load_tileset( const cata_path &img_path, const bool 
     extend_vector_by( ts.underwater_tile_values, expected_tilecount );
     extend_vector_by( ts.underwater_dark_tile_values, expected_tilecount );
     extend_vector_by( ts.memory_tile_values, expected_tilecount );
+#endif
+
+
+
+
+
+
+
+
+
+############################################# START HERE ##########################################
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     for( const SDL_Rect sub_rect : output_range ) {
         cata_assert( sub_rect.x % sprite_width == 0 );
