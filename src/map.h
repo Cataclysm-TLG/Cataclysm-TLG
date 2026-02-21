@@ -1351,7 +1351,8 @@ class map
          */
         item_location add_item_or_charges_ret_loc( const tripoint_bub_ms &pos, item obj,
                 bool overflow = true, bool force = false );
-        item &add_item_or_charges( const tripoint_bub_ms &pos, item obj, bool overflow = true, bool force = false );
+        item &add_item_or_charges( const tripoint_bub_ms &pos, item obj, bool overflow = true,
+                                   bool force = false );
         item &add_item_or_charges( const tripoint_bub_ms &pos, item obj, int &copies_remaining,
                                    bool overflow = true, bool force = false );
 
@@ -2493,14 +2494,16 @@ class tinymap : private map
         }
         item &add_item_or_charges( const point_omt_ms &p, const item &obj,
                                    bool overflow = true, bool force = false ) {
-            return map::add_item_or_charges( tripoint_bub_ms( rebase_bub( p ), abs_sub.z() ), obj, overflow, force );
+            return map::add_item_or_charges( tripoint_bub_ms( rebase_bub( p ), abs_sub.z() ), obj, overflow,
+                                             force );
         }
         std::vector<item *> put_items_from_loc(
             const item_group_id &group_id, const tripoint_omt_ms &p,
             const time_point &turn = calendar::start_of_cataclysm ) {
             return map::put_items_from_loc( group_id, rebase_bub( p ), turn );
         }
-        item &add_item_or_charges( const tripoint_omt_ms &pos, item obj, bool overflow = true, bool force = false ) {
+        item &add_item_or_charges( const tripoint_omt_ms &pos, item obj, bool overflow = true,
+                                   bool force = false ) {
             return map::add_item_or_charges( rebase_bub( pos ), std::move( obj ), overflow, force );
         }
         std::vector<item *> place_items(

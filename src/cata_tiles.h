@@ -435,6 +435,22 @@ class cata_tiles
                     tileset_cache &cache );
         ~cata_tiles();
 
+        struct draw_options {
+            TILE_CATEGORY category = TILE_CATEGORY::NONE;
+            const std::string *subcategory = nullptr;
+
+            int intensity = 0;
+            const std::string *variant = nullptr;
+
+            point offset = point::zero;
+
+            float scale_x = 1.0f;
+            float scale_y = 1.0f;
+
+            uint32_t tint_rgba = 0;
+        };
+
+
         /** Reload tileset, with the given scale. Scale is divided by 16 to allow for scales < 1 without risking
          *  float inaccuracies. */
         void set_draw_scale( int scale );
@@ -490,18 +506,37 @@ class cata_tiles
         bool find_overlay_looks_like( bool male, const std::string &overlay, const std::string &variant,
                                       std::string &draw_id );
 
-        bool draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll,
-                                  bool apply_visual_effects );
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects );
+        // New bub_ms headers
+        bool draw_from_id_string(
+            const std::string &id,
+            const tripoint_bub_ms &pos,
+            int subtile,
+            int rota,
+            lit_level ll,
+            bool apply_visual_effects
+        );
 
-        // TODO: DDA removed this one, find out why. See DDA 78815
-        bool draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll,
-                                  bool apply_visual_effects, int &height_3d );
-
+        bool draw_from_id_string(
+            const std::string &id,
+            const tripoint_bub_ms &pos,
+            int subtile,
+            int rota,
+            lit_level ll,
+            bool apply_visual_effects,
+            int &height_3d,
+            const draw_options &opts
+        );
+        bool draw_from_id_string_internal(
+            const std::string &id,
+            const tripoint_bub_ms &pos,
+            int subtile,
+            int rota,
+            lit_level ll,
+            int retract,
+            bool apply_visual_effects,
+            int &height_3d,
+            const draw_options &opts
+        );
 
         // used by sdltiles for overmap drawing.
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
@@ -510,27 +545,6 @@ class cata_tiles
                                   bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
 
 
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level );
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level,
-                                  const std::string &variant );
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level,
-                                  const std::string &variant, const point &offset );
-        bool draw_from_id_string_internal( const std::string &id, const tripoint_bub_ms &pos, int subtile,
-                                           int rota,
-                                           lit_level ll, int retract, bool apply_visual_effects, int &height_3d );
-        bool draw_from_id_string_internal( const std::string &id, TILE_CATEGORY category,
-                                           const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                           lit_level ll, int retract, bool apply_visual_effects, int &height_3d, int intensity_level,
-                                           const std::string &variant, const point &offset, float scale_x, float scale_y );
         bool draw_sprite_at(
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
