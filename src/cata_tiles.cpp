@@ -1946,7 +1946,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         // check to see if player is located at ter
         draw_options opts{};
         opts.category = TILE_CATEGORY::NONE;
-        opts.subcategory = &empty_string;
+
         int height_3d = 0;
         draw_from_id_string(
             "cursor",
@@ -1963,7 +1963,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         if( indicator_offset ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-            opts.subcategory = &empty_string;
+
 
             int height_3d = 0;
             draw_from_id_string(
@@ -2289,7 +2289,7 @@ bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY categ
 {
     draw_options opts{};
     opts.category = category;
-    opts.subcategory = &subcategory;
+    opts.subcategory = subcategory;
     opts.scale_x = scale_x;
     opts.scale_y = scale_y;
 
@@ -2421,6 +2421,7 @@ cata_tiles::find_tile_looks_like( const std::string &id, TILE_CATEGORY category,
             return ret;
         }
 
+
         case TILE_CATEGORY::VEHICLE_PART: {
             const int lljl = looks_like_jumps_limit - 1;
             // vehicle parts start with vp_ for their tiles, but not their IDs
@@ -2457,6 +2458,7 @@ cata_tiles::find_tile_looks_like( const std::string &id, TILE_CATEGORY category,
             return find_tile_looks_like( new_it->looks_like.str(), category, "",
                                          looks_like_jumps_limit - 1 );
         }
+
 
         default:
             return std::nullopt;
@@ -2550,9 +2552,9 @@ bool cata_tiles::draw_from_id_string_internal(
 
     // Extract options from draw_options
     TILE_CATEGORY category = opts.category;
-    const std::string &subcategory = opts.subcategory ? *opts.subcategory : empty_string;
+    const std::string &subcategory = opts.subcategory;
     int intensity_level = opts.intensity;
-    const std::string &variant = opts.variant ? *opts.variant : "";
+    const std::string &variant = opts.variant;
     point offset = opts.offset;
     float scale_x = opts.scale_x;
     float scale_y = opts.scale_y;
@@ -2692,12 +2694,66 @@ bool cata_tiles::draw_from_id_string_internal(
                 col = tmp.color();
                 break;
             }
-            // other categories unchanged, including OVERMAP types, FIELD, TRAP, WEATHER...
+            case TILE_CATEGORY::OVERMAP_TERRAIN: {
+                const oter_type_str_id tmp( id );
+                if( tmp.is_valid() ) {
+                    if( !tmp->is_linear() ) {
+                        // For overmap terrain with connections, make sure rotation stays in bounds
+                        rota %= om_direction::size;
+                        sym = tmp->get_rotated( static_cast<om_direction::type>( rota ) )->get_uint32_symbol();
+                    } else {
+                        sym = tmp->get_uint32_symbol();
+                    }
+                }
+                break;
+            }
+            case TILE_CATEGORY::OVERMAP_NOTE: {
+                sym = static_cast<uint8_t>( id[5] );
+                col = color_from_string( id.substr( 7, id.length() - 1 ) );
+                break;
+            }
+            case TILE_CATEGORY::FIELD: {
+                const field_type_id fid = field_type_id( found_id );
+                sym = fid->get_intensity_level().symbol;
+                col = fid->get_intensity_level().color;
+                break;
+            }
+            case TILE_CATEGORY::TRAP: {
+                const trap_str_id tmp( found_id );
+                if( tmp.is_valid() ) {
+                    const trap &t = tmp.obj();
+                    sym = t.sym;
+                    col = t.color;
+                }
+                break;
+            }
+            case TILE_CATEGORY::OVERMAP_WEATHER: {
+                const weather_type_id weather_def( id );
+                if( weather_def.is_valid() ) {
+                    sym = weather_def->symbol;
+                    col = weather_def->map_color;
+                }
+                break;
+            }
+            case TILE_CATEGORY::OVERMAP_VISION_LEVEL: {
+                size_t id_end = id.find( '$' );
+                om_vision_level level = io::string_to_enum<om_vision_level>( id.substr( id_end + 1 ) );
+                oter_vision_id vision_id( id.substr( 0, id_end ) );
+                // if we have gotten this far, this call can't fail, because the id never would have
+                // been generated to get it. Nonetheless, better safe than sorry
+                if( const oter_vision::level *viewed = vision_id->viewed( level ) ) {
+                    sym = viewed->symbol;
+                    col = viewed->color;
+                }
+                break;
+            }
+
+
             default:
                 break;
         }
 
-        // Special symbol remapping for lines
+        // Special cases for walls
         switch( sym ) {
             case LINE_XOXO:
             case LINE_XOXO_UNICODE:
@@ -3147,7 +3203,7 @@ bool cata_tiles::apply_vision_effects( const tripoint_bub_ms &pos,
     // lighting is never rotated, though, could possibly add in random rotation?
     draw_options opts{};
     opts.category = TILE_CATEGORY::LIGHTING;
-    opts.subcategory = &empty_string;
+
 
     draw_from_id_string(
         light_name,
@@ -3326,7 +3382,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
 
             draw_options opts{};
             opts.category = TILE_CATEGORY::TERRAIN;
-            opts.subcategory = &empty_string;
+
 
             return memorize_only
                    ? false
@@ -3367,7 +3423,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
             const bool nv = !overridden;
             draw_options opts{};
             opts.category = TILE_CATEGORY::TERRAIN;
-            opts.subcategory = &empty_string;
+
             return memorize_only
                    ? false
                    : draw_from_id_string(
@@ -3389,9 +3445,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                 return false;
             } else {
                 draw_options opts{};
-                static const std::string empty_subcat; // safe pointer
                 opts.category = TILE_CATEGORY::TERRAIN;
-                opts.subcategory = &empty_subcat;
 
                 return draw_from_id_string(
                            mt.get_ter_id(),
@@ -3457,9 +3511,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
                 return false;
             } else {
                 draw_options opts{};
-                static const std::string empty_subcat; // safe pointer
                 opts.category = TILE_CATEGORY::FURNITURE;
-                opts.subcategory = &empty_subcat;
                 return draw_from_id_string(
                            fname,
                            p,
@@ -3508,7 +3560,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
             const bool nv = !overridden;
             draw_options opts{};
             opts.category = TILE_CATEGORY::FURNITURE;
-            opts.subcategory = &empty_string;
+
 
 
 
@@ -3533,7 +3585,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
 
             draw_options opts{};
             opts.category = TILE_CATEGORY::FURNITURE;
-            opts.subcategory = &empty_string;
+
 
 
 
@@ -3596,7 +3648,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
             } else {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::TRAP;
-                opts.subcategory = &empty_string;
+
 
 
 
@@ -3644,12 +3696,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
                 return false;
             } else {
                 draw_options opts{};
-                static const std::string empty_subcat; // persistent string
                 opts.category = TILE_CATEGORY::TRAP;
-                opts.subcategory = &empty_subcat;
-
-
-
                 return draw_from_id_string(
                            trname,
                            p,
@@ -3671,7 +3718,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
             } else {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::TRAP;
-                opts.subcategory = &empty_string;
+
 
 
 
@@ -3706,9 +3753,9 @@ bool cata_tiles::draw_part_con( const tripoint_bub_ms &p, const lit_level ll, in
             return false;
         } else {
             draw_options opts{};
-            static const std::string empty_subcat;
+
             opts.category = TILE_CATEGORY::TRAP;
-            opts.subcategory = &empty_subcat;
+
 
 
 
@@ -3747,7 +3794,7 @@ bool cata_tiles::draw_graffiti( const tripoint_bub_ms &p, const lit_level ll, in
                                             "_" ) ).substr( 0, 32 );
     draw_options opts{};
     opts.category = TILE_CATEGORY::NONE;
-    opts.subcategory = &empty_string;
+
 
 
 
@@ -3807,7 +3854,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                     // if we have found info on the item go through and draw its stuff
                     draw_options opts{};
                     opts.category = TILE_CATEGORY::FIELD;
-                    opts.subcategory = &empty_string;
+
                     opts.intensity = fe.get_field_intensity();
                     opts.offset = layer_var.offset;
 
@@ -3867,8 +3914,8 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                         // if we have found info on the item go through and draw its stuff
                         draw_options opts{};
                         opts.category = TILE_CATEGORY::ITEM;
-                        opts.subcategory = &layer_it_category;
-                        opts.variant = &variant;
+                        opts.subcategory = layer_it_category;
+                        opts.variant = variant;
                         opts.offset = layer_var.offset;
 
                         draw_from_id_string(
@@ -3943,12 +3990,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                 }
                 if( !has_drawn_field ) {
                     draw_options opts{};
-                    static const std::string empty_subcat; // persistent string
-                    opts.category = TILE_CATEGORY::FIELD;
-                    opts.subcategory = &empty_subcat;
-
                     opts.intensity = intensity;
-
                     draw_from_id_string(
                         fld.id().str(),
                         p,
@@ -3989,7 +4031,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
             int intensity = fld_overridden ? 0 : here.field_at( p ).displayed_intensity();
             draw_options opts{};
             opts.category = TILE_CATEGORY::FIELD;
-            opts.subcategory = &empty_string;
+
             opts.intensity = intensity;
 
             ret_draw_field = draw_from_id_string(
@@ -4066,8 +4108,8 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
 
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::ITEM;
-                opts.subcategory = &it_category;
-                opts.variant = &variant;
+                opts.subcategory = it_category;
+                opts.variant = variant;
 
                 ret_draw_items = draw_from_id_string(
                                      disp_id,
@@ -4154,8 +4196,8 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                 int height_3d_temp = height_3d;
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::VEHICLE_PART;
-                opts.subcategory = &empty_string;
-                opts.variant = &vd.variant.id;
+
+                opts.variant = vd.variant.id;
 
                 bool ret = false;
                 if( !memorize_only ) {
@@ -4182,10 +4224,6 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                 if( ret && !vd.carried_furn.empty() ) {
                     draw_options opts_furn{};
                     opts_furn.category = TILE_CATEGORY::FURNITURE;
-                    opts_furn.subcategory = &empty_string;
-                    opts_furn.scale_x = 1.0f;
-                    opts_furn.scale_y = 1.0f;
-
                     draw_from_id_string(
                         vd.carried_furn,
                         p,
@@ -4214,7 +4252,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
             int height_3d_temp = height_3d;
             draw_options opts{};
             opts.category = TILE_CATEGORY::VEHICLE_PART;
-            opts.subcategory = &empty_string;
+
 
             bool ret = false;
             if( !memorize_only ) {
@@ -4257,11 +4295,11 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
             } else {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::VEHICLE_PART;
-                static const std::string empty_subcat;
-                opts.subcategory = &empty_subcat;
+
+
 
                 if( !variant_storage.empty() ) {
-                    opts.variant = &variant_storage;
+                    opts.variant = variant_storage;
                 }
 
 
@@ -4352,7 +4390,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                                              empty_string : id.obj().species.begin()->str();
         draw_options opts{};
         opts.category = TILE_CATEGORY::MONSTER;
-        opts.subcategory = &ent_subcategory;
+        opts.subcategory = ent_subcategory;
 
         result = draw_from_id_string(
                      chosen_id,
@@ -4378,7 +4416,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                     you.enchantment_cache->get_vision_description_struct( sees_with_special, d );
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-                opts.subcategory = &empty_string;
+
 
                 return draw_from_id_string(
                            special_vis_desc.id,
@@ -4430,7 +4468,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                 }
                 draw_options opts{};
                 opts.category = ent_category;
-                opts.subcategory = &ent_subcategory;
+                opts.subcategory = ent_subcategory;
 
                 result = draw_from_id_string(
                              chosen_id,
@@ -4500,7 +4538,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                     you.enchantment_cache->get_vision_description_struct( sees_with_special, d );
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-                opts.subcategory = &empty_string;
+
 
 
 
@@ -4530,7 +4568,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
         if( tileset_ptr->find_tile_type( draw_id ) ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-            opts.subcategory = &empty_string;
+
 
 
 
@@ -4577,7 +4615,7 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
     // Draw shadow
     draw_options opts{};
     opts.category = TILE_CATEGORY::NONE;
-    opts.subcategory = &empty_string;
+
 
 
 
@@ -4623,7 +4661,7 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
             if( tileset_ptr->find_tile_type( draw_id ) ) {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-                opts.subcategory = &empty_string;
+
 
 
 
@@ -4670,7 +4708,7 @@ bool cata_tiles::draw_zone_mark( const tripoint_bub_ms &p, lit_level ll, int &he
         if( option && !option->get_mark().empty() ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-            opts.subcategory = &empty_string;
+
 
 
 
@@ -4705,7 +4743,7 @@ bool cata_tiles::draw_zombie_revival_indicators( const tripoint_bub_ms &pos, con
             if( i.can_revive() ) {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-                opts.subcategory = &empty_string;
+
 
 
 
@@ -5394,7 +5432,7 @@ void cata_tiles::draw_bullet_frame()
 {
     draw_options opts{};
     opts.category = TILE_CATEGORY::BULLET;
-    opts.subcategory = &empty_string;
+
 
 
     int height_3d = 0;
@@ -5414,7 +5452,7 @@ void cata_tiles::draw_hit_frame()
     const std::string hit_overlay = "animation_hit";
     draw_options opts{};
     opts.category = TILE_CATEGORY::HIT_ENTITY; // overlay/impact type
-    opts.subcategory = &empty_string;
+
 
 
     int height_3d = 0;
@@ -5441,7 +5479,7 @@ void cata_tiles::draw_line()
 
     draw_options opts{};
     opts.category = TILE_CATEGORY::NONE;
-    opts.subcategory = &empty_string;
+
 
 
     int height_3d = 0;
@@ -5476,7 +5514,7 @@ void cata_tiles::draw_cursor()
 {
     draw_options opts{};
     opts.category = TILE_CATEGORY::NONE;
-    opts.subcategory = &empty_string;
+
 
 
     int height_3d = 0;
@@ -5498,7 +5536,7 @@ void cata_tiles::draw_highlight()
 {
     draw_options opts{};
     opts.category = TILE_CATEGORY::NONE;
-    opts.subcategory = &empty_string;
+
 
 
     int height_3d = 0;
@@ -5532,7 +5570,7 @@ void cata_tiles::draw_weather_frame()
         const tripoint_bub_ms pos( point_bub_ms( p ), 0 );
         draw_options opts{};
         opts.category = TILE_CATEGORY::WEATHER;
-        opts.subcategory = &empty_string;
+
 
 
         int height_3d = 0;
@@ -5582,7 +5620,7 @@ void cata_tiles::draw_sct_frame( std::multimap<point, formatted_text> &overlay_s
                     if( tileset_ptr->find_tile_type( generic_id ) ) {
                         draw_options opts{};
                         opts.category = TILE_CATEGORY::NONE;
-                        opts.subcategory = &empty_string;
+
 
 
                         int height_3d = 0;
@@ -5615,7 +5653,7 @@ void cata_tiles::draw_zones_frame()
         for( int iX = zone_start.x(); iX <= zone_end.x(); ++iX ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-            opts.subcategory = &empty_string;
+
 
 
             int height_3d = 0;
@@ -5645,7 +5683,7 @@ void cata_tiles::draw_async_anim()
         if( find_tile_looks_like( tile_id, TILE_CATEGORY::NONE, "" ) ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-            opts.subcategory = &empty_string;
+
 
 
             int height_3d = 0;
@@ -5677,7 +5715,7 @@ void cata_tiles::draw_footsteps_frame( const tripoint_bub_ms &center )
 
 
         opts.category = TILE_CATEGORY::NONE;
-        opts.subcategory = &empty_string;
+
         int height_3d = 0;
         if( pos.z() > center.z() && tl_above ) {
             draw_from_id_string( id_footstep_above, pos, 0, 0, lit_level::LIT, false, height_3d, opts );

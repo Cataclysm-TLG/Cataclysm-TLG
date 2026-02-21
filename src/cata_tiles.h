@@ -437,16 +437,17 @@ class cata_tiles
 
         struct draw_options {
             TILE_CATEGORY category = TILE_CATEGORY::NONE;
-            const std::string *subcategory = nullptr;
+            std::string subcategory;
 
             int intensity = 0;
-            const std::string *variant = nullptr;
+            std::string variant;
 
             point offset = point::zero;
 
             float scale_x = 1.0f;
             float scale_y = 1.0f;
 
+            // Unused currently, a placeholder for future shenanigans.
             uint32_t tint_rgba = 0;
         };
 
