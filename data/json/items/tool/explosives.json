@@ -56,7 +56,7 @@
     "material": [ "rdx" ],
     "symbol": ";",
     "color": "light_gray",
-    "countdown_action": { "type": "explosion", "explosion": { "power": 2800 } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 1960 } },
     "countdown_interval": "6 seconds",
     "flags": [ "NPC_THROW_NOW", "SPAWN_ACTIVE" ]
   },

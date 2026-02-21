@@ -540,7 +540,7 @@
           { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 5,
+        "encumbrance": 6,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
         "coverage": 95
       },
