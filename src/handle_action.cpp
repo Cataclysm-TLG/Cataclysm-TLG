@@ -968,7 +968,8 @@ static void smash()
     map &here = get_map();
     for( const item &maybe_corpse : here.i_at( smashp ) ) {
         // No smashing corpses you can't actually get to.
-        if( is_smashable_corpse( maybe_corpse ) && !here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
+        if( is_smashable_corpse( maybe_corpse ) &&
+            !here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
             smashable_corpse_at_target = true;
             break;
         }
@@ -1165,7 +1166,8 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
         }
 
     } else {
-        if( !here.has_items( smashp ) || here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
+        if( !here.has_items( smashp ) ||
+            here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
             add_msg( _( "There's nothing there to smash!" ) );
         } else {
             sounds::sound( smashp, 8, sounds::sound_t::combat, _( "thump!" ),
