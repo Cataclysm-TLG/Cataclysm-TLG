@@ -127,6 +127,8 @@ class texture
                  const SDL_Rect &rect ) : sdl_texture_ptr( std::move( ptr ) ),
             srcrect( rect ) { }
         texture() = default;
+        SDL_Texture* get_sdl_texture() const { return sdl_texture_ptr.get(); }
+        const SDL_Rect& get_srcrect() const { return srcrect; }
 
         /// Returns the width (first) and height (second) of the stored texture.
         std::pair<int, int> dimension() const {
@@ -435,6 +437,19 @@ class cata_tiles
                     tileset_cache &cache );
         ~cata_tiles();
 
+        struct tint {
+            bool enabled = false;
+            uint32_t rgba = 0;
+
+            // Optional HSV for dynamic recolor
+            float h = 0.0f;              // hue [0,360)
+            float s = 0.0f;              // saturation [0,1]
+            float v = 1.0f;              // value/brightness [0,1]
+
+            tint() = default;
+            tint(uint32_t rgba_) : enabled(true), rgba(rgba_) {}
+        };
+
         struct draw_options {
             TILE_CATEGORY category = TILE_CATEGORY::NONE;
             std::string subcategory;
@@ -447,10 +462,12 @@ class cata_tiles
             float scale_x = 1.0f;
             float scale_y = 1.0f;
 
-            // Unused currently, a placeholder for future shenanigans.
-            uint32_t tint_rgba = 0;
+            tint recolor;
         };
 
+
+
+        
 
         /** Reload tileset, with the given scale. Scale is divided by 16 to allow for scales < 1 without risking
          *  float inaccuracies. */
@@ -550,11 +567,12 @@ class cata_tiles
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
             bool apply_visual_effects, int retract, int &height_3d, const point &offset,
-            float scale_x, float scale_y );
-        bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
-                           lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
-                           const point &offset,
-                           float scale_x, float scale_y );
+            float scale_x, float scale_y, const tint &recolor  );
+        bool draw_tile_at(
+            const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
+            lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
+            const point &offset, float scale_x, float scale_y,
+            const tint &recolor );
 
         /* Tile Picking */
         void get_tile_values( int t, const std::array<int, 4> &tn, int &subtile, int &rotation,
