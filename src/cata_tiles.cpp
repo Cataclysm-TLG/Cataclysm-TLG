@@ -342,26 +342,6 @@ tile_type &tileset::create_tile_type( const std::string &id, tile_type &&new_til
     return inserted_tile;
 }
 
-void cata_tiles::load_tileset( const std::string &tileset_id, const bool precheck,
-                               const bool force, const bool pump_events )
-{
-    if( tileset_ptr && tileset_ptr->get_tileset_id() == tileset_id && !force ) {
-        return;
-    }
-    // TODO: move into clear or somewhere else.
-    // reset the overlay ordering from the previous loaded tileset
-    tileset_mutation_overlay_ordering.clear();
-
-    tileset_ptr = cache.load_tileset( tileset_id, renderer, precheck, force, pump_events );
-
-    set_draw_scale( 16 );
-
-    // Precalculate occlusion transparency
-    // On isometric tilesets, occlusion intensity scales with zlevel_height in tile_config.json
-    fog_alpha = is_isometric() ? std::min( std::max( int( 255.0f - 255.0f * pow( 155.0f / 255.0f,
-                                           zlevel_height / 100.0f ) ), 40 ), 150 ) : 100;
-}
-
 void cata_tiles::reinit()
 {
     set_draw_scale( 16 );
@@ -875,94 +855,6 @@ const texture *tileset::get_or_default( const int sprite_index,
 #endif
 }
 
-bool tileset_loader::copy_surface_to_texture( const SDL_Surface_Ptr &surf, const point offset,
-        std::vector<texture> &target ) const
-{
-    assert( surf );
-    const rect_range<SDL_Rect> input_range(
-        sprite_width, sprite_height,
-        point( surf->w / sprite_width, surf->h / sprite_height ) );
-
-    const std::shared_ptr<SDL_Texture> texture_ptr =
-        CreateTextureFromSurface( renderer, surf );
-    if( !texture_ptr ) {
-        return false;
-    }
-
-    for( const SDL_Rect rect : input_range ) {
-        assert( offset.x % sprite_width == 0 );
-        assert( offset.y % sprite_height == 0 );
-        const point pos( offset + point( rect.x, rect.y ) );
-        assert( pos.x % sprite_width == 0 );
-        assert( pos.y % sprite_height == 0 );
-        const size_t index =
-            this->offset + ( pos.x / sprite_width ) +
-            ( pos.y / sprite_height ) * ( tile_atlas_width / sprite_width );
-        assert( index < target.size() );
-        assert( target[index].dimension() == std::make_pair( 0, 0 ) );
-        target[index] = texture( texture_ptr, rect );
-    }
-    return true;
-}
-
-bool tileset_loader::copy_surface_to_dynamic_atlas(
-    const SDL_Surface_Ptr &surf, const point offset )
-{
-#if !defined(DYNAMIC_ATLAS)
-    return false;
-#else
-    assert( surf );
-    const rect_range<SDL_Rect> input_range(
-        sprite_width,
-        sprite_height,
-        point( surf->w / sprite_width, surf->h / sprite_height )
-    );
-
-    auto [st_tex, st_surf, st_sub_rect] =
-        ts.texture_atlas()->get_staging_area( sprite_width, sprite_height );
-
-    SDL_SetSurfaceBlendMode( surf.get(), SDL_BLENDMODE_NONE );
-
-    auto state = sdl_save_render_state( renderer.get() );
-    for( const SDL_Rect src_rect : input_range ) {
-        assert( offset.x % sprite_width == 0 );
-        assert( offset.y % sprite_height == 0 );
-
-        const point pos( offset + point( src_rect.x, src_rect.y ) );
-        assert( pos.x % sprite_width == 0 );
-        assert( pos.y % sprite_height == 0 );
-
-        const int index =
-            this->offset + ( pos.x / sprite_width ) +
-            ( pos.y / sprite_height ) * ( tile_atlas_width / sprite_width );
-
-        SDL_FillRect( st_surf, nullptr, SDL_MapRGBA( st_surf->format, 255, 255, 255, 0 ) );
-        SDL_BlitSurface( surf.get(), &src_rect, st_surf, &st_sub_rect );
-
-        const auto surf_hash = get_surface_hash( st_surf, nullptr );
-        const auto existing = ts.tileset_atlas->id_search( surf_hash );
-
-        atlas_texture atl_tex;
-        if( existing.has_value() ) {
-            atl_tex = existing.value();
-        } else {
-            atl_tex = ts.tileset_atlas->allocate_sprite( sprite_width, sprite_height );
-            ts.tileset_atlas->id_assign( surf_hash, atl_tex );
-
-            SDL_UpdateTexture( st_tex, nullptr, st_surf->pixels, st_surf->pitch );
-            SDL_SetRenderTarget( renderer.get(), atl_tex.first.get() );
-            SDL_RenderCopy( renderer.get(), st_tex, &st_sub_rect, &atl_tex.second );
-        }
-
-        const auto tex_key = tileset_lookup_key{ index, TILESET_NO_MASK, tileset_fx_type::none, TILESET_NO_COLOR };
-        auto& [at_tex, at_rect] = atl_tex;
-        ts.tile_lookup.emplace( tex_key, texture( std::move( at_tex ), at_rect ) );
-    }
-    sdl_restore_render_state( renderer.get(), state );
-
-    return true;
-#endif
-}
 
 static color_pixel_function_pointer get_pixel_function( const tileset_fx_type &type )
 {
@@ -1194,157 +1086,11 @@ const texture *tileset::get_or_default( const int sprite_index,
 
 
 
-
-
-
-
-bool tileset_loader::create_textures_from_tile_atlas( const SDL_Surface_Ptr &tile_atlas,
-        point offset )
-{
-    assert( tile_atlas );
-
-#if defined(DYNAMIC_ATLAS)
-    return copy_surface_to_dynamic_atlas( tile_atlas, offset );
-#else
-
-    /** perform color filter conversion here */
-    using tiles_pixel_color_entry = std::tuple<std::vector<texture>*, std::string>;
-    std::array<tiles_pixel_color_entry, 8> tile_values_data = {{
-            { std::make_tuple( &ts.tile_values, "color_pixel_none" ) },
-            { std::make_tuple( &ts.shadow_tile_values, "color_pixel_grayscale" ) },
-            { std::make_tuple( &ts.night_tile_values, "color_pixel_nightvision" ) },
-            { std::make_tuple( &ts.underwater_tile_values, "color_pixel_underwater" ) },
-            { std::make_tuple( &ts.underwater_dark_tile_values, "color_pixel_underwater_dark" ) },
-            { std::make_tuple( &ts.overexposed_tile_values, "color_pixel_overexposed" ) },
-            { std::make_tuple( &ts.memory_tile_values, tilecontext->memory_map_mode ) }
-        }
-    };
-    for( tiles_pixel_color_entry &entry : tile_values_data ) {
-        std::vector<texture> *tile_values = std::get<0>( entry );
-        color_pixel_function_pointer color_pixel_function = get_color_pixel_function( std::get<1>
-                ( entry ) );
-        if( !color_pixel_function ) {
-            // TODO: Move it inside apply_color_filter.
-            success = copy_surface_to_texture( tile_atlas, offset, *tile_values );
-        } else {
-            success = copy_surface_to_texture( apply_color_filter_blit_copy( tile_atlas, color_pixel_function ),
-                                               offset,
-                                               *tile_values );
-        }
-        if( !success ) {
-            return false;
-        }
-    }
-    return true;
-#endif
-}
-
 template<typename T>
 static void extend_vector_by( std::vector<T> &vec, const size_t additional_size )
 {
     vec.resize( vec.size() + additional_size );
 }
-
-void tileset_cache::loader::load_tileset( const cata_path &img_path, const bool pump_events )
-{
-    cata_assert( sprite_width > 0 );
-    cata_assert( sprite_height > 0 );
-    const SDL_Surface_Ptr tile_atlas = load_image( img_path.get_unrelative_path().u8string().c_str() );
-    cata_assert( tile_atlas );
-    tile_atlas_width = tile_atlas->w;
-
-    if( R >= 0 && R <= 255 && G >= 0 && G <= 255 && B >= 0 && B <= 255 ) {
-        const Uint32 key = SDL_MapRGB( tile_atlas->format, 0, 0, 0 );
-        throwErrorIf( SDL_SetColorKey( tile_atlas.get(), SDL_TRUE, key ) != 0,
-                      "SDL_SetColorKey failed" );
-        throwErrorIf( SDL_SetSurfaceRLE( tile_atlas.get(), 1 ), "SDL_SetSurfaceRLE failed" );
-    }
-
-    SDL_RendererInfo info;
-    throwErrorIf( SDL_GetRendererInfo( renderer.get(), &info ) != 0, "SDL_GetRendererInfo failed" );
-    // Software rendering stores textures as surfaces with run-length encoding, which makes
-    // extracting a part in the middle of the texture slow. Therefore this "simulates" that the
-    // renderer only supports one tile
-    // per texture. Each tile will go on its own texture object.
-    if( info.flags & SDL_RENDERER_SOFTWARE ) {
-        info.max_texture_width = sprite_width;
-        info.max_texture_height = sprite_height;
-    }
-    // for debugging only: force a very small maximal texture size, as to trigger
-    // splitting the tile atlas.
-#if 0
-    // +1 to check correct rounding
-    info.max_texture_width = sprite_width * 10 + 1;
-    info.max_texture_height = sprite_height * 20 + 1;
-#endif
-
-    const int min_tile_xcount = 128;
-    const int min_tile_ycount = min_tile_xcount * 2;
-
-    if( info.max_texture_width == 0 ) {
-        info.max_texture_width = sprite_width * min_tile_xcount;
-        DebugLog( D_INFO, DC_ALL ) << "SDL_RendererInfo max_texture_width was set to 0. " <<
-                                   " Changing it to " << info.max_texture_width;
-    } else {
-        throwErrorIf( info.max_texture_width < sprite_width,
-                      "Maximal texture width is smaller than tile width" );
-    }
-
-    if( info.max_texture_height == 0 ) {
-        info.max_texture_height = sprite_height * min_tile_ycount;
-        DebugLog( D_INFO, DC_ALL ) << "SDL_RendererInfo max_texture_height was set to 0. " <<
-                                   " Changing it to " << info.max_texture_height;
-    } else {
-        throwErrorIf( info.max_texture_height < sprite_height,
-                      "Maximal texture height is smaller than tile height" );
-    }
-
-    // Number of tiles in each dimension that fits into a (maximal) SDL texture.
-    // If the tile atlas contains more than that, we have to split it.
-    const int max_tile_xcount = info.max_texture_width / sprite_width;
-    const int max_tile_ycount = info.max_texture_height / sprite_height;
-    // Range over the tile atlas, wherein each rectangle fits into the maximal
-    // SDL texture size. In other words: a range over the parts into which the
-    // tile atlas needs to be split.
-    const rect_range<SDL_Rect> output_range(
-        max_tile_xcount * sprite_width,
-        max_tile_ycount * sprite_height,
-        point( divide_round_up( tile_atlas->w, info.max_texture_width ),
-               divide_round_up( tile_atlas->h, info.max_texture_height ) ) );
-
-    const int expected_tilecount = ( tile_atlas->w / sprite_width ) *
-                                   ( tile_atlas->h / sprite_height );
-#if !defined(DYNAMIC_ATLAS)
-    extend_vector_by( ts.tile_values, expected_tilecount );
-    extend_vector_by( ts.shadow_tile_values, expected_tilecount );
-    extend_vector_by( ts.night_tile_values, expected_tilecount );
-    extend_vector_by( ts.overexposed_tile_values, expected_tilecount );
-    extend_vector_by( ts.underwater_tile_values, expected_tilecount );
-    extend_vector_by( ts.underwater_dark_tile_values, expected_tilecount );
-    extend_vector_by( ts.memory_tile_values, expected_tilecount );
-#endif
-
-
-
-
-
-
-
-
-
-############################################# START HERE ##########################################
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     for( const SDL_Rect sub_rect : output_range ) {
@@ -1467,6 +1213,10 @@ void tileset_cache::loader::load( const std::string &tileset_id, const bool prec
     }
 
     ts.clear();
+
+#if defined(DYNAMIC_ATLAS)
+    ts.tileset_atlas = std::make_unique<dynamic_atlas>( 4096, 4096, ts.tile_width, ts.tile_height );
+#endif
 
     // Load tile information if available.
     offset = 0;

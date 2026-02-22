@@ -514,7 +514,10 @@ class cata_tiles
             int subtile,
             int rota,
             lit_level ll,
-            bool apply_visual_effects
+            bool apply_visual_effects,
+
+            std::optional<nc_color> tint_rgb,
+            std::optional<hsv_color> tint_hsv
         );
 
         bool draw_from_id_string(
