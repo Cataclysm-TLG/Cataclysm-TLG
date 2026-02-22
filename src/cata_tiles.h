@@ -196,17 +196,13 @@ class tileset
         std::vector<texture> underwater_tile_values;
         std::vector<texture> underwater_dark_tile_values;
         std::vector<texture> memory_tile_values;
-
         std::unordered_set<std::string> duplicate_ids;
 
         std::unordered_map<std::string, tile_type> tile_ids;
-        // caches both "default" and "_season_XXX" tile variants (to reduce the number of lookups)
-        // either variant can be either a `nullptr` or a pointer/reference to the real value (stored inside `tile_ids`)
         std::array<std::unordered_map<std::string, season_tile_value>, season_type::NUM_SEASONS>
         tile_ids_by_season;
 
-        static const texture *get_if_available( const size_t index,
-                                                const decltype( shadow_tile_values ) &tiles ) {
+        static const texture *get_if_available( const size_t index, const decltype( shadow_tile_values ) &tiles ) {
             return index < tiles.size() ? & tiles[index] : nullptr;
         }
 
@@ -249,24 +245,6 @@ class tileset
 
         const texture *get_tile( const size_t index ) const {
             return get_if_available( index, tile_values );
-        }
-        const texture *get_night_tile( const size_t index ) const {
-            return get_if_available( index, night_tile_values );
-        }
-        const texture *get_shadow_tile( const size_t index ) const {
-            return get_if_available( index, shadow_tile_values );
-        }
-        const texture *get_overexposed_tile( const size_t index ) const {
-            return get_if_available( index, overexposed_tile_values );
-        }
-        const texture *get_underwater_tile( const size_t index ) const {
-            return get_if_available( index, underwater_tile_values );
-        }
-        const texture *get_underwater_dark_tile( const size_t index ) const {
-            return get_if_available( index, underwater_dark_tile_values );
-        }
-        const texture *get_memory_tile( const size_t index ) const {
-            return get_if_available( index, memory_tile_values );
         }
 
         const std::unordered_set<std::string> &get_duplicate_ids() const {
@@ -465,9 +443,16 @@ class cata_tiles
             tint recolor;
         };
 
+        struct vision_tint {
+            uint32_t rgba;
+            bool enabled = true;
 
+            constexpr vision_tint(uint32_t rgba_) : rgba(rgba_) {}
+        };
 
-        
+        inline tint to_tint(vision_tint v) {
+            return tint(v.rgba);
+        }
 
         /** Reload tileset, with the given scale. Scale is divided by 16 to allow for scales < 1 without risking
          *  float inaccuracies. */
@@ -911,5 +896,14 @@ class cata_tiles
 
         std::string memory_map_mode = "color_pixel_sepia";
 };
+
+extern const cata_tiles::vision_tint VISION_NORMAL;
+extern const cata_tiles::vision_tint VISION_SHADOW;
+extern const cata_tiles::vision_tint VISION_MEMORY;
+extern const cata_tiles::vision_tint VISION_NIGHTVISION;
+extern const cata_tiles::vision_tint VISION_OVEREXPOSED;
+extern const cata_tiles::vision_tint VISION_UNDERWATER;
+extern const cata_tiles::vision_tint VISION_UNDERWATER_D;
+extern const cata_tiles::vision_tint VISION_UNSEEN;
 
 #endif // CATA_SRC_CATA_TILES_H

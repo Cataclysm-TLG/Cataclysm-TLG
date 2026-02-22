@@ -2,20 +2,17 @@
   {
     "id": "TINT_NO_FG",
     "type": "json_flag",
-    "//": "Do not apply tint to background",
-    "context": [  ]
+    "//": "Do not apply tint to background"
   },
   {
     "id": "TINT_NO_BG",
     "type": "json_flag",
-    "//": "Do not apply tint to foreground",
-    "context": [  ]
+    "//": "Do not apply tint to foreground"
   },
   {
     "id": "TINT_NONE",
     "type": "json_flag",
-    "//": "Do not apply tint",
-    "context": [  ]
+    "//": "Do not apply tint"
   },
   {
     "id": "DEBUG_ONLY",

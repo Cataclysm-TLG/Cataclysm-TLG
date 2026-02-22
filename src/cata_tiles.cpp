@@ -78,6 +78,24 @@
 
 #define dbg(x) DebugLog((x),D_SDL) << __FILE__ << ":" << __LINE__ << ": "
 
+
+// TODO: use the constructor to get hsv going
+// TODO2: Is there a way to get these set up ahead of time so that they're cheaper
+const cata_tiles::vision_tint VISION_NORMAL        { 0xFFFFFFFF };
+const cata_tiles::vision_tint VISION_SHADOW        { 0xFFFFFFFF };
+//VISION_SHADOW.s = 0.2f;
+//VISION_SHADOW.v = 0.8f;
+const cata_tiles::vision_tint VISION_MEMORY        { 0xFFFFFFFF };
+//VISION_MEMORY.s = 0.0f;
+//VISION_MEMORY.v = 0.6f;
+const cata_tiles::vision_tint VISION_NIGHTVISION   { 0x00FF00FF };
+const cata_tiles::vision_tint VISION_OVEREXPOSED { 0x80FF40FF };
+//VISION_OVEREXPOSED.s = 1.2f;
+//VISION_OVEREXPOSED.v = 1.2f;
+const cata_tiles::vision_tint VISION_UNDERWATER    { 0x6096C8FF };
+const cata_tiles::vision_tint VISION_UNDERWATER_D  { 0x203040FF };
+const cata_tiles::vision_tint VISION_UNSEEN        { 0x000000FF };
+
 static const efftype_id effect_ridden( "ridden" );
 
 static const itype_id itype_corpse( "corpse" );
@@ -257,10 +275,6 @@ void cata_tiles::on_options_changed()
 void tileset::clear()
 {
     tile_values.clear();
-    shadow_tile_values.clear();
-    night_tile_values.clear();
-    overexposed_tile_values.clear();
-    memory_tile_values.clear();
     duplicate_ids.clear();
     tile_ids.clear();
     for( std::unordered_map<std::string, season_tile_value> &m : tile_ids_by_season ) {
@@ -474,14 +488,8 @@ void tileset_cache::loader::create_textures_from_tile_atlas( const SDL_Surface_P
 
     /** perform color filter conversion here */
     using tiles_pixel_color_entry = std::tuple<std::vector<texture>*, std::string>;
-    std::array<tiles_pixel_color_entry, 7> tile_values_data = {{
-            { std::make_tuple( &ts.tile_values, "color_pixel_none" ) },
-            { std::make_tuple( &ts.shadow_tile_values, "color_pixel_grayscale" ) },
-            { std::make_tuple( &ts.night_tile_values, "color_pixel_nightvision" ) },
-            { std::make_tuple( &ts.underwater_tile_values, "color_pixel_underwater" ) },
-            { std::make_tuple( &ts.underwater_dark_tile_values, "color_pixel_underwater_dark" ) },
-            { std::make_tuple( &ts.overexposed_tile_values, "color_pixel_overexposed" ) },
-            { std::make_tuple( &ts.memory_tile_values, tilecontext->memory_map_mode ) }
+    std::array<tiles_pixel_color_entry, 1> tile_values_data = {{
+            { std::make_tuple( &ts.tile_values, "color_pixel_none" ) }
         }
     };
     for( tiles_pixel_color_entry &entry : tile_values_data ) {
@@ -574,12 +582,6 @@ void tileset_cache::loader::load_tileset( const cata_path &img_path, const bool 
     const int expected_tilecount = ( tile_atlas->w / sprite_width ) *
                                    ( tile_atlas->h / sprite_height );
     extend_vector_by( ts.tile_values, expected_tilecount );
-    extend_vector_by( ts.shadow_tile_values, expected_tilecount );
-    extend_vector_by( ts.night_tile_values, expected_tilecount );
-    extend_vector_by( ts.overexposed_tile_values, expected_tilecount );
-    extend_vector_by( ts.underwater_tile_values, expected_tilecount );
-    extend_vector_by( ts.underwater_dark_tile_values, expected_tilecount );
-    extend_vector_by( ts.memory_tile_values, expected_tilecount );
 
     for( const SDL_Rect sub_rect : output_range ) {
         cata_assert( sub_rect.x % sprite_width == 0 );
@@ -2961,7 +2963,6 @@ bool cata_tiles::draw_from_id_string_internal(
         retract = 0;
     }
 
-    // Draw the tile
     draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll, nv_color_active, retract,
                   height_3d, offset, scale_x, scale_y, opts.recolor );
 
@@ -2996,35 +2997,22 @@ bool cata_tiles::draw_sprite_at(
     const int sprite_index = spritelist[sprite_num];
     const texture *sprite_tex = tileset_ptr->get_tile(sprite_index);
 
-    const texture *sprite_tex = tileset_ptr->get_tile(sprite_index);
-    // Night vision, low light, underwater effects.
-    if (ll == lit_level::MEMORIZED) {
-        if (const texture *ptr = tileset_ptr->get_memory_tile(sprite_index)) {
-            sprite_tex = ptr;
-        }
-    } else if (apply_visual_effects && nv_goggles_activated) {
-        if (ll != lit_level::LOW) {
-            if (const texture *ptr = tileset_ptr->get_overexposed_tile(sprite_index)) {
-                sprite_tex = ptr;
-            }
-        } else {
-            if (const texture *ptr = tileset_ptr->get_night_tile(sprite_index)) {
-                sprite_tex = ptr;
-            }
-        }
-    } else if (apply_visual_effects && get_player_character().is_underwater()) {
-        if (ll != lit_level::LOW) {
-            if (const auto ptr = tileset_ptr->get_underwater_tile(sprite_index)) {
-                sprite_tex = ptr;
-            }
-        } else {
-            if (const auto ptr = tileset_ptr->get_underwater_dark_tile(sprite_index)) {
-                sprite_tex = ptr;
-            }
-        }
-    } else if (ll == lit_level::LOW) {
-        if (const texture *ptr = tileset_ptr->get_shadow_tile(sprite_index)) {
-            sprite_tex = ptr;
+    tint vision_tint;
+
+    if( ll == lit_level::MEMORIZED ) {
+        vision_tint = to_tint(VISION_MEMORY);
+    } 
+    else if( apply_visual_effects && nv_goggles_activated ) {
+        vision_tint = ( ll != lit_level::LOW ) ? to_tint(VISION_OVEREXPOSED) : to_tint(VISION_NIGHTVISION);
+    } 
+    else if( apply_visual_effects && get_player_character().is_underwater() ) {
+        vision_tint = ( ll != lit_level::LOW ) ? to_tint(VISION_UNDERWATER) : to_tint(VISION_UNDERWATER_D);
+    } 
+    else {
+        switch( ll ) {
+            case lit_level::DARK:       vision_tint = to_tint(VISION_SHADOW); break;
+            case lit_level::LOW:        vision_tint = to_tint(VISION_SHADOW); break;
+            default:                    vision_tint = to_tint(VISION_NORMAL); break;
         }
     }
 
@@ -3054,16 +3042,46 @@ bool cata_tiles::draw_sprite_at(
     destination.w = static_cast<int>(width * tile_width * tile.pixelscale / tileset_ptr->get_tile_width() * scale_x);
     destination.h = static_cast<int>(height * tile_height * tile.pixelscale / tileset_ptr->get_tile_height() * scale_y);
 
-    // Apply tint if enabled.
-    if( recolor.enabled && sprite_tex->get_sdl_texture() ) {
-        const Uint8 r = static_cast<Uint8>( ( recolor.rgba >> 16 ) & 0xFF );
-        const Uint8 g = static_cast<Uint8>( ( recolor.rgba >> 8 ) & 0xFF );
-        const Uint8 b = static_cast<Uint8>( recolor.rgba & 0xFF );
-        const Uint8 a = static_cast<Uint8>( ( recolor.rgba >> 24 ) & 0xFF );
+    // Apply combined recolor and vision tint.
+    if (sprite_tex->get_sdl_texture()) {
 
-        SDL_SetTextureColorMod( sprite_tex->get_sdl_texture(), r, g, b );
-        SDL_SetTextureAlphaMod( sprite_tex->get_sdl_texture(), a );
+    Uint8 r = 255, g = 255, b = 255, a = 255;
+
+    if (recolor.enabled) {
+        r = static_cast<Uint8>((recolor.rgba >> 16) & 0xFF);
+        g = static_cast<Uint8>((recolor.rgba >> 8) & 0xFF);
+        b = static_cast<Uint8>(recolor.rgba & 0xFF);
+        a = static_cast<Uint8>((recolor.rgba >> 24) & 0xFF);
     }
+
+    const Uint8 vr = (vision_tint.rgba >> 16) & 0xFF;
+    const Uint8 vg = (vision_tint.rgba >> 8) & 0xFF;
+    const Uint8 vb = vision_tint.rgba & 0xFF;
+    const Uint8 va = (vision_tint.rgba >> 24) & 0xFF;
+
+    if (vision_tint.rgba == VISION_NIGHTVISION.rgba || vision_tint.rgba == VISION_OVEREXPOSED.rgba) {
+        // Night vision/overexposed: override all pixels to green
+        r = 0;
+        g = 255;
+        b = 0;
+        a = 255;
+    } else if (vision_tint.rgba == VISION_SHADOW.rgba) {
+        // Grayscale shadow: average the RGB channels
+        Uint8 gray = (r + g + b) / 3;
+        r = g = b = gray * vg / 255; // use vg for intensity scaling
+        a = (a * va) / 255;
+    } else {
+        r = (r * vr) / 255;
+        g = (g * vg) / 255;
+        b = (b * vb) / 255;
+        a = (a * va) / 255;
+    }
+
+
+        SDL_SetTextureColorMod(sprite_tex->get_sdl_texture(), r, g, b);
+        SDL_SetTextureAlphaMod(sprite_tex->get_sdl_texture(), a);
+    }
+
     // Render sprite.
     int ret = 0;
     if (rotate_sprite) {
@@ -3090,7 +3108,7 @@ bool cata_tiles::draw_sprite_at(
     printErrorIf(ret != 0, "SDL_RenderCopyEx() failed");
 
     // Reset recolor so it doesn't affect other sprites.
-    if (recolor.enabled && sprite_tex->get_sdl_texture()) {
+    if (sprite_tex->get_sdl_texture()) {
         SDL_SetTextureColorMod(sprite_tex->get_sdl_texture(), 255, 255, 255);
         SDL_SetTextureAlphaMod(sprite_tex->get_sdl_texture(), 255);
     }
