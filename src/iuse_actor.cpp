@@ -165,6 +165,9 @@ static const skill_id skill_firstaid( "firstaid" );
 static const skill_id skill_survival( "survival" );
 static const skill_id skill_traps( "traps" );
 
+static const std::string flag_CARGO( "CARGO" );
+static const std::string flag_FLUIDTANK( "FLUIDTANK" );
+
 static const trait_id trait_DEBUG_BIONICS( "DEBUG_BIONICS" );
 static const trait_id trait_ILLITERATE( "ILLITERATE" );
 static const trait_id trait_LIGHTWEIGHT( "LIGHTWEIGHT" );
@@ -1260,13 +1263,42 @@ std::optional<int> deploy_appliance_actor::use( Character *p, item &it,
         return std::nullopt;
     }
 
-    // TODO: Use map aware operation when available
-    it.spill_contents( suitable.value() );
-    // TODO: Use map aware operation when available
-    if( !place_appliance( *here, suitable.value(),
-                          vpart_appliance_from_item( appliance_base ), *p, it ) ) {
-        // failed to place somehow, cancel!!
+    tripoint_bub_ms target = suitable.value();
+
+    const vpart_id &vpart = vpart_appliance_from_item( appliance_base );
+    if( !place_appliance( *here, target, vpart, *p, it ) ) {
         return 0;
+    }
+
+    /* Contents of our item automatically move inside of the appliance, but would
+       normally be deleted if there is no space for them. This is imperfect, but
+       we can check to see if the appliance can hold stuff and manually attempt
+       to spill stuff that definitely won't fit. This can still delete items if
+       the appliance is smaller or lacks storage that the item had, so be careful. */
+    if( vpart->has_flag( flag_FLUIDTANK ) ) {
+        bool placed_fluid = false;
+        for( item *content : it.get_contents().all_items_top() ) {
+            if( content->made_of( phase_id::LIQUID ) ) {
+                if( !placed_fluid ) {
+                    placed_fluid = true;
+                } else {
+                    here->add_item_or_charges( target, std::move( *content ), true, true );
+                }
+            }
+        }
+        it.get_contents().remove_items_if( []( const item & it ) {
+            return it.made_of( phase_id::LIQUID );
+        } );
+    }
+    if( vpart->has_flag( flag_CARGO ) ) {
+        for( item *content : it.get_contents().all_items_top() ) {
+            if( !content->made_of( phase_id::LIQUID ) ) {
+                here->add_item_or_charges( target, std::move( *content ), true, true );
+            }
+        }
+        it.get_contents().remove_items_if( []( const item & it ) {
+            return !it.made_of( phase_id::LIQUID );
+        } );
     }
     p->mod_moves( -to_moves<int>( 2_seconds ) );
     return 1;
