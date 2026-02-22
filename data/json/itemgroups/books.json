@@ -1027,7 +1027,6 @@
     "type": "item_group",
     "subtype": "distribution",
     "entries": [
-      { "item": "satellitemap", "prob": 1 },
       { "item": "touristmap", "prob": 2 },
       { "item": "trailmap", "prob": 2 },
       { "item": "roadmap", "prob": 1 }
