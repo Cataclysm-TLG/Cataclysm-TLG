@@ -348,6 +348,8 @@ enum action_id : int {
     /** Toggle retracted/transparent high sprites */
     ACTION_TOGGLE_PREVENT_OCCLUSION,
     ACTION_DISPLAY_NPC_ATTACK_POTENTIAL,
+    /** Toggle visual effect rendering */
+    ACTION_DISPLAY_TILES_NO_VFX,
     /** Toggle timing of the game hours */
     ACTION_TOGGLE_HOUR_TIMER,
     /** Not an action, serves as count of enumerated actions */
