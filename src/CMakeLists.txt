@@ -40,6 +40,29 @@ if (TILES)
 
     target_link_libraries(cataclysm-tiles-common PUBLIC third-party)
 
+    if (TILES)
+    add_library(
+        cataclysm-tiles-common OBJECT
+        ${CATACLYSM_TLG_SOURCES}
+        ${CATACLYSM_TLG_HEADERS}
+    )
+    target_include_directories(cataclysm-tiles-common INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+    target_link_libraries(cataclysm-tiles-common PUBLIC third-party)
+    
+    cmake_dependent_option(DYNAMIC_ATLAS
+        "Enable dynamic atlas generation" ON
+        TILES OFF
+    )
+
+    if(DYNAMIC_ATLAS)
+        add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third-party/dynamic_atlas)
+        target_link_libraries(cataclysm-tiles-common PUBLIC dynamic_atlas)
+        target_compile_definitions(cataclysm-tiles-common PUBLIC DYNAMIC_ATLAS)
+        target_include_directories(cataclysm-tiles-common PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/third-party/dynamic_atlas/include
+        )
+    endif()
+
     if (WIN32)
         add_definitions(-DUSE_WINMAIN)
         add_executable(

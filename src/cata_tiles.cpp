@@ -78,24 +78,6 @@
 
 #define dbg(x) DebugLog((x),D_SDL) << __FILE__ << ":" << __LINE__ << ": "
 
-
-// TODO: use the constructor to get hsv going
-// TODO2: Is there a way to get these set up ahead of time so that they're cheaper
-const cata_tiles::vision_tint VISION_NORMAL        { 0xFFFFFFFF };
-const cata_tiles::vision_tint VISION_SHADOW        { 0xFFFFFFFF };
-//VISION_SHADOW.s = 0.2f;
-//VISION_SHADOW.v = 0.8f;
-const cata_tiles::vision_tint VISION_MEMORY        { 0xFFFFFFFF };
-//VISION_MEMORY.s = 0.0f;
-//VISION_MEMORY.v = 0.6f;
-const cata_tiles::vision_tint VISION_NIGHTVISION   { 0x00FF00FF };
-const cata_tiles::vision_tint VISION_OVEREXPOSED { 0x80FF40FF };
-//VISION_OVEREXPOSED.s = 1.2f;
-//VISION_OVEREXPOSED.v = 1.2f;
-const cata_tiles::vision_tint VISION_UNDERWATER    { 0x6096C8FF };
-const cata_tiles::vision_tint VISION_UNDERWATER_D  { 0x203040FF };
-const cata_tiles::vision_tint VISION_UNSEEN        { 0x000000FF };
-
 static const efftype_id effect_ridden( "ridden" );
 
 static const itype_id itype_corpse( "corpse" );
@@ -2961,7 +2943,7 @@ bool cata_tiles::draw_from_id_string_internal(
     }
 
     draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll, nv_color_active, retract,
-                  height_3d, offset, scale_x, scale_y, opts.recolor );
+                  height_3d, offset, scale_x, scale_y );
 
     return true;
 }
@@ -2969,147 +2951,181 @@ bool cata_tiles::draw_from_id_string_internal(
 bool cata_tiles::draw_sprite_at(
     const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
     const point &p, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
-    bool apply_visual_effects, int retract, int &height_3d, const point &offset,
-    float scale_x, float scale_y, const tint &recolor )
+    bool apply_visual_effects, int retract, int &height_3d, const point &offset, float scale_x,
+    float scale_y )
 {
-    const std::vector<int> *picked = svlist.pick(loc_rand);
-    if (!picked || picked->empty()) {
+    const std::vector<int> *picked = svlist.pick( loc_rand );
+    if( !picked ) {
         return true;
     }
     const std::vector<int> &spritelist = *picked;
+    if( spritelist.empty() ) {
+        return true;
+    }
 
-    int sprite_num = 0;
+    int ret = 0;
+    // blit foreground based on rotation
     bool rotate_sprite = false;
-    if (!rota_fg && spritelist.size() == 1) {
+    int sprite_num = 0;
+    if( !rota_fg && spritelist.size() == 1 ) {
+        // don't rotate, a background tile without manual rotations
         rotate_sprite = false;
         sprite_num = 0;
-    } else if (spritelist.size() == 1) {
+    } else if( spritelist.size() == 1 ) {
+        // just one tile, apply SDL sprite rotation if not in isometric mode
         rotate_sprite = true;
         sprite_num = 0;
     } else {
+        // multiple rotated tiles defined, don't apply sprite rotation after picking one
         rotate_sprite = false;
+        // two tiles, tile 0 is N/S, tile 1 is E/W
+        // four tiles, 0=N, 1=E, 2=S, 3=W
+        // extending this to more than 4 rotated tiles will require changing rota to degrees
         sprite_num = rota % spritelist.size();
     }
 
     const int sprite_index = spritelist[sprite_num];
-    const texture *sprite_tex = tileset_ptr->get_tile(sprite_index);
+    const texture *sprite_tex = tileset_ptr->get_tile( sprite_index );
 
-    tint vision_tint;
-
+    //use night vision colors when in use
+    //then use low light tile if available
     if( ll == lit_level::MEMORIZED ) {
-        vision_tint = to_tint(VISION_MEMORY);
-    } 
-    else if( apply_visual_effects && nv_goggles_activated ) {
-        vision_tint = ( ll != lit_level::LOW ) ? to_tint(VISION_OVEREXPOSED) : to_tint(VISION_NIGHTVISION);
-    } 
-    else if( apply_visual_effects && get_player_character().is_underwater() ) {
-        vision_tint = ( ll != lit_level::LOW ) ? to_tint(VISION_UNDERWATER) : to_tint(VISION_UNDERWATER_D);
-    } 
-    else {
-        switch( ll ) {
-            case lit_level::DARK:       vision_tint = to_tint(VISION_SHADOW); break;
-            case lit_level::LOW:        vision_tint = to_tint(VISION_SHADOW); break;
-            default:                    vision_tint = to_tint(VISION_NORMAL); break;
+        if( const texture *ptr = tileset_ptr->get_memory_tile( sprite_index ) ) {
+            sprite_tex = ptr;
+        }
+    } else if( apply_visual_effects && nv_goggles_activated ) {
+        if( ll != lit_level::LOW ) {
+            if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
+                sprite_tex = ptr;
+            }
+        } else {
+            if( const texture *ptr = tileset_ptr->get_night_tile( sprite_index ) ) {
+                sprite_tex = ptr;
+            }
+        }
+        // TODO: Review if this works for remote view e.g. RC cars.
+    } else if( apply_visual_effects && get_player_character().is_underwater() ) {
+        if( ll != lit_level::LOW ) {
+            if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
+                sprite_tex = ptr;
+            }
+        } else {
+            if( const auto ptr = tileset_ptr->get_underwater_dark_tile( sprite_index ) ) {
+                sprite_tex = ptr;
+            }
+        }
+    } else if( ll == lit_level::LOW ) {
+        if( const texture *ptr = tileset_ptr->get_shadow_tile( sprite_index ) ) {
+            sprite_tex = ptr;
         }
     }
 
-    // Compute destination rectangle.
-    int width = 0, height = 0;
-    std::tie(width, height) = sprite_tex->dimension();
-
+    int width = 0;
+    int height = 0;
+    std::tie( width, height ) = sprite_tex->dimension();
     point draw_offset = point::zero;
-    if (scale_x != 0) {
-        draw_offset.x = round((width / 2) * (1 - scale_x));
+    // Overlays might not all be the same size. draw_offset adjusts the offsets according to image dimensions
+    // to keep all mutations, gear etc in proper relation to each other when characters are dynamically scaled.
+    if( scale_x != 0 ) {
+        // Rescaled tiles need to be horizontally centered.
+        draw_offset.x = round( ( width / 2 ) * ( 1 - scale_x ) );
     }
-    if (scale_y != 0) {
-        draw_offset.y = height - (height * scale_y);
+    if( scale_y != 0 ) {
+        draw_offset.y = height - ( height * scale_y );
     }
-
     const point &tile_offset = retract <= 0
                                ? tile.offset
-                               : (retract >= 100
-                                  ? tile.offset_retracted
-                                  : tile.offset + ((tile.offset_retracted - tile.offset) * retract) / 100);
-
+                               : ( retract >= 100
+                                   ? tile.offset_retracted
+                                   : tile.offset
+                                   + ( ( tile.offset_retracted - tile.offset ) * retract ) / 100
+                                 );
     SDL_Rect destination;
-    destination.x = p.x + divide_round_down((tile_offset.x + offset.x + draw_offset.x) * tile_width,
-                                            tileset_ptr->get_tile_width());
-    destination.y = p.y + divide_round_down((tile_offset.y + offset.y - height_3d + draw_offset.y) * tile_width,
-                                            tileset_ptr->get_tile_width());
-    destination.w = static_cast<int>(width * tile_width * tile.pixelscale / tileset_ptr->get_tile_width() * scale_x);
-    destination.h = static_cast<int>(height * tile_height * tile.pixelscale / tileset_ptr->get_tile_height() * scale_y);
 
-    // Apply combined recolor and vision tint.
-    if (sprite_tex->get_sdl_texture()) {
+    // Using divide_round_down because the offset might be negative.
+    destination.x = p.x + divide_round_down( ( tile_offset.x + offset.x + draw_offset.x ) * tile_width,
+                    tileset_ptr->get_tile_width() );
+    destination.y = p.y + divide_round_down( ( tile_offset.y + offset.y - height_3d + draw_offset.y ) *
+                    tile_width,
+                    tileset_ptr->get_tile_width() );
+    destination.w = static_cast<int>( width * tile_width * tile.pixelscale /
+                                      tileset_ptr->get_tile_width() * scale_x );
+    destination.h = static_cast<int>( height * tile_height * tile.pixelscale /
+                                      tileset_ptr->get_tile_height() * scale_y );
 
-    Uint8 r = 255, g = 255, b = 255, a = 255;
-
-    if (recolor.enabled) {
-        r = static_cast<Uint8>((recolor.rgba >> 16) & 0xFF);
-        g = static_cast<Uint8>((recolor.rgba >> 8) & 0xFF);
-        b = static_cast<Uint8>(recolor.rgba & 0xFF);
-        a = static_cast<Uint8>((recolor.rgba >> 24) & 0xFF);
-    }
-
-    const Uint8 vr = (vision_tint.rgba >> 16) & 0xFF;
-    const Uint8 vg = (vision_tint.rgba >> 8) & 0xFF;
-    const Uint8 vb = vision_tint.rgba & 0xFF;
-    const Uint8 va = (vision_tint.rgba >> 24) & 0xFF;
-
-    if (vision_tint.rgba == VISION_NIGHTVISION.rgba || vision_tint.rgba == VISION_OVEREXPOSED.rgba) {
-        // Night vision/overexposed: override all pixels to green
-        r = 0;
-        g = 255;
-        b = 0;
-        a = 255;
-    } else if (vision_tint.rgba == VISION_SHADOW.rgba) {
-        // Grayscale shadow: average the RGB channels
-        Uint8 gray = (r + g + b) / 3;
-        r = g = b = gray * vg / 255; // use vg for intensity scaling
-        a = (a * va) / 255;
-    } else {
-        r = (r * vr) / 255;
-        g = (g * vg) / 255;
-        b = (b * vb) / 255;
-        a = (a * va) / 255;
-    }
-
-
-        SDL_SetTextureColorMod(sprite_tex->get_sdl_texture(), r, g, b);
-        SDL_SetTextureAlphaMod(sprite_tex->get_sdl_texture(), a);
-    }
-
-    // Render sprite.
-    int ret = 0;
-    if (rotate_sprite) {
-        if (rota == -1) {
-            ret = sprite_tex->render_copy_ex(renderer, &destination, 0, nullptr, SDL_FLIP_HORIZONTAL);
+    if( rotate_sprite ) {
+        if( rota == -1 ) {
+            // flip horizontally
+            ret = sprite_tex->render_copy_ex(
+                      renderer, &destination, 0, nullptr,
+                      static_cast<SDL_RendererFlip>( SDL_FLIP_HORIZONTAL ) );
         } else {
-            switch (rota % 4) {
+            switch( rota % 4 ) {
                 default:
-                case 0: ret = sprite_tex->render_copy_ex(renderer, &destination, 0, nullptr, SDL_FLIP_NONE); break;
-                case 1: ret = is_isometric() ? sprite_tex->render_copy_ex(renderer, &destination, 0, nullptr, SDL_FLIP_NONE)
-                                            : sprite_tex->render_copy_ex(renderer, &destination, -90, nullptr, SDL_FLIP_NONE); break;
-                case 2: ret = is_isometric() ? sprite_tex->render_copy_ex(renderer, &destination, 0, nullptr, SDL_FLIP_NONE)
-                                            : sprite_tex->render_copy_ex(renderer, &destination, 0, nullptr,
-                                                                        static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL));
-                                            break;
-                case 3: ret = is_isometric() ? sprite_tex->render_copy_ex(renderer, &destination, 0, nullptr, SDL_FLIP_NONE)
-                                            : sprite_tex->render_copy_ex(renderer, &destination, 90, nullptr, SDL_FLIP_NONE); break;
+                case 0:
+                    // unrotated (and 180, with just two sprites)
+                    ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
+                                                      SDL_FLIP_NONE );
+                    break;
+                case 1:
+                    // 90 degrees (and 270, with just two sprites)
+#if defined(_WIN32) && defined(CROSS_LINUX)
+                    // For an unknown reason, additional offset is required in direct3d mode
+                    // for cross-compilation from Linux to Windows
+                    if( direct3d_mode ) {
+                        destination.y -= 1;
+                    }
+#endif
+                    if( !is_isometric() ) {
+                        // never rotate isometric tiles
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, -90, nullptr,
+                                                          SDL_FLIP_NONE );
+                    } else {
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
+                                                          SDL_FLIP_NONE );
+                    }
+                    break;
+                case 2:
+                    // 180 degrees, implemented with flips instead of rotation
+                    if( !is_isometric() ) {
+                        // never flip isometric tiles vertically
+                        ret = sprite_tex->render_copy_ex(
+                                  renderer, &destination, 0, nullptr,
+                                  static_cast<SDL_RendererFlip>( SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL ) );
+                    } else {
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
+                                                          SDL_FLIP_NONE );
+                    }
+                    break;
+                case 3:
+                    // 270 degrees
+#if defined(_WIN32) && defined(CROSS_LINUX)
+                    // For an unknown reason, additional offset is required in direct3d mode
+                    // for cross-compilation from Linux to Windows
+                    if( direct3d_mode ) {
+                        destination.x -= 1;
+                    }
+#endif
+                    if( !is_isometric() ) {
+                        // never rotate isometric tiles
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, 90, nullptr,
+                                                          SDL_FLIP_NONE );
+                    } else {
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
+                                                          SDL_FLIP_NONE );
+                    }
+                    break;
             }
         }
     } else {
-        ret = sprite_tex->render_copy_ex(renderer, &destination, 0, nullptr, SDL_FLIP_NONE);
+        // don't rotate, same as case 0 above
+        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr, SDL_FLIP_NONE );
     }
 
-    printErrorIf(ret != 0, "SDL_RenderCopyEx() failed");
-
-    // Reset recolor so it doesn't affect other sprites.
-    if (sprite_tex->get_sdl_texture()) {
-        SDL_SetTextureColorMod(sprite_tex->get_sdl_texture(), 255, 255, 255);
-        SDL_SetTextureAlphaMod(sprite_tex->get_sdl_texture(), 255);
-    }
-
+    printErrorIf( ret != 0, "SDL_RenderCopyEx() failed" );
+    // this reference passes all the way back up the call chain back to
+    // cata_tiles::draw() here.draw_points_cache[z][row][col].com.height_3d
+    // where we are accumulating the height of every sprite stacked up in a tile
     height_3d += tile.height_3d;
     return true;
 }
@@ -3117,13 +3133,13 @@ bool cata_tiles::draw_sprite_at(
 bool cata_tiles::draw_tile_at(
     const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
     lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
-    const point &offset, float scale_x, float scale_y, const tint &recolor )
+    const point &offset, float scale_x, float scale_y )
 {
     int fake_int = height_3d;
     draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, ll,
-                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y, recolor );
+                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y );
     draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, ll,
-                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y, recolor );
+                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y );
     return true;
 }
 

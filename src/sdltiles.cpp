@@ -44,6 +44,7 @@
 #include "color_loader.h"
 #include "cursesport.h"
 #include "debug.h"
+#include "dynamic_atlas.h"
 #include "filesystem.h"
 #include "flag.h"
 #include "font_loader.h"
@@ -121,6 +122,7 @@ static uint32_t lastupdate = 0;
 static uint32_t interval = 25;
 static bool needupdate = false;
 static bool need_invalidate_framebuffers = false;
+static const std::string empty_string;
 palette_array windowsPalette;
 
 static Font_Ptr font;
@@ -967,20 +969,23 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             }
 
             const lit_level ll = overmap_buffer.is_explored( omp ) ? lit_level::LOW : lit_level::LIT;
+
+            
+            auto [bgCol, fgCol] = get_overmap_color( overmap_buffer, omp );
             // light level is now used for choosing between grayscale filter and normal lit tiles.
 
             draw_from_id_string( id, category,
                                  category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
-                                 omp, subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
+                                 omp, subtile, rotation, bgCol, fgCol, ll, false, height_3d, 1.0f, 1.0f );
             if( !mx.is_empty() && mx->autonote ) {
                 draw_from_id_string( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp,
-                                     0, 0, ll, false, height_3d, 1.0f, 1.0f );
+                                     0, 0,  bgCol, fgCol, ll, false, height_3d, 1.0f, 1.0f );
             }
 
             if( draw_overlays && show_map_revealed ) {
                 auto it = revealed_highlights.find( omp );
                 if( it != revealed_highlights.end() ) {
-                    draw_from_id_string( "highlight", tripoint_bub_ms( omp.raw() ), 0, 0, lit_level::LIT, false );
+                    draw_from_id_string( "highlight", tripoint_bub_ms( omp.raw() ), 0, 0, bgCol, fgCol, lit_level::LIT, false );
                 }
             }
 
@@ -1059,19 +1064,19 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             if( ( uistate.place_terrain || uistate.place_special ) &&
                 overmap_ui::is_generated_omt( omp.xy() ) ) {
                 // Highlight areas that already have been generated
-                draw_from_id_string( "highlight", tripoint_bub_ms( omp.raw() ), 0, 0, lit_level::LIT, false );
+                draw_from_id_string( "highlight", tripoint_bub_ms( omp.raw() ), 0, 0,  bgCol, fgCol, lit_level::LIT, false );
             }
 
             if( draw_overlays && overmap_buffer.has_vehicle( omp ) ) {
                 const std::string tile_id = overmap_buffer.get_vehicle_tile_id( omp );
                 if( find_tile_looks_like( tile_id, TILE_CATEGORY::OVERMAP_NOTE, "" ) ) {
                     draw_from_id_string( tile_id, TILE_CATEGORY::OVERMAP_NOTE,
-                                         "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                         "overmap_note", omp, 0, 0, bgCol, fgCol, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 } else {
                     const std::string ter_sym = overmap_buffer.get_vehicle_ter_sym( omp );
                     std::string note_name = "note_" + ter_sym + "_cyan";
                     draw_from_id_string( note_name, TILE_CATEGORY::OVERMAP_NOTE,
-                                         "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                         "overmap_note", omp, 0, 0, bgCol, fgCol, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 }
             }
 
@@ -1113,7 +1118,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             id,
             tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ),
             subtile,
-            rotation,
+            rotation, bgCol, fgCol,
             lit_level::LOW,
             true,          // apply_visual_effects
             height_3d,
@@ -1144,7 +1149,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                     id,
                     tripoint_bub_ms( global_omt_to_draw_position( center_pos + rp ) ),
                     subtile,
-                    rotation,
+                    rotation, bgCol, fgCol,
                     lit_level::LOW,
                     true,
                     height_3d,
@@ -1173,7 +1178,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                                lit_level::LIT, height_3d, 1.0f, 1.0f );
     if( !fast_traveling ) {
         draw_from_id_string( "cursor", tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ), 0, 0,
-                             lit_level::LIT,
+                              bgCol, fgCol,lit_level::LIT,
                              false );
     }
 
@@ -1183,7 +1188,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 draw_from_id_string(
                     "highlight",
                     tripoint_bub_ms( global_omt_to_draw_position( pos ) ),
-                    0, 0, lit_level::LIT, false
+                    0, 0,  bgCol, fgCol,lit_level::LIT, false
                 );
             }
         }
@@ -1194,7 +1199,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                     draw_from_id_string(
                         "highlight",
                         tripoint_bub_ms( global_omt_to_draw_position( pos ) ),
-                        0, 0, lit_level::LIT, false
+                        0, 0,  bgCol, fgCol,lit_level::LIT, false
                     );
                 }
             }
@@ -1207,7 +1212,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         if( mission_arrow ) {
             draw_from_id_string( mission_arrow->second,
                                  tripoint_bub_ms( global_omt_to_draw_position( mission_arrow->first ) ), 0,
-                                 0, lit_level::LIT, false );
+                                 0, bgCol, fgCol, lit_level::LIT, false );
         }
     }
 

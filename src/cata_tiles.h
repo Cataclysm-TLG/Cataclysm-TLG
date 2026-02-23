@@ -415,19 +415,6 @@ class cata_tiles
                     tileset_cache &cache );
         ~cata_tiles();
 
-        struct tint {
-            bool enabled = false;
-            uint32_t rgba = 0;
-
-            // Optional HSV for dynamic recolor
-            float h = 0.0f;              // hue [0,360)
-            float s = 0.0f;              // saturation [0,1]
-            float v = 1.0f;              // value/brightness [0,1]
-
-            tint() = default;
-            tint(uint32_t rgba_) : enabled(true), rgba(rgba_) {}
-        };
-
         struct draw_options {
             TILE_CATEGORY category = TILE_CATEGORY::NONE;
             std::string subcategory;
@@ -439,20 +426,7 @@ class cata_tiles
 
             float scale_x = 1.0f;
             float scale_y = 1.0f;
-
-            tint recolor;
         };
-
-        struct vision_tint {
-            uint32_t rgba;
-            bool enabled = true;
-
-            constexpr vision_tint(uint32_t rgba_) : rgba(rgba_) {}
-        };
-
-        inline tint to_tint(vision_tint v) {
-            return tint(v.rgba);
-        }
 
         /** Reload tileset, with the given scale. Scale is divided by 16 to allow for scales < 1 without risking
          *  float inaccuracies. */
@@ -514,7 +488,7 @@ class cata_tiles
             const std::string &id,
             const tripoint_bub_ms &pos,
             int subtile,
-            int rota,
+            int rota, bgCol, fgCol,
             lit_level ll,
             bool apply_visual_effects
         );
@@ -523,7 +497,7 @@ class cata_tiles
             const std::string &id,
             const tripoint_bub_ms &pos,
             int subtile,
-            int rota,
+            int rota, bgCol, fgCol,
             lit_level ll,
             bool apply_visual_effects,
             int &height_3d,
@@ -533,7 +507,7 @@ class cata_tiles
             const std::string &id,
             const tripoint_bub_ms &pos,
             int subtile,
-            int rota,
+            int rota, bgCol, fgCol,
             lit_level ll,
             int retract,
             bool apply_visual_effects,
@@ -544,7 +518,7 @@ class cata_tiles
         // used by sdltiles for overmap drawing.
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                   const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
-                                  lit_level ll,
+                                  lit_level ll, bgCol, fgCol,
                                   bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
 
 
@@ -552,12 +526,11 @@ class cata_tiles
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
             bool apply_visual_effects, int retract, int &height_3d, const point &offset,
-            float scale_x, float scale_y, const tint &recolor  );
+            float scale_x, float scale_y  );
         bool draw_tile_at(
             const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
             lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
-            const point &offset, float scale_x, float scale_y,
-            const tint &recolor );
+            const point &offset, float scale_x, float scale_y );
 
         /* Tile Picking */
         void get_tile_values( int t, const std::array<int, 4> &tn, int &subtile, int &rotation,
@@ -896,14 +869,5 @@ class cata_tiles
 
         std::string memory_map_mode = "color_pixel_sepia";
 };
-
-extern const cata_tiles::vision_tint VISION_NORMAL;
-extern const cata_tiles::vision_tint VISION_SHADOW;
-extern const cata_tiles::vision_tint VISION_MEMORY;
-extern const cata_tiles::vision_tint VISION_NIGHTVISION;
-extern const cata_tiles::vision_tint VISION_OVEREXPOSED;
-extern const cata_tiles::vision_tint VISION_UNDERWATER;
-extern const cata_tiles::vision_tint VISION_UNDERWATER_D;
-extern const cata_tiles::vision_tint VISION_UNSEEN;
 
 #endif // CATA_SRC_CATA_TILES_H
