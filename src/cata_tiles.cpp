@@ -1948,7 +1948,6 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         // check to see if player is located at ter
         draw_options opts{};
         opts.category = TILE_CATEGORY::NONE;
-
         int height_3d = 0;
         draw_from_id_string(
             "cursor",
@@ -1965,12 +1964,10 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         if( indicator_offset ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-
-
             int height_3d = 0;
             draw_from_id_string(
                 "cursor",
-                tripoint_bub_ms( g->ter_view_p.xy(), center.z() ),
+                tripoint_bub_ms( you.pos_bub().xy(), center.z() ) + indicator_offset->xy(),
                 0, 0,
                 lit_level::LIT,
                 false,
