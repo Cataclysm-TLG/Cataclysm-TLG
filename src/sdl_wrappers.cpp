@@ -9,6 +9,7 @@
 #include "cata_assert.h"
 #include "debug.h"
 #include "point.h"
+#include "sdl_utils.h"
 
 #if defined(_MSC_VER) && defined(USE_VCPKG)
 #   include <SDL2/SDL_image.h>
@@ -159,6 +160,11 @@ SDL_Surface_Ptr load_image( const char *const path )
     if( !result ) {
         throw std::runtime_error( "Could not load image \"" + std::string( path ) + "\": " +
                                   IMG_GetError() );
+    }
+    // Convert Surface to raw SDL_Color format if necessary, as load_image doesn't guarantee any particular format to be loaded
+    if( result->format->format != sdl_color_pixel_format ) {
+        const auto tmp = SDL_ConvertSurfaceFormat( result.get(), sdl_color_pixel_format, 0 );
+        result = SDL_Surface_Ptr{tmp};
     }
     return result;
 }

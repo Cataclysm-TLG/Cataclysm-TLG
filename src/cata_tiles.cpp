@@ -1934,7 +1934,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         draw_from_id_string(
             "cursor",
             tripoint_bub_ms( g->ter_view_p.xy(), center.z() ),
-            0, 0,
+            0, 0, bgCol, fgCol,
             lit_level::LIT,
             false,
             height_3d,
@@ -1950,7 +1950,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
             draw_from_id_string(
                 "cursor",
                 tripoint_bub_ms( you.pos_bub().xy(), center.z() ) + indicator_offset->xy(),
-                0, 0,
+                0, 0, bgCol, fgCol,
                 lit_level::LIT,
                 false,
                 height_3d,
@@ -2235,14 +2235,14 @@ bool cata_tiles::draw_from_id_string(
     const std::string &id,
     const tripoint_bub_ms &pos,
     int subtile,
-    int rota,
+    int rota, bgCol, fgCol,
     lit_level ll,
     bool apply_visual_effects
 )
 {
     int dummy_height = 0;
     draw_options opts{};
-    return draw_from_id_string( id, pos, subtile, rota, ll, apply_visual_effects, dummy_height, opts );
+    return draw_from_id_string( id, pos, subtile, rota, bgCol, fgCol, ll, apply_visual_effects, dummy_height, opts );
 }
 
 // Full wrapper, includes options.
@@ -2251,20 +2251,20 @@ bool cata_tiles::draw_from_id_string(
     const tripoint_bub_ms &pos,
     int subtile,
     int rota,
-    lit_level ll,
+    lit_level ll, bgCol, fgCol,
     bool apply_visual_effects,
     int &height_3d,
     const draw_options &opts
 )
 {
     int retract = 0;
-    return draw_from_id_string_internal( id, pos, subtile, rota, ll, retract, apply_visual_effects,
+    return draw_from_id_string_internal( id, pos, subtile, rota, bgCol, fgCol, ll, retract, apply_visual_effects,
                                          height_3d, opts );
 }
 
 // Used by sdltiles.cpp for overmap drawing
 bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                      const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
+                                      const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota, bgCol, fgCol,
                                       lit_level ll,
                                       bool apply_visual_effects, int &height_3d, float scale_x, float scale_y )
 {
@@ -2278,7 +2278,7 @@ bool cata_tiles::draw_from_id_string( const std::string &id, TILE_CATEGORY categ
                id,
                tripoint_bub_ms( pos.raw() ),
                subtile,
-               rota,
+               rota, bgCol, fgCol,
                ll,
                apply_visual_effects,
                height_3d,
@@ -2521,7 +2521,7 @@ bool cata_tiles::draw_from_id_string_internal(
     const std::string &id,
     const tripoint_bub_ms &pos,
     int subtile,
-    int rota,
+    int rota, bgCol, fgCol,
     lit_level ll,
     int retract,
     bool apply_visual_effects,
@@ -2793,12 +2793,12 @@ bool cata_tiles::draw_from_id_string_internal(
                 rota = 0;
             }
             if( tileset_ptr->find_tile_type( generic_id ) ) {
-                return draw_from_id_string_internal( generic_id, pos, subtile, rota, ll, retract, nv_color_active,
+                return draw_from_id_string_internal( generic_id, pos, subtile, rota,  bgCol, fgCol, ll, retract, nv_color_active,
                                                      height_3d, opts );
             }
             generic_id = get_ascii_tile_id( sym, -1, -1 );
             if( tileset_ptr->find_tile_type( generic_id ) ) {
-                return draw_from_id_string_internal( generic_id, pos, subtile, rota, ll, retract, nv_color_active,
+                return draw_from_id_string_internal( generic_id, pos, subtile, rota,  bgCol, fgCol, ll, retract, nv_color_active,
                                                      height_3d, opts );
             }
         }
@@ -2827,7 +2827,7 @@ bool cata_tiles::draw_from_id_string_internal(
         if( std::find( display_subtiles.begin(), display_subtiles.end(),
                        multitile_keys[subtile] ) != display_subtiles.end() ) {
             return draw_from_id_string_internal( found_id + "_" + multitile_keys[subtile],
-                                                 pos, -1, rota, ll, retract, nv_color_active, height_3d, opts );
+                                                 pos, -1, rota,  bgCol, fgCol, ll, retract, nv_color_active, height_3d, opts );
         }
     }
 
@@ -3186,7 +3186,7 @@ bool cata_tiles::apply_vision_effects( const tripoint_bub_ms &pos,
         light_name,
         pos,
         0,
-        0,
+        0,  bgCol, fgCol,
         lit_level::LIT,
         false,
         height_3d,
@@ -3367,7 +3367,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                        tname,
                        p,
                        subtile,
-                       rotation,
+                       rotation, bgCol, fgCol,
                        ll,
                        true,
                        height_3d,
@@ -3407,7 +3407,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                        tname,
                        p,
                        subtile,
-                       rotation,
+                       rotation, bgCol, fgCol,
                        lit,
                        nv,
                        height_3d,
@@ -3428,7 +3428,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                            mt.get_ter_id(),
                            p,
                            mt.get_ter_subtile(),
-                           mt.get_ter_rotation(),
+                           mt.get_ter_rotation(), bgCol, fgCol,
                            lit_level::MEMORIZED,
                            true,
                            height_3d,
@@ -3493,7 +3493,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
                            fname,
                            p,
                            subtile,
-                           rotation,
+                           rotation, bgCol, fgCol,
                            ll,
                            true,
                            height_3d,
@@ -3548,7 +3548,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
                        fname,
                        p,
                        subtile,
-                       rotation,
+                       rotation, bgCol, fgCol,
                        lit,
                        nv,
                        height_3d,
@@ -3573,7 +3573,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
                        mt.get_dec_id(),
                        p,
                        mt.get_dec_subtile(),
-                       mt.get_dec_rotation(),
+                       mt.get_dec_rotation(), bgCol, fgCol,
                        lit_level::MEMORIZED,
                        true,
                        height_3d,
@@ -3633,7 +3633,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
                            trname,
                            p,
                            subtile,
-                           rotation,
+                           rotation, bgCol, fgCol,
                            ll,
                            true,
                            height_3d,
@@ -3678,7 +3678,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
                            trname,
                            p,
                            subtile,
-                           rotation,
+                           rotation, bgCol, fgCol,
                            lit,
                            nv,
                            height_3d,
@@ -3703,7 +3703,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
                            mt.get_dec_id(),
                            p,
                            mt.get_dec_subtile(),
-                           mt.get_dec_rotation(),
+                           mt.get_dec_rotation(), bgCol, fgCol,
                            lit_level::MEMORIZED,
                            true,
                            height_3d,
@@ -3740,7 +3740,7 @@ bool cata_tiles::draw_part_con( const tripoint_bub_ms &p, const lit_level ll, in
                        trname,
                        p,
                        0,
-                       0,
+                       0, bgCol, fgCol,
                        ll,
                        nv_goggles_activated,
                        height_3d,
@@ -3779,7 +3779,7 @@ bool cata_tiles::draw_graffiti( const tripoint_bub_ms &p, const lit_level ll, in
                tileset_ptr->find_tile_type( tile ) ? tile : "graffiti",
                p,
                0,
-               rotation,
+               rotation, bgCol, fgCol,
                lit,
                false,
                height_3d,
@@ -3839,7 +3839,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                                          sprite_to_draw,
                                          p,
                                          subtile,
-                                         rotation,
+                                         rotation, bgCol, fgCol,
                                          ll,
                                          nv,
                                          height_3d,
@@ -3899,7 +3899,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                             sprite_to_draw,
                             p,
                             0,
-                            0,
+                            0, bgCol, fgCol,
                             layer_lit,
                             layer_nv,
                             height_3d,
@@ -3972,7 +3972,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                         fld.id().str(),
                         p,
                         subtile,
-                        rotation,
+                        rotation, bgCol, fgCol,
                         ll,
                         nv_goggles_activated,
                         height_3d,
@@ -4015,7 +4015,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                                  fld.id().str(),
                                  p,
                                  subtile,
-                                 rotation,
+                                 rotation, bgCol, fgCol,
                                  lit,
                                  false,
                                  height_3d,
@@ -4092,7 +4092,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                                      disp_id,
                                      p,
                                      0,
-                                     0,
+                                     0, bgCol, fgCol,
                                      lit,
                                      nv,
                                      height_3d,
@@ -4182,7 +4182,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                               "vp_" + vd.id.str(),
                               p,
                               subtile,
-                              rotation,
+                              rotation, bgCol, fgCol,
                               ll,
                               true,
                               height_3d_temp,
@@ -4205,7 +4205,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                         vd.carried_furn,
                         p,
                         subtile,
-                        angle_to_dir4( 0_degrees ),
+                        angle_to_dir4( 0_degrees ), bgCol, fgCol,
                         ll,
                         true,
                         height_3d,
@@ -4237,7 +4237,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                           vpname,
                           p,
                           subtile,
-                          rotation,
+                          rotation, bgCol, fgCol,
                           lit_level::LIT,
                           false,
                           height_3d_temp,
@@ -4285,7 +4285,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                            tid_storage,
                            p,
                            t.get_dec_subtile(),
-                           t.get_dec_rotation(),
+                           t.get_dec_rotation(), bgCol, fgCol,
                            lit_level::MEMORIZED,
                            true,
                            height_3d_temp,
@@ -4373,7 +4373,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                      chosen_id,
                      p,
                      corner,
-                     0,
+                     0, bgCol, fgCol,
                      lit_level::LIT,
                      false,
                      height_3d,
@@ -4399,7 +4399,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                            special_vis_desc.id,
                            p,
                            0,
-                           0,
+                           0, bgCol, fgCol,
                            lit_level::LIT,
                            false,
                            height_3d,
@@ -4451,7 +4451,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                              chosen_id,
                              p,
                              subtile,
-                             rot_facing,
+                             rot_facing, bgCol, fgCol,
                              ll,
                              false,
                              height_3d,
@@ -4523,7 +4523,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                            special_vis_desc.id,
                            p,
                            0,
-                           0,
+                           0, bgCol, fgCol,
                            lit_level::LIT,
                            false,
                            height_3d,
@@ -4553,7 +4553,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                 draw_id,
                 p,
                 0,
-                0,
+                0, bgCol, fgCol,
                 lit_level::LIT,
                 false,
                 height_3d,
@@ -4600,7 +4600,7 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
             "shadow",
             p,
             0,
-            0,
+            0, bgCol, fgCol,
             ll,
             false,
             height_3d,
@@ -4646,7 +4646,7 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
                     draw_id,
                     p,
                     0,
-                    0,
+                    0, bgCol, fgCol,
                     lit_level::LIT,
                     false,
                     height_3d,
@@ -4693,7 +4693,7 @@ bool cata_tiles::draw_zone_mark( const tripoint_bub_ms &p, lit_level ll, int &he
                        option->get_mark(),
                        p,
                        0,
-                       0,
+                       0, bgCol, fgCol,
                        ll,
                        true,
                        height_3d,
@@ -4728,7 +4728,7 @@ bool cata_tiles::draw_zombie_revival_indicators( const tripoint_bub_ms &pos, con
                            ZOMBIE_REVIVAL_INDICATOR,
                            pos,
                            0,
-                           0,
+                           0, bgCol, fgCol,
                            lit_level::LIT,
                            false,
                            height_3d,
@@ -4818,7 +4818,7 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
                 ent_name,
                 p,
                 corner,
-                0,
+                0, bgCol, fgCol,
                 ll,
                 false,
                 height_3d,
@@ -4834,7 +4834,7 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
                 ent_name,
                 p,
                 corner,
-                -1,
+                -1, bgCol, fgCol,
                 ll,
                 false,
                 height_3d,
@@ -4861,7 +4861,7 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
                 override_look.id,
                 p,
                 corner,
-                0,
+                0, bgCol, fgCol,
                 ll,
                 false,
                 height_3d,
@@ -4877,7 +4877,7 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
                 override_look.id,
                 p,
                 corner,
-                -1,
+                -1, bgCol, fgCol,
                 ll,
                 false,
                 height_3d,
@@ -4903,7 +4903,7 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
                     draw_id,
                     p,
                     corner,
-                    0,
+                    0, bgCol, fgCol,
                     ll,
                     false,
                     height_3d,
@@ -4919,7 +4919,7 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
                     draw_id,
                     p,
                     corner,
-                    -1,
+                    -1, bgCol, fgCol,
                     ll,
                     false,
                     height_3d,
@@ -4952,7 +4952,7 @@ void cata_tiles::draw_entity_with_overlays( const monster &mon, const tripoint_b
                     draw_id,
                     p,
                     corner,
-                    0,
+                    0, bgCol, fgCol,
                     ll,
                     false,
                     height_3d,
@@ -4968,7 +4968,7 @@ void cata_tiles::draw_entity_with_overlays( const monster &mon, const tripoint_b
                     draw_id,
                     p,
                     corner,
-                    -1,
+                    -1, bgCol, fgCol,
                     ll,
                     false,
                     height_3d,
@@ -4992,7 +4992,7 @@ bool cata_tiles::draw_item_highlight( const tripoint_bub_ms &pos, int &height_3d
                ITEM_HIGHLIGHT,
                pos,
                0,
-               0,
+               0, bgCol, fgCol,
                lit_level::LIT,
                false,
                height_3d,
@@ -5288,13 +5288,13 @@ void cata_tiles::draw_explosion_frame()
 
         opts.category = TILE_CATEGORY::NONE;
         int height_3d = 0;
-        draw_from_id_string( exp_name, exp_pos + point( -i, -i ), subtile, rotation++, lit_level::LIT, true,
+        draw_from_id_string( exp_name, exp_pos + point( -i, -i ), subtile, rotation++, bgCol, fgCol, lit_level::LIT, true,
                              height_3d, opts );
-        draw_from_id_string( exp_name, exp_pos + point( -i,  i ), subtile, rotation++, lit_level::LIT, true,
+        draw_from_id_string( exp_name, exp_pos + point( -i,  i ), subtile, rotation++, bgCol, fgCol, lit_level::LIT, true,
                              height_3d, opts );
-        draw_from_id_string( exp_name, exp_pos + point( i,  i ), subtile, rotation++, lit_level::LIT, true,
+        draw_from_id_string( exp_name, exp_pos + point( i,  i ), subtile, rotation++, bgCol, fgCol, lit_level::LIT, true,
                              height_3d, opts );
-        draw_from_id_string( exp_name, exp_pos + point( i, -i ), subtile, rotation,   lit_level::LIT, true,
+        draw_from_id_string( exp_name, exp_pos + point( i, -i ), subtile, rotation, bgCol, fgCol, lit_level::LIT, true,
                              height_3d, opts );
 
         subtile = edge;
@@ -5305,15 +5305,15 @@ void cata_tiles::draw_explosion_frame()
 
 
             int height_3d = 0;
-            draw_from_id_string( exp_name, exp_pos + point( j, -i ), subtile, rotation, lit_level::LIT, true,
+            draw_from_id_string( exp_name, exp_pos + point( j, -i ), subtile, rotation, bgCol, fgCol, lit_level::LIT, true,
                                  height_3d, opts );
-            draw_from_id_string( exp_name, exp_pos + point( j,  i ), subtile, rotation, lit_level::LIT, true,
+            draw_from_id_string( exp_name, exp_pos + point( j,  i ), subtile, rotation, bgCol, fgCol, lit_level::LIT, true,
                                  height_3d, opts );
 
             rotation = 1;
-            draw_from_id_string( exp_name, exp_pos + point( -i,  j ), subtile, rotation, lit_level::LIT, true,
+            draw_from_id_string( exp_name, exp_pos + point( -i,  j ), subtile, rotation, bgCol, fgCol, lit_level::LIT, true,
                                  height_3d, opts );
-            draw_from_id_string( exp_name, exp_pos + point( i,  j ), subtile, rotation, lit_level::LIT, true,
+            draw_from_id_string( exp_name, exp_pos + point( i,  j ), subtile, rotation, bgCol, fgCol, lit_level::LIT, true,
                                  height_3d, opts );
         }
     }
@@ -5401,7 +5401,7 @@ void cata_tiles::draw_custom_explosion_frame()
 
 
         int height_3d = 0;
-        draw_from_id_string( explosion_tile_id, p, subtile, rotation, lit_level::LIT, true, height_3d,
+        draw_from_id_string( explosion_tile_id, p, subtile, rotation, bgCol, fgCol, lit_level::LIT, true, height_3d,
                              opts );
     }
 }
@@ -5417,8 +5417,8 @@ void cata_tiles::draw_bullet_frame()
         bul_id,
         bul_pos,
         0,
-        0,
-        lit_level::LIT,  // lighting
+        0, bgCol, fgCol,
+        lit_level::LIT,
         false,
         height_3d,
         opts
@@ -5437,8 +5437,8 @@ void cata_tiles::draw_hit_frame()
         hit_overlay,
         hit_pos,
         0,
-        0,
-        lit_level::LIT,  // lighting
+        0, bgCol, fgCol,
+        lit_level::LIT,
         false,
         height_3d,
         opts
@@ -5466,10 +5466,10 @@ void cata_tiles::draw_line()
                 line_overlay,
                 *it,
                 0,
-                0,
+                0, bgCol, fgCol,
                 lit_level::LIT,
                 false,
-                height_3d,    // reference to height
+                height_3d,
                 opts
             );
         }
@@ -5479,7 +5479,7 @@ void cata_tiles::draw_line()
         line_endpoint_id,
         line_trajectory.back(),
         0,
-        0,
+        0, bgCol, fgCol,
         lit_level::LIT,
         false,
         height_3d,
@@ -5498,12 +5498,12 @@ void cata_tiles::draw_cursor()
     for( const tripoint_bub_ms &p : cursors ) {
         draw_from_id_string(
             "cursor",
-            p,          // position
+            p,
             0,
-            0,
+            0, bgCol, fgCol,
             lit_level::LIT,
             false,
-            height_3d,  // reference to height
+            height_3d,
             opts
         );
     }
@@ -5522,7 +5522,7 @@ void cata_tiles::draw_highlight()
             "highlight",
             p,
             0,
-            0,
+            0, bgCol, fgCol,
             lit_level::LIT,
             false,
             height_3d,
@@ -5555,10 +5555,10 @@ void cata_tiles::draw_weather_frame()
             weather_name,
             pos,
             0,
-            0,
+            0, bgCol, fgCol,
             lit_level::LIT,
             true,
-            height_3d,     // reference to int height
+            height_3d,
             opts
         );
     }
@@ -5605,10 +5605,10 @@ void cata_tiles::draw_sct_frame( std::multimap<point, formatted_text> &overlay_s
                             generic_id,
                             iD + tripoint_bub_ms( point_bub_ms( iOffset ), player_pos.z() ), // position
                             0,
-                            0,
+                            0, bgCol, fgCol,
                             lit_level::LIT,
                             false,
-                            height_3d,  // reference to int height_3d
+                            height_3d,
                             opts
                         );
                     }
@@ -5638,7 +5638,7 @@ void cata_tiles::draw_zones_frame()
                 "highlight",
                 tripoint_bub_ms( iX, iY, player_pos.z() ) + zone_offset.xy(), // position
                 0,
-                0,
+                0, bgCol, fgCol,
                 lit_level::LIT,
                 false,
                 height_3d,
@@ -5668,7 +5668,7 @@ void cata_tiles::draw_async_anim()
                 tile_id,
                 p,
                 0,
-                0,
+                0, bgCol, fgCol,
                 lit_level::LIT,
                 true,
                 height_3d,
@@ -5695,11 +5695,11 @@ void cata_tiles::draw_footsteps_frame( const tripoint_bub_ms &center )
 
         int height_3d = 0;
         if( pos.z() > center.z() && tl_above ) {
-            draw_from_id_string( id_footstep_above, pos, 0, 0, lit_level::LIT, false, height_3d, opts );
+            draw_from_id_string( id_footstep_above, pos, 0, 0, bgCol, fgCol, lit_level::LIT, false, height_3d, opts );
         } else if( pos.z() < center.z() && tl_below ) {
-            draw_from_id_string( id_footstep_below, pos, 0, 0, lit_level::LIT, false, height_3d, opts );
+            draw_from_id_string( id_footstep_below, pos, 0, 0, bgCol, fgCol, lit_level::LIT, false, height_3d, opts );
         } else {
-            draw_from_id_string( id_footstep, pos, 0, 0, lit_level::LIT, false, height_3d, opts );
+            draw_from_id_string( id_footstep, pos, 0, 0, bgCol, fgCol, lit_level::LIT, false, height_3d, opts );
         }
     }
 }
