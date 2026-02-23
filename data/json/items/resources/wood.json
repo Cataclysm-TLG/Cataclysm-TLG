@@ -90,7 +90,7 @@
     "price": "40 USD",
     "price_postapoc": "50 cent",
     "countdown_interval": "4 hours",
-    "revert_to": "spear_shaft",
+    "revert_to": "long_pole",
     "qualities": [ [ "HAMMER", 1 ] ],
     "melee_damage": { "bash": 18 }
   },
