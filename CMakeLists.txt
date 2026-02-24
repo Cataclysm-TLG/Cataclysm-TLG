@@ -110,6 +110,8 @@ if (NOT MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcx16")
 endif()
 
+include(ListImportedTargets)
+
 find_package(PkgConfig)
 if (NOT DYNAMIC_LINKING)
     if(NOT MSVC)
