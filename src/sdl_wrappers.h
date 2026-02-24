@@ -30,6 +30,7 @@ struct SDL_Renderer_deleter {
     }
 };
 using SDL_Renderer_Ptr = std::unique_ptr<SDL_Renderer, SDL_Renderer_deleter>;
+using SDL_Texture_SharedPtr = std::shared_ptr<SDL_Texture>;
 
 struct SDL_Window_deleter {
     void operator()( SDL_Window *const window ) {
