@@ -149,7 +149,6 @@ static const trait_id trait_WHISKERS_RAT( "WHISKERS_RAT" );
 avatar::avatar()
 {
     player_map_memory = std::make_unique<map_memory>();
-    show_map_memory = true;
     active_mission = nullptr;
     grab_type = object_type::NONE;
     calorie_diary.emplace_front( );
@@ -247,11 +246,6 @@ void avatar::longpull( const std::string &name )
     Creature::longpull( name, traj.back() );
 }
 
-void avatar::toggle_map_memory()
-{
-    show_map_memory = !show_map_memory;
-}
-
 bool avatar::is_map_memory_valid() const
 {
     return player_map_memory->is_valid();
@@ -262,7 +256,7 @@ bool avatar::should_show_map_memory() const
     if( get_timed_events().get( timed_event_type::OVERRIDE_PLACE ) ) {
         return false;
     }
-    return show_map_memory;
+    return true;
 }
 
 bool avatar::save_map_memory()
