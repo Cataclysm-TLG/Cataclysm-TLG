@@ -27,9 +27,16 @@
     ],
     "components": [
       [
+        [ "slime_scrap", 20 ],
         [ "meat_tainted", 3 ],
+        [ "meat_mutant_tainted", 3 ],
+        [ "meat_tainted_human", 3 ],
         [ "dry_meat_tainted", 3 ],
+        [ "dry_meat_tainted_human", 3 ],
         [ "tainted_innards", 4 ],
+        [ "tainted_innards_human", 4 ],
+        [ "blood_tainted", 4 ],
+        [ "blood_tainted_human", 4 ],
         [ "fetus", 1 ],
         [ "arm", 2 ],
         [ "leg", 2 ]
@@ -399,7 +406,12 @@
     "components": [
       [ [ "mutagen", 1 ] ],
       [ [ "rat_sample", 1 ] ],
-      [ [ "meat_tainted", 6 ], [ "dry_meat_tainted", 6 ] ],
+      [
+        [ "meat_tainted", 6 ],
+        [ "dry_meat_tainted", 6 ],
+        [ "meat_tainted_human", 6 ],
+        [ "dry_meat_tainted_human", 6 ]
+      ],
       [ [ "quikclot", 2 ], [ "rat_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]
@@ -448,8 +460,8 @@
     "components": [
       [ [ "mutagen", 1 ] ],
       [ [ "chiropteran_sample", 1 ] ],
-      [ [ "animal_blood", 6 ], [ "mutant_blood", 6 ] ],
-      [ [ "meal_bone_tainted", 1 ], [ "chiropteran_sample", 1 ] ]
+      [ [ "animal_blood", 6 ], [ "mutant_blood", 6 ], [ "blood", 6 ] ],
+      [ [ "tainted_marrow", 1 ], [ "tainted_marrow_human", 1 ], [ "chiropteran_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]
   },
@@ -792,8 +804,8 @@
     "components": [
       [ [ "mutagen", 1 ] ],
       [ [ "cephalopod_sample", 1 ] ],
-      [ [ "meat_tainted", 6 ], [ "dry_meat_tainted", 6 ], [ "can_chowder", 1 ], [ "can_clams", 1 ] ],
-      [ [ "permanent_ink", 800 ], [ "cephalopod_sample", 1 ] ]
+      [ [ "can_chowder", 1 ], [ "can_clams", 1 ], [ "mollusk", 1 ], [ "mollusk_cooked", 2 ] ],
+      [ [ "cephalopod_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]
   },
