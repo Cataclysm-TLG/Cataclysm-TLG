@@ -4425,5 +4425,15 @@
     "id": "ar_glasses_advanced",
     "type": "MIGRATION",
     "replace": "smart_glasses"
+  },
+  {
+    "id": "survivor_dry_duffelbag",
+    "type": "MIGRATION",
+    "replace": "dry_duffelbag"
+  },
+  {
+    "id": "survivor_duffel_bag",
+    "type": "MIGRATION",
+    "replace": "long_duffelbag"
   }
 ]

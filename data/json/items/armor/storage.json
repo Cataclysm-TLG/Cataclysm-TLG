@@ -783,8 +783,8 @@
     "flags": [ "WATER_FRIENDLY", "BELTED", "OVERSIZE" ],
     "armor": [
       {
-        "encumbrance": 2,
-        "volume_encumber_modifier": 0.19,
+        "encumbrance": 5,
+        "volume_encumber_modifier": 0.35,
         "coverage": 80,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_hanging_back" ]
@@ -836,7 +836,7 @@
       {
         "encumbrance": 10,
         "volume_encumber_modifier": 0.25,
-        "coverage": 100,
+        "coverage": 80,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_hanging_back" ]
       }
@@ -888,8 +888,8 @@
     "armor": [
       {
         "encumbrance": 10,
-        "volume_encumber_modifier": 0.25,
-        "coverage": 100,
+        "volume_encumber_modifier": 0.35,
+        "coverage": 80,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_hanging_back" ]
       }
@@ -927,7 +927,7 @@
       {
         "encumbrance": 1,
         "volume_encumber_modifier": 0.3,
-        "coverage": 100,
+        "coverage": 80,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_waist" ]
       }
