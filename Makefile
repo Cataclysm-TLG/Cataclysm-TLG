@@ -902,9 +902,8 @@ ifeq ($(MSYS2),1)
   CXXFLAGS += -DMSYS2
 endif
 
-CFLAGS := $(CXXFLAGS)
-CFLAGS += $(C_STD)
-CXXFLAGS += $(CXX_STD) $(CXX_WARNINGS)
+CFLAGS += $(C_STD) $(WARNINGS) -fvisibility=hidden
+CXXFLAGS += $(CXX_STD) $(CXX_WARNINGS) -fvisibility=hidden
 
 # Enumerations of all the source files and headers.
 ifeq ($(HEADERPOPULARITY), 1)
