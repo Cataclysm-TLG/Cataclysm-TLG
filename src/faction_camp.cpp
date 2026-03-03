@@ -2994,6 +2994,7 @@ point_rel_omt connection_direction_of( const point_rel_omt &dir, const recipe &m
     }
 
     return connection_dir;
+    \
 }
 
 static void salt_water_pipe_orientation_adjustment( const point_rel_omt &dir, bool &orthogonal,
@@ -3602,12 +3603,21 @@ std::pair<size_t, std::string> basecamp::farm_action( const point_rel_omt &dir, 
                     if( seed != items.end() && farm_valid_seed( *seed ) ) {
                         plots_cnt += 1;
                         if( comp ) {
-                            int skillLevel = round( comp->get_skill_level( skill_survival ) );
-                            ///\EFFECT_SURVIVAL increases number of plants harvested from a seed
-                            int plant_count = rng( skillLevel / 2, skillLevel );
-                            plant_count *= farm_map.furn( pos )->plant->harvest_multiplier;
-                            plant_count = std::min( std::max( plant_count, 1 ), 12 );
-                            int seed_cnt = std::max( 1, rng( plant_count / 4, plant_count / 2 ) );
+
+
+                            float skillLevel = comp->get_skill_level( skill_survival );
+                            ///\EFFECT_SURVIVAL increases number of plants harvested from a seed.
+                            float skill_divisor = 4.f;
+                            // Fertilizer reduces the odds of a bad harvest.
+                            if( farm_map.i_at( pos ).size() > 1 ) {
+                                skill_divisor = 2.f;
+                            }
+                            float plant_count = rng_float( skillLevel / skill_divisor, skillLevel );
+                            const auto &fp = farm_map.furn( pos )->plant;
+                            plant_count *= fp->harvest_multiplier;
+                            int plant_count_int = static_cast<int>( std::round( plant_count ) );
+                            plant_count = std::min( std::max( plant_count_int, 1 ), 10 );
+                            int seed_cnt = rng( plant_count_int / 4, plant_count_int / 2 );
                             for( item &i : iexamine::get_harvest_items( *seed->type, plant_count,
                                     seed_cnt, true ) ) {
                                 here.add_item_or_charges( player_character.pos_bub(), i );

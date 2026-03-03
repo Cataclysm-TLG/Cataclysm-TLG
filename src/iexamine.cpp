@@ -2687,7 +2687,6 @@ void iexamine::harvest_plant( Character &you, const tripoint_bub_ms &examp, bool
             float plant_count = rng_float( skillLevel / skill_divisor, skillLevel );
             const auto &fp = here.furn( examp )->plant;
             plant_count *= fp->harvest_multiplier;
-            \
             int plant_count_int = static_cast<int>( std::round( plant_count ) );
             plant_count = std::min( std::max( plant_count_int, 1 ), 10 );
             int seedCount = rng( plant_count_int / 4, plant_count_int / 2 );

@@ -3564,11 +3564,6 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
             const bool nv = !overridden;
             draw_options opts{};
             opts.category = TILE_CATEGORY::FURNITURE;
-
-
-
-
-
             return memorize_only
                    ? false
                    : draw_from_id_string(
@@ -3586,14 +3581,8 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
         // Try drawing memory if invisible and not overridden.
         const memorized_tile &mt = get_furniture_memory_at( here.get_abs( p ) );
         if( !mt.get_dec_id().empty() ) {
-
             draw_options opts{};
             opts.category = TILE_CATEGORY::FURNITURE;
-
-
-
-
-
             return memorize_only
                    ? false
                    : draw_from_id_string(
@@ -3722,10 +3711,6 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
             } else {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::TRAP;
-
-
-
-
                 return draw_from_id_string(
                            mt.get_dec_id(),
                            p,
@@ -4299,15 +4284,9 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
             } else {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::VEHICLE_PART;
-
-
-
                 if( !variant_storage.empty() ) {
                     opts.variant = variant_storage;
                 }
-
-
-
                 return draw_from_id_string(
                            tid_storage,
                            p,
