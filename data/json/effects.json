@@ -1952,9 +1952,7 @@
     "max_duration": "3 m",
     "max_intensity": 4,
     "int_decay_tick": 40,
-    "base_mods": {
-      "health_chance": [ 300, 600 ],
-      "health_min": [ -1 ] },
+    "base_mods": { "health_chance": [ 300, 600 ], "health_min": [ -1 ] },
     "scaling_mods": { "str_mod": [ -1 ], "dex_mod": [ -1 ], "cough_chance": [ 10 ] },
     "limb_score_mods": [
       { "limb_score": "breathing", "resist_modifier": 1, "scaling": -0.25 },

@@ -201,7 +201,7 @@
     "flags": [ "RAW" ],
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
-    {
+  {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "fat_tainted_human",

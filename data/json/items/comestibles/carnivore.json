@@ -816,7 +816,7 @@
     "use_action": [ "POISON_TAINTED" ],
     "price_postapoc": "0 cent",
     "fun": -25
-  },  
+  },
   {
     "id": "tainted_innards_human",
     "copy-from": "offal",
@@ -1492,7 +1492,7 @@
     "smoking_result": "dry_meat_tainted",
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
-    {
+  {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "meat_tainted_human",
@@ -1603,7 +1603,7 @@
     "flags": [ "TRADER_AVOID", "RAW" ],
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
-    {
+  {
     "id": "blood_tainted_human",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
