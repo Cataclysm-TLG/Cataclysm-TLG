@@ -265,8 +265,18 @@
     "items": [
       { "group": "drugs_analgesic", "prob": 100 },
       { "group": "drugs_heal_simple", "prob": 100 },
-      { "group": "drugs_misc", "prob": 100 },
+      { "group": "drugs_misc", "prob": 30 },
       { "group": "drugs_rare", "prob": 100 }
+    ]
+  },
+    {
+    "id": "drugs_otc",
+    "type": "item_group",
+    "//": "Drugs stocked by a pharmacy, not including prescription medications",
+    "items": [
+      { "group": "drugs_analgesic", "prob": 100 },
+      { "group": "drugs_heal_simple", "prob": 100 },
+      { "group": "drugs_misc", "prob": 30 }
     ]
   },
   {
