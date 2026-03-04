@@ -3623,7 +3623,9 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
                                                  3_hours ) );
         corpse.set_var( "activity_var", who.name );
         item_location loc = here.add_item_or_charges_ret_loc( who.pos_bub(), corpse );
-        who.add_msg_if_player( m_good, _( "You caught a %s." ), corpse_type.nname() );
+        if( who.is_avatar() ) {
+            popup( _( "You caught a %s." ), corpse_type.nname() );
+        }
         if( loc ) {
             who.may_activity_occupancy_after_end_items_loc.push_back( loc );
         }
@@ -3684,7 +3686,7 @@ void fish_activity_actor::do_turn( player_activity &, Character &who )
     }
     // no matter the population of fish, your skill and tool limits the ease of catching.
     fish_chance = std::min( survival_skill * 10, fish_chance );
-    if( x_in_y( fish_chance, 600000 ) ) {
+    if( x_in_y( fish_chance, 500000 ) ) {
         who.add_msg_if_player( m_good, _( "You feel a tug on your line!" ) );
         rod_fish( who, fishables );
     }
