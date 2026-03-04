@@ -20,7 +20,7 @@
     "id": "SUS_shelf_commercial_sauces_dressings",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_sauces_dressings", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_sauces_dressings", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_spices_seasoning",
@@ -43,7 +43,7 @@
     "id": "SUS_shelf_commercial_spices_seasoning",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_spices_seasoning", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_spices_seasoning", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_oil_vinegar",
@@ -55,7 +55,7 @@
     "id": "SUS_shelf_commercial_oil_vinegar",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_oil_vinegar", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_oil_vinegar", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_exotic_food",
@@ -67,7 +67,7 @@
     "id": "SUS_shelf_commercial_exotic_food",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_exotic_food", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_exotic_food", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_grains",
@@ -79,7 +79,7 @@
     "id": "SUS_shelf_commercial_grains",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_grains", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_grains", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_baking",
@@ -100,7 +100,7 @@
     "id": "SUS_shelf_commercial_baking",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_baking", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_baking", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_pasta",
@@ -112,7 +112,7 @@
     "id": "SUS_shelf_commercial_pasta",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_pasta", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_pasta", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_canned_vegetables",
@@ -124,7 +124,7 @@
     "id": "SUS_shelf_commercial_canned_vegetables",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_canned_vegetables", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_canned_vegetables", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_canned_fruits",
@@ -136,7 +136,7 @@
     "id": "SUS_shelf_commercial_canned_fruits",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_canned_fruits", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_canned_fruits", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_canned_meat",
@@ -160,7 +160,7 @@
     "id": "SUS_shelf_commercial_canned_meat",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_canned_meat", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_canned_meat", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_canned_meals",
@@ -185,7 +185,7 @@
     "id": "SUS_shelf_commercial_canned_meals",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_canned_meals", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_canned_meals", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_coffee",
@@ -197,7 +197,7 @@
     "id": "SUS_shelf_commercial_coffee",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_coffee", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_coffee", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_tea",
@@ -216,7 +216,7 @@
     "id": "SUS_shelf_commercial_tea",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_tea", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_tea", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_breakfast_cereal",
@@ -232,7 +232,7 @@
     "id": "SUS_shelf_commercial_breakfast_cereal",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_breakfast_cereal", "count": [ 1, 5 ] } ]
+    "entries": [ { "group": "commercial_breakfast_cereal", "count": [ 1, 3 ] } ]
   },
   {
     "id": "commercial_breakfast_mixes",
@@ -244,7 +244,7 @@
     "id": "SUS_shelf_commercial_breakfast_mixes",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_breakfast_mixes", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_breakfast_mixes", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_spreads",
@@ -268,7 +268,7 @@
     "id": "SUS_shelf_commercial_sweet_snacks",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_sweet_snacks", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_sweet_snacks", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_butter_cream",
@@ -329,13 +329,13 @@
     "id": "SUS_shelf_commercial_cheese",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_cheese", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_cheese", "count": [ 1, 4 ] } ]
   },
   {
     "id": "SUS_shelf_commercial_milk",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "any_milk", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "any_milk", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_eggs",
@@ -347,7 +347,7 @@
     "id": "SUS_shelf_commercial_eggs",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_eggs", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_eggs", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_deli",
@@ -360,7 +360,7 @@
     "id": "SUS_shelf_commercial_deli",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_deli", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_deli", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_meat",
@@ -372,7 +372,7 @@
     "id": "SUS_shelf_commercial_meat",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_meat", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_meat", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_seafood",
@@ -384,7 +384,7 @@
     "id": "SUS_shelf_commercial_seafood",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_seafood", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_seafood", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_icecream",
@@ -405,7 +405,7 @@
     "id": "SUS_shelf_commercial_icecream",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_icecream", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_icecream", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_frozen_dessert",
@@ -417,7 +417,7 @@
     "id": "SUS_shelf_commercial_frozen_dessert",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_frozen_dessert", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_frozen_dessert", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_water",
@@ -429,29 +429,29 @@
     "id": "SUS_shelf_commercial_water",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_water", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_water", "count": [ 1, 4 ] } ]
   },
   {
     "id": "SUS_shelf_commercial_soda",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "soda_in_container_full", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "soda_in_container_full", "count": [ 1, 4 ] } ]
   },
   {
     "id": "SUS_shelf_commercial_soda",
     "type": "item_group",
     "subtype": "distribution",
     "entries": [
-      { "item": "cola", "prob": 20, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "rootbeer", "prob": 20, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "lemonlime", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "orangesoda", "prob": 15, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "colamdew", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "zerocola", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "zeroorange", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "zerotropical", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "zeromdew", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
-      { "item": "tonic_water", "prob": 5, "container-item": "can_drink", "sealed": true, "count": [ 1, 6 ] },
+      { "item": "cola", "prob": 20, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "rootbeer", "prob": 20, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "lemonlime", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "orangesoda", "prob": 15, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "colamdew", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "zerocola", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "zeroorange", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "zerotropical", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "zeromdew", "prob": 10, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
+      { "item": "tonic_water", "prob": 5, "container-item": "can_drink", "sealed": true, "count": [ 1, 4 ] },
       { "item": "cola", "prob": 20, "container-item": "bottle_twoliter", "sealed": true },
       { "item": "rootbeer", "prob": 20, "container-item": "bottle_twoliter", "sealed": true },
       { "item": "lemonlime", "prob": 10, "container-item": "bottle_twoliter", "sealed": true },
@@ -474,7 +474,7 @@
     "id": "SUS_shelf_commercial_juices",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_juices", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_juices", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_sports_drink",
@@ -486,7 +486,7 @@
     "id": "SUS_shelf_commercial_sports_drink",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_sports_drink", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_sports_drink", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_snacks_chips",
@@ -498,7 +498,7 @@
     "id": "SUS_shelf_commercial_chips",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_snacks_chips", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_snacks_chips", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_snacks_nuts_crackers",
@@ -522,7 +522,7 @@
     "id": "SUS_shelf_commercial_nuts_crackers",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_snacks_nuts_crackers", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_snacks_nuts_crackers", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_chocolate",
@@ -534,7 +534,7 @@
     "id": "SUS_shelf_commercial_chocolate",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_chocolate", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_chocolate", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_candy",
@@ -556,7 +556,7 @@
     "id": "SUS_shelf_commercial_candy",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_candy", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_candy", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_pet_food",
@@ -568,7 +568,7 @@
     "id": "SUS_shelf_commercial_pet_food",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_pet_food", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_pet_food", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_pet_accessories",
@@ -599,7 +599,7 @@
     "id": "SUS_shelf_commercial_baby_accessories_food",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_baby_accessories_food", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_baby_accessories_food", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_baby_hygiene",
@@ -611,7 +611,7 @@
     "id": "SUS_shelf_commercial_baby_hygiene",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_baby_hygiene", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_baby_hygiene", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_office_supplies",
@@ -631,7 +631,7 @@
     "id": "SUS_shelf_commercial_office_supplies",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_office_supplies", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_office_supplies", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_electronics_accessories",
@@ -679,7 +679,7 @@
     "id": "SUS_shelf_commercial_laundry",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_household_laundry", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_household_laundry", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_household_dish_cleaning",
@@ -691,7 +691,7 @@
     "id": "SUS_shelf_commercial_dish_cleaning",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_household_dish_cleaning", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_household_dish_cleaning", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_cleaning_supplies",
@@ -703,7 +703,7 @@
     "id": "SUS_shelf_commercial_cleaning_supplies",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_cleaning_supplies", "count": [ 1, 5 ] } ]
+    "entries": [ { "group": "commercial_cleaning_supplies", "count": [ 1, 3 ] } ]
   },
   {
     "id": "commercial_toilet_paper",
@@ -715,7 +715,7 @@
     "id": "SUS_shelf_commercial_toilet_paper",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_toilet_paper", "count": [ 1, 5 ] } ]
+    "entries": [ { "group": "commercial_toilet_paper", "count": [ 1, 3 ] } ]
   },
   {
     "id": "commercial_dental_care",
@@ -727,13 +727,13 @@
     "id": "SUS_shelf_commercial_dental_care",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_dental_care", "count": [ 1, 5 ] } ]
+    "entries": [ { "group": "commercial_dental_care", "count": [ 1, 3 ] } ]
   },
   {
     "id": "SUS_shelf_commercial_drugs",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "drugs_pharmacy", "count": [ 1, 5 ] } ]
+    "entries": [ { "group": "drugs_heal_simple", "count": [ 1, 3 ] } ]
   },
   {
     "id": "commercial_shower_supplies",
@@ -753,7 +753,7 @@
     "id": "SUS_shelf_commercial_shower_supplies",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_shower_supplies", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_shower_supplies", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_personal_care",
@@ -901,7 +901,7 @@
     "id": "SUS_shelf_commercial_frozen_meals",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_frozen_meals", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_frozen_meals", "count": [ 1, 4 ] } ]
   },
   {
     "id": "commercial_frozen_vegetables",
@@ -921,7 +921,7 @@
     "id": "SUS_shelf_commercial_frozen_vegetables",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "commercial_frozen_vegetables", "count": [ 1, 6 ] } ]
+    "entries": [ { "group": "commercial_frozen_vegetables", "count": [ 1, 4 ] } ]
   },
   {
     "id": "any_supermarket_SUS",
