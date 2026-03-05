@@ -12,6 +12,7 @@
     "difficulty": 0,
     "action": "bubble",
     "drops": [ "bubblewrap" ],
+    "benign": true,
     "vehicle_data": { "sound_volume": 18, "sound": "Pop!" }
   },
   {
@@ -27,6 +28,7 @@
     "difficulty": 0,
     "action": "glass",
     "drops": [ "glass_shard" ],
+    "benign": true,
     "vehicle_data": { "sound_volume": 10, "sound": "Crunch!" }
   },
   {

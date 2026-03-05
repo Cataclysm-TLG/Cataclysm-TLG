@@ -4121,12 +4121,13 @@ bool place_trap_actor::is_allowed( Character &p, const tripoint_bub_ms &pos,
                                    const std::string &name ) const
 {
     if( !allow_under_player && pos == p.pos_bub() ) {
-        p.add_msg_if_player( m_info, _( "Yeah.  Place the %s at your feet.  Real damn smart move." ),
+        p.add_msg_if_player( m_info, _( "You should move before you place the %s there." ),
                              name );
         return false;
     }
     map &here = get_map();
-    if( here.move_cost( pos ) != 2 ) {
+    // !needs_solid_neighbor probably doesn't matter here, but let's assume we can put tripwires in midair.
+    if( here.move_cost( pos ) != 2 || ( here.ter( pos )->has_flag( "EMPTY_SPACE" ) && !needs_solid_neighbor ) ) {
         p.add_msg_if_player( m_info, _( "You can't place a %s there." ), name );
         return false;
     }
