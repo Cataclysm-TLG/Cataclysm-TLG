@@ -5,7 +5,7 @@
     "name": "Megacity",
     "authors": [ "Renech" ],
     "maintainers": [ "Worm Girl" ],
-    "description": "The world is entirely covered by a single, unending city.",
+    "description": "The world is entirely covered by a single, unending city.  NOTE: Expect long load times!",
     "category": "total_conversion",
     "dependencies": [ "tlg" ]
   },
@@ -14,19 +14,6 @@
     "name": "DEFAULT_REGION",
     "stype": "string_input",
     "value": "mega_mega_city"
-  },
-  {
-    "id": "FAKE_UNUSED_FLAG",
-    "type": "json_flag",
-    "name": "",
-    "//COMMENT": "Fake flag used for an empty whitelist."
-  },
-  {
-    "type": "overmap_special",
-    "id": "Evac Shelter",
-    "copy-from": "Evac Shelter",
-    "//COMMENT": "Oops! Not so unused now, are you? Well we need to spawn somewhere, so this will have to do. For now.",
-    "extend": { "flags": [ "FAKE_UNUSED_FLAG" ] }
   },
   {
     "type": "region_settings",
@@ -38,13 +25,12 @@
     "forests": null,
     "lakes": null,
     "highways": null,
-    "cities": "mega_mega_city_settings",
-    "feature_flag_settings": { "extend": { "whitelist": [ "FAKE_UNUSED_FLAG" ] } }
+    "cities": "mega_mega_city_settings"
   },
   {
     "type": "SCENARIO_BLACKLIST",
     "subtype": "whitelist",
-    "scenarios": [ "evacuee" ]
+    "scenarios": [ "lone_survivor_start", "largebuilding", "fire", "bad_day", "last_delivery" ]
   },
   {
     "type": "EXTERNAL_OPTION",
