@@ -7,8 +7,7 @@
     "maintainers": [ "Worm Girl" ],
     "description": "The world is entirely covered by a single, unending city.",
     "category": "total_conversion",
-    "dependencies": [ "tlg" ],
-    "conflicts": [ "classic_zombies", "innawood" ]
+    "dependencies": [ "tlg" ]
   },
   {
     "type": "EXTERNAL_OPTION",
