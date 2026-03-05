@@ -219,7 +219,7 @@
     "time": "45 m",
     "autolearn": true,
     "book_learn": [ [ "textbook_fabrication", 3 ], [ "textbook_weparabic", 5 ], [ "bronze_book", 4 ] ],
-    "using": [ [ "redsmithing_standard", 2 ] ],
+    "using": [ [ "redsmithing_simple", 2 ] ],
     "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
