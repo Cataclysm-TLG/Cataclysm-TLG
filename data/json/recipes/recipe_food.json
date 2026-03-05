@@ -90,7 +90,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "water_purifying",
+    "result": "water_purifying_active",
     "category": "CC_FOOD",
     "id_suffix": "using_tablets",
     "subcategory": "CSC_FOOD_DRINKS",
@@ -102,7 +102,7 @@
     "flags": [ "NO_MORALE_OK" ],
     "//": "See pur_tablets item definition for documentation and discussion",
     "autolearn": true,
-    "components": [ [ [ "water_murky", 4 ] ], [ [ "pur_tablets", 1 ] ] ]
+    "components": [ [ [ "water_murky", 4 ], [ "water", 4 ] ], [ [ "pur_tablets", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -277,7 +277,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "raw_curing_fatty_meat",
+    "result": "raw_curing_fatty_meat_active",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_MEAT",
     "skill_used": "cooking",
@@ -4177,11 +4177,7 @@
     "book_learn": [ [ "cookbook_mexican", 1 ] ],
     "qualities": [ { "id": "COOK", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 3, "LIST" ] ] ],
-    "components": [
-      [ [ "flour", 1 ], [ "bread_flour", 1 ] ],
-      [ [ "any_butter_or_oil", 1, "LIST" ] ],
-      [ [ "water", 1 ], [ "water_clean", 1 ] ]
-    ]
+    "components": [ [ [ "flour", 1 ] ], [ [ "any_butter_or_oil", 1, "LIST" ] ], [ [ "water", 1 ], [ "water_clean", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -7117,7 +7113,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "sauerkraut_ferment",
+    "result": "sauerkraut_ferment_active",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
     "skill_used": "cooking",
@@ -7125,6 +7121,11 @@
     "time": "30 m",
     "book_learn": [ [ "fermenting_book", 2 ], [ "cookbook_foodfashions", 4 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
+    "proficiencies": [
+      { "proficiency": "prof_knife_skills" },
+      { "proficiency": "prof_fermenting" },
+      { "proficiency": "prof_lactofermenting" }
+    ],
     "tools": [ [ [ "surface_heat", 4, "LIST" ] ] ],
     "//": "barely any cooking going on here",
     "components": [
@@ -7137,7 +7138,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "pickles_ferment",
+    "result": "pickles_ferment_active",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
     "skill_used": "cooking",
@@ -7145,6 +7146,7 @@
     "time": "30 m",
     "book_learn": [ [ "fermenting_book", 3 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
+    "proficiencies": [ { "proficiency": "prof_fermenting" }, { "proficiency": "prof_lactofermenting" } ],
     "tools": [ [ [ "surface_heat", 2, "LIST" ] ] ],
     "//": "barely any cooking going on here",
     "components": [
@@ -7152,13 +7154,13 @@
       [ [ "vinegar", 1 ] ],
       [ [ "saline", 1 ], [ "salt", 2 ] ],
       [ [ "jar_glass_sealed", 1 ] ],
-      [ [ "cucumber", 1 ], [ "cucumber_cut", 1 ] ]
+      [ [ "cucumber", 8 ] ]
     ]
   },
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "eggs_ferment",
+    "result": "eggs_ferment_active",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "cooking",
@@ -7166,6 +7168,7 @@
     "time": "30 m",
     "book_learn": [ [ "fermenting_book", 4 ] ],
     "qualities": [ { "id": "COOK", "level": 3 } ],
+    "proficiencies": [ { "proficiency": "prof_fermenting" }, { "proficiency": "prof_lactofermenting" } ],
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "//": "eggs are already cooked so no need to make this high",
     "components": [
@@ -7488,23 +7491,6 @@
     "tools": [ [ [ "surface_heat", 42, "LIST" ] ] ],
     "//": "https://www.simplyrecipes.com/recipes/caramel_sauce/ minimum heavy cream is 250ml so double recipe.  Minimum 28u to caramelize the sugar, plus 14 for the milkfat",
     "components": [ [ [ "sugar", 84 ] ], [ [ "any_butter", 12, "LIST" ] ], [ [ "milk_cream", 1 ] ], [ [ "salt", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "meat_tainted",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_MEAT",
-    "skill_used": "cooking",
-    "difficulty": 5,
-    "time": "1 h 30 m",
-    "book_learn": [ [ "recipe_creepy", 5 ], [ "recipe_serum", 6 ] ],
-    "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "meat", 1 ], [ "mutant_meat", 1 ], [ "human_meat", 1, "LIST" ], [ "rehydrated_meat", 1 ] ],
-      [ [ "slime_scrap", 2 ] ],
-      [ [ "water", 1 ] ]
-    ]
   },
   {
     "type": "recipe",

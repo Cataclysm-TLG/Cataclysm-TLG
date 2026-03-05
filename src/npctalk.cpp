@@ -3,6 +3,8 @@
 #include <array>
 #include <cmath>
 #include <cstddef>
+#include <exception>
+#include <filesystem>
 #include <iterator>
 #include <list>
 #include <map>
@@ -21,6 +23,8 @@
 #include "avatar.h"
 #include "bionics.h"
 #include "calendar.h"
+#include "cata_lazy.h"
+#include "cata_path.h"
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "character.h"
@@ -42,6 +46,8 @@
 #include "explosion.h"
 #include "faction.h"
 #include "faction_camp.h"
+#include "field.h"
+#include "filesystem.h"
 #include "flag.h"
 #include "game.h"
 #include "game_constants.h"
@@ -70,6 +76,8 @@
 #include "npctrade.h"
 #include "output.h"
 #include "overmapbuffer.h"
+#include "path_info.h"
+#include "pickup.h"
 #include "pimpl.h"
 #include "player_activity.h"
 #include "pocket_type.h"
@@ -4623,6 +4631,23 @@ talk_effect_fun_t::func f_place_override( const JsonObject &jo, std::string_view
     };
 }
 
+talk_effect_fun_t::func f_clear_dimension( const JsonObject &jo, std::string_view member,
+        std::string_view )
+{
+    str_or_var target_dimension = get_str_or_var( jo.get_member( member ), member, true );
+
+    return [target_dimension]( dialogue const & d ) {
+        const std::string target_dimension_id = target_dimension.evaluate(
+                d );
+        const std::vector<cata_path> dimensions_query = get_directories_with( target_dimension_id,
+                PATH_INFO::dimensions_save_path() );
+        if( dimensions_query.size() == 1 ) {
+            std::filesystem::remove_all( ( PATH_INFO::dimensions_save_path() /
+                                           target_dimension_id ).get_unrelative_path() );
+        }
+    };
+}
+
 talk_effect_fun_t::func f_mapgen_update( const JsonObject &jo, std::string_view member,
         std::string_view )
 {
@@ -5298,6 +5323,19 @@ talk_effect_fun_t::func f_give_achievment( const JsonObject &jo, std::string_vie
     };
 }
 
+talk_effect_fun_t::func f_signal_hordes( const JsonObject &jo, std::string_view member,
+        std::string_view )
+{
+    var_info var = read_var_info( jo.get_object( member ) );
+    dbl_or_var signal_power = get_dbl_or_var( jo, "signal_power", true, 0 );
+    return [var, signal_power]( dialogue & d ) {
+        tripoint_abs_ms loc_ms = read_var_value( var, d ).tripoint();
+        tripoint_abs_sm loc_sm = project_to<coords::sm>( loc_ms );
+
+        overmap_buffer.signal_hordes( loc_sm, signal_power.evaluate( d ) );
+    };
+}
+
 talk_effect_fun_t::func f_cast_spell( const JsonObject &jo, std::string_view member,
                                       std::string_view src, bool is_npc )
 {
@@ -5776,6 +5814,22 @@ talk_effect_fun_t::func f_transform_item( const JsonObject &jo, std::string_view
             const std::string target_str = target_id.evaluate( d );
             ( *it )->convert( itype_id( target_str ), it->carrier() );
             ( *it )->active = activate || ( *it )->has_temperature();
+        } else {
+            debugmsg( "beta talker must be Item." );
+        }
+    };
+}
+
+talk_effect_fun_t::func f_set_browsed( const JsonObject &jo, std::string_view member,
+                                       std::string_view )
+{
+    bool desired_browse_state = jo.get_bool( member );
+
+    return [desired_browse_state]( dialogue const & d ) {
+        item_location *it = d.actor( true )->get_item();
+
+        if( it && it->get_item() ) {
+            ( *it )->set_browsed( desired_browse_state );
         } else {
             debugmsg( "beta talker must be Item." );
         }
@@ -7314,23 +7368,13 @@ talk_effect_fun_t::func f_teleport( const JsonObject &jo, std::string_view membe
     bool force = jo.get_bool( "force", false );
     bool force_safe = jo.get_bool( "force_safe", false );
 
-    str_or_var dimension_prefix;
-    optional( jo, false, "dimension_prefix", dimension_prefix, "" );
-
     return [is_npc, target_var, fail_message, success_message, force,
-            force_safe, dimension_prefix]( dialogue const & d ) {
+            force_safe]( dialogue const & d ) {
         tripoint_abs_ms target_pos = read_var_value( target_var, d ).tripoint();
         Creature *teleporter = d.actor( is_npc )->get_creature();
         if( teleporter ) {
-            std::string prefix = dimension_prefix.evaluate( d );
-            bool successful_dimension_swap = false;
-            // Make sure we don't cause a dimension swap on every
-            // short/long range teleport outside the default dimension
-            if( !prefix.empty() && prefix != g->get_dimension_prefix() ) {
-                successful_dimension_swap = g->travel_to_dimension( prefix );
-            }
             if( teleport::teleport_to_point( *teleporter, get_map().get_bub( target_pos ), true, false,
-                                             false, force, force_safe ) || successful_dimension_swap ) {
+                                             false, force, force_safe ) ) {
                 teleporter->add_msg_if_player( success_message.evaluate( d ) );
             } else {
                 teleporter->add_msg_if_player( fail_message.evaluate( d ) );
@@ -7344,10 +7388,71 @@ talk_effect_fun_t::func f_teleport( const JsonObject &jo, std::string_view membe
         }
         vehicle *veh = d.actor( is_npc )->get_vehicle();
         if( veh ) {
-            if( teleport::teleport_vehicle( *veh, target_pos ) ) {
+            if( teleport::teleport_vehicle( *veh, target_pos, force ) ) {
                 add_msg( success_message.evaluate( d ) );
             } else {
                 add_msg( fail_message.evaluate( d ) );
+            }
+        }
+    };
+}
+
+talk_effect_fun_t::func f_travel_to_dimension( const JsonObject &jo, std::string_view member,
+        std::string_view )
+{
+    str_or_var dimension_prefix = get_str_or_var( jo.get_member( member ), member, true );
+    translation_or_var fail_message;
+    optional( jo, false, "fail_message", fail_message );
+    translation_or_var success_message;
+    optional( jo, false, "success_message", success_message );
+
+    // accepts values "all"/"follower"/"enemy"
+    str_or_var npc_travel_filter;
+    optional( jo, false, "npc_travel_filter", npc_travel_filter, "all" );
+
+    dbl_or_var npc_travel_radius;
+    optional( jo, false, "npc_travel_radius", npc_travel_radius, 0 );
+
+    str_or_var region_type_var;
+    optional( jo, false, "region_type", region_type_var, "default" );
+
+    return [fail_message, success_message, dimension_prefix, npc_travel_filter,
+                  npc_travel_radius, region_type_var]( dialogue const & d ) {
+        Creature *teleporter = d.actor( false )->get_creature();
+        if( teleporter ) {
+            std::string region_type = region_type_var.evaluate( d );
+            std::string prefix = dimension_prefix.evaluate( d );
+            std::string temp_dimension_prefix = ( prefix == "default" ) ? "" : prefix;
+            if( temp_dimension_prefix != g->get_dimension_prefix() ) {
+                std::vector<npc *> travellers;
+                std::string filter = npc_travel_filter.evaluate( d );
+                int radius = npc_travel_radius.evaluate( d );
+                if( radius > 0 ) {
+                    travellers = g->get_npcs_if( [teleporter, filter, radius]( const npc & guy ) {
+                        int distance_to_player = rl_dist( guy.pos_abs(), teleporter->pos_abs() );
+                        if( distance_to_player <= radius ) {
+                            if( filter == "all" ) {
+                                return true;
+                            } else if( filter == "follower" ) {
+                                return guy.is_following();
+                            } else if( filter == "enemy" ) {
+                                return guy.is_enemy();
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            return false;
+                        }
+                    } );
+                }
+                // returns False if fail
+                if( g->travel_to_dimension( prefix, region_type, travellers ) ) {
+                    teleporter->add_msg_if_player( success_message.evaluate( d ) );
+                } else {
+                    teleporter->add_msg_if_player( fail_message.evaluate( d ) );
+                }
+            } else {
+                teleporter->add_msg_if_player( fail_message.evaluate( d ) );
             }
         }
     };
@@ -7539,6 +7644,7 @@ parsers = {
     { "u_spawn_npc", "npc_spawn_npc", jarg::member, &talk_effect_fun::f_spawn_npc },
     { "u_set_field", "npc_set_field", jarg::member, &talk_effect_fun::f_field },
     { "u_teleport", "npc_teleport", jarg::object, &talk_effect_fun::f_teleport },
+    { "u_travel_to_dimension", jarg::member, &talk_effect_fun::f_travel_to_dimension},
     { "u_set_flag", "npc_set_flag", jarg::member, &talk_effect_fun::f_set_flag },
     { "u_unset_flag", "npc_unset_flag", jarg::member, &talk_effect_fun::f_unset_flag },
     { "u_set_fault", "npc_set_fault", jarg::member, &talk_effect_fun::f_set_fault },
@@ -7575,6 +7681,7 @@ parsers = {
     { "set_npc_cbm_reserve_rule", jarg::member, &talk_effect_fun::f_npc_cbm_reserve_rule },
     { "set_npc_cbm_recharge_rule", jarg::member, &talk_effect_fun::f_npc_cbm_recharge_rule },
     { "map_spawn_item", jarg::member, &talk_effect_fun::f_spawn_item },
+    { "clear_dimension", jarg::member, &talk_effect_fun::f_clear_dimension },
     { "mapgen_update", jarg::member, &talk_effect_fun::f_mapgen_update },
     { "alter_timed_events", jarg::member, &talk_effect_fun::f_alter_timed_events },
     { "revert_location", jarg::member, &talk_effect_fun::f_revert_location },
@@ -7611,6 +7718,8 @@ parsers = {
     { "u_set_talker", "npc_set_talker", jarg::member, &talk_effect_fun::f_set_talker },
     { "turn_cost", jarg::member, &talk_effect_fun::f_turn_cost },
     { "transform_item", jarg::member, &talk_effect_fun::f_transform_item },
+    { "signal_hordes", jarg::member, &talk_effect_fun::f_signal_hordes },
+    { "set_browsed", jarg::member, &talk_effect_fun::f_set_browsed },
     // since parser checks all effects in order, having "message" field in any another effect (like in f_roll_remainder)
     // would cause parser to think it's a "message" effect
     { "message", "message", jarg::member, &talk_effect_fun::f_message },

@@ -770,6 +770,11 @@ bool vehicle::autodrive_controller::check_drivable( map &here, const tripoint_bu
         return false;
     }
 
+    // don't drive over junk which could damage our wheels, the player must always manually do that.
+    if( here.has_items( pt ) ) {
+        return false;
+    }
+
     // check for furniture that hinders movement; furniture with 0 move cost
     // can be driven on
     const furn_id &furniture = here.furn( pt );
@@ -839,6 +844,7 @@ void vehicle::autodrive_controller::enqueue_if_ramp( point_queue &ramp_points,
     }
     // Please don't drive into craters.
     if( !here.has_flag( ter_furn_flag::TFLAG_ROAD, p ) ) {
+        ramp_points.visited.emplace( p );
         return;
     }
     ramp_points.visited.emplace( p );
@@ -1300,7 +1306,6 @@ std::optional<navigation_step> vehicle::autodrive_controller::compute_next_step(
             square_dist( first_step.pos.xy().raw(), second_step.pos.xy().raw() ) !=
             square_dist( first_step.pos.xy().raw(), veh_pos.xy().raw() ) &&
             first_step.steering_dir == second_step.steering_dir ) {
-            data.path.pop_back();
             maintain_speed = true;
             data.path.clear();
         } else {
@@ -1440,8 +1445,18 @@ autodrive_result vehicle::do_autodrive( map &here, Character &driver )
     const tripoint_abs_ms veh_pos = pos_abs();
     const tripoint_abs_omt veh_omt = project_to<coords::omt>( veh_pos );
     std::vector<tripoint_abs_omt> &omt_path = driver.omt_path;
-    while( !omt_path.empty() && veh_omt.xy() == omt_path.back().xy() ) {
-        omt_path.pop_back();
+    // following code finds the last overmap path tile matched to the vehicle coordinates
+    // usually it's just the last in the path vector, but we may skip it is we drive fast and cross the tile in a corner
+    const auto veh_on_path = std::find_if( omt_path.rbegin(),
+    omt_path.rend(), [xy = veh_omt.xy()]( const auto & path ) {
+        return path.xy() == xy;
+    } );
+    if( veh_on_path != omt_path.rend() ) {
+        omt_path.erase( ( veh_on_path + 1 ).base(), omt_path.end() );
+        // it removes XY duplicates spanned across mupltiple Z levels
+        while( !omt_path.empty() && veh_omt.xy() == omt_path.back().xy() ) {
+            omt_path.pop_back();
+        }
     }
     if( omt_path.empty() ) {
         stop_autodriving( false );

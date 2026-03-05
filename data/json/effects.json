@@ -780,7 +780,9 @@
       "pain_min": [ 1 ],
       "pain_chance": [ 150, 900 ],
       "hurt_min": [ 1 ],
-      "hurt_chance": [ 450, 2700 ]
+      "hurt_chance": [ 450, 2700 ],
+      "health_chance": [ 500, 1000 ],
+      "health_min": [ -1 ]
     },
     "show_in_info": true,
     "blood_analysis_description": "Poison"
@@ -806,10 +808,41 @@
       "pain_chance": [ 100, 500 ],
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
-      "hurt_chance": [ 300, 1800 ]
+      "hurt_chance": [ 200, 400 ],
+      "health_chance": [ 300, 600 ],
+      "health_min": [ -1 ]
     },
     "show_in_info": true,
     "blood_analysis_description": "Poison"
+  },
+  {
+    "type": "effect_type",
+    "id": "poison_tainted",
+    "name": [ "Necrotic Poison" ],
+    "desc": [ "You have been horribly poisoned!" ],
+    "miss_messages": [ [ "You feel like you're dying.", 2 ] ],
+    "rating": "bad",
+    "immune_bp_flags": [ "BIONIC_LIMB" ],
+    "resist_traits": [ "POISRESIST" ],
+    "immune_flags": [ "EATDEAD" ],
+    "pain_sizing": true,
+    "hurt_sizing": true,
+    "main_parts_only": true,
+    "base_mods": {
+      "per_mod": [ -4, -2 ],
+      "dex_mod": [ -4, -2 ],
+      "str_mod": [ -6, -3 ],
+      "speed_mod": [ -20, -10 ],
+      "pain_min": [ 3, 1 ],
+      "pain_chance": [ 100, 500 ],
+      "hurt_min": [ 1, 1 ],
+      "hurt_max": [ 6, 3 ],
+      "hurt_chance": [ 300, 600 ],
+      "health_chance": [ 200, 400 ],
+      "health_min": [ -1 ]
+    },
+    "show_in_info": true,
+    "blood_analysis_description": "Systemic Necrosis"
   },
   {
     "type": "effect_type",
@@ -836,7 +869,7 @@
     "show_in_info": true,
     "limb_score_mods": [ { "limb_score": "breathing", "modifier": 0.6 } ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ],
-    "blood_analysis_description": "Unknown Organic Toxin"
+    "blood_analysis_description": "Severe Histamine Reaction"
   },
   {
     "id": "venom_dmg",
@@ -1919,6 +1952,7 @@
     "max_duration": "3 m",
     "max_intensity": 4,
     "int_decay_tick": 40,
+    "base_mods": { "health_chance": [ 300, 600 ], "health_min": [ -1 ] },
     "scaling_mods": { "str_mod": [ -1 ], "dex_mod": [ -1 ], "cough_chance": [ 10 ] },
     "limb_score_mods": [
       { "limb_score": "breathing", "resist_modifier": 1, "scaling": -0.25 },
@@ -3421,15 +3455,9 @@
   },
   {
     "type": "effect_type",
-    "id": "amigara",
-    "apply_message": "You can't look away from the faultline…",
-    "rating": "bad"
-  },
-  {
-    "type": "effect_type",
     "id": "fearparalyze",
-    "name": [ "Feared" ],
-    "desc": [ "You have been paralyzed by the fear." ],
+    "name": [ "Frightened" ],
+    "desc": [ "You are paralyzed by fear." ],
     "rating": "bad",
     "show_in_info": true
   },

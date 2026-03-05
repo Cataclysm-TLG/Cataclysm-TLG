@@ -47,6 +47,8 @@
 #include "harvest.h"
 #include "item.h"
 #include "item_stack.h"
+#include "item_location.h"
+#include "item_transformation.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -709,7 +711,7 @@ bool mattack::shriek_stun( monster *z )
         }
         // Affect the target
         // Small bash to every square, silent to not flood message box. Only affects glass/crystal items.
-        here.bash( cone, 4, true, false, false, nullptr, true );
+        here.bash( cone, 4, true, false, false, false, nullptr, true );
 
         // If a monster is there, chance for stun
         Creature *target = creatures.creature_at( cone );
@@ -1353,9 +1355,6 @@ void mattack::smash_specific( monster *z, Creature *target )
 {
     if( target == nullptr || !z->is_adjacent( target, false ) ) {
         return;
-    }
-    if( z->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        z->use_mech_power( 5_kJ );
     }
     z->set_dest( target->pos_abs() );
     smash( z );
@@ -3437,7 +3436,8 @@ bool mattack::blow_whistle( monster *z )
         return false;
     }
     add_msg_if_player_sees( *z, m_warning, _( "The %1$s loudly blows their whistle!" ), z->name() );
-    sounds::sound( z->pos_bub( here ), 40, sounds::sound_t::alarm, _( "FWEEEET!" ), false, "misc",
+    // should match the loudness of whistle item
+    sounds::sound( z->pos_bub( here ), 100, sounds::sound_t::alarm, _( "FWEEEET!" ), false, "misc",
                    "whistle" );
 
     return true;
@@ -4266,8 +4266,8 @@ bool mattack::kamikaze( monster *z )
         z->disable_special( "KAMIKAZE" );
         return true;
     }
-    act_bomb_type = item::find_type( actor->target );
-    int delay = to_seconds<int>( actor->target_timer );
+    act_bomb_type = item::find_type( actor->transform.target );
+    int delay = to_seconds<int>( actor->transform.target_timer );
 
     // HACK: HORRIBLE HACK ALERT! Remove the following code completely once we have working monster inventory processing
     if( z->has_effect( effect_countdown ) ) {

@@ -614,15 +614,7 @@
     "broken_color": "light_gray",
     "proportional": { "durability": 0.5 },
     "epower": "25 W",
-    "requirements": {
-      "install": { "time": "30 s" },
-      "removal": { "time": "30 s" },
-      "repair": {
-        "skills": [ [ "electronics", 6 ] ],
-        "time": "30 m",
-        "using": [ [ "vehicle_screw", 1 ], [ "solar_panel", 1 ], [ "soldering_standard", 8 ] ]
-      }
-    },
+    "requirements": { "install": {  }, "removal": { "time": "30 s" } },
     "breaks_into": [ { "item": "folding_solar_panel", "damage": [ 5, 5 ] } ],
     "remove_as": "folding_solar_panel",
     "item": "folding_solar_panel_deployed"
@@ -656,7 +648,7 @@
     "description": "A small solar panel, mounted on a frame and ready to power other appliances.",
     "copy-from": "solar_panel",
     "proportional": { "epower": 1.2 },
-    "requirements": { "removal": { "time": "3 m", "using": [ [ "vehicle_wrench_2", 1 ] ] } },
+    "requirements": { "install": {  }, "removal": { "time": "3 m", "using": [ [ "vehicle_wrench_2", 1 ] ] } },
     "variants": [ { "symbols": "#", "symbols_broken": "x" } ]
   },
   {
@@ -669,6 +661,7 @@
     "//": "4 times the panels, 1.2x matching the above appliance",
     "proportional": { "epower": 4.8 },
     "requirements": {
+      "install": {  },
       "removal": { "time": "3 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": {
         "skills": [ [ "electronics", 6 ] ],
@@ -817,68 +810,6 @@
     ],
     "damage_reduction": { "all": 9 },
     "variants": [ { "symbols": "Y", "symbols_broken": "X" } ]
-  },
-  {
-    "type": "vehicle_part",
-    "id": "ap_water_wheel",
-    "name": { "str": "water wheel" },
-    "categories": [ "energy" ],
-    "color": "yellow",
-    "broken_color": "yellow",
-    "damage_modifier": 10,
-    "durability": 50,
-    "description": "A set of paddles which can be moved by flowing water to turn an axle and generate power.",
-    "epower": "80 W",
-    "item": "water_wheel",
-    "location": "structure",
-    "flags": [ "WATER_WHEEL", "OBSTACLE", "APPLIANCE" ],
-    "requirements": {
-      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
-      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
-      "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "10 m", "using": [ [ "rope_natural_short", 1 ] ] }
-    },
-    "breaks_into": [
-      { "item": "splinter", "count": [ 40, 60 ] },
-      { "item": "steel_fragment", "count": [ 1, 3 ] },
-      { "item": "scrap", "count": [ 6, 15 ] },
-      { "item": "cable", "charges": [ 90, 180 ] },
-      { "item": "nail", "charges": [ 21, 35 ] },
-      { "item": "nuts_bolts", "charges": [ 3, 6 ] }
-    ],
-    "damage_reduction": { "all": 15, "stab": 6, "cut": 8 },
-    "variants": [ { "symbols": "*", "symbols_broken": "x" } ]
-  },
-  {
-    "type": "vehicle_part",
-    "id": "ap_xl_water_wheel",
-    "name": { "str": "large water wheel" },
-    "looks_like": "water_wheel",
-    "categories": [ "energy" ],
-    "color": "yellow",
-    "broken_color": "yellow",
-    "damage_modifier": 10,
-    "durability": 80,
-    "description": "A large set of paddles which can be moved by flowing water to turn an axle and generate power.",
-    "epower": "180 W",
-    "item": "xl_water_wheel",
-    "location": "structure",
-    "flags": [ "WATER_WHEEL", "OBSTACLE", "APPLIANCE" ],
-    "requirements": {
-      "install": { "skills": [ [ "mechanics", 4 ] ], "time": "60 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
-      "removal": { "skills": [ [ "mechanics", 4 ] ], "time": "60 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
-      "repair": { "skills": [ [ "mechanics", 5 ] ], "time": "15 m", "using": [ [ "rope_natural_short", 2 ] ] }
-    },
-    "breaks_into": [
-      { "item": "splinter", "count": [ 60, 100 ] },
-      { "item": "steel_chunk", "count": [ 1, 3 ] },
-      { "item": "steel_fragment", "count": [ 4, 9 ] },
-      { "item": "scrap", "count": [ 20, 35 ] },
-      { "item": "cable", "charges": [ 225, 400 ] },
-      { "item": "nail", "charges": [ 80, 130 ] },
-      { "item": "nuts_bolts", "charges": [ 5, 12 ] }
-    ],
-    "damage_reduction": { "all": 16, "stab": 6, "cut": 8 },
-    "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {
     "type": "vehicle_part",

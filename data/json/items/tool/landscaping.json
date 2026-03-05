@@ -363,7 +363,7 @@
     },
     "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "clumsy" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -60 ] ],
-    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE" ],
+    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 4, "cut": 40 }
   }
 ]

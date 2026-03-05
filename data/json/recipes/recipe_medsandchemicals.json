@@ -499,7 +499,7 @@
       [ [ "chem_sulphur", 100 ] ],
       [ [ "scrap", 2 ] ],
       [ [ "chem_nickel_powder", 7 ] ],
-      [ [ "chem_aluminium_powder", 16 ] ]
+      [ [ "aluminum_powder", 16 ] ]
     ]
   },
   {
@@ -667,28 +667,6 @@
     "qualities": [ { "id": "CHEM", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 25, "LIST" ] ] ],
     "components": [ [ [ "iodine", 10 ] ], [ [ "aspirin", 10 ] ], [ [ "bleach", 1 ], [ "oxy_powder", 50 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "bleach",
-    "category": "CC_CHEM",
-    "subcategory": "CSC_CHEM_CHEMICALS",
-    "skill_used": "chemistry",
-    "skills_required": [ "electronics", 2 ],
-    "difficulty": 4,
-    "time": "25 m",
-    "batch_time_factors": [ 90, 4 ],
-    "//": "another variation of chloralkali process, now used to produce bleach (sodium hypochlorite - or rather rough, technical grade hypochlorite/hydroxide/chloride mix), note we will not be heating anything and that the (mostly) electrochemical reaction easily scales in size, some hydrogen gas could be recoverable (optional byproduct)",
-    "book_learn": [ [ "adv_chemistry", 3 ], [ "textbook_chemistry", 3 ], [ "recipe_labchem", 3 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_intro_chemistry" },
-      { "proficiency": "prof_inorganic_chemistry" },
-      { "proficiency": "prof_intro_chem_synth" }
-    ],
-    "qualities": [ { "id": "CHEM", "level": 2 } ],
-    "tools": [ [ [ "electrolysis_kit", 250 ] ] ],
-    "components": [ [ [ "salt_water", 2 ], [ "saline", 10 ] ] ]
   },
   {
     "type": "recipe",
@@ -921,7 +899,7 @@
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
     "components": [
       [ [ "water", 4 ], [ "water_clean", 4 ] ],
-      [ [ "meal_bone", 2 ], [ "meal_bone_tainted", 4 ] ],
+      [ [ "meal_bone", 2 ] ],
       [ [ "meal_chitin_piece", 1 ] ],
       [ [ "ammonia_liquid", 1 ], [ "lye_powder", 100 ], [ "chem_saltpetre", 50 ] ]
     ]
@@ -929,7 +907,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "flask_yeast",
+    "result": "flask_yeast_active",
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_OTHER",
     "skill_used": "cooking",
@@ -1250,7 +1228,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "chem_aluminium_sulphate",
+    "result": "aluminum_sulfate",
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_CHEMICALS",
     "skill_used": "chemistry",
@@ -1264,7 +1242,7 @@
     ],
     "qualities": [ { "id": "BOIL", "level": 2 }, { "id": "CHEM", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 25, "LIST" ] ] ],
-    "components": [ [ [ "chem_sulphuric_acid", 1 ] ], [ [ "chem_hydrogen_peroxide", 10 ] ], [ [ "chem_aluminium_powder", 25 ] ] ]
+    "components": [ [ [ "chem_sulphuric_acid", 1 ] ], [ [ "chem_hydrogen_peroxide", 10 ] ], [ [ "aluminum_powder", 25 ] ] ]
   },
   {
     "type": "recipe",
@@ -1686,7 +1664,7 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" }, { "proficiency": "prof_inorganic_chemistry" } ],
     "qualities": [ { "id": "BOIL", "level": 2 } ],
-    "components": [ [ [ "chem_aluminium_powder", 50 ] ], [ [ "chem_chromium_oxide", 430 ] ] ]
+    "components": [ [ [ "aluminum_powder", 50 ] ], [ [ "chem_chromium_oxide", 430 ] ] ]
   },
   {
     "type": "recipe",

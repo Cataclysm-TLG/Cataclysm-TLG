@@ -21,6 +21,7 @@
 #include "auto_note.h"
 #include "avatar.h"
 #include "cached_options.h"
+#include "calendar.h"
 #include "cata_assert.h"
 #include "cata_utility.h"
 #include "cata_views.h"
@@ -36,7 +37,7 @@
 #include "flood_fill.h"
 #include "game.h"
 #include "generic_factory.h"
-#include "json.h"
+#include "horde_entity.h"
 #include "line.h"
 #include "map_iterator.h"
 #include "mapbuffer.h"
@@ -51,6 +52,7 @@
 #include "output.h"
 #include "overmap_connection.h"
 #include "overmap_location.h"
+#include "overmap_map_data_cache.h"
 #include "overmap_noise.h"
 #include "overmap_types.h"
 #include "overmapbuffer.h"
@@ -73,7 +75,7 @@ static const mongroup_id GROUP_OCEAN_SHORE( "GROUP_OCEAN_SHORE" );
 static const mongroup_id GROUP_RIVER( "GROUP_RIVER" );
 static const mongroup_id GROUP_SUBWAY_CITY( "GROUP_SUBWAY_CITY" );
 static const mongroup_id GROUP_SWAMP( "GROUP_SWAMP" );
-static const mongroup_id GROUP_ZOMBIE( "GROUP_ZOMBIE" );
+static const mongroup_id GROUP_ZOMBIE_HORDE( "GROUP_ZOMBIE_HORDE" );
 
 static const oter_str_id oter_central_lab( "central_lab" );
 static const oter_str_id oter_central_lab_core( "central_lab_core" );
@@ -91,7 +93,6 @@ static const oter_str_id oter_lab_escape_cells( "lab_escape_cells" );
 static const oter_str_id oter_lab_escape_entrance( "lab_escape_entrance" );
 static const oter_str_id oter_lab_train_depot( "lab_train_depot" );
 static const oter_str_id oter_open_air( "open_air" );
-static const oter_str_id oter_river_center( "river_center" );
 static const oter_str_id oter_road_nesw_manhole( "road_nesw_manhole" );
 static const oter_str_id oter_sewer_end_north( "sewer_end_north" );
 static const oter_str_id oter_sewer_isolated( "sewer_isolated" );
@@ -121,7 +122,10 @@ static const oter_vision_id oter_vision_default( "default" );
 static const overmap_location_id overmap_location_land( "land" );
 static const overmap_location_id overmap_location_swamp( "swamp" );
 
-static const species_id species_ZOMBIE( "ZOMBIE" );
+static const string_id<map_data_summary> map_data_summary_empty_omt( "empty_omt" );
+static const string_id<map_data_summary> map_data_summary_full_omt( "full_omt" );
+static const string_id<map_data_summary>
+map_data_summary_scattered_obstacles_omt( "scattered_obstacles_omt" );
 
 class map_extra;
 
@@ -325,9 +329,6 @@ static size_t from_dir( om_direction::type dir )
 }
 
 } // namespace om_lines
-
-//const regional_settings default_region_settings;
-t_regional_settings_map region_settings_map;
 
 namespace
 {
@@ -927,6 +928,39 @@ void oter_type_t::load( const JsonObject &jo, const std::string_view )
     optional( jo, was_loaded, "connect_group", connect_group, string_reader{} );
     optional( jo, was_loaded, "travel_cost_type", travel_cost_type, oter_travel_cost_type::other );
 
+    if( jo.has_member( "default_map_data" ) ) {
+        mandatory( jo, was_loaded, "default_map_data", default_map_data );
+    } else if( !was_loaded ) {
+        // With no specific override, set based on travel_cost_type if present.
+        switch( travel_cost_type ) {
+            case oter_travel_cost_type::impassable:
+            // Revisit water and air?
+            case oter_travel_cost_type::water:
+            case oter_travel_cost_type::air:
+                default_map_data = map_data_summary_full_omt;
+                break;
+            case oter_travel_cost_type::road:
+            case oter_travel_cost_type::field:
+            case oter_travel_cost_type::dirt_road:
+                default_map_data = map_data_summary_empty_omt;
+                break;
+            case oter_travel_cost_type::trail:
+            case oter_travel_cost_type::forest:
+            case oter_travel_cost_type::shore:
+            case oter_travel_cost_type::swamp:
+                default_map_data = map_data_summary_scattered_obstacles_omt;
+                break;
+            case oter_travel_cost_type::other:
+            default:
+                // Terrible hack, just mark it impssable?
+                // There seem to be something like 2,500 entries that need to be annotted for this to work.
+                default_map_data = map_data_summary_full_omt;
+                // Should not reach, throw an error.
+                //jo.throw_error( string_format( "No inferred or explicit default_map_data for %s", id.str() ) );
+                break;
+        }
+    }
+
     optional( jo, was_loaded, "vision_levels", vision_levels, oter_vision_default );
     optional( jo, false, "uniform_terrain", uniform_terrain );
     if( uniform_terrain ) {
@@ -1245,16 +1279,6 @@ void overmap_terrains::check_consistency()
 void overmap_terrains::finalize()
 {
     terrain_types.finalize();
-
-    if( region_settings_map.find( "default" ) == region_settings_map.end() ) {
-        debugmsg( "ERROR: can't find default overmap settings (region_map_settings 'default'), "
-                  "Cataclysm pending.  And not the fun kind." );
-    }
-
-    for( auto &elem : region_settings_map ) {
-        elem.second.finalize();
-    }
-
     set_oter_ids();
 }
 
@@ -3121,8 +3145,15 @@ void overmap_special::check() const
 // *** BEGIN overmap FUNCTIONS ***
 overmap::overmap( const point_abs_om &p ) : loc( p )
 {
-    settings = &overmap_buffer.get_default_settings( p );
+    const region_settings_id region_type( overmap_buffer.current_region_type );
+    if( overmap_buffer.current_region_type == "default" || !region_type.is_valid() ) {
+        const region_settings_id default_settings = overmap_buffer.get_default_settings( p ).id;
+        settings = default_settings;
+    } else {
+        settings = region_type;
+    }
     init_layers();
+    hordes.set_location( loc );
 }
 
 overmap::~overmap() = default;
@@ -3139,7 +3170,7 @@ void overmap::populate( overmap_special_batch &enabled_specials )
 void overmap::populate()
 {
     overmap_special_batch enabled_specials = overmap_specials::get_default_batch( loc );
-    const overmap_feature_flag_settings &overmap_feature_flag = settings->overmap_feature_flag;
+    const region_settings_feature_flag &overmap_feature_flag = settings->overmap_feature_flag;
 
     const bool should_blacklist = !overmap_feature_flag.blacklist.empty();
     const bool should_whitelist = !overmap_feature_flag.whitelist.empty();
@@ -3179,6 +3210,10 @@ oter_id overmap::get_default_terrain( int z ) const
     return settings->default_oter[OVERMAP_DEPTH + z].id();
 }
 
+// underlying bitset default constructs to all 0.
+static map_data_summary impassable_omt{};
+static map_data_summary passable_omt{ ~impassable_omt.passable, true };
+
 void overmap::init_layers()
 {
     for( int k = 0; k < OVERMAP_LAYERS; ++k ) {
@@ -3187,6 +3222,8 @@ void overmap::init_layers()
         l.terrain.fill( tid );
         l.visible.fill( om_vision_level::unseen );
         l.explored.fill( false );
+        // Verify this isn't copying!
+        l.map_cache.fill( std::shared_ptr<map_data_summary> { std::shared_ptr<void>(), &passable_omt } );
     }
 }
 
@@ -3228,6 +3265,8 @@ void overmap::ter_set( const tripoint_om_omt &p, const oter_id &id )
         // We had a predecessor, and it was the same type as the incoming one
         // Don't push another copy.
     }
+    // TODO: maaaaybe this can be set after underlying map data has been changed? IDK.
+    set_passable( project_combine( loc, p ), id->get_type_id()->default_map_data );
     current_oter = id;
 }
 
@@ -3322,16 +3361,6 @@ bool overmap::mongroup_check( const mongroup &candidate ) const
                candidate.interest == match.second.interest &&
                candidate.dying == match.second.dying &&
                candidate.horde == match.second.horde;
-    } ) != matching_range.second;
-}
-
-bool overmap::monster_check( const std::pair<tripoint_om_sm, monster> &candidate ) const
-{
-    const auto matching_range = monster_map.equal_range( candidate.first );
-    return std::find_if( matching_range.first, matching_range.second,
-    [candidate]( const std::pair<tripoint_om_sm, monster> &match ) {
-        return candidate.second.pos_bub() == match.second.pos_bub() &&
-               candidate.second.type == match.second.type;
     } ) != matching_range.second;
 }
 
@@ -3594,6 +3623,113 @@ void overmap::add_omt_stack_argument( const point_abs_omt &p, const std::string 
     omt_stack_arguments_map[p].add( param_name, value );
 }
 
+bool overmap::passable( const tripoint_om_ms &p )
+{
+    point_om_omt omt_origin;
+    tripoint_omt_ms index;
+    std::tie( omt_origin, index ) = project_remain<coords::omt>( p );
+    std::shared_ptr<map_data_summary> &ptr = layer[index.z() +
+            OVERMAP_DEPTH].map_cache[omt_origin];
+    if( !ptr ) {
+        // Oh no we aren't populated???
+        // Promote to error later.
+        return false;
+    }
+    if( !ptr->passable[index.y() * 24 + index.x()] ) {
+        return false;
+    }
+    return hordes.entity_at( p ) == nullptr;
+}
+
+std::shared_ptr<map_data_summary> overmap::get_omt_summary( const tripoint_om_omt &p )
+{
+    std::shared_ptr<map_data_summary> &ptr = layer[p.z() +
+            OVERMAP_DEPTH].map_cache[p.xy()];
+    if( !ptr ) {
+        // Oh no we aren't populated???
+        // Promote to error later.
+        return std::shared_ptr<map_data_summary>();
+    }
+    return ptr;
+}
+
+void overmap::set_passable( const tripoint_om_ms &p, bool new_passable )
+{
+    point_om_omt omt_origin;
+    tripoint_omt_ms index;
+    std::tie( omt_origin, index ) = project_remain<coords::omt>( p );
+    std::shared_ptr<map_data_summary> &ptr = layer[index.z() +
+            OVERMAP_DEPTH].map_cache[omt_origin];
+    if( !ptr ) {
+        // Oh no we aren't populated???
+        // Promote to error later.
+        return;
+    }
+    if( ptr->placeholder ) {
+        // Copy the placeholder data.
+        ptr = std::make_shared<map_data_summary>( ptr->passable );
+    }
+    ptr->passable[index.y() * 24 + index.x()] = new_passable;
+}
+
+// For internal use only, just overwrite the pointer.
+void overmap::set_passable( const tripoint_abs_omt &p,
+                            std::shared_ptr<map_data_summary> new_passable )
+{
+    point_abs_om overmap_coord;
+    tripoint_om_omt omt_coord;
+    std::tie( overmap_coord, omt_coord ) = project_remain<coords::om>( p );
+    if( overmap_coord != loc ) {
+        return;
+    }
+    layer[omt_coord.z() + OVERMAP_DEPTH].map_cache[omt_coord.xy()] = std::move( new_passable );
+}
+
+void overmap::set_passable( const tripoint_abs_omt &p,
+                            string_id<map_data_summary> new_passable )
+{
+    point_abs_om overmap_coord;
+    tripoint_om_omt omt_coord;
+    std::tie( overmap_coord, omt_coord ) = project_remain<coords::om>( p );
+    if( overmap_coord != loc ) {
+        return;
+    }
+    std::shared_ptr<map_data_summary> &ptr = layer[omt_coord.z() +
+            OVERMAP_DEPTH].map_cache[omt_coord.xy()];
+    // overmap pinky promises to never write to this map_data_summary.
+    // This is enforced by all writes to map_cache[] checking for placeholder == true.
+    // If so, we CoW to a new map_data_summary then edit that.
+    ptr = std::const_pointer_cast<map_data_summary>( map_data_placeholders::get_ptr(
+                new_passable ) );
+}
+
+void overmap::set_passable( const tripoint_abs_omt &p, const std::bitset<24 * 24> &new_passable )
+{
+    point_abs_om overmap_coord;
+    tripoint_om_omt omt_coord;
+    std::tie( overmap_coord, omt_coord ) = project_remain<coords::om>( p );
+    if( overmap_coord != loc ) {
+        return;
+    }
+    std::shared_ptr<map_data_summary> &ptr = layer[omt_coord.z() +
+            OVERMAP_DEPTH].map_cache[omt_coord.xy()];
+    if( !ptr ) {
+        // Oh no we aren't populated???
+        // Promote to error later.
+        return;
+    }
+    ptr = std::make_shared<map_data_summary>( new_passable );
+}
+
+bool overmap::inbounds( const tripoint_abs_ms &p )
+{
+    point_abs_om overmap_coord;
+    tripoint_om_omt omt_within_overmap;
+    std::tie( overmap_coord, omt_within_overmap ) =
+        project_remain<coords::om>( project_to<coords::omt> ( p ) );
+    return overmap_coord == loc;
+}
+
 bool overmap::inbounds( const tripoint_om_omt &p, int clearance )
 {
     static constexpr tripoint_om_omt overmap_boundary_min( 0, 0, -OVERMAP_DEPTH );
@@ -3649,6 +3785,8 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
             for( int j = 0; j < OMAPY; j++ ) {
                 // NOLINTNEXTLINE(modernize-loop-convert)
                 for( int i = 0; i < OMAPX; i++ ) {
+                    set_passable( project_combine( loc, tripoint_om_omt( i, j, z ) ),
+                                  omt_outside_defined_omap->get_type_id()->default_map_data );
                     layer[z + OVERMAP_DEPTH].terrain[i][j] = omt_outside_defined_omap;
                 }
             }
@@ -3658,65 +3796,71 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
     std::vector<Highway_path> highway_paths;
     calculate_urbanity();
     calculate_forestosity();
-    if( get_option<bool>( "OVERMAP_POPULATE_OUTSIDE_CONNECTIONS_FROM_NEIGHBORS" ) ) {
+    if( settings->neighbor_connections ) {
         populate_connections_out_from_neighbors( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         place_rivers( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_LAKES" ) ) {
+    if( settings->overmap_lake ) {
         place_lakes( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_OCEANS" ) ) {
+    if( settings->overmap_ocean ) {
         place_oceans( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FORESTS" ) ) {
+    if( settings->overmap_forest ) {
         place_forests();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_SWAMPS" ) ) {
+    if( settings->overmap_forest && settings->place_swamps ) {
         place_swamps();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RAVINES" ) ) {
+    if( settings->overmap_ravine ) {
         place_ravines();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         // Polish rivers now so highways get the correct predecessors rather than river_center
         polish_river( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+    if( settings->overmap_highway ) {
         highway_paths = place_highways( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_CITIES" ) ) {
+    if( settings->city_spec ) {
         place_cities();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FOREST_TRAILS" ) ) {
+    if( settings->overmap_highway ) {
+        place_highway_interchanges( highway_paths );
+    }
+    if( settings->city_spec ) {
+        build_cities();
+    }
+    if( settings->forest_trail ) {
         place_forest_trails();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RAILROADS_BEFORE_ROADS" ) ) {
-        if( get_option<bool>( "OVERMAP_PLACE_RAILROADS" ) ) {
+    if( settings->place_railroads_before_roads ) {
+        if( settings->place_railroads ) {
             place_railroads( neighbor_overmaps );
         }
-        if( get_option<bool>( "OVERMAP_PLACE_ROADS" ) ) {
+        if( settings->place_roads ) {
             place_roads( neighbor_overmaps );
         }
     } else {
-        if( get_option<bool>( "OVERMAP_PLACE_ROADS" ) ) {
+        if( settings->place_roads ) {
             place_roads( neighbor_overmaps );
         }
-        if( get_option<bool>( "OVERMAP_PLACE_RAILROADS" ) ) {
+        if( settings->place_railroads ) {
             place_railroads( neighbor_overmaps );
         }
     }
-    if( get_option<bool>( "OVERMAP_PLACE_SPECIALS" ) ) {
+    if( settings->place_specials ) {
         place_specials( enabled_specials );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+    if( settings->overmap_highway ) {
         finalize_highways( highway_paths );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FOREST_TRAILHEADS" ) ) {
+    if( settings->forest_trail ) {
         place_forest_trailheads();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         polish_river( neighbor_overmaps ); // Polish again for placed specials
     }
 
@@ -4348,155 +4492,173 @@ void mongroup::wander( const overmap &om )
     }
 }
 
+horde_entity &overmap::spawn_monster( const tripoint_abs_ms &p, mtype_id id )
+{
+    return ( *hordes.spawn_entity( p, id ) )->second;
+}
+
+// Seeks through the submap looking for open areas.
+// Cursor is passed in to track progress across multiple calls.
+// An alternative is just returning a shuffled vector of open spaces to consume.
+std::optional<tripoint_om_ms> overmap::find_open_space_in_submap( const tripoint_om_ms
+        &submap_origin, point_rel_ms &cursor )
+{
+    for( ; cursor.y() < SEEX; cursor.y()++ ) {
+        do {
+            if( passable( submap_origin + cursor ) ) {
+                return { submap_origin + cursor };
+            }
+            // We want to preserve the initial value of cursor but still loop,
+            // this structure accomplishes that.
+            if( ++cursor.x() >= SEEX ) {
+                cursor.x() = 0;
+                break;
+            }
+        } while( true );
+    }
+    // Ran out of space on the submap!
+    return std::optional<tripoint_om_ms>();
+}
+
+void overmap::spawn_monsters( const tripoint_om_sm &p, std::vector<monster> &monsters )
+{
+    tripoint_om_ms submap_origin = project_to<coords::ms>( p );
+    point_rel_ms cursor{ 0, 0 };
+    for( monster &mon_to_spawn : monsters ) {
+        std::optional<tripoint_om_ms> open_space =
+            find_open_space_in_submap( submap_origin, cursor );
+        if( !open_space ) {
+            // Ran out of space on the submap!
+            return;
+        }
+        hordes.spawn_entity( project_combine( pos(), *open_space ), mon_to_spawn );
+    }
+}
+
+void overmap::spawn_mongroup( const tripoint_om_sm &p, const mongroup_id &type, int count )
+{
+    tripoint_om_ms submap_origin = project_to<coords::ms>( p );
+    point_rel_ms cursor{ 0, 0 };
+    while( count > 0 ) {
+        for( MonsterGroupResult &result : MonsterGroupManager::GetResultFromGroup( type, &count ) ) {
+            for( int i = 0; i < result.pack_size; ++i ) {
+
+                std::optional<tripoint_om_ms> open_space =
+                    find_open_space_in_submap( submap_origin, cursor );
+                if( !open_space ) {
+                    // Ran out of space on the submap!
+                    return;
+                }
+                hordes.spawn_entity( project_combine( pos(), *open_space ), result.name );
+            }
+        }
+    }
+}
+
+horde_entity *overmap::entity_at( const tripoint_om_ms &p )
+{
+    return hordes.entity_at( p );
+}
+
+// This should really be const but I don't want to mess with it right now.
+std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> overmap::hordes_at(
+    const tripoint_om_omt &p, int filter )
+{
+    return hordes.entity_group_at( p, filter );
+}
+
 /**
  * Moves hordes around the map according to their behaviour and target.
- * Also, emerge hordes from monsters that are outside the player's view. Currently only works for zombies.
+ * If they enter the coordinate space of the loaded map, spawn them there.
  */
 void overmap::move_hordes()
 {
-    // Prevent hordes to be moved twice by putting them in here after moving.
-    decltype( zg ) tmpzg;
-    //MOVE ZOMBIE GROUPS
-    for( auto it = zg.begin(); it != zg.end(); ) {
-        mongroup &mg = it->second;
-        if( !mg.horde || mg.behaviour == mongroup::horde_behaviour::nemesis ) {
-            //nemesis hordes have their own move function
-            ++it;
+    // TODO: throttle processing of monsters.
+    // Specifically for throttling, only a process a subset of the eligible monster buckets per invocation.
+    std::unordered_map<tripoint_abs_ms, horde_entity> migrating_hordes;
+    for( horde_map::iterator mon = hordes.get_view( horde_map_flavors::active ).begin(),
+         mon_end = hordes.end(); mon != mon_end; ) {
+        // This might have an issue where a monster prevented from acting possibly should
+        // get another chance to act?
+        // This is here so that when a entity moves from one bucket to another it doesn't
+        // get a second set of moves.
+        if( mon->second.last_processed == calendar::turn ) {
+            mon++;
             continue;
         }
-
-        if( mg.behaviour == mongroup::horde_behaviour::none ) {
-            mg.behaviour =
-                one_in( 2 ) ? mongroup::horde_behaviour::city : mongroup::horde_behaviour::roam;
-        }
-
-        // Gradually decrease interest.
-        mg.dec_interest( 1 );
-
-        if( ( mg.abs_pos.xy() == mg.target ) || mg.interest <= 15 ) {
-            mg.wander( *this );
-        }
-
-        // Decrease movement chance according to the terrain we're currently on.
-        const oter_id &walked_into = ter( project_to<coords::omt>( mg.rel_pos() ) );
-        int movement_chance = 1;
-        if( walked_into == oter_forest || walked_into == oter_forest_water ) {
-            movement_chance = 3;
-        } else if( walked_into == oter_forest_thick ) {
-            movement_chance = 6;
-        } else if( walked_into == oter_river_center ) {
-            movement_chance = 10;
-        }
-
-        // If the average horde speed is 50% that of normal, then the chance to
-        // move should be 1/2 what it would be if the speed was 100%.
-        // Since the max speed for a horde is one map space per 2.5 minutes,
-        // choose that to be the speed of the fastest horde monster, which is
-        // roughly 200 at the time of writing. So a horde with average speed
-        // 200 or over will move at max speed, and slower hordes will move less
-        // frequently. The average horde speed for regular Z's is around 100,
-        // or one space per 5 minutes.
-        if( one_in( movement_chance ) && rng( 0, 100 ) < mg.interest && rng( 0, 200 ) < mg.avg_speed() ) {
-            // TODO: Handle moving to adjacent overmaps.
-            if( mg.abs_pos.x() > mg.target.x() ) {
-                mg.abs_pos.x()--;
+        mon->second.last_processed = calendar::turn;
+        // If we have a goal, proceed toward it.
+        if( mon->second.tracking_intensity > 0 && mon->first != mon->second.destination ) {
+            mon->second.tracking_intensity--;
+            mon->second.moves += mon->second.type_id->speed;
+            if( mon->second.moves <= 0 ) {
+                mon++;
+                continue;
             }
-            if( mg.abs_pos.x() < mg.target.x() ) {
-                mg.abs_pos.x()++;
+            std::vector<tripoint_abs_ms> viable_candidates;
+            // Call up to overmapbuffer in case it needs to dispatch to an adjacent overmap.
+            for( const tripoint_abs_ms &candidate :
+                 squares_closer_to( mon->first, mon->second.destination ) ) {
+                // Just filter out cross-level candidates for now.
+                if( candidate.z() == mon->first.z() && overmap_buffer.passable( candidate ) ) {
+                    viable_candidates.push_back( candidate );
+                }
             }
-            if( mg.abs_pos.y() > mg.target.y() ) {
-                mg.abs_pos.y()--;
+            if( viable_candidates.empty() ) {
+                // We're stuck.
+                // TODO: try to wander to get around obstacles, or smash.
+                mon++;
+                continue;
             }
-            if( mg.abs_pos.y() < mg.target.y() ) {
-                mg.abs_pos.y()++;
+            // TODO: nuanced move costs.
+            mon->second.moves -= 100;
+            if( viable_candidates.front() == mon->second.destination ) {
+                mon->second.tracking_intensity = 0;
+            }
+            // squares_closer_to already orders candidates by how close to the main line they are.
+            // For now just pick the first non-blocked square, later we could fuzz/stumble.
+            if( get_map().inbounds( viable_candidates.front() ) ) {
+                monster *placed_monster = nullptr;
+                if( mon->second.monster_data ) {
+                    placed_monster = g->place_critter_around( make_shared_fast<monster>( *mon->second.monster_data ),
+                                     get_map().get_bub( viable_candidates.front() ), 1 );
+                } else {
+                    placed_monster = g->place_critter_around( mon->second.type_id->id,
+                                     get_map().get_bub( viable_candidates.front() ), 1 );
+                }
+                if( placed_monster == nullptr ) {
+                    // If the tile is occupied it can't enter, just don't move for now.
+                    mon++;
+                    continue;
+                }
+                // TODO: this should be bundled into a constructor.
+                if( mon->second.tracking_intensity > 0 ) {
+                    placed_monster->wander_to( mon->second.destination, mon->second.tracking_intensity );
+                }
+                mon = hordes.erase( mon );
+                continue;
             }
 
-            // Erase the group at it's old location, add the group with the new location
-            tmpzg.emplace( mg.rel_pos(), mg );
-            zg.erase( it++ );
-        } else {
-            ++it;
+            horde_map::iterator moving_mon = mon;
+            // Advance the loop iterator past the current node, which we will be removing.
+            mon++;
+            auto monster_node = hordes.extract( moving_mon );
+            monster_node.key() = viable_candidates.front();
+            migrating_hordes.insert( std::move( monster_node ) );
         }
     }
-    // and now back into the monster group map.
-    zg.insert( tmpzg.begin(), tmpzg.end() );
-
-    if( get_option<bool>( "WANDER_SPAWNS" ) ) {
-
-        // Re-absorb zombies into hordes.
-        // Scan over monsters outside the player's view and place them back into hordes.
-        auto monster_map_it = monster_map.begin();
-        while( monster_map_it != monster_map.end() ) {
-            const tripoint_om_sm &p = monster_map_it->first;
-            monster &this_monster = monster_map_it->second;
-
-            // Only zombies on z-level 0 may join hordes.
-            if( p.z() != 0 ) {
-                ++monster_map_it;
-                continue;
-            }
-
-            // Check if the monster is a zombie.
-            const mtype &type = *this_monster.type;
-            if(
-                !type.species.count( species_ZOMBIE ) || // Only add zombies to hordes.
-                this_monster.get_speed() <= 30 || // So are very slow zombies, like crawling zombies.
-                !this_monster.will_join_horde( INT_MAX ) || // So are zombies who won't join a horde of any size.
-                !this_monster.mission_ids.empty() // We mustn't delete monsters that are related to missions.
-            ) {
-                // Don't delete the monster, just increment the iterator.
-                ++monster_map_it;
-                continue;
-            }
-
-            // Only monsters in the open (fields, forests, roads) are eligible to wander
-            const oter_id &om_here = ter( project_to<coords::omt>( p ) );
-            if( !is_ot_match( "field", om_here, ot_match_type::contains ) &&
-                !is_ot_match( "road", om_here, ot_match_type::contains ) &&
-                !is_ot_match( "forest", om_here, ot_match_type::prefix ) &&
-                !is_ot_match( "swamp", om_here, ot_match_type::prefix ) ) {
-                ++monster_map_it;
-                continue;
-            }
-
-            // Scan for compatible hordes in this area, selecting the largest.
-            mongroup *add_to_group = nullptr;
-            auto group_bucket = zg.equal_range( p );
-            std::vector<monster>::size_type add_to_horde_size = 0;
-            std::for_each( group_bucket.first, group_bucket.second,
-            [&]( std::pair<const tripoint_om_sm, mongroup> &horde_entry ) {
-                mongroup &horde = horde_entry.second;
-
-                // We only absorb zombies into GROUP_ZOMBIE hordes
-                if( horde.horde && !horde.monsters.empty() && horde.type == GROUP_ZOMBIE &&
-                    horde.monsters.size() > add_to_horde_size ) {
-                    add_to_group = &horde;
-                    add_to_horde_size = horde.monsters.size();
-                }
-            } );
-
-            // Check again if the zombie will join the largest horde, now that we know the accurate size.
-            if( this_monster.will_join_horde( add_to_horde_size ) ) {
-                // If there is no horde to add the monster to, create one.
-                if( add_to_group == nullptr ) {
-                    tripoint_abs_sm abs_pos = project_combine( pos(), p );
-                    mongroup m( GROUP_ZOMBIE, abs_pos, 0 );
-                    m.horde = true;
-                    m.monsters.push_back( this_monster );
-                    m.interest = 0; // Ensures that we will select a new target.
-                    add_mon_group( m );
-                } else {
-                    add_to_group->monsters.push_back( this_monster );
-                }
-            } else { // Bad luck--the zombie would have joined a larger horde, but not this one.  Skip.
-                // Don't delete the monster, just increment the iterator.
-                ++monster_map_it;
-                continue;
-            }
-
-            // Delete the monster, continue iterating.
-            monster_map_it = monster_map.erase( monster_map_it );
+    while( !migrating_hordes.empty() ) {
+        auto monster_node = migrating_hordes.extract( migrating_hordes.begin() );
+        point_abs_om dest_omp;
+        tripoint_om_sm dest_sm;
+        std::tie( dest_omp, dest_sm ) = project_remain<coords::om>( project_to<coords::sm>
+                                        ( monster_node.key() ) );
+        overmap *dest_om = overmap_buffer.get_existing( dest_omp );
+        if( dest_om == nullptr ) {
+            debugmsg( "A horde entity tried to wander into a non-existent overmap." );
+            continue;
         }
+        dest_om->hordes.insert( std::move( monster_node ) );
     }
 }
 
@@ -4598,10 +4760,9 @@ bool overmap::remove_nemesis()
 * @param p location of signal relative to this overmap origin
 * @param sig_power - power of signal or max distance for reaction of zombies
 */
-void overmap::signal_hordes( const tripoint_rel_sm &p_rel, const int sig_power )
+void overmap::signal_hordes( const tripoint_abs_ms &p, const int sig_power )
 {
-    tripoint_om_sm p( p_rel.raw() );
-    tripoint_abs_sm absp = project_combine( pos(), p );
+    tripoint_abs_sm absp = project_to<coords::sm>( p );
     for( auto &elem : zg ) {
         mongroup &mg = elem.second;
         if( !mg.horde ) {
@@ -4638,6 +4799,19 @@ void overmap::signal_hordes( const tripoint_rel_sm &p_rel, const int sig_power )
                 add_msg_debug( debugmode::DF_OVERMAP, "horde set interest %d dist %d", min_capped_inter, dist );
             }
         }
+    }
+    hordes.signal_entities( p, sig_power );
+}
+
+void overmap::alert_entity( const tripoint_om_ms &location, const tripoint_abs_ms &destination,
+                            int intensity )
+{
+    horde_map::iterator target = hordes.find( location );
+    if( target != hordes.end() && intensity > target->second.tracking_intensity ) {
+        auto monster_node = hordes.extract( target );
+        monster_node.mapped().tracking_intensity = intensity;
+        monster_node.mapped().destination = destination;
+        hordes.insert( std::move( monster_node ) );
     }
 }
 
@@ -4718,7 +4892,7 @@ void overmap::place_forest_trails()
         return current_terrain == oter_forest || current_terrain == oter_forest_thick ||
                current_terrain == oter_forest_water;
     };
-    const forest_trail_settings &forest_trail = settings->forest_trail;
+    const region_settings_forest_trail &forest_trail = settings->get_settings_forest_trail();
 
     for( int i = 0; i < OMAPX; i++ ) {
         for( int j = 0; j < OMAPY; j++ ) {
@@ -4839,6 +5013,8 @@ void overmap::place_forest_trailheads()
         return;
     }
 
+    const region_settings_forest_trail &settings_forest_trail = settings->get_settings_forest_trail();
+
     // Trailheads may be placed if all of the following are true:
     // 1. we're at a forest_trail_end_north/south/west/east,
     // 2. we're within trailhead_road_distance from an existing road
@@ -4849,7 +5025,7 @@ void overmap::place_forest_trailheads()
         bool close = false;
         for( const tripoint_om_omt &nearby_point : closest_points_first(
                  trailhead,
-                 settings->forest_trail.trailhead_road_distance
+                 settings_forest_trail.trailhead_road_distance
              ) ) {
             if( check_ot( "road", ot_match_type::contains, nearby_point ) ) {
                 close = true;
@@ -4860,8 +5036,8 @@ void overmap::place_forest_trailheads()
 
     const auto try_place_trailhead_special = [&]( const tripoint_om_omt & trail_end,
     const om_direction::type & dir ) {
-        overmap_special_id trailhead = settings->forest_trail.trailheads.pick();
-        if( one_in( settings->forest_trail.trailhead_chance ) &&
+        overmap_special_id trailhead = settings_forest_trail.trailheads.pick();
+        if( one_in( settings_forest_trail.trailhead_chance ) &&
             trailhead_close_to_road( trail_end ) &&
             can_place_special( *trailhead, trail_end, dir, false ) ) {
             const city &nearest_city = get_nearest_city( trail_end );
@@ -4882,6 +5058,7 @@ void overmap::place_forest_trailheads()
 
 void overmap::place_forests()
 {
+    const region_settings_forest &settings_forest = settings->get_settings_forest();
     const oter_id default_oter_id( settings->default_oter[OVERMAP_DEPTH] );
     const om_noise::om_noise_layer_forest f( global_base_point(), g->get_seed() );
 
@@ -4899,9 +5076,9 @@ void overmap::place_forests()
             const float n = f.noise_at( p.xy() );
 
             // If the noise here meets our threshold, turn it into a forest.
-            if( n + forest_size_adjust > settings->overmap_forest.noise_threshold_forest_thick ) {
+            if( n + forest_size_adjust > settings_forest.noise_threshold_forest_thick ) {
                 ter_set( p, oter_forest_thick );
-            } else if( n + forest_size_adjust > settings->overmap_forest.noise_threshold_forest ) {
+            } else if( n + forest_size_adjust > settings_forest.noise_threshold_forest ) {
                 ter_set( p, oter_forest );
             }
         }
@@ -4941,6 +5118,7 @@ bool overmap::guess_has_lake( const point_abs_om &p, const double noise_threshol
 
 void overmap::place_swamps()
 {
+    const region_settings_forest &settings_forest = settings->get_settings_forest();
     // Buffer our river terrains by a variable radius and increment a counter for the location each
     // time it's included in a buffer. It's a floodplain that we'll then intersect later with some
     // noise to adjust how frequently it occurs.
@@ -4955,8 +5133,8 @@ void overmap::place_swamps()
                 std::vector<point_om_omt> buffered_points =
                     closest_points_first(
                         pos.xy(),
-                        rng( settings->overmap_forest.river_floodplain_buffer_distance_min,
-                             settings->overmap_forest.river_floodplain_buffer_distance_max ) );
+                        rng( settings_forest.river_floodplain_buffer_distance_min,
+                             settings_forest.river_floodplain_buffer_distance_max ) );
                 for( const point_om_omt &p : buffered_points )  {
                     if( !inbounds( p ) ) {
                         continue;
@@ -4982,12 +5160,12 @@ void overmap::place_swamps()
             // If this was a part of our buffered floodplain, and the noise here meets the threshold, and the one_in rng
             // triggers, then we should flood this location and make it a swamp.
             const bool should_flood = ( floodplain[x][y] > 0 && !one_in( floodplain[x][y] ) && f.noise_at( { x, y } )
-                                        > settings->overmap_forest.noise_threshold_swamp_adjacent_water );
+                                        > settings_forest.noise_threshold_swamp_adjacent_water );
 
             // If this location meets our isolated swamp threshold, regardless of floodplain values, we'll make it
             // into a swamp.
             const bool should_isolated_swamp = f.noise_at( pos.xy() ) >
-                                               settings->overmap_forest.noise_threshold_swamp_isolated;
+                                               settings_forest.noise_threshold_swamp_isolated;
             if( should_flood || should_isolated_swamp )  {
                 ter_set( pos, oter_forest_water );
             }
@@ -5007,38 +5185,22 @@ void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps
 
     // At least 3 exit points, to guarantee road continuity across overmaps
     if( roads_out.size() < 3 ) {
-
-        // x and y coordinates for a point on the edge in each direction
-        // -1 represents a variable one dimensional coordinate along that edge
-        // east == point( OMAPX - 1, n ); north == point( n, 0 );
-        static constexpr std::array<int, 4> edge_coords_x = {OMAPX - 1, -1, 0, -1};
-        static constexpr std::array<int, 4> edge_coords_y = {-1, OMAPY - 1, -1, 0};
-
-        // all the points on an edge except the 10 on each end
-        std::array < int, OMAPX - 20 > omap_num;
-        for( int i = 0; i < OMAPX - 20; i++ ) {
-            omap_num[i] = i + 10;
-        }
-
-        std::array < size_t, 4 > dirs = {0, 1, 2, 3};
-        std::shuffle( dirs.begin(), dirs.end(), rng_get_engine() );
-
-        for( size_t dir : dirs ) {
+        for( const om_direction::type dir : om_direction::all ) {
             // only potentially add a new random connection toward ungenerated overmaps
-            if( neighbor_overmaps[dir] == nullptr ) {
-                std::shuffle( omap_num.begin(), omap_num.end(), rng_get_engine() );
-                for( const int &i : omap_num ) {
-                    tripoint_om_omt tmp = tripoint_om_omt(
-                                              edge_coords_x[dir] >= 0 ? edge_coords_x[dir] : i,
-                                              edge_coords_y[dir] >= 0 ? edge_coords_y[dir] : i,
-                                              0 );
+            if( neighbor_overmaps[static_cast<int>( dir )] == nullptr ) {
+                // all the points on an edge except the 10 on each corner
+                std::vector<tripoint_om_omt> border = get_border( dir, 0, 10 );
+                std::shuffle( border.begin(), border.end(), rng_get_engine() );
+                for( const tripoint_om_omt &p : border ) {
                     // Make sure these points don't conflict with rivers.
-                    if( !( is_river( ter( tmp ) ) ||
-                           // avoid adjacent rivers
+                    if( !( is_river( ter( p ) ) ||
+                           // avoid immediately adjacent rivers
                            // east/west of a point on the north/south edge, and vice versa
-                           is_river( ter( tmp + point_rel_omt( four_adjacent_offsets[( dir + 1 ) % 4] ) ) ) ||
-                           is_river( ter( tmp + point_rel_omt( four_adjacent_offsets[( dir + 3 ) % 4] ) ) ) ) ) {
-                        roads_out.push_back( tmp );
+                           is_river( ter( p + point_rel_omt(
+                                              four_adjacent_offsets[static_cast<int>( om_direction::turn_right( dir ) )] ) ) ) ||
+                           is_river( ter( p + point_rel_omt(
+                                              four_adjacent_offsets[static_cast<int>( om_direction::turn_left( dir ) )] ) ) ) ) ) {
+                        roads_out.push_back( p );
                         break;
                     }
                 }
@@ -5167,12 +5329,29 @@ std::vector<tripoint_om_omt> overmap::get_border( const point_rel_om &direction,
     return get_neighbor_border( flip_direction, z, distance_corner );
 }
 
+std::vector<tripoint_om_omt> overmap::get_border( const om_direction::type direction, int z,
+        int distance_corner )
+{
+    return get_border( point_rel_om( four_adjacent_offsets[static_cast<int>( direction )] ), z,
+                       distance_corner );
+}
+
 void overmap::calculate_forestosity()
 {
-    float northern_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_NORTH" );
-    float eastern_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_EAST" );
-    float western_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_WEST" );
-    float southern_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_SOUTH" );
+    if( !settings->overmap_forest ) {
+        forest_size_adjust = 0;
+        forestosity = 0;
+        return;
+    }
+    const region_settings_forest &settings_forest = settings->get_settings_forest();
+    float northern_forest_increase = settings_forest.forest_increase[static_cast<int>
+                                     ( om_direction::type::north )];
+    float eastern_forest_increase = settings_forest.forest_increase[static_cast<int>
+                                    ( om_direction::type::east )];
+    float western_forest_increase = settings_forest.forest_increase[static_cast<int>
+                                    ( om_direction::type::west )];
+    float southern_forest_increase = settings_forest.forest_increase[static_cast<int>
+                                     ( om_direction::type::south )];
     const point_abs_om this_om = pos();
     if( western_forest_increase != 0 && this_om.x() < 0 ) {
         forest_size_adjust -= this_om.x() * western_forest_increase;
@@ -5189,9 +5368,8 @@ void overmap::calculate_forestosity()
     forestosity = forest_size_adjust * 25.0f;
     //debugmsg( "forestosity = %1.2f at OM %i, %i", forestosity, this_om.x(), this_om.y() );
     // make sure forest size never totally overwhelms the map
-    forest_size_adjust = std::min( forest_size_adjust,
-                                   get_option<float>( "OVERMAP_FOREST_LIMIT" ) - static_cast<float>
-                                   ( settings->overmap_forest.noise_threshold_forest ) );
+    forest_size_adjust = std::min<float>( forest_size_adjust,
+                                          settings_forest.max_forest - settings_forest.noise_threshold_forest );
 }
 
 void overmap::calculate_urbanity()
@@ -5200,10 +5378,12 @@ void overmap::calculate_urbanity()
     if( op_city_size <= 0 ) {
         return;
     }
-    int northern_urban_increase = get_option<int>( "OVERMAP_URBAN_INCREASE_NORTH" );
-    int eastern_urban_increase = get_option<int>( "OVERMAP_URBAN_INCREASE_EAST" );
-    int western_urban_increase = get_option<int>( "OVERMAP_URBAN_INCREASE_WEST" );
-    int southern_urban_increase = get_option<int>( "OVERMAP_URBAN_INCREASE_SOUTH" );
+    int northern_urban_increase = settings->urban_increase[static_cast<int>
+                                  ( om_direction::type::north )];
+    int eastern_urban_increase = settings->urban_increase[static_cast<int>( om_direction::type::east )];
+    int western_urban_increase = settings->urban_increase[static_cast<int>( om_direction::type::west )];
+    int southern_urban_increase = settings->urban_increase[static_cast<int>
+                                  ( om_direction::type::south )];
     if( northern_urban_increase == 0 && eastern_urban_increase == 0 && western_urban_increase == 0 &&
         southern_urban_increase == 0 ) {
         return;
@@ -5425,7 +5605,8 @@ bool overmap::build_lab(
 
 void overmap::place_ravines()
 {
-    if( settings->overmap_ravine.num_ravines == 0 ) {
+    const region_settings_ravine &settings_ravine = settings->get_settings_ravine();
+    if( settings_ravine.num_ravines == 0 ) {
         return;
     }
 
@@ -5445,20 +5626,24 @@ void overmap::place_ravines()
     // A path is generated for each of ravine, and all its constituent points are stored within the
     // rift_points set. In the code block below, the set is then used to determine edges and place the
     // actual terrain pieces of the ravine.
-    for( int n = 0; n < settings->overmap_ravine.num_ravines; n++ ) {
-        const point_rel_omt offset( rng( -settings->overmap_ravine.ravine_range,
-                                         settings->overmap_ravine.ravine_range ),
-                                    rng( -settings->overmap_ravine.ravine_range, settings->overmap_ravine.ravine_range ) );
+    const int ravine_range = settings_ravine.ravine_range;
+    const int ravine_width = settings_ravine.ravine_width;
+    const int ravine_depth = settings_ravine.ravine_depth;
+
+    for( int n = 0; n < settings_ravine.num_ravines; n++ ) {
+        const point_rel_omt offset( rng( -ravine_range,
+                                         ravine_range ),
+                                    rng( -ravine_range, ravine_range ) );
         const point_om_omt origin( rng( 0, OMAPX ), rng( 0, OMAPY ) );
         const point_om_omt destination = origin + offset;
-        if( !inbounds( destination, settings->overmap_ravine.ravine_width * 3 ) ) {
+        if( !inbounds( destination, ravine_width * 3 ) ) {
             continue;
         }
         const auto path = pf::greedy_path( origin, destination, point_om_omt( OMAPX, OMAPY ), estimate );
         for( const auto &node : path.nodes ) {
-            for( int i = 1 - settings->overmap_ravine.ravine_width; i < settings->overmap_ravine.ravine_width;
+            for( int i = 1 - ravine_width; i < ravine_width;
                  i++ ) {
-                for( int j = 1 - settings->overmap_ravine.ravine_width; j < settings->overmap_ravine.ravine_width;
+                for( int j = 1 - ravine_width; j < ravine_width;
                      j++ ) {
                     const point_om_omt n = node.pos + point( j, i );
                     if( inbounds( n, 1 ) ) {
@@ -5482,8 +5667,8 @@ void overmap::place_ravines()
                 }
             }
         }
-        for( int z = 0; z >= settings->overmap_ravine.ravine_depth; z-- ) {
-            if( z == settings->overmap_ravine.ravine_depth ) {
+        for( int z = 0; z >= ravine_depth; z-- ) {
+            if( z == ravine_depth ) {
                 ter_set( tripoint_om_omt( p, z ), edge ? rift_floor_edge : rift_floor );
             } else {
                 ter_set( tripoint_om_omt( p, z ), edge ? rift_edge : rift );
@@ -6373,7 +6558,7 @@ void overmap::place_mongroups()
 
                 tripoint_abs_omt city_center = project_combine( elem.pos_om, tripoint_om_omt( elem.pos, 0 ) );
 
-                std::vector<tripoint_abs_sm> submap_list;
+                std::vector<tripoint_om_sm> submap_list;
 
                 // gather all of the points in range to test for viable placement of hordes.
                 for( tripoint_om_omt const &temp_omt : points_in_radius( tripoint_om_omt( elem.pos, 0 ),
@@ -6381,17 +6566,16 @@ void overmap::place_mongroups()
 
                     // running too close to the edge of the overmap can get us cascading mapgen
                     if( inbounds( temp_omt, 2 ) ) {
-
                         tripoint_abs_omt target_omt = project_combine( elem.pos_om, temp_omt );
 
                         // right now we're only placing city horde spawns on roads, for simplicity.
                         // this can be replaced with an OMT flag for later for better flexibility.
                         if( overmap_buffer.ter( target_omt )->get_type_id() == oter_type_road ) {
-                            tripoint_abs_sm this_sm = project_to<coords::sm>( target_omt );
+                            tripoint_om_sm this_sm = project_to<coords::sm>( temp_omt );
 
                             // for some reason old style spawns are submap-aligned.
                             // get all four quadrants for better distribution.
-                            std::vector<tripoint_abs_sm> local_sm_list;
+                            std::vector<tripoint_om_sm> local_sm_list;
                             local_sm_list.push_back( this_sm );
                             local_sm_list.push_back( this_sm + point::east );
                             local_sm_list.push_back( this_sm + point::south );
@@ -6426,21 +6610,11 @@ void overmap::place_mongroups()
                 // if there aren't enough roads, we'll just reuse them, re-shuffled.
                 while( desired_zombies > 0 ) {
                     std::shuffle( submap_list.begin(), submap_list.end(), rng_get_engine() );
-                    for( tripoint_abs_sm const &s : submap_list ) {
+                    for( tripoint_om_sm const &s : submap_list ) {
                         if( desired_zombies <= 0 ) {
                             break;
                         }
-                        mongroup m( GROUP_ZOMBIE, s, desired_zombies > 10 ? 10 : desired_zombies );
-
-                        // with wander_spawns (aka wandering hordes) off, these become 'normal'
-                        // zombie spawns and behave like ants, triffids, fungals, etc.
-                        // they won't try very hard to get placed in the world, so there will
-                        // probably be fewer zombies than expected.
-                        m.horde = true;
-                        if( get_option<bool>( "WANDER_SPAWNS" ) ) {
-                            m.wander( *this );
-                        }
-                        add_mon_group( m );
+                        spawn_mongroup( s, GROUP_ZOMBIE_HORDE, desired_zombies > 10 ? 10 : desired_zombies );
                         desired_zombies -= 10;
                     }
                 }
@@ -6471,64 +6645,90 @@ void overmap::place_mongroups()
         }
     }
 
-    // Now place ocean mongroup. Weights may need to be altered.
-    const om_noise::om_noise_layer_ocean f( global_base_point(), g->get_seed() );
-    const point_abs_om this_om = pos();
-    const int northern_ocean = settings->overmap_ocean.ocean_start_north;
-    const int eastern_ocean = settings->overmap_ocean.ocean_start_east;
-    const int western_ocean = settings->overmap_ocean.ocean_start_west;
-    const int southern_ocean = settings->overmap_ocean.ocean_start_south;
-
-    // noise threshold adjuster for deep ocean. Increase to make deep ocean move further from the shore.
-    constexpr float DEEP_OCEAN_THRESHOLD_ADJUST = 1.25;
-
-    // code taken from place_oceans, but noise threshold increased to determine "deep ocean".
-    const auto is_deep_ocean = [&]( const point_om_omt & p ) {
-        // credit to ehughsbaird for thinking up this inbounds solution to infinite flood fill lag.
-        if( northern_ocean == 0 && eastern_ocean == 0 && western_ocean == 0 && southern_ocean == 0 ) {
-            // you know you could just turn oceans off in global_settings.json right?
-            return false;
-        }
-        bool inbounds = p.x() > -5 && p.y() > -5 && p.x() < OMAPX + 5 && p.y() < OMAPY + 5;
-        if( !inbounds ) {
-            return false;
-        }
-        float ocean_adjust = calculate_ocean_gradient( p, this_om );
-        if( ocean_adjust == 0.0f ) {
-            // It's too soon!  Too soon for an ocean!!  ABORT!!!
-            return false;
-        }
-        return f.noise_at( p ) + ocean_adjust > settings->overmap_ocean.noise_threshold_ocean *
-               DEEP_OCEAN_THRESHOLD_ADJUST;
-    };
-
-    for( int x = 3; x < OMAPX - 3; x += 7 ) {
-        for( int y = 3; y < OMAPY - 3; y += 7 ) {
-            int ocean_count = 0;
-            for( int sx = x - 3; sx <= x + 3; sx++ ) {
-                for( int sy = y - 3; sy <= y + 3; sy++ ) {
-                    if( is_ocean( ter( { sx, sy, 0 } ) ) ) {
-                        ocean_count++;
+    if( settings->overmap_river || settings->overmap_lake ) {
+        // Figure out where rivers and lakes are, and place appropriate critters
+        for( int x = 3; x < OMAPX - 3; x += 7 ) {
+            for( int y = 3; y < OMAPY - 3; y += 7 ) {
+                int river_count = 0;
+                for( int sx = x - 3; sx <= x + 3; sx++ ) {
+                    for( int sy = y - 3; sy <= y + 3; sy++ ) {
+                        if( is_lake_or_river( ter( { sx, sy, 0 } ) ) ) {
+                            river_count++;
+                        }
                     }
                 }
+                if( river_count >= 25 && is_lake_or_river( ter( { x, y, 0 } ) ) ) {
+                    tripoint_om_omt p( x, y, 0 );
+                    float norm_factor = std::abs( GROUP_RIVER->freq_total / 1000.0f );
+                    unsigned int pop =
+                        std::round( norm_factor * rng( river_count * 8, river_count * 25 ) );
+                    spawn_mon_group(
+                        mongroup( GROUP_RIVER, project_combine( pos(), project_to<coords::sm>( p ) ),
+                                  pop ), 3 );
+                }
             }
-            bool am_deep = is_deep_ocean( { x, y } );
-            if( ocean_count >= 25 ) {
-                tripoint_om_omt p( x, y, 0 );
-                if( am_deep ) {
-                    float norm_factor = std::abs( GROUP_OCEAN_DEEP->freq_total / 1000.0f );
-                    unsigned int pop =
-                        std::round( norm_factor * rng( ocean_count * 8, ocean_count * 25 ) );
-                    spawn_mon_group(
-                        mongroup( GROUP_OCEAN_DEEP, project_combine( pos(), project_to<coords::sm>( p ) ),
-                                  pop ), 3 );
-                } else {
-                    float norm_factor = std::abs( GROUP_OCEAN_SHORE->freq_total / 1000.0f );
-                    unsigned int pop =
-                        std::round( norm_factor * rng( ocean_count * 8, ocean_count * 25 ) );
-                    spawn_mon_group(
-                        mongroup( GROUP_OCEAN_SHORE, project_combine( pos(), project_to<coords::sm>( p ) ),
-                                  pop ), 3 );
+        }
+    }
+    if( settings->overmap_ocean ) {
+        // Now place ocean mongroup. Weights may need to be altered.
+        const region_settings_ocean &settings_ocean = settings->get_settings_ocean();
+        const om_noise::om_noise_layer_ocean f( global_base_point(), g->get_seed() );
+        const point_abs_om this_om = pos();
+        const bool oceans_disabled = !settings_ocean.ocean_start_north.has_value() &&
+                                     !settings_ocean.ocean_start_east.has_value() &&
+                                     !settings_ocean.ocean_start_west.has_value() && !settings_ocean.ocean_start_south.has_value();
+
+        // noise threshold adjuster for deep ocean. Increase to make deep ocean move further from the shore.
+        constexpr float DEEP_OCEAN_THRESHOLD_ADJUST = 1.25;
+
+        // code taken from place_oceans, but noise threshold increased to determine "deep ocean".
+        const auto is_deep_ocean = [&]( const point_om_omt & p ) {
+            // credit to ehughsbaird for thinking up this inbounds solution to infinite flood fill lag.
+            if( oceans_disabled ) {
+                // you know you could just turn oceans off in global_settings.json right?
+                return false;
+            }
+            bool inbounds = p.x() > -5 && p.y() > -5 && p.x() < OMAPX + 5 && p.y() < OMAPY + 5;
+            if( !inbounds ) {
+                return false;
+            }
+            float ocean_adjust = calculate_ocean_gradient( p, this_om );
+            if( ocean_adjust == 0.0f ) {
+                // It's too soon!  Too soon for an ocean!!  ABORT!!!
+                return false;
+            }
+            return f.noise_at( p ) + ocean_adjust > settings_ocean.noise_threshold_ocean *
+                   DEEP_OCEAN_THRESHOLD_ADJUST;
+        };
+
+        for( int x = 3; x < OMAPX - 3; x += 7 ) {
+            for( int y = 3; y < OMAPY - 3; y += 7 ) {
+                int ocean_count = 0;
+                for( int sx = x - 3; sx <= x + 3; sx++ ) {
+                    for( int sy = y - 3; sy <= y + 3; sy++ ) {
+                        if( is_ocean( ter( { sx, sy, 0 } ) ) ) {
+                            ocean_count++;
+                        }
+                    }
+                }
+                bool am_deep = is_deep_ocean( { x, y } );
+                if( ocean_count >= 25 ) {
+                    tripoint_om_omt p( x, y, 0 );
+                    if( am_deep ) {
+                        float norm_factor = std::abs( GROUP_OCEAN_DEEP->freq_total / 1000.0f );
+                        unsigned int pop =
+                            std::round( norm_factor * rng( ocean_count * 8, ocean_count * 25 ) );
+                        spawn_mon_group(
+                            mongroup( GROUP_OCEAN_DEEP, project_combine( pos(), project_to<coords::sm>( p ) ),
+                                      pop ), 3 );
+                    } else {
+                        float norm_factor = std::abs( GROUP_OCEAN_SHORE->freq_total / 1000.0f );
+                        unsigned int pop =
+                            std::round( norm_factor * rng( ocean_count * 8, ocean_count * 25 ) );
+                        spawn_mon_group(
+                            mongroup( GROUP_OCEAN_SHORE, project_combine( pos(), project_to<coords::sm>( p ) ),
+                                      pop ), 3 );
+                    }
                 }
             }
         }

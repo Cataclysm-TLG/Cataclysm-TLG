@@ -56,8 +56,7 @@
       { "group": "toy_engine_kit", "prob": 1 },
       { "item": "radiocontrol", "prob": 25, "charges": [ 0, 50 ] },
       [ "omnicamera", 7 ],
-      [ "chem_nitric_acid", 1 ],
-      [ "solarpack", 10 ]
+      [ "chem_nitric_acid", 1 ]
     ]
   },
   {

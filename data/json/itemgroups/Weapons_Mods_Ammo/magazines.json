@@ -4,7 +4,6 @@
     "id": "mags_milspec",
     "//": "Current military specification magazines.",
     "items": [
-      [ "huge_atomic_battery_cell", 2 ],
       [ "5x50_20_mag", 2 ],
       [ "5x50_40_mag", 2 ],
       [ "8x40_10_mag", 5 ],

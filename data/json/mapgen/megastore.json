@@ -83,30 +83,30 @@
     "type": "palette",
     "id": "mega_goods_a",
     "items": {
-      "b": { "item": "novels", "chance": 45, "repeat": [ 0, 4 ] },
-      "f": { "item": "produce", "chance": 45, "repeat": [ 0, 4 ] },
-      "F": { "item": "fridgesnacks", "chance": 45, "repeat": [ 0, 4 ] },
-      "k": { "item": "shirts", "chance": 45, "repeat": [ 0, 4 ] },
-      "K": { "item": "shoes", "chance": 45, "repeat": [ 0, 4 ] },
-      "r": { "item": "pants", "chance": 45, "repeat": [ 0, 4 ] },
-      "R": { "item": "jackets", "chance": 45, "repeat": [ 0, 4 ] },
-      "x": { "item": "child_items", "chance": 45, "repeat": [ 0, 6 ] },
-      "X": { "item": "construction_worker", "chance": 45, "repeat": [ 0, 4 ] }
+      "b": { "item": "novels", "chance": 25, "repeat": [ 0, 3 ] },
+      "f": { "item": "produce", "chance": 25, "repeat": [ 0, 3 ] },
+      "F": { "item": "fridgesnacks", "chance": 25, "repeat": [ 0, 3 ] },
+      "k": { "item": "shirts", "chance": 25, "repeat": [ 0, 3 ] },
+      "K": { "item": "shoes", "chance": 35, "repeat": [ 0, 3 ] },
+      "r": { "item": "pants", "chance": 35, "repeat": [ 0, 3 ] },
+      "R": { "item": "jackets", "chance": 35, "repeat": [ 0, 3 ] },
+      "x": { "item": "child_items", "chance": 45, "repeat": [ 0, 4 ] },
+      "X": { "item": "construction_worker", "chance": 25, "repeat": [ 0, 3 ] }
     }
   },
   {
     "type": "palette",
     "id": "mega_goods_b",
     "items": {
-      "b": { "item": "homebooks", "chance": 60, "repeat": [ 0, 4 ] },
-      "f": { "item": "fridgesnacks", "chance": 45, "repeat": [ 0, 4 ] },
-      "F": { "item": "fridge", "chance": 45, "repeat": [ 0, 4 ] },
-      "k": { "item": "shoes", "chance": 65, "repeat": [ 0, 4 ] },
-      "K": { "item": "cannedfood", "chance": 45, "repeat": [ 0, 4 ] },
-      "r": { "item": "hardware", "chance": 45, "repeat": [ 0, 4 ] },
-      "R": { "item": "mischw", "chance": 45, "repeat": [ 0, 4 ] },
-      "x": { "item": "shelter", "chance": 45, "repeat": [ 0, 4 ] },
-      "X": { "item": "cannedfood", "chance": 45, "repeat": [ 0, 4 ] }
+      "b": { "item": "homebooks", "chance": 60, "repeat": [ 0, 3 ] },
+      "f": { "item": "fridgesnacks", "chance": 45, "repeat": [ 0, 3 ] },
+      "F": { "item": "fridge", "chance": 45, "repeat": [ 0, 3 ] },
+      "k": { "item": "shoes", "chance": 65, "repeat": [ 0, 3 ] },
+      "K": { "item": "cannedfood", "chance": 45, "repeat": [ 0, 3 ] },
+      "r": { "item": "hardware", "chance": 45, "repeat": [ 0, 3 ] },
+      "R": { "item": "mischw", "chance": 45, "repeat": [ 0, 3 ] },
+      "x": { "item": "shelter", "chance": 45, "repeat": [ 0, 3 ] },
+      "X": { "item": "cannedfood", "chance": 45, "repeat": [ 0, 3 ] }
     }
   },
   {
@@ -114,59 +114,59 @@
     "id": "mega_goods_c",
     "items": {
       "b": { "item": "waitingroom", "chance": 60, "repeat": [ 0, 3 ] },
-      "f": { "item": "fridge", "chance": 45, "repeat": [ 0, 6 ] },
-      "F": { "item": "produce", "chance": 45, "repeat": [ 0, 4 ] },
-      "k": { "item": "cannedfood", "chance": 45, "repeat": [ 0, 6 ] },
-      "K": { "item": "pasta", "chance": 45, "repeat": [ 0, 5 ] },
-      "r": { "item": "hardware", "chance": 45, "repeat": [ 0, 4 ] },
-      "R": { "item": "cleaning", "chance": 45, "repeat": [ 0, 4 ] },
-      "x": { "item": "shoes", "chance": 45, "repeat": [ 0, 6 ] },
-      "X": { "item": "dresser", "chance": 45, "repeat": [ 0, 4 ] }
+      "f": { "item": "fridge", "chance": 25, "repeat": [ 0, 4 ] },
+      "F": { "item": "produce", "chance": 25, "repeat": [ 0, 3 ] },
+      "k": { "item": "cannedfood", "chance": 25, "repeat": [ 0, 4 ] },
+      "K": { "item": "pasta", "chance": 25, "repeat": [ 0, 5 ] },
+      "r": { "item": "hardware", "chance": 25, "repeat": [ 0, 3 ] },
+      "R": { "item": "cleaning", "chance": 25, "repeat": [ 0, 3 ] },
+      "x": { "item": "shoes", "chance": 35, "repeat": [ 0, 4 ] },
+      "X": { "item": "dresser", "chance": 25, "repeat": [ 0, 3 ] }
     }
   },
   {
     "type": "palette",
     "id": "mega_goods_d",
     "items": {
-      "b": { "item": "waitingroom", "chance": 45, "repeat": [ 0, 4 ] },
+      "b": { "item": "waitingroom", "chance": 25, "repeat": [ 0, 3 ] },
       "f": { "item": "vending_food_items", "chance": 45, "repeat": [ 0, 8 ] },
-      "F": { "item": "kitchen", "chance": 45, "repeat": [ 0, 4 ] },
-      "k": { "item": "pasta", "chance": 45, "repeat": [ 0, 6 ] },
-      "K": { "item": "winter", "chance": 45, "repeat": [ 0, 4 ] },
-      "r": { "item": "sports", "chance": 45, "repeat": [ 0, 4 ] },
-      "R": { "item": "camping", "chance": 45, "repeat": [ 0, 4 ] },
-      "x": { "item": "cleaning", "chance": 45, "repeat": [ 0, 4 ] },
-      "X": { "item": "pasta", "chance": 45, "repeat": [ 0, 6 ] }
+      "F": { "item": "kitchen", "chance": 25, "repeat": [ 0, 3 ] },
+      "k": { "item": "pasta", "chance": 25, "repeat": [ 0, 4 ] },
+      "K": { "item": "winter", "chance": 15, "repeat": [ 0, 3 ] },
+      "r": { "item": "sports", "chance": 35, "repeat": [ 0, 3 ] },
+      "R": { "item": "camping", "chance": 35, "repeat": [ 0, 3 ] },
+      "x": { "item": "cleaning", "chance": 45, "repeat": [ 0, 3 ] },
+      "X": { "item": "pasta", "chance": 25, "repeat": [ 0, 4 ] }
     }
   },
   {
     "type": "palette",
     "id": "mega_goods_e",
     "items": {
-      "b": { "item": "waitingroom", "chance": 45, "repeat": [ 0, 4 ] },
-      "f": { "item": "produce", "chance": 45, "repeat": [ 0, 4 ] },
-      "F": { "item": "vending_drink_items", "chance": 45, "repeat": [ 0, 8 ] },
-      "k": { "item": "cleaning", "chance": 45, "repeat": [ 0, 4 ] },
-      "K": { "item": "camping", "chance": 45, "repeat": [ 0, 4 ] },
-      "r": { "item": "mechanics", "chance": 45, "repeat": [ 0, 4 ] },
-      "R": { "item": "construction_worker", "chance": 45, "repeat": [ 0, 4 ] },
-      "x": { "item": "kitchen", "chance": 45, "repeat": [ 0, 4 ] },
-      "X": { "item": "school", "chance": 45, "repeat": [ 0, 4 ] }
+      "b": { "item": "waitingroom", "chance": 45, "repeat": [ 0, 3 ] },
+      "f": { "item": "produce", "chance": 42, "repeat": [ 0, 3 ] },
+      "F": { "item": "vending_drink_items", "chance": 25, "repeat": [ 0, 8 ] },
+      "k": { "item": "cleaning", "chance": 25, "repeat": [ 0, 3 ] },
+      "K": { "item": "camping", "chance": 35, "repeat": [ 0, 3 ] },
+      "r": { "item": "mechanics", "chance": 35, "repeat": [ 0, 3 ] },
+      "R": { "item": "construction_worker", "chance": 15, "repeat": [ 0, 3 ] },
+      "x": { "item": "kitchen", "chance": 25, "repeat": [ 0, 3 ] },
+      "X": { "item": "school", "chance": 25, "repeat": [ 0, 3 ] }
     }
   },
   {
     "type": "palette",
     "id": "mega_goods_f",
     "items": {
-      "b": { "item": "novels", "chance": 45, "repeat": [ 0, 6 ] },
-      "f": { "item": "fridgesnacks", "chance": 45, "repeat": [ 0, 8 ] },
-      "F": { "item": "vending_drink_items", "chance": 45, "repeat": [ 0, 8 ] },
-      "k": { "item": "shirts", "chance": 45, "repeat": [ 0, 4 ] },
-      "K": { "item": "shoes", "chance": 45, "repeat": [ 0, 4 ] },
-      "r": { "item": "snacks", "chance": 45, "repeat": [ 0, 6 ] },
-      "R": { "item": "shelter", "chance": 45, "repeat": [ 0, 4 ] },
-      "x": { "item": "textbooks", "chance": 45, "repeat": [ 0, 4 ] },
-      "X": { "item": "dresser", "chance": 45, "repeat": [ 0, 4 ] }
+      "b": { "item": "novels", "chance": 25, "repeat": [ 0, 4 ] },
+      "f": { "item": "fridgesnacks", "chance": 25, "repeat": [ 0, 8 ] },
+      "F": { "item": "vending_drink_items", "chance": 35, "repeat": [ 0, 8 ] },
+      "k": { "item": "shirts", "chance": 25, "repeat": [ 0, 3 ] },
+      "K": { "item": "shoes", "chance": 25, "repeat": [ 0, 3 ] },
+      "r": { "item": "snacks", "chance": 25, "repeat": [ 0, 4 ] },
+      "R": { "item": "shelter", "chance": 25, "repeat": [ 0, 3 ] },
+      "x": { "item": "textbooks", "chance": 25, "repeat": [ 0, 3 ] },
+      "X": { "item": "dresser", "chance": 25, "repeat": [ 0, 3 ] }
     }
   },
   {

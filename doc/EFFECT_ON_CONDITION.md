@@ -1380,6 +1380,35 @@ Will give a message if you're in the dimension with the ID of "test".
   "then": { "u_message": "Currently loaded dimension is the one with ID of 'test'." } }
 ```
 
+### `clear_dimension`
+- type: string or [variable object](#variable-object)
+- deletes the dimension folder with the given string ID.
+
+#### Valid talkers:
+
+| Avatar | NPC | Monster | Furniture | Item | Vehicle |
+| ------  --------- | ---- | ------- | --- | ---- |
+| ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ |
+
+#### Examples
+Deletes (if present) the dimension with ID of 'test'.
+```jsonc
+{ { "clear_dimension": "test" } }
+```
+Asks for text input, will delete the dimension that matches the string ID.
+```jsonc
+{
+    "set_string_var": "",
+    "string_input": {
+      "title": { "str": "clear the dimension named:" },
+      "description": { "str": "the main dimension can't be cleared." },
+      "width": 30
+    },
+    "target_var": { "u_val": "target_dimension" }
+},
+{ "clear_dimension": { "u_val": "target_dimension" } }
+```
+
 ### `player_see_u`, `player_see_npc`
 - type: simple string
 - return true if player can see alpha or beta talker
@@ -1669,6 +1698,10 @@ You can see selected location.
 ### `has_ammo`
 - type: simple string
 - return true if beta talker is an item and has enough ammo for at least one "shot".
+
+### `is_rotten`
+- type: simple string
+- return true if beta talker is an item and is rotten.
 
 ### `test_eoc`
 - type: string or [variable object](##variable-object)
@@ -2792,6 +2825,28 @@ Teleport player to `new_map`
     { "u_teleport": { "global_val": "new_map" }, "force": true }
   ]
 }
+```
+
+#### `signal_hordes`
+Alert all hordes nearby to this location, akin to explosion
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- |
+| "signal_hordes" | **mandatory** | [variable object](#variable-object) | location variable that horde will try to reach |
+| "signal_power" | **mandatory** | int or [variable object](#variable-object) | default 0; the strength of a signal, ie how far it would propagate around the signal, in tiles |
+
+##### Examples
+
+Alert horde in 200 meter range
+```jsonc
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      { "u_location_variable": { "context_val": "your_pos" } },
+      { "signal_hordes": { "context_val": "your_pos" }, "signal_power": 200 }
+    ]
+  },
 ```
 
 #### `reveal_map`
@@ -4356,13 +4411,12 @@ You cancel activity `ACT_GAME` for 45 minutes
 You or NPC is teleported to `target_var` coordinates
 
 | Syntax | Optionality | Value  | Info |
-| --- | --- | --- | --- | 
-| "u_teleport", / "npc_teleport" | **mandatory** | [variable object](##variable-object) | location to teleport; should use `target_var`, created previously |
-| "success_message" | optional | string or [variable object](##variable-object) | message, that would be printed, if teleportation was successful | 
-| "fail_message" | optional | string or [variable object](##variable-object) | message, that would be printed, if teleportation was failed, like if coordinates contained creature or impassable obstacle (like wall) | 
-| "force" | optional | boolean | default false; if true, teleportation can't fail - any creature, that stand on target coordinates, would be brutally telefragged, and if impassable obstacle occur, the closest point would be picked instead |
-| "force_safe" | optional | boolean | default false; if true, teleportation cannot^(tm) fail.  If there is a creature or obstacle at the target coordinate, the closest passable point within 5 horizontal tiles is picked instead.  If there is no point, the creature remains where they are.
-| "dimension_prefix" | optional | string | default ""; if a value is specified, will teleport the player to a dimension named after the prefix. |
+| --- | --- | --- | --- |
+| "u_teleport", / "npc_teleport" | **mandatory** | [variable object](#variable-object) | location to teleport; should use `target_var`, created previously |
+| "success_message" | optional | string or [variable object](#variable-object) | message, that would be printed, if teleportation was successful |
+| "fail_message" | optional | string or [variable object](#variable-object) | message, that would be printed, if teleportation was failed, like if coordinates contained creature or impassable obstacle (like wall) |
+| "force" | optional | boolean | default false; if true, teleportation can't fail - any creature, that stand on target coordinates, would be brutally telefragged, and if impassable obstacle occur, the closest point would be picked instead. For the vehicle, collision test will be skipped. |
+| "force_safe" | optional | boolean | default false; if true, teleportation cannot^(tm) fail.  If there is a creature or obstacle at the target coordinate, the closest passable point within 5 horizontal tiles is picked instead.  If there is no point, the creature remains where they are. |
 
 ##### Valid talkers:
 
@@ -4385,6 +4439,33 @@ You teleport to `grass_place` with message `Yay!`; as `force` boolean is `true`,
   "fail_message": "Something is very wrong!",
   "force": true
 }
+```
+
+#### `u_travel_to_dimension`
+Unloads the current dimension and loads the dimension with the specific ID, optionally brings along NPCs.
+| "u_travel_to_dimension" | **mandatory** | string | Will teleport the player to a dimension with the ID. |
+| "npc_travel_radius" | optional | int or [variable object](#variable-object) | default 0; if a value above 0 is specified, the NPCs within that radius around the player will be transported with them when dimension hopping. |
+| "npc_travel_filter" | optional | string or [variable object](#variable-object) | default `all`; Acceps the following values: `all`, `follower`, `enemy`. Does nothing if `npc_travel_radius` is 0. |
+| "region_type" | optional | string or [variable object](#variable-object) | default `default`; The dimension is generated with the region settings of a `region_settings_new` object. |
+
+##### Valid talkers:
+
+| Avatar | NPC | Monster | Furniture | Item | Vehicle |
+| ------  --------- | ---- | ------- | --- | ---- |
+| ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+
+##### Examples
+
+You teleport to a dimension with the ID of `test`, at the same position you're in currently, bringing any NPC following you  within 5 tiles of you along.
+```jsonc
+  {
+  "u_travel_to_dimension": "test",
+  "npc_travel_radius": 5,
+  "npc_travel_filter": "follower",
+  "fail_message": "your body doesn't move",
+  "success_message": "This place feels different."
+  }
 ```
 
 #### `u_explosion`, `npc_explosion`
@@ -4920,6 +5001,25 @@ Picks a random fault from a type, and applies it onto item
 Beta talker adds a random fault from `shorted` type as it's fault
 ```jsonc
 { "npc_set_random_fault_of_type": "shorted" }
+```
+
+#### `set_browsed`
+Set the browse status of browsable items
+
+| Syntax | Optionality | Value  | Info |
+| ------ | ----------- | ------ | ---- |
+| "set_browsed" | **mandatory** | boolean | browse status |
+
+##### Valid talkers:
+
+| Avatar | NPC | Monster | Furniture | Item | Vehicle |
+| ------ | --------- | ---- | ------- | --- | ---- |
+| ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ |
+
+##### Examples
+Beta talker makes some browsable item browsed
+```jsonc
+{ "set_browsed": true }
 ```
 
 ## Map effects

@@ -73,7 +73,6 @@ static const furn_str_id furn_f_bench( "f_bench" );
 static const furn_str_id furn_f_boulder_large( "f_boulder_large" );
 static const furn_str_id furn_f_boulder_medium( "f_boulder_medium" );
 static const furn_str_id furn_f_boulder_small( "f_boulder_small" );
-static const furn_str_id furn_f_broken_boat( "f_broken_boat" );
 static const furn_str_id furn_f_camp_chair( "f_camp_chair" );
 static const furn_str_id furn_f_canvas_door( "f_canvas_door" );
 static const furn_str_id furn_f_canvas_wall( "f_canvas_wall" );
@@ -148,6 +147,8 @@ static const mongroup_id GROUP_STRAY_DOGS( "GROUP_STRAY_DOGS" );
 static const oter_type_str_id oter_type_bridge( "bridge" );
 static const oter_type_str_id oter_type_bridgehead_ground( "bridgehead_ground" );
 static const oter_type_str_id oter_type_road( "road" );
+
+static const region_settings_id region_settings_default( "default" );
 
 static const relic_procgen_id relic_procgen_data_alien_reality( "alien_reality" );
 
@@ -1737,13 +1738,12 @@ static bool mx_sandy_beach( map &m, const tripoint_abs_sm &abs_sub )
     detritus.add( furn_f_boulder_small, 20 );
     detritus.add( furn_f_boulder_medium, 10 );
     detritus.add( furn_f_boulder_large, 3 );
-    detritus.add( furn_f_broken_boat, 1 );
 
     for( int i = 0; i < SEEX * 2; i++ ) {
         for( int j = 0; j < SEEY * 2; j++ ) {
             const tripoint_bub_ms loc( i, j, abs_sub.z() );
             const ter_id &ter_loc = m.ter( loc );
-            if( ter_loc == ter_t_sand && one_in( 20 ) ) {
+            if( ter_loc == ter_t_sand && one_in( 40 ) ) {
                 !one_in( 10 ) ? m.furn_set( loc, detritus.pick()->id() ) : m.ter_set( loc, ter_t_tidepool );
             }
             if( ter_loc == ter_t_swater_surf && one_in( 10 ) ) {
@@ -1884,10 +1884,12 @@ void debug_spawn_test()
 {
     uilist mx_menu;
     std::vector<std::string> mx_names;
-    for( std::pair<const std::string, map_extras> &region_extra :
-         region_settings_map["default"].region_extras ) {
-        mx_menu.addentry( -1, true, -1, region_extra.first );
-        mx_names.push_back( region_extra.first );
+    const region_settings_map_extras &settings_map_extras =
+        region_settings_default->get_settings_map_extras();
+    for( const map_extra_collection_id &region_extra : settings_map_extras.extras ) {
+        const std::string &mx_name = region_extra.str();
+        mx_menu.addentry( -1, true, -1, mx_name );
+        mx_names.push_back( mx_name );
     }
 
     mx_menu.text = _( "Test which map extra list?" );
@@ -1902,9 +1904,13 @@ void debug_spawn_test()
         map_extra_id mx_null = map_extra_id::NULL_ID();
 
         for( size_t a = 0; a < 32400; a++ ) {
-            map_extras ex = region_settings_map["default"].region_extras[mx_names[index]];
+            auto mx_iter = settings_map_extras.extras.find( map_extra_collection_id( mx_names[index] ) );
+            if( mx_iter == settings_map_extras.extras.end() ) {
+                continue;
+            }
+            const map_extra_collection &ex = **mx_iter;
             if( ex.chance > 0 && one_in( ex.chance ) ) {
-                map_extra_id *extra = ex.values.pick();
+                const map_extra_id *extra = ex.values.pick();
                 if( extra == nullptr ) {
                     results[mx_null]++;
                 } else {

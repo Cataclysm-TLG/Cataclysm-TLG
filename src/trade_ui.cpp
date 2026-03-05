@@ -4,6 +4,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <memory>
+#include <set>
+#include <unordered_set>
 
 #include "character.h"
 #include "clzones.h"
@@ -12,6 +14,8 @@
 #include "game_constants.h"
 #include "inventory_ui.h"
 #include "item.h"
+#include "item_category.h"
+#include "map.h"
 #include "npc.h"
 #include "npctrade.h"
 #include "npctrade_utils.h"
@@ -20,8 +24,12 @@
 #include "point.h"
 #include "string_formatter.h"
 #include "type_id.h"
+#include "vehicle.h"
+
+static const faction_id faction_your_followers( "your_followers" );
 
 static const flag_id json_flag_NO_UNWIELD( "NO_UNWIELD" );
+
 static const item_category_id item_category_ITEMS_WORN( "ITEMS_WORN" );
 static const item_category_id item_category_WEAPON_HELD( "WEAPON_HELD" );
 
@@ -130,6 +138,16 @@ trade_ui::trade_ui( party_t &you, npc &trader, currency_t cost, std::string titl
         }
     } else if( !trader.is_player_ally() ) {
         _panes[_trader]->add_nearby_items( 1 );
+    }
+
+    const map &here = get_map();
+
+    for( const wrapped_vehicle &wv : get_map().get_vehicles() ) {
+        if( wv.v->owner == faction_your_followers ) {
+            for( const tripoint_abs_ms &veh_pt : wv.v->get_points() ) {
+                _panes[_you]->add_vehicle_items( here.get_bub( veh_pt ) );
+            }
+        }
     }
 
     if( trader.will_exchange_items_freely() ) {

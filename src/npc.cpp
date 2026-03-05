@@ -2731,10 +2731,6 @@ void npc::npc_dismount()
         return;
     }
     remove_effect( effect_riding );
-    if( mounted_creature->has_flag( mon_flag_RIDEABLE_MECH ) &&
-        !mounted_creature->type->mech_weapon.is_empty() ) {
-        get_wielded_item().remove_item();
-    }
     mounted_creature->remove_effect( effect_ridden );
     mounted_creature->add_effect( effect_controlled, 5_turns );
     mounted_creature = nullptr;

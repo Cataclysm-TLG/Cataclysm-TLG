@@ -25,8 +25,12 @@
 #include "cuboid_rectangle.h"
 #include "debug.h"
 #include "filesystem.h"
+#include "flexbuffer_json.h"
 #include "game.h"
 #include "game_constants.h"
+#include "horde_entity.h"
+#include "horde_map.h"
+#include "json.h"
 #include "line.h"
 #include "map.h"
 #include "mapgendata.h"
@@ -35,6 +39,7 @@
 #include "mod_manager.h"
 #include "mongroup.h"
 #include "monster.h"
+#include "mtype.h"
 #include "npc.h"
 #include "omdata.h"
 #include "options.h"
@@ -43,7 +48,6 @@
 #include "overmap_types.h"
 #include "path_info.h"
 #include "point.h"
-#include "regional_settings.h"
 #include "rng.h"
 #include "simple_pathfinding.h"
 #include "string_formatter.h"
@@ -109,7 +113,7 @@ overmap &overmapbuffer::get( const point_abs_om &p )
 
     // That constructor loads an existing overmap or creates a new one.
     overmap &new_om = *( overmaps[ p ] = std::make_unique<overmap>( p ) );
-    overmap_count++;
+    global_state.overmap_count++;
     new_om.populate();
     // Note: fix_mongroups might load other overmaps, so overmaps.back() is not
     // necessarily the overmap at (x,y)
@@ -129,7 +133,7 @@ void overmapbuffer::create_custom_overmap( const point_abs_om &p, overmap_specia
         }
     }
     overmap &new_om = *( overmaps[ p ] = std::make_unique<overmap>( p ) );
-    overmap_count++;
+    global_state.overmap_count++;
     new_om.populate( specials );
 }
 
@@ -262,31 +266,35 @@ void overmapbuffer::clear()
 {
     overmaps.clear();
     known_non_existing.clear();
-    placed_unique_specials.clear();
-    unique_special_count.clear();
-    highway_intersections.clear();
-    highway_global_offset = point_abs_om::invalid;
-    overmap_count = 0;
-    major_river_count = 0;
+    global_state.clear();
     last_requested_overmap = nullptr;
 }
 
-const regional_settings &overmapbuffer::get_settings( const tripoint_abs_omt &p )
+void overmap_global_state::clear()
+{
+    placed_unique_specials.clear();
+    unique_special_count.clear();
+    highway_intersections.clear();
+    overmap_count = 0;
+    major_river_count = 0;
+}
+
+const region_settings &overmapbuffer::get_settings( const tripoint_abs_omt &p )
 {
     overmap *om = get_om_global( p ).om;
     return om->get_settings();
 }
 
-const regional_settings &overmapbuffer::get_default_settings( const point_abs_om &p )
+const region_settings &overmapbuffer::get_default_settings( const point_abs_om &p )
 {
     const std::string rsettings_id = get_option<std::string>( "DEFAULT_REGION" );
-    t_regional_settings_map_citr rsit = region_settings_map.find( rsettings_id );
+    const region_settings_id region_settings_default( rsettings_id );
 
-    if( rsit == region_settings_map.end() ) {
+    if( !region_settings_default.is_valid() ) {
         debugmsg( "overmap%s: can't find region '%s'", p.to_string(),
                   rsettings_id.c_str() ); // gonna die now =[
     }
-    return rsit->second;
+    return *region_settings_default;
 }
 
 void overmapbuffer::add_note( const tripoint_abs_omt &p, const std::string &message )
@@ -494,20 +502,13 @@ bool overmapbuffer::has_horde( const tripoint_abs_omt &p )
     return false;
 }
 
-int overmapbuffer::get_horde_size( const tripoint_abs_omt &p )
+int overmapbuffer::get_horde_size( const tripoint_abs_omt &p, int filter )
 {
     int horde_size = 0;
-    for( mongroup * const &m : overmap_buffer.monsters_at( p ) ) {
-        if( m->horde ) {
-            // Monstergroups which have not yet spawned in will not display. This is fine.
-            // Map visibility being iffy means that we probably wouldn't be able to see such
-            // groups anyway, and unspawned groups all have a horde_size of 10 which looks
-            // weird when you get close and it's like 3 guys and the size 10 horde disappears
-            // from your map.
-            if( !m->monsters.empty() ) {
-                horde_size += m->monsters.size();
-            }
-        }
+    std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> hordes = overmap_buffer.hordes_at(
+                p, filter );
+    for( std::unordered_map<tripoint_abs_ms, horde_entity> *horde_group : hordes ) {
+        horde_size += horde_group->size();
     }
 
     return horde_size;
@@ -608,16 +609,71 @@ std::string overmapbuffer::get_vehicle_tile_id( const tripoint_abs_omt &omt )
     return tile_id;
 }
 
+bool overmapbuffer::passable( const tripoint_abs_ms &p )
+{
+    point_abs_om loc;
+    tripoint_om_ms offset;
+    std::tie( loc, offset ) = project_remain<coords::om>( p );
+    overmap *om = get_existing( loc );
+    if( om == nullptr ) {
+        return false;
+    }
+    return om->passable( offset );
+}
+
+std::shared_ptr<map_data_summary> overmapbuffer::get_omt_summary( const tripoint_abs_omt &p )
+{
+    point_abs_om loc;
+    tripoint_om_omt offset;
+    std::tie( loc, offset ) = project_remain<coords::om>( p );
+    overmap *om = get_existing( loc );
+    if( om == nullptr ) {
+        return {};
+    }
+    return om->get_omt_summary( offset );
+}
+
+void overmapbuffer::set_passable( const tripoint_abs_ms &p, bool new_passable )
+{
+    point_abs_om loc;
+    tripoint_om_ms offset;
+    std::tie( loc, offset ) = project_remain<coords::om>( p );
+    overmap *om = get_existing( loc );
+    if( om == nullptr ) {
+        return;
+    }
+    om->set_passable( offset, new_passable );
+}
+
+void overmapbuffer::set_passable( const tripoint_abs_omt &p,
+                                  const std::bitset<24 * 24> &new_passable )
+{
+    const tripoint_abs_om loc = project_to<coords::om>( p );
+    overmap *om = get_existing( loc.xy() );
+    if( om == nullptr ) {
+        return;
+    }
+    om->set_passable( p, new_passable );
+}
+
 void overmapbuffer::signal_hordes( const tripoint_abs_sm &center, const int sig_power )
 {
-    const int radius = sig_power;
-    for( overmap *&om : get_overmaps_near( center, radius ) ) {
-        const point_abs_sm abs_pos_om = project_to<coords::sm>( om->pos() );
-        const tripoint_rel_sm rel_pos = center - abs_pos_om;
-        // overmap::signal_hordes expects a coordinate relative to the overmap, this is easier
-        // for processing as the monster group stores is location as relative coordinates, too.
-        om->signal_hordes( rel_pos, sig_power );
+    for( overmap *&om : get_overmaps_near( center, sig_power ) ) {
+        om->signal_hordes( project_to<coords::ms>( center ), sig_power );
     }
+}
+
+void overmapbuffer:: alert_entity( const tripoint_abs_ms &location,
+                                   const tripoint_abs_ms &destination, int intensity )
+{
+    point_abs_om loc;
+    tripoint_om_ms offset;
+    std::tie( loc, offset ) = project_remain<coords::om>( location );
+    overmap *om = get_existing( loc );
+    if( om == nullptr ) {
+        return;
+    }
+    om->alert_entity( offset, destination, intensity );
 }
 
 void overmapbuffer::signal_nemesis( const tripoint_abs_sm &p )
@@ -637,6 +693,14 @@ void overmapbuffer::add_nemesis( const tripoint_abs_omt &p )
     overmap *om = get_existing( loc.xy() );
     om->place_nemesis( p );
 
+}
+
+void overmapbuffer::clear_mongroups()
+{
+    for( std::pair<const point_abs_om, std::unique_ptr<overmap>> &omp : overmaps ) {
+        omp.second->clear_mon_groups();
+        omp.second->hordes.clear();
+    }
 }
 
 void overmapbuffer::process_mongroups()
@@ -1130,12 +1194,17 @@ void overmapbuffer::add_unique_special( const overmap_special_id &id )
     if( contains_unique_special( id ) ) {
         debugmsg( "Globally unique overmap special placed more than once: %s", id.str() );
     }
-    placed_unique_specials.emplace( id );
+    global_state.placed_unique_specials.emplace( id );
+}
+
+void overmapbuffer::log_unique_special( const overmap_special_id &id )
+{
+    global_state.unique_special_count[id]++;
 }
 
 bool overmapbuffer::contains_unique_special( const overmap_special_id &id ) const
 {
-    return placed_unique_specials.find( id ) != placed_unique_specials.end();
+    return global_state.placed_unique_specials.find( id ) != global_state.placed_unique_specials.end();
 }
 
 static omt_find_params assign_params(
@@ -1693,114 +1762,129 @@ city_reference overmapbuffer::closest_known_city( const tripoint_abs_sm &center 
     return city_reference::invalid;
 }
 
-interhighway_node overmapbuffer::get_overmap_highway_intersection_point(
-    const point_abs_om &p )
+void overmap_feature_grid::clear()
 {
-    return overmap_buffer.highway_intersections[p.to_string_writable()];
+    grid_origin = point_abs_om::invalid;
+    feature_grid.clear();
 }
 
-void overmapbuffer::set_overmap_highway_intersection_point( const point_abs_om &p,
-        const interhighway_node &intersection )
+void overmap_feature_grid::set_grid_origin( const point_abs_om &p )
 {
-    overmap_buffer.highway_intersections[p.to_string_writable()] = intersection;
+    grid_origin = p;
 }
 
-
-void overmapbuffer::set_highway_global_offset()
+point_abs_om overmap_feature_grid::get_grid_origin() const
 {
-    //this only happens exactly once, upon generation of the first overmap
-    //TODO: there should be an intersection around the avatar's start location, not 0,0
-    overmap_buffer.highway_global_offset = point_abs_om();
+    return grid_origin;
 }
 
-point_abs_om overmapbuffer::get_highway_global_offset() const
+std::vector<overmap_feature_grid_node>
+overmap_feature_grid::find_grid_adjacent_features( const point_abs_om &generated_om_pos )
 {
-    return overmap_buffer.highway_global_offset;
-}
-
-std::vector<interhighway_node>
-overmapbuffer::find_highway_adjacent_intersections( const point_abs_om &generated_om_pos )
-{
-    const overmap_highway_settings &highway_settings = get_default_settings(
-                generated_om_pos ).overmap_highway;
-    const int c_seperation = highway_settings.grid_column_seperation;
-    const int r_seperation = highway_settings.grid_row_seperation;
+    const int c_seperation = column_separation;
+    const int r_seperation = row_separation;
 
     //generate adjacent intersection points
-    std::vector<interhighway_node> adjacent_intersections;
+    std::vector<overmap_feature_grid_node> adjacent_features;
     for( const point &cardinal : four_adjacent_offsets ) {
         const point_abs_om p( generated_om_pos.x() + cardinal.x * c_seperation,
                               generated_om_pos.y() + cardinal.y * r_seperation );
-        if( !highway_intersection_exists( p ) ) {
-            generate_highway_intersection_point( p );
+        if( !feature_point_exists( p ) ) {
+            generate_feature_point( p );
         }
-        adjacent_intersections.emplace_back( overmap_buffer.get_overmap_highway_intersection_point( p ) );
+        adjacent_features.emplace_back( get_feature_point( p ) );
     }
 
     //store adjacencies in calling intersection point
-    interhighway_node this_intersection =
-        overmap_buffer.get_overmap_highway_intersection_point( generated_om_pos );
+    overmap_feature_grid_node this_feature = get_feature_point( generated_om_pos );
     const int adjacencies = four_adjacent_offsets.size();
     for( int i = 0; i < adjacencies; i++ ) {
-        if( this_intersection.adjacent_intersections[i].is_invalid() ) {
-            this_intersection.adjacent_intersections[i] = adjacent_intersections[i].grid_pos;
+        if( this_feature.get_adjacent_pos( i ).is_invalid() ) {
+            this_feature.set_adjacent_pos( adjacent_features[i].get_grid_pos(), i );
         }
     }
-    overmap_buffer.set_overmap_highway_intersection_point( generated_om_pos, this_intersection );
+    set_feature_point( generated_om_pos, this_feature );
 
-    return adjacent_intersections;
+    return adjacent_features;
 }
 
-bool overmapbuffer::highway_intersection_exists( const point_abs_om &intersection_om ) const
+void overmap_feature_grid::serialize( JsonOut &out ) const
 {
-    return highway_intersections.find( intersection_om.to_string_writable() ) !=
-           highway_intersections.end();
+    out.start_object();
+    out.member( "overmap_highway_offset", grid_origin );
+    out.member( "overmap_highway_intersections", feature_grid );
+    out.end_object();
+}
+void overmap_feature_grid::deserialize( const JsonObject &obj )
+{
+    obj.read( "overmap_highway_offset", grid_origin );
+    obj.read( "overmap_highway_intersections", feature_grid );
 }
 
-
-void overmapbuffer::generate_highway_intersection_point( const point_abs_om &generated_om_pos )
+int overmapbuffer::get_unique_special_count( const overmap_special_id &id )
 {
-    const overmap_highway_settings &highway_settings = get_default_settings(
-                generated_om_pos ).overmap_highway;
-    const int intersection_max_radius = highway_settings.intersection_max_radius;
-    if( !highway_intersection_exists( generated_om_pos ) ) {
-        interhighway_node new_intersection( generated_om_pos );
-        new_intersection.generate_offset( intersection_max_radius );
+    return global_state.unique_special_count[id];
+}
+
+int overmapbuffer::get_overmap_count() const
+{
+    return global_state.overmap_count;
+}
+
+int overmapbuffer::get_major_river_count() const
+{
+    return global_state.major_river_count;
+}
+
+void overmapbuffer::inc_major_river_count()
+{
+    global_state.major_river_count++;
+}
+
+bool overmap_feature_grid::feature_point_exists( const point_abs_om &intersection_om ) const
+{
+    return feature_grid.find( intersection_om.to_string_writable() ) !=
+           feature_grid.end();
+}
+
+void overmap_feature_grid::generate_feature_point( const point_abs_om &generated_om_pos )
+{
+    if( !feature_point_exists( generated_om_pos ) ) {
+        overmap_feature_grid_node new_intersection( generated_om_pos );
+        generate_offset( new_intersection );
         add_msg_debug( debugmode::DF_HIGHWAY, "Generated intersection at overmap %s.",
-                       new_intersection.offset_pos.to_string_writable() );
-        overmap_buffer.highway_intersections.insert( { generated_om_pos.to_string_writable(), new_intersection } );
+                       new_intersection.get_offset_pos().to_string_writable() );
+        feature_grid.insert( { generated_om_pos.to_string_writable(), new_intersection } );
     }
 }
 
-std::vector<point_abs_om> overmapbuffer::find_highway_intersection_bounds( const point_abs_om
+std::vector<point_abs_om> overmap_feature_grid::find_feature_point_bounds( const point_abs_om
         & generated_om_pos )
 {
-    const overmap_highway_settings &highway_settings = get_default_settings(
-                generated_om_pos ).overmap_highway;
-    const int c_seperation = highway_settings.grid_column_seperation;
-    const int r_seperation = highway_settings.grid_row_seperation;
+    const int c_separation = column_separation;
+    const int r_separation = row_separation;
 
-    const point_abs_om center = overmap_buffer.highway_global_offset;
+    const point_abs_om center = grid_origin;
     const point_rel_om diff = generated_om_pos - center;
 
-    const double col_diff = diff.x() / static_cast<double>( c_seperation );
-    const double row_diff = diff.y() / static_cast<double>( r_seperation );
+    const double col_diff = diff.x() / static_cast<double>( c_separation );
+    const double row_diff = diff.y() / static_cast<double>( r_separation );
     const int colsign = std::copysign( 1.0, col_diff );
     const int rowsign = std::copysign( 1.0, row_diff );
-    const bool col_aligned = diff.x() % c_seperation == 0;
-    const bool row_aligned = diff.y() % r_seperation == 0;
+    const bool col_aligned = diff.x() % c_separation == 0;
+    const bool row_aligned = diff.y() % r_separation == 0;
     const int col = static_cast<int>( col_diff ) + ( colsign == -1 && !col_aligned ? -1 : 0 );
     const int row = static_cast<int>( row_diff ) + ( rowsign == -1 && !row_aligned ? -1 : 0 );
 
-    point_abs_om top_left( center.x() + col * c_seperation, center.y() + row * r_seperation );
-    std::vector<point_abs_om> bounds = { top_left + point_rel_om( c_seperation, r_seperation ),
-                                         top_left + point_rel_om( 0, r_seperation ),
-                                         top_left + point_rel_om( c_seperation, 0 ),
+    point_abs_om top_left( center.x() + col * c_separation, center.y() + row * r_separation );
+    std::vector<point_abs_om> bounds = { top_left + point_rel_om( c_separation, r_separation ),
+                                         top_left + point_rel_om( 0, r_separation ),
+                                         top_left + point_rel_om( c_separation, 0 ),
                                          top_left
                                        };
     for( const point_abs_om &p : bounds ) {
-        if( !highway_intersection_exists( p ) ) {
-            generate_highway_intersection_point( p );
+        if( !feature_point_exists( p ) ) {
+            generate_feature_point( p );
         }
     }
     return bounds;
@@ -1881,40 +1965,87 @@ void overmapbuffer::spawn_monster( const tripoint_abs_sm &p, bool spawn_nonlocal
     tripoint_om_sm current_submap_loc;
     std::tie( omp, current_submap_loc ) = project_remain<coords::om>( p );
     overmap &om = get( omp );
-    auto monster_bucket = om.monster_map.equal_range( current_submap_loc );
-    std::for_each( monster_bucket.first, monster_bucket.second,
-    [&]( std::pair<const tripoint_om_sm, monster> &monster_entry ) {
-        monster &this_monster = monster_entry.second;
-        map &here = get_map();
-        const tripoint_bub_ms local = this_monster.pos_bub( here );
-        // The monster position must be local to the main map when added to the game
-        if( !spawn_nonlocal ) {
-            cata_assert( here.inbounds( local ) );
+    std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> monster_bucket =
+        om.hordes.entity_group_at( current_submap_loc );
+    if( monster_bucket.empty() ) {
+        return;
+    }
+    map &here = get_map();
+    for( std::unordered_map<tripoint_abs_ms, horde_entity> *monster_tree : monster_bucket ) {
+        for( std::pair<const tripoint_abs_ms, horde_entity> &monster_entry : *monster_tree ) {
+            const tripoint_bub_ms local = here.get_bub( monster_entry.first );
+            // The monster position must be local to the main map when added to the game
+            if( !spawn_nonlocal ) {
+                cata_assert( here.inbounds( local ) );
+            }
+            // TODO: This needs to verify that the monster can be placed, otherwise it will fail with a debugmsg in creature_tracker::add()
+            monster *placed = nullptr;
+            if( monster_entry.second.monster_data ) {
+                placed = g->place_critter_around( make_shared_fast<monster>
+                                                  ( *monster_entry.second.monster_data ),
+                                                  local, 1, true );
+                // TODO: make sure entity data such as destination is synched
+            } else {
+                placed = g->place_critter_around( monster_entry.second.type_id->id, local, 1 );
+            }
+            if( placed ) {
+                placed->on_load();
+            }
         }
-        monster *const placed = g->place_critter_around( make_shared_fast<monster>( this_monster ),
-                                local, 0, true );
-        if( placed ) {
-            placed->on_load();
-        }
-    } );
-    om.monster_map.erase( current_submap_loc );
+    }
+    om.hordes.clear_chunk( current_submap_loc );
+}
+
+void overmapbuffer::spawn_mongroup( const tripoint_abs_sm &p, const mongroup_id &type, int count )
+{
+    point_abs_om omp;
+    tripoint_om_sm submap_loc;
+    std::tie( omp, submap_loc ) = project_remain<coords::om>( p );
+    overmap &om = get( omp );
+    om.spawn_mongroup( submap_loc, type, count );
 }
 
 void overmapbuffer::despawn_monster( const monster &critter )
 {
-    // Get the overmap coordinates and get the overmap, sm is now local to that overmap
-    point_abs_om omp;
-    tripoint_om_sm sm;
-    std::tie( omp, sm ) = project_remain<coords::om>( critter.pos_abs_sm() );
-    overmap &om = get( omp );
+    tripoint_abs_om omp = project_to<coords::om>( critter.pos_abs() );
+    overmap &om = get( omp.xy() );
     // Store the monster using coordinates local to the overmap
 
     if( critter.is_nemesis() ) {
         //if the monster is the 'hunted' trait's nemesis, it becomes an overmap horde
         om.place_nemesis( critter.pos_abs_omt() );
     } else {
-        om.monster_map.insert( std::make_pair( sm, critter ) );
+        om.hordes.spawn_entity( critter.pos_abs(), critter );
     }
+}
+
+horde_entity *overmapbuffer::entity_at( const tripoint_abs_ms &p )
+{
+    point_abs_om omp;
+    tripoint_om_ms oms;
+    std::tie( omp, oms ) = project_remain<coords::om>( p );
+    overmap &om = get( omp );
+    return om.entity_at( oms );
+}
+
+std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> overmapbuffer::hordes_at(
+    const tripoint_abs_omt &p, int filter )
+{
+    point_abs_om omp;
+    tripoint_om_omt omt;
+    std::tie( omp, omt ) = project_remain<coords::om>( p );
+    overmap &om = get( omp );
+    return om.hordes_at( omt, filter );
+}
+
+horde_entity &overmapbuffer::spawn_monster( const tripoint_abs_ms &p, mtype_id id )
+{
+    // Get the overmap coordinates and get the overmap, sm is now local to that overmap
+    point_abs_om omp;
+    tripoint_om_sm sm;
+    std::tie( omp, sm ) = project_remain<coords::om>( project_to<coords::sm>( p ) );
+    overmap &om = get( omp );
+    return om.spawn_monster( p, id );
 }
 
 overmapbuffer::t_notes_vector overmapbuffer::get_notes( int z, std::string_view pattern )

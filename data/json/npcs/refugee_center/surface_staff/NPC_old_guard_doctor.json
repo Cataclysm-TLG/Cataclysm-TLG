@@ -109,7 +109,7 @@
       "rejected": "Are you sure?  The scientific value of that blood data could be priceless…",
       "advice": "The centrifuge is a bit technical; you might want to study up on the usage of computers before completing that part.",
       "inquire": "Well, do you have the data yet?",
-      "success": "Excellent!  This may be the key to removing the infection.",
+      "success": "Necrosis?  It didn't detect a novel pathogen?  Maybe there's something else here we can use…",
       "success_lie": "Wait, you couldn't possibly have the data!  Liar!",
       "failure": "What a shame, that data could have proved invaluable…"
     },
@@ -134,7 +134,7 @@
     "followup": "MISSION_SCIENCE_REP_3",
     "dialogue": {
       "describe": "We need help…",
-      "offer": "The medical software didn't just analyze the blood, it triggered a government alert.  Medical staff was under orders to immediately drive any matching samples to the nearest laboratory.  That must mean the government knew!  We have the destination address.  Go there, get in, and bring back any records you can download off a computer.  Like last time, I can compensate you, and the Old Guard saw enough promise in this assignment to spare a larger sum of 60 merch.  I'm sure you're also free to lay claim to any valuables you might find at the target location.",
+      "offer": "When you analyzed that blood, the computer didn't pick up any virus or parasite that could be causing this, but something weird happened.  The computer you used triggered a government alert.  Medical staff was under orders to immediately drive any matching samples to the nearest laboratory.  That must mean the government knew!  We have the destination address.  Go there, get in, and bring back any records you can download off a computer.  Like last time, I can compensate you, and the Old Guard saw enough promise in this assignment to spare a larger sum of 60 merch.  I'm sure you're also free to lay claim to any valuables you might find at the target location.",
       "accepted": "Great!  I've mapped out a route to the address.",
       "rejected": "Can't blame you, but come back if you change your mind.",
       "advice": "If the laboratory is locked, maybe you can find an id card from employees who died in the evacuation.  Also brush up on your computer skills, any computers will have some security on them.  Bring back anything you find on a USB drive.",
@@ -216,7 +216,7 @@
     "has_generic_rewards": false,
     "dialogue": {
       "describe": "We need help…",
-      "offer": "In the data we found a major contract for tunneling and train equipment, ordered eight months ago.  It's the best lead we have.  Here's the address of the government lab where the equipment was delivered.  I want you to go there, find the tunnels that they dug, and download everything you can about the train network.  On the other hand, our sponsors were extremely impressed in getting this far without their direction, and would like to apologize by supporting this mission with a whole 300 merch!",
+      "offer": "In the data we found a major contract for tunneling and train equipment, ordered four years before things went to hell.  It's the best lead we have.  Here's the address of the government lab where the equipment was delivered.  I want you to go there, find the tunnels that they dug, and download everything you can about the train network.  On the other hand, our sponsors were extremely impressed in getting this far without their direction, and would like to apologize by supporting this mission with a whole 300 merch!",
       "accepted": "So glad for your help.",
       "rejected": "Can't blame you, but come back if you change your mind.",
       "advice": "The equipment was rated for 50 feet underground, so that tunnel entrance is going to be deeper inside a lab than a normal subway.  Fifty feet would mean maybe four stories down.  Bring back anything you find on a USB drive.",

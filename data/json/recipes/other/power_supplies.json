@@ -156,37 +156,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
-    "result": "solarpack",
-    "category": "CC_ELECTRONIC",
-    "subcategory": "CSC_ELECTRONIC_OTHER",
-    "skill_used": "electronics",
-    "skills_required": [ [ "fabrication", 2 ], [ "mechanics", 2 ] ],
-    "difficulty": 8,
-    "time": "50 m",
-    "decomp_learn": 5,
-    "autolearn": true,
-    "book_learn": [ [ "manual_electronics", 7 ], [ "textbook_electronics", 6 ], [ "advanced_electronics", 6 ] ],
-    "//": "50cm weld",
-    "using": [ [ "soldering_standard", 35 ], [ "welding_standard", 50 ] ],
-    "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "byproducts": [ [ "sheet_metal_small", 8 ], [ "scrap", 8 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_elec_soldering" },
-      { "proficiency": "prof_elec_circuits" },
-      { "proficiency": "prof_elec_semiconductors" }
-    ],
-    "components": [
-      [ [ "power_supply", 2 ] ],
-      [ [ "amplifier", 2 ] ],
-      [ [ "solar_panel", 1 ] ],
-      [ [ "cable", 20 ] ],
-      [ [ "sheet_metal", 2 ] ],
-      [ [ "rope_natural_short", 1, "LIST" ] ]
-    ]
-  },
-  {
-    "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "result": "solar_panel",
     "category": "CC_ELECTRONIC",

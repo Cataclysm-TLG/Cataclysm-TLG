@@ -3752,5 +3752,75 @@
     "type": "MIGRATION",
     "id": "ammo_box_army_10_50bmg",
     "replace": "ammo_box_big"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sewage",
+    "replace": "water_sewage"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanning_hide",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanning_pelt",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "water_purifying",
+    "replace": "water_clean"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "solarpack",
+    "replace": "backpack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "solarpack_on",
+    "replace": "backpack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "brick_kiln",
+    "replace": "kiln"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "material_aluminium_ingot",
+    "replace": "aluminum_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "chem_aluminium_powder",
+    "replace": "aluminum_powder"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "chem_aluminium_sulphate",
+    "replace": "aluminum_sulfate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bread_flour",
+    "replace": "flour"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "huge_atomic_battery_cell",
+    "replace": "heavy_atomic_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "weather_reader",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "blade_trap",
+    "replace": "blade"
   }
 ]

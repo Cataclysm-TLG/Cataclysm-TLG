@@ -342,9 +342,7 @@ void iexamine::cvdmachine( Character &you, const tripoint_bub_ms & )
     item_location loc = g->inv_map_splice( []( const item & e ) {
         return e.has_edged_damage() &&
                !e.has_flag( flag_DIAMOND ) && !e.has_flag( flag_NO_CVD ) &&
-               ( e.made_of( material_steel ) || e.made_of( material_ch_steel ) ||
-                 e.made_of( material_hc_steel ) || e.made_of( material_lc_steel ) ||
-                 e.made_of( material_mc_steel ) || e.made_of( material_qt_steel ) );
+               ( e.made_of( material_steel ) );
     }, _( "Apply diamond coating" ), 1, _( "You don't have a suitable item to coat with diamond" ) );
 
     if( !loc ) {
@@ -1757,6 +1755,18 @@ void iexamine::pit_covered( Character &you, const tripoint_bub_ms &examp )
     you.mod_moves( -to_moves<int>( 1_seconds ) );
 }
 
+void iexamine::thin_ice( Character &you, const tripoint_bub_ms &examp )
+{
+    map &here = get_map();
+    const trap &tr = here.tr_at( examp );
+    if( !you.knows_trap( examp ) ) {
+        you.add_msg_if_player( m_warning, _( "The ice looks thin and won't support your weight." ) );
+        you.add_known_trap( examp, tr );
+    } else {
+        you.add_msg_if_player( m_info, _( "The ice here is thin." ) );
+    }
+}
+
 
 
 /**
@@ -2510,8 +2520,9 @@ void iexamine::dirtmound( Character &you, const tripoint_bub_ms &examp )
     }
     const itype_id &seed_id = std::get<0>( seed_entries[seed_index] );
 
-    if( !warm_enough_to_plant( you.pos_bub(), seed_id ) ) {
-        you.add_msg_if_player( m_info, _( "It is too cold to plant that now." ) );
+    ret_val<void>can_plant = warm_enough_to_plant( examp, seed_id );
+    if( !can_plant.success() ) {
+        you.add_msg_if_player( m_info, can_plant.c_str() );
         return;
     }
 
@@ -2666,14 +2677,19 @@ void iexamine::harvest_plant( Character &you, const tripoint_bub_ms &examp, bool
             player_activity act( ACT_HARVEST, to_moves<int>( 60_seconds ) );
             you.assign_activity( act );
             here.i_clear( examp );
-
-            int skillLevel = round( you.get_skill_level( skill_survival ) );
-            ///\EFFECT_SURVIVAL increases number of plants harvested from a seed
-            int plant_count = rng( skillLevel / 2, skillLevel );
+            float skillLevel = you.get_skill_level( skill_survival );
+            ///\EFFECT_SURVIVAL increases number of plants harvested from a seed.
+            float skill_divisor = 4.f;
+            // Fertilizer reduces the odds of a bad harvest.
+            if( here.i_at( examp ).size() > 1 ) {
+                skill_divisor = 2.f;
+            }
+            float plant_count = rng_float( skillLevel / skill_divisor, skillLevel );
             const auto &fp = here.furn( examp )->plant;
             plant_count *= fp->harvest_multiplier;
-            plant_count = std::min( std::max( plant_count, 1 ), 12 );
-            int seedCount = std::max( 1, rng( plant_count / 4, plant_count / 2 ) );
+            int plant_count_int = static_cast<int>( std::round( plant_count ) );
+            plant_count = std::min( std::max( plant_count_int, 1 ), 10 );
+            int seedCount = rng( plant_count_int / 4, plant_count_int / 2 );
             for( item &i : get_harvest_items( type, plant_count, seedCount, true ) ) {
                 if( from_activity ) {
                     i.set_var( "activity_var", you.name );
@@ -2696,10 +2712,14 @@ ret_val<void> iexamine::can_fertilize( Character &you, const tripoint_bub_ms &ti
 {
     map &here = get_map();
     if( !here.has_flag_furn( ter_furn_flag::TFLAG_PLANT, tile ) ) {
-        return ret_val<void>::make_failure( _( "Tile isn't a plant" ) );
+        return ret_val<void>::make_failure( _( "That isn't a plant you can fertilize." ) );
+    }
+    if( here.has_flag_furn( ter_furn_flag::TFLAG_PLANT, tile ) &&
+        harvestable_now( tile ) ) {
+        return ret_val<void>::make_failure( _( "There's no point in fertilizing a mature plant." ) );
     }
     if( here.i_at( tile ).size() > 1 ) {
-        return ret_val<void>::make_failure( _( "Tile is already fertilized" ) );
+        return ret_val<void>::make_failure( _( "That area has already been fertilized." ) );
     }
     if( ( fertilizer->count_by_charges() && !you.has_charges( fertilizer, 1 ) ) ||
         !you.has_amount( fertilizer, 1 ) ) {
@@ -2727,10 +2747,6 @@ void iexamine::fertilize_plant( Character &you, const tripoint_bub_ms &tile,
         planted = you.use_amount( fertilizer, 1 );
     }
 
-    // Reduce the amount of time it takes until the next stage of the plant by
-    // 20% of a seasons length. (default 2.8 days).
-    const time_duration fertilizerEpoch = calendar::season_length() * 0.2;
-
     map &here = get_map();
     // Can't use item_stack::only_item() since there might be fertilizer
     map_stack items = here.i_at( tile );
@@ -2744,11 +2760,6 @@ void iexamine::fertilize_plant( Character &you, const tripoint_bub_ms &tile,
         return;
     }
 
-    // TODO: item should probably clamp the value on its own
-    seed->set_birthday( seed->birthday() - fertilizerEpoch );
-    // The plant furniture has the NOITEM token which prevents adding items on that square,
-    // spawned items are moved to an adjacent field instead, but the fertilizer token
-    // must be on the square of the plant, therefore this hack:
     const furn_id &old_furn = here.furn( tile );
     here.furn_set( tile, furn_str_id::NULL_ID() );
     here.spawn_item( tile, itype_fertilizer, 1, 1, calendar::turn );
@@ -7315,6 +7326,7 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
             { "portable_structure", &iexamine::portable_structure },
             { "pit", &iexamine::pit },
             { "pit_covered", &iexamine::pit_covered },
+            { "thin_ice", &iexamine::thin_ice },
             { "safe", &iexamine::safe },
             { "bulletin_board", &iexamine::bulletin_board },
             { "pedestal_wyrm", &iexamine::pedestal_wyrm },

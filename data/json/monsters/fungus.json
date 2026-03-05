@@ -261,6 +261,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug", "prof_wp_hymenoptera" ],
     "harvest": "arachnid",
     "special_attacks": [ [ "FUNGUS", 200 ] ],
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "SEES", "SMELLS", "POISON", "CLIMBS", "PATH_AVOID_FIRE", "PATH_AVOID_FALL" ],
     "armor": { "bash": 1, "cut": 1, "bullet": 1, "electric": 2 }
@@ -296,7 +297,7 @@
     "harvest": "arachnid",
     "special_attacks": [ [ "FUNGAL_TRAIL", 3 ] ],
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
-    "flags": [ "SEES", "SMELLS", "VENOM", "WEBWALK", "CLIMBS", "PATH_AVOID_FIRE", "INSECTICIDEPROOF" ],
+    "flags": [ "SEES", "VENOM", "WEBWALK", "CLIMBS", "PATH_AVOID_FIRE", "INSECTICIDEPROOF" ],
     "armor": { "bash": 2, "cut": 6, "bullet": 5, "electric": 2 }
   },
   {
@@ -346,6 +347,7 @@
     "vision_night": 2,
     "harvest": "arachnid_wasp",
     "dissect": "dissect_insect_sample_single",
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "SEES", "SMELLS", "HEARS", "HARDTOSHOOT", "PATH_AVOID_FIRE" ],
     "armor": { "bash": 1, "cut": 4, "stab": 2 }
@@ -407,6 +409,7 @@
     "vision_day": 10,
     "vision_night": 7,
     "harvest": "arachnid_wasp",
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "dissect": "dissect_insect_sample_single",
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "SEES", "SMELLS", "HEARS", "PATH_AVOID_FIRE" ],
@@ -497,6 +500,7 @@
     "vision_day": 7,
     "vision_night": 3,
     "harvest": "arachnid_bee",
+    "scents_tracked": [ "sc_fetid", "sc_human" ],
     "dissect": "dissect_insect_sample_single",
     "flags": [ "SEES", "SMELLS", "PATH_AVOID_FIRE" ],
     "armor": { "bash": 3, "cut": 5, "bullet": 4 }

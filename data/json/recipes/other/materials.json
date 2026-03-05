@@ -355,13 +355,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "components": [
-      [
-        [ "tin", 12 ],
-        [ "aluminum_foil", 371 ],
-        [ "chem_aluminium_powder", 29 ],
-        [ "can_drink", 2 ],
-        [ "scrap_aluminum", 1 ]
-      ],
+      [ [ "tin", 12 ], [ "aluminum_foil", 371 ], [ "aluminum_powder", 29 ], [ "can_drink", 2 ], [ "scrap_aluminum", 1 ] ],
       [ [ "copper_scrap_equivalent", 1, "LIST" ] ]
     ]
   },
@@ -511,7 +505,7 @@
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
-    "result": "chem_aluminium_powder",
+    "result": "aluminum_powder",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_OTHER",
     "skill_used": "fabrication",
@@ -522,7 +516,7 @@
     "//": "TODO: inputs not balanced to 176g output",
     "//2": "TODO: water / sand amounts excessive; also can recover some of it as byproducts",
     "components": [
-      [ [ "material_aluminium_ingot", 1 ], [ "can_drink", 6 ], [ "scrap_aluminum", 2 ], [ "aluminum_foil", 40 ] ],
+      [ [ "aluminum_chunk", 1 ], [ "can_drink", 6 ], [ "scrap_aluminum", 2 ], [ "aluminum_foil", 40 ] ],
       [ [ "water", 5 ], [ "water_clean", 5 ] ],
       [ [ "material_sand", 25 ] ]
     ]
@@ -1733,7 +1727,7 @@
     "components": [ [ [ "nylon_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "material_aluminium_ingot",
+    "result": "aluminum_chunk",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",

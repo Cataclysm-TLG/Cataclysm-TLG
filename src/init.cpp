@@ -87,6 +87,7 @@
 #include "overmap.h"
 #include "overmap_connection.h"
 #include "overmap_location.h"
+#include "overmap_map_data_cache.h"
 #include "profession.h"
 #include "profession_group.h"
 #include "proficiency.h"
@@ -290,6 +291,7 @@ void DynamicDataLoader::initialize()
     add( "profession_item_substitutions", &profession::load_item_substitutions );
     add( "proficiency", &proficiency::load_proficiencies );
     add( "proficiency_category", &proficiency_category::load_proficiency_categories );
+    add( "proficiency_migration", &proficiency_migration::load );
     add( "speed_description", &speed_description::load_speed_descriptions );
     add( "mood_face", &mood_face::load_mood_faces );
     add( "skill", &Skill::load_skill );
@@ -395,9 +397,7 @@ void DynamicDataLoader::initialize()
     add( "overmap_special_migration", &overmap_special_migration::load_migrations );
     add( "city_building", &city_buildings::load );
     add( "map_extra", &MapExtras::load );
-
-    add( "region_settings", &load_region_settings );
-    add( "region_overlay", &load_region_overlay );
+    add( "omt_placeholder", &map_data_placeholders::load );
 
     add( "region_settings_river", &region_settings_river::load_region_settings_river );
     add( "region_settings_lake", &region_settings_lake::load_region_settings_lake );
@@ -417,14 +417,13 @@ void DynamicDataLoader::initialize()
          &region_settings_forest_mapgen::load_region_settings_forest_mapgen );
     add( "region_settings_map_extras",
          &region_settings_map_extras::load_region_settings_map_extras );
-    add( "forest_biome_feature",
-         &forest_biome_feature::load_forest_biome_feature );
+    add( "forest_biome_component",
+         &forest_biome_component::load_forest_biome_feature );
     add( "forest_biome_mapgen",
          &forest_biome_mapgen::load_forest_biome_mapgen );
     add( "map_extra_collection",
          &map_extra_collection::load_map_extra_collection );
-    add( "region_settings_new", &region_settings::load_region_settings );
-    add( "region_overlay_new", &region_overlay_new::load_region_overlay_new );
+    add( "region_settings", &region_settings::load_region_settings );
 
     add( "ITEM_BLACKLIST", []( const JsonObject & jo ) {
         item_controller->load_item_blacklist( jo );
@@ -690,10 +689,12 @@ void DynamicDataLoader::unload_data()
     overmap_terrains::reset();
     overmap::reset_oter_id_migrations();
     overmap::reset_oter_id_camp_migrations();
+    map_data_placeholders::reset();
     profession::reset();
     profession_blacklist::reset();
     proficiency::reset();
     proficiency_category::reset();
+    proficiency_migration::reset();
     mood_face::reset();
     speed_description::reset();
     quality::reset();
@@ -709,11 +710,10 @@ void DynamicDataLoader::unload_data()
     region_terrain_furniture::reset();
     region_settings_forest_mapgen::reset();
     region_settings_map_extras::reset();
-    forest_biome_feature::reset();
+    forest_biome_component::reset();
     forest_biome_mapgen::reset();
     map_extra_collection::reset();
     region_settings::reset();
-    region_overlay_new::reset();
     reset_monster_adjustment();
     recipe_dictionary::reset();
     recipe_group::reset();
@@ -728,7 +728,6 @@ void DynamicDataLoader::unload_data()
     reset_mod_tileset();
     reset_overlay_ordering();
     reset_recipe_categories();
-    reset_region_settings();
     reset_scenarios_blacklist();
     reset_speech();
     rotatable_symbols::reset();
@@ -801,6 +800,7 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
             { _( "Damage info orders" ), &damage_info_order::finalize_all },
             { _( "Diseases" ), &disease_type::finalize_all },
             { _( "Weather types" ), &weather_types::finalize_all },
+            { _( "Weather generators" ), &weather_generator::finalize_all },
             { _( "Effect on conditions" ), &effect_on_conditions::finalize_all },
             { _( "Field types" ), &field_types::finalize_all },
             { _( "Ammo effects" ), &ammo_effects::finalize_all },
@@ -867,13 +867,13 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
             { _( "NPC classes" ), &npc_class::finalize_all },
             { _( "Overmap Vision Levels" ), &oter_vision::finalize_all },
             { _( "Overmap Special Migrations" ), &overmap_special_migration::finalize_all },
+            { _( "Overmap placeholders" ), &map_data_placeholders::finalize },
             { _( "Professions" ), &profession::finalize_all },
             { _( "Proficiencies" ), &proficiency::finalize_all },
             { _( "Proficiency Categories" ), &proficiency_category::finalize_all },
             { _( "Qualities" ), &quality::finalize_all },
             { _( "Recipe Groups" ), &recipe_group::finalize },
             { _( "Region Settings" ), &region_settings::finalize_all },
-            { _( "Region Overlays" ), &region_overlay_new::finalize_all },
             { _( "Relic Procedural Generations" ), &relic_procgen_data::finalize_all },
             { _( "Speed Descriptions" ), &speed_description::finalize_all },
             { _( "Species" ), &species_type::finalize_all },
@@ -942,6 +942,7 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
             { _( "Items" ), &items::check_consistency },
             { _( "Materials" ), &materials::check },
             { _( "Faults" ), &faults::check_consistency },
+            { _( "Proficiency migration" ), &proficiency_migration::check },
             { _( "Vehicle parts" ), &vehicles::parts::check },
             { _( "Vehicle part migrations" ), &vpart_migration::check },
             { _( "Mapgen definitions" ), &check_mapgen_definitions },
@@ -963,7 +964,6 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
             { _( "Climbing aid" ), &climbing_aid::check_consistency },
             { _( "Mutations" ), &mutation_branch::check_consistency },
             { _( "Mutation categories" ), &mutation_category_trait::check_consistency },
-            { _( "Region settings" ), check_region_settings },
             { _( "Overmap land use codes" ), &overmap_land_use_codes::check_consistency },
             { _( "Overmap connections" ), &overmap_connections::check_consistency },
             { _( "Overmap terrain" ), &overmap_terrains::check_consistency },

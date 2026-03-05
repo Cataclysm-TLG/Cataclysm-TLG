@@ -611,11 +611,7 @@ void veh_interact::cache_tool_availability()
     crafting_inv = &player_character.crafting_inventory();
 
     cache_tool_availability_update_lifting( player_character.pos_bub() );
-    int mech_jack = 0;
-    if( player_character.is_mounted() ) {
-        mech_jack = player_character.mounted_creature->mech_str_addition() + 10;
-    }
-    int max_quality = std::max( { player_character.max_quality( qual_JACK ), mech_jack,
+    int max_quality = std::max( { player_character.max_quality( qual_JACK ),
                                   map_selector( player_character.pos_bub(), PICKUP_RANGE ).max_quality( qual_JACK ),
                                   vehicle_selector( here, player_character.pos_bub(), 2, true, *veh ).max_quality( qual_JACK )
                                 } );
@@ -2045,7 +2041,8 @@ void veh_interact::do_rename()
 {
     std::string name = string_input_popup()
                        .title( _( "Enter new vehicle name:" ) )
-                       .width( 20 )
+                       .width( 60 )
+                       .text( veh->name )
                        .query_string();
     if( !name.empty() ) {
         veh->name = name;
@@ -2795,6 +2792,7 @@ void veh_interact::display_details( const vpart_info *part )
     int line = 0;
     bool small_mode = column_width < 20;
 
+    // TODO: show mod part comes from
     // line 0: part name
     fold_and_print( w_details, point( col_1, line ), details_w, c_light_green, part->name() );
 
@@ -3098,7 +3096,7 @@ void veh_interact::complete_vehicle( map &here, Character &you )
             for( const std::vector<item_comp> &e : reqs.get_components() ) {
                 for( item &obj : you.consume_items( e, 1, is_crafting_component, [&vpinfo]( const itype_id & itm ) {
                 return itm == vpinfo.base_item;
-            } ) ) {
+            }, false, true ) ) {
                     if( obj.typeId() == vpinfo.base_item ) {
                         base = obj;
                     } else {

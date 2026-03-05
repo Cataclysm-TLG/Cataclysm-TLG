@@ -14,7 +14,7 @@
     "price_postapoc": "25 USD",
     "material": [ "wood", "steel" ],
     "flags": [ "PRIMITIVE_RANGED_WEAPON", "RELOAD_ONE", "MOUNTED_GUN", "DURABLE_MELEE" ],
-    "skill": "rifle",
+    "skill": "launcher",
     "min_strength": 8,
     "ammo": [ "bolt_ballista" ],
     "loudness": 20,

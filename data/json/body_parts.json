@@ -1318,7 +1318,8 @@
     "side": 1,
     "opposite": "foot_sole_r",
     "name_multiple": "foot bottoms",
-    "name": "left foot bottom"
+    "name": "left foot bottom",
+    "flags": [ "LIMB_SOLE" ]
   },
   {
     "id": "foot_arch_l",
@@ -1368,7 +1369,8 @@
     "side": 2,
     "opposite": "foot_sole_l",
     "name_multiple": "foot bottoms",
-    "name": "right foot bottom"
+    "name": "right foot bottom",
+    "flags": [ "LIMB_SOLE" ]
   },
   {
     "id": "foot_arch_r",

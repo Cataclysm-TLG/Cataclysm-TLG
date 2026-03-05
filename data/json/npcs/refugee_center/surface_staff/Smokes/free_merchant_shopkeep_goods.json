@@ -59,7 +59,7 @@
     ]
   },
   {
-    "//": "A collection of welding consumables for both steel and aluminium.",
+    "//": "A collection of welding consumables for both steel and aluminum.",
     "type": "item_group",
     "id": "FREE_MERCHANTS_Shop_Parts_Mechanics",
     "subtype": "collection",

@@ -571,7 +571,7 @@
       [ "knife_butcher", 10 ],
       [ "funnel", 50 ],
       [ "jar_glass_sealed", 50 ],
-      [ "jar_3l_glass_sealed", 40 ],
+      [ "jar_3l_glass_sealed", 2 ],
       [ "tongs", 25 ],
       { "item": "coffeemaker", "prob": 10 },
       [ "cookbook_daintydishes", 40 ],

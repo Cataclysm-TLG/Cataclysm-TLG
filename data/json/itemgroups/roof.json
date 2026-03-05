@@ -65,7 +65,7 @@
       [ "jug_plastic", 10 ],
       { "item": "spray_can", "prob": 50, "charges": [ 0, 4 ] },
       [ "jar_glass_sealed", 10 ],
-      [ "jar_3l_glass_sealed", 8 ],
+      [ "jar_3l_glass_sealed", 2 ],
       [ "flyer", 10 ],
       [ "scorecard", 2 ],
       { "item": "talking_doll", "prob": 20, "charges": [ 0, 10 ] },

@@ -241,15 +241,6 @@
     "levels": [ { "name": "ship", "color": "dark_gray", "sym": "#" }, { "name": "ship", "color": "dark_gray", "sym": "#" } ]
   },
   {
-    "id": "large_outcropping",
-    "//": [ "large raised landscape features, that may look natural", "used for the exodii castle" ],
-    "type": "oter_vision",
-    "levels": [
-      { "name": "outcropping", "color": "light_gray", "sym": "X" },
-      { "name": "outcropping", "color": "light_gray", "sym": "X" }
-    ]
-  },
-  {
     "id": "natural_outcropping",
     "//": "A raised landscape feature that is or looks natural",
     "type": "oter_vision",

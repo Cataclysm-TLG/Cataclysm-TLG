@@ -38,5 +38,10 @@
     "type": "ter_furn_migration",
     "from_furn": "f_compact_ASRG_containment",
     "to_furn": "f_generator_broken"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_furn": "f_broken_boat",
+    "to_furn": "f_beach_log"
   }
 ]

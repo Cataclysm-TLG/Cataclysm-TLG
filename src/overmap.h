@@ -11,6 +11,7 @@
 #include <iosfwd>
 #include <iterator>
 #include <map>
+#include <memory>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -25,10 +26,14 @@
 #include "cube_direction.h"
 #include "enums.h"
 #include "game_constants.h"
+#include "hash_utils.h"
+#include "horde_map.h"
+#include "map_scale_constants.h"
 #include "mapgendata.h"
 #include "mdarray.h"
 #include "memory_fast.h"
 #include "mongroup.h"
+#include "omdata.h"
 #include "overmap_types.h" // IWYU pragma: keep
 #include "point.h"
 #include "rng.h"
@@ -40,9 +45,14 @@ class JsonObject;
 class JsonOut;
 class cata_path;
 class character_id;
+class monster;
 class npc;
 class overmap_connection;
+struct horde_entity;
+struct map_data_summary;
+struct region_settings;
 struct regional_settings;
+template <typename T> struct enum_traits;
 
 struct om_note {
     std::string text;
@@ -118,6 +128,7 @@ struct map_layer {
     cata::mdarray<oter_id, point_om_omt> terrain;
     cata::mdarray<om_vision_level, point_om_omt> visible;
     cata::mdarray<bool, point_om_omt> explored;
+    cata::mdarray<std::shared_ptr<map_data_summary>, point_om_omt> map_cache;
     std::vector<om_note> notes;
     std::vector<om_map_extra> extras;
 };
@@ -204,24 +215,97 @@ class overmap_special_batch
         point_abs_om origin_overmap;
 };
 
+// a point on an overmap_feature_grid that has base point `grid_pos` and its realized offset `offset_pos`
+class overmap_feature_grid_node
+{
+        //grid point; used to bound any given overmap
+        point_abs_om grid_pos = point_abs_om::invalid;
+        //offset position from grid_pos; effectively where the feature is placed
+        point_abs_om offset_pos = point_abs_om::invalid;
+        //existing N/E/S/W adjacent features for this node on grid
+        std::array<point_abs_om, HIGHWAY_MAX_CONNECTIONS> adjacent_features =
+        { point_abs_om::invalid, point_abs_om::invalid, point_abs_om::invalid, point_abs_om::invalid };
+    public:
+        overmap_feature_grid_node() = default;
+        explicit overmap_feature_grid_node( point_abs_om grid_pos ) : grid_pos( grid_pos ) {};
+        point_abs_om get_grid_pos() const {
+            return grid_pos;
+        }
+        point_abs_om get_offset_pos() const {
+            return offset_pos;
+        }
+        void set_offset_pos( const point_abs_om &pos ) {
+            offset_pos = pos;
+        }
+        point_abs_om get_adjacent_pos( int dir ) {
+            return adjacent_features[dir];
+        }
+        void set_adjacent_pos( const point_abs_om &pos, int dir ) {
+            adjacent_features[dir] = pos;
+        }
+        void serialize( JsonOut &out ) const;
+        void deserialize( const JsonObject &obj );
+};
+
 /**
-* Highways use a grid of overmap points to determine where intersections are generated.
-* These grid points have an offset to make highways look more natural.
+* For overmap features that spawn in grids independent of terrain/specials/etc.
+* The structure is a grid of overmap points centered on `grid_origin`
+* separated by row/column_separation, where the points can vary in row/column
+* no more than `max_offset_variance`.
+*
+* This is a base class and should be extended.
 */
-struct interhighway_node {
-    interhighway_node() = default;
-    explicit interhighway_node( point_abs_om grid_pos ) : grid_pos( grid_pos ) {};
-    //offset position; effectively where the intersection special is placed
-    point_abs_om offset_pos = point_abs_om::invalid;
-    //grid point; used to bound any given overmap
-    point_abs_om grid_pos = point_abs_om::invalid;
-    //existing N/E/S/W adjacent intersections
-    std::array<point_abs_om, HIGHWAY_MAX_CONNECTIONS> adjacent_intersections =
-    { point_abs_om::invalid, point_abs_om::invalid, point_abs_om::invalid, point_abs_om::invalid };
-    //set offset_pos for this point
-    void generate_offset( int intersection_max_radius );
-    void serialize( JsonOut &out ) const;
-    void deserialize( const JsonObject &obj );
+class overmap_feature_grid
+{
+
+    protected:
+        std::map<std::string, overmap_feature_grid_node> feature_grid;
+        point_abs_om grid_origin = point_abs_om::invalid;
+        int row_separation = 0; // NOLINT(cata-serialize)
+        int column_separation = 0; // NOLINT(cata-serialize)
+        int max_offset_variance = 0; // NOLINT(cata-serialize)
+    public:
+        overmap_feature_grid() = default;
+        virtual ~overmap_feature_grid() = default;
+        void set_grid_origin( const point_abs_om &p );
+        point_abs_om get_grid_origin() const;
+        // given an overmap point, finds and generates cardinal-adjacent feature points
+        std::vector<overmap_feature_grid_node> find_grid_adjacent_features( const point_abs_om
+                &generated_om_pos );
+        void generate_feature_point( const point_abs_om &generated_om_pos );
+        //DO NOT USE; for legacy loading only
+        void set_feature_grid( const std::map<std::string, overmap_feature_grid_node> &grid ) {
+            feature_grid = grid;
+        }
+        bool feature_point_exists( const point_abs_om &intersection_om ) const;
+        overmap_feature_grid_node get_feature_point(
+            const point_abs_om &p ) const {
+            return feature_grid.at( p.to_string_writable() );
+        }
+        void set_feature_point( const point_abs_om &p,
+                                const overmap_feature_grid_node &intersection ) {
+            feature_grid[p.to_string_writable()] = intersection;
+        }
+        //resets origin, clears all feature points
+        void clear();
+        void serialize( JsonOut &out ) const;
+        void deserialize( const JsonObject &obj );
+        /**
+        * given an overmap point, finds and generates the feature grid points boxing it in,
+        * aligning to the top-left-most point; this point is always last in the returned list
+        * NOTE: this function can be generalized if necessary
+        */
+        std::vector<point_abs_om> find_feature_point_bounds( const point_abs_om &generated_om_pos );
+        //set offset_pos for the given node
+        virtual void generate_offset( overmap_feature_grid_node &node ) = 0;
+};
+
+class highway_intersection_grid : public overmap_feature_grid
+{
+    public:
+        // cannot be placed in constructor because options are loaded after overmapbuffer
+        void set_options();
+        void generate_offset( overmap_feature_grid_node &node ) override;
 };
 
 /*
@@ -236,6 +320,7 @@ struct intrahighway_node {
     overmap_special_id placed_special = overmap_special_id::NULL_ID();
     bool is_segment = true;
     bool is_ramp = false;
+    bool is_interchange = false;
     //whether to flip ramp direction
     bool ramp_down = false;
     explicit intrahighway_node( tripoint_om_omt pos, om_direction::type dir,
@@ -362,6 +447,29 @@ class overmap
         void delete_extra( const tripoint_om_omt &p );
 
         /**
+         * Access cache of map data for agents operating at overmap scale.
+         */
+        bool passable( const tripoint_om_ms &p );
+        std::shared_ptr<map_data_summary> get_omt_summary( const tripoint_om_omt &p );
+        void set_passable( const tripoint_om_ms &p, bool new_passable );
+        void set_passable( const tripoint_abs_omt &p, const std::bitset<24 * 24> &new_passable );
+    private:
+        void set_passable( const tripoint_abs_omt &p, std::shared_ptr<map_data_summary> new_passable );
+        void set_passable( const tripoint_abs_omt &p, string_id<map_data_summary> new_passable );
+        std::optional<tripoint_om_ms> find_open_space_in_submap( const tripoint_om_ms &submap_origin,
+                point_rel_ms &cursor );
+    public:
+        // Spawn a monter at overmap scale.
+        horde_entity &spawn_monster( const tripoint_abs_ms &p, mtype_id id );
+        // Spawn a vector of monsters at overmap scale on a specified submap.
+        void spawn_monsters( const tripoint_om_sm &p, std::vector<monster> &monsters );
+        // Spawn monsters from a mongroup on a specified submap.
+        void spawn_mongroup( const tripoint_om_sm &p, const mongroup_id &type, int count );
+        horde_entity *entity_at( const tripoint_om_ms &p );
+        std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> hordes_at(
+            const tripoint_om_omt &p, int filter );
+
+        /**
          * Getter for overmap scents.
          * @returns a reference to a scent_trace from the requested location.
          */
@@ -379,6 +487,8 @@ class overmap
         static bool inbounds( const point_om_omt &p, int clearance = 0 ) {
             return inbounds( tripoint_om_omt( p, 0 ), clearance );
         }
+        bool inbounds( const tripoint_abs_ms &p );
+
         /**
          * Return a vector containing the absolute coordinates of
          * every matching note on the current z level of the current overmap.
@@ -411,7 +521,7 @@ class overmap
         point_abs_omt global_base_point() const;
 
         // TODO: Should depend on coordinates
-        const regional_settings &get_settings() const {
+        const region_settings &get_settings() const {
             return *settings;
         }
 
@@ -439,7 +549,6 @@ class overmap
     public:
         /** Unit test enablers to check if a given mongroup is present. */
         bool mongroup_check( const mongroup &candidate ) const;
-        bool monster_check( const std::pair<tripoint_om_sm, monster> &candidate ) const;
 
         // TODO: make private
         std::vector<radio_tower> radios;
@@ -504,7 +613,7 @@ class overmap
         // special, so that it can be queried later by mapgen
         std::unordered_map<om_pos_dir, std::string> joins_used;
 
-        const regional_settings *settings;
+        region_settings_id settings;
 
         oter_id get_default_terrain( int z ) const;
 
@@ -523,12 +632,13 @@ class overmap
         void add_omt_stack_argument( const point_abs_omt &p, const std::string &param_name,
                                      const cata_variant &value );
         /**
-         * When monsters despawn during map-shifting they will be added here.
+         * Monster entries live here so they can move around at overmap scales.
+         * When monsters despawn during map-shifting they will also be added here.
          * map::spawn_monsters will load them and place them into the reality bubble
          * (adding it to the creature tracker and putting it onto the map).
-         * This stores each submap worth of monsters in a different bucket of the multimap.
+         * This stores each submap worth of monsters in a seperate tree.
          */
-        std::unordered_multimap<tripoint_om_sm, monster> monster_map;
+        horde_map hordes;
 
         // parse data in an opened overmap file
         void unserialize( const cata_path &file_name, std::istream &fin );
@@ -557,7 +667,9 @@ class overmap
         const city &get_nearest_city( const tripoint_om_omt &p ) const;
         const city &get_invalid_city() const;
 
-        void signal_hordes( const tripoint_rel_sm &p, int sig_power );
+        void signal_hordes( const tripoint_abs_ms &p, int sig_power );
+        void alert_entity( const tripoint_om_ms &location, const tripoint_abs_ms &destination,
+                           int intensity );
         void process_mongroups();
         void move_hordes();
 
@@ -615,6 +727,10 @@ class overmap
         Highway_path place_highway_reserved_path( const tripoint_om_omt &p1,
                 const tripoint_om_omt &p2,
                 int dir1, int dir2, int base_z );
+        /**
+        * Places some guaranteed interchange specials on the given path if possible
+        */
+        void place_highway_interchanges( std::vector<Highway_path> &highway_path );
         /*
         * tries to find a point to place an intersection special where it isn't on water
         * @return point in radius of center without water; invalid if none found
@@ -690,7 +806,10 @@ class overmap
         void calculate_urbanity();
         void calculate_forestosity();
 
+        // place city centers
         void place_cities();
+        // build cities using placed centers
+        void build_cities();
         void place_building( const tripoint_om_omt &p, om_direction::type dir, const city &town,
                              std::unordered_set<overmap_special_id> &placed_unique_buildings );
 
@@ -726,6 +845,8 @@ class overmap
 
         //gets border OMT points of this overmap in cardinal direction
         std::vector<tripoint_om_omt> get_border( const point_rel_om &direction, int z,
+                int distance_corner );
+        std::vector<tripoint_om_omt> get_border( om_direction::type direction, int z,
                 int distance_corner );
         //gets border OMT points of the neighboring overmap in cardinal direction
         std::vector<tripoint_om_omt> get_neighbor_border( const point_rel_om &direction, int z,

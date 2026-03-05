@@ -965,8 +965,11 @@ static void smash()
     // Little hack: If there's a smashable corpse, it'll always be bashed first. So don't bother warning about
     // terrain smashing unless it's actually possible.
     bool smashable_corpse_at_target = false;
-    for( const item &maybe_corpse : get_map().i_at( smashp ) ) {
-        if( is_smashable_corpse( maybe_corpse ) ) {
+    map &here = get_map();
+    for( const item &maybe_corpse : here.i_at( smashp ) ) {
+        // No smashing corpses you can't actually get to.
+        if( is_smashable_corpse( maybe_corpse ) &&
+            !here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
             smashable_corpse_at_target = true;
             break;
         }
@@ -1007,25 +1010,10 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
     ret.resistance = -1;
 
     map &here = get_map();
-    if( is_mounted() ) {
-        auto *mons = mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "Your %s refuses to move as its batteries have been drained." ),
-                         mons->get_name() );
-                return ret;
-            }
-        }
-    }
     const int move_cost = !is_armed() ? 80 :
                           get_wielded_item()->attack_time( *this ) * 0.8;
-    bool mech_smash = false;
     int smashskill = smash_ability();
     ret.skill = smashskill;
-    if( is_mounted() ) {
-        mech_smash = true;
-    }
-
     bool smash_floor = false;
     if( smashp.z() != posz() ) {
         if( smashp.z() > posz() ) {
@@ -1039,12 +1027,6 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
 
     get_event_bus().send<event_type::character_smashes_tile>(
         getID(), here.ter( smashp ).id(), here.furn( smashp ).id() );
-    if( is_mounted() ) {
-        monster *crit = mounted_creature.get();
-        if( crit->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            crit->use_mech_power( 3_kJ );
-        }
-    }
     for( std::pair<const field_type_id, field_entry> &fd_to_smsh : here.field_at( smashp ) ) {
         const std::optional<map_fd_bash_info> &bash_info = fd_to_smsh.first->bash_info;
         if( !bash_info ) {
@@ -1078,14 +1060,16 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
 
     bool should_pulp = false;
     for( const item &maybe_corpse : here.i_at( smashp ) ) {
-        if( is_smashable_corpse( maybe_corpse ) ) {
-            if( maybe_corpse.get_mtype()->bloodType()->has_acid && !maybe_corpse.has_flag( flag_BLED ) &&
-                !is_immune_field( fd_acid ) ) {
-                if( !query_yn( _( "Are you sure you want to pulp an acid filled corpse?" ) ) ) {
-                    return ret; // Player doesn't want an acid bath
+        if( !here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
+            if( is_smashable_corpse( maybe_corpse ) ) {
+                if( maybe_corpse.get_mtype()->bloodType()->has_acid && !maybe_corpse.has_flag( flag_BLED ) &&
+                    !is_immune_field( fd_acid ) ) {
+                    if( !query_yn( _( "Are you sure you want to pulp an acid filled corpse?" ) ) ) {
+                        return ret; // Player doesn't want an acid bath
+                    }
                 }
+                should_pulp = true; // There is at least one corpse to pulp
             }
-            should_pulp = true; // There is at least one corpse to pulp
         }
     }
 
@@ -1125,37 +1109,35 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
     item_location weapon = used_weapon();
     if( bash_result.did_bash ) {
         ret.did_smash = true;
-        if( !mech_smash ) {
-            set_activity_level( EXPLOSIVE_EXERCISE );
-            handle_melee_wear( weapon );
-            weary_mult = 1.0f / exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
+        set_activity_level( EXPLOSIVE_EXERCISE );
+        handle_melee_wear( weapon );
+        weary_mult = 1.0f / exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
 
-            const int mod_sta = std::min( -150, 2 * get_standard_stamina_cost() );
-            burn_energy_arms( mod_sta );
+        const int mod_sta = std::min( -150, 2 * get_standard_stamina_cost() );
+        burn_energy_arms( mod_sta );
 
-            if( weapon ) {
-                const int glass_portion = weapon->made_of( material_glass );
-                float glass_fraction = glass_portion / static_cast<float>( weapon->type->mat_portion_total );
-                if( std::isnan( glass_fraction ) || glass_fraction > 1.f ) {
-                    glass_fraction = 0.f;
+        if( weapon ) {
+            const int glass_portion = weapon->made_of( material_glass );
+            float glass_fraction = glass_portion / static_cast<float>( weapon->type->mat_portion_total );
+            if( std::isnan( glass_fraction ) || glass_fraction > 1.f ) {
+                glass_fraction = 0.f;
+            }
+            const int vol = weapon->volume() * glass_fraction / 250_ml;
+            if( glass_portion && rng( 0, vol + 3 ) < vol ) {
+                add_msg( m_bad, _( "Your %s shatters!" ), weapon->tname() );
+                weapon->spill_contents( pos_bub() );
+                sounds::sound( pos_bub(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
+                               "glass" );
+                deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( damage_cut,
+                             rng( 0,
+                                  vol ) ) );
+                if( vol > 20 ) {
+                    // Hurt left arm too, if it was big
+                    deal_damage( nullptr, bodypart_id( "hand_l" ), damage_instance( damage_cut,
+                                 rng( 0, static_cast<int>( vol * .5 ) ) ) );
                 }
-                const int vol = weapon->volume() * glass_fraction / 250_ml;
-                if( glass_portion && rng( 0, vol + 3 ) < vol ) {
-                    add_msg( m_bad, _( "Your %s shatters!" ), weapon->tname() );
-                    weapon->spill_contents( pos_bub() );
-                    sounds::sound( pos_bub(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
-                                   "glass" );
-                    deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( damage_cut,
-                                 rng( 0,
-                                      vol ) ) );
-                    if( vol > 20 ) {
-                        // Hurt left arm too, if it was big
-                        deal_damage( nullptr, bodypart_id( "hand_l" ), damage_instance( damage_cut,
-                                     rng( 0, static_cast<int>( vol * .5 ) ) ) );
-                    }
-                    remove_weapon();
-                    check_dead_state( &here );
-                }
+                remove_weapon();
+                check_dead_state( &here );
             }
         }
         mod_moves( -move_cost * weary_mult );
@@ -1184,7 +1166,8 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
         }
 
     } else {
-        if( !here.has_items( smashp ) ) {
+        if( !here.has_items( smashp ) ||
+            here.furn( smashp ).obj().has_flag( ter_furn_flag::TFLAG_SEALED ) ) {
             add_msg( _( "There's nothing there to smash!" ) );
         } else {
             sounds::sound( smashp, 8, sounds::sound_t::combat, _( "thump!" ),
@@ -2453,14 +2436,6 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             }
             break;
         case ACTION_MOVE_DOWN: {
-            if( player_character.is_mounted() ) {
-                auto *mon = player_character.mounted_creature.get();
-                if( !mon->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-                    add_msg( m_info, _( "You can't go down stairs while you're riding." ) );
-                    break;
-                }
-            }
-
             if( has_vehicle_control( player_character ) ) {
                 const optional_vpart_position vp = here.veh_at( player_character.pos_bub() );
                 if( vp->vehicle().is_rotorcraft( here ) ) {
@@ -2502,13 +2477,6 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
         }
 
         case ACTION_MOVE_UP:
-            if( player_character.is_mounted() ) {
-                auto *mon = player_character.mounted_creature.get();
-                if( !mon->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-                    add_msg( m_info, _( "You can't go up stairs while you're riding." ) );
-                    break;
-                }
-            }
             if( !player_character.in_vehicle ) {
                 vertical_move( 1, false );
             } else if( has_vehicle_control( player_character ) ) {
@@ -2524,12 +2492,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_CLOSE:
-            if( player_character.is_mounted() ) {
-                auto *mon = player_character.mounted_creature.get();
-                if( !mon->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-                    add_msg( m_info, _( "You can't close things while you're riding." ) );
-                }
-            } else if( mouse_target ) {
+            if( mouse_target ) {
                 doors::close_door( here, player_character, *mouse_target );
             } else {
                 close();
@@ -2600,7 +2563,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_ZONES:
-            zones_manager();
+            zone_manager_ui::display_zone_manager();
             break;
 
         case ACTION_LOOT:

@@ -124,6 +124,8 @@ using drop_locations = std::list<drop_location>;
 
 using bionic_uid = unsigned int;
 
+static const matec_id no_technique_id( "" );
+
 constexpr int MAX_CLAIRVOYANCE = 40;
 // kcal in a kilogram of fat, used to convert stored kcal into body weight. 3500kcal/lb * 2.20462lb/kg = 7716.17
 constexpr float KCAL_PER_KG = 3500 * 2.20462;
@@ -682,7 +684,7 @@ class Character : public Creature, public visitable
         // Strength modified by limb lifting score
         int get_arm_str() const;
         // Defines distance from which CAMOUFLAGE mobs are visible
-        int get_eff_per() const override;
+        int spot_check() const override;
 
         // Penalty modifiers applied for ranged attacks due to low stats
         int ranged_dex_mod() const;
@@ -988,7 +990,7 @@ class Character : public Creature, public visitable
         void update_stomach( const time_point &from, const time_point &to );
         /** Updates the mutations from enchantments */
         void update_cached_mutations();
-        /** Returns true if character needs food, false if character is an NPC with NO_NPC_FOOD set */
+        /** Returns true if character is the player or a member of their faction, otherwise false. */
         bool needs_food() const;
         /** Increases hunger, thirst, fatigue and stimulants wearing off. `rate_multiplier` is for retroactive updates. */
         void update_needs( int rate_multiplier );
@@ -1213,7 +1215,8 @@ class Character : public Creature, public visitable
                                     bool allow_unarmed = true, int forced_movecost = -1 );
 
         /** Handles reach melee attacks */
-        void reach_attack( const tripoint_bub_ms &p, int forced_movecost = -1 );
+        void reach_attack( const tripoint_bub_ms &p, int forced_movecost = -1,
+                           matec_id force_technique = no_technique_id );
 
         /**
          * Calls the to other melee_attack function with an empty technique id (meaning no specific
@@ -3541,15 +3544,15 @@ class Character : public Creature, public visitable
         /** Returns 1 if the player is wearing an item of that count on one foot, 2 if on both,
          *  and zero if on neither */
         int shoe_type_count( const itype_id &it ) const;
-        /** Returns true if the player is wearing something on their feet that is not SKINTIGHT */
-        bool is_wearing_shoes( const side &check_side = side::BOTH ) const;
 
         // Adjusted squeamish penalty for traits and other issues.
         int get_squeamish_penalty( const bodypart_id &bp ) const;
 
-        /** Returns true if the player is not wearing anything that covers the soles of their feet,
-            ignoring INTEGRATED */
-        bool is_barefoot() const;
+        /**
+         * Returns true if the character doesn't have tough feet or anything rigid on their soles.
+         * Integrated items return false if they're rigid, such as hooves.
+         */
+        bool barefoot_penalty( const side &check_side = side::BOTH ) const;
 
         /** Returns true if the worn item is visible (based on layering and coverage) */
         bool is_worn_item_visible( std::list<item>::const_iterator ) const;
@@ -3799,15 +3802,17 @@ class Character : public Creature, public visitable
                                const std::function<bool( const item & )> &filter = return_true<item>, bool player_inv = true,
                                bool npc_query = false, const recipe *rec = nullptr );
         std::list<item> consume_items( const comp_selection<item_comp> &is, int batch,
-                                       const std::function<bool( const item & )> &filter = return_true<item>, bool select_ind = false );
+                                       const std::function<bool( const item & )> &filter = return_true<item>, bool select_ind = false,
+                                       bool disable_preference = false );
         std::list<item> consume_items( map &m, const comp_selection<item_comp> &is, int batch,
                                        const std::function<bool( const item & )> &filter = return_true<item>,
-                                       const std::vector<tripoint_bub_ms> &reachable_pts = {}, bool select_ind = false );
+                                       const std::vector<tripoint_bub_ms> &reachable_pts = {}, bool select_ind = false,
+                                       bool disable_preference = false );
         // Selects one entry in components using select_item_component and consumes those items.
         std::list<item> consume_items( const std::vector<item_comp> &components, int batch = 1,
                                        const std::function<bool( const item & )> &filter = return_true<item>,
                                        const std::function<bool( const itype_id & )> &select_ind = return_false<itype_id>,
-                                       const bool can_cancel = false );
+                                       bool can_cancel = false, bool disable_preference = false );
         bool consume_software_container( const itype_id &software_id );
         comp_selection<tool_comp>
         select_tool_component( const std::vector<tool_comp> &tools, int batch, read_only_visitable &map_inv,

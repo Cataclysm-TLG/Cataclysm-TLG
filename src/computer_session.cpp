@@ -67,8 +67,6 @@
 #include "ui.h"
 #include "ui_manager.h"
 
-static const efftype_id effect_amigara( "amigara" );
-
 static const furn_str_id furn_f_centrifuge( "f_centrifuge" );
 static const furn_str_id furn_f_console_broken( "f_console_broken" );
 static const furn_str_id furn_f_counter( "f_counter" );
@@ -77,6 +75,7 @@ static const furn_str_id furn_f_rubble_rock( "f_rubble_rock" );
 static const itype_id itype_black_box( "black_box" );
 static const itype_id itype_blood( "blood" );
 static const itype_id itype_blood_tainted( "blood_tainted" );
+static const itype_id itype_blood_tainted_human( "blood_tainted_human" );
 static const itype_id itype_c4( "c4" );
 static const itype_id itype_cobalt_60( "cobalt_60" );
 static const itype_id itype_mininuke( "mininuke" );
@@ -853,8 +852,6 @@ void computer_session::action_elevator_on()
 
 void computer_session::action_amigara_log()
 {
-    get_timed_events().add( timed_event_type::AMIGARA_WHISPERS, calendar::turn + 5_minutes );
-
     Character &player_character = get_player_character();
     tripoint_abs_sm abs_loc = get_map().get_abs_sub();
     point_abs_sm abs_sub = abs_loc.xy();
@@ -993,7 +990,8 @@ void computer_session::action_blood_anal()
             } else if( items.only_item().empty() ) {
                 print_error( _( "ERROR: Please only use container with blood sample." ) );
             } else if( items.only_item().legacy_front().typeId() != itype_blood &&
-                       items.only_item().legacy_front().typeId() != itype_blood_tainted ) {
+                       items.only_item().legacy_front().typeId() != itype_blood_tainted &&
+                       items.only_item().legacy_front().typeId() != itype_blood_tainted_human ) {
                 print_error( _( "ERROR: Please only use blood samples." ) );
             } else if( items.only_item().legacy_front().rotten() ) {
                 print_error( _( "ERROR: Please only use fresh blood samples." ) );
@@ -1001,14 +999,13 @@ void computer_session::action_blood_anal()
                 const item &blood = items.only_item().legacy_front();
                 const mtype *mt = blood.get_mtype();
                 if( mt == nullptr || mt->id == mtype_id::NULL_ID() ) {
-                    print_line( _( "Result: Human blood, no pathogens found." ) );
+                    print_line( _( "Result: Human blood.  Results nominal." ) );
                 } else if( mt->in_species( species_ZOMBIE ) ) {
                     if( mt->in_species( species_HUMAN ) ) {
-                        print_line( _( "Result: Human blood.  Unknown pathogen found." ) );
+                        print_line( _( "Result: Human blood.  Systemic necrosis detected." ) );
                     } else {
-                        print_line( _( "Result: Unknown blood type.  Unknown pathogen found." ) );
+                        print_line( _( "Result: Unknown blood type.  Systemic necrosis detected." ) );
                     }
-                    print_line( _( "Pathogen bonded to erythrocytes and leukocytes." ) );
                     item software( itype_software_blood_data, calendar::turn_zero );
                     units::ememory downloaded_size = software.ememory_size();
                     if( query_bool( _( "Download data?" ) ) ) {
@@ -1642,7 +1639,6 @@ void computer_session::failure_pump_leak()
 void computer_session::failure_amigara()
 {
     get_timed_events().add( timed_event_type::AMIGARA, calendar::turn + 30_seconds );
-    get_player_character().add_effect( effect_amigara, 2_minutes );
     map &here = get_map();
     explosion_handler::explosion( &get_player_character(),
                                   tripoint_bub_ms( rng( 0, MAPSIZE_X ), rng( 0, MAPSIZE_Y ), here.get_abs_sub().z() ), 10, 0.7, false,

@@ -20,7 +20,7 @@
       "sound": "porcelain breaking!",
       "sound_fail": "whunk!",
       "items": [
-        { "item": "cu_pipe", "prob": 50 },
+        { "item": "pipe_cpvc", "count": [ 1, 5 ] },
         { "item": "water_faucet", "prob": 50 },
         { "item": "pipe_fittings", "count": [ 0, 2 ] },
         { "item": "ceramic_shard", "count": [ 6, 18 ] }
@@ -46,8 +46,8 @@
       "sound_vol": 16,
       "sound_fail_vol": 12,
       "items": [
-        { "item": "cu_pipe", "count": [ 0, 2 ] },
-        { "item": "copper_fragment", "count": [ 0, 2 ] },
+        { "item": "pipe_cpvc", "count": [ 1, 5 ] },
+        { "item": "scrap_copper", "count": [ 0, 2 ] },
         { "item": "pipe_fittings", "count": [ 0, 2 ] },
         { "item": "ceramic_shard", "count": [ 2, 6 ] },
         { "item": "glass_shard", "count": [ 8, 16 ] }
@@ -75,7 +75,9 @@
       "sound": "porcelain breaking!",
       "sound_fail": "whunk!",
       "items": [
-        { "item": "cu_pipe", "prob": 50 },
+        {
+          "distribution": [ { "item": "pipe_cpvc", "prob": 40, "count": [ 1, 5 ] }, { "item": "cu_pipe", "prob": 60, "count": [ 1, 5 ] } ]
+        },
         { "item": "water_faucet", "prob": 50 },
         { "item": "pipe_fittings", "count": [ 0, 2 ] },
         { "item": "ceramic_shard", "count": [ 2, 8 ] }
@@ -101,11 +103,7 @@
       "str_max": 30,
       "sound": "porcelain breaking!",
       "sound_fail": "whunk!",
-      "items": [
-        { "item": "cu_pipe", "prob": 50 },
-        { "item": "ceramic_shard", "count": [ 2, 8 ] },
-        { "item": "wax_paraffin", "count": 1 }
-      ]
+      "items": [ { "item": "ceramic_shard", "count": [ 2, 8 ] }, { "item": "wax_paraffin", "count": 1 } ]
     }
   },
   {
@@ -139,7 +137,7 @@
         { "item": "cu_pipe", "count": [ 1, 4 ] },
         { "item": "copper_fragment", "count": [ 0, 2 ] },
         { "item": "water_faucet", "count": [ 0, 1 ] },
-        { "item": "material_aluminium_ingot", "count": 2 }
+        { "item": "aluminum_chunk", "count": 2 }
       ]
     }
   },
@@ -174,7 +172,7 @@
         { "item": "cu_pipe", "count": [ 1, 8 ] },
         { "item": "copper_fragment", "count": [ 1, 4 ] },
         { "item": "water_faucet", "count": [ 0, 1 ] },
-        { "item": "material_aluminium_ingot", "count": 4 }
+        { "item": "aluminum_chunk", "count": 4 }
       ]
     }
   },

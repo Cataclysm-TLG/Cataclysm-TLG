@@ -78,6 +78,7 @@ class eoc_events;
 class event_bus;
 class faction_manager;
 class field_entry;
+class inventory_selector_preset;
 class item;
 class kill_tracker;
 class live_view;
@@ -146,7 +147,6 @@ class game
 {
         friend class editmap;
         friend class main_menu;
-        friend class exosuit_interact;
         friend class swap_map;
         friend achievements_tracker &get_achievements();
         friend event_bus &get_event_bus();
@@ -305,9 +305,11 @@ class game
 
         /**
          * Moves the player to an alternate dimension.
-         * The prefix identifies the dimension and its properties.
+         * @param prefix identifies the dimension and its properties.
+         * @param npc_travellers vector of NPCs that should be brought along when travelling to another dimension
          */
-        bool travel_to_dimension( const std::string &prefix );
+        bool travel_to_dimension( const std::string &prefix, const std::string &region_type,
+                                  const std::vector<npc *> &npc_travellers );
         /**
          * Retrieve the identifier of the current dimension.
          * TODO: this should be a dereferencable id that gives properties of the dimension.
@@ -664,7 +666,9 @@ class game
         /** Checks whether or not there is a zone of particular type nearby */
         bool check_near_zone( const zone_type_id &type, const tripoint_bub_ms &where ) const;
         bool is_zones_manager_open() const;
-        void zones_manager();
+        void set_zones_manager_open( bool zm_open ) {
+            zones_manager_open = zm_open;
+        };
 
         /// @brief attempt to find a safe route (avoids tiles dangerous to '@ref who').
         /// @param who character to use for evaluating danger tiles and pathfinding start position
@@ -732,6 +736,8 @@ class game
         /** Custom-filtered menu for inventory and nearby items and those that within specified radius */
         item_location inv_map_splice( const item_filter &filter, const std::string &title, int radius = 0,
                                       const std::string &none_message = "" );
+        item_location inv_map_splice( const inventory_selector_preset &preset, const std::string &title,
+                                      int radius = 0, const std::string &none_message = "" );
         item_location inv_map_splice( const item_location_filter &filter, const std::string &title,
                                       int radius = 0, const std::string &none_message = "" );
 
@@ -1344,7 +1350,7 @@ class game
         //currently used as a hacky workaround for dimension swapping
         bool swapping_dimensions = false; // NOLINT (cata-serialize)
     private:
-        // Stores the currently occupoed dimension.
+        // Stores the currently occupied dimension.
         // TODO: should be an id instead of a string.
         std::string dimension_prefix;
 };

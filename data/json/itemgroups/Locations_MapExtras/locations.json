@@ -183,7 +183,7 @@
       [ "antiparasitic", 10 ],
       [ "diazepam", 10 ],
       [ "stethoscope", 35 ],
-      [ "jar_3l_glass_sealed", 15 ],
+      [ "jar_3l_glass_sealed", 1 ],
       [ "magnifying_glass", 5 ],
       { "item": "chem_hydrogen_peroxide", "prob": 5, "charges": [ 1, -1 ] },
       [ "strong_antibiotic", 1 ],
@@ -544,7 +544,7 @@
       [ "wire", 40 ],
       { "item": "sheet_metal", "prob": 5 },
       { "item": "sheet_metal_small", "prob": 5, "count": [ 0, 4 ] },
-      { "item": "material_aluminium_ingot", "prob": 10, "count": [ 1, 5 ] }
+      { "item": "aluminum_chunk", "prob": 10, "count": [ 1, 5 ] }
     ]
   },
   {
@@ -556,7 +556,7 @@
       { "item": "glass_shard_large", "prob": 50 },
       [ "bottle_glass", 30 ],
       [ "jar_glass_sealed", 20 ],
-      [ "jar_3l_glass_sealed", 10 ]
+      [ "jar_3l_glass_sealed", 1 ]
     ]
   },
   {
@@ -707,6 +707,7 @@
       [ "pail_plastic", 5 ],
       [ "ear_spool", 15 ],
       { "item": "lighter", "prob": 35, "charges": [ 0, 15 ], "damage": [ 0, 4 ] },
+      { "item": "pipe_cpvc", "prob": 35, "count": [ 2, 9 ] },
       [ "funnel", 25 ],
       [ "canteen", 20 ],
       [ "basket_laundry", 20 ],
@@ -741,7 +742,7 @@
       [ "fancy_glasses_eye", 5 ],
       { "item": "marble", "prob": 20, "charges": [ 1, 3 ] },
       [ "fish_bowl", 15 ],
-      [ "jar_3l_glass_sealed", 120 ],
+      [ "jar_3l_glass_sealed", 2 ],
       [ "magnifying_glass", 20 ],
       [ "mirror", 30 ],
       { "item": "glass_shard", "prob": 650, "charges": [ 1, 8 ] },
@@ -775,7 +776,7 @@
       [ "can_drink", 130 ],
       [ "can_drink", 130 ],
       [ "keg", 15 ],
-      [ "material_aluminium_ingot", 25 ],
+      [ "aluminum_chunk", 25 ],
       [ "xlframe", 10 ],
       [ "survival_kit_box", 1 ],
       [ "wearable_light", 5 ],
@@ -935,7 +936,7 @@
       [ "fire_ax", 2 ],
       { "item": "spray_can", "prob": 50, "charges": [ 0, 10 ] },
       [ "jar_glass_sealed", 10 ],
-      [ "jar_3l_glass_sealed", 8 ],
+      [ "jar_3l_glass_sealed", 2 ],
       [ "flyer", 10 ],
       { "item": "gasoline_lantern", "prob": 10, "charges": [ 0, 500 ] },
       { "item": "electric_lantern", "prob": 8, "charges": [ 0, 100 ] },
@@ -1363,7 +1364,6 @@
       { "item": "ref_lighter", "prob": 2, "charges": [ 0, 50 ] },
       { "item": "matches", "prob": 60, "charges": [ 0, 20 ] },
       { "item": "ref_matches", "prob": 60, "charges": [ 0, 32 ] },
-      [ "sewage", 60 ],
       [ "pipebomb", 4 ],
       { "prob": 8, "group": "crack_bag_zipper_1_4" },
       [ "crackpipe", 37 ],
@@ -1390,6 +1390,7 @@
       [ "hand_pump", 10 ],
       [ "wrench", 30 ],
       [ "pipe", 20 ],
+      { "item": "pipe_cpvc", "prob": 40, "count": [ 7, 23 ] },
       [ "boots", 70 ],
       [ "denim_overalls", 10 ],
       [ "technician_coveralls", 25 ],
@@ -1415,7 +1416,7 @@
       { "group": "tools_toolbox", "prob": 5 },
       [ "apron_plastic", 20 ],
       [ "apron_leather", 2 ],
-      [ "chem_aluminium_sulphate", 20 ],
+      [ "aluminum_sulfate", 20 ],
       [ "plunger_toilet", 10 ],
       [ "plunger_futuristic", 5 ]
     ]
@@ -2284,7 +2285,7 @@
       { "item": "hotplate", "prob": 15 },
       { "item": "funnel", "prob": 50 },
       { "item": "jar_glass_sealed", "prob": 20 },
-      { "item": "jar_3l_glass_sealed", "prob": 15 },
+      { "item": "jar_3l_glass_sealed", "prob": 1 },
       { "item": "apron_plastic", "prob": 25 },
       { "item": "apron_cotton", "prob": 8 },
       { "item": "apron_leather", "prob": 2 },
@@ -2300,7 +2301,7 @@
       { "item": "chem_hydrogen_peroxide", "prob": 10, "charges": [ 1, -1 ] },
       { "item": "chem_muriatic_acid", "prob": 5, "charges": [ 1, -1 ] },
       { "prob": 10, "group": "chem_sulphur_bottle_plastic_small_100_inf" },
-      { "item": "chem_aluminium_powder", "prob": 5, "charges": [ 1, 100 ] },
+      { "item": "aluminum_powder", "prob": 5, "charges": [ 1, 100 ] },
       { "item": "chem_zinc_powder", "prob": 10, "charges": [ 100, -1 ] },
       { "item": "chem_zinc_oxide", "prob": 5, "charges": [ 100, -1 ] },
       { "item": "chem_manganese_dioxide", "prob": 10, "charges": [ 100, -1 ] },

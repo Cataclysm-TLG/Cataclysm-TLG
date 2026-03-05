@@ -106,6 +106,24 @@ std::string enum_to_string<mdeath_type>( mdeath_type data )
 
 } // namespace io
 
+template<>
+const mtype &int_id<mtype>::obj() const
+{
+    return MonsterGenerator::generator().mon_templates->obj( *this );
+}
+
+template<>
+bool int_id<mtype>::is_valid() const
+{
+    return MonsterGenerator::generator().mon_templates->is_valid( *this );
+}
+
+template<>
+const string_id<mtype> &int_id<mtype>::id() const
+{
+    return MonsterGenerator::generator().mon_templates->convert( *this );
+}
+
 /** @relates string_id */
 template<>
 const mtype &string_id<mtype>::obj() const
@@ -118,6 +136,12 @@ template<>
 bool string_id<mtype>::is_valid() const
 {
     return MonsterGenerator::generator().mon_templates->is_valid( *this );
+}
+
+template<>
+int_id<mtype> string_id<mtype>::id() const
+{
+    return MonsterGenerator::generator().mon_templates->convert( *this, int_id<mtype>( 0 ) );
 }
 
 /** @relates string_id */
@@ -944,9 +968,6 @@ void mtype::load( const JsonObject &jo, const std::string_view src )
     optional( jo, was_loaded, "starting_ammo", starting_ammo );
     optional( jo, was_loaded, "luminance", luminance, 0 );
     optional( jo, was_loaded, "revert_to_itype", revert_to_itype, itype_id() );
-    optional( jo, was_loaded, "mech_weapon", mech_weapon, itype_id() );
-    optional( jo, was_loaded, "mech_str_bonus", mech_str_bonus, 0 );
-    optional( jo, was_loaded, "mech_battery", mech_battery, itype_id() );
 
     optional( jo, was_loaded, "mount_items", mount_items );
 
@@ -1334,14 +1355,6 @@ void MonsterGenerator::check_monster_definitions() const
         if( !mon.fungalize_into.is_empty() && !mon.fungalize_into.is_valid() ) {
             debugmsg( "monster %s has unknown fungalize_into: %s", mon.id.c_str(),
                       mon.fungalize_into.c_str() );
-        }
-        if( !mon.mech_weapon.is_empty() && !item::type_is_defined( mon.mech_weapon ) ) {
-            debugmsg( "monster %s has unknown mech_weapon: %s", mon.id.c_str(),
-                      mon.mech_weapon.c_str() );
-        }
-        if( !mon.mech_battery.is_empty() && !item::type_is_defined( mon.mech_battery ) ) {
-            debugmsg( "monster %s has unknown mech_battery: %s", mon.id.c_str(),
-                      mon.mech_battery.c_str() );
         }
         if( !mon.mount_items.tied.is_empty() && !item::type_is_defined( mon.mount_items.tied ) ) {
             debugmsg( "monster %s has unknown mount_items.tied: %s", mon.id.c_str(),

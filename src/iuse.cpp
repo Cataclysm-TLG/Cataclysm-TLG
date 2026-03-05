@@ -60,6 +60,7 @@
 #include "item.h"
 #include "item_location.h"
 #include "item_pocket.h"
+#include "item_transformation.h"
 #include "iteminfo_query.h"
 #include "itype.h"
 #include "json.h"
@@ -119,7 +120,6 @@
 #include "weather_gen.h"
 #include "weather_type.h"
 
-static const activity_id ACT_FISH( "ACT_FISH" );
 static const activity_id ACT_GAME( "ACT_GAME" );
 static const activity_id ACT_GENERIC_GAME( "ACT_GENERIC_GAME" );
 static const activity_id ACT_HAND_CRANK( "ACT_HAND_CRANK" );
@@ -204,6 +204,7 @@ static const efftype_id effect_onfire( "onfire" );
 static const efftype_id effect_paincysts( "paincysts" );
 static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_poison( "poison" );
+static const efftype_id effect_poison_tainted( "poison_tainted" );
 static const efftype_id effect_pre_conjunctivitis_bacterial( "pre_conjunctivitis_bacterial" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
@@ -255,7 +256,6 @@ static const itype_id itype_arcade_machine( "arcade_machine" );
 static const itype_id itype_atomic_coffeepot( "atomic_coffeepot" );
 static const itype_id itype_barometer( "barometer" );
 static const itype_id itype_battery( "battery" );
-static const itype_id itype_c4armed( "c4armed" );
 static const itype_id itype_canister_empty( "canister_empty" );
 static const itype_id itype_cig( "cig" );
 static const itype_id itype_cigar( "cigar" );
@@ -264,8 +264,6 @@ static const itype_id itype_detergent( "detergent" );
 static const itype_id itype_ecig( "ecig" );
 static const itype_id itype_efile_photos( "efile_photos" );
 static const itype_id itype_fire( "fire" );
-static const itype_id itype_firecracker_act( "firecracker_act" );
-static const itype_id itype_firecracker_pack_act( "firecracker_pack_act" );
 static const itype_id itype_geiger_on( "geiger_on" );
 static const itype_id itype_glass_shard( "glass_shard" );
 static const itype_id itype_handrolled_cig( "handrolled_cig" );
@@ -284,7 +282,6 @@ static const itype_id itype_multi_cooker_filled( "multi_cooker_filled" );
 static const itype_id itype_nicotine_liquid( "nicotine_liquid" );
 static const itype_id itype_paper( "paper" );
 static const itype_id itype_pur_tablets( "pur_tablets" );
-static const itype_id itype_radio_car( "radio_car" );
 static const itype_id itype_radio_car_on( "radio_car_on" );
 static const itype_id itype_radio_on( "radio_on" );
 static const itype_id itype_rebreather_on( "rebreather_on" );
@@ -300,7 +297,8 @@ static const itype_id itype_towel( "towel" );
 static const itype_id itype_towel_wet( "towel_wet" );
 static const itype_id itype_water( "water" );
 static const itype_id itype_water_clean( "water_clean" );
-static const itype_id itype_water_purifying( "water_purifying" );
+static const itype_id itype_water_murky( "water_murky" );
+static const itype_id itype_water_purifying_active( "water_purifying_active" );
 static const itype_id itype_wax( "wax" );
 static const itype_id itype_weather_reader( "weather_reader" );
 
@@ -966,6 +964,29 @@ std::optional<int> iuse::poison( Character *p, item *it, const tripoint_bub_ms &
         return 1;
     }
     p->add_effect( effect_poison, 1_hours );
+    p->add_effect( effect_foodpoison, 3_hours );
+    return 1;
+}
+
+std::optional<int> iuse::poison_tainted( Character *p, item *it, const tripoint_bub_ms & )
+{
+    if( p->has_trait( trait_EATDEAD ) ) {
+        return 1;
+    }
+
+    // NPCs have a magical sense of what is inedible
+    // Players can abuse the crafting menu instead...
+    if( !it->has_flag( flag_HIDDEN_POISON ) &&
+        ( p->is_npc() ||
+          !p->query_yn( _( "Are you sure you want to eat this?  It looks poisonous…" ) ) ) ) {
+        return std::nullopt;
+    }
+    /** @EFFECT_STR increases EATPOISON trait effectiveness (50-90%) */
+    if( p->has_trait( trait_EATPOISON ) && ( !one_in( p->str_cur / 2 ) ) ) {
+        p->add_effect( effect_poison, 1_hours );
+        return 1;
+    }
+    p->add_effect( effect_poison_tainted, 1_hours * ( rng( 1, 2 ) ) );
     p->add_effect( effect_foodpoison, 3_hours );
     return 1;
 }
@@ -1767,18 +1788,19 @@ std::optional<int> iuse::remove_all_mods( Character *p, item *, const tripoint_b
 
 static bool good_fishing_spot( const tripoint_bub_ms &pos, Character *p )
 {
-    std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub( 60, pos );
+    std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub(
+                MAX_VIEW_DISTANCE, pos );
     std::vector<monster *> fishables = g->get_fishable_monsters( fishable_locations );
     map &here = get_map();
     // isolated little body of water with no definite fish population
     const oter_id &cur_omt =
         overmap_buffer.ter( coords::project_to<coords::omt>( here.get_abs( pos ) ) );
-    std::string om_id = cur_omt.id().c_str();
     if( fishables.empty() && !here.has_flag( ter_furn_flag::TFLAG_CURRENT, pos ) &&
         // this is a ridiculous way to find a good fishing spot, but I'm just trying
         // to do oceans right now.  Maybe is_water_body() would be better?
         // if you find this comment still here and it's later than 2025, LOL.
-        om_id.find( "river_" ) == std::string::npos && !cur_omt->is_lake() && !cur_omt->is_ocean() &&
+        is_ot_match( "river_", cur_omt, ot_match_type::contains ) &&
+        !cur_omt->is_lake() && !cur_omt->is_ocean() &&
         !cur_omt->is_lake_shore() && !cur_omt->is_ocean_shore() ) {
         p->add_msg_if_player( m_info, _( "You doubt you will have much luck catching fish here." ) );
         return false;
@@ -1808,9 +1830,8 @@ std::optional<int> iuse::fishing_rod( Character *p, item *it, const tripoint_bub
         return std::nullopt;
     }
     p->add_msg_if_player( _( "You cast your line and wait to hook something…" ) );
-    p->assign_activity( ACT_FISH, to_moves<int>( 5_hours ), 0, 0, it->tname() );
-    p->activity.targets.emplace_back( *p, it );
-    p->activity.coord_set = g->get_fishable_locations_abs( 60, *found );
+    p->assign_activity( fish_activity_actor( item_location( *p, it ),
+                        g->get_fishable_locations_abs( MAX_VIEW_DISTANCE, *found ), 5_hours ) );
     return 0;
 }
 
@@ -1910,7 +1931,8 @@ std::optional<int> iuse::fish_trap_tick( Character *p, item *it, const tripoint_
         }
 
         //get the fishables around the trap's spot
-        std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub( 60, pos );
+        std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub(
+                    MAX_VIEW_DISTANCE, pos );
         std::vector<monster *> fishables = g->get_fishable_monsters( fishable_locations );
         for( int i = 0; i < fishes; i++ ) {
             player.practice( skill_survival, rng( 3, 10 ) );
@@ -2009,328 +2031,6 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint_bu
     return 1;
 }
 
-class exosuit_interact
-{
-    public:
-        static int run( item *it ) {
-            exosuit_interact menu( it );
-            menu.interact_loop();
-            return menu.moves;
-        }
-
-    private:
-        explicit exosuit_interact( item *it ) : suit( it ), ctxt( "", keyboard_mode::keycode ) {
-            ctxt.register_navigate_ui_list();
-            ctxt.register_leftright();
-            ctxt.register_action( "SCROLL_INFOBOX_UP" );
-            ctxt.register_action( "SCROLL_INFOBOX_DOWN" );
-            ctxt.register_action( "CONFIRM" );
-            ctxt.register_action( "QUIT" );
-            // mouse selection
-            ctxt.register_action( "SELECT" );
-            ctxt.register_action( "SEC_SELECT" );
-            ctxt.register_action( "MOUSE_MOVE" );
-            ctxt.register_action( "SCROLL_UP" );
-            ctxt.register_action( "SCROLL_DOWN" );
-            pocket_count = it->get_all_contained_pockets().size();
-            height = std::max( pocket_count, height_default ) + 2;
-            width_menu = 30;
-            for( const item_pocket *pkt : it->get_all_contained_pockets() ) {
-                int tmp = utf8_width( get_pocket_name( pkt ) );
-                if( tmp > width_menu ) {
-                    width_menu = tmp;
-                }
-            }
-            width_menu = std::min( width_menu, 50 );
-            width_info = 80 - width_menu;
-            moves = 0;
-        }
-        ~exosuit_interact() = default;
-
-        item *suit;
-        weak_ptr_fast<ui_adaptor> ui;
-        input_context ctxt;
-        catacurses::window w_border;
-        catacurses::window w_info;
-        catacurses::window w_menu;
-        std::map<int, inclusive_rectangle<point>> pkt_map;
-        int moves = 0;
-        int pocket_count = 0;
-        int cur_pocket = 0;
-        int scroll_pos = 0;
-        int height = 0;
-        const int height_default = 20;
-        int width_info = 30;
-        int width_menu = 30;
-        int sel_frame = 0;
-
-        static std::string get_pocket_name( const item_pocket *pkt ) {
-            if( !pkt->get_pocket_data()->pocket_name.empty() ) {
-                return pkt->get_pocket_data()->pocket_name.translated();
-            }
-            const std::set<flag_id> flags = pkt->get_pocket_data()->get_flag_restrictions();
-            return enumerate_as_string( flags, []( const flag_id & fid ) {
-                if( fid->name().empty() ) {
-                    return fid.str();
-                }
-                return fid->name();
-            } );
-        }
-
-        void init_windows() {
-            const point topleft( TERMX / 2 - ( width_info + width_menu + 3 ) / 2, TERMY / 2 - height / 2 );
-            //NOLINTNEXTLINE(cata-use-named-point-constants)
-            w_menu = catacurses::newwin( height - 2, width_menu, topleft + point( 1, 1 ) );
-            w_info = catacurses::newwin( height - 2, width_info, topleft + point( 2 + width_menu, 1 ) );
-            w_border = catacurses::newwin( height, width_info + width_menu + 3, topleft );
-        }
-
-        void draw_menu() {
-            pkt_map.clear();
-            // info box
-            pkt_map.emplace( -1, inclusive_rectangle<point>( point( 2 + width_menu, 1 ),
-                             point( 2 + width_menu + width_info, height - 2 ) ) );
-            werase( w_menu );
-            int row = 0;
-            for( const item_pocket *pkt : suit->get_all_contained_pockets() ) {
-                nc_color colr = row == cur_pocket ? h_white : c_white;
-                std::string txt = get_pocket_name( pkt );
-                int remaining = width_menu - utf8_width( txt, true );
-                if( remaining > 0 ) {
-                    txt.append( remaining, ' ' );
-                }
-                trim_and_print( w_menu, point( 0, row ), width_menu, colr, txt );
-                pkt_map.emplace( row, inclusive_rectangle<point>( point( 0, row ), point( width_menu, row ) ) );
-                row++;
-            }
-            wnoutrefresh( w_menu );
-        }
-
-        void draw_iteminfo() {
-            std::vector<iteminfo> dummy;
-            std::vector<iteminfo> suitinfo;
-            item_pocket *pkt = suit->get_all_contained_pockets()[cur_pocket];
-            pkt->general_info( suitinfo, cur_pocket, true );
-            pkt->contents_info( suitinfo, cur_pocket, true );
-            item_info_data data( suit->tname(), suit->type_name(), suitinfo, dummy, scroll_pos );
-            data.without_getch = true;
-            data.without_border = true;
-            data.scrollbar_left = false;
-            data.use_full_win = true;
-            data.padding = 0;
-            draw_item_info( w_info, data );
-        }
-
-        shared_ptr_fast<ui_adaptor> create_or_get_ui_adaptor() {
-            shared_ptr_fast<ui_adaptor> current_ui = ui.lock();
-            if( !current_ui ) {
-                ui = current_ui = make_shared_fast<ui_adaptor>();
-                current_ui->on_screen_resize( [this]( ui_adaptor & cui ) {
-                    init_windows();
-                    cui.position_from_window( w_border );
-                } );
-                current_ui->mark_resize();
-                current_ui->on_redraw( [this]( const ui_adaptor & ) {
-                    draw_border( w_border, c_white, suit->tname(), c_light_green );
-                    wattron( w_border, c_white );
-                    mvwvline( w_border, point( width_menu + 1, 1 ), LINE_XOXO, height - 2 );
-                    mvwaddch( w_border, point( width_menu + 1, height - 1 ), LINE_XXOX );
-                    wattroff( w_border, c_white );
-                    wnoutrefresh( w_border );
-                    draw_menu();
-                    draw_iteminfo();
-                } );
-            }
-            return current_ui;
-        }
-
-        void interact_loop() {
-            bool done = false;
-            shared_ptr_fast<ui_adaptor> current_ui = create_or_get_ui_adaptor();
-            while( !done ) {
-                ui_manager::redraw();
-                std::string action = ctxt.handle_input();
-                if( action == "MOUSE_MOVE" || action == "SELECT" ) {
-                    std::optional<point> coord = ctxt.get_coordinates_text( w_border );
-                    if( !!coord ) {
-                        int tmp_frame = 0;
-                        run_for_point_in<int, point>( pkt_map, *coord,
-                        [&tmp_frame]( const std::pair<int, inclusive_rectangle<point>> &p ) {
-                            if( p.first == -1 ) {
-                                tmp_frame = 1;
-                            }
-                        } );
-                        sel_frame = tmp_frame;
-                    }
-                    coord = ctxt.get_coordinates_text( w_menu );
-                    if( !!coord ) {
-                        int tmp_pocket = cur_pocket;
-                        run_for_point_in<int, point>( pkt_map, *coord,
-                        [&tmp_pocket, &action]( const std::pair<int, inclusive_rectangle<point>> &p ) {
-                            if( p.first >= 0 ) {
-                                tmp_pocket = p.first;
-                                if( action == "SELECT" ) {
-                                    action = "CONFIRM";
-                                }
-                            }
-                        } );
-                        cur_pocket = tmp_pocket;
-                    }
-                } else if( action == "SCROLL_UP" || action == "SCROLL_DOWN" ) {
-                    if( sel_frame == 0 ) {
-                        action = action == "SCROLL_UP" ? "UP" : "DOWN";
-                    } else {
-                        action = action == "SCROLL_UP" ? "SCROLL_INFOBOX_UP" : "SCROLL_INFOBOX_DOWN";
-                    }
-                }
-                if( action == "QUIT" || action == "SEC_SELECT" ) {
-                    scroll_pos = 0;
-                    done = true;
-                } else if( action == "CONFIRM" ) {
-                    scroll_pos = 0;
-                    int nmoves = insert_replace_activate_mod(
-                                     suit->get_all_contained_pockets()[cur_pocket], suit );
-                    moves = moves > nmoves ? moves : nmoves;
-                    if( !get_player_character().activity.is_null() ) {
-                        done = true;
-                    }
-                } else if( navigate_ui_list( action, cur_pocket, 5, pocket_count, true ) ) {
-                    scroll_pos = 0;
-                    sel_frame = 0;
-                } else if( action == "SCROLL_INFOBOX_UP" ) {
-                    scroll_pos--;
-                    sel_frame = 1;
-                } else if( action == "SCROLL_INFOBOX_DOWN" ) {
-                    scroll_pos++;
-                    sel_frame = 1;
-                }
-            }
-        }
-
-        int insert_replace_activate_mod( item_pocket *pkt, item *it ) {
-            Character &c = get_player_character();
-            map &here = get_map();
-            const std::set<flag_id> flags = pkt->get_pocket_data()->get_flag_restrictions();
-            if( flags.empty() ) {
-                //~ Modular exoskeletons require pocket restrictions to insert modules. %s = pocket name.
-                popup( _( "%s doesn't define any restrictions for modules!" ), get_pocket_name( pkt ) );
-                return 0;
-            }
-
-            // If pocket already contains a module, ask to unload or replace
-            const bool not_empty = !pkt->empty();
-            if( not_empty ) {
-                item *mod_it = pkt->all_items_top().front();
-                std::string mod_name = mod_it->tname();
-                uilist amenu;
-                //~ Prompt the player to handle the module inside the modular exoskeleton
-                amenu.text = _( "What to do with the existing module?" );
-                amenu.addentry( -1, true, MENU_AUTOASSIGN, _( "Unload everything from this %s" ),
-                                get_pocket_name( pkt ) );
-                amenu.addentry( -1, true, MENU_AUTOASSIGN, _( "Replace the %s" ), mod_name );
-                amenu.addentry( -1, mod_it->has_relic_activation() || mod_it->type->has_use(), MENU_AUTOASSIGN,
-                                mod_it->active ? _( "Deactivate the %s" ) : _( "Activate the %s" ), mod_name );
-                amenu.addentry( -1, mod_it->is_reloadable() && c.can_reload( *mod_it ), MENU_AUTOASSIGN,
-                                _( "Reload the %s" ), mod_name );
-                amenu.addentry( -1, !mod_it->is_container_empty(), MENU_AUTOASSIGN, _( "Unload the %s" ),
-                                mod_name );
-                amenu.query();
-                int ret = amenu.ret;
-                item_location loc_it;
-                item_location held = c.get_wielded_item();
-                if( !!held && held->has_item( *mod_it ) ) {
-                    loc_it = item_location( held, mod_it );
-                } else {
-                    for( const item_location &loc : c.top_items_loc() ) {
-                        if( loc->has_item( *mod_it ) ) {
-                            loc_it = item_location( loc, mod_it );
-                            break;
-                        }
-                    }
-                }
-                if( ret < 0 || ret > 4 ) {
-                    return 0;
-                } else if( ret == 0 ) {
-                    // Unload existing module
-                    pkt->remove_items_if( [&c, &here]( const item & i ) {
-                        here.add_item_or_charges( c.pos_bub(), i );
-                        return true;
-                    } );
-                    return to_moves<int>( 5_seconds );
-                } else if( ret == 2 ) {
-                    if( !!loc_it ) {
-                        avatar_action::use_item( get_avatar(), loc_it );
-                    }
-                    return 0;
-                } else if( ret == 3 ) {
-                    if( !!loc_it ) {
-                        g->reload( loc_it );
-                    }
-                    return 0;
-                } else if( ret == 4 ) {
-                    if( !!loc_it ) {
-                        c.unload( loc_it );
-                    }
-                    return 0;
-                }
-            }
-
-            const item_filter filter = [&flags, pkt, it]( const item & i ) {
-                return i.has_any_flag( flags ) && ( pkt->empty() || !it->has_item( i ) ) &&
-                       pkt->can_contain( i ).success();
-            };
-
-            std::vector<item_location> candidates;
-            for( item *i : c.items_with( filter ) ) {
-                candidates.emplace_back( c, i );
-            }
-            for( const tripoint_bub_ms &p : here.points_in_radius( c.pos_bub(), PICKUP_RANGE ) ) {
-                for( item &i : here.i_at( p ) ) {
-                    if( filter( i ) ) {
-                        candidates.emplace_back( map_cursor( p ), &i );
-                    }
-                }
-            }
-            if( candidates.empty() ) {
-                //~ The player has nothing that fits in the modular exoskeleton's pocket
-                popup( _( "You don't have anything compatible with this module!" ) );
-                return 0;
-            }
-
-            //~ Prompt the player to select an item to attach to the modular exoskeleton's pocket (%s)
-            uilist imenu( string_format( _( "Which module to attach to the %s?" ), get_pocket_name( pkt ) ), {} );
-            for( const item_location &i : candidates ) {
-                imenu.addentry( -1, true, MENU_AUTOASSIGN, i->tname() );
-            }
-            imenu.query();
-            int ret = imenu.ret;
-            if( ret < 0 || static_cast<size_t>( ret ) >= candidates.size() ) {
-                // Cancelled
-                return 0;
-            }
-
-            int moves = 0;
-
-            // Unload existing module
-            if( not_empty ) {
-                pkt->remove_items_if( [&c, &here]( const item & i ) {
-                    here.add_item_or_charges( c.pos_bub(), i );
-                    return true;
-                } );
-                moves += to_moves<int>( 5_seconds );
-            }
-            ret_val<item *> rval = pkt->insert_item( *candidates[ret] );
-            if( rval.success() ) {
-                candidates[ret].remove_item();
-                moves += to_moves<int>( 5_seconds );
-                return moves;
-            }
-            debugmsg( "Could not insert item \"%s\" into pocket \"%s\": %s",
-                      candidates[ret]->type_name(), get_pocket_name( pkt ), rval.str() );
-            return moves;
-        }
-};
-
 std::optional<int> iuse::mace( Character *p, item *it, const tripoint_bub_ms & )
 {
     if( !it->ammo_sufficient( p ) ) {
@@ -2360,19 +2060,6 @@ std::optional<int> iuse::mace( Character *p, item *it, const tripoint_bub_ms & )
     here.add_field( dest, fd_tear_gas, 2, 3_turns );
     p->mod_moves( -to_moves<int>( 1_seconds ) );
     return 1;
-}
-
-std::optional<int> iuse::manage_exosuit( Character *p, item *it, const tripoint_bub_ms & )
-{
-    if( !p->is_avatar() ) {
-        return std::nullopt;
-    }
-    if( it->get_all_contained_pockets().empty() ) {
-        add_msg( m_warning, _( "Your %s does not have any pockets to contain modules." ), it->tname() );
-        return std::nullopt;
-    }
-    p->mod_moves( -exosuit_interact::run( it ) );
-    return 0;
 }
 
 std::optional<int> iuse::unpack_item( Character *p, item *it, const tripoint_bub_ms & )
@@ -2495,7 +2182,7 @@ std::optional<int> iuse::purify_water( Character *p, item *purifier, item_locati
     }
 
     const std::vector<item *> liquids = water->items_with( []( const item & it ) {
-        return it.typeId() == itype_water;
+        return it.typeId() == itype_water || it.typeId() == itype_water_murky;
     } );
     int charges_of_water = 0;
     for( const item *water : liquids ) {
@@ -2529,7 +2216,7 @@ std::optional<int> iuse::purify_water( Character *p, item *purifier, item_locati
     p->mod_moves( -req_moves );
 
     for( item *water : liquids ) {
-        water->convert( itype_water_purifying, p ).poison = 0;
+        water->convert( itype_water_purifying_active, p ).poison = 0;
         water->set_birthday( calendar::turn );
     }
     // We've already consumed the tablets, so don't try to consume them again
@@ -2546,8 +2233,8 @@ std::optional<int> iuse::water_tablets( Character *p, item *it, const tripoint_b
 
     item_location obj = g->inv_map_splice( [&here]( const item_location & e ) {
         return ( !e->empty() && e->has_item_with( []( const item & it ) {
-            return it.typeId() == itype_water;
-        } ) ) || ( e->typeId() == itype_water &&
+            return it.typeId() == itype_water || it.typeId() == itype_water_murky;
+        } ) ) || ( ( e->typeId() == itype_water || e->typeId() == itype_water_murky ) &&
                    here.has_flag_furn( ter_furn_flag::TFLAG_LIQUIDCONT, e.pos_bub( here ) ) );
     }, _( "Purify what?" ), 1, _( "You don't have water to purify." ) );
 
@@ -2557,17 +2244,6 @@ std::optional<int> iuse::water_tablets( Character *p, item *it, const tripoint_b
     }
 
     return purify_water( p, it, obj );
-}
-
-std::optional<int> iuse::radio_off( Character *p, item *it, const tripoint_bub_ms & )
-{
-    if( !it->ammo_sufficient( p ) ) {
-        p->add_msg_if_player( _( "It's dead." ) );
-    } else {
-        p->add_msg_if_player( _( "You turn the radio on." ) );
-        it->convert( itype_radio_on, p ).active = true;
-    }
-    return 1;
 }
 
 std::optional<int> iuse::directional_antenna( Character *p, item *, const tripoint_bub_ms & )
@@ -3483,30 +3159,6 @@ std::optional<int> iuse::granade_act( Character *, item *it, const tripoint_bub_
     return 1;
 }
 
-std::optional<int> iuse::c4( Character *p, item *it, const tripoint_bub_ms & )
-{
-    int time = 0;
-    bool got_value = false;
-    if( p->is_avatar() ) {
-        got_value = query_int( time, false, _( "Set the timer to how many seconds (0 to cancel)?" ) );
-        if( !got_value || time <= 0 ) {
-            p->add_msg_if_player( _( "Never mind." ) );
-            return std::nullopt;
-        }
-    }
-    p->add_msg_if_player( n_gettext( "You set the timer to %d second.",
-                                     "You set the timer to %d seconds.", time ), time );
-    it->convert( itype_c4armed );
-    if( got_value ) {
-        it->countdown_point = calendar::turn + time_duration::from_seconds( time );
-    } else {
-        // Uses value from the converted type (e.g. currently hardcoded c4armed)
-        it->countdown_point = calendar::turn + it->type->countdown_interval;
-    }
-    it->active = true;
-    return 1;
-}
-
 std::optional<int> iuse::acidbomb_act( Character *p, item *it, const tripoint_bub_ms &pos )
 {
     if( !p ) {
@@ -3582,57 +3234,29 @@ std::optional<int> iuse::molotov_lit( Character *p, item *it, const tripoint_bub
     return 0;
 }
 
-std::optional<int> iuse::firecracker_pack( Character *p, item *it, const tripoint_bub_ms & )
-{
-    if( p->cant_do_underwater() ) {
-        return std::nullopt;
-    }
-    if( !p->has_charges( itype_fire, 1 ) ) {
-        p->add_msg_if_player( m_info, _( "You need a source of fire!" ) );
-        return std::nullopt;
-    }
-    p->add_msg_if_player( _( "You light the pack of firecrackers." ) );
-    it->convert( itype_firecracker_pack_act, p );
-    it->countdown_point = calendar::turn + 27_seconds;
-    it->set_age( 0_turns );
-    it->active = true;
-    return 0; // don't use any charges at all. it has became a new item
-}
-
 std::optional<int> iuse::firecracker_pack_act( Character *, item *it, const tripoint_bub_ms &pos )
 {
+    int seconds_left = to_seconds<int>( it->countdown_point - calendar::turn );
+
     // Two seconds of lit fuse burning
     // Followed by random number of explosions (4-6) per turn until 25 epxlosions have happened
     // Finally item despawns since countdown has ended
-    if( it->age() < 2_seconds ) {
+    if( seconds_left > 25 ) {
         sounds::sound( pos, 0, sounds::sound_t::alarm, _( "ssss…" ), true, "misc", "lit_fuse" );
     } else {
         // Time left to countdown_point is used to track of number of explosions
         int explosions = rng( 4, 6 );
         int i = 0;
-        explosions = std::min( explosions, to_seconds<int>( it->countdown_point - calendar::turn ) );
+        explosions = std::min( explosions, seconds_left );
+
         for( i = 0; i < explosions; i++ ) {
             sounds::sound( pos, 20, sounds::sound_t::combat, _( "Bang!" ), false, "explosion", "small" );
         }
+
         it->countdown_point -= ( explosions - 1 ) * 1_seconds;
     }
-    return 0;
-}
 
-std::optional<int> iuse::firecracker( Character *p, item *it, const tripoint_bub_ms & )
-{
-    if( p->cant_do_underwater() ) {
-        return std::nullopt;
-    }
-    if( !p->use_charges_if_avail( itype_fire, 1 ) ) {
-        p->add_msg_if_player( m_info, _( "You need a source of fire!" ) );
-        return std::nullopt;
-    }
-    p->add_msg_if_player( _( "You light the firecracker." ) );
-    it->convert( itype_firecracker_act, p );
-    it->countdown_point = calendar::turn + 2_seconds;
-    it->active = true;
-    return 1;
+    return 0;
 }
 
 std::optional<int> iuse::mininuke( Character *p, item *it, const tripoint_bub_ms & )
@@ -3989,11 +3613,11 @@ std::optional<int> iuse::dive_tank( Character *p, item *it, const tripoint_bub_m
         if( it->ammo_remaining( ) == 0 ) {
             p->add_msg_if_player( m_bad, _( "Air in your %s runs out." ), it->tname() );
             it->erase_var( "overwrite_env_resist" );
-            it->convert( *it->type->revert_to ).active = false;
+            it->type->transform_into.value().transform( p, *it, true );
         }
     } else { // not worn = off thanks to on-demand regulator
         it->erase_var( "overwrite_env_resist" );
-        it->convert( *it->type->revert_to ).active = false;
+        it->type->transform_into.value().transform( p, *it, true );
     }
 
     return 1;
@@ -4006,7 +3630,7 @@ std::optional<int> iuse::dive_tank_activate( Character *p, item *it, const tripo
     } else if( it->active ) { //off
         p->add_msg_if_player( _( "You turn off the regulator and close the air valve." ) );
         it->erase_var( "overwrite_env_resist" );
-        it->convert( *it->type->revert_to ).active = false;
+        it->type->transform_into.value().transform( p, *it, true );
     } else { //on
         if( !p->is_worn( *it ) ) {
             p->add_msg_if_player( _( "You should wear it first." ) );
@@ -5825,13 +5449,14 @@ std::optional<int> iuse::efiledevice( Character *p, item *it, const tripoint_bub
     amenu.text = _( "Select operation:" );
     amenu.addentry( efd_combo_bm, true, 'a', _( "Browse + move files from all devices" ) );
     amenu.addentry( efd_browse, true, 'b', _( "Browse devices" ) );
+    const bool has_files = !used_edevice->efiles().empty();
     if( used_edevice->is_browsed() ) {
-        amenu.addentry( efd_read_this, true, 'r', _( "Read files on this device" ) );
+        amenu.addentry( efd_read_this, has_files, 'r', _( "Read files on this device" ) );
         amenu.addentry( efd_read_external, true, 'e', _( "Read files on external devices" ) );
         amenu.addentry( efd_move_onto_this, true, 'm', _( "Move files onto this device" ) );
-        amenu.addentry( efd_move_off_this, true, 'k', _( "Move files off of this device" ) );
         amenu.addentry( efd_copy_onto_this, true, 'c', _( "Copy files onto this device" ) );
-        amenu.addentry( efd_copy_from_this, true, 'f', _( "Copy files off of this device" ) );
+        amenu.addentry( efd_move_off_this, has_files, 'k', _( "Move files off of this device" ) );
+        amenu.addentry( efd_copy_from_this, has_files, 'f', _( "Copy files off of this device" ) );
         amenu.addentry( efd_wipe, true, 'W', _( "Wipe files from devices" ) );
     }
 
@@ -7198,32 +6823,6 @@ std::optional<int> iuse::radiocar( Character *p, item *it, const tripoint_bub_ms
     return 1;
 }
 
-std::optional<int> iuse::radiocaron( Character *p, item *it, const tripoint_bub_ms & )
-{
-    if( !it->ammo_sufficient( p ) ) {
-        // Deactivate since other mode has an iuse too.
-        it->convert( itype_radio_car, p ).active = false;
-        return 0;
-    }
-
-    int choice = uilist( _( "What to do with your activated RC car?" ), {
-        _( "Turn off" )
-    } );
-
-    if( choice < 0 ) {
-        return 1;
-    }
-
-    if( choice == 0 ) {
-        it->convert( itype_radio_car, p ).active = false;
-
-        p->add_msg_if_player( _( "You turned off your RC car." ) );
-        return 1;
-    }
-
-    return 1;
-}
-
 static void sendRadioSignal( Character &p, const flag_id &signal )
 {
     map &here = get_map();
@@ -7475,13 +7074,21 @@ std::optional<int> iuse::remoteveh_tick( Character *p, item *it, const tripoint_
     vehicle *remote = g->remoteveh();
     bool stop = false;
     if( !it->ammo_sufficient( p ) ) {
-        p->add_msg_if_player( m_bad, _( "The remote control's battery goes dead." ) );
+        if( p != nullptr ) {
+            p->add_msg_if_player( m_bad, _( "The remote control's battery goes dead." ) );
+        }
         stop = true;
+
     } else if( remote == nullptr ) {
-        p->add_msg_if_player( _( "Lost contact with the vehicle." ) );
+        if( p != nullptr ) {
+            p->add_msg_if_player( _( "Lost contact with the vehicle." ) );
+        }
         stop = true;
+
     } else if( remote->fuel_left( here, itype_battery ) == 0 ) {
-        p->add_msg_if_player( m_bad, _( "The vehicle's battery died." ) );
+        if( p != nullptr ) {
+            p->add_msg_if_player( m_bad, _( "The vehicle's battery died." ) );
+        }
         stop = true;
     }
     if( stop ) {
@@ -9297,7 +8904,6 @@ ret_val<void> use_function::can_call( const Character &p, const item &it,
         return ret_val<void>::make_failure( _( "Your %s is broken and won't activate." ),
                                             it.tname() );
     }
-
     return actor->can_use( p, it, here, pos );
 }
 

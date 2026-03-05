@@ -44,7 +44,6 @@
     "tools": [ [ [ "surface_heat", 37, "LIST" ] ] ],
     "//1": "bread flour: 5u, flour: 5u, cornmeal: 25u, molasses: 2u",
     "components": [
-      [ [ "bread_flour", 1 ] ],
       [ [ "flour", 5 ] ],
       [ [ "cornmeal", 5 ] ],
       [ [ "molasses", 2 ] ],
@@ -224,7 +223,7 @@
     "tools": [ [ [ "surface_heat", 11, "LIST" ] ] ],
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_baking" } ],
     "//": "flour = 11u",
-    "components": [ [ [ "flour", 11 ], [ "bread_flour", 11 ] ], [ [ "water_clean", 2 ] ] ]
+    "components": [ [ [ "flour", 11 ] ], [ [ "water_clean", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -243,7 +242,7 @@
     "//": "11u for flour and 2u for oil",
     "tools": [ [ [ "surface_heat", 13, "LIST" ] ] ],
     "components": [
-      [ [ "flour", 11 ], [ "bread_flour", 11 ], [ "flour_wheat_free", 11 ] ],
+      [ [ "flour", 11 ], [ "flour_wheat_free", 11 ] ],
       [ [ "water_clean", 2 ] ],
       [ [ "any_butter_or_oil", 4, "LIST" ] ],
       [ [ "salt", 1 ] ]
@@ -270,6 +269,6 @@
     "qualities": [ { "id": "OVEN", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 22, "LIST" ] ] ],
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_baking" }, { "proficiency": "prof_baking_bread" } ],
-    "components": [ [ [ "flour", 22 ], [ "bread_flour", 5 ] ], [ [ "yeast", 1 ] ], [ [ "water_clean", 2 ] ], [ [ "sugar", 4 ] ] ]
+    "components": [ [ [ "flour", 22 ] ], [ [ "yeast", 1 ] ], [ [ "water_clean", 2 ] ], [ [ "sugar", 4 ] ] ]
   }
 ]

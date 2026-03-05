@@ -69,7 +69,7 @@
       },
       {
         "id": "LESSON_GOT_AMMO",
-        "text": "The item you just picked up is ammunition, used with a gun.  It has many special attributes.  The damage value is the maximum done on a standard hit; a critical hit or headshot will do much more damage.  Some monsters or NPCs will wear armor which reduces the damage from gunfire; a high armor-pierce value will reduce this effect.  The range is the maximum range the ammo can achieve, and the dispersion affects its chance to hit."
+        "text": "The item you just picked up is ammunition, used with a gun.  It has many special attributes.  The damage value is the maximum done on a standard hit; a critical hit or headshot will do much more damage.  Some monsters or NPCs will wear armor which reduces the damage from gunfire; a high armor penetration value will reduce this effect.  The range is the maximum range the ammo can achieve, and the dispersion affects its chance to hit."
       },
       {
         "id": "LESSON_WORE_ARMOR",

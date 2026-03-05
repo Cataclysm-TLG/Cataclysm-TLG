@@ -2385,11 +2385,7 @@ static void draw_can_craft_indicator( const catacurses::window &w, const recipe 
 
     std::stringstream modifiers_list;
     if( limb_modifier != 100 ) {
-        if( limb_modifier < 100 ) {
-            modifiers_list << _( "hands encumbrance/wounds" ) << " " << limb_modifier << "%";
-        } else {
-            modifiers_list << _( "extra manipulators" ) << " " << limb_modifier << "%";
-        }
+        modifiers_list << _( "manipulation score" ) << " " << limb_modifier << "%";
     }
     if( mut_multi != 100 ) {
         if( !modifiers_list.str().empty() ) {
@@ -2426,7 +2422,10 @@ static void draw_can_craft_indicator( const catacurses::window &w, const recipe 
             }
             modifiers_list << _( "pain" ) << " " << pain_multi << "%";
         }
-
+        if( limb_modifier + morale_modifier + lighting_modifier + pain_multi < 400 ) {
+            float int_bonus = crafter.get_int();
+            modifiers_list << _( "intelligence bonus" ) << " " << int_bonus << "%";
+        }
         right_print( w, 0, 1, i_yellow,
                      string_format( craft_speed_reason_strings.at( SLOW_BUT_CRAFTABLE ).translated(),
                                     static_cast<int>( crafter.crafting_speed_multiplier( rec ) * 100 ),

@@ -468,8 +468,8 @@ bool Creature::is_likely_underwater( const map &here ) const
 {
     return is_underwater() ||
            ( has_flag( mon_flag_AQUATIC ) &&
-             here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub( here ) ) &&
-             !here.has_vehicle_floor( pos_bub() ) );
+             ( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub( here ) ) ||
+               here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, pos_bub( here ) ) ) );
 }
 
 // Detects whether a target is sapient or not (or barely sapient, since ferals count)
@@ -631,11 +631,11 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     }
 
     // Camouflage or Water Camouflage checks
-    if( has_camouflage && target_range > this->get_eff_per() ) {
+    if( has_camouflage && target_range > this->spot_check() ) {
         return false;
     }
 
-    if( has_water_camouflage && target_range > this->get_eff_per() ) {
+    if( has_water_camouflage && target_range > this->spot_check() ) {
         if( is_underwater ||
             here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, critter.pos_bub( here ) ) ||
             ( here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, critter.pos_bub( here ) ) &&
@@ -1052,8 +1052,7 @@ void Creature::deal_melee_hit( Creature *source, int hit_spread, bool critical_h
     if( has_effect( effect_ridden ) ) {
         monster *mons = dynamic_cast<monster *>( this );
         if( mons && mons->mounted_player ) {
-            if( !mons->has_flag( mon_flag_MECH_DEFENSIVE ) &&
-                one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
+            if( one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
                 mons->mounted_player->deal_melee_hit( source, hit_spread, critical_hit, dam, dealt_dam, attack );
                 return;
             }
@@ -1443,8 +1442,7 @@ void Creature::deal_projectile_attack( map *here, Creature *source, dealt_projec
     if( has_effect( effect_ridden ) ) {
         monster *mons = as_monster();
         if( mons && mons->mounted_player ) {
-            if( !mons->has_flag( mon_flag_MECH_DEFENSIVE ) &&
-                one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
+            if( one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
                 mons->mounted_player->deal_projectile_attack( here, source, attack, missed_by, print_messages,
                         wp_attack );
                 return;
@@ -1688,6 +1686,12 @@ void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
     }
 
     // Pull creature
+
+    if( c->has_effect( effect_tied ) || c->has_flag( mon_flag_IMMOBILE ) ||
+        c->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
+        add_msg_if_player( _( "%s is immobile and cannot be moved." ), c->disp_name( false, true ) );
+        return;
+    }
     const Character *ch = as_character();
     const monster *mon = as_monster();
     const int str = ch != nullptr ? ch->get_str() : mon != nullptr ? mon->get_grab_strength() : 10;
@@ -1714,6 +1718,11 @@ void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
 bool Creature::grapple_drag( Creature *c )
 {
     if( !has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        return false;
+    }
+    if( c->has_effect( effect_tied ) || c->has_flag( mon_flag_IMMOBILE ) ||
+        c->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
+        add_msg_if_player( _( "%s is immobile and cannot be moved." ), c->disp_name( false, true ) );
         return false;
     }
     const Character *ch = as_character();
@@ -1983,9 +1992,10 @@ void Creature::add_effect( const effect_source &source, const efftype_id &eff_id
 
     if( !found ) {
         // If we don't already have it then add a new one
-
         // Now we can make the new effect for application
-        effect e( effect_source( source ), &type, dur, bp.id(), permanent, intensity, calendar::turn );
+
+        time_duration duration = permanent ? std::max( dur, 1_seconds ) : dur;
+        effect e( effect_source( source ), &type, duration, bp.id(), permanent, intensity, calendar::turn );
 
         ( *effects )[eff_id][bp] = e;
         if( Character *ch = as_character() ) {
@@ -2534,7 +2544,7 @@ int Creature::get_speed() const
     return get_speed_base() + get_speed_bonus();
 }
 
-int Creature::get_eff_per() const
+int Creature::spot_check() const
 {
     return 0;
 }

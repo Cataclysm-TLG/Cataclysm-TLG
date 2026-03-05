@@ -37,7 +37,7 @@
         "+             u|  B    |~~`~~~`~~~~~~~~~~~~:;qpo",
         "#::):|::):|::):|))|::):|~~`~~~`~~~~~52~~~~~|;;p#",
         "#    |P  u|u   |  |r   |~~`~~~`~~~~~~~~~||+##+##",
-        "#rr u|r hr|P hr|  :rh u|~~`~~~`~~~~~~~~1|;;#.s.#",
+        "#rr u|r hr|P hr|  :rh u|~~`~~~`~Ł~~~~~~1|;;#.s.#",
         "# h P|rh r|P rr|  |r  P|c~`~~~`~~|5~31~5|kj#.s..",
         "##::###::###::##))##::###bbbbbbb###o##o#####.s..",
         "#%%%%#%%%%#%%%%#ss#%%%%#c_______s#%%%%%%.^.#.s..",
@@ -88,7 +88,7 @@
         "#r   -rrP-  u|hro=====w|CC~~~~`~~~`~~~o hhhh --#",
         "#--  -----  u| r|=====w|~~~~~~`~~~`~~~|       P#",
         "#rr  -rrP-  u|+||======+~~~~~~`````~~~+      hro",
-        "#Ph  - h -  B| zz======|~~~~~~~~~57~~~|       r#",
+        "#Ph  - h -  B| zz======|~~~~~~~~~57~~Ł|       r#",
         "or           +     |||||d&d|~~~~~31~~~|B P ||+|#",
         "#rh          +     |Y;j|Q~Q|~~~~~~~~~5||+| |B r#",
         "#||+||P  |||||||   +;;k|Q~Q|~52~~~~~~2|;;| | hr#",
@@ -132,6 +132,7 @@
         "K": "t_thconc_floor",
         "Q": "t_thconc_floor",
         "U": "t_thconc_floor",
+        "Ł": "t_thconc_floor",
         "1": "t_thconc_floor",
         "2": "t_thconc_floor",
         "3": "t_thconc_floor",
@@ -236,7 +237,8 @@
         "s": { "group": "GROUP_ZOMBIE", "chance": 1 },
         "~": { "group": "GROUP_ZOMBIE_LIGHT_INDUSTRY", "chance": 2 }
       },
-      "place_vehicles": [ { "vehicle": "cube_van", "x": 31, "y": 50, "chance": 30, "rotation": 270 } ]
+      "place_vehicles": [ { "vehicle": "cube_van", "x": 31, "y": 50, "chance": 22, "rotation": 270 } ],
+      "vehicles": { "Ł": { "vehicle": "hand_truck", "chance": 30 } }
     }
   },
   {

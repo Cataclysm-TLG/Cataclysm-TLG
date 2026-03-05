@@ -882,6 +882,8 @@ class item : public visitable
         std::vector<item_pocket *> get_all_standard_pockets();
         std::vector<item_pocket *> get_all_ablative_pockets();
         std::vector<const item_pocket *> get_all_ablative_pockets() const;
+        std::vector<const item_pocket *> get_all_contained_and_mod_pockets() const;
+        std::vector<item_pocket *> get_all_contained_and_mod_pockets();
         /**
          * Updates the pockets of this item to be correct based on the mods that are installed.
          * Pockets which are modified that contain an item will be spilled
@@ -1934,6 +1936,7 @@ class item : public visitable
          */
         void on_contents_changed();
 
+        bool can_use_relic( const Character &guy ) const;
         bool use_relic( Character &guy, const tripoint_bub_ms &pos );
         bool has_relic_recharge() const;
         bool has_relic_activation() const;
@@ -2758,6 +2761,12 @@ class item : public visitable
          * Summed range value of a gun, including values from mods. Returns 0 on non-gun items.
          */
         int gun_range( bool with_ammo = true ) const;
+
+        /**
+         * Ratio (percent given as an int) of gun length to character height minus a 75% allowance.
+         * Creates problems if it's above 75%. At 125% (50% awkwardness) the weapon becomes unusable.
+         */
+        int gun_awkwardness( const Character &p ) const;
 
         /**
          *  Get effective recoil considering handling, loaded ammo and effects of attached gunmods

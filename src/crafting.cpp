@@ -315,12 +315,16 @@ float Character::crafting_speed_multiplier( const recipe &rec ) const
     float crafting_speed = morale_crafting_speed_multiplier( rec ) *
                            lighting_craft_speed_multiplier( rec ) *
                            limb_score * pain_multi;
-
+    float int_adjustment = get_int() / 100.f;
+    // Int makes up for speed penalties, but doesn't add speed on its own.
+    if( crafting_speed < 1.0f ) {
+        crafting_speed = std::min( 1.f, crafting_speed + int_adjustment );
+    }
     const float result = enchantment_cache->modify_value( enchant_vals::mod::CRAFTING_SPEED_MULTIPLIER,
                          crafting_speed );
-
-    add_msg_debug( debugmode::DF_CHARACTER, "Limb score multiplier %.1f, crafting speed multiplier %1f",
-                   get_limb_score( limb_score_manip ), result );
+    add_msg_debug( debugmode::DF_CHARACTER,
+                   "Limb score multiplier %1f, int adjustment %2f, crafting speed multiplier %3f",
+                   get_limb_score( limb_score_manip ), int_adjustment, result );
 
     return std::max( result, 0.0f );
 }
@@ -2098,7 +2102,7 @@ static void empty_buckets( Character &p )
 }
 
 std::list<item> Character::consume_items( const comp_selection<item_comp> &is, int batch,
-        const std::function<bool( const item & )> &filter, bool select_ind )
+        const std::function<bool( const item & )> &filter, bool select_ind, bool disable_preference )
 {
     map &m = get_map();
     std::list<item> ret;
@@ -2109,17 +2113,19 @@ std::list<item> Character::consume_items( const comp_selection<item_comp> &is, i
     // populate a grid of spots that can be reached
     const std::vector<tripoint_bub_ms> &reachable_pts = m.reachable_flood_steps( pos_bub(),
             PICKUP_RANGE, 1, 100 );
-    return consume_items( m, is, batch, filter, reachable_pts, select_ind );
+    return consume_items( m, is, batch, filter, reachable_pts, select_ind, disable_preference );
 }
 
 std::list<item> Character::consume_items( map &m, const comp_selection<item_comp> &is, int batch,
         const std::function<bool( const item & )> &filter,
         const std::vector<tripoint_bub_ms> &reachable_pts,
-        bool select_ind )
+        bool select_ind, bool disable_preference )
 {
-    auto preferred_filter = [&filter]( const item & it ) {
+    std::function<bool( const item & )> active_preferred_filter = [&filter]( const item & it ) {
         return filter( it ) && is_preferred_component( it );
     };
+    std::function<bool( const item & )> preferred_filter = disable_preference ? filter :
+            active_preferred_filter;
 
     std::list<item> ret;
 
@@ -2219,13 +2225,13 @@ to consume_items */
 std::list<item> Character::consume_items( const std::vector<item_comp> &components, int batch,
         const std::function<bool( const item & )> &filter,
         const std::function<bool( const itype_id & )> &select_ind,
-        const bool can_cancel )
+        const bool can_cancel, const bool disable_preference )
 {
     inventory map_inv;
     map_inv.form_from_map( pos_bub(), PICKUP_RANGE, this );
     comp_selection<item_comp> sel = select_item_component( components, batch, map_inv, can_cancel,
                                     filter );
-    return consume_items( sel, batch, filter, select_ind( sel.comp.type ) );
+    return consume_items( sel, batch, filter, select_ind( sel.comp.type ), disable_preference );
 }
 
 bool Character::consume_software_container( const itype_id &software_id )

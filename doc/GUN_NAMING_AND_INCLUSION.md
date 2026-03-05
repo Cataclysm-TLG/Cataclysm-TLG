@@ -222,7 +222,7 @@ Here are some selected identifiers that are used by existing guns
 
 | Identifier |Commentary|
 |------------|----------|
-|Exodii      |Describes the faction associated with all the items that go with this gun|
+|Robofac     |Describes the faction associated with all the items that go with this gun|
 |P230        |This is the name of a handgun. This is a valid common identifier, as long as the handgun follows the other rules|
 |varmint     |This is a descriptor of the role of the gun. This is a valid identifier|
 |Glock       |This is a brand. This is a valid common identifier, matching the magazines with this ammo type to the gun|

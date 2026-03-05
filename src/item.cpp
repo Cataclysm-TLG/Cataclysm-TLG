@@ -61,6 +61,7 @@
 #include "item_factory.h"
 #include "item_group.h"
 #include "item_tname.h"
+#include "item_transformation.h"
 #include "iteminfo_query.h"
 #include "itype.h"
 #include "iuse.h"
@@ -678,11 +679,11 @@ item &item::deactivate( Character *ch, bool alert )
         return *this; // no-op
     }
 
-    if( type->revert_to ) {
+    if( type->transform_into ) {
         if( ch && alert && !type->tool->revert_msg.empty() ) {
             ch->add_msg_if_player( m_info, type->tool->revert_msg.translated(), tname() );
         }
-        convert( *type->revert_to );
+        type->transform_into.value().transform( ch, *this, true );
         active = false;
 
         if( ch ) {
@@ -2844,7 +2845,7 @@ void item::ammo_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
                                multiplier );
         }
         if( parts->test( iteminfo_parts::AMMO_DAMAGE_AP ) ) {
-            info.emplace_back( "AMMO", space + _( "Armor-pierce: " ), get_ranged_pierce( ammo ) );
+            info.emplace_back( "AMMO", space + _( "Armor penetration: " ), get_ranged_pierce( ammo ) );
         }
         if( parts->test( iteminfo_parts::AMMO_DAMAGE_RANGE ) ) {
             info.emplace_back( "AMMO", _( "Range: " ), "<num>" + space,
@@ -3049,39 +3050,51 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
 
     if( parts->test( iteminfo_parts::GUN_DAMAGE ) ) {
         insert_separation_line( info );
-        info.emplace_back( "GUN", _( "<bold>Ranged damage</bold>" ), "", iteminfo::no_newline );
+        info.emplace_back( "GUN", _( "<bold>Ranged damage</bold>: " ), "", iteminfo::no_newline,
+                           mod->gun_damage( false ).total_damage() );
     }
 
     if( mod->ammo_required() ) {
-        // some names are not shown, so no need to translate them
-
-        const int gun_damage = loaded_mod->gun_damage( true, false ).total_damage();
-        int pellet_damage = 0;
-        const bool pellets = curammo->ammo->count > 1;
-        if( parts->test( iteminfo_parts::GUN_DAMAGE_PELLETS ) && pellets ) {
-            pellet_damage = loaded_mod->gun_damage( true, true ).total_damage();
-
-            // if shotgun, gun_damage is your point blank damage, and anything further is pellets x damage of a single pellet
-            info.emplace_back( "GUN", _( "<bold>Point blank damage:</bold> " ), "<num>", iteminfo::no_flags,
-                               gun_damage );
-            info.emplace_back( "GUN", "damage_per_pellet", _( "<num> per pellet" ),
-                               iteminfo::no_newline | iteminfo::no_name, pellet_damage );
-            info.emplace_back( "GUN", ", ", iteminfo::no_newline );
-            info.emplace_back( "GUN", "amount_of_pellets", _( "<num> pellets" ),
-                               iteminfo::no_newline | iteminfo::no_name, curammo->ammo->count );
-            info.emplace_back( "GUN", " = ", iteminfo::no_newline );
+        // ammo_damage, sum_of_damage, and ammo_mult not shown so don't need to translate.
+        float dmg_mult = 1.0f;
+        for( const damage_unit &dmg : curammo->ammo->damage.damage_units ) {
+            dmg_mult *= dmg.unconditional_damage_mult;
+        }
+        if( dmg_mult != 1.0f ) {
+            if( parts->test( iteminfo_parts::GUN_DAMAGE_AMMOPROP ) ) {
+                info.emplace_back( "GUN", "ammo_mult", "*",
+                                   iteminfo::no_newline | iteminfo::no_name | iteminfo::is_decimal, dmg_mult );
+            }
         } else {
+            if( parts->test( iteminfo_parts::GUN_DAMAGE_LOADEDAMMO ) ) {
+                damage_instance ammo_dam = curammo->ammo->damage;
+                int bullet_damage = ammo_dam.total_damage();
+                if( mod->barrel_length().value() > 0 ) {
+                    bullet_damage = ammo_dam.di_considering_length( mod->barrel_length() ).total_damage();
+                }
+                info.emplace_back( "GUN", "ammo_damage", "",
+                                   iteminfo::no_newline | iteminfo::no_name |
+                                   iteminfo::show_plus, bullet_damage );
+            }
+        }
 
+        const int gun_damage = loaded_mod->gun_damage( true ).total_damage();
+        if( damage() > 0 ) {
+            item intact_mod( *loaded_mod );
+            intact_mod.set_degradation( 0 );
+            intact_mod.set_damage( 0 );
+            const int intact_damage = intact_mod.gun_damage( true ).total_damage();
+            if( intact_damage != gun_damage ) {
+                const int dmg_penalty = gun_damage - intact_damage;
+                info.emplace_back( "GUN", "damaged_weapon_penalty", "",
+                                   iteminfo::no_newline | iteminfo::no_name, dmg_penalty );
+            }
         }
 
         if( parts->test( iteminfo_parts::GUN_DAMAGE_TOTAL ) ) {
-            info.emplace_back( "GUN", "final_damage", "<num>",
-                               iteminfo::no_newline | iteminfo::no_name,
-                               pellets ? pellet_damage * curammo->ammo->count : gun_damage );
+            info.emplace_back( "GUN", "sum_of_damage", _( " = <num>" ),
+                               iteminfo::no_newline | iteminfo::no_name, gun_damage );
         }
-    } else {
-        info.emplace_back( "GUN", "final_damage", "<num>", iteminfo::no_newline | iteminfo::no_name,
-                           mod->gun_damage( false ).total_damage() );
     }
     info.back().bNewLine = true;
 
@@ -3109,42 +3122,73 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
 
     // TODO: This doesn't cover multiple damage types
 
-    int ammo_pierce = 0;
-    if( mod->ammo_required() ) {
-        ammo_pierce = get_ranged_pierce( *curammo->ammo );
-    }
-
     if( parts->test( iteminfo_parts::GUN_ARMORPIERCE ) ) {
-        info.emplace_back( "GUN", _( "Armor-pierce: " ), "",
-                           iteminfo::no_newline, get_ranged_pierce( gun ) + ammo_pierce );
+        info.emplace_back( "GUN", _( "Armor penetration: " ), "",
+                           iteminfo::no_newline, get_ranged_pierce( gun ) );
+    }
+    if( mod->ammo_required() ) {
+        int ammo_pierce = get_ranged_pierce( *curammo->ammo );
+        // ammo_armor_pierce and sum_of_armor_pierce don't need to translate.
+        if( parts->test( iteminfo_parts::GUN_ARMORPIERCE_LOADEDAMMO ) ) {
+            info.emplace_back( "GUN", "ammo_armor_pierce", "",
+                               iteminfo::no_newline | iteminfo::no_name |
+                               iteminfo::show_plus, ammo_pierce );
+        }
+        if( parts->test( iteminfo_parts::GUN_ARMORPIERCE_TOTAL ) ) {
+            info.emplace_back( "GUN", "sum_of_armor_pierce", _( " = <num>" ),
+                               iteminfo::no_name,
+                               get_ranged_pierce( gun ) + ammo_pierce );
+        }
     }
     info.back().bNewLine = true;
 
-    double gun_dispersion = mod->gun_dispersion( false, false ) / 100.0;
-    if( mod->ammo_required() ) {
-        gun_dispersion = loaded_mod->gun_dispersion( true, false ) / 100.0;
-    }
     if( parts->test( iteminfo_parts::GUN_DISPERSION ) ) {
-        info.emplace_back( "GUN", _( "Dispersion: " ), _( "<num> MOA" ),
-                           iteminfo::is_decimal | iteminfo::lower_is_better | iteminfo::no_newline,
-                           gun_dispersion );
+        info.emplace_back( "GUN", _( "Dispersion: " ), "",
+                           iteminfo::no_newline | iteminfo::lower_is_better,
+                           mod->gun_dispersion( false, false ) );
+    }
+    if( mod->ammo_required() ) {
+        int ammo_dispersion = curammo->ammo->dispersion_considering_length( barrel_length() );
+        // ammo_dispersion and sum_of_dispersion don't need to translate.
+        if( parts->test( iteminfo_parts::GUN_DISPERSION_LOADEDAMMO ) ) {
+            info.emplace_back( "GUN", "ammo_dispersion", "",
+                               iteminfo::no_newline | iteminfo::lower_is_better |
+                               iteminfo::no_name | iteminfo::show_plus,
+                               ammo_dispersion );
+        }
+        if( parts->test( iteminfo_parts::GUN_DISPERSION_TOTAL ) ) {
+            info.emplace_back( "GUN", "sum_of_dispersion", _( " = <num>" ),
+                               iteminfo::lower_is_better | iteminfo::no_name,
+                               loaded_mod->gun_dispersion( true, false ) );
+        }
     }
     info.back().bNewLine = true;
 
     // if effective sight dispersion differs from actual sight dispersion display both
     std::pair<int, int> disp = mod->sight_dispersion( player_character );
-    const int eff_disp = disp.second;
-    const int point_shooting_limit = player_character.point_shooting_limit( *mod );
+    int act_disp = disp.first;
+    int eff_disp = disp.second;
+    int adj_disp = eff_disp - act_disp;
+    int point_shooting_limit = player_character.point_shooting_limit( *mod );
 
     if( parts->test( iteminfo_parts::GUN_DISPERSION_SIGHT ) ) {
         if( point_shooting_limit <= eff_disp ) {
-            info.emplace_back( "GUN", _( "Sight dispersion (point shooting): " ), _( "<num> MOA" ),
-                               iteminfo::is_decimal | iteminfo::no_newline | iteminfo::lower_is_better,
-                               point_shooting_limit / 100.0 );
+            info.emplace_back( "GUN", _( "Sight dispersion (point shooting): " ), "",
+                               iteminfo::no_newline | iteminfo::lower_is_better,
+                               point_shooting_limit );
         } else {
-            info.emplace_back( "GUN", _( "Sight dispersion: " ), _( "<num> MOA" ),
-                               iteminfo::is_decimal | iteminfo::no_newline | iteminfo::lower_is_better,
-                               eff_disp / 100.0 );
+            info.emplace_back( "GUN", _( "Sight dispersion: " ), "",
+                               iteminfo::no_newline | iteminfo::lower_is_better,
+                               act_disp );
+
+            if( adj_disp ) {
+                info.emplace_back( "GUN", "sight_adj_disp", "",
+                                   iteminfo::no_newline | iteminfo::lower_is_better |
+                                   iteminfo::no_name | iteminfo::show_plus, adj_disp );
+                info.emplace_back( "GUN", "sight_eff_disp", _( " = <num>" ),
+                                   iteminfo::lower_is_better | iteminfo::no_name,
+                                   eff_disp );
+            }
         }
     }
 
@@ -3161,15 +3205,33 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
                                iteminfo::lower_is_better | iteminfo::no_name,
                                loaded_mod->gun_recoil( player_character, true ) );
         }
-
+        if( parts->test( iteminfo_parts::GUN_AWKWARDNESS ) ) {
+            info.back().bNewLine = true;
+            int awkward_percent = gun_awkwardness( get_player_character() );
+            if( awkward_percent < 75 ) {
+                info.emplace_back(
+                    "GUN",
+                    _( "Height penalty: " ),
+                    string_format( "<neutral>%d%%</neutral>", awkward_percent ),
+                    iteminfo::lower_is_better
+                );
+            } else {
+                info.emplace_back(
+                    "GUN",
+                    _( "Height penalty: " ),
+                    string_format( "<bad>%d%%</bad>", awkward_percent ),
+                    iteminfo::lower_is_better
+                );
+            }
+        }
         if( parts->test( iteminfo_parts::GUN_RECOIL_THEORETICAL_MINIMUM ) ) {
             info.back().bNewLine = true;
             info.emplace_back( "GUN", _( "Theoretical minimum recoil: " ), "",
                                iteminfo::no_newline | iteminfo::lower_is_better, loaded_mod->gun_recoil( player_character, true,
                                        true ) );
         }
-        if( parts->test( iteminfo_parts:: GUN_IDEAL_STRENGTH ) ) {
-            info.emplace_back( "GUN", "ideal_strength", _( " (when strength reaches: <num>)" ),
+        if( parts->test( iteminfo_parts::GUN_IDEAL_STRENGTH ) ) {
+            info.emplace_back( "GUN", "ideal_strength", _( " (Requires <num> strength)" ),
                                iteminfo::lower_is_better | iteminfo::no_name,
                                loaded_mod->gun_base_weight() / 333.0_gram );
         }
@@ -3415,7 +3477,7 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
     }
     int pierce = get_ranged_pierce( mod );
     if( get_ranged_pierce( mod ) != 0 && parts->test( iteminfo_parts::GUNMOD_ARMORPIERCE ) ) {
-        info.emplace_back( "GUNMOD", _( "Armor-pierce: " ), "", iteminfo::show_plus,
+        info.emplace_back( "GUNMOD", _( "Armor penetration: " ), "", iteminfo::show_plus,
                            pierce );
     }
     if( mod.to_hit_mod != 0 && parts->test( iteminfo_parts::GUNMOD_TO_HIT_MODIFIER ) ) {
@@ -7070,10 +7132,10 @@ units::length item::barrel_length() const
     if( is_gun() ) {
         units::length l = type->gun->barrel_length;
         for( const item *mod : mods() ) {
-            // if a gun has a barrel length specifying mod then use that length for sure
-            if( mod->type->gunmod->barrel_length > 0_mm ) {
+            // If a gun has a barrel length specifying mod then use that length for sure.
+            if( !mod->is_gun() && mod->type->gunmod->barrel_length > 0_mm ) {
                 l = mod->type->gunmod->barrel_length;
-                // if we find an explicit barrel mod then use that and quit the loop
+                // If we find an explicit barrel mod then use that and quit the loop.
                 break;
             }
         }
@@ -7969,7 +8031,7 @@ bool item::process_decay( Character *carrier, int decay_hours,
         time_duration decay_countdown = time_duration::from_seconds( item_counter ) + time_delta *
                                         rng_normal( 0.9, 1.1 );
         if( decay_countdown >= time_duration::from_hours( decay_hours ) ) {
-            convert( *type->revert_to, carrier );
+            type->transform_into.value().transform( carrier, *this, true );
             return true;
         }
         item_counter = to_seconds<int>( decay_countdown );
@@ -7986,7 +8048,7 @@ bool item::process_decay_in_air( map &here, Character *carrier, const tripoint_b
         time_duration new_air_exposure = time_duration::from_seconds( item_counter ) + time_delta *
                                          rng_normal( 0.9, 1.1 ) * environment_multiplier;
         if( new_air_exposure >= time_duration::from_hours( decay_hours ) ) {
-            convert( *type->revert_to, carrier );
+            type->transform_into.value().transform( carrier, *this, true );
             return true;
         }
         item_counter = to_seconds<int>( new_air_exposure );
@@ -8560,7 +8622,7 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
     if( !can_revive() ) {
         return false;
     }
-    if( here.veh_at( pos ) ) {
+    if( here.veh_at( pos ) && !here.passable( pos ) ) {
         return false;
     }
 
@@ -10107,6 +10169,16 @@ std::vector<const item_pocket *> item::get_all_ablative_pockets() const
     return contents.get_all_ablative_pockets();
 }
 
+std::vector<const item_pocket *> item::get_all_contained_and_mod_pockets() const
+{
+    return contents.get_all_contained_and_mod_pockets();
+}
+
+std::vector<item_pocket *> item::get_all_contained_and_mod_pockets()
+{
+    return contents.get_all_contained_and_mod_pockets();
+}
+
 item_pocket *item::contained_where( const item &contained )
 {
     return contents.contained_where( contained );
@@ -10343,7 +10415,7 @@ bool item::is_emissive() const
         return true;
     }
 
-    for( const item_pocket *pkt : get_all_contained_pockets() ) {
+    for( const item_pocket *pkt : get_all_contained_and_mod_pockets() ) {
         if( pkt->transparent() ) {
             for( const item *it : pkt->all_items_top() ) {
                 if( it->is_emissive() ) {
@@ -10400,6 +10472,11 @@ bool item::has_relic_recharge() const
 bool item::has_relic_activation() const
 {
     return is_relic() && relic_data->has_activation();
+}
+
+bool item::can_use_relic( const Character &guy ) const
+{
+    return is_relic() && relic_data->can_activate( *this, guy );
 }
 
 std::vector<enchant_cache> item::get_proc_enchantments() const
@@ -11033,15 +11110,23 @@ units::mass item::gun_base_weight() const
     return base_weight;
 
 }
+
+int item::gun_awkwardness( const Character &p ) const
+{
+    float gun_length = ( length() / 10_mm );
+    float length_ratio = gun_length / p.height();
+    float awkwardness = 1.f;
+    const float threshold = 0.75f;
+    awkwardness = length_ratio / threshold;
+    return std::max( 0, static_cast<int>( std::round( ( awkwardness - 1.f ) * 100.f ) ) );
+}
+
 int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) const
 {
     if( !is_gun() || ( ammo_required() && !ammo_remaining( ) ) ) {
         return 0;
     }
-
-    ///\ARM_STR improves the handling of heavier weapons
-    // we consider only base weight to avoid exploits
-    // now we need to add weight of receiver
+    ///\ARM_STR improves the handling of heavier weapons.
     double wt = ideal_strength ? gun_base_weight() / 333.0_gram : std::min( gun_base_weight(),
                 p.get_arm_str() * 333_gram ) / 333.0_gram;
 
@@ -11052,10 +11137,10 @@ int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) cons
         }
     }
 
-    // rescale from JSON units which are intentionally specified as integral values
+    // $escale from JSON units which are intentionally specified as integral values.
     handling /= 10;
 
-    // algorithm is biased so heavier weapons benefit more from improved handling
+    // Algorithm is biased so heavier weapons benefit more from improved handling.
     handling = std::pow( wt, 0.8 ) * std::pow( handling, 1.2 );
 
     int qty = type->gun->recoil;
@@ -11063,11 +11148,16 @@ int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) cons
         qty += ammo_data()->ammo->recoil;
     }
 
-    // handling could be either a bonus or penalty dependent upon installed mods
+    float awkwardness = 1.f;
+    if( !bipod ) {
+        // Divide by 100 to turn the int back into a percent.
+        awkwardness += gun_awkwardness( p ) / 100.f;
+    }
+    // Handling could be either a bonus or penalty dependent upon installed mods.
     if( handling > 1.0 ) {
-        return qty / handling;
+        return static_cast<int>( std::round( qty / handling * awkwardness ) );
     } else {
-        return qty * ( 1.0 + std::abs( handling ) );
+        return static_cast<int>( std::round( qty * ( 1.0 + std::abs( handling ) ) * awkwardness ) );
     }
 }
 
@@ -12530,7 +12620,16 @@ int item::getlight_emit() const
     float lumint = type->light_emission;
 
     if( lumint == 0 ) {
-        return 0;
+        // gunmods can create light, but cache_visit_items_with() do not check items inside mod pockets
+        // we will check it here
+        if( is_gun() && !gunmods().empty() ) {
+            for( const item *maybe_flashlight : gunmods() ) {
+                if( maybe_flashlight->type->light_emission != 0 ) {
+                    return maybe_flashlight->getlight_emit();
+                }
+            }
+            return 0;
+        }
     }
 
     if( ammo_required() == 0 || ( has_flag( flag_USE_UPS ) && ammo_capacity( ammo_battery ) == 0 ) ||
@@ -13346,9 +13445,9 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
     time_point time = last_temp_check;
     item_internal::scoped_goes_bad_cache _cache( this );
     const bool process_rot = goes_bad() && spoil_modifier != 0;
-    const bool decays = has_flag( flag_DECAYS ) && type->revert_to;
+    const bool decays = has_flag( flag_DECAYS ) && type->transform_into;
     const bool decays_in_air = !watertight_container && has_flag( flag_DECAYS_IN_AIR ) &&
-                               type->revert_to;
+                               type->transform_into;
     int64_t decay_hours = ( decays || decays_in_air ) ? get_property_int64_t( "decay_hours" ) :
                           0;
     if( now - time > 1_hours ) {
@@ -13802,8 +13901,8 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
         if( carrier != nullptr ) {
             carrier->add_msg_if_player( m_neutral, _( "You finish your %s." ), type_name() );
         }
-        if( type->revert_to ) {
-            convert( *type->revert_to, carrier );
+        if( type->transform_into ) {
+            type->transform_into.value().transform( carrier, *this, true );
         } else {
             type->invoke( carrier, *this, pos, "transform" );
         }
@@ -13820,10 +13919,10 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
         // No lit cigs in inventory, only in hands or in mouth
         // So if we're taking cig off or unwielding it, extinguish it first
         if( !carrier->is_worn( *this ) && !carrier->is_wielding( *this ) ) {
-            if( type->revert_to ) {
+            if( type->transform_into ) {
                 carrier->add_msg_if_player( m_neutral, _( "You extinguish your %s and put it away." ),
                                             type_name() );
-                convert( *type->revert_to, carrier );
+                type->transform_into.value().transform( carrier, *this, true );
             } else {
                 type->invoke( carrier, *this, pos, "transform" );
             }
@@ -13947,8 +14046,8 @@ bool item::process_extinguish( map &here, Character *carrier, const tripoint_bub
         }
     }
 
-    if( type->revert_to ) {
-        convert( *type->revert_to, carrier );
+    if( type->transform_into ) {
+        type->transform_into.value().transform( carrier, *this, true );
     } else {
         type->invoke( carrier, *this, pos, "transform" );
     }
@@ -14459,31 +14558,74 @@ int item::charge_linked_batteries( vehicle &linked_veh, int turns_elapsed )
 
     if( turns_elapsed < 1 || ( short_time_passed &&
                                !calendar::once_every( time_duration::from_turns( link().charge_interval ) ) ) ) {
+        // Too early to get any charge.
         return link().charge_rate;
     }
 
-    // If a long time passed, multiply the total by the efficiency rather than cancelling a charge.
-    int transfer_total = short_time_passed ? 1 :
-                         ( turns_elapsed * 1.0f / link().charge_interval ) * link().charge_interval;
+
+
+
 
     if( power_in ) {
-        const int battery_deficit = linked_veh.discharge_battery( here, transfer_total, true );
-        // Around 85% efficient by default; a few of the discharges don't actually recharge
-        if( battery_deficit == 0 && ( !short_time_passed || rng_float( 0.0, 1.0 ) <= link().efficiency ) ) {
-            ammo_set( itype_battery, ammo_remaining( ) + transfer_total );
+        int available_charges = linked_veh.battery_power_level( ).first;
+        int wanted_charges = ammo_capacity( itype_battery->ammo->type ) - ammo_remaining( );
+
+        // Nothing to charge or nothing to charge with
+        if( wanted_charges == 0 || available_charges == 0 ) {
+            return link().charge_rate;
         }
-    } else {
-        // Around 85% efficient by default; a few of the discharges don't actually charge
-        if( !short_time_passed || rng_float( 0.0, 1.0 ) <= link().efficiency ) {
-            const int battery_surplus = linked_veh.charge_battery( here, transfer_total, true );
-            if( battery_surplus == 0 ) {
-                ammo_set( itype_battery, ammo_remaining( ) - transfer_total );
+
+        if( short_time_passed ) {
+            // Single charge - subtract one from source, roll against efficiency to add one to destination
+            linked_veh.discharge_battery( here, 1, true );
+            if( rng_float( 0.0, 1.0 ) <= link().efficiency ) {
+                ammo_set( itype_battery, ammo_remaining( ) + 1 );
             }
         } else {
-            const std::pair<int, int> linked_levels = linked_veh.connected_battery_power_level( here );
-            if( linked_levels.first < linked_levels.second ) {
-                ammo_set( itype_battery, ammo_remaining( ) - transfer_total );
+            // Multiple charges - get minimum from available charges, possible transfer in given time and
+            // amount of charges destination needs to charge itself to full with given efficiency.
+            // Subtract that value from the source and after reduction by efficiency add it to the destination.
+            int possible_transfer = turns_elapsed * 1.0f / link().charge_interval;
+            int required_charges = wanted_charges / link().efficiency;
+            int spent_charges = std::min( { possible_transfer, available_charges, required_charges } );
+            // Avoid rounding error on full charge
+            int received_charges = spent_charges == required_charges
+                                   ? wanted_charges
+                                   : spent_charges * link().efficiency;
+
+            linked_veh.discharge_battery( here, spent_charges, true );
+            ammo_set( itype_battery, ammo_remaining( ) + received_charges );
+        }
+    } else {
+        const auto [bat_remaining, bat_capacity] = linked_veh.battery_power_level( );
+        int available_charges = ammo_remaining( );
+        int wanted_charges = bat_capacity - bat_remaining;
+
+        // Nothing to charge or nothing to charge with
+        if( wanted_charges == 0 || available_charges == 0 ) {
+            return link().charge_rate;
+        }
+
+        if( short_time_passed ) {
+            // Single charge - subtract one from source, roll against efficiency to add one to destination
+            ammo_set( itype_battery, ammo_remaining( ) - 1 );
+            if( rng_float( 0.0, 1.0 ) <= link().efficiency ) {
+                linked_veh.charge_battery( here, 1, true );
             }
+        } else {
+            // Multiple charges - get minimum from available charges, possible transfer in given time and
+            // amount of charges destination needs to charge itself to full with given efficiency.
+            // Subtract that value from the source and after reduction by efficiency add it to the destination.
+            int possible_transfer = turns_elapsed * 1.0f / link().charge_interval;
+            int required_charges = wanted_charges / link().efficiency;
+            int spent_charges = std::min( { possible_transfer, available_charges, required_charges } );
+            // Avoid rounding error on full charge
+            int received_charges = spent_charges == required_charges
+                                   ? wanted_charges
+                                   : spent_charges * link().efficiency;
+
+            ammo_set( itype_battery, ammo_remaining( ) - spent_charges );
+            linked_veh.charge_battery( here, received_charges, true );
         }
     }
     return link().charge_rate;
@@ -14576,8 +14718,8 @@ bool item::process_linked_item( Character *carrier, const tripoint_bub_ms & /*po
 bool item::process_wet( Character *carrier, const tripoint_bub_ms & /*pos*/ )
 {
     if( item_counter == 0 ) {
-        if( type->revert_to ) {
-            convert( *type->revert_to, carrier );
+        if( type->transform_into ) {
+            type->transform_into.value().transform( carrier, *this, true );
         }
         unset_flag( flag_WET );
         active = false;
@@ -14610,7 +14752,7 @@ bool item::process_tool( Character *carrier, const tripoint_bub_ms &pos )
         if( carrier ) {
             carrier->add_msg_if_player( m_info, _( "The %s ran out of energy!" ), tname() );
         }
-        if( type->revert_to.has_value() ) {
+        if( type->transform_into.has_value() ) {
             deactivate( carrier );
             return false;
         } else {
@@ -14781,8 +14923,8 @@ bool item::process_internal( map &here, Character *carrier, const tripoint_bub_m
                 type->countdown_action.call( carrier, *this, pos );
             }
             countdown_point = calendar::turn_max;
-            if( type->revert_to ) {
-                convert( *type->revert_to, carrier );
+            if( type->transform_into ) {
+                type->transform_into.value().transform( carrier, *this, true );
 
                 active = needs_processing();
             } else {
@@ -15017,32 +15159,27 @@ bool item::is_comfortable() const
 template <typename T>
 bool item::is_bp_rigid( const T &bp ) const
 {
-    // overrides for the item overall
+    // Item flags override all.
     if( has_flag( flag_SOFT ) ) {
         return false;
     } else if( has_flag( flag_HARD ) ) {
         return true;
     }
-
     const armor_portion_data *portion = portion_for_bodypart( bp );
-
     bool is_rigid = false;
-
     if( portion ) {
+        // If the override is set in armor data, that takes precedent over materials.
         is_rigid |= portion->rigid;
     }
 
-    // check if ablative pieces are rigid too
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
                 is_rigid |= ablative_armor.is_bp_rigid( bp );
             }
         }
     }
-
     return is_rigid;
 }
 

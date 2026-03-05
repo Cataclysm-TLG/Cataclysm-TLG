@@ -774,7 +774,7 @@ class Creature : public viewer
         virtual float get_hit() const;
 
         virtual int get_speed() const;
-        virtual int get_eff_per() const;
+        virtual int spot_check() const;
         virtual creature_size get_size() const = 0;
         virtual int get_hp( const bodypart_id &bp ) const;
         virtual int get_hp() const;
@@ -819,8 +819,11 @@ class Creature : public viewer
     protected:
         // Sets the creature's position without any side-effects.
         void set_pos_bub_only( const map &here, const tripoint_bub_ms &p );
+
+    public:
         // Sets the creature's position without any side-effects.
         void set_pos_abs_only( const tripoint_abs_ms &loc );
+    protected:
         // Invoked when the creature's position changes.
         virtual void on_move( const tripoint_abs_ms &old_pos );
         /**anatomy is the plan of the creature's body*/

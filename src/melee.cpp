@@ -133,6 +133,7 @@ static const limb_score_id limb_score_grip( "grip" );
 static const limb_score_id limb_score_manip( "manip" );
 static const limb_score_id limb_score_reaction( "reaction" );
 
+static const matec_id tec_aoe_secondary( "tec_aoe_secondary" );
 static const matec_id WBLOCK_1( "WBLOCK_1" );
 static const matec_id WBLOCK_2( "WBLOCK_2" );
 static const matec_id WBLOCK_3( "WBLOCK_3" );
@@ -247,7 +248,9 @@ bool Character::handle_melee_wear( item_location shield, float wear_multiplier )
     }
     int damage_chance = static_cast<int>( ( stat_factor * material_factor /
                                             ( wear_multiplier * enchant_multiplier ) ) );
-    if( shield->has_flag( flag_DURABLE_MELEE ) ) {
+    // STURDY items are also durable for unarmed attack purposes.
+    if( shield->has_flag( flag_DURABLE_MELEE ) || ( unarmed_attack() &&
+            shield->has_flag( flag_STURDY ) ) ) {
         damage_chance *= 2;
     }
 
@@ -600,6 +603,17 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 {
     map &here = get_map();
 
+    // Prevent player from melee-attacking creatures that are underwater under thick ice
+    if( t.is_underwater() ) {
+        const tripoint_bub_ms tpos = t.pos_bub( here );
+        if( here.has_flag( ter_furn_flag::TFLAG_THICK_ICE, tpos ) ) {
+            if( is_avatar() ) {
+                add_msg_if_player( m_info, _( "You can't reach that through the thick ice." ) );
+            }
+            return false;
+        }
+    }
+
     if( !enough_working_legs() ) {
         if( !movement_mode_is( move_mode_prone ) ) {
             add_msg_if_player( m_bad, _( "Your broken legs cannot hold you and you fall down." ) );
@@ -614,27 +628,6 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         // TODO: Per-NPC tracking? Right now monster hit by either npc or player will draw aggro...
         t.add_effect( effect_hit_by_player, 10_minutes ); // Flag as attacked by us for AI
     }
-    if( is_mounted() ) {
-        auto *mons = mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "The %s has dead batteries and will not move its arms." ),
-                         mons->get_name() );
-                return false;
-            }
-            if( mons->type->has_special_attack( "SMASH" ) && one_in( 3 ) ) {
-                add_msg( m_info, _( "The %s hisses as its hydraulic arm pumps forward!" ),
-                         mons->get_name() );
-                mattack::smash_specific( mons, &t );
-            } else {
-                mons->use_mech_power( 2_kJ );
-                mons->melee_attack( t );
-            }
-            mod_moves( forced_movecost >= 0 ? -forced_movecost : -mons->type->attack_cost );
-            return true;
-        }
-    }
-
     // Fighting is as strenuous as it gets. Melee actions almost always take just a second or
     // two, so we use EXPLOSIVE_EXERCISE to better simulate the exhausting effects of combat.
     set_activity_level( EXPLOSIVE_EXERCISE );
@@ -649,7 +642,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         return false;
     }
 
-    if( is_avatar() && move_cost > 1000 && calendar::turn > melee_warning_turn ) {
+    if( is_avatar() && move_cost > 400 && calendar::turn > melee_warning_turn ) {
         const std::string &action = query_popup()
                                     .context( "CANCEL_ACTIVITY_OR_IGNORE_QUERY" )
                                     .message( _( "<color_light_red>Attacking with your %1$s will take a long time.  "
@@ -1094,11 +1087,9 @@ int Character::get_total_melee_stamina_cost( const item *weap ) const
     return std::min<int>( -75, proficiency_multiplier * ( mod_sta + melee - stance_malus ) );
 }
 
-void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
+void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost,
+                              matec_id force_technique )
 {
-    static const matec_id no_technique_id( "" );
-    matec_id force_technique = no_technique_id;
-
     // Fighting is hard work
     set_activity_level( EXPLOSIVE_EXERCISE );
 
@@ -1833,37 +1824,15 @@ bool Character::valid_aoe_technique( Creature const &t, const ma_technique &tech
     }
 
     if( technique.aoe == "impale" ) {
-        // Impale hits the target and a single target behind them
-        // Check if the square cardinally behind our target, or to the left / right,
-        // contains a possible target.
-        tripoint_bub_ms left = t_pos + tripoint_rel_ms( offset_a[lookup], offset_b[lookup], 0 );
-        tripoint_bub_ms target_pos = t_pos + ( t.pos_bub() - pos_bub() );
-        tripoint_bub_ms right = t_pos + tripoint_rel_ms( offset_b[lookup], -offset_b[lookup], 0 );
-
-        monster *const mon_l = creatures.creature_at<monster>( left );
+        // Impale hits the target and a single target orthogonally behind them. Does not work for diagonals.
+        tripoint_bub_ms target_pos = t_pos + ( t_pos - pos );
         monster *const mon_t = creatures.creature_at<monster>( target_pos );
-        monster *const mon_r = creatures.creature_at<monster>( right );
-        if( mon_l && mon_l->friendly == 0 ) {
-            targets.push_back( mon_l );
-        }
-        if( mon_t && mon_t->friendly == 0 ) {
+        if( mon_t && mon_t->friendly == 0 && ( mon_t->pos_bub() != t_pos ) ) {
             targets.push_back( mon_t );
         }
-        if( mon_r && mon_r->friendly == 0 ) {
-            targets.push_back( mon_r );
-        }
-
-        npc *const npc_l = creatures.creature_at<npc>( left );
         npc *const npc_t = creatures.creature_at<npc>( target_pos );
-        npc *const npc_r = creatures.creature_at<npc>( right );
-        if( npc_l && npc_l->is_enemy() ) {
-            targets.push_back( npc_l );
-        }
-        if( npc_t && npc_t->is_enemy() ) {
+        if( npc_t && npc_t->is_enemy() && ( npc_t->pos_bub() != t_pos ) ) {
             targets.push_back( npc_t );
-        }
-        if( npc_r && npc_r->is_enemy() ) {
-            targets.push_back( npc_r );
         }
         if( !targets.empty() ) {
             return true;
@@ -1884,7 +1853,7 @@ bool Character::valid_aoe_technique( Creature const &t, const ma_technique &tech
                 targets.push_back( np );
             }
         }
-        //don't trigger circle for fewer than 2 targets
+        // Don't trigger circle for fewer than 2 targets.
         if( targets.size() < 2 ) {
             targets.clear();
         } else {
@@ -2079,7 +2048,6 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
                 is_mounted() ||
                 ( veh0 != nullptr && std::abs( veh0->velocity ) > 100 ) || // Diving from moving vehicle
                 ( veh0 != nullptr && veh0->player_in_control( here, get_avatar() ) ) || // Player is driving
-                has_effect( effect_amigara ) ||
                 has_flag( json_flag_GRAB );
             if( !move_issue ) {
                 if( t_pos != prev_pos ) {
@@ -2141,22 +2109,22 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
 
         valid_aoe_technique( t, technique, targets );
 
-        //hit only one valid target (pierce through doesn't spread out)
-        if( technique.aoe == "impale" ) {
-            // TODO: what if targets is empty
-            Creature *const v = random_entry( targets );
-            targets.clear();
-            targets.push_back( v );
+        // Hit only one valid target (stabbing through doesn't spread out)
+        if( technique.aoe == "impale" && !targets.empty() ) {
+            Creature *const v = targets.front();  // first valid behind target
+            reach_attack( v->pos_bub(), -1, tec_aoe_secondary );
+            // Perform the attack and then exclude just v, in the unlikely event we are impaling AND doing some other AOE.
+            targets.erase(
+                std::remove( targets.begin(), targets.end(), v ),
+                targets.end()
+            );
         }
 
-        //hit the targets in the lists (all candidates if wide or burst, or just the unlucky sod if deep)
-        int count_hit = 0;
+        // Hit the targets in the list (all candidates if wide or burst, or just the unlucky sod if deep)
         for( Creature *const c : targets ) {
-            melee_attack( *c, false );
+            melee_attack( *c, false, tec_aoe_secondary );
         }
 
-        t.add_msg_if_player( m_good, n_gettext( "%d enemy hit!", "%d enemies hit!", count_hit ),
-                             count_hit );
         // Extra attacks are free of charge (otherwise AoE attacks would SUCK)
         moves = temp_moves;
         set_stamina( temp_stamina );

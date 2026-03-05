@@ -34,7 +34,7 @@
   {
     "type": "item_group",
     "id": "amigara_drops",
-    "subtype": "distribution",
+    "subtype": "collection",
     "entries": [
       {
         "group": "amigara_items",
@@ -42,7 +42,7 @@
           "procgen_id": "netherum_tunnels",
           "rules": { "power_level": 1000, "max_attributes": 4, "max_negative_power": -1000, "resonant": true }
         },
-        "prob": 100
+        "prob": 50
       }
     ]
   },

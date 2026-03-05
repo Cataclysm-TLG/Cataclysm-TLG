@@ -24,6 +24,7 @@
 #include "global_vars.h"
 #include "item.h"
 #include "item_pocket.h"
+#include "item_transformation.h"
 #include "iuse.h" // use_function
 #include "mapdata.h"
 #include "proficiency.h"
@@ -356,6 +357,9 @@ struct armor_portion_data {
      * Includes material portion and thickness.
      */
     std::vector<part_material> materials;
+
+    // Whether material rigidity is overridden in the armor data.
+    bool rigid_override = false;
 
     // Where does this cover if any
     std::optional<body_part_set> covers;
@@ -966,6 +970,11 @@ struct islot_gunmod : common_ranged_data {
     // wheter the item is supposed to work as a bayonet when attached
     bool is_bayonet = false;
 
+    /** if the item is visible and selectable in the inventory menu
+    used by mounted flashlights and similar
+    */
+    bool is_visible_when_installed = false;
+
     /** Not compatible on weapons that have this mod slot */
     std::set<gunmod_location> blacklist_slot;
 
@@ -1178,11 +1187,14 @@ struct islot_seed {
         islot_seed() = default;
 
         const std::vector<std::pair<flag_id, time_duration>> &get_growth_stages() const;
+        units::temperature get_growth_temp() const;
     private:
         /**
         * What stages of growth does this plant have? How long does each stage of growth last?
         */
         std::vector<std::pair<flag_id, time_duration>> growth_stages;
+        // Temperature needs to be at or above this temp for the plant to be planted/grow.
+        units::temperature growth_temp;
 };
 
 enum condition_type {
@@ -1461,10 +1473,10 @@ struct itype {
         time_duration countdown_interval = 0_seconds;
 
         /**
-        * If set the item will revert to this after countdown. If not set the item is deleted.
+        * If set the item will transform to this after countdown. If not set the item is deleted.
         * Tools revert to this when they run out of charges
         */
-        std::optional<itype_id> revert_to;
+        std::optional<item_transformation> transform_into;
 
         /**
         * Space occupied by items of this type

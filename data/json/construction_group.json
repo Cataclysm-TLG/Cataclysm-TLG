@@ -1377,26 +1377,6 @@
   },
   {
     "type": "construction_group",
-    "id": "place_wind_turbine",
-    "name": "Place Wind Turbine"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_xl_wind_turbine",
-    "name": "Place Large Wind Turbine"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_water_wheel",
-    "name": "Place Water Wheel"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_xl_water_wheel",
-    "name": "Place Large Water Wheel"
-  },
-  {
-    "type": "construction_group",
     "id": "place_small_battery",
     "name": "Place Small Battery"
   },

@@ -678,7 +678,6 @@
     "price_postapoc": "50 cent",
     "addiction_type": "alcohol",
     "addiction_potential": 5,
-    "use_action": [ "ALCOHOL" ],
     "stim": -6,
     "quench": -6,
     "material": [ "fruit", "alcohol" ],
@@ -688,7 +687,7 @@
     "sealed": true,
     "fun": 9,
     "//": "this item is intended to generally be inherited from the fruit and alcohol used.",
-    "vitamins": [ [ "vitC", 20 ], [ "fruit_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 20 ], [ "fruit_allergen", 1 ], [ "ethanol", 3 ] ],
     "flags": [ "USE_EAT_VERB", "EATEN_COLD" ]
   }
 ]

@@ -1559,10 +1559,6 @@
     "type": "json_flag"
   },
   {
-    "id": "MECH_BAT",
-    "type": "json_flag"
-  },
-  {
     "id": "MESSY",
     "type": "json_flag"
   },
@@ -2050,6 +2046,10 @@
     "type": "json_flag"
   },
   {
+    "id": "DAMAGE_VEHICLE_WHEELS",
+    "type": "json_flag"
+  },
+  {
     "id": "SCIENCE_CARD_VISITOR",
     "type": "json_flag",
     "info": "You could probably use this to get into a science facility."
@@ -2176,76 +2176,6 @@
     "info": "Allows movement in open air."
   },
   {
-    "id": "EXO_SMALL",
-    "type": "json_flag",
-    "info": "This is meant for a small exosuit hardpoint."
-  },
-  {
-    "id": "EXO_LARGE",
-    "type": "json_flag",
-    "info": "This is meant for a large exosuit hardpoint."
-  },
-  {
-    "id": "EXO_PSU",
-    "type": "json_flag",
-    "info": "This is meant for an exosuit PSU hardpoint."
-  },
-  {
-    "id": "EXO_SMALL_GADGET",
-    "type": "json_flag",
-    "info": "This is meant for small exosuit gadgets, 1 L or less."
-  },
-  {
-    "id": "EXO_HELMET_GADGET",
-    "type": "json_flag",
-    "info": "This is meant for helmet-specific gadgets."
-  },
-  {
-    "id": "EXO_MEDIUM_GADGET",
-    "type": "json_flag",
-    "info": "This is meant for medium exosuit gadgets, between 1 L and 5 L."
-  },
-  {
-    "id": "EXO_LARGE_GADGET",
-    "type": "json_flag",
-    "info": "This is meant for large exosuit gadgets, larger than 5 L."
-  },
-  {
-    "id": "EXO_UNDERLAYER",
-    "type": "json_flag",
-    "info": "This is meant for exosuit underlayers."
-  },
-  {
-    "id": "EXO_HELMET_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit helmet plating."
-  },
-  {
-    "id": "EXO_TORSO_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit torso plating."
-  },
-  {
-    "id": "EXO_ARM_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit arm plating."
-  },
-  {
-    "id": "EXO_GLOVE_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit arm plating."
-  },
-  {
-    "id": "EXO_LEG_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit leg plating."
-  },
-  {
-    "id": "EXO_BOOT_PLATE",
-    "type": "json_flag",
-    "info": "This is meant for exosuit foot plating."
-  },
-  {
     "id": "ENERGY_SHIELD",
     "type": "json_flag",
     "info": "This piece of armor is an energy barrier and will break after absorbing a certain amount of damage."
@@ -2332,21 +2262,6 @@
     "id": "VIEW_PHOTOS",
     "type": "json_flag",
     "//": "Any item that can display a list of contained photos"
-  },
-  {
-    "id": "AFS_CS_LOCKER_CARD",
-    "type": "json_flag",
-    "info": "ID card granting access to the crashing ship's locker room."
-  },
-  {
-    "id": "AFS_CS_ARMORY_CARD",
-    "type": "json_flag",
-    "info": "ID card granting access to the crashing ship's armory."
-  },
-  {
-    "id": "AFS_CS_EXOBAY_CARD",
-    "type": "json_flag",
-    "info": "ID card granting access to the crashing ship's exobay."
   },
   {
     "id": "PAPER_SHAPED",
@@ -2698,5 +2613,127 @@
     "id": "VERMINOUS",
     "//": "This character is immune to sewer gas and doesn't mind wearing filthy gear.",
     "type": "json_flag"
+  },
+  {
+    "id": "BARRICADABLE_DOOR_DAMAGED",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Damaged Barricadable Door"
+  },
+  {
+    "id": "BARRICADABLE_DOOR_REINFORCED_DAMAGED",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Damaged Barricadable Reinforced Door"
+  },
+  {
+    "id": "BARRICADABLE_DOOR_REINFORCED",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Barricadable Reinforced Door"
+  },
+  {
+    "id": "BARRICADABLE_DOOR",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Barricadable Door"
+  },
+  {
+    "id": "BARRICADABLE_WINDOW_CURTAINS",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Barricadable Window with Curtains"
+  },
+  {
+    "id": "BARRICADABLE_WINDOW",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Barricadable Window"
+  },
+  {
+    "id": "CHIP",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Chip",
+    "info": "A paint chipper can be used to remove paint from this."
+  },
+  {
+    "id": "DIGGABLE",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Diggable",
+    "info": "A hole can be dug here."
+  },
+  {
+    "id": "EASY_DECONSTRUCT",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Simple"
+  },
+  {
+    "id": "FLAT",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Flat"
+  },
+  {
+    "id": "PIT_FILLABLE",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Fillable pit"
+  },
+  {
+    "id": "PLOWABLE",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Plowable"
+  },
+  {
+    "id": "RUBBLE",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Rubble"
+  },
+  {
+    "id": "SUPPORTS_ROOF",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Supports roof",
+    "info": "A roof can be built above this without other support."
+  },
+  {
+    "id": "TREE",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Tree"
+  },
+  {
+    "id": "WALL",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Wall"
+  },
+  {
+    "id": "WIRED_WALL",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag used in Construction pre_flags field",
+    "name": "Wired Wall"
+  },
+  {
+    "id": "PHASE_BACK",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag",
+    "name": "Phase back",
+    "info": "This terrain will phase back to its original terrain when no longer modified."
+  },
+  {
+    "id": "SWIM_UNDER",
+    "type": "json_flag",
+    "info": "Terrain with this flag is treated as having water beneath a covering (e.g. ice); entities may be considered under water for swimming and related mechanics."
+  },
+  {
+    "id": "EATDEAD",
+    "type": "json_flag",
+    "//": "Used for immunity to the effects of eating zombies."
   }
 ]

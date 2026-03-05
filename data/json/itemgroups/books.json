@@ -1026,12 +1026,7 @@
     "id": "stand_flyer_maps",
     "type": "item_group",
     "subtype": "distribution",
-    "entries": [
-      { "item": "satellitemap", "prob": 1 },
-      { "item": "touristmap", "prob": 2 },
-      { "item": "trailmap", "prob": 2 },
-      { "item": "roadmap", "prob": 1 }
-    ]
+    "entries": [ { "item": "touristmap", "prob": 2 }, { "item": "trailmap", "prob": 2 }, { "item": "roadmap", "prob": 1 } ]
   },
   {
     "id": "pamphlets",

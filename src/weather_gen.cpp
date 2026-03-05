@@ -64,7 +64,10 @@ void weather_generator::reset()
 {
     weather_generator_factory.reset();
 }
-
+void weather_generator::finalize()
+{
+    sort_weather();
+}
 void weather_generator::finalize_all()
 {
     weather_generator_factory.finalize();
@@ -185,7 +188,7 @@ w_point weather_generator::get_weather( const tripoint_abs_ms &location, const t
     double P =
         base_pressure +
         raw_noise_4d( x, y, z, modSEED + 211 ) *
-        10 * ( -seasonality + 2 );
+        15 * ( -seasonality + 2 );
 
     // Wind power
     W = std::max( 0, static_cast<int>( base_wind * rng( 1, 2 ) / std::pow( ( P + W ) / 1014.78, rng( 9,

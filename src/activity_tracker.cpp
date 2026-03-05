@@ -20,7 +20,7 @@ int activity_tracker::weariness() const
 // Called every 5 minutes, when activity level is logged
 void activity_tracker::try_reduce_weariness( int bmr )
 {
-    const float recovery_mult = 0.5f;
+    const float recovery_mult = 0.05f;
     // As fatigue_mod approaches zero, low_activity_ticks and reduction approach infinity which in turn make tracker approach - infinity before being capped at 0.
     // Skip the math and just automatically set tracker to 0.
     if( average_activity() < LIGHT_EXERCISE ) {

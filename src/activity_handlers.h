@@ -70,6 +70,7 @@ enum class do_activity_reason : int {
     NO_COMPONENTS,          // can't do the activity there due to lack of components /tools
     DONT_HAVE_SKILL,        // don't have the required skill
     NO_ZONE,                // There is no required zone anymore
+    NO_VEHICLE,             // There is no vehicle or no accessible vehicle at this location
     ALREADY_DONE,           // the activity is done already ( maybe by someone else )
     UNKNOWN_ACTIVITY,       // This is probably an error - got to the end of function with no previous reason
     NEEDS_CLEARING,         // For farming - tile was neglected and became overgrown, can be cleared.
@@ -220,7 +221,6 @@ void fertilize_plot_do_turn( player_activity *act, Character *you );
 void fetch_do_turn( player_activity *act, Character *you );
 void fill_liquid_do_turn( player_activity *act, Character *you );
 void find_mount_do_turn( player_activity *act, Character *you );
-void fish_do_turn( player_activity *act, Character *you );
 void game_do_turn( player_activity *act, Character *you );
 void generic_game_do_turn( player_activity *act, Character *you );
 void hand_crank_do_turn( player_activity *act, Character *you );
@@ -259,7 +259,6 @@ do_turn_functions;
 void atm_finish( player_activity *act, Character *you );
 void butcher_finish( player_activity *act, Character *you );
 void eat_menu_finish( player_activity *act, Character *you );
-void fish_finish( player_activity *act, Character *you );
 void generic_game_finish( player_activity *act, Character *you );
 void gunmod_add_finish( player_activity *act, Character *you );
 void heat_item_finish( player_activity *act, Character *you );

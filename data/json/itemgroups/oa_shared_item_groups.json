@@ -47,7 +47,7 @@
       [ "jug_plastic", 10 ],
       [ "spray_can", 20 ],
       [ "jar_glass_sealed", 20 ],
-      [ "jar_3l_glass_sealed", 5 ],
+      [ "jar_3l_glass_sealed", 2 ],
       [ "flyer", 40 ],
       [ "talking_doll", 10 ],
       { "item": "marble", "prob": 20, "charges": [ 1, 20 ] },

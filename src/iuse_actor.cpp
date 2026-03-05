@@ -50,6 +50,7 @@
 #include "item_group.h"
 #include "item_location.h"
 #include "item_pocket.h"
+#include "item_transformation.h"
 #include "itype.h"
 #include "json.h"
 #include "json_loader.h"
@@ -164,6 +165,9 @@ static const skill_id skill_firstaid( "firstaid" );
 static const skill_id skill_survival( "survival" );
 static const skill_id skill_traps( "traps" );
 
+static const std::string flag_CARGO( "CARGO" );
+static const std::string flag_FLUIDTANK( "FLUIDTANK" );
+
 static const trait_id trait_DEBUG_BIONICS( "DEBUG_BIONICS" );
 static const trait_id trait_ILLITERATE( "ILLITERATE" );
 static const trait_id trait_LIGHTWEIGHT( "LIGHTWEIGHT" );
@@ -181,39 +185,17 @@ std::unique_ptr<iuse_actor> iuse_transform::clone() const
 
 void iuse_transform::load( const JsonObject &obj, const std::string & )
 {
-    optional( obj, false, "target", target );
-    optional( obj, false, "target_group", target_group );
-
-    if( !target.is_empty() && !target_group.is_empty() ) {
-        obj.throw_error_at( "target_group", "Cannot use both target and target_group at once" );
-    }
+    transform.deserialize( obj );
 
     optional( obj, false, "msg", msg_transform );
-    optional( obj, false, "msg", msg_transform );
-    optional( obj, false, "variant_type", variant_type, "<any>" );
-    optional( obj, false, "container", container );
-    optional( obj, false, "sealed", sealed, true );
-    if( obj.has_member( "target_charges" ) && obj.has_member( "rand_target_charges" ) ) {
-        obj.throw_error_at( "target_charges",
-                            "Transform actor specified both fixed and random target charges" );
-    }
-    optional( obj, false, "target_charges", ammo_qty, -1 );
-    optional( obj, false, "rand_target_charges", random_ammo_qty );
-    if( random_ammo_qty.size() == 1 ) {
-        obj.throw_error_at( "rand_target_charges",
-                            "You must specify two or more values to choose between" );
-    }
-    optional( obj, false, "target_ammo", ammo_type );
-
-    optional( obj, false, "target_timer", target_timer, 0_seconds );
-
-    if( !ammo_type.is_empty() && !container.is_empty() ) {
-        obj.throw_error_at( "target_ammo", "Transform actor specified both ammo type and container type" );
-    }
-
-    optional( obj, false, "active", active, false );
 
     optional( obj, false, "moves", moves, numeric_bound_reader<int> { 0 }, 0 );
+
+    optional( obj, false, "set_timer", set_timer, false );
+
+    if( set_timer && transform.target_timer != 0_seconds ) {
+        obj.throw_error_at( "set_timer", "Cannot use both set_timer and target_timer at once" );
+    }
 
     optional( obj, false, "need_fire", need_fire, numeric_bound_reader<int> { 0 }, 0 );
     optional( obj, false, "need_charges_msg", need_charges_msg, to_translation( "The %s is empty!" ) );
@@ -265,6 +247,20 @@ std::optional<int> iuse_transform::use( Character *p, item &it, map *,
         }
     }
 
+    int timer_time = 0;
+    bool got_timer_value = false;
+
+    if( set_timer && p->is_avatar() ) {
+        got_timer_value = query_int( timer_time, false,
+                                     _( "Set the timer to how many seconds (0 to cancel)?" ) );
+        if( !got_timer_value || timer_time <= 0 ) {
+            p->add_msg_if_player( _( "Never mind." ) );
+            return std::nullopt;
+        }
+        p->add_msg_if_player( n_gettext( "You set the timer to %d second.",
+                                         "You set the timer to %d seconds.", timer_time ), timer_time );
+    }
+
     if( !msg_transform.empty() ) {
         p->add_msg_if_player( m_neutral, msg_transform, it.tname() );
     }
@@ -283,94 +279,30 @@ std::optional<int> iuse_transform::use( Character *p, item &it, map *,
         }
     }
 
-    if( target_group.is_empty() && it.count_by_charges() != target->count_by_charges() &&
+    if( transform.target_group.is_empty() &&
+        it.count_by_charges() != transform.target->count_by_charges() &&
         it.count() > 1 ) {
         item take_one = it.split( 1 );
-        do_transform( p, take_one, variant_type );
+        transform.transform( p, take_one );
         // TODO: Change to map aware operation when available
         p->i_add_or_drop( take_one );
     } else {
-        do_transform( p, it, variant_type );
+        transform.transform( p, it, true );
+    }
+
+    if( set_timer ) {
+        if( got_timer_value ) {
+            it.countdown_point = calendar::turn + time_duration::from_seconds( timer_time );
+        } else {
+            // Uses value from the converted type
+            it.countdown_point = calendar::turn + it.type->countdown_interval;
+        }
     }
 
     if( it.is_tool() ) {
         result = scale;
     }
     return result;
-}
-
-void iuse_transform::do_transform( Character *p, item &it, const std::string &variant_type ) const
-{
-    item obj_copy( it );
-    item *obj;
-    // defined here to allow making a new item assigned to the pointer
-    item obj_it;
-    if( container.is_empty() ) {
-        if( !target_group.is_empty() ) {
-            obj = &it.convert( item_group::item_from( target_group ).typeId(), p );
-        } else {
-            obj = &it.convert( target, p );
-            obj->set_itype_variant( variant_type );
-        }
-        if( ammo_qty >= 0 || !random_ammo_qty.empty() ) {
-            int qty;
-            if( !random_ammo_qty.empty() ) {
-                const int index = rng( 1, random_ammo_qty.size() - 1 );
-                qty = rng( random_ammo_qty[index - 1], random_ammo_qty[index] );
-            } else {
-                qty = ammo_qty;
-            }
-            if( !ammo_type.is_empty() ) {
-                obj->ammo_set( ammo_type, qty );
-            } else if( obj->is_ammo() ) {
-                obj->charges = qty;
-            } else if( !obj->ammo_current().is_null() ) {
-                obj->ammo_set( obj->ammo_current(), qty );
-            } else if( obj->has_flag( flag_RADIO_ACTIVATION ) && obj->has_flag( flag_BOMB ) ) {
-                obj->set_countdown( 1 );
-            } else {
-                obj->set_countdown( qty );
-            }
-        }
-    } else {
-        obj = &it.convert( container, p );
-        obj->set_itype_variant( variant_type );
-        int count = std::max( ammo_qty, 1 );
-        item cont;
-        if( !target_group.is_empty() ) {
-            cont = item( item_group::item_from( target_group ).typeId(), calendar::turn );
-        } else if( target->count_by_charges() ) {
-            cont = item( target, calendar::turn, count );
-            count = 1;
-        } else {
-            cont = item( target, calendar::turn );
-        }
-        for( int i = 0; i < count; i++ ) {
-            if( !it.put_in( cont, pocket_type::CONTAINER ).success() ) {
-                it.put_in( cont, pocket_type::MIGRATION );
-            }
-        }
-        if( sealed ) {
-            it.seal();
-        }
-    }
-
-    if( target_timer > 0_seconds ) {
-        obj->countdown_point = calendar::turn + target_timer;
-    }
-    obj->active = active || obj->has_temperature() || target_timer > 0_seconds;
-    if( p && p->is_worn( *obj ) ) {
-        if( !obj->is_armor() ) {
-            item_location il = item_location( *p, obj );
-            p->takeoff( il );
-        } else {
-            p->calc_encumbrance();
-            p->update_bodytemp();
-            p->on_worn_item_transform( obj_copy, *obj );
-        }
-    }
-
-    p->clear_inventory_search_cache();
 }
 
 ret_val<void> iuse_transform::can_use( const Character &p, const item &it,
@@ -396,7 +328,7 @@ ret_val<void> iuse_transform::can_use( const Character &p, const item &it,
     }
 
     if( p.is_worn( it ) ) {
-        item tmp = item( target );
+        item tmp = item( transform.target );
         if( !tmp.has_flag( flag_OVERSIZE ) && !tmp.has_flag( flag_INTEGRATED ) &&
             !tmp.has_flag( flag_SEMITANGIBLE ) ) {
             for( const trait_id &mut : p.get_functioning_mutations() ) {
@@ -448,13 +380,13 @@ std::string iuse_transform::get_name() const
 
 void iuse_transform::finalize( const itype_id &my_item_type )
 {
-    if( !item::type_is_defined( target ) && target_group.is_empty() ) {
-        debugmsg( "Invalid transform target: %s", target.c_str() );
+    if( !item::type_is_defined( transform.target ) && transform.target_group.is_empty() ) {
+        debugmsg( "Invalid transform target: %s", transform.target.c_str() );
     }
 
-    if( !container.is_empty() ) {
-        if( !item::type_is_defined( container ) ) {
-            debugmsg( "Invalid transform container: %s", container.c_str() );
+    if( !transform.container.is_empty() ) {
+        if( !item::type_is_defined( transform.container ) ) {
+            debugmsg( "Invalid transform container: %s", transform.container.c_str() );
         }
 
         // todo: check contents fit container?
@@ -468,9 +400,9 @@ void iuse_transform::finalize( const itype_id &my_item_type )
         // It is not unreasonable to want items that violate this assumption (one example is
         // the infamous Apple mouse which cannot be operated while charging),
         // but we don't have any of those implemented right now, so the check stays.
-        if( !target.obj().can_use( "link_up" ) ) {
+        if( !transform.target.obj().can_use( "link_up" ) ) {
             debugmsg( "Item %s has link_up action, yet transforms into %s which doesn't.",
-                      my_item_type.c_str(), target.c_str() );
+                      my_item_type.c_str(), transform.target.c_str() );
         }
     }
 }
@@ -478,44 +410,44 @@ void iuse_transform::finalize( const itype_id &my_item_type )
 void iuse_transform::info( const item &it, std::vector<iteminfo> &dump ) const
 {
 
-    if( !target_group.is_empty() ) {
+    if( !transform.target_group.is_empty() ) {
         dump.emplace_back( "TOOL", _( "Can transform into one of several items" ) );
         return;
     }
-    int amount = std::max( ammo_qty, 1 );
-    item dummy( target, calendar::turn, target->count_by_charges() ? amount : 1 );
-    dummy.set_itype_variant( variant_type );
+    int amount = std::max( transform.ammo_qty, 1 );
+    item dummy( transform.target, calendar::turn, transform.target->count_by_charges() ? amount : 1 );
+    dummy.set_itype_variant( transform.variant_type );
     // If the variant is to be randomized, use default no-variant name
-    if( variant_type == "<any>" ) {
+    if( transform.variant_type == "<any>" ) {
         dummy.clear_itype_variant();
     }
     if( it.has_flag( flag_FIT ) ) {
         dummy.set_flag( flag_FIT );
     }
-    if( target->count_by_charges() || !ammo_type.is_empty() ) {
-        if( !ammo_type.is_empty() ) {
+    if( transform.target->count_by_charges() || !transform.ammo_type.is_empty() ) {
+        if( !transform.ammo_type.is_empty() ) {
             dump.emplace_back( "TOOL", _( "<bold>Turns into</bold>: " ),
-                               string_format( _( "%s (%d %s)" ), dummy.tname(), amount, ammo_type->nname( amount ) ) );
-        } else if( !container.is_empty() ) {
+                               string_format( _( "%s (%d %s)" ), dummy.tname(), amount, transform.ammo_type->nname( amount ) ) );
+        } else if( !transform.container.is_empty() ) {
             dump.emplace_back( "TOOL", _( "<bold>Turns into</bold>: " ),
                                amount > 1 ?
                                string_format( _( "%s (%d %s)" ),
-                                              container->nname( 1 ), amount, target->nname( amount ) ) :
+                                              transform.container->nname( 1 ), amount, transform.target->nname( amount ) ) :
                                string_format( _( "%s (%s)" ),
-                                              container->nname( 1 ), target->nname( amount ) ) );
+                                              transform.container->nname( 1 ), transform.target->nname( amount ) ) );
         } else {
             dump.emplace_back( "TOOL", _( "<bold>Turns into</bold>: " ),
-                               string_format( _( "%s (%d)" ), target->nname( amount ), amount ) );
+                               string_format( _( "%s (%d)" ), transform.target->nname( amount ), amount ) );
         }
     } else {
         dump.emplace_back( "TOOL", _( "<bold>Turns into</bold>: " ),
                            amount > 1 ?
-                           string_format( _( "%d %s" ), amount, target->nname( amount ) ) :
-                           string_format( _( "%s" ), target->nname( amount ) ) );
+                           string_format( _( "%d %s" ), amount, transform.target->nname( amount ) ) :
+                           string_format( _( "%s" ), transform.target->nname( amount ) ) );
     }
 
-    if( target_timer > 0_seconds ) {
-        dump.emplace_back( "TOOL", _( "Countdown: " ), to_seconds<int>( target_timer ) );
+    if( transform.target_timer > 0_seconds ) {
+        dump.emplace_back( "TOOL", _( "Countdown: " ), to_seconds<int>( transform.target_timer ) );
     }
 
     const auto *explosion_use = dummy.get_use( "explosion" );
@@ -795,6 +727,7 @@ void effect_data::deserialize( const JsonObject &jo )
     optional( jo, false, "duration", duration, 0_seconds );
     optional( jo, false, "bp", bp, bodypart_str_id::NULL_ID() );
     optional( jo, false, "permanent", permanent, false );
+    optional( jo, false, "intensity", intensity, 0 );
 }
 
 } // namespace iuse
@@ -902,7 +835,7 @@ std::optional<int> consume_drug_iuse::use( Character *p, item &it, map *here,
         } else if( p->has_trait( trait_LIGHTWEIGHT ) ) {
             dur *= 1.2;
         }
-        p->add_effect( eff.id, dur, eff.bp, eff.permanent );
+        p->add_effect( eff.id, dur, eff.bp, eff.permanent, eff.intensity );
     }
     //Apply the various damage_over_time
     for( const damage_over_time_data &Dot : damage_over_time ) {
@@ -1330,13 +1263,42 @@ std::optional<int> deploy_appliance_actor::use( Character *p, item &it,
         return std::nullopt;
     }
 
-    // TODO: Use map aware operation when available
-    it.spill_contents( suitable.value() );
-    // TODO: Use map aware operation when available
-    if( !place_appliance( *here, suitable.value(),
-                          vpart_appliance_from_item( appliance_base ), *p, it ) ) {
-        // failed to place somehow, cancel!!
+    tripoint_bub_ms target = suitable.value();
+
+    const vpart_id &vpart = vpart_appliance_from_item( appliance_base );
+    if( !place_appliance( *here, target, vpart, *p, it ) ) {
         return 0;
+    }
+
+    /* Contents of our item automatically move inside of the appliance, but would
+       normally be deleted if there is no space for them. This is imperfect, but
+       we can check to see if the appliance can hold stuff and manually attempt
+       to spill stuff that definitely won't fit. This can still delete items if
+       the appliance is smaller or lacks storage that the item had, so be careful. */
+    if( vpart->has_flag( flag_FLUIDTANK ) ) {
+        bool placed_fluid = false;
+        for( item *content : it.get_contents().all_items_top() ) {
+            if( content->made_of( phase_id::LIQUID ) ) {
+                if( !placed_fluid ) {
+                    placed_fluid = true;
+                } else {
+                    here->add_item_or_charges( target, std::move( *content ), true, true );
+                }
+            }
+        }
+        it.get_contents().remove_items_if( []( const item & it ) {
+            return it.made_of( phase_id::LIQUID );
+        } );
+    }
+    if( vpart->has_flag( flag_CARGO ) ) {
+        for( item *content : it.get_contents().all_items_top() ) {
+            if( !content->made_of( phase_id::LIQUID ) ) {
+                here->add_item_or_charges( target, std::move( *content ), true, true );
+            }
+        }
+        it.get_contents().remove_items_if( []( const item & it ) {
+            return !it.made_of( phase_id::LIQUID );
+        } );
     }
     p->mod_moves( -to_moves<int>( 2_seconds ) );
     return 1;
@@ -3874,7 +3836,7 @@ int heal_actor::finish_using( Character &healer, Character &patient, item &it,
     }
 
     for( const iuse::effect_data &eff : effects ) {
-        patient.add_effect( eff.id, eff.duration, eff.bp, eff.permanent );
+        patient.add_effect( eff.id, eff.duration, eff.bp, eff.permanent, eff.intensity );
     }
 
     if( !used_up_item_id.is_empty() ) {
@@ -6001,7 +5963,7 @@ std::optional<int> change_scent_iuse::use( Character *p, item &it, map *,
 
     // Apply the various effects.
     for( const iuse::effect_data &eff : effects ) {
-        p->add_effect( eff.id, eff.duration, eff.bp, eff.permanent );
+        p->add_effect( eff.id, eff.duration, eff.bp, eff.permanent, eff.intensity );
     }
     return charges_to_use;
 }

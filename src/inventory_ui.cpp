@@ -680,6 +680,11 @@ inventory_selector_preset::inventory_selector_preset()
     } ) );
 }
 
+bool inventory_selector_preset::is_shown( const item_location & ) const
+{
+    return true;
+}
+
 bool inventory_selector_preset::sort_compare( const inventory_entry &lhs,
         const inventory_entry &rhs ) const
 {
@@ -2026,9 +2031,14 @@ bool inventory_selector::add_contained_items( item_location &container, inventor
         return false;
     }
 
-    std::list<item *> const items = preset.get_pocket_type() == pocket_type::LAST
-                                    ? container->all_items_top()
-                                    : container->all_items_top( preset.get_pocket_type() );
+    std::list<item *> items;
+    if( preset.get_pocket_type().size() == 1 && preset.has_pocket_type( pocket_type::LAST ) ) {
+        items = container->all_items_top();
+    } else {
+        for( const pocket_type pt : preset.get_pocket_type() ) {
+            items.splice( items.begin(), container->all_items_top( pt ) );
+        }
+    }
 
     bool vis_top = false;
     inventory_column temp( preset );
@@ -4231,8 +4241,13 @@ inventory_selector::stats inventory_insert_selector::get_raw_stats() const
                         }
                     }
                 }
-                selected_weight += w * overflow_counter;
-                selected_volume += v * overflow_counter;
+                if( e->any_item()->count_by_charges() ) {
+                    selected_weight += w * overflow_counter / e->get_total_charges();
+                    selected_volume += v * overflow_counter / e->get_total_charges();
+                } else {
+                    selected_weight += w * overflow_counter;
+                    selected_volume += v * overflow_counter;
+                }
             }
         }
     }

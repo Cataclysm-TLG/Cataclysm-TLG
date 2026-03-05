@@ -66,7 +66,6 @@ static const bionic_id bio_railgun( "bio_railgun" );
 static const character_modifier_id
 character_modifier_melee_stamina_cost_mod( "melee_stamina_cost_mod" );
 
-static const efftype_id effect_amigara( "amigara" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
@@ -256,13 +255,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         !you.has_effect( effect_psi_stunned ) && !is_riding && !you.has_effect( effect_incorporeal ) &&
         !m.impassable_field_at( dest_loc ) && !you.has_flag( json_flag_CANNOT_MOVE ) ) {
         if( weapon && weapon->has_flag( flag_DIG_TOOL ) ) {
-            if( weapon->type->can_use( "JACKHAMMER" ) &&
-                weapon->ammo_sufficient( &you ) ) {
-                you.invoke_item( &*weapon, "JACKHAMMER", dest_loc );
-                // don't move into the tile until done mining
-                you.defer_move( dest_loc );
-                return true;
-            } else if( weapon->type->can_use( "PICKAXE" ) ) {
+            if( weapon->type->can_use( "PICKAXE" ) ) {
                 you.invoke_item( &*weapon, "PICKAXE", dest_loc );
                 // don't move into the tile until done mining
                 you.defer_move( dest_loc );
@@ -336,29 +329,6 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
                 auto *mons = you.mounted_creature.get();
                 mons->facing = FacingDirection::LEFT;
             }
-        }
-    }
-
-    if( you.has_effect( effect_amigara ) ) {
-        int curdist = INT_MAX;
-        int newdist = INT_MAX;
-        const tripoint_bub_ms minp{ 0, 0, you.posz() };
-        const tripoint_bub_ms maxp{ MAPSIZE_X, MAPSIZE_Y, you.posz() };
-        for( const tripoint_bub_ms &pt : m.points_in_rectangle( minp, maxp ) ) {
-            if( m.ter( pt ) == ter_t_fault ) {
-                int dist = rl_dist( pt, you.pos_bub() );
-                if( dist < curdist ) {
-                    curdist = dist;
-                }
-                dist = rl_dist( pt, dest_loc );
-                if( dist < newdist ) {
-                    newdist = dist;
-                }
-            }
-        }
-        if( newdist > curdist ) {
-            add_msg( m_info, _( "You cannot pull yourself away from the faultline…" ) );
-            return false;
         }
     }
 
@@ -996,16 +966,6 @@ void avatar_action::plthrow( avatar &you, item_location loc,
     } else if( you.has_flag( json_flag_CANNOT_ATTACK ) ) {
         add_msg( m_info, _( "You are incapable of throwing anything!" ) );
         return;
-    }
-    if( you.is_mounted() ) {
-        monster *mons = get_player_character().mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "Your %s refuses to move as its batteries have been drained." ),
-                         mons->get_name() );
-                return;
-            }
-        }
     }
 
     // TODO: Move this to Character or ranged. As of this writing, bionics.h can be removed from header at that time.

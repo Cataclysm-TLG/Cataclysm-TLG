@@ -1,5 +1,5 @@
 # 超过78个字符的段落将自动换行
-# 下面这行这么长
+# 以下不要再写注释
 ##############################################################################
 <color_white>原作者：</color>           <color_white>项目主管：</color>
 <color_yellow>Whales</color>（<color_dark_gray>不再参与</color>） <color_yellow>Worm Girl</color>
@@ -7,7 +7,7 @@
 <color_white>特别鸣谢艺术贡献者：</color>
 <color_yellow>Fris0uman</color>, <color_yellow>Golfavel</color>, <color_yellow>vetall812</color>, <color_yellow>Dandy-boy</color>, 以及其他人。
 
-<color_white>This project was forked from Cataclysm: Dark Days Ahead and would not exist without the efforts of scores of contributors on that project.</color>
+<color_white>本项目是从《大灾变：浩劫余生》（Cataclysm: Dark Days Ahead）分支出来的，如果没有该项目众多贡献者的努力，本项目就不会存在。</color>
 <color_cyan>https://github.com/CleverRaven/Cataclysm-DDA/</color>
 
 《<color_light_cyan>大灾变</color>：<color_light_blue>最后一代</color>》按 <color_white>CC-BY-SA 3.0</color> 授权协议发布：
