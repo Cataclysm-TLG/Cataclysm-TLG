@@ -1,0 +1,51 @@
+[
+  {
+    "type": "MOD_INFO",
+    "id": "megacity_mod",
+    "name": "Megacity",
+    "authors": [ "Renech" ],
+    "maintainers": [ "Worm Girl" ],
+    "description": "The world is entirely covered by a single, unending city.  NOTE: Expect long load times!",
+    "category": "total_conversion",
+    "dependencies": [ "tlg" ]
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "DEFAULT_REGION",
+    "stype": "string_input",
+    "value": "mega_mega_city"
+  },
+  {
+    "type": "region_settings",
+    "id": "mega_mega_city",
+    "copy-from": "default",
+    "place_swamps": false,
+    "rivers": null,
+    "ocean": null,
+    "forests": null,
+    "lakes": null,
+    "highways": null,
+    "cities": "mega_mega_city_settings"
+  },
+  {
+    "type": "SCENARIO_BLACKLIST",
+    "subtype": "whitelist",
+    "scenarios": [ "lone_survivor_start", "largebuilding", "fire", "bad_day", "last_delivery" ]
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MEGACITY",
+    "//": "If true, mapgen will be overwritten to place several large overlapping cities on every overmap. Intended for use only in the megacity mod, using it in other circumstances may cause strange behavior.",
+    "stype": "bool",
+    "value": true
+  },
+  {
+    "type": "region_settings_city",
+    "id": "mega_mega_city_settings",
+    "copy-from": "default",
+    "shop_radius": 200,
+    "shop_sigma": 0,
+    "park_radius": 0,
+    "park_sigma": 0
+  }
+]
