@@ -11709,6 +11709,10 @@ void Character::stagger()
         }
     }
 
+    // Check if the character is currently inside an enclosed vehicle
+    const optional_vpart_position vp_here = here.veh_at( pos_bub() );
+    const bool currently_enclosed = vp_here && vp_here->vehicle().enclosed_at( &here, pos_bub() );
+
     creature_tracker &creatures = get_creature_tracker();
     std::vector<tripoint_bub_ms> &pool = preferred_stumbles.empty() ? valid_stumbles :
                                          preferred_stumbles;
@@ -11717,9 +11721,15 @@ void Character::stagger()
         bool blocked = false;
         const tripoint_bub_ms dest = random_entry_removed( pool );
         const optional_vpart_position vp_there = here.veh_at( dest );
-        if( vp_there ) {
-            vehicle &veh = vp_there->vehicle();
-            if( veh.enclosed_at( &here,  dest ) ) {
+        if( currently_enclosed ) {
+            // If we're in an enclosed vehicle, only allow stumbling within the same enclosed space
+            if( !vp_there || &vp_there->vehicle() != &vp_here->vehicle() ||
+                !vp_there->vehicle().enclosed_at( &here, dest ) ) {
+                blocked = true;
+            }
+        } else if( vp_there ) {
+            // If we're not enclosed, block stumbling into enclosed tiles
+            if( vp_there->vehicle().enclosed_at( &here, dest ) ) {
                 blocked = true;
             }
         }
