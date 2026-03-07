@@ -4617,7 +4617,7 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
     // Bloodfeeders can drink human blood.
     if( it.has_vitamin( vitamin_human_flesh_vitamin ) ) {
         if( !( has_flag( json_flag_CANNIBAL ) ||
-            ( has_flag( json_flag_BLOODFEEDER ) && it.has_flag( flag_HEMOVORE_FUN ) ) ) ) {
+               ( has_flag( json_flag_BLOODFEEDER ) && it.has_flag( flag_HEMOVORE_FUN ) ) ) ) {
             return 0.0f;
         }
     }
