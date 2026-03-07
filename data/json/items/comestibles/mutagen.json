@@ -264,7 +264,7 @@
     }
   },
   {
-    "id": "iv_mutagen_lupine",
+    "id": "iv_mutagen_canine",
     "copy-from": "iv_mutagen_flavor",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
@@ -276,7 +276,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the canine infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_lupine", 220, 320 ] ]
+      "vitamins": [ [ "mutagen_canine", 220, 320 ] ]
     }
   },
   {
@@ -684,7 +684,7 @@
     }
   },
   {
-    "id": "mutagen_lupine",
+    "id": "mutagen_canine",
     "copy-from": "mutagen_flavor",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
@@ -693,7 +693,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the canine mutagen.",
-      "vitamins": [ [ "mutagen_lupine", 120, 220 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_canine", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {

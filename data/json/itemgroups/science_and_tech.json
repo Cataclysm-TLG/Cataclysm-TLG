@@ -321,7 +321,7 @@
           { "item": "mutagen_troglobite", "prob": 2, "count": [ 1, 2 ] },
           { "item": "mutagen_ursine", "prob": 2, "count": [ 1, 2 ] },
           { "item": "mutagen_feline", "prob": 2, "count": [ 1, 2 ] },
-          { "item": "mutagen_lupine", "prob": 2, "count": [ 1, 2 ] },
+          { "item": "mutagen_canine", "prob": 2, "count": [ 1, 2 ] },
           { "item": "mutagen_mouse", "prob": 2, "count": [ 1, 2 ] },
           { "item": "mutagen_rabbit", "prob": 2, "count": [ 1, 2 ] },
           { "item": "mutagen_crustacean", "prob": 2, "count": [ 1, 2 ] },
@@ -369,7 +369,7 @@
           { "item": "iv_mutagen_troglobite", "prob": 2, "count": [ 1, 5 ] },
           { "item": "iv_mutagen_ursine", "prob": 2, "count": [ 1, 5 ] },
           { "item": "iv_mutagen_feline", "prob": 2, "count": [ 1, 5 ] },
-          { "item": "iv_mutagen_lupine", "prob": 2, "count": [ 1, 5 ] },
+          { "item": "iv_mutagen_canine", "prob": 2, "count": [ 1, 5 ] },
           { "item": "iv_mutagen_mouse", "prob": 2, "count": [ 1, 5 ] },
           { "item": "iv_mutagen_rabbit", "prob": 2, "count": [ 1, 5 ] },
           { "item": "iv_mutagen_crustacean", "prob": 2, "count": [ 1, 5 ] },
@@ -409,7 +409,7 @@
           { "item": "mutagen_troglobite", "count": [ 1, 5 ], "prob": 2 },
           { "item": "mutagen_ursine", "count": [ 1, 5 ], "prob": 2 },
           { "item": "mutagen_feline", "count": [ 1, 5 ], "prob": 2 },
-          { "item": "mutagen_lupine", "count": [ 1, 5 ], "prob": 2 },
+          { "item": "mutagen_canine", "count": [ 1, 5 ], "prob": 2 },
           { "item": "mutagen_rabbit", "count": [ 1, 5 ], "prob": 2 },
           { "item": "mutagen_crustacean", "count": [ 1, 5 ], "prob": 2 }
         ]

@@ -6659,7 +6659,7 @@
     "points": -4,
     "visibility": 5,
     "ugliness": 7,
-    "description": "You've gotten rid of that terribly imprecise mouth and now imbibe your food like a proper person.  Chewing was tiresome anyway.",
+    "description": "Your mouth is now a long, flexible tube.  You can no longer consume solid food and must find liquid nourishment instead.",
     "purifiable": false,
     "prereqs": [ "MANDIBLES" ],
     "category": [ "INSECT" ],

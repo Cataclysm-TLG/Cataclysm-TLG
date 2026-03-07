@@ -2130,31 +2130,6 @@ static bool dead_plant( bool flower, Character &you, const tripoint_bub_ms &exam
 }
 
 /**
- * Helper method to see if player has traits, hunger and mouthwear for drinking nectar.
- */
-static bool can_drink_nectar( const Character &you )
-{
-    return ( you.has_active_mutation( trait_PROBOSCIS )  ||
-             you.has_active_mutation( trait_BEAK_HUM ) ) &&
-           ( you.get_hunger() > 0 ) && ( !you.wearing_something_on( bodypart_id( "mouth" ) ) );
-}
-
-/**
- * Consume Nectar. -15 hunger.
- */
-bool iexamine_helper::drink_nectar( Character &you )
-{
-    if( can_drink_nectar( you ) ) {
-        add_msg( _( "You drink some nectar." ) );
-        item nectar( "nectar", calendar::turn, 1 );
-        you.assign_activity( consume_activity_actor( nectar ) );
-        return true;
-    }
-
-    return false;
-}
-
-/**
  * Spawn an item after harvesting the plant
  */
 void iexamine_helper::handle_harvest( Character &you, const std::string &itemid,
@@ -2175,9 +2150,8 @@ void iexamine_helper::handle_harvest( Character &you, const std::string &itemid,
 }
 
 /**
- * Prompt pick (or drink nectar if able) poppy bud. Not safe for player.
+ * Prompt pick poppy bud. Not safe for player.
  *
- * Drinking causes: -25 hunger, +20 fatigue, pkill2-70 effect and, 1 in 20 pkiller-1 addiction.
  * Picking w/ env_resist < 5 causes 1 in 3  sleep for 12 min and 4 dmg to each leg
  */
 void iexamine::flower_poppy( Character &you, const tripoint_bub_ms &examp )
@@ -2186,23 +2160,6 @@ void iexamine::flower_poppy( Character &you, const tripoint_bub_ms &examp )
         return;
     }
     map &here = get_map();
-    // TODO: Get rid of this section and move it to eating
-    // Two y/n prompts is just too much
-    if( can_drink_nectar( you ) ) {
-        if( !query_yn( _( "You feel woozy as you explore the %s. Drink?" ),
-                       here.furnname( examp ) ) ) {
-            return;
-        }
-        add_msg( _( "You slowly suck up the nectar." ) );
-        item poppy( "poppy_nectar", calendar::turn, 1 );
-        you.assign_activity( consume_activity_actor( poppy ) );
-        you.mod_fatigue( 20 );
-        you.add_effect( effect_pkill2, 7_minutes );
-        // Please drink poppy nectar responsibly.
-        if( one_in( 20 ) ) {
-            you.add_addiction( STATIC( addiction_id( "opioid" ) ), 1 );
-        }
-    }
     if( !query_yn( _( "Pick %s?" ), here.furnname( examp ) ) ) {
         none( you, examp );
         return;
@@ -2264,15 +2221,11 @@ void iexamine::flower_cactus( Character &you, const tripoint_bub_ms &examp )
 }
 
 /**
- * Dig up its roots or drink its nectar if you can.
+ * Dig up its roots if you can.
  */
 void iexamine::flower_dahlia( Character &you, const tripoint_bub_ms &examp )
 {
     if( dead_plant( true, you, examp ) ) {
-        return;
-    }
-
-    if( iexamine_helper::drink_nectar( you ) ) {
         return;
     }
 
@@ -2333,32 +2286,10 @@ static bool query_pick( Character &who, const tripoint_bub_ms &target )
     return true;
 }
 
-void iexamine::harvest_furn_nectar( Character &you, const tripoint_bub_ms &examp )
-{
-    bool auto_forage = get_option<bool>( "AUTO_FEATURES" ) &&
-                       get_option<std::string>( "AUTO_FORAGING" ) == "all";
-    if( !auto_forage && !query_pick( you, examp ) ) {
-        return;
-    }
-    you.assign_activity( harvest_activity_actor( examp, auto_forage ) );
-}
-
 void iexamine::harvest_furn( Character &you, const tripoint_bub_ms &examp )
 {
     bool auto_forage = get_option<bool>( "AUTO_FEATURES" ) &&
                        get_option<std::string>( "AUTO_FORAGING" ) == "all";
-    if( !auto_forage && !query_pick( you, examp ) ) {
-        return;
-    }
-    you.assign_activity( harvest_activity_actor( examp, auto_forage ) );
-}
-
-void iexamine::harvest_ter_nectar( Character &you, const tripoint_bub_ms &examp )
-{
-    bool auto_forage = get_option<bool>( "AUTO_FEATURES" ) &&
-                       ( get_option<std::string>( "AUTO_FORAGING" ) == "all" ||
-                         get_option<std::string>( "AUTO_FORAGING" ) == "bushes" ||
-                         get_option<std::string>( "AUTO_FORAGING" ) == "trees" );
     if( !auto_forage && !query_pick( you, examp ) ) {
         return;
     }
@@ -2391,17 +2322,6 @@ void iexamine::flower_marloss( Character &you, const tripoint_bub_ms &examp )
         add_msg( m_info, _( "This flower is still alive, despite the harsh conditions…" ) );
     }
     map &here = get_map();
-    if( can_drink_nectar( you ) ) {
-        if( !query_yn( _( "You feel out of place as you explore the %s. Drink?" ),
-                       here.furnname( examp ) ) ) {
-            return;
-        }
-        you.mod_moves( -to_moves<int>
-                       ( 30_seconds ) ); // Takes 30 seconds, more or less if faster/slower than 100 speed
-        add_msg( m_bad, _( "This flower tastes very wrong…" ) );
-        // If you can drink flowers, you're post-thresh and the Mycus does not want you.
-        you.add_effect( effect_teleglow, 10_minutes );
-    }
     if( !query_yn( _( "Pick %s?" ), here.furnname( examp ) ) ) {
         none( you, examp );
         return;
@@ -7343,9 +7263,7 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
             { "compost_empty", &iexamine::compost_empty },
             { "compost_full", &iexamine::compost_full },
             { "keg", &iexamine::keg },
-            { "harvest_furn_nectar", &iexamine::harvest_furn_nectar },
             { "harvest_furn", &iexamine::harvest_furn },
-            { "harvest_ter_nectar", &iexamine::harvest_ter_nectar },
             { "harvest_ter", &iexamine::harvest_ter },
             { "clear_overgrown", &iexamine::clear_overgrown },
             { "harvest_plant_ex", &iexamine::harvest_plant_ex },
@@ -7387,9 +7305,7 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
     };
 
     static const std::set<std::string> harvestable_functions = {
-        "harvest_furn_nectar",
         "harvest_furn",
-        "harvest_ter_nectar",
         "harvest_ter",
         "harvest_plant",
     };

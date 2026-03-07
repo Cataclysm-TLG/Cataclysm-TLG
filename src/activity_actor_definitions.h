@@ -1384,15 +1384,13 @@ class harvest_activity_actor : public activity_actor
     private:
         tripoint_bub_ms target;
         bool exam_furn = false;
-        bool nectar = false;
         bool auto_forage = false;
 
         bool can_resume_with_internal( const activity_actor &other,
                                        const Character &/*who*/ ) const override {
             const harvest_activity_actor &actor = static_cast<const harvest_activity_actor &>
                                                   ( other );
-            return target == actor.target && auto_forage == actor.auto_forage &&
-                   exam_furn == actor.exam_furn && nectar == actor.nectar;
+            return target == actor.target && auto_forage == actor.auto_forage;
         }
 };
 

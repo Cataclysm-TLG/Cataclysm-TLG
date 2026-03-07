@@ -189,7 +189,7 @@
       {
         "if": { "compare_string": [ { "context_val": "trait" }, "MUTATING_GRADUAL_CANINE" ] },
         "then": [
-          { "u_add_var": "MUTATING_GRADUAL_vitamin", "value": "mutagen_lupine" },
+          { "u_add_var": "MUTATING_GRADUAL_vitamin", "value": "mutagen_canine" },
           { "u_add_var": "MUTATING_GRADUAL_threshold", "value": "THRESH_LUPINE" }
         ]
       },

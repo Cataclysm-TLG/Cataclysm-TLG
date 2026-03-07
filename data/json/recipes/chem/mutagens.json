@@ -687,7 +687,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "mutagen_lupine",
+    "result": "mutagen_canine",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "chemistry",
@@ -714,7 +714,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "iv_mutagen_lupine",
+    "result": "iv_mutagen_canine",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "chemistry",
@@ -730,7 +730,7 @@
       { "proficiency": "prof_chem_synth" }
     ],
     "using": [ [ "serum_production_standard", 37 ] ],
-    "components": [ [ [ "mutagen_lupine", 2 ] ], [ [ "canine_sample", 1 ] ] ],
+    "components": [ [ [ "mutagen_canine", 2 ] ], [ [ "canine_sample", 1 ] ] ],
     "flags": [ "SECRET" ]
   },
   {

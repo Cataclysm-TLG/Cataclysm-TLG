@@ -125,6 +125,7 @@ static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_catch_up( "catch_up" );
 static const efftype_id effect_cramped_space( "cramped_space" );
 static const efftype_id effect_disinfected( "disinfected" );
+static const efftype_id effect_drunk( "drunk" );
 static const efftype_id effect_hit_by_player( "hit_by_player" );
 static const efftype_id effect_hypovolemia( "hypovolemia" );
 static const efftype_id effect_infected( "infected" );
@@ -140,18 +141,27 @@ static const efftype_id effect_stunned( "stunned" );
 
 static const field_type_str_id field_fd_last_known( "fd_last_known" );
 
+static const flag_id json_flag_HEMOVORE_FUN( "HEMOVORE_FUN" );
+
 static const itype_id itype_inhaler( "inhaler" );
 static const itype_id itype_lsd( "lsd" );
 static const itype_id itype_oxygen_tank( "oxygen_tank" );
 static const itype_id itype_smoxygen_tank( "smoxygen_tank" );
 static const itype_id itype_thorazine( "thorazine" );
 
+static const json_character_flag json_flag_CANNIBAL( "CANNIBAL" );
+static const json_character_flag json_flag_BLOODFEEDER( "BLOODFEEDER" );
+
 static const npc_class_id NC_EVAC_SHOPKEEP( "NC_EVAC_SHOPKEEP" );
 
 static const skill_id skill_firstaid( "firstaid" );
 
+static const trait_id trait_ALCMET( "ALCMET" );
 static const trait_id trait_IGNORE_SOUND( "IGNORE_SOUND" );
 static const trait_id trait_RETURN_TO_START_POS( "RETURN_TO_START_POS" );
+
+static const vitamin_id vitamin_ethanol( "ethanol" );
+static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
 
 static const zone_type_id zone_type_NO_NPC_PICKUP( "NO_NPC_PICKUP" );
 static const zone_type_id zone_type_NPC_RETREAT( "NPC_RETREAT" );
@@ -4558,7 +4568,7 @@ void npc::use_painkiller()
 // Be eaten before it rots (favor soon-to-rot perishables)
 //
 // TODO: Cache the results of this, *especially* if there's nothing we want to eat.
-static float rate_food( const item &it, int want_nutr, int want_quench )
+float npc::rate_food( const item &it, int want_nutr, int want_quench )
 {
     const auto &food = it.get_comestible();
     if( !food ) {
@@ -4583,7 +4593,6 @@ static float rate_food( const item &it, int want_nutr, int want_quench )
         // TODO: Get a good method of telling apart:
         // raw meat (parasites - don't eat unless mutant)
         // zed meat (poison - don't eat unless mutant)
-        // alcohol (debuffs, health drop - supplement diet but don't bulk-consume)
         // caffeine (fine to consume, but expensive and prevents sleep)
         // hallucination mushrooms (NPCs don't hallucinate, so don't eat those)
         // honeycomb (harmless iuse)
@@ -4595,6 +4604,22 @@ static float rate_food( const item &it, int want_nutr, int want_quench )
 
         // For now skip all of those
         return 0.0f;
+    }
+
+    if( it.has_vitamin( vitamin_ethanol ) ) {
+        // Alcohol metabolizers can take a sip while sober.
+        if( !has_trait( trait_ALCMET ) || !has_effect( effect_drunk ) ) {
+            return 0.0f;
+        }
+    }
+
+    // Cannibals can eat human flesh or drink human blood.
+    // Bloodfeeders can drink human blood.
+    if( it.has_vitamin( vitamin_human_flesh_vitamin ) ) {
+        if( !( has_flag( json_flag_CANNIBAL ) ||
+            ( has_flag( json_flag_BLOODFEEDER ) && it.has_flag( flag_HEMOVORE_FUN ) ) ) ) {
+            return 0.0f;
+        }
     }
 
     double relative_rot = it.get_relative_rot();

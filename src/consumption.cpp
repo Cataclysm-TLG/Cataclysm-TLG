@@ -917,7 +917,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
     }
 
     if( !has_flag( json_flag_SAPIOVORE ) &&
-        !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
+        !has_flag( json_flag_CANNIBAL ) &&
         !has_flag( json_flag_PSYCHOPATH ) &&
         !( food.has_flag( flag_HEMOVORE_FUN ) && has_flag( json_flag_HEMOVORE ) ) &&
         food.has_vitamin( vitamin_human_flesh_vitamin ) &&
@@ -1003,7 +1003,7 @@ ret_val<edible_rating> Character::will_eat( const item &food, bool interactive )
 
     const bool carnivore = has_trait( trait_CARNIVORE );
     const bool food_is_human_flesh = food.has_vitamin( vitamin_human_flesh_vitamin );
-    if( ( food_is_human_flesh && !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
+    if( ( food_is_human_flesh && !has_flag( json_flag_CANNIBAL ) &&
           !has_flag( json_flag_PSYCHOPATH ) && !has_flag( json_flag_SAPIOVORE ) ) &&
         !( has_flag( json_flag_HEMOVORE ) && food.has_flag( flag_HEMOVORE_FUN ) ) ) {
         add_consequence( _( "The thought of eating human flesh makes you feel sick." ), CANNIBALISM );
