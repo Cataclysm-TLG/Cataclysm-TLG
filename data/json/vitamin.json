@@ -324,11 +324,11 @@
     "disease_excess": [ [ 100, 400 ], [ 401, 800 ], [ 801, 1600 ] ]
   },
   {
-    "id": "mutagen_lupine",
+    "id": "mutagen_canine",
     "type": "vitamin",
     "vit_type": "counter",
     "name": { "str": "Canine Mutagen" },
-    "excess": "mutagen_lupine",
+    "excess": "mutagen_canine",
     "min": 0,
     "max": 1600,
     "rate": "20 m",

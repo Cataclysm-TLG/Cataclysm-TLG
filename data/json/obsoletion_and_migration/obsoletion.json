@@ -940,5 +940,10 @@
       "//": "The time it takes is a week and this appears to be the minimum time the internet says it takes."
     },
     "melee_damage": { "bash": 20 }
+  },
+  {
+    "id": "mutagen_lupine",
+    "type": "effect_type",
+    "max_duration": 2
   }
 ]

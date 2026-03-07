@@ -4904,9 +4904,6 @@ void harvest_activity_actor::start( player_activity &act, Character &who )
                 return;
             }
             exam_furn = true;
-        } else if( furn->has_examine( iexamine::harvest_furn_nectar ) )  {
-            exam_furn = true;
-            nectar = true;
         }
     }
 
@@ -4937,12 +4934,6 @@ void harvest_activity_actor::finish( player_activity &act, Character &who )
     act.set_to_null();
 
     map &here = get_map();
-
-    // If nothing can be harvested, neither can nectar
-    // Incredibly low priority TODO: Allow separating nectar seasons
-    if( nectar && iexamine_helper::drink_nectar( who ) ) {
-        return;
-    }
 
     const float survival_skill = who.get_skill_level( skill_survival );
     bool got_anything = false;
@@ -4981,7 +4972,6 @@ void harvest_activity_actor::serialize( JsonOut &jsout ) const
     jsout.start_object();
     jsout.member( "target", target );
     jsout.member( "exam_furn", exam_furn );
-    jsout.member( "nectar", nectar );
     jsout.member( "auto_forage", auto_forage );
     jsout.end_object();
 }
@@ -4993,7 +4983,6 @@ std::unique_ptr<activity_actor> harvest_activity_actor::deserialize( JsonValue &
     JsonObject jsobj = jsin.get_object();
     jsobj.read( "target", actor.target );
     jsobj.read( "exam_furn", actor.exam_furn );
-    jsobj.read( "nectar", actor.nectar );
     jsobj.read( "auto_forage", actor.auto_forage );
     return actor.clone();
 }

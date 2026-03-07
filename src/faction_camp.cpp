@@ -5593,15 +5593,15 @@ void basecamp::feed_workers( const std::vector<std::reference_wrapper <Character
         debugmsg( "feed_workers called without any workers to feed!" );
         return;
     }
-    if( !is_player_meal ) {
-        return;
-    }
 
     // Split the food into equal sized portions.
     food /= num_workers;
     for( const auto &worker_reference : workers ) {
         Character &worker = worker_reference.get();
-        worker.add_msg_if_player( _( "You grab a prepared meal from storage and chow down." ) );
+        if( is_player_meal ) {
+            worker.add_msg_if_player(
+                _( "You grab a prepared meal from storage and chow down." ) );
+        }
         units::volume filling_vol = std::max( 0_ml,
                                               worker.stomach.capacity( worker ) / 2 - worker.stomach.contains() );
         worker.stomach.ingest( food_summary{

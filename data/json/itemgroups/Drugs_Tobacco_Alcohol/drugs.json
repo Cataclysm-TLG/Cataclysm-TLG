@@ -269,7 +269,7 @@
       { "group": "drugs_rare", "prob": 100 }
     ]
   },
-    {
+  {
     "id": "drugs_otc",
     "type": "item_group",
     "//": "Drugs stocked by a pharmacy, not including prescription medications",

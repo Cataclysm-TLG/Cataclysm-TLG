@@ -4127,7 +4127,8 @@ bool place_trap_actor::is_allowed( Character &p, const tripoint_bub_ms &pos,
     }
     map &here = get_map();
     // !needs_solid_neighbor probably doesn't matter here, but let's assume we can put tripwires in midair.
-    if( here.move_cost( pos ) != 2 || ( here.ter( pos )->has_flag( "EMPTY_SPACE" ) && !needs_solid_neighbor ) ) {
+    if( here.move_cost( pos ) != 2 || ( here.ter( pos )->has_flag( "EMPTY_SPACE" ) &&
+                                        !needs_solid_neighbor ) ) {
         p.add_msg_if_player( m_info, _( "You can't place a %s there." ), name );
         return false;
     }

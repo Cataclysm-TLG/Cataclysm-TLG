@@ -1503,7 +1503,7 @@
   },
   {
     "type": "effect_type",
-    "id": "mutagen_lupine",
+    "id": "mutagen_canine",
     "name": [ "Canine Mutation", "Canine Transformation", "Canine Metamorphosis" ],
     "desc": [
       "You consumed canine mutagen.",

@@ -3822,5 +3822,15 @@
     "type": "MIGRATION",
     "id": "blade_trap",
     "replace": "blade"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutagen_lupine",
+    "replace": "mutagen_canine"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "iv_mutagen_lupine",
+    "replace": "iv_mutagen_canine"
   }
 ]

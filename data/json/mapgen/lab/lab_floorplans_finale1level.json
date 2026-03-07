@@ -270,7 +270,7 @@
             [ "lab_filltank_mutagen_troglobite", 2 ],
             [ "lab_filltank_mutagen_ursine", 2 ],
             [ "lab_filltank_mutagen_feline", 2 ],
-            [ "lab_filltank_mutagen_lupine", 2 ]
+            [ "lab_filltank_mutagen_canine", 2 ]
           ],
           "x": 10,
           "y": 16
@@ -379,8 +379,8 @@
   },
   {
     "type": "mapgen",
-    "nested_mapgen_id": "lab_filltank_mutagen_lupine",
-    "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_lupine" } ] }
+    "nested_mapgen_id": "lab_filltank_mutagen_canine",
+    "object": { "mapgensize": [ 1, 1 ], "place_liquids": [ { "amount": [ 10, 100 ], "x": 0, "y": 0, "liquid": "mutagen_canine" } ] }
   },
   {
     "//": "turrets finale",

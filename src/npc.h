@@ -968,6 +968,7 @@ class npc : public Character
         bool has_painkiller();
         bool took_painkiller() const;
         void use_painkiller();
+        float rate_food( const item &it, int want_nutr, int want_quench );
         void activate_item( item &it );
         bool has_identified( const itype_id & ) const override {
             return true;
