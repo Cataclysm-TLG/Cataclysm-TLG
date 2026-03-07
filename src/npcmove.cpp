@@ -4715,26 +4715,20 @@ bool npc::consume_food_from_camp()
         int stomach_room = 15000 - stomach_kcal;
         int gut_room = 15000 - gut_kcal;
 
-
         // Stomach and gut kcal will overflow at 20,000. feed_workers doesn't really model
         // stomach volume very well, so that's not helpful for preventing overeating. Here we
         // kludge a fix in just to keep that from happening.
         // TODO: Make feed_workers properly guess a stomach volume and have that prevent overflow
         // instead of this.
         int safe_kcal_cap = std::min( stomach_room, gut_room );
-
         if( safe_kcal_cap <= 0 ) {
             return false;
         }
-
         desired_kcal = std::min( desired_kcal, safe_kcal_cap );
-
         int kcal_to_eat = std::min( desired_kcal, bcp->get_owner()->food_supply().kcal() );
-
         if( kcal_to_eat > 0 ) {
             nutrients meal = bcp->camp_food_supply( -kcal_to_eat );
             bcp->feed_workers( *this, -meal );
-
             return true;
         } else {
             // We need food but there's none to eat :(
