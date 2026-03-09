@@ -25,6 +25,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "dandelion_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -40,6 +41,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "autumn" ], "id": "burdock_harv" },
       { "seasons": [ "summer" ], "id": "burdock_summer_harv" }
@@ -73,6 +75,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer" ], "id": "wild_carrot_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -88,6 +91,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn", "winter" ], "id": "m_stellatum_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -103,6 +107,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "//": "Root can always be harvested, but there is no flower to harvest seeds from in winter.",
     "harvest_by_season": [
       { "seasons": [ "summer", "autumn" ], "id": "salsify_seed_harv" },
@@ -138,6 +143,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "generic_flower_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -153,6 +159,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "spurge_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -187,6 +194,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "generic_flower_harv" } ],
     "//": "Add flower and bud spawns once useful.",
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
@@ -203,6 +211,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "generic_flower_harv" } ],
     "//": "Add flower and bud spawns once useful.",
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
@@ -219,6 +228,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn" ], "id": "lotus_harv" },
       { "seasons": [ "summer" ], "id": "lotus_summer_harv" },
@@ -239,6 +249,7 @@
     "required_str": -1,
     "coverage": 5,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "sunflower_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -254,6 +265,7 @@
     "required_str": -1,
     "coverage": 5,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn", "winter" ], "id": "jerusalem_artichoke_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -284,6 +296,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "bluebell_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -314,6 +327,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "chicory_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -329,6 +343,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC", "GRAZER_INEDIBLE" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "datura_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -385,6 +400,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "wild_sarsaparilla_harv" } ],
     "bash": {
       "str_min": 2,
@@ -407,6 +423,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn", "winter" ], "id": "wintergreen_harv" } ],
     "bash": {
       "str_min": 2,
@@ -429,6 +446,7 @@
     "concealment": 50,
     "required_str": -1,
     "flags": [ "TRANSPARENT", "SHORT", "SHRUB", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring" ], "id": "japanese_knotweed_harv" } ],
     "bash": {
       "str_min": 2,
@@ -450,6 +468,7 @@
     "color": [ "brown_green", "magenta", "magenta", "brown" ],
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLOWER", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "summer", "autumn" ], "id": "generic_edible_flower_spring_harv" },
       { "seasons": [ "summer", "autumn" ], "id": "generic_edible_flower_harv" }
@@ -474,6 +493,7 @@
     "move_cost_mod": 0,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLOWER", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "summer", "autumn" ], "id": "generic_edible_flower_spring_harv" },
       { "seasons": [ "summer", "autumn" ], "id": "generic_edible_flower_harv" }
@@ -520,6 +540,7 @@
     "move_cost_mod": 0,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLOWER", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "thistle_harv" } ],
     "bash": {
       "str_min": 2,
@@ -562,6 +583,7 @@
     "concealment": 45,
     "required_str": -1,
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "DIGGABLE", "FLAT", "THIN_OBSTACLE", "SHRUB", "SMALL_HIDE" ],
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "wild_rice_harv" } ],
     "bash": {
       "str_min": 2,
