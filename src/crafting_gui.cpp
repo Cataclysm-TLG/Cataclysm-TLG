@@ -88,8 +88,8 @@ enum CRAFTING_SPEED_STATE {
 static const std::map<const CRAFTING_SPEED_STATE, translation> craft_speed_reason_strings = {
     {TOO_DARK_TO_CRAFT, to_translation( "too dark to craft" )},
     {TOO_SLOW_TO_CRAFT, to_translation( "unable to craft" )},
-    {SLOW_BUT_CRAFTABLE, to_translation( "crafting is slowed to %d%%: %s" )},
-    {FAST_CRAFTING, to_translation( "crafting is accelerated to %d%%: %s" )},
+    {SLOW_BUT_CRAFTABLE, to_translation( "crafting speed %d%%: %s" )},
+    {FAST_CRAFTING, to_translation( "crafting speed %d%%: %s" )},
     {NORMAL_CRAFTING, to_translation( "craftable" )}
 };
 
@@ -2385,7 +2385,7 @@ static void draw_can_craft_indicator( const catacurses::window &w, const recipe 
 
     std::stringstream modifiers_list;
     if( limb_modifier != 100 ) {
-        modifiers_list << _( "manipulation score" ) << " " << limb_modifier << "%";
+        modifiers_list << _( "manipulation" ) << " " << limb_modifier << "%";
     }
     if( mut_multi != 100 ) {
         if( !modifiers_list.str().empty() ) {
@@ -2414,7 +2414,7 @@ static void draw_can_craft_indicator( const catacurses::window &w, const recipe 
             if( !modifiers_list.str().empty() ) {
                 modifiers_list << ", ";
             }
-            modifiers_list << _( "lighting" ) << " " << lighting_modifier << "%";
+            modifiers_list << _( "visibility" ) << " " << lighting_modifier << "%";
         }
         if( pain_multi < 100 ) {
             if( !modifiers_list.str().empty() ) {
@@ -2424,7 +2424,10 @@ static void draw_can_craft_indicator( const catacurses::window &w, const recipe 
         }
         if( limb_modifier + morale_modifier + lighting_modifier + pain_multi < 400 ) {
             float int_bonus = crafter.get_int();
-            modifiers_list << _( "intelligence bonus" ) << " " << int_bonus << "%";
+            if( !modifiers_list.str().empty() ) {
+                modifiers_list << ", ";
+            }
+            modifiers_list << _( "int bonus" ) << " " << int_bonus << "%";
         }
         right_print( w, 0, 1, i_yellow,
                      string_format( craft_speed_reason_strings.at( SLOW_BUT_CRAFTABLE ).translated(),
