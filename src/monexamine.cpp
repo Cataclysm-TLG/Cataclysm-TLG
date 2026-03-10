@@ -89,7 +89,7 @@ void attach_saddle_to( monster &z )
     }
     item_location loc = tack_loc();
     if( !loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
     z.add_effect( effect_monster_saddled, 1_turns, true );
@@ -211,7 +211,7 @@ void attach_bag_to( monster &z )
                         _( "Bag item" ) );
 
     if( !loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
 
@@ -307,7 +307,7 @@ bool give_items_to( monster &z )
     }
     // Quit if there is nothing to add
     if( to_move.empty() ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return true;
     }
     z.add_effect( effect_controlled, 5_turns );
@@ -343,7 +343,7 @@ bool add_armor( monster &z )
     item_location loc = pet_armor_loc( z );
 
     if( !loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return true;
     }
 

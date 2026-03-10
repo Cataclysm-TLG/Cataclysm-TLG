@@ -932,7 +932,7 @@ void avatar_action::eat( avatar &you, item_location &loc,
 
     if( !loc ) {
         you.cancel_activity();
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
     loc.overflow( here );
@@ -1108,7 +1108,7 @@ void avatar_action::plthrow( avatar &you, item_location loc,
     }
 
     if( !loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
 
@@ -1223,7 +1223,7 @@ void avatar_action::use_item( avatar &you, item_location &loc, std::string const
         loc = game_menus::inv::use();
 
         if( !loc ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             return;
         }
     }
@@ -1314,7 +1314,7 @@ void avatar_action::unload( avatar &you )
 {
     std::pair<item_location, bool> ret = game_menus::inv::unload( you );
     if( !ret.first ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
 
@@ -1328,7 +1328,7 @@ void avatar_action::unload( avatar &you )
         }, _( "Insert item" ), 1, _( "You have no container to insert items." ) );
 
         if( !new_container ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             return;
         }
         you.unload( ret.first, false, new_container );

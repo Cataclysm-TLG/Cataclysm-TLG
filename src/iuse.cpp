@@ -1768,7 +1768,7 @@ std::optional<int> iuse::remove_all_mods( Character *p, item *, const tripoint_b
     _( "You don't have any modified tools." ) );
 
     if( !loc ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -3264,7 +3264,7 @@ std::optional<int> iuse::mininuke( Character *p, item *it, const tripoint_bub_ms
     int time;
     bool got_value = query_int( time, false, _( "Set the timer to ___ turns (0 to cancel)?" ) );
     if( !got_value || time <= 0 ) {
-        p->add_msg_if_player( _( "Never mind." ) );
+        p->add_msg_if_player( _( "Nevermind." ) );
         return std::nullopt;
     }
     p->add_msg_if_player( _( "You set the timer to %s." ),
@@ -4766,7 +4766,7 @@ static bool heat_item( Character &p )
 
     item *heat = loc.get_item();
     if( heat == nullptr ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return false;
     }
     // simulates heat capacity of food, more weight = longer heating time
@@ -5091,7 +5091,7 @@ std::optional<int> iuse::gunmod_attach( Character *p, item *it, const tripoint_b
         item_location loc = game_menus::inv::gun_to_modify( *p->as_character(), *it );
 
         if( !loc ) {
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             return std::nullopt;
         }
 
@@ -5158,7 +5158,7 @@ std::optional<int> iuse::toolmod_attach( Character *p, item *it, const tripoint_
                                            _( "You don't have compatible tools." ) );
 
     if( !loc ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -6395,7 +6395,7 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
         const std::optional<tripoint_bub_ms> aim_point_ = g->look_around();
 
         if( !aim_point_ ) {
-            p->add_msg_if_player( _( "Never mind." ) );
+            p->add_msg_if_player( _( "Nevermind." ) );
             return std::nullopt;
         }
         tripoint_bub_ms aim_point{ *aim_point_ };
@@ -8040,7 +8040,7 @@ static bool heat_items( Character *p, item *it, bool liquid_items, bool solid_it
     p->inv->restack( *p );
     heater h = find_heater( p, it );
     if( h.available_heater == -1 ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return false;
     }
     //Hotplate can only use it self as heat source
@@ -8344,7 +8344,7 @@ std::optional<int> iuse::wash_items( Character *p, bool soft_items, bool hard_it
     units::volume total_volume = 0_ml;
     for( drop_location pair : to_clean ) {
         if( !pair.first ) {
-            p->add_msg_if_player( m_info, _( "Never mind." ) );
+            p->add_msg_if_player( m_info, _( "Nevermind." ) );
             return std::nullopt;
         }
         total_volume += pair.first->volume( false, true, pair.second );

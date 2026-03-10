@@ -1730,7 +1730,7 @@ void vehicle::use_harness( int part, map *here, const tripoint_bub_ms &pos )
                 *here, _( "Where is the creature to harness?" ), _( "There is no creature to harness nearby." ), f,
                 false );
     if( !pnt_ ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return;
     }
 
@@ -2506,7 +2506,7 @@ void vehicle::build_interact_menu( veh_menu &menu, map *here, const tripoint_bub
 
             if( !loc )
             {
-                you.add_msg_if_player( _( "Never mind." ) );
+                you.add_msg_if_player( _( "Nevermind." ) );
                 return;
             }
 

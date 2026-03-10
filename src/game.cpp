@@ -8816,7 +8816,7 @@ void game::insert_item( drop_locations &targets )
     }, title, 1, _( "You have no container to insert items." ) );
 
     if( !item_loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
 
@@ -8830,7 +8830,7 @@ void game::insert_item()
     }, _( "Insert item" ), 1, _( "You have no container to insert items." ) );
 
     if( !item_loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
 
@@ -9595,7 +9595,7 @@ void game::reload( item_location &loc, bool prompt, bool empty )
         }
         loc = loc.obtain( u );
         if( !loc ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             return;
         }
     }
@@ -9644,7 +9644,7 @@ void game::reload_item()
                              _( "Reload item" ), 1, _( "You have nothing to reload." ) );
 
     if( !item_loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
 

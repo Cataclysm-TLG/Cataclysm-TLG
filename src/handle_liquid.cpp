@@ -317,7 +317,7 @@ static bool get_liquid_target( item &liquid, const item *const source, const int
         item *const cont = target.item_loc.get_item();
 
         if( cont == nullptr || cont->is_null() ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             return;
         }
         // Sometimes the cont parameter is omitted, but the liquid is still within a container that counts
@@ -418,7 +418,7 @@ static bool get_liquid_target( item &liquid, const item *const source, const int
     while( target.dest_opt == LD_NULL ) {
         menu.query();
         if( menu.ret < 0 || static_cast<size_t>( menu.ret ) >= actions.size() ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             // Explicitly canceled all options (container, drink, pour).
             return false;
         }

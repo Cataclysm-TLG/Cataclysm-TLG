@@ -254,7 +254,7 @@ std::optional<int> iuse_transform::use( Character *p, item &it, map *,
         got_timer_value = query_int( timer_time, false,
                                      _( "Set the timer to how many seconds (0 to cancel)?" ) );
         if( !got_timer_value || timer_time <= 0 ) {
-            p->add_msg_if_player( _( "Never mind." ) );
+            p->add_msg_if_player( _( "Nevermind." ) );
             return std::nullopt;
         }
         p->add_msg_if_player( n_gettext( "You set the timer to %d second.",
@@ -1624,7 +1624,7 @@ std::optional<int> salvage_actor::use( Character *p, item &cutter, const tripoin
 
     item_location item_loc = game_menus::inv::salvage( *p, this );
     if( !item_loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -1654,7 +1654,7 @@ std::optional<int> salvage_actor::use( Character *p, item &cutter, map *,
 
     item_location item_loc = game_menus::inv::salvage( *p, this );
     if( !item_loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -2129,7 +2129,7 @@ std::optional<int> inscribe_actor::use( Character *p, item &it, map *here,
 
     item_location loc = game_menus::inv::titled_menu( get_avatar(), _( "Inscribe which item?" ) );
     if( !loc ) {
-        p->add_msg_if_player( m_info, _( "Never mind." ) );
+        p->add_msg_if_player( m_info, _( "Nevermind." ) );
         return std::nullopt;
     }
     item &cut = *loc;
@@ -2920,7 +2920,7 @@ std::optional<int> holster_actor::use( Character *you, item &it, map *here,
     } else {
         int ret = uilist( string_format( _( "Use %s" ), it.tname() ), opts );
         if( ret < 0 ) {
-            you->add_msg_if_player( _( "Never mind." ) );
+            you->add_msg_if_player( _( "Nevermind." ) );
             return std::nullopt;
         }
         internal_item = *std::next( all_items.begin(), ret );
@@ -3980,7 +3980,7 @@ bodypart_id heal_actor::use_healing_item( Character &healer, Character &patient,
                                         get_stopbleed_level( healer ), bite, infect, force, get_bandaged_level( healer ),
                                         get_disinfected_level( healer ) );
             if( healed == bodypart_str_id::NULL_ID() ) {
-                add_msg( m_info, _( "Never mind." ) );
+                add_msg( m_info, _( "Nevermind." ) );
                 return bodypart_str_id::NULL_ID().id(); // canceled
             }
             return healed;
@@ -4339,7 +4339,7 @@ std::optional<int> saw_barrel_actor::use( Character *p, item &it, map *,
     item_location loc = game_menus::inv::saw_barrel( *p, it );
 
     if( !loc ) {
-        p->add_msg_if_player( _( "Never mind." ) );
+        p->add_msg_if_player( _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -4406,7 +4406,7 @@ std::optional<int> saw_stock_actor::use( Character *p, item &it, map *,
     item_location loc = game_menus::inv::saw_stock( *p, it );
 
     if( !loc ) {
-        p->add_msg_if_player( _( "Never mind." ) );
+        p->add_msg_if_player( _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -4488,7 +4488,7 @@ std::optional<int> molle_attach_actor::use( Character *p, item &it,
     item_location loc = game_menus::inv::molle_attach( *p, it );
 
     if( !loc ) {
-        p->add_msg_if_player( _( "Never mind." ) );
+        p->add_msg_if_player( _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -4534,7 +4534,7 @@ std::optional<int> molle_detach_actor::use( Character *p, item &it,
         return 0;
     }
 
-    p->add_msg_if_player( _( "Never mind." ) );
+    p->add_msg_if_player( _( "Nevermind." ) );
     return std::nullopt;
 }
 
@@ -4660,7 +4660,7 @@ std::optional<int> detach_gunmods_actor::use( Character *p, item &it,
     item_location mod_loc = game_menus::inv::gunmod_to_remove( *p, it );
 
     if( !mod_loc ) {
-        p->add_msg_if_player( _( "Never mind." ) );
+        p->add_msg_if_player( _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -4687,7 +4687,7 @@ std::optional<int> detach_gunmods_actor::use( Character *p, item &it,
         }
     }
 
-    p->add_msg_if_player( _( "Never mind." ) );
+    p->add_msg_if_player( _( "Nevermind." ) );
     return std::nullopt;
 }
 
@@ -4772,7 +4772,7 @@ std::optional<int> modify_gunmods_actor::use( Character *p, item &it,
         return 0;
     }
 
-    p->add_msg_if_player( _( "Never mind." ) );
+    p->add_msg_if_player( _( "Nevermind." ) );
     return std::nullopt;
 }
 
@@ -5169,7 +5169,7 @@ std::optional<int> link_up_actor::use( Character *p, item &it, map *here,
             loc = game_menus::inv::titled_filter_menu( ups_filter, *you, choose_ups, -1, dont_have_ups );
         }
         if( !loc ) {
-            p->add_msg_if_player( _( "Never mind." ) );
+            p->add_msg_if_player( _( "Nevermind." ) );
             return std::nullopt;
         }
 
@@ -5205,7 +5205,7 @@ std::optional<int> link_up_actor::use( Character *p, item &it, map *here,
             loc = game_menus::inv::titled_filter_menu( solar_filter, *you, choose_solar, -1, dont_have_solar );
         }
         if( !loc ) {
-            p->add_msg_if_player( _( "Never mind." ) );
+            p->add_msg_if_player( _( "Nevermind." ) );
             return std::nullopt;
         }
 
@@ -5244,7 +5244,7 @@ std::optional<int> link_up_actor::link_to_veh_app( Character *p, item &it,
                 here, _( "Attach the cable where?" ),
                 "", can_link, false, false );
     if( !pnt_ ) {
-        p->add_msg_if_player( _( "Never mind." ) );
+        p->add_msg_if_player( _( "Nevermind." ) );
         return std::nullopt;
     }
     const tripoint_bub_ms &selection = *pnt_;
@@ -5347,7 +5347,7 @@ std::optional<int> link_up_actor::link_tow_cable( Character *p, item &it,
                 here, to_towing ? _( "Attach cable to the vehicle that will do the towing." ) :
                 _( "Attach cable to the vehicle that will be towed." ), "", can_link, false, false );
     if( !pnt_ ) {
-        p->add_msg_if_player( _( "Never mind." ) );
+        p->add_msg_if_player( _( "Nevermind." ) );
         return std::nullopt;
     }
     const tripoint_bub_ms &selection = *pnt_;
@@ -5402,7 +5402,7 @@ std::optional<int> link_up_actor::link_extend_cable( Character *p, item &it,
 {
     avatar *you = p->as_avatar();
     if( !you ) {
-        p->add_msg_if_player( m_info, _( "Never mind." ) );
+        p->add_msg_if_player( m_info, _( "Nevermind." ) );
         return std::nullopt;
     }
 
@@ -5433,7 +5433,7 @@ std::optional<int> link_up_actor::link_extend_cable( Character *p, item &it,
                    _( "You don't have a compatible cable." ) );
     }
     if( !selected ) {
-        p->add_msg_if_player( m_info, _( "Never mind." ) );
+        p->add_msg_if_player( m_info, _( "Nevermind." ) );
         return std::nullopt;
     }
 

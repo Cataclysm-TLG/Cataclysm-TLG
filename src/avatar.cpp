@@ -446,7 +446,7 @@ diary *avatar::get_avatar_diary()
 bool avatar::read( item_location &book, item_location ereader )
 {
     if( !book ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return false;
     }
 
@@ -615,7 +615,7 @@ bool avatar::read( item_location &book, item_location ereader )
 
         menu.query( true );
         if( menu.ret == UILIST_CANCEL ) {
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             return false;
         } else if( menu.ret >= 2 ) {
             continuous = true;
@@ -637,7 +637,7 @@ bool avatar::read( item_location &book, item_location ereader )
         menu.addentry( 2, true, '0', _( "Train until tired or success" ) );
         menu.query( true );
         if( menu.ret == UILIST_CANCEL ) {
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             return false;
         } else if( menu.ret == 1 ) {
             continuous = false;
