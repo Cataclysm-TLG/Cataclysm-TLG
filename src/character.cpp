@@ -4685,16 +4685,27 @@ int Character::get_arm_str() const
     return str_cur * get_modifier( character_modifier_limb_str_mod );
 }
 
-int Character::spot_check() const
+int Character::get_vision_per() const
 {
     float vision_score = get_limb_score( limb_score_vision );
+    // FIXME: We shouldn't use fine_detail_vision here as full night vis chars still need to be checking NV.
     if( fine_detail_vision_mod() > 4 ) {
         vision_score = std::min( get_limb_score( limb_score_vision ),
                                  get_limb_score( limb_score_night_vis ) );
     }
-    return ( Character::get_per() + int( Character::has_proficiency(
-            proficiency_prof_spotting ) ) *
-             Character::get_per_base() ) * vision_score ;
+    return Character::get_per() * vision_score;
+}
+
+int Character::spot_check() const
+{
+    float vision_score = get_limb_score( limb_score_vision );
+    if( fine_detail_vision_mod() > 4 ) {
+        // FIXME: We shouldn't use fine_detail_vision here as full night vis chars still need to be checking NV.
+        vision_score = std::min( get_limb_score( limb_score_vision ),
+                                 get_limb_score( limb_score_night_vis ) );
+    }
+    return ( get_per() + int( has_proficiency(
+                                  proficiency_prof_spotting ) ) * get_per_base() ) * vision_score;
 }
 
 int Character::ranged_dex_mod() const
