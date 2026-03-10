@@ -6008,6 +6008,11 @@ static bool check_if_disassemble_okay( item_location target, Character &who )
 {
     item *disassembly = target.get_item();
 
+    if( who.is_worn( *disassembly ) ) {
+        who.add_msg_if_player(
+            _( "You can't disassemble an item while you're wearing it." ) );
+        return false;
+    }
     // item_location::get_item() will return nullptr if the item is lost
     if( !disassembly ) {
         who.add_msg_player_or_npc(
