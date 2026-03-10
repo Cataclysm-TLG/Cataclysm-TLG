@@ -2666,7 +2666,7 @@ bool Character::disassemble()
 bool Character::disassemble( item_location target, bool interactive, bool disassemble_all )
 {
     if( !target ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return false;
     }
 
@@ -2679,12 +2679,12 @@ bool Character::disassemble( item_location target, bool interactive, bool disass
     }
 
     if( obj.is_favorite &&
-        !query_yn( _( "You're going to disassemble favorited item.\nAre you sure?" ) ) ) {
+        !query_yn( _( "This item is marked as a favorite.\nAre you sure?" ) ) ) {
         return false;
     }
 
-    if( obj.is_worn_by_player() &&
-        !query_yn( _( "You're going to disassemble worn item.\nAre you sure?" ) ) ) {
+    if( obj.is_worn_by_player() ) {
+        add_msg_if_player( _( "You must remove that before disassembling it." ) );
         return false;
     }
 
@@ -2732,7 +2732,7 @@ bool Character::disassemble( item_location target, bool interactive, bool disass
                                           obj.type_name( 1 ), obj.charges );
                 popup_input.title( title ).edit( num_dis );
                 if( popup_input.canceled() || num_dis <= 0 ) {
-                    add_msg( _( "Never mind." ) );
+                    add_msg( _( "Nevermind." ) );
                     return false;
                 }
                 num_dis = std::min( num_dis, obj.charges );
@@ -2844,7 +2844,7 @@ void Character::complete_disassemble( item_location target )
                                       obj.type_name( 1 ), obj.charges );
             popup_input.title( title ).edit( num_dis );
             if( popup_input.canceled() || num_dis <= 0 ) {
-                add_msg( _( "Never mind." ) );
+                add_msg( _( "Nevermind." ) );
                 activity.set_to_null();
                 return;
             }

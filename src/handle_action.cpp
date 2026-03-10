@@ -624,7 +624,7 @@ static void grab()
 
     const std::optional<tripoint_bub_ms> grabp_ = choose_adjacent( _( "Grab where?" ) );
     if( !grabp_ ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
     tripoint_bub_ms grabp = *grabp_;
@@ -1632,7 +1632,7 @@ static void loot()
 
     switch( flags ) {
         case None:
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             break;
         case SortLoot:
             player_character.assign_activity( ACT_MOVE_LOOT );
@@ -1717,7 +1717,7 @@ static void wear()
     if( loc ) {
         player_character.wear( loc );
     } else {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
     }
 }
 
@@ -1729,7 +1729,7 @@ static void takeoff()
     if( loc ) {
         player_character.takeoff( loc.obtain( player_character ) );
     } else {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
     }
 }
 
@@ -1764,7 +1764,7 @@ static void read()
             }
         }
     } else {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
     }
 }
 

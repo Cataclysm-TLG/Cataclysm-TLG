@@ -2646,7 +2646,7 @@ void repair_item_finish( player_activity *act, Character *you, bool no_menu )
         item_location item_loc = game_menus::inv::repair( *you, actor, main_tool );
 
         if( item_loc == item_location::nowhere ) {
-            you->add_msg_if_player( m_info, _( "Never mind." ) );
+            you->add_msg_if_player( m_info, _( "Nevermind." ) );
             act->set_to_null();
             return;
         }

@@ -3013,7 +3013,7 @@ void act_vehicle_unload_fuel( map &here, vehicle *veh )
         }
         smenu.query();
         if( smenu.ret < 0 || static_cast<size_t>( smenu.ret ) >= fuels.size() ) {
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             return;
         }
         fuel = fuels[smenu.ret];

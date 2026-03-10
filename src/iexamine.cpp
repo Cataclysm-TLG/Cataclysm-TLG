@@ -2106,7 +2106,7 @@ void iexamine::door_peephole( Character &you, const tripoint_bub_ms &examp )
         here.open_door( you, examp, true, false );
         you.add_msg_if_player( _( "You open the door." ) );
     } else {
-        you.add_msg_if_player( _( "Never mind." ) );
+        you.add_msg_if_player( _( "Nevermind." ) );
     }
 }
 
@@ -3495,7 +3495,7 @@ void iexamine::fvat_empty( Character &you, const tripoint_bub_ms &examp )
                 break;
             }
             default:
-                add_msg( _( "Never mind." ) );
+                add_msg( _( "Nevermind." ) );
                 return;
         }
     }
@@ -3724,7 +3724,7 @@ void iexamine::compost_empty( Character &you, const tripoint_bub_ms &examp )
                 break;
             }
             default:
-                add_msg( _( "Never mind." ) );
+                add_msg( _( "Nevermind." ) );
                 return;
         }
     }
@@ -4791,7 +4791,7 @@ void iexamine::curtains( Character &you, const tripoint_bub_ms &examp )
         you.mod_moves( -to_moves<int>( 10_seconds ) );
         you.add_msg_if_player( _( "You tear the curtains and curtain rod off the windowframe." ) );
     } else {
-        you.add_msg_if_player( _( "Never mind." ) );
+        you.add_msg_if_player( _( "Nevermind." ) );
     }
 }
 
@@ -6569,7 +6569,7 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
     smenu.query();
 
     if( smenu.ret < 0 || static_cast<size_t>( smenu.ret ) >= entries.size() ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return;
     }
     int count = 0;
@@ -6587,7 +6587,7 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
     int amount = max_count;
     if( !query_int( amount, true, _( "Insert how many %s into the mill?" ),
                     item::nname( what->typeId(), count ) ) || amount <= 0 ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return;
     } else if( amount > count ) {
         add_msg( m_info, _( "You don't have that many." ) );
@@ -6786,7 +6786,7 @@ void iexamine::quern_examine( Character &you, const tripoint_bub_ms &examp )
             }
             break;
         default:
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             break;
         case 4:
             const furn_id &f = here.furn( examp );
@@ -7019,7 +7019,7 @@ void iexamine::smoker_options( Character &you, const tripoint_bub_ms &examp )
         }
         break;
         default:
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             break;
         case 7:
             if( portable ) {

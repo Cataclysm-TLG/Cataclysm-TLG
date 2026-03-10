@@ -1167,7 +1167,7 @@ std::optional<tripoint_rel_ms> choose_direction( const std::string &message,
         }
     } while( !done );
 
-    add_msg( _( "Never mind." ) );
+    add_msg( _( "Nevermind." ) );
     return std::nullopt;
 }
 

@@ -6055,7 +6055,7 @@ void Character::toolmod_add( item_location tool, item_location mod )
         if( !query_yn( _( "Permanently install your %1$s in your %2$s?" ),
                        colorize( mod->tname(), mod->color_in_inventory() ),
                        colorize( tool->tname(), tool->color_in_inventory() ) ) ) {
-            add_msg_if_player( _( "Never mind." ) );
+            add_msg_if_player( _( "Nevermind." ) );
             return; // player canceled installation
         }
     }
@@ -7043,7 +7043,7 @@ void Character::mend_item( item_location &&obj, bool interactive )
         }
         menu.query();
         if( menu.ret < 0 ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             return;
         }
         sel = menu.ret;
