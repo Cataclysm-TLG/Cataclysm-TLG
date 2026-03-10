@@ -146,6 +146,7 @@ void harvest_entry::load( const JsonObject &jo )
     optional( jo, was_loaded, "type", type, harvest_drop_type_id::NULL_ID() );
     optional( jo, was_loaded, "base_num", base_num, { 1.0f, 1.0f } );
     optional( jo, was_loaded, "scale_num", scale_num, { 0.0f, 0.0f } );
+    optional( jo, was_loaded, "difficulty", difficulty, 10 );
     optional( jo, was_loaded, "max", max, 1000 );
     optional( jo, was_loaded, "mass_ratio", mass_ratio, 0.00f );
     optional( jo, was_loaded, "flags", flags );
@@ -173,6 +174,7 @@ class harvest_entry_reader : public generic_typed_reader<harvest_entry_reader>
             optional( jo, false, "type", ret.type, harvest_drop_type_id::NULL_ID() );
             optional( jo, false, "base_num", ret.base_num, { 1.0f, 1.0f } );
             optional( jo, false, "scale_num", ret.scale_num, { 0.0f, 0.0f } );
+            optional( jo, false, "difficulty", ret.difficulty, 10 );
             optional( jo, false, "max", ret.max, 1000 );
             optional( jo, false, "mass_ratio", ret.mass_ratio, 0.00f );
             optional( jo, false, "flags", ret.flags );

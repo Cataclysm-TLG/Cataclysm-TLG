@@ -78,6 +78,10 @@ struct harvest_entry {
     // This is multiplied by survival and added to the above
     // TODO: Make it a map: skill->scaling
     std::pair<float, float> scale_num = { 0.0f, 0.0f };
+    /* Assuming perfect visibility and 10 perception, entry.difficulty is the
+       survival skill that would be required to reach the cap. We can and should
+       set it above 10 for hard-to-find items. 0 difficulty allows 100% harvest rates. */
+    int difficulty = 10;
 
     int max = 1000;
     harvest_drop_type_id type;

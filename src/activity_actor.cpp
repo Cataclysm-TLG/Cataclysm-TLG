@@ -4938,15 +4938,18 @@ void harvest_activity_actor::finish( player_activity &act, Character &who )
     const float survival_skill = who.get_skill_level( skill_survival );
     bool got_anything = false;
     for( const harvest_entry &entry : here.get_harvest( target ).obj() ) {
-        int forage_roll = rng( 0, 49 );
+        /* Assuming perfect visibility and 10 perception, entry.difficulty is the
+           survival skill that would be required to reach the cap. 0 entry.difficulty
+           bypasses the hard cap. */
+        int difficulty = entry.difficulty * 3 + 13;
+        int forage_roll = rng( 0, difficulty );
         const float min_num = entry.scale_num.first * survival_skill + entry.base_num.first;
         const float max_num = entry.scale_num.second * survival_skill + entry.base_num.second;
         int vision_factor = std::clamp( 5 - static_cast<int>( std::floor( who.fine_detail_vision_mod() ) ),
                                         -4, 4 );
         const int roll = std::min<int>( entry.max, std::round( rng_float( min_num, max_num ) ) );
-        got_anything = ( std::min( ( survival_skill * 3 + ( who.per_cur + vision_factor ) ),
-                                   42.0f ) > forage_roll ) &&
-                       ( roll > 0 );
+        got_anything |= ( ( survival_skill * 3 + ( who.get_vision_per() + vision_factor ) ) > forage_roll )
+                        && roll > 0 && ( entry.difficulty == 0 || rng( 0, 49 ) < 40 );
         if( got_anything ) {
             for( int i = 0; i < roll; i++ ) {
                 iexamine_helper::handle_harvest( who, entry.drop, false );

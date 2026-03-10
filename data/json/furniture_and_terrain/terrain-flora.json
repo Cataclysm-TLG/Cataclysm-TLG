@@ -41,7 +41,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -89,7 +90,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -116,7 +118,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -141,7 +144,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -168,7 +172,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -193,7 +198,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -220,7 +226,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -245,7 +252,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -272,7 +280,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -297,7 +306,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -324,7 +334,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -349,7 +360,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -376,7 +388,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -401,7 +414,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -428,7 +442,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -453,7 +468,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -481,7 +497,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -507,7 +524,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -531,7 +549,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -548,7 +567,6 @@
     "move_cost": 0,
     "roof": "t_treetop_dead",
     "examine_action": "harvest_ter",
-    "//": "gives a maximum of ~15L and ~8.5kg of wood between sticks and twigs",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "tree_dead_harv" } ],
     "transforms_into": "t_tree_very_dead",
     "flags": [ "FLAMMABLE_ASH", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
@@ -611,7 +629,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 0, 5 ] },
+        { "item": "stick_long", "count": [ 0, 3 ] },
+        { "item": "stick", "count": [ 0, 3 ] },
         { "item": "splinter", "count": [ 0, 4 ] },
         { "item": "twig", "count": [ 2, 7 ] },
         { "item": "leaves", "count": [ 5, 20 ] }
@@ -661,7 +680,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -688,7 +708,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -716,7 +737,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -743,7 +765,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -771,7 +794,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -798,7 +822,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -826,7 +851,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -853,7 +879,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -881,7 +908,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -908,7 +936,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -983,7 +1012,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1010,7 +1040,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1038,7 +1069,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1065,7 +1097,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1093,7 +1126,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1120,7 +1154,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1148,7 +1183,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1175,7 +1211,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1203,7 +1240,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1230,7 +1268,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1257,7 +1296,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1283,7 +1323,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1311,7 +1352,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1338,7 +1380,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1468,7 +1511,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1493,7 +1537,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1519,7 +1564,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1544,7 +1590,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1572,7 +1619,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1597,7 +1645,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1622,7 +1671,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1647,7 +1697,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1671,7 +1722,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1695,7 +1747,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1719,7 +1772,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1747,7 +1801,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1774,7 +1829,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1802,7 +1858,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1828,7 +1885,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1856,7 +1914,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1882,7 +1941,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1910,7 +1970,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1936,7 +1997,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1984,7 +2046,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -2011,7 +2074,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]

@@ -683,6 +683,8 @@ class Character : public Creature, public visitable
         int get_enchantment_speed_bonus() const;
         // Strength modified by limb lifting score
         int get_arm_str() const;
+        // Perception modified by vision score (or NV, if it's dark).
+        int get_vision_per() const;
         // Defines distance from which CAMOUFLAGE mobs are visible
         int spot_check() const override;
 
