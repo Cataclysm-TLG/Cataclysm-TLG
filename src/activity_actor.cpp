@@ -6866,6 +6866,11 @@ std::unique_ptr<activity_actor> haircut_activity_actor::deserialize( JsonValue &
 static bool check_stealing( Character &who, item &it )
 {
     if( !it.is_owned_by( who, true ) ) {
+        // Don't flag taking items from hostile factions as stealing.
+        const faction *owner_fac = g->faction_manager_ptr->get( it.get_owner(), false );
+        if( owner_fac && owner_fac->likes_u < -10 ) {
+            return true;
+        }
         // Has the player given input on if stealing is ok?
         if( who.get_value( "THIEF_MODE" ).str() == "THIEF_ASK" ) {
             Pickup::query_thief();
