@@ -932,7 +932,7 @@ void item_pocket::set_item_defaults()
 {
     for( item &contained_item : contents ) {
         /* for guns and other items defined to have a magazine but don't use "ammo" */
-        if( contained_item.is_magazine() ) {
+        if( contained_item.is_magazine() && !contained_item.ammo_default().is_null() ) {
             contained_item.ammo_set(
                 contained_item.ammo_default(),
                 contained_item.ammo_capacity( item_controller->find_template(
