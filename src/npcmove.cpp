@@ -4708,7 +4708,7 @@ bool npc::consume_food_from_camp()
 
         if( kcal_to_eat > 0 ) {
             nutrients meal = bcp->camp_food_supply( -kcal_to_eat );
-            bcp->feed_workers( *this, -meal );
+            bcp->feed_workers( *this, -meal, true );
 
             return true;
         } else {
