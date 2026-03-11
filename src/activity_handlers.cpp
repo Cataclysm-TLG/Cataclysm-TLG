@@ -803,18 +803,18 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
 
     int time_to_cut;
     switch( corpse.size ) {
-        // Time (roughly) in turns to cut up the corpse
+        // Time (roughly) in turns to cut up the corpse.
         case creature_size::tiny:
-            time_to_cut = 600; // 10 minutes
+            time_to_cut = 300; // 5 minutes
             break;
         case creature_size::small:
-            time_to_cut = 1200; // 20 minutes
+            time_to_cut = 900; // 15 minutes
             break;
         case creature_size::medium:
             time_to_cut = 1800; // 30 minutes
             break;
         case creature_size::large:
-            time_to_cut = 2400; // 40 minutes
+            time_to_cut = 2700; // 45 minutes
             break;
         case creature_size::huge:
             time_to_cut = 8400; // 140 minutes
