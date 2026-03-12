@@ -1125,6 +1125,7 @@ void npc::revert_after_activity()
 {
     mission = previous_mission;
     attitude = previous_attitude;
+    activity.canceled( *this );
     activity = player_activity();
     current_activity_id = activity_id::NULL_ID();
     clear_destination();
@@ -1423,30 +1424,44 @@ void npc::do_npc_read( bool ebook )
     item_location ereader;
 
     if( !ebook ) {
-        book = game_menus::inv::read( *npc_player );
+        book = game_menus::inv::read( *npc_player, false );
     } else {
         ereader = game_menus::inv::ereader_to_use( *npc_player );
         if( !ereader ) {
             add_msg( _( "Nevermind." ) );
             return;
         }
+        // Activate the ereader screen before selecting the book so that the
+        // book item_location is created against the already-on ereader and
+        // remains valid across save/load cycles.
+        if( ereader->type->tool && ereader->type->tool->power_draw == 0_W ) {
+            npc_player->invoke_item( &*ereader, "transform", npc_player->pos_bub() );
+        }
         book = game_menus::inv::ebookread( *npc_player, ereader );
     }
 
+    const auto deactivate = [&]() {
+        if( ereader && ereader->type->tool && ereader->type->tool->power_draw > 0_W ) {
+            npc_player->invoke_item( &*ereader, "transform", npc_player->pos_bub() );
+        }
+    };
+
     if( !book ) {
-        add_msg( _( "Nevermind." ) );
+        deactivate();
         return;
     }
 
     std::vector<std::string> fail_reasons;
     Character *npc_character = as_character();
     if( !npc_character ) {
+        deactivate();
         return;
     }
 
     book = book.obtain( *npc_character );
     if( can_read( *book, fail_reasons ) ) {
-        add_msg_if_player_sees( pos_bub(), _( "%s starts reading." ), disp_name() );
+        add_msg_if_player_sees( pos_bub(), ebook ? _( "%s starts reading ebook %s." ) :
+                                _( "%s starts reading %s." ), disp_name(), book->type_name() );
 
         // NPCs can't read to other NPCs yet
         const time_duration time_taken = time_to_read( *book, *this );
@@ -1456,6 +1471,7 @@ void npc::do_npc_read( bool ebook )
         assign_activity( actor );
 
     } else {
+        deactivate();
         for( const std::string &reason : fail_reasons ) {
             say( reason );
         }
