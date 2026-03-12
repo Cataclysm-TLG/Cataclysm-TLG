@@ -663,6 +663,11 @@ class item_location::impl::item_in_container : public item_location::impl
 
         item_in_container( const item_location &container, item *which ) :
             impl( which ), container( container ) {}
+        // Lazy constructor: defers item resolution until first use.
+        // Used when the container's owner (e.g. an NPC) may not yet be in
+        // critter_tracker at deserialization time.
+        item_in_container( const item_location &container, int idx ) :
+            impl( idx ), container( container ) {}
 
         void serialize( JsonOut &js ) const override {
             js.start_object();
@@ -673,7 +678,7 @@ class item_location::impl::item_in_container : public item_location::impl
         }
 
         item *unpack( int idx ) const override {
-            if( idx < 0 || static_cast<size_t>( idx ) >= target()->num_item_stacks() ) {
+            if( idx < 0 ) {
                 return nullptr;
             }
             std::list<const item *> all_items = container->all_items_ptr();
@@ -905,24 +910,31 @@ void item_location::deserialize( const JsonObject &obj )
     } else if( type == "in_container" ) {
         item_location parent;
         obj.read( "parent", parent );
-        if( !parent.ptr->valid() ) {
-            if( parent == nowhere ) {
-                debugmsg( "parent location doesn't exist.  Item_location has lost its target over a save/load cycle." );
-                ptr.reset( new impl::nowhere );
+        // When the item ultimately lives on a character (at any nesting depth), the
+        // character may not yet be in critter_tracker during overmap deserialization.
+        // Use a lazy item_in_container that defers resolution until first use.
+        if( parent.where_recursive() == item_location::type::character ) {
+            ptr.reset( new impl::item_in_container( parent, idx ) );
+        } else {
+            if( !parent.ptr->valid() ) {
+                if( parent == nowhere ) {
+                    debugmsg( "parent location doesn't exist.  Item_location has lost its target over a save/load cycle." );
+                    ptr.reset( new impl::nowhere );
+                    return;
+                }
+                debugmsg( "parent location does not point to valid item" );
+                ptr = std::make_shared<impl::item_on_map>( map_cursor( parent.pos_abs() ), idx ); // drop on ground
                 return;
             }
-            debugmsg( "parent location does not point to valid item" );
-            ptr = std::make_shared<impl::item_on_map>( map_cursor( parent.pos_abs() ), idx ); // drop on ground
-            return;
-        }
-        const std::list<item *> parent_contents = parent->all_items_container_top();
-        if( idx > -1 && idx < static_cast<int>( parent_contents.size() ) ) {
-            auto iter = parent_contents.begin();
-            std::advance( iter, idx );
-            ptr.reset( new impl::item_in_container( parent, *iter ) );
-        } else {
-            // probably pointing to the wrong item
-            debugmsg( "contents index greater than contents size" );
+            const std::list<item *> parent_contents = parent->all_items_container_top();
+            if( idx > -1 && idx < static_cast<int>( parent_contents.size() ) ) {
+                auto iter = parent_contents.begin();
+                std::advance( iter, idx );
+                ptr.reset( new impl::item_in_container( parent, *iter ) );
+            } else {
+                // probably pointing to the wrong item
+                debugmsg( "contents index greater than contents size" );
+            }
         }
     }
 }
