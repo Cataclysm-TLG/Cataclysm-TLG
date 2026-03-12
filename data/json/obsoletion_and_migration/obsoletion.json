@@ -945,5 +945,14 @@
     "id": "mutagen_lupine",
     "type": "effect_type",
     "max_duration": 2
+  },
+  {
+    "id": "mutagen_lupine",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Lupine Mutagen (obsolete)" },
+    "min": 0,
+    "max": 1600,
+    "rate": "1 m"
   }
 ]

@@ -2677,7 +2677,7 @@
     "weight": "34 g",
     "volume": "250 ml",
     "to_hit": -2,
-    "vitamins": [ [ "vitC", "0 μg" ], [ "iron", "1200 μg" ], [ "calcium", "45000 μg" ], [ "vegetable_allergen", 1 ] ]
+    "vitamins": [ [ "iron", 1 ], [ "calcium", 4 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "ITEM",
