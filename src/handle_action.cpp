@@ -2418,7 +2418,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                     for( const tripoint_bub_ms &point : here.points_in_radius( player_character.pos_bub(), 1 ) ) {
                         bool did_mop = false;
                         if( is_blind ) {
-                            // blind character have a 1/3 chance of actually mopping
+                            // Blind characters has a 1/3 chance of actually mopping.
                             if( one_in( 3 ) ) {
                                 did_mop = here.mop_spills( point );
                             } else {
@@ -2427,9 +2427,9 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                         } else {
                             did_mop = here.mop_spills( point );
                         }
-                        // iuse::mop costs 15 moves per use
+                        // iuse::mop costs 300 moves per use
                         if( did_mop ) {
-                            player_character.mod_moves( -15 );
+                            player_character.mod_moves( -300 );
                         }
                     }
                 }

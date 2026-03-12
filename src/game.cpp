@@ -10106,7 +10106,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     if( u.has_flag( json_flag_NYCTOPHOBIA ) && !u.has_effect( effect_took_xanax ) && !u.is_running() &&
         dest_light_level < nyctophobia_threshold ) {
         add_msg( m_bad,
-                 _( "It's so dark and scary in there!  You can't force yourself to walk into this tile.  Switch to running movement mode to move there." ) );
+                 _( "You're too scared to walk into the dark.  You must run in order to willingly go that way." ) );
         return false;
     }
 

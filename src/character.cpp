@@ -2303,7 +2303,7 @@ bool Character::uncanny_dodge()
     if( adjacent.xy() != pos_bub().xy() ) {
         set_pos_bub_only( here, adjacent );
 
-        //landed in a vehicle tile
+        // landed in a vehicle tile
         if( here.veh_at( pos_bub( here ) ) ) {
             here.board_vehicle( pos_bub( here ), this );
         }

@@ -1402,25 +1402,20 @@ vehicle *map::veh_at_internal( const tripoint_bub_ms &p, int &part_num )
 void map::board_vehicle( const tripoint_bub_ms &pos, Character *p )
 {
     if( p == nullptr ) {
-        debugmsg( "map::board_vehicle: null player" );
+        // debugmsg( "map::board_vehicle: null player" );
         return;
     }
 
     const std::optional<vpart_reference> vp = veh_at( pos ).part_with_feature( VPFLAG_BOARDABLE,
             true );
     if( !vp ) {
-        avatar *player_character = p->as_avatar();
-        if( player_character != nullptr &&
-            player_character->grab_point.x() == 0 && player_character->grab_point.y() == 0 ) {
-            debugmsg( "map::board_vehicle: vehicle with unbroken and BOARDABLE part not found" );
-        }
         return;
     }
     if( vp->part().has_flag( vp_flag::passenger_flag ) ) {
-        Character *psg = vp->vehicle().get_passenger( vp->part_index() );
-        debugmsg( "map::board_vehicle: %s failed to board passenger (%s) is already there",
-                  p ? p->get_name() : "<null_boarder>",
-                  psg ? psg->get_name() : "<null_passenger>" );
+        // Character *psg = vp->vehicle().get_passenger( vp->part_index() );
+        // debugmsg( "map::board_vehicle: %s failed to board passenger (%s) is already there",
+        //           p ? p->get_name() : "<null_boarder>",
+        //           psg ? psg->get_name() : "<null_passenger>" );
         unboard_vehicle( pos );
     }
     vp->part().set_flag( vp_flag::passenger_flag );
@@ -1442,7 +1437,7 @@ void map::unboard_vehicle( const vpart_reference &vp, Character *passenger, bool
 
     if( !passenger ) {
         if( !dead_passenger ) {
-            debugmsg( "map::unboard_vehicle: passenger not found" );
+            // debugmsg( "map::unboard_vehicle: passenger not found" );
         }
         return;
     }
@@ -1461,7 +1456,7 @@ void map::unboard_vehicle( const tripoint_bub_ms &p, bool dead_passenger )
     const std::optional<vpart_reference> vp = veh_at( p ).part_with_feature( VPFLAG_BOARDABLE, false );
     Character *passenger = nullptr;
     if( !vp ) {
-        debugmsg( "map::unboard_vehicle: vehicle not found" );
+        // debugmsg( "map::unboard_vehicle: vehicle not found" );
         // Try and force unboard the player anyway.
         passenger = get_creature_tracker().creature_at<Character>( p );
         if( passenger ) {
