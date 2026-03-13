@@ -37,7 +37,7 @@
   {
     "id": "CONSTRUCTION_BLUEPRINT",
     "type": "LOOT_ZONE",
-    "name": "Construction: Blueprint",
+    "name": "Construction",
     "display_field": "fd_construction_blueprint_zone",
     "description": "Designate a blueprint zone for construction."
   },
