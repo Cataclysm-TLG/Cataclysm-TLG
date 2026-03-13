@@ -10,7 +10,7 @@
     "coverage": 25,
     "concealment": 25,
     "required_str": -1,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "MOUNTABLE", "LIQUIDCONT" ],
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "MOUNTABLE", "LIQUIDCONT", "SOAKING_TUB" ],
     "max_volume": "200 L",
     "examine_action": "keg",
     "keg_capacity": "150 L",

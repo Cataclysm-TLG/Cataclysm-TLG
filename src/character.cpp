@@ -248,6 +248,7 @@ static const efftype_id effect_glowy_led( "glowy_led" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_heavysnare( "heavysnare" );
+static const efftype_id effect_hot( "hot" );
 static const efftype_id effect_in_pit( "in_pit" );
 static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_infected( "infected" );
@@ -384,6 +385,7 @@ static const material_id material_qt_steel( "qt_steel" );
 static const material_id material_steel( "steel" );
 
 static const morale_type morale_cold( "morale_cold" );
+static const morale_type morale_comfy( "morale_comfy" );
 static const morale_type morale_hot( "morale_hot" );
 
 static const move_mode_id move_mode_prone( "prone" );
@@ -13985,6 +13987,55 @@ void Character::water_immersion()
                 for( const auto &pair : wet_groups ) {
                     drench( pair.first, pair.second, false );
                 }
+            }
+        }
+    }
+    // Soaking in a liquid-filled tub (e.g. bathtub) while prone or crouching drenches the
+    // character, providing evaporative cooling. Requires at least 10 L of liquid in the furniture.
+    if( ( is_prone() || is_crouching() ) && !in_vehicle &&
+        here.has_flag( ter_furn_flag::TFLAG_SOAKING_TUB, pos_bub() ) ) {
+        units::volume water_vol = 0_ml;
+        for( const item &it : here.i_at( pos_bub() ) ) {
+            if( it.made_of( phase_id::LIQUID ) ) {
+                water_vol += it.volume();
+            }
+        }
+        // 1 charge of water = 250 ml.
+        // The bathtub spans two tiles but liquid is stored per-tile, so we only check the
+        // tile the character is on.
+        // Lying down requires ~30 L to be mostly submerged; crouching needs ~15 L.
+        const units::volume prone_min = units::from_liter( 30 );
+        const units::volume crouch_min = units::from_liter( 15 );
+        const bool enough_to_lie = water_vol >= prone_min;
+        const bool enough_to_crouch = water_vol >= crouch_min;
+        const bool is_hot = get_effect_int( effect_hot ) > 0;
+        if( is_prone() && enough_to_lie ) {
+            // Lying in the tub: fully submerged, drench all body parts except head
+            drench( 100, get_drenching_body_parts( false ), false );
+            if( is_hot && calendar::once_every( 1_minutes ) ) {
+                add_morale( morale_comfy, 2, 10, 2_minutes, 1_minutes, true );
+            }
+            if( one_in( 50 ) ) {
+                add_msg_if_player( m_good, _( "You soak in the water." ) );
+            }
+        } else if( is_prone() && enough_to_crouch ) {
+            // Lying but not enough water to be submerged — partial soak
+            drench( 60, get_drenching_body_parts( false, false, true ), false );
+            if( one_in( 50 ) ) {
+                add_msg_if_player( m_info, _( "The tub is too shallow to soak in properly." ) );
+            }
+        } else if( is_crouching() && enough_to_crouch ) {
+            // Crouching in the tub: lower body submerged only
+            drench( 80, get_drenching_body_parts( false, false, true ), false );
+            if( is_hot && calendar::once_every( 1_minutes ) ) {
+                add_morale( morale_comfy, 1, 5, 2_minutes, 1_minutes, true );
+            }
+            if( one_in( 50 ) ) {
+                add_msg_if_player( m_good, _( "You sit in the water." ) );
+            }
+        } else {
+            if( one_in( 50 ) ) {
+                add_msg_if_player( m_info, _( "The tub doesn't have enough water to soak in." ) );
             }
         }
     }
