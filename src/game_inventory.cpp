@@ -1800,8 +1800,51 @@ drop_locations game_menus::inv::efile_select( Character &who, item_location &use
     bool copying = action == EF_COPY_FROM_THIS || action == EF_COPY_ONTO_THIS;
     bool wiping = action == EF_WIPE;
 
-    const inventory_filter_preset preset( [&copying]( const item_location & loc ) {
-        return loc.is_efile() && ( !copying || loc->is_ecopiable() );
+    // For copy actions, pre-compute the canonical source item for each typeId:
+    // - exclude files already on the destination device
+    // - when multiple source devices have the same file, use only the first occurrence
+    // E_FILE_COLLECTION items (recipe catalogs, photo collections) are exempt: add_efile
+    // merges their contents into an existing collection rather than creating a duplicate,
+    // so they must always be shown regardless of what is already on the destination.
+    std::map<itype_id, const item *> canonical_copy_sources;
+    if( copying ) {
+        std::set<itype_id> dest_typeids;
+        for( const item *f : to_edevice->efiles() ) {
+            if( !f->has_flag( flag_E_FILE_COLLECTION ) ) {
+                dest_typeids.insert( f->typeId() );
+            }
+        }
+        for( const item_location &src_dev : from_edevices ) {
+            if( !src_dev ) {
+                continue;
+            }
+            for( const item *f : src_dev->efiles() ) {
+                if( f->has_flag( flag_E_FILE_COLLECTION ) ) {
+                    continue; // not deduplicated; merged into existing collection by add_efile
+                }
+                const itype_id &tid = f->typeId();
+                if( !dest_typeids.count( tid ) && !canonical_copy_sources.count( tid ) ) {
+                    canonical_copy_sources[tid] = f;
+                }
+            }
+        }
+    }
+
+    const inventory_filter_preset preset( [&]( const item_location & loc ) {
+        if( !loc.is_efile() || ( copying && !loc->is_ecopiable() ) ) {
+            return false;
+        }
+        if( copying ) {
+            if( loc->has_flag( flag_E_FILE_COLLECTION ) ) {
+                // Always show: add_efile merges these rather than creating duplicates
+                return true;
+            }
+            // Only show the canonical item for each typeId (deduplicates across devices
+            // and hides files already present on the destination device)
+            auto it = canonical_copy_sources.find( loc->typeId() );
+            return it != canonical_copy_sources.end() && it->second == loc.get_item();
+        }
+        return true;
     } );
 
     const int available_charges = to_edevice->ammo_remaining( );
