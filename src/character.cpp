@@ -9526,6 +9526,17 @@ void Character::fall_asleep( const time_duration &duration )
             cancel_activity();
         }
     }
+    // Turn off any active e-file devices (tablets, laptops) when falling asleep
+    std::vector<item *> active_edevices;
+    visit_items( [&active_edevices]( item * it, item * ) -> VisitResponse {
+        if( it->type->can_use( "E_FILE_DEVICE" ) && it->type->transform_into ) {
+            active_edevices.push_back( it );
+        }
+        return VisitResponse::NEXT;
+    } );
+    for( item *it : active_edevices ) {
+        it->type->transform_into->transform( this, *it );
+    }
     add_effect( effect_sleep, duration );
     get_event_bus().send<event_type::character_falls_asleep>( getID(), to_seconds<int>( duration ) );
 }
