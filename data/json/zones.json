@@ -16,16 +16,16 @@
   {
     "id": "CAMP_FOOD",
     "type": "LOOT_ZONE",
-    "name": "Basecamp: Food",
+    "name": "Food Distribution",
     "display_field": "fd_basecamp_food_zone",
-    "description": "Items in this zone will be added to a basecamp's food supply in the Distribute Food mission."
+    "description": "Items in this zone will be added to a settlement's food supply when food is distributed via dialogue or the bulletin board."
   },
   {
     "id": "CAMP_STORAGE",
     "type": "LOOT_ZONE",
-    "name": "Basecamp: Storage",
+    "name": "Worker Storage",
     "display_field": "fd_basecamp_storage_zone",
-    "description": "Items in this zone will be added to a basecamp's inventory for use by its workers."
+    "description": "Items in this zone will be added to a settlement's inventory for use by its workers."
   },
   {
     "id": "CHOP_TREES",
@@ -37,42 +37,42 @@
   {
     "id": "CONSTRUCTION_BLUEPRINT",
     "type": "LOOT_ZONE",
-    "name": "Construction: Blueprint",
+    "name": "Construction",
     "display_field": "fd_construction_blueprint_zone",
     "description": "Designate a blueprint zone for construction."
   },
   {
     "id": "DISASSEMBLE",
     "type": "LOOT_ZONE",
-    "name": "Disassembly Work",
+    "name": "Disassembly",
     "display_field": "fd_disassembly_work_zone",
     "description": "Items in this zone are marked for disassembly."
   },
   {
     "id": "FARM_PLOT",
     "type": "LOOT_ZONE",
-    "name": "Farm: Plot",
+    "name": "Farming",
     "display_field": "fd_farm_plot_zone",
     "description": "Designate a farm plot for tilling and planting."
   },
   {
     "id": "FISHING_SPOT",
     "type": "LOOT_ZONE",
-    "name": "Fishing Spot",
+    "name": "Fishing",
     "display_field": "fd_fishing_spot_zone",
     "description": "Designate an area to fish from."
   },
   {
     "id": "MINING",
     "type": "LOOT_ZONE",
-    "name": "Mine Terrain",
+    "name": "Mining",
     "display_field": "fd_mine_terrain_zone",
     "description": "Designate an area to mine."
   },
   {
     "id": "MOPPING",
     "type": "LOOT_ZONE",
-    "name": "Mop Tile",
+    "name": "Mopping",
     "display_field": "fd_mop_tile_zone",
     "description": "Designate an area to mop clean."
   },
@@ -121,28 +121,28 @@
   {
     "id": "SOURCE_FIREWOOD",
     "type": "LOOT_ZONE",
-    "name": "Source: Firewood",
+    "name": "Firewood",
     "display_field": "fd_firewood_source_zone",
     "description": "Source for firewood or other flammable materials in this zone may be used to automatically refuel fires.  This will be done to maintain light during long-running tasks such as crafting, reading or waiting."
   },
   {
     "id": "VEHICLE_DECONSTRUCT",
     "type": "LOOT_ZONE",
-    "name": "Vehicle Deconstruct Zone",
+    "name": "Vehicle Deconstruction",
     "display_field": "fd_vehicle_deconstruct_zone",
     "description": "Any vehicles in this area are marked for deconstruction."
   },
   {
     "id": "VEHICLE_PATROL",
     "type": "LOOT_ZONE",
-    "name": "Vehicle Patrol Zone",
+    "name": "Vehicle Patrol",
     "display_field": "fd_vehicle_patrol_zone",
     "description": "Vehicles with an autopilot will patrol in this zone."
   },
   {
     "id": "VEHICLE_REPAIR",
     "type": "LOOT_ZONE",
-    "name": "Vehicle Repair Zone",
+    "name": "Vehicle Repair",
     "display_field": "fd_vehicle_repair_zone",
     "description": "Any vehicles in this area are marked for repair work."
   }

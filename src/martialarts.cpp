@@ -1583,7 +1583,7 @@ std::optional<std::pair<attack_vector_id, sub_bodypart_str_id>>
                            vec.c_str() );
             continue;
         }
-        // Sort our calc_vector of sublimb/damage pairs
+        // Sort our calc_vector of sublimb/damage pairs.
         std::sort( calc_vector.begin(),
                    calc_vector.end(), []( const std::pair<sub_bodypart_str_id, float> &a,
         const std::pair<sub_bodypart_str_id, float> &b ) {

@@ -423,9 +423,9 @@ std::string blueprint_options::get_zone_name_suggestion() const
 std::string loot_options::get_zone_name_suggestion() const
 {
     if( !mark.empty() ) {
-        return string_format( _( "Loot: Custom: %s" ), mark );
+        return string_format( _( "Custom Storage: %s" ), mark );
     }
-    return _( "Loot: Custom: No Filter" );
+    return _( "Custom Storage: No Filter" );
 }
 
 std::string plot_options::get_zone_name_suggestion() const

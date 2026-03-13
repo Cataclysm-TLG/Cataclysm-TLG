@@ -2319,7 +2319,7 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
 
                 // check if we found path to source / adjacent tile
                 if( route.empty() ) {
-                    add_msg( m_info, _( "%s can't reach the source tile.  Try to sort out loot without a cart." ),
+                    add_msg( m_info, _( "%s can't reach the source tile." ),
                              you.disp_name() );
                     continue;
                 }

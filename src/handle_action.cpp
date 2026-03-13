@@ -1566,12 +1566,12 @@ static void loot()
     menu.desc_enabled = true;
 
     if( flags & SortLoot ) {
-        menu.addentry_desc( SortLootStatic, true, 'o', _( "Sort out my loot (static zones only)" ),
-                            _( "Sorts out the loot from Loot: Unsorted zone to nearby appropriate Loot zones ignoring personal zones.  Uses empty space in your inventory or utilizes a cart, if you are holding one." ) );
-        menu.addentry_desc( SortLootPersonal, true, 'O', _( "Sort out my loot (personal zones only)" ),
-                            _( "Sorts out the loot from Loot: Unsorted zone to nearby appropriate Loot zones ignoring static zones.  Uses empty space in your inventory or utilizes a cart, if you are holding one." ) );
-        menu.addentry_desc( SortLoot, true, 'I', _( "Sort out my loot (all)" ),
-                            _( "Sorts out the loot from Loot: Unsorted zone to nearby appropriate Loot zones.  Uses empty space in your inventory or utilizes a cart, if you are holding one." ) );
+        menu.addentry_desc( SortLootStatic, true, 'o', _( "Sort out items (static zones only)" ),
+                            _( "Sorts items out of the Unsorted zone and into nearby appropriate zones, ignoring personal zones." ) );
+        menu.addentry_desc( SortLootPersonal, true, 'O', _( "Sort out items (personal zones only)" ),
+                            _( "Sorts items out of the Unsorted zone to nearby appropriate zones, ignoring static zones." ) );
+        menu.addentry_desc( SortLoot, true, 'I', _( "Sort out items (all)" ),
+                            _( "Sorts items out of the Unsorted zone to all nearby appropriate zones." ) );
     }
 
     if( flags & UnloadLoot ) {
