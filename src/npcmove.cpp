@@ -94,6 +94,7 @@ static const activity_id ACT_MOVE_LOOT( "ACT_MOVE_LOOT" );
 static const activity_id ACT_OPERATION( "ACT_OPERATION" );
 static const activity_id ACT_SPELLCASTING( "ACT_SPELLCASTING" );
 static const activity_id ACT_TIDY_UP( "ACT_TIDY_UP" );
+static const activity_id ACT_MULTIPLE_READ( "ACT_MULTIPLE_READ" );
 
 static const bionic_id bio_ads( "bio_ads" );
 static const bionic_id bio_blade( "bio_blade" );
@@ -4097,6 +4098,11 @@ bool npc::do_player_activity()
         // instead; just scan the map ONCE for a task to do, and if it returns false
         // then stop scanning, abandon the activity, and kill the backlog of moves.
         if( !generic_multi_activity_handler( activity, *this->as_character(), true ) ) {
+            if( activity.id() == ACT_MULTIPLE_READ ) {
+                add_msg_if_player_sees( *this,
+                                        _( "%s has nothing left to study from their books." ),
+                                        disp_name() );
+            }
             revert_after_activity();
             set_moves( 0 );
             return true;

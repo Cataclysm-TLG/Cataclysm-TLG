@@ -121,8 +121,8 @@ item_location disassemble( Character &you );
 item_location gun_to_modify( Character &you, const item &gunmod );
 /** Gunmod removal menu. */
 item_location gunmod_to_remove( Character &you, item &gun );
-/** Book reading menu. */
-item_location read( Character &you );
+/** Book reading menu. @param include_ebooks if true, ebook files from ereaders appear in menu. */
+item_location read( Character &you, bool include_ebooks = true );
 /** E-Book reading menu. */
 item_location ereader_to_use( Character &you );
 /** eBook reading menu. */

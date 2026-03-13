@@ -1707,6 +1707,44 @@ void read_activity_actor::start( player_activity &act, Character &who )
     // starting the activity should cost a charge to boot up the ebook app
     if( using_ereader ) {
         ereader->ammo_consume( ereader->ammo_required(), who.pos_bub(), &who );
+        // Try to plug the ereader into a nearby appliance/powergrid to charge while reading.
+        // Search within cable length — any appliance tile in the network works.
+        if( ereader->can_link_up() && ereader->has_no_links() ) {
+            map &here = get_map();
+            const link_up_actor *link_actor = static_cast<const link_up_actor *>(
+                                                  ereader->get_use( "link_up" )->get_actor_ptr() );
+            const int cable_len = link_actor->cable_length == -1 ?
+                                  ereader->type->maximum_charges() : link_actor->cable_length;
+            bool plugged_in = false;
+            for( const tripoint_bub_ms &pt : here.points_in_radius( who.pos_bub(), cable_len ) ) {
+                // points_in_radius uses Chebyshev (square), but process_link uses rl_dist (Euclidean).
+                // Skip tiles that would immediately exceed max_length after plugging in.
+                if( rl_dist( who.pos_bub(), pt ) > cable_len ) {
+                    continue;
+                }
+                const optional_vpart_position ovp = here.veh_at( pt );
+                if( !ovp ) {
+                    continue;
+                }
+                if( ovp->vehicle().avail_linkable_part( ovp->mount_pos(), true ) == -1 ) {
+                    continue;
+                }
+                if( ereader->link_to( ovp, link_state::vehicle_port ).success() ) {
+                    who.add_msg_player_or_npc(
+                        string_format( _( "You plug your %s into the %s." ),
+                                       ereader->tname(), ovp->vehicle().name ),
+                        string_format( _( "<npcname> plugs their %s into the %s." ),
+                                       ereader->tname(), ovp->vehicle().name ) );
+                    plugged_in = true;
+                    break;
+                }
+            }
+            if( !plugged_in ) {
+                add_msg_if_player_sees( who,
+                    _( "%1$s can't find a nearby power grid to plug their %2$s into." ),
+                    who.disp_name(), ereader->tname() );
+            }
+        }
     }
 
     act.moves_total = moves_total;
@@ -2059,9 +2097,11 @@ bool read_activity_actor::npc_read( npc &learner )
                      book->type_name() );
         }
 
-    } else if( display_messages && skill ) {
-        add_msg( m_info, _( "%s can no longer learn from %s." ), learner.disp_name(),
-                 book->type_name() );
+    } else if( skill ) {
+        if( display_messages ) {
+            add_msg( m_info, _( "%s can no longer learn from %s." ), learner.disp_name(),
+                     book->type_name() );
+        }
         continuous = false;
         // read non-skill books only once
     } else if( !skill ) {
@@ -2073,7 +2113,20 @@ bool read_activity_actor::npc_read( npc &learner )
 
 void read_activity_actor::finish( player_activity &act, Character &who )
 {
+    // Deactivate ereader screen (turn off) if it was activated when reading started
+    auto deactivate_ereader = [&]() {
+        if( using_ereader && ereader && ereader->type->tool &&
+            ereader->type->tool->power_draw > 0_W ) {
+            // Disconnect from powergrid before turning off
+            if( ereader->can_link_up() && !ereader->has_no_links() ) {
+                ereader->reset_link( false );
+            }
+            who.invoke_item( &*ereader, "transform", who.pos_bub() );
+        }
+    };
+
     if( cancel_if_book_invalid( act, book, who ) ) {
+        deactivate_ereader();
         return;
     }
 
@@ -2085,6 +2138,7 @@ void read_activity_actor::finish( player_activity &act, Character &who )
                                  player_readma( *who.as_avatar() ) : player_read( *who.as_avatar() );
 
         if( should_null ) {
+            deactivate_ereader();
             act.set_to_null();
             return;
         }
@@ -2092,11 +2146,13 @@ void read_activity_actor::finish( player_activity &act, Character &who )
 
         // npcs can't read martial arts books yet
         if( is_mabook ) {
+            deactivate_ereader();
             act.set_to_null();
             return;
         }
 
         if( npc_read( static_cast<npc &>( who ) ) ) {
+            deactivate_ereader();
             act.set_to_null();
             return;
         }
@@ -2121,6 +2177,7 @@ void read_activity_actor::finish( player_activity &act, Character &who )
                 for( const std::string &reason : fail_messages ) {
                     add_msg( m_bad, reason );
                 }
+                deactivate_ereader();
                 act.set_to_null();
                 return;
             }
@@ -2130,16 +2187,55 @@ void read_activity_actor::finish( player_activity &act, Character &who )
                            to_string_writable( time_taken ) );
         }
 
-        // restart the activity
+        // restart the activity without deactivating — ereader stays on while reading
         moves_total = to_moves<int>( time_taken );
         act.moves_total = to_moves<int>( time_taken );
         act.moves_left = to_moves<int>( time_taken );
         return;
     } else  {
-        who.add_msg_if_player( m_info, _( "You finish reading." ) );
+        if( using_ereader ) {
+            who.add_msg_player_or_npc( m_info,
+                                       string_format( _( "You finish reading ebook %s." ),
+                                                      book->type_name() ),
+                                       string_format( _( "<npcname> finishes reading ebook %s." ),
+                                                      book->type_name() ) );
+        } else {
+            who.add_msg_player_or_npc( m_info,
+                                       string_format( _( "You finish reading %s." ),
+                                                      book->type_name() ),
+                                       string_format( _( "<npcname> finishes reading %s." ),
+                                                      book->type_name() ) );
+        }
     }
 
+    deactivate_ereader();
     act.set_to_null();
+}
+
+void read_activity_actor::canceled( player_activity &/*act*/, Character &who )
+{
+    if( is_valid_book( book ) ) {
+        if( using_ereader ) {
+            who.add_msg_player_or_npc( m_info,
+                                       string_format( _( "You stop reading ebook %s." ),
+                                                      book->type_name() ),
+                                       string_format( _( "<npcname> stops reading ebook %s." ),
+                                                      book->type_name() ) );
+        } else {
+            who.add_msg_player_or_npc( m_info,
+                                       string_format( _( "You stop reading %s." ),
+                                                      book->type_name() ),
+                                       string_format( _( "<npcname> stops reading %s." ),
+                                                      book->type_name() ) );
+        }
+    }
+    if( using_ereader && ereader && ereader->type->tool &&
+        ereader->type->tool->power_draw > 0_W ) {
+        if( ereader->can_link_up() && !ereader->has_no_links() ) {
+            ereader->reset_link( false );
+        }
+        who.invoke_item( &*ereader, "transform", who.pos_bub() );
+    }
 }
 
 bool read_activity_actor::can_resume_with_internal( const activity_actor &other,

@@ -1608,12 +1608,12 @@ class ebookread_inventory_preset : public read_inventory_preset
         }
 };
 
-item_location game_menus::inv::read( Character &you )
+item_location game_menus::inv::read( Character &you, bool include_ebooks )
 {
     const std::string msg = you.is_avatar() ? _( "You have nothing to read." ) :
                             string_format( _( "%s has nothing to read." ), you.disp_name() );
     return inv_internal( you, read_inventory_preset( you ), _( "Read" ), 1, msg, "", item_location(),
-                         true );
+                         include_ebooks );
 }
 
 item_location game_menus::inv::ebookread( Character &you, item_location &ereader )

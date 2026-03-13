@@ -14397,13 +14397,19 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
             std::string cable_name = is_cable_item ? string_format( _( "over-extended %s" ), label( 1 ) ) :
                                      string_format( _( "%s's over-extended cable" ), label( 1 ) );
             if( carrier != nullptr ) {
-                carrier->add_msg_if_player( m_bad, _( "Your %s breaks loose!" ), cable_name );
+                if( carrier->is_npc() ) {
+                    add_msg_if_player_sees( *carrier, m_bad, _( "%s's %s breaks loose!" ),
+                                           carrier->disp_name( true, true ), cable_name );
+                } else {
+                    carrier->add_msg_if_player( m_bad, _( "Your %s breaks loose!" ), cable_name );
+                }
             } else {
-                add_msg_if_player_sees( pos, m_bad, _( "Your %s breaks loose!" ), cable_name );
+                add_msg_if_player_sees( pos, m_bad, _( "The %s breaks loose!" ), cable_name );
             }
             return true;
         } else if( link().length + M_SQRT2 >= link().max_length + 1 && carrier != nullptr ) {
-            carrier->add_msg_if_player( m_warning, _( "Your %s is stretched to its limit!" ), link_name() );
+            carrier->add_msg_if_player( m_warning, _( "Your %s is stretched to its limit!" ),
+                                        link_name() );
         }
         return false;
     };

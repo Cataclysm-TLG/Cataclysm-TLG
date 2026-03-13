@@ -1293,6 +1293,25 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
         if( !you.items_with( filter ).empty() ) {
             return activity_reason_info::ok( do_activity_reason::NEEDS_BOOK_TO_LEARN );
         }
+        // items_with/visit_items skips E_FILE_STORAGE pockets, so check ereaders explicitly
+        bool has_readable_ebook = false;
+        you.visit_items( [&]( item * it, item * ) {
+            if( has_readable_ebook || !it->is_estorage() ) {
+                return has_readable_ebook ? VisitResponse::ABORT : VisitResponse::NEXT;
+            }
+            for( const item *ebook : it->ebooks() ) {
+                read_condition_result condition = you.check_read_condition( *ebook );
+                if( condition == read_condition_result::SUCCESS ||
+                    condition == read_condition_result::TOO_DARK ) {
+                    has_readable_ebook = true;
+                    return VisitResponse::ABORT;
+                }
+            }
+            return VisitResponse::NEXT;
+        } );
+        if( has_readable_ebook ) {
+            return activity_reason_info::ok( do_activity_reason::NEEDS_BOOK_TO_LEARN );
+        }
         // TODO: find books from zone?
         return activity_reason_info::fail( do_activity_reason::ALREADY_DONE );
     }
@@ -3295,17 +3314,64 @@ static bool generic_multi_activity_do(
             return false;
         }
     } else if( reason == do_activity_reason::NEEDS_BOOK_TO_LEARN ) {
-        const item_filter filter = [ &you ]( const item & i ) {
-            read_condition_result condition = you.check_read_condition( i );
-            return condition == read_condition_result::SUCCESS;
-        };
-        std::vector<item *> books = you.items_with( filter );
-        if( !books.empty() && books[0] ) {
-            const time_duration time_taken = you.time_to_read( *books[0], you );
-            item_location book = item_location( you, books[0] );
-            item_location ereader;
+        // Find the first readable book, tracking whether it lives inside an ereader
+        item *book_ptr = nullptr;
+        item *ereader_ptr = nullptr;
+        you.visit_items( [&]( item * it, item * parent ) {
+            if( book_ptr != nullptr ) {
+                return VisitResponse::ABORT;
+            }
+            if( you.check_read_condition( *it ) == read_condition_result::SUCCESS ) {
+                book_ptr = it;
+                ereader_ptr = ( parent && parent->is_estorage() ) ? parent : nullptr;
+                return VisitResponse::ABORT;
+            }
+            // E_FILE_STORAGE contents are not visited by visit_contents, check ereaders explicitly
+            if( it->is_estorage() ) {
+                for( const item *ebook : it->ebooks() ) {
+                    if( you.check_read_condition( *ebook ) == read_condition_result::SUCCESS ) {
+                        book_ptr = const_cast<item *>( ebook );
+                        ereader_ptr = it;
+                        return VisitResponse::ABORT;
+                    }
+                }
+            }
+            return VisitResponse::NEXT;
+        } );
+        if( book_ptr ) {
+            item_location book;
+            item_location ereader_loc;
+            if( ereader_ptr ) {
+                ereader_loc = item_location( you, ereader_ptr );
+                // Activate the ereader screen if it's currently off
+                if( ereader_ptr->type->tool && ereader_ptr->type->tool->power_draw == 0_W ) {
+                    you.invoke_item( ereader_ptr, "transform", you.pos_bub() );
+                }
+                // After possible transform, find the first readable ebook with fresh pointers
+                for( const item *ebook : ereader_ptr->ebooks() ) {
+                    if( you.check_read_condition( *ebook ) == read_condition_result::SUCCESS ) {
+                        book = item_location( ereader_loc, const_cast<item *>( ebook ) );
+                        break;
+                    }
+                }
+                if( !book ) {
+                    return true;
+                }
+            } else {
+                book = item_location( you, book_ptr );
+            }
+            const time_duration time_taken = you.time_to_read( *book, you );
             you.backlog.emplace_front( act_id );
-            you.assign_activity( read_activity_actor( time_taken, book, ereader, true ) );
+            you.assign_activity( read_activity_actor( time_taken, book, ereader_loc, true ) );
+            if( ereader_ptr ) {
+                you.add_msg_player_or_npc(
+                    string_format( _( "You start reading ebook %s." ), book->type_name() ),
+                    string_format( _( "<npcname> starts reading ebook %s." ), book->type_name() ) );
+            } else {
+                you.add_msg_player_or_npc(
+                    string_format( _( "You start reading %s." ), book->type_name() ),
+                    string_format( _( "<npcname> starts reading %s." ), book->type_name() ) );
+            }
             return false;
         }
     } else if( reason == do_activity_reason::CAN_DO_CONSTRUCTION ) {
