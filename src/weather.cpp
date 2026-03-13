@@ -157,23 +157,9 @@ float incident_sun_irradiance( const weather_type_id &wtype, const time_point &t
 static void proc_weather_sum( const weather_type_id &wtype, weather_sum &data,
                               const time_point &t, const time_duration &tick_size )
 {
-    int amount = 0;
-    if( wtype->rains ) {
-        switch( wtype->precip ) {
-            case precip_class::very_light:
-                amount = 1 * to_turns<int>( tick_size );
-                break;
-            case precip_class::light:
-                amount = 4 * to_turns<int>( tick_size );
-                break;
-            case precip_class::heavy:
-                amount = 8 * to_turns<int>( tick_size );
-                break;
-            default:
-                break;
-        }
+    if( wtype->rains && wtype->precip != precip_class::none ) {
+        data.rain_amount += precip_mm_per_hour( wtype->precip ) * to_turns<double>( tick_size );
     }
-    data.rain_amount += amount;
 
     // TODO: Change this sunlight "sampling" here into a proper interpolation
     const float tick_sunlight = incident_sunlight( wtype, t );
@@ -237,7 +223,9 @@ void retroactively_fill_from_funnel( item &it, const trap &tr, const time_point 
     // Technically 0.0 division is OK, but it will be cleaner without it
     if( data.rain_amount > 0 ) {
         const double turns = to_turns<double>( end - start );
-        const double charges_per_turn = 1.0 / tr.funnel_turns_per_charge( data.rain_amount );
+        // rain_amount is sum of (mm/hour * turns), so dividing by turns gives average mm/hour
+        const double avg_mm_per_hour = data.rain_amount / turns;
+        const double charges_per_turn = 1.0 / tr.funnel_turns_per_charge( avg_mm_per_hour );
         const int rain = roll_remainder( charges_per_turn * turns );
         it.add_rain_to_container( rain );
         // add_msg_debug( "Retroactively adding %d water from turn %d to %d", rain, startturn, endturn);
