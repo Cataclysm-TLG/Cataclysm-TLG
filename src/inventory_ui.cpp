@@ -3084,7 +3084,7 @@ void inventory_column::remove_duplicate_itypes( bool include_variants )
             }
         }
     };
-    //sort out duplicates, clear list, then reconstruct entries
+    // Sort out duplicates, clear list, then reconstruct entries.
     audit_entries( entries );
     audit_entries( entries_hidden );
     clear();

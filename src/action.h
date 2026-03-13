@@ -133,7 +133,7 @@ enum action_id : int {
     ACTION_LIST_ITEMS,
     /** Open the zone manager */
     ACTION_ZONES,
-    /** Sort out the loot */
+    /** Sort out items */
     ACTION_LOOT,
     /**@}*/
 
