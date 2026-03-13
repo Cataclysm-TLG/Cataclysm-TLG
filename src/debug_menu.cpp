@@ -224,6 +224,7 @@ std::string enum_to_string<debug_menu::debug_menu_index>( debug_menu::debug_menu
         case debug_menu::debug_menu_index::BLEED_SELF: return "BLEED_SELF";
         case debug_menu::debug_menu_index::SHOW_SOUND: return "SHOW_SOUND";
         case debug_menu::debug_menu_index::DISPLAY_WEATHER: return "DISPLAY_WEATHER";
+        case debug_menu::debug_menu_index::DISPLAY_SNOW_DEPTH: return "DISPLAY_SNOW_DEPTH";
         case debug_menu::debug_menu_index::DISPLAY_SCENTS: return "DISPLAY_SCENTS";
         case debug_menu::debug_menu_index::CHANGE_TIME: return "CHANGE_TIME";
         case debug_menu::debug_menu_index::FORCE_TEMP: return "FORCE_TEMP";
@@ -909,6 +910,7 @@ static int info_uilist( bool display_all_entries = true )
             { uilist_entry( debug_menu_index::TEST_IT_GROUP, true, 'i', _( "Test item group" ) ) },
             { uilist_entry( debug_menu_index::SHOW_SOUND, true, 'c', _( "Show sound clustering" ) ) },
             { uilist_entry( debug_menu_index::DISPLAY_WEATHER, true, 'w', _( "Display weather" ) ) },
+            { uilist_entry( debug_menu_index::DISPLAY_SNOW_DEPTH, true, 'W', _( "Toggle display snow depth" ) ) },
             { uilist_entry( debug_menu_index::DISPLAY_SCENTS, true, 'S', _( "Display overmap scents" ) ) },
             { uilist_entry( debug_menu_index::DISPLAY_SCENTS_LOCAL, true, 's', _( "Toggle display local scents" ) ) },
             { uilist_entry( debug_menu_index::DISPLAY_SCENTS_TYPE_LOCAL, true, 'y', _( "Toggle display local scents type" ) ) },
@@ -4193,6 +4195,9 @@ void debug()
             break;
         case debug_menu_index::DISPLAY_TEMP:
             g->display_toggle_overlay( ACTION_DISPLAY_TEMPERATURE );
+            break;
+        case debug_menu_index::DISPLAY_SNOW_DEPTH:
+            g->display_toggle_overlay( ACTION_DISPLAY_SNOW_DEPTH );
             break;
         case debug_menu_index::DISPLAY_VEHICLE_AI:
             g->display_toggle_overlay( ACTION_DISPLAY_VEHICLE_AI );
