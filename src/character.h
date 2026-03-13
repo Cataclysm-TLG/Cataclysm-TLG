@@ -2800,8 +2800,9 @@ class Character : public Creature, public visitable
 
         void pause(); // '.' command; pauses & resets recoil.
 
-        /** Check if we're in a water tile and handle wetness effects.  Should be run when waiting or moving. */
-        void water_immersion();
+        /** Check if we're in a water tile and handle wetness effects.  Should be run when waiting or moving.
+         *  @param immediate If true, soaking messages are shown unconditionally (used on first entry). */
+        void water_immersion( bool immediate = false );
 
         /** Check player strong enough to lift an object unaided by equipment (jacks, levers etc) */
         bool can_lift( item &obj ) const;

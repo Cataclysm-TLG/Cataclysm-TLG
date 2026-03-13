@@ -1335,7 +1335,7 @@ void avatar::set_movement_mode( const move_mode_id &new_mode )
         }
         // Check for water immersion effects (e.g. soaking in a tub when going prone/crouching)
         if( new_mode == move_mode_prone || new_mode == move_mode_crouch ) {
-            water_immersion();
+            water_immersion( true );
         }
     } else {
         add_msg( new_mode->change_message( false, get_steed_type() ) );
