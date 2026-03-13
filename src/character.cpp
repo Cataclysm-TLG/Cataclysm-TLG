@@ -14015,13 +14015,13 @@ void Character::water_immersion()
             if( is_hot && calendar::once_every( 1_minutes ) ) {
                 add_morale( morale_comfy, 2, 10, 2_minutes, 1_minutes, true );
             }
-            if( one_in( 50 ) ) {
+            if( calendar::once_every( 1_minutes ) ) {
                 add_msg_if_player( m_good, _( "You soak in the water." ) );
             }
         } else if( is_prone() && enough_to_crouch ) {
             // Lying but not enough water to be submerged — partial soak
             drench( 60, get_drenching_body_parts( false, false, true ), false );
-            if( one_in( 50 ) ) {
+            if( calendar::once_every( 1_minutes ) ) {
                 add_msg_if_player( m_info, _( "The tub is too shallow to soak in properly." ) );
             }
         } else if( is_crouching() && enough_to_crouch ) {
@@ -14030,11 +14030,11 @@ void Character::water_immersion()
             if( is_hot && calendar::once_every( 1_minutes ) ) {
                 add_morale( morale_comfy, 1, 5, 2_minutes, 1_minutes, true );
             }
-            if( one_in( 50 ) ) {
+            if( calendar::once_every( 1_minutes ) ) {
                 add_msg_if_player( m_good, _( "You sit in the water." ) );
             }
         } else {
-            if( one_in( 50 ) ) {
+            if( calendar::once_every( 1_minutes ) ) {
                 add_msg_if_player( m_info, _( "The tub doesn't have enough water to soak in." ) );
             }
         }
