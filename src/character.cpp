@@ -4166,7 +4166,7 @@ int Character::calc_focus_equilibrium( bool ignore_pain ) const
 {
     int focus_equilibrium = 100;
 
-    if( activity.id() == ACT_READ ) {
+    if( activity.id() == ACT_READ && !activity.targets.empty() ) {
         const item_location book = activity.targets[0];
         if( book && book->is_book() ) {
             const cata::value_ptr<islot_book> &bt = book->type->book;

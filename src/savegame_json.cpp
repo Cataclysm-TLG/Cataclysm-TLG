@@ -2262,8 +2262,12 @@ void npc::load( const JsonObject &data )
         complaints.emplace( member.name(), p );
     }
     data.read( "unique_id", unique_id );
+    // Temporarily clear activity so calc_focus_equilibrium() doesn't try to
+    // resolve item_locations before this NPC is in the critter tracker.
+    player_activity saved_activity = std::move( activity );
     clear_personality_traits();
     generate_personality_traits();
+    activity = std::move( saved_activity );
     data.read( "may_activity_occupancy_after_end_items_loc",
                may_activity_occupancy_after_end_items_loc );
 }
