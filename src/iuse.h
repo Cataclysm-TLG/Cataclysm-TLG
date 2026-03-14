@@ -204,9 +204,6 @@ std::optional<int> radiocar( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> radiocontrol( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> radiocontrol_tick( Character *, item *, const tripoint_bub_ms & );
 
-std::optional<int> multicooker( Character *, item *, const tripoint_bub_ms & );
-std::optional<int> multicooker_tick( Character *, item *, const tripoint_bub_ms & );
-
 std::optional<int> remoteveh( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> remoteveh_tick( Character *, item *, const tripoint_bub_ms & );
 

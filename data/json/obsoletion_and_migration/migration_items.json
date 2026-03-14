@@ -3832,5 +3832,10 @@
     "type": "MIGRATION",
     "id": "iv_mutagen_lupine",
     "replace": "iv_mutagen_canine"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "multi_cooker",
+    "replace": "hotplate"
   }
 ]
