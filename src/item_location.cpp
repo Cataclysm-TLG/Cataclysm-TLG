@@ -681,6 +681,9 @@ class item_location::impl::item_in_container : public item_location::impl
             if( idx < 0 ) {
                 return nullptr;
             }
+            if( !container ) {
+                return nullptr;
+            }
             std::list<const item *> all_items = container->all_items_ptr();
             auto iter = all_items.begin();
             std::advance( iter, idx );
