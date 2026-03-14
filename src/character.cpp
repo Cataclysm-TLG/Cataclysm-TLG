@@ -248,6 +248,7 @@ static const efftype_id effect_glowy_led( "glowy_led" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_heavysnare( "heavysnare" );
+static const efftype_id effect_hot( "hot" );
 static const efftype_id effect_in_pit( "in_pit" );
 static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_infected( "infected" );
@@ -384,6 +385,7 @@ static const material_id material_qt_steel( "qt_steel" );
 static const material_id material_steel( "steel" );
 
 static const morale_type morale_cold( "morale_cold" );
+static const morale_type morale_comfy( "morale_comfy" );
 static const morale_type morale_hot( "morale_hot" );
 
 static const move_mode_id move_mode_prone( "prone" );
@@ -13996,6 +13998,29 @@ void Character::water_immersion()
                 for( const auto &pair : wet_groups ) {
                     drench( pair.first, pair.second, false );
                 }
+            }
+        }
+    }
+    // Soaking in a liquid-filled tub (e.g. bathtub) drenches the character.
+    // Requires at least 15 L of liquid in the furniture tile.
+    if( !in_vehicle && here.has_flag( ter_furn_flag::TFLAG_SOAKING_TUB, pos_bub() ) ) {
+        units::volume water_vol = 0_ml;
+        for( const item &it : here.i_at( pos_bub() ) ) {
+            if( it.made_of( phase_id::LIQUID ) ) {
+                water_vol += it.volume();
+            }
+        }
+        // The bathtub spans two tiles but liquid is stored per-tile, so we only check the
+        // tile the character is on.
+        const units::volume min_vol = units::from_liter( 15 );
+        if( water_vol >= min_vol ) {
+            drench( 100, get_drenching_body_parts( false ), false );
+            if( calendar::once_every( 1_minutes ) ) {
+                add_msg_if_player( m_good, _( "You soak in the water." ) );
+            }
+        } else {
+            if( calendar::once_every( 1_minutes ) ) {
+                add_msg_if_player( m_info, _( "The tub doesn't have enough water to soak in." ) );
             }
         }
     }
