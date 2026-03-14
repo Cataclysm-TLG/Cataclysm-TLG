@@ -490,7 +490,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "Geiger counter (on)", "str_pl": "Geiger counters (on)" },
     "description": "A tool for measuring radiation.  It is in continuous scan mode, and will produce quiet clicking sounds in the presence of ambient radiation.  Using it allows you to turn it off, or scan yourself or the ground.",
-    "power_draw": "200 mW",
+    "power_draw": "100 mW",
     "revert_to": "geiger_off",
     "use_action": {
       "target": "geiger_off",
