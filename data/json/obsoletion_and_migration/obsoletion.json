@@ -954,5 +954,15 @@
     "min": 0,
     "max": 1600,
     "rate": "1 m"
+  },
+  {
+    "type": "TRAIT_MIGRATION",
+    "id": "seer_mark",
+    "remove": true
+  },
+  {
+    "type": "TRAIT_MIGRATION",
+    "id": "BOSS_Brigitte_LaCroix_01",
+    "remove": true
   }
 ]
