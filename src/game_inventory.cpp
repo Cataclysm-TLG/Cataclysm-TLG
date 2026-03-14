@@ -1497,10 +1497,19 @@ class read_inventory_preset: public pickup_inventory_preset
 
         bool is_shown( const item_location &loc ) const override {
             const item_location p_loc = loc.parent_item();
-            return ( loc->is_book() || loc->type->can_use( "learn_spell" ) ) &&
-                   ( !p_loc || ( !p_loc->is_estorage() || p_loc->is_estorage_usable( you ) ) ||
-                     !p_loc->uses_energy() ||
-                     p_loc->energy_remaining( p_loc.carrier(), false ) >= 1_kJ );
+            if( !( loc->is_book() || loc->type->can_use( "learn_spell" ) ) ) {
+                return false;
+            }
+            if( p_loc && p_loc->is_estorage() ) {
+                // Estorage device must be browsed before its files are readable.
+                // Additionally it must be usable (charged tablet) or not require energy (USB drive).
+                return p_loc->is_browsed() &&
+                       ( p_loc->is_estorage_usable( you ) || !p_loc->uses_energy() ||
+                         p_loc->energy_remaining( p_loc.carrier(), false ) >= 1_kJ );
+            }
+            return !p_loc ||
+                   !p_loc->uses_energy() ||
+                   p_loc->energy_remaining( p_loc.carrier(), false ) >= 1_kJ;
         }
 
         std::string get_denial( const item_location &loc ) const override {
