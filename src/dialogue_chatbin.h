@@ -116,6 +116,8 @@ struct dialogue_chatbin_snippets {
     translation snip_run_away = no_translation( "<run_away>" );
     translation snip_speech_warning = no_translation( "<speech_warning>" );
     translation snip_thirsty = no_translation( "<thirsty>" );
+    translation snip_too_cold = no_translation( "<too_cold>" );
+    translation snip_too_hot = no_translation( "<too_hot>" );
     translation snip_wait = no_translation( "<wait>" );
     translation snip_warn_sleep = no_translation( "<warn_sleep>" );
     translation snip_yawn = no_translation( "<yawn>" );
