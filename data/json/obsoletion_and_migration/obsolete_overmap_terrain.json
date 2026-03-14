@@ -200,7 +200,11 @@
       "LIXA_entry_2_south": "omt_obsolete",
       "LIXA_road_south": "omt_obsolete",
       "LIXA_road_guard_south": "omt_obsolete",
-      "LIXA_road_guard_roof_south": "omt_obsolete"
+      "LIXA_road_guard_roof_south": "omt_obsolete",
+      "cemetery_4square_00_lacroix": "cemetery_4square_00",
+      "cemetery_4square_01_lacroix": "cemetery_4square_01",
+      "cemetery_4square_10_lacroix": "cemetery_4square_10",
+      "cemetery_4square_11_lacroix": "cemetery_4square_11"
     }
   }
 ]

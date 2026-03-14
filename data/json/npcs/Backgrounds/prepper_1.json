@@ -576,12 +576,6 @@
         "topic": "BGSS_PREPPER_1_FOUND_LMOE9_HUB01"
       },
       {
-        "text": "I met this woman who was… uh… obsessed with bones?  She said that since <the_cataclysm>, the bones of living things 'hum' with some kind of special power and that she wants to collect lots of them to either end the world or save the world.  I'm honestly still not entirely clear how or what's supposed to happen…  How about that idea?  Did THAT ever cross your mind?",
-        "//": "This option only shows if you've asked Brigitte LaCroix, the Boneseer, about her theory on the Cataclysm.",
-        "condition": { "u_has_var": "dialogue_song_asked_about_song", "value": "yes" },
-        "topic": "BGSS_PREPPER_1_FOUND_LMOE9_BONE_SEER"
-      },
-      {
         "text": "Honestly, it's probably aliens.  I can't really think of another reasonable explanation for all of this.",
         "topic": "BGSS_PREPPER_1_FOUND_LMOE9_ALIENS"
       },
@@ -657,20 +651,6 @@
     ]
   },
   {
-    "id": "BGSS_PREPPER_1_FOUND_LMOE9_BONE_SEER",
-    "type": "talk_topic",
-    "dynamic_line": {
-      "gendered_line": "She said it was… energy in bones?  Listen, I've heard a lot of crazy bullshit in my time and that's up there, for sure.  And I don't see how something like that explains all the crazy shit I've seen either.  But collecting bones to… save the world?  Fuck it, give it a shot.  Maybe that's something just YOU do, though.  I'm happy believing a lie if that's the truth, I'll be honest.",
-      "relevant_genders": [ "npc" ]
-    },
-    "responses": [
-      {
-        "text": "I didn't say it was a SOLID theory, but maybe she's onto something.  This is evil on a cosmic scale; I don't know how else to explain it.  Maybe she's right.  Maybe the bones really are 'singing'.",
-        "topic": "BGSS_PREPPER_1_FOUND_LMOE10_BONE_SEER"
-      }
-    ]
-  },
-  {
     "id": "BGSS_PREPPER_1_FOUND_LMOE9_ALIENS",
     "type": "talk_topic",
     "dynamic_line": {
@@ -736,12 +716,6 @@
         "topic": "TALK_DONE"
       }
     ]
-  },
-  {
-    "id": "BGSS_PREPPER_1_FOUND_LMOE10_BONE_SEER",
-    "type": "talk_topic",
-    "dynamic_line": "Once again, I'm staying out of the bone bullshit.  I hope the best for you and the bone woman.  You definitely seem like you have things under control.",
-    "responses": [ { "text": "Maybe I shouldn't have mentioned it…  Let's just get moving.", "topic": "TALK_DONE" } ]
   },
   {
     "id": "BGSS_PREPPER_1_FOUND_LMOE10_ALIENS",
