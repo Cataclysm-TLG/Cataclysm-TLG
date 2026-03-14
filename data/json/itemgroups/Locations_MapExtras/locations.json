@@ -419,7 +419,6 @@
       { "item": "toaster", "prob": 20, "damage": [ 0, 4 ] },
       { "item": "television", "prob": 20, "damage": [ 0, 4 ] },
       { "item": "microwave", "prob": 20, "damage": [ 0, 4 ] },
-      { "item": "multi_cooker", "prob": 1, "damage": [ 0, 4 ] },
       { "item": "waffleiron", "prob": 25, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
       { "item": "radio", "prob": 15, "damage": [ 0, 4 ] }
     ]
@@ -442,7 +441,6 @@
       { "item": "toaster", "prob": 20, "damage": [ 0, 4 ] },
       { "item": "television", "prob": 20, "damage": [ 0, 4 ] },
       { "item": "microwave", "prob": 20, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
-      { "item": "multi_cooker", "prob": 1, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
       { "item": "pan", "prob": 25, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
       { "item": "dutch_oven", "prob": 5, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
       { "item": "waffleiron", "prob": 10, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
@@ -689,7 +687,6 @@
       { "item": "dehydrator", "prob": 5, "damage": [ 0, 4 ] },
       { "item": "food_processor", "prob": 5, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
       { "item": "hotplate", "prob": 5, "damage": [ 0, 4 ] },
-      { "item": "multi_cooker", "prob": 5, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
       { "item": "vac_sealer", "prob": 5, "damage": [ 0, 4 ] }
     ]
   },

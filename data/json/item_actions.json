@@ -591,11 +591,6 @@
   },
   {
     "type": "item_action",
-    "id": "MULTICOOKER",
-    "name": { "str": "Cook" }
-  },
-  {
-    "type": "item_action",
     "id": "MYCUS",
     "name": { "str": "Consume" }
   },
