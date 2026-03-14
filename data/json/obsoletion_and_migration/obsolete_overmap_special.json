@@ -18,5 +18,10 @@
     "type": "overmap_special_migration",
     "id": "Occupied Lumbermill",
     "new_id": "Lumbermill"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "cemetery_lacroix",
+    "new_id": "cemetery_religious"
   }
 ]

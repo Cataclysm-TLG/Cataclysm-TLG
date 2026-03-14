@@ -719,14 +719,6 @@
   },
   {
     "type": "mutation",
-    "//": "This NPC can tell you about other NPCs.",
-    "id": "BOSS_Brigitte_LaCroix_01",
-    "copy-from": "BOSS_No_Others_01",
-    "name": { "str": "Other Survivors Story" },
-    "description": "Brigitte LaCroix 01."
-  },
-  {
-    "type": "mutation",
     "//": "This is a unique background story trait that should not be given out randomly.",
     "id": "BGSS_Rescue_Pilot_1",
     "name": { "str": "Survivor Story" },
