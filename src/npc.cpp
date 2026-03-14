@@ -1458,7 +1458,21 @@ void npc::do_npc_read( bool ebook )
         return;
     }
 
-    book = book.obtain( *npc_character );
+    if( ebook ) {
+        if( !ereader->has_flag( flag_ALLOWS_REMOTE_USE ) ) {
+            item the_book = *book.get_item();
+            npc_character->wield( *ereader );
+            ereader = npc_character->get_wielded_item();
+            item *newit = ereader->get_item_with( [&]( const item & it ) {
+                return it.typeId() == the_book.typeId();
+            } );
+            if( newit ) {
+                book = item_location( ereader, &*newit );
+            }
+        }
+    } else {
+        book = book.obtain( *npc_character );
+    }
     if( can_read( *book, fail_reasons ) ) {
         add_msg_if_player_sees( pos_bub(), ebook ? _( "%s starts reading ebook %s." ) :
                                 _( "%s starts reading %s." ), disp_name(), book->type_name() );
