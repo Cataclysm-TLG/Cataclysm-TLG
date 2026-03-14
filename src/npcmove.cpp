@@ -85,6 +85,7 @@
 #include "viewer.h"
 #include "visitable.h"
 #include "vehicle_selector.h"
+#include "weather.h"
 #include "vpart_position.h"
 #include "vpart_range.h"
 
@@ -2598,6 +2599,15 @@ npc_action npc::address_needs( float danger )
 
     if( one_in( 3 ) && adjust_worn() ) {
         return npc_noop;
+    }
+
+    if( is_player_ally() && one_in( 3 ) ) {
+        const units::temperature torso_temp = get_part_temp_cur( body_part_torso.id() );
+        if( torso_temp <= BODYTEMP_COLD && try_wear_warmer_clothing() ) {
+            return npc_noop;
+        } else if( torso_temp >= BODYTEMP_HOT && try_remove_warm_clothing() ) {
+            return npc_noop;
+        }
     }
 
     const auto could_sleep = [&]() {
@@ -5565,6 +5575,46 @@ bool outfit::adjust_worn( npc &guy )
         }
     }
     return false;
+}
+
+bool npc::try_wear_warmer_clothing()
+{
+    // Collect unworn wearable items with warmth from inventory
+    std::vector<item *> candidates = items_with( [this]( const item & it ) {
+        return it.is_armor() && !is_worn( it ) && it.get_warmth() > 0;
+    } );
+    if( candidates.empty() ) {
+        return false;
+    }
+    // Try the warmest first
+    std::stable_sort( candidates.begin(), candidates.end(), []( const item * a, const item * b ) {
+        return a->get_warmth() > b->get_warmth();
+    } );
+    for( item *it : candidates ) {
+        if( can_wear( *it ).success() && wear_item( *it, false ) ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool npc::try_remove_warm_clothing()
+{
+    // Minimum warmth value worth removing when overheating
+    static constexpr int min_warmth_to_remove = 10;
+
+    std::vector<item *> warm_worn = items_with( [this]( const item & it ) {
+        return is_worn( it ) && !it.has_flag( flag_SPLINT ) && it.get_warmth() > min_warmth_to_remove;
+    } );
+    if( warm_worn.empty() ) {
+        return false;
+    }
+    item *warmest = *std::max_element( warm_worn.begin(), warm_worn.end(),
+    []( const item * a, const item * b ) {
+        return a->get_warmth() < b->get_warmth();
+    } );
+    item_location loc( *this, warmest );
+    return can_takeoff( *warmest ).success() && takeoff( loc );
 }
 
 void npc::set_movement_mode( const move_mode_id &new_mode )
