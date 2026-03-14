@@ -3333,6 +3333,18 @@ void efile_activity_actor::completed_processing_current_efile( player_activity &
     add_msg_if_player_sees( who, m_info, string_format( _( "%s %s %s." ),
                             who.disp_name( false, true ), efile_action_name( action_type, true, false ),
                             current_efile->display_name() ) );
+    // Helper: remove a stale item_location from selected_efiles by raw pointer.
+    // Must be called BEFORE the item is removed from its pocket, while the pointer is still valid.
+    auto erase_from_selected = [&]( const item_location & loc ) {
+        const item *ptr = loc.get_item();
+        selected_efiles.erase(
+            std::remove_if( selected_efiles.begin(), selected_efiles.end(),
+        [ptr]( const item_location & l ) {
+            return l.get_item() == ptr; // NOLINT(clang-analyzer-core.NullDereference)
+        } ),
+        selected_efiles.end() );
+    };
+
     switch( action_type ) {
         case EF_BROWSE:
             if( current_efile->typeId() == itype_efile_junk ) {
@@ -3351,6 +3363,9 @@ void efile_activity_actor::completed_processing_current_efile( player_activity &
             remove_efile( current_edevice, *current_efile );
             break;
         case EF_MOVE_FROM_THIS:
+            // Erase from selected_efiles before destroying the item so the item_location
+            // cannot be serialised with a stale (now-invalid) traversal index on save.
+            erase_from_selected( current_efile );
             add_efile( current_edevice, *current_efile, false );
             remove_efile( used_edevice, *current_efile );
             break;
@@ -3542,14 +3557,27 @@ void efile_activity_actor::canceled( player_activity &act, Character &who )
 
 void efile_activity_actor::serialize( JsonOut &jsout ) const
 {
+    // Filter out any item_locations that have become invalid (e.g. items moved/deleted since last
+    // load).  Writing an invalid traversal index would trigger a debug error on the next load.
+    auto valid_locs = []( const std::vector<item_location> &locs ) {
+        std::vector<item_location> out;
+        out.reserve( locs.size() );
+        for( const item_location &loc : locs ) {
+            if( loc && loc.get_item() != nullptr ) {
+                out.push_back( loc );
+            }
+        }
+        return out;
+    };
+
     jsout.start_object();
     jsout.member( "used_edevice", used_edevice );
     jsout.member( "target_edevices", target_edevices );
     jsout.member( "target_edevices_copy", target_edevices_copy );
     jsout.member( "action_type", action_type );
     jsout.member( "combo_type", combo_type );
-    jsout.member( "selected_efiles", selected_efiles );
-    jsout.member( "currently_processed_efiles", currently_processed_efiles );
+    jsout.member( "selected_efiles", valid_locs( selected_efiles ) );
+    jsout.member( "currently_processed_efiles", valid_locs( currently_processed_efiles ) );
     jsout.member( "target_edevices_count", target_edevices_count );
     jsout.member( "processed_edevices", processed_edevices );
     jsout.member( "failed_edevices", failed_edevices );
