@@ -960,6 +960,8 @@ class npc : public Character
         void drop( const drop_locations &what, const tripoint_bub_ms &target,
                    bool stash ) override;
         bool adjust_worn();
+        bool try_wear_warmer_clothing();
+        bool try_remove_warm_clothing();
         bool has_healing_item( healing_options try_to_fix );
         healing_options patient_assessment( const Character &c );
         healing_options has_healing_options();
