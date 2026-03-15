@@ -1,0 +1,22 @@
+[
+  {
+    "type": "npc",
+    "id": "SEER_Brigitte_LaCroix",
+    "//": "Obsolete template from removed Kindred faction content.",
+    "class": "NC_BONE_SEER",
+    "attitude": 7,
+    "mission": 3,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "KINDRED_Darren_Cooper",
+    "//": "Obsolete template from removed Kindred faction content.",
+    "class": "NC_KINDRED_COOPER",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  }
+]
