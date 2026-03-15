@@ -146,7 +146,7 @@
         { "item": "story_book", "x": 8, "y": 37 },
         { "item": "classic_literature", "x": 8, "y": 37 },
         { "item": "deck_of_cards", "x": 7, "y": 56 },
-        { "item": "fertilizer_commercial", "repeat": [ 1, 3 ], "x": [ 39, 40 ], "y": [ 48, 49 ] },
+        { "group": "fertilizer_commercial_bag_canvas_60", "repeat": [ 1, 2 ], "x": [ 39, 40 ], "y": [ 48, 49 ], "chance": 100 },
         { "item": "stick_long", "x": 50, "y": 18, "repeat": [ 5, 20 ] },
         { "item": "log", "x": 50, "y": 18, "repeat": [ 4, 8 ] },
         { "item": "stick_long", "x": 33, "y": 47, "repeat": [ 1, 5 ] }
