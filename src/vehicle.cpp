@@ -8404,8 +8404,10 @@ void vehicle::update_time( map &here, const time_point &update_to )
 
         const double area_in_mm2 = std::pow( pt.info().bonus, 2 ) * M_PI;
         const double elapsed_turns = to_turns<double>( elapsed );
-        const double avg_mm_per_hour = elapsed_turns > 0.0 ? accum_weather.rain_amount / elapsed_turns : 0.0;
-        const int qty = roll_remainder( funnel_charges_per_turn( area_in_mm2, avg_mm_per_hour ) * elapsed_turns );
+        const double avg_mm_per_hour = elapsed_turns > 0.0 ? accum_weather.rain_amount / elapsed_turns :
+                                       0.0;
+        const int qty = roll_remainder( funnel_charges_per_turn( area_in_mm2,
+                                        avg_mm_per_hour ) * elapsed_turns );
         int c_qty = qty + ( tank->can_reload( water_clean ) ?  tank->ammo_remaining( ) : 0 );
         int cost_to_purify = c_qty * itype_water_purifier->charges_to_use();
 

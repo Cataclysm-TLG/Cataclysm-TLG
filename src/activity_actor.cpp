@@ -1741,8 +1741,8 @@ void read_activity_actor::start( player_activity &act, Character &who )
             }
             if( !plugged_in ) {
                 add_msg_if_player_sees( who,
-                    _( "%1$s can't find a nearby power grid to plug their %2$s into." ),
-                    who.disp_name(), ereader->tname() );
+                                        _( "%1$s can't find a nearby power grid to plug their %2$s into." ),
+                                        who.disp_name(), ereader->tname() );
             }
         }
     }
@@ -2196,15 +2196,15 @@ void read_activity_actor::finish( player_activity &act, Character &who )
         if( using_ereader ) {
             who.add_msg_player_or_npc( m_info,
                                        string_format( _( "You finish reading ebook %s." ),
-                                                      book->type_name() ),
+                                               book->type_name() ),
                                        string_format( _( "<npcname> finishes reading ebook %s." ),
-                                                      book->type_name() ) );
+                                               book->type_name() ) );
         } else {
             who.add_msg_player_or_npc( m_info,
                                        string_format( _( "You finish reading %s." ),
-                                                      book->type_name() ),
+                                               book->type_name() ),
                                        string_format( _( "<npcname> finishes reading %s." ),
-                                                      book->type_name() ) );
+                                               book->type_name() ) );
         }
     }
 
@@ -2218,15 +2218,15 @@ void read_activity_actor::canceled( player_activity &/*act*/, Character &who )
         if( using_ereader ) {
             who.add_msg_player_or_npc( m_info,
                                        string_format( _( "You stop reading ebook %s." ),
-                                                      book->type_name() ),
+                                               book->type_name() ),
                                        string_format( _( "<npcname> stops reading ebook %s." ),
-                                                      book->type_name() ) );
+                                               book->type_name() ) );
         } else {
             who.add_msg_player_or_npc( m_info,
                                        string_format( _( "You stop reading %s." ),
-                                                      book->type_name() ),
+                                               book->type_name() ),
                                        string_format( _( "<npcname> stops reading %s." ),
-                                                      book->type_name() ) );
+                                               book->type_name() ) );
         }
     }
     if( using_ereader && ereader && ereader->type->tool &&
