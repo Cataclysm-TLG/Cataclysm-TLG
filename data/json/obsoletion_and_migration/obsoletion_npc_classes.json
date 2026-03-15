@@ -1,0 +1,16 @@
+[
+  {
+    "type": "npc_class",
+    "id": "NC_BONE_SEER",
+    "name": { "str": "Bone Seer" },
+    "job_description": "Obsolete class from removed Kindred faction content.",
+    "common": false
+  },
+  {
+    "type": "npc_class",
+    "id": "NC_KINDRED_COOPER",
+    "name": { "str": "Rogue Kindred" },
+    "job_description": "Obsolete class from removed Kindred faction content.",
+    "common": false
+  }
+]
