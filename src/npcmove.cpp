@@ -84,6 +84,7 @@
 #include "vehicle.h"
 #include "viewer.h"
 #include "visitable.h"
+#include "weather.h"
 #include "vehicle_selector.h"
 #include "vpart_position.h"
 #include "vpart_range.h"
@@ -1972,6 +1973,7 @@ void npc::execute_action( npc_action action )
 
         case npc_player_activity:
             do_player_activity();
+            complain();
             break;
 
         case npc_undecided:
@@ -5376,6 +5378,8 @@ bool npc::complain()
     static const std::string radiation_string = "radiation";
     static const std::string hunger_string = "hunger";
     static const std::string thirst_string = "thirst";
+    static const std::string too_cold_string = "too_cold";
+    static const std::string too_hot_string = "too_hot";
 
     if( !is_player_ally() || !get_player_view().sees( here, *this ) ) {
         return false;
@@ -5467,6 +5471,24 @@ bool npc::complain()
     if( has_effect( effect_hypovolemia ) ) {
         std::string speech = chat_snippets().snip_lost_blood.translated();
         if( complain_about( hypovolemia_string, 10_minutes, speech ) ) {
+            return true;
+        }
+    }
+
+    // Temperature complaints — cold and hot, every 30 min normally, forced every 10 min when severe
+    const units::temperature torso_temp = get_part_temp_cur( body_part_torso.id() );
+    if( torso_temp <= BODYTEMP_COLD ) {
+        const bool severe = torso_temp <= BODYTEMP_VERY_COLD;
+        const time_duration freq = severe ? 10_minutes : 30_minutes;
+        if( complain_about( too_cold_string, freq, chat_snippets().snip_too_cold.translated(),
+                            severe, sounds::sound_t::order ) ) {
+            return true;
+        }
+    } else if( torso_temp >= BODYTEMP_HOT ) {
+        const bool severe = torso_temp >= BODYTEMP_VERY_HOT;
+        const time_duration freq = severe ? 10_minutes : 30_minutes;
+        if( complain_about( too_hot_string, freq, chat_snippets().snip_too_hot.translated(),
+                            severe, sounds::sound_t::order ) ) {
             return true;
         }
     }
