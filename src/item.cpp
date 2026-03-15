@@ -14618,6 +14618,12 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
     if( !link().t_veh ) {
         vehicle *found_veh = vehicle::find_vehicle( here, link().t_abs_pos );
         if( !found_veh ) {
+            if( last_t_abs_pos_is_oob ) {
+                // Target is outside the reality bubble -- its submap is probably
+                // just unloaded. Skip processing this turn; the cable will
+                // reconnect when the target submap loads back in.
+                return false;
+            }
             return reset_link( true, carrier, -2, true, pos );
         }
         if( debug_mode ) {
@@ -14825,7 +14831,7 @@ int item::charge_linked_batteries( vehicle &linked_veh, int turns_elapsed )
             // Avoid rounding error on full charge
             int received_charges = spent_charges == required_charges
                                    ? wanted_charges
-                                  : static_cast<int>( spent_charges * link().efficiency );
+                                   : static_cast<int>( spent_charges * link().efficiency );
 
             int surplus = linked_veh.charge_battery( here, received_charges, true );
             int actual_received = received_charges - surplus;
