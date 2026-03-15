@@ -384,6 +384,7 @@ static const material_id material_lc_steel( "lc_steel" );
 static const material_id material_mc_steel( "mc_steel" );
 static const material_id material_qt_steel( "qt_steel" );
 static const material_id material_steel( "steel" );
+static const material_id material_water( "water" );
 
 static const morale_type morale_cold( "morale_cold" );
 static const morale_type morale_comfy( "morale_comfy" );
@@ -14041,17 +14042,18 @@ bool Character::in_bath()
 {
     map &here = get_map();
     if( !in_vehicle && here.has_flag( ter_furn_flag::TFLAG_SOAKING_TUB, pos_bub() ) ) {
-        // Requires at least 15 L of liquid in the furniture tile.
+        // Requires at least 40 L of liquid in the furniture tile.
         units::volume water_vol = 0_ml;
         for( const item &it : here.i_at( pos_bub() ) ) {
-            if( it.made_of( phase_id::LIQUID ) ) {
+            // TODO: funny effects for non-water.
+            if( it.made_of( phase_id::LIQUID ) && it.made_of( material_water ) ) {
                 water_vol += it.volume();
             }
         }
         // The bathtub spans two tiles but liquid is stored per-tile, so we only check the
         // tile the character is on.
         // TODO: Water should spread to contiguous tiles, check for non-water fluids, hot water, etc.
-        const units::volume min_vol = units::from_liter( 15 );
+        const units::volume min_vol = units::from_liter( 40 );
         if( water_vol >= min_vol ) {
             return true;
         }
