@@ -31,6 +31,7 @@
 #include "line.h"
 #include "map.h"
 #include "map_iterator.h"
+#include "melee.h"
 #include "messages.h"
 #include "monster.h"
 #include "mtype.h"
@@ -863,7 +864,7 @@ bool melee_actor::call( monster &z ) const
     // Dodge check
 
     const int acc = accuracy >= 0 ? accuracy : z.type->melee_skill;
-    int hitspread = target->deal_melee_attack( &z, dice( acc, 10 ) );
+    int hitspread = target->deal_melee_attack( &z, melee::melee_hit_range( acc ) );
 
     // Pick body part
     bodypart_str_id bp_hit = body_parts.empty() ?
