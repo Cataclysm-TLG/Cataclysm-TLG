@@ -1650,7 +1650,8 @@ conditional_t::func f_is_on_liquid( bool is_npc )
 {
     return [is_npc]( const_dialogue const & d ) {
         map &here = get_map();
-        return !get_map().is_dry( d.const_actor( is_npc )->pos_bub( here ) );
+        return !get_map().is_dry( d.const_actor( is_npc )->pos_bub( here ) ) &&
+               !d.const_actor( is_npc )->in_bath();
     };
 }
 

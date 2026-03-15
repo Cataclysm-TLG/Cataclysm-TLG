@@ -215,6 +215,7 @@ static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_alarm_clock( "alarm_clock" );
 static const efftype_id effect_bandaged( "bandaged" );
 static const efftype_id effect_beartrap( "beartrap" );
+static const efftype_id effect_bile( "bile" );
 static const efftype_id effect_bite( "bite" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_blind( "blind" );
@@ -9531,7 +9532,8 @@ void Character::fall_asleep( const time_duration &duration )
     // Turn off any active e-file devices (tablets, laptops) when falling asleep
     std::vector<item *> active_edevices;
     visit_items( [&active_edevices]( item * it, item * ) -> VisitResponse {
-        if( it->type->can_use( "E_FILE_DEVICE" ) && it->type->transform_into ) {
+        if( it->type->can_use( "E_FILE_DEVICE" ) && it->type->transform_into )
+        {
             active_edevices.push_back( it );
         }
         return VisitResponse::NEXT;
@@ -13977,6 +13979,15 @@ void Character::water_immersion()
                 std::vector<bodypart_id> drenched_vec;
                 for( bodypart_id bp : drenched_parts ) {
                     drenched_vec.push_back( bp );
+                    if( has_effect( effect_corroding, bp ) ) {
+                        remove_effect( effect_corroding, bp );
+                    }
+                    if( has_effect( effect_bile, bp ) ) {
+                        remove_effect( effect_bile, bp );
+                    }
+                    if( has_effect( effect_glowing, bp ) ) {
+                        remove_effect( effect_glowing, bp );
+                    }
                 }
                 // Initialize exposure map
                 std::map<bodypart_id, float> exposure;
@@ -14001,9 +14012,36 @@ void Character::water_immersion()
             }
         }
     }
-    // Soaking in a liquid-filled tub (e.g. bathtub) drenches the character.
-    // Requires at least 15 L of liquid in the furniture tile.
+    if( in_bath() ) {
+        if( has_effect( effect_onfire ) ) {
+            add_msg( _( "The water puts out the flames!" ) );
+            remove_effect( effect_onfire );
+            // Motherfucker riding a horse in the bath.
+            if( is_mounted() ) {
+                monster *mon = mounted_creature.get();
+                if( mon->has_effect( effect_onfire ) ) {
+                    mon->remove_effect( effect_onfire );
+                }
+            }
+        }
+        if( has_effect( effect_corroding ) ) {
+            remove_effect( effect_corroding );
+        }
+        if( has_effect( effect_bile ) ) {
+            remove_effect( effect_bile );
+        }
+        if( has_effect( effect_glowing ) ) {
+            remove_effect( effect_glowing );
+        }
+        drench( 100, get_drenching_body_parts(), false );
+    }
+}
+
+bool Character::in_bath()
+{
+    map &here = get_map();
     if( !in_vehicle && here.has_flag( ter_furn_flag::TFLAG_SOAKING_TUB, pos_bub() ) ) {
+        // Requires at least 15 L of liquid in the furniture tile.
         units::volume water_vol = 0_ml;
         for( const item &it : here.i_at( pos_bub() ) ) {
             if( it.made_of( phase_id::LIQUID ) ) {
@@ -14012,18 +14050,13 @@ void Character::water_immersion()
         }
         // The bathtub spans two tiles but liquid is stored per-tile, so we only check the
         // tile the character is on.
+        // TODO: Water should spread to contiguous tiles, check for non-water fluids, hot water, etc.
         const units::volume min_vol = units::from_liter( 15 );
         if( water_vol >= min_vol ) {
-            drench( 100, get_drenching_body_parts( false ), false );
-            if( calendar::once_every( 1_minutes ) ) {
-                add_msg_if_player( m_good, _( "You soak in the water." ) );
-            }
-        } else {
-            if( calendar::once_every( 1_minutes ) ) {
-                add_msg_if_player( m_info, _( "The tub doesn't have enough water to soak in." ) );
-            }
+            return true;
         }
     }
+    return false;
 }
 
 void Character::pause()

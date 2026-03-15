@@ -2877,7 +2877,8 @@ std::optional<int> iuse::geiger( Character *p, item *it, const tripoint_bub_ms &
 
     auto scan_cost = [&]() -> std::optional<int> {
         p->mod_moves( -100 );
-        if( one_in( 25 ) ) {
+        if( one_in( 25 ) )
+        {
             return 1;
         }
         return std::nullopt;
@@ -2895,9 +2896,9 @@ std::optional<int> iuse::geiger( Character *p, item *it, const tripoint_bub_ms &
             };
 
             const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_highlight(
-                here, _( "Scan whom?" ),
-                _( "There is no one to scan nearby." ), f, false
-            );
+                        here, _( "Scan whom?" ),
+                        _( "There is no one to scan nearby." ), f, false
+                    );
 
             if( !pnt_ ) {
                 return std::nullopt;
@@ -2907,21 +2908,21 @@ std::optional<int> iuse::geiger( Character *p, item *it, const tripoint_bub_ms &
 
             if( pnt == p->pos_bub() ) {
                 p->add_msg_if_player( m_info,
-                    _( "Your radiation level: %d mSv (%d mSv from items)" ),
-                    p->get_rad(),
-                    static_cast<int>( p->get_leak_level() )
-                );
+                                      _( "Your radiation level: %d mSv (%d mSv from items)" ),
+                                      p->get_rad(),
+                                      static_cast<int>( p->get_leak_level() )
+                                    );
                 return scan_cost();
             }
 
             if( npc *const person_ = creatures.creature_at<npc>( pnt ) ) {
                 npc &person = *person_;
                 p->add_msg_if_player( m_info,
-                    _( "%s's radiation level: %d mSv (%d mSv from items)" ),
-                    person.get_name(),
-                    person.get_rad(),
-                    static_cast<int>( person.get_leak_level() )
-                );
+                                      _( "%s's radiation level: %d mSv (%d mSv from items)" ),
+                                      person.get_name(),
+                                      person.get_rad(),
+                                      static_cast<int>( person.get_leak_level() )
+                                    );
                 return scan_cost();
             }
 
@@ -2930,9 +2931,9 @@ std::optional<int> iuse::geiger( Character *p, item *it, const tripoint_bub_ms &
 
         case 1:
             p->add_msg_if_player( m_info,
-                _( "The ground's radiation level: %d mSv/h" ),
-                here.get_radiation( p->pos_bub() )
-            );
+                                  _( "The ground's radiation level: %d mSv/h" ),
+                                  here.get_radiation( p->pos_bub() )
+                                );
             return scan_cost();
 
         case 2:

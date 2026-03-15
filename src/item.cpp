@@ -14399,7 +14399,7 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
             if( carrier != nullptr ) {
                 if( carrier->is_npc() ) {
                     add_msg_if_player_sees( *carrier, m_bad, _( "%s's %s breaks loose!" ),
-                                           carrier->disp_name( true, true ), cable_name );
+                                            carrier->disp_name( true, true ), cable_name );
                 } else {
                     carrier->add_msg_if_player( m_bad, _( "Your %s breaks loose!" ), cable_name );
                 }
