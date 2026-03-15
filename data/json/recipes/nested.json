@@ -1696,14 +1696,7 @@
     "subcategory": "CSC_*_NESTED",
     "name": "auxiliary weapons",
     "description": "Recipes related to modifying secondary weapons to attach to a wider variety of guns and crossbows.",
-    "nested_category_data": [
-      "m26_mass_mod",
-      "knife_combat",
-      "m203_mod",
-      "m320_mod_mod",
-      "masterkey_mod",
-      "u_shotgun_mod"
-    ]
+    "nested_category_data": [ "m26_mass_mod", "knife_combat", "m203_mod", "m320_mod_mod", "masterkey_mod", "u_shotgun_mod" ]
   },
   {
     "id": "nested_modified_gunmods_sights",
@@ -2371,11 +2364,6 @@
     "subcategory": "CSC_*_NESTED",
     "name": "XL makeshift ballistic plates",
     "description": "Recipes related to constructing oversized makeshift ESAPI plates.",
-    "nested_category_data": [
-      "scrap_esapi_plate_xl",
-      "steel_esapi_plate_xl",
-      "wood_esapi_plate_xl",
-      "paper_esapi_plate_xl"
-    ]
+    "nested_category_data": [ "scrap_esapi_plate_xl", "steel_esapi_plate_xl", "wood_esapi_plate_xl", "paper_esapi_plate_xl" ]
   }
 ]
