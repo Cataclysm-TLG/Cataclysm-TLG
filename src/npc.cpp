@@ -1461,6 +1461,11 @@ void npc::do_npc_read( bool ebook )
     if( ebook ) {
         if( !ereader->has_flag( flag_ALLOWS_REMOTE_USE ) ) {
             item the_book = *book.get_item();
+            npc_character->wield( *ereader );
+            ereader = npc_character->get_wielded_item();
+            if( !ereader ) {
+                deactivate();
+                return;
             if( !npc_character->is_wielding( *ereader ) ) {
                 npc_character->wield( *ereader );
                 ereader = npc_character->get_wielded_item();
