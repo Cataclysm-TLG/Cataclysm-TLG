@@ -1312,7 +1312,7 @@
       [ "maple_sap", 50 ],
       [ "syrup", 100 ],
       [ "maple_candy", 10 ],
-      [ "flour", 30 ],
+      { "prob": 30, "group": "flour_bag_paper_powder_1_70" },
       [ "milk_powder", 30 ],
       [ "powder_eggs", 10 ],
       { "group": "egg_bird_unfert_carton_egg_10" },
