@@ -1439,17 +1439,17 @@ void Character::modify_morale( item &food, const int nutr )
         const bool apex_predator = has_flag( json_flag_PRED4 );
         if( apex_predator ) {
             // Largest bonus, balances out to around +5 or +10. Some organs may still be negative.
-            add_morale( morale_meatarian, 20, 10, 4_hours, 3_hours );
+            add_morale( morale_meatarian, 20, 10, 4_hours, 3_hours, true );
             add_msg_if_player( m_good,
                                _( "As you tear into the raw flesh, you feel satisfied with your meal." ) );
         } else if( predator || hunter ) {
             // Should approximately balance the fun to 0 for normal meat.
-            add_morale( morale_meatarian, 15, 5, 3_hours, 2_hours );
+            add_morale( morale_meatarian, 15, 5, 3_hours, 2_hours, true );
             add_msg_if_player( m_good,
                                _( "Raw flesh doesn't taste all that bad, actually." ) );
         } else if( carnivore || culler ) {
             // Only a small bonus (+5), still negative fun.
-            add_morale( morale_meatarian, 5, 0, 2_hours, 1_hours );
+            add_morale( morale_meatarian, 5, 0, 2_hours, 1_hours, true );
             add_msg_if_player( m_bad,
                                _( "This doesn't taste very good, but meat is meat." ) );
         } else if( has_trait( trait_SQUEAMISH ) ) {
@@ -1462,12 +1462,12 @@ void Character::modify_morale( item &food, const int nutr )
         const morale_type allergy = allergy_type( food );
         if( allergy != morale_type::NULL_ID() ) {
             add_msg_if_player( m_bad, _( "Your stomach begins gurgling and you feel bloated and ill." ) );
-            add_morale( allergy, -75, -400, 2_hours, 1_hours );
+            add_morale( allergy, -35, -75, 2_hours, 1_hours, true );
         }
         if( food.has_flag( flag_ALLERGEN_JUNK ) ) {
             if( has_trait( trait_PROJUNK ) ) {
                 add_msg_if_player( m_good, _( "Mmm, junk food." ) );
-                add_morale( morale_sweettooth, 5, 30, 2_hours, 1_hours );
+                add_morale( morale_sweettooth, 5, 25, 2_hours, 1_hours, true );
             }
             if( has_trait( trait_PROJUNK2 ) ) {
                 if( !one_in( 100 ) ) {
@@ -1475,13 +1475,13 @@ void Character::modify_morale( item &food, const int nutr )
                 } else {
                     add_msg_if_player( m_good, _( "Snack attack!" ) );
                 }
-                add_morale( morale_sweettooth, 10, 50, 2_hours, 1_hours );
+                add_morale( morale_sweettooth, 10, 30, 2_hours, 1_hours, true );
             }
             // Carnivores CAN eat junk food, but they won't like it much.
             // Pizza-scraping happens in consume_effects.
             if( has_trait( trait_CARNIVORE ) && !food.has_flag( flag_CARNIVORE_OK ) ) {
                 add_msg_if_player( m_bad, _( "Your stomach begins gurgling and you feel bloated and ill." ) );
-                add_morale( morale_no_digest, -25, -125, 2_hours, 1_hours );
+                add_morale( morale_no_digest, -30, -60, 2_hours, 1_hours, true );
             }
         }
     }
@@ -1490,7 +1490,7 @@ void Character::modify_morale( item &food, const int nutr )
     if( !food.rotten() && chew && has_trait( trait_SAPROPHAGE ) ) {
         // It's OK to *drink* things that haven't rotted.  Alternative is to ban water.  D:
         add_msg_if_player( m_bad, _( "Your stomach begins gurgling and you feel bloated and ill." ) );
-        add_morale( morale_no_digest, -75, -400, 2_hours, 1_hours );
+        add_morale( morale_no_digest, -50, -100, 2_hours, 1_hours, true );
     }
     if( food.has_flag( flag_URSINE_HONEY ) && ( !crossed_threshold() ||
             has_trait( trait_THRESH_URSINE ) ) &&
@@ -1501,7 +1501,7 @@ void Character::modify_morale( item &food, const int nutr )
         } else {
             add_msg_if_player( m_good, _( "You feast upon the sweet honey." ) );
         }
-        add_morale( morale_honey, honey_fun, 100, 4_hours, 3_hours );
+        add_morale( morale_honey, honey_fun, 100, 4_hours, 3_hours, true );
     }
     if( nausea_chance > 5 ) {
         if( has_trait( trait_PICKYEATER ) ) {
