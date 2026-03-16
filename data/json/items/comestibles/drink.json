@@ -1291,7 +1291,7 @@
     "description": "Water with sugar or honey added.  Tastes okay.",
     "price": "95 cent",
     "price_postapoc": "10 cent",
-    "material": [ { "type": "water", "portion": 833 }, { "type": "junk", "portion": 167 } ],
+    "material": [ { "type": "water", "portion": 833 }, { "type": "sugar", "portion": 167 } ],
     "volume": "250 ml",
     "charges": 1,
     "phase": "liquid",
