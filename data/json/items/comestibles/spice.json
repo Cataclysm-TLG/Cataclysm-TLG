@@ -131,7 +131,7 @@
     "material": [ "sugar" ],
     "volume": "6 ml",
     "calories": 19,
-    "vitamins": [ [ "junkfood_allergen", 1 ] ],
+    "vitamins": [ [ "junk_allergen", 1 ] ],
     "flags": [ "NO_TEMP", "NUTRIENT_OVERRIDE", "WATER_DISSOLVE" ]
   },
   {
