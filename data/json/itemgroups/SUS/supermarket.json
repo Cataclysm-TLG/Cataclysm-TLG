@@ -238,7 +238,7 @@
     "id": "commercial_breakfast_mixes",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "flour", 3 ], [ "chem_baking_soda", 1 ], [ "syrup", 1 ] ]
+    "items": [ { "prob": 3, "group": "flour_bag_paper" }, [ "chem_baking_soda", 1 ], [ "syrup", 1 ] ]
   },
   {
     "id": "SUS_shelf_commercial_breakfast_mixes",
