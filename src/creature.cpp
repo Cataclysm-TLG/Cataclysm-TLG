@@ -595,6 +595,12 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         here.sees( pos, critter_pos, 2 ) ) {
         return true;
     }
+    // Creatures underwater beneath a solid surface (walkway, ice) are hidden
+    // from non-underwater observers. Underwater observers can still see each other.
+    if( !is_likely_underwater( here ) && critter.is_underwater() &&
+        here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, critter_pos ) ) {
+        return false;
+    }
 
     // If we cannot see without any of the penalties below, bail now.
     if( !sees( here, critter_pos, critter.is_avatar() ) ) {
