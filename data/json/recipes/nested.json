@@ -2188,25 +2188,6 @@
     "nested_category_data": [ "scrap_aluminum_melted_foil", "scrap_aluminum_assorted_scrap" ]
   },
   {
-    "id": "nested_aketon_canvas",
-    "type": "nested_category",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
-    "name": "canvas aketons",
-    "description": "Recipes related to canvas cloth armor meant to be worn under other armor.",
-    "skill_used": "tailor",
-    "nested_category_data": [
-      "aketon_canvas",
-      "xl_aketon_canvas",
-      "xs_aketon_canvas",
-      "aketon_canvas_vest",
-      "xl_aketon_canvas_vest",
-      "xs_aketon_canvas_vest"
-    ],
-    "difficulty": 3
-  },
-  {
     "id": "nested_aketon_wool",
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
