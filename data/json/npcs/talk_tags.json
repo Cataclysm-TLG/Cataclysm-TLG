@@ -295,6 +295,40 @@
   },
   {
     "type": "snippet",
+    "category": "<too_cold>",
+    "//": "NPC complaint when dangerously cold",
+    "text": [
+      "I'm freezing out here.",
+      "It's <swear> freezing!",
+      "I can't feel my fingers.",
+      "We need to find somewhere warm.",
+      "I'm so cold I can barely think straight.",
+      "Any chance we could find a fire or something?",
+      "I'm going to get hypothermia at this rate.",
+      "My teeth are chattering.",
+      "It's too cold, we need shelter.",
+      "I'm <very> cold, <name_g>."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "<too_hot>",
+    "//": "NPC complaint when dangerously hot",
+    "text": [
+      "It's scorching out here.",
+      "I'm roasting alive.",
+      "Do you have any water?  I'm overheating.",
+      "We need to find some shade.",
+      "I'm going to pass out from the heat.",
+      "It's way too hot to be moving around.",
+      "I feel like I'm melting.",
+      "My head is pounding from the heat.",
+      "I'm <swear> burning up.",
+      "I'm <very> hot, <name_g>."
+    ]
+  },
+  {
+    "type": "snippet",
     "category": "<swear!>",
     "//": "Swears and curses used to emphasize unpleasant events",
     "text": [

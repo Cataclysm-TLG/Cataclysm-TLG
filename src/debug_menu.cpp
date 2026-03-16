@@ -2390,7 +2390,7 @@ static void character_edit_menu()
         D_DESC, D_SKILLS, D_THEORY, D_PROF, D_STATS, D_SPELLS, D_ITEMS, D_DELETE_ITEMS, D_DROP_ITEMS, D_ITEM_WORN,
         D_HP, D_STAMINA, D_MORALE, D_PAIN, D_NEEDS, D_NORMALIZE_BODY, D_FITNESS, D_STATUS, D_MISSION_ADD, D_MISSION_EDIT,
         D_TELE, D_MUTATE, D_BIONICS, D_CLASS, D_ATTITUDE, D_OPINION, D_PERSONALITY, D_ADD_EFFECT, D_ASTHMA, D_PRINT_VARS,
-        D_WRITE_EOCS, D_KILL_XP, D_CHECK_TEMP, D_EDIT_VARS, D_FACTION, D_ALPHA_EOC, D_BETA_EOC
+        D_WRITE_EOCS, D_KILL_XP, D_CHECK_TEMP, D_SET_TEMP, D_EDIT_VARS, D_FACTION, D_ALPHA_EOC, D_BETA_EOC
     };
     nmenu.addentry( D_DESC, true, 'D', "%s",
                     _( "Edit description - name, age, height or blood type" ) );
@@ -2418,6 +2418,7 @@ static void character_edit_menu()
     nmenu.addentry( D_TELE, true, 'e', "%s", _( "Teleport" ) );
     nmenu.addentry( D_ADD_EFFECT, true, 'E', "%s", _( "Add an effect" ) );
     nmenu.addentry( D_CHECK_TEMP, true, 'U', "%s", _( "Print temperature" ) );
+    nmenu.addentry( D_SET_TEMP, true, 'X', "%s", _( "Set body temperature (all parts)" ) );
     nmenu.addentry( D_ASTHMA, true, 'k', "%s", _( "Cause asthma attack" ) );
     nmenu.addentry( D_MISSION_EDIT, true, 'M', "%s", _( "Edit missions (WARNING: Unstable!)" ) );
     nmenu.addentry( D_PRINT_VARS, true, 'V', "%s", _( "Print vars to file" ) );
@@ -2704,6 +2705,43 @@ static void character_edit_menu()
                 add_msg( string_format( "%s: temperature: %f K, temperature conv: %f K, wetness: %d", bp->name,
                                         units::to_kelvin( you.get_part_temp_cur( bp ) ), units::to_kelvin( you.get_part_temp_conv( bp ) ),
                                         you.get_part_wetness( bp ) ) );
+            }
+            break;
+        }
+        case D_SET_TEMP: {
+            std::string input = string_input_popup()
+                                .title( _( "Set body temperature (e.g. 315K or 40C)" ) )
+                                .width( 20 )
+                                .query_string();
+            if( !input.empty() ) {
+                units::temperature new_temp;
+                bool valid = false;
+                if( input.back() == 'K' || input.back() == 'k' ) {
+                    float k = std::stof( input );
+                    new_temp = units::from_kelvin( k );
+                    valid = true;
+                } else if( input.back() == 'C' || input.back() == 'c' ) {
+                    float c = std::stof( input );
+                    new_temp = units::from_celsius( c );
+                    valid = true;
+                } else {
+                    // Assume Kelvin if no suffix
+                    try {
+                        float k = std::stof( input );
+                        new_temp = units::from_kelvin( k );
+                        valid = true;
+                    } catch( ... ) {
+                        popup( _( "Invalid temperature. Use e.g. 315K or 40C." ) );
+                    }
+                }
+                if( valid ) {
+                    for( const bodypart_id &bp : you.get_all_body_parts() ) {
+                        you.set_part_temp_cur( bp, new_temp );
+                        you.set_part_temp_conv( bp, new_temp );
+                    }
+                    add_msg( _( "Set all body part temperatures to %.2f K (%.2f C)." ),
+                             units::to_kelvin( new_temp ), units::to_celsius( new_temp ) );
+                }
             }
             break;
         }
