@@ -1466,6 +1466,9 @@ void npc::do_npc_read( bool ebook )
             if( !ereader ) {
                 deactivate();
                 return;
+            if( !npc_character->is_wielding( *ereader ) ) {
+                npc_character->wield( *ereader );
+                ereader = npc_character->get_wielded_item();
             }
             item *newit = ereader->get_item_with( [&]( const item & it ) {
                 return it.typeId() == the_book.typeId();
