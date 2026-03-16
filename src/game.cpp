@@ -5227,14 +5227,14 @@ void game::use_computer( const tripoint_bub_ms &p )
         }
     }
     if( u.has_flag( json_flag_TEMPORARY_SHAPESHIFT_NO_HANDS ) ) {
-        add_msg( m_info, _( "Without hands you, can't use a computer." ) );
+        add_msg( m_info, _( "Without hands, you can't use a computer." ) );
         return;
     }
     if( u.has_effect( effect_incorporeal ) ) {
         add_msg( m_info, _( "You lack the substance to use the computer." ) );
         return;
     }
-    if( u.has_flag( json_flag_CANT_USE_COMPUTERS ) ) {
+    if( u.has_flag( json_flag_CANNOT_USE_COMPUTERS ) ) {
         add_msg( m_info, _( "You don't have any idea how to use this thing." ) );
         return;
     }
