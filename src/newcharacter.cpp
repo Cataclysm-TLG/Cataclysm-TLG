@@ -61,6 +61,8 @@
 #include "string_formatter.h"
 #include "string_input_popup.h"
 #include "text_snippets.h"
+#include "trait_group.h"
+#include "translation.h"
 #include "translations.h"
 #include "type_id.h"
 #include "ui.h"
@@ -79,6 +81,9 @@ static const flag_id json_flag_no_auto_equip( "no_auto_equip" );
 static const json_character_flag json_flag_BIONIC_TOGGLED( "BIONIC_TOGGLED" );
 
 static const matype_id style_none( "style_none" );
+
+static const trait_group::Trait_group_tag
+Trait_group_NPC_starting_traits( "NPC_starting_traits" );
 
 static const trait_id trait_SMELLY( "SMELLY" );
 static const trait_id trait_WEAKSCENT( "WEAKSCENT" );
@@ -594,6 +599,11 @@ void Character::randomize( const bool random_scenario, bool play_now )
     reset_cardio_acc();
 
     if( is_npc() ) {
+        for( const trait_and_var &cur : trait_group::traits_from( Trait_group_NPC_starting_traits ) ) {
+            if( !has_conflicting_trait( cur.trait ) ) {
+                set_mutation( cur.trait, cur.trait->variant( cur.variant ) );
+            }
+        }
         as_npc()->randomize_personality();
         as_npc()->generate_personality_traits();
         initialize();
