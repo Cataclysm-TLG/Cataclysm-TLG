@@ -2324,5 +2324,15 @@
     "type": "snippet",
     "category": "<ally_rule_seek_shelter_false_text>",
     "text": "<mypronoun> will follow you regardless of temperature."
+  },
+  {
+    "type": "snippet",
+    "category": "<ally_rule_use_climate_control_true_text>",
+    "text": "<mypronoun> will use fans, vehicle climate controls, and water to manage temperature."
+  },
+  {
+    "type": "snippet",
+    "category": "<ally_rule_use_climate_control_false_text>",
+    "text": "<mypronoun> will not use climate control devices."
   }
 ]

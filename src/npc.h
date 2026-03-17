@@ -332,7 +332,8 @@ enum class ally_rule : int {
     follow_distance_2 = 32768,
     lock_doors = 65536,
     avoid_locks = 131072,
-    seek_shelter = 262144
+    seek_shelter = 262144,
+    use_climate_control = 524288
 };
 
 struct ally_rule_data {
@@ -473,6 +474,13 @@ const std::unordered_map<std::string, ally_rule_data> ally_rule_strs = { {
                 ally_rule::seek_shelter,
                 "<ally_rule_seek_shelter_true_text>",
                 "<ally_rule_seek_shelter_false_text>"
+            }
+        },
+        {
+            "use_climate_control", {
+                ally_rule::use_climate_control,
+                "<ally_rule_use_climate_control_true_text>",
+                "<ally_rule_use_climate_control_false_text>"
             }
         }
     }
