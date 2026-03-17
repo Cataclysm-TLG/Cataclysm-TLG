@@ -3409,6 +3409,8 @@ void npc::npc_update_body()
     if( calendar::once_every( 10_seconds ) ) {
         update_body( last_updated, calendar::turn );
         last_updated = calendar::turn;
+        update_bodytemp();
+        update_body_wetness( *get_weather().weather_precise );
     }
 }
 

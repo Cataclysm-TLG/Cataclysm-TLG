@@ -2631,6 +2631,10 @@ npc_action npc::address_needs( float danger )
                                 true, sounds::sound_t::order );
             }
         }
+        if( rules.has_flag( ally_rule::use_climate_control ) &&
+            try_use_climate_control_devices() ) {
+            return npc_noop;
+        }
     }
 
     const auto could_sleep = [&]() {
@@ -5846,6 +5850,207 @@ bool npc::seek_safe_temperature()
         }
     }
     return false;
+}
+
+bool npc::try_use_climate_control_devices()
+{
+    const units::temperature torso_temp = get_part_temp_cur( body_part_torso.id() );
+    const bool is_hot = torso_temp >= BODYTEMP_HOT;
+    const bool is_cold = torso_temp <= BODYTEMP_COLD;
+    if( !is_hot && !is_cold ) {
+        return false;
+    }
+
+    map &here = get_map();
+    bool did_something = false;
+
+    // --- Vehicle climate control ---
+    if( in_vehicle ) {
+        const optional_vpart_position ovp = here.veh_at( pos_bub() );
+        if( ovp ) {
+            vehicle &veh = ovp->vehicle();
+
+            // Close any open vehicle doors to trap heat/cool air
+            for( const vpart_reference &vpr : veh.get_avail_parts( VPFLAG_OPENABLE ) ) {
+                if( vpr.part().open ) {
+                    const int part_idx = veh.index_of_part( &vpr.part() );
+                    if( part_idx >= 0 && veh.can_close( part_idx, *this ) ) {
+                        complain_about( "close_veh_door_climate", 5_minutes,
+                                        _( "I'm closing the vehicle doors to regulate the temperature." ),
+                                        true, sounds::sound_t::order );
+                        veh.close( here, part_idx );
+                        move_pause();
+                        return true;
+                    }
+                }
+            }
+
+            // Enable/disable climate control parts
+            if( is_hot ) {
+                const auto cooler_parts = veh.get_avail_parts( "COOLER" );
+                for( const vpart_reference &vpr : cooler_parts ) {
+                    if( !vpr.part().enabled && veh.can_enable( here, vpr.part() ) ) {
+                        complain_about( "enable_veh_cooler", 5_minutes,
+                                        string_format( _( "Turning on the %s to cool down." ),
+                                                       vpr.part().name() ),
+                                        true, sounds::sound_t::order );
+                        vpr.part().enabled = true;
+                        // Disable space heater if it was on
+                        for( const vpart_reference &hp : veh.get_avail_parts( "SPACE_HEATER" ) ) {
+                            hp.part().enabled = false;
+                        }
+                        move_pause();
+                        return true;
+                    }
+                }
+            } else if( is_cold ) {
+                const auto heater_parts = veh.get_avail_parts( "SPACE_HEATER" );
+                for( const vpart_reference &vpr : heater_parts ) {
+                    if( !vpr.part().enabled && veh.can_enable( here, vpr.part() ) ) {
+                        complain_about( "enable_veh_heater", 5_minutes,
+                                        string_format( _( "Turning on the %s to warm up." ),
+                                                       vpr.part().name() ),
+                                        true, sounds::sound_t::order );
+                        vpr.part().enabled = true;
+                        // Disable cooler if it was on
+                        for( const vpart_reference &cp : veh.get_avail_parts( "COOLER" ) ) {
+                            cp.part().enabled = false;
+                        }
+                        move_pause();
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    // --- Fan use when hot ---
+    if( is_hot && !g->is_sheltered( pos_bub() ) ) {
+        static const quality_id qual_WINNOW( "WINNOW" );
+        const int fan_level = max_quality( qual_WINNOW );
+        if( fan_level > 0 ) {
+            // Use real wind cooling mechanic: fanning creates air movement which reduces apparent temperature
+            // Fan wind speed: quality 1 ≈ 4.5 mph (2 m/s), quality 2 ≈ 9 mph (4 m/s)
+            const double fan_wind_mph = fan_level * 4.5;
+            weather_manager &weather_man = get_weather();
+            const units::temperature local_temp = weather_man.get_temperature( pos_bub() );
+            const int local_humidity = get_local_humidity( weather_man.weather_precise->humidity,
+                                       weather_man.weather_id, false );
+            // Windchill delta from adding fan airflow; use same "bugged" scaling as update_bodytemp()
+            const units::temperature_delta windchill = get_local_windchill( local_temp,
+                    local_humidity, fan_wind_mph );
+            const units::temperature_delta fan_cooling = units::from_celsius_delta(
+                        units::to_fahrenheit_delta( windchill ) * 100.0 / 500.0 );
+            if( fan_cooling < 0_C_delta ) {
+                for( const bodypart_id &bp : get_all_body_parts() ) {
+                    mod_part_temp_cur( bp, fan_cooling );
+                }
+                complain_about( "fan_self", 3_minutes,
+                                _( "I'm fanning myself to cool down." ),
+                                true, sounds::sound_t::order );
+                move_pause();
+                return true;
+            }
+        }
+    }
+
+    // --- Drink water when hot to stay hydrated ---
+    if( is_hot ) {
+        const std::vector<item *> inv_food = cache_get_items_with( "is_food", &item::is_food );
+        for( item *it : inv_food ) {
+            if( it->get_comestible() && it->get_comestible()->quench > 0 ) {
+                const int saved_thirst = get_thirst();
+                if( saved_thirst < NPC_THIRST_CONSUME ) {
+                    // Boost thirst temporarily so we'll actually drink
+                    set_thirst( NPC_THIRST_CONSUME + 1 );
+                }
+                if( consume( item_location( *this, it ) ) != trinary::NONE ) {
+                    if( get_thirst() > saved_thirst ) {
+                        set_thirst( saved_thirst );
+                    }
+                    complain_about( "drink_heat", 10_minutes,
+                                    _( "Drinking something to stay hydrated in this heat." ),
+                                    true, sounds::sound_t::order );
+                    did_something = true;
+                    return true;
+                }
+                set_thirst( saved_thirst );
+                break;
+            }
+        }
+    }
+
+    // --- Bathtub drenching when hot ---
+    if( is_hot && !in_vehicle ) {
+        static constexpr int bathtub_search_radius = 15;
+        static const material_id material_water( "water" );
+        static const units::volume min_bath_vol = units::from_liter( 40 );
+
+        const auto has_enough_bath_water = [&]( const tripoint_bub_ms & pt ) -> bool {
+            units::volume water_vol = 0_ml;
+            for( const item &it : here.i_at( pt ) ) {
+                if( it.made_of( phase_id::LIQUID ) && it.made_of( material_water ) ) {
+                    water_vol += it.volume();
+                }
+            }
+            return water_vol >= min_bath_vol;
+        };
+
+        // If already in a soaking tub with enough water, stay and soak
+        // (water_immersion() in pause() handles the actual drenching automatically)
+        if( here.has_flag( ter_furn_flag::TFLAG_SOAKING_TUB, pos_bub() ) &&
+            has_enough_bath_water( pos_bub() ) ) {
+            complain_about( "bathtub_soak", 5_minutes,
+                            _( "I'm cooling off in the tub.  Tell me to follow when you need me." ),
+                            true, sounds::sound_t::order );
+            move_pause();
+            return true;
+        }
+
+        // Search for a bathtub with enough water nearby
+        creature_tracker &creatures = get_creature_tracker();
+        tripoint_bub_ms best_tub = pos_bub();
+        int best_dist = bathtub_search_radius + 1;
+        for( const tripoint_bub_ms &pt : here.points_in_radius( pos_bub(), bathtub_search_radius ) ) {
+            if( !here.has_flag( ter_furn_flag::TFLAG_SOAKING_TUB, pt ) ) {
+                continue;
+            }
+            // Check if tile is occupied by another creature
+            if( creatures.creature_at( pt ) ) {
+                continue;
+            }
+            // Check for enough water
+            units::volume water_vol = 0_ml;
+            for( const item &it : here.i_at( pt ) ) {
+                if( it.made_of( phase_id::LIQUID ) && it.made_of( material_water ) ) {
+                    water_vol += it.volume();
+                }
+            }
+            if( water_vol < min_bath_vol ) {
+                continue;
+            }
+            const int dist = rl_dist( pos_bub(), pt );
+            if( dist < best_dist ) {
+                best_dist = dist;
+                best_tub = pt;
+            }
+        }
+
+        if( best_dist <= bathtub_search_radius ) {
+            complain_about( "seek_bathtub", 2_minutes,
+                            _( "I need to cool off.  I'm heading for that bathtub." ),
+                            true, sounds::sound_t::order );
+            if( pos_bub() != best_tub ) {
+                update_path( best_tub );
+                if( !path.empty() ) {
+                    move_to_next();
+                    return true;
+                }
+            }
+        }
+    }
+
+    return did_something;
 }
 
 void npc::set_movement_mode( const move_mode_id &new_mode )

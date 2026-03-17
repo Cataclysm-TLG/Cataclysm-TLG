@@ -335,16 +335,6 @@
         },
         {
           "concatenate": [
-            { "npc_override": "use_climate_control", "yes": "  OVERRIDE: ", "no": "  " },
-            {
-              "npc_rule": "use_climate_control",
-              "yes": "<ally_rule_use_climate_control_true_text>",
-              "no": "<ally_rule_use_climate_control_false_text>"
-            }
-          ]
-        },
-        {
-          "concatenate": [
             { "npc_override": "use_guns", "yes": "  OVERRIDE: ", "no": "  " },
             {
               "npc_rule": "use_guns",
@@ -424,15 +414,6 @@
         },
         "topic": "TALK_COMBAT_COMMANDS",
         "effect": { "toggle_npc_rule": "seek_shelter" }
-      },
-      {
-        "truefalsetext": {
-          "condition": { "npc_rule": "use_climate_control" },
-          "true": "Don't use fans or vehicle climate controls.",
-          "false": "Use fans and vehicle climate controls when needed."
-        },
-        "topic": "TALK_COMBAT_COMMANDS",
-        "effect": { "toggle_npc_rule": "use_climate_control" }
       },
       {
         "truefalsetext": {
@@ -861,6 +842,16 @@
               "no": "<ally_rule_forbid_engage_false_text>"
             }
           ]
+        },
+        {
+          "concatenate": [
+            { "npc_override": "use_climate_control", "yes": "  OVERRIDE: ", "no": "  " },
+            {
+              "npc_rule": "use_climate_control",
+              "yes": "<ally_rule_use_climate_control_true_text>",
+              "no": "<ally_rule_use_climate_control_false_text>"
+            }
+          ]
         }
       ]
     },
@@ -945,6 +936,15 @@
         },
         "topic": "TALK_MISC_RULES",
         "effect": { "toggle_npc_rule": "ignore_noise" }
+      },
+      {
+        "truefalsetext": {
+          "condition": { "npc_rule": "use_climate_control" },
+          "true": "Don't use fans or vehicle climate controls.",
+          "false": "Use fans and vehicle climate controls when needed."
+        },
+        "topic": "TALK_MISC_RULES",
+        "effect": { "toggle_npc_rule": "use_climate_control" }
       },
       { "text": "Set up pickup rules.", "topic": "TALK_MISC_RULES", "effect": "set_npc_pickup" },
       { "text": "Clear all overrides.", "topic": "TALK_MISC_RULES", "effect": "clear_overrides" },

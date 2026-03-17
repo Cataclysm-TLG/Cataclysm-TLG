@@ -1212,5 +1212,40 @@
     "to_hit": -1,
     "melee_damage": { "cut": 12 },
     "weapon_category": [ "SHIVS" ]
+  },
+  {
+    "id": "fan_hand_makeshift",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "name": { "str": "makeshift hand fan" },
+    "description": "A small fan made from folded paper and sticks, bound together with glue.  Useful for fanning yourself on a hot day.",
+    "symbol": ",",
+    "color": "white",
+    "material": [ "paper", "wood" ],
+    "weight": "60 g",
+    "volume": "250 ml",
+    "price": "0 cent",
+    "price_postapoc": "5 cent",
+    "qualities": [ [ "WINNOW", 1 ] ],
+    "flags": [ "FLAMMABLE" ],
+    "looks_like": "paper_box"
+  },
+  {
+    "id": "fan_punkah_makeshift",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "name": { "str": "handheld punkah" },
+    "description": "A large handheld fan made from a long pole with paper or feathers attached.  Moves a great deal of air when waved vigorously.",
+    "symbol": "/",
+    "color": "brown",
+    "material": [ "wood", "paper" ],
+    "weight": "400 g",
+    "volume": "2 L",
+    "price": "0 cent",
+    "price_postapoc": "25 cent",
+    "qualities": [ [ "WINNOW", 2 ] ],
+    "flags": [ "FLAMMABLE" ],
+    "to_hit": 2,
+    "looks_like": "walking_stick"
   }
 ]
