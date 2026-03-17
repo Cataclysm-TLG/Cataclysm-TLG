@@ -2314,5 +2314,15 @@
     "type": "snippet",
     "category": "<ally_rule_forbid_engage_false_text>",
     "text": "<mypronoun> will follow normal engagement rules."
+  },
+  {
+    "type": "snippet",
+    "category": "<ally_rule_seek_shelter_true_text>",
+    "text": "<mypronoun> will seek shelter and stay there when dangerously cold or hot."
+  },
+  {
+    "type": "snippet",
+    "category": "<ally_rule_seek_shelter_false_text>",
+    "text": "<mypronoun> will follow you regardless of temperature."
   }
 ]
