@@ -86,6 +86,7 @@
 #include "visitable.h"
 #include "weather.h"
 #include "vehicle_selector.h"
+#include "weather.h"
 #include "vpart_position.h"
 #include "vpart_range.h"
 
@@ -2600,6 +2601,15 @@ npc_action npc::address_needs( float danger )
 
     if( one_in( 3 ) && adjust_worn() ) {
         return npc_noop;
+    }
+
+    if( is_player_ally() && one_in( 3 ) ) {
+        const units::temperature torso_temp = get_part_temp_cur( body_part_torso.id() );
+        if( torso_temp <= BODYTEMP_COLD && try_wear_warmer_clothing() ) {
+            return npc_noop;
+        } else if( torso_temp >= BODYTEMP_HOT && try_remove_warm_clothing() ) {
+            return npc_noop;
+        }
     }
 
     const auto could_sleep = [&]() {
@@ -5585,6 +5595,81 @@ bool outfit::adjust_worn( npc &guy )
                 return true;
             }
         }
+    }
+    return false;
+}
+
+bool npc::try_wear_warmer_clothing()
+{
+    // Collect unworn wearable items with warmth from inventory
+    std::vector<item *> candidates = items_with( [this]( const item & it ) {
+        return it.is_armor() && !is_worn( it ) && it.get_warmth() > 0;
+    } );
+    if( candidates.empty() ) {
+        complain_about( "too_cold_no_clothes", 5_minutes,
+                        _( "I'm freezing and I don't have anything warmer to wear!" ) );
+        return false;
+    }
+    // Try the warmest first
+    std::stable_sort( candidates.begin(), candidates.end(), []( const item * a, const item * b ) {
+        return a->get_warmth() > b->get_warmth();
+    } );
+    for( item *it : candidates ) {
+        item_location loc( *this, it );
+        if( can_wear( *it ).success() && wear( loc, true ) ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool npc::try_remove_warm_clothing()
+{
+    // Minimum warmth value worth removing when overheating
+    static constexpr int min_warmth_to_remove = 10;
+
+    // Critical items that should never be auto-removed regardless of temperature
+    auto is_critical_gear = []( const item & it ) {
+        return it.has_flag( flag_SPLINT ) ||
+               it.has_flag( flag_GAS_PROOF ) ||
+               it.has_flag( flag_RAD_PROOF );
+    };
+
+    std::vector<item *> warm_worn = items_with( [&]( const item & it ) {
+        return is_worn( it ) && !is_critical_gear( it ) && it.get_warmth() > min_warmth_to_remove;
+    } );
+    if( warm_worn.empty() ) {
+        return false;
+    }
+    // Sturdy armor won't be auto-removed - NPC complains and waits for a player order
+    std::vector<item *> removable;
+    item *warmest_sturdy = nullptr;
+    for( item *it : warm_worn ) {
+        if( it->has_flag( flag_STURDY ) ) {
+            if( !warmest_sturdy || it->get_warmth() > warmest_sturdy->get_warmth() ) {
+                warmest_sturdy = it;
+            }
+        } else {
+            removable.push_back( it );
+        }
+    }
+    if( removable.empty() ) {
+        if( warmest_sturdy ) {
+            complain_about( "too_hot_armor", 5_minutes,
+                            string_format(
+                                _( "My %s is making me overheat!  You'll have to tell me to take it off." ),
+                                warmest_sturdy->tname() ),
+                            true, sounds::sound_t::order );
+        }
+        return false;
+    }
+    item *warmest = *std::max_element( removable.begin(), removable.end(),
+    []( const item * a, const item * b ) {
+        return a->get_warmth() < b->get_warmth();
+    } );
+    item_location loc( *this, warmest );
+    if( can_takeoff( *warmest ).success() && takeoff( loc ) ) {
+        return true;
     }
     return false;
 }
