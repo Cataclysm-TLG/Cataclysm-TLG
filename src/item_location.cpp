@@ -54,6 +54,9 @@
 #include "vpart_range.h"
 #include "weighted_list.h"
 
+// Legacy: positional index lookup, used only for serializing idx (kept for old-save compat
+// from before #85905) and vehicle base items. Once legacy save support is dropped, this can
+// be removed for map/person/container paths. Vehicle base items still need idx=-1 as a sentinel.
 template <typename T>
 static int find_index( const T &sel, const item *obj )
 {
@@ -70,6 +73,7 @@ static int find_index( const T &sel, const item *obj )
     return found ? idx : -1;
 }
 
+// Legacy: positional index retrieval, counterpart to find_index. Same deprecation applies (#85905).
 template <typename T>
 static item *retrieve_index( const T &sel, int idx )
 {
@@ -109,6 +113,7 @@ class item_location::impl
 
         impl() = default;
         explicit impl( item *i ) : what( i->get_safe_reference() ) {}
+        // Legacy: idx-only constructor for old-save compat (#85905)
         explicit impl( int idx ) : idx( idx ), needs_unpacking( true ) {}
         impl( int idx, int64_t uid ) : idx( idx ), uid_hint( uid ), needs_unpacking( true ) {}
 
@@ -139,6 +144,7 @@ class item_location::impl
         virtual void remove_item() = 0;
         virtual void on_contents_changed() = 0;
         virtual void serialize( JsonOut &js ) const = 0;
+        // Legacy: idx-based item lookup for old-save compat and vehicle base items (#85905)
         virtual item *unpack( int ) const = 0;
         virtual item *unpack_by_uid( int64_t ) const {
             return nullptr;
@@ -175,7 +181,7 @@ class item_location::impl
             }
         }
         mutable safe_reference<item> what;
-        mutable int idx = -1;
+        mutable int idx = -1; // legacy, see #85905
         mutable int64_t uid_hint = 0;
         mutable bool needs_unpacking = false;
 
@@ -717,8 +723,7 @@ class item_location::impl::item_in_container : public item_location::impl
         item_location container;
         mutable item_pocket *container_pkt = nullptr; // NOLINT(cata-serialize)
 
-        // figures out the index for the item, which is where it is in the total list of contents
-        // note: could be a better way of handling this?
+        // Legacy: positional index for old-save compat (#85905). UID is now preferred.
         int calc_index() const {
             if( !container ) {
                 return -1;
