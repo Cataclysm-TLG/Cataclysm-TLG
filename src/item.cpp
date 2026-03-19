@@ -5233,9 +5233,17 @@ void item::qualities_info( std::vector<iteminfo> &info, const iteminfo_query *pa
     if( parts->test( iteminfo_parts::QUALITIES ) && has_any_qualities ) {
         insert_separation_line( info );
         // List all inherent (unconditional) qualities
+        // Helper to extract level-only pairs for display from item_quality maps
+        const auto to_level_pairs = []( const std::map<quality_id, itype::item_quality> &qmap ) {
+            std::map<quality_id, int> result;
+            for( const auto &e : qmap ) {
+                result[e.first] = e.second.level;
+            }
+            return result;
+        };
         if( !type->qualities.empty() ) {
             info.emplace_back( "QUALITIES", "", _( "<bold>Has qualities</bold>:" ) );
-            for( const std::pair<quality_id, int> &q : sorted_lex( type->qualities ) ) {
+            for( const std::pair<quality_id, int> &q : sorted_lex( to_level_pairs( type->qualities ) ) ) {
                 name_quality( q );
             }
         }
@@ -5250,7 +5258,8 @@ void item::qualities_info( std::vector<iteminfo> &info, const iteminfo_query *pa
                                    string_format( _( "<bad>Needs %d or more charges</bad> for qualities:" ),
                                                   type->charges_to_use() ) );
             }
-            for( const std::pair<quality_id, int> &q : sorted_lex( type->charged_qualities ) ) {
+            for( const std::pair<quality_id, int> &q : sorted_lex(
+                     to_level_pairs( type->charged_qualities ) ) ) {
                 name_quality( q );
             }
         }
@@ -5265,11 +5274,11 @@ void item::qualities_info( std::vector<iteminfo> &info, const iteminfo_query *pa
         info.emplace_back( "QUALITIES", "", _( "Contains items with qualities:" ) );
         std::map<quality_id, int, quality_id::LexCmp> most_quality;
         for( const item *e : contents.all_items_top() ) {
-            for( const std::pair<const quality_id, int> &q : e->type->qualities ) {
-                auto emplace_result = most_quality.emplace( q );
+            for( const auto &q : e->type->qualities ) {
+                auto emplace_result = most_quality.emplace( q.first, q.second.level );
                 if( !emplace_result.second &&
-                    most_quality.at( emplace_result.first->first ) < q.second ) {
-                    most_quality[ q.first ] = q.second;
+                    most_quality.at( emplace_result.first->first ) < q.second.level ) {
+                    most_quality[ q.first ] = q.second.level;
                 }
             }
         }
@@ -7789,9 +7798,9 @@ int item::get_quality_nonrecursive( const quality_id &id, const bool strict_boil
     int return_quality = INT_MIN;
 
     // Check for inherent item quality
-    for( const std::pair<const quality_id, int> &quality : type->qualities ) {
+    for( const auto &quality : type->qualities ) {
         if( quality.first == id ) {
-            return_quality = quality.second;
+            return_quality = quality.second.level;
         }
     }
 
@@ -7799,9 +7808,9 @@ int item::get_quality_nonrecursive( const quality_id &id, const bool strict_boil
     // (using ammo_remaining() with player character to include bionic/UPS power)
     if( !type->charged_qualities.empty() && ammo_sufficient( &get_player_character() ) ) {
         // see if any charged qualities are better than the current one
-        for( const std::pair<const quality_id, int> &quality : type->charged_qualities ) {
+        for( const auto &quality : type->charged_qualities ) {
             if( quality.first == id ) {
-                return_quality = std::max( return_quality, quality.second );
+                return_quality = std::max( return_quality, quality.second.level );
             }
         }
     }
@@ -7868,6 +7877,68 @@ std::set<matec_id> item::get_techniques() const
     std::set<matec_id> result = type->techniques;
     result.insert( techniques.begin(), techniques.end() );
     return result;
+}
+float item::get_quality_speed( const quality_id &id, int level,
+                               const Character *crafter ) const
+{
+    // BOIL special case: empty containers only (mirrors get_quality)
+    if( id == qual_BOIL && !contents.empty_container() ) {
+        return 1.0f;
+    }
+
+    bool found = false;
+    float best_speed = 1.0f;
+
+    // Helper: consider a source that provides the quality at qual_level with speed s
+    const auto consider = [&]( int qual_level, float s ) {
+        if( qual_level >= level ) {
+            if( !found || s < best_speed ) {
+                best_speed = s;
+                found = true;
+            }
+        }
+    };
+
+    // Inherent qualities
+    auto it = type->qualities.find( id );
+    if( it != type->qualities.end() ) {
+        consider( it->second.level, it->second.speed );
+    }
+
+    // Charged qualities (only if crafter provided for ammo_sufficient check)
+    if( crafter && !type->charged_qualities.empty() && ammo_sufficient( crafter ) ) {
+        auto cit = type->charged_qualities.find( id );
+        if( cit != type->charged_qualities.end() ) {
+            consider( cit->second.level, cit->second.speed );
+        }
+    }
+
+    // Contained items: recursive through contents (mirrors get_quality -> contents.best_quality)
+    for( const item *contained : contents.all_items_top() ) {
+        // Recurse: child checks its own inherent, charged, and contained items
+        float child_speed = contained->get_quality_speed( id, level, crafter );
+        // Child already returns 1.0 if it doesn't qualify, but we use found flag
+        // to distinguish "qualifies at 1.0" from "doesn't qualify". Check the
+        // child's quality level directly without leaking get_player_character():
+        // use the same crafter-aware resolution we do above.
+        int child_level = INT_MIN;
+        auto cit = contained->type->qualities.find( id );
+        if( cit != contained->type->qualities.end() ) {
+            child_level = cit->second.level;
+        }
+        if( crafter && !contained->type->charged_qualities.empty() &&
+            contained->ammo_sufficient( crafter ) ) {
+            auto ccit = contained->type->charged_qualities.find( id );
+            if( ccit != contained->type->charged_qualities.end() ) {
+                child_level = std::max( child_level, ccit->second.level );
+            }
+        }
+        if( child_level >= level ) {
+            consider( child_level, child_speed );
+        }
+    }
+
+    return best_speed;
 }
 
 int item::get_comestible_fun() const
