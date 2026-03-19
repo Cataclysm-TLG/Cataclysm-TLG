@@ -2740,5 +2740,10 @@
     "id": "TOUGH_TAIL",
     "type": "json_flag",
     "//": "In lieu of adding bp args to max_hp enchantments, this grants all of parts of type 'tail' +20% max HP."
+  },
+  {
+    "id": "SNOWWALKING",
+    "type": "json_flag",
+    "info": "Your movement is not slowed regardless of snow depth."
   }
 ]
