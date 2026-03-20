@@ -19,7 +19,7 @@
     "volume": "80 ml",
     "price_postapoc": "2 USD 50 cent",
     "to_hit": -2,
-    "ranged_damage": { "damage_type": "bash", "amount": 5 },
+    "ranged_damage": { "damage_type": "bash", "amount": 6 },
     "range": 10,
     "dispersion": 150,
     "durability": 6,
