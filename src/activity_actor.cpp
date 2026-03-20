@@ -6697,6 +6697,15 @@ std::unique_ptr<activity_actor> reload_activity_actor::deserialize( JsonValue &j
     data.read( "qty", actor.quantity );
     data.read( "target_loc", actor.target_loc );
     data.read( "ammo_loc", actor.ammo_loc );
+<<<<<<< HEAD
+=======
+    data.read( "seconds_per_round", actor.seconds_per_round );
+    data.read( "already_loaded", actor.already_loaded );
+    if( actor.ammo_loc ) {
+        actor.ammo_id = actor.ammo_loc->type->id;
+    }
+
+>>>>>>> Guard reload_activity_actor::deserialize against invalid ammo_loc
     return actor.clone();
 }
 
