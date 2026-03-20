@@ -331,7 +331,8 @@ enum class ally_rule : int {
     forbid_engage = 16384,
     follow_distance_2 = 32768,
     lock_doors = 65536,
-    avoid_locks = 131072
+    avoid_locks = 131072,
+    seek_shelter = 262144
 };
 
 struct ally_rule_data {
@@ -465,6 +466,13 @@ const std::unordered_map<std::string, ally_rule_data> ally_rule_strs = { {
                 ally_rule::follow_distance_2,
                 "<ally_rule_follow_distance_2_true_text>",
                 "<ally_rule_follow_distance_2_false_text>"
+            }
+        },
+        {
+            "seek_shelter", {
+                ally_rule::seek_shelter,
+                "<ally_rule_seek_shelter_true_text>",
+                "<ally_rule_seek_shelter_false_text>"
             }
         }
     }
@@ -962,6 +970,7 @@ class npc : public Character
         bool adjust_worn();
         bool try_wear_warmer_clothing();
         bool try_remove_warm_clothing();
+        bool seek_safe_temperature();
         bool has_healing_item( healing_options try_to_fix );
         healing_options patient_assessment( const Character &c );
         healing_options has_healing_options();
