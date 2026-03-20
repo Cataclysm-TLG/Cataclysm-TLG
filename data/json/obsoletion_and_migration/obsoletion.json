@@ -964,5 +964,10 @@
     "type": "TRAIT_MIGRATION",
     "id": "BOSS_Brigitte_LaCroix_01",
     "remove": true
+  },
+  {
+    "type": "TRAIT_MIGRATION",
+    "id": "PROF_CHURL",
+    "remove": true
   }
 ]
