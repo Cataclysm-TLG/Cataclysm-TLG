@@ -5333,7 +5333,7 @@
     "name": { "str": "Gastropod Foot" },
     "points": 1,
     "mixed_effect": true,
-    "description": "Your legs have consolidated into a single muscular 'foot' that goes up into your belly.  You are slower on flat ground, but the foot is surprisingly good for rough terrain, nearly silent, and immune to the effects of sludge.",
+    "description": "In place of legs you have a single muscular 'foot' like that of a snail.  You are slower, but your footing is stable, your movement nearly silent, and you are immune to the effects of sludge.",
     "category": [ "GASTROPOD" ],
     "types": [ "LEGS", "FEET", "SOLES" ],
     "cancels": [ "FLEET", "FLEET2" ],
@@ -5344,12 +5344,7 @@
     "visibility": 8,
     "ugliness": 9,
     "encumbrance_always": [ [ "leg_l", 10 ], [ "leg_r", 10 ], [ "foot_l", 10 ], [ "foot_r", 10 ] ],
-    "enchantments": [
-      {
-        "condition": { "not": { "u_has_move_mode": "prone" } },
-        "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ]
-      }
-    ],
+    "enchantments": [ "ench_gastropod_foot", "gastropod_foot_bonuses" ],
     "restricts_gear": [ "leg_l", "leg_r", "foot_l", "foot_r" ],
     "destroys_gear": true
   },

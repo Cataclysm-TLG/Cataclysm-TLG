@@ -80,6 +80,14 @@
     "copy-from": "hitpoint_graph_label"
   },
   {
+    "id": "hp_gastropod_foot_graph",
+    "type": "widget",
+    "label": "FOOT",
+    "var": "bp_hp",
+    "bodypart": "gastropod_foot",
+    "copy-from": "hitpoint_graph_label"
+  },
+  {
     "id": "hp_head_graph_no_label",
     "type": "widget",
     "label": "HEAD",
@@ -125,6 +133,14 @@
     "label": "R LEG",
     "var": "bp_hp",
     "bodypart": "leg_r",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+    {
+    "id": "hp_gastropod_foot_graph_no_label",
+    "type": "widget",
+    "label": "FOOT",
+    "var": "bp_hp",
+    "bodypart": "gastropod_foot",
     "copy-from": "hitpoint_graph_no_label"
   },
   {
@@ -175,6 +191,14 @@
     "bodypart": "leg_r",
     "copy-from": "hitpoint_num_label"
   },
+    {
+    "id": "hp_gastropod_foot_num_label",
+    "type": "widget",
+    "label": "FOOT",
+    "var": "bp_hp",
+    "bodypart": "leg_r",
+    "copy-from": "hitpoint_num_label"
+  },
   {
     "id": "hp_head_num_no_label",
     "type": "widget",
@@ -221,6 +245,14 @@
     "label": "R LEG",
     "var": "bp_hp",
     "bodypart": "leg_r",
+    "copy-from": "hitpoint_num_no_label"
+  },
+    {
+    "id": "hp_gastropod_foot_num_no_label",
+    "type": "widget",
+    "label": "FOOT",
+    "var": "bp_hp",
+    "bodypart": "gastropod_foot",
     "copy-from": "hitpoint_num_no_label"
   },
   {
@@ -288,6 +320,14 @@
     "width": 11,
     "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_graph_no_label" ]
   },
+    {
+    "id": "status_hpg_layout_gastropod_foot",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 11,
+    "widgets": [ "bodypart_gastropod_foot_status_text", "hp_gastropod_foot_graph_no_label" ]
+  },
   {
     "id": "status_hpn_layout_head",
     "type": "widget",
@@ -336,6 +376,14 @@
     "width": 9,
     "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_num_no_label" ]
   },
+    {
+    "id": "status_hpn_layout_gastropod_foot",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 9,
+    "widgets": [ "bodypart_gastropod_foot_status_text", "hp_gastropod_foot_num_no_label" ]
+  },
   {
     "id": "hitpoint_graphs_top_layout",
     "type": "widget",
@@ -350,7 +398,7 @@
     "style": "layout",
     "label": "HP Bottom",
     "arrange": "columns",
-    "widgets": [ "status_hpg_layout_lleg", "status_hpg_layout_torso", "status_hpg_layout_rleg" ]
+    "widgets": [ "status_hpg_layout_lleg", "status_hpg_layout_torso", "status_hpg_layout_rleg", "status_gastropod_foot" ]
   },
   {
     "id": "hitpoints_all_graphs_layout",
@@ -379,7 +427,7 @@
     "type": "widget",
     "style": "layout",
     "arrange": "columns",
-    "widgets": [ "status_hpg_layout_lleg", "status_hpg_layout_rleg" ]
+    "widgets": [ "status_hpg_layout_lleg", "status_hpg_layout_rleg", "status_gastropod_foot" ]
   },
   {
     "id": "hitpoints_head_torso_nums_layout",
@@ -400,7 +448,7 @@
     "type": "widget",
     "style": "layout",
     "arrange": "columns",
-    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_rleg" ]
+    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_rleg", "status_gastropod_foot" ]
   },
   {
     "id": "hitpoint_nums_top_layout",
@@ -416,7 +464,7 @@
     "style": "layout",
     "label": "HP Bottom",
     "arrange": "columns",
-    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_torso", "status_hpn_layout_rleg" ]
+    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_torso", "status_hpn_layout_rleg", "status_gastropod_foot" ]
   },
   {
     "id": "hitpoints_all_nums_layout",
@@ -445,7 +493,7 @@
     "type": "widget",
     "style": "layout",
     "arrange": "columns",
-    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_rleg" ]
+    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_rleg", "status_hpn_gastropod_foot" ]
   },
   {
     "id": "hitpoint_num_labels_top_layout",
@@ -461,7 +509,7 @@
     "label": "HP Nums Bottom",
     "style": "layout",
     "arrange": "columns",
-    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_torso", "status_hpn_layout_rleg" ]
+    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_torso", "status_hpn_layout_rleg", "status_hpn_layout_gastropod_foot" ]
   },
   {
     "id": "hitpoints_all_narrow_graphs_layout",
@@ -491,7 +539,8 @@
       "status_hpg_layout_larm",
       "status_hpg_layout_rarm",
       "status_hpg_layout_lleg",
-      "status_hpg_layout_rleg"
+      "status_hpg_layout_rleg",
+      "status_hpg_layout_gastropod_foot"
     ]
   },
   {
@@ -505,7 +554,8 @@
       "status_hpn_layout_larm",
       "status_hpn_layout_rarm",
       "status_hpn_layout_lleg",
-      "status_hpn_layout_rleg"
+      "status_hpn_layout_rleg",
+      "status_hpn_layout_gastropod_foot"
     ]
   }
 ]
