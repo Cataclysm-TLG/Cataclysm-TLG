@@ -111,7 +111,7 @@
     "type": "ammunition_type",
     "id": "gravel",
     "name": "gravel",
-    "default": "gravel"
+    "default": "material_gravel"
   },
   {
     "type": "ammunition_type",

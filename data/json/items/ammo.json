@@ -677,7 +677,7 @@
     "weight": "10 g",
     "ammo_type": "gravel",
     "damage": { "damage_type": "bash", "amount": 3, "armor_penetration": 1 },
-    "range": 5,
+    "range": 4,
     "dispersion": 14,
     "loudness": 0,
     "count": 50,

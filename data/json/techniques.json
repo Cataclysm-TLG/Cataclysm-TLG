@@ -289,7 +289,7 @@
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
         { "not": { "npc_bodytype": "snake" } },
-        { "not": { "npc_has_effect": "downed" } },
+        { "not": { "npc_has_effect": "downed" } }
       ]
     },
     "mult_bonuses": [

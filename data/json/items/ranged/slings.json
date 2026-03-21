@@ -29,7 +29,6 @@
   },
   {
     "id": "slingshot",
-    "//": "Tileset whitelist for sling & slingshots.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "symbol": "(",
@@ -47,12 +46,12 @@
     "price_postapoc": "50 cent",
     "to_hit": -2,
     "ranged_damage": { "damage_type": "bash", "amount": 1 },
-    "range": 4,
+    "range": 6,
     "dispersion": 75,
     "durability": 6,
     "clip_size": 1,
     "reload": 50,
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "pebble": 1 }, "open_container": true } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "gravel": 1 }, "open_container": true } ]
   },
   {
     "id": "staff_sling",
@@ -110,17 +109,17 @@
     "flags": [ "FIRE_TWOHAND", "RELOAD_AND_SHOOT", "NEVER_JAMS", "PRIMITIVE_RANGED_WEAPON", "BELT_CLIP", "WATERPROOF_GUN" ],
     "ammo_effects": [ "NEVER_MISFIRES", "NO_PENETRATE_OBSTACLES" ],
     "skill": "throw",
-    "ammo": [ "pebble" ],
+    "ammo": [ "gravel" ],
     "weight": "322 g",
     "volume": "500 ml",
     "price_postapoc": "2 USD 50 cent",
     "to_hit": -2,
-    "ranged_damage": { "damage_type": "bullet", "amount": 2 },
-    "range": 2,
+    "ranged_damage": { "damage_type": "bash", "amount": 2 },
+    "range": 7,
     "dispersion": 45,
     "durability": 7,
     "clip_size": 1,
     "reload": 50,
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "pebble": 1 }, "open_container": true } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "gravel": 1 }, "open_container": true } ]
   }
 ]
