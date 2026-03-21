@@ -41,7 +41,7 @@
     "flags": [ "FIRE_TWOHAND", "RELOAD_AND_SHOOT", "NEVER_JAMS", "PRIMITIVE_RANGED_WEAPON", "BELT_CLIP", "WATERPROOF_GUN" ],
     "ammo_effects": [ "NEVER_MISFIRES", "NO_PENETRATE_OBSTACLES" ],
     "skill": "throw",
-    "ammo": [ "pebble" ],
+    "ammo": [ "gravel" ],
     "weight": "254 g",
     "volume": "250 ml",
     "price_postapoc": "50 cent",

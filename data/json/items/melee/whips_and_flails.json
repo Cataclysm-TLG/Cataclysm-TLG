@@ -16,7 +16,7 @@
     "flags": [ "REACH_ATTACK", "REACH3", "WHIP", "POLEARM" ],
     "to_hit": { "grip": "none", "length": "long", "surface": "line", "balance": "neutral" },
     "category": "weapons",
-    "melee_damage": { "cut": 3 },
+    "melee_damage": { "bash": 3, "cut": 1 },
     "weapon_category": [ "WHIPS" ]
   },
   {
@@ -36,7 +36,7 @@
     "to_hit": { "grip": "none", "length": "long", "surface": "every", "balance": "uneven" },
     "material": [ { "type": "leather", "portion": 9 }, { "type": "steel", "portion": 1 } ],
     "flags": [ "WHIP", "NONCONDUCTIVE" ],
-    "melee_damage": { "cut": 7 },
+    "melee_damage": { "bash": 2, "cut": 6 },
     "weapon_category": [ "WHIPS" ]
   },
   {

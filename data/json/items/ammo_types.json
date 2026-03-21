@@ -109,6 +109,12 @@
   },
   {
     "type": "ammunition_type",
+    "id": "gravel",
+    "name": "gravel",
+    "default": "gravel"
+  },
+  {
+    "type": "ammunition_type",
     "id": "pebble",
     "name": "pebbles",
     "default": "pebble"

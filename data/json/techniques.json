@@ -260,7 +260,8 @@
         },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
-        { "not": { "npc_bodytype": "snake" } }
+        { "not": { "npc_bodytype": "snake" } },
+        { "not": { "npc_has_effect": "downed" } }
       ]
     },
     "condition_desc": "* Only works on a target of <info>similar size</info>, tests intelligence and strength",
@@ -287,7 +288,8 @@
         },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
-        { "not": { "npc_bodytype": "snake" } }
+        { "not": { "npc_bodytype": "snake" } },
+        { "not": { "npc_has_effect": "downed" } },
       ]
     },
     "mult_bonuses": [
