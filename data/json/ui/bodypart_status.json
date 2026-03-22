@@ -71,7 +71,8 @@
         "color": "red_red",
         "condition": { "u_has_effect": "bleed", "intensity": 21 }
       }
-    ]
+    ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "bodypart_status_text",
@@ -178,12 +179,12 @@
     "type": "widget",
     "label": "Status Legend",
     "style": "legend",
-    "bodyparts": [ "head", "torso", "arm_l", "arm_r", "leg_l", "leg_r" ],
+    "bodyparts": [ "head", "torso", "arm_l", "arm_r", "leg_l", "leg_r", "gastropod_foot" ],
     "copy-from": "bodypart_status_indicator_template",
     "width": 0,
     "height": 3,
     "text_align": "left",
-    "flags": [ "W_LABEL_NONE", "W_DYNAMIC_HEIGHT" ]
+    "flags": [ "W_LABEL_NONE", "W_DYNAMIC_HEIGHT", "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "bodypart_status_top_layout",

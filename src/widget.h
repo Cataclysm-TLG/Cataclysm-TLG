@@ -323,6 +323,8 @@ class widget
         // Get this widget's id
         const widget_id &getId() const;
 
+        bool is_bodypart_var() const;
+
         // Layout this widget within max_width, including child widgets. Calling layout on a regular
         // (non-layout style) widget is the same as show(), but will pad with spaces inside the
         // label area, so the returned string is equal to max_width.

@@ -307,6 +307,19 @@ void widget_clause::load( const JsonObject &jo )
     optional( jo, false, "widgets", widgets, string_id_reader<::widget> {} );
 }
 
+bool widget::is_bodypart_var() const
+{
+    switch( _var ) {
+        case widget_var::bp_hp:
+        case widget_var::bp_encumb:
+        case widget_var::bp_warmth:
+        case widget_var::bp_wetness:
+            return true;
+        default:
+            return false;
+    }
+}
+
 bool widget_clause::meets_condition( const std::string &opt_var ) const
 {
     dialogue d( get_talker_for( get_avatar() ), nullptr );

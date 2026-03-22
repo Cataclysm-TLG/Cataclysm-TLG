@@ -582,7 +582,7 @@
     "base_hp": 120,
     "drench_capacity": 700,
     "bionic_slots": 58,
-    "flags": [ "LIMB_LOWER" ],
+    "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE" ],
     "sub_parts": [ "leg_hip_l", "leg_upper_l", "leg_knee_l", "leg_lower_l", "leg_draped_l" ],
     "encumbrance_per_weight": [
       { "weight": "1 mg", "encumbrance": 1 },

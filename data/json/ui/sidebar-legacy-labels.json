@@ -20,7 +20,7 @@
     "type": "widget",
     "style": "layout",
     "arrange": "rows",
-    "widgets": [ "status_hpg_layout_rarm", "status_hpg_layout_rleg" ]
+    "widgets": [ "status_hpg_layout_rarm", "status_hpg_layout_rleg", "status_hpg_layout_gastropod_foot" ]
   },
   {
     "id": "ll_limbs_layout",

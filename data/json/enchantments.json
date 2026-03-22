@@ -354,12 +354,7 @@
     "type": "enchantment",
     "id": "ench_gastropod_foot_bonuses",
     "condition": { "not": { "u_has_move_mode": "prone" } },
-    "modified_bodyparts": [
-      {
-        "condition": { "not": { "u_has_move_mode": "prone" } },
-        "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ]
-      }
-    ]
+    "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ]
   },
   {
     "type": "enchantment",
