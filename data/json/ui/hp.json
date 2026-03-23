@@ -150,7 +150,8 @@
     "label": "HEAD",
     "var": "bp_hp",
     "bodypart": "head",
-    "copy-from": "hitpoint_num_label"
+    "copy-from": "hitpoint_num_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_torso_num_label",
@@ -158,7 +159,8 @@
     "label": "TORSO",
     "var": "bp_hp",
     "bodypart": "torso",
-    "copy-from": "hitpoint_num_label"
+    "copy-from": "hitpoint_num_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_left_arm_num_label",
@@ -166,7 +168,8 @@
     "label": "L ARM",
     "var": "bp_hp",
     "bodypart": "arm_l",
-    "copy-from": "hitpoint_num_label"
+    "copy-from": "hitpoint_num_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_right_arm_num_label",
@@ -174,7 +177,8 @@
     "label": "R ARM",
     "var": "bp_hp",
     "bodypart": "arm_r",
-    "copy-from": "hitpoint_num_label"
+    "copy-from": "hitpoint_num_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_left_leg_num_label",
@@ -182,7 +186,8 @@
     "label": "L LEG",
     "var": "bp_hp",
     "bodypart": "leg_l",
-    "copy-from": "hitpoint_num_label"
+    "copy-from": "hitpoint_num_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_right_leg_num_label",
@@ -190,7 +195,8 @@
     "label": "R LEG",
     "var": "bp_hp",
     "bodypart": "leg_r",
-    "copy-from": "hitpoint_num_label"
+    "copy-from": "hitpoint_num_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
     {
     "id": "hp_gastropod_foot_num_label",
@@ -198,7 +204,8 @@
     "label": "FOOT",
     "var": "bp_hp",
     "bodypart": "leg_r",
-    "copy-from": "hitpoint_num_label"
+    "copy-from": "hitpoint_num_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_head_num_no_label",
@@ -206,7 +213,8 @@
     "label": "HEAD",
     "var": "bp_hp",
     "bodypart": "head",
-    "copy-from": "hitpoint_num_no_label"
+    "copy-from": "hitpoint_num_no_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_torso_num_no_label",
@@ -214,7 +222,8 @@
     "label": "TORSO",
     "var": "bp_hp",
     "bodypart": "torso",
-    "copy-from": "hitpoint_num_no_label"
+    "copy-from": "hitpoint_num_no_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_left_arm_num_no_label",
@@ -222,7 +231,8 @@
     "label": "L ARM",
     "var": "bp_hp",
     "bodypart": "arm_l",
-    "copy-from": "hitpoint_num_no_label"
+    "copy-from": "hitpoint_num_no_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_right_arm_num_no_label",
@@ -230,7 +240,8 @@
     "label": "R ARM",
     "var": "bp_hp",
     "bodypart": "arm_r",
-    "copy-from": "hitpoint_num_no_label"
+    "copy-from": "hitpoint_num_no_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_left_leg_num_no_label",
@@ -238,7 +249,8 @@
     "label": "L LEG",
     "var": "bp_hp",
     "bodypart": "leg_l",
-    "copy-from": "hitpoint_num_no_label"
+    "copy-from": "hitpoint_num_no_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hp_right_leg_num_no_label",
@@ -246,7 +258,8 @@
     "label": "R LEG",
     "var": "bp_hp",
     "bodypart": "leg_r",
-    "copy-from": "hitpoint_num_no_label"
+    "copy-from": "hitpoint_num_no_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
     {
     "id": "hp_gastropod_foot_num_no_label",
@@ -254,7 +267,8 @@
     "label": "FOOT",
     "var": "bp_hp",
     "bodypart": "gastropod_foot",
-    "copy-from": "hitpoint_num_no_label"
+    "copy-from": "hitpoint_num_no_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "bodygraph_hp_layout",
@@ -277,49 +291,67 @@
     "id": "status_hpg_layout_head",
     "type": "widget",
     "style": "layout",
+    "bodypart": "head",
     "arrange": "columns",
     "width": 11,
-    "widgets": [ "bodypart_head_status_text", "hp_head_graph_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_head_status_text", "hp_head_graph_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpg_layout_torso",
     "type": "widget",
     "style": "layout",
+    "bodypart": "torso",
     "arrange": "columns",
     "width": 11,
-    "widgets": [ "bodypart_torso_status_text", "hp_torso_graph_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_torso_status_text", "hp_torso_graph_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpg_layout_larm",
     "type": "widget",
     "style": "layout",
+    "bodypart": "arm_l",
     "arrange": "columns",
     "width": 11,
-    "widgets": [ "bodypart_larm_status_text", "hp_left_arm_graph_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_larm_status_text", "hp_left_arm_graph_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpg_layout_rarm",
     "type": "widget",
     "style": "layout",
+    "bodypart": "arm_r",
     "arrange": "columns",
     "width": 11,
-    "widgets": [ "bodypart_rarm_status_text", "hp_right_arm_graph_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_rarm_status_text", "hp_right_arm_graph_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpg_layout_lleg",
     "type": "widget",
     "style": "layout",
+    "bodypart": "leg_l",
     "arrange": "columns",
     "width": 11,
-    "widgets": [ "bodypart_lleg_status_text", "hp_left_leg_graph_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_lleg_status_text", "hp_left_leg_graph_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpg_layout_rleg",
     "type": "widget",
     "style": "layout",
+    "bodypart": "leg_r",
     "arrange": "columns",
     "width": 11,
-    "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_graph_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_graph_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
     {
     "id": "status_hpg_layout_gastropod_foot",
@@ -327,7 +359,9 @@
     "style": "layout",
     "arrange": "columns",
     "width": 11,
-    "widgets": [ "bodypart_gastropod_foot_status_text", "hp_gastropod_foot_graph_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_gastropod_foot_status_text", "hp_gastropod_foot_graph_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpn_layout_head",
@@ -335,7 +369,9 @@
     "style": "layout",
     "arrange": "columns",
     "width": 9,
-    "widgets": [ "bodypart_head_status_text", "hp_head_num_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_head_status_text", "hp_head_num_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpn_layout_torso",
@@ -343,7 +379,9 @@
     "style": "layout",
     "arrange": "columns",
     "width": 9,
-    "widgets": [ "bodypart_torso_status_text", "hp_torso_num_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_torso_status_text", "hp_torso_num_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpn_layout_larm",
@@ -351,7 +389,9 @@
     "style": "layout",
     "arrange": "columns",
     "width": 9,
-    "widgets": [ "bodypart_larm_status_text", "hp_left_arm_num_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_larm_status_text", "hp_left_arm_num_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpn_layout_rarm",
@@ -359,7 +399,9 @@
     "style": "layout",
     "arrange": "columns",
     "width": 9,
-    "widgets": [ "bodypart_rarm_status_text", "hp_right_arm_num_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_rarm_status_text", "hp_right_arm_num_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpn_layout_lleg",
@@ -367,7 +409,9 @@
     "style": "layout",
     "arrange": "columns",
     "width": 9,
-    "widgets": [ "bodypart_lleg_status_text", "hp_left_leg_num_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_lleg_status_text", "hp_left_leg_num_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "status_hpn_layout_rleg",
@@ -375,7 +419,9 @@
     "style": "layout",
     "arrange": "columns",
     "width": 9,
-    "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_num_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_num_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
     {
     "id": "status_hpn_layout_gastropod_foot",
@@ -383,7 +429,9 @@
     "style": "layout",
     "arrange": "columns",
     "width": 9,
-    "widgets": [ "bodypart_gastropod_foot_status_text", "hp_gastropod_foot_num_no_label" ]
+    "height": 0,
+    "widgets": [ "bodypart_gastropod_foot_status_text", "hp_gastropod_foot_num_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "hitpoint_graphs_top_layout",

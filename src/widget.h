@@ -290,6 +290,8 @@ class widget
         std::vector<widget_id> _widgets;
         // Child widget layout arrangement / direction
         std::string _arrange;
+        // Used for arrange = grid.
+        int _grid_columns = 0;
         // Id of body_graph to use for widget_var::body_graph
         std::string _body_graph;
         // Compass direction corresponding to the indexed directions from avatar::get_mon_visible
