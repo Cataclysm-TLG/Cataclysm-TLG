@@ -150,7 +150,7 @@
   {
     "type": "forest_biome_mapgen",
     "id": "biome_forest_default",
-    "terrains": [ "forest", "special_forest", "special_forest_isherwood" ],
+    "terrains": [ "forest", "special_forest" ],
     "sparseness_adjacency_factor": 3,
     "item_group": "forest",
     "item_group_chance": 60,
@@ -198,7 +198,6 @@
       "river_sw",
       "slimepit_z0",
       "special_forest_thick",
-      "special_forest_thick_isherwood",
       "spider_pit",
       "standing_stones",
       "stream",
