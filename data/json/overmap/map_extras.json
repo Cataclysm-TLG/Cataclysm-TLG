@@ -777,6 +777,15 @@
     "color": "light_gray"
   },
   {
+    "id": "mx_riverside_jetski",
+    "type": "map_extra",
+    "name": { "str": "Jetski" },
+    "description": "An abandoned jetski.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_riverside_jetski" },
+    "min_max_zlevel": [ 0, 0 ],
+    "flags": [ "MAN_MADE", "CLASSIC" ]
+  },
+  {
     "id": "mx_toxic_waste",
     "type": "map_extra",
     "name": { "str": "Toxic waste" },

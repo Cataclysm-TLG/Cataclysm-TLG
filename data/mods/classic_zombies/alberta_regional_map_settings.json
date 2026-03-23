@@ -1026,7 +1026,7 @@
     "type": "map_extra_collection",
     "id": "river",
     "chance": 1,
-    "extras": [ [ "mx_null", 77 ], [ "mx_riverside_boat", 1 ], [ "mx_reed", 22 ] ]
+    "extras": [ [ "mx_null", 77 ], [ "mx_riverside_boat", 1 ], [ "mx_riverside_jetski", 1 ], [ "mx_reed", 22 ] ]
   },
   {
     "type": "map_extra_collection",
