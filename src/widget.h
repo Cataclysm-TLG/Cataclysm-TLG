@@ -290,6 +290,8 @@ class widget
         std::vector<widget_id> _widgets;
         // Child widget layout arrangement / direction
         std::string _arrange;
+        // Used for arrange = grid.
+        int _grid_columns = 0;
         // Id of body_graph to use for widget_var::body_graph
         std::string _body_graph;
         // Compass direction corresponding to the indexed directions from avatar::get_mon_visible
@@ -322,6 +324,8 @@ class widget
         static const std::vector<widget> &get_all();
         // Get this widget's id
         const widget_id &getId() const;
+
+        bool is_bodypart_var() const;
 
         // Layout this widget within max_width, including child widgets. Calling layout on a regular
         // (non-layout style) widget is the same as show(), but will pad with spaces inside the

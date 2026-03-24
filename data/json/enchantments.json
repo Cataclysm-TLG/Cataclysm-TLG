@@ -340,6 +340,18 @@
   },
   {
     "type": "enchantment",
+    "id": "ench_gastropod_foot",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "foot_l" }, { "lose": "foot_r" }, { "lose": "leg_l" }, { "lose": "leg_r" }, { "gain": "gastropod_foot" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_gastropod_foot_bonuses",
+    "condition": { "not": { "u_has_move_mode": "prone" } },
+    "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ]
+  },
+  {
+    "type": "enchantment",
     "id": "ench_eyes_frog",
     "condition": "ALWAYS",
     "modified_bodyparts": [ { "lose": "eyes" }, { "gain": "eyes_frog" } ]

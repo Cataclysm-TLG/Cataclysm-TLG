@@ -5703,11 +5703,13 @@ bool npc::seek_safe_temperature()
     const field_type_id fire = ::fd_fire;
 
     const auto try_move_to = [&]( const tripoint_bub_ms & dest ) -> bool {
-        if( pos_bub() == dest ) {
+        if( pos_bub() == dest )
+        {
             return false;
         }
         update_path( dest );
-        if( path.empty() ) {
+        if( path.empty() )
+        {
             return false;
         }
         move_to_next();

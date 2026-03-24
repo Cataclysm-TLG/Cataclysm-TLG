@@ -307,6 +307,7 @@ void widget_clause::load( const JsonObject &jo )
     optional( jo, false, "widgets", widgets, string_id_reader<::widget> {} );
 }
 
+
 bool widget_clause::meets_condition( const std::string &opt_var ) const
 {
     dialogue d( get_talker_for( get_avatar() ), nullptr );
@@ -449,6 +450,7 @@ void widget::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "description", _description, "" );
     optional( jo, was_loaded, "style", _style, "number" );
     optional( jo, was_loaded, "arrange", _arrange, "columns" );
+    optional( jo, was_loaded, "columns", _grid_columns, 0 );
     optional( jo, was_loaded, "body_graph", _body_graph, "full_body_widget" );
     optional( jo, was_loaded, "direction", _direction, cardinal_direction::num_cardinal_directions );
     optional( jo, was_loaded, "text_align", _text_align, widget_alignment::LEFT );
@@ -771,7 +773,6 @@ void widget::set_default_var_range( const avatar &ava )
             _var_min = _var_norm.first - 3;
             _var_max = _var_norm.first + 3;
             break;
-
         // Bodypart attributes
         case widget_var::bp_hp:
             // HP for body part
@@ -990,10 +991,8 @@ static int custom_draw_func( const draw_args &args )
     // Leave 1 character space for margin on left and right
     const int margin = 1;
     const int widt = width - 2 * margin;
-    // Whether to subtract height lines from the drawn panel space
     const bool disable_empty = wgt->has_flag( json_flag_W_DISABLED_WHEN_EMPTY );
 
-    // Quit if there is nothing to draw or no space to draw it
     if( wgt == nullptr || width <= 0 ) {
         return 0;
     }
@@ -1002,6 +1001,7 @@ static int custom_draw_func( const draw_args &args )
     const bool skip_pad = wgt->has_flag( json_flag_W_NO_PADDING );
 
     werase( w );
+
     if( wgt->_style == "sidebar" ) {
         // noop
     } else if( wgt->_style == "layout" ) {
@@ -1014,11 +1014,16 @@ static int custom_draw_func( const draw_args &args )
 
                 const std::string txt = row_widget.layout( u, widt, wgt->_label_width,
                                         skip_pad || row_wid->has_flag( json_flag_W_NO_PADDING ) );
+
+                // Skip this child entirely if layout returns empty
+                if( txt.empty() ) {
+                    continue;
+                }
+
+                // reclaim height if disabled when empty
                 if( row_wid->has_flag( json_flag_W_DISABLED_WHEN_EMPTY ) && txt.empty() ) {
-                    // reclaim the skipped height in the sidebar
                     height_diff -= row_widget._height;
                 } else {
-                    // draw normally
                     row_num = widget::custom_draw_multiline( txt, w, margin, widt, row_num );
                 }
             }
@@ -1027,36 +1032,30 @@ static int custom_draw_func( const draw_args &args )
                 wgt->_height = row_num;
             }
             if( disable_empty && widgets.empty() ) {
-                // reclaim the skipped height in the sidebar
                 height_diff -= wgt->_height;
             }
-        } else {
-            // Layout widgets in columns
-            // For now, this is the default when calling layout()
-            // So, just layout self on a single line
 
+        } else {
+            // Layout widgets in columns or grid
             const std::string txt = wgt->layout( u, widt, wgt->_label_width, skip_pad );
-            if( disable_empty && txt.empty() ) {
-                // reclaim the skipped height in the sidebar
-                height_diff -= wgt->_height;
-            } else {
-                // draw normally
+            if( !( disable_empty && txt.empty() ) ) {
                 widget::custom_draw_multiline( txt, w, margin, widt, 0 );
+            } else {
+                height_diff -= wgt->_height;
             }
         }
+
     } else {
         // No layout, just a widget
         const std::string txt = wgt->layout( u, widt, 0, skip_pad );
-        if( disable_empty && txt.empty() ) {
-            // reclaim the skipped height in the sidebar
-            height_diff -= wgt->_height;
-        } else {
-            // draw normally
+        if( !( disable_empty && txt.empty() ) ) {
             widget::custom_draw_multiline( txt, w, margin, widt, 0 );
+        } else {
+            height_diff -= wgt->_height;
         }
     }
-    wnoutrefresh( w );
 
+    wnoutrefresh( w );
     return height_diff;
 }
 
@@ -1452,10 +1451,33 @@ std::string widget::sym_text( bool from_condition, int width )
 
 std::vector<string_id<widget>> widget::widgets( bool from_condition )
 {
-    if( from_condition ) {
-        return widgets_cond();
+    std::vector<string_id<widget>> result;
+
+    std::vector<string_id<widget>> source =
+                                    from_condition ? widgets_cond() : _widgets;
+
+    for( const widget_id &wid : source ) {
+        const widget &child = wid.obj();
+
+        if( !child._bps.empty() ) {
+            bool found = false;
+
+            for( const bodypart_id &bp : child._bps ) {
+                if( get_player_character().has_part( bp, body_part_filter::equivalent ) ) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if( !found ) {
+                continue;
+            }
+        }
+
+        result.push_back( wid );
     }
-    return _widgets;
+
+    return result;
 }
 
 std::string widget::number_cond( enumeration_conjunction join_type ) const
@@ -1784,103 +1806,169 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
                             bool skip_pad )
 {
     std::string ret;
+
     if( _style == "layout" ) {
+        // Get all child widgets
         std::vector<string_id<widget>> wgts = widgets( !_clauses.empty() );
-        int layout_label_width = ( label_width == 0 || ! _pad_labels ) ? _label_width : label_width;
+
+        // Filter child widgets based on body parts
+        std::vector<string_id<widget>> shown_widgets;
+        for( const auto &wid : wgts ) {
+            widget wobj = wid.obj();
+            bool include = true;
+
+            if( !wobj._bps.empty() ) {
+                include = false;
+                for( const bodypart_id &bp : wobj._bps ) {
+                    if( get_player_character().has_part( bp, body_part_filter::equivalent ) ) {
+                        include = true;
+                        break;
+                    }
+                }
+            }
+
+            if( include ) {
+                shown_widgets.push_back( wid );
+            }
+        }
+        wgts = std::move( shown_widgets );
+
+        int layout_label_width = ( label_width == 0 || !_pad_labels ) ? _label_width : label_width;
 
         if( _arrange == "rows" ) {
             std::string sep;
             int h = 0;
-            // Stack rows vertically into a multiline widget
             for( const widget_id &wid : wgts ) {
                 widget cur_child = wid.obj();
-                ret += sep + cur_child.layout( ava, max_width, layout_label_width,
-                                               skip_pad || wid->has_flag( json_flag_W_NO_PADDING ) );
+                const bool skip_pad_this = skip_pad || wid->has_flag( json_flag_W_NO_PADDING );
+                std::string txt = cur_child.layout( ava, std::max( 0, static_cast<int>( max_width ) ),
+                                                    layout_label_width, skip_pad_this );
+                if( txt.empty() ) {
+                    continue;
+                }
+                ret += sep + txt;
                 sep = "\n";
-                h += wid->_height < 0 ? 0 : wid->_height;
+                h += cur_child._height < 0 ? 0 : cur_child._height;
             }
-            // Set height for the final layout
             set_height_for_widget( id, h );
-        } else { // columns
+
+        } else if( _arrange == "grid" ) {
             const int num_widgets = wgts.size();
             if( num_widgets == 0 ) {
-                debugmsg( "widget layout has no widgets" );
+                _height = 0;
+                return "";
             }
-            // Number of spaces between columns
+
+            const int cols_per_row = std::max( 1, _grid_columns );
             const int col_padding = _padding;
-            // Subtract column padding to get space available for widgets
-            const int avail_width = max_width - col_padding * ( num_widgets - 1 );
-            // Divide available width equally among all widgets
-            const int child_width = avail_width / num_widgets;
-            // Total widget width w/o padding
-            const int total_widget_width = std::accumulate( wgts.begin(), wgts.end(), 0,
-            [child_width]( int sum, const widget_id & wid ) {
-                widget cur_child = wid.obj();
-                return sum + ( cur_child._style == "layout" &&
-                               cur_child._width > 0 ? cur_child._width : child_width );
-            } );
-            // Total widget width with padding
-            const int total_widget_padded_width = total_widget_width + col_padding * ( num_widgets - 1 );
-            // Keep remainder to distribute
-            int remainder = max_width - total_widget_padded_width;
-            // Store the (potentially) multi-row text for each column
+            std::string sep;
+            int total_height = 0;
+
+            for( int start = 0; start < num_widgets; start += cols_per_row ) {
+                std::vector<std::vector<std::string>> cols;
+                std::vector<int> widths;
+
+                int row_count = std::min( cols_per_row, num_widgets - start );
+                int avail_width = std::max( 0, static_cast<int>( max_width ) - col_padding * ( row_count - 1 ) );
+                int child_width = row_count > 0 ? avail_width / row_count : 0;
+                int remainder = avail_width - ( child_width * row_count );
+
+                for( int i = start; i < start + row_count; i++ ) {
+                    widget &child = const_cast<widget &>( wgts[i].obj() );
+                    int cur_width = child_width;
+                    if( child._style == "layout" && child._width > 0 ) {
+                        cur_width = child._width;
+                    }
+                    if( remainder > 0 ) {
+                        cur_width++;
+                        remainder--;
+                    }
+
+                    std::string txt = child.layout( ava, std::max( 0, cur_width ),
+                                                    layout_label_width, skip_pad );
+                    cols.emplace_back( string_split( txt, '\n' ) );
+                    widths.emplace_back( cur_width );
+                }
+
+                // Compute max height of this row (1 row per row in grid)
+                size_t h_max = 0;
+                for( const auto &col_lines : cols ) {
+                    h_max = std::max<size_t>( h_max, col_lines.size() );
+                }
+                if( h_max > 0 ) {
+                    total_height += h_max;
+                }
+
+                for( size_t r = 0; r < h_max; r++ ) {
+                    std::string line;
+                    bool any_val = false;
+                    for( size_t c = 0; c < cols.size(); c++ ) {
+                        if( r < cols[c].size() ) {
+                            any_val = true;
+                            line += cols[c][r];
+                        } else if( !skip_pad ) {
+                            line += std::string( widths[c], ' ' );
+                        }
+                        if( !skip_pad && c + 1 < cols.size() ) {
+                            line += std::string( col_padding, ' ' );
+                        }
+                    }
+                    if( any_val ) {
+                        ret += sep + line;
+                        sep = "\n";
+                    }
+                }
+            }
+            set_height_for_widget( id, total_height );
+
+        } else { // columns / minimum_columns
+            const int num_widgets = wgts.size();
+            if( num_widgets == 0 ) {
+                _height = 0;
+                return "";
+            }
+
+            const int col_padding = _padding;
+            int avail_width = std::max( 0, static_cast<int>( max_width ) - col_padding * ( num_widgets - 1 ) );
+            int child_width = num_widgets > 0 ? avail_width / num_widgets : 0;
+            int remainder = avail_width - ( child_width * num_widgets );
+
             std::vector<std::vector<std::string>> cols;
             std::vector<int> widths;
             unsigned int total_width = 0;
-            std::string debug_widths;
+
             for( size_t i = 0; i < wgts.size(); i++ ) {
-                const widget_id &wid = wgts[i];
-                widget cur_child = wid.obj();
+                widget cur_child = wgts[i].obj();
                 int cur_width = child_width;
-                // determine spacing based on type of column
-                if( _arrange == "minimum_columns" ) {
-                    if( cur_child._width > 0 ) {
-                        cur_width = cur_child._width;
-                    }
-                    // if last widget make it take the remaining space
+
+                if( _arrange == "minimum_columns" && cur_child._width > 0 ) {
+                    cur_width = cur_child._width;
                     if( i == wgts.size() - 1 ) {
-                        cur_width = std::max<int>( 0, avail_width - total_width );
+                        cur_width = std::max( 0, avail_width - static_cast<int>( total_width ) );
                     }
-                } else { //columns
-                    if( cur_child._style == "layout" && cur_child._width > 0 ) {
-                        cur_width = cur_child._width;
-                    }
-                    // Spread remainder over the first few columns
+                } else if( cur_child._style == "layout" && cur_child._width > 0 ) {
+                    cur_width = cur_child._width;
                     if( remainder > 0 ) {
                         cur_width += 1;
-                        remainder -= 1;
+                        remainder--;
                     }
                 }
 
-                // for debug keep track of each and width
-                debug_widths.append( string_format( "%s: %d,", wid.str(), cur_width ) );
-
-                if( cur_width > 0 ) {
-                    total_width += cur_width;
-                }
-                if( total_width > max_width ) {
-                    debugmsg( string_format( "widget layout is wider (%d) than sidebar allows (%d) for %s.",
-                                             total_width, max_width, debug_widths ) );
-                }
-                const bool skip_pad_this = skip_pad || wid->has_flag( json_flag_W_NO_PADDING );
-                // Layout child in this column
-                const std::string txt = cur_child.layout( ava, skip_pad_this ? 0 : cur_width,
-                                        layout_label_width, skip_pad_this );
-                // Store the resulting text for this column
+                std::string txt = cur_child.layout( ava, std::max( 0, cur_width ),
+                                                    layout_label_width, skip_pad );
                 cols.emplace_back( string_split( txt, '\n' ) );
                 widths.emplace_back( cur_width );
+                total_width += cur_width;
             }
 
             int h_max = 0;
             std::string sep;
-            // Line up each row of each column to form the whole multi-line layout
-            for( size_t r = 0; ; r++ ) {
+            for( size_t r = 0;; r++ ) {
                 bool any_val = false;
                 std::string line;
                 for( size_t c = 0; c < cols.size(); c++ ) {
                     if( r >= cols[c].size() ) {
                         if( !skip_pad ) {
-                            // No row r for this column, pad with empty space
                             line += std::string( widths[c], ' ' );
                         }
                     } else {
@@ -1888,7 +1976,6 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
                         line += cols[c][r];
                     }
                     if( !skip_pad && c + 1 < cols.size() ) {
-                        // Add padding between columns
                         line += std::string( col_padding, ' ' );
                     }
                 }
@@ -1899,45 +1986,44 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
                 sep = "\n";
                 h_max++;
             }
-            // Set height for the final layout
             set_height_for_widget( id, h_max );
         }
-    } else {
-        // Get displayed value (colorized)
+
+    } else { // leaf text widget
         std::string shown = show( ava, max_width );
-        // If nothing was printed, the widget never had a chance to adjust the height. Adjust it here.
         if( shown.empty() && has_flag( json_flag_W_DYNAMIC_HEIGHT ) ) {
             _height = 0;
         }
-        // Let the calling func know that this widget should be skipped for rendering
         if( has_flag( json_flag_W_DISABLED_WHEN_EMPTY ) &&
             string_empty_or_whitespace( remove_color_tags( shown ) ) ) {
             return "";
         }
+
         size_t strpos = 0;
         int row_num = 0;
-        // For multi-line widgets, each line is separated by a '\n' character
         while( ( strpos = shown.find( '\n' ) ) != std::string::npos && row_num < _height ) {
-            // Process line, including '\n'
             ret += append_line( shown.substr( 0, strpos + 1 ), row_num == 0, max_width,
                                 has_flag( json_flag_W_LABEL_NONE ) ? translation() : _label,
                                 0, _separator, _text_align, _label_align, skip_pad );
-            // Delete used token
             shown.erase( 0, strpos + 1 );
             row_num++;
         }
         if( row_num < _height ) {
-            // Process last line, or first for single-line widgets
             ret += append_line( shown, row_num == 0, max_width,
                                 has_flag( json_flag_W_LABEL_NONE ) ? translation() : _label,
-                                row_num == 0 && _pad_labels ? label_width : 0, _separator, _text_align, _label_align, skip_pad );
+                                row_num == 0 && _pad_labels ? label_width : 0,
+                                _separator, _text_align, _label_align, skip_pad );
         }
         if( !ret.empty() && ret.back() == '\n' ) {
             ret.pop_back();
         }
     }
-    return ret.find( '\n' ) != std::string::npos || max_width == 0 ?
-           ret : trim_by_length( ret, max_width );
+
+    if( ret.find( '\n' ) != std::string::npos || max_width <= 0 ) {
+        return ret;
+    } else {
+        return trim_by_length( ret, std::max( 0, static_cast<int>( max_width ) ) );
+    }
 }
 
 std::string format_widget_multiline( const std::vector<std::string> &keys, int max_height,
@@ -1945,34 +2031,48 @@ std::string format_widget_multiline( const std::vector<std::string> &keys, int m
 {
     std::string ret;
     height = 0;
-    // For single-line text, just lay everything on the same line
     if( width <= 0 && max_height == 1 ) {
         width = INT_MAX;
     }
+
     const int h_max = max_height == 0 ? INT_MAX : max_height;
     const int nsize = keys.size();
-    for( int row = 0, nidx = 0; row < h_max && nidx < nsize; row++ ) {
+    int nidx = 0;
+
+    for( int row = 0; row < h_max && nidx < nsize; row++ ) {
         int wavail = width;
-        int nwidth = utf8_width( keys[nidx], true );
+        bool row_has_content = false;
         bool startofline = true;
-        while( nidx < nsize && ( wavail > nwidth || startofline ) ) {
+
+        while( nidx < nsize ) {
+            int nwidth = utf8_width( keys[nidx], true );
+            if( !startofline && wavail <= nwidth ) {
+                break; // not enough space on this row
+            }
+
             startofline = false;
             wavail -= nwidth;
             ret += keys[nidx];
+            row_has_content = true;
             nidx++;
-            if( nidx < nsize ) {
-                nwidth = utf8_width( keys[nidx], true );
-                if( wavail > nwidth ) {
+
+            if( nidx < nsize && wavail > 0 ) {
+                int sep_width = join ? 2 : 2;
+                if( wavail > sep_width ) {
                     ret += join ? ", " : "  ";
-                    wavail -= 2;
+                    wavail -= sep_width;
                 }
             }
         }
-        // Newline, if not the last row
-        if( row < h_max - 1 ) {
-            ret += "\n";
+
+        // Only count rows that actually have content
+        if( row_has_content ) {
+            height++;
+            if( row < h_max - 1 && nidx < nsize ) {
+                ret += "\n";
+            }
         }
-        height++;
     }
+
     return ret;
 }

@@ -51,6 +51,14 @@
         "encumbrance": 8,
         "layers": [ "BELTED" ],
         "//warmth": 20
+      },
+      {
+        "material": [ { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "gastropod_foot" ],
+        "coverage": 65,
+        "encumbrance": 5,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
       }
     ]
   },
@@ -132,6 +140,14 @@
         "encumbrance": 8,
         "layers": [ "BELTED" ],
         "//warmth": 20
+      },
+      {
+        "material": [ { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "gastropod_foot" ],
+        "coverage": 65,
+        "encumbrance": 5,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
       }
     ]
   },
@@ -192,6 +208,14 @@
         "encumbrance": 8,
         "layers": [ "BELTED" ],
         "//warmth": 20
+      },
+      {
+        "material": [ { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "gastropod_foot" ],
+        "coverage": 65,
+        "encumbrance": 5,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
       }
     ],
     "use_action": {
@@ -268,6 +292,14 @@
         "encumbrance": 8,
         "layers": [ "BELTED" ],
         "//warmth": 20
+      },
+      {
+        "material": [ { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "gastropod_foot" ],
+        "coverage": 65,
+        "encumbrance": 5,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
       }
     ],
     "use_action": {
