@@ -3022,7 +3022,8 @@ bool cata_tiles::draw_from_id_string_internal(
         retract = 0;
     }
     // Draw the tile
-    draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll, nv_color_active, retract,
+    const tile_render_params rp{ ll, nv_color_active };
+    draw_tile_at( display_tile, screen_pos, loc_rand, rota, rp, retract,
                   height_3d, offset, scale_x, scale_y, mirror, creature );
 
     return true;
@@ -3030,21 +3031,19 @@ bool cata_tiles::draw_from_id_string_internal(
 
 bool cata_tiles::draw_tile_at(
     const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
-    lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
+    const tile_render_params &rp, int retract, int &height_3d,
     const point &offset, float scale_x, float scale_y, int mirror, bool creature )
 {
     int fake_int = height_3d;
-    draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, ll,
-                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y, mirror, creature );
-    draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, ll,
-                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y, mirror, creature );
+    draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, rp, retract, fake_int, offset, scale_x, scale_y, mirror, creature );
+    draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, rp, retract, height_3d, offset, scale_x, scale_y, mirror, creature );
     return true;
 }
 
 bool cata_tiles::draw_sprite_at(
     const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
-    const point &p, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
-    bool apply_visual_effects, int retract, int &height_3d, const point &offset, float scale_x,
+    const point &p, unsigned int loc_rand, bool rota_fg, int rota, const tile_render_params &rp,
+    int retract, int &height_3d, const point &offset, float scale_x,
     float scale_y, int mirror, bool creature )
 {
     const std::vector<int> *picked = svlist.pick( loc_rand );
@@ -3082,12 +3081,12 @@ bool cata_tiles::draw_sprite_at(
 
     //use night vision colors when in use
     //then use low light tile if available
-    if( ll == lit_level::MEMORIZED ) {
+    if( rp.ll == lit_level::MEMORIZED ) {
         if( const texture *ptr = tileset_ptr->get_memory_tile( sprite_index ) ) {
             sprite_tex = ptr;
         }
-    } else if( apply_visual_effects && nv_goggles_activated ) {
-        if( ll != lit_level::LOW ) {
+    } else if( rp.use_night_vision_tiles ) {
+        if( rp.ll != lit_level::LOW ) {
             if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
                 sprite_tex = ptr;
             }
@@ -3097,8 +3096,8 @@ bool cata_tiles::draw_sprite_at(
             }
         }
         // TODO: Review if this works for remote view e.g. RC cars.
-    } else if( apply_visual_effects && get_player_character().is_underwater() ) {
-        if( ll != lit_level::LOW ) {
+    } else if( rp.use_night_vision_tiles && get_player_character().is_underwater() ) {
+        if( rp.ll != lit_level::LOW ) {
             if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
                 sprite_tex = ptr;
             }
@@ -3107,7 +3106,7 @@ bool cata_tiles::draw_sprite_at(
                 sprite_tex = ptr;
             }
         }
-    } else if( ll == lit_level::LOW ) {
+    } else if( rp.ll == lit_level::LOW ) {
         if( const texture *ptr = tileset_ptr->get_shadow_tile( sprite_index ) ) {
             sprite_tex = ptr;
         }

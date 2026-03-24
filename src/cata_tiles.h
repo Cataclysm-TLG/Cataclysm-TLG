@@ -148,6 +148,16 @@ class texture
 };
 
 /**
+ * Bundles per-tile rendering state so the draw path carries all lighting
+ * decisions in one place. Future fields (light color tint, per-tile
+ * brightness) extend this struct without adding parameters to every function.
+ */
+struct tile_render_params {
+    lit_level ll;
+    bool use_night_vision_tiles = false;
+};
+
+/**
 * Holds weighted map of sprites for contextual tile layering
 * e.g. different sprites for item "pen" on "f_desk"
 */
@@ -553,14 +563,13 @@ class cata_tiles
 
         // Wrapper for draw_sprite_at()
         bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
-                           lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
+                           const tile_render_params &rp, int retract, int &height_3d,
                            const point &offset,
                            float scale_x, float scale_y, int mirror, bool creature = false );
 
         bool draw_sprite_at(
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
-            const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
-            bool apply_visual_effects, int retract, int &height_3d, const point &offset,
+            const point &, unsigned int loc_rand, bool rota_fg, int rota, const tile_render_params &rp, int retract, int &height_3d, const point &offset,
             float scale_x, float scale_y, int mirror, bool creature = false );
 
         /* Tile Picking */
