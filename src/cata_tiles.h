@@ -138,13 +138,12 @@ class texture
             return std::make_pair( srcrect.w, srcrect.h );
         }
         /// Interface to @ref SDL_RenderCopyEx, using this as the texture, and
-        /// null as source rectangle (render the whole texture). Other parameters
-        /// are simply passed through.
+        /// the stored source rectangle. Other parameters are simply passed through.
         int render_copy_ex( const SDL_Renderer_Ptr &renderer, const SDL_Rect *const dstrect,
                             const double angle,
                             const SDL_Point *const center, const SDL_RendererFlip flip ) const {
-            return SDL_RenderCopyEx( renderer.get(), sdl_texture_ptr.get(), &srcrect, dstrect, angle, center,
-                                     flip );
+            RenderCopyEx( renderer, sdl_texture_ptr.get(), &srcrect, dstrect, angle, center, flip );
+            return 0;
         }
 };
 

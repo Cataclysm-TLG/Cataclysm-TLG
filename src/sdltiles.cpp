@@ -881,8 +881,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
     {
         //set clipping to prevent drawing over stuff we shouldn't
         SDL_Rect clipRect = { dest.x, dest.y, width, height };
-        printErrorIf( SDL_RenderSetClipRect( renderer.get(), &clipRect ) != 0,
-                      "SDL_RenderSetClipRect failed" );
+        RenderSetClipRect( renderer, &clipRect );
 
         //fill render area with black to prevent artifacts where no new pixels are drawn
         geometry->rect( renderer, clipRect, SDL_Color() );
@@ -1370,8 +1369,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         }
     }
 
-    printErrorIf( SDL_RenderSetClipRect( renderer.get(), nullptr ) != 0,
-                  "SDL_RenderSetClipRect failed" );
+    RenderSetClipRect( renderer, nullptr );
 }
 
 static bool draw_window( Font_Ptr &font, const catacurses::window &w, const point &offset )
@@ -2641,8 +2639,8 @@ void draw_virtual_joystick()
         return;
     }
 
-    SDL_SetTextureAlphaMod( touch_joystick.get(),
-                            get_option<int>( "ANDROID_VIRTUAL_JOYSTICK_OPACITY" ) * 0.01f * 255.0f );
+    SetTextureAlphaMod( touch_joystick,
+                        get_option<int>( "ANDROID_VIRTUAL_JOYSTICK_OPACITY" ) * 0.01f * 255.0f );
 
     float longest_window_edge = std::max( WindowWidth, WindowHeight );
 

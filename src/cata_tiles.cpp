@@ -1328,8 +1328,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
     {
         // Set clipping to prevent drawing over stuff we shouldn't.
         SDL_Rect clipRect = {dest.x, dest.y, width, height};
-        printErrorIf( SDL_RenderSetClipRect( renderer.get(), &clipRect ) != 0,
-                      "SDL_RenderSetClipRect failed" );
+        RenderSetClipRect( renderer, &clipRect );
 
         // Fill render area with black to prevent artifacts where no new pixels are drawn.
         geometry->rect( renderer, clipRect, SDL_Color() );
@@ -2003,8 +2002,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         }
     }
 
-    printErrorIf( SDL_RenderSetClipRect( renderer.get(), nullptr ) != 0,
-                  "SDL_RenderSetClipRect failed" );
+    RenderSetClipRect( renderer, nullptr );
 }
 
 void cata_tiles::set_draw_cache_dirty()
