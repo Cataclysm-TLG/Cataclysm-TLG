@@ -915,60 +915,91 @@ static void layer_item( std::map<bodypart_id, encumbrance_data> &vals, const ite
  * e.g. one shirt will not encumber you, but two is tight and starts to restrict movement.
  * Clothes on separate layers don't interact, so if you wear e.g. a light jacket over a shirt,
  * they're intended to be worn that way, and don't impose a penalty.
- * The default is to assume that clothes do not fit, clothes that are "fitted" either
- * reduce the encumbrance penalty by ten, or if that is already 0, they reduce the layering effect.
- *
- * Use cases:
- * What would typically be considered normal "street clothes" should not be considered encumbering.
- * T-shirt, shirt, jacket on torso/arms, underwear and pants on legs, socks and shoes on feet.
- * This is currently handled by each of these articles of clothing
- * being on a different layer and/or body part, therefore accumulating no encumbrance.
  */
 void outfit::item_encumb( std::map<bodypart_id, encumbrance_data> &vals,
                           const item &new_item, const Character &guy ) const
 {
+    // Reset all encumbrance data.
+    vals.clear();
 
-    // reset all layer data
-    vals = std::map<bodypart_id, encumbrance_data>();
-
-    // Figure out where new_item would be worn
+    // Figure out where new_item would be worn.
     std::list<item>::const_iterator new_item_position = worn.end();
     if( !new_item.is_null() ) {
-        // const_cast required to work around g++-4.8 library bug
-        // see the commit that added this comment to understand why
         new_item_position =
             const_cast<outfit *>( this )->position_to_wear_new_item( new_item );
     }
 
-    // Track highest layer observed so far so we can penalize out-of-order
-    // items
+    // Track highest layer observed so far to penalize out-of-order items.
     std::map<sub_bodypart_id, layer_level> highest_layer_so_far;
 
+    // First, handle normal worn items + new_item insertion.
     for( auto w_it = worn.begin(); w_it != worn.end(); ++w_it ) {
         if( w_it == new_item_position ) {
-            layer_item( vals, new_item, highest_layer_so_far, guy );
+            layer_item(vals, new_item, highest_layer_so_far, guy);
         }
-        layer_item( vals, *w_it, highest_layer_so_far, guy );
+        layer_item(vals, *w_it, highest_layer_so_far, guy);
     }
-
     if( worn.end() == new_item_position && !new_item.is_null() ) {
-        layer_item( vals, new_item, highest_layer_so_far, guy );
+        layer_item(vals, new_item, highest_layer_so_far, guy);
     }
 
-    // make sure values are sane
+    // Handle ablative pockets.
+    for( const item &worn_item : worn ) {
+        if( !worn_item.is_ablative() ) {
+            continue; // Skip items without ablative pockets.
+        }
+
+        // Iterate over first-order ablative pockets.
+        for( const item_pocket *pocket_ptr : worn_item.get_all_ablative_pockets() ) {
+            const item_pocket &pocket = *pocket_ptr;
+
+            // Iterate over top-level items in pocket.
+            for( const item *pocketed_ptr : pocket.all_items_top() ) {
+                const item &pocketed = *pocketed_ptr;
+                if( pocketed.is_null() ) {
+                    continue;
+                }
+                // Compute encumbrance in a temporary map.
+                std::map<bodypart_id, encumbrance_data> temp_vals;
+                std::map<sub_bodypart_id, layer_level> dummy_highest_layer;
+                layer_item(temp_vals, pocketed, dummy_highest_layer, guy);
+                // Merge only to bodyparts NOT covered by the parent.
+                for( const auto &pair : temp_vals ) {
+                    const bodypart_id &bp = pair.first;
+                    // Check if parent covers this bodypart.
+                    bool overlaps = false;
+                    for( const string_id<body_part_type> &bpt : worn_item.get_covered_body_parts() ) {
+                        if( bpt == bp.id() ) {
+                            overlaps = true;
+                            break;
+                        }
+                    }
+                    // We don't need to special-case overlapping coverage, it works already.
+                    if( overlaps ) {
+                        continue;
+                    }
+                    encumbrance_data &elem = vals[bp];
+                    elem.armor_encumbrance += pair.second.armor_encumbrance;
+                    elem.layer_penalty += pair.second.layer_penalty;
+                    // Copy layer details.
+                    const auto &src = pair.second.layer_penalty_details;
+                    for( size_t i = 0; i < src.size(); i++ ) {
+                        elem.layer_penalty_details[i] = src[i];
+                    }
+                }
+            }
+        }
+    }
+
+    // Final sanity check and aggregation.
     for( const bodypart_id &bp : guy.get_all_body_parts() ) {
         encumbrance_data &elem = vals[bp];
-
         for( const layer_details &cur_layer : elem.layer_penalty_details ) {
-            // only apply the layers penalty to the limb if it is conflicting
             if( cur_layer.is_conflicting ) {
                 elem.layer_penalty += cur_layer.total;
             }
         }
-
         elem.armor_encumbrance = std::max( 0, elem.armor_encumbrance );
-
-        // Add armor and layering penalties for the final values
         elem.encumbrance += elem.armor_encumbrance + elem.layer_penalty;
     }
 }

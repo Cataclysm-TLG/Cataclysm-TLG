@@ -1746,6 +1746,13 @@
         "coverage": 60,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
+      },
+      {
+        "encumbrance": 4,
+        "volume_encumber_modifier": 0.25,
+        "coverage": 30,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
       }
     ],
     "use_action": { "type": "transform", "msg": "You move the bag to your back.", "menu_text": "Adjust", "target": "mbag", "moves": 120 }

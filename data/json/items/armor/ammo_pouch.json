@@ -1136,6 +1136,12 @@
         "coverage": 5,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "encumbrance": [ 2, 3 ],
+        "coverage": 2,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
       }
     ]
   },

@@ -952,7 +952,7 @@
     "parent": "torso",
     "secondary": true,
     "side": 0,
-    "name": "front torso (hang)",
+    "name": "chest (hanging)",
     "opposite": "torso_hanging_back",
     "name_multiple": "item hangs off you",
     "locations_under": [ "torso_upper", "torso_lower" ]
@@ -964,7 +964,7 @@
     "parent": "torso",
     "secondary": true,
     "side": 0,
-    "name": "back torso (hang)",
+    "name": "back (hanging)",
     "opposite": "torso_hanging_front",
     "name_multiple": "item hangs off you",
     "locations_under": [ "torso_upper", "torso_lower" ]

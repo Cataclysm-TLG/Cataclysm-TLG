@@ -970,7 +970,7 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
     if( is_ablative() ) {
         // its an ablative pocket volume and weight maxes don't matter
         info.emplace_back( "DESCRIPTION",
-                           _( "Holds a <info>single armored plate</info>." ) );
+                           _( "Holds a <info>single armor add-on or attachment</info>." ) );
     } else if( data->ammo_restriction.empty() ) {
         info.push_back( vol_to_info( cont_type_str, _( "Volume: " ),
                                      volume_capacity(), 2, false ) );
@@ -1482,7 +1482,7 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
             return ret_val<item_pocket::contain_code>::make_success();
         } else {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_MOD, _( "only mods can go into mod pocket" ) );
+                       contain_code::ERR_MOD, _( "Only mods can go into mod slots." ) );
         }
     }
 
@@ -1496,7 +1496,7 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
             return ret_val<item_pocket::contain_code>::make_success();
         } else {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_MOD, _( "only books, e-scannable items can go into e-file pocket" ) );
+                       contain_code::ERR_MOD, _( "Only e-scannable items can go into e-file containers." ) );
         }
     }
 
@@ -1505,13 +1505,13 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
             return ret_val<item_pocket::contain_code>::make_success();
         } else {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_MOD, _( "only cables can go into cable pocket" ) );
+                       contain_code::ERR_MOD, _( "Only cables can go into cable pockets." ) );
         }
     }
 
     if( it.has_flag( flag_NO_UNWIELD ) ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_MOD, _( "cannot unwield item" ) );
+                   contain_code::ERR_MOD, _( "Cannot unwield item." ) );
     }
 
     if( !data->item_id_restriction.empty() || !data->get_flag_restrictions().empty() ||
@@ -1520,7 +1520,7 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
             !it.has_any_flag( data->get_flag_restrictions() ) &&
             !data->material_restriction.count( it.get_base_material().id ) ) {
             return ret_val<item_pocket::contain_code>::make_failure( contain_code::ERR_FLAG,
-                    _( "holster does not accept this item type or form factor" ) );
+                    _( "Incorrect item type." ) );
         }
     }
 
@@ -1528,14 +1528,14 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
     if( !data->ammo_restriction.empty() ) {
         if( !it.is_ammo() ) {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_AMMO, _( "item is not ammunition" ) );
+                       contain_code::ERR_AMMO, _( "Item is not ammunition." ) );
         }
 
         const auto ammo_restriction_iter = data->ammo_restriction.find( it.ammo_type() );
 
         if( ammo_restriction_iter == data->ammo_restriction.end() ) {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_AMMO, _( "item is not the correct ammo type" ) );
+                       contain_code::ERR_AMMO, _( "Item is not the correct ammo type." ) );
         }
 
         return ret_val<item_pocket::contain_code>::make_success();
@@ -1544,13 +1544,13 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
     if( it.made_of( phase_id::LIQUID ) ) {
         if( !data->watertight && !it.has_flag( flag_FROM_FROZEN_LIQUID ) ) {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_LIQUID, _( "can't contain liquid" ) );
+                       contain_code::ERR_LIQUID, _( "Can't contain liquid." ) );
         }
     }
     if( it.made_of( phase_id::GAS ) ) {
         if( !data->airtight ) {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_GAS, _( "can't contain gas" ) );
+                       contain_code::ERR_GAS, _( "Can't contain gas." ) );
         }
     }
 
@@ -1561,22 +1561,22 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
         !it.is_frozen_liquid() && data->max_item_volume &&
         !charges_per_volume_recursive( *data->max_item_volume, it ) ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_TOO_BIG, _( "item is too big" ) );
+                   contain_code::ERR_TOO_BIG, _( "Item is too big." ) );
     }
     if( it.length() > data->max_item_length ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_TOO_BIG, _( "item is too long" ) );
+                   contain_code::ERR_TOO_BIG, _( "Item is too long." ) );
     }
 
     if( it.length() < data->min_item_length ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_TOO_SMALL, _( "item is too short" ) );
+                   contain_code::ERR_TOO_SMALL, _( "Item is too short." ) );
     }
 
     if( ( it.count_by_charges() ? it.volume( false, false, 1 ) : it.volume() )
         < data->min_item_volume ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_TOO_SMALL, _( "item is too small" ) );
+                   contain_code::ERR_TOO_SMALL, _( "Item is too small." ) );
     }
     return ret_val<item_pocket::contain_code>::make_success();
 }
@@ -1682,16 +1682,16 @@ ret_val<item_pocket::contain_code> item_pocket::_can_contain( const item &it,
                 return ret_val<item_pocket::contain_code>::make_success();
             } else {
                 return ret_val<item_pocket::contain_code>::make_failure(
-                           contain_code::ERR_NO_SPACE, _( "ablative pocket already contains a plate" ) );
+                           contain_code::ERR_NO_SPACE, _( "Already contains an insert." ) );
             }
         }
 
         if( it.is_rigid() ) {
             for( const sub_bodypart_id &sbp : it.get_covered_sub_body_parts() ) {
-                if( it.is_bp_rigid( sbp ) && std::count( no_rigid.begin(), no_rigid.end(), sbp ) != 0 ) {
+                if( it.is_bp_rigid_selective( sbp ) && std::count( no_rigid.begin(), no_rigid.end(), sbp ) != 0 ) {
                     return ret_val<item_pocket::contain_code>::make_failure(
                                contain_code::ERR_NO_SPACE,
-                               _( "ablative pocket is being worn with hard armor can't support hard plate" ) );
+                               _( "Insert would conflict with another worn rigid item." ) );
                 }
             }
         }
