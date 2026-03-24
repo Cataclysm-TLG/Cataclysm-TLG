@@ -1156,8 +1156,13 @@ const std::array<bodypart_str_id, 4> &right_side_parts()
 
 } // namespace
 
-static void iterate_helper_sbp( const item *i, const side s,
-                                const std::function<void( const sub_bodypart_str_id & )> &cb )
+static void iterate_helper_sbp_masked( const item *i, const side s,
+                                       const std::function<void( const sub_bodypart_str_id & )> &cb,
+                                       const body_part_set *mask = nullptr );
+
+static void iterate_helper_sbp_masked( const item *i, const side s,
+                                       const std::function<void( const sub_bodypart_str_id & )> &cb,
+                                       const body_part_set *mask )
 {
     const islot_armor *armor = i->find_armor_data();
     if( armor == nullptr ) {
@@ -1166,64 +1171,71 @@ static void iterate_helper_sbp( const item *i, const side s,
 
     for( const armor_portion_data &data : armor->sub_data ) {
         if( !data.sub_coverage.empty() ) {
-            if( !armor->sided || s == side::BOTH || s == side::num_sides ) {
-                for( const sub_bodypart_str_id &bpid : data.sub_coverage ) {
-                    cb( bpid );
+            for( const sub_bodypart_str_id &sbp : data.sub_coverage ) {
+                // skip opposite side if necessary
+                if( s != side::BOTH && s != side::num_sides ) {
+                    if( sbp->part_side != s && sbp->part_side != side::BOTH ) {
+                        continue;
+                    }
                 }
-                continue;
-            }
-            for( const sub_bodypart_str_id &bpid : data.sub_coverage ) {
-                if( bpid->part_side == s || bpid->part_side == side::BOTH ) {
-                    cb( bpid );
+                // apply mask if present
+                if( mask == nullptr || mask->test(sbp->parent) ) {
+                    cb(sbp);
                 }
             }
         }
     }
 }
+
+
+
+static void iterate_helper_masked( const item *i, const side s,
+                                   const std::function<void( const bodypart_str_id & )> &cb,
+                                   const body_part_set *mask = nullptr );
 
 void item::iterate_covered_sub_body_parts_internal( const side s,
         const std::function<void( const sub_bodypart_str_id & )> &cb,
         bool check_ablative_armor ) const
-
 {
-    iterate_helper_sbp( this, s, cb );
+    // 1. gather parent coverage
+    body_part_set parent_coverage;
+    iterate_helper_masked( this, s, [&]( const bodypart_str_id &bp ){ parent_coverage.set(bp); } );
 
-    //check for ablative armor too
+    // 2. process sub-body-parts masked by parent
+    iterate_helper_sbp_masked( this, s, cb, &parent_coverage );
+
     if( check_ablative_armor && is_ablative() ) {
         for( const item_pocket *pocket : get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
-
-                iterate_helper_sbp( &ablative_armor, s, cb );
+                iterate_helper_sbp_masked( &ablative_armor, s, cb, &parent_coverage );
             }
         }
     }
 }
 
-static void iterate_helper( const item *i, const side s,
-                            const std::function<void( const bodypart_str_id & )> &cb )
+static void iterate_helper_masked( const item *i, const side s,
+                                   const std::function<void( const bodypart_str_id & )> &cb,
+                                   const body_part_set *mask )
 {
     const islot_armor *armor = i->find_armor_data();
     if( armor == nullptr ) {
         return;
     }
 
-    // If we are querying for only one side of the body, we ignore coverage
-    // for parts on the opposite side of the body.
     const auto &opposite_side_parts = s == side::LEFT ? right_side_parts() : left_side_parts();
 
     for( const armor_portion_data &data : armor->data ) {
         if( data.covers.has_value() ) {
-            if( !armor->sided || s == side::BOTH || s == side::num_sides ) {
-                for( const bodypart_str_id &bpid : data.covers.value() ) {
-                    cb( bpid );
-                }
-                continue;
-            }
             for( const bodypart_str_id &bpid : data.covers.value() ) {
-                if( std::find( opposite_side_parts.begin(), opposite_side_parts.end(),
-                               bpid ) == opposite_side_parts.end() ) {
+                // skip opposite side if necessary
+                if( s != side::BOTH && s != side::num_sides ) {
+                    if( std::find(opposite_side_parts.begin(), opposite_side_parts.end(), bpid) != opposite_side_parts.end() ) {
+                        continue;
+                    }
+                }
+                // apply mask if present
+                if( mask == nullptr || mask->test(bpid) ) {
                     cb( bpid );
                 }
             }
@@ -1235,16 +1247,18 @@ void item::iterate_covered_body_parts_internal( const side s,
         const std::function<void( const bodypart_str_id & )> &cb,
         bool check_ablative_armor ) const
 {
-    iterate_helper( this, s, cb );
+    body_part_set parent_coverage;
+    iterate_helper_masked( this, s, [&]( const bodypart_str_id &bp ){ parent_coverage.set(bp); cb(bp); } );
 
-    //check for ablative armor too
     if( check_ablative_armor && is_ablative() ) {
         for( const item_pocket *pocket : get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
-
-                iterate_helper( &ablative_armor, s, cb );
+                iterate_helper_masked( &ablative_armor, s, [&]( const bodypart_str_id &bp ) {
+                    if( parent_coverage.test(bp) ) {
+                        cb(bp);
+                    }
+                } );
             }
         }
     }
@@ -8426,7 +8440,6 @@ int item::get_coverage( const sub_bodypart_id &bodypart ) const
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
                 adjusted_coverage = std::max( adjusted_coverage, ablative_armor.get_coverage( bodypart ) );
             }
@@ -8451,19 +8464,28 @@ const armor_portion_data *item::portion_for_bodypart( const bodypart_id &bodypar
     }
 
     const islot_armor *t = find_armor_data();
-    if( !t ) {
-        return nullptr;
+    if( t ) {
+        for( const armor_portion_data &entry : t->data ) {
+            if( entry.covers.has_value() && entry.covers->test( bodypart.id() ) ) {
+                return &entry;
+            }
+        }
     }
 
-    for( const armor_portion_data &entry : t->data ) {
-        if( entry.covers.has_value() && entry.covers->test( bodypart.id() ) ) {
-            return &entry;
+    if( is_ablative() ) {
+        for( const item_pocket *pocket : get_all_ablative_pockets() ) {
+            if( !pocket->empty() ) {
+                const item &ablative_armor = pocket->front();
+                const armor_portion_data* entry = ablative_armor.portion_for_bodypart(bodypart);
+                if( entry != nullptr ) {
+                    return entry;
+                }
+            }
         }
     }
 
     return nullptr;
 }
-
 
 const armor_portion_data *item::portion_for_bodypart( const sub_bodypart_id &bodypart ) const
 {
@@ -8472,27 +8494,30 @@ const armor_portion_data *item::portion_for_bodypart( const sub_bodypart_id &bod
     }
 
     const islot_armor *t = find_armor_data();
-    if( !t ) {
-        return nullptr;
-    }
-
     const sub_bodypart_str_id &bodypart_sid = bodypart.id();
 
-    for( const armor_portion_data &entry : t->sub_data ) {
-
-        if( entry.sub_coverage.count( bodypart_sid ) > 0 ) {
-            return &entry;
-        }
-
-        // Try similar sub-bodyparts
-        for( const sub_bodypart_str_id &similar : bodypart->similar_bodyparts ) {
-
-            if( !similar.is_valid() ) {
-                continue;
+    if( t ) {
+        for( const armor_portion_data &entry : t->sub_data ) {
+            if( entry.sub_coverage.count( bodypart_sid ) > 0 ) {
+                return &entry;
             }
 
-            if( entry.sub_coverage.count( similar ) > 0 ) {
-                return &entry;
+            for( const sub_bodypart_str_id &similar : bodypart->similar_bodyparts ) {
+                if( similar.is_valid() && entry.sub_coverage.count( similar ) > 0 ) {
+                    return &entry;
+                }
+            }
+        }
+    }
+
+    if( is_ablative() ) {
+        for( const item_pocket *pocket : get_all_ablative_pockets() ) {
+            if( !pocket->empty() ) {
+                const item &ablative_armor = pocket->front();
+                const armor_portion_data* entry = ablative_armor.portion_for_bodypart(bodypart);
+                if( entry != nullptr ) {
+                    return entry;
+                }
             }
         }
     }
