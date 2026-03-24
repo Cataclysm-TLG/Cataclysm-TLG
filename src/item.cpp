@@ -1172,13 +1172,11 @@ static void iterate_helper_sbp_masked( const item *i, const side s,
     for( const armor_portion_data &data : armor->sub_data ) {
         if( !data.sub_coverage.empty() ) {
             for( const sub_bodypart_str_id &sbp : data.sub_coverage ) {
-                // skip opposite side if necessary
                 if( s != side::BOTH && s != side::num_sides ) {
                     if( sbp->part_side != s && sbp->part_side != side::BOTH ) {
                         continue;
                     }
                 }
-                // apply mask if present
                 if( mask == nullptr || mask->test(sbp->parent) ) {
                     cb(sbp);
                 }
@@ -1197,13 +1195,9 @@ void item::iterate_covered_sub_body_parts_internal( const side s,
         const std::function<void( const sub_bodypart_str_id & )> &cb,
         bool check_ablative_armor ) const
 {
-    // 1. gather parent coverage
     body_part_set parent_coverage;
     iterate_helper_masked( this, s, [&]( const bodypart_str_id &bp ){ parent_coverage.set(bp); } );
-
-    // 2. process sub-body-parts masked by parent
     iterate_helper_sbp_masked( this, s, cb, &parent_coverage );
-
     if( check_ablative_armor && is_ablative() ) {
         for( const item_pocket *pocket : get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
@@ -1222,19 +1216,15 @@ static void iterate_helper_masked( const item *i, const side s,
     if( armor == nullptr ) {
         return;
     }
-
     const auto &opposite_side_parts = s == side::LEFT ? right_side_parts() : left_side_parts();
-
     for( const armor_portion_data &data : armor->data ) {
         if( data.covers.has_value() ) {
             for( const bodypart_str_id &bpid : data.covers.value() ) {
-                // skip opposite side if necessary
                 if( s != side::BOTH && s != side::num_sides ) {
                     if( std::find(opposite_side_parts.begin(), opposite_side_parts.end(), bpid) != opposite_side_parts.end() ) {
                         continue;
                     }
                 }
-                // apply mask if present
                 if( mask == nullptr || mask->test(bpid) ) {
                     cb( bpid );
                 }
@@ -1249,7 +1239,6 @@ void item::iterate_covered_body_parts_internal( const side s,
 {
     body_part_set parent_coverage;
     iterate_helper_masked( this, s, [&]( const bodypart_str_id &bp ){ parent_coverage.set(bp); cb(bp); } );
-
     if( check_ablative_armor && is_ablative() ) {
         for( const item_pocket *pocket : get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
