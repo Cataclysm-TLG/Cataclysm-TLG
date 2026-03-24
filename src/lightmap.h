@@ -53,6 +53,26 @@ constexpr inline int LIGHT_RANGE( float b )
                              LIGHT_TRANSPARENCY_OPEN_AIR ) );
 }
 
+// Per-tile accumulated light color energy (float RGB).
+// Stored as raw energy, not display-ready; the renderer converts to uint8.
+struct light_color_rgb {
+    float r = 0.0f;
+    float g = 0.0f;
+    float b = 0.0f;
+    bool is_colored() const {
+        return r > 0.0f || g > 0.0f || b > 0.0f;
+    }
+    light_color_rgb &operator+=( const light_color_rgb &rhs ) {
+        r += rhs.r;
+        g += rhs.g;
+        b += rhs.b;
+        return *this;
+    }
+    light_color_rgb operator*( float scale ) const {
+        return { r * scale, g * scale, b * scale };
+    }
+};
+
 enum class lit_level : uint8_t {
     DARK = 0,
     LOW, // Hard to see

@@ -20,6 +20,7 @@
 #include "compatibility.h"
 #include "coordinates.h"
 #include "damage.h"
+#include "lightmap.h"
 #include "requirements.h"
 #include "translations.h"
 #include "type_id.h"
@@ -481,6 +482,7 @@ class vpart_info
         // recharging (charging speed in watts)
         // funnel (water collection area in mm^2)
         int bonus = 0;
+        light_color_rgb light_color;
 
         /** cargo weight modifier (percentage) */
         int cargo_weight_modifier = 100;
