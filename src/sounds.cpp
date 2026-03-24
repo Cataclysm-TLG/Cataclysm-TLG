@@ -642,7 +642,7 @@ void sounds::process_sound_markers( Character *you )
         // Secure the flag before wake_up() clears the effect
         bool slept_through = you->has_effect( effect_slept_through_alarm );
         // See if we need to wake someone up
-        if( you->has_effect( effect_sleep ) ) {
+        if( you->in_sleep_state() ) {
             if( ( ( !( you->has_trait( trait_HEAVYSLEEPER ) ||
                        you->has_trait( trait_HEAVYSLEEPER2 ) ) && dice( 2, 15 ) < heard_volume ) ||
                   ( you->has_trait( trait_HEAVYSLEEPER ) && dice( 3, 15 ) < heard_volume ) ||

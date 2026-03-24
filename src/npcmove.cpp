@@ -68,6 +68,8 @@
 #include "monster.h"
 #include "mtype.h"
 #include "npc_attack.h"
+#include "npc_decision_category.h"
+#include "npc_opinion.h"
 #include "npctalk.h"
 #include "omdata.h"
 #include "options.h"
@@ -169,6 +171,7 @@ static const skill_id skill_firstaid( "firstaid" );
 
 static const trait_id trait_ALCMET( "ALCMET" );
 static const string_id<behavior::node_t> behavior_node_t_npc_homeostasis( "npc_homeostasis" );
+static const string_id<behavior::node_t> behavior_node_t_npc_decision( "npc_decision" );
 static const string_id<behavior::node_t> behavior_node_t_npc_needs( "npc_needs" );
 
 static const trait_id trait_IGNORE_SOUND( "IGNORE_SOUND" );
@@ -217,6 +220,80 @@ enum npc_action : int {
     npc_worker_downtime,
     num_npc_actions
 };
+
+const char *category_name( decision_category cat )
+{
+    switch( cat ) {
+        case decision_category::combat:
+            return "combat";
+        case decision_category::investigate:
+            return "investigate";
+        case decision_category::needs:
+            return "needs";
+        case decision_category::duty:
+            return "duty";
+        case decision_category::idle:
+            return "idle";
+        case decision_category::unmodeled:
+            return "unmodeled";
+    }
+    return "unmodeled";
+}
+
+decision_category bt_goal_to_category( const std::string &goal )
+{
+    if( goal == "fight" || goal == "flee" ) {
+        return decision_category::combat;
+    }
+    if( goal == "investigate_sound" ) {
+        return decision_category::investigate;
+    }
+    if( goal == "drink_water" || goal == "eat_food" || goal == "go_to_sleep" ||
+        goal == "wear_warmer_clothes" || goal == "take_shelter" || goal == "start_fire" ) {
+        return decision_category::needs;
+    }
+    if( goal == "return_to_guard_pos" ) {
+        return decision_category::duty;
+    }
+    if( goal == "idle" ) {
+        return decision_category::idle;
+    }
+    return decision_category::unmodeled;
+}
+
+const char *classify_comparison( decision_category bt, decision_category cascade )
+{
+    if( bt == decision_category::unmodeled || cascade == decision_category::unmodeled ) {
+        return "unmodeled";
+    }
+    return bt == cascade ? "converged" : "DIVERGED";
+}
+
+static decision_category cascade_action_to_category( npc_action action )
+{
+    switch( action ) {
+        case npc_melee:
+        case npc_shoot:
+        case npc_do_attack:
+        case npc_reach_attack:
+        case npc_aim:
+        case npc_flee:
+        case npc_avoid_friendly_fire:
+            return decision_category::combat;
+        case npc_investigate_sound:
+            return decision_category::investigate;
+        case npc_sleep:
+            return decision_category::needs;
+        case npc_return_to_guard_pos:
+            return decision_category::duty;
+        case npc_undecided:
+        case npc_pause:
+            return decision_category::idle;
+        default:
+            return decision_category::unmodeled;
+    }
+}
+
 
 namespace
 {
@@ -1402,6 +1479,19 @@ void npc::move()
         }
     }
 
+    // Top-level decision BT: evaluate before side-effecting cascade for convergence
+    // diagnostic. Placed after regen_ai_cache, act_on_danger_assessment, and
+    // guaranteed_hostile attitude mutation so the oracle sees final state.
+    std::string bt_decision_goal;
+    decision_category bt_decision_cat = decision_category::unmodeled;
+    if( debug_mode && debugmode::enabled_filters.count( debugmode::DF_NPC_NEEDS ) ) {
+        behavior::character_oracle_t decision_oracle( this );
+        behavior::tree decision_tree;
+        decision_tree.add( &behavior_node_t_npc_decision.obj() );
+        bt_decision_goal = decision_tree.tick( &decision_oracle );
+        bt_decision_cat = bt_goal_to_category( bt_decision_goal );
+    }
+
     /* This bypasses the logic to determine the npc action, but this all needs to be rewritten
      * anyway.
      * NPC won't avoid dangerous terrain while accompanying the player inside a vehicle to keep
@@ -1622,6 +1712,17 @@ void npc::move()
     }
 
     add_msg_debug( debugmode::DF_NPC, "%s chose action %s.", get_name(), npc_action_name( action ) );
+
+    if( !bt_decision_goal.empty() ) {
+        decision_category cascade_cat = cascade_action_to_category( action );
+        add_msg_debug( debugmode::DF_NPC_NEEDS,
+                       "NPC %s: BT=%s(%s) cascade=%s(%s) %s",
+                       get_name(),
+                       category_name( bt_decision_cat ), bt_decision_goal,
+                       category_name( cascade_cat ), npc_action_name( action ),
+                       classify_comparison( bt_decision_cat, cascade_cat ) );
+    }
+
     execute_action( action );
 }
 
@@ -1741,7 +1842,7 @@ void npc::execute_action( npc_action action )
                     // but fall asleep directly on success. The lying_down ->
                     // can_sleep() rng retry cycle is for the player who gets
                     // "you try to sleep but can't" feedback. Without direct
-                    // fall_asleep(), NPC sleepiness keeps incrementing while
+                    // fall_asleep(), NPC fatigue keeps incrementing while
                     // they lie awake (recovery only runs while asleep).
                     if( !is_avatar() && can_sleep() ) {
                         fall_asleep();

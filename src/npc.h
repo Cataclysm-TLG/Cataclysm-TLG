@@ -1372,6 +1372,31 @@ class npc : public Character
             return ai_cache.current_attack_evaluation;
         }
 
+        // Accessors for BT oracle predicates (character_oracle_t)
+        float get_ai_danger() const {
+            return ai_cache.danger;
+        }
+        weak_ptr_fast<Creature> get_ai_target() const {
+            return ai_cache.target;
+        }
+        bool has_ai_sound_alerts() const {
+            return !ai_cache.sound_alerts.empty();
+        }
+        std::optional<tripoint_abs_ms> get_ai_guard_pos() const {
+            return ai_cache.guard_pos;
+        }
+        // Effective guard position: ai_cache (ephemeral, from sound investigation)
+        // falls back to persistent guard_pos (from mission/dialogue assignment).
+        std::optional<tripoint_abs_ms> get_effective_guard_pos() const {
+            if( ai_cache.guard_pos ) {
+                return ai_cache.guard_pos;
+            }
+            return guard_pos;
+        }
+        void push_ai_sound_alert( const tripoint_abs_ms &pos, sounds::sound_t type, int vol ) {
+            ai_cache.sound_alerts.push_back( { pos, type, vol } );
+        }
+
         // Where we last saw the player
         std::optional<tripoint_abs_ms> last_player_seen_pos;
         // Player orders a friendly NPC to move to this position
