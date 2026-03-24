@@ -638,6 +638,7 @@
     "max_coverage": 45,
     "parent": "gastropod_foot",
     "side": 0,
+    "opposite": "gastropod_foot_lower",
     "name_multiple": "foot",
     "name": "upper foot"
   },
@@ -647,6 +648,7 @@
     "max_coverage": 45,
     "parent": "gastropod_foot",
     "side": 0,
+    "opposite": "gastropod_foot_upper",
     "name_multiple": "foot",
     "name": "lower foot"
   },
@@ -656,6 +658,7 @@
     "max_coverage": 10,
     "parent": "gastropod_foot",
     "side": 0,
+    "opposite": "sub_limb_debug",
     "name_multiple": "foot",
     "name": "pedal sole"
   },
@@ -668,6 +671,7 @@
     "secondary": true,
     "name_multiple": "foot (draped)",
     "name": "foot (draped)",
+    "opposite": "sub_limb_debug",
     "locations_under": [ "gastropod_foot_upper" ]
   }
 ]
