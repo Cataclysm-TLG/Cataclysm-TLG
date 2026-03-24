@@ -1,14 +1,6 @@
 [
-    {
-    "id": "ll_limbs_layout",
-    "type": "widget",
-    "style": "layout",
-    "label": "Limbs",
-    "arrange": "columns",
-    "widgets": [ "ll_left_limbs_layout", "ll_middle_limbs_layout", "ll_right_limbs_layout" ]
-  },
   {
-    "id": "ll_limbs_new_layout",
+    "id": "ll_limbs_layout",
     "type": "widget",
     "style": "layout",
     "label": "Limbs",
@@ -16,6 +8,17 @@
     "columns": 3,
     "height": 0,
     "widgets": [ "ll_larm_layout", "ll_head_layout", "ll_rarm_layout", "ll_lleg_layout", "ll_gastropod_foot_layout", "ll_torso_layout", "ll_rleg_layout" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_limbs_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "label": "Limbs",
+    "arrange": "grid",
+    "columns": 3,
+    "height": 0,
+    "widgets": [ "ll_larm_sa_layout", "ll_head_sa_layout", "ll_rarm_sa_layout", "ll_lleg_sa_layout", "ll_gastropod_foot_sa_layout", "ll_torso_sa_layout", "ll_rleg_sa_layout" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
@@ -101,7 +104,8 @@
     "arrange": "rows",
     "bodypart": "arm_l",
     "text_align": "right",
-    "widgets": [ "status_hpn_layout_larm" ]
+    "widgets": [ "status_hpn_layout_larm" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "ll_head_sa_layout",
@@ -110,7 +114,8 @@
     "arrange": "rows",
     "bodypart": "head",
     "text_align": "right",
-    "widgets": [ "status_hpn_layout_head" ]
+    "widgets": [ "status_hpn_layout_head" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "ll_rarm_sa_layout",
@@ -119,7 +124,8 @@
     "arrange": "rows",
     "bodypart": "arm_r",
     "text_align": "right",
-    "widgets": [ "status_hpn_layout_rarm" ]
+    "widgets": [ "status_hpn_layout_rarm" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
     {
     "id": "ll_lleg_sa_layout",
@@ -128,7 +134,8 @@
     "arrange": "rows",
     "bodypart": "leg_l",
     "text_align": "right",
-    "widgets": [ "status_hpn_layout_lleg" ]
+    "widgets": [ "status_hpn_layout_lleg" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
     {
     "id": "ll_gastropod_foot_sa_layout",
@@ -137,7 +144,8 @@
     "arrange": "rows",
     "bodypart": "gastropod_foot",
     "text_align": "right",
-    "widgets": [ "status_hpn_layout_gastropod_foot" ]
+    "widgets": [ "status_hpn_layout_gastropod_foot" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
     {
     "id": "ll_torso_sa_layout",
@@ -146,7 +154,8 @@
     "arrange": "rows",
     "bodypart": "torso",
     "text_align": "right",
-    "widgets": [ "status_hpn_layout_torso" ]
+    "widgets": [ "status_hpn_layout_torso" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
     {
     "id": "ll_rleg_sa_layout",
@@ -155,63 +164,8 @@
     "arrange": "rows",
     "bodypart": "leg_r",
     "text_align": "right",
-    "widgets": [ "status_hpn_layout_rleg" ]
-  },
-  {
-    "id": "ll_left_limbs_layout",
-    "type": "widget",
-    "style": "layout",
-    "arrange": "rows",
-    "text_align": "right",
-    "widgets": [ "status_hpg_layout_larm", "status_hpg_layout_lleg" ]
-  },
-  {
-    "id": "ll_middle_limbs_layout",
-    "type": "widget",
-    "style": "layout",
-    "arrange": "rows",
-    "text_align": "center",
-    "widgets": [ "status_hpg_layout_head", "status_hpg_layout_torso" ]
-  },
-  {
-    "id": "ll_right_limbs_layout",
-    "type": "widget",
-    "style": "layout",
-    "arrange": "rows",
-    "widgets": [ "status_hpg_layout_rarm", "status_hpg_layout_rleg", "status_hpg_layout_gastropod_foot" ]
-  },
-
-  {
-    "id": "ll_left_limbs_sa_layout",
-    "type": "widget",
-    "style": "layout",
-    "arrange": "rows",
-    "text_align": "right",
-    "widgets": [ "status_hpn_layout_larm", "status_hpn_layout_lleg" ]
-  },
-  {
-    "id": "ll_middle_limbs_sa_layout",
-    "type": "widget",
-    "style": "layout",
-    "arrange": "rows",
-    "text_align": "center",
-    "widgets": [ "status_hpn_layout_head", "status_hpn_layout_torso" ]
-  },
-  {
-    "id": "ll_right_limbs_sa_layout",
-    "type": "widget",
-    "style": "layout",
-    "arrange": "rows",
-    "widgets": [ "status_hpn_layout_rarm", "status_hpn_layout_rleg" ]
-  },
-  {
-    "id": "ll_limbs_sa_layout",
-    "type": "widget",
-    "style": "layout",
-    "label": "Limbs (self-aware)",
-    "arrange": "columns",
-    "widgets": [ "ll_left_limbs_sa_layout", "ll_middle_limbs_sa_layout", "ll_right_limbs_sa_layout" ],
-    "flags": [ "W_DISABLED_BY_DEFAULT" ]
+    "widgets": [ "status_hpn_layout_rleg" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "ll_stamina_speed_move_layout",
@@ -360,7 +314,8 @@
     "padding": 2,
     "width": 44,
     "widgets": [
-      "ll_limbs_new_layout",
+      "ll_limbs_layout",
+      "ll_limbs_sa_layout",
       "ll_movement_layout",
       "ll_stats_layout",
       "all_weariness_layout",

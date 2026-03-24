@@ -214,7 +214,7 @@
     "var": "bp_hp",
     "bodypart": "head",
     "copy-from": "hitpoint_num_no_label",
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
   {
     "id": "hp_torso_num_no_label",
@@ -223,7 +223,7 @@
     "var": "bp_hp",
     "bodypart": "torso",
     "copy-from": "hitpoint_num_no_label",
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
   {
     "id": "hp_left_arm_num_no_label",
@@ -232,7 +232,7 @@
     "var": "bp_hp",
     "bodypart": "arm_l",
     "copy-from": "hitpoint_num_no_label",
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
   {
     "id": "hp_right_arm_num_no_label",
@@ -241,7 +241,7 @@
     "var": "bp_hp",
     "bodypart": "arm_r",
     "copy-from": "hitpoint_num_no_label",
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
   {
     "id": "hp_left_leg_num_no_label",
@@ -250,7 +250,7 @@
     "var": "bp_hp",
     "bodypart": "leg_l",
     "copy-from": "hitpoint_num_no_label",
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
   {
     "id": "hp_right_leg_num_no_label",
@@ -259,7 +259,7 @@
     "var": "bp_hp",
     "bodypart": "leg_r",
     "copy-from": "hitpoint_num_no_label",
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
     {
     "id": "hp_gastropod_foot_num_no_label",
@@ -268,7 +268,7 @@
     "var": "bp_hp",
     "bodypart": "gastropod_foot",
     "copy-from": "hitpoint_num_no_label",
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
   {
     "id": "bodygraph_hp_layout",
@@ -447,7 +447,7 @@
     "style": "layout",
     "label": "HP Bottom",
     "arrange": "columns",
-    "widgets": [ "status_hpg_layout_lleg", "status_hpg_layout_torso", "status_hpg_layout_rleg", "status_gastropod_foot" ]
+    "widgets": [ "status_hpg_layout_lleg", "status_hpg_layout_torso", "status_hpg_layout_rleg", "status_hpg_gastropod_foot" ]
   },
   {
     "id": "hitpoints_all_graphs_layout",
@@ -476,7 +476,7 @@
     "type": "widget",
     "style": "layout",
     "arrange": "columns",
-    "widgets": [ "status_hpg_layout_lleg", "status_hpg_layout_rleg", "status_gastropod_foot" ]
+    "widgets": [ "status_hpg_layout_lleg", "status_hpg_layout_rleg", "status_hpg_gastropod_foot" ]
   },
   {
     "id": "hitpoints_head_torso_nums_layout",
@@ -497,7 +497,7 @@
     "type": "widget",
     "style": "layout",
     "arrange": "columns",
-    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_rleg", "status_gastropod_foot" ]
+    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_rleg", "status_hpn_gastropod_foot" ]
   },
   {
     "id": "hitpoint_nums_top_layout",
@@ -513,7 +513,7 @@
     "style": "layout",
     "label": "HP Bottom",
     "arrange": "columns",
-    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_torso", "status_hpn_layout_rleg", "status_gastropod_foot" ]
+    "widgets": [ "status_hpn_layout_lleg", "status_hpn_layout_torso", "status_hpn_layout_rleg", "status_hpn_gastropod_foot" ]
   },
   {
     "id": "hitpoints_all_nums_layout",
