@@ -3,22 +3,38 @@
     "id": "ll_limbs_layout",
     "type": "widget",
     "style": "layout",
-    "label": "Limbs",
+    "label": "Hit Points",
     "arrange": "grid",
     "columns": 3,
     "height": 0,
-    "widgets": [ "ll_larm_layout", "ll_head_layout", "ll_rarm_layout", "ll_lleg_layout", "ll_gastropod_foot_layout", "ll_torso_layout", "ll_rleg_layout" ],
+    "widgets": [
+      "ll_larm_layout",
+      "ll_head_layout",
+      "ll_rarm_layout",
+      "ll_lleg_layout",
+      "ll_gastropod_foot_layout",
+      "ll_torso_layout",
+      "ll_rleg_layout"
+    ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
     "id": "ll_limbs_sa_layout",
     "type": "widget",
     "style": "layout",
-    "label": "Limbs",
+    "label": "Hit Points (Numerical)",
     "arrange": "grid",
     "columns": 3,
     "height": 0,
-    "widgets": [ "ll_larm_sa_layout", "ll_head_sa_layout", "ll_rarm_sa_layout", "ll_lleg_sa_layout", "ll_gastropod_foot_sa_layout", "ll_torso_sa_layout", "ll_rleg_sa_layout" ],
+    "widgets": [
+      "ll_larm_sa_layout",
+      "ll_head_sa_layout",
+      "ll_rarm_sa_layout",
+      "ll_lleg_sa_layout",
+      "ll_gastropod_foot_sa_layout",
+      "ll_torso_sa_layout",
+      "ll_rleg_sa_layout"
+    ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
@@ -54,7 +70,7 @@
     "widgets": [ "status_hpg_layout_rarm" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_lleg_layout",
     "type": "widget",
     "style": "layout",
@@ -65,7 +81,7 @@
     "widgets": [ "status_hpg_layout_lleg" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_gastropod_foot_layout",
     "type": "widget",
     "style": "layout",
@@ -76,7 +92,7 @@
     "widgets": [ "status_hpg_layout_gastropod_foot" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_torso_layout",
     "type": "widget",
     "style": "layout",
@@ -87,7 +103,7 @@
     "widgets": [ "status_hpg_layout_torso" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_rleg_layout",
     "type": "widget",
     "style": "layout",
@@ -127,7 +143,7 @@
     "widgets": [ "status_hpn_layout_rarm" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_lleg_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -137,7 +153,7 @@
     "widgets": [ "status_hpn_layout_lleg" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_gastropod_foot_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -147,7 +163,7 @@
     "widgets": [ "status_hpn_layout_gastropod_foot" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_torso_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -157,7 +173,7 @@
     "widgets": [ "status_hpn_layout_torso" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_rleg_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -309,7 +325,7 @@
     "id": "legacy_labels_sidebar",
     "type": "widget",
     "style": "sidebar",
-    "label": "labels",
+    "label": "Labels",
     "separator": ": ",
     "padding": 2,
     "width": 44,

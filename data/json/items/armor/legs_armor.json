@@ -344,21 +344,35 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
         "coverage": 98,
-        "encumbrance": 1
+        "encumbrance": 5
       },
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "coverage": 95,
-        "encumbrance": 2
+        "encumbrance": 0
       },
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
         "coverage": 40,
-        "encumbrance": 2
+        "encumbrance": 0
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 98,
+        "encumbrance": 4
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_lower" ],
+        "coverage": 10,
+        "encumbrance": 0
       }
     ]
   },
@@ -743,6 +757,14 @@
         "coverage": 60,
         "encumbrance": 5,
         "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 75,
+        "encumbrance": 3,
+        "rigid_layer_only": true
       }
     ]
   },
@@ -854,7 +876,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
         "coverage": 90,
-        "encumbrance": 2,
+        "encumbrance": 5,
         "rigid_layer_only": true
       },
       {
@@ -862,7 +884,15 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "coverage": 70,
-        "encumbrance": 3,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 75,
+        "encumbrance": 4,
         "rigid_layer_only": true
       }
     ]

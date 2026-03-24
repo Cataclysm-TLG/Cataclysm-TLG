@@ -8522,39 +8522,52 @@ int item::get_warmth() const
 
 int item::get_warmth( const bodypart_id &bp ) const
 {
-    double warmth_val = 0.0;
-    float limb_coverage = 0.0f;
     bool check_ablative_armor = false;
     if( !covers( bp, check_ablative_armor ) ) {
         return 0;
     }
-    warmth_val = get_warmth();
-    // calculate how much of the limb the armor ideally covers
-    // idea being that an item that covers the shoulders and torso shouldn't
-    // heat the whole arm like it covers it
-    // TODO: fully configure this per armor entry
+
+    double warmth_val = get_warmth();
+    float limb_coverage = 0.0f;
+
+    // If no sublocations, assume full coverage.
     if( !has_sublocations() ) {
-        // if it doesn't have sublocations it has 100% covered
-        limb_coverage = 100;
+        limb_coverage = 100.0f;
     } else {
+        // Build a set of subparts the character actually has and are valid.
+        std::set<sub_bodypart_id> actual_subparts;
         for( const sub_bodypart_str_id &sbp : bp->sub_parts ) {
-            if( !covers( sbp, check_ablative_armor ) ) {
-                continue;
+            if( sbp.id().is_valid() ) {
+                actual_subparts.insert( sbp.id() );
+            }
+        }
+
+        // Sum coverage only for actual subparts
+        for( const sub_bodypart_str_id &sbp : bp->sub_parts ) {
+            sub_bodypart_id sid = sbp.id();
+            if( !actual_subparts.count( sid ) ) {
+                continue; // Skip subparts the character doesn't have.
             }
 
-            // TODO: handle non 100% sub body part coverages
+            if( !covers( sbp, check_ablative_armor ) ) {
+                continue; // Skip if armor doesn't cover this subpart.
+            }
+
+            // TODO: handle partial coverage per subpart if needed
             limb_coverage += sbp->max_coverage;
         }
     }
-    int warmth = std::round( warmth_val * limb_coverage / 100.0f );
 
+    // Calculate warmth scaled by coverage.
+    int warmth = std::round( warmth_val * limb_coverage / 100.0f );
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
-            if( !pocket->empty() ) {
-                // get the contained plate
-                const item &ablative_armor = pocket->front();
-                warmth += ablative_armor.get_warmth( bp );
+            if( pocket->empty() ) {
+                continue;
             }
+
+            const item &ablative_armor = pocket->front();
+            warmth += ablative_armor.get_warmth( bp );
         }
     }
 

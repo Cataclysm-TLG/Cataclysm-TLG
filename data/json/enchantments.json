@@ -342,13 +342,7 @@
     "type": "enchantment",
     "id": "ench_gastropod_foot",
     "condition": "ALWAYS",
-    "modified_bodyparts": [
-      { "lose": "foot_l" },
-      { "lose": "foot_r" },
-      { "lose": "leg_l" },
-      { "lose": "leg_r" },
-      { "gain": "gastropod_foot" }
-    ]
+    "modified_bodyparts": [ { "lose": "foot_l" }, { "lose": "foot_r" }, { "lose": "leg_l" }, { "lose": "leg_r" }, { "gain": "gastropod_foot" } ]
   },
   {
     "type": "enchantment",

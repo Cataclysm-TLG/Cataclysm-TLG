@@ -27,7 +27,7 @@
     "flags": [ "VARSIZE", "POCKETS" ],
     "armor": [
       {
-        "encumbrance": [ 7, 11 ],
+        "encumbrance": [ 4, 7 ],
         "coverage": 100,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r", "leg_upper_l", "leg_upper_r", "leg_knee_r", "leg_knee_l" ]
@@ -36,7 +36,19 @@
         "coverage": 90,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
-        "encumbrance": [ 0, 0 ]
+        "encumbrance": 0
+      },
+      {
+        "coverage": 100,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": [ 4, 7 ]
+      },
+      {
+        "coverage": 90,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_lower" ],
+        "encumbrance": 0
       }
     ]
   },
@@ -395,6 +407,12 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "encumbrance": 0
+      },
+      {
+        "coverage": 95,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": 3
       }
     ]
   },
@@ -436,6 +454,12 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "encumbrance": [ 0, 0 ]
+      },
+      {
+        "coverage": 95,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": [ 3, 6 ]
       }
     ]
   },
@@ -477,6 +501,12 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "encumbrance": [ 0, 0 ]
+      },
+      {
+        "coverage": 95,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": [ 4, 7 ]
       }
     ]
   },
@@ -642,6 +672,12 @@
         "coverage": 35,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
+      },
+      {
+        "coverage": 20,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": 1
       }
     ]
   },
@@ -1427,6 +1463,12 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "encumbrance": 0
+      },
+      {
+        "coverage": 95,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": 2
       }
     ],
     "material_thickness": 0.65,
@@ -1462,6 +1504,12 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "encumbrance": 0
+      },
+      {
+        "coverage": 95,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": 2
       }
     ]
   },
@@ -1500,6 +1548,18 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_lower_l", "leg_lower_r" ],
         "encumbrance": 0
+      },
+      {
+        "coverage": 98,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": 5
+      },
+      {
+        "coverage": 95,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_lower" ],
+        "encumbrance": 0
       }
     ]
   },
@@ -1532,6 +1592,18 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "encumbrance": 0
+      },
+      {
+        "coverage": 98,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": 3
+      },
+      {
+        "coverage": 30,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_lower" ],
+        "encumbrance": 0
       }
     ]
   },
@@ -1563,6 +1635,18 @@
         "coverage": 38,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
+        "encumbrance": 0
+      },
+      {
+        "coverage": 98,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": 6
+      },
+      {
+        "coverage": 20,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_lower" ],
         "encumbrance": 0
       }
     ]

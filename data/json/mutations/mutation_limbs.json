@@ -556,7 +556,7 @@
     "name_multiple": "frogs",
     "name": "right frog"
   },
-    {
+  {
     "id": "gastropod_foot",
     "type": "body_part",
     "name": "gastropod foot",
@@ -583,7 +583,7 @@
     "drench_capacity": 700,
     "bionic_slots": 58,
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE" ],
-    "sub_parts": [ "leg_hip_l", "leg_upper_l", "leg_knee_l", "leg_lower_l", "leg_draped_l" ],
+    "sub_parts": [ "gastropod_foot_draped", "gastropod_foot_upper", "gastropod_foot_lower", "gastropod_foot_pedal_sole" ],
     "encumbrance_per_weight": [
       { "weight": "1 mg", "encumbrance": 1 },
       { "weight": "300 g", "encumbrance": 4 },
@@ -631,5 +631,43 @@
         "max_duration": 15
       }
     ]
+  },
+  {
+    "id": "gastropod_foot_upper",
+    "type": "sub_body_part",
+    "max_coverage": 45,
+    "parent": "gastropod_foot",
+    "side": 0,
+    "name_multiple": "foot",
+    "name": "upper foot"
+  },
+  {
+    "id": "gastropod_foot_lower",
+    "type": "sub_body_part",
+    "max_coverage": 45,
+    "parent": "gastropod_foot",
+    "side": 0,
+    "name_multiple": "foot",
+    "name": "lower foot"
+  },
+  {
+    "id": "gastropod_foot_pedal_sole",
+    "type": "sub_body_part",
+    "max_coverage": 10,
+    "parent": "gastropod_foot",
+    "side": 0,
+    "name_multiple": "foot",
+    "name": "pedal sole"
+  },
+  {
+    "id": "gastropod_foot_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "gastropod_foot",
+    "side": 0,
+    "secondary": true,
+    "name_multiple": "foot (draped)",
+    "name": "foot (draped)",
+    "locations_under": [ "gastropod_foot_upper" ]
   }
 ]

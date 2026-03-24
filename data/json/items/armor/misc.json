@@ -312,6 +312,13 @@
         "coverage": 90,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ]
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 75,
+        "encumbrance": 22,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
       }
     ]
   },
@@ -353,6 +360,13 @@
         "coverage": 90,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ]
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 75,
+        "encumbrance": 36,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
       }
     ]
   },

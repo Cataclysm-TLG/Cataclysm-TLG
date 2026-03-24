@@ -3287,6 +3287,12 @@
         "coverage": 90,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ]
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 50,
+        "encumbrance": [ 28, 28 ],
+        "specifically_covers": [ "gastropod_foot_draped" ]
       }
     ],
     "tool_ammo": "battery"

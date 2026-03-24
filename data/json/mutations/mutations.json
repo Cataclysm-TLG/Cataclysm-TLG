@@ -5345,7 +5345,6 @@
     "ugliness": 9,
     "encumbrance_always": [ [ "leg_l", 10 ], [ "leg_r", 10 ], [ "foot_l", 10 ], [ "foot_r", 10 ] ],
     "enchantments": [ "ench_gastropod_foot", "ench_gastropod_foot_bonuses" ],
-    "restricts_gear": [ "leg_l", "leg_r", "foot_l", "foot_r" ],
     "destroys_gear": true
   },
   {

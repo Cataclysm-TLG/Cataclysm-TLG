@@ -37,6 +37,18 @@
         "encumbrance": [ 5, 6 ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "gastropod_foot" ],
+        "coverage": 78,
+        "encumbrance": [ 4, 5 ],
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
       }
     ],
     "pocket_data": [
@@ -143,6 +155,18 @@
         "coverage": 86,
         "encumbrance": [ 5, 6 ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "gastropod_foot" ],
+        "coverage": 78,
+        "encumbrance": [ 4, 5 ],
+        "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
       }
     ],

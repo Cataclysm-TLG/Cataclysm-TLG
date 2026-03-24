@@ -136,7 +136,7 @@
     "bodypart": "leg_r",
     "copy-from": "hitpoint_graph_no_label"
   },
-    {
+  {
     "id": "hp_gastropod_foot_graph_no_label",
     "type": "widget",
     "label": "FOOT",
@@ -198,7 +198,7 @@
     "copy-from": "hitpoint_num_label",
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "hp_gastropod_foot_num_label",
     "type": "widget",
     "label": "FOOT",
@@ -261,7 +261,7 @@
     "copy-from": "hitpoint_num_no_label",
     "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
-    {
+  {
     "id": "hp_gastropod_foot_num_no_label",
     "type": "widget",
     "label": "FOOT",
@@ -353,7 +353,7 @@
     "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_graph_no_label" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "status_hpg_layout_gastropod_foot",
     "type": "widget",
     "style": "layout",
@@ -423,7 +423,7 @@
     "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_num_no_label" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "status_hpn_layout_gastropod_foot",
     "type": "widget",
     "style": "layout",
