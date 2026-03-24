@@ -1144,9 +1144,15 @@ class npc : public Character
             tripoint_bub_ms pos;
             int dist;
         };
+        struct scored_shelter {
+            tripoint_bub_ms pos;
+            int dist;
+        };
         std::vector<scored_water_source> find_nearby_water_sources() const;
         std::vector<scored_item> find_nearby_food();
         std::vector<scored_item> find_nearby_warm_clothing();
+        std::vector<scored_shelter> find_nearby_shelters() const;
+        std::vector<scored_water_source> find_nearby_harvestable() const;
         bool drink_from_water_source( const tripoint_bub_ms &water_pos );
         bool consume_food_at( item_location loc );
         bool wear_item_at( item_location loc );

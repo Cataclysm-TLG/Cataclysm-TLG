@@ -6,13 +6,13 @@
 #include "behavior.h"
 #include "bodypart.h"
 #include "character.h"
-#include "coordinates.h"
 #include "item.h"
 #include "itype.h"
 #include "make_static.h"
 #include "map.h"
 #include "map_iterator.h"
 #include "mapdata.h"
+#include "npc.h"
 #include "ret_val.h"
 #include "type_id.h"
 #include "units.h"
@@ -92,20 +92,13 @@ status_t character_oracle_t::can_make_fire( std::string_view ) const
 
 status_t character_oracle_t::can_take_shelter( std::string_view ) const
 {
-    // "Take shelter" is an action: move to an indoor tile.
-    // Already indoors -> action not applicable.
-    // Outdoors with adjacent indoor tile -> shelter within reach.
-    const map &here = get_map();
-    const tripoint_bub_ms &pos = subject->pos_bub();
-    if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, pos ) ) {
+    // Delegate to npc::find_nearby_shelters() so oracle and action share
+    // the same detection logic (radius, LOS, passability, creature check).
+    const npc *n = dynamic_cast<const npc *>( subject );
+    if( !n ) {
         return status_t::failure;
     }
-    for( const tripoint_bub_ms &adj : here.points_in_radius( pos, 1 ) ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, adj ) && here.passable( adj ) ) {
-            return status_t::running;
-        }
-    }
-    return status_t::failure;
+    return n->find_nearby_shelters().empty() ? status_t::failure : status_t::running;
 }
 
 status_t character_oracle_t::has_water( std::string_view ) const
