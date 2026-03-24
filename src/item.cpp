@@ -3600,18 +3600,17 @@ static bool armor_encumb_header_info( const item &it, std::vector<iteminfo> &inf
         if( sizing_level == item::sizing::human_sized_small_char ) {
             format = _( " <bad>(too big)</bad>" );
         } else if( sizing_level == item::sizing::big_sized_small_char ) {
-            format = _( " <bad>(huge!)</bad>" );
+            format = _( " <bad>(way too big)</bad>" );
         } else if( sizing_level == item::sizing::small_sized_human_char ||
                    sizing_level == item::sizing::human_sized_big_char ) {
             format = _( " <bad>(too small)</bad>" );
         } else if( sizing_level == item::sizing::small_sized_big_char ) {
-            format = _( " <bad>(tiny!)</bad>" );
+            format = _( " <bad>(way too small)</bad>" );
         }
     }
     if( format.empty() ) {
         return false;
     }
-
     //~ The size or fit of an article of clothing (fits / poor fit)
     info.emplace_back( "ARMOR", _( "<bold>Size/Fit</bold>:" ) + format );
     return true;
@@ -3622,7 +3621,6 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
 {
     bool divider_needed = false;
     const std::string space = "  ";
-
     bool ret = false;
     if( const islot_armor *t = find_armor_data() ) {
         if( t->data.empty() ) {
@@ -3631,23 +3629,26 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
         std::set<sub_bodypart_id> character_subparts;
         for( const bodypart_id &bp : you.get_all_body_parts() ) {
             for( const sub_bodypart_str_id &sbp : bp->sub_parts ) {
-                character_subparts.insert( sbp.id() );
+                if( sbp.is_valid() ) {
+                    character_subparts.insert( sbp.id() );
+                }
             }
         }
-
         for( const armor_portion_data &p : t->sub_data ) {
-            if( divider_needed ) {
-                insert_separation_line( info );
-            }
-
             std::vector<sub_bodypart_id> covered;
             for( const sub_bodypart_str_id &sbp_str : p.sub_coverage ) {
+                if( !sbp_str.is_valid() ) {
+                    continue;
+                }
                 sub_bodypart_id sid = sbp_str.id();
                 if( character_subparts.count( sid ) > 0 &&
                     std::find( covered.begin(), covered.end(), sid ) == covered.end() ) {
                     covered.push_back( sid );
                 }
                 for( const sub_bodypart_str_id &similar : sbp_str->similar_bodyparts ) {
+                    if( !similar.is_valid() ) {
+                        continue;
+                    }
                     sub_bodypart_id similar_id = similar.id();
                     if( character_subparts.count( similar_id ) > 0 &&
                         std::find( covered.begin(), covered.end(), similar_id ) == covered.end() ) {
@@ -3655,18 +3656,26 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
                     }
                 }
             }
-
-            std::set<translation, localized_comparator> to_print = body_part_type::consolidate( covered );
+            if( covered.empty() ) {
+                continue;
+            }
+            if( divider_needed ) {
+                insert_separation_line( info );
+            }
+            std::set<translation, localized_comparator> to_print =
+                body_part_type::consolidate( covered );
             std::string coverage = _( "<bold>Protection for</bold>:" );
             for( const translation &entry : to_print ) {
-                coverage += string_format( _( " The <info>%s</info>." ), entry );
+                coverage += string_format(
+                                _( " The <info>%s</info>." ),
+                                entry );
             }
             info.emplace_back( "ARMOR", coverage );
-
-            // the following function need one representative sub limb from which to query data
-            armor_material_info( info, parts, 0, false, *p.sub_coverage.begin() );
-            armor_attribute_info( info, parts, 0, false, *p.sub_coverage.begin() );
-            armor_protection_info( info, parts, 0, false, *p.sub_coverage.begin() );
+            // Use first valid covered subpart instead of raw sub_coverage
+            const sub_bodypart_id rep = covered.front();
+            armor_material_info( info, parts, 0, false, rep );
+            armor_attribute_info( info, parts, 0, false, rep );
+            armor_protection_info( info, parts, 0, false, rep );
             ret = true;
             divider_needed = true;
         }
@@ -3674,15 +3683,17 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
         if( divider_needed ) {
             insert_separation_line( info );
         }
-        //right now all eligible gunmods (shoulder_strap, belt_clip) have the is_armor flag and use the torso
-        info.emplace_back( "ARMOR", _( "Torso:" ) + space, "",
-                           iteminfo::no_flags | iteminfo::lower_is_better, get_avg_encumber( get_avatar() ) );
-
-        //~ Limb-specific coverage (for guns strapped to torso)
-        info.emplace_back( "DESCRIPTION", _( "<bold>Torso coverage</bold>:" ) );
-        //~ Regular/Default coverage
-        info.emplace_back( "ARMOR", "",
-                           iteminfo::no_flags, get_coverage( body_part_torso.id() ) );
+        info.emplace_back( "ARMOR",
+                           _( "Torso:" ) + space,
+                           "",
+                           iteminfo::no_flags | iteminfo::lower_is_better,
+                           get_avg_encumber( get_avatar() ) );
+        info.emplace_back( "DESCRIPTION",
+                           _( "<bold>Torso coverage</bold>:" ) );
+        info.emplace_back( "ARMOR",
+                           "",
+                           iteminfo::no_flags,
+                           get_coverage( body_part_torso.id() ) );
     }
 
     return ret;
@@ -3725,57 +3736,52 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
     if( !is_armor() && !is_pet_armor() ) {
         return;
     }
-
+    if( !sbp.is_valid() ) {
+        return;
+    }
+    if( !portion_for_bodypart( sbp ) ) {
+        return;
+    }
     if( parts->test( iteminfo_parts::ARMOR_PROTECTION ) ) {
         const std::string space = "  ";
-        // NOLINTNEXTLINE(cata-translate-string-literal)
         std::string bp_cat = string_format( "ARMOR" );
         std::string layering;
-
-        // get the layers this bit of the armor covers if its unique compared to the rest of the armor
         for( const layer_level &ll : get_layer( sbp ) ) {
             layering += string_format( " <stat>%s</stat>.", item::layer_to_string( ll ) );
         }
-        //~ Limb-specific coverage (%s = name of limb)
-        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Layer</bold>:%s" ), layering ) );
-        //~ Regular/Default coverage
-        info.emplace_back( bp_cat, string_format( "%s%s%s", space, _( "Coverage:" ), space ), "",
-                           iteminfo::no_flags, get_coverage( sbp ) );
-
+        info.emplace_back( "DESCRIPTION",
+                           string_format( _( "<bold>Layer</bold>:%s" ), layering ) );
+        info.emplace_back( bp_cat,
+                           string_format( "%s%s%s", space, _( "Coverage:" ), space ),
+                           "", iteminfo::no_flags, get_coverage( sbp ) );
         bool printed_any = false;
-
-        // gather all the protection data
-        // the rolls are basically a perfect hit for protection and a
-        // worst possible
         resistances worst_res = resistances( *this, false, 99, sbp );
         resistances best_res = resistances( *this, false, 0, sbp );
         resistances median_res = resistances( *this, false, 50, sbp );
-
         int percent_best = 100;
         int percent_worst = 0;
         const armor_portion_data *portion = portion_for_bodypart( sbp );
-        // if there isn't a portion this is probably pet armor
         if( portion ) {
             percent_best = portion->best_protection_chance;
             percent_worst = portion->worst_protection_chance;
         }
-
         bool display_median = percent_best < 50 && percent_worst < 50;
-
         if( display_median ) {
             info.emplace_back( "DESCRIPTION",
-                               string_format( "<bold>%s</bold>: <bad>%d%%</bad>, <color_c_yellow>Median</color>, <good>%d%%</good>",
-                                              _( "Protection" ), percent_worst, percent_best ) );
+                               string_format(
+                                   "<bold>%s</bold>: <bad>%d%%</bad>, <color_c_yellow>Median</color>, <good>%d%%</good>",
+                                   _( "Protection" ), percent_worst, percent_best ) );
         } else if( percent_worst > 0 ) {
             info.emplace_back( "DESCRIPTION",
-                               string_format( "<bold>%s</bold>: <bad>%d%%</bad>, <good>%d%%</good>", _( "Protection" ),
-                                              percent_worst, percent_best ) );
+                               string_format(
+                                   "<bold>%s</bold>: <bad>%d%%</bad>, <good>%d%%</good>",
+                                   _( "Protection" ), percent_worst, percent_best ) );
         } else {
-            info.emplace_back( "DESCRIPTION", string_format( "<bold>%s</bold>:", _( "Protection" ) ) );
+            info.emplace_back( "DESCRIPTION",
+                               string_format( "<bold>%s</bold>:", _( "Protection" ) ) );
         }
-
-        for( const damage_info_order &dio : damage_info_order::get_all(
-                 damage_info_order::info_type::PROT ) ) {
+        for( const damage_info_order &dio :
+             damage_info_order::get_all( damage_info_order::info_type::PROT ) ) {
             if( best_res.resist_vals.count( dio.dmg_type ) <= 0 ||
                 best_res.type_resist( dio.dmg_type ) < 1.0f ) {
                 continue;
@@ -3784,76 +3790,123 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
             if( dio.info_display == damage_info_order::info_disp::DETAILED ) {
                 if( display_median ) {
                     info.emplace_back( bp_cat,
-                                       string_format( "%s%s:  <bad>%.2f</bad>, <color_c_yellow>%.2f</color>, <good>%.2f</good>", space,
-                                                      uppercase_first_letter( dio.dmg_type->name.translated() ), worst_res.type_resist( dio.dmg_type ),
-                                                      median_res.type_resist( dio.dmg_type ), best_res.type_resist( dio.dmg_type ) ), "",
-                                       iteminfo::no_flags );
+                                       string_format(
+                                           "%s%s:  <bad>%.2f</bad>, <color_c_yellow>%.2f</color>, <good>%.2f</good>",
+                                           space,
+                                           uppercase_first_letter(
+                                               dio.dmg_type->name.translated() ),
+                                           worst_res.type_resist( dio.dmg_type ),
+                                           median_res.type_resist( dio.dmg_type ),
+                                           best_res.type_resist( dio.dmg_type ) ),
+                                       "", iteminfo::no_flags );
                     printed_any = true;
                 } else if( percent_worst > 0 ) {
-                    info.emplace_back( bp_cat, string_format( "%s%s:  <bad>%.2f</bad>, <good>%.2f</good>", space,
-                                       uppercase_first_letter( dio.dmg_type->name.translated() ),
-                                       worst_res.type_resist( dio.dmg_type ), best_res.type_resist( dio.dmg_type ) ), "",
-                                       iteminfo::no_flags );
+                    info.emplace_back( bp_cat,
+                                       string_format(
+                                           "%s%s:  <bad>%.2f</bad>, <good>%.2f</good>",
+                                           space,
+                                           uppercase_first_letter(
+                                               dio.dmg_type->name.translated() ),
+                                           worst_res.type_resist( dio.dmg_type ),
+                                           best_res.type_resist( dio.dmg_type ) ),
+                                       "", iteminfo::no_flags );
                     printed_any = true;
                 } else {
                     skipped_detailed = true;
                 }
             }
-            if( skipped_detailed || dio.info_display == damage_info_order::info_disp::BASIC ) {
-                info.emplace_back( bp_cat, string_format( "%s%s: ", space,
-                                   uppercase_first_letter( dio.dmg_type->name.translated() ) ), "",
-                                   iteminfo::is_decimal, best_res.type_resist( dio.dmg_type ) );
+            if( skipped_detailed ||
+                dio.info_display == damage_info_order::info_disp::BASIC ) {
+                info.emplace_back( bp_cat,
+                                   string_format(
+                                       "%s%s: ",
+                                       space,
+                                       uppercase_first_letter(
+                                           dio.dmg_type->name.translated() ) ),
+                                   "",
+                                   iteminfo::is_decimal,
+                                   best_res.type_resist( dio.dmg_type ) );
+
                 printed_any = true;
             }
         }
         if( get_base_env_resist( *this ) >= 1 ) {
-            info.emplace_back( bp_cat, string_format( "%s%s", space, _( "Environmental: " ) ),
+            info.emplace_back( bp_cat,
+                               string_format( "%s%s", space, _( "Environmental: " ) ),
                                get_base_env_resist( *this ) );
+
             printed_any = true;
         }
-        // if we haven't printed any armor data acknowledge that
         if( !printed_any ) {
-            info.emplace_back( bp_cat, string_format( "%s%s", space, _( "Negligible Protection" ) ) );
+            info.emplace_back( bp_cat,
+                               string_format( "%s%s",
+                                              space,
+                                              _( "Negligible Protection" ) ) );
         }
-        if( type->can_use( "GASMASK" ) || type->can_use( "DIVE_TANK" ) ) {
-            info.emplace_back( "ARMOR", string_format( "<bold>%s</bold>:",
-                               _( "Protection when active" ) ) );
-            info.emplace_back( bp_cat, space + _( "Acid: " ), "",
+        if( type->can_use( "GASMASK" ) ||
+            type->can_use( "DIVE_TANK" ) ) {
+            info.emplace_back(
+                "ARMOR",
+                string_format(
+                    "<bold>%s</bold>:",
+                    _( "Protection when active" ) ) );
+            info.emplace_back( bp_cat,
+                               space + _( "Acid Resistance: " ),
+                               "",
                                iteminfo::no_newline | iteminfo::is_decimal,
                                resist( damage_acid, false, sbp ) );
-            info.emplace_back( bp_cat, space + _( "Fire: " ), "",
+            info.emplace_back( bp_cat,
+                               space + _( "Fire: " ),
+                               "",
                                iteminfo::no_newline | iteminfo::is_decimal,
                                resist( damage_heat, false, sbp ) );
-            info.emplace_back( bp_cat, space + _( "Environmental: " ),
-                               get_env_resist( get_base_env_resist_w_filter() ) );
+            info.emplace_back(
+                bp_cat,
+                space + _( "Environmental: " ),
+                get_env_resist(
+                    get_base_env_resist_w_filter() ) );
         }
-
         if( sbp == sub_bodypart_id() && damage() > 0 ) {
             armor_protect_dmg_info( damage(), info );
         }
     }
 }
+
 void item::armor_material_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                                 int /*batch*/, bool /*debug*/, const sub_bodypart_id &sbp ) const
 {
     if( !is_armor() && !is_pet_armor() ) {
         return;
     }
-
+    if( !sbp.is_valid() ) {
+        return;
+    }
+    if( !portion_for_bodypart( sbp ) ) {
+        return;
+    }
     if( parts->test( iteminfo_parts::ARMOR_MATERIALS ) ) {
         const std::string space = "  ";
-        // NOLINTNEXTLINE(cata-translate-string-literal)
         std::string bp_cat = string_format( "ARMOR" );
         std::string materials_list;
-        std::string units_info = pgettext( "length unit: milimeter", "mm" );
+        std::string units_info =
+            pgettext( "length unit: milimeter", "mm" );
         for( const part_material *mat : armor_made_of( sbp ) ) {
-
-            materials_list.append( string_format( "  %s %.2f%s (%d%%).", mat->id->name(), mat->thickness,
-                                                  units_info, mat->cover ) );
+            materials_list.append(
+                string_format(
+                    "  %s %.2f%s (%d%%).",
+                    mat->id->name(),
+                    mat->thickness,
+                    units_info,
+                    mat->cover ) );
         }
-
-        info.emplace_back( bp_cat, string_format( "%s%s", _( "<bold>Materials</bold>:" ),
-                           materials_list ), "", iteminfo::no_flags );
+        info.emplace_back(
+            bp_cat,
+            string_format(
+                "%s%s",
+                _( "<bold>Materials</bold>:" ),
+                materials_list ),
+            "",
+            iteminfo::no_flags );
     }
 }
 
@@ -3863,16 +3916,24 @@ void item::armor_attribute_info( std::vector<iteminfo> &info, const iteminfo_que
     if( !is_armor() && !is_pet_armor() ) {
         return;
     }
-
+    if( !sbp.is_valid() ) {
+        return;
+    }
+    if( !portion_for_bodypart( sbp ) ) {
+        return;
+    }
     if( parts->test( iteminfo_parts::ARMOR_ADDITIONAL_INFO ) ) {
         const std::string space = "  ";
-        // NOLINTNEXTLINE(cata-translate-string-literal)
-        std::string bp_cat = string_format( "ARMOR" );
-
-        if( const armor_portion_data *portion_data = portion_for_bodypart( sbp ) ) {
+        std::string bp_cat =
+            string_format( "ARMOR" );
+        if( const armor_portion_data *portion_data =
+                portion_for_bodypart( sbp ) ) {
             if( portion_data->rigid_layer_only ) {
-                info.emplace_back( bp_cat, _( "<info>Rigid items only conflict on shared layers</info>" ),
-                                   "", iteminfo::no_flags );
+                info.emplace_back(
+                    bp_cat,
+                    _( "<info>Rigid items only conflict on shared layers</info>" ),
+                    "",
+                    iteminfo::no_flags );
             }
         }
     }
@@ -3942,8 +4003,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     const std::string space = "  ";
     body_part_set covered_parts = get_covered_body_parts();
-    // Remove any parts from the list which we do not have.
-    // TODO: Maybe parts we don't have could be displayed another way?
     std::vector<bodypart_str_id> to_reset;
     for( const bodypart_str_id &bp : covered_parts ) {
         if( !you.has_part( bp ) ) {
@@ -3953,56 +4012,43 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     for( const bodypart_str_id &bp : to_reset ) {
         covered_parts.reset( bp );
     }
-
     bool covers_anything = covered_parts.any();
     const bool show_bodygraph = get_option<bool>( "ITEM_BODYGRAPH" ) &&
                                 parts->test( iteminfo_parts::ARMOR_BODYGRAPH );
-
     if( parts->test( iteminfo_parts::ARMOR_BODYPARTS ) ) {
         insert_separation_line( info );
         std::vector<sub_bodypart_id> covered;
-        const Character &you = get_player_character();
-
         for( const sub_bodypart_id sbp : get_covered_sub_body_parts() ) {
-            if( you.has_part( sbp->parent ) ) {
+            if( !sbp.is_valid() ) {
+                continue;
+            }
+            if( sbp->parent.is_valid() && you.has_part( sbp->parent ) ) {
                 covered.push_back( sbp );
             }
         }
-
         std::string coverage = _( "<bold>Covers</bold>:" );
-
         if( !covered.empty() ) {
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( covered );
             for( const translation &entry : to_print ) {
                 coverage += string_format( _( " The <info>%s</info>." ), entry );
             }
         }
-
         if( !covers_anything ) {
             coverage += _( " <info>Nothing</info>." );
         }
-
         info.emplace_back( "ARMOR", coverage );
     }
-
     if( parts->test( iteminfo_parts::ARMOR_RIGIDITY ) && ( is_rigid() || is_ablative() ) ) {
-        // if the item has no armor data it doesn't cover that part
         const islot_armor *armor = find_armor_data();
         if( armor != nullptr ) {
             if( armor->rigid ) {
-                std::string coverage = _( "<bold>This armor is rigid</bold>" );
-                info.emplace_back( "ARMOR", coverage );
+                info.emplace_back( "ARMOR", _( "<bold>This armor is rigid</bold>" ) );
             } else {
-                // only some parts are rigid
                 std::string coverage = _( "<bold>Rigid Locations</bold>:" );
                 std::set<sub_bodypart_id> covered;
-                // if ablative check if there are hard plates in locations
                 if( armor->ablative ) {
-                    // if item has ablative armor we should check those too.
                     for( const item_pocket *pocket : get_all_contained_pockets() ) {
-                        // if the pocket is ablative and not empty we should use its values
                         if( pocket->get_pocket_data()->ablative && !pocket->empty() ) {
-                            // get the contained plate
                             const item &ablative_armor = pocket->front();
                             for( const armor_portion_data &entry : ablative_armor.find_armor_data()->sub_data ) {
                                 if( entry.rigid ) {
@@ -4021,7 +4067,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                         }
                     }
                 }
-
                 if( !covered.empty() ) {
                     std::vector<sub_bodypart_id> covered_vec( covered.begin(), covered.end() );
                     std::set<translation, localized_comparator> to_print = body_part_type::consolidate( covered_vec );
@@ -4033,22 +4078,21 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
             }
         }
     }
-
     if( parts->test( iteminfo_parts::ARMOR_RIGIDITY ) && is_comfortable() ) {
-        // if the item has no armor data it doesn't cover that part
         const islot_armor *armor = find_armor_data();
         if( armor != nullptr ) {
             if( armor->comfortable ) {
-                std::string coverage = _( "<bold>This armor is comfortable</bold>" );
-                info.emplace_back( "ARMOR", coverage );
+                info.emplace_back( "ARMOR", _( "<bold>This armor is comfortable</bold>" ) );
             } else {
-                // only some parts are comfortable
                 std::string coverage = _( "<bold>Comfortable Locations</bold>:" );
                 std::vector<sub_bodypart_id> covered;
                 for( const armor_portion_data &entry : armor->sub_data ) {
                     if( entry.comfortable ) {
                         for( const sub_bodypart_str_id &sbp : entry.sub_coverage ) {
-                            covered.emplace_back( sbp );
+                            sub_bodypart_id sid = sbp.id();
+                            if( sid.is_valid() ) {
+                                covered.push_back( sid );
+                            }
                         }
                     }
                 }
@@ -4062,7 +4106,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
             }
         }
     }
-
     if( parts->test( iteminfo_parts::ARMOR_COVERAGE ) && covers_anything ) {
         std::map<int, std::vector<bodypart_id>> limb_groups;
         for( const bodypart_str_id &bp : covered_parts ) {
@@ -4074,13 +4117,11 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                 limb_groups[ get_coverage( bp ) ].emplace_back( bp );
             }
         }
-        // keep on one line if only 1 entry
         if( limb_groups.size() == 1 ) {
             info.emplace_back( "ARMOR", _( "<bold>Total Coverage</bold>" ), iteminfo::no_newline );
         } else {
             info.emplace_back( "ARMOR", _( "<bold>Total Coverage</bold>:" ) );
         }
-
         for( auto &entry : limb_groups ) {
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( entry.second );
             std::string coverage;
@@ -4094,47 +4135,42 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     if( parts->test( iteminfo_parts::ARMOR_ENCUMBRANCE ) && covers_anything ) {
         std::map<armor_encumb_data, std::vector<bodypart_id>> limb_groups;
-        const Character &c = get_player_character();
-
         armor_encumb_header_info( *this, info );
         for( const bodypart_str_id &bp : covered_parts ) {
-            armor_encumb_data encumbrance( get_encumber( c, bp, item::encumber_flags::assume_empty ),
-                                           get_encumber( c, bp ), get_encumber( c, bp, item::encumber_flags::assume_full ) );
-
+            armor_encumb_data encumbrance(
+                get_encumber( you, bp, item::encumber_flags::assume_empty ),
+                get_encumber( you, bp ),
+                get_encumber( you, bp, item::encumber_flags::assume_full )
+            );
             limb_groups[encumbrance].emplace_back( bp );
         }
-        // keep on one line if only 1 entry
+
         if( limb_groups.size() == 1 ) {
             info.emplace_back( "ARMOR", _( "<bold>Encumbrance</bold>" ), iteminfo::no_newline );
         } else {
             info.emplace_back( "ARMOR", _( "<bold>Encumbrance</bold>:" ) );
         }
+
         for( auto &entry : limb_groups ) {
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( entry.second );
             std::string coverage;
-            std::string encumbrance_info;
             for( const translation &entry : to_print ) {
                 coverage += string_format( _( " The <info>%s</info>." ), entry );
             }
 
-            //encumbrance_info = string_format( "%d", entry.first.encumb );
-
-            // NOLINTNEXTLINE(cata-translate-string-literal)
             info.emplace_back( "ARMOR", space, "", iteminfo::no_newline | iteminfo::lower_is_better,
                                entry.first.encumb );
 
-            // if it has a max value
             if( entry.first.encumb != entry.first.encumb_max ) {
-                std::string when_full_message = _( ", When full" ) + space;
-                info.emplace_back( "ARMOR", when_full_message, "", iteminfo::no_newline | iteminfo::lower_is_better,
+                info.emplace_back( "ARMOR", _( ", When full" ) + space, "",
+                                   iteminfo::no_newline | iteminfo::lower_is_better,
                                    entry.first.encumb_max );
             }
 
-            // if it has a min value
             if( entry.first.encumb != entry.first.encumb_min ) {
-                std::string when_empty_message = _( ", When empty" ) + space;
-                info.emplace_back( "ARMOR", when_empty_message, "",
-                                   iteminfo::no_newline | iteminfo::lower_is_better, entry.first.encumb_min );
+                info.emplace_back( "ARMOR", _( ", When empty" ) + space, "",
+                                   iteminfo::no_newline | iteminfo::lower_is_better,
+                                   entry.first.encumb_min );
             }
             info.emplace_back( "ARMOR", string_format( ":%s", coverage ) );
         }
@@ -4145,7 +4181,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         for( const bodypart_str_id &bp : covered_parts ) {
             limb_groups[get_warmth( bp )].emplace_back( bp );
         }
-        // keep on one line if only 1 entry
         if( limb_groups.size() == 1 ) {
             info.emplace_back( "ARMOR", _( "<bold>Warmth</bold>" ), iteminfo::no_newline );
         } else {
@@ -4163,7 +4198,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     }
 
     if( parts->test( iteminfo_parts::ARMOR_BREATHABILITY ) && covers_anything ) {
-
         std::map<int, std::vector<bodypart_id>> limb_groups;
         for( const bodypart_str_id &bp : covered_parts ) {
             const armor_portion_data *portion = portion_for_bodypart( bp );
@@ -4171,12 +4205,13 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                 limb_groups[portion->breathability].emplace_back( bp );
             }
         }
-        // keep on one line if only 1 entry
+
         if( limb_groups.size() == 1 ) {
             info.emplace_back( "ARMOR", _( "<bold>Breathability</bold>" ), iteminfo::no_newline );
         } else {
             info.emplace_back( "ARMOR", _( "<bold>Breathability</bold>:" ) );
         }
+
         for( auto &entry : limb_groups ) {
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( entry.second );
             std::string coverage;
@@ -4187,9 +4222,7 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                                entry.first );
         }
     }
-
     insert_separation_line( info );
-
 
     if( covers_anything ) {
         bool print_prot = true;
@@ -4202,13 +4235,12 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         armor_protect_dmg_info( damage(), info );
     }
 
-
-    // Whatever the last entry was, we want a newline at this point
-    info.back().bNewLine = true;
+    if( !info.empty() ) {
+        info.back().bNewLine = true;
+    }
 
     if( show_bodygraph ) {
         insert_separation_line( info );
-
         auto bg_cb = [this]( const bodygraph_part * bgp, const std::string & sym ) {
             if( !bgp ) {
                 return colorize( sym, bodygraph_full_body_iteminfo->fill_color );
@@ -4220,6 +4252,9 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
             nc_color clr = c_dark_gray;
             int cov_val = 0;
             for( const sub_bodypart_id &sid : grp ) {
+                if( !sid.is_valid() ) {
+                    continue;
+                }
                 int tmp = get_coverage( sid );
                 cov_val = tmp > cov_val ? tmp : cov_val;
             }
@@ -8411,39 +8446,57 @@ bool item::has_sublocations() const
 
 const armor_portion_data *item::portion_for_bodypart( const bodypart_id &bodypart ) const
 {
+    if( !bodypart.is_valid() ) {
+        return nullptr;
+    }
+
     const islot_armor *t = find_armor_data();
     if( !t ) {
         return nullptr;
     }
+
     for( const armor_portion_data &entry : t->data ) {
         if( entry.covers.has_value() && entry.covers->test( bodypart.id() ) ) {
             return &entry;
         }
     }
+
     return nullptr;
 }
 
 
 const armor_portion_data *item::portion_for_bodypart( const sub_bodypart_id &bodypart ) const
 {
+    if( !bodypart.is_valid() ) {
+        return nullptr;
+    }
+
     const islot_armor *t = find_armor_data();
     if( !t ) {
         return nullptr;
     }
+
     const sub_bodypart_str_id &bodypart_sid = bodypart.id();
+
     for( const armor_portion_data &entry : t->sub_data ) {
+
         if( entry.sub_coverage.count( bodypart_sid ) > 0 ) {
             return &entry;
         }
-    }
-    // Try similar sub-bodyparts
-    for( const sub_bodypart_str_id &similar : bodypart->similar_bodyparts ) {
-        for( const armor_portion_data &entry : t->sub_data ) {
+
+        // Try similar sub-bodyparts
+        for( const sub_bodypart_str_id &similar : bodypart->similar_bodyparts ) {
+
+            if( !similar.is_valid() ) {
+                continue;
+            }
+
             if( entry.sub_coverage.count( similar ) > 0 ) {
                 return &entry;
             }
         }
     }
+
     return nullptr;
 }
 
