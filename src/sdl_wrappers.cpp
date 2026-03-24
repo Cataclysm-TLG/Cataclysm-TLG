@@ -248,4 +248,3 @@ bool RenderIsClipEnabled( const SDL_Renderer_Ptr &renderer )
     return SDL_RenderIsClipEnabled( renderer.get() ) == SDL_TRUE;
 }
 #endif // defined(TILES)
-#endif // defined(TILES) || defined(SDL_SOUND)
