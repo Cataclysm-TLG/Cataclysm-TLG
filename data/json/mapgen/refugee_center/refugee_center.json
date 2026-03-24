@@ -103,7 +103,9 @@
         { "type": "NPC_NO_INVESTIGATE", "faction": "old_guard", "x": [ 69, 71 ], "y": [ 2, 23 ] },
         { "type": "NPC_NO_INVESTIGATE", "faction": "old_guard", "x": [ 72, 95 ], "y": [ 0, 23 ] },
         { "type": "NPC_NO_INVESTIGATE", "faction": "lobby_beggars", "x": [ 69, 71 ], "y": [ 2, 23 ] },
-        { "type": "NPC_NO_INVESTIGATE", "faction": "lobby_beggars", "x": [ 72, 95 ], "y": [ 0, 23 ] }
+        { "type": "NPC_NO_INVESTIGATE", "faction": "lobby_beggars", "x": [ 72, 95 ], "y": [ 0, 23 ] },
+        { "type": "NPC_NO_INVESTIGATE", "faction": "no_faction", "x": [ 69, 71 ], "y": [ 2, 23 ] },
+        { "type": "NPC_NO_INVESTIGATE", "faction": "no_faction", "x": [ 72, 95 ], "y": [ 0, 23 ] }
       ],
       "place_vehicles": [
         { "vehicle": "schoolbus", "x": 19, "y": 13, "chance": 75, "rotation": 270 },

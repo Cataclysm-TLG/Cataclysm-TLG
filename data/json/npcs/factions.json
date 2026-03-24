@@ -468,6 +468,7 @@
         "kill on sight": false,
         "watch your back": false,
         "share my stuff": false,
+        "share public goods": true,
         "guard your stuff": false,
         "lets you in": false,
         "defends your space": false,
