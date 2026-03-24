@@ -71,6 +71,9 @@ struct light_color_rgb {
     light_color_rgb operator*( float scale ) const {
         return { r * scale, g * scale, b * scale };
     }
+
+    // Create from HSV. h in [0,360), s and v in [0,1].
+    static light_color_rgb from_hsv( float h, float s, float v );
 };
 
 enum class lit_level : uint8_t {

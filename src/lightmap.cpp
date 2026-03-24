@@ -639,6 +639,39 @@ void map::generate_lightmap( const int zlev )
     for( const std::pair<tripoint_bub_ms, float> &elem : lm_override ) {
         lm[elem.first.x()][elem.first.y()].fill( elem.second );
     }
+
+    // 3x3 box blur on the color cache softens residual octant boundary seams.
+    // Even with per-channel max in update_light_color, attenuation differences
+    // between adjacent octants can leave visible intensity steps.
+    {
+        auto &light_color_cache = map_cache.light_color_cache;
+        static auto blur_buf =
+            std::make_unique<cata::mdarray<light_color_rgb, point_bub_ms>>();
+        blur_buf->fill( light_color_rgb{} );
+        for( int x = 1; x < MAPSIZE_X - 1; ++x ) {
+            for( int y = 1; y < MAPSIZE_Y - 1; ++y ) {
+                if( !light_color_cache[x][y].is_colored() ) {
+                    continue;
+                }
+                light_color_rgb sum;
+                int count = 0;
+                for( int dx = -1; dx <= 1; ++dx ) {
+                    for( int dy = -1; dy <= 1; ++dy ) {
+                        sum += light_color_cache[x + dx][y + dy];
+                        ++count;
+                    }
+                }
+                ( *blur_buf )[x][y] = sum * ( 1.0f / count );
+            }
+        }
+        for( int x = 1; x < MAPSIZE_X - 1; ++x ) {
+            for( int y = 1; y < MAPSIZE_Y - 1; ++y ) {
+                if( ( *blur_buf )[x][y].is_colored() ) {
+                    light_color_cache[x][y] = ( *blur_buf )[x][y];
+                }
+            }
+        }
+    }
 }
 
 void map::add_light_source( const tripoint_bub_ms &p, float luminance,
@@ -656,15 +689,48 @@ void map::add_light_source( const tripoint_bub_ms &p, float luminance,
     }
 }
 
+light_color_rgb light_color_rgb::from_hsv( float h, float s, float v )
+{
+    const float c = v * s;
+    const float x = c * ( 1.0f - std::abs( std::fmod( h / 60.0f, 2.0f ) - 1.0f ) );
+    const float m = v - c;
+    float r1 = 0.0f;
+    float g1 = 0.0f;
+    float b1 = 0.0f;
+    if( h < 60.0f ) {
+        r1 = c;
+        g1 = x;
+    } else if( h < 120.0f ) {
+        r1 = x;
+        g1 = c;
+    } else if( h < 180.0f ) {
+        g1 = c;
+        b1 = x;
+    } else if( h < 240.0f ) {
+        g1 = x;
+        b1 = c;
+    } else if( h < 300.0f ) {
+        r1 = x;
+        b1 = c;
+    } else {
+        r1 = c;
+        b1 = x;
+    }
+    return { r1 + m, g1 + m, b1 + m };
+}
+
 // Set before each castLight sequence, read by update_light_color callback.
 static light_color_rgb g_current_source_color;
 
-// castLight callback for color propagation. Additive accumulation lets
-// multiple sources contribute; the rendering pass extracts the saturated
-// component to build the final tint.
+// castLight callback for color propagation. Per-channel max prevents octant
+// boundary seams (two adjacent octants hitting the same tile would double
+// the color with +=, but scalar light uses max() so it stays clean).
 static void update_light_color( light_color_rgb &tile_color, const float &intensity, quadrant )
 {
-    tile_color += g_current_source_color * intensity;
+    const light_color_rgb contrib = g_current_source_color * intensity;
+    tile_color.r = std::max( tile_color.r, contrib.r );
+    tile_color.g = std::max( tile_color.g, contrib.g );
+    tile_color.b = std::max( tile_color.b, contrib.b );
 }
 
 
