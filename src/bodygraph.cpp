@@ -452,7 +452,7 @@ void bodygraph_display::prepare_partlist()
                 continue;
             }
             partlist.emplace_back( bid, nullptr, &bgp.second,
-                                u->has_part( bid, body_part_filter::equivalent ) );
+                                   u->has_part( bid, body_part_filter::equivalent ) );
         }
         for( const sub_bodypart_id &sid : bgp.second.sub_bodyparts ) {
             if( !sid.is_valid() || !u->has_part( sid->parent ) ) {
@@ -460,7 +460,7 @@ void bodygraph_display::prepare_partlist()
             }
             const bodypart_id bid = sid->parent.id();
             partlist.emplace_back( bid, &*sid, &bgp.second,
-                                u->has_part( bid, body_part_filter::equivalent ) );
+                                   u->has_part( bid, body_part_filter::equivalent ) );
         }
     }
     std::sort( partlist.begin(), partlist.end(),
