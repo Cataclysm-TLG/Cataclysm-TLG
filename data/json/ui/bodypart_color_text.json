@@ -405,5 +405,63 @@
       { "id": "bitten", "text": "FOOT", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
     "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "bodypart_fish_tail_status_text",
+    "type": "widget",
+    "bodypart": "fish_tail",
+    "style": "text",
+    "default_clause": { "text": "TAIL" },
+    "clauses": [
+      {
+        "id": "bleedingAndBitten3",
+        "text": "FOOT",
+        "color": "magenta_red",
+        "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
+      },
+      {
+        "id": "bleedingAndBitten12",
+        "text": "FOOT",
+        "color": "magenta",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bite" },
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding3",
+        "text": "FOOT",
+        "color": "red_red",
+        "condition": { "u_has_effect": "bleed", "intensity": 21 }
+      },
+      {
+        "id": "bleeding2",
+        "text": "FOOT",
+        "color": "red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 11 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding1",
+        "text": "FOOT",
+        "color": "light_red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+          ]
+        }
+      },
+      { "id": "infected", "text": "FOOT", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "FOOT", "color": "blue", "condition": { "u_has_effect": "bite" } }
+    ],
+    "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
   }
 ]

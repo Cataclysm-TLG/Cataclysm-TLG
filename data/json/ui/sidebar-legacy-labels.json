@@ -14,7 +14,8 @@
       "ll_lleg_layout",
       "ll_gastropod_foot_layout",
       "ll_torso_layout",
-      "ll_rleg_layout"
+      "ll_rleg_layout",
+      "ll_fish_tail_layout"
     ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
@@ -33,7 +34,8 @@
       "ll_lleg_sa_layout",
       "ll_gastropod_foot_sa_layout",
       "ll_torso_sa_layout",
-      "ll_rleg_sa_layout"
+      "ll_rleg_sa_layout",
+      "ll_fish_tail_sa_layout"
     ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
@@ -114,6 +116,16 @@
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
+    "id": "ll_fish_tail_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "fish_tail",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_fish_tail" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
     "id": "ll_larm_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -181,6 +193,16 @@
     "bodypart": "leg_r",
     "text_align": "right",
     "widgets": [ "status_hpn_layout_rleg" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_fish_tail_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "fish_tail",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_fish_tail" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {

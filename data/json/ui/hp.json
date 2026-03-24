@@ -88,6 +88,14 @@
     "bodypart": "gastropod_foot",
     "copy-from": "hitpoint_graph_label"
   },
+    {
+    "id": "hp_fish_tail_graph",
+    "type": "widget",
+    "label": "TAIL",
+    "var": "bp_hp",
+    "bodypart": "fish_tail",
+    "copy-from": "hitpoint_graph_label"
+  },
   {
     "id": "hp_head_graph_no_label",
     "type": "widget",
@@ -142,6 +150,14 @@
     "label": "FOOT",
     "var": "bp_hp",
     "bodypart": "gastropod_foot",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_fish_tail_graph_no_label",
+    "type": "widget",
+    "label": "TAIL",
+    "var": "bp_hp",
+    "bodypart": "fish_tail",
     "copy-from": "hitpoint_graph_no_label"
   },
   {
@@ -203,7 +219,16 @@
     "type": "widget",
     "label": "FOOT",
     "var": "bp_hp",
-    "bodypart": "leg_r",
+    "bodypart": "gastropod_foot",
+    "copy-from": "hitpoint_num_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "hp_fish_tail_num_label",
+    "type": "widget",
+    "label": "TAIL",
+    "var": "bp_hp",
+    "bodypart": "fish_tail",
     "copy-from": "hitpoint_num_label",
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
@@ -267,6 +292,15 @@
     "label": "FOOT",
     "var": "bp_hp",
     "bodypart": "gastropod_foot",
+    "copy-from": "hitpoint_num_no_label",
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
+  },
+  {
+    "id": "hp_fish_tail_num_no_label",
+    "type": "widget",
+    "label": "TAIL",
+    "var": "bp_hp",
+    "bodypart": "fish_tail",
     "copy-from": "hitpoint_num_no_label",
     "flags": [ "W_DISABLED_WHEN_EMPTY", "W_LABEL_NONE" ]
   },
@@ -357,10 +391,22 @@
     "id": "status_hpg_layout_gastropod_foot",
     "type": "widget",
     "style": "layout",
+    "bodypart": "gastropod_foot",
     "arrange": "columns",
     "width": 11,
     "height": 0,
     "widgets": [ "bodypart_gastropod_foot_status_text", "hp_gastropod_foot_graph_no_label" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "status_hpg_layout_fish_tail",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "fish_tail",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_fish_tail_status_text", "hp_fish_tail_graph_no_label" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
