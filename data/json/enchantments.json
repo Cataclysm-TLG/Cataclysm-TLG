@@ -352,6 +352,12 @@
   },
   {
     "type": "enchantment",
+    "id": "ench_fish_tail",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "gain": "fish_tail" } ]
+  },
+  {
+    "type": "enchantment",
     "id": "ench_eyes_frog",
     "condition": "ALWAYS",
     "modified_bodyparts": [ { "lose": "eyes" }, { "gain": "eyes_frog" } ]

@@ -185,7 +185,7 @@
     "type": "widget",
     "label": "Status Legend",
     "style": "legend",
-    "bodyparts": [ "head", "torso", "arm_l", "arm_r", "leg_l", "leg_r", "gastropod_foot" ],
+    "bodyparts": [ "head", "torso", "arm_l", "arm_r", "leg_l", "leg_r", "gastropod_foot", "fish_tail" ],
     "copy-from": "bodypart_status_indicator_template",
     "width": 0,
     "height": 3,

@@ -673,5 +673,104 @@
     "name": "foot (draped)",
     "opposite": "sub_limb_debug",
     "locations_under": [ "gastropod_foot_upper" ]
+  },
+  {
+    "id": "fish_tail",
+    "type": "body_part",
+    "name": "tail",
+    "accusative": { "ctxt": "bodypart_accusative", "str": "tail" },
+    "heading": "tail",
+    "heading_multiple": "tails",
+    "hp_bar_ui_text": "TAIL",
+    "encumbrance_text": "Running and swimming are slowed.",
+    "encumbrance_threshold": 20,
+    "main_part": "fish_tail",
+    "connected_to": "torso",
+    "side": "both",
+    "opposite_part": "fish_tail",
+    "limb_types": [ "tail" ],
+    "limb_scores": [ [ "swim", 0.15 ], [ "balance", 0.8 ] ],
+    "hit_size": 10,
+    "hit_difficulty": 0.85,
+    "stylish_bonus": 1,
+    "hot_morale_mod": 0.5,
+    "cold_morale_mod": 0.5,
+    "fire_warmth_bonus": 600,
+    "squeamish_penalty": 5,
+    "base_hp": 45,
+    "drench_capacity": 600,
+    "smash_message": "You tail-slap the %s.",
+    "flags": [ "LIMB_LOWER" ],
+    "sub_parts": [ "fish_tail_base", "fish_tail_tip" ],
+     "effects_on_hit": [
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 7,
+        "dmg_scale_increment": 2,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1500
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
+        "dmg_threshold": 5,
+        "dmg_scale_increment": 2,
+        "duration": 60,
+        "duration_dmg_scaling": 90,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "bullet",
+        "dmg_threshold": 5,
+        "dmg_scale_increment": 1,
+        "duration": 60,
+        "duration_dmg_scaling": 90,
+        "max_duration": 1200
+      },
+      {
+        "id": "staggered_character",
+        "dmg_type": "bash",
+        "dmg_threshold": 8,
+        "dmg_scale_increment": 5,
+        "chance": 10,
+        "chance_dmg_scaling": 10,
+        "duration": 5,
+        "duration_dmg_scaling": 2,
+        "max_duration": 15
+      },
+      {
+        "id": "staggered_character",
+        "dmg_threshold": 12,
+        "dmg_scale_increment": 5,
+        "chance": 10,
+        "chance_dmg_scaling": 10,
+        "duration": 5,
+        "duration_dmg_scaling": 2,
+        "max_duration": 15
+      }
+    ]
+  },
+  {
+    "id": "fish_tail_base",
+    "type": "sub_body_part",
+    "max_coverage": 30,
+    "parent": "fish_tail",
+    "side": 0,
+    "opposite": "fish_tail_tip",
+    "name_multiple": "tail",
+    "name": "tail base"
+  },
+  {
+    "id": "fish_tail_tip",
+    "type": "sub_body_part",
+    "max_coverage": 70,
+    "parent": "fish_tail",
+    "side": 0,
+    "opposite": "fish_tail_base",
+    "name_multiple": "tail",
+    "name": "tail fin"
   }
 ]
