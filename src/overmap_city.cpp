@@ -18,7 +18,6 @@
 #include "map_iterator.h"
 #include "map_scale_constants.h"
 #include "omdata.h"
-#include "options.h"
 #include "overmap.h"
 #include "overmap_connection.h"
 #include "overmapbuffer.h"
