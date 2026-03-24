@@ -826,6 +826,19 @@
     ]
   },
   {
+    "type": "region_settings_city",
+    "id": "no_cities",
+    "city_size": 0,
+    "city_spacing": 0,
+    "shop_radius": 0,
+    "shop_sigma": 0,
+    "park_radius": 0,
+    "park_sigma": 0,
+    "houses": [  ],
+    "parks": [  ],
+    "shops": [  ]
+  },
+  {
     "type": "map_extra_collection",
     "id": "forest",
     "chance": 40,

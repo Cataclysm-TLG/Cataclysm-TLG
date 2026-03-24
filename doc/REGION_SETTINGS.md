@@ -31,7 +31,7 @@ see their info later in this document.
 | `forest_composition`     | `region_settings_forest_mapgen`     | Defines flora (and "stuff") that cover the `forest` terrain types.    |
 | `forest_trails`          | `region_settings_forest_trail`      | Defines the overmap and local structure of forest trails. `null` to disable. |
 | `highways`               | `region_settings_highway`           | Defines parameters for generating highways in the region. `null` to disable. |
-| `cities`                 | `region_settings_city`              | Defines the structural compositions of cities. `null` to disable city generation. |
+| `cities`                 | `region_settings_city`              | Defines the structural compositions of cities. `"no_cities"` to disable city generation. |
 | `map_extras`             | `region_settings_map_extras`        | Defines the map extra groups referenced by overmap terrains.          |
 | `terrain_furniture`      | `region_settings_terrain_furniture` | Defines the resolution of regional terrain/furniture to actual types. |
 | `weather`                | `weather_generator`                 | Defines the base weather attributes for the region.                   |
@@ -452,7 +452,7 @@ relative placements of various classes of buildings.
 | `houses`               | Weighted list of overmap terrains and specials used for houses.               |
 | `parks`                | Weighted list of overmap terrains and specials used for parks.                |
 | `shops`                | Weighted list of overmap terrains and specials used for shops.                |
-| `city_size`            | Size of cities. Larger number = bigger cities. 0 = no cities. Range: 0 - 16   |
+| `city_size`            | Required Setting. Size of cities. Larger number = bigger cities. 0 = no cities. Range: 0 - 16   |
 | `city_spacing`         | Space between cities. Larger number = more space between cities. Range: 0 - 8 |
 | `is_megacity`          | Special flag to trigger special map generation. Generates a megacity.         |
 

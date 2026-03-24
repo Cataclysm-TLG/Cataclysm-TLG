@@ -570,7 +570,7 @@ void region_terrain_furniture::load( const JsonObject &jo, std::string_view )
 void region_settings_city::load( const JsonObject &jo, std::string_view )
 {
     optional( jo, was_loaded, "is_megacity", is_megacity );
-    optional( jo, was_loaded, "city_size", city_size );
+    mandatory( jo, was_loaded, "city_size", city_size );
     optional( jo, was_loaded, "city_spacing", city_spacing );
     optional( jo, was_loaded, "shop_radius", shop_radius );
     optional( jo, was_loaded, "shop_sigma", shop_sigma );
@@ -614,7 +614,7 @@ void region_settings::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "forest_trails", forest_trail );
 
     optional( jo, was_loaded, "map_extras", region_extras );
-    optional( jo, was_loaded, "cities", city_spec );
+    mandatory( jo, was_loaded, "cities", city_spec );
     optional( jo, was_loaded, "weather", weather );
     optional( jo, was_loaded, "feature_flag_settings", overmap_feature_flag );
     optional( jo, was_loaded, "forests", overmap_forest );
