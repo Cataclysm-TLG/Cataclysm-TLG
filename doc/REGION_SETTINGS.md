@@ -444,14 +444,17 @@ relative placements of various classes of buildings.
 
 ### Fields
 
-|       Identifier        |                            Description                             |
-| ----------------------- | ------------------------------------------------------------------ |
-| `name_snippet`          | Snippet used to generate city names. Default is `<city_name>`.     |
-| `shop_radius`           | Radial frequency of shop placement. Smaller number = more shops.   |
-| `park_radius`           | Radial frequency of park placement. Smaller number = more parks.   |
-| `houses`                | Weighted list of overmap terrains and specials used for houses.    |
-| `parks`                 | Weighted list of overmap terrains and specials used for parks.     |
-| `shops`                 | Weighted list of overmap terrains and specials used for shops.     |
+|       Identifier       |                            Description                                        |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| `name_snippet`         | Snippet used to generate city names. Default is `<city_name>`.                |
+| `shop_radius`          | Radial frequency of shop placement. Smaller number = more shops.              |
+| `park_radius`          | Radial frequency of park placement. Smaller number = more parks.              |
+| `houses`               | Weighted list of overmap terrains and specials used for houses.               |
+| `parks`                | Weighted list of overmap terrains and specials used for parks.                |
+| `shops`                | Weighted list of overmap terrains and specials used for shops.                |
+| `city_size`            | Size of cities. Larger number = bigger cities. 0 = no cities. Range: 0 - 16   |
+| `city_spacing`         | Space between cities. Larger number = more space between cities. Range: 0 - 8 |
+| `is_megacity`          | Special flag to trigger special map generation. Generates a megacity.         |
 
 ### Placing shops, parks, and houses
 
@@ -466,6 +469,9 @@ place the shop or park are based on the formula `rng( 0, 99 ) > X_radius * dista
 {
     "type": "region_settings_city",
     "id": "default",
+    "is_megacity": false,
+    "city_size": 8,
+    "city_spacing": 4,
     "shop_radius": 30,
     "shop_sigma": 50,
     "park_radius": 20,

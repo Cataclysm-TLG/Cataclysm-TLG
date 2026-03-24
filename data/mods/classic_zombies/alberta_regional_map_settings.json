@@ -359,6 +359,8 @@
   {
     "type": "region_settings_city",
     "id": "default",
+    "city_size": 8,
+    "city_spacing": 4,
     "shop_radius": 30,
     "shop_sigma": 50,
     "park_radius": 20,
