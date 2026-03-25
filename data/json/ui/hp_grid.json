@@ -1,5 +1,5 @@
 [
-    {
+  {
     "id": "ll_larm_layout",
     "type": "widget",
     "style": "layout",
@@ -10,7 +10,7 @@
     "widgets": [ "status_hpg_layout_larm" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-      {
+  {
     "id": "ll_wing_bird_l_layout",
     "type": "widget",
     "style": "layout",
@@ -107,7 +107,7 @@
     "widgets": [ "status_hpg_layout_long_tail" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_fish_tail_layout",
     "type": "widget",
     "style": "layout",
@@ -127,7 +127,7 @@
     "widgets": [ "status_hpn_layout_larm" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_wing_bird_l_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -157,7 +157,7 @@
     "widgets": [ "status_hpn_layout_rarm" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_wing_bird_r_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -217,7 +217,7 @@
     "widgets": [ "status_hpn_layout_long_tail" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
-    {
+  {
     "id": "ll_fish_tail_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -257,7 +257,7 @@
     "height": 0,
     "widgets": [ "bodypart_larm_status_text", "hp_left_arm_graph_no_label" ]
   },
-    {
+  {
     "id": "status_hpg_layout_wing_bird_l",
     "type": "widget",
     "style": "layout",
@@ -277,7 +277,7 @@
     "height": 0,
     "widgets": [ "bodypart_rarm_status_text", "hp_right_arm_graph_no_label" ]
   },
-      {
+  {
     "id": "status_hpg_layout_wing_bird_r",
     "type": "widget",
     "style": "layout",
@@ -327,7 +327,7 @@
     "height": 0,
     "widgets": [ "bodypart_long_tail_status_text", "hp_long_tail_graph_no_label" ]
   },
-    {
+  {
     "id": "status_hpg_layout_fish_tail",
     "type": "widget",
     "style": "layout",
@@ -364,7 +364,7 @@
     "height": 0,
     "widgets": [ "bodypart_larm_status_text", "hp_left_arm_num_no_label" ]
   },
-      {
+  {
     "id": "status_hpn_layout_wing_bird_l",
     "type": "widget",
     "style": "layout",
@@ -383,7 +383,7 @@
     "height": 0,
     "widgets": [ "bodypart_rarm_status_text", "hp_right_arm_num_no_label" ]
   },
-      {
+  {
     "id": "status_hpn_layout_wing_bird_r",
     "type": "widget",
     "style": "layout",
@@ -429,7 +429,7 @@
     "height": 0,
     "widgets": [ "bodypart_long_tail_status_text", "hp_long_tail_num_no_label" ]
   },
-    {
+  {
     "id": "status_hpn_layout_fish_tail",
     "type": "widget",
     "style": "layout",
@@ -459,7 +459,7 @@
     "bodypart": "arm_l",
     "copy-from": "hitpoint_graph_no_label"
   },
-    {
+  {
     "id": "hp_wing_bird_l_graph_no_label",
     "type": "widget",
     "var": "bp_hp",
@@ -473,7 +473,7 @@
     "bodypart": "arm_r",
     "copy-from": "hitpoint_graph_no_label"
   },
-      {
+  {
     "id": "hp_wing_bird_r_graph_no_label",
     "type": "widget",
     "var": "bp_hp",
@@ -501,14 +501,14 @@
     "bodypart": "gastropod_foot",
     "copy-from": "hitpoint_graph_no_label"
   },
-    {
+  {
     "id": "hp_long_tail_graph_no_label",
     "type": "widget",
     "var": "bp_hp",
     "bodypart": "long_tail",
     "copy-from": "hitpoint_graph_no_label"
   },
-      {
+  {
     "id": "hp_fish_tail_graph_no_label",
     "type": "widget",
     "var": "bp_hp",
@@ -536,7 +536,7 @@
     "bodypart": "arm_l",
     "copy-from": "hitpoint_num_no_label"
   },
-    {
+  {
     "id": "hp_wing_bird_l_num_no_label",
     "type": "widget",
     "var": "bp_hp",
@@ -550,7 +550,7 @@
     "bodypart": "arm_r",
     "copy-from": "hitpoint_num_no_label"
   },
-      {
+  {
     "id": "hp_wing_bird_r_num_no_label",
     "type": "widget",
     "var": "bp_hp",

@@ -87,7 +87,7 @@
     "bodypart": "gastropod_foot",
     "copy-from": "hitpoint_graph_label"
   },
-    {
+  {
     "id": "hp_long_tail_graph",
     "type": "widget",
     "label": "TAIL",

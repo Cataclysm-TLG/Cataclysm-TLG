@@ -464,7 +464,7 @@
     ],
     "flags": [ "W_LABEL_NONE" ]
   },
-    {
+  {
     "id": "bodypart_fish_tail_status_text",
     "type": "widget",
     "bodypart": "fish_tail",
@@ -580,7 +580,7 @@
     ],
     "flags": [ "W_LABEL_NONE" ]
   },
-    {
+  {
     "id": "bodypart_wing_bird_l_status_text",
     "type": "widget",
     "bodypart": "wing_bird_l",

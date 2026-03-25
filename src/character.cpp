@@ -2863,7 +2863,8 @@ void Character::calc_all_parts_hp( float hp_mod, float hp_adjustment, int str_ma
         if( has_bionic( bio_armor_torso ) && part.first == body_part_torso ) {
             new_max *= 1.09;
         }
-        if( has_flag( json_flag_TOUGH_TAIL ) && part.first.obj().primary_limb_type() == body_part_type::type::tail ) {
+        if( has_flag( json_flag_TOUGH_TAIL ) &&
+            part.first.obj().primary_limb_type() == body_part_type::type::tail ) {
             new_max *= 1.2;
         }
 
