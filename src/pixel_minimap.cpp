@@ -175,8 +175,8 @@ struct pixel_minimap::submap_cache {
     //the list of updates to apply to the texture
     //reduces render target switching to once per submap
     std::vector<point> update_list;
-    //flag used to indicate that the texture needs to be cleared before first use
-    bool ready = false;
+    //cpu-side pixel buffer (ARGB8888); uploaded via SDL_UpdateTexture to avoid render target switching
+    std::vector<uint32_t> pixel_buffer;
     shared_texture_pool &pool;
 
     //reserve the SEEX * SEEY submap tiles
@@ -256,10 +256,14 @@ void pixel_minimap::clear_unused_cache()
     }
 }
 
-//draws individual updates to the submap cache texture
-//the render target will be set back to display_buffer after all submaps are updated
+//draws individual updates to the submap cache texture via CPU pixel buffer + SDL_UpdateTexture,
+//avoiding SDL_SetRenderTarget which crashes with sdl2-compat over SDL3
 void pixel_minimap::flush_cache_updates()
 {
+    const point chunk_size = projector->get_tiles_size( { SEEX, SEEY } );
+    const int buf_pixels = chunk_size.x * chunk_size.y;
+    const point tile_size = projector->get_tile_size();
+
     for( auto &mcp : cache ) {
         if( mcp.second.update_list.empty() ) {
             continue;
@@ -270,39 +274,31 @@ void pixel_minimap::flush_cache_updates()
             continue;
         }
 
-        SetRenderTarget( renderer, mcp.second.chunk_tex );
+        auto &sb = mcp.second;
 
-        if( !mcp.second.ready ) {
-            mcp.second.ready = true;
+        // Lazy-init pixel buffer to transparent black on first use
+        if( sb.pixel_buffer.empty() ) {
+            sb.pixel_buffer.assign( buf_pixels, 0 );
+        }
 
-            SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0x00 );
-            RenderClear( renderer );
-
-            for( int y = 0; y < SEEY; ++y ) {
-                for( int x = 0; x < SEEX; ++x ) {
-                    const point tile_pos = projector->get_tile_pos( { x, y }, { SEEX, SEEY } );
-                    const point tile_size = projector->get_tile_size();
-
-                    const SDL_Rect rect = SDL_Rect{ tile_pos.x, tile_pos.y, tile_size.x, tile_size.y };
-
-                    geometry->rect( renderer, rect, SDL_Color() );
+        // Paint each updated tile into the CPU-side pixel buffer
+        for( const point &p : sb.update_list ) {
+            const point tile_pos = projector->get_tile_pos( p, { SEEX, SEEY } );
+            const SDL_Color c = sb.color_at( p );
+            const uint32_t pixel = ( static_cast<uint32_t>( c.a ) << 24 ) |
+                                   ( static_cast<uint32_t>( c.r ) << 16 ) |
+                                   ( static_cast<uint32_t>( c.g ) << 8 ) |
+                                   static_cast<uint32_t>( c.b );
+            for( int py = 0; py < tile_size.y; ++py ) {
+                for( int px = 0; px < tile_size.x; ++px ) {
+                    sb.pixel_buffer[( tile_pos.y + py ) * chunk_size.x + ( tile_pos.x + px )] = pixel;
                 }
             }
         }
 
-        for( const point &p : mcp.second.update_list ) {
-            const point tile_pos = projector->get_tile_pos( p, { SEEX, SEEY } );
-            const SDL_Color tile_color = mcp.second.color_at( p );
-
-            if( pixel_size.x == 1 && pixel_size.y == 1 ) {
-                SetRenderDrawColor( renderer, tile_color.r, tile_color.g, tile_color.b, tile_color.a );
-                RenderDrawPoint( renderer, tile_pos );
-            } else {
-                geometry->rect( renderer, tile_pos, pixel_size.x, pixel_size.y, tile_color );
-            }
-        }
-
-        mcp.second.update_list.clear();
+        SDL_UpdateTexture( sb.chunk_tex.get(), nullptr,
+                           sb.pixel_buffer.data(), chunk_size.x * sizeof( uint32_t ) );
+        sb.update_list.clear();
     }
 }
 
@@ -425,7 +421,9 @@ void pixel_minimap::set_screen_rect( const SDL_Rect &screen_rect )
     const point chunk_size = projector->get_tiles_size( { SEEX, SEEY } );
 
     const auto chunk_texture_generator = [&chunk_size, this]() {
-        SDL_Texture_Ptr result = create_cache_texture( renderer, chunk_size.x, chunk_size.y );
+        SDL_Texture_Ptr result = CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888,
+                                               SDL_TEXTUREACCESS_STREAMING,
+                                               chunk_size.x, chunk_size.y );
         SetTextureBlendMode( result, SDL_BLENDMODE_BLEND );
         return result;
     };
