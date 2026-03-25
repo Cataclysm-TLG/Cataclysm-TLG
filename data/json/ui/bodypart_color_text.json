@@ -411,6 +411,64 @@
     "type": "widget",
     "bodypart": "fish_tail",
     "style": "text",
+    "default_clause": { "text": "F TAIL" },
+    "clauses": [
+      {
+        "id": "bleedingAndBitten3",
+        "text": "F TAIL",
+        "color": "magenta_red",
+        "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
+      },
+      {
+        "id": "bleedingAndBitten12",
+        "text": "F TAIL",
+        "color": "magenta",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bite" },
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding3",
+        "text": "F TAIL",
+        "color": "red_red",
+        "condition": { "u_has_effect": "bleed", "intensity": 21 }
+      },
+      {
+        "id": "bleeding2",
+        "text": "F TAIL",
+        "color": "red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 11 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding1",
+        "text": "F TAIL",
+        "color": "light_red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+          ]
+        }
+      },
+      { "id": "infected", "text": "F TAIL", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "F TAIL", "color": "blue", "condition": { "u_has_effect": "bite" } }
+    ],
+    "flags": [ "W_LABEL_NONE" ]
+  },
+  {
+    "id": "bodypart_long_tail_status_text",
+    "type": "widget",
+    "bodypart": "long_tail",
+    "style": "text",
     "default_clause": { "text": "TAIL" },
     "clauses": [
       {

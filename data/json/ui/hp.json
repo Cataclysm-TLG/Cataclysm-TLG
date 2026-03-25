@@ -90,9 +90,17 @@
   {
     "id": "hp_fish_tail_graph",
     "type": "widget",
-    "label": "TAIL",
+    "label": "F TAIL",
     "var": "bp_hp",
     "bodypart": "fish_tail",
+    "copy-from": "hitpoint_graph_label"
+  },
+    {
+    "id": "hp_long_tail_graph",
+    "type": "widget",
+    "label": "TAIL",
+    "var": "bp_hp",
+    "bodypart": "long_tail",
     "copy-from": "hitpoint_graph_label"
   },
   {
@@ -149,6 +157,13 @@
     "type": "widget",
     "var": "bp_hp",
     "bodypart": "fish_tail",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+    {
+    "id": "hp_long_tail_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "long_tail",
     "copy-from": "hitpoint_graph_no_label"
   },
   {
@@ -210,9 +225,17 @@
   {
     "id": "hp_fish_tail_num_label",
     "type": "widget",
-    "label": "TAIL",
+    "label": "F TAIL",
     "var": "bp_hp",
     "bodypart": "fish_tail",
+    "copy-from": "hitpoint_num_label"
+  },
+  {
+    "id": "hp_long_tail_num_label",
+    "type": "widget",
+    "label": "TAIL",
+    "var": "bp_hp",
+    "bodypart": "long_tail",
     "copy-from": "hitpoint_num_label"
   },
   {
@@ -269,6 +292,13 @@
     "type": "widget",
     "var": "bp_hp",
     "bodypart": "fish_tail",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_long_tail_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "long_tail",
     "copy-from": "hitpoint_num_no_label"
   },
   {
@@ -369,6 +399,16 @@
     "widgets": [ "bodypart_fish_tail_status_text", "hp_fish_tail_graph_no_label" ]
   },
   {
+    "id": "status_hpg_layout_long_tail",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "long_tail",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_long_tail_status_text", "hp_long_tail_graph_no_label" ]
+  },
+  {
     "id": "status_hpn_layout_head",
     "type": "widget",
     "style": "layout",
@@ -439,6 +479,15 @@
     "width": 9,
     "height": 0,
     "widgets": [ "bodypart_fish_tail_status_text", "hp_fish_tail_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_long_tail",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 9,
+    "height": 0,
+    "widgets": [ "bodypart_long_tail_status_text", "hp_long_tail_num_no_label" ]
   },
   {
     "id": "hitpoint_graphs_top_layout",

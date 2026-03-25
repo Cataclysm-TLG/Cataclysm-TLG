@@ -354,7 +354,13 @@
     "type": "enchantment",
     "id": "ench_fish_tail",
     "condition": "ALWAYS",
-    "modified_bodyparts": [ { "gain": "fish_tail" } ]
+    "modified_bodyparts": [ { "gain": "fish_tail" }, { "lose": "long_tail" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_long_tail",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "gain": "long_tail" }, { "lose": "fish_tail" } ]
   },
   {
     "type": "enchantment",

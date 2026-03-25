@@ -1818,7 +1818,7 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
             if( !wobj._bps.empty() ) {
                 include = false;
                 for( const bodypart_id &bp : wobj._bps ) {
-                    if( get_player_character().has_part( bp, body_part_filter::equivalent ) ) {
+                    if( get_player_character().has_part( bp, body_part_filter::strict ) ) {
                         include = true;
                         break;
                     }
