@@ -2651,7 +2651,7 @@ bodypart_id Creature::get_part_id( const bodypart_id &id,
     if( found != body.end() ) {
         return found->first;
     }
-    // try to find an equivalent part in the body map
+    // Check the body map for equivalent parts e.g. of the same type.
     if( filter >= body_part_filter::equivalent ) {
         for( const std::pair<const bodypart_str_id, bodypart> &bp : body ) {
             if( id->part_side == bp.first->part_side &&
@@ -2660,7 +2660,7 @@ bodypart_id Creature::get_part_id( const bodypart_id &id,
             }
         }
     }
-    // try to find the next best thing
+    // Try to find the next best thing.
     std::pair<bodypart_id, float> best = { bodypart_str_id::NULL_ID().id(), 0.0f };
     if( filter >= body_part_filter::next_best ) {
         for( const std::pair<const bodypart_str_id, bodypart> &bp : body ) {

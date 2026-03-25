@@ -2735,5 +2735,10 @@
     "id": "EATDEAD",
     "type": "json_flag",
     "//": "Used for immunity to the effects of eating zombies."
+  },
+  {
+    "id": "TOUGH_TAIL",
+    "type": "json_flag",
+    "//": "In lieu of adding bp args to max_hp enchantments, this grants all of parts of type 'tail' +20% max HP."
   }
 ]
