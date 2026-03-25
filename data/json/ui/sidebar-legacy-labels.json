@@ -123,7 +123,7 @@
     "bodypart": "fish_tail",
     "text_align": "right",
     "widgets": [ "status_hpg_layout_fish_tail" ],
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_NO_PADDING" ]
   },
   {
     "id": "ll_larm_sa_layout",

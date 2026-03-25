@@ -1810,13 +1810,11 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
     if( _style == "layout" ) {
         // Get all child widgets
         std::vector<string_id<widget>> wgts = widgets( !_clauses.empty() );
-
         // Filter child widgets based on body parts
         std::vector<string_id<widget>> shown_widgets;
         for( const auto &wid : wgts ) {
             widget wobj = wid.obj();
             bool include = true;
-
             if( !wobj._bps.empty() ) {
                 include = false;
                 for( const bodypart_id &bp : wobj._bps ) {
@@ -1826,15 +1824,12 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
                     }
                 }
             }
-
             if( include ) {
                 shown_widgets.push_back( wid );
             }
         }
         wgts = std::move( shown_widgets );
-
         int layout_label_width = ( label_width == 0 || !_pad_labels ) ? _label_width : label_width;
-
         if( _arrange == "rows" ) {
             std::string sep;
             int h = 0;
@@ -1868,13 +1863,18 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
                 std::vector<std::vector<std::string>> cols;
                 std::vector<int> widths;
 
-                int row_count = std::min( cols_per_row, num_widgets - start );
+                int row_count = cols_per_row;
                 int avail_width = std::max( 0, static_cast<int>( max_width ) - col_padding * ( row_count - 1 ) );
                 int child_width = row_count > 0 ? avail_width / row_count : 0;
                 int remainder = avail_width - ( child_width * row_count );
 
                 for( int i = start; i < start + row_count; i++ ) {
-                    widget &child = const_cast<widget &>( wgts[i].obj() );
+                    if( i >= num_widgets ) {
+                        cols.emplace_back();
+                        widths.emplace_back( child_width );
+                        continue;
+                    }
+                    widget child = wgts[i].obj();
                     int cur_width = child_width;
                     if( child._style == "layout" && child._width > 0 ) {
                         cur_width = child._width;
@@ -1924,41 +1924,71 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
         } else { // columns / minimum_columns
             const int num_widgets = wgts.size();
             if( num_widgets == 0 ) {
-                _height = 0;
-                return "";
+                debugmsg( "widget layout has no widgets" );
             }
-
+            // Number of spaces between columns
             const int col_padding = _padding;
-            int avail_width = std::max( 0, static_cast<int>( max_width ) - col_padding * ( num_widgets - 1 ) );
-            int child_width = num_widgets > 0 ? avail_width / num_widgets : 0;
-            int remainder = avail_width - ( child_width * num_widgets );
-
+            // Subtract column padding to get space available for widgets
+            const int avail_width = max_width - col_padding * ( num_widgets - 1 );
+            // Divide available width equally among all widgets
+            const int child_width = avail_width / num_widgets;
+            // Total widget width w/o padding
+            const int total_widget_width = std::accumulate( wgts.begin(), wgts.end(), 0,
+            [child_width]( int sum, const widget_id & wid ) {
+                widget cur_child = wid.obj();
+                return sum + ( cur_child._style == "layout" &&
+                               cur_child._width > 0 ? cur_child._width : child_width );
+            } );
+            // Total widget width with padding
+            const int total_widget_padded_width = total_widget_width + col_padding * ( num_widgets - 1 );
+            // Keep remainder to distribute
+            int remainder = max_width - total_widget_padded_width;
+            // Store the (potentially) multi-row text for each column
             std::vector<std::vector<std::string>> cols;
             std::vector<int> widths;
             unsigned int total_width = 0;
-
+            std::string debug_widths;
             for( size_t i = 0; i < wgts.size(); i++ ) {
-                widget cur_child = wgts[i].obj();
+                const widget_id &wid = wgts[i];
+                widget cur_child = wid.obj();
                 int cur_width = child_width;
-
-                if( _arrange == "minimum_columns" && cur_child._width > 0 ) {
-                    cur_width = cur_child._width;
-                    if( i == wgts.size() - 1 ) {
-                        cur_width = std::max( 0, avail_width - static_cast<int>( total_width ) );
+                // determine spacing based on type of column
+                if( _arrange == "minimum_columns" ) {
+                    if( cur_child._width > 0 ) {
+                        cur_width = cur_child._width;
                     }
-                } else if( cur_child._style == "layout" && cur_child._width > 0 ) {
-                    cur_width = cur_child._width;
+                    // if last widget make it take the remaining space
+                    if( i == wgts.size() - 1 ) {
+                        cur_width = std::max<int>( 0, avail_width - total_width );
+                    }
+                } else { //columns
+                    if( cur_child._style == "layout" && cur_child._width > 0 ) {
+                        cur_width = cur_child._width;
+                    }
+                    // Spread remainder over the first few columns
                     if( remainder > 0 ) {
                         cur_width += 1;
-                        remainder--;
+                        remainder -= 1;
                     }
                 }
 
-                std::string txt = cur_child.layout( ava, std::max( 0, cur_width ),
-                                                    layout_label_width, skip_pad );
+                // for debug keep track of each and width
+                debug_widths.append( string_format( "%s: %d,", wid.str(), cur_width ) );
+
+                if( cur_width > 0 ) {
+                    total_width += cur_width;
+                }
+                if( total_width > max_width ) {
+                    debugmsg( string_format( "widget layout is wider (%d) than sidebar allows (%d) for %s.",
+                                             total_width, max_width, debug_widths ) );
+                }
+                const bool skip_pad_this = skip_pad || wid->has_flag( json_flag_W_NO_PADDING );
+                // Layout child in this column
+                const std::string txt = cur_child.layout( ava, skip_pad_this ? 0 : cur_width,
+                                        layout_label_width, skip_pad_this );
+                // Store the resulting text for this column
                 cols.emplace_back( string_split( txt, '\n' ) );
                 widths.emplace_back( cur_width );
-                total_width += cur_width;
             }
 
             int h_max = 0;
@@ -1988,7 +2018,6 @@ std::string widget::layout( const avatar &ava, unsigned int max_width, int label
             }
             set_height_for_widget( id, h_max );
         }
-
     } else { // leaf text widget
         std::string shown = show( ava, max_width );
         if( shown.empty() && has_flag( json_flag_W_DYNAMIC_HEIGHT ) ) {

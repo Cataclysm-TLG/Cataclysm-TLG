@@ -702,7 +702,7 @@
     "smash_message": "You tail-slap the %s.",
     "flags": [ "LIMB_LOWER" ],
     "sub_parts": [ "fish_tail_base", "fish_tail_tip" ],
-     "effects_on_hit": [
+    "effects_on_hit": [
       {
         "id": "bleed",
         "dmg_type": "cut",
