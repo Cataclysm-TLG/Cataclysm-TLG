@@ -353,6 +353,7 @@ static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 static const json_character_flag json_flag_STEADY( "STEADY" );
 static const json_character_flag json_flag_STOP_SLEEP_DEPRIVATION( "STOP_SLEEP_DEPRIVATION" );
 static const json_character_flag json_flag_SUPER_CLAIRVOYANCE( "SUPER_CLAIRVOYANCE" );
+static const json_character_flag json_flag_TOUGH_TAIL( "TOUGH_TAIL" );
 static const json_character_flag json_flag_UNCANNY_DODGE( "UNCANNY_DODGE" );
 static const json_character_flag json_flag_VERMINOUS( "VERMINOUS" );
 static const json_character_flag json_flag_WALK_UNDERWATER( "WALK_UNDERWATER" );
@@ -2861,6 +2862,9 @@ void Character::calc_all_parts_hp( float hp_mod, float hp_adjustment, int str_ma
         }
         if( has_bionic( bio_armor_torso ) && part.first == body_part_torso ) {
             new_max *= 1.09;
+        }
+        if( has_flag( json_flag_TOUGH_TAIL ) && part.first.obj().primary_limb_type() == body_part_type::type::tail ) {
+            new_max *= 1.2;
         }
 
         new_max = std::max( 1, new_max );

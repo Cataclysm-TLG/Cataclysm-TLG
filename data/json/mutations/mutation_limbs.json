@@ -689,7 +689,7 @@
     "side": "both",
     "opposite_part": "fish_tail",
     "limb_types": [ "tail" ],
-    "limb_scores": [ [ "swim", 0.15 ], [ "balance", 0.08 ] ],
+    "limb_scores": [ [ "swim", 0.15 ], [ "balance", 0.1 ] ],
     "hit_size": 10,
     "hit_difficulty": 0.85,
     "stylish_bonus": 1,
@@ -697,7 +697,7 @@
     "cold_morale_mod": 0.5,
     "fire_warmth_bonus": 600,
     "squeamish_penalty": 5,
-    "base_hp": 45,
+    "base_hp": 46,
     "drench_capacity": 600,
     "smash_message": "You tail-slap the %s.",
     "flags": [ "LIMB_LOWER" ],
@@ -788,7 +788,8 @@
     "side": "both",
     "opposite_part": "long_tail",
     "limb_types": [ "tail" ],
-    "limb_scores": [ [ "balance", 0.1 ] ],
+    "limb_scores": [ [ "balance", 0.16 ] ],
+    "similar_bodyparts": [ "fish_tail" ],
     "hit_size": 10,
     "hit_difficulty": 0.85,
     "stylish_bonus": 1,
@@ -796,7 +797,7 @@
     "cold_morale_mod": 0.5,
     "fire_warmth_bonus": 600,
     "squeamish_penalty": 5,
-    "base_hp": 45,
+    "base_hp": 46,
     "drench_capacity": 600,
     "smash_message": "You tail-whip the %s.",
     "flags": [ "LIMB_LOWER" ],
@@ -860,7 +861,8 @@
     "side": 0,
     "opposite": "long_tail_tip",
     "name_multiple": "tail",
-    "name": "tail base"
+    "name": "tail base",
+    "similar_bodyparts": [ "fish_tail_base" ]
   },
   {
     "id": "long_tail_tip",
@@ -870,6 +872,7 @@
     "side": 0,
     "opposite": "long_tail_base",
     "name_multiple": "tail",
-    "name": "tail tip"
+    "name": "tail tip",
+    "similar_bodyparts": [ "fish_tail_tip" ]
   }
 ]

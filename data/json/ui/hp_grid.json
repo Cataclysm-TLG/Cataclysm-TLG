@@ -536,11 +536,25 @@
     "bodypart": "arm_l",
     "copy-from": "hitpoint_num_no_label"
   },
+    {
+    "id": "hp_wing_bird_l_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "wing_bird_l",
+    "copy-from": "hitpoint_num_no_label"
+  },
   {
     "id": "hp_right_arm_num_no_label",
     "type": "widget",
     "var": "bp_hp",
     "bodypart": "arm_r",
+    "copy-from": "hitpoint_num_no_label"
+  },
+      {
+    "id": "hp_wing_bird_r_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "wing_bird_r",
     "copy-from": "hitpoint_num_no_label"
   },
   {
