@@ -8078,19 +8078,18 @@
     "leads_to": [ "LEG_TENT_BRACE" ],
     "category": [ "CEPHALOPOD" ],
     "wet_protection": [
-      { "part": "leg_l", "neutral": 21 },
-      { "part": "leg_r", "neutral": 21 },
-      { "part": "foot_l", "neutral": 6 },
-      { "part": "foot_r", "neutral": 6 }
+      { "part": "cephalopod_arm_1", "neutral": 21 },
+      { "part": "cephalopod_arm_2", "neutral": 21 },
+      { "part": "cephalopod_arm_3", "neutral": 21 },
+      { "part": "cephalopod_arm_4", "neutral": 21 },
+      { "part": "cephalopod_arm_5", "neutral": 21 },
+      { "part": "cephalopod_arm_6", "neutral": 21 }
     ],
     "restricts_gear": [ "foot_l", "foot_r" ],
     "enchantments": [
+      "ench_leg_tentacles",
       {
-        "values": [
-          { "value": "MOVE_COST", "multiply": 0.2 },
-          { "value": "MOVECOST_SWIM_MOD", "multiply": -0.15 },
-          { "value": "FOOTSTEP_NOISE", "multiply": -1 }
-        ]
+        "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.15 }, { "value": "FOOTSTEP_NOISE", "multiply": -1 } ]
       }
     ],
     "flags": [ "TOUGH_FEET" ]
@@ -8100,10 +8099,8 @@
     "id": "LEG_TENT_BRACE",
     "name": { "str": "Tentacle Bracing" },
     "points": 0,
-    "visibility": 4,
-    "ugliness": 2,
     "mixed_effect": true,
-    "description": "Your lower tentacles have developed suckers, perfect for walking along lake beds and ocean floors.  They make land movement marginally more tiring, but do a good job of keeping you set in place.",
+    "description": "Your lower arms have developed strong suckers, perfect for walking along lake beds and ocean floors.  They make land movement marginally more tiring, but do a good job of keeping you set in place.",
     "prereqs": [ "LEG_TENTACLES" ],
     "threshreq": [ "THRESH_CEPHALOPOD" ],
     "category": [ "CEPHALOPOD" ],

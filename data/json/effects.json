@@ -509,6 +509,23 @@
   },
   {
     "type": "effect_type",
+    "id": "winded_gastropod_foot",
+    "name": [ "Winded (Foot)" ],
+    "desc": [ "You're short of breath.  Your foot has impaired function until you recover." ],
+    "rating": "bad",
+    "max_duration": "30 s",
+    "base_mods": { "speed_mod": [ -5 ], "pain_min": [ 1 ], "pain_chance": [ 10 ], "pain_max_val": [ 20 ] },
+    "limb_score_mods": [
+      { "limb_score": "block", "modifier": 0.81 },
+      { "limb_score": "swim", "modifier": 0.49 },
+      { "limb_score": "move_speed", "modifier": 0.75 },
+      { "limb_score": "footing", "modifier": 0.7 },
+      { "limb_score": "balance", "modifier": 0.7 }
+    ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
+  },
+  {
+    "type": "effect_type",
     "id": "winded_leg_r",
     "name": [ "Winded (Right Leg)" ],
     "desc": [ "You're short of breath.  Your right leg has impaired function until you recover." ],
@@ -569,6 +586,60 @@
       { "limb_score": "move_speed", "modifier": 0.5 },
       { "limb_score": "footing", "modifier": 0.5 },
       { "limb_score": "balance", "modifier": 0.5 }
+    ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD", "EFFECT_LIMB_DISABLE_CONDITIONAL_FLAGS" ]
+  },
+  {
+    "type": "effect_type",
+    "id": "winded_cephalopod_arm_lower",
+    "name": [ "Winded (Arms)" ],
+    "desc": [ "You're short of breath.  Your arms have impaired function until you recover." ],
+    "rating": "bad",
+    "max_duration": "30 s",
+    "base_mods": {
+      "dex_mod": [ -1 ],
+      "str_mod": [ -1 ],
+      "speed_mod": [ -5 ],
+      "pain_min": [ 1 ],
+      "pain_chance": [ 10 ],
+      "pain_max_val": [ 20 ]
+    },
+    "limb_score_mods": [
+      { "limb_score": "lift", "modifier": 0.8 },
+      { "limb_score": "block", "modifier": 0.8 },
+      { "limb_score": "swim", "modifier": 0.8 },
+      { "limb_score": "manip", "modifier": 0.8 },
+      { "limb_score": "grip", "modifier": 0.8 },
+      { "limb_score": "move_speed", "modifier": 0.8 },
+      { "limb_score": "footing", "modifier": 0.8 },
+      { "limb_score": "balance", "modifier": 0.8 }
+    ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD", "EFFECT_LIMB_DISABLE_CONDITIONAL_FLAGS" ]
+  },
+  {
+    "type": "effect_type",
+    "id": "winded_cephalopod_arm_upper",
+    "name": [ "Winded (Arms)" ],
+    "desc": [ "You're short of breath.  Your arms have impaired function until you recover." ],
+    "rating": "bad",
+    "max_duration": "30 s",
+    "base_mods": {
+      "dex_mod": [ -1 ],
+      "str_mod": [ -1 ],
+      "speed_mod": [ -5 ],
+      "pain_min": [ 1 ],
+      "pain_chance": [ 10 ],
+      "pain_max_val": [ 20 ]
+    },
+    "limb_score_mods": [
+      { "limb_score": "lift", "modifier": 0.8 },
+      { "limb_score": "block", "modifier": 0.8 },
+      { "limb_score": "swim", "modifier": 0.8 },
+      { "limb_score": "manip", "modifier": 0.8 },
+      { "limb_score": "grip", "modifier": 0.8 },
+      { "limb_score": "move_speed", "modifier": 0.8 },
+      { "limb_score": "footing", "modifier": 0.8 },
+      { "limb_score": "balance", "modifier": 0.8 }
     ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD", "EFFECT_LIMB_DISABLE_CONDITIONAL_FLAGS" ]
   },
@@ -3233,7 +3304,10 @@
       "winded_leg_l",
       "winded_leg_r",
       "winded_arm_l",
-      "winded_arm_r"
+      "winded_arm_r",
+      "winded_cephalopod_arm_upper",
+      "winded_cephalopod_arm_lower",
+      "winded_gastropod_foot"
     ],
     "base_mods": { "str_mod": [ -1 ], "dex_mod": [ -2 ], "per_mod": [ -2 ], "int_mod": [ -1 ] },
     "scaling_mods": { "str_mod": [ 2 ], "dex_mod": [ 3 ], "per_mod": [ 3 ], "int_mod": [ 1 ] },
@@ -3249,7 +3323,16 @@
     "rating": "good",
     "max_intensity": 2,
     "int_dur_factor": "50 s",
-    "removes_effects": [ "winded", "winded_leg_l", "winded_leg_r", "winded_arm_l", "winded_arm_r" ],
+    "removes_effects": [
+      "winded",
+      "winded_leg_l",
+      "winded_leg_r",
+      "winded_arm_l",
+      "winded_arm_r",
+      "winded_cephalopod_arm_upper",
+      "winded_cephalopod_arm_lower",
+      "winded_gastropod_foot"
+    ],
     "base_mods": { "speed_mod": [ -5 ], "dex_mod": [ -2 ], "per_mod": [ -1 ], "int_mod": [ -2 ] },
     "scaling_mods": {
       "speed_mod": [ 15 ],
@@ -3273,7 +3356,16 @@
     "miss_messages": [ [ "Your comedown throws you off.", 1 ] ],
     "max_intensity": 2,
     "int_dur_factor": "150 s",
-    "removes_effects": [ "winded", "winded_leg_l", "winded_leg_r", "winded_arm_l", "winded_arm_r" ],
+    "removes_effects": [
+      "winded",
+      "winded_leg_l",
+      "winded_leg_r",
+      "winded_arm_l",
+      "winded_arm_r",
+      "winded_cephalopod_arm_upper",
+      "winded_cephalopod_arm_lower",
+      "winded_gastropod_foot"
+    ],
     "base_mods": {
       "speed_mod": [ -10 ],
       "str_mod": [ -2 ],
