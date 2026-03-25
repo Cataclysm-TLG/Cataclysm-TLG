@@ -935,12 +935,12 @@ void outfit::item_encumb( std::map<bodypart_id, encumbrance_data> &vals,
     // First, handle normal worn items + new_item insertion.
     for( auto w_it = worn.begin(); w_it != worn.end(); ++w_it ) {
         if( w_it == new_item_position ) {
-            layer_item(vals, new_item, highest_layer_so_far, guy);
+            layer_item( vals, new_item, highest_layer_so_far, guy );
         }
-        layer_item(vals, *w_it, highest_layer_so_far, guy);
+        layer_item( vals, *w_it, highest_layer_so_far, guy );
     }
     if( worn.end() == new_item_position && !new_item.is_null() ) {
-        layer_item(vals, new_item, highest_layer_so_far, guy);
+        layer_item( vals, new_item, highest_layer_so_far, guy );
     }
 
     // Handle ablative pockets.
@@ -962,7 +962,7 @@ void outfit::item_encumb( std::map<bodypart_id, encumbrance_data> &vals,
                 // Compute encumbrance in a temporary map.
                 std::map<bodypart_id, encumbrance_data> temp_vals;
                 std::map<sub_bodypart_id, layer_level> dummy_highest_layer;
-                layer_item(temp_vals, pocketed, dummy_highest_layer, guy);
+                layer_item( temp_vals, pocketed, dummy_highest_layer, guy );
                 // Merge only to bodyparts NOT covered by the parent.
                 for( const auto &pair : temp_vals ) {
                     const bodypart_id &bp = pair.first;

@@ -114,7 +114,7 @@
       { "id": "infected", "text": "TORSO", "color": "green", "condition": { "u_has_effect": "infected" } },
       { "id": "bitten", "text": "TORSO", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
-    "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_LABEL_NONE" ]
   },
   {
     "id": "bodypart_larm_status_text",
@@ -172,7 +172,7 @@
       { "id": "infected", "text": "L ARM", "color": "green", "condition": { "u_has_effect": "infected" } },
       { "id": "bitten", "text": "L ARM", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
-    "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_LABEL_NONE" ]
   },
   {
     "id": "bodypart_rarm_status_text",
@@ -230,7 +230,7 @@
       { "id": "infected", "text": "R ARM", "color": "green", "condition": { "u_has_effect": "infected" } },
       { "id": "bitten", "text": "R ARM", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
-    "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_LABEL_NONE" ]
   },
   {
     "id": "bodypart_lleg_status_text",
@@ -288,7 +288,7 @@
       { "id": "infected", "text": "L LEG", "color": "green", "condition": { "u_has_effect": "infected" } },
       { "id": "bitten", "text": "L LEG", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
-    "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_LABEL_NONE" ]
   },
   {
     "id": "bodypart_rleg_status_text",
@@ -346,7 +346,7 @@
       { "id": "infected", "text": "R LEG", "color": "green", "condition": { "u_has_effect": "infected" } },
       { "id": "bitten", "text": "R LEG", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
-    "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_LABEL_NONE" ]
   },
   {
     "id": "bodypart_gastropod_foot_status_text",
@@ -404,7 +404,7 @@
       { "id": "infected", "text": "FOOT", "color": "green", "condition": { "u_has_effect": "infected" } },
       { "id": "bitten", "text": "FOOT", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
-    "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_LABEL_NONE" ]
   },
   {
     "id": "bodypart_fish_tail_status_text",
@@ -415,13 +415,13 @@
     "clauses": [
       {
         "id": "bleedingAndBitten3",
-        "text": "FOOT",
+        "text": "TAIL",
         "color": "magenta_red",
         "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
       },
       {
         "id": "bleedingAndBitten12",
-        "text": "FOOT",
+        "text": "TAIL",
         "color": "magenta",
         "condition": {
           "and": [
@@ -433,13 +433,13 @@
       },
       {
         "id": "bleeding3",
-        "text": "FOOT",
+        "text": "TAIL",
         "color": "red_red",
         "condition": { "u_has_effect": "bleed", "intensity": 21 }
       },
       {
         "id": "bleeding2",
-        "text": "FOOT",
+        "text": "TAIL",
         "color": "red",
         "condition": {
           "and": [
@@ -450,7 +450,7 @@
       },
       {
         "id": "bleeding1",
-        "text": "FOOT",
+        "text": "TAIL",
         "color": "light_red",
         "condition": {
           "and": [
@@ -459,9 +459,9 @@
           ]
         }
       },
-      { "id": "infected", "text": "FOOT", "color": "green", "condition": { "u_has_effect": "infected" } },
-      { "id": "bitten", "text": "FOOT", "color": "blue", "condition": { "u_has_effect": "bite" } }
+      { "id": "infected", "text": "TAIL", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "TAIL", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
-    "flags": [ "W_LABEL_NONE", "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_LABEL_NONE" ]
   }
 ]
