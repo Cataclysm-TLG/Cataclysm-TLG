@@ -267,6 +267,7 @@ static const efftype_id effect_onfire( "onfire" );
 static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_playing_instrument( "playing_instrument" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
+static const efftype_id effect_revived_marker( "revived_marker" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
 static const efftype_id effect_stunned( "stunned" );
@@ -5844,11 +5845,19 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
     }
 
     if( it.get_var( "times_combatted", 0.0 ) > 0.0 ) {
-        critter.times_combatted_player = it.get_var( "times_combatted", 0.0 );
+        critter.times_combatted_player = std::numeric_limits<short>::max();
     }
 
+    <<< <<< < HEAD
     return place_critter_around( newmon_ptr, p, radius, false, avoid_vehicle );
-}
+    == == == =
+        // Add a permanent effect marking this as a revived creature. Everytime they revive they will have this effect forever.
+        critter.add_effect( effect_source(), effect_revived_marker, calendar::INDEFINITELY_LONG_DURATION,
+                            true );
+
+    return place_critter_around( newmon_ptr, tripoint_bub_ms( p ), radius );
+    >>> >>> > No kill xp for spawncampers( #86067 )
+    }
 
 void game::assing_revive_form( item &it, tripoint_bub_ms p )
 {

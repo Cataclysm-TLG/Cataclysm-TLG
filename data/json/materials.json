@@ -374,19 +374,19 @@
     "bash_dmg_verb": "cracked",
     "cut_dmg_verb": { "str": "cut", "ctxt": "material cut damage verb" },
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 0.4, "cut": 0.6, "acid": 18, "heat": 10, "bullet": 2 }
+    "resist": { "bash": 0.4, "cut": 0.6, "acid": 18, "heat": 4, "bullet": 2 }
   },
   {
     "type": "material",
     "id": "damaged_ceramic",
     "name": "Compromised Ceramic",
     "copy-from": "ceramic",
-    "resist": { "bash": 0.2, "cut": 0.5, "acid": 16, "heat": 10, "bullet": 0.8 }
+    "resist": { "bash": 0.2, "cut": 0.5, "acid": 16, "heat": 3, "bullet": 0.8 }
   },
   {
     "type": "material",
     "id": "chitin",
-    "name": "Hardened Chitin",
+    "name": "Chitin",
     "density": 1.45,
     "specific_heat_liquid": 4.186,
     "specific_heat_solid": 2.108,
@@ -434,42 +434,10 @@
   },
   {
     "type": "material",
-    "id": "chitin_light",
-    "name": "Light Chitin",
-    "density": 1.45,
-    "specific_heat_liquid": 4.186,
-    "specific_heat_solid": 2.108,
-    "latent_heat": 333,
-    "breathability": "POOR",
-    "wind_resist": 90,
-    "dmg_adj": [ "scratched", { "str": "cut", "ctxt": "material damage adjective" }, "cracked", "shattered" ],
-    "bash_dmg_verb": "cracked",
-    "cut_dmg_verb": "chipped",
-    "acid_dmg_verb": "burned",
-    "chip_resist": 8,
-    "burn_data": [
-      { "fuel": 0, "smoke": 0, "burn": 0.0001 },
-      { "fuel": 0.2, "smoke": 3, "burn": 0.005, "volume_per_turn": "200 ml" },
-      { "fuel": 0.35, "smoke": 5, "burn": 0.015, "volume_per_turn": "200 ml" }
-    ],
-    "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1.4, "cut": 3, "acid": 3, "heat": 0, "bullet": 0.9 }
-  },
-  {
-    "type": "material",
-    "id": "sclerotin_light",
-    "name": "Light Sclerotin",
-    "density": 1.8,
-    "copy-from": "chitin_light",
-    "chip_resist": 18,
-    "resist": { "bash": 4, "cut": 6, "acid": 3, "heat": 0, "bullet": 1.8 }
-  },
-  {
-    "type": "material",
     "id": "sclerotin",
-    "name": "Hardened Sclerotin",
+    "name": "Hardened Chitin",
     "density": 1.9,
-    "copy-from": "chitin_light",
+    "copy-from": "chitin",
     "chip_resist": 22,
     "breathability": "IMPERMEABLE",
     "resist": { "bash": 5.2, "cut": 7, "acid": 3, "heat": 0, "bullet": 2.1 }
@@ -488,7 +456,7 @@
     "cut_dmg_verb": { "str": "cut", "ctxt": "material cut damage verb" },
     "acid_dmg_verb": "burned",
     "burn_products": [ [ "ceramic_shard", 0.5 ] ],
-    "resist": { "bash": 2, "cut": 3, "acid": 20, "heat": 3, "bullet": 2 }
+    "resist": { "bash": 2, "cut": 3, "acid": 20, "heat": 6, "bullet": 2 }
   },
   {
     "type": "material",
@@ -503,7 +471,7 @@
     "bash_dmg_verb": "cracked",
     "cut_dmg_verb": { "str": "cut", "ctxt": "material cut damage verb" },
     "acid_dmg_verb": "etched",
-    "resist": { "bash": 2, "cut": 3, "acid": 15, "heat": 3, "bullet": 2 }
+    "resist": { "bash": 2, "cut": 3, "acid": 15, "heat": 6, "bullet": 2 }
   },
   {
     "type": "material",
@@ -521,7 +489,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "burned",
     "burn_products": [ [ "copper", 0.5 ] ],
-    "resist": { "bash": 2, "cut": 3, "acid": 9, "heat": 3, "bullet": 2 },
+    "resist": { "bash": 2, "cut": 3, "acid": 9, "heat": 6, "bullet": 2 },
     "repair_difficulty": 3
   },
   {
@@ -671,7 +639,7 @@
     "bash_dmg_verb": "chipped",
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 5, "cut": 5, "acid": 20, "heat": 3, "bullet": 2 }
+    "resist": { "bash": 5, "cut": 5, "acid": 20, "heat": 10, "bullet": 2 }
   },
   {
     "type": "material",
@@ -687,7 +655,7 @@
     "bash_dmg_verb": "chipped",
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 5, "cut": 5, "acid": 20, "heat": 3, "bullet": 2 }
+    "resist": { "bash": 5, "cut": 5, "acid": 20, "heat": 10, "bullet": 2 }
   },
   {
     "type": "material",
@@ -733,7 +701,7 @@
       { "fuel": 0.35, "smoke": 5, "burn": 0.015, "volume_per_turn": "200 ml" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 2.3, "cut": 4, "acid": 4, "heat": 2.2, "bullet": 1.2 },
+    "resist": { "bash": 2.3, "cut": 4, "acid": 4, "heat": 3, "bullet": 1.2 },
     "repair_difficulty": 5
   },
   {
@@ -811,7 +779,7 @@
     "cut_dmg_verb": { "str": "cut", "ctxt": "material cut damage verb" },
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "ceramic_shard", 0.5 ] ],
-    "resist": { "bash": 1, "cut": 1, "acid": 20, "heat": 3, "bullet": 1 }
+    "resist": { "bash": 1, "cut": 1, "acid": 20, "heat": 10, "bullet": 1 }
   },
   {
     "type": "material",
@@ -909,7 +877,7 @@
       { "fuel": 0, "smoke": 0, "burn": 1000, "volume_per_turn": "5000 ml", "//": "More like shattering than melting" }
     ],
     "burn_products": [ [ "glass_shard", 0.5 ] ],
-    "resist": { "bash": 5, "cut": 10, "acid": 15, "heat": 6, "bullet": 9 }
+    "resist": { "bash": 5, "cut": 10, "acid": 15, "heat": 10, "bullet": 9 }
   },
   {
     "type": "material",
@@ -931,7 +899,7 @@
       { "fuel": 0, "smoke": 0, "burn": 1000, "volume_per_turn": "5000 ml", "//": "More like shattering than melting" }
     ],
     "burn_products": [ [ "glass_shard", 0.5 ] ],
-    "resist": { "bash": 3, "cut": 4, "acid": 15, "heat": 3, "bullet": 1 },
+    "resist": { "bash": 3, "cut": 4, "acid": 15, "heat": 4, "bullet": 1 },
     "repair_difficulty": 7
   },
   {
@@ -953,7 +921,7 @@
       { "fuel": 0, "smoke": 0, "burn": 1000, "volume_per_turn": "5000 ml", "//": "More like shattering than melting" }
     ],
     "burn_products": [ [ "tempered_glass_shard", 0.5 ] ],
-    "resist": { "bash": 4.5, "cut": 4, "acid": 15, "heat": 3, "bullet": 1 }
+    "resist": { "bash": 4.5, "cut": 4, "acid": 15, "heat": 8, "bullet": 1 }
   },
   {
     "type": "material",
@@ -975,7 +943,7 @@
       { "fuel": 0, "smoke": 0, "burn": 1000, "volume_per_turn": "5000 ml", "//": "More like shattering than melting" }
     ],
     "burn_products": [ [ "glass_shard", 0.5 ] ],
-    "resist": { "bash": 3, "cut": 4, "acid": 15, "heat": 3, "bullet": 1 }
+    "resist": { "bash": 3, "cut": 4, "acid": 15, "heat": 10, "bullet": 1 }
   },
   {
     "type": "material",
@@ -1221,6 +1189,7 @@
     "type": "material",
     "id": "iron",
     "name": "Iron",
+    "//": "Iron and steel are a false dichotomy, so let this material represent cast iron and similar.",
     "density": 7.3,
     "specific_heat_liquid": 0.82,
     "specific_heat_solid": 0.45,
@@ -1233,7 +1202,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap_cast_iron", 0.5 ] ],
-    "resist": { "bash": 4, "cut": 4, "acid": 5, "heat": 3, "bullet": 2 },
+    "resist": { "bash": 4, "cut": 4, "acid": 5, "heat": 4, "bullet": 2 },
     "repair_difficulty": 2
   },
   {
@@ -1256,7 +1225,7 @@
       { "fuel": 0, "smoke": 3, "burn": 0.002 },
       { "fuel": 0, "smoke": 5, "burn": 0.005 }
     ],
-    "resist": { "bash": 1, "cut": 1, "acid": 2, "heat": 1, "bullet": 1 }
+    "resist": { "bash": 0, "cut": 0, "acid": 0, "heat": 0, "bullet": 0 }
   },
   {
     "type": "material",
@@ -1467,7 +1436,7 @@
     "type": "material",
     "id": "spandex",
     "name": "Spandex",
-    "//": "This stuff should max out at 1mm in a wetsuit, but is generally much thinner, as in women's tights.",
+    "//": "This stuff should max out at 1mm in a wetsuit, but is generally a tenth of that, as in women's tights.",
     "density": 1.2,
     "specific_heat_liquid": 1.7,
     "specific_heat_solid": 1.7,
@@ -1722,7 +1691,7 @@
     "copy-from": "plastic",
     "name": "Transparent Impact Resistant Plastic",
     "//2": "This one represents various transparent impact-resistant plastics, like polycarbonate.  Prime material for visors and safety goggles.",
-    "resist": { "bash": 4, "cut": 3, "acid": 13, "heat": 1, "bullet": 1.5 },
+    "resist": { "bash": 4, "cut": 3, "acid": 13, "heat": 2, "bullet": 1.5 },
     "repair_difficulty": 4
   },
   {
@@ -1731,7 +1700,7 @@
     "copy-from": "plastic",
     "name": "Transparent Bullet Resistant Composite",
     "//2": "This one represents specialised transparent bulletproof composites, mostly employed on military vehicles and in high-value construction (banks).",
-    "resist": { "bash": 5, "cut": 4, "acid": 13, "heat": 1, "bullet": 2 },
+    "resist": { "bash": 5, "cut": 4, "acid": 13, "heat": 3, "bullet": 2 },
     "repair_difficulty": 5
   },
   {
