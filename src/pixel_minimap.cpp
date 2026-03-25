@@ -265,6 +265,11 @@ void pixel_minimap::flush_cache_updates()
             continue;
         }
 
+        if( !mcp.second.chunk_tex ) {
+            mcp.second.update_list.clear();
+            continue;
+        }
+
         SetRenderTarget( renderer, mcp.second.chunk_tex );
 
         if( !mcp.second.ready ) {
