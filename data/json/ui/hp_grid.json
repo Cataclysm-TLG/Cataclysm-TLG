@@ -98,6 +98,66 @@
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
+    "id": "ll_cephalopod_arm_1_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_1",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_cephalopod_arm_1" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_2_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_2",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_cephalopod_arm_2" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_3_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_3",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_cephalopod_arm_3" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_4_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_4",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_cephalopod_arm_4" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_5_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_5",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_cephalopod_arm_5" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_6_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_6",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_cephalopod_arm_6" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
     "id": "ll_long_tail_layout",
     "type": "widget",
     "style": "layout",
@@ -208,6 +268,66 @@
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
+    "id": "ll_cephalopod_arm_1_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_1",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_cephalopod_arm_1" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_2_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_2",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_cephalopod_arm_2" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_3_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_3",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_cephalopod_arm_3" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_4_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_4",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_cephalopod_arm_4" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_5_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_5",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_cephalopod_arm_5" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_arm_6_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_arm_6",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_cephalopod_arm_6" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
     "id": "ll_long_tail_sa_layout",
     "type": "widget",
     "style": "layout",
@@ -306,6 +426,66 @@
     "width": 11,
     "height": 0,
     "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_cephalopod_arm_1",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_arm_1",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_arm_1_status_text", "hp_cephalopod_arm_1_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_cephalopod_arm_2",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_arm_2",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_arm_2_status_text", "hp_cephalopod_arm_2_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_cephalopod_arm_3",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_arm_3",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_arm_3_status_text", "hp_cephalopod_arm_3_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_cephalopod_arm_4",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_arm_4",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_arm_4_status_text", "hp_cephalopod_arm_4_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_cephalopod_arm_5",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_arm_5",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_arm_5_status_text", "hp_cephalopod_arm_5_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_cephalopod_arm_6",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_arm_6",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_arm_6_status_text", "hp_cephalopod_arm_6_graph_no_label" ]
   },
   {
     "id": "status_hpg_layout_gastropod_foot",
@@ -412,6 +592,60 @@
     "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_num_no_label" ]
   },
   {
+    "id": "status_hpn_layout_cephalopod_arm_1",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 9,
+    "height": 0,
+    "widgets": [ "bodypart_arm_1_status_text", "hp_cephalopod_arm_1_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_cephalopod_arm_2",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 9,
+    "height": 0,
+    "widgets": [ "bodypart_arm_2_status_text", "hp_cephalopod_arm_2_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_cephalopod_arm_3",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 9,
+    "height": 0,
+    "widgets": [ "bodypart_arm_3_status_text", "hp_cephalopod_arm_3_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_cephalopod_arm_4",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 9,
+    "height": 0,
+    "widgets": [ "bodypart_arm_4_status_text", "hp_cephalopod_arm_4_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_cephalopod_arm_5",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 9,
+    "height": 0,
+    "widgets": [ "bodypart_arm_5_status_text", "hp_cephalopod_arm_5_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_cephalopod_arm_6",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "columns",
+    "width": 9,
+    "height": 0,
+    "widgets": [ "bodypart_arm_6_status_text", "hp_cephalopod_arm_6_num_no_label" ]
+  },
+  {
     "id": "status_hpn_layout_gastropod_foot",
     "type": "widget",
     "style": "layout",
@@ -495,6 +729,48 @@
     "copy-from": "hitpoint_graph_no_label"
   },
   {
+    "id": "hp_cephalopod_arm_1_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_1",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_2_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_2",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_3_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_3",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_4_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_4",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_5_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_5",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_6_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_6",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
     "id": "hp_gastropod_foot_graph_no_label",
     "type": "widget",
     "var": "bp_hp",
@@ -569,6 +845,48 @@
     "type": "widget",
     "var": "bp_hp",
     "bodypart": "leg_r",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_1_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_1",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_2_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_2",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_3_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_3",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_4_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_4",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_5_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_5",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_cephalopod_arm_6_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_arm_6",
     "copy-from": "hitpoint_num_no_label"
   },
   {
