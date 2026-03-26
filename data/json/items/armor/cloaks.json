@@ -34,6 +34,34 @@
         "encumbrance": 3,
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 60,
+        "encumbrance": 5,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 60,
+        "encumbrance": 5,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "layers": [ "BELTED" ]
       }
     ]
   },
@@ -1856,9 +1884,37 @@
       },
       {
         "covers": [ "gastropod_foot" ],
-        "coverage": 50,
+        "coverage": 75,
         "encumbrance": 4,
         "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 95,
+        "encumbrance": 6,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 95,
+        "encumbrance": 6,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
         "layers": [ "BELTED" ]
       }
     ]
@@ -1896,6 +1952,34 @@
         "encumbrance": 3,
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 4,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 4,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "layers": [ "BELTED" ]
       }
     ]
   },
@@ -1928,6 +2012,34 @@
         "coverage": 50,
         "encumbrance": 1,
         "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 2,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 2,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
         "layers": [ "BELTED" ]
       }
     ],
@@ -1968,6 +2080,34 @@
         "encumbrance": 2,
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 3,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 3,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "layers": [ "BELTED" ]
       }
     ],
     "warmth": 25,
@@ -2006,6 +2146,34 @@
         "coverage": 40,
         "encumbrance": 1,
         "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 50,
+        "encumbrance": 2,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 50,
+        "encumbrance": 2,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
         "layers": [ "BELTED" ]
       }
     ],
@@ -2058,6 +2226,34 @@
         "encumbrance": 1,
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 2,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 2,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "layers": [ "BELTED" ]
       }
     ],
     "variants": [
@@ -2109,6 +2305,34 @@
         "encumbrance": 3,
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 4,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 4,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "layers": [ "BELTED" ]
       }
     ]
   },
@@ -2146,6 +2370,34 @@
         "encumbrance": 3,
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 4,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 4,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "layers": [ "BELTED" ]
       }
     ]
   },
@@ -2182,6 +2434,34 @@
         "coverage": 50,
         "encumbrance": 2,
         "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 3,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 3,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
         "layers": [ "BELTED" ]
       }
     ]
@@ -2231,6 +2511,34 @@
         "coverage": 50,
         "encumbrance": 10,
         "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 12,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 10,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
         "layers": [ "BELTED" ]
       }
     ],
@@ -2312,6 +2620,34 @@
         "coverage": 60,
         "encumbrance": 8,
         "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 70,
+        "encumbrance": 10,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 10,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
         "layers": [ "BELTED" ]
       }
     ],
@@ -2445,7 +2781,7 @@
       {
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 4
       },
       {
@@ -2453,6 +2789,27 @@
         "coverage": 80,
         "encumbrance": 2,
         "specifically_covers": [ "gastropod_foot_draped" ]
+      },
+      { "covers": [ "long_tail" ], "coverage": 98, "encumbrance": 4, "specifically_covers": [ "long_tail_draped" ] },
+      {
+        "coverage": 98,
+        "encumbrance": 4,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ]
       },
       { "covers": [ "arm_l", "arm_r" ], "coverage": 40, "encumbrance": 8 },
       { "covers": [ "wing_bird_l", "wing_bird_r" ], "coverage": 40, "encumbrance": 8 }

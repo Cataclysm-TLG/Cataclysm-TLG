@@ -569,6 +569,7 @@
     "encumbrance_text": "Running and swimming are slowed.",
     "encumbrance_threshold": 20,
     "main_part": "gastropod_foot",
+    "is_vital": true,
     "connected_to": "torso",
     "side": "both",
     "opposite_part": "gastropod_foot",
@@ -587,16 +588,6 @@
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE" ],
     "windage_effect": "winded_gastropod_foot",
     "sub_parts": [ "gastropod_foot_draped", "gastropod_foot_upper", "gastropod_foot_lower", "gastropod_foot_pedal_sole" ],
-    "encumbrance_per_weight": [
-      { "weight": "1 mg", "encumbrance": 1 },
-      { "weight": "300 g", "encumbrance": 4 },
-      { "weight": "800 g", "encumbrance": 8 },
-      { "weight": "1300 g", "encumbrance": 20 },
-      { "weight": "1600 g", "encumbrance": 30 },
-      { "weight": "2200 g", "encumbrance": 50 },
-      { "weight": "5600 g", "encumbrance": 80 },
-      { "weight": "10000 g", "encumbrance": 160 }
-    ],
     "effects_on_hit": [
       {
         "id": "bleed",
@@ -684,7 +675,7 @@
     "accusative": { "ctxt": "bodypart_accusative", "str": "tail" },
     "heading": "tail",
     "heading_multiple": "tails",
-    "hp_bar_ui_text": "F TAIL",
+    "hp_bar_ui_text": "TAIL",
     "encumbrance_text": "Swimming is slowed, balance is penalized.",
     "encumbrance_threshold": 20,
     "main_part": "fish_tail",
@@ -704,7 +695,7 @@
     "drench_capacity": 600,
     "smash_message": "You tail-slap the %s.",
     "flags": [ "LIMB_LOWER" ],
-    "sub_parts": [ "fish_tail_base", "fish_tail_tip" ],
+    "sub_parts": [ "fish_tail_base", "fish_tail_tip", "fish_tail_draped" ],
     "effects_on_hit": [
       {
         "id": "bleed",
@@ -777,6 +768,18 @@
     "name": "tail fin"
   },
   {
+    "id": "fish_tail_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "fish_tail",
+    "side": 0,
+    "secondary": true,
+    "name_multiple": "tail (draped)",
+    "name": "tail (draped)",
+    "opposite": "sub_limb_debug",
+    "locations_under": [ "fish_tail_upper" ]
+  },
+  {
     "id": "long_tail",
     "type": "body_part",
     "name": "tail",
@@ -804,7 +807,7 @@
     "drench_capacity": 600,
     "smash_message": "You tail-whip the %s.",
     "flags": [ "LIMB_LOWER" ],
-    "sub_parts": [ "long_tail_base", "long_tail_tip" ],
+    "sub_parts": [ "long_tail_base", "long_tail_tip", "long_tail_draped" ],
     "effects_on_hit": [
       {
         "id": "bleed",
@@ -879,11 +882,24 @@
     "similar_bodyparts": [ "fish_tail_tip" ]
   },
   {
+    "id": "long_tail_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "long_tail",
+    "side": 0,
+    "secondary": true,
+    "name_multiple": "tail (draped)",
+    "name": "tail (draped)",
+    "opposite": "sub_limb_debug",
+    "locations_under": [ "long_tail_upper" ],
+    "similar_bodyparts": [ "fish_tail_draped" ]
+  },
+  {
     "id": "cephalopod_arm_1",
     "type": "body_part",
-    "name": "first arm",
+    "name": "first left arm",
     "name_multiple": "arms",
-    "accusative": { "ctxt": "bodypart_accusative", "str": "first arm" },
+    "accusative": { "ctxt": "bodypart_accusative", "str": "first left arm" },
     "accusative_multiple": { "ctxt": "bodypart_accusative", "str": "arms" },
     "heading": "arm 1",
     "heading_multiple": "arms",
@@ -895,14 +911,15 @@
     "opposite_part": "cephalopod_arm_4",
     "hit_size": 13,
     "hit_difficulty": 0.95,
+    "mend_rate": 200,
     "limb_types": [ [ "arm", 0.4 ], [ "hand", 0.3 ], [ "leg", 0.5 ], [ "foot", 0.5 ] ],
     "limb_scores": [
-      [ "move_speed", 0.12 ],
+      [ "move_speed", 0.14 ],
       [ "grip", 0.2 ],
       [ "manip", 0.1, 0.2 ],
-      [ "lift", 0.2 ],
+      [ "lift", 0.14 ],
       [ "balance", 0.2 ],
-      [ "block", 0.2 ],
+      [ "block", 0.16 ],
       [ "swim", 0.2 ],
       [ "crawl", 0.2 ],
       [ "footing", 0.2 ]
@@ -913,7 +930,7 @@
     "fire_warmth_bonus": 600,
     "squeamish_penalty": 5,
     "is_limb": true,
-    "base_hp": 20,
+    "base_hp": 24,
     "drench_capacity": 1000,
     "techniques": [ "tech_base_punch", "tech_base_punch" ],
     "smash_message": "You smack the %s.",
@@ -921,7 +938,7 @@
     "windage_effect": "winded_cephalopod_arm_lower",
     "bmi_encumbrance_threshold": 9,
     "bmi_encumbrance_scalar": 0.6,
-    "sub_parts": [ "cephalopod_arm_1_base", "cephalopod_arm_1_tip" ],
+    "sub_parts": [ "cephalopod_arm_1_base", "cephalopod_arm_1_tip", "cephalopod_arm_1_draped" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE", "LIMB_HAND" ],
     "effects_on_hit": [
       {
@@ -979,27 +996,39 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_1",
-    "side": 0,
-    "opposite": "cephalopod_arm_1_tip",
+    "side": 1,
+    "opposite": "cephalopod_arm_4_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "proximal first left arm"
   },
   {
     "id": "cephalopod_arm_1_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_1",
-    "side": 0,
-    "opposite": "cephalopod_arm_1_base",
+    "side": 1,
+    "opposite": "cephalopod_arm_4_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "distal first left arm"
+  },
+  {
+    "id": "cephalopod_arm_1_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_1",
+    "side": 1,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "first left arm (draped)",
+    "opposite": "cephalopod_arm_4_draped",
+    "locations_under": [ "cephalopod_arm_1_upper" ]
   },
   {
     "id": "cephalopod_arm_2",
     "type": "body_part",
-    "name": "second arm",
+    "name": "second left arm",
     "name_multiple": "arms",
-    "accusative": { "ctxt": "bodypart_accusative", "str": "second arm" },
+    "accusative": { "ctxt": "bodypart_accusative", "str": "second left arm" },
     "accusative_multiple": { "ctxt": "bodypart_accusative", "str": "arms" },
     "heading": "arm 2",
     "heading_multiple": "arms",
@@ -1011,14 +1040,15 @@
     "opposite_part": "cephalopod_arm_5",
     "hit_size": 13,
     "hit_difficulty": 0.95,
+    "mend_rate": 200,
     "limb_types": [ [ "arm", 0.4 ], [ "hand", 0.3 ], [ "leg", 0.5 ], [ "foot", 0.5 ] ],
     "limb_scores": [
       [ "move_speed", 0.14 ],
       [ "grip", 0.2 ],
       [ "manip", 0.1, 0.2 ],
-      [ "lift", 0.2 ],
+      [ "lift", 0.14 ],
       [ "balance", 0.2 ],
-      [ "block", 0.2 ],
+      [ "block", 0.16 ],
       [ "swim", 0.2 ],
       [ "crawl", 0.2 ],
       [ "footing", 0.2 ]
@@ -1029,7 +1059,7 @@
     "fire_warmth_bonus": 600,
     "squeamish_penalty": 5,
     "is_limb": true,
-    "base_hp": 20,
+    "base_hp": 24,
     "drench_capacity": 1000,
     "techniques": [ "tech_base_punch", "tech_base_punch" ],
     "smash_message": "You smack the %s.",
@@ -1037,7 +1067,7 @@
     "windage_effect": "winded_cephalopod_arm_lower",
     "bmi_encumbrance_threshold": 9,
     "bmi_encumbrance_scalar": 0.6,
-    "sub_parts": [ "cephalopod_arm_2_base", "cephalopod_arm_2_tip" ],
+    "sub_parts": [ "cephalopod_arm_2_base", "cephalopod_arm_2_tip", "cephalopod_arm_2_draped" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE", "LIMB_HAND" ],
     "effects_on_hit": [
       {
@@ -1095,27 +1125,39 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_2",
-    "side": 0,
-    "opposite": "cephalopod_arm_2_tip",
+    "side": 1,
+    "opposite": "cephalopod_arm_5_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "proximal second left arm"
   },
   {
     "id": "cephalopod_arm_2_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_2",
-    "side": 0,
-    "opposite": "cephalopod_arm_2_base",
+    "side": 1,
+    "opposite": "cephalopod_arm_5_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "distal second left arm"
+  },
+  {
+    "id": "cephalopod_arm_2_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_2",
+    "side": 1,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "second left arm (draped)",
+    "opposite": "cephalopod_arm_5_draped",
+    "locations_under": [ "cephalopod_arm_2_upper" ]
   },
   {
     "id": "cephalopod_arm_3",
     "type": "body_part",
-    "name": "third arm",
+    "name": "third left arm",
     "name_multiple": "arms",
-    "accusative": { "ctxt": "bodypart_accusative", "str": "third arm" },
+    "accusative": { "ctxt": "bodypart_accusative", "str": "third left arm" },
     "accusative_multiple": { "ctxt": "bodypart_accusative", "str": "arms" },
     "heading": "arm 3",
     "heading_multiple": "arms",
@@ -1127,14 +1169,15 @@
     "opposite_part": "cephalopod_arm_6",
     "hit_size": 13,
     "hit_difficulty": 0.95,
+    "mend_rate": 200,
     "limb_types": [ [ "arm", 0.4 ], [ "hand", 0.3 ], [ "leg", 0.5 ], [ "foot", 0.5 ] ],
     "limb_scores": [
       [ "move_speed", 0.14 ],
       [ "grip", 0.2 ],
       [ "manip", 0.1, 0.2 ],
-      [ "lift", 0.2 ],
+      [ "lift", 0.14 ],
       [ "balance", 0.2 ],
-      [ "block", 0.2 ],
+      [ "block", 0.16 ],
       [ "swim", 0.2 ],
       [ "crawl", 0.2 ],
       [ "footing", 0.2 ]
@@ -1145,7 +1188,7 @@
     "fire_warmth_bonus": 600,
     "squeamish_penalty": 5,
     "is_limb": true,
-    "base_hp": 20,
+    "base_hp": 24,
     "drench_capacity": 1000,
     "techniques": [ "tech_base_punch", "tech_base_punch" ],
     "smash_message": "You smack the %s.",
@@ -1153,7 +1196,7 @@
     "windage_effect": "winded_cephalopod_arm_lower",
     "bmi_encumbrance_threshold": 9,
     "bmi_encumbrance_scalar": 0.6,
-    "sub_parts": [ "cephalopod_arm_3_base", "cephalopod_arm_3_tip" ],
+    "sub_parts": [ "cephalopod_arm_3_base", "cephalopod_arm_3_tip", "cephalopod_arm_3_draped" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE", "LIMB_HAND" ],
     "effects_on_hit": [
       {
@@ -1211,27 +1254,39 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_3",
-    "side": 0,
-    "opposite": "cephalopod_arm_3_tip",
+    "side": 1,
+    "opposite": "cephalopod_arm_6_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "proximal third left arm"
   },
   {
     "id": "cephalopod_arm_3_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_3",
-    "side": 0,
-    "opposite": "cephalopod_arm_3_base",
+    "side": 1,
+    "opposite": "cephalopod_arm_6_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "distal third left arm"
+  },
+  {
+    "id": "cephalopod_arm_3_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_3",
+    "side": 1,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "third left arm (draped)",
+    "opposite": "cephalopod_arm_6_draped",
+    "locations_under": [ "cephalopod_arm_3_upper" ]
   },
   {
     "id": "cephalopod_arm_4",
     "type": "body_part",
-    "name": "fourth arm",
+    "name": "first right arm",
     "name_multiple": "arms",
-    "accusative": { "ctxt": "bodypart_accusative", "str": "fourth arm" },
+    "accusative": { "ctxt": "bodypart_accusative", "str": "first right arm" },
     "accusative_multiple": { "ctxt": "bodypart_accusative", "str": "arms" },
     "heading": "arm 4",
     "heading_multiple": "arms",
@@ -1243,14 +1298,15 @@
     "opposite_part": "cephalopod_arm_1",
     "hit_size": 13,
     "hit_difficulty": 0.95,
+    "mend_rate": 200,
     "limb_types": [ [ "arm", 0.4 ], [ "hand", 0.3 ], [ "leg", 0.5 ], [ "foot", 0.5 ] ],
     "limb_scores": [
       [ "move_speed", 0.14 ],
       [ "grip", 0.2 ],
       [ "manip", 0.1, 0.2 ],
-      [ "lift", 0.2 ],
+      [ "lift", 0.14 ],
       [ "balance", 0.2 ],
-      [ "block", 0.2 ],
+      [ "block", 0.16 ],
       [ "swim", 0.2 ],
       [ "crawl", 0.2 ],
       [ "footing", 0.2 ]
@@ -1261,7 +1317,7 @@
     "fire_warmth_bonus": 600,
     "squeamish_penalty": 5,
     "is_limb": true,
-    "base_hp": 20,
+    "base_hp": 24,
     "drench_capacity": 1000,
     "techniques": [ "tech_base_punch", "tech_base_punch" ],
     "smash_message": "You smack the %s.",
@@ -1269,7 +1325,7 @@
     "windage_effect": "winded_cephalopod_arm_lower",
     "bmi_encumbrance_threshold": 9,
     "bmi_encumbrance_scalar": 0.6,
-    "sub_parts": [ "cephalopod_arm_4_base", "cephalopod_arm_4_tip" ],
+    "sub_parts": [ "cephalopod_arm_4_base", "cephalopod_arm_4_tip", "cephalopod_arm_4_draped" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE", "LIMB_HAND" ],
     "effects_on_hit": [
       {
@@ -1327,27 +1383,39 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_4",
-    "side": 0,
-    "opposite": "cephalopod_arm_4_tip",
+    "side": 2,
+    "opposite": "cephalopod_arm_1_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "proximal first right arm"
   },
   {
     "id": "cephalopod_arm_4_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_4",
-    "side": 0,
-    "opposite": "cephalopod_arm_4_base",
+    "side": 2,
+    "opposite": "cephalopod_arm_1_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "distal first right arm"
+  },
+  {
+    "id": "cephalopod_arm_4_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_4",
+    "side": 2,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "first right arm (draped)",
+    "opposite": "cephalopod_arm_1_draped",
+    "locations_under": [ "cephalopod_arm_4_upper" ]
   },
   {
     "id": "cephalopod_arm_5",
     "type": "body_part",
-    "name": "fifth arm",
+    "name": "second right arm",
     "name_multiple": "arms",
-    "accusative": { "ctxt": "bodypart_accusative", "str": "fifth arm" },
+    "accusative": { "ctxt": "bodypart_accusative", "str": "second right arm" },
     "accusative_multiple": { "ctxt": "bodypart_accusative", "str": "arms" },
     "heading": "arm 5",
     "heading_multiple": "arms",
@@ -1359,14 +1427,15 @@
     "opposite_part": "cephalopod_arm_2",
     "hit_size": 13,
     "hit_difficulty": 0.95,
+    "mend_rate": 200,
     "limb_types": [ [ "arm", 0.4 ], [ "hand", 0.3 ], [ "leg", 0.5 ], [ "foot", 0.5 ] ],
     "limb_scores": [
       [ "move_speed", 0.14 ],
       [ "grip", 0.2 ],
       [ "manip", 0.1, 0.2 ],
-      [ "lift", 0.2 ],
+      [ "lift", 0.14 ],
       [ "balance", 0.2 ],
-      [ "block", 0.2 ],
+      [ "block", 0.16 ],
       [ "swim", 0.2 ],
       [ "crawl", 0.2 ],
       [ "footing", 0.2 ]
@@ -1377,7 +1446,7 @@
     "fire_warmth_bonus": 600,
     "squeamish_penalty": 5,
     "is_limb": true,
-    "base_hp": 20,
+    "base_hp": 24,
     "drench_capacity": 1000,
     "techniques": [ "tech_base_punch", "tech_base_punch" ],
     "smash_message": "You smack the %s.",
@@ -1385,7 +1454,7 @@
     "windage_effect": "winded_cephalopod_arm_lower",
     "bmi_encumbrance_threshold": 9,
     "bmi_encumbrance_scalar": 0.6,
-    "sub_parts": [ "cephalopod_arm_5_base", "cephalopod_arm_5_tip" ],
+    "sub_parts": [ "cephalopod_arm_5_base", "cephalopod_arm_5_tip", "cephalopod_arm_5_draped" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE", "LIMB_HAND" ],
     "effects_on_hit": [
       {
@@ -1443,27 +1512,39 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_5",
-    "side": 0,
-    "opposite": "cephalopod_arm_5_tip",
+    "side": 2,
+    "opposite": "cephalopod_arm_2_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "proximal second right arm"
   },
   {
     "id": "cephalopod_arm_5_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_5",
-    "side": 0,
-    "opposite": "cephalopod_arm_5_base",
+    "side": 2,
+    "opposite": "cephalopod_arm_2_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "distal second right arm"
+  },
+  {
+    "id": "cephalopod_arm_5_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_5",
+    "side": 2,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "second right arm (draped)",
+    "opposite": "cephalopod_arm_2_draped",
+    "locations_under": [ "cephalopod_arm_5_upper" ]
   },
   {
     "id": "cephalopod_arm_6",
     "type": "body_part",
-    "name": "sixth arm",
+    "name": "third right arm",
     "name_multiple": "arms",
-    "accusative": { "ctxt": "bodypart_accusative", "str": "sixth arm" },
+    "accusative": { "ctxt": "bodypart_accusative", "str": "third right arm" },
     "accusative_multiple": { "ctxt": "bodypart_accusative", "str": "arms" },
     "heading": "arm 6",
     "heading_multiple": "arms",
@@ -1475,14 +1556,15 @@
     "opposite_part": "cephalopod_arm_3",
     "hit_size": 13,
     "hit_difficulty": 0.95,
+    "mend_rate": 200,
     "limb_types": [ [ "arm", 0.4 ], [ "hand", 0.3 ], [ "leg", 0.5 ], [ "foot", 0.5 ] ],
     "limb_scores": [
       [ "move_speed", 0.14 ],
       [ "grip", 0.2 ],
       [ "manip", 0.1, 0.2 ],
-      [ "lift", 0.2 ],
+      [ "lift", 0.14 ],
       [ "balance", 0.2 ],
-      [ "block", 0.2 ],
+      [ "block", 0.16 ],
       [ "swim", 0.2 ],
       [ "crawl", 0.2 ],
       [ "footing", 0.2 ]
@@ -1493,7 +1575,7 @@
     "fire_warmth_bonus": 600,
     "squeamish_penalty": 5,
     "is_limb": true,
-    "base_hp": 20,
+    "base_hp": 24,
     "drench_capacity": 1000,
     "techniques": [ "tech_base_punch", "tech_base_punch" ],
     "smash_message": "You smack the %s.",
@@ -1501,7 +1583,7 @@
     "windage_effect": "winded_cephalopod_arm_lower",
     "bmi_encumbrance_threshold": 9,
     "bmi_encumbrance_scalar": 0.6,
-    "sub_parts": [ "cephalopod_arm_6_base", "cephalopod_arm_6_tip" ],
+    "sub_parts": [ "cephalopod_arm_6_base", "cephalopod_arm_6_tip", "cephalopod_arm_6_draped" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE", "LIMB_HAND" ],
     "effects_on_hit": [
       {
@@ -1559,19 +1641,31 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_6",
-    "side": 0,
-    "opposite": "cephalopod_arm_6_tip",
+    "side": 2,
+    "opposite": "cephalopod_arm_3_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "proximal third right arm"
   },
   {
     "id": "cephalopod_arm_6_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_6",
-    "side": 0,
-    "opposite": "cephalopod_arm_6_base",
+    "side": 2,
+    "opposite": "cephalopod_arm_3_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "distal third right arm"
+  },
+  {
+    "id": "cephalopod_arm_6_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_6",
+    "side": 2,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "third right arm (draped)",
+    "opposite": "cephalopod_arm_3_draped",
+    "locations_under": [ "cephalopod_arm_6_upper" ]
   }
 ]

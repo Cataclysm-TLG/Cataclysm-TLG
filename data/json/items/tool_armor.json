@@ -330,7 +330,23 @@
     "warmth": 5,
     "material_thickness": 1,
     "flags": [ "OUTER", "SPLINT", "ALLOWS_TAIL" ],
-    "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "leg_l", "leg_r" ] } ]
+    "armor": [
+      {
+        "encumbrance": 70,
+        "coverage": 75,
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "long_tail"
+        ]
+      }
+    ]
   },
   {
     "id": "leg_xlsplint",
@@ -3283,16 +3299,37 @@
     "armor": [
       { "encumbrance": [ 35, 35 ], "coverage": 90, "covers": [ "torso", "arm_l", "arm_r" ] },
       {
-        "encumbrance": [ 35, 35 ],
+        "encumbrance": [ 10, 10 ],
         "coverage": 90,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ]
       },
       {
         "covers": [ "gastropod_foot" ],
-        "coverage": 50,
-        "encumbrance": [ 28, 28 ],
+        "coverage": 78,
+        "encumbrance": [ 5, 5 ],
         "specifically_covers": [ "gastropod_foot_draped" ]
+      },
+      {
+        "encumbrance": [ 10, 10 ],
+        "coverage": 90,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "layers": [ "BELTED" ]
       }
     ],
     "tool_ammo": "battery"

@@ -1218,25 +1218,6 @@
     ]
   },
   {
-    "id": "stockings_tent_arms",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "tentacle sleeves", "str_pl": "pairs of tentacle sleeves" },
-    "description": "Long cloth tubes sized to fit over tentacles and help protect them from the cold.",
-    "weight": "360 g",
-    "volume": "1500 ml",
-    "price": "4 USD",
-    "price_postapoc": "2 USD 50 cent",
-    "material": [ "cotton" ],
-    "symbol": "[",
-    "looks_like": "arm_warmers",
-    "color": "dark_gray",
-    "warmth": 10,
-    "material_thickness": 0.2,
-    "flags": [ "VARSIZE", "SKINTIGHT", "OVERSIZE" ],
-    "armor": [ { "encumbrance": 5, "coverage": 75, "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ] } ]
-  },
-  {
     "id": "winter_gloves_army",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
