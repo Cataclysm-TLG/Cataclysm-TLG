@@ -129,7 +129,7 @@ static Font_Ptr overmap_font;
 
 static SDL_Window_Ptr window;
 static SDL_Renderer_Ptr renderer;
-static SDL_PixelFormat_Ptr format;
+static Uint32 pixel_format = SDL_PIXELFORMAT_UNKNOWN;
 static SDL_Texture_Ptr display_buffer;
 static GeometryRenderer_Ptr geometry;
 #if defined(__ANDROID__)
@@ -345,9 +345,8 @@ static void WinCreate()
         oversized_framebuffer[i].chars.assign( TERMINAL_WIDTH, cursecell( "" ) );
     }
 
-    const Uint32 wformat = SDL_GetWindowPixelFormat( ::window.get() );
-    format.reset( SDL_AllocFormat( wformat ) );
-    throwErrorIf( !format, "SDL_AllocFormat failed" );
+    pixel_format = SDL_GetWindowPixelFormat( ::window.get() );
+    throwErrorIf( pixel_format == SDL_PIXELFORMAT_UNKNOWN, "SDL_GetWindowPixelFormat failed" );
 
     int renderer_id = -1;
 #if !defined(__ANDROID__)
@@ -459,7 +458,6 @@ static void WinDestroy()
     tilecontext.reset();
     gamepad::quit();
     geometry.reset();
-    format.reset();
     display_buffer.reset();
     renderer.reset();
     ::window.reset();
@@ -4010,12 +4008,12 @@ void catacurses::init_interface()
     }
 #endif
 
-    font = std::make_unique<FontFallbackList>( renderer, format, fl.fontwidth, fl.fontheight,
+    font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.fontwidth, fl.fontheight,
             windowsPalette, fl.typeface, fl.fontsize, fl.fontblending );
-    map_font = std::make_unique<FontFallbackList>( renderer, format, fl.map_fontwidth,
+    map_font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.map_fontwidth,
                fl.map_fontheight,
                windowsPalette, fl.map_typeface, fl.map_fontsize, fl.fontblending );
-    overmap_font = std::make_unique<FontFallbackList>( renderer, format, fl.overmap_fontwidth,
+    overmap_font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.overmap_fontwidth,
                    fl.overmap_fontheight,
                    windowsPalette, fl.overmap_typeface, fl.overmap_fontsize, fl.fontblending );
     stdscr = newwin( get_terminal_height(), get_terminal_width(), point::zero );
@@ -4437,7 +4435,7 @@ bool save_screenshot( const std::string &file_path )
     SDL_Surface_Ptr surface = CreateRGBSurface( 0, viewport.w, viewport.h, 32, 0, 0, 0, 0 );
 
     // Get data from SDL_Renderer and save them into surface
-    if( printErrorIf( SDL_RenderReadPixels( renderer.get(), nullptr, surface->format->format,
+    if( printErrorIf( SDL_RenderReadPixels( renderer.get(), nullptr, GetSurfacePixelFormat( surface ),
                                             surface->pixels, surface->pitch ) != 0,
                       "save_screenshot: cannot read data from SDL_Renderer." ) ) {
         return false;
