@@ -5769,7 +5769,7 @@
     "skill_used": "tailor",
     "time": "15 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 26 ] ], [ [ "thread_kevlar", 80 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 12 ] ], [ [ "thread_kevlar", 80 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5779,7 +5779,7 @@
     "skill_used": "tailor",
     "time": "30 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 10 ] ], [ [ "thread_kevlar", 25 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 25 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5787,9 +5787,9 @@
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "skill_used": "tailor",
-    "time": "45 m",
+    "time": "15 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 10 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 2 ] ], [ [ "thread_kevlar", 10 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5797,9 +5797,69 @@
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "skill_used": "tailor",
-    "time": "20 m",
+    "time": "45 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 20 ] ], [ [ "thread_kevlar", 50 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 6 ] ], [ [ "thread_kevlar", 50 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "cephalopod_sleeves_cut_resistant",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 8 ] ], [ [ "thread_kevlar", 25 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "cephalopod_sleeves_cut_resistant_xs",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "15 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 10 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "cephalopod_sleeves_cut_resistant_xl",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "45 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 12 ] ], [ [ "thread_kevlar", 50 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_sleeve_cut_resistant",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "15 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 2 ] ], [ [ "thread_kevlar", 18 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_sleeve_cut_resistant_xs",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "5 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 1 ] ], [ [ "thread_kevlar", 5 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_sleeve_cut_resistant_xl",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 25 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {

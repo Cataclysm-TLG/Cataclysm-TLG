@@ -49,7 +49,7 @@
   {
     "result": "chitin_sollerets",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
+    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
@@ -83,7 +83,7 @@
   {
     "result": "acidchitin_sollerets",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
+    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",

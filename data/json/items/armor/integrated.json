@@ -23,7 +23,25 @@
           { "type": "vegetable", "covered_by_mat": 100, "thickness": 1.5 },
           { "type": "wood", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 1,
         "breathability": "GOOD"
@@ -50,7 +68,25 @@
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 75, "thickness": 2 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 14
       }
@@ -63,7 +99,7 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "distributed bark" },
-    "description": "Your bark is spread evenly across your body.",
+    "description": "Bark evenly spread evenly across the body.",
     "weight": "12 kg",
     "volume": "15 L",
     "price": "0 cent",
@@ -77,7 +113,25 @@
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 75, "thickness": 4 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 16
       }
@@ -90,7 +144,7 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "consolidated bark" },
-    "description": "Your bark is pulled together to protect your torso.",
+    "description": "Bark, thicker around the trunk.",
     "weight": "12 kg",
     "volume": "15 L",
     "price": "0 cent",
@@ -110,7 +164,20 @@
       },
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 4 }, { "type": "wood", "covered_by_mat": 50, "thickness": 3 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "head",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 10
       },
@@ -136,7 +203,7 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "latticed bark" },
-    "description": "Your bark is latticed into a larger frame.",
+    "description": "Bark, latticed to provide strong but uneven protection.",
     "weight": "12 kg",
     "volume": "15 L",
     "price": "0 cent",
@@ -150,7 +217,21 @@
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 4 }, { "type": "wood", "covered_by_mat": 75, "thickness": 6 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 18
       },
@@ -196,12 +277,12 @@
     "armor": [
       {
         "material": [ { "type": "feathers", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "arm_l", "arm_r", "torso", "head" ],
+        "covers": [ "arm_l", "arm_r", "torso", "head", "long_tail" ],
         "coverage": 100,
         "encumbrance": 4
       },
       {
-        "material": [ { "type": "feathers", "covered_by_mat": 100, "thickness": 4 } ],
+        "material": [ { "type": "feathers", "covered_by_mat": 100, "thickness": 5 } ],
         "covers": [ "wing_bird_l", "wing_bird_r" ],
         "coverage": 100,
         "encumbrance": 4
@@ -221,7 +302,7 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "light fur" },
-    "description": "A light coat of fur that grows across much of the body.",
+    "description": "A light coat of fur growing in patches all over the body.",
     "weight": "300 g",
     "volume": "300 ml",
     "price": "0 cent",
@@ -235,7 +316,19 @@
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 80,
         "encumbrance": 2
       }
@@ -267,7 +360,19 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 2 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 80,
         "encumbrance": 6
       },
@@ -305,7 +410,19 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 90,
         "encumbrance": 8
       },
@@ -343,7 +460,19 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 90,
         "encumbrance": 6
       },
@@ -375,7 +504,7 @@
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "torso" ],
+        "covers": [ "torso", "long_tail" ],
         "coverage": 100,
         "encumbrance": 14,
         "layers": [ "SKINTIGHT", "NORMAL" ]
@@ -388,7 +517,19 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 2 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 80,
         "encumbrance": 6
       },
@@ -420,7 +561,7 @@
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3.5 } ],
-        "covers": [ "torso" ],
+        "covers": [ "torso", "long_tail" ],
         "coverage": 100,
         "encumbrance": 12,
         "layers": [ "SKINTIGHT", "NORMAL" ]
@@ -433,7 +574,19 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 2 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 80,
         "encumbrance": 5
       },
@@ -451,7 +604,7 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sleek fur" },
-    "description": "The fur of a proud, wise creature.",
+    "description": "The fur of a proud hunter.",
     "weight": "1 kg",
     "volume": "1 L",
     "price": "0 cent",
@@ -465,13 +618,25 @@
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso" ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "long_tail" ],
         "coverage": 100,
         "encumbrance": 6
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 90,
         "encumbrance": 6
       },
@@ -488,8 +653,8 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
-    "name": { "str": "lynx fur" },
-    "description": "A pile of fur around the neck, protecting from foes that go for the throat.",
+    "name": { "str": "mane" },
+    "description": "A thick ruff of fur around the throat.",
     "weight": "200 g",
     "volume": "200 ml",
     "price": "0 cent",
@@ -546,7 +711,21 @@
           { "type": "wool", "covered_by_mat": 20, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 8
       },
@@ -601,7 +780,21 @@
           { "type": "leather_arthropod", "covered_by_mat": 20, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 14
       },
@@ -659,7 +852,21 @@
           { "type": "flesh", "covered_by_mat": 33, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 16
       },
@@ -811,7 +1018,20 @@
     "armor": [
       {
         "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "long_tail",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
         "coverage": 100,
         "encumbrance": 2
       },
@@ -872,7 +1092,7 @@
       },
       {
         "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 2.5 } ],
-        "covers": [ "arm_l", "arm_r" ],
+        "covers": [ "arm_l", "arm_r", "long_tail" ],
         "specifically_covers": [ "arm_upper_l", "arm_lower_l", "arm_upper_r", "arm_lower_r" ],
         "coverage": 95,
         "encumbrance": 13,
@@ -949,7 +1169,7 @@
       },
       {
         "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "covers": [ "arm_l", "arm_r" ],
+        "covers": [ "arm_l", "arm_r", "long_tail" ],
         "specifically_covers": [ "arm_upper_l", "arm_lower_l", "arm_upper_r", "arm_lower_r" ],
         "coverage": 95,
         "encumbrance": 8,
@@ -1274,6 +1494,31 @@
         "encumbrance": 0,
         "layers": [ "BELTED" ],
         "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 8 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "gastropod_foot_draped",
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "coverage": 90,
+        "encumbrance": 8,
+        "layers": [ "BELTED" ],
+        "rigid_layer_only": true
       }
     ]
   },
@@ -1328,6 +1573,31 @@
         "specifically_covers": [ "torso_hanging_back" ],
         "coverage": 8,
         "encumbrance": 0,
+        "layers": [ "BELTED" ],
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 10 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "gastropod_foot_draped",
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "coverage": 90,
+        "encumbrance": 8,
         "layers": [ "BELTED" ],
         "rigid_layer_only": true
       }
@@ -1395,7 +1665,7 @@
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.0 } ],
-        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r", "long_tail" ],
         "coverage": 65,
         "encumbrance": 3,
         "breathability": "GOOD"
@@ -1436,7 +1706,7 @@
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r", "long_tail" ],
         "coverage": 85,
         "encumbrance": 6,
         "breathability": "POOR"
@@ -1484,7 +1754,7 @@
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 2 } ],
-        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r", "long_tail" ],
         "coverage": 95,
         "encumbrance": 6
       },
@@ -1555,7 +1825,7 @@
           { "type": "bone", "covered_by_mat": 30, "thickness": 2.0 },
           { "type": "scales", "covered_by_mat": 100, "thickness": 3.0 }
         ],
-        "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "arm_l", "arm_r", "leg_l", "leg_r", "long_tail" ],
         "coverage": 98,
         "encumbrance": 16
       },
