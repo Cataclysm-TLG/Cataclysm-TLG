@@ -30,7 +30,7 @@ static const ter_str_id ter_t_flat_roof( "t_flat_roof" );
 static const ter_str_id ter_t_floor( "t_floor" );
 static const ter_str_id ter_t_test_blue_light( "t_test_blue_light" );
 static const ter_str_id ter_t_test_red_light( "t_test_red_light" );
-static const ter_str_id ter_t_utility_light( "t_utility_light" );
+static const ter_str_id ter_test_t_utility_light( "test_t_utility_light" );
 static const vpart_id vpart_test_red_headlight( "test_red_headlight" );
 static const vproto_id vehicle_prototype_car( "car" );
 
@@ -220,7 +220,7 @@ TEST_CASE( "uncolored_source_produces_no_color", "[light_color]" )
     scoped_weather_override weather_clear( WEATHER_CLEAR );
 
     const tripoint_bub_ms src = get_player_character().pos_bub() + tripoint::east * 3;
-    place_ter_roofed( src, ter_t_utility_light );
+    place_ter_roofed( src, ter_test_t_utility_light );
 
     rebuild_lightmap( 0 );
 
