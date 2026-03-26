@@ -369,6 +369,33 @@
       },
       {
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 98,
+        "encumbrance": 4
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 95,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ]
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
         "covers": [ "gastropod_foot" ],
         "specifically_covers": [ "gastropod_foot_lower" ],
         "coverage": 10,
@@ -765,6 +792,35 @@
         "coverage": 75,
         "encumbrance": 3,
         "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 60,
+        "encumbrance": 5,
+        "rigid_layer_only": true
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 60,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ],
+        "rigid_layer_only": true
       }
     ]
   },
@@ -893,6 +949,35 @@
         "specifically_covers": [ "gastropod_foot_upper" ],
         "coverage": 75,
         "encumbrance": 4,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 70,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 80,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ],
         "rigid_layer_only": true
       }
     ]

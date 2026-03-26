@@ -2538,26 +2538,106 @@
     "id": "stockings_tent_legs",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "tentacle socks", "str_pl": "pairs of tentacle socks" },
-    "description": "Six long cloth tubes sized to fit over tentacles and help protect them from the cold.",
-    "weight": "300 g",
-    "volume": "1500 ml",
-    "price": "12 USD",
-    "price_postapoc": "2 USD 50 cent",
+    "name": { "str": "cephalopod socks", "str_pl": "sets of cephalopod socks" },
+    "description": "A collection of thigh socks sewn too slender for human legs, but ideal for keeping the many arms of a cephalopod warm.",
+    "weight": "150 g",
+    "volume": "500 ml",
+    "price": "0 USD",
+    "price_postapoc": "5 cent",
     "material": [ "cotton" ],
     "symbol": "[",
     "looks_like": "leg_warmers",
     "color": "dark_gray",
     "warmth": 10,
     "material_thickness": 0.1,
-    "flags": [ "VARSIZE", "SKINTIGHT", "OVERSIZE" ],
+    "flags": [ "SKINTIGHT" ],
     "armor": [
-      { "encumbrance": 10, "coverage": 100, "covers": [ "foot_l", "foot_r" ] },
       {
-        "covers": [ "leg_l", "leg_r" ],
-        "specifically_covers": [ "leg_lower_l", "leg_lower_r", "leg_knee_l", "leg_knee_r", "leg_upper_l", "leg_upper_r" ],
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_1_tip",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_2_tip",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_3_tip",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_4_tip",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_5_tip",
+          "cephalopod_arm_6_base",
+          "cephalopod_arm_6_tip"
+        ],
         "coverage": 100,
         "encumbrance": 6
+      }
+    ]
+  },
+  {
+    "id": "stockings_tent_legs_vinyl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "plastic cephalopod sleeves", "str_pl": "sets of plastic cephalopod sleeves" },
+    "description": "A bunch of slender tubes of plastic sheeting.  These could be used to keep the many arms of a cephalopod reasonably safe from environmental hazards.",
+    "weight": "300 g",
+    "volume": "900 ml",
+    "price": "0 USD",
+    "price_postapoc": "5 cent",
+    "material": [ "vinyl" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "white",
+    "warmth": 10,
+    "material_thickness": 0.4,
+    "environmental_protection": 12,
+    "flags": [ "NORMAL" ],
+    "armor": [
+      {
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ],
+        "coverage": 95,
+        "encumbrance": 11
+      },
+      {
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_tip",
+          "cephalopod_arm_2_tip",
+          "cephalopod_arm_3_tip",
+          "cephalopod_arm_4_tip",
+          "cephalopod_arm_5_tip",
+          "cephalopod_arm_6_tip"
+        ],
+        "coverage": 100,
+        "encumbrance": 0
       }
     ]
   },

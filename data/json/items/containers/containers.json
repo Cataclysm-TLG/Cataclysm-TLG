@@ -1848,14 +1848,21 @@
         "coverage": 5,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ],
-        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 } ]
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
       },
       {
         "encumbrance": 1,
         "coverage": 3,
         "covers": [ "gastropod_foot" ],
         "specifically_covers": [ "gastropod_foot_upper" ],
-        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 } ]
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
+      },
+      {
+        "encumbrance": 2,
+        "coverage": 5,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "COLLAPSE_CONTENTS" ]
@@ -2260,16 +2267,23 @@
     "sided": true,
     "armor": [
       {
-        "material": [ { "type": "iron", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ],
         "coverage": 2,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
       },
       {
-        "material": [ { "type": "iron", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ],
         "coverage": 1,
+        "encumbrance": 1,
         "covers": [ "gastropod_foot" ],
         "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": 2,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ]
       }
     ],
     "qualities": [ [ "BOIL", 1 ] ],
@@ -2780,16 +2794,25 @@
     "sided": true,
     "armor": [
       {
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ],
         "coverage": 5,
+        "encumbrance": 1,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
       },
       {
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ],
         "coverage": 5,
+        "encumbrance": 1,
         "covers": [ "gastropod_foot" ],
         "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": 1,
+        "coverage": 5,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
     "flags": [ "BELTED", "WATER_FRIENDLY" ],

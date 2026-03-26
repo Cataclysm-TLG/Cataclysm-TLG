@@ -704,7 +704,7 @@
     "drench_capacity": 600,
     "smash_message": "You tail-slap the %s.",
     "flags": [ "LIMB_LOWER" ],
-    "sub_parts": [ "fish_tail_base", "fish_tail_tip" ],
+    "sub_parts": [ "fish_tail_base", "fish_tail_tip", "fish_tail_draped" ],
     "effects_on_hit": [
       {
         "id": "bleed",
@@ -777,6 +777,18 @@
     "name": "tail fin"
   },
   {
+    "id": "fish_tail_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "fish_tail",
+    "side": 0,
+    "secondary": true,
+    "name_multiple": "tail (draped)",
+    "name": "tail (draped)",
+    "opposite": "sub_limb_debug",
+    "locations_under": [ "fish_tail_upper" ]
+  },
+  {
     "id": "long_tail",
     "type": "body_part",
     "name": "tail",
@@ -804,7 +816,7 @@
     "drench_capacity": 600,
     "smash_message": "You tail-whip the %s.",
     "flags": [ "LIMB_LOWER" ],
-    "sub_parts": [ "long_tail_base", "long_tail_tip" ],
+    "sub_parts": [ "long_tail_base", "long_tail_tip", "long_tail_draped" ],
     "effects_on_hit": [
       {
         "id": "bleed",
@@ -879,6 +891,19 @@
     "similar_bodyparts": [ "fish_tail_tip" ]
   },
   {
+    "id": "long_tail_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "long_tail",
+    "side": 0,
+    "secondary": true,
+    "name_multiple": "tail (draped)",
+    "name": "tail (draped)",
+    "opposite": "sub_limb_debug",
+    "locations_under": [ "long_tail_upper" ],
+    "similar_bodyparts": [ "fish_tail_draped" ]
+  },
+  {
     "id": "cephalopod_arm_1",
     "type": "body_part",
     "name": "first arm",
@@ -921,7 +946,7 @@
     "windage_effect": "winded_cephalopod_arm_lower",
     "bmi_encumbrance_threshold": 9,
     "bmi_encumbrance_scalar": 0.6,
-    "sub_parts": [ "cephalopod_arm_1_base", "cephalopod_arm_1_tip" ],
+    "sub_parts": [ "cephalopod_arm_1_draped", "cephalopod_arm_1_base", "cephalopod_arm_1_tip" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT", "LIMB_SOLE", "LIMB_HAND" ],
     "effects_on_hit": [
       {
@@ -979,20 +1004,32 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_1",
-    "side": 0,
-    "opposite": "cephalopod_arm_1_tip",
+    "side": 1,
+    "opposite": "cephalopod_arm_4_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "first arm base"
   },
   {
     "id": "cephalopod_arm_1_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_1",
-    "side": 0,
-    "opposite": "cephalopod_arm_1_base",
+    "side": 1,
+    "opposite": "cephalopod_arm_4_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "first arm tip"
+  },
+  {
+    "id": "cephalopod_arm_1_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_1",
+    "side": 1,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "arm 1 (draped)",
+    "opposite": "cephalopod_arm_4_draped",
+    "locations_under": [ "cephalopod_arm_1_upper" ]
   },
   {
     "id": "cephalopod_arm_2",
@@ -1095,20 +1132,32 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_2",
-    "side": 0,
-    "opposite": "cephalopod_arm_2_tip",
+    "side": 1,
+    "opposite": "cephalopod_arm_5_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "second arm base"
   },
   {
     "id": "cephalopod_arm_2_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_2",
-    "side": 0,
-    "opposite": "cephalopod_arm_2_base",
+    "side": 1,
+    "opposite": "cephalopod_arm_5_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "second arm tip"
+  },
+  {
+    "id": "cephalopod_arm_2_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_2",
+    "side": 1,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "arm 2 (draped)",
+    "opposite": "cephalopod_arm_5_draped",
+    "locations_under": [ "cephalopod_arm_2_upper" ]
   },
   {
     "id": "cephalopod_arm_3",
@@ -1211,20 +1260,32 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_3",
-    "side": 0,
-    "opposite": "cephalopod_arm_3_tip",
+    "side": 1,
+    "opposite": "cephalopod_arm_6_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "third arm base"
   },
   {
     "id": "cephalopod_arm_3_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_3",
-    "side": 0,
-    "opposite": "cephalopod_arm_3_base",
+    "side": 1,
+    "opposite": "cephalopod_arm_6_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "third arm tip"
+  },
+  {
+    "id": "cephalopod_arm_3_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_3",
+    "side": 1,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "arm 3 (draped)",
+    "opposite": "cephalopod_arm_6_draped",
+    "locations_under": [ "cephalopod_arm_3_upper" ]
   },
   {
     "id": "cephalopod_arm_4",
@@ -1327,20 +1388,32 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_4",
-    "side": 0,
-    "opposite": "cephalopod_arm_4_tip",
+    "side": 2,
+    "opposite": "cephalopod_arm_1_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "fourth arm base"
   },
   {
     "id": "cephalopod_arm_4_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_4",
-    "side": 0,
-    "opposite": "cephalopod_arm_4_base",
+    "side": 2,
+    "opposite": "cephalopod_arm_1_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "fourth arm tip"
+  },
+  {
+    "id": "cephalopod_arm_4_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_4",
+    "side": 2,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "arm 4 (draped)",
+    "opposite": "cephalopod_arm_1_draped",
+    "locations_under": [ "cephalopod_arm_4_upper" ]
   },
   {
     "id": "cephalopod_arm_5",
@@ -1443,20 +1516,32 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_5",
-    "side": 0,
-    "opposite": "cephalopod_arm_5_tip",
+    "side": 2,
+    "opposite": "cephalopod_arm_2_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "fifth arm base"
   },
   {
     "id": "cephalopod_arm_5_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_5",
-    "side": 0,
-    "opposite": "cephalopod_arm_5_base",
+    "side": 2,
+    "opposite": "cephalopod_arm_2_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "fifth arm tip"
+  },
+  {
+    "id": "cephalopod_arm_5_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_5",
+    "side": 2,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "arm 5 (draped)",
+    "opposite": "cephalopod_arm_2_draped",
+    "locations_under": [ "cephalopod_arm_5_upper" ]
   },
   {
     "id": "cephalopod_arm_6",
@@ -1559,19 +1644,31 @@
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_6",
-    "side": 0,
-    "opposite": "cephalopod_arm_6_tip",
+    "side": 2,
+    "opposite": "cephalopod_arm_3_base",
     "name_multiple": "arms",
-    "name": "arm base"
+    "name": "sixth arm base"
   },
   {
     "id": "cephalopod_arm_6_tip",
     "type": "sub_body_part",
     "max_coverage": 50,
     "parent": "cephalopod_arm_6",
-    "side": 0,
-    "opposite": "cephalopod_arm_6_base",
+    "side": 2,
+    "opposite": "cephalopod_arm_3_tip",
     "name_multiple": "arms",
-    "name": "arm tip"
+    "name": "sixth arm tip"
+  },
+  {
+    "id": "cephalopod_arm_6_draped",
+    "type": "sub_body_part",
+    "max_coverage": 100,
+    "parent": "cephalopod_arm_6",
+    "side": 2,
+    "secondary": true,
+    "name_multiple": "arm (draped)",
+    "name": "arm 6 (draped)",
+    "opposite": "cephalopod_arm_3_draped",
+    "locations_under": [ "cephalopod_arm_6_upper" ]
   }
 ]
