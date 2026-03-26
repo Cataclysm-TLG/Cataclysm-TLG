@@ -908,7 +908,8 @@
     "skills_required": [ [ "fabrication", 2 ] ],
     "time": "3 h",
     "autolearn": true,
-    "using": [ [ "plastic_sheet", 9 ], [ "adhesive", 12 ] ],
+    "components": [ [ [ "plastic_sheet", 9 ] ] ],
+    "using": [ [ "adhesive", 12 ] ],
     "byproducts": [ [ "plastic_sheet_small", 3 ] ]
   },
   {

@@ -1611,7 +1611,6 @@
         "specifically_covers": [ "gastropod_foot_upper" ],
         "encumbrance": 2
       },
-      { "covers": [ "long_tail" ], "specifically_covers": [ "long_tail_base" ], "coverage": 60, "encumbrance": 3 },
       {
         "encumbrance": 3,
         "coverage": 70,
