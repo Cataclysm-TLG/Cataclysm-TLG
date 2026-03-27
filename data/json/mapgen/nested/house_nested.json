@@ -190,7 +190,7 @@
       "rotation": [ 0, 3 ],
       "rows": [
         "   D",
-        "ɱ @@",
+        "I @@",
         "a @@",
         "   D"
       ],
@@ -258,23 +258,6 @@
         "D   ",
         "@@ a",
         "@@ I",
-        "D   "
-      ],
-      "palettes": [ "standard_domestic_palette" ],
-      "flags": [ "ALLOW_TERRAIN_UNDER_FURNITURE" ]
-    }
-  },
-  {
-    "type": "mapgen",
-    "//": "compass direction indicates head of bed",
-    "nested_mapgen_id": "bedroom_4x4_adult_2_W",
-    "object": {
-      "mapgensize": [ 4, 4 ],
-      "rotation": [ 0, 3 ],
-      "rows": [
-        "D   ",
-        "@@ a",
-        "@@ ɱ",
         "D   "
       ],
       "palettes": [ "standard_domestic_palette" ],
