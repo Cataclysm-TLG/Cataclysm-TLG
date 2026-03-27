@@ -313,7 +313,8 @@
           "chance": 33,
           "pack_size": [ 1, 2 ]
         }
-      ]
+      ],
+      "flags": [ "ERASE_FURNITURE_BEFORE_PLACING_TERRAIN", "ERASE_TRAP_BEFORE_PLACING_TERRAIN", "ALLOW_TERRAIN_UNDER_ITEMS" ]
     }
   },
   {

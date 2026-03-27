@@ -3075,9 +3075,9 @@
     "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, requires <info>Cross Hands</info>",
     "knockback_dist": 1,
     "mult_bonuses": [
-      { "stat": "damage", "type": "bash", "scale": 1.5 },
-      { "stat": "damage", "type": "cut", "scale": 1.5 },
-      { "stat": "damage", "type": "stab", "scale": 1.5 }
+      { "stat": "damage", "type": "bash", "scale": 1.25 },
+      { "stat": "damage", "type": "cut", "scale": 1.25 },
+      { "stat": "damage", "type": "stab", "scale": 1.25 }
     ],
     "attack_vectors": [ "vector_palm" ]
   },
@@ -3104,9 +3104,9 @@
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "movecost", "scale": 0.75 },
-      { "stat": "damage", "type": "bash", "scale": 1.2 },
-      { "stat": "damage", "type": "cut", "scale": 1.2 },
-      { "stat": "damage", "type": "stab", "scale": 1.2 }
+      { "stat": "damage", "type": "bash", "scale": 1.25 },
+      { "stat": "damage", "type": "cut", "scale": 1.25 },
+      { "stat": "damage", "type": "stab", "scale": 1.25 }
     ],
     "attack_vectors": [ "vector_grasp" ]
   },
@@ -3147,9 +3147,9 @@
     "tech_effects": [ { "id": "staggered", "chance": 80, "duration": 200, "on_damage": true, "message": "%s is knocked off-balance!" } ],
     "knockback_dist": 1,
     "mult_bonuses": [
-      { "stat": "damage", "type": "bash", "scale": 2.0 },
-      { "stat": "damage", "type": "cut", "scale": 2.0 },
-      { "stat": "damage", "type": "stab", "scale": 2.0 }
+      { "stat": "damage", "type": "bash", "scale": 1.75 },
+      { "stat": "damage", "type": "cut", "scale": 1.75 },
+      { "stat": "damage", "type": "stab", "scale": 1.75 }
     ],
     "attack_vectors": [ "vector_palm" ]
   },
