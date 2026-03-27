@@ -796,6 +796,7 @@
     "limb_types": [ "tail" ],
     "limb_scores": [ [ "balance", 0.16 ] ],
     "similar_bodyparts": [ "fish_tail" ],
+    "techniques": [ "TAIL_WHIP" ],
     "hit_size": 10,
     "hit_difficulty": 0.85,
     "stylish_bonus": 1,

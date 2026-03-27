@@ -1044,6 +1044,74 @@
     "melee_damage": { "stab": 14 }
   },
   {
+    "id": "integrated_stinging_tail",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "stinger" },
+    "description": "A hypodermic barb of class-sharp chitin.",
+    "weight": "800 g",
+    "volume": "1200 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "sclerotin", "iflesh" ],
+    "symbol": ";",
+    "color": "black",
+    "flags": [
+      "INTEGRATED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "WATER_FRIENDLY",
+      "PADDED",
+      "NO_SALVAGE",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
+    "techniques": [ "STINGER_STAB" ],
+    "armor": [
+      {
+        "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_tip" ],
+        "coverage": 8,
+        "encumbrance": 3
+      }
+    ],
+    "melee_damage": { "stab": 11 }
+  },
+  {
+    "id": "integrated_club_tail",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "tail club" },
+    "description": "A weighty knob of fused vertebrae and osteoderms weighing down the tip of the tail like a ball and chain.",
+    "weight": "2300 g",
+    "volume": "2200 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "bone", "scales", "flesh" ],
+    "symbol": ";",
+    "color": "brown",
+    "warmth": 8,
+    "material_thickness": 3,
+    "flags": [
+      "INTEGRATED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "WATER_FRIENDLY",
+      "PADDED",
+      "NO_SALVAGE",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
+    "techniques": [ "TAIL_CLUB" ],
+    "armor": [ { "covers": [ "long_tail" ], "specifically_covers": [ "long_tail_tip" ], "coverage": 8, "encumbrance": 3 } ],
+    "melee_damage": { "bash": 12 }
+  },
+  {
     "id": "integrated_chitin",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],

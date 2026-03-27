@@ -2589,7 +2589,8 @@
         "values": [
           { "value": "MOVE_COST", "multiply": -0.1 },
           { "value": "ATTACK_SPEED", "multiply": -0.05 },
-          { "value": "CARRY_WEIGHT", "multiply": -0.1 }
+          { "value": "CARRY_WEIGHT", "multiply": -0.1 },
+          { "value": "WEIGHT", "multiply": -0.1 }
         ]
       }
     ]
@@ -3948,8 +3949,8 @@
     "description": "Your limbs seem to have a little more 'give' to them.  +1 Dexterity.",
     "changes_to": [ "BENDY2" ],
     "cancels": [ "HUMAN_ARMS", "HUMAN_LEGS" ],
-    "threshreq": [ "THRESH_SLIME", "THRESH_ELFA" ],
-    "category": [ "SLIME", "ELFA" ],
+    "threshreq": [ "THRESH_SLIME", "THRESH_ELFA", "THRESH_CEPHALOPOD" ],
+    "category": [ "SLIME", "ELFA", "CEPHALOPOD" ],
     "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": 1 } ] } ]
   },
   {
@@ -4731,12 +4732,6 @@
     "restricts_gear": [ "leg_hip_l", "leg_hip_r" ],
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
-    "attacks": {
-      "attack_text_u": "You whap %s with your tail!",
-      "attack_text_npc": "%1$s whaps %2$s with their tail!",
-      "chance": 20,
-      "base_damage": { "damage_type": "bash", "amount": 8 }
-    },
     "enchantments": [ "ench_long_tail", { "values": [ { "value": "DODGE_CHANCE", "add": 0.5 } ] } ],
     "flags": [ "TOUGH_TAIL" ]
   },
@@ -4803,13 +4798,8 @@
     "category": [ "INSECT" ],
     "threshreq": [ "THRESH_INSECT" ],
     "allow_soft_gear": true,
-    "attacks": {
-      "attack_text_u": "You sting %s with your tail!",
-      "attack_text_npc": "%1$s stings %2$s with their tail!",
-      "chance": 20,
-      "base_damage": { "damage_type": "stab", "amount": 20 }
-    },
-    "enchantments": [ "ench_long_tail" ]
+    "enchantments": [ "ench_long_tail" ],
+    "integrated_armor": [ "integrated_stinging_tail" ]
   },
   {
     "type": "mutation",
@@ -4825,12 +4815,6 @@
     "restricts_gear": [ "leg_hip_l", "leg_hip_r" ],
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
-    "attacks": {
-      "attack_text_u": "You club %s with your tail!",
-      "attack_text_npc": "%1$s clubs %2$s with their tail!",
-      "chance": 20,
-      "base_damage": { "damage_type": "bash", "amount": 18 }
-    },
     "enchantments": [ "ench_long_tail" ],
     "flags": [ "TOUGH_TAIL" ]
   },
@@ -5221,7 +5205,7 @@
       }
     ],
     "types": [ "ARMS", "HANDS" ],
-    "enchantments": [ "ench_wings_bird" ],
+    "enchantments": [ "ench_wings_bird", { "values": [ { "value": "WEIGHT", "multiply": -0.1 } ] } ],
     "prereqs": [ "ARM_FEATHERS" ],
     "prereqs2": [ "HOLLOW_BONES" ],
     "threshreq": [ "THRESH_BIRD" ],
@@ -5243,6 +5227,7 @@
     "restricts_gear": [ "torso" ],
     "flags": [ "WINGS_1" ],
     "active": true,
+    "enchantments": [ { "values": [ { "value": "WEIGHT", "multiply": 0.04 } ] } ],
     "transform": { "target": "WINGS_INSECT_active", "msg_transform": "You begin buzzing your wings.", "active": true, "moves": 20 }
   },
   {
@@ -5253,7 +5238,7 @@
     "copy-from": "WINGS_INSECT",
     "valid": false,
     "flags": [ "WINGS_1", "MUSCLE_VEH_BOOST" ],
-    "enchantments": [ "ench_wings_insect_active" ],
+    "enchantments": [ "ench_wings_insect_active", { "values": [ { "value": "WEIGHT", "multiply": 0.04 } ] } ],
     "transform": { "target": "WINGS_INSECT", "msg_transform": "Your wings go still.", "active": false, "moves": 0 }
   },
   {
@@ -5341,7 +5326,7 @@
     "visibility": 8,
     "ugliness": 9,
     "encumbrance_always": [ [ "leg_l", 10 ], [ "leg_r", 10 ], [ "foot_l", 10 ], [ "foot_r", 10 ] ],
-    "enchantments": [ "ench_gastropod_foot", "ench_gastropod_foot_bonuses" ],
+    "enchantments": [ "ench_gastropod_foot", "ench_gastropod_foot_bonuses", { "values": [ { "value": "WEIGHT", "multiply": 0.15 } ] } ],
     "destroys_gear": true
   },
   {
@@ -5629,7 +5614,15 @@
     "leads_to": [ "HIBERNATE" ],
     "category": [ "URSINE" ],
     "armor": [ { "part_types": [ "torso", "head", "arm", "hand", "leg", "foot", "mouth", "tail" ], "bash": 1 } ],
-    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": 0.05 }, { "value": "MOVECOST_SWIM_MOD", "multiply": -0.05 } ] } ]
+    "enchantments": [
+      {
+        "values": [
+          { "value": "MOVE_COST", "multiply": 0.05 },
+          { "value": "MOVECOST_SWIM_MOD", "multiply": -0.05 },
+          { "value": "WEIGHT", "multiply": 0.1 }
+        ]
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -6403,7 +6396,7 @@
     "description": "Most of your fingers have grown to tremendous length, becoming a broad pair of leathery wings.  This allows you to arrest a fall or glide from a ledge if you aren't too weighed down, but naturally impedes your fine motor skills.  They even keep you warm when you sleep.",
     "types": [ "ARMS", "HANDS" ],
     "flags": [ "WING_GLIDE", "WINGS_2", "ARM_WINGS" ],
-    "enchantments": [ "ench_wings_bird" ],
+    "enchantments": [ "ench_wings_bird", { "values": [ { "value": "WEIGHT", "multiply": -0.1 } ] } ],
     "prereqs": [ "WEBBED" ],
     "category": [ "CHIROPTERAN" ],
     "restricts_gear": [ "arm_l", "arm_r", "hand_l", "hand_r" ],
@@ -6675,7 +6668,8 @@
           { "value": "MOVE_COST", "multiply": -0.15 },
           { "value": "ATTACK_SPEED", "multiply": -0.05 },
           { "value": "STAMINA_REGEN_MOD", "add": 0.1 },
-          { "value": "CARRY_WEIGHT", "multiply": -0.125 }
+          { "value": "CARRY_WEIGHT", "multiply": -0.125 },
+          { "value": "WEIGHT", "multiply": -0.2 }
         ]
       }
     ]
@@ -6697,7 +6691,8 @@
           { "value": "MAX_HP", "multiply": 0.05 },
           { "value": "MOVECOST_SWIM_MOD", "multiply": 0.2 },
           { "value": "DODGE_CHANCE", "add": -1.0 },
-          { "value": "CARRY_WEIGHT", "multiply": 0.15 }
+          { "value": "CARRY_WEIGHT", "multiply": 0.15 },
+          { "value": "WEIGHT", "multiply": 0.15 }
         ]
       }
     ],
@@ -7830,7 +7825,7 @@
     "threshreq": [ "THRESH_INSECT", "THRESH_SPIDER" ],
     "category": [ "INSECT", "SPIDER" ],
     "restricts_gear": [ "torso" ],
-    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": -2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": -2 }, { "value": "WEIGHT", "multiply": 0.08 } ] } ]
   },
   {
     "type": "mutation",
@@ -7844,7 +7839,8 @@
     "prereqs": [ "INSECT_ARMS" ],
     "prereqs2": [ "ANTENNAE" ],
     "threshreq": [ "THRESH_INSECT" ],
-    "category": [ "INSECT" ]
+    "category": [ "INSECT" ],
+    "enchantments": [ { "values": [ { "value": "WEIGHT", "multiply": 0.08 } ] } ]
   },
   {
     "type": "mutation",
@@ -7863,7 +7859,7 @@
     "threshreq": [ "THRESH_SPIDER" ],
     "category": [ "SPIDER" ],
     "restricts_gear": [ "torso" ],
-    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": 0.3 } ] } ]
+    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": 0.3 }, { "value": "WEIGHT", "multiply": 0.12 } ] } ]
   },
   {
     "type": "mutation",
@@ -7891,6 +7887,7 @@
       ]
     ],
     "enchantments": [
+      { "condition": "ALWAYS", "values": [ { "value": "WEIGHT", "multiply": 0.12 } ] },
       {
         "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" } ] },
         "values": [ { "value": "MOVE_COST", "multiply": -0.85 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.5 } ],

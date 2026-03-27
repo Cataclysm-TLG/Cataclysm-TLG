@@ -23,6 +23,13 @@
   },
   {
     "type": "attack_vector",
+    "id": "vector_tail_tip",
+    "limbs": [ "long_tail" ],
+    "contact_area": [ "long_tail_tip" ],
+    "natural_attack": true
+  },
+  {
+    "type": "attack_vector",
     "id": "vector_bite",
     "limbs": [ "mouth" ],
     "contact_area": [ "mouth_lips" ],
