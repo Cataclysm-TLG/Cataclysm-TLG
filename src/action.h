@@ -76,8 +76,6 @@ enum action_id : int {
 
     // Viewport movement actions and related
     /**@{*/
-    /** Toggle memorized tiles being shown */
-    ACTION_TOGGLE_MAP_MEMORY,
     /** Center the viewport on character */
     ACTION_CENTER,
     /** Move viewport north */

@@ -3071,12 +3071,12 @@ void monster::die( map *here, Creature *nkiller )
 
     item_location corpse;
 
-    // If this monster dies underwater under thick ice and is aquatic (fish),
-    // do not create a corpse on the ice tile (prevent corpse drop).
+    // If this monster dies underwater in swim-under terrain and is aquatic (fish),
+    // do not create a corpse on the tile (prevent corpse drop).
     bool suppress_corpse = false;
     if( here != nullptr ) {
         const tripoint_bub_ms death_pos = pos_bub( *here );
-        if( here->has_flag( ter_furn_flag::TFLAG_THICK_ICE, death_pos ) && is_underwater() &&
+        if( here->has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, death_pos ) && is_underwater() &&
             ( swims() || has_flag( mon_flag_AQUATIC ) ) ) {
             suppress_corpse = true;
         }
@@ -4019,8 +4019,8 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
     if( !tmp_provocative ) {
         return;
     }
-    // Already following a more interesting sound.
-    if( provocative_sound && wandf > 0 ) {
+    // Already following a more interesting sound, 50% chance to follow a new sound instead
+    if( provocative_sound && wandf > 0 && rng( 0, 1 ) ) {
         return;
     }
 

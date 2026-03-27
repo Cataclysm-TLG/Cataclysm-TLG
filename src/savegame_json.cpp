@@ -1638,8 +1638,6 @@ void avatar::store( JsonOut &json ) const
     json.member( "completed_missions", mission::to_uid_vector( completed_missions ) );
     json.member( "failed_missions", mission::to_uid_vector( failed_missions ) );
 
-    json.member( "show_map_memory", show_map_memory );
-
     json.member( "assigned_invlet" );
     json.start_array();
     for( const auto &iter : inv->assigned_invlet ) {
@@ -1771,8 +1769,6 @@ void avatar::load( const JsonObject &data )
     if( active_mission && active_mission->has_failed() ) {
         update_active_mission();
     }
-
-    data.read( "show_map_memory", show_map_memory );
 
     for( JsonArray pair : data.get_array( "assigned_invlet" ) ) {
         inv->assigned_invlet[static_cast<char>( pair.get_int( 0 ) )] =

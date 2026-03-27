@@ -803,6 +803,12 @@ class map
         int extra_cost( const tripoint_bub_ms &cur, const tripoint_bub_ms &p,
                         const pathfinding_settings &settings,
                         PathfindingFlags p_special ) const;
+        // Catches up renewable generation (solar/wind/water) for off-map vehicles
+        // that are connected to in-bubble grids via cables.
+        void resolve_off_map_grid_generation();
+        // Re-enables appliance parts that were disabled by power_parts() deficit
+        // when the connected grid actually has battery charge available.
+        void resolve_appliance_grid_power();
     public:
 
         // Vehicles: Common to 2D and 3D
@@ -1113,6 +1119,12 @@ class map
         }
 
         bool is_outside( const tripoint_bub_ms &p ) const;
+        // Returns true if precipitation cannot reach this tile. Walks upward
+        // through z-levels looking for any blocking surface: solid floor,
+        // TRANSPARENT_FLOOR (glass/ramps/grates), NO_FLOOR_WATER, SUN_ROOF_ABOVE
+        // furniture, or vehicle with ROOF/OPAQUE. Uses floor_cache when valid,
+        // falls back to direct terrain/furniture/vehicle checks otherwise.
+        bool is_roofed( const tripoint_bub_ms &p ) const;
         /**
          * Returns whether or not the terrain at the given location can be dived into
          * (by monsters that can swim or are aquatic or non-breathing).
@@ -2579,6 +2591,9 @@ class tinymap : private map
         };
         bool is_outside( const tripoint_omt_ms &p ) const {
             return map::is_outside( rebase_bub( p ) );
+        }
+        bool is_roofed( const tripoint_omt_ms &p ) const {
+            return map::is_roofed( rebase_bub( p ) );
         }
         int get_radiation( const tripoint_omt_ms &p ) const {
             return map::get_radiation( rebase_bub( p ) );

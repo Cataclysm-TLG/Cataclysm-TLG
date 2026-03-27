@@ -477,6 +477,19 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
             }
         }
         return true;
+    } else if( action == "FAV_WHITELIST_CONTENTS" ) {
+        const cata::flat_set<itype_id> whitelisted_items = selected_pocket->settings.get_item_whitelist();
+        bool modified = false;
+        for( item *item : selected_pocket->all_items_top() ) {
+            if( whitelisted_items.find( item->typeId() ) == whitelisted_items.end() ) {
+                selected_pocket->settings.whitelist_item( item->typeId() );
+                modified = true;
+            }
+        }
+        if( modified ) {
+            selected_pocket->settings.set_was_edited();
+        }
+        return true;
     } else if( action == "FAV_CLEAR" ) {
         if( query_yn( _( "Are you sure you want to clear settings for pocket %d?" ), pocket_num ) ) {
             selected_pocket->settings.clear();
@@ -507,7 +520,10 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
                         ctxt.get_action_name( "FAV_APPLY_PRESET" ) );
         cmenu.addentry( 10, true, inp_mngr.get_first_char_for_action( "FAV_DEL_PRESET", "INVENTORY" ),
                         ctxt.get_action_name( "FAV_DEL_PRESET" ) );
-        cmenu.addentry( 11, true, inp_mngr.get_first_char_for_action( "FAV_CLEAR", "INVENTORY" ),
+        cmenu.addentry( 11, true, inp_mngr.get_first_char_for_action( "FAV_WHITELIST_CONTENTS",
+                        "INVENTORY" ),
+                        ctxt.get_action_name( "FAV_WHITELIST_CONTENTS" ) );
+        cmenu.addentry( 12, true, inp_mngr.get_first_char_for_action( "FAV_CLEAR", "INVENTORY" ),
                         ctxt.get_action_name( "FAV_CLEAR" ) );
         cmenu.query();
 
@@ -547,6 +563,9 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
                 ev = "FAV_DEL_PRESET";
                 break;
             case 11:
+                ev = "FAV_WHITELIST_CONTENTS";
+                break;
+            case 12:
                 ev = "FAV_CLEAR";
                 break;
             default:
@@ -554,7 +573,7 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
 
         }
         const std::vector<input_event> evlist = inp_mngr.get_input_for_action( ev, "INVENTORY" );
-        if( cmenu.ret >= 0 && cmenu.ret <= 11 && !evlist.empty() ) {
+        if( cmenu.ret >= 0 && cmenu.ret <= 12 && !evlist.empty() ) {
             return key( ctxt, evlist.front(), -1, menu );
         }
         return true;
@@ -2177,6 +2196,7 @@ std::vector<const item *> item_contents::get_added_pockets() const
 void item_contents::add_pocket( const item &pocket_item )
 {
     units::volume total_nonrigid_volume = 0_ml;
+    units::volume effective_nonrigid_volume = 0_ml;
     for( const item_pocket *i_pocket : pocket_item.get_all_contained_pockets() ) {
 
         // need to insert before the end since the final pocket is the migration pocket
@@ -2184,9 +2204,12 @@ void item_contents::add_pocket( const item &pocket_item )
         // these pockets should fallback to using the item name as a description
         // need to update it once it's stored in the contents list
         ( ++contents.rbegin() )->name_as_description = true;
-        total_nonrigid_volume += i_pocket->max_contains_volume();
+        total_nonrigid_volume += i_pocket->volume_capacity();
+        effective_nonrigid_volume += i_pocket->volume_capacity() *
+                                     i_pocket->get_pocket_data()->volume_encumber_modifier;
     }
     additional_pockets_volume += total_nonrigid_volume;
+    additional_pockets_effective_volume += effective_nonrigid_volume;
     additional_pockets_space_used += pocket_item.get_pocket_size();
     additional_pockets.push_back( pocket_item );
     additional_pockets.back().clear_items();
@@ -2207,8 +2230,11 @@ item item_contents::remove_pocket( int index )
     // at this point reversed past the pockets we want to get rid of so now start going forward
     auto it = std::next( rit ).base();
     units::volume total_nonrigid_volume = 0_ml;
+    units::volume effective_nonrigid_volume = 0_ml;
     for( item_pocket *i_pocket : additional_pockets[index].get_all_contained_pockets() ) {
-        total_nonrigid_volume += i_pocket->max_contains_volume();
+        total_nonrigid_volume += i_pocket->volume_capacity();
+        effective_nonrigid_volume += i_pocket->volume_capacity() *
+                                     i_pocket->get_pocket_data()->volume_encumber_modifier;
 
         // move items from the consolidated pockets to the item that will be returned
         for( const item *item_to_move : it->all_items_top() ) {
@@ -2219,6 +2245,7 @@ item item_contents::remove_pocket( int index )
         contents.erase( it++ );
     }
     additional_pockets_volume -= total_nonrigid_volume;
+    additional_pockets_effective_volume -= effective_nonrigid_volume;
     additional_pockets_space_used -= additional_pockets[index].get_pocket_size();
 
     // create a copy of the item to return and delete the old items entry
@@ -2257,7 +2284,7 @@ bool item_contents::has_additional_pockets() const
 
 int item_contents::get_additional_pocket_encumbrance( float mod ) const
 {
-    return additional_pockets_volume * mod / 250_ml;
+    return additional_pockets_effective_volume * mod / 250_ml;
 }
 
 int item_contents::get_additional_space_used() const
@@ -2817,7 +2844,8 @@ void pocket_management_menu( const std::string &title, const std::vector<item *>
         { "FAV_CONTEXT_MENU", translation() },
         { "FAV_SAVE_PRESET", translation() },
         { "FAV_APPLY_PRESET", translation() },
-        { "FAV_DEL_PRESET", translation() }
+        { "FAV_DEL_PRESET", translation() },
+        { "FAV_WHITELIST_CONTENTS", translation() }
     };
     // Override CONFIRM with FAV_CONTEXT_MENU
     pocket_selector.allow_confirm = false;

@@ -85,6 +85,7 @@
 #include "overmapbuffer.h"
 #include "pathfinding.h"
 #include "pocket_type.h"
+#include "power_network.h"
 #include "projectile.h"
 #include "ranged.h"
 #include "relic.h"
@@ -667,6 +668,128 @@ void map::on_vehicle_moved( const int smz )
     set_pathfinding_cache_dirty( smz );
 }
 
+void map::resolve_off_map_grid_generation()
+{
+    const int minz = zlevels ? -OVERMAP_DEPTH : abs_sub.z();
+    const int maxz = zlevels ? OVERMAP_HEIGHT : abs_sub.z();
+    std::unordered_set<vehicle *> resolved;
+
+    // Build set of in-bubble vehicles for fast membership check
+    std::unordered_set<vehicle *> in_bubble;
+    for( int zlev = minz; zlev <= maxz; ++zlev ) {
+        const level_cache *cache = get_cache_lazy( zlev );
+        if( !cache ) {
+            continue;
+        }
+        in_bubble.insert( cache->vehicle_list.begin(), cache->vehicle_list.end() );
+    }
+
+    power_network_manager &pnm = g->power_networks();
+    pnm.begin_rebuild();
+
+    for( vehicle *veh : in_bubble ) {
+        if( resolved.count( veh ) ) {
+            continue;
+        }
+        std::map<vehicle *, float> grid = veh->search_connected_vehicles( *this );
+        bool has_off_map_renewables = false;
+        for( const auto &[grid_veh, loss] : grid ) {
+            resolved.insert( grid_veh );
+            if( !in_bubble.count( grid_veh ) &&
+                ( !grid_veh->solar_panels.empty() ||
+                  !grid_veh->wind_turbines.empty() ||
+                  !grid_veh->water_wheels.empty() ) ) {
+                has_off_map_renewables = true;
+            }
+        }
+
+        // Record every grid in the power network manager
+        pnm.add_grid( veh, grid );
+
+        if( !has_off_map_renewables ) {
+            continue;
+        }
+        // Process each off-map source individually so charge_battery()
+        // computes the correct cable loss path from that source.
+        for( const auto &[grid_veh, loss] : grid ) {
+            if( in_bubble.count( grid_veh ) ) {
+                continue;
+            }
+            int energy = grid_veh->catchup_off_map_renewables( calendar::turn );
+            if( energy > 0 ) {
+                grid_veh->charge_battery( *this, energy );
+            }
+        }
+    }
+
+    pnm.finish_rebuild();
+}
+
+void map::resolve_appliance_grid_power()
+{
+    const int minz = zlevels ? -OVERMAP_DEPTH : abs_sub.z();
+    const int maxz = zlevels ? OVERMAP_HEIGHT : abs_sub.z();
+    std::unordered_set<vehicle *> resolved;
+
+    for( int zlev = minz; zlev <= maxz; ++zlev ) {
+        const level_cache *cache = get_cache_lazy( zlev );
+        if( !cache ) {
+            continue;
+        }
+        for( vehicle *veh : cache->vehicle_list ) {
+            if( !veh->is_appliance() ) {
+                continue;
+            }
+            if( resolved.count( veh ) ) {
+                continue;
+            }
+            bool has_power_disabled = false;
+            for( const vpart_reference &vp : veh->get_all_parts() ) {
+                if( vp.part().power_disabled ) {
+                    has_power_disabled = true;
+                    break;
+                }
+            }
+            if( !has_power_disabled ) {
+                continue;
+            }
+            // found a candidate -- resolve its entire grid
+            std::map<vehicle *, float> grid = veh->search_connected_vehicles( *this );
+            int total_charge = 0;
+            for( const auto &[grid_veh, loss] : grid ) {
+                total_charge += grid_veh->battery_power_level().first;
+            }
+            if( total_charge > 0 ) {
+                for( const auto &[grid_veh, loss] : grid ) {
+                    if( !grid_veh->is_appliance() ) {
+                        continue;
+                    }
+                    for( const vpart_reference &vp : grid_veh->get_all_parts() ) {
+                        vehicle_part &pt = vp.part();
+                        if( !pt.power_disabled ) {
+                            continue;
+                        }
+                        if( pt.is_unavailable() ) {
+                            pt.power_disabled = false;
+                            continue;
+                        }
+                        if( pt.enabled ) {
+                            // user re-enabled it manually, just clear the flag
+                            pt.power_disabled = false;
+                            continue;
+                        }
+                        pt.enabled = true;
+                        pt.power_disabled = false;
+                    }
+                }
+            }
+            for( const auto &[grid_veh, loss] : grid ) {
+                resolved.insert( grid_veh );
+            }
+        }
+    }
+}
+
 void map::vehmove()
 {
     // give vehicles movement points
@@ -734,6 +857,9 @@ void map::vehmove()
         veh_pair.first->recalculate_enchantment_cache();
         veh_pair.first->idle( *this, /* on_map = */ veh_pair.second );
     }
+
+    resolve_off_map_grid_generation();
+    resolve_appliance_grid_power();
 
     // refresh vehicle zones for moved vehicles
     zone_manager::get_manager().cache_vzones( this );
@@ -3458,6 +3584,76 @@ bool map::is_outside( const tripoint_bub_ms &p ) const
 
     const auto &outside_cache = get_cache_ref( p.z() ).outside_cache;
     return outside_cache[p.x()][p.y()];
+}
+
+bool map::is_roofed( const tripoint_bub_ms &p ) const
+{
+    if( !inbounds( p ) ) {
+        return false;
+    }
+
+    // Walk upward through z-levels looking for any surface that blocks
+    // precipitation. The first blocking surface found means this tile is roofed.
+    for( int z = p.z() + 1; z <= OVERMAP_HEIGHT; ++z ) {
+        const tripoint_bub_ms check_pos( p.x(), p.y(), z );
+        const level_cache *cache = get_cache_lazy( z );
+
+        // Fast path: use floor_cache when it exists and is clean
+        if( cache && !cache->floor_cache_dirty ) {
+            if( cache->floor_cache[p.x()][p.y()] ) {
+                return true;
+            }
+            // Transparent floors (glass, ramps, grates) are marked as "no floor"
+            // in floor_cache but are physical surfaces that block precipitation
+            if( has_flag_ter( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, check_pos ) ) {
+                return true;
+            }
+            // Water surfaces absorb precipitation before it reaches tiles below
+            if( has_flag_ter( ter_furn_flag::TFLAG_NO_FLOOR_WATER, check_pos ) ) {
+                return true;
+            }
+            continue;
+        }
+
+        // Fallback: direct terrain/furniture/vehicle checks when cache is
+        // missing or dirty. Mirrors build_floor_cache semantics.
+
+        // TRANSPARENT_FLOOR checked first: blocks precipitation even when
+        // combined with vertical-transition flags like GOES_DOWN
+        if( has_flag_ter( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, check_pos ) ) {
+            return true;
+        }
+
+        const bool no_floor = has_flag_ter( ter_furn_flag::TFLAG_NO_FLOOR, check_pos );
+        const bool goes_down = has_flag_ter( ter_furn_flag::TFLAG_GOES_DOWN, check_pos );
+
+        if( !no_floor && !goes_down ) {
+            return true;
+        }
+
+        if( has_flag_ter( ter_furn_flag::TFLAG_NO_FLOOR_WATER, check_pos ) ) {
+            return true;
+        }
+
+        // SUN_ROOF_ABOVE on furniture at z-1 overrides no-floor at z
+        // (matching build_floor_cache which checks below_submap furniture)
+        const tripoint_bub_ms below_pos( p.x(), p.y(), z - 1 );
+        if( inbounds( below_pos ) &&
+            has_flag_furn( ter_furn_flag::TFLAG_SUN_ROOF_ABOVE, below_pos ) ) {
+            return true;
+        }
+
+        // Check for vehicle roof/opaque parts at this level
+        const optional_vpart_position vp = veh_at( check_pos );
+        if( vp ) {
+            if( vp->part_with_feature( VPFLAG_ROOF, false ) ||
+                vp->part_with_feature( VPFLAG_OPAQUE, false ) ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 bool map::is_last_ter_wall( const bool no_furn, const point_bub_ms &p,
