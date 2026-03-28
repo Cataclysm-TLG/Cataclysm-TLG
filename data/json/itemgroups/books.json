@@ -60,6 +60,7 @@
     "subtype": "distribution",
     "entries": [
       { "item": "manual_eskrima", "prob": 100 },
+      { "item": "manual_kalaripayattu", "prob": 100 },
       { "item": "manual_krav_maga", "prob": 100 },
       { "item": "manual_ninjutsu", "prob": 100 },
       { "item": "manual_pankration", "prob": 5 },
@@ -731,6 +732,7 @@
       { "item": "manual_fencing", "prob": 4 },
       { "item": "manual_aikido", "prob": 3 },
       { "item": "manual_eskrima", "prob": 3 },
+      { "item": "manual_kalaripayattu", "prob": 2 },
       { "item": "manual_krav_maga", "prob": 3 },
       { "item": "manual_ninjutsu", "prob": 2 },
       { "item": "manual_silat", "prob": 3 },
@@ -747,7 +749,13 @@
       { "item": "manual_swordsmanship", "prob": 3 },
       { "item": "manual_barbaran", "prob": 1 },
       { "item": "book_lockpick", "prob": 1 },
-      { "group": "rare_martial_arts_books", "prob": 6 },
+      { "item": "manual_crane", "prob": 1 },
+      { "item": "manual_dragon", "prob": 1 },
+      { "item": "manual_leopard", "prob": 1 },
+      { "item": "manual_snake", "prob": 1 },
+      { "item": "manual_tiger", "prob": 1 },
+      { "item": "manual_zui_quan", "prob": 1 },
+      { "item": "manual_kalaripayattu", "prob": 1 },
       { "item": "scots_tailor", "prob": 30 },
       { "item": "necronomicon", "prob": 1 },
       { "item": "ballista_book", "prob": 6 }
@@ -778,7 +786,13 @@
       { "item": "manual_niten", "prob": 1 },
       { "item": "manual_sojutsu", "prob": 1 },
       { "item": "manual_capoeira", "prob": 1 },
-      { "group": "rare_martial_arts_books", "prob": 8 },
+      { "item": "manual_crane", "prob": 1 },
+      { "item": "manual_dragon", "prob": 1 },
+      { "item": "manual_leopard", "prob": 1 },
+      { "item": "manual_snake", "prob": 1 },
+      { "item": "manual_tiger", "prob": 1 },
+      { "item": "manual_zui_quan", "prob": 1 },
+      { "item": "manual_kalaripayattu", "prob": 1 },
       { "item": "mag_melee", "prob": 20 },
       { "item": "manual_melee", "prob": 10 },
       { "item": "mag_unarmed", "prob": 20 },
@@ -790,24 +804,10 @@
     ]
   },
   {
-    "id": "rare_martial_arts_books",
-    "type": "item_group",
-    "//": "These are exceptionally rare martial arts books that should only spawn very rarely.",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "manual_crane", "prob": 1 },
-      { "item": "manual_dragon", "prob": 1 },
-      { "item": "manual_leopard", "prob": 1 },
-      { "item": "manual_snake", "prob": 1 },
-      { "item": "manual_tiger", "prob": 1 },
-      { "item": "manual_zui_quan", "prob": 1 }
-    ]
-  },
-  {
     "id": "home_martial_arts_books",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "group": "rare_martial_arts_books", "prob": 1 }, { "group": "dojo_manuals", "prob": 1 } ]
+    "entries": [ { "group": "dojo_manuals", "prob": 1 } ]
   },
   {
     "id": "doctors_books",

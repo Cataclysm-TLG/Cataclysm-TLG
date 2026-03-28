@@ -1760,7 +1760,6 @@
     "description": "50% moves, 66% damage, min 2 melee",
     "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right" ]
   },
-  
   {
     "type": "technique",
     "id": "tec_kalaripayattu_marma_sastram",
@@ -1782,7 +1781,10 @@
     "type": "technique",
     "id": "tec_kalaripayattu_chakra_veeshu",
     "name": "Chakra Veeshu",
-    "messages": [ "You lash in a wide circle, hitting %s and everything around you", "<npcname> lashes in a wide circle, hitting %s and everything around them!" ],
+    "messages": [
+      "You lash in a wide circle, hitting %s and everything around you",
+      "<npcname> lashes in a wide circle, hitting %s and everything around them!"
+    ],
     "skill_requirements": [ { "name": "melee", "level": 5 } ],
     "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
     "melee_allowed": true,
@@ -1790,9 +1792,7 @@
     "weapon_categories_allowed": [ "WHIPS" ],
     "aoe": "spin",
     "condition": { "and": [ { "not": { "u_has_flag": "GRAB_FILTER" } }, { "not": { "u_has_flag": "GRAB" } } ] },
-    "mult_bonuses": [
-      { "stat": "movecost", "scale": 1.33 }
-    ],
+    "mult_bonuses": [ { "stat": "movecost", "scale": 1.33 } ],
     "description": "Whip-only AOE attack.",
     "attack_vectors": [ "vector_null" ]
   },
