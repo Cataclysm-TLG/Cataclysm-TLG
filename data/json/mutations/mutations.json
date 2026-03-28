@@ -1183,18 +1183,19 @@
     "id": "MARTIAL_ARTS_MELEE",
     "name": { "str": "Melee Weapon Training" },
     "points": 3,
-    "description": "You have practiced fighting with weapons.  You start with your choice of Barbaran Montante, Bōjutsu, Eskrima, Fencing, Fior Di Battaglia, Medieval Swordsmanship, Niten Ichi-Ryu, Pencak Silat, or Sōjutsu.",
+    "description": "You have practiced fighting with weapons.  You start with your choice of Barbaran Montante, Bōjutsu, Eskrima, Fencing, Fior Di Battaglia, Kalaripayattu, Medieval Swordsmanship, Niten Ichi-Ryu, Pencak Silat, or Sōjutsu.",
     "player_display": false,
     "initial_ma_styles": [
       "style_bojutsu",
       "style_barbaran",
       "style_eskrima",
       "style_fencing",
-      "style_silat",
-      "style_niten",
-      "style_sojutsu",
+      "style_medievalpole",
+      "style_kalaripayattu",
       "style_swordsmanship",
-      "style_medievalpole"
+      "style_niten",
+      "style_silat",
+      "style_sojutsu"
     ],
     "valid": false
   },
