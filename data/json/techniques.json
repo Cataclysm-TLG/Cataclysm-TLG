@@ -1745,6 +1745,75 @@
   },
   {
     "type": "technique",
+    "id": "tec_kalaripayattu_successive_strike",
+    "name": "Successive Strike",
+    "messages": [ "You quickly attack %s", "<npcname> quickly attack %s!" ],
+    "melee_allowed": true,
+    "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
+    "skill_requirements": [ { "name": "melee", "level": 2 } ],
+    "mult_bonuses": [
+      { "stat": "movecost", "scale": 0.5 },
+      { "stat": "damage", "type": "bash", "scale": 0.66 },
+      { "stat": "damage", "type": "cut", "scale": 0.66 },
+      { "stat": "damage", "type": "stab", "scale": 0.66 }
+    ],
+    "description": "50% moves, 66% damage, min 2 melee",
+    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_kalaripayattu_marma_sastram",
+    "name": "Marma Sastram",
+    "messages": [ "You spot your opening and strike at %s", "<npcname> spots an opening and strikes at %s!" ],
+    "melee_allowed": true,
+    "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
+    "crit_tec": true,
+    "skill_requirements": [ { "name": "melee", "level": 2 } ],
+    "flat_bonuses": [
+      { "stat": "damage", "type": "bash", "scaling-stat": "per", "scale": 0.5 },
+      { "stat": "damage", "type": "cut", "scaling-stat": "per", "scale": 0.5 },
+      { "stat": "damage", "type": "stab", "scaling-stat": "per", "scale": 0.5 }
+    ],
+    "description": "50% of perception added to damage, grants Simha Vadivu.",
+    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_kalaripayattu_chakra_veeshu",
+    "name": "Chakra Veeshu",
+    "messages": [
+      "You lash in a wide circle, hitting %s and everything around you",
+      "<npcname> lashes in a wide circle, hitting %s and everything around them!"
+    ],
+    "skill_requirements": [ { "name": "melee", "level": 5 } ],
+    "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
+    "melee_allowed": true,
+    "weighting": -2,
+    "weapon_categories_allowed": [ "WHIPS" ],
+    "aoe": "spin",
+    "condition": { "and": [ { "not": { "u_has_flag": "GRAB_FILTER" } }, { "not": { "u_has_flag": "GRAB" } } ] },
+    "mult_bonuses": [ { "stat": "movecost", "scale": 1.33 } ],
+    "description": "Whip-only AOE attack.",
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_kalaripayattu_focused_strike",
+    "name": "Focused Strike",
+    "messages": [ "You press the attack, striking %s", "<npcname> presses the attack, striking %s!" ],
+    "melee_allowed": true,
+    "required_buffs_all": [ "buff_kalaripayattu_simha_vadivu" ],
+    "crit_ok": true,
+    "skill_requirements": [ { "name": "melee", "level": 3 } ],
+    "flat_bonuses": [
+      { "stat": "damage", "type": "bash", "scaling-stat": "per", "scale": 0.5 },
+      { "stat": "damage", "type": "cut", "scaling-stat": "per", "scale": 0.5 },
+      { "stat": "damage", "type": "stab", "scaling-stat": "per", "scale": 0.5 }
+    ],
+    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right" ]
+  },
+  {
+    "type": "technique",
     "id": "tec_kickboxing_rapid",
     "name": "Jab",
     "messages": [ "You quickly jab %s", "<npcname> quickly jabs at %s!" ],
