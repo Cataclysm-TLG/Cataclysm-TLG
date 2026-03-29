@@ -2240,7 +2240,15 @@ bool mattack::formblob( monster *z )
             if( z->get_speed_base() > mon_blob_small->speed + 35 && rng( 0, 250 ) < z->get_speed_base() ) {
                 // If we're big enough, spawn a baby blob.
                 shared_ptr_fast<monster> mon = make_shared_fast<monster>( mon_blob_small );
-                mon->ammo = mon->type->starting_ammo;
+                if( !mon->type->starting_ammo.empty() ) {
+                    for( const auto &pair : mon->type->starting_ammo ) {
+                        const itype_id &ammo_type = pair.first;
+                        int max_amt = pair.second;
+                        int min_amt = std::min( mon->type->starting_ammo_min, pair.second );
+                        int qty = rng( min_amt, max_amt );
+                        mon->ammo[ ammo_type ] = qty;
+                    }
+                }
                 if( mon->will_move_to( dest ) && mon->know_danger_at( dest ) ) {
                     didit = true;
                     z->set_speed_base( z->get_speed_base() - mon_blob_small->speed );

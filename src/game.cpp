@@ -5356,15 +5356,23 @@ monster *game::place_critter_at( const shared_ptr_fast<monster> &mon, const trip
     return place_critter_around( mon, p, 0 );
 }
 
-monster *game::place_critter_around( const mtype_id &id, const tripoint_bub_ms &center,
+monster *game::place_critter_around( const mtype_id &id,
+                                     const tripoint_bub_ms &center,
                                      const int radius )
 {
-    // TODO: change this into an assert, it must never happen.
     if( id.is_null() ) {
         return nullptr;
     }
     shared_ptr_fast<monster> mon = make_shared_fast<monster>( id );
-    mon->ammo = mon->type->starting_ammo;
+    if( !mon->type->starting_ammo.empty() ) {
+        for( const auto &pair : mon->type->starting_ammo ) {
+            const itype_id &ammo_type = pair.first;
+            int max_amt = pair.second;
+            int min_amt = std::min( mon->type->starting_ammo_min, pair.second );
+            int qty = rng( min_amt, max_amt );
+            mon->ammo[ ammo_type ] = qty;
+        }
+    }
     return place_critter_around( mon, center, radius );
 }
 

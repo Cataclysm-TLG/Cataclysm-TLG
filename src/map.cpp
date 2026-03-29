@@ -10422,7 +10422,15 @@ void map::spawn_monsters_submap( const tripoint_rel_sm &gp, bool ignore_sight, b
                     tmp.ammo.emplace( ap.first, ap.second.get() );
                 }
             } else {
-                tmp.ammo = tmp.type->starting_ammo;
+                if( !tmp.type->starting_ammo.empty() ) {
+                    for( const auto &pair : tmp.type->starting_ammo ) {
+                        const itype_id &ammo_type = pair.first;
+                        int max_amt = pair.second;
+                        int min_amt = std::min( tmp.type->starting_ammo_min, pair.second );
+                        int qty = rng( min_amt, max_amt );
+                        tmp.ammo[ ammo_type ] = qty;
+                    }
+                }
             }
 
             // This can fail, but there isn't much we can do about it if it does. We could output some

@@ -519,7 +519,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                                           critter->ranged_target_size(), 0.4 );
             }
 
-            if( !skip_hit &&critter != nullptr && cur_missed_by < 1.0 ) {
+            if( !skip_hit && critter != nullptr && cur_missed_by < 1.0 ) {
                 // Prevent shots from hitting underwater creatures that are beneath surface (except thin ice);
                 // treat the shot as hitting the terrain instead.
                 if( critter->is_underwater() &&
