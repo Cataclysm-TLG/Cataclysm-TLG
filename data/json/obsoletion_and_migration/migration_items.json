@@ -3837,5 +3837,10 @@
     "type": "MIGRATION",
     "id": "multi_cooker",
     "replace": "hotplate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bot_turret_searchlight",
+    "replace": "lens"
   }
 ]

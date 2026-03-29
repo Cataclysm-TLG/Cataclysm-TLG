@@ -979,7 +979,15 @@ std::optional<int> place_monster_iuse::use( Character *p, item &it, map *here,
     // Uses the moves specified by iuse_actor's definition
     p->mod_moves( -moves );
 
-    newmon.ammo = newmon.type->starting_ammo;
+    if( !newmon.type->starting_ammo.empty() ) {
+        for( const auto &pair : newmon.type->starting_ammo ) {
+            const itype_id &ammo_type = pair.first;
+            int max_amt = pair.second;
+            int min_amt = std::min( newmon.type->starting_ammo_min, pair.second );
+            int qty = rng( min_amt, max_amt );
+            newmon.ammo[ ammo_type ] = qty;
+        }
+    }
     if( !newmon.has_flag( mon_flag_INTERIOR_AMMO ) ) {
         for( std::pair<const itype_id, int> &amdef : newmon.ammo ) {
             item ammo_item( amdef.first, calendar::turn_zero );
