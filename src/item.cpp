@@ -6968,17 +6968,6 @@ std::string item::display_name( unsigned int quantity ) const
                                    link_max_len - link_len, link_max_len, extensions ), cable_color ) );
         }
     }
-    // HACK: This is a hack to prevent possible crashing when displaying maps as items during character creation
-    if( is_map() && calendar::turn != calendar::turn_zero ) {
-        tripoint_abs_omt map_pos_omt =
-            project_to<coords::omt>( get_var( "reveal_map_center", player_character.pos_abs() ) );
-        tripoint_abs_sm map_pos =
-            project_to<coords::sm>( map_pos_omt );
-        const city *c = overmap_buffer.closest_city( map_pos ).city;
-        if( c != nullptr ) {
-            name = string_format( "%s %s", c->name, name );
-        }
-    }
 
     return string_format( "%s%s%s%s", name, sidetxt, amt, cable );
 }
@@ -15532,6 +15521,22 @@ void item::mod_charges( int mod )
         charges = INFINITE_CHARGES - 1; // Highly unlikely, but finite charges should not become infinite.
     } else {
         charges += mod;
+    }
+}
+
+void item::preserve_location( const tripoint_abs_ms &location )
+{
+    if( has_flag( flag_PRESERVE_SPAWN_LOC ) && !has_var( "spawn_location" ) ) {
+        // TODO migrate from old reveal_map_center, can be removed somewhere in the future
+        if( has_var( "reveal_map_center" ) ) {
+            set_var( "spawn_location", get_var( "reveal_map_center", tripoint_abs_ms::invalid ) );
+            remove_var( "reveal_map_center" );
+        } else {
+            set_var( "spawn_location", location );
+        }
+    }
+    for( item *subitem : all_items_ptr() ) {
+        subitem->preserve_location( location );
     }
 }
 

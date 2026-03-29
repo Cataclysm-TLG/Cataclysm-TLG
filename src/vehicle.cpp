@@ -6397,6 +6397,8 @@ std::optional<vehicle_stack::iterator> vehicle::add_item( map &here, vehicle_par
         itm_copy.spill_contents( bub_part_pos( here, vp ) );
     }
 
+    itm_copy.preserve_location( pos_abs() );
+
     const vehicle_stack::iterator new_pos = vp.items.insert( itm_copy );
     active_items.add( *new_pos, vp.mount );
 
