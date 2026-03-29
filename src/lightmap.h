@@ -4,6 +4,7 @@
 
 #include <cmath> // IWYU pragma: keep
 #include <ostream>
+#include <string_view>
 
 #include <stdint.h>
 
@@ -76,6 +77,10 @@ struct light_color_rgb {
     // Create from HSV. h in [0,360), s and v in [0,1].
     static light_color_rgb from_hsv( float h, float s, float v );
 };
+
+// Returns the warm dawn/dusk tint color, or empty when not applicable
+// (alternate dimension, outside twilight). Cached per turn.
+light_color_rgb dawn_dusk_color_for_lightmap( std::string_view dimension );
 
 enum class lit_level : uint8_t {
     DARK = 0,

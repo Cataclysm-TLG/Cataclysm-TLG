@@ -69,6 +69,40 @@ std::string four_quadrants::to_string() const
                           ( *this )[quadrant::SW], ( *this )[quadrant::NW] );
 }
 
+// Dawn/dusk tint: cached per turn, returns the warm color for twilight
+// or an empty color outside twilight. Only depends on calendar::turn.
+static light_color_rgb cached_twilight_color()
+{
+    static time_point cached_turn = calendar::before_time_starts;
+    static light_color_rgb cached_color;
+    if( cached_turn == calendar::turn ) {
+        return cached_color;
+    }
+    cached_turn = calendar::turn;
+    if( !is_twilight( calendar::turn ) ) {
+        cached_color = {};
+        return cached_color;
+    }
+    const units::angle alt = sun_azimuth_altitude( calendar::turn ).second;
+    constexpr float lo = -6.0f;
+    constexpr float hi = -1.0f;
+    const float progress = std::clamp(
+                               static_cast<float>( to_degrees( alt ) - lo ) / ( hi - lo ), 0.0f, 1.0f );
+    const float hue = 25.0f + progress * 20.0f;
+    const float ease = std::sin( progress * M_PI );
+    const float tint_strength = ease * 0.35f;
+    cached_color = light_color_rgb::from_hsv( hue, 0.8f, 1.0f ) * tint_strength;
+    return cached_color;
+}
+
+light_color_rgb dawn_dusk_color_for_lightmap( std::string_view dimension )
+{
+    if( !dimension.empty() ) {
+        return {};
+    }
+    return cached_twilight_color();
+}
+
 void map::add_item_light_recursive( const tripoint_bub_ms &p, const item &it )
 {
     float ilum = 0.0f; // brightness
@@ -455,6 +489,35 @@ void map::generate_lightmap( const int zlev )
 
     build_sunlight_cache( zlev );
 
+    // Dawn/dusk tint: color sunlit tiles during twilight. At this point lm
+    // contains only sunlight (no artificial sources yet), so any excess over
+    // the indoor baseline is sunlight that reached the tile.
+    const light_color_rgb ddc =
+        dawn_dusk_color_for_lightmap( g->get_dimension_prefix() );
+    if( ddc.is_colored() ) {
+        const float outside_light = g->natural_light_level( 0 );
+        const float inside_light = ( zlev >= 0 && outside_light > LIGHT_SOURCE_BRIGHT )
+                                   ? LIGHT_AMBIENT_DIM * 0.8f : LIGHT_AMBIENT_LOW;
+        auto &lcc = map_cache.light_color_cache;
+        bool wrote_any = false;
+        for( int x = 0; x < MAPSIZE_X; ++x ) {
+            for( int y = 0; y < MAPSIZE_Y; ++y ) {
+                const float sun = lm[x][y].max() - inside_light;
+                if( sun > 0.5f ) {
+                    const light_color_rgb contrib = ddc * sun;
+                    auto &cc = lcc[x][y];
+                    cc.r = std::max( cc.r, contrib.r );
+                    cc.g = std::max( cc.g, contrib.g );
+                    cc.b = std::max( cc.b, contrib.b );
+                    wrote_any = true;
+                }
+            }
+        }
+        if( wrote_any ) {
+            map_cache.has_colored_lights = true;
+        }
+    }
+
     apply_character_light( get_player_character() );
     for( npc &guy : g->all_npcs() ) {
         apply_character_light( guy );
@@ -488,10 +551,17 @@ void map::generate_lightmap( const int zlev )
                                     std::min( natural_light, lm[neighbour.x()][neighbour.y()].max() );
                                 if( light_transparency( p ) > LIGHT_TRANSPARENCY_SOLID ) {
                                     update_light_quadrants( lm[p.x()][p.y()], source_light, quadrant::default_ );
-                                    apply_directional_light( p, dir_d[i], source_light );
+                                    apply_directional_light( p, dir_d[i], source_light, ddc );
                                 } else {
                                     update_light_quadrants( lm[p.x()][p.y()], source_light, dir_quadrants[i][0] );
                                     update_light_quadrants( lm[p.x()][p.y()], source_light, dir_quadrants[i][1] );
+                                    if( ddc.is_colored() ) {
+                                        const light_color_rgb contrib = ddc * source_light;
+                                        auto &cc = map_cache.light_color_cache[p.x()][p.y()];
+                                        cc.r = std::max( cc.r, contrib.r );
+                                        cc.g = std::max( cc.g, contrib.g );
+                                        cc.b = std::max( cc.b, contrib.b );
+                                    }
                                 }
                             }
                         }
@@ -1433,7 +1503,8 @@ void map::apply_light_source( const tripoint_bub_ms &p, float luminance )
 #undef CAST_LIGHT_OCTANT
 }
 
-void map::apply_directional_light( const tripoint_bub_ms &p, int direction, float luminance )
+void map::apply_directional_light( const tripoint_bub_ms &p, int direction,
+                                   float luminance, const light_color_rgb &color )
 {
     const point_bub_ms p2( p.xy() );
 
@@ -1441,38 +1512,45 @@ void map::apply_directional_light( const tripoint_bub_ms &p, int direction, floa
     cata::mdarray<four_quadrants, point_bub_ms> &lm = cache.lm;
     cata::mdarray<float, point_bub_ms> &transparency_cache =
         cache.transparency_cache;
-    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache =
-        cache.vehicle_obstructed_cache;
+    cata::mdarray<light_color_rgb, point_bub_ms> &light_color_cache =
+        cache.light_color_cache;
+
+    const bool has_color = color.is_colored();
+    if( has_color ) {
+        const light_color_rgb contrib = color * luminance;
+        auto &cc = light_color_cache[p2.x()][p2.y()];
+        cc.r = std::max( cc.r, contrib.r );
+        cc.g = std::max( cc.g, contrib.g );
+        cc.b = std::max( cc.b, contrib.b );
+        cache.has_colored_lights = true;
+    }
+
+#define CAST_DIR_OCTANT( _xx, _xy, _yx, _yy ) \
+    if( has_color ) { \
+        castLight<_xx, _xy, _yx, _yy, float, four_quadrants, light_calc, light_check, \
+        update_light_quadrants, accumulate_transparency, true>( \
+                lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, 1.0f, 0.0f, \
+                LIGHT_TRANSPARENCY_OPEN_AIR, color, &light_color_cache ); \
+    } else { \
+        castLight<_xx, _xy, _yx, _yy, float, four_quadrants, light_calc, light_check, \
+        update_light_quadrants, accumulate_transparency>( \
+                lm, transparency_cache, blocked_cache, p2, 0, luminance ); \
+    }
 
     if( direction == 90 ) {
-        castLight < 1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
-                  update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
-        castLight < -1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
-                  update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        CAST_DIR_OCTANT( 1, 0, 0, -1 )
+        CAST_DIR_OCTANT( -1, 0, 0, -1 )
     } else if( direction == 0 ) {
-        castLight < 0, -1, 1, 0, float, four_quadrants, light_calc, light_check,
-                  update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
-        castLight < 0, -1, -1, 0, float, four_quadrants, light_calc, light_check,
-                  update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        CAST_DIR_OCTANT( 0, -1, 1, 0 )
+        CAST_DIR_OCTANT( 0, -1, -1, 0 )
     } else if( direction == 270 ) {
-        castLight<1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
-                  update_light_quadrants, accumulate_transparency>(
-                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
-        castLight < -1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
-                  update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        CAST_DIR_OCTANT( 1, 0, 0, 1 )
+        CAST_DIR_OCTANT( -1, 0, 0, 1 )
     } else if( direction == 180 ) {
-        castLight<0, 1, 1, 0, float, four_quadrants, light_calc, light_check,
-                  update_light_quadrants, accumulate_transparency>(
-                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
-        castLight < 0, 1, -1, 0, float, four_quadrants, light_calc, light_check,
-                  update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        CAST_DIR_OCTANT( 0, 1, 1, 0 )
+        CAST_DIR_OCTANT( 0, 1, -1, 0 )
     }
+#undef CAST_DIR_OCTANT
 }
 
 void map::apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, float luminance,

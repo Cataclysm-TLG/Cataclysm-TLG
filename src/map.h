@@ -2158,7 +2158,8 @@ class map
         void add_light_source( const tripoint_bub_ms &p, float luminance,
                                const light_color_rgb &color = {} );
         // Handle just cardinal directions and 45 deg angles.
-        void apply_directional_light( const tripoint_bub_ms &p, int direction, float luminance );
+        void apply_directional_light( const tripoint_bub_ms &p, int direction, float luminance,
+                                      const light_color_rgb &color = {} );
         void apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, float luminance,
                               const units::angle &wideangle = 30_degrees,
                               const light_color_rgb &color = {} );
