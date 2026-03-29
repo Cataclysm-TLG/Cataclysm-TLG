@@ -35,7 +35,7 @@
     "components": [ [ [ "leather_patch", 30 ], [ "rope_superior_short", 2, "LIST" ] ], [ [ "scrap", 9 ], [ "razor_blade", 9 ] ] ]
   },
   {
-    "result": "kris",
+    "result": "urumi",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_WEAPON",
