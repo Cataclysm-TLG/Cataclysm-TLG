@@ -8080,7 +8080,7 @@
       [ [ "water_clean", 1 ] ],
       [ [ "meat_stomach_small", 1, "LIST" ] ],
       [ [ "meat_offal", 1, "LIST" ] ],
-      [ [ "oatmeal", 4 ],  [ "oatmeal_coarse", 4 ], [ "buckwheat", 1 ] ]
+      [ [ "oatmeal", 4 ], [ "oatmeal_coarse", 4 ], [ "buckwheat", 1 ] ]
     ]
   },
   {
@@ -8104,7 +8104,7 @@
       [ [ "water_clean", 2 ] ],
       [ [ "meat_stomach_large", 1, "LIST" ] ],
       [ [ "meat_offal", 2, "LIST" ] ],
-      [ [ "oatmeal", 8 ],  [ "oatmeal_coarse", 8 ], [ "buckwheat", 2 ] ]
+      [ [ "oatmeal", 8 ], [ "oatmeal_coarse", 8 ], [ "buckwheat", 2 ] ]
     ],
     "charges": 2
   },
@@ -8149,7 +8149,7 @@
     "qualities": [ { "id": "BOIL", "level": 1 }, { "id": "COOK", "level": 3 } ],
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
     "components": [
-      [ [ "oatmeal", 1 ],  [ "oatmeal_coarse", 1 ], [ "flour_any", 5, "LIST" ], [ "buckwheat", 1 ] ],
+      [ [ "oatmeal", 1 ], [ "oatmeal_coarse", 1 ], [ "flour_any", 5, "LIST" ], [ "buckwheat", 1 ] ],
       [ [ "dry_fruit", 1 ] ],
       [ [ "any_shortening", 6, "LIST" ] ],
       [ [ "sugar_standard", 1, "LIST" ] ]
