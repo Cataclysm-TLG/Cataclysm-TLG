@@ -966,6 +966,8 @@ void mtype::load( const JsonObject &jo, const std::string_view src )
               weighted_string_id_reader<efftype_id, int> { 1 } );
 
     optional( jo, was_loaded, "starting_ammo", starting_ammo );
+    optional( jo, was_loaded, "starting_ammo_min", starting_ammo_min );
+
     optional( jo, was_loaded, "luminance", luminance, 0 );
     optional( jo, was_loaded, "revert_to_itype", revert_to_itype, itype_id() );
 

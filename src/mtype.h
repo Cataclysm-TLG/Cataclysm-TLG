@@ -361,7 +361,14 @@ struct mtype {
         bodytype_id bodytype;
         shearing_data shearing;
 
-        std::map<itype_id, int> starting_ammo; // Amount of ammo the monster spawns with.
+        // Amount of ammo the monster spawns with.
+        std::map<itype_id, int> starting_ammo;
+        /** 
+         * Monster will spawn with a random ammo count between this and starting_ammo.
+         * If starting_ammo_min > starting_ammo, ammo will not be randomized.
+        */
+        int starting_ammo_min = 0;
+
         // Name of item group that is used to create item dropped upon death, or empty.
         item_group_id death_drops;
 

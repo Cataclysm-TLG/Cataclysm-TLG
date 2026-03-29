@@ -19,6 +19,7 @@
     "vision_day": 50,
     "revert_to_itype": "bot_secubot",
     "starting_ammo": { "556": 30 },
+    "starting_ammo_min": 30,
     "special_attacks": [
       {
         "type": "gun",
@@ -76,6 +77,7 @@
     "vision_day": 50,
     "revert_to_itype": "bot_talon_m202a1",
     "starting_ammo": { "m235tpa": 4 },
+    "starting_ammo_min": 4,
     "special_attacks": [
       {
         "type": "gun",
@@ -306,6 +308,7 @@
     "path_settings": { "avoid_traps": true, "avoid_sharp": true },
     "revert_to_itype": "bot_dispatch",
     "starting_ammo": { "bot_c4_hack": 2, "bot_flashbang_hack": 3, "bot_gasbomb_hack": 3, "bot_grenade_hack": 10 },
+    "starting_ammo_min": 10,
     "special_attacks": [ [ "GRENADIER", 10 ] ],
     "death_drops": { "groups": [ [ "robots", 1 ] ] },
     "death_function": { "corpse_type": "BROKEN" },
@@ -350,6 +353,7 @@
     "path_settings": { "avoid_traps": true, "avoid_sharp": true },
     "revert_to_itype": "bot_dispatch_military",
     "starting_ammo": { "bot_c4_hack": 10, "bot_flashbang_hack": 10, "bot_gasbomb_hack": 10, "bot_grenade_hack": 20 },
+    "starting_ammo_min": 20,
     "special_attacks": [ [ "GRENADIER_ELITE", 10 ] ],
     "death_drops": { "groups": [ [ "robots", 1 ] ] },
     "death_function": { "corpse_type": "BROKEN" },

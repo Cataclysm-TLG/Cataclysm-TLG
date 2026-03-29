@@ -2111,7 +2111,15 @@ void spell_effect::slime_split_on_death( const spell &sp, Creature &caster,
             }
 
             shared_ptr_fast<monster> mon = make_shared_fast<monster>( slime_id );
-            mon->ammo = mon->type->starting_ammo;
+            if( !mon->type->starting_ammo.empty() ) {
+                for( const auto &pair : mon->type->starting_ammo ) {
+                    const itype_id &ammo_type = pair.first;
+                    int max_amt = pair.second;
+                    int min_amt = std::min( mon->type->starting_ammo_min, pair.second );
+                    int qty = rng( min_amt, max_amt );
+                    mon->ammo[ ammo_type ] = qty;
+                }
+            }
             if( mon->will_move_to( dest ) && mon->know_danger_at( dest ) ) {
                 if( monster *const blob = g->place_critter_around( mon, dest, 0 ) ) {
                     sp.make_sound( dest, caster );

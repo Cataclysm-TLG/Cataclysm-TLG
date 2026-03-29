@@ -607,33 +607,6 @@
     "melee_damage": { "bash": 8 }
   },
   {
-    "id": "bot_turret_searchlight",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "inactive milspec searchlight" },
-    "description": "An inactive military-grade automated searchlight.  Using this item involves placing it on the ground and turning it on.  If reprogrammed and rewired successfully, the searchlight will then identify you as an ally, survey the area, and illuminate approaching hostiles.  Seems to have an unhealthy fascination with you.",
-    "weight": "120000 g",
-    "volume": "92500 ml",
-    "price": "5000 USD",
-    "price_postapoc": "10 USD",
-    "to_hit": -3,
-    "material": [ "steel" ],
-    "symbol": ";",
-    "color": "light_green",
-    "use_action": {
-      "type": "place_monster",
-      "monster_id": "mon_turret_searchlight",
-      "friendly_msg": "The searchlight flares up and establishes a perimeter.",
-      "hostile_msg": "A bright light blinds you as the searchlight refuses to turn away from you.",
-      "//": "Milspec but immobile and no lethal weaponry",
-      "difficulty": 4,
-      "moves": 150,
-      "skills": [ "electronics", "computer" ]
-    },
-    "flags": [ "SINGLE_USE" ],
-    "melee_damage": { "bash": 8 }
-  },
-  {
     "id": "bot_dispatch",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
