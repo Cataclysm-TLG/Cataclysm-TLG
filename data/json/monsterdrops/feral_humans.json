@@ -14,6 +14,7 @@
           { "item": "crash_axe", "prob": 5, "damage": [ 1, 3 ] }
         ]
       },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "default_zombie_death_drops", "prob": 100, "damage": [ 1, 3 ] }
     ]
   },
@@ -23,6 +24,7 @@
     "id": "feral_humans_death_drops_pipe",
     "entries": [
       { "item": "pipe", "prob": 100, "damage": [ 0, 2 ] },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "default_zombie_death_drops", "prob": 100, "damage": [ 1, 3 ] }
     ]
   },
@@ -32,6 +34,7 @@
     "id": "feral_humans_death_drops_knife",
     "entries": [
       { "group": "kitchen_knives", "prob": 100, "damage": [ 0, 3 ] },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "default_zombie_death_drops", "prob": 100, "damage": [ 1, 3 ] }
     ]
   },
@@ -47,6 +50,7 @@
           { "item": "claw_bar", "prob": 10, "damage": [ 0, 1 ] }
         ]
       },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "default_zombie_death_drops", "prob": 100, "damage": [ 1, 3 ] }
     ]
   },
@@ -54,7 +58,11 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "feral_humans_death_drops_tool",
-    "entries": [ { "item": "hammer", "prob": 100, "damage": [ 1, 3 ] }, { "group": "mon_zombie_technician_death_drops", "prob": 100 } ]
+    "entries": [
+      { "item": "hammer", "prob": 100, "damage": [ 1, 3 ] },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
+      { "group": "mon_zombie_technician_death_drops", "prob": 100 }
+    ]
   },
   {
     "type": "item_group",
@@ -152,6 +160,7 @@
     "entries": [
       { "group": "survivor_stabbing", "prob": 100, "damage": [ 0, 3 ] },
       { "group": "underwear", "damage": [ 0, 3 ] },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "survivor_basic_pants", "damage": [ 0, 3 ] },
       { "group": "survivor_basic_shirt", "damage": [ 0, 3 ] },
       { "group": "survivor_basic_hands", "damage": [ 0, 3 ], "prob": 95 },
