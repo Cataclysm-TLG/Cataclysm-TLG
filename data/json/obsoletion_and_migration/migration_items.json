@@ -3841,6 +3841,6 @@
   {
     "type": "MIGRATION",
     "id": "bot_turret_searchlight",
-    "replace": "turret_searchlight"
+    "replace": "lens"
   }
 ]
