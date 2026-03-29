@@ -46,7 +46,7 @@
     "skill_used": "fabrication",
     "difficulty": 7,
     "time": "10 h",
-    "book_learn": [ [ "textbook_weapeast", 6 ] ],
+    "book_learn": [ [ "textbook_weapwest", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
