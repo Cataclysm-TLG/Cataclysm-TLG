@@ -85,7 +85,6 @@
     "volume": "1375 ml",
     "longest_side": "150 cm",
     "price_postapoc": "1 USD 50 cent",
-    "//": "Not quite as long as a quarterstaff.",
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "good" },
     "ranged_damage": { "damage_type": "bash", "amount": 10 },
     "range": 5,
