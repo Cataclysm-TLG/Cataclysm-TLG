@@ -3226,7 +3226,6 @@ std::optional<int> iuse::grenade_inc_act( Character *p, item *, const tripoint_b
 
 std::optional<int> iuse::molotov_lit( Character *p, item *it, const tripoint_bub_ms &pos )
 {
-
     if( !p ) {
         // It was thrown or dropped, so burst into flames.
         map &here = get_map();

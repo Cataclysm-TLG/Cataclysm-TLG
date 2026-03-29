@@ -361,6 +361,12 @@
   },
   {
     "type": "ammunition_type",
+    "id": "feral_molotov",
+    "name": "molotov cocktail",
+    "default": "feral_molotov"
+  },
+  {
+    "type": "ammunition_type",
     "id": "gasoline",
     "name": "gasoline",
     "default": "gasoline"
