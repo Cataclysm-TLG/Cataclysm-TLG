@@ -176,5 +176,24 @@
     "price_postapoc": "75 cent",
     "weapon_category": [ "WHIPS", "NINJUTSU_WEAPONS", "KUNG_FU_WEAPONS" ],
     "melee_damage": { "bash": 18 }
+  },
+    {
+    "type": "ITEM",
+    "id": "urumi",
+    "category": "weapons",
+    "name": { "str": "urumi" },
+    "description": "A thin ribbon of flexible steel attached to a handle, the whip sword is an Indian weapon long renowned for its bizarre design and the skill required to properly use it.",
+    "weight": "1075 g",
+    "looks_like": "bullwhip",
+    "color": "dark_gray",
+    "symbol": "/",
+    "material": [ "steel" ],
+    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "clumsy" },
+    "volume": "1100 ml",
+    "price": "30 USD",
+    "flags": [ "REACH_ATTACK", "WHIP" ],
+    "price_postapoc": "5 USD",
+    "weapon_category": [ "WHIPS" ],
+    "melee_damage": { "cut": 15 }
   }
 ]
