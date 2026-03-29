@@ -760,6 +760,7 @@
         "unarmed_allowed": true,
         "melee_allowed": true,
         "bonus_dodges": 1,
+        "forbidden_buffs_all": [ "buff_kalaripayattu_simha_vadivu" ],
         "flat_bonuses": [ { "stat": "dodge", "scale": 1.0 } ]
       }
     ],

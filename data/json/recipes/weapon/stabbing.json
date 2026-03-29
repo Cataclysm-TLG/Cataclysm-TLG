@@ -44,9 +44,9 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_STABBING",
     "skill_used": "fabrication",
-    "difficulty": 9,
+    "difficulty": 7,
     "time": "10 h",
-    "book_learn": [ [ "textbook_weapeast", 9 ] ],
+    "book_learn": [ [ "textbook_weapwest", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },

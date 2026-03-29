@@ -583,6 +583,8 @@
       { "item": "tanto", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25 },
       { "item": "tanto", "prob": 1 },
       [ "kris", 5 ],
+      [ "urumi", 1 ],
+      { "item": "urumi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       [ "junk_platemail_suit", 1 ],
       [ "platemail_cuirass", 1 ],
       [ "armor_samurai", 1 ],

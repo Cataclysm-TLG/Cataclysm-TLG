@@ -1749,6 +1749,8 @@
     "name": "Successive Strike",
     "messages": [ "You quickly attack %s", "<npcname> quickly attack %s!" ],
     "melee_allowed": true,
+    "reach_ok": true,
+    "weighting": 2,
     "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
     "skill_requirements": [ { "name": "melee", "level": 2 } ],
     "mult_bonuses": [
@@ -1768,6 +1770,8 @@
     "melee_allowed": true,
     "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
     "crit_tec": true,
+    "reach_ok": true,
+    "weighting": 2,
     "skill_requirements": [ { "name": "melee", "level": 2 } ],
     "flat_bonuses": [
       { "stat": "damage", "type": "bash", "scaling-stat": "per", "scale": 0.5 },
@@ -1788,7 +1792,6 @@
     "skill_requirements": [ { "name": "melee", "level": 5 } ],
     "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
     "melee_allowed": true,
-    "weighting": -2,
     "weapon_categories_allowed": [ "WHIPS" ],
     "aoe": "spin",
     "condition": { "and": [ { "not": { "u_has_flag": "GRAB_FILTER" } }, { "not": { "u_has_flag": "GRAB" } } ] },
@@ -1802,8 +1805,10 @@
     "name": "Focused Strike",
     "messages": [ "You press the attack, striking %s", "<npcname> presses the attack, striking %s!" ],
     "melee_allowed": true,
+    "reach_ok": true,
     "required_buffs_all": [ "buff_kalaripayattu_simha_vadivu" ],
     "crit_ok": true,
+    "weighting": 2,
     "skill_requirements": [ { "name": "melee", "level": 3 } ],
     "flat_bonuses": [
       { "stat": "damage", "type": "bash", "scaling-stat": "per", "scale": 0.5 },
