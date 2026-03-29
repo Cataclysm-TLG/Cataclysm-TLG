@@ -27,7 +27,7 @@
     },
     "martial_art": "style_barbaran"
   },
-    {
+  {
     "id": "manual_kalaripayattu",
     "copy-from": "book_martial",
     "type": "ITEM",

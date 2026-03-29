@@ -27,7 +27,6 @@
     "flags": [ "NPC_ACTIVATE", "NO_REPAIR" ],
     "ammo_type": "sling-ready_grenade",
     "damage": { "damage_type": "bash", "amount": 5 },
-    "//": "Total range with staff sling 21 - 5 more than can be thrown by a player with 10 strength",
     "range": 11,
     "dispersion": 14,
     "effects": [ "COOKOFF", "NEVER_MISFIRES", "NON_FOULING", "FLAME" ],
