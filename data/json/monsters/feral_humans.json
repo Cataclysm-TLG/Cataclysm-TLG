@@ -182,7 +182,8 @@
     "description": "Before the bombs fell, runaway fires were the biggest killers.  Now you behold one of their architects: a gibbering madman, reeking of fuel and painted all over with soot and ash that fail to conceal the glint of a knife.",
     "copy-from": "mon_feral_human_pipe",
     "dodge": 3,
-    "starting_ammo": { "feral_molotov": 3 },
+    "starting_ammo": { "feral_molotov": 4 },
+    "starting_ammo_min": 1,
     "special_attacks": [
       {
         "type": "gun",
