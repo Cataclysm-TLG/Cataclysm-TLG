@@ -186,12 +186,12 @@
     "special_attacks": [
       {
         "type": "gun",
-        "cooldown": 6,
+        "cooldown": 10,
         "move_cost": 200,
         "gun_type": "feral_human_thrown_molotov",
         "ammo_type": "feral_molotov",
         "no_ammo_sound": "",
-        "fake_skills": [ [ "throw", 3 ] ],
+        "fake_skills": [ [ "throw", 2 ] ],
         "fake_str": 8,
         "condition": {
           "and": [
@@ -773,7 +773,7 @@
         "fake_skills": [ [ "gun", 2 ], [ "shotgun", 2 ] ],
         "fake_dex": 8,
         "fake_per": 9,
-        "//": "(ferals don't care about max-effective range.)",
+        "//": "(ferals don't care about max effective range.)",
         "ranges": [ [ 2, 25, "DEFAULT" ] ],
         "condition": {
           "and": [
