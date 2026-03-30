@@ -153,7 +153,27 @@
       "Crafting is faster if you have an actual place for it, preferably a workshop bench.",
       "Hope for the best but prepare for the worst.  A backup stash of necessities can save the day.",
       "Pain can drastically slow you down and reduces your stats.  Check your speed in the character menu.",
-      "Winners don't do drugs.  They're too valuable.  Winners trade drugs for more bullets."
+      "Winners don't do drugs.  They're too valuable.  Winners trade drugs for more bullets.",
+      "Excessive item counts in proximity to your character can cause slowdown.  Don't be a hoarder!",
+      "You don't need to grab every piece of loot you see.  There's always more to find.",
+      "You won't use mutated body parts like fangs and horns to attack if they're covered up.",
+      "Keep a few spare weapons and pieces of armor around your base.  Switching is easier than repairing.",
+      "Switching to a sidearm is often faster than reloading.",
+      "You can use markers to rename items, making it easier to stay organized.",
+      "Twohanded weapons are hard to use when things are grabbing you.  Keep something smaller on hand too!",
+      "Handguns are powerful and easy to use even when you're badly wounded.  Always keep one handy.",
+      "The Archer's Form proficiency lowers the strength requirement on bows by up to 6.",
+      "If you like archery but lack the strength, consider a crossbow.",
+      "Spraypaint can be used to blind enemies, and is especially effective against robots.",
+      "Cameras can blind enemies with their flash in melee.  Say cheese and die!",
+      "Blinded creatures can still detect you in melee, and will remember where they last saw you.",
+      "Stun guns will cause even zombies to release their grabs, but effectiveness falls off with size.",
+      "Insecticide is really good at killing bugs, even the big ones.",
+      "Tear gas stuns anything that breathes.  It blinds anything with eyes, except robots and arthropods.",
+      "Going prone can make it harder for shrapnel to hit you.",
+      "Grenades create very fine shrapnel which isn't great against armor.  Pipebombs on the other hand…",
+      "Use the fire, sludge, and acid some enemies spread to your advantage.",
+      "Mutant meat isn't good for you, but if you're hungry, surely you can eat just a little…"
     ]
   }
 ]
