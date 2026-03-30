@@ -1609,7 +1609,7 @@
       [ "stockings", 20 ],
       [ "garter_belt", 5 ],
       [ "bullwhip", 20 ],
-      [ "dressage_whip", 20 ],
+      [ "riding_crop", 20 ],
       { "item": "candle", "prob": 20, "charges": [ 0, 100 ] },
       [ "condom", 50 ]
     ]
