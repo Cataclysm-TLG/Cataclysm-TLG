@@ -13,7 +13,7 @@
     "material": [ "leather" ],
     "techniques": [ "WRAP_HARMLESS" ],
     "//": "Most whips are OK in melee, but bullwhips really need a lot of room to get going.",
-    "flags": [ "REACH_ATTACK", "WHIP", "POLEARM" ],
+    "flags": [ "REACH_ATTACK", "REACH3", "WHIP", "POLEARM" ],
     "to_hit": { "grip": "none", "length": "long", "surface": "line", "balance": "neutral" },
     "category": "weapons",
     "melee_damage": { "bash": 3, "cut": 1 },

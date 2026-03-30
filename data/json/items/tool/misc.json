@@ -277,7 +277,10 @@
     "symbol": ",",
     "color": "green",
     "qualities": [ [ "HOSE", 1 ] ],
-    "melee_damage": { "bash": 5 }
+    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "uneven" },
+    "flags": [ "ALWAYS_TWOHAND" ],
+    "weapon_category": [ "WHIPS" ],
+    "melee_damage": { "bash": 4 }
   },
   {
     "type": "ITEM",
