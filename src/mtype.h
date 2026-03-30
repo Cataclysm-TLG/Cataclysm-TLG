@@ -363,7 +363,7 @@ struct mtype {
 
         // Amount of ammo the monster spawns with.
         std::map<itype_id, int> starting_ammo;
-        /** 
+        /**
          * Monster will spawn with a random ammo count between this and starting_ammo.
          * If starting_ammo_min > starting_ammo, ammo will not be randomized.
         */
