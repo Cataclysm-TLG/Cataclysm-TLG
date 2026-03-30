@@ -1878,7 +1878,7 @@ void sfx::do_footstep( const Character &ch )
             play_plmove_sound_variant( "walk_water", seas_str, indoors, night );
             return;
         }
-        if( ch.is_barefoot() ) {
+        if( ch.worn.is_barefoot() ) {
             play_plmove_sound_variant( "walk_barefoot", seas_str, indoors, night );
             return;
         }
