@@ -6,7 +6,7 @@
     "copy-from": "armor_acidchitin",
     "category": "CC_ANIMALS",
     "subcategory": "CSC_ANIMALS_BOVINE ARMOR",
-    "skills_required": [ [ "survival", 4 ], [ "firstaid", 2 ], [ "fabrication", 4 ] ],
+    "skills_required": [ [ "survival", 4 ], [ "fabrication", 4 ] ],
     "time": "10 h 15 m",
     "using": [ [ "cordage", 7 ] ],
     "components": [ [ [ "acidchitin_piece", 100 ] ] ],
@@ -14,7 +14,8 @@
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_chitinworking" },
       { "proficiency": "prof_closures" }
-    ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ]
   },
   {
     "result": "chitin_armor_cow",
@@ -240,6 +241,7 @@
     "time": "28 h 45 m",
     "book_learn": [ [ "textbook_tailor", 5 ], [ "tailor_portfolio", 5 ], [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ] ],
     "using": [ [ "sewing_standard", 302 ] ],
+    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 1 }, { "id": "DRILL", "level": 2 } ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic", "time_multiplier": 1.1, "skill_penalty": 0.15 },
       { "proficiency": "prof_closures", "time_multiplier": 1.1 },

@@ -439,12 +439,8 @@
     "type": "recipe",
     "copy-from": "mutant_meat_cooked",
     "result": "meat_mutant_tainted_cooked",
-    "components": [ [ [ "meat_mutant_tainted", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "result": "meat_mutant_tainted_smoked",
-    "copy-from": "meat_smoked",
+    "qualities": [ { "id": "COOK", "level": 1 } ],
+    "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [ [ [ "meat_mutant_tainted", 1 ] ] ]
   },
   {
@@ -1038,6 +1034,24 @@
     "//": "300g of meat for 30 smoking_heats",
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_preservation" }, { "proficiency": "prof_food_curing" } ],
     "components": [ [ [ "meat_red_raw", 1, "LIST" ] ] ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "result": "meat_mutant_tainted_smoked",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_MEAT",
+    "skill_used": "cooking",
+    "difficulty": 3,
+    "time": "1 h",
+    "charges": 1,
+    "autolearn": true,
+    "batch_time_factors": [ 83, 3 ],
+    "qualities": [ { "id": "COOK", "level": 1 } ],
+    "tools": [ [ [ "smoking_heat", 30, "LIST" ] ] ],
+    "//": "300g of meat for 30 smoking_heats",
+    "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_preservation" }, { "proficiency": "prof_food_curing" } ],
+    "components": [ [ [ "meat_mutant_tainted", 1 ] ] ]
   },
   {
     "type": "recipe",
