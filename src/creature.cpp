@@ -1776,30 +1776,51 @@ bool Creature::grapple_drag( Creature *c )
     }
 }
 
-bool Creature::stumble_invis( const Creature &player, const bool stumblemsg )
+bool Creature::stumble_invis( const Creature &attacker, const bool stumblemsg )
 {
     map &here = get_map();
 
     // DEBUG insivibility can't be seen through
-    if( player.has_trait( trait_DEBUG_CLOAK ) ) {
+    if( attacker.has_trait( trait_DEBUG_CLOAK ) ) {
         return false;
     }
-    if( this == &player || !is_adjacent( &player, true ) ) {
+    if( this == &attacker || !is_adjacent( &attacker, true ) ) {
         return false;
     }
     if( stumblemsg ) {
-        const bool player_sees = player.sees( here, *this );
+        const bool player_sees = attacker.sees( here, *this );
         add_msg( m_bad, _( "%s stumbles into you!" ), player_sees ? this->disp_name( false,
                  true ) : _( "Something" ) );
     }
     add_effect( effect_stumbled_into_invisible, 6_seconds );
     // Mark last known location, or extend duration if exists
-    if( here.has_field_at( player.pos_bub( here ), field_fd_last_known ) ) {
-        here.set_field_age( player.pos_bub( here ), field_fd_last_known, 0_seconds );
+    if( here.has_field_at( attacker.pos_bub( here ), field_fd_last_known ) ) {
+        here.set_field_age( attacker.pos_bub( here ), field_fd_last_known, 0_seconds );
     } else {
-        here.add_field( player.pos_bub( here ), field_fd_last_known );
+        here.add_field( attacker.pos_bub( here ), field_fd_last_known );
     }
     moves = 0;
+    return true;
+}
+
+bool Creature::react_to_ranged( const Creature &attacker )
+{
+    map &here = get_map();
+    // If we're blind or stunned we can't track throws, and we don't need to if we see the attacker.
+    if( sees( here, attacker ) || has_effect( effect_blind ) || has_effect( effect_stunned ) ) {
+        return false;
+    }
+    // Zombies are dumb. Robots are REALLY dumb.
+    if( ( in_species( species_ZOMBIE ) && !one_in( 3 ) ) || ( in_species( species_ROBOT ) || in_species( species_ROBOT_FLYING ) ) ) {
+        return false;
+    }
+    add_effect( effect_stumbled_into_invisible, 2_seconds );
+    // Mark last known location, or extend duration if exists
+    if( here.has_field_at( attacker.pos_bub( here ), field_fd_last_known ) ) {
+        here.set_field_age( attacker.pos_bub( here ), field_fd_last_known, 0_seconds );
+    } else {
+        here.add_field( attacker.pos_bub( here ), field_fd_last_known );
+    }
     return true;
 }
 

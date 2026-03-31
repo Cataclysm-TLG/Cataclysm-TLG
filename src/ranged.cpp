@@ -130,9 +130,11 @@ static const character_modifier_id character_modifier_thrown_dex_mod( "thrown_de
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_cut( "cut" );
 
+static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_hit_by_player( "hit_by_player" );
 static const efftype_id effect_on_roof( "on_roof" );
+static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_quadruped_full( "quadruped_full" );
 
 static const fault_id fault_gun_blackpowder( "fault_gun_blackpowder" );
@@ -1608,6 +1610,9 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
         if( hit_entry.second.first == 0 ) {
             continue;
         }
+        // Low-velocity projectiles are easy to source, unless the target is blind or senseless.
+        // TODO: Stealth projectiles?
+        hit_entry.first->react_to_ranged( *this );
         if( monster *const m = hit_entry.first->as_monster() ) {
             cata::event e = cata::event::make<event_type::character_ranged_attacks_monster>( getID(),
                             itype_id::NULL_ID(),

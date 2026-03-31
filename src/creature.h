@@ -528,8 +528,10 @@ class Creature : public viewer
         bool dodge_check( monster *z, bodypart_id bp, const damage_instance &dam_inst,
                           float training_level = 0.0f );
 
-        // Temporarily reveals an invisible player when a monster tries to enter their location
-        bool stumble_invis( const Creature &player, bool stumblemsg = true );
+        // Creatures temporarily detect unseen creatures when bumping into them.
+        bool stumble_invis( const Creature &attacker, bool stumblemsg = true );
+        // Use stumble_invis's system to try and find creatures throwing stuff at us from hiding.
+        bool react_to_ranged( const Creature &player );
         // Attack an empty location
         bool attack_air( const tripoint_bub_ms &p );
 
