@@ -26,14 +26,13 @@
     "description": "A splintered piece of wood. It could be used as a skewer for cooking.",
     "category": "other",
     "material": [ "wood" ],
-    "weight": "100 g",
-    "volume": "200 ml",
+    "weight": "70 g",
+    "volume": "160 ml",
     "longest_side": "20 cm",
     "to_hit": { "grip": "none", "length": "hand", "surface": "any", "balance": "uneven" },
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
-    "flags": [ "NO_SALVAGE", "TRADER_AVOID", "FIREWOOD" ],
-    "melee_damage": { "bash": 1 }
+    "flags": [ "NO_SALVAGE", "TRADER_AVOID", "FIREWOOD" ]
   },
   {
     "type": "ITEM",

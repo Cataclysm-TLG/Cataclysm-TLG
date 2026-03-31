@@ -1665,7 +1665,7 @@
     "description": "An implant that works on simple physics rather than electronics, this CBM replaces the ulnar collateral ligaments with assistive biocompatible tethers that automatically constrict and relax to improve the user's throwing distance and accuracy.",
     "occupied_bodyparts": [ [ "arm_l", 1 ], [ "arm_r", 1 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
-    "enchantments": [ { "condition": "ALWAYS", "skills": [ { "value": "throw", "add": 3 } ] } ]
+    "enchantments": [ { "condition": "ALWAYS", "skills": [ { "value": "throw", "add": 2 } ] } ]
   },
   {
     "id": "bio_railgun",
