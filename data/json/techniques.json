@@ -1760,7 +1760,7 @@
       { "stat": "damage", "type": "stab", "scale": 0.66 }
     ],
     "description": "50% moves, 66% damage, min 2 melee",
-    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right" ]
+    "attack_vectors": [ "vector_null" ]
   },
   {
     "type": "technique",
@@ -1779,7 +1779,7 @@
       { "stat": "damage", "type": "stab", "scaling-stat": "per", "scale": 0.5 }
     ],
     "description": "50% of perception added to damage, grants Simha Vadivu.",
-    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right" ]
+    "attack_vectors": [ "vector_null" ]
   },
   {
     "type": "technique",
@@ -1815,7 +1815,7 @@
       { "stat": "damage", "type": "cut", "scaling-stat": "per", "scale": 0.5 },
       { "stat": "damage", "type": "stab", "scaling-stat": "per", "scale": 0.5 }
     ],
-    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right" ]
+    "attack_vectors": [ "vector_null" ]
   },
   {
     "type": "technique",
