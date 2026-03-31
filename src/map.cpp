@@ -3148,7 +3148,11 @@ void map::drop_items( const tripoint_bub_ms &p )
 
     float damage_total = 0.0f;
     for( item &i : items ) {
+        if( i.is_soft() || !i.made_of( phase_id::SOLID ) ) {
+            continue;
+        }
         units::mass wt_dropped = i.weight();
+        units::volume vol_dropped = i.volume();
 
         if( max_height_fallen <= 0 ) {
             debugmsg( "Tried to calculate damage for falling item, but item somehow fell less than one z-level!" );
@@ -3162,22 +3166,27 @@ void map::drop_items( const tripoint_bub_ms &p )
             // This is shorter than the average adult, but it's an *okay* approximation.
             height_fallen -= occupied_tile_fraction( creature_below->get_size() );
         }
-        // in meters, assuming one z-level is ~2.5m.
-        const double distance_to_fall = height_fallen * 2.5;
+        // In meters, assuming one z-level is ~2m.
+        const double distance_to_fall = height_fallen * 2;
 
-        // in meters per second (squared).
+        // In meters per second (squared).
         const double gravity_acceleration_constant = 9.8;
 
-        // in seconds.
+        // In seconds.
         double falling_time = sqrt( 2 * distance_to_fall / gravity_acceleration_constant );
 
-        // in meters per second.
+        // In meters per second.
         double velocity_at_impact = gravity_acceleration_constant * falling_time;
+        
+        double density = to_kilogram( wt_dropped ) / to_liter( vol_dropped );
 
-        // in joules.
-        double impact_energy = to_kilogram( wt_dropped ) * std::pow( velocity_at_impact, 2.0 ) / 2.0;
+        // Adjust the damage so e.g. a table and a bowling ball don't hit the same.
+        double adjusted_mass = to_kilogram( wt_dropped ) * std::min( density, 1.0 );
 
-        // in faces smashed (parts per hundred).
+        // In joules.
+        double impact_energy = adjusted_mass * std::pow( velocity_at_impact, 2.0 ) / 2.0;
+
+        // In faces smashed (parts per hundred).
         double damage = sqrt( impact_energy );
         damage_total += damage;
 
@@ -3191,8 +3200,8 @@ void map::drop_items( const tripoint_bub_ms &p )
             // Most of the threat comes from the projectile going very fast before it enters a creature's vertical FOV
             // or e.g. it fell from so high up that there was no indication of something coming down before it (possibly) hits
             float hit_mod = velocity_at_impact / ( dodge_mod + 5 );
-
-            int creature_hit_chance = rng( 0, 100 );
+            // 200 here so it just misses 25%+ of the time.
+            int creature_hit_chance = rng( 0, 150 );
             double avoid_chance = hit_mod * occupied_tile_fraction( creature_below->get_size() );
             // We use sqrt here because it trends back towards 1. Spectacularly low hit_mod will still have SOME chance to hit while
             // hits of >1 avoid_chance are not always going to strike the head

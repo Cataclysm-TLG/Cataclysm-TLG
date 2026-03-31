@@ -1610,12 +1610,9 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
         if( hit_entry.second.first == 0 ) {
             continue;
         }
-        map &here = get_map();
         // Low-velocity projectiles are easy to source, unless the target is blind or senseless.
         // TODO: Stealth projectiles?
-        if( !hit_entry.first->has_effect( effect_blind ) && !hit_entry.first->has_effect( effect_stunned ) && !hit_entry.first->sees( here, *this ) ) {
-            stumble_invis( *hit_entry.first, false );
-        }
+        hit_entry.first->react_to_ranged( *this );
         if( monster *const m = hit_entry.first->as_monster() ) {
             cata::event e = cata::event::make<event_type::character_ranged_attacks_monster>( getID(),
                             itype_id::NULL_ID(),
