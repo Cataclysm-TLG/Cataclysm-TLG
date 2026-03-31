@@ -757,7 +757,6 @@
         "id": "buff_kalaripayattu_chuvadu",
         "name": "Chuvadu",
         "description": "The steps for attack keep you mobile and centered as you seek an opening.\n\n+1 Dodge ability,\n+1 Dodge attempt.",
-        "unarmed_allowed": true,
         "melee_allowed": true,
         "bonus_dodges": 1,
         "forbidden_buffs_all": [ "buff_kalaripayattu_simha_vadivu" ],
@@ -780,7 +779,7 @@
       "tec_kalaripayattu_marma_sastram",
       "tec_kalaripayattu_focused_strike"
     ],
-    "weapon_category": [ "BATONS", "CLAWS", "KNIVES", "MEDIUM_SWORDS", "SHORT_SWORDS", "WHIPS" ]
+    "weapon_category": [ "BATONS", "KNIVES", "MEDIUM_SWORDS", "SHORT_SWORDS", "WHIPS" ]
   },
   {
     "type": "martial_art",
