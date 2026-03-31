@@ -14514,8 +14514,13 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
             }
             return true;
         } else if( link().length + M_SQRT2 >= link().max_length + 1 && carrier != nullptr ) {
-            carrier->add_msg_if_player( m_warning, _( "Your %s is stretched to its limit!" ),
-                                        link_name() );
+            if( carrier->is_npc() ) {
+                add_msg_if_player_sees( *carrier, m_warning, _( "%s's %s is stretched to its limit!" ),
+                                        carrier->disp_name( true, true ), link_name() );
+            } else {
+                carrier->add_msg_if_player( m_warning, _( "Your %s is stretched to its limit!" ),
+                                            link_name() );
+            }
         }
         return false;
     };
@@ -14609,8 +14614,10 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
     }
 
     // If either of the link's connected sides moved, check the cable's length.
+    // Use Chebyshev (square) distance so that diagonal movement costs the same as cardinal,
+    // matching player intuition that "N tiles" means N moves in any direction.
     if( length_check_needed ) {
-        link().length = rl_dist( pos, t_veh_bub_pos + t_veh->part( link_vp_index ).precalc[0].raw() );
+        link().length = square_dist( pos, t_veh_bub_pos + t_veh->part( link_vp_index ).precalc[0].raw() );
         if( check_length() ) {
             return reset_link( true, carrier, link_vp_index );
         }
