@@ -10,6 +10,10 @@
 #include <numeric>
 #include <ostream>
 #include <tuple>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+#include <vector>
 
 #include "active_item_cache.h"
 #include "activity_handlers.h"
@@ -17,11 +21,13 @@
 #include "ammo.h"
 #include "avatar.h"
 #include "basecamp.h"
+#include "behavior.h"
 #include "bionics.h"
 #include "bodypart.h"
 #include "cata_algo.h"
 #include "character.h"
 #include "character_id.h"
+#include "character_oracle.h"
 #include "clzones.h"
 #include "colony.h"
 #include "coordinates.h"
@@ -160,6 +166,8 @@ static const npc_class_id NC_EVAC_SHOPKEEP( "NC_EVAC_SHOPKEEP" );
 static const skill_id skill_firstaid( "firstaid" );
 
 static const trait_id trait_ALCMET( "ALCMET" );
+static const string_id<behavior::node_t> behavior_node_t_npc_needs( "npc_needs" );
+
 static const trait_id trait_IGNORE_SOUND( "IGNORE_SOUND" );
 static const trait_id trait_RETURN_TO_START_POS( "RETURN_TO_START_POS" );
 
@@ -171,6 +179,9 @@ static const zone_type_id zone_type_NPC_RETREAT( "NPC_RETREAT" );
 
 static constexpr float MAX_FLOAT = 5000000000.0f;
 
+// Legacy thresholds for NPC food consumption and complaints.
+// The behavior tree in npc_behavior.json uses different thresholds
+// via character_oracle predicates (see character_oracle.cpp).
 // TODO: These would be much better using common code or constants from character.cpp,
 // which handles the player formatting of thirst/hunger levels. Right now we
 // have magic numbers all over the place. ;(
@@ -1361,6 +1372,21 @@ void npc::move()
     }
     add_msg_debug( debugmode::DF_NPC, "NPC %s: target = %s, danger = %.1f, range = %d",
                    get_name(), target_name, ai_cache.danger, *confident_range_cache );
+
+    if( debug_mode && debugmode::enabled_filters.count( debugmode::DF_NPC_NEEDS ) ) {
+        behavior::character_oracle_t oracle( this );
+        behavior::tree bt;
+        bt.add( &behavior_node_t_npc_needs.obj() );
+        const std::string bt_goal = bt.tick( &oracle );
+        const auto saved_needs = needs;
+        decide_needs();
+        const std::string legacy_top = needs.empty()
+                                       ? "need_none" : get_need_str_id( needs[0] );
+        needs = saved_needs;
+        add_msg_debug( debugmode::DF_NPC_NEEDS,
+                       "NPC %s: BT needs goal = %s, legacy = %s",
+                       get_name(), bt_goal, legacy_top );
+    }
 
     Character &player_character = get_player_character();
     //faction opinion determines if it should consider you hostile
@@ -4662,16 +4688,19 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
     }
 
     double relative_rot = it.get_relative_rot();
+    float weight = 0.0f;
 
-    // Don't eat rotten food.
     if( relative_rot >= 1.0f ) {
-        // TODO: Allow sapro mutants to eat it anyway and make them prefer it
-        return 0.0f;
+        if( !can_consume_rot ) {
+            return 0.0f;
+        }
+        // Saprophages/saprovores prefer rotten food
+        weight = 15.0f;
+    } else {
+        // For non-rotten food, weight in range 1-10.
+        // The closer it is to expiring, the more we should aim to eat it.
+        weight = std::max( 1.0f, static_cast<float>( 10.0 * relative_rot ) );
     }
-
-    // For non-rotten food, we have a starting weight in the range 1-10
-    // The closer it is to expiring, the more we should aim to eat it.
-    float weight = std::max( 1.0, 10.0 * relative_rot );
 
     // TODO: I feel like we should exclude *really* un-fun foods (flour, hot sauce, etc)
     //       rather than discount them. Eating cooked liver is fine, eating raw flour... :/
@@ -4792,7 +4821,7 @@ bool npc::consume_food()
 
     if( inv_food.empty() ) {
         if( !needs_food() ) {
-            // TODO: Remove this and let player "exploit" hungry NPCs
+            // When NO_NPC_FOOD is active and NPC has no food, silently reset hunger/thirst
             set_hunger( 0 );
             set_thirst( 0 );
         }
@@ -5462,20 +5491,22 @@ bool npc::complain()
         deactivate_bionic_by_id( bio_radscrubber );
     }
 
-    // Hunger every 3-6 hours
-    // Since NPCs can't starve to death, respect the rules
-    if( get_hunger() > NPC_HUNGER_COMPLAIN &&
-        complain_about( hunger_string,
-                        std::max( 3_hours, time_duration::from_minutes( 60 * 8 - get_hunger() ) ),
-                        chat_snippets().snip_hungry.translated() ) ) {
-        return true;
-    }
+    // Hunger and thirst complaints only fire when NPC has food needs
+    if( needs_food() ) {
+        // Hunger every 3-6 hours
+        // Complaint frequency scales with hunger level
+        if( get_hunger() > NPC_HUNGER_COMPLAIN &&
+            complain_about( hunger_string,
+                            std::max( 3_hours, time_duration::from_minutes( 60 * 8 - get_hunger() ) ),
+                            chat_snippets().snip_hungry.translated() ) ) {
+            return true;
+        }
 
-    // Thirst every 2 hours
-    // Since NPCs can't dry to death, respect the rules
-    if( get_thirst() > NPC_THIRST_COMPLAIN &&
-        complain_about( thirst_string, 2_hours, chat_snippets().snip_thirsty.translated() ) ) {
-        return true;
+        // Thirst every 2 hours
+        if( get_thirst() > NPC_THIRST_COMPLAIN &&
+            complain_about( thirst_string, 2_hours, chat_snippets().snip_thirsty.translated() ) ) {
+            return true;
+        }
     }
 
     //Bleeding every 5 minutes

@@ -6,14 +6,21 @@
 #include "behavior.h"
 #include "bodypart.h"
 #include "character.h"
+#include "coordinates.h"
 #include "item.h"
 #include "itype.h"
 #include "make_static.h"
+#include "map.h"
+#include "map_iterator.h"
+#include "mapdata.h"
 #include "ret_val.h"
 #include "type_id.h"
 #include "units.h"
 #include "value_ptr.h"
 #include "weather.h"
+
+static const efftype_id effect_meth( "meth" );
+static const flag_id json_flag_FIRESTARTER( "FIRESTARTER" );
 
 namespace behavior
 {
@@ -80,13 +87,24 @@ status_t character_oracle_t::can_make_fire( std::string_view ) const
         }
         return false;
     } );
-    return found_fire_stuff ? status_t::running : status_t::success;
+    return found_fire_stuff ? status_t::running : status_t::failure;
 }
 
 status_t character_oracle_t::can_take_shelter( std::string_view ) const
 {
-    // There be no shelter here.
-    // The frontline is everywhere.
+    // "Take shelter" is an action: move to an indoor tile.
+    // Already indoors -> action not applicable.
+    // Outdoors with adjacent indoor tile -> shelter within reach.
+    const map &here = get_map();
+    const tripoint_bub_ms &pos = subject->pos_bub();
+    if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, pos ) ) {
+        return status_t::failure;
+    }
+    for( const tripoint_bub_ms &adj : here.points_in_radius( pos, 1 ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, adj ) && here.passable( adj ) ) {
+            return status_t::running;
+        }
+    }
     return status_t::failure;
 }
 
@@ -106,6 +124,74 @@ status_t character_oracle_t::has_food( std::string_view ) const
         return cand.is_food() && cand.get_comestible()->has_calories();
     } );
     return found_food ? status_t::running : status_t::failure;
+}
+
+status_t character_oracle_t::needs_sleep_badly( std::string_view ) const
+{
+    // DEAD_TIRED (383) = microsleeps start, 38% of MASSIVE_SLEEPINESS.
+    // Parallels needs_water_badly at 43% of death threshold.
+    if( subject->get_fatigue() >= static_cast<int>( fatigue_levels::DEAD_TIRED ) ) {
+        return status_t::running;
+    }
+    return status_t::success;
+}
+
+float character_oracle_t::thirst_urgency( std::string_view ) const
+{
+    // 0 = hydrated, 1 = dehydration death (threshold 1200, character_health.cpp).
+    static constexpr float death_threshold = 1200.0f;
+    return std::clamp( subject->get_thirst() / death_threshold, 0.0f, 1.0f );
+}
+
+float character_oracle_t::hunger_urgency( std::string_view ) const
+{
+    // 0 = healthy weight, 1 = starvation death (stored_kcal <= 0, character_health.cpp).
+    const int healthy = subject->get_healthy_kcal();
+    if( healthy <= 0 ) {
+        return 0.0f;
+    }
+    const float kcal_frac = static_cast<float>( subject->get_stored_kcal() ) / healthy;
+    return std::clamp( 1.0f - kcal_frac, 0.0f, 1.0f );
+}
+
+float character_oracle_t::warmth_urgency( std::string_view ) const
+{
+    // 0 = all bodyparts at BODYTEMP_NORM (37C),
+    // 1 = coldest bodypart at BODYTEMP_FREEZING (28C).
+    const float norm = units::to_kelvin( BODYTEMP_NORM );
+    const float freeze = units::to_kelvin( BODYTEMP_FREEZING );
+    const float range = norm - freeze;
+    if( range <= 0.0f ) {
+        return 0.0f;
+    }
+    float coldest = norm;
+    for( const bodypart_id &bp : subject->get_all_body_parts() ) {
+        const float temp = units::to_kelvin( subject->get_part_temp_conv( bp ) );
+        coldest = std::min( coldest, temp );
+    }
+    return std::clamp( ( norm - coldest ) / range, 0.0f, 1.0f );
+}
+
+status_t character_oracle_t::can_sleep( std::string_view ) const
+{
+    // Meth is the only hard blocker in Character::can_sleep().
+    // Stim, comfort, insomnia, and rng are soft score modifiers whose
+    // net effect depends on location and luck -- the oracle can't
+    // evaluate those without knowing where the NPC will sleep.
+    if( subject->has_effect( effect_meth ) ) {
+        return status_t::failure;
+    }
+    if( subject->get_fatigue() >= static_cast<int>( fatigue_levels::EXHAUSTED ) ) {
+        return status_t::running;
+    }
+    return status_t::failure;
+}
+
+float character_oracle_t::fatigue_urgency( std::string_view ) const
+{
+    // 0 = rested, 1 = forced unconsciousness (MASSIVE_SLEEPINESS = 1000).
+    static constexpr float cap = 1000.0f;
+    return std::clamp( subject->get_fatigue() / cap, 0.0f, 1.0f );
 }
 
 } // namespace behavior

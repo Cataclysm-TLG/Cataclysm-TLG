@@ -1382,7 +1382,7 @@
           "condition": { "not": { "compare_string": [ "yes", { "npc_val": "mbt_f_function_set" } ] } },
           "effect": [
             { "npc_add_var": "mbt_f_function_set", "value": "yes" },
-            { "npc_add_var": "mbt_f_function", "possible_values": [ "morale", "focus", "pain", "sleepiness" ] }
+            { "npc_add_var": "mbt_f_function", "possible_values": [ "morale", "focus", "pain", "fatigue" ] }
           ]
         },
         {
