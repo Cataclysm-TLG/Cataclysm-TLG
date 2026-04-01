@@ -66,10 +66,9 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "cooking",
-    "difficulty": 3,
-    "time": "30 m",
+    "difficulty": 0,
+    "time": "30 s",
     "autolearn": true,
-    "qualities": [ { "id": "COOK", "level": 1 } ],
     "components": [ [ [ "milk_cream_jar", 1 ] ] ],
     "charges": 5
   },
