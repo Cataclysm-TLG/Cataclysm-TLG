@@ -433,8 +433,6 @@ void npc_template::load( const JsonObject &jsobj, std::string_view src )
     jsobj.read( "<run_away>", tem.snippets.snip_run_away );
     jsobj.read( "<speech_warning>", tem.snippets.snip_speech_warning );
     jsobj.read( "<thirsty>", tem.snippets.snip_thirsty );
-    jsobj.read( "<too_cold>", tem.snippets.snip_too_cold );
-    jsobj.read( "<too_hot>", tem.snippets.snip_too_hot );
     jsobj.read( "<wait>", tem.snippets.snip_wait );
     jsobj.read( "<warn_sleep>", tem.snippets.snip_warn_sleep );
     jsobj.read( "<yawn>", tem.snippets.snip_yawn );
@@ -3963,7 +3961,6 @@ npc_follower_rules::npc_follower_rules()
     set_flag( ally_rule::ignore_noise );
     clear_flag( ally_rule::forbid_engage );
     clear_flag( ally_rule::follow_distance_2 );
-    set_flag( ally_rule::seek_shelter );
 }
 
 bool npc_follower_rules::has_flag( ally_rule test, bool check_override ) const
