@@ -821,7 +821,7 @@ void npc::assess_danger()
         cur_threat_map[direction_from( pos_bub(), pt )] += 2.0f * ( NPC_MONSTER_DANGER_MAX - dist );
         if( dist < 3 && !has_effect( effect_npc_fire_bad ) ) {
             warn_about( "fire_bad", 1_minutes );
-            add_effect( effect_npc_fire_bad, 5_turns );
+            add_effect( effect_npc_fire_bad, 20_turns );
             path.clear();
         }
     }
