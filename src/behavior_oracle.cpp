@@ -54,7 +54,7 @@ score_predicate_map = {{
         { "npc_thirst_urgency", make_score_function( &character_oracle_t::thirst_urgency ) },
         { "npc_hunger_urgency", make_score_function( &character_oracle_t::hunger_urgency ) },
         { "npc_warmth_urgency", make_score_function( &character_oracle_t::warmth_urgency ) },
-        { "npc_sleepiness_urgency", make_score_function( &character_oracle_t::sleepiness_urgency ) }
+        { "npc_fatigue_urgency", make_score_function( &character_oracle_t::fatigue_urgency ) }
     }
 };
 

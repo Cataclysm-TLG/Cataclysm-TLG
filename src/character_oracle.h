@@ -37,7 +37,7 @@ class character_oracle_t : public oracle_t
         float thirst_urgency( std::string_view ) const;
         float hunger_urgency( std::string_view ) const;
         float warmth_urgency( std::string_view ) const;
-        float sleepiness_urgency( std::string_view ) const;
+        float fatigue_urgency( std::string_view ) const;
     private:
         const Character *subject;
 };

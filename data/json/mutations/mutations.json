@@ -1647,7 +1647,7 @@
     "id": "CHEMIMBALANCE",
     "name": { "str": "Chemical Imbalance" },
     "points": -2,
-    "description": "You suffer from a minor chemical imbalance, whether mental or physical.  Minor changes to your internal chemistry will manifest themselves on occasion, such as hunger, sleepiness, narcotic effects, etc.",
+    "description": "You suffer from a minor chemical imbalance, whether mental or physical.  Minor changes to your internal chemistry will manifest themselves on occasion, such as hunger, fatigue, pain, etc.",
     "starting_trait": true,
     "random_at_chargen": false,
     "category": [ "SLIME", "MEDICAL", "CHIMERA", "ELFA" ]

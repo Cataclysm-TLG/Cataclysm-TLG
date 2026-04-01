@@ -130,7 +130,7 @@ status_t character_oracle_t::needs_sleep_badly( std::string_view ) const
 {
     // DEAD_TIRED (383) = microsleeps start, 38% of MASSIVE_SLEEPINESS.
     // Parallels needs_water_badly at 43% of death threshold.
-    if( subject->get_sleepiness() >= static_cast<int>( sleepiness_levels::DEAD_TIRED ) ) {
+    if( subject->get_fatigue() >= static_cast<int>( fatigue_levels::DEAD_TIRED ) ) {
         return status_t::running;
     }
     return status_t::success;
@@ -181,17 +181,17 @@ status_t character_oracle_t::can_sleep( std::string_view ) const
     if( subject->has_effect( effect_meth ) ) {
         return status_t::failure;
     }
-    if( subject->get_sleepiness() >= static_cast<int>( sleepiness_levels::EXHAUSTED ) ) {
+    if( subject->get_fatigue() >= static_cast<int>( fatigue_levels::EXHAUSTED ) ) {
         return status_t::running;
     }
     return status_t::failure;
 }
 
-float character_oracle_t::sleepiness_urgency( std::string_view ) const
+float character_oracle_t::fatigue_urgency( std::string_view ) const
 {
     // 0 = rested, 1 = forced unconsciousness (MASSIVE_SLEEPINESS = 1000).
     static constexpr float cap = 1000.0f;
-    return std::clamp( subject->get_sleepiness() / cap, 0.0f, 1.0f );
+    return std::clamp( subject->get_fatigue() / cap, 0.0f, 1.0f );
 }
 
 } // namespace behavior
