@@ -2638,10 +2638,6 @@ npc_action npc::address_needs( float danger )
         }
     }
 
-    if( is_player_ally() && one_in( 3 ) && seek_safe_temperature() ) {
-        return npc_noop;
-    }
-
     const auto could_sleep = [&]() {
         if( danger <= 0.01 ) {
             if( get_fatigue() >= fatigue_levels::TIRED ) {
@@ -5705,87 +5701,6 @@ bool npc::try_remove_warm_clothing()
     item_location loc( *this, warmest );
     if( can_takeoff( *warmest ).success() && takeoff( loc ) ) {
         return true;
-    }
-    return false;
-}
-
-bool npc::seek_safe_temperature()
-{
-    const map &here = get_map();
-    const units::temperature torso_temp = get_part_temp_cur( body_part_torso.id() );
-    static constexpr int seek_radius = 15;
-    const field_type_id fire = ::fd_fire;
-
-    const auto try_move_to = [&]( const tripoint_bub_ms & dest ) -> bool {
-        if( pos_bub() == dest )
-        {
-            return false;
-        }
-        update_path( dest );
-        if( path.empty() )
-        {
-            return false;
-        }
-        move_to_next();
-        return true;
-    };
-
-    if( torso_temp <= BODYTEMP_COLD ) {
-        // Look for a fire to stand near
-        tripoint_bub_ms best_fire_adj;
-        int best_fire_adj_dist = seek_radius + 1;
-        for( const tripoint_bub_ms &pt : here.points_in_radius( pos_bub(), seek_radius ) ) {
-            if( !here.get_field( pt, fire ) ) {
-                continue;
-            }
-            // Target an adjacent passable tile — don't walk into the fire itself
-            for( const tripoint_bub_ms &adj : here.points_in_radius( pt, 1 ) ) {
-                if( adj == pt || !here.passable( adj ) ) {
-                    continue;
-                }
-                const int d = rl_dist( pos_bub(), adj );
-                if( d > 0 && d < best_fire_adj_dist ) {
-                    best_fire_adj_dist = d;
-                    best_fire_adj = adj;
-                }
-            }
-        }
-        if( best_fire_adj_dist <= seek_radius ) {
-            return try_move_to( best_fire_adj );
-        }
-        // No fire found; if outside, seek nearest indoor tile
-        if( here.is_outside( pos_bub() ) ) {
-            tripoint_bub_ms shelter;
-            int shelter_dist = seek_radius + 1;
-            for( const tripoint_bub_ms &pt : here.points_in_radius( pos_bub(), seek_radius ) ) {
-                if( !here.is_outside( pt ) && here.passable( pt ) ) {
-                    const int d = rl_dist( pos_bub(), pt );
-                    if( d > 0 && d < shelter_dist ) {
-                        shelter_dist = d;
-                        shelter = pt;
-                    }
-                }
-            }
-            if( shelter_dist <= seek_radius ) {
-                return try_move_to( shelter );
-            }
-        }
-    } else if( torso_temp >= BODYTEMP_HOT && here.is_outside( pos_bub() ) ) {
-        // Seek nearest indoor tile for shade
-        tripoint_bub_ms shelter;
-        int shelter_dist = seek_radius + 1;
-        for( const tripoint_bub_ms &pt : here.points_in_radius( pos_bub(), seek_radius ) ) {
-            if( !here.is_outside( pt ) && here.passable( pt ) ) {
-                const int d = rl_dist( pos_bub(), pt );
-                if( d > 0 && d < shelter_dist ) {
-                    shelter_dist = d;
-                    shelter = pt;
-                }
-            }
-        }
-        if( shelter_dist <= seek_radius ) {
-            return try_move_to( shelter );
-        }
     }
     return false;
 }

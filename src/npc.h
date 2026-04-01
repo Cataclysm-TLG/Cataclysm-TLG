@@ -965,7 +965,6 @@ class npc : public Character
         bool adjust_worn();
         bool try_wear_warmer_clothing();
         bool try_remove_warm_clothing();
-        bool seek_safe_temperature();
         bool has_healing_item( healing_options try_to_fix );
         healing_options patient_assessment( const Character &c );
         healing_options has_healing_options();
