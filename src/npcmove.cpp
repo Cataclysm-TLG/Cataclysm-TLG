@@ -2650,11 +2650,11 @@ npc_action npc::address_needs( float danger )
             if( torso_temp <= BODYTEMP_COLD ) {
                 complain_about( "override_cold", 5_minutes,
                                 _( "I'd love to find somewhere warmer, but I'm following you instead." ),
-                                false, sounds::sound_t::order );
+                                true, sounds::sound_t::order );
             } else if( torso_temp >= BODYTEMP_HOT ) {
                 complain_about( "override_hot", 5_minutes,
                                 _( "I'd love to find somewhere cooler, but I'm following you instead." ),
-                                false, sounds::sound_t::order );
+                                true, sounds::sound_t::order );
             }
         }
     }
@@ -5543,14 +5543,14 @@ bool npc::complain()
         const bool severe = torso_temp <= BODYTEMP_VERY_COLD;
         const time_duration freq = severe ? 10_minutes : 30_minutes;
         if( complain_about( too_cold_string, freq, chat_snippets().snip_too_cold.translated(),
-                            false, sounds::sound_t::order ) ) {
+                            severe, sounds::sound_t::order ) ) {
             return true;
         }
     } else if( torso_temp >= BODYTEMP_HOT ) {
         const bool severe = torso_temp >= BODYTEMP_VERY_HOT;
         const time_duration freq = severe ? 10_minutes : 30_minutes;
         if( complain_about( too_hot_string, freq, chat_snippets().snip_too_hot.translated(),
-                            false, sounds::sound_t::order ) ) {
+                            severe, sounds::sound_t::order ) ) {
             return true;
         }
     }
@@ -5711,7 +5711,7 @@ bool npc::try_remove_warm_clothing()
                             string_format(
                                 _( "My %s is making me overheat!  You'll have to tell me to take it off." ),
                                 warmest_sturdy->tname() ),
-                            false, sounds::sound_t::order );
+                            true, sounds::sound_t::order );
         }
         return false;
     }
@@ -5752,7 +5752,7 @@ bool npc::seek_safe_temperature()
         if( !here.is_outside( pos_bub() ) ) {
             complain_about( "sheltering_cold", 5_minutes,
                             _( "I'll stay in here until it warms up.  Tell me to follow you when you need me." ),
-                            false, sounds::sound_t::order );
+                            true, sounds::sound_t::order );
             move_pause();
             return true;
         }
@@ -5778,7 +5778,7 @@ bool npc::seek_safe_temperature()
         if( best_fire_adj_dist <= seek_radius ) {
             complain_about( "seek_fire_warmth", 2_minutes,
                             _( "I'm freezing!  I'm heading for that fire." ),
-                            false, sounds::sound_t::order );
+                            true, sounds::sound_t::order );
             return try_move_to( best_fire_adj );
         }
         // No fire found; if outside, seek nearest enclosed shelter
@@ -5800,11 +5800,11 @@ bool npc::seek_safe_temperature()
                     complain_about( "seek_cold_shelter", 2_minutes,
                                     string_format( _( "I'm freezing!  I'm heading for that %s." ),
                                                    vp->vehicle().name ),
-                                    false, sounds::sound_t::order );
+                                    true, sounds::sound_t::order );
                 } else {
                     complain_about( "seek_cold_shelter", 2_minutes,
                                     _( "It's too cold out here, I need to find shelter." ),
-                                    false, sounds::sound_t::order );
+                                    true, sounds::sound_t::order );
                 }
                 return try_move_to( shelter );
             }
@@ -5838,7 +5838,7 @@ bool npc::seek_safe_temperature()
                 if( cool_dist <= seek_radius ) {
                     complain_about( "flee_fire_heat", 2_minutes,
                                     _( "The heat from that fire is unbearable!  I need to get away." ),
-                                    false, sounds::sound_t::order );
+                                    true, sounds::sound_t::order );
                     return try_move_to( cool_spot );
                 }
             }
@@ -5847,7 +5847,7 @@ bool npc::seek_safe_temperature()
         if( !here.is_outside( pos_bub() ) ) {
             complain_about( "sheltering_hot", 5_minutes,
                             _( "I'll stay in here until it cools down.  Tell me to follow you when you need me." ),
-                            false, sounds::sound_t::order );
+                            true, sounds::sound_t::order );
             move_pause();
             return true;
         }
@@ -5869,11 +5869,11 @@ bool npc::seek_safe_temperature()
                 complain_about( "seek_hot_shelter", 2_minutes,
                                 string_format( _( "It's too hot out here, I'm heading for that %s." ),
                                                vp->vehicle().name ),
-                                false, sounds::sound_t::order );
+                                true, sounds::sound_t::order );
             } else {
                 complain_about( "seek_hot_shelter", 2_minutes,
                                 _( "It's too hot out here, I need to find some shade." ),
-                                false, sounds::sound_t::order );
+                                true, sounds::sound_t::order );
             }
             return try_move_to( shelter );
         }
