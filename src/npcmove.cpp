@@ -821,14 +821,10 @@ void npc::assess_danger()
         }
         int dist = rl_dist( pos_bub(), pt );
         cur_threat_map[direction_from( pos_bub(), pt )] += 2.0f * ( NPC_MONSTER_DANGER_MAX - dist );
-        if( dist < 3 ) {
-            if( !has_effect( effect_npc_fire_bad ) ) {
-                warn_about( "fire_bad", 1_minutes );
-                path.clear();
-            }
-            // Keep refreshing the effect while fire is within 3 tiles so the NPC
-            // keeps running until they are truly clear, preventing back-and-forth.
-            add_effect( effect_npc_fire_bad, 20_turns );
+        if( dist < 3 && !has_effect( effect_npc_fire_bad ) ) {
+            warn_about( "fire_bad", 1_minutes );
+            add_effect( effect_npc_fire_bad, 5_turns );
+            path.clear();
         }
     }
 
@@ -5810,39 +5806,6 @@ bool npc::seek_safe_temperature()
             }
         }
     } else if( torso_temp >= BODYTEMP_HOT ) {
-        // Fire raises the air temperature in nearby tiles; use tile temperature to detect this.
-        // If current tile is significantly hotter than ambient (due to fire or other heat source),
-        // find the nearest passable tile that is back at ambient temperature.
-        // Skip if heat-immune (bionic heatsink, mutations, etc.)
-        if( !has_flag( flag_HEAT_IMMUNE ) ) {
-            weather_manager &weather_man = get_weather();
-            const units::temperature ambient = weather_man.temperature;
-            const units::temperature my_tile_temp = weather_man.get_temperature( pos_bub() );
-            // 5°C above ambient is a clear sign of fire/heat source nearby
-            static constexpr units::temperature_delta fire_heat_threshold = 5_C_delta;
-            if( my_tile_temp > ambient + fire_heat_threshold ) {
-                tripoint_bub_ms cool_spot;
-                int cool_dist = seek_radius + 1;
-                for( const tripoint_bub_ms &pt : here.points_in_radius( pos_bub(), seek_radius ) ) {
-                    if( pt == pos_bub() || !here.passable( pt ) || sees_dangerous_field( pt ) ) {
-                        continue;
-                    }
-                    if( weather_man.get_temperature( pt ) <= ambient + fire_heat_threshold ) {
-                        const int d = rl_dist( pos_bub(), pt );
-                        if( d < cool_dist ) {
-                            cool_dist = d;
-                            cool_spot = pt;
-                        }
-                    }
-                }
-                if( cool_dist <= seek_radius ) {
-                    complain_about( "flee_fire_heat", 2_minutes,
-                                    _( "The heat from that fire is unbearable!  I need to get away." ),
-                                    true, sounds::sound_t::order );
-                    return try_move_to( cool_spot );
-                }
-            }
-        }
         // Already in shelter — stay put
         if( !here.is_outside( pos_bub() ) ) {
             complain_about( "sheltering_hot", 5_minutes,
