@@ -1633,7 +1633,7 @@
     "flags": [ "SKINTIGHT" ],
     "armor": [
       {
-        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.0 } ],
         "covers": [ "long_tail" ],
         "encumbrance": 4,
         "specifically_covers": [ "long_tail_base", "long_tail_tip" ],
@@ -1659,6 +1659,53 @@
     "copy-from": "tail_sleeve_cut_resistant",
     "weight": "55 g",
     "volume": "102 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "description": "A tube of leather which should help protect the wearer's tail from cuts and scrapes.",
+    "weight": "210 g",
+    "volume": "255 ml",
+    "price": "0 USD",
+    "price_postapoc": "25 cent",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "color": "brown",
+    "warmth": 12,
+    "flags": [ "NORMAL" ],
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "long_tail" ],
+        "encumbrance": 8,
+        "specifically_covers": [ "long_tail_base", "long_tail_tip" ],
+        "coverage": 85
+      }
+    ]
+  },
+  {
+    "id": "tail_sleeve_leather_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "copy-from": "tail_sleeve_leather",
+    "weight": "420 g",
+    "volume": "510 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_leather_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "copy-from": "tail_sleeve_leather",
+    "weight": "105 g",
+    "volume": "152 ml",
     "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
   }
 ]

@@ -177,7 +177,7 @@
     "weapon_category": [ "WHIPS", "NINJUTSU_WEAPONS", "KUNG_FU_WEAPONS" ],
     "melee_damage": { "bash": 18 }
   },
-    {
+  {
     "type": "ITEM",
     "id": "urumi",
     "category": "weapons",

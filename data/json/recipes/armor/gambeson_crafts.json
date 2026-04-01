@@ -122,7 +122,7 @@
     "//2": "roughly 20 hours total for the craft while skilled.  Lower time thanks to big premade sheets.",
     "//3": "byproducts are 25% patches and 75% scraps (scrap is 1g and patch is 3g)",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
+    "subcategory": "CSC_ARMOR_LEGS",
     "skill_used": "tailor",
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_articulation" }, { "proficiency": "prof_quilting" } ],
     "difficulty": 5,
