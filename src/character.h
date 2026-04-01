@@ -3503,16 +3503,18 @@ class Character : public Creature, public visitable
         void modify_health( const islot_comestible &comest );
         /** Used to compute how filling a food is.*/
         double compute_effective_food_volume_ratio( const item &food ) const;
-        /** Used to calculate water and dry volume of a chewed food **/
+        /** Used to calculate water and dry volume of a chewed food. **/
         std::pair<units::volume, units::volume> masticated_volume( const item &food ) const;
         /** Used to to display how filling a food is. */
         int compute_calories_per_effective_volume( const item &food,
                 const nutrients *nutrient = nullptr ) const;
-        /** Handles the effects of consuming an item. Returns false if nothing was consumed */
+        /** Handles the effects of consuming an item. Returns false if nothing was consumed. */
         bool consume_effects( item &food );
-        /** Check whether the character can consume this very item */
+        /** Check whether the character can consume this very item. */
         bool can_consume_as_is( const item &it ) const;
-        /** True if the character has enough skill (in cooking or survival) to estimate time to rot */
+        /** Check whether we are OK with eating rotten food. */
+        bool can_consume_rot() const;
+        /** True if the character has enough skill (in cooking or survival) to estimate time to rot. */
         bool can_estimate_rot() const;
         /**
          * Returns a reference to the item itself (if it's consumable),
