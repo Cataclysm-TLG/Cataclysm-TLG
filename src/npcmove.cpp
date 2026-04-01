@@ -5637,8 +5637,6 @@ bool npc::try_wear_warmer_clothing()
         return it.is_armor() && !is_worn( it ) && it.get_warmth() > 0;
     } );
     if( candidates.empty() ) {
-        complain_about( "too_cold_no_clothes", 5_minutes,
-                        _( "I'm freezing and I don't have anything warmer to wear!" ) );
         return false;
     }
     // Try the warmest first
@@ -5685,12 +5683,10 @@ bool npc::try_remove_warm_clothing()
         }
     }
     if( removable.empty() ) {
-        if( warmest_sturdy ) {
-            complain_about( "too_hot_armor", 1_minutes,
-                            string_format(
-                                _( "My %s is making me overheat!  You'll have to tell me to take it off." ),
-                                warmest_sturdy->tname() ),
-                            true, sounds::sound_t::order );
+        if( warmest_sturdy && one_in( 4 ) ) {
+            say( string_format(
+                     _( "My %s is making me overheat!  You'll have to tell me to take it off." ),
+                     warmest_sturdy->tname() ) );
         }
         return false;
     }
@@ -5698,8 +5694,10 @@ bool npc::try_remove_warm_clothing()
     []( const item * a, const item * b ) {
         return a->get_warmth() < b->get_warmth();
     } );
+    const int takeoff_cost = item_wear_cost( *warmest );
     item_location loc( *this, warmest );
     if( can_takeoff( *warmest ).success() && takeoff( loc ) ) {
+        mod_moves( -takeoff_cost );
         return true;
     }
     return false;
