@@ -2638,21 +2638,8 @@ npc_action npc::address_needs( float danger )
         }
     }
 
-    if( is_player_ally() ) {
-        if( rules.has_flag( ally_rule::seek_shelter ) && seek_safe_temperature() ) {
-            return npc_noop;
-        } else if( !rules.has_flag( ally_rule::seek_shelter ) ) {
-            const units::temperature torso_temp = get_part_temp_cur( body_part_torso.id() );
-            if( torso_temp <= BODYTEMP_COLD ) {
-                complain_about( "override_cold", 5_minutes,
-                                _( "I'd love to find somewhere warmer, but I'm following you instead." ),
-                                true, sounds::sound_t::order );
-            } else if( torso_temp >= BODYTEMP_HOT ) {
-                complain_about( "override_hot", 5_minutes,
-                                _( "I'd love to find somewhere cooler, but I'm following you instead." ),
-                                true, sounds::sound_t::order );
-            }
-        }
+    if( is_player_ally() && one_in( 3 ) && seek_safe_temperature() ) {
+        return npc_noop;
     }
 
     const auto could_sleep = [&]() {
@@ -5744,14 +5731,6 @@ bool npc::seek_safe_temperature()
     };
 
     if( torso_temp <= BODYTEMP_COLD ) {
-        // Already in shelter — stay put
-        if( !here.is_outside( pos_bub() ) ) {
-            complain_about( "sheltering_cold", 5_minutes,
-                            _( "I'll stay in here until it warms up.  Tell me to follow you when you need me." ),
-                            true, sounds::sound_t::order );
-            move_pause();
-            return true;
-        }
         // Look for a fire to stand near
         tripoint_bub_ms best_fire_adj;
         int best_fire_adj_dist = seek_radius + 1;
@@ -5772,12 +5751,9 @@ bool npc::seek_safe_temperature()
             }
         }
         if( best_fire_adj_dist <= seek_radius ) {
-            complain_about( "seek_fire_warmth", 2_minutes,
-                            _( "I'm freezing!  I'm heading for that fire." ),
-                            true, sounds::sound_t::order );
             return try_move_to( best_fire_adj );
         }
-        // No fire found; if outside, seek nearest enclosed shelter
+        // No fire found; if outside, seek nearest indoor tile
         if( here.is_outside( pos_bub() ) ) {
             tripoint_bub_ms shelter;
             int shelter_dist = seek_radius + 1;
@@ -5791,30 +5767,11 @@ bool npc::seek_safe_temperature()
                 }
             }
             if( shelter_dist <= seek_radius ) {
-                const optional_vpart_position vp = here.veh_at( shelter );
-                if( vp ) {
-                    complain_about( "seek_cold_shelter", 2_minutes,
-                                    string_format( _( "I'm freezing!  I'm heading for that %s." ),
-                                                   vp->vehicle().name ),
-                                    true, sounds::sound_t::order );
-                } else {
-                    complain_about( "seek_cold_shelter", 2_minutes,
-                                    _( "It's too cold out here, I need to find shelter." ),
-                                    true, sounds::sound_t::order );
-                }
                 return try_move_to( shelter );
             }
         }
-    } else if( torso_temp >= BODYTEMP_HOT ) {
-        // Already in shelter — stay put
-        if( !here.is_outside( pos_bub() ) ) {
-            complain_about( "sheltering_hot", 5_minutes,
-                            _( "I'll stay in here until it cools down.  Tell me to follow you when you need me." ),
-                            true, sounds::sound_t::order );
-            move_pause();
-            return true;
-        }
-        // Seek nearest enclosed shelter for shade
+    } else if( torso_temp >= BODYTEMP_HOT && here.is_outside( pos_bub() ) ) {
+        // Seek nearest indoor tile for shade
         tripoint_bub_ms shelter;
         int shelter_dist = seek_radius + 1;
         for( const tripoint_bub_ms &pt : here.points_in_radius( pos_bub(), seek_radius ) ) {
@@ -5827,17 +5784,6 @@ bool npc::seek_safe_temperature()
             }
         }
         if( shelter_dist <= seek_radius ) {
-            const optional_vpart_position vp = here.veh_at( shelter );
-            if( vp ) {
-                complain_about( "seek_hot_shelter", 2_minutes,
-                                string_format( _( "It's too hot out here, I'm heading for that %s." ),
-                                               vp->vehicle().name ),
-                                true, sounds::sound_t::order );
-            } else {
-                complain_about( "seek_hot_shelter", 2_minutes,
-                                _( "It's too hot out here, I need to find some shade." ),
-                                true, sounds::sound_t::order );
-            }
             return try_move_to( shelter );
         }
     }

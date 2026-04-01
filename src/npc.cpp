@@ -3963,7 +3963,6 @@ npc_follower_rules::npc_follower_rules()
     set_flag( ally_rule::ignore_noise );
     clear_flag( ally_rule::forbid_engage );
     clear_flag( ally_rule::follow_distance_2 );
-    set_flag( ally_rule::seek_shelter );
 }
 
 bool npc_follower_rules::has_flag( ally_rule test, bool check_override ) const

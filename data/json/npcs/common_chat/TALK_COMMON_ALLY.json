@@ -325,16 +325,6 @@
         },
         {
           "concatenate": [
-            { "npc_override": "seek_shelter", "yes": "  OVERRIDE: ", "no": "  " },
-            {
-              "npc_rule": "seek_shelter",
-              "yes": "<ally_rule_seek_shelter_true_text>",
-              "no": "<ally_rule_seek_shelter_false_text>"
-            }
-          ]
-        },
-        {
-          "concatenate": [
             { "npc_override": "use_guns", "yes": "  OVERRIDE: ", "no": "  " },
             {
               "npc_rule": "use_guns",
@@ -405,15 +395,6 @@
         },
         "topic": "TALK_COMBAT_COMMANDS",
         "effect": { "toggle_npc_rule": "follow_distance_2" }
-      },
-      {
-        "truefalsetext": {
-          "condition": { "npc_rule": "seek_shelter" },
-          "true": "Follow me regardless of temperature.",
-          "false": "Seek shelter when dangerously cold or hot."
-        },
-        "topic": "TALK_COMBAT_COMMANDS",
-        "effect": { "toggle_npc_rule": "seek_shelter" }
       },
       {
         "truefalsetext": {
