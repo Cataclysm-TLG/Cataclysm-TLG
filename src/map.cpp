@@ -6289,7 +6289,7 @@ item map::liquid_from( const tripoint_bub_ms &p ) const
     weather_manager &weather = get_weather();
     ter_t source_terrain = ter( p ).obj();
 
-    if( !source_terrain.liquid_source_item_id.empty() &&
+ if( source_terrain.liquid_source_item_id.is_valid() &&
         source_terrain.liquid_source_count == std::make_pair( 0, 0 ) ) {
 
         item ret( source_terrain.liquid_source_item_id, calendar::turn, item::INFINITE_CHARGES );

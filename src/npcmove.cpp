@@ -1479,9 +1479,10 @@ void npc::move()
     } else {
         // No present danger
         cleanup_on_no_danger();
-
-        action = address_needs();
-        print_action( "address_needs %s", action );
+        if( is_player_ally() ) {
+            action = address_needs();
+            print_action( "address_needs %s", action );
+        }
 
         if( action == npc_undecided ) {
             action = address_player();
@@ -3449,11 +3450,13 @@ void npc::avoid_friendly_fire()
      * We pass a <danger> value of NPC_DANGER_VERY_LOW + 1 so that we won't start
      * eating food (or, god help us, sleeping).
      */
-    npc_action action = address_needs( NPC_DANGER_VERY_LOW + 1 );
-    if( action == npc_undecided ) {
-        move_pause();
+    if( is_player_ally() ) {
+        npc_action action = address_needs( NPC_DANGER_VERY_LOW + 1 );
+        if( action == npc_undecided ) {
+            move_pause();
+        }
+        execute_action( action );
     }
-    execute_action( action );
 }
 
 void npc::escape_explosion()
@@ -4724,7 +4727,8 @@ void npc::use_painkiller()
 // Be eaten before it rots (favor soon-to-rot perishables)
 //
 // TODO: Cache the results of this, *especially* if there's nothing we want to eat.
-float npc::rate_food( const item &it, int want_nutr, int want_quench )
+float npc::rate_food( const Character &who, const item &it, int want_nutr,
+                        int want_quench )
 {
     const auto &food = it.get_comestible();
     if( !food ) {
@@ -4764,7 +4768,7 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
 
     if( it.has_vitamin( vitamin_ethanol ) ) {
         // Alcohol metabolizers can take a sip while sober.
-        if( !has_trait( trait_ALCMET ) || !has_effect( effect_drunk ) ) {
+        if( !who.has_trait( trait_ALCMET ) || !who.has_effect( effect_drunk ) ) {
             return 0.0f;
         }
     }
@@ -4772,8 +4776,8 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
     // Cannibals can eat human flesh or drink human blood.
     // Bloodfeeders can drink human blood.
     if( it.has_vitamin( vitamin_human_flesh_vitamin ) ) {
-        if( !( has_flag( json_flag_CANNIBAL ) ||
-               ( has_flag( json_flag_BLOODFEEDER ) && it.has_flag( flag_HEMOVORE_FUN ) ) ) ) {
+        if( !( who.has_flag( json_flag_CANNIBAL ) ||
+               ( who.has_flag( json_flag_BLOODFEEDER ) && it.has_flag( flag_HEMOVORE_FUN ) ) ) ) {
             return 0.0f;
         }
     }
@@ -4782,7 +4786,7 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
     float weight = 0.0f;
 
     if( relative_rot >= 1.0f ) {
-        if( !( can_consume_rot() ) ) {
+        if( !( who.can_consume_rot() ) ) {
             return 0.0f;
         }
         // Saprophages/saprovores prefer rotten food
@@ -4923,7 +4927,7 @@ bool npc::consume_food()
         }
     } else {
         for( item * const &food_item : inv_food ) {
-            float cur_weight = rate_food( *food_item, want_hunger, want_quench );
+            float cur_weight = rate_food( *this, *food_item, want_hunger, want_quench );
             // Note: will_eat is expensive, avoid calling it if possible
             if( cur_weight > best_weight && will_eat( *food_item ).success() ) {
                 best_weight = cur_weight;

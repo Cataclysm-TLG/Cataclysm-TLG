@@ -5491,9 +5491,7 @@ float Character::activity_level() const
 
 bool Character::needs_food() const
 {
-    return is_avatar() ||
-           ( is_npc() && get_faction() != nullptr &&
-             is_ally( get_player_character() ) );
+    return is_avatar() || ( as_npc()->is_player_ally() );
 }
 
 void Character::update_needs( int rate_multiplier )
@@ -5636,19 +5634,24 @@ void Character::update_needs( int rate_multiplier )
 
 needs_rates Character::calc_needs_rates() const
 {
+    needs_rates rates;
+    // Only the player and their allies care about any of this.
+    if( !is_avatar() && !as_npc()->is_player_ally() ) {
+        rates.hunger = 0.f;
+        rates.kcal = 0.f;
+        rates.fatigue = 0.f;
+        rates.thirst = 0.f;
+        rates.recovery = 1.f;
+        return rates;
+    }
+
     const effect &sleep = get_effect( effect_sleep );
     const bool asleep = !sleep.is_null();
-
-    needs_rates rates;
     rates.hunger = metabolic_rate();
-
     rates.kcal = get_bmr();
-
     add_msg_debug_if( is_avatar(), debugmode::DF_CHAR_CALORIES, "Metabolic rate: %.2f", rates.hunger );
-
     rates.thirst = 1.f;
     rates.fatigue = 1.f;
-
     if( asleep ) {
         calc_sleep_recovery_rate( rates );
     } else {
