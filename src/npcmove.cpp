@@ -4691,7 +4691,7 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
     float weight = 0.0f;
 
     if( relative_rot >= 1.0f ) {
-        if( !can_consume_rot ) {
+        if( !( can_consume_rot() ) ) {
             return 0.0f;
         }
         // Saprophages/saprovores prefer rotten food

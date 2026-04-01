@@ -1762,6 +1762,11 @@ bool Character::can_consume_as_is( const item &it ) const
     return false;
 }
 
+bool Character::can_consume_rot() const
+{
+    return has_trait( trait_SAPROVORE ) || has_trait( trait_SAPROPHAGE );
+}
+
 item &Character::get_consumable_from( item &it ) const
 {
     item *ret = nullptr;
