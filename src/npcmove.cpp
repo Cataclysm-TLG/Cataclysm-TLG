@@ -1999,7 +1999,6 @@ void npc::execute_action( npc_action action )
 
         case npc_player_activity:
             do_player_activity();
-            complain();
             break;
 
         case npc_undecided:
@@ -5512,14 +5511,14 @@ bool npc::complain()
         const bool severe = torso_temp <= BODYTEMP_VERY_COLD;
         const time_duration freq = severe ? 10_minutes : 30_minutes;
         if( complain_about( too_cold_string, freq, chat_snippets().snip_too_cold.translated(),
-                            severe, sounds::sound_t::order ) ) {
+                            severe ) ) {
             return true;
         }
     } else if( torso_temp >= BODYTEMP_HOT ) {
         const bool severe = torso_temp >= BODYTEMP_VERY_HOT;
         const time_duration freq = severe ? 10_minutes : 30_minutes;
         if( complain_about( too_hot_string, freq, chat_snippets().snip_too_hot.translated(),
-                            severe, sounds::sound_t::order ) ) {
+                            severe ) ) {
             return true;
         }
     }
