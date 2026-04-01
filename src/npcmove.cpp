@@ -5690,7 +5690,7 @@ bool npc::try_remove_warm_clothing()
     }
     if( removable.empty() ) {
         if( warmest_sturdy ) {
-            complain_about( "too_hot_armor", 5_minutes,
+            complain_about( "too_hot_armor", 1_minutes,
                             string_format(
                                 _( "My %s is making me overheat!  You'll have to tell me to take it off." ),
                                 warmest_sturdy->tname() ),
