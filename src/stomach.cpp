@@ -397,7 +397,7 @@ food_summary stomach_contents::digest( const Character &owner, const needs_rates
     food_summary digested;
     stomach_digest_rates rates = get_digest_rates( metabolic_rates, owner );
 
-    // Digest water, but no more than in stomach.
+    // Digest water, but no more than what's in our stomach.
     digested.water = std::min( water, rates.water * five_mins );
     water -= digested.water;
 
@@ -406,30 +406,38 @@ food_summary stomach_contents::digest( const Character &owner, const needs_rates
         return digested;
     }
 
-    // Digest solids, but no more than in stomach.
+    // Digest solids, but no more than what's in our in stomach.
     digested.solids = std::min( contents, rates.solids * half_hours );
     contents -= digested.solids;
 
-    // Digest kCal -- use min_kcal by default, but no more than what's in stomach,
+    // Ensure that we don't digest more than what's in our stomach,
     // and no less than percentage_kcal of what's in stomach.
     int kcal_fraction = std::lround( nutr.kcal() * rates.percent_kcal );
-    digested.nutr.calories = half_hours * clamp<int64_t>( rates.min_calories, kcal_fraction * 1000,
+    int max_kcal_to_digest = nutr.calories;
+    int target_kcal = half_hours * clamp<int64_t>( rates.min_calories, kcal_fraction * 1000,
                              nutr.calories );
-
+    digested.nutr.calories = std::min( max_kcal_to_digest, target_kcal );
+    // Catch tiny kcal remainder values so the stomach can actually fully empty.
+    if( digested.nutr.calories <= 0 && nutr.calories > 0 && nutr.calories < rates.min_calories * 2 ) {
+        digested.nutr.calories = nutr.calories;
+    }
     // Digest vitamins just like we did kCal, but we need to do one at a time.
     for( const std::pair<const vitamin_id, int> &vit : nutr.vitamins() ) {
         if( vit.first->type() != vitamin_type::DRUG ) {
             int vit_fraction = std::lround( vit.second * rates.percent_vitamin );
-            digested.nutr.set_vitamin( vit.first, half_hours * clamp( rates.min_vitamin, vit_fraction,
-                                       vit.second ) );
+            int max_vit_to_digest = vit.second;  // Available vitamin in stomach
+            int target_vit = half_hours * clamp( rates.min_vitamin, vit_fraction,
+                                       vit.second );
+            digested.nutr.set_vitamin( vit.first, std::min( max_vit_to_digest, target_vit ) );
         }
         // drug vitamins are absorbed to the blood instantly after the first stomach step.
         // this makes the drug vitamins easier to balance (no need to account for slow trickle-ing in of the drug)
         else if( vit.first->type() == vitamin_type::DRUG && stomach ) {
-            digested.nutr.set_vitamin( vit.first, vit.second );
+            // For drugs, we still need to check if they're available
+            int max_drug_to_absorb = vit.second;
+            digested.nutr.set_vitamin( vit.first, max_drug_to_absorb );
         }
     }
-
     nutr -= digested.nutr;
     return digested;
 }

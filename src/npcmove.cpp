@@ -155,6 +155,8 @@ static const itype_id itype_lsd( "lsd" );
 static const itype_id itype_oxygen_tank( "oxygen_tank" );
 static const itype_id itype_smoxygen_tank( "smoxygen_tank" );
 static const itype_id itype_thorazine( "thorazine" );
+static const itype_id itype_water( "water" );
+static const itype_id itype_water_clean( "water_clean" );
 
 static const json_character_flag json_flag_CANNIBAL( "CANNIBAL" );
 static const json_character_flag json_flag_BLOODFEEDER( "BLOODFEEDER" );
@@ -164,6 +166,7 @@ static const npc_class_id NC_EVAC_SHOPKEEP( "NC_EVAC_SHOPKEEP" );
 static const skill_id skill_firstaid( "firstaid" );
 
 static const trait_id trait_ALCMET( "ALCMET" );
+static const string_id<behavior::node_t> behavior_node_t_npc_homeostasis( "npc_homeostasis" );
 static const string_id<behavior::node_t> behavior_node_t_npc_needs( "npc_needs" );
 
 static const trait_id trait_IGNORE_SOUND( "IGNORE_SOUND" );
@@ -1476,9 +1479,10 @@ void npc::move()
     } else {
         // No present danger
         cleanup_on_no_danger();
-
-        action = address_needs();
-        print_action( "address_needs %s", action );
+        if( is_player_ally() ) {
+            action = address_needs();
+            print_action( "address_needs %s", action );
+        }
 
         if( action == npc_undecided ) {
             action = address_player();
@@ -1726,11 +1730,21 @@ void npc::execute_action( npc_action action )
             // TODO: Handle empty path better
             if( best_spot == pos_bub() || path.empty() ) {
                 move_pause();
-                if( !has_effect( effect_lying_down ) ) {
+                if( !in_sleep_state() ) {
                     activate_bionic_by_id( bio_sleep_shutdown );
-                    add_effect( effect_lying_down, 30_minutes, false, 1 );
                     if( !player_character.in_sleep_state() ) {
                         add_msg_if_player_sees( *this, _( "%s lies down to sleep." ), get_name() );
+                    }
+                    // NPCs check can_sleep() for hard blockers (meth, stim)
+                    // but fall asleep directly on success. The lying_down ->
+                    // can_sleep() rng retry cycle is for the player who gets
+                    // "you try to sleep but can't" feedback. Without direct
+                    // fall_asleep(), NPC sleepiness keeps incrementing while
+                    // they lie awake (recovery only runs while asleep).
+                    if( !is_avatar() && can_sleep() ) {
+                        fall_asleep();
+                    } else {
+                        add_effect( effect_lying_down, 30_minutes, false, 1 );
                     }
                 }
             } else {
@@ -2509,6 +2523,21 @@ healing_options npc::patient_assessment( const Character &c )
 
 npc_action npc::address_needs( float danger )
 {
+    // Check if NPC needs warmth via the oracle predicate directly.
+    // The full BT subtree is too narrow for gating -- it only knows about
+    // inventory items and indoor tiles, not ground items. The predicate
+    // just checks bodypart temperature.
+    bool needs_warmth = false;
+    {
+        behavior::character_oracle_t oracle( this );
+        needs_warmth = oracle.needs_warmth_badly( "" ) == behavior::status_t::running;
+        if( needs_warmth ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS,
+                           "NPC %s: needs warmth (trying wear, ground wear, shelter)",
+                           get_name() );
+        }
+    }
+
     map &here = get_map();
 
     Character &player_character = get_player_character();
@@ -2579,6 +2608,22 @@ npc_action npc::address_needs( float danger )
         }
     }
 
+    // Warmth: wearing clothes costs a turn but hypothermia is life-threatening.
+    // Before danger gate, like extreme food.
+    if( needs_warmth && wear_warmest_item() ) {
+        return npc_noop;
+    }
+    // Warmth: adjacent ground clothing, instant (no movement).
+    if( needs_warmth ) {
+        for( scored_item &c : find_nearby_warm_clothing() ) {
+            if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
+                if( wear_item_at( c.loc ) ) {
+                    return npc_noop;
+                }
+            }
+        }
+    }
+
     // Extreme thirst or hunger, bypass safety check.
     if( get_thirst() > 80 ||
         get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
@@ -2587,6 +2632,22 @@ npc_action npc::address_needs( float danger )
         }
         if( consume_food() ) {
             return npc_noop;
+        }
+        // Adjacent ground food, instant.
+        for( scored_item &c : find_nearby_food() ) {
+            if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
+                if( consume_food_at( c.loc ) ) {
+                    return npc_noop;
+                }
+            }
+        }
+        // Adjacent water terrain, instant.
+        for( scored_water_source &ws : find_nearby_water_sources() ) {
+            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
+                if( drink_from_water_source( ws.pos ) ) {
+                    return npc_noop;
+                }
+            }
         }
     }
     // Hallucinations have a chance of disappearing each turn.
@@ -2598,6 +2659,50 @@ npc_action npc::address_needs( float danger )
         return npc_undecided;
     }
 
+    // Warmth: shelter requires movement, only safe at low danger.
+    if( needs_warmth && take_shelter_nearby() ) {
+        return npc_noop;
+    }
+    // Warmth: path to distant ground clothing.
+    if( needs_warmth ) {
+        for( scored_item &c : find_nearby_warm_clothing() ) {
+            if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
+                return npc_noop;
+            }
+        }
+    }
+
+    // Extreme food/water pathing: the pre-gate block only consumed adjacent
+    // resources. If extreme need persists and we passed the danger gate,
+    // path to distant ground food or water deterministically.
+    if( get_thirst() > 80 ||
+        get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
+        for( scored_item &c : find_nearby_food() ) {
+            if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
+                if( consume_food_at( c.loc ) ) {
+                    return npc_noop;
+                }
+            } else {
+                if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
+                    return npc_noop;
+                }
+            }
+        }
+        for( scored_water_source &ws : find_nearby_water_sources() ) {
+            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
+                if( drink_from_water_source( ws.pos ) ) {
+                    return npc_noop;
+                }
+            } else {
+                if( move_to_and_verify( ws.pos ) ) {
+                    return npc_noop;
+                }
+            }
+        }
+    }
+
+    // Normal food/drink: camp -> inventory -> ground food -> terrain water.
+    // All under the same random gate so ground never outranks camp/inventory.
     if( one_in( 3 ) && ( get_thirst() > NPC_THIRST_CONSUME ||
                          get_hunger() > NPC_HUNGER_CONSUME ) ) {
         if( consume_food_from_camp() ) {
@@ -2605,6 +2710,28 @@ npc_action npc::address_needs( float danger )
         }
         if( consume_food() ) {
             return npc_noop;
+        }
+        for( scored_item &c : find_nearby_food() ) {
+            if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
+                if( consume_food_at( c.loc ) ) {
+                    return npc_noop;
+                }
+            } else {
+                if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
+                    return npc_noop;
+                }
+            }
+        }
+        for( scored_water_source &ws : find_nearby_water_sources() ) {
+            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
+                if( drink_from_water_source( ws.pos ) ) {
+                    return npc_noop;
+                }
+            } else {
+                if( move_to_and_verify( ws.pos ) ) {
+                    return npc_noop;
+                }
+            }
         }
     }
 
@@ -2641,9 +2768,7 @@ npc_action npc::address_needs( float danger )
     // TODO: More risky attempts at sleep when exhausted
     if( could_sleep() ) {
         if( !is_player_ally() ) {
-            // TODO: Make tired NPCs handle sleep offscreen
-            set_fatigue( 0 );
-            return npc_undecided;
+            return npc_sleep;
         }
 
         if( rules.has_flag( ally_rule::allow_sleep ) ||
@@ -3325,11 +3450,13 @@ void npc::avoid_friendly_fire()
      * We pass a <danger> value of NPC_DANGER_VERY_LOW + 1 so that we won't start
      * eating food (or, god help us, sleeping).
      */
-    npc_action action = address_needs( NPC_DANGER_VERY_LOW + 1 );
-    if( action == npc_undecided ) {
-        move_pause();
+    if( is_player_ally() ) {
+        npc_action action = address_needs( NPC_DANGER_VERY_LOW + 1 );
+        if( action == npc_undecided ) {
+            move_pause();
+        }
+        execute_action( action );
     }
-    execute_action( action );
 }
 
 void npc::escape_explosion()
@@ -4600,7 +4727,8 @@ void npc::use_painkiller()
 // Be eaten before it rots (favor soon-to-rot perishables)
 //
 // TODO: Cache the results of this, *especially* if there's nothing we want to eat.
-float npc::rate_food( const item &it, int want_nutr, int want_quench )
+float npc::rate_food( const Character &who, const item &it, int want_nutr,
+                        int want_quench )
 {
     const auto &food = it.get_comestible();
     if( !food ) {
@@ -4640,7 +4768,7 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
 
     if( it.has_vitamin( vitamin_ethanol ) ) {
         // Alcohol metabolizers can take a sip while sober.
-        if( !has_trait( trait_ALCMET ) || !has_effect( effect_drunk ) ) {
+        if( !who.has_trait( trait_ALCMET ) || !who.has_effect( effect_drunk ) ) {
             return 0.0f;
         }
     }
@@ -4648,8 +4776,8 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
     // Cannibals can eat human flesh or drink human blood.
     // Bloodfeeders can drink human blood.
     if( it.has_vitamin( vitamin_human_flesh_vitamin ) ) {
-        if( !( has_flag( json_flag_CANNIBAL ) ||
-               ( has_flag( json_flag_BLOODFEEDER ) && it.has_flag( flag_HEMOVORE_FUN ) ) ) ) {
+        if( !( who.has_flag( json_flag_CANNIBAL ) ||
+               ( who.has_flag( json_flag_BLOODFEEDER ) && it.has_flag( flag_HEMOVORE_FUN ) ) ) ) {
             return 0.0f;
         }
     }
@@ -4658,7 +4786,7 @@ float npc::rate_food( const item &it, int want_nutr, int want_quench )
     float weight = 0.0f;
 
     if( relative_rot >= 1.0f ) {
-        if( !( can_consume_rot() ) ) {
+        if( !( who.can_consume_rot() ) ) {
             return 0.0f;
         }
         // Saprophages/saprovores prefer rotten food
@@ -4728,13 +4856,18 @@ bool npc::consume_food_from_camp()
     }
     basecamp *bcp = *potential_bc;
 
-    // Handle water
+    // Handle water -- route through stomach so thirst decreases naturally.
     if( get_thirst() > 40 && bcp->has_water() && bcp->allowed_access_by( *this, true ) ) {
-        complain_about( "camp_water_thanks", 1_hours,
-                        chat_snippets().snip_camp_water_thanks.translated(), false );
-        // TODO: Stop skipping the stomach for this, actually put the water in there.
-        set_thirst( 0 );
-        return true;
+        const units::volume want = std::max( 0_ml,
+                                             units::from_milliliter( get_thirst() * 5 ) );
+        const units::volume room = stomach.stomach_remaining( *this );
+        const units::volume intake = std::min( want, room );
+        if( intake > 0_ml ) {
+            stomach.ingest( { intake, 0_ml, {} } );
+            complain_about( "camp_water_thanks", 1_hours,
+                            chat_snippets().snip_camp_water_thanks.translated(), false );
+            return true;
+        }
     }
 
     // Handle food
@@ -4794,7 +4927,7 @@ bool npc::consume_food()
         }
     } else {
         for( item * const &food_item : inv_food ) {
-            float cur_weight = rate_food( *food_item, want_hunger, want_quench );
+            float cur_weight = rate_food( *this, *food_item, want_hunger, want_quench );
             // Note: will_eat is expensive, avoid calling it if possible
             if( cur_weight > best_weight && will_eat( *food_item ).success() ) {
                 best_weight = cur_weight;
@@ -4974,7 +5107,7 @@ void npc::reach_omt_destination()
                 if( player_character.cache_has_item_with_flag( flag_TWO_WAY_RADIO, true ) &&
                     cache_has_item_with_flag( flag_TWO_WAY_RADIO, true ) ) {
                     add_msg_if_player_sees( pos_bub(), m_info, _( "From your two-way radio you hear %s reporting in, "
-                                            "'I've arrived, boss!'" ), disp_name() );
+                                            "'I've arrived.'" ), disp_name() );
                 }
             }
         } else {
@@ -5548,6 +5681,212 @@ void npc::do_reload( const item_location &it )
 
     // Otherwise the NPC may not equip the weapon until they see danger
     has_new_items = true;
+}
+
+bool npc::wear_warmest_item()
+{
+    // Find unworn item with highest warmth that we can wear.
+    item *best = nullptr;
+    int best_warmth = 0;
+    has_item_with( [this, &best, &best_warmth]( const item & candidate ) {
+        if( !is_worn( candidate ) && candidate.get_warmth() > best_warmth &&
+            can_wear( candidate ).success() ) {
+            best = const_cast<item *>( &candidate );
+            best_warmth = candidate.get_warmth();
+        }
+        return false;
+    } );
+    if( !best ) {
+        return false;
+    }
+    item_location loc( *this, best );
+    return wear( loc, false ).has_value();
+}
+
+bool npc::take_shelter_nearby()
+{
+    const map &here = get_map();
+    const tripoint_bub_ms &cur = pos_bub();
+    if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, cur ) ) {
+        return false;
+    }
+    const creature_tracker &creatures = get_creature_tracker();
+    for( const tripoint_bub_ms &adj : here.points_in_radius( cur, 1 ) ) {
+        if( adj == cur ) {
+            continue;
+        }
+        if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, adj ) &&
+            here.passable( adj ) && !creatures.creature_at( adj ) ) {
+            move_to( adj );
+            if( pos_bub() == adj ) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+std::vector<npc::scored_water_source> npc::find_nearby_water_sources() const
+{
+    static const std::set<itype_id> allowed = {
+        itype_water, itype_water_clean
+    };
+    std::vector<scored_water_source> results;
+    const map &here = get_map();
+    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), 6 ) ) {
+        if( !sees( here, p ) ) {
+            continue;
+        }
+        const ter_t &t = here.ter( p ).obj();
+        if( t.liquid_source_item_id.is_null() ) {
+            continue;
+        }
+        if( t.liquid_source_count != std::make_pair( 0, 0 ) ) {
+            continue;
+        }
+        if( allowed.count( t.liquid_source_item_id ) == 0 ) {
+            continue;
+        }
+        results.push_back( { p, rl_dist( pos_bub(), p ) } );
+    }
+    std::sort( results.begin(), results.end(),
+    []( const scored_water_source & a, const scored_water_source & b ) {
+        return a.dist < b.dist;
+    } );
+    return results;
+}
+
+std::vector<npc::scored_item> npc::find_nearby_food()
+{
+    std::vector<scored_item> results;
+    if( is_player_ally() && !rules.has_flag( ally_rule::allow_pick_up ) ) {
+        return results;
+    }
+    int want_hunger = std::max( 0, get_hunger() );
+    int want_quench = std::max( 0, get_thirst() );
+    bool thirst_dominant = get_thirst() > get_hunger() * 2;
+    map &here = get_map();
+
+    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), 6 ) ) {
+        if( is_player_ally() && g->check_zone( zone_type_NO_NPC_PICKUP, p ) ) {
+            continue;
+        }
+        if( !here.sees_some_items( p, *this ) || !sees( here, p ) ) {
+            continue;
+        }
+        for( item &it : here.i_at( p ) ) {
+            if( !it.is_food() ) {
+                continue;
+            }
+            if( thirst_dominant && it.get_comestible() &&
+                it.get_comestible()->quench <= 0 ) {
+                continue;
+            }
+            if( !would_take_that( it, p ) ) {
+                continue;
+            }
+            float w = rate_food( *this, it, want_hunger, want_quench );
+            if( w > 0.0f && will_eat( it ).success() ) {
+                results.push_back( {
+                    item_location( map_cursor( p ), &it ), w
+                } );
+            }
+        }
+    }
+    std::sort( results.begin(), results.end(),
+    []( const scored_item & a, const scored_item & b ) {
+        return a.score > b.score;
+    } );
+    return results;
+}
+
+std::vector<npc::scored_item> npc::find_nearby_warm_clothing()
+{
+    std::vector<scored_item> results;
+    if( is_player_ally() && !rules.has_flag( ally_rule::allow_pick_up ) ) {
+        return results;
+    }
+    map &here = get_map();
+    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), 6 ) ) {
+        if( is_player_ally() && g->check_zone( zone_type_NO_NPC_PICKUP, p ) ) {
+            continue;
+        }
+        if( !here.sees_some_items( p, *this ) || !sees( here, p ) ) {
+            continue;
+        }
+        for( item &it : here.i_at( p ) ) {
+            if( it.get_warmth() <= 0 || !can_wear( it ).success() ) {
+                continue;
+            }
+            if( !would_take_that( it, p ) ) {
+                continue;
+            }
+            results.push_back( {
+                item_location( map_cursor( p ), &it ),
+                static_cast<float>( it.get_warmth() )
+            } );
+        }
+    }
+    std::sort( results.begin(), results.end(),
+    []( const scored_item & a, const scored_item & b ) {
+        return a.score > b.score;
+    } );
+    return results;
+}
+
+bool npc::drink_from_water_source( const tripoint_bub_ms &water_pos )
+{
+    if( get_thirst() <= 0 ) {
+        return false;
+    }
+    const units::volume want = std::max( 0_ml,
+                                         units::from_milliliter( get_thirst() * 5 ) );
+    const units::volume room = stomach.stomach_remaining( *this );
+    const units::volume intake = std::min( want, room );
+    if( intake <= 0_ml ) {
+        return false;
+    }
+    stomach.ingest( { intake, 0_ml, {} } );
+    add_msg_debug( debugmode::DF_NPC_NEEDS,
+                   "NPC %s: drank from terrain at %s", get_name(),
+                   water_pos.to_string_writable() );
+    return true;
+}
+
+bool npc::consume_food_at( item_location loc )
+{
+    if( !loc.get_item() ) {
+        return false;
+    }
+    const time_duration &t = get_consume_time( *loc );
+    if( consume( loc ) != trinary::NONE ) {
+        mod_moves( -to_moves<int>( t ) );
+        return true;
+    }
+    return false;
+}
+
+bool npc::wear_item_at( item_location loc )
+{
+    if( !loc.get_item() ) {
+        return false;
+    }
+    return wear( loc, false ).has_value();
+}
+
+bool npc::move_to_and_verify( const tripoint_bub_ms &target )
+{
+    const std::optional<tripoint_bub_ms> dest = nearest_passable( target, pos_bub() );
+    if( !dest ) {
+        return false;
+    }
+    update_path( *dest );
+    if( path.empty() && rl_dist( pos_bub(), *dest ) > 1 ) {
+        return false;
+    }
+    const tripoint_bub_ms before = pos_bub();
+    move_to_next();
+    return pos_bub() != before;
 }
 
 bool npc::adjust_worn()

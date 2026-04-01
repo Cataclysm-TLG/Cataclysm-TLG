@@ -971,7 +971,7 @@ class npc : public Character
         bool has_painkiller();
         bool took_painkiller() const;
         void use_painkiller();
-        float rate_food( const item &it, int want_nutr, int want_quench );
+        float rate_food( const Character &who, const item &it, int want_nutr, int want_quench );
         void activate_item( item &it );
         bool has_identified( const itype_id & ) const override {
             return true;
@@ -1132,6 +1132,25 @@ class npc : public Character
 
         npc_action address_needs();
         npc_action address_needs( float danger );
+        bool wear_warmest_item();
+        bool take_shelter_nearby();
+        // Local resource acquisition: find helpers return scored candidates
+        // for callers to iterate best-first, skipping unpathable targets.
+        struct scored_item {
+            item_location loc;
+            float score;
+        };
+        struct scored_water_source {
+            tripoint_bub_ms pos;
+            int dist;
+        };
+        std::vector<scored_water_source> find_nearby_water_sources() const;
+        std::vector<scored_item> find_nearby_food();
+        std::vector<scored_item> find_nearby_warm_clothing();
+        bool drink_from_water_source( const tripoint_bub_ms &water_pos );
+        bool consume_food_at( item_location loc );
+        bool wear_item_at( item_location loc );
+        bool move_to_and_verify( const tripoint_bub_ms &target );
         npc_action address_player();
         npc_action long_term_goal_action();
         int evaluate_sleep_spot( tripoint_bub_ms p );
@@ -1420,6 +1439,11 @@ class npc : public Character
          * Update body, but throttled.
          */
         void npc_update_body();
+        /**
+         * Recompute body temperature and wetness from current weather.
+         * Shared between npc_update_body() and on_load() catch-up.
+         */
+        void update_bodytemp_and_wetness();
 
         bool get_known_to_u() const;
 
