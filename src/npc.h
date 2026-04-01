@@ -1134,6 +1134,23 @@ class npc : public Character
         npc_action address_needs( float danger );
         bool wear_warmest_item();
         bool take_shelter_nearby();
+        // Local resource acquisition: find helpers return scored candidates
+        // for callers to iterate best-first, skipping unpathable targets.
+        struct scored_item {
+            item_location loc;
+            float score;
+        };
+        struct scored_water_source {
+            tripoint_bub_ms pos;
+            int dist;
+        };
+        std::vector<scored_water_source> find_nearby_water_sources() const;
+        std::vector<scored_item> find_nearby_food();
+        std::vector<scored_item> find_nearby_warm_clothing();
+        bool drink_from_water_source( const tripoint_bub_ms &water_pos );
+        bool consume_food_at( item_location loc );
+        bool wear_item_at( item_location loc );
+        bool move_to_and_verify( const tripoint_bub_ms &target );
         npc_action address_player();
         npc_action long_term_goal_action();
         int evaluate_sleep_spot( tripoint_bub_ms p );
