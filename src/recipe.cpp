@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <initializer_list>
 #include <memory>
 #include <numeric>
 #include <optional>
@@ -93,10 +94,45 @@ time_duration recipe::time_to_craft( const Character &guy, recipe_time_flag flag
 
 int64_t recipe::time_to_craft_moves( const Character &guy, recipe_time_flag flags ) const
 {
+    if( has_steps() ) {
+        double total = 0.0;
+        for( const recipe_step &s : steps_ ) {
+            if( flags == recipe_time_flag::ignore_proficiencies ) {
+                total += s.time;
+            } else {
+                total += s.time * proficiency_time_maluses_for_step( guy, s );
+            }
+        }
+        return static_cast<int64_t>( total );
+    }
     if( flags == recipe_time_flag::ignore_proficiencies ) {
         return time;
     }
     return time * proficiency_time_maluses( guy );
+}
+
+double batch_savings::apply( double time, int batch_size ) const
+{
+    if( const linear *lin = std::get_if<linear>( &data ) ) {
+        int reps = std::ceil( batch_size / static_cast<double>( lin->max_batch.value_or( batch_size ) ) );
+        return ( reps * lin->offset ) + ( batch_size * ( time - lin->offset ) );
+    }
+    if( const logistic *log = std::get_if<logistic>( &data ) ) {
+        if( log->rscale == 0.0f ) {
+            return time * batch_size;
+        }
+        double ret = 0.0;
+        // recipe benefits from batching, so batching scale factor needs to be calculated
+        // At batch_rsize, incremental time increase is 99.5% of batch_rscale
+        const double scale = log->rsize / 6.0f;
+        for( int x = 0; x < batch_size; x++ ) {
+            // scaled logistic function output
+            const double logf = ( 2.0 / ( 1.0 + std::exp( -( x / scale ) ) ) ) - 1.0;
+            ret += time * ( 1.0 - ( log->rscale * logf ) );
+        }
+        return ret;
+    }
+    return time * batch_size;
 }
 
 int64_t recipe::batch_time( const Character &guy, int batch, float multiplier,
@@ -109,26 +145,17 @@ int64_t recipe::batch_time( const Character &guy, int batch, float multiplier,
         multiplier = 1.0f;
     }
 
-    const double local_time = static_cast<double>( time_to_craft_moves( guy ) ) / multiplier;
+    double total_time;
 
-    // if recipe does not benefit from batching and we have no assistants, don't do unnecessary additional calculations
-    if( batch_rscale == 0.0 && assistants == 0 ) {
-        return static_cast<int64_t>( local_time ) * batch;
-    }
-
-    double total_time = 0.0;
-    // if recipe does not benefit from batching but we do have assistants, skip calculating the batching scale factor
-    if( batch_rscale == 0.0f ) {
-        total_time = local_time * batch;
-    } else {
-        // recipe benefits from batching, so batching scale factor needs to be calculated
-        // At batch_rsize, incremental time increase is 99.5% of batch_rscale
-        const double scale = batch_rsize / 6.0f;
-        for( int x = 0; x < batch; x++ ) {
-            // scaled logistic function output
-            const double logf = ( 2.0 / ( 1.0 + std::exp( -( x / scale ) ) ) ) - 1.0;
-            total_time += local_time * ( 1.0 - ( batch_rscale * logf ) );
+    if( has_steps() ) {
+        total_time = 0.0;
+        for( const recipe_step &s : steps_ ) {
+            double step_time = s.time * proficiency_time_maluses_for_step( guy, s ) / multiplier;
+            total_time += s.batch_info.apply( step_time, batch );
         }
+    } else {
+        const double local_time = static_cast<double>( time_to_craft_moves( guy ) ) / multiplier;
+        total_time = batch_info.apply( local_time, batch );
     }
 
     //Assistants can decrease the time for production but never less than that of one unit
@@ -137,8 +164,9 @@ int64_t recipe::batch_time( const Character &guy, int batch, float multiplier,
     } else if( assistants >= 2 ) {
         total_time = total_time * .60;
     }
-    if( total_time < local_time ) {
-        total_time = local_time;
+    const double single_time = static_cast<double>( time_to_craft_moves( guy ) ) / multiplier;
+    if( total_time < single_time ) {
+        total_time = single_time;
     }
 
     return static_cast<int64_t>( total_time );
@@ -148,6 +176,14 @@ bool recipe::has_flag( const std::string &flag_name ) const
 {
     return flags.count( flag_name );
 }
+
+struct time_duration_as_moves_reader : public generic_typed_reader<time_duration_as_moves_reader> {
+    int64_t get_next( const JsonValue &jv ) const {
+        time_duration ret;
+        jv.read( ret );
+        return to_moves<int64_t>( ret );
+    }
+};
 
 void recipe::load( const JsonObject &jo, const std::string_view src )
 {
@@ -217,10 +253,56 @@ void recipe::load( const JsonObject &jo, const std::string_view src )
         return;
     }
 
-    if( jo.has_string( "time" ) ) {
-        time = to_moves<int>( read_from_json_string<time_duration>( jo.get_member( "time" ),
-                              time_duration::units ) );
+    // --- Recipe steps detection and schema validation ---
+    // Capture whether inherited step state exists from copy-from base,
+    // then clear so copied state cannot leak on reload/override.
+    const bool had_inherited_steps = !steps_.empty();
+    steps_.clear();
+    aggregate_proficiencies_.clear();
+
+    const bool is_step_recipe = jo.has_array( "steps" );
+
+    // Clear legacy requirement state so a reload from stepless to step-based
+    // does not silently retain old root tools/components/proficiencies.
+    if( is_step_recipe ) {
+        requirements_ = requirement_data();
+        deduped_requirements_ = deduped_requirement_data();
+        reqs_external.clear();
+        reqs_internal.clear();
+        proficiencies.clear();
+        time = 0;
+        batch_info = batch_savings();
+        exertion = 0.0f;
     }
+
+    if( had_inherited_steps && !is_step_recipe ) {
+        jo.throw_error( "non-step recipe cannot inherit from a step recipe base" );
+    }
+
+    if( is_step_recipe ) {
+        if( abstract ) {
+            jo.throw_error( "abstract recipes cannot have steps" );
+        }
+        if( jo.has_string( "copy-from" ) ) {
+            jo.throw_error( "step recipes cannot use copy-from" );
+        }
+        for( const char *field : {
+                 "tools", "qualities", "proficiencies",
+                 "batch_time_factors", "time",
+                 "activity_level", "using"
+             } ) {
+            if( jo.has_member( field ) ) {
+                jo.throw_error( string_format(
+                                    "step recipes must not have root-level '%s'", field ) );
+            }
+        }
+    }
+
+    // --- Fields that only apply to stepless recipes ---
+    if( !is_step_recipe ) {
+        optional( jo, was_loaded, "time", time, time_duration_as_moves_reader{}, 0 );
+    }
+
     optional( jo, was_loaded, "difficulty", difficulty, numeric_bound_reader<int> {0, MAX_SKILL} );
     optional( jo, was_loaded, "flags", flags );
 
@@ -233,10 +315,13 @@ void recipe::load( const JsonObject &jo, const std::string_view src )
     optional( jo, false, "container_variant", container_variant );
     optional( jo, was_loaded, "sealed", sealed, true );
 
-    if( jo.has_array( "batch_time_factors" ) ) {
-        JsonArray batch = jo.get_array( "batch_time_factors" );
-        batch_rscale = batch.get_int( 0 ) / 100.0;
-        batch_rsize  = batch.get_int( 1 );
+    if( !is_step_recipe ) {
+        optional( jo, was_loaded, "batch_time_factors", batch_info );
+        if( batch_savings::linear *lin = std::get_if<batch_savings::linear>( &batch_info.data ) ) {
+            if( lin->offset > time ) {
+                jo.throw_error( "batch scaling time greater than recipe time" );
+            }
+        }
     }
 
     optional( jo, was_loaded, "charges", charges );
@@ -263,7 +348,9 @@ void recipe::load( const JsonObject &jo, const std::string_view src )
         }
     }
 
-    jo.read( "proficiencies", proficiencies );
+    if( !is_step_recipe ) {
+        jo.read( "proficiencies", proficiencies );
+    }
 
     // simplified autolearn sets requirements equal to required skills at finalization
     if( jo.has_bool( "autolearn" ) ) {
@@ -276,8 +363,10 @@ void recipe::load( const JsonObject &jo, const std::string_view src )
         }
     }
 
-    // Mandatory: This recipe's exertion level
-    mandatory( jo, was_loaded, "activity_level", exertion, activity_level_reader{} );
+    // Mandatory for stepless recipes; step recipes compute exertion during finalize
+    if( !is_step_recipe ) {
+        mandatory( jo, was_loaded, "activity_level", exertion, activity_level_reader{} );
+    }
 
     // Never let the player have a debug or NPC recipe
     optional( jo, was_loaded, "never_learn", never_learn, false );
@@ -313,7 +402,10 @@ void recipe::load( const JsonObject &jo, const std::string_view src )
         flags_to_delete = jo.get_tags<flag_id>( "delete_flags" );
     }
 
-    optional( jo, was_loaded, "using", reqs_external, weighted_string_id_reader<requirement_id, int> { 1 } );
+    if( !is_step_recipe ) {
+        optional( jo, was_loaded, "using", reqs_external,
+                  weighted_string_id_reader<requirement_id, int> { 1 } );
+    }
 
     bool inherited_tools = false;
     bool inherited_qualities = false;
@@ -460,20 +552,61 @@ void recipe::load( const JsonObject &jo, const std::string_view src )
     requirement_data::load_requirement( jo, req_id, false, abstract );
     reqs_internal.emplace_back( req_id, 1 );
 
-    if( inherited_tools && !jo.has_member( "tools" ) ) {
-        debugmsg( "Recipe %s inherits from recipe that has tools, but does not have any of its own.  "
-                  "This is probably an error.", id.str() );
+    // Parse recipe steps
+    if( is_step_recipe ) {
+        int step_index = 0;
+        for( JsonObject step_jo : jo.get_array( "steps" ) ) {
+            recipe_step step;
+            step.load( step_jo, id.str(), step_index++ );
+            steps_.emplace_back( std::move( step ) );
+        }
+        if( steps_.empty() ) {
+            jo.throw_error( "steps array must not be empty" );
+        }
     }
 
-    if( inherited_qualities && !jo.has_member( "qualities" ) ) {
-        debugmsg( "Recipe %s inherits from recipe that has qualities, but does not have any of its own.  "
-                  "This is probably an error.", id.str() );
+    if( !is_step_recipe ) {
+        if( inherited_tools && !jo.has_member( "tools" ) ) {
+            debugmsg( "Recipe %s inherits from recipe that has tools, but does not have any of its own.  "
+                      "This is probably an error.", id.str() );
+        }
+
+        if( inherited_qualities && !jo.has_member( "qualities" ) ) {
+            debugmsg( "Recipe %s inherits from recipe that has qualities, but does not have any of its own.  "
+                      "This is probably an error.", id.str() );
+        }
+
+        if( inherited_components  && !jo.has_member( "components" ) ) {
+            debugmsg( "Recipe %s inherits from recipe that has components, but does not have any of its own.  "
+                      "This is probably an error.", id.str() );
+        }
+    }
+}
+
+void recipe_step::load( const JsonObject &jo, const std::string &recipe_name, int step_index )
+{
+    jo.allow_omitted_members();
+
+    mandatory( jo, false, "name", name );
+    mandatory( jo, false, "time", time, time_duration_as_moves_reader{} );
+    if( time <= 0 ) {
+        jo.throw_error( "step time must be positive" );
+    }
+    mandatory( jo, false, "activity_level", exertion, activity_level_reader{} );
+
+    optional( jo, false, "batch_time_factors", batch_info );
+    jo.read( "proficiencies", proficiencies );
+
+    if( jo.has_member( "components" ) ) {
+        jo.throw_error( "step recipes must not have per-step components; "
+                        "use root-level components" );
     }
 
-    if( inherited_components  && !jo.has_member( "components" ) ) {
-        debugmsg( "Recipe %s inherits from recipe that has components, but does not have any of its own.  "
-                  "This is probably an error.", id.str() );
-    }
+    // Load inline tools/qualities for this step
+    const requirement_id step_req_id( "inline_recipe_" + recipe_name + "_step_"
+                                      + std::to_string( step_index ) );
+    requirement_data::load_requirement( jo, step_req_id, false, false );
+    reqs_internal.emplace_back( step_req_id, 1 );
 }
 
 static cata::value_ptr<parameterized_build_reqs> calculate_all_blueprint_reqs(
@@ -593,6 +726,41 @@ void recipe::finalize()
 
     if( !blueprint.is_empty() ) {
         incorporate_build_reqs();
+    } else if( has_steps() ) {
+        // Step recipes: merge root components + per-step tools/qualities
+        add_requirements( reqs_internal );  // root components
+        reqs_internal.clear();
+
+        for( recipe_step &step : steps_ ) {
+            // Resolve each step's inline requirements
+            step.requirements = std::accumulate(
+                                    step.reqs_internal.begin(), step.reqs_internal.end(),
+                                    step.requirements );
+            // Merge step requirements into recipe-level for whole-recipe gating
+            requirements_ = requirements_ + step.requirements;
+            step.reqs_internal.clear();
+        }
+
+        deduped_requirements_ = deduped_requirement_data( requirements_, ident() );
+
+        // Compute aggregate time
+        time = 0;
+        for( const recipe_step &step : steps_ ) {
+            time += step.time;
+        }
+
+        // Compute time-weighted average exertion
+        double weighted_exertion = 0.0;
+        for( const recipe_step &step : steps_ ) {
+            weighted_exertion += step.exertion * step.time;
+        }
+        exertion = static_cast<float>( weighted_exertion / time );
+
+        // Step recipes use per-step batch logic, not recipe-level
+        batch_info = batch_savings();
+
+        // Build aggregate proficiency view and validate
+        finalize_step_proficiencies();
     } else {
         // concatenate both external and inline requirements
         add_requirements( reqs_external );
@@ -613,6 +781,7 @@ void recipe::finalize()
 
     std::set<proficiency_id> required;
     std::set<proficiency_id> used;
+    // For step recipes, proficiencies is empty; validation done in finalize_step_proficiencies
     for( recipe_proficiency &rpof : proficiencies ) {
         if( !rpof.id.is_valid() ) {
             debugmsg( "proficiency %s does not exist in recipe %s", rpof.id.str(), id.str() );
@@ -664,6 +833,91 @@ void recipe::finalize()
 void recipe::add_requirements( const std::vector<std::pair<requirement_id, int>> &reqs )
 {
     requirements_ = std::accumulate( reqs.begin(), reqs.end(), requirements_ );
+}
+
+void recipe::finalize_step_proficiencies()
+{
+    // Validate per-step proficiencies and build aggregate view.
+    // Ordering: first-seen across steps, merged into existing slot if duplicate.
+    aggregate_proficiencies_.clear();
+
+    // Track required vs non-required state per proficiency ID
+    std::map<proficiency_id, bool> seen_required;
+
+    for( recipe_step &step : steps_ ) {
+        for( recipe_proficiency &rpof : step.proficiencies ) {
+            if( !rpof.id.is_valid() ) {
+                debugmsg( "proficiency %s does not exist in step recipe %s",
+                          rpof.id.str(), id.str() );
+                continue;
+            }
+
+            if( rpof.required && rpof.time_multiplier != 0.0f ) {
+                debugmsg( "proficiency %s in step recipe %s cannot be both "
+                          "required and provide a malus", rpof.id.str(), id.str() );
+            }
+
+            // Apply defaults, then normalize required profs
+            if( rpof.time_multiplier == 0.0f ) {
+                rpof.time_multiplier = rpof.id->default_time_multiplier();
+            }
+            if( !rpof._skill_penalty_assigned ) {
+                rpof.skill_penalty = rpof.id->default_skill_penalty();
+            }
+            if( rpof.required ) {
+                rpof.time_multiplier = 0.0f;
+                rpof.skill_penalty = 0.0f;
+            }
+
+            // Check for required/optional conflict across steps
+            auto it = seen_required.find( rpof.id );
+            if( it != seen_required.end() && it->second != rpof.required ) {
+                debugmsg( "proficiency %s is required in one step but optional "
+                          "in another in recipe %s; treating as required",
+                          rpof.id.str(), id.str() );
+                // Fallback: required wins, zero multipliers
+                rpof.required = true;
+                rpof.time_multiplier = 0.0f;
+                rpof.skill_penalty = 0.0f;
+            }
+            seen_required[rpof.id] = rpof.required;
+
+            // Merge into aggregate: first-seen order
+            bool found = false;
+            for( recipe_proficiency &existing : aggregate_proficiencies_ ) {
+                if( existing.id == rpof.id ) {
+                    // Duplicate: merge using conservative rules
+                    if( rpof.required ) {
+                        existing.required = true;
+                        existing.time_multiplier = 0.0f;
+                        existing.skill_penalty = 0.0f;
+                    } else {
+                        existing.time_multiplier = std::max( existing.time_multiplier,
+                                                             rpof.time_multiplier );
+                        existing.skill_penalty = std::max( existing.skill_penalty,
+                                                           rpof.skill_penalty );
+                        existing.learning_time_mult = std::max( existing.learning_time_mult,
+                                                                rpof.learning_time_mult );
+                        // nullopt wins (no artificial cap)
+                        if( !rpof.max_experience.has_value() ) {
+                            existing.max_experience = std::nullopt;
+                        }
+                    }
+                    found = true;
+                    break;
+                }
+            }
+            if( !found ) {
+                recipe_proficiency entry = rpof;
+                // Required profs in aggregate must have zero multipliers
+                if( entry.required ) {
+                    entry.time_multiplier = 0.0f;
+                    entry.skill_penalty = 0.0f;
+                }
+                aggregate_proficiencies_.push_back( entry );
+            }
+        }
+    }
 }
 
 std::string recipe::get_consistency_error() const
@@ -911,7 +1165,7 @@ std::string recipe::required_proficiencies_string( const Character *c ) const
 {
     std::vector<proficiency_id> required_profs;
 
-    for( const recipe_proficiency &rec : proficiencies ) {
+    for( const recipe_proficiency &rec : get_proficiencies() ) {
         if( rec.required ) {
             required_profs.push_back( rec.id );
         }
@@ -968,7 +1222,7 @@ std::string recipe::used_proficiencies_string( const Character *c ) const
     }
     std::vector<prof_penalty> used_profs;
 
-    for( const recipe_proficiency &rec : proficiencies ) {
+    for( const recipe_proficiency &rec : get_proficiencies() ) {
         if( !rec.required ) {
             if( c->has_proficiency( rec.id ) || helpers_have_proficiencies( *c, rec.id ) )  {
                 used_profs.push_back( { rec.id, rec.time_multiplier, rec.skill_penalty} );
@@ -990,7 +1244,7 @@ std::string recipe::recipe_proficiencies_string() const
     std::vector<proficiency_id> profs;
 
     profs.reserve( proficiencies.size() );
-    for( const recipe_proficiency &rec : proficiencies ) {
+    for( const recipe_proficiency &rec : get_proficiencies() ) {
         profs.push_back( rec.id );
     }
     std::string list = enumerate_as_string( profs.begin(),
@@ -1004,7 +1258,7 @@ std::string recipe::recipe_proficiencies_string() const
 std::vector<proficiency_id> recipe::required_proficiencies() const
 {
     std::vector<proficiency_id> ret;
-    for( const recipe_proficiency &rec : proficiencies ) {
+    for( const recipe_proficiency &rec : get_proficiencies() ) {
         if( rec.required ) {
             ret.emplace_back( rec.id );
         }
@@ -1025,7 +1279,7 @@ bool recipe::character_has_required_proficiencies( const Character &c ) const
 std::vector<proficiency_id> recipe::used_proficiencies() const
 {
     std::vector<proficiency_id> ret;
-    for( const recipe_proficiency &rec : proficiencies ) {
+    for( const recipe_proficiency &rec : get_proficiencies() ) {
         if( !rec.required ) {
             ret.emplace_back( rec.id );
         }
@@ -1061,17 +1315,53 @@ static float proficiency_time_malus( const Character &crafter, const recipe_prof
 
 float recipe::proficiency_time_maluses( const Character &crafter ) const
 {
+    if( has_steps() && time > 0 ) {
+        // For step recipes, compute as effective ratio from per-step aggregation
+        return static_cast<float>( time_to_craft_moves( crafter ) ) / static_cast<float>( time );
+    }
     float total_malus = 1.0f;
-    for( const recipe_proficiency &prof : proficiencies ) {
+    for( const recipe_proficiency &prof : get_proficiencies() ) {
         total_malus *= proficiency_time_malus( crafter, prof );
     }
     return total_malus;
 }
 
-float recipe::max_proficiency_time_maluses( const Character & ) const
+float recipe::proficiency_time_maluses_for_step(
+    const Character &crafter, const recipe_step &step )
 {
     float total_malus = 1.0f;
-    for( const recipe_proficiency &prof : proficiencies ) {
+    for( const recipe_proficiency &prof : step.proficiencies ) {
+        total_malus *= proficiency_time_malus( crafter, prof );
+    }
+    return total_malus;
+}
+
+double recipe::step_budget_moves( const Character &guy, size_t step_idx, int batch ) const
+{
+    cata_assert( step_idx < steps_.size() );
+    const recipe_step &s = steps_[step_idx];
+    double t = s.time * proficiency_time_maluses_for_step( guy, s );
+    return s.batch_info.apply( t, batch );
+}
+
+float recipe::max_proficiency_time_maluses( const Character & ) const
+{
+    if( has_steps() && time > 0 ) {
+        // For step recipes, compute max malus from per-step data.
+        // Required profs (time_multiplier=0) contribute 1.0 (no penalty),
+        // not 0.0 which would drag the weighted average down.
+        double total = 0.0;
+        for( const recipe_step &s : steps_ ) {
+            float step_malus = 1.0f;
+            for( const recipe_proficiency &prof : s.proficiencies ) {
+                step_malus *= prof.time_multiplier > 0.0f ? prof.time_multiplier : 1.0f;
+            }
+            total += s.time * step_malus;
+        }
+        return static_cast<float>( total / time );
+    }
+    float total_malus = 1.0f;
+    for( const recipe_proficiency &prof : get_proficiencies() ) {
         total_malus *= prof.time_multiplier;
     }
     return total_malus;
@@ -1097,7 +1387,7 @@ static float proficiency_skill_malus( const Character &crafter, const recipe_pro
 float recipe::proficiency_skill_maluses( const Character &crafter ) const
 {
     float total_malus = 0.f;
-    for( const recipe_proficiency &prof : proficiencies ) {
+    for( const recipe_proficiency &prof : get_proficiencies() ) {
         total_malus += proficiency_skill_malus( crafter, prof );
     }
     return total_malus;
@@ -1106,7 +1396,7 @@ float recipe::proficiency_skill_maluses( const Character &crafter ) const
 float recipe::max_proficiency_skill_maluses( const Character & ) const
 {
     float total_malus = 0.f;
-    for( const recipe_proficiency &prof : proficiencies ) {
+    for( const recipe_proficiency &prof : get_proficiencies() ) {
         total_malus += prof.skill_penalty;
     }
     return total_malus;
@@ -1121,7 +1411,7 @@ std::string recipe::missing_proficiencies_string( const Character *crafter ) con
 
     const book_proficiency_bonuses book_bonuses =
         crafter->crafting_inventory().get_book_proficiency_bonuses();
-    for( const recipe_proficiency &prof : proficiencies ) {
+    for( const recipe_proficiency &prof : get_proficiencies() ) {
         if( !prof.required ) {
             if( !( crafter->has_proficiency( prof.id ) || helpers_have_proficiencies( *crafter, prof.id ) ) ) {
                 prof_penalty pen = { prof.id,
@@ -1213,11 +1503,28 @@ std::string recipe::required_all_skills_string( const std::map<skill_id, int> &s
     return required_skills_as_string( skillList );
 }
 
+std::string batch_savings::savings_string() const
+{
+    if( const linear *lin = std::get_if<linear>( &data ) ) {
+        std::string time_saved = to_string( time_duration::from_moves<int>( lin->offset ) );
+        if( lin->max_batch.has_value() ) {
+            return string_format( _( "%s per unit to %d units" ), time_saved, lin->max_batch.value() );
+        } else {
+            return string_format( _( "%s per unit" ), time_saved );
+        }
+    }
+    if( const logistic *log = std::get_if<logistic>( &data ) ) {
+        return string_format( _( "%d%% at >%d units" ), static_cast<int>( log->rscale * 100 ), log->rsize );
+    }
+    return _( "none" );
+}
+
 std::string recipe::batch_savings_string() const
 {
-    return ( batch_rsize != 0 ) ?
-           string_format( _( "%d%% at >%d units" ), static_cast<int>( batch_rscale * 100 ), batch_rsize )
-           : _( "none" );
+    if( has_steps() ) {
+        return _( "varies by step" );
+    }
+    return batch_info.savings_string();
 }
 
 std::string recipe::result_name( const bool decorated ) const
@@ -1536,6 +1843,40 @@ void recipe::incorporate_build_reqs()
         }
 
         reqs.consolidate( reqs_internal, reqs_external );
+    }
+}
+
+void batch_savings::deserialize( const JsonValue &jv )
+{
+    if( jv.test_array() ) {
+        JsonArray ja = jv.get_array();
+        logistic ret;
+        ja.read( 0, ret.rscale );
+        ret.rscale /= 100.0;
+        ja.read( 1, ret.rsize );
+        data = ret;
+        if( ret.rscale > 1.0 || ret.rscale <= 0.0 || ret.rsize < 1 ) {
+            jv.throw_error( "Invalid batch factors" );
+        }
+        return;
+    }
+    JsonObject jo = jv.get_object();
+    std::string mode = jo.get_string( "mode" );
+    if( mode == "linear" ) {
+        linear ret;
+        mandatory( jo, false, "setup", ret.offset, time_duration_as_moves_reader{} );
+        optional( jo, false, "max", ret.max_batch );
+        if( ret.max_batch.value_or( 1 ) < 1 ) {
+            jo.throw_error( "Invalid max value" );
+        }
+        data = ret;
+    } else if( mode == "logistic" ) {
+        logistic ret;
+        mandatory( jo, false, "percent", ret.rscale, percentile_reader{0, 100} );
+        mandatory( jo, false, "at", ret.rsize, numeric_bound_reader{1} );
+        data = ret;
+    } else {
+        jo.throw_error( string_format( "Unrecognized mode %s", mode ) );
     }
 }
 
