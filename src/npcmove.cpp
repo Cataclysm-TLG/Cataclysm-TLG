@@ -5644,8 +5644,7 @@ bool npc::try_wear_warmer_clothing()
         return a->get_warmth() > b->get_warmth();
     } );
     for( item *it : candidates ) {
-        item_location loc( *this, it );
-        if( can_wear( *it ).success() && wear( loc, true ) ) {
+        if( can_wear( *it ).success() && wear_item( *it, false ) ) {
             return true;
         }
     }
@@ -5657,50 +5656,18 @@ bool npc::try_remove_warm_clothing()
     // Minimum warmth value worth removing when overheating
     static constexpr int min_warmth_to_remove = 10;
 
-    // Critical items that should never be auto-removed regardless of temperature
-    auto is_critical_gear = []( const item & it ) {
-        return it.has_flag( flag_SPLINT ) ||
-               it.has_flag( flag_GAS_PROOF ) ||
-               it.has_flag( flag_RAD_PROOF );
-    };
-
-    std::vector<item *> warm_worn = items_with( [&]( const item & it ) {
-        return is_worn( it ) && !is_critical_gear( it ) && it.get_warmth() > min_warmth_to_remove;
+    std::vector<item *> warm_worn = items_with( [this]( const item & it ) {
+        return is_worn( it ) && !it.has_flag( flag_SPLINT ) && it.get_warmth() > min_warmth_to_remove;
     } );
     if( warm_worn.empty() ) {
         return false;
     }
-    // Sturdy armor won't be auto-removed - NPC complains and waits for a player order
-    std::vector<item *> removable;
-    item *warmest_sturdy = nullptr;
-    for( item *it : warm_worn ) {
-        if( it->has_flag( flag_STURDY ) ) {
-            if( !warmest_sturdy || it->get_warmth() > warmest_sturdy->get_warmth() ) {
-                warmest_sturdy = it;
-            }
-        } else {
-            removable.push_back( it );
-        }
-    }
-    if( removable.empty() ) {
-        if( warmest_sturdy && one_in( 4 ) ) {
-            say( string_format(
-                     _( "My %s is making me overheat!  You'll have to tell me to take it off." ),
-                     warmest_sturdy->tname() ) );
-        }
-        return false;
-    }
-    item *warmest = *std::max_element( removable.begin(), removable.end(),
+    item *warmest = *std::max_element( warm_worn.begin(), warm_worn.end(),
     []( const item * a, const item * b ) {
         return a->get_warmth() < b->get_warmth();
     } );
-    const int takeoff_cost = item_wear_cost( *warmest );
     item_location loc( *this, warmest );
-    if( can_takeoff( *warmest ).success() && takeoff( loc ) ) {
-        mod_moves( -takeoff_cost );
-        return true;
-    }
-    return false;
+    return can_takeoff( *warmest ).success() && takeoff( loc );
 }
 
 void npc::set_movement_mode( const move_mode_id &new_mode )
