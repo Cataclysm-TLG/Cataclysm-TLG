@@ -8933,7 +8933,7 @@ void Character::on_hurt( Creature *source, bool disturb /*= true*/ )
     }
 
     if( disturb ) {
-        if( has_effect( effect_sleep ) && !has_active_bionic( bio_sleep_shutdown ) ) {
+        if( in_sleep_state() && !has_active_bionic( bio_sleep_shutdown ) ) {
             wake_up();
         }
         if( uistate.distraction_attack && !is_npc() && !has_effect( effect_narcosis ) ) {

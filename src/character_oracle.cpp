@@ -1,6 +1,7 @@
 #include "character_oracle.h"
 
 #include <memory>
+#include <optional>
 #include <vector>
 
 #include "behavior.h"
@@ -13,6 +14,8 @@
 #include "map.h"
 #include "map_iterator.h"
 #include "mapdata.h"
+#include "npc.h"
+#include "point.h"
 #include "ret_val.h"
 #include "type_id.h"
 #include "units.h"
@@ -20,7 +23,10 @@
 #include "weather.h"
 
 static const efftype_id effect_meth( "meth" );
+static const efftype_id effect_npc_run_away( "npc_run_away" );
 static const flag_id json_flag_FIRESTARTER( "FIRESTARTER" );
+static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
+static const trait_id trait_IGNORE_SOUND( "IGNORE_SOUND" );
 
 namespace behavior
 {
@@ -92,20 +98,13 @@ status_t character_oracle_t::can_make_fire( std::string_view ) const
 
 status_t character_oracle_t::can_take_shelter( std::string_view ) const
 {
-    // "Take shelter" is an action: move to an indoor tile.
-    // Already indoors -> action not applicable.
-    // Outdoors with adjacent indoor tile -> shelter within reach.
-    const map &here = get_map();
-    const tripoint_bub_ms &pos = subject->pos_bub();
-    if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, pos ) ) {
+    // Delegate to npc::find_nearby_shelters() so oracle and action share
+    // the same detection logic (radius, LOS, passability, creature check).
+    const npc *n = dynamic_cast<const npc *>( subject );
+    if( !n ) {
         return status_t::failure;
     }
-    for( const tripoint_bub_ms &adj : here.points_in_radius( pos, 1 ) ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, adj ) && here.passable( adj ) ) {
-            return status_t::running;
-        }
-    }
-    return status_t::failure;
+    return n->find_nearby_shelters().empty() ? status_t::failure : status_t::running;
 }
 
 status_t character_oracle_t::has_water( std::string_view ) const
@@ -128,7 +127,7 @@ status_t character_oracle_t::has_food( std::string_view ) const
 
 status_t character_oracle_t::needs_sleep_badly( std::string_view ) const
 {
-    // DEAD_TIRED (383) = microsleeps start, 38% of MASSIVE_SLEEPINESS.
+    // DEAD_TIRED (383) = microsleeps start, 38% of MASSIVE_FATIGUE.
     // Parallels needs_water_badly at 43% of death threshold.
     if( subject->get_fatigue() >= static_cast<int>( fatigue_levels::DEAD_TIRED ) ) {
         return status_t::running;
@@ -189,9 +188,90 @@ status_t character_oracle_t::can_sleep( std::string_view ) const
 
 float character_oracle_t::fatigue_urgency( std::string_view ) const
 {
-    // 0 = rested, 1 = forced unconsciousness (MASSIVE_SLEEPINESS = 1000).
+    // 0 = rested, 1 = forced unconsciousness (MASSIVE_FATIGUE = 1000).
     static constexpr float cap = 1000.0f;
     return std::clamp( subject->get_fatigue() / cap, 0.0f, 1.0f );
+}
+
+// Top-level decision predicates. These need NPC-specific state (ai_cache,
+// attitude) so they dynamic_cast from Character to npc.
+
+status_t character_oracle_t::in_danger( std::string_view ) const
+{
+    const npc *n = dynamic_cast<const npc *>( subject );
+    if( !n ) {
+        return status_t::failure;
+    }
+    return n->get_ai_danger() > 0 ? status_t::running : status_t::failure;
+}
+
+status_t character_oracle_t::should_flee( std::string_view ) const
+{
+    const npc *n = dynamic_cast<const npc *>( subject );
+    if( !n ) {
+        return status_t::failure;
+    }
+    if( n->has_effect( effect_npc_run_away ) ) {
+        return status_t::running;
+    }
+    if( n->get_attitude() == NPCATT_FLEE_TEMP ) {
+        return status_t::running;
+    }
+    return status_t::failure;
+}
+
+status_t character_oracle_t::has_target( std::string_view ) const
+{
+    const npc *n = dynamic_cast<const npc *>( subject );
+    if( !n ) {
+        return status_t::failure;
+    }
+    return n->get_ai_target().lock() ? status_t::running : status_t::failure;
+}
+
+status_t character_oracle_t::has_sound_alerts( std::string_view ) const
+{
+    const npc *n = dynamic_cast<const npc *>( subject );
+    if( !n ) {
+        return status_t::failure;
+    }
+    // Mirror the live cascade gates in npc::move() sound investigation:
+    // companions don't investigate, immobile NPCs can't investigate,
+    // IGNORE_SOUND NPCs treat sounds as non-actionable.
+    if( n->is_walking_with() || n->has_flag( json_flag_CANNOT_MOVE ) ||
+        n->has_trait( trait_IGNORE_SOUND ) ) {
+        return status_t::failure;
+    }
+    return n->has_ai_sound_alerts() ? status_t::running : status_t::failure;
+}
+
+status_t character_oracle_t::displaced_from_post( std::string_view ) const
+{
+    const npc *n = dynamic_cast<const npc *>( subject );
+    if( !n ) {
+        return status_t::failure;
+    }
+    if( n->has_flag( json_flag_CANNOT_MOVE ) ) {
+        return status_t::failure;
+    }
+    std::optional<tripoint_abs_ms> gp = n->get_effective_guard_pos();
+    if( !gp ) {
+        return status_t::failure;
+    }
+    return n->pos_abs() != *gp ? status_t::running : status_t::failure;
+}
+
+float character_oracle_t::duty_urgency( std::string_view ) const
+{
+    const npc *n = dynamic_cast<const npc *>( subject );
+    if( !n ) {
+        return 0.0f;
+    }
+    std::optional<tripoint_abs_ms> gp = n->get_effective_guard_pos();
+    if( !gp || n->pos_abs() == *gp ) {
+        return 0.0f;
+    }
+    return 0.5f;
 }
 
 } // namespace behavior

@@ -1100,6 +1100,11 @@ class npc : public Character
         // Movement; the following are defined in npcmove.cpp
         void move(); // Picks an action & a target and calls execute_action
         void execute_action( npc_action action ); // Performs action
+        // Returns true if p is in an NPC_NO_GO zone for this NPC's faction.
+        bool is_no_go_position( const tripoint_abs_ms &p ) const;
+        // Returns true if p is a valid sleep target: not in NPC_NO_GO and
+        // reachable without bashing. Does not check occupancy.
+        bool is_valid_sleep_candidate( const tripoint_bub_ms &p ) const;
         void process_turn() override;
 
         using Character::invoke_item;
@@ -1144,9 +1149,15 @@ class npc : public Character
             tripoint_bub_ms pos;
             int dist;
         };
+        struct scored_shelter {
+            tripoint_bub_ms pos;
+            int dist;
+        };
         std::vector<scored_water_source> find_nearby_water_sources() const;
         std::vector<scored_item> find_nearby_food();
         std::vector<scored_item> find_nearby_warm_clothing();
+        std::vector<scored_shelter> find_nearby_shelters() const;
+        std::vector<scored_water_source> find_nearby_harvestable() const;
         bool drink_from_water_source( const tripoint_bub_ms &water_pos );
         bool consume_food_at( item_location loc );
         bool wear_item_at( item_location loc );
@@ -1364,6 +1375,31 @@ class npc : public Character
 
         const npc_attack_rating &get_current_attack_evaluation() const {
             return ai_cache.current_attack_evaluation;
+        }
+
+        // Accessors for BT oracle predicates (character_oracle_t)
+        float get_ai_danger() const {
+            return ai_cache.danger;
+        }
+        weak_ptr_fast<Creature> get_ai_target() const {
+            return ai_cache.target;
+        }
+        bool has_ai_sound_alerts() const {
+            return !ai_cache.sound_alerts.empty();
+        }
+        std::optional<tripoint_abs_ms> get_ai_guard_pos() const {
+            return ai_cache.guard_pos;
+        }
+        // Effective guard position: ai_cache (ephemeral, from sound investigation)
+        // falls back to persistent guard_pos (from mission/dialogue assignment).
+        std::optional<tripoint_abs_ms> get_effective_guard_pos() const {
+            if( ai_cache.guard_pos ) {
+                return ai_cache.guard_pos;
+            }
+            return guard_pos;
+        }
+        void push_ai_sound_alert( const tripoint_abs_ms &pos, sounds::sound_t type, int vol ) {
+            ai_cache.sound_alerts.push_back( { pos, type, vol } );
         }
 
         // Where we last saw the player
