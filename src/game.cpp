@@ -993,6 +993,12 @@ bool game::start_game()
     load_map( lev, /*pump_events=*/true );
 
     start_loc.place_player( u, omtstart );
+    // Set spawn location for starting items (maps need it to be readable)
+    const tripoint_abs_ms player_pos = u.pos_abs();
+    u.visit_items( [&player_pos]( item * it, item * ) {
+        it->preserve_location( player_pos );
+        return VisitResponse::NEXT;
+    } );
     map &here = reality_bubble();
     int level = here.get_abs_sub().z();
     // Rebuild map cache because we want visibility cache to avoid spawning monsters in sight
