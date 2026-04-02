@@ -4870,7 +4870,7 @@ void npc::use_painkiller()
 //
 // TODO: Cache the results of this, *especially* if there's nothing we want to eat.
 float npc::rate_food( const Character &who, const item &it, int want_nutr,
-                        int want_quench )
+                      int want_quench )
 {
     const auto &food = it.get_comestible();
     if( !food ) {

@@ -69,8 +69,7 @@
     "difficulty": 0,
     "time": "30 s",
     "autolearn": true,
-    "components": [ [ [ "milk_cream_jar", 1 ] ] ],
-    "charges": 5
+    "components": [ [ [ "milk_cream_jar", 1 ] ] ]
   },
   {
     "type": "recipe",

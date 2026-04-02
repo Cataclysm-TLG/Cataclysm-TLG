@@ -1811,7 +1811,8 @@ bool Creature::react_to_ranged( const Creature &attacker )
         return false;
     }
     // Zombies are dumb. Robots are REALLY dumb.
-    if( ( in_species( species_ZOMBIE ) && !one_in( 3 ) ) || ( in_species( species_ROBOT ) || in_species( species_ROBOT_FLYING ) ) ) {
+    if( ( in_species( species_ZOMBIE ) && !one_in( 3 ) ) || ( in_species( species_ROBOT ) ||
+            in_species( species_ROBOT_FLYING ) ) ) {
         return false;
     }
     add_effect( effect_stumbled_into_invisible, 2_seconds );

@@ -415,7 +415,7 @@ food_summary stomach_contents::digest( const Character &owner, const needs_rates
     int kcal_fraction = std::lround( nutr.kcal() * rates.percent_kcal );
     int max_kcal_to_digest = nutr.calories;
     int target_kcal = half_hours * clamp<int64_t>( rates.min_calories, kcal_fraction * 1000,
-                             nutr.calories );
+                      nutr.calories );
     digested.nutr.calories = std::min( max_kcal_to_digest, target_kcal );
     // Catch tiny kcal remainder values so the stomach can actually fully empty.
     if( digested.nutr.calories <= 0 && nutr.calories > 0 && nutr.calories < rates.min_calories * 2 ) {
@@ -427,7 +427,7 @@ food_summary stomach_contents::digest( const Character &owner, const needs_rates
             int vit_fraction = std::lround( vit.second * rates.percent_vitamin );
             int max_vit_to_digest = vit.second;  // Available vitamin in stomach
             int target_vit = half_hours * clamp( rates.min_vitamin, vit_fraction,
-                                       vit.second );
+                                                 vit.second );
             digested.nutr.set_vitamin( vit.first, std::min( max_vit_to_digest, target_vit ) );
         }
         // drug vitamins are absorbed to the blood instantly after the first stomach step.
