@@ -4197,9 +4197,13 @@ void game::draw_async_anim_curses()
     }
 }
 
-void game::void_async_anim_curses()
+bool game::void_async_anim_curses()
 {
+    if( async_anim_layer_curses.empty() ) {
+        return false;
+    }
     async_anim_layer_curses.clear();
+    return true;
 }
 
 void game::init_draw_blink_curses( const tripoint_bub_ms &p, const std::string &ncstr,

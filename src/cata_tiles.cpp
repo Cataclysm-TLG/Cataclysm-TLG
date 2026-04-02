@@ -1375,8 +1375,10 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
             draw_bullet_frame();
         }
         if( do_draw_hit ) {
-            draw_hit_frame();
             void_hit();
+            if( do_draw_hit ) {
+                draw_hit_frame();
+            }
         }
         if( do_draw_line ) {
             draw_line();
@@ -4824,6 +4826,15 @@ void cata_tiles::void_hit()
     hit_pos = { -1, -1, -1 };
     hit_entity_id.clear();
 }
+bool cata_tiles::expire_hit_animations()
+{
+    if( !do_draw_hit ) {
+        return false;
+    }
+    const size_t before = hit_animations.size();
+    void_hit();
+    return hit_animations.size() != before;
+}
 void cata_tiles::void_line()
 {
     do_draw_line = false;
@@ -4856,10 +4867,14 @@ void cata_tiles::void_zones()
 {
     do_draw_zones = false;
 }
-void cata_tiles::void_async_anim()
+bool cata_tiles::void_async_anim()
 {
+    if( !do_draw_async_anim ) {
+        return false;
+    }
     do_draw_async_anim = false;
     async_anim_layer.clear();
+    return true;
 }
 void cata_tiles::void_radiation_override()
 {

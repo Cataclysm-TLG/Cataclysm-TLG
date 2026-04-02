@@ -267,7 +267,7 @@ class game
         void init_draw_async_anim_curses( const tripoint_bub_ms &p, const std::string &ncstr,
                                           const nc_color &nccol );
         void draw_async_anim_curses();
-        void void_async_anim_curses();
+        bool void_async_anim_curses();
     protected:
         std::map<tripoint_bub_ms, std::pair <std::string, nc_color>>
                 async_anim_layer_curses; // NOLINT(cata-serialize)
