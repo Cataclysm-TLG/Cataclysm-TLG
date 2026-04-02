@@ -17,7 +17,7 @@
     "material": [ "wheat" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "calcium", 5 ], [ "iron", 34 ], [ "wheat_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 5 ], [ "iron", 34 ] ],
     "fun": -1
   },
   {
@@ -139,14 +139,15 @@
     "symbol": "%",
     "quench": -1,
     "calories": 45,
-    "description": "This enriched white flour is useful for baking.",
+    "description": "A fine powder made of ground wheat.  It's great for baking, not so good raw.",
     "price": "45 cent",
     "price_postapoc": "10 cent",
     "material": [ "wheat", "powder" ],
     "volume": "24 ml",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
     "vitamins": [ [ "iron", 3 ], [ "wheat_allergen", 1 ] ],
-    "fun": -5
+    "fun": -5,
+    "contamination": [ { "disease": "highly_contaminated_food", "probability": 0.1 }, { "disease": "bad_food", "probability": 1 } ]
   },
   {
     "type": "ITEM",
@@ -213,7 +214,7 @@
     "volume": "250 ml",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
     "fun": 2,
-    "vitamins": [ [ "calcium", 1 ], [ "iron", 10 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 1 ], [ "iron", 10 ] ]
   },
   {
     "type": "ITEM",
@@ -235,7 +236,7 @@
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 3,
-    "vitamins": [ [ "vitC", 30 ], [ "calcium", 1 ], [ "iron", 10 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 30 ], [ "calcium", 1 ], [ "iron", 10 ] ]
   },
   {
     "type": "ITEM",
@@ -257,7 +258,7 @@
     "material": [ "wheat" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
-    "vitamins": [ [ "iron", 2 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "iron", 2 ] ]
   },
   {
     "type": "ITEM",
@@ -279,7 +280,7 @@
     "material": [ "wheat" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
-    "vitamins": [ [ "iron", 7 ], [ "vitC", 7 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "iron", 7 ], [ "vitC", 7 ] ]
   },
   {
     "type": "ITEM",
@@ -517,7 +518,7 @@
     "primary_material": "wheat",
     "volume": "62 ml",
     "flags": [ "EDIBLE_FROZEN" ],
-    "vitamins": [ [ "calcium", 2 ], [ "iron", 7 ], [ "wheat_allergen", 1 ], [ "fruit_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 7 ], [ "fruit_allergen", 1 ] ],
     "fun": 3
   },
   {
