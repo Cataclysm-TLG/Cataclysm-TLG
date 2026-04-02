@@ -97,7 +97,7 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
                        drop_item.tname(), nb_of_dropped_shard, max_nb_of_shards - 1, to_gram( drop_item.type->weight ) );*/
 
         for( int i = 0; i < nb_of_dropped_shard; ++i ) {
-            item shard( "glass_shard" );
+            item shard( itype_glass_shard );
             //actual dropping of shards
             here->add_item_or_charges( pt, shard );
         }

@@ -170,6 +170,8 @@ static const itype_id itype_bot_manhack( "bot_manhack" );
 static const itype_id itype_bot_mininuke_hack( "bot_mininuke_hack" );
 static const itype_id itype_bot_pacification_hack( "bot_pacification_hack" );
 static const itype_id itype_e_handcuffs( "e_handcuffs" );
+static const itype_id itype_processor( "processor" );
+static const itype_id itype_m4_carbine( "m4_carbine" );
 
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 
@@ -2897,7 +2899,8 @@ void mattack::rifle( monster *z, Creature *target )
     }
     add_msg_if_player_sees( *z, m_warning, _( "The %s opens up with its rifle!" ), z->name() );
 
-    tmp.set_wielded_item( item( "m4_carbine" ).ammo_set( ammo_type, z->ammo[ ammo_type ] ) );
+    tmp.set_wielded_item( item( itype_m4_carbine, calendar::turn_zero ).ammo_set( ammo_type,
+                          z->ammo[ ammo_type ] ) );
 
     item_location weapon = tmp.get_wielded_item();
     int burst = std::max( weapon->gun_get_mode( gun_mode_AUTO ).qty, 1 );
@@ -2930,7 +2933,7 @@ bool mattack::searchlight( monster *z )
         creature_tracker &creatures = get_creature_tracker();
         for( int i = 0; i < max_lamp_count; i++ ) {
 
-            item settings( "processor", calendar::turn_zero );
+            item settings( itype_processor, calendar::turn_zero );
 
             settings.set_var( "SL_PREFER_UP", "TRUE" );
             settings.set_var( "SL_PREFER_DOWN", "TRUE" );
@@ -3692,7 +3695,7 @@ bool mattack::riotbot( monster *z )
         if( choice == ur_arrest ) {
             z->anger = 0;
 
-            item handcuffs( "e_handcuffs", calendar::turn_zero );
+            item handcuffs( itype_e_handcuffs, calendar::turn_zero );
             handcuffs.charges = handcuffs.type->maximum_charges();
             handcuffs.active = true;
             const tripoint_bub_ms foe_pos = foe->pos_bub( here );

@@ -73,6 +73,7 @@ static const furn_str_id furn_f_counter( "f_counter" );
 static const furn_str_id furn_f_rubble_rock( "f_rubble_rock" );
 
 static const itype_id itype_black_box( "black_box" );
+static const itype_id itype_black_box_transcript( "black_box_transcript" );
 static const itype_id itype_blood( "blood" );
 static const itype_id itype_blood_tainted( "blood_tainted" );
 static const itype_id itype_blood_tainted_human( "blood_tainted_human" );
@@ -1049,7 +1050,7 @@ void computer_session::action_data_anal()
             } else { // Success!
                 if( items.only_item().typeId() == itype_black_box ) {
                     print_line( _( "Memory Bank: Military Hexron Encryption\nPrinting Transcript\n" ) );
-                    item transcript( "black_box_transcript", calendar::turn );
+                    item transcript( itype_black_box_transcript, calendar::turn );
                     here.add_item_or_charges( player_character.pos_bub(), transcript );
                 } else {
                     print_line( _( "Memory Bank: Unencrypted\nNothing of interest.\n" ) );

@@ -162,10 +162,12 @@ static const itype_id itype_2x4( "2x4" );
 static const itype_id itype_arm_splint( "arm_splint" );
 static const itype_id itype_bot_broken_cyborg( "bot_broken_cyborg" );
 static const itype_id itype_bot_prototype_cyborg( "bot_prototype_cyborg" );
+static const itype_id itype_cactus_pad( "cactus_pad" );
 static const itype_id itype_cash_card( "cash_card" );
 static const itype_id itype_charcoal( "charcoal" );
 static const itype_id itype_chem_carbide( "chem_carbide" );
 static const itype_id itype_corpse( "corpse" );
+static const itype_id itype_dahlia_root( "dahlia_root" );
 static const itype_id itype_disassembly( "disassembly" );
 static const itype_id itype_fake_milling_item( "fake_milling_item" );
 static const itype_id itype_fake_smoke_plume( "fake_smoke_plume" );
@@ -181,12 +183,18 @@ static const itype_id itype_marloss_seed( "marloss_seed" );
 static const itype_id itype_mycus_fruit( "mycus_fruit" );
 static const itype_id itype_nail( "nail" );
 static const itype_id itype_nanomaterial( "nanomaterial" );
+static const itype_id itype_nectar( "nectar" );
 static const itype_id itype_petrified_eye( "petrified_eye" );
+static const itype_id itype_poppy_bud( "poppy_bud" );
+static const itype_id itype_poppy_nectar( "poppy_nectar" );
+static const itype_id itype_seed_cactus( "seed_cactus" );
+static const itype_id itype_seed_dahlia( "seed_dahlia" );
 static const itype_id itype_sheet( "sheet" );
 static const itype_id itype_stick( "stick" );
 static const itype_id itype_string_36( "string_36" );
 static const itype_id itype_unfinished_cac2( "unfinished_cac2" );
 static const itype_id itype_unfinished_charcoal( "unfinished_charcoal" );
+static const itype_id itype_withered( "withered" );
 
 static const json_character_flag json_flag_ATTUNEMENT( "ATTUNEMENT" );
 static const json_character_flag json_flag_GLIDE( "GLIDE" );
@@ -481,7 +489,8 @@ void iexamine::nanofab( Character &you, const tripoint_bub_ms &examp )
             return;
         }
 
-        new_item = item( nanofab_template->get_var( "NANOFAB_ITEM_ID" ), calendar::turn );
+        //TODO: Allow variables to be cata_variant ids
+        new_item = item( itype_id( nanofab_template->get_var( "NANOFAB_ITEM_ID" ) ), calendar::turn );
         int qty = std::max( 1, new_item.volume() / 250_ml );
         reqs = *nanofab_template->type->template_requirements * qty;
     }
@@ -817,7 +826,7 @@ class atm_menu
                 return false;
             }
 
-            item card( "cash_card", calendar::turn );
+            item card( itype_cash_card, calendar::turn );
             card.ammo_set( card.ammo_default(), 0 );
             you.i_add( card );
             you.cash -= 1000;
@@ -1741,7 +1750,7 @@ void iexamine::pit_covered( Character &you, const tripoint_bub_ms &examp )
     }
 
     map &here = get_map();
-    item plank( "2x4", calendar::turn );
+    item plank( itype_2x4, calendar::turn );
     add_msg( _( "You remove the plank." ) );
     here.add_item_or_charges( you.pos_bub(), plank );
     const ter_id &ter_pit = here.ter( examp );
@@ -2132,10 +2141,9 @@ static bool dead_plant( bool flower, Character &you, const tripoint_bub_ms &exam
 /**
  * Spawn an item after harvesting the plant
  */
-void iexamine_helper::handle_harvest( Character &you, const std::string &itemid,
-                                      bool force_drop )
+void iexamine_helper::handle_harvest( Character &you, const itype_id &itemid, bool force_drop )
 {
-    item harvest = item( itemid );
+    item harvest( itemid );
     if( harvest.has_temperature() ) {
         harvest.set_item_temperature( get_weather().get_temperature( you.pos_bub() ) );
     }
@@ -2189,8 +2197,8 @@ void iexamine::flower_poppy( Character &you, const tripoint_bub_ms &examp )
 
     here.furn_set( examp, furn_str_id::NULL_ID() );
 
-    iexamine_helper::handle_harvest( you, "poppy_bud", false );
-    iexamine_helper::handle_harvest( you, "withered", false );
+    iexamine_helper::handle_harvest( you, itype_poppy_bud, false );
+    iexamine_helper::handle_harvest( you, itype_withered, false );
 }
 
 /**
@@ -2216,8 +2224,8 @@ void iexamine::flower_cactus( Character &you, const tripoint_bub_ms &examp )
 
     here.furn_set( examp, furn_str_id::NULL_ID() );
 
-    iexamine_helper::handle_harvest( you, "cactus_pad", false );
-    iexamine_helper::handle_harvest( you, "seed_cactus", false );
+    iexamine_helper::handle_harvest( you, itype_cactus_pad, false );
+    iexamine_helper::handle_harvest( you, itype_seed_cactus, false );
 }
 
 /**
@@ -2248,10 +2256,10 @@ void iexamine::flower_dahlia( Character &you, const tripoint_bub_ms &examp )
     here.furn_set( examp, furn_str_id::NULL_ID() );
 
     if( can_get_root ) {
-        iexamine_helper::handle_harvest( you, "dahlia_root", false );
+        iexamine_helper::handle_harvest( you, itype_dahlia_root, false );
     }
-    iexamine_helper::handle_harvest( you, "seed_dahlia", false );
-    iexamine_helper::handle_harvest( you, "withered", false );
+    iexamine_helper::handle_harvest( you, itype_seed_dahlia, false );
+    iexamine_helper::handle_harvest( you, itype_withered, false );
     // There was a bud and flower spawn here
     // But those were useless, don't re-add until they get useful
 }
@@ -2328,7 +2336,7 @@ void iexamine::flower_marloss( Character &you, const tripoint_bub_ms &examp )
     }
     here.furn_set( examp, furn_str_id::NULL_ID() );
     here.spawn_item( you.pos_bub(), itype_marloss_seed, 1, 3, calendar::turn );
-    iexamine_helper::handle_harvest( you, "withered", false );
+    iexamine_helper::handle_harvest( you, itype_withered, false );
 }
 
 /**
@@ -2907,7 +2915,7 @@ void iexamine::kiln_full( Character &, const tripoint_bub_ms &examp )
         }
     }
 
-    item result( "charcoal", calendar::turn );
+    item result( itype_charcoal, calendar::turn );
     result.charges = char_type->charges_per_volume( total_volume );
     here.add_item( examp, result );
     here.furn_set( examp, next_kiln_type );
@@ -2981,7 +2989,7 @@ void iexamine::arcfurnace_empty( Character &you, const tripoint_bub_ms &examp )
     you.consume_ups( 1250_kJ );
     here.i_clear( examp );
     here.furn_set( examp, next_arcfurnace_type );
-    item result( "unfinished_cac2", calendar::turn );
+    item result( itype_unfinished_cac2, calendar::turn );
     result.charges = char_charges;
     here.add_item( examp, result );
     add_msg( _( "You turn on the furnace." ) );
@@ -3038,7 +3046,7 @@ void iexamine::arcfurnace_full( Character &, const tripoint_bub_ms &examp )
         }
     }
 
-    item result( "chem_carbide", calendar::turn );
+    item result( itype_chem_carbide, calendar::turn );
     result.charges = char_type->charges_per_volume( total_volume );
     here.add_item( examp, result );
     here.furn_set( examp, next_arcfurnace_type );
@@ -4205,7 +4213,7 @@ void iexamine::tree_hickory( Character &you, const tripoint_bub_ms &examp )
 
 static item_location maple_tree_sap_container()
 {
-    const item maple_sap = item( "maple_sap", calendar::turn_zero );
+    const item maple_sap = item( itype_maple_sap, calendar::turn_zero );
     return g->inv_map_splice( [&]( const item & it ) {
         return it.get_remaining_capacity_for_liquid( maple_sap, true ) > 0;
     }, _( "Use which container to collect sap?" ), PICKUP_RANGE,
@@ -6145,7 +6153,7 @@ static void mill_activate( Character &you, const tripoint_bub_ms &examp )
         }
     }
     here.furn_set( examp, next_mill_type );
-    item result( "fake_milling_item", calendar::turn );
+    item result( itype_fake_milling_item, calendar::turn );
     result.item_counter = to_turns<int>( milling_time );
     result.activate();
     here.add_item( examp, result );
@@ -6251,7 +6259,7 @@ static void smoker_activate( Character &you, const tripoint_bub_ms &examp )
     } else {
         charcoal->charges -= char_charges;
     }
-    item result( "fake_smoke_plume", calendar::turn );
+    item result( itype_fake_smoke_plume, calendar::turn );
     result.item_counter = to_turns<int>( 6_hours );
     result.activate();
     here.add_item( examp, result );

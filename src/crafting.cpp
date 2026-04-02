@@ -97,7 +97,9 @@ static const furn_str_id furn_f_fake_bench_hands( "f_fake_bench_hands" );
 static const furn_str_id furn_f_ground_crafting_spot( "f_ground_crafting_spot" );
 
 static const itype_id itype_disassembly( "disassembly" );
+static const itype_id itype_pickaxe( "pickaxe" );
 static const itype_id itype_plut_cell( "plut_cell" );
+static const itype_id itype_shovel( "shovel" );
 
 static const json_character_flag json_flag_BLIND_CRAFT( "BLIND_CRAFT" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
@@ -699,8 +701,8 @@ const inventory &Character::crafting_inventory( map *here, const tripoint_bub_ms
     }
 
     if( has_trait( trait_BURROW ) || has_trait( trait_BURROWLARGE ) ) {
-        *crafting_cache.crafting_inventory += item( "pickaxe", calendar::turn );
-        *crafting_cache.crafting_inventory += item( "shovel", calendar::turn );
+        *crafting_cache.crafting_inventory += item( itype_pickaxe, calendar::turn );
+        *crafting_cache.crafting_inventory += item( itype_shovel, calendar::turn );
     }
 
     crafting_cache.valid = true;

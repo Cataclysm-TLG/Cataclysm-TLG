@@ -256,9 +256,14 @@ static const itype_id itype_arcade_machine( "arcade_machine" );
 static const itype_id itype_atomic_coffeepot( "atomic_coffeepot" );
 static const itype_id itype_barometer( "barometer" );
 static const itype_id itype_battery( "battery" );
+static const itype_id itype_blood( "blood" );
+static const itype_id itype_blood_acid( "blood_acid" );
+static const itype_id itype_c4armed( "c4armed" );
 static const itype_id itype_canister_empty( "canister_empty" );
 static const itype_id itype_cig( "cig" );
+static const itype_id itype_cig_lit( "cig_lit" );
 static const itype_id itype_cigar( "cigar" );
+static const itype_id itype_cigar_lit( "cigar_lit" );
 static const itype_id itype_cow_bell( "cow_bell" );
 static const itype_id itype_detergent( "detergent" );
 static const itype_id itype_ecig( "ecig" );
@@ -268,8 +273,10 @@ static const itype_id itype_geiger_on( "geiger_on" );
 static const itype_id itype_glass_shard( "glass_shard" );
 static const itype_id itype_handrolled_cig( "handrolled_cig" );
 static const itype_id itype_heatpack_used( "heatpack_used" );
+static const itype_id itype_hotplate( "hotplate" );
 static const itype_id itype_hygrometer( "hygrometer" );
 static const itype_id itype_joint( "joint" );
+static const itype_id itype_joint_lit( "joint_lit" );
 static const itype_id itype_liquid_soap( "liquid_soap" );
 static const itype_id itype_log( "log" );
 static const itype_id itype_mask_h20survivor_on( "mask_h20survivor_on" );
@@ -279,8 +286,10 @@ static const itype_id itype_mp3( "mp3" );
 static const itype_id itype_mp3_on( "mp3_on" );
 static const itype_id itype_nicotine_liquid( "nicotine_liquid" );
 static const itype_id itype_paper( "paper" );
+static const itype_id itype_pot( "pot" );
 static const itype_id itype_pur_tablets( "pur_tablets" );
 static const itype_id itype_radio_car_on( "radio_car_on" );
+static const itype_id itype_radio_mod( "radio_mod" );
 static const itype_id itype_radio_on( "radio_on" );
 static const itype_id itype_rebreather_on( "rebreather_on" );
 static const itype_id itype_rebreather_xl_on( "rebreather_xl_on" );
@@ -291,6 +300,10 @@ static const itype_id itype_smartphone_music( "smartphone_music" );
 static const itype_id itype_soap( "soap" );
 static const itype_id itype_soldering_iron( "soldering_iron" );
 static const itype_id itype_spiral_stone( "spiral_stone" );
+static const itype_id itype_syringe( "syringe" );
+static const itype_id itype_tazer( "tazer" );
+static const itype_id itype_tongs( "tongs" );
+static const itype_id itype_toolset( "toolset" );
 static const itype_id itype_towel( "towel" );
 static const itype_id itype_towel_wet( "towel_wet" );
 static const itype_id itype_water( "water" );
@@ -459,7 +472,7 @@ void remove_radio_mod( item &it, Character &p )
         return;
     }
     p.add_msg_if_player( _( "You remove the radio modification from your %s." ), it.tname() );
-    item mod( "radio_mod" );
+    item mod( itype_radio_mod );
     p.i_add_or_drop( mod, 1 );
     it.unset_flag( flag_RADIO_ACTIVATION );
     it.unset_flag( flag_RADIO_MOD );
@@ -571,17 +584,17 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint_bub_ms 
 
     item cig;
     if( it->typeId() == itype_cig || it->typeId() == itype_handrolled_cig ) {
-        cig = item( "cig_lit", calendar::turn );
+        cig = item( itype_cig_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 4_minutes );
         p->mod_hunger( -3 );
         p->mod_thirst( 2 );
     } else if( it->typeId() == itype_cigar ) {
-        cig = item( "cigar_lit", calendar::turn );
+        cig = item( itype_cigar_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 12_minutes );
         p->mod_thirst( 3 );
         p->mod_hunger( -4 );
     } else if( it->typeId() == itype_joint ) {
-        cig = item( "joint_lit", calendar::turn );
+        cig = item( itype_joint_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 4_minutes );
         p->mod_hunger( 4 );
         p->mod_thirst( 6 );
@@ -624,7 +637,7 @@ std::optional<int> iuse::ecig( Character *p, item *it, const tripoint_bub_ms & )
             p->add_msg_if_player( m_neutral,
                                   _( "You inhale some vapor from your advanced electronic cigarette." ) );
             p->use_charges( itype_nicotine_liquid, 1 );
-            item dummy_ecig = item( "ecig", calendar::turn );
+            item dummy_ecig = item( itype_ecig, calendar::turn );
             p->consume_effects( dummy_ecig );
         } else {
             p->add_msg_if_player( m_info, _( "You don't have any nicotine liquid!" ) );
@@ -938,7 +951,7 @@ std::optional<int> iuse::flu_vaccine( Character *p, item *it, const tripoint_bub
                               _( "You notice the date on the packaging is pretty old.  It may no longer be effective." ) );
     }
     p->mod_pain( 3 );
-    item syringe( "syringe", it->birthday() );
+    item syringe( itype_syringe, it->birthday() );
     p->i_add_or_drop( syringe );
     return 1;
 }
@@ -1272,7 +1285,7 @@ std::optional<int> iuse::purify_smart( Character *p, item *it, const tripoint_bu
 
     p->mod_pain( 3 );
 
-    item syringe( "syringe", it->birthday() );
+    item syringe( itype_syringe, it->birthday() );
     p->i_add( syringe );
     p->vitamins_mod( default_character_compute_effective_nutrients( *it ).vitamins() );
     get_event_bus().send<event_type::administers_mutagen>( p->getID(),
@@ -4259,7 +4272,7 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
         return std::nullopt;
     }
 
-    item blood( "blood", calendar::turn );
+    item blood( itype_blood, calendar::turn );
     bool drew_blood = false;
     bool acid_blood = false;
     bool vampire = false;
@@ -4308,7 +4321,7 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
     }
 
     if( acid_blood ) {
-        item acid( "blood_acid", calendar::turn );
+        item acid( itype_blood_acid, calendar::turn );
         acid.set_item_temperature( blood_temp );
         it->put_in( acid, pocket_type::CONTAINER );
         if( one_in( 3 ) ) {
@@ -4949,7 +4962,7 @@ std::optional<int> iuse::adrenaline_injector( Character *p, item *it, const trip
     p->add_msg_player_or_npc( _( "You inject yourself with adrenaline." ),
                               _( "<npcname> injects themselves with adrenaline." ) );
 
-    item syringe( "syringe", it->birthday() );
+    item syringe( itype_syringe, it->birthday() );
     p->i_add( syringe );
     if( p->has_effect( effect_adrenaline ) ) {
         p->add_msg_if_player( m_bad, _( "Your heart spasms!" ) );

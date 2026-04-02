@@ -872,9 +872,8 @@ std::optional<int> consume_drug_iuse::use( Character *p, item &it, map *here,
         }
     }
 
-    if( !used_up_item.empty() ) {
+    if( !used_up_item.is_null() ) {
         item used_up( used_up_item, it.birthday() );
-        // TODO: Use map aware 'i_add_or_drop' when available
         p->i_add_or_drop( used_up );
     }
 
@@ -4354,7 +4353,7 @@ std::optional<int> saw_barrel_actor::use( Character *p, item &it, map *,
 
     item &obj = *loc.obtain( *p );
     p->add_msg_if_player( _( "You saw down the barrel of your %s." ), obj.tname() );
-    obj.put_in( item( "barrel_small", calendar::turn ), pocket_type::MOD );
+    obj.put_in( item( itype_barrel_small, calendar::turn ), pocket_type::MOD );
 
     return 0;
 }
@@ -4421,7 +4420,7 @@ std::optional<int> saw_stock_actor::use( Character *p, item &it, map *,
 
     item &obj = *loc.obtain( *p );
     p->add_msg_if_player( _( "You saw down the stock of your %s." ), obj.tname() );
-    obj.put_in( item( "stock_none", calendar::turn ), pocket_type::MOD );
+    obj.put_in( item( itype_stock_none, calendar::turn ), pocket_type::MOD );
 
     return 0;
 }

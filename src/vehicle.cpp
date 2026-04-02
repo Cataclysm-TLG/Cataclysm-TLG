@@ -114,6 +114,7 @@ static const itype_id fuel_type_muscle( "muscle" );
 static const itype_id fuel_type_plutonium_cell( "plut_cell" );
 static const itype_id fuel_type_wind( "wind" );
 static const itype_id itype_battery( "battery" );
+static const itype_id itype_generic_folded_vehicle( "generic_folded_vehicle" );
 static const itype_id itype_plut_cell( "plut_cell" );
 static const itype_id itype_plut_slurry_dense( "plut_slurry_dense" );
 static const itype_id itype_seed_buckwheat( "seed_buckwheat" );
@@ -5439,7 +5440,7 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
         int base_burn = actual_staminaRegen - 3;
         base_burn = std::max( eff_load / 3, base_burn );
         //charge bionics when using muscle engine
-        const item muscle( "muscle" );
+        const item muscle( fuel_type_muscle );
         for( const bionic_id &bid : driver->get_bionic_fueled_with_muscle() ) {
             if( driver->has_active_bionic( bid ) ) { // active power gen
                 // more pedaling = more power
@@ -6351,7 +6352,7 @@ void vehicle::slow_leak( map &here )
             p.ammo_consume( qty, &here, bub_part_pos( here, p ) );
         } else if( fuel == fuel_type_plutonium_cell ) {
             if( p.ammo_remaining() >= PLUTONIUM_CHARGES / 10 ) {
-                item leak( "plut_slurry_dense", calendar::turn, qty );
+                item leak( itype_plut_slurry_dense, calendar::turn, qty );
                 here.add_item_or_charges( dest, leak );
                 p.ammo_consume( qty * PLUTONIUM_CHARGES / 10, &here, bub_part_pos( here, p ) );
             } else {
@@ -8117,7 +8118,7 @@ time_duration vehicle::unfolding_time() const
 
 item vehicle::get_folded_item( map &here ) const
 {
-    item folded( "generic_folded_vehicle", calendar::turn );
+    item folded( itype_generic_folded_vehicle, calendar::turn );
     const std::vector<std::reference_wrapper<const vehicle_part>> &parts = real_parts();
     try {
         std::ostringstream veh_data;
@@ -8420,8 +8421,8 @@ void vehicle::update_time( map &here, const time_point &update_to )
     const weather_sum accum_weather = sum_conditions( update_from, update_to,
                                       pos_abs() );
     // make some reference objects to use to check for reload
-    const item water( "water" );
-    const item water_clean( "water_clean" );
+    const item water( itype_water );
+    const item water_clean( itype_water_clean );
 
     for( int idx : funnels ) {
         const vehicle_part &pt = parts[idx];

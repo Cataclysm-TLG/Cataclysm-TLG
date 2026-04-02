@@ -109,6 +109,9 @@ static const item_group_id Item_spawn_data_forest( "forest" );
 static const item_group_id
 Item_spawn_data_gathering_faction_camp_firewood( "gathering_faction_camp_firewood" );
 
+static const itype_id itype_camp_meal_large( "camp_meal_large" );
+static const itype_id itype_camp_meal_medium( "camp_meal_medium" );
+static const itype_id itype_camp_meal_small( "camp_meal_small" );
 static const itype_id itype_duffelbag( "duffelbag" );
 static const itype_id itype_fungal_seeds( "fungal_seeds" );
 static const itype_id itype_log( "log" );
@@ -5631,14 +5634,10 @@ int basecamp::time_to_food( time_duration work, float exertion_level ) const
 item basecamp::make_fake_food( const nutrients &to_use ) const
 {
     // This is dumb, but effective.
-    std::string food_id = "camp_meal_small";
-    if( to_use.kcal() > 3000 ) {
-        food_id = "camp_meal_large";
-    } else if( to_use.kcal() > 1000 ) {
-        food_id = "camp_meal_medium";
-    }
-    item food_item( food_id );
-    // Set the default nutritional of the item.
+    item food_item = to_use.kcal() > 3000 ?
+                     item( itype_camp_meal_large ) : to_use.kcal() > 1000 ?
+                     item( itype_camp_meal_medium ) : item( itype_camp_meal_small );
+    // Set the default nutrition of the item.
     // This doesn't persist through save/load, but that's ok, we will be eating it immediately.
     food_item.get_comestible()->set_default_nutrition( to_use );
     return food_item;

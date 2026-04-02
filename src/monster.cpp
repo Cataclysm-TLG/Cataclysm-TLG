@@ -152,8 +152,12 @@ static const flag_id json_flag_MUTAGEN_SAMPLE( "MUTAGEN_SAMPLE" );
 static const flag_id json_flag_PIT( "PIT" );
 static const flag_id json_flag_PRESERVE_SPAWN_LOC( "PRESERVE_SPAWN_LOC" );
 
+static const itype_id itype_beartrap( "beartrap" );
+static const itype_id itype_light_snare_kit( "light_snare_kit" );
 static const itype_id itype_milk( "milk" );
 static const itype_id itype_milk_raw( "milk_raw" );
+static const itype_id itype_rope_6( "rope_6" );
+static const itype_id itype_snare_trigger( "snare_trigger" );
 
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 
@@ -3104,15 +3108,15 @@ void monster::die( map *here, Creature *nkiller )
         move_special_item_to_inv( armor_item );
         move_special_item_to_inv( storage_item );
         move_special_item_to_inv( tied_item );
-        if( has_effect( effect_beartrap ) ) {
-            add_item( item( "beartrap", calendar::turn_zero ) );
-        }
         if( has_effect( effect_lightsnare ) ) {
-            add_item( item( "light_snare_kit", calendar::turn_zero ) );
+            add_item( item( itype_light_snare_kit, calendar::turn_zero ) );
         }
         if( has_effect( effect_heavysnare ) ) {
-            add_item( item( "rope_6", calendar::turn_zero ) );
-            add_item( item( "snare_trigger", calendar::turn_zero ) );
+            add_item( item( itype_rope_6, calendar::turn_zero ) );
+            add_item( item( itype_snare_trigger, calendar::turn_zero ) );
+        }
+        if( has_effect( effect_beartrap ) ) {
+            add_item( item( itype_beartrap, calendar::turn_zero ) );
         }
     }
 

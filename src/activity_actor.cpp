@@ -5134,7 +5134,7 @@ void harvest_activity_actor::finish( player_activity &act, Character &who )
                         && roll > 0 && ( entry.difficulty == 0 || rng( 0, 49 ) < 40 );
         if( got_anything ) {
             for( int i = 0; i < roll; i++ ) {
-                iexamine_helper::handle_harvest( who, entry.drop, false );
+                iexamine_helper::handle_harvest( who, itype_id( entry.drop ), false );
             }
         }
     }
