@@ -34,7 +34,7 @@
     "symbol": "/",
     "color": "red",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "gasoline": 450 }, "watertight": true, "rigid": true } ],
-    "charges_per_use": 5,
+    "charges_per_use": 0,
     "techniques": [ "SWEEP" ],
     "use_action": {
       "type": "effect_on_conditions",
