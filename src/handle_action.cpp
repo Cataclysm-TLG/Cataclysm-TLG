@@ -2021,23 +2021,13 @@ void game::open_consume_item_menu()
     as_m.entries.emplace_back( 2, true, 'm', _( "Medication" ) );
     as_m.query();
 
-    avatar &player_character = get_avatar();
-    switch( as_m.ret ) {
-        case 0: {
-            item_location loc = game_menus::inv::consume_food();
-            avatar_action::eat( player_character, loc );
-            break;
-        }
-        case 1: {
-            item_location loc = game_menus::inv::consume_drink();
-            avatar_action::eat( player_character, loc );
-            break;
-        }
-        case 2:
-            avatar_action::eat_or_use( player_character, game_menus::inv::consume_meds() );
-            break;
-        default:
-            break;
+    const int query_returned_index = as_m.ret;
+    if( query_returned_index >= 0 && query_returned_index < 3 ) {
+        const std::array<std::string, 3> comestype_strings = { "FOOD", "DRINK", "MED" };
+        const std::string &selected_comestype = comestype_strings[query_returned_index];
+        uistate.open_menu = [selected_comestype = selected_comestype]() {
+            avatar_action::eat_or_use( get_avatar(), game_menus::inv::consume( selected_comestype ) );
+        };
     }
 }
 
@@ -3143,6 +3133,11 @@ bool game::handle_action()
     } else if( player_character.has_destination_activity() ) {
         // starts destination activity after the player successfully reached his destination
         player_character.start_destination_activity();
+        return false;
+    } else if( uistate.open_menu ) {
+        std::optional<std::function<void()>> open_menu_tmp = std::nullopt;
+        std::swap( uistate.open_menu, open_menu_tmp );
+        open_menu_tmp.value()();
         return false;
     } else {
         // No auto-move, ask player for input
