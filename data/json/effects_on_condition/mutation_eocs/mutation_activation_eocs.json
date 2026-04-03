@@ -37,7 +37,7 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "prep_time": 3,
+          "prep_time": "3",
           "spell_to_cast": "spell_spit_flare",
           "message_success": { "i18n": true, "str": "You launch a glob of bioluminescent material!" },
           "message_fail": { "i18n": true, "str": "Your body is too starved to activate your bioluminescent flare." }
@@ -52,7 +52,7 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "prep_time": 1,
+          "prep_time": "1",
           "spell_to_cast": "spell_slime_spray",
           "message_success": { "i18n": true, "str": "You spit out some goo onto your enemies!" },
           "message_fail": { "i18n": true, "str": "Your body is too starved to activate your slime spray." }
@@ -67,8 +67,8 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "energy_amount": 1400,
-          "prep_time": 1,
+          "energy_amount": "1400",
+          "prep_time": "1",
           "spell_to_cast": "spell_feline_leap",
           "message_success": {
             "i18n": true,
@@ -86,8 +86,8 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "energy_amount": 1800,
-          "prep_time": 2,
+          "energy_amount": "1800",
+          "prep_time": "2",
           "spell_to_cast": "spell_short_leap",
           "message_success": { "i18n": true, "str": "You take a big leap forward." },
           "message_fail": { "i18n": true, "str": "You  are too tired to perform a jump." }
@@ -102,8 +102,8 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "energy_amount": 2000,
-          "prep_time": 3,
+          "energy_amount": "2000",
+          "prep_time": "2",
           "spell_to_cast": "spell_crushing_leap",
           "message_success": { "i18n": true, "str": "You crouch down and leap forward with all your might." },
           "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
@@ -118,8 +118,8 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "energy_amount": 1900,
-          "prep_time": 1,
+          "energy_amount": "1900",
+          "prep_time": "1",
           "spell_to_cast": "spell_avian_leap",
           "message_success": { "i18n": true, "str": "You leap forward, talons ready to strike." },
           "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
@@ -134,8 +134,8 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "energy_amount": 1900,
-          "prep_time": 1,
+          "energy_amount": "1900",
+          "prep_time": "1",
           "spell_to_cast": "spell_raptor_leap",
           "message_success": { "i18n": true, "str": "You leap forward, talons ready to strike." },
           "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
@@ -150,8 +150,8 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "energy_amount": 600,
-          "prep_time": 1,
+          "energy_amount": "600",
+          "prep_time": "1",
           "spell_to_cast": "spell_whipping_tongue_pull",
           "message_success": { "i18n": true, "str": "Your tongue launches out to snag your target." },
           "message_fail": { "i18n": true, "str": "You are too tired to catch anything with your tongue." }
@@ -166,8 +166,8 @@
       {
         "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
         "variables": {
-          "energy_amount": 600,
-          "prep_time": 1,
+          "energy_amount": "600",
+          "prep_time": "1",
           "spell_to_cast": "spell_harpoon_tongue_stab",
           "message_success": { "i18n": true, "str": "Your tongue launches out to spear your target." },
           "message_fail": { "i18n": true, "str": "You are too tired to catch anything with your tongue." }

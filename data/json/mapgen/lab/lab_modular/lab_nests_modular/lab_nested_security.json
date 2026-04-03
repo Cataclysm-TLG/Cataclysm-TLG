@@ -395,10 +395,7 @@
         "U|      H|"
       ],
       "palettes": [ "lab_common_palette", "lab_security_palette" ],
-      "place_loot": [
-        { "group": "dogfood_dry_bag_plastic_6", "x": 0, "y": 3, "chance": 100 },
-        { "item": "dogfood", "x": 0, "y": 3, "chance": 100 }
-      ],
+      "place_loot": [ { "group": "dogfood_dry_bag_plastic_6", "x": 0, "y": 3, "chance": 100 }, { "item": "dogfood", "x": 0, "y": 3, "chance": 100 } ],
       "place_nested": [
         { "chunks": [ [ "1x6_bash", 50 ], [ "null", 50 ] ], "x": [ 2, 4 ], "y": 2 },
         { "chunks": [ [ "1x6_bash", 50 ], [ "null", 50 ] ], "x": [ 2, 3 ], "y": 4 }
@@ -430,10 +427,7 @@
         "   ն   | |"
       ],
       "palettes": [ "lab_common_palette", "lab_security_palette" ],
-      "place_loot": [
-        { "group": "dogfood_dry_bag_plastic_6", "x": 0, "y": 6, "chance": 100 },
-        { "item": "dogfood", "x": 0, "y": 6, "chance": 100 }
-      ],
+      "place_loot": [ { "group": "dogfood_dry_bag_plastic_6", "x": 0, "y": 6, "chance": 100 }, { "item": "dogfood", "x": 0, "y": 6, "chance": 100 } ],
       "place_nested": [
         { "chunks": [ [ "1x6_bash", 50 ], [ "null", 50 ] ], "x": [ 2, 3 ], "y": 5 },
         { "chunks": [ [ "1x6_bash", 50 ], [ "null", 50 ] ], "x": [ 2, 4 ], "y": 7 }
