@@ -2072,7 +2072,9 @@ void Item_factory::init()
     add_iuse( "MININUKE", &iuse::mininuke );
     add_iuse( "MOLOTOV_LIT", &iuse::molotov_lit );
     add_iuse( "MOP", &iuse::mop );
+    add_iuse( "MP3", &iuse::mp3 );
     add_iuse( "MP3_ON", &iuse::mp3_on );
+    add_iuse( "MP3_DEACTIVATE", &iuse::mp3_deactivate );
     add_iuse( "MYCUS", &iuse::mycus );
     add_iuse( "NOISE_EMITTER_ON", &iuse::noise_emitter_on );
     add_iuse( "OXYGEN_BOTTLE", &iuse::oxygen_bottle );
@@ -2159,7 +2161,6 @@ void Item_factory::init()
     add_actor( std::make_unique<iuse_transform>() );
     add_actor( std::make_unique<unpack_actor>() );
     add_actor( std::make_unique<message_iuse>() );
-    add_actor( std::make_unique<mp3_iuse>() );
     add_actor( std::make_unique<sound_iuse>() );
     add_actor( std::make_unique<play_instrument_iuse>() );
     add_actor( std::make_unique<manualnoise_actor>() );
@@ -2534,12 +2535,6 @@ void Item_factory::check_definitions() const
                 msg += string_format( "invalid cooks_like %s\n",
                                       type->comestible->cooks_like.c_str() );
             }
-            if( !type->comestible->smoking_result.is_null() &&
-                !type->comestible->smoking_result.is_empty() &&
-                !has_template( type->comestible->smoking_result ) ) {
-                msg += string_format( "invalid smoking_result %s\n",
-                                      type->comestible->smoking_result.c_str() );
-            }
             if( type->comestible->rot_spawn.rot_spawn_monster != mtype_id::NULL_ID() &&
                 !type->comestible->rot_spawn.rot_spawn_monster.is_valid() ) {
                 msg += string_format( "invalid rot_spawn monster %s\n",
@@ -2560,41 +2555,9 @@ void Item_factory::check_definitions() const
                 msg += "empty product list\n";
             }
 
-            for( const std::pair<const std::pair<itype_id, std::string>, int> &b : type->brewable->results ) {
-                if( !has_template( b.first.first ) ) {
-                    msg += string_format( "invalid result id %s\n", b.first.first.c_str() );
-                }
-                const std::vector<itype_variant_data> &variants = b.first.first->variants;
-                const auto has_variant = [&b]( const itype_variant_data & variant ) {
-                    return b.first.second == variant.id;
-                };
-                if( !b.first.second.empty() &&
-                    std::find_if( variants.begin(), variants.end(), has_variant ) == variants.end() ) {
-                    msg += string_format( "Invalid variant %s for result %s\n", b.first.second, b.first.first.c_str() );
-                }
-            }
-        }
-        if( type->compostable ) {
-            if( type->compostable->time < 1_turns ) {
-                msg += "fermenting time is less than 1 turn\n";
-            }
-
-            if( type->compostable->results.empty() ) {
-                msg += "empty product list\n";
-            }
-
-            for( const std::pair<const std::pair<itype_id, std::string>, int> &b :
-                 type->compostable->results ) {
-                if( !has_template( b.first.first ) ) {
-                    msg += string_format( "invalid result id %s\n", b.first.first.c_str() );
-                }
-                const std::vector<itype_variant_data> &variants = b.first.first->variants;
-                const auto has_variant = [&b]( const itype_variant_data & variant ) {
-                    return b.first.second == variant.id;
-                };
-                if( !b.first.second.empty() &&
-                    std::find_if( variants.begin(), variants.end(), has_variant ) == variants.end() ) {
-                    msg += string_format( "Invalid variant %s for result %s\n", b.first.second, b.first.first.c_str() );
+            for( const std::pair<const itype_id, int> &b : type->brewable->results ) {
+                if( !has_template( b.first ) ) {
+                    msg += string_format( "invalid result id %s\n", b.first.c_str() );
                 }
             }
         }
@@ -2884,9 +2847,6 @@ const itype *Item_factory::add_runtime( const itype_id &id, translation name,
     def->description = std::move( description );
     m_runtimes[ id ].reset( def );
     m_runtimes_dirty = true;
-    // Clear armor_containers cache. It is probably not needed (added runtime will not be a container),
-    // but as this almost never hapens and the cost is next to none, we can afford to be correct.
-    armor_containers.clear();
     return def;
 }
 
@@ -3515,10 +3475,6 @@ void islot_comestible::deserialize( const JsonObject &jo )
         consumption_eocs.push_back( effect_on_conditions::load_inline_eoc( jv, src ) );
     }
     optional( jo, was_loaded, "rot_spawn", rot_spawn );
-
-    if( smoking_result != itype_id::NULL_ID() && comesttype == "INVALID" ) {
-        jo.throw_error( "comestible_type INVALID cannot have smoking_result" );
-    }
 }
 
 struct generic_result_reader : generic_typed_reader<generic_result_reader> {
@@ -3549,13 +3505,25 @@ struct generic_result_reader : generic_typed_reader<generic_result_reader> {
 void islot_brewable::deserialize( const JsonObject &jo )
 {
     optional( jo, was_loaded, "brew_time", time, 1_turns );
-    mandatory( jo, was_loaded, "brew_results", results, generic_result_reader{} );
+    if( jo.has_array( "brew_results" ) ) {
+        for( std::string entry : jo.get_string_array( "brew_results" ) ) {
+            results[itype_id( entry )] = 1;
+        }
+    } else {
+        mandatory( jo, was_loaded, "brew_results", results );
+    }
 }
 
 void islot_compostable::deserialize( const JsonObject &jo )
 {
     optional( jo, was_loaded, "compost_time", time, 1_turns );
-    mandatory( jo, was_loaded, "compost_results", results, generic_result_reader{} );
+    if( jo.has_array( "compost_results" ) ) {
+        for( std::string entry : jo.get_string_array( "compost_results" ) ) {
+            results[itype_id( entry )] = 1;
+        }
+    } else {
+        mandatory( jo, was_loaded, "compost_results", results );
+    }
 }
 
 void islot_seed::deserialize( const JsonObject &jo )
@@ -3608,7 +3576,6 @@ void islot_gunmod::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "mode_modifier", mode_modifier, gun_modes_reader{} );
     optional( jo, was_loaded, "reload_modifier", reload_modifier );
     optional( jo, was_loaded, "min_str_required_mod", min_str_required_mod );
-    optional( jo, was_loaded, "min_str_required_mod_if_prone", min_str_required_mod_if_prone );
     optional( jo, was_loaded, "is_bayonet", is_bayonet );
     optional( jo, was_loaded, "is_visible_when_installed", is_visible_when_installed );
     optional( jo, was_loaded, "blacklist_mod", blacklist_mod, auto_flags_reader<itype_id> {} );
@@ -3810,7 +3777,7 @@ void Item_factory::check_and_create_magazine_pockets( itype &def )
 
     pocket_data mag_data;
     mag_data.holster = true;
-    mag_data.raw_max_contains_volume = 200_liter;
+    mag_data.volume_capacity = 200_liter;
     mag_data.max_contains_weight = 2000000_kilogram;
     mag_data.max_item_length = 2_km;
     mag_data.watertight = true;
@@ -4176,6 +4143,7 @@ void itype::load( const JsonObject &jo, std::string_view src )
     optional( jo, was_loaded, "price", price, not_negative_money, 0_cent );
     optional( jo, was_loaded, "price_postapoc", price_post, not_negative_money, -1_cent );
     optional( jo, was_loaded, "stackable", stackable_ );
+    optional( jo, was_loaded, "stack_max", stack_max );
     optional( jo, was_loaded, "integral_volume", integral_volume, not_negative_volume, -1_ml );
     optional( jo, was_loaded, "light", light_emission, 0 );
     optional( jo, was_loaded, "integral_longest_side", integral_longest_side, not_negative_length,
@@ -4758,17 +4726,6 @@ void Item_factory::add_entry( Item_group &ig, const JsonObject &obj,
         use_modifier = true;
     }
 
-    if( obj.has_array( "variables" ) ) {
-        for( const JsonObject jo : obj.get_array( "variables" ) ) {
-            for( const JsonMember &jv : jo ) {
-                diag_value dv;
-                mandatory( jo, false, jv.name(), dv );
-                modifier.item_vars.insert( { jv.name(), dv } );
-            }
-        }
-        use_modifier = true;
-    }
-
     if( use_modifier ) {
         sptr->modifier.emplace( std::move( modifier ) );
     }
@@ -4991,6 +4948,43 @@ std::vector<item_group_id> Item_factory::get_all_group_names()
     return rval;
 }
 
+void item_group::debug_spawn()
+{
+    std::vector<item_group_id> groups = item_controller->get_all_group_names();
+    uilist menu;
+    menu.text = _( "Test which group?" );
+    for( size_t i = 0; i < groups.size(); i++ ) {
+        menu.entries.emplace_back( static_cast<int>( i ), true, -2, groups[i].str() );
+    }
+    while( true ) {
+        menu.query();
+        const int index = menu.ret;
+        if( index >= static_cast<int>( groups.size() ) || index < 0 ) {
+            break;
+        }
+        // Spawn items from the group 100 times
+        std::map<std::string, int> itemnames;
+        for( size_t a = 0; a < 100; a++ ) {
+            const ItemList items = items_from( groups[index], calendar::turn );
+            for( const item &it : items ) {
+                itemnames[it.display_name()]++;
+            }
+        }
+        // Invert the map to get sorting!
+        std::multimap<int, std::string> itemnames2;
+        for( const auto &e : itemnames ) {
+            itemnames2.insert( std::pair<int, std::string>( e.second, e.first ) );
+        }
+        uilist menu2;
+        menu2.text = _( "Result of 100 spawns:" );
+        for( const auto &e : itemnames2 ) {
+            menu2.entries.emplace_back( static_cast<int>( menu2.entries.size() ), true, -2,
+                                        string_format( _( "%d x %s" ), e.first, e.second ) );
+        }
+        menu2.query();
+    }
+}
+
 bool Item_factory::has_template( const itype_id &id ) const
 {
     return template_list_contains( id ) || m_runtimes.count( id );
@@ -5030,52 +5024,6 @@ std::vector<const itype *> Item_factory::find( const std::function<bool( const i
     } );
 
     return res;
-}
-
-std::pair<std::vector<item>::const_iterator, std::vector<item>::const_iterator>
-Item_factory::get_armor_containers( units::volume min_volume ) const
-{
-    if( armor_containers.empty() ) {
-        // Prepare armor_containers for contained_in cache.
-        using item_volumes = std::tuple<item, units::volume>;
-        std::vector<item_volumes> vols;
-        for( const itype *ity : all() ) {
-            if( item_is_blacklisted( ity->get_id() ) || ity->get_id() == itype_debug_backpack ) {
-                continue;
-            }
-            item itm = item( ity );
-            if( !itm.is_armor() ) {
-                continue;
-            }
-            const units::volume vol = itm.get_biggest_pocket_capacity();
-            if( vol == 0_ml ) {
-                continue;
-            }
-            vols.emplace_back( std::move( itm ), vol );
-        }
-
-        // Sort armor_containers based on the biggest pocket volume.
-        std::sort( vols.begin(), vols.end(), []( const item_volumes & a, const item_volumes & b ) {
-            return std::get<1>( a ) < std::get<1>( b );
-        } );
-
-        // Add them in ascending order.
-        armor_containers.clear();
-        volumes.clear();
-        armor_containers.reserve( vols.size() );
-        volumes.reserve( vols.size() );
-        // TODO move the elements instead
-        for( const item_volumes &iv : vols ) {
-            armor_containers.emplace_back( std::get<0>( iv ) );
-            volumes.emplace_back( std::get<1>( iv ) );
-        }
-    }
-
-    // Iterator in volumes coresponds to iterator in armor_containers.
-    // Binary find the first holster that has enough volume.
-    return { armor_containers.begin() + static_cast<size_t>( lower_bound(
-                 volumes.begin(), volumes.end(), min_volume ) - volumes.begin() ),
-             armor_containers.end()};
 }
 
 std::list<itype_id> Item_factory::subtype_replacement( const itype_id &base ) const

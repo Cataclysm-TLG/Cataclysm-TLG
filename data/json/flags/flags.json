@@ -1249,7 +1249,7 @@
     "type": "json_flag"
   },
   {
-    "id": "ALLERGEN_vegetable",
+    "id": "ALLERGEN_VEGETABLE",
     "type": "json_flag"
   },
   {
