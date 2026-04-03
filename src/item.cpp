@@ -305,8 +305,7 @@ item::item() : bday( calendar::start_of_cataclysm )
     select_itype_variant();
 }
 
-item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( turn ),
-    uid_( generate_next_item_uid() )
+item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( turn )
 {
     contents = item_contents( type->pockets );
     if( type->countdown_interval > 0_seconds ) {

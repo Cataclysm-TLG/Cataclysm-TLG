@@ -28,7 +28,6 @@
 #include "item_contents.h"
 #include "item_location.h"
 #include "item_tname.h"
-#include "item_uid.h"
 #include "material.h"
 #include "math_parser_diag_value.h"
 #include "point.h"
@@ -234,12 +233,6 @@ class item : public visitable
         /** Return a pointer-like type that's automatically invalidated if this
          * item is destroyed or assigned-to */
         safe_reference<item> get_safe_reference();
-
-        /** Persistent unique identifier for this item instance.
-         * Returns const ref to avoid triggering item_uid's copy-generates-new semantics. */
-        const item_uid &uid() const {
-            return uid_;
-        }
 
         /**
          * Filter converting this instance to another type preserving all other aspects
@@ -3340,7 +3333,6 @@ class item : public visitable
         time_point last_temp_check = calendar::turn_zero;
         /// The time the item was created.
         time_point bday;
-        item_uid uid_; // persistent unique identifier, survives save/load
         /**
          * Current phase state, inherits a default at room temperature from
          * itype and can be changed through item processing.  This is a static

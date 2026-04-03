@@ -134,6 +134,10 @@ struct dealt_projectile_attack;
 
 static const activity_id ACT_ADV_INVENTORY( "ACT_ADV_INVENTORY" );
 static const activity_id ACT_AUTODRIVE( "ACT_AUTODRIVE" );
+static const activity_id ACT_CONSUME_DRINK_MENU( "ACT_CONSUME_DRINK_MENU" );
+static const activity_id ACT_CONSUME_FOOD_MENU( "ACT_CONSUME_FOOD_MENU" );
+static const activity_id ACT_CONSUME_MEDS_MENU( "ACT_CONSUME_MEDS_MENU" );
+static const activity_id ACT_EAT_MENU( "ACT_EAT_MENU" );
 static const activity_id ACT_FISH( "ACT_FISH" );
 static const activity_id ACT_GAME( "ACT_GAME" );
 static const activity_id ACT_HAND_CRANK( "ACT_HAND_CRANK" );
@@ -7560,6 +7564,16 @@ bool Character::invoke_item( item *used, const std::string &method, const tripoi
         return false;
     }
 
+    if( actually_used->is_comestible() ) {
+        const bool ret = consume_effects( *used );
+        const int consumed = used->activation_consume( charges_used.value(), pt, this );
+        if( consumed == 0 ) {
+            // Nothing was consumed from within the item. "Eat" the item itself away.
+            i_rem( actually_used );
+        }
+        return ret;
+    }
+
     actually_used->activation_consume( charges_used.value(), pt, this );
 
     if( actually_used->has_flag( flag_SINGLE_USE ) || actually_used->is_bionic() ||
@@ -9677,6 +9691,10 @@ bool Character::can_use_floor_warmth() const
            has_activity( ACT_TRY_SLEEP ) ||
            has_activity( ACT_OPERATION ) ||
            has_activity( ACT_TREE_COMMUNION ) ||
+           has_activity( ACT_EAT_MENU ) ||
+           has_activity( ACT_CONSUME_FOOD_MENU ) ||
+           has_activity( ACT_CONSUME_DRINK_MENU ) ||
+           has_activity( ACT_CONSUME_MEDS_MENU ) ||
            has_activity( ACT_VIEW_RECIPE ) ||
            has_activity( ACT_STUDY_SPELL );
 }
