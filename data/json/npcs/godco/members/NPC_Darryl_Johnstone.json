@@ -155,7 +155,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_GODCO_Darryl_Farm",
-    "dynamic_line": "Took us three days and four hard-working hands to clear this humble little land.  It's a far-cry from my old garden, it really is.  I heard theories, from Tom of course, that really messed with my head.  You can never know what's in one of them toxic clouds, can ya?  I suspect goo-puker blood.  That putrid oil is a sure way to make any soil infertile, or so that nitwit says.  Here I go again, ramblin' once more.  One of my bad habits.",
+    "dynamic_line": "Took us two weeks and four hard-working hands to clear this humble little land.  It's a far cry from my old garden, it really is.  I heard theories, from Tom of course, that really messed with my head.  The earth don't yield like she used to, and maybe it's for the same reason the dead don't stay buried any more.  I s'pose it's no use worrying about it, we just have to work twice as hard.",
     "responses": [
       { "text": "Is there anything I can do to help you out?", "topic": "TALK_MISSION_LIST" },
       { "text": "What were you saying before?", "topic": "TALK_NONE" },
@@ -189,71 +189,71 @@
   {
     "id": "TALK_GODCO_Darryl_Trade2",
     "type": "talk_topic",
-    "dynamic_line": "All right, this is what I've got:  I can give cucumber, barley or blackberry seeds for one icon; carrot, buckwheat or cranberry seeds for two icons; oat, sugar beet or potato seeds for three icons.",
+    "dynamic_line": "All right, this is what I've got:  I can spare three packs of cucumber, barley or blackberry seeds for one icon; carrot, buckwheat or cranberry seeds for two icons; oat, sugar beet or potato seeds for three icons.",
     "responses": [
       {
         "text": "I'll buy cucumber seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 1 } },
-        "effect": [ { "u_sell_item": "icon", "count": 1 }, { "u_spawn_item": "seed_cucumber", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 1 }, { "u_spawn_item": "seed_cucumber", "count": 3 } ]
       },
       {
         "text": "I'll buy barley seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 1 } },
-        "effect": [ { "u_sell_item": "icon", "count": 1 }, { "u_spawn_item": "seed_barley", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 1 }, { "u_spawn_item": "seed_barley", "count": 3 } ]
       },
       {
         "text": "I'll buy blackberry seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 1 } },
-        "effect": [ { "u_sell_item": "icon", "count": 1 }, { "u_spawn_item": "seed_blackberries", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 1 }, { "u_spawn_item": "seed_blackberries", "count": 3 } ]
       },
       {
         "text": "I'll buy carrot seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 2 } },
-        "effect": [ { "u_sell_item": "icon", "count": 2 }, { "u_spawn_item": "seed_carrot", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 2 }, { "u_spawn_item": "seed_carrot", "count": 3 } ]
       },
       {
         "text": "I'll buy buckwheat seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 2 } },
-        "effect": [ { "u_sell_item": "icon", "count": 2 }, { "u_spawn_item": "seed_buckwheat", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 2 }, { "u_spawn_item": "seed_buckwheat", "count": 3 } ]
       },
       {
         "text": "I'll buy cranberry seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 2 } },
-        "effect": [ { "u_sell_item": "icon", "count": 2 }, { "u_spawn_item": "seed_cranberries", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 2 }, { "u_spawn_item": "seed_cranberries", "count": 3 } ]
       },
       {
         "text": "I'll buy oat seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 3 } },
-        "effect": [ { "u_sell_item": "icon", "count": 3 }, { "u_spawn_item": "seed_oats", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 3 }, { "u_spawn_item": "seed_oats", "count": 3 } ]
       },
       {
         "text": "I'll buy sugar beet seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 3 } },
-        "effect": [ { "u_sell_item": "icon", "count": 3 }, { "u_spawn_item": "seed_sugar_beet", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 3 }, { "u_spawn_item": "seed_sugar_beet", "count": 3 } ]
       },
       {
         "text": "I'll buy potato seeds.",
         "topic": "TALK_GODCO_Darryl_Trade2",
         "condition": { "u_has_items": { "item": "icon", "count": 3 } },
-        "effect": [ { "u_sell_item": "icon", "count": 3 }, { "u_spawn_item": "seed_potato_raw", "count": 25 } ]
+        "effect": [ { "u_sell_item": "icon", "count": 3 }, { "u_spawn_item": "seed_potato_raw", "count": 3 } ]
       },
       {
-        "text": "Can't you just give them to me for free?  You said you didn't need them.",
+        "text": "Can you spare anything?  You know how bad the food situation is.",
         "condition": { "not": { "u_has_effect": "godco_darryl_bartered" } },
         "trial": { "type": "PERSUADE", "difficulty": 25, "mod": [ [ "trust", 5 ] ] },
         "success": {
           "topic": "TALK_GODCO_Darryl_BarterSuccess",
           "effect": [
             { "npc_add_effect": "godco_darryl_bartered", "duration": "PERMANENT" },
-            { "u_spawn_item": "seed_potato_raw", "count": 25 }
+            { "u_spawn_item": "seed_oats", "count": 3 }
           ]
         },
         "failure": { "topic": "TALK_GODCO_Darryl_BarterFail", "opinion": { "trust": -6 } }
@@ -265,7 +265,7 @@
     "type": "talk_topic",
     "id": "TALK_GODCO_Darryl_BarterSuccess",
     "dynamic_line": {
-      "gendered_line": "Well, you got me there.  I sure ain't one to block a fellow farmer's right to reclaim this God-given earth.",
+      "gendered_line": "Yeah, I surely do.  Here, it ain't much, but oats are easy enough, and good food too.",
       "relevant_genders": [ "u" ]
     },
     "responses": [ { "text": "Thank you.  See you around, Darryl.", "topic": "TALK_DONE" } ]
@@ -273,13 +273,13 @@
   {
     "type": "talk_topic",
     "id": "TALK_GODCO_Darryl_BarterFail",
-    "dynamic_line": "It really isn't difficult to earn your money here.  Hard labor, like the rest of us.",
+    "dynamic_line": "It really isn't hard to earn your keep here.  Talk to folks, someone'll have something for you to do.",
     "responses": [ { "text": "…", "topic": "TALK_DONE" } ]
   },
   {
     "type": "talk_topic",
     "id": "TALK_GODCO_Darryl_Wife",
-    "dynamic_line": "I've got a wife, Gemma.  She's a grand lady, should be around here somewhere.  She used to teach biology, and we both love gardenin'; that's how we met, ya see.  She 'aint been herself lately, I'm startin' to worry.",
+    "dynamic_line": "I've got a wife, Gemma.  She's a grand lady, should be around here somewhere.  She used to teach biology, and we both love gardenin'; that's how we met, ya see.  She ain't been herself lately, I'm startin' to worry.",
     "responses": [
       { "text": "What about your parents?", "topic": "TALK_GODCO_Darryl_Mom&Dad" },
       { "text": "I'll check on her.  I hope everything works out for you.", "topic": "TALK_DONE" }
