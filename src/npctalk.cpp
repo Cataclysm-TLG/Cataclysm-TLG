@@ -148,9 +148,6 @@ static std::map<std::string, json_talk_topic> json_talk_topics;
 using item_menu = std::function<item_location( const item_location_filter & )>;
 using item_menu_mul = std::function<drop_locations( const item_location_filter & )>;
 
-extern template struct value_or_var<diag_value, eoc_math, string_mutator<translation>>;
-using diag_value_or_var = value_or_var<diag_value, eoc_math, string_mutator<translation>>;
-
 struct sub_effect_parser {
     using f_t = talk_effect_fun_t::func( * )( const JsonObject &, std::string_view,
                 std::string_view src );
@@ -6059,13 +6056,13 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
         random_time = jo.get_bool( "randomize_time_in_future", false );
     }
 
-    std::unordered_map<std::string, diag_value_or_var> context;
+    std::unordered_map<std::string, str_translation_or_var> context;
     if( jo.has_object( "variables" ) ) {
         const JsonObject &variables = jo.get_object( "variables" );
         for( const JsonMember &jv : variables ) {
-            diag_value_or_var vov;
-            mandatory( variables, false, jv.name(), vov );
-            context[jv.name()] = vov;
+            str_translation_or_var stov;
+            stov.deserialize( jv );
+            context[jv.name()] = stov;
         }
     }
 
@@ -6102,7 +6099,8 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
                             d.get_context() };
 
         for( const auto &val : context ) {
-            newDialog.set_value( val.first, val.second.evaluate( d ) );
+            // FXIXME: typed variables
+            newDialog.set_value( val.first, diag_value::legacy_value{ val.second.evaluate( d, true ) } );
         }
 
         if( dov_time ) {
@@ -6160,15 +6158,15 @@ talk_effect_fun_t::func f_run_eoc_selector( const JsonObject &jo, std::string_vi
         jo.throw_error( "Invalid input for run_eoc_selector, size of eocs and keys needs to be identical, or keys need to be empty." );
     }
 
-    std::vector<std::unordered_map<std::string, diag_value_or_var>> context;
+    std::vector<std::unordered_map<std::string, str_translation_or_var>> context;
     if( jo.has_array( "variables" ) ) {
         for( const JsonValue &member : jo.get_array( "variables" ) ) {
             const JsonObject &variables = member.get_object();
-            std::unordered_map<std::string, diag_value_or_var> temp_context;
+            std::unordered_map<std::string, str_translation_or_var> temp_context;
             for( const JsonMember &jv : variables ) {
-                diag_value_or_var vov;
-                mandatory( variables, false, jv.name(), vov );
-                temp_context[jv.name()] = vov;
+                str_translation_or_var stov;
+                stov.deserialize( jv );
+                temp_context[jv.name()] = stov;
             }
             context.emplace_back( temp_context );
         }
@@ -6259,7 +6257,8 @@ talk_effect_fun_t::func f_run_eoc_selector( const JsonObject &jo, std::string_vi
         }
         if( !context.empty() ) {
             for( const auto &val : context[contextIndex] ) {
-                newDialog.set_value( val.first, val.second.evaluate( d ) );
+                // FIXME: typed variables
+                newDialog.set_value( val.first, diag_value::legacy_value{ val.second.evaluate( d, true ) } );
             }
         }
 
@@ -7501,20 +7500,18 @@ talk_effect_fun_t::func f_trigger_event( const JsonObject &jo, std::string_view 
     JsonArray const &jargs = jo.get_array( "args" );
 
     event_type type = io::string_to_enum<event_type>( type_str );
-    std::vector<diag_value_or_var> args;
+    std::vector<str_or_var> args;
     args.reserve( jargs.size() );
     for( JsonValue const &jv : jargs ) {
-        diag_value_or_var vov;
-        vov.deserialize( jv );
-        args.emplace_back( vov );
+        args.emplace_back( get_str_or_var( jv, "args" ) );
     }
 
     return [type, args]( dialogue & d ) {
         std::vector<std::string> args_str;
         args_str.reserve( args.size() );
         std::transform( args.cbegin(), args.cend(),
-        std::back_inserter( args_str ), [&d]( diag_value_or_var const & sov ) {
-            return sov.evaluate( d ).to_string();
+        std::back_inserter( args_str ), [&d]( str_or_var const & sov ) {
+            return sov.evaluate( d );
         } );
         get_event_bus().send( cata::event::make_dyn( type, args_str ) );
     };
