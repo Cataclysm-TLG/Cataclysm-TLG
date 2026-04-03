@@ -465,6 +465,7 @@ game::game() :
     u_shared_ptr( &u, null_deleter{} ),
     next_npc_id( 1 ),
     next_mission_id( 1 ),
+    next_item_uid( 1 ),
     remoteveh_cache_time( calendar::before_time_starts ),
     tileset_zoom( DEFAULT_TILESET_ZOOM ),
     last_mouse_edge_scroll( std::chrono::steady_clock::now() )
@@ -813,6 +814,7 @@ void game::setup()
 
     next_npc_id = character_id( 1 );
     next_mission_id = 1;
+    next_item_uid = 1;
     uquit = QUIT_NO;   // We haven't quit the game
     bVMonsterLookFire = true;
 
@@ -2373,7 +2375,10 @@ int game::inventory_item_menu( item_location locThisItem,
                     if( !locThisItem.get_item()->is_container() ) {
                         avatar_action::eat( u, locThisItem );
                     } else {
-                        avatar_action::eat_or_use( u, game_menus::inv::consume( locThisItem ) );
+                        uistate.open_menu = [locThisItem = locThisItem]() {
+                            avatar_action::eat_or_use( get_avatar(),
+                                                       game_menus::inv::consume( std::string(), locThisItem ) );
+                        };
                     }
                     break;
                 case 'W': {
@@ -4536,6 +4541,11 @@ character_id game::assign_npc_id()
     character_id ret = next_npc_id;
     ++next_npc_id;
     return ret;
+}
+
+int64_t game::assign_item_uid()
+{
+    return next_item_uid++;
 }
 
 Creature *game::is_hostile_nearby()
@@ -7295,6 +7305,9 @@ look_around_result game::look_around(
         ctxt.register_action( "LEVEL_DOWN" );
     }
     ctxt.register_action( "TOGGLE_FAST_SCROLL" );
+    if( !has_first_point && !select_zone && !peeking && !is_moving_zone ) {
+        ctxt.register_action( "map" );
+    }
     ctxt.register_action( "CHANGE_MONSTER_NAME" );
     ctxt.register_action( "EXTENDED_DESCRIPTION" );
     ctxt.register_action( "SELECT" );
@@ -7453,6 +7466,11 @@ look_around_result game::look_around(
             list_items_monsters();
         } else if( action == "TOGGLE_FAST_SCROLL" ) {
             fast_scroll = !fast_scroll;
+        } else if( action == "map" ) {
+            uistate.open_menu = [center, &here]() {
+                ui::omap::look_around_map( here.get_abs( center ) );
+            };
+            break;
         } else if( action == "toggle_pixel_minimap" ) {
             toggle_pixel_minimap();
 
