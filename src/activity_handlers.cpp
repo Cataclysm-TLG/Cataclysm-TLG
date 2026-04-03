@@ -118,7 +118,11 @@ static const activity_id ACT_BLEED( "ACT_BLEED" );
 static const activity_id ACT_BUILD( "ACT_BUILD" );
 static const activity_id ACT_BUTCHER( "ACT_BUTCHER" );
 static const activity_id ACT_BUTCHER_FULL( "ACT_BUTCHER_FULL" );
+static const activity_id ACT_CONSUME_DRINK_MENU( "ACT_CONSUME_DRINK_MENU" );
+static const activity_id ACT_CONSUME_FOOD_MENU( "ACT_CONSUME_FOOD_MENU" );
+static const activity_id ACT_CONSUME_MEDS_MENU( "ACT_CONSUME_MEDS_MENU" );
 static const activity_id ACT_DISSECT( "ACT_DISSECT" );
+static const activity_id ACT_EAT_MENU( "ACT_EAT_MENU" );
 static const activity_id ACT_FERTILIZE_PLOT( "ACT_FERTILIZE_PLOT" );
 static const activity_id ACT_FETCH_REQUIRED( "ACT_FETCH_REQUIRED" );
 static const activity_id ACT_FIELD_DRESS( "ACT_FIELD_DRESS" );
@@ -268,9 +272,13 @@ activity_handlers::do_turn_functions = {
     { ACT_MUTANT_TREE_COMMUNION, mutant_tree_communion_do_turn },
     { ACT_FETCH_REQUIRED, fetch_do_turn },
     { ACT_BUILD, build_do_turn },
+    { ACT_EAT_MENU, eat_menu_do_turn },
     { ACT_VEHICLE_DECONSTRUCTION, vehicle_deconstruction_do_turn },
     { ACT_VEHICLE_REPAIR, vehicle_repair_do_turn },
     { ACT_MULTIPLE_CHOP_TREES, chop_trees_do_turn },
+    { ACT_CONSUME_FOOD_MENU, consume_food_menu_do_turn },
+    { ACT_CONSUME_DRINK_MENU, consume_drink_menu_do_turn },
+    { ACT_CONSUME_MEDS_MENU, consume_meds_menu_do_turn },
     { ACT_VIEW_RECIPE, view_recipe_do_turn },
     { ACT_MOVE_LOOT, move_loot_do_turn },
     { ACT_ADV_INVENTORY, adv_inventory_do_turn },
@@ -328,6 +336,10 @@ activity_handlers::finish_functions = {
     { ACT_OPERATION, operation_finish },
     { ACT_VIBE, vibe_finish },
     { ACT_ATM, atm_finish },
+    { ACT_EAT_MENU, eat_menu_finish },
+    { ACT_CONSUME_FOOD_MENU, eat_menu_finish },
+    { ACT_CONSUME_DRINK_MENU, eat_menu_finish },
+    { ACT_CONSUME_MEDS_MENU, eat_menu_finish },
     { ACT_VIEW_RECIPE, view_recipe_finish },
     { ACT_JACKHAMMER, jackhammer_finish },
     { ACT_ROBOT_CONTROL, robot_control_finish },
@@ -2876,6 +2888,40 @@ void activity_handlers::toolmod_add_finish( player_activity *act, Character *you
     act->targets[1].remove_item();
 }
 
+// This activity opens the menu (it's not meant to queue consumption of items)
+void activity_handlers::eat_menu_do_turn( player_activity *, Character *you )
+{
+    if( !you->is_avatar() ) {
+        debugmsg( "Character %s somehow opened the eat menu!  Cancelling their activity to prevent infinite loop",
+                  you->name );
+        you->cancel_activity();
+        return;
+    }
+
+    avatar &player_character = get_avatar();
+    avatar_action::eat_or_use( player_character, game_menus::inv::consume() );
+}
+
+void activity_handlers::consume_food_menu_do_turn( player_activity *, Character * )
+{
+    avatar &player_character = get_avatar();
+    item_location loc = game_menus::inv::consume_food();
+    avatar_action::eat( player_character, loc );
+}
+
+void activity_handlers::consume_drink_menu_do_turn( player_activity *, Character * )
+{
+    avatar &player_character = get_avatar();
+    item_location loc = game_menus::inv::consume_drink();
+    avatar_action::eat( player_character, loc );
+}
+
+void activity_handlers::consume_meds_menu_do_turn( player_activity *, Character * )
+{
+    avatar &player_character = get_avatar();
+    avatar_action::eat_or_use( player_character, game_menus::inv::consume_meds() );
+}
+
 void activity_handlers::view_recipe_do_turn( player_activity *act, Character *you )
 {
     if( !you->is_avatar() ) {
@@ -3449,6 +3495,10 @@ void activity_handlers::atm_finish( player_activity *act, Character * )
     }
 }
 
+void activity_handlers::eat_menu_finish( player_activity *, Character * )
+{
+    // Only exists to keep the eat activity alive between turns
+}
 
 void activity_handlers::view_recipe_finish( player_activity *act, Character * )
 {
