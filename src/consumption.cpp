@@ -1883,18 +1883,19 @@ static bool consume_med( item &target, Character &you )
     }
 
     const itype_id tool_type = target.get_comestible()->tool;
-    const itype *req_tool = item::find_type( tool_type );
+    if( !tool_type.is_null() ) {
+        const itype *req_tool = item::find_type( tool_type );
 
-    if( req_tool->tool ) {
-        if( !( you.has_amount( tool_type, 1 ) &&
-               you.has_charges( tool_type, req_tool->tool->charges_per_use ) ) ) {
-            you.add_msg_if_player( m_info,
-                                   _( "You need a %s to consume that!" ), req_tool->nname( 1 ) );
-            return false;
+        if( req_tool->tool ) {
+            if( !( you.has_amount( tool_type, 1 ) &&
+                you.has_charges( tool_type, req_tool->tool->charges_per_use ) ) ) {
+                you.add_msg_if_player( m_info,
+                                    _( "You need a %s to consume that!" ), req_tool->nname( 1 ) );
+                return false;
+            }
+            you.use_charges( tool_type, req_tool->tool->charges_per_use );
         }
-        you.use_charges( tool_type, req_tool->tool->charges_per_use );
     }
-
     int amount_used = 1;
     if( target.type->has_use() ) {
         amount_used = target.type->invoke( &you, target, you.pos_bub() ).value_or( 0 );
