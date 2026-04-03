@@ -297,12 +297,7 @@ class bookbinder_copy_activity_actor: public activity_actor
             static const activity_id ACT_BINDER_COPY_RECIPE( "ACT_BINDER_COPY_RECIPE" );
             return ACT_BINDER_COPY_RECIPE;
         }
-        void set_resume_values_internal( const activity_actor &other,
-                                         const Character &/*who*/ ) override {
-            const oxytorch_activity_actor &actor = static_cast<const oxytorch_activity_actor &>
-                                                   ( other );
-            tool = actor.tool;
-        }
+
         bool can_resume_with_internal( const activity_actor &other, const Character & ) const override {
             const bookbinder_copy_activity_actor &act = static_cast<const bookbinder_copy_activity_actor &>
                     ( other );
