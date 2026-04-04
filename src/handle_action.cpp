@@ -328,6 +328,18 @@ input_context game::get_player_input( std::string &action )
 #endif
             }
 
+#if defined(TILES)
+            // Expire stale hit-animation overlays between draws
+            if( tilecontext->expire_hit_animations() ) {
+                invalidate_main_ui_adaptor();
+            }
+
+            // Animated tiles need periodic redraws to cycle frames
+            if( tilecontext->has_animated_tiles() ) {
+                invalidate_main_ui_adaptor();
+            }
+#endif
+
             if( g->has_blink_curses() && current_turn.blink_timeout() ) {
                 g->blink_active_phase = !g->blink_active_phase;
                 g->invalidate_main_ui_adaptor();
