@@ -1654,8 +1654,8 @@ void options_manager::add_options_general()
                                         to_translation( "Options regarding auto notes." ) ),
     [&]( const std::string & page_id ) {
         add( "AUTO_NOTES", page_id, to_translation( "Auto notes" ),
-             to_translation( "If true, automatically sets notes." ),
-             false
+             to_translation( "If true, automatically sets notes on the map." ),
+             true
            );
 
         add( "AUTO_NOTES_STAIRS", page_id, to_translation( "Auto notes (stairs)" ),
@@ -1667,7 +1667,7 @@ void options_manager::add_options_general()
 
         add( "AUTO_NOTES_DROPPED_FAVORITES", page_id, to_translation( "Auto notes (dropped favorites)" ),
              to_translation( "If true, automatically sets notes when player drops favorited items." ),
-             false
+             true
            );
 
         get_option( "AUTO_NOTES_DROPPED_FAVORITES" ).setPrerequisite( "AUTO_NOTES" );
