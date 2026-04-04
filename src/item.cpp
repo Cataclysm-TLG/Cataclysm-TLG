@@ -9457,6 +9457,14 @@ bool item::mod_damage( int qty )
             }
         }
 
+        // Remove DROPPED_FAVORITES autonote if exists.
+        if( destroy ) {
+            item_location loc = item_location();
+            tripoint_abs_omt loc_omt = coords::project_to<coords::omt>( loc.pos_abs() );
+            if( overmap_buffer.note( loc_omt ) == display_name() ) {
+                overmap_buffer.delete_note( loc_omt );
+            }
+        }
         return destroy;
     }
 }

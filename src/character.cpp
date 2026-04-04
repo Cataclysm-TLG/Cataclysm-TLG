@@ -10404,6 +10404,10 @@ void Character::on_worn_item_soiled( const item &it )
 void Character::on_item_wear( const item &it )
 {
     invalidate_inventory();
+    // Remove DROPPED_FAVORITES autonote if exists.
+    if( overmap_buffer.note( pos_abs_omt() ) == it.display_name() ) {
+        overmap_buffer.delete_note( pos_abs_omt() );
+    }
     morale->on_item_wear( it );
 }
 

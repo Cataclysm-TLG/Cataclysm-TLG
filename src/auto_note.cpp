@@ -562,7 +562,6 @@ void auto_note_manager_gui::show()
     }
 
     if( !get_option<bool>( "AUTO_NOTES" ) &&
-        get_option<bool>( "AUTO_NOTES_MAP_EXTRAS" ) &&
         query_yn( _( "Auto notes are disabled globally.\nDo you want to enable?" ) ) ) {
         get_options().get_option( "AUTO_NOTES" ).setNext();
         get_options().save();
