@@ -237,17 +237,6 @@
   },
   {
     "type": "keybinding",
-    "id": "ENABLE_MAPEXTRA_NOTE",
-    "category": "AUTO_NOTES",
-    "name": "Enable auto notes for map extras",
-    "bindings": [
-      { "input_method": "keyboard_any", "key": "e" },
-      { "input_method": "keyboard_char", "key": "E" },
-      { "input_method": "keyboard_code", "key": "e", "mod": [ "shift" ] }
-    ]
-  },
-  {
-    "type": "keybinding",
     "id": "SWITCH_AUTO_NOTE_OPTION",
     "category": "AUTO_NOTES",
     "name": "Toggle auto notes option",
@@ -256,24 +245,6 @@
       { "input_method": "keyboard_char", "key": "S" },
       { "input_method": "keyboard_code", "key": "s", "mod": [ "shift" ] }
     ]
-  },
-  {
-    "type": "keybinding",
-    "id": "DISABLE_MAPEXTRA_NOTE",
-    "category": "AUTO_NOTES",
-    "name": "Disable auto notes for map extras",
-    "bindings": [
-      { "input_method": "keyboard_any", "key": "d" },
-      { "input_method": "keyboard_char", "key": "D" },
-      { "input_method": "keyboard_code", "key": "d", "mod": [ "shift" ] }
-    ]
-  },
-  {
-    "type": "keybinding",
-    "id": "CHANGE_MAPEXTRA_CHARACTER",
-    "category": "AUTO_NOTES",
-    "name": "Change a symbol for map extra",
-    "bindings": [ { "input_method": "keyboard_any", "key": "=" } ]
   },
   {
     "type": "keybinding",
@@ -3059,12 +3030,6 @@
     "name": "Auto pickup manager",
     "category": "DEFAULTMODE",
     "id": "open_autopickup"
-  },
-  {
-    "type": "keybinding",
-    "name": "Auto notes manager",
-    "category": "DEFAULTMODE",
-    "id": "open_autonotes"
   },
   {
     "type": "keybinding",

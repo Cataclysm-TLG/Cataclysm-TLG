@@ -55,7 +55,7 @@
       "ll_long_tail_sa_layout",
       "ll_fish_tail_sa_layout"
     ],
-    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+    "flags": [ "W_DISABLED_WHEN_EMPTY", "W_DISABLED_BY_DEFAULT" ]
   },
   {
     "id": "ll_stamina_speed_move_layout",
