@@ -207,7 +207,7 @@ static const vitamin_id vitamin_nut_allergen( "nut_allergen" );
 static const vitamin_id vitamin_vegetable_allergen( "vegetable_allergen" );
 static const vitamin_id vitamin_wheat_allergen( "wheat_allergen" );
 
-// note: cannot use constants from flag.h (e.g. flag_ALLERGEN_vegetable) here, as they
+// note: cannot use constants from flag.h (e.g. flag_ALLERGEN_VEGETABLE) here, as they
 // might be uninitialized at the time these const arrays are created
 static const std::array<vitamin_id, 5> carnivore_blacklist {{
         vitamin_vegetable_allergen, vitamin_fruit_allergen,

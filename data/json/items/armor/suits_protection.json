@@ -1596,8 +1596,6 @@
   },
   {
     "id": "hazmat_suit",
-    "//": "Should be substantially more difficult to repair than ordinary rubber - glass is difficulty 7",
-    "repairs_like": "glass",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "hazmat suit" },

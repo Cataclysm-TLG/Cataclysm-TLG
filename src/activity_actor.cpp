@@ -1171,22 +1171,7 @@ void hacksaw_activity_actor::start( player_activity &act, Character &/*who*/ )
         return;
     }
 
-    int qual = 0;
-    if( type.has_value() ) {
-        item veh_tool = item( type.value(), calendar::turn );
-        for( const std::pair<const quality_id, int> &quality : type.value()->qualities ) {
-            if( quality.first == qual_SAW_M ) {
-                qual = quality.second;
-            }
-        }
-        for( const std::pair<const quality_id, int> &quality : type.value()->charged_qualities ) {
-            if( quality.first == qual_SAW_M ) {
-                qual = std::max( qual, quality.second );
-            }
-        }
-    } else {
-        qual = tool->get_quality( qual_SAW_M );
-    }
+    int qual = get_tool_quality();
     if( qual < 2 ) {
         if( !testing ) {
             debugmsg( "Item %s with 'HACKSAW' use action requires SAW_M quality of at least 2.",
@@ -1202,6 +1187,7 @@ void hacksaw_activity_actor::start( player_activity &act, Character &/*who*/ )
     act.moves_total = moves_before_quality / ( qual / 2 );
     add_msg_debug( debugmode::DF_ACTIVITY, "%s moves_total: %d", act.id().str(), act.moves_total );
     act.moves_left = act.moves_total;
+    moves_left = act.moves_left;
 }
 
 static void tool_out_of_charges( Character &who, const std::string &tool_name )
@@ -1215,8 +1201,9 @@ static void tool_out_of_charges( Character &who, const std::string &tool_name )
     who.cancel_activity();
 }
 
-void hacksaw_activity_actor::do_turn( player_activity &/*act*/, Character &who )
+void hacksaw_activity_actor::do_turn( player_activity &act, Character &who )
 {
+    moves_left = act.moves_left;
     map &here = get_map();
 
     std::string method = "HACKSAW";
@@ -1332,18 +1319,58 @@ void hacksaw_activity_actor::finish( player_activity &act, Character &who )
     act.set_to_null();
 }
 
-//TODO: Make hacksawing resumable with different tools with the same SAW_M quality.
-//Potentially make it possible to resume with different SAW_M quality and recalculate time to completion partway through.
-//This is really not a big deal, and will cost a few minutes of in game time and part of a medium battery charge at worst as someone accidentally cancels the activity_actor and has to start again
-//If a few minutes are life and death, sawing metal may not be the wise choice in the first place.
-bool hacksaw_activity_actor::can_resume_with_internal( const activity_actor &other,
-        const Character &/*who*/ ) const
+float hacksaw_activity_actor::exertion_level() const
 {
-    const hacksaw_activity_actor &actor = static_cast<const hacksaw_activity_actor &>
-                                          ( other );
-    return actor.target == target && ( ( veh_pos.has_value() &&
-                                         veh_pos.value() == actor.veh_pos.value_or( tripoint_bub_ms::max ) ) ||
-                                       actor.tool.operator == ( tool ) );
+    if( tool->ammo_required() ) {
+        return LIGHT_EXERCISE;
+    } else {
+        return get_type()->exertion_level();
+    }
+}
+
+int hacksaw_activity_actor::get_tool_quality() const
+{
+    int qual = 0;
+    if( type.has_value() ) {
+        item veh_tool = item( type.value(), calendar::turn );
+        for( const auto &quality : type.value()->qualities ) {
+            if( quality.first == qual_SAW_M ) {
+                qual = quality.second.level;
+            }
+        }
+        for( const auto &quality : type.value()->charged_qualities ) {
+            if( quality.first == qual_SAW_M ) {
+                qual = std::max( qual, quality.second.level );
+            }
+        }
+    } else {
+        qual = tool->get_quality( qual_SAW_M );
+    }
+
+    return qual;
+}
+
+void hacksaw_activity_actor::set_resume_values_internal( const activity_actor &other,
+        const Character &/*who*/ )
+{
+    // This method recalculates moves_left based on tool quality comparison but it doesn't have
+    // access to update the moves_left on the corresponding player_activity.  You must set the
+    // player_activity's moves_left separately after resuming the activity_actor.
+
+    const hacksaw_activity_actor &actor = static_cast<const hacksaw_activity_actor &>( other );
+
+    int actor_qual = actor.get_tool_quality();
+    int qual = get_tool_quality();
+
+    int new_moves_left = -1;
+    if( actor_qual > 1 ) {
+        new_moves_left = moves_left * ( qual - 1 ) / ( actor_qual - 1 );
+    }
+    add_msg_debug( debugmode::DF_ACTIVITY,
+                   "Hacksaw resume.  Actor quality: %d, quality: %d, moves_left: %d, new_moves_left: %d.",
+                   actor_qual, qual, moves_left, new_moves_left );
+    moves_left = new_moves_left;
+    tool = actor.tool;
 }
 
 void hacksaw_activity_actor::serialize( JsonOut &jsout ) const
@@ -1353,6 +1380,7 @@ void hacksaw_activity_actor::serialize( JsonOut &jsout ) const
     jsout.member( "tool", tool );
     jsout.member( "type", type );
     jsout.member( "veh_pos", veh_pos );
+    jsout.member( "moves_left", moves_left );
     jsout.end_object();
 }
 
@@ -1364,6 +1392,7 @@ std::unique_ptr<activity_actor> hacksaw_activity_actor::deserialize( JsonValue &
     data.read( "tool", actor.tool );
     data.read( "type", actor.type );
     data.read( "veh_pos", actor.veh_pos );
+    data.read( "moves_left", actor.moves_left );
     return actor.clone();
 }
 
@@ -4447,15 +4476,18 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
     if( cached_crafting_speed != crafting_speed || cached_assistants != assistants ) {
         cached_crafting_speed = crafting_speed;
         cached_assistants = assistants;
+        // Recompute per-step tool speed from current crafting inventory
+        cached_tool_speeds = compute_tool_speeds( rec, crafter );
+        const std::vector<float> *ts = cached_tool_speeds.empty() ? nullptr : &cached_tool_speeds;
 
         // Base moves for batch size with no speed modifier or assistants
         // Must ensure >= 1 so we don't divide by 0;
         cached_base_total_moves = std::max( static_cast<int64_t>( 1 ),
-                                            rec.batch_time( crafter, craft.get_making_batch_size(), 1.0f, 0 ) );
+                                            rec.batch_time( crafter, craft.get_making_batch_size(), 1.0f, 0, ts ) );
         // Current expected total moves, includes crafting speed modifiers and assistants
         cached_cur_total_moves = std::max( static_cast<int64_t>( 1 ),
                                            rec.batch_time( crafter, craft.get_making_batch_size(), crafting_speed,
-                                                   assistants ) );
+                                                   assistants, ts ) );
     }
     const double base_total_moves = cached_base_total_moves;
     const double cur_total_moves = cached_cur_total_moves;
@@ -4483,9 +4515,10 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
     if( rec.has_steps() ) {
         craft.mod_step_progress( delta_progress );
         const int last_step_idx = static_cast<int>( rec.steps().size() ) - 1;
+        const std::vector<float> *ts = cached_tool_speeds.empty() ? nullptr : &cached_tool_speeds;
         while( craft.get_current_step() < last_step_idx ) {
             const double budget = rec.step_budget_moves( crafter,
-                                  craft.get_current_step(), craft.get_making_batch_size() );
+                                  craft.get_current_step(), craft.get_making_batch_size(), ts );
             if( craft.get_step_progress() < budget ) {
                 break;
             }
@@ -5855,9 +5888,11 @@ void reload_activity_actor::finish( player_activity &act, Character &who )
     }
 
     // Attempt to put item in another pocket before prompting
-    if( who.try_add( reloadable, nullptr, nullptr, false ) != item_location::nowhere ) {
+    item_location new_loc = who.try_add( reloadable, nullptr, nullptr, false );
+    if( new_loc != item_location::nowhere ) {
         // try_add copied the old item, so remove it now.
         loc.remove_item();
+        target_loc = new_loc;
         return;
     }
 
@@ -5883,6 +5918,7 @@ void reload_activity_actor::finish( player_activity &act, Character &who )
             who.wield( target_loc );
             add_msg( m_neutral, _( "The %s no longer fits in your inventory so you wield it instead." ),
                      reloadable_name );
+            target_loc = who.used_weapon();
             break;
         case 2:
         default:
@@ -5892,7 +5928,7 @@ void reload_activity_actor::finish( player_activity &act, Character &who )
                                                   _( "The %s no longer fits in your inventory so you drop it instead." ),
                                                   reloadable_name );
             }
-            here.add_item_or_charges( loc.pos_bub( here ), reloadable );
+            target_loc = here.add_item_or_charges_ret_loc( loc.pos_bub( here ), reloadable );
             loc.remove_item();
             break;
     }

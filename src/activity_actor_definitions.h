@@ -220,6 +220,8 @@ class hacksaw_activity_actor : public activity_actor
         void start( player_activity &act, Character &who ) override;
         void do_turn( player_activity &/*act*/, Character &who ) override;
         void finish( player_activity &act, Character &who ) override;
+        float exertion_level() const override;
+        int get_tool_quality() const;
 
         std::unique_ptr<activity_actor> clone() const override {
             return std::make_unique<hacksaw_activity_actor>( *this );
@@ -228,6 +230,7 @@ class hacksaw_activity_actor : public activity_actor
         void serialize( JsonOut &jsout ) const override;
         static std::unique_ptr<activity_actor> deserialize( JsonValue &jsin );
 
+        int moves_left;
         // debugmsg causes a backtrace when fired during cata_test
         bool testing = false;  // NOLINT(cata-serialize)
     private:
@@ -235,8 +238,16 @@ class hacksaw_activity_actor : public activity_actor
         item_location tool;
         std::optional<itype_id> type;
         std::optional<tripoint_bub_ms> veh_pos;
+
         bool can_resume_with_internal( const activity_actor &other,
-                                       const Character &/*who*/ ) const override;
+                                       const Character &/*who*/ ) const override {
+            const hacksaw_activity_actor &actor = static_cast<const hacksaw_activity_actor &>
+                                                  ( other );
+            return actor.target == target;
+        }
+
+        void set_resume_values_internal( const activity_actor &other,
+                                         const Character &/*who*/ ) override;
 };
 
 class hacking_activity_actor : public activity_actor
@@ -1173,6 +1184,7 @@ class craft_activity_actor : public activity_actor
         std::optional<requirement_data> cached_continuation_requirements; // NOLINT(cata-serialize)
         float cached_crafting_speed; // NOLINT(cata-serialize)
         int cached_assistants; // NOLINT(cata-serialize)
+        std::vector<float> cached_tool_speeds; // NOLINT(cata-serialize)
         double cached_base_total_moves; // NOLINT(cata-serialize)
         double cached_cur_total_moves; // NOLINT(cata-serialize)
         float cached_workbench_multiplier; // NOLINT(cata-serialize)
@@ -1681,6 +1693,12 @@ class oxytorch_activity_actor : public activity_actor
         tripoint_bub_ms target;
         item_location tool;
 
+        void set_resume_values_internal( const activity_actor &other,
+                                         const Character &/*who*/ ) override {
+            const oxytorch_activity_actor &actor = static_cast<const oxytorch_activity_actor &>
+                                                   ( other );
+            tool = actor.tool;
+        }
         bool can_resume_with_internal( const activity_actor &other,
                                        const Character &/*who*/ ) const override {
             const oxytorch_activity_actor &actor = static_cast<const oxytorch_activity_actor &>
