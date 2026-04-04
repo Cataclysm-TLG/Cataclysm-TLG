@@ -79,6 +79,7 @@
 #include "rng.h"
 #include "sounds.h"
 #include "string_formatter.h"
+#include "string_id.h"
 #include "string_input_popup.h"
 #include "talker.h"
 #include "translations.h"
@@ -825,19 +826,18 @@ std::optional<int> consume_drug_iuse::use( Character *p, item &it, map *here,
     }
 
     // Output message.
-    p->add_msg_if_player( activation_message.translated(), it.type_name( 1 ) );
+    p->add_msg_if_player( activation_message );
+
+    if( used_up_item.is_valid() ) {
+        item used_up( used_up_item, it.birthday() );
+        p->i_add_or_drop( used_up );
+    }
     // Consume charges.
     for( const auto &consumable : charges_needed ) {
         if( consumable.second != -1 ) {
             p->use_charges( consumable.first, consumable.second );
         }
     }
-
-    if( !used_up_item.is_null() ) {
-        item used_up( used_up_item, it.birthday() );
-        p->i_add_or_drop( used_up );
-    }
-
     // Uses the moves specified by iuse_actor's definition
     p->mod_moves( -moves );
     return 1;
