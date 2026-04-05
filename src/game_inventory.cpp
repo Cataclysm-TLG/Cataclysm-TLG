@@ -51,6 +51,7 @@
 #include "output.h"
 #include "pimpl.h"
 #include "point.h"
+#include "proficiency.h"
 #include "recipe.h"
 #include "recipe_dictionary.h"
 #include "requirements.h"
@@ -652,7 +653,7 @@ class disassemble_inventory_preset : public inventory_selector_preset
 
             append_cell( [ this ]( const item_location & loc ) {
                 return to_string_clipped( get_recipe( loc ).time_to_craft( get_player_character(),
-                                          recipe_time_flag::ignore_proficiencies ) );
+                                          {}, recipe_time_flag::ignore_proficiencies ) );
             }, _( "TIME" ) );
         }
 

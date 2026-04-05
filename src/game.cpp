@@ -8982,7 +8982,7 @@ static void add_disassemblables( uilist &menu,
             }
             menu.addentry_col( menu_index++, true, hotkey, msg,
                                to_string_clipped( uncraft_recipe.time_to_craft( get_player_character(),
-                                                  recipe_time_flag::ignore_proficiencies ) ) );
+                                                  {}, recipe_time_flag::ignore_proficiencies ) ) );
             hotkey = std::nullopt;
         }
     }
@@ -9438,7 +9438,7 @@ void game::butcher()
                 }
 
                 const int time = uncraft_recipe.time_to_craft_moves(
-                                     get_player_character(), recipe_time_flag::ignore_proficiencies );
+                                     get_player_character(), {}, recipe_time_flag::ignore_proficiencies );
                 time_to_disassemble_once += time * stack.second;
                 if( stack.first->typeId() == itype_disassembly ) {
                     item test( uncraft_recipe.result(), calendar::turn, 1 );
