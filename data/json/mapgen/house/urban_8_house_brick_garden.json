@@ -54,7 +54,7 @@
         "}": "t_reinforced_door_glass_c"
       },
       "items": { "q": { "item": "farming_seeds", "chance": 70 } },
-      "sealed_item": { "0": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 40 } },
+      "sealed_item": { "0": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 10 } },
       "place_nested": [
         { "chunks": [ [ "greenhouse_6x6_herbal", 100 ] ], "x": 8, "y": 8 },
         { "chunks": [ [ "greenhouse_6x6_vegetable", 100 ] ], "x": 8, "y": 15 },

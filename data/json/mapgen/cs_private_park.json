@@ -151,7 +151,7 @@
         { "type": "NPC_NO_INVESTIGATE", "faction": "no_faction", "x": 23, "y": [ 0, 23 ] },
         { "type": "NPC_NO_INVESTIGATE", "faction": "no_faction", "x": [ 0, 23 ], "y": 23 }
       ],
-      "sealed_item": { "<": { "item": { "item": "seed_potato_raw" }, "furniture": "f_plant_seedling", "chance": 70 } },
+      "sealed_item": { "<": { "item": { "item": "seed_potato_raw" }, "furniture": "f_plant_seedling", "chance": 10 } },
       "place_npcs": [ { "class": "NPC_park_survivor", "x": [ 5, 8 ], "y": 21 } ],
       "toilets": { "t": {  } },
       "items": {
