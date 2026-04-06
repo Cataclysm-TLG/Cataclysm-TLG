@@ -889,6 +889,51 @@
     "looks_like": "fd_smoke"
   },
   {
+    "id": "fd_fallout",
+    "type": "field_type",
+    "substance_name": "radioactive ash",
+    "intensity_levels": [
+      {
+        "name": "fallout",
+        "sym": "%",
+        "dangerous": true,
+        "concentration": 1,
+        "extra_radiation_max": 1,
+        "effects": [
+          {
+            "effect_id": "smoke_eyes",
+            "body_part": "eyes",
+            "intensity": 1,
+            "min_duration": "2 seconds",
+            "max_duration": "2 seconds",
+            "immunity_data": { "body_part_env_resistance": [ [ "sensor", 3 ] ] },
+            "immune_inside_vehicle": true
+          },
+          {
+            "effect_id": "smoke_lungs",
+            "body_part": "mouth",
+            "intensity": 1,
+            "min_duration": "2 seconds",
+            "max_duration": "2 seconds",
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 3 ] ] },
+            "immune_inside_vehicle": true
+          }
+        ]
+      }
+    ],
+    "decay_amount_factor": 3,
+    "percent_spread": 50,
+    "outdoor_age_speedup": "1 minutes",
+    "dirty_transparency_cache": true,
+    "has_fume": true,
+    "priority": 8,
+    "half_life": "100 minutes",
+    "phase": "gas",
+    "display_items": false,
+    "display_field": true,
+    "looks_like": "fd_smoke"
+  },
+  {
     "id": "fd_gas_vent",
     "type": "field_type",
     "substance_name": "toxic gas",
