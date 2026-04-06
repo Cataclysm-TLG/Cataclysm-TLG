@@ -101,7 +101,7 @@
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "terrain": { ".": "t_shingle_flat_roof" },
       "furniture": { "y": "f_planter" },
-      "sealed_item": { "y": { "item": { "item": "seed_wild_herbs" }, "furniture": "f_plant_seedling", "chance": 80 } }
+      "sealed_item": { "y": { "item": { "item": "seed_wild_herbs" }, "furniture": "f_plant_seedling", "chance": 20 } }
     }
   },
   {

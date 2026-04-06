@@ -77,17 +77,17 @@
       },
       "liquids": { "O": { "liquid": "water", "amount": [ 0, 100 ] }, "t": { "liquid": "fertilizer_liquid", "amount": [ 0, 100 ] } },
       "sealed_item": {
-        "1": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "2": { "item": { "item": "seed_lettuce" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "3": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "4": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "5": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "8": { "item": { "item": "seed_celery" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "6": { "item": { "item": "seed_pumpkin" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "R": { "item": { "item": "seed_blueberries" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "S": { "item": { "item": "seed_strawberries" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "s": { "item": { "item": "seed_corn" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "g": { "item": { "item": "seed_cabbage" }, "furniture": "f_planter_seedling", "chance": 20 }
+        "1": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "2": { "item": { "item": "seed_lettuce" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "3": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "4": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "5": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "8": { "item": { "item": "seed_celery" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "6": { "item": { "item": "seed_pumpkin" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "R": { "item": { "item": "seed_blueberries" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "S": { "item": { "item": "seed_strawberries" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "s": { "item": { "item": "seed_corn" }, "furniture": "f_planter_seedling", "chance": 6 },
+        "g": { "item": { "item": "seed_cabbage" }, "furniture": "f_planter_seedling", "chance": 6 }
       },
       "items": { "C": { "item": "ga_items_1", "chance": 80 }, "7": { "item": "garden_shed", "chance": 33 } },
       "place_items": [

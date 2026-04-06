@@ -424,7 +424,7 @@
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "terrain": { "B": "t_railroad_rubble" },
       "furniture": { "b": "f_bench", "B": [ "f_birdbath", "f_statue" ] },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling" } }
+      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling", "chance": 60 } }
     }
   },
   {
@@ -444,7 +444,7 @@
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "terrain": { "_": "t_railroad_rubble", "b": "t_railroad_rubble", "B": "t_railroad_rubble" },
       "furniture": { "B": [ "f_birdbath", "f_statue" ], "b": "f_bench" },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling" } }
+      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling", "chance": 60 } }
     }
   },
   {
