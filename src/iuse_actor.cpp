@@ -826,7 +826,7 @@ std::optional<int> consume_drug_iuse::use( Character *p, item &it, map *here,
     }
 
     // Output message.
-    p->add_msg_if_player( activation_message );
+    p->add_msg_if_player( activation_message.translated() );
 
     if( used_up_item.is_valid() ) {
         item used_up( used_up_item, it.birthday() );
