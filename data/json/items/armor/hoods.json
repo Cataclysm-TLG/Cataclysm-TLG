@@ -19,6 +19,7 @@
     ],
     "warmth": 10,
     "material_thickness": 1,
+    "environmental_protection": 2,
     "flags": [ "BELTED", "SUN_SHADE" ]
   },
   {
@@ -38,6 +39,7 @@
     "warmth": 8,
     "material_thickness": 0.3,
     "flags": [ "RAINPROOF", "BELTED", "SUN_SHADE" ],
+    "environmental_protection": 5,
     "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 95, "covers": [ "head" ] } ]
   },
   {
@@ -58,6 +60,7 @@
     "warmth": 15,
     "material_thickness": 2,
     "flags": [ "WATER_FRIENDLY", "STURDY", "BELTED", "SUN_SHADE", "RAINPROOF" ],
+    "environmental_protection": 4,
     "armor": [
       {
         "encumbrance": 12,
@@ -103,7 +106,7 @@
     "color": "light_gray",
     "warmth": 5,
     "material_thickness": 0.5,
-    "environmental_protection": 2,
+    "environmental_protection": 3,
     "flags": [ "SKINTIGHT", "STURDY" ],
     "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 98, "covers": [ "head" ] } ]
   },
@@ -123,6 +126,7 @@
     "color": "light_gray",
     "warmth": 10,
     "material_thickness": 0.1,
+    "environmental_protection": 4,
     "flags": [ "RAINPROOF", "BELTED", "SUN_SHADE" ],
     "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 95, "covers": [ "head" ] } ]
   },
@@ -146,6 +150,7 @@
     ],
     "warmth": 8,
     "material_thickness": 0.2,
+    "environmental_protection": 3,
     "flags": [ "SKINTIGHT" ]
   },
   {

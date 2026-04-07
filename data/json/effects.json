@@ -852,7 +852,7 @@
       "pain_chance": [ 150, 900 ],
       "hurt_min": [ 1 ],
       "hurt_chance": [ 450, 2700 ],
-      "health_chance": [ 500, 1000 ],
+      "health_chance": [ 250, 750 ],
       "health_min": [ -1 ]
     },
     "show_in_info": true,
@@ -880,7 +880,7 @@
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
       "hurt_chance": [ 200, 400 ],
-      "health_chance": [ 300, 600 ],
+      "health_chance": [ 100, 400 ],
       "health_min": [ -1 ]
     },
     "show_in_info": true,
@@ -2575,6 +2575,12 @@
   },
   {
     "type": "effect_type",
+    "id": "fallout",
+    "base_mods": { "rad_chance": [ 1200 ], "rad_min": [ 1 ] },
+    "max_duration": "10 m"
+  },
+  {
+    "type": "effect_type",
     "id": "taint",
     "name": [ "Touched Mind", "Touched Mind", "Tainted Mind", "Badly Tainted Mind" ],
     "miss_messages": [ [ "Your sense of reality warps!", 3 ] ],
@@ -4247,7 +4253,7 @@
     "max_intensity": 2000,
     "show_intensity": false,
     "int_dur_factor": "10 s",
-    "scaling_mods": { "speed_mod": [ -0.2 ], "str_mod": [ -0.125 ], "dex_mod": [ -0.09 ], "int_mod": [ -0.1 ], "per_mod": [ -0.083 ] },
+    "scaling_mods": { "speed_mod": [ -0.2 ], "str_mod": [ -0.125 ], "dex_mod": [ -0.09 ], "int_mod": [ -0.1 ], "per_mod": [ -0.083 ], "hurt_min": [ 1 ], "hurt_chance": [ 8000 ] },
     "blood_analysis_description": "Irradiated"
   },
   {
@@ -4352,8 +4358,8 @@
     "desc": [ "You are under the effects of a stomach soother." ],
     "int_add_val": 1,
     "max_intensity": 3,
-    "base_mods": { "vomit_tick": [ 60 ], "health_chance": [ 1500 ], "health_min": [ 1 ] },
-    "scaling_mods": { "health_min": [ -1.5 ], "health_min_val": [ -2 ], "vomit_tick": [ 120 ] },
+    "base_mods": { "vomit_tick": [ 60 ] },
+    "scaling_mods": { "vomit_tick": [ 120 ] },
     "max_duration": 14400,
     "dur_add_perc": 70
   },

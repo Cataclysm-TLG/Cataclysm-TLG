@@ -1834,15 +1834,29 @@ void map::creature_in_field( Creature &critter )
                 critter.check_immunity_data( fe.immunity_data ) ) {
                 continue;
             }
-            bool effect_added = false;
-            if( fe.is_environmental ) {
-                effect_added = critter.add_env_effect( fe.id, fe.bp.id(), fe.intensity,  fe.get_duration() );
-            } else {
-                effect_added = true;
-                critter.add_effect( field_fx.get_id(), field_fx.get_duration(), field_fx.get_bp(),
-                                    field_fx.is_permanent(), field_fx.get_intensity() );
-            }
-            if( effect_added ) {
+            bool add_effect = ( fe.bp.is_null() || critter.is_monster() || critter.has_part( fe.bp ) );
+            if( add_effect ) {
+                if( fe.is_environmental ) {
+                    if( !critter.is_monster() ) {
+                        // Scan through resistance data to get vectors: parts by which the effect enters the body.
+                        for( const auto &[bp, resistance] : fe.immunity_data.immunity_data_body_part_env_resistance ) {
+                            // Filter for ones we actually have.
+                            for( const bodypart_id &part : critter.get_all_body_parts_of_type( bp ) ) {
+                                if( !critter.has_part( part ) ) {
+                                    continue;
+                                }
+                                // Apply via the vector to fe.bp.id(), allowing partial enviro resistance.
+                                critter.add_env_effect( fe.id, part, fe.intensity, fe.get_duration(), fe.bp.id() );
+                            }
+                        }
+                    } else {
+                        // If we're a monster just slap the effect on.
+                        critter.add_env_effect( fe.id, fe.bp.id(), fe.intensity, fe.get_duration() );
+                    }
+                } else {
+                    critter.add_effect( field_fx.get_id(), field_fx.get_duration(), field_fx.get_bp(),
+                                        field_fx.is_permanent(), field_fx.get_intensity() );
+                }
                 critter.add_msg_player_or_npc( fe.env_message_type, fe.get_message(), fe.get_message_npc() );
             }
             if( cur_field_id->decrease_intensity_on_contact ) {

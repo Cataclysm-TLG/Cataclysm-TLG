@@ -2081,9 +2081,8 @@ int outfit::get_env_resist( bodypart_id bp ) const
 {
     int ret = 0;
     for( const item &i : worn ) {
-        // Head protection works on eyes too (e.g. baseball cap)
-        if( i.covers( bp ) || ( bp == body_part_eyes && i.covers( body_part_head ) ) ) {
-            ret += i.get_env_resist();
+        if( i.covers( bp ) ) {
+            ret = std::max( ret, i.get_env_resist() );
         }
     }
     return ret;

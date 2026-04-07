@@ -112,7 +112,6 @@ int Character::get_env_resist( bodypart_id bp ) const
             ret += EP->second;
         }
     }
-
     if( bp == body_part_eyes && has_flag( json_flag_SEESLEEP ) ) {
         ret += 8;
     }

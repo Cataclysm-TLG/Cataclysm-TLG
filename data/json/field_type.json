@@ -687,13 +687,14 @@
         "effects": [
           {
             "effect_id": "poison",
-            "body_part": "mouth",
+            "body_part": "torso",
             "intensity": 2,
             "min_duration": "2 minutes",
             "max_duration": "2 minutes",
             "immune_inside_vehicle": true,
             "message": "You feel sick from inhaling the hazy cloud.",
-            "message_type": "bad"
+            "message_type": "bad",
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 6 ] ] }
           }
         ]
       },
@@ -706,13 +707,14 @@
         "effects": [
           {
             "effect_id": "poison",
-            "body_part": "mouth",
+            "body_part": "torso",
             "intensity": 5,
             "min_duration": "3 minutes",
             "max_duration": "3 minutes",
             "immune_inside_vehicle": true,
             "message": "You feel sick from inhaling the toxic gas.",
-            "message_type": "bad"
+            "message_type": "bad",
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 6 ] ] }
           }
         ]
       },
@@ -724,25 +726,27 @@
         "effects": [
           {
             "effect_id": "poison",
-            "body_part": "mouth",
+            "body_part": "torso",
             "intensity": 5,
             "min_duration": "3 minutes",
             "max_duration": "3 minutes",
             "//": "won't be applied outside of vehicles, so it could apply harsher effect",
             "immune_outside_vehicle": true,
             "message": "You feel sick from inhaling the thick toxic gas.",
-            "message_type": "bad"
+            "message_type": "bad",
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] }
           },
           {
             "effect_id": "badpoison",
-            "body_part": "mouth",
+            "body_part": "torso",
             "intensity": 5,
             "min_duration": "3 minutes",
             "max_duration": "3 minutes",
             "//": "won't be applied inside of vehicles, so it could apply lesser effect",
             "immune_inside_vehicle": true,
             "message": "You feel sick from inhaling the thick toxic gas.",
-            "message_type": "bad"
+            "message_type": "bad",
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] }
           }
         ]
       }
@@ -753,7 +757,6 @@
     "outdoor_age_speedup": "3 minutes",
     "dirty_transparency_cache": true,
     "has_fume": true,
-    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] },
     "priority": 8,
     "half_life": "10 minutes",
     "phase": "gas",
@@ -775,7 +778,7 @@
         "effects": [
           {
             "effect_id": "tpollen",
-            "body_part": "mouth",
+            "body_part": "torso",
             "intensity": 2,
             "min_duration": "2 minutes",
             "max_duration": "2 minutes",
@@ -794,7 +797,7 @@
         "effects": [
           {
             "effect_id": "tpollen",
-            "body_part": "mouth",
+            "body_part": "torso",
             "intensity": 5,
             "min_duration": "3 minutes",
             "max_duration": "3 minutes",
@@ -811,7 +814,7 @@
     "outdoor_age_speedup": "3 minutes",
     "dirty_transparency_cache": true,
     "has_fume": true,
-    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] },
+    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 6 ] ] },
     "priority": 8,
     "half_life": "10 minutes",
     "phase": "gas",
@@ -916,6 +919,33 @@
             "min_duration": "2 seconds",
             "max_duration": "2 seconds",
             "immunity_data": { "body_part_env_resistance": [ [ "mouth", 3 ] ] },
+            "immune_inside_vehicle": true
+          },
+          {
+            "effect_id": "fallout",
+            "body_part": "mouth",
+            "intensity": 1,
+            "min_duration": "1 minute",
+            "max_duration": "10 minutes",
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 6 ] ] },
+            "immune_inside_vehicle": true
+          },
+          {
+            "effect_id": "fallout",
+            "body_part": "head",
+            "intensity": 1,
+            "min_duration": "20 seconds",
+            "max_duration": "10 minutes",
+            "immunity_data": { "body_part_env_resistance": [ [ "head", 6 ] ] },
+            "immune_inside_vehicle": true
+          },
+          {
+            "effect_id": "fallout",
+            "body_part": "torso",
+            "intensity": 1,
+            "min_duration": "20 seconds",
+            "max_duration": "10 minutes",
+            "immunity_data": { "body_part_env_resistance": [ [ "torso", 6 ] ] },
             "immune_inside_vehicle": true
           }
         ]
