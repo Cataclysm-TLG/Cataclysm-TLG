@@ -1969,25 +1969,22 @@
     "type": "effect_type",
     "id": "smoke_eyes",
     "name": [
-      "Little Eye Irritation (Smoke)",
-      "Minor Eye Irritation (Smoke)",
-      "Huge Eye Irritation (Smoke)",
-      "Bad Eye Irritation (Smoke)"
+      "Mild Eye Irritation",
+      "Eye Irritation",
+      "Major Eye Irritation",
+      "Severe Eye Irritation"
     ],
     "desc": [
-      "Your eyes are mildly irritated.",
+      "Your eyes burn a little.",
       "Your eyes are watering.",
       "Your eyes sting badly and tears stream from them continuously.",
-      "You can barely see anything due to your massive eye irritation and the flood of tears streaming from them."
+      "Your eyes are so badly inflamed that you can hardly see."
     ],
     "apply_message": [
-      [ "Your eyes are mildly irritated.", "bad" ],
+      [ "Your eyes burn a little.", "bad" ],
       [ "Your eyes are watering.", "bad" ],
       [ "Your eyes sting badly and tears stream from them continuously.", "bad" ],
-      [
-        "You can barely see anything due to your massive eye irritation and the flood of tears streaming from them.",
-        "bad"
-      ]
+      [ "Your eyes are so badly inflamed that you can hardly see.", "bad" ]
     ],
     "miss_messages": [ [ "Your eyes sting and tear from the smoke.", 1 ] ],
     "max_duration": "3 m",
@@ -2005,16 +2002,16 @@
   {
     "type": "effect_type",
     "id": "smoke_lungs",
-    "name": [ "Inhaled Some Smoke", "Inhaled Plenty of Smoke", "Smoke Inhalation", "Bad Smoke Inhalation" ],
+    "name": [ "Mild Smoke Inhalation", "Smoke Inhalation", "Major Smoke Inhalation", "Severe Smoke Inhalation" ],
     "desc": [
-      "You draw in a faint whiff of smoke.",
-      "A noticeable volume of smoke fills your lungs.",
-      "A dense cloud of smoke enters your lungs.",
-      "You inhale an overwhelming volume of smoke."
+      "Your chest and throat burn a little.",
+      "You caught a lungful of smoke.",
+      "You have breathed in a significant amount of smoke.",
+      "You are choking on smoke."
     ],
     "apply_message": [
       [ "You draw in a faint whiff of smoke.", "bad" ],
-      [ "A noticeable volume of smoke fills your lungs.", "bad" ],
+      [ "You catch a lungful of smoke.", "bad" ],
       [ "A dense cloud of smoke enters your lungs.", "bad" ],
       [ "You inhale an overwhelming volume of smoke.", "bad" ]
     ],
