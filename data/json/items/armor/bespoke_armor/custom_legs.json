@@ -60,7 +60,7 @@
     ],
     "warmth": 15,
     "material_thickness": 4,
-    "environmental_protection": 3,
+    "environmental_protection": 7,
     "flags": [ "VARSIZE", "POCKETS", "STURDY", "RAINPROOF" ],
     "armor": [
       {
