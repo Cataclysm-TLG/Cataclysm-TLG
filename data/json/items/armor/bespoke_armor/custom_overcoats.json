@@ -134,7 +134,7 @@
       }
     ],
     "warmth": 30,
-    "environmental_protection": 3,
+    "environmental_protection": 5,
     "flags": [ "VARSIZE", "POCKETS", "COLLAR", "STURDY", "RAINPROOF", "OUTER" ]
   },
   {
@@ -255,7 +255,7 @@
       { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "1 kg", "moves": 120 }
     ],
     "warmth": 20,
-    "environmental_protection": 3,
+    "environmental_protection": 5,
     "flags": [ "VARSIZE", "POCKETS", "COLLAR", "STURDY", "RAINPROOF", "OUTER" ]
   },
   {

@@ -16,7 +16,7 @@
     "looks_like": "hood_rain",
     "color": "brown",
     "warmth": 15,
-    "environmental_protection": 3,
+    "environmental_protection": 6,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
     "armor": [
@@ -60,7 +60,7 @@
     "looks_like": "hood_rain",
     "color": "light_gray",
     "warmth": 20,
-    "environmental_protection": 3,
+    "environmental_protection": 6,
     "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
     "armor": [
       {
@@ -103,7 +103,7 @@
     "looks_like": "hood_survivor",
     "color": "light_gray",
     "warmth": 75,
-    "environmental_protection": 5,
+    "environmental_protection": 6,
     "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
     "armor": [
       {
