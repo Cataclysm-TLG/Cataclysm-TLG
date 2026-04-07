@@ -1888,9 +1888,9 @@ static bool consume_med( item &target, Character &you )
 
         if( req_tool->tool ) {
             if( !( you.has_amount( tool_type, 1 ) &&
-                you.has_charges( tool_type, req_tool->tool->charges_per_use ) ) ) {
+                   you.has_charges( tool_type, req_tool->tool->charges_per_use ) ) ) {
                 you.add_msg_if_player( m_info,
-                                    _( "You need a %s to consume that!" ), req_tool->nname( 1 ) );
+                                       _( "You need a %s to consume that!" ), req_tool->nname( 1 ) );
                 return false;
             }
             you.use_charges( tool_type, req_tool->tool->charges_per_use );

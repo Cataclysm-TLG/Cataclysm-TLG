@@ -852,7 +852,7 @@
       "pain_chance": [ 150, 900 ],
       "hurt_min": [ 1 ],
       "hurt_chance": [ 450, 2700 ],
-      "health_chance": [ 500, 1000 ],
+      "health_chance": [ 250, 750 ],
       "health_min": [ -1 ]
     },
     "show_in_info": true,
@@ -880,7 +880,7 @@
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
       "hurt_chance": [ 200, 400 ],
-      "health_chance": [ 300, 600 ],
+      "health_chance": [ 100, 400 ],
       "health_min": [ -1 ]
     },
     "show_in_info": true,
@@ -1968,26 +1968,18 @@
   {
     "type": "effect_type",
     "id": "smoke_eyes",
-    "name": [
-      "Little Eye Irritation (Smoke)",
-      "Minor Eye Irritation (Smoke)",
-      "Huge Eye Irritation (Smoke)",
-      "Bad Eye Irritation (Smoke)"
-    ],
+    "name": [ "Mild Eye Irritation", "Eye Irritation", "Major Eye Irritation", "Severe Eye Irritation" ],
     "desc": [
-      "Your eyes are mildly irritated.",
+      "Your eyes burn a little.",
       "Your eyes are watering.",
       "Your eyes sting badly and tears stream from them continuously.",
-      "You can barely see anything due to your massive eye irritation and the flood of tears streaming from them."
+      "Your eyes are so badly inflamed that you can hardly see."
     ],
     "apply_message": [
-      [ "Your eyes are mildly irritated.", "bad" ],
+      [ "Your eyes burn a little.", "bad" ],
       [ "Your eyes are watering.", "bad" ],
       [ "Your eyes sting badly and tears stream from them continuously.", "bad" ],
-      [
-        "You can barely see anything due to your massive eye irritation and the flood of tears streaming from them.",
-        "bad"
-      ]
+      [ "Your eyes are so badly inflamed that you can hardly see.", "bad" ]
     ],
     "miss_messages": [ [ "Your eyes sting and tear from the smoke.", 1 ] ],
     "max_duration": "3 m",
@@ -2005,16 +1997,16 @@
   {
     "type": "effect_type",
     "id": "smoke_lungs",
-    "name": [ "Inhaled Some Smoke", "Inhaled Plenty of Smoke", "Smoke Inhalation", "Bad Smoke Inhalation" ],
+    "name": [ "Mild Smoke Inhalation", "Smoke Inhalation", "Major Smoke Inhalation", "Severe Smoke Inhalation" ],
     "desc": [
-      "You draw in a faint whiff of smoke.",
-      "A noticeable volume of smoke fills your lungs.",
-      "A dense cloud of smoke enters your lungs.",
-      "You inhale an overwhelming volume of smoke."
+      "Your chest and throat burn a little.",
+      "You caught a lungful of smoke.",
+      "You have breathed in a significant amount of smoke.",
+      "You are choking on smoke."
     ],
     "apply_message": [
       [ "You draw in a faint whiff of smoke.", "bad" ],
-      [ "A noticeable volume of smoke fills your lungs.", "bad" ],
+      [ "You catch a lungful of smoke.", "bad" ],
       [ "A dense cloud of smoke enters your lungs.", "bad" ],
       [ "You inhale an overwhelming volume of smoke.", "bad" ]
     ],
@@ -2572,6 +2564,12 @@
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ],
     "show_in_info": true,
     "resist_traits": [ "M_IMMUNE" ]
+  },
+  {
+    "type": "effect_type",
+    "id": "fallout",
+    "base_mods": { "rad_chance": [ 1200 ], "rad_min": [ 1 ] },
+    "max_duration": "10 m"
   },
   {
     "type": "effect_type",
@@ -4247,7 +4245,15 @@
     "max_intensity": 2000,
     "show_intensity": false,
     "int_dur_factor": "10 s",
-    "scaling_mods": { "speed_mod": [ -0.2 ], "str_mod": [ -0.125 ], "dex_mod": [ -0.09 ], "int_mod": [ -0.1 ], "per_mod": [ -0.083 ] },
+    "scaling_mods": {
+      "speed_mod": [ -0.2 ],
+      "str_mod": [ -0.125 ],
+      "dex_mod": [ -0.09 ],
+      "int_mod": [ -0.1 ],
+      "per_mod": [ -0.083 ],
+      "hurt_min": [ 1 ],
+      "hurt_chance": [ 8000 ]
+    },
     "blood_analysis_description": "Irradiated"
   },
   {
@@ -4352,8 +4358,8 @@
     "desc": [ "You are under the effects of a stomach soother." ],
     "int_add_val": 1,
     "max_intensity": 3,
-    "base_mods": { "vomit_tick": [ 60 ], "health_chance": [ 1500 ], "health_min": [ 1 ] },
-    "scaling_mods": { "health_min": [ -1.5 ], "health_min_val": [ -2 ], "vomit_tick": [ 120 ] },
+    "base_mods": { "vomit_tick": [ 60 ] },
+    "scaling_mods": { "vomit_tick": [ 120 ] },
     "max_duration": 14400,
     "dur_add_perc": 70
   },
