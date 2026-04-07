@@ -954,13 +954,13 @@
     "decay_amount_factor": 3,
     "percent_spread": 50,
     "outdoor_age_speedup": "1 minutes",
-    "dirty_transparency_cache": true,
+    "dirty_transparency_cache": false,
     "has_fume": true,
     "priority": 8,
     "half_life": "100 minutes",
     "phase": "gas",
     "display_items": false,
-    "display_field": true,
+    "display_field": false,
     "looks_like": "fd_smoke"
   },
   {
