@@ -1936,6 +1936,7 @@
     "color": "yellow",
     "warmth": 10,
     "material_thickness": 0.4,
+    "environmental_protection": 2,
     "flags": [ "OVERSIZE", "BELTED", "POCKETS" ],
     "armor": [
       { "encumbrance": 4, "coverage": 65, "covers": [ "torso" ] },
@@ -2065,6 +2066,7 @@
     "symbol": "[",
     "color": "light_blue",
     "flags": [ "OVERSIZE", "HOOD", "BELTED", "STURDY", "POCKETS" ],
+    "environmental_protection": 2,
     "armor": [
       { "encumbrance": 6, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
       {
@@ -2211,6 +2213,7 @@
     "material_thickness": 0.1,
     "flags": [ "OVERSIZE", "BELTED", "POCKETS", "HOOD" ],
     "variant_type": "generic",
+    "environmental_protection": 1,
     "armor": [
       { "encumbrance": 3, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
       {
@@ -2418,7 +2421,7 @@
     "color": "blue",
     "warmth": 50,
     "material_thickness": 0.5,
-    "environmental_protection": 3,
+    "environmental_protection": 2,
     "flags": [ "OVERSIZE", "HOOD", "BELTED", "POCKETS" ],
     "armor": [
       { "encumbrance": 6, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
@@ -2483,7 +2486,7 @@
     "color": "light_gray",
     "warmth": 10,
     "material_thickness": 0.5,
-    "environmental_protection": 4,
+    "environmental_protection": 3,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 200 } } ],
     "charges_per_use": 1,
     "use_action": [
@@ -2670,7 +2673,7 @@
     "color": "light_gray",
     "warmth": 35,
     "material_thickness": 1,
-    "environmental_protection": 1,
+    "environmental_protection": 2,
     "flags": [ "BELTED", "OVERSIZE", "POCKETS" ],
     "armor": [
       { "encumbrance": 7, "coverage": 85, "covers": [ "torso" ] },
@@ -2706,7 +2709,7 @@
     "volume": "50 ml",
     "to_hit": -1,
     "flags": [ "RAINPROOF", "OVERSIZE", "HOOD", "BELTED" ],
-    "environmental_protection": 1,
+    "environmental_protection": 3,
     "material_thickness": 0.1,
     "armor": [ { "coverage": 90, "covers": [ "torso" ], "encumbrance": 3 } ]
   },
@@ -2725,7 +2728,7 @@
     "weight": "280 g",
     "volume": "250 ml",
     "flags": [ "RAINPROOF", "HOOD", "OVERSIZE", "BELTED", "TRANSPARENT", "POCKETS" ],
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "material_thickness": 0.4,
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper", "torso_lower" ], "coverage": 100, "encumbrance": 4 },
