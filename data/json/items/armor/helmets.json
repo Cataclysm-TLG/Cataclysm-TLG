@@ -19,6 +19,7 @@
     "material_thickness": 2,
     "use_action": [ "HEAT_ALL_ITEMS" ],
     "techniques": [ "WBLOCK_1" ],
+    "environmental_protection": 4,
     "armor": [
       {
         "encumbrance": 34,
@@ -63,6 +64,7 @@
     "material_thickness": 1,
     "use_action": [ "HEAT_ALL_ITEMS" ],
     "techniques": [ "WBLOCK_1" ],
+    "environmental_protection": 4,
     "armor": [
       {
         "material": [
@@ -126,7 +128,6 @@
     "color": "red",
     "warmth": 10,
     "material_thickness": 3,
-    "environmental_protection": 1,
     "flags": [ "VARSIZE", "OVERSIZE", "STURDY", "OUTER" ],
     "armor": [
       {
@@ -184,6 +185,7 @@
     "warmth": 20,
     "material_thickness": 9,
     "techniques": [ "WBLOCK_1" ],
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "PADDED", "OUTER", "NORMAL", "MODULE_HOLDER" ],
     "armor": [
       {
@@ -281,6 +283,7 @@
     "price": "200 USD",
     "//": "assuming this is an antique and not a cheap replica",
     "price_postapoc": "12 USD",
+    "environmental_protection": 4,
     "to_hit": -1,
     "material": [ "steel", "plastic", "leather" ],
     "repairs_with": [ "steel" ],
@@ -318,6 +321,7 @@
     "volume": "1200 ml",
     "symbol": "[",
     "looks_like": "helmet_army",
+    "environmental_protection": 4,
     "color": "green",
     "warmth": 30,
     "flags": [ "VARSIZE", "STURDY", "PADDED", "OUTER", "NORMAL", "CUSHION_FALL" ],
@@ -360,7 +364,7 @@
     ],
     "warmth": 25,
     "material_thickness": 8,
-    "environmental_protection": 2,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "SUN_GLASSES", "PADDED", "OUTER", "NORMAL", "MODULE_HOLDER" ],
     "pocket_data": [
@@ -396,6 +400,7 @@
     "color": "dark_gray",
     "warmth": 20,
     "material_thickness": 8,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "PADDED", "OUTER", "NORMAL", "MODULE_HOLDER" ],
     "armor": [
@@ -497,6 +502,7 @@
     "symbol": "[",
     "looks_like": "cowboy_hat",
     "color": "yellow",
+    "environmental_protection": 4,
     "warmth": 15,
     "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "PADDED", "SUN_SHADE", "OUTER", "NORMAL" ],
     "armor": [
@@ -541,7 +547,7 @@
     "color": "blue",
     "warmth": 15,
     "material_thickness": 3,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "PADDED", "SUN_SHADE", "OUTER", "NORMAL", "PADDED" ],
     "armor": [
@@ -585,6 +591,7 @@
     "symbol": "[",
     "looks_like": "helmet_plate",
     "color": "light_gray",
+    "environmental_protection": 4,
     "armor": [
       {
         "covers": [ "head" ],
@@ -650,6 +657,7 @@
     "symbol": "[",
     "looks_like": "hat_hard",
     "color": "dark_gray",
+    "environmental_protection": 2,
     "warmth": 15,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "PADDED", "OUTER", "NORMAL", "CUSHION_FALL" ],
@@ -788,6 +796,7 @@
     "color": "brown",
     "warmth": 35,
     "material_thickness": 3,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "STURDY", "OUTER", "NORMAL", "PADDED" ],
     "armor": [
@@ -872,6 +881,7 @@
     "material": [ "thermo_resin", "plastic_pad" ],
     "symbol": "[",
     "looks_like": "helmet_motor",
+    "environmental_protection": 4,
     "color": "yellow",
     "armor": [
       {
@@ -930,6 +940,7 @@
     "material": [ "iron", "leather" ],
     "symbol": "[",
     "looks_like": "helmet_barbute",
+    "environmental_protection": 4,
     "color": "light_gray",
     "armor": [
       {
@@ -1070,6 +1081,7 @@
     "warmth": 12,
     "material_thickness": 2.5,
     "techniques": [ "WBLOCK_1" ],
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "WATER_FRIENDLY", "STURDY", "OUTER", "NORMAL", "PADDED" ],
     "armor": [
       {
@@ -1115,6 +1127,7 @@
     "symbol": "[",
     "color": "dark_gray",
     "material_thickness": 3,
+    "environmental_protection": 2,
     "flags": [ "WATER_FRIENDLY", "OUTER", "BELTED" ],
     "armor": [
       {
@@ -1158,6 +1171,7 @@
     "color": "green",
     "warmth": 30,
     "material_thickness": 0.5,
+    "environmental_protection": 3,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
     "armor": [ { "encumbrance": 2, "coverage": 100, "covers": [ "head" ] } ],
     "melee_damage": { "bash": 1 }
@@ -1251,7 +1265,7 @@
     ],
     "use_action": { "type": "transform", "menu_text": "Raise visor", "target": "helmet_motor_raised", "msg": "You raise your visor." },
     "warmth": 30,
-    "environmental_protection": 2,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "NORMAL", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
@@ -1326,7 +1340,7 @@
     ],
     "use_action": { "type": "transform", "menu_text": "Lower visor", "target": "helmet_motor", "msg": "You put down your visor." },
     "warmth": 30,
-    "environmental_protection": 1,
+    "environmental_protection": 3,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "WATERPROOF", "STURDY", "PADDED", "NORMAL", "OUTER", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
@@ -1377,6 +1391,7 @@
       }
     ],
     "warmth": 20,
+    "environmental_protection": 4,
     "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_SHADE", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
   },
@@ -1389,6 +1404,7 @@
     "description": "A helmet designed to protect from falls and kicks involving horses.",
     "weight": "650 g",
     "volume": "1750 ml",
+    "environmental_protection": 3,
     "delete": { "flags": [ "SUN_SHADE" ] }
   },
   {
@@ -1405,6 +1421,7 @@
     "material": [ "iron", "leather" ],
     "symbol": "[",
     "looks_like": "helmet_barbute",
+    "environmental_protection": 4,
     "color": "light_gray",
     "armor": [
       {
@@ -1475,7 +1492,7 @@
     ],
     "warmth": 10,
     "material_thickness": 2.2,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "STURDY", "OUTER" ],
     "melee_damage": { "bash": 3 }
@@ -1524,7 +1541,7 @@
     ],
     "warmth": 5,
     "material_thickness": 2,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "STURDY", "SUN_SHADE", "RAINPROOF" ],
     "melee_damage": { "bash": 1 }
@@ -1568,6 +1585,7 @@
     "flags": [ "OUTER" ],
     "material_thickness": 1.5,
     "techniques": [ "WBLOCK_1" ],
+    "environmental_protection": 4,
     "armor": [
       {
         "material": [
@@ -1600,6 +1618,7 @@
     "color": "dark_gray",
     "warmth": 10,
     "material_thickness": 3,
+    "environmental_protection": 3,
     "flags": [ "PADDED", "OUTER", "CUSHION_FALL" ],
     "techniques": [ "WBLOCK_1" ],
     "armor": [
@@ -1631,6 +1650,7 @@
     "color": "dark_gray",
     "warmth": 15,
     "material_thickness": 2.6,
+    "environmental_protection": 4,
     "flags": [ "PADDED", "OUTER" ],
     "armor": [
       {
@@ -1686,6 +1706,7 @@
     "material": [ "bronze" ],
     "symbol": "[",
     "looks_like": "helmet_plate",
+    "environmental_protection": 4,
     "color": "yellow",
     "armor": [
       {
@@ -1756,6 +1777,7 @@
     "material": [ "bronze" ],
     "symbol": "[",
     "looks_like": "helmet_corinthian",
+    "environmental_protection": 4,
     "color": "yellow",
     "armor": [
       {
@@ -1807,6 +1829,7 @@
     "looks_like": "pot_helmet",
     "copy-from": "pot_helmet",
     "material_thickness": 1.3,
+    "environmental_protection": 4,
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] },
     "armor": [
       {
@@ -1894,7 +1917,7 @@
       }
     ],
     "warmth": 5,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "STURDY", "CONDUCTIVE", "ONLY_ONE", "OUTER" ],
     "melee_damage": { "bash": 3 }
@@ -1969,6 +1992,7 @@
     "color": "dark_gray",
     "warmth": 15,
     "techniques": [ "WBLOCK_1" ],
+    "environmental_protection": 4,
     "flags": [ "WATERPROOF", "PADDED", "NORMAL", "OUTER", "MODULE_HOLDER" ],
     "armor": [
       {
@@ -2074,6 +2098,7 @@
     "material": [ "steel" ],
     "symbol": "[",
     "looks_like": "helmet_barbute",
+    "environmental_protection": 4,
     "color": "light_gray",
     "armor": [
       {
