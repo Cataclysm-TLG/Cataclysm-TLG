@@ -89,5 +89,57 @@
     "global": true,
     "condition": { "and": [ "u_is_outside" ] },
     "effect": [ { "u_message": "The ash has stopped falling, and the clouds no longer seem so ominous.", "type": "good" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_SCENARIO_FALLOUT_ALWAYS",
+    "effect": [ { "math": [ "fallout_always = 1" ] }, { "run_eocs": "EOC_CAUSE_FALLOUT_ALWAYS" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_CAUSE_FALLOUT_ALWAYS",
+    "recurrence": [
+      { "global_val": "fallout_min_recurrence", "default": "5 minutes" },
+      { "global_val": "fallout_max_recurrence", "default": "3 hours" }
+    ],
+    "global": true,
+    "condition": {
+      "and": [
+        { "math": [ "fallout_always == 1" ] },
+        { "not": { "or": [ { "is_weather": "fallout" }, { "math": [ "cause_fallout_always == 1" ] } ] } },
+        {
+          "or": [
+            { "is_weather": "clear" },
+            { "is_weather": "sunny" },
+            { "is_weather": "fog" },
+            { "is_weather": "mist" },
+            { "is_weather": "cloudy" }
+          ]
+        }
+      ]
+    },
+    "effect": [
+      { "math": [ "cause_fallout_always = 1" ] },
+      "next_weather",
+      {
+        "run_eocs": "EOC_CANCEL_FALLOUT_ALWAYS",
+        "time_in_future": [
+          { "global_val": "fallout_min_length", "default": "12 hours" },
+          { "global_val": "fallout_max_length", "default": "72 hours" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_CANCEL_FALLOUT_ALWAYS",
+    "global": true,
+    "condition": {
+      "and": [
+        { "math": [ "fallout_always == 1" ] },
+        { "or": [ { "is_weather": "fallout" }, { "math": [ "cause_fallout_always == 1" ] } ] }
+      ]
+    },
+    "effect": [ { "math": [ "cause_fallout_always = 0" ] }, "next_weather" ]
   }
 ]

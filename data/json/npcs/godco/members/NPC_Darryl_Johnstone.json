@@ -251,10 +251,7 @@
         "trial": { "type": "PERSUADE", "difficulty": 25, "mod": [ [ "trust", 5 ] ] },
         "success": {
           "topic": "TALK_GODCO_Darryl_BarterSuccess",
-          "effect": [
-            { "npc_add_effect": "godco_darryl_bartered", "duration": "PERMANENT" },
-            { "u_spawn_item": "seed_oats", "count": 3 }
-          ]
+          "effect": [ { "npc_add_effect": "godco_darryl_bartered", "duration": "PERMANENT" }, { "u_spawn_item": "seed_oats", "count": 3 } ]
         },
         "failure": { "topic": "TALK_GODCO_Darryl_BarterFail", "opinion": { "trust": -6 } }
       },
