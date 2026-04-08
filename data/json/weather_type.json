@@ -268,11 +268,7 @@
     "required_weathers": [ "clear", "sunny", "fog", "mist", "cloudy" ],
     "sound_category": "snow",
     "priority": 120,
-    "condition": {
-      "and": [
-        { "math": [ "cause_fallout == 1" ] }
-      ]
-    }
+    "condition": { "and": [ { "or": [ { "math": [ "cause_fallout == 1" ] }, { "math": [ "cause_fallout_always == 1" ] } ] } ] }
   },
   {
     "id": "mist",
