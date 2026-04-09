@@ -2232,8 +2232,8 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
         leg_block = martial_arts_data->can_leg_block( *this );
         nonstandard_block = martial_arts_data->can_nonstandard_block( *this );
         if( arm_block || leg_block || nonstandard_block ) {
-            // block_bonus for limb blocks will be added when the limb is decided.
-            block_score = get_arm_str() + unarmed_skill;
+            // get_str instead of get_arm_str, we're not lifting an item & limb scores are checked later.
+            block_score = get_str() + unarmed_skill;
         } else {
             // We don't have a shield or a technique. How are we blocking?
             return false;
