@@ -1295,6 +1295,42 @@ std::vector<options_manager::id_and_option> options_manager::build_tilesets_list
     search_resource( TILESETS, result, { PATH_INFO::user_gfx(), PATH_INFO::gfxdir() },
                      "tileset",
                      PATH_INFO::tileset_conf() );
+ 
+    auto iter = result.begin();
+
+    // Block nonfunctional out-of-repo tilesets.
+    std::vector<std::string> unusable_list = {
+        "MshockRealXotto",
+        "UNDEAD_PEOPLE_BASE",
+        "UNDEAD_PEOPLE",
+        "UNDEAD"
+    };
+
+    while( iter != result.end() ) {
+        const std::string checked_tileset_id = iter->first;
+        bool kill_with_fire = false;
+        for( std::string unusable_tileset : unusable_list ) {
+            if( checked_tileset_id.find( unusable_tileset ) != std::string::npos ) {
+                kill_with_fire = true;
+                break;
+            }
+        }
+
+        if( kill_with_fire ) {
+            iter = result.erase( iter );
+        } else {
+            iter++;
+        }
+    }
+
+    // Default values
+    if( result.empty() ) {
+        result.emplace_back( "hoder", to_translation( "Hoder's" ) );
+    }
+
+    search_resource( TILESETS, result, { PATH_INFO::user_gfx(), PATH_INFO::gfxdir() },
+                     "tileset",
+                     PATH_INFO::tileset_conf() );
 
     // Default values
     if( result.empty() ) {
