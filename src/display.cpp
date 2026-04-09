@@ -640,6 +640,9 @@ std::pair<std::string, nc_color> display::weight_text_color( const Character &u 
         weight_color = c_light_gray;
     } else if( bmi > character_weight_category::underweight ) {
         weight_string = translate_marker( "Underweight" );
+        weight_color = c_light_gray;
+    } else if( bmi > character_weight_category::skinny ) {
+        weight_string = translate_marker( "Skinny" );
         weight_color = c_yellow;
     } else if( bmi > character_weight_category::emaciated ) {
         weight_string = translate_marker( "Emaciated" );
@@ -696,7 +699,9 @@ std::string display::weight_long_description( const Character &u )
     } else if( bmi > character_weight_category::normal ) {
         return _( "You look to be a pretty healthy weight, with some fat to last you through the winter, but nothing excessive." );
     } else if( bmi > character_weight_category::underweight ) {
-        return _( "You are thin, thinner than is healthy.  You are less resilient to going without food." );
+        return _( "You are a little on the slim side.  It might be a good idea to put on some weight before it gets too bad." );
+    } else if( bmi > character_weight_category::skinny ) {
+        return _( "You are thinner than is healthy.  You're weak from lack of energy and it's getting bad enough to lead to health problems." );
     } else if( bmi > character_weight_category::emaciated ) {
         return _( "You are very unhealthily underweight, nearing starvation." );
     } else {

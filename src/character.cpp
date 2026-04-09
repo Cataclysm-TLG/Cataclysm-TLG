@@ -4891,7 +4891,7 @@ int Character::kcal_speed_penalty() const
     static const std::vector<std::pair<float, float>> starv_thresholds = { {
             std::make_pair( 0.0f, -90.0f ),
             std::make_pair( character_weight_category::emaciated, -50.f ),
-            std::make_pair( character_weight_category::underweight, -25.0f ),
+            std::make_pair( character_weight_category::skinny, -25.0f ),
             std::make_pair( character_weight_category::normal, 0.0f )
         }
     };
