@@ -70,12 +70,8 @@
 
 class ui_adaptor;
 
-#if defined(TILES)
-#   if defined(_MSC_VER) && defined(USE_VCPKG)
-#      include <SDL2/SDL_version.h>
-#   else
-#      include <SDL_version.h>
-#   endif
+#if defined(TILES) || defined(SDL_SOUND)
+#   include "sdl_version_wrappers.h"
 #endif
 
 #if defined(__ANDROID__)
@@ -640,7 +636,7 @@ int main( int argc, const char *argv[] )
 
 #if defined(_WIN32) and defined(TILES)
     const HANDLE std_output { GetStdHandle( STD_OUTPUT_HANDLE ) }, std_error { GetStdHandle( STD_ERROR_HANDLE ) };
-    if( std_output != INVALID_HANDLE_VALUE and std_error != INVALID_HANDLE_VALUE ) {
+    if( std_output != INVALID_HANDLE_VALUE && std_error != INVALID_HANDLE_VALUE ) {
         if( AttachConsole( ATTACH_PARENT_PROCESS ) ) {
             if( std_output == nullptr ) {
                 freopen_s( &CONOUT, "CONOUT$", "w", stdout );
@@ -732,20 +728,20 @@ int main( int argc, const char *argv[] )
     DebugLog( D_INFO, DC_ALL ) << "[main] C locale set to " << setlocale( LC_ALL, nullptr );
     DebugLog( D_INFO, DC_ALL ) << "[main] C++ locale set to " << std::locale().name();
 
-#if defined(TILES)
-    SDL_version compiled;
-    SDL_VERSION( &compiled );
-    DebugLog( D_INFO, DC_ALL ) << "SDL version used during compile is "
-                               << static_cast<int>( compiled.major ) << "."
-                               << static_cast<int>( compiled.minor ) << "."
-                               << static_cast<int>( compiled.patch );
+#if defined(TILES) || defined(SDL_SOUND)
+    {
+        const SDLVersionInfo compiled = GetCompiledSDLVersion();
+        DebugLog( D_INFO, DC_ALL ) << "SDL version used during compile is "
+                                   << compiled.major << "."
+                                   << compiled.minor << "."
+                                   << compiled.patch;
 
-    SDL_version linked;
-    SDL_GetVersion( &linked );
-    DebugLog( D_INFO, DC_ALL ) << "SDL version used during linking and in runtime is "
-                               << static_cast<int>( linked.major ) << "."
-                               << static_cast<int>( linked.minor ) << "."
-                               << static_cast<int>( linked.patch );
+        const SDLVersionInfo linked = GetLinkedSDLVersion();
+        DebugLog( D_INFO, DC_ALL ) << "SDL version used during linking and in runtime is "
+                                   << linked.major << "."
+                                   << linked.minor << "."
+                                   << linked.patch;
+    }
 #endif
 
 #if !defined(TILES)

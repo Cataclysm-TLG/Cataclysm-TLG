@@ -677,9 +677,6 @@ class zone_manager
         void deserialize( const JsonValue &jv );
 };
 
-/**
-* TO-DO: update to ImGui
-*/
 class zone_manager_ui
 {
     public:

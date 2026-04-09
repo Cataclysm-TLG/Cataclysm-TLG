@@ -3466,12 +3466,9 @@ static void game_report()
     DebugLog( DL_ALL, DC_ALL ) << " GAME REPORT:\n" << report;
     std::string popup_msg = _( "Report written to debug.log" );
 #if defined(TILES)
-    // copy to clipboard
-    int clipboard_result = SDL_SetClipboardText( report.c_str() );
-    printErrorIf( clipboard_result != 0, "Error while copying the game report to the clipboard." );
-    if( clipboard_result == 0 ) {
-        popup_msg += _( " and to the clipboard." );
-    }
+    const bool clipboard_ok = SetClipboardText( report );
+    printErrorIf( !clipboard_ok, "Error while copying the game report to the clipboard." );
+    popup_msg = report;
 #endif
     popup( popup_msg );
 }
