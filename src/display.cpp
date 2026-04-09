@@ -699,7 +699,7 @@ std::string display::weight_long_description( const Character &u )
     } else if( bmi > character_weight_category::normal ) {
         return _( "You look to be a pretty healthy weight, with some fat to last you through the winter, but nothing excessive." );
     } else if( bmi > character_weight_category::underweight ) {
-        return _( "You are a little on the slim side.  It's nothing to worry about yet, but it might be a good idea to put on some weight." );
+        return _( "You are a little on the slim side.  It might be a good idea to put on some weight before it gets too bad." );
     } else if( bmi > character_weight_category::skinny ) {
         return _( "You are thinner than is healthy.  You're weak from lack of energy and it's getting bad enough to lead to health problems." );
     } else if( bmi > character_weight_category::emaciated ) {
