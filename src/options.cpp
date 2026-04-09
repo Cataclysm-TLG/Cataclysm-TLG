@@ -1328,10 +1328,6 @@ std::vector<options_manager::id_and_option> options_manager::build_tilesets_list
         result.emplace_back( "hoder", to_translation( "Hoder's" ) );
     }
 
-    search_resource( TILESETS, result, { PATH_INFO::user_gfx(), PATH_INFO::gfxdir() },
-                     "tileset",
-                     PATH_INFO::tileset_conf() );
-
     // Default values
     if( result.empty() ) {
         result.emplace_back( "hoder", to_translation( "Hoder's" ) );
