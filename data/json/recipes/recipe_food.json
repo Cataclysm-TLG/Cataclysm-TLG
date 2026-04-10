@@ -8070,7 +8070,7 @@
     "time": "3 m",
     "charges": 8,
     "qualities": [ { "id": "CONTAIN", "level": 1 } ],
-    "components": [ [ [ "sugar", 10 ] ], [ [ "salt", 1 ] ], [ [ "water_clean", 8 ] ], [ [ "chem_baking_soda", 2 ] ] ]
+    "components": [ [ [ "sugar", 10 ], [ "honey", 10 ], [ "honey_glassed", 10 ], [ "syrup", 10 ] ], [ [ "salt", 1 ] ], [ [ "water_clean", 8 ] ], [ [ "chem_baking_soda", 2 ] ] ]
   },
   {
     "result": "oatmeal_coarse",
