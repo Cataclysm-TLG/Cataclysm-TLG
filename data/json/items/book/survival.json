@@ -232,7 +232,7 @@
     "read_skill": "survival"
   },
   {
-    "id": "isherwood_herbal_remedies",
+    "id": "textbook_herbal_remedies",
     "type": "ITEM",
     "subtypes": [ "BOOK" ],
     "category": "manuals",

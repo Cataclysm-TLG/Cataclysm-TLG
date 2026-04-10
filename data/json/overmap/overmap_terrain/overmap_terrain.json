@@ -169,15 +169,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "cabin_isherwood",
-    "name": "cabin",
-    "vision_levels": "isolated_building",
-    "sym": "C",
-    "color": "i_green",
-    "see_cost": "high"
-  },
-  {
-    "type": "overmap_terrain",
     "id": [
       "riverside_dwelling",
       "riverside_dwelling1",

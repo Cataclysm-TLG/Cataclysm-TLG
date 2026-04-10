@@ -969,5 +969,10 @@
     "type": "TRAIT_MIGRATION",
     "id": "PROF_CHURL",
     "remove": true
+  },
+  {
+    "type": "TRAIT_MIGRATION",
+    "id": "Boss_Isherwood_01",
+    "remove": true
   }
 ]

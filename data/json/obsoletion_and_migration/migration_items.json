@@ -3867,5 +3867,10 @@
     "type": "MIGRATION",
     "id": "e_combatsaw_on",
     "replace": "elec_chainsaw_on"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "isherwood_herbal_remedies",
+    "replace": "textbook_herbal_remedies"
   }
 ]
