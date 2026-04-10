@@ -4252,6 +4252,7 @@
       "int_mod": [ -0.1 ],
       "per_mod": [ -0.083 ],
       "hurt_min": [ 1 ],
+      "hurt_max": [ 1 ],
       "hurt_chance": [ 8000 ]
     },
     "blood_analysis_description": "Irradiated"
