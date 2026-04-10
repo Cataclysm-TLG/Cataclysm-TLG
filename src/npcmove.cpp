@@ -2805,15 +2805,6 @@ npc_action npc::address_needs( float danger )
                 }
             }
         }
-        // Last resort: harvest scavenging (forage underbrush, harvest plants).
-        for( const scored_water_source &h : find_nearby_harvestable() ) {
-            if( square_dist( pos_bub(), h.pos ) <= 1 ) {
-                here.examine( *this, h.pos );
-                return npc_noop;
-            } else if( move_to_and_verify( h.pos ) ) {
-                return npc_noop;
-            }
-        }
     }
 
     // Normal food/drink: camp -> inventory -> ground food -> terrain water.
@@ -2846,15 +2837,6 @@ npc_action npc::address_needs( float danger )
                 if( move_to_and_verify( ws.pos ) ) {
                     return npc_noop;
                 }
-            }
-        }
-        // Last resort: harvest scavenging (same as extreme path).
-        for( const scored_water_source &h : find_nearby_harvestable() ) {
-            if( square_dist( pos_bub(), h.pos ) <= 1 ) {
-                here.examine( *this, h.pos );
-                return npc_noop;
-            } else if( move_to_and_verify( h.pos ) ) {
-                return npc_noop;
             }
         }
     }
