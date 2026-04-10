@@ -1295,7 +1295,7 @@ std::vector<options_manager::id_and_option> options_manager::build_tilesets_list
     search_resource( TILESETS, result, { PATH_INFO::user_gfx(), PATH_INFO::gfxdir() },
                      "tileset",
                      PATH_INFO::tileset_conf() );
- 
+
     auto iter = result.begin();
 
     // Block nonfunctional out-of-repo tilesets.
