@@ -304,43 +304,59 @@ bool mon_spellcasting_actor::call( monster &mon ) const
         return false;
     }
 
-    if( !mon.attack_target() && !allow_no_target ) {
+    Creature *target = mon.attack_target();
+
+    if( !target && !allow_no_target ) {
         // this is an attack. there is no reason to attack if there isn't a real target.
         // Unless we don't need one
         return false;
     }
 
     if( has_condition ) {
-        dialogue d( get_talker_for( &mon ),
-                    allow_no_target ? nullptr : get_talker_for( mon.attack_target() ) );
+        dialogue d(
+            get_talker_for( &mon ),
+            ( allow_no_target || !target ) ? nullptr : get_talker_for( target )
+        );
+
         if( !condition( d ) ) {
             add_msg_debug( debugmode::DF_MATTACK, "Attack conditionals failed" );
             return false;
         }
     }
 
-    const tripoint_bub_ms target = ( spell_data.self ||
-                                     allow_no_target ) ? mon.pos_bub() : mon.attack_target()->pos_bub();
+    const tripoint_bub_ms target_pos =
+        ( spell_data.self || allow_no_target || !target )
+        ? mon.pos_bub()
+        : target->pos_bub();
+
     spell spell_instance = spell_data.get_spell( mon );
     spell_instance.set_message( spell_data.trigger_message );
 
     // Bail out if the target is out of range.
-    if( !spell_data.self &&
-        trig_dist( mon.pos_bub(), target ) > spell_instance.range( mon ) ) {
+    if( !spell_data.self && target &&
+        trig_dist( mon.pos_bub(), target_pos ) > spell_instance.range( mon ) ) {
         return false;
     }
 
     std::string target_name;
-    if( const Creature *target_monster = get_creature_tracker().creature_at( target ) ) {
-        target_name = target_monster->disp_name();
+    if( target ) {
+        if( const Creature *target_monster = get_creature_tracker().creature_at( target_pos ) ) {
+            target_name = target_monster->disp_name();
+        }
     }
 
-    add_msg_if_player_sees( target, spell_instance.message(), mon.disp_name(),
-                            spell_instance.name(), target_name );
+    add_msg_if_player_sees(
+        target_pos,
+        spell_instance.message(),
+        mon.disp_name(),
+        spell_instance.name(),
+        target_name
+    );
 
     avatar fake_player;
     mon.mod_moves( -spell_instance.casting_time( fake_player, true ) );
-    spell_instance.cast_all_effects( mon, target );
+
+    spell_instance.cast_all_effects( mon, target_pos );
 
     return true;
 }
