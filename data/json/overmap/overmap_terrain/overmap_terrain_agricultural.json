@@ -100,31 +100,6 @@
   {
     "type": "overmap_terrain",
     "id": [
-      "farm_isherwood_1",
-      "farm_isherwood_4",
-      "farm_isherwood_5",
-      "farm_isherwood_6",
-      "farm_isherwood_7",
-      "farm_isherwood_8",
-      "farm_isherwood_9",
-      "horse_farm_isherwood_1",
-      "horse_farm_isherwood_2",
-      "horse_farm_isherwood_11",
-      "horse_farm_isherwood_12",
-      "horse_farm_isherwood_14",
-      "horse_farm_isherwood_15",
-      "horse_farm_isherwood_16",
-      "horse_farm_isherwood_3",
-      "horse_farm_isherwood_5",
-      "horse_farm_isherwood_6",
-      "horse_farm_isherwood_8"
-    ],
-    "copy-from": "2farm_1",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
-    "id": [
       "2farm_13",
       "2farm_14",
       "2farm_17",
@@ -169,33 +144,15 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [ "farm_isherwood_2_roof", "horse_farm_isherwood_13_roof" ],
-    "copy-from": "farm_2_roof",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
     "id": [ "farm_3" ],
     "copy-from": "generic_rural_building",
     "name": "farm barn"
   },
   {
     "type": "overmap_terrain",
-    "id": [ "farm_isherwood_3" ],
-    "copy-from": "farm_3",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
     "id": [ "farm_3_roof" ],
     "copy-from": "farm_3",
     "name": "farm barn roof"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": [ "farm_isherwood_3_roof" ],
-    "copy-from": "farm_3_roof",
-    "extras": ""
   },
   {
     "type": "overmap_terrain",
@@ -219,12 +176,6 @@
     "copy-from": "generic_rural_building",
     "name": "farm house",
     "sym": "^"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": [ "horse_farm_isherwood_13", "farm_isherwood_2" ],
-    "copy-from": "farm_2",
-    "extras": ""
   },
   {
     "type": "overmap_terrain",
@@ -319,81 +270,10 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [
-      "dairy_farm_isherwood_NW",
-      "dairy_farm_isherwood_NE",
-      "dairy_farm_isherwood_W",
-      "dairy_farm_isherwood_E",
-      "dairy_farm_isherwood_SE",
-      "dairy_farm_isherwood_SW"
-    ],
-    "copy-from": "dairy_farm_NW",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
     "id": [ "dairy_farm_SE_roof", "dairy_farm_SW_roof" ],
     "copy-from": "generic_rural_building",
     "name": "dairy farm roof",
     "sym": "w"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": [ "dairy_farm_isherwood_SE_roof", "dairy_farm_isherwood_SW_roof" ],
-    "copy-from": "dairy_farm_SE_roof",
-    "extras": ""
-  },
-  {
-    "id": "smokehouse",
-    "//": "Isherwoord omt",
-    "type": "overmap_terrain",
-    "copy-from": "generic_rural_building",
-    "name": "smokehouse",
-    "sym": "u",
-    "color": "brown",
-    "extras": ""
-  },
-  {
-    "id": "smokehouse_roof",
-    "type": "overmap_terrain",
-    "copy-from": "generic_rural_building",
-    "name": "smokehouse roof",
-    "color": "brown",
-    "extras": ""
-  },
-  {
-    "id": "rural_outbuilding",
-    "//": "Isherwoord omt",
-    "type": "overmap_terrain",
-    "copy-from": "generic_rural_building",
-    "name": "outbuilding",
-    "color": "brown",
-    "extras": ""
-  },
-  {
-    "id": "rural_outbuilding_roof",
-    "//": "Isherwoord omt",
-    "type": "overmap_terrain",
-    "copy-from": "generic_rural_building",
-    "name": "outbuilding roof",
-    "sym": "u",
-    "color": "brown",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "farm_isherwood_2_cellar",
-    "copy-from": "generic_rural_building",
-    "name": "farm house cellar",
-    "sym": "O",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "farm_isherwood_3_hayloft",
-    "copy-from": "generic_rural_building",
-    "name": "farm barn hayloft",
-    "extras": ""
   },
   {
     "id": "cemetery_small",
@@ -574,22 +454,10 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_4",
-    "copy-from": "farm_horse_carriage_house_1",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
     "id": "farm_horse_carriage_house_1_roof",
     "copy-from": "generic_rural_building",
     "name": "carriage house roof",
     "sym": "o"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_4_roof",
-    "copy-from": "farm_horse_carriage_house_1_roof",
-    "extras": ""
   },
   {
     "type": "overmap_terrain",
@@ -600,22 +468,10 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_7",
-    "copy-from": "farm_horse_stable_1",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
     "id": "farm_horse_stable_1_hayloft",
     "copy-from": "generic_rural_building",
     "name": "horse stable hayloft",
     "sym": "&"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_7_hayloft",
-    "copy-from": "farm_horse_stable_1_hayloft",
-    "extras": ""
   },
   {
     "type": "overmap_terrain",
@@ -626,22 +482,10 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_7_roof",
-    "copy-from": "farm_horse_stable_1_roof",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
     "id": [ "farm_1_greenhouse", "farm_horse_greenhouse" ],
     "copy-from": "generic_rural_building",
     "name": "greenhouse",
     "sym": "o"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_9",
-    "copy-from": "farm_horse_greenhouse",
-    "extras": ""
   },
   {
     "type": "overmap_terrain",
@@ -668,12 +512,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_9_roof",
-    "copy-from": "farm_horse_greenhouse_roof",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
     "id": "farm_1_coop",
     "copy-from": "generic_rural_building",
     "name": "chicken coop",
@@ -681,22 +519,10 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_10",
-    "copy-from": "farm_1_coop",
-    "extras": ""
-  },
-  {
-    "type": "overmap_terrain",
     "id": "farm_1_coop_roof",
     "copy-from": "generic_rural_building",
     "name": "chicken coop roof",
     "sym": "o"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_10_roof",
-    "copy-from": "farm_1_coop_roof",
-    "extras": ""
   },
   {
     "type": "overmap_terrain",
@@ -805,12 +631,6 @@
     "copy-from": "generic_rural_building",
     "name": "farm house 2nd floor",
     "sym": "^"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "horse_farm_isherwood_13_2ndfloor",
-    "copy-from": "farm_horse_house_1_2ndfloor",
-    "extras": ""
   },
   {
     "type": "overmap_terrain",

@@ -18,5 +18,95 @@
     "mission": 7,
     "chat": "TALK_DONE",
     "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_barry",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_BARRY",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_carlos",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_CARLOS",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_chris",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_CHRIS",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_claire",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_CLAIRE",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_eddie",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_EDDIE",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_jack",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_JACK",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_jesse",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_JESSE",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_lisa",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_LISA",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_luke",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_LUKE",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
   }
 ]

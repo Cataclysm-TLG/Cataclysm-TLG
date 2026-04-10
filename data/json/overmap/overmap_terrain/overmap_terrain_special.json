@@ -55,7 +55,7 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [ "special_forest", "special_forest_isherwood" ],
+    "id": [ "special_forest" ],
     "copy-from": "generic_forest",
     "name": "forest",
     "sym": "F",
@@ -78,7 +78,7 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [ "special_forest_thick", "special_forest_thick_isherwood" ],
+    "id": [ "special_forest_thick" ],
     "copy-from": "generic_forest",
     "name": "forest",
     "sym": "F",

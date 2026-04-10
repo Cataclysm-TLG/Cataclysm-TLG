@@ -152,30 +152,14 @@
       "math": [ "npc_randomize_dialogue_direction == 0" ],
       "yes": "No, sorry.  Nothin' much worth notin' out there these days, just the odd scattered survivor and they usually don't want random visitors.",
       "no": {
-        "math": [ "npc_randomize_dialogue_direction == 1" ],
-        "yes": "Matter of fact, yeah.  Ran into a bunch of farmers.  They don't want much to do with our caravans, but someone like you they might be OK with.",
-        "no": {
-          "math": [ "npc_randomize_dialogue_direction == 2" ],
-          "yes": {
-            "gendered_line": "There's been rumors.  Folks talkin' about some kind of secret lab, out in the wilds, with survivors in it.  I haven't seen it myself, mind you.",
-            "relevant_genders": [ "npc" ]
-          }
+        "math": [ "npc_randomize_dialogue_direction == 2" ],
+        "yes": {
+          "gendered_line": "There's been rumors.  Folks talkin' about some kind of secret lab, out in the wilds, with survivors in it.  I haven't seen it myself, mind you.",
+          "relevant_genders": [ "npc" ]
         }
       }
     },
     "responses": [
-      {
-        "text": "How do I get to that farm?",
-        "topic": "TALK_FREE_MERCHANT_TEAMSTER_DIRECTIONS_2",
-        "condition": {
-          "and": [
-            { "math": [ "npc_randomize_dialogue_direction == 1" ] },
-            { "not": { "u_has_var": "teamster_mission_directions", "value": "isherwood" } }
-          ]
-        },
-        "effect": { "assign_mission": "directions_isherwood" },
-        "switch": true
-      },
       {
         "text": "How do I get to that lab?",
         "topic": "TALK_FREE_MERCHANT_TEAMSTER_DIRECTIONS_2",
@@ -356,31 +340,6 @@
         "topic": "TALK_DONE"
       }
     ]
-  },
-  {
-    "id": "directions_isherwood",
-    "type": "mission_definition",
-    "name": { "str": "Check out that farm" },
-    "description": "Ran into a bunch of farmers.  They don't want much to do with our caravans, but someone like you they might be OK with.",
-    "goal": "MGOAL_GO_TO",
-    "difficulty": 2,
-    "value": 0,
-    "start": {
-      "assign_mission_target": { "om_special": "Isherwood Farm Mutable", "om_terrain": "farm_isherwood_1", "reveal_radius": 5 },
-      "effect": { "u_add_var": "teamster_mission_directions", "value": "isherwood" }
-    },
-    "origins": [ "ORIGIN_SECONDARY" ],
-    "dialogue": {
-      "describe": "Ran into a bunch of farmers.  They don't want much to do with our caravans, but someone like you they might be OK with.",
-      "offer": "Ran into a bunch of farmers.  They don't want much to do with our caravans, but someone like you they might be OK with.",
-      "accepted": "Nice.",
-      "rejected": "Seems reasonable.",
-      "advice": "Be careful.  It's rough out there.",
-      "inquire": "How is the search going?",
-      "success": "Huh, go figure.",
-      "success_lie": "Huh, go figure.",
-      "failure": "It is what it is."
-    }
   },
   {
     "id": "directions_hub01",
