@@ -586,7 +586,7 @@
     "material": [ "flesh" ],
     "spoils_in": "8 hours",
     "fun": -18,
-    "use_action": [ "POISON" ],
+    "flags": [ "INEDIBLE" ],
     "contamination": [ { "disease": "bad_food", "probability": 100 } ],
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
