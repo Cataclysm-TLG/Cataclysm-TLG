@@ -3154,10 +3154,17 @@ void map::drop_items( const tripoint_bub_ms &p )
     }
 
     float damage_total = 0.0f;
-    for( item &i : items ) {
-        if( i.is_soft() || !i.made_of( phase_id::SOLID ) ) {
+
+    while( !items.empty() ) {
+        auto it = items.begin();
+        item i = *it;
+        items.erase( it );
+
+        if( !i.made_of( phase_id::SOLID ) ) {
+            add_item_or_charges( below, i );
             continue;
         }
+
         units::mass wt_dropped = i.weight();
         units::volume vol_dropped = i.volume();
 
@@ -3165,6 +3172,7 @@ void map::drop_items( const tripoint_bub_ms &p )
             debugmsg( "Tried to calculate damage for falling item, but item somehow fell less than one z-level!" );
             max_height_fallen = 1;
         }
+
         Creature *creature_below = get_creature_tracker().creature_at( below );
         double height_fallen = max_height_fallen;
         if( creature_below ) {
@@ -3173,6 +3181,7 @@ void map::drop_items( const tripoint_bub_ms &p )
             // This is shorter than the average adult, but it's an *okay* approximation.
             height_fallen -= occupied_tile_fraction( creature_below->get_size() );
         }
+
         // In meters, assuming one z-level is ~2m.
         const double distance_to_fall = height_fallen * 2;
 
@@ -3232,17 +3241,19 @@ void map::drop_items( const tripoint_bub_ms &p )
                     //~First positional argument: Item name. Second: Name of a person (e.g. "Jane") or player (e.g. "you"). Third: Body part name, accusative.
                     const std::string msg = _( "Falling %1$s hits %2$s on the %3$s for %4$i damage!" );
                     add_msg_if_player_sees( creature_below->pos_bub(), msg,
-                                            i.tname(), creature_below->disp_name(), hit_part->accusative, static_cast<int>( damage ) );
+                                            i.tname(), creature_below->disp_name(), hit_part->accusative,
+                                            static_cast<int>( damage ) );
                 } else {
                     add_msg_if_player_sees( creature_below->pos_bub(), _( "Falling %1$s hits %2$s for %3$i damage!" ),
-                                            i.tname(), creature_below->disp_name(), static_cast<int>( damage ) );
+                                            i.tname(), creature_below->disp_name(),
+                                            static_cast<int>( damage ) );
                 }
+
                 // FIXME: Hardcoded damage type!
                 creature_below->deal_damage( nullptr, hit_part, damage_instance( damage_bash, damage ) );
             }
         }
     }
-
     // Bash terain, furniture, items (including this one!) and vehicles on tile below
     bash( below, damage_total / 2 );
     i_clear( p );
@@ -4288,7 +4299,7 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
         if( by_charges ) {
             damage_chance *= i->charges_per_volume( 250_ml );
             while( ( damage_chance > material_factor ||
-                     x_in_y( damage_chance, material_factor ) ) &&
+                     x_in_y( damage_chance / material_factor, 1.0f ) ) &&
                    i->charges > 0 ) {
                 i->charges--;
                 damage_chance -= material_factor;
@@ -4297,7 +4308,7 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
             }
         } else {
             const field_type_id type_blood = i->is_corpse() ? i->get_mtype()->bloodType() : fd_null;
-            while( ( damage_chance > material_factor || x_in_y( damage_chance, material_factor ) ) &&
+            while( ( damage_chance > material_factor || x_in_y( damage_chance / material_factor, 1.0f ) ) &&
                    ( i->damage() < i->max_damage() ) ) {
                 i->inc_damage();
                 add_splash( type_blood, p, 1, damage_chance );
@@ -4400,6 +4411,8 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
     std::string damaged_item_name;
 
     std::vector<item> contents;
+
+    // IMPORTANT: take a reference to the real stack so erase() is valid
     map_stack items = i_at( p );
 
     for( auto i = items.begin(); i != items.end(); ) {
@@ -4412,10 +4425,6 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
             continue;
         }
         if( i->made_of( phase_id::LIQUID ) ) {
-            i++;
-            continue;
-        }
-        if( i->is_corpse() ) {
             i++;
             continue;
         }
@@ -4432,7 +4441,7 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
 
         // The volume check here pretty much only influences very large items
         const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
-        float damage_chance = power / volume_factor;
+        float damage_chance = 10.f * power / volume_factor;
 
         if( i->is_soft() && damage_chance > 0.f ) {
             damage_chance /= 5.f;
@@ -4441,18 +4450,20 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
         params.did_bash = true;
         params.bashed_solid = true;
         const bool by_charges = i->count_by_charges();
+
         // See if they were damaged
         if( by_charges ) {
             damage_chance *= std::max( 1, i->charges_per_volume( 250_ml ) );
             while( ( damage_chance > material_factor ||
-                     x_in_y( damage_chance, material_factor ) ) &&
+                     x_in_y( damage_chance / material_factor, 1.0f ) ) &&
                    i->charges > 0 ) {
                 i->charges--;
                 damage_chance -= material_factor;
                 item_was_damaged = true;
             }
         } else {
-            while( ( damage_chance > material_factor || x_in_y( damage_chance, material_factor ) ) &&
+            while( ( damage_chance > material_factor ||
+                     x_in_y( damage_chance / material_factor, 1.0f ) ) &&
                    ( i->damage() < i->max_damage() ) ) {
                 i->inc_damage();
                 damage_chance -= material_factor;
@@ -4489,11 +4500,13 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
                 sounds::sound( p, 12, sounds::sound_t::combat, _( "glass shattering." ), false,
                                "smash_success", "smash_glass_contents" );
             }
-            i = i_rem( p, i );
+
+            i = items.erase( i );
             items_destroyed++;
         } else {
             i++;
         }
+
         if( !hit_all ) {
             done = true;
         }
