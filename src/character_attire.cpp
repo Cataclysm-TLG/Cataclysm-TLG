@@ -1967,7 +1967,7 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
             // now we roll to see if it's affected.
             add_msg_if_player_sees( guy, m_warning, _( "%1s %2s gets on %3s %4s." ),
                                     get_liquid_descriptor( liquid_remaining ), liquid_name, guy.disp_name( true ),
-                                    armor.tname() );
+                                    pre_damage_name );
             // A droplet of acid or bile are less likely to ruin a shirt than a whole bucket.
             // Breathability works against the item as it means the liquid is soaking in or getting through
             // gaps or holes.
@@ -1981,14 +1981,13 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                         ( rng( 1, 2000 ) - ( ( 100 - breathability ) * 10 ) ) < liquid_remaining ) ) {
                     add_msg_if_player_sees( guy, m_warning, _( "Filth covers %1s %2s!" ), guy.disp_name( true,
                                             true ),
-                                            armor.tname() );
+                                            pre_damage_name );
                     armor.set_flag( json_flag_FILTHY );
                     guy.on_worn_item_soiled( armor );
                 }
                 // If this is an armor-damaging liquid, the damage is relative to fluid_remaining
                 // and the coverage of the item.
                 if( damage.amount >= 1.0f && damage_armor ) {
-                    const std::string pre_damage_name = armor.tname();
                     bool destroy = false;
                     guy.adjust_taken_damage_by_enchantments( damage );
                     if( ignite && damage.amount >= 1.0f ) {
