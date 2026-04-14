@@ -343,9 +343,9 @@
         "%#++#%"
       ],
       "terrain": {
-        "#": "t_reinforced_glass_shutter_open",
-        "+": "t_reinforced_door_glass_c",
-        "%": "t_reinforced_glass_shutter",
+        "#": "t_laminated_glass_shutter_open",
+        "+": "t_laminated_door_glass_c",
+        "%": "t_laminated_glass_shutter",
         "$": "t_wall_glass"
       },
       "furniture": { "S": "f_statue" },
@@ -368,9 +368,9 @@
         "%#++#%"
       ],
       "terrain": {
-        "#": "t_reinforced_glass_shutter_open",
-        "+": "t_reinforced_door_glass_c",
-        "%": "t_reinforced_glass_shutter",
+        "#": "t_laminated_glass_shutter_open",
+        "+": "t_laminated_door_glass_c",
+        "%": "t_laminated_glass_shutter",
         "$": "t_wall_glass"
       },
       "sealed_item": { "1": { "item": { "item": "seed_sugar_beet" }, "furniture": "f_planter_mature" } },
@@ -393,9 +393,9 @@
         "%#++#%"
       ],
       "terrain": {
-        "#": "t_reinforced_glass_shutter_open",
-        "+": "t_reinforced_door_glass_c",
-        "%": "t_reinforced_glass_shutter",
+        "#": "t_laminated_glass_shutter_open",
+        "+": "t_laminated_door_glass_c",
+        "%": "t_laminated_glass_shutter",
         "$": "t_wall_glass"
       },
       "furniture": { "a": "f_stool" },

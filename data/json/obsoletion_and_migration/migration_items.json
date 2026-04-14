@@ -3872,5 +3872,15 @@
     "type": "MIGRATION",
     "id": "isherwood_herbal_remedies",
     "replace": "textbook_herbal_remedies"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "reinforced_glass_sheet",
+    "replace": "tempered_glass_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "reinforced_glass_pane",
+    "replace": "tempered_glass_sheet"
   }
 ]

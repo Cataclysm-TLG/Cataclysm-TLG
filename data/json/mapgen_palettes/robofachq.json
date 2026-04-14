@@ -14,7 +14,7 @@
       "|": "t_concrete_wall",
       "/": "t_wall_metal",
       "=": "t_wall_glass",
-      "(": "t_reinforced_glass",
+      "(": "t_laminated_glass",
       ",": "t_region_groundcover_urban",
       "e": "t_elevator",
       "E": "t_elevator_control",

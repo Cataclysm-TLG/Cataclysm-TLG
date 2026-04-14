@@ -124,7 +124,7 @@
     "type": "ITEM",
     "id": "reinforced_solar_panel_v2",
     "name": { "str": "advanced reinforced solar panel" },
-    "description": "An advanced solar panel that has been covered with a pane of reinforced glass to protect the delicate solar cells from zombies or errant baseballs.  The glass causes this panel to produce slightly less power than a normal advanced panel.",
+    "description": "A high-performance solar panel with sturdy brackets and wire guards across its face, trading efficiency for durability.",
     "price": "2400 USD",
     "price_postapoc": "35 USD",
     "copy-from": "reinforced_solar_panel"

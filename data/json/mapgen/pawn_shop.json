@@ -46,7 +46,7 @@
         "*": "t_door_locked",
         "+": [ [ "t_door_metal_pickable", 80 ], [ "t_door_metal_o", 5 ], [ "t_door_metal_c", 15 ] ],
         "~": "t_window_alarm",
-        "%": "t_reinforced_glass",
+        "%": "t_laminated_glass",
         "4": "t_gutter_downspout",
         "<": "t_ladder_up"
       },

@@ -13,7 +13,7 @@
       "=": "t_door_glass_frosted_lab_c",
       "~": "t_water_sh",
       "'": "t_railroad_rubble",
-      ":": "t_reinforced_glass",
+      ":": "t_laminated_glass",
       ";": "t_window",
       "}": "t_window_bars",
       "_": "t_pavement",
@@ -71,7 +71,7 @@
       "+": "t_door_c",
       "-": "t_door_glass_frosted_c",
       "=": "t_door_glass_frosted_lab_c",
-      ":": "t_reinforced_glass",
+      ":": "t_laminated_glass",
       ";": "t_window",
       "_": "t_flat_roof",
       ",": "t_glass_roof",
@@ -131,7 +131,7 @@
       "+": "t_door_c",
       "-": "t_door_glass_frosted_c",
       "=": "t_door_glass_frosted_lab_c",
-      ":": "t_reinforced_glass",
+      ":": "t_laminated_glass",
       "m": "t_door_metal_c"
     },
     "furniture": {

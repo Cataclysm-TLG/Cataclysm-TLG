@@ -933,19 +933,6 @@
   },
   {
     "type": "construction",
-    "id": "constr_remove_reinforced_glass",
-    "group": "remove_glass_wall",
-    "//": "Removes a reinforced glass wall",
-    "category": "DECONSTRUCT",
-    "required_skills": [ [ "fabrication", 4 ] ],
-    "time": "10 m",
-    "using": [ [ "wall_floor_glass_removal_standard", 1 ] ],
-    "byproducts": [ { "item": "reinforced_glass_sheet", "count": 1 } ],
-    "pre_terrain": "t_reinforced_glass",
-    "post_terrain": "t_m_frame"
-  },
-  {
-    "type": "construction",
     "id": "constr_remove_glass_wall",
     "group": "remove_glass_wall",
     "//": "Removes a glass wall",
@@ -953,7 +940,7 @@
     "required_skills": [ [ "fabrication", 4 ] ],
     "time": "10 m",
     "using": [ [ "wall_floor_glass_removal_standard", 1 ] ],
-    "byproducts": [ { "item": "glass_sheet", "count": 1 } ],
+    "byproducts": [ { "item": "tempered_glass_sheet", "count": 1 } ],
     "pre_terrain": "t_wall_glass",
     "post_terrain": "t_floor"
   },
@@ -966,7 +953,7 @@
     "required_skills": [ [ "fabrication", 4 ] ],
     "time": "10 m",
     "using": [ [ "wall_floor_glass_removal_standard", 1 ] ],
-    "byproducts": [ { "item": "glass_sheet", "count": [ 1, 2 ] } ],
+    "byproducts": [ { "item": "tempered_glass_sheet", "count": [ 1, 2 ] } ],
     "pre_terrain": "t_door_glass_c",
     "post_terrain": "t_floor"
   },
@@ -979,7 +966,7 @@
     "required_skills": [ [ "fabrication", 4 ] ],
     "time": "10 m",
     "using": [ [ "wall_floor_glass_removal_standard", 1 ] ],
-    "byproducts": [ { "item": "glass_sheet", "count": [ 1, 2 ] } ],
+    "byproducts": [ { "item": "tempered_glass_sheet", "count": [ 1, 2 ] } ],
     "pre_terrain": "t_door_glass_frosted_c",
     "post_terrain": "t_floor"
   },
@@ -992,7 +979,7 @@
     "required_skills": [ [ "fabrication", 4 ] ],
     "time": "10 m",
     "using": [ [ "wall_floor_glass_removal_standard", 1 ] ],
-    "byproducts": [ { "item": "glass_sheet", "count": [ 1, 2 ] } ],
+    "byproducts": [ { "item": "tempered_glass_sheet", "count": [ 1, 2 ] } ],
     "pre_terrain": "t_door_glass_lab_c",
     "post_terrain": "t_floor"
   },
@@ -1005,34 +992,21 @@
     "required_skills": [ [ "fabrication", 4 ] ],
     "time": "10 m",
     "using": [ [ "wall_floor_glass_removal_standard", 1 ] ],
-    "byproducts": [ { "item": "glass_sheet", "count": [ 1, 2 ] } ],
+    "byproducts": [ { "item": "tempered_glass_sheet", "count": [ 1, 2 ] } ],
     "pre_terrain": "t_door_glass_frosted_lab_c",
     "post_terrain": "t_floor"
   },
   {
     "type": "construction",
-    "id": "constr_remove_reinforced_glass_door",
+    "id": "constr_remove_lamnated_glass_door_lab",
     "group": "remove_glass_door",
-    "//": "Removes a reinforced glass door",
+    "//": "Removes a laminated lab glass door",
     "category": "DECONSTRUCT",
     "required_skills": [ [ "fabrication", 4 ] ],
     "time": "10 m",
     "using": [ [ "wall_floor_glass_removal_standard", 1 ] ],
-    "byproducts": [ { "item": "reinforced_glass_sheet", "count": [ 1, 2 ] } ],
-    "pre_terrain": "t_reinforced_door_glass_c",
-    "post_terrain": "t_floor"
-  },
-  {
-    "type": "construction",
-    "id": "constr_remove_reinforced_glass_door_lab",
-    "group": "remove_glass_door",
-    "//": "Removes a reinforced lab glass door",
-    "category": "DECONSTRUCT",
-    "required_skills": [ [ "fabrication", 4 ] ],
-    "time": "10 m",
-    "using": [ [ "wall_floor_glass_removal_standard", 1 ] ],
-    "byproducts": [ { "item": "reinforced_glass_sheet", "count": [ 1, 2 ] } ],
-    "pre_terrain": "t_reinforced_door_glass_lab_c",
+    "byproducts": [ { "item": "tempered_glass_sheet", "count": [ 1, 2 ] } ],
+    "pre_terrain": "t_laminated_door_glass_lab_c",
     "post_terrain": "t_floor"
   },
   {

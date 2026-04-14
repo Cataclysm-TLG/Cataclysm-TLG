@@ -43,5 +43,50 @@
     "type": "ter_furn_migration",
     "from_furn": "f_broken_boat",
     "to_furn": "f_beach_log"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_reinforced_door_glass_c",
+    "to_ter": "t_laminated_door_glass_c"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_reinforced_door_glass_o",
+    "to_ter": "t_laminated_door_glass_o"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_reinforced_glass_shutter",
+    "to_ter": "t_laminated_glass_shutter"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_reinforced_glass_lab",
+    "to_ter": "t_laminated_glass_lab"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_wall_glass_lab",
+    "to_ter": "t_laminated_glass_lab"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_reinforced_glass_shutter_open",
+    "to_ter": "t_laminated_glass_shutter_open"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_reinforced_glass",
+    "to_ter": "t_laminated_glass"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_reinforced_door_glass_lab_c",
+    "to_ter": "t_laminated_door_glass_lab_c"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_reinforced_door_glass_lab_o",
+    "to_ter": "t_laminated_door_glass_lab_o"
   }
 ]
