@@ -13,7 +13,7 @@
       "!": "t_door_metal_locked",
       ".": "t_region_groundcover_urban",
       "w": "t_window",
-      "W": "t_reinforced_glass",
+      "W": "t_laminated_glass",
       "_": "t_pavement",
       "y": "t_pavement_y",
       "s": "t_concrete",

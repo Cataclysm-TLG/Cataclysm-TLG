@@ -198,9 +198,9 @@ static const ter_str_id ter_t_metal_floor( "t_metal_floor" );
 static const ter_str_id ter_t_null( "t_null" );
 static const ter_str_id ter_t_pseudo_phase( "t_pseudo_phase" );
 static const ter_str_id ter_t_radio_tower( "t_radio_tower" );
-static const ter_str_id ter_t_reinforced_door_glass_c( "t_reinforced_door_glass_c" );
-static const ter_str_id ter_t_reinforced_glass( "t_reinforced_glass" );
-static const ter_str_id ter_t_reinforced_glass_lab( "t_reinforced_glass_lab" );
+static const ter_str_id ter_t_laminated_door_glass_c( "t_laminated_door_glass_c" );
+static const ter_str_id ter_t_laminated_glass( "t_laminated_glass" );
+static const ter_str_id ter_t_laminated_glass_lab( "t_laminated_glass_lab" );
 static const ter_str_id ter_t_rock_floor( "t_rock_floor" );
 static const ter_str_id ter_t_sewage( "t_sewage" );
 static const ter_str_id ter_t_stairs_down( "t_stairs_down" );
@@ -7009,11 +7009,11 @@ void map::draw_lab( mapgendata &dat )
                         !has_flag_ter( ter_furn_flag::TFLAG_DOOR, east_border ) ) {
                         // TODO: create a ter_reset function that does ter_set,
                         // furn_set, and i_clear?
-                        ter_str_id lw_type = tower_lab ? ter_t_reinforced_glass : ter_t_concrete_wall;
-                        ter_str_id tw_type = tower_lab ? ter_t_reinforced_glass : ter_t_concrete_wall;
-                        ter_str_id rw_type = tower_lab && rw == 2 ? ter_t_reinforced_glass :
+                        ter_str_id lw_type = tower_lab ? ter_t_laminated_glass : ter_t_concrete_wall;
+                        ter_str_id tw_type = tower_lab ? ter_t_laminated_glass : ter_t_concrete_wall;
+                        ter_str_id rw_type = tower_lab && rw == 2 ? ter_t_laminated_glass :
                                              ter_t_concrete_wall;
-                        ter_str_id bw_type = tower_lab && bw == 2 ? ter_t_reinforced_glass :
+                        ter_str_id bw_type = tower_lab && bw == 2 ? ter_t_laminated_glass :
                                              ter_t_concrete_wall;
                         for( int i = 0; i < SEEX * 2; i++ ) {
                             ter_set( point_bub_ms( 23, i ), rw_type );
@@ -7516,10 +7516,10 @@ void map::draw_lab( mapgendata &dat )
             if( !has_flag_ter( ter_furn_flag::TFLAG_WALL, east_border ) &&
                 !has_flag_ter( ter_furn_flag::TFLAG_DOOR, east_border ) ) {
                 // TODO: create a ter_reset function that does ter_set, furn_set, and i_clear?
-                ter_str_id lw_type = tower_lab ? ter_t_reinforced_glass : ter_t_concrete_wall;
-                ter_str_id tw_type = tower_lab ? ter_t_reinforced_glass : ter_t_concrete_wall;
-                ter_str_id rw_type = tower_lab && rw == 2 ? ter_t_reinforced_glass : ter_t_concrete_wall;
-                ter_str_id bw_type = tower_lab && bw == 2 ? ter_t_reinforced_glass : ter_t_concrete_wall;
+                ter_str_id lw_type = tower_lab ? ter_t_laminated_glass : ter_t_concrete_wall;
+                ter_str_id tw_type = tower_lab ? ter_t_laminated_glass : ter_t_concrete_wall;
+                ter_str_id rw_type = tower_lab && rw == 2 ? ter_t_laminated_glass : ter_t_concrete_wall;
+                ter_str_id bw_type = tower_lab && bw == 2 ? ter_t_laminated_glass : ter_t_concrete_wall;
                 for( int i = 0; i < SEEX * 2; i++ ) {
                     ter_set( point_bub_ms( 23, i ), rw_type );
                     furn_set( point_bub_ms( 23, i ), furn_str_id::NULL_ID() );
@@ -7590,17 +7590,17 @@ void map::draw_lab( mapgendata &dat )
                         mtrap_set( this, tripoint_bub_ms( SEEX + 2, SEEY - 3, dat.zlevel() ), tr_dissector );
                         mtrap_set( this, tripoint_bub_ms( SEEX - 3, SEEY + 2, dat.zlevel() ), tr_dissector );
                         mtrap_set( this, tripoint_bub_ms( SEEX + 2, SEEY + 2, dat.zlevel() ), tr_dissector );
-                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX + 1, SEEY + 1 ), point_bub_ms( SEEX - 2,
+                        line( this, ter_t_laminated_glass, point_bub_ms( SEEX + 1, SEEY + 1 ), point_bub_ms( SEEX - 2,
                                 SEEY + 1 ),
                               dat.zlevel() );
-                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY ), point_bub_ms( SEEX - 2,
+                        line( this, ter_t_laminated_glass, point_bub_ms( SEEX - 2, SEEY ), point_bub_ms( SEEX - 2,
                                 SEEY - 2 ),
                               dat.zlevel() );
-                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 1, SEEY - 2 ), point_bub_ms( SEEX + 1,
+                        line( this, ter_t_laminated_glass, point_bub_ms( SEEX - 1, SEEY - 2 ), point_bub_ms( SEEX + 1,
                                 SEEY - 2 ),
                               dat.zlevel() );
-                        ter_set( point_bub_ms( SEEX + 1, SEEY - 1 ), ter_t_reinforced_glass );
-                        ter_set( point_bub_ms( SEEX + 1, SEEY ), ter_t_reinforced_door_glass_c );
+                        ter_set( point_bub_ms( SEEX + 1, SEEY - 1 ), ter_t_laminated_glass );
+                        ter_set( point_bub_ms( SEEX + 1, SEEY ), ter_t_laminated_door_glass_c );
                         furn_set( point_bub_ms( SEEX - 1, SEEY - 1 ), furn_f_table );
                         furn_set( point_bub_ms( SEEX, SEEY - 1 ), furn_f_table );
                         furn_set( point_bub_ms( SEEX - 1, SEEY ), furn_f_table );
@@ -7636,14 +7636,14 @@ void map::draw_lab( mapgendata &dat )
                         furn_set( point_bub_ms( SEEX - 1, SEEY ), furn_f_rack );
                         furn_set( point_bub_ms( SEEX, SEEY ), furn_f_rack );
                         furn_set( point_bub_ms( SEEX + 1, SEEY ), furn_f_rack );
-                        line( this, ter_t_reinforced_door_glass_c, point_bub_ms( SEEX - 2, SEEY - 2 ),
+                        line( this, ter_t_laminated_door_glass_c, point_bub_ms( SEEX - 2, SEEY - 2 ),
                               point_bub_ms( SEEX + 1, SEEY - 2 ), dat.zlevel() );
-                        line( this, ter_t_reinforced_door_glass_c, point_bub_ms( SEEX - 2, SEEY + 1 ),
+                        line( this, ter_t_laminated_door_glass_c, point_bub_ms( SEEX - 2, SEEY + 1 ),
                               point_bub_ms( SEEX + 1, SEEY + 1 ), dat.zlevel() );
-                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 3, SEEY - 2 ), point_bub_ms( SEEX - 3,
+                        line( this, ter_t_laminated_glass, point_bub_ms( SEEX - 3, SEEY - 2 ), point_bub_ms( SEEX - 3,
                                 SEEY + 1 ),
                               dat.zlevel() );
-                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX + 2, SEEY - 2 ), point_bub_ms( SEEX + 2,
+                        line( this, ter_t_laminated_glass, point_bub_ms( SEEX + 2, SEEY - 2 ), point_bub_ms( SEEX + 2,
                                 SEEY + 1 ),
                               dat.zlevel() );
                         place_items( Item_spawn_data_ammo_rare, 96,
@@ -7671,7 +7671,7 @@ void map::draw_lab( mapgendata &dat )
                                     if( ( i - lw ) % 2 == 0 ) {
                                         ter_set( point_bub_ms( i, j ), ter_t_concrete_wall );
                                     } else {
-                                        ter_set( point_bub_ms( i, j ), ter_t_reinforced_glass );
+                                        ter_set( point_bub_ms( i, j ), ter_t_laminated_glass );
                                     }
                                 } else if( ( i - lw ) % 2 == 0 || j == tw + 2 ) {
                                     ter_set( point_bub_ms( i, j ), ter_t_concrete_wall );
@@ -7724,16 +7724,16 @@ void map::draw_lab( mapgendata &dat )
                                 Item_spawn_data_bionics, 75, point_bub_ms( SEEX - 1, SEEY - 1 ),
                                 point_bub_ms( SEEX, SEEY ), abs_sub.z(), false, calendar::start_of_cataclysm ).size();
                     }
-                    line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY - 2 ), point_bub_ms( SEEX + 1,
+                    line( this, ter_t_laminated_glass, point_bub_ms( SEEX - 2, SEEY - 2 ), point_bub_ms( SEEX + 1,
                             SEEY - 2 ),
                           dat.zlevel() );
-                    line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY + 1 ), point_bub_ms( SEEX + 1,
+                    line( this, ter_t_laminated_glass, point_bub_ms( SEEX - 2, SEEY + 1 ), point_bub_ms( SEEX + 1,
                             SEEY + 1 ),
                           dat.zlevel() );
-                    line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY - 1 ), point_bub_ms( SEEX - 2,
+                    line( this, ter_t_laminated_glass, point_bub_ms( SEEX - 2, SEEY - 1 ), point_bub_ms( SEEX - 2,
                             SEEY ),
                           dat.zlevel() );
-                    line( this, ter_t_reinforced_glass, point_bub_ms( SEEX + 1, SEEY - 1 ), point_bub_ms( SEEX + 1,
+                    line( this, ter_t_laminated_glass, point_bub_ms( SEEX + 1, SEEY - 1 ), point_bub_ms( SEEX + 1,
                             SEEY ),
                           dat.zlevel() );
                     spawn_item( point_bub_ms( SEEX - 4, SEEY - 3 ), "id_science" );
@@ -8794,7 +8794,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             "---\n"
                                             "|c|\n"
                                             "-=-\n",
-                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass_lab ),
+                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_laminated_glass_lab ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
                 m->place_items( Item_spawn_data_bionics_common, 70, bio,
                                 bio, z, false, calendar::start_of_cataclysm );
@@ -8813,7 +8813,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             "-=-\n"
                                             "|c|\n"
                                             "---\n",
-                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass_lab ),
+                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_laminated_glass_lab ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
                 m->place_items( Item_spawn_data_bionics_common, 70, bio,
                                 bio, z, false, calendar::start_of_cataclysm );
@@ -8833,7 +8833,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             "|-|\n"
                                             "|c=\n"
                                             "|-|\n",
-                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass_lab ),
+                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_laminated_glass_lab ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
                 m->place_items( Item_spawn_data_bionics_common, 70, point_bub_ms( biox, bioy ),
                                 point_bub_ms( biox, bioy ), z, false, calendar::start_of_cataclysm );
@@ -8852,7 +8852,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             "|-|\n"
                                             "=c|\n"
                                             "|-|\n",
-                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass_lab ),
+                                            mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_laminated_glass_lab ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
                 m->place_items( Item_spawn_data_bionics_common, 70, point_bub_ms( biox, bioy ),
                                 point_bub_ms( biox, bioy ), z, false, calendar::turn_zero );

@@ -590,11 +590,6 @@
   },
   {
     "type": "construction_group",
-    "id": "build_reinforced_glass_window",
-    "name": "Build Reinforced Glass Window"
-  },
-  {
-    "type": "construction_group",
     "id": "build_river_bridge",
     "name": "Build River Bridge"
   },

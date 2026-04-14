@@ -47,8 +47,8 @@
         "'": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "Ŧ": "t_privacy_fence",
         "ɤ": "t_privacy_fencegate_c",
-        "¶": "t_reinforced_door_glass_c",
-        ":": "t_reinforced_glass_shutter",
+        "¶": "t_laminated_door_glass_c",
+        ":": "t_laminated_glass_shutter",
         "*": "t_door_metal_pickable",
         "§": "t_region_groundcover_urban"
       },

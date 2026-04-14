@@ -50,8 +50,8 @@
         "~": "t_drystone_wall_half",
         ";": "t_dirtfloor",
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
-        "$": "t_reinforced_glass_shutter",
-        "}": "t_reinforced_door_glass_c"
+        "$": "t_laminated_glass_shutter",
+        "}": "t_laminated_door_glass_c"
       },
       "items": { "q": { "item": "farming_seeds", "chance": 70 } },
       "sealed_item": { "0": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 10 } },

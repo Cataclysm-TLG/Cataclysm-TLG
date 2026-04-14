@@ -127,9 +127,9 @@ static const ter_str_id ter_t_missile( "t_missile" );
 static const ter_str_id ter_t_open_air( "t_open_air" );
 static const ter_str_id ter_t_rad_platform( "t_rad_platform" );
 static const ter_str_id ter_t_radio_tower( "t_radio_tower" );
-static const ter_str_id ter_t_reinforced_glass_lab( "t_reinforced_glass_lab" );
-static const ter_str_id ter_t_reinforced_glass_shutter( "t_reinforced_glass_shutter" );
-static const ter_str_id ter_t_reinforced_glass_shutter_open( "t_reinforced_glass_shutter_open" );
+static const ter_str_id ter_t_laminated_glass_lab( "t_laminated_glass_lab" );
+static const ter_str_id ter_t_laminated_glass_shutter( "t_laminated_glass_shutter" );
+static const ter_str_id ter_t_laminated_glass_shutter_open( "t_laminated_glass_shutter_open" );
 static const ter_str_id ter_t_sewage( "t_sewage" );
 static const ter_str_id ter_t_sewage_pipe( "t_sewage_pipe" );
 static const ter_str_id ter_t_sewage_pump( "t_sewage_pump" );
@@ -386,9 +386,9 @@ static bool has_terminate_terrain( const map &here, const tripoint_bub_ms &p )
 {
     const ter_id &t_north = here.ter( p + tripoint::north );
     const ter_id &t_south = here.ter( p + tripoint::south );
-    return ( t_north == ter_t_reinforced_glass_lab &&
+    return ( t_north == ter_t_laminated_glass_lab &&
              t_south == ter_t_concrete_wall ) ||
-           ( t_south == ter_t_reinforced_glass_lab &&
+           ( t_south == ter_t_laminated_glass_lab &&
              t_north == ter_t_concrete_wall );
 }
 
@@ -402,11 +402,11 @@ bool computer_session::can_activate( computer_action action )
 
         case COMPACT_RELEASE:
         case COMPACT_RELEASE_DISARM:
-            return here.has_nearby_ter( get_player_character().pos_bub(), ter_t_reinforced_glass_lab,
+            return here.has_nearby_ter( get_player_character().pos_bub(), ter_t_laminated_glass_lab,
                                         25 );
 
         case COMPACT_RELEASE_BIONICS:
-            return here.has_nearby_ter( get_player_character().pos_bub(), ter_t_reinforced_glass_lab, 3 );
+            return here.has_nearby_ter( get_player_character().pos_bub(), ter_t_laminated_glass_lab, 3 );
 
         case COMPACT_TERMINATE: {
             creature_tracker &creatures = get_creature_tracker();
@@ -555,7 +555,7 @@ void computer_session::helper_release( float radius )
                    false,
                    "environment",
                    "alarm" );
-    get_map().translate_radius( ter_t_reinforced_glass_lab, ter_t_thconc_floor, radius,
+    get_map().translate_radius( ter_t_laminated_glass_lab, ter_t_thconc_floor, radius,
                                 player_character.pos_bub(),
                                 true );
     query_any( _( "Containment shields opened.  Press any key…" ) );
@@ -1432,12 +1432,12 @@ void computer_session::action_conveyor()
     query_any( _( "Conveyor belt cycle complete.  Press any key…" ) );
 }
 
-// toggles reinforced glass shutters open->closed and closed->open depending on their current state
+// toggles laminated glass shutters open->closed and closed->open depending on their current state
 void computer_session::action_shutters()
 {
     Character &player_character = get_player_character();
     player_character.mod_moves( -to_moves<int>( 3_seconds ) );
-    get_map().translate_radius( ter_t_reinforced_glass_shutter_open, ter_t_reinforced_glass_shutter,
+    get_map().translate_radius( ter_t_laminated_glass_shutter_open, ter_t_laminated_glass_shutter,
                                 8.0,
                                 player_character.pos_bub(),
                                 true, true );

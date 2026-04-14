@@ -21,7 +21,7 @@
       "(": "t_pavement_y",
       "H": "t_chaingate_l",
       "f": "t_chainfence",
-      "g": "t_reinforced_glass",
+      "g": "t_laminated_glass",
       "w": "t_window_bars_noglass",
       "|": "t_brick_wall",
       "│": "t_concrete_wall",

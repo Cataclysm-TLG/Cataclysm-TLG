@@ -6,9 +6,9 @@
     "terrain": {
       ".": "t_region_groundcover_urban",
       "A": [ "t_region_shrub", "t_region_shrub_fruit", "t_region_shrub_decorative" ],
-      "B": "t_reinforced_glass_shutter_open",
-      "C": "t_reinforced_door_glass_c",
-      "D": "t_reinforced_glass_shutter",
+      "B": "t_laminated_glass_shutter_open",
+      "C": "t_laminated_door_glass_c",
+      "D": "t_laminated_glass_shutter",
       "E": "t_chickenwire_gate_c",
       "F": "t_chickenwire_fence",
       "G": "t_sandbox",

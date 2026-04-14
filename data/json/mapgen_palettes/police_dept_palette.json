@@ -15,7 +15,7 @@
       "│": "t_ponywall",
       "W": "t_wall_glass",
       "w": "t_window",
-      "V": "t_reinforced_glass",
+      "V": "t_laminated_glass",
       "v": "t_window_bars",
       ".": "t_linoleum_white",
       "c": "t_linoleum_white",

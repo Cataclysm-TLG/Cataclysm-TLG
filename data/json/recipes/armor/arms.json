@@ -315,10 +315,9 @@
     "difficulty": 4,
     "skills_required": [ [ "tailor", 1 ] ],
     "time": "120 m",
-    "autolearn": true,
-    "byproducts": [ [ "spandex_patch", 2 ] ],
+    "book_learn": [ [ "plastics_book", 2 ] ],
     "using": [ [ "plastic_molding", 1 ], [ "tailoring_spandex_sheet", 2 ] ],
-    "proficiencies": [ { "proficiency": "prof_plasticworking" } ]
+    "proficiencies": [ { "proficiency": "prof_plasticworking" }, { "proficiency": "prof_elastics" } ]
   },
   {
     "result": "leather_vambraces",

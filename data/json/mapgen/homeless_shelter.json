@@ -17,7 +17,7 @@
       "+": "t_door_c",
       "v": "t_window_bars",
       "#": "t_brick_wall",
-      "=": "t_reinforced_glass",
+      "=": "t_laminated_glass",
       "'": "t_thconc_floor",
       "L": "t_thconc_floor",
       "R": "t_thconc_floor",
