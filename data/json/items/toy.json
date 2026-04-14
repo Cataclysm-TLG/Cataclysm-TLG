@@ -620,55 +620,55 @@
       {
         "id": "toy_plush_lobster",
         "name": { "str": "lobster plushie" },
-        "description": "A cuddly red lobster plushie with a soft, red shell mimic, and big, playful eyes.",
+        "description": "A cuddly red lobster plushie with a soft red shell and big playful eyes.",
         "weight": 1
       },
       {
         "id": "toy_plush_bwhale",
         "name": { "str": "blue whale plushie" },
-        "description": "A large, funny, cuddly blue whale plushie with soft, blue-gray fur, big, friendly eyes, and a playful expression.",
+        "description": "A cuddly blue whale plushie with soft blue-gray fur and a playful expression.",
         "weight": 1
       },
       {
         "id": "toy_plush_hwhale",
         "name": { "str": "humpback whale plushie" },
-        "description": "A large, lovable and huggable humpback whale plushie with soft, gray and white fur and big, friendly eyes.",
+        "description": "A huggable humpback whale plushie with soft gray and white fur and big friendly eyes.",
         "weight": 1
       },
       {
         "id": "toy_plush_camel",
         "name": { "str": "camel plushie" },
-        "description": "A cuddly and sweet camel plushie with two soft humps, tan fur and big, soulful eyes.",
+        "description": "A cuddly camel plushie with two soft humps, tan fur, and big soulful eyes.",
         "weight": 1
       },
       {
         "id": "toy_plush_dromedary",
         "name": { "str": "dromedary plushie" },
-        "description": "A cute and cuddly plushie with soft brown fur, a big, single hump, and friendly eyes.",
+        "description": "A cuddly camel plushie with a single humps, tan fur, and big soulful eyes.",
         "weight": 1
       },
       {
         "id": "toy_plush_llama",
         "name": { "str": "llama plushie" },
-        "description": "A precious llama plushie with soft, fluffy fur in grayish white.  It has expressive eyes, a tuft of fur on its head, long, delicate legs, and has a selection of detachable accessories, such as a saddle, a blanket, and even a hat!",
+        "description": "A precious llama plushie with soft, fluffy fur in grayish white.  It has expressive eyes and a tuft of fur on its head.",
         "weight": 1
       },
       {
         "id": "toy_plush_alpaca",
         "name": { "str": "alpaca plushie" },
-        "description": "A cute and loving alpaca plushie featuring soft, curly fur in shades of white and brown, shiny black eyes, and slightly short legs.",
+        "description": "A cute alpaca plushie featuring soft, curly fur in shades of white and brown.",
         "weight": 1
       },
       {
         "id": "toy_plush_cow",
         "name": { "str": "cow plushie" },
-        "description": "This very well-made cow plushie features soft, velvety fur in black and white patches, with endearing floppy ears and bright eyes, together with a pair of soft horns and the typical cow udder.",
+        "description": "A stuffed dairy cow with soft, velvety fur spotted in Holstein black and white.",
         "weight": 1
       },
       {
         "id": "toy_plush_sheep",
         "name": { "str": "sheep plushie" },
-        "description": "This loving and fluffy sheep plushie features soft, woolly fur in white, with cute floppy ears and expressive eyes.",
+        "description": "This loving and fluffy sheep plushie features soft woolly fur in white, with cute floppy ears and expressive eyes.",
         "weight": 1
       },
       {
