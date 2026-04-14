@@ -4,7 +4,7 @@
     "id": "caffeine",
     "name": "Caffeine Withdrawal",
     "type_name": "caffeine",
-    "description": "Strength - 1;   Slight sluggishness;   Occasional cravings",
+    "description": "Not medically significant.",
     "craving_morale": "morale_craving_caffeine",
     "effect_on_condition": "EOC_CAFFEINE_ADDICTION"
   },
@@ -13,7 +13,7 @@
     "id": "nicotine",
     "name": "Nicotine Withdrawal",
     "type_name": "nicotine",
-    "description": "Intelligence - 1;   Occasional cravings",
+    "description": "Not medically significant.",
     "craving_morale": "morale_craving_nicotine",
     "builtin": "nicotine_effect"
   },
@@ -22,7 +22,7 @@
     "id": "alcohol",
     "name": "Alcohol Withdrawal",
     "type_name": "alcohol",
-    "description": "Perception - 1;   Intelligence - 1;   Occasional Cravings;\nRisk of delirium tremens",
+    "description": "Risk of delirium tremens.",
     "craving_morale": "morale_craving_alcohol",
     "builtin": "alcohol_effect"
   },
@@ -31,7 +31,7 @@
     "id": "sleeping pill",
     "name": "Sleeping Pill Dependence",
     "type_name": "sleeping pills",
-    "description": "You may find it difficult to sleep without medication.",
+    "description": "May cause insomnia.",
     "effect_on_condition": "EOC_SLEEP_ADDICTION"
   },
   {
@@ -39,7 +39,7 @@
     "id": "opioid",
     "name": "Opioid Withdrawal",
     "type_name": "opioids",
-    "description": "Strength - 1;   Perception - 1;   Dexterity - 1;\nDepression and physical pain to some degree.  Frequent cravings.  Vomiting.",
+    "description": "Nausea, pain, severe depression.",
     "craving_morale": "morale_craving_opioid",
     "builtin": "opioid_effect"
   },
@@ -48,7 +48,7 @@
     "id": "amphetamine",
     "name": "Amphetamine Withdrawal",
     "type_name": "amphetamine",
-    "description": "Strength - 1;   Intelligence - 1;\nMovement rate reduction.  Depression.  Weak immune system.  Frequent cravings.",
+    "description": "Slowdown and severe depression.",
     "craving_morale": "morale_craving_speed",
     "builtin": "amphetamine_effect"
   },
