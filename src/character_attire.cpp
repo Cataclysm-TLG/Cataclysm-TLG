@@ -1959,34 +1959,35 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
             ++iter;
             continue;
         }
+        const int breathability = armor.breathability( bp );
+        const int coverage = armor.get_coverage( bp );
         const std::string pre_damage_name = armor.tname();
-        if( rng( 1, 100 ) <= armor.get_coverage( bp ) && liquid_remaining > 0 ) {
+        if( rng( 1, 100 ) <= coverage && liquid_remaining > 0 ) {
             // The item has intercepted the splash to protect its wearer,
             // now we roll to see if it's affected.
             add_msg_if_player_sees( guy, m_warning, _( "%1s %2s gets on %3s %4s." ),
                                     get_liquid_descriptor( liquid_remaining ), liquid_name, guy.disp_name( true ),
-                                    armor.tname() );
+                                    pre_damage_name );
             // A droplet of acid or bile are less likely to ruin a shirt than a whole bucket.
             // Breathability works against the item as it means the liquid is soaking in or getting through
             // gaps or holes.
-            if( ( rng( 1, 2000 ) - ( ( 100 - armor.breathability( bp ) ) * 10 ) ) < liquid_remaining ) {
+            if( ( rng( 1, 2000 ) - ( ( 100 - breathability ) * 10 ) ) < liquid_remaining ) {
                 // Apply filth to the item. Currently hardcoded because we don't have other item
                 // flags that would make sense for this. It gets its own probability roll here
                 // because it can't use armor_absorb's.
                 if( sp.has_flag( spell_flag::MAKE_FILTHY ) && !armor.has_flag( flag_INTEGRATED ) &&
                     !armor.has_flag( flag_SEMITANGIBLE ) && !armor.has_flag( flag_PERSONAL ) &&
                     !armor.has_flag( flag_AURA ) && (
-                        ( rng( 1, 2000 ) - ( ( 100 - armor.breathability( bp ) ) * 10 ) ) < liquid_remaining ) ) {
+                        ( rng( 1, 2000 ) - ( ( 100 - breathability ) * 10 ) ) < liquid_remaining ) ) {
                     add_msg_if_player_sees( guy, m_warning, _( "Filth covers %1s %2s!" ), guy.disp_name( true,
                                             true ),
-                                            armor.tname() );
+                                            pre_damage_name );
                     armor.set_flag( json_flag_FILTHY );
                     guy.on_worn_item_soiled( armor );
                 }
                 // If this is an armor-damaging liquid, the damage is relative to fluid_remaining
                 // and the coverage of the item.
                 if( damage.amount >= 1.0f && damage_armor ) {
-                    const std::string pre_damage_name = armor.tname();
                     bool destroy = false;
                     guy.adjust_taken_damage_by_enchantments( damage );
                     if( ignite && damage.amount >= 1.0f ) {
@@ -2024,14 +2025,14 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                             worn_remains.push_back( *it );
                         }
                         iter = decltype( iter )( worn.erase( --iter.base() ) );
+                        continue;
                     }
                 }
             }
             // Whether or not the item was affected by the fluid, it still blocked some or all of it.
             // Breathability and coverage let fluid soak through, but some is lost, weakening the attack as it goes.
             liquid_remaining = std::max( 0,
-                                         liquid_remaining - ( ( ( armor.get_coverage( bp ) + ( 100 - armor.breathability(
-                                                 bp ) ) ) / 2 ) * 10 ) );
+                                         liquid_remaining - ( ( ( coverage + ( 100 - breathability ) ) / 2 ) * 10 ) );
             damage.amount *= static_cast<float>( liquid_remaining ) / static_cast<float>( liquid_amount );
         }
         ++iter;
