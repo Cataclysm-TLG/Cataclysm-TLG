@@ -89,7 +89,7 @@
     "id": "tempered_glass_sheet_reinforced",
     "symbol": "]",
     "color": "light_cyan",
-    "name": { "str": "sheet of tempered glass", "str_pl": "sheets of tempered glass" },
+    "name": { "str": "reinforced sheet of tempered glass", "str_pl": "reinforced sheets of tempered glass" },
     "description": "A plate of safety glass reinforced with metal brackets and slats to give it a bit more durability without sacrificing too much visibility.",
     "category": "spare_parts",
     "price": "110 USD",
