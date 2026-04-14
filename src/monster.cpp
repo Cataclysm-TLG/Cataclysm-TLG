@@ -4048,8 +4048,8 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
     if( wander_turns < wandf ) {
         return;
     }
-    // only trigger this if the monster is not friendly or the source isn't the player
-    if( friendly == 0 || source != get_player_character().pos_bub() ) {
+    // Only trigger this if the monster is not friendly or the source isn't us or the player.
+    if( source != pos_bub() && ( friendly == 0 || source != get_player_character().pos_bub() ) ) {
         process_trigger( mon_trigger::SOUND, volume );
     }
     provocative_sound = tmp_provocative;
