@@ -439,11 +439,11 @@ void suffer::while_grabbed( Character &you )
 
 void suffer::from_addictions( Character &you )
 {
-    time_duration timer = -6_hours;
+    time_duration timer = -9_hours;
     if( you.has_trait( trait_ADDICTIVE ) ) {
-        timer = -10_hours;
+        timer = -12_hours;
     } else if( you.has_trait( trait_NONADDICTIVE ) ) {
-        timer = -3_hours;
+        timer = -6_hours;
     }
     for( addiction &cur_addiction : you.addictions ) {
         if( cur_addiction.sated <= 0_turns &&

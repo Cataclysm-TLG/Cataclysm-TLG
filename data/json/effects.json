@@ -3545,7 +3545,12 @@
   },
   {
     "type": "effect_type",
-    "id": "withdrawal_Alcohol",
+    "id": "withdrawal_alcohol_timer",
+    "max_intensity": 3
+  },
+  {
+    "type": "effect_type",
+    "id": "withdrawal_alcohol",
     "name": [ "Mild Alcohol Withdrawal", "Moderate Alcohol Withdrawal", "Severe Alcohol Withdrawal" ],
     "desc": [
       "You could use a drink to settle your nerves.",
@@ -3554,8 +3559,8 @@
     ],
     "max_intensity": 3,
     "apply_message": "You really need a drink!",
-    "int_dur_factor": "8 h",
     "miss_messages": [ [ "You feel horrible.", 1 ] ],
+    "rating": "bad",
     "base_mods": {
       "thirst_tick": [ 1800 ],
       "thirst_min": [ 1 ],
