@@ -14,6 +14,7 @@
 #include "creature.h"
 #include "debug.h"
 #include "dialogue.h"
+#include "effect.h"
 #include "effect_on_condition.h"
 #include "enums.h"
 #include "flexbuffer_json-inl.h"
@@ -25,7 +26,7 @@
 #include "talker.h"
 #include "text_snippets.h"
 
-static const efftype_id effect_withdrawal_alcohol_timer( "effect_withdrawal_alcohol_timer" );
+static const efftype_id effect_withdrawal_alcohol_timer( "withdrawal_alcohol_timer" );
 static const efftype_id effect_hallu( "hallu" );
 static const efftype_id effect_shakes( "shakes" );
 

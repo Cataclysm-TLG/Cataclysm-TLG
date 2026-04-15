@@ -20,9 +20,9 @@
   {
     "type": "addiction_type",
     "id": "alcohol",
-    "name": "Alcohol Withdrawal",
+    "name": "Craving Alcohol",
     "type_name": "alcohol",
-    "description": "Risk of delirium tremens.",
+    "description": "A drink would make everything better.",
     "craving_morale": "morale_craving_alcohol",
     "builtin": "alcohol_effect"
   },
