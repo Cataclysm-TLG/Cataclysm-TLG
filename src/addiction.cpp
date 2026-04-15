@@ -14,6 +14,7 @@
 #include "creature.h"
 #include "debug.h"
 #include "dialogue.h"
+#include "effect.h"
 #include "effect_on_condition.h"
 #include "enums.h"
 #include "flexbuffer_json-inl.h"
@@ -25,6 +26,8 @@
 #include "talker.h"
 #include "text_snippets.h"
 
+static const efftype_id effect_withdrawal_alcohol_timer( "withdrawal_alcohol_timer" );
+static const efftype_id effect_withdrawal_alcohol( "withdrawal_alcohol" );
 static const efftype_id effect_hallu( "hallu" );
 static const efftype_id effect_shakes( "shakes" );
 
@@ -77,7 +80,53 @@ const std::vector<add_type> &add_type::get_all()
     return add_type_factory.get_all();
 }
 
-static bool alcohol_diazepam_add( Character &u, int in, bool is_alcohol )
+static bool alcohol_add( Character &u, int in )
+{
+    static time_point last_alc_dream = calendar::turn_zero;
+    const bool recent_dream = ( calendar::turn - last_alc_dream < 3_hours );
+    const morale_type morale_type = morale_craving_alcohol;
+
+    int timer_int = std::min( in / 3, 3 );
+
+    bool ret = false;
+    if( x_in_y( in, 24 ) ) {
+        if( !u.has_effect( effect_withdrawal_alcohol_timer ) ||
+            u.get_effect_int( effect_withdrawal_alcohol_timer ) < timer_int ) {
+            u.add_effect( effect_withdrawal_alcohol_timer, 24_hours * timer_int, false, timer_int );
+        }
+        ret = true;
+    }
+
+    // If you're not drunk, you want to be.
+    if( rng( 0, 100 ) < in &&
+        ( !u.in_sleep_state() || !recent_dream ) ) {
+        const std::string msg_1 =
+            ( u.in_sleep_state() ? "addict_alcohol_mild_asleep" : "addict_alcohol_mild_awake" );
+        u.add_msg_if_player( m_warning,
+            SNIPPET.random_from_category( msg_1 ).value_or( translation() ).translated() );
+        u.add_morale( morale_type, -35, -4 * in, 1_hours, 30_minutes, true );
+        ret = true;
+        if( u.in_sleep_state() ) {
+            last_alc_dream = calendar::turn;
+        }
+
+    // If you're in active withdrawal, you feel horrible!
+    } else if( u.has_effect( effect_withdrawal_alcohol ) && in > 7 && rng( 0, 80 ) < in &&
+               ( !u.in_sleep_state() || !recent_dream ) ) {
+        const std::string msg_2 =
+            ( u.in_sleep_state() ? "addict_alcohol_strong_asleep" : "addict_alcohol_strong_awake" );
+        u.add_msg_if_player( m_bad,
+            SNIPPET.random_from_category( msg_2 ).value_or( translation() ).translated() );
+        u.add_morale( morale_type, -35, -4 * in, 1_hours, 30_minutes, true );
+        ret = true;
+        if( u.in_sleep_state() ) {
+            last_alc_dream = calendar::turn;
+        }
+    }
+    return ret;
+}
+
+static bool benzodiazepine_add( Character &u, int in, bool is_alcohol )
 {
     static time_point last_alc_dream = calendar::turn_zero;
     static time_point last_dia_dream = calendar::turn_zero;
@@ -207,13 +256,13 @@ static bool nicotine_effect( Character &u, addiction &add )
 static bool alcohol_effect( Character &u, addiction &add )
 {
     const int in = std::min( 20, add.intensity );
-    return alcohol_diazepam_add( u, in, true );
+    return alcohol_add( u, in );
 }
 
 static bool diazepam_effect( Character &u, addiction &add )
 {
     const int in = std::min( 20, add.intensity );
-    return alcohol_diazepam_add( u, in, false );
+    return benzodiazepine_add( u, in, false );
 }
 
 static bool opioid_effect( Character &u, addiction &add )

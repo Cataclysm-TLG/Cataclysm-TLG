@@ -61,7 +61,7 @@ class addiction
     public:
         addiction_id type;
         int intensity = 0;
-        time_duration sated = 1_hours;
+        time_duration sated = 5_hours;
 
         addiction() = default;
         explicit addiction( const addiction_id &t, const int i = 1 ) : type {t}, intensity {i} { }
