@@ -27,6 +27,7 @@
 #include "text_snippets.h"
 
 static const efftype_id effect_withdrawal_alcohol_timer( "withdrawal_alcohol_timer" );
+static const efftype_id effect_withdrawal_alcohol( "withdrawal_alcohol" );
 static const efftype_id effect_hallu( "hallu" );
 static const efftype_id effect_shakes( "shakes" );
 
@@ -96,7 +97,8 @@ static bool alcohol_add( Character &u, int in )
         ret = true;
     }
 
-    if( rng( 0, 40 ) < in &&
+    // If you're not drunk, you want to be.
+    if( rng( 0, 100 ) < in &&
         ( !u.in_sleep_state() || !recent_dream ) ) {
         const std::string msg_1 =
             ( u.in_sleep_state() ? "addict_alcohol_mild_asleep" : "addict_alcohol_mild_awake" );
@@ -108,7 +110,8 @@ static bool alcohol_add( Character &u, int in )
             last_alc_dream = calendar::turn;
         }
 
-    } else if( in > 7 && rng( 0, 40 ) < in &&
+    // If you're in active withdrawal, you feel horrible!
+    } else if( u.has_effect( effect_withdrawal_alcohol ) && in > 7 && rng( 0, 80 ) < in &&
                ( !u.in_sleep_state() || !recent_dream ) ) {
         const std::string msg_2 =
             ( u.in_sleep_state() ? "addict_alcohol_strong_asleep" : "addict_alcohol_strong_awake" );
