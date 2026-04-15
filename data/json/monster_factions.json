@@ -290,11 +290,6 @@
   },
   {
     "type": "MONSTER_FACTION",
-    "name": "molerat",
-    "base_faction": "mutant"
-  },
-  {
-    "type": "MONSTER_FACTION",
     "name": "amigara",
     "base_faction": "mutant",
     "neutral": [ "amigara" ]
@@ -382,7 +377,6 @@
       "frog",
       "slug",
       "mutant_piscivores",
-      "molerat",
       "amigara",
       "mutant_with_vortex",
       "corvid",
