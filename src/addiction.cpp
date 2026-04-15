@@ -89,7 +89,7 @@ static bool alcohol_add( Character &u, int in)
     bool ret = false;
     if( x_in_y( in, to_turns<int>( 2_hours ) ) ) {
         if( !u.has_effect( effect_withdrawal_alcohol_timer ) || u.get_effect_int( effect_withdrawal_alcohol_timer ) < timer_int ) {
-            u.add_effect( effect_withdrawal_alcohol_timer, 1_turns, true, timer_int );
+            u.add_effect( effect_withdrawal_alcohol_timer, 24_hours * timer_int, false, timer_int );
         }
         ret = true;
     }
@@ -115,7 +115,7 @@ static bool alcohol_add( Character &u, int in)
     return ret;
 }
 
-static bool alcohol_diazepam_add( Character &u, int in, bool is_alcohol )
+static bool benzodiazepine_add( Character &u, int in, bool is_alcohol )
 {
     static time_point last_alc_dream = calendar::turn_zero;
     static time_point last_dia_dream = calendar::turn_zero;
@@ -251,7 +251,7 @@ static bool alcohol_effect( Character &u, addiction &add )
 static bool diazepam_effect( Character &u, addiction &add )
 {
     const int in = std::min( 20, add.intensity );
-    return alcohol_diazepam_add( u, in, false );
+    return benzodiazepine_add( u, in, false );
 }
 
 static bool opioid_effect( Character &u, addiction &add )

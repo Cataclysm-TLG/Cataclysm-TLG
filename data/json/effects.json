@@ -3546,7 +3546,15 @@
   {
     "type": "effect_type",
     "id": "withdrawal_alcohol_timer",
-    "max_intensity": 3
+    "max_intensity": 3,
+    "int_dur_factor": "24 h",
+    "max_duration": "72 h",
+    "//": "Helper effect to track progression of withdrawals."
+  },
+  {
+    "type": "effect_type",
+    "id": "withdrawal_alcohol_detoxed",
+    "//": "Safe from withdrawals until you drink again."
   },
   {
     "type": "effect_type",

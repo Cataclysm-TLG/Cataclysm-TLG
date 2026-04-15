@@ -155,6 +155,7 @@ static const activity_id ACT_WAIT( "ACT_WAIT" );
 static const activity_id ACT_WAIT_NPC( "ACT_WAIT_NPC" );
 static const activity_id ACT_WAIT_STAMINA( "ACT_WAIT_STAMINA" );
 
+static const addiction_id addiction_alcohol( "alcohol" );
 static const addiction_id addiction_opioid( "opioid" );
 static const addiction_id addiction_sleeping_pill( "sleeping pill" );
 
@@ -285,6 +286,7 @@ static const efftype_id effect_tapeworm( "tapeworm" );
 static const efftype_id effect_tied( "tied" );
 static const efftype_id effect_transition_contacts( "transition_contacts" );
 static const efftype_id effect_winded( "winded" );
+static const efftype_id effect_withdrawal_timer_alcohol( "withdrawal_timer_alcohol" );
 
 static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 
@@ -11828,6 +11830,12 @@ bool Character::can_sleep()
     int sleepy = get_comfort_at( pos_bub() ).comfort;
     if( has_addiction( addiction_sleeping_pill ) ) {
         sleepy -= 4;
+    }
+    if( addiction_level( addiction_alcohol ) > 5 ) {
+        sleepy -= 1;
+    }
+    if( has_effect( effect_withdrawal_timer_alcohol ) ) {
+        sleepy -= get_effect_int( effect_withdrawal_timer_alcohol );
     }
     sleepy = enchantment_cache->modify_value( enchant_vals::mod::SLEEPY, sleepy );
     if( get_fatigue() < fatigue_levels::TIRED + 1 ) {
