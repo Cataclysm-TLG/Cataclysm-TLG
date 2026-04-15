@@ -1508,8 +1508,8 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
             std::pair<nc_color, std::string> toxins = fac()->vitamin_stores( vitamin_type::TOXIN );
             entry = string_format( _( "Notes:\n"
                                       "Distribute food to your followers.  "
-                                      "Place the food you wish to distribute in the camp food zone.  "
-                                      "You must have a camp food zone, and a camp storage zone, "
+                                      "Place the food you wish to distribute in the food distribution zone.  "
+                                      "You must have a food distribution zone, and a work storage zone, "
                                       "or you will be prompted to create them using the zone manager.\n"
                                       "Effects:\n"
                                       "> Increases your faction's food supply value which in "
@@ -4369,7 +4369,7 @@ void basecamp::recruit_return( const mission_id &miss_id, int score )
         // nullptr;
         return;
     }
-    // Time durations always subtract from camp food supply
+    // Time durations always subtract from settlement food supply
     camp_food_supply( 1_days * food_desire );
     avatar &player_character = get_avatar();
     recruit->spawn_at_precise( player_character.pos_abs() + point( -4, -4 ) );
@@ -5325,7 +5325,7 @@ bool basecamp::validate_sort_points()
 
 bool basecamp::set_sort_points()
 {
-    popup( _( "Please create some sorting zones.  You must create a camp food zone, and a camp storage zone." ) );
+    popup( _( "Please create some sorting zones.  You must create a food distribution zone and a work storage zone." ) );
     zone_manager_ui::display_zone_manager();
     return validate_sort_points();
 }
@@ -5752,9 +5752,9 @@ bool basecamp::distribute_food( bool player_command )
 {
     if( !validate_sort_points() ) {
         if( player_command ) {
-            popup( _( "You do not have a camp food zone.  Aborting…" ) );
+            popup( _( "You do not have a food distribution zone.  Aborting…" ) );
         } else {
-            debugmsg( "NPC-initiated food distribution at %s failed due to lacking zones", name );
+            debugmsg( "NPC-initiated food distribution at %s failed due to lacking a zone.", name );
         }
         return false;
     }
