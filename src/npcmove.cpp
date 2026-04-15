@@ -5052,7 +5052,7 @@ bool npc::consume_food()
 
     if( inv_food.empty() ) {
         if( !needs_food() ) {
-            // When NO_NPC_FOOD is active and NPC has no food, silently reset hunger/thirst
+            // Silently reset hunger/thirst.
             set_hunger( 0 );
             set_thirst( 0 );
         }

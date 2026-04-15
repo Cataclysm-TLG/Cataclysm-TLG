@@ -446,12 +446,7 @@ void suffer::from_addictions( Character &you )
         timer = -6_hours;
     }
     for( addiction &cur_addiction : you.addictions ) {
-        if( cur_addiction.sated <= 0_turns &&
-            cur_addiction.intensity >= MIN_ADDICTION_LEVEL ) {
-            if( uistate.distraction_withdrawal && !you.is_npc() ) {
-                g->cancel_activity_or_ignore_query( distraction_type::withdrawal,
-                                                    _( "You start having withdrawals!" ) );
-            }
+        if( cur_addiction.sated <= 0_turns && cur_addiction.intensity >= MIN_ADDICTION_LEVEL ) {
             cur_addiction.run_effect( you );
         }
         cur_addiction.sated -= 1_turns;
@@ -1877,7 +1872,9 @@ void Character::suffer()
         suffer::while_underwater( *this );
     }
 
-    suffer::from_addictions( *this );
+    if( calendar::once_every( 5_minutes ) ) {
+        suffer::from_addictions( *this );
+    }
 
     if( !in_sleep_state() ) {
         suffer::while_awake( *this, current_stim );
