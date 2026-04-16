@@ -3561,8 +3561,8 @@
     "id": "withdrawal_alcohol",
     "name": [ "Mild Alcohol Withdrawal", "Moderate Alcohol Withdrawal", "Severe Alcohol Withdrawal" ],
     "desc": [
-      "You could use a drink to settle your nerves.",
-      "You are in dire need of a drink.",
+      "You're starting to feel sick.  You know a drink would fix this.",
+      "Your body aches and you have chills, like you've got the flu.",
       "You feel horrible, like you'll die if you can't have a drink!"
     ],
     "max_intensity": 3,
@@ -3576,6 +3576,7 @@
       "fatigue_min": [ 1 ],
       "pain_max_val": [ 15 ],
       "pain_min": [ 1, 0 ],
+      "pain_chance": [ 3600 ],
       "stamina_min": [ -100 ],
       "stamina_max": [ -200 ],
       "stamina_chance": [ 1200 ],
@@ -3585,10 +3586,11 @@
       "vomit_tick": [ 1800 ]
     },
     "scaling_mods": {
-      "str_mod": [ -0.5 ],
-      "per_mod": [ -0.25 ],
-      "dex_mod": [ -0.66 ],
-      "int_mod": [ -0.75 ],
+      "str_mod": [ -0.67 ],
+      "per_mod": [ -0.34 ],
+      "dex_mod": [ -0.67 ],
+      "int_mod": [ -1.0 ],
+      "pain_chance": [ -500 ],
       "stamina_max": [ -500 ],
       "stamina_chance": [ -300 ],
       "vomit_chance": [ -10 ]
@@ -3597,6 +3599,58 @@
       { "limb_score": "manip", "modifier": 0.9, "scaling": -0.1 },
       { "limb_score": "block", "modifier": 1.0, "scaling": -0.1 },
       { "limb_score": "vision", "modifier": 1.0, "scaling": -0.05 },
+      { "limb_score": "reaction", "modifier": 0.9, "scaling": -0.2 },
+      { "limb_score": "move_speed", "modifier": 1.0, "scaling": -0.05 },
+      { "limb_score": "balance", "modifier": 0.9, "scaling": -0.2 },
+      { "limb_score": "footing", "modifier": 0.8, "scaling": -0.2 },
+      { "limb_score": "swim", "modifier": 1.0, "scaling": -0.2 }
+    ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
+  },
+  {
+    "type": "effect_type",
+    "id": "withdrawal_nicotine_timer",
+    "max_intensity": 3,
+    "int_dur_factor": "32 h",
+    "max_duration": "96 h",
+    "//": "Helper effect to track progression of withdrawals."
+  },
+  {
+    "type": "effect_type",
+    "id": "withdrawal_nicotine_detoxed",
+    "//": "Safe from withdrawals until you smoke again."
+  },
+  {
+    "type": "effect_type",
+    "id": "withdrawal_nicotine",
+    "name": [ "Mild Nicotine Withdrawal", "Nicotine Withdrawal" ],
+    "desc": [
+      "You feel anxious, irritable, and distracted.",
+      "Your ears ring and your head is pounding."
+    ],
+    "max_intensity": 2,
+    "apply_message": "Going so long without nicotine feels awful.",
+    "miss_messages": [ [ "You feel horrible.", 1 ] ],
+    "rating": "bad",
+    "base_mods": {
+      "pain_max_val": [ 35 ],
+      "pain_min": [ 1, 0 ],
+      "pain_chance": [ 1800 ],
+      "stamina_min": [ -100 ],
+      "stamina_max": [ -200 ],
+      "stamina_chance": [ 2400 ]
+    },
+    "scaling_mods": {
+      "per_mod": [ -0.50 ],
+      "dex_mod": [ -0.50 ],
+      "int_mod": [ -1.0 ],
+      "stamina_max": [ -500 ],
+      "stamina_chance": [ -300 ],
+      "pain_chance": [ -600 ]
+    },
+    "limb_score_mods": [
+      { "limb_score": "manip", "modifier": 0.9, "scaling": -0.1 },
+      { "limb_score": "block", "modifier": 1.0, "scaling": -0.1 },
       { "limb_score": "reaction", "modifier": 0.9, "scaling": -0.2 },
       { "limb_score": "move_speed", "modifier": 1.0, "scaling": -0.05 },
       { "limb_score": "balance", "modifier": 0.9, "scaling": -0.2 },
