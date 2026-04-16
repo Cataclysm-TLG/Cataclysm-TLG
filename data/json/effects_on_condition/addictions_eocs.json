@@ -127,8 +127,8 @@
     "condition": {
       "and": [
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 1 },
-        { "not":  { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not":  { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "drunk" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
@@ -140,9 +140,9 @@
     "condition": {
       "and": [
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 2 },
-        { "not":  { "u_has_effect": "withdrawal_alcohol", "intensity": 2 } },
-        { "not":  { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not":  { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "withdrawal_alcohol", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "drunk" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
@@ -154,8 +154,8 @@
     "condition": {
       "and": [
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 2 },
-        { "not":  { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not":  { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "drunk" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 2, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
@@ -195,9 +195,9 @@
     "condition": {
       "and": [
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 3 },
-        { "not":  { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not":  { "u_has_effect": "valium" } },
-        { "not":  { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "valium" } },
+        { "not": { "u_has_effect": "drunk" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 3, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
@@ -209,8 +209,8 @@
     "condition": {
       "and": [
         { "u_has_effect": "withdrawal_alcohol", "intensity": 3 },
-        { "not":  { "u_has_effect": "valium" } },
-        { "not":  { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "valium" } },
+        { "not": { "u_has_effect": "drunk" } }
       ]
     },
     "effect": { "u_add_effect": "shakes", "intensity": 3, "duration": { "math": [ "300 + rand(5) * 60" ] } }
@@ -222,23 +222,29 @@
     "condition": {
       "and": [
         { "u_has_effect": "withdrawal_alcohol", "intensity": 3 },
-        { "not":  { "u_has_effect": "valium" } },
-        { "not":  { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "valium" } },
+        { "not": { "u_has_effect": "drunk" } }
       ]
     },
-    "effect": { "u_add_effect": "hallu", "intensity": 3, "duration": { "math": [ "1800 + rand(8) * 3600" ] } }
+    "effect": { "u_add_effect": "hallu", "duration": { "math": [ "1800 + rand(6) * 3600" ] } }
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_ALCOHOL_DETOX",
     "eoc_type": "EVENT",
     "required_event": "character_loses_effect",
-    "condition": { "and": [ { "compare_string": [ "withdrawal_alcohol_timer", { "context_val": "effect" } ] }, { "not": { "u_has_effect": "drunk" } } ] },
+    "condition": {
+      "and": [
+        { "compare_string": [ "withdrawal_alcohol_timer", { "context_val": "effect" } ] },
+        { "not": { "u_has_effect": "drunk" } }
+      ]
+    },
     "effect": { "u_add_effect": "withdrawal_alcohol_detoxed", "duration": "PERMANENT" }
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_ALCOHOL_RETOX",
+    "recurrence": [ "30 seconds", "5 minutes" ],
     "condition": {
       "and": [
         { "or": [ { "u_has_effect": "withdrawal_alcohol" }, { "u_has_effect": "withdrawal_alcohol_detoxed" } ] },
