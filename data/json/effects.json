@@ -3586,10 +3586,10 @@
       "vomit_tick": [ 1800 ]
     },
     "scaling_mods": {
-      "str_mod": [ -0.67 ],
-      "per_mod": [ -0.34 ],
-      "dex_mod": [ -0.67 ],
-      "int_mod": [ -1.0 ],
+      "str_mod": [ -1.34 ],
+      "per_mod": [ -0.67 ],
+      "dex_mod": [ -1.0 ],
+      "int_mod": [ -1.67 ],
       "pain_chance": [ -500 ],
       "stamina_max": [ -500 ],
       "stamina_chance": [ -300 ],
@@ -3641,8 +3641,8 @@
       "stamina_chance": [ 2400 ]
     },
     "scaling_mods": {
-      "per_mod": [ -0.50 ],
-      "dex_mod": [ -0.50 ],
+      "per_mod": [ -0.5 ],
+      "dex_mod": [ -1.0 ],
       "int_mod": [ -1.0 ],
       "stamina_max": [ -500 ],
       "stamina_chance": [ -300 ],
