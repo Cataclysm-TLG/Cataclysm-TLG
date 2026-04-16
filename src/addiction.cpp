@@ -103,20 +103,20 @@ static bool alcohol_add( Character &u, int in )
         const std::string msg_1 =
             ( u.in_sleep_state() ? "addict_alcohol_mild_asleep" : "addict_alcohol_mild_awake" );
         u.add_msg_if_player( m_warning,
-            SNIPPET.random_from_category( msg_1 ).value_or( translation() ).translated() );
+                             SNIPPET.random_from_category( msg_1 ).value_or( translation() ).translated() );
         u.add_morale( morale_type, -35, -4 * in, 1_hours, 30_minutes, true );
         ret = true;
         if( u.in_sleep_state() ) {
             last_alc_dream = calendar::turn;
         }
 
-    // If you're in active withdrawal, you feel horrible!
+        // If you're in active withdrawal, you feel horrible!
     } else if( u.has_effect( effect_withdrawal_alcohol ) && in > 7 && rng( 0, 80 ) < in &&
                ( !u.in_sleep_state() || !recent_dream ) ) {
         const std::string msg_2 =
             ( u.in_sleep_state() ? "addict_alcohol_strong_asleep" : "addict_alcohol_strong_awake" );
         u.add_msg_if_player( m_bad,
-            SNIPPET.random_from_category( msg_2 ).value_or( translation() ).translated() );
+                             SNIPPET.random_from_category( msg_2 ).value_or( translation() ).translated() );
         u.add_morale( morale_type, -35, -4 * in, 1_hours, 30_minutes, true );
         ret = true;
         if( u.in_sleep_state() ) {
