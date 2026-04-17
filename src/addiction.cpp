@@ -238,7 +238,6 @@ static bool nicotine_effect( Character &u, addiction &add )
 
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( 20, add.intensity );
-    add_msg( _( "nicotine_effect with int %s"), in );
     int timer_int = std::min( in / 3, 3 );
 
     bool ret = false;
@@ -425,7 +424,6 @@ bool addiction::run_effect( Character &u )
 {
     bool ret = false;
     if( !type->get_effect().is_null() ) {
-        add_msg( _( "effect for type is not null" ) );
         dialogue d( get_talker_for( u ), nullptr );
         ret = type->get_effect()->activate( d );
     } else {
