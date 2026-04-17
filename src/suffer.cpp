@@ -439,7 +439,6 @@ void suffer::while_grabbed( Character &you )
 
 void suffer::from_addictions( Character &you )
 {
-    add_msg( _( "suffer::from_addictions()" ) );
     time_duration timer = -9_hours;
     if( you.has_trait( trait_ADDICTIVE ) ) {
         timer = -12_hours;
@@ -447,9 +446,7 @@ void suffer::from_addictions( Character &you )
         timer = -6_hours;
     }
     for( addiction &cur_addiction : you.addictions ) {
-        add_msg( _( "addiction found: intensity %s" ), cur_addiction.intensity );
         if( cur_addiction.sated <= 0_turns && cur_addiction.intensity >= MIN_ADDICTION_LEVEL ) {
-            add_msg( _( "running effect" ) );
             cur_addiction.run_effect( you );
         }
         cur_addiction.sated -= 5_minutes;
