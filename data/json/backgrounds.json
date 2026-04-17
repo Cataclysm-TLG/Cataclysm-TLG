@@ -30,7 +30,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "caffiene_addict",
-    "name": "Caffeine Addict",
+    "name": "Caffeine Addiction",
     "description": "Caffeine gave you life and without it you are nothing.  You'd better find a steady supply, and fast.",
     "points": -1,
     "addictions": [ { "intensity": 15, "type": "caffeine" } ]
