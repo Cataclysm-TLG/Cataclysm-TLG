@@ -94,8 +94,9 @@ static bool alcohol_add( Character &u, int in )
 
     bool ret = false;
     if( x_in_y( in, 24 ) ) {
-        if( !u.has_effect( effect_withdrawal_alcohol_detoxed ) && ( !u.has_effect( effect_withdrawal_alcohol_timer ) ||
-            u.get_effect_int( effect_withdrawal_alcohol_timer ) < timer_int ) ) {
+        if( !u.has_effect( effect_withdrawal_alcohol_detoxed ) &&
+            ( !u.has_effect( effect_withdrawal_alcohol_timer ) ||
+              u.get_effect_int( effect_withdrawal_alcohol_timer ) < timer_int ) ) {
             u.add_effect( effect_withdrawal_alcohol_timer, 24_hours * timer_int, false, timer_int );
         }
         ret = true;
@@ -108,11 +109,13 @@ static bool alcohol_add( Character &u, int in )
             ( u.in_sleep_state() ? "addict_alcohol_mild_asleep" : "addict_alcohol_mild_awake" );
         u.add_msg_if_player( m_warning,
                              SNIPPET.random_from_category( msg_1 ).value_or( translation() ).translated() );
-        u.add_morale( morale_type, -35, -4 * in, 1_hours, 30_minutes, true );
-        ret = true;
         if( u.in_sleep_state() ) {
             last_alc_dream = calendar::turn;
+        } else {
+            u.add_morale( morale_type, -35, -4 * in, 1_hours, 30_minutes, true );
         }
+
+        ret = true;
 
         // If you're in active withdrawal, you feel horrible!
     } else if( u.has_effect( effect_withdrawal_alcohol ) && in > 7 && rng( 0, 80 ) < in &&
@@ -121,11 +124,12 @@ static bool alcohol_add( Character &u, int in )
             ( u.in_sleep_state() ? "addict_alcohol_strong_asleep" : "addict_alcohol_strong_awake" );
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg_2 ).value_or( translation() ).translated() );
-        u.add_morale( morale_type, -35, -4 * in, 1_hours, 30_minutes, true );
-        ret = true;
         if( u.in_sleep_state() ) {
             last_alc_dream = calendar::turn;
+        } else {
+            u.add_morale( morale_type, -35, -4 * in, 1_hours, 30_minutes, true );
         }
+        ret = true;
     }
     return ret;
 }
@@ -231,38 +235,42 @@ static bool crack_coke_add( Character &u, int in, int stim, bool is_crack )
 
 static bool nicotine_effect( Character &u, addiction &add )
 {
+
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( 20, add.intensity );
-
+    add_msg( _( "nicotine_effect with int %s"), in );
     int timer_int = std::min( in / 3, 3 );
-    
+
     bool ret = false;
-    if( x_in_y( in, 24 ) ) {
-        if( !u.has_effect( effect_withdrawal_nicotine_detoxed ) && ( !u.has_effect( effect_withdrawal_nicotine_timer ) ||
-            u.get_effect_int( effect_withdrawal_nicotine_timer ) < timer_int ) ) {
+    if( x_in_y( in, 48 ) ) {
+        if( !u.has_effect( effect_withdrawal_nicotine_detoxed ) &&
+            ( !u.has_effect( effect_withdrawal_nicotine_timer ) ||
+              u.get_effect_int( effect_withdrawal_nicotine_timer ) < timer_int ) ) {
             u.add_effect( effect_withdrawal_nicotine_timer, 32_hours * timer_int, false, timer_int );
         }
         ret = true;
     }
 
-    if( one_in( 3000 - 20 * in ) && ( !u.in_sleep_state() || calendar::turn - last_dream > 3_hours ) ) {
+    if( x_in_y( in, 60 ) && ( !u.in_sleep_state() || calendar::turn - last_dream > 3_hours ) ) {
         if( u.in_sleep_state() ) {
             last_dream = calendar::turn;
         }
-        const bool strong = rng( 0, 6 ) < in;
+        const bool strong = rng( 0, 10 ) < in;
         const std::string msg =
             !strong ?
             ( u.in_sleep_state() ? "addict_nicotine_mild_asleep" : "addict_nicotine_mild_awake" ) :
             ( u.in_sleep_state() ? "addict_nicotine_strong_asleep" : "addict_nicotine_strong_awake" );
         u.add_msg_if_player( m_warning,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_nicotine, -15, -3 * in, 1_hours, 30_minutes, true  );
-
-        if( one_in( 800 - 30 * in ) ) {
-            u.mod_fatigue( 1 );
+        if( !u.in_sleep_state() ) {
+            u.add_morale( morale_craving_nicotine, -15, -3 * in, 1_hours, 30_minutes, true );
         }
 
-        return ret;
+        ret = true;
+    }
+
+    if( one_in( 90 - 3 * in ) ) {
+        u.mod_fatigue( 1 );
     }
     return ret;
 }

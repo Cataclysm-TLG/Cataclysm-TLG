@@ -3624,10 +3624,7 @@
     "type": "effect_type",
     "id": "withdrawal_nicotine",
     "name": [ "Mild Nicotine Withdrawal", "Nicotine Withdrawal" ],
-    "desc": [
-      "You feel anxious, irritable, and distracted.",
-      "Your ears ring and your head is pounding."
-    ],
+    "desc": [ "You feel anxious, irritable, and distracted.", "Your ears ring and your head is pounding." ],
     "max_intensity": 2,
     "apply_message": "Going so long without nicotine feels awful.",
     "miss_messages": [ [ "You feel horrible.", 1 ] ],

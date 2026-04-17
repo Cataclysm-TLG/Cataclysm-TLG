@@ -252,5 +252,97 @@
       ]
     },
     "effect": [ { "u_lose_effect": "withdrawal_alcohol_detoxed" }, { "u_lose_effect": "withdrawal_alcohol" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_1",
+    "recurrence": [ "10 minutes", "6 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 1 },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_2_1",
+    "recurrence": [ "10 minutes", "6 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 2 },
+        { "not": { "u_has_effect": "withdrawal_nicotine", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_2_2",
+    "recurrence": [ "20 hours", "28 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 2 },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 2, "duration": { "math": [ "3600 + rand(2) * 3600" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_3_1",
+    "recurrence": [ "10 minutes", "10 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_nicotine", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_3_2",
+    "recurrence": [ "12 hours", "72 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 2, "duration": { "math": [ "7200 + rand(2) * 3600" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_DETOX",
+    "eoc_type": "EVENT",
+    "required_event": "character_loses_effect",
+    "condition": {
+      "and": [
+        { "compare_string": [ "withdrawal_nicotine_timer", { "context_val": "effect" } ] },
+        { "not": { "u_has_effect": "cig" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine_detoxed", "duration": "PERMANENT" }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_RETOX",
+    "recurrence": [ "30 seconds", "5 minutes" ],
+    "condition": {
+      "and": [
+        { "or": [ { "u_has_effect": "withdrawal_nicotine" }, { "u_has_effect": "withdrawal_nicotine_detoxed" } ] },
+        { "u_has_effect": "cig" }
+      ]
+    },
+    "effect": [ { "u_lose_effect": "withdrawal_nicotine_detoxed" }, { "u_lose_effect": "withdrawal_nicotine" } ]
   }
 ]
