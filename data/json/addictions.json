@@ -2,18 +2,18 @@
   {
     "type": "addiction_type",
     "id": "caffeine",
-    "name": "Caffeine Withdrawal",
+    "name": "Craving Caffeine",
     "type_name": "caffeine",
-    "description": "Not medically significant.",
+    "description": "Life without caffeine is rough, but there are worse things to be hooked on.",
     "craving_morale": "morale_craving_caffeine",
     "effect_on_condition": "EOC_CAFFEINE_ADDICTION"
   },
   {
     "type": "addiction_type",
     "id": "nicotine",
-    "name": "Nicotine Withdrawal",
+    "name": "Craving Nicotine",
     "type_name": "nicotine",
-    "description": "Not medically significant.",
+    "description": "A cigarette, a vape, even the gum would be better than going without.",
     "craving_morale": "morale_craving_nicotine",
     "builtin": "nicotine_effect"
   },
@@ -29,35 +29,35 @@
   {
     "type": "addiction_type",
     "id": "sleeping pill",
-    "name": "Sleeping Pill Dependence",
+    "name": "Sleeping Pill Insomnia",
     "type_name": "sleeping pills",
-    "description": "May cause insomnia.",
+    "description": "You will have a hard time sleeping without help.",
     "effect_on_condition": "EOC_SLEEP_ADDICTION"
   },
   {
     "type": "addiction_type",
     "id": "opioid",
-    "name": "Opioid Withdrawal",
+    "name": "Craving Opioids",
     "type_name": "opioids",
-    "description": "Nausea, pain, severe depression.",
+    "description": "You really need some painkillers.",
     "craving_morale": "morale_craving_opioid",
     "builtin": "opioid_effect"
   },
   {
     "type": "addiction_type",
     "id": "amphetamine",
-    "name": "Amphetamine Withdrawal",
+    "name": "Craving Amphetamines",
     "type_name": "amphetamine",
-    "description": "Slowdown and severe depression.",
+    "description": "Everything is too much and too loud, and you can't keep up.",
     "craving_morale": "morale_craving_speed",
     "builtin": "amphetamine_effect"
   },
   {
     "type": "addiction_type",
     "id": "cocaine",
-    "name": "Cocaine Withdrawal",
+    "name": "Craving Cocaine",
     "type_name": "cocaine",
-    "description": "Perception - 1;   Intelligence - 1;   Frequent cravings.",
+    "description": "Just a bump would fix you.",
     "craving_morale": "morale_craving_cocaine",
     "builtin": "cocaine_effect"
   },

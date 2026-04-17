@@ -425,6 +425,7 @@ bool addiction::run_effect( Character &u )
 {
     bool ret = false;
     if( !type->get_effect().is_null() ) {
+        add_msg( _( "effect for type is not null" ) );
         dialogue d( get_talker_for( u ), nullptr );
         ret = type->get_effect()->activate( d );
     } else {
