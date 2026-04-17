@@ -513,10 +513,9 @@
   {
     "type": "effect_on_condition",
     "id": "picked_rosebuds_fall",
-    "recurrence": [ "1 seconds", "1 seconds" ],
-    "condition": { "and": [ { "u_has_trait": "ROSEBUDS_FALL_active" } ] },
     "effect": [
-      { "u_lose_trait": "ROSEBUDS_FALL_active" },
+      { "u_lose_trait": "ROSEBUDS_FALL" },
+      { "u_message": "Most of the fruits are beyond consideration, but you pick what you can and discard the rest." },
       { "u_spawn_item": "mutfruit", "count": 1 },
       { "u_add_trait": "ROSEBUDS_FALL_PICKED" }
     ]

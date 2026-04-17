@@ -128,7 +128,9 @@
       "and": [
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 1 },
         { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
@@ -142,7 +144,9 @@
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 2 },
         { "not": { "u_has_effect": "withdrawal_alcohol", "intensity": 2 } },
         { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
@@ -155,7 +159,9 @@
       "and": [
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 2 },
         { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 2, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
@@ -169,7 +175,9 @@
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 3 },
         { "not": { "u_has_effect": "withdrawal_alcohol", "intensity": 2 } },
         { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
@@ -183,7 +191,9 @@
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 3 },
         { "not": { "u_has_effect": "withdrawal_alcohol", "intensity": 3 } },
         { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 2, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
@@ -197,7 +207,9 @@
         { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 3 },
         { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
         { "not": { "u_has_effect": "valium" } },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 3, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
@@ -210,7 +222,9 @@
       "and": [
         { "u_has_effect": "withdrawal_alcohol", "intensity": 3 },
         { "not": { "u_has_effect": "valium" } },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "shakes", "intensity": 3, "duration": { "math": [ "300 + rand(5) * 60" ] } }
@@ -223,7 +237,9 @@
       "and": [
         { "u_has_effect": "withdrawal_alcohol", "intensity": 3 },
         { "not": { "u_has_effect": "valium" } },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "hallu", "duration": { "math": [ "1800 + rand(6) * 3600" ] } }
@@ -236,7 +252,9 @@
     "condition": {
       "and": [
         { "compare_string": [ "withdrawal_alcohol_timer", { "context_val": "effect" } ] },
-        { "not": { "u_has_effect": "drunk" } }
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol_detoxed", "duration": "PERMANENT" }
@@ -261,7 +279,9 @@
       "and": [
         { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 1 },
         { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
-        { "not": { "u_has_effect": "cig" } }
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
@@ -275,7 +295,9 @@
         { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 2 },
         { "not": { "u_has_effect": "withdrawal_nicotine", "intensity": 2 } },
         { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
-        { "not": { "u_has_effect": "cig" } }
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
@@ -288,7 +310,9 @@
       "and": [
         { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 2 },
         { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
-        { "not": { "u_has_effect": "cig" } }
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 2, "duration": { "math": [ "3600 + rand(2) * 3600" ] } }
@@ -302,7 +326,9 @@
         { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 3 },
         { "not": { "u_has_effect": "withdrawal_nicotine", "intensity": 2 } },
         { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
-        { "not": { "u_has_effect": "cig" } }
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
@@ -315,7 +341,9 @@
       "and": [
         { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 3 },
         { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
-        { "not": { "u_has_effect": "cig" } }
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 2, "duration": { "math": [ "7200 + rand(2) * 3600" ] } }

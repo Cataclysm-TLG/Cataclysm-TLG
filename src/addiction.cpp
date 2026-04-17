@@ -26,6 +26,7 @@
 #include "talker.h"
 #include "text_snippets.h"
 
+static const efftype_id effect_opioid_effect( "opioid_effect" );
 static const efftype_id effect_withdrawal_alcohol( "withdrawal_alcohol" );
 static const efftype_id effect_withdrawal_alcohol_detoxed( "withdrawal_alcohol_detoxed" );
 static const efftype_id effect_withdrawal_alcohol_timer( "withdrawal_alcohol_timer" );
@@ -93,7 +94,7 @@ static bool alcohol_add( Character &u, int in )
     int timer_int = std::min( in / 3, 3 );
 
     bool ret = false;
-    if( x_in_y( in, 24 ) ) {
+    if( x_in_y( in, 24 ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_alcohol_detoxed ) &&
             ( !u.has_effect( effect_withdrawal_alcohol_timer ) ||
               u.get_effect_int( effect_withdrawal_alcohol_timer ) < timer_int ) ) {
@@ -241,7 +242,7 @@ static bool nicotine_effect( Character &u, addiction &add )
     int timer_int = std::min( in / 3, 3 );
 
     bool ret = false;
-    if( x_in_y( in, 48 ) ) {
+    if( x_in_y( in, 48 ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_nicotine_detoxed ) &&
             ( !u.has_effect( effect_withdrawal_nicotine_timer ) ||
               u.get_effect_int( effect_withdrawal_nicotine_timer ) < timer_int ) ) {
@@ -296,7 +297,7 @@ static bool opioid_effect( Character &u, addiction &add )
         u.mod_painkiller( -1 );
     }
     // No further effects if we're doped up.
-    if( u.get_painkiller() >= add.intensity ) {
+    if( u.has_effect( effect_opioid_effect ) ) {
         add.sated = 0_turns;
         u.remove_effect( effect_shakes );
         return false;
@@ -442,6 +443,7 @@ void add_type::load( const JsonObject &jo, std::string_view )
     mandatory( jo, was_loaded, "name", _name );
     mandatory( jo, was_loaded, "type_name", _type_name );
     mandatory( jo, was_loaded, "description", _desc );
+    optional( jo, false, "sated", _sated, 2_hours );
     optional( jo, was_loaded, "craving_morale", _craving_morale, morale_type::NULL_ID() );
     optional( jo, was_loaded, "effect_on_condition", _effect );
     optional( jo, was_loaded, "builtin", _builtin );

@@ -3476,32 +3476,13 @@
     "ugliness": 2,
     "active": true,
     "valid": false,
-    "transform": {
-      "target": "ROSEBUDS_FALL_active",
-      "msg_transform": "Most of the fruits are beyond consideration, but you pick what you can and discard the rest.",
-      "active": false,
-      "moves": 150
-    },
     "description": "A few odd-looking fruits ripen on stems growing out of your head.  They'll probably die off come winter, but you could activate this mutation to pick them before then, if you wanted.",
     "encumbrance_always": [ [ "head", 10 ] ],
     "restricts_gear": [ "head_crown" ],
     "types": [ "SCENT" ],
     "prereqs": [ "FLOWERS" ],
     "cancels": [ "SMELLY", "SMELLY2" ],
-    "//": "Sorry elves, only true plants can reproduce this way.",
-    "threshreq": [ "THRESH_PLANT" ]
-  },
-  {
-    "type": "mutation",
-    "id": "ROSEBUDS_FALL_active",
-    "name": { "str": "Fruiting (picked)" },
-    "points": 3,
-    "active": true,
-    "description": "You shouldn't be able to see this, it's just used to proc the EOC.",
-    "types": [ "SCENT" ],
-    "prereqs": [ "FLOWERS" ],
-    "valid": false,
-    "cancels": [ "SMELLY", "SMELLY2", "ROSEBUDS_FALL" ],
+    "activated_eocs": [ "picked_rosebuds_fall" ],
     "threshreq": [ "THRESH_PLANT" ]
   },
   {
@@ -3512,7 +3493,7 @@
     "description": "You've picked all your fruit and no longer have any, as such this mutation is not supposed to be visible.",
     "types": [ "SCENT" ],
     "prereqs": [ "FLOWERS" ],
-    "cancels": [ "SMELLY", "SMELLY2", "ROSEBUDS_FALL_active" ],
+    "cancels": [ "SMELLY", "SMELLY2", "ROSEBUDS_FALL" ],
     "threshreq": [ "THRESH_PLANT" ],
     "player_display": false,
     "valid": false
