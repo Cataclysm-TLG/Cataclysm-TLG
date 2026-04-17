@@ -439,18 +439,22 @@ void suffer::while_grabbed( Character &you )
 
 void suffer::from_addictions( Character &you )
 {
-    time_duration timer = -9_hours;
+    time_duration timer = -50_hours;
     if( you.has_trait( trait_ADDICTIVE ) ) {
-        timer = -12_hours;
+        timer = -60_hours;
     } else if( you.has_trait( trait_NONADDICTIVE ) ) {
-        timer = -6_hours;
+        timer = -40_hours;
     }
     for( addiction &cur_addiction : you.addictions ) {
         if( cur_addiction.sated <= 0_turns && cur_addiction.intensity >= MIN_ADDICTION_LEVEL ) {
             cur_addiction.run_effect( you );
         }
+        // TODO: Hook lightweight/metabolism in both here and to effect/vitamin decay.
         cur_addiction.sated -= 5_minutes;
-        // Higher intensity addictions heal faster
+        if( rng( 1, 60 ) < cur_addiction.intensity ) {
+            cur_addiction.sated -= 4_minutes;
+        }
+        // Higher intensity addictions heal faster.
         if( cur_addiction.sated - 10_minutes * cur_addiction.intensity < timer ) {
             if( cur_addiction.intensity <= 2 ) {
                 you.rem_addiction( cur_addiction.type );
@@ -2251,7 +2255,6 @@ void Character::add_addiction( const addiction_id &type, int strength )
         if( i.sated < 0_turns ) {
             i.sated = timer;
         } else if( i.sated < 10_minutes ) {
-            // TODO: Make this variable?
             i.sated += timer;
         } else {
             i.sated += timer / 2;
