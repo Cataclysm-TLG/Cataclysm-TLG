@@ -3421,7 +3421,6 @@
       "ROSEBUDS_SUMMER",
       "ROSEBUDS_FALL",
       "ROSEBUDS_WINTER",
-      "ROSEBUDS_FALL_active",
       "ROSEBUDS_FALL_PICKED"
     ]
   },
@@ -3492,7 +3491,6 @@
     "points": 3,
     "description": "You've picked all your fruit and no longer have any, as such this mutation is not supposed to be visible.",
     "types": [ "SCENT" ],
-    "prereqs": [ "FLOWERS" ],
     "cancels": [ "SMELLY", "SMELLY2", "ROSEBUDS_FALL" ],
     "threshreq": [ "THRESH_PLANT" ],
     "player_display": false,
