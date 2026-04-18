@@ -6047,7 +6047,7 @@
           { "item": "pants_army" },
           { "item": "socks" },
           { "item": "boots_combat" },
-          { "item": "attached_ear_plugs_off" },
+          { "item": "attached_ear_plugs_off", "custom-flags": [ "no_auto_equip" ] },
           { "item": "helmet_eod" },
           { "item": "nomex_gloves" },
           { "item": "gloves_eod" },

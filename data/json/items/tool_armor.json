@@ -1148,7 +1148,8 @@
         "covers": [ "head" ],
         "coverage": 100,
         "layers": [ "OUTER", "NORMAL" ],
-        "encumbrance_modifiers": [ "RESTRICTS_NECK", "WELL_SUPPORTED" ]
+        "encumbrance_modifiers": [ "RESTRICTS_NECK", "WELL_SUPPORTED" ],
+        "rigid_layer_only": true
       },
       {
         "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 20.0 } ],
@@ -3362,7 +3363,7 @@
     "name": { "str": "attached ear plugs (in)", "str_pl": "pairs of attached ear plugs (in)" },
     "description": "A pair of industrial-grade ear plugs attached together by some string.  They are inside your ears, activate them to take them out.",
     "copy-from": "ear_plugs",
-    "flags": [ "DEAF" ],
+    "flags": [ "DEAF", "OVERSIZE", "SKINTIGHT", "SOFT", "UNRESTRICTED" ],
     "use_action": {
       "type": "transform",
       "msg": "You take the ear plugs out.",
@@ -3395,7 +3396,7 @@
     "description": "A pair of makeshift ear plugs made from lumps of wax on the ends of a piece of string.  They are inside your ears, activate them to take them out.",
     "copy-from": "ear_plugs",
     "material": [ "beeswax", "cotton" ],
-    "flags": [ "SPAWN_ACTIVE" ],
+    "flags": [ "SPAWN_ACTIVE", "OVERSIZE", "SKINTIGHT", "SOFT", "UNRESTRICTED", "DEAF" ],
     "use_action": {
       "type": "transform",
       "msg": "You take the ear plugs out.",
