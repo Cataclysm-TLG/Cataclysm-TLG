@@ -3882,5 +3882,10 @@
     "type": "MIGRATION",
     "id": "reinforced_glass_pane",
     "replace": "tempered_glass_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lifestraw",
+    "replace": "plastic_chunk"
   }
 ]

@@ -438,7 +438,7 @@
   {
     "id": "TALK_ROBOFAC_MERC_1_BACKGROUND_10",
     "type": "talk_topic",
-    "dynamic_line": "I kind of lost track of the days.  Every day was the same; eat, check the barricades, look on the Internet, play some games with the sound off to try and distract myself.  I filled up my bathtub, and once the water went out, I'd drink from there with a lifestraw when I needed to hydrate.  Meal planning got easier after I was down to just my canned stuff.  The Internet didn't stay on for long, though, which I guess was a blessing because of how many people were sharing their fear and awful experiences in real time.  I did that routine every day until that emergency broadcast came through that no help was coming, and then I knew it was over.",
+    "dynamic_line": "I kind of lost track of the days.  Every day was the same; eat, check the barricades, look on the Internet, play some games with the sound off to try and distract myself.  I filled up my bathtub, and once the water went out, I'd drink from there when I needed to hydrate.  Meal planning got easier after I was down to just my canned stuff.  The Internet didn't stay on for long, though, which I guess was a blessing because of how many people were sharing their fear and awful experiences in real time.  I did that routine every day until that emergency broadcast came through that no help was coming, and then I knew it was over.",
     "responses": [ { "text": "[Listen.]", "topic": "TALK_ROBOFAC_MERC_1_BACKGROUND_11" } ]
   },
   {
