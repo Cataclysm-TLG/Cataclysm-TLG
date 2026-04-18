@@ -451,27 +451,6 @@
     ]
   },
   {
-    "id": "lifestraw",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "lifestraw" },
-    "description": "A small personal water filter.  The instructions say to set the lifestraw in suspect water, let sit for one minute then drink.  The two-part filtration system will purify the water you drink up to a certain amount.  Water taken from uncertain sources like a river may be dirty.",
-    "weight": "104 g",
-    "volume": "592 ml",
-    "price": "40 USD",
-    "price_postapoc": "10 USD",
-    "to_hit": -3,
-    "material": [ "cotton", "plastic" ],
-    "symbol": "i",
-    "looks_like": "advanced_ecig",
-    "color": "light_cyan",
-    "initial_charges": 4000,
-    "max_charges": 4000,
-    "charges_per_use": 1,
-    "use_action": [ "WATER_PURIFIER" ],
-    "melee_damage": { "bash": 1 }
-  },
-  {
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "id": "gasket_plastic",

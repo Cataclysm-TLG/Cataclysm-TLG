@@ -301,7 +301,6 @@
       { "item": "bottle_folding" },
       { "item": "flashlight", "charges": 150 },
       { "item": "picklocks" },
-      { "item": "lifestraw" },
       { "item": "pocket_survival" },
       { "item": "handflare", "count": 4, "charges": 300 }
     ]
