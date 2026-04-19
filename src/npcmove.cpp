@@ -2651,7 +2651,7 @@ npc_action npc::address_needs( float danger )
     // and swing into action with alarming alacrity.
     // no sometimes they are just looking the other way, sometimes they hestitate.
     // ( also we can get huge performance boosts )
-    if( one_in( 3 ) ) {
+    if( one_in( 5 ) ) {
         healing_options try_to_fix_me = patient_assessment( *this );
         if( try_to_fix_me.any_true() ) {
             if( !use_bionic_by_id( bio_nanobots ) ) {
@@ -5690,13 +5690,13 @@ bool npc::complain()
         }
     }
 
-    // When bitten, complain every hour, but respect restrictions
+    // When bitten, complain every 30 minutes, but respect restrictions.
     if( has_effect( effect_bite ) ) {
         const bodypart_id &bp =  bp_affected( *this, effect_bite );
         std::string talktag = chat_snippets().snip_wound_bite.translated();
         parse_tags( talktag, get_player_character(), *this );
         const std::string speech = string_format( talktag, body_part_name( bp ) );
-        if( complain_about( bite_string, 1_hours, speech ) ) {
+        if( complain_about( bite_string, 30_minutes, speech ) ) {
             return true;
         }
     }
