@@ -11522,6 +11522,7 @@ void game::on_options_changed()
 #if defined(TILES)
     tilecontext->on_options_changed();
 #endif
+    refresh_mouse_config();
 }
 
 void game::water_affect_items( Character &ch ) const

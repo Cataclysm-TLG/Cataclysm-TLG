@@ -1,5 +1,11 @@
 #if defined(SDL_SOUND)
 
+// SDL3_mixer is a complete API rewrite (channel-based -> track-based).
+// Sound support for SDL3 will be added in a separate PR.
+#if defined(USE_SDL3)
+#error "SDL3_mixer support is not yet implemented. Build with SOUND=0 for SDL3 builds."
+#endif
+
 #include "sdlsound.h"
 
 #include <atomic>
