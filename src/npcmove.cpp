@@ -2651,7 +2651,7 @@ npc_action npc::address_needs( float danger )
     // and swing into action with alarming alacrity.
     // no sometimes they are just looking the other way, sometimes they hestitate.
     // ( also we can get huge performance boosts )
-    if( one_in( 3 ) ) {
+    if( one_in( 5 ) ) {
         healing_options try_to_fix_me = patient_assessment( *this );
         if( try_to_fix_me.any_true() ) {
             if( !use_bionic_by_id( bio_nanobots ) ) {
