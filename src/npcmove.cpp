@@ -5690,13 +5690,13 @@ bool npc::complain()
         }
     }
 
-    // When bitten, complain every hour, but respect restrictions
+    // When bitten, complain every 30 minutes, but respect restrictions.
     if( has_effect( effect_bite ) ) {
         const bodypart_id &bp =  bp_affected( *this, effect_bite );
         std::string talktag = chat_snippets().snip_wound_bite.translated();
         parse_tags( talktag, get_player_character(), *this );
         const std::string speech = string_format( talktag, body_part_name( bp ) );
-        if( complain_about( bite_string, 1_hours, speech ) ) {
+        if( complain_about( bite_string, 30_minutes, speech ) ) {
             return true;
         }
     }
