@@ -808,6 +808,10 @@ void refresh_display()
     RedrawWindow( WindowHandle, nullptr, nullptr, RDW_INVALIDATE | RDW_UPDATENOW );
 }
 
+void refresh_mouse_config()
+{
+}
+
 void set_title( const std::string &title )
 {
     if( WindowHandle != nullptr ) {
