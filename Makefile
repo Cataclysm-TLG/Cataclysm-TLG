@@ -571,18 +571,18 @@ ifeq ($(NATIVE), osx)
     endif
   endif
   ifdef FRAMEWORK
-      ifeq ($(SDL3), 1)
+    ifeq ($(SDL3), 1)
       SDL_FRAMEWORK_GLOB := SDL3.*
     else
       SDL_FRAMEWORK_GLOB := SDL2.*
     endif
     ifeq ($(FRAMEWORKSDIR),)
       FRAMEWORKSDIR := $(strip $(if $(shell [ -d $(HOME)/Library/Frameworks ] && echo 1), \
-          $(if $(shell find $(HOME)/Library/Frameworks -name '$(SDL_FRAMEWORK_GLOB)'), \
+                             $(if $(shell find $(HOME)/Library/Frameworks -name '$(SDL_FRAMEWORK_GLOB)'), \
                                $(HOME)/Library/Frameworks,),))
     endif
     ifeq ($(FRAMEWORKSDIR),)
-            FRAMEWORKSDIR := $(strip $(if $(shell find /Library/Frameworks -name '$(SDL_FRAMEWORK_GLOB)'), \
+      FRAMEWORKSDIR := $(strip $(if $(shell find /Library/Frameworks -name '$(SDL_FRAMEWORK_GLOB)'), \
                                  /Library/Frameworks,))
     endif
     ifeq ($(FRAMEWORKSDIR),)
@@ -747,8 +747,7 @@ ifeq ($(TILES), 1)
   SDL = 1
   BINDIST_EXTRAS += gfx
   ifeq ($(NATIVE),osx)
-    ifdef FRAMEWORK
- ifeq ($(SDL3), 1)
+    ifeq ($(SDL3), 1)
       ifdef FRAMEWORK
         OSX_INC = -F$(FRAMEWORKSDIR) \
 		-I$(FRAMEWORKSDIR)/SDL3.framework/Headers \
@@ -770,25 +769,23 @@ ifeq ($(TILES), 1)
 			ifeq ($(SOUND), 1)
 				OSX_INC += -I$(FRAMEWORKSDIR)/SDL2_mixer.framework/Headers
 			endif
-      LDFLAGS += -F$(FRAMEWORKSDIR) \
+        LDFLAGS += -F$(FRAMEWORKSDIR) -rpath $(FRAMEWORKSDIR) \
 		 -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework Cocoa
 		 ifeq ($(SOUND), 1)
 		 	LDFLAGS += -framework SDL2_mixer
 		 endif
-
         CXXFLAGS += $(OSX_INC)
       else # libsdl build
         DEFINES += -DOSX_SDL2_LIBS
         # handle #include "SDL2/SDL.h" and "SDL.h"
         CXXFLAGS += $(subst -I,-isystem ,$(shell sdl2-config --cflags)) \
-
 		  -isystem $(shell dirname $(shell sdl2-config --cflags | sed 's/-I\(.[^ ]*\) .*/\1/'))
         LDFLAGS += -framework Cocoa $(shell sdl2-config --libs) -lSDL2_ttf
         LDFLAGS += -lSDL2_image
         ifeq ($(SOUND), 1)
           LDFLAGS += -lSDL2_mixer
-          endif
         endif
+      endif
     endif
     CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
     LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
