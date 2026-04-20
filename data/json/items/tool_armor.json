@@ -1033,7 +1033,8 @@
       "msg": "You open the headlamp's cover.",
       "menu_text": "Open cover",
       "target": "wearable_atomic_light"
-    }
+    },
+    "light": 0
   },
   {
     "id": "ar_glasses_basic",

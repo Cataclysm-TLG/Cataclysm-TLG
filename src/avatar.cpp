@@ -1034,6 +1034,7 @@ void avatar::reset_stats()
     set_fake_effect_dur( effect_sad, 1_turns * -morale );
 
     // Stimulants
+    // FIXME: are you fucking kidding me
     set_fake_effect_dur( effect_stim, 1_turns * current_stim );
     set_fake_effect_dur( effect_depressants, 1_turns * -current_stim );
     if( has_trait( trait_STIMBOOST ) ) {

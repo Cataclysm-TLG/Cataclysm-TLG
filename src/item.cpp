@@ -227,6 +227,7 @@ static const trait_id trait_TOLERANCE( "TOLERANCE" );
 static const trait_id trait_WOOLALLERGY( "WOOLALLERGY" );
 
 static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
+static const vitamin_id vitamin_cannabis( "cannabis" );
 
 // vitamin flags
 static const std::string flag_NO_DISPLAY( "NO_DISPLAY" );
@@ -14127,11 +14128,17 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
         } else if( carrier->has_trait( trait_LIGHTWEIGHT ) ) {
             duration = 30_seconds;
         }
-        carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
+        // Tamp down message spam.
+        if( one_in( 3 ) ) {
+            carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
+        }
         if( has_flag( flag_TOBACCO ) ) {
             carrier->add_effect( effect_cig, duration );
         } else {
-            carrier->add_effect( effect_weed_high, duration / 2 );
+            // Deliver a total of less than 10mg per joint on average.
+            if( one_in( 3 ) ) {
+                carrier->vitamin_mod( vitamin_cannabis, 1 );
+            }
         }
         carrier->mod_moves( -to_moves<int>( 1_seconds ) * 0.15 );
 

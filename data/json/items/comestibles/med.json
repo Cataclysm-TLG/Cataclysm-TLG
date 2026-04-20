@@ -983,31 +983,18 @@
     "price": "6 USD",
     "symbol": "!",
     "color": "green",
-    "quench": -5,
-    "stim": -6,
-    "healthy": -1,
     "fun": 30,
     "addiction_potential": 10,
     "flags": [ "NO_INGEST" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take a dab.  Wow, that's got some killer terpenes!",
-      "effects": [
-        { "id": "weed_high", "duration": "180 m" },
-        {
-          "id": "pkill1_generic",
-          "duration": "120 m",
-          "//": "If at some point we add neuropathic painkillers, this should be changed to one."
-        },
-        { "id": "pkill2", "duration": "5 m" },
-        { "id": "high", "duration": "60 m" },
-        { "id": "smoke", "duration": "2 m" }
-      ],
-      "stat_adjustments": { "hunger": 4, "thirst": 6 },
-      "fields_produced": { "fd_weedsmoke": 2 },
+      "effects": [ { "id": "weed_high", "duration": "5 m" } ],
+      "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "fire": 1 },
       "tools_needed": { "apparatus": -1 },
-      "moves": 6000
+      "moves": 1500,
+      "vitamins": [ [ "cannabis", 14 ] ]
     }
   },
   {
@@ -1023,27 +1010,18 @@
     "price": "4 USD",
     "symbol": "!",
     "color": "green",
-    "quench": -10,
-    "stim": -8,
-    "healthy": -1,
     "fun": 20,
-    "addiction_potential": 10,
+    "addiction_potential": 8,
     "flags": [ "NO_INGEST" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take a dab of wax.  *cough cough* Good stuff!",
-      "effects": [
-        { "id": "weed_high", "duration": "150 m" },
-        { "id": "pkill1_generic", "duration": "100 m" },
-        { "id": "pkill2", "duration": "5 m" },
-        { "id": "high", "duration": "60 m" },
-        { "id": "smoke", "duration": "2 m" }
-      ],
-      "stat_adjustments": { "hunger": 5, "thirst": 7 },
-      "fields_produced": { "fd_weedsmoke": 2 },
+      "effects": [ { "id": "weed_high", "duration": "5 m" } ],
+      "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "fire": 1 },
       "tools_needed": { "apparatus": -1 },
-      "moves": 6000
+      "moves": 1500,
+      "vitamins": [ [ "cannabis", 12 ] ]
     }
   },
   {
@@ -1064,24 +1042,17 @@
     "symbol": "!",
     "color": "green",
     "quench": -5,
-    "stim": -3,
     "fun": 15,
     "phase": "liquid",
     "addiction_potential": 5,
     "flags": [ "NO_INGEST" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take a dab of distillate.  Sooooo smooth…",
-      "effects": [
-        { "id": "weed_high", "duration": "180 m" },
-        { "id": "pkill1_generic", "duration": "120 m" },
-        { "id": "pkill2", "duration": "5 m" },
-        { "id": "high", "duration": "60 m" },
-        { "id": "smoke", "duration": "1 m" }
-      ],
-      "stat_adjustments": { "hunger": 4, "thirst": 6 },
-      "fields_produced": { "fd_weedsmoke": 2 },
+      "activation_message": "You take a dab of distillate.",
+      "effects": [ { "id": "weed_high", "duration": "5 m" } ],
+      "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "advanced_ecig": 1 },
+      "vitamins": [ [ "cannabis", 15 ] ],
       "moves": 1500
     }
   },
@@ -1229,8 +1200,6 @@
     "price_postapoc": "50 cent",
     "symbol": "!",
     "color": "green",
-    "quench": -5,
-    "stim": -10,
     "healthy": -1,
     "fun": 15,
     "addiction_potential": 5,
@@ -1996,7 +1965,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "marijuana" },
-    "description": "The dried flower buds and leaves harvested from a psychoactive variety of hemp plant.  Used to reduce nausea, stimulate appetite and elevate mood.  It can be habit-forming, and adverse reactions are possible.",
+    "description": "The dried flower buds and leaves harvested from a psychoactive variety of hemp plant.  Used to reduce nausea, relieve pain, sleep easier, and elevate mood.  It can be habit-forming.",
     "weight": "1 g",
     "volume": "2 ml",
     "price": "25 cent",
@@ -2004,7 +1973,6 @@
     "symbol": "!",
     "color": "green",
     "quench": -5,
-    "stim": -10,
     "healthy": -1,
     "fun": 15,
     "addiction_potential": 5,
@@ -2012,13 +1980,13 @@
     "flags": [ "NO_INGEST", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You smoke some weed.  Good stuff, man!",
-      "effects": [ { "id": "weed_high", "duration": 90 }, { "id": "pkill1_generic", "duration": 360 } ],
-      "stat_adjustments": { "hunger": 4, "thirst": 6 },
-      "fields_produced": { "fd_weedsmoke": 2 },
+      "activation_message": "You smoke some weed.",
+      "effects": [ { "id": "weed_high", "duration": "5 m" } ],
+      "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "fire": 1 },
       "tools_needed": { "apparatus": -1 },
-      "moves": 40
+      "moves": 1500,
+      "vitamins": [ [ "cannabis", 7 ] ]
     },
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },

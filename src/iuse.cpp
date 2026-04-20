@@ -411,6 +411,7 @@ static const trap_str_id tr_portal( "tr_portal" );
 static const vitamin_id vitamin_blood( "blood" );
 static const vitamin_id vitamin_human_blood_vitamin( "human_blood_vitamin" );
 static const vitamin_id vitamin_redcells( "redcells" );
+static const vitamin_id vitamin_cannabis( "cannabis" );
 
 // how many characters per turn of radio
 static constexpr int RADIO_PER_TURN = 25;
@@ -552,11 +553,8 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint_bub_ms 
     } else if( it->typeId() == itype_joint ) {
         cig = item( itype_joint_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 4_minutes );
-        p->mod_hunger( 4 );
-        p->mod_thirst( 6 );
-        if( p->get_painkiller() < 5 ) {
-            p->set_painkiller( ( p->get_painkiller() + 3 ) * 2 );
-        }
+        p->add_effect( effect_weed_high, 5_minutes );
+        p->vitamin_mod( vitamin_cannabis, 2 );
     } else {
         p->add_msg_if_player( m_bad,
                               _( "Please let the devs know you should be able to smoke a %s, but the smoking code does not know how." ),
