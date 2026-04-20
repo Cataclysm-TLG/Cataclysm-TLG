@@ -989,9 +989,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take a dab.  Wow, that's got some killer terpenes!",
-      "effects": [
-        { "id": "weed_high", "duration": "5 m" }
-      ],
+      "effects": [ { "id": "weed_high", "duration": "5 m" } ],
       "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "fire": 1 },
       "tools_needed": { "apparatus": -1 },
@@ -1018,9 +1016,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take a dab of wax.  *cough cough* Good stuff!",
-      "effects": [
-        { "id": "weed_high", "duration": "5 m" }
-      ],
+      "effects": [ { "id": "weed_high", "duration": "5 m" } ],
       "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "fire": 1 },
       "tools_needed": { "apparatus": -1 },
@@ -1053,9 +1049,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take a dab of distillate.",
-      "effects": [
-        { "id": "weed_high", "duration": "5 m" }
-      ],
+      "effects": [ { "id": "weed_high", "duration": "5 m" } ],
       "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "advanced_ecig": 1 },
       "vitamins": [ [ "cannabis", 15 ] ],

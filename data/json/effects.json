@@ -3460,8 +3460,7 @@
     "max_duration": "10 hours",
     "desc": [ "You are under the effects of cannabis." ],
     "miss_messages": [ [ "You're too stoned to keep up.", 1 ] ],
-    "base_mods":
-     { 
+    "base_mods": {
       "per_mod": [ -1 ],
       "pkill_max_val": [ 7 ],
       "pkill_min": [ 1 ],
