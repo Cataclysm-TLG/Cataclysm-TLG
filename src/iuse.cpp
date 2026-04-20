@@ -553,7 +553,7 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint_bub_ms 
     } else if( it->typeId() == itype_joint ) {
         cig = item( itype_joint_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 4_minutes );
-        p->add_effect( effect_weed_high, 30_seconds );
+        p->add_effect( effect_weed_high, 5_minutes );
         p->vitamin_mod( vitamin_cannabis, 2 );
     } else {
         p->add_msg_if_player( m_bad,
