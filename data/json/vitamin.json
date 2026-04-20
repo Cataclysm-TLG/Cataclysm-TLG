@@ -80,7 +80,7 @@
     "max": 250,
     "//": "Decays into nsaid to simulate the delated effect of naproxen vs aspirin.",
     "rate": "5 s",
-    "decays_into": [ [ "vit_nsaid", 2 ], [ "vit_nsaid_bp", 1 ]  ]
+    "decays_into": [ [ "vit_nsaid", 2 ], [ "vit_nsaid_bp", 1 ] ]
   },
   {
     "id": "vit_nsaid_bp",

@@ -952,8 +952,8 @@
     "vit_type": "counter",
     "name": { "str": "Lupine Mutagen (obsolete)" },
     "min": 0,
-    "max": 1600,
-    "rate": "1 m"
+    "max": 1,
+    "rate": "1 s"
   },
   {
     "type": "TRAIT_MIGRATION",
@@ -1004,5 +1004,19 @@
     "type": "effect_type",
     "id": "pkill",
     "max_duration": "1 s"
+  },
+  {
+    "type": "effect_type",
+    "id": "nsaid_eff",
+    "max_duration": "1 s"
+  },
+  {
+    "id": "vit_ibuprofen",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Obsolete NSAID vitamin" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 s"
   }
 ]
