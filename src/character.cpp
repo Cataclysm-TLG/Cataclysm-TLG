@@ -156,6 +156,7 @@ static const activity_id ACT_WAIT_NPC( "ACT_WAIT_NPC" );
 static const activity_id ACT_WAIT_STAMINA( "ACT_WAIT_STAMINA" );
 
 static const addiction_id addiction_alcohol( "alcohol" );
+static const addiction_id addiction_cannabis( "cannabis" );
 static const addiction_id addiction_opioid( "opioid" );
 static const addiction_id addiction_sleeping_pill( "sleeping pill" );
 
@@ -285,6 +286,7 @@ static const efftype_id effect_subaquatic_sonar( "subaquatic_sonar" );
 static const efftype_id effect_tapeworm( "tapeworm" );
 static const efftype_id effect_tied( "tied" );
 static const efftype_id effect_transition_contacts( "transition_contacts" );
+static const efftype_id effect_weed_high( "weed_high" );
 static const efftype_id effect_winded( "winded" );
 static const efftype_id effect_withdrawal_timer_alcohol( "withdrawal_timer_alcohol" );
 
@@ -11833,6 +11835,9 @@ bool Character::can_sleep()
         sleepy -= 4;
     }
     if( addiction_level( addiction_alcohol ) > 5 ) {
+        sleepy -= 1;
+    }
+    if( addiction_level( addiction_cannabis ) > 5 && !has_effect( effect_weed_high ) ) {
         sleepy -= 1;
     }
     if( has_effect( effect_withdrawal_timer_alcohol ) ) {

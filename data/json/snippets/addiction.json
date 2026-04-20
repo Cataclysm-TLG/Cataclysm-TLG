@@ -2,7 +2,7 @@
   {
     "type": "snippet",
     "category": "addict_alcohol_mild_awake",
-    "text": [ "You could use a drink.", "You're dying for a drink.", "If only you had a beer…" ]
+    "text": [ "You could use a drink.", "Wouldn't you rather be drunk right now?", "If only you had a beer…" ]
   },
   {
     "type": "snippet",
@@ -18,7 +18,7 @@
     "category": "addict_alcohol_mild_asleep",
     "text": [
       "You dream of sitting at your favorite venue, enjoying a nice drink…",
-      "Talking to your friends for hours while having a couple drinks, just good times, until you wake up alone and sober."
+      "Talking to friends for hours while having a couple drinks…good times."
     ]
   },
   {
@@ -32,20 +32,17 @@
   {
     "type": "snippet",
     "category": "addict_diazepam_mild_awake",
-    "text": [ "You could use some diazepam." ]
+    "text": [ "You could use some benzos." ]
   },
   {
     "type": "snippet",
     "category": "addict_diazepam_strong_awake",
-    "text": [ "You're shaking… you need some diazepam!" ]
+    "text": [ "You're shaking… you need some benzos!" ]
   },
   {
     "type": "snippet",
     "category": "addict_diazepam_mild_asleep",
-    "text": [
-      "You dream that you reach into your pocket and pull out a bottle full of that wonderful diazepam candy…",
-      "'A song plays in your dreams' ♪Lie still little bottle, and shake my shaky hand.  Black coffee's not enough for me, I need a better friend♪."
-    ]
+    "text": [ "You dream that you reach into your pocket and pull out a bottle full of those wonderful sedatives…" ]
   },
   {
     "type": "snippet",
@@ -57,23 +54,41 @@
   },
   {
     "type": "snippet",
+    "category": "addict_cannabis_mild_awake",
+    "text": [ "If only you had some weed…", "A toke would level you out." ]
+  },
+  {
+    "type": "snippet",
+    "category": "addict_cannabis_strong_awake",
+    "text": [
+      "You're starting to think weed might actually be habit-forming.",
+      "You feel anxious.  You know some marijuana would fix this.",
+      "Your stomach is doing flip-flops.  You NEED a toke."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "addict_cannabis_mild_asleep",
+    "text": [ "You dream of rolling the perfect joint.", "The skunky taste of herb lingers in your memory." ]
+  },
+  {
+    "type": "snippet",
+    "category": "addict_cannabis_strong_asleep",
+    "text": [
+      "Imagine all the world leaders passing a blunt around and just talking things out.  This could have all been avoided.",
+      "You drift in and out of sleep, uncertain whether your stash is all gone.",
+      "You dream of being abducted by big pink aliens.  They flew across the galaxy in search of Earth's strongest weed."
+    ]
+  },
+  {
+    "type": "snippet",
     "category": "addict_coke_awake",
     "text": [ "You feel like you need a bump.", "What would you do for some coke, right now?" ]
   },
   {
     "type": "snippet",
-    "category": "addict_crack_awake",
-    "text": [ "You're shivering, you need some crack." ]
-  },
-  {
-    "type": "snippet",
     "category": "addict_coke_asleep",
     "text": [ "You feel like you need a bump.", "You should have a party with some cocaine, it's not like you have work tomorrow." ]
-  },
-  {
-    "type": "snippet",
-    "category": "addict_crack_asleep",
-    "text": [ "You're shivering, you need some crack." ]
   },
   {
     "type": "snippet",
@@ -100,9 +115,9 @@
     "text": [
       "You need some nicotine.",
       "You dream about smoking cigarettes one after another until the pack is empty.",
-      "You wake with the imagined taste of smoke in your mouth; how long has it been since that was true?",
+      "You taste smoke in your dreams.",
       "Standing on the edge of a building with a cigarette in your hand, a horde of zombies milling below.  You take one last long drag and flick the butt out over the zombies then step off the ledge.  Waking with a start you can almost taste the smoke and tar in your mouth.",
-      "In your dream you brutally disanimate several zombies and then tear through their clothing looking for any unsmoked cigarettes"
+      "In your dream you brutally disanimate several zombies and then tear through their clothing looking for any unsmoked cigarettes."
     ]
   },
   {

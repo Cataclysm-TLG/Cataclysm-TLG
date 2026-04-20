@@ -63,7 +63,6 @@ std::optional<int> purify_smart( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> sewage( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> smoking( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> thorazine( Character *, item *, const tripoint_bub_ms & );
-std::optional<int> weed_cake( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> xanax( Character *, item *, const tripoint_bub_ms & );
 
 // TOOLS
