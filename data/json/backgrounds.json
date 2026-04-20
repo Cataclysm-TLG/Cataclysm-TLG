@@ -38,6 +38,15 @@
   {
     "type": "profession",
     "subtype": "hobby",
+    "id": "cannabis_addict",
+    "name": "Cannabis Addiction",
+    "description": "Some people say marijuana isn't addictive.  For reasons you can no longer recall, you decided to prove them wrong.",
+    "points": -1,
+    "addictions": [ { "intensity": 15, "type": "cannabis" } ]
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
     "id": "cocaine_addict",
     "name": "Cocaine Addiction",
     "description": "Cocaine is indeed a hell of a drug.  One minute you're skiing down mountains of powder, the next you're rolling zombies and digging through dumpsters for crack.",

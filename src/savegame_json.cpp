@@ -4257,7 +4257,7 @@ void addiction::deserialize( const JsonObject &jo )
                 type = STATIC( addiction_id( "cocaine" ) );
                 break;
             case add_type_legacy::CRACK:
-                type = STATIC( addiction_id( "crack" ) );
+                type = STATIC( addiction_id( "cocaine" ) );
                 break;
             case add_type_legacy::MUTAGEN:
                 type = STATIC( addiction_id( "mutagen" ) );

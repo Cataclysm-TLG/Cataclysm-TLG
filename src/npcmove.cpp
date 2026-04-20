@@ -4883,7 +4883,6 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
         // royal jelly (way too expensive to eat as food)
         // mutagenic crap (don't eat, we want player to micromanage muties)
         // marloss (NPCs don't turn fungal)
-        // weed brownies (small debuff)
         // seeds (too expensive)
 
         // For now skip all of those

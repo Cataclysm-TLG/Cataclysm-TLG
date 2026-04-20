@@ -806,11 +806,6 @@
   },
   {
     "type": "item_action",
-    "id": "WEED_CAKE",
-    "name": { "str": "Consume" }
-  },
-  {
-    "type": "item_action",
     "id": "XANAX",
     "name": { "str": "Take" }
   },

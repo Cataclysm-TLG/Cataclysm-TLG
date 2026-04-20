@@ -15,7 +15,7 @@
     "name": "Craving Nicotine",
     "type_name": "nicotine",
     "description": "A cigarette, a vape, even the gum would be better than going without.",
-    "sated": "2 hours",
+    "sated": "3 hours",
     "craving_morale": "morale_craving_nicotine",
     "builtin": "nicotine_effect"
   },
@@ -64,19 +64,19 @@
     "name": "Craving Cocaine",
     "type_name": "cocaine",
     "description": "Just a bump would fix you.",
-    "sated": "1 hours",
+    "sated": "2 hours",
     "craving_morale": "morale_craving_cocaine",
     "builtin": "cocaine_effect"
   },
   {
     "type": "addiction_type",
-    "id": "crack",
-    "name": "Crack Cocaine Withdrawal",
-    "type_name": "crack cocaine",
-    "description": "Perception - 2;   Intelligence - 2;   Frequent cravings.",
-    "sated": "45 minutes",
-    "craving_morale": "morale_craving_crack",
-    "builtin": "crack_effect"
+    "id": "cannabis",
+    "name": "Craving Cannabis",
+    "type_name": "cannabis",
+    "description": "You could use some herb right now.",
+    "sated": "8 hours",
+    "craving_morale": "morale_craving_cannabis",
+    "builtin": "cannabis_effect"
   },
   {
     "type": "addiction_type",
@@ -104,7 +104,7 @@
     "name": "Marloss Longing",
     "type_name": "Marloss berries",
     "description": "You should try some of those pink berries.",
-    "sated": "2 hours",
+    "sated": "8 hours",
     "craving_morale": "morale_craving_marloss",
     "effect_on_condition": "EOC_MARLOSS_R_ADDICTION"
   },
@@ -114,7 +114,7 @@
     "name": "Marloss Desire",
     "type_name": "Marloss seeds",
     "description": "You should try some of those cyan seeds.",
-    "sated": "2 hours",
+    "sated": "8 hours",
     "craving_morale": "morale_craving_marloss",
     "effect_on_condition": "EOC_MARLOSS_B_ADDICTION"
   },
@@ -124,7 +124,7 @@
     "name": "Marloss Cravings",
     "type_name": "Marloss gel",
     "description": "You should try some of that golden gel.",
-    "sated": "2 hours",
+    "sated": "8 hours",
     "craving_morale": "morale_craving_marloss",
     "effect_on_condition": "EOC_MARLOSS_Y_ADDICTION"
   }

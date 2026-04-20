@@ -240,7 +240,6 @@ static const efftype_id effect_visuals( "visuals" );
 static const efftype_id effect_weak_antibiotic( "weak_antibiotic" );
 static const efftype_id effect_weak_antibiotic_visible( "weak_antibiotic_visible" );
 static const efftype_id effect_webbed( "webbed" );
-static const efftype_id effect_weed_high( "weed_high" );
 static const efftype_id effect_zapped( "zapped" );
 
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
@@ -553,8 +552,7 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint_bub_ms 
     } else if( it->typeId() == itype_joint ) {
         cig = item( itype_joint_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 4_minutes );
-        p->add_effect( effect_weed_high, 5_minutes );
-        p->vitamin_mod( vitamin_cannabis, 2 );
+        p->vitamin_mod( vitamin_cannabis, 3 );
     } else {
         p->add_msg_if_player( m_bad,
                               _( "Please let the devs know you should be able to smoke a %s, but the smoking code does not know how." ),
@@ -809,30 +807,6 @@ std::optional<int> iuse::anticonvulsant( Character *p, item *, const tripoint_bu
     if( p->has_effect( effect_shakes ) ) {
         p->remove_effect( effect_shakes );
         p->add_msg_if_player( m_good, _( "You stop shaking." ) );
-    }
-    return 1;
-}
-
-std::optional<int> iuse::weed_cake( Character *p, item *, const tripoint_bub_ms & )
-{
-    p->add_msg_if_player(
-        _( "You start scarfing down the delicious cake.  It tastes a little funny, though…" ) );
-    time_duration duration = 12_minutes;
-    if( p->has_trait( trait_TOLERANCE ) ) {
-        duration = 9_minutes;
-    }
-    if( p->has_trait( trait_LIGHTWEIGHT ) ) {
-        duration = 15_minutes;
-    }
-    p->mod_hunger( 2 );
-    p->mod_thirst( 6 );
-    if( p->get_painkiller() < 5 ) {
-        p->set_painkiller( ( p->get_painkiller() + 3 ) * 2 );
-    }
-    p->add_effect( effect_weed_high, duration );
-    p->mod_moves( -to_moves<int>( 1_seconds ) );
-    if( one_in( 5 ) ) {
-        weed_msg( *p );
     }
     return 1;
 }
