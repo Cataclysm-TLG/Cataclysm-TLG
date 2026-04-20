@@ -92,8 +92,8 @@
     "max": 500,
     "//": "1mg ibuprofen equivalent.",
     "//2": "Takes 30 min to kick in, lasts 6 hours. TODO: Overdose when we can adjust rate at different amounts.",
-    "rate": "100 s",
-    "disease_excess": [ [ 10, 216 ] ]
+    "rate": "44 s",
+    "disease_excess": [ [ 10, 500 ] ]
   },
   {
     "id": "vit_nsaid",
@@ -105,8 +105,8 @@
     "max": 500,
     "//": "1mg ibuprofen equivalent.",
     "//2": "Takes 30 min to kick in, lasts 6 hours. TODO: Overdose when we can adjust rate at different amounts.",
-    "rate": "100 s",
-    "disease_excess": [ [ 10, 216 ] ]
+    "rate": "44 s",
+    "disease_excess": [ [ 10, 500 ] ]
   },
   {
     "id": "vit_acetaminophen",
