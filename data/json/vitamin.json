@@ -663,7 +663,7 @@
     "excess": "weed_high",
     "min": 0,
     "max": 100,
-    "rate": "10 m",
+    "rate": "6 m",
     "//": "TODO: Should decay faster the higher it is.",
     "disease_excess": [ [ 2, 9 ], [ 10, 24 ], [ 25, 39 ], [ 40, 100 ] ]
   }
