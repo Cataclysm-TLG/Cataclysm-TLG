@@ -117,7 +117,7 @@
     "min": 0,
     "max": 500,
     "//": "1mg acetaminophen equivalent.",
-    "//": "Takes 30 min to kick in, lasts ~5.5 hours. TODO: Overdose when we can adjust rate at different amounts.",
+    "//2": "Takes 30 min to kick in, lasts ~5.5 hours. TODO: Overdose when we can adjust rate at different amounts.",
     "rate": "40 s",
     "disease_excess": [ [ 10, 500 ] ]
   },

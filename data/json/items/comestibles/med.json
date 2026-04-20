@@ -1371,7 +1371,6 @@
       "bleed": 0,
       "bite": 0.66,
       "move_cost": 2500,
-      "activation_message": "You apply some wintergreen oil.",
       "effects": [ { "id": "wintergreen_analgesic", "duration": "1 h" } ]
     },
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "ALLOWS_REMOTE_USE" ]
