@@ -3416,13 +3416,7 @@
     "changes_to": [ "ROSEBUDS" ],
     "enchantments": [ { "values": [ { "value": "SCENT_MASK", "add": -200 } ] } ],
     "social_modifiers": { "lie": 10 },
-    "prevented_by": [
-      "FLOWERS_WINTER",
-      "ROSEBUDS_SUMMER",
-      "ROSEBUDS_FALL",
-      "ROSEBUDS_WINTER",
-      "ROSEBUDS_FALL_PICKED"
-    ]
+    "prevented_by": [ "FLOWERS_WINTER", "ROSEBUDS_SUMMER", "ROSEBUDS_FALL", "ROSEBUDS_WINTER", "ROSEBUDS_FALL_PICKED" ]
   },
   {
     "type": "mutation",

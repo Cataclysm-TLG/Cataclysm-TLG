@@ -962,7 +962,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You chew the wintergreen leaves.",
-      "effects": [ { "id": "pkill_wintergreen", "duration": "30 m" } ]
+      "effects": [ { "id": "wintergreen_analgesic", "duration": "10 m" } ]
     },
     "material": [ "vegetable" ],
     "primary_material": "dried_vegetable",
