@@ -2224,80 +2224,75 @@
     "id": "anticoagulant",
     "max_intensity": 3,
     "rating": "bad",
-    "blood_analysis_description": "Blood Thinner",
+    "blood_analysis_description": "Platelet Thromboxane Synthesis Suppressed",
     "effect_dur_scaling": [ { "effect_id": "bleed", "modifier": 1.05, "same_bp": false } ]
   },
   {
     "type": "effect_type",
-    "id": "nsaid_eff",
+    "id": "nsaid_bp",
     "//": "Blood pressure up.  Remember that this is divided by 10000, so maximum 5% increase.",
-    "//2": "NSAIDs are the drug family that includes ibuprofen.",
-    "rating": "bad",
-    "base_mods": { "blood_pressure_tick": [ 100 ], "blood_pressure_min": [ 2 ], "blood_pressure_max_val": [ 500 ] }
+    "//2": "NSAIDs are the drug family that includes ibuprofen, aspirin, and naproxen.",
+    "base_mods": { "blood_pressure_tick": [ 100 ], "blood_pressure_min": [ 2 ], "blood_pressure_max_val": [ 500 ] },
+    "blood_analysis_description": "NSAID-associated Renal Prostaglandin Suppression"
+  },
+  {
+    "type": "effect_type",
+    "id": "nsaid_analgesic",
+    "max_duration": "6 h",
+    "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 1 ], "pkill_max_val": [ 15 ] },
+    "rating": "good",
+    "pkill_addict_reduces": true,
+    "blood_analysis_description": "Non-Steroidal Anti-Inflammatory Drug"
+  },
+  {
+    "type": "effect_type",
+    "id": "acetaminophen_analgesic",
+    "max_duration": "330 m",
+    "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 1 ], "pkill_max_val": [ 15 ] },
+    "rating": "good",
+    "pkill_addict_reduces": true,
+    "blood_analysis_description": "Acetaminophen"
   },
   {
     "type": "effect_type",
     "id": "pkill1_generic",
-    "max_duration": "4 m",
+    "max_duration": "6 h",
     "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 1 ], "pkill_max_val": [ 15 ] },
     "rating": "good",
+    "pkill_addict_reduces": true,
     "blood_analysis_description": "Minor Painkiller"
   },
   {
     "type": "effect_type",
-    "id": "pkill1_nsaid",
-    "max_duration": "4 m",
-    "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 1 ], "pkill_max_val": [ 15 ] },
-    "rating": "good",
-    "blood_analysis_description": "Minor Painkiller (NSAID-based)"
-  },
-  {
-    "type": "effect_type",
-    "id": "pkill1_acetaminophen",
-    "max_duration": "4 m",
-    "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 1 ], "pkill_max_val": [ 15 ] },
-    "rating": "good",
-    "blood_analysis_description": "Minor Painkiller (Acetaminophen)"
-  },
-  {
-    "type": "effect_type",
     "id": "pkill2",
-    "pkill_addict_reduces": true,
     "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 2 ] },
     "rating": "good",
+    "pkill_addict_reduces": true,
     "blood_analysis_description": "Moderate Painkiller"
   },
   {
     "type": "effect_type",
     "id": "pkill3",
-    "pkill_addict_reduces": true,
     "base_mods": { "pkill_tick": [ 12 ], "pkill_min": [ 1 ] },
     "rating": "good",
+    "pkill_addict_reduces": true,
     "blood_analysis_description": "Heavy Painkiller"
   },
   {
     "type": "effect_type",
     "id": "pkill_l",
-    "pkill_addict_reduces": true,
     "base_mods": { "pkill_max_val": [ 40 ], "pkill_tick": [ 120 ], "pkill_min": [ 1 ] },
     "rating": "good",
+    "pkill_addict_reduces": true,
     "blood_analysis_description": "Slow-Release Painkiller"
   },
   {
     "type": "effect_type",
-    "id": "pkill_wintergreen",
-    "pkill_addict_reduces": true,
+    "id": "wintergreen_analgesic",
     "base_mods": { "pkill_max_val": [ 15 ], "pkill_tick": [ 50 ], "pkill_min": [ 1 ], "pkill_chance": [ 45 ] },
     "rating": "good",
-    "blood_analysis_description": "Ate wintergreen leaves"
-  },
-  {
-    "type": "effect_type",
-    "id": "pkill_wintergreen_oil",
     "pkill_addict_reduces": true,
-    "base_mods": { "pkill_max_val": [ 30 ], "pkill_tick": [ 42 ], "pkill_min": [ 2 ] },
-    "rating": "good",
-    "blood_analysis_description": "Wintergreen Oil"
+    "blood_analysis_description": "Methyl Salicylate"
   },
   {
     "type": "effect_type",
@@ -4295,17 +4290,6 @@
     "name": [ "Sheared" ],
     "desc": [ "The creature has been fully sheared." ],
     "max_duration": "90d"
-  },
-  {
-    "type": "effect_type",
-    "id": "pkill",
-    "name": [ "Painkillers" ],
-    "desc": [ "You are under the influence of analgesic substances to relieve pain, but they may numb you a bit." ],
-    "max_intensity": 30,
-    "int_dur_factor": "10 s",
-    "scaling_mods": { "speed_mod": [ -1 ] },
-    "rating": "good",
-    "blood_analysis_description": "Painkiller"
   },
   {
     "type": "effect_type",

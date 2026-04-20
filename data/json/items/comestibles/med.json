@@ -49,7 +49,7 @@
     "addiction_potential": 10,
     "addiction_type": "amphetamine",
     "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take some %s." }
+    "use_action": { "type": "consume_drug", "activation_message": "You take a stimulant capsule." }
   },
   {
     "id": "adrenaline_injector",
@@ -135,7 +135,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str": "aspirin" },
-    "description": "Acetylsalicylic acid, a mild anti-inflammatory and blood thinner.  Take to relieve pain and swelling.  Careful - it can increase bleeding.",
+    "description": "Acetylsalicylic acid, an NSAID that can treat pain and fever.  It is a blood thinner, and may exacerbate bleeding.",
     "weight": "1 g",
     "volume": "1 ml",
     "price": "2 cent",
@@ -146,12 +146,7 @@
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You take some aspirin.",
-      "effects": [ { "id": "pkill1_nsaid", "duration": 9000 } ]
-    },
-    "vitamins": [ [ "vit_bloodthinner", 4320 ] ]
+    "vitamins": [ [ "vit_bloodthinner", 2160 ], [ "vit_nsaid", 500 ], [ "vit_nsaid_bp", 420 ] ]
   },
   {
     "id": "ibuprofen",
@@ -159,7 +154,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "ibuprofen" },
-    "description": "Ibuprofen, a mild NSAID-based painkiller.  Take to relieve pain and swelling.",
+    "description": "Ibuprofen, a mild NSAID analgesic.  It relieves pain and swelling, but raises blood pressure more than other NSAIDs.",
     "weight": "1 g",
     "volume": "1 ml",
     "price": "2 cent",
@@ -172,10 +167,9 @@
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take some ibuprofen.",
-      "effects": [ { "id": "pkill1_nsaid", "duration": 9000 } ]
+      "activation_message": "You take an ibuprofen tablet."
     },
-    "vitamins": [ [ "vit_ibuprofen", 216 ] ]
+    "vitamins": [ [ "vit_nsaid", 400 ], [ "vit_nsaid_bp", 420 ] ]
   },
   {
     "id": "naproxen",
@@ -183,7 +177,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "naproxen" },
-    "description": "Naproxen, a mild long-lasting NSAID-based painkiller.  Take to relieve pain and swelling.",
+    "description": "Naproxen, a slow-acting over-the-counter pain medicaton.  It takes up to an hour to kick in, but lasts longer than other NSAIDs.",
     "weight": "1 g",
     "volume": "1 ml",
     "price": "2 cent",
@@ -196,10 +190,9 @@
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take some naproxen.",
-      "effects": [ { "id": "pkill1_nsaid", "duration": 18000 } ]
+      "activation_message": "You take a naproxen tablet."
     },
-    "vitamins": [ [ "vit_ibuprofen", 432 ] ]
+    "vitamins": [ [ "vit_naproxen", 250 ] ]
   },
   {
     "id": "acetaminophen",
@@ -220,9 +213,9 @@
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take some acetaminophen.",
-      "effects": [ { "id": "pkill1_acetaminophen", "duration": 9000 } ]
-    }
+      "activation_message": "You take some acetaminophen."
+    },
+    "vitamins": [ [ "vit_acetaminophen", 500 ] ]
   },
   {
     "id": "metaprolol",
@@ -1378,7 +1371,8 @@
       "bleed": 0,
       "bite": 0.66,
       "move_cost": 2500,
-      "effects": [ { "id": "pkill_wintergreen_oil", "duration": "1 h" } ]
+      "activation_message": "You apply some wintergreen oil.",
+      "effects": [ { "id": "wintergreen_analgesic", "duration": "1 h" } ]
     },
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "ALLOWS_REMOTE_USE" ]
   },
@@ -1529,7 +1523,7 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "addiction_potential": 40,
     "addiction_type": "sleeping pill",
-    "use_action": { "type": "consume_drug", "activation_message": "You take a %s." },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a sleeping pill." },
     "fatigue_mod": -40
   },
   {
@@ -1577,7 +1571,7 @@
     "addiction_type": [ "sleeping pill", "opioid" ],
     "vitamins": [ [ "vit_mme", 200 ] ],
     "flags": [ "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take a %s." },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a dose of poppy sleep." },
     "fatigue_mod": -40
   },
   {
@@ -1835,7 +1829,7 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take the %s.",
+      "activation_message": "You take a multivitamin.",
       "vitamins": [ [ "calcium", 24, 48 ], [ "iron", 24, 48 ], [ "vitC", 24, 48 ] ]
     },
     "//": "Yes, the vitamins are intentionally duplicated here. The consume/use/iteminfo UI needs them in use_action, but to actually pass on the vitamins they need to be in the comestible data, as below.",
@@ -1858,7 +1852,7 @@
     "symbol": "!",
     "color": "magenta",
     "container": "bottle_plastic_pill_supplement",
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 75 ] ] },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a calcium tablet.", "vitamins": [ [ "calcium", 75 ] ] },
     "vitamins": [ [ "calcium", 75 ] ]
   },
   {
@@ -1879,7 +1873,7 @@
     "color": "white",
     "looks_like": "calcium_tablet",
     "flags": [ "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 24 ] ] },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a bone meal tablet.", "vitamins": [ [ "calcium", 24 ] ] },
     "vitamins": [ [ "meat_allergen", 1 ], [ "calcium", 24 ] ]
   },
   {
@@ -1900,7 +1894,7 @@
     "color": "yellow",
     "looks_like": "calcium_tablet",
     "flags": [ "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 23 ] ] },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a flavored bone meal tablet.", "vitamins": [ [ "calcium", 23 ] ] },
     "vitamins": [ [ "meat_allergen", 1 ], [ "calcium", 23 ] ]
   },
   {
@@ -1918,7 +1912,7 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "symbol": "!",
     "color": "magenta",
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "vitC", 556 ] ] },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a vitamin C tablet.", "vitamins": [ [ "vitC", 556 ] ] },
     "vitamins": [ [ "vitC", 556 ] ]
   },
   {
@@ -1952,7 +1946,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_supplement",
     "flags": [ "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You swallow the %s.  You wait in anticipation of its effects." },
+    "use_action": { "type": "consume_drug", "activation_message": "You swallow the homeopathic pull.  It should kick in any minute now." },
     "snippet_category": [
       {
         "id": "pill1",

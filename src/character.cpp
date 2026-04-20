@@ -5610,8 +5610,14 @@ void Character::update_needs( int rate_multiplier )
         set_stim( std::max( current_stim - rate_multiplier, 0 ) );
     }
 
-    if( get_painkiller() > 0 ) {
-        mod_painkiller( -std::min( get_painkiller(), rate_multiplier ) );
+    // Only spend painkiller to treat pain we actually feel.
+    if( get_painkiller() > 0 && get_perceived_pain() > 0 ) {
+        const int spend = std::min( {
+            get_painkiller(),
+            rate_multiplier,
+            get_perceived_pain()
+        } );
+        mod_painkiller( -spend );
     }
 
     if( get_bp_effect_mod() > 0 ) {
@@ -7874,11 +7880,6 @@ void Character::vomit()
             }
         }
     }
-    remove_effect( effect_pkill1_generic );
-    remove_effect( effect_pkill1_acetaminophen );
-    remove_effect( effect_pkill1_nsaid );
-    remove_effect( effect_pkill2 );
-    remove_effect( effect_pkill3 );
     // Don't wake up when just retching
     if( stomach_contents_before_vomit > 0_ml ) {
         wake_up();

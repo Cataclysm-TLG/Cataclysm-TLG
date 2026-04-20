@@ -974,5 +974,35 @@
     "type": "TRAIT_MIGRATION",
     "id": "Boss_Isherwood_01",
     "remove": true
+  },
+  {
+    "type": "effect_type",
+    "id": "pkill1_nsaid",
+    "max_duration": "1 s"
+  },
+  {
+    "type": "effect_type",
+    "id": "pkill1_acetaminophen",
+    "max_duration": "1 s"
+  },
+  {
+    "type": "effect_type",
+    "id": "pkill_wintergreen",
+    "max_duration": "1 s"
+  },
+  {
+    "type": "effect_type",
+    "id": "pkill_wintergreen_oil",
+    "max_duration": "1 s"
+  },
+  {
+    "type": "effect_type",
+    "id": "acetaminophen_eff",
+    "max_duration": "1 s"
+  },
+  {
+    "type": "effect_type",
+    "id": "pkill",
+    "max_duration": "1 s"
   }
 ]

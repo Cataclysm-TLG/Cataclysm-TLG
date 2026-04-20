@@ -97,7 +97,6 @@ static const efftype_id effect_happy( "happy" );
 static const efftype_id effect_irradiated( "irradiated" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_onfire( "onfire" );
-static const efftype_id effect_pkill( "pkill" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_relax_gas( "relax_gas" );
 static const efftype_id effect_sad( "sad" );
@@ -1009,8 +1008,6 @@ void avatar::reset_stats()
             remove_effect( type );
         }
     };
-    // Painkiller
-    set_fake_effect_dur( effect_pkill, 1_turns * get_painkiller() );
 
     // Pain
     if( get_perceived_pain() > 0 ) {
