@@ -654,5 +654,17 @@
     "rate": "24 s",
     "//2": "TODO: update effect so vitamin excess scales correctly",
     "disease_excess": [ [ 1, 1000 ], [ 1001, 2000 ], [ 2001, 3000 ], [ 3001, 4000 ], [ 4001, 10000 ] ]
+  },
+  {
+    "id": "cannabis",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Cannabis" },
+    "excess": "weed_high",
+    "min": 0,
+    "max": 100,
+    "rate": "10 m",
+    "//": "TODO: Should decay faster the higher it is.",
+    "disease_excess": [ [ 2, 9 ], [ 10, 24 ], [ 25, 39 ], [ 40, 100 ] ]
   }
 ]

@@ -3455,10 +3455,31 @@
     "type": "effect_type",
     "id": "weed_high",
     "apply_message": "You feel lightheaded.",
-    "miss_messages": [ [ "That critter's jumping around like a jitterbug!  It needs to mellow out.", 1 ] ],
-    "base_mods": { "per_mod": [ -1 ] },
+    "name": [ "Stoned", "Baked", "Blazed", "Zooted" ],
+    "max_intensity": 4,
+    "max_duration": "10 hours",
+    "desc": [ "You are under the effects of cannabis." ],
+    "miss_messages": [ [ "You're too stoned to keep up.", 1 ] ],
+    "base_mods":
+     { 
+      "per_mod": [ -1 ],
+      "pkill_max_val": [ 7 ],
+      "pkill_min": [ 1 ],
+      "pkill_tick": [ 45 ],
+      "fatigue_max": [ 10 ],
+      "fatigue_tick": [ 300 ],
+      "fatigue_min": [ 1 ]
+    },
+    "scaling_mods": {
+      "per_mod": [ -0.67 ],
+      "dex_mod": [ -0.67 ],
+      "int_mod": [ -1.67 ],
+      "fatigue_max": [ 10 ],
+      "pkill_max_val": [ 7 ],
+      "speed_mod": [ -5 ]
+    },
     "enchantments": [ { "values": [ { "value": "VOMIT_MUL", "multiply": -0.9 } ] } ],
-    "blood_analysis_description": "Intoxicant: THC"
+    "blood_analysis_description": "Tetrahydrocannabinol"
   },
   {
     "type": "effect_type",
