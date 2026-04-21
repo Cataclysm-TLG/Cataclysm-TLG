@@ -66,6 +66,15 @@ jobs:
             ext: zip
             content: application/zip
             sound: 1
+          - name: Windows Tiles Sounds x64 MSVC (SDL3)
+            artifact: windows-with-graphics-and-sounds-sdl3-x64
+            arch: x64
+            os: windows-2022
+            ext: zip
+            content: application/zip
+            tiles: 1
+            sound: 1
+            sdl3: 1
           - name: Linux Tiles x64
             os: ubuntu-22.04
             mxe: none
@@ -84,6 +93,16 @@ jobs:
             tiles: 1
             sound: 1
             artifact: linux-tiles-sounds-x64
+            ext: tar.gz
+            content: application/gzip
+          - name: Linux Tiles Sounds x64 (SDL3)
+            os: ubuntu-24.04
+            android: none
+            libbacktrace: 1
+            tiles: 1
+            sound: 1
+            sdl3: 1
+            artifact: linux-with-graphics-and-sounds-sdl3-x64
             ext: tar.gz
             content: application/gzip
           - name: Linux Curses x64
@@ -110,6 +129,14 @@ jobs:
             tiles: 1
             sound: 1
             artifact: osx-tiles-universal
+            ext: dmg
+            content: application/x-apple-diskimage
+          - name: macOS Tiles Universal Binary (SDL3)
+            os: macos-15
+            tiles: 1
+            sound: 0
+            sdl3: 1
+            artifact: osx-with-graphics-sdl3-universal
             ext: dmg
             content: application/x-apple-diskimage
           - name: Android x64
@@ -178,22 +205,8 @@ jobs:
           install: >-
             gettext
             make
-      - name: Install dependencies (windows mxe)
-        if: matrix.mxe != 'none'
-        run: |
-          sudo apt install gettext
-      - name: Install MXE
-        if: matrix.mxe != 'none'
-        run: |
-          curl -L -o mxe-${{ matrix.mxe }}.tar.xz https://github.com/BrettDong/MXE-GCC/releases/download/mxe-sdl-2-0-20/mxe-${{ matrix.mxe }}.tar.xz
-          curl -L -o mxe-${{ matrix.mxe }}.tar.xz.sha256 https://github.com/BrettDong/MXE-GCC/releases/download/mxe-sdl-2-0-20/mxe-${{ matrix.mxe }}.tar.xz.sha256
-          shasum -a 256 -c ./mxe-${{ matrix.mxe }}.tar.xz.sha256
-          sudo tar xJf mxe-${{ matrix.mxe }}.tar.xz -C /opt
-          curl -L -o SDL2-devel-2.26.2-mingw.tar.gz https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-devel-2.26.2-mingw.tar.gz
-          shasum -a 256 -c ./build-scripts/SDL2-devel-2.26.2-mingw.tar.gz.sha256
-          sudo tar -xzf SDL2-devel-2.26.2-mingw.tar.gz -C /opt/mxe/usr/${{ matrix.mxe }}-w64-mingw32.static.gcc12 --strip-components=2 SDL2-2.26.2/${{ matrix.mxe }}-w64-mingw32
-      - name: Install dependencies (Linux)
-        if: runner.os == 'Linux' && matrix.mxe == 'none' && matrix.android == 'none' && !matrix.wasm
+      - name: Install dependencies (Linux, SDL2)
+        if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 != 1
         run: |
           sudo apt-get update
           sudo apt-get install libsdl2-dev
@@ -207,12 +220,35 @@ jobs:
           cp ../LICENSE.txt ${{ github.workspace }}/LICENSE-SDL.txt
           sudo apt-get install libncursesw5-dev libsdl2-ttf-dev libsdl2-image-dev \
             libsdl2-mixer-dev libpulse-dev ccache gettext parallel
+      - name: Install dependencies (Linux, SDL3)
+        if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1
+        run: |
+          sudo apt-get update
+          sudo apt-get install libsdl3-dev libsdl3-image-dev libsdl3-ttf-dev \
+            libflac-dev libogg-dev libvorbis-dev libmpg123-dev libwavpack-dev \
+            libpulse-dev libncursesw5-dev ccache gettext parallel pkg-config cmake
+      - name: Build SDL3_mixer from source (Linux, SDL3)
+        if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1
+        run: |
+          git clone --depth 1 --branch release-3.2.0 https://github.com/libsdl-org/SDL_mixer.git sdl3_mixer_src
+          cmake -S sdl3_mixer_src -B sdl3_mixer_build \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DSDLMIXER_VENDORED=OFF \
+              -DSDLMIXER_FLAC=ON -DSDLMIXER_FLAC_LIBFLAC=ON \
+              -DSDLMIXER_MP3=ON -DSDLMIXER_MP3_MPG123=ON \
+              -DSDLMIXER_VORBIS=VORBISFILE \
+              -DSDLMIXER_WAVPACK=ON \
+              -DSDLMIXER_OPUS=OFF -DSDLMIXER_MOD=OFF -DSDLMIXER_MIDI=OFF \
+              -DBUILD_SHARED_LIBS=ON
+          cmake --build sdl3_mixer_build -j$((`nproc`+0))
+          sudo cmake --install sdl3_mixer_build
+          cp sdl3_mixer_src/LICENSE.txt ${{ github.workspace }}/LICENSE-SDL3_mixer.txt
       - name: Install Emscripten (WebAssembly)
         if: matrix.wasm
-        uses: mymindstorm/setup-emsdk@v13
-      - name: Install runtime dependencies (mac)
-        if: runner.os == 'macOS'
-        uses: BrettDong/setup-sdl2-frameworks@v2
+        uses: mymindstorm/setup-emsdk@d233ac12b0102f74ca199f5dad7a4e2c13a8a745 # v13
+      - name: Install runtime dependencies (mac, SDL2)
+        if: runner.os == 'macOS' && matrix.sdl3 != 1
+        uses: BrettDong/setup-sdl2-frameworks@a8ca795ef904417e9ddcb010ef6bf2d11779dbe3 # v2
         with:
           sdl2: 2.30.11
           sdl2-ttf: 2.24.0
@@ -221,17 +257,20 @@ jobs:
       - name: Install build dependencies (mac)
         if: runner.os == 'macOS'
         run: |
-          HOMEBREW_NO_AUTO_UPDATE=yes HOMEBREW_NO_INSTALL_CLEANUP=yes \
-            brew install gettext ccache parallel dylibbundler pipx
-          pipx install dmgbuild
-          pipx inject dmgbuild biplist
-      - name: install macports (mac)
-        if: runner.os == 'macOS' && matrix.tiles == 1
-        uses: melusina-org/setup-macports@v1
-      - name: install macports packages (mac)
-        if: runner.os == 'macOS' && matrix.tiles == 1
+          HOMEBREW_NO_AUTO_UPDATE=yes HOMEBREW_NO_INSTALL_CLEANUP=yes brew install gettext ccache parallel dylibbundler
+          pip3 install --break-system-packages dmgbuild biplist
+      - name: install macports (mac, SDL2)
+        if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 != 1
+        uses: melusina-org/setup-macports@c7eb59386def259a274627092566a7f7b8d219b1 # v1
+      - name: install macports packages (mac, SDL2)
+        if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 != 1
         run: |
           sudo port install freetype +universal pkgconfig +universal
+      - name: install brew packages (mac, SDL3)
+        if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 == 1
+        run: |
+          HOMEBREW_NO_AUTO_UPDATE=yes HOMEBREW_NO_INSTALL_CLEANUP=yes \
+            brew install pkgconf sdl3 sdl3_image sdl3_ttf sdl3_mixer freetype
       - name: Create VERSION.TXT
         shell: bash
         run: |
@@ -259,23 +298,16 @@ jobs:
       - name: Build CTLG (linux)
         if: runner.os == 'Linux' && matrix.mxe == 'none' && matrix.android == 'none' && !matrix.wasm
         run: |
-          make -j$((`nproc`+0)) TILES=${{ matrix.tiles }} SOUND=${{ matrix.tiles }} RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=1 LIBBACKTRACE=${{ matrix.libbacktrace }} PCH=0 bindist
-          mv cataclysm-tlg-1.0.tar.gz ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.tar.gz
-      - name: Build Ctlg (WebAssembly)
-        if: matrix.wasm
+          make COMPILER=clang++-18 -j$((`nproc`+0)) TILES=${{ matrix.tiles }} SOUND=${{ matrix.tiles }} SDL3=${{ matrix.sdl3 == 1 && '1' || '0' }} RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=1 LIBBACKTRACE=${{ matrix.libbacktrace }} WARN_STALE_DATA=1 PCH=0 bindist
+          mv cataclysmdda-0.J.tar.gz cdda-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.tar.gz
+      - name: Build CDDA (WebAssembly)
+        if: matrix.wasm && success()
         run: |
           ./build-scripts/build-emscripten.sh
           ./build-scripts/prepare-web.sh
-          (cd build && zip ../ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.${{ matrix.ext }} *)
-      - name: Build CTLG (windows mxe)
-        if: matrix.mxe != 'none'
-        env:
-          PLATFORM: /opt/mxe/usr/bin/${{ matrix.mxe }}-w64-mingw32.static.gcc12-
-        run: |
-          make -j$((`nproc`+0)) CROSS="${PLATFORM}" TILES=1 SOUND=1 RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=1 LIBBACKTRACE=${{ matrix.libbacktrace }} PCH=0 bindist
-          mv cataclysm-tlg-1.0.zip ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
-      - name: Build Ctlg (windows msvc)
-        if: runner.os == 'Windows'
+          (cd build && zip ../cdda-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.${{ matrix.ext }} *)
+      - name: Build CDDA (windows msvc, SDL2)
+        if: runner.os == 'Windows' && matrix.sdl3 != 1
         env:
           # Enable pretty backtraces
           BACKTRACE: 1
@@ -284,15 +316,32 @@ jobs:
         run: |
           msbuild -m -p:Configuration=Release -p:Platform=${{ matrix.arch }} "-target:Cataclysm-vcpkg-static;JsonFormatter-vcpkg-static;zzip" msvc-full-features\Cataclysm-vcpkg-static.sln
           .\build-scripts\windist.ps1
-          mv cataclysm-tlg-1.0.zip ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
-      - name: Build Ctlg (osx)
-        if: runner.os == 'macOS'
+          mv cataclysmdda-0.J.zip cdda-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
+      - name: Build CDDA (windows msvc, SDL3)
+        if: runner.os == 'Windows' && matrix.sdl3 == 1
+        env:
+          BACKTRACE: 1
+          CDDA_RELEASE_BUILD: 1
+          VCPKG_OVERLAY_TRIPLETS: ${{ github.workspace }}\.github\vcpkg_triplets
         run: |
-          make -j3 TILES=${{ matrix.tiles }} SOUND=${{ matrix.tiles }} RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=0 PCH=0 USE_HOME_DIR=1 FRAMEWORK=1 UNIVERSAL_BINARY=1 dmgdist
-          mv Cataclysm.dmg ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.dmg
-      - name: Set up JDK 8 (android)
-        if: runner.os == 'Linux' && matrix.android != 'none' && matrix.mxe == 'none'
-        uses: actions/setup-java@v4
+          msbuild -m -p:Configuration=Release -p:Platform=${{ matrix.arch }} -p:UseSDL3=true "-target:Cataclysm-vcpkg-static;JsonFormatter-vcpkg-static;zzip" msvc-full-features\Cataclysm-vcpkg-static.sln
+          .\build-scripts\windist.ps1
+          mv cataclysmdda-0.J.zip cdda-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
+      - name: Build CDDA (osx, SDL2)
+        if: runner.os == 'macOS' && matrix.sdl3 != 1
+        run: |
+          make -j3 TILES=${{ matrix.tiles }} SOUND=${{ matrix.tiles }} RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=0 PCH=0 USE_HOME_DIR=1 FRAMEWORK=1 UNIVERSAL_BINARY=1 WARN_STALE_DATA=1 dmgdist
+          mv Cataclysm.dmg cdda-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.dmg
+      - name: Build CDDA (osx, SDL3)
+        if: runner.os == 'macOS' && matrix.sdl3 == 1
+        env:
+          PKG_CONFIG_PATH: /opt/homebrew/lib/pkgconfig
+        run: |
+          make -j3 TILES=${{ matrix.tiles }} SOUND=${{ matrix.tiles }} SDL3=1 RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=0 PCH=0 USE_HOME_DIR=1 UNIVERSAL_BINARY=1 WARN_STALE_DATA=1 dmgdist
+          mv Cataclysm.dmg cdda-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.dmg
+      - name: Set up JDK (android)
+        if: runner.os == 'Linux' && matrix.android != 'none'
+        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
         with:
           java-version: '11'
           distribution: 'adopt'   
