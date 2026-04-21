@@ -58,6 +58,26 @@ void set_slow_time_predicate( bool_predicate fn );
 // predicate without re-exporting the function pointer.
 bool slow_time_predicate_active();
 
+namespace testing
+{
+// Reserved track's current frequency ratio. Used by slow-time
+// property tests to verify predicate-to-ratio wiring without coupling
+// tests to backend internals. SDL2 backend returns 1.0 (no native
+// ratio concept).
+float reserved_track_frequency_ratio( sfx::channel slot );
+
+// Current frequency ratio of the most-recently-started one-shot
+// track. SDL2 backend returns 1.0. Returns 0.0 if no one-shot is
+// currently tracked.
+float last_oneshot_frequency_ratio();
+
+// Produce a minimal valid sfx_audio (a single silent stereo frame)
+// that play_reserved and play_oneshot will accept. Used by tests
+// that need to exercise the play path without loading a real file.
+// SDL2 backend returns nullptr.
+sfx_audio *make_synthetic_sfx_audio();
+} // namespace testing
+
 void stop_all_sfx( int fade_out_ms );
 void fade_group( sfx::group g, int ms );
 

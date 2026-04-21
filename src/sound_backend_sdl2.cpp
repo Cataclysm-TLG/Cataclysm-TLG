@@ -379,6 +379,25 @@ bool slow_time_predicate_active()
     return g_slow_time_predicate != nullptr && g_slow_time_predicate();
 }
 
+namespace testing
+{
+float reserved_track_frequency_ratio( sfx::channel /*slot*/ )
+{
+    // SDL2_mixer has no native per-track frequency ratio. Slow-time
+    // DSP runs via Mix_RegisterEffect and mutates output PCM in
+    // place; there is no stored ratio to query.
+    return 1.0f;
+}
+float last_oneshot_frequency_ratio()
+{
+    return 1.0f;
+}
+sfx_audio *make_synthetic_sfx_audio()
+{
+    return nullptr;
+}
+} // namespace testing
+
 void poll()
 {
     // SDL2 needs no main-thread audio pump.
