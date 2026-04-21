@@ -653,7 +653,7 @@
     "symbol": "/",
     "color": "yellow",
     "techniques": [ "WBLOCK_1", "DEF_DISARM" ],
-    "flags": [ "POLEARM", "REACH_ATTACK", "ALWAYS_TWOHAND", "NONCONDUCTIVE", "SHEATH_SPEAR", "SPEAR", "WALKING_AID" ],
+    "flags": [ "POLEARM", "REACH_ATTACK", "ALWAYS_TWOHAND", "NONCONDUCTIVE", "SPEAR", "WALKING_AID" ],
     "weapon_category": [ "HOOKING_WEAPONRY", "POLEARMS", "SPEARS" ],
     "melee_damage": { "bash": 9, "cut": 43 }
   }
