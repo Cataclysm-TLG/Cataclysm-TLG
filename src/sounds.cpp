@@ -1033,7 +1033,7 @@ void sfx::do_vehicle_engine_sfx()
     }
 
     if( !veh->is_autodriving && current_speed != previous_speed ) {
-        Mix_HaltChannel( static_cast<int>( ch ) );
+        sound_backend::stop_reserved( ch, 0 );
         add_msg_debug( debugmode::DF_SOUND, "STOP speed %d =/= %d", current_speed, previous_speed );
         play_ambient_variant_sound( id_and_variant.first, id_and_variant.second,
                                     seas_str, indoors, night,

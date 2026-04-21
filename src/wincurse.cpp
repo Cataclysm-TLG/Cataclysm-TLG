@@ -808,9 +808,9 @@ HWND getWindowHandle()
 
 void refresh_display()
 {
-    #if defined(SDL_SOUND)
+#if defined(SDL_SOUND)
     sound_backend::poll();
-    #endif
+#endif
     RedrawWindow( WindowHandle, nullptr, nullptr, RDW_INVALIDATE | RDW_UPDATENOW );
 }
 
