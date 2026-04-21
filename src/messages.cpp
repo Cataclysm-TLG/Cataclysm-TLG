@@ -31,6 +31,7 @@
 
 #include "options.h"
 
+static const efftype_id effect_drunk( "drunk" );
 static const efftype_id effect_weed_high( "weed_high" );
 
 namespace
@@ -244,107 +245,229 @@ class messages_impl
         }
 
         void modify_msg_with_exclamations( std::string &msg, game_message_type const type ) {
-            // add smileys to messages if the player is high on weed
             Character *p_char = &get_player_character();
-            if( !p_char->has_effect( effect_weed_high ) ) {
+
+            const bool is_stoned = p_char->has_effect( effect_weed_high );
+            const bool is_drunk = p_char->has_effect( effect_drunk );
+
+            if( !is_stoned && !is_drunk ) {
                 return;
             }
 
-            const time_duration weed_dur = p_char->get_effect_dur( effect_weed_high );
-            const float in_minutes = to_minutes<float>( weed_dur );
-            // we will now calculate how often smiley faces should appear in messages.
-            // Slowly rises. 0 at 0, 1 at 22.5, 2 at 45 mins. Asymptote at 3.
-            const float max_per_msg = 3 - 3 / ( 1 + 0.001 * in_minutes * in_minutes );
-            //possible values for smiles_for_this_msg are 0,1,2,3.
-            int smiles_for_this_msg = static_cast<int>( round( rng_normal( 0, max_per_msg ) ) );
-
-            // now insert the smiley face somewhere in the msg string. We want to avoid breaking up words, so we will only replace spaces.
-            // find all suitable locations for smiley. That is, end of message + all spaces (except after certain words)
-            std::vector<size_t> smiley_locations;
-            // we also need to track space locations to extract words properly. Annoying but necessary.
-            std::vector<size_t> space_locations;
-
-            // end of msg
-            smiley_locations.push_back( msg.size() );
-            // now all spaces
-            for( size_t j = 0; j < msg.size(); j++ ) {
-                if( msg[j] == ' ' ) {
-                    bool wordskip = false;
-                    // fancy logic. It's weird if the smiley comes after "to" or "that" or "a". Let's try and skip words like those.
-                    // We skip all short words (<=3 letters), and all words in the forbidden_words array.
-                    if( !space_locations.empty() ) {
-                        const size_t prev_space = space_locations.back();
-                        // if prev_space is the previous char, skip
-                        if( prev_space == j - 1 ) {
-                            wordskip = true;
+            if( is_drunk ) {
+                const int intensity = p_char->get_effect_int( effect_drunk );
+                if( intensity > 0 ) {
+                    // String length determines how many errors are added. Increase the divisor to reduce number of errors.
+                    const float length_factor = static_cast<float>( msg.size() ) / 16.0f;
+                    // Insensity multiplier increases the amount of errors.
+                    const float expected = length_factor * ( 0.75f * intensity );
+                    // Expected multiplier makes it more chaotic.
+                    int slurred_words = std::max( 0, static_cast<int>(
+                                                      round( rng_normal( expected, expected * 0.75f ) )
+                                                  ) );
+                    slurred_words = std::min( slurred_words, static_cast<int>( msg.size() / 2 ) );
+                    auto is_ascii_char = [&]( char c ) -> bool {
+                        return static_cast<unsigned char>( c ) < 0x80;
+                    };
+                    std::vector<bool> unsafe( msg.size(), false );
+                    // Exclude up to 8 characters adjacent to these markup symbols.
+                    for( size_t i = 0; i < msg.size(); i++ ) {
+                        if( msg[i] == '%' || msg[i] == '\\' || msg[i] == '$' ) {
+                            for( int d = -8; d <= 8; d++ ) {
+                                int p = static_cast<int>( i + d );
+                                if( p >= 0 && p < static_cast<int>( msg.size() ) ) {
+                                    unsafe[p] = true;
+                                }
+                            }
                         }
-                        // check that smiley_locations.back() did not return none
-                        if( prev_space != std::string::npos ) {
-                            const std::string word = msg.substr( prev_space, j - prev_space );
-                            const std::array<std::string, 6> forbidden_words = { " that", " with", " this", " over", " your", " onto" };
-                            for( const std::string &forbidden_word : forbidden_words ) {
-                                if( word == forbidden_word ) {
-                                    wordskip = true;
+                    }
+                    for( int m = 0; m < slurred_words; m++ ) {
+                        std::vector<std::pair<size_t, size_t>> ranges;
+                        bool in_tag = false;
+                        size_t start = std::string::npos;
+                        for( size_t i = 0; i < msg.size(); i++ ) {
+                            char c = msg[i];
+                            if( c == '<' ) {
+                                if( start != std::string::npos ) {
+                                    ranges.emplace_back( start, i - start );
+                                    start = std::string::npos;
+                                }
+                                in_tag = true;
+                            }
+                            if( c == '>' ) {
+                                in_tag = false;
+                                continue;
+                            }
+                            if( in_tag ) {
+                                continue;
+                            }
+                            // Ensure that we only mess up ASCII text.
+                            if( !is_ascii_char( c ) ) {
+                                if( start != std::string::npos ) {
+                                    ranges.emplace_back( start, i - start );
+                                    start = std::string::npos;
+                                }
+                                continue;
+                            }
+                            // Exclude unsafe text.
+                            if( unsafe[i] ) {
+                                if( start != std::string::npos ) {
+                                    ranges.emplace_back( start, i - start );
+                                    start = std::string::npos;
+                                }
+                                continue;
+                            }
+
+                            // Exclude markup symbols and stuff they're attached to.
+                            if( c == '_' || c == ' ' || c == '/' || c == '|' ) {
+                                if( start != std::string::npos ) {
+                                    ranges.emplace_back( start, i - start );
+                                    start = std::string::npos;
+                                }
+                                continue;
+                            }
+                            if( start == std::string::npos ) {
+                                start = i;
+                            }
+                        }
+                        if( start != std::string::npos ) {
+                            ranges.emplace_back( start, msg.size() - start );
+                        }
+                        std::vector<std::pair<size_t, size_t>> usable;
+                        for( auto &r : ranges ) {
+                            if( r.second < 3 ) {
+                                continue;
+                            }
+                            bool ok = true;
+                            for( size_t i = r.first; i < r.first + r.second; i++ ) {
+                                if( !is_ascii_char( msg[i] ) || unsafe[i] ) {
+                                    ok = false;
                                     break;
                                 }
                             }
-                            if( word.size() > 1 && word.size() <= 4 ) {
-                                wordskip = true;
+                            if( ok ) {
+                                usable.push_back( r );
                             }
                         }
-                    } else {
-                        // skip very first word
-                        wordskip = true;
-                    }
-                    space_locations.push_back( j );
-                    if( !wordskip ) {
-                        smiley_locations.push_back( j );
-                    }
-                }
-            }
-            // first, check if smiles_for_this_msg == len(smiley_locations)
-            if( smiles_for_this_msg >= static_cast<int>( smiley_locations.size() ) ) {
-                smiles_for_this_msg = static_cast<int>( smiley_locations.size() ) - 1;
-            }
-            // then pick one at random
-            for( int i = 0; i < smiles_for_this_msg; i++ ) {
-                const size_t smiley_location = random_entry_removed( smiley_locations );
-                std::string smiley_string = " :)";
-                if( type == m_good || type == m_critical ) {
-                    if( one_in( 5 ) ) {
-                        smiley_string = " :D";
-                    }
-                }
-                msg.insert( smiley_location, smiley_string );
-                //for( size_t j = 0; j < smiley_locations.size(); j++ ) {
-                // modernize-loop-convert. Use range-based for loop instead.
-                for( size_t &smil_loc : smiley_locations ) {
-                    if( smil_loc > smiley_location ) {
-                        // we increment to account for the insertion of the smiley string
-                        smil_loc += 3;
-                    }
-                }
-            }
+                        if( usable.empty() ) {
+                            break;
+                        }
+                        auto [rstart, rlen] = random_entry( usable );
+                        int slurred_roll = rng( 0, intensity + 1 );
+                        if( slurred_roll <= 1 ) {
+                            size_t pos = rstart + rng( 0, rlen - 1 );
+                            char &c = msg[pos];
+                            if( !is_ascii_char( c ) || unsafe[pos] ) {
+                                continue;
+                            }
+                            if( c == '.' || c == ',' || c == '!' || c == '?' ) {
+                                c = ' ';
+                            } else {
+                                c = static_cast<char>( tolower( c ) );
+                            }
+                        } else if( slurred_roll <= 3 && rlen >= 4 ) {
+                            size_t pos = rstart + rng( 0, rlen - 2 );
 
-            // if we are *very* high, there will be a chance to finish a long message with an exclamation
-            if( smiles_for_this_msg > 1 ) {
-                int woah_chance = static_cast<int>( 10 / smiles_for_this_msg );
-                if( msg.size() > 16 && one_in( woah_chance ) ) {
-                    std::vector<std::string> exclamations = {
-                        "Woah.", "Dude."
-                    };
-                    std::vector<std::string> good_exclamations = {
-                        "Cool!", "Wicked!", "Awesome!"
-                    };
-                    std::vector<std::string> bad_exclamations = {
-                        "Not cool.", "Oof.", "Bummer."
-                    };
-                    if( type == m_good || type == m_critical || type == m_headshot ) {
-                        msg += " " + random_entry( good_exclamations );
-                    } else if( type == m_bad || type == m_grazing ) {
-                        msg += " " + random_entry( bad_exclamations );
-                    } else {
-                        msg += " " + random_entry( exclamations );
+                            if( !is_ascii_char( msg[pos] ) ||
+                                !is_ascii_char( msg[pos + 1] ) ||
+                                unsafe[pos] || unsafe[pos + 1] ) {
+                                continue;
+                            }
+                            std::swap( msg[pos], msg[pos + 1] );
+                        } else {
+                            size_t pos = rstart + rng( 0, rlen - 1 );
+                            if( !is_ascii_char( msg[pos] ) || unsafe[pos] ) {
+                                continue;
+                            }
+                            if( one_in( 2 ) ) {
+                                msg.erase( pos, 1 );
+                            } else {
+                                char &c = msg[pos];
+                                c = ' ';
+                            }
+                        }
+                    }
+                }
+            }
+            if( is_stoned ) {
+                const int weed_intensity = std::clamp( p_char->get_effect_int( effect_weed_high ), 0, 4 );
+                const float max_per_msg = ( weed_intensity / 4.0f ) * 3.0f;
+                int smiles_for_this_msg = static_cast<int>(
+                                              round( rng_normal( 0, max_per_msg ) )
+                                          );
+                std::vector<size_t> smiley_locations;
+                std::vector<size_t> space_locations;
+                smiley_locations.push_back( msg.size() );
+                for( size_t j = 0; j < msg.size(); j++ ) {
+                    if( msg[j] == ' ' ) {
+                        bool wordskip = false;
+                        if( !space_locations.empty() ) {
+                            const size_t prev_space = space_locations.back();
+                            if( prev_space == j - 1 ) {
+                                wordskip = true;
+                            }
+                            if( prev_space != std::string::npos ) {
+                                const std::string word = msg.substr( prev_space, j - prev_space );
+                                const std::array<std::string, 6> forbidden_words = { " that", " with", " this", " over", " your", " onto" };
+                                for( const std::string &forbidden_word : forbidden_words ) {
+                                    if( word == forbidden_word ) {
+                                        wordskip = true;
+                                        break;
+                                    }
+                                }
+                                if( word.size() > 1 && word.size() <= 4 ) {
+                                    wordskip = true;
+                                }
+                            }
+                        } else {
+                            wordskip = true;
+                        }
+                        space_locations.push_back( j );
+                        if( !wordskip ) {
+                            smiley_locations.push_back( j );
+                        }
+                    }
+                }
+
+                if( smiles_for_this_msg >= static_cast<int>( smiley_locations.size() ) ) {
+                    smiles_for_this_msg = static_cast<int>( smiley_locations.size() ) - 1;
+                }
+
+                for( int i = 0; i < smiles_for_this_msg; i++ ) {
+                    const size_t smiley_location = random_entry_removed( smiley_locations );
+                    std::string smiley_string = " :)";
+                    if( type == m_good || type == m_critical ) {
+                        if( one_in( 5 ) ) {
+                            smiley_string = " :D";
+                        }
+                    }
+                    msg.insert( smiley_location, smiley_string );
+                    for( size_t &smil_loc : smiley_locations ) {
+                        if( smil_loc > smiley_location ) {
+                            smil_loc += 3;
+                        }
+                    }
+                }
+
+                if( smiles_for_this_msg > 1 ) {
+                    int woah_chance = static_cast<int>( 10 / smiles_for_this_msg );
+                    if( msg.size() > 16 && one_in( woah_chance ) ) {
+                        std::vector<std::string> exclamations = {
+                            "Woah.", "Dude.", "Huh?"
+                        };
+                        std::vector<std::string> good_exclamations = {
+                            "Cool!", "Yeah!", "Awesome!"
+                        };
+                        std::vector<std::string> bad_exclamations = {
+                            "Not cool.", "Oof.", "Bummer."
+                        };
+                        if( type == m_good || type == m_critical || type == m_headshot ) {
+                            msg += " " + random_entry( good_exclamations );
+                        } else if( type == m_bad || type == m_grazing ) {
+                            msg += " " + random_entry( bad_exclamations );
+                        } else {
+                            msg += " " + random_entry( exclamations );
+                        }
                     }
                 }
             }

@@ -149,23 +149,25 @@ static bool benzodiazepine_add( Character &u, int in )
         ret = true;
     }
     if( one_in( 40 ) && rng( 0, 30 ) < in && ( !u.in_sleep_state() || !recent_dream ) ) {
-        const std::string msg_1 =( u.in_sleep_state() ? "addict_diazepam_mild_asleep" : "addict_diazepam_mild_awake" );
+        const std::string msg_1 = ( u.in_sleep_state() ? "addict_diazepam_mild_asleep" :
+                                    "addict_diazepam_mild_awake" );
         u.add_msg_if_player( m_warning,
                              SNIPPET.random_from_category( msg_1 ).value_or( translation() ).translated() );
         u.add_morale( morale_type, -35, -4 * in );
         ret = true;
         if( u.in_sleep_state() ) {
-                last_dia_dream = calendar::turn;
+            last_dia_dream = calendar::turn;
         }
     } else if( rng( 8, 600 ) < in && ( !u.in_sleep_state() || !recent_dream ) ) {
-        const std::string msg_2 = ( u.in_sleep_state() ? "addict_diazepam_strong_asleep" : "addict_diazepam_strong_awake" );
+        const std::string msg_2 = ( u.in_sleep_state() ? "addict_diazepam_strong_asleep" :
+                                    "addict_diazepam_strong_awake" );
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg_2 ).value_or( translation() ).translated() );
         u.add_morale( morale_type, -35, -4 * in );
         u.add_effect( effect_shakes, 5_minutes );
         ret = true;
         if( u.in_sleep_state() ) {
-                last_dia_dream = calendar::turn;
+            last_dia_dream = calendar::turn;
         }
     } else if( !u.has_effect( effect_hallu ) && rng( 10, 1600 ) < in ) {
         u.add_effect( effect_hallu, 6_hours );
@@ -187,7 +189,7 @@ static bool cocaine_add( Character &u, int in, int stim )
         u.add_morale( morale_type, -20, -4 * in );
         ret = true;
         if( u.in_sleep_state() ) {
-                last_coke_dream = calendar::turn;
+            last_coke_dream = calendar::turn;
         }
     };
 

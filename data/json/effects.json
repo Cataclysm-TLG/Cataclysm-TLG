@@ -2238,7 +2238,6 @@
   {
     "type": "effect_type",
     "id": "nsaid_analgesic",
-    "max_duration": "6 h",
     "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 1 ], "pkill_max_val": [ 15 ] },
     "rating": "good",
     "pkill_addict_reduces": true,
@@ -2247,7 +2246,6 @@
   {
     "type": "effect_type",
     "id": "acetaminophen_analgesic",
-    "max_duration": "330 m",
     "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 1 ], "pkill_max_val": [ 15 ] },
     "rating": "good",
     "pkill_addict_reduces": true,
@@ -2256,7 +2254,6 @@
   {
     "type": "effect_type",
     "id": "pkill1_generic",
-    "max_duration": "6 h",
     "base_mods": { "pkill_tick": [ 42 ], "pkill_min": [ 1 ], "pkill_max_val": [ 15 ] },
     "rating": "good",
     "pkill_addict_reduces": true,
@@ -3457,7 +3454,6 @@
     "apply_message": "You feel lightheaded.",
     "name": [ "Stoned", "Baked", "Blazed", "Zooted" ],
     "max_intensity": 4,
-    "max_duration": "10 hours",
     "desc": [ "You are under the effects of cannabis." ],
     "miss_messages": [ [ "You're too stoned to keep up.", 1 ] ],
     "base_mods": {
@@ -3516,16 +3512,15 @@
     "id": "drunk",
     "name": [ "Buzzed", "Tipsy", "Drunk", "Wasted", "Dead Drunk" ],
     "desc": [
-      "You drank some alcohol.  You feel warm inside.",
-      "You drank alcohol.  Party on!",
-      "You drank lots of alcohol.  Now you're feeling it.",
-      "You drank too much alcohol.  It's the end of the world, what do you care?",
-      "You drank so much that you're probably not going to remember this."
+      "You had some alcohol.  You feel warm inside.",
+      "You had some alcohol.  Party on!",
+      "You had lots of alcohol.  Now you're feeling it.",
+      "You had too much alcohol.  It's the end of the world, what do you care?",
+      "You had so much alcohol that you're probably not going to remember this."
     ],
     "max_intensity": 5,
     "apply_message": "You feel lightheaded.",
     "blood_analysis_description": "Alcohol",
-    "int_dur_factor": "100 m",
     "miss_messages": [ [ "You feel woozy.", 1 ] ],
     "base_mods": {
       "vomit_chance": [ -43 ],
@@ -3548,12 +3543,12 @@
     },
     "limb_score_mods": [
       { "limb_score": "manip", "modifier": 0.9, "scaling": -0.1 },
-      { "limb_score": "block", "modifier": 1.0, "scaling": -0.1 },
+      { "limb_score": "block", "modifier": 1.0, "scaling": -0.05 },
       { "limb_score": "vision", "modifier": 1.0, "scaling": -0.05 },
       { "limb_score": "reaction", "modifier": 0.9, "scaling": -0.2 },
-      { "limb_score": "move_speed", "modifier": 1.0, "scaling": -0.05 },
+      { "limb_score": "move_speed", "modifier": 1.0, "scaling": -0.02 },
       { "limb_score": "balance", "modifier": 0.9, "scaling": -0.2 },
-      { "limb_score": "footing", "modifier": 0.8, "scaling": -0.2 },
+      { "limb_score": "footing", "modifier": 1.0, "scaling": -0.15 },
       { "limb_score": "swim", "modifier": 1.0, "scaling": -0.2 }
     ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
