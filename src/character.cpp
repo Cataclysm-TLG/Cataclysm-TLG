@@ -2824,10 +2824,6 @@ void Character::process_turn()
                 remove_effect( effid );
             }
             grab_1.clear();
-        } else {
-            // TODO: Move stamina cost to creature escape attempts, incorporate relative size etc.
-            set_activity_level( EXPLOSIVE_EXERCISE );
-            burn_energy_arms( -200 );
         }
     }
     effect_on_conditions::process_effect_on_conditions( *this );

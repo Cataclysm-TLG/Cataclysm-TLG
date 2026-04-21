@@ -261,12 +261,6 @@ float Character::get_limb_score( const limb_score_id &score, const body_part_typ
                 if( local.has_flag( flag_EFFECT_LIMB_SCORE_MOD_LOCAL ) ) {
                     local_mul = local.get_limb_score_mod( score, resists_effect( local ) );
                     mod *= local_mul;
-                    if( local_mul != 1.0f ) {
-                        add_msg_debug( debugmode::DF_CHARACTER,
-                                       "Local limb score modifier %s for limb score %s on BP %s found, effect multiplier %.1f, score contribution after modifier %.1f",
-                                       local.disp_name(),
-                                       score.c_str(), id.first.c_str(), local_mul, mod );
-                    }
                 }
             }
         }
