@@ -9,8 +9,6 @@
 
 #include "sounds.h"
 
-struct Mix_Chunk;
-
 namespace sound_backend
 {
 
@@ -62,18 +60,6 @@ bool slow_time_predicate_active();
 
 void stop_all_sfx( int fade_out_ms );
 void fade_group( sfx::group g, int ms );
-
-// Raw SDL2 playback seam. Takes a Mix_Chunk directly since the SFX
-// cache still hands out Mix_Chunk pointers to callers. Returns true
-// on FAILURE. volume is the fully-resolved 0-128 value (see
-// play_opts::volume). pitch: 1.0 = unity; backend produces a pitched
-// copy internally and frees it when the play finishes.
-// owns_audio_src: if true, the backend frees audio_src when the play
-// finishes.
-bool play_effect( Mix_Chunk *audio_src, sfx::channel slot, int loops,
-                  int volume, int fade_in_ms,
-                  int angle_deg, bool positional,
-                  float pitch, bool owns_audio_src );
 
 void poll();
 

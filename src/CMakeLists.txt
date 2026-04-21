@@ -145,17 +145,7 @@ if (TILES)
         endif ()
     endif ()
     if (SOUND)
-        if (USE_SDL3)
-            if (NOT DYNAMIC_LINKING AND TARGET SDL3_mixer::SDL3_mixer-static)
-                target_link_libraries(cataclysm-tiles-common PUBLIC
-                    SDL3_mixer::SDL3_mixer-static
-                )
-            else()
-                target_link_libraries(cataclysm-tiles-common PUBLIC
-                    SDL3_mixer::SDL3_mixer
-                )
-            endif()
-        else ()
+        if (NOT USE_SDL3)
             if (NOT DYNAMIC_LINKING)
                 target_link_libraries(cataclysm-tiles-common PUBLIC
                     SDL2_mixer::SDL2_mixer-static

@@ -1,11 +1,5 @@
 #if defined(SDL_SOUND)
 
-// SDL3_mixer is a complete API rewrite (channel-based -> track-based).
-// Sound support for SDL3 will be added in a separate PR.
-#if defined(USE_SDL3)
-#error "SDL3_mixer support is not yet implemented. Build with SOUND=0 for SDL3 builds."
-#endif
-
 #include "sdlsound.h"
 
 #include <atomic>
@@ -18,12 +12,6 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
-#if defined(_MSC_VER) && defined(USE_VCPKG)
-#    include <SDL2/SDL_mixer.h>
-#else
-#    include <SDL_mixer.h>
-#endif
 
 #include "cached_options.h"
 #include "debug.h"
@@ -62,12 +50,11 @@ struct sfx_args {
 struct sound_effect_resource {
     std::string path;
     struct deleter {
-        // Operator overloaded to leverage deletion API.
-        void operator()( Mix_Chunk *const c ) const {
-            Mix_FreeChunk( c );
+        void operator()( sound_backend::sfx_audio *const a ) const {
+            sound_backend::free_sfx( a );
         }
     };
-    std::unique_ptr<Mix_Chunk, deleter> chunk;
+    std::unique_ptr<sound_backend::sfx_audio, deleter> chunk;
 };
 
 static int add_sfx_path( const std::string &path );
@@ -507,41 +494,15 @@ void update_music_volume()
     }
 }
 
-// Allocate new Mix_Chunk as a null-chunk. Results in a valid, but empty chunk
-// that is created when loading of a sound effect resource fails. Does not own
-// memory. Mix_FreeChunk will free the SDL_malloc'd Mix_Chunk pointer.
-static Mix_Chunk *make_null_chunk()
-{
-    static Mix_Chunk null_chunk = { 0, nullptr, 0, 0 };
-    // SDL_malloc to match up with Mix_FreeChunk's SDL_free call
-    // to free the Mix_Chunk object memory
-    Mix_Chunk *nchunk = static_cast<Mix_Chunk *>( SDL_malloc( sizeof( Mix_Chunk ) ) );
-
-    // Assign as copy of null_chunk
-    ( *nchunk ) = null_chunk;
-    return nchunk;
-}
-
-static Mix_Chunk *load_chunk( const std::string &path )
-{
-    Mix_Chunk *result = Mix_LoadWAV( path.c_str() );
-    if( result == nullptr ) {
-        // Failing to load a sound file is not a fatal error worthy of a backtrace
-        dbg( D_WARNING ) << "Failed to load sfx audio file " << path << ": " << Mix_GetError();
-        result = make_null_chunk();
-    }
-    return result;
-}
-
-// Check to see if the resource has already been loaded
-// - Loaded: Return stored pointer
-// - Not Loaded: Load chunk from stored resource path
-static Mix_Chunk *get_sfx_resource( int resource_id )
+// Resolve the cached SFX handle for a resource id, loading on first use.
+// Backend::load_sfx returns a silent-fallback handle on failure, so the
+// return is always non-null once the slot is initialized.
+static sound_backend::sfx_audio *get_sfx_resource( int resource_id )
 {
     sound_effect_resource &resource = sfx_resources.resource[ resource_id ];
     if( !resource.chunk ) {
         cata_path path = current_soundpack_path / resource.path;
-        resource.chunk.reset( load_chunk( path.generic_u8string() ) );
+        resource.chunk.reset( sound_backend::load_sfx( path.generic_u8string() ) );
     }
     return resource.chunk.get();
 }
@@ -727,16 +688,12 @@ void sfx::play_variant_sound( const std::string &id, const std::string &variant,
     }
     const sound_effect &selected_sound_effect = *eff;
 
-    Mix_Chunk *effect_to_play = get_sfx_resource( selected_sound_effect.resource_id );
+    sound_backend::sfx_audio *effect_to_play = get_sfx_resource( selected_sound_effect.resource_id );
 
-    const int final_vol = selected_sound_effect.volume *
-                          get_option<int>( "SOUND_EFFECT_VOLUME" ) * volume / ( 100 * 100 );
-    const bool error = sound_backend::play_effect( effect_to_play, channel::any, 0,
-                       final_vol, 0, 0, false, 1.0f, false );
-    if( error ) {
-        dbg( D_ERROR ) << "Failed to play sound effect: " << Mix_GetError() << " id:" << id
-                       << " variant:" << variant << " season:" << season;
-    }
+    sound_backend::play_opts opts;
+    opts.volume = selected_sound_effect.volume *
+                  get_option<int>( "SOUND_EFFECT_VOLUME" ) * volume / ( 100 * 100 );
+    sound_backend::play_oneshot( effect_to_play, opts );
 }
 
 void sfx::play_variant_sound( const std::string &id, const std::string &variant,
@@ -759,20 +716,16 @@ void sfx::play_variant_sound( const std::string &id, const std::string &variant,
     }
     const sound_effect &selected_sound_effect = *eff;
 
-    Mix_Chunk *effect_to_play = get_sfx_resource( selected_sound_effect.resource_id );
+    sound_backend::sfx_audio *effect_to_play = get_sfx_resource( selected_sound_effect.resource_id );
     const bool is_pitched = ( pitch_min > 0 ) && ( pitch_max > 0 );
-    const float pitch_mod = is_pitched
-                            ? static_cast<float>( rng_float( pitch_min, pitch_max ) )
-                            : 1.0f;
 
-    const int final_vol = selected_sound_effect.volume *
-                          get_option<int>( "SOUND_EFFECT_VOLUME" ) * volume / ( 100 * 100 );
-    const bool failed = sound_backend::play_effect( effect_to_play, channel::any, 0,
-                        final_vol, 0, static_cast<int>( to_degrees( angle ) ), true, pitch_mod, false );
-    if( failed ) {
-        dbg( D_ERROR ) << "Failed to play sound effect: " << Mix_GetError() << " id:" << id
-                       << " variant:" << variant << " season:" << season;
-    }
+    sound_backend::play_opts opts;
+    opts.volume = selected_sound_effect.volume *
+                  get_option<int>( "SOUND_EFFECT_VOLUME" ) * volume / ( 100 * 100 );
+    opts.angle_deg = static_cast<int>( to_degrees( angle ) );
+    opts.positional = true;
+    opts.pitch = is_pitched ? static_cast<float>( rng_float( pitch_min, pitch_max ) ) : 1.0f;
+    sound_backend::play_oneshot( effect_to_play, opts );
 }
 
 void sfx::play_ambient_variant_sound( const std::string &id, const std::string &variant,
@@ -795,9 +748,8 @@ void sfx::play_ambient_variant_sound( const std::string &id, const std::string &
     }
     const sound_effect &selected_sound_effect = *eff;
 
-    Mix_Chunk *effect_to_play = get_sfx_resource( selected_sound_effect.resource_id );
+    sound_backend::sfx_audio *effect_to_play = get_sfx_resource( selected_sound_effect.resource_id );
     const bool is_pitched = pitch > 0;
-    const float pitch_mod = is_pitched ? static_cast<float>( pitch ) : 1.0f;
 
     // Ambient sounds use a two-stage volume scale: the AMBIENT_SOUND_VOLUME
     // pre-multiply followed by the standard effect-level multiply.
@@ -805,15 +757,14 @@ void sfx::play_ambient_variant_sound( const std::string &id, const std::string &
     //   effect.volume^2 * AMBIENT_SOUND_VOLUME * SOUND_EFFECT_VOLUME * volume / 1e8
     volume = selected_sound_effect.volume * get_option<int>( "AMBIENT_SOUND_VOLUME" ) * volume /
              ( 100 * 100 );
-    const int final_vol = selected_sound_effect.volume *
-                          get_option<int>( "SOUND_EFFECT_VOLUME" ) * volume / ( 100 * 100 );
-    const bool failed = sound_backend::play_effect( effect_to_play, channel, loops,
-                        final_vol, fade_in_duration, 0, false, pitch_mod, false );
 
-    if( failed ) {
-        dbg( D_ERROR ) << "Failed to play sound effect: " << Mix_GetError() << " id:" << id
-                       << " variant:" << variant << " season:" << season;
-    }
+    sound_backend::play_opts opts;
+    opts.loops = loops;
+    opts.fade_in_ms = fade_in_duration;
+    opts.volume = selected_sound_effect.volume *
+                  get_option<int>( "SOUND_EFFECT_VOLUME" ) * volume / ( 100 * 100 );
+    opts.pitch = is_pitched ? static_cast<float>( pitch ) : 1.0f;
+    sound_backend::play_reserved( effect_to_play, channel, opts );
 }
 
 void load_soundset()
@@ -875,4 +826,14 @@ void load_soundset()
     }
 }
 
-#endif
+// capitalized to mirror cata_tiles::InitSDL()
+void initSDLAudioOnly()
+{
+    const int ret = SDL_Init( SDL_INIT_AUDIO );
+    throwErrorIf( ret != 0, "SDL_Init failed" );
+    if( atexit( SDL_Quit ) ) {
+        debugmsg( "atexit failed to register SDL_Quit" );
+    }
+}
+
+#endif // SDL_SOUND

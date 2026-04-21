@@ -885,7 +885,7 @@ else
 endif # TILES
 
 ifeq ($(SOUND), 1)
- ifeq ($(SDL3), 1)
+  ifeq ($(SDL3), 1)
     CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-mixer))
     LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-mixer)
     ifneq ($(NATIVE),osx)

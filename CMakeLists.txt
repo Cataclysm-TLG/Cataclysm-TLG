@@ -382,14 +382,6 @@ if (SOUND AND USE_SDL3)
 endif ()
 
 if (SOUND AND NOT USE_SDL3)
-    # You need TILES to be able to use SOUND
-    if (NOT TILES)
-        message(FATAL_ERROR
-                "You must enable graphical support with -DTILES=1 \
-                 to be able to enable sound support. \
-                 See doc/COMPILING/COMPILING-CMAKE.md for details and more info.")
-    endif ()
-
     # Sound requires SDL_mixer library
     message(STATUS "Searching for SDL2_mixer library --")
     find_package(SDL2_mixer)
