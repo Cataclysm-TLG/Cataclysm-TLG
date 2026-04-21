@@ -2519,6 +2519,16 @@ bool monster::move_effects( bool, tripoint_bub_ms dest_loc )
             add_msg_debug( debugmode::DF_MONSTER,
                            "%1s attempting to break grab %2s, success %3s in intensity %4s",
                            get_name(), grab.get_id().c_str(), monster, grab_str );
+            if( grabber && !grabber->is_monster() ) {
+                int maintain_cost =
+                    std::clamp( std::max( 1, 100 - grab_str ) * ( std::max( 1,
+                                enum_size() - grabber->enum_size() ) + static_cast<int>( std::max( get_melee(), get_dodge() ) ) ),
+                                100,
+                                400
+                              );
+                grabber->as_character()->set_activity_level( EXPLOSIVE_EXERCISE );
+                grabber->as_character()->burn_energy_arms( -maintain_cost );
+            }
             if( !x_in_y( monster, grab_str ) ) {
                 return false;
             } else {
