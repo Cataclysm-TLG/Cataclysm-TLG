@@ -1,4 +1,4 @@
-#if defined(SDL_SOUND)
+#if defined(SDL_SOUND) && !defined(USE_SDL3)
 
 #include "sound_backend.h"
 
@@ -179,6 +179,8 @@ Mix_Chunk *do_pitch_shift( const Mix_Chunk *s, float pitch )
 }
 } // namespace
 
+namespace
+{
 bool play_effect( Mix_Chunk *audio_src, sfx::channel slot, int loops,
                   int volume, int fade_in_ms,
                   int angle_deg, bool positional,
@@ -238,6 +240,7 @@ bool play_effect( Mix_Chunk *audio_src, sfx::channel slot, int loops,
 
     return failed;
 }
+} // namespace
 
 struct sfx_audio {
     Mix_Chunk *chunk;
@@ -487,4 +490,4 @@ bool is_music_playing()
 
 } // namespace sound_backend
 
-#endif // SDL_SOUND
+#endif // SDL_SOUND && !USE_SDL3
