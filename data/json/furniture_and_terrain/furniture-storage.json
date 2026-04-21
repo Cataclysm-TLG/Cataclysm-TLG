@@ -491,7 +491,8 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
-        { "item": "scrap", "count": [ 4, 10 ] },
+        { "item": "scrap", "count": [ 2, 8 ] },
+		{ "item": "steel_fragment", "count": [ 2, 4 ] },
         { "item": "sheet_metal_small", "count": [ 6, 10 ] },
         { "item": "pipe", "count": [ 0, 1 ] }
       ]
