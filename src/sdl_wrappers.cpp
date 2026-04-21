@@ -403,7 +403,7 @@ void RenderCopyEx( const SDL_Renderer_Ptr &renderer, SDL_Texture *const texture,
     const SDL_FRect *fdstp = dstrect ? &( fdst = to_frect( *dstrect ) ) : nullptr;
     const SDL_FPoint *fcenterp = center ? &( fcenter = to_fpoint( *center ) ) : nullptr;
     printErrorIf( !SDL_RenderTextureRotated( renderer.get(), texture, fsrcp, fdstp, angle,
-                                             fcenterp, flip ),
+                  fcenterp, flip ),
                   "SDL_RenderTextureRotated failed" );
 #else
     printErrorIf( SDL_RenderCopyEx( renderer.get(), texture, srcrect, dstrect, angle, center,
