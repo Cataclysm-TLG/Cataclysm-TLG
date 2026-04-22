@@ -4282,27 +4282,30 @@ void unload_activity_actor::unload( Character &who, item_location &target )
                  pocket_type::MAGAZINE
              } ) {
 
+            std::vector<item *> to_remove;
+
             for( item *contained : it.all_items_top( ptype, true ) ) {
                 int old_charges = contained->charges;
                 const bool consumed = who.add_or_drop_with_msg( *contained, true, &it, contained );
+
                 if( consumed || contained->charges != old_charges ) {
                     changed = true;
                     handler.unseal_pocket_containing( item_location( target, contained ) );
                 }
+
                 if( consumed ) {
-                    it.remove_item( *contained );
+                    to_remove.push_back( contained );
                 }
+            }
+
+            for( item *contained : to_remove ) {
+                it.remove_item( *contained );
             }
 
             if( changed ) {
                 it.on_contents_changed();
                 who.invalidate_weight_carried_cache();
                 handler.handle_by( who );
-                // Warning: the above call to `contents_change_handler::handle_by` will
-                // call `Character::handle_contents_changed`, which might invalidate items
-                // and item_locations. See description for `::handle_contents_changed`
-                // in character.h .
-                // Therefore, it is important that we don't use `target` or `it` after here.
                 break;
             }
         }
@@ -4321,13 +4324,14 @@ void unload_activity_actor::unload( Character &who, item_location &target )
             actually_unloaded = true;
         }
     }
-    // remove the ammo leads in the belt
+
+    // Remove the ammo leads in the belt.
     for( item *remove : remove_contained ) {
         it.remove_item( *remove );
         actually_unloaded = true;
     }
 
-    // remove the belt linkage
+    // Remove the linkage.
     if( it.is_ammo_belt() ) {
         if( it.type->magazine->linkage ) {
             item link( *it.type->magazine->linkage, calendar::turn, qty );
@@ -4342,7 +4346,7 @@ void unload_activity_actor::unload( Character &who, item_location &target )
         who.add_msg_if_player( _( "You unload your %s." ), it.tname() );
     }
 
-    if( it.has_flag( flag_MAG_DESTROY ) && it.ammo_remaining( ) == 0 ) {
+    if( it.has_flag( flag_MAG_DESTROY ) && it.ammo_remaining() == 0 ) {
         target.remove_item();
     }
 
