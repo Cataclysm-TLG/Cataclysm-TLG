@@ -850,7 +850,7 @@
       "offer": "I've got an idea to solve my problem.  I'll pay you if you can find seven oxycodone pills for me; the ones they used to prescribe after a surgery.",
       "accepted": "Thank you, <granny_name_g>.  I'm glad the youngsters still help the elderly.",
       "rejected": "I can understand your hesitation <granny_name_g>.  I wouldn't worry about it too much.",
-      "advice": "An old doctors office should have some.  They have those fancy autodocs upstairs.",
+      "advice": "An old doctor's office should have some.  Some of them have those fancy autodocs upstairs.",
       "inquire": "Have you found my painkillers?",
       "success": "I want you to have these few things of mine, I won't be needing them anymore.  I think I'll take a walk in the woods, get some fresh air for these old bones…",
       "success_lie": "Deceitful rogue, you…",

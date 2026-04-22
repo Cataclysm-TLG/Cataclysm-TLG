@@ -1013,7 +1013,7 @@
   {
     "id": "vit_ibuprofen",
     "type": "vitamin",
-    "vit_type": "drug",
+    "vit_type": "counter",
     "name": { "str": "Obsolete NSAID vitamin" },
     "min": 0,
     "max": 1,
