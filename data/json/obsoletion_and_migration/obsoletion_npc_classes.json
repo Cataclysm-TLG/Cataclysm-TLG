@@ -72,8 +72,15 @@
   {
     "type": "npc_class",
     "id": "NC_ISHERWOOD_LUKE",
-    "name": { "str": "LUKE Isherwood" },
+    "name": { "str": "Luke Isherwood" },
     "job_description": "Obsolete class from removed Isherwood faction content.",
+    "common": false
+  },
+  {
+    "type": "npc_class",
+    "id": "NC_ANCILLA_DOCTOR",
+    "name": { "str": "Doc.  Stevens" },
+    "job_description": "Obsolete class from removed Hub 01 Ancilla Bar NPC.",
     "common": false
   }
 ]

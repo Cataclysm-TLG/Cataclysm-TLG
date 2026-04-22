@@ -108,5 +108,14 @@
     "mission": 7,
     "chat": "TALK_DONE",
     "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "ancilla_doctor",
+    "class": "NC_ANCILLA_DOCTOR",
+    "attitude": 0,
+    "mission": 3,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
   }
 ]
