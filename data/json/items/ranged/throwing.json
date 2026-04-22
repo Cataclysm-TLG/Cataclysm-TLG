@@ -121,6 +121,7 @@
     "longest_side": "43 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "uneven" },
     "weapon_category": [ "HAND_AXES" ],
+    "flags": [ "SHEATH_AXE" ],
     "thrown_damage": [ { "damage_type": "bash", "amount": 6 }, { "damage_type": "cut", "amount": 16 } ],
     "melee_damage": { "bash": 10, "cut": 17 }
   },
