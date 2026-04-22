@@ -3461,7 +3461,7 @@
       "pkill_max_val": [ 7 ],
       "pkill_min": [ 1 ],
       "pkill_tick": [ 45 ],
-      "fatigue_max": [ 10 ],
+      "fatigue_max_val": [ 8 ],
       "fatigue_tick": [ 300 ],
       "fatigue_min": [ 1 ]
     },
@@ -3469,7 +3469,7 @@
       "per_mod": [ -0.67 ],
       "dex_mod": [ -0.67 ],
       "int_mod": [ -1.67 ],
-      "fatigue_max": [ 10 ],
+      "fatigue_max_val": [ 2 ],
       "pkill_max_val": [ 7 ],
       "speed_mod": [ -5 ]
     },
@@ -4170,11 +4170,11 @@
       "blood_pressure_tick": [ 250 ],
       "blood_pressure_min": [ -2 ],
       "blood_pressure_min_val": [ -200 ],
-      "fatigue_min": [ 4 ],
+      "fatigue_min": [ 1 ],
       "fatigue_chance": [ 500 ],
-      "fatigue_max_val": [ 200 ]
+      "fatigue_max_val": [ 10 ]
     },
-    "scaling_mods": { "blood_pressure_min": [ -1 ], "blood_pressure_min_val": [ -100 ], "fatigue_max_val": [ 50 ], "fatigue_min": [ 2 ] },
+    "scaling_mods": { "blood_pressure_min": [ -1 ], "blood_pressure_min_val": [ -100 ], "fatigue_max_val": [ 5 ], "fatigue_min": [ 2 ] },
     "rating": "neutral",
     "blood_analysis_description": "Beta Blocker"
   },
