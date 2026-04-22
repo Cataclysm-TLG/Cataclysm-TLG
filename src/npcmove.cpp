@@ -1043,18 +1043,17 @@ void npc::assess_danger()
     // Warn about sufficiently risky nearby hostiles
     const auto handle_hostile = [&]( const Character & foe, float foe_threat,
     const std::string & bogey, const std::string & warning ) {
-        int dist = rl_dist( pos_bub(), foe.pos_bub() );
-        // ignore targets behind glass even if we can see them
+        int dist = trig_dist( pos_bub(), foe.pos_bub() );
+        // Ignore targets behind glass even if we can see them.
         if( !clear_shot_reach( pos_bub(), foe.pos_bub(), false ) ) {
             // still warn about enemies behind impassable glass walls, but not as often.
             // since NPC threats have a higher chance of ignoring soft obstacles, we'll ignore them here.
             if( foe_threat > 2 * ( 8.0f + personality.bravery + rng( 0, 5 ) ) ) {
                 warn_about( "monster", 10_minutes, bogey, dist, foe.pos_bub() );
             }
-            return 0.0f;
-        } else {
             add_msg_debug( debugmode::DF_NPC_COMBATAI, "%s ignored %s because there's an obstacle in between.",
                            name, bogey );
+            return 0.0f;
         }
         if( foe_threat > ( 8.0f + personality.bravery + rng( 0, 5 ) ) ) {
             warn_about( "monster", 10_minutes, bogey, dist, foe.pos_bub() );
@@ -1129,13 +1128,13 @@ void npc::assess_danger()
         // whoever the NPC perceives as their closest leader.
         float player_diff = std::max( evaluate_character( player_character, npc_ranged, is_enemy() ),
                                       NPC_DANGER_VERY_LOW );
-        int dist = rl_dist( pos_bub(), player_character.pos_bub() );
+        int dist = trig_dist( pos_bub(), player_character.pos_bub() );
         if( is_enemy() ) {
             add_msg_debug( debugmode::DF_NPC_COMBATAI,
                            "<color_light_gray>%s identified player as an</color> <color_red>enemy</color> <color_light_gray>of threat level %1.2f</color>",
                            name, player_diff );
             mem_combat.assess_enemy += handle_hostile( player_character, player_diff,
-                                       translate_marker( "maniac" ),
+                                       translate_marker( "enemy" ),
                                        "kill_player" );
         } else if( is_friendly( player_character ) ) {
             add_msg_debug( debugmode::DF_NPC_COMBATAI,
@@ -4430,24 +4429,47 @@ bool npc::do_player_activity()
 double npc::evaluate_weapon( item &maybe_weapon, bool can_use_gun, bool use_silent ) const
 {
     bool allowed = ( !maybe_weapon.is_gun() && !is_worn( maybe_weapon ) &&
-                     !maybe_weapon.has_flag( flag_INTEGRATED ) ) || ( can_use_gun && maybe_weapon.is_gun() &&
-                             ( !use_silent || maybe_weapon.is_silent() ) );
-    // According to unmodified evaluation score, NPCs almost always prioritize wielding guns if they have one.
-    // This is relatively reasonable, as players can issue commands to NPCs when we do not want them to use ranged weapons.
-    // Conversely, we cannot directly issue commands when we want NPCs to prioritize ranged weapons.
-    // Note that the scoring method here is different from the 'weapon_value' used elsewhere.
+                     !maybe_weapon.has_flag( flag_INTEGRATED ) ) ||
+                   ( can_use_gun && maybe_weapon.is_gun() &&
+                     ( !use_silent || maybe_weapon.is_silent() ) );
     map &here = get_map();
-    double val_gun = allowed ? gun_value( maybe_weapon, maybe_weapon.shots_remaining( here,
-                                          this ) ) : 0;
+    int shots = maybe_weapon.shots_remaining( here, this );
+    // When evaluating our gun, treat it as loaded if it looks like we can reload it before trouble catches up to us.
+    if( maybe_weapon.is_gun() && shots == 0 && maybe_weapon.ammo_remaining() > 0 ) {
+    int dist = INT_MAX;
+    for( const weak_ptr_fast<Creature> &wp : ai_cache.hostile_guys ) {
+        if( wp.expired() ) {
+            continue;
+        }
+        auto sp = wp.lock();
+        if( !sp ) {
+            continue;
+        }
+        const Creature &cr = *sp;
+        dist = std::min( dist,
+                        trig_dist( pos_bub(), cr.pos_bub() ) );
+    }
+    if( dist == INT_MAX ) {
+        dist = 1;
+    }
+    int reload_moves = const_cast<npc*>( this )->estimate_reload_time( maybe_weapon );
+        // TODO: Smarter evaluation of the safety of our position.
+        // TODO: Move and reload.
+        // TODO: Evaluate whether the enemy is closing to melee or not.
+        int safety_window = ( dist - 1 ) * 150;
+        if( reload_moves <= safety_window ) {
+            shots = 1;
+        }
+    }
+    double val_gun = allowed ? gun_value( maybe_weapon, shots ) : 0;
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
                    "%s %s valued at <color_light_cyan>%1.2f as a ranged weapon to wield</color>.",
                    disp_name( true ), maybe_weapon.type->get_id().str(), val_gun );
     double val_melee = allowed ? melee_value( maybe_weapon ) : 0;
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                   "%s %s valued at <color_light_cyan>%1.2f as a melee weapon to wield</color>.", disp_name( true ),
-                   maybe_weapon.type->get_id().str(), val_melee );
-    double val = std::max( val_gun, val_melee );
-    return val;
+                   "%s %s valued at <color_light_cyan>%1.2f as a melee weapon to wield</color>.",
+                   disp_name( true ), maybe_weapon.type->get_id().str(), val_melee );
+    return std::max( val_gun, val_melee );
 }
 
 item *npc::evaluate_best_weapon() const
@@ -5766,6 +5788,24 @@ bool npc::complain()
     }
 
     return false;
+}
+
+int npc::estimate_reload_time( const item &it )
+{
+    item_location loc( *this, const_cast<item *>( &it ) );
+
+    item::reload_option reload_opt = select_ammo( loc );
+
+    if( !reload_opt ) {
+        return INT_MAX;
+    }
+
+    const item &ammo = *reload_opt.ammo;
+
+    int qty = std::max( 1, std::min( ammo.charges,
+        it.ammo_capacity( ammo.ammo_data()->ammo->type ) - it.ammo_remaining() ) );
+
+    return item_reload_cost( it, ammo, qty );
 }
 
 void npc::do_reload( const item_location &it )
