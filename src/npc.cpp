@@ -1912,7 +1912,7 @@ void npc::make_angry()
         my_fac->trusts_u = std::min( -15, my_fac->trusts_u - 5 );
     }
     if( op_of_u.fear > 10 + personality.aggression + personality.bravery ) {
-        set_attitude( NPCATT_FLEE_TEMP ); // We don't want to take u on!
+        set_attitude( NPCATT_FLEE_TEMP ); // We don't want to take you on!
     } else {
         set_attitude( NPCATT_KILL ); // Yeah, we think we could take you!
     }

@@ -1198,6 +1198,8 @@ class npc : public Character
         void update_cardio_acc() override {};
 
         void aim( const Target_attributes &target_attributes );
+
+        int estimate_reload_time( const item &it );
         void do_reload( const item_location &it );
 
         // Physical movement from one tile to the next
