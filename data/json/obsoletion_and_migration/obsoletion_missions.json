@@ -343,5 +343,39 @@
     "global": true,
     "condition": { "u_has_mission": "directions_isherwood_traveler" },
     "effect": [ { "remove_active_mission": "directions_isherwood_traveler" } ]
+  },
+  {
+    "id": "directions_hub01",
+    "type": "mission_definition",
+    "name": { "str": "Check out Hub-01" },
+    "description": "Obsolete mission from removed Refugee Center teamster.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_directions_hub01_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "directions_hub01" },
+    "effect": [ { "remove_active_mission": "directions_hub01" } ]
+  },
+    {
+    "id": "MISSION_INVESTIGATE_TRADER",
+    "type": "mission_definition",
+    "name": { "str": "Investigate the shady trader." },
+    "description": "Obsolete mission from removed Refugee Center teamster.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_INVESTIGATE_TRADER_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_INVESTIGATE_TRADER" },
+    "effect": [ { "remove_active_mission": "MISSION_INVESTIGATE_TRADER" } ]
   }
 ]

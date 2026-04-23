@@ -117,5 +117,23 @@
     "mission": 3,
     "chat": "TALK_DONE",
     "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "FM_caravan_merchant_godco_predatory",
+    "class": "NC_TRADER_PREDATORY",
+    "attitude": 0,
+    "mission": 3,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "FM_caravan_guard_predatory",
+    "class": "NC_BOUNTY_HUNTER",
+    "attitude": 0,
+    "mission": 3,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
   }
 ]

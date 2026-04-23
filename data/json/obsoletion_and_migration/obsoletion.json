@@ -241,6 +241,14 @@
     "type": "effect_on_condition"
   },
   {
+    "id": "godco_change_trader",
+    "type": "effect_on_condition"
+  },
+  {
+    "id": "godco_place_trader",
+    "type": "effect_on_condition"
+  },
+  {
     "id": "EOC_REFUGEE_CENTER_NPC_MOVEMENT",
     "type": "effect_on_condition"
   },

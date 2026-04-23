@@ -171,7 +171,7 @@
   {
     "id": "TALK_FREE_MERCHANTS_MERCHANT_OutsideWorld2",
     "type": "talk_topic",
-    "dynamic_line": "Other than those people with the hard drive, none that I know of.  Scavengers share some odd things, but we can't exactly go check for ourselves.  The teamster in the back bay might have some pointers, though, if you really want to know."
+    "dynamic_line": "Other than those people with the hard drive, none that I know of.  Scavengers share some odd things, but we can't exactly go check for ourselves."
   },
   {
     "id": [ "TALK_FREE_MERCHANTS_MERCHANT_Plans" ],

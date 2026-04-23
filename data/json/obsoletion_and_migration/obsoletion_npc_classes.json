@@ -82,5 +82,12 @@
     "name": { "str": "Doc.  Stevens" },
     "job_description": "Obsolete class from removed Hub 01 Ancilla Bar NPC.",
     "common": false
+  },
+  {
+    "type": "npc_class",
+    "id": "NC_TRADER_PREDATORY",
+    "name": { "str": "Trader" },
+    "job_description": "Obsolete class from removed Hub 01 Ancilla Bar NPC.",
+    "common": false
   }
 ]
