@@ -2929,16 +2929,24 @@ double Character::melee_value( const item &weap ) const
         } else {
             add_msg_debug( debugmode::DF_MELEE, "Unarmed as melee: 0.0" );
         }
+        return std::max( 0.0, my_value );
+    } else {
+        return unarmed_value();
     }
-
-    return std::max( 0.0, my_value );
 }
 
 
 double Character::unarmed_value() const
 {
-    // TODO: Martial arts and integrated items
-    return melee_value( item() );
+    // TODO: Martial arts, worn weapons, integrated items
+    double my_value = 0.0;
+    int total = 0;
+    int dmg = 1 + get_arm_str() / 2;
+    total += dmg;
+    my_value += total;
+    my_value += get_skill_level( skill_unarmed );
+    add_msg_debug( debugmode::DF_MELEE, "Unarmed as melee: %.1f", my_value );
+    return std::max( 0.0, my_value );
 }
 
 void avatar::disarm( npc &target )

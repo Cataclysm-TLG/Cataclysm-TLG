@@ -348,7 +348,8 @@ void npc_attack_melee::use( npc &source, const tripoint_bub_ms &location ) const
 
 tripoint_range<tripoint_bub_ms> npc_attack_melee::targetable_points( const npc &source ) const
 {
-    return get_map().points_in_radius( source.pos_bub(), 8 );
+    // Must be sight_max or we won't even consider approaching enemies, even if they shoot at us.
+    return get_map().points_in_radius( source.pos_bub(), source.sight_max );
 }
 
 npc_attack_rating npc_attack_melee::evaluate( const npc &source,
@@ -360,8 +361,12 @@ npc_attack_rating npc_attack_melee::evaluate( const npc &source,
     }
     const int time_penalty = base_time_penalty( source );
     creature_tracker &creatures = get_creature_tracker();
+    map &here = get_map();
     for( const tripoint_bub_ms &targetable_point : targetable_points( source ) ) {
         if( Creature *critter = creatures.creature_at( targetable_point ) ) {
+            if( !source.sees( here, *critter ) ) {
+                continue;
+            }
             if( source.attitude_to( *critter ) != Creature::Attitude::HOSTILE ) {
                 // no point in swinging a sword at a friendly!
                 continue;
