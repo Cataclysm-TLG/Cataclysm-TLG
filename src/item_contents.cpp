@@ -1028,7 +1028,9 @@ std::set<flag_id> item_contents::magazine_flag_restrictions() const
     std::set<flag_id> ret;
     for( const item_pocket &pocket : contents ) {
         if( pocket.is_type( pocket_type::MAGAZINE_WELL ) ) {
-            ret = pocket.get_pocket_data()->get_flag_restrictions();
+            const pocket_data::FlagsSetType &src = pocket.get_pocket_data()->get_flag_restrictions();
+            ret.clear();
+            ret.insert( src.begin(), src.end() );
         }
     }
     return ret;

@@ -6597,7 +6597,7 @@ void item::update_inherited_flags()
     auto const inehrit_flags = [this]( FlagsSetType const & Flags ) {
         for( flag_id const &f : Flags ) {
             if( f->inherit() ) {
-                inherited_tags_cache.emplace( f );
+                inherited_tags_cache.insert( f );
             }
         }
     };
@@ -6646,10 +6646,10 @@ void item::update_prefix_suffix_flags()
 void item::update_prefix_suffix_flags( const flag_id &f )
 {
     if( !f->item_prefix().empty() ) {
-        prefix_tags_cache.emplace( f );
+        prefix_tags_cache.insert( f );
     }
     if( !f->item_suffix().empty() ) {
-        suffix_tags_cache.emplace( f );
+        suffix_tags_cache.insert( f );
     }
 }
 

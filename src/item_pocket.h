@@ -471,7 +471,7 @@ struct pocket_noise {
 class pocket_data
 {
     public:
-        using FlagsSetType = std::set<flag_id>;
+        using FlagsSetType = cata::flat_set<flag_id>;
 
         bool was_loaded = false;
 
