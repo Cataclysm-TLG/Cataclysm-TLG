@@ -1076,10 +1076,10 @@ void npc::assess_danger()
         }
 
         if( !is_player_ally() || is_too_close || ok_by_rules( foe, dist, scaled_distance ) ) {
-            float decay = 1.0f / (1.0f + 0.5f * (scaled_distance - 1.0f));
+            float decay = 1.0f / ( 1.0f + 0.5f * ( scaled_distance - 1.0f ) );
             float priority = foe_threat * decay;
             if( is_too_close ) {
-                priority = std::max(priority, foe_threat);
+                priority = std::max( priority, foe_threat );
             }
             cur_threat_map[direction_from( pos_bub(), foe.pos_bub() )] += priority;
             if( priority > highest_priority ) {
@@ -2215,14 +2215,14 @@ void npc::evaluate_best_attack( const Creature *target )
             }
             if( !it->type->use_methods.empty() ) {
                 compare( std::make_shared<npc_attack_activate_item>( *it ),
-                        "(as ACTIVATED) " + it->display_name() );
+                         "(as ACTIVATED) " + it->display_name() );
             }
             if( rules.has_flag( ally_rule::use_guns ) ) {
                 for( const std::pair<const gun_mode_id, gun_mode> &mode : it->gun_all_modes() ) {
                     if( !( mode.second.melee() || mode.second.flags.count( "NPC_AVOID" ) ||
-                        !can_use( *mode.second.target ) ||
-                        ( rules.has_flag( ally_rule::use_silent ) && is_player_ally() &&
-                            !mode.second->is_silent() ) ) ) {
+                           !can_use( *mode.second.target ) ||
+                           ( rules.has_flag( ally_rule::use_silent ) && is_player_ally() &&
+                             !mode.second->is_silent() ) ) ) {
                         if( it->shots_remaining( here, this ) > 0 || can_reload_current() ) {
                             compare( std::make_shared<npc_attack_gun>( *it, mode.second ), "(as FIRED) " + it->display_name() );
                         } else {
@@ -3122,19 +3122,23 @@ bool npc::enough_time_to_reload( const item &gun ) const
         const Character &foe = dynamic_cast<const Character &>( *target );
         const item_location weapon = foe.get_wielded_item();
         // TODO: Allow reloading if the player has a low accuracy gun
-        if( sees( here, foe ) && weapon && weapon->is_gun() && rltime > 200 &&
+        if( sees( here, foe ) && weapon && weapon->is_gun() && rltime > 400 &&
             weapon->gun_range( true ) > distance + turns_til_reloaded / target_speed ) {
-            // Don't take longer than 2 turns if player has a gun
+            // Don't take longer than 4 turns if player has a gun
             add_msg_debug( debugmode::DF_NPC_ITEMAI, "%s is shy about reloading with &s standing right there.",
                            name, foe.name );
             return false;
         }
     }
-
-    // TODO: Handle monsters with ranged attacks and players with CBMs
+    int allowance = 2;
+    if( target->is_monster() && ( target->has_flag( mon_flag_HIT_AND_RUN ) ||
+                                  target->has_flag( mon_flag_RANGED_ATTACKER ) ) ) {
+        allowance += 2;
+    }
+    // TODO: Make this smarter. Do we have cover? Does the player have a CBM or ranged mutation/spell/throwing item?
     add_msg_debug( debugmode::DF_NPC_ITEMAI, "%s turns to reload: %i./nTurns til reached: %i.", name,
                    static_cast<int>( turns_til_reloaded ), static_cast<int>( turns_til_reached ) );
-    return turns_til_reloaded < turns_til_reached;
+    return turns_til_reloaded < ( turns_til_reached + allowance );
 }
 
 void npc::aim( const Target_attributes &target_attributes )
@@ -4444,9 +4448,9 @@ double npc::evaluate_weapon( item &maybe_weapon, bool can_use_gun, bool use_sile
             // TODO: Smarter evaluation of the safety of our position.
             // TODO: Move and reload.
             // TODO: Evaluate whether the enemy is closing to melee or not.
-                shots = 1;
-            }
+            shots = 1;
         }
+    }
     double val_gun = allowed ? gun_value( maybe_weapon, shots ) : 0;
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
                    "%s %s valued at <color_light_cyan>%1.2f as a ranged weapon to wield</color>.",
