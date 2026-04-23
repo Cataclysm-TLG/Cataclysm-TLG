@@ -117,7 +117,7 @@
     "volume": "1250 ml",
     "price": "35 USD",
     "price_postapoc": "3 USD",
-    "material": [ "cotton", "steel" ],
+    "material": [ "cotton", "steel_chain" ],
     "symbol": "[",
     "looks_like": "balaclava",
     "color": "dark_gray",
@@ -127,23 +127,21 @@
         "coverage": 90,
         "encumbrance": 12,
         "material": [
-          { "type": "cotton", "covered_by_mat": 100, "thickness": 4 },
-          { "type": "steel", "covered_by_mat": 90, "thickness": 1.5 }
+          { "type": "steel_chain", "covered_by_mat": 70, "thickness": 1.2 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 4 }
         ]
       },
       {
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 10,
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "breathability": "GOOD"
+        "encumbrance": 25,
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ]
       },
       {
         "covers": [ "mouth" ],
         "coverage": 100,
         "encumbrance": 3,
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "breathability": "GOOD"
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ]
       }
     ],
     "flags": [ "STURDY", "PADDED" ],
