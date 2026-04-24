@@ -2519,27 +2519,28 @@ units::mass item_pocket::remaining_weight() const
 
 int item_pocket::charges_per_remaining_volume( const item &it ) const
 {
-    if( it.count_by_charges() ) {
-        units::volume non_it_volume = volume_capacity();
-        int contained_charges = 0;
-        for( const item &contained : contents ) {
-            if( contained.stacks_with( it ) ) {
-                contained_charges += contained.charges;
-            } else {
-                non_it_volume -= contained.volume();
-            }
-        }
-        return it.charges_per_volume( non_it_volume, true ) - contained_charges;
-    } else {
+    if( !it.count_by_charges() ) {
         return it.charges_per_volume( remaining_volume(), true );
     }
-    // Single pass: subtract the volume of every item that doesn't stack with
-    // `it`, and tally charges of those that do. When nothing stacks this
-    // reduces to volume_capacity() - contains_volume() == remaining_volume().
+    // Skip contents walk when no typeId match is possible.
+    bool any_same_type = false;
+    for( const item &contained : contents ) {
+        if( contained.typeId() == it.typeId() ) {
+            any_same_type = true;
+            break;
+        }
+    }
+    if( !any_same_type ) {
+        return it.charges_per_volume( remaining_volume(), true );
+    }
     units::volume non_it_volume = volume_capacity();
     int contained_charges = 0;
     for( const item &contained : contents ) {
-        if( contained.typeId() == it.typeId() && contained.stacks_with( it ) ) {
+        if( contained.typeId() != it.typeId() ) {
+            non_it_volume -= contained.volume();
+            continue;
+        }
+        if( contained.stacks_with( it ) ) {
             contained_charges += contained.charges;
         } else {
             non_it_volume -= contained.volume();
@@ -2550,27 +2551,27 @@ int item_pocket::charges_per_remaining_volume( const item &it ) const
 
 int item_pocket::charges_per_remaining_weight( const item &it ) const
 {
-    if( it.count_by_charges() ) {
-        units::mass non_it_weight = weight_capacity();
-        int contained_charges = 0;
-        for( const item &contained : contents ) {
-            if( contained.stacks_with( it ) ) {
-                contained_charges += contained.charges;
-            } else {
-                non_it_weight -= contained.weight();
-            }
-        }
-        return it.charges_per_weight( non_it_weight, true ) - contained_charges;
-    } else {
+    if( !it.count_by_charges() ) {
         return it.charges_per_weight( remaining_weight(), true );
     }
-    // Single pass: subtract the weight of every item that doesn't stack with
-    // `it`, and tally charges of those that do. When nothing stacks this
-    // reduces to weight_capacity() - contains_weight() == remaining_weight().
+    bool any_same_type = false;
+    for( const item &contained : contents ) {
+        if( contained.typeId() == it.typeId() ) {
+            any_same_type = true;
+            break;
+        }
+    }
+    if( !any_same_type ) {
+        return it.charges_per_weight( remaining_weight(), true );
+    }
     units::mass non_it_weight = weight_capacity();
     int contained_charges = 0;
     for( const item &contained : contents ) {
-        if( contained.typeId() == it.typeId() && contained.stacks_with( it ) ) {
+        if( contained.typeId() != it.typeId() ) {
+            non_it_weight -= contained.weight();
+            continue;
+        }
+        if( contained.stacks_with( it ) ) {
             contained_charges += contained.charges;
         } else {
             non_it_weight -= contained.weight();
