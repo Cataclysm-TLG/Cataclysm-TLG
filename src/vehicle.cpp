@@ -5161,7 +5161,7 @@ bool vehicle::handle_potential_theft( Character const &you, bool check_only, boo
         Character const *const elem = cr.as_character();
         return elem != nullptr && you.getID() != elem->getID() && is_owned_by( *elem ) &&
                rl_dist( elem->pos_bub( here ), you.pos_bub( here ) ) < MAX_VIEW_DISTANCE &&
-               elem->sees( here, you.pos_bub( here ) );
+               elem->sees( here, you );
     } );
     if( !has_owner() || ( witnesses.empty() && ( has_old_owner() || you.is_npc() ) ) ) {
         if( !has_owner() ||
