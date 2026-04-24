@@ -2206,6 +2206,7 @@ std::string enum_to_string<jmapgen_flags>( jmapgen_flags v )
             return "ERASE_ITEMS_BEFORE_PLACING_TERRAIN";
         case jmapgen_flags::no_underlying_rotate: return "NO_UNDERLYING_ROTATE";
         case jmapgen_flags::avoid_creatures: return "AVOID_CREATURES";
+        case jmapgen_flags::skip_on_open_air: return "SKIP_ON_OPEN_AIR";
         // *INDENT-ON*
         case jmapgen_flags::last:
             break;
@@ -3416,7 +3417,11 @@ class jmapgen_furniture : public jmapgen_piece_with_has_vehicle_collision
             if( chosen_id.id().is_null() ) {
                 return;
             }
-            if( !dat.m.furn_set( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id ) ) {
+            const tripoint_bub_ms p( x.get(), y.get(), dat.zlevel() + z.get() );
+            if( dat.has_flag( jmapgen_flags::skip_on_open_air ) && dat.m.is_open_air( p ) ) {
+                return;
+            }
+            if( !dat.m.furn_set( p, chosen_id ) ) {
                 debugmsg( "Problem setting furniture in %s", context );
             }
         }
