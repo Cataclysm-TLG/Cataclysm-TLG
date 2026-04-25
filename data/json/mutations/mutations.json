@@ -3004,6 +3004,7 @@
     "cancels": [ "SHELL" ],
     "category": [ "CRUSTACEAN" ],
     "leads_to": [ "CRUSTACEAN_CLAW" ],
+    "threshreq": [ "THRESH_CRUSTACEAN" ],
     "flags": [ "TOUGH_FEET" ],
     "enchantments": [
       {
@@ -3033,6 +3034,7 @@
     "points": 8,
     "visibility": 10,
     "ugliness": 8,
+    "valid": false,
     "description": "You're covered in a great chitin carapace which reduces your Dexterity by 1, however it has recently molted and will offer poor protection until it has time to harden.  Greatly reduces wet effects.",
     "types": [ "BODY_ARMOR" ],
     "prereqs": [ "CHITIN2_MOLTED" ],

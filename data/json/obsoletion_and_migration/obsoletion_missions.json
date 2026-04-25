@@ -361,7 +361,7 @@
     "condition": { "u_has_mission": "directions_hub01" },
     "effect": [ { "remove_active_mission": "directions_hub01" } ]
   },
-    {
+  {
     "id": "MISSION_INVESTIGATE_TRADER",
     "type": "mission_definition",
     "name": { "str": "Investigate the shady trader." },
