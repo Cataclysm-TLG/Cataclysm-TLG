@@ -467,8 +467,8 @@ Valid arguments:
 "hurt_chance_bot"
 "hurt_tick"         - Defaults to every tick
 
-"sleep_amount"      - Amount of turns spent sleeping.
-"sleep_min"         - Minimal amount of sleep in turns, certain effect can give
+"sleep_amount"      - Amount of seconds spent sleeping.
+"sleep_min"         - Minimal amount of sleep in seconds, certain effect can give
 "sleep_max"         - if 0 or missing value will be exactly "sleep_min"
 "sleep_chance"      - Chance to fall asleep
 "sleep_chance_bot"
@@ -693,8 +693,8 @@ Intensity 4
     0 - 3 * 1 =             -3 PER
     0 - 3 * 1 =             -3 DEX
     0 - 3 * 1.43 =          -4 INT
-    -43 + 3 * 21 = 20       "vomit_chance_bot" doesn't exist, so a 1 in 20 chance of vomiting. "vomit_tick" doesn't exist, so it rolls every turn.
-    -1003 + 3 * 501 = 500   "sleep_chance_bot" doesn't exist, so a 1 in 500 chance of passing out for rng(2500, 3500) turns. "sleep_tick" doesn't exist, so it rolls every turn.
+    -43 + 3 * 21 = 20       "vomit_chance_bot" doesn't exist, so a 1 in 20 chance of vomiting. "vomit_tick" doesn't exist, so it rolls every second.
+    -1003 + 3 * 501 = 500   "sleep_chance_bot" doesn't exist, so a 1 in 500 chance of passing out for rng(2500, 3500) seconds. "sleep_tick" doesn't exist, so it rolls every turn.
 ```
 
 ### Blood analysis description

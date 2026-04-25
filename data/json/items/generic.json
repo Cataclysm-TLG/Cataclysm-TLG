@@ -2230,21 +2230,6 @@
   },
   {
     "type": "ITEM",
-    "id": "poppy_bud",
-    "name": { "str": "poppy bud" },
-    "category": "chems",
-    "description": "A poppy bud.  Contains some substances commonly produced by a mutated poppy flower.",
-    "weight": "30 g",
-    "to_hit": -3,
-    "color": "light_red",
-    "symbol": ",",
-    "material": [ "vegetable" ],
-    "volume": "5 ml",
-    "price": "2 USD",
-    "price_postapoc": "50 cent"
-  },
-  {
-    "type": "ITEM",
     "id": "sunflower",
     "name": { "str": "sunflower" },
     "description": "The top of a sunflower, with yellow petals and some seeds that have yet to be eaten by animals.",

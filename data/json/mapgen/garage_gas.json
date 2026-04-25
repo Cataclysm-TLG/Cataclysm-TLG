@@ -35,7 +35,7 @@
         { "point": "terrain", "id": "t_shrub", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 2 ] },
         { "point": "furniture", "id": "f_dandelion", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 1 ] },
         { "point": "furniture", "id": "f_bluebell", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 1 ] },
-        { "point": "furniture", "id": "f_mutpoppy", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 1 ] }
+        { "point": "furniture", "id": "f_poppy", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 1 ] }
       ],
       "palettes": [ "parametrized_walls_palette" ],
       "terrain": {

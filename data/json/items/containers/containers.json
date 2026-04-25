@@ -656,6 +656,35 @@
     "flags": [ "COLLAPSE_CONTENTS" ]
   },
   {
+    "id": "vial_glass",
+    "type": "ITEM",
+    "category": "container",
+    "name": { "str": "glass vial" },
+    "looks_like": "bottle_plastic",
+    "description": "A tiny glass ampuole commonly used to store medication in liquid form.",
+    "weight": "12 g",
+    "volume": "8 ml",
+    "longest_side": "110 mm",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "watertight": true,
+        "rigid": true,
+        "transparent": true,
+        "max_contains_volume": "5 ml",
+        "max_contains_weight": "50 g",
+        "moves": 400
+      }
+    ],
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "to_hit": 1,
+    "material": [ "glass" ],
+    "symbol": ")",
+    "color": "white",
+    "flags": [ "COLLAPSE_CONTENTS" ]
+  },
+  {
     "id": "bottle_plastic_pill_prescription",
     "type": "ITEM",
     "category": "container",

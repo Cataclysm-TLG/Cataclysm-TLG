@@ -3887,5 +3887,25 @@
     "type": "MIGRATION",
     "id": "lifestraw",
     "replace": "plastic_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "poppy_bud",
+    "replace": "poppy_pod"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "poppy_pain",
+    "replace": "opium_tar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "poppy_sleep",
+    "replace": "opium_tar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "poppy_cough",
+    "replace": "opium_tar"
   }
 ]

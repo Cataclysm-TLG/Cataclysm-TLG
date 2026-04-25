@@ -1547,7 +1547,8 @@
       [ "f_dandelion", 100 ],
       [ "f_dahlia", 100 ],
       [ "f_bluebell", 100 ],
-      [ "f_sunflower", 30 ]
+      [ "f_sunflower", 30 ],
+      [ "f_poppy", 15 ]
     ]
   },
   {
@@ -1565,7 +1566,8 @@
       [ "f_dahlia", 1 ],
       [ "f_salsify", 1 ],
       [ "f_chicory", 1 ],
-      [ "f_sunflower", 1 ]
+      [ "f_sunflower", 1 ],
+      [ "f_poppy", 1 ]
     ]
   },
   {
@@ -1605,7 +1607,6 @@
       [ "f_japanese_knotweed", 200 ],
       [ "f_dahlia", 200 ],
       [ "f_maianthemum_stellatum", 200 ],
-      [ "f_mutpoppy", 200 ],
       [ "f_black_eyed_susan", 100 ],
       [ "f_flower_tulip", 100 ],
       [ "f_mustard", 100 ],
@@ -1633,7 +1634,6 @@
       [ "f_plant_dead", 90 ],
       [ "f_salsify", 300 ],
       [ "f_dahlia", 200 ],
-      [ "f_mutpoppy", 100 ],
       [ "f_maianthemum_stellatum", 100 ],
       [ "f_wintergreen", 100 ],
       [ "f_dogbane", 80 ]

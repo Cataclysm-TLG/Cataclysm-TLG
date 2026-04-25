@@ -25,12 +25,20 @@
   {
     "id": "dandelion_harv",
     "type": "harvest",
-    "entries": [ { "drop": "raw_dandelion", "base_num": [ 1, 4 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "raw_dandelion", "base_num": [ 1, 2 ], "difficulty": 6 } ]
+  },
+  {
+    "id": "poppy_harv",
+    "type": "harvest",
+    "entries": [
+      { "drop": "poppy_pod", "base_num": [ 1, 5 ], "difficulty": 7 },
+      { "drop": "seed_poppy", "base_num": [ 1, 2 ], "difficulty": 7 }
+    ]
   },
   {
     "id": "burdock_harv",
     "type": "harvest",
-    "entries": [ { "drop": "raw_burdock", "base_num": [ 1, 4 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "raw_burdock", "base_num": [ 1, 3 ], "difficulty": 8 } ]
   },
   {
     "id": "burdock_summer_harv",
