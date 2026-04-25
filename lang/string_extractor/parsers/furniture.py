@@ -4,6 +4,11 @@ from .examine_action import parse_examine_action
 
 
 def parse_furniture(json, origin):
+    if json.get("abstract"):
+        return
+    if "id" not in json:
+        return
+
     name = get_singular_name(json.get("name", json["id"]))
     if "name" in json:
         write_text(json["name"], origin, comment="Furniture name")
