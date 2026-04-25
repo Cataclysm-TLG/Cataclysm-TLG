@@ -15,6 +15,8 @@
 #include <sstream>
 #include <string>
 #include <tuple>
+#include <string_view>
+#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 
@@ -1796,8 +1798,8 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     bits.set( tname::segments::UPS, _stacks_ups( *this, rhs ) );
     // Guns that differ only by dirt/shot_counter can still stack,
     // but other item_vars such as label/note will prevent stacking.
-    // CAMERA_*_PHOTOS_count are derived caches; not part of identity.
-    static const std::set<std::string> ignore_keys = { "dirt", "shot_counter", "spawn_location", "ethereal", "last_act_by_char_id", "activity_var", "CAMERA_EXTENDED_PHOTOS_count", "CAMERA_MONSTER_PHOTOS_count" };
+    // CAMERA_*_PHOTOS_count and EIPC_RECIPES_count are derived caches; not part of identity.
+    static const std::set<std::string> ignore_keys = { "dirt", "shot_counter", "spawn_location", "ethereal", "last_act_by_char_id", "activity_var", "CAMERA_EXTENDED_PHOTOS_count", "CAMERA_MONSTER_PHOTOS_count", "EIPC_RECIPES_count" };
     bits.set( tname::segments::VARS, map_equal_ignoring_keys( item_vars, rhs.item_vars, ignore_keys ) );
     bits.set( tname::segments::ETHEREAL, _stacks_ethereal( *this, rhs ) );
     bits.set( tname::segments::LOCATION_HINT, _stacks_location_hint( *this, rhs ) );
@@ -8942,11 +8944,37 @@ bool item::efiles_all_browsed() const
     return true;
 }
 
+static int count_valid_recipes( const std::string_view csv )
+{
+    // Match get_saved_recipes() semantics: deduplicate via set so a malformed
+    // CSV like ",balclava,balclava," returns 1, not 2.
+    std::set<recipe_id> seen;
+    for( const std::string &rid_str : string_split( csv, ',' ) ) {
+        const recipe_id rid( rid_str );
+        if( !rid.is_empty() && rid.is_valid() ) {
+            seen.emplace( rid );
+        }
+    }
+    return static_cast<int>( seen.size() );
+}
+
 units::ememory item::ememory_size() const
 {
     units::ememory ememory_return = type->ememory_size;
     if( typeId() == itype_efile_recipes ) {
-        ememory_return *= get_saved_recipes().size();
+        if( is_broken_on_active() ) {
+            return 0_KB;
+        }
+        // Reading a cached count avoids parsing EIPC_RECIPES and validating
+        // every recipe_id in stacks_with.
+        int n;
+        if( has_var( "EIPC_RECIPES_count" ) ) {
+            n = static_cast<int>( get_var( "EIPC_RECIPES_count", 0.0 ) );
+        } else {
+            n = count_valid_recipes( get_var( "EIPC_RECIPES" ) );
+            const_cast<item *>( this )->set_var( "EIPC_RECIPES_count", n );
+        }
+        ememory_return *= n;
     } else if( typeId() == itype_efile_photos ) {
         ememory_return *= total_photos();
     }
@@ -10980,7 +11008,11 @@ std::set<recipe_id> item::get_saved_recipes() const
 
 void item::set_saved_recipes( const std::set<recipe_id> &recipes )
 {
-    set_var( "EIPC_RECIPES", string_join( recipes, "," ) );
+    const std::string csv = string_join( recipes, "," );
+    set_var( "EIPC_RECIPES", csv );
+    // Compute from the persisted CSV so the cache reflects steady-state validity,
+    // not transient state like is_broken_on_active().
+    set_var( "EIPC_RECIPES_count", count_valid_recipes( csv ) );
 }
 
 void item::generate_recipes()

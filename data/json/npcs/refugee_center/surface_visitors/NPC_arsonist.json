@@ -155,7 +155,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_ARSONIST_WORLD_SOMETHING",
-    "dynamic_line": "I mean, there was a nuclear war and now the dead are walking, what do you want me to say?  The monsters are getting bigger and weirder, too, and there are fewer people every day.  Game over, man.",
+    "dynamic_line": "I mean, there was a nuclear war and now the dead are walking, what do you want me to say?  The monsters are getting bigger and weirder, and there are fewer people every day.  Game over, man.",
     "responses": [ { "text": "I feel bad for asking.", "topic": "TALK_ARSONIST" } ]
   },
   {
