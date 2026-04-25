@@ -1208,7 +1208,27 @@
     "plant_name": "dandelion",
     "fruit": "raw_dandelion",
     "growth_stages": [
-      { "GROWTH_SEED": "23 days" },
+      { "GROWTH_SEED": "14 days" },
+      { "GROWTH_SEEDLING": "21 days" },
+      { "GROWTH_MATURE": "21 days" },
+      { "GROWTH_HARVEST": "20 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "SEED", "COMESTIBLE" ],
+    "id": "seed_poppy",
+    "copy-from": "seed",
+    "name": { "str_sp": "poppy seeds" },
+    "color": "green",
+    "description": "Some poppy seeds.",
+    "flags": [ "PLANTABLE_SEED", "NUTRIENT_OVERRIDE", "INEDIBLE" ],
+    "volume": "2 ml",
+    "plant_name": "poppy",
+    "fruit": "poppy_pod",
+    "growth_stages": [
+      { "GROWTH_SEED": "14 days" },
       { "GROWTH_SEEDLING": "23 days" },
       { "GROWTH_MATURE": "23 days" },
       { "GROWTH_HARVEST": "22 days" },

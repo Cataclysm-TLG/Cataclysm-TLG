@@ -5565,7 +5565,7 @@
           { "item": "bandages", "count": 3 },
           { "item": "scalpel" },
           { "item": "syringe" },
-          { "item": "morphine" },
+          { "group": "morphine_vial_glass_4" },
           { "item": "aspirin" },
           { "item": "antibiotics" },
           { "item": "disinfectant" },

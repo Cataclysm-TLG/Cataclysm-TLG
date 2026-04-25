@@ -88,5 +88,10 @@
     "type": "ter_furn_migration",
     "from_ter": "t_reinforced_door_glass_lab_o",
     "to_ter": "t_laminated_door_glass_lab_o"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_furn": "f_mutpoppy",
+    "to_furn": "f_poppy"
   }
 ]

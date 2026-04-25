@@ -347,6 +347,14 @@
     "charges": 2
   },
   {
+    "result": "seed_poppy",
+    "type": "recipe",
+    "copy-from": "seed_extraction_cutting",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "poppy_pod", 1 ] ] ],
+    "charges": 2
+  },
+  {
     "result": "seed_raw_burdock",
     "type": "recipe",
     "copy-from": "seed_extraction_cutting",

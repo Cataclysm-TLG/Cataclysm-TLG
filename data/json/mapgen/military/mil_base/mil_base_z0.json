@@ -1128,13 +1128,7 @@
       "place_loot": [
         { "group": "mil_base_hmg", "x": 65, "y": 46, "chance": 10, "magazine": 100 },
         { "group": "SUS_janitors_closet", "x": 22, "y": 26, "chance": 90, "repeat": [ 1, 2 ] },
-        {
-          "group": "morphine_bottle_plastic_pill_prescription_4",
-          "x": 28,
-          "y": 25,
-          "chance": 50,
-          "repeat": [ 20, 60 ]
-        },
+        { "group": "morphine_vial_glass_4", "x": 28, "y": 25, "chance": 50, "repeat": [ 20, 60 ] },
         {
           "group": "tramadol_bottle_plastic_pill_prescription_10",
           "x": 28,

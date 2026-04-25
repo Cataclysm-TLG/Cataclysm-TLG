@@ -3461,15 +3461,16 @@
       "pkill_max_val": [ 7 ],
       "pkill_min": [ 1 ],
       "pkill_tick": [ 45 ],
-      "fatigue_max_val": [ 8 ],
-      "fatigue_tick": [ 300 ],
+      "fatigue_max_val": [ 90 ],
+      "fatigue_chance": [ 1000 ],
       "fatigue_min": [ 1 ]
     },
     "scaling_mods": {
       "per_mod": [ -0.67 ],
       "dex_mod": [ -0.67 ],
       "int_mod": [ -1.67 ],
-      "fatigue_max_val": [ 2 ],
+      "fatigue_max_val": [ 40 ],
+      "fatigue_chance": [ -250 ],
       "pkill_max_val": [ 7 ],
       "speed_mod": [ -5 ]
     },
@@ -3522,10 +3523,15 @@
     "apply_message": "You feel lightheaded.",
     "blood_analysis_description": "Alcohol",
     "miss_messages": [ [ "You feel woozy.", 1 ] ],
+    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 25000 ] ],
+    "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
     "base_mods": {
-      "vomit_chance": [ -43 ],
+      "vomit_chance": [ -20 ],
+      "vomit_chance_bot": [ 1000 ],
+      "vomit_tick": [ 180 ],
+      "sleep_tick": [ 45 ],
       "sleep_chance": [ -1003 ],
-      "sleep_min": [ 15000 ],
+      "sleep_min": [ 10 ],
       "sleep_max": [ 21000 ],
       "pkill_amount": [ 3 ],
       "pkill_max_val": [ 3 ],
@@ -3536,10 +3542,11 @@
       "per_mod": [ -0.5 ],
       "dex_mod": [ -0.5 ],
       "int_mod": [ -0.75 ],
-      "vomit_chance": [ 21 ],
+      "vomit_chance": [ 17.5 ],
+      "vomit_tick": [ -30 ],
       "sleep_chance": [ 501 ],
       "pkill_max_val": [ 10 ],
-      "pkill_tick": [ -10 ]
+      "pkill_tick": [ -5 ]
     },
     "limb_score_mods": [
       { "limb_score": "manip", "modifier": 0.9, "scaling": -0.1 },
@@ -4171,10 +4178,10 @@
       "blood_pressure_min": [ -2 ],
       "blood_pressure_min_val": [ -200 ],
       "fatigue_min": [ 1 ],
-      "fatigue_chance": [ 500 ],
-      "fatigue_max_val": [ 10 ]
+      "fatigue_chance": [ 5000 ],
+      "fatigue_max_val": [ 180 ]
     },
-    "scaling_mods": { "blood_pressure_min": [ -1 ], "blood_pressure_min_val": [ -100 ], "fatigue_max_val": [ 5 ], "fatigue_min": [ 2 ] },
+    "scaling_mods": { "blood_pressure_min": [ -1 ], "blood_pressure_min_val": [ -100 ], "fatigue_max_val": [ 50 ], "fatigue_min": [ 2 ] },
     "rating": "neutral",
     "blood_analysis_description": "Beta Blocker"
   },
@@ -4204,38 +4211,75 @@
   {
     "type": "effect_type",
     "id": "opioid_eff",
-    "//": "Gives Status warnings of danger levels only.  Significant chance that death occurs well before or after this scale suggests.  As Pkill is vitaminized move opioids to this scale for effects.",
+    "//": "Pain relief increases linearly. Vomit chance increases and then becomes impossible due to CNS depression. Sleep is mostly impossible but ramps up sharply at i4 toward 100% at i7.",
     "name": [
-      "Mild Opioid Euphoria",
-      "Moderate Opioid Euphoria",
-      "Significant Opioid Euphoria",
-      "Opioid Intoxication",
-      "Opioid Debilitation",
-      "Death"
+      "Pain Relief",
+      "Painkillers",
+      "Heavy Opioid Euphoria",
+      "Opioid High",
+      "Nodding Out",
+      "Opioid Overdose",
+      "Severe Opioid Overdose"
     ],
     "desc": [
-      "Mild euphoric feelings from the opioids you've taken.",
-      "Moderate euphoria, likely sedative effects.",
-      "Significant euphoria, heavy sedative effects.",
-      "Some incapacitation, sedation, nausea, numbness.",
-      "Significant chance of death, incapable of many tasks, narcolepsy.",
-      "Terminal Dosage achieved."
+      "Your aches and pains don't feel as bad.",
+      "You are uplifted by a gentle, bubbly euphoria that soothes your every ache.",
+      "You feel warm, like you're wrapped up in a chemical hug that takes away the pain.",
+      "You're really out of it.  That's OK…",
+      "You're so high that it's difficult to keep your eyes open.",
+      "Awareness comes and goes, the world outside your numb darkness is a dim slideshow for someone else to watch.",
+      "Your body is shutting down."
     ],
-    "blood_analysis_description": "Sample contains opioid based painkillers.",
-    "max_intensity": 6
-  },
-  {
-    "type": "effect_type",
-    "id": "bad_food_ennui",
-    "name": [ "Gross Food", "Demoralizing Food", "Depressing Food" ],
-    "desc": [
-      "The food you eat is disgusting.",
-      "Eating nothing but disgusting rations is starting to get you down.",
-      "Sure, you survived, but what kind of survival is this, eating these disgusting rations day in and day out?"
+    "blood_analysis_description": "Opioids",
+    "max_intensity": 7,
+    "miss_messages": [ [ "You feel numb.", 1 ] ],
+    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 250000 ], [ 1, 50000 ], [ 1, 5000 ] ],
+    "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
+    "pkill_addict_reduces": true,
+    "base_mods": {
+      "vomit_chance": [ 2500 ],
+      "vomit_tick": [ 24 ],
+      "fatigue_min": [ 1 ],
+      "fatigue_max": [ 2 ],
+      "fatigue_chance": [ 1000 ],
+      "fatigue_max_val": [ 150 ],
+      "cough_chance": [ -1002 ],
+      "sleep_chance": [ -584 ],
+      "sleep_chance_bot": [ 1000 ],
+      "sleep_tick": [ 1800 ],
+      "sleep_min": [ 5 ],
+      "sleep_max": [ 10 ],
+      "pkill_max_val": [ 15 ],
+      "pkill_min": [ 1 ],
+      "pkill_tick": [ 45 ]
+    },
+    "scaling_mods": {
+      "str_mod": [ -0.75 ],
+      "per_mod": [ -0.67 ],
+      "dex_mod": [ -0.75 ],
+      "int_mod": [ -0.5 ],
+      "fatigue_chance": [ -140 ],
+      "fatigue_max_val": [ 150 ],
+      "vomit_chance": [ -500 ],
+      "vomit_tick": [ -2 ],
+      "sleep_chance": [ 317 ],
+      "sleep_tick": [ -299 ],
+      "pkill_max_val": [ 20 ],
+      "sleep_max": [ 500 ],
+      "pkill_tick": [ -10 ],
+      "speed_mod": [ -5 ]
+    },
+    "limb_score_mods": [
+      { "limb_score": "manip", "modifier": 0.9, "scaling": -0.1 },
+      { "limb_score": "block", "modifier": 1.0, "scaling": -0.05 },
+      { "limb_score": "vision", "modifier": 1.0, "scaling": -0.05 },
+      { "limb_score": "reaction", "modifier": 0.9, "scaling": -0.2 },
+      { "limb_score": "move_speed", "modifier": 1.0, "scaling": -0.02 },
+      { "limb_score": "balance", "modifier": 0.9, "scaling": -0.2 },
+      { "limb_score": "footing", "modifier": 1.0, "scaling": -0.15 },
+      { "limb_score": "swim", "modifier": 1.0, "scaling": -0.2 }
     ],
-    "max_intensity": 3,
-    "//": "Mood debuff is handled separately by bad_food_mood_debuff EoC.",
-    "rating": "bad"
+    "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
   },
   {
     "type": "effect_type",

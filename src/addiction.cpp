@@ -317,30 +317,29 @@ static bool opioid_effect( Character &u, addiction &add )
     if( u.get_pain() < in * 2 ) {
         u.mod_pain( 1 );
     }
-    if( one_in( 1200 - 10 * in ) ) {
-        u.mod_daily_health( -1, -in * 20 );
-    }
     if( one_in( 40 ) && dice( 2, 30 ) < in &&
-        ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
-        if( u.in_sleep_state() ) {
-            last_dream = calendar::turn;
-        }
+        ( !u.in_sleep_state() || calendar::turn - last_dream > 4_hours ) ) {
         const std::string msg =
             u.in_sleep_state() ? "addict_opioid_mild_asleep" : "addict_opioid_mild_awake";
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_opioid, -40, -4 * in );
-        u.add_effect( effect_shakes, 2_minutes + in * 30_seconds );
-    } else if( one_in( 40 ) && dice( 2, 30 ) < in &&
-               ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
         if( u.in_sleep_state() ) {
             last_dream = calendar::turn;
+        } else {
+            u.add_morale( morale_craving_opioid, -40, -4 * in, 1_hours, 30_minutes, true );
+            u.add_effect( effect_shakes, 2_minutes + in * 30_seconds );
         }
+    } else if( one_in( 40 ) && dice( 2, 30 ) < in &&
+               ( !u.in_sleep_state() || calendar::turn - last_dream > 4_hours ) ) {
         const std::string msg =
             u.in_sleep_state() ? "addict_opioid_strong_asleep" : "addict_opioid_strong_awake";
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_opioid, -30, -4 * in );
+        if( u.in_sleep_state() ) {
+            last_dream = calendar::turn;
+        } else {
+            u.add_morale( morale_craving_opioid, -30, -4 * in, 1_hours, 30_minutes, true );
+        }
     } else if( one_in( 50 ) && dice( 3, 50 ) < in ) {
         u.vomit();
     }

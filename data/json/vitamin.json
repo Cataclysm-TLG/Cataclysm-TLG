@@ -122,16 +122,25 @@
     "disease_excess": [ [ 10, 500 ] ]
   },
   {
+    "id": "vit_tramadol",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Tramadol" },
+    "min": 0,
+    "max": 666,
+    "rate": "200 s",
+    "decays_into": [ [ "vit_mme", 21 ] ]
+  },
+  {
     "id": "vit_mme",
     "type": "vitamin",
     "vit_type": "drug",
-    "name": { "str": "Morphine Milligram Equivalent (percentile)" },
-    "//": "1 vit_mme is equivalent to 1% of an MME.  Need to adjust excess and rate at minimum.",
+    "name": { "str": "Morphine Milligram Equivalent" },
     "excess": "opioid_eff",
     "min": 0,
-    "max": 40000,
-    "rate": "100 s",
-    "disease_excess": [ [ 500, 1500 ], [ 1501, 5000 ], [ 5001, 18000 ], [ 18001, 30000 ], [ 30001, 39998 ], [ 39999, 40000 ] ]
+    "max": 10000,
+    "rate": "48 s",
+    "disease_excess": [ [ 175, 400 ], [ 500, 1000 ], [ 1100, 2000 ], [ 2100, 3500 ], [ 3600, 5000 ], [ 5100, 7500 ], [ 7600, 10000 ] ]
   },
   {
     "id": "mutant_toxin",

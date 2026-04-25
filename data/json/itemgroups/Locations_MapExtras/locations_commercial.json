@@ -1965,7 +1965,7 @@
       { "prob": 30, "group": "antiparasitic_bottle_plastic_pill_prescription_1_10" },
       { "prob": 20, "group": "antibiotics_bottle_plastic_pill_prescription_1_15" },
       { "prob": 7, "group": "thorazine_bottle_plastic_pill_prescription_1_10" },
-      { "item": "morphine", "prob": 10, "count": [ 1, 4 ] },
+      { "group": "morphine_vial_glass_4", "count": [ 1, 4 ] },
       { "prob": 15, "group": "codeine_bottle_plastic_pill_painkiller_1_10" },
       { "item": "saline", "prob": 15, "charges": [ 1, 5 ] },
       { "item": "smoxygen_tank", "prob": 10, "charges": [ 0, 12 ] },

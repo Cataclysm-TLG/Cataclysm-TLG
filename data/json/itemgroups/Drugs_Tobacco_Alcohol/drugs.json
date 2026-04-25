@@ -185,7 +185,7 @@
       { "group": "naproxen_ad_group", "prob": 50 },
       { "group": "codeine_ad_group", "prob": 60 },
       { "group": "tramadol_ad_group", "prob": 60 },
-      { "item": "morphine", "count": [ 1, 12 ], "container-item": "null", "prob": 10 },
+      { "group": "morphine_vial_glass_4", "prob": 10, "count": [ 1, 2 ] },
       { "group": "oxycodone_ad_group", "prob": 200 }
     ]
   },
@@ -690,9 +690,9 @@
   },
   {
     "type": "item_group",
-    "id": "morphine_bottle_plastic_pill_prescription_4",
+    "id": "morphine_vial_glass_4",
     "subtype": "collection",
-    "container-item": "bottle_plastic_pill_prescription",
+    "container-item": "vial_glass",
     "entries": [ { "item": "morphine", "container-item": "null", "count": 4 } ]
   },
   {
