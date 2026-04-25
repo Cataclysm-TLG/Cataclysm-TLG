@@ -1865,8 +1865,15 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
               link_length() == rhs.link_length() && max_link_length() == rhs.max_link_length() );
     bits.set( tname::segments::MODS, _stacks_mods( *this, rhs ) );
     //checking browsed status is not necessary, equal vars are checked earlier
+    const bool lhs_estorage = is_estorage();
+    const bool rhs_estorage = rhs.is_estorage();
+    // Non-estorage pairs short-circuit true (printer skips segment); mixed pairs
+    // stay false so aggregated headers drop free-mem when grouped with non-estorage.
     bits.set( tname::segments::EMEMORY,
-              occupied_ememory() == rhs.occupied_ememory() && total_ememory() == rhs.total_ememory() );
+              lhs_estorage == rhs_estorage &&
+              ( !lhs_estorage ||
+                ( occupied_ememory() == rhs.occupied_ememory() &&
+                  total_ememory() == rhs.total_ememory() ) ) );
     bits.set( tname::segments::last_segment );
 
     // only check contents if everything else matches
@@ -9011,12 +9018,7 @@ units::ememory item::ememory_size() const
 
 units::ememory item::occupied_ememory() const
 {
-    std::vector<const item *> all_efiles = efiles();
-    units::ememory total = 0_KB;
-    for( const item *i : all_efiles ) {
-        total += i->ememory_size();
-    }
-    return total;
+    return contents.occupied_ememory();
 }
 
 units::ememory item::total_ememory() const
