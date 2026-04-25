@@ -149,6 +149,8 @@ static const efftype_id effect_sleep( "sleep" );
 static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 static const fault_id fault_overheat_safety( "fault_overheat_safety" );
 
+static const flag_id json_flag_LOCATION_PRECISE_CLOSEST_CITY( "LOCATION_PRECISE_CLOSEST_CITY" );
+
 static const furn_str_id furn_f_metal_smoking_rack_active( "f_metal_smoking_rack_active" );
 static const furn_str_id furn_f_smoking_rack_active( "f_smoking_rack_active" );
 static const furn_str_id furn_f_water_mill_active( "f_water_mill_active" );
@@ -1598,6 +1600,32 @@ bool _stacks_location_hint( item const &lhs, item const &rhs )
             }
         };
         return get_bucket( this_dist ) == get_bucket( that_dist );
+    }
+    return false;
+}
+
+bool _stacks_location_precise_closest_city( item const &lhs, item const &rhs )
+{
+    // Skip the closest_city sort unless both items can actually display the segment.
+    if( !lhs.has_flag( json_flag_LOCATION_PRECISE_CLOSEST_CITY ) ||
+        !rhs.has_flag( json_flag_LOCATION_PRECISE_CLOSEST_CITY ) ) {
+        return true;
+    }
+    static const std::string omt_loc_var = "spawn_location";
+    const tripoint_abs_ms this_loc( lhs.get_var( omt_loc_var, tripoint_abs_ms::invalid ) );
+    const tripoint_abs_ms that_loc( rhs.get_var( omt_loc_var, tripoint_abs_ms::invalid ) );
+    if( this_loc == that_loc ) {
+        return true;
+    } else if( this_loc != tripoint_abs_ms::invalid && that_loc != tripoint_abs_ms::invalid ) {
+        const tripoint_abs_omt this_omt = project_to<coords::omt>( this_loc );
+        const tripoint_abs_sm this_sm = project_to<coords::sm>( this_omt );
+        const city_reference this_city = overmap_buffer.closest_city( this_sm );
+
+        const tripoint_abs_omt that_omt = project_to<coords::omt>( that_loc );
+        const tripoint_abs_sm that_sm = project_to<coords::sm>( that_omt );
+        const city_reference that_city = overmap_buffer.closest_city( that_sm );
+
+        return this_city.city == that_city.city;
     }
     return false;
 }
