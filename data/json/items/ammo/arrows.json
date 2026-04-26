@@ -253,6 +253,6 @@
     "revert_to": "arrow_wood",
     "recovery_chance": 40,
     "effects": [ "IGNITE" ],
-    "flags": [ "TRADER_AVOID" ]
+    "flags": [ "TRADER_AVOID", "SPAWNS_ACTIVE" ]
   }
 ]
