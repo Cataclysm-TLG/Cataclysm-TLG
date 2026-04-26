@@ -32,11 +32,13 @@
 #include "event.h"
 #include "event_bus.h"
 #include "faction.h"
+#include "flag.h"
 #include "game.h"
 #include "game_constants.h"
 #include "game_inventory.h"
 #include "item.h"
 #include "item_location.h"
+#include "iuse_actor.h"
 #include "line.h"
 #include "magic.h"
 #include "map.h"
@@ -79,24 +81,50 @@ static const activity_id ACT_VEHICLE_DECONSTRUCTION( "ACT_VEHICLE_DECONSTRUCTION
 static const activity_id ACT_VEHICLE_REPAIR( "ACT_VEHICLE_REPAIR" );
 static const activity_id ACT_WAIT_NPC( "ACT_WAIT_NPC" );
 
+static const efftype_id effect_anemia( "anemia" );
 static const efftype_id effect_allow_sleep( "allow_sleep" );
 static const efftype_id effect_asked_for_item( "asked_for_item" );
 static const efftype_id effect_asked_personal_info( "asked_personal_info" );
 static const efftype_id effect_asked_to_follow( "asked_to_follow" );
 static const efftype_id effect_asked_to_lead( "asked_to_lead" );
 static const efftype_id effect_asked_to_train( "asked_to_train" );
+static const efftype_id effect_bandaged( "bandaged" );
 static const efftype_id effect_bite( "bite" );
 static const efftype_id effect_bleed( "bleed" );
+static const efftype_id effect_bloodworms( "bloodworms" );
+static const efftype_id effect_brainworms( "brainworms" );
+static const efftype_id effect_common_cold( "common_cold" );
+static const efftype_id effect_conjunctivitis_bacterial( "conjunctivitis_bacterial" );
+static const efftype_id effect_conjunctivitis_viral( "conjunctivitis_viral" );
 static const efftype_id effect_currently_busy( "currently_busy" );
+static const efftype_id effect_dermatik( "dermatik" );
+static const efftype_id effect_disinfected( "disinfected" );
+static const efftype_id effect_flu( "flu" );
+static const efftype_id effect_fungus( "fungus" );
+static const efftype_id effect_hypovolemia( "hypovolemia" );
 static const efftype_id effect_infected( "infected" );
+static const efftype_id effect_irradiated( "irradiated" );
 static const efftype_id effect_lying_down( "lying_down" );
+static const efftype_id effect_mending( "mending" );
 static const efftype_id effect_npc_suspend( "npc_suspend" );
+static const efftype_id effect_paincysts( "paincysts" );
 static const efftype_id effect_pet( "pet" );
+static const efftype_id effect_rat_bite_fever( "rat_bite_fever" );
+static const efftype_id effect_redcells_anemia( "redcells_anemia" );
+static const efftype_id effect_scurvy( "scurvy" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_socialized_recently( "socialized_recently" );
+static const efftype_id effect_tapeworm( "tapeworm" );
+static const efftype_id effect_tetanus( "tetanus" );
+static const efftype_id effect_toxin_buildup( "toxin_buildup" );
 
 static const faction_id faction_no_faction( "no_faction" );
 static const faction_id faction_your_followers( "your_followers" );
+
+static const itype_id itype_arm_splint( "arm_splint" );
+static const itype_id itype_leg_splint( "leg_splint" );
+
+static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 
 static const mission_type_id mission_MISSION_REACH_SAFETY( "MISSION_REACH_SAFETY" );
 
@@ -107,6 +135,8 @@ static const morale_type morale_shave( "morale_shave" );
 static const mtype_id mon_chicken( "mon_chicken" );
 static const mtype_id mon_cow( "mon_cow" );
 static const mtype_id mon_horse( "mon_horse" );
+
+static const skill_id skill_firstaid( "firstaid" );
 
 static const zone_type_id zone_type_CAMP_FOOD( "CAMP_FOOD" );
 static const zone_type_id zone_type_CAMP_STORAGE( "CAMP_STORAGE" );
@@ -670,95 +700,141 @@ void talk_function::give_equipment_allowance( npc &p, int allowance )
     p.add_effect( effect_asked_for_item, 3_hours );
 }
 
-void talk_function::lesser_give_aid( npc &p )
-{
-    Character &player_character = get_player_character();
-    for( const bodypart_id &bp :
-         player_character.get_all_body_parts( get_body_part_flags::only_main ) ) {
-        player_character.heal( bp, rng( 5, 15 ) );
-        if( player_character.has_effect( effect_bleed, bp.id() ) ) {
-            player_character.remove_effect( effect_bleed, bp );
-        }
-    }
-    const int moves = to_moves<int>( 15_minutes );
-    player_character.assign_activity( ACT_WAIT_NPC, moves );
-    player_character.activity.str_values.push_back( p.get_name() );
-    p.add_effect( effect_currently_busy, 60_minutes );
-}
-
-void talk_function::lesser_give_all_aid( npc &p )
-{
-    lesser_give_aid( p ); // Provide lesser aid to the player first
-
-    Character &player_character = get_player_character();
-    for( npc &guy : g->all_npcs() ) {
-        if( guy.is_walking_with() && rl_dist( guy.pos_bub(), player_character.pos_bub() ) < PICKUP_RANGE ) {
-            for( const bodypart_id &bp :
-                 guy.get_all_body_parts( get_body_part_flags::only_main ) ) {
-                guy.heal( bp, rng( 5, 15 ) );
-                if( guy.has_effect( effect_bleed, bp.id() ) ) {
-                    guy.remove_effect( effect_bleed, bp );
-                }
-            }
-        }
-    }
-
-    const int moves = to_moves<int>( 30_minutes );
-    player_character.assign_activity( ACT_WAIT_NPC, moves );
-    player_character.activity.str_values.push_back( p.get_name() );
-    p.add_effect( effect_currently_busy, 120_minutes );
-}
-
 void talk_function::give_aid( npc &p )
 {
-    Character &player_character = get_player_character();
+    Character &patient = get_player_character();
+    float medic_skill = p.get_skill_level( skill_firstaid );
     for( const bodypart_id &bp :
-         player_character.get_all_body_parts( get_body_part_flags::only_main ) ) {
-        player_character.heal( bp, 5 * rng( 2, 5 ) );
-        if( player_character.has_effect( effect_bite, bp.id() ) ) {
-            player_character.remove_effect( effect_bite, bp );
+         patient.get_all_body_parts( get_body_part_flags::only_main ) ) {
+        // TODO: Repairing bionics.
+        if( bp->has_flag( json_flag_BIONIC_LIMB ) ) {
+            continue;
         }
-        if( player_character.has_effect( effect_bleed, bp.id() ) ) {
-            player_character.remove_effect( effect_bleed, bp );
+        if( patient.has_effect( effect_bite, bp.id() ) ) {
+            patient.remove_effect( effect_bite, bp );
         }
-        if( player_character.has_effect( effect_infected, bp.id() ) ) {
-            player_character.remove_effect( effect_infected, bp );
+        if( patient.has_effect( effect_bleed, bp.id() ) ) {
+            patient.remove_effect( effect_bleed, bp );
         }
-    }
-
-    const int moves = to_moves<int>( 30_minutes );
-    player_character.assign_activity( ACT_WAIT_NPC, moves );
-    player_character.activity.str_values.push_back( p.get_name() );
-    p.add_effect( effect_currently_busy, 120_minutes );
-}
-
-void talk_function::give_all_aid( npc &p )
-{
-    give_aid( p ); // Provide aid to the player first
-
-    Character &player_character = get_player_character();
-    for( npc &guy : g->all_npcs() ) {
-        if( guy.is_walking_with() && rl_dist( guy.pos_bub(), player_character.pos_bub() ) < PICKUP_RANGE ) {
-            for( const bodypart_id &bp :
-                 guy.get_all_body_parts( get_body_part_flags::only_main ) ) {
-                guy.heal( bp, 5 * rng( 2, 5 ) );
-                if( guy.has_effect( effect_bite, bp.id() ) ) {
-                    guy.remove_effect( effect_bite, bp );
+        if( patient.get_part_hp_max( bp ) > patient.get_part_hp_cur( bp ) ) {
+            if( !patient.has_effect( effect_disinfected, bp.id() ) ) {
+                int disinfectant_power = 2;
+                float prof_bonus = medic_skill + std::clamp( ( (
+                                       p.int_cur - 10.0f ) / 3.0f ), 0.0f, medic_skill / 2.66f );
+                float total_bonus = disinfectant_power + ( 0.25f + disinfectant_power ) * prof_bonus;
+                total_bonus = p.enchantment_cache->modify_value( enchant_vals::mod::BANDAGE_BONUS,
+                              total_bonus );
+                int disinfectant_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
+                patient.add_effect( effect_disinfected, 1_turns, bp );
+                effect &e = patient.get_effect( effect_disinfected, bp );
+                e.set_duration( e.get_int_dur_factor() * disinfectant_intensity );
+                patient.set_part_damage_bandaged( bp,
+                                                  patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
+                int practice_amount = 2 * disinfectant_intensity;
+                p.practice( skill_firstaid, static_cast<int>( practice_amount ) );
+            }
+            if( !patient.has_effect( effect_bandaged, bp.id() ) ) {
+                int bandages_power = 2;
+                float prof_bonus = medic_skill + std::clamp( ( (
+                                       p.int_cur - 10.0f ) / 3.0f ), 0.0f, medic_skill / 2.66f );
+                float total_bonus = bandages_power + ( 0.25f + bandages_power ) * prof_bonus;
+                total_bonus = p.enchantment_cache->modify_value( enchant_vals::mod::BANDAGE_BONUS,
+                              total_bonus );
+                int bandages_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
+                patient.add_effect( effect_bandaged, 1_turns, bp );
+                effect &e = patient.get_effect( effect_bandaged, bp );
+                e.set_duration( e.get_int_dur_factor() * bandages_intensity );
+                patient.set_part_damage_bandaged( bp,
+                                                  patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
+                int practice_amount = 2 * bandages_intensity;
+                p.practice( skill_firstaid, static_cast<int>( practice_amount ) );
+            }
+        }
+        int broken_limbs_count = 0;
+        for( const bodypart_id &part :
+             patient.get_all_body_parts( get_body_part_flags::only_main ) ) {
+            const bool broken = patient.is_limb_broken( part );
+            effect &existing_effect = patient.get_effect( effect_mending, part );
+            // Skip part if not broken or already healed 50%
+            if( !broken || ( !existing_effect.is_null() &&
+                             existing_effect.get_duration() >
+                             existing_effect.get_max_duration() - 5_days - 1_turns ) ) {
+                continue;
+            }
+            broken_limbs_count++;
+            int quantity = 1;
+            if( ( part == bodypart_id( "arm_l" ) || part == bodypart_id( "arm_r" ) ) &&
+                !patient.worn_with_flag( flag_SPLINT, part ) ) {
+                map &here = get_map();
+                tripoint_bub_ms patient_pos = patient.pos_bub();
+                here.spawn_item( patient_pos, itype_arm_splint );
+                for( const item &it : here.use_amount( patient_pos, 1, itype_arm_splint, quantity ) ) {
+                    if( !it.is_null() ) {
+                        patient.wear_item( it, false );
+                        patient.add_msg_player_or_npc( m_good, _( "The medic sets and splints your %s." ),
+                                                       _( "The medic sets and splints <npcname>'s %s." ),
+                                                       body_part_name( part ) );
+                    }
                 }
-                if( guy.has_effect( effect_bleed, bp.id() ) ) {
-                    guy.remove_effect( effect_bleed, bp );
-                }
-                if( guy.has_effect( effect_infected, bp.id() ) ) {
-                    guy.remove_effect( effect_infected, bp );
+            } else if( ( part == bodypart_id( "leg_l" ) || part == bodypart_id( "leg_r" ) ) &&
+                       !patient.worn_with_flag( flag_SPLINT, part ) ) {
+                map &here = get_map();
+                tripoint_bub_ms patient_pos = patient.pos_bub();
+                here.spawn_item( patient_pos, itype_leg_splint );
+                for( const item &it : here.use_amount( patient_pos, 1, itype_leg_splint, quantity ) ) {
+                    if( !it.is_null() ) {
+                        patient.wear_item( it, false );
+                        patient.add_msg_player_or_npc( m_good, _( "The medic sets and splints your %s." ),
+                                                       _( "The medic sets and splints <npcname>'s %s." ),
+                                                       body_part_name( part ) );
+                    }
                 }
             }
         }
     }
-
-    const int moves = to_moves<int>( 60_minutes );
-    player_character.assign_activity( ACT_WAIT_NPC, moves );
-    player_character.activity.str_values.push_back( p.get_name() );
-    p.add_effect( effect_currently_busy, 240_minutes );
+    if( ( x_in_y( medic_skill, 9.0 ) ) && ( patient.has_effect( effect_tapeworm ) || patient.has_effect( effect_bloodworms ) || patient.has_effect( effect_brainworms ) || patient.has_effect( effect_paincysts ) || patient.has_effect( effect_dermatik ) ) ) {
+        p.say( _( "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up.") );
+    }
+    if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_fungus ) ) {
+        p.say( _( "Looks like you have a pretty serious fungal infection.  Taking antifungal medication should clear it up, but I'd hurry if I were you." ) );
+    }
+    if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_irradiated ) ) {
+        p.say( _( "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection.") );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_infected ) ) {
+        p.say( _( "You have a bacterial infection.  There's a chance a healthy person can fight this sort of thing off, but it can be lethal for just about anybody.  Find the strongest antibiotics you can and take one every twelve hours until it's cleared up.") );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_flu ) ) {
+        p.say( _( "You probably feel pretty horrible, but it's just the flu.  It should resolve itself within two to twelve days from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any.") );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_common_cold ) ) {
+        p.say( _( "It seems you've caught a cold.  It should resolve itself within two days to three weeks from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any.") );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && ( patient.has_effect( effect_conjunctivitis_viral ) || patient.has_effect( effect_conjunctivitis_bacterial ) ) ) {
+        p.say( _( "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, that won't have any effect.") );
+    }
+    if( x_in_y( medic_skill, 5.0 ) && ( patient.has_effect( effect_rat_bite_fever ) ) ) {
+        p.say( _( "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it.") );
+    }
+    if( x_in_y( medic_skill, 5.0 ) && ( patient.has_effect( effect_tetanus ) ) ) {
+        p.say( _( "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms.") );
+    }
+    if( x_in_y( medic_skill, 6.0 ) && patient.get_effect_int( effect_toxin_buildup ) > 1 ) {
+        p.say( _( "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time.") );
+    }
+    if( x_in_y( medic_skill, 4.0 ) && ( patient.has_effect( effect_anemia ) || patient.has_effect( effect_redcells_anemia ) ) ) {
+        p.say( _( "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself.") );
+    }
+    if( x_in_y( medic_skill, 4.0 ) && patient.has_effect( effect_scurvy ) ) {
+        p.say( _( "Scurvy.  That's a vitamin C deficiency.  You're going to want to look for fruit, greens, or organ meat, and it's got to be fresh, the preserved stuff usually won't do.  Vitamin supplements would also do the trick." ) );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_hypovolemia ) ) {
+        p.say( _( "You're going into shock because your blood volume is too low.  You can quickly fix it with a saline infusion.  Failing that, you're going to want to drink a lot of water and get some rest." ) );
+    }
+    const int moves = to_moves<int>( 30_minutes );
+    patient.assign_activity( ACT_WAIT_NPC, moves );
+    patient.activity.str_values.push_back( p.get_name() );
+    p.add_effect( effect_currently_busy, 120_minutes );
 }
 
 static void generic_barber( const std::string &mut_type )
@@ -880,7 +956,7 @@ void talk_function::drop_items_in_place( npc &p )
     if( !to_drop.empty() ) {
         // spawn a activity for the npc to drop the specified items
         p.assign_activity( drop_activity_actor( to_drop, tripoint_rel_ms::zero, false ) );
-        p.say( "<acknowledged>" );
+        p.say( "Understood." );
     } else {
         p.say( _( "I don't have anything to drop off." ) );
     }

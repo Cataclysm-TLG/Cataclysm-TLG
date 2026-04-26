@@ -3163,7 +3163,6 @@
     "resist_effects": [ "took_antihistamine", "took_flumed" ],
     "resist_traits": [ "INFRESIST", "PER_SLIME_OK" ],
     "immune_flags": [ "INFECTION_IMMUNE", "SEESLEEP" ],
-    "int_dur_factor": "50 m",
     "base_mods": { "int_mod": [ -1 ], "per_mod": [ -2 ], "pain_min": [ 1 ], "pain_chance": [ 400, 1000 ] },
     "limb_score_mods": [
       { "limb_score": "vision", "modifier": 0.8, "resist_modifier": 0.9 },
@@ -3188,7 +3187,6 @@
     "resist_effects": [ "took_antihistamine", "took_flumed" ],
     "resist_traits": [ "INFRESIST", "PER_SLIME_OK" ],
     "immune_flags": [ "INFECTION_IMMUNE", "SEESLEEP" ],
-    "int_dur_factor": "50 m",
     "base_mods": { "int_mod": [ -1 ], "per_mod": [ -2 ], "pain_min": [ 1 ], "pain_chance": [ 400, 1000 ] },
     "miss_messages": [ [ "It feels like there's sand in your eye.", 1 ] ],
     "limb_score_mods": [
@@ -3825,7 +3823,7 @@
     "remove_message": "The fever breaks.",
     "rating": "bad",
     "immune_bp_flags": [ "BIONIC_LIMB" ],
-    "resist_effects": [ "aspirin" ],
+    "resist_effects": [ "nsaid_analgesic" ],
     "base_mods": {
       "stamina_min": [ -50 ],
       "stamina_max": [ -100 ],
