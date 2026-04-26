@@ -19,7 +19,7 @@
     "shopkeeper_item_group": "NC_DOCTOR_misc",
     "skills": [
       { "skill": "ALL", "level": { "mul": [ { "one_in": 3 }, { "sum": [ { "dice": [ 3, 2 ] }, { "rng": [ -1, -3 ] } ] } ] } },
-      { "skill": "firstaid", "bonus": { "rng": [ 2, 6 ] } }
+      { "skill": "firstaid", "bonus": { "rng": [ 4, 6 ] } }
     ]
   },
   {
@@ -44,6 +44,7 @@
       { "text": "Heard anything about the outside world?", "topic": "TALK_SCIENCE_REP_WORLD" },
       { "text": "Can I trade for supplies?", "topic": "TALK_SCIENCE_REP_ASK_TRADE" },
       { "text": "Can I do anything for you?", "topic": "TALK_MISSION_LIST" },
+      { "text": "Do you provide medical services?", "topic": "TALK_SCIENCE_REP_HEAL_YOU" },
       { "text": "Well, bye.", "topic": "TALK_DONE" }
     ]
   },
@@ -56,7 +57,7 @@
     },
     "responses": [
       { "text": "So what are you doing right now?", "topic": "TALK_SCIENCE_REP_NEW_DOING" },
-      { "text": "Never mind…", "topic": "TALK_SCIENCE_REP" }
+      { "text": "Nevermind…", "topic": "TALK_SCIENCE_REP" }
     ]
   },
   {
@@ -65,7 +66,7 @@
     "dynamic_line": "The Old Guard--that's what's left of the feds--set me up here to screen any new arrivals for infection risks.  Can't be too paranoid these days.  Sad to have to turn people away, but I like the assignment for the chance to get news about the outside world.",
     "responses": [
       { "text": "What kind of news?", "topic": "TALK_SCIENCE_REP_NEW_NEWS" },
-      { "text": "Never mind…", "topic": "TALK_SCIENCE_REP" }
+      { "text": "Nevermind…", "topic": "TALK_SCIENCE_REP" }
     ]
   },
   {
@@ -77,14 +78,41 @@
   {
     "id": "TALK_SCIENCE_REP_WORLD",
     "type": "talk_topic",
-    "dynamic_line": "This is no classic zombie outbreak.  The dead seem to be getting stronger as the days go on.  Some survivors too, come in here with… adaptations.  Maybe they're related.",
-    "responses": [ { "text": "Never mind…", "topic": "TALK_SCIENCE_REP" } ]
+    "dynamic_line": "This isn't like in the movies.  The dead seem to be getting stronger as the days go on.  Some survivors too, come in here with… adaptations.  Maybe they're related.",
+    "responses": [ { "text": "Nevermind…", "topic": "TALK_SCIENCE_REP" } ]
   },
   {
     "id": "TALK_SCIENCE_REP_ASK_TRADE",
     "type": "talk_topic",
-    "dynamic_line": "We can't.  There's nothing we can spare to sell and I've got no budget to buy from you.  I don't suppose you want to donate?",
+    "dynamic_line": "We don't have spare medicine to sell, if that's what you're asking.  If you've got extra supplies and you want to be paid for them, go talk to Smokes at the other window, he'll get you all sorted out.",
     "responses": [ { "text": "…", "topic": "TALK_SCIENCE_REP" } ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_SCIENCE_REP_HEAL_YOU",
+    "dynamic_line": "Supplies are stretched thin and you're not a resident here, but I could provide you with wound care and a physical for fifteen merch.",
+    "responses": [
+      {
+        "text": "I have the money, let's get started.",
+        "condition": { "u_has_items": { "item": "FMCNote", "count": 15 } },
+        "effect": [ { "u_sell_item": "FMCNote", "count": 15 }, "give_aid" ],
+        "topic": "TALK_DONE"
+      },
+      {
+        "text": "That's a little expensive.",
+        "topic": "TALK_SCIENCE_REP_HEAL_COMPLAIN"
+      },
+      { "text": "I've changed my mind.  Let's talk about something else.", "topic": "TALK_SCIENCE_REP" }
+    ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_SCIENCE_REP_HEAL_COMPLAIN",
+    "dynamic_line": "I'm not exactly turning a profit back here.  That money's going toward paying for more supplies so I can keep doing my job, and those supplies come from people like you, who expect to be paid for risking life and limb for bringing them here.  If you can't pay, then I'm sorry, but we are in the middle of an unprecedented calamity.  We should all thank heaven that we're still breathing at all.",
+    "responses": [
+      { "text": "Let's talk about something else.", "topic": "TALK_SCIENCE_REP" },
+      { "text": "Nevermind.", "topic": "TALK_DONE" }
+    ]
   },
   {
     "id": "MISSION_SCIENCE_REP_1",

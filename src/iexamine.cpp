@@ -5830,7 +5830,7 @@ void iexamine::autodoc( Character &you, const tripoint_bub_ms &examp )
                     continue;
                 }
                 broken_limbs_count++;
-                patient.mod_moves( -to_moves<int>( 5_seconds ) );
+                patient.mod_moves( -to_moves<int>( 240_seconds ) );
                 // TODO: fail here if unable to perform the action, i.e. can't wear more, trait mismatch.
                 int quantity = 1;
                 if( part == bodypart_id( "arm_l" ) || part == bodypart_id( "arm_r" ) ) {

@@ -144,12 +144,12 @@
   {
     "type": "talk_topic",
     "id": "TALK_GODCO_Jane_Heal_You",
-    "dynamic_line": "Sure, I've got some supplies on hand, just give me a minute and you'll be right as rain.  It'll cost three icons.",
+    "dynamic_line": "Sure, I've got some supplies on hand, just give me a minute and I'll look you over.  It'll cost ten icons.",
     "responses": [
       {
         "text": "I can pay for quality work.  Here it is.",
-        "condition": { "u_has_items": { "item": "icon", "count": 3 } },
-        "effect": [ { "u_sell_item": "icon", "count": 3 }, "give_aid" ],
+        "condition": { "u_has_items": { "item": "icon", "count": 10 } },
+        "effect": [ { "u_sell_item": "icon", "count": 10 }, "give_aid" ],
         "topic": "TALK_DONE"
       },
       { "text": "I've changed my mind.  Let's talk about something else.", "topic": "TALK_GODCO_Jane_2" }
