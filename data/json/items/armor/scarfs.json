@@ -81,9 +81,7 @@
     "warmth": 20,
     "environmental_protection": 1,
     "material_thickness": 0.3,
-    "armor": [
-      { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] } ]
   },
   {
     "id": "knit_scarf",
@@ -104,9 +102,7 @@
     "warmth": 20,
     "environmental_protection": 2,
     "material_thickness": 1,
-    "armor": [
-      { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] } ]
   },
   {
     "id": "scarf",
@@ -127,9 +123,7 @@
     "warmth": 45,
     "environmental_protection": 2,
     "material_thickness": 1,
-    "armor": [
-      { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] } ]
   },
   {
     "id": "scarf_fur",
@@ -150,9 +144,7 @@
     "warmth": 65,
     "environmental_protection": 2,
     "material_thickness": 2,
-    "armor": [
-      { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] } ]
   },
   {
     "id": "scarf_faux_fur",
@@ -173,9 +165,7 @@
     "warmth": 50,
     "environmental_protection": 2,
     "material_thickness": 2,
-    "armor": [
-      { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] } ]
   },
   {
     "id": "grass_keffiyeh",
@@ -196,9 +186,7 @@
     "material_thickness": 1,
     "environmental_protection": 0,
     "flags": [ "OVERSIZE", "COLLAR", "ALLOWS_NATURAL_ATTACKS", "HOOD", "UNRESTRICTED" ],
-    "armor": [
-      { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] } ]
   },
   {
     "id": "nun_wimple",

@@ -251,8 +251,11 @@
     "symbol": "=",
     "color": "brown",
     "revert_to": "arrow_wood",
+    "count": 1,
+    "stack_size": 1,
+    "stack_max": 1,
     "recovery_chance": 40,
     "effects": [ "IGNITE" ],
-    "flags": [ "TRADER_AVOID", "SPAWNS_ACTIVE" ]
+    "flags": [ "TRADER_AVOID" ]
   }
 ]
