@@ -4716,7 +4716,7 @@
           { "item": "apron_leather" },
           { "item": "boots" },
           { "item": "gloves_leather" },
-          { "item": "long_knit_scarf" },
+          { "item": "knit_scarf" },
           { "item": "hat_fur" },
           { "item": "purse" },
           { "item": "pot" },
@@ -5865,7 +5865,7 @@
         "entries": [
           { "item": "fancy_sunglasses" },
           { "item": "platinum_watch" },
-          { "item": "knit_scarf_loose" },
+          { "item": "knit_scarf" },
           { "item": "gloves_liner" },
           { "item": "polaroid_photo" },
           { "item": "suppressor" },
