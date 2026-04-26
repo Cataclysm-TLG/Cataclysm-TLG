@@ -35,6 +35,7 @@
       { "prob": 8, "group": "coke_bag_zipper_1_8" },
       { "prob": 2, "group": "meth_bag_zipper_1_6" },
       { "prob": 1, "group": "heroin_bag_zipper_1_4" },
+      { "item": "naloxone", "prob": 1 },
       [ "syringe", 8 ],
       { "item": "electrohack", "prob": 3, "charges": [ 0, 100 ] },
       [ "hatchet", 10 ],

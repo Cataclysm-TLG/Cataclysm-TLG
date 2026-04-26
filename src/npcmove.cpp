@@ -5772,7 +5772,8 @@ bool npc::complain()
 
     if( has_effect( effect_hypovolemia ) ) {
         std::string speech = chat_snippets().snip_lost_blood.translated();
-        if( complain_about( hypovolemia_string, 10_minutes, speech ) ) {
+        time_duration complain_interval = 50_minutes - 10_minutes * get_effect_int( effect_hypovolemia );
+        if( complain_about( hypovolemia_string, complain_interval, speech ) ) {
             return true;
         }
     }

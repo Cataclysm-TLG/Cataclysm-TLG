@@ -61,6 +61,7 @@
 #include "translations.h"
 #include "ui.h"
 #include "viewer.h"
+#include "vitamin.h"
 
 static const activity_id ACT_FIND_MOUNT( "ACT_FIND_MOUNT" );
 static const activity_id ACT_MOVE_LOOT( "ACT_MOVE_LOOT" );
@@ -107,6 +108,7 @@ static const efftype_id effect_irradiated( "irradiated" );
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_mending( "mending" );
 static const efftype_id effect_npc_suspend( "npc_suspend" );
+static const efftype_id effect_opioid_eff( "opioid_eff" );
 static const efftype_id effect_paincysts( "paincysts" );
 static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_rat_bite_fever( "rat_bite_fever" );
@@ -137,6 +139,10 @@ static const mtype_id mon_cow( "mon_cow" );
 static const mtype_id mon_horse( "mon_horse" );
 
 static const skill_id skill_firstaid( "firstaid" );
+
+static const vitamin_id vitamin_blood( "blood" );
+static const vitamin_id vitamin_vit_mme( "vit_mme" );
+static const vitamin_id vitamin_vit_naloxone( "vit_naloxone" );
 
 static const zone_type_id zone_type_CAMP_FOOD( "CAMP_FOOD" );
 static const zone_type_id zone_type_CAMP_STORAGE( "CAMP_STORAGE" );
@@ -700,10 +706,31 @@ void talk_function::give_equipment_allowance( npc &p, int allowance )
     p.add_effect( effect_asked_for_item, 3_hours );
 }
 
+/* This function assumes we're dealing with a public-facing professional (or someone who has
+*  reason to behave as such for the player character) who is in a well-stocked office. It might
+   someday be worth coming back and actually making sure the medic has all these supplies, but
+   generally they're only administering relatively cheap life-saving stuff. */
 void talk_function::give_aid( npc &p )
 {
     Character &patient = get_player_character();
     float medic_skill = p.get_skill_level( skill_firstaid );
+    if( patient.get_effect_int( effect_opioid_eff ) > 4 ) {
+        patient.vitamin_mod( vitamin_vit_mme, -1250 );
+        patient.vitamin_mod( vitamin_vit_naloxone, 400 );
+        patient.add_msg_player_or_npc( m_good,
+                                       _( "%s administers a dose of naloxone to treat your opioid overdose." ),
+                                       _( "%s administers a dose of naloxone to treat <npcname>'s opioid overdose." ),
+                                       p.get_name() );
+    }
+    if( patient.get_effect_int( effect_hypovolemia ) > 1 ) {
+        patient.vitamin_mod( vitamin_blood, 2500 );
+        patient.add_msg_player_or_npc( m_good,
+                                       _( "%s administers a saline infusion to treat your hypovolemic shock." ),
+                                       _( "%s administers a saline infusion to treat <npcname>'s hypovolemic shock." ),
+                                       p.get_name() );
+    }
+    // No need to fuss with stomach stuff, we're here for a while to get the physical done anyway. The doc can spare some water.
+    patient.set_thirst( 0 );
     for( const bodypart_id &bp :
          patient.get_all_body_parts( get_body_part_flags::only_main ) ) {
         // TODO: Repairing bionics.
@@ -792,44 +819,45 @@ void talk_function::give_aid( npc &p )
             }
         }
     }
-    if( ( x_in_y( medic_skill, 9.0 ) ) && ( patient.has_effect( effect_tapeworm ) || patient.has_effect( effect_bloodworms ) || patient.has_effect( effect_brainworms ) || patient.has_effect( effect_paincysts ) || patient.has_effect( effect_dermatik ) ) ) {
-        p.say( _( "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up.") );
+    if( ( x_in_y( medic_skill, 9.0 ) ) && ( patient.has_effect( effect_tapeworm ) ||
+                                            patient.has_effect( effect_bloodworms ) || patient.has_effect( effect_brainworms ) ||
+                                            patient.has_effect( effect_paincysts ) || patient.has_effect( effect_dermatik ) ) ) {
+        p.say( _( "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up." ) );
     }
     if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_fungus ) ) {
         p.say( _( "Looks like you have a pretty serious fungal infection.  Taking antifungal medication should clear it up, but I'd hurry if I were you." ) );
     }
     if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_irradiated ) ) {
-        p.say( _( "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection.") );
+        p.say( _( "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection." ) );
     }
     if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_infected ) ) {
-        p.say( _( "You have a bacterial infection.  There's a chance a healthy person can fight this sort of thing off, but it can be lethal for just about anybody.  Find the strongest antibiotics you can and take one every twelve hours until it's cleared up.") );
+        p.say( _( "You have a bacterial infection.  There's a chance a healthy person can fight this sort of thing off, but it can be lethal for just about anybody.  Find the strongest antibiotics you can and take one every twelve hours until it's cleared up." ) );
     }
     if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_flu ) ) {
-        p.say( _( "You probably feel pretty horrible, but it's just the flu.  It should resolve itself within two to twelve days from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any.") );
+        p.say( _( "You probably feel pretty horrible, but it's just the flu.  It should resolve itself within two to twelve days from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any." ) );
     }
     if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_common_cold ) ) {
-        p.say( _( "It seems you've caught a cold.  It should resolve itself within two days to three weeks from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any.") );
+        p.say( _( "It seems you've caught a cold.  It should resolve itself within two days to three weeks from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any." ) );
     }
-    if( x_in_y( medic_skill, 3.0 ) && ( patient.has_effect( effect_conjunctivitis_viral ) || patient.has_effect( effect_conjunctivitis_bacterial ) ) ) {
-        p.say( _( "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, that won't have any effect.") );
+    if( x_in_y( medic_skill, 3.0 ) && ( patient.has_effect( effect_conjunctivitis_viral ) ||
+                                        patient.has_effect( effect_conjunctivitis_bacterial ) ) ) {
+        p.say( _( "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, that won't have any effect." ) );
     }
     if( x_in_y( medic_skill, 5.0 ) && ( patient.has_effect( effect_rat_bite_fever ) ) ) {
-        p.say( _( "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it.") );
+        p.say( _( "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it." ) );
     }
     if( x_in_y( medic_skill, 5.0 ) && ( patient.has_effect( effect_tetanus ) ) ) {
-        p.say( _( "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms.") );
+        p.say( _( "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms." ) );
     }
     if( x_in_y( medic_skill, 6.0 ) && patient.get_effect_int( effect_toxin_buildup ) > 1 ) {
-        p.say( _( "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time.") );
+        p.say( _( "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time." ) );
     }
-    if( x_in_y( medic_skill, 4.0 ) && ( patient.has_effect( effect_anemia ) || patient.has_effect( effect_redcells_anemia ) ) ) {
-        p.say( _( "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself.") );
+    if( x_in_y( medic_skill, 4.0 ) && ( patient.has_effect( effect_anemia ) ||
+                                        patient.has_effect( effect_redcells_anemia ) ) ) {
+        p.say( _( "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself." ) );
     }
     if( x_in_y( medic_skill, 4.0 ) && patient.has_effect( effect_scurvy ) ) {
         p.say( _( "Scurvy.  That's a vitamin C deficiency.  You're going to want to look for fruit, greens, or organ meat, and it's got to be fresh, the preserved stuff usually won't do.  Vitamin supplements would also do the trick." ) );
-    }
-    if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_hypovolemia ) ) {
-        p.say( _( "You're going into shock because your blood volume is too low.  You can quickly fix it with a saline infusion.  Failing that, you're going to want to drink a lot of water and get some rest." ) );
     }
     const int moves = to_moves<int>( 30_minutes );
     patient.assign_activity( ACT_WAIT_NPC, moves );

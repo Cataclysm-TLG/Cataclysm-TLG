@@ -420,7 +420,7 @@
     "id": "saline_bag_500",
     "copy-from": "saline_bag_250",
     "type": "ITEM",
-    "name": { "str": "medium saline infusion kit" },
+    "name": { "str": "saline infusion kit" },
     "description": "A sealed plastic bag for liquids used in intravenous therapy, with rubber tube and cannula - all you need to perform an infusion.  Holds 500 mL of completely sterile saline, therefore it is safe to put it inside your veins, if you know how.",
     "weight": "518 g",
     "volume": "590 ml",

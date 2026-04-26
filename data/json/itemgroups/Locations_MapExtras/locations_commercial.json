@@ -1128,6 +1128,7 @@
       { "item": "syringe", "prob": 20 },
       { "prob": 10, "group": "meth_bag_zipper_1_6" },
       { "prob": 5, "group": "heroin_bag_zipper_1_4" },
+      { "item": "naloxone", "prob": 2 },
       { "item": "mag_porn", "prob": 35 },
       { "item": "hairpin", "prob": 5 },
       { "item": "purse", "prob": 15 },

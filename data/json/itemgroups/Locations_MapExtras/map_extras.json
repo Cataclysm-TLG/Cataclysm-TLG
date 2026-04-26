@@ -147,7 +147,8 @@
             "container-item": "null",
             "count": [ 6, 12 ],
             "prob": 20
-          }
+          },
+          { "item": "naloxone", "prob": 2 }
         ],
         "prob": 50
       },

@@ -356,6 +356,28 @@
     }
   },
   {
+    "id": "naloxone",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "MED",
+    "name": { "str_sp": "naloxone" },
+    "description": "A small plastic device with a nozzle on one end and a plunger on the other.  The drug inside can be administered nasally to rapidly reverse and block the effect of opioids, which could save someone's life during an overdose.",
+    "weight": "70 g",
+    "volume": "80 ml",
+    "price": "22 USD",
+    "price_postapoc": "1 USD",
+    "symbol": "!",
+    "color": "light_cyan",
+    "material": "plastic",
+    "flags": [ "NO_INGEST" ],
+    "vitamins": [ [ "vit_naloxone", 400 ], [ "vit_tramadol", -200 ], [ "vit_mme", -1250 ] ],
+    "use_action": {
+      "type": "consume_drug",
+      "activation_message": "You spray the naloxone up your nose.",
+      "effects": [ { "id": "nausea", "duration": "4 m" } ]
+    }
+  },
+  {
     "id": "cig",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
@@ -1926,7 +1948,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "fast-acting sedative" },
+    "name": { "str_sp": "alprazolam" },
     "description": "An anti-anxiety agent with a powerful sedative effect.  May cause dissociation and loss of memory.  It is dangerously addictive, and withdrawal from regular use should be gradual.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
@@ -1938,13 +1960,6 @@
     "color": "cyan",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "xanax",
-        "name": { "str_sp": "Xanax" },
-        "description": "An anti-anxiety agent with a powerful sedative effect.  May cause dissociation and loss of memory.  It is dangerously addictive, and withdrawal from regular use should be gradual."
-      }
-    ],
     "stim": -4,
     "healthy": -2,
     "fun": 20,
