@@ -5539,28 +5539,12 @@
     "components": [ [ [ "yarn", 90 ] ] ]
   },
   {
-    "result": "long_knit_scarf",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "20 m",
-    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "yarn", 180 ] ] ]
-  },
-  {
     "result": "scarf",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "15 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "yarn", 90 ] ] ]
-  },
-  {
-    "result": "scarf_long",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "20 m",
-    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "yarn", 160 ] ] ]
   },
   {
     "result": "gloves_wool",

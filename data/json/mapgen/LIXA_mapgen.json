@@ -584,7 +584,6 @@
         { "item": "holybook_quran", "x": 11, "y": 9, "amount": 1 },
         { "item": "holybook_hadith", "x": 12, "y": 7, "amount": 1 },
         { "item": "pride_flag", "variant": "transgender_pride_flag", "x": 18, "y": 1, "amount": 1 },
-        { "item": "long_knit_scarf", "x": 18, "y": 1, "amount": 1 },
         { "item": "knit_scarf", "x": 18, "y": 1, "amount": 2 },
         { "item": "laptop", "x": 18, "y": 5, "amount": 1 },
         { "item": "software_useless", "x": 18, "y": 5, "amount": [ 4, 7 ] },

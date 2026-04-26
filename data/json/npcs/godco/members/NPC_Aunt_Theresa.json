@@ -98,7 +98,7 @@
             { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('1 d')" ] }
           ]
         },
-        "effect": [ { "u_spawn_item": "long_knit_scarf" } ],
+        "effect": [ { "u_spawn_item": "knit_scarf" } ],
         "topic": "TALK_GODCO_Theresa_Knit_Done"
       },
       {
