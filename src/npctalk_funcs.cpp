@@ -880,7 +880,7 @@ void talk_function::give_aid( npc &p )
         p.say( _( "All else aside, your outlook seems great.  Clean living really is its own reward." ) );
     }
     // Here's little bit of EXP for listening to the doc.
-    patient.practice( skill_firstaid, 2, 4 );
+    patient.practice( skill_firstaid, 6, 4 );
     const int moves = to_moves<int>( 30_minutes );
     patient.assign_activity( ACT_WAIT_NPC, moves );
     patient.activity.str_values.push_back( p.get_name() );
