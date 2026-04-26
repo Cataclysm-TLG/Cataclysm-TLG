@@ -4281,6 +4281,12 @@
   },
   {
     "type": "effect_type",
+    "id": "naloxone_eff",
+    "max_duration": "1 s",
+    "//": "Just used to trigger an EOC that ditches some morale bonuses."
+  },
+  {
+    "type": "effect_type",
     "id": "hypovolemia",
     "name": [ "Mild Hypovolemic Shock", "Moderate Hypovolemic Shock", "Advanced Hypovolemic Shock", "Severe Hypovolemic Shock" ],
     "desc": [

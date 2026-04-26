@@ -198,6 +198,7 @@
           { "item": "coke", "prob": 5 },
           { "item": "lsd", "prob": 2 },
           { "item": "heroin", "prob": 5 },
+          { "item": "naloxone", "prob": 2 },
           { "collection": [ { "item": "crackpipe" }, { "item": "crack" } ], "prob": 5 },
           { "collection": [ { "item": "weed" }, { "item": "pipe_glass", "prob": 50 } ], "prob": 10 },
           { "distribution": [ { "item": "joint", "prob": 80 }, { "item": "joint_roach", "prob": 20 } ], "prob": 10 }

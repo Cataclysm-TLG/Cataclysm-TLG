@@ -26,8 +26,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "prescription stimulant" },
-    "description": "Medical-grade amphetamine salts mixed with dextroamphetamine salts, commonly prescribed to treat hyperactive attention deficits.  It suppresses the appetite, and is quite addictive.",
+    "name": { "str_sp": "dextroamphetamine" },
+    "description": "A mild prescription stimulant commonly prescribed for attention deficit disorder, often with levoamphetamine included.  It can be addictive if abused.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -37,13 +37,6 @@
     "color": "light_red",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "adderall",
-        "name": { "str_sp": "Adderall" },
-        "description": "Medical-grade amphetamine salts mixed with dextroamphetamine salts, commonly prescribed to treat hyperactive attention deficits.  It suppresses the appetite, and is quite addictive."
-      }
-    ],
     "stim": 24,
     "fun": 10,
     "addiction_potential": 10,
@@ -57,7 +50,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str": "epinephrine autoinjector" },
-    "description": "A syringe filled with a shot of epinephrine, also called adrenalin.  It serves as a powerful stimulant when you inject yourself with it.  Asthmatics can use it in an emergency to clear an asthma attack.",
+    "description": "A syringe filled with a shot of epinephrine, also called adrenaline.  It serves as a powerful stimulant when you inject yourself with it.  Asthmatics can use it in an emergency to clear an asthma attack.",
     "looks_like": "flu_shot",
     "weight": "12 g",
     "volume": "10ml",
@@ -353,6 +346,28 @@
       "type": "consume_drug",
       "activation_message": "You cover yourself in the solution everywhere the spray touched your body.",
       "effects": [ { "id": "skunk_spray_neutralizer" } ]
+    }
+  },
+  {
+    "id": "naloxone",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "MED",
+    "name": { "str_sp": "naloxone" },
+    "description": "A small plastic device with a nozzle on one end and a plunger on the other.  The drug inside can be administered nasally to rapidly reverse and block the effect of opioids, which could save someone's life during an overdose.",
+    "weight": "70 g",
+    "volume": "80 ml",
+    "price": "22 USD",
+    "price_postapoc": "1 USD",
+    "symbol": "!",
+    "color": "light_cyan",
+    "material": "plastic",
+    "flags": [ "NO_INGEST" ],
+    "vitamins": [ [ "vit_naloxone", 400 ], [ "vit_tramadol", -200 ], [ "vit_mme", -1250 ] ],
+    "use_action": {
+      "type": "consume_drug",
+      "activation_message": "You spray the naloxone up your nose.",
+      "effects": [ { "id": "nausea", "duration": "4 m" }, { "id": "naloxone_eff", "duration": "1 s" } ]
     }
   },
   {
@@ -943,7 +958,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "prescription sedative" },
+    "name": { "str_sp": "diazepam" },
     "description": "A strong benzodiazepine drug used to treat muscle spasms, anxiety, seizures, and panic attacks.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
@@ -954,13 +969,6 @@
     "color": "white",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "diazepam",
-        "name": { "str_sp": "diazepam" },
-        "description": "A strong benzodiazepine drug used to treat muscle spasms, anxiety, seizures, and panic attacks."
-      }
-    ],
     "stim": -8,
     "healthy": -1,
     "fun": 8,
@@ -1926,8 +1934,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "fast-acting sedative" },
-    "description": "An anti-anxiety agent with a powerful sedative effect.  May cause dissociation and loss of memory.  It is dangerously addictive, and withdrawal from regular use should be gradual.",
+    "name": { "str_sp": "alprazolam" },
+    "description": "A fast-acting benzodiazepine with a powerful sedative effect.  It is dangerously addictive, and withdrawal from regular use should be gradual.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -1938,19 +1946,11 @@
     "color": "cyan",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "xanax",
-        "name": { "str_sp": "Xanax" },
-        "description": "An anti-anxiety agent with a powerful sedative effect.  May cause dissociation and loss of memory.  It is dangerously addictive, and withdrawal from regular use should be gradual."
-      }
-    ],
-    "stim": -4,
     "healthy": -2,
     "fun": 20,
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 40,
-    "addiction_type": "sleeping pill",
+    "addiction_type": "diazepam",
     "use_action": [ "XANAX" ]
   },
   {
@@ -1977,7 +1977,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "heartburn medicine" },
+    "name": { "str_sp": "bismuth subsalicylate" },
     "description": "Creamy pink heartburn syrup that soothes upset stomachs and quells vomitous urges.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
@@ -1991,7 +1991,7 @@
     "color": "white",
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take some heartburn medicine.",
+      "activation_message": "You take some bismuth subsalicylate.",
       "effects": [ { "id": "tummy_tablet", "duration": 6400 } ]
     },
     "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE" ]

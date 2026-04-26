@@ -123,6 +123,7 @@
       { "prob": 2, "group": "meth_bag_zipper_6" },
       { "prob": 1, "group": "heroin_bag_zipper_4" },
       { "prob": 4, "group": "crack_bag_zipper_4" },
+      { "item": "naloxone", "prob": 6 },
       { "prob": 1, "group": "antifungal_bottle_plastic_pill_prescription_5" },
       { "prob": 2, "group": "antiparasitic_bottle_plastic_pill_prescription_5" },
       { "prob": 1, "group": "diazepam_bottle_plastic_pill_prescription_10" },

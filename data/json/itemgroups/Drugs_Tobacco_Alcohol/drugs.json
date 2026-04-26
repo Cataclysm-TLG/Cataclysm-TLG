@@ -186,7 +186,8 @@
       { "group": "codeine_ad_group", "prob": 60 },
       { "group": "tramadol_ad_group", "prob": 60 },
       { "group": "morphine_vial_glass_4", "prob": 10, "count": [ 1, 2 ] },
-      { "group": "oxycodone_ad_group", "prob": 200 }
+      { "group": "oxycodone_ad_group", "prob": 200 },
+      { "item": "naloxone", "prob": 60, "count": [ 1, 4 ] }
     ]
   },
   {
@@ -244,7 +245,8 @@
       { "item": "inhaler", "prob": 70, "charges": [ 10, 100 ] },
       { "prob": 50, "group": "quikclot_bag_plastic_1_6" },
       { "item": "smoxygen_tank", "prob": 70, "charges": [ 0, 12 ] },
-      { "distribution": [ { "group": "full_ifak" }, { "group": "used_ifak" } ], "prob": 40 }
+      { "distribution": [ { "group": "full_ifak" }, { "group": "used_ifak" } ], "prob": 40 },
+      { "item": "naloxone", "prob": 60, "count": [ 1, 2 ] }
     ]
   },
   {
@@ -309,7 +311,8 @@
       { "item": "morphine", "prob": 20, "count": [ 1, 4 ] },
       { "prob": 20, "group": "quikclot_bag_plastic_1_6" },
       { "item": "smoxygen_tank", "prob": 20, "charges": [ 0, 12 ] },
-      { "prob": 20, "group": "tramadol_bottle_plastic_pill_prescription_1_10" }
+      { "prob": 20, "group": "tramadol_bottle_plastic_pill_prescription_1_10" },
+      { "item": "naloxone", "prob": 20, "count": [ 1, 4 ] }
     ]
   },
   {

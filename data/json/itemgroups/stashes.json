@@ -75,6 +75,7 @@
       { "prob": 2, "group": "meth_bag_zipper_1_6" },
       { "prob": 1, "group": "heroin_bag_zipper_1_4" },
       { "prob": 4, "group": "crack_bag_zipper_1_4" },
+      { "item": "naloxone", "prob": 2 },
       [ "crackpipe", 4 ],
       { "prob": 1, "group": "antifungal_bottle_plastic_pill_prescription_1_5" },
       { "prob": 2, "group": "antiparasitic_bottle_plastic_pill_prescription_1_10" },
@@ -99,6 +100,7 @@
       { "prob": 2, "group": "meth_bag_zipper_1_6" },
       { "prob": 1, "group": "heroin_bag_zipper_1_4" },
       { "prob": 4, "group": "crack_bag_zipper_1_4" },
+      { "item": "naloxone", "prob": 2 },
       [ "crackpipe", 7 ],
       { "prob": 1, "group": "diazepam_bottle_plastic_pill_prescription_1_10" },
       { "item": "lsd", "prob": 6, "count": [ 1, 5 ] }

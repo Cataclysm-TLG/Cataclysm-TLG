@@ -132,6 +132,16 @@
     "decays_into": [ [ "vit_mme", 21 ] ]
   },
   {
+    "id": "vit_naloxone",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Naloxone" },
+    "min": 0,
+    "max": 1200,
+    "rate": "8 s",
+    "decays_into": [ [ "vit_mme", -12 ] ]
+  },
+  {
     "id": "vit_mme",
     "type": "vitamin",
     "vit_type": "drug",
