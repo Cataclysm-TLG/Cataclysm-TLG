@@ -724,6 +724,13 @@ void talk_function::give_aid( npc &p )
                                        _( "%s administers a dose of naloxone to treat <npcname>'s opioid overdose." ),
                                        p.get_name() );
     }
+    if( patient.get_effect_int( effect_hypovolemia ) > 1 ) {
+        patient.vitamin_mod( vitamin_blood, 2500 );
+        patient.add_msg_player_or_npc( m_good,
+                                       _( "%s administers a saline infusion to treat your hypovolemic shock." ),
+                                       _( "%s administers a saline infusion to treat <npcname>'s hypovolemic shock." ),
+                                       p.get_name() );
+    }
     patient.set_thirst( 0 );
     for( const bodypart_id &bp :
          patient.get_all_body_parts( get_body_part_flags::only_main ) ) {
@@ -744,14 +751,14 @@ void talk_function::give_aid( npc &p )
                 float total_bonus = disinfectant_power +
                                     ( 0.25f + disinfectant_power ) * prof_bonus;
                 total_bonus = p.enchantment_cache->modify_value(
-                                  enchant_vals::mod::BANDAGE_BONUS, total_bonus );
-                int bandage_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
+                                  enchant_vals::mod::DISINFECTANT_BONUS, total_bonus );
+                int disinfectant_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
                 patient.add_effect( effect_disinfected, 1_turns, bp );
                 effect &e = patient.get_effect( effect_disinfected, bp );
-                e.set_duration( e.get_int_dur_factor() * bandage_intensity );
-                patient.set_part_damage_bandaged(
+                e.set_duration( e.get_int_dur_factor() * disinfectant_intensity );
+                patient.set_part_damage_disinfected(
                     bp, patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
-                p.practice( skill_firstaid, 2 * bandage_intensity );
+                p.practice( skill_firstaid, 2 * disinfectant_intensity );
             }
             if( !patient.has_effect( effect_bandaged, bp.id() ) ) {
                 int bandages_power = 2;
@@ -761,13 +768,13 @@ void talk_function::give_aid( npc &p )
                                     ( 0.25f + bandages_power ) * prof_bonus;
                 total_bonus = p.enchantment_cache->modify_value(
                                   enchant_vals::mod::BANDAGE_BONUS, total_bonus );
-                int disinfectant_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
+                int bandage_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
                 patient.add_effect( effect_bandaged, 1_turns, bp );
                 effect &e = patient.get_effect( effect_bandaged, bp );
-                e.set_duration( e.get_int_dur_factor() * disinfectant_intensity );
+                e.set_duration( e.get_int_dur_factor() * bandage_intensity );
                 patient.set_part_damage_bandaged(
                     bp, patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
-                p.practice( skill_firstaid, 2 * disinfectant_intensity );
+                p.practice( skill_firstaid, 2 * bandage_intensity );
             }
         }
     }
@@ -872,6 +879,8 @@ void talk_function::give_aid( npc &p )
     } else {
         p.say( _( "All else aside, your outlook seems great.  Clean living really is its own reward." ) );
     }
+    // Here's little bit of EXP for listening to the doc.
+    patient.practice( skill_firstaid, 2, 4 );
     const int moves = to_moves<int>( 30_minutes );
     patient.assign_activity( ACT_WAIT_NPC, moves );
     patient.activity.str_values.push_back( p.get_name() );
