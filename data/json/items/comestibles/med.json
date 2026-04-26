@@ -374,7 +374,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You spray the naloxone up your nose.",
-      "effects": [ { "id": "nausea", "duration": "4 m" } ]
+      "effects": [ { "id": "nausea", "duration": "4 m" }, { "id": "naloxone_eff", "duration": "1 s" } ]
     }
   },
   {

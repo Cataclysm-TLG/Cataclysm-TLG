@@ -218,5 +218,14 @@
         "intensity": { "math": [ "u_effect_intensity('dermatik_visible', 'bodypart': IMPREGNATED_BODYPART)" ] }
       }
     ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "eoc_naloxine",
+    "eoc_type": "EVENT",
+    "required_event": "character_gains_effect",
+    "condition": { "compare_string": [ "naloxone_eff", { "context_val": "effect" } ] },
+    "//": "Drugs should probably get bespoke morale types so tolerance can tank them.",
+    "effect": [ { "u_lose_morale": "morale_food_good" } ]
   }
 ]

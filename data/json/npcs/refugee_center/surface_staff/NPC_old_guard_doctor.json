@@ -98,10 +98,7 @@
         "effect": [ { "u_sell_item": "FMCNote", "count": 15 }, "give_aid" ],
         "topic": "TALK_DONE"
       },
-      {
-        "text": "That's a little expensive.",
-        "topic": "TALK_SCIENCE_REP_HEAL_COMPLAIN"
-      },
+      { "text": "That's a little expensive.", "topic": "TALK_SCIENCE_REP_HEAL_COMPLAIN" },
       { "text": "I've changed my mind.  Let's talk about something else.", "topic": "TALK_SCIENCE_REP" }
     ]
   },
