@@ -737,7 +737,7 @@
       { "item": "tank_top", "variant": "tank_top_camo" },
       { "item": "bandolier_rifle", "contents-group": "bandolier_rifle_hunter" },
       { "item": "jacket_army" },
-      { "item": "knit_scarf" },
+      { "item": "scarf" },
       { "item": "backpack_hiking" },
       { "item": "duffelbag" },
       { "item": "sheath", "contents-item": "knife_hunting" },
