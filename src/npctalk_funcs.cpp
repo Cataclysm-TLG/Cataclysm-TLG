@@ -140,6 +140,8 @@ static const mtype_id mon_horse( "mon_horse" );
 
 static const skill_id skill_firstaid( "firstaid" );
 
+static const trait_id trait_IRREPARABLE( "IRREPARABLE" );
+
 static const vitamin_id vitamin_blood( "blood" );
 static const vitamin_id vitamin_vit_mme( "vit_mme" );
 static const vitamin_id vitamin_vit_naloxone( "vit_naloxone" );
@@ -722,18 +724,9 @@ void talk_function::give_aid( npc &p )
                                        _( "%s administers a dose of naloxone to treat <npcname>'s opioid overdose." ),
                                        p.get_name() );
     }
-    if( patient.get_effect_int( effect_hypovolemia ) > 1 ) {
-        patient.vitamin_mod( vitamin_blood, 2500 );
-        patient.add_msg_player_or_npc( m_good,
-                                       _( "%s administers a saline infusion to treat your hypovolemic shock." ),
-                                       _( "%s administers a saline infusion to treat <npcname>'s hypovolemic shock." ),
-                                       p.get_name() );
-    }
-    // No need to fuss with stomach stuff, we're here for a while to get the physical done anyway. The doc can spare some water.
     patient.set_thirst( 0 );
     for( const bodypart_id &bp :
          patient.get_all_body_parts( get_body_part_flags::only_main ) ) {
-        // TODO: Repairing bionics.
         if( bp->has_flag( json_flag_BIONIC_LIMB ) ) {
             continue;
         }
@@ -746,88 +739,61 @@ void talk_function::give_aid( npc &p )
         if( patient.get_part_hp_max( bp ) > patient.get_part_hp_cur( bp ) ) {
             if( !patient.has_effect( effect_disinfected, bp.id() ) ) {
                 int disinfectant_power = 2;
-                float prof_bonus = medic_skill + std::clamp( ( (
-                                       p.int_cur - 10.0f ) / 3.0f ), 0.0f, medic_skill / 2.66f );
-                float total_bonus = disinfectant_power + ( 0.25f + disinfectant_power ) * prof_bonus;
-                total_bonus = p.enchantment_cache->modify_value( enchant_vals::mod::BANDAGE_BONUS,
-                              total_bonus );
-                int disinfectant_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
+                float prof_bonus = medic_skill + std::clamp(
+                                       ( ( p.int_cur - 10.0f ) / 3.0f ), 0.0f, medic_skill / 2.66f );
+                float total_bonus = disinfectant_power +
+                                    ( 0.25f + disinfectant_power ) * prof_bonus;
+                total_bonus = p.enchantment_cache->modify_value(
+                                  enchant_vals::mod::BANDAGE_BONUS, total_bonus );
+                int bandage_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
                 patient.add_effect( effect_disinfected, 1_turns, bp );
                 effect &e = patient.get_effect( effect_disinfected, bp );
-                e.set_duration( e.get_int_dur_factor() * disinfectant_intensity );
-                patient.set_part_damage_bandaged( bp,
-                                                  patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
-                int practice_amount = 2 * disinfectant_intensity;
-                p.practice( skill_firstaid, static_cast<int>( practice_amount ) );
+                e.set_duration( e.get_int_dur_factor() * bandage_intensity );
+                patient.set_part_damage_bandaged(
+                    bp, patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
+                p.practice( skill_firstaid, 2 * bandage_intensity );
             }
             if( !patient.has_effect( effect_bandaged, bp.id() ) ) {
                 int bandages_power = 2;
-                float prof_bonus = medic_skill + std::clamp( ( (
-                                       p.int_cur - 10.0f ) / 3.0f ), 0.0f, medic_skill / 2.66f );
-                float total_bonus = bandages_power + ( 0.25f + bandages_power ) * prof_bonus;
-                total_bonus = p.enchantment_cache->modify_value( enchant_vals::mod::BANDAGE_BONUS,
-                              total_bonus );
-                int bandages_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
+                float prof_bonus = medic_skill + std::clamp(
+                                       ( ( p.int_cur - 10.0f ) / 3.0f ), 0.0f, medic_skill / 2.66f );
+                float total_bonus = bandages_power +
+                                    ( 0.25f + bandages_power ) * prof_bonus;
+                total_bonus = p.enchantment_cache->modify_value(
+                                  enchant_vals::mod::BANDAGE_BONUS, total_bonus );
+                int disinfectant_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
                 patient.add_effect( effect_bandaged, 1_turns, bp );
                 effect &e = patient.get_effect( effect_bandaged, bp );
-                e.set_duration( e.get_int_dur_factor() * bandages_intensity );
-                patient.set_part_damage_bandaged( bp,
-                                                  patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
-                int practice_amount = 2 * bandages_intensity;
-                p.practice( skill_firstaid, static_cast<int>( practice_amount ) );
-            }
-        }
-        int broken_limbs_count = 0;
-        for( const bodypart_id &part :
-             patient.get_all_body_parts( get_body_part_flags::only_main ) ) {
-            const bool broken = patient.is_limb_broken( part );
-            effect &existing_effect = patient.get_effect( effect_mending, part );
-            // Skip part if not broken or already healed 50%
-            if( !broken || ( !existing_effect.is_null() &&
-                             existing_effect.get_duration() >
-                             existing_effect.get_max_duration() - 5_days - 1_turns ) ) {
-                continue;
-            }
-            broken_limbs_count++;
-            int quantity = 1;
-            if( ( part == bodypart_id( "arm_l" ) || part == bodypart_id( "arm_r" ) ) &&
-                !patient.worn_with_flag( flag_SPLINT, part ) ) {
-                map &here = get_map();
-                tripoint_bub_ms patient_pos = patient.pos_bub();
-                here.spawn_item( patient_pos, itype_arm_splint );
-                for( const item &it : here.use_amount( patient_pos, 1, itype_arm_splint, quantity ) ) {
-                    if( !it.is_null() ) {
-                        patient.wear_item( it, false );
-                        patient.add_msg_player_or_npc( m_good, _( "The medic sets and splints your %s." ),
-                                                       _( "The medic sets and splints <npcname>'s %s." ),
-                                                       body_part_name( part ) );
-                    }
-                }
-            } else if( ( part == bodypart_id( "leg_l" ) || part == bodypart_id( "leg_r" ) ) &&
-                       !patient.worn_with_flag( flag_SPLINT, part ) ) {
-                map &here = get_map();
-                tripoint_bub_ms patient_pos = patient.pos_bub();
-                here.spawn_item( patient_pos, itype_leg_splint );
-                for( const item &it : here.use_amount( patient_pos, 1, itype_leg_splint, quantity ) ) {
-                    if( !it.is_null() ) {
-                        patient.wear_item( it, false );
-                        patient.add_msg_player_or_npc( m_good, _( "The medic sets and splints your %s." ),
-                                                       _( "The medic sets and splints <npcname>'s %s." ),
-                                                       body_part_name( part ) );
-                    }
-                }
+                e.set_duration( e.get_int_dur_factor() * disinfectant_intensity );
+                patient.set_part_damage_bandaged(
+                    bp, patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
+                p.practice( skill_firstaid, 2 * disinfectant_intensity );
             }
         }
     }
-    if( ( x_in_y( medic_skill, 9.0 ) ) && ( patient.has_effect( effect_tapeworm ) ||
-                                            patient.has_effect( effect_bloodworms ) || patient.has_effect( effect_brainworms ) ||
-                                            patient.has_effect( effect_paincysts ) || patient.has_effect( effect_dermatik ) ) ) {
+    bool found = false;
+    if( patient.has_effect( effect_tapeworm ) ) {
+        found |= x_in_y( medic_skill, 8.0 );
+    }
+    if( patient.has_effect( effect_bloodworms ) ) {
+        found |= x_in_y( medic_skill, 9.0 );
+    }
+    if( patient.has_effect( effect_brainworms ) ) {
+        found |= x_in_y( medic_skill, 10.0 );
+    }
+    if( patient.has_effect( effect_paincysts ) ) {
+        found |= x_in_y( medic_skill, 8.0 );
+    }
+    if( patient.has_effect( effect_dermatik ) ) {
+        found |= x_in_y( medic_skill, 6.0 );
+    }
+    if( found ) {
         p.say( _( "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up." ) );
     }
     if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_fungus ) ) {
         p.say( _( "Looks like you have a pretty serious fungal infection.  Taking antifungal medication should clear it up, but I'd hurry if I were you." ) );
     }
-    if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_irradiated ) ) {
+    if( x_in_y( medic_skill, 8.0 ) && patient.has_effect( effect_irradiated ) ) {
         p.say( _( "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection." ) );
     }
     if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_infected ) ) {
@@ -841,23 +807,70 @@ void talk_function::give_aid( npc &p )
     }
     if( x_in_y( medic_skill, 3.0 ) && ( patient.has_effect( effect_conjunctivitis_viral ) ||
                                         patient.has_effect( effect_conjunctivitis_bacterial ) ) ) {
-        p.say( _( "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, that won't have any effect." ) );
+        p.say( _( "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, it won't have any effect." ) );
     }
-    if( x_in_y( medic_skill, 5.0 ) && ( patient.has_effect( effect_rat_bite_fever ) ) ) {
+    if( x_in_y( medic_skill, 5.0 ) && patient.has_effect( effect_rat_bite_fever ) ) {
         p.say( _( "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it." ) );
     }
-    if( x_in_y( medic_skill, 5.0 ) && ( patient.has_effect( effect_tetanus ) ) ) {
+    if( x_in_y( medic_skill, 5.0 ) && patient.has_effect( effect_tetanus ) ) {
         p.say( _( "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms." ) );
     }
     if( x_in_y( medic_skill, 6.0 ) && patient.get_effect_int( effect_toxin_buildup ) > 1 ) {
         p.say( _( "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time." ) );
     }
-    if( x_in_y( medic_skill, 4.0 ) && ( patient.has_effect( effect_anemia ) ||
-                                        patient.has_effect( effect_redcells_anemia ) ) ) {
+    if( patient.has_effect( effect_anemia ) || patient.has_effect( effect_redcells_anemia ) ) {
         p.say( _( "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself." ) );
     }
-    if( x_in_y( medic_skill, 4.0 ) && patient.has_effect( effect_scurvy ) ) {
+    if( patient.has_effect( effect_scurvy ) ) {
         p.say( _( "Scurvy.  That's a vitamin C deficiency.  You're going to want to look for fruit, greens, or organ meat, and it's got to be fresh, the preserved stuff usually won't do.  Vitamin supplements would also do the trick." ) );
+    }
+    time_duration since_start = calendar::turn - calendar::start_of_game;
+    int game_minutes = to_minutes<int>( since_start );
+    int time_slice_hourly = game_minutes / 60;
+    size_t hash_val_hourly = std::hash<int> {}( time_slice_hourly );
+    float normalized_hourly = ( hash_val_hourly % 1000 ) / 1000.0f;
+    float hourly_noise_factor = 0.85f + 0.3f * normalized_hourly;
+
+    const int cardio = static_cast<int>(
+                           std::round( p.get_cardiofit() * hourly_noise_factor )
+                       );
+
+    const int base = p.get_cardio_acc_base();
+
+    if( cardio < base * 0.9 ) {
+        p.say( _( "Your pulse is elevated and I'm not liking the look of your blood pressure.  You need more exercise." ) );
+    } else if( cardio < base * 1.1 ) {
+        p.say( _( "I'd say you could stand to get more exercise." ) );
+    } else if( cardio < base * 1.6 ) {
+        p.say( _( "Your vitals look good." ) );
+    } else if( cardio < base * 2.2 ) {
+        p.say( _( "It seems like you're in pretty good shape.  Your vitals look great, anyway." ) );
+    } else {
+        p.say( _( "You're in incredible shape!  What exactly have you been doing out there?" ) );
+    }
+
+    const float bmi = patient.get_bmi_fat();
+    if( bmi < character_weight_category::skinny ) {
+        p.say( _( "You probably don't need me to tell you this, but you're starving.  You're going to have a hard time staying healthy, let alone active, if your body doesn't have enough energy for its basic functions." ) );
+    } else if( bmi < character_weight_category::obese ) {
+        p.say( _( "Your weight looks OK." ) );
+    } else if( bmi < character_weight_category::morbidly_obese ) {
+        p.say( _( "You might benefit from losing some weight.  Things being how they are I'd say it's better to have too much than too little, but you're at the point where it's starting to put a strain on your body." ) );
+    } else {
+        p.say( _( "We really should think about getting you on a diet.  I know, I know, I don't like saying it, but now more than ever, your health matters." ) );
+    }
+    if( patient.has_trait( trait_IRREPARABLE ) ) {
+        p.say( _( "I don't think your condition's going to improve without some sort of miracle, so you need to stay out of trouble." ) );
+    } else if( patient.get_lifestyle() < -50 ) {
+        p.say( _( "One last thing: your immune system's probably shot.  That means you'll have a hard time fighting off infection and recovering from injury.  You need to avoid drugs and alcohol, mask up whenever possible, and don't eat anything weird.  Oh, and try to get some sleep.  You won't bounce back right away, but if you can stay active, stay clean, and try to maintain a healthy weight, you'll start feeling a lot better." ) );
+    } else if( patient.get_lifestyle() < -15 ) {
+        p.say( _( "That's everything.  You'd probably benefit from some lifestyle changes, though.  Little things, like exposure to toxins, junk food, smoke inhalation, even just dealing with a lot of negative emotions - all this stuff adds up, and it can really do a number on your health." ) );
+    } else if( patient.get_lifestyle() < 35 ) {
+        p.say( _( "It looks like apart from everything else, you've been maintaining good lifestyle habits.  Keep it up, it'll pay dividends the next time you're up against an injury or illness." ) );
+    } else if( patient.get_lifestyle() < 80 ) {
+        p.say( _( "Your health otherwise seems pretty good.  As long as you don't push it too far, you should be able to bounce back pretty well from most health problems." ) );
+    } else {
+        p.say( _( "All else aside, your outlook seems great.  Clean living really is its own reward." ) );
     }
     const int moves = to_moves<int>( 30_minutes );
     patient.assign_activity( ACT_WAIT_NPC, moves );

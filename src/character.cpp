@@ -11370,7 +11370,7 @@ void Character::process_one_effect( effect &it, bool is_new )
     if( val != 0 ) {
         mod = 1;
         if( it.get_sizing( "PAIN" ) ) {
-            if( has_trait( trait_FAT ) ) {
+            if( has_trait( trait_FAT ) || get_bmi_fat() > character_weight_category::overweight ) {
                 mod *= 1.5;
             }
             if( get_size() == creature_size::large ) {
@@ -11394,7 +11394,7 @@ void Character::process_one_effect( effect &it, bool is_new )
     if( val != 0 ) {
         mod = 1;
         if( it.get_sizing( "HURT" ) ) {
-            if( has_trait( trait_FAT ) ) {
+            if( has_trait( trait_FAT ) || get_bmi_fat() > character_weight_category::overweight ) {
                 mod *= 1.5;
             }
             if( get_size() == creature_size::large ) {
