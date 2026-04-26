@@ -1992,7 +1992,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "heartburn medicine" },
+    "name": { "str_sp": "bismuth subsalicylate" },
     "description": "Creamy pink heartburn syrup that soothes upset stomachs and quells vomitous urges.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
@@ -2006,7 +2006,7 @@
     "color": "white",
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take some heartburn medicine.",
+      "activation_message": "You take some bismuth subsalicylate.",
       "effects": [ { "id": "tummy_tablet", "duration": 6400 } ]
     },
     "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE" ]
