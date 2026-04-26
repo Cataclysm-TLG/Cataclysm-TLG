@@ -3907,5 +3907,135 @@
     "type": "MIGRATION",
     "id": "poppy_cough",
     "replace": "opium_tar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "patchwork_scarf_headwrap",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "patchwork_scarf_loose",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_patchwork_scarf",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_patchwork_scarf_loose",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_patchwork_scarf_headwrap",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "knit_scarf_loose",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "knit_scarf_headwrap",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_knit_scarf",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_knit_scarf_loose",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_knit_scarf_headwrap",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_loose",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_headwrap",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_long",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_long_headwrap",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_long_loose",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_loose",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_headwrap",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_long",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_long_headwrap",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_long_loose",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_loose",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_headwrap",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_long",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_long_headwrap",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_long_loose",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "marloss_scarf",
+    "replace": "keffiyeh"
   }
 ]
