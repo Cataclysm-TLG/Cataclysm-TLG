@@ -91,9 +91,9 @@
   {
     "type": "addiction_type",
     "id": "diazepam",
-    "name": "Diazepam Withdrawal",
+    "name": "Craving Benzodiazepines",
     "type_name": "diazepam",
-    "description": "Perception - 1;   Intelligence - 1;\nAnxiety, nausea, hallucinations, and general malaise.",
+    "description": "The world is way too much, you're freaking out.  You just need a chill pill, that's all.",
     "sated": "6 hours",
     "craving_morale": "morale_craving_diazepam",
     "builtin": "diazepam_effect"

@@ -26,8 +26,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "prescription stimulant" },
-    "description": "Medical-grade amphetamine salts mixed with dextroamphetamine salts, commonly prescribed to treat hyperactive attention deficits.  It suppresses the appetite, and is quite addictive.",
+    "name": { "str_sp": "dextroamphetamine" },
+    "description": "A mild prescription stimulant commonly prescribed for attention deficit disorder, often with levoamphetamine included.  It can be addictive if abused.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -37,13 +37,6 @@
     "color": "light_red",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "adderall",
-        "name": { "str_sp": "Adderall" },
-        "description": "Medical-grade amphetamine salts mixed with dextroamphetamine salts, commonly prescribed to treat hyperactive attention deficits.  It suppresses the appetite, and is quite addictive."
-      }
-    ],
     "stim": 24,
     "fun": 10,
     "addiction_potential": 10,
@@ -57,7 +50,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str": "epinephrine autoinjector" },
-    "description": "A syringe filled with a shot of epinephrine, also called adrenalin.  It serves as a powerful stimulant when you inject yourself with it.  Asthmatics can use it in an emergency to clear an asthma attack.",
+    "description": "A syringe filled with a shot of epinephrine, also called adrenaline.  It serves as a powerful stimulant when you inject yourself with it.  Asthmatics can use it in an emergency to clear an asthma attack.",
     "looks_like": "flu_shot",
     "weight": "12 g",
     "volume": "10ml",
@@ -965,7 +958,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "prescription sedative" },
+    "name": { "str_sp": "diazepam" },
     "description": "A strong benzodiazepine drug used to treat muscle spasms, anxiety, seizures, and panic attacks.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
@@ -976,13 +969,6 @@
     "color": "white",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "diazepam",
-        "name": { "str_sp": "diazepam" },
-        "description": "A strong benzodiazepine drug used to treat muscle spasms, anxiety, seizures, and panic attacks."
-      }
-    ],
     "stim": -8,
     "healthy": -1,
     "fun": 8,
@@ -1949,7 +1935,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "alprazolam" },
-    "description": "An anti-anxiety agent with a powerful sedative effect.  May cause dissociation and loss of memory.  It is dangerously addictive, and withdrawal from regular use should be gradual.",
+    "description": "A fast-acting benzodiazepine with a powerful sedative effect.  It is dangerously addictive, and withdrawal from regular use should be gradual.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -1960,12 +1946,11 @@
     "color": "cyan",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "stim": -4,
     "healthy": -2,
     "fun": 20,
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 40,
-    "addiction_type": "sleeping pill",
+    "addiction_type": "diazepam",
     "use_action": [ "XANAX" ]
   },
   {
