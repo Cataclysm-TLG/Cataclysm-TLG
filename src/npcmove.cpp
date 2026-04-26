@@ -3228,8 +3228,14 @@ bool npc::is_valid_sleep_candidate( const tripoint_bub_ms &p ) const
 
 bool npc::can_open_door( const tripoint_bub_ms &p, const bool inside ) const
 {
-    return !is_hallucination() && !rules.has_flag( ally_rule::avoid_doors ) &&
-           get_map().open_door( *this, p, inside, true );
+    if( is_hallucination() ) {
+        return false;
+    }
+    if( !( guaranteed_hostile() || is_enemy() ) &&
+        rules.has_flag( ally_rule::avoid_doors ) ) {
+        return false;
+    }
+    return get_map().open_door( *this, p, inside, true );
 }
 
 bool npc::can_move_to( const tripoint_bub_ms &p, bool no_bashing ) const

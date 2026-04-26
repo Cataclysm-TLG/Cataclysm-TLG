@@ -1522,10 +1522,13 @@ void npc::handle_sound( const sounds::sound_t spriority, const std::string &desc
     }
     // patrolling guards will investigate more readily than stationary NPCS
     int investigate_dist = 10;
+    if( guaranteed_hostile() || is_enemy() ) {
+        investigate_dist = 25;
+    }
     if( mission == NPC_MISSION_GUARD_ALLY || mission == NPC_MISSION_GUARD_PATROL ) {
         investigate_dist = 50;
     }
-    if( rules.has_flag( ally_rule::ignore_noise ) ) {
+    if( ( !guaranteed_hostile() && !is_enemy() ) && rules.has_flag( ally_rule::ignore_noise ) ) {
         investigate_dist = 0;
     }
     if( ai_cache.total_danger < 1.0f ) {
@@ -1539,7 +1542,7 @@ void npc::handle_sound( const sounds::sound_t spriority, const std::string &desc
             } else if( spriority > sounds::sound_t::activity ) {
                 warn_about( "combat_noise", rng( 1, 10 ) * 1_minutes );
             }
-            bool should_check = rl_dist( pos_bub(), spos ) < investigate_dist;
+            bool should_check = trig_dist( pos_bub(), spos ) < investigate_dist;
             if( should_check ) {
                 const zone_manager &mgr = zone_manager::get_manager();
                 // NOLINTNEXTLINE(bugprone-branch-clone)

@@ -792,38 +792,42 @@ void talk_function::give_aid( npc &p )
             }
         }
     }
-    if( ( x_in_y( medic_skill, 9.0 ) ) && ( patient.has_effect( effect_tapeworm ) || patient.has_effect( effect_bloodworms ) || patient.has_effect( effect_brainworms ) || patient.has_effect( effect_paincysts ) || patient.has_effect( effect_dermatik ) ) ) {
-        p.say( _( "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up.") );
+    if( ( x_in_y( medic_skill, 9.0 ) ) && ( patient.has_effect( effect_tapeworm ) ||
+                                            patient.has_effect( effect_bloodworms ) || patient.has_effect( effect_brainworms ) ||
+                                            patient.has_effect( effect_paincysts ) || patient.has_effect( effect_dermatik ) ) ) {
+        p.say( _( "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up." ) );
     }
     if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_fungus ) ) {
         p.say( _( "Looks like you have a pretty serious fungal infection.  Taking antifungal medication should clear it up, but I'd hurry if I were you." ) );
     }
     if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_irradiated ) ) {
-        p.say( _( "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection.") );
+        p.say( _( "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection." ) );
     }
     if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_infected ) ) {
-        p.say( _( "You have a bacterial infection.  There's a chance a healthy person can fight this sort of thing off, but it can be lethal for just about anybody.  Find the strongest antibiotics you can and take one every twelve hours until it's cleared up.") );
+        p.say( _( "You have a bacterial infection.  There's a chance a healthy person can fight this sort of thing off, but it can be lethal for just about anybody.  Find the strongest antibiotics you can and take one every twelve hours until it's cleared up." ) );
     }
     if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_flu ) ) {
-        p.say( _( "You probably feel pretty horrible, but it's just the flu.  It should resolve itself within two to twelve days from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any.") );
+        p.say( _( "You probably feel pretty horrible, but it's just the flu.  It should resolve itself within two to twelve days from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any." ) );
     }
     if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_common_cold ) ) {
-        p.say( _( "It seems you've caught a cold.  It should resolve itself within two days to three weeks from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any.") );
+        p.say( _( "It seems you've caught a cold.  It should resolve itself within two days to three weeks from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any." ) );
     }
-    if( x_in_y( medic_skill, 3.0 ) && ( patient.has_effect( effect_conjunctivitis_viral ) || patient.has_effect( effect_conjunctivitis_bacterial ) ) ) {
-        p.say( _( "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, that won't have any effect.") );
+    if( x_in_y( medic_skill, 3.0 ) && ( patient.has_effect( effect_conjunctivitis_viral ) ||
+                                        patient.has_effect( effect_conjunctivitis_bacterial ) ) ) {
+        p.say( _( "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, that won't have any effect." ) );
     }
     if( x_in_y( medic_skill, 5.0 ) && ( patient.has_effect( effect_rat_bite_fever ) ) ) {
-        p.say( _( "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it.") );
+        p.say( _( "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it." ) );
     }
     if( x_in_y( medic_skill, 5.0 ) && ( patient.has_effect( effect_tetanus ) ) ) {
-        p.say( _( "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms.") );
+        p.say( _( "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms." ) );
     }
     if( x_in_y( medic_skill, 6.0 ) && patient.get_effect_int( effect_toxin_buildup ) > 1 ) {
-        p.say( _( "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time.") );
+        p.say( _( "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time." ) );
     }
-    if( x_in_y( medic_skill, 4.0 ) && ( patient.has_effect( effect_anemia ) || patient.has_effect( effect_redcells_anemia ) ) ) {
-        p.say( _( "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself.") );
+    if( x_in_y( medic_skill, 4.0 ) && ( patient.has_effect( effect_anemia ) ||
+                                        patient.has_effect( effect_redcells_anemia ) ) ) {
+        p.say( _( "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself." ) );
     }
     if( x_in_y( medic_skill, 4.0 ) && patient.has_effect( effect_scurvy ) ) {
         p.say( _( "Scurvy.  That's a vitamin C deficiency.  You're going to want to look for fruit, greens, or organ meat, and it's got to be fresh, the preserved stuff usually won't do.  Vitamin supplements would also do the trick." ) );
