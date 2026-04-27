@@ -65,7 +65,7 @@
   {
     "id": "patchwork_scarf",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "light_gray",
@@ -86,7 +86,7 @@
   {
     "id": "knit_scarf",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "dark_gray",
@@ -107,7 +107,7 @@
   {
     "id": "scarf",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "brown",
@@ -128,7 +128,7 @@
   {
     "id": "scarf_fur",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "brown",
@@ -149,7 +149,7 @@
   {
     "id": "scarf_faux_fur",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "white",
@@ -211,7 +211,7 @@
   {
     "id": "tallit_gadol",
     "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "blue",

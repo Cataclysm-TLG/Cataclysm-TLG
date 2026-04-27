@@ -2632,54 +2632,6 @@
     "armor": [ { "encumbrance": 10, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ]
   },
   {
-    "id": "turtleneck",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
-    "name": { "str": "turtleneck" },
-    "description": "A tasteful wool turtleneck, modeled after cashmere.  Unencumbering and warm, but lacking storage.",
-    "category": "clothing",
-    "weight": "478 g",
-    "volume": "2500 ml",
-    "price": "50 USD",
-    "price_postapoc": "60 cent",
-    "material": [ "wool" ],
-    "symbol": "[",
-    "looks_like": "sweater",
-    "color": "white",
-    "warmth": 30,
-    "material_thickness": 0.5,
-    "environmental_protection": 2,
-    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS", "COLLAR" ],
-    "armor": [
-      { "encumbrance": 3, "coverage": 100, "covers": [ "torso", "arm_l", "arm_r", "mouth" ] },
-      { "encumbrance": 1, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
-  },
-  {
-    "id": "turtleneck_shirt",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR", "TOOL" ],
-    "name": { "str": "turtleneck shirt" },
-    "description": "A tasteful shirt with a high rolled collar.  It's too thin to be called a sweater.",
-    "category": "clothing",
-    "weight": "300 g",
-    "volume": "2000 ml",
-    "price": "20 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "cotton" ],
-    "symbol": "[",
-    "looks_like": "sweater",
-    "color": "white",
-    "warmth": 20,
-    "material_thickness": 0.5,
-    "environmental_protection": 1,
-    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS", "COLLAR" ],
-    "armor": [
-      { "encumbrance": 2, "coverage": 98, "covers": [ "torso", "arm_l", "arm_r" ] },
-      { "encumbrance": 0, "coverage": 95, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
-  },
-  {
     "type": "ITEM",
     "subtypes": [ "ARMOR", "TOOL" ],
     "id": "mask_ski",
