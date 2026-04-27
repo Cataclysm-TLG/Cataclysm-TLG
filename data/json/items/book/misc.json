@@ -170,7 +170,7 @@
     "id": "mag_porn",
     "type": "ITEM",
     "subtypes": [ "BOOK" ],
-    "name": { "str": "Playboy", "str_pl": "issues of Playboy" },
+    "name": { "str": "naughty magazine", "str_pl": "naughty magazines" },
     "description": "You can read it for the articles.  Or not.",
     "weight": "60 g",
     "volume": "250 ml",

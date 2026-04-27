@@ -75,6 +75,7 @@
       { "category": "spare_parts", "purchase_rate": 0 },
       { "category": "chems", "purchase_rate": 0 },
       { "category": "food", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.05 },
       { "category": "tools", "purchase_rate": 0 },
       { "category": "armor", "purchase_rate": 0 },
       { "category": "ma_manuals", "purchase_rate": 0 },
@@ -87,7 +88,8 @@
       { "category": "magazines", "purchase_rate": 0 },
       { "category": "veh_parts", "purchase_rate": 0 },
       { "category": "tool_magazine", "purchase_rate": 0 },
-      { "category": "other", "purchase_rate": 0 }
+      { "category": "other", "purchase_rate": 0 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 }
     ],
     "relations": {
       "robofac": {
@@ -198,6 +200,7 @@
       { "category": "spare_parts", "purchase_rate": 0 },
       { "category": "chems", "purchase_rate": 0 },
       { "category": "bionics", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.05 },
       { "category": "tools", "purchase_rate": 0 },
       { "category": "armor", "purchase_rate": 0 },
       { "category": "ma_manuals", "purchase_rate": 0 },
@@ -210,7 +213,13 @@
       { "category": "magazines", "purchase_rate": 0 },
       { "category": "veh_parts", "purchase_rate": 0 },
       { "category": "tool_magazine", "purchase_rate": 0 },
-      { "category": "other", "purchase_rate": 0 }
+      { "category": "other", "purchase_rate": 0 },
+      { "group": "toiletries", "purchase_rate": 0.5 },
+      { "group": "firstaid", "purchase_rate": 0.3 },
+      { "group": "drugs_medical_common", "purchase_rate": 0.3 },
+      { "group": "drugs_soft", "purchase_rate": 0.5 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "games_board_all", "purchase_rate": 0.5 }
     ],
     "relations": {
       "free_merchants": {
@@ -361,6 +370,7 @@
       { "category": "bionics", "purchase_rate": 0 },
       { "category": "tools", "purchase_rate": 0 },
       { "category": "armor", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.05 },
       { "category": "ma_manuals", "purchase_rate": 0 },
       { "category": "manuals", "purchase_rate": 0 },
       { "category": "mutagen", "purchase_rate": 0 },
@@ -371,7 +381,13 @@
       { "category": "magazines", "purchase_rate": 0 },
       { "category": "veh_parts", "purchase_rate": 0 },
       { "category": "tool_magazine", "purchase_rate": 0 },
-      { "category": "other", "purchase_rate": 0 }
+      { "category": "other", "purchase_rate": 0 },
+      { "group": "toiletries", "purchase_rate": 0.4 },
+      { "group": "firstaid", "purchase_rate": 0.4 },
+      { "group": "drugs_medical_common", "purchase_rate": 0.3 },
+      { "group": "drugs_soft", "purchase_rate": 0.5 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "games_board_all", "purchase_rate": 0.3 }
     ],
     "relations": {
       "free_merchants": {
@@ -560,6 +576,7 @@
       { "category": "bionics", "purchase_rate": 0 },
       { "category": "tools", "purchase_rate": 0 },
       { "category": "armor", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.08 },
       { "category": "ma_manuals", "purchase_rate": 0 },
       { "category": "manuals", "purchase_rate": 0 },
       { "category": "mutagen", "purchase_rate": 0 },
@@ -570,7 +587,12 @@
       { "category": "magazines", "purchase_rate": 0.5 },
       { "category": "veh_parts", "purchase_rate": 0 },
       { "category": "tool_magazine", "purchase_rate": 0 },
-      { "category": "other", "purchase_rate": 0 }
+      { "category": "other", "purchase_rate": 0 },
+      { "group": "toiletries", "purchase_rate": 0.3 },
+      { "group": "firstaid", "purchase_rate": 0.5 },
+      { "group": "drugs_medical_common", "purchase_rate": 0.25 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "games_board_all", "purchase_rate": 0.5 }
     ],
     "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 82500,
@@ -715,11 +737,33 @@
       { "item": "money_bundle_FMCNote", "purchase_rate": 0 },
       { "item": "RobofacCoin", "purchase_rate": 0 },
       { "item": "FMCNote", "purchase_rate": 0 },
-      { "group": "games_board_all", "premium": 2 },
-      { "group": "manuals", "premium": 2 },
-      { "group": "textbooks", "premium": 2 },
-      { "group": "literature", "premium": 2 },
-      { "group": "exotic_books", "premium": 4 }
+      { "category": "clothing", "purchase_rate": 0 },
+      { "category": "container", "purchase_rate": 0 },
+      { "category": "spare_parts", "purchase_rate": 0 },
+      { "category": "chems", "purchase_rate": 0 },
+      { "category": "food", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.05 },
+      { "category": "tools", "purchase_rate": 0 },
+      { "category": "armor", "purchase_rate": 0 },
+      { "category": "mutagen", "purchase_rate": 0 },
+      { "category": "drugs", "purchase_rate": 0 },
+      { "category": "ammo", "purchase_rate": 0 },
+      { "category": "weapons", "purchase_rate": 0 },
+      { "category": "guns", "purchase_rate": 0 },
+      { "category": "magazines", "purchase_rate": 0 },
+      { "category": "veh_parts", "purchase_rate": 0 },
+      { "category": "tool_magazine", "purchase_rate": 0 },
+      { "category": "other", "purchase_rate": 0 },
+      { "category": "manuals", "premium": 1 },
+      { "category": "ma_manuals", "premium": 1 },
+      { "group": "literature", "premium": 1 },
+      { "group": "exotic_books", "premium": 2 },
+      { "group": "toiletries", "purchase_rate": 0.3 },
+      { "group": "firstaid", "purchase_rate": 0.5 },
+      { "group": "drugs_medical_common", "purchase_rate": 0.25 },
+      { "group": "drugs_soft", "purchase_rate": 0.25 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "games_board_all", "purchase_rate": 0.5 }
     ],
     "relations": {
       "free_merchants": {
