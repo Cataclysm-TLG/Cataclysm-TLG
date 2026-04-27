@@ -2153,9 +2153,8 @@ ret_val<void> npc::wants_to_buy( const item &it, int at_price ) const
         return ret_val<void>::make_success();
     }
 
-
-    if( it.has_flag( flag_TRADER_AVOID ) || it.has_var( VAR_TRADE_IGNORE ) ) {
-        return ret_val<void>::make_failure( _( "Will never buy this" ) );
+    if( it.has_flag( flag_TRADER_AVOID ) || it.has_var( VAR_TRADE_IGNORE ) || at_price == 0 ) {
+        return ret_val<void>::make_failure( _( "Will not buy this" ) );
     }
 
     if( it.is_filthy() ) {
@@ -2168,7 +2167,7 @@ ret_val<void> npc::wants_to_buy( const item &it, int at_price ) const
     }
 
     // TODO: Base on inventory
-    return at_price >= 0 ? ret_val<void>::make_success() : ret_val<void>::make_failure();
+    return at_price > 0 ? ret_val<void>::make_success() : ret_val<void>::make_failure();
 }
 
 // Will the NPC freely exchange items with the player?

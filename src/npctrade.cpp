@@ -194,6 +194,8 @@ int npc_trading::adjusted_price( item const *it, int amount, Character const &bu
         price *= fpr->premium;
         if( seller.is_npc() ) {
             price *= fpr->markup;
+        } else {
+            price *= fpr->purchase_rate;
         }
     }
     if( it->count_by_charges() && amount >= 0 ) {
