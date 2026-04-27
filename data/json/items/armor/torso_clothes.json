@@ -195,14 +195,8 @@
       {
         "coverage": 42,
         "encumbrance": 3,
-        "covers": [
-          "cephalopod_arm_1",
-          "cephalopod_arm_4"
-        ],
-        "specifically_covers": [
-          "cephalopod_arm_1_draped",
-          "cephalopod_arm_4_draped"
-        ],
+        "covers": [ "cephalopod_arm_1", "cephalopod_arm_4" ],
+        "specifically_covers": [ "cephalopod_arm_1_draped", "cephalopod_arm_4_draped" ],
         "layers": [ "BELTED" ]
       }
     ],
@@ -702,7 +696,6 @@
       }
     ]
   },
-  
   {
     "id": "turtleneck",
     "type": "ITEM",
