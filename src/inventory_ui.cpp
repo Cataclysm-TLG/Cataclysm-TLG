@@ -613,13 +613,18 @@ void inventory_entry::cache_denial( inventory_selector_preset const &preset ) co
 
 const item_category *inventory_entry::get_category_ptr() const
 {
+    if( cached_category_ptr != nullptr ) {
+        return cached_category_ptr;
+    }
     if( custom_category != nullptr ) {
-        return custom_category;
+        cached_category_ptr = custom_category;
+        return cached_category_ptr;
     }
     if( !is_item() ) {
         return nullptr;
     }
-    return &any_item()->get_category_of_contents();
+    cached_category_ptr = &any_item()->get_category_of_contents();
+    return cached_category_ptr;
 }
 
 inventory_column::inventory_column( const inventory_selector_preset &preset ) :
@@ -1299,15 +1304,16 @@ inventory_entry *inventory_column::add_entry( const inventory_entry &entry )
     paging_is_valid = false;
     if( entry.is_item() ) {
         item_location entry_item = entry.locations.front();
+        item_category const *entry_cat_ptr = entry.get_category_ptr();
 
         auto entry_with_loc = std::find_if( dest.begin(),
-        dest.end(), [&entry, &entry_item, this]( const inventory_entry & e ) {
+        dest.end(), [&entry_item, entry_cat_ptr, this]( const inventory_entry & e ) {
             if( !e.is_item() ) {
                 return false;
             }
             item_location found_entry_item = e.locations.front();
             return !e.is_collated() &&
-                   e.get_category_ptr() == entry.get_category_ptr() &&
+                   e.get_category_ptr() == entry_cat_ptr &&
                    entry_item.where() == found_entry_item.where() &&
                    entry_item.pos_abs() == found_entry_item.pos_abs() &&
                    entry_item.parent_item() == found_entry_item.parent_item() &&
