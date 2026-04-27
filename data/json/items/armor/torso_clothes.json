@@ -10,7 +10,7 @@
     "weight": "226 g",
     "price": "10 USD",
     "material": [ "cotton" ],
-    "material_thickness": 0.5,
+    "material_thickness": 0.3,
     "color": "white",
     "delete": { "flags": [ "OUTER" ] },
     "extend": { "flags": [ "BELTED" ] },
@@ -88,7 +88,7 @@
     "weight": "136 g",
     "price": "25 USD",
     "material": [ "cotton" ],
-    "material_thickness": 0.5,
+    "material_thickness": 0.3,
     "color": "white",
     "delete": { "flags": [ "OUTER" ] },
     "extend": { "flags": [ "BELTED" ] },
@@ -158,7 +158,7 @@
     "price": "10 USD",
     "material": [ "cotton" ],
     "color": "white",
-    "material_thickness": 0.5,
+    "material_thickness": 0.3,
     "delete": { "flags": [ "RAINPROOF" ] }
   },
   {
@@ -177,46 +177,31 @@
     "looks_like": "vest_leather",
     "color": "brown",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 70, "encumbrance": 2, "volume_encumber_modifier": 0.3 },
+      { "covers": [ "torso" ], "coverage": 70, "encumbrance": 4, "volume_encumber_modifier": 0.3 },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 42,
-        "encumbrance": [ 1, 1 ],
+        "encumbrance": [ 5, 5 ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       },
       {
         "covers": [ "gastropod_foot" ],
         "coverage": 36,
-        "encumbrance": 1,
+        "encumbrance": 3,
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
       },
       {
-        "covers": [ "long_tail" ],
         "coverage": 42,
-        "encumbrance": 1,
-        "specifically_covers": [ "long_tail_draped" ],
-        "layers": [ "BELTED" ]
-      },
-      {
-        "coverage": 42,
-        "encumbrance": 1,
+        "encumbrance": 3,
         "covers": [
           "cephalopod_arm_1",
-          "cephalopod_arm_2",
-          "cephalopod_arm_3",
-          "cephalopod_arm_4",
-          "cephalopod_arm_5",
-          "cephalopod_arm_6"
+          "cephalopod_arm_4"
         ],
         "specifically_covers": [
           "cephalopod_arm_1_draped",
-          "cephalopod_arm_2_draped",
-          "cephalopod_arm_3_draped",
-          "cephalopod_arm_4_draped",
-          "cephalopod_arm_5_draped",
-          "cephalopod_arm_6_draped"
+          "cephalopod_arm_4_draped"
         ],
         "layers": [ "BELTED" ]
       }
@@ -238,7 +223,7 @@
       }
     ],
     "warmth": 2,
-    "material_thickness": 2,
+    "material_thickness": 1.5,
     "environmental_protection": 1,
     "flags": [ "POCKETS", "OUTER", "RAINPROOF" ]
   },
@@ -252,7 +237,7 @@
     "copy-from": "apron_leather",
     "weight": "391 g",
     "material": [ "vinyl" ],
-    "material_thickness": 1.5,
+    "material_thickness": 1.2,
     "color": "light_cyan",
     "extend": { "flags": [ "TRANSPARENT", "RAINPROOF" ] }
   },
@@ -715,6 +700,57 @@
         "description": "A long-sleeved shirt with horizontal black and white stripes.",
         "color": "light_gray"
       }
+    ]
+  },
+  
+  {
+    "id": "turtleneck",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "turtleneck" },
+    "description": "A tasteful wool turtleneck, modeled after cashmere.  Unencumbering and warm, but lacking storage.",
+    "category": "clothing",
+    "weight": "478 g",
+    "volume": "2500 ml",
+    "price": "50 USD",
+    "price_postapoc": "60 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "sweater",
+    "color": "white",
+    "warmth": 30,
+    "material_thickness": 0.5,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS", "COLLAR" ],
+    "armor": [
+      { "encumbrance": 3, "coverage": 98, "covers": [ "arm_l", "arm_r" ] },
+      { "encumbrance": 3, "coverage": 98, "covers": [ "torso" ] },
+      { "encumbrance": 1, "coverage": 98, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
+    ]
+  },
+  {
+    "id": "turtleneck_shirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "turtleneck shirt" },
+    "description": "A tasteful shirt with a high rolled collar.  It's too thin to be called a sweater.",
+    "category": "clothing",
+    "weight": "300 g",
+    "volume": "2000 ml",
+    "price": "20 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "sweater",
+    "color": "white",
+    "warmth": 20,
+    "material_thickness": 0.5,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS", "COLLAR" ],
+    "armor": [
+      { "encumbrance": 2, "coverage": 98, "covers": [ "arm_l", "arm_r" ] },
+      { "encumbrance": 2, "coverage": 98, "covers": [ "torso" ] },
+      { "encumbrance": 0, "coverage": 98, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
     ]
   },
   {
