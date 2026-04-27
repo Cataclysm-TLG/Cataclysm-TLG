@@ -73,6 +73,10 @@ struct sub_body_part_type {
     // exist bellow them for things like discomfort
     std::vector<sub_bodypart_str_id> locations_under;
 
+
+    cata::flat_set<json_character_flag> flags;
+    cata::flat_set<json_character_flag> conditional_flags;
+
     // These subparts act like this limb for armor coverage
     // TODO: Coverage/Encumbrance multiplier
     std::vector<sub_bodypart_str_id> similar_bodyparts;
@@ -80,6 +84,8 @@ struct sub_body_part_type {
     damage_instance unarmed_damage;
 
     static void load_bp( const JsonObject &jo, const std::string &src );
+
+    bool has_flag( const json_character_flag &flag ) const;
 
     void load( const JsonObject &jo, std::string_view src );
 

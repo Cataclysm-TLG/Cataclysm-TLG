@@ -803,6 +803,7 @@
       [ "nachosmc", 1 ],
       [ "nail", 3 ],
       [ "nailgun", 3 ],
+      { "item": "naloxone", "prob": 2 },
       [ "neccowafers", 4 ],
       [ "silver_necklace", 5 ],
       [ "news_regional", 3 ],

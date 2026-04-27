@@ -580,7 +580,6 @@
       },
       { "item": "food_processor", "prob": 70, "damage": [ 0, 4 ] },
       { "item": "waffleiron", "prob": 45, "damage": [ 0, 4 ] },
-      { "item": "multi_cooker", "prob": 25, "damage": [ 0, 4 ] },
       { "item": "pastaextruder", "prob": 10, "damage": [ 0, 4 ] },
       { "item": "dehydrator", "prob": 10, "damage": [ 0, 4 ] },
       { "item": "hotplate", "prob": 10, "damage": [ 0, 4 ] },

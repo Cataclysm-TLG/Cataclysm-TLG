@@ -68,32 +68,89 @@
     "min": 0,
     "max": 4320,
     "rate": "100 s",
-    "//": "Takes 30 min to kick in, lasts 5 days",
+    "//": "Takes 30 min to kick in, lasts up to 5 days",
     "disease_excess": [ [ 10, 4320 ] ]
   },
   {
-    "id": "vit_ibuprofen",
+    "id": "vit_naproxen",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Naproxen Sodium" },
+    "min": 0,
+    "max": 250,
+    "//": "Decays into nsaid to simulate the delated effect of naproxen vs aspirin.",
+    "rate": "5 s",
+    "decays_into": [ [ "vit_nsaid", 2 ], [ "vit_nsaid_bp", 1 ] ]
+  },
+  {
+    "id": "vit_nsaid_bp",
     "type": "vitamin",
     "vit_type": "drug",
-    "name": { "str": "Ibuprofen" },
-    "excess": "nsaid_eff",
+    "name": { "str": "NSAID (Blood Pressure)" },
+    "excess": "nsaid_bp",
     "min": 0,
-    "max": 432,
-    "//": "Takes 30 min to kick in, lasts 6 hours",
-    "rate": "100 s",
-    "disease_excess": [ [ 10, 216 ] ]
+    "max": 500,
+    "//": "1mg ibuprofen equivalent.",
+    "//2": "Takes 30 min to kick in, lasts 6 hours. TODO: Overdose when we can adjust rate at different amounts.",
+    "rate": "44 s",
+    "disease_excess": [ [ 10, 500 ] ]
+  },
+  {
+    "id": "vit_nsaid",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Non-Steroidal Anti-Inflammatory Drug" },
+    "excess": "nsaid_analgesic",
+    "min": 0,
+    "max": 500,
+    "//": "1mg ibuprofen equivalent.",
+    "//2": "Takes 30 min to kick in, lasts 6 hours. TODO: Overdose when we can adjust rate at different amounts.",
+    "rate": "44 s",
+    "disease_excess": [ [ 10, 500 ] ]
+  },
+  {
+    "id": "vit_acetaminophen",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Acetaminophen" },
+    "excess": "acetaminophen_analgesic",
+    "min": 0,
+    "max": 500,
+    "//": "1mg acetaminophen equivalent.",
+    "//2": "Takes 30 min to kick in, lasts ~5.5 hours. TODO: Overdose when we can adjust rate at different amounts.",
+    "rate": "40 s",
+    "disease_excess": [ [ 10, 500 ] ]
+  },
+  {
+    "id": "vit_tramadol",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Tramadol" },
+    "min": 0,
+    "max": 666,
+    "rate": "200 s",
+    "decays_into": [ [ "vit_mme", 21 ] ]
+  },
+  {
+    "id": "vit_naloxone",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Naloxone" },
+    "min": 0,
+    "max": 1200,
+    "rate": "8 s",
+    "decays_into": [ [ "vit_mme", -12 ] ]
   },
   {
     "id": "vit_mme",
     "type": "vitamin",
     "vit_type": "drug",
-    "name": { "str": "Morphine Milligram Equivalent (percentile)" },
-    "//": "1 vit_mme is equivalent to 1% of an MME.  Need to adjust excess and rate at minimum.",
+    "name": { "str": "Morphine Milligram Equivalent" },
     "excess": "opioid_eff",
     "min": 0,
-    "max": 40000,
-    "rate": "100 s",
-    "disease_excess": [ [ 500, 1500 ], [ 1501, 5000 ], [ 5001, 18000 ], [ 18001, 30000 ], [ 30001, 39998 ], [ 39999, 40000 ] ]
+    "max": 10000,
+    "rate": "48 s",
+    "disease_excess": [ [ 175, 400 ], [ 500, 1000 ], [ 1100, 2000 ], [ 2100, 3500 ], [ 3600, 5000 ], [ 5100, 7500 ], [ 7600, 10000 ] ]
   },
   {
     "id": "mutant_toxin",
@@ -324,11 +381,11 @@
     "disease_excess": [ [ 100, 400 ], [ 401, 800 ], [ 801, 1600 ] ]
   },
   {
-    "id": "mutagen_lupine",
+    "id": "mutagen_canine",
     "type": "vitamin",
     "vit_type": "counter",
     "name": { "str": "Canine Mutagen" },
-    "excess": "mutagen_lupine",
+    "excess": "mutagen_canine",
     "min": 0,
     "max": 1600,
     "rate": "20 m",
@@ -590,5 +647,43 @@
     "rate": "48 h",
     "flags": [ "NO_DISPLAY" ],
     "disease_excess": [ [ 60, 399 ], [ 400, 1079 ], [ 1080, 1440 ] ]
+  },
+  {
+    "id": "ethanol",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Alcohol" },
+    "//": "1 unit is 1 ml of pure ethanol",
+    "min": 0,
+    "max": 1000,
+    "rate": "1 s",
+    "//2": "For 70 kg person, BAC of 1 ml is about 0.0016%, so 16 units",
+    "//3": "TODO tie it somehow to body weight",
+    "decays_into": [ [ "BAC", 16 ] ]
+  },
+  {
+    "id": "BAC",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Alcohol (BAC)" },
+    "excess": "drunk",
+    "//": "1 unit is 0.1 mg/dL, aka 0.0001% BAC. Average metabolic rate is 150 per hour. Anyhting bigger than 4000 should be deadly for average character",
+    "min": 0,
+    "max": 10000,
+    "rate": "24 s",
+    "//2": "TODO: update effect so vitamin excess scales correctly",
+    "disease_excess": [ [ 1, 1000 ], [ 1001, 2000 ], [ 2001, 3000 ], [ 3001, 4000 ], [ 4001, 10000 ] ]
+  },
+  {
+    "id": "cannabis",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Cannabis" },
+    "excess": "weed_high",
+    "min": 0,
+    "max": 100,
+    "rate": "6 m",
+    "//": "1 unit is 1mg THC equivalent. TODO: Nonlinear decay.",
+    "disease_excess": [ [ 2, 9 ], [ 10, 24 ], [ 25, 39 ], [ 40, 100 ] ]
   }
 ]

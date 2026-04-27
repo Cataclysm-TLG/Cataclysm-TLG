@@ -207,9 +207,9 @@ endif
 # S 1 | b | a
 #
 
-# Enable building tests by default
+# Disable building tests by default
 ifndef TESTS
-  TESTS = 1
+  TESTS = 0
 endif
 
 # Disable running tests by default
@@ -402,6 +402,10 @@ ifneq ($(SANITIZE),)
   endif
   CXXFLAGS += $(SANITIZE_FLAGS)
   LDFLAGS += $(SANITIZE_FLAGS)
+endif
+
+ifeq ($(MJ), 1)
+  MJFLAG = -MJ $@.json
 endif
 
 # enable optimizations. slow to build
@@ -1099,13 +1103,13 @@ includes: $(OBJS:.o=.inc)
 	+make -C tests includes
 
 $(ODIR)/third-party/%.o: $(SRC_DIR)/third-party/%.cpp
-	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -w -MMD -MP -c $< -o $@
+	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -w -MMD -MP $(MJFLAG) -c $< -o $@
 
 $(ODIR)/third-party/%.o: $(SRC_DIR)/third-party/%.c
-	$(CXX) -x c $(CPPFLAGS) $(DEFINES) $(CFLAGS) -w -MMD -MP -c $< -o $@
+	$(CXX) -x c $(CPPFLAGS) $(DEFINES) $(CFLAGS) -w -MMD -MP $(MJFLAG) -c $< -o $@
 
 $(ODIR)/%.o: $(SRC_DIR)/%.cpp $(PCH_P)
-	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -MMD -MP $(PCHFLAGS) -c $< -o $@
+	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -MMD -MP $(PCHFLAGS) $(MJFLAG) -c $< -o $@
 
 $(ODIR)/%.o: $(SRC_DIR)/%.rc
 	$(RC) $(RFLAGS) $< -o $@

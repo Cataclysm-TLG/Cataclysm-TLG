@@ -80,6 +80,11 @@
     "text": "Craving caffeine"
   },
   {
+    "id": "morale_craving_cannabis",
+    "type": "morale_type",
+    "text": "Craving cannabis"
+  },
+  {
     "id": "morale_craving_alcohol",
     "type": "morale_type",
     "text": "Craving alcohol"
@@ -98,11 +103,6 @@
     "id": "morale_craving_cocaine",
     "type": "morale_type",
     "text": "Craving cocaine"
-  },
-  {
-    "id": "morale_craving_crack",
-    "type": "morale_type",
-    "text": "Craving crack cocaine"
   },
   {
     "id": "morale_craving_mutagen",
@@ -203,11 +203,6 @@
     "id": "morale_feeling_bad",
     "type": "morale_type",
     "text": "Feeling bad"
-  },
-  {
-    "id": "morale_bad_protein_bar",
-    "type": "morale_type",
-    "text": "Demoralizing food"
   },
   {
     "id": "morale_killed_innocent",

@@ -76,8 +76,6 @@ enum action_id : int {
 
     // Viewport movement actions and related
     /**@{*/
-    /** Toggle memorized tiles being shown */
-    ACTION_TOGGLE_MAP_MEMORY,
     /** Center the viewport on character */
     ACTION_CENTER,
     /** Move viewport north */
@@ -133,7 +131,7 @@ enum action_id : int {
     ACTION_LIST_ITEMS,
     /** Open the zone manager */
     ACTION_ZONES,
-    /** Sort out the loot */
+    /** Sort out items */
     ACTION_LOOT,
     /**@}*/
 
@@ -283,8 +281,6 @@ enum action_id : int {
     ACTION_OPTIONS,
     /** Open autopickup manager */
     ACTION_AUTOPICKUP,
-    /** Open autonotes manager */
-    ACTION_AUTONOTES,
     /** Open safemode manager */
     ACTION_SAFEMODE,
     /** Open color manager */
@@ -335,6 +331,8 @@ enum action_id : int {
     ACTION_TOGGLE_AUTO_PICKUP,
     /** Toggle temperature map */
     ACTION_DISPLAY_TEMPERATURE,
+    /** Toggle snow depth map */
+    ACTION_DISPLAY_SNOW_DEPTH,
     /** Toggle vehicle autopilot data */
     ACTION_DISPLAY_VEHICLE_AI,
     /** Toggle visibility map */

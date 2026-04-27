@@ -906,7 +906,7 @@
         ";": "t_strconc_floor",
         "|": "t_concrete_wall",
         "X": "t_laminated_glass",
-        "-": "t_reinforced_door_glass_lab_c",
+        "-": "t_laminated_door_glass_lab_c",
         "<": "t_stairs_up",
         ".": [
           [ "t_grass_tall", 5 ],
@@ -961,7 +961,7 @@
         ";": "t_strconc_floor",
         "|": "t_concrete_wall",
         "X": "t_laminated_glass",
-        "-": "t_reinforced_door_glass_lab_c",
+        "-": "t_laminated_door_glass_lab_c",
         "<": "t_stairs_up",
         ".": [
           [ "t_region_groundcover_forest", 20 ],
@@ -1099,7 +1099,7 @@
         ";": "t_strconc_floor",
         "|": "t_concrete_wall",
         "X": "t_laminated_glass",
-        "-": "t_reinforced_door_glass_lab_c",
+        "-": "t_laminated_door_glass_lab_c",
         "<": "t_stairs_up"
       },
       "place_monsters": [ { "monster": "GROUP_RIVER", "x": [ 0, 6 ], "y": [ 0, 6 ], "density": 0.1, "repeat": [ 1, 3 ] } ]

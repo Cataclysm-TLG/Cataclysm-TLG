@@ -6,9 +6,9 @@
     "terrain": {
       ".": "t_region_groundcover_urban",
       "A": [ "t_region_shrub", "t_region_shrub_fruit", "t_region_shrub_decorative" ],
-      "B": "t_reinforced_glass_shutter_open",
-      "C": "t_reinforced_door_glass_c",
-      "D": "t_reinforced_glass_shutter",
+      "B": "t_laminated_glass_shutter_open",
+      "C": "t_laminated_door_glass_c",
+      "D": "t_laminated_glass_shutter",
       "E": "t_chickenwire_gate_c",
       "F": "t_chickenwire_fence",
       "G": "t_sandbox",
@@ -50,15 +50,15 @@
       "p": "f_region_flower"
     },
     "sealed_item": {
-      "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling" },
-      "2": { "item": { "item": "seed_chamomile" }, "furniture": "f_planter_harvest" },
-      "3": { "item": { "item": "seed_thyme" }, "furniture": "f_planter_harvest" },
-      "4": { "item": { "item": "seed_bee_balm" }, "furniture": "f_planter_harvest" },
-      "5": { "item": { "item": "seed_mugwort" }, "furniture": "f_planter_harvest" },
-      "6": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_harvest" },
-      "7": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_harvest" },
-      "8": { "item": { "item": "soybean_seed" }, "furniture": "f_planter_harvest" },
-      "9": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_harvest" }
+      "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling", "chance": 70 },
+      "2": { "item": { "item": "seed_chamomile" }, "furniture": "f_planter_seedling", "chance": 40 },
+      "3": { "item": { "item": "seed_thyme" }, "furniture": "f_planter_seedling", "chance": 40 },
+      "4": { "item": { "item": "seed_bee_balm" }, "furniture": "f_planter_seedling", "chance": 40 },
+      "5": { "item": { "item": "seed_mugwort" }, "furniture": "f_planter_seedling", "chance": 40 },
+      "6": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 10 },
+      "7": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_seedling", "chance": 10 },
+      "8": { "item": { "item": "seed_beans" }, "furniture": "f_planter_seedling", "chance": 10 },
+      "9": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling", "chance": 10 }
     }
   }
 ]

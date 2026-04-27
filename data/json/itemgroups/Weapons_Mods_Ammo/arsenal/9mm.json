@@ -9,20 +9,16 @@
     "type": "item_group",
     "id": "milspec_arsenal_9mm_gun&ammo",
     "subtype": "collection",
-    "items": [
-      { "group": "milspec_arsenal_9mm_gun&mags" },
-      { "group": "ammo_can_9mm_any_full", "prob": 30, "count": [ 0, 1 ] },
-      { "group": "ammo_can_9mm_any_part", "prob": 80, "count": [ 0, 2 ] }
-    ]
+    "items": [ { "group": "milspec_arsenal_9mm_gun&mags" }, { "group": "ammo_can_9mm_any", "prob": 75, "count": [ 1, 2 ] } ]
   },
   {
     "type": "item_group",
     "id": "milspec_arsenal_9mm_gun&mags",
     "subtype": "collection",
     "items": [
-      { "group": "milspec_arsenal_9mm", "count": [ 0, 2 ] },
-      { "group": "milspec_arsenal_9mm", "count": [ 0, 2 ], "prob": 40 },
-      { "group": "milspec_arsenal_9mm", "count": [ 0, 2 ], "prob": 10 }
+      { "group": "milspec_arsenal_9mm", "count": [ 1, 2 ], "prob": 80 },
+      { "group": "milspec_arsenal_9mm", "count": [ 1, 2 ], "prob": 30 },
+      { "group": "milspec_arsenal_9mm", "count": [ 1, 2 ], "prob": 10 }
     ]
   },
   {
@@ -31,8 +27,8 @@
     "items": [
       { "group": "nested_m9_no_ammo", "prob": 70 },
       { "group": "nested_m11_no_ammo", "prob": 70 },
-      { "group": "nested_m17_no_ammo", "prob": 100 },
-      { "group": "nested_m18_no_ammo", "prob": 100 },
+      { "group": "nested_m17_no_ammo", "prob": 80 },
+      { "group": "nested_m18_no_ammo", "prob": 80 },
       { "group": "nested_p226_no_ammo", "prob": 10 },
       { "group": "nested_glock_19_no_ammo", "prob": 10 },
       { "group": "nested_glock_17_no_ammo", "prob": 10 }

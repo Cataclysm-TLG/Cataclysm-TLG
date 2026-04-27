@@ -99,6 +99,7 @@ class avatar : public Character
         void deserialize( const JsonObject &data ) override;
         bool save_map_memory();
         void load_map_memory();
+        void clear_map_memory();
 
         // newcharacter.cpp
         bool create( character_type type, const std::string &tempname = "" );
@@ -140,7 +141,6 @@ class avatar : public Character
         using Character::query_yn;
         bool query_yn( const std::string &mes ) const override;
 
-        void toggle_map_memory();
         //! @copydoc map_memory::is_valid() const
         bool is_map_memory_valid() const;
         bool should_show_map_memory() const;
@@ -383,7 +383,6 @@ class avatar : public Character
         std::string save_id;
 
         std::unique_ptr<map_memory> player_map_memory;
-        bool show_map_memory;
 
         friend class debug_menu::mission_debug;
         /**

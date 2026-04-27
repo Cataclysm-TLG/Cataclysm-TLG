@@ -45,7 +45,7 @@
             "dirt": [ 0, 6000 ]
           }
         ],
-        "prob": 3
+        "prob": 4
       },
       { "group": "infantry_common_gear", "prob": 60 },
       { "group": "military_standard_grenades", "count": [ 0, 3 ], "prob": 6 },
@@ -130,7 +130,7 @@
         "prob": 10
       },
       { "group": "military_patrol_food", "prob": 10 },
-      { "distribution": [ { "group": "infantry_officer_gear" }, { "group": "infantry_medical_gear" } ], "prob": 5 },
+      { "distribution": [ { "group": "infantry_officer_gear" }, { "group": "infantry_medical_gear" } ], "prob": 6 },
       { "group": "wallets", "prob": 10 },
       { "group": "pocket_cigar", "prob": 1 },
       { "group": "misc_smoking_legal", "prob": 5 },

@@ -89,17 +89,17 @@
         "-__|..|i..r..#|....|__ss"
       ],
       "terrain": {
-        "+": "t_reinforced_door_glass_c",
+        "+": "t_laminated_door_glass_c",
         "-": "t_brick_wall",
         "D": "t_dirt",
         "_": [ "t_bamboo", "t_bamboo_long", "t_bamboo_tall", "t_grass" ],
         "b": "t_dirt",
         "d": "t_door_metal_c",
         "f": "t_dirt",
-        "r": "t_reinforced_glass",
+        "r": "t_laminated_glass",
         "s": "t_sidewalk",
         "v": "t_sidewalk",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         ".": "t_floor",
         "|": "t_brick_wall"
       },
@@ -175,17 +175,17 @@
         "-__|..|i..r..#|....|__ss"
       ],
       "terrain": {
-        "+": "t_reinforced_door_glass_c",
+        "+": "t_laminated_door_glass_c",
         "-": "t_brick_wall",
         "D": "t_dirt",
         "_": [ "t_bamboo", "t_bamboo_long", "t_bamboo_tall", "t_grass" ],
         "b": "t_dirt",
         "d": "t_door_metal_c",
         "f": "t_dirt",
-        "r": "t_reinforced_glass",
+        "r": "t_laminated_glass",
         "s": "t_sidewalk",
         "v": "t_sidewalk",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         ".": "t_floor",
         "|": "t_brick_wall"
       },
@@ -262,17 +262,17 @@
         "-__|..|i..w..#|....|__ss"
       ],
       "terrain": {
-        "+": "t_reinforced_door_glass_c",
+        "+": "t_laminated_door_glass_c",
         "-": "t_brick_wall",
         "D": "t_dirt",
         "_": [ "t_bamboo", "t_bamboo_long", "t_bamboo_tall", "t_grass" ],
         "b": "t_dirt",
         "d": "t_door_metal_c",
         "f": "t_dirt",
-        "r": "t_reinforced_glass",
+        "r": "t_laminated_glass",
         "s": "t_sidewalk",
         "v": "t_sidewalk",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         "|": "t_brick_wall"
       },
       "furniture": {
@@ -394,7 +394,7 @@
         "4": "t_tree_pine",
         "7": "t_tree_maple_tapped",
         "B": "t_brick_wall_halfway",
-        "D": "t_reinforced_door_glass_c",
+        "D": "t_laminated_door_glass_c",
         "^": "t_floor",
         "_": "t_grass",
         "a": "t_door_metal_c",
@@ -402,7 +402,7 @@
         "c": "t_floor",
         "d": "t_dirt",
         "h": "t_floor",
-        "r": "t_reinforced_glass",
+        "r": "t_laminated_glass",
         "s": "t_sidewalk",
         "{": "t_floor",
         "|": "t_brick_wall",
@@ -571,7 +571,7 @@
         "s": "t_water_pool_shallow_outdoors",
         "t": "t_sidewalk",
         "u": "t_underbrush",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         "{": "t_sidewalk",
         "|": "t_brick_wall"
       },
@@ -675,7 +675,7 @@
         "s": "t_water_pool_shallow_outdoors",
         "t": "t_sidewalk",
         "u": "t_underbrush",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         "{": "t_sidewalk",
         "|": "t_brick_wall"
       },
@@ -798,8 +798,8 @@
         "bbbbbbbbbbbbbbbbbbbbbbbb"
       ],
       "terrain": {
-        "+": "t_reinforced_door_glass_c",
-        "-": "t_reinforced_glass",
+        "+": "t_laminated_door_glass_c",
+        "-": "t_laminated_glass",
         ".": "t_floor",
         "_": "t_sidewalk",
         "b": "t_brick_wall",
@@ -970,7 +970,7 @@
       ],
       "terrain": {
         "#": "t_sidewalk",
-        "+": "t_reinforced_door_glass_c",
+        "+": "t_laminated_door_glass_c",
         "-": "t_brick_wall",
         ".": "t_floor",
         "4": "t_tree_pine",
@@ -983,7 +983,7 @@
         "d": "t_dirt",
         "f": "t_dirt",
         "s": "t_swater_sh",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         "|": "t_brick_wall"
       },
       "furniture": {

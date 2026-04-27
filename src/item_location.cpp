@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <functional>
 #include <iosfwd>
+#include <cstdint>
 #include <iterator>
 #include <list>
 #include <optional>
@@ -24,6 +25,7 @@
 #include "game_constants.h"
 #include "item.h"
 #include "item_pocket.h"
+#include "item_uid.h"
 #include "itype.h"
 #include "json.h"
 #include "line.h"
@@ -39,6 +41,7 @@
 #include "talker_item.h"
 #include "translations.h"
 #include "units.h"
+#include "value_ptr.h"
 #include "vehicle.h"
 #include "vehicle_selector.h"
 #include "visitable.h"
@@ -50,14 +53,16 @@ template <typename T>
 static int find_index( const T &sel, const item *obj )
 {
     int idx = -1;
-    sel.visit_items( [&idx, &obj]( const item * e, item * ) {
+    bool found = false;
+    sel.visit_items( [&idx, &obj, &found]( const item * e, item * ) {
         idx++;
         if( e == obj ) {
+            found = true;
             return VisitResponse::ABORT;
         }
         return VisitResponse::NEXT;
     } );
-    return idx;
+    return found ? idx : -1;
 }
 
 template <typename T>
@@ -66,6 +71,20 @@ static item *retrieve_index( const T &sel, int idx )
     item *obj = nullptr;
     sel.visit_items( [&idx, &obj]( const item * e, item * ) {
         if( idx-- == 0 ) {
+            obj = const_cast<item *>( e );
+            return VisitResponse::ABORT;
+        }
+        return VisitResponse::NEXT;
+    } );
+    return obj;
+}
+
+template <typename T>
+static item *retrieve_by_uid( const T &sel, int64_t uid )
+{
+    item *obj = nullptr;
+    sel.visit_items( [&uid, &obj]( const item * e, item * ) {
+        if( e->uid().get_value() == uid ) {
             obj = const_cast<item *>( e );
             return VisitResponse::ABORT;
         }
@@ -86,6 +105,7 @@ class item_location::impl
         impl() = default;
         explicit impl( item *i ) : what( i->get_safe_reference() ) {}
         explicit impl( int idx ) : idx( idx ), needs_unpacking( true ) {}
+        impl( int idx, int64_t uid ) : idx( idx ), uid_hint( uid ), needs_unpacking( true ) {}
 
         virtual ~impl() = default;
 
@@ -115,6 +135,9 @@ class item_location::impl
         virtual void on_contents_changed() = 0;
         virtual void serialize( JsonOut &js ) const = 0;
         virtual item *unpack( int ) const = 0;
+        virtual item *unpack_by_uid( int64_t ) const {
+            return nullptr;
+        }
 
         item *target() const {
             ensure_unpacked();
@@ -129,7 +152,15 @@ class item_location::impl
     private:
         void ensure_unpacked() const {
             if( needs_unpacking ) {
-                if( item *i = unpack( idx ) ) {
+                item *i = nullptr;
+                if( uid_hint > 0 ) {
+                    i = unpack_by_uid( uid_hint );
+                }
+                if( !i && uid_hint == 0 ) {
+                    // Legacy save or vehicle base item: use index
+                    i = unpack( idx );
+                }
+                if( i ) {
                     what = i->get_safe_reference();
                 } else {
                     debugmsg( "item_location lost its target item during a save/load cycle" );
@@ -139,6 +170,7 @@ class item_location::impl
         }
         mutable safe_reference<item> what;
         mutable int idx = -1;
+        mutable int64_t uid_hint = 0;
         mutable bool needs_unpacking = false;
 
     public:
@@ -222,17 +254,34 @@ class item_location::impl::item_on_map : public item_location::impl
     public:
         item_on_map( const map_cursor &cur, item *which ) : impl( which ), cur( cur ) {}
         item_on_map( const map_cursor &cur, int idx ) : impl( idx ), cur( cur ) {}
+        item_on_map( const map_cursor &cur, int idx, int64_t uid ) : impl( idx, uid ), cur( cur ) {}
 
         void serialize( JsonOut &js ) const override {
+            if( !target() ) {
+                item_location::nowhere.serialize( js );
+                return;
+            }
+            int idx = find_index( cur, target() );
+            if( idx < 0 ) {
+                item_location::nowhere.serialize( js );
+                return;
+            }
             js.start_object();
             js.member( "type", "map" );
             js.member( "position", pos_abs() );
-            js.member( "idx", find_index( cur, target() ) );
+            js.member( "idx", idx );
+            if( target()->uid().is_valid() ) {
+                js.member( "uid", target()->uid().get_value() );
+            }
             js.end_object();
         }
 
         item *unpack( int idx ) const override {
             return retrieve_index( cur, idx );
+        }
+
+        item *unpack_by_uid( int64_t uid ) const override {
+            return retrieve_by_uid( cur, uid );
         }
 
         type where() const override {
@@ -342,19 +391,30 @@ class item_location::impl::item_on_person : public item_location::impl
         }
 
         item_on_person( character_id who_id, int idx ) : impl( idx ), who_id( who_id ), who( nullptr ) {}
+        item_on_person( character_id who_id, int idx, int64_t uid ) :
+            impl( idx, uid ), who_id( who_id ), who( nullptr ) {}
 
         void serialize( JsonOut &js ) const override {
             if( !ensure_who_unpacked() ) {
-                // Write an invalid item_location to avoid invalid json
-                js.start_object();
-                js.member( "type", "null" );
-                js.end_object();
+                item_location::nowhere.serialize( js );
+                return;
+            }
+            if( !target() ) {
+                item_location::nowhere.serialize( js );
+                return;
+            }
+            int idx = find_index( *who, target() );
+            if( idx < 0 ) {
+                item_location::nowhere.serialize( js );
                 return;
             }
             js.start_object();
             js.member( "type", "character" );
             js.member( "character", who_id );
-            js.member( "idx", find_index( *who, target() ) );
+            js.member( "idx", idx );
+            if( target()->uid().is_valid() ) {
+                js.member( "uid", target()->uid().get_value() );
+            }
             js.end_object();
         }
 
@@ -363,6 +423,13 @@ class item_location::impl::item_on_person : public item_location::impl
                 return nullptr;
             }
             return retrieve_index( *who, idx );
+        }
+
+        item *unpack_by_uid( int64_t uid ) const override {
+            if( !ensure_who_unpacked() ) {
+                return nullptr;
+            }
+            return retrieve_by_uid( *who, uid );
         }
 
         type where() const override {
@@ -492,6 +559,8 @@ class item_location::impl::item_on_vehicle : public item_location::impl
     public:
         item_on_vehicle( const vehicle_cursor &cur, item *which ) : impl( which ), cur( cur ) {}
         item_on_vehicle( const vehicle_cursor &cur, int idx ) : impl( idx ), cur( cur ) {}
+        item_on_vehicle( const vehicle_cursor &cur, int idx, int64_t uid ) :
+            impl( idx, uid ), cur( cur ) {}
 
         void serialize( JsonOut &js ) const override {
             const std::vector<wrapped_vehicle> &vehicles = get_map().get_vehicles();
@@ -500,24 +569,41 @@ class item_location::impl::item_on_vehicle : public item_location::impl
             };
             if( std::find_if( vehicles.begin(), vehicles.end(), same_veh ) == vehicles.end() ) {
                 debugmsg( "Could not find vehicle for item_location on vehicle" );
-                // This is intended as a temporary patch, but if you're reading this you know how it goes sometimes.
-                // Serialize exactly like an item_location::nowhere just in case this sticks around long enough for that to change...
-                item_location dummy = item_location::nowhere;
-                dummy.serialize( js );
+                item_location::nowhere.serialize( js );
                 return;
+            }
+            if( !target() ) {
+                item_location::nowhere.serialize( js );
+                return;
+            }
+            bool is_base_item = target() == &cur.veh.part( cur.part ).base;
+            int idx = -1;
+            if( !is_base_item ) {
+                idx = find_index( cur, target() );
+                if( idx < 0 ) {
+                    item_location::nowhere.serialize( js );
+                    return;
+                }
             }
             js.start_object();
             js.member( "type", "vehicle" );
             js.member( "position", pos_abs() );
             js.member( "part", cur.part );
-            if( target() != &cur.veh.part( cur.part ).base ) {
-                js.member( "idx", find_index( cur, target() ) );
+            if( !is_base_item ) {
+                js.member( "idx", idx );
+                if( target()->uid().is_valid() ) {
+                    js.member( "uid", target()->uid().get_value() );
+                }
             }
             js.end_object();
         }
 
         item *unpack( int idx ) const override {
             return idx >= 0 ? retrieve_index( cur, idx ) : &cur.veh.part( cur.part ).base;
+        }
+
+        item *unpack_by_uid( int64_t uid ) const override {
+            return retrieve_by_uid( cur, uid );
         }
 
         type where() const override {
@@ -638,10 +724,7 @@ class item_location::impl::item_in_container : public item_location::impl
                 }
                 idx++;
             }
-            if( container->empty() ) {
-                return -1;
-            }
-            return idx;
+            return -1;
         }
     public:
         item_location parent_item() const override {
@@ -662,17 +745,37 @@ class item_location::impl::item_in_container : public item_location::impl
 
         item_in_container( const item_location &container, item *which ) :
             impl( which ), container( container ) {}
+        // Lazy constructor: defers item resolution until first use.
+        // Used when the container's owner (e.g. an NPC) may not yet be in
+        // critter_tracker at deserialization time.
+        item_in_container( const item_location &container, int idx ) :
+            impl( idx ), container( container ) {}
 
         void serialize( JsonOut &js ) const override {
+            if( !target() ) {
+                item_location::nowhere.serialize( js );
+                return;
+            }
+            int idx = calc_index();
+            if( idx < 0 ) {
+                item_location::nowhere.serialize( js );
+                return;
+            }
             js.start_object();
-            js.member( "idx", calc_index() );
+            js.member( "idx", idx );
             js.member( "type", "in_container" );
             js.member( "parent", container );
+            if( target()->uid().is_valid() ) {
+                js.member( "uid", target()->uid().get_value() );
+            }
             js.end_object();
         }
 
         item *unpack( int idx ) const override {
-            if( idx < 0 || static_cast<size_t>( idx ) >= target()->num_item_stacks() ) {
+            if( idx < 0 ) {
+                return nullptr;
+            }
+            if( !container ) {
                 return nullptr;
             }
             std::list<const item *> all_items = container->all_items_ptr();
@@ -871,10 +974,12 @@ void item_location::deserialize( const JsonObject &obj )
     std::string type = obj.get_string( "type" );
 
     int idx = -1;
+    int64_t uid = 0;
     tripoint_bub_ms pos_ = tripoint_bub_ms::invalid;
     tripoint_abs_ms position = tripoint_abs_ms::invalid;
 
     obj.read( "idx", idx );
+    obj.read( "uid", uid );
     if( !obj.read( "position", position ) ) {
         // Save compatibility for change made 2025-02-19
         obj.read( "pos", pos_ );
@@ -890,16 +995,16 @@ void item_location::deserialize( const JsonObject &obj )
             // character item locations were assumed to be on g->u
             who_id = get_player_character().getID();
         }
-        ptr.reset( new impl::item_on_person( who_id, idx ) );
+        ptr = std::make_shared<impl::item_on_person>( who_id, idx, uid );
 
     } else if( type == "map" ) {
-        ptr = std::make_shared<impl::item_on_map>( map_cursor( position ), idx );
+        ptr = std::make_shared<impl::item_on_map>( map_cursor( position ), idx, uid );
 
     } else if( type == "vehicle" ) {
         vehicle *const veh = veh_pointer_or_null( here.veh_at( position ) );
         int part = obj.get_int( "part" );
         if( veh && part >= 0 && part < veh->part_count() ) {
-            ptr.reset( new impl::item_on_vehicle( vehicle_cursor( *veh, part ), idx ) );
+            ptr = std::make_shared<impl::item_on_vehicle>( vehicle_cursor( *veh, part ), idx, uid );
         }
     } else if( type == "in_container" ) {
         item_location parent;
@@ -907,7 +1012,7 @@ void item_location::deserialize( const JsonObject &obj )
         if( !parent.ptr->valid() ) {
             if( parent == nowhere ) {
                 debugmsg( "parent location doesn't exist.  Item_location has lost its target over a save/load cycle." );
-                ptr.reset( new impl::nowhere );
+                ptr = std::make_shared<impl::nowhere>();
                 return;
             }
             debugmsg( "parent location does not point to valid item" );
@@ -915,13 +1020,32 @@ void item_location::deserialize( const JsonObject &obj )
             return;
         }
         const std::list<item *> parent_contents = parent->all_items_container_top();
-        if( idx > -1 && idx < static_cast<int>( parent_contents.size() ) ) {
+
+        item *found = nullptr;
+        if( uid > 0 ) {
+            for( item *it : parent_contents ) {
+                if( it->uid().get_value() == uid ) {
+                    found = it;
+                    break;
+                }
+            }
+            if( !found ) {
+                debugmsg( "item_location UID not found in container contents" );
+                ptr = std::make_shared<impl::nowhere>();
+                return;
+            }
+        } else if( idx > -1 && idx < static_cast<int>( parent_contents.size() ) ) {
+            // Legacy save: no UID, use index
             auto iter = parent_contents.begin();
             std::advance( iter, idx );
-            ptr.reset( new impl::item_in_container( parent, *iter ) );
+            found = *iter;
+        }
+
+        if( found ) {
+            ptr = std::make_shared<impl::item_in_container>( parent, found );
         } else {
-            // probably pointing to the wrong item
             debugmsg( "contents index greater than contents size" );
+            ptr = std::make_shared<impl::nowhere>();
         }
     }
 }
@@ -953,6 +1077,19 @@ bool item_location::has_parent() const
 bool item_location::is_efile() const
 {
     return parent_item() && parent_item()->is_estorage();
+}
+
+bool item_location::is_invisible_installed_gunmod() const
+{
+    const item_location current_location = *this;
+    if( current_location->is_gunmod() ) {
+        item_location parent = parent_item();
+        const bool installed = parent && parent->is_gun();
+        if( installed && !current_location->type->gunmod->is_visible_when_installed ) {
+            return true;
+        }
+    }
+    return false;
 }
 
 ret_val<void> item_location::parents_can_contain_recursive( item *it ) const
@@ -1220,44 +1357,6 @@ bool item_location::protected_from_liquids() const
     // we recursively checked all containers
     // none are closed watertight containers
     return false;
-}
-
-void item_location::set_fault( const fault_id &fault_id, bool force, bool message )
-{
-    map &here = get_map();
-    item &it = *item_location::get_item();
-    if( !force && it.type->faults.get_specific_weight( fault_id ) == 0 ) {
-        return;
-    }
-
-    if( message ) {
-        add_msg_if_player_sees( pos_bub( here ), fault_id.obj().message() );
-    }
-
-    it.faults.insert( fault_id );
-}
-
-void item_location::set_random_fault_of_type( const std::string &fault_type, bool force,
-        bool message )
-{
-    map &here = get_map();
-    item &it = *get_item();
-    if( force ) {
-        set_fault( random_entry( faults::all_of_type( fault_type ) ), true, true );
-        return;
-    }
-
-    weighted_int_list<fault_id> faults_by_type;
-    for( const weighted_object<int, fault_id> &f : it.type->faults ) {
-        faults_by_type.add( f.obj, f.weight );
-    }
-
-    const fault_id f = *faults_by_type.pick();
-    if( message ) {
-        add_msg_if_player_sees( pos_bub( here ), f.obj().message() );
-    }
-
-    it.faults.insert( f );
 }
 
 std::unique_ptr<talker> get_talker_for( item_location &it )

@@ -36,7 +36,6 @@
 #include "activity_actor_definitions.h"
 #include "activity_type.h"
 #include "addiction.h"
-#include "assign.h"
 #include "auto_pickup.h"
 #include "avatar.h"
 #include "basecamp.h"
@@ -307,6 +306,15 @@ void item_pocket::favorite_settings::serialize( JsonOut &json ) const
     json.end_object();
 }
 
+static cata::flat_set<itype_id> migrate_ids( const cata::flat_set<itype_id> &list )
+{
+    cata::flat_set<itype_id> new_list;
+    for( const itype_id &it : list ) {
+        new_list.insert( item_controller->migrate_id( it ) );
+    }
+    return new_list;
+}
+
 void item_pocket::favorite_settings::deserialize( const JsonObject &data )
 {
     data.allow_omitted_members();
@@ -316,6 +324,8 @@ void item_pocket::favorite_settings::deserialize( const JsonObject &data )
     data.read( "priority", priority_rating );
     data.read( "item_whitelist", item_whitelist );
     data.read( "item_blacklist", item_blacklist );
+    item_whitelist = migrate_ids( item_whitelist );
+    item_blacklist = migrate_ids( item_blacklist );
     data.read( "category_whitelist", category_whitelist );
     data.read( "category_blacklist", category_blacklist );
     if( data.has_member( "collapsed" ) ) {
@@ -391,6 +401,10 @@ void player_activity::deserialize( const JsonObject &data )
     bool is_obsolete = false;
     std::set<std::string> obs_activities {
         "ACT_MAKE_ZLAVE" // Remove after 0.F
+        "ACT_EAT_MENU", // Remove after 0.J
+        "ACT_CONSUME_FOOD_MENU", // Remove after 0.J
+        "ACT_CONSUME_DRINK_MENU", // Remove after 0.J
+        "ACT_CONSUME_MEDS_MENU" // Remove after 0.J
     };
     if( !data.read( "type", tmptype ) ) {
         // Then it's a legacy save.
@@ -748,6 +762,8 @@ void Character::load( const JsonObject &data )
 
     data.read( "proficiencies", _proficiencies );
 
+    _proficiencies->migrate_proficiencies();
+
     // If the proficiency XP required has changed such that a proficiency is now known
     for( const proficiency_id &prof : _proficiencies->learning_profs() ) {
         if( _proficiencies->pct_practiced_time( prof ) >= prof->time_to_learn() ) {
@@ -1076,8 +1092,18 @@ void Character::load( const JsonObject &data )
     recalc_sight_limits();
     calc_encumbrance();
 
-    assign( data, "power_level", power_level, false, 0_kJ );
-    assign( data, "max_power_level_modifier", max_power_level_modifier, false, units::energy::min() );
+    // migration code, added in early 0.J
+    if( data.has_int( "power_level" ) ) {
+        power_level = units::from_kilojoule( data.get_int64( "power_level" ) );
+    } else {
+        data.read( "power_level", power_level );
+    }
+    // migration code, added in early 0.J
+    if( data.has_int( "max_power_level_modifier" ) ) {
+        max_power_level_modifier = units::from_kilojoule( data.get_int64( "max_power_level_modifier" ) );
+    } else {
+        data.read( "max_power_level_modifier", max_power_level_modifier );
+    }
 
     // Bionic power should not be negative!
     if( power_level < 0_mJ ) {
@@ -1442,14 +1468,8 @@ void Character::store( JsonOut &json ) const
     json.member( "proficiencies", _proficiencies );
 
     // npc; unimplemented
-    if( power_level < 1_J ) {
-        json.member( "power_level", std::to_string( units::to_millijoule( power_level ) ) + " mJ" );
-    } else if( power_level < 1_kJ ) {
-        json.member( "power_level", std::to_string( units::to_joule( power_level ) ) + " J" );
-    } else {
-        json.member( "power_level", units::to_kilojoule( power_level ) );
-    }
-    json.member( "max_power_level_modifier", units::to_kilojoule( max_power_level_modifier ) );
+    json.member( "power_level", power_level );
+    json.member( "max_power_level_modifier", max_power_level_modifier );
 
     if( !overmap_time.empty() ) {
         json.member( "overmap_time" );
@@ -1622,8 +1642,6 @@ void avatar::store( JsonOut &json ) const
     json.member( "completed_missions", mission::to_uid_vector( completed_missions ) );
     json.member( "failed_missions", mission::to_uid_vector( failed_missions ) );
 
-    json.member( "show_map_memory", show_map_memory );
-
     json.member( "assigned_invlet" );
     json.start_array();
     for( const auto &iter : inv->assigned_invlet ) {
@@ -1755,8 +1773,6 @@ void avatar::load( const JsonObject &data )
     if( active_mission && active_mission->has_failed() ) {
         update_active_mission();
     }
-
-    data.read( "show_map_memory", show_map_memory );
 
     for( JsonArray pair : data.get_array( "assigned_invlet" ) ) {
         inv->assigned_invlet[static_cast<char>( pair.get_int( 0 ) )] =
@@ -2246,8 +2262,12 @@ void npc::load( const JsonObject &data )
         complaints.emplace( member.name(), p );
     }
     data.read( "unique_id", unique_id );
+    // Temporarily clear activity so calc_focus_equilibrium() doesn't try to
+    // resolve item_locations before this NPC is in the critter tracker.
+    player_activity saved_activity = std::move( activity );
     clear_personality_traits();
     generate_personality_traits();
+    activity = std::move( saved_activity );
     data.read( "may_activity_occupancy_after_end_items_loc",
                may_activity_occupancy_after_end_items_loc );
 }
@@ -2707,7 +2727,11 @@ void time_duration::serialize( JsonOut &jsout ) const
 void time_duration::deserialize( const JsonValue &jsin )
 {
     if( jsin.test_string() ) {
-        *this = read_from_json_string<time_duration>( jsin, time_duration::units );
+        if( std::string const &str = jsin.get_string(); str == "infinite" ) {
+            *this = time_duration::from_turns( calendar::INDEFINITELY_LONG );
+        } else {
+            *this = read_from_json_string<time_duration>( jsin, time_duration::units );
+        }
     } else {
         turns_ = jsin.get_int();
     }
@@ -2726,6 +2750,8 @@ void item::craft_data::serialize( JsonOut &jsout ) const
     jsout.member( "tools_to_continue", tools_to_continue );
     jsout.member( "batch_size", batch_size );
     jsout.member( "cached_tool_selections", cached_tool_selections );
+    jsout.member( "current_step", current_step );
+    jsout.member( "step_progress", step_progress );
     jsout.end_object();
 }
 
@@ -2750,6 +2776,16 @@ void item::craft_data::deserialize( const JsonObject &obj )
     tools_to_continue = obj.get_bool( "tools_to_continue", false );
     batch_size = obj.get_int( "batch_size", -1 );
     obj.read( "cached_tool_selections", cached_tool_selections );
+    current_step = obj.get_int( "current_step", 0 );
+    step_progress = obj.get_float( "step_progress", 0.0 );
+    // Validate step index against the recipe's actual step count.
+    if( making && making->has_steps() ) {
+        int max_step = static_cast<int>( making->steps().size() ) - 1;
+        current_step = std::clamp( current_step, 0, max_step );
+    } else {
+        current_step = 0;
+        step_progress = 0.0;
+    }
 }
 
 void item::link_data::serialize( JsonOut &jsout ) const
@@ -2823,6 +2859,14 @@ void item::io( Archive &archive )
         return i.get_id().str();
     }, io::required_tag() );
 
+    // Persistent unique identifier for item instances
+    archive.io( "uid", uid_, item_uid() );
+    if constexpr( Archive::is_input::value ) {
+        if( !uid_.is_valid() ) {
+            uid_ = item_uid( generate_next_item_uid() );
+        }
+    }
+
     // normalize legacy saves to always have charges >= 0
     archive.io( "charges", charges, 0 );
     charges = std::max( charges, 0 );
@@ -2885,7 +2929,9 @@ void item::io( Archive &archive )
     archive.io( "techniques", techniques, io::empty_default_tag() );
     archive.io( "faults", faults, io::empty_default_tag() );
     archive.io( "item_tags", item_tags, io::empty_default_tag() );
-    archive.io( "components", components, io::empty_default_tag() );
+    if( !has_flag( flag_NUTRIENT_OVERRIDE ) ) {
+        archive.io( "components", components, io::empty_default_tag() );
+    }
     archive.io( "specific_energy", specific_energy, units::from_joule_per_gram( -10.f ) );
     archive.io( "temperature", temperature, units::from_kelvin( 0.f ) );
     archive.io( "recipe_charges", recipe_charges, 1 );
@@ -3622,6 +3668,13 @@ void mission::deserialize( const JsonObject &jo )
         target.y() = ja.get_int( 1 );
     }
 
+    if( jo.has_string( "dimension" ) ) {
+        dimension = jo.get_string( "dimension" );
+    } else {
+        // dimension is set as the main one
+        dimension = "";
+    }
+
     if( jo.has_string( "follow_up" ) ) {
         follow_up = mission_type_id( jo.get_string( "follow_up" ) );
     }
@@ -3667,6 +3720,7 @@ void mission::serialize( JsonOut &json ) const
     json.write( target.z() );
     json.end_array();
 
+    json.member( "dimension", dimension );
     json.member( "item_id", item_id );
     json.member( "item_count", item_count );
     json.member( "target_id", target_id.str() );
@@ -4203,7 +4257,7 @@ void addiction::deserialize( const JsonObject &jo )
                 type = STATIC( addiction_id( "cocaine" ) );
                 break;
             case add_type_legacy::CRACK:
-                type = STATIC( addiction_id( "crack" ) );
+                type = STATIC( addiction_id( "cocaine" ) );
                 break;
             case add_type_legacy::MUTAGEN:
                 type = STATIC( addiction_id( "mutagen" ) );
@@ -4920,6 +4974,18 @@ void submap::store( JsonOut &jsout ) const
     }
     jsout.end_array();
 
+    // Output any recorded original terrain for phase reverts
+    jsout.member( "phase_reverts" );
+    jsout.start_array();
+    for( const auto &entry : original_terrain ) {
+        jsout.start_array();
+        jsout.write( entry.first.x() );
+        jsout.write( entry.first.y() );
+        jsout.write( entry.second.obj().id.str() );
+        jsout.end_array();
+    }
+    jsout.end_array();
+
     // Output the spawn points
     jsout.member( "spawns" );
     jsout.start_array();
@@ -4992,8 +5058,8 @@ void submap::load( const JsonValue &jv, const std::string &member_name, int vers
         JsonArray terrain_json = jv;
         // Small duplication here so that the update check is only performed once
         if( rubpow_update ) {
-            item rock = item( "rock", calendar::turn_zero );
-            item chunk = item( "steel_chunk", calendar::turn_zero );
+            item rock = item( itype_rock, calendar::turn_zero );
+            item chunk = item( itype_steel_chunk, calendar::turn_zero );
             for( int j = 0; j < SEEY; j++ ) {
                 for( int i = 0; i < SEEX; i++ ) {
                     const ter_str_id tid( terrain_json.next_string() );
@@ -5213,6 +5279,18 @@ void submap::load( const JsonValue &jv, const std::string &member_name, int vers
             }
             if( cosmetic_entry.has_more() ) {
                 cosmetic_entry.throw_error( "Too many values for cosmetics" );
+            }
+        }
+    } else if( member_name == "phase_reverts" ) {
+        JsonArray pr_json = jv;
+        while( pr_json.has_more() ) {
+            JsonArray entry = pr_json.next_array();
+            int i = entry.next_int();
+            int j = entry.next_int();
+            const point_sm_ms p( i, j );
+            ter_str_id tstr = ter_str_id( entry.next_string() );
+            if( tstr.is_valid() ) {
+                original_terrain.emplace( p, tstr.id() );
             }
         }
     } else if( member_name == "spawns" ) {

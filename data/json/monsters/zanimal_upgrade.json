@@ -261,7 +261,6 @@
     "grab_strength": 45,
     "special_attacks": [
       [ "ACID_BARF", 10 ],
-      [ "ACID_BARF", 10 ],
       [ "scratch", 10 ],
       {
         "id": "bite_grab",

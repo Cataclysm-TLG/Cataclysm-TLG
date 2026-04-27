@@ -15,7 +15,7 @@
     "using": [ [ "plastic_molding", 2 ] ],
     "components": [
       [ [ "plastic_bottles_4l", 1, "LIST" ] ],
-      [ [ "lightstrip_inactive", 1 ] ],
+      [ [ "light_bulb", 1 ] ],
       [ [ "light_battery_cell", 1 ] ],
       [ [ "paint_yellow", 1 ] ]
     ]

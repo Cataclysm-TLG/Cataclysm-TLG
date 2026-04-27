@@ -135,7 +135,7 @@ class monster : public Creature
         int get_hp_max( const bodypart_id & ) const override;
         int get_hp_max() const override;
         int hp_percentage() const override;
-        int get_eff_per() const override;
+        int spot_check() const override;
         void witness_thievery( item *it ) override;
 
         float get_mountable_weight_ratio() const;
@@ -490,9 +490,6 @@ class monster : public Creature
         * @param amt amount of energy to consume. Is rounded down to kJ precision. Do not use negative values.
         * @return Actual amount of energy consumed
         */
-        units::energy use_mech_power( units::energy amt );
-        bool check_mech_powered() const;
-        int mech_str_addition() const;
 
         /**
          * Makes monster react to heard sound

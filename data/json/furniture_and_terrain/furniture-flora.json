@@ -1,17 +1,18 @@
 [
   {
     "type": "furniture",
-    "id": "f_mutpoppy",
-    "name": "mutated poppy flower",
-    "description": "These strange flowers have appeared in the wake of the Cataclysm, and their buds can be used for medicinal purposes, like the seeds of the mundane poppy they're named after.  The dirt around it gently churns as its roots writhe beneath the soil, and it's surrounded by an overwhelming floral smell that makes you feel sleepy.",
+    "id": "f_poppy",
+    "name": "poppy flower",
+    "description": "Papaver somniferum, also known as the opium poppy.  These harmless-looking flowers were once widely cultivated for decorative purposes, but in summer their heads may be harvested and used in the production of a highly addictive painkiller.",
     "symbol": "f",
-    "color": "light_red",
+    "color": "red",
     "looks_like": "f_dandelion",
     "move_cost_mod": 0,
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
-    "examine_action": "flower_poppy",
+    "//": "todo: poppy straw for extraction,",
+    "harvest_by_season": [ { "seasons": [ "summer" ], "id": "poppy_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
   {
@@ -25,7 +26,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "dandelion_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -41,7 +42,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "autumn" ], "id": "burdock_harv" },
       { "seasons": [ "summer" ], "id": "burdock_summer_harv" }
@@ -75,7 +76,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer" ], "id": "wild_carrot_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -91,7 +92,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn", "winter" ], "id": "m_stellatum_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -107,7 +108,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "//": "Root can always be harvested, but there is no flower to harvest seeds from in winter.",
     "harvest_by_season": [
       { "seasons": [ "summer", "autumn" ], "id": "salsify_seed_harv" },
@@ -137,13 +138,13 @@
     "name": "tulip",
     "description": "A bright, colorful flower with petals forming a small cup at its top.  It can be poisonous to livestock.",
     "symbol": "f",
-    "looks_like": "f_mutpoppy",
+    "looks_like": "f_poppy",
     "color": "light_blue",
     "move_cost_mod": 0,
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "generic_flower_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -159,7 +160,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "spurge_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -194,7 +195,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "generic_flower_harv" } ],
     "//": "Add flower and bud spawns once useful.",
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
@@ -211,7 +212,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "generic_flower_harv" } ],
     "//": "Add flower and bud spawns once useful.",
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
@@ -228,7 +229,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn" ], "id": "lotus_harv" },
       { "seasons": [ "summer" ], "id": "lotus_summer_harv" },
@@ -249,7 +250,7 @@
     "required_str": -1,
     "coverage": 5,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "sunflower_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -265,7 +266,7 @@
     "required_str": -1,
     "coverage": 5,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn", "winter" ], "id": "jerusalem_artichoke_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -296,7 +297,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER", "GRAZER_INEDIBLE" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "bluebell_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -327,7 +328,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "chicory_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -343,7 +344,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC", "GRAZER_INEDIBLE" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "datura_harv" } ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
   },
@@ -400,7 +401,7 @@
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "wild_sarsaparilla_harv" } ],
     "bash": {
       "str_min": 2,
@@ -416,14 +417,14 @@
     "name": "wintergreen",
     "description": "A small shrub native to North America.  The leaves, which remain green even in winter, are valued for medicinal purposes.  It produces edible and sweet berries, too!",
     "symbol": ",",
-    "looks_like": "f_mutpoppy",
+    "looks_like": "f_poppy",
     "//": "green all year long",
     "color": "green",
     "move_cost_mod": 1,
     "required_str": -1,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "FLOWER" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn", "winter" ], "id": "wintergreen_harv" } ],
     "bash": {
       "str_min": 2,
@@ -446,7 +447,7 @@
     "concealment": 50,
     "required_str": -1,
     "flags": [ "TRANSPARENT", "SHORT", "SHRUB", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring" ], "id": "japanese_knotweed_harv" } ],
     "bash": {
       "str_min": 2,
@@ -468,7 +469,7 @@
     "color": [ "brown_green", "magenta", "magenta", "brown" ],
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLOWER", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "summer", "autumn" ], "id": "generic_edible_flower_spring_harv" },
       { "seasons": [ "summer", "autumn" ], "id": "generic_edible_flower_harv" }
@@ -493,7 +494,7 @@
     "move_cost_mod": 0,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLOWER", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "summer", "autumn" ], "id": "generic_edible_flower_spring_harv" },
       { "seasons": [ "summer", "autumn" ], "id": "generic_edible_flower_harv" }
@@ -540,7 +541,7 @@
     "move_cost_mod": 0,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "TINY", "FLOWER", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn" ], "id": "thistle_harv" } ],
     "bash": {
       "str_min": 2,
@@ -562,7 +563,6 @@
     "move_cost_mod": 0,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "SHORT", "FLOWER", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
-    "examine_action": "harvest_furn_nectar",
     "bash": {
       "str_min": 2,
       "str_max": 6,
@@ -584,7 +584,7 @@
     "concealment": 45,
     "required_str": -1,
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "DIGGABLE", "FLAT", "THIN_OBSTACLE", "SHRUB", "SMALL_HIDE" ],
-    "examine_action": "harvest_furn_nectar",
+    "examine_action": "harvest_furn",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "wild_rice_harv" } ],
     "bash": {
       "str_min": 2,

@@ -392,7 +392,13 @@
     "fruit": "raw_beans",
     "seeds": false,
     "byproducts": [ "withered" ],
-    "grow": "91 days"
+    "growth_stages": [
+      { "GROWTH_SEED": "23 days" },
+      { "GROWTH_SEEDLING": "23 days" },
+      { "GROWTH_MATURE": "23 days" },
+      { "GROWTH_HARVEST": "22 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ]
   },
   {
     "type": "ITEM",
@@ -500,7 +506,13 @@
     "fruit": "soybean",
     "seeds": false,
     "byproducts": [ "withered", "raw_edamame" ],
-    "grow": "91 days",
+    "growth_stages": [
+      { "GROWTH_SEED": "23 days" },
+      { "GROWTH_SEEDLING": "23 days" },
+      { "GROWTH_MATURE": "23 days" },
+      { "GROWTH_HARVEST": "22 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ],
     "into": "paste_nut",
     "recipe": "paste_nut_mill_5_1"
   },
@@ -529,7 +541,13 @@
     "fruit": "soybean",
     "seeds": false,
     "byproducts": [ "withered", "raw_edamame" ],
-    "grow": "91 days",
+    "growth_stages": [
+      { "GROWTH_SEED": "23 days" },
+      { "GROWTH_SEEDLING": "23 days" },
+      { "GROWTH_MATURE": "23 days" },
+      { "GROWTH_HARVEST": "22 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ],
     "into": "flour_wheat_free",
     "recipe": "flour_wheat_free_mill_1_1"
   },
@@ -707,7 +725,7 @@
     "symbol": ";",
     "quench": 1,
     "calories": 170,
-    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 25 ], [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
     "fun": 5,
     "freezing_point": -274,
     "color": "brown",
@@ -731,7 +749,7 @@
     "symbol": ";",
     "quench": 1,
     "calories": 1190,
-    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 175 ], [ "calcium", 35 ], [ "iron", 35 ], [ "vegetable_allergen", 1 ] ],
     "fun": 5,
     "freezing_point": -274,
     "color": "brown",
@@ -755,7 +773,7 @@
     "symbol": ";",
     "quench": 1,
     "calories": 6120,
-    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 875 ], [ "calcium", 175 ], [ "iron", 175 ], [ "vegetable_allergen", 1 ] ],
     "fun": 5,
     "freezing_point": -274,
     "color": "brown",
@@ -899,7 +917,7 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 70,
-    "vitamins": [ [ "vegetable_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 2 ], [ "iron", 5 ], [ "calcium", 20 ], [ "vegetable_allergen", 1 ] ],
     "description": "Some grass, edible by grazers and ruminants only.  Seeing this item is a bug.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
@@ -917,7 +935,7 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 40,
-    "vitamins": [ [ "vegetable_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 1 ], [ "iron", 3 ], [ "calcium", 12 ], [ "vegetable_allergen", 1 ] ],
     "description": "A small plant or flower, edible by grazers and ruminants only.  Seeing this item is a bug.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
@@ -935,7 +953,7 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 98,
-    "vitamins": [ [ "vegetable_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 2 ], [ "iron", 7 ], [ "calcium", 26 ], [ "vegetable_allergen", 1 ] ],
     "description": "Some underbrush, edible by ruminants only.  Seeing this item is a bug.",
     "price": "0 cent",
     "price_postapoc": "0 cent",

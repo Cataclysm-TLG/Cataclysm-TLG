@@ -19,7 +19,6 @@
       "target": "molotov_lit",
       "msg": "You light the Molotov cocktail!",
       "target_charges": 1,
-      "active": true,
       "moves": 75,
       "need_fire": 1,
       "menu_text": "Light rag",
@@ -28,7 +27,6 @@
     "flags": [ "NPC_ACTIVATE", "NO_REPAIR" ],
     "ammo_type": "sling-ready_grenade",
     "damage": { "damage_type": "bash", "amount": 5 },
-    "//": "Total range with staff sling 21 - 5 more than can be thrown by a player with 10 strength",
     "range": 11,
     "dispersion": 14,
     "effects": [ "COOKOFF", "NEVER_MISFIRES", "NON_FOULING", "FLAME" ],
@@ -53,7 +51,6 @@
       "target": "grenade_act",
       "msg": "You snap the retaining fuse on the grenade.",
       "target_timer": "5 seconds",
-      "active": true,
       "menu_text": "Activate grenade",
       "type": "transform"
     },
@@ -85,7 +82,6 @@
       "target": "small_homemade_grenade_act",
       "msg": "You light the retaining fuse on the improvised grenade.  Throw it before it blows in your face!",
       "target_timer": "5 seconds",
-      "active": true,
       "need_fire": 1,
       "menu_text": "Light fuse",
       "type": "transform"
@@ -112,7 +108,6 @@
       "target": "homemade_grenade_act",
       "msg": "You light the retaining fuse on the improvised grenade.  Throw it before it blows in your face!",
       "target_timer": "5 seconds",
-      "active": true,
       "need_fire": 1,
       "menu_text": "Light fuse",
       "type": "transform"
@@ -139,7 +134,6 @@
       "target": "military_explosive_small_grenade_act",
       "msg": "You light the retaining fuse on the improvised grenade.  Throw it before it blows in your face!",
       "target_timer": "5 seconds",
-      "active": true,
       "need_fire": 1,
       "menu_text": "Light fuse",
       "type": "transform"
@@ -166,7 +160,6 @@
       "target": "military_explosive_grenade_act",
       "msg": "You light the retaining fuse on the improvised grenade.  Throw it before it blows in your face!",
       "target_timer": "5 seconds",
-      "active": true,
       "need_fire": 1,
       "menu_text": "Light fuse",
       "type": "transform"

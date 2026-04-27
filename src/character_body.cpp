@@ -1182,7 +1182,7 @@ void Character::update_stomach( const time_point &from, const time_point &to )
             hunger_effect = effect_hunger_hungry;
         } else if( recently_ate ) {
             hunger_effect = effect_hunger_very_hungry;
-        } else if( get_bmi_fat() < character_weight_category::underweight ) {
+        } else if( get_bmi_fat() < character_weight_category::skinny ) {
             hunger_effect = effect_hunger_near_starving;
         } else if( get_bmi_fat() < character_weight_category::emaciated ) {
             hunger_effect = effect_hunger_starving;

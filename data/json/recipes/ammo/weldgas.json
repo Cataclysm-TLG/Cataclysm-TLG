@@ -122,8 +122,8 @@
       { "proficiency": "prof_inorganic_chemistry" }
     ],
     "components": [
-      [ [ "material_aluminium_ingot", 3 ], [ "scrap_aluminum", 15 ] ],
-      [ [ "chem_sulphuric_acid", 1 ], [ "chem_aluminium_sulphate", 6 ], [ "chem_sulphur", 50 ] ],
+      [ [ "aluminum_chunk", 3 ], [ "scrap_aluminum", 15 ] ],
+      [ [ "chem_sulphuric_acid", 1 ], [ "aluminum_sulfate", 6 ], [ "chem_sulphur", 50 ] ],
       [ [ "salt", 12 ], [ "chem_potassium_chloride", 65 ], [ "material_rocksalt", 1 ] ],
       [ [ "lye_powder", 20 ], [ "lye", 1 ], [ "chem_potassium_hydroxide", 40 ] ],
       [ [ "material_sand", 15 ] ]
@@ -178,7 +178,7 @@
       [ [ "wire_draw_machine", 120 ] ]
     ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_wiremaking" } ],
-    "components": [ [ [ "material_aluminium_ingot", 3 ], [ "scrap_aluminum", 11 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 3 ], [ "scrap_aluminum", 11 ] ] ]
   },
   {
     "type": "recipe",
@@ -215,7 +215,7 @@
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "ANVIL", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ], [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ], [ [ "forge", 200 ] ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
-    "components": [ [ [ "material_aluminium_ingot", 3 ], [ "scrap_aluminum", 13 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 3 ], [ "scrap_aluminum", 13 ] ] ]
   },
   {
     "result": "oxygen_tank",

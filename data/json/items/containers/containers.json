@@ -656,6 +656,35 @@
     "flags": [ "COLLAPSE_CONTENTS" ]
   },
   {
+    "id": "vial_glass",
+    "type": "ITEM",
+    "category": "container",
+    "name": { "str": "glass vial" },
+    "looks_like": "bottle_plastic",
+    "description": "A tiny glass ampuole commonly used to store medication in liquid form.",
+    "weight": "12 g",
+    "volume": "8 ml",
+    "longest_side": "110 mm",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "watertight": true,
+        "rigid": true,
+        "transparent": true,
+        "max_contains_volume": "5 ml",
+        "max_contains_weight": "50 g",
+        "moves": 400
+      }
+    ],
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "to_hit": 1,
+    "material": [ "glass" ],
+    "symbol": ")",
+    "color": "white",
+    "flags": [ "COLLAPSE_CONTENTS" ]
+  },
+  {
     "id": "bottle_plastic_pill_prescription",
     "type": "ITEM",
     "category": "container",
@@ -1848,7 +1877,21 @@
         "coverage": 5,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ],
-        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 } ]
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
+      },
+      {
+        "encumbrance": 1,
+        "coverage": 3,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
+      },
+      {
+        "encumbrance": 2,
+        "coverage": 5,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "COLLAPSE_CONTENTS" ]
@@ -2253,10 +2296,23 @@
     "sided": true,
     "armor": [
       {
-        "material": [ { "type": "iron", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ],
         "coverage": 2,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ],
+        "coverage": 1,
+        "encumbrance": 1,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": 2,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ]
       }
     ],
     "qualities": [ [ "BOIL", 1 ] ],
@@ -2767,10 +2823,25 @@
     "sided": true,
     "armor": [
       {
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ],
         "coverage": 5,
+        "encumbrance": 1,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "coverage": 5,
+        "encumbrance": 1,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": 1,
+        "coverage": 5,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
     "flags": [ "BELTED", "WATER_FRIENDLY" ],
@@ -3527,10 +3598,10 @@
       }
     ],
     "qualities": [ [ "CONTAIN", 1 ] ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 9 }
   },
   {
-    "id": "aquarium_medium_drying",
+    "id": "aquarium_medium_drying_active",
     "type": "ITEM",
     "category": "other",
     "name": { "str": "50 gallon aquarium (drying)", "str_pl": "50 gallon aquariums (drying)" },
@@ -3543,6 +3614,7 @@
     "material": [ "glass" ],
     "symbol": ")",
     "color": "light_cyan",
+    "flags": [ "SPAWN_ACTIVE" ],
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -3554,16 +3626,9 @@
       }
     ],
     "qualities": [ [ "CONTAIN", 1 ] ],
-    "use_action": {
-      "target": "aquarium_medium",
-      "msg": "You check that the aquarium does indeed hold water, it is ready.",
-      "moves": 100,
-      "type": "delayed_transform",
-      "transform_age": 604800,
-      "not_ready_msg": "The silicone hasn't dried quite yet.",
-      "//": "The time it takes is a week and this appears to be the minimum time the internet says it takes."
-    },
-    "melee_damage": { "bash": 1 }
+    "countdown_interval": "7 days",
+    "revert_to": "aquarium_medium",
+    "melee_damage": { "bash": 9 }
   },
   {
     "id": "aquarium_small",
@@ -3591,10 +3656,10 @@
       }
     ],
     "qualities": [ [ "CONTAIN", 1 ] ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 8 }
   },
   {
-    "id": "aquarium_small_drying",
+    "id": "aquarium_small_drying_active",
     "type": "ITEM",
     "category": "other",
     "name": { "str": "30 gallon aquarium (drying)", "str_pl": "30 gallon aquariums (drying)" },
@@ -3608,6 +3673,7 @@
     "symbol": ")",
     "color": "light_cyan",
     "looks_like": "aquarium_medium",
+    "flags": [ "SPAWN_ACTIVE" ],
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -3619,16 +3685,9 @@
       }
     ],
     "qualities": [ [ "CONTAIN", 1 ] ],
-    "use_action": {
-      "target": "aquarium_small",
-      "msg": "You check that the aquarium does indeed hold water, it is ready.",
-      "moves": 100,
-      "type": "delayed_transform",
-      "transform_age": 604800,
-      "not_ready_msg": "The silicone hasn't dried quite yet.",
-      "//": "The time it takes is a week and this appears to be the minimum time the internet says it takes."
-    },
-    "melee_damage": { "bash": 1 }
+    "countdown_interval": "7 days",
+    "revert_to": "aquarium_small",
+    "melee_damage": { "bash": 8 }
   },
   {
     "id": "aquarium_large",
@@ -3656,10 +3715,10 @@
       }
     ],
     "qualities": [ [ "CONTAIN", 1 ] ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 10 }
   },
   {
-    "id": "aquarium_large_drying",
+    "id": "aquarium_large_drying_active",
     "type": "ITEM",
     "category": "other",
     "name": { "str": "100 gallon aquarium (drying)", "str_pl": "100 gallon aquariums (drying)" },
@@ -3673,6 +3732,7 @@
     "symbol": ")",
     "color": "light_cyan",
     "looks_like": "aquarium_medium",
+    "flags": [ "SPAWN_ACTIVE" ],
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -3684,16 +3744,9 @@
       }
     ],
     "qualities": [ [ "CONTAIN", 1 ] ],
-    "use_action": {
-      "target": "aquarium_large",
-      "msg": "You check that the aquarium does indeed hold water, it is ready.",
-      "moves": 100,
-      "type": "delayed_transform",
-      "transform_age": 604800,
-      "not_ready_msg": "The silicone hasn't dried quite yet.",
-      "//": "The time it takes is a week and this appears to be the minimum time the internet says it takes."
-    },
-    "melee_damage": { "bash": 1 }
+    "countdown_interval": "7 days",
+    "revert_to": "aquarium_large",
+    "melee_damage": { "bash": 10 }
   },
   {
     "id": "pressurized_canister",

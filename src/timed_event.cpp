@@ -156,7 +156,7 @@ void timed_event::actualize()
 
         case timed_event_type::AMIGARA: {
             get_event_bus().send<event_type::angers_amigara_horrors>();
-            int num_horrors = rng( 3, 5 );
+            int num_horrors = rng( 1, 4 );
             std::optional<tripoint_bub_ms> fault_point;
             bool horizontal = false;
             for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
@@ -275,22 +275,6 @@ void timed_event::per_turn()
                 add_msg( m_warning, _( "The entire cavern shakes!" ) );
             }
             break;
-
-        case timed_event_type::AMIGARA_WHISPERS: {
-            bool faults = false;
-            for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
-                if( here.ter( p ) == ter_t_fault ) {
-                    faults = true;
-                    break;
-                }
-            }
-
-            if( calendar::once_every( time_duration::from_seconds( 10 ) ) && faults ) {
-                add_msg( m_info, _( "You hear someone whispering \"%s\"" ),
-                         SNIPPET.random_from_category( "amigara_whispers" ).value_or( translation() ) );
-            }
-        }
-        break;
 
         default:
             // Nothing happens for other events

@@ -262,6 +262,7 @@ Use the `Home` key to return to the top.
   - [`map_special`](#map_special)
   - [`requirement`](#requirement-1)
   - [`reveal_locale`](#reveal_locale)
+  - [`distance_initial_visibility`](#distance_initial_visibility)
   - [`eocs`](#eocs)
   - [`missions`](#missions-1)
   - [`start_of_cataclysm`](#start_of_cataclysm)
@@ -2595,7 +2596,7 @@ request](https://github.com/CleverRaven/Cataclysm-DDA/pull/36657) and the
 "components": [ [ [ "spear_wood", 4 ], [ "pointy_stick", 4 ] ] ],   // Items used in construction
 "pre_special": [ "check_empty", "check_up_OK" ],                    // Required something that isn't terrain. The syntax also allows for a square bracket enclosed list of specials which all have to be fulfilled
 "pre_terrain": "t_pit",                                             // Alternative to pre_special; Required terrain to build on
-"pre_flags": [ "WALL", { "flag": "DIGGABLE", "force_terrain": true } ], // Flags beginning furniture/terrain must have. force_ter forces the flag to apply to the underlying terrain
+"pre_flags": [ "WALL", { "flag": "DIGGABLE", "force_terrain": true } ], // Flags beginning furniture/terrain must have. force_ter forces the flag to apply to the underlying terrain. Must be defined in flags.json
 "post_terrain": "t_pit_spiked",                                     // Terrain type after construction is complete
 "post_special": "done_mine_upstairs",                               // Required to do something beyond setting the post terrain. The syntax also allows for a square bracket enclosed list of specials which all have to be fulfilled
 "pre_note": "Build a spikes on a diggable terrain",                 // Create an annotation to this recipe
@@ -3122,6 +3123,14 @@ Qualities are (non-exclusively) associated with items in the various item
 definitions in the json files by adding a `"qualities":` line.
 For example: `"qualities": [ [ "ANVIL", 2 ] ],` associates the `ANVIL` quality
 at level `2` to the item.
+
+Qualities also accept an object format with an optional `speed` field:
+`"qualities": [ { "id": "SEW", "level": 2, "speed": 0.3 } ]`.
+The `speed` value (default 1.0) is a multiplier applied to recipe steps that
+require this quality. Values below 1.0 make the step faster (e.g. a sewing
+machine with speed 0.3 completes sewing steps in 30% of the base time).
+Both array and object formats can be mixed freely. `charged_qualities` accepts
+the same format.
 
 ### Traits/Mutations
 
@@ -5997,6 +6006,12 @@ The achievement you need to do to access this scenario
 (optional, boolean)
 
 Defaults true. If a road can be found within 3 OMTs of the starting position, reveals a path to the nearest city and that city's center.
+
+## `distance_initial_visibility`
+
+(optional, int)
+
+Defaults 15. How much of the initial map should be known when the game is started? This value is a radius.
 
 ## `eocs`
 (optional, array of strings)

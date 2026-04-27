@@ -73,8 +73,9 @@ static const damage_type_id damage_acid( "acid" );
 
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_corroding( "corroding" );
-static const efftype_id effect_jumping( "jumping" );
 static const efftype_id effect_invisibility( "invisibility" );
+static const efftype_id effect_jumping( "jumping" );
+static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_teleglow( "teleglow" );
 
 static const flag_id json_flag_FIT( "FIT" );
@@ -1324,7 +1325,7 @@ void spell_effect::spawn_ethereal_item( const spell &sp, Creature &caster,
                                             calendar::turn );
             granted.insert( granted.end(), group_items.begin(), group_items.end() );
         } else {
-            granted.emplace_back( sp.effect_data(), calendar::turn );
+            granted.emplace_back( itype_id( sp.effect_data() ), calendar::turn );
         }
     }
 
@@ -1669,6 +1670,10 @@ void spell_effect::charm_monster( const spell &sp, Creature &caster, const tripo
             mon->get_hp() <= sp.damage( caster ) ) {
             mon->unset_dest();
             mon->friendly += sp.duration( caster ) / 100;
+            if( mon->friendly != -1 && sp.has_flag( spell_flag::CHARM_PET ) ) {
+                mon->friendly = -1;
+                mon->add_effect( effect_pet, 1_turns, true );
+            }
         }
     }
 }
@@ -2106,7 +2111,15 @@ void spell_effect::slime_split_on_death( const spell &sp, Creature &caster,
             }
 
             shared_ptr_fast<monster> mon = make_shared_fast<monster>( slime_id );
-            mon->ammo = mon->type->starting_ammo;
+            if( !mon->type->starting_ammo.empty() ) {
+                for( const auto &pair : mon->type->starting_ammo ) {
+                    const itype_id &ammo_type = pair.first;
+                    int max_amt = pair.second;
+                    int min_amt = std::min( mon->type->starting_ammo_min, pair.second );
+                    int qty = rng( min_amt, max_amt );
+                    mon->ammo[ ammo_type ] = qty;
+                }
+            }
             if( mon->will_move_to( dest ) && mon->know_danger_at( dest ) ) {
                 if( monster *const blob = g->place_critter_around( mon, dest, 0 ) ) {
                     sp.make_sound( dest, caster );

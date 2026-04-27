@@ -491,7 +491,8 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
-        { "item": "scrap", "count": [ 4, 10 ] },
+        { "item": "scrap", "count": [ 2, 8 ] },
+        { "item": "steel_fragment", "count": [ 2, 4 ] },
         { "item": "sheet_metal_small", "count": [ 6, 10 ] },
         { "item": "pipe", "count": [ 0, 1 ] }
       ]
@@ -1455,7 +1456,7 @@
     "concealment": 70,
     "required_str": 16,
     "max_volume": "1500 L",
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "HIDE_PLACE", "NO_SIGHT", "FIRE_CONTAINER", "LIQUIDCONT" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "HIDE_PLACE", "NO_SIGHT", "FIRE_CONTAINER", "LIQUIDCONT", "SOAKING_TUB" ],
     "deconstruct": {
       "items": [
         { "item": "frame", "count": [ 2, 3 ] },
@@ -1678,7 +1679,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
-        { "item": "material_aluminium_ingot", "count": [ 3, 8 ] },
+        { "item": "aluminum_chunk", "count": [ 3, 8 ] },
         { "item": "lock", "count": [ 0, 1 ] },
         { "item": "scrap_aluminum", "count": [ 3, 15 ] },
         { "item": "hinge", "count": [ 0, 2 ] },

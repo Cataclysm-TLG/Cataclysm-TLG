@@ -193,20 +193,20 @@ item Single_item_creator::create_single_without_container( const time_point &bir
 {
     // Check direct return conditions first.
     if( type == S_NONE ) {
-        return item( null_item_id, birthday );
+        return item( itype_id::NULL_ID(), birthday );
     }
     Item_spawn_data *isd = nullptr;
     if( type == S_ITEM_GROUP ) {
         item_group_id group_id( id );
         if( std::find( rec.begin(), rec.end(), group_id ) != rec.end() ) {
             debugmsg( "recursion in item spawn list %s", id.c_str() );
-            return item( null_item_id, birthday );
+            return item( itype_id::NULL_ID(), birthday );
         }
         rec.push_back( group_id );
         isd = item_controller->get_group( group_id );
         if( isd == nullptr ) {
             debugmsg( "unknown item spawn list %s", id.c_str() );
-            return item( null_item_id, birthday );
+            return item( itype_id::NULL_ID(), birthday );
         }
     }
 
@@ -224,7 +224,7 @@ item Single_item_creator::create_single_without_container( const time_point &bir
             if( id == "corpse" ) {
                 return item::make_corpse( mtype_id::NULL_ID(), birthday );
             } else {
-                return item( id, birthday );
+                return item( itype_id( id ), birthday );
             }
         }
     } )();
@@ -609,7 +609,7 @@ void Item_modifier::modify( item &new_item, const std::string &context ) const
                         mag.ammo_set( mag.ammo_default(), ch );
                     }
                     new_item.put_in( mag, pocket_type::MAGAZINE_WELL );
-                } else if( new_item.is_magazine() ) {
+                } else if( new_item.is_magazine() && !new_item.ammo_default().is_null() ) {
                     new_item.ammo_set( new_item.ammo_default(), ch );
                 } else if( new_item.magazine_current() ) {
                     new_item.ammo_set( new_item.magazine_current()->ammo_default(), ch );
@@ -883,7 +883,7 @@ item Item_group::create_single( const time_point &birthday, RecursionList &rec )
             return elem->create_single( birthday, rec );
         }
     }
-    return item( null_item_id, birthday );
+    return item( itype_id::NULL_ID(), birthday );
 }
 
 void Item_group::check_consistency( bool actually_spawn ) const

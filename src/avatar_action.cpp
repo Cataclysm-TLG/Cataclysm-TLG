@@ -49,7 +49,8 @@
 #include "options.h"
 #include "output.h"
 #include "pimpl.h"
-#include "player_activity.h"
+#include "popup.h"
+#include "point.h"
 #include "projectile.h"
 #include "ranged.h"
 #include "ret_val.h"
@@ -66,7 +67,6 @@ static const bionic_id bio_railgun( "bio_railgun" );
 static const character_modifier_id
 character_modifier_melee_stamina_cost_mod( "melee_stamina_cost_mod" );
 
-static const efftype_id effect_amigara( "amigara" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
@@ -81,7 +81,10 @@ static const efftype_id effect_winded( "winded" );
 
 static const furn_str_id furn_f_safe_c( "f_safe_c" );
 
+static const itype_id itype_grass( "grass" );
+static const itype_id itype_small_plant( "small_plant" );
 static const itype_id itype_swim_fins( "swim_fins" );
+static const itype_id itype_underbrush( "underbrush" );
 
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
@@ -256,13 +259,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         !you.has_effect( effect_psi_stunned ) && !is_riding && !you.has_effect( effect_incorporeal ) &&
         !m.impassable_field_at( dest_loc ) && !you.has_flag( json_flag_CANNOT_MOVE ) ) {
         if( weapon && weapon->has_flag( flag_DIG_TOOL ) ) {
-            if( weapon->type->can_use( "JACKHAMMER" ) &&
-                weapon->ammo_sufficient( &you ) ) {
-                you.invoke_item( &*weapon, "JACKHAMMER", dest_loc );
-                // don't move into the tile until done mining
-                you.defer_move( dest_loc );
-                return true;
-            } else if( weapon->type->can_use( "PICKAXE" ) ) {
+            if( weapon->type->can_use( "PICKAXE" ) ) {
                 you.invoke_item( &*weapon, "PICKAXE", dest_loc );
                 // don't move into the tile until done mining
                 you.defer_move( dest_loc );
@@ -339,29 +336,6 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         }
     }
 
-    if( you.has_effect( effect_amigara ) ) {
-        int curdist = INT_MAX;
-        int newdist = INT_MAX;
-        const tripoint_bub_ms minp{ 0, 0, you.posz() };
-        const tripoint_bub_ms maxp{ MAPSIZE_X, MAPSIZE_Y, you.posz() };
-        for( const tripoint_bub_ms &pt : m.points_in_rectangle( minp, maxp ) ) {
-            if( m.ter( pt ) == ter_t_fault ) {
-                int dist = rl_dist( pt, you.pos_bub() );
-                if( dist < curdist ) {
-                    curdist = dist;
-                }
-                dist = rl_dist( pt, dest_loc );
-                if( dist < newdist ) {
-                    newdist = dist;
-                }
-            }
-        }
-        if( newdist > curdist ) {
-            add_msg( m_info, _( "You cannot pull yourself away from the faultline…" ) );
-            return false;
-        }
-    }
-
     dbg( D_PEDANTIC_INFO ) << "game:plmove: From (" <<
                            you_pos.x() << "," << you_pos.y() << "," << you_pos.z() << ") to (" <<
                            dest_loc.x() << "," << dest_loc.y() << "," << dest_loc.z() << ")";
@@ -387,8 +361,12 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
 
     if( monster *const mon_ptr = creatures.creature_at<monster>( dest_loc, true ) ) {
         monster &critter = *mon_ptr;
-        if( critter.friendly == 0 &&
-            !critter.has_effect( effect_pet ) ) {
+        // Creatures swimming under a solid surface don't block surface movement
+        if( critter.is_underwater() &&
+            m.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, dest_loc ) ) {
+            // They're under the walkway/ice, player walks over them
+        } else if( critter.friendly == 0 &&
+                   !critter.has_effect( effect_pet ) ) {
             if( you.is_auto_moving() ) {
                 add_msg( m_warning, _( "Monster in the way.  Auto move canceled." ) );
                 add_msg( m_info, _( "Move into the monster to attack." ) );
@@ -877,10 +855,10 @@ bool avatar_action::eat_here( avatar &you )
           !furn_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to eat the leaves from the %s." ), furn_underfoot->name() );
-            return true;
+            return false;
         } else {
             here.furn_set( you.pos_bub(), furn_str_id::NULL_ID() );
-            item food( "underbrush", calendar::turn, 1 );
+            item food( itype_underbrush, calendar::turn, 1 );
             you.assign_activity( consume_activity_actor( food ) );
             return true;
         }
@@ -890,10 +868,10 @@ bool avatar_action::eat_here( avatar &you )
           !ter_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to eat the leaves from the %s." ), ter_underfoot->name() );
-            return true;
+            return false;
         } else {
             here.ter_set( you.pos_bub(), ter_t_grass );
-            item food( "underbrush", calendar::turn, 1 );
+            item food( itype_underbrush, calendar::turn, 1 );
             you.assign_activity( consume_activity_actor( food ) );
             return true;
         }
@@ -903,10 +881,10 @@ bool avatar_action::eat_here( avatar &you )
           !furn_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to eat the %s." ), furn_underfoot->name() );
-            return true;
+            return false;
         } else {
             here.furn_set( you.pos_bub(), furn_str_id::NULL_ID() );
-            item food( "small_plant", calendar::turn, 1 );
+            item food( itype_small_plant, calendar::turn, 1 );
             you.assign_activity( consume_activity_actor( food ) );
             return true;
         }
@@ -916,9 +894,9 @@ bool avatar_action::eat_here( avatar &you )
           !ter_underfoot.obj().has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to graze." ) );
-            return true;
+            return false;
         } else {
-            item food( item( "grass", calendar::turn, 1 ) );
+            item food( item( itype_grass, calendar::turn, 1 ) );
             you.assign_activity( consume_activity_actor( food ) );
             here.ter_set( you.pos_bub(), here.get_ter_transforms_into( you.pos_bub() ) );
             return true;
@@ -927,16 +905,16 @@ bool avatar_action::eat_here( avatar &you )
     if( is_grazer ) {
         if( ter_underfoot == ter_t_grass_golf || ter_underfoot == ter_t_grass ) {
             add_msg( _( "This grass is too short to graze." ) );
-            return true;
+            return false;
         } else if( ter_underfoot == ter_t_grass_dead ) {
             add_msg( _( "This grass is dead and too mangled for you to graze." ) );
-            return true;
+            return false;
         } else if( ter_underfoot == ter_t_grass_white ) {
             add_msg( _( "This grass is tainted with paint and thus inedible." ) );
-            return true;
+            return false;
         } else if( ter_underfoot == ter_t_grass_alien ) {
             add_msg( _( "This grass is razor sharp and would probably shred your mouth." ) );
-            return true;
+            return false;
         }
     }
     return false;
@@ -944,30 +922,15 @@ bool avatar_action::eat_here( avatar &you )
 
 void avatar_action::eat( avatar &you, item_location &loc )
 {
-    std::string filter;
-    if( !you.activity.str_values.empty() ) {
-        filter = you.activity.str_values.back();
-    }
-    avatar_action::eat( you, loc, you.activity.values, you.activity.targets, filter,
-                        you.activity.id() );
-}
-
-void avatar_action::eat( avatar &you, item_location &loc,
-                         const std::vector<int> &consume_menu_selections,
-                         const std::vector<item_location> &consume_menu_selected_items,
-                         const std::string &consume_menu_filter,
-                         activity_id type )
-{
     map &here = get_map();
 
     if( !loc ) {
         you.cancel_activity();
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
     loc.overflow( here );
-    you.assign_activity( consume_activity_actor( loc, consume_menu_selections,
-                         consume_menu_selected_items, consume_menu_filter, type ) );
+    you.assign_activity( consume_activity_actor( loc, true ) );
     you.last_item = item( *loc ).typeId();
 }
 
@@ -996,16 +959,6 @@ void avatar_action::plthrow( avatar &you, item_location loc,
     } else if( you.has_flag( json_flag_CANNOT_ATTACK ) ) {
         add_msg( m_info, _( "You are incapable of throwing anything!" ) );
         return;
-    }
-    if( you.is_mounted() ) {
-        monster *mons = get_player_character().mounted_creature.get();
-        if( mons->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-            if( !mons->check_mech_powered() ) {
-                add_msg( m_bad, _( "Your %s refuses to move as its batteries have been drained." ),
-                         mons->get_name() );
-                return;
-            }
-        }
     }
 
     // TODO: Move this to Character or ranged. As of this writing, bionics.h can be removed from header at that time.
@@ -1148,7 +1101,7 @@ void avatar_action::plthrow( avatar &you, item_location loc,
     }
 
     if( !loc ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
 
@@ -1263,7 +1216,7 @@ void avatar_action::use_item( avatar &you, item_location &loc, std::string const
         loc = game_menus::inv::use();
 
         if( !loc ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             return;
         }
     }
@@ -1273,11 +1226,6 @@ void avatar_action::use_item( avatar &you, item_location &loc, std::string const
     }
 
     loc.overflow( here );
-
-    if( loc->is_comestible() && loc->is_frozen_liquid() ) {
-        add_msg( _( "Try as you might, you can't consume frozen liquids." ) );
-        return;
-    }
 
     if( loc->wetness && loc->has_flag( flag_WATER_BREAK_ACTIVE ) ) {
         if( query_yn( _( "This item is still wet and it will break if you turn it on.  Proceed?" ) ) ) {
@@ -1354,7 +1302,7 @@ void avatar_action::unload( avatar &you )
 {
     std::pair<item_location, bool> ret = game_menus::inv::unload( you );
     if( !ret.first ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return;
     }
 
@@ -1368,7 +1316,7 @@ void avatar_action::unload( avatar &you )
         }, _( "Insert item" ), 1, _( "You have no container to insert items." ) );
 
         if( !new_container ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             return;
         }
         you.unload( ret.first, false, new_container );

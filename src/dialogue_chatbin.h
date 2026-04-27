@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef CATA_SRC_DIALOGUE_CHATBIN_H
 #define CATA_SRC_DIALOGUE_CHATBIN_H
 
@@ -125,7 +125,7 @@ struct dialogue_chatbin_snippets {
     translation snip_pulp_zombie = to_translation( "Hold on, I want to pulp that %s." );
     translation snip_heal_player = to_translation( "Hold still %s, I'm coming to help you." );
     translation snip_wound_infected = to_translation( "My %s wound is infected…" );
-    translation snip_wound_bite = to_translation( "The bite wound on my %s looks bad." );
+    translation snip_wound_bite = to_translation( "I need some disinfectant for my %s wound." );
     translation snip_bleeding = to_translation( "My %s is bleeding!" );
     translation snip_bleeding_badly = to_translation( "My %s is bleeding badly!" );
     translation snip_radiation_sickness = to_translation( "I'm suffering from radiation sickness…" );

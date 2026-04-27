@@ -399,6 +399,9 @@ void uistatedata::serialize( JsonOut &json ) const
     json.member( "distraction_withdrawal", distraction_withdrawal );
     json.member( "numpad_navigation", numpad_navigation );
 
+    json.member( "consume_menu_uistate" );
+    consume_uistate.serialize( json );
+
     json.member( "input_history" );
     json.start_object();
     for( const auto &e : input_history ) {
@@ -446,6 +449,7 @@ void uistatedata::deserialize( const JsonObject &jo )
     jo.read( "overmap_show_hordes", overmap_show_hordes );
     jo.read( "overmap_show_revealed_omts", overmap_show_revealed_omts );
     jo.read( "overmap_show_forest_trails", overmap_show_forest_trails );
+    jo.read( "consume_menu_uistate", consume_uistate );
     jo.read( "hidden_recipes", hidden_recipes );
     jo.read( "favorite_recipes", favorite_recipes );
     jo.read( "expanded_recipes", expanded_recipes );
@@ -678,6 +682,11 @@ inventory_selector_preset::inventory_selector_preset()
     std::function<std::string( const inventory_entry & )>( [ this ]( const inventory_entry & entry ) {
         return get_caption( entry );
     } ) );
+}
+
+bool inventory_selector_preset::is_shown( const item_location & ) const
+{
+    return true;
 }
 
 bool inventory_selector_preset::sort_compare( const inventory_entry &lhs,
@@ -2026,9 +2035,14 @@ bool inventory_selector::add_contained_items( item_location &container, inventor
         return false;
     }
 
-    std::list<item *> const items = preset.get_pocket_type() == pocket_type::LAST
-                                    ? container->all_items_top()
-                                    : container->all_items_top( preset.get_pocket_type() );
+    std::list<item *> items;
+    if( preset.get_pocket_type().size() == 1 && preset.has_pocket_type( pocket_type::LAST ) ) {
+        items = container->all_items_top();
+    } else {
+        for( const pocket_type pt : preset.get_pocket_type() ) {
+            items.splice( items.begin(), container->all_items_top( pt ) );
+        }
+    }
 
     bool vis_top = false;
     inventory_column temp( preset );
@@ -3074,7 +3088,7 @@ void inventory_column::remove_duplicate_itypes( bool include_variants )
             }
         }
     };
-    //sort out duplicates, clear list, then reconstruct entries
+    // Sort out duplicates, clear list, then reconstruct entries.
     audit_entries( entries );
     audit_entries( entries_hidden );
     clear();
@@ -4231,8 +4245,13 @@ inventory_selector::stats inventory_insert_selector::get_raw_stats() const
                         }
                     }
                 }
-                selected_weight += w * overflow_counter;
-                selected_volume += v * overflow_counter;
+                if( e->any_item()->count_by_charges() ) {
+                    selected_weight += w * overflow_counter / e->get_total_charges();
+                    selected_volume += v * overflow_counter / e->get_total_charges();
+                } else {
+                    selected_weight += w * overflow_counter;
+                    selected_volume += v * overflow_counter;
+                }
             }
         }
     }

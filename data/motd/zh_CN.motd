@@ -1,8 +1,8 @@
-# Lines longer than 78 characters will be wrapped automatically
-# The following line is for reference
+# 一行字符数超过78个，会自动折行
+# 从下面开始是显示在游戏中的文字（也不要再写注释了）
 ##############################################################################
-<color_white>Visit us:</color>
+<color_white>了解我们:</color>
 
-<color_white>Report bugs, suggestion and follow the development at:</color>
+<color_white>提交BUG、提交建议或跟进开发进度请到:</color>
 
 <color_light_gray>* Github: </color><color_light_cyan>https://github.com/Cataclysm-TLG/Cataclysm-TLG</color>

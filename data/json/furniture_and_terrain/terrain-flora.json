@@ -41,7 +41,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -89,7 +90,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -116,7 +118,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -141,7 +144,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -168,7 +172,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -193,7 +198,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -220,7 +226,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -245,7 +252,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -272,7 +280,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -297,7 +306,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -315,7 +325,7 @@
     "transforms_into": "t_tree_hazelnut_harvested",
     "examine_action": "harvest_ter",
     "looks_like": "t_tree_hickory",
-    "roof": "t_treetop",
+    "roof": "t_treetop_nut",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "hazelnut_harv" } ],
     "bash": {
       "str_min": 80,
@@ -324,7 +334,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -340,7 +351,7 @@
     "move_cost": 0,
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_hazelnut",
-    "roof": "t_treetop",
+    "roof": "t_treetop_nut",
     "looks_like": "t_tree_hickory_harvested",
     "bash": {
       "str_min": 80,
@@ -349,7 +360,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -376,7 +388,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -401,7 +414,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -417,8 +431,8 @@
     "color": [ "green", "green", "green", "brown" ],
     "move_cost": 0,
     "roof": "t_treetop",
-    "examine_action": "harvest_ter_nectar",
     "transforms_into": "t_tree_basswood_harvested",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "spring" ], "id": "young_leaves_harv" } ],
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "bash": {
@@ -428,7 +442,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -453,7 +468,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -481,7 +497,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -507,7 +524,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -531,7 +549,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -548,7 +567,6 @@
     "move_cost": 0,
     "roof": "t_treetop_dead",
     "examine_action": "harvest_ter",
-    "//": "gives a maximum of ~15L and ~8.5kg of wood between sticks and twigs",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "tree_dead_harv" } ],
     "transforms_into": "t_tree_very_dead",
     "flags": [ "FLAMMABLE_ASH", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
@@ -611,7 +629,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 0, 5 ] },
+        { "item": "stick_long", "count": [ 0, 3 ] },
+        { "item": "stick", "count": [ 0, 3 ] },
         { "item": "splinter", "count": [ 0, 4 ] },
         { "item": "twig", "count": [ 2, 7 ] },
         { "item": "leaves", "count": [ 5, 20 ] }
@@ -652,7 +671,7 @@
     "move_cost": 0,
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_apple_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "apple_harv" } ],
     "bash": {
       "str_min": 80,
@@ -661,7 +680,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -688,7 +708,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -707,7 +728,7 @@
     "move_cost": 0,
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_crabapple_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "crabapple_harv" } ],
     "bash": {
       "str_min": 80,
@@ -716,7 +737,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -743,7 +765,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -754,7 +777,7 @@
     "id": "t_tree_pear",
     "name": "pear tree",
     "looks_like": "t_tree_apple",
-    "roof": "t_treetop",
+    "roof": "t_treetop_fruit",
     "description": "This is 'Pyrus communis', or the common pear tree, which produces fruit in the fall.  If you examined the branches more closely, you could probably find a few mature ones.",
     "symbol": "7",
     "color": [ "light_green", "light_green", "light_green_green", "brown" ],
@@ -762,7 +785,7 @@
     "move_cost": 0,
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_pear_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "pear_harv" } ],
     "bash": {
       "str_min": 80,
@@ -771,7 +794,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -798,7 +822,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -817,7 +842,7 @@
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_coffee_harvested",
     "looks_like": "t_tree_plum",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "coffee_harv" } ],
     "bash": {
       "str_min": 80,
@@ -826,7 +851,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -853,7 +879,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -869,10 +896,10 @@
     "color": [ "light_green", "red_green", "light_green", "brown" ],
     "//": "barren in winter, fruits in summer",
     "move_cost": 0,
-    "roof": "t_treetop",
+    "roof": "t_treetop_fruit",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_cherry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "cherry_harv" } ],
     "bash": {
       "str_min": 80,
@@ -881,7 +908,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -897,7 +925,7 @@
     "color": [ "light_green", "light_green", "light_green", "brown" ],
     "//": "barren in winter, no fruits anymore",
     "move_cost": 0,
-    "roof": "t_treetop",
+    "roof": "t_treetop_fruit",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "HARVESTED", "CLIMB_ADJACENT" ],
     "examine_action": "harvested_plant",
     "transforms_into": "t_tree_cherry",
@@ -908,7 +936,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -927,7 +956,7 @@
     "roof": "t_treetop",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_juniper_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "juniper_harv" } ],
     "bash": {
       "str_min": 80,
@@ -974,7 +1003,7 @@
     "roof": "t_treetop",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_peach_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "peach_harv" } ],
     "bash": {
       "str_min": 80,
@@ -983,7 +1012,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1010,7 +1040,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1026,10 +1057,10 @@
     "color": [ "light_green", "light_red_green", "light_green", "brown" ],
     "//": "barren in winter, fruits in summer",
     "move_cost": 0,
-    "roof": "t_treetop",
+    "roof": "t_treetop_fruit",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_apricot_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "apricot_harv" } ],
     "bash": {
       "str_min": 80,
@@ -1038,7 +1069,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1054,7 +1086,7 @@
     "color": [ "light_green", "light_green", "light_green", "brown" ],
     "//": "barren in winter, no fruits anymore",
     "move_cost": 0,
-    "roof": "t_treetop",
+    "roof": "t_treetop_apricot",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "HARVESTED", "CLIMB_ADJACENT" ],
     "examine_action": "harvested_plant",
     "transforms_into": "t_tree_apricot",
@@ -1065,7 +1097,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1081,10 +1114,10 @@
     "color": [ "light_green", "magenta_green", "light_green", "brown" ],
     "//": "barren in winter, fruits in summer",
     "move_cost": 0,
-    "roof": "t_treetop",
+    "roof": "t_treetop_fruit",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_plum_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "plum_harv" } ],
     "bash": {
       "str_min": 80,
@@ -1093,7 +1126,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1109,7 +1143,7 @@
     "color": [ "light_green", "light_green", "light_green", "brown" ],
     "//": "barren in winter, no fruits anymore",
     "move_cost": 0,
-    "roof": "t_treetop",
+    "roof": "t_treetop_fruit",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "HARVESTED", "CLIMB_ADJACENT" ],
     "examine_action": "harvested_plant",
     "transforms_into": "t_tree_plum",
@@ -1120,7 +1154,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1138,7 +1173,7 @@
     "roof": "t_treetop",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_mulberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_tree_apple",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "mulberry_harv" } ],
     "bash": {
@@ -1148,7 +1183,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1175,7 +1211,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1193,7 +1230,7 @@
     "roof": "t_treetop",
     "flags": [ "FLAMMABLE_ASH", "NOITEM", "SUPPORTS_ROOF", "TREE", "REDUCE_SCENT", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_tupelo_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_tree_plum",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "tupelo_harv" } ],
     "bash": {
@@ -1203,7 +1240,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1230,7 +1268,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1247,7 +1286,7 @@
     "coverage": 70,
     "flags": [ "FLAMMABLE_ASH", "NOITEM", "TREE", "REDUCE_SCENT", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_nannyberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_tree_plum",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "nannyberry_harv" } ],
     "bash": {
@@ -1257,7 +1296,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1283,7 +1323,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1301,7 +1342,7 @@
     "roof": "t_treetop",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "transforms_into": "t_tree_elderberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_tree_plum",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "elderberry_harv" } ],
     "bash": {
@@ -1311,7 +1352,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1338,7 +1380,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1374,7 +1417,7 @@
     "description": "A towering coniferous tree that belongs to the 'Pinus' genus, with the New England species varying from 'P. strobus', 'P. resinosa' and 'P. rigida'.  Some of the branches and resin clumps have been stripped away and many of the pinecones aren't developed fully yet, but given a season, it could be harvestable again.",
     "symbol": "4",
     "color": "brown",
-    "roof": "t_treetop_evergreen",
+    "roof": "t_treetop_deadpine",
     "copy-from": "t_tree_pine",
     "looks_like": "t_tree_deadpine",
     "transforms_into": "t_tree_pine",
@@ -1385,7 +1428,7 @@
     "id": "t_tree_deadpine",
     "name": "dead pine tree",
     "looks_like": "t_tree_dead",
-    "roof": "t_treetop_dead",
+    "roof": "t_treetop_deadpine",
     "description": "A towering coniferous tree that belongs to the 'Pinus' genus, with the New England species varying from 'P. strobus', 'P. resinosa' and 'P. rigida'.  This tree's branches are bare, and it appears to be dead.",
     "symbol": "4",
     "color": "brown",
@@ -1468,7 +1511,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1493,7 +1537,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1519,7 +1564,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1544,7 +1590,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1572,7 +1619,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1597,7 +1645,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1608,7 +1657,7 @@
     "id": "t_tree_maple",
     "name": "maple tree",
     "looks_like": "t_tree",
-    "roof": "t_treetop",
+    "roof": "t_treetop_maple",
     "description": "A large deciduous tree of the 'Acer' genus.  The leaves are distinctively shaped with five prongs.  It could be tapped in order to extract maple sap.",
     "symbol": "7",
     "color": [ "red", "light_green", "light_green", "red" ],
@@ -1622,7 +1671,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1633,7 +1683,7 @@
     "id": "t_tree_maple_tapped",
     "name": "maple tree",
     "looks_like": "t_tree_maple",
-    "roof": "t_treetop",
+    "roof": "t_treetop_maple",
     "description": "A large deciduous tree of the 'Acer' genus.  The leaves are distinctively shaped with five prongs.  A spigot is wedged into the trunk, and sweet maple sap can be extracted.",
     "symbol": "7",
     "color": [ "red", "light_green", "light_green", "red" ],
@@ -1647,7 +1697,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1671,7 +1722,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1682,7 +1734,7 @@
     "id": "t_tree_magnolia",
     "name": "magnolia tree",
     "looks_like": "t_tree_apple",
-    "roof": "t_treetop",
+    "roof": "t_treetop_fruit",
     "description": "Part of an ancient lineage of broadleaf trees known for their large white flowers.",
     "symbol": "7",
     "color": [ "light_green", "light_green", "i_light_green", "brown" ],
@@ -1695,7 +1747,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1719,7 +1772,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1747,7 +1801,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1774,7 +1829,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1790,7 +1846,7 @@
     "symbol": "7",
     "color": [ "light_green", "light_green", "brown_green", "brown" ],
     "move_cost": 0,
-    "roof": "t_treetop",
+    "roof": "t_treetop_nut",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
     "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "pistachio_harv" } ],
@@ -1802,7 +1858,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1814,7 +1871,7 @@
     "name": "pistachio tree",
     "description": "A deciduous tree of the 'Pistacia' genus.  This is a cultivated tree, and is not native to this region.  Unfortunately, it looks like it has been picked clean of pistachio nuts.",
     "looks_like": "t_tree_hickory_harvested",
-    "roof": "t_treetop",
+    "roof": "t_treetop_nut",
     "symbol": "7",
     "color": [ "light_green", "light_green", "light_green", "brown" ],
     "move_cost": 0,
@@ -1828,7 +1885,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1842,7 +1900,7 @@
     "looks_like": "t_tree_hickory",
     "//": "Almond tree is not a local native and is only used in specific locations like orchards and gardens.",
     "symbol": "7",
-    "roof": "t_treetop",
+    "roof": "t_treetop_nut",
     "color": [ "light_green", "light_green", "brown_green", "brown" ],
     "move_cost": 0,
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "BROWSABLE", "CLIMB_ADJACENT" ],
@@ -1856,7 +1914,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1869,7 +1928,7 @@
     "name": "almond tree",
     "looks_like": "t_tree_hickory_harvested",
     "symbol": "7",
-    "roof": "t_treetop",
+    "roof": "t_treetop_nut",
     "color": [ "light_green", "light_green", "light_green", "brown" ],
     "move_cost": 0,
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "HARVESTED", "CLIMB_ADJACENT" ],
@@ -1882,7 +1941,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1910,7 +1970,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1936,7 +1997,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -1984,7 +2046,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -2011,7 +2074,8 @@
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
       "items": [
-        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 3 ] },
         { "item": "splinter", "count": [ 10, 25 ] },
         { "item": "leaves", "count": [ 50, 150 ] }
       ]
@@ -2300,7 +2364,7 @@
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE", "BROWSABLE" ],
     "transforms_into": "t_shrub_peanut_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "shrub_peanut_harv" } ],
     "bash": {
       "str_min": 4,
@@ -2354,7 +2418,7 @@
     "coverage": 60,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE", "BROWSABLE" ],
     "transforms_into": "t_shrub_autumn_olive_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "shrub_autumn_olive_harv" } ],
     "bash": {
       "str_min": 4,
@@ -2407,7 +2471,7 @@
     "coverage": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE", "BROWSABLE" ],
     "transforms_into": "t_shrub_hobblebush_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "shrub_hobblebush_harv" } ],
     "bash": {
       "str_min": 4,
@@ -2461,7 +2525,7 @@
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE", "BROWSABLE" ],
     "transforms_into": "t_shrub_blueberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "shrub_blueberry_harv" } ],
     "bash": {
       "str_min": 4,
@@ -2515,7 +2579,7 @@
     "coverage": 5,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "BROWSABLE" ],
     "transforms_into": "t_shrub_strawberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "shrub_strawberry_harv" } ],
     "bash": {
       "str_min": 4,
@@ -2568,7 +2632,7 @@
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SHARP", "BROWSABLE" ],
     "transforms_into": "t_shrub_blackberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_shrub_blueberry",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "shrub_blackberry_harv" } ],
     "bash": {
@@ -2623,7 +2687,7 @@
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE", "BROWSABLE" ],
     "transforms_into": "t_shrub_huckleberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_shrub_blueberry",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "shrub_huckleberry_harv" } ],
     "bash": {
@@ -2678,7 +2742,7 @@
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SHARP", "BROWSABLE" ],
     "transforms_into": "t_shrub_raspberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_shrub_strawberry",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "shrub_raspberry_harv" } ],
     "bash": {
@@ -2733,7 +2797,7 @@
     "concealment": 20,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE", "BROWSABLE" ],
     "transforms_into": "t_shrub_grape_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_shrub_blueberry",
     "harvest_by_season": [ { "seasons": [ "summer" ], "id": "shrub_grape_harv" } ],
     "bash": {
@@ -2787,7 +2851,7 @@
     "coverage": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE", "BROWSABLE" ],
     "transforms_into": "t_shrub_spicebush_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_shrub_blueberry",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "shrub_spicebush_harv" } ],
     "bash": {
@@ -2840,7 +2904,7 @@
     "coverage": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE", "BROWSABLE" ],
     "transforms_into": "t_shrub_chokeberry_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_shrub_blueberry",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "shrub_chokeberry_harv" } ],
     "bash": {
@@ -2894,7 +2958,7 @@
     "concealment": 10,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SHARP", "BROWSABLE" ],
     "transforms_into": "t_shrub_rose_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_shrub_strawberry",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "shrub_rose_harv" } ],
     "//": "Insert rose (flower) harvest in summer once flowers have a use (same for other generic flowers).",
@@ -2950,8 +3014,8 @@
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE" ],
     "transforms_into": "t_shrub_hydrangea_harvested",
+    "examine_action": "harvest_ter",
     "fall_damage_reduction": 5,
-    "examine_action": "harvest_ter_nectar",
     "looks_like": "t_shrub",
     "bash": {
       "str_min": 4,
@@ -3007,7 +3071,7 @@
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE" ],
     "transforms_into": "t_shrub_lilac_harvested",
-    "examine_action": "harvest_ter_nectar",
+    "examine_action": "harvest_ter",
     "looks_like": "t_shrub",
     "bash": {
       "str_min": 4,
@@ -3175,7 +3239,7 @@
     "type": "terrain",
     "id": "t_grass_dead",
     "name": "dead grass",
-    "description": "An area of long, shaggy grass that hasn't been cut recently.",
+    "description": "Patchy grass which has withered and died.",
     "looks_like": "t_dirt",
     "symbol": ".",
     "color": "brown",

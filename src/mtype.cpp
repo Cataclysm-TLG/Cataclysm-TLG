@@ -105,8 +105,6 @@ mon_flag_id mon_flag_ACIDPROOF,
             mon_flag_KEENNOSE,
             mon_flag_KEEP_DISTANCE,
             mon_flag_LOUDMOVES,
-            mon_flag_MECH_DEFENSIVE,
-            mon_flag_MECH_RECON_VISION,
             mon_flag_MILKABLE,
             mon_flag_NEMESIS,
             mon_flag_NEVER_WANDER,
@@ -140,7 +138,6 @@ mon_flag_id mon_flag_ACIDPROOF,
             mon_flag_RANGED_ATTACKER,
             mon_flag_REVIVES,
             mon_flag_REVIVES_HEALTHY,
-            mon_flag_RIDEABLE_MECH,
             mon_flag_SEES,
             mon_flag_SHORTACIDTRAIL,
             mon_flag_SILENT_DISAPPEAR,
@@ -232,8 +229,6 @@ void set_mon_flag_ids()
     mon_flag_KEENNOSE = mon_flag_id( "KEENNOSE" );
     mon_flag_KEEP_DISTANCE = mon_flag_id( "KEEP_DISTANCE" );
     mon_flag_LOUDMOVES = mon_flag_id( "LOUDMOVES" );
-    mon_flag_MECH_DEFENSIVE = mon_flag_id( "MECH_DEFENSIVE" );
-    mon_flag_MECH_RECON_VISION = mon_flag_id( "MECH_RECON_VISION" );
     mon_flag_MILKABLE = mon_flag_id( "MILKABLE" );
     mon_flag_NEMESIS = mon_flag_id( "NEMESIS" );
     mon_flag_NEVER_WANDER = mon_flag_id( "NEVER_WANDER" );
@@ -266,7 +261,6 @@ void set_mon_flag_ids()
     mon_flag_RANGED_ATTACKER = mon_flag_id( "RANGED_ATTACKER" );
     mon_flag_REVIVES = mon_flag_id( "REVIVES" );
     mon_flag_REVIVES_HEALTHY = mon_flag_id( "REVIVES_HEALTHY" );
-    mon_flag_RIDEABLE_MECH = mon_flag_id( "RIDEABLE_MECH" );
     mon_flag_SEES = mon_flag_id( "SEES" );
     mon_flag_SHORTACIDTRAIL = mon_flag_id( "SHORTACIDTRAIL" );
     mon_flag_SILENT_DISAPPEAR = mon_flag_id( "SILENT_DISAPPEAR" );

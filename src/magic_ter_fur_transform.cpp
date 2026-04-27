@@ -44,6 +44,11 @@ void ter_furn_transform::load_transform( const JsonObject &jo, const std::string
     ter_furn_transform_factory.load( jo, src );
 }
 
+void ter_furn_transform::finalize_all()
+{
+    ter_furn_transform_factory.finalize();
+}
+
 void ter_furn_transform::reset_all()
 {
     ter_furn_transform_factory.reset();
@@ -67,7 +72,7 @@ static void load_transform_results( const JsonObject &jsi, const std::string &js
         list.add( T( jsi.get_string( json_key ) ), 1 );
         return;
     }
-    load_weighted_list( jsi.get_member( json_key ), list, 1 );
+    list.deserialize( jsi.get_member( json_key ) );
 }
 
 void ter_furn_transform::reset()

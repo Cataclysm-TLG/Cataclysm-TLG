@@ -18,6 +18,7 @@
 #include "avatar.h"
 #include "bionics.h"
 #include "ballistics.h"
+#include "bodypart.h"
 #include "cached_options.h"
 #include "calendar.h"
 #include "cata_scope_helpers.h"
@@ -129,9 +130,11 @@ static const character_modifier_id character_modifier_thrown_dex_mod( "thrown_de
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_cut( "cut" );
 
+static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_hit_by_player( "hit_by_player" );
 static const efftype_id effect_on_roof( "on_roof" );
+static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_quadruped_full( "quadruped_full" );
 
 static const fault_id fault_gun_blackpowder( "fault_gun_blackpowder" );
@@ -739,7 +742,7 @@ bool Character::handle_gun_damage( item &it )
 
 
     // i am bad at math, so we will use vibes instead
-    double gun_jam_chance;
+    double gun_jam_chance = 0;
     int gun_damage = it.damage() / 1000.0;
     switch( gun_damage ) {
         case 0:
@@ -759,7 +762,7 @@ bool Character::handle_gun_damage( item &it )
             break;
     }
 
-    int mag_damage;
+    int mag_damage = 0;
     double mag_jam_chance = 0;
     if( it.magazine_current() ) {
         mag_damage = it.magazine_current()->damage() / 1000.0;
@@ -1033,11 +1036,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         debugmsg( "%s is empty and has no ammo for reloading.", gun.tname() );
         return 0;
     }
-    bool is_mech_weapon = false;
-    if( is_mounted() &&
-        mounted_creature->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        is_mech_weapon = true;
-    }
+
 
     // cap our maximum burst size by ammo and energy
     if( !gun.has_flag( flag_VEHICLE ) && !ammo ) {
@@ -1085,8 +1084,8 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         if( !!ammo && !gun.ammo_remaining( ) ) {
             Character &you = get_avatar();
             gun.reload( you, ammo, 1 );
-            you.burn_energy_arms( - gun.get_min_str() * static_cast<int>( 0.006f *
-                                  get_option<int>( "PLAYER_MAX_STAMINA_BASE" ) ) );
+            // FIXME: move the value of 3500 to a gamewide const (it's the player max stamina base)
+            you.burn_energy_arms( - gun.get_min_str() * static_cast<int>( 0.006f * 3500 ) );
         }
 
         if( !handle_gun_damage( gun ) ) {
@@ -1247,11 +1246,6 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
     } else {
         // apply delayed recoil, factor in recoil enchantments
         recoil += enchantment_cache->modify_value( enchant_vals::mod::RECOIL_MODIFIER, delay );
-        if( is_mech_weapon ) {
-            // mechs can handle recoil far better. they are built around their main gun.
-            // TODO: shouldn't this affect only recoil accumulated during this function?
-            recoil = recoil / 2;
-        }
         // Cap
         recoil = std::min( MAX_RECOIL, recoil );
     }
@@ -1418,19 +1412,6 @@ int Character::throwing_dispersion( const item &to_throw, Creature *critter,
     return std::max( 0, dispersion );
 }
 
-static std::optional<int> character_throw_assist( const Character &guy )
-{
-    std::optional<int> throw_assist = std::nullopt;
-    if( guy.is_mounted() ) {
-        auto *mons = guy.mounted_creature.get();
-        if( mons->mech_str_addition() != 0 ) {
-            throw_assist = mons->mech_str_addition();
-            mons->use_mech_power( 3_kJ );
-        }
-    }
-    return throw_assist;
-}
-
 static float throwing_skill_adjusted( const Character &guy )
 {
     float skill_level = std::min( static_cast<float>( MAX_SKILL ), guy.get_skill_level( skill_throw ) );
@@ -1443,16 +1424,13 @@ static float throwing_skill_adjusted( const Character &guy )
 
 int Character::thrown_item_adjusted_damage( const item &thrown ) const
 {
-    const std::optional<int> throw_assist = character_throw_assist( *this );
-    const bool do_railgun = has_active_bionic( bio_railgun ) && thrown.made_of_any( ferric ) &&
-                            !throw_assist;
+    const bool do_railgun = has_active_bionic( bio_railgun ) && thrown.made_of_any( ferric );
 
     // The damage dealt due to item's weight, player's strength, and skill level
     // Up to str/2 or weight/100g (lower), so 10 str is 5 damage before multipliers
     // Railgun doubles the effective strength
     ///\ARM_STR increases throwing damage
-    double stats_mod = do_railgun ? get_str() : ( get_arm_str() / 2.0 );
-    stats_mod = throw_assist ? *throw_assist / 2.0 : stats_mod;
+    double stats_mod = do_railgun ? get_arm_str() : ( get_arm_str() / 2.0 );
     // modify strength impact based on skill level, clamped to [0.15 - 1]
     // mod = mod * [ ( ( skill / max_skill ) * 0.85 ) + 0.15 ]
     stats_mod *= ( std::min( static_cast<float>( MAX_SKILL ),
@@ -1510,14 +1488,11 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     const int throwing_skill = round( get_skill_level( skill_throw ) );
     const units::volume volume = to_throw.volume();
     const units::mass weight = to_throw.weight();
-    const std::optional<int> throw_assist = character_throw_assist( *this );
 
     // Set activity level to 12 * str_ratio, with 12 being max (EXPLOSIVE_EXERCISE)
     // This ratio should never be below 0 and above 1
-    if( !throw_assist ) {
-        const int stamina_cost = get_standard_stamina_cost( &thrown );
-        mod_stamina( stamina_cost + throwing_skill );
-    }
+    const int stamina_cost = get_standard_stamina_cost( &thrown );
+    mod_stamina( stamina_cost + throwing_skill );
 
     const float skill_level = throwing_skill_adjusted( *this );
     add_msg_debug( debugmode::DF_RANGED, "Adjusted throw skill %g", skill_level );
@@ -1525,8 +1500,7 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     damage_instance &impact = proj.impact;
     std::set<ammo_effect_str_id> &proj_effects = proj.proj_effects;
 
-    const bool do_railgun = has_active_bionic( bio_railgun ) && thrown.made_of_any( ferric ) &&
-                            !throw_assist;
+    const bool do_railgun = has_active_bionic( bio_railgun ) && thrown.made_of_any( ferric );
 
     impact.add_damage( damage_bash, std::min( weight / 100.0_gram,
                        static_cast<double>( thrown_item_adjusted_damage( thrown ) ) ) );
@@ -1636,6 +1610,9 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
         if( hit_entry.second.first == 0 ) {
             continue;
         }
+        // Low-velocity projectiles are easy to source, unless the target is blind or senseless.
+        // TODO: Stealth projectiles?
+        hit_entry.first->react_to_ranged( *this );
         if( monster *const m = hit_entry.first->as_monster() ) {
             cata::event e = cata::event::make<event_type::character_ranged_attacks_monster>( getID(),
                             itype_id::NULL_ID(),
@@ -2000,7 +1977,7 @@ static void print_confidence_ratings( const catacurses::window &w,
 {
     for( const confidence_rating &cr : ratings ) {
         std::string label = pgettext( "aim_confidence", cr.label.c_str() );
-        std::string symbols = string_format( "<color_%s>%s</color> = %s", cr.color, cr.symbol, label );
+        std::string symbols = string_format( "<color_%s>%c</color> = %s", cr.color, cr.symbol, label );
         int line_len = utf8_width( label ) + 5; // 5 for '# = ' and whitespace at end
         if( ( width - column_number ) < line_len ) {
             column_number = 1;
@@ -2647,12 +2624,14 @@ dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
     // then beginners will rely heavily on high-precision weapons, while experts are not.
     // Obviously this is not true.
     // So use a constant instead.
+    // FIXME: Move divider to global constant gun_dispersion_divider (deprecated option)
+    double divider = 18;
     if( obj.gun_skill() == skill_archery ) {
         dispersion.add_range( dispersion_from_skill( avgSkill,
-                              450 / get_option< float >( "GUN_DISPERSION_DIVIDER" ) ) );
+                              450 / divider ) );
     } else {
         dispersion.add_range( dispersion_from_skill( avgSkill,
-                              300 / get_option< float >( "GUN_DISPERSION_DIVIDER" ) ) );
+                              300 / divider ) );
     }
 
     float disperation_mod = enchantment_cache->modify_value( enchant_vals::mod::WEAPON_DISPERSION,
@@ -3005,8 +2984,8 @@ target_handler::trajectory target_ui::run()
                 if( !relevant->ammo_remaining( ) && activity->reload_loc ) {
                     you->mod_moves( -RAS_time( *you, activity->reload_loc ) );
                     relevant->reload( get_avatar(), activity->reload_loc, 1 );
-                    you->burn_energy_arms( - relevant->get_min_str() * static_cast<int>( 0.006f *
-                                           get_option<int>( "PLAYER_MAX_STAMINA_BASE" ) ) );
+                    // FIXME: move the value of 3500 to a gamewide const (it's the player max stamina base)
+                    you->burn_energy_arms( - relevant->get_min_str() * static_cast<int>( 0.006f * 3500 ) );
                     activity->reload_loc = item_location();
                 }
             }
@@ -3117,7 +3096,9 @@ void target_ui::init_window_and_input()
     ctxt.register_action( "NEXT_TARGET" );
     ctxt.register_action( "PREV_TARGET" );
     ctxt.register_action( "CENTER" );
-    ctxt.register_action( "TOGGLE_UNLOAD_RAS_WEAPON" );
+    if( mode == TargetMode::Fire && relevant->has_flag( flag_RELOAD_AND_SHOOT ) ) {
+        ctxt.register_action( "TOGGLE_UNLOAD_RAS_WEAPON" );
+    }
     ctxt.register_action( "TOGGLE_SNAP_TO_TARGET" );
     ctxt.register_action( "HELP_KEYBINDINGS" );
     ctxt.register_action( "QUIT" );
@@ -3427,8 +3408,17 @@ void target_ui::update_target_list()
             targets.push_back( target->pos_bub( here ) );
         }
     }
+    // Sort hostile creatures first, then by distance within each group.
+    creature_tracker &creatures = get_creature_tracker();
     std::sort( targets.begin(), targets.end(), [&]( const tripoint_bub_ms lhs,
     const tripoint_bub_ms rhs ) {
+        const Creature *cl = creatures.creature_at( lhs, true );
+        const Creature *cr = creatures.creature_at( rhs, true );
+        const bool lhs_hostile = cl && cl->attitude_to( *you ) == Creature::Attitude::HOSTILE;
+        const bool rhs_hostile = cr && cr->attitude_to( *you ) == Creature::Attitude::HOSTILE;
+        if( lhs_hostile != rhs_hostile ) {
+            return lhs_hostile;
+        }
         return trig_dist( lhs,
                           you->pos_bub( here ) ) < trig_dist( rhs,
                                   you->pos_bub( here ) );
@@ -4244,12 +4234,12 @@ void target_ui::draw_controls_list( int text_y )
                              } );
         } else {
             if( !unload_RAS_weapon ) {
-                std::string unload = string_format( _( "[%s] Unload the %s after quitting." ),
+                std::string unload = string_format( _( "[%s] to unload the %s after quitting." ),
                                                     bound_key( "TOGGLE_UNLOAD_RAS_WEAPON" ).short_description(),
                                                     relevant->tname() );
-                lines.push_back( {3, colored( col_disabled, unload )} );
+                lines.push_back( {3, colored( col_enabled, unload )} );
             } else {
-                std::string unload = string_format( _( "[%s] Keep the %s loaded after quitting." ),
+                std::string unload = string_format( _( "[%s] to keep the %s loaded after quitting." ),
                                                     bound_key( "TOGGLE_UNLOAD_RAS_WEAPON" ).short_description(),
                                                     relevant->tname() );
                 lines.push_back( {3, colored( col_enabled, unload )} );
@@ -4557,20 +4547,10 @@ bool gunmode_checks_weapon( avatar &you, const map &m, std::vector<std::string> 
 
     if( gmode->get_gun_energy_drain() > 0_kJ ) {
         const units::energy energy_drain = gmode->get_gun_energy_drain();
-        bool is_mech_weapon = false;
-        if( you.is_mounted() ) {
-            monster *mons = get_player_character().mounted_creature.get();
-            if( !mons->type->mech_weapon.is_empty() ) {
-                is_mech_weapon = true;
-            }
-        }
 
         if( gmode->energy_remaining( &you ) < energy_drain ) {
             result = false;
-            if( is_mech_weapon ) {
-                messages.push_back( string_format( _( "Your mech has an empty battery, its %s will not fire." ),
-                                                   gmode->tname() ) );
-            } else if( gmode->has_flag( flag_USES_BIONIC_POWER ) ) {
+            if( gmode->has_flag( flag_USES_BIONIC_POWER ) ) {
                 messages.push_back( string_format(
                                         _( "You need at least %2$d kJ of bionic power to fire the %1$s!" ),
                                         gmode->tname(), units::to_kilojoule( energy_drain ) ) );
@@ -4596,6 +4576,26 @@ bool gunmode_checks_weapon( avatar &you, const map &m, std::vector<std::string> 
             result = false;
         }
     }
+    if( gmode->gun_awkwardness( you ) >= 75 && !gmode->has_flag( flag_MOUNTED_GUN ) ) {
+        bool bipod = false;
+        if( gmode->has_flag( flag_BIPOD ) ) {
+            map &here = get_map();
+            bipod = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, you.pos_bub( here ) ) ||
+                    you.is_prone();
+            if( !bipod ) {
+                if( const optional_vpart_position vp = here.veh_at( you.pos_abs( ) ) ) {
+                    bipod = vp->vehicle().has_part( you.pos_abs( ), "MOUNTABLE" );
+                }
+            }
+        }
+        if( !bipod ) {
+            messages.push_back( string_format(
+                                    _( "You are too small to use the %s." ),
+                                    gmode->tname() ) );
+            return false;
+        }
+    }
+
 
     return result;
 }

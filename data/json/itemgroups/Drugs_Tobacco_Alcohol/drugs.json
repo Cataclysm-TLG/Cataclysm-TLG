@@ -185,8 +185,9 @@
       { "group": "naproxen_ad_group", "prob": 50 },
       { "group": "codeine_ad_group", "prob": 60 },
       { "group": "tramadol_ad_group", "prob": 60 },
-      { "item": "morphine", "count": [ 1, 12 ], "container-item": "null", "prob": 10 },
-      { "group": "oxycodone_ad_group", "prob": 200 }
+      { "group": "morphine_vial_glass_4", "prob": 10, "count": [ 1, 2 ] },
+      { "group": "oxycodone_ad_group", "prob": 200 },
+      { "item": "naloxone", "prob": 60, "count": [ 1, 4 ] }
     ]
   },
   {
@@ -226,7 +227,7 @@
       [ "blood", 300 ],
       [ "vacutainer", 100 ],
       [ "jar_glass_sealed", 30 ],
-      [ "jar_3l_glass_sealed", 15 ],
+      [ "jar_3l_glass_sealed", 5 ],
       [ "hygrometer", 3 ],
       [ "chem_nitric_acid", 15 ],
       [ "denat_alcohol", 100 ],
@@ -244,7 +245,8 @@
       { "item": "inhaler", "prob": 70, "charges": [ 10, 100 ] },
       { "prob": 50, "group": "quikclot_bag_plastic_1_6" },
       { "item": "smoxygen_tank", "prob": 70, "charges": [ 0, 12 ] },
-      { "distribution": [ { "group": "full_ifak" }, { "group": "used_ifak" } ], "prob": 40 }
+      { "distribution": [ { "group": "full_ifak" }, { "group": "used_ifak" } ], "prob": 40 },
+      { "item": "naloxone", "prob": 60, "count": [ 1, 2 ] }
     ]
   },
   {
@@ -265,8 +267,18 @@
     "items": [
       { "group": "drugs_analgesic", "prob": 100 },
       { "group": "drugs_heal_simple", "prob": 100 },
-      { "group": "drugs_misc", "prob": 100 },
+      { "group": "drugs_misc", "prob": 30 },
       { "group": "drugs_rare", "prob": 100 }
+    ]
+  },
+  {
+    "id": "drugs_otc",
+    "type": "item_group",
+    "//": "Drugs stocked by a pharmacy, not including prescription medications",
+    "items": [
+      { "group": "drugs_analgesic", "prob": 100 },
+      { "group": "drugs_heal_simple", "prob": 100 },
+      { "group": "drugs_misc", "prob": 30 }
     ]
   },
   {
@@ -299,7 +311,8 @@
       { "item": "morphine", "prob": 20, "count": [ 1, 4 ] },
       { "prob": 20, "group": "quikclot_bag_plastic_1_6" },
       { "item": "smoxygen_tank", "prob": 20, "charges": [ 0, 12 ] },
-      { "prob": 20, "group": "tramadol_bottle_plastic_pill_prescription_1_10" }
+      { "prob": 20, "group": "tramadol_bottle_plastic_pill_prescription_1_10" },
+      { "item": "naloxone", "prob": 20, "count": [ 1, 4 ] }
     ]
   },
   {
@@ -680,9 +693,9 @@
   },
   {
     "type": "item_group",
-    "id": "morphine_bottle_plastic_pill_prescription_4",
+    "id": "morphine_vial_glass_4",
     "subtype": "collection",
-    "container-item": "bottle_plastic_pill_prescription",
+    "container-item": "vial_glass",
     "entries": [ { "item": "morphine", "container-item": "null", "count": 4 } ]
   },
   {

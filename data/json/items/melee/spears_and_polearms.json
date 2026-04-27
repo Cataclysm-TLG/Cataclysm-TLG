@@ -9,7 +9,7 @@
     "longest_side": "150 cm",
     "price": "55 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ { "type": "wood", "portion": 8 }, { "type": "steel", "portion": 2 } ],
+    "material": [ { "type": "steel", "portion": 2 }, { "type": "wood", "portion": 8 } ],
     "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "uneven" },
     "symbol": "/",
     "color": "brown",
@@ -50,7 +50,7 @@
     "weight": "1000 g",
     "color": "brown",
     "symbol": "/",
-    "material": [ { "type": "steel", "portion": 2 }, { "type": "steel", "portion": 8 } ],
+    "material": [ { "type": "steel", "portion": 2 }, { "type": "wood", "portion": 8 } ],
     "techniques": [ "WBLOCK_1", "DEF_DISARM" ],
     "volume": "1750 ml",
     "longest_side": "140 cm",
@@ -653,7 +653,7 @@
     "symbol": "/",
     "color": "yellow",
     "techniques": [ "WBLOCK_1", "DEF_DISARM" ],
-    "flags": [ "POLEARM", "REACH_ATTACK", "ALWAYS_TWOHAND", "NONCONDUCTIVE", "SHEATH_SPEAR", "SPEAR", "WALKING_AID" ],
+    "flags": [ "POLEARM", "REACH_ATTACK", "ALWAYS_TWOHAND", "NONCONDUCTIVE", "SPEAR", "WALKING_AID" ],
     "weapon_category": [ "HOOKING_WEAPONRY", "POLEARMS", "SPEARS" ],
     "melee_damage": { "bash": 9, "cut": 43 }
   }

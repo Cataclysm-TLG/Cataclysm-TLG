@@ -269,7 +269,7 @@
       ],
       "palettes": [ "standard_domestic_palette", "prefab_home" ],
       "terrain": { "$": "t_fence_wire", "!": "t_dirtmound" },
-      "sealed_item": { "!": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 80 } },
+      "sealed_item": { "!": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 10 } },
       "place_vehicles": [ { "vehicle": "parking_garage", "x": 6, "y": [ 5, 9 ], "chance": 20, "rotation": 90 } ],
       "place_nested": [
         { "chunks": [ [ "1x1_clothesdryer", 3 ], [ "null", 5 ] ], "x": [ 9, 11 ], "y": [ 2, 5 ] },

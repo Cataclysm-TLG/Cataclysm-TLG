@@ -181,7 +181,8 @@ const std::map<float, std::string> activity_levels_str_map = {
 namespace character_weight_category
 {
 constexpr float emaciated = 1.0f;
-constexpr float underweight = 2.0f;
+constexpr float skinny = 2.0f;
+constexpr float underweight = 2.5f;
 constexpr float normal = 3.0f;
 constexpr float overweight = 5.0f;
 constexpr float obese = 10.0f;

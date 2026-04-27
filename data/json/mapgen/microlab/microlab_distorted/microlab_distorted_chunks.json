@@ -24,7 +24,7 @@
       "2": "t_door_glass_frosted_lab_c",
       ":": "t_door_glass_c",
       "=": "t_wall_glass",
-      "(": "t_reinforced_glass",
+      "(": "t_laminated_glass",
       "X": "t_door_metal_locked",
       "3": "t_door_metal_c",
       "4": "t_door_metal_pickable",

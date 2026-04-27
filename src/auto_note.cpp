@@ -348,9 +348,6 @@ void auto_note_manager_gui::show()
         ctxt.register_navigate_ui_list();
         ctxt.register_action( "CONFIRM" );
         ctxt.register_action( "QUIT" );
-        ctxt.register_action( "ENABLE_MAPEXTRA_NOTE" );
-        ctxt.register_action( "DISABLE_MAPEXTRA_NOTE" );
-        ctxt.register_action( "CHANGE_MAPEXTRA_CHARACTER" );
     }
 
     ui.on_redraw( [&]( const ui_adaptor & ) {
@@ -562,7 +559,6 @@ void auto_note_manager_gui::show()
     }
 
     if( !get_option<bool>( "AUTO_NOTES" ) &&
-        get_option<bool>( "AUTO_NOTES_MAP_EXTRAS" ) &&
         query_yn( _( "Auto notes are disabled globally.\nDo you want to enable?" ) ) ) {
         get_options().get_option( "AUTO_NOTES" ).setNext();
         get_options().save();

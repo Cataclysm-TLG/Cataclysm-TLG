@@ -97,7 +97,7 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
                        drop_item.tname(), nb_of_dropped_shard, max_nb_of_shards - 1, to_gram( drop_item.type->weight ) );*/
 
         for( int i = 0; i < nb_of_dropped_shard; ++i ) {
-            item shard( "glass_shard" );
+            item shard( itype_glass_shard );
             //actual dropping of shards
             here->add_item_or_charges( pt, shard );
         }
@@ -520,6 +520,16 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             }
 
             if( !skip_hit && critter != nullptr && cur_missed_by < 1.0 ) {
+                // Prevent shots from hitting underwater creatures that are beneath surface (except thin ice);
+                // treat the shot as hitting the terrain instead.
+                if( critter->is_underwater() &&
+                    here->has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, critter->pos_bub() ) &&
+                    !here->has_flag( ter_furn_flag::TFLAG_THIN_ICE, critter->pos_bub() ) ) {
+                    if( origin != nullptr && origin->is_avatar() ) {
+                        add_msg( m_info, _( "Your shot is blocked by the surface." ) );
+                    }
+                    continue;
+                }
                 if( in_veh != nullptr && veh_pointer_or_null( here->veh_at( tp ) ) == in_veh &&
                     critter->is_avatar() ) {
                     // Turret either was aimed by the player (who is now ducking) and shoots from above

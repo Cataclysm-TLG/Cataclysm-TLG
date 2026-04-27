@@ -647,21 +647,6 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "bullwhip",
-    "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_RANGED",
-    "skill_used": "fabrication",
-    "difficulty": 6,
-    "time": "3 h",
-    "reversible": true,
-    "autolearn": true,
-    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather_patch", 20 ] ], [ [ "rope_superior_short", 2, "LIST" ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "longbow",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
@@ -1362,21 +1347,6 @@
     "book_learn": [ [ "textbook_armschina", 4 ] ],
     "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
     "components": [ [ [ "2x4", 2 ] ], [ [ "2x4", 2 ], [ "stick", 2 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
-    "result": "bullwhip_razor",
-    "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_RANGED",
-    "skill_used": "fabrication",
-    "difficulty": 6,
-    "time": "4 h",
-    "reversible": true,
-    "autolearn": true,
-    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
-    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "leather_patch", 30 ], [ "rope_superior_short", 2, "LIST" ] ], [ [ "scrap", 9 ], [ "razor_blade", 9 ] ] ]
   },
   {
     "type": "recipe",

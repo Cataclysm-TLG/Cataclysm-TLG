@@ -1527,7 +1527,7 @@ void Character::disp_info( bool customize_character )
 
     const float bmi = get_bmi_fat();
 
-    if( bmi < character_weight_category::underweight ) {
+    if( bmi < character_weight_category::skinny ) {
         std::string starvation_name;
         std::string starvation_text;
 

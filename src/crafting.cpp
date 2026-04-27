@@ -97,7 +97,9 @@ static const furn_str_id furn_f_fake_bench_hands( "f_fake_bench_hands" );
 static const furn_str_id furn_f_ground_crafting_spot( "f_ground_crafting_spot" );
 
 static const itype_id itype_disassembly( "disassembly" );
+static const itype_id itype_pickaxe( "pickaxe" );
 static const itype_id itype_plut_cell( "plut_cell" );
+static const itype_id itype_shovel( "shovel" );
 
 static const json_character_flag json_flag_BLIND_CRAFT( "BLIND_CRAFT" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
@@ -315,12 +317,16 @@ float Character::crafting_speed_multiplier( const recipe &rec ) const
     float crafting_speed = morale_crafting_speed_multiplier( rec ) *
                            lighting_craft_speed_multiplier( rec ) *
                            limb_score * pain_multi;
-
+    float int_adjustment = get_int() / 100.f;
+    // Int makes up for speed penalties, but doesn't add speed on its own.
+    if( crafting_speed < 1.0f ) {
+        crafting_speed = std::min( 1.f, crafting_speed + int_adjustment );
+    }
     const float result = enchantment_cache->modify_value( enchant_vals::mod::CRAFTING_SPEED_MULTIPLIER,
                          crafting_speed );
-
-    add_msg_debug( debugmode::DF_CHARACTER, "Limb score multiplier %.1f, crafting speed multiplier %1f",
-                   get_limb_score( limb_score_manip ), result );
+    add_msg_debug( debugmode::DF_CHARACTER,
+                   "Limb score multiplier %1f, int adjustment %2f, crafting speed multiplier %3f",
+                   get_limb_score( limb_score_manip ), int_adjustment, result );
 
     return std::max( result, 0.0f );
 }
@@ -480,7 +486,9 @@ int64_t Character::expected_time_to_craft( const recipe &rec, int batch_size ) c
 {
     const size_t assistants = available_assistant_count( rec );
     float modifier = crafting_speed_multiplier( rec );
-    return rec.batch_time( *this, batch_size, modifier, assistants );
+    std::vector<float> tool_speeds = compute_tool_speeds( rec, *this );
+    const std::vector<float> *ts = tool_speeds.empty() ? nullptr : &tool_speeds;
+    return rec.batch_time( *this, batch_size, modifier, assistants, ts );
 }
 
 bool Character::check_eligible_containers_for_crafting( const recipe &rec, int batch_size ) const
@@ -695,8 +703,8 @@ const inventory &Character::crafting_inventory( map *here, const tripoint_bub_ms
     }
 
     if( has_trait( trait_BURROW ) || has_trait( trait_BURROWLARGE ) ) {
-        *crafting_cache.crafting_inventory += item( "pickaxe", calendar::turn );
-        *crafting_cache.crafting_inventory += item( "shovel", calendar::turn );
+        *crafting_cache.crafting_inventory += item( itype_pickaxe, calendar::turn );
+        *crafting_cache.crafting_inventory += item( itype_shovel, calendar::turn );
     }
 
     crafting_cache.valid = true;
@@ -1066,9 +1074,21 @@ bool Character::craft_proficiency_gain( const item &craft, const time_duration &
 
     bool this_character_gained = false;
 
+    // For step recipes, use the current step's proficiency list so learning
+    // is targeted to the step being worked on. For stepless recipes, use the
+    // recipe-wide aggregate.
+    const std::vector<recipe_proficiency> &active_profs =
+        making.has_steps()
+        ? making.steps()[craft.get_current_step()].proficiencies
+        : making.get_proficiencies();
+
     for( Character *p : all_crafters ) {
         std::vector<learn_subject> subjects;
-        for( const recipe_proficiency &prof : making.proficiencies ) {
+        for( const recipe_proficiency &prof : active_profs ) {
+            // Required profs (time_multiplier == 0) gate access, not learning
+            if( prof.time_multiplier == 0.0f ) {
+                continue;
+            }
             if( !p->_proficiencies->has_learned( prof.id ) &&
                 prof.id->can_learn() &&
                 p->_proficiencies->has_prereqs( prof.id ) ) {
@@ -1171,7 +1191,7 @@ float Character::get_recipe_weighted_skill_average( const recipe &making ) const
                    total_skill_modifiers, int_cur / 4.f );
 
     // Missing proficiencies penalize skill level
-    for( const recipe_proficiency &recip : making.proficiencies ) {
+    for( const recipe_proficiency &recip : making.get_proficiencies() ) {
         if( !recip.required && !has_proficiency( recip.id ) ) {
             total_skill_modifiers -= recip.skill_penalty;
         }
@@ -2098,7 +2118,7 @@ static void empty_buckets( Character &p )
 }
 
 std::list<item> Character::consume_items( const comp_selection<item_comp> &is, int batch,
-        const std::function<bool( const item & )> &filter, bool select_ind )
+        const std::function<bool( const item & )> &filter, bool select_ind, bool disable_preference )
 {
     map &m = get_map();
     std::list<item> ret;
@@ -2109,17 +2129,19 @@ std::list<item> Character::consume_items( const comp_selection<item_comp> &is, i
     // populate a grid of spots that can be reached
     const std::vector<tripoint_bub_ms> &reachable_pts = m.reachable_flood_steps( pos_bub(),
             PICKUP_RANGE, 1, 100 );
-    return consume_items( m, is, batch, filter, reachable_pts, select_ind );
+    return consume_items( m, is, batch, filter, reachable_pts, select_ind, disable_preference );
 }
 
 std::list<item> Character::consume_items( map &m, const comp_selection<item_comp> &is, int batch,
         const std::function<bool( const item & )> &filter,
         const std::vector<tripoint_bub_ms> &reachable_pts,
-        bool select_ind )
+        bool select_ind, bool disable_preference )
 {
-    auto preferred_filter = [&filter]( const item & it ) {
+    std::function<bool( const item & )> active_preferred_filter = [&filter]( const item & it ) {
         return filter( it ) && is_preferred_component( it );
     };
+    std::function<bool( const item & )> preferred_filter = disable_preference ? filter :
+            active_preferred_filter;
 
     std::list<item> ret;
 
@@ -2219,13 +2241,13 @@ to consume_items */
 std::list<item> Character::consume_items( const std::vector<item_comp> &components, int batch,
         const std::function<bool( const item & )> &filter,
         const std::function<bool( const itype_id & )> &select_ind,
-        const bool can_cancel )
+        const bool can_cancel, const bool disable_preference )
 {
     inventory map_inv;
     map_inv.form_from_map( pos_bub(), PICKUP_RANGE, this );
     comp_selection<item_comp> sel = select_item_component( components, batch, map_inv, can_cancel,
                                     filter );
-    return consume_items( sel, batch, filter, select_ind( sel.comp.type ) );
+    return consume_items( sel, batch, filter, select_ind( sel.comp.type ), disable_preference );
 }
 
 bool Character::consume_software_container( const itype_id &software_id )
@@ -2660,7 +2682,7 @@ bool Character::disassemble()
 bool Character::disassemble( item_location target, bool interactive, bool disassemble_all )
 {
     if( !target ) {
-        add_msg( _( "Never mind." ) );
+        add_msg( _( "Nevermind." ) );
         return false;
     }
 
@@ -2673,12 +2695,12 @@ bool Character::disassemble( item_location target, bool interactive, bool disass
     }
 
     if( obj.is_favorite &&
-        !query_yn( _( "You're going to disassemble favorited item.\nAre you sure?" ) ) ) {
+        !query_yn( _( "This item is marked as a favorite.\nAre you sure?" ) ) ) {
         return false;
     }
 
-    if( obj.is_worn_by_player() &&
-        !query_yn( _( "You're going to disassemble worn item.\nAre you sure?" ) ) ) {
+    if( obj.is_worn_by_player() ) {
+        add_msg_if_player( _( "You must remove that before disassembling it." ) );
         return false;
     }
 
@@ -2726,7 +2748,7 @@ bool Character::disassemble( item_location target, bool interactive, bool disass
                                           obj.type_name( 1 ), obj.charges );
                 popup_input.title( title ).edit( num_dis );
                 if( popup_input.canceled() || num_dis <= 0 ) {
-                    add_msg( _( "Never mind." ) );
+                    add_msg( _( "Nevermind." ) );
                     return false;
                 }
                 num_dis = std::min( num_dis, obj.charges );
@@ -2838,7 +2860,7 @@ void Character::complete_disassemble( item_location target )
                                       obj.type_name( 1 ), obj.charges );
             popup_input.title( title ).edit( num_dis );
             if( popup_input.canceled() || num_dis <= 0 ) {
-                add_msg( _( "Never mind." ) );
+                add_msg( _( "Nevermind." ) );
                 activity.set_to_null();
                 return;
             }

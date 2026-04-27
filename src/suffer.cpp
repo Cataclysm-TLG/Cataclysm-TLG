@@ -267,7 +267,7 @@ void suffer::mutation_power( Character &you, const trait_id &mut_id )
             you.set_cost_timer( mut_id, mut_id->cooldown - 1_turns );
         }
         if( mut_id->hunger ) {
-            if( you.get_bmi_fat() < character_weight_category::underweight ) {
+            if( you.get_bmi_fat() < character_weight_category::skinny ) {
                 you.add_msg_if_player( m_warning,
                                        _( "You're too malnourished to keep your %s going." ),
                                        you.mutation_name( mut_id ) );
@@ -439,23 +439,22 @@ void suffer::while_grabbed( Character &you )
 
 void suffer::from_addictions( Character &you )
 {
-    time_duration timer = -6_hours;
+    time_duration timer = -50_hours;
     if( you.has_trait( trait_ADDICTIVE ) ) {
-        timer = -10_hours;
+        timer = -60_hours;
     } else if( you.has_trait( trait_NONADDICTIVE ) ) {
-        timer = -3_hours;
+        timer = -40_hours;
     }
     for( addiction &cur_addiction : you.addictions ) {
-        if( cur_addiction.sated <= 0_turns &&
-            cur_addiction.intensity >= MIN_ADDICTION_LEVEL ) {
-            if( uistate.distraction_withdrawal && !you.is_npc() ) {
-                g->cancel_activity_or_ignore_query( distraction_type::withdrawal,
-                                                    _( "You start having withdrawals!" ) );
-            }
+        if( cur_addiction.sated <= 0_turns && cur_addiction.intensity >= MIN_ADDICTION_LEVEL ) {
             cur_addiction.run_effect( you );
         }
-        cur_addiction.sated -= 1_turns;
-        // Higher intensity addictions heal faster
+        // TODO: Hook lightweight/metabolism in both here and to effect/vitamin decay.
+        cur_addiction.sated -= 5_minutes;
+        if( rng( 1, 60 ) < cur_addiction.intensity ) {
+            cur_addiction.sated -= 4_minutes;
+        }
+        // Higher intensity addictions heal faster.
         if( cur_addiction.sated - 10_minutes * cur_addiction.intensity < timer ) {
             if( cur_addiction.intensity <= 2 ) {
                 you.rem_addiction( cur_addiction.type );
@@ -1877,7 +1876,9 @@ void Character::suffer()
         suffer::while_underwater( *this );
     }
 
-    suffer::from_addictions( *this );
+    if( calendar::once_every( 5_minutes ) ) {
+        suffer::from_addictions( *this );
+    }
 
     if( !in_sleep_state() ) {
         suffer::while_awake( *this, current_stim );
@@ -2254,7 +2255,6 @@ void Character::add_addiction( const addiction_id &type, int strength )
         if( i.sated < 0_turns ) {
             i.sated = timer;
         } else if( i.sated < 10_minutes ) {
-            // TODO: Make this variable?
             i.sated += timer;
         } else {
             i.sated += timer / 2;

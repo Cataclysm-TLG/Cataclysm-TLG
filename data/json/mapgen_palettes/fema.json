@@ -16,7 +16,7 @@
       "~": "t_floor",
       "&": "t_floor",
       "%": "t_fence_barbed",
-      "@": "t_reinforced_glass",
+      "@": "t_laminated_glass",
       ")": "t_wall_wood",
       "0": "t_floor",
       "b": "t_floor",

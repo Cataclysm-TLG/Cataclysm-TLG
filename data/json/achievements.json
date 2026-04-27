@@ -1982,20 +1982,6 @@
     ]
   },
   {
-    "id": "achievement_reach_isherwood_farms",
-    "type": "achievement",
-    "name": "Open Fields",
-    "requirements": [
-      {
-        "event_statistic": "last_overmap_special_avatar_entered",
-        "is": "==",
-        "target": [ "overmap_special_id", "Isherwood Farm Mutable" ],
-        "visible": "when_achievement_completed",
-        "description": "Reach Isherwood Farms"
-      }
-    ]
-  },
-  {
     "id": "achievement_reach_aircraft_carrier",
     "type": "achievement",
     "name": "Top Gun",

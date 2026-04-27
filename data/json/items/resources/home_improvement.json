@@ -216,5 +216,22 @@
     "weight": "25 g",
     "volume": "1000 ml",
     "to_hit": -3
+  },
+  {
+    "type": "ITEM",
+    "id": "pipe_cpvc",
+    "symbol": "#",
+    "color": "white",
+    "looks_like": "pipe",
+    "name": { "str": "PVC pipe" },
+    "description": "White polyvinyl chloride pipe, commonly used for household plumbing, but also in many another applications.",
+    "//": "1 inch schedule 80 CPVC, 0.44 lbs/ft., thickness 0.179 in., inner diameter 0.957 in., outer 1.315 in.",
+    "category": "spare_parts",
+    "price": "315 cent",
+    "price_postapoc": "1 cent",
+    "material": [ "vinyl" ],
+    "melee_damage": { "bash": 4 },
+    "weight": "327 g",
+    "volume": "1750 ml"
   }
 ]

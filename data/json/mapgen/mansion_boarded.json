@@ -113,7 +113,7 @@
         "   #....#......#...q#   ",
         "   #...............q#   ",
         "   #]]]....}........#   ",
-        "   #..].........=.=.#   ",
+        "   #..].....Ł...=.=.#   ",
         "   #..)]]...........#   ",
         "   #....]........ggg#   ",
         "   ##################   ",
@@ -148,7 +148,8 @@
         "x": { "item": "a_television", "chance": 100 },
         "c": { "item": "suit_of_armor", "chance": 80 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ],
+      "vehicles": { "Ł": { "vehicle": "hand_truck", "chance": 10 } }
     }
   },
   {

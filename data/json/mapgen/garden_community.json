@@ -77,7 +77,7 @@
       },
       "furniture": { "O": "f_standing_tank", "H": "f_standing_tank", "t": "f_table" },
       "liquids": { "O": { "liquid": "water", "amount": [ 0, 100 ] }, "H": { "liquid": "fertilizer_liquid", "amount": [ 0, 100 ] } },
-      "sealed_item": { "D": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_planter_seedling", "chance": 20 } },
+      "sealed_item": { "D": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_planter_seedling", "chance": 6 } },
       "place_items": [
         { "chance": 35, "repeat": 2, "item": "supplies_farming", "x": 6, "y": 4 },
         { "chance": 35, "repeat": 2, "item": "garden_shed", "x": 7, "y": 4 },
@@ -127,7 +127,7 @@
       "terrain": { ".": "t_region_soil", " ": "t_region_groundcover_urban" },
       "furniture": { "O": "f_standing_tank", "H": "f_standing_tank", "#": "f_planter" },
       "place_item": [ { "item": "hose", "x": 11, "y": 13 } ],
-      "sealed_item": { "#": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_planter_seedling", "chance": 30 } },
+      "sealed_item": { "#": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_planter_seedling", "chance": 6 } },
       "liquids": { "O": { "liquid": "water", "amount": [ 0, 100 ] }, "H": { "liquid": "fertilizer_liquid", "amount": [ 0, 100 ] } },
       "place_signs": [
         { "signage": "<city> Community Garden.  Open dawn to dusk.", "x": 2, "y": 2 },
@@ -222,8 +222,8 @@
       "furniture": { "O": "f_standing_tank", "H": "f_standing_tank", "t": "f_table" },
       "liquids": { "O": { "liquid": "water", "amount": [ 0, 100 ] }, "H": { "liquid": "fertilizer_liquid", "amount": [ 0, 100 ] } },
       "sealed_item": {
-        "D": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_planter_seedling", "chance": 20 },
-        "#": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_planter_seedling", "chance": 20 }
+        "D": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_planter_seedling", "chance": 4 },
+        "#": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_planter_seedling", "chance": 4 }
       },
       "place_items": [
         { "chance": 20, "item": "tools_earthworking", "x": 7, "y": 16 },

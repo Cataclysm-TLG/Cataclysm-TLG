@@ -1,35 +1,53 @@
 #include "mapdata.h"
 
 #include <algorithm>
-#include <cstdlib>
+#include <exception>
 #include <iterator>
 #include <map>
 #include <memory>
 #include <unordered_map>
 #include <utility>
 
-#include "assign.h"
+#include "avatar.h"
 #include "calendar.h"
+#include "character.h"
 #include "color.h"
 #include "debug.h"
 #include "enum_conversions.h"
+#include "flexbuffer_json.h"
+#include "flag.h"
 #include "generic_factory.h"
 #include "harvest.h"
 #include "iexamine.h"
 #include "iexamine_actors.h"
+#include "item.h"
 #include "item_group.h"
-#include "json.h"
+#include "iteminfo_query.h"
+#include "mapdata.h"
+#include "mod_manager.h"
 #include "output.h"
 #include "rng.h"
+#include "skill.h"
 #include "string_formatter.h"
 #include "translations.h"
 #include "trap.h"
 #include "type_id.h"
 
+
 static furn_id f_null;
+
+static const flag_id json_flag_DIGGABLE( "DIGGABLE" );
+static const flag_id json_flag_EASY_DECONSTRUCT( "EASY_DECONSTRUCT" );
+static const flag_id json_flag_FLAT( "FLAT" );
+static const flag_id json_flag_PHASE_BACK( "PHASE_BACK" );
+static const flag_id json_flag_PLOWABLE( "PLOWABLE" );
+
 static const furn_str_id furn_f_null( "f_null" );
 
+
 static const item_group_id Item_spawn_data_EMPTY_GROUP( "EMPTY_GROUP" );
+
+static const skill_id skill_survival( "survival" );
 
 namespace
 {
@@ -135,6 +153,37 @@ int_id<furn_t>::int_id( const string_id<furn_t> &id ) : _id( id.id() )
 {
 }
 
+ter_furn_id::ter_furn_id()
+{
+    ter_furn = ter_str_id::NULL_ID().id();
+}
+
+ter_furn_id::ter_furn_id( const std::string &name )
+{
+    resolve( name );
+}
+
+bool ter_furn_id::resolve( const std::string &name )
+{
+    ter_str_id temp_ter( name );
+    furn_str_id temp_furn( name );
+    bool resolved = false;
+    if( temp_ter.is_valid() && !temp_ter.is_null() ) {
+        ter_furn = ter_id( name );
+        resolved = true;
+    } else if( temp_furn.is_valid() && !temp_furn.is_null() ) {
+        ter_furn = furn_id( name );
+        resolved = true;
+    }
+    return resolved;
+}
+
+void ter_furn_id::deserialize( const JsonValue &jo )
+{
+    std::string name = jo.get_string();
+    resolve( name );
+}
+
 namespace io
 {
 
@@ -175,6 +224,9 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_CURRENT: return "CURRENT";
         case ter_furn_flag::TFLAG_HARVESTED: return "HARVESTED";
         case ter_furn_flag::TFLAG_PERMEABLE: return "PERMEABLE";
+        case ter_furn_flag::TFLAG_THIN_ICE: return "THIN_ICE";
+        case ter_furn_flag::TFLAG_THICK_ICE: return "THICK_ICE";
+        case ter_furn_flag::TFLAG_SWIM_UNDER: return "SWIM_UNDER";
         case ter_furn_flag::TFLAG_AUTO_WALL_SYMBOL: return "AUTO_WALL_SYMBOL";
         case ter_furn_flag::TFLAG_CONNECT_WITH_WALL: return "CONNECT_WITH_WALL";
         case ter_furn_flag::TFLAG_CLIMBABLE: return "CLIMBABLE";
@@ -217,6 +269,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_CAN_SIT: return "CAN_SIT";
         case ter_furn_flag::TFLAG_FLAT_SURF: return "FLAT_SURF";
         case ter_furn_flag::TFLAG_BUTCHER_EQ: return "BUTCHER_EQ";
+        case ter_furn_flag::TFLAG_GROWTH_SEED: return "GROWTH_SEED";
         case ter_furn_flag::TFLAG_GROWTH_SEEDLING: return "GROWTH_SEEDLING";
         case ter_furn_flag::TFLAG_GROWTH_MATURE: return "GROWTH_MATURE";
         case ter_furn_flag::TFLAG_WORKOUT_ARMS: return "WORKOUT_ARMS";
@@ -231,6 +284,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_CLIMB_SIMPLE: return "CLIMB_SIMPLE";
         case ter_furn_flag::TFLAG_NANOFAB_TABLE: return "NANOFAB_TABLE";
         case ter_furn_flag::TFLAG_ROAD: return "ROAD";
+        case ter_furn_flag::TFLAG_RUG: return "RUG";
         case ter_furn_flag::TFLAG_TINY: return "TINY";
         case ter_furn_flag::TFLAG_SHORT: return "SHORT";
         case ter_furn_flag::TFLAG_NOCOLLIDE: return "NOCOLLIDE";
@@ -281,6 +335,8 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_WIRED_WALL: return "WIRED_WALL";
         case ter_furn_flag::TFLAG_MON_AVOID_STRICT: return "MON_AVOID_STRICT";
         case ter_furn_flag::TFLAG_REGION_PSEUDO: return "REGION_PSEUDO";
+        case ter_furn_flag::TFLAG_PHASE_BACK: return "PHASE_BACK";
+        case ter_furn_flag::TFLAG_SOAKING_TUB: return "SOAKING_TUB";
 
         // *INDENT-ON*
         case ter_furn_flag::NUM_TFLAG_FLAGS:
@@ -454,9 +510,9 @@ bool furn_workbench_info::load( const JsonObject &jsobj, std::string_view member
 {
     JsonObject j = jsobj.get_object( member );
 
-    assign( j, "multiplier", multiplier );
-    assign( j, "mass", allowed_mass );
-    assign( j, "volume", allowed_volume );
+    optional( j, false, "multiplier", multiplier, 1.0f );
+    optional( j, false, "mass", allowed_mass, units::mass::max() );
+    optional( j, false, "volume", allowed_volume, units::volume::max() );
 
     return true;
 }
@@ -468,10 +524,10 @@ bool plant_data::load( const JsonObject &jsobj, std::string_view member )
 {
     JsonObject j = jsobj.get_object( member );
 
-    assign( j, "transform", transform );
-    assign( j, "base", base );
-    assign( j, "growth_multiplier", growth_multiplier );
-    assign( j, "harvest_multiplier", harvest_multiplier );
+    optional( j, false, "transform", transform, furn_str_id::NULL_ID() );
+    optional( j, false, "base", base, furn_str_id::NULL_ID() );
+    optional( j, false, "growth_multiplier", growth_multiplier, 1.0f );
+    optional( j, false, "harvest_multiplier", harvest_multiplier, 1.0f );
 
     return true;
 }
@@ -638,12 +694,22 @@ void load_furniture( const JsonObject &jo, const std::string &src )
     furniture_data.load( jo, src );
 }
 
+void finalize_furniture( )
+{
+    furniture_data.finalize();
+}
+
 void load_terrain( const JsonObject &jo, const std::string &src )
 {
     if( terrain_data.empty() ) { // TODO: This shouldn't live here
         terrain_data.insert( null_terrain_t() );
     }
     terrain_data.load( jo, src );
+}
+
+void finalize_terrain( )
+{
+    terrain_data.finalize();
 }
 
 void map_data_common_t::set_flag( const std::string &flag )
@@ -918,8 +984,8 @@ bool ter_t::is_null() const
 void ter_t::load( const JsonObject &jo, const std::string &src )
 {
     map_data_common_t::load( jo, src );
-    mandatory( jo, was_loaded, "move_cost", movecost );
-    assign( jo, "max_volume", max_volume, src == "tlg" );
+    optional( jo, was_loaded, "move_cost", movecost );
+    optional( jo, was_loaded, "max_volume", max_volume, DEFAULT_TILE_VOLUME );
     optional( jo, was_loaded, "trap", trap_id_str );
     optional( jo, was_loaded, "heat_radiation", heat_radiation );
 
@@ -935,6 +1001,47 @@ void ter_t::load( const JsonObject &jo, const std::string &src )
 
     optional( jo, was_loaded, "lockpick_result", lockpick_result, ter_str_id::NULL_ID() );
 
+    // Phase-change fields
+    if( jo.has_array( "phase_targets" ) ) {
+        JsonArray ja = jo.get_array( "phase_targets" );
+        for( const JsonValue v : ja ) {
+            if( v.test_string() ) {
+                phase_targets.emplace_back( v.get_string() );
+            } else {
+                jo.throw_error( "phase_targets must be an array of terrain id strings" );
+            }
+        }
+    }
+
+    if( jo.has_array( "phase_temps" ) ) {
+        JsonArray ja = jo.get_array( "phase_temps" );
+        for( const JsonValue v : ja ) {
+            if( v.test_number() ) {
+                // Interpret numeric values as degrees Celsius in JSON
+                phase_temps.emplace_back( units::from_celsius( v.get_float() ) );
+            } else if( v.test_string() ) {
+                const std::string s = v.get_string();
+                try {
+                    const double val = std::stod( s );
+                    phase_temps.emplace_back( units::from_celsius( val ) );
+                } catch( const std::exception & ) {
+                    jo.throw_error( "phase_temps entries must be numbers (Celsius) or numeric strings" );
+                }
+            } else {
+                jo.throw_error( "phase_temps must be an array of numbers or numeric strings" );
+            }
+        }
+    }
+
+    optional( jo, was_loaded, "phase_method", phase_method );
+
+    // Validate phase arrays: `phase_temps` must contain exactly one less
+    // entry than `phase_targets`.
+    if( !phase_targets.empty() ) {
+        if( phase_temps.size() != phase_targets.size() - 1 ) {
+            jo.throw_error( "phase_temps must contain exactly one less entry than phase_targets" );
+        }
+    }
     oxytorch = cata::make_value<activity_data_ter>();
     if( jo.has_object( "oxytorch" ) ) { //TODO: Make overwriting these with eg "oxytorch": { } work while still allowing overwriting single values
         oxytorch->load( jo.get_object( "oxytorch" ) );

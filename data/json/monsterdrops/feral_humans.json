@@ -14,6 +14,7 @@
           { "item": "crash_axe", "prob": 5, "damage": [ 1, 3 ] }
         ]
       },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "default_zombie_death_drops", "prob": 100, "damage": [ 1, 3 ] }
     ]
   },
@@ -23,6 +24,17 @@
     "id": "feral_humans_death_drops_pipe",
     "entries": [
       { "item": "pipe", "prob": 100, "damage": [ 0, 2 ] },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
+      { "group": "default_zombie_death_drops", "prob": 100, "damage": [ 1, 3 ] }
+    ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "feral_humans_death_drops_knife",
+    "entries": [
+      { "group": "kitchen_knives", "prob": 100, "damage": [ 0, 3 ] },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "default_zombie_death_drops", "prob": 100, "damage": [ 1, 3 ] }
     ]
   },
@@ -38,6 +50,7 @@
           { "item": "claw_bar", "prob": 10, "damage": [ 0, 1 ] }
         ]
       },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "default_zombie_death_drops", "prob": 100, "damage": [ 1, 3 ] }
     ]
   },
@@ -45,7 +58,100 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "feral_humans_death_drops_tool",
-    "entries": [ { "item": "hammer", "prob": 100, "damage": [ 1, 3 ] }, { "group": "mon_zombie_technician_death_drops", "prob": 100 } ]
+    "entries": [
+      { "item": "hammer", "prob": 100, "damage": [ 1, 3 ] },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
+      { "group": "mon_zombie_technician_death_drops", "prob": 100 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "kitchen_knives",
+    "entries": [
+      {
+        "distribution": [
+          { "item": "knife_chef", "prob": 10 },
+          { "item": "knife_butcher", "prob": 12 },
+          { "item": "knife_steak", "prob": 16 },
+          { "item": "knife_paring", "prob": 10 },
+          { "item": "knife_carving", "prob": 10 },
+          { "item": "knife_meat_cleaver", "prob": 8 },
+          { "item": "knife_vegetable_cleaver", "prob": 4 }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "feral_humans_death_drops_pyromaniac",
+    "entries": [
+      { "group": "kitchen_knives", "prob": 100, "damage": [ 0, 3 ] },
+      {
+        "distribution": [
+          { "item": "lighter", "prob": 20, "charges": 90, "damage": [ 0, 2 ] },
+          { "item": "lighter", "prob": 20, "charges": 10, "damage": [ 0, 2 ] },
+          { "item": "lighter", "prob": 20, "charges": 0, "damage": [ 0, 2 ] },
+          { "item": "lighter", "prob": 20, "charges": 50, "damage": [ 0, 2 ] },
+          { "item": "lighter", "prob": 20, "charges": 25, "damage": [ 0, 2 ] },
+          { "item": "matches", "prob": 20, "charges": 12 },
+          { "item": "matches", "prob": 20, "charges": 2 },
+          { "item": "matches", "prob": 20, "charges": 6 }
+        ],
+        "prob": 100
+      },
+      { "item": "molotov", "prob": 25 },
+      { "item": "corpse_ash", "count": [ 10, 30 ], "prob": 5 },
+      { "group": "underwear", "damage": [ 0, 3 ] },
+      { "group": "survivor_basic_pants", "damage": [ 0, 3 ] },
+      { "group": "survivor_basic_shirt", "damage": [ 0, 3 ] },
+      { "item": "protest_flag", "prob": 4 },
+      {
+        "distribution": [
+          { "item": "bunker_coat", "prob": 20, "damage": [ 0, 3 ] },
+          { "item": "longcoat_leather", "prob": 8, "damage": [ 0, 3 ] },
+          { "item": "sleeveless_longcoat_leather", "prob": 10, "damage": [ 0, 3 ] },
+          { "item": "longcoat", "prob": 8, "damage": [ 0, 3 ] },
+          { "item": "sleeveless_longcoat", "prob": 12, "damage": [ 0, 3 ] },
+          { "item": "jacket_leather_tire", "prob": 6, "damage": [ 0, 3 ] },
+          { "item": "jacket_leather_mod", "prob": 6, "damage": [ 0, 3 ] },
+          { "item": "tire_cuirass", "prob": 6, "damage": [ 0, 3 ] },
+          { "item": "leather_police_jacket", "prob": 6, "damage": [ 0, 3 ] },
+          { "item": "jacket_jean_mod", "prob": 6, "damage": [ 0, 3 ] },
+          { "item": "vest_jean_mod", "prob": 6, "damage": [ 0, 3 ] },
+          { "item": "vest_leather_mod", "prob": 6, "damage": [ 0, 3 ] }
+        ],
+        "prob": 70
+      },
+      {
+        "distribution": [
+          { "item": "mask_rioter", "prob": 20, "damage": [ 0, 3 ] },
+          { "item": "mask_hockey", "prob": 12, "damage": [ 0, 3 ] },
+          { "item": "mask_dust", "prob": 20, "damage": [ 0, 3 ] },
+          { "item": "bandana", "prob": 20, "damage": [ 0, 3 ] },
+          { "item": "mask_filter", "prob": 20, "damage": [ 0, 3 ] },
+          { "item": "mask_gas", "prob": 8, "damage": [ 0, 3 ] }
+        ],
+        "prob": 50
+      },
+      { "group": "survivor_basic_feet", "damage": [ 0, 3 ] },
+      { "group": "clothing_glasses", "prob": 5, "damage": [ 0, 3 ] },
+      { "group": "clothing_watch", "prob": 5, "damage": [ 0, 3 ] },
+      {
+        "distribution": [
+          { "item": "police_belt", "prob": 35, "damage": [ 0, 3 ] },
+          { "item": "fireman_belt", "prob": 35, "damage": [ 0, 3 ] },
+          { "item": "tool_belt", "prob": 30, "damage": [ 0, 3 ] }
+        ],
+        "prob": 50
+      },
+      { "group": "harddrugs", "prob": 15 },
+      { "group": "stash_food", "prob": 15 },
+      { "group": "ammo_common", "prob": 10 },
+      { "group": "stash_drugs", "prob": 15 },
+      { "group": "gear_survival", "prob": 15 }
+    ]
   },
   {
     "type": "item_group",
@@ -54,6 +160,7 @@
     "entries": [
       { "group": "survivor_stabbing", "prob": 100, "damage": [ 0, 3 ] },
       { "group": "underwear", "damage": [ 0, 3 ] },
+      { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
       { "group": "survivor_basic_pants", "damage": [ 0, 3 ] },
       { "group": "survivor_basic_shirt", "damage": [ 0, 3 ] },
       { "group": "survivor_basic_hands", "damage": [ 0, 3 ], "prob": 95 },
@@ -185,12 +292,7 @@
     "subtype": "collection",
     "id": "feral_maids_death_drops_knife",
     "entries": [
-      {
-        "distribution": [
-          { "item": "knife_chef", "prob": 50, "damage": [ 0, 3 ] },
-          { "item": "knife_butcher", "prob": 50, "damage": [ 0, 3 ] }
-        ]
-      },
+      { "distribution": [ { "group": "kitchen_knives", "prob": 20, "damage": [ 0, 3 ] } ] },
       {
         "distribution": [
           { "group": "default_maid_clothes", "prob": 50, "damage": [ 1, 4 ] },
@@ -572,6 +674,8 @@
       { "group": "survivor_bashing", "prob": 100, "damage": [ 0, 4 ] },
       { "group": "stash_food", "prob": 30 },
       { "group": "mil_food_nodrugs", "prob": 10 },
+      { "item": "protest_flag", "prob": 2 },
+      { "item": "organization_flag", "prob": 5 },
       { "group": "used_survival_kit", "prob": 50, "damage": [ 0, 4 ] }
     ]
   },

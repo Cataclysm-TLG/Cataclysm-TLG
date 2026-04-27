@@ -37,5 +37,345 @@
   {
     "id": "EOC_vitrified_farm_entry",
     "type": "effect_on_condition"
+  },
+  {
+    "id": "MISSION_SEER_GATHER_BONE",
+    "type": "mission_definition",
+    "name": { "str": "Find scrap for the bone seer" },
+    "description": "Obsolete mission from removed Kindred faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_SEER_GATHER_BONE_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_SEER_GATHER_BONE" },
+    "effect": [ { "remove_active_mission": "MISSION_SEER_GATHER_BONE" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_BARRY_1",
+    "type": "mission_definition",
+    "name": { "str": "Return Barry to Eddie at the dairy." },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_BARRY_1_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_BARRY_1" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_BARRY_1" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_CARLOS_1",
+    "type": "mission_definition",
+    "name": { "str": "Find an anvil" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_CARLOS_1_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_CARLOS_1" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_CARLOS_1" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_CARLOS_2",
+    "type": "mission_definition",
+    "name": { "str": "Find an anvil" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_CARLOS_2_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_CARLOS_2" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_CARLOS_2" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_CHRIS_1",
+    "type": "mission_definition",
+    "name": { "str": "Free Barry from the mysterious structure" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_CHRIS_1_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_CHRIS_1" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_CHRIS_1" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_CLAIRE_1",
+    "type": "mission_definition",
+    "name": { "str": "Free Barry from the mysterious structure" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_CLAIRE_1_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_CLAIRE_1" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_CLAIRE_1" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_CLAIRE_2",
+    "type": "mission_definition",
+    "name": { "str": "Collect Seeds" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_CLAIRE_2_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_CLAIRE_2" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_CLAIRE_2" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_CLAIRE_3",
+    "type": "mission_definition",
+    "name": { "str": "Find and capture a cat" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_CLAIRE_3_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_CLAIRE_3" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_CLAIRE_3" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_EDDIE_1",
+    "type": "mission_definition",
+    "name": { "str": "Eddie's first mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_EDDIE_1_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_EDDIE_1" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_EDDIE_1" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_EDDIE_2",
+    "type": "mission_definition",
+    "name": { "str": "Eddie's second mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_EDDIE_2_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_EDDIE_2" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_EDDIE_2" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_EDDIE_3",
+    "type": "mission_definition",
+    "name": { "str": "Eddie's third mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_EDDIE_3_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_EDDIE_3" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_EDDIE_3" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_JACK_1",
+    "type": "mission_definition",
+    "name": { "str": "Jack's first mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_JACK_1_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_JACK_1" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_JACK_1" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_JACK_2",
+    "type": "mission_definition",
+    "name": { "str": "Jack's second mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_JACK_2_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_JACK_2" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_JACK_2" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_JESSE_1",
+    "type": "mission_definition",
+    "name": { "str": "Jesse's first mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_JESSE_1_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_JESSE_1" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_JESSE_1" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_JESSE_2",
+    "type": "mission_definition",
+    "name": { "str": "Jesse's second mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_JESSE_2_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_JESSE_2" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_JESSE_2" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_LUKE_1",
+    "type": "mission_definition",
+    "name": { "str": "Luke's first mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_LUKE_1_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_LUKE_1" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_LUKE_1" } ]
+  },
+  {
+    "id": "MISSION_ISHERWOOD_LUKE_2",
+    "type": "mission_definition",
+    "name": { "str": "Luke's second mission" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_ISHERWOOD_LUKE_2_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_ISHERWOOD_LUKE_2" },
+    "effect": [ { "remove_active_mission": "MISSION_ISHERWOOD_LUKE_2" } ]
+  },
+  {
+    "id": "directions_isherwood_traveler",
+    "type": "mission_definition",
+    "name": { "str": "Check out that farm" },
+    "description": "Obsolete mission from removed Isherwood faction content.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_directions_isherwood_traveler_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "directions_isherwood_traveler" },
+    "effect": [ { "remove_active_mission": "directions_isherwood_traveler" } ]
+  },
+  {
+    "id": "directions_hub01",
+    "type": "mission_definition",
+    "name": { "str": "Check out Hub-01" },
+    "description": "Obsolete mission from removed Refugee Center teamster.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_directions_hub01_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "directions_hub01" },
+    "effect": [ { "remove_active_mission": "directions_hub01" } ]
+  },
+  {
+    "id": "MISSION_INVESTIGATE_TRADER",
+    "type": "mission_definition",
+    "name": { "str": "Investigate the shady trader." },
+    "description": "Obsolete mission from removed Refugee Center teamster.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_INVESTIGATE_TRADER_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_INVESTIGATE_TRADER" },
+    "effect": [ { "remove_active_mission": "MISSION_INVESTIGATE_TRADER" } ]
   }
 ]

@@ -134,7 +134,7 @@
     "threshold_mut": "THRESH_LUPINE",
     "mutagen_message": "You feel an urge to mark your territory.  But then it passes.",
     "memorial_message": "Wolfed out.",
-    "vitamin": "mutagen_lupine",
+    "vitamin": "mutagen_canine",
     "base_removal_chance": 33,
     "base_removal_cost_mul": 2.5
   },

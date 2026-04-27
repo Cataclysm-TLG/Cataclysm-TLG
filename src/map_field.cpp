@@ -85,6 +85,7 @@ static const flag_id json_flag_NO_UNLOAD( "NO_UNLOAD" );
 
 static const furn_str_id furn_f_ash( "f_ash" );
 
+static const itype_id itype_ash( "ash" );
 static const itype_id itype_rock( "rock" );
 
 static const json_character_flag json_flag_HEATSINK( "HEATSINK" );
@@ -1085,7 +1086,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
             smoke += static_cast<int>( windpower / 5 );
             if( cur.get_field_intensity() > 1 &&
                 one_in( 175 - cur.get_field_intensity() * 50 ) ) {
-                here.bash( p, 999, false, true, true );
+                here.bash( p, 999, false, true, true, true );
             }
 
         } else if( ter_furn_has_flag( ter, frn, ter_furn_flag::TFLAG_FLAMMABLE_HARD ) &&
@@ -1096,7 +1097,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
             smoke += static_cast<int>( windpower / 5 );
             if( cur.get_field_intensity() > 1 &&
                 one_in( 200 - cur.get_field_intensity() * 50 ) ) {
-                here.bash( p, 999, false, true, true );
+                here.bash( p, 999, false, true, true, true );
             }
 
         } else if( ter.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH ) ) {
@@ -1106,7 +1107,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
             smoke += static_cast<int>( windpower / 5 );
             if( cur.get_field_intensity() > 1 &&
                 one_in( 160 - cur.get_field_intensity() * 50 ) ) {
-                here.bash( p, 999, false, true, true );
+                here.bash( p, 999, false, true, true, true );
                 here.spawn_item( p, "ash", 1, rng( 10, 1000 ) );
             }
 
@@ -1119,7 +1120,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
             if( ( cur.get_field_intensity() > 1 && one_in( 160 - cur.get_field_intensity() * 50 ) ) ||
                 ( cur.get_field_intensity() == 1 && one_in( 600 ) ) ) {
                 here.furn_set( p, furn_f_ash );
-                here.add_item_or_charges( p, item( "ash" ) );
+                here.add_item_or_charges( p, item( itype_ash ) );
             }
 
         } else if( ter.has_flag( ter_furn_flag::TFLAG_NO_FLOOR ) && p.z() > -OVERMAP_DEPTH ) {
@@ -1833,15 +1834,29 @@ void map::creature_in_field( Creature &critter )
                 critter.check_immunity_data( fe.immunity_data ) ) {
                 continue;
             }
-            bool effect_added = false;
-            if( fe.is_environmental ) {
-                effect_added = critter.add_env_effect( fe.id, fe.bp.id(), fe.intensity,  fe.get_duration() );
-            } else {
-                effect_added = true;
-                critter.add_effect( field_fx.get_id(), field_fx.get_duration(), field_fx.get_bp(),
-                                    field_fx.is_permanent(), field_fx.get_intensity() );
-            }
-            if( effect_added ) {
+            bool add_effect = ( fe.bp.is_null() || critter.is_monster() || critter.has_part( fe.bp ) );
+            if( add_effect ) {
+                if( fe.is_environmental ) {
+                    if( !critter.is_monster() ) {
+                        // Scan through resistance data to get vectors: parts by which the effect enters the body.
+                        for( const auto &[bp, resistance] : fe.immunity_data.immunity_data_body_part_env_resistance ) {
+                            // Filter for ones we actually have.
+                            for( const bodypart_id &part : critter.get_all_body_parts_of_type( bp ) ) {
+                                if( !critter.has_part( part ) ) {
+                                    continue;
+                                }
+                                // Apply via the vector to fe.bp.id(), allowing partial enviro resistance.
+                                critter.add_env_effect( fe.id, part, fe.intensity, fe.get_duration(), fe.bp.id() );
+                            }
+                        }
+                    } else {
+                        // If we're a monster just slap the effect on.
+                        critter.add_env_effect( fe.id, fe.bp.id(), fe.intensity, fe.get_duration() );
+                    }
+                } else {
+                    critter.add_effect( field_fx.get_id(), field_fx.get_duration(), field_fx.get_bp(),
+                                        field_fx.is_permanent(), field_fx.get_intensity() );
+                }
                 critter.add_msg_player_or_npc( fe.env_message_type, fe.get_message(), fe.get_message_npc() );
             }
             if( cur_field_id->decrease_intensity_on_contact ) {

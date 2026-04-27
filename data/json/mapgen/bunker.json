@@ -161,16 +161,16 @@
         "!": { "item": "bunker_basement_clothing", "chance": 40 },
         "s": { "item": "dining", "chance": 45 },
         "q": [
-          { "item": "milspec_arsenal_group_only_guns", "chance": 30 },
-          { "item": "arsenal_mics_group", "chance": 10 },
-          { "item": "c4_box_part", "chance": 10 },
-          { "item": "bionics_mil", "chance": 10 },
+          { "item": "milspec_arsenal_group_only_guns", "chance": 33 },
+          { "item": "arsenal_mics_group", "chance": 33 },
+          { "item": "c4_box_part", "chance": 33 },
+          { "item": "bionics_mil", "chance": 20 },
           { "item": "grenade_can_pa120_grenades_full", "chance": 10 }
         ],
         "U": { "item": "SUS_janitors_closet", "chance": 100 },
-        "L": [ { "item": "milspec_arsenal_group_only_ammo", "chance": 10 } ],
-        "G": { "item": "arsenal_armor_collection", "chance": 40 },
-        "E": { "item": "guns_rifle_milspec", "chance": 30 }
+        "L": [ { "item": "milspec_arsenal_group_only_ammo", "chance": 33 } ],
+        "G": { "item": "arsenal_armor_collection", "chance": 80 },
+        "E": { "item": "guns_rifle_milspec", "chance": 66 }
       },
       "place_fields": [ { "field": "fd_blood", "x": 2, "y": 3 }, { "field": "fd_blood", "x": 3, "y": 3 } ],
       "place_loot": [

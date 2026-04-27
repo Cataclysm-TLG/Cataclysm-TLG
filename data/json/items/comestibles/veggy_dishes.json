@@ -1192,6 +1192,7 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "zucchini", "name": { "str_sp": "%s, zucchini" } }
     ],
     "copy-from": "vegetable_wild",
+    "smoking_result": "null",
     "proportional": { "weight": 0.5 },
     "color": "green",
     "spoils_in": "360 days",
@@ -1269,12 +1270,18 @@
     "volume": "83 ml",
     "vitamins": [ [ "vitC", 12 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD" ],
-    "flags": [ "EDIBLE_FROZEN", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ],
+    "flags": [ "EDIBLE_FROZEN", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED", "NUTRIENT_OVERRIDE" ],
     "plant_name": "corn",
     "fruit": "corn",
     "seeds": false,
     "byproducts": [ "withered" ],
-    "grow": "80 days",
+    "growth_stages": [
+      { "GROWTH_SEED": "20 days" },
+      { "GROWTH_SEEDLING": "20 days" },
+      { "GROWTH_MATURE": "20 days" },
+      { "GROWTH_HARVEST": "20 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ],
     "into": "cornmeal",
     "recipe": "cornmeal_mill_1_3"
   },
@@ -1380,17 +1387,13 @@
     "subtypes": [ "COMESTIBLE" ],
     "id": "rehydrated_corn_kernels",
     "name": { "str_sp": "rehydrated corn kernels" },
-    "copy-from": "vegetable_wild",
+    "copy-from": "corn_kernels",
     "weight": "60 g",
     "color": "yellow",
     "spoils_in": "1 day",
+    "quench": 2,
     "description": "Reconstituted corn kernels, much more enjoyable to eat now that they have been rehydrated.",
-    "price": "9 USD",
-    "price_postapoc": "50 cent",
-    "smoking_result": "dry_corn",
-    "volume": "83 ml",
-    "delete": { "flags": [ "RAW" ] },
-    "vitamins": [ [ "vitC", 12 ], [ "iron", 4 ] ],
+    "delete": { "flags": [ "RAW", "INEDIBLE" ] },
     "fun": 2
   },
   {
@@ -1790,7 +1793,6 @@
     "description": "Boiled potatoes mashed together with salt & oil.",
     "price": "50 cent",
     "price_postapoc": "30 cent",
-    "sealed": true,
-    "delete": { "flags": [ "RAW" ] }
+    "sealed": true
   }
 ]

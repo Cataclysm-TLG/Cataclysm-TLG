@@ -14,7 +14,7 @@
     "time": "15 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 }, { "id": "SCREW", "level": 1 } ],
     "components": [
-      [ [ "material_aluminium_ingot", 12 ] ],
+      [ [ "aluminum_chunk", 12 ] ],
       [ [ "scrap_aluminum", 3 ] ],
       [ [ "hinge", 2 ] ],
       [ [ "lock", 1 ] ],

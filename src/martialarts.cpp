@@ -119,6 +119,11 @@ void weapon_category::load_weapon_categories( const JsonObject &jo, const std::s
     weapon_category_factory.load( jo, src );
 }
 
+void weapon_category::finalize_all()
+{
+    weapon_category_factory.finalize();
+}
+
 void weapon_category::reset()
 {
     weapon_category_factory.reset();
@@ -167,6 +172,11 @@ matype_id martial_art_learned_from( const itype &type )
 void load_technique( const JsonObject &jo, const std::string &src )
 {
     ma_techniques.load( jo, src );
+}
+
+void ma_technique::finalize_all()
+{
+    ma_techniques.finalize();
 }
 
 // To avoid adding empty entries
@@ -396,6 +406,11 @@ void load_martial_art( const JsonObject &jo, const std::string &src )
     martialarts.load( jo, src );
 }
 
+void martialart::finalize_all()
+{
+    martialarts.finalize();
+}
+
 class ma_buff_reader : public generic_typed_reader<ma_buff_reader>
 {
     public:
@@ -620,6 +635,7 @@ void finalize_martial_arts()
         effect_type::register_ma_buff_effect( new_eff );
     }
     attack_vector_factory.finalize();
+    ma_buffs.finalize();
     for( const attack_vector &vector : attack_vector_factory.get_all() ) {
         // Check if this vector allows substitutions in the first place
         if( vector.strict_limb_definition ) {
@@ -1567,7 +1583,7 @@ std::optional<std::pair<attack_vector_id, sub_bodypart_str_id>>
                            vec.c_str() );
             continue;
         }
-        // Sort our calc_vector of sublimb/damage pairs
+        // Sort our calc_vector of sublimb/damage pairs.
         std::sort( calc_vector.begin(),
                    calc_vector.end(), []( const std::pair<sub_bodypart_str_id, float> &a,
         const std::pair<sub_bodypart_str_id, float> &b ) {
@@ -1584,10 +1600,10 @@ std::optional<std::pair<attack_vector_id, sub_bodypart_str_id>>
         if( rng( 0, 2 ) > 0 ) {
             for( const auto &vec : list ) {
                 for( const auto &iterate : storage ) {
-                    if( iterate.first == vec.obj && iterate.first->natural_attack &&
+                    if( iterate.first == vec.first && iterate.first->natural_attack &&
                         !user.natural_attack_restricted_on( iterate.second ) ) {
                         add_msg_debug( debugmode::DF_MELEE,
-                                       "Chose natural attack vector %s for technique %s", vec.obj.c_str(), tech.c_str() );
+                                       "Chose natural attack vector %s for technique %s", vec.first.c_str(), tech.c_str() );
                         return iterate;
                     }
                 }

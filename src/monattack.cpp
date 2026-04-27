@@ -47,6 +47,8 @@
 #include "harvest.h"
 #include "item.h"
 #include "item_stack.h"
+#include "item_location.h"
+#include "item_transformation.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -168,6 +170,8 @@ static const itype_id itype_bot_manhack( "bot_manhack" );
 static const itype_id itype_bot_mininuke_hack( "bot_mininuke_hack" );
 static const itype_id itype_bot_pacification_hack( "bot_pacification_hack" );
 static const itype_id itype_e_handcuffs( "e_handcuffs" );
+static const itype_id itype_processor( "processor" );
+static const itype_id itype_m4_carbine( "m4_carbine" );
 
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 
@@ -709,7 +713,7 @@ bool mattack::shriek_stun( monster *z )
         }
         // Affect the target
         // Small bash to every square, silent to not flood message box. Only affects glass/crystal items.
-        here.bash( cone, 4, true, false, false, nullptr, true );
+        here.bash( cone, 4, true, false, false, false, nullptr, true );
 
         // If a monster is there, chance for stun
         Creature *target = creatures.creature_at( cone );
@@ -1353,9 +1357,6 @@ void mattack::smash_specific( monster *z, Creature *target )
 {
     if( target == nullptr || !z->is_adjacent( target, false ) ) {
         return;
-    }
-    if( z->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        z->use_mech_power( 5_kJ );
     }
     z->set_dest( target->pos_abs() );
     smash( z );
@@ -2241,7 +2242,15 @@ bool mattack::formblob( monster *z )
             if( z->get_speed_base() > mon_blob_small->speed + 35 && rng( 0, 250 ) < z->get_speed_base() ) {
                 // If we're big enough, spawn a baby blob.
                 shared_ptr_fast<monster> mon = make_shared_fast<monster>( mon_blob_small );
-                mon->ammo = mon->type->starting_ammo;
+                if( !mon->type->starting_ammo.empty() ) {
+                    for( const auto &pair : mon->type->starting_ammo ) {
+                        const itype_id &ammo_type = pair.first;
+                        int max_amt = pair.second;
+                        int min_amt = std::min( mon->type->starting_ammo_min, pair.second );
+                        int qty = rng( min_amt, max_amt );
+                        mon->ammo[ ammo_type ] = qty;
+                    }
+                }
                 if( mon->will_move_to( dest ) && mon->know_danger_at( dest ) ) {
                     didit = true;
                     z->set_speed_base( z->get_speed_base() - mon_blob_small->speed );
@@ -2890,7 +2899,8 @@ void mattack::rifle( monster *z, Creature *target )
     }
     add_msg_if_player_sees( *z, m_warning, _( "The %s opens up with its rifle!" ), z->name() );
 
-    tmp.set_wielded_item( item( "m4_carbine" ).ammo_set( ammo_type, z->ammo[ ammo_type ] ) );
+    tmp.set_wielded_item( item( itype_m4_carbine, calendar::turn_zero ).ammo_set( ammo_type,
+                          z->ammo[ ammo_type ] ) );
 
     item_location weapon = tmp.get_wielded_item();
     int burst = std::max( weapon->gun_get_mode( gun_mode_AUTO ).qty, 1 );
@@ -2923,7 +2933,7 @@ bool mattack::searchlight( monster *z )
         creature_tracker &creatures = get_creature_tracker();
         for( int i = 0; i < max_lamp_count; i++ ) {
 
-            item settings( "processor", calendar::turn_zero );
+            item settings( itype_processor, calendar::turn_zero );
 
             settings.set_var( "SL_PREFER_UP", "TRUE" );
             settings.set_var( "SL_PREFER_DOWN", "TRUE" );
@@ -3437,7 +3447,8 @@ bool mattack::blow_whistle( monster *z )
         return false;
     }
     add_msg_if_player_sees( *z, m_warning, _( "The %1$s loudly blows their whistle!" ), z->name() );
-    sounds::sound( z->pos_bub( here ), 40, sounds::sound_t::alarm, _( "FWEEEET!" ), false, "misc",
+    // should match the loudness of whistle item
+    sounds::sound( z->pos_bub( here ), 100, sounds::sound_t::alarm, _( "FWEEEET!" ), false, "misc",
                    "whistle" );
 
     return true;
@@ -3684,7 +3695,7 @@ bool mattack::riotbot( monster *z )
         if( choice == ur_arrest ) {
             z->anger = 0;
 
-            item handcuffs( "e_handcuffs", calendar::turn_zero );
+            item handcuffs( itype_e_handcuffs, calendar::turn_zero );
             handcuffs.charges = handcuffs.type->maximum_charges();
             handcuffs.active = true;
             const tripoint_bub_ms foe_pos = foe->pos_bub( here );
@@ -4266,8 +4277,8 @@ bool mattack::kamikaze( monster *z )
         z->disable_special( "KAMIKAZE" );
         return true;
     }
-    act_bomb_type = item::find_type( actor->target );
-    int delay = to_seconds<int>( actor->target_timer );
+    act_bomb_type = item::find_type( actor->transform.target );
+    int delay = to_seconds<int>( actor->transform.target_timer );
 
     // HACK: HORRIBLE HACK ALERT! Remove the following code completely once we have working monster inventory processing
     if( z->has_effect( effect_countdown ) ) {

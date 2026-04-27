@@ -344,21 +344,62 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
         "coverage": 98,
-        "encumbrance": 1
+        "encumbrance": 5
       },
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "coverage": 95,
-        "encumbrance": 2
+        "encumbrance": 0
       },
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
         "coverage": 40,
-        "encumbrance": 2
+        "encumbrance": 0
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 98,
+        "encumbrance": 4
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 98,
+        "encumbrance": 4
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 95,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ]
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_lower" ],
+        "coverage": 10,
+        "encumbrance": 0
       }
     ]
   },
@@ -467,7 +508,7 @@
       "target": "chainmail_skirt_budget",
       "menu_text": "Tighten"
     },
-    "delete": { "flags": [ "NORMAL", "STURDY" ] },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -743,6 +784,43 @@
         "coverage": 60,
         "encumbrance": 5,
         "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 75,
+        "encumbrance": 3,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 60,
+        "encumbrance": 5,
+        "rigid_layer_only": true
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 60,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ],
+        "rigid_layer_only": true
       }
     ]
   },
@@ -854,7 +932,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
         "coverage": 90,
-        "encumbrance": 2,
+        "encumbrance": 5,
         "rigid_layer_only": true
       },
       {
@@ -862,7 +940,44 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "coverage": 70,
-        "encumbrance": 3,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 75,
+        "encumbrance": 4,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 70,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 80,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ],
         "rigid_layer_only": true
       }
     ]
@@ -1380,5 +1495,217 @@
     "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "leggings_kevlar",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "description": "A pair of Kevlar leggings designed to protect the legs from abrasion when riding a motorcycle.",
+    "weight": "310 g",
+    "volume": "500 ml",
+    "price": "12 USD",
+    "price_postapoc": "2 USD",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "looks_like": "leggings",
+    "color": "yellow",
+    "warmth": 14,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 6,
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "leggings_kevlar_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "copy-from": "leggings_kevlar",
+    "weight": "620 g",
+    "volume": "800 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "leggings_kevlar_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "copy-from": "leggings_kevlar",
+    "weight": "155 g",
+    "volume": "250 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  },
+  {
+    "id": "cephalopod_sleeves_cut_resistant",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "cut-resistant cephalopod sleeves", "str_pl": "sets of cut-resistant cephalopod sleeves" },
+    "description": "A set of tubes of loosely woven Kevlar which should fit over a cephalopod's many arms.",
+    "weight": "440 g",
+    "volume": "820 ml",
+    "price": "0 USD",
+    "price_postapoc": "1 USD",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "yellow",
+    "warmth": 10,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "encumbrance": 4,
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_1_tip",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_2_tip",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_3_tip",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_4_tip",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_5_tip",
+          "cephalopod_arm_6_base",
+          "cephalopod_arm_6_tip"
+        ],
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "cephalopod_sleeves_cut_resistant_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant cephalopod sleeves", "str_pl": "sets of cut-resistant cephalopod sleeves" },
+    "copy-from": "cephalopod_sleeves_cut_resistant",
+    "weight": "880 g",
+    "volume": "820 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "cephalopod_sleeves_cut_resistant_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant cephalopod sleeves", "str_pl": "sets of cut-resistant cephalopod sleeves" },
+    "copy-from": "cephalopod_sleeves_cut_resistant",
+    "weight": "220 g",
+    "volume": "410 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_cut_resistant",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "cut-resistant tail sleeve", "str_pl": "cut-resistant tail sleeves" },
+    "description": "A slender tube of loosely woven Kevlar which should help protect the wearer's tail from cuts and scrapes.",
+    "weight": "110 g",
+    "volume": "205 ml",
+    "price": "0 USD",
+    "price_postapoc": "25 cent",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "color": "yellow",
+    "warmth": 10,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [ "long_tail" ],
+        "encumbrance": 4,
+        "specifically_covers": [ "long_tail_base", "long_tail_tip" ],
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "tail_sleeve_cut_resistant_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant tail sleeve", "str_pl": "cut-resistant tail sleeves" },
+    "copy-from": "tail_sleeve_cut_resistant",
+    "weight": "220 g",
+    "volume": "410 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_cut_resistant_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant tail sleeve", "str_pl": "cut-resistant tail sleeves" },
+    "copy-from": "tail_sleeve_cut_resistant",
+    "weight": "55 g",
+    "volume": "102 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "description": "A tube of leather which should help protect the wearer's tail from cuts and scrapes.",
+    "weight": "210 g",
+    "volume": "255 ml",
+    "price": "0 USD",
+    "price_postapoc": "25 cent",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "color": "brown",
+    "warmth": 12,
+    "flags": [ "NORMAL" ],
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "long_tail" ],
+        "encumbrance": 8,
+        "specifically_covers": [ "long_tail_base", "long_tail_tip" ],
+        "coverage": 85
+      }
+    ]
+  },
+  {
+    "id": "tail_sleeve_leather_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "copy-from": "tail_sleeve_leather",
+    "weight": "420 g",
+    "volume": "510 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_leather_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "copy-from": "tail_sleeve_leather",
+    "weight": "105 g",
+    "volume": "152 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
   }
 ]

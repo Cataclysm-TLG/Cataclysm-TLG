@@ -28,10 +28,12 @@
 #include "enums.h"
 #include "event.h"
 #include "event_bus.h"
+#include "flag.h"
 #include "flexbuffer_json-inl.h"
 #include "flexbuffer_json.h"
 #include "game.h"
 #include "game_constants.h"
+#include "generic_factory.h"
 #include "input.h"
 #include "input_context.h"
 #include "inventory.h"
@@ -104,6 +106,7 @@ static const item_group_id Item_spawn_data_jewelry_front( "jewelry_front" );
 static const itype_id itype_2x4( "2x4" );
 static const itype_id itype_bone_human( "bone_human" );
 static const itype_id itype_nail( "nail" );
+static const itype_id itype_rope_30( "rope_30" );
 static const itype_id itype_sheet( "sheet" );
 static const itype_id itype_stick( "stick" );
 static const itype_id itype_string_36( "string_36" );
@@ -154,7 +157,6 @@ static const vpart_id vpart_frame( "frame" );
 
 static const vproto_id vehicle_prototype_none( "none" );
 
-static const std::string flag_INITIAL_PART( "INITIAL_PART" );
 static const std::string flag_WIRING( "WIRING" );
 
 static bool finalized = false;
@@ -462,6 +464,8 @@ static shared_ptr_fast<game::draw_callback_t> construction_preview_callback(
     } );
 }
 
+static std::string has_pre_flags_colorize( const construction &con );
+
 construction_id construction_menu( const bool blueprint )
 {
     if( !finalized ) {
@@ -678,8 +682,12 @@ construction_id construction_menu( const bool blueprint )
                     } else {
                         require_string = ter_str_id( current_con->pre_terrain )->name();
                     }
+                    //TODO: per-requirement colorizing like has_pre_flags_colorize
                     nc_color pre_color = has_pre_terrain( *current_con ) ? c_green : c_red;
                     add_line( _( "Requires: " ) + colorize( require_string, pre_color ) );
+                }
+                if( !current_con->pre_flags.empty() ) {
+                    add_line( string_format( _( "Required conditions: %s" ), has_pre_flags_colorize( *current_con ) ) );
                 }
                 if( !current_con->pre_note.empty() ) {
                     add_line( _( "Annotation: " ) + colorize( current_con->pre_note, color_data ) );
@@ -1134,13 +1142,83 @@ bool player_can_see_to_build( Character &you, const construction_group_str_id &g
     return false;
 }
 
-bool can_construct_furn_ter( const construction &con, furn_id const &f, ter_id const &t )
+bool has_pre_flags( const construction &con, furn_id const &f, ter_id const &t )
 {
     return std::all_of( con.pre_flags.begin(), con.pre_flags.end(), [&f, &t]( auto const & flag ) {
         const bool use_ter = flag.second || f == furn_str_id::NULL_ID();
         return ( use_ter || f->has_flag( flag.first ) ) &&
                ( !use_ter || t->has_flag( flag.first ) );
     } );
+}
+
+// static bool has_pre_flags( const construction &con, const tripoint_bub_ms &p )
+// {
+//     if( con.pre_flags.empty() ) {
+//         return true;
+//     }
+//     const map &here = get_map();
+//     furn_id f = here.furn( p );
+//     ter_id t = here.ter( p );
+//     return has_pre_flags( con, f, t );
+// }
+
+// static bool has_pre_flags( const construction &con )
+// {
+//     if( con.pre_flags.empty() ) {
+//         return true;
+//     }
+//     const tripoint_bub_ms &avatar_pos = get_player_character().pos_bub();
+//     for( const tripoint_bub_ms &p : get_map().points_in_radius( avatar_pos, 1 ) ) {
+//         if( p != avatar_pos && has_pre_flags( con, p ) ) {
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+
+// Returns a colorized list of pre_flags, red for unmatched flags, green for matched flags.
+static std::string has_pre_flags_colorize( const construction &con )
+{
+    if( con.pre_flags.empty() ) {
+        return "";
+    }
+
+    std::vector<std::string> flags_colorized;
+
+    const map &here = get_map();
+
+    const tripoint_bub_ms &avatar_pos = get_player_character().pos_bub();
+    const auto points = get_map().points_in_radius( avatar_pos, 1 );
+    // which of the surrounding points have all the necessary flags
+    std::vector<bool> good_points( 9, true );
+    // can't build in the player's location
+    good_points[4] = false;
+    for( const auto &flag : con.pre_flags ) {
+        bool has_flag = false;
+        size_t index = 0;
+        for( const auto &p : points ) {
+            if( p != avatar_pos ) {
+                const furn_id &f = here.furn( p );
+                const ter_id &t = here.ter( p );
+                const bool use_ter = flag.second || f == furn_str_id::NULL_ID();
+                has_flag = ( use_ter || f->has_flag( flag.first ) ) && ( !use_ter || t->has_flag( flag.first ) );
+                if( !has_flag ) {
+                    good_points[ index ] = false;
+                }
+            }
+            index++;
+        }
+        const nc_color color = has_flag ? c_green : c_red;
+        flags_colorized.emplace_back( colorize( flag_id( flag.first )->name(), color ) );
+    }
+    // It's possible that each flag is green because some adjacent location has it
+    // but no single location has every flag. That is represented here by coloring
+    // the commas and conjunction red.
+    const bool has_good_point = std::any_of( good_points.begin(), good_points.end(), []( bool a ) {
+        return a;
+    } );
+    const nc_color color = has_good_point ? c_green : c_red;
+    return colorize( enumerate_as_string( flags_colorized ), color );
 }
 
 bool can_construct( const construction &con, const tripoint_bub_ms &p )
@@ -1158,7 +1236,7 @@ bool can_construct( const construction &con, const tripoint_bub_ms &p )
         return false;
     }
     if( !has_pre_terrain( con, p ) || // terrain type
-        !can_construct_furn_ter( con, f, t ) ) { // flags
+        !has_pre_flags( con, f, t ) ) { // flags
         return false;
     }
     if( !con.post_terrain.empty() ) { // make sure the construction would actually do something
@@ -1673,7 +1751,7 @@ void construct::done_grave( const tripoint_bub_ms &p, Character &player_characte
 static vpart_id vpart_from_item( const itype_id &item_id )
 {
     for( const vpart_info &vpi : vehicles::parts::get_all() ) {
-        if( vpi.base_item == item_id && vpi.has_flag( flag_INITIAL_PART ) ) {
+        if( vpi.base_item == item_id && vpi.has_flag( flag_INITIAL_PART.str() ) ) {
             return vpi.id;
         }
     }
@@ -1693,7 +1771,7 @@ void construct::done_vehicle( const tripoint_bub_ms &p, Character & )
 {
     std::string name = string_input_popup()
                        .title( _( "Enter new vehicle name:" ) )
-                       .width( 20 )
+                       .width( 60 )
                        .query_string();
     if( name.empty() ) {
         name = _( "Car" );
@@ -1854,7 +1932,7 @@ void construct::done_deconstruct( const tripoint_bub_ms &p, Character &player_ch
 static void unroll_digging( const int numer_of_2x4s )
 {
     // refund components!
-    item rope( "rope_30" );
+    item rope( itype_rope_30 );
     map &here = get_map();
     tripoint_bub_ms avatar_pos = get_player_character().pos_bub();
     here.add_item_or_charges( avatar_pos, rope );
@@ -2264,14 +2342,8 @@ void load_construction( const JsonObject &jo )
         con.post_is_furniture = true;
     }
 
-    std::string activity_level = jo.get_string( "activity_level", "MODERATE_EXERCISE" );
-    const auto activity_it = activity_levels_map.find( activity_level );
-    if( activity_it != activity_levels_map.end() ) {
-        con.activity_level = activity_it->second;
-    } else {
-        jo.throw_error( string_format( "Invalid activity level %s in construction %s", activity_level,
-                                       con.str_id.str() ) );
-    }
+    optional( jo, false/*con.was_loaded*/, "activity_level", con.activity_level,
+              activity_level_reader{}, MODERATE_EXERCISE );
 
     if( jo.has_member( "pre_flags" ) ) {
         con.pre_flags.clear();
@@ -2500,7 +2572,7 @@ void finalize_constructions()
 {
     std::vector<item_comp> frame_items;
     for( const vpart_info &vpi : vehicles::parts::get_all() ) {
-        if( !vpi.has_flag( flag_INITIAL_PART ) ) {
+        if( !vpi.has_flag( flag_INITIAL_PART.str() ) ) {
             continue;
         }
         if( vpi.id == vpart_frame ) {

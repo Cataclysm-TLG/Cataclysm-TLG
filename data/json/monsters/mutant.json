@@ -358,7 +358,7 @@
     "stomach_size": 1100,
     "harvest": "mutant_human",
     "dissect": "dissect_gastropod_sample_large",
-    "delete": { "flags": [ "HIT_AND_RUN" ], "fear_triggers": [ "FIRE" ] },
+    "delete": { "fear_triggers": [ "FIRE" ] },
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF", "NOHEAD", "STUN_IMMUNE", "PATH_AVOID_FIRE" ] },
     "armor": { "bash": 22, "cut": 45, "stab": 30, "heat": 8, "bullet": 70, "electric": 6, "acid": 3 }
   }

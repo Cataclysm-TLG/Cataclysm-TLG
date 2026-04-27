@@ -850,7 +850,7 @@
       "offer": "I've got an idea to solve my problem.  I'll pay you if you can find seven oxycodone pills for me; the ones they used to prescribe after a surgery.",
       "accepted": "Thank you, <granny_name_g>.  I'm glad the youngsters still help the elderly.",
       "rejected": "I can understand your hesitation <granny_name_g>.  I wouldn't worry about it too much.",
-      "advice": "An old doctors office should have some.  They have those fancy autodocs upstairs.",
+      "advice": "An old doctor's office should have some.  Some of them have those fancy autodocs upstairs.",
       "inquire": "Have you found my painkillers?",
       "success": "I want you to have these few things of mine, I won't be needing them anymore.  I think I'll take a walk in the woods, get some fresh air for these old bones…",
       "success_lie": "Deceitful rogue, you…",
@@ -1330,29 +1330,6 @@
       "success": "This should be very useful to us.  Now we can truly begin our march of righteousness.",
       "success_lie": "If you see this, it's a bug.",
       "failure": "As expected of such a person…"
-    }
-  },
-  {
-    "id": "MISSION_INVESTIGATE_TRADER",
-    "type": "mission_definition",
-    "name": { "str": "Investigate the Trader" },
-    "description": "Find some proof that the representative near the New England Community Church is crooked.",
-    "goal": "MGOAL_CONDITION",
-    "difficulty": 1,
-    "goal_condition": { "math": [ "freemerch_godco_trader_investigated", "==", "1" ] },
-    "value": 0,
-    "origins": [ "ORIGIN_SECONDARY" ],
-    "has_generic_rewards": false,
-    "dialogue": {
-      "describe": "Find some proof about that merchant.",
-      "offer": "If you see this, it's a bug.",
-      "accepted": "If you see this, it's a bug.",
-      "rejected": "If you see this, it's a bug.",
-      "advice": "If you see this, it's a bug.",
-      "inquire": "What have you found out?",
-      "success": "Thanks, we'll take the needed initiative.",
-      "success_lie": "If you see this, it's a bug.",
-      "failure": "Of course, you have no evidence."
     }
   },
   {

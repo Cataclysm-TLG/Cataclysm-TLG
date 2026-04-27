@@ -1087,7 +1087,6 @@
       "msg": "You adjust your mail for a closer fit.",
       "target": "chainmail_junk_vest",
       "menu_text": "Tighten"
-    },
-    "delete": { "flags": [ "STURDY" ] }
+    }
   }
 ]

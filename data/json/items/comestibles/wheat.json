@@ -17,7 +17,7 @@
     "material": [ "wheat" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "calcium", 5 ], [ "iron", 34 ], [ "wheat_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 5 ], [ "iron", 34 ] ],
     "fun": -1
   },
   {
@@ -139,42 +139,21 @@
     "symbol": "%",
     "quench": -1,
     "calories": 45,
-    "description": "This enriched white flour is useful for baking.",
+    "description": "A fine powder made of ground wheat.  It's great for baking, not so good raw.",
     "price": "45 cent",
     "price_postapoc": "10 cent",
     "material": [ "wheat", "powder" ],
     "volume": "24 ml",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
     "vitamins": [ [ "iron", 3 ], [ "wheat_allergen", 1 ] ],
-    "fun": -5
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
-    "id": "bread_flour",
-    "name": { "str_sp": "bread flour" },
-    "weight": "60 g",
-    "color": "white",
-    "spoils_in": "360 days",
-    "container": "bag_paper_powder",
-    "comestible_type": "FOOD",
-    "symbol": "%",
-    "quench": -1,
-    "calories": 55,
-    "description": "This white flour is useful for adding more stretch and chew to bread while baking.",
-    "price": "10 cent",
-    "price_postapoc": "4 cent",
-    "material": [ "wheat", "powder" ],
-    "volume": "120 ml",
-    "flags": [ "EDIBLE_FROZEN", "RAW" ],
-    "vitamins": [ [ "iron", 4 ], [ "wheat_allergen", 1 ] ],
-    "fun": -5
+    "fun": -5,
+    "contamination": [ { "disease": "highly_contaminated_food", "probability": 0.1 }, { "disease": "bad_food", "probability": 1 } ]
   },
   {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "oatmeal",
-    "name": { "str_sp": "oatmeal" },
+    "name": { "str_sp": "instant oatmeal" },
     "weight": "35 g",
     "color": "light_gray",
     "spoils_in": "360 days",
@@ -183,15 +162,37 @@
     "symbol": "%",
     "quench": -15,
     "calories": 131,
-    "description": "Dry flakes of flattened grain.  Tasty and nutritious when cooked, it also doubles as food for horses while dry.",
+    "description": "Dry flakes of flattened grain.  Tasty and nutritious when cooked, they are ideal for making porridge or granola.",
     "price": "87 cent",
     "price_postapoc": "12 cent",
     "material": [ "wheat" ],
     "volume": "125 ml",
     "cooks_like": "oatmeal_cooked",
     "flags": [ "EDIBLE_FROZEN", "NUTRIENT_OVERRIDE", "RAW" ],
-    "vitamins": [ [ "calcium", 1 ], [ "iron", 10 ], [ "wheat_allergen", 1 ] ],
-    "fun": -8
+    "vitamins": [ [ "calcium", 1 ], [ "iron", 10 ] ],
+    "fun": -3
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "id": "oatmeal_coarse",
+    "name": { "str_sp": "coarse oatmeal" },
+    "weight": "35 g",
+    "color": "light_gray",
+    "spoils_in": "120 days",
+    "container": "box_small",
+    "comestible_type": "FOOD",
+    "symbol": "%",
+    "quench": -15,
+    "calories": 131,
+    "description": "Dry oats, ground coarsely in preparation for making porridge.  Unlike instant oats, these are not pre-steamed, meaning they aren't ready for human consumption and will take quite some time to cook.",
+    "price": "87 cent",
+    "price_postapoc": "12 cent",
+    "material": [ "wheat" ],
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN", "NUTRIENT_OVERRIDE", "RAW", "INEDIBLE", "BIRD", "CATTLE" ],
+    "vitamins": [ [ "calcium", 1 ], [ "iron", 10 ] ],
+    "fun": -3
   },
   {
     "type": "ITEM",
@@ -213,7 +214,7 @@
     "volume": "250 ml",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
     "fun": 2,
-    "vitamins": [ [ "calcium", 1 ], [ "iron", 10 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 1 ], [ "iron", 10 ] ]
   },
   {
     "type": "ITEM",
@@ -235,7 +236,7 @@
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 3,
-    "vitamins": [ [ "vitC", 30 ], [ "calcium", 1 ], [ "iron", 10 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 30 ], [ "calcium", 1 ], [ "iron", 10 ] ]
   },
   {
     "type": "ITEM",
@@ -257,7 +258,7 @@
     "material": [ "wheat" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
-    "vitamins": [ [ "iron", 2 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "iron", 2 ] ]
   },
   {
     "type": "ITEM",
@@ -279,7 +280,7 @@
     "material": [ "wheat" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
-    "vitamins": [ [ "iron", 7 ], [ "vitC", 7 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "iron", 7 ], [ "vitC", 7 ] ]
   },
   {
     "type": "ITEM",
@@ -517,7 +518,7 @@
     "primary_material": "wheat",
     "volume": "62 ml",
     "flags": [ "EDIBLE_FROZEN" ],
-    "vitamins": [ [ "calcium", 2 ], [ "iron", 7 ], [ "wheat_allergen", 1 ], [ "fruit_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 7 ], [ "fruit_allergen", 1 ] ],
     "fun": 3
   },
   {
@@ -632,12 +633,22 @@
     "id": "space_cake",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "FOOD",
     "name": { "str": "space cake" },
-    "copy-from": "sponge_cake",
-    "price_postapoc": "5 USD",
     "description": "This cake's destiny is to take you on a gnarly trip.",
-    "fun": 12,
-    "use_action": [ "WEED_CAKE" ]
+    "container": "box_small",
+    "weight": "68 g",
+    "volume": "187 ml",
+    "price": "1250 cent",
+    "price_postapoc": "4 USD",
+    "material": [ "wheat", "egg" ],
+    "symbol": "%",
+    "color": "brown",
+    "calories": 278,
+    "fun": 18,
+    "spoils_in": "17 days",
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 5 ], [ "wheat_allergen", 1 ], [ "egg_allergen", 1 ], [ "cannabis", 10 ] ],
+    "flags": [ "EATEN_HOT" ]
   },
   {
     "id": "brownie",
@@ -655,11 +666,21 @@
     "id": "brownie_weed",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "FOOD",
     "name": { "str": "'special' brownie" },
-    "copy-from": "brownie",
     "description": "This is definitely not how grandma used to bake them.",
-    "price_postapoc": "5 USD",
-    "fun": 15,
-    "use_action": [ "WEED_CAKE" ]
+    "container": "box_small",
+    "weight": "68 g",
+    "volume": "187 ml",
+    "price": "1250 cent",
+    "price_postapoc": "4 USD",
+    "material": [ "wheat", "egg" ],
+    "symbol": "%",
+    "color": "brown",
+    "calories": 278,
+    "fun": 18,
+    "spoils_in": "17 days",
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 5 ], [ "wheat_allergen", 1 ], [ "egg_allergen", 1 ], [ "cannabis", 10 ] ],
+    "flags": [ "EATEN_HOT" ]
   }
 ]

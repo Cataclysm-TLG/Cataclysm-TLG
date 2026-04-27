@@ -109,6 +109,12 @@
   },
   {
     "type": "ammunition_type",
+    "id": "gravel",
+    "name": "gravel",
+    "default": "material_gravel"
+  },
+  {
+    "type": "ammunition_type",
     "id": "pebble",
     "name": "pebbles",
     "default": "pebble"
@@ -352,6 +358,12 @@
     "id": "sling-ready_grenade",
     "name": "sling-ready grenades",
     "default": "sling-ready_molotov"
+  },
+  {
+    "type": "ammunition_type",
+    "id": "feral_molotov",
+    "name": "molotov cocktail",
+    "default": "feral_molotov"
   },
   {
     "type": "ammunition_type",

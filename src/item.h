@@ -28,6 +28,7 @@
 #include "item_contents.h"
 #include "item_location.h"
 #include "item_tname.h"
+#include "item_uid.h"
 #include "material.h"
 #include "math_parser_diag_value.h"
 #include "point.h"
@@ -228,18 +229,17 @@ class item : public visitable
         /** For constructing in-progress disassemblies */
         item( const recipe *rec, int qty, item &component );
 
-        // Legacy constructor for constructing from string rather than itype_id
-        // TODO: remove this and migrate code using it.
-        template<typename... Args>
-        explicit item( const std::string &itype, Args &&... args ) :
-            item( itype_id( itype ), std::forward<Args>( args )... )
-        {}
-
         ~item() override;
 
         /** Return a pointer-like type that's automatically invalidated if this
          * item is destroyed or assigned-to */
         safe_reference<item> get_safe_reference();
+
+        /** Persistent unique identifier for this item instance.
+         * Returns const ref to avoid triggering item_uid's copy-generates-new semantics. */
+        const item_uid &uid() const {
+            return uid_;
+        }
 
         /**
          * Filter converting this instance to another type preserving all other aspects
@@ -882,6 +882,8 @@ class item : public visitable
         std::vector<item_pocket *> get_all_standard_pockets();
         std::vector<item_pocket *> get_all_ablative_pockets();
         std::vector<const item_pocket *> get_all_ablative_pockets() const;
+        std::vector<const item_pocket *> get_all_contained_and_mod_pockets() const;
+        std::vector<item_pocket *> get_all_contained_and_mod_pockets();
         /**
          * Updates the pockets of this item to be correct based on the mods that are installed.
          * Pockets which are modified that contain an item will be spilled
@@ -1041,6 +1043,14 @@ class item : public visitable
          * @param strict_boiling True if containers must be empty to have BOIL quality
          */
         int get_quality( const quality_id &id, bool strict_boiling = true ) const;
+        /**
+         * Speed modifier for a quality this item provides at >= level.
+         * Mirrors get_quality() resolution: inherent, charged (if crafter provided),
+         * BOIL special case, contained items.
+         * Returns 1.0f if item doesn't qualify or has no speed modifier.
+         */
+        float get_quality_speed( const quality_id &id, int level,
+                                 const Character *crafter = nullptr ) const;
 
         /**
          * Return true if this item's type is counted by charges
@@ -1934,6 +1944,7 @@ class item : public visitable
          */
         void on_contents_changed();
 
+        bool can_use_relic( const Character &guy ) const;
         bool use_relic( Character &guy, const tripoint_bub_ms &pos );
         bool has_relic_recharge() const;
         bool has_relic_activation() const;
@@ -1969,6 +1980,7 @@ class item : public visitable
          * already used somewhere.
          */
         /*@{*/
+        //TODO: Add a set_var( const std::string &name, const cata_variant &id ) overload rather than using raw strings where appropriate
         double get_var( const std::string &key, double default_value ) const;
         std::string get_var( const std::string &key, std::string default_value = {} ) const;
         tripoint_abs_ms get_var( const std::string &key, tripoint_abs_ms default_value ) const;
@@ -1982,7 +1994,6 @@ class item : public visitable
         void remove_var( const std::string &key );
         diag_value const &get_value( const std::string &name ) const;
         diag_value const *maybe_get_value( const std::string &name ) const;
-        /** Whether the variable is defined at all. */
         bool has_var( const std::string &name ) const;
         /** Erase the value of the given variable. */
         void erase_var( const std::string &name );
@@ -2146,11 +2157,6 @@ class item : public visitable
          * Whether this is actually a seed, the seed functions won't be of much use for non-seeds.
          */
         bool is_seed() const;
-        /**
-         * Time it takes to grow from one stage to another. There are normally 4 plant stages:
-         * seed, seedling, mature and harvest. Non-seed items return 0.
-         */
-        time_duration get_plant_epoch( int num_epochs = 3 ) const;
         /**
          * The name of the plant as it appears in the various informational menus. This should be
          * translated. Returns an empty string for non-seed items.
@@ -2765,6 +2771,12 @@ class item : public visitable
         int gun_range( bool with_ammo = true ) const;
 
         /**
+         * Ratio (percent given as an int) of gun length to character height minus a 75% allowance.
+         * Creates problems if it's above 75%. At 125% (50% awkwardness) the weapon becomes unusable.
+         */
+        int gun_awkwardness( const Character &p ) const;
+
+        /**
          *  Get effective recoil considering handling, loaded ammo and effects of attached gunmods
          *  @param p player stats such as STR can alter effective recoil
          *  @param bipod whether any bipods should be considered
@@ -3003,6 +3015,14 @@ class item : public visitable
         bool has_tools_to_continue() const;
         void set_cached_tool_selections( const std::vector<comp_selection<tool_comp>> &selections );
         const std::vector<comp_selection<tool_comp>> &get_cached_tool_selections() const;
+
+        // Step iteration state for step recipes.
+        // get_current_step clamps to valid range as a defensive measure.
+        int get_current_step() const;
+        void set_current_step( int step );
+        double get_step_progress() const;
+        void set_step_progress( double progress );
+        void mod_step_progress( double delta );
 
         std::vector<enchant_cache> get_proc_enchantments() const;
         std::vector<enchantment> get_defined_enchantments() const;
@@ -3262,6 +3282,11 @@ class item : public visitable
                 std::optional<units::mass> cached_weight; // NOLINT(cata-serialize)
                 std::optional<units::volume> cached_volume; // NOLINT(cata-serialize)
 
+                // Step iteration state for step recipes.
+                // Authoritative: advanced by tracking consumed work against step budgets.
+                int current_step = 0;
+                double step_progress = 0.0; // base-speed moves consumed within current step
+
                 // if this is an in progress disassembly as opposed to craft
                 bool disassembly = false;
                 void serialize( JsonOut &jsout ) const;
@@ -3323,6 +3348,7 @@ class item : public visitable
         time_point last_temp_check = calendar::turn_zero;
         /// The time the item was created.
         time_point bday;
+        item_uid uid_; // persistent unique identifier, survives save/load
         /**
          * Current phase state, inherits a default at room temperature from
          * itype and can be changed through item processing.  This is a static

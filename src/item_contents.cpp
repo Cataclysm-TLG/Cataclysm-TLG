@@ -477,6 +477,19 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
             }
         }
         return true;
+    } else if( action == "FAV_WHITELIST_CONTENTS" ) {
+        const cata::flat_set<itype_id> whitelisted_items = selected_pocket->settings.get_item_whitelist();
+        bool modified = false;
+        for( item *item : selected_pocket->all_items_top() ) {
+            if( whitelisted_items.find( item->typeId() ) == whitelisted_items.end() ) {
+                selected_pocket->settings.whitelist_item( item->typeId() );
+                modified = true;
+            }
+        }
+        if( modified ) {
+            selected_pocket->settings.set_was_edited();
+        }
+        return true;
     } else if( action == "FAV_CLEAR" ) {
         if( query_yn( _( "Are you sure you want to clear settings for pocket %d?" ), pocket_num ) ) {
             selected_pocket->settings.clear();
@@ -507,7 +520,10 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
                         ctxt.get_action_name( "FAV_APPLY_PRESET" ) );
         cmenu.addentry( 10, true, inp_mngr.get_first_char_for_action( "FAV_DEL_PRESET", "INVENTORY" ),
                         ctxt.get_action_name( "FAV_DEL_PRESET" ) );
-        cmenu.addentry( 11, true, inp_mngr.get_first_char_for_action( "FAV_CLEAR", "INVENTORY" ),
+        cmenu.addentry( 11, true, inp_mngr.get_first_char_for_action( "FAV_WHITELIST_CONTENTS",
+                        "INVENTORY" ),
+                        ctxt.get_action_name( "FAV_WHITELIST_CONTENTS" ) );
+        cmenu.addentry( 12, true, inp_mngr.get_first_char_for_action( "FAV_CLEAR", "INVENTORY" ),
                         ctxt.get_action_name( "FAV_CLEAR" ) );
         cmenu.query();
 
@@ -547,6 +563,9 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
                 ev = "FAV_DEL_PRESET";
                 break;
             case 11:
+                ev = "FAV_WHITELIST_CONTENTS";
+                break;
+            case 12:
                 ev = "FAV_CLEAR";
                 break;
             default:
@@ -554,7 +573,7 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
 
         }
         const std::vector<input_event> evlist = inp_mngr.get_input_for_action( ev, "INVENTORY" );
-        if( cmenu.ret >= 0 && cmenu.ret <= 11 && !evlist.empty() ) {
+        if( cmenu.ret >= 0 && cmenu.ret <= 12 && !evlist.empty() ) {
             return key( ctxt, evlist.front(), -1, menu );
         }
         return true;
@@ -2148,6 +2167,20 @@ std::vector<item_pocket *> item_contents::get_all_ablative_pockets()
     } );
 }
 
+std::vector<const item_pocket *> item_contents::get_all_contained_and_mod_pockets() const
+{
+    return get_pockets( []( item_pocket const & pocket ) {
+        return pocket.is_type( pocket_type::CONTAINER ) || pocket.is_type( pocket_type::MOD );
+    } );
+}
+
+std::vector<item_pocket *> item_contents::get_all_contained_and_mod_pockets()
+{
+    return get_pockets( []( item_pocket const & pocket ) {
+        return pocket.is_type( pocket_type::CONTAINER ) || pocket.is_type( pocket_type::MOD );
+    } );
+}
+
 std::vector<const item *> item_contents::get_added_pockets() const
 {
     std::vector<const item *> items_added;
@@ -2543,7 +2576,7 @@ void item_contents::process( map &here, Character *carrier, const tripoint_bub_m
                              temperature_flag flag, float spoil_multiplier_parent, bool watertight_container )
 {
     for( item_pocket &pocket : contents ) {
-        if( pocket.is_type( pocket_type::CONTAINER ) ) {
+        if( pocket.is_type( pocket_type::CONTAINER ) || pocket.is_type( pocket_type::MOD ) ) {
             pocket.process( here, carrier, pos, insulation, flag, spoil_multiplier_parent,
                             watertight_container );
         }
@@ -2700,7 +2733,6 @@ void item_contents::info( std::vector<iteminfo> &info, const iteminfo_query *par
     if( parts->test( iteminfo_parts::DESCRIPTION_POCKETS ) ) {
         // start by saying what items are attached to this directly
         if( !additional_pockets.empty() ) {
-            insert_separation_line( info );
             info.emplace_back( "CONTAINER", _( "<bold>This item incorporates</bold>:" ) );
             for( const item &it : additional_pockets ) {
                 info.emplace_back( "CONTAINER", string_format( _( "%s." ),
@@ -2803,7 +2835,8 @@ void pocket_management_menu( const std::string &title, const std::vector<item *>
         { "FAV_CONTEXT_MENU", translation() },
         { "FAV_SAVE_PRESET", translation() },
         { "FAV_APPLY_PRESET", translation() },
-        { "FAV_DEL_PRESET", translation() }
+        { "FAV_DEL_PRESET", translation() },
+        { "FAV_WHITELIST_CONTENTS", translation() }
     };
     // Override CONFIRM with FAV_CONTEXT_MENU
     pocket_selector.allow_confirm = false;

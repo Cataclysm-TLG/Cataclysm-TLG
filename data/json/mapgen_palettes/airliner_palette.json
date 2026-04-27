@@ -19,8 +19,8 @@
       "Z": "t_metal_floor",
       "+": "t_door_metal_c",
       "D": "t_door_metal_locked",
-      "g": "t_reinforced_glass",
-      "s": "t_reinforced_glass_shutter",
+      "g": "t_laminated_glass",
+      "s": "t_laminated_glass_shutter",
       ">": "t_slope_down",
       "<": "t_slope_up"
     },

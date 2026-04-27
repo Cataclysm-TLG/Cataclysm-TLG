@@ -86,6 +86,8 @@ static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 static const flag_id json_flag_PIT( "PIT" );
 
+static const itype_id itype_gasoline( "gasoline" );
+static const itype_id itype_napalm( "napalm" );
 static const itype_id itype_pressurized_tank( "pressurized_tank" );
 
 static const material_id material_iflesh( "iflesh" );
@@ -168,7 +170,8 @@ bool monster::will_move_to( map *here, const tripoint_bub_ms &p ) const
     }
 
     if( has_flag( mon_flag_AQUATIC ) && (
-            !here->has_flag( ter_furn_flag::TFLAG_SWIMMABLE, p ) ||
+            !( here->has_flag( ter_furn_flag::TFLAG_SWIMMABLE, p ) ||
+               here->has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, p ) ) ||
             // AQUATIC (confined to water) monster avoid vehicles, unless they are already underneath one
             ( here->veh_at( p ) && !here->veh_at( pos_bub() ) )
         ) ) {
@@ -930,7 +933,7 @@ void monster::move()
         return;
     }
 
-    if( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) ||
+    if( has_flag( mon_flag_IMMOBILE ) ||
         has_flag( json_flag_CANNOT_MOVE ) ) {
         moves = 0;
         return;
@@ -1003,7 +1006,8 @@ void monster::move()
     bool try_to_move = false;
     creature_tracker &creatures = get_creature_tracker();
 
-    for( const tripoint_bub_ms &dest : here.points_in_radius( pos_bub(), 1 ) ) {
+    // Check z-level neighbors too so creatures on stairs aren't falsely stuck
+    for( const tripoint_bub_ms &dest : here.points_in_radius( pos_bub(), 1, 1 ) ) {
         if( dest != pos_bub() ) {
             if( can_move_to( dest ) && can_squeeze_to( dest ) &&
                 creatures.creature_at( dest, true ) == nullptr ) {
@@ -1127,7 +1131,8 @@ void monster::move()
         // This is a float and using trig_dist() because that Does the Right Thing(tm)
         // in both circular and roguelike distance modes.
         const float distance_to_target = trig_dist( pos_bub(), destination );
-        for( tripoint_bub_ms &candidate : squares_closer_to( pos_bub(), destination ) ) {
+        tripoint_bub_ms loc = pos_bub();
+        for( tripoint_bub_ms &candidate : squares_closer_to( loc, destination ) ) {
             // rare scenario when monster is on the border of the map and it's goal is outside of the map
             if( !here.inbounds( candidate ) ) {
                 continue;
@@ -1154,8 +1159,13 @@ void monster::move()
                 }
 
                 // If we're trying to go up but can't fly, check if we can climb. If we can't, then don't
-                // This prevents non-climb/fly enemies running up walls
-                if( candidate.z() > pos_abs().z() && !( via_ramp || flies() ) ) {
+                // This prevents non-climb/fly enemies running up walls.
+                // Regular stairs (GOES_UP without DIFFICULT_Z) are traversable by any creature,
+                // consistent with can_reach_to(). Ladders, ropes, and scaffolding (DIFFICULT_Z)
+                // still require climbing ability.
+                if( candidate.z() > pos_abs().z() && !( via_ramp || flies() ) &&
+                    !( here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos_bub() ) &&
+                       !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos_bub() ) ) ) {
                     if( !can_climb() || !here.has_floor_or_support( candidate ) ) {
                         if( !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ||
                             !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, candidate ) ) {
@@ -1555,36 +1565,42 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
         movecost = 100;
         // Swimming monsters move super fast in water
     } else if( swims() ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( f );
         }
-        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( t );
         }
     } else if( can_submerge() ) {
         // No-breathe monsters have to walk underwater slowly
-        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( f );
         }
-        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( t );
         }
         movecost /= 2;
     } else if( climbs() ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, f ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, f ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 150;
         } else {
             movecost += 50 * here.move_cost( f );
         }
-        if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, t ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, t ) ||
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 150;
         } else {
             movecost += 50 * here.move_cost( t );
@@ -1753,6 +1769,17 @@ int monster::group_bash_skill( const tripoint_bub_ms &target )
 bool monster::attack_at( const tripoint_bub_ms &p )
 {
     const map &here = get_map();
+
+    // Aquatic monsters that are underwater should not be able to attack
+    // through the surface above them, except they may attack other monsters
+    // that are also underwater (fish fighting under the ice).
+    if( is_underwater() && here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, pos_bub() ) ) {
+        creature_tracker &creatures = get_creature_tracker();
+        monster *target_mon = creatures.creature_at<monster>( p );
+        if( !( target_mon != nullptr && target_mon->is_underwater() ) ) {
+            return false;
+        }
+    }
 
     if( has_flag( mon_flag_PACIFIST ) || has_flag( json_flag_CANNOT_ATTACK ) ) {
         return false;
@@ -1926,8 +1953,14 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     bool will_be_water =
         on_ground && (
             // AQUATIC monsters always "swim under" the vehicles, while other swimming monsters are forced to surface
-            has_flag( mon_flag_AQUATIC ) || ( can_submerge() && !here.veh_at( destination ) )
-        ) && here.is_divable( destination );
+            has_flag( mon_flag_AQUATIC ) || ( can_submerge() && !here.veh_at( destination ) ) ||
+            // If the destination terrain has SWIM_UNDER, swimmers should remain submerged there.
+            ( swims() && here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) )
+        ) && ( here.is_divable( destination ) ||
+               here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) ||
+               // AQUATIC creatures stay submerged in any swimmable terrain (including shallow water)
+               ( has_flag( mon_flag_AQUATIC ) &&
+                 here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, destination ) ) );
 
     if( get_option<bool>( "LOG_MONSTER_MOVEMENT" ) ) {
         // Birds and other flying creatures flying over the deep water terrain
@@ -1997,6 +2030,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
             const int rough_damage = rng( 1, 2 );
             if( here.has_flag( ter_furn_flag::TFLAG_SHARP, pos ) && !one_in( 4 ) &&
                 get_armor_type( damage_cut, bodypart_id( "torso" ) ) < sharp_damage && get_hp() > sharp_damage ) {
+                here.bash( pos, sharp_damage ); // Moving through a sharp terrain also smashes the terrain, weakly.
                 apply_damage( nullptr, bodypart_id( "torso" ), sharp_damage );
             }
             if( here.has_flag( ter_furn_flag::TFLAG_ROUGH, pos ) && one_in( 6 ) &&
@@ -2077,7 +2111,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
             if( one_in( 10 ) ) {
                 // if it has more napalm, drop some and reduce ammo in tank
                 if( ammo[itype_pressurized_tank] > 0 ) {
-                    here.add_item_or_charges( pos, item( "napalm", calendar::turn, 50 ) );
+                    here.add_item_or_charges( pos_bub(), item( itype_napalm, calendar::turn, 50 ) );
                     ammo[itype_pressurized_tank] -= 50;
                 } else {
                     // TODO: remove mon_flag_DRIPS_NAPALM flag since no more napalm in tank
@@ -2088,7 +2122,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
         if( has_flag( mon_flag_DRIPS_GASOLINE ) ) {
             if( one_in( 5 ) ) {
                 // TODO: use same idea that limits napalm dripping
-                here.add_item_or_charges( pos, item( "gasoline" ) );
+                here.add_item_or_charges( pos_bub(), item( itype_gasoline ) );
             }
         }
     }
@@ -2379,7 +2413,7 @@ bool monster::will_reach( const point_bub_ms &p )
         return false;
     }
 
-    if( ( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) ||
+    if( ( has_flag( mon_flag_IMMOBILE ) ||
           has_flag( json_flag_CANNOT_MOVE ) ) &&
         ( pos_bub().xy() != p ) ) {
         return false;

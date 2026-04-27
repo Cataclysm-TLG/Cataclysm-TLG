@@ -114,7 +114,10 @@ static const itype_id fuel_type_muscle( "muscle" );
 static const itype_id fuel_type_plutonium_cell( "plut_cell" );
 static const itype_id fuel_type_wind( "wind" );
 static const itype_id itype_battery( "battery" );
+static const itype_id itype_generic_folded_vehicle( "generic_folded_vehicle" );
 static const itype_id itype_plut_cell( "plut_cell" );
+static const itype_id itype_plut_slurry_dense( "plut_slurry_dense" );
+static const itype_id itype_seed_buckwheat( "seed_buckwheat" );
 static const itype_id itype_wall_wiring( "wall_wiring" );
 static const itype_id itype_water( "water" );
 static const itype_id itype_water_clean( "water_clean" );
@@ -1582,14 +1585,6 @@ void vehicle::add_effect( const effect_source &source, const efftype_id &eff_id,
         effect &e = found_effect->second;
         // If we do, mod the duration, factoring in the mod value
         e.mod_duration( dur * e.get_dur_add_perc() / 100 );
-        // Limit to max duration
-        if( e.get_duration() > e.get_max_duration() ) {
-            e.set_duration( e.get_max_duration() );
-        }
-        // Adding a permanent effect makes it permanent
-        if( e.is_permanent() ) {
-            e.pause_effect();
-        }
     }
 
     if( !found ) {
@@ -1598,23 +1593,7 @@ void vehicle::add_effect( const effect_source &source, const efftype_id &eff_id,
         // Now we can make the new effect for application
         effect e( effect_source( source ), &type, dur, bodypart_str_id::NULL_ID(), permanent, intensity,
                   calendar::turn );
-        // Bound to max duration
-        if( e.get_duration() > e.get_max_duration() ) {
-            e.set_duration( e.get_max_duration() );
-        }
 
-        // Force intensity if it is duration based
-        if( e.get_int_dur_factor() != 0_turns ) {
-            const int intensity = std::ceil( e.get_duration() / e.get_int_dur_factor() );
-            e.set_intensity( std::max( 1, intensity ) );
-        }
-        // Bound new effect intensity by [1, max intensity]
-        if( e.get_intensity() < 1 ) {
-            add_msg_debug( debugmode::DF_CREATURE, "Bad intensity, ID: %s", e.get_id().c_str() );
-            e.set_intensity( 1 );
-        } else if( e.get_intensity() > e.get_max_intensity() ) {
-            e.set_intensity( e.get_max_intensity() );
-        }
         effects[eff_id] = e;
     }
 }
@@ -4009,7 +3988,8 @@ int64_t vehicle::fuel_left( map &here, const itype_id &ftype,
         if( part.ammo_current() != ftype ||
             // don't count frozen liquid
             ( !part.base.empty() && part.is_tank() &&
-              part.base.legacy_front().made_of( phase_id::SOLID ) ) || !filter( part ) ) {
+              part.base.legacy_front().made_of( phase_id::SOLID ) ) || !filter( part ) ||
+            part.has_flag( vp_flag::carried_flag ) ) {
             continue;
         }
         fl += part.ammo_remaining( );
@@ -4069,7 +4049,8 @@ int vehicle::fuel_capacity( map &here, const itype_id &ftype ) const
     const vehicle_part_range vpr = get_all_parts();
     return std::accumulate( vpr.begin(), vpr.end(), int64_t { 0 },
     [&ftype]( const int64_t &lhs, const vpart_reference & rhs ) {
-        if( rhs.part().ammo_current() == ftype && ftype->ammo ) {
+        if( rhs.part().ammo_current() == ftype && ftype->ammo &&
+            !rhs.part().has_flag( vp_flag::carried_flag ) ) {
             return lhs + rhs.part().ammo_capacity( ftype->ammo->type );
         }
         return lhs;
@@ -5452,14 +5433,14 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
         // But only if the player is actually there!
         int eff_load = load / 10;
         int mod = 4 * st; // strain
-        const int base_staminaRegen = static_cast<int>
-                                      ( get_option<float>( "PLAYER_BASE_STAMINA_REGEN_RATE" ) );
+        // FIXME: Move this to a global constant.
+        const int base_staminaRegen = 20;
         const int actual_staminaRegen = static_cast<int>( base_staminaRegen *
                                         driver->get_cardiofit() / driver->get_cardio_acc_base() );
         int base_burn = actual_staminaRegen - 3;
         base_burn = std::max( eff_load / 3, base_burn );
         //charge bionics when using muscle engine
-        const item muscle( "muscle" );
+        const item muscle( fuel_type_muscle );
         for( const bionic_id &bid : driver->get_bionic_fueled_with_muscle() ) {
             if( driver->has_active_bionic( bid ) ) { // active power gen
                 // more pedaling = more power
@@ -5666,6 +5647,42 @@ units::power vehicle::total_water_wheel_epower( map &here ) const
     return epower;
 }
 
+units::power vehicle::rated_solar_epower() const
+{
+    units::power epower = 0_W;
+    for( const int p : solar_panels ) {
+        const vehicle_part &vp = parts[p];
+        if( !vp.is_unavailable() ) {
+            epower += part_epower( vp );
+        }
+    }
+    return epower;
+}
+
+units::power vehicle::rated_wind_epower() const
+{
+    units::power epower = 0_W;
+    for( const int p : wind_turbines ) {
+        const vehicle_part &vp = parts[p];
+        if( !vp.is_unavailable() ) {
+            epower += part_epower( vp );
+        }
+    }
+    return epower;
+}
+
+units::power vehicle::rated_water_epower() const
+{
+    units::power epower = 0_W;
+    for( const int p : water_wheels ) {
+        const vehicle_part &vp = parts[p];
+        if( !vp.is_unavailable() ) {
+            epower += part_epower( vp );
+        }
+    }
+    return epower;
+}
+
 units::power vehicle::net_battery_charge_rate( map &here, bool include_reactors ) const
 {
     return total_engine_epower() + total_alternator_epower( here ) + total_accessory_epower() +
@@ -5826,16 +5843,19 @@ void vehicle::power_parts( map &here )
         // Scoops need a special case since they consume power during actual use
         for( const vpart_reference &vp : get_enabled_parts( "SCOOP" ) ) {
             vp.part().enabled = false;
+            vp.part().power_disabled = true;
         }
         // Rechargers need special case since they consume power on demand
         for( const vpart_reference &vp : get_enabled_parts( "RECHARGE" ) ) {
             vp.part().enabled = false;
+            vp.part().power_disabled = true;
         }
 
         for( const vpart_reference &vp : get_enabled_parts( VPFLAG_ENABLED_DRAINS_EPOWER ) ) {
             vehicle_part &pt = vp.part();
             if( pt.info().epower < 0_W ) {
                 pt.enabled = false;
+                pt.power_disabled = true;
             }
         }
 
@@ -6064,7 +6084,7 @@ int64_t vehicle::battery_left( map &here, bool apply_loss ) const
         const float efficiency = 1.0f - ( apply_loss ? pair.second : 0.0f );
         for( const int part_idx : veh.batteries ) {
             const vehicle_part &vp = veh.parts[part_idx];
-            ret += vp.ammo_remaining( ) * efficiency;
+            ret += vp.ammo_remaining() * efficiency;
         }
     }
     return ret;
@@ -6204,13 +6224,21 @@ void vehicle::idle( map &here, bool on_map )
         engine_on = false;
     }
 
-    if( !warm_enough_to_plant( player_character.pos_bub( here ) ) ) {
-        for( int i : planters ) {
-            vehicle_part &vp = parts[ i ];
-            if( vp.enabled ) {
-                add_msg_if_player_sees( pos_bub( here ), _( "The %s's planter turns off due to low temperature." ),
-                                        name );
-                vp.enabled = false;
+    // FIXME/HACK: Always checks buckwheat seeds!
+    // Returned string intentionally discarded!
+    // TODO: move it to planter function that tries to plant, and maybe cache it there
+    // (warm_enough_to_plant() is very expensive)
+    if( !planters.empty() && calendar::once_every( 10_minutes ) ) {
+        ret_val<void>can_plant = warm_enough_to_plant( player_character.pos_bub(), itype_seed_buckwheat );
+        if( !can_plant.success() ) {
+            for( int i : planters ) {
+                vehicle_part &vp = parts[ i ];
+                if( vp.enabled ) {
+                    add_msg_if_player_sees( pos_bub( here ),
+                                            _( "The %s's planter turns off due to unsuitable planting conditions." ),
+                                            name );
+                    vp.enabled = false;
+                }
             }
         }
     }
@@ -6324,7 +6352,7 @@ void vehicle::slow_leak( map &here )
             p.ammo_consume( qty, &here, bub_part_pos( here, p ) );
         } else if( fuel == fuel_type_plutonium_cell ) {
             if( p.ammo_remaining() >= PLUTONIUM_CHARGES / 10 ) {
-                item leak( "plut_slurry_dense", calendar::turn, qty );
+                item leak( itype_plut_slurry_dense, calendar::turn, qty );
                 here.add_item_or_charges( dest, leak );
                 p.ammo_consume( qty * PLUTONIUM_CHARGES / 10, &here, bub_part_pos( here, p ) );
             } else {
@@ -6537,23 +6565,16 @@ void vehicle::place_spawn_items( map &here )
                     continue;
                 }
 
-                for( const itype_id &e : spawn.item_ids ) {
-                    if( rng_float( 0, 1 ) < 1.0f ) {
-                        item spawn( e );
-                        created.emplace_back( spawn.in_its_container() );
+                for( const std::pair<itype_id, std::string> &e : spawn.item_ids ) {
+                    item spawn( e.first );
+                    if( !e.second.empty() ) {
+                        spawn.set_itype_variant( e.second );
                     }
-                }
-                for( const std::pair<itype_id, std::string> &e : spawn.variant_ids ) {
-                    if( rng_float( 0, 1 ) < 1.0f ) {
-                        item spawn( e.first );
-                        item added = spawn.in_its_container();
-                        added.set_itype_variant( e.second );
-                        created.push_back( added );
-                    }
+                    item added = spawn.in_its_container();
+                    created.push_back( added );
                 }
                 for( const item_group_id &e : spawn.item_groups ) {
-                    item_group::ItemList group_items = item_group::items_from( e, calendar::start_of_cataclysm,
-                                                       spawn_flags::use_spawn_rate );
+                    item_group::ItemList group_items = item_group::items_from( e, calendar::start_of_cataclysm );
                     created.insert( created.end(), group_items.begin(), group_items.end() );
                 }
             }
@@ -6836,7 +6857,7 @@ void vehicle::refresh()
         if( vpi.has_flag( VPFLAG_ROTOR ) ) {
             rotors.push_back( p );
         }
-        if( vp.part().is_battery() ) {
+        if( vp.part().is_battery() && !vp.part().has_flag( vp_flag::carried_flag ) ) {
             batteries.push_back( p );
         }
         if( vp.part().is_fuel_store( false ) ) {
@@ -8042,7 +8063,7 @@ std::map<itype_id, int> vehicle::fuels_left( ) const
 {
     std::map<itype_id, int> result;
     for( const vehicle_part &p : parts ) {
-        if( p.is_fuel_store() && !p.ammo_current().is_null() ) {
+        if( p.is_fuel_store() && !p.ammo_current().is_null() && !p.has_flag( vp_flag::carried_flag ) ) {
             result[ p.ammo_current() ] += p.ammo_remaining( );
         }
     }
@@ -8053,7 +8074,8 @@ std::list<item *> vehicle::fuel_items_left()
 {
     std::list<item *> result;
     for( vehicle_part &p : parts ) {
-        if( p.is_fuel_store() && !p.ammo_current().is_null() && !p.base.is_container_empty() ) {
+        if( p.is_fuel_store() && !p.ammo_current().is_null() && !p.base.is_container_empty() &&
+            !p.has_flag( vp_flag::carried_flag ) ) {
             result.push_back( &p.base.only_item() );
         }
     }
@@ -8066,6 +8088,9 @@ bool vehicle::is_foldable() const
         return false;
     }
     for( const vehicle_part &vp : real_parts() ) {
+        if( vp.get_base().has_var( "tied_down_furniture" ) ) {
+            return false;
+        }
         if( !vp.info().folded_volume ) {
             return false;
         }
@@ -8093,7 +8118,7 @@ time_duration vehicle::unfolding_time() const
 
 item vehicle::get_folded_item( map &here ) const
 {
-    item folded( "generic_folded_vehicle", calendar::turn );
+    item folded( itype_generic_folded_vehicle, calendar::turn );
     const std::vector<std::reference_wrapper<const vehicle_part>> &parts = real_parts();
     try {
         std::ostringstream veh_data;
@@ -8396,8 +8421,8 @@ void vehicle::update_time( map &here, const time_point &update_to )
     const weather_sum accum_weather = sum_conditions( update_from, update_to,
                                       pos_abs() );
     // make some reference objects to use to check for reload
-    const item water( "water" );
-    const item water_clean( "water_clean" );
+    const item water( itype_water );
+    const item water_clean( itype_water_clean );
 
     for( int idx : funnels ) {
         const vehicle_part &pt = parts[idx];
@@ -8418,7 +8443,11 @@ void vehicle::update_time( map &here, const time_point &update_to )
         }
 
         const double area_in_mm2 = std::pow( pt.info().bonus, 2 ) * M_PI;
-        const int qty = roll_remainder( funnel_charges_per_turn( area_in_mm2, accum_weather.rain_amount ) );
+        const double elapsed_turns = to_turns<double>( elapsed );
+        const double avg_mm_per_hour = elapsed_turns > 0.0 ? accum_weather.rain_amount / elapsed_turns :
+                                       0.0;
+        const int qty = roll_remainder( funnel_charges_per_turn( area_in_mm2,
+                                        avg_mm_per_hour ) * elapsed_turns );
         int c_qty = qty + ( tank->can_reload( water_clean ) ?  tank->ammo_remaining( ) : 0 );
         int cost_to_purify = c_qty * itype_water_purifier->charges_to_use();
 
@@ -8472,6 +8501,98 @@ void vehicle::update_time( map &here, const time_point &update_to )
             charge_battery( here, energy_bat );
         }
     }
+}
+
+int vehicle::catchup_off_map_renewables( const time_point &now )
+{
+    const time_point update_from = last_update;
+    if( now <= update_from || update_from == time_point( 0 ) ) {
+        last_update = now;
+        return 0;
+    }
+
+    if( sm_pos.z() < 0 ) {
+        last_update = now;
+        return 0;
+    }
+
+    if( now - update_from < 1_minutes ) {
+        return 0;
+    }
+
+    if( solar_panels.empty() && wind_turbines.empty() && water_wheels.empty() ) {
+        return 0;
+    }
+
+    const time_duration elapsed = now - update_from;
+    last_update = now;
+
+    int total_energy = 0;
+    const weather_sum accum_weather = sum_conditions( update_from, now, pos_abs() );
+
+    if( !solar_panels.empty() ) {
+        units::power epower = 0_W;
+        for( const int p : solar_panels ) {
+            const vehicle_part &vp = parts[p];
+            if( vp.is_unavailable() || !is_sm_tile_outside( abs_part_pos( vp ) ) ) {
+                continue;
+            }
+            epower += part_epower( vp );
+        }
+        double intensity = accum_weather.radiant_exposure / max_sun_irradiance() /
+                           to_seconds<float>( elapsed );
+        int energy_bat = power_to_energy_bat( epower * intensity, elapsed );
+        if( energy_bat > 0 ) {
+            add_msg_debug( debugmode::DF_VEHICLE,
+                           "%s off-map got %d kJ from solar panels", name, energy_bat );
+            total_energy += energy_bat;
+        }
+    }
+
+    if( !wind_turbines.empty() ) {
+        // Same TODO as update_time: uses current wind, not weather backfill
+        const oter_id &cur_om_ter = overmap_buffer.ter( pos_abs_omt() );
+        weather_manager &weather = get_weather();
+        units::power epower = 0_W;
+        for( const int p : wind_turbines ) {
+            const vehicle_part &vp = parts[p];
+            if( vp.is_unavailable() || !is_sm_tile_outside( abs_part_pos( vp ) ) ) {
+                continue;
+            }
+            int windpower = get_local_windpower( weather.windspeed, cur_om_ter,
+                                                 abs_part_pos( vp ),
+                                                 weather.winddirection, false );
+            if( windpower <= ( weather.windspeed / 10.0 ) ) {
+                continue;
+            }
+            epower += part_epower( vp ) * windpower;
+        }
+        int energy_bat = power_to_energy_bat( epower, elapsed );
+        if( energy_bat > 0 ) {
+            add_msg_debug( debugmode::DF_VEHICLE,
+                           "%s off-map got %d kJ from wind turbines", name, energy_bat );
+            total_energy += energy_bat;
+        }
+    }
+
+    if( !water_wheels.empty() ) {
+        units::power epower = 0_W;
+        for( const int p : water_wheels ) {
+            const vehicle_part &vp = parts[p];
+            if( vp.is_unavailable() || !is_sm_tile_over_water( abs_part_pos( vp ) ) ) {
+                continue;
+            }
+            epower += part_epower( vp );
+        }
+        int energy_bat = power_to_energy_bat( epower, elapsed );
+        if( energy_bat > 0 ) {
+            add_msg_debug( debugmode::DF_VEHICLE,
+                           "%s off-map got %d kJ from water wheels", name, energy_bat );
+            total_energy += energy_bat;
+        }
+    }
+
+    return total_energy;
 }
 
 void vehicle::invalidate_mass()

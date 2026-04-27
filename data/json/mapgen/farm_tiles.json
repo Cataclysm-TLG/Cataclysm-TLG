@@ -449,11 +449,11 @@
         "_": "t_region_soil"
       },
       "sealed_item": {
-        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_plant_seedling", "chance": 15 },
-        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_plant_seedling", "chance": 15 },
-        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_plant_seedling", "chance": 15 },
-        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_plant_seedling", "chance": 15 },
-        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_plant_seedling", "chance": 15 }
+        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_plant_seedling", "chance": 8 },
+        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_plant_seedling", "chance": 8 },
+        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_plant_seedling", "chance": 8 },
+        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_plant_seedling", "chance": 8 },
+        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_plant_seedling", "chance": 8 }
       }
     }
   },
@@ -505,11 +505,11 @@
         "_": "t_region_soil"
       },
       "sealed_item": {
-        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_plant_seedling", "chance": 15 },
-        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_plant_seedling", "chance": 15 },
-        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_plant_seedling", "chance": 15 },
-        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_plant_seedling", "chance": 15 },
-        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_plant_seedling", "chance": 15 }
+        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_plant_seedling", "chance": 8 },
+        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_plant_seedling", "chance": 8 },
+        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_plant_seedling", "chance": 8 },
+        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_plant_seedling", "chance": 8 },
+        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_plant_seedling", "chance": 8 }
       },
       "place_monsters": [
         { "monster": "GROUP_FARM_PESTS", "x": [ 2, 8 ], "y": [ 2, 8 ], "density": 0.01 },

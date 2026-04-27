@@ -131,7 +131,6 @@
         "b": "f_bench",
         "n": "f_slab"
       },
-      "place_nested": [ { "chunks": [ [ "SEER_Brigitte_LaCroix_spawn", 20 ], [ "null", 80 ] ], "x": 42, "y": 30 } ],
       "signs": { "P": { "signage": "Closed at sunset." }, "p": { "signage": "Maintained by the <city> Church." } },
       "items": {
         "X": { "item": "grave_memories", "chance": 1 },

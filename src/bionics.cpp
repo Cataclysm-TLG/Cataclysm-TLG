@@ -18,7 +18,6 @@
 #include "action.h"
 #include "activity_actor_definitions.h"
 #include "activity_type.h"
-#include "assign.h"
 #include "avatar.h"
 #include "avatar_action.h"
 #include "ballistics.h"
@@ -143,6 +142,7 @@ static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 
 static const itype_id itype_anesthetic( "anesthetic" );
+static const itype_id itype_burnt_out_bionic( "burnt_out_bionic" );
 static const itype_id itype_radiocontrol( "radiocontrol" );
 static const itype_id itype_remotevehcontrol( "remotevehcontrol" );
 static const itype_id itype_water_clean( "water_clean" );
@@ -319,12 +319,15 @@ void bionic_data::load( const JsonObject &jsobj, std::string_view src )
     mandatory( jsobj, was_loaded, "description", description );
 
     optional( jsobj, was_loaded, "cant_remove_reason", cant_remove_reason );
-    // uses assign because optional doesn't handle loading units as strings
-    assign( jsobj, "react_cost", power_over_time, false, 0_kJ );
-    assign( jsobj, "capacity", capacity, false );
-    assign( jsobj, "act_cost", power_activate, false, 0_kJ );
-    assign( jsobj, "deact_cost", power_deactivate, false, 0_kJ );
-    assign( jsobj, "trigger_cost", power_trigger, false, 0_kJ );
+    optional( jsobj, was_loaded, "react_cost", power_over_time,
+              units_bound_reader<units::energy>( 0_kJ ), 0_kJ );
+    optional( jsobj, was_loaded, "capacity", capacity, 0_kJ );
+    optional( jsobj, was_loaded, "act_cost", power_activate,
+              units_bound_reader<units::energy>( 0_kJ ), 0_kJ );
+    optional( jsobj, was_loaded, "deact_cost", power_deactivate,
+              units_bound_reader<units::energy>( 0_kJ ), 0_kJ );
+    optional( jsobj, was_loaded, "trigger_cost", power_trigger,
+              units_bound_reader<units::energy>( 0_kJ ), 0_kJ );
 
     optional( jsobj, was_loaded, "time", charge_time, 0_turns );
 
@@ -1209,9 +1212,9 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
         if( choice >= 0 && choice <= 1 ) {
             item ctr;
             if( choice == 0 ) {
-                ctr = item( "remotevehcontrol", calendar::turn_zero );
+                ctr = item( itype_remotevehcontrol, calendar::turn_zero );
             } else {
-                ctr = item( "radiocontrol", calendar::turn_zero );
+                ctr = item( itype_radiocontrol, calendar::turn_zero );
             }
             ctr.charges = units::to_kilojoule( get_power_level() );
             int power_use = invoke_item( &ctr );
@@ -1267,7 +1270,7 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
                                    _( "You have at least one free cable in your inventory that you could use to connect yourself." ) );
             }
         }
-        if( !success ) {
+        if( !success && bio.auto_shutdown ) {
             refund_power();
             bio.powered = false;
             return false;
@@ -1445,7 +1448,6 @@ Character::bionic_fuels Character::bionic_fuel_check( bionic &bio,
         result.connected_fuel = get_bionic_fuels( bio.id );
     }
 
-    int other_charges = 0;
     // There could be multiple fuels. But probably not. So we just check the first.
     bool is_perpetual = !bio.id->fuel_opts.empty() &&
                         bio.id->fuel_opts.front()->get_fuel_data().is_perpetual_fuel;
@@ -1453,13 +1455,8 @@ Character::bionic_fuels Character::bionic_fuel_check( bionic &bio,
                               bio.id->fuel_opts.front() == fuel_type_metabolism;
 
     if( metabolism_powered ) {
-        other_charges = std::max( 0.0f, get_stored_kcal() - 0.8f * get_healthy_kcal() );
-    }
-
-    if( !is_perpetual && !other_charges && result.connected_vehicles.empty() &&
-        result.connected_solar.empty() &&
-        result.connected_fuel.empty() ) {
-        if( metabolism_powered ) {
+        int metabolism_charges = get_stored_kcal() - static_cast<int>( 0.8f * get_healthy_kcal() );
+        if( metabolism_charges <= 0 ) {
             if( start ) {
                 add_msg_player_or_npc( m_info,
                                        _( "Your %s cannot be started because your calories are below safe levels." ),
@@ -1475,19 +1472,33 @@ Character::bionic_fuels Character::bionic_fuel_check( bionic &bio,
                 bio.powered = false;
                 deactivate_bionic( bio, true );
             }
-        } else if( start ) {
-            add_msg_player_or_npc( m_bad, _( "Your %s does not have enough fuel to start." ),
-                                   _( "<npcname>'s %s does not have enough fuel to start." ),
-                                   bio.info().name );
-        } else if( bio.powered ) {
-            add_msg_player_or_npc( m_info,
-                                   _( "Your %s runs out of fuel and turns off." ),
-                                   _( "<npcname>'s %s runs out of fuel and turns off." ),
-                                   bio.info().name );
-            bio.powered = false;
-            deactivate_bionic( bio, true );
+            result.can_be_on = false;
         }
-        result.can_be_on = false;
+    } else if( !is_perpetual && result.connected_vehicles.empty() &&
+               result.connected_solar.empty() &&
+               result.connected_fuel.empty() ) {
+        if( bio.auto_shutdown ) {
+            if( start ) {
+                add_msg_player_or_npc( m_bad, _( "Your %s does not have enough fuel to start." ),
+                                       _( "<npcname>'s %s does not have enough fuel to start." ),
+                                       bio.info().name );
+            } else if( bio.powered ) {
+                add_msg_player_or_npc( m_info,
+                                       _( "Your %s runs out of fuel and turns off." ),
+                                       _( "<npcname>'s %s runs out of fuel and turns off." ),
+                                       bio.info().name );
+                bio.powered = false;
+                deactivate_bionic( bio, true );
+            }
+            result.can_be_on = false;
+        } else {
+            if( start ) {
+                add_msg_player_or_npc( m_info,
+                                       _( "Your %s does not currently have enough fuel to produce energy." ),
+                                       _( "<npcname>'s %s does not currently have enough fuel to produce energy." ),
+                                       bio.info().name );
+            }
+        }
     }
 
     return result;
@@ -1563,13 +1574,22 @@ void Character::burn_fuel( bionic &bio )
                 // Do not waste fuel charging over limit.
                 return;
             }
+            bool depleted = false;
             if( fuel->count_by_charges() ) {
                 fuel->charges--;
                 if( fuel->charges == 0 ) {
                     i_rem( fuel );
+                    depleted = true;
                 }
             } else {
                 i_rem( fuel );
+                depleted = true;
+            }
+            if( depleted && !bio.auto_shutdown ) {
+                add_msg_player_or_npc( m_info,
+                                       _( "Your %s runs out of fuel." ),
+                                       _( "<npcname>'s %s runs out of fuel." ),
+                                       bio.info().name );
             }
 
         }
@@ -2338,9 +2358,9 @@ void Character::perform_uninstall( const bionic &bio, int difficulty, int succes
             }
         }
 
-        item cbm( "burnt_out_bionic" );
+        item cbm( itype_burnt_out_bionic );
         if( item::type_is_defined( bio_id->itype() ) ) {
-            cbm = item( bio_id.c_str() );
+            cbm = item( bio_id->itype() );
         }
         cbm.set_flag( flag_FILTHY );
         cbm.set_flag( flag_NO_STERILE );
@@ -2370,7 +2390,7 @@ bool Character::uninstall_bionic( const bionic &bio, monster &installer, Charact
         return false;
     }
 
-    item bionic_to_uninstall = item( bio.id.str(), calendar::turn_zero );
+    item bionic_to_uninstall = item( bio.info().itype(), calendar::turn_zero );
     const itype *itemtype = bionic_to_uninstall.type;
     int difficulty = itemtype->bionic->difficulty;
     int chance_of_success = bionic_manip_cos( adjusted_skill, difficulty + 2 );
@@ -2414,7 +2434,7 @@ bool Character::uninstall_bionic( const bionic &bio, monster &installer, Charact
             add_msg( m_mixed, _( "Successfully removed %s." ), bio.info().name );
         }
 
-        item cbm( "burnt_out_bionic" );
+        item cbm( itype_burnt_out_bionic );
         if( item::type_is_defined( bio.info().itype() ) ) {
             cbm = bionic_to_uninstall;
         }
@@ -2760,7 +2780,7 @@ void Character::bionics_install_failure( const bionic_id &bid, const std::string
         }
     }
     if( drop_cbm ) {
-        item cbm( bid.c_str() );
+        item cbm( bid->itype() );
         cbm.set_flag( flag_NO_STERILE );
         cbm.set_flag( flag_NO_PACKED );
         cbm.set_fault( fault_bionic_salvaged );
@@ -3257,6 +3277,7 @@ void bionic::serialize( JsonOut &json ) const
         json.member( "safe_fuel_threshold", safe_fuel_threshold );
     }
     json.member( "show_sprite", show_sprite );
+    json.member( "auto_shutdown", auto_shutdown );
 
     if( has_weapon() ) {
         json.member( "weapon", weapon );
@@ -3315,6 +3336,9 @@ void bionic::deserialize( const JsonObject &jo )
     }
     if( jo.has_bool( "show_sprite" ) ) {
         show_sprite = jo.get_bool( "show_sprite" );
+    }
+    if( jo.has_bool( "auto_shutdown" ) ) {
+        auto_shutdown = jo.get_bool( "auto_shutdown" );
     }
     if( jo.has_array( "bionic_tags" ) ) {
         for( const std::string line : jo.get_array( "bionic_tags" ) ) {

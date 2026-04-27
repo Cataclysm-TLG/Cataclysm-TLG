@@ -26,8 +26,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "prescription stimulant" },
-    "description": "Medical-grade amphetamine salts mixed with dextroamphetamine salts, commonly prescribed to treat hyperactive attention deficits.  It suppresses the appetite, and is quite addictive.",
+    "name": { "str_sp": "dextroamphetamine" },
+    "description": "A mild prescription stimulant commonly prescribed for attention deficit disorder, often with levoamphetamine included.  It can be addictive if abused.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -37,19 +37,12 @@
     "color": "light_red",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "adderall",
-        "name": { "str_sp": "Adderall" },
-        "description": "Medical-grade amphetamine salts mixed with dextroamphetamine salts, commonly prescribed to treat hyperactive attention deficits.  It suppresses the appetite, and is quite addictive."
-      }
-    ],
     "stim": 24,
     "fun": 10,
     "addiction_potential": 10,
     "addiction_type": "amphetamine",
     "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take some %s." }
+    "use_action": { "type": "consume_drug", "activation_message": "You take a stimulant capsule." }
   },
   {
     "id": "adrenaline_injector",
@@ -57,7 +50,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str": "epinephrine autoinjector" },
-    "description": "A syringe filled with a shot of epinephrine, also called adrenalin.  It serves as a powerful stimulant when you inject yourself with it.  Asthmatics can use it in an emergency to clear an asthma attack.",
+    "description": "A syringe filled with a shot of epinephrine, also called adrenaline.  It serves as a powerful stimulant when you inject yourself with it.  Asthmatics can use it in an emergency to clear an asthma attack.",
     "looks_like": "flu_shot",
     "weight": "12 g",
     "volume": "10ml",
@@ -135,7 +128,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str": "aspirin" },
-    "description": "Acetylsalicylic acid, a mild anti-inflammatory and blood thinner.  Take to relieve pain and swelling.  Careful - it can increase bleeding.",
+    "description": "Acetylsalicylic acid, an NSAID that can treat pain and fever.  It is a blood thinner, and may exacerbate bleeding.",
     "weight": "1 g",
     "volume": "1 ml",
     "price": "2 cent",
@@ -146,12 +139,7 @@
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You take some aspirin.",
-      "effects": [ { "id": "pkill1_nsaid", "duration": 9000 } ]
-    },
-    "vitamins": [ [ "vit_bloodthinner", 4320 ] ]
+    "vitamins": [ [ "vit_bloodthinner", 2160 ], [ "vit_nsaid", 500 ], [ "vit_nsaid_bp", 420 ] ]
   },
   {
     "id": "ibuprofen",
@@ -159,7 +147,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "ibuprofen" },
-    "description": "Ibuprofen, a mild NSAID-based painkiller.  Take to relieve pain and swelling.",
+    "description": "Ibuprofen, a mild NSAID analgesic.  It relieves pain and swelling, but raises blood pressure more than other NSAIDs.",
     "weight": "1 g",
     "volume": "1 ml",
     "price": "2 cent",
@@ -170,12 +158,8 @@
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You take some ibuprofen.",
-      "effects": [ { "id": "pkill1_nsaid", "duration": 9000 } ]
-    },
-    "vitamins": [ [ "vit_ibuprofen", 216 ] ]
+    "use_action": { "type": "consume_drug", "activation_message": "You take an ibuprofen tablet." },
+    "vitamins": [ [ "vit_nsaid", 400 ], [ "vit_nsaid_bp", 420 ] ]
   },
   {
     "id": "naproxen",
@@ -183,7 +167,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "naproxen" },
-    "description": "Naproxen, a mild long-lasting NSAID-based painkiller.  Take to relieve pain and swelling.",
+    "description": "Naproxen, a slow-acting over-the-counter pain medicaton.  It takes up to an hour to kick in, but lasts longer than other NSAIDs.",
     "weight": "1 g",
     "volume": "1 ml",
     "price": "2 cent",
@@ -194,12 +178,8 @@
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You take some naproxen.",
-      "effects": [ { "id": "pkill1_nsaid", "duration": 18000 } ]
-    },
-    "vitamins": [ [ "vit_ibuprofen", 432 ] ]
+    "use_action": { "type": "consume_drug", "activation_message": "You take a naproxen tablet." },
+    "vitamins": [ [ "vit_naproxen", 250 ] ]
   },
   {
     "id": "acetaminophen",
@@ -218,11 +198,8 @@
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You take some acetaminophen.",
-      "effects": [ { "id": "pkill1_acetaminophen", "duration": 9000 } ]
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You take some acetaminophen." },
+    "vitamins": [ [ "vit_acetaminophen", 500 ] ]
   },
   {
     "id": "metaprolol",
@@ -372,6 +349,28 @@
     }
   },
   {
+    "id": "naloxone",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "MED",
+    "name": { "str_sp": "naloxone" },
+    "description": "A small plastic device with a nozzle on one end and a plunger on the other.  The drug inside can be administered nasally to rapidly reverse and block the effect of opioids, which could save someone's life during an overdose.",
+    "weight": "70 g",
+    "volume": "80 ml",
+    "price": "22 USD",
+    "price_postapoc": "1 USD",
+    "symbol": "!",
+    "color": "light_cyan",
+    "material": "plastic",
+    "flags": [ "NO_INGEST" ],
+    "vitamins": [ [ "vit_naloxone", 400 ], [ "vit_tramadol", -200 ], [ "vit_mme", -1250 ] ],
+    "use_action": {
+      "type": "consume_drug",
+      "activation_message": "You spray the naloxone up your nose.",
+      "effects": [ { "id": "nausea", "duration": "4 m" }, { "id": "naloxone_eff", "duration": "1 s" } ]
+    }
+  },
+  {
     "id": "cig",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
@@ -443,7 +442,7 @@
     "comestible_type": "MED",
     "name": { "str_sp": "codeine" },
     "//": "Based on 30mg Codeine Sulfate Tablets.",
-    "description": "A mild opioid used in the suppression of pain, cough, and other ailments.  While relatively weak for a narcotic, it is still addictive, with a potential for overdose.",
+    "description": "An opioid in tablet form, used in the suppression of pain, cough, and other ailments.  While relatively weak for a narcotic, it is still addictive, with a potential for overdose.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -452,7 +451,6 @@
     "symbol": "!",
     "color": "cyan",
     "container": "bottle_plastic_pill_painkiller",
-    "stim": -2,
     "fun": 10,
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "addiction_potential": 10,
@@ -461,7 +459,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take some codeine.",
-      "effects": [ { "id": "pkill2", "duration": 1080 }, { "id": "cough_suppress", "duration": 1000 } ]
+      "effects": [ { "id": "cough_suppress", "duration": "2 h" } ]
     }
   },
   {
@@ -481,7 +479,7 @@
     "container": "bag_zipper",
     "stim": 20,
     "healthy": -2,
-    "fun": 25,
+    "fun": 15,
     "addiction_potential": 50,
     "addiction_type": "cocaine",
     "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
@@ -541,7 +539,7 @@
             "id": "EOC_myopia_contacts_weekly",
             "effect": {
               "run_eocs": "EOC_CONTACTS",
-              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "contacts", "time": "604800" }
+              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "contacts", "time": 604800 }
             }
           }
         ]
@@ -568,7 +566,7 @@
             "id": "EOC_myopia_transition_contacts_weekly",
             "effect": {
               "run_eocs": "EOC_CONTACTS",
-              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "transition_contacts", "time": "604800" }
+              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "transition_contacts", "time": 604800 }
             }
           }
         ]
@@ -593,7 +591,7 @@
             "id": "EOC_myopia_contacts_daily",
             "effect": {
               "run_eocs": "EOC_CONTACTS",
-              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "contacts", "time": "57600" }
+              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "contacts", "time": 57600 }
             }
           }
         ]
@@ -618,7 +616,7 @@
             "id": "EOC_myopia_transition_contacts_daily",
             "effect": {
               "run_eocs": "EOC_CONTACTS",
-              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "transition_contacts", "time": "57600" }
+              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "transition_contacts", "time": 57600 }
             }
           }
         ]
@@ -641,7 +639,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_hyperopia_contacts_weekly",
-            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "contacts", "time": "604800" } }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "contacts", "time": 604800 } }
           }
         ]
       }
@@ -663,7 +661,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_hyperopia_transition_contacts_weekly",
-            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "transition_contacts", "time": "604800" } }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "transition_contacts", "time": 604800 } }
           }
         ]
       }
@@ -685,7 +683,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_hyperopia_contacts_daily",
-            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "contacts", "time": "57600" } }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "contacts", "time": 57600 } }
           }
         ]
       }
@@ -707,7 +705,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_hyperopia_transition_contacts_daily",
-            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "transition_contacts", "time": "57600" } }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "transition_contacts", "time": 57600 } }
           }
         ]
       }
@@ -731,7 +729,7 @@
             "id": "EOC_bifocal_contacts_weekly",
             "effect": {
               "run_eocs": "EOC_CONTACTS",
-              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "flag3": "HYPEROPIC", "effect": "contacts", "time": "604800" }
+              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "flag3": "HYPEROPIC", "effect": "contacts", "time": 604800 }
             }
           }
         ]
@@ -756,13 +754,7 @@
             "id": "EOC_bifocal_transition_contacts_weekly",
             "effect": {
               "run_eocs": "EOC_CONTACTS",
-              "variables": {
-                "flag1": "MYOPIC",
-                "flag2": "MYOPIC_IN_LIGHT",
-                "flag3": "HYPEROPIC",
-                "effect": "transition_contacts",
-                "time": "604800"
-              }
+              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "flag3": "HYPEROPIC", "effect": "transition_contacts", "time": 604800 }
             }
           }
         ]
@@ -787,7 +779,7 @@
             "id": "EOC_bifocal_contacts_daily",
             "effect": {
               "run_eocs": "EOC_CONTACTS",
-              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "flag3": "HYPEROPIC", "effect": "contacts", "time": "57600" }
+              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "flag3": "HYPEROPIC", "effect": "contacts", "time": 57600 }
             }
           }
         ]
@@ -812,13 +804,7 @@
             "id": "EOC_bifocal_transition_contacts_daily",
             "effect": {
               "run_eocs": "EOC_CONTACTS",
-              "variables": {
-                "flag1": "MYOPIC",
-                "flag2": "MYOPIC_IN_LIGHT",
-                "flag3": "HYPEROPIC",
-                "effect": "transition_contacts",
-                "time": "57600"
-              }
+              "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "flag3": "HYPEROPIC", "effect": "transition_contacts", "time": 57600 }
             }
           }
         ]
@@ -841,7 +827,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_plano_transition_contacts_weekly",
-            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "effect": "transition_contacts_plano", "plano": "1", "time": "604800" } }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "effect": "transition_contacts_plano", "plano": 1, "time": 604800 } }
           }
         ]
       }
@@ -863,7 +849,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_plano_transition_contacts_daily",
-            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "plano": "1", "effect": "transition_contacts_plano", "time": "57600" } }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "plano": 1, "effect": "transition_contacts_plano", "time": 57600 } }
           }
         ]
       }
@@ -886,13 +872,13 @@
     "container": "bag_zipper",
     "stim": 40,
     "healthy": -2,
-    "fun": 50,
+    "fun": 15,
     "addiction_potential": 80,
-    "addiction_type": "crack",
+    "addiction_type": "cocaine",
     "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You smoke your crack rocks.  Mother would be proud.",
+      "activation_message": "You smoke your crack rocks.",
       "effects": [ { "id": "high", "duration": 15 } ],
       "stat_adjustments": { "hunger": -10 },
       "fields_produced": { "fd_cracksmoke": 2 },
@@ -972,7 +958,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "prescription sedative" },
+    "name": { "str_sp": "diazepam" },
     "description": "A strong benzodiazepine drug used to treat muscle spasms, anxiety, seizures, and panic attacks.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
@@ -983,13 +969,6 @@
     "color": "white",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "diazepam",
-        "name": { "str_sp": "diazepam" },
-        "description": "A strong benzodiazepine drug used to treat muscle spasms, anxiety, seizures, and panic attacks."
-      }
-    ],
     "stim": -8,
     "healthy": -1,
     "fun": 8,
@@ -1011,31 +990,18 @@
     "price": "6 USD",
     "symbol": "!",
     "color": "green",
-    "quench": -5,
-    "stim": -6,
-    "healthy": -1,
     "fun": 30,
     "addiction_potential": 10,
+    "addiction_type": "cannabis",
     "flags": [ "NO_INGEST" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take a dab.  Wow, that's got some killer terpenes!",
-      "effects": [
-        { "id": "weed_high", "duration": "180 m" },
-        {
-          "id": "pkill1_generic",
-          "duration": "120 m",
-          "//": "If at some point we add neuropathic painkillers, this should be changed to one."
-        },
-        { "id": "pkill2", "duration": "5 m" },
-        { "id": "high", "duration": "60 m" },
-        { "id": "smoke", "duration": "2 m" }
-      ],
-      "stat_adjustments": { "hunger": 4, "thirst": 6 },
-      "fields_produced": { "fd_weedsmoke": 2 },
+      "activation_message": "You take a dab.",
+      "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "fire": 1 },
       "tools_needed": { "apparatus": -1 },
-      "moves": 6000
+      "moves": 1500,
+      "vitamins": [ [ "cannabis", 14 ] ]
     }
   },
   {
@@ -1051,27 +1017,18 @@
     "price": "4 USD",
     "symbol": "!",
     "color": "green",
-    "quench": -10,
-    "stim": -8,
-    "healthy": -1,
     "fun": 20,
-    "addiction_potential": 10,
+    "addiction_potential": 8,
+    "addiction_type": "cannabis",
     "flags": [ "NO_INGEST" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take a dab of wax.  *cough cough* Good stuff!",
-      "effects": [
-        { "id": "weed_high", "duration": "150 m" },
-        { "id": "pkill1_generic", "duration": "100 m" },
-        { "id": "pkill2", "duration": "5 m" },
-        { "id": "high", "duration": "60 m" },
-        { "id": "smoke", "duration": "2 m" }
-      ],
-      "stat_adjustments": { "hunger": 5, "thirst": 7 },
-      "fields_produced": { "fd_weedsmoke": 2 },
+      "activation_message": "You take a dab of wax.",
+      "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "fire": 1 },
       "tools_needed": { "apparatus": -1 },
-      "moves": 6000
+      "moves": 1500,
+      "vitamins": [ [ "cannabis", 12 ] ]
     }
   },
   {
@@ -1092,24 +1049,17 @@
     "symbol": "!",
     "color": "green",
     "quench": -5,
-    "stim": -3,
     "fun": 15,
     "phase": "liquid",
-    "addiction_potential": 5,
+    "addiction_potential": 10,
+    "addiction_type": "cannabis",
     "flags": [ "NO_INGEST" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take a dab of distillate.  Sooooo smooth…",
-      "effects": [
-        { "id": "weed_high", "duration": "180 m" },
-        { "id": "pkill1_generic", "duration": "120 m" },
-        { "id": "pkill2", "duration": "5 m" },
-        { "id": "high", "duration": "60 m" },
-        { "id": "smoke", "duration": "1 m" }
-      ],
-      "stat_adjustments": { "hunger": 4, "thirst": 6 },
-      "fields_produced": { "fd_weedsmoke": 2 },
+      "activation_message": "You take a hit of distillate.",
+      "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "advanced_ecig": 1 },
+      "vitamins": [ [ "cannabis", 15 ] ],
       "moves": 1500
     }
   },
@@ -1194,7 +1144,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "heroin" },
-    "description": "An extremely strong opioid narcotic derived from morphine.  Incredibly addictive, the risk of overdose is extreme, and the drug is contraindicated for nearly all medical purposes.",
+    "description": "An extremely strong opioid narcotic derived from morphine.  It is incredibly addictive, the risk of overdose is extreme, and the drug is contraindicated for nearly all medical purposes.",
     "weight": "1 g",
     "volume": "2 ml",
     "price": "140 cent",
@@ -1203,11 +1153,9 @@
     "symbol": "!",
     "color": "light_gray",
     "container": "bag_zipper",
-    "stim": -10,
     "healthy": -5,
-    "fun": 50,
-    "vitamins": [ [ "vit_mme", 3000 ] ],
-    "//": "Heroin due to being cut is at best 50% its weight equivalent in morphine.  Injectables are triple the MME per weight per Venera.",
+    "fun": 30,
+    "vitamins": [ [ "vit_mme", 3500 ] ],
     "addiction_potential": 75,
     "addiction_type": "opioid",
     "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
@@ -1215,11 +1163,8 @@
       "type": "consume_drug",
       "activation_message": "You shoot up.",
       "tools_needed": { "syringe": -1 },
-      "effects": [
-        { "id": "pkill3", "duration": 480 },
-        { "id": "pkill2", "duration": 1200 },
-        { "id": "cough_suppress", "duration": 1000 }
-      ]
+      "charges_needed": { "fire": 1 },
+      "effects": [ { "id": "cough_suppress", "duration": "60 m" } ]
     }
   },
   {
@@ -1257,11 +1202,10 @@
     "price_postapoc": "50 cent",
     "symbol": "!",
     "color": "green",
-    "quench": -5,
-    "stim": -10,
     "healthy": -1,
     "fun": 15,
     "addiction_potential": 5,
+    "addiction_type": "cannabis",
     "flags": [ "NO_INGEST", "NO_TEMP" ],
     "use_action": [ "SMOKING" ]
   },
@@ -1293,8 +1237,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "low-grade methamphetamine" },
-    "description": "A profoundly addictive and powerful stimulant.  While extremely effective at enhancing alertness, it is hazardous to health and the risk of an adverse reaction is great.",
+    "name": { "str_sp": "crank" },
+    "description": "Tiny off-white crystals of methamphetamine.  Their coloration suggests dubious purity, but even poor-quality meth is still one of the post potent and addictive stimulants around.",
     "weight": "1 g",
     "volume": "2 ml",
     "price": "150 cent",
@@ -1306,7 +1250,7 @@
     "quench": -2,
     "stim": 20,
     "healthy": -7,
-    "fun": 30,
+    "fun": 12,
     "addiction_potential": 50,
     "addiction_type": "amphetamine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
@@ -1317,8 +1261,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "high-grade methamphetamine" },
-    "description": "A profoundly addictive and powerful stimulant.  While extremely effective at enhancing alertness, it is hazardous to health and the risk of an adverse reaction is great.  This one could have only been made by a great chemist.",
+    "name": { "str_sp": "crystal meth" },
+    "description": "Tiny crystals of methamphetamine, one of the most potent and addictive stimulants around.  This sample looks quite pure.",
     "looks_like": "meth",
     "weight": "1 g",
     "volume": "2 ml",
@@ -1331,7 +1275,7 @@
     "quench": -1,
     "stim": 30,
     "healthy": -5,
-    "fun": 25,
+    "fun": 16,
     "addiction_potential": 40,
     "addiction_type": "amphetamine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
@@ -1343,28 +1287,22 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "morphine" },
-    "description": "A very strong, naturally-occurring narcotic used to treat intense pain in hospital settings.  You'll need a syringe to inject it, and it's very addictive, so be careful.",
-    "weight": "20 mg",
-    "volume": "2 ml",
-    "stack_size": 32,
+    "description": "An addictive narcotic used to treat intense pain in hospital settings.  You'll need a syringe to inject it, but it will take effect almost immediately.",
+    "weight": "1050 mg",
+    "volume": "1 ml",
     "price": "40 cent",
     "price_postapoc": "250 cent",
-    "material": [ "powder" ],
+    "material": [ "water" ],
+    "container": "vial_glass",
     "symbol": "!",
     "color": "light_gray",
-    "stim": -5,
     "healthy": -3,
-    "fun": 25,
+    "fun": 20,
     "addiction_potential": 25,
     "addiction_type": "opioid",
-    "vitamins": [ [ "vit_mme", 3000 ] ],
+    "vitamins": [ [ "vit_mme", 1000 ] ],
     "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You shoot up.",
-      "tools_needed": { "syringe": -1 },
-      "effects": [ { "id": "pkill3", "duration": 120 }, { "id": "pkill2", "duration": 1200 } ]
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You shoot up.", "tools_needed": { "syringe": -1 } }
   },
   {
     "id": "wintergreen_oil",
@@ -1382,7 +1320,6 @@
     "symbol": "~",
     "color": "yellow",
     "phase": "liquid",
-    "fun": -5,
     "spoils_in": "60 days",
     "use_action": {
       "type": "heal",
@@ -1390,7 +1327,7 @@
       "bleed": 0,
       "bite": 0.66,
       "move_cost": 2500,
-      "effects": [ { "id": "pkill_wintergreen_oil", "duration": "1 h" } ]
+      "effects": [ { "id": "wintergreen_analgesic", "duration": "1 h" } ]
     },
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "ALLOWS_REMOTE_USE" ]
   },
@@ -1411,7 +1348,7 @@
     "color": "yellow",
     "phase": "liquid",
     "quench": -50,
-    "fun": -5,
+    "fun": -4,
     "spoils_in": "28 days",
     "use_action": [ "ANTIPARASITIC" ],
     "flags": [ "NPC_SAFE" ]
@@ -1489,8 +1426,8 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "oxycodone" },
-    "//": "15mg Oxycodone pills",
-    "description": "A strong semi-synthetic narcotic used in the treatment of intense pain.  Highly addictive.",
+    "//": "5mg oxycodone IR tab",
+    "description": "A potent opioid pain relief medication in an immediate release tablet.  Oxycodone is highly addictive.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -1500,17 +1437,12 @@
     "color": "light_green",
     "container": "bottle_plastic_pill_prescription",
     "healthy": -1,
-    "stim": -4,
-    "fun": 18,
+    "fun": 25,
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 16,
-    "vitamins": [ [ "vit_mme", 2250 ] ],
+    "vitamins": [ [ "vit_mme", 750 ] ],
     "addiction_type": "opioid",
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You take some oxycodone.",
-      "effects": [ { "id": "pkill3", "duration": 120 }, { "id": "pkill2", "duration": 1200 } ]
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You take some oxycodone." }
   },
   {
     "id": "pills_sleep",
@@ -1541,79 +1473,34 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "addiction_potential": 40,
     "addiction_type": "sleeping pill",
-    "use_action": { "type": "consume_drug", "activation_message": "You take a %s." },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a sleeping pill." },
     "fatigue_mod": -40
   },
   {
-    "id": "poppy_pain",
+    "id": "opium_tar",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "poppy painkiller" },
-    "//": "1 ML equivalent to 1 mg of morphine. So in this item 2ML equals 2 mg of morphine.",
-    "description": "A potent opioid palliative produced by the refining of the mutated poppy.  Notably devoid of euphoric or sedative effects, but as an opioid it can still be addictive.",
-    "weight": "1 g",
-    "volume": "2 ml",
+    "name": { "str_sp": "opium tar" },
+    "//": "10mg of opium is 1mg mme.  For now, we'll assume the survivor is just eating it.",
+    "description": "A sticky blob of painkiller derived from the poppy plant.  It lacks the potency of a modern pharmaceutical formulation, but is every bit as addictive.",
+    "weight": "30 mg",
+    "volume": "1 ml",
     "price": "30 cent",
     "price_postapoc": "150 cent",
     "material": [ "drug_filler" ],
     "symbol": "!",
-    "color": "pink",
+    "color": "brown",
     "healthy": -2,
     "addiction_potential": 10,
     "addiction_type": "opioid",
-    "vitamins": [ [ "vit_mme", 200 ] ],
+    "vitamins": [ [ "vit_mme", 300 ] ],
     "flags": [ "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take some poppy painkiller.",
-      "effects": [ { "id": "pkill2", "duration": 1080 } ]
+      "activation_message": "You swallow some opium.",
+      "effects": [ { "id": "cough_suppress", "duration": "90 m" } ]
     }
-  },
-  {
-    "id": "poppy_sleep",
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
-    "comestible_type": "MED",
-    "name": { "str_sp": "poppy sleep" },
-    "//": "1 ML equivalent to 1 mg of morphine. So in this item 2ML equals 2 mg of morphine.",
-    "description": "A potent sleep aid extracted from mutated poppy seeds.  Effective, but as an opioid it can be addictive.",
-    "weight": "1 g",
-    "volume": "2 ml",
-    "price": "20 cent",
-    "price_postapoc": "25 cent",
-    "material": [ "drug_filler" ],
-    "symbol": "!",
-    "color": "magenta",
-    "healthy": -2,
-    "addiction_type": [ "sleeping pill", "opioid" ],
-    "vitamins": [ [ "vit_mme", 200 ] ],
-    "flags": [ "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take a %s." },
-    "fatigue_mod": -40
-  },
-  {
-    "id": "poppysyrup",
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
-    "comestible_type": "MED",
-    "name": { "str_sp": "poppy cough syrup" },
-    "description": "Cough syrup made from mutated poppy.  Will make you sleepy.",
-    "weight": "48 g",
-    "volume": "250 ml",
-    "price": "25 USD",
-    "price_postapoc": "2 USD 50 cent",
-    "charges": 5,
-    "symbol": "~",
-    "color": "magenta",
-    "phase": "liquid",
-    "vitamins": [ [ "vit_mme", 200 ] ],
-    "container": "bottle_plastic_small",
-    "stim": -3,
-    "healthy": -1,
-    "addiction_potential": 15,
-    "addiction_type": [ "sleeping pill", "opiate" ],
-    "use_action": [ "FLUSLEEP" ]
   },
   {
     "id": "prophylactic_antivenom",
@@ -1656,7 +1543,6 @@
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
     "variants": [ { "id": "prozac", "name": { "str_sp": "Prozac" }, "append": true, "description": "Its generic name is fluoxetine." } ],
-    "stim": -5,
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 5,
     "addiction_type": "amphetamine",
@@ -1808,8 +1694,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "tramadol" },
-    "//": "60mg Ultram",
-    "description": "A painkiller used to manage moderate pain.  The effects last for several hours, but are relatively subdued for an opioid.",
+    "description": "A tablet containing 50mg of a slow-acting opioid.  It is slow-acting and relatively mild, but will last much longer than other opioids.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -1818,16 +1703,12 @@
     "symbol": "!",
     "color": "yellow",
     "container": "bottle_plastic_pill_prescription",
-    "fun": 6,
-    "vitamins": [ [ "vit_mme", 600 ] ],
+    "fun": 8,
+    "vitamins": [ [ "vit_tramadol", 5 ] ],
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 6,
     "addiction_type": "opioid",
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You take some tramadol.",
-      "effects": [ { "id": "pkill_l", "duration": 27000 } ]
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You take some tramadol." }
   },
   {
     "id": "vitamins",
@@ -1847,7 +1728,7 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take the %s.",
+      "activation_message": "You take a multivitamin.",
       "vitamins": [ [ "calcium", 24, 48 ], [ "iron", 24, 48 ], [ "vitC", 24, 48 ] ]
     },
     "//": "Yes, the vitamins are intentionally duplicated here. The consume/use/iteminfo UI needs them in use_action, but to actually pass on the vitamins they need to be in the comestible data, as below.",
@@ -1870,7 +1751,7 @@
     "symbol": "!",
     "color": "magenta",
     "container": "bottle_plastic_pill_supplement",
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 75 ] ] },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a calcium tablet.", "vitamins": [ [ "calcium", 75 ] ] },
     "vitamins": [ [ "calcium", 75 ] ]
   },
   {
@@ -1891,7 +1772,7 @@
     "color": "white",
     "looks_like": "calcium_tablet",
     "flags": [ "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 24 ] ] },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a bone meal tablet.", "vitamins": [ [ "calcium", 24 ] ] },
     "vitamins": [ [ "meat_allergen", 1 ], [ "calcium", 24 ] ]
   },
   {
@@ -1912,7 +1793,11 @@
     "color": "yellow",
     "looks_like": "calcium_tablet",
     "flags": [ "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 23 ] ] },
+    "use_action": {
+      "type": "consume_drug",
+      "activation_message": "You take a flavored bone meal tablet.",
+      "vitamins": [ [ "calcium", 23 ] ]
+    },
     "vitamins": [ [ "meat_allergen", 1 ], [ "calcium", 23 ] ]
   },
   {
@@ -1930,7 +1815,7 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "symbol": "!",
     "color": "magenta",
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "vitC", 556 ] ] },
+    "use_action": { "type": "consume_drug", "activation_message": "You take a vitamin C tablet.", "vitamins": [ [ "vitC", 556 ] ] },
     "vitamins": [ [ "vitC", 556 ] ]
   },
   {
@@ -1959,12 +1844,11 @@
     "volume": "5 ml",
     "price": "50 cent",
     "price_postapoc": "1 cent",
-    "fun": 1,
     "symbol": "!",
     "color": "white",
     "container": "bottle_plastic_pill_supplement",
     "flags": [ "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You swallow the %s.  You wait in anticipation of its effects." },
+    "use_action": { "type": "consume_drug", "activation_message": "You swallow the homeopathic pull.  It should kick in any minute now." },
     "snippet_category": [
       {
         "id": "pill1",
@@ -2020,7 +1904,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "marijuana" },
-    "description": "The dried flower buds and leaves harvested from a psychoactive variety of hemp plant.  Used to reduce nausea, stimulate appetite and elevate mood.  It can be habit-forming, and adverse reactions are possible.",
+    "description": "The dried flower buds and leaves harvested from a psychoactive variety of hemp plant.  Used to reduce nausea, relieve pain, sleep easier, and elevate mood.  It can be habit-forming.",
     "weight": "1 g",
     "volume": "2 ml",
     "price": "25 cent",
@@ -2028,21 +1912,20 @@
     "symbol": "!",
     "color": "green",
     "quench": -5,
-    "stim": -10,
     "healthy": -1,
     "fun": 15,
     "addiction_potential": 5,
+    "addiction_type": "cannabis",
     "material": [ "vegetable" ],
     "flags": [ "NO_INGEST", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You smoke some weed.  Good stuff, man!",
-      "effects": [ { "id": "weed_high", "duration": 90 }, { "id": "pkill1_generic", "duration": 360 } ],
-      "stat_adjustments": { "hunger": 4, "thirst": 6 },
-      "fields_produced": { "fd_weedsmoke": 2 },
+      "activation_message": "You smoke some weed.",
+      "fields_produced": { "fd_weedsmoke": 1 },
       "charges_needed": { "fire": 1 },
       "tools_needed": { "apparatus": -1 },
-      "moves": 40
+      "moves": 1500,
+      "vitamins": [ [ "cannabis", 7 ] ]
     },
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
@@ -2051,8 +1934,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "fast-acting sedative" },
-    "description": "An anti-anxiety agent with a powerful sedative effect.  May cause dissociation and loss of memory.  It is dangerously addictive, and withdrawal from regular use should be gradual.",
+    "name": { "str_sp": "alprazolam" },
+    "description": "A fast-acting benzodiazepine with a powerful sedative effect.  It is dangerously addictive, and withdrawal from regular use should be gradual.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -2063,19 +1946,11 @@
     "color": "cyan",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "variants": [
-      {
-        "id": "xanax",
-        "name": { "str_sp": "Xanax" },
-        "description": "An anti-anxiety agent with a powerful sedative effect.  May cause dissociation and loss of memory.  It is dangerously addictive, and withdrawal from regular use should be gradual."
-      }
-    ],
-    "stim": -4,
     "healthy": -2,
     "fun": 20,
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 40,
-    "addiction_type": "sleeping pill",
+    "addiction_type": "diazepam",
     "use_action": [ "XANAX" ]
   },
   {
@@ -2102,7 +1977,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "heartburn medicine" },
+    "name": { "str_sp": "bismuth subsalicylate" },
     "description": "Creamy pink heartburn syrup that soothes upset stomachs and quells vomitous urges.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
@@ -2116,7 +1991,7 @@
     "color": "white",
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take some heartburn medicine.",
+      "activation_message": "You take some bismuth subsalicylate.",
       "effects": [ { "id": "tummy_tablet", "duration": 6400 } ]
     },
     "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE" ]

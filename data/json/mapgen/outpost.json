@@ -40,11 +40,11 @@
       },
       "furniture": { "t": "f_locker", "R": "f_rack", "H": "f_rack", "@": "f_bunkbed", "h": "f_chair", "T": "f_table", "Y": "f_trashcan" },
       "items": {
-        "@": { "item": "army_bed", "chance": 60, "repeat": [ 1, 2 ] },
+        "@": { "item": "army_bed", "chance": 50, "repeat": [ 1, 2 ] },
         "T": { "item": "dining", "chance": 50 },
-        "H": { "item": "milspec_arsenal_weapon&ammo_collection", "chance": 75 },
-        "R": { "item": "any_MRE", "chance": 70, "repeat": [ 1, 8 ] },
-        "t": { "item": "army_personal_locker", "chance": 75, "repeat": [ 1, 2 ] },
+        "H": { "item": "milspec_arsenal_weapon&ammo_collection", "chance": 33 },
+        "R": { "item": "any_MRE", "chance": 60, "repeat": [ 1, 3 ] },
+        "t": { "item": "army_personal_locker", "chance": 50, "repeat": [ 1, 2 ] },
         "Y": { "item": "trash_cart", "chance": 50 },
         "&": { "item": "SUS_toilet", "chance": 50 }
       },

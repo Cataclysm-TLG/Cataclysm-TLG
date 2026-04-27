@@ -27,7 +27,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "category": "food",
     "name": { "str_sp": "juvenile sourdough starter" },
-    "description": "A floury paste that is slowly going bad.  Someday it will be sourdough.",
+    "description": "A floury paste that is slowly fermenting.  Someday it will be sourdough.",
     "comestible_type": "FOOD",
     "weight": "100 g",
     "volume": "100 ml",
@@ -36,17 +36,11 @@
     "material": [ "wheat" ],
     "symbol": "%",
     "color": "white",
-    "flags": [ "SOFT" ],
+    "flags": [ "SOFT", "SPAWN_ACTIVE" ],
     "fun": -5,
     "calories": 192,
-    "use_action": {
-      "target": "sourdough_starter_uncovered",
-      "msg": "After feeding it and caring for it for a week, your sourdough starter is finally ready for the big leagues.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 518400,
-      "not_ready_msg": "You've been caring for your starter for a while, but it's going to need longer before you can do anything tasty with it."
-    },
+    "countdown_interval": "24 hours",
+    "revert_to": "sourdough_starter_uncovered",
     "vitamins": [ [ "wheat_allergen", 1 ] ]
   },
   {
@@ -64,17 +58,11 @@
     "material": [ "wheat" ],
     "symbol": "%",
     "color": "white",
-    "flags": [ "SOFT" ],
+    "flags": [ "SPAWN_ACTIVE", "SOFT" ],
     "fun": -5,
     "calories": 192,
-    "use_action": {
-      "target": "sourdough_starter_uncovered",
-      "msg": "The starter is now stinky and bubbly, and looks ready for cooking.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 86400,
-      "not_ready_msg": "The starter isn't quite ready to go."
-    },
+    "countdown_interval": "24 hours",
+    "revert_to": "sourdough_starter_uncovered",
     "vitamins": [ [ "wheat_allergen", 1 ] ]
   },
   {

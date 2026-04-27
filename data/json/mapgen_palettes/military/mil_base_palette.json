@@ -36,7 +36,7 @@
       "d": [ "t_door_metal_c", "t_door_metal_o" ],
       "z": "t_door_metal_pickable",
       "D": "t_door_metal_locked",
-      "g": "t_reinforced_glass_shutter",
+      "g": "t_laminated_glass_shutter",
       ">": "t_stairs_down",
       "<": "t_stairs_up",
       "w": "t_window_domestic",

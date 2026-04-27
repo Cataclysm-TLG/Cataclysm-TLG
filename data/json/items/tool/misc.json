@@ -49,7 +49,7 @@
     "use_action": {
       "type": "manualnoise",
       "moves": 100,
-      "noise": 50,
+      "noise": 110,
       "noise_message": "HOOOOONK!",
       "noise_id": "misc",
       "noise_variant": "airhorn",
@@ -277,27 +277,10 @@
     "symbol": ",",
     "color": "green",
     "qualities": [ [ "HOSE", 1 ] ],
-    "melee_damage": { "bash": 5 }
-  },
-  {
-    "id": "grapnel",
-    "type": "ITEM",
-    "category": "tools",
-    "name": { "str": "grappling hook" },
-    "description": "A folding grappling hook attached to a stout, 30-foot long piece of lightweight cord.  Useful for keeping yourself safe from falls.  Can be used in place of a long rope for butchering, in a pinch.",
-    "weight": "1980 g",
-    "volume": "2500 ml",
-    "copy-from": "rope_30",
-    "price_postapoc": "5 USD",
-    "to_hit": -2,
-    "material": [ "cotton", "steel" ],
-    "symbol": ";",
-    "color": "light_gray",
-    "techniques": [ "SPIN", "WRAP" ],
-    "qualities": [ [ "COOK", 1 ], [ "ROPE", 2 ] ],
-    "extend": { "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE" ] },
-    "use_action": { "type": "deploy_furn", "furn_type": "f_rope_up" },
-    "melee_damage": { "bash": 12, "cut": 6 }
+    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "uneven" },
+    "flags": [ "ALWAYS_TWOHAND" ],
+    "weapon_category": [ "WHIPS" ],
+    "melee_damage": { "bash": 4 }
   },
   {
     "type": "ITEM",
@@ -305,20 +288,21 @@
     "category": "weapons",
     "id": "grip_hook",
     "name": { "str": "grip hook" },
-    "description": "A simple steel meat hook with a circular steel handle.",
+    "description": "A simple steel hook with a circular steel handle.",
     "weight": "900 g",
+    "longest_side": "26 cm",
     "color": "light_gray",
     "symbol": "?",
     "material": [ "steel" ],
     "techniques": [ "DEF_DISARM", "SWEEP" ],
     "flags": [ "DURABLE_MELEE", "BELT_CLIP", "ALLOWS_BODY_BLOCK" ],
     "volume": "750 ml",
-    "to_hit": -3,
+    "to_hit": { "grip": "solid", "length": "hand", "surface": "point", "balance": "neutral" },
     "price": "20 USD",
     "price_postapoc": "2 USD 50 cent",
-    "qualities": [ [ "HAMMER", 1 ], [ "BUTCHER", -5 ] ],
-    "melee_damage": { "bash": 2, "stab": 6 },
-    "weapon_category": [ "SHIVS" ]
+    "qualities": [ [ "HAMMER", 1 ], [ "COOK", 1 ] ],
+    "weapon_category": [ "HOOKING_WEAPONS" ],
+    "melee_damage": { "bash": 3, "stab": 6 }
   },
   {
     "id": "hand_pump",
@@ -433,7 +417,6 @@
       {
         "target": "large_space_heater_on",
         "msg": "You turn on the heater.",
-        "active": true,
         "need_charges": 1,
         "need_charges_msg": "The heater needs more charge.",
         "menu_text": "Turn on",
@@ -453,7 +436,8 @@
     "description": "A portable electric heater that steadily emits warm air.  Raises temperature about 10 degrees Celsius, and fills a larger volume of air than the smaller version.",
     "power_draw": "1 kW",
     "emits": [ "emit_hot_air2_blast" ],
-    "flags": [ "ALLOWS_REMOTE_USE", "LIGHT_2" ],
+    "light": 2,
+    "flags": [ "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ],
     "revert_to": "large_space_heater",
     "use_action": [
       {
@@ -465,27 +449,6 @@
       },
       { "type": "link_up", "cable_length": 2, "charge_rate": "1 kW" }
     ]
-  },
-  {
-    "id": "lifestraw",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "lifestraw" },
-    "description": "A small personal water filter.  The instructions say to set the lifestraw in suspect water, let sit for one minute then drink.  The two-part filtration system will purify the water you drink up to a certain amount.  Water taken from uncertain sources like a river may be dirty.",
-    "weight": "104 g",
-    "volume": "592 ml",
-    "price": "40 USD",
-    "price_postapoc": "10 USD",
-    "to_hit": -3,
-    "material": [ "cotton", "plastic" ],
-    "symbol": "i",
-    "looks_like": "advanced_ecig",
-    "color": "light_cyan",
-    "initial_charges": 4000,
-    "max_charges": 4000,
-    "charges_per_use": 1,
-    "use_action": [ "WATER_PURIFIER" ],
-    "melee_damage": { "bash": 1 }
   },
   {
     "type": "ITEM",
@@ -642,7 +605,6 @@
       {
         "target": "small_space_heater_on",
         "msg": "You turn on the heater.",
-        "active": true,
         "need_charges": 1,
         "need_charges_msg": "The heater needs more charge.",
         "menu_text": "Turn on",
@@ -662,7 +624,8 @@
     "description": "A portable electric heater that steadily emits warm air.  Raises temperature about 10 degrees Celsius.",
     "power_draw": "500 W",
     "emits": [ "emit_hot_air2_stream" ],
-    "flags": [ "ALLOWS_REMOTE_USE", "LIGHT_2" ],
+    "light": 2,
+    "flags": [ "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ],
     "revert_to": "small_space_heater",
     "use_action": [
       {
@@ -988,7 +951,8 @@
     "symbol": "/",
     "color": "light_gray",
     "techniques": [ "WBLOCK_3", "WIDE" ],
-    "flags": [ "FIRE", "LIGHT_240", "FLAMING", "TRADER_AVOID" ],
+    "light": 240,
+    "flags": [ "FIRE", "FLAMING", "TRADER_AVOID" ],
     "melee_damage": { "bash": 1, "cut": 1 }
   },
   {
@@ -1088,12 +1052,11 @@
       {
         "type": "manualnoise",
         "moves": 100,
-        "noise": 34,
+        "noise": 100,
         "noise_message": "FWEEEET!",
         "noise_id": "misc",
         "noise_variant": "whistle",
-        "use_message": "You blow the whistle.",
-        "//": "Somewhat lower than the proper whistle."
+        "use_message": "You blow the whistle."
       },
       "WEATHER_TOOL",
       { "type": "firestarter", "moves": 1000, "moves_slow": 25000, "need_sunlight": true }
@@ -1138,58 +1101,6 @@
     "melee_damage": { "bash": 2, "cut": 2 }
   },
   {
-    "id": "air_launcher",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "novelty pneumatic launcher" },
-    "description": "A toy that uses compressed air to launch small objects for the amusement of children.  It is very tiring to reload, and completely ineffective as a weapon.  Pump sold separately.",
-    "looks_like": "m79",
-    "weight": "1850 g",
-    "volume": "3850 ml",
-    "price": "15 USD",
-    "price_postapoc": "1 USD",
-    "to_hit": -1,
-    "material": [ "steel", "plastic" ],
-    "symbol": "P",
-    "color": "blue",
-    "flags": [ "FRAGILE_MELEE" ],
-    "melee_damage": { "bash": 4 }
-  },
-  {
-    "id": "dressage_whip",
-    "type": "ITEM",
-    "symbol": "/",
-    "color": "dark_gray",
-    "name": { "str": "dressage whip" },
-    "description": "A long, thin and flexible rod that tapers to a point, originally used to stimulate a horse and give them orders.",
-    "weight": "90 g",
-    "volume": "732 ml",
-    "longest_side": "1100 mm",
-    "price": "10 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "epoxy", "nylon" ],
-    "flags": [ "REACH_ATTACK", "REACH3" ],
-    "to_hit": { "grip": "solid", "length": "long", "surface": "point", "balance": "neutral" },
-    "melee_damage": { "cut": 1 }
-  },
-  {
-    "id": "riding_crop",
-    "type": "ITEM",
-    "symbol": "/",
-    "color": "dark_gray",
-    "name": { "str": "riding crop" },
-    "description": "A rod ending in a leather popper originally used to stimulate a horse and give them orders.",
-    "weight": "68 g",
-    "volume": "1480 ml",
-    "longest_side": "600 mm",
-    "price": "10 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "epoxy", "leather" ],
-    "flags": [ "REACH_ATTACK" ],
-    "to_hit": { "grip": "solid", "length": "long", "surface": "point", "balance": "neutral" },
-    "melee_damage": { "cut": 1 }
-  },
-  {
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "id": "nm_teeth",
@@ -1209,7 +1120,7 @@
       "done_message": "You carefully place the teeth on the ground, ready to be walked on by something passing by."
     },
     "flags": [ "HURT_WHEN_WIELDED", "TRADER_AVOID", "SINGLE_USE", "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
-    "to_hit": -1,
+    "to_hit": { "grip": "none", "length": "hand", "surface": "line", "balance": "neutral" },
     "melee_damage": { "cut": 12 },
     "weapon_category": [ "SHIVS" ]
   }

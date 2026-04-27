@@ -45,7 +45,15 @@
         { "not": { "u_has_trait": "CRUSTACEAN_CARAPACE" } }
       ]
     },
-    "effect": [ { "u_add_effect": "molting_imminent", "intensity": 1, "duration": "PERMANENT" }, { "u_lose_effect": "molting" } ]
+    "effect": [
+      { "u_add_effect": "molting_imminent", "intensity": 1, "duration": "PERMANENT" },
+      { "u_lose_effect": "molting" },
+      {
+        "u_message": "You can hardly move in your tightening exoskeleton, and you feel a strong impulse to hunker down somewhere safe.",
+        "type": "bad",
+        "popup": true
+      }
+    ]
   },
   {
     "type": "effect_on_condition",
@@ -64,7 +72,8 @@
       { "u_add_effect": "sleep", "duration": "5 minutes" },
       {
         "u_message": "Your exoskeleton grows steadily more rigid until you can no longer move.  You strain against it for a few minutes, and it peels and cracks away in chunks like a plaster mold, revealing a soft and tender new layer beneath.",
-        "type": "bad"
+        "type": "bad",
+        "popup": true
       },
       { "u_lose_trait": "CHITIN2" },
       { "u_lose_trait": "CHITIN" },
@@ -121,7 +130,15 @@
         { "not": { "u_has_effect": "molting_imminent" } }
       ]
     },
-    "effect": [ { "u_add_effect": "molting_imminent", "intensity": 1, "duration": "PERMANENT" }, { "u_lose_effect": "molting" } ]
+    "effect": [
+      { "u_add_effect": "molting_imminent", "intensity": 1, "duration": "PERMANENT" },
+      { "u_lose_effect": "molting" },
+      {
+        "u_message": "You can hardly move in your tightening exoskeleton, and you feel a strong impulse to hunker down somewhere safe.",
+        "type": "bad",
+        "popup": true
+      }
+    ]
   },
   {
     "type": "effect_on_condition",
@@ -140,7 +157,8 @@
       { "u_add_effect": "sleep", "duration": "15 minutes" },
       {
         "u_message": "Your exoskeleton locks up around you like a straitjacket, completely immobilizing you.  As you try to move, you begin to feel it painlessly rip, opening a hole through which you can slowly emerge, raw, soft, and vulnerable.",
-        "type": "bad"
+        "type": "bad",
+        "popup": true
       },
       { "u_lose_trait": "CHITIN3" },
       { "u_lose_trait": "CHITIN2" },
@@ -513,10 +531,10 @@
   {
     "type": "effect_on_condition",
     "id": "picked_rosebuds_fall",
-    "recurrence": [ "1 seconds", "1 seconds" ],
-    "condition": { "and": [ { "u_has_trait": "ROSEBUDS_FALL_active" } ] },
+    "eoc_type": "ACTIVATION",
     "effect": [
-      { "u_lose_trait": "ROSEBUDS_FALL_active" },
+      { "u_lose_trait": "ROSEBUDS_FALL" },
+      { "u_message": "Most of the fruits are beyond consideration, but you pick what you can and discard the rest." },
       { "u_spawn_item": "mutfruit", "count": 1 },
       { "u_add_trait": "ROSEBUDS_FALL_PICKED" }
     ]

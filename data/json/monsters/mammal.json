@@ -73,7 +73,7 @@
     "special_attacks": [ { "type": "bite", "cooldown": 15 } ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
-    "flags": [ "SEES", "SMELLS", "HEARS", "GOODHEARING", "WARM", "FLIES", "ANIMAL", "PATH_AVOID_DANGER", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "GOODHEARING", "WARM", "FLIES", "ANIMAL", "PATH_AVOID_DANGER", "SMALL_HIDER" ]
   },
   {
     "id": "mon_bear_cub",
@@ -459,14 +459,6 @@
     "upgrades": { "age_grow": 120, "into": "mon_cat" },
     "//": "Kittens do not have their full fur yet and are really sensitive to cold temperature",
     "armor": { "cold": 0 }
-  },
-  {
-    "id": "mon_cat_isherwood",
-    "type": "MONSTER",
-    "copy-from": "mon_cat",
-    "description": "A small domesticated predator gone feral in the absence of human stewardship.  Located near the old Isherwood cabin.",
-    "morale": 50,
-    "fear_triggers": [ "SOUND", "FRIEND_ATTACKED" ]
   },
   {
     "id": "mon_chipmunk",
@@ -894,7 +886,7 @@
     "harvest": "dog_tiny_with_skull",
     "upgrades": { "age_grow": 42, "into_group": "GROUP_DOG_EVOLVED" },
     "extend": { "flags": [ "NO_BREED", "SMALL_HIDER" ] },
-    "delete": { "flags": [ "CORNERED_FIGHTER" ], "zombify_into": "mon_zombie_dog" }
+    "delete": { "flags": [ "CORNERED_FIGHTER" ] }
   },
   {
     "id": "mon_dog_trained",
@@ -1002,7 +994,6 @@
     "vision_night": 6,
     "harvest": "dog_tiny_with_skull",
     "fear_triggers": [ "HURT" ],
-    "delete": { "zombify_into": "mon_zombie_dog" },
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "reproduction": { "baby_monster": "mon_dog_little_baby", "baby_count": 3, "baby_timer": 240 },
     "//": "1-3 puppies & 240 days per-litter for size tiny canines",

@@ -83,9 +83,9 @@
 #include "visitable.h"
 #include "vpart_position.h"
 #include "vpart_range.h"
+#include "weather.h"
 
 static const bionic_id bio_voice( "bio_voice" );
-
 static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_controlled( "controlled" );
 static const efftype_id effect_drunk( "drunk" );
@@ -119,6 +119,8 @@ static const item_group_id Item_spawn_data_npc_eyes( "npc_eyes" );
 static const item_group_id Item_spawn_data_survivor_bashing( "survivor_bashing" );
 static const item_group_id Item_spawn_data_survivor_cutting( "survivor_cutting" );
 static const item_group_id Item_spawn_data_survivor_stabbing( "survivor_stabbing" );
+
+static const itype_id itype_molotov( "molotov" );
 
 static const json_character_flag json_flag_BLIND_READ_FAST( "BLIND_READ_FAST" );
 static const json_character_flag json_flag_BLIND_READ_SLOW( "BLIND_READ_SLOW" );
@@ -287,7 +289,7 @@ npc::npc()
 }
 
 standard_npc::standard_npc( const std::string &name, const tripoint_bub_ms &pos,
-                            const std::vector<std::string> &clothing,
+                            const std::vector<itype_id> &clothing,
                             int sk_lvl, int s_str, int s_dex, int s_int, int s_per )
 {
     map &here = get_map();
@@ -314,7 +316,7 @@ standard_npc::standard_npc( const std::string &name, const tripoint_bub_ms &pos,
         set_skill_level( e.ident(), std::max( sk_lvl, 0 ) );
     }
 
-    for( const std::string &e : clothing ) {
+    for( const itype_id &e : clothing ) {
         wear_item( item( e ), false );
     }
 
@@ -608,7 +610,7 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
         return;
     }
 
-    set_wielded_item( item( "null", calendar::turn_zero ) );
+    set_wielded_item( item( itype_id::NULL_ID(), calendar::turn_zero ) );
     inv->clear();
     randomize_personality();
     moves = 100;
@@ -970,7 +972,7 @@ void starting_inv( npc &who, const npc_class_id &type )
     starting_inv_ammo( who, res, multiplier );
 
     if( type == NC_ARSONIST ) {
-        res.emplace_back( "molotov" );
+        res.emplace_back( itype_molotov );
     }
 
     int qty = ( type == NC_EVAC_SHOPKEEP ||
@@ -1125,6 +1127,7 @@ void npc::revert_after_activity()
 {
     mission = previous_mission;
     attitude = previous_attitude;
+    activity.canceled( *this );
     activity = player_activity();
     current_activity_id = activity_id::NULL_ID();
     clear_destination();
@@ -1423,30 +1426,64 @@ void npc::do_npc_read( bool ebook )
     item_location ereader;
 
     if( !ebook ) {
-        book = game_menus::inv::read( *npc_player );
+        book = game_menus::inv::read( *npc_player, false );
     } else {
         ereader = game_menus::inv::ereader_to_use( *npc_player );
         if( !ereader ) {
-            add_msg( _( "Never mind." ) );
+            add_msg( _( "Nevermind." ) );
             return;
+        }
+        // Activate the ereader screen before selecting the book so that the
+        // book item_location is created against the already-on ereader and
+        // remains valid across save/load cycles.
+        if( ereader->type->tool && ereader->type->tool->power_draw == 0_W ) {
+            npc_player->invoke_item( &*ereader, "transform", npc_player->pos_bub() );
         }
         book = game_menus::inv::ebookread( *npc_player, ereader );
     }
 
+    const auto deactivate = [&]() {
+        if( ereader && ereader->type->tool && ereader->type->tool->power_draw > 0_W ) {
+            npc_player->invoke_item( &*ereader, "transform", npc_player->pos_bub() );
+        }
+    };
+
     if( !book ) {
-        add_msg( _( "Never mind." ) );
+        deactivate();
         return;
     }
 
     std::vector<std::string> fail_reasons;
     Character *npc_character = as_character();
     if( !npc_character ) {
+        deactivate();
         return;
     }
 
-    book = book.obtain( *npc_character );
+    if( ebook ) {
+        if( !ereader->has_flag( flag_ALLOWS_REMOTE_USE ) ) {
+            item the_book = *book.get_item();
+            if( !npc_character->is_wielding( *ereader ) ) {
+                npc_character->wield( *ereader );
+                ereader = npc_character->get_wielded_item();
+            }
+            if( !ereader ) {
+                deactivate();
+                return;
+            }
+            item *newit = ereader->get_item_with( [&]( const item & it ) {
+                return it.typeId() == the_book.typeId();
+            } );
+            if( newit ) {
+                book = item_location( ereader, &*newit );
+            }
+        }
+    } else {
+        book = book.obtain( *npc_character );
+    }
     if( can_read( *book, fail_reasons ) ) {
-        add_msg_if_player_sees( pos_bub(), _( "%s starts reading." ), disp_name() );
+        add_msg_if_player_sees( pos_bub(), ebook ? _( "%s starts reading ebook %s." ) :
+                                _( "%s starts reading %s." ), disp_name(), book->type_name() );
 
         // NPCs can't read to other NPCs yet
         const time_duration time_taken = time_to_read( *book, *this );
@@ -1456,6 +1493,7 @@ void npc::do_npc_read( bool ebook )
         assign_activity( actor );
 
     } else {
+        deactivate();
         for( const std::string &reason : fail_reasons ) {
             say( reason );
         }
@@ -1874,7 +1912,7 @@ void npc::make_angry()
         my_fac->trusts_u = std::min( -15, my_fac->trusts_u - 5 );
     }
     if( op_of_u.fear > 10 + personality.aggression + personality.bravery ) {
-        set_attitude( NPCATT_FLEE_TEMP ); // We don't want to take u on!
+        set_attitude( NPCATT_FLEE_TEMP ); // We don't want to take you on!
     } else {
         set_attitude( NPCATT_KILL ); // Yeah, we think we could take you!
     }
@@ -1902,6 +1940,9 @@ int npc::assigned_missions_value() const
     return ret;
 }
 
+// Legacy need ranking. Scores each need 0-20, sorts by urgency.
+// The behavior tree (npc_behavior.json + character_oracle.cpp)
+// is the intended replacement for survival needs. See #28681.
 void npc::decide_needs()
 {
     const item_location weapon = get_wielded_item();
@@ -2731,10 +2772,6 @@ void npc::npc_dismount()
         return;
     }
     remove_effect( effect_riding );
-    if( mounted_creature->has_flag( mon_flag_RIDEABLE_MECH ) &&
-        !mounted_creature->type->mech_weapon.is_empty() ) {
-        get_wielded_item().remove_item();
-    }
     mounted_creature->remove_effect( effect_ridden );
     mounted_creature->add_effect( effect_controlled, 5_turns );
     mounted_creature = nullptr;
@@ -3369,12 +3406,19 @@ void npc::on_unload()
 {
 }
 
+void npc::update_bodytemp_and_wetness()
+{
+    update_bodytemp();
+    update_body_wetness( *get_weather().weather_precise );
+}
+
 // A throtled version of player::update_body since npc's don't need to-the-turn updates.
 void npc::npc_update_body()
 {
     if( calendar::once_every( 10_seconds ) ) {
         update_body( last_updated, calendar::turn );
         last_updated = calendar::turn;
+        update_bodytemp_and_wetness();
     }
 }
 
@@ -3428,6 +3472,11 @@ void npc::on_load( map *here )
             update_mental_focus();
         }
     }
+
+    // Reconcile body temperature and wetness with current weather.
+    // The catch-up loops above ran update_body() but not update_bodytemp();
+    // one recompute at current conditions is enough since temp converges fast.
+    update_bodytemp_and_wetness();
 
     if( dt > 0_turns ) {
         // This ensures food is properly rotten at load

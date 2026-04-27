@@ -16,7 +16,6 @@
 #include "anatomy.h"
 #include "bionics.h"
 #include "body_part_set.h"
-#include "cached_options.h"
 #include "calendar.h"
 #include "cata_assert.h"
 #include "cata_utility.h"
@@ -469,8 +468,8 @@ bool Creature::is_likely_underwater( const map &here ) const
 {
     return is_underwater() ||
            ( has_flag( mon_flag_AQUATIC ) &&
-             here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub( here ) ) &&
-             !here.has_vehicle_floor( pos_bub() ) );
+             ( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub( here ) ) ||
+               here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, pos_bub( here ) ) ) );
 }
 
 // Detects whether a target is sapient or not (or barely sapient, since ferals count)
@@ -596,6 +595,12 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         here.sees( pos, critter_pos, 2 ) ) {
         return true;
     }
+    // Creatures underwater beneath a solid surface (walkway, ice) are hidden
+    // from non-underwater observers. Underwater observers can still see each other.
+    if( !is_likely_underwater( here ) && critter.is_underwater() &&
+        here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, critter_pos ) ) {
+        return false;
+    }
 
     // If we cannot see without any of the penalties below, bail now.
     if( !sees( here, critter_pos, critter.is_avatar() ) ) {
@@ -632,11 +637,11 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     }
 
     // Camouflage or Water Camouflage checks
-    if( has_camouflage && target_range > this->get_eff_per() ) {
+    if( has_camouflage && target_range > this->spot_check() ) {
         return false;
     }
 
-    if( has_water_camouflage && target_range > this->get_eff_per() ) {
+    if( has_water_camouflage && target_range > this->spot_check() ) {
         if( is_underwater ||
             here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, critter.pos_bub( here ) ) ||
             ( here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, critter.pos_bub( here ) ) &&
@@ -1053,8 +1058,7 @@ void Creature::deal_melee_hit( Creature *source, int hit_spread, bool critical_h
     if( has_effect( effect_ridden ) ) {
         monster *mons = dynamic_cast<monster *>( this );
         if( mons && mons->mounted_player ) {
-            if( !mons->has_flag( mon_flag_MECH_DEFENSIVE ) &&
-                one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
+            if( one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
                 mons->mounted_player->deal_melee_hit( source, hit_spread, critical_hit, dam, dealt_dam, attack );
                 return;
             }
@@ -1444,8 +1448,7 @@ void Creature::deal_projectile_attack( map *here, Creature *source, dealt_projec
     if( has_effect( effect_ridden ) ) {
         monster *mons = as_monster();
         if( mons && mons->mounted_player ) {
-            if( !mons->has_flag( mon_flag_MECH_DEFENSIVE ) &&
-                one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
+            if( one_in( std::max( 2, mons->get_size() - mons->mounted_player->get_size() ) ) ) {
                 mons->mounted_player->deal_projectile_attack( here, source, attack, missed_by, print_messages,
                         wp_attack );
                 return;
@@ -1689,6 +1692,12 @@ void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
     }
 
     // Pull creature
+
+    if( c->has_effect( effect_tied ) || c->has_flag( mon_flag_IMMOBILE ) ||
+        c->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
+        add_msg_if_player( _( "%s is immobile and cannot be moved." ), c->disp_name( false, true ) );
+        return;
+    }
     const Character *ch = as_character();
     const monster *mon = as_monster();
     const int str = ch != nullptr ? ch->get_str() : mon != nullptr ? mon->get_grab_strength() : 10;
@@ -1715,6 +1724,11 @@ void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
 bool Creature::grapple_drag( Creature *c )
 {
     if( !has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        return false;
+    }
+    if( c->has_effect( effect_tied ) || c->has_flag( mon_flag_IMMOBILE ) ||
+        c->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
+        add_msg_if_player( _( "%s is immobile and cannot be moved." ), c->disp_name( false, true ) );
         return false;
     }
     const Character *ch = as_character();
@@ -1762,30 +1776,52 @@ bool Creature::grapple_drag( Creature *c )
     }
 }
 
-bool Creature::stumble_invis( const Creature &player, const bool stumblemsg )
+bool Creature::stumble_invis( const Creature &attacker, const bool stumblemsg )
 {
     map &here = get_map();
 
     // DEBUG insivibility can't be seen through
-    if( player.has_trait( trait_DEBUG_CLOAK ) ) {
+    if( attacker.has_trait( trait_DEBUG_CLOAK ) ) {
         return false;
     }
-    if( this == &player || !is_adjacent( &player, true ) ) {
+    if( this == &attacker || !is_adjacent( &attacker, true ) ) {
         return false;
     }
     if( stumblemsg ) {
-        const bool player_sees = player.sees( here, *this );
+        const bool player_sees = attacker.sees( here, *this );
         add_msg( m_bad, _( "%s stumbles into you!" ), player_sees ? this->disp_name( false,
                  true ) : _( "Something" ) );
     }
     add_effect( effect_stumbled_into_invisible, 6_seconds );
     // Mark last known location, or extend duration if exists
-    if( here.has_field_at( player.pos_bub( here ), field_fd_last_known ) ) {
-        here.set_field_age( player.pos_bub( here ), field_fd_last_known, 0_seconds );
+    if( here.has_field_at( attacker.pos_bub( here ), field_fd_last_known ) ) {
+        here.set_field_age( attacker.pos_bub( here ), field_fd_last_known, 0_seconds );
     } else {
-        here.add_field( player.pos_bub( here ), field_fd_last_known );
+        here.add_field( attacker.pos_bub( here ), field_fd_last_known );
     }
     moves = 0;
+    return true;
+}
+
+bool Creature::react_to_ranged( const Creature &attacker )
+{
+    map &here = get_map();
+    // If we're blind or stunned we can't track throws, and we don't need to if we see the attacker.
+    if( sees( here, attacker ) || has_effect( effect_blind ) || has_effect( effect_stunned ) ) {
+        return false;
+    }
+    // Zombies are dumb. Robots are REALLY dumb.
+    if( ( in_species( species_ZOMBIE ) && !one_in( 3 ) ) || ( in_species( species_ROBOT ) ||
+            in_species( species_ROBOT_FLYING ) ) ) {
+        return false;
+    }
+    add_effect( effect_stumbled_into_invisible, 2_seconds );
+    // Mark last known location, or extend duration if exists
+    if( here.has_field_at( attacker.pos_bub( here ), field_fd_last_known ) ) {
+        here.set_field_age( attacker.pos_bub( here ), field_fd_last_known, 0_seconds );
+    } else {
+        here.add_field( attacker.pos_bub( here ), field_fd_last_known );
+    }
     return true;
 }
 
@@ -1964,14 +2000,6 @@ void Creature::add_effect( const effect_source &source, const efftype_id &eff_id
             const int prev_int = e.get_intensity();
             // If we do, mod the duration, factoring in the mod value
             e.mod_duration( dur * e.get_dur_add_perc() / 100 );
-            // Limit to max duration
-            if( e.get_duration() > e.get_max_duration() ) {
-                e.set_duration( e.get_max_duration() );
-            }
-            // Adding a permanent effect makes it permanent
-            if( e.is_permanent() ) {
-                e.pause_effect();
-            }
             // int_dur_factor overrides all other intensity settings
             // ...but it's handled in set_duration, so explicitly do nothing here
             if( e.get_int_dur_factor() > 0_turns ) {
@@ -1982,14 +2010,8 @@ void Creature::add_effect( const effect_source &source, const efftype_id &eff_id
             } else if( e.get_int_add_val() != 0 ) {
                 e.mod_intensity( e.get_int_add_val(), is_avatar() );
             }
-
-            // Bound intensity by [1, max intensity]
-            if( e.get_intensity() < 1 ) {
-                add_msg_debug( debugmode::DF_CREATURE, "Bad intensity, ID: %s", e.get_id().c_str() );
-                e.set_intensity( 1 );
-            } else if( e.get_intensity() > e.get_max_intensity() ) {
-                e.set_intensity( e.get_max_intensity() );
-            }
+            // Bound new effect intensity by [1, max intensity]
+            e.clamp_intensity();
             if( e.get_intensity() != prev_int ) {
                 on_effect_int_change( eff_id, e.get_intensity(), bp );
             }
@@ -1998,26 +2020,11 @@ void Creature::add_effect( const effect_source &source, const efftype_id &eff_id
 
     if( !found ) {
         // If we don't already have it then add a new one
-
         // Now we can make the new effect for application
-        effect e( effect_source( source ), &type, dur, bp.id(), permanent, intensity, calendar::turn );
-        // Bound to max duration
-        if( e.get_duration() > e.get_max_duration() ) {
-            e.set_duration( e.get_max_duration() );
-        }
 
-        // Force intensity if it is duration based
-        if( e.get_int_dur_factor() != 0_turns ) {
-            const int intensity = std::ceil( e.get_duration() / e.get_int_dur_factor() );
-            e.set_intensity( std::max( 1, intensity ) );
-        }
-        // Bound new effect intensity by [1, max intensity]
-        if( e.get_intensity() < 1 ) {
-            add_msg_debug( debugmode::DF_CREATURE, "Bad intensity, ID: %s", e.get_id().c_str() );
-            e.set_intensity( 1 );
-        } else if( e.get_intensity() > e.get_max_intensity() ) {
-            e.set_intensity( e.get_max_intensity() );
-        }
+        time_duration duration = permanent ? std::max( dur, 1_seconds ) : dur;
+        effect e( effect_source( source ), &type, duration, bp.id(), permanent, intensity, calendar::turn );
+
         ( *effects )[eff_id][bp] = e;
         if( Character *ch = as_character() ) {
             get_event_bus().send<event_type::character_gains_effect>( ch->getID(), bp.id(), eff_id );
@@ -2565,7 +2572,7 @@ int Creature::get_speed() const
     return get_speed_base() + get_speed_bonus();
 }
 
-int Creature::get_eff_per() const
+int Creature::spot_check() const
 {
     return 0;
 }
@@ -2672,7 +2679,7 @@ bodypart_id Creature::get_part_id( const bodypart_id &id,
     if( found != body.end() ) {
         return found->first;
     }
-    // try to find an equivalent part in the body map
+    // Check the body map for equivalent parts e.g. of the same type.
     if( filter >= body_part_filter::equivalent ) {
         for( const std::pair<const bodypart_str_id, bodypart> &bp : body ) {
             if( id->part_side == bp.first->part_side &&
@@ -2681,7 +2688,7 @@ bodypart_id Creature::get_part_id( const bodypart_id &id,
             }
         }
     }
-    // try to find the next best thing
+    // Try to find the next best thing.
     std::pair<bodypart_id, float> best = { bodypart_str_id::NULL_ID().id(), 0.0f };
     if( filter >= body_part_filter::next_best ) {
         for( const std::pair<const bodypart_str_id, bodypart> &bp : body ) {

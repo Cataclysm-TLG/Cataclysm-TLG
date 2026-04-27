@@ -229,7 +229,8 @@
     "result": "xs_bra",
     "type": "recipe",
     "copy-from": "bra",
-    "using": [ [ "tailoring_cotton_sheet", 1 ], [ "fastener_small", 1 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 1 ], [ "fastener_small", 1 ] ],
+    "components": [ [ [ "wire", 1 ] ] ]
   },
   {
     "result": "bellyband",

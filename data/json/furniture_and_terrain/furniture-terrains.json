@@ -1302,6 +1302,7 @@
       "TINY",
       "DONT_REMOVE ROTTEN",
       "SEALED",
+      "GROWTH_SEED",
       "CONTAINER"
     ],
     "examine_action": "aggie_plant",
@@ -1489,6 +1490,7 @@
       "TINY",
       "DONT_REMOVE ROTTEN",
       "SEALED",
+      "GROWTH_SEED",
       "CONTAINER"
     ],
     "examine_action": "aggie_plant",

@@ -175,8 +175,8 @@ void Character::try_remove_heavysnare()
             remove_effect( effect_heavysnare );
             add_msg_player_or_npc( m_good, _( "You free yourself from the heavy snare!" ),
                                    _( "<npcname> frees themselves from the heavy snare!" ) );
-            item rope( "rope_6", calendar::turn );
-            item snare( "snare_trigger", calendar::turn );
+            item rope( itype_rope_6, calendar::turn );
+            item snare( itype_snare_trigger, calendar::turn );
             here.add_item_or_charges( pos_bub(), rope );
             here.add_item_or_charges( pos_bub(), snare );
         } else {
@@ -236,7 +236,8 @@ bool Character::try_remove_grab( bool attacking )
         // Iterate through all our grabs and attempt to break them one by one
         for( const effect &eff : get_effects_with_flag( json_flag_GRAB ) ) {
             float escape_chance = 1.0f;
-            float grabber_roll = static_cast<float>( eff.get_intensity() );
+            int grab_str = eff.get_intensity();
+            float grabber_roll = static_cast<float>( grab_str );
             // We need to figure out which Creature is responsible for this grab early for good messaging
             // For now, one grabber per limb TODO: handle multiple grabbers and decrement intensity
             Creature *grabber = nullptr;
@@ -344,11 +345,21 @@ bool Character::try_remove_grab( bool attacking )
                 escape_chance *= 1.5f;
                 add_msg_debug( debugmode::DF_MATTACK,
                                "Pocket torn off in the attempt, escape chance increased to %.1f",
-                               escape_chance * 100 / eff.get_intensity() );
+                               escape_chance * 100 / grab_str );
             }
-
+            // Grabber burns energy trying to hold us.
+            if( grabber && !grabber->is_monster() ) {
+                int maintain_cost =
+                    std::clamp( std::max( 1, 100 - grab_str ) * ( std::max( 1,
+                                enum_size() - grabber->enum_size() ) + static_cast<int>( escape_chance / 10.f ) ),
+                                100,
+                                400
+                              );
+                grabber->as_character()->set_activity_level( EXPLOSIVE_EXERCISE );
+                grabber->as_character()->burn_energy_arms( -maintain_cost );
+            }
             // Every attempt burns some stamina - maybe some moves?
-            burn_energy_arms( -5 * eff.get_intensity() );
+            burn_energy_arms( -5 * grab_str );
             if( x_in_y( escape_chance, grabber_roll ) ) {
                 if( grabber->is_monster() ) {
                     grabber->as_monster()->remove_grab( eff.get_bp().id() );

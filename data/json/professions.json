@@ -899,41 +899,6 @@
   },
   {
     "type": "profession",
-    "id": "churl",
-    "name": "Churl",
-    "description": "What the deuyl?  Ye ne wist noo thing of this straunge plaas nor what wycked enchauntment brought ye hidder.  Wyth this accoustrement ye must needs underfongen to find newe lyflode in the most hidous Cataclysm man hath witnessed sithen that deluge Noe rood out in his greet schippe.",
-    "npc_background": "BG_survival_story_EVACUEE",
-    "points": 0,
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "footrags" },
-          { "item": "loincloth" },
-          { "item": "cloak_wool" },
-          { "item": "ragpouch" },
-          { "item": "small_relic" },
-          { "item": "gloves_wraps" },
-          { "item": "tunic_rag" },
-          { "item": "knife_baselard", "container-item": "sheath" }
-        ]
-      },
-      "female": { "entries": [ { "item": "chestwrap" } ] }
-    },
-    "proficiencies": [ "prof_fibers", "prof_carving", "prof_leatherworking_basic", "prof_knives_familiar" ],
-    "skills": [
-      { "level": 3, "name": "melee" },
-      { "level": 3, "name": "throw" },
-      { "level": 3, "name": "archery" },
-      { "level": 3, "name": "fabrication" },
-      { "level": 3, "name": "tailor" },
-      { "level": 3, "name": "survival" },
-      { "level": 3, "name": "cooking" }
-    ],
-    "traits": [ "PROF_CHURL", "ILLITERATE" ],
-    "flags": [ "SCEN_ONLY", "SKIP_DEFAULT_BACKGROUND" ]
-  },
-  {
-    "type": "profession",
     "id": "labtech",
     "name": "Lab Technician",
     "description": "Thanks to years of study and hard work in the lab, you're familiar with the basics of scientific inquiry.  Only one question remains: can you undo the very Cataclysm your colleagues helped create?",
@@ -4751,7 +4716,7 @@
           { "item": "apron_leather" },
           { "item": "boots" },
           { "item": "gloves_leather" },
-          { "item": "long_knit_scarf" },
+          { "item": "knit_scarf" },
           { "item": "hat_fur" },
           { "item": "purse" },
           { "item": "pot" },
@@ -5579,7 +5544,6 @@
       "prof_intro_biology",
       "prof_physiology",
       "prof_burn_care",
-      "prof_dissect_humans",
       "prof_gun_cleaning",
       "prof_knives_familiar",
       "prof_auto_rifles_familiar",
@@ -5601,7 +5565,7 @@
           { "item": "bandages", "count": 3 },
           { "item": "scalpel" },
           { "item": "syringe" },
-          { "item": "morphine" },
+          { "group": "morphine_vial_glass_4" },
           { "item": "aspirin" },
           { "item": "antibiotics" },
           { "item": "disinfectant" },
@@ -5901,7 +5865,7 @@
         "entries": [
           { "item": "fancy_sunglasses" },
           { "item": "platinum_watch" },
-          { "item": "knit_scarf_loose" },
+          { "item": "knit_scarf" },
           { "item": "gloves_liner" },
           { "item": "polaroid_photo" },
           { "item": "suppressor" },
@@ -6083,7 +6047,7 @@
           { "item": "pants_army" },
           { "item": "socks" },
           { "item": "boots_combat" },
-          { "item": "attached_ear_plugs_off" },
+          { "item": "attached_ear_plugs_off", "custom-flags": [ "no_auto_equip" ] },
           { "item": "helmet_eod" },
           { "item": "nomex_gloves" },
           { "item": "gloves_eod" },

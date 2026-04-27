@@ -109,12 +109,18 @@ static const item_group_id Item_spawn_data_forest( "forest" );
 static const item_group_id
 Item_spawn_data_gathering_faction_camp_firewood( "gathering_faction_camp_firewood" );
 
+static const itype_id itype_camp_meal_large( "camp_meal_large" );
+static const itype_id itype_camp_meal_medium( "camp_meal_medium" );
+static const itype_id itype_camp_meal_small( "camp_meal_small" );
 static const itype_id itype_duffelbag( "duffelbag" );
 static const itype_id itype_fungal_seeds( "fungal_seeds" );
 static const itype_id itype_log( "log" );
 static const itype_id itype_marloss_seed( "marloss_seed" );
 
 static const json_character_flag json_flag_PSYCHOPATH( "PSYCHOPATH" );
+
+static const itype_id itype_seed_buckwheat( "seed_buckwheat" );
+static const itype_id itype_stick_long( "stick_long" );
 
 static const mongroup_id GROUP_CAMP_HUNTING( "GROUP_CAMP_HUNTING" );
 static const mongroup_id GROUP_CAMP_HUNTING_LARGE( "GROUP_CAMP_HUNTING_LARGE" );
@@ -1355,10 +1361,15 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
                        "Intensity: Moderate\n"
                        "Time: 1 Min / Plot\n"
                        "Positions: 0/1\n" );
+
+            const tripoint_abs_omt target_omt = omt_pos + dir;
+            const tripoint_bub_ms target_pnt = get_map().get_bub( project_to<coords::ms>( target_omt ) );
+            // FIXME/HACK: Always checks buckwheat seeds!
             mission_key.add_start( miss_id,
                                    name_display_of( miss_id ), entry,
-                                   plots > 0 && warm_enough_to_plant( omt_pos + dir ) );
-        } else {
+                                   plots > 0 && warm_enough_to_plant( target_pnt, itype_seed_buckwheat ).success() );
+        }
+        if( !npc_list.empty() ) {
             entry = action_of( miss_id.id );
             bool avail = update_time_left( entry, npc_list );
             mission_key.add_return( miss_id,
@@ -1497,8 +1508,8 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
             std::pair<nc_color, std::string> toxins = fac()->vitamin_stores( vitamin_type::TOXIN );
             entry = string_format( _( "Notes:\n"
                                       "Distribute food to your followers.  "
-                                      "Place the food you wish to distribute in the camp food zone.  "
-                                      "You must have a camp food zone, and a camp storage zone, "
+                                      "Place the food you wish to distribute in the food distribution zone.  "
+                                      "You must have a food distribution zone, and a work storage zone, "
                                       "or you will be prompted to create them using the zone manager.\n"
                                       "Effects:\n"
                                       "> Increases your faction's food supply value which in "
@@ -2986,6 +2997,7 @@ point_rel_omt connection_direction_of( const point_rel_omt &dir, const recipe &m
     }
 
     return connection_dir;
+    \
 }
 
 static void salt_water_pipe_orientation_adjustment( const point_rel_omt &dir, bool &orthogonal,
@@ -3594,12 +3606,21 @@ std::pair<size_t, std::string> basecamp::farm_action( const point_rel_omt &dir, 
                     if( seed != items.end() && farm_valid_seed( *seed ) ) {
                         plots_cnt += 1;
                         if( comp ) {
-                            int skillLevel = round( comp->get_skill_level( skill_survival ) );
-                            ///\EFFECT_SURVIVAL increases number of plants harvested from a seed
-                            int plant_count = rng( skillLevel / 2, skillLevel );
-                            plant_count *= farm_map.furn( pos )->plant->harvest_multiplier;
-                            plant_count = std::min( std::max( plant_count, 1 ), 12 );
-                            int seed_cnt = std::max( 1, rng( plant_count / 4, plant_count / 2 ) );
+
+
+                            float skillLevel = comp->get_skill_level( skill_survival );
+                            ///\EFFECT_SURVIVAL increases number of plants harvested from a seed.
+                            float skill_divisor = 4.f;
+                            // Fertilizer reduces the odds of a bad harvest.
+                            if( farm_map.i_at( pos ).size() > 1 ) {
+                                skill_divisor = 2.f;
+                            }
+                            float plant_count = rng_float( skillLevel / skill_divisor, skillLevel );
+                            const auto &fp = farm_map.furn( pos )->plant;
+                            plant_count *= fp->harvest_multiplier;
+                            int plant_count_int = static_cast<int>( std::round( plant_count ) );
+                            plant_count = std::min( std::max( plant_count_int, 1 ), 10 );
+                            int seed_cnt = rng( plant_count_int / 4, plant_count_int / 2 );
                             for( item &i : iexamine::get_harvest_items( *seed->type, plant_count,
                                     seed_cnt, true ) ) {
                                 here.add_item_or_charges( player_character.pos_bub(), i );
@@ -4348,7 +4369,7 @@ void basecamp::recruit_return( const mission_id &miss_id, int score )
         // nullptr;
         return;
     }
-    // Time durations always subtract from camp food supply
+    // Time durations always subtract from settlement food supply
     camp_food_supply( 1_days * food_desire );
     avatar &player_character = get_avatar();
     recruit->spawn_at_precise( player_character.pos_abs() + point( -4, -4 ) );
@@ -4994,7 +5015,7 @@ void om_range_mark( const tripoint_abs_omt &origin, int range, bool add_notes,
                     const std::string &message )
 {
     std::vector<tripoint_abs_omt> note_pts;
-    note_pts.reserve( range * 7 ); // actual multiplier varies from 5.33 to 8, mostly 6 to 7
+    note_pts.reserve( range * 8 ); // actual multiplier varies from 5.33 to 8
     for( const tripoint_abs_omt &pos : points_on_radius_circ( origin, range ) ) {
         note_pts.emplace_back( pos );
     }
@@ -5304,8 +5325,8 @@ bool basecamp::validate_sort_points()
 
 bool basecamp::set_sort_points()
 {
-    popup( _( "Please create some sorting zones.  You must create a camp food zone, and a camp storage zone." ) );
-    g->zones_manager();
+    popup( _( "Please create some sorting zones.  You must create a food distribution zone and a work storage zone." ) );
+    zone_manager_ui::display_zone_manager();
     return validate_sort_points();
 }
 
@@ -5575,15 +5596,15 @@ void basecamp::feed_workers( const std::vector<std::reference_wrapper <Character
         debugmsg( "feed_workers called without any workers to feed!" );
         return;
     }
-    if( !is_player_meal && get_option<bool>( "NO_NPC_FOOD" ) ) {
-        return;
-    }
 
     // Split the food into equal sized portions.
     food /= num_workers;
     for( const auto &worker_reference : workers ) {
         Character &worker = worker_reference.get();
-        worker.add_msg_if_player( _( "You grab a prepared meal from storage and chow down." ) );
+        if( is_player_meal ) {
+            worker.add_msg_if_player(
+                _( "You grab a prepared meal from storage and chow down." ) );
+        }
         units::volume filling_vol = std::max( 0_ml,
                                               worker.stomach.capacity( worker ) / 2 - worker.stomach.contains() );
         worker.stomach.ingest( food_summary{
@@ -5613,14 +5634,10 @@ int basecamp::time_to_food( time_duration work, float exertion_level ) const
 item basecamp::make_fake_food( const nutrients &to_use ) const
 {
     // This is dumb, but effective.
-    std::string food_id = "camp_meal_small";
-    if( to_use.kcal() > 3000 ) {
-        food_id = "camp_meal_large";
-    } else if( to_use.kcal() > 1000 ) {
-        food_id = "camp_meal_medium";
-    }
-    item food_item( food_id );
-    // Set the default nutritional of the item.
+    item food_item = to_use.kcal() > 3000 ?
+                     item( itype_camp_meal_large ) : to_use.kcal() > 1000 ?
+                     item( itype_camp_meal_medium ) : item( itype_camp_meal_small );
+    // Set the default nutrition of the item.
     // This doesn't persist through save/load, but that's ok, we will be eating it immediately.
     food_item.get_comestible()->set_default_nutrition( to_use );
     return food_item;
@@ -5735,9 +5752,9 @@ bool basecamp::distribute_food( bool player_command )
 {
     if( !validate_sort_points() ) {
         if( player_command ) {
-            popup( _( "You do not have a camp food zone.  Aborting…" ) );
+            popup( _( "You do not have a food distribution zone.  Aborting…" ) );
         } else {
-            debugmsg( "NPC-initiated food distribution at %s failed due to lacking zones", name );
+            debugmsg( "NPC-initiated food distribution at %s failed due to lacking a zone.", name );
         }
         return false;
     }

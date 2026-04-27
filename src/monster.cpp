@@ -31,8 +31,10 @@
 #include "game_constants.h"
 #include "harvest.h"
 #include "item.h"
+#include "item_factory.h"
 #include "item_group.h"
 #include "itype.h"
+#include "iuse.h"
 #include "line.h"
 #include "make_static.h"
 #include "map.h"
@@ -148,9 +150,14 @@ static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 static const flag_id json_flag_MUTAGEN_SAMPLE( "MUTAGEN_SAMPLE" );
 static const flag_id json_flag_PIT( "PIT" );
+static const flag_id json_flag_PRESERVE_SPAWN_LOC( "PRESERVE_SPAWN_LOC" );
 
+static const itype_id itype_beartrap( "beartrap" );
+static const itype_id itype_light_snare_kit( "light_snare_kit" );
 static const itype_id itype_milk( "milk" );
 static const itype_id itype_milk_raw( "milk_raw" );
+static const itype_id itype_rope_6( "rope_6" );
+static const itype_id itype_snare_trigger( "snare_trigger" );
 
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 
@@ -285,14 +292,6 @@ monster::monster( const mtype_id &id ) : monster()
     biosignatures = type->biosignatures;
     if( monster::has_flag( mon_flag_AQUATIC ) ) {
         fish_population = dice( 1, 20 );
-    }
-    if( monster::has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        itype_id mech_bat = itype_id( type->mech_battery );
-        const itype &type = *item::find_type( mech_bat );
-        int max_charge = type.magazine->capacity;
-        item mech_bat_item = item( mech_bat, calendar::turn_zero );
-        mech_bat_item.ammo_consume( rng( 0, max_charge ), tripoint_bub_ms::zero, nullptr );
-        battery_item = cata::make_value<item>( mech_bat_item );
     }
     if( monster::has_flag( mon_flag_PET_MOUNTABLE ) ) {
         if( !type->mount_items.tied.is_empty() ) {
@@ -452,7 +451,7 @@ void monster::try_upgrade( bool pin_time )
     if( !can_upgrade() ) {
         return;
     }
-    
+
     const int current_day = to_days<int>( calendar::turn - calendar::fall_of_civilization );
     // This should only occur when a monster is created or upgraded to a new form.
     if( upgrade_time < 0 ) {
@@ -948,6 +947,22 @@ int monster::print_info( const catacurses::window &w, int vStart, int vLines, in
         }
     }
     wattroff( w, c_light_gray );
+
+    // Print "taming" food information
+    if( !type->petfood.food.empty() ) {
+        vStart += fold_and_print( w, point( column, vStart ), max_width, c_light_blue,
+                                  _( "Seems to be familiar with people and could be tamed with:" ) );
+
+        for( std::string food_category : type->petfood.food ) {
+            std::vector<const itype *> food_items = Item_factory::find( [&]( const itype & t ) {
+                return t.use_methods.count( "PETFOOD" ) && t.comestible &&
+                       t.comestible->petfood.count( food_category );
+            } );
+            for( const itype *food_item_type : food_items ) {
+                mvwprintz( w, point( column, ++vStart ), c_white, food_item_type->nname( 1 ) );
+            }
+        }
+    }
 
     // Riding indicator on next line after description.
     if( has_effect( effect_ridden ) && mounted_player ) {
@@ -1737,8 +1752,9 @@ int monster::hp_percentage() const
     return get_hp( bodypart_id( "torso" ) ) * 100 / get_hp_max();
 }
 
-int monster::get_eff_per() const
+int monster::spot_check() const
 {
+    // FIXME: this sucks???
     return std::min( type->vision_night, type->vision_day );
 }
 
@@ -2089,24 +2105,11 @@ bool monster::melee_attack( Creature &target, float accuracy )
                 add_msg( m_bad, _( "%1$s hits your %2$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
                          body_part_name_accusative( dealt_dam.bp_hit ) );
             } else if( target.is_npc() ) {
-                if( has_effect( effect_ridden ) && has_flag( mon_flag_RIDEABLE_MECH ) &&
-                    pos_bub() == player_character.pos_bub() ) {
-                    //~ %1$s: name of your mount, %2$s: target NPC name, %3$d: damage value
-                    add_msg( m_good, _( "Your %1$s hits %2$s for %3$d damage!" ), name(), target.disp_name(),
-                             total_dealt );
-                } else {
-                    //~ %1$s: attacker name, %2$s: target NPC name, %3$s: bodypart name in accusative
-                    add_msg( _( "%1$s hits %2$s %3$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
-                             target.disp_name( true ),
-                             body_part_name_accusative( dealt_dam.bp_hit ) );
-                }
+                //~ %1$s: attacker name, %2$s: target NPC name, %3$s: bodypart name in accusative
+                add_msg( _( "%1$s hits %2$s %3$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
+                         target.disp_name( true ),
+                         body_part_name_accusative( dealt_dam.bp_hit ) );
             } else {
-                if( has_effect( effect_ridden ) && has_flag( mon_flag_RIDEABLE_MECH ) &&
-                    pos_bub() == player_character.pos_bub() ) {
-                    //~ %1$s: name of your mount, %2$s: target creature name, %3$d: damage value
-                    add_msg( m_good, _( "Your %1$s hits %2$s for %3$d damage!" ), get_name(), target.disp_name(),
-                             total_dealt );
-                }
                 if( get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ) {
                     if( !u_see_me && u_see_target ) {
                         add_msg( _( "Something hits the %1$s!" ), target.disp_name() );
@@ -2298,7 +2301,6 @@ void monster::apply_damage( Creature *source, bodypart_id /*bp*/, int dam,
 void monster::die_in_explosion( Creature *source )
 {
     map &here = get_map();
-
     hp = -9999; // huge to trigger explosion and prevent corpse item
     die( &here, source );
 }
@@ -2517,6 +2519,16 @@ bool monster::move_effects( bool, tripoint_bub_ms dest_loc )
             add_msg_debug( debugmode::DF_MONSTER,
                            "%1s attempting to break grab %2s, success %3s in intensity %4s",
                            get_name(), grab.get_id().c_str(), monster, grab_str );
+            if( grabber && !grabber->is_monster() ) {
+                int maintain_cost =
+                    std::clamp( std::max( 1, 100 - grab_str ) * ( std::max( 1,
+                                enum_size() - grabber->enum_size() ) + static_cast<int>( std::max( get_melee(), get_dodge() ) ) ),
+                                100,
+                                400
+                              );
+                grabber->as_character()->set_activity_level( EXPLOSIVE_EXERCISE );
+                grabber->as_character()->burn_energy_arms( -maintain_cost );
+            }
             if( !x_in_y( monster, grab_str ) ) {
                 return false;
             } else {
@@ -3072,19 +3084,32 @@ void monster::die( map *here, Creature *nkiller )
     }
 
     item_location corpse;
+
+    // If this monster dies underwater in swim-under terrain and is aquatic (fish),
+    // do not create a corpse on the tile (prevent corpse drop).
+    bool suppress_corpse = false;
+    if( here != nullptr ) {
+        const tripoint_bub_ms death_pos = pos_bub( *here );
+        if( here->has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, death_pos ) && is_underwater() &&
+            ( swims() || has_flag( mon_flag_AQUATIC ) ) ) {
+            suppress_corpse = true;
+        }
+    }
     // drop a corpse, or not - this needs to happen after the spell, for e.g. revivification effects
-    switch( type->mdeath_effect.corpse_type ) {
-        case mdeath_type::NORMAL:
-            corpse =  mdeath::normal( here, *this );
-            break;
-        case mdeath_type::BROKEN:
-            mdeath::broken( here, *this );
-            break;
-        case mdeath_type::SPLATTER:
-            corpse = mdeath::splatter( here, *this );
-            break;
-        default:
-            break;
+    if( !suppress_corpse ) {
+        switch( type->mdeath_effect.corpse_type ) {
+            case mdeath_type::NORMAL:
+                corpse =  mdeath::normal( here, *this );
+                break;
+            case mdeath_type::BROKEN:
+                mdeath::broken( here, *this );
+                break;
+            case mdeath_type::SPLATTER:
+                corpse = mdeath::splatter( here, *this );
+                break;
+            default:
+                break;
+        }
     }
 
     if( death_drops ) {
@@ -3093,15 +3118,15 @@ void monster::die( map *here, Creature *nkiller )
         move_special_item_to_inv( armor_item );
         move_special_item_to_inv( storage_item );
         move_special_item_to_inv( tied_item );
-        if( has_effect( effect_beartrap ) ) {
-            add_item( item( "beartrap", calendar::turn_zero ) );
-        }
         if( has_effect( effect_lightsnare ) ) {
-            add_item( item( "light_snare_kit", calendar::turn_zero ) );
+            add_item( item( itype_light_snare_kit, calendar::turn_zero ) );
         }
         if( has_effect( effect_heavysnare ) ) {
-            add_item( item( "rope_6", calendar::turn_zero ) );
-            add_item( item( "snare_trigger", calendar::turn_zero ) );
+            add_item( item( itype_rope_6, calendar::turn_zero ) );
+            add_item( item( itype_snare_trigger, calendar::turn_zero ) );
+        }
+        if( has_effect( effect_beartrap ) ) {
+            add_item( item( itype_beartrap, calendar::turn_zero ) );
         }
     }
 
@@ -3168,38 +3193,6 @@ void monster::die( map *here, Creature *nkiller )
             }
         }
     }
-}
-
-units::energy monster::use_mech_power( units::energy amt )
-{
-    if( is_hallucination() || !has_flag( mon_flag_RIDEABLE_MECH ) || !battery_item ) {
-        return 0_kJ;
-    }
-    const int max_drain = battery_item->ammo_remaining( );
-    const int consumption = std::min( static_cast<int>( units::to_kilojoule( amt ) ), max_drain );
-    battery_item->ammo_consume( consumption, pos_bub(), nullptr );
-    return units::from_kilojoule( static_cast<std::int64_t>( consumption ) );
-}
-
-int monster::mech_str_addition() const
-{
-    return type->mech_str_bonus;
-}
-
-bool monster::check_mech_powered() const
-{
-    if( is_hallucination() || !has_flag( mon_flag_RIDEABLE_MECH ) || !battery_item ) {
-        return false;
-    }
-    if( battery_item->ammo_remaining( ) <= 0 ) {
-        return false;
-    }
-    const itype &type = *battery_item->type;
-    if( battery_item->ammo_remaining( ) <= type.magazine->capacity / 10 && one_in( 10 ) ) {
-        add_msg( m_bad, _( "Your %s emits a beeping noise as its batteries start to get low." ),
-                 get_name() );
-    }
-    return true;
 }
 
 void monster::generate_inventory( bool disableDrops )
@@ -3289,6 +3282,25 @@ void monster::drop_items_on_death( map *here, item *corpse )
             }
         }
     }
+
+    // Check if item has PRESERVE_SPAWN_LOC and set it if necessary
+    // This probably needs to be encapsulated in some generic function
+    for( item &it : new_items ) {
+        if( it.has_flag( json_flag_PRESERVE_SPAWN_LOC ) &&
+            !it.has_var( "spawn_location" ) ) {
+            it.set_var( "spawn_location", pos_abs().to_string_writable() );
+        }
+
+        // since efiles are not in standard pocket, check it separately
+        if( it.has_pocket_type( pocket_type::E_FILE_STORAGE ) ) {
+            for( item *it_software : it.all_items_top( pocket_type::E_FILE_STORAGE ) ) {
+                if( it_software->has_flag( json_flag_PRESERVE_SPAWN_LOC ) &&
+                    !it_software->has_var( "spawn_location" ) ) {
+                    it_software->set_var( "spawn_location", pos_abs().to_string_writable() );
+                }
+            }
+        }
+    };
 }
 
 void monster::spawn_dissectables_on_death( item *corpse ) const
@@ -3856,10 +3868,17 @@ item monster::to_item() const
     if( type->revert_to_itype.is_empty() ) {
         return item();
     }
-    // Birthday is wrong, but the item created here does not use it anyway (I hope).
     item result( type->revert_to_itype, calendar::turn );
-    const int damfac = std::max( 1, ( result.max_damage() + 1 ) * hp / type->hp );
-    result.set_damage( std::max( 0, ( result.max_damage() + 1 ) - damfac ) );
+    const int max_dmg = result.max_damage();
+
+    // Adjust corpse's damage based on degree of overkill.
+    const int damfac = std::max( 1, ( max_dmg + 1 ) * hp / type->hp );
+    int percent_damage = std::max( 0, ( max_dmg + 1 ) - damfac );
+
+    // Throwing a rock shouldn't gib a rabbit. Let's gate damage for sanity's sake.
+    int allowed_damage = std::clamp( -hp / 5, 0, 5 );
+    int final_damage = std::min( percent_damage, allowed_damage );
+    result.set_damage( final_damage );
     return result;
 }
 
@@ -4014,8 +4033,8 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
     if( !tmp_provocative ) {
         return;
     }
-    // Already following a more interesting sound.
-    if( provocative_sound && wandf > 0 ) {
+    // Already following a more interesting sound, 50% chance to follow a new sound instead
+    if( provocative_sound && wandf > 0 && rng( 0, 1 ) ) {
         return;
     }
 
@@ -4039,8 +4058,8 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
     if( wander_turns < wandf ) {
         return;
     }
-    // only trigger this if the monster is not friendly or the source isn't the player
-    if( friendly == 0 || source != get_player_character().pos_bub() ) {
+    // Only trigger this if the monster is not friendly or the source isn't us or the player.
+    if( source != pos_bub() && ( friendly == 0 || source != get_player_character().pos_bub() ) ) {
         process_trigger( mon_trigger::SOUND, volume );
     }
     provocative_sound = tmp_provocative;
@@ -4253,6 +4272,31 @@ std::function<bool( const tripoint_bub_ms & )> monster::get_path_avoid() const
     };
 }
 
+static void add_item_overlay_id( const item &item,
+                                 std::vector<std::pair<std::string, std::string>> &overlay_ids,
+                                 const std::vector<std::string> &suffixes )
+{
+    const std::string overlay_id = "worn_" + item.typeId().str();
+    for( const std::string &suffix : suffixes ) {
+        std::string full_id = overlay_id;
+        full_id += "_";
+        full_id += suffix;
+        overlay_ids.emplace_back( std::move( full_id ), "" );
+    }
+}
+
+static void add_generic_overlay_id( const std::string &base_id,
+                                    std::vector<std::pair<std::string, std::string>> &overlay_ids,
+                                    const std::vector<std::string> &suffixes )
+{
+    for( const std::string &suffix : suffixes ) {
+        std::string full_id = base_id;
+        full_id += "_";
+        full_id += suffix;
+        overlay_ids.emplace_back( std::move( full_id ), "" );
+    }
+}
+
 std::vector<std::pair<std::string, std::string>> monster::get_overlay_ids() const
 {
     std::vector<std::pair<std::string, std::string>> rval;
@@ -4266,6 +4310,25 @@ std::vector<std::pair<std::string, std::string>> monster::get_overlay_ids() cons
         for( const auto &eff_pr : *effects ) {
             rval.emplace_back( "effect_" + eff_pr.first.str(), "" );
         }
+    }
+
+    std::vector<std::string> overlay_suffixes;
+    if( !type->bodytype.empty() ) {
+        overlay_suffixes.emplace_back( type->bodytype );
+    }
+    const std::string mon_id = type->id.str();
+    if( !mon_id.empty() ) {
+        overlay_suffixes.emplace_back( mon_id );
+    }
+
+    if( armor_item ) {
+        add_item_overlay_id( *armor_item, rval, overlay_suffixes );
+    }
+    if( tack_item ) {
+        add_generic_overlay_id( "worn_tack", rval, overlay_suffixes );
+    }
+    if( storage_item ) {
+        add_generic_overlay_id( "worn_storage", rval, overlay_suffixes );
     }
 
     return rval;

@@ -127,8 +127,7 @@
     ],
     "warmth": 7,
     "environmental_protection": 3,
-    "flags": [ "VARSIZE", "POCKETS", "STURDY" ],
-    "melee_damage": { "bash": 6 }
+    "flags": [ "VARSIZE", "POCKETS", "STURDY" ]
   },
   {
     "id": "lsurvivor_suit_xl",
@@ -264,9 +263,8 @@
       }
     ],
     "warmth": 25,
-    "environmental_protection": 3,
-    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY" ],
-    "melee_damage": { "bash": 6 }
+    "environmental_protection": 7,
+    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY" ]
   },
   {
     "id": "survivor_suit_xl",

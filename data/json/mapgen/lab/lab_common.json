@@ -23,8 +23,8 @@
       "^": "f_rubble_rock"
     },
     "terrain": {
-      "g": "t_reinforced_glass",
-      "G": "t_reinforced_door_glass_lab_c",
+      "g": "t_laminated_glass",
+      "G": "t_laminated_door_glass_lab_c",
       ".": "t_thconc_floor",
       ",": "t_strconc_floor",
       "-": "t_concrete_wall",
@@ -214,7 +214,7 @@
     "nested_mapgen_id": "lab_glass_north_wall",
     "object": {
       "mapgensize": [ 24, 24 ],
-      "set": [ { "line": "terrain", "id": "t_reinforced_glass", "x": 0, "x2": 22, "y": 0, "y2": 0 } ]
+      "set": [ { "line": "terrain", "id": "t_laminated_glass", "x": 0, "x2": 22, "y": 0, "y2": 0 } ]
     }
   },
   {
@@ -223,7 +223,7 @@
     "nested_mapgen_id": "lab_glass_west_wall",
     "object": {
       "mapgensize": [ 24, 24 ],
-      "set": [ { "line": "terrain", "id": "t_reinforced_glass", "x": 0, "x2": 0, "y": 0, "y2": 22 } ]
+      "set": [ { "line": "terrain", "id": "t_laminated_glass", "x": 0, "x2": 0, "y": 0, "y2": 22 } ]
     }
   },
   {
@@ -232,7 +232,7 @@
     "nested_mapgen_id": "lab_glass_east_wall",
     "object": {
       "mapgensize": [ 24, 24 ],
-      "set": [ { "line": "terrain", "id": "t_reinforced_glass", "x": 23, "x2": 23, "y": 1, "y2": 22 } ]
+      "set": [ { "line": "terrain", "id": "t_laminated_glass", "x": 23, "x2": 23, "y": 1, "y2": 22 } ]
     }
   },
   {
@@ -241,7 +241,7 @@
     "nested_mapgen_id": "lab_glass_south_wall",
     "object": {
       "mapgensize": [ 24, 24 ],
-      "set": [ { "line": "terrain", "id": "t_reinforced_glass", "x": 1, "x2": 22, "y": 23, "y2": 23 } ]
+      "set": [ { "line": "terrain", "id": "t_laminated_glass", "x": 1, "x2": 22, "y": 23, "y2": 23 } ]
     }
   },
   {

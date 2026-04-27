@@ -415,17 +415,11 @@
     ]
   },
   {
-    "type": "item_group",
-    "id": "xedra_gun",
-    "items": [ { "item": "hk_mp5k", "prob": 45 } ]
-  },
-  {
-    "id": "xedra_kill_team_set",
+    "id": "kill_team_set",
     "type": "item_group",
     "subtype": "collection",
     "items": [
       { "group": "clothing_military" },
-      { "item": "resonance_measurement_device", "prob": 10 },
       { "item": "elbow_pads", "prob": 80 },
       { "item": "knee_pads", "prob": 85 },
       {
@@ -438,7 +432,7 @@
       { "group": "clothing_tactical_leg", "prob": 80 },
       { "group": "clothing_watch", "prob": 45 },
       { "item": "glasses_bal", "prob": 30 },
-      { "group": "xedra_gun" },
+      { "item": "hk_mp5k", "prob": 45 },
       { "group": "cop_melee" },
       { "group": "cop_holster_field" }
     ]
@@ -839,7 +833,6 @@
       { "item": "briefcase", "prob": 5 },
       { "item": "survnote", "prob": 2 },
       { "item": "robot_controls", "prob": 3 },
-      { "item": "solarpack", "prob": 1 },
       { "item": "flight_helmet", "prob": 20, "ammo-item": "light_battery_cell", "charges": [ 0, 150 ] },
       { "item": "mil_flight_suit", "prob": 20 }
     ]
@@ -858,8 +851,7 @@
       [ "bot_rifleturret", 10 ],
       [ "bot_crows_m240", 10 ],
       [ "bot_talon_m202a1", 10 ],
-      [ "bot_dispatch_military", 15 ],
-      [ "bot_turret_searchlight", 75 ]
+      [ "bot_dispatch_military", 15 ]
     ]
   },
   {

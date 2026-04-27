@@ -49,6 +49,7 @@ template <typename E> struct enum_traits;
 
 enum class spell_flag : int {
     AIRBORNE,
+    CHARM_PET, // Applies the pet friendliness adjustment to a monster when charming them
     CONCENTRATE, // Focus affects spell fail %.
     DODGEABLE, // The target can dodge this attack completely if they succeed on a dodge roll against its spell level. Implies NO_DODGE_MITIGATION.
     EXTRA_EFFECTS_FIRST, // The extra effects are cast before the main spell.
@@ -401,7 +402,6 @@ class spell_type
 
         static void load_spell( const JsonObject &jo, const std::string &src );
         void load( const JsonObject &jo, std::string_view src );
-        void serialize( JsonOut &json ) const;
         /**
          * All spells in the game.
          */

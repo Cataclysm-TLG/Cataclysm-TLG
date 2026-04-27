@@ -23,7 +23,7 @@
     "difficulty": 1,
     "time": "45 m",
     "autolearn": true,
-    "tools": [ [ [ "brick_kiln", 10 ], [ "kiln", 10 ], [ "surface_heat", 10, "LIST" ] ] ],
+    "tools": [ [ [ "fake_clay_kiln", 10 ], [ "kiln", 10 ], [ "surface_heat", 10, "LIST" ] ] ],
     "components": [ [ [ "any_water", 1, "LIST" ] ], [ [ "clay_lump", 1 ] ] ]
   },
   {
@@ -194,7 +194,6 @@
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
     "time": "40 m",
-    "batch_time_factors": [ 80, 2 ],
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
@@ -219,7 +218,6 @@
     "difficulty": 5,
     "time": "40 m",
     "autolearn": true,
-    "batch_time_factors": [ 80, 2 ],
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
     "qualities": [
@@ -323,7 +321,7 @@
     "skills_required": [ [ "survival", 1 ] ],
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
-    "time": "15 m",
+    "time": "30 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
@@ -347,7 +345,6 @@
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
     "time": "30 m",
-    "batch_time_factors": [ 80, 2 ],
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],

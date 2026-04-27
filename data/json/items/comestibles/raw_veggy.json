@@ -542,7 +542,13 @@
     "plant_name": "garlic",
     "fruit": "garlic",
     "byproducts": [ "withered" ],
-    "grow": "65 days"
+    "growth_stages": [
+      { "GROWTH_SEED": "17 days" },
+      { "GROWTH_SEEDLING": "16 days" },
+      { "GROWTH_MATURE": "16 days" },
+      { "GROWTH_HARVEST": "16 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ]
   },
   {
     "type": "ITEM",
@@ -567,7 +573,13 @@
     "plant_name": "garlic",
     "fruit": "garlic",
     "byproducts": [ "withered" ],
-    "grow": "65 days"
+    "growth_stages": [
+      { "GROWTH_SEED": "17 days" },
+      { "GROWTH_SEEDLING": "16 days" },
+      { "GROWTH_MATURE": "16 days" },
+      { "GROWTH_HARVEST": "16 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ]
   },
   {
     "type": "ITEM",
@@ -823,6 +835,27 @@
   {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
+    "id": "poppy_pod",
+    "name": { "str_sp": "poppy pod" },
+    "weight": "30 g",
+    "volume": "70 ml",
+    "color": "brown",
+    "comestible_type": "FOOD",
+    "symbol": "%",
+    "calories": 9,
+    "description": "The fruit of the poppy flower, a seed-bearing head left over after the petals have dropped off.",
+    "price": "15 cent",
+    "price_postapoc": "12 cent",
+    "healthy": -1,
+    "addiction_potential": 2,
+    "material": [ "vegetable" ],
+    "fun": -12,
+    "flags": [ "FREEZERBURN", "INEDIBLE", "RABBIT", "CATTLE" ],
+    "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vegetable_allergen", 1 ], [ "vit_mme", 30 ] ]
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
     "id": "raw_burdock",
     "name": { "str_sp": "burdock" },
     "weight": "72 g",
@@ -950,7 +983,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You chew the wintergreen leaves.",
-      "effects": [ { "id": "pkill_wintergreen", "duration": "30 m" } ]
+      "effects": [ { "id": "wintergreen_analgesic", "duration": "10 m" } ]
     },
     "material": [ "vegetable" ],
     "primary_material": "dried_vegetable",
@@ -1113,7 +1146,13 @@
     "fruit": "raw_beans",
     "seeds": false,
     "byproducts": [ "withered" ],
-    "grow": "91 days"
+    "growth_stages": [
+      { "GROWTH_SEED": "23 days" },
+      { "GROWTH_SEEDLING": "23 days" },
+      { "GROWTH_MATURE": "23 days" },
+      { "GROWTH_HARVEST": "22 days" },
+      { "GROWTH_OVERGROWN": "1 hour" }
+    ]
   },
   {
     "type": "ITEM",

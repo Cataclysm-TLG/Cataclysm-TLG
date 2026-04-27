@@ -927,32 +927,12 @@
     "can_resume": false
   },
   {
-    "id": "ACT_EAT_MENU",
-    "type": "activity_type",
-    "activity_level": "NO_EXERCISE",
-    "verb": "eating",
-    "rooted": true,
-    "based_on": "neither",
-    "ignored_distractions": [ "hunger", "thirst" ],
-    "can_resume": false
-  },
-  {
     "id": "ACT_PICKUP_MENU",
     "type": "activity_type",
     "activity_level": "NO_EXERCISE",
     "verb": "picking up",
     "rooted": true,
     "based_on": "neither",
-    "can_resume": false
-  },
-  {
-    "id": "ACT_CONSUME_FOOD_MENU",
-    "type": "activity_type",
-    "activity_level": "NO_EXERCISE",
-    "verb": "consuming",
-    "rooted": true,
-    "based_on": "neither",
-    "ignored_distractions": [ "hunger", "thirst" ],
     "can_resume": false
   },
   {
@@ -981,24 +961,6 @@
     "auto_needs": true,
     "rooted": true,
     "based_on": "time",
-    "can_resume": false
-  },
-  {
-    "id": "ACT_CONSUME_DRINK_MENU",
-    "type": "activity_type",
-    "activity_level": "NO_EXERCISE",
-    "verb": "drinking",
-    "based_on": "neither",
-    "ignored_distractions": [ "hunger", "thirst" ],
-    "can_resume": false
-  },
-  {
-    "id": "ACT_CONSUME_MEDS_MENU",
-    "type": "activity_type",
-    "activity_level": "NO_EXERCISE",
-    "verb": "using drugs",
-    "based_on": "neither",
-    "ignored_distractions": [ "hunger", "thirst" ],
     "can_resume": false
   },
   {
@@ -1146,6 +1108,28 @@
     "refuel_fires": false,
     "auto_needs": false,
     "interruptable_with_kb": false
+  },
+  {
+    "id": "ACT_PHONE_RECOVERY_BASIC",
+    "type": "activity_type",
+    "activity_level": "NO_EXERCISE",
+    "verb": "recovering",
+    "based_on": "time",
+    "interruptable": true,
+    "can_resume": false,
+    "interruptable_with_kb": true,
+    "completion_eoc": "EOC_SMARTPHONE_RECOVERY_BASIC_2"
+  },
+  {
+    "id": "ACT_PHONE_RECOVERY_ADVANCED",
+    "type": "activity_type",
+    "activity_level": "NO_EXERCISE",
+    "verb": "recovering",
+    "based_on": "time",
+    "interruptable": true,
+    "can_resume": false,
+    "interruptable_with_kb": true,
+    "completion_eoc": "EOC_SMARTPHONE_RECOVERY_ADVANCED_2"
   },
   {
     "id": "ACT_SALINE_INFUSE",

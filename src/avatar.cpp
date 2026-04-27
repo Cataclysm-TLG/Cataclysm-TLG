@@ -97,7 +97,6 @@ static const efftype_id effect_happy( "happy" );
 static const efftype_id effect_irradiated( "irradiated" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_onfire( "onfire" );
-static const efftype_id effect_pkill( "pkill" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_relax_gas( "relax_gas" );
 static const efftype_id effect_sad( "sad" );
@@ -149,7 +148,6 @@ static const trait_id trait_WHISKERS_RAT( "WHISKERS_RAT" );
 avatar::avatar()
 {
     player_map_memory = std::make_unique<map_memory>();
-    show_map_memory = true;
     active_mission = nullptr;
     grab_type = object_type::NONE;
     calorie_diary.emplace_front( );
@@ -247,11 +245,6 @@ void avatar::longpull( const std::string &name )
     Creature::longpull( name, traj.back() );
 }
 
-void avatar::toggle_map_memory()
-{
-    show_map_memory = !show_map_memory;
-}
-
 bool avatar::is_map_memory_valid() const
 {
     return player_map_memory->is_valid();
@@ -262,7 +255,7 @@ bool avatar::should_show_map_memory() const
     if( get_timed_events().get( timed_event_type::OVERRIDE_PLACE ) ) {
         return false;
     }
-    return show_map_memory;
+    return true;
 }
 
 bool avatar::save_map_memory()
@@ -273,6 +266,11 @@ bool avatar::save_map_memory()
 void avatar::load_map_memory()
 {
     player_map_memory->load( pos_abs() );
+}
+
+void avatar::clear_map_memory()
+{
+    player_map_memory->clear();
 }
 
 void avatar::prepare_map_memory_region( const tripoint_abs_ms &p1, const tripoint_abs_ms &p2 )
@@ -441,7 +439,7 @@ diary *avatar::get_avatar_diary()
 bool avatar::read( item_location &book, item_location ereader )
 {
     if( !book ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return false;
     }
 
@@ -610,7 +608,7 @@ bool avatar::read( item_location &book, item_location ereader )
 
         menu.query( true );
         if( menu.ret == UILIST_CANCEL ) {
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             return false;
         } else if( menu.ret >= 2 ) {
             continuous = true;
@@ -632,7 +630,7 @@ bool avatar::read( item_location &book, item_location ereader )
         menu.addentry( 2, true, '0', _( "Train until tired or success" ) );
         menu.query( true );
         if( menu.ret == UILIST_CANCEL ) {
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             return false;
         } else if( menu.ret == 1 ) {
             continuous = false;
@@ -1010,8 +1008,6 @@ void avatar::reset_stats()
             remove_effect( type );
         }
     };
-    // Painkiller
-    set_fake_effect_dur( effect_pkill, 1_turns * get_painkiller() );
 
     // Pain
     if( get_perceived_pain() > 0 ) {
@@ -1038,6 +1034,7 @@ void avatar::reset_stats()
     set_fake_effect_dur( effect_sad, 1_turns * -morale );
 
     // Stimulants
+    // FIXME: are you fucking kidding me
     set_fake_effect_dur( effect_stim, 1_turns * current_stim );
     set_fake_effect_dur( effect_depressants, 1_turns * -current_stim );
     if( has_trait( trait_STIMBOOST ) ) {
@@ -1425,7 +1422,7 @@ bool avatar::invoke_item( item *used, const tripoint_bub_ms &pt, int pre_obtain_
     const std::map<std::string, use_function> &use_methods = used->type->use_methods;
     const int num_methods = use_methods.size();
 
-    const bool has_relic = used->has_relic_activation();
+    const bool has_relic = used->has_relic_activation() && used->can_use_relic( *this );
     if( use_methods.empty() && !has_relic ) {
         return false;
     } else if( num_methods == 1 && !has_relic ) {

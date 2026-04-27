@@ -41,6 +41,8 @@
 //static const flag_id json_flag_SPLINT( "SPLINT" );
 //static const flag_id json_flag_THERMOMETER( "THERMOMETER" );
 
+static const flag_id json_flag_W_DISABLED_WHEN_EMPTY( "W_DISABLED_WHEN_EMPTY" );
+
 //static const string_id<behavior::node_t> behavior_node_t_npc_needs( "npc_needs" );
 
 //static const trait_id trait_NOPAIN( "NOPAIN" );
@@ -83,13 +85,25 @@ static std::string trunc_ellipse( const std::string &input, unsigned int trunc )
 
 static int get_wgt_height( const widget_id &wgt )
 {
-    if( wgt->_widgets.empty() || wgt->_arrange == "columns" || wgt->_arrange == "minimum_columns" ) {
+    // Leaf widgets or column layouts just use their own height
+    if( wgt->_widgets.empty() || wgt->_arrange == "columns" ||
+        wgt->_arrange == "minimum_columns" || wgt->_arrange == "grid" ) {
         return wgt->_height > 0 ? wgt->_height : 1;
     }
+
     int h = 0;
+
     for( const widget_id &w : wgt->_widgets ) {
-        h += get_wgt_height( w );
+        int child_h = get_wgt_height( w );
+
+        // Skip empty children if they are disabled when empty
+        if( child_h == 0 && w->has_flag( json_flag_W_DISABLED_WHEN_EMPTY ) ) {
+            continue;
+        }
+
+        h += child_h;
     }
+
     return h;
 }
 

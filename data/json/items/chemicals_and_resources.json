@@ -79,8 +79,8 @@
     "subtypes": [ "AMMO" ],
     "id": "material_cement",
     "category": "spare_parts",
-    "price": "2 USD",
-    "price_postapoc": "10 cent",
+    "price": "10 cent",
+    "price_postapoc": "1 cent",
     "name": { "str_sp": "cement powder" },
     "symbol": "=",
     "color": "dark_gray",
@@ -101,12 +101,11 @@
     "name": { "str_sp": "gravel", "ctxt": "material" },
     "symbol": "=",
     "color": "dark_gray",
-    "description": "A handful of gravel, smaller than pebbles but larger than sand.",
+    "description": "A marble-sized bit of stone.",
     "material": [ "stone" ],
-    "//": "density: 1.6 g/cm3",
     "volume": "5 ml",
     "weight": "8 g",
-    "ammo_type": "components",
+    "ammo_type": "gravel",
     "count": 1,
     "melee_damage": { "bash": 1 }
   },
@@ -501,29 +500,8 @@
   },
   {
     "type": "ITEM",
-    "id": "sewage",
-    "subtypes": [ "COMESTIBLE" ],
-    "name": { "str_sp": "sewage sample" },
-    "material": [ "water", "feces" ],
-    "weight": "280 g",
-    "color": "brown",
-    "container": "bottle_plastic",
-    "sealed": false,
-    "symbol": "~",
-    "description": "A sample of sewage from a treatment plant.  Disgusting, why would anyone want this?",
-    "price": "0 cent",
-    "comestible_type": "INVALID",
-    "flags": [ "INEDIBLE" ],
-    "charges": 1,
-    "price_postapoc": "0 cent",
-    "volume": "250 ml",
-    "phase": "liquid",
-    "category": "chems"
-  },
-  {
-    "type": "ITEM",
     "subtypes": [ "AMMO" ],
-    "id": "chem_aluminium_powder",
+    "id": "aluminum_powder",
     "category": "chems",
     "price": "5 USD",
     "price_postapoc": "5 USD",
@@ -1011,7 +989,7 @@
   {
     "type": "ITEM",
     "subtypes": [ "AMMO" ],
-    "id": "chem_aluminium_sulphate",
+    "id": "aluminum_sulfate",
     "category": "chems",
     "price": "3 USD",
     "price_postapoc": "1 USD",
@@ -1232,7 +1210,7 @@
     "volume": "2 ml",
     "flags": [ "NO_INGEST" ],
     "//6": "The ratio of how much water can be purified per tablet (maximum).  Should match the water_purifying recipe",
-    "variables": { "water_per_tablet": "4" }
+    "variables": { "water_per_tablet": 4 }
   },
   {
     "type": "ITEM",
@@ -2243,6 +2221,9 @@
     "name": { "str_sp": "foul acidic blood" },
     "symbol": "~",
     "color": "red",
+    "//": "weight and freezing temp adjusted assuming the acid is diluted by essentially 50% water",
+    "weight": "352 g",
+    "freezing_point": -18,
     "description": "Blood mixed with acidic compounds, foul-smelling and extremely corrosive, a means of refining this could net some useful chemicals."
   }
 ]

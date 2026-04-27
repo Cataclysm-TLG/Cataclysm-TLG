@@ -381,12 +381,6 @@
         "switch": true
       },
       {
-        "text": "<BOSS_intro_question>",
-        "topic": "BOSS_Brigitte_LaCroix_Story1",
-        "condition": { "npc_has_trait": "BOSS_Brigitte_LaCroix_01" },
-        "switch": true
-      },
-      {
         "text": "<CWH_intro_question>",
         "topic": "CWH_CONFUSED_1_IDEAS1",
         "condition": { "npc_has_trait": "BGSS_Confused_1" },

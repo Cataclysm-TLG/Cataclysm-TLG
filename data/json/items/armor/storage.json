@@ -1746,6 +1746,19 @@
         "coverage": 60,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
+      },
+      {
+        "encumbrance": 4,
+        "volume_encumber_modifier": 0.25,
+        "coverage": 30,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": 4,
+        "coverage": 0.25,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
       }
     ],
     "use_action": { "type": "transform", "msg": "You move the bag to your back.", "menu_text": "Adjust", "target": "mbag", "moves": 120 }

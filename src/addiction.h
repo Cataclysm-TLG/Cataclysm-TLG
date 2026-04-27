@@ -21,6 +21,7 @@ struct add_type {
         translation _desc;
         morale_type _craving_morale;
         effect_on_condition_id _effect;
+        time_duration _sated = 2_hours;
         std::string _builtin;
     public:
         addiction_id id;
@@ -28,6 +29,7 @@ struct add_type {
         static void load_add_types( const JsonObject &jo, const std::string &src );
         static void reset();
         static void check_add_types();
+        static void finalize_all();
         void load( const JsonObject &jo, std::string_view src );
         static const std::vector<add_type> &get_all();
 
@@ -47,6 +49,9 @@ struct add_type {
         const morale_type &get_craving_morale() const {
             return _craving_morale;
         }
+        const time_duration &get_default_sated() const {
+            return _sated;
+        }
         const effect_on_condition_id &get_effect() const {
             return _effect;
         }
@@ -60,10 +65,13 @@ class addiction
     public:
         addiction_id type;
         int intensity = 0;
-        time_duration sated = 1_hours;
+        time_duration sated = 2_hours;
 
         addiction() = default;
-        explicit addiction( const addiction_id &t, const int i = 1 ) : type {t}, intensity {i} { }
+        explicit addiction( const addiction_id &t, const int i = 1 )
+            : type { t }, intensity { i } {
+            sated = t->get_default_sated();
+        }
 
         void serialize( JsonOut &json ) const;
         void deserialize( const JsonObject &jo );

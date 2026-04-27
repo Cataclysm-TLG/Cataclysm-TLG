@@ -108,6 +108,7 @@ enum class iteminfo_parts : size_t {
 
     GUN_RECOIL_THEORETICAL_MINIMUM,
     GUN_IDEAL_STRENGTH,
+    GUN_AWKWARDNESS,
 
     GUN_RELOAD_TIME,
 

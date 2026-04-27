@@ -13,7 +13,9 @@
 #include "effect.h"
 #include "flag.h"
 #include "game.h"
+#include "game_constants.h"
 #include "input_context.h"
+#include "input_enums.h"
 #include "output.h"
 #include "ui_manager.h"
 #include "weather.h"
@@ -510,7 +512,7 @@ static medical_column draw_effects_summary( const int column_count, Character &y
 
     const float bmi = you.get_bmi_fat();
 
-    if( bmi < character_weight_category::underweight ) {
+    if( bmi < character_weight_category::skinny ) {
         std::string starvation_name;
         std::string starvation_text;
 
@@ -524,7 +526,7 @@ static medical_column draw_effects_summary( const int column_count, Character &y
                 _( "Your body is weakened by starvation.  Only time and regular meals will help you recover.\n\n" );
         }
 
-        if( bmi < character_weight_category::underweight ) {
+        if( bmi < character_weight_category::skinny ) {
             const float str_penalty = 1.0f - ( ( bmi - 13.0f ) / 3.0f );
             starvation_text += std::string( _( "Strength" ) ) + " -" + string_format( "%2.0f%%\n",
                                str_penalty * 100.0f );
@@ -622,7 +624,7 @@ static medical_column draw_stats_summary( const int column_count, Character &you
     }
     if( you.kcal_speed_penalty() < 0 ) {
         pen = std::abs( you.kcal_speed_penalty() );
-        pge_str = pgettext( "speed penalty", you.get_bmi() < character_weight_category::underweight ?
+        pge_str = pgettext( "speed penalty", you.get_bmi() < character_weight_category::skinny ?
                             "Starving" : "Underfed" );
         speed_detail_str += colorize( string_format( _( "%s    -%2d%%\n" ), pge_str, pen ), c_red );
     }

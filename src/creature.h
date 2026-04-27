@@ -528,8 +528,10 @@ class Creature : public viewer
         bool dodge_check( monster *z, bodypart_id bp, const damage_instance &dam_inst,
                           float training_level = 0.0f );
 
-        // Temporarily reveals an invisible player when a monster tries to enter their location
-        bool stumble_invis( const Creature &player, bool stumblemsg = true );
+        // Creatures temporarily detect unseen creatures when bumping into them.
+        bool stumble_invis( const Creature &attacker, bool stumblemsg = true );
+        // Use stumble_invis's system to try and find creatures throwing stuff at us from hiding.
+        bool react_to_ranged( const Creature &player );
         // Attack an empty location
         bool attack_air( const tripoint_bub_ms &p );
 
@@ -774,7 +776,7 @@ class Creature : public viewer
         virtual float get_hit() const;
 
         virtual int get_speed() const;
-        virtual int get_eff_per() const;
+        virtual int spot_check() const;
         virtual creature_size get_size() const = 0;
         virtual int get_hp( const bodypart_id &bp ) const;
         virtual int get_hp() const;
@@ -819,8 +821,11 @@ class Creature : public viewer
     protected:
         // Sets the creature's position without any side-effects.
         void set_pos_bub_only( const map &here, const tripoint_bub_ms &p );
+
+    public:
         // Sets the creature's position without any side-effects.
         void set_pos_abs_only( const tripoint_abs_ms &loc );
+    protected:
         // Invoked when the creature's position changes.
         virtual void on_move( const tripoint_abs_ms &old_pos );
         /**anatomy is the plan of the creature's body*/
@@ -833,7 +838,7 @@ class Creature : public viewer
 
         bodypart_id get_random_body_part( bool main = false ) const;
         /**
-         * Returns body parts this creature have.
+         * Returns body parts this creature has.
          * @param only_main If true, only displays parts that can have hit points
          */
         std::vector<bodypart_id> get_all_body_parts(

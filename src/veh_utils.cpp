@@ -54,8 +54,8 @@ int calc_xp_gain( const vpart_info &vp, const skill_id &sk, const Character &who
     /* Some installations are very fast, so we need to ensure that we're not
        giving an accelerated amount of XP for those. */
     double exp = to_moves<double>( vp.install_moves ) /
-                to_moves<double>( 1_minutes ) /
-                static_cast<double>( 1 << lvl );
+                 to_moves<double>( 1_minutes ) /
+                 static_cast<double>( 1 << lvl );
 
     int exp_int = static_cast<int>( exp );
     double exp_fraction = exp - exp_int;
