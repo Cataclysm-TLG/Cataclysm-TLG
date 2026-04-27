@@ -19,7 +19,11 @@
       [ "quikclot", 1 ],
       [ "bfipowder", 1 ],
       { "item": "liq_bandage", "prob": 1, "container-item": "liq_bandage_spray" },
-      [ "disinfectant", 1 ]
+      [ "disinfectant", 1 ],
+      [ "saline_bag_250", 1 ],
+      [ "saline_bag_500", 1 ],
+      [ "saline_bag_1000", 1 ],
+      [ "saline_bag_2000", 1 ]
     ]
   },
   {
