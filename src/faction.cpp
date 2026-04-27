@@ -119,8 +119,9 @@ faction_price_rule faction_price_rules_reader::get_next( JsonValue &jv )
     faction_price_rule ret( icg_entry_reader::_part_get_next( jo ) );
     optional( jo, false, "markup", ret.markup, 1.0 );
     optional( jo, false, "premium", ret.premium, 1.0 );
-    optional( jo, false, "fixed_adj", ret.fixed_adj, std::nullopt );
+    optional( jo, false, "purchase_rate", ret.purchase_rate, 1.0 );
     optional( jo, false, "price", ret.price, std::nullopt );
+    optional( jo, false, "fixed_adj", ret.fixed_adj, std::nullopt );
     return ret;
 }
 
