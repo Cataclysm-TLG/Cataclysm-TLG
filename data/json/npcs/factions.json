@@ -81,7 +81,7 @@
       { "category": "armor", "purchase_rate": 0 },
       { "category": "ma_manuals", "purchase_rate": 0 },
       { "category": "manuals", "purchase_rate": 0 },
-      { "category": "mutagen", "purchase_rate": 0 },
+      { "category": "mutagen", "purchase_rate": 0.5 },
       { "category": "drugs", "purchase_rate": 0 },
       { "category": "ammo", "purchase_rate": 0 },
       { "category": "weapons", "purchase_rate": 0 },
@@ -90,7 +90,8 @@
       { "category": "veh_parts", "purchase_rate": 0 },
       { "category": "tool_magazine", "purchase_rate": 0 },
       { "category": "other", "purchase_rate": 0 },
-      { "group": "drugs_medical_important", "purchase_rate": 0.5 }
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "ultratech", "purchase_rate": 0.5 }
     ],
     "relations": {
       "robofac": {
