@@ -1138,13 +1138,13 @@
         },
         { "group": "bottle_otc_painkiller_20", "x": 28, "y": 25, "chance": 50, "repeat": [ 20, 80 ] },
         {
-          "group": "oxycodone_bottle_plastic_pill_prescription_10",
+          "group": "oxycodone_ad_group",
           "x": 28,
           "y": 25,
           "chance": 50,
           "repeat": [ 20, 60 ]
         },
-        { "group": "codeine_bottle_plastic_pill_painkiller_10", "x": 28, "y": 25, "chance": 50, "repeat": [ 20, 60 ] },
+        { "group": "codeine_ad_group", "x": 28, "y": 25, "chance": 50, "repeat": [ 20, 60 ] },
         {
           "group": "antifungal_bottle_plastic_pill_prescription_5",
           "x": 28,

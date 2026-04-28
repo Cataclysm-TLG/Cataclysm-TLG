@@ -617,7 +617,7 @@
       { "item": "apple_cider", "prob": 50 },
       { "item": "lemonade", "prob": 50 },
       { "item": "energy_drink", "prob": 55 },
-      { "item": "diet_nergy_drink", "prob": 55 },
+      { "item": "diet_energy_drink", "prob": 55 },
       { "item": "herbal_tea", "prob": 30 },
       { "group": "softdrinks_canned", "prob": 460 },
       { "item": "milk", "prob": 50 },

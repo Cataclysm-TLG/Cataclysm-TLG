@@ -1038,6 +1038,7 @@
     "type_name": "mutation",
     "description": "Obsoleted mutagen addiction.",
     "sated": "99 hours",
-    "craving_morale": "morale_craving_mutagen"
+    "craving_morale": "morale_craving_mutagen",
+    "effect_on_condition": "EOC_MUTATION_ADDICTION"
   }
 ]

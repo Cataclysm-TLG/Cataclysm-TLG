@@ -32,7 +32,7 @@
         },
         "then": [
           { "u_message": "You've got a headache.  You need caffeine to function.", "type": "bad" },
-          { "math": [ "u_val('pain') + 5" ] }
+          { "math": [ "u_pain('type': 'perceived') += 7" ] }
         ]
       }
     ]

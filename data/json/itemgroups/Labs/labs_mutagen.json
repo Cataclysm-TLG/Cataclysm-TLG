@@ -23,9 +23,9 @@
       { "group": "oxy_powder_bottle_part", "prob": 30 },
       { "prob": 10, "group": "heroin_bag_zipper_4" },
       { "item": "lsd", "prob": 10, "count": 5 },
-      { "prob": 10, "group": "oxycodone_bottle_plastic_pill_prescription_10" },
+      { "prob": 10, "group": "oxycodone_ad_group" },
       { "prob": 10, "group": "tramadol_bottle_plastic_pill_prescription_10" },
-      { "prob": 10, "group": "codeine_bottle_plastic_pill_painkiller_10" },
+      { "prob": 10, "group": "codeine_ad_group" },
       { "prob": 10, "group": "thorazine_bottle_plastic_pill_prescription_10" },
       { "prob": 20, "group": "pills_sleep_bottle_plastic_pill_prescription_10" },
       { "prob": 30, "group": "vitamins_bottle_plastic_pill_supplement_20" }

@@ -1635,10 +1635,17 @@
   },
   {
     "type": "item_group",
+    "id": "cig_box_cigarette_full",
+    "subtype": "collection",
+    "container-item": "box_cigarette",
+    "entries": [ { "item": "cig", "container-item": "null", "count": 20 } ]
+  },
+  {
+    "type": "item_group",
     "id": "box_small_nicotine_patch_full",
     "subtype": "collection",
     "container-item": "box_small",
-    "entries": [ { "item": "nicotine_patch", "container-item": "null", "count": [ 10 ] } ]
+    "entries": [ { "item": "nicotine_patch", "container-item": "null", "count": 10 } ]
   },
   {
     "type": "item_group",

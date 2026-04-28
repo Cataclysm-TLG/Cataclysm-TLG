@@ -244,7 +244,7 @@
       { "item": "seed_tobacco", "prob": 5 },
       { "item": "rolling_paper", "prob": 45 },
       { "item": "pipe_glass", "prob": 20 },
-      { "prob": 60, "group": "cig_box_cigarette_20" },
+      { "prob": 60, "group": "cig_box_cigarette_full" },
       { "prob": 60, "group": "chaw_wrapper_20" }
     ]
   },

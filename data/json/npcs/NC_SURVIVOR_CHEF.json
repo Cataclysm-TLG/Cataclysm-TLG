@@ -80,7 +80,7 @@
       { "item": "knife_butcher", "prob": 100 },
       { "item": "joint", "prob": 50 },
       { "prob": 5, "group": "coke_bag_zipper_8" },
-      { "prob": 60, "group": "cig_box_cigarette_20" },
+      { "prob": 60, "group": "cig_box_cigarette_full" },
       { "item": "lighter", "prob": 60, "charges": [ 10, -1 ] },
       { "prob": 30, "group": "vegetable_pickled_jar_glass_sealed_2" },
       { "prob": 20, "group": "meat_pickled_jar_glass_sealed_2" }

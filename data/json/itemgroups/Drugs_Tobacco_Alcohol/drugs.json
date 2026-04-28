@@ -269,7 +269,7 @@
       { "group": "drugs_analgesic", "prob": 100 },
       { "group": "drugs_heal_simple", "prob": 100 },
       { "group": "box_small_nicotine_patch_full", "prob": 2 },
-      { "item": "nic_gum", "count": [ 8 ], "container-item": "box_small", "prob": 2 },
+      { "item": "nic_gum", "count": 8, "container-item": "box_small", "prob": 1 },
       { "group": "drugs_misc", "prob": 30 },
       { "group": "drugs_rare", "prob": 100 }
     ]
@@ -433,28 +433,28 @@
     "id": "aspirin_ad_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "aspirin", "container-item": "null", "count": [ 5, 60 ] } ]
+    "entries": [ { "item": "aspirin", "container-item": "null", "count": [ 1, 30 ] } ]
   },
   {
     "type": "item_group",
     "id": "acetaminophen_ad_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "acetaminophen", "container-item": "null", "count": [ 5, 60 ] } ]
+    "entries": [ { "item": "acetaminophen", "container-item": "null", "count": [ 1, 30 ] } ]
   },
   {
     "type": "item_group",
     "id": "ibuprofen_ad_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "ibuprofen", "container-item": "null", "count": [ 5, 60 ] } ]
+    "entries": [ { "item": "ibuprofen", "container-item": "null", "count": [ 1, 30 ] } ]
   },
   {
     "type": "item_group",
     "id": "naproxen_ad_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "naproxen", "container-item": "null", "count": [ 5, 60 ] } ]
+    "entries": [ { "item": "naproxen", "container-item": "null", "count": [ 1, 30 ] } ]
   },
   {
     "type": "item_group",
@@ -468,7 +468,7 @@
     "id": "tramadol_ad_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "tramadol", "container-item": "null", "count": [ 1, 120 ] } ]
+    "entries": [ { "item": "tramadol", "container-item": "null", "count": [ 1, 30 ] } ]
   },
   {
     "type": "item_group",
@@ -482,49 +482,49 @@
     "id": "adderall_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "adderall", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "adderall", "container-item": "null", "count": [ 1, 60 ] } ]
   },
   {
     "type": "item_group",
     "id": "antibiotics_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "antibiotics", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "antibiotics", "container-item": "null", "count": [ 1, 14 ] } ]
   },
   {
     "type": "item_group",
     "id": "strong_antibiotics_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "strong_antibiotic", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "strong_antibiotic", "container-item": "null", "count": [ 1, 14 ] } ]
   },
   {
     "type": "item_group",
     "id": "antifungal_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "antifungal", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "antifungal", "container-item": "null", "count": [ 1, 20 ] } ]
   },
   {
     "type": "item_group",
     "id": "antiparasitic_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "antiparasitic", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "antiparasitic", "container-item": "null", "count": [ 1, 20 ] } ]
   },
   {
     "type": "item_group",
     "id": "diazepam_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "diazepam", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "diazepam", "container-item": "null", "count": [ 1, 60 ] } ]
   },
   {
     "type": "item_group",
     "id": "calcium_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_supplement",
-    "entries": [ { "item": "calcium_tablet", "container-item": "null", "count": [ 15, 60 ] } ],
+    "entries": [ { "item": "calcium_tablet", "container-item": "null", "count": [ 1, 30 ] } ],
     "on_overflow": "spill"
   },
   {
@@ -532,7 +532,7 @@
     "id": "iron_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "inj_iron", "container-item": "null", "count": [ 15, 60 ] } ],
+    "entries": [ { "item": "inj_iron", "container-item": "null", "count": [ 1, 30 ] } ],
     "on_overflow": "spill"
   },
   {
@@ -540,21 +540,21 @@
     "id": "prozac_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "prozac", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "prozac", "container-item": "null", "count": [ 1, 30 ] } ]
   },
   {
     "type": "item_group",
     "id": "thorazine_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "thorazine", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "thorazine", "container-item": "null", "count": [ 1, 30 ] } ]
   },
   {
     "type": "item_group",
     "id": "xanax_dr_group",
     "subtype": "collection",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "xanax", "container-item": "null", "count": [ 15, 60 ] } ]
+    "entries": [ { "item": "xanax", "container-item": "null", "count": [ 1, 30 ] } ]
   },
   {
     "type": "item_group",
@@ -562,7 +562,7 @@
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "jar_3l_glass_sealed",
-    "entries": [ { "item": "weed", "count": [ 10, 420 ] } ]
+    "entries": [ { "item": "weed", "count": [ 1, 140 ] } ]
   },
   {
     "type": "item_group",
@@ -570,7 +570,7 @@
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "jar_glass_sealed",
-    "entries": [ { "item": "hi_q_shatter", "count": [ 5, 140 ] } ]
+    "entries": [ { "item": "hi_q_shatter", "count": [ 1, 140 ] } ]
   },
   {
     "type": "item_group",
@@ -578,7 +578,7 @@
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "jar_glass_sealed",
-    "entries": [ { "item": "hi_q_wax", "count": [ 5, 140 ] } ]
+    "entries": [ { "item": "hi_q_wax", "count": [ 1, 140 ] } ]
   },
   {
     "type": "item_group",
