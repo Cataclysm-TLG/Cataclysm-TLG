@@ -150,7 +150,7 @@
     "id": "basic_short_swords",
     "type": "requirement",
     "//": "Any basic thing you could use as a short sword, exlcudes high-quality things.",
-    "tools": [ [ [ "makeshift_machete", -1 ], [ "machete_gimmick", -1 ], [ "machete", -1 ] ] ]
+    "tools": [ [ [ "makeshift_machete", -1 ], [ "machete_gimmick", -1 ] ] ]
   },
   {
     "id": "real_short_swords",
@@ -163,7 +163,8 @@
         [ "sword_bronze", -1 ],
         [ "sword_bayonet", -1 ],
         [ "butterfly_swords", -1 ],
-        [ "arisaka_bayonet", -1 ]
+        [ "arisaka_bayonet", -1 ],
+        [ "machete", -1 ]
       ]
     ]
   },
