@@ -3,13 +3,7 @@
     "type": "item_group",
     "id": "toiletries",
     "subtype": "collection",
-    "items": [
-      "soap",
-      "menstrual_pad",
-      "menstrual_cup",
-      "toilet_paper",
-      "liquid_soap"
-    ]
+    "items": [ "soap", "menstrual_pad", "menstrual_cup", "toilet_paper", "liquid_soap" ]
   },
   {
     "type": "item_group",
@@ -107,7 +101,7 @@
       [ "prussian_blue", 1 ]
     ]
   },
-    {
+  {
     "type": "item_group",
     "subtype": "collection",
     "//": "All board games grouped together.  Currently used to inflate their prices for specific factions.",

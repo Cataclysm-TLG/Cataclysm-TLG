@@ -521,6 +521,39 @@
     "melee_damage": { "bash": 8 }
   },
   {
+    "id": "90two",
+    "copy-from": "pistol_base",
+    "looks_like": "glock_17",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
+    "name": { "str": "Beretta 90-two pistol" },
+    "description": "A more modern version of Beretta's popular 92 series of handguns, the 90-two performs largely the same.  The main difference is a sleeker, almost futuristic-looking design owed in large part to the polymer underbarrel rail cover.  This one is chambered in 9x19mm.",
+    "weight": "905 g",
+    "volume": "554 ml",
+    "longest_side": "250 mm",
+    "barrel_length": "125 mm",
+    "price": "650 USD",
+    "price_postapoc": "20 USD",
+    "to_hit": -2,
+    "material": [ "steel", "plastic" ],
+    "symbol": "(",
+    "color": "dark_gray",
+    "ammo": [ "9mm" ],
+    "range": 6,
+    "dispersion": 480,
+    "durability": 7,
+    "min_cycle_recoil": 450,
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
+    "pocket_data": [
+      {
+        "magazine_well": "250 ml",
+        "pocket_type": "MAGAZINE_WELL",
+        "item_restriction": [ "m9mag", "m9mag_10rd", "m9mag_17rd", "m9mag_18rd", "m9mag_20rd", "m9bigmag", "m9mag_32rd", "m9mag_35rd" ]
+      }
+    ],
+    "melee_damage": { "bash": 8 }
+  },
+  {
     "id": "px4",
     "copy-from": "pistol_base",
     "looks_like": "glock_17",

@@ -32,7 +32,7 @@
     "subtype": "collection",
     "ammo": 100,
     "entries": [
-      { "item": "glock_20", "variant": "glock_20", "charges": [ 0, 15 ] },
+      { "item": "glock_20", "charges": [ 0, 15 ] },
       { "item": "glock_20mag" },
       { "item": "glock_20mag", "prob": 50 },
       { "group": "on_hand_10mm" }
@@ -123,7 +123,7 @@
     "subtype": "collection",
     "ammo": 100,
     "entries": [
-      { "item": "glock_40", "variant": "glock_40", "charges": [ 0, 15 ] },
+      { "item": "glock_40", "charges": [ 0, 15 ] },
       { "item": "glock_20mag" },
       { "item": "glock_20mag", "prob": 50 },
       { "group": "on_hand_10mm" }
@@ -188,7 +188,7 @@
     "subtype": "collection",
     "ammo": 100,
     "entries": [
-      { "item": "m9", "variant": "m9", "charges": [ 0, 15 ] },
+      { "item": "m9", "charges": [ 0, 15 ] },
       { "item": "m9mag" },
       { "item": "m9mag", "prob": 50 },
       { "group": "on_hand_9mm" }
@@ -678,7 +678,7 @@
     "subtype": "collection",
     "ammo": 100,
     "entries": [
-      { "item": "m9", "variant": "90two", "charges": [ 0, 15 ] },
+      { "item": "90two", "charges": [ 0, 15 ] },
       { "item": "m9mag_17rd" },
       { "item": "m9mag_17rd", "prob": 50 },
       { "group": "on_hand_9mm" }
@@ -2310,7 +2310,7 @@
     "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
     "subtype": "collection",
     "ammo": 100,
-    "entries": [ { "item": "benelli_tsa", "variant": "mossberg_500_security", "charges": [ 0, 6 ] }, { "group": "on_hand_shot" } ]
+    "entries": [ { "item": "mossberg_500_security", "charges": [ 0, 6 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_remington_870_express",
@@ -2326,7 +2326,7 @@
     "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
     "subtype": "collection",
     "ammo": 100,
-    "entries": [ { "item": "remington_870", "variant": "browning_a5", "charges": [ 0, 5 ] }, { "group": "on_hand_shot" } ]
+    "entries": [ { "item": "browning_a5", "charges": [ 0, 5 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_remington_1100",
@@ -2334,7 +2334,7 @@
     "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
     "subtype": "collection",
     "ammo": 100,
-    "entries": [ { "item": "remington_870", "variant": "remington_1100", "charges": [ 0, 5 ] }, { "group": "on_hand_shot" } ]
+    "entries": [ { "item": "remington_1100", "charges": [ 0, 5 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_mossberg_930",
@@ -2419,15 +2419,15 @@
     "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
     "subtype": "collection",
     "ammo": 100,
-    "entries": [ { "item": "mossberg_930", "variant": "m1014", "charges": [ 0, 8 ] }, { "group": "on_hand_shot" } ]
+    "entries": [ { "item": "m1014", "charges": [ 0, 8 ] }, { "group": "on_hand_shot" } ]
   },
   {
-    "id": "nested_SPAS_12",
+    "id": "nested_spas_12",
     "type": "item_group",
     "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
     "subtype": "collection",
     "ammo": 100,
-    "entries": [ { "item": "mossberg_590", "variant": "SPAS_12", "charges": [ 0, 9 ] }, { "group": "on_hand_shot" } ]
+    "entries": [ { "item": "spas_12", "charges": [ 0, 9 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_slp",
@@ -2436,10 +2436,7 @@
     "subtype": "collection",
     "ammo": 100,
     "//2": "The FN SLP Mk I is drilled and tapped for rail mounts: https://fnamerica.wpenginepowered.com/wp-content/uploads/2016/10/1608_FN_SLP_sellsheet_R5.pdf",
-    "entries": [
-      { "item": "mossberg_590", "variant": "slp", "contents-item": [ "rail_mount" ], "charges": [ 0, 9 ] },
-      { "group": "on_hand_shot" }
-    ]
+    "entries": [ { "item": "slp", "contents-item": [ "rail_mount" ], "charges": [ 0, 9 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_benelli_m2",
@@ -2447,7 +2444,7 @@
     "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
     "subtype": "collection",
     "ammo": 100,
-    "entries": [ { "item": "benelli_sa", "variant": "m2", "charges": [ 0, 4 ] }, { "group": "on_hand_shot" } ]
+    "entries": [ { "item": "m2", "charges": [ 0, 4 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_black_eagle",
@@ -2455,7 +2452,7 @@
     "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
     "subtype": "collection",
     "ammo": 100,
-    "entries": [ { "item": "benelli_sa", "variant": "sbe", "charges": [ 0, 4 ] }, { "group": "on_hand_shot" } ]
+    "entries": [ { "item": "sbe", "charges": [ 0, 4 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_benelli_m2_tac",
@@ -2464,10 +2461,7 @@
     "subtype": "collection",
     "ammo": 100,
     "//2": "Benelli M2 tactical shotguns are drilled and tapped for rail mounts: https://www.benelliusa.com/shotguns/m2-tactical-shotguns",
-    "entries": [
-      { "item": "benelli_tsa", "variant": "m2_tac", "contents-item": [ "rail_mount" ], "charges": [ 0, 6 ] },
-      { "group": "on_hand_shot" }
-    ]
+    "entries": [ { "item": "m2_tac", "contents-item": [ "rail_mount" ], "charges": [ 0, 6 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_mossberg_590",
@@ -2850,7 +2844,7 @@
     "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
     "subtype": "collection",
     "ammo": 100,
-    "entries": [ { "item": "remington_870", "variant": "ithaca37", "charges": [ 0, 5 ] }, { "group": "on_hand_shot" } ]
+    "entries": [ { "item": "ithaca37", "charges": [ 0, 5 ] }, { "group": "on_hand_shot" } ]
   },
   {
     "id": "nested_cz600",
