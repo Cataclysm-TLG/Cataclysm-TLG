@@ -1349,10 +1349,7 @@
     "addiction_potential": 75,
     "vitamins": [ [ "nicotine_slow", 48 ] ],
     "flags": [ "NO_INGEST" ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You apply a nicotine patch."
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You apply a nicotine patch." }
   },
   {
     "id": "nyquil",

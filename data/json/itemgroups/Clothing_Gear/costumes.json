@@ -292,7 +292,7 @@
       { "item": "fursuit", "variant": "fox_fursuit", "prob": 3 },
       { "item": "fursuit", "variant": "dog_fursuit", "prob": 3 },
       { "item": "fursuit", "variant": "eagle_fursuit", "prob": 1 },
-      { "item": "fursuit", "variant": "rabbit_fursuit", "prob": 2 }
+      { "item": "fursuit", "variant": "rabbit_fursuit", "prob": 2 },
       { "item": "fursuit", "variant": "rat_fursuit", "prob": 1 },
       { "item": "fursuit", "variant": "fantasy_fursuit", "prob": 2 },
       { "item": "fursuit", "variant": "horse_fursuit", "prob": 1 },
