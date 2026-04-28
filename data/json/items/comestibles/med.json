@@ -27,7 +27,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "dextroamphetamine" },
-    "description": "A mild prescription stimulant commonly prescribed for attention deficit disorder, often with levoamphetamine included.  It can be addictive if abused.",
+    "description": "A prescription stimulant commonly prescribed for attention deficit disorder, often with levoamphetamine included.  It can be addictive if abused.",
     "material": [ "drug_filler" ],
     "weight": "1 g",
     "volume": "1 ml",
@@ -37,11 +37,12 @@
     "color": "light_red",
     "container": "bottle_plastic_pill_prescription",
     "variant_type": "drug",
-    "fun": 10,
+    "fun": 5,
     "addiction_potential": 10,
     "addiction_type": "amphetamine",
     "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take a stimulant capsule." }
+    "vitamins": [ [ "amphetamine", 5 ] ],
+    "use_action": { "type": "consume_drug", "activation_message": "You take a dextroamphetamine pill." }
   },
   {
     "id": "adrenaline_injector",
@@ -217,7 +218,7 @@
     "healthy": -1,
     "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You take some metaprolol." },
-    "vitamins": [ [ "vit_betablocker", 864 ] ]
+    "vitamins": [ [ "betablocker", 864 ] ]
   },
   {
     "id": "bfipowder",
@@ -477,34 +478,6 @@
     "addiction_type": "cocaine",
     "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": [ "COKE" ]
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
-    "id": "cola_meth",
-    "name": { "str_sp": "methacola" },
-    "category": "drugs",
-    "weight": "61 g",
-    "color": "brown",
-    "addiction_type": "amphetamine",
-    "container": "bottle_glass",
-    "comestible_type": "DRINK",
-    "symbol": "~",
-    "quench": 15,
-    "healthy": -8,
-    "addiction_potential": 60,
-    "calories": 49,
-    "description": "A potent cocktail of amphetamines, caffeine and corn syrup, this stuff puts a spring in your step, a fire in your eye, and a bad case of tachycardia tremors in your somersaulting heart.",
-    "price": "10 USD",
-    "price_postapoc": "20 cent",
-    "material": [ "junk" ],
-    "volume": "250 ml",
-    "phase": "liquid",
-    "charges": 4,
-    "flags": [ "EATEN_COLD", "WATER_DISSOLVE", "NO_AUTO_CONSUME" ],
-    "freezing_point": -45,
-    "fun": 30,
-    "vitamins": [ [ "junk_allergen", 1 ] ]
   },
   {
     "id": "myopia_contacts_weekly",
@@ -1223,7 +1196,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str_sp": "crank" },
+    "name": { "str_sp": "speed" },
     "description": "Tiny off-white crystals of methamphetamine.  Their coloration suggests dubious purity, but even poor-quality meth is still one of the post potent and addictive stimulants around.",
     "weight": "1 g",
     "volume": "2 ml",
@@ -1239,6 +1212,7 @@
     "addiction_potential": 50,
     "addiction_type": "amphetamine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
+    "vitamins": [ [ "amphetamine", 17 ] ],
     "use_action": [ "METH" ]
   },
   {
@@ -1263,6 +1237,7 @@
     "addiction_potential": 40,
     "addiction_type": "amphetamine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
+    "vitamins": [ [ "amphetamine", 25 ] ],
     "use_action": [ "METH" ]
   },
   {

@@ -48,14 +48,25 @@
     "disease": [ [ -2800, -3600 ], [ -3601, -4400 ], [ -4401, -5600 ] ]
   },
   {
-    "id": "vit_betablocker",
+    "id": "amphetamine",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Amphetamine" },
+    "excess": "amphetamine_eff",
+    "min": 0,
+    "max": 50,
+    "rate": "54 m",
+    "disease_excess": [ [ 5, 15 ], [ 16, 20 ], [ 21, 35 ], [ 36, 50 ] ]
+  },
+  {
+    "id": "betablocker",
     "type": "vitamin",
     "vit_type": "drug",
     "name": { "str": "Beta-Blocker" },
     "excess": "betablock",
     "min": 0,
     "max": 864,
-    "//": [ "Takes 30 min to kick in, lasts 24 hours (or more)." ],
+    "//": "Lasts 24 hours (or more).",
     "rate": "100 s",
     "disease_excess": [ [ 10, 864 ], [ 865, 1728 ], [ 1729, 2592 ] ]
   },

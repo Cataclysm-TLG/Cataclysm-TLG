@@ -280,6 +280,44 @@
   },
   {
     "type": "item_group",
+    "id": "fursuits",
+    "//": "Fursuits. These could be for furries or paired with the mascot suits group for stadiums etc.",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "fursuit", "variant": "wolf_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "tiger_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "cat_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "lion_fursuit", "prob": 2 },
+      { "item": "fursuit", "variant": "bear_fursuit", "prob": 2 },
+      { "item": "fursuit", "variant": "fox_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "dog_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "eagle_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "rabbit_fursuit", "prob": 2 }
+      { "item": "fursuit", "variant": "rat_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "fantasy_fursuit", "prob": 2 },
+      { "item": "fursuit", "variant": "horse_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "bull_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "chicken_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "monster_fursuit", "prob": 2 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mascot_suits",
+    "//": "Mascot suits. These are mostly stuff for sports teams or promotions.",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "mascot_suit", "variant": "shark_costume", "prob": 3 },
+      { "item": "mascot_suit", "variant": "dino_costume", "prob": 3 },
+      { "item": "mascot_suit", "variant": "dragon_costume", "prob": 3 },
+      { "item": "mascot_suit", "variant": "fish_costume", "prob": 2 },
+      { "item": "mascot_suit", "variant": "spartan_costume", "prob": 3 },
+      { "item": "mascot_suit", "variant": "pizza_costume", "prob": 2 },
+      { "item": "mascot_suit", "variant": "revolutionary_costume", "prob": 2 }
+    ]
+  },
+  {
+    "type": "item_group",
     "id": "costume_undergarments_women",
     "//": "undergarments for costumes, cosplay and costume parties",
     "subtype": "distribution",
