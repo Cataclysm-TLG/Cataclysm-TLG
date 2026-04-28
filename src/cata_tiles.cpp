@@ -4484,7 +4484,6 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                 draw_options opts{};
                 opts.category = ent_category;
                 opts.subcategory = ent_subcategory;
-
                 result = draw_from_id_string(
                              chosen_id,
                              p,
@@ -4506,7 +4505,6 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
         const Character *pl = dynamic_cast<const Character *>( &critter );
         if( pl != nullptr ) {
             const bool use_scaling = get_option<bool>( "CREATURE_TILE_SCALING" );
-
             float scale_x = 1.0f;
             float scale_y = 1.0f;
             if( use_scaling ) {
@@ -4556,10 +4554,6 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                     you.enchantment_cache->get_vision_description_struct( sees_with_special, d );
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-
-
-
-
                 return draw_from_id_string(
                            special_vis_desc.id,
                            p,
@@ -4577,7 +4571,6 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
             return false;
         }
     }
-
     if( result && !is_player && show_creature_overlay_icons ) {
         std::string draw_id = "overlay_" + Creature::attitude_raw_string( attitude );
         if( sees_player && !you.has_trait( trait_INATTENTIVE ) ) {
@@ -4607,7 +4600,6 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
     if( invisible[0] ) {
         return false;
     }
-
     tripoint_bub_ms scan_p( p + tripoint::above );
     map &here = get_map();
     Character &you = get_player_character();
@@ -4675,10 +4667,6 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
             if( tileset_ptr->find_tile_type( draw_id ) ) {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-
-
-
-
                 draw_from_id_string(
                     draw_id,
                     p,
@@ -4838,7 +4826,6 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
     int prev_height_3d = height_3d;
     if( override_look_muts.empty() ) {
         std::string ent_name;
-
         if( ch.is_npc() ) {
             ent_name = ch.male ? "npc_male" : "npc_female";
         } else {
@@ -4850,7 +4837,6 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
             opts.category = TILE_CATEGORY::NONE;
             opts.scale_x = scale_x;
             opts.scale_y = scale_y;
-
             draw_from_id_string(
                 ent_name,
                 p,
@@ -4866,7 +4852,6 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
             opts.category = TILE_CATEGORY::NONE;
             opts.scale_x = scale_x;
             opts.scale_y = scale_y;
-
             draw_from_id_string(
                 ent_name,
                 p,
@@ -4893,7 +4878,6 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
             opts.category = category;
             opts.scale_x = scale_x;
             opts.scale_y = scale_y;
-
             draw_from_id_string(
                 override_look.id,
                 p,
@@ -4909,7 +4893,6 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
             opts.category = category;
             opts.scale_x = scale_x;
             opts.scale_y = scale_y;
-
             draw_from_id_string(
                 override_look.id,
                 p,
@@ -4922,7 +4905,6 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
             );
         }
     }
-
     // Next up, draw all the overlays.
     std::vector<std::pair<std::string, std::string>> overlays = override_look_muts.empty() ?
             ch.get_overlay_ids() : ch.get_overlay_ids_when_override_look();
@@ -4935,7 +4917,6 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
                 opts.category = TILE_CATEGORY::NONE;
                 opts.scale_x = scale_x;
                 opts.scale_y = scale_y;
-
                 draw_from_id_string(
                     draw_id,
                     p,
@@ -4973,7 +4954,6 @@ void cata_tiles::draw_entity_with_overlays( const monster &mon, const tripoint_b
         lit_level ll, int &height_3d )
 {
     // TODO: move drawing the monster from draw_critter_at() here
-
     std::vector<std::pair<std::string, std::string>> overlays = mon.get_overlay_ids();
     for( const std::pair<std::string, std::string> &overlay : overlays ) {
         std::string draw_id = overlay.first;
@@ -4982,9 +4962,6 @@ void cata_tiles::draw_entity_with_overlays( const monster &mon, const tripoint_b
             if( mon.facing == FacingDirection::RIGHT ) {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-
-
-
                 draw_from_id_string(
                     draw_id,
                     p,
@@ -4998,9 +4975,6 @@ void cata_tiles::draw_entity_with_overlays( const monster &mon, const tripoint_b
             } else if( mon.facing == FacingDirection::LEFT ) {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-
-
-
                 draw_from_id_string(
                     draw_id,
                     p,
@@ -5012,7 +4986,6 @@ void cata_tiles::draw_entity_with_overlays( const monster &mon, const tripoint_b
                     opts
                 );
             }
-
             height_3d = std::max( height_3d, overlay_height_3d );
         }
     }
