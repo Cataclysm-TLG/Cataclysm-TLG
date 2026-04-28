@@ -116,11 +116,6 @@
   },
   {
     "type": "item_action",
-    "id": "METH",
-    "name": { "str": "Smoke/snort meth" }
-  },
-  {
-    "type": "item_action",
     "id": "TAZER",
     "name": { "str": "Taze something" }
   },

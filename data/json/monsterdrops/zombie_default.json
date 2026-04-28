@@ -195,6 +195,7 @@
       {
         "distribution": [
           { "item": "meth", "prob": 5 },
+          { "item": "pure_meth", "prob": 5 },
           { "item": "coke", "prob": 5 },
           { "item": "lsd", "prob": 2 },
           { "item": "heroin", "prob": 5 },

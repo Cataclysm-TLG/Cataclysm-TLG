@@ -26,6 +26,8 @@
 #include "talker.h"
 #include "text_snippets.h"
 
+static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
+static const efftype_id effect_cig( "cig" );
 static const efftype_id effect_nausea( "nausea" );
 static const efftype_id effect_opioid_effect( "opioid_effect" );
 static const efftype_id effect_withdrawal_alcohol( "withdrawal_alcohol" );
@@ -208,7 +210,10 @@ static bool cocaine_add( Character &u, int in )
 
 static bool nicotine_effect( Character &u, addiction &add )
 {
-
+    if( u.has_effect( effect_cig ) ) {
+        add.sated = 0_turns;
+        return false;
+    }
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( 20, add.intensity );
     int timer_int = std::min( in / 3, 3 );
@@ -345,6 +350,10 @@ static bool opioid_effect( Character &u, addiction &add )
 
 static bool amphetamine_effect( Character &u, addiction &add )
 {
+    if( u.has_effect( effect_amphetamine_eff ) ) {
+        add.sated = 0_turns;
+        return false;
+    }
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( add.intensity, 20 );
     bool ret = false;
