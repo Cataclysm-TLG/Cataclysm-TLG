@@ -4037,5 +4037,10 @@
     "type": "MIGRATION",
     "id": "marloss_scarf",
     "replace": "keffiyeh"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cola_meth",
+    "replace": "pure_meth"
   }
 ]

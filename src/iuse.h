@@ -52,7 +52,6 @@ std::optional<int> marloss( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> marloss_gel( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> marloss_seed( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> meditate( Character *, item *, const tripoint_bub_ms & );
-std::optional<int> meth( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> mycus( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> petfood( Character *p, item *it, const tripoint_bub_ms & );
 std::optional<int> plantblech( Character *, item *, const tripoint_bub_ms & );

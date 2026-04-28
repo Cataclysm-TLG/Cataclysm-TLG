@@ -1511,10 +1511,9 @@ void Character::update_heartrate_index()
     const float hr_stamina_mod = 1.6f * ( 1.0f - stamina_level );
 
     float hr_nicotine_mod = 0.0f;
-    if( get_effect_dur( effect_cig ) > 0_turns ) {
+    if( has_effect( effect_cig ) ) {
         // Nicotine-induced tachycardia
-        if( get_effect_dur( effect_cig ) >
-            10_minutes * ( addiction_level( STATIC( addiction_id( "nicotine" ) ) ) + 1 ) ) {
+        if( get_effect_int( effect_cig ) > ( addiction_level( STATIC( addiction_id( "nicotine" ) ) ) - 9 ) ) {
             hr_nicotine_mod = 0.2f;
         } else {
             hr_nicotine_mod = 0.1f;

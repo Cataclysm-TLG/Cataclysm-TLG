@@ -1687,7 +1687,9 @@
       { "item": "knife_trench", "prob": 14 },
       { "item": "switchblade", "prob": 15 },
       { "item": "bondage_mask", "prob": 1 },
-      { "item": "thermos", "prob": 25 }
+      { "item": "thermos", "prob": 25 },
+      { "group": "fursuits", "prob": 6 },
+      { "group": "mascot_suits", "prob": 5 }
     ]
   },
   {
@@ -2104,10 +2106,9 @@
       { "group": "softdrinks_canned", "prob": 90 },
       [ "choco_coffee_beans", 20 ],
       { "prob": 20, "group": "caffeine_bottle_plastic_pill_supplement_1_10" },
-      [ "cola_meth", 1 ],
       [ "picklocks", 10 ],
-      [ "wolfsuit", 4 ],
-      [ "dinosuit", 4 ],
+      { "group": "fursuits", "prob": 6 },
+      { "group": "mascot_suits", "prob": 5 },
       [ "jedi_cloak", 4 ],
       { "item": "glowstick", "prob": 60, "charges": 1400 },
       [ "blanket", 10 ],

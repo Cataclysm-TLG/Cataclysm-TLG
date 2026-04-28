@@ -142,7 +142,6 @@ static const damage_type_id damage_heat( "heat" );
 static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_bleed( "bleed" );
-static const efftype_id effect_cig( "cig" );
 static const efftype_id effect_shakes( "shakes" );
 static const efftype_id effect_sleep( "sleep" );
 static const fault_id fault_emp_reboot( "fault_emp_reboot" );
@@ -14093,7 +14092,7 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
             type->invoke( carrier, *this, pos, "transform" );
             if( !this->is_null() ) {
                 here.add_item_or_charges( carrier->pos_bub(), *this );
-                on_drop( carrier->pos_bub(), here );        
+                on_drop( carrier->pos_bub(), here );
                 carrier->i_rem( this );
             }
         }

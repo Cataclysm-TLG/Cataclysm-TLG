@@ -257,7 +257,6 @@ static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_masked_scent( "masked_scent" );
 static const efftype_id effect_melatonin( "melatonin" );
 static const efftype_id effect_mending( "mending" );
-static const efftype_id effect_meth( "meth" );
 static const efftype_id effect_monster_saddled( "monster_saddled" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_nausea( "nausea" );
@@ -11819,10 +11818,6 @@ double Character::vomit_mod()
 
 bool Character::can_sleep()
 {
-    if( has_effect( effect_meth ) ) {
-        // Sleep ain't happening until that meth wears off completely.
-        return false;
-    }
     // Since there's a bit of randomness to falling asleep, we want to
     // prevent exploiting this if can_sleep() gets called over and over.
     // Only actually check if we can fall asleep no more frequently than

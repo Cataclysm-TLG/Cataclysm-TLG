@@ -22,7 +22,6 @@
 #include "value_ptr.h"
 #include "weather.h"
 
-static const efftype_id effect_meth( "meth" );
 static const efftype_id effect_npc_run_away( "npc_run_away" );
 static const flag_id json_flag_FIRESTARTER( "FIRESTARTER" );
 static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
@@ -173,13 +172,6 @@ float character_oracle_t::warmth_urgency( std::string_view ) const
 
 status_t character_oracle_t::can_sleep( std::string_view ) const
 {
-    // Meth is the only hard blocker in Character::can_sleep().
-    // Stim, comfort, insomnia, and rng are soft score modifiers whose
-    // net effect depends on location and luck -- the oracle can't
-    // evaluate those without knowing where the NPC will sleep.
-    if( subject->has_effect( effect_meth ) ) {
-        return status_t::failure;
-    }
     if( subject->get_fatigue() >= static_cast<int>( fatigue_levels::EXHAUSTED ) ) {
         return status_t::running;
     }

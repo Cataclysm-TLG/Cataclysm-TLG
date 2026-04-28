@@ -1040,5 +1040,9 @@
     "sated": "99 hours",
     "craving_morale": "morale_craving_mutagen",
     "effect_on_condition": "EOC_MUTATION_ADDICTION"
+  },
+  {
+    "type": "effect_type",
+    "id": "meth"
   }
 ]

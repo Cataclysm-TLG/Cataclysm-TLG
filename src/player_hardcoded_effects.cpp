@@ -47,6 +47,7 @@ static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
 
 static const efftype_id effect_adrenaline( "adrenaline" );
 static const efftype_id effect_alarm_clock( "alarm_clock" );
+static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
 static const efftype_id effect_anemia( "anemia" );
 static const efftype_id effect_antibiotic( "antibiotic" );
 static const efftype_id effect_antifungal( "antifungal" );
@@ -74,7 +75,6 @@ static const efftype_id effect_hypovolemia( "hypovolemia" );
 static const efftype_id effect_infected( "infected" );
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_mending( "mending" );
-static const efftype_id effect_meth( "meth" );
 static const efftype_id effect_motor_seizure( "motor_seizure" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_onfire( "onfire" );
@@ -1283,31 +1283,26 @@ void Character::hardcoded_effects( effect &it )
                 it.mult_duration( .25 );
             }
         }
-    } else if( id == effect_meth ) {
-        if( intense == 1 ) {
-            add_miss_reason( _( "Everything feels like it's sped up, and you're being left behind." ), 2 );
-            if( one_in( 900 ) ) {
-                add_msg_if_player( m_bad, _( "You feel paranoid.  Is someone watching you?" ) );
+    } else if( id == effect_amphetamine_eff ) {
+        if( intense > 2 ) {
+            add_miss_reason( _( "Too fast.  You're too fast!  Everything's too fast!" ), 2 );
+            if( one_in( 5000 ) ) {
+                add_msg_if_player( m_bad, _( "You feel paranoid." ) );
                 mod_pain( 1 );
                 mod_fatigue( dice( 1, 6 ) );
-            } else if( one_in( 3000 ) ) {
+            } else if( one_in( 6000 ) ) {
                 add_msg_if_player( m_bad,
                                    _( "You can't stop clenching your jaw." ) );
                 mod_pain( 1 );
-            } else if( one_in( 3000 ) ) {
+            } else if( one_in( 6000 ) ) {
                 if( one_in( 10 ) ) {
                     add_msg_if_player( m_bad, _( "The bugs are back." ) );
                 } else {
                     add_msg_if_player( m_bad, _( "It feels like there are tiny bugs crawling over your body." ) );
                 }
                 const bodypart_id &itch = random_body_part( true );
-                schedule_effect( effect_formication, 60_minutes * rng_float( 0.75f, 1.25f ), itch );
+                schedule_effect( effect_formication, 30_minutes * rng_float( 0.25f, 1.25f ), itch );
                 mod_pain( 1 );
-            } else if( one_in( 3000 ) ) {
-                add_msg_if_player( m_bad,
-                                   _( "You taste bile and your vision throbs." ) );
-                vomit();
-                mod_fatigue( dice( 1, 6 ) );
             }
         }
     } else if( id == effect_tindrift ) {

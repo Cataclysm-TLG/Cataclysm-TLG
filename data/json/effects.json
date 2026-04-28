@@ -3398,30 +3398,48 @@
   },
   {
     "type": "effect_type",
-    "id": "meth",
-    "name": [ "Meth comedown", "High on Meth" ],
-    "max_intensity": 2,
-    "int_dur_factor": "200 s",
+    "id": "amphetamine_eff",
+    "name": [ "Focused", "Amphetamine Buzz", "Tweaking", "Spun" ],
+    "desc": [
+      "Stimulants are helping you stay focused and alert.",
+      "You are locked the fuck in.",
+      "Your thoughts are going a mile a minute.  Your whole body is burning up with chattery, nervous energy.",
+      "You are too high on amphetamines to realize how much of a twitchy degenerate you've become."
+    ],
+    "max_intensity": 4,
     "base_mods": {
-      "speed_mod": [ -20 ],
-      "str_mod": [ -3 ],
-      "dex_mod": [ -2 ],
-      "int_mod": [ -1 ],
-      "per_mod": [ -2 ],
-      "vomit_chance": [ 2000 ],
-      "stamina_min": [ -4 ]
+      "focus_min": [ 1 ],
+      "focus_max": [ 2 ],
+      "focus_max_val": [ 10 ],
+      "focus_chance": [ 60 ],
+      "int_mod": [ 1 ],
+      "per_mod": [ 0.5 ],
+      "fatigue_min": [ -1 ],
+      "fatigue_max": [ -1 ],
+      "fatigue_tick": [ 10 ],
+      "fatigue_min_val": [ -50 ],
+      "stamina_min": [ 100 ],
+      "stamina_max": [ 200 ],
+      "stamina_chance": [ 50 ],
+      "thirst_min": [ 1 ],
+      "thirst_max": [ 2 ],
+      "thirst_tick": [ 1000 ]
     },
     "scaling_mods": {
-      "speed_mod": [ 15 ],
-      "str_mod": [ 1.5 ],
-      "dex_mod": [ 1 ],
-      "int_mod": [ 0.5 ],
-      "per_mod": [ 1 ],
-      "fatigue_min": [ 1 ],
-      "fatigue_tick": [ 9 ],
-      "stamina_min": [ 8 ]
+      "focus_min": [ -1 ],
+      "focus_min_val": [ -10 ],
+      "focus_max_val": [ 5 ],
+      "speed_mod": [ 3 ],
+      "str_mod": [ 0.5 ],
+      "dex_mod": [ -0.36 ],
+      "int_mod": [ -1 ],
+      "per_mod": [ 0.5 ],
+      "fatigue_min": [ -1 ],
+      "fatigue_max": [ -5 ],
+      "fatigue_min_val": [ -100 ],
+      "thirst_tick": [ -100 ]
     },
-    "blood_analysis_description": "Methamphetamines"
+    "blood_analysis_description": "Amphetamines"
   },
   {
     "type": "effect_type",
@@ -3553,7 +3571,10 @@
       "pkill_amount": [ 3 ],
       "pkill_max_val": [ 3 ],
       "pkill_min": [ 1 ],
-      "pkill_tick": [ 45 ]
+      "pkill_tick": [ 45 ],
+      "thirst_min": [ 1 ],
+      "thirst_max": [ 2 ],
+      "thirst_tick": [ 1000 ]
     },
     "scaling_mods": {
       "per_mod": [ -0.5 ],
@@ -3563,7 +3584,8 @@
       "vomit_tick": [ -30 ],
       "sleep_chance": [ 501 ],
       "pkill_max_val": [ 10 ],
-      "pkill_tick": [ -5 ]
+      "pkill_tick": [ -5 ],
+      "thirst_tick": [ -100 ]
     },
     "limb_score_mods": [
       { "limb_score": "manip", "modifier": 0.9, "scaling": -0.1 },
@@ -5174,7 +5196,7 @@
     "rating": "bad",
     "resist_effects": [ "took_flumed", "took_antihistamine" ],
     "show_in_info": true,
-    "base_mods": { "per_mod": [ -2 ], "int_mod": [ -2 ], "stamina_min": [ -50 ], "stamina_max": [ -150 ], "stamina_chance": [ 300 ] }
+    "base_mods": { "per_mod": [ -2 ], "int_mod": [ -2 ], "stamina_min": [ -50 ], "stamina_max": [ -300 ], "stamina_chance": [ 300 ] }
   },
   {
     "type": "effect_type",
