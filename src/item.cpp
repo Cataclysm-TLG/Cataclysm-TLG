@@ -14093,7 +14093,7 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
             type->invoke( carrier, *this, pos, "transform" );
             if( !this->is_null() ) {
                 here.add_item_or_charges( carrier->pos_bub(), *this );
-                on_drop( carrier->pos_bub(), here );        
+                on_drop( carrier->pos_bub(), here );
                 carrier->i_rem( this );
             }
         }
