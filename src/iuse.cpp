@@ -162,7 +162,6 @@ static const efftype_id effect_bloodworms( "bloodworms" );
 static const efftype_id effect_boomered( "boomered" );
 static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_brainworms( "brainworms" );
-static const efftype_id effect_cig( "cig" );
 static const efftype_id effect_conjunctivitis_bacterial( "conjunctivitis_bacterial" );
 static const efftype_id effect_conjunctivitis_viral( "conjunctivitis_viral" );
 static const efftype_id effect_contacts( "contacts" );
@@ -568,11 +567,7 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint_bub_ms 
             weed_msg( *p );
         }
     }
-    if( p->get_effect_dur( effect_cig ) > 10_minutes * ( p->addiction_level(
-                addiction_nicotine ) + 1 ) ) {
-        p->add_msg_if_player( m_bad, _( "Ugh, too much smoke… you feel nasty." ) );
-    }
-
+    
     return 1;
 }
 

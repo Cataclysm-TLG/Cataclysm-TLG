@@ -142,7 +142,6 @@ static const damage_type_id damage_heat( "heat" );
 static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_bleed( "bleed" );
-static const efftype_id effect_cig( "cig" );
 static const efftype_id effect_shakes( "shakes" );
 static const efftype_id effect_sleep( "sleep" );
 static const fault_id fault_emp_reboot( "fault_emp_reboot" );
