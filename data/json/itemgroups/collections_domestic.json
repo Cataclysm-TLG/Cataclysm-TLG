@@ -1166,6 +1166,7 @@
       { "item": "gum", "prob": 30, "count": [ 1, 10 ] },
       { "item": "caff_gum", "prob": 4, "count": [ 1, 10 ] },
       { "item": "nic_gum", "prob": 2, "count": [ 1, 10 ] },
+      { "group": "box_small_nicotine_patch_1_10", "prob": 1 },
       { "item": "clown_suit", "prob": 1 },
       { "item": "clownshoes", "prob": 1 },
       { "item": "bondage_suit", "prob": 5 },
@@ -1631,6 +1632,20 @@
     "//": "This group was created automatically and may contain errors.",
     "container-item": "box_cigarette",
     "entries": [ { "item": "cig", "container-item": "null", "count": [ 1, 20 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "box_small_nicotine_patch_full",
+    "subtype": "collection",
+    "container-item": "box_small",
+    "entries": [ { "item": "nicotine_patch", "container-item": "null", "count": [ 10 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "box_small_nicotine_patch_1_10",
+    "subtype": "collection",
+    "container-item": "box_small",
+    "entries": [ { "item": "nicotine_patch", "container-item": "null", "count": [ 1, 10 ] } ]
   },
   {
     "type": "item_group",

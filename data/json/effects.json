@@ -3426,11 +3426,30 @@
   {
     "type": "effect_type",
     "id": "cig",
-    "name": [ "Nicotine" ],
-    "desc": [ "You had a puff or two.", "You smoked too much." ],
+    "name": [ "Nicotine", "Nicotine Overdose" ],
+    "desc": [ "You feel a slight buzz from the tobacco.", "You feel awful, you've had far too much." ],
     "max_intensity": 2,
-    "int_dur_factor": "10 m",
-    "scaling_mods": { "vomit_chance": [ 500 ] },
+    "base_mods": {
+      "vomit_chance": [ -20 ],
+      "vomit_chance_bot": [ 1000 ],
+      "vomit_tick": [ 180 ],
+      "focus_min": [ 1 ],
+      "focus_max": [ 2 ],
+      "focus_chance": [ 10 ],
+      "focus_max_val": [ 8 ],
+      "fatigue_min": [ -1 ],
+      "fatigue_max": [ -3 ],
+      "fatigue_chance": [ 100 ],
+      "fatigue_max_val": [ -25 ]
+    },
+    "scaling_mods": {
+      "focus_min_val": [ -8 ],
+      "focus_max_val": [ -8 ],
+      "focus_min": [ -1 ],
+      "vomit_chance": [ 21 ],
+      "int_mod": [ -1 ],
+      "per_mod": [ -1 ]
+    },
     "blood_analysis_description": "Nicotine"
   },
   {
@@ -4284,6 +4303,40 @@
     "id": "naloxone_eff",
     "max_duration": "1 s",
     "//": "Just used to trigger an EOC that ditches some morale bonuses."
+  },
+  {
+    "type": "effect_type",
+    "id": "caffeine_eff",
+    "name": [ "Caffeinated", "Overcaffeinated", "Caffeine Overdose" ],
+    "desc": [
+      "Just a little pick-me-up.",
+      "Caffeine is giving you a little too much energy, leaving you jittery and uncomfortable.",
+      "You've had far too much caffeine.  You feel shaky and irritable."
+    ],
+    "base_mods": {
+      "vomit_chance": [ -20 ],
+      "vomit_chance_bot": [ 1000 ],
+      "vomit_tick": [ 180 ],
+      "focus_min": [ 1 ],
+      "focus_max": [ 1 ],
+      "focus_chance": [ 600 ],
+      "focus_max_val": [ 5 ],
+      "fatigue_min": [ -1 ],
+      "fatigue_max": [ -1 ],
+      "fatigue_chance": [ 100 ],
+      "fatigue_max_val": [ -30 ]
+    },
+    "scaling_mods": {
+      "fatigue_max_val": [ -30 ],
+      "focus_min_val": [ -2 ],
+      "focus_max_val": [ -3 ],
+      "focus_min": [ -1 ],
+      "vomit_chance": [ 15 ],
+      "dex_mod": [ -1 ],
+      "int_mod": [ -0.5 ],
+      "per_mod": [ -0.5 ]
+    },
+    "blood_analysis_description": "Caffeine"
   },
   {
     "type": "effect_type",

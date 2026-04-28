@@ -671,7 +671,7 @@
     "name": { "str_sp": "Irish coffee" },
     "weight": "252 g",
     "color": "brown",
-    "addiction_type": [ "alcohol", { "addiction": "caffeine", "potential": 3 } ],
+    "addiction_type": [ "alcohol", { "addiction": "caffeine", "potential": 1 } ],
     "container": "bottle_glass",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -689,7 +689,7 @@
     "phase": "liquid",
     "fun": 20,
     "flags": [ "EATEN_HOT", "NO_AUTO_CONSUME" ],
-    "vitamins": [ [ "ethanol", 20 ], [ "milk_allergen", 1 ] ]
+    "vitamins": [ [ "ethanol", 20 ], [ "milk_allergen", 1 ], [ "caffeine", 40 ] ]
   },
   {
     "type": "ITEM",
@@ -699,7 +699,7 @@
     "name": { "str_sp": "karsk" },
     "weight": "250 g",
     "color": "brown",
-    "addiction_type": [ "alcohol", { "addiction": "caffeine", "potential": 3 } ],
+    "addiction_type": [ "alcohol", { "addiction": "caffeine", "potential": 2 } ],
     "container": "bottle_glass",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -707,7 +707,7 @@
     "healthy": -1,
     "addiction_potential": 5,
     "calories": 103,
-    "description": "A cocktail made by mixing coffee and pure alcohol, typically moonshine, originating from Scandinavia.  Sometimes sugar is also added.",
+    "description": "A cocktail made by mixing coffee and pure alcohol, typically moonshine, originating from Scandinavia.",
     "price": "5 USD",
     "price_postapoc": "2 USD 50 cent",
     "material": [ "alcohol", "water" ],
@@ -716,7 +716,7 @@
     "charges": 1,
     "phase": "liquid",
     "fun": 20,
-    "vitamins": [ [ "ethanol", 50 ] ],
+    "vitamins": [ [ "ethanol", 50 ], [ "caffeine", 60 ] ],
     "flags": [ "EATEN_HOT", "NO_AUTO_CONSUME" ]
   },
   {

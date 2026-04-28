@@ -577,6 +577,7 @@
       { "item": "gum", "prob": 90, "count": 10 },
       { "item": "caff_gum", "prob": 10, "count": 10 },
       { "item": "nic_gum", "prob": 1, "count": 10 },
+      { "group": "box_small_nicotine_patch_1_10", "prob": 1 },
       { "item": "improve_sights", "prob": 10 },
       { "item": "waterproof_gunmod", "prob": 4 },
       { "item": "cleansuit", "prob": 5 },

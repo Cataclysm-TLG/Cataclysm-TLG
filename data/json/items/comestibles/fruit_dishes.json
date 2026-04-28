@@ -678,7 +678,6 @@
     "price_postapoc": "50 cent",
     "addiction_type": "alcohol",
     "addiction_potential": 5,
-    "stim": -6,
     "quench": -6,
     "material": [ "fruit", "alcohol" ],
     "volume": "250 ml",

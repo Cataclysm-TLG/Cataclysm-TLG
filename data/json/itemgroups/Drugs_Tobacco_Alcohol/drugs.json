@@ -256,6 +256,7 @@
     "subtype": "distribution",
     "entries": [
       { "group": "bfipowder_bottle_plastic_5_60", "prob": 100 },
+      { "group": "box_small_nicotine_patch_1_10", "prob": 1 },
       { "item": "dayquil", "charges": [ 1, 10 ], "container-item": "bottle_plastic", "prob": 50 },
       { "item": "nyquil", "charges": [ 1, 10 ], "container-item": "bottle_plastic", "prob": 50 }
     ]
@@ -267,18 +268,10 @@
     "items": [
       { "group": "drugs_analgesic", "prob": 100 },
       { "group": "drugs_heal_simple", "prob": 100 },
+      { "group": "box_small_nicotine_patch_full", "prob": 2 },
+      { "item": "nic_gum", "count": [ 8 ], "container-item": "box_small", "prob": 2 },
       { "group": "drugs_misc", "prob": 30 },
       { "group": "drugs_rare", "prob": 100 }
-    ]
-  },
-  {
-    "id": "drugs_otc",
-    "type": "item_group",
-    "//": "Drugs stocked by a pharmacy, not including prescription medications",
-    "items": [
-      { "group": "drugs_analgesic", "prob": 100 },
-      { "group": "drugs_heal_simple", "prob": 100 },
-      { "group": "drugs_misc", "prob": 30 }
     ]
   },
   {
@@ -364,6 +357,7 @@
       { "item": "shavingkit", "prob": 5, "charges": [ 0, 10 ] },
       { "item": "elec_hairtrimmer", "prob": 2, "charges": [ 0, 50 ] },
       { "item": "nic_gum", "prob": 25, "count": [ 1, 10 ] },
+      { "group": "box_small_nicotine_patch_1_10", "prob": 1 },
       { "prob": 30, "group": "weak_antibiotic_bottle_plastic_pill_prescription_1_5" }
     ]
   },

@@ -141,7 +141,6 @@ void weed_msg( Character &p )
             case 1:
                 p.add_msg_if_player( "%s", SNIPPET.random_from_category( "weed_Simpsons_1" ).value_or(
                                          translation() ) );
-                p.mod_hunger( 2 );
                 return;
             case 2:
                 if( smarts > 8 ) {
@@ -251,7 +250,6 @@ void weed_msg( Character &p )
             case 1:
                 p.add_msg_if_player( "%s", SNIPPET.random_from_category( "weed_Real_Life_1" ).value_or(
                                          translation() ) );
-                p.mod_hunger( 4 );
                 if( p.has_trait( trait_VEGETARIAN ) ) {
                     p.add_msg_if_player( "%s", SNIPPET.random_from_category( "weed_Real_Life_2" ).value_or(
                                              translation() ) );
@@ -400,6 +398,18 @@ void effect_type::load_mod_data( const JsonObject &j )
         {"stim_chance",      mod_action::CHANCE_TOP},
         {"stim_chance_bot",  mod_action::CHANCE_BOT},
         {"stim_tick",        mod_action::TICK},
+    } );
+
+    // Then focus
+    extract_effect( to_extract, "FOCUS", {
+        {"focus_amount",      mod_action::AMOUNT},
+        {"focus_min",         mod_action::MIN},
+        {"focus_max",         mod_action::MAX},
+        {"focus_min_val",     mod_action::MIN_VAL},
+        {"focus_max_val",     mod_action::MAX_VAL},
+        {"focus_chance",      mod_action::CHANCE_TOP},
+        {"focus_chance_bot",  mod_action::CHANCE_BOT},
+        {"focus_tick",        mod_action::TICK},
     } );
 
     // Then health
@@ -911,7 +921,10 @@ std::string effect::disp_desc( bool reduced ) const
                          _( "sate" ) );
     val = get_avg_mod( "FATIGUE", reduced );
     values.emplace_back( get_percentage( "FATIGUE", val, reduced ), val, _( "fatigue" ),
-                         _( "rest" ) );
+                         _( "alertness" ) );
+    val = get_avg_mod( "FOCUS", reduced );
+    values.emplace_back( get_percentage( "FOCUS", val, reduced ), val, _( "focus" ),
+                         _( "distraction" ) );
     val = get_avg_mod( "COUGH", reduced );
     values.emplace_back( get_percentage( "COUGH", val, reduced ), val, _( "coughing" ),
                          _( "coughing" ) );
