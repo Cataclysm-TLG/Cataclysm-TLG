@@ -223,7 +223,7 @@
     "id": "guns_pistol_rare_display",
     "//": "Empty uncommon pistols found exclusively at gun stores.",
     "items": [
-      { "item": "m9", "variant": "90two", "prob": 25 },
+      { "item": "90two", "prob": 25 },
       { "item": "90two40", "prob": 10 },
       { "item": "bond_410", "prob": 10 },
       { "group": "modular_deagle_357", "prob": 4 },
@@ -887,21 +887,15 @@
     "items": [
       { "item": "mossberg_500", "prob": 33, "charges": [ 0, 6 ] },
       { "item": "remington_870", "prob": 35, "charges": [ 0, 5 ] },
-      { "item": "benelli_tsa", "variant": "mossberg_500_security", "prob": 17, "charges": [ 0, 6 ] },
+      { "item": "mossberg_500_security", "prob": 17, "charges": [ 0, 6 ] },
       { "item": "remington_870_express", "prob": 18, "charges": [ 0, 6 ] },
-      { "item": "remington_870", "variant": "browning_a5", "prob": 14, "charges": [ 0, 5 ] },
-      { "item": "benelli_sa", "variant": "m2", "prob": 17, "charges": [ 0, 4 ] },
-      { "item": "benelli_sa", "variant": "sbe", "prob": 37, "charges": [ 0, 4 ] },
-      {
-        "item": "benelli_tsa",
-        "variant": "m2_tac",
-        "contents-item": [ "rail_mount" ],
-        "prob": 12,
-        "charges": [ 0, 6 ]
-      },
-      { "item": "mossberg_590", "variant": "slp", "contents-item": [ "rail_mount" ], "prob": 6, "charges": [ 0, 9 ] },
-      { "item": "remington_870", "variant": "ithaca37", "prob": 6, "charges": [ 0, 5 ] },
-      { "item": "remington_870", "variant": "remington_1100", "prob": 17, "charges": [ 0, 5 ] },
+      { "item": "browning_a5", "prob": 14, "charges": [ 0, 5 ] },
+      { "item": "m2", "prob": 17, "charges": [ 0, 4 ] },
+      { "item": "sbe", "prob": 37, "charges": [ 0, 4 ] },
+      { "item": "m2_tac", "contents-item": [ "rail_mount" ], "prob": 12, "charges": [ 0, 6 ] },
+      { "group": "nested_slp", "prob": 6 },
+      { "item": "ithaca37", "prob": 6, "charges": [ 0, 5 ] },
+      { "item": "remington_1100", "prob": 17, "charges": [ 0, 5 ] },
       { "item": "mossberg_930", "prob": 15, "charges": [ 0, 6 ] },
       { "item": "shotgun_410", "prob": 30, "charges": [ 0, 1 ] },
       { "item": "shotgun_d", "prob": 30, "charges": [ 0, 2 ] },
@@ -916,16 +910,16 @@
     "items": [
       { "item": "mossberg_500", "prob": 33 },
       { "item": "remington_870", "prob": 35 },
-      { "item": "benelli_tsa", "variant": "mossberg_500_security", "prob": 17 },
+      { "item": "mossberg_500_security", "prob": 17 },
       { "item": "remington_870_express", "prob": 18 },
-      { "item": "remington_870", "variant": "browning_a5", "prob": 14 },
-      { "item": "benelli_sa", "variant": "m2", "prob": 17 },
-      { "item": "benelli_sa", "variant": "sbe", "prob": 37 },
-      { "item": "benelli_tsa", "variant": "m2_tac", "contents-item": [ "rail_mount" ], "prob": 12 },
-      { "item": "mossberg_590", "variant": "slp", "contents-item": [ "rail_mount" ], "prob": 6 },
+      { "item": "browning_a5", "prob": 14 },
+      { "item": "m2", "prob": 17 },
+      { "item": "sbe", "prob": 37 },
+      { "item": "m2_tac", "contents-item": [ "rail_mount" ], "prob": 12 },
+      { "group": "nested_slp", "prob": 6 },
       { "item": "mossberg_590m", "prob": 1 },
-      { "item": "remington_870", "variant": "ithaca37", "prob": 6 },
-      { "item": "remington_870", "variant": "remington_1100", "prob": 17 },
+      { "item": "ithaca37", "prob": 6 },
+      { "item": "remington_1100", "prob": 17 },
       { "item": "mossberg_930", "prob": 15 },
       { "item": "shotgun_410", "prob": 30 },
       { "item": "shotgun_d", "prob": 30 },
@@ -945,7 +939,7 @@
       { "group": "nested_srm_1216", "prob": 2 },
       { "group": "nested_tavor_12", "prob": 5 },
       { "group": "nested_m1014", "prob": 10 },
-      { "group": "nested_SPAS_12", "prob": 2 },
+      { "group": "nested_spas_12", "prob": 2 },
       { "group": "nested_slp", "prob": 10 },
       { "group": "nested_mossberg_590m", "prob": 2 }
     ]
@@ -962,9 +956,9 @@
       { "item": "srm_1216", "prob": 1, "charges": [ 0, 16 ] },
       { "item": "dp_12", "prob": 2, "charges": [ 0, 14 ] },
       { "item": "tavor_12", "prob": 5, "charges": [ 0, 5 ] },
-      { "group": "nested_SPAS_12", "prob": 2 },
-      { "item": "mossberg_930", "variant": "m1014", "prob": 10, "charges": [ 0, 8 ] },
-      { "item": "mossberg_590", "variant": "slp", "contents-item": [ "rail_mount" ], "prob": 10, "charges": [ 0, 9 ] },
+      { "group": "nested_spas_12", "prob": 2 },
+      { "item": "m1014", "prob": 10, "charges": [ 0, 8 ] },
+      { "group": "nested_slp", "prob": 10 },
       { "item": "mossberg_590m", "prob": 2, "charges": [ 0, 5 ] }
     ]
   },
@@ -976,11 +970,11 @@
     "entries": [
       { "item": "ksg", "prob": 5 },
       { "item": "tavor_12", "prob": 5 },
-      { "group": "nested_SPAS_12", "prob": 2 },
+      { "group": "nested_spas_12", "prob": 2 },
       { "item": "srm_1216", "prob": 3 },
       { "item": "dp_12", "prob": 4 },
-      { "item": "mossberg_930", "variant": "m1014", "prob": 10 },
-      { "item": "mossberg_590", "variant": "slp", "contents-item": [ "rail_mount" ], "prob": 10 },
+      { "item": "m1014", "prob": 10 },
+      { "group": "nested_slp", "prob": 4 },
       { "item": "mossberg_590m", "prob": 2 }
     ]
   },
@@ -1037,7 +1031,7 @@
       { "item": "streetsweeper", "prob": 4 },
       { "item": "winchester_1887", "prob": 10 },
       { "item": "winchester_1897", "prob": 20 },
-      { "group": "nested_SPAS_12", "prob": 2 },
+      { "group": "nested_spas_12", "prob": 2 },
       { "item": "saiga_410", "prob": 10 }
     ]
   },
@@ -1269,34 +1263,10 @@
         "contents-item": "shoulder_strap",
         "prob": 1
       },
-      {
-        "item": "benelli_tsa",
-        "variant": "mossberg_500_security",
-        "charges": [ 0, 6 ],
-        "contents-item": "shoulder_strap",
-        "prob": 40
-      },
-      {
-        "item": "mossberg_590",
-        "variant": "mossberg_590",
-        "charges": [ 0, 9 ],
-        "contents-item": "shoulder_strap",
-        "prob": 15
-      },
-      {
-        "item": "mossberg_930",
-        "variant": "mossberg_930",
-        "charges": [ 0, 8 ],
-        "contents-item": "shoulder_strap",
-        "prob": 7
-      },
-      {
-        "item": "mossberg_930",
-        "variant": "m1014",
-        "charges": [ 0, 8 ],
-        "contents-item": "shoulder_strap",
-        "prob": 2
-      },
+      { "item": "mossberg_500_security", "charges": [ 0, 6 ], "contents-item": "shoulder_strap", "prob": 40 },
+      { "item": "mossberg_590", "charges": [ 0, 9 ], "contents-item": "shoulder_strap", "prob": 15 },
+      { "item": "mossberg_930", "charges": [ 0, 8 ], "contents-item": "shoulder_strap", "prob": 7 },
+      { "item": "m1014", "charges": [ 0, 8 ], "contents-item": "shoulder_strap", "prob": 2 },
       { "item": "remington_870_express", "charges": [ 0, 7 ], "contents-item": "shoulder_strap", "prob": 70 },
       { "item": "remington_700", "charges": [ 0, 4 ], "contents-item": "shoulder_strap", "prob": 2 },
       { "item": "M24", "charges": [ 0, 5 ], "contents-item": "shoulder_strap", "prob": 10 }
@@ -1336,28 +1306,10 @@
       { "item": "ruger_mini", "ammo-item": "223", "charges": 20, "contents-item": "shoulder_strap", "prob": 5 },
       { "item": "steyr_aug", "ammo-item": "556_mk318", "charges": 30, "contents-item": "shoulder_strap", "prob": 1 },
       { "item": "hk_g36", "ammo-item": "556_mk318", "charges": 30, "contents-item": "shoulder_strap", "prob": 1 },
-      {
-        "item": "benelli_tsa",
-        "variant": "mossberg_500_security",
-        "charges": 6,
-        "contents-item": "shoulder_strap",
-        "prob": 40
-      },
-      {
-        "item": "mossberg_590",
-        "variant": "mossberg_590",
-        "charges": 9,
-        "contents-item": "shoulder_strap",
-        "prob": 15
-      },
-      {
-        "item": "mossberg_930",
-        "variant": "mossberg_930",
-        "charges": 8,
-        "contents-item": "shoulder_strap",
-        "prob": 7
-      },
-      { "item": "mossberg_930", "variant": "m1014", "charges": 8, "contents-item": "shoulder_strap", "prob": 2 },
+      { "item": "mossberg_500_security", "charges": 6, "contents-item": "shoulder_strap", "prob": 40 },
+      { "item": "mossberg_590", "charges": 9, "contents-item": "shoulder_strap", "prob": 15 },
+      { "item": "mossberg_930", "charges": 8, "contents-item": "shoulder_strap", "prob": 7 },
+      { "item": "m1014", "charges": 8, "contents-item": "shoulder_strap", "prob": 2 },
       { "item": "remington_870_express", "charges": 7, "contents-item": "shoulder_strap", "prob": 70 }
     ]
   },
@@ -1515,8 +1467,7 @@
       {
         "collection": [
           {
-            "item": "benelli_tsa",
-            "variant": "mossberg_500_security",
+            "item": "mossberg_500_security",
             "charges": [ 0, 6 ],
             "contents-item": "shoulder_strap",
             "damage": [ 0, 3 ],
@@ -1530,7 +1481,6 @@
         "collection": [
           {
             "item": "mossberg_590",
-            "variant": "mossberg_590",
             "charges": [ 0, 9 ],
             "contents-item": "shoulder_strap",
             "damage": [ 0, 3 ],
@@ -1544,7 +1494,6 @@
         "collection": [
           {
             "item": "mossberg_930",
-            "variant": "mossberg_930",
             "charges": [ 0, 8 ],
             "contents-item": "shoulder_strap",
             "damage": [ 0, 3 ],
@@ -1556,14 +1505,7 @@
       },
       {
         "collection": [
-          {
-            "item": "mossberg_930",
-            "variant": "m1014",
-            "charges": [ 0, 8 ],
-            "contents-item": "shoulder_strap",
-            "damage": [ 0, 3 ],
-            "dirt": [ 0, 7050 ]
-          },
+          { "item": "m1014", "charges": [ 0, 8 ], "contents-item": "shoulder_strap", "damage": [ 0, 3 ], "dirt": [ 0, 7050 ] },
           { "group": "field_shotgun" }
         ],
         "prob": 2
@@ -1935,14 +1877,7 @@
       },
       {
         "collection": [
-          {
-            "item": "mossberg_930",
-            "variant": "m1014",
-            "charges": [ 0, 8 ],
-            "contents-item": "shoulder_strap",
-            "damage": [ 0, 3 ],
-            "dirt": [ 0, 7050 ]
-          },
+          { "item": "m1014", "charges": [ 0, 8 ], "contents-item": "shoulder_strap", "damage": [ 0, 3 ], "dirt": [ 0, 7050 ] },
           { "group": "field_shotgun" }
         ],
         "prob": 5
@@ -2116,16 +2051,10 @@
       { "item": "plr16", "prob": 1, "charges": [ 0, 30 ] },
       { "item": "mossberg_500", "prob": 10, "charges": [ 0, 6 ] },
       { "item": "remington_870", "prob": 11, "charges": [ 0, 5 ] },
-      { "item": "benelli_sa", "variant": "m2", "prob": 7, "charges": [ 0, 4 ] },
-      { "item": "benelli_sa", "variant": "sbe", "prob": 11, "charges": [ 0, 4 ] },
-      {
-        "item": "benelli_tsa",
-        "variant": "m2_tac",
-        "contents-item": [ "rail_mount" ],
-        "prob": 4,
-        "charges": [ 0, 6 ]
-      },
-      { "item": "remington_870", "variant": "ithaca37", "prob": 4, "charges": [ 0, 5 ] },
+      { "item": "m2", "prob": 7, "charges": [ 0, 4 ] },
+      { "item": "sbe", "prob": 11, "charges": [ 0, 4 ] },
+      { "item": "m2_tac", "contents-item": [ "rail_mount" ], "prob": 4, "charges": [ 0, 6 ] },
+      { "item": "ithaca37", "prob": 4, "charges": [ 0, 5 ] },
       { "group": "cz600", "prob": 5, "charges": [ 0, 10 ] },
       { "item": "ruger_1022", "prob": 7, "charges": [ 0, 10 ] },
       { "item": "shotgun_410", "prob": 1, "charges": [ 0, 1 ] },
@@ -2133,7 +2062,7 @@
       { "item": "shotgun_d", "prob": 10, "charges": [ 0, 2 ] },
       { "item": "sks", "prob": 1, "charges": [ 0, 10 ] },
       { "item": "aksemi", "prob": 2, "charges": [ 0, 30 ] },
-      { "item": "mosin44", "variant": "mosin44", "prob": 2, "charges": [ 0, 5 ] },
+      { "item": "mosin44", "prob": 2, "charges": [ 0, 5 ] },
       { "item": "remington700_270", "prob": 1, "charges": [ 0, 4 ] },
       { "item": "ruger_m77", "prob": 1, "charges": [ 0, 4 ] },
       { "item": "ruger_arr", "prob": 1, "charges": [ 0, 3 ] },

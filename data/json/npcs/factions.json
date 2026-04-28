@@ -66,7 +66,8 @@
     "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 100000000,
     "currency": "RobofacCoin",
-    "price_rules": [ { "group": "NC_ROBOFAC_gear", "markup": 2 },
+    "price_rules": [
+      { "group": "NC_ROBOFAC_gear", "markup": 2 },
       { "item": "money_strap_FMCNote", "purchase_rate": 0 },
       { "item": "money_bundle_FMCNote", "purchase_rate": 0 },
       { "item": "FMCNote", "purchase_rate": 0 },
