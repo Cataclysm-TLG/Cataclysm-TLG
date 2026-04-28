@@ -329,10 +329,11 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "hedge trimmer (on)", "str_pl": "hedge trimmers (on)" },
-    "description": "A cordless, double-sided, gasoline-powered hedge trimmer.  It is currently on, ready to do some zombie topiary; use this item to turn it off.",
-    "power_draw": "500 W",
+    "description": "This hedge trimmer is on and making a lot of noise.  Use it to turn it off.",
+    "turns_per_charge": 4,
     "charges_per_use": 0,
     "revert_to": "trimmer_off",
+    "techniques": [ "SWEEP" ],
     "use_action": {
       "type": "effect_on_conditions",
       "ammo_scale": 0,
@@ -363,7 +364,8 @@
     },
     "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "clumsy" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -60 ] ],
-    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "SPAWN_ACTIVE" ],
-    "melee_damage": { "bash": 4, "cut": 40 }
+    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "FRAGILE_MELEE", "SPAWN_ACTIVE" ],
+    "melee_damage": { "bash": 4, "cut": 40 },
+    "tool_ammo": [ "gasoline" ]
   }
 ]
