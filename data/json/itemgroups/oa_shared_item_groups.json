@@ -64,7 +64,8 @@
       [ "mask_dust", 10 ],
       { "item": "gum", "prob": 6, "count": [ 1, 10 ] },
       { "item": "caff_gum", "prob": 6, "count": [ 1, 10 ] },
-      { "item": "nic_gum", "prob": 4, "count": [ 1, 10 ] }
+      { "item": "nic_gum", "prob": 4, "count": [ 1, 10 ] },
+      { "group": "box_small_nicotine_patch_1_10", "prob": 1 }
     ]
   },
   {

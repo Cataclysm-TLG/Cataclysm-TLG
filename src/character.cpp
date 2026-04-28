@@ -11306,6 +11306,7 @@ void Character::process_one_effect( effect &it, bool is_new )
         }
     }
 
+
     // Handle hunger
     val = get_effect( "HUNGER", reduced );
     if( val != 0 ) {
@@ -11349,6 +11350,19 @@ void Character::process_one_effect( effect &it, bool is_new )
         if( is_new || it.activated( calendar::turn, "FATIGUE", val, reduced, mod ) ) {
             mod_fatigue( bound_mod_to_vals( get_fatigue(), val, it.get_max_val( "FATIGUE", reduced ),
                                             it.get_min_val( "FATIGUE", reduced ) ) );
+        }
+    }
+
+    // Handle focus
+    val = get_effect( "FOCUS", reduced );
+    if( val != 0 ) {
+        if( is_new || it.activated( calendar::turn, "FOCUS", val, reduced ) ) {
+            mod_focus( bound_mod_to_vals(
+                           get_focus(),
+                           val,
+                           it.get_max_val( "FOCUS", reduced ),
+                           it.get_min_val( "FOCUS", reduced )
+                       ) );
         }
     }
 
@@ -11552,7 +11566,7 @@ void Character::process_effects()
     dex_bonus_hardcoded = 0;
     int_bonus_hardcoded = 0;
     per_bonus_hardcoded = 0;
-    // Human only effects
+    // Character only effects.
     for( std::pair<const efftype_id, std::map<bodypart_id, effect>> &elem : *effects ) {
         for( std::pair<const bodypart_id, effect> &_effect_it : elem.second ) {
             process_one_effect( _effect_it.second, false );

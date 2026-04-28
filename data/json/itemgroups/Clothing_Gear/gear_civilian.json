@@ -285,7 +285,8 @@
     "type": "item_group",
     "id": "npc_hacker",
     "items": [
-      [ "energy_drink", 55 ],
+      [ "energy_drink", 25 ],
+      [ "diet_energy_drink", 30 ],
       [ "mag_computer", 45 ],
       [ "mag_electronics", 25 ],
       [ "colamdew", 50 ],

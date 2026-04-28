@@ -212,7 +212,8 @@
           { "item": "cigar", "prob": 5 },
           { "group": "pocket_cigar", "prob": 1 },
           { "item": "handrolled_cig", "prob": 10 },
-          { "item": "nic_gum", "prob": 10 },
+          { "item": "nic_gum", "prob": 3 },
+          { "group": "box_small_nicotine_patch_1_10", "prob": 2 },
           { "item": "ecig", "prob": 15 },
           {
             "collection": [

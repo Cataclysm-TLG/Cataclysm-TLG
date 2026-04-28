@@ -176,7 +176,7 @@ static bool benzodiazepine_add( Character &u, int in )
     return ret;
 }
 
-static bool cocaine_add( Character &u, int in, int stim )
+static bool cocaine_add( Character &u, int in )
 {
     static time_point last_coke_dream = calendar::turn_zero;
     const bool recent_dream = ( calendar::turn - last_coke_dream < 2_hours );
@@ -200,9 +200,6 @@ static bool cocaine_add( Character &u, int in, int stim )
     }
     if( dice( 2, 80 ) <= in && ( !u.in_sleep_state() || !recent_dream ) ) {
         run_addict_eff( u, in, cur_msg );
-        if( stim > -150 ) {
-            u.mod_stim( -3 );
-        }
     }
     return ret;
 }
@@ -406,8 +403,7 @@ static bool amphetamine_effect( Character &u, addiction &add )
 static bool cocaine_effect( Character &u, addiction &add )
 {
     const int in = std::min( 20, add.intensity );
-    const int current_stim = u.get_stim();
-    return cocaine_add( u, in, current_stim );
+    return cocaine_add( u, in );
 }
 
 /*********************************************/
@@ -479,8 +475,6 @@ std::string add_type_legacy_conv( std::string const &v )
         return "nicotine";
     } else if( v == "COKE" ) {
         return "cocaine";
-    } else if( v == "MUTAGEN" ) {
-        return "mutagen";
     } else if( v == "DIAZEPAM" ) {
         return "diazepam";
     } else if( v == "MARLOSS_R" ) {

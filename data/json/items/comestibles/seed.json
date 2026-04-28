@@ -1525,7 +1525,6 @@
     "description": "Small, dark seeds from the spiny pods of a datura plant.  Full of powerful psychoactive chemicals, these tiny seeds are a potent analgesic and deliriant, and can be deadly in cases of overdose.",
     "weight": "2 g",
     "price": "0 cent",
-    "stim": 6,
     "healthy": -2,
     "fun": -1,
     "use_action": [ "DATURA" ],

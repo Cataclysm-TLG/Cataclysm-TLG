@@ -42,6 +42,7 @@
       { "item": "caff_gum", "prob": 10, "count": [ 1, 10 ] },
       { "item": "sm_extinguisher", "prob": 10, "charges": 10 },
       { "item": "nic_gum", "prob": 2, "count": [ 1, 10 ] },
+      { "group": "box_small_nicotine_patch_1_10", "prob": 1 },
       { "item": "razor_blade", "prob": 3 },
       { "item": "knitting_needles", "prob": 1 },
       { "group": "newspaper_recent", "prob": 15 },

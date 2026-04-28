@@ -411,6 +411,7 @@ static const vitamin_id vitamin_blood( "blood" );
 static const vitamin_id vitamin_human_blood_vitamin( "human_blood_vitamin" );
 static const vitamin_id vitamin_redcells( "redcells" );
 static const vitamin_id vitamin_cannabis( "cannabis" );
+static const vitamin_id vitamin_nicotine( "nicotine" );
 
 // how many characters per turn of radio
 static constexpr int RADIO_PER_TURN = 25;
@@ -542,13 +543,9 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint_bub_ms 
     if( it->typeId() == itype_cig || it->typeId() == itype_handrolled_cig ) {
         cig = item( itype_cig_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 4_minutes );
-        p->mod_hunger( -3 );
-        p->mod_thirst( 2 );
     } else if( it->typeId() == itype_cigar ) {
         cig = item( itype_cigar_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 12_minutes );
-        p->mod_thirst( 3 );
-        p->mod_hunger( -4 );
     } else if( it->typeId() == itype_joint ) {
         cig = item( itype_joint_lit, calendar::turn );
         cig.item_counter = to_turns<int>( 4_minutes );
@@ -596,14 +593,7 @@ std::optional<int> iuse::ecig( Character *p, item *it, const tripoint_bub_ms & )
             return std::nullopt;
         }
     }
-
-    p->mod_thirst( 1 );
-    p->mod_hunger( -1 );
-    p->add_effect( effect_cig, 10_minutes );
-    if( p->get_effect_dur( effect_cig ) > 10_minutes * ( p->addiction_level(
-                addiction_nicotine ) + 1 ) ) {
-        p->add_msg_if_player( m_bad, _( "Ugh, too much nicotine… you feel nasty." ) );
-    }
+    p->vitamin_mod( vitamin_nicotine, 2 );
     return 1;
 }
 

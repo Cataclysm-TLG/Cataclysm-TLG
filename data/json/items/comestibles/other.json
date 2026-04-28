@@ -618,12 +618,10 @@
     "color": "brown",
     "addiction_type": "caffeine",
     "addiction_potential": 1,
-    "fatigue_mod": 24,
-    "stim": 8,
     "container": "bag_plastic_small",
     "comestible_type": "FOOD",
     "symbol": "%",
-    "description": "Ground coffee beans.  You can boil it into a mediocre stimulant, or something better if you had an atomic coffee pot.",
+    "description": "Ground coffee beans.  You can boil it into a mediocre stimulant, or something better if you had a coffee pot.",
     "price": "45 cent",
     "price_postapoc": "25 cent",
     "material": [ "powder" ],
@@ -631,7 +629,8 @@
     "flags": [ "NO_TEMP", "RAW", "IRREPLACEABLE_CONSUMABLE", "NUTRIENT_OVERRIDE" ],
     "calories": 2,
     "fun": -5,
-    "freezing_point": -274
+    "freezing_point": -274,
+    "vitamins": [ [ "caffeine", 50 ] ]
   },
   {
     "type": "ITEM",

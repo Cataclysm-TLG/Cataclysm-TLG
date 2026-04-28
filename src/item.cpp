@@ -171,6 +171,7 @@ static const itype_id itype_blood( "blood" );
 static const itype_id itype_brass_catcher( "brass_catcher" );
 static const itype_id itype_bullet_crossbow( "bullet_crossbow" );
 static const itype_id itype_cash_card( "cash_card" );
+static const itype_id itype_cigar_lit( "cigar_lit" );
 static const itype_id itype_corpse( "corpse" );
 static const itype_id itype_corpse_generic_human( "corpse_generic_human" );
 static const itype_id itype_craft( "craft" );
@@ -226,6 +227,7 @@ static const trait_id trait_WOOLALLERGY( "WOOLALLERGY" );
 
 static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
 static const vitamin_id vitamin_cannabis( "cannabis" );
+static const vitamin_id vitamin_nicotine( "nicotine" );
 
 // vitamin flags
 static const std::string flag_NO_DISPLAY( "NO_DISPLAY" );
@@ -14082,8 +14084,18 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
         }
         if( type->transform_into ) {
             type->transform_into.value().transform( carrier, *this, true );
+            if( !this->is_null() ) {
+                here.add_item_or_charges( carrier->pos_bub(), *this );
+                on_drop( carrier->pos_bub(), here );
+                carrier->i_rem( this );
+            }
         } else {
             type->invoke( carrier, *this, pos, "transform" );
+            if( !this->is_null() ) {
+                here.add_item_or_charges( carrier->pos_bub(), *this );
+                on_drop( carrier->pos_bub(), here );        
+                carrier->i_rem( this );
+            }
         }
         if( typeId() == itype_joint_lit && carrier != nullptr ) {
             carrier->vitamin_mod( vitamin_cannabis, 2 ); // one last puff
@@ -14120,22 +14132,23 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
     }
     // if carried by someone:
     if( carrier != nullptr ) {
-        time_duration duration = 15_seconds;
-        if( carrier->has_trait( trait_TOLERANCE ) ) {
-            duration = 7_seconds;
-        } else if( carrier->has_trait( trait_LIGHTWEIGHT ) ) {
-            duration = 30_seconds;
-        }
-        // Tamp down message spam.
-        if( one_in( 3 ) ) {
-            carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
-        }
+        int puff_chance = 4;
         if( has_flag( flag_TOBACCO ) ) {
-            carrier->add_effect( effect_cig, duration );
+            // Try not to go over 3mg nicotine if we started at 0.
+            if( typeId() == itype_cigar_lit ) {
+                puff_chance = 30;
+            } else {
+                puff_chance = 20;
+            }
+            if( one_in( puff_chance ) ) {
+                carrier->vitamin_mod( vitamin_nicotine, 1 );
+                carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
+            }
         } else {
-            // Deliver a total of less than 10mg per joint on average.
-            if( one_in( 3 ) ) {
+            // Aim for around 10mg cannabis per joint.
+            if( one_in( puff_chance ) ) {
                 carrier->vitamin_mod( vitamin_cannabis, 1 );
+                carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
             }
         }
         carrier->mod_moves( -to_moves<int>( 1_seconds ) * 0.15 );

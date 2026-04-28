@@ -241,6 +241,10 @@
     "type": "effect_on_condition"
   },
   {
+    "id": "EOC_MUTAGEN_ADDICTION",
+    "type": "effect_on_condition"
+  },
+  {
     "id": "godco_change_trader",
     "type": "effect_on_condition"
   },
@@ -1022,9 +1026,18 @@
     "id": "vit_ibuprofen",
     "type": "vitamin",
     "vit_type": "counter",
-    "name": { "str": "Obsolete NSAID vitamin" },
+    "name": { "str": "NSAID vitamin (obsolete)" },
     "min": 0,
     "max": 1,
     "rate": "1 s"
+  },
+  {
+    "type": "addiction_type",
+    "id": "mutagen",
+    "name": "Mutation Craving (obsolete)",
+    "type_name": "mutation",
+    "description": "Obsoleted mutagen addiction.",
+    "sated": "99 hours",
+    "craving_morale": "morale_craving_mutagen"
   }
 ]

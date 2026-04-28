@@ -3,7 +3,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "alcoholic",
-    "name": "Alcohol Addiction",
+    "name": "Alcohol Dependence",
     "description": "One drink became two, two became too many, and before long you were only able to find solace at the bottom of a bottle.  God damn, you need a drink.",
     "points": -2,
     "addictions": [ { "intensity": 15, "type": "alcohol" } ]
@@ -12,7 +12,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "amphetamine_addict",
-    "name": "Amphetamine Addiction",
+    "name": "Amphetamine Dependence",
     "description": "You're not entirely sure what happened last night, but you woke up on the floor and everything has completely gone to shit.  This is not the first time this has happened to you.  With any luck, it will not be the last.",
     "points": -2,
     "addictions": [ { "intensity": 15, "type": "amphetamine" } ]
@@ -21,7 +21,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "benzo_addict",
-    "name": "Benzodiazepine Addiction",
+    "name": "Benzodiazepine Dependence",
     "description": "Bars, V, xannies, whatever you called those magical sedatives, they're all gone now.  The Cataclysm would make anybody nervous, but you've heard benzo withdrawals can be lethal…",
     "points": -2,
     "addictions": [ { "intensity": 15, "type": "diazepam" } ]
@@ -30,7 +30,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "caffiene_addict",
-    "name": "Caffeine Addiction",
+    "name": "Caffeine Dependence",
     "description": "Caffeine gave you life and without it you are nothing.  You'd better find a steady supply, and fast.",
     "points": -1,
     "addictions": [ { "intensity": 15, "type": "caffeine" } ]
@@ -39,7 +39,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "cannabis_addict",
-    "name": "Cannabis Addiction",
+    "name": "Cannabis Dependence",
     "description": "Some people say marijuana isn't addictive.  For reasons you can no longer recall, you decided to prove them wrong.",
     "points": -1,
     "addictions": [ { "intensity": 15, "type": "cannabis" } ]
@@ -48,7 +48,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "cocaine_addict",
-    "name": "Cocaine Addiction",
+    "name": "Cocaine Dependence",
     "description": "Cocaine is indeed a hell of a drug.  One minute you're skiing down mountains of powder, the next you're rolling zombies and digging through dumpsters for crack.",
     "points": -2,
     "addictions": [ { "intensity": 15, "type": "cocaine" } ]
@@ -57,7 +57,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "opioid_addict",
-    "name": "Opioid Addiction",
+    "name": "Opioid Dependence",
     "description": "Whether by pill, pipe, or needle, you wound up chasing the dragon.  Your dealer's long dead, so you're going to need to get your fix before withdrawals set in.",
     "points": -2,
     "addictions": [ { "intensity": 15, "type": "opioid" } ]
@@ -66,7 +66,7 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "sleeping_pill_addict",
-    "name": "Sleeping Pill Addiction",
+    "name": "Sleeping Pill Dependence",
     "description": "You'd been having trouble falling asleep, so you started taking prescription sleep meds.  Now you can hardly seem to fall asleep at all without them, and you'll need plenty of rest to face the days ahead.",
     "points": -2,
     "addictions": [ { "intensity": 15, "type": "sleeping pill" } ]

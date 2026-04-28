@@ -4,7 +4,8 @@
     "id": "NC_HACKER_misc",
     "subtype": "distribution",
     "entries": [
-      { "item": "energy_drink", "prob": 55 },
+      { "item": "energy_drink", "prob": 20 },
+      { "item": "diet_energy_drink", "prob": 35 },
       { "item": "mag_computer", "prob": 45 },
       { "item": "mag_electronics", "prob": 25 },
       { "item": "colamdew", "prob": 50 },

@@ -13,15 +13,15 @@
     "condition": { "math": [ "rand(2000)", "<=", "addiction_rational(2000, 20, u_addiction_intensity('caffeine'))" ] },
     "effect": [
       { "u_message": "You want some caffeine.", "type": "warning" },
-      { "u_add_morale": "morale_craving_caffeine", "bonus": -5, "max_bonus": -30 },
+      { "u_add_morale": "morale_craving_caffeine", "bonus": -5, "max_bonus": -25 },
       {
         "if": {
           "and": [
-            { "math": [ "u_val('stim')", ">", "u_addiction_intensity('caffeine') * -10" ] },
+            { "math": [ "u_val('fatigue')", ">", "u_addiction_intensity('caffeine') * -10" ] },
             { "math": [ "rand(10)", "<", "u_addiction_intensity('caffeine')" ] }
           ]
         },
-        "then": { "math": [ "u_val('stim')", "--" ] }
+        "then": { "math": [ "u_val('fatigue')", "--" ] }
       },
       {
         "if": {
@@ -31,8 +31,8 @@
           ]
         },
         "then": [
-          { "u_message": "Your hands start shaking… you need it bad!", "type": "bad" },
-          { "u_add_effect": "shakes", "duration": "2 minutes" }
+          { "u_message": "You've got a headache.  You need caffeine to function.", "type": "bad" },
+          { "math": [ "u_val('pain') + 5" ] }
         ]
       }
     ]
@@ -72,52 +72,6 @@
       { "u_add_morale": "morale_craving_marloss", "bonus": -5, "max_bonus": -30 },
       { "u_message": "You daydream about succulent, pale golden gel, sweet but light.", "type": "info" },
       { "if": { "math": [ "u_val('focus')", ">", "40" ] }, "then": { "math": [ "u_val('focus')", "--" ] } }
-    ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_MUTAGEN_ADDICTION",
-    "condition": { "u_has_trait": "MUT_JUNKIE" },
-    "effect": [
-      {
-        "if": { "math": [ "rand(600)", "<=", "addiction_rational(600, 50, u_addiction_intensity('mutagen'))" ] },
-        "then": [
-          {
-            "if": { "math": [ "rand(6)", "<", "u_addiction_intensity('mutagen')" ] },
-            "then": { "u_message": "You so miss the exquisite rainbow of post-humanity.", "type": "warning" },
-            "else": { "u_message": "Your body is SOO booorrrring.  Just a little sip to liven things up?", "type": "warning" }
-          },
-          { "u_add_morale": "morale_craving_mutagen", "bonus": -20, "max_bonus": -200 }
-        ]
-      },
-      {
-        "if": {
-          "and": [
-            { "math": [ "u_val('focus')", ">", "40" ] },
-            { "math": [ "rand(800)", "<=", "addiction_rational(800, 20, u_addiction_intensity('mutagen'))" ] }
-          ]
-        },
-        "then": [
-          { "math": [ "u_val('focus')", "-=", "u_addiction_intensity('mutagen')" ] },
-          {
-            "u_message": "You daydream what it'd be like if you were *different*.  Different is good.",
-            "type": "warning"
-          }
-        ]
-      }
-    ],
-    "false_effect": [
-      {
-        "if": { "math": [ "rand(500)", "<=", "addiction_rational(500, 15, u_addiction_intensity('mutagen'))" ] },
-        "then": [
-          {
-            "if": { "math": [ "rand(6)", "<", "u_addiction_intensity('mutagen')" ] },
-            "then": { "u_message": "You haven't had any mutagen lately.", "type": "warning" },
-            "else": { "u_message": "You could use some new parts…", "type": "warning" }
-          },
-          { "u_add_morale": "morale_craving_mutagen", "bonus": -5, "max_bonus": -50 }
-        ]
-      }
     ]
   },
   {

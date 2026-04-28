@@ -297,7 +297,6 @@
     "price": "85 cent",
     "quench": -1,
     "calories": 135,
-    "stim": 1,
     "fun": 3,
     "flags": [ "EDIBLE_FROZEN" ],
     "vitamins": [ [ "junk_allergen", 1 ] ]
@@ -512,14 +511,12 @@
     "color": "brown",
     "spoils_in": "360 days",
     "addiction_type": "caffeine",
-    "fatigue_mod": 30,
-    "stim": 10,
     "container": "bag_plastic_small",
     "comestible_type": "FOOD",
     "symbol": "%",
     "quench": -1,
     "addiction_potential": 2,
-    "calories": 160,
+    "calories": 80,
     "description": "Roasted coffee beans coated with dark chocolate, a natural source of concentrated caffeine.",
     "price": "10 cent",
     "price_postapoc": "10 cent",
@@ -527,7 +524,7 @@
     "volume": "8 ml",
     "fun": 2,
     "flags": [ "EDIBLE_FROZEN", "NO_AUTO_CONSUME" ],
-    "vitamins": [ [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ], [ "caffeine", 80 ] ]
   },
   {
     "type": "ITEM",

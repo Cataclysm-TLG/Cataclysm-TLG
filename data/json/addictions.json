@@ -80,16 +80,6 @@
   },
   {
     "type": "addiction_type",
-    "id": "mutagen",
-    "name": "Mutation Withdrawal",
-    "type_name": "mutation",
-    "description": "You've gotten a taste for mutating and the chemicals that cause it.  But you can stop, yeah, any time you want.",
-    "sated": "8 hours",
-    "craving_morale": "morale_craving_mutagen",
-    "effect_on_condition": "EOC_MUTAGEN_ADDICTION"
-  },
-  {
-    "type": "addiction_type",
     "id": "diazepam",
     "name": "Craving Benzodiazepines",
     "type_name": "diazepam",

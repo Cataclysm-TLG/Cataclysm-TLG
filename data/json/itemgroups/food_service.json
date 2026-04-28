@@ -754,6 +754,7 @@
       { "item": "lemonade", "prob": 30 },
       { "item": "sports_drink", "prob": 40 },
       { "item": "energy_drink", "prob": 40 },
+      { "item": "diet_energy_drink", "prob": 40 },
       { "group": "softdrinks_canned", "prob": 290 },
       { "item": "cola", "prob": 30, "container-item": "bottle_plastic", "sealed": false },
       { "item": "creamsoda", "prob": 20, "container-item": "bottle_plastic", "sealed": false },

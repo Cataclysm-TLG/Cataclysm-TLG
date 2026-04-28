@@ -1510,17 +1510,9 @@ void Character::update_heartrate_index()
     // The influence of stamina on heartrate seemeed excessive and was toned down.
     const float hr_stamina_mod = 1.6f * ( 1.0f - stamina_level );
 
-    const int stim_level = get_stim();
-    float hr_stim_mod = 0.0f;
-    if( stim_level > 0 ) {
-        //that's asymptotical function that is equal to 1 at around 30 stim level
-        //and slows down all the time almost reaching 2.
-        //Tweaking x*x multiplier will accordingly change effect accumulation
-        hr_stim_mod = 2 - 2 / ( 1 + 0.001 * stim_level * stim_level );
-    }
     float hr_nicotine_mod = 0.0f;
     if( get_effect_dur( effect_cig ) > 0_turns ) {
-        //Nicotine-induced tachycardia
+        // Nicotine-induced tachycardia
         if( get_effect_dur( effect_cig ) >
             10_minutes * ( addiction_level( STATIC( addiction_id( "nicotine" ) ) ) + 1 ) ) {
             hr_nicotine_mod = 0.2f;
@@ -1603,7 +1595,7 @@ void Character::update_heartrate_index()
     constexpr float HR_EFFECT_INT_TO_FLOAT_MULT = 0.0001f;
     const float hr_effect_mod = effect_mod * HR_EFFECT_INT_TO_FLOAT_MULT;
 
-    heart_rate_index = 1.0f + hr_temp_mod + hr_activity_mods + hr_stim_mod + hr_nicotine_mod
+    heart_rate_index = 1.0f + hr_temp_mod + hr_activity_mods + hr_nicotine_mod
                        + hr_bp_loss_mod + hr_effect_mod;
 }
 
