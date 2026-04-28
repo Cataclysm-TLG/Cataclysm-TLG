@@ -4470,11 +4470,9 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
             if( rot_facing >= -1 ) {
                 const mtype_id ent_name = m->type->id;
                 std::string chosen_id = ent_name.str();
+                const Character *rider = nullptr;
                 if( m->has_effect( effect_ridden ) ) {
-                    int pl_under_height = 6;
-                    if( m->mounted_player ) {
-                        draw_entity_with_overlays( *m->mounted_player, p, ll, pl_under_height, 1.0f, 1.0f );
-                    }
+                    rider = m->mounted_player;
                     const std::string prefix = "rid_";
                     std::string copy_id = chosen_id;
                     const std::string ridden_id = copy_id.insert( 0, prefix );
@@ -4498,6 +4496,9 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                              opts
                          );
                 draw_entity_with_overlays( *m, p, ll, height_3d );
+                if( rider ) {
+                    draw_entity_with_overlays( *rider, p, ll, height_3d, 1.0f, 1.0f );
+                }
                 sees_player = m->sees( here, you );
                 attitude = m->attitude_to( you );
             }
@@ -4585,10 +4586,6 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
         if( tileset_ptr->find_tile_type( draw_id ) ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-
-
-
-
             draw_from_id_string(
                 draw_id,
                 p,
