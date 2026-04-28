@@ -1212,8 +1212,7 @@
     "addiction_potential": 50,
     "addiction_type": "amphetamine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
-    "vitamins": [ [ "amphetamine", 17 ] ],
-    "use_action": [ "METH" ]
+    "vitamins": [ [ "amphetamine", 17 ] ]
   },
   {
     "id": "pure_meth",
@@ -1237,8 +1236,7 @@
     "addiction_potential": 40,
     "addiction_type": "amphetamine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
-    "vitamins": [ [ "amphetamine", 25 ] ],
-    "use_action": [ "METH" ]
+    "vitamins": [ [ "amphetamine", 25 ] ]
   },
   {
     "id": "morphine",

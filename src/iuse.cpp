@@ -194,7 +194,6 @@ static const efftype_id effect_lack_sleep( "lack_sleep" );
 static const efftype_id effect_laserlocked( "laserlocked" );
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_melatonin( "melatonin" );
-static const efftype_id effect_meth( "meth" );
 static const efftype_id effect_monster_armor( "monster_armor" );
 static const efftype_id effect_monster_saddled( "monster_saddled" );
 static const efftype_id effect_music( "music" );
@@ -814,44 +813,6 @@ std::optional<int> iuse::coke( Character *p, item *, const tripoint_bub_ms & )
     }
     p->mod_hunger( -8 );
     p->add_effect( effect_high, duration );
-    return 1;
-}
-
-std::optional<int> iuse::meth( Character *p, item *, const tripoint_bub_ms & )
-{
-    /** @EFFECT_STR reduces duration of meth */
-    time_duration duration = 1_minutes * ( 60 - p->str_cur );
-    if( p->has_amount( itype_apparatus, 1 ) && p->use_charges_if_avail( itype_fire, 1 ) ) {
-        p->add_msg_if_player( m_neutral, _( "You smoke your meth." ) );
-        p->add_msg_if_player( m_good, _( "The world seems to sharpen." ) );
-        p->mod_fatigue( -375 );
-        if( p->has_trait( trait_TOLERANCE ) ) {
-            duration *= 1.2;
-        } else {
-            duration *= ( p->has_trait( trait_LIGHTWEIGHT ) ? 1.8 : 1.5 );
-        }
-        map &here = get_map();
-        // breathe out some smoke
-        for( int i = 0; i < 3; i++ ) {
-            point_rel_ms offset( rng( -2, 2 ), rng( -2, 2 ) );
-            here.add_field( p->pos_bub() + offset, field_type_id( "fd_methsmoke" ), 2 );
-        }
-    } else {
-        p->add_msg_if_player( _( "You snort some crystal meth." ) );
-        p->mod_fatigue( -300 );
-    }
-    if( !p->has_effect( effect_meth ) ) {
-        duration += 1_hours;
-    }
-    if( duration > 0_turns ) {
-        // meth actually inhibits hunger, weaker characters benefit more
-        /** @EFFECT_STR_MAX >4 experiences less hunger benefit from meth */
-        int hungerpen = p->str_max < 5 ? 35 : 40 - ( 2 * p->str_max );
-        if( hungerpen > 0 ) {
-            p->mod_hunger( -hungerpen );
-        }
-        p->add_effect( effect_meth, duration );
-    }
     return 1;
 }
 

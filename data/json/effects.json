@@ -3398,10 +3398,6 @@
   },
   {
     "type": "effect_type",
-    "id": "meth"
-  },
-  {
-    "type": "effect_type",
     "id": "amphetamine_eff",
     "name": [ "Focused", "Amphetamine Buzz", "Tweaking", "Spun" ],
     "desc": [
