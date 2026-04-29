@@ -34,6 +34,33 @@
     "components": [ [ [ "duct_tape", 10 ] ], [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "paper", 10 ] ] ]
   },
   {
+    "id": "prac_stabbing_dummy",
+    "type": "practice",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_PRACTICE",
+    "subcategory": "CSC_PRACTICE_MELEE",
+    "name": "stabbing",
+    "description": "Practice your stabbing weapon skill by stabbing a dummy made of rolls of wet paper on a stand.",
+    "skill_used": "stabbing",
+    "skills_required": [ [ "melee", 1 ] ],
+    "time": "1 h",
+    "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
+    "autolearn": [ [ "cutting", 2 ] ],
+    "book_learn": [ [ "mag_stabbing", 1 ], [ "manual_stabbing", 1 ] ],
+    "//": "Only real and powerful stabbing weapons.",
+    "tools": [
+      [
+        [ "real_shivs", 1, "LIST" ],
+        [ "real_knives", 1, "LIST" ],
+        [ "real_thrusting_swords", 1, "LIST" ],
+        [ "real_spears", 1, "LIST" ]
+      ],
+      [ "water", "water_clean" ]
+    ],
+    "//1": "A bunch of duct tape and scrap to repair the dummy with each training session.",
+    "components": [ [ [ "duct_tape", 10 ] ], [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "paper", 10 ] ] ]
+  },
+  {
     "id": "prac_bashing_dummy",
     "type": "practice",
     "activity_level": "BRISK_EXERCISE",
