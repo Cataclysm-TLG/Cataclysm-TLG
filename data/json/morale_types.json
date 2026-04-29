@@ -97,7 +97,7 @@
   {
     "id": "morale_craving_speed",
     "type": "morale_type",
-    "text": "Craving speed"
+    "text": "Craving amphetamines"
   },
   {
     "id": "morale_craving_cocaine",
@@ -112,7 +112,7 @@
   {
     "id": "morale_craving_diazepam",
     "type": "morale_type",
-    "text": "Craving prescription sedatives"
+    "text": "Craving benzodiazepines"
   },
   {
     "id": "morale_craving_marloss",
@@ -227,7 +227,7 @@
   {
     "id": "morale_mutagen_elf",
     "type": "morale_type",
-    "text": "Fey mutation"
+    "text": "Sylvan mutation"
   },
   {
     "id": "morale_mutagen_chimera",

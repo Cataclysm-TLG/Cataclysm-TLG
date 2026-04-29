@@ -463,9 +463,9 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "cocaine" },
-    "description": "Crystalline extract of the coca leaf, or at least, a white powder with some of that in it.  A topical analgesic, it is more commonly used for its stimulatory properties.  Highly addictive.",
-    "weight": "1 g",
-    "volume": "2 ml",
+    "description": "Crystalline extract of the coca leaf, or at least, a white powder with some of that in it.  It is a highly addictive stimulant.",
+    "weight": "100 mg",
+    "volume": "1 ml",
     "price": "1 USD",
     "price_postapoc": "25 cent",
     "material": [ "powder" ],
@@ -474,10 +474,11 @@
     "container": "bag_zipper",
     "healthy": -2,
     "fun": 15,
-    "addiction_potential": 50,
+    "addiction_potential": 30,
     "addiction_type": "cocaine",
     "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
-    "use_action": [ "COKE" ]
+    "vitamins": [ [ "cocaine", 1 ] ],
+    "use_action": { "type": "consume_drug", "activation_message": "You snort a bump of cocaine.", "vitamins": [ [ "cocaine", 1, 2 ] ] }
   },
   {
     "id": "myopia_contacts_weekly",
@@ -836,16 +837,17 @@
     "container": "bag_zipper",
     "healthy": -2,
     "fun": 15,
-    "addiction_potential": 80,
+    "addiction_potential": 30,
     "addiction_type": "cocaine",
     "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
+    "vitamins": [ [ "cocaine", 1 ] ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You smoke your crack rocks.",
-      "effects": [ { "id": "high", "duration": 15 } ],
       "fields_produced": { "fd_cracksmoke": 2 },
       "charges_needed": { "fire": 1 },
-      "tools_needed": { "apparatus": -1 }
+      "tools_needed": { "apparatus": -1 },
+      "vitamins": [ [ "cocaine", 1, 2 ] ]
     }
   },
   {
@@ -1124,7 +1126,8 @@
       "activation_message": "You shoot up.",
       "tools_needed": { "syringe": -1 },
       "charges_needed": { "fire": 1 },
-      "effects": [ { "id": "cough_suppress", "duration": "60 m" } ]
+      "effects": [ { "id": "cough_suppress", "duration": "60 m" } ],
+      "vitamins": [ [ "vit_mme", 2000, 7700 ] ]
     }
   },
   {
@@ -1212,7 +1215,8 @@
     "addiction_potential": 50,
     "addiction_type": "amphetamine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
-    "vitamins": [ [ "amphetamine", 17 ] ]
+    "vitamins": [ [ "amphetamine", 17 ] ],
+    "use_action": { "type": "consume_drug", "activation_message": "You snort some speed.", "vitamins": [ [ "amphetamine", 14, 22 ] ] }
   },
   {
     "id": "pure_meth",
@@ -1220,7 +1224,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "crystal meth" },
-    "description": "Tiny crystals of methamphetamine, one of the most potent and addictive stimulants around.  This sample looks quite pure.",
+    "description": "Tiny crystals of methamphetamine, one of the most potent and addictive stimulants around.  This sample is quite pure and should lead to a strong, reliable high.",
     "looks_like": "meth",
     "weight": "1 g",
     "volume": "2 ml",
@@ -1236,7 +1240,8 @@
     "addiction_potential": 40,
     "addiction_type": "amphetamine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
-    "vitamins": [ [ "amphetamine", 25 ] ]
+    "vitamins": [ [ "amphetamine", 25 ] ],
+    "use_action": { "type": "consume_drug", "activation_message": "You snort some crystal meth." }
   },
   {
     "id": "morphine",
@@ -2053,7 +2058,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str_sp": "cocaine topical cream" },
-    "description": "A medical cream that provides both vascular restriction and anesthetic properties.",
+    "description": "A medical cream that provides both vascular restriction and anesthetic properties.  It won't get you high, but if used too frequently it may still be habit-forming.",
     "weight": "5 g",
     "volume": "250 ml",
     "price": "5 USD 50 cent",
