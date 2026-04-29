@@ -909,16 +909,16 @@ std::string effect::disp_desc( bool reduced ) const
                          _( "pain" ) );
     val = get_avg_mod( "HURT", reduced );
     values.emplace_back( get_percentage( "HURT", val, reduced ), val, _( "damage" ),
-                         _( "damage" ) );
+                         _( "healing" ) );
     val = get_avg_mod( "STAMINA", reduced );
     values.emplace_back( get_percentage( "STAMINA", val, reduced ), val,
-                         _( "stamina recovery" ), _( "fatigue" ) );
+                         _( "invigoration" ), _( "dyspnea" ) );
     val = get_avg_mod( "THIRST", reduced );
     values.emplace_back( get_percentage( "THIRST", val, reduced ), val, _( "thirst" ),
                          _( "quench" ) );
     val = get_avg_mod( "HUNGER", reduced );
     values.emplace_back( get_percentage( "HUNGER", val, reduced ), val, _( "hunger" ),
-                         _( "sate" ) );
+                         _( "satiation" ) );
     val = get_avg_mod( "FATIGUE", reduced );
     values.emplace_back( get_percentage( "FATIGUE", val, reduced ), val, _( "fatigue" ),
                          _( "alertness" ) );

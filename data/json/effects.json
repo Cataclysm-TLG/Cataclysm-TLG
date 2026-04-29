@@ -3419,7 +3419,7 @@
       "fatigue_tick": [ 10 ],
       "fatigue_min_val": [ -50 ],
       "stamina_min": [ 100 ],
-      "stamina_max": [ 200 ],
+      "stamina_max": [ 300 ],
       "stamina_chance": [ 50 ],
       "thirst_min": [ 1 ],
       "thirst_max": [ 2 ],
@@ -3440,6 +3440,56 @@
       "thirst_tick": [ -100 ]
     },
     "blood_analysis_description": "Amphetamines"
+  },
+  {
+    "type": "effect_type",
+    "id": "cocaine",
+    "name": [ "Sharp", "Wired", "Geeked", "Whiteout" ],
+    "desc": [
+      "You've got a mild cocaine buzz going.  Feels good, feels clean.",
+      "You're feeling chatty and energized, and probably way too confident.",
+      "The cocaine has you jittery, irritable, and anxious, but somehow spacey at the same time.",
+      "You are completely fucked off the cocaine.  Your chest hurts, and you can't stop clenching your jaw."
+    ],
+    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 25000 ] ],
+    "death_msg": "You have a heart attack!",
+    "max_intensity": 4,
+    "base_mods": {
+      "focus_min": [ 1 ],
+      "focus_max": [ 2 ],
+      "speed_mod": [ 3 ],
+      "focus_max_val": [ 6 ],
+      "focus_chance": [ 40 ],
+      "int_mod": [ 1 ],
+      "per_mod": [ 0.5 ],
+      "fatigue_min": [ -1 ],
+      "fatigue_max": [ -1 ],
+      "fatigue_tick": [ 10 ],
+      "fatigue_min_val": [ -30 ],
+      "stamina_min": [ 50 ],
+      "stamina_max": [ 500 ],
+      "stamina_chance": [ 40 ],
+      "thirst_min": [ 1 ],
+      "thirst_max": [ 2 ],
+      "thirst_tick": [ 1000 ]
+    },
+    "scaling_mods": {
+      "focus_min": [ -1 ],
+      "focus_min_val": [ -5 ],
+      "focus_max_val": [ 4 ],
+      "speed_mod": [ 2 ],
+      "str_mod": [ 0.5 ],
+      "int_mod": [ -1 ],
+      "per_mod": [ 0.5 ],
+      "fatigue_min": [ -1 ],
+      "fatigue_max": [ -5 ],
+      "stamina_min": [ -150 ],
+      "stamina_max": [ -150 ],
+      "stamina_chance": [ -5 ],
+      "fatigue_min_val": [ -50 ],
+      "thirst_tick": [ -100 ]
+    },
+    "blood_analysis_description": "Cocaine"
   },
   {
     "type": "effect_type",
@@ -3574,9 +3624,12 @@
       "pkill_tick": [ 45 ],
       "thirst_min": [ 1 ],
       "thirst_max": [ 2 ],
-      "thirst_tick": [ 1000 ]
+      "thirst_tick": [ 1000 ],
+      "str_mod": [ 0.5 ]
     },
     "scaling_mods": {
+      "speed_mod": [ -2 ],
+      "str_mod": [ 0.5 ],
       "per_mod": [ -0.5 ],
       "dex_mod": [ -0.5 ],
       "int_mod": [ -0.75 ],
