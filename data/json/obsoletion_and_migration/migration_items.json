@@ -4042,5 +4042,10 @@
     "type": "MIGRATION",
     "id": "cola_meth",
     "replace": "pure_meth"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "benelli_sa",
+    "replace": "m2"
   }
 ]
