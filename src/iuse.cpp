@@ -566,7 +566,7 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint_bub_ms 
             weed_msg( *p );
         }
     }
-    
+
     return 1;
 }
 

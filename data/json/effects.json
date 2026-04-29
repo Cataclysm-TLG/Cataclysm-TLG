@@ -3504,12 +3504,7 @@
     "type": "effect_type",
     "id": "took_antihistamine",
     "rating": "good",
-    "base_mods": {
-      "fatigue_min": [ 2 ],
-      "fatigue_max": [ 10 ],
-      "fatigue_chance": [ 60 ],
-      "fatigue_max_val": [ 90 ]
-    },
+    "base_mods": { "fatigue_min": [ 2 ], "fatigue_max": [ 10 ], "fatigue_chance": [ 60 ], "fatigue_max_val": [ 90 ] },
     "blood_analysis_description": "Diphenhydramine"
   },
   {
@@ -4445,12 +4440,7 @@
   {
     "type": "effect_type",
     "id": "cough_suppress",
-    "base_mods": {
-      "fatigue_min": [ 1 ],
-      "fatigue_max": [ 6 ],
-      "fatigue_chance": [ 60 ],
-      "fatigue_max_val": [ 60 ]
-    }
+    "base_mods": { "fatigue_min": [ 1 ], "fatigue_max": [ 6 ], "fatigue_chance": [ 60 ], "fatigue_max_val": [ 60 ] }
   },
   {
     "type": "effect_type",

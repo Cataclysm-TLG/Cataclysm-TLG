@@ -870,10 +870,7 @@
     "addiction_potential": 8,
     "addiction_type": "sleeping pill",
     "vitamins": [ [ "vit_acetaminophen", 500 ], [ "dextromethorphan", 30 ] ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You drink your cough syrup."
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You drink your cough syrup." }
   },
   {
     "id": "disinfectant",
@@ -1380,10 +1377,7 @@
     "addiction_potential": 14,
     "addiction_type": "sleeping pill",
     "vitamins": [ [ "vit_acetaminophen", 500 ], [ "diphenhydramine", 30 ], [ "dextromethorphan", 30 ] ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You drink your cough syrup."
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You drink your cough syrup." }
   },
   {
     "id": "antihistamine",
@@ -1404,10 +1398,7 @@
     "addiction_potential": 4,
     "addiction_type": "sleeping pill",
     "vitamins": [ [ "diphenhydramine", 30 ] ],
-    "use_action": {
-      "type": "consume_drug",
-      "activation_message": "You take an antihistamine pill."
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You take an antihistamine pill." }
   },
   {
     "id": "oxycodone",
