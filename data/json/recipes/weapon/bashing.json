@@ -326,7 +326,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "long_pole", 1 ] ], [ [ "leather_patch", 2 ], [ "duct_tape", 4 ] ] ]
+    "components": [ [ [ "spear_shaft", 1 ] ], [ [ "leather_patch", 2 ], [ "duct_tape", 4 ] ] ]
   },
   {
     "type": "recipe",
