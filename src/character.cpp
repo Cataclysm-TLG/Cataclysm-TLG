@@ -271,7 +271,6 @@ static const efftype_id effect_pkill3( "pkill3" );
 static const efftype_id effect_pre_conjunctivitis_bacterial( "pre_conjunctivitis_bacterial" );
 static const efftype_id effect_pre_conjunctivitis_viral( "pre_conjunctivitis_viral" );
 static const efftype_id effect_quadruped_full( "quadruped_full" );
-static const efftype_id effect_recently_coughed( "recently_coughed" );
 static const efftype_id effect_recover( "recover" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
@@ -5538,7 +5537,7 @@ void Character::update_needs( int rate_multiplier )
                 sleep.set_duration( 1_turns );
                 mod_fatigue( -25 );
             } else {
-                if( has_effect( effect_disrupted_sleep ) || has_effect( effect_recently_coughed ) ) {
+                if( has_effect( effect_disrupted_sleep ) ) {
                     recovered *= .5;
                 }
                 mod_fatigue( -recovered );
@@ -7699,7 +7698,7 @@ int Character::item_retrieve_cost( const item &it, const item &container, bool p
 
 void Character::cough( bool harmful, int loudness )
 {
-    if( has_effect( effect_cough_suppress ) ) {
+    if( has_effect( effect_cough_suppress ) && !one_in( 100 ) ) {
         return;
     }
 

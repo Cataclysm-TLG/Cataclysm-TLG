@@ -1031,7 +1031,7 @@ class wish_item_callback: public uilist_callback
                 item tmp = wishitem_produce( *standard_itype_ids[entnum], flags, false );
 
                 const itype_variant_data *variant = itype_variants[entnum];
-                if( variant != nullptr && tmp.has_itype_variant( false ) ) {
+                if( variant != nullptr && tmp.has_itype_variant() ) {
                     // Set the variant type as shown in the selected list item.
                     std::string variant_id = variant->id;
                     tmp.set_itype_variant( variant_id );
@@ -1173,7 +1173,7 @@ void debug_menu::wishitem( Character *you, const tripoint_bub_ms &pos )
         while( wmenu.ret >= 0 ) {
             item granted = wishitem_produce( *std::get<1>( opts[wmenu.ret] ), cb.flags, cb.incontainer );
             const itype_variant_data *variant = std::get<2>( opts[wmenu.ret] );
-            if( variant != nullptr && granted.has_itype_variant( false ) ) {
+            if( variant != nullptr && granted.has_itype_variant() ) {
                 std::string variant_id = variant->id;
                 granted.set_itype_variant( variant_id );
             }

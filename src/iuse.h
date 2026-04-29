@@ -43,8 +43,6 @@ std::optional<int> datura( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> ecig( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> eyedrops( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> flu_vaccine( Character *, item *, const tripoint_bub_ms & );
-std::optional<int> flumed( Character *, item *, const tripoint_bub_ms & );
-std::optional<int> flusleep( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> fungicide( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> honeycomb( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> inhaler( Character *, item *, const tripoint_bub_ms & );

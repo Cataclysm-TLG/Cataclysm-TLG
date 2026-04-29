@@ -2026,8 +2026,6 @@ void Item_factory::init()
     add_iuse( "FISH_TRAP", &iuse::fish_trap );
     add_iuse( "FISH_TRAP_TICK", &iuse::fish_trap_tick );
     add_iuse( "FITNESS_CHECK", &iuse::fitness_check );
-    add_iuse( "FLUMED", &iuse::flumed );
-    add_iuse( "FLUSLEEP", &iuse::flusleep );
     add_iuse( "FLU_VACCINE", &iuse::flu_vaccine );
     add_iuse( "FUNGICIDE", &iuse::fungicide );
     add_iuse( "GASMASK_ACTIVATE", &iuse::gasmask_activate,

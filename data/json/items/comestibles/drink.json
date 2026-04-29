@@ -147,7 +147,6 @@
     "copy-from": "tea",
     "color": "green",
     "comestible_type": "MED",
-    "use_action": [ "FLUMED" ],
     "spoils_in": "10 days",
     "quench": 34,
     "calories": 2,
@@ -155,6 +154,7 @@
     "price": "1 USD",
     "price_postapoc": "25 cent",
     "fun": 1,
+    "vitamins": [ [ "diphenhydramine", 20 ] ],
     "flags": [ "EATEN_HOT", "NO_AUTO_CONSUME" ]
   },
   {

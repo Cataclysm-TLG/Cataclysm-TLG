@@ -2487,10 +2487,9 @@ class item : public visitable
         bool is_gun() const;
 
         /**
-         * Does this item have a variant associated with it
-         * If check_option, the return of this is dependent on the SHOW_x_VARIANTS option
+         * Does this item have a variant associated with it?
          */
-        bool has_itype_variant( bool check_option = true ) const;
+        bool has_itype_variant() const;
 
         /**
          * The variant associated with this item
