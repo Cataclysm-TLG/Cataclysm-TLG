@@ -4047,5 +4047,10 @@
     "type": "MIGRATION",
     "id": "benelli_sa",
     "replace": "m2"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "benelli_tsa",
+    "replace": "m2"
   }
 ]

@@ -1044,5 +1044,9 @@
   {
     "type": "effect_type",
     "id": "meth"
+  },
+  {
+    "type": "effect_type",
+    "id": "took_flumed"
   }
 ]

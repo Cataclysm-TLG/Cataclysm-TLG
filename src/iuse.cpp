@@ -223,7 +223,6 @@ static const efftype_id effect_tetanus( "tetanus" );
 static const efftype_id effect_tied( "tied" );
 static const efftype_id effect_took_antiasthmatic( "took_antiasthmatic" );
 static const efftype_id effect_took_anticonvulsant_visible( "took_anticonvulsant_visible" );
-static const efftype_id effect_took_flumed( "took_flumed" );
 static const efftype_id effect_took_prozac( "took_prozac" );
 static const efftype_id effect_took_prozac_bad( "took_prozac_bad" );
 static const efftype_id effect_took_prozac_visible( "took_prozac_visible" );
@@ -948,22 +947,6 @@ std::optional<int> iuse::datura( Character *p, item *it, const tripoint_bub_ms &
     if( p->has_trait( trait_SPIRITUAL ) ) {
         p->add_morale( morale_food_good, 36, 72, 2_hours, 1_hours, false, it->type );
     }
-    return 1;
-}
-
-std::optional<int> iuse::flumed( Character *p, item *it, const tripoint_bub_ms & )
-{
-    p->add_effect( effect_took_flumed, 10_hours );
-    p->add_msg_if_player( _( "You take some %s." ), it->tname() );
-    return 1;
-}
-
-std::optional<int> iuse::flusleep( Character *p, item *it, const tripoint_bub_ms & )
-{
-    p->add_effect( effect_took_flumed, 12_hours );
-    p->mod_fatigue( 30 );
-    p->add_msg_if_player( _( "You take some %s." ), it->tname() );
-    p->add_msg_if_player( m_warning, _( "You feel very sleepy…" ) );
     return 1;
 }
 

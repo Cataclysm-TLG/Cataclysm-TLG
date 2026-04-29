@@ -2135,25 +2135,17 @@
   },
   {
     "type": "effect_type",
-    "id": "took_flumed",
-    "rating": "good",
-    "blood_analysis_description": "Antihistamines",
-    "max_duration": 57600,
-    "dur_add_perc": 30
-  },
-  {
-    "type": "effect_type",
     "id": "took_xanax",
     "max_duration": 14400,
     "dur_add_perc": 22,
     "base_mods": { "stim_tick": [ 150 ], "stim_min": [ -1 ], "stim_min_val": [ -1 ] },
     "rating": "good",
-    "blood_analysis_description": "Fast-acting sedatives"
+    "blood_analysis_description": "Alprazolam"
   },
   {
     "type": "effect_type",
     "id": "took_xanax_visible",
-    "name": [ "Took Fast-acting Sedative" ],
+    "name": [ "Took Alprazolam" ],
     "desc": [ "You took a fast-acting sedative some time ago and you might still be under its influence." ],
     "max_duration": 18000,
     "dur_add_perc": 20
@@ -2173,7 +2165,7 @@
   {
     "type": "effect_type",
     "id": "took_prozac_visible",
-    "name": [ "Took Antidepressant" ],
+    "name": [ "Took Fluoxetine" ],
     "desc": [ "You took an antidepressant some time ago and you might still be under its influence." ],
     "max_duration": 72000,
     "dur_add_perc": 35
@@ -2200,7 +2192,7 @@
   {
     "type": "effect_type",
     "id": "took_thorazine_visible",
-    "name": [ "Took Antipsychotic" ],
+    "name": [ "Took Chlorpromazine" ],
     "desc": [ "You took an antipsychotic some time ago and you might still be under its influence." ],
     "max_duration": 72000,
     "dur_add_perc": 35
@@ -2605,8 +2597,7 @@
       { "limb_score": "reaction", "modifier": 0.8, "scaling": -0.2 },
       { "limb_score": "block", "modifier": 0.8, "scaling": -0.2 }
     ],
-    "flags": [ "EFFECT_LIMB_SCORE_MOD" ],
-    "blood_analysis_description": "Hallucinations"
+    "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
   },
   {
     "type": "effect_type",
@@ -2614,7 +2605,7 @@
     "base_mods": { "rad_chance": [ 600 ], "rad_min": [ -1 ] },
     "max_duration": 10800,
     "dur_add_perc": 35,
-    "blood_analysis_description": "Prussian Blue",
+    "blood_analysis_description": "Potassium Ferric Hexacyanoferrate",
     "rating": "good"
   },
   {
@@ -2780,7 +2771,6 @@
     "type": "effect_type",
     "id": "hallu",
     "max_duration": "6 h",
-    "blood_analysis_description": "Hallucinations",
     "limb_score_mods": [
       { "limb_score": "reaction", "modifier": 0.8, "scaling": -0.2 },
       { "limb_score": "block", "modifier": 0.8, "scaling": -0.2 }
@@ -2931,7 +2921,6 @@
     "type": "effect_type",
     "id": "dermatik",
     "immune_bp_flags": [ "BIONIC_LIMB" ],
-    "blood_analysis_description": "Insect Parasite",
     "vitamins": [
       { "vitamin": "dermatik_larva_size", "rate": [ [ 1, 1 ] ], "tick": [ "1 m" ] },
       { "vitamin": "vitC", "rate": [ [ -1, -1 ] ], "tick": [ "5 m" ] },
@@ -2972,10 +2961,10 @@
     "type": "effect_type",
     "id": "formication",
     "name": [ "Itchy", "Very Itchy", "Terribly Itchy" ],
-    "desc": [ "You stop to scratch yourself frequently; high INT helps you resist the urge." ],
+    "desc": [ "You have to fight the urge to scratch yourself." ],
     "apply_message": "You feel extremely itchy!",
     "rating": "bad",
-    "resist_effects": [ "took_flumed", "took_antihistamine" ],
+    "resist_effects": [ "took_antihistamine" ],
     "main_parts_only": true,
     "show_in_info": true,
     "immune_bp_flags": [ "BIONIC_LIMB" ],
@@ -3010,7 +2999,7 @@
     "apply_memorial_log": "Started getting sick.",
     "apply_message": "You feel a sickness coming on…",
     "rating": "bad",
-    "resist_effects": [ "took_flumed" ],
+    "resist_effects": [ "acetaminophen_analgesic", "nsaid_analgesic" ],
     "immune_flags": [ "NO_DISEASE" ],
     "base_mods": {
       "thirst_tick": [ 3600 ],
@@ -3018,7 +3007,7 @@
       "fatigue_tick": [ 600 ],
       "fatigue_min": [ 1 ],
       "str_mod": [ -1, 0 ],
-      "cough_chance": [ 1200, 0 ]
+      "cough_chance": [ 1200 ]
     }
   },
   {
@@ -3032,7 +3021,7 @@
     "apply_memorial_log": "Started getting sick.",
     "apply_message": "You feel a sickness coming on…",
     "rating": "bad",
-    "resist_effects": [ "took_flumed" ],
+    "resist_effects": [ "acetaminophen_analgesic", "nsaid_analgesic" ],
     "immune_flags": [ "NO_DISEASE" ],
     "base_mods": {
       "thirst_tick": [ 3600 ],
@@ -3040,7 +3029,7 @@
       "fatigue_tick": [ 600 ],
       "fatigue_min": [ 1 ],
       "str_mod": [ -1, 0 ],
-      "cough_chance": [ 600, 0 ]
+      "cough_chance": [ 600 ]
     }
   },
   {
@@ -3052,7 +3041,7 @@
     "remove_memorial_log": "Got over the cold.",
     "apply_message": "You feel a cold coming on…",
     "rating": "bad",
-    "resist_effects": [ "took_flumed" ],
+    "resist_effects": [ "acetaminophen_analgesic", "nsaid_analgesic" ],
     "immune_flags": [ "NO_DISEASE" ],
     "miss_messages": [ [ "You're too stuffed up to fight effectively.", 1 ] ],
     "base_mods": {
@@ -3064,9 +3053,9 @@
       "dex_mod": [ -1, 0 ],
       "per_mod": [ -1, 0 ],
       "int_mod": [ -2, -1 ],
-      "cough_chance": [ 900, 0 ]
+      "cough_chance": [ 900 ]
     },
-    "blood_analysis_description": "Viral Infection"
+    "blood_analysis_description": "Rhinovirus Infection"
   },
   {
     "type": "effect_type",
@@ -3079,7 +3068,7 @@
     "remove_memorial_log": "Got over the flu.",
     "apply_message": "You feel a flu coming on…",
     "rating": "bad",
-    "resist_effects": [ "took_flumed" ],
+    "resist_effects": [ "acetaminophen_analgesic", "nsaid_analgesic" ],
     "immune_flags": [ "NO_DISEASE" ],
     "miss_messages": [ [ "You're too stuffed up to fight effectively.", 1 ] ],
     "base_mods": {
@@ -3096,7 +3085,7 @@
       "cough_chance": [ 300, 0 ],
       "vomit_chance": [ 3600, 7200 ]
     },
-    "blood_analysis_description": "Viral Infection"
+    "blood_analysis_description": "Influenza Infection"
   },
   {
     "type": "effect_type",
@@ -3105,7 +3094,7 @@
     "desc": [ "Common cold antibodies in your bloodstream prevent you from catching common cold." ],
     "blocks_effects": [ "common_cold", "pre_common_cold" ],
     "rating": "good",
-    "blood_analysis_description": "Common Cold Antibodies",
+    "blood_analysis_description": "Rhinovirus Antibodies",
     "max_duration": 14515200,
     "dur_add_perc": 50
   },
@@ -3126,7 +3115,6 @@
     "desc": [ "You have been vaccinated for the flu recently." ],
     "blocks_effects": [ "flu", "pre_flu" ],
     "rating": "good",
-    "blood_analysis_description": "Antivirals",
     "max_duration": 14515200,
     "dur_add_perc": 50
   },
@@ -3136,7 +3124,7 @@
     "id": "pre_conjunctivitis_viral",
     "show_in_info": false,
     "immune_flags": [ "INFECTION_IMMUNE", "SEESLEEP" ],
-    "blood_analysis_description": "Viral Infection",
+    "blood_analysis_description": "Adenovirus Infection",
     "max_duration": "71 h"
   },
   {
@@ -3145,7 +3133,7 @@
     "id": "pre_conjunctivitis_bacterial",
     "show_in_info": false,
     "immune_flags": [ "INFECTION_IMMUNE", "SEESLEEP" ],
-    "blood_analysis_description": "Bacterial Infection",
+    "blood_analysis_description": "Staphylococcus Aureus Infection",
     "max_duration": "71 h"
   },
   {
@@ -3170,7 +3158,7 @@
     ],
     "miss_messages": [ [ "It feels like there's sand in your eye.", 1 ] ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ],
-    "blood_analysis_description": "Viral Infection"
+    "blood_analysis_description": "Adenovirus Infection"
   },
   {
     "//": "For player, indistinguishable from conjunctivitis_bacterial, but separate here to allow for separate resistances from antibiotics.",
@@ -3194,7 +3182,7 @@
       { "limb_score": "night_vis", "modifier": 0.8, "resist_modifier": 0.9 }
     ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ],
-    "blood_analysis_description": "Bacterial Infection"
+    "blood_analysis_description": "Staphylococcus Aureus Infection"
   },
   {
     "type": "effect_type",
@@ -3202,7 +3190,7 @@
     "name": [ "Antivenom Resistance" ],
     "desc": [ "You are temporarily resistant to venoms." ],
     "rating": "good",
-    "blood_analysis_description": "Prophylactic antivenom"
+    "blood_analysis_description": "Prophylactic Antivenom"
   },
   {
     "type": "effect_type",
@@ -3211,15 +3199,7 @@
     "desc": [ "You have taken an antiasthmatic drug recently." ],
     "rating": "good",
     "max_duration": 86400,
-    "blood_analysis_description": "Antiasthmatics"
-  },
-  {
-    "type": "effect_type",
-    "id": "took_antihistamine",
-    "name": [ "Took Antihistamine Drugs" ],
-    "desc": [ "You have taken an antihistamine drug recently." ],
-    "rating": "good",
-    "blood_analysis_description": "Antihistamines"
+    "blood_analysis_description": "Albuterol"
   },
   {
     "type": "effect_type",
@@ -3299,7 +3279,7 @@
     ],
     "base_mods": { "str_mod": [ -1 ], "dex_mod": [ -2 ], "per_mod": [ -2 ], "int_mod": [ -1 ] },
     "scaling_mods": { "str_mod": [ 2 ], "dex_mod": [ 3 ], "per_mod": [ 3 ], "int_mod": [ 1 ] },
-    "blood_analysis_description": "Healing Medication"
+    "blood_analysis_description": "Stimulant RX12"
   },
   {
     "type": "effect_type",
@@ -3331,7 +3311,7 @@
       "stamina_min": [ 4 ],
       "stamina_max": [ 8 ]
     },
-    "blood_analysis_description": "Stimulants"
+    "blood_analysis_description": "Stimulant RX11"
   },
   {
     "type": "effect_type",
@@ -3370,7 +3350,7 @@
       "per_mod": [ 0.5 ],
       "stamina_min": [ 4 ]
     },
-    "blood_analysis_description": "Adrenaline Spike"
+    "blood_analysis_description": "Elevated Epinephrine Levels"
   },
   {
     "type": "effect_type",
@@ -3519,6 +3499,34 @@
       "per_mod": [ -1 ]
     },
     "blood_analysis_description": "Nicotine"
+  },
+  {
+    "type": "effect_type",
+    "id": "took_antihistamine",
+    "rating": "good",
+    "base_mods": {
+      "fatigue_min": [ 2 ],
+      "fatigue_max": [ 10 ],
+      "fatigue_chance": [ 60 ],
+      "fatigue_max_val": [ 90 ]
+    },
+    "blood_analysis_description": "Diphenhydramine"
+  },
+  {
+    "type": "effect_type",
+    "id": "zolpidem",
+    "name": [ "Zolpidem" ],
+    "desc": [ "Medication is making you more drowsy by the minute" ],
+    "rating": "good",
+    "base_mods": {
+      "int_mod": [ -1 ],
+      "speed_mod": [ -10 ],
+      "fatigue_min": [ 2 ],
+      "fatigue_max": [ 60 ],
+      "fatigue_chance": [ 60 ],
+      "fatigue_max_val": [ 350 ]
+    },
+    "blood_analysis_description": "Zolpidem"
   },
   {
     "type": "effect_type",
@@ -4436,7 +4444,13 @@
   },
   {
     "type": "effect_type",
-    "id": "cough_suppress"
+    "id": "cough_suppress",
+    "base_mods": {
+      "fatigue_min": [ 1 ],
+      "fatigue_max": [ 6 ],
+      "fatigue_chance": [ 60 ],
+      "fatigue_max_val": [ 60 ]
+    }
   },
   {
     "type": "effect_type",
