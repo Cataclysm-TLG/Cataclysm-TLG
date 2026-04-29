@@ -1465,13 +1465,14 @@
     "healthy": -2,
     "addiction_potential": 15,
     "addiction_type": "opioid",
-    "vitamins": [ [ "vit_mme", 200, 500 ] ],
+    "vitamins": [ [ "vit_mme", 350 ] ],
     "fun": 10,
     "flags": [ "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You swallow some opium.",
-      "effects": [ { "id": "cough_suppress", "duration": "90 m" } ]
+      "effects": [ { "id": "cough_suppress", "duration": "90 m" } ],
+      "vitamins": [ [ "vit_mme", 200, 500 ] ]
     }
   },
   {
