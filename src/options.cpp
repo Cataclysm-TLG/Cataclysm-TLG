@@ -1848,9 +1848,6 @@ void options_manager::add_options_interface()
     add_option_group( "interface", Group( "naming_opts", to_translation( "Naming Options" ),
                                           to_translation( "Options regarding the naming of items." ) ),
     [&]( const std::string & page_id ) {
-        add( "SHOW_DRUG_VARIANTS", page_id, to_translation( "Show drug brand names" ),
-             to_translation( "If true, show brand names for drugs, instead of generic functional names - 'Adderall', instead of 'prescription stimulant'." ),
-             false );
         add( "AMMO_IN_NAMES", page_id, to_translation( "Add ammo to weapon/magazine names" ),
              to_translation( "If true, the default ammo is added to weapon and magazine names.  For example \"Mosin-Nagant M44 (4/5)\" becomes \"Mosin-Nagant M44 (4/5 7.62x54mm)\"." ),
              true

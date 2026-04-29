@@ -3204,7 +3204,7 @@ void item::deserialize( const JsonObject &data )
             put_in( new_photo_gallery, pocket_type::E_FILE_STORAGE );
         }
     }
-    if( !has_itype_variant( false ) && can_have_itype_variant() ) {
+    if( !has_itype_variant() && can_have_itype_variant() ) {
         if( possible_itype_variant( typeId().str() ) ) {
             set_itype_variant( typeId().str() );
         } else {

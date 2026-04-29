@@ -1531,8 +1531,8 @@ bool item::same_for_rle( const item &rhs ) const
     if( !contents.empty_with_no_mods() || !rhs.contents.empty_with_no_mods() ) {
         return false;
     }
-    if( has_itype_variant( false ) != rhs.has_itype_variant( false ) ||
-        ( has_itype_variant( false ) && rhs.has_itype_variant( false ) &&
+    if( has_itype_variant() != rhs.has_itype_variant() ||
+        ( has_itype_variant() && rhs.has_itype_variant() &&
           itype_variant().id != rhs.itype_variant().id ) ) {
         return false;
     }
@@ -9951,21 +9951,12 @@ bool item::possible_itype_variant( const std::string &test ) const
                          variant_looking_for ) != type->variants.end();
 }
 
-bool item::has_itype_variant( bool check_option ) const
+bool item::has_itype_variant() const
 {
     if( _itype_variant == nullptr ) {
         return false;
-    } else if( !check_option ) {
-        return true;
     }
-
-    switch( type->variant_kind ) {
-        case itype_variant_kind::drug:
-            return get_option<bool>( "SHOW_DRUG_VARIANTS" );
-        default:
-            return true;
-    }
-    return false;
+    return true;
 }
 
 const itype_variant_data &item::itype_variant() const
