@@ -1376,7 +1376,7 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE" ],
     "addiction_potential": 14,
     "addiction_type": "sleeping pill",
-    "vitamins": [ [ "vit_acetaminophen", 500 ], [ "diphenhydramine", 30 ], [ "dextromethorphan", 30 ] ],
+    "vitamins": [ [ "vit_acetaminophen", 500 ], [ "diphenhydramine", 30 ], [ "dextromethorphan", 30 ], [ "ethanol", 2 ] ],
     "use_action": { "type": "consume_drug", "activation_message": "You drink your cough syrup." }
   },
   {

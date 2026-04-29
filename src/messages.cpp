@@ -260,7 +260,7 @@ class messages_impl
                     // String length determines how many errors are added. Increase the divisor to reduce number of errors.
                     const float length_factor = static_cast<float>( msg.size() ) / 16.0f;
                     // Insensity multiplier increases the amount of errors.
-                    const float expected = length_factor * ( 0.75f * intensity );
+                    const float expected = length_factor * ( 0.7f * intensity );
                     // Expected multiplier makes it more chaotic.
                     int slurred_words = std::max( 0, static_cast<int>(
                                                       round( rng_normal( expected, expected * 0.75f ) )

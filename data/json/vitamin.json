@@ -140,7 +140,7 @@
     "id": "dextromethorphan",
     "type": "vitamin",
     "vit_type": "drug",
-    "name": { "str": "Diphenhydramine" },
+    "name": { "str": "Dextromethorphan" },
     "excess": "cough_suppress",
     "min": 0,
     "max": 30,
