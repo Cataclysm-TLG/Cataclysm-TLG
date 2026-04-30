@@ -207,8 +207,18 @@
           { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 }
         ],
         "covers": [ "arm_l", "arm_r" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 16
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
+        "encumbrance": 16,
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 }
+        ]
       }
     ],
     "warmth": 35,
@@ -545,7 +555,26 @@
         "coverage": 95
       },
       { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ], "coverage": 100 },
-      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ], "coverage": 80 }
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ], "coverage": 80 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 5,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 16,
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ]
+      }
     ]
   },
   {
@@ -601,6 +630,16 @@
         ],
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 98,
+        "encumbrance": 28
+      },
+      {
+        "material": [
+          { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 }
+        ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
         "encumbrance": 28
       }
     ]
@@ -664,6 +703,15 @@
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 98,
         "encumbrance": 28
+      },
+      {
+        "material": [
+          { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 }
+        ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95
       }
     ],
     "use_action": {
@@ -756,6 +804,19 @@
         "specifically_covers": [ "arm_lower_l", "arm_lower_r" ],
         "coverage": 95,
         "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "coverage": 98,
+        "encumbrance": 10
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "coverage": 95
       }
     ],
     "melee_damage": { "bash": 2 }
@@ -1036,6 +1097,19 @@
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_upper_l", "arm_upper_r" ],
         "coverage": 10
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "coverage": 5,
+        "encumbrance": 10
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "coverage": 95
       }
     ]
   },

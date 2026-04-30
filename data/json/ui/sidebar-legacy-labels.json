@@ -9,9 +9,11 @@
     "height": 0,
     "widgets": [
       "ll_larm_layout",
+      "ll_cephalopod_tentacle_l_layout",
       "ll_wing_bird_l_layout",
       "ll_head_layout",
       "ll_rarm_layout",
+      "ll_cephalopod_tentacle_r_layout",
       "ll_wing_bird_r_layout",
       "ll_lleg_layout",
       "ll_cephalopod_arm_1_layout",

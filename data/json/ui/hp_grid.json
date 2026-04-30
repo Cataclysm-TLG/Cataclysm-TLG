@@ -22,6 +22,28 @@
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
+    "id": "ll_cephalopod_tentacle_l_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_tentacle_l",
+    "text_align": "right",
+    "height": 0,
+    "widgets": [ "status_hpg_layout_cephalopod_tentacle_l" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_tentacle_r_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_tentacle_r",
+    "text_align": "right",
+    "height": 0,
+    "widgets": [ "status_hpg_layout_cephalopod_tentacle_r" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
     "id": "ll_head_layout",
     "type": "widget",
     "style": "layout",
@@ -388,6 +410,26 @@
     "widgets": [ "bodypart_wing_bird_l_status_text", "hp_wing_bird_l_graph_no_label" ]
   },
   {
+    "id": "status_hpg_layout_cephalopod_tentacle_l",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_tentacle_l",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_tentacle_l_status_text", "hp_cephalopod_tentacle_l_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_cephalopod_tentacle_r",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_tentacle_r",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_tentacle_r_status_text", "hp_cephalopod_tentacle_r_graph_no_label" ]
+  },
+  {
     "id": "status_hpg_layout_rarm",
     "type": "widget",
     "style": "layout",
@@ -574,6 +616,26 @@
     "widgets": [ "bodypart_wing_bird_r_status_text", "hp_wing_bird_r_num_no_label" ]
   },
   {
+    "id": "status_hpn_layout_cephalopod_tentacle_l",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_tentacle_l",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_tentacle_l_status_text", "hp_cephalopod_tentacle_l_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_cephalopod_tentacle_r",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "cephalopod_tentacle_r",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_cephalopod_tentacle_r_status_text", "hp_cephalopod_tentacle_r_num_no_label" ]
+  },
+  {
     "id": "status_hpn_layout_lleg",
     "type": "widget",
     "style": "layout",
@@ -701,6 +763,20 @@
     "copy-from": "hitpoint_graph_no_label"
   },
   {
+    "id": "hp_cephalopod_tentacle_l_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_tentacle_l",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_cephalopod_tentacle_r_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_tentacle_r",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
     "id": "hp_right_arm_graph_no_label",
     "type": "widget",
     "var": "bp_hp",
@@ -817,6 +893,20 @@
     "type": "widget",
     "var": "bp_hp",
     "bodypart": "wing_bird_l",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_cephalopod_tentacle_l_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_tentacle_l",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_cephalopod_tentacle_r_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "cephalopod_tentacle_r",
     "copy-from": "hitpoint_num_no_label"
   },
   {

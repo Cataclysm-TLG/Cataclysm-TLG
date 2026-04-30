@@ -19,6 +19,18 @@
       { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 22, 26 ] },
       { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 22, 22 ] },
       {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 22, 22 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "encumbrance": [ 0, 0 ]
+      },
+      {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
         "encumbrance": [ 14, 14 ],
@@ -132,6 +144,17 @@
       },
       { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 12 },
       {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 12
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      },
+      {
         "coverage": 90,
         "encumbrance": 8,
         "covers": [
@@ -173,6 +196,18 @@
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": [ 10, 14 ] },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
       { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 10, 10 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 10, 10 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "encumbrance": [ 0, 0 ]
+      },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
@@ -277,6 +312,26 @@
         ]
       },
       {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 14, 14 ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "encumbrance": [ 0, 0 ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 }
+        ]
+      },
+      {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 75,
         "encumbrance": [ 8, 8 ],
@@ -365,7 +420,18 @@
         "coverage": 100,
         "encumbrance": 14
       },
-      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 95 },
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 98 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 14
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
@@ -428,6 +494,17 @@
     "armor": [
       { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 18, 27 ] },
       { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 18, 21 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 18, 21 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
@@ -565,7 +642,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 16, 16 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 16, 16 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 16, 16 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -675,7 +763,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 22, 22 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 22, 22 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 22, 22 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -851,7 +950,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 18, 18 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 18, 18 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 18, 18 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -979,7 +1089,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 18, 18 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 18, 18 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 18, 18 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1094,7 +1215,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 4, 4 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 4, 4 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 4, 4 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1134,7 +1266,18 @@
     "color": "green",
     "armor": [
       { "covers": [ "torso" ], "coverage": 98, "encumbrance": [ 8, 12 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 8, 8 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 8, 8 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 8, 8 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1187,7 +1330,18 @@
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95, "encumbrance": [ 12, 16 ] },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 12, 12 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 12, 12 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 12, 12 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1270,7 +1424,18 @@
         "coverage": 100,
         "encumbrance": [ 10, 10 ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 70 }
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 70 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 10, 10 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 60,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1317,6 +1482,25 @@
           { "type": "vinyl", "covered_by_mat": 60, "thickness": 0.3 },
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }
         ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 13, 13 ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 60, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 60, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }
+        ]
       }
     ],
     "pocket_data": [
@@ -1354,7 +1538,18 @@
     "color": "light_red",
     "armor": [
       { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 16, 18 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 16, 16 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 16, 16 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 16, 16 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1394,7 +1589,18 @@
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": [ 14, 16 ] },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 16, 16 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 16, 16 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 16, 16 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1472,7 +1678,18 @@
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": [ 18, 20 ] },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95, "encumbrance": [ 0, 0 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 18, 18 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 18, 18 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 18, 18 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1691,7 +1908,18 @@
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": [ 8, 12 ] },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 8, 8 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 8, 8 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 8, 8 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1730,7 +1958,18 @@
     "color": "blue",
     "armor": [
       { "covers": [ "torso" ], "coverage": 98, "encumbrance": [ 8, 12 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 8, 8 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 8, 8 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 8, 8 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1768,7 +2007,18 @@
     "color": "cyan",
     "armor": [
       { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 8, 12 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 8, 8 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 8, 8 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 8, 8 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -1828,6 +2078,25 @@
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 98,
         "encumbrance": [ 14, 14 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 14, 14 ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 95, "thickness": 0.2 },
+          { "type": "wool", "covered_by_mat": 100, "thickness": 0.9 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 95, "thickness": 0.2 },
+          { "type": "wool", "covered_by_mat": 100, "thickness": 0.9 }
+        ]
       }
     ],
     "pocket_data": [
@@ -1867,7 +2136,18 @@
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 8 },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 90 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 6 }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 6 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 6
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "variant_type": "generic",
     "variants": [
@@ -1933,7 +2213,18 @@
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 98, "encumbrance": 6 },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 6 }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 6 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 6
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ]
   },
   {
@@ -1961,7 +2252,18 @@
         "coverage": 100,
         "encumbrance": [ 6, 6 ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 90 }
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 90 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 6, 6 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 88,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -2022,6 +2324,17 @@
         "encumbrance": 5
       },
       { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 20 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 5
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 18,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      },
       {
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
@@ -2124,7 +2437,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 10 }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 10 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 10
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ]
   },
   {
@@ -2144,7 +2468,18 @@
     "color": "dark_gray",
     "armor": [
       { "covers": [ "torso" ], "coverage": 98, "encumbrance": [ 20, 22 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 20, 20 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 20, 20 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 20, 20 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -2199,7 +2534,18 @@
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": [ 18, 22 ] },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 18, 18 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 18, 18 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 18, 18 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -2295,7 +2641,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 14, 14 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 14, 14 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 14, 14 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -2383,7 +2740,18 @@
         "coverage": 100,
         "encumbrance": 2
       },
-      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 90 }
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 90 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 14, 14 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 92,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "warmth": 8,
     "material_thickness": 0.1,
@@ -2457,7 +2825,18 @@
         "encumbrance": 2
       },
       { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 60 },
-      { "covers": [ "eyes" ], "coverage": 5, "encumbrance": 1 }
+      { "covers": [ "eyes" ], "coverage": 5, "encumbrance": 1 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 70,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "warmth": 5,
     "material_thickness": 0.1,
@@ -2530,7 +2909,18 @@
         "coverage": 100,
         "encumbrance": 2
       },
-      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 90 }
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 90 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "warmth": 10,
     "material_thickness": 0.1,
@@ -2605,6 +2995,17 @@
         "specifically_covers": [ "arm_lower_l", "arm_lower_r" ],
         "coverage": 95,
         "encumbrance": [ 0, 0 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 4, 4 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 96,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
       }
     ],
     "pocket_data": [
@@ -2696,6 +3097,25 @@
           { "type": "faux_fur", "covered_by_mat": 10, "thickness": 1.0 }
         ],
         "coverage": 100
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 18, 18 ],
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "faux_fur", "covered_by_mat": 10, "thickness": 1.0 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "faux_fur", "covered_by_mat": 10, "thickness": 1.0 }
+        ]
       }
     ],
     "pocket_data": [
@@ -2722,8 +3142,8 @@
     "id": "santa_jacket_short",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "short Santa jacket" },
-    "description": "A short red jacket with white faux fur as trim, similar to a Santa jacket but sleeveless, for a more revealing look on Christmas.",
+    "name": { "str": "sexy Santa jacket" },
+    "description": "A short red jacket with white faux fur as trim.  It's sleeveless, so Santa can show off his guns when he comes down your chimney this year.",
     "weight": "1200 g",
     "volume": "2000 ml",
     "price": "180 USD",
@@ -3327,7 +3747,18 @@
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95, "encumbrance": 12 },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100 },
       { "covers": [ "leg_l", "leg_r" ], "coverage": 98, "encumbrance": 10 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 10 }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 10 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 10
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ]
   },
   {
@@ -3352,6 +3783,17 @@
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 12 },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
       { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 12 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 12
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      },
       {
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
@@ -3495,6 +3937,17 @@
         "encumbrance": [ 13, 13 ]
       },
       {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 13, 13 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      },
+      {
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r", "leg_knee_l", "leg_knee_r", "leg_lower_l", "leg_lower_r", "leg_hip_l", "leg_hip_r" ],
         "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
@@ -3596,7 +4049,18 @@
     "color": "white",
     "armor": [
       { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 20, 26 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 20, 20 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 20, 20 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 20, 20 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
@@ -3708,7 +4172,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 12 }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 12 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 12
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ]
   },
   {
@@ -3773,7 +4248,18 @@
         ],
         "layers": [ "BELTED" ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 10 }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 10 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 10
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ]
   },
   {
@@ -3792,7 +4278,18 @@
     "looks_like": "jacket_army",
     "armor": [
       { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 16, 22 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 16, 16 ] }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 16, 16 ] },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 16, 16 ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+      }
     ],
     "pocket_data": [
       {
