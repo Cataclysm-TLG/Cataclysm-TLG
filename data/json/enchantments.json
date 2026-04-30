@@ -387,6 +387,19 @@
   },
   {
     "type": "enchantment",
+    "id": "ench_arm_tentacles",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "hand_l" },
+      { "lose": "hand_r" },
+      { "lose": "arm_l" },
+      { "lose": "arm_r" },
+      { "gain": "cephalopod_tentacle_l" },
+      { "gain": "cephalopod_tentacle_r" }
+    ]
+  },
+  {
+    "type": "enchantment",
     "id": "ench_hooves",
     "condition": "ALWAYS",
     "modified_bodyparts": [ { "lose": "foot_l" }, { "lose": "foot_r" }, { "gain": "hoof_l" }, { "gain": "hoof_r" } ],

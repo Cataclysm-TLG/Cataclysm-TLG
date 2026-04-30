@@ -67,6 +67,15 @@
   },
   {
     "type": "mutation",
+    "id": "ARM_TENTACLES_4",
+    "name": { "str": "Four Tentacles" },
+    "description": "Obsoleted Four Tentacles mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
     "id": "KILLER",
     "name": { "str": "Killer Drive" },
     "description": "Obsoleted Killer Drive mutation.",
