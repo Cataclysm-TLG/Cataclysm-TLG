@@ -22,7 +22,7 @@
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
         ],
-        "covers": [ "torso", "arm_l", "arm_r" ],
+        "covers": [ "torso", "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 95,
         "encumbrance": [ 8, 13 ]
       },

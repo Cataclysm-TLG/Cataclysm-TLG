@@ -639,6 +639,122 @@
     "flags": [ "W_LABEL_NONE" ]
   },
   {
+    "id": "bodypart_cephalopod_tentacle_l_status_text",
+    "type": "widget",
+    "bodypart": "cephalopod_tentacle_l",
+    "style": "text",
+    "default_clause": { "text": "LTENT" },
+    "clauses": [
+      {
+        "id": "bleedingAndBitten3",
+        "text": "LTENT",
+        "color": "magenta_red",
+        "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
+      },
+      {
+        "id": "bleedingAndBitten12",
+        "text": "LTENT",
+        "color": "magenta",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bite" },
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding3",
+        "text": "LTENT",
+        "color": "red_red",
+        "condition": { "u_has_effect": "bleed", "intensity": 21 }
+      },
+      {
+        "id": "bleeding2",
+        "text": "LTENT",
+        "color": "red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 11 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding1",
+        "text": "LTENT",
+        "color": "light_red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+          ]
+        }
+      },
+      { "id": "infected", "text": "LTENT", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "LTENT", "color": "blue", "condition": { "u_has_effect": "bite" } }
+    ],
+    "flags": [ "W_LABEL_NONE" ]
+  },
+  {
+    "id": "bodypart_cephalopod_tentacle_r_status_text",
+    "type": "widget",
+    "bodypart": "cephalopod_tentacle_r",
+    "style": "text",
+    "default_clause": { "text": "RTENT" },
+    "clauses": [
+      {
+        "id": "bleedingAndBitten3",
+        "text": "RTENT",
+        "color": "magenta_red",
+        "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
+      },
+      {
+        "id": "bleedingAndBitten12",
+        "text": "RTENT",
+        "color": "magenta",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bite" },
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding3",
+        "text": "RTENT",
+        "color": "red_red",
+        "condition": { "u_has_effect": "bleed", "intensity": 21 }
+      },
+      {
+        "id": "bleeding2",
+        "text": "RTENT",
+        "color": "red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 11 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding1",
+        "text": "RTENT",
+        "color": "light_red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+          ]
+        }
+      },
+      { "id": "infected", "text": "RTENT", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "RTENT", "color": "blue", "condition": { "u_has_effect": "bite" } }
+    ],
+    "flags": [ "W_LABEL_NONE" ]
+  },
+  {
     "id": "bodypart_cephalopod_arm_1_status_text",
     "type": "widget",
     "bodypart": "cephalopod_arm_1",
