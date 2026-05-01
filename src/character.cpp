@@ -10732,14 +10732,13 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
         if( flatground && !is_on_ground() ) {
             float flatground_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_FLATGROUND_MOD,
                                     1 );
-            run_cost_effect_mul( flatground_mult, _( "Flat Ground Mut." ) );
+            run_cost_effect_mul( flatground_mult, _( "Flat Ground" ) );
         }
 
-
-        if( movecost > 105 ) {
+        if( here.move_cost( pos_bub() ) > 2 ) {
             float obstacle_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_OBSTACLE_MOD,
                                   1 );
-            run_cost_effect_mul( obstacle_mult, _( "Obstacle Muts." ) );
+            run_cost_effect_mul( obstacle_mult, _( "Rough Terrain" ) );
 
             if( has_proficiency( proficiency_prof_parkour ) && is_running() ) {
                 run_cost_effect_mul( 0.5, _( "Parkour" ) );
@@ -10751,6 +10750,7 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                 movecost = 100;
             }
         }
+        
         if( has_trait( trait_M_IMMUNE ) && on_fungus ) {
             if( movecost > 75 ) {
                 // Mycal characters are faster on their home territory, even through things like shrubs
