@@ -140,6 +140,12 @@
   {
     "type": "item_group",
     "subtype": "collection",
+    "id": "charged_handheld_game",
+    "entries": [ { "item": "handheld_game_system", "charges": 48 } ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
     "id": "charged_two_way_radio",
     "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 300, "container-item": "two_way_radio" } ]
   },
@@ -393,6 +399,11 @@
   },
   {
     "type": "profession_item_substitutions",
+    "item": "wool_sockmitts",
+    "sub": [ { "present": [ "WOOLALLERGY" ], "new": [ "jacket_leather" ] }, { "present": [ "VEGAN" ], "new": [ "sockmitts" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
     "item": "suit",
     "sub": [
       { "present": [ "WOOLALLERGY" ], "new": [ "jacket_light", "pants", "dress_shirt" ] },
@@ -442,6 +453,16 @@
   {
     "type": "profession_item_substitutions",
     "item": "boots_hiking",
+    "sub": [ { "present": [ "VEGAN" ], "new": [ "motorbike_boots" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
+    "item": "boots_steel",
+    "sub": [ { "present": [ "VEGAN" ], "new": [ "motorbike_boots" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
+    "item": "boots_western",
     "sub": [ { "present": [ "VEGAN" ], "new": [ "motorbike_boots" ] } ]
   },
   {
@@ -1057,7 +1078,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
     },
     "age_lower": 16
   },
@@ -1147,6 +1168,38 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" } ] },
+      "female": { "entries": [ { "item": "panties" }, { "item": "sports_bra" } ] }
+    }
+  },
+  {
+    "type": "profession",
+    "id": "vandal",
+    "name": "Vandal",
+    "description": "When the riots started, you took to the streets to join in the mayhem.  Now the old world is gone, and you're ready to bring havoc to the new one.",
+    "npc_background": "BG_survival_story_CRIMINAL",
+    "points": 3,
+    "skills": [ { "level": 3, "name": "traps" }, { "level": 1, "name": "fabrication" } ],
+    "items": {
+      "both": {
+        "entries": [
+          { "item": "mask_rioter" },
+          { "item": "sunglasses" },
+          { "item": "hoodie" },
+          { "item": "backpack" },
+          { "item": "longshirt" },
+          { "item": "gloves_work" },
+          { "item": "claw_bar" },
+          { "item": "pants_cargo" },
+          { "item": "molotov", "count": 3 },
+          { "item": "socks" },
+          { "item": "boots_steel" },
+          { "group": "charged_flashlight" },
+          { "item": "textbook_anarch" },
+          { "item": "lighter", "charges": 100 },
+          { "item": "spray_can", "charges": 10 }
+        ]
+      },
+      "male": { "entries": [ { "item": "boxer_briefs" } ] },
       "female": { "entries": [ { "item": "panties" }, { "item": "sports_bra" } ] }
     }
   },
@@ -3448,7 +3501,7 @@
   {
     "type": "profession",
     "id": "mutant_patient",
-    "name": "Unwilling Mutant",
+    "name": "Test Subject",
     "description": "You were a human guinea pig, used by laboratory technicians to understand the immense power of mutation.  You are determined to live on, if only to spite them for what they did to you.",
     "npc_background": "BG_survival_story_EVACUEE",
     "points": -1,
@@ -3459,33 +3512,6 @@
     },
     "flags": [ "SCEN_ONLY" ],
     "age_lower": 16
-  },
-  {
-    "type": "profession",
-    "id": "mutant_volunteer",
-    "name": "Volunteer Mutant",
-    "description": "Your dreams of becoming a mutant superhero through genetic alteration may have fallen a bit short, but the scientists say you're ready.  It's time for a field test.",
-    "npc_background": "BG_survival_story_EVACUEE",
-    "points": 2,
-    "skills": [ { "level": 4, "name": "chemistry" }, { "level": 4, "name": "electronics" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "dress_shirt" },
-          { "item": "pants" },
-          { "item": "socks" },
-          { "item": "boots" },
-          { "item": "knit_scarf" },
-          { "item": "coat_lab" },
-          { "item": "glasses_safety" },
-          { "item": "wristwatch" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
-    },
-    "flags": [ "SCEN_ONLY" ],
-    "missions": [ "MISSION_MUTANT_VOLUNTEER" ]
   },
   {
     "type": "profession",
@@ -3668,32 +3694,33 @@
     "type": "profession",
     "id": "otaku",
     "name": "Otaku",
-    "description": "After many late nights with friends watching anime and eating snacks, you decided to make the trip to the premier anime convention in the Northeast.  Now zombies are eating everyone, and even worse, the convention is cancelled!  At least you were ready in case your costume tore.",
+    "description": "You have recently attended what might be the last anime convention ever.  There are zombies everywhere now, buty you picked up something at the merch tables that might even the odds.  This is just like one of your Japanese Animes!",
     "npc_background": "BG_survival_story_ECCENTRIC",
-    "points": 0,
-    "skills": [ { "level": 2, "name": "tailor" } ],
+    "points": 2,
     "items": {
       "both": {
         "entries": [
-          { "item": "shorts" },
-          { "item": "socks" },
           { "item": "sneakers" },
-          { "item": "tank_top" },
+          { "item": "tshirt" },
           { "item": "mbag" },
           { "item": "mag_animecon" },
-          { "item": "cheeseburger" },
+          { "item": "diet_energy_drink" },
+          { "item": "chips" },
           { "group": "charged_smart_phone" },
-          { "item": "eink_tablet_pc", "charges": 150 },
-          {
-            "item": "light_minus_battery_cell",
-            "ammo-item": "battery",
-            "charges": 50,
-            "container-item": "game_watch"
-          }
+          { "group": "charged_handheld_game" },
+          { "item": "katana", "custom-flags": [ "REPLICA_EQUIPMENT", "auto_wield" ], "container-item": "scabbard" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "item": "fedora" }, { "item": "boxer_shorts" }, { "item": "shorts_cargo" }, { "item": "socks" } ] },
+      "female": {
+        "entries": [
+          { "item": "faux_fur_cat_ears" },
+          { "item": "sockmitts" },
+          { "item": "skirt" },
+          { "item": "stockings" },
+          { "item": "panties" }
+        ]
+      }
     },
     "missions": [ "MISSION_OTAKU" ]
   },
@@ -4637,14 +4664,18 @@
   {
     "type": "profession",
     "id": "reenactor",
-    "name": { "male": "Historical Reenactor", "female": "Ahistorical Reenactor" },
-    "description": {
-      "npc_background": "BG_survival_story_EVACUEE",
-      "male": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world permanently derailed your plans.",
-      "female": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world made traditional gender roles obsolete."
-    },
-    "points": 2,
-    "proficiencies": [ "prof_gunsmithing_basic", "prof_metalworking", "prof_gunsmithing_antique", "prof_gun_cleaning" ],
+    "name": { "male": "Historical Reenactor", "female": "Historical Reenactor" },
+    "description": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world permanently derailed your plans.",
+    "points": 4,
+    "proficiencies": [
+      "prof_gunsmithing_basic",
+      "prof_metalworking",
+      "prof_gunsmithing_antique",
+      "prof_gun_cleaning",
+      "prof_spinning",
+      "prof_gun_cleaning",
+      "prof_weaving"
+    ],
     "skills": [
       { "level": 3, "name": "gun" },
       { "level": 3, "name": "rifle" },
@@ -4653,7 +4684,7 @@
       { "level": 2, "name": "cooking" }
     ],
     "items": {
-      "both": {
+      "male": {
         "entries": [
           { "item": "stockings" },
           { "item": "pockknife" },
@@ -4680,31 +4711,10 @@
           { "item": "flintlock_ammo", "charges": 15 },
           { "item": "vinegar", "container-item": "bottle_plastic_small" },
           { "item": "lamp_oil", "container-item": "bottle_plastic_small" },
-          { "group": "charged_smart_phone" },
-          { "group": "charged_matches" }
+          { "item": "ref_matches", "charges": 32 }
         ]
-      }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "reenactor2",
-    "name": { "male": "Ahistorical Reenactor", "female": "Historical Reenactor" },
-    "description": {
-      "npc_background": "BG_survival_story_EVACUEE",
-      "male": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world made traditional gender roles obsolete.",
-      "female": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world permanently derailed your plans."
-    },
-    "points": 2,
-    "proficiencies": [ "prof_spinning", "prof_closures", "prof_knitting", "prof_gun_cleaning" ],
-    "skills": [
-      { "level": 4, "name": "tailor" },
-      { "level": 4, "name": "cooking" },
-      { "level": 2, "name": "gun" },
-      { "level": 2, "name": "rifle" }
-    ],
-    "items": {
-      "both": {
+      },
+      "female": {
         "entries": [
           { "item": "stockings" },
           { "item": "pockknife" },
@@ -4712,18 +4722,26 @@
           { "item": "tobacco" },
           { "item": "backpack" },
           { "item": "dress" },
-          { "item": "apron_leather" },
+          { "item": "apron_cotton" },
           { "item": "boots" },
-          { "item": "gloves_leather" },
+          { "item": "wool_sockmitts" },
           { "item": "knit_scarf" },
           { "item": "hat_fur" },
           { "item": "purse" },
           { "item": "pot" },
           { "item": "cornmeal" },
+          {
+            "item": "rifle_flintlock",
+            "ammo-item": "flintlock_ammo",
+            "charges": 1,
+            "contents-item": "shoulder_strap_simple"
+          },
+          { "item": "flintlock_pouch", "contents-group": "flintlock_pouch_reenactor" },
+          { "item": "flintlock_ammo", "charges": 15 },
           { "item": "salt" },
           { "item": "needle_wood", "ammo-item": "thread", "charges": 200 },
           { "item": "oil_lamp", "charges": 750 },
-          { "group": "charged_smart_phone" },
+          { "item": "ref_matches", "charges": 32 },
           { "group": "charged_matches" }
         ]
       }
@@ -4837,109 +4855,12 @@
   },
   {
     "type": "profession",
-    "id": "jr_survivalist",
-    "name": "Survivalist Jr.",
-    "description": "Your parents were crazy preppers who thought some \"Cataclysm\" was coming, and insisted on preparing you for it.  Turns out they were right.  You didn't get a chance to thank them.  The only thing you can do for them now is what they always hoped you would do in the dark days ahead: survive.",
-    "npc_background": "BG_survival_story_TEENAGER",
-    "points": 2,
-    "skills": [
-      { "level": 3, "name": "fabrication" },
-      { "level": 3, "name": "survival" },
-      { "level": 3, "name": "firstaid" },
-      { "level": 3, "name": "traps" }
-    ],
-    "proficiencies": [ "prof_fibers", "prof_fibers_rope", "prof_lockpicking", "prof_gun_cleaning" ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "jacket_light" },
-          { "item": "pants_cargo" },
-          { "item": "socks" },
-          { "item": "boots" },
-          { "item": "knit_scarf" },
-          { "item": "backpack" },
-          { "item": "granola" },
-          { "item": "water_clean" },
-          { "item": "scissors" },
-          { "item": "magnifying_glass" },
-          { "item": "wristwatch" },
-          { "item": "whistle" },
-          { "group": "charged_cell_phone" },
-          { "group": "full_1st_aid" },
-          { "group": "charged_flashlight" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
-    },
-    "age_lower": 16,
-    "age_upper": 18
-  },
-  {
-    "type": "profession",
-    "id": "dodgeball_player",
-    "name": "Dodgeball Player",
-    "description": "In dodgeball, failing to dodge meant taking a ball to the head and being out of the game.  In the Cataclysm, it means getting eaten by monsters.  Don't slip up.",
-    "npc_background": "BG_survival_story_SPORTS",
-    "points": 2,
-    "skills": [ { "level": 5, "name": "dodge" }, { "level": 4, "name": "throw" }, { "level": 3, "name": "swimming" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "jacket_light" },
-          { "item": "jeans" },
-          { "item": "socks_ankle" },
-          { "item": "lowtops" },
-          { "item": "slingpack" },
-          { "item": "juice" },
-          { "group": "charged_smart_phone" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
-    },
-    "age_lower": 16,
-    "age_upper": 18
-  },
-  {
-    "type": "profession",
-    "id": "science_club_mem",
-    "name": "Science Club Member",
-    "description": "The school never let your club play with the really fun chemicals, the kind that make things go boom, but there aren't any teachers around to enforce the rules anymore.",
+    "id": "nerd",
+    "name": "Nerd",
+    "description": "You studied hard, but you never fit in with the cool kids.  Then the bombs fell, and only you survived.  The geek shall inherit the earth!",
     "npc_background": "BG_survival_story_TEENAGER",
     "points": 1,
-    "skills": [ { "level": 2, "name": "fabrication" }, { "level": 2, "name": "mechanics" }, { "level": 2, "name": "chemistry" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "jacket_light" },
-          { "item": "jeans" },
-          { "item": "socks" },
-          { "item": "sneakers" },
-          { "item": "knit_scarf" },
-          { "item": "backpack" },
-          { "item": "basic_chemistry" },
-          { "item": "wristwatch" },
-          { "group": "charged_smart_phone" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "panties" } ] }
-    },
-    "age_lower": 16,
-    "age_upper": 18
-  },
-  {
-    "type": "profession",
-    "id": "av_club_mem",
-    "name": "A/V Club Member",
-    "description": "You were a member of the school A/V club.  You're sure there's some way you can use your technical skills to help you stay alive.  You just haven't figured out how to make an awesome death ray yet.",
-    "npc_background": "BG_survival_story_TEENAGER",
-    "points": 1,
-    "skills": [ { "level": 3, "name": "electronics" }, { "level": 3, "name": "computer" } ],
+    "skills": [ { "level": 2, "name": "electronics" }, { "level": 3, "name": "computer" }, { "level": 3, "name": "science" } ],
     "items": {
       "both": {
         "entries": [
@@ -4951,6 +4872,7 @@
           { "item": "knit_scarf" },
           { "item": "backpack" },
           { "item": "mag_electronics" },
+          { "item": "basic_chemistry" },
           { "item": "wristwatch" },
           { "group": "charged_smart_phone" }
         ]
@@ -4960,34 +4882,6 @@
     },
     "age_lower": 16,
     "age_upper": 18
-  },
-  {
-    "type": "profession",
-    "id": "teacher",
-    "name": "Teacher",
-    "description": "You've been teaching kids all your life, experiencing the joy and aggravation of imparting knowledge to young minds.  If zombies have any interest in education, they're not showing it.",
-    "npc_background": "BG_survival_story_WORKER_PUBLIC",
-    "points": 1,
-    "skills": [ { "level": 4, "name": "speech" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "dress_shirt" },
-          { "item": "blazer" },
-          { "item": "socks" },
-          { "item": "dress_shoes" },
-          { "item": "tie_skinny" },
-          { "item": "tieclip" },
-          { "item": "poetry_book" },
-          { "item": "wristwatch" },
-          { "group": "charged_smart_phone" },
-          { "item": "permanent_marker", "charges": 500 },
-          { "item": "pants" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
-    }
   },
   {
     "type": "profession",
@@ -5054,8 +4948,8 @@
     "name": "Miner",
     "description": "Your canteen is dry, your jackhammer is out of gas, and you're on your last pair of batteries for your mining helmet…",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 1,
-    "skills": [ { "level": 2, "name": "mechanics" }, { "level": 2, "name": "swimming" } ],
+    "points": 2,
+    "skills": [ { "level": 2, "name": "mechanics" }, { "level": 2, "name": "swimming" }, { "level": 1, "name": "traps" } ],
     "items": {
       "both": {
         "entries": [
@@ -5074,6 +4968,7 @@
           { "group": "charged_smart_phone" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "jackhammer", "charges": 0 },
+          { "item": "dynamite", "count": 4 },
           { "item": "light_battery_cell", "charges": 100 },
           { "group": "hat_hard_flashlight" }
         ]
@@ -5081,65 +4976,6 @@
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
       "female": { "entries": [ { "item": "boy_shorts" }, { "item": "sports_bra" } ] }
     }
-  },
-  {
-    "type": "profession",
-    "id": "demolition_expert",
-    "name": "Demolition Expert",
-    "description": "Before this all began, you were having the time of your life at your dream job: blowing stuff up.  The Cataclysm means you're finally allowed to do it full time.",
-    "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "skills": [ { "level": 4, "name": "fabrication" }, { "level": 3, "name": "chemistry" }, { "level": 3, "name": "throw" } ],
-    "points": 2,
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "socks" },
-          { "item": "boots_steel" },
-          { "item": "gloves_work" },
-          { "item": "jumpsuit" },
-          { "item": "canteen" },
-          { "item": "tool_belt" },
-          { "item": "mbag" },
-          { "item": "briefcase" },
-          { "item": "wristwatch" },
-          { "item": "hat_hard" },
-          { "group": "charged_matches" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "dynamite", "count": 8 },
-          { "item": "dynamite", "count": 4 },
-          { "group": "charged_smart_phone" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "sports_bra" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "parkour_practitioner",
-    "name": { "male": "Traceur", "female": "Traceuse" },
-    "description": "You've practiced parkour for many years, and made the world your playground.  It wouldn't be a lie to say that running is your life.  Which is good, because now that the end has come, you're running FOR your life.",
-    "npc_background": "BG_survival_story_SPORTS",
-    "points": 3,
-    "proficiencies": [ "prof_parkour" ],
-    "skills": [ { "level": 6, "name": "dodge" }, { "level": 4, "name": "swimming" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "hoodie" },
-          { "item": "pants_cargo" },
-          { "item": "socks_ankle" },
-          { "item": "sneakers" },
-          { "item": "runner_bag" },
-          { "item": "wristwatch" },
-          { "group": "charged_smart_phone" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
-    },
-    "age_lower": 18
   },
   {
     "type": "profession",

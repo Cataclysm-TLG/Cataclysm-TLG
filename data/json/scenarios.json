@@ -443,7 +443,7 @@
     "points": -8,
     "description": "The scientists stopped their experiments on you abruptly, leaving you behind while they evacuated before lockdown.  Find a way to escape or starve to death.",
     "start_name": "Locked Lab",
-    "professions": [ "unemployed", "mutant_patient", "mutant_volunteer", "broken_cyborg", "bionic_patient" ],
+    "professions": [ "unemployed", "mutant_patient", "broken_cyborg", "bionic_patient" ],
     "allowed_locs": [ "sloc_lab_random", "sloc_lab_escape_cells", "sloc_lab_finale" ],
     "traits": [
       "ELFAEYES",
@@ -659,7 +659,7 @@
     "description": "You have been heavily experimented upon for the advancement of science, willingly or not.  Once the Cataclysm struck, you escaped the lab and wandered aimlessly, ending up in a forest.",
     "start_name": "Wilderness",
     "allowed_locs": [ "sloc_forest", "sloc_field" ],
-    "professions": [ "unemployed", "mutant_patient", "mutant_volunteer", "broken_cyborg", "bionic_patient" ],
+    "professions": [ "unemployed", "mutant_patient", "broken_cyborg", "bionic_patient" ],
     "traits": [
       "ELFAEYES",
       "MESOPIC",

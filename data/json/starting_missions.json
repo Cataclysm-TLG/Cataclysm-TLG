@@ -364,28 +364,6 @@
     "origins": [ "ORIGIN_GAME_START" ]
   },
   {
-    "id": "MISSION_MUTANT_VOLUNTEER",
-    "type": "mission_definition",
-    "name": { "str": "Continue with your evolution" },
-    "description": "Your evolution to a more perfect form was interrupted by the Cataclysm.  Restart your transformation process, whatever it costs.",
-    "goal": "MGOAL_CONDITION",
-    "goal_condition": { "u_has_trait": "CHANGING" },
-    "difficulty": 5,
-    "value": 0,
-    "end": {
-      "effect": [
-        {
-          "u_add_morale": "morale_feeling_good",
-          "bonus": 50,
-          "max_bonus": 50,
-          "duration": "24 hours",
-          "decay_start": "24 hours"
-        }
-      ]
-    },
-    "origins": [ "ORIGIN_GAME_START" ]
-  },
-  {
     "id": "MISSION_SOCIAL_BUTTERFLY",
     "type": "mission_definition",
     "name": { "str": "Social butterfly" },
