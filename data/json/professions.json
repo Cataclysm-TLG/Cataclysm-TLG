@@ -141,7 +141,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_handheld_game",
-    "entries": [ { "item": "handheld_game_system", "charges": 48 } ]
+    "entries": [ { "item": "portable_game", "charges": 48 } ]
   },
   {
     "type": "item_group",
@@ -4860,7 +4860,7 @@
     "description": "You studied hard, but you never fit in with the cool kids.  Then the bombs fell, and only you survived.  The geek shall inherit the earth!",
     "npc_background": "BG_survival_story_TEENAGER",
     "points": 1,
-    "skills": [ { "level": 2, "name": "electronics" }, { "level": 3, "name": "computer" }, { "level": 3, "name": "science" } ],
+    "skills": [ { "level": 2, "name": "electronics" }, { "level": 3, "name": "computer" }, { "level": 3, "name": "chemistry" } ],
     "items": {
       "both": {
         "entries": [
