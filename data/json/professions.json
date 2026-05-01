@@ -3708,7 +3708,7 @@
           { "item": "chips" },
           { "group": "charged_smart_phone" },
           { "group": "charged_handheld_game" },
-          { "item": "katana", "custom-flags": [ "REPLICA_EQUIPMENT", "auto_wield" ], "container-item": "scabbard" }
+          { "item": "katana", "custom-flags": [ "REPLICA_EQUIPMENT", "auto_wield" ] }
         ]
       },
       "male": { "entries": [ { "item": "fedora" }, { "item": "boxer_shorts" }, { "item": "shorts_cargo" }, { "item": "socks" } ] },

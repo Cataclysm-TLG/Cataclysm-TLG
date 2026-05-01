@@ -153,7 +153,7 @@
     "symbol": "\\",
     "color": "brown",
     "techniques": [ "RAPID", "PRECISE" ],
-    "flags": [ "NONCONDUCTIVE" ],
+    "flags": [ "NONCONDUCTIVE", "BELT_CLIP" ],
     "weapon_category": [ "FLAILS", "KARATE_WEAPONS", "KUNG_FU_WEAPONS" ],
     "melee_damage": { "bash": 19 }
   },
