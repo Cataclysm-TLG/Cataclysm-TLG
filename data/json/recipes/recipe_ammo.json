@@ -368,7 +368,6 @@
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
     "time": "30 m",
-    "batch_time_factors": [ 80, 2 ],
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
