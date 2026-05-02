@@ -1089,7 +1089,7 @@
     "id": "footrags",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "foot rags", "str_pl": "pairs of foot rags" },
+    "name": { "str": "foot wraps", "str_pl": "pairs of foot wraps" },
     "description": "Rags tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
     "weight": "56 g",
     "volume": "250 ml",
@@ -1103,7 +1103,7 @@
     "material_thickness": 0.4,
     "flags": [ "SKINTIGHT", "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
-      { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      { "encumbrance": 10, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
       {
         "encumbrance": 4,
         "coverage": 85,
@@ -1130,7 +1130,7 @@
     "material_thickness": 1.5,
     "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
-      { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
       {
         "encumbrance": 6,
         "coverage": 85,
@@ -1157,7 +1157,7 @@
     "material_thickness": 1.5,
     "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
-      { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
       {
         "encumbrance": 6,
         "coverage": 85,
@@ -1184,7 +1184,7 @@
     "material_thickness": 1.5,
     "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
-      { "encumbrance": 14, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
       {
         "encumbrance": 5,
         "coverage": 85,
@@ -1211,7 +1211,7 @@
     "material_thickness": 0.6,
     "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
-      { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      { "encumbrance": 11, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
       {
         "encumbrance": 5,
         "coverage": 85,
@@ -1238,7 +1238,7 @@
     "material_thickness": 0.4,
     "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
-      { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      { "encumbrance": 10, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
       {
         "encumbrance": 4,
         "coverage": 85,
