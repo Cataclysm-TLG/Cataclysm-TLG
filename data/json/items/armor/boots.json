@@ -1100,7 +1100,7 @@
     "looks_like": "socks",
     "color": "white",
     "warmth": 5,
-    "material_thickness": 1.5,
+    "material_thickness": 0.4,
     "flags": [ "SKINTIGHT", "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
       { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
@@ -1208,7 +1208,7 @@
     "looks_like": "socks_wool",
     "color": "blue",
     "warmth": 15,
-    "material_thickness": 1.5,
+    "material_thickness": 0.6,
     "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
       { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
@@ -1235,7 +1235,7 @@
     "looks_like": "socks_nomex",
     "color": "blue",
     "warmth": 15,
-    "material_thickness": 1.5,
+    "material_thickness": 0.4,
     "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
     "armor": [
       { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
