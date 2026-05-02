@@ -10750,7 +10750,7 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                 movecost = 100;
             }
         }
-        
+
         if( has_trait( trait_M_IMMUNE ) && on_fungus ) {
             if( movecost > 75 ) {
                 // Mycal characters are faster on their home territory, even through things like shrubs
