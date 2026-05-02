@@ -45,7 +45,7 @@
     "skills_required": [ [ "melee", 1 ] ],
     "time": "1 h",
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
-    "autolearn": [ [ "cutting", 2 ] ],
+    "autolearn": [ [ "stabbing", 2 ] ],
     "book_learn": [ [ "mag_stabbing", 1 ], [ "manual_stabbing", 1 ] ],
     "//": "Only real and powerful stabbing weapons.",
     "tools": [
