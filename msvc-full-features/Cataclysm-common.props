@@ -127,10 +127,10 @@
         ogg.lib;
         out123.lib;
         pdcurses.lib;
-        SDL3_image-static$(VcpkgLibSuffix).lib;
-        SDL3_mixer-static$(VcpkgLibSuffix).lib;
-        SDL3_ttf$(VcpkgLibSuffix).lib;
-        SDL3-static$(VcpkgLibSuffix).lib;
+        SDL3_image-static.lib;
+        SDL3_mixer-static.lib;
+        SDL3_ttf-static.lib;
+        SDL3-static.lib;
         syn123.lib;
         turbojpeg.lib;
         vorbis.lib;
