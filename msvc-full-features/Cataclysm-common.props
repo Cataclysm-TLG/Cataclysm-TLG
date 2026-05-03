@@ -14,6 +14,7 @@
     <_CTLG_RELEASE_BUILD>false</_CTLG_RELEASE_BUILD>
     <_CTLG_RELEASE_BUILD Condition="'$(CTLG_RELEASE_BUILD)'!=''">true</_CTLG_RELEASE_BUILD>
     <_CTLG_LLVM_BIN_PATH>$(VCInstallDir)Tools\Llvm\bin\</_CTLG_LLVM_BIN_PATH>
+    <_CTLG_LLVM_BIN_PATH Condition="'$(PreferredToolArchitecture)'=='x64'">$(VCInstallDir)Tools\Llvm\x64\bin\</_CTLG_LLVM_BIN_PATH>
     <_CTLG_LLVM_BIN_PATH Condition="'$(LLVMInstallDir)'!=''">$(LLVMInstallDir)\bin\</_CTLG_LLVM_BIN_PATH>
     <CTLG_LLVM_LIB_PATH Condition="'$(CTLG_LLVM_LIB_PATH)'==''">$(_CTLG_LLVM_BIN_PATH)</CTLG_LLVM_LIB_PATH>
     <CTLG_LLD_LINK_PATH Condition="'$(CTLG_LLD_LINK_PATH)'==''">$(_CTLG_LLVM_BIN_PATH)</CTLG_LLD_LINK_PATH>
@@ -125,10 +126,10 @@
         ogg.lib;
         out123.lib;
         pdcurses.lib;
-        SDL3_image-static$(VcpkgLibSuffix).lib;
-        SDL3_mixer-static$(VcpkgLibSuffix).lib;
-        SDL3_ttf$(VcpkgLibSuffix).lib;
-        SDL3-static$(VcpkgLibSuffix).lib;
+        SDL3_image-static.lib;
+        SDL3_mixer-static.lib;
+        SDL3_ttf-static.lib;
+        SDL3-static.lib;
         syn123.lib;
         turbojpeg.lib;
         vorbis.lib;
