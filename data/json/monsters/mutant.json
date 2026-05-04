@@ -6,6 +6,7 @@
     "description": "This was once a person, but they've undergone some hideous transformation.  Their pallid skin is clammy and wet, and their face is dominated by unnaturally large, reflective eyes that no longer hold the spark of intelligence.",
     "copy-from": "mon_feral_human_pipe",
     "looks_like": "mon_zombie_runner",
+    "default_faction": "lab_mutant",
     "symbol": "@",
     "color": "white",
     "melee_skill": 6,

@@ -190,6 +190,7 @@ static bool check_water_affect_items( avatar &you )
         // End any ongoing activities so we don't get stuck in an infinite loop when e.g. farming.
         you.activity.set_to_null();
         you.cancel_activity();
+        you.abort_automove();
         return false;
     }
 
