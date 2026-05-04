@@ -235,6 +235,12 @@ if (NOT MSVC)
     else()
         set(CATA_WARNINGS "${CATA_WARNINGS} -Wno-unknown-warning")
     endif()
+    # GCC 16 -Wsfinae-incomplete: SFINAE on incomplete forward-declared types
+    # (e.g. std::reference_wrapper<vehicle>) is link-compatible across TUs.
+    check_cxx_compiler_flag(-Wsfinae-incomplete HAVE_SFINAE_INCOMPLETE)
+    if (HAVE_SFINAE_INCOMPLETE)
+        set(CATA_WARNINGS "${CATA_WARNINGS} -Wno-error=sfinae-incomplete")
+    endif ()
     if (NOT "${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
         set(CATA_WARNINGS "${CATA_WARNINGS} -Wredundant-decls")
     endif ()
