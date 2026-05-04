@@ -53,6 +53,7 @@
   },
   {
     "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "antler",
     "symbol": "%",
     "color": "white",
@@ -71,6 +72,7 @@
   },
   {
     "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "antler_piece",
     "symbol": "%",
     "color": "white",
@@ -82,7 +84,9 @@
     "weight": "140 g",
     "volume": "80 ml",
     "longest_side": "4 cm",
-    "to_hit": -2
+    "to_hit": -2,
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_1_1"
   },
   {
     "type": "ITEM",
