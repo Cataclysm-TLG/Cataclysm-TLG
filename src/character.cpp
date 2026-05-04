@@ -10726,7 +10726,7 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
             run_cost_effect_mul( 1.5f, _( "Swim Fins" ) );
         }
         const bool vehicle_floor = here.has_vehicle_floor( pos_bub() );
-        const bool flatground = here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
+        const bool flatground = ( here.move_cost( pos_bub() ) <= 2 || here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() ) );
         const bool on_road = here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() );
         const bool on_fungus = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() );
         if( flatground && !is_on_ground() ) {
@@ -10817,8 +10817,6 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
             run_cost_effect_add( 10, _( "Roots" ) );
         }
     }
-
-
 
     // Snow depth movement penalty (outdoor, unroofed tiles only)
     if( here.is_outside( pos_bub() ) && !here.is_roofed( pos_bub() ) ) {
