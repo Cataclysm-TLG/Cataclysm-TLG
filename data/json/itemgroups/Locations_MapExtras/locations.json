@@ -1027,7 +1027,6 @@
       { "item": "awl_bone", "prob": 50, "damage": [ 0, 4 ] },
       { "item": "billet_bone", "prob": 20, "damage": [ 0, 4 ] },
       { "item": "billet_wood", "prob": 20, "damage": [ 0, 4 ] },
-      { "item": "button_horn", "prob": 3, "charges": [ 1, 6 ], "damage": [ 0, 4 ] },
       { "item": "button_wood", "prob": 3, "charges": [ 1, 6 ], "damage": [ 0, 4 ] },
       { "item": "button_bone", "prob": 3, "charges": [ 1, 6 ], "damage": [ 0, 4 ] },
       { "item": "loincloth_leather", "prob": 10, "damage": [ 0, 4 ] },
