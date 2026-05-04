@@ -59,13 +59,15 @@
     "name": { "str": "antler" },
     "description": "A branching length of antler, dropped by or harvested from one of the local ungulates terrorizing the region.",
     "price": "0 cent",
-    "material": [ "keratin" ],
+    "material": [ "bone" ],
     "techniques": [ "WBLOCK_1" ],
     "weight": "1400 g",
     "volume": "800 ml",
     "longest_side": "40 cm",
     "to_hit": { "grip": "solid", "length": "hand", "surface": "line", "balance": "clumsy" },
-    "melee_damage": { "bash": 3 }
+    "melee_damage": { "bash": 3 },
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_1_4"
   },
   {
     "type": "ITEM",
@@ -75,7 +77,7 @@
     "name": { "str": "antler piece" },
     "description": "A small section of antler that has been cut into more manageable pieces.",
     "price": "0 cent",
-    "material": [ "keratin" ],
+    "material": [ "bone" ],
     "techniques": [ "WBLOCK_1" ],
     "weight": "140 g",
     "volume": "80 ml",

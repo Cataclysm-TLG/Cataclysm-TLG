@@ -57,7 +57,7 @@
     "id": "bone_sturdy",
     "type": "requirement",
     "//": "Any kind of bones, human or not.  Tainted bones are too brittle and won't work for this purpose.",
-    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ] ] ]
+    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ], [ "antler", 1 ] ] ]
   },
   {
     "id": "bone_any",

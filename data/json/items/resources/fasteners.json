@@ -75,15 +75,6 @@
     "material": [ "bone" ]
   },
   {
-    "id": "button_horn",
-    "copy-from": "button_plastic",
-    "type": "ITEM",
-    "subtypes": [ "AMMO" ],
-    "name": { "str": "horn button" },
-    "description": "A clothing button carved from horn.",
-    "material": [ "keratin" ]
-  },
-  {
     "id": "snapfastener_steel",
     "copy-from": "button_steel",
     "type": "ITEM",

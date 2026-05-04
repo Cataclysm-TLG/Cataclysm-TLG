@@ -4052,5 +4052,10 @@
     "type": "MIGRATION",
     "id": "benelli_tsa",
     "replace": "m2"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "button_horn",
+    "replace": "button_bone"
   }
 ]
