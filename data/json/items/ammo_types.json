@@ -798,6 +798,12 @@
     "default": "teargas_spray"
   },
   {
+    "type": "ammunition_type",
+    "id": "bug_spray",
+    "name": "bug spray",
+    "default": "bug_spray"
+  },
+  {
     "id": "tinder",
     "name": "tinder",
     "default": "tinder",

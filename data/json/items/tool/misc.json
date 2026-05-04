@@ -786,6 +786,35 @@
     "tool_ammo": "teargas_spray"
   },
   {
+    "id": "bug_spray_can",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "name": { "str": "bug spray" },
+    "description": "An aerosol canister of pesticides that promises to kill ants, roaches, and spiders in seconds.",
+    "weight": "650 g",
+    "volume": "750 ml",
+    "longest_side": "23 cm",
+    "price": "12 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "material": [ "steel" ],
+    "symbol": ";",
+    "color": "red",
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE",
+        "airtight": true,
+        "watertight": true,
+        "rigid": true,
+        "ammo_restriction": { "bug_spray": 5 }
+      }
+    ],
+    "charges_per_use": 1,
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "BELT_CLIP" ],
+    "use_action": [ "BUGSPRAY" ],
+    "tool_ammo": "bug_spray"
+  },
+  {
     "id": "c4_payload",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],

@@ -1381,6 +1381,24 @@
     "count": 10
   },
   {
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
+    "id": "bug_spray",
+    "category": "chems",
+    "price": "5 USD",
+    "price_postapoc": "5 USD",
+    "name": { "str_sp": "insecticidal gas" },
+    "symbol": "%",
+    "color": "white",
+    "sealed": false,
+    "description": "Aerosolized pesticides formulated to kill all sorts of arthropods.",
+    "volume": "250 ml",
+    "weight": "1 mg",
+    "phase": "gas",
+    "ammo_type": "bug_spray",
+    "count": 10
+  },
+  {
     "id": "tinder",
     "type": "ITEM",
     "subtypes": [ "AMMO" ],
