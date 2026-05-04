@@ -371,6 +371,11 @@
   },
   {
     "type": "item_action",
+    "id": "BUGSPRAY",
+    "name": { "str": "Spray" }
+  },
+  {
+    "type": "item_action",
     "id": "EYEDROPS",
     "name": { "str": "Use" }
   },

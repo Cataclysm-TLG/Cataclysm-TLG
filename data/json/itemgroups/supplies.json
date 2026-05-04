@@ -475,6 +475,8 @@
       [ "cu_pipe", 50 ],
       [ "fungicide", 5 ],
       { "group": "insecticide_bag_plastic", "prob": 5 },
+      { "item": "bug_bomb", "prob": 1 },
+      { "item": "bug_spray_can", "prob": 5, "charges": 5 },
       { "group": "charcoal_bag_part", "prob": 5 },
       { "group": "ammo_pocket_batteries_full", "prob": 50 },
       [ "solar_cell", 5 ],

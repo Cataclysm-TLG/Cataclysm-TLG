@@ -1258,6 +1258,8 @@
       { "item": "apron_plastic", "prob": 15 },
       { "item": "mask_dust", "prob": 65 },
       { "item": "towel", "prob": 40 },
+      { "item": "bug_bomb", "prob": 1 },
+      { "item": "bug_spray_can", "prob": 5, "charges": [ 1, 5 ] },
       { "item": "plastic_sheet", "prob": 40 },
       { "item": "bottle_plastic", "prob": 10 },
       { "item": "bottle_plastic_small", "prob": 5 },

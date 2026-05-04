@@ -61,7 +61,9 @@
       { "item": "chem_hydrogen_peroxide", "prob": 40, "charges": [ 4, -1 ] },
       { "item": "soap", "count": [ 1, 2 ], "prob": 70 },
       { "item": "detergent", "count": [ 1, 2 ], "prob": 80 },
-      { "item": "paper", "count": [ 1, 2 ], "prob": 90 }
+      { "item": "paper", "count": [ 1, 2 ], "prob": 90 },
+      { "item": "bug_bomb", "prob": 1 },
+      { "item": "bug_spray_can", "prob": 5, "charges": [ 1, 5 ] }
     ]
   },
   {

@@ -43,6 +43,8 @@
           { "item": "grapnel", "prob": 1 },
           { "item": "misc_repairkit", "prob": 5 },
           { "item": "knitting_needles", "prob": 1 },
+          { "item": "bug_bomb", "prob": 1 },
+          { "item": "bug_spray_can", "prob": 5, "charges": 5 },
           { "item": "medium_propane_tank", "prob": 20, "count": [ 1, 2 ], "charges": 15000 }
         ]
       }

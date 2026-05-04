@@ -1929,6 +1929,37 @@ std::optional<int> iuse::mace( Character *p, item *it, const tripoint_bub_ms & )
     return 1;
 }
 
+std::optional<int> iuse::bugspray( Character *p, item *it, const tripoint_bub_ms & )
+{
+    if( !it->ammo_sufficient( p ) ) {
+        return std::nullopt;
+    }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
+    // If anyone other than the player wants to use one of these,
+    // they're going to need to figure out how to aim it.
+    map &here = get_map();
+    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent( _( "Spray where?" ) );
+    if( !dest_ || dest_ == p->pos_bub( here ) ) {
+        return std::nullopt;
+    }
+    tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
+    creature_tracker &creatures = get_creature_tracker();
+    Creature *critter = creatures.creature_at( dest );
+    if( critter && !critter->is_monster() && !critter->is_avatar() &&
+        ( !critter->as_npc()->is_enemy() ) ) {
+        if( !query_yn( _( "This will probably make %s angry.  Continue?" ), critter->disp_name() ) ) {
+            return std::nullopt;
+        }
+        critter->as_npc()->on_attacked( *p );
+    }
+    here.add_field( dest, fd_insecticidal_gas, 2, 3_turns );
+    p->mod_moves( -to_moves<int>( 1_seconds ) );
+    return 1;
+}
+
 std::optional<int> iuse::unpack_item( Character *p, item *it, const tripoint_bub_ms & )
 {
     if( p->cant_do_underwater() ) {
