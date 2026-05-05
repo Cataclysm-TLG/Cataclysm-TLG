@@ -454,6 +454,15 @@ bool doors::forced_door_closing( const tripoint_bub_ms &p,
             return false;
         }
     }
+    if( m.has_furn( p ) ) {
+        if( bash_dmg <= 0 ) {
+            return false;
+        }
+        m.bash( p, bash_dmg );
+        if( m.has_furn( p ) ) {
+            return false;
+        }
+    }
     if( bash_dmg < 0 && !m.i_at( point_bub_ms( x, y ) ).empty() ) {
         return false;
     }
@@ -471,6 +480,7 @@ bool doors::forced_door_closing( const tripoint_bub_ms &p,
             return false;
         }
     }
+
 
     m.ter_set( point_bub_ms( x, y ), door_type );
     if( m.has_flag( ter_furn_flag::TFLAG_NOITEM, point_bub_ms( x, y ) ) ) {
