@@ -1921,8 +1921,7 @@
     "name": { "str": "wasp venom gland" },
     "description": "A fragile, slightly quivering organ for the production and storage of wasp venom.  You could extract some very useful chemicals from it with the right know-how, but only if you hurry.",
     "color": "light_green",
-    "fun": -50,
-    "use_action": [ "POISON" ]
+    "flags": [ "INEDIBLE" ]
   },
   {
     "id": "venom_bee",
@@ -1932,8 +1931,7 @@
     "name": { "str": "bee venom gland" },
     "description": "A fragile, slightly quivering organ for the production and storage of honeybee venom.  You could extract some very useful chemicals from it with the right know-how, but only if you hurry.",
     "color": "yellow",
-    "fun": -50,
-    "use_action": [ "POISON" ]
+    "flags": [ "INEDIBLE" ]
   },
   {
     "id": "venom_paralytic",
@@ -1945,7 +1943,7 @@
     "material": [ "vegetable" ],
     "color": "light_gray",
     "fun": -50,
-    "vitamins": [ [ "vegetable_allergen", 1 ] ]
+    "flags": [ "INEDIBLE" ]
   },
   {
     "id": "triffid_fungicide",
@@ -1956,8 +1954,7 @@
     "description": "A triffid sac filled with what appears to be a triffid-produced antifungal agent.  It will likely already work as an antifungal compound for more offensive applications, but requires further refining before it can be used as a medical drug.",
     "material": [ "vegetable" ],
     "color": "light_blue",
-    "fun": -50,
-    "vitamins": [ [ "vegetable_allergen", 1 ] ]
+    "flags": [ "INEDIBLE" ]
   },
   {
     "id": "conc_venom",

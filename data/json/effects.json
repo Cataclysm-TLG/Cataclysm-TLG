@@ -3424,7 +3424,7 @@
   {
     "type": "effect_type",
     "id": "cocaine",
-    "name": [ "Sharp", "Wired", "Geeked", "Whiteout" ],
+    "name": [ "Cocaine Buzz", "Coked Up", "Geeked", "Whiteout" ],
     "desc": [
       "You've got a mild cocaine buzz going.  Feels good, feels clean.",
       "You're feeling chatty and energized, and probably way too confident.",
