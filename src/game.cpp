@@ -11074,10 +11074,12 @@ int game::grabbed_furn_move_time( const tripoint_rel_ms &dp )
                              !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, fdest ) &&
                              !here.has_flag( ter_furn_flag::TFLAG_DESTROY_ITEM, fdest ) &&
                              only_liquid_items;
+
     const furn_t &fo = here.furn( fpos ).obj();
-    const bool src_item_ok = fo.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
-                             fo.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER ) ||
-                             fo.has_flag( ter_furn_flag::TFLAG_SEALED );
+    const bool src_item_ok = ( fo.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
+                             fo.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM ) ||
+                             fo.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER ) ) &&
+                             !fo.has_flag( ter_furn_flag::TFLAG_SEALED ) ;
 
     int str_req = furntype.move_str_req;
     // Factor in weight of items contained in the furniture.
@@ -11168,9 +11170,10 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
                              !here.has_flag( ter_furn_flag::TFLAG_DESTROY_ITEM, fdest );
 
     const furn_t &fo = here.furn( fpos ).obj();
-    const bool src_item_ok = fo.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
-                             fo.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER ) ||
-                             fo.has_flag( ter_furn_flag::TFLAG_SEALED );
+    const bool src_item_ok = ( fo.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
+                             fo.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM ) ||
+                             fo.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER ) ) &&
+                             !fo.has_flag( ter_furn_flag::TFLAG_SEALED );
 
     const int fire_intensity = here.get_field_intensity( fpos, fd_fire );
     time_duration fire_age = here.get_field_age( fpos, fd_fire );
@@ -11272,8 +11275,22 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
         here.i_clear( fdest );
     }
 
-    if( src_items > 0 ) { // Move the stuff inside.
-        if( dst_item_ok && src_item_ok ) {
+    if( src_items > 0 || dst_items > 0 ) { // We have to move stuff.
+        if( dst_items == 0 ) {
+            // There's nothing in the target tile, so our container can move its own stuff.
+            std::list<item> temp;
+            map_stack src_ms = here.i_at( fpos );
+            map_stack dst_ms = here.i_at( fdest );
+
+            // Move source items to temp.
+            std::move( src_ms.begin(), src_ms.end(), std::back_inserter( temp ) );
+            here.i_clear( fpos );
+
+            // Move source items (from temp) to destination.
+            for( item &src_item : temp ) {
+                here.add_item( fdest, src_item );
+            }
+        } else if( dst_item_ok && src_item_ok ) {
             // Assume contents of both cells are legal, so we can just swap contents.
             std::list<item> temp;
             map_stack src_ms = here.i_at( fpos );
