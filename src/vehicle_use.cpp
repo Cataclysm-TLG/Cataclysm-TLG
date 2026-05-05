@@ -358,7 +358,7 @@ void vehicle::build_electronics_menu( map &here, veh_menu &menu )
     add_toggle( pgettext( "electronics menu option", "planter" ),
                 "TOGGLE_PLANTER", "PLANTER" );
     add_toggle( pgettext( "electronics menu option", "rockwheel" ),
-                "TOGGLE_PLOW", "ROCKWHEEL" );
+                "TOGGLE_ROCKWHEEL", "ROCKWHEEL" );
     add_toggle( pgettext( "electronics menu option", "roadheader" ),
                 "TOGGLE_PLOW", "ROADHEAD" );
     add_toggle( pgettext( "electronics menu option", "scoop" ),

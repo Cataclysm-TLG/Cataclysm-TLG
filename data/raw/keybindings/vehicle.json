@@ -329,6 +329,13 @@
     "bindings": [ { "input_method": "keyboard_any", "key": "w" } ]
   },
   {
+    "id": "TOGGLE_ROCKWHEEL",
+    "type": "keybinding",
+    "category": "VEHICLE",
+    "name": "Toggle rockwheel",
+    "bindings": [ { "input_method": "keyboard_any", "key": "w" } ]
+  },
+  {
     "id": "TOGGLE_REACTOR",
     "type": "keybinding",
     "category": "VEHICLE",
