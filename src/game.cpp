@@ -11076,10 +11076,10 @@ int game::grabbed_furn_move_time( const tripoint_rel_ms &dp )
                              only_liquid_items;
 
     const furn_t &fo = here.furn( fpos ).obj();
-    const bool src_item_ok = ( fo.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
+    const bool src_item_ok = fo.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
                              fo.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM ) ||
-                             fo.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER ) ) &&
-                             !fo.has_flag( ter_furn_flag::TFLAG_SEALED ) ;
+                             fo.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER ) ||
+                             fo.has_flag( ter_furn_flag::TFLAG_SEALED ) ;
 
     int str_req = furntype.move_str_req;
     // Factor in weight of items contained in the furniture.
@@ -11170,10 +11170,10 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
                              !here.has_flag( ter_furn_flag::TFLAG_DESTROY_ITEM, fdest );
 
     const furn_t &fo = here.furn( fpos ).obj();
-    const bool src_item_ok = ( fo.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
+    const bool src_item_ok = fo.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
                              fo.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM ) ||
-                             fo.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER ) ) &&
-                             !fo.has_flag( ter_furn_flag::TFLAG_SEALED );
+                             fo.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER ) ||
+                             fo.has_flag( ter_furn_flag::TFLAG_SEALED );
 
     const int fire_intensity = here.get_field_intensity( fpos, fd_fire );
     time_duration fire_age = here.get_field_age( fpos, fd_fire );
