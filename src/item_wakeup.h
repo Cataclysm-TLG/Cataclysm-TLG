@@ -18,8 +18,7 @@ class JsonObject;
 class JsonOut;
 class item;
 
-// Categorizes what a scheduled wakeup is for.  Distinct kinds for one item
-// coexist independently.
+// Distinct kinds coexist per item.
 enum class item_wakeup_kind : uint8_t {
     alarm = 0,
     ready_check,
@@ -27,18 +26,15 @@ enum class item_wakeup_kind : uint8_t {
     last
 };
 
-// Persisted vehicle hint.  vpart_reference is a runtime handle and must
-// not appear on disk; this struct stores only stable values.  The cargo
-// square is authoritative; part_index/mount_offset are fallback hints
-// that may be stale after vehicle moves or repairs.
+// Persisted vehicle hint.  cargo_square is authoritative; part_index and
+// mount_offset are fallbacks that may be stale across moves or repairs.
 struct vehicle_hint {
     tripoint_abs_ms cargo_square;
     int part_index = -1;
     point_rel_ms mount_offset;
 };
 
-// Hint for resolving an item by uid.  Drives the lookup order in
-// find_item_by_uid; never the source of truth for item identity.
+// Hint for find_item_by_uid lookup; never authoritative.
 struct item_locator_hint {
     enum class place : uint8_t { map, vehicle, character, unknown };
     place where = place::unknown;
@@ -47,9 +43,7 @@ struct item_locator_hint {
     item_locator_hint() = default;
 };
 
-// Producer record returned by item::enumerate_scheduled_wakeups.  Items
-// describe their desired wakeups by (kind, when); the manager stamps the
-// caller-supplied hint when (re)scheduling.
+// Producer record.  Manager stamps the caller-supplied hint when scheduling.
 struct desired_wakeup {
     item_wakeup_kind kind;
     time_point when;
@@ -63,9 +57,8 @@ struct scheduled_wakeup_info {
     item_locator_hint hint;
 };
 
-// Item-targeted wakeup scheduler.  Items remain authoritative for runtime
-// state; this queue is advisory and can be reconstructed via
-// rebuild_for_item from item state.
+// Item-targeted wakeup scheduler.  Items are authoritative; this queue is
+// advisory and reconstructible via rebuild_for_item.
 class item_wakeup_manager
 {
     public:
@@ -82,10 +75,8 @@ class item_wakeup_manager
         void cancel( int64_t uid, item_wakeup_kind kind );
         void cancel_all( int64_t uid );
 
-        // Reconcile the manager's queue for a single item against the item's
-        // own enumerate_scheduled_wakeups().  Items the manager has but the
-        // item no longer wants are cancelled; new desires are scheduled.
-        // Idempotent.  Hint is stamped onto every (re)scheduled entry.
+        // Reconcile this item's entries against its enumerate_scheduled_wakeups().
+        // Idempotent.
         void rebuild_for_item( item &it, item_locator_hint hint );
 
         bool is_scheduled( int64_t uid, item_wakeup_kind kind ) const;
@@ -95,11 +86,8 @@ class item_wakeup_manager
         std::vector<scheduled_wakeup_info> dump() const;
         stats get_stats() const;
 
-        // Two-phase, non-reentrant.  Snapshot all entries with when <= now,
-        // erase from live queue, then dispatch handlers from the snapshot.
-        // Recursion guard asserts process() is not called from a handler.
-        // Wakeups newly scheduled for <= now during a handler do NOT fire
-        // again in the same pass.
+        // Two-phase: snapshot expired entries, erase, dispatch from snapshot.
+        // Asserts non-reentrant.  Same-pass reschedule does not double-fire.
         void process( time_point now );
 
         // Test isolation only.  Drops every entry and zeroes stats.
@@ -117,20 +105,31 @@ class item_wakeup_manager
         };
 
         std::vector<entry> entries_;
-        stats stats_;
+        stats stats_; // NOLINT(cata-serialize)
+        int stale_seen_uids_ = 0; // NOLINT(cata-serialize)
+        bool stale_msg_emitted_ = false; // NOLINT(cata-serialize)
 };
 
-// Game-owned accessor.
 item_wakeup_manager &get_item_wakeups();
 
-// find_item_by_uid is declared in item_location.h.
-
-// Test-only handler registry.  Production builds compile this out.
-#ifdef CATA_TESTS
+// Test handler registry.  Always compiled in; production cost is one
+// empty-map lookup per dispatch.
 using item_wakeup_test_handler =
     void( * )( item &it, item_wakeup_kind kind, time_point now );
 void register_test_wakeup_handler( const itype_id &id, item_wakeup_test_handler fn );
 void clear_test_wakeup_handlers();
-#endif
+
+// Dispatch entry called from item::actualize_scheduled.
+void actualize_scheduled_dispatch( item &it, item_wakeup_kind kind, time_point now );
+
+// Test producer registry.  See test handler registry note above.
+using item_wakeup_test_enumerator =
+    std::vector<desired_wakeup>( * )( const item &it );
+void register_test_enumerate_handler( const itype_id &id,
+                                      item_wakeup_test_enumerator fn );
+void clear_test_enumerate_handlers();
+
+// Dispatch entry called from item::enumerate_scheduled_wakeups.
+std::vector<desired_wakeup> enumerate_scheduled_dispatch( const item &it );
 
 #endif // CATA_SRC_ITEM_WAKEUP_H
