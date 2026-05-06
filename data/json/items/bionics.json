@@ -817,7 +817,7 @@
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Air Filtration System CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "An advanced filtration system that is implanted in the user's trachea.  If toxins or airborne diseases find their way into the windpipe, the filter will attempt to remove them.",
+    "description": "A system of complex filters to be installed throughout the user's airways.  These will restrict breathing slightly, but will offer decent protection from smoke, dust, and airborne contaminants when unpowered, and unparalleled protection when powered.",
     "price": "4500 USD",
     "price_postapoc": "60 USD",
     "weight": "100 g",
