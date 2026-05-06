@@ -487,8 +487,8 @@
       { "condition": "ACTIVE", "values": [ { "value": "DEXTERITY", "add": 2 } ] },
       { "condition": "INACTIVE", "values": [ { "value": "DEXTERITY", "add": -1 } ] }
     ],
-    "act_cost": "4 J",
-    "react_cost": "4 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -613,8 +613,8 @@
       { "condition": "INACTIVE", "values": [ { "value": "PERCEPTION", "add": -1 } ] }
     ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY" ],
-    "act_cost": "4 J",
-    "react_cost": "4 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -764,15 +764,6 @@
     "act_cost": "10 kJ"
   },
   {
-    "id": "bio_gills",
-    "type": "bionic",
-    "name": { "str": "Respirator" },
-    "description": "A complex respiration augmentation system.  Improves respiration ability in air and allows breathing water.  Will automatically turn on when drowning.  Turn on to recharge stamina faster, at moderate power cost.  Asthmatics may also use it to stop asthma attacks.",
-    "occupied_bodyparts": [ [ "torso", 8 ], [ "head", 2 ], [ "mouth", 2 ] ],
-    "flags": [ "BIONIC_TOGGLED" ],
-    "trigger_cost": "25 kJ"
-  },
-  {
     "id": "bio_ground_sonar",
     "type": "bionic",
     "name": { "str": "Terranian Sonar" },
@@ -887,8 +878,8 @@
       { "condition": "ACTIVE", "values": [ { "value": "INTELLIGENCE", "add": 2 } ] },
       { "condition": "INACTIVE", "values": [ { "value": "INTELLIGENCE", "add": -1 } ] }
     ],
-    "act_cost": "4 J",
-    "react_cost": "4 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -1132,10 +1123,15 @@
     "id": "bio_purifier",
     "type": "bionic",
     "name": { "str": "Air Filtration System" },
-    "description": "Surgically implanted in your trachea is an advanced filtration system.  If toxins or airborne diseases find their way into your windpipe, the filter will attempt to remove them.",
+    "description": "An advanced system of filters have been surgically implanted throughout your airway.  They provide minor protection from smoke and irritants even while unpowered, and when powered will filter out most all harmful airborne compounds.",
     "occupied_bodyparts": [ [ "torso", 5 ], [ "mouth", 1 ] ],
-    "env_protec": [ [ "mouth", 15 ] ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "env_protec": [ [ "mouth", 8 ] ],
+    "encumbrance": [ [ "mouth", 10 ] ],
+    "toggled_pseudo_items": [ "armor_bio_filter" ],
+    "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "act_cost": "15 J",
+    "react_cost": "15 J",
+    "time": "1 s"
   },
   {
     "id": "bio_radio",
@@ -1321,8 +1317,8 @@
       { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 2 } ] },
       { "condition": "INACTIVE", "values": [ { "value": "STRENGTH", "add": -1 } ] }
     ],
-    "act_cost": "4 J",
-    "react_cost": "4 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
