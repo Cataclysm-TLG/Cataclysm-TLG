@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstdint>
 #include <functional>
 #include <optional>
@@ -844,4 +845,131 @@ TEST_CASE( "item_wakeup_resolve_off_bubble_returns_invalid",
     const tripoint_abs_ms far_away{ 1000000, 1000000, 0 };
     item_location loc = find_item_by_uid( 12345, hint_for_map( far_away ) );
     CHECK_FALSE( loc );
+}
+
+TEST_CASE( "item_wakeup_update_displaces_top", "[item_wakeup][heap]" )
+{
+    item_wakeup_manager mgr;
+    const time_point t_early = calendar::turn_zero + 1_minutes;
+    const time_point t_late = calendar::turn_zero + 10_minutes;
+
+    mgr.schedule_or_update( 5, t_early, item_wakeup_kind::ready_check, hint_unknown() );
+    mgr.schedule_or_update( 9, t_early + 1_minutes, item_wakeup_kind::ready_check,
+                            hint_unknown() );
+    mgr.schedule_or_update( 5, t_late, item_wakeup_kind::ready_check, hint_unknown() );
+
+    std::optional<scheduled_wakeup_info> top = mgr.peek_next_wakeup();
+    REQUIRE( top.has_value() );
+    CHECK( top->uid == 9 );
+    CHECK( top->when == t_early + 1_minutes );
+    CHECK( mgr.get_stats().total_pending == 2 );
+}
+
+TEST_CASE( "item_wakeup_cancel_top_lets_next_fire", "[item_wakeup][heap]" )
+{
+    item_wakeup_manager mgr;
+    const time_point t_early = calendar::turn_zero + 1_minutes;
+    const time_point t_late = calendar::turn_zero + 5_minutes;
+
+    mgr.schedule_or_update( 1, t_early, item_wakeup_kind::ready_check, hint_unknown() );
+    mgr.schedule_or_update( 2, t_late, item_wakeup_kind::ready_check, hint_unknown() );
+    mgr.cancel( 1, item_wakeup_kind::ready_check );
+
+    std::optional<scheduled_wakeup_info> top = mgr.peek_next_wakeup();
+    REQUIRE( top.has_value() );
+    CHECK( top->uid == 2 );
+    CHECK( top->when == t_late );
+}
+
+TEST_CASE( "item_wakeup_serialize_after_update_drops_tombstones",
+           "[item_wakeup][heap][persistence]" )
+{
+    item_wakeup_manager src;
+    src.schedule_or_update( 5, calendar::turn_zero + 1_minutes,
+                            item_wakeup_kind::ready_check, hint_unknown() );
+    src.schedule_or_update( 5, calendar::turn_zero + 10_minutes,
+                            item_wakeup_kind::ready_check, hint_unknown() );
+    src.cancel( 5, item_wakeup_kind::ready_check );
+
+    std::ostringstream os;
+    JsonOut jsout( os );
+    src.serialize( jsout );
+
+    item_wakeup_manager dst;
+    JsonValue jv = json_loader::from_string( os.str() );
+    JsonObject jo = jv.get_object();
+    dst.deserialize( jo );
+
+    CHECK( dst.get_stats().total_pending == 0 );
+    CHECK_FALSE( dst.is_scheduled( 5, item_wakeup_kind::ready_check ) );
+}
+
+TEST_CASE( "item_wakeup_peek_tiebreak_matches_dump_order", "[item_wakeup][heap]" )
+{
+    item_wakeup_manager mgr;
+    const time_point t = calendar::turn_zero + 5_minutes;
+    mgr.schedule_or_update( 5, t, item_wakeup_kind::ready_check, hint_unknown() );
+    mgr.schedule_or_update( 5, t, item_wakeup_kind::alarm, hint_unknown() );
+    mgr.schedule_or_update( 3, t, item_wakeup_kind::ready_check, hint_unknown() );
+    mgr.schedule_or_update( 3, t, item_wakeup_kind::alarm, hint_unknown() );
+
+    const std::vector<scheduled_wakeup_info> sorted = mgr.dump();
+    REQUIRE( sorted.size() == 4 );
+    const std::optional<scheduled_wakeup_info> top = mgr.peek_next_wakeup();
+    REQUIRE( top.has_value() );
+    CHECK( top->uid == sorted.front().uid );
+    CHECK( top->kind == sorted.front().kind );
+    CHECK( top->when == sorted.front().when );
+}
+
+TEST_CASE( "item_wakeup_dispatch_order_with_equal_when", "[item_wakeup][heap]" )
+{
+    clear_map();
+    install_test_handler();
+
+    avatar &u = get_avatar();
+    map &here = get_map();
+    const tripoint_bub_ms origin( 60, 60, 0 );
+    u.setpos( here, origin );
+    item &a = here.add_item( origin, item( itype_test_wakeup_dummy, calendar::turn ) );
+    item &b = here.add_item( origin, item( itype_test_wakeup_dummy, calendar::turn ) );
+    const int64_t uid_a = a.uid().get_value();
+    const int64_t uid_b = b.uid().get_value();
+    const int64_t small_uid = std::min( uid_a, uid_b );
+    const int64_t large_uid = std::max( uid_a, uid_b );
+
+    item_wakeup_manager mgr;
+    const time_point fire_at = calendar::turn + 1_minutes;
+    const item_locator_hint h = hint_for_map( here.get_abs( origin ) );
+    mgr.schedule_or_update( large_uid, fire_at, item_wakeup_kind::ready_check, h );
+    mgr.schedule_or_update( small_uid, fire_at, item_wakeup_kind::ready_check, h );
+
+    mgr.process( fire_at );
+    REQUIRE( fire_log().size() == 2 );
+    CHECK( fire_log()[0].uid == small_uid );
+    CHECK( fire_log()[1].uid == large_uid );
+}
+
+TEST_CASE( "item_wakeup_deserialize_restores_heap_invariant",
+           "[item_wakeup][heap][persistence]" )
+{
+    item_wakeup_manager src;
+    src.schedule_or_update( 9, calendar::turn_zero + 5_minutes,
+                            item_wakeup_kind::ready_check, hint_unknown() );
+    src.schedule_or_update( 1, calendar::turn_zero + 1_minutes,
+                            item_wakeup_kind::ready_check, hint_unknown() );
+
+    std::ostringstream os;
+    JsonOut jsout( os );
+    src.serialize( jsout );
+
+    item_wakeup_manager dst;
+    JsonValue jv = json_loader::from_string( os.str() );
+    JsonObject jo = jv.get_object();
+    dst.deserialize( jo );
+
+    std::optional<scheduled_wakeup_info> top = dst.peek_next_wakeup();
+    REQUIRE( top.has_value() );
+    CHECK( top->uid == 1 );
+    CHECK( top->when == calendar::turn_zero + 1_minutes );
 }

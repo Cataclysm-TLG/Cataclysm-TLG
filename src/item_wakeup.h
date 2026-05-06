@@ -3,13 +3,15 @@
 #define CATA_SRC_ITEM_WAKEUP_H
 
 #include <cstdint>
+#include <map>
 #include <optional>
 #include <utility>
 #include <variant>
 #include <vector>
 
 #include "calendar.h"
-#include "character_id.h"
+#include "character_id.h" // IWYU pragma: keep
+#include "colony.h"
 #include "coordinates.h"
 #include "point.h"
 #include "type_id.h"
@@ -104,7 +106,22 @@ class item_wakeup_manager
             item_locator_hint hint;
         };
 
-        std::vector<entry> entries_;
+        using entry_iter = cata::colony<entry>::iterator;
+        using key_t = std::pair<int64_t, item_wakeup_kind>;
+
+        // Pop tombstoned entries off heap_ until top points to a live node.
+        void clean_heap_top();
+        bool is_live( const entry_iter &it ) const;
+        static bool heap_greater( const entry_iter &a, const entry_iter &b );
+
+        cata::colony<entry> entries_;
+        // Source of liveness truth.  An entry_iter is live iff
+        // by_key_[{uid, kind}] == iter.  Stale heap nodes are reaped on
+        // pop or via clean_heap_top.
+        std::map<key_t, entry_iter> by_key_;
+        // Min-heap by (when, uid, kind), maintained via push_heap/pop_heap.
+        // Pure cache, reconstructible from entries_ + by_key_ on load.
+        std::vector<entry_iter> heap_; // NOLINT(cata-serialize)
         stats stats_; // NOLINT(cata-serialize)
         int stale_seen_uids_ = 0; // NOLINT(cata-serialize)
         bool stale_msg_emitted_ = false; // NOLINT(cata-serialize)

@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <map>
+#include <queue>
 #include <string>
 #include <utility>
 
@@ -214,40 +215,63 @@ static void dispatch_actualize( item &it, item_wakeup_kind kind, time_point now 
     }
 }
 
+// Min-heap comparator: top is smallest by (when, uid, kind).  push_heap and
+// friends produce a max-heap, so this returns true when `a` should sink
+// below `b`, i.e. `a` is greater.
+bool item_wakeup_manager::heap_greater( const entry_iter &a, const entry_iter &b )
+{
+    if( a->when != b->when ) {
+        return a->when > b->when;
+    }
+    if( a->uid != b->uid ) {
+        return a->uid > b->uid;
+    }
+    return static_cast<int>( a->kind ) > static_cast<int>( b->kind );
+}
+
+bool item_wakeup_manager::is_live( const entry_iter &it ) const
+{
+    const auto map_it = by_key_.find( {it->uid, it->kind} );
+    return map_it != by_key_.end() && map_it->second == it;
+}
+
+void item_wakeup_manager::clean_heap_top()
+{
+    while( !heap_.empty() && !is_live( heap_.front() ) ) {
+        const entry_iter top = heap_.front();
+        std::pop_heap( heap_.begin(), heap_.end(), heap_greater );
+        heap_.pop_back();
+        entries_.erase( top );
+    }
+}
+
 void item_wakeup_manager::schedule_or_update( int64_t uid, time_point when,
         item_wakeup_kind kind, item_locator_hint hint )
 {
-    auto match = std::find_if( entries_.begin(), entries_.end(),
-    [uid, kind]( const entry & e ) {
-        return e.uid == uid && e.kind == kind;
-    } );
-    if( match != entries_.end() ) {
-        match->when = when;
-        match->hint = hint;
-        return;
-    }
     entry e;
     e.uid = uid;
     e.kind = kind;
     e.when = when;
     e.hint = hint;
-    entries_.push_back( e );
+    const entry_iter new_it = entries_.insert( e );
+    by_key_[ {uid, kind}] = new_it;
+    heap_.push_back( new_it );
+    std::push_heap( heap_.begin(), heap_.end(), heap_greater );
+    clean_heap_top();
 }
 
 void item_wakeup_manager::cancel( int64_t uid, item_wakeup_kind kind )
 {
-    entries_.erase( std::remove_if( entries_.begin(), entries_.end(),
-    [uid, kind]( const entry & e ) {
-        return e.uid == uid && e.kind == kind;
-    } ), entries_.end() );
+    by_key_.erase( {uid, kind} );
+    clean_heap_top();
 }
 
 void item_wakeup_manager::cancel_all( int64_t uid )
 {
-    entries_.erase( std::remove_if( entries_.begin(), entries_.end(),
-    [uid]( const entry & e ) {
-        return e.uid == uid;
-    } ), entries_.end() );
+    for( int k = 0; k < static_cast<int>( item_wakeup_kind::last ); ++k ) {
+        by_key_.erase( {uid, static_cast<item_wakeup_kind>( k )} );
+    }
+    clean_heap_top();
 }
 
 void item_wakeup_manager::rebuild_for_item( item &it, item_locator_hint hint )
@@ -255,66 +279,62 @@ void item_wakeup_manager::rebuild_for_item( item &it, item_locator_hint hint )
     const int64_t uid = it.uid().get_value();
     const std::vector<desired_wakeup> desired = it.enumerate_scheduled_wakeups();
 
-    // Cancel kinds the item no longer wants.
-    entries_.erase( std::remove_if( entries_.begin(), entries_.end(),
-    [uid, &desired]( const entry & e ) {
-        if( e.uid != uid ) {
-            return false;
+    for( int k = 0; k < static_cast<int>( item_wakeup_kind::last ); ++k ) {
+        const item_wakeup_kind kind = static_cast<item_wakeup_kind>( k );
+        const bool wanted = std::any_of( desired.begin(), desired.end(),
+        [kind]( const desired_wakeup & d ) {
+            return d.kind == kind;
+        } );
+        if( !wanted ) {
+            by_key_.erase( {uid, kind} );
         }
-        for( const desired_wakeup &d : desired ) {
-            if( d.kind == e.kind ) {
-                return false;
-            }
-        }
-        return true;
-    } ), entries_.end() );
-
-    // Add or update each desired wakeup.
+    }
     for( const desired_wakeup &d : desired ) {
         schedule_or_update( uid, d.when, d.kind, hint );
     }
+    clean_heap_top();
 }
 
 bool item_wakeup_manager::is_scheduled( int64_t uid, item_wakeup_kind kind ) const
 {
-    return std::any_of( entries_.begin(), entries_.end(),
-    [uid, kind]( const entry & e ) {
-        return e.uid == uid && e.kind == kind;
-    } );
+    return by_key_.count( {uid, kind} ) > 0;
 }
 
 std::optional<time_point> item_wakeup_manager::get( int64_t uid,
         item_wakeup_kind kind ) const
 {
-    auto match = std::find_if( entries_.begin(), entries_.end(),
-    [uid, kind]( const entry & e ) {
-        return e.uid == uid && e.kind == kind;
-    } );
-    if( match == entries_.end() ) {
+    const auto map_it = by_key_.find( {uid, kind} );
+    if( map_it == by_key_.end() ) {
         return std::nullopt;
     }
-    return match->when;
+    return map_it->second->when;
 }
 
 std::optional<scheduled_wakeup_info> item_wakeup_manager::peek_next_wakeup() const
 {
-    std::vector<scheduled_wakeup_info> all = dump();
-    if( all.empty() ) {
+    if( heap_.empty() ) {
         return std::nullopt;
     }
-    return all.front();
+    const entry_iter top = heap_.front();
+    scheduled_wakeup_info info;
+    info.uid = top->uid;
+    info.kind = top->kind;
+    info.when = top->when;
+    info.hint = top->hint;
+    return info;
 }
 
 std::vector<scheduled_wakeup_info> item_wakeup_manager::dump() const
 {
     std::vector<scheduled_wakeup_info> out;
-    out.reserve( entries_.size() );
-    for( const entry &e : entries_ ) {
+    out.reserve( by_key_.size() );
+    for( const auto &kv : by_key_ ) {
+        const entry_iter it = kv.second;
         scheduled_wakeup_info info;
-        info.uid = e.uid;
-        info.kind = e.kind;
-        info.when = e.when;
-        info.hint = e.hint;
+        info.uid = it->uid;
+        info.kind = it->kind;
+        info.when = it->when;
+        info.hint = it->hint;
         out.push_back( info );
     }
     std::sort( out.begin(), out.end(),
@@ -333,7 +353,7 @@ std::vector<scheduled_wakeup_info> item_wakeup_manager::dump() const
 item_wakeup_manager::stats item_wakeup_manager::get_stats() const
 {
     stats s = stats_;
-    s.total_pending = static_cast<int>( entries_.size() );
+    s.total_pending = static_cast<int>( by_key_.size() );
     return s;
 }
 
@@ -342,28 +362,25 @@ void item_wakeup_manager::process( time_point now )
     cata_assert( !processing_active );
     processing_active = true;
 
-    // Snapshot expired entries in deterministic order, erase from live queue.
     std::vector<entry> snapshot;
-    snapshot.reserve( entries_.size() );
-    auto first_pending = std::partition( entries_.begin(), entries_.end(),
-    [now]( const entry & e ) {
-        return e.when > now;
-    } );
-    snapshot.assign( first_pending, entries_.end() );
-    entries_.erase( first_pending, entries_.end() );
-    std::sort( snapshot.begin(), snapshot.end(),
-    []( const entry & a, const entry & b ) {
-        if( a.when != b.when ) {
-            return a.when < b.when;
+    while( !heap_.empty() ) {
+        const entry_iter top = heap_.front();
+        if( !is_live( top ) ) {
+            std::pop_heap( heap_.begin(), heap_.end(), heap_greater );
+            heap_.pop_back();
+            entries_.erase( top );
+            continue;
         }
-        if( a.uid != b.uid ) {
-            return a.uid < b.uid;
+        if( top->when > now ) {
+            break;
         }
-        return static_cast<int>( a.kind ) < static_cast<int>( b.kind );
-    } );
+        snapshot.push_back( *top );
+        std::pop_heap( heap_.begin(), heap_.end(), heap_greater );
+        heap_.pop_back();
+        by_key_.erase( {top->uid, top->kind} );
+        entries_.erase( top );
+    }
 
-    // Dispatch each.  Stale uids increment the counter; threshold breach
-    // emits a single debugmsg per manager lifetime (reset by clear()).
     for( const entry &e : snapshot ) {
         item_location loc = find_item_by_uid( e.uid, e.hint );
         if( !loc ) {
@@ -379,12 +396,15 @@ void item_wakeup_manager::process( time_point now )
         loc->actualize_scheduled( e.kind, now );
     }
 
+    clean_heap_top();
     processing_active = false;
 }
 
 void item_wakeup_manager::clear()
 {
     entries_.clear();
+    by_key_.clear();
+    heap_.clear();
     stats_ = stats{};
     stale_seen_uids_ = 0;
     stale_msg_emitted_ = false;
@@ -396,18 +416,24 @@ void item_wakeup_manager::serialize( JsonOut &jsout ) const
     jsout.member( "version", CURRENT_VERSION );
     jsout.member( "wakeups" );
     jsout.start_array();
-    std::vector<entry> sorted = entries_;
-    std::sort( sorted.begin(), sorted.end(),
-    []( const entry & a, const entry & b ) {
-        if( a.when != b.when ) {
-            return a.when < b.when;
+    std::vector<entry_iter> live;
+    live.reserve( by_key_.size() );
+    for( const std::pair<const key_t, entry_iter> &kv : by_key_ ) {
+        live.push_back( kv.second );
+    }
+    std::sort( live.begin(), live.end(),
+    []( const entry_iter & a, const entry_iter & b ) {
+        if( a->when != b->when ) {
+            return a->when < b->when;
         }
-        if( a.uid != b.uid ) {
-            return a.uid < b.uid;
+        if( a->uid != b->uid ) {
+            return a->uid < b->uid;
         }
-        return static_cast<int>( a.kind ) < static_cast<int>( b.kind );
+        return static_cast<int>( a->kind ) < static_cast<int>( b->kind );
     } );
-    for( const entry &e : sorted ) {
+    cata_assert( entries_.size() >= live.size() );
+    for( const entry_iter &it : live ) {
+        const entry &e = *it;
         jsout.start_object();
         jsout.member( "uid", e.uid );
         jsout.member( "kind", kind_to_string( e.kind ) );
@@ -422,10 +448,7 @@ void item_wakeup_manager::serialize( JsonOut &jsout ) const
 
 void item_wakeup_manager::deserialize( const JsonObject &jo )
 {
-    entries_.clear();
-    stats_ = stats{};
-    stale_seen_uids_ = 0;
-    stale_msg_emitted_ = false;
+    clear();
 
     int version = 0;
     if( !jo.read( "version", version ) ) {
@@ -443,8 +466,6 @@ void item_wakeup_manager::deserialize( const JsonObject &jo )
     std::map<std::pair<int64_t, item_wakeup_kind>, entry> dedup;
     int dropped = 0;
     for( JsonObject row : jo.get_array( "wakeups" ) ) {
-        // Consume every field unconditionally so the strict JSON parser
-        // does not flag unread members on bad entries.
         row.allow_omitted_members();
         int64_t uid = 0;
         std::string kind_str;
@@ -470,9 +491,9 @@ void item_wakeup_manager::deserialize( const JsonObject &jo )
         e.kind = kind;
         e.when = when;
         e.hint = hint;
-        // Dedupe by (uid, kind), keeping the latest when.
-        auto key = std::make_pair( uid, kind );
-        auto existing = dedup.find( key );
+        const std::pair<int64_t, item_wakeup_kind> key{ uid, kind };
+        const std::map<std::pair<int64_t, item_wakeup_kind>, entry>::const_iterator existing
+            = dedup.find( key );
         if( existing == dedup.end() ) {
             dedup[key] = e;
         } else {
@@ -482,10 +503,12 @@ void item_wakeup_manager::deserialize( const JsonObject &jo )
             }
         }
     }
-    entries_.reserve( dedup.size() );
     for( const auto &kv : dedup ) {
-        entries_.push_back( kv.second );
+        const entry_iter it = entries_.insert( kv.second );
+        by_key_[kv.first] = it;
+        heap_.push_back( it );
     }
+    std::make_heap( heap_.begin(), heap_.end(), heap_greater );
     stats_.dropped_on_load = dropped;
 }
 

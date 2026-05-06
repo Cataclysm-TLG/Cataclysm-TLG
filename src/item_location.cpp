@@ -51,6 +51,7 @@
 #include "visitable.h"
 #include "vpart_position.h"
 #include "value_ptr.h"
+#include "vpart_range.h"
 #include "weighted_list.h"
 
 template <typename T>
