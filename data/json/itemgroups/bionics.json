@@ -28,7 +28,6 @@
       [ "bio_targeting", 10 ],
       [ "bio_ground_sonar", 10 ],
       [ "bio_membrane", 10 ],
-      [ "bio_gills", 10 ],
       [ "bio_purifier", 10 ],
       [ "bio_climate", 10 ],
       [ "bio_heatsink", 10 ],

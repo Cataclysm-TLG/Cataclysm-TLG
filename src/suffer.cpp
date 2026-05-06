@@ -71,7 +71,6 @@ static const addiction_id addiction_nicotine( "nicotine" );
 static const bionic_id bio_dis_acid( "bio_dis_acid" );
 static const bionic_id bio_dis_shock( "bio_dis_shock" );
 static const bionic_id bio_geiger( "bio_geiger" );
-static const bionic_id bio_gills( "bio_gills" );
 static const bionic_id bio_power_weakness( "bio_power_weakness" );
 static const bionic_id bio_radleak( "bio_radleak" );
 static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
@@ -86,6 +85,7 @@ static const efftype_id effect_deaf( "deaf" );
 static const efftype_id effect_disabled( "disabled" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_drunk( "drunk" );
+static const efftype_id effect_formication( "formication" );
 static const efftype_id effect_hallu( "hallu" );
 static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_iodine( "iodine" );
@@ -322,13 +322,8 @@ void suffer::while_underwater( Character &you )
         you.oxygen += 12;
     }
     if( you.oxygen <= 5 ) {
-        if( you.has_bionic( bio_gills ) && you.get_power_level() >= bio_gills->power_trigger ) {
-            you.oxygen += 5;
-            you.mod_power_level( -bio_gills->power_trigger );
-        } else {
-            you.add_msg_if_player( m_bad, _( "You're drowning!" ) );
-            you.apply_damage( nullptr, bodypart_id( "torso" ), rng( 1, 4 ) );
-        }
+        you.add_msg_if_player( m_bad, _( "You're drowning!" ) );
+        you.apply_damage( nullptr, bodypart_id( "torso" ), rng( 1, 4 ) );
     }
     if( you.has_trait( trait_FRESHWATEROSMOSIS ) &&
         !get_map().has_flag_ter( ter_furn_flag::TFLAG_SALT_WATER, you.pos_bub() ) &&
@@ -564,62 +559,47 @@ void suffer::while_awake( Character &you, const int current_stim )
 void suffer::from_chemimbalance( Character &you )
 {
     if( one_turn_in( 6_hours ) && !you.has_flag( json_flag_PAIN_IMMUNE ) && rng( 0, 1 ) == 1 ) {
-        you.add_msg_if_player( m_bad, _( "You suddenly feel sharp pain for no reason." ) );
+        you.add_msg_if_player( m_bad, _( "Your body aches." ) );
         you.mod_pain( 3 * rng( 1, 3 ) );
     }
-    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
-        int pkilladd = 5 * rng( -1, 2 );
-        if( pkilladd > 0 ) {
-            you.add_msg_if_player( m_bad, _( "You suddenly feel numb." ) );
-        } else if( ( pkilladd < 0 ) && ( !you.has_flag( json_flag_PAIN_IMMUNE ) ) ) {
-            you.add_msg_if_player( m_bad, _( "You suddenly ache." ) );
-        }
-        you.mod_painkiller( pkilladd );
-    }
     if( one_turn_in( 6_hours ) && !you.has_effect( effect_sleep ) && rng( 0, 1 ) == 1 ) {
-        you.add_msg_if_player( m_bad, _( "You feel dizzy for a moment." ) );
+        if( one_in( 2 ) ) {
+            you.add_msg_if_player( m_bad, _( "You feel dizzy for a moment." ) );
+        }
         you.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.1, 0.3 ) );
     }
     if( one_turn_in( 6_hours )  && rng( 0, 1 ) == 1 ) {
-        int hungadd = 5 * rng( -1, 3 );
-        if( hungadd > 0 ) {
-            you.add_msg_if_player( m_bad, _( "You suddenly feel hungry." ) );
-        } else {
-            you.add_msg_if_player( m_good, _( "You suddenly feel a little full." ) );
+        if( one_in( 2 ) ) {
+            you.add_msg_if_player( m_bad, _( "Your mouth feels dry." ) );
         }
-        you.mod_hunger( hungadd );
-    }
-    if( one_turn_in( 6_hours )  && rng( 0, 1 ) == 1 ) {
-        you.add_msg_if_player( m_bad, _( "You suddenly feel thirsty." ) );
         you.mod_thirst( 5 * rng( 1, 3 ) );
     }
     if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
-        you.add_msg_if_player( m_good, _( "You feel fatigued all of a sudden." ) );
+        if( one_in( 2 ) ) {
+            you.add_msg_if_player( m_good, _( "You feel sleepy." ) );
+        }
         you.mod_fatigue( 10 * rng( 2, 4 ) );
+    }
+    if( one_turn_in( 8_hours ) && rng( 0, 2 ) == 1 ) {
+        if( one_in( 2 ) ) {
+            you.add_msg_if_player( m_good, _( "You feel restless." ) );
+        }
+        you.mod_fatigue( -10 * rng( 1, 2 ) );
+    }
+    if( one_turn_in( 8_hours ) && rng( 0, 2 ) == 1 ) {
+        const bodypart_id &itch = you.random_body_part( true );
+        you.schedule_effect( effect_formication, 10_minutes * rng_float( 0.25f, 1.25f ), itch );
+    }
+    if( one_turn_in( 8_hours ) && rng( 0, 3 ) == 1 ) {
+        if( you.get_effect_int( effect_deaf ) < 2 ) {
+            you.add_effect( effect_deaf, 250_seconds );
+        }
     }
     if( one_turn_in( 8_hours ) && rng( 0, 1 ) == 1 ) {
         if( one_in( 3 ) ) {
             you.add_morale( morale_feeling_good, 20, 100 );
         } else {
             you.add_morale( morale_feeling_bad, -20, -100 );
-        }
-    }
-    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
-        if( one_in( 3 ) ) {
-            you.add_msg_if_player( m_bad, _( "You suddenly feel very cold." ) );
-            you.set_all_parts_temp_cur( BODYTEMP_VERY_COLD );
-        } else {
-            you.add_msg_if_player( m_bad, _( "You suddenly feel cold." ) );
-            you.set_all_parts_temp_cur( BODYTEMP_COLD );
-        }
-    }
-    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
-        if( one_in( 3 ) ) {
-            you.add_msg_if_player( m_bad, _( "You suddenly feel very hot." ) );
-            you.set_all_parts_temp_cur( BODYTEMP_VERY_HOT );
-        } else {
-            you.add_msg_if_player( m_bad, _( "You suddenly feel hot." ) );
-            you.set_all_parts_temp_cur( BODYTEMP_HOT );
         }
     }
 }
@@ -639,8 +619,6 @@ void suffer::from_asthma( Character &you, const int current_stim )
     }
     bool auto_use = you.has_charges( itype_inhaler, 1 ) || you.has_charges( itype_oxygen_tank, 1 ) ||
                     you.has_charges( itype_smoxygen_tank, 1 );
-    bool oxygenator = you.has_bionic( bio_gills ) &&
-                      you.get_power_level() >= ( bio_gills->power_trigger / 8 );
     if( you.underwater ) {
         you.oxygen = you.oxygen / 2;
         auto_use = false;
@@ -654,15 +632,10 @@ void suffer::from_asthma( Character &you, const int current_stim )
         inventory map_inv;
         map_inv.form_from_map( you.pos_bub(), 2, &you );
         // check if an inhaler is somewhere near
-        bool nearby_use = auto_use || oxygenator || map_inv.has_charges( itype_inhaler, 1 ) ||
+        bool nearby_use = auto_use || map_inv.has_charges( itype_inhaler, 1 ) ||
                           map_inv.has_charges( itype_oxygen_tank, 1 ) ||
                           map_inv.has_charges( itype_smoxygen_tank, 1 );
-        // check if character has an oxygenator first
-        if( oxygenator ) {
-            you.mod_power_level( -bio_gills->power_trigger / 8 );
-            you.add_msg_if_player( m_info, _( "You use your Oxygenator to clear it up, "
-                                              "then go back to sleep." ) );
-        } else if( auto_use  && !you.has_bionic( bio_sleep_shutdown ) ) {
+        if( auto_use  && !you.has_bionic( bio_sleep_shutdown ) ) {
             if( you.use_charges_if_avail( itype_inhaler, 1 ) ) {
                 you.add_msg_if_player( m_info, _( "You use your inhaler and go back to sleep." ) );
                 you.add_effect( effect_took_antiasthmatic, rng( 6_hours, 12_hours ) );

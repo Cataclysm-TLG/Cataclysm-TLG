@@ -109,7 +109,6 @@ static const bionic_id bio_emp( "bio_emp" );
 static const bionic_id bio_evap( "bio_evap" );
 static const bionic_id bio_flashbang( "bio_flashbang" );
 static const bionic_id bio_geiger( "bio_geiger" );
-static const bionic_id bio_gills( "bio_gills" );
 static const bionic_id bio_jointservo( "bio_jointservo" );
 static const bionic_id bio_lighter( "bio_lighter" );
 static const bionic_id bio_lockpick( "bio_lockpick" );
@@ -1834,22 +1833,9 @@ void Character::process_bionic( bionic &bio )
         int max_pkill = std::min( 150, pain );
         if( pkill < max_pkill ) {
             mod_painkiller( 1 );
-            mod_power_level( -trigger_cost );
-        }
-
-        // Only dull pain so extreme that we can't pkill it safely
-        if( pkill >= 150 && pain > pkill && get_stim() > -150 ) {
-            mod_pain( -1 );
-            // Negative side effect: negative stim
-            mod_stim( -1 );
-            mod_power_level( -trigger_cost );
-        }
-    } else if( bio.id == bio_gills ) {
-        const units::energy trigger_cost = bio.info().power_trigger / 8;
-        if( has_effect( effect_asthma ) && get_power_level() >= trigger_cost ) {
-            add_msg_if_player( m_good,
-                               _( "You feel your throat open up and air filling your lungs!" ) );
-            remove_effect( effect_asthma );
+            if( one_in( 10 ) ) {
+                mod_fatigue( 1 );
+            }
             mod_power_level( -trigger_cost );
         }
     } else if( bio.id == bio_evap ) {
