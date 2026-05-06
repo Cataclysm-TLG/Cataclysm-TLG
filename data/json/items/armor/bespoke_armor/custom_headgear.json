@@ -204,7 +204,7 @@
         "covers": [ "head" ],
         "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
         "coverage": 100,
-        "encumbrance": [ 9, 9 ]
+        "encumbrance": [ 22, 22 ]
       },
       {
         "material": [
