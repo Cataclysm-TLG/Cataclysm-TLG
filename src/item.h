@@ -46,6 +46,8 @@ class Character;
 class Creature;
 class JsonObject;
 class JsonOut;
+struct desired_wakeup;
+enum class item_wakeup_kind : uint8_t;
 class book_proficiency_bonuses;
 class enchantment;
 class enchant_cache;
@@ -1508,6 +1510,15 @@ class item : public visitable
 
         bool leak( map &here, Character *carrier, const tripoint_bub_ms &pos,
                    item_pocket *pocke = nullptr );
+
+        // Producer contract for the item wakeup scheduler.  Returns the
+        // (kind, when) pairs this item currently wants scheduled.  Default
+        // empty; only items with their own time-based state override.
+        std::vector<desired_wakeup> enumerate_scheduled_wakeups() const;
+
+        // Consumer for a fired wakeup.  Must be idempotent: receiving the
+        // same (kind, now) twice must not corrupt state.
+        void actualize_scheduled( item_wakeup_kind kind, time_point now );
 
         struct link_data {
             /// State of the link's source connection, the end usually represented by the device/cable item itself. @ref link_state.

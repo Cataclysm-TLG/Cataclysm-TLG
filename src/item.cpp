@@ -65,6 +65,7 @@
 #include "item_tname.h"
 #include "item_transformation.h"
 #include "iteminfo_query.h"
+#include "item_wakeup.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -15085,6 +15086,15 @@ bool item::process_gun_cooling( Character *carrier )
         }
     }
     return false;
+}
+
+std::vector<desired_wakeup> item::enumerate_scheduled_wakeups() const
+{
+    return {};
+}
+
+void item::actualize_scheduled( item_wakeup_kind /*kind*/, time_point /*now*/ )
+{
 }
 
 bool item::process( map &here, Character *carrier, const tripoint_bub_ms &pos, float insulation,
