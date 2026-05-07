@@ -318,6 +318,7 @@ class recipe
             return steps_;
         }
         bool has_attention_steps() const;
+        bool has_remaining_attention_steps( int from_step ) const;
         // Returns aggregate proficiencies for step recipes, or the legacy
         // proficiencies field for stepless recipes.  This is a conservative
         // whole-recipe approximation used for display, gating, approximate
