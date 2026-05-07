@@ -7,10 +7,13 @@
 #include <string>
 #include <vector>
 
+#include "item_wakeup.h"
+
 class Character;
 class item;
 class item_location;
 class recipe;
+class time_point;
 struct attention_plan;
 template <typename E> struct enum_traits;
 
@@ -44,5 +47,12 @@ std::optional<std::vector<attention_plan>> show_craft_planning_modal(
 // auto-traveling.
 void fire_step_complete_distraction( const std::string &msg,
                                      const item_location &loc );
+
+// Wakeup hooks for in-progress craft items.  Called by item_wakeup
+// dispatchers when the item is a craft.
+std::vector<desired_wakeup> craft_enumerate_scheduled_wakeups(
+    const item &craft, const item_location &loc );
+void craft_actualize_scheduled( item &craft, item_wakeup_kind kind,
+                                time_point now, const item_location &loc );
 
 #endif // CATA_SRC_CRAFTING_H

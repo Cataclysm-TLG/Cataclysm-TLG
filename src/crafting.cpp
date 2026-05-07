@@ -30,6 +30,7 @@
 #include "color.h"
 #include "coordinates.h"
 #include "craft_command.h"
+#include "crafting_enums.h"
 #include "crafting_gui.h"
 #include "creature.h"
 #include "debug.h"
@@ -75,9 +76,11 @@
 #include "string_formatter.h"
 #include "string_input_popup.h"
 #include "talker.h"
+#include "translation.h"
 #include "translations.h"
 #include "type_id.h"
 #include "ui.h"
+#include "uistate.h"
 #include "units.h"
 #include "value_ptr.h"
 #include "veh_type.h"
@@ -1066,6 +1069,270 @@ std::optional<std::vector<attention_plan>> show_craft_planning_modal(
     }
 
     return plans;
+}
+
+std::vector<desired_wakeup> craft_enumerate_scheduled_wakeups(
+    const item &craft, const item_location & /*loc*/ )
+{
+    std::vector<desired_wakeup> result;
+    if( !craft.is_craft() ) {
+        return result;
+    }
+    const time_point ready_at = craft.get_ready_at();
+    const time_point alarm_at = craft.get_alarm_at();
+    const time_point fail_at = craft.get_fail_at();
+    if( ready_at != calendar::before_time_starts ) {
+        result.push_back( desired_wakeup{ item_wakeup_kind::ready_check, ready_at } );
+    }
+    if( alarm_at != calendar::before_time_starts ) {
+        result.push_back( desired_wakeup{ item_wakeup_kind::alarm, alarm_at } );
+    }
+    if( fail_at != calendar::before_time_starts ) {
+        result.push_back( desired_wakeup{ item_wakeup_kind::fail_check, fail_at } );
+    }
+    return result;
+}
+
+static bool step_has_env_requirements( const recipe_step &step )
+{
+    return !step.requirements.get_tools().empty()
+           || !step.requirements.get_qualities().empty();
+}
+
+static Character *resolve_crafter( const character_id &cid )
+{
+    if( !cid.is_valid() ) {
+        return nullptr;
+    }
+    avatar &u = get_avatar();
+    if( u.getID() == cid ) {
+        return &u;
+    }
+    return g->find_npc( cid );
+}
+
+static bool env_satisfied_for_step( const recipe_step &step, const item &craft,
+                                    const item_location &loc )
+{
+    if( !step_has_env_requirements( step ) ) {
+        return true;
+    }
+    map &m = get_map();
+    const tripoint_bub_ms craft_pos = m.get_bub( loc.pos_abs() );
+
+    inventory inv;
+    if( loc.where() == item_location::type::character ) {
+        Character *holder = loc.carrier();
+        if( holder != nullptr ) {
+            inv = holder->crafting_inventory( craft_pos, PICKUP_RANGE );
+        }
+    } else {
+        Character *crafter = resolve_crafter( craft.get_crafter_id() );
+        if( crafter != nullptr
+            && rl_dist( crafter->pos_bub( m ), craft_pos ) <= PICKUP_RANGE ) {
+            inv = crafter->crafting_inventory( craft_pos, PICKUP_RANGE );
+        } else {
+            inv.form_from_map( &m, craft_pos, PICKUP_RANGE, /*pl=*/nullptr );
+        }
+    }
+    return step.requirements.can_make_with_inventory(
+               inv, return_true<item>, /*batch=*/1, craft_flags::start_only );
+}
+
+static std::string compose_unattend_message( const item &craft, const recipe_step &step )
+{
+    if( !step.unattend_message.empty() ) {
+        return step.unattend_message.translated();
+    }
+    return string_format( _( "%s is ready." ), craft.get_making().result_name() );
+}
+
+static void advance_passive_step( item &craft )
+{
+    craft.set_passive_started_at( calendar::before_time_starts );
+    craft.set_ready_at( calendar::before_time_starts );
+    craft.set_alarm_at( calendar::before_time_starts );
+    craft.set_fail_at( calendar::before_time_starts );
+    craft.set_pause_started_at( calendar::before_time_starts );
+    craft.set_saved_ready_at( calendar::before_time_starts );
+    craft.set_saved_alarm_at( calendar::before_time_starts );
+    craft.set_saved_fail_at( calendar::before_time_starts );
+    craft.set_current_step( craft.get_current_step() + 1 );
+    craft.set_step_progress( 0.0 );
+}
+
+static void craft_actualize_alarm( item &craft, time_point now, const item_location &loc )
+{
+    if( craft.get_alarm_at() == calendar::before_time_starts ) {
+        return;
+    }
+    // Same-turn collision: ready_check fires next in (kind, when, uid) order
+    // and will produce its own distraction.  Suppress redundant alarm.
+    if( craft.get_ready_at() != calendar::before_time_starts
+        && now >= craft.get_ready_at() ) {
+        craft.set_alarm_at( calendar::before_time_starts );
+        get_item_wakeups().rebuild_for_item( loc );
+        return;
+    }
+    craft.set_alarm_at( calendar::before_time_starts );
+
+    const recipe &rec = craft.get_making();
+    const int step_idx = craft.get_current_step();
+    std::string msg;
+    if( step_idx >= 0 && step_idx < static_cast<int>( rec.steps().size() ) ) {
+        msg = compose_unattend_message( craft, rec.steps()[step_idx] );
+    } else {
+        msg = string_format( _( "%s is ready." ), rec.result_name() );
+    }
+    fire_step_complete_distraction( msg, loc );
+    get_item_wakeups().rebuild_for_item( loc );
+}
+
+static bool activity_targets_loc( const Character &c, const item_location &loc )
+{
+    return ( c.activity.id() == ACT_CRAFT || c.activity.id() == ACT_CRAFT_WAIT )
+           && !c.activity.targets.empty()
+           && c.activity.targets.back() == loc;
+}
+
+static void end_live_wait_for( const item_location &loc )
+{
+    avatar &u = get_avatar();
+    if( activity_targets_loc( u, loc ) ) {
+        u.activity.set_to_null();
+    }
+    for( npc &n : g->all_npcs() ) {
+        if( activity_targets_loc( n, loc ) ) {
+            n.activity.set_to_null();
+        }
+    }
+}
+
+static std::optional<tripoint_bub_ms> craft_loc_for_complete( const item_location &loc )
+{
+    if( loc.where() == item_location::type::character ) {
+        return std::nullopt;
+    }
+    return get_map().get_bub( loc.pos_abs() );
+}
+
+static void craft_actualize_fail( item &craft, time_point now,
+                                  const item_location &loc )
+{
+    if( craft.get_fail_at() == calendar::before_time_starts ) {
+        return;
+    }
+    if( now < craft.get_fail_at() ) {
+        return;
+    }
+    end_live_wait_for( loc );
+    item_location mut_loc = loc;
+    mut_loc.remove_item();
+}
+
+static void finalize_passive_craft( item &craft, const item_location &loc )
+{
+    Character *crafter = resolve_crafter( craft.get_crafter_id() );
+    if( crafter == nullptr ) {
+        debugmsg( "crafter %d gone before terminal unattended step finalized; "
+                  "destroying craft for recipe %s",
+                  craft.get_crafter_id().get_value(),
+                  craft.get_making().ident().str() );
+        item_location mut_loc = loc;
+        mut_loc.remove_item();
+        return;
+    }
+    end_live_wait_for( loc );
+    item craft_copy = craft;
+    const std::optional<tripoint_bub_ms> finalize_loc = craft_loc_for_complete( loc );
+    item_location mut_loc = loc;
+    mut_loc.remove_item();
+    crafter->complete_craft( craft_copy, finalize_loc );
+}
+
+static void craft_actualize_ready( item &craft, time_point now, const item_location &loc )
+{
+    if( craft.get_ready_at() == calendar::before_time_starts ) {
+        return;
+    }
+    if( now < craft.get_ready_at() ) {
+        return;
+    }
+    const recipe &rec = craft.get_making();
+    const int step_idx = craft.get_current_step();
+    if( step_idx < 0 || step_idx >= static_cast<int>( rec.steps().size() ) ) {
+        return;
+    }
+    const recipe_step &step = rec.steps()[step_idx];
+
+    if( !env_satisfied_for_step( step, craft, loc ) ) {
+        if( craft.get_pause_started_at() == calendar::before_time_starts ) {
+            craft.set_pause_started_at( now );
+            craft.set_saved_ready_at( craft.get_ready_at() );
+            craft.set_saved_alarm_at( craft.get_alarm_at() );
+            craft.set_saved_fail_at( craft.get_fail_at() );
+            craft.set_alarm_at( calendar::before_time_starts );
+            craft.set_fail_at( calendar::before_time_starts );
+        }
+        craft.set_ready_at( now + 1_minutes );
+        get_item_wakeups().rebuild_for_item( loc );
+        return;
+    }
+
+    if( craft.get_pause_started_at() != calendar::before_time_starts ) {
+        const time_duration paused_for = now - craft.get_pause_started_at();
+        craft.set_ready_at( craft.get_saved_ready_at() + paused_for );
+        if( craft.get_saved_alarm_at() != calendar::before_time_starts ) {
+            craft.set_alarm_at( craft.get_saved_alarm_at() + paused_for );
+        }
+        if( craft.get_saved_fail_at() != calendar::before_time_starts ) {
+            craft.set_fail_at( craft.get_saved_fail_at() + paused_for );
+        }
+        craft.set_pause_started_at( calendar::before_time_starts );
+        craft.set_saved_ready_at( calendar::before_time_starts );
+        craft.set_saved_alarm_at( calendar::before_time_starts );
+        craft.set_saved_fail_at( calendar::before_time_starts );
+        if( now < craft.get_ready_at() ) {
+            get_item_wakeups().rebuild_for_item( loc );
+            return;
+        }
+    }
+
+    const std::string completion_msg = compose_unattend_message( craft, step );
+    const bool was_last_step = step_idx == static_cast<int>( rec.steps().size() ) - 1;
+
+    if( was_last_step ) {
+        const bool was_on_craft = activity_targets_loc( get_avatar(), loc );
+        finalize_passive_craft( craft, loc );
+        if( !was_on_craft ) {
+            fire_step_complete_distraction( completion_msg, loc );
+        }
+        return;
+    }
+    advance_passive_step( craft );
+    get_item_wakeups().rebuild_for_item( loc );
+    fire_step_complete_distraction( completion_msg, loc );
+}
+
+void craft_actualize_scheduled( item &craft, item_wakeup_kind kind, time_point now,
+                                const item_location &loc )
+{
+    if( !craft.is_craft() ) {
+        return;
+    }
+    switch( kind ) {
+        case item_wakeup_kind::alarm:
+            craft_actualize_alarm( craft, now, loc );
+            return;
+        case item_wakeup_kind::ready_check:
+            craft_actualize_ready( craft, now, loc );
+            return;
+        case item_wakeup_kind::fail_check:
+            craft_actualize_fail( craft, now, loc );
+            return;
+        case item_wakeup_kind::last:
+            return;
+    }
 }
 
 void Character::start_craft( craft_command &command, const std::optional<tripoint_bub_ms> &loc,
