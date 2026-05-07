@@ -55,6 +55,7 @@
 #include "construction.h"
 #include "coordinates.h"
 #include "craft_command.h"
+#include "crafting_enums.h"
 #include "creature.h"
 #include "creature_tracker.h"
 #include "damage.h"
@@ -2816,6 +2817,12 @@ void item::craft_data::serialize( JsonOut &jsout ) const
     if( crafter_id.is_valid() ) {
         jsout.member( "crafter_id", crafter_id );
     }
+    if( passive_start_counter != 0 ) {
+        jsout.member( "passive_start_counter", passive_start_counter );
+    }
+    if( passive_end_counter != 0 ) {
+        jsout.member( "passive_end_counter", passive_end_counter );
+    }
     jsout.end_object();
 }
 
@@ -2891,6 +2898,8 @@ void item::craft_data::deserialize( const JsonObject &obj )
     if( obj.has_member( "crafter_id" ) ) {
         obj.read( "crafter_id", crafter_id );
     }
+    passive_start_counter = obj.get_int( "passive_start_counter", 0 );
+    passive_end_counter = obj.get_int( "passive_end_counter", 0 );
     // Recipe-edit migration: drop stale passive runtime on shape mismatch.
     bool stale = false;
     if( making && !disassembly ) {
@@ -2899,11 +2908,12 @@ void item::craft_data::deserialize( const JsonObject &obj )
             stale = true;
         }
         if( !stale && passive_started_at != calendar::before_time_starts ) {
-            if( !making->has_steps() ) {
-                stale = true;
-            } else if( current_step >= 0
-                       && current_step < static_cast<int>( making->steps().size() )
-                       && making->steps()[current_step].attention != step_attention::unattended ) {
+            const bool no_steps = !making->has_steps();
+            const bool current_step_attended = making->has_steps()
+                                               && current_step >= 0
+                                               && current_step < static_cast<int>( making->steps().size() )
+                                               && making->steps()[current_step].attention != step_attention::unattended;
+            if( no_steps || current_step_attended ) {
                 stale = true;
             }
         }
@@ -2918,6 +2928,8 @@ void item::craft_data::deserialize( const JsonObject &obj )
         saved_ready_at = calendar::before_time_starts;
         saved_alarm_at = calendar::before_time_starts;
         saved_fail_at = calendar::before_time_starts;
+        passive_start_counter = 0;
+        passive_end_counter = 0;
     }
 }
 

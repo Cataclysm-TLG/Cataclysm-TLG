@@ -4521,6 +4521,30 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
                 if( plan.choice == step_choice::set_timer && plan.alarm_offset.has_value() ) {
                     craft.set_alarm_at( calendar::turn + *plan.alarm_offset );
                 }
+                // Snapshot counter bounds so item_tname can project without mutation.
+                // Bounds derive from prior steps' budgets to drop any active-step
+                // overshoot in item_counter from carrying into this passive step.
+                double prior_moves = 0.0;
+                double base_default = 0.0;
+                double step_default = 0.0;
+                for( size_t i = 0; i < rec.steps().size(); ++i ) {
+                    const double budget = rec.step_budget_moves(
+                                              crafter, i, craft.get_making_batch_size(), passive_ctx );
+                    base_default += budget;
+                    if( static_cast<int>( i ) < idx ) {
+                        prior_moves += budget;
+                    } else if( static_cast<int>( i ) == idx ) {
+                        step_default = budget;
+                    }
+                }
+                base_default = std::max( 1.0, base_default );
+                const int start_counter = static_cast<int>( std::round(
+                                              prior_moves / base_default * 10000000.0 ) );
+                const int end_counter = std::min( 10000000,
+                                                  static_cast<int>( std::round(
+                                                          ( prior_moves + step_default ) / base_default * 10000000.0 ) ) );
+                craft.set_passive_start_counter( start_counter );
+                craft.set_passive_end_counter( end_counter );
                 mode_ = derive_mode();
                 get_item_wakeups().rebuild_for_item( *craft_item );
             }

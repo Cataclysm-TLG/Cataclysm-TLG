@@ -1149,6 +1149,9 @@ static std::string compose_unattend_message( const item &craft, const recipe_ste
 
 static void advance_passive_step( item &craft )
 {
+    if( craft.get_passive_end_counter() > craft.item_counter ) {
+        craft.item_counter = std::min( 10000000, craft.get_passive_end_counter() );
+    }
     craft.set_passive_started_at( calendar::before_time_starts );
     craft.set_ready_at( calendar::before_time_starts );
     craft.set_alarm_at( calendar::before_time_starts );
@@ -1157,6 +1160,8 @@ static void advance_passive_step( item &craft )
     craft.set_saved_ready_at( calendar::before_time_starts );
     craft.set_saved_alarm_at( calendar::before_time_starts );
     craft.set_saved_fail_at( calendar::before_time_starts );
+    craft.set_passive_start_counter( 0 );
+    craft.set_passive_end_counter( 0 );
     craft.set_current_step( craft.get_current_step() + 1 );
     craft.set_step_progress( 0.0 );
 }

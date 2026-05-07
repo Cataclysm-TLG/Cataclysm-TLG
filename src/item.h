@@ -3060,6 +3060,11 @@ class item : public visitable
         character_id get_crafter_id() const;
         void set_crafter_id( character_id id );
 
+        int get_passive_start_counter() const;
+        void set_passive_start_counter( int c );
+        int get_passive_end_counter() const;
+        void set_passive_end_counter( int c );
+
         std::vector<enchant_cache> get_proc_enchantments() const;
         std::vector<enchantment> get_defined_enchantments() const;
         // calculates the enchantment value as if this item were wielded.
@@ -3340,6 +3345,11 @@ class item : public visitable
                 time_point saved_ready_at = calendar::before_time_starts;
                 time_point saved_alarm_at = calendar::before_time_starts;
                 time_point saved_fail_at  = calendar::before_time_starts;
+
+                // Counter bounds snapshotted at passive-step entry; item_tname
+                // projects linearly between them without mutation.
+                int passive_start_counter = 0;
+                int passive_end_counter = 0;
 
                 // Original crafter (for env-check fallback when craft is on
                 // map/vehicle and the crafter is no longer on top of it).
