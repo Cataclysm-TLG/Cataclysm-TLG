@@ -8108,21 +8108,16 @@ std::optional<int> iuse::craft( Character *p, item *it, const tripoint_bub_ms & 
         return std::nullopt;
     }
 
-    item_location craft_loc( *p, it );
-    craft_resolve_overdue_passive( *it, calendar::turn, craft_loc );
-    if( !craft_loc || !craft_loc.get_item() ) {
-        return std::nullopt;
-    }
-    it = craft_loc.get_item();
     const recipe &rec = it->get_making();
-    std::optional<std::vector<attention_plan>> chosen;
-    if( rec.has_remaining_attention_steps( it->get_current_step() ) && p->is_avatar() ) {
-        chosen = show_craft_planning_modal( rec, *p, it->get_making_batch_size(),
-                                            it->get_current_step(),
-                                            it->get_step_plans() );
+    if( rec.has_attention_steps() && p->is_avatar() ) {
+        std::optional<std::vector<attention_plan>> chosen =
+                show_craft_planning_modal( rec, *p, it->get_making_batch_size(),
+                                           it->get_step_plans() );
         if( !chosen ) {
             return std::nullopt;
         }
+        it->set_step_plans( std::move( *chosen ) );
+        it->set_crafter_id( p->getID() );
     }
     if( !p->can_continue_craft( *it ) ) {
         return std::nullopt;

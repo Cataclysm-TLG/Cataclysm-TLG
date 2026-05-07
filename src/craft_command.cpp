@@ -215,7 +215,7 @@ void craft_command::execute( bool only_cache_comps )
     std::vector<attention_plan> plans;
     if( rec->has_attention_steps() && crafter->is_avatar() ) {
         std::optional<std::vector<attention_plan>> chosen =
-                show_craft_planning_modal( *rec, *crafter, batch_size, /*from_step=*/0, {} );
+                show_craft_planning_modal( *rec, *crafter, batch_size, {} );
         if( !chosen ) {
             return;
         }
