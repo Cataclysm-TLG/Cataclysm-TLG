@@ -38,6 +38,8 @@
 #include "coordinates.h"
 #include "craft_command.h"
 #include "crafting_gui.h"
+#include "crafting.h"
+#include "crafting_enums.h"
 #include "creature.h"
 #include "creature_tracker.h"
 #include "debug.h"
@@ -63,6 +65,7 @@
 #include "item_components.h"
 #include "item_contents.h"
 #include "item_location.h"
+#include "item_wakeup.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -4463,6 +4466,73 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
                 break;
             }
             accumulated -= budget;
+        }
+    }
+
+    // Mode is derived from craft state every turn so wakeup handlers that
+    // advance current_step do not need to reach into the live actor.
+    auto derive_mode = [&]() -> mode {
+        if( !rec.has_steps() )
+        {
+            return mode::active;
+        }
+        const recipe_step &s = rec.steps()[craft.get_current_step()];
+        if( s.attention != step_attention::unattended )
+        {
+            return mode::active;
+        }
+        if( craft.get_passive_started_at() == calendar::before_time_starts )
+        {
+            return mode::active;
+        }
+        const std::vector<attention_plan> &plans = craft.get_step_plans();
+        const int idx = craft.get_current_step();
+        if( idx >= static_cast<int>( plans.size() ) )
+        {
+            return mode::waiting;
+        }
+        return plans[idx].choice == step_choice::do_wait ? mode::waiting : mode::active;
+    };
+    mode_ = derive_mode();
+
+    if( rec.has_steps() ) {
+        const recipe_step &cur_step = rec.steps()[craft.get_current_step()];
+        if( cur_step.attention == step_attention::unattended ) {
+            const std::vector<attention_plan> &plans = craft.get_step_plans();
+            const int idx = craft.get_current_step();
+            const attention_plan plan = idx < static_cast<int>( plans.size() ) ? plans[idx] :
+                                        attention_plan{};
+
+            if( craft.get_passive_started_at() == calendar::before_time_starts ) {
+                craft.set_passive_started_at( calendar::turn );
+                const crafting_cost_context passive_ctx{ crafter.book_bonuses_nearby(),
+                        compute_tool_speeds( rec, crafter ) };
+                const int64_t step_moves = static_cast<int64_t>( rec.step_budget_moves(
+                                               crafter, idx, craft.get_making_batch_size(),
+                                               passive_ctx, recipe_time_flag::ignore_proficiencies ) );
+                craft.set_ready_at( calendar::turn + time_duration::from_moves( step_moves ) );
+                if( cur_step.max_time.has_value() ) {
+                    time_duration fail_dur = *cur_step.max_time;
+                    if( cur_step.grace_period.has_value() ) {
+                        fail_dur += *cur_step.grace_period;
+                    }
+                    craft.set_fail_at( calendar::turn + fail_dur );
+                }
+                if( plan.choice == step_choice::set_timer && plan.alarm_offset.has_value() ) {
+                    craft.set_alarm_at( calendar::turn + *plan.alarm_offset );
+                }
+                mode_ = derive_mode();
+                get_item_wakeups().rebuild_for_item( *craft_item );
+            }
+
+            if( plan.choice == step_choice::do_wait ) {
+                crafter.set_moves( 0 );
+                return;
+            }
+            // do_something / set_timer: end activity without backlog.
+            act.set_to_null();
+            crafter.set_moves( 0 );
+            return;
         }
     }
 
