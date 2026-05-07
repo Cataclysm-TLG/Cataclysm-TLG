@@ -2665,7 +2665,7 @@
     "armor": [
       {
         "encumbrance": 2,
-        "volume_encumber_modifier": 0.2,
+        "volume_encumber_modifier": 0.25,
         "coverage": 60,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ]
@@ -2877,7 +2877,7 @@
         "max_contains_volume": "6000 ml",
         "max_contains_weight": "12000 g",
         "max_item_length": "133 cm",
-        "moves": 100
+        "moves": 350
       },
       {
         "pocket_type": "CONTAINER",
@@ -2885,13 +2885,13 @@
         "max_contains_weight": "5000 g",
         "max_item_length": "20 cm",
         "magazine_well": "500 ml",
-        "moves": 80
+        "moves": 300
       }
     ],
     "warmth": 1,
     "material_thickness": 1,
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
-    "armor": [ { "encumbrance": [ 2, 6 ], "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
+    "armor": [ { "encumbrance": 4, "volume_encumber_modifier": 0.25, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
     "id": "rifle_case_soft_leather",
@@ -2913,7 +2913,7 @@
         "max_contains_volume": "6000 ml",
         "max_contains_weight": "12000 g",
         "max_item_length": "133 cm",
-        "moves": 100
+        "moves": 350
       },
       {
         "pocket_type": "CONTAINER",
@@ -2921,13 +2921,13 @@
         "max_contains_weight": "5000 g",
         "max_item_length": "20 cm",
         "magazine_well": "500 ml",
-        "moves": 80
+        "moves": 300
       }
     ],
     "warmth": 1,
     "material_thickness": 2,
     "flags": [ "WATER_FRIENDLY", "STURDY", "BELTED", "OVERSIZE" ],
-    "armor": [ { "encumbrance": [ 2, 6 ], "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
+    "armor": [ { "encumbrance": 4, "volume_encumber_modifier": 0.25, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
     "id": "rifle_case_soft_2",
@@ -2949,7 +2949,7 @@
         "max_contains_volume": "12000 ml",
         "max_contains_weight": "22000 g",
         "max_item_length": "133 cm",
-        "moves": 100
+        "moves": 300
       },
       {
         "pocket_type": "CONTAINER",
@@ -2957,7 +2957,7 @@
         "max_contains_weight": "6 kg",
         "max_item_length": "30 cm",
         "magazine_well": "750 ml",
-        "moves": 200
+        "moves": 350
       },
       {
         "pocket_type": "CONTAINER",
@@ -2965,7 +2965,7 @@
         "max_contains_weight": "3 kg",
         "max_item_length": "25 cm",
         "magazine_well": "500 ml",
-        "moves": 120
+        "moves": 350
       },
       {
         "pocket_type": "CONTAINER",
@@ -2973,13 +2973,13 @@
         "max_contains_weight": "3 kg",
         "max_item_length": "25 cm",
         "magazine_well": "500 ml",
-        "moves": 120
+        "moves": 350
       }
     ],
     "warmth": 1,
     "material_thickness": 1,
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
-    "armor": [ { "encumbrance": [ 2, 14 ], "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
+    "armor": [ { "encumbrance": 5, "volume_encumber_modifier": 0.25, "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
     "id": "rifle_case_soft_leather_2",
@@ -3001,7 +3001,7 @@
         "max_contains_volume": "12000 ml",
         "max_contains_weight": "22000 g",
         "max_item_length": "133 cm",
-        "moves": 100
+        "moves": 300
       },
       {
         "pocket_type": "CONTAINER",
@@ -3009,7 +3009,7 @@
         "max_contains_weight": "6 kg",
         "max_item_length": "30 cm",
         "magazine_well": "750 ml",
-        "moves": 200
+        "moves": 350
       },
       {
         "pocket_type": "CONTAINER",
@@ -3017,7 +3017,7 @@
         "max_contains_weight": "3 kg",
         "max_item_length": "25 cm",
         "magazine_well": "500 ml",
-        "moves": 120
+        "moves": 350
       },
       {
         "pocket_type": "CONTAINER",
@@ -3025,13 +3025,13 @@
         "max_contains_weight": "3 kg",
         "max_item_length": "25 cm",
         "magazine_well": "500 ml",
-        "moves": 120
+        "moves": 350
       }
     ],
     "warmth": 1,
     "material_thickness": 2,
-    "flags": [ "WATER_FRIENDLY", "STURDY", "BELTED", "OVERSIZE" ],
-    "armor": [ { "encumbrance": [ 2, 14 ], "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
+    "flags": [ "WATER_FRIENDLY", "STURDY", "BELTED", "OVERSIZE" ],    
+    "armor": [ { "encumbrance": 5, "volume_encumber_modifier": 0.25, "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
     "id": "rifle_case_xl_soft_leather",
@@ -3053,7 +3053,7 @@
         "max_contains_volume": "12 L",
         "max_contains_weight": "15875 g",
         "max_item_length": "146 cm",
-        "moves": 100
+        "moves": 350
       },
       {
         "pocket_type": "CONTAINER",
@@ -3061,13 +3061,13 @@
         "max_contains_weight": "5000 g",
         "max_item_length": "20 cm",
         "magazine_well": "500 ml",
-        "moves": 80
+        "moves": 300
       }
     ],
     "warmth": 1,
     "material_thickness": 2,
     "flags": [ "WATER_FRIENDLY", "STURDY", "BELTED", "OVERSIZE" ],
-    "armor": [ { "encumbrance": [ 2, 6 ], "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
+    "armor": [ { "encumbrance": 5, "volume_encumber_modifier": 0.25, "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
     "id": "camera_bag",
