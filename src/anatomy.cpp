@@ -297,21 +297,19 @@ bodypart_id anatomy::select_blocking_part( const Creature *blocker, bool arm, bo
         }
 
         // Can we block with our normal boring arm?
-        if( bp->has_type( body_part_type::type::arm ) && !bp->has_flag( json_flag_NONSTANDARD_BLOCK ) &&
+        if( bp->limbtypes.count( body_part_type::type::arm ) == 0 && !bp->has_flag( json_flag_NONSTANDARD_BLOCK ) &&
             !arm ) {
             add_msg_debug( debugmode::DF_MELEE, "BP %s discarded, no arm blocks allowed",
                            body_part_name( bp ) );
             continue;
             // Can we block with our normal boring legs?
-        } else if( bp->has_type( body_part_type::type::leg ) &&
+        } else if( bp->limbtypes.count( body_part_type::type::leg ) == 0 &&
                    !bp->has_flag( json_flag_NONSTANDARD_BLOCK ) && !leg ) {
             add_msg_debug( debugmode::DF_MELEE, "BP %s discarded, no leg blocks allowed",
                            body_part_name( bp ) );
             continue;
             // Can we block with our non-normal non-arms/non-legs?
-        } else if( ( ( !bp->has_type( body_part_type::type::arm ) &&
-                       !bp->has_type( body_part_type::type::leg ) ) || bp->has_flag( json_flag_NONSTANDARD_BLOCK ) ) &&
-                   !nonstandard ) {
+        } else if( bp->has_flag( json_flag_NONSTANDARD_BLOCK ) && !nonstandard ) {
             add_msg_debug( debugmode::DF_MELEE, "BP %s discarded, no nonstandard blocks allowed",
                            body_part_name( bp ) );
             continue;
