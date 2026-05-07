@@ -1824,6 +1824,19 @@ bool recipe::has_attention_steps() const
     return false;
 }
 
+bool recipe::has_remaining_attention_steps( int from_step ) const
+{
+    if( from_step < 0 ) {
+        from_step = 0;
+    }
+    for( int i = from_step; i < static_cast<int>( steps_.size() ); ++i ) {
+        if( steps_[i].attention != step_attention::none ) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool recipe::is_practice() const
 {
     return practice_data.has_value();
