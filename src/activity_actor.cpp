@@ -4503,50 +4503,18 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
             const attention_plan plan = idx < static_cast<int>( plans.size() ) ? plans[idx] :
                                         attention_plan{};
 
+            // Past-due wakeup (off-bubble drop or same-turn race): advance inline.
+            if( craft.get_passive_started_at() != calendar::before_time_starts &&
+                craft.get_ready_at() != calendar::before_time_starts &&
+                calendar::turn >= craft.get_ready_at() ) {
+                craft_actualize_scheduled( craft, item_wakeup_kind::ready_check,
+                                           calendar::turn, craft_item );
+                return;
+            }
+
             if( craft.get_passive_started_at() == calendar::before_time_starts ) {
-                craft.set_passive_started_at( calendar::turn );
-                const crafting_cost_context passive_ctx{ crafter.book_bonuses_nearby(),
-                        compute_tool_speeds( rec, crafter ) };
-                const int64_t step_moves = static_cast<int64_t>( rec.step_budget_moves(
-                                               crafter, idx, craft.get_making_batch_size(),
-                                               passive_ctx, recipe_time_flag::ignore_proficiencies ) );
-                craft.set_ready_at( calendar::turn + time_duration::from_moves( step_moves ) );
-                if( cur_step.max_time.has_value() ) {
-                    time_duration fail_dur = *cur_step.max_time;
-                    if( cur_step.grace_period.has_value() ) {
-                        fail_dur += *cur_step.grace_period;
-                    }
-                    craft.set_fail_at( calendar::turn + fail_dur );
-                }
-                if( plan.choice == step_choice::set_timer && plan.alarm_offset.has_value() ) {
-                    craft.set_alarm_at( calendar::turn + *plan.alarm_offset );
-                }
-                // Snapshot counter bounds so item_tname can project without mutation.
-                // Bounds derive from prior steps' budgets to drop any active-step
-                // overshoot in item_counter from carrying into this passive step.
-                double prior_moves = 0.0;
-                double base_default = 0.0;
-                double step_default = 0.0;
-                for( size_t i = 0; i < rec.steps().size(); ++i ) {
-                    const double budget = rec.step_budget_moves(
-                                              crafter, i, craft.get_making_batch_size(), passive_ctx );
-                    base_default += budget;
-                    if( static_cast<int>( i ) < idx ) {
-                        prior_moves += budget;
-                    } else if( static_cast<int>( i ) == idx ) {
-                        step_default = budget;
-                    }
-                }
-                base_default = std::max( 1.0, base_default );
-                const int start_counter = static_cast<int>( std::round(
-                                              prior_moves / base_default * 10000000.0 ) );
-                const int end_counter = std::min( 10000000,
-                                                  static_cast<int>( std::round(
-                                                          ( prior_moves + step_default ) / base_default * 10000000.0 ) ) );
-                craft.set_passive_start_counter( start_counter );
-                craft.set_passive_end_counter( end_counter );
+                craft_stamp_passive_entry( craft, crafter, calendar::turn, craft_item );
                 mode_ = derive_mode();
-                get_item_wakeups().rebuild_for_item( *craft_item );
             }
 
             if( plan.choice == step_choice::do_wait ) {

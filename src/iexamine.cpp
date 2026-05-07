@@ -7177,17 +7177,22 @@ void iexamine::workbench_internal( Character &you, const tripoint_bub_ms &examp,
             if( selected_craft->typeId() == itype_disassembly ) {
                 you.disassemble( crafts[amenu2.ret], true );
             } else {
+                craft_resolve_overdue_passive( *selected_craft, calendar::turn, crafts[amenu2.ret] );
+                if( !crafts[amenu2.ret] || !crafts[amenu2.ret].get_item() ) {
+                    break;
+                }
+                selected_craft = crafts[amenu2.ret].get_item();
                 const recipe &rec = selected_craft->get_making();
-                if( rec.has_attention_steps() && you.is_avatar() ) {
-                    std::optional<std::vector<attention_plan>> chosen =
-                            show_craft_planning_modal( rec, you,
-                                                       selected_craft->get_making_batch_size(),
-                                                       selected_craft->get_step_plans() );
+                std::optional<std::vector<attention_plan>> chosen;
+                if( rec.has_remaining_attention_steps( selected_craft->get_current_step() )
+                    && you.is_avatar() ) {
+                    chosen = show_craft_planning_modal( rec, you,
+                                                        selected_craft->get_making_batch_size(),
+                                                        selected_craft->get_current_step(),
+                                                        selected_craft->get_step_plans() );
                     if( !chosen ) {
                         break;
                     }
-                    selected_craft->set_step_plans( std::move( *chosen ) );
-                    selected_craft->set_crafter_id( you.getID() );
                 }
                 if( !you.can_continue_craft( *selected_craft ) ) {
                     break;
@@ -7198,6 +7203,11 @@ void iexamine::workbench_internal( Character &you, const tripoint_bub_ms &examp,
                         _( "<npcname> doesn't know the recipe for the %s and can't continue crafting." ),
                         rec.result_name() );
                     break;
+                }
+                if( chosen ) {
+                    selected_craft->set_step_plans( std::move( *chosen ) );
+                    selected_craft->set_crafter_id( you.getID() );
+                    craft_apply_resume_replan( crafts[amenu2.ret] );
                 }
                 you.add_msg_player_or_npc(
                     pgettext( "in progress craft", "You start working on the %s." ),
