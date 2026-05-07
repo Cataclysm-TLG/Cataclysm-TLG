@@ -2665,7 +2665,7 @@
     "armor": [
       {
         "encumbrance": 2,
-        "volume_encumber_modifier": 0.2,
+        "volume_encumber_modifier": 0.25,
         "coverage": 60,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ]
