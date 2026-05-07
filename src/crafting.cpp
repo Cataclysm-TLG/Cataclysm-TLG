@@ -88,6 +88,7 @@
 #include "weather.h"
 
 static const activity_id ACT_CRAFT( "ACT_CRAFT" );
+static const activity_id ACT_CRAFT_WAIT( "ACT_CRAFT_WAIT" );
 static const activity_id ACT_DISASSEMBLE( "ACT_DISASSEMBLE" );
 static const activity_id ACT_MULTIPLE_CRAFT( "ACT_MULTIPLE_CRAFT" );
 
@@ -975,6 +976,25 @@ static item_location place_craft_or_disassembly(
     }
 
     return craft_in_world;
+}
+
+void fire_step_complete_distraction( const std::string &msg, const item_location &loc )
+{
+    avatar &u = get_avatar();
+    if( ( u.activity.id() == ACT_CRAFT || u.activity.id() == ACT_CRAFT_WAIT )
+        && !u.activity.targets.empty()
+        && u.activity.targets.back() == loc ) {
+        return;
+    }
+    if( !uistate.distraction_craft_step_complete ) {
+        add_msg( m_info, msg );
+        return;
+    }
+    const bool interrupted =
+        g->cancel_activity_or_ignore_query( distraction_type::craft_step_complete, msg );
+    if( !interrupted && u.activity.id().is_null() && !u.has_destination() ) {
+        add_msg( m_info, msg );
+    }
 }
 
 std::optional<std::vector<attention_plan>> show_craft_planning_modal(

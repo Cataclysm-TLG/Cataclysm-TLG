@@ -336,6 +336,7 @@ enum class distraction_type : int {
     mutation,
     oxygen,
     withdrawal,
+    craft_step_complete,
     last,
 };
 
