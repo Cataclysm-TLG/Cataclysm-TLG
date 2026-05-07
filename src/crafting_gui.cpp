@@ -21,6 +21,7 @@
 #include "character_id.h"
 #include "color.h"
 #include "crafting.h"
+#include "crafting_enums.h"
 #include "crafting_gui_helpers.h"
 #include "cuboid_rectangle.h"
 #include "cursesdef.h"
