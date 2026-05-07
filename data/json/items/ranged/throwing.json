@@ -16,7 +16,7 @@
     "color": "blue",
     "to_hit": -1,
     "ammo_type": "thrown",
-    "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON" ]
+    "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON", "ALLOWS_BODY_BLOCK" ]
   },
   {
     "type": "ITEM",
@@ -66,7 +66,7 @@
     "color": "white",
     "to_hit": -2,
     "ammo_type": "thrown",
-    "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON" ]
+    "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON", "ALLOWS_BODY_BLOCK" ]
   },
   {
     "type": "ITEM",
@@ -84,7 +84,8 @@
     "longest_side": "30 cm",
     "to_hit": -1,
     "thrown_damage": [ { "damage_type": "stab", "amount": 16 } ],
-    "melee_damage": { "cut": 8 }
+    "melee_damage": { "cut": 8 },
+    "flags": [ "ALLOWS_BODY_BLOCK" ]
   },
   {
     "type": "ITEM",
@@ -103,7 +104,8 @@
     "longest_side": "30 cm",
     "to_hit": -1,
     "thrown_damage": [ { "damage_type": "stab", "amount": 18 }, { "damage_type": "bash", "amount": 4 } ],
-    "melee_damage": { "cut": 8 }
+    "melee_damage": { "cut": 8 },
+    "flags": [ "ALLOWS_BODY_BLOCK" ]
   },
   {
     "type": "ITEM",
