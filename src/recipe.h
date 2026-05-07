@@ -332,8 +332,11 @@ class recipe
             const book_proficiency_bonuses &books );
         // Per-step time budget in base moves (with proficiency malus and batch savings).
         // Same per-step formula that batch_time() uses internally.
+        // ignore_proficiencies skips the proficiency malus (passive steps run on
+        // wall-clock independent of crafter skill).
         double step_budget_moves( const Character &guy, size_t step_idx, int batch,
-                                  const crafting_cost_context &ctx ) const;
+                                  const crafting_cost_context &ctx,
+                                  recipe_time_flag flags = recipe_time_flag::none ) const;
 
         // This is used by the basecamp bulletin board.
         std::string required_all_skills_string( const std::map<skill_id, int> & ) const;

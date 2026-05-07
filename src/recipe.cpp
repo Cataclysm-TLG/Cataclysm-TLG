@@ -1427,11 +1427,15 @@ float recipe::proficiency_time_maluses_for_step(
 }
 
 double recipe::step_budget_moves( const Character &guy, size_t step_idx, int batch,
-                                  const crafting_cost_context &ctx ) const
+                                  const crafting_cost_context &ctx,
+                                  recipe_time_flag flags ) const
 {
     cata_assert( step_idx < steps_.size() );
     const recipe_step &s = steps_[step_idx];
-    double t = s.time * proficiency_time_maluses_for_step( guy, s, ctx.books );
+    double t = s.time;
+    if( ( flags & recipe_time_flag::ignore_proficiencies ) != recipe_time_flag::ignore_proficiencies ) {
+        t *= proficiency_time_maluses_for_step( guy, s, ctx.books );
+    }
     if( step_idx < ctx.tool_speeds.size() ) {
         t *= ctx.tool_speeds[step_idx];
     }
