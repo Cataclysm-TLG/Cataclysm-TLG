@@ -977,7 +977,79 @@ static item_location place_craft_or_disassembly(
     return craft_in_world;
 }
 
-void Character::start_craft( craft_command &command, const std::optional<tripoint_bub_ms> &loc )
+std::optional<std::vector<attention_plan>> show_craft_planning_modal(
+        const recipe &rec, const Character &crafter, int batch,
+        const std::vector<attention_plan> &existing )
+{
+    const std::vector<recipe_step> &steps = rec.steps();
+    std::vector<attention_plan> plans( steps.size() );
+    for( size_t i = 0; i < std::min( existing.size(), plans.size() ); ++i ) {
+        plans[i] = existing[i];
+    }
+
+    const bool has_timepiece = crafter.has_watch() || crafter.has_alarm_clock();
+    const crafting_cost_context ctx{ crafter.book_bonuses_nearby(),
+                                     compute_tool_speeds( rec, crafter ) };
+
+    for( size_t i = 0; i < steps.size(); ++i ) {
+        const recipe_step &step = steps[i];
+        if( step.attention != step_attention::unattended ) {
+            continue;
+        }
+
+        const time_duration step_dur = time_duration::from_moves(
+                                           rec.step_budget_moves( crafter, i, batch, ctx,
+                                                   recipe_time_flag::ignore_proficiencies ) );
+
+        uilist menu;
+        menu.text = string_format(
+                        _( "Step: %s (%s)\nWhat do you want to do?" ),
+                        step.name.translated(),
+                        to_string_approx( step_dur ) );
+        menu.addentry( 0, true, 'w', _( "Wait for it to finish" ) );
+        menu.addentry( 1, true, 'd', _( "Do something else" ) );
+        if( has_timepiece ) {
+            menu.addentry( 2, true, 't', _( "Set a timer" ) );
+        }
+        menu.query();
+
+        if( menu.ret == UILIST_CANCEL ) {
+            return std::nullopt;
+        }
+
+        if( menu.ret == 0 ) {
+            plans[i].choice = step_choice::do_wait;
+            plans[i].alarm_offset.reset();
+        } else if( menu.ret == 1 ) {
+            plans[i].choice = step_choice::do_something;
+            plans[i].alarm_offset.reset();
+        } else if( menu.ret == 2 ) {
+            uilist alarm;
+            alarm.text = _( "Set an alarm for when?" );
+            alarm.addentry( 1, true, '1',
+                            string_format( _( "When the step finishes (%s)" ),
+                                           to_string( step_dur ) ) );
+            alarm.addentry( 2, step_dur > 5_minutes, '2',
+                            string_format( _( "5 minutes before (%s in)" ),
+                                           to_string( step_dur - 5_minutes ) ) );
+            alarm.query();
+            if( alarm.ret == UILIST_CANCEL ) {
+                return std::nullopt;
+            }
+            plans[i].choice = step_choice::set_timer;
+            if( alarm.ret == 2 ) {
+                plans[i].alarm_offset = step_dur - 5_minutes;
+            } else {
+                plans[i].alarm_offset = step_dur;
+            }
+        }
+    }
+
+    return plans;
+}
+
+void Character::start_craft( craft_command &command, const std::optional<tripoint_bub_ms> &loc,
+                             std::vector<attention_plan> plans )
 {
     if( command.empty() ) {
         debugmsg( "Attempted to start craft with empty command" );
@@ -991,6 +1063,13 @@ void Character::start_craft( craft_command &command, const std::optional<tripoin
     const recipe &making = craft.get_making();
     if( static_cast<int>( get_skill_level( command.get_skill_id() ) ) > making.get_skill_cap() ) {
         handle_skill_warning( command.get_skill_id(), true );
+    }
+
+    if( making.has_attention_steps() ) {
+        craft.set_crafter_id( getID() );
+    }
+    if( !plans.empty() ) {
+        craft.set_step_plans( std::move( plans ) );
     }
 
     // In case we were wearing something just consumed

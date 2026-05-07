@@ -34,6 +34,8 @@
 #include "city.h"
 #include "color.h"
 #include "coordinates.h"
+#include "crafting.h"
+#include "crafting_enums.h"
 #include "creature.h"
 #include "creature_tracker.h"
 #include "cuboid_rectangle.h"
@@ -8106,10 +8108,20 @@ std::optional<int> iuse::craft( Character *p, item *it, const tripoint_bub_ms & 
         return std::nullopt;
     }
 
+    const recipe &rec = it->get_making();
+    if( rec.has_attention_steps() && p->is_avatar() ) {
+        std::optional<std::vector<attention_plan>> chosen =
+                show_craft_planning_modal( rec, *p, it->get_making_batch_size(),
+                                           it->get_step_plans() );
+        if( !chosen ) {
+            return std::nullopt;
+        }
+        it->set_step_plans( std::move( *chosen ) );
+        it->set_crafter_id( p->getID() );
+    }
     if( !p->can_continue_craft( *it ) ) {
         return std::nullopt;
     }
-    const recipe &rec = it->get_making();
     if( !p->has_recipe( &rec ) ) {
         p->add_msg_player_or_npc(
             _( "You don't know the recipe for the %s and can't continue crafting." ),
