@@ -4,10 +4,12 @@
 
 #include <list>
 #include <optional>
+#include <string>
 #include <vector>
 
 class Character;
 class item;
+class item_location;
 class recipe;
 struct attention_plan;
 template <typename E> struct enum_traits;
@@ -35,5 +37,12 @@ void drop_or_handle( const item &newit, Character &p );
 std::optional<std::vector<attention_plan>> show_craft_planning_modal(
         const recipe &rec, const Character &crafter, int batch,
         const std::vector<attention_plan> &existing );
+
+// Interrupts the avatar's current activity with a craft_step_complete
+// distraction.  Suppresses if the avatar is already engaged on this same
+// craft.  Falls back to a log message if the avatar is idle and not
+// auto-traveling.
+void fire_step_complete_distraction( const std::string &msg,
+                                     const item_location &loc );
 
 #endif // CATA_SRC_CRAFTING_H
