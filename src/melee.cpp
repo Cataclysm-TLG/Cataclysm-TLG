@@ -2153,7 +2153,9 @@ int melee::blocking_ability( const item &shield )
 item_location Character::best_shield()
 {
     int best_value = 0;
-    const bool weapon_can_block = weapon.has_technique( WBLOCK_0 ) || weapon.has_technique( WBLOCK_1 ) || weapon.has_technique( WBLOCK_2 ) || weapon.has_technique( WBLOCK_3 );
+    const bool weapon_can_block = weapon.has_technique( WBLOCK_0 ) ||
+                                  weapon.has_technique( WBLOCK_1 ) || weapon.has_technique( WBLOCK_2 ) ||
+                                  weapon.has_technique( WBLOCK_3 );
     item_location best;
     if( weapon_can_block && martial_arts_data->can_weapon_block() ) {
         best_value = melee::blocking_ability( weapon );
@@ -2209,11 +2211,13 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     // Check if we are going to block with an item. This could
     // be worn equipment with the BLOCK_WHILE_WORN flag.
     bool has_shield = !!shield;
-    bool worn_shield = has_shield && shield->has_flag( flag_BLOCK_WHILE_WORN ) && is_worn( *shield.get_item() );
+    bool worn_shield = has_shield && shield->has_flag( flag_BLOCK_WHILE_WORN ) &&
+                       is_worn( *shield.get_item() );
 
     bool conductive_shield = false;
     // Can we block with our body despite wielding a weapon?
-    bool armed_body_block = !weapon.is_null() && ( !weapon.is_two_handed( *this ) || weapon.has_flag( json_flag_ALLOWS_BODY_BLOCKING ) );
+    bool armed_body_block = !weapon.is_null() && ( !weapon.is_two_handed( *this ) ||
+                            weapon.has_flag( json_flag_ALLOWS_BODY_BLOCKING ) );
 
     bool arm_block = martial_arts_data->can_arm_block( *this );
     bool leg_block = martial_arts_data->can_leg_block( *this );
@@ -2243,7 +2247,7 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
         // We have no way of blocking.
         return false;
     }
-    
+
     bool will_weapon_block = false;
     bool will_body_block = false;
     int block_score = 0;
