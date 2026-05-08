@@ -3865,23 +3865,13 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
                                               space,
                                               _( "Negligible Protection" ) ) );
         }
-        if( type->can_use( "GASMASK" ) ||
+        if( type->can_use( "GASMASK_ACTIVATE" ) ||
             type->can_use( "DIVE_TANK" ) ) {
             info.emplace_back(
                 "ARMOR",
                 string_format(
                     "<bold>%s</bold>:",
                     _( "Protection when active" ) ) );
-            info.emplace_back( bp_cat,
-                               space + _( "Acid Resistance: " ),
-                               "",
-                               iteminfo::no_newline | iteminfo::is_decimal,
-                               resist( damage_acid, false, sbp ) );
-            info.emplace_back( bp_cat,
-                               space + _( "Fire: " ),
-                               "",
-                               iteminfo::no_newline | iteminfo::is_decimal,
-                               resist( damage_heat, false, sbp ) );
             info.emplace_back(
                 bp_cat,
                 space + _( "Environmental: " ),

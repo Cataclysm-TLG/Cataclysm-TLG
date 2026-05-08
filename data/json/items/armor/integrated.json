@@ -2080,7 +2080,7 @@
     "symbol": "[",
     "color": "dark_gray",
     "warmth": 0,
-    "environmental_protection": 15,
+    "environmental_protection": 16,
     "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR", "NO_SALVAGE" ],
     "armor": [
       {
