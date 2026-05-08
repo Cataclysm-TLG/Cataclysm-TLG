@@ -335,6 +335,10 @@
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 75,
         "encumbrance": [ 8, 8 ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       },
@@ -342,6 +346,10 @@
         "covers": [ "gastropod_foot" ],
         "coverage": 60,
         "encumbrance": 6,
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ]
       },
@@ -349,6 +357,10 @@
         "covers": [ "long_tail" ],
         "coverage": 75,
         "encumbrance": 8,
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
         "specifically_covers": [ "long_tail_draped" ],
         "layers": [ "BELTED" ]
       },
@@ -370,6 +382,10 @@
           "cephalopod_arm_4_draped",
           "cephalopod_arm_5_draped",
           "cephalopod_arm_6_draped"
+        ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 }
         ],
         "layers": [ "BELTED" ]
       }
