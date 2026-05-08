@@ -49,6 +49,6 @@
     "color": "yellow",
     "techniques": [ "RAPID" ],
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "TRADER_AVOID", "NO_REPAIR", "ALLOWS_BODY_BLOCK", "SHEATH_KNIFE" ]
+    "flags": [ "TRADER_AVOID", "NO_REPAIR",  "SHEATH_KNIFE" ]
   }
 ]

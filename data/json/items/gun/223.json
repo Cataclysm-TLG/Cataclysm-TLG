@@ -67,7 +67,7 @@
       [ "stock", 1 ]
     ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
-    "flags": [ "NO_TURRET", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "NO_TURRET" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -127,7 +127,7 @@
     "dispersion": 300,
     "durability": 6,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    
     "min_cycle_recoil": 1350,
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -652,7 +652,7 @@
     "ammo": [ "223" ],
     "skill": "pistol",
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    
     "range": -6,
     "dispersion": 380,
     "durability": 6,

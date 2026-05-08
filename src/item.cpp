@@ -9715,7 +9715,7 @@ void item::mitigate_damage( damage_unit &du, const sub_bodypart_id &bp, int roll
 
 bool item::is_two_handed( const Character &guy ) const
 {
-    if( has_flag( flag_ALWAYS_TWOHAND ) ) {
+    if( has_flag( flag_ALWAYS_TWOHAND ) || has_flag( flag_FIRE_TWOHAND ) ) {
         return true;
     }
     ///\EFFECT_STR determines which weapons can be wielded with one hand

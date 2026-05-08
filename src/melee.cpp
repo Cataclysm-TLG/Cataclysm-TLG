@@ -114,6 +114,7 @@ static const efftype_id effect_venom_player2( "venom_player2" );
 static const efftype_id effect_venom_weaken( "venom_weaken" );
 static const efftype_id effect_winded( "winded" );
 
+static const json_character_flag json_flag_ALLOWS_BODY_BLOCKING( "ALLOWS_BODY_BLOCKING" );
 static const json_character_flag json_flag_CANNOT_ATTACK( "CANNOT_ATTACK" );
 static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const json_character_flag json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
@@ -134,6 +135,7 @@ static const limb_score_id limb_score_manip( "manip" );
 static const limb_score_id limb_score_reaction( "reaction" );
 
 static const matec_id tec_aoe_secondary( "tec_aoe_secondary" );
+static const matec_id WBLOCK_0( "WBLOCK_0" );
 static const matec_id WBLOCK_1( "WBLOCK_1" );
 static const matec_id WBLOCK_2( "WBLOCK_2" );
 static const matec_id WBLOCK_3( "WBLOCK_3" );
@@ -2135,29 +2137,34 @@ int melee::blocking_ability( const item &shield )
 {
     int block_bonus = 0;
     if( shield.has_technique( WBLOCK_3 ) ) {
-        block_bonus = 10;
+        block_bonus = 8 + shield.type->m_to_hit;
     } else if( shield.has_technique( WBLOCK_2 ) ) {
-        block_bonus = 6;
+        block_bonus = 4 + shield.type->m_to_hit;
     } else if( shield.has_technique( WBLOCK_1 ) ) {
-        block_bonus = 4;
+        block_bonus = 2 + shield.type->m_to_hit;
     } else if( shield.has_flag( flag_BLOCK_WHILE_WORN ) ) {
         block_bonus = 2;
+    }  else if( shield.has_technique( WBLOCK_0 ) ) {
+        block_bonus = shield.type->m_to_hit;
     }
     return block_bonus;
 }
 
 item_location Character::best_shield()
 {
-    // Note: wielded weapon, not one used for attacks
     int best_value = melee::blocking_ability( weapon );
-    // "BLOCK_WHILE_WORN" without a blocking tech need to be worn for the bonus
-    best_value = best_value == 2 ? 0 : best_value;
-    item_location best = best_value > 0 ? get_wielded_item() : item_location();
+    const bool weapon_can_block = weapon.has_technique( WBLOCK_0 ) ||
+                                  weapon.has_technique( WBLOCK_1 ) || weapon.has_technique( WBLOCK_2 ) ||
+                                  weapon.has_technique( WBLOCK_3 );
+    item_location best;
+    if( weapon_can_block ) {
+        best = get_wielded_item();
+    }
     item *best_worn = worn.best_shield();
-    if( best_worn && melee::blocking_ability( *best_worn ) >= best_value ) {
+    if( best_worn && best_worn->has_flag( flag_BLOCK_WHILE_WORN ) &&
+        melee::blocking_ability( *best_worn ) >= best_value ) {
         best = item_location( *this, best_worn );
     }
-
     return best;
 }
 
@@ -2206,11 +2213,10 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     bool conductive_shield = false;
     bool unarmed = !is_armed();
     bool force_unarmed = martial_arts_data->is_force_unarmed();
+    // Does our fighting style allow us to block with a weapon?
     bool allow_weapon_blocking = martial_arts_data->can_weapon_block();
-    bool armed_body_block = weapon.has_flag( flag_ALLOWS_BODY_BLOCK );
-
-    // boolean check if blocking is being done with unarmed or not
-    const bool item_blocking = allow_weapon_blocking && has_shield && !unarmed && !armed_body_block;
+    // Can we block with our body despite wielding a weapon?
+    bool armed_body_block = !unarmed && ( !weapon.is_two_handed( *this ) || weapon.has_flag( json_flag_ALLOWS_BODY_BLOCKING ) );
 
     bool arm_block = false;
     bool leg_block = false;
@@ -2223,7 +2229,13 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     if( has_shield ) {
         block_bonus = melee::blocking_ability( *shield );
         conductive_shield = shield->conductive();
+        if( block_bonus > 0 ) {
+            // Our wielded item is a better blocking implement than our arms and legs.
+            armed_body_block = false;
+        }
     }
+    //
+    const bool item_blocking = allow_weapon_blocking && has_shield && !unarmed && !armed_body_block;
     /** @ARM_STR increases attack blocking effectiveness with a limb or worn/wielded item */
     /** @EFFECT_UNARMED increases attack blocking effectiveness with a limb or worn item */
     if( unarmed || force_unarmed || worn_shield || armed_body_block || ( has_shield &&
