@@ -460,7 +460,7 @@
     "color": "brown",
     "qualities": [ [ "HAMMER", 3 ], [ "PRY", 1 ], [ "HAMMER_FINE", 1 ], [ "PRYING_NAIL", 1 ] ],
     "use_action": [ "CROWBAR" ],
-    "flags": [ "BELT_CLIP", "NONCONDUCTIVE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "BELT_CLIP", "NONCONDUCTIVE" ],
     "weapon_category": [ "BATONS" ],
     "melee_damage": { "bash": 9 }
   },
@@ -755,7 +755,7 @@
     "symbol": ";",
     "color": "light_gray",
     "qualities": [ [ "CUT", 2 ], [ "SAW_W", 1 ], [ "SAW_M", 1 ], [ "WRENCH", 1 ], [ "SCREW", 1 ], [ "BUTCHER", 7 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "melee_damage": { "bash": 1, "stab": 4 },
     "weapon_category": [ "SHIVS" ]
   },
@@ -801,7 +801,7 @@
       [ "HAMMER", 1 ],
       [ "LEATHER_AWL", 2 ]
     ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "FIRESTARTER", "REQUIRES_TINDER" ],
+    "flags": [ "SHEATH_KNIFE",  "FIRESTARTER", "REQUIRES_TINDER" ],
     "melee_damage": { "bash": 1, "stab": 4 },
     "weapon_category": [ "SHIVS" ]
   },
@@ -1045,7 +1045,7 @@
     "symbol": ";",
     "color": "yellow",
     "qualities": [ [ "SCREW", 1 ] ],
-    "flags": [ "SPEAR", "BELT_CLIP", "ALLOWS_BODY_BLOCK", "NO_SALVAGE" ],
+    "flags": [ "SPEAR", "BELT_CLIP",  "NO_SALVAGE" ],
     "weapon_category": [ "SHIVS" ],
     "melee_damage": { "bash": 2, "stab": 6 }
   },
@@ -1362,7 +1362,7 @@
     "symbol": ";",
     "color": "light_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 2 ], [ "BUTCHER", 7 ], [ "FABRIC_CUT", 1 ] ],
-    "flags": [ "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "FRAGILE_MELEE" ],
     "melee_damage": { "cut": 6 },
     "weapon_category": [ "SHIVS" ]
   },

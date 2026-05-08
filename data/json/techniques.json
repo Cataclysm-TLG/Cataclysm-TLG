@@ -60,6 +60,15 @@
   },
   {
     "type": "technique",
+    "id": "WBLOCK_0",
+    "name": "Block",
+    "dummy": true,
+    "mult_bonuses": [ { "stat": "movecost", "scale": 0.0 } ],
+    "messages": [ "You block %s!", "<npcname> blocks %s!" ],
+    "description": "Poor blocking ability"
+  },
+  {
+    "type": "technique",
     "id": "WBLOCK_1",
     "name": "Block",
     "dummy": true,

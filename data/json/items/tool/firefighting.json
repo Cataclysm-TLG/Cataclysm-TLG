@@ -25,6 +25,7 @@
     ],
     "charges_per_use": 1,
     "flags": [ "NO_UNLOAD", "NO_RELOAD" ],
+    "techniques": [ "WBLOCK_0" ],
     "use_action": [ "EXTINGUISHER" ],
     "melee_damage": { "bash": 16 }
   },
@@ -64,6 +65,7 @@
     "price_postapoc": "50 cent",
     "to_hit": -1,
     "material": [ "steel", "plastic" ],
+    "techniques": [ "WBLOCK_0" ],
     "symbol": ";",
     "color": "red",
     "pocket_data": [
@@ -137,6 +139,7 @@
     "price": "100 USD",
     "material": [ { "type": "steel", "portion": 1 }, { "type": "fiberglass", "portion": 9 } ],
     "weapon_category": [ "POLEARMS", "HOOKING_WEAPONRY" ],
+    "techniques": [ "WBLOCK_1" ],
     "flags": [ "DURABLE_MELEE", "REACH_ATTACK", "POLEARM", "NONCONDUCTIVE", "SHEATH_SPEAR", "ALWAYS_TWOHAND" ],
     "weight": "3100 g",
     "//": " If the pole itself has a diameter of around 3 cm which is thick, to be frank, then we half it for the radius -> 1,5 cm, square it -> 2,25, mulitplicate with pi -> ~7,07 cm² multiplicate with 160 cm length -> 1130 cm³ which is 1,13 liters. We add the hook which is around 100 ml of volume.",

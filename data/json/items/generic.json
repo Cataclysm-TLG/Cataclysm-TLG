@@ -847,7 +847,7 @@
     "weight": "553 g",
     "volume": "750 ml",
     "qualities": [ [ "BUTCHER", -38 ] ],
-    "flags": [ "ALLOWS_BODY_BLOCK", "SHEATH_KNIFE" ],
+    "flags": [  "SHEATH_KNIFE" ],
     "melee_damage": { "bash": 5, "cut": 9 }
   },
   {

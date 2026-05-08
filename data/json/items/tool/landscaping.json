@@ -34,7 +34,8 @@
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "DIG", 1 ], [ "BUTCHER", -4 ], [ "CUT", 2 ] ],
-    "flags": [ "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK", "SHEATH_KNIFE" ],
+    "techniques": [ "WBLOCK_0" ],
+    "flags": [ "FRAGILE_MELEE",  "SHEATH_KNIFE" ],
     "melee_damage": { "bash": 3, "cut": 5 },
     "weapon_category": [ "SHIVS" ]
   },
@@ -98,6 +99,7 @@
     "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "uneven" },
     "color": "brown",
     "qualities": [ [ "DIG", 2 ] ],
+    "techniques": [ "WBLOCK_1" ],
     "melee_damage": { "bash": 15, "cut": 1 }
   },
   {
@@ -116,6 +118,7 @@
     "symbol": "/",
     "color": "brown",
     "flags": [ "NONCONDUCTIVE" ],
+    "techniques": [ "WBLOCK_1" ],
     "melee_damage": { "bash": 12, "cut": 3 }
   },
   {
@@ -151,7 +154,7 @@
     "material": [ { "type": "wood", "portion": 7 }, { "type": "steel", "portion": 3 } ],
     "symbol": "/",
     "color": "light_gray",
-    "techniques": [ "WIDE", "SWEEP" ],
+    "techniques": [ "WIDE", "SWEEP", "WBLOCK_0" ],
     "qualities": [ [ "CUT", 1 ], [ "GRASS_CUT", 2 ], [ "BUTCHER", -22 ] ],
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE" ],
     "weapon_category": [ "HOOKING_WEAPONRY", "POLEARMS" ],

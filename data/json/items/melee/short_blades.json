@@ -22,9 +22,10 @@
     "longest_side": "35 cm",
     "price": "30 USD",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 25 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 11 } ],
     "melee_damage": { "stab": 13 }
@@ -42,9 +43,10 @@
     "longest_side": "25 cm",
     "price": "2 USD 50 cent",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 15 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 5 } ],
     "melee_damage": { "stab": 7 }
@@ -63,9 +65,10 @@
     "longest_side": "15 cm",
     "price": "2 USD 50 cent",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 10 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "melee_damage": { "stab": 6 },
     "thrown_damage": [ { "damage_type": "stab", "amount": 4 } ],
     "weapon_category": [ "SHIVS" ]
@@ -84,9 +87,10 @@
     "longest_side": "30 cm",
     "price": "15 USD",
     "price_postapoc": "1 USD",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 10 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 10 } ],
     "melee_damage": { "stab": 12 }
@@ -105,9 +109,10 @@
     "longest_side": "30 cm",
     "price": "20 USD",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 22 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 9 } ],
     "melee_damage": { "stab": 11 }
@@ -126,9 +131,10 @@
     "longest_side": "35 cm",
     "price": "5 USD",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "line", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "melee_damage": { "stab": 6 },
     "thrown_damage": [ { "damage_type": "stab", "amount": 4 } ],
     "weapon_category": [ "SHIVS" ]
@@ -147,9 +153,10 @@
     "longest_side": "33 cm",
     "price": "22 USD",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "line", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 15 ] ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    
     "thrown_damage": [ { "damage_type": "cut", "amount": 9 } ],
     "melee_damage": { "bash": 3, "cut": 11 }
   },
@@ -167,9 +174,10 @@
     "longest_side": "35 cm",
     "price": "35 USD",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "line", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 25 ] ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    
     "thrown_damage": [ { "damage_type": "cut", "amount": 9 } ],
     "melee_damage": { "bash": 3, "cut": 12 }
   },
@@ -189,8 +197,9 @@
     "material": [ "steel", "plastic" ],
     "symbol": ";",
     "color": "dark_gray",
+    "techniques": [ "WBLOCK_0" ],
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 14 ] ],
-    "flags": [ "ALLOWS_BODY_BLOCK", "CONDUCTIVE" ],
+    "flags": [  "CONDUCTIVE" ],
     "weapon_category": [ "SHIVS" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 12 } ],
     "melee_damage": { "stab": 14 }
@@ -207,12 +216,13 @@
     "longest_side": "15 cm",
     "price": "20 USD",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "material": [ "steel", "plastic" ],
     "symbol": ";",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 14 ] ],
-    "flags": [ "ALLOWS_BODY_BLOCK", "CONDUCTIVE", "DURABLE_MELEE" ],
+    "flags": [  "CONDUCTIVE", "DURABLE_MELEE" ],
     "weapon_category": [ "SHIVS" ],
     "melee_damage": { "stab": 11 }
   },
@@ -227,12 +237,13 @@
     "longest_side": "10 cm",
     "price": "15 USD",
     "price_postapoc": "50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "material": [ "steel", "plastic" ],
     "symbol": ";",
     "color": "light_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 12 ] ],
-    "flags": [ "BELT_CLIP", "ALLOWS_BODY_BLOCK", "CONDUCTIVE" ],
+    "flags": [ "BELT_CLIP",  "CONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 11 } ],
     "melee_damage": { "stab": 13 }
@@ -283,12 +294,13 @@
     "longest_side": "9 cm",
     "price": "30 USD",
     "price_postapoc": "5 USD",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "solid", "length": "hand", "surface": "point", "balance": "neutral" },
     "material": [ "steel", "plastic" ],
     "symbol": ";",
     "color": "red",
     "qualities": [ [ "CUT", 2 ], [ "SAW_W", 1 ], [ "SAW_M", 1 ], [ "SCREW", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    
     "melee_damage": { "stab": 6 },
     "weapon_category": [ "SHIVS" ]
   },
@@ -305,13 +317,14 @@
     "longest_side": "20 cm",
     "price": "40 USD",
     "price_postapoc": "7 USD 50 cent",
+    "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "good" },
     "material": [ "steel", "leather" ],
     "repairs_with": [ "steel" ],
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 30 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "CONDUCTIVE", "DURABLE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE",  "CONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "cut", "amount": 10 } ],
     "melee_damage": { "cut": 12 }
@@ -363,13 +376,14 @@
       "DURABLE_MELEE",
       "SHEATH_KNIFE",
       "NPC_THROWN",
-      "ALLOWS_BODY_BLOCK",
+      
       "PUMP_RAIL_COMPATIBLE",
       "NO_SALVAGE",
       "CONDUCTIVE"
     ],
     "weapon_category": [ "KNIVES" ],
-    "thrown_damage": [ { "damage_type": "stab", "amount": 15 } ],
+    "techniques": [ "WBLOCK_0" ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 14 } ],
     "melee_damage": { "stab": 17 },
     "to_hit_mod": 1
   },
@@ -432,13 +446,14 @@
       "DURABLE_MELEE",
       "SHEATH_KNIFE",
       "NPC_THROWN",
-      "ALLOWS_BODY_BLOCK",
+      
       "PUMP_RAIL_COMPATIBLE",
       "NO_SALVAGE",
       "CONDUCTIVE"
     ],
     "weapon_category": [ "KNIVES" ],
-    "thrown_damage": [ { "damage_type": "stab", "amount": 13 } ],
+    "techniques": [ "WBLOCK_0" ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 12 } ],
     "melee_damage": { "stab": 15 },
     "to_hit_mod": 1
   },
@@ -488,13 +503,14 @@
       "DURABLE_MELEE",
       "SHEATH_KNIFE",
       "NPC_THROWN",
-      "ALLOWS_BODY_BLOCK",
+      
       "PUMP_RAIL_COMPATIBLE",
       "NO_SALVAGE",
       "CONDUCTIVE"
     ],
     "weapon_category": [ "KNIVES" ],
-    "thrown_damage": [ { "damage_type": "stab", "amount": 14 } ],
+    "techniques": [ "WBLOCK_0" ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 13 } ],
     "melee_damage": { "stab": 16 },
     "to_hit_mod": 1
   },
@@ -517,8 +533,10 @@
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 27 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "CONDUCTIVE", "DURABLE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE",  "CONDUCTIVE", "DURABLE_MELEE" ],
     "weapon_category": [ "KNIVES" ],
+    "techniques": [ "WBLOCK_0" ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 13 } ],
     "melee_damage": { "stab": 16 }
   },
   {
@@ -539,9 +557,10 @@
     "color": "dark_gray",
     "min_skills": [ [ "weapon", 2 ], [ "melee", 1 ] ],
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 16 ] ],
-    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 12 } ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "stab": 14 }
   },
   {
@@ -584,9 +603,11 @@
     "symbol": ";",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 11 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
-    "melee_damage": { "stab": 8 }
+    "techniques": [ "WBLOCK_0" ],
+    "melee_damage": { "stab": 8 },
+    "thrown_damage": [ { "damage_type": "stab", "amount": 5 } ]
   },
   {
     "id": "bone_knife",
@@ -605,8 +626,9 @@
     "to_hit": { "grip": "none", "length": "hand", "surface": "point", "balance": "neutral" },
     "material": [ "bone" ],
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 12 ] ],
-    "flags": [ "SHEATH_KNIFE", "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE", "FRAGILE_MELEE" ],
     "weapon_category": [ "SHIVS" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "stab": 7 }
   },
   {
@@ -624,9 +646,10 @@
     "symbol": ";",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 15 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
-    "thrown_damage": [ { "damage_type": "stab", "amount": 11 } ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 10 } ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "stab": 13 }
   },
   {
@@ -649,7 +672,7 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 12 ] ],
     "flags": [ "DURABLE_MELEE", "SHEATH_SWORD" ],
     "weapon_category": [ "KNIVES" ],
-    "thrown_damage": [ { "damage_type": "cut", "amount": 11 } ],
+    "thrown_damage": [ { "damage_type": "cut", "amount": 10 } ],
     "melee_damage": { "cut": 13 }
   },
   {
@@ -673,6 +696,7 @@
     "qualities": [ [ "CUT", 2 ], [ "AXE", 1 ], [ "GRASS_CUT", 1 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 18 ] ],
     "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "NONCONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 13 } ],
     "melee_damage": { "bash": 2, "cut": 19 }
   },
   {
@@ -690,8 +714,9 @@
     "volume": "250 ml",
     "longest_side": "20 cm",
     "to_hit": { "grip": "none", "length": "hand", "surface": "point", "balance": "good" },
-    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE" ],
     "weapon_category": [ "SHIVS" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "bash": 1, "stab": 3 }
   },
   {
@@ -710,8 +735,10 @@
     "symbol": ";",
     "color": "brown",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 11 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
+    "techniques": [ "WBLOCK_0" ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 5 } ],
     "melee_damage": { "stab": 9 }
   },
   {
@@ -732,8 +759,10 @@
     "color": "yellow",
     "looks_like": "copper_knife",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 19 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
+    "techniques": [ "WBLOCK_0" ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 10 } ],
     "melee_damage": { "stab": 14 }
   },
   {
@@ -754,8 +783,9 @@
     "color": "yellow",
     "qualities": [ [ "CUT", 2 ], [ "PRY", 1 ], [ "BUTCHER", 15 ] ],
     "use_action": [ "CROWBAR" ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "cut": 12 }
   },
   {
@@ -774,8 +804,9 @@
     "symbol": ",",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 3 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "stab": 8 }
   },
   {
@@ -793,8 +824,9 @@
     "symbol": ";",
     "color": "brown",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 11 ] ],
-    "flags": [ "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "FRAGILE_MELEE" ],
     "weapon_category": [ "SHIVS" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "stab": 7 }
   },
   {
@@ -813,8 +845,10 @@
     "symbol": ";",
     "color": "light_gray",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 11 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
+    "techniques": [ "WBLOCK_0" ],
+    "thrown_damage": [ { "damage_type": "stab", "amount": 2 } ],
     "melee_damage": { "bash": 2, "stab": 5 }
   },
   {
@@ -833,8 +867,9 @@
     "symbol": ";",
     "color": "light_gray",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 8 ], [ "FABRIC_CUT", 1 ] ],
-    "flags": [ "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "FRAGILE_MELEE" ],
     "melee_damage": { "cut": 3 },
+    "techniques": [ "WBLOCK_0" ],
     "weapon_category": [ "SHIVS" ]
   },
   {

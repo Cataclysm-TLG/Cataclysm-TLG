@@ -132,6 +132,7 @@
     "material": [ "wood", "copper" ],
     "symbol": ";",
     "color": "brown",
+    "techniques": [ "WBLOCK_0" ],
     "qualities": [ [ "CUT", 1 ], [ "AXE", 1 ], [ "BUTCHER", -44 ] ],
     "flags": [ "BELT_CLIP", "NONCONDUCTIVE", "SHEATH_AXE" ],
     "weapon_category": [ "HAND_AXES" ],
@@ -224,9 +225,10 @@
     "material": [ "stone", "wood" ],
     "symbol": ";",
     "color": "brown",
+    "techniques": [ "WBLOCK_1" ],
     "qualities": [ [ "SAW_W", 1 ], [ "BUTCHER", -56 ] ],
     "flags": [ "BELT_CLIP", "SHEATH_AXE" ],
-    "melee_damage": { "bash": 8, "cut": 14 }
+    "melee_damage": { "bash": 7, "cut": 13 }
   },
   {
     "id": "primitive_axe",
@@ -243,9 +245,10 @@
     "material": [ "wood", "stone" ],
     "symbol": "/",
     "color": "light_gray",
+    "techniques": [ "WBLOCK_1" ],
     "qualities": [ [ "CUT", 1 ], [ "AXE", 1 ], [ "BUTCHER", -70 ], [ "HAMMER", 1 ] ],
     "flags": [ "BELT_CLIP", "SHEATH_AXE" ],
     "weapon_category": [ "HOOKING_WEAPONRY", "GREAT_AXES" ],
-    "melee_damage": { "bash": 8, "cut": 14 }
+    "melee_damage": { "bash": 8, "cut": 15 }
   }
 ]

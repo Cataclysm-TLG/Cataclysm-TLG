@@ -297,7 +297,8 @@ bodypart_id anatomy::select_blocking_part( const Creature *blocker, bool arm, bo
         }
 
         // Can we block with our normal boring arm?
-        if( bp->limbtypes.count( body_part_type::type::arm ) == 0 && !bp->has_flag( json_flag_NONSTANDARD_BLOCK ) &&
+        if( bp->limbtypes.count( body_part_type::type::arm ) == 0 &&
+            !bp->has_flag( json_flag_NONSTANDARD_BLOCK ) &&
             !arm ) {
             add_msg_debug( debugmode::DF_MELEE, "BP %s discarded, no arm blocks allowed",
                            body_part_name( bp ) );

@@ -528,7 +528,7 @@
     "loudness": 0,
     "to_hit": -1,
     "recovery_chance": 99,
-    "effects": [ "NEVER_MISFIRES", "NON_FOULING", "ALLOWS_BODY_BLOCK" ],
+    "effects": [ "NEVER_MISFIRES", "NON_FOULING" ],
     "qualities": [ [ "HAMMER", 1 ] ],
     "melee_damage": { "bash": 7 },
     "thrown_damage": { "damage_type": "bash", "amount": 6 }

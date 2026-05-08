@@ -278,7 +278,7 @@
     "color": "green",
     "qualities": [ [ "HOSE", 1 ] ],
     "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "uneven" },
-    "flags": [ "ALWAYS_TWOHAND" ],
+    "flags": [ "ALWAYS_TWOHAND", "ALLOWS_BODY_BLOCKING" ],
     "weapon_category": [ "WHIPS" ],
     "melee_damage": { "bash": 4 }
   },
@@ -295,7 +295,7 @@
     "symbol": "?",
     "material": [ "steel" ],
     "techniques": [ "DEF_DISARM", "SWEEP" ],
-    "flags": [ "DURABLE_MELEE", "BELT_CLIP", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "DURABLE_MELEE", "BELT_CLIP" ],
     "volume": "750 ml",
     "to_hit": { "grip": "solid", "length": "hand", "surface": "point", "balance": "neutral" },
     "price": "20 USD",
@@ -1148,7 +1148,7 @@
       "practice": 2,
       "done_message": "You carefully place the teeth on the ground, ready to be walked on by something passing by."
     },
-    "flags": [ "HURT_WHEN_WIELDED", "TRADER_AVOID", "SINGLE_USE", "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "HURT_WHEN_WIELDED", "TRADER_AVOID", "SINGLE_USE", "FRAGILE_MELEE" ],
     "to_hit": { "grip": "none", "length": "hand", "surface": "line", "balance": "neutral" },
     "melee_damage": { "cut": 12 },
     "weapon_category": [ "SHIVS" ]
