@@ -1470,7 +1470,7 @@ void veh_interact::calc_overview( map &here )
                         fmtstring = str_cat( "%s %s ", leak_marker, "%5.1fL", leak_marker );
                         offset = 0;
                     }
-                    right_print( w, y, offset, pt_ammo_cur->color,
+                    right_print( w, y, offset, pt_ammo_cur->color == nc_color() ? c_light_gray : pt_ammo_cur->color,
                                  string_format( fmtstring, specials, pt_ammo_cur->nname( 1 ),
                                                 round_up( units::to_liter( it.volume() ), 1 ) ) );
                 } else {
