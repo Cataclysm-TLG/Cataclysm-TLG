@@ -796,7 +796,7 @@ class comestible_inventory_preset : public inventory_selector_preset
                 if( player_character.can_estimate_rot() ) {
                     if( loc->is_comestible() && loc->get_comestible()->spoils > 0_turns ) {
                         if( !loc->rotten() ) {
-                            return get_time_left_rounded( loc );
+                            return to_string_approx( get_time_left( loc ) );
                         }
                     }
                     return std::string( "---" );
@@ -898,16 +898,6 @@ class comestible_inventory_preset : public inventory_selector_preset
             }
 
             return time_left;
-        }
-
-        std::string get_time_left_rounded( const item_location &loc ) const {
-            const item &it = *loc;
-            if( it.is_going_bad() ) {
-                return _( "soon!" );
-            }
-
-            time_duration time_left = get_time_left( loc );
-            return to_string_approx( time_left );
         }
 
         std::string get_freshness( const item_location &loc ) {
