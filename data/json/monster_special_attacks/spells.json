@@ -855,8 +855,11 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_boomer_claymore",
-    "effect": [ 
-      { "npc_explosion": { "power": 15, "max_noise": 65, "distance_factor": 0.8, "shrapnel": { "casing_mass": 3, "fragment_mass": 0.009 } } } ]
+    "effect": [
+      {
+        "npc_explosion": { "power": 15, "max_noise": 65, "distance_factor": 0.8, "shrapnel": { "casing_mass": 3, "fragment_mass": 0.009 } }
+      }
+    ]
   },
   {
     "id": "create_noise",
