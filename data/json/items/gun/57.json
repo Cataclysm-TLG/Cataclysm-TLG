@@ -30,7 +30,6 @@
     "dispersion": 440,
     "durability": 8,
     "min_cycle_recoil": 330,
-    
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "//": "The standard Five-SeveN doesn't come with a threaded barrel, but tactical models do, and that's what is mostly in our itemgroups.",
     "valid_mod_locations": [ [ "muzzle", 1 ], [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock mount", 1 ] ],
@@ -149,7 +148,6 @@
     "dispersion": 400,
     "durability": 8,
     "min_cycle_recoil": 330,
-    
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [

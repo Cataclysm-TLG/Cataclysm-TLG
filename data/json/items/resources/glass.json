@@ -44,7 +44,7 @@
     "material": [ "glass" ],
     "weight": "75 g",
     "volume": "30 ml",
-    "flags": [ "HURT_WHEN_WIELDED", "TRADER_AVOID", "SINGLE_USE", "FRAGILE_MELEE",  "DAMAGE_VEHICLE_WHEELS" ],
+    "flags": [ "HURT_WHEN_WIELDED", "TRADER_AVOID", "SINGLE_USE", "FRAGILE_MELEE", "DAMAGE_VEHICLE_WHEELS" ],
     "to_hit": -1,
     "melee_damage": { "cut": 6 },
     "weapon_category": [ "SHIVS" ]

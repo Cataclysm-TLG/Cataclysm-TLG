@@ -156,7 +156,6 @@
     "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "line", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 15 ] ],
-    
     "thrown_damage": [ { "damage_type": "cut", "amount": 9 } ],
     "melee_damage": { "bash": 3, "cut": 11 }
   },
@@ -177,7 +176,6 @@
     "techniques": [ "WBLOCK_0" ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "line", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 25 ] ],
-    
     "thrown_damage": [ { "damage_type": "cut", "amount": 9 } ],
     "melee_damage": { "bash": 3, "cut": 12 }
   },
@@ -199,7 +197,7 @@
     "color": "dark_gray",
     "techniques": [ "WBLOCK_0" ],
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 14 ] ],
-    "flags": [  "CONDUCTIVE" ],
+    "flags": [ "CONDUCTIVE" ],
     "weapon_category": [ "SHIVS" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 12 } ],
     "melee_damage": { "stab": 14 }
@@ -222,7 +220,7 @@
     "symbol": ";",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 14 ] ],
-    "flags": [  "CONDUCTIVE", "DURABLE_MELEE" ],
+    "flags": [ "CONDUCTIVE", "DURABLE_MELEE" ],
     "weapon_category": [ "SHIVS" ],
     "melee_damage": { "stab": 11 }
   },
@@ -243,7 +241,7 @@
     "symbol": ";",
     "color": "light_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 12 ] ],
-    "flags": [ "BELT_CLIP",  "CONDUCTIVE" ],
+    "flags": [ "BELT_CLIP", "CONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 11 } ],
     "melee_damage": { "stab": 13 }
@@ -300,7 +298,6 @@
     "symbol": ";",
     "color": "red",
     "qualities": [ [ "CUT", 2 ], [ "SAW_W", 1 ], [ "SAW_M", 1 ], [ "SCREW", 1 ], [ "BUTCHER", 8 ] ],
-    
     "melee_damage": { "stab": 6 },
     "weapon_category": [ "SHIVS" ]
   },
@@ -324,7 +321,7 @@
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 30 ] ],
-    "flags": [ "SHEATH_KNIFE",  "CONDUCTIVE" ],
+    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "cut", "amount": 10 } ],
     "melee_damage": { "cut": 12 }
@@ -372,15 +369,7 @@
     "install_time": "5 s",
     "min_skills": [ [ "weapon", 2 ], [ "melee", 1 ] ],
     "qualities": [ [ "CUT", 2 ], [ "SAW_W", 1 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 19 ] ],
-    "flags": [
-      "DURABLE_MELEE",
-      "SHEATH_KNIFE",
-      "NPC_THROWN",
-      
-      "PUMP_RAIL_COMPATIBLE",
-      "NO_SALVAGE",
-      "CONDUCTIVE"
-    ],
+    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "NPC_THROWN", "PUMP_RAIL_COMPATIBLE", "NO_SALVAGE", "CONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
     "techniques": [ "WBLOCK_0" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 14 } ],
@@ -442,15 +431,7 @@
     "install_time": "5 s",
     "min_skills": [ [ "weapon", 2 ], [ "melee", 1 ] ],
     "qualities": [ [ "CUT", 2 ], [ "SAW_M", 1 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 15 ] ],
-    "flags": [
-      "DURABLE_MELEE",
-      "SHEATH_KNIFE",
-      "NPC_THROWN",
-      
-      "PUMP_RAIL_COMPATIBLE",
-      "NO_SALVAGE",
-      "CONDUCTIVE"
-    ],
+    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "NPC_THROWN", "PUMP_RAIL_COMPATIBLE", "NO_SALVAGE", "CONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
     "techniques": [ "WBLOCK_0" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 12 } ],
@@ -499,15 +480,7 @@
     "install_time": "5 s",
     "min_skills": [ [ "weapon", 2 ], [ "melee", 1 ] ],
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 19 ] ],
-    "flags": [
-      "DURABLE_MELEE",
-      "SHEATH_KNIFE",
-      "NPC_THROWN",
-      
-      "PUMP_RAIL_COMPATIBLE",
-      "NO_SALVAGE",
-      "CONDUCTIVE"
-    ],
+    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "NPC_THROWN", "PUMP_RAIL_COMPATIBLE", "NO_SALVAGE", "CONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
     "techniques": [ "WBLOCK_0" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 13 } ],
@@ -533,7 +506,7 @@
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 27 ] ],
-    "flags": [ "SHEATH_KNIFE",  "CONDUCTIVE", "DURABLE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE", "DURABLE_MELEE" ],
     "weapon_category": [ "KNIVES" ],
     "techniques": [ "WBLOCK_0" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 13 } ],

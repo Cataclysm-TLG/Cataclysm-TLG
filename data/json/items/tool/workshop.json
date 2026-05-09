@@ -801,7 +801,7 @@
       [ "HAMMER", 1 ],
       [ "LEATHER_AWL", 2 ]
     ],
-    "flags": [ "SHEATH_KNIFE",  "FIRESTARTER", "REQUIRES_TINDER" ],
+    "flags": [ "SHEATH_KNIFE", "FIRESTARTER", "REQUIRES_TINDER" ],
     "melee_damage": { "bash": 1, "stab": 4 },
     "weapon_category": [ "SHIVS" ]
   },
@@ -1045,7 +1045,7 @@
     "symbol": ";",
     "color": "yellow",
     "qualities": [ [ "SCREW", 1 ] ],
-    "flags": [ "SPEAR", "BELT_CLIP",  "NO_SALVAGE" ],
+    "flags": [ "SPEAR", "BELT_CLIP", "NO_SALVAGE" ],
     "weapon_category": [ "SHIVS" ],
     "melee_damage": { "bash": 2, "stab": 6 }
   },
