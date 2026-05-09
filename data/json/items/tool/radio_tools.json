@@ -72,7 +72,7 @@
       {
         "type": "sound",
         "sound_message": "buzzz…",
-        "sound_volume": 0,
+        "sound_volume": 8,
         "sound_id": "misc",
         "sound_variant": "rc_car_drives"
       }

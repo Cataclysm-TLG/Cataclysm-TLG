@@ -151,7 +151,7 @@
             "variables": {
               "sound_chance": 10,
               "sound_message": { "i18n": true, "str": "Your electric carver buzzes." },
-              "volume": 8,
+              "volume": 10,
               "revert_to": "carver_off"
             }
           }
