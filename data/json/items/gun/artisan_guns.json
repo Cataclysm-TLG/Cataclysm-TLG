@@ -44,7 +44,7 @@
     "valid_mod_locations": [  ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 14 ] ],
-    "flags": [ "DURABLE_MELEE",  "NO_TURRET", "EASY_CLEAN" ],
+    "flags": [ "DURABLE_MELEE", "NO_TURRET", "EASY_CLEAN" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS", "SHIVS" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "32": 2 } } ],
     "melee_damage": { "stab": 8 }

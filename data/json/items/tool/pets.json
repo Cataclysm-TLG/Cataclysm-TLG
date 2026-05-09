@@ -105,7 +105,7 @@
     "symbol": ";",
     "color": "dark_gray",
     "charged_qualities": [ [ "SHEAR", 3 ] ],
-    "flags": [ "WATER_BREAK",  "FRAGILE_MELEE" ],
+    "flags": [ "WATER_BREAK", "FRAGILE_MELEE" ],
     "charges_per_use": 25,
     "pocket_data": [
       {

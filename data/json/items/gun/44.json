@@ -35,7 +35,7 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 1413,
-    "flags": [  "NO_TURRET" ],
+    "flags": [ "NO_TURRET" ],
     "//2": "NO_TURRET should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "valid_mod_locations": [ [ "bore", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "stock mount", 1 ] ],

@@ -208,7 +208,7 @@
       {
         "type": "spell",
         "cooldown": 0,
-        "spell_data": { "id": "boomer_claymore_initial", "min_level": 0 },
+        "spell_data": { "id": "boomer_claymore_initial", "min_level": 1 },
         "monster_message": "An unstable flesh-raptor explodes!"
       }
     ],

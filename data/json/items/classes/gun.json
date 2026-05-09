@@ -65,7 +65,6 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "base pistol" },
-    
     "skill": "pistol",
     "sight_dispersion": 60,
     "range": 3,
@@ -131,7 +130,7 @@
     "subtypes": [ "GUN" ],
     "name": { "str": "revolver" },
     "//proportional": { "reload": 0.7 },
-    "extend": { "flags": [  "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS", "EASY_CLEAN" ] },
+    "extend": { "flags": [ "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS", "EASY_CLEAN" ] },
     "//": "Revolvers exclude the muzzle location preventing installation of suppressors",
     "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "valid_mod_locations": [
@@ -152,7 +151,7 @@
     "name": { "str": "cap & ball revolver" },
     "reload": 150,
     "range": 2,
-    "extend": { "flags": [  "RELOAD_ONE", "NO_UNLOAD", "EASY_CLEAN" ] },
+    "extend": { "flags": [ "RELOAD_ONE", "NO_UNLOAD", "EASY_CLEAN" ] },
     "//": "Slower reloads, no unloading.  Base, unskilled person should take 1.5 seconds per chamber.  No underbarrel mods, that's where the ram goes.",
     "valid_mod_locations": [ [ "barrel", 1 ], [ "grip", 1 ], [ "stock", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ] ],
     "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ]
