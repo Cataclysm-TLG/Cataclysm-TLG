@@ -552,7 +552,6 @@ std::optional<int> sound_iuse::use( Character *, item &,
                                     map *here, const tripoint_bub_ms &pos ) const
 {
     map &bubble_map = reality_bubble();
-
     if( bubble_map.inbounds( here->get_abs( pos ) ) ) {
         sounds::sound( bubble_map.get_bub( here->get_abs( pos ) ), sound_volume, sound_type,
                        sound_message.translated(), true,
