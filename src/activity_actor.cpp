@@ -4515,6 +4515,15 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
             if( craft.get_passive_started_at() == calendar::before_time_starts ) {
                 craft_stamp_passive_entry( craft, crafter, calendar::turn, craft_item );
                 mode_ = derive_mode();
+                // Carrying step_progress forward (recipe-edit migration) can
+                // back-date passive_started_at past ready_at; advance inline
+                // instead of waiting for a queued ready_check.
+                if( craft.get_ready_at() != calendar::before_time_starts &&
+                    calendar::turn >= craft.get_ready_at() ) {
+                    craft_actualize_scheduled( craft, item_wakeup_kind::ready_check,
+                                               calendar::turn, craft_item );
+                    return;
+                }
             }
 
             if( plan.choice == step_choice::do_wait ) {

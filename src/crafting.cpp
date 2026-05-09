@@ -49,6 +49,7 @@
 #include "item_components.h"
 #include "item_location.h"
 #include "item_stack.h"
+#include "item_uid.h"
 #include "itype.h"
 #include "iuse.h"
 #include "line.h"
@@ -1245,6 +1246,7 @@ static void craft_actualize_fail( item &craft, time_point now,
         return;
     }
     end_live_wait_for( loc );
+    get_item_wakeups().cancel_all( craft.uid().get_value() );
     item_location mut_loc = loc;
     mut_loc.remove_item();
 }
@@ -1257,6 +1259,7 @@ static void finalize_passive_craft( item &craft, const item_location &loc )
                   "destroying craft for recipe %s",
                   craft.get_crafter_id().get_value(),
                   craft.get_making().ident().str() );
+        get_item_wakeups().cancel_all( craft.uid().get_value() );
         item_location mut_loc = loc;
         mut_loc.remove_item();
         return;
@@ -1264,6 +1267,7 @@ static void finalize_passive_craft( item &craft, const item_location &loc )
     end_live_wait_for( loc );
     item craft_copy = craft;
     const std::optional<tripoint_bub_ms> finalize_loc = craft_loc_for_complete( loc );
+    get_item_wakeups().cancel_all( craft.uid().get_value() );
     item_location mut_loc = loc;
     mut_loc.remove_item();
     crafter->complete_craft( craft_copy, finalize_loc );
@@ -1300,6 +1304,14 @@ static void craft_actualize_ready( item &craft, time_point now, const item_locat
         return;
     }
 
+    // Fail before ready: queue ordering dispatches ready first, but an
+    // overdue fail must short-circuit instead of advancing the step.
+    if( craft.get_fail_at() != calendar::before_time_starts &&
+        now >= craft.get_fail_at() ) {
+        craft_actualize_fail( craft, now, loc );
+        return;
+    }
+
     if( !env_satisfied_for_step( step, craft, loc ) ) {
         if( craft.get_pause_started_at() == calendar::before_time_starts ) {
             craft.set_pause_started_at( now );
@@ -1316,6 +1328,8 @@ static void craft_actualize_ready( item &craft, time_point now, const item_locat
 
     if( craft.get_pause_started_at() != calendar::before_time_starts ) {
         const time_duration paused_for = now - craft.get_pause_started_at();
+        // Restored fail_at is always in the future: pause entry is gated by
+        // the top-of-handler fail guard, so saved_fail_at > pause_started_at.
         craft.set_ready_at( craft.get_saved_ready_at() + paused_for );
         if( craft.get_saved_alarm_at() != calendar::before_time_starts ) {
             craft.set_alarm_at( craft.get_saved_alarm_at() + paused_for );
@@ -1327,6 +1341,11 @@ static void craft_actualize_ready( item &craft, time_point now, const item_locat
         craft.set_saved_ready_at( calendar::before_time_starts );
         craft.set_saved_alarm_at( calendar::before_time_starts );
         craft.set_saved_fail_at( calendar::before_time_starts );
+        // Already-due alarm fires inline, not one queue tick late.
+        if( craft.get_alarm_at() != calendar::before_time_starts &&
+            now >= craft.get_alarm_at() ) {
+            craft_actualize_alarm( craft, now, loc );
+        }
         if( now < craft.get_ready_at() ) {
             get_item_wakeups().rebuild_for_item( loc );
             return;
@@ -1417,22 +1436,37 @@ void craft_stamp_passive_entry( item &craft, const Character &crafter, time_poin
     const attention_plan plan = idx < static_cast<int>( plans.size() ) ? plans[idx] :
                                 attention_plan{};
 
-    craft.set_passive_started_at( now );
     const crafting_cost_context passive_ctx{ crafter.book_bonuses_nearby(),
             compute_tool_speeds( rec, crafter ) };
     const int64_t step_moves = static_cast<int64_t>( rec.step_budget_moves(
                                    crafter, idx, craft.get_making_batch_size(),
                                    passive_ctx, recipe_time_flag::ignore_proficiencies ) );
-    craft.set_ready_at( now + time_duration::from_moves( step_moves ) );
+    // Carry step_progress as a fraction of the active (prof-aware) budget
+    // and back-date entry by that fraction of the passive budget; preserves
+    // prior work when an active step becomes unattended via recipe edit.
+    time_point entry_time = now;
+    if( craft.get_step_progress() > 0.0 ) {
+        const double active_budget = rec.step_budget_moves(
+                                         crafter, idx, craft.get_making_batch_size(), passive_ctx );
+        if( active_budget > 0.0 && step_moves > 0 ) {
+            const double fraction = std::min( 1.0,
+                                              craft.get_step_progress() / active_budget );
+            const int64_t elapsed_passive_moves = static_cast<int64_t>(
+                    fraction * static_cast<double>( step_moves ) );
+            entry_time = now - time_duration::from_moves( elapsed_passive_moves );
+        }
+    }
+    craft.set_passive_started_at( entry_time );
+    craft.set_ready_at( entry_time + time_duration::from_moves( step_moves ) );
     if( cur_step.max_time.has_value() ) {
         time_duration fail_dur = *cur_step.max_time;
         if( cur_step.grace_period.has_value() ) {
             fail_dur += *cur_step.grace_period;
         }
-        craft.set_fail_at( now + fail_dur );
+        craft.set_fail_at( entry_time + fail_dur );
     }
     if( plan.choice == step_choice::set_timer && plan.alarm_offset.has_value() ) {
-        craft.set_alarm_at( now + *plan.alarm_offset );
+        craft.set_alarm_at( entry_time + *plan.alarm_offset );
     }
     // Counter bounds derive from prior steps' budgets (default flags) so any
     // active-step overshoot in item_counter does not carry into this passive
@@ -3753,7 +3787,8 @@ static bool is_anyone_crafting( const item_location &itm, const Character *you =
 {
     for( const npc &guy : g->all_npcs() ) {
         if( !( you && you->getID() == guy.getID() ) &&
-            guy.activity.id() == ACT_CRAFT ) {
+            ( guy.activity.id() == ACT_CRAFT || guy.activity.id() == ACT_CRAFT_WAIT ) &&
+            !guy.activity.targets.empty() ) {
             item_location target = guy.activity.targets.back();
             if( target == itm ) {
                 return true;

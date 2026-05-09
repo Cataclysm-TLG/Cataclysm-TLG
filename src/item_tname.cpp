@@ -221,8 +221,13 @@ std::string craft( item const &it, unsigned int /* quantity */,
         const int start_counter = it.get_passive_start_counter();
         const int end_counter = it.get_passive_end_counter();
         if( pstart != calendar::before_time_starts && ready > pstart && end_counter > start_counter ) {
+            // Freeze projection at pause time so a stalled craft does not
+            // keep ticking up.
+            const time_point pause_start = it.get_pause_started_at();
+            const time_point eff_now = pause_start != calendar::before_time_starts
+                                       ? pause_start : calendar::turn;
             const time_duration step_dur = ready - pstart;
-            time_duration elapsed = calendar::turn - pstart;
+            time_duration elapsed = eff_now - pstart;
             if( elapsed < 0_seconds ) {
                 elapsed = 0_seconds;
             }
