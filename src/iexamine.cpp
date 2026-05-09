@@ -3084,11 +3084,6 @@ void iexamine::stook_empty( Character &, const tripoint_bub_ms &examp )
     } else if( !here.is_outside( examp ) ) {
         add_msg( _( "The stook will need to be set up outside to dry." ) );
         return;
-    } else {
-        add_msg( _( "This pile contains grain that is ready to be left out for drying." ) );
-        if( !query_yn( _( "Stand the grain up to dry?" ) ) ) {
-            return;
-        }
     }
 
     here.furn_set( examp, next_stook_type );
