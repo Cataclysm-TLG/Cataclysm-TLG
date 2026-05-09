@@ -2065,6 +2065,35 @@
     ]
   },
   {
+    "id": "armor_bio_filter",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "bionic filtration system" },
+    "description": "A powered system of filters working to keep the airways clear of dust, smoke, and airborne toxins.",
+    "weight": "180 g",
+    "volume": "250 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "to_hit": -2,
+    "material": [ "plastic", "steel" ],
+    "symbol": "[",
+    "color": "dark_gray",
+    "warmth": 0,
+    "environmental_protection": 16,
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR", "NO_SALVAGE" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 }
+        ],
+        "covers": [ "mouth" ],
+        "coverage": 0
+      }
+    ]
+  },
+  {
     "id": "armor_bio_eyes",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],

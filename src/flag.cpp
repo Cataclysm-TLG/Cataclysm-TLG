@@ -30,7 +30,6 @@ const flag_id flag_ALLERGEN_NUT( "ALLERGEN_NUT" );
 const flag_id flag_ALLERGEN_VEGETABLE( "ALLERGEN_VEGETABLE" );
 const flag_id flag_ALLERGEN_WHEAT( "ALLERGEN_WHEAT" );
 const flag_id flag_ALLERGEN_WOOL( "ALLERGEN_WOOL" );
-const flag_id flag_ALLOWS_BODY_BLOCK( "ALLOWS_BODY_BLOCK" );
 const flag_id flag_ALLOWS_NATURAL_ATTACKS( "ALLOWS_NATURAL_ATTACKS" );
 const flag_id flag_ALLOWS_REMOTE_USE( "ALLOWS_REMOTE_USE" );
 const flag_id flag_ALWAYS_TWOHAND( "ALWAYS_TWOHAND" );

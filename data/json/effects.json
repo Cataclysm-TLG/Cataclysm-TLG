@@ -2199,6 +2199,12 @@
   },
   {
     "type": "effect_type",
+    "id": "took_analgesic",
+    "//": "Helps NPCs know if they took pain medicine.",
+    "max_duration": 1200
+  },
+  {
+    "type": "effect_type",
     "id": "no_sight",
     "name": [ "Poor Sight" ],
     "desc": [ "You can't see very far from this spot." ],
@@ -3424,7 +3430,7 @@
   {
     "type": "effect_type",
     "id": "cocaine",
-    "name": [ "Sharp", "Wired", "Geeked", "Whiteout" ],
+    "name": [ "Cocaine Buzz", "Coked Up", "Geeked", "Whiteout" ],
     "desc": [
       "You've got a mild cocaine buzz going.  Feels good, feels clean.",
       "You're feeling chatty and energized, and probably way too confident.",

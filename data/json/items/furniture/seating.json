@@ -10,10 +10,12 @@
     "price": "30 USD",
     "price_postapoc": "2 USD 50 cent",
     "longest_side": "95 cm",
-    "volume": "30 L",
-    "weight": "12 kg",
+    "volume": "20 L",
+    "weight": "6 kg",
+    "techniques": [ "WBLOCK_1" ],
     "material": [ "wood" ],
-    "to_hit": -3
+    "to_hit": -3,
+    "melee_damage": { "bash": 8 }
   },
   {
     "type": "ITEM",
@@ -45,7 +47,9 @@
     "volume": "17 L",
     "weight": "3 kg",
     "material": [ "wood" ],
-    "to_hit": -2
+    "to_hit": -2,
+    "techniques": [ "WBLOCK_1" ],
+    "melee_damage": { "bash": 6 }
   },
   {
     "type": "ITEM",
@@ -61,7 +65,9 @@
     "volume": "20 L",
     "weight": "11 kg",
     "material": [ "wood" ],
-    "to_hit": -2
+    "to_hit": -2,
+    "techniques": [ "WBLOCK_0" ],
+    "melee_damage": { "bash": 6 }
   },
   {
     "type": "ITEM",
@@ -76,7 +82,9 @@
     "volume": "30 L",
     "weight": "7500 g",
     "material": [ { "type": "steel", "portion": 975 }, { "type": "leather", "portion": 25 } ],
-    "to_hit": -2
+    "to_hit": -2,
+    "techniques": [ "WBLOCK_1" ],
+    "melee_damage": { "bash": 6 }
   },
   {
     "type": "ITEM",
@@ -92,7 +100,9 @@
     "volume": "30 L",
     "weight": "5 kg",
     "material": [ { "type": "wood", "portion": 85 }, { "type": "steel", "portion": 15 } ],
-    "to_hit": -3
+    "to_hit": -3,
+    "techniques": [ "WBLOCK_1" ],
+    "melee_damage": { "bash": 7 }
   },
   {
     "type": "ITEM",

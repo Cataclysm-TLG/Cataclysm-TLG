@@ -70,7 +70,7 @@
     "longest_side": "130 cm",
     "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "uneven" },
     "price_postapoc": "5 USD",
-    "flags": [ "SHEATH_SWORD" ],
+    "flags": [ "SHEATH_SWORD", "ALWAYS_TWOHAND" ],
     "weapon_category": [ "GREAT_SWORDS" ],
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -20 ] ],
     "techniques": [ "WBLOCK_1", "RAPID", "WIDE", "BRUTAL" ],
@@ -181,6 +181,7 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 8 ], [ "SAW_W", 1 ], [ "DIG", 1 ], [ "PRY", 1 ], [ "GRASS_CUT", 1 ] ],
     "flags": [ "SHEATH_SWORD", "FRAGILE_MELEE" ],
     "weapon_category": [ "SHORT_SWORDS" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "bash": 2, "cut": 14 }
   },
   {
@@ -480,8 +481,9 @@
     "material": [ { "type": "leather", "portion": 1.1 }, { "type": "steel", "portion": 48 } ],
     "repairs_with": [ "steel" ],
     "qualities": [ [ "CUT", 1 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 18 ] ],
-    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES", "NINJUTSU_WEAPONS" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "stab": 14 }
   },
   {
@@ -521,7 +523,7 @@
     "volume": "82 ml",
     "longest_side": "15 cm",
     "to_hit": { "grip": "none", "length": "hand", "surface": "line", "balance": "good" },
-    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE", "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE", "FRAGILE_MELEE" ],
     "weapon_category": [ "SHIVS" ],
     "qualities": [ [ "BUTCHER", -18 ] ],
     "melee_damage": { "cut": 6 }
@@ -548,7 +550,7 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -31 ] ],
     "weapon_category": [ "LONG_THRUSTING_SWORDS", "GREAT_SWORDS" ],
-    "melee_damage": { "bash": 10, "cut": 33 }
+    "melee_damage": { "bash": 13, "cut": 33 }
   },
   {
     "id": "karambit",
@@ -563,12 +565,12 @@
     "price": "64 USD",
     "price_postapoc": "50 cent",
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "good" },
-    "techniques": [ "PRECISE" ],
+    "techniques": [ "PRECISE", "WBLOCK_0" ],
     "material": [ "steel" ],
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
     "melee_damage": { "stab": 12 }
   },
@@ -590,7 +592,8 @@
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "techniques": [ "WBLOCK_0" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
     "melee_damage": { "stab": 16 }
   },
@@ -616,7 +619,7 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 9 ] ],
     "weapon_category": [ "GREAT_SWORDS" ],
-    "melee_damage": { "bash": 4, "cut": 50 }
+    "melee_damage": { "bash": 3, "cut": 42 }
   },
   {
     "id": "fencing_foil",
@@ -1007,7 +1010,7 @@
     "volume": "51 ml",
     "longest_side": "17 cm",
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
-    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 14 ] ],
     "melee_damage": { "bash": 2, "stab": 12 }
@@ -1025,7 +1028,7 @@
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "any", "balance": "neutral" },
     "price_postapoc": "5 USD",
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    
     "techniques": [ "WBLOCK_1" ],
     "melee_damage": { "bash": 3, "stab": 14 },
     "weapon_category": [ "SHIVS" ]

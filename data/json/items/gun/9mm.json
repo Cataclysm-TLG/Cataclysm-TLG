@@ -360,7 +360,7 @@
     "min_cycle_recoil": 450,
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
-    "flags": [ "RELOAD_ONE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "RELOAD_ONE" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",

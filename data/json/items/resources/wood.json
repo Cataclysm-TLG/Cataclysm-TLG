@@ -5,7 +5,7 @@
     "symbol": "/",
     "color": "brown",
     "name": { "str": "log" },
-    "description": "A large log of wood, cut from a tree.  (a)ctivate a wood axe or wood saw to cut it into planks.",
+    "description": "A large section of tree trunk.",
     "category": "other",
     "price": "100 USD",
     "price_postapoc": "10 cent",

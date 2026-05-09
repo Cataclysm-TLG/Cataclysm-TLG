@@ -43,7 +43,7 @@
     "material": [ "silver" ],
     "symbol": ";",
     "techniques": [ "PRECISE" ],
-    "flags": [ "FRAGILE_MELEE", "BELT_CLIP", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "FRAGILE_MELEE", "BELT_CLIP", "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
     "to_hit": 1,
     "color": "light_gray",
@@ -65,7 +65,7 @@
     "symbol": ",",
     "color": "light_red",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 3 ], [ "FABRIC_CUT", 1 ] ],
-    "flags": [ "BELT_CLIP", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "NO_SALVAGE" ],
+    "flags": [ "BELT_CLIP", "SHEATH_KNIFE",  "NO_SALVAGE" ],
     "weapon_category": [ "SHIVS" ],
     "melee_damage": { "stab": 6 },
     "//": "Based on https://www.amazon.com/dp/B001M0GB6Y"
@@ -134,7 +134,7 @@
       }
     ],
     "use_action": [ { "type": "inscribe", "verb": "Write", "gerund": "Written", "on_terrain": false, "material_restricted": false } ],
-    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "ALLOWS_BODY_BLOCK" ]
+    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE" ]
   },
   {
     "id": "pencil",
@@ -155,7 +155,7 @@
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "graphite": 100 }, "rigid": true } ],
     "use_action": [ { "type": "inscribe", "verb": "Write", "gerund": "Written", "on_terrain": false, "material_restricted": false } ],
-    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD", "NO_UNLOAD", "ALLOWS_BODY_BLOCK" ]
+    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD", "NO_UNLOAD" ]
   },
   {
     "id": "black_pen",
@@ -176,7 +176,7 @@
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "black_pen_ink": 100 }, "watertight": true, "rigid": true } ],
     "use_action": [ { "type": "inscribe", "verb": "Write", "gerund": "Written", "on_terrain": false, "material_restricted": false } ],
-    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD", "ALLOWS_BODY_BLOCK" ]
+    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD" ]
   },
   {
     "id": "blue_pen",
@@ -197,7 +197,7 @@
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "blue_pen_ink": 100 }, "watertight": true, "rigid": true } ],
     "use_action": [ { "type": "inscribe", "verb": "Write", "gerund": "Written", "on_terrain": false, "material_restricted": false } ],
-    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD", "ALLOWS_BODY_BLOCK" ]
+    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD" ]
   },
   {
     "id": "red_pen",
@@ -218,7 +218,7 @@
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "red_pen_ink": 100 }, "watertight": true, "rigid": true } ],
     "use_action": [ { "type": "inscribe", "verb": "Write", "gerund": "Written", "on_terrain": false, "material_restricted": false } ],
-    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD", "ALLOWS_BODY_BLOCK" ]
+    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD" ]
   },
   {
     "id": "green_pen",
@@ -239,7 +239,7 @@
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "green_pen_ink": 100 }, "watertight": true, "rigid": true } ],
     "use_action": [ { "type": "inscribe", "verb": "Write", "gerund": "Written", "on_terrain": false, "material_restricted": false } ],
-    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD", "ALLOWS_BODY_BLOCK" ]
+    "flags": [ "FRAGILE_MELEE", "WRITE_MESSAGE", "NO_RELOAD" ]
   },
   {
     "id": "leather_journal",

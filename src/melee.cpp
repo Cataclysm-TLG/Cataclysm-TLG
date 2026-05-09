@@ -114,6 +114,7 @@ static const efftype_id effect_venom_player2( "venom_player2" );
 static const efftype_id effect_venom_weaken( "venom_weaken" );
 static const efftype_id effect_winded( "winded" );
 
+static const json_character_flag json_flag_ALLOWS_BODY_BLOCKING( "ALLOWS_BODY_BLOCKING" );
 static const json_character_flag json_flag_CANNOT_ATTACK( "CANNOT_ATTACK" );
 static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const json_character_flag json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
@@ -134,6 +135,7 @@ static const limb_score_id limb_score_manip( "manip" );
 static const limb_score_id limb_score_reaction( "reaction" );
 
 static const matec_id tec_aoe_secondary( "tec_aoe_secondary" );
+static const matec_id WBLOCK_0( "WBLOCK_0" );
 static const matec_id WBLOCK_1( "WBLOCK_1" );
 static const matec_id WBLOCK_2( "WBLOCK_2" );
 static const matec_id WBLOCK_3( "WBLOCK_3" );
@@ -1572,10 +1574,9 @@ std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id> Character::pick_tech
     std::vector<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>> basics;
 
     for( const matec_id &tec_id : all ) {
-        add_msg_debug( debugmode::DF_MELEE, "Evaluating technique %s", tec_id->name );
 
         if( find( blacklist.begin(), blacklist.end(), tec_id ) != blacklist.end() ) {
-            add_msg_debug( debugmode::DF_MELEE, "Technique is on the blacklist, discarded" );
+            add_msg_debug( debugmode::DF_MELEE, "Technique %s is on the blacklist, discarded", tec_id->name );
             continue;
         }
 
@@ -1627,13 +1628,13 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
 
     // ignore "dummy" techniques like WBLOCK_1
     if( tec_id->dummy ) {
-        add_msg_debug( debugmode::DF_MELEE, "Dummy technique, attack discarded" );
+        add_msg_debug( debugmode::DF_MELEE, "%s is a dummy technique, attack discarded", tec_id->name );
         return std::nullopt;
     }
 
     // skip defensive techniques
     if( tec_id->defensive ) {
-        add_msg_debug( debugmode::DF_MELEE, "Defensive technique, attack discarded" );
+        add_msg_debug( debugmode::DF_MELEE, "%s is a defensive technique, attack discarded", tec_id->name );
         return std::nullopt;
     }
 
@@ -1641,26 +1642,29 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
     if( tec_id->has_condition ) {
         const_dialogue d( get_const_talker_for( *this ), get_const_talker_for( t ) );
         if( !tec_id->condition( d ) ) {
-            add_msg_debug( debugmode::DF_MELEE, "Conditionals failed, attack discarded" );
+            add_msg_debug( debugmode::DF_MELEE, "%s conditionals failed, attack discarded", tec_id->name );
             return std::nullopt;
         }
     }
 
     // skip wall adjacent techniques if not next to a wall
     if( tec_id->wall_adjacent && !get_map().is_wall_adjacent( pos_bub() ) ) {
-        add_msg_debug( debugmode::DF_MELEE, "No adjacent walls found, attack discarded" );
+        add_msg_debug( debugmode::DF_MELEE, "No adjacent walls found for %s, attack discarded",
+                       tec_id->name );
         return std::nullopt;
     }
 
     // skip non reach ok techniques if reach attacking
     if( !( tec_id->reach_ok || tec_id->reach_tec ) && reach_attacking ) {
-        add_msg_debug( debugmode::DF_MELEE, "Not usable with reach attack, attack discarded" );
+        add_msg_debug( debugmode::DF_MELEE, "%s not usable with reach attack, attack discarded",
+                       tec_id->name );
         return std::nullopt;
     }
 
     // skip reach techniques if not reach attacking
     if( tec_id->reach_tec && !reach_attacking ) {
-        add_msg_debug( debugmode::DF_MELEE, "Only usable with reach attack, attack discarded" );
+        add_msg_debug( debugmode::DF_MELEE, "%s only usable with reach attack, attack discarded",
+                       tec_id->name );
         return std::nullopt;
     }
 
@@ -1712,7 +1716,7 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
     // dice(p->dex_cur + p->get_skill_level("melee"),   10))
     if( tec_id->disarms && !t.has_weapon() ) {
         add_msg_debug( debugmode::DF_MELEE,
-                       "Disarming technique against unarmed opponent, attack discarded" );
+                       "Disarming technique %s against unarmed opponent, attack discarded", tec_id->name );
         return std::nullopt;
     }
 
@@ -1724,7 +1728,8 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
 
     // if aoe, check if there are valid targets
     if( !tec_id->aoe.empty() && !valid_aoe_technique( t, tec_id.obj() ) ) {
-        add_msg_debug( debugmode::DF_MELEE, "AoE technique witout valid AoE targets, attack discarded" );
+        add_msg_debug( debugmode::DF_MELEE,
+                       "%s is an AoE technique witout valid AoE targets, attack discarded", tec_id->name );
         return std::nullopt;
     }
 
@@ -1732,7 +1737,7 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
     if( tec_id->weighting < 0 && !one_in( std::abs( tec_id->weighting ) ) ) {
         if( !tec_id->fallback ) {
             add_msg_debug( debugmode::DF_MELEE,
-                           "Negative technique weighting failed weight roll, attack discarded" );
+                           "Negative tech weighting failed roll, attack %s discarded", tec_id->name );
         } else {
             // Fallback techs should always fire in place of tec_none if possible, even if they failed their roll.
             if( tec_id->is_valid_character( *this ) ) {
@@ -1743,7 +1748,8 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
                     fallbacks.push_back( std::make_tuple( tec_id, vector->first, vector->second ) );
                     add_msg_debug( debugmode::DF_MELEE, "Adding fallback tech %s to the tech list", tec_id->name );
                 } else {
-                    add_msg_debug( debugmode::DF_MELEE, "No valid attack vector found, fallback attack discarded" );
+                    add_msg_debug( debugmode::DF_MELEE, "No valid attack vector found, fallback attack %s discarded",
+                                   tec_id->name );
                 }
             }
         }
@@ -1758,7 +1764,7 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
         if( vector ) {
             return std::make_tuple( tec_id, vector->first, vector->second );
         } else {
-            add_msg_debug( debugmode::DF_MELEE, "No valid attack vector found, attack discarded" );
+            add_msg_debug( debugmode::DF_MELEE, "No valid attack vector found, %s discarded", tec_id->name );
             return std::nullopt;
         }
     }
@@ -2135,29 +2141,36 @@ int melee::blocking_ability( const item &shield )
 {
     int block_bonus = 0;
     if( shield.has_technique( WBLOCK_3 ) ) {
-        block_bonus = 10;
+        block_bonus = 8 + shield.type->m_to_hit;
     } else if( shield.has_technique( WBLOCK_2 ) ) {
-        block_bonus = 6;
+        block_bonus = 4 + shield.type->m_to_hit;
     } else if( shield.has_technique( WBLOCK_1 ) ) {
-        block_bonus = 4;
+        block_bonus = 2 + shield.type->m_to_hit;
     } else if( shield.has_flag( flag_BLOCK_WHILE_WORN ) ) {
         block_bonus = 2;
+    }  else if( shield.has_technique( WBLOCK_0 ) ) {
+        block_bonus = shield.type->m_to_hit;
     }
     return block_bonus;
 }
 
 item_location Character::best_shield()
 {
-    // Note: wielded weapon, not one used for attacks
-    int best_value = melee::blocking_ability( weapon );
-    // "BLOCK_WHILE_WORN" without a blocking tech need to be worn for the bonus
-    best_value = best_value == 2 ? 0 : best_value;
-    item_location best = best_value > 0 ? get_wielded_item() : item_location();
+    int best_value = 0;
+    const bool weapon_can_block = weapon.has_technique( WBLOCK_0 ) ||
+                                  weapon.has_technique( WBLOCK_1 ) || weapon.has_technique( WBLOCK_2 ) ||
+                                  weapon.has_technique( WBLOCK_3 );
+    item_location best;
+    if( weapon_can_block && martial_arts_data->can_weapon_block() ) {
+        best_value = melee::blocking_ability( weapon );
+        best = get_wielded_item();
+    }
     item *best_worn = worn.best_shield();
-    if( best_worn && melee::blocking_ability( *best_worn ) >= best_value ) {
+    if( best_worn &&
+        best_worn->has_flag( flag_BLOCK_WHILE_WORN ) &&
+        melee::blocking_ability( *best_worn ) >= best_value ) {
         best = item_location( *this, best_worn );
     }
-
     return best;
 }
 
@@ -2178,19 +2191,6 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
         return false;
     }
 
-    // Melee skill and reaction score governs if you can react in time.
-    // Skill of 5 with full stamina and no relevant encumbrance guarantees a block attempt.
-    // Skill of 10 and no relevant encumbrance almost guarantees a block attempt regardless of stamina.
-    // The + 0.01 is a safety margin to prevent floating point precision errors in x_in_y.
-    float melee_skill = has_active_bionic( bio_cqb ) ? 5 : get_skill_level( skill_melee );
-    if( !x_in_y( melee_skill * 40.0 * get_limb_score( limb_score_reaction ) - 100 *
-                 get_stamina_dodge_modifier(), 200 ) ) {
-        add_msg_debug( debugmode::DF_MELEE, "Block roll failed" );
-        return false;
-    }
-
-    blocks_left--;
-
     // This bonus absorbs damage from incoming attacks before they land,
     // but it still counts as a block even if it absorbs all the damage.
     float total_phys_block = mabuff_block_bonus();
@@ -2200,60 +2200,91 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
 
     // Check if we are going to block with an item. This could
     // be worn equipment with the BLOCK_WHILE_WORN flag.
-    const bool has_shield = !!shield;
-    bool worn_shield = has_shield && shield->has_flag( flag_BLOCK_WHILE_WORN );
+    bool has_shield = !!shield;
+    bool worn_shield = has_shield && shield->has_flag( flag_BLOCK_WHILE_WORN ) &&
+                       is_worn( *shield.get_item() );
 
     bool conductive_shield = false;
-    bool unarmed = !is_armed();
-    bool force_unarmed = martial_arts_data->is_force_unarmed();
-    bool allow_weapon_blocking = martial_arts_data->can_weapon_block();
-    bool armed_body_block = weapon.has_flag( flag_ALLOWS_BODY_BLOCK );
+    // Can we block with our body despite wielding a weapon?
+    bool armed_body_block = !weapon.is_null() && ( !weapon.is_two_handed( *this ) ||
+                            weapon.has_flag( json_flag_ALLOWS_BODY_BLOCKING ) );
 
-    // boolean check if blocking is being done with unarmed or not
-    const bool item_blocking = allow_weapon_blocking && has_shield && !unarmed && !armed_body_block;
-
-    bool arm_block = false;
-    bool leg_block = false;
-    bool nonstandard_block = false;
+    bool arm_block = martial_arts_data->can_arm_block( *this );
+    bool leg_block = martial_arts_data->can_leg_block( *this );
+    bool nonstandard_block = martial_arts_data->can_nonstandard_block( *this );
 
     int unarmed_skill = round( get_skill_level( skill_unarmed ) );
 
-    int block_score = 1;
+    int weapon_block_score = 1;
+    int body_block_score = 1;
+    bool can_block_unarmed = false;
 
-    if( has_shield ) {
-        block_bonus = melee::blocking_ability( *shield );
-        conductive_shield = shield->conductive();
+    if( ( arm_block || leg_block || nonstandard_block ) && ( !has_shield || armed_body_block ) ) {
+        can_block_unarmed = true;
+        /** @EFFECT_UNARMED increases attack blocking effectiveness with a limb or worn item */
+        // get_str instead of get_arm_str, we're not lifting an item & limb scores are checked later.
+        body_block_score = get_str() + unarmed_skill + mabuff_block_effectiveness_bonus();
     }
-    /** @ARM_STR increases attack blocking effectiveness with a limb or worn/wielded item */
-    /** @EFFECT_UNARMED increases attack blocking effectiveness with a limb or worn item */
-    if( unarmed || force_unarmed || worn_shield || armed_body_block || ( has_shield &&
-            !allow_weapon_blocking ) ) {
-        arm_block = martial_arts_data->can_arm_block( *this );
-        leg_block = martial_arts_data->can_leg_block( *this );
-        nonstandard_block = martial_arts_data->can_nonstandard_block( *this );
-        if( arm_block || leg_block || nonstandard_block ) {
-            // get_str instead of get_arm_str, we're not lifting an item & limb scores are checked later.
-            block_score = get_str() + unarmed_skill;
-        } else {
-            // We don't have a shield or a technique. How are we blocking?
-            return false;
-        }
-        // Do we block with a weapon? Worn shields are already filtered out.
-        // And weapon blocks are preferred by best_shield.
-    } else if( has_shield ) {
-        block_score = get_arm_str() + block_bonus + melee_skill;
-    } else {
-        // Can't block with limbs or items (do not block).
+
+    if( !has_shield && !can_block_unarmed ) {
+        // We have no way of blocking.
         return false;
     }
 
-    // add martial arts block effectiveness bonus
-    block_score += mabuff_block_effectiveness_bonus();
+    // Melee skill and reaction score governs if you can react in time.
+    // Skill of 5 with full stamina and no relevant encumbrance guarantees a block attempt.
+    // Skill of 10 and no relevant encumbrance almost guarantees a block attempt regardless of stamina.
+    // The + 0.01 is a safety margin to prevent floating point precision errors in x_in_y.
+    // TODO: No guaranteed anything, checks vs monster skill.
+    float melee_skill = has_active_bionic( bio_cqb ) ? 5 : get_skill_level( skill_melee );
+    if( !x_in_y( melee_skill * 40.0 * get_limb_score( limb_score_reaction ) - 100 *
+                 get_stamina_dodge_modifier(), 200 ) ) {
+        add_msg_debug( debugmode::DF_MELEE, "Block reaction roll failed" );
+        return false;
+    }
 
-    // Weapon blocks are preferred to limb blocks.
+    // We only decrement blocks and make the reaction roll if we can actually block.
+    blocks_left--;
+
+    if( has_shield ) {
+        /** @ARM_STR increases attack blocking effectiveness with a worn/wielded item */
+        block_bonus = melee::blocking_ability( *shield );
+        conductive_shield = shield->conductive();
+        weapon_block_score = get_arm_str() + block_bonus + melee_skill + mabuff_block_effectiveness_bonus();
+    }
+
+    bool will_weapon_block = false;
+    bool will_body_block = false;
+    int block_score = 0;
+
+    // Get the rest of our block modifiers to tally up a final score.
+    if( can_block_unarmed ) {
+        bp_hit = select_blocking_part( arm_block, leg_block, nonstandard_block );
+        body_block_score *= get_part( bp_hit )->get_limb_score( limb_score_block );
+        add_msg_debug( debugmode::DF_MELEE, "Body block score after limb score multiplier: %d",
+                       body_block_score );
+        if( worn_shield && shield->covers( bp_hit ) ) {
+            // BLOCK_WHILE_WORN is largely deprecated, but here we conditionally grant the bonus if it exists.
+            body_block_score += block_bonus;
+        }
+    }
+
+    // Use the best thing available.
+    if( has_shield && ( !can_block_unarmed || weapon_block_score >= body_block_score ) ) {
+        will_weapon_block = true;
+    } else if( can_block_unarmed && ( !has_shield || body_block_score > weapon_block_score ) ) {
+        will_body_block = true;
+    }
+
+    if( !will_weapon_block && !will_body_block ) {
+        // Not sure how we got here, but let's bail out before something horrible happens.
+        return false;
+    }
+
     std::string thing_blocked_with;
-    // Do we block with a weapon? Handle melee wear but leave bp the same.
-    if( !( unarmed || force_unarmed || worn_shield || armed_body_block ) && allow_weapon_blocking ) {
+    if( will_weapon_block ) {
+        add_msg_debug( debugmode::DF_MELEE, "Weapon block score: %d", weapon_block_score );
+        block_score = weapon_block_score;
         thing_blocked_with = shield->tname();
         // Scaling modifier from incoming damage.
         float base_wear = 0.1f;
@@ -2265,22 +2296,15 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
         }
         handle_melee_wear( shield, wear_modifier );
     } else {
-        // Select part to block with, preferring worn blocking armor if applicable
-        bp_hit = select_blocking_part( arm_block, leg_block, nonstandard_block );
-        block_score *= get_part( bp_hit )->get_limb_score( limb_score_block );
-        add_msg_debug( debugmode::DF_MELEE, "Block score after multiplier %d", block_score );
+        block_score = body_block_score;
         if( worn_shield && shield->covers( bp_hit ) ) {
             thing_blocked_with = shield->tname();
-
             if( source != nullptr && !source->is_hallucination() ) {
                 for( damage_unit &du : dam.damage_units ) {
                     shield->damage_armor_durability( du, du, bp_hit, this, calculate_by_enchantment( 1,
                                                      enchant_vals::mod::EQUIPMENT_DAMAGE_CHANCE ) );
                 }
             }
-
-            block_score += block_bonus;
-
         } else {
             thing_blocked_with = body_part_name( bp_hit );
         }
@@ -2327,7 +2351,7 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
             // but severely mitigated damage if not
             bool can_block = elem.type == STATIC( damage_type_id( "electric" ) ) ? !conductive_shield : true;
             // Unarmed weapons won't block those
-            if( item_blocking && can_block ) {
+            if( will_weapon_block && can_block ) {
                 float previous_amount = elem.amount;
                 elem.amount /= 5;
                 damage_blocked += previous_amount - elem.amount;

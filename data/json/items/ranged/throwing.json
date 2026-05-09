@@ -84,6 +84,7 @@
     "longest_side": "30 cm",
     "to_hit": -1,
     "thrown_damage": [ { "damage_type": "stab", "amount": 16 } ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "cut": 8 }
   },
   {
@@ -102,6 +103,7 @@
     "weight": "300 g",
     "longest_side": "30 cm",
     "to_hit": -1,
+    "techniques": [ "WBLOCK_0" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 18 }, { "damage_type": "bash", "amount": 4 } ],
     "melee_damage": { "cut": 8 }
   },
@@ -122,6 +124,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "uneven" },
     "weapon_category": [ "HAND_AXES" ],
     "flags": [ "SHEATH_AXE" ],
+    "techniques": [ "WBLOCK_0" ],
     "thrown_damage": [ { "damage_type": "bash", "amount": 6 }, { "damage_type": "cut", "amount": 16 } ],
     "melee_damage": { "bash": 10, "cut": 17 }
   },
@@ -139,8 +142,9 @@
     "volume": "56 ml",
     "weight": "200 g",
     "longest_side": "35 cm",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
+    "techniques": [ "WBLOCK_0" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 14 } ],
     "melee_damage": { "bash": 1, "stab": 10 }
   },
@@ -160,6 +164,7 @@
     "color": "brown",
     "ammo_type": "thrown",
     "flags": [ "NOGIB" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -180,6 +185,7 @@
     "weapon_category": [ "POLEARMS", "SPEARS" ],
     "price": "90 USD",
     "price_postapoc": "5 USD",
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "bash": 5, "stab": 18 }
   },
   {
@@ -199,6 +205,7 @@
     "weapon_category": [ "POLEARMS", "SPEARS" ],
     "price": "90 USD",
     "price_postapoc": "5 USD",
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "bash": 5, "stab": 16 }
   }
 ]

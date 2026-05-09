@@ -665,7 +665,7 @@
     "longest_side": "21 cm",
     "price": "75 cent",
     "copy-from": "base_silverware",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "FRAGILE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE",  "FRAGILE_MELEE" ],
     "weapon_category": [ "SHIVS" ],
     "to_hit": { "grip": "solid", "length": "hand", "surface": "point", "balance": "neutral" },
     "melee_damage": { "bash": 2, "stab": 1 },
@@ -683,7 +683,7 @@
     "looks_like": "fork",
     "copy-from": "base_plastic_silverware",
     "weapon_category": [ "SHIVS" ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "FRAGILE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE",  "FRAGILE_MELEE" ],
     "melee_damage": { "bash": 1, "stab": 1 }
   },
   {
@@ -697,7 +697,7 @@
     "longest_side": "19 cm",
     "price": "69 cent",
     "copy-from": "base_silverware",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "to_hit": { "grip": "solid", "length": "hand", "surface": "point", "balance": "neutral" },
     "//": "Based on https://www.amazon.com/dp/B0886HQRD3"
   },
@@ -712,7 +712,7 @@
     "longest_side": "15 cm",
     "looks_like": "spoon",
     "copy-from": "base_plastic_silverware",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ]
+    "flags": [ "SHEATH_KNIFE" ]
   },
   {
     "type": "ITEM",
@@ -743,7 +743,7 @@
     "volume": "75 ml",
     "longest_side": "21 cm",
     "price": "4 USD",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "FRAGILE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE",  "FRAGILE_MELEE" ],
     "copy-from": "base_silverware",
     "to_hit": { "grip": "solid", "length": "hand", "surface": "point", "balance": "neutral" },
     "melee_damage": { "bash": 2, "stab": 1 },
@@ -761,7 +761,7 @@
     "longest_side": "15 cm",
     "looks_like": "knife_butter",
     "weapon_category": [ "SHIVS" ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "FRAGILE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE",  "FRAGILE_MELEE" ],
     "copy-from": "base_plastic_silverware",
     "melee_damage": { "bash": 1, "stab": 1 }
   },
@@ -798,7 +798,7 @@
     "id": "peeler",
     "name": { "str": "vegetable peeler" },
     "description": "A simple tool for peeling the outer skin off fruits and veggies without stabbing yourself.",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "looks_like": "knife_butter",
     "copy-from": "base_silverware",
     "weight": "82 g",
@@ -847,7 +847,7 @@
     "id": "spork",
     "name": { "str": "spork" },
     "description": "The bastardized hybrid of a spoon and fork, with all the power and capabilities of both in a more annoying to use package.",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "FRAGILE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE",  "FRAGILE_MELEE" ],
     "looks_like": "fork",
     "copy-from": "base_silverware",
     "weapon_category": [ "SHIVS" ],
@@ -859,7 +859,7 @@
     "id": "foon",
     "name": { "str": "foon" },
     "description": "Clearly the superior instrument.  Sporks are just imitators.",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK", "FRAGILE_MELEE" ],
+    "flags": [ "SHEATH_KNIFE",  "FRAGILE_MELEE" ],
     "looks_like": "spork",
     "copy-from": "base_silverware",
     "weapon_category": [ "SHIVS" ],
@@ -871,7 +871,7 @@
     "id": "chopsticks",
     "name": { "str": "chopsticks", "str_pl": "pairs of chopsticks" },
     "description": "One of the most popular eating utensils in the world.  Does double duty as a way of dealing with especially fragile vampires.",
-    "flags": [ "ALLOWS_BODY_BLOCK", "FRAGILE_MELEE" ],
+    "flags": [  "FRAGILE_MELEE" ],
     "symbol": "X",
     "color": "light_gray",
     "price": "1 USD",
@@ -961,7 +961,7 @@
     "volume": "180 ml",
     "longest_side": "29 cm",
     "price": "12 USD",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
     "melee_damage": { "bash": 3, "stab": 2 },
     "to_hit": { "grip": "solid", "length": "hand", "surface": "point", "balance": "neutral" },
@@ -1443,7 +1443,7 @@
     "name": { "str": "icecream scoop" },
     "description": "A utensil used for scooping icecream into bowls.  It has a spring powered lever to assist.",
     "looks_like": "spoon",
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "copy-from": "base_silverware"
   },
   {

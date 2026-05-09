@@ -319,7 +319,7 @@
     "symbol": ",",
     "color": "yellow",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 5 ], [ "FABRIC_CUT", 2 ] ],
-    "flags": [ "BELT_CLIP", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "BELT_CLIP", "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
     "melee_damage": { "stab": 10 }
   },

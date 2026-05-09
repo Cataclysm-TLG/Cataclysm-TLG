@@ -918,7 +918,7 @@
       [ "manip", 0.12, 0.22 ],
       [ "lift", 0.05 ],
       [ "grip", 0.051 ],
-      [ "block", 0.26 ],
+      [ "block", 1.0 ],
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
@@ -1022,7 +1022,7 @@
     "name_multiple": "arm (draped)",
     "name": "first left arm (draped)",
     "opposite": "cephalopod_arm_4_draped",
-    "locations_under": [ "cephalopod_arm_1_upper" ]
+    "locations_under": [ "cephalopod_arm_1_base" ]
   },
   {
     "id": "cephalopod_arm_2",
@@ -1047,7 +1047,7 @@
       [ "manip", 0.12, 0.22 ],
       [ "lift", 0.05 ],
       [ "grip", 0.051 ],
-      [ "block", 0.26 ],
+      [ "block", 1.0 ],
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
@@ -1151,7 +1151,7 @@
     "name_multiple": "arm (draped)",
     "name": "second left arm (draped)",
     "opposite": "cephalopod_arm_5_draped",
-    "locations_under": [ "cephalopod_arm_2_upper" ]
+    "locations_under": [ "cephalopod_arm_2_base" ]
   },
   {
     "id": "cephalopod_arm_3",
@@ -1176,7 +1176,7 @@
       [ "manip", 0.12, 0.22 ],
       [ "lift", 0.05 ],
       [ "grip", 0.051 ],
-      [ "block", 0.26 ],
+      [ "block", 1.0 ],
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
@@ -1280,7 +1280,7 @@
     "name_multiple": "arm (draped)",
     "name": "third left arm (draped)",
     "opposite": "cephalopod_arm_6_draped",
-    "locations_under": [ "cephalopod_arm_3_upper" ]
+    "locations_under": [ "cephalopod_arm_3_base" ]
   },
   {
     "id": "cephalopod_arm_4",
@@ -1305,7 +1305,7 @@
       [ "manip", 0.12, 0.22 ],
       [ "lift", 0.05 ],
       [ "grip", 0.051 ],
-      [ "block", 0.26 ],
+      [ "block", 1.0 ],
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
@@ -1409,7 +1409,7 @@
     "name_multiple": "arm (draped)",
     "name": "first right arm (draped)",
     "opposite": "cephalopod_arm_1_draped",
-    "locations_under": [ "cephalopod_arm_4_upper" ]
+    "locations_under": [ "cephalopod_arm_4_base" ]
   },
   {
     "id": "cephalopod_arm_5",
@@ -1434,7 +1434,7 @@
       [ "manip", 0.12, 0.22 ],
       [ "lift", 0.05 ],
       [ "grip", 0.051 ],
-      [ "block", 0.26 ],
+      [ "block", 1.0 ],
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
@@ -1538,7 +1538,7 @@
     "name_multiple": "arm (draped)",
     "name": "second right arm (draped)",
     "opposite": "cephalopod_arm_2_draped",
-    "locations_under": [ "cephalopod_arm_5_upper" ]
+    "locations_under": [ "cephalopod_arm_5_base" ]
   },
   {
     "id": "cephalopod_arm_6",
@@ -1563,7 +1563,7 @@
       [ "manip", 0.12, 0.22 ],
       [ "lift", 0.05 ],
       [ "grip", 0.051 ],
-      [ "block", 0.26 ],
+      [ "block", 1.0 ],
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
@@ -1667,7 +1667,7 @@
     "name_multiple": "arm (draped)",
     "name": "third right arm (draped)",
     "opposite": "cephalopod_arm_3_draped",
-    "locations_under": [ "cephalopod_arm_6_upper" ]
+    "locations_under": [ "cephalopod_arm_6_base" ]
   },
   {
     "id": "cephalopod_tentacle_l",
@@ -1692,7 +1692,7 @@
       [ "manip", 0.45, 0.95 ],
       [ "lift", 0.35 ],
       [ "grip", 0.36 ],
-      [ "block", 1.2 ],
+      [ "block", 1.0 ],
       [ "balance", 0.02 ],
       [ "swim", 0.08 ],
       [ "crawl", 0.08 ],
@@ -1809,7 +1809,7 @@
       [ "manip", 0.45, 0.95 ],
       [ "lift", 0.35 ],
       [ "grip", 0.36 ],
-      [ "block", 1.2 ],
+      [ "block", 1.0 ],
       [ "balance", 0.02 ],
       [ "swim", 0.08 ],
       [ "crawl", 0.08 ],
