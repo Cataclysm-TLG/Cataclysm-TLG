@@ -1100,7 +1100,14 @@ void vehicle::operate_planter( map &here )
                     //then don't put the item there.
                     break;
                 } else if( t == ter_t_dirtmound ) {
-                    here.set( loc, ter_t_dirt, furn_f_plant_seed );
+                    ret_val<void>can_plant = warm_enough_to_plant( loc, i->typeId() );
+                    if( can_plant.success() ) {
+                        // Plant the seed once it gets dropped.
+                        here.set( loc, ter_t_dirt, furn_f_plant_seed );
+                    } else {
+                        // Leave the seed on the ground.
+                        add_msg_if_player_sees( loc, can_plant.c_str() );
+                    }
                 } else if( !here.has_flag( ter_furn_flag::TFLAG_PLOWABLE, loc ) ) {
                     //If it isn't plowable terrain, then it will most likely be damaged.
                     damage( here, planter_id, rng( 1, 10 ), damage_bash, false );
