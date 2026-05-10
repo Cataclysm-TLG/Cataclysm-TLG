@@ -1192,6 +1192,11 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost,
 
     reach_attacking = true;
     melee_attack_abstract( *critter, true, force_technique, false, forced_movecost );
+    last_target_pos = std::nullopt;
+    shared_ptr_fast<Creature> last_target = this->last_target.lock();
+    if( !last_target || last_target->is_dead_state() ) {
+        this->last_target.reset();
+    }
     reach_attacking = false;
 }
 

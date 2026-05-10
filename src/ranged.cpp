@@ -1640,6 +1640,10 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     }
     // Reset last target pos
     last_target_pos = std::nullopt;
+    shared_ptr_fast<Creature> last_target = this->last_target.lock();
+    if( !last_target || last_target->is_dead_state() ) {
+        this->last_target.reset();
+    }
     recoil = MAX_RECOIL;
     // MLB pitchers can throw around 100 times a day.
     const float str_ratio = static_cast<float>( weight / 100.0_gram ) / str_cur;
