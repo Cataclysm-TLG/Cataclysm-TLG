@@ -14,10 +14,10 @@
     "id": "military_squad_guns",
     "subtype": "distribution",
     "groups": [
-      { "group": "military_standard_assault_rifles", "prob": 80, "damage": [ 0, 2 ], "dirt": [ 1500, 7050 ] },
-      { "group": "military_standard_lmgs", "prob": 80, "damage": [ 0, 2 ], "dirt": [ 1500, 7050 ] },
-      { "group": "military_standard_sniper_rifles", "prob": 80, "damage": [ 0, 2 ], "dirt": [ 1500, 7050 ] },
-      { "group": "military_standard_shotguns", "prob": 80, "damage": [ 0, 2 ], "dirt": [ 1500, 7050 ] }
+      { "group": "military_standard_assault_rifles", "prob": 80, "damage": [ -1, 2 ], "dirt": [ 1500, 7050 ] },
+      { "group": "military_standard_lmgs", "prob": 80, "damage": [ -1, 2 ], "dirt": [ 1500, 7050 ] },
+      { "group": "military_standard_sniper_rifles", "prob": 80, "damage": [ -1, 2 ], "dirt": [ 1500, 7050 ] },
+      { "group": "military_standard_shotguns", "prob": 80, "damage": [ -1, 2 ], "dirt": [ 1500, 7050 ] }
     ]
   },
   {

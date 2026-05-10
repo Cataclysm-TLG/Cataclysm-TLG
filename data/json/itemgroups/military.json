@@ -80,8 +80,8 @@
     "//": "ESAPI plates for light vest",
     "subtype": "collection",
     "entries": [
-      { "item": "steel_ballistic_plate", "damage": [ 0, 2 ], "prob": 30 },
-      { "item": "steel_ballistic_plate", "damage": [ 0, 2 ], "prob": 30 }
+      { "item": "steel_ballistic_plate", "damage": [ -1, 2 ], "prob": 30 },
+      { "item": "steel_ballistic_plate", "damage": [ -1, 2 ], "prob": 30 }
     ]
   },
   {
@@ -90,8 +90,8 @@
     "//": "ESAPI plates for light vest",
     "subtype": "collection",
     "entries": [
-      { "item": "heavy_steel_ballistic_plate", "damage": [ 0, 2 ], "prob": 30 },
-      { "item": "heavy_steel_ballistic_plate", "damage": [ 0, 2 ], "prob": 30 }
+      { "item": "heavy_steel_ballistic_plate", "damage": [ -1, 2 ], "prob": 30 },
+      { "item": "heavy_steel_ballistic_plate", "damage": [ -1, 2 ], "prob": 30 }
     ]
   },
   {
@@ -99,7 +99,7 @@
     "type": "item_group",
     "//": "ESAPI plates for light vest",
     "subtype": "collection",
-    "entries": [ { "item": "stab_plate", "damage": [ 0, 2 ], "prob": 30 }, { "item": "stab_plate", "damage": [ 0, 2 ], "prob": 30 } ]
+    "entries": [ { "item": "stab_plate", "damage": [ -1, 2 ], "prob": 30 }, { "item": "stab_plate", "damage": [ -1, 2 ], "prob": 30 } ]
   },
   {
     "id": "pristine_esapi_plates",
@@ -137,7 +137,7 @@
     "entries": [
       { "group": "some_esapi_plates", "prob": 50 },
       { "group": "custom_heavy_lbv", "prob": 50 },
-      { "group": "ballistic_protectors", "damage": [ 0, 2 ], "prob": 50 }
+      { "group": "ballistic_protectors", "damage": [ -1, 2 ], "prob": 50 }
     ]
   },
   {
@@ -171,12 +171,13 @@
   {
     "id": "military_ballistic_vest",
     "type": "item_group",
-    "//": "ESAPI vest plus plates",
+    "//": "ESAPI vest plus maybe some plates.",
     "subtype": "distribution",
     "entries": [
       {
         "distribution": [
           { "item": "ballistic_vest_esapi", "contents-group": "used_kitted_medium_vest", "prob": 100 },
+          { "item": "ballistic_vest_esapi", "prob": 100 },
           {
             "collection": [ { "item": "ballistic_vest_esapi", "contents-group": "some_esapi_plates" }, { "group": "loaded_lbv" } ],
             "prob": 50
@@ -185,7 +186,13 @@
         "prob": 40
       },
       {
-        "collection": [ { "item": "level_3_vest", "contents-group": "some_esapi_front_plates" }, { "group": "loaded_lbv" } ],
+        "distribution": [
+          {
+            "collection": [ { "item": "level_3_vest", "contents-group": "some_esapi_front_plates" }, { "group": "loaded_lbv" } ],
+            "prob": 100
+          },
+          { "item": "level_3_vest", "prob": 10 }
+        ],
         "prob": 50
       },
       { "group": "military_ballistic_vest_light", "prob": 10 },
@@ -356,11 +363,61 @@
     "id": "infantry_common_gear",
     "subtype": "collection",
     "entries": [
-      { "item": "e_tool", "prob": 60 },
-      { "item": "pipe_cleaner", "prob": 1 },
+      { "item": "e_tool", "prob": 1 },
+      { "item": "multimeter", "prob": 1, "charges": [ 0, 100 ] },
+      { "item": "pipe_cleaner", "prob": 10 },
+      { "item": "glowstick", "prob": 4, "count": [ 1, 5 ] },
+      { "group": "duct_tape_roll_part", "prob": 4 },
       { "item": "mask_gas", "prob": 20, "charges": [ 0, 100 ] },
+      { "item": "gasfilter_med", "prob": 5, "charges": 100 },
       { "item": "two_way_radio", "prob": 60, "charges": [ 0, 100 ] },
-      { "group": "infantry_knives", "prob": 80 }
+      { "item": "multitool", "prob": 1 },
+      { "item": "trailmap", "prob": 1 },
+      { "item": "roadmap", "prob": 1 },
+      { "item": "wearable_light", "prob": 8, "charges": [ 0, 100 ] },
+      { "item": "rope_6", "prob": 4 },
+      { "item": "string_6", "prob": 10, "count": [ 1, 2 ] },
+      { "item": "string_36", "prob": 5 },
+      { "item": "antenna", "prob": 1 },
+      { "item": "deck_of_cards", "prob": 1 },
+      { "item": "holy_symbol", "prob": 1 },
+      { "item": "toothbrush_plain", "prob": 1 },
+      { "item": "razor_shaving", "prob": 1 },
+      { "item": "screwdriver", "prob": 1 },
+      { "item": "condom_sealed", "prob": 1, "count": [ 0, 2 ] },
+      { "item": "bug_spray_can", "prob": 1, "charges": [ 0, 10 ] },
+      { "item": "knife_folding", "prob": 5, "damage": [ -1, 1 ] },
+      { "item": "knife_swissarmy", "prob": 1, "damage": [ -1, 1 ] },
+      { "item": "knife_KABAR", "prob": 2, "damage": [ -1, 1 ] },
+      { "group": "infantry_knives", "prob": 40, "damage": [ -1, 1 ] }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "infantry_spent_ammo",
+    "subtype": "collection",
+    "entries": [
+      {
+        "distribution": [ { "item": "stanag30", "charges": 0, "prob": 30 }, { "item": "stanag30", "charges": [ 1, 30 ], "prob": 50 } ],
+        "prob": 20
+      },
+      { "item": "40x46mm_m433", "charges": [ 1, 3 ], "prob": 2 },
+      {
+        "distribution": [
+          { "item": "p320mag_17rd_9x19mm", "charges": 0, "prob": 40 },
+          { "item": "p320mag_17rd_9x19mm", "ammo-item": "9mmfmj", "charges": [ 1, 17 ], "prob": 50 }
+        ],
+        "prob": 20
+      },
+      { "item": "shot_00", "charges": [ 0, 12 ], "prob": 1, "container-item": "bandolier_shotgun" },
+      { "item": "shot_00", "charges": [ 0, 12 ], "prob": 2, "container-item": "ammo_box" },
+      { "item": "9mmP", "charges": [ 0, 30 ], "prob": 5, "container-item": "ammo_box" },
+      { "item": "556", "charges": [ 0, 30 ], "prob": 5, "container-item": "ammo_box" },
+      { "item": "762_51", "charges": [ 0, 12 ], "prob": 1, "container-item": "ammo_box" },
+      { "item": "762_51", "charges": [ 1, 12 ], "prob": 2 },
+      { "item": "shot_00", "charges": [ 1, 12 ], "prob": 4 },
+      { "item": "9mmP", "charges": [ 1, 30 ], "prob": 10 },
+      { "item": "556", "charges": [ 1, 30 ], "prob": 10 }
     ]
   },
   {

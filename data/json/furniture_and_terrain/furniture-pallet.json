@@ -52,8 +52,8 @@
       "items": [
         { "item": "pallet", "count": 1 },
         { "item": "adobe_brick", "count": 350 },
-        { "item": "adobe_brick", "count": 50, "damage": [ 1, 4 ] },
-        { "item": "plastic_sheet", "count": 1, "damage": [ 2, 4 ] }
+        { "item": "adobe_brick", "count": 50, "damage": [ -1, 5 ] },
+        { "item": "plastic_sheet", "count": 1, "damage": [ 2, 5 ] }
       ]
     }
   },

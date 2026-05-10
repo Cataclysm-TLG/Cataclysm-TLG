@@ -3381,7 +3381,7 @@
     "subtypes": [ "ARMOR", "TOOL" ],
     "category": "armor",
     "name": { "str": "military flight helmet" },
-    "description": "A military flight helmet.  Equipped with a visor, microphone, and noise dampening system.  The helmet is also fitted with plastic rails to allow for different load-outs.",
+    "description": "A military flight helmet.  Equipped with a visor, microphone, and an active noise dampening system.  The helmet is also fitted with plastic rails to allow for different loadouts.",
     "weight": "1324 g",
     "volume": "2 L",
     "price": "500 USD",
@@ -3392,21 +3392,21 @@
     "looks_like": "helmet_motor",
     "color": "dark_gray",
     "armor": [
-      { "covers": [ "head" ], "coverage": 100, "encumbrance": 30 },
-      { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 5, "layers": [ "OUTER" ] }
+      { "covers": [ "head" ], "coverage": 100, "encumbrance": 30, "layers": [ "NORMAL", "OUTER" ] },
+      { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 5, "layers": [ "NORMAL" ] }
     ],
     "warmth": 15,
     "material_thickness": 5,
     "environmental_protection": 2,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "VARSIZE", "STURDY", "DEAF", "SUN_GLASSES", "PADDED" ],
+    "flags": [ "VARSIZE", "STURDY", "DEAF", "SUN_GLASSES", "PADDED", "MODULE_HOLDER" ],
     "charges_per_use": 1,
     "use_action": {
       "type": "transform",
-      "msg": "You turn the flight helmet on.",
-      "target": "flight_helmet_on",
-      "need_charges": 1,
-      "need_charges_msg": "The helmet's batteries are dead."
+      "ammo_scale": 0,
+      "menu_text": "Turn on",
+      "msg": "The %s flicks on.",
+      "target": "flight_helmet_on"
     },
     "pocket_data": [
       {
@@ -3458,14 +3458,14 @@
     "looks_like": "helmet_motor",
     "color": "dark_gray",
     "armor": [
-      { "covers": [ "head" ], "coverage": 100, "encumbrance": 30 },
-      { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 5, "layers": [ "OUTER" ] }
+      { "covers": [ "head" ], "coverage": 100, "encumbrance": 30, "layers": [ "NORMAL", "OUTER" ] },
+      { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 5, "layers": [ "NORMAL" ] }
     ],
     "warmth": 15,
     "material_thickness": 5,
     "environmental_protection": 2,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "VARSIZE", "STURDY", "PARTIAL_DEAF", "SUN_GLASSES", "TWO_WAY_RADIO", "PADDED", "SPAWN_ACTIVE" ],
+    "flags": [ "VARSIZE", "STURDY", "PARTIAL_DEAF", "SUN_GLASSES", "TWO_WAY_RADIO", "PADDED", "SPAWN_ACTIVE", "MODULE_HOLDER" ],
     "charges_per_use": 1,
     "tool_ammo": "battery",
     "power_draw": "60 mW",
@@ -3483,6 +3483,28 @@
         "rigid": true,
         "flag_restriction": [ "BATTERY_LIGHT" ],
         "default_magazine": "light_battery_cell"
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "2 L",
+        "max_contains_weight": "2 kg",
+        "moves": 250,
+        "description": "Pocket for a front night vision attachment.",
+        "flag_restriction": [ "HELMET_FRONT_ATTACHMENT" ],
+        "inherits_flags": false
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "500 g",
+        "max_item_length": "14 cm",
+        "moves": 100,
+        "description": "Pocket for a flashlight attachment.",
+        "flag_restriction": [ "HELMET_HEAD_ATTACHMENT" ],
+        "transparent": true
       }
     ],
     "melee_damage": { "bash": 6 }

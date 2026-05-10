@@ -133,7 +133,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "corpse_child_survival",
-    "entries": [ { "group": "corpse_child_survival_undam", "damage": [ 3, 4 ], "prob": 100 } ]
+    "entries": [ { "group": "corpse_child_survival_undam", "damage": [ 3, 5 ], "prob": 100 } ]
   },
   {
     "type": "item_group",
@@ -152,7 +152,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "corpse_female_survival",
-    "entries": [ { "group": "corpse_female_survival_undam", "damage": [ 3, 4 ], "prob": 100 } ]
+    "entries": [ { "group": "corpse_female_survival_undam", "damage": [ 3, 5 ], "prob": 100 } ]
   },
   {
     "type": "item_group",
@@ -165,7 +165,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "corpses_unisex_survival",
-    "entries": [ { "group": "corpses_unisex_survival_undam", "damage": [ 3, 4 ], "prob": 100 } ]
+    "entries": [ { "group": "corpses_unisex_survival_undam", "damage": [ 3, 5 ], "prob": 100 } ]
   },
   {
     "type": "item_group",
