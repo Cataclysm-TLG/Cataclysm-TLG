@@ -6,6 +6,9 @@
 #include <unordered_map>
 #include <utility>
 
+#include "bodypart.h"
+#include "cached_options.h"
+#include "calendar.h"
 #include "cata_algo.h"
 #include "cata_utility.h"
 #include "crafting_gui.h"

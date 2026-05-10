@@ -48,6 +48,7 @@
 #include "player_activity.h"
 #include "pocket_type.h"
 #include "point.h"
+#include "proficiency.h"
 #include "ranged.h"
 #include "ret_val.h"
 #include "safe_reference.h"
@@ -81,7 +82,6 @@ class monster;
 class nc_color;
 class player_morale;
 class profession;
-class proficiency_set;
 class recipe;
 class recipe_subset;
 class spell;
@@ -3607,6 +3607,10 @@ class Character : public Creature, public visitable
                                              const tripoint_bub_ms &src_pos = tripoint_bub_ms::zero,
                                              int radius = PICKUP_RANGE, bool clear_path = true ) const;
         void invalidate_crafting_inventory();
+        // Efficiently query book proficiency bonuses from nearby items
+        // without rebuilding the full crafting inventory.
+        // Walks map tiles and vehicle cargo in range, plus character inventory.
+        book_proficiency_bonuses book_bonuses_nearby( int radius = PICKUP_RANGE ) const;
 
         /** Simply runs all the cache-invalidating functions at once to make sure the character's
          * weight and crafting cache and stuff are all updated. Use whenever a function updates
