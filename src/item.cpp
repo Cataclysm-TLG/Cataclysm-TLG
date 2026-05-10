@@ -2030,14 +2030,10 @@ static std::string get_freshness_description( const item &food_item )
         }
     } else if( food_item.is_going_bad() ) {
         // Old food likewise is assumed to be fairly obvious.
-        if( player_character.can_estimate_rot() ) {
-            return string_format( _( "* This food looks <bad>old</bad>.  "
-                                     "It's just <info>%s</info> from becoming inedible." ),
-                                  to_string_approx( time_left ) );
-        } else {
-            return _( "* This food looks <bad>old</bad>.  "
-                      "It's on the brink of becoming inedible." );
-        }
+        // At this point, even skilled characters cannot tell the exact time of expiration
+        // (which would be at hour or minute precision).
+        return _( "* This food looks <bad>old</bad>.  "
+                  "It's on the brink of becoming inedible." );
     }
 
     if( !player_character.can_estimate_rot() ) {
