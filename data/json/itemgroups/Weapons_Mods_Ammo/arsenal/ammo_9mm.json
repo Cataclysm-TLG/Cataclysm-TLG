@@ -36,6 +36,13 @@
   },
   {
     "type": "item_group",
+    "id": "ammo_box_9mmP",
+    "container-item": "ammo_box",
+    "on_overflow": "discard",
+    "items": [ { "item": "9mmP", "count": 1, "charges": 30 } ]
+  },
+  {
+    "type": "item_group",
     "id": "ammo_can_9mm",
     "container-item": "ammunition_can_30",
     "items": [ { "group": "ammo_box_9mm", "count": [ 0, 6 ] } ]

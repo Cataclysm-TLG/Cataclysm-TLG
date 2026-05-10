@@ -48,6 +48,7 @@
         "prob": 4
       },
       { "group": "infantry_common_gear", "prob": 60 },
+      { "group": "infantry_spent_ammo", "prob": 10 },
       { "group": "military_standard_grenades", "count": [ 0, 3 ], "prob": 6 },
       { "group": "military_patrol_food", "prob": 10 },
       { "distribution": [ { "group": "infantry_officer_gear" }, { "group": "infantry_medical_gear" } ], "prob": 5 },
@@ -194,6 +195,8 @@
         "prob": 3
       },
       { "group": "infantry_common_gear", "prob": 15 },
+      { "group": "infantry_spent_ammo", "prob": 15 },
+      { "group": "infantry_spent_ammo", "prob": 3 },
       {
         "distribution": [
           { "group": "military_standard_grenades", "count": [ 0, 3 ], "prob": 40 },

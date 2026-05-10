@@ -365,6 +365,39 @@
   },
   {
     "type": "item_group",
+    "id": "infantry_spent_ammo",
+    "subtype": "collection",
+    "entries": [
+      {
+        "distribution": [ { "item": "stanag30", "charges": 0, "prob": 30 }, { "item": "stanag30", "charges": [ 1, 30 ], "prob": 50 } ],
+        "prob": 20
+      },
+      {
+        "item": "40x46mm_m433", "charges": [ 1, 3 ],
+        "prob": 5
+      },
+      {
+        "distribution": [ { "item": "p320mag_17rd_9x19mm", "charges": 0, "prob": 40 }, { "item": "stanag30", "ammo-item": "9mmfmj", "charges": [ 1, 17 ], "prob": 50 } ],
+        "prob": 20
+      },
+      {
+        "item": "shot_00", "charges": [ 1, 12 ],
+        "prob": 3, "container-item": "ammo_box"
+      },
+      { "item": "9mmP", "charges": [ 1, 30 ], "prob": 5, "container-item": "ammo_box" },
+      { "item": "556", "charges": [ 1, 30 ], "prob": 5, "container-item": "ammo_box" },
+      { "item": "762_51", "charges": [ 1, 12 ], "prob": 1, "container-item": "ammo_box" },
+      { "item": "762_51", "charges": [ 1, 12 ], "prob": 2 },
+      {
+        "item": "shot_00", "charges": [ 1, 12 ],
+        "prob": 5
+      },
+      { "item": "9mmP", "charges": [ 1, 30 ], "prob": 10 },
+      { "item": "556", "charges": [ 1, 30 ], "prob": 10  }
+    ]
+  },
+  {
+    "type": "item_group",
     "id": "infantry_knives",
     "container-item": "sheath",
     "subtype": "distribution",
