@@ -334,18 +334,6 @@
   {
     "type": "item_group",
     "subtype": "collection",
-    "id": "bandolier_swat_cqc1",
-    "entries": [ { "item": "shot_00", "charges": 12 } ]
-  },
-  {
-    "type": "item_group",
-    "subtype": "collection",
-    "id": "bandolier_swat_cqc2",
-    "entries": [ { "item": "shot_slug", "charges": 12 } ]
-  },
-  {
-    "type": "item_group",
-    "subtype": "collection",
     "id": "quiver_naturalist",
     "entries": [ { "item": "arrow_wood", "count": 12 } ]
   },

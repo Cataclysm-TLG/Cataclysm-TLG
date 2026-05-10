@@ -4,7 +4,7 @@
     "subtype": "collection",
     "id": "map_extra_science",
     "//": "Nested group to damage the container-item",
-    "entries": [ { "group": "map_extra_science_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
+    "entries": [ { "group": "map_extra_science_corpse", "prob": 100, "damage": [ -1, 1 ] } ]
   },
   {
     "type": "item_group",
@@ -52,7 +52,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "map_extra_college_camping",
-    "entries": [ { "group": "map_extra_college_camping_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
+    "entries": [ { "group": "map_extra_college_camping_corpse", "prob": 100, "damage": [ -1, 1 ] } ]
   },
   {
     "type": "item_group",
@@ -61,12 +61,12 @@
     "container-item": "corpse_generic_human",
     "entries": [
       { "group": "underwear", "damage": [ 1, 3 ] },
-      { "group": "shirts", "damage": [ 1, 4 ] },
-      { "group": "jackets", "damage": [ 1, 4 ], "prob": 30 },
-      { "group": "pants", "damage": [ 1, 4 ] },
-      { "group": "socks_unisex", "damage": [ 1, 4 ] },
-      { "group": "shoes", "damage": [ 1, 4 ] },
-      { "group": "hatstore_hats", "damage": [ 1, 4 ], "prob": 40 },
+      { "group": "shirts", "damage": [ -1, 5 ] },
+      { "group": "jackets", "damage": [ -1, 5 ], "prob": 30 },
+      { "group": "pants", "damage": [ -1, 5 ] },
+      { "group": "socks_unisex", "damage": [ -1, 5 ] },
+      { "group": "shoes", "damage": [ -1, 5 ] },
+      { "group": "hatstore_hats", "damage": [ -1, 5 ], "prob": 40 },
       { "group": "college_camping", "prob": 50 },
       { "group": "college_camping", "prob": 80 },
       { "group": "SUS_book_nonf_soft", "prob": 20 },
@@ -78,7 +78,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "map_extra_college_sports",
-    "entries": [ { "group": "map_extra_college_sports_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
+    "entries": [ { "group": "map_extra_college_sports_corpse", "prob": 100, "damage": [ -1, 1 ] } ]
   },
   {
     "type": "item_group",
@@ -87,12 +87,12 @@
     "container-item": "corpse_generic_human",
     "entries": [
       { "group": "underwear", "damage": [ 1, 3 ] },
-      { "group": "shirts", "damage": [ 1, 4 ] },
-      { "group": "jackets", "damage": [ 1, 4 ], "prob": 30 },
-      { "group": "pants", "damage": [ 1, 4 ] },
-      { "group": "socks_unisex", "damage": [ 1, 4 ] },
-      { "group": "shoes", "damage": [ 1, 4 ] },
-      { "group": "hatstore_hats", "damage": [ 1, 4 ], "prob": 40 },
+      { "group": "shirts", "damage": [ -1, 5 ] },
+      { "group": "jackets", "damage": [ -1, 5 ], "prob": 30 },
+      { "group": "pants", "damage": [ -1, 5 ] },
+      { "group": "socks_unisex", "damage": [ -1, 5 ] },
+      { "group": "shoes", "damage": [ -1, 5 ] },
+      { "group": "hatstore_hats", "damage": [ -1, 5 ], "prob": 40 },
       { "group": "college_sports", "prob": 50 },
       { "group": "college_sports", "prob": 90 },
       { "group": "SUS_book_sports", "prob": 30 },
@@ -103,7 +103,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "map_extra_college_lake",
-    "entries": [ { "group": "map_extra_college_lake_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
+    "entries": [ { "group": "map_extra_college_lake_corpse", "prob": 100, "damage": [ -1, 1 ] } ]
   },
   {
     "type": "item_group",
@@ -112,12 +112,12 @@
     "container-item": "corpse_generic_human",
     "entries": [
       { "group": "underwear", "damage": [ 1, 3 ] },
-      { "group": "shirts", "damage": [ 1, 4 ] },
-      { "group": "jackets", "damage": [ 1, 4 ], "prob": 30 },
-      { "group": "pants", "damage": [ 1, 4 ] },
-      { "group": "socks_unisex", "damage": [ 1, 4 ] },
-      { "group": "shoes", "damage": [ 1, 4 ] },
-      { "group": "hatstore_hats", "damage": [ 1, 4 ], "prob": 40 },
+      { "group": "shirts", "damage": [ -1, 5 ] },
+      { "group": "jackets", "damage": [ -1, 5 ], "prob": 30 },
+      { "group": "pants", "damage": [ -1, 5 ] },
+      { "group": "socks_unisex", "damage": [ -1, 5 ] },
+      { "group": "shoes", "damage": [ -1, 5 ] },
+      { "group": "hatstore_hats", "damage": [ -1, 5 ], "prob": 40 },
       { "group": "college_lake", "prob": 50 },
       { "group": "college_lake", "prob": 70 },
       { "group": "SUS_book_nonf_soft", "prob": 25 }
@@ -152,11 +152,11 @@
         ],
         "prob": 50
       },
-      { "item": "pants_cargo", "damage": [ 1, 4 ] },
-      { "group": "socks_unisex", "damage": [ 1, 4 ] },
-      { "group": "lab_shoes", "damage": [ 1, 4 ], "prob": 50 },
-      { "group": "shirts", "damage": [ 1, 4 ], "prob": 50 },
-      { "group": "jackets", "damage": [ 1, 4 ], "prob": 30 },
+      { "item": "pants_cargo", "damage": [ -1, 5 ] },
+      { "group": "socks_unisex", "damage": [ -1, 5 ] },
+      { "group": "lab_shoes", "damage": [ -1, 5 ], "prob": 50 },
+      { "group": "shirts", "damage": [ -1, 5 ], "prob": 50 },
+      { "group": "jackets", "damage": [ -1, 5 ], "prob": 30 },
       { "group": "underwear", "damage": [ 1, 3 ] }
     ]
   },
@@ -164,7 +164,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "map_extra_police",
-    "entries": [ { "group": "map_extra_police_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
+    "entries": [ { "group": "map_extra_police_corpse", "prob": 100, "damage": [ -1, 1 ] } ]
   },
   {
     "type": "item_group",

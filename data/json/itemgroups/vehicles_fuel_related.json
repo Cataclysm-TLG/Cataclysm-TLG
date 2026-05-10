@@ -89,12 +89,12 @@
       { "group": "duct_tape_roll_part", "prob": 35 },
       { "group": "superglue", "prob": 20 },
       { "item": "cotton_patch", "prob": 8, "custom-flags": [ "FILTHY" ] },
-      { "item": "tshirt", "prob": 4, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
+      { "item": "tshirt", "prob": 4, "damage": [ -1, 5 ], "custom-flags": [ "FILTHY" ] },
       { "item": "cotton_patch", "prob": 8 },
       { "item": "rubber_spray_can", "prob": 2, "charges": [ 0, 10 ] },
-      { "item": "tshirt", "prob": 4, "damage": [ 0, 4 ] },
+      { "item": "tshirt", "prob": 4, "damage": [ -1, 5 ] },
       {
-        "distribution": [ { "item": "pockknife", "damage": [ 0, 1 ] }, { "item": "boxcutter", "damage": [ 0, 1 ] } ],
+        "distribution": [ { "item": "pockknife", "damage": [ -1, 1 ] }, { "item": "boxcutter", "damage": [ -1, 1 ] } ],
         "prob": 20
       },
       { "item": "glowstick", "count": [ 0, 2 ], "charges": 1400, "prob": 10 },

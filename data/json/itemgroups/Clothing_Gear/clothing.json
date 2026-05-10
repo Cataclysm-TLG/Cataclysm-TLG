@@ -205,9 +205,9 @@
     "subtype": "collection",
     "//": "Base clothing entries for Navy officers.",
     "items": [
-      { "item": "boots", "damage": [ 0, 4 ] },
-      { "item": "hat_navy", "damage": [ 0, 4 ] },
-      { "item": "officer_uniform", "damage": [ 0, 4 ] },
+      { "item": "boots", "damage": [ -1, 5 ] },
+      { "item": "hat_navy", "damage": [ -1, 5 ] },
+      { "item": "officer_uniform", "damage": [ -1, 5 ] },
       { "distribution": [ { "item": "socks", "prob": 30 }, { "item": "nomex_socks", "prob": 70 } ] },
       {
         "distribution": [
@@ -315,7 +315,7 @@
       { "item": "elbow_pads", "prob": 10 },
       { "item": "knee_pads", "prob": 85 },
       {
-        "distribution": [ { "group": "army_helmet_nvg", "prob": 2 }, { "item": "helmet_army", "prob": 198 } ],
+        "distribution": [ { "group": "army_helmet_nvg", "prob": 1 }, { "item": "helmet_army", "prob": 199 } ],
         "prob": 55
       },
       { "item": "gloves_tactical", "prob": 60 },
@@ -323,7 +323,12 @@
       { "group": "molle_backpacks_and_accessories", "prob": 85 },
       { "group": "clothing_tactical_leg", "prob": 15 },
       {
-        "distribution": [ { "group": "clothing_glasses", "prob": 60 }, { "item": "glasses_bal", "prob": 30 } ],
+        "distribution": [ { "item": "neck_gaiter_kevlar", "prob": 1 }, { "item": "neck_gaiter", "prob": 10 }, { "item": "bandana", "prob": 1 } ],
+        "prob": 2
+      },
+      { "item": "bandana_head", "prob": 2 },
+      {
+        "distribution": [ { "group": "clothing_glasses", "prob": 60 }, { "item": "glasses_bal", "prob": 20 } ],
         "prob": 20
       },
       { "group": "clothing_watch", "prob": 5 }
@@ -2014,7 +2019,7 @@
     "type": "item_group",
     "id": "allclothes_damaged",
     "subtype": "distribution",
-    "items": [ { "group": "allclothes", "damage": [ 3, 4 ] } ]
+    "items": [ { "group": "allclothes", "damage": [ 3, 5 ] } ]
   },
   {
     "type": "item_group",
@@ -2851,7 +2856,7 @@
     "items": [
       { "item": "basket_laundry", "prob": 20 },
       {
-        "collection": [ { "group": "laundry", "prob": 25, "damage": [ 0, 4 ] }, { "group": "laundry", "prob": 70 } ],
+        "collection": [ { "group": "laundry", "prob": 25, "damage": [ -1, 5 ] }, { "group": "laundry", "prob": 70 } ],
         "prob": 100
       }
     ]
