@@ -60,6 +60,7 @@ static const efftype_id effect_laserlocked( "laserlocked" );
 static const efftype_id effect_null( "null" );
 static const efftype_id effect_poison( "poison" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
+static const efftype_id effect_pulled( "pulled" );
 static const efftype_id effect_run( "run" );
 static const efftype_id effect_sensor_stun( "sensor_stun" );
 static const efftype_id effect_stunned( "stunned" );
@@ -545,7 +546,7 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
                    eff_grab_strength, grab_data.pull_chance );
 
     // Handle seatbelts and weight limits for pulls/drags TODO: tear you out depending on grab str?
-    if( grab_data.pull_chance > -1 || grab_data.drag_distance > 0 ) {
+    if( ( grab_data.pull_chance > -1 || grab_data.drag_distance > 0 ) && !target->has_effect( effect_pulled ) ) {
         if( target->get_weight() > z.get_weight() * grab_data.pull_weight_ratio ) {
             target->add_msg_player_or_npc( msg_type, grab_data.pull_fail_msg_u, grab_data.pull_fail_msg_npc,
                                            mon_name );
@@ -596,7 +597,7 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
             tdir.advance();
             pt.x() = target_pos.x() + tdir.dx();
             pt.y() = target_pos.y() + tdir.dy();
-            //Cancel the grab if the space is occupied by something
+            // Cancel the grab if the space is occupied by something
             if( !g->is_empty( pt ) ) {
                 break;
             }

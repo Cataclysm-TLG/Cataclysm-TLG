@@ -211,6 +211,7 @@
         { "not": { "npc_has_effect": "incorporeal" } }
       ]
     },
+    "effects": [ { "id": "pulled", "duration": 1 } ],
     "grab": true,
     "grab_data": {
       "exclusive_grab": true,
@@ -220,7 +221,6 @@
       "drag_grab_break_distance": 2,
       "grab_effect": "null"
     },
-    "effects": [ { "id": "pulled", "duration": 1 } ],
     "hit_dmg_u": "%1$s drags you!",
     "hit_dmg_npc": "%1$s drags <npcname>!",
     "miss_msg_u": "",
