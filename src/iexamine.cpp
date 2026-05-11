@@ -7189,7 +7189,8 @@ void iexamine::workbench_internal( Character &you, const tripoint_bub_ms &examp,
                     chosen = show_craft_planning_modal( rec, you,
                                                         selected_craft->get_making_batch_size(),
                                                         selected_craft->get_current_step(),
-                                                        selected_craft->get_step_plans() );
+                                                        selected_craft->get_step_plans(),
+                                                        selected_craft );
                     if( !chosen ) {
                         break;
                     }

@@ -7,13 +7,13 @@
 #include <string>
 #include <vector>
 
+#include "calendar.h"
 #include "item_wakeup.h"
 
 class Character;
 class item;
 class item_location;
 class recipe;
-class time_point;
 struct attention_plan;
 template <typename E> struct enum_traits;
 
@@ -35,12 +35,38 @@ void remove_ammo( std::list<item> &dis_items, Character &p );
 
 void drop_or_handle( const item &newit, Character &p );
 
+// Per-choice data for the timer sub-menu when the modal is shown on an
+// in-flight unattended step.  All offsets are step-start anchored
+// (`alarm_at = passive_started_at + offset`), so the resulting
+// `attention_plan::alarm_offset` field is wire-compatible with the
+// pre-flight branch.
+struct inflight_alarm_choices {
+    time_duration remaining;
+    bool finish_enabled = false;
+    bool five_before_enabled = false;
+    std::optional<time_duration> finish_offset;
+    std::optional<time_duration> five_before_offset;
+};
+
+// Pure helper.  Returns the timer choice set for an in-flight unattended
+// step given its `passive_started_at`, the live deadline (`saved_ready_at`
+// when env-paused, otherwise `ready_at`), and the current calendar turn.
+// "5 minutes before" is disabled when remaining time is at most 5 minutes.
+inflight_alarm_choices compute_inflight_alarm_choices(
+    time_point passive_started_at, time_point live_ready_at,
+    time_point now );
+
 // Asks the avatar what to do at each remaining unattended step (skipping
 // any step before `from_step`).  Returns nullopt if the avatar cancelled.
-// `existing` pre-fills choices on resume.
+// `existing` pre-fills choices on resume.  When `current_craft` is non-null
+// AND the iterated step matches `current_craft->get_current_step()` AND
+// the step is mid-flight, the timer sub-menu offers choices relative to
+// the remaining runtime so resume timers do not anchor to a stale step
+// start.
 std::optional<std::vector<attention_plan>> show_craft_planning_modal(
         const recipe &rec, const Character &crafter, int batch, int from_step,
-        const std::vector<attention_plan> &existing );
+        const std::vector<attention_plan> &existing,
+        const item *current_craft = nullptr );
 
 // Interrupts the avatar's current activity with a craft_step_complete
 // distraction when the avatar can read time; falls back to a vague flavor

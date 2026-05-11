@@ -8119,7 +8119,7 @@ std::optional<int> iuse::craft( Character *p, item *it, const tripoint_bub_ms & 
     if( rec.has_remaining_attention_steps( it->get_current_step() ) && p->is_avatar() ) {
         chosen = show_craft_planning_modal( rec, *p, it->get_making_batch_size(),
                                             it->get_current_step(),
-                                            it->get_step_plans() );
+                                            it->get_step_plans(), it );
         if( !chosen ) {
             return std::nullopt;
         }

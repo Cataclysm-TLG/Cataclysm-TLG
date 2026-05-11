@@ -1008,9 +1008,26 @@ void fire_step_complete_distraction( const std::string &interrupt_msg,
     }
 }
 
+inflight_alarm_choices compute_inflight_alarm_choices(
+    time_point passive_started_at, time_point live_ready_at, time_point now )
+{
+    inflight_alarm_choices result;
+    result.remaining = live_ready_at - now;
+    if( result.remaining <= 0_seconds ) {
+        return result;
+    }
+    result.finish_enabled = true;
+    result.finish_offset = live_ready_at - passive_started_at;
+    if( result.remaining > 5_minutes ) {
+        result.five_before_enabled = true;
+        result.five_before_offset = live_ready_at - passive_started_at - 5_minutes;
+    }
+    return result;
+}
+
 std::optional<std::vector<attention_plan>> show_craft_planning_modal(
         const recipe &rec, const Character &crafter, int batch, int from_step,
-        const std::vector<attention_plan> &existing )
+        const std::vector<attention_plan> &existing, const item *current_craft )
 {
     const std::vector<recipe_step> &steps = rec.steps();
     std::vector<attention_plan> plans( steps.size() );
@@ -1029,9 +1046,34 @@ std::optional<std::vector<attention_plan>> show_craft_planning_modal(
             continue;
         }
 
-        const time_duration step_dur = time_duration::from_moves(
-                                           rec.step_budget_moves( crafter, i, batch, ctx,
-                                                   recipe_time_flag::ignore_proficiencies ) );
+        const bool is_inflight = current_craft != nullptr
+                                 && current_craft->get_passive_started_at() != calendar::before_time_starts
+                                 && current_craft->get_current_step() == static_cast<int>( i );
+        inflight_alarm_choices inflight;
+        time_duration step_dur;
+        if( is_inflight ) {
+            const bool paused =
+                current_craft->get_saved_ready_at() != calendar::before_time_starts;
+            const time_point live_ready_at = paused
+                                             ? current_craft->get_saved_ready_at()
+                                             : current_craft->get_ready_at();
+            // Paused deadlines slide on unpause; evaluate at pause snapshot.
+            const time_point eval_now = paused
+                                        ? current_craft->get_pause_started_at()
+                                        : calendar::turn;
+            inflight = compute_inflight_alarm_choices(
+                           current_craft->get_passive_started_at(), live_ready_at,
+                           eval_now );
+            // Past completion: overdue resolver will pick it up; skip here.
+            if( inflight.remaining <= 0_seconds ) {
+                continue;
+            }
+            step_dur = inflight.remaining;
+        } else {
+            step_dur = time_duration::from_moves(
+                           rec.step_budget_moves( crafter, i, batch, ctx,
+                                                  recipe_time_flag::ignore_proficiencies ) );
+        }
 
         uilist menu;
         menu.text = string_format(
@@ -1058,10 +1100,14 @@ std::optional<std::vector<attention_plan>> show_craft_planning_modal(
         } else if( menu.ret == 2 ) {
             uilist alarm;
             alarm.text = _( "Set an alarm for when?" );
-            alarm.addentry( 1, true, '1',
+            const bool finish_enabled = is_inflight ? inflight.finish_enabled : true;
+            const bool five_before_enabled = is_inflight
+                                             ? inflight.five_before_enabled
+                                             : step_dur > 5_minutes;
+            alarm.addentry( 1, finish_enabled, '1',
                             string_format( _( "When the step finishes (%s)" ),
                                            to_string( step_dur ) ) );
-            alarm.addentry( 2, step_dur > 5_minutes, '2',
+            alarm.addentry( 2, five_before_enabled, '2',
                             string_format( _( "5 minutes before (%s in)" ),
                                            to_string( step_dur - 5_minutes ) ) );
             alarm.query();
@@ -1069,7 +1115,10 @@ std::optional<std::vector<attention_plan>> show_craft_planning_modal(
                 return std::nullopt;
             }
             plans[i].choice = step_choice::set_timer;
-            if( alarm.ret == 2 ) {
+            if( is_inflight ) {
+                plans[i].alarm_offset = alarm.ret == 2 ? inflight.five_before_offset
+                                        : inflight.finish_offset;
+            } else if( alarm.ret == 2 ) {
                 plans[i].alarm_offset = step_dur - 5_minutes;
             } else {
                 plans[i].alarm_offset = step_dur;
