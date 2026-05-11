@@ -3934,9 +3934,8 @@ class Character : public Creature, public visitable
         time_duration get_consume_time( const item &it ) const;
 
         // For display purposes mainly, how far we are from the next level of weariness
-        std::pair<int, int> weariness_transition_progress() const;
         int weariness_level() const;
-        int weariness_transition_level() const;
+        int weariness_transition_percent() const;
         int weary_threshold() const;
         int weariness() const;
         float activity_level() const;

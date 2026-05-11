@@ -743,7 +743,7 @@ void widget::set_default_var_range( const avatar &ava )
             break;
         case widget_var::weary_transition_level:
             _var_min = 0;
-            _var_max = ava.weary_threshold();
+            _var_max = 100;
             break;
         case widget_var::custom:
             _custom_var.set_widget_var_range( ava, *this );
@@ -892,7 +892,7 @@ int widget::get_var_value( const avatar &ava ) const
             value = ava.weariness_level();
             break;
         case widget_var::weary_transition_level:
-            value = ava.weariness_transition_level();
+            value = ava.weariness_transition_percent();
             break;
         case widget_var::stat_str:
             value = ava.get_str();
