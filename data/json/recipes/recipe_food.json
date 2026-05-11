@@ -3460,9 +3460,9 @@
     "time": "45 m",
     "batch_time_factors": [ 80, 1 ],
     "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "tools": [ [ [ "surface_heat", 40, "LIST" ] ] ],
-    "//": "meat = 20u, fat = 15u, vegetable/fruit = 4u, give or take",
+    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "BOIL", "level": 2 } ],
+    "tools": [ [ [ "surface_heat", 15, "LIST" ] ] ],
+    "proficiencies": [ { "proficiency": "prof_knife_skills" }, { "proficiency": "prof_preservation" } ],
     "components": [
       [ [ "any_shortening", 6, "LIST" ] ],
       [
@@ -3489,8 +3489,9 @@
     "time": "45 m",
     "batch_time_factors": [ 80, 1 ],
     "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
+    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "BOIL", "level": 2 } ],
+    "tools": [ [ [ "surface_heat", 15, "LIST" ] ] ],
+    "proficiencies": [ { "proficiency": "prof_knife_skills" }, { "proficiency": "prof_preservation" } ],
     "components": [
       [ [ "any_shortening", 6, "LIST" ] ],
       [
@@ -3517,9 +3518,99 @@
     "time": "40 m",
     "batch_time_factors": [ 80, 1 ],
     "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "tools": [ [ [ "surface_heat", 36, "LIST" ] ] ],
-    "//": "meat = 20u, fat = 15u, give or take",
+    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "BOIL", "level": 2 } ],
+    "tools": [ [ [ "surface_heat", 15, "LIST" ] ] ],
+    "proficiencies": [ { "proficiency": "prof_knife_skills" }, { "proficiency": "prof_preservation" } ],
+    "components": [
+      [ [ "any_shortening", 6, "LIST" ] ],
+      [
+        [ "jerky", 2 ],
+        [ "dry_meat", 2 ],
+        [ "meat_smoked", 2 ],
+        [ "dry_fish", 2 ],
+        [ "fish_smoked", 2 ],
+        [ "dry_lobster", 2 ],
+        [ "lobster_smoked", 2 ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "pemmican",
+    "id_suffix": "with_food_processor",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_MEAT",
+    "skill_used": "cooking",
+    "difficulty": 5,
+    "charges": 4,
+    "time": "20 m",
+    "batch_time_factors": [ 80, 1 ],
+    "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
+    "tools": [ [ [ "surface_heat", 15, "LIST" ] ], [ [ "food_processor", 20 ] ] ],
+    "qualities": [ { "id": "BOIL", "level": 2 } ],
+    "proficiencies": [ { "proficiency": "prof_preservation" } ],
+    "//": "meat = 20u, fat = 15u, vegetable/fruit = 4u, give or take",
+    "components": [
+      [ [ "any_shortening", 6, "LIST" ] ],
+      [
+        [ "jerky", 2 ],
+        [ "dry_meat", 2 ],
+        [ "meat_smoked", 2 ],
+        [ "dry_fish", 2 ],
+        [ "fish_smoked", 2 ],
+        [ "dry_lobster", 2 ],
+        [ "lobster_smoked", 2 ]
+      ],
+      [ [ "dry_fruit", 2 ] ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "pemmican_vegetable",
+    "id_suffix": "with_food_processor",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "cooking",
+    "difficulty": 5,
+    "charges": 4,
+    "time": "20 m",
+    "batch_time_factors": [ 80, 1 ],
+    "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
+    "tools": [ [ [ "surface_heat", 15, "LIST" ] ], [ [ "food_processor", 20 ] ] ],
+    "qualities": [ { "id": "BOIL", "level": 2 } ],
+    "proficiencies": [ { "proficiency": "prof_preservation" } ],
+    "components": [
+      [ [ "any_shortening", 6, "LIST" ] ],
+      [
+        [ "jerky", 2 ],
+        [ "dry_meat", 2 ],
+        [ "meat_smoked", 2 ],
+        [ "dry_fish", 2 ],
+        [ "fish_smoked", 2 ],
+        [ "dry_lobster", 2 ],
+        [ "lobster_smoked", 2 ]
+      ],
+      [ [ "dry_vegetable", 2 ], [ "dry_corn", 2 ], [ "dry_mushroom", 2 ] ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "pemmican_meat",
+    "id_suffix": "with_food_processor",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "cooking",
+    "difficulty": 5,
+    "charges": 4,
+    "time": "20 m",
+    "batch_time_factors": [ 80, 1 ],
+    "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
+    "tools": [ [ [ "surface_heat", 15, "LIST" ] ], [ [ "food_processor", 20 ] ] ],
+    "qualities": [ { "id": "BOIL", "level": 2 } ],
+    "proficiencies": [ { "proficiency": "prof_preservation" } ],
     "components": [
       [ [ "any_shortening", 6, "LIST" ] ],
       [
