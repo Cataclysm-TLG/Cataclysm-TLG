@@ -733,7 +733,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "pemmican",
-    "name": { "str_sp": "pemmican" },
+    "name": { "str_sp": "pemmican with fruit" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "prepper %s" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "pernicious %s" } }
@@ -758,7 +758,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "pemmican_vegetable",
-    "name": { "str_sp": "pemmican" },
+    "name": { "str_sp": "pemmican with vegetables" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "prepper %s" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "pernicious %s" } }
@@ -783,7 +783,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "pemmican_meat",
-    "name": { "str_sp": "pemmican (meat only)" },
+    "name": { "str_sp": "pemmican" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "prepper %s" } },
       { "type": "COMPONENT_ID", "condition": "mutant", "name": { "str_sp": "pernicious %s" } }
