@@ -3058,6 +3058,8 @@ class item : public visitable
         void set_saved_alarm_at( time_point t );
         time_point get_saved_fail_at() const;
         void set_saved_fail_at( time_point t );
+        time_point get_env_check_at() const;
+        void set_env_check_at( time_point t );
 
         character_id get_crafter_id() const;
         void set_crafter_id( character_id id );
@@ -3347,6 +3349,10 @@ class item : public visitable
                 time_point saved_ready_at = calendar::before_time_starts;
                 time_point saved_alarm_at = calendar::before_time_starts;
                 time_point saved_fail_at  = calendar::before_time_starts;
+                // Periodic env-check cursor while step is live, has env
+                // reqs, and is not env-paused.  before_time_starts otherwise
+                // (during pause, ready_at is the 1-minute polling cursor).
+                time_point env_check_at = calendar::before_time_starts;
 
                 // Counter bounds snapshotted at passive-step entry; item_tname
                 // projects linearly between them without mutation.

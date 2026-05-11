@@ -34,6 +34,8 @@ const char *kind_to_string( item_wakeup_kind k )
     switch( k ) {
         case item_wakeup_kind::alarm:
             return "alarm";
+        case item_wakeup_kind::env_check:
+            return "env_check";
         case item_wakeup_kind::ready_check:
             return "ready_check";
         case item_wakeup_kind::fail_check:
@@ -48,6 +50,10 @@ bool string_to_kind( const std::string &s, item_wakeup_kind &out )
 {
     if( s == "alarm" ) {
         out = item_wakeup_kind::alarm;
+        return true;
+    }
+    if( s == "env_check" ) {
+        out = item_wakeup_kind::env_check;
         return true;
     }
     if( s == "ready_check" ) {

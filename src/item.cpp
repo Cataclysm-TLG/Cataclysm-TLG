@@ -16056,6 +16056,18 @@ void item::set_saved_fail_at( time_point t )
     craft_data_->saved_fail_at = t;
 }
 
+time_point item::get_env_check_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->env_check_at;
+}
+
+void item::set_env_check_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->env_check_at = t;
+}
+
 character_id item::get_crafter_id() const
 {
     cata_assert( craft_data_ );

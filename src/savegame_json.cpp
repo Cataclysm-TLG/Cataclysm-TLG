@@ -2814,6 +2814,9 @@ void item::craft_data::serialize( JsonOut &jsout ) const
     if( saved_fail_at != calendar::before_time_starts ) {
         jsout.member( "saved_fail_at", saved_fail_at );
     }
+    if( env_check_at != calendar::before_time_starts ) {
+        jsout.member( "env_check_at", env_check_at );
+    }
     if( crafter_id.is_valid() ) {
         jsout.member( "crafter_id", crafter_id );
     }
@@ -2895,6 +2898,9 @@ void item::craft_data::deserialize( const JsonObject &obj )
     if( obj.has_member( "saved_fail_at" ) ) {
         obj.read( "saved_fail_at", saved_fail_at );
     }
+    if( obj.has_member( "env_check_at" ) ) {
+        obj.read( "env_check_at", env_check_at );
+    }
     if( obj.has_member( "crafter_id" ) ) {
         obj.read( "crafter_id", crafter_id );
     }
@@ -2928,6 +2934,7 @@ void item::craft_data::deserialize( const JsonObject &obj )
         saved_ready_at = calendar::before_time_starts;
         saved_alarm_at = calendar::before_time_starts;
         saved_fail_at = calendar::before_time_starts;
+        env_check_at = calendar::before_time_starts;
         passive_start_counter = 0;
         passive_end_counter = 0;
     }
