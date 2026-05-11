@@ -146,11 +146,12 @@
     "condition": {
       "and": [
         { "not": { "u_has_flag": "GRAB_FILTER" } },
-        { "not": { "u_has_effect": "maimed_arm" } },
-        { "not": { "u_has_flag": "NO_GRAB" } },
-        { "not": { "npc_has_effect": "incorporeal" } }
+        { "not": { "npc_has_flag": "GRAB" } },
+        { "not": { "npc_has_effect": "pulled" } },
+        { "not": { "u_has_effect": "incorporeal" } }
       ]
     },
+    "effects": [ { "id": "pulled", "duration": 1 } ],
     "damage_max_instance": [ { "damage_type": "bash", "amount": 0 } ],
     "grab_data": { "exclusive_grab": true, "pull_chance": 100, "pull_weight_ratio": 0.75 },
     "no_dmg_msg_u": "",
@@ -171,9 +172,11 @@
         { "not": { "u_has_flag": "GRAB_FILTER" } },
         { "not": { "u_has_effect": "maimed_arm" } },
         { "not": { "u_has_flag": "NO_GRAB" } },
+        { "not": { "npc_has_effect": "pulled" } },
         { "not": { "npc_has_effect": "incorporeal" } }
       ]
     },
+    "effects": [ { "id": "pulled", "duration": 1 } ],
     "damage_max_instance": [ { "damage_type": "bash", "amount": 0 } ],
     "grab": true,
     "grab_data": {
@@ -204,6 +207,7 @@
         { "u_has_flag": "GRAB_FILTER" },
         { "npc_has_flag": "GRAB" },
         { "not": { "u_has_flag": "NO_GRAB" } },
+        { "not": { "npc_has_effect": "pulled" } },
         { "not": { "npc_has_effect": "incorporeal" } }
       ]
     },
@@ -216,6 +220,7 @@
       "drag_grab_break_distance": 2,
       "grab_effect": "null"
     },
+    "effects": [ { "id": "pulled", "duration": 1 } ],
     "hit_dmg_u": "%1$s drags you!",
     "hit_dmg_npc": "%1$s drags <npcname>!",
     "miss_msg_u": "",
@@ -808,10 +813,12 @@
       "and": [
         { "not": { "u_has_flag": "GRAB_FILTER" } },
         { "not": { "npc_has_flag": "GRAB" } },
+        { "not": { "npc_has_effect": "pulled" } },
+        { "not": { "u_has_effect": "incorporeal" } },
         { "not": { "u_has_effect": "sectioned_filaments" } }
       ]
     },
-    "effects": [ { "id": "venom_pain", "duration": 54000, "affect_hit_bp": true } ],
+    "effects": [ { "id": "venom_pain", "duration": 54000, "affect_hit_bp": true }, { "id": "pulled", "duration": 1 } ],
     "hit_dmg_u": "Using its filaments, the %s pulls you close.",
     "hit_dmg_npc": "Using its filaments, the %s pulls <npcname> close.",
     "miss_msg_u": "The %s spews filaments at you but misses.",

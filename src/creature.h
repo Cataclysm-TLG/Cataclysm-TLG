@@ -330,7 +330,7 @@ class Creature : public viewer
         /** Helper overload for when the boolean is discardable */
         bool can_move_to_vehicle_tile( const tripoint_abs_ms &loc ) const;
         /** Checks for and excludes vehicle gaps that only exist due to diagonal skew. */
-        bool can_squeeze_to( const tripoint_bub_ms &p ) const;
+        bool vehicle_not_blocking( const tripoint_bub_ms &p ) const;
         /** Moves the creature to the given location and calls the on_move() handler. */
         void move_to( const tripoint_abs_ms &loc );
         virtual int climbing_cost( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;

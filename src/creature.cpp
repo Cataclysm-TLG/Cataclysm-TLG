@@ -960,48 +960,55 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
         return false;
     }
 
-    if( rl_dist( pos_bub(), target->pos_bub() ) != 1 ) {
+    const int dz = std::abs( posz() - target->posz() );
+
+    // Too far apart vertically.
+    if( dz > 1 ) {
         return false;
     }
 
-    // Diagonally offset targets are not adjacent.
-    if( posz() != target->posz() && pos_bub().xy() != target->pos_bub().xy() ) {
-        return false;
+    const point_rel_ms delta = pos_bub().xy() - target->pos_bub().xy();
+    const int dx = std::abs( delta.x() );
+    const int dy = std::abs( delta.y() );
+
+    if( dz == 0 ) {
+        // Same Z level:
+        // adjacent if within the surrounding 8 tiles.
+        if( dx > 1 || dy > 1 || ( dx == 0 && dy == 0 ) ) {
+            return false;
+        }
+    } else {
+        // Different Z levels:
+        // adjacent only if directly above/below.
+        if( !allow_z_levels || dx != 0 || dy != 0 ) {
+            return false;
+        }
     }
 
-    if( !can_squeeze_to( target->pos_bub() ) ) {
-        return false;
-    }
-
-    // Explicitly check for Z difference > 1
-    if( std::abs( posz() - target->posz() ) > 1 ) {
-
+    if( !vehicle_not_blocking( target->pos_bub() ) ) {
         return false;
     }
 
     map &here = get_map();
-    if( posz() == target->posz() ) {
-        return
-            /* either target or attacker are underwater and separated by vehicle tiles */
-            !( underwater != target->underwater &&
-               here.veh_at( pos_bub() ) && here.veh_at( target->pos_bub() ) );
+
+    if( dz == 0 ) {
+        return !( underwater != target->underwater &&
+                  here.veh_at( pos_bub() ) &&
+                  here.veh_at( target->pos_bub() ) );
     }
 
-    if( !allow_z_levels ) {
-        return false;
-    }
-
-    // The square above must have no floor.
-    // The square below must have no ceiling (i.e. no floor on the tile above it).
     const bool target_above = target->posz() > posz();
     const tripoint_bub_ms up = target_above ? target->pos_bub() : pos_bub();
     const tripoint_bub_ms down = target_above ? pos_bub() : target->pos_bub();
-    const tripoint_bub_ms above{ down.xy(), up.z()};
-    return ( !here.has_floor( up ) || here.ter( up )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ) &&
-           ( !here.has_floor( above ) || here.ter( above )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) );
+    const tripoint_bub_ms above{ down.xy(), up.z() };
+
+    return ( !here.has_floor( up ) ||
+             here.ter( up )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ) &&
+           ( !here.has_floor( above ) ||
+             here.ter( above )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) );
 }
 
-bool Creature::can_squeeze_to( const tripoint_bub_ms &p ) const
+bool Creature::vehicle_not_blocking( const tripoint_bub_ms &p ) const
 {
     map &here = get_map();
     return !here.obstructed_by_vehicle_rotation( pos_bub(), p );

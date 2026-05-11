@@ -3976,6 +3976,12 @@
   },
   {
     "type": "effect_type",
+    "id": "pulled",
+    "//": "Dummy effect to prevent multiple creatures from pulling a creature in the same turn",
+    "max_duration": "1 s"
+  },
+  {
+    "type": "effect_type",
     "id": "grabbing",
     "name": [ "Grabbing" ],
     "desc": [ "Grabbing another creature and holding them in place." ],

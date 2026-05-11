@@ -2036,7 +2036,7 @@ bool monster::melee_attack( Creature &target, float accuracy )
         // We don't hit, so just return
         return true;
     }
-    if( !can_squeeze_to( target.pos_bub() ) ) {
+    if( !vehicle_not_blocking( target.pos_bub() ) ) {
         return false;
     }
 
