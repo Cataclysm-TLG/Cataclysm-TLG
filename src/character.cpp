@@ -5362,29 +5362,6 @@ int Character::weary_threshold() const
     return std::max( threshold, bmr / 10 );
 }
 
-std::pair<int, int> Character::weariness_transition_progress() const
-{
-    // Mostly a duplicate of the below function. No real way to clean this up
-    int amount = weariness();
-    int threshold = weary_threshold();
-    amount -= threshold;
-    // failsafe if threshold is zero; see #72242
-    if( threshold == 0 ) {
-        return { std::abs( amount ), threshold };
-    } else {
-        while( amount >= 0 ) {
-            amount -= threshold;
-            if( threshold > 20 ) {
-                threshold = static_cast<int>( std::round( threshold *= 0.75 ) );
-            }
-        }
-    }
-
-    // If we return the absolute value of the amount, it will work better
-    // Because as it decreases, we will approach a transition
-    return {std::abs( amount ), threshold};
-}
-
 int Character::weariness_level() const
 {
     int amount = weariness();
@@ -5398,7 +5375,7 @@ int Character::weariness_level() const
         while( amount >= 0 ) {
             amount -= threshold;
             if( threshold > 20 ) {
-                threshold = static_cast<int>( std::round( threshold *= 0.75 ) );
+                threshold = static_cast<int>( std::round( threshold * 0.75 ) );
             }
             ++level;
         }
@@ -5407,25 +5384,34 @@ int Character::weariness_level() const
     return level;
 }
 
-
-int Character::weariness_transition_level() const
+int Character::weariness_transition_percent() const
 {
     int amount = weariness();
     int threshold = weary_threshold();
+    int level = 0;
+    int range = threshold;
     amount -= threshold;
     // failsafe if threshold is zero; see #72242
     if( threshold == 0 ) {
-        return std::abs( amount );
+        return 100;
     } else {
         while( amount >= 0 ) {
+            range = threshold;
             amount -= threshold;
             if( threshold > 20 ) {
-                threshold = static_cast<int>( std::round( threshold *= 0.75 ) );
+                threshold = static_cast<int>( std::round( threshold * 0.75 ) );
+            }
+            ++level;
+            if( level > 5 ) {
+                // The weariness level can go beyond "Extreme",
+                // but that is the highest that the widgets show.
+                // Clamp the transition indicator to 0 at that point.
+                return 0;
             }
         }
     }
 
-    return std::abs( amount );
+    return std::round( ( -100.0f * amount ) / range );
 }
 
 float Character::maximum_exertion_level() const
