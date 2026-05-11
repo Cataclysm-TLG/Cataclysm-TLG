@@ -235,11 +235,6 @@ static const ter_str_id ter_t_underbrush( "t_underbrush" );
 static const trait_id trait_MARLOSS( "MARLOSS" );
 static const trait_id trait_MARLOSS_BLUE( "MARLOSS_BLUE" );
 static const trait_id trait_PARAIMMUNE( "PARAIMMUNE" );
-static const trait_id trait_PROF_CHURL( "PROF_CHURL" );
-static const trait_id trait_PROF_FED( "PROF_FED" );
-static const trait_id trait_PROF_PD_DET( "PROF_PD_DET" );
-static const trait_id trait_PROF_POLICE( "PROF_POLICE" );
-static const trait_id trait_PROF_SWAT( "PROF_SWAT" );
 static const trait_id trait_THRESH_MARLOSS( "THRESH_MARLOSS" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
 
@@ -253,14 +248,26 @@ static bool within_visual_range( monster *z, int max_range )
               !z->sees( here, player_character ) );
 }
 
-static bool within_target_range( const monster *const z, const Creature *const target, int range )
+static bool within_target_range( const monster *const z, const Creature *const target,
+                                 int range )
 {
+    if( target == nullptr ) {
+        return false;
+    }
     const map &here = get_map();
-
-    return target != nullptr &&
-           ( z->is_adjacent( target, true ) ||
-             trig_dist( z->pos_bub(), target->pos_bub() ) <= range ) &&
-           z->sees( here, *target );
+    if( z->is_adjacent( target, true ) ) {
+        return z->sees( here, *target );
+    }
+    bool in_range = false;
+    if( z->pos_bub().z() == target->pos_bub().z() ) {
+        in_range = trig_dist( z->pos_bub(), target->pos_bub() ) <= range;
+    } else {
+        // If we're on different Z levels, round up to make sure they count properly for 2.
+        in_range = static_cast<int>(
+                       std::ceil(
+                           trig_dist_precise( z->pos_bub(), target->pos_bub() ) ) ) <= range;
+    }
+    return in_range && z->sees( here, *target );
 }
 
 static Creature *sting_get_target( monster *z, float range = 5.0f )
@@ -1079,7 +1086,7 @@ bool mattack::pull_metal_weapon( monster *z )
                     proj.speed = 50;
                     proj.impact = damage_instance( damage_bash, pulled_weapon.weight() / 250_gram );
                     // make the projectile stop one tile short to prevent hitting the monster
-                    proj.range = rl_dist( foe->pos_bub(), z->pos_bub() ) - 1;
+                    proj.range = trig_dist( foe->pos_bub(), z->pos_bub() ) - 1;
                     proj.proj_effects = { { ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET } };
 
                     dealt_projectile_attack dealt;
@@ -2684,72 +2691,64 @@ bool mattack::photograph( monster *z )
     // Badges should NOT be swappable between roles.
     // Hence separate checking.
     // If you are in fact listed as a police officer
-    if( player_character.has_trait( trait_PROF_POLICE ) ) {
+    if( player_character.is_wearing( itype_badge_deputy ) ) {
         // And you're wearing your badge
-        if( player_character.is_wearing( itype_badge_deputy ) ) {
-            if( one_in( 3 ) ) {
-                add_msg( m_info, _( "The %s flashes a LED and departs.  Human officer on scene." ),
-                         z->name() );
-                z->no_corpse_quiet = true;
-                z->no_extra_death_drops = true;
-                z->die( &here, nullptr );
-                return false;
-            } else {
-                add_msg( m_info,
-                         _( "The %s acknowledges you as an officer responding, but hangs around to watch." ),
-                         z->name() );
-                add_msg( m_info, _( "Probably some now-obsolete Internal Affairs subroutine…" ) );
-                return true;
-            }
-        }
-    }
-
-    if( player_character.has_trait( trait_PROF_PD_DET ) ) {
-        // And you have your shield on
-        if( player_character.is_wearing( itype_badge_detective ) ) {
-            if( one_in( 4 ) ) {
-                add_msg( m_info, _( "The %s flashes a LED and departs.  Human officer on scene." ),
-                         z->name() );
-                z->no_corpse_quiet = true;
-                z->no_extra_death_drops = true;
-                z->die( &here, nullptr );
-                return false;
-            } else {
-                add_msg( m_info,
-                         _( "The %s acknowledges you as an officer responding, but hangs around to watch." ),
-                         z->name() );
-                add_msg( m_info, _( "Ops used to do that in case you needed backup…" ) );
-                return true;
-            }
-        }
-    } else if( player_character.has_trait( trait_PROF_SWAT ) ) {
-        // And you're wearing your badge
-        if( player_character.is_wearing( itype_badge_swat ) ) {
-            if( one_in( 3 ) ) {
-                add_msg( m_info, _( "The %s flashes a LED and departs.  SWAT's working the area." ),
-                         z->name() );
-                z->no_corpse_quiet = true;
-                z->no_extra_death_drops = true;
-                z->die( &here, nullptr );
-                return false;
-            } else {
-                add_msg( m_info, _( "The %s acknowledges you as SWAT onsite, but hangs around to watch." ),
-                         z->name() );
-                add_msg( m_info, _( "Probably some now-obsolete Internal Affairs subroutine…" ) );
-                return true;
-            }
-        }
-    }
-
-    if( player_character.has_trait( trait_PROF_FED ) ) {
-        // And you're wearing your badge
-        if( player_character.is_wearing( itype_badge_marshal ) ) {
-            add_msg( m_info, _( "The %s flashes a LED and departs.  The Feds got this." ), z->name() );
+        if( one_in( 3 ) ) {
+            add_msg( m_info, _( "The %s flashes a LED and departs.  Human officer on scene." ),
+                     z->name() );
             z->no_corpse_quiet = true;
             z->no_extra_death_drops = true;
             z->die( &here, nullptr );
             return false;
+        } else {
+            add_msg( m_info,
+                     _( "The %s acknowledges you as an officer responding, but hangs around to watch." ),
+                     z->name() );
+            add_msg( m_info, _( "Probably some now-obsolete Internal Affairs subroutine…" ) );
+            return true;
         }
+    }
+
+    if( player_character.is_wearing( itype_badge_detective ) ) {
+        // And you have your shield on
+        if( one_in( 4 ) ) {
+            add_msg( m_info, _( "The %s flashes a LED and departs.  Human officer on scene." ),
+                     z->name() );
+            z->no_corpse_quiet = true;
+            z->no_extra_death_drops = true;
+            z->die( &here, nullptr );
+            return false;
+        } else {
+            add_msg( m_info,
+                     _( "The %s acknowledges you as an officer responding, but hangs around to watch." ),
+                     z->name() );
+            add_msg( m_info, _( "Ops used to do that in case you needed backup…" ) );
+            return true;
+        }
+    } else if( player_character.is_wearing( itype_badge_swat ) ) {
+        // And you're wearing your badge
+        if( one_in( 3 ) ) {
+            add_msg( m_info, _( "The %s flashes a LED and departs.  SWAT's working the area." ),
+                     z->name() );
+            z->no_corpse_quiet = true;
+            z->no_extra_death_drops = true;
+            z->die( &here, nullptr );
+            return false;
+        } else {
+            add_msg( m_info, _( "The %s acknowledges you as SWAT onsite, but hangs around to watch." ),
+                     z->name() );
+            add_msg( m_info, _( "Probably some now-obsolete Internal Affairs subroutine…" ) );
+            return true;
+        }
+    }
+
+    if( player_character.is_wearing( itype_badge_marshal ) ) {
+        // And you're wearing your badge
+        add_msg( m_info, _( "The %s flashes a LED and departs.  The Feds got this." ), z->name() );
+        z->no_corpse_quiet = true;
+        z->no_extra_death_drops = true;
+        z->die( &here, nullptr );
+        return false;
     }
 
     if( z->friendly || ( weapon && weapon->typeId() == itype_e_handcuffs ) ) {

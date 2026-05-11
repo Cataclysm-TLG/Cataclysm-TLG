@@ -1009,7 +1009,7 @@ void monster::move()
     // Check z-level neighbors too so creatures on stairs aren't falsely stuck
     for( const tripoint_bub_ms &dest : here.points_in_radius( pos_bub(), 1, 1 ) ) {
         if( dest != pos_bub() ) {
-            if( can_move_to( dest ) && can_squeeze_to( dest ) &&
+            if( can_move_to( dest ) && vehicle_not_blocking( dest ) &&
                 creatures.creature_at( dest, true ) == nullptr ) {
                 try_to_move = true;
                 break;
@@ -1234,7 +1234,7 @@ void monster::move()
             // Try to shove vehicle out of the way
             shove_vehicle( destination, tripoint_bub_ms( candidate ) );
             // Bail out if we can't move there and we can't bash.
-            if( !pathed && ( !can_move_to( candidate ) || !can_squeeze_to( candidate ) ) ) {
+            if( !pathed && ( !can_move_to( candidate ) || !vehicle_not_blocking( candidate ) ) ) {
                 if( !can_bash || has_flag( json_flag_CANNOT_ATTACK ) ) {
                     continue;
                 }
@@ -1922,7 +1922,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     if( critter != nullptr && !step_on_critter ) {
         return false;
     }
-    if( !can_squeeze_to( destination ) ) {
+    if( !vehicle_not_blocking( destination ) ) {
         return false;
     }
 

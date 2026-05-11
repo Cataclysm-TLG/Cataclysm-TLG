@@ -3463,9 +3463,10 @@ void basecamp::start_crafting( const std::string &type, const mission_id &miss_i
             return;
         }
 
-    const crafting_cost_context ctx = crafting_cost_context::for_recipe(
-            get_player_character(), making );
-        time_duration work_days = base_camps::to_workdays( making.batch_duration( get_player_character(), ctx,
+        const crafting_cost_context ctx = crafting_cost_context::for_recipe(
+                                              get_player_character(), making );
+        time_duration work_days = base_camps::to_workdays( making.batch_duration( get_player_character(),
+                                  ctx,
                                   batch_size ) );
         npc_ptr comp = start_mission( miss_id, work_days, true,
                                       _( "begins to work…" ), false, {}, making.exertion_level(),
@@ -4712,9 +4713,9 @@ int basecamp::recipe_batch_max( const recipe &making ) const
     int max_batch = 0;
     const int max_checks = 9;
     for( size_t batch_size = 1000; batch_size > 0; batch_size /= 10 ) {
-        for( int iter = 0; iter < max_checks; iter++ ) {    
+        for( int iter = 0; iter < max_checks; iter++ ) {
             const crafting_cost_context ctx = crafting_cost_context::for_recipe(
-            get_player_character(), making );
+                                                  get_player_character(), making );
             time_duration work_days = base_camps::to_workdays( making.batch_duration(
                                           get_player_character(), ctx, max_batch + batch_size ) );
             int food_req = time_to_food( work_days );

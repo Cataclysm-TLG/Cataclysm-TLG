@@ -60,6 +60,7 @@ static const efftype_id effect_laserlocked( "laserlocked" );
 static const efftype_id effect_null( "null" );
 static const efftype_id effect_poison( "poison" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
+static const efftype_id effect_pulled( "pulled" );
 static const efftype_id effect_run( "run" );
 static const efftype_id effect_sensor_stun( "sensor_stun" );
 static const efftype_id effect_stunned( "stunned" );
@@ -331,11 +332,21 @@ bool mon_spellcasting_actor::call( monster &mon ) const
 
     spell spell_instance = spell_data.get_spell( mon );
     spell_instance.set_message( spell_data.trigger_message );
-
-    // Bail out if the target is out of range.
-    if( !spell_data.self && target &&
-        trig_dist( mon.pos_bub(), target_pos ) > spell_instance.range( mon ) ) {
-        return false;
+    if( !spell_data.self && target ) {
+        // Bail out if the target is out of range.
+        if( mon.pos_bub().z() == target->pos_bub().z() ) {
+            if( !spell_data.self && target &&
+                trig_dist( mon.pos_bub(), target_pos ) > spell_instance.range( mon ) ) {
+                return false;
+            }
+        } else {
+            // Round up to ensure Z levels count properly as 2.
+            if( !spell_data.self && target &&
+                static_cast<int>( std::ceil( trig_dist_precise( mon.pos_bub(),
+                                             target_pos ) ) ) > spell_instance.range( mon ) ) {
+                return false;
+            }
+        }
     }
 
     std::string target_name;
@@ -487,11 +498,23 @@ Creature *melee_actor::find_target( monster &z ) const
     }
 
     if( range > 1 ) {
-        if( !z.sees( here, *target ) ||
-            !here.clear_path( z.pos_bub( here ), target->pos_bub( here ), range, 1, 200 ) ) {
-            return nullptr;
+        bool in_range = false;
+
+        if( z.posz() == target->posz() ) {
+            in_range = trig_dist( z.pos_bub(), target->pos_bub() ) <= range;
+        } else {
+            in_range = static_cast<int>(
+                           std::ceil(
+                               trig_dist_precise(
+                                   z.pos_bub(), target->pos_bub() ) ) ) <= range;
         }
 
+        if( !in_range ||
+            !z.sees( here, *target ) ||
+            !here.clear_path( z.pos_bub( here ), target->pos_bub( here ),
+                              range, 1, 200 ) ) {
+            return nullptr;
+        }
     } else if( !z.is_adjacent( target, false ) ) {
         return nullptr;
     }
@@ -523,7 +546,7 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
                    eff_grab_strength, grab_data.pull_chance );
 
     // Handle seatbelts and weight limits for pulls/drags TODO: tear you out depending on grab str?
-    if( grab_data.pull_chance > -1 || grab_data.drag_distance > 0 ) {
+    if( ( grab_data.pull_chance > -1 || grab_data.drag_distance > 0 ) && !target->has_effect( effect_pulled ) ) {
         if( target->get_weight() > z.get_weight() * grab_data.pull_weight_ratio ) {
             target->add_msg_player_or_npc( msg_type, grab_data.pull_fail_msg_u, grab_data.pull_fail_msg_npc,
                                            mon_name );
@@ -574,7 +597,7 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
             tdir.advance();
             pt.x() = target_pos.x() + tdir.dx();
             pt.y() = target_pos.y() + tdir.dy();
-            //Cancel the grab if the space is occupied by something
+            // Cancel the grab if the space is occupied by something
             if( !g->is_empty( pt ) ) {
                 break;
             }
