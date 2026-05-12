@@ -677,6 +677,18 @@
   },
   {
     "type": "mutation",
+    "id": "GORGER",
+    "name": { "str": "Gorger" },
+    "points": 1,
+    "description": "Your stomach can expand quite a bit.  This comes in handy as you tend to swallow food whole.",
+    "cancels": [ "GOURMAND" ],
+    "category": [ "FISH", "LIZARD", "CHIMERA", "BATRACHIAN" ],
+    "enchantments": [
+      { "values": [ { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.4 }, { "value": "CONSUME_TIME_MOD", "multiply": -0.5 } ] }
+    ]
+  },
+  {
+    "type": "mutation",
     "id": "EASYSLEEPER",
     "name": { "str": "Easy Sleeper" },
     "points": 1,
