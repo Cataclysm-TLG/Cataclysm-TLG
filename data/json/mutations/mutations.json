@@ -1581,7 +1581,7 @@
     "id": "PROJUNK",
     "name": { "str": "Sweet Tooth" },
     "points": 1,
-    "description": "You have a soft spot for processed foods, and gain a morale bonus from eating them.",
+    "description": "You have a soft spot for sweets, snacks, and empty calories.  Junk food is more enjoyable, but everything else is a bit less so.",
     "starting_trait": true,
     "cancels": [ "ANTIJUNK" ],
     "changes_to": [ "PROJUNK2" ],

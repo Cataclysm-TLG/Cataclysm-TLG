@@ -579,6 +579,15 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
         fun_max = 25;
     }
 
+    // Non junk food is less enjoyable to sweet tooth/snackaholic characters.
+    if( comest.has_flag( flag_ALLERGEN_JUNK ) ) {
+        if( has_trait( trait_PROJUNK ) || has_trait( trait_PROJUNK2 ) ) {
+            if( fun > 0 ) {
+                fun *= 0.75;
+            }
+        }
+    }
+
     // This cherry soda's just not the same...
     if( has_flag( json_flag_BLOODFEEDER ) && !comest.has_flag( flag_HEMOVORE_FUN ) && fun > 0 ) {
         fun *= 0.5;
@@ -1467,15 +1476,16 @@ void Character::modify_morale( item &food, const int nutr )
         if( food.has_flag( flag_ALLERGEN_JUNK ) ) {
             if( has_trait( trait_PROJUNK ) ) {
                 add_msg_if_player( m_good, _( "Mmm, junk food." ) );
-                add_morale( morale_sweettooth, 5, 25, 2_hours, 1_hours, true );
+                add_morale( morale_sweettooth, 5, 15, 2_hours, 30_minutes, true );
             }
             if( has_trait( trait_PROJUNK2 ) ) {
                 if( !one_in( 100 ) ) {
-                    add_msg_if_player( m_good, _( "When life's got you down, there's always sugar." ) );
+                    //~ Translators: This is a quote from the 1973 animated film Charlotte's Web, where a rat is singing about eating trash off the ground. Do what you will with that information.
+                    add_msg_if_player( m_good, _( "A veritable smorgasbord!" ) );
                 } else {
                     add_msg_if_player( m_good, _( "Snack attack!" ) );
                 }
-                add_morale( morale_sweettooth, 10, 30, 2_hours, 1_hours, true );
+                add_morale( morale_sweettooth, 5, 30, 2_hours, 30_minutes, true );
             }
             // Carnivores CAN eat junk food, but they won't like it much.
             // Pizza-scraping happens in consume_effects.
