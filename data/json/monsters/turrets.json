@@ -41,11 +41,10 @@
         "no_ammo_sound": "a chk!"
       }
     ],
-    "special_when_hit": [ "RETURN_FIRE", 100 ],
     "death_drops": {  },
     "death_function": { "corpse_type": "BROKEN" },
     "flags": [ "SEES", "NOHEAD", "ELECTRONIC", "BIOLOGICALPROOF", "COLDPROOF", "IMMOBILE", "NO_BREATHE", "DROPS_AMMO", "NO_TRAIN" ],
-    "armor": { "bash": 5, "cut": 16, "bullet": 13, "stab": 16 }
+    "armor": { "bash": 5, "cut": 16, "bullet": 13, "stab": 16, "acid": 5 }
   },
   {
     "id": "mon_turret_searchlight",
@@ -86,7 +85,7 @@
       "NO_TRAIN",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 3, "cut": 16, "bullet": 2, "stab": 16 }
+    "armor": { "bash": 3, "cut": 16, "bullet": 2, "stab": 16, "acid": 5 }
   },
   {
     "id": "mon_turret_bmg",
@@ -119,7 +118,7 @@
         "move_cost": 150,
         "gun_type": "m2browning",
         "ammo_type": "50bmg",
-        "fake_skills": [ [ "gun", 8 ], [ "rifle", 8 ] ],
+        "fake_skills": [ [ "gun", 7 ], [ "rifle", 7 ] ],
         "fake_dex": 12,
         "ranges": [ [ 0, 40, "AUTO" ], [ 41, 110, "DEFAULT" ] ],
         "require_targeting_npc": true,
@@ -133,7 +132,6 @@
         "no_ammo_sound": "a chk!"
       }
     ],
-    "special_when_hit": [ "RETURN_FIRE", 100 ],
     "death_drops": {  },
     "death_function": { "corpse_type": "BROKEN" },
     "flags": [
@@ -149,7 +147,7 @@
       "ID_CARD_DESPAWN",
       "NO_TRAIN"
     ],
-    "armor": { "bash": 4, "cut": 16, "bullet": 13, "stab": 16 }
+    "armor": { "bash": 6, "cut": 18, "bullet": 10, "stab": 18, "acid": 5 }
   },
   {
     "id": "mon_turret_rifle",
@@ -182,7 +180,7 @@
         "move_cost": 150,
         "gun_type": "m249",
         "ammo_type": "556",
-        "fake_skills": [ [ "gun", 8 ], [ "rifle", 8 ] ],
+        "fake_skills": [ [ "gun", 7 ], [ "rifle", 7 ] ],
         "fake_dex": 12,
         "ranges": [ [ 0, 36, "DEFAULT" ] ],
         "require_targeting_npc": true,
@@ -196,7 +194,6 @@
         "no_ammo_sound": "a chk!"
       }
     ],
-    "special_when_hit": [ "RETURN_FIRE", 100 ],
     "death_drops": {  },
     "death_function": { "corpse_type": "BROKEN" },
     "flags": [
@@ -212,7 +209,7 @@
       "CONSOLE_DESPAWN",
       "NO_TRAIN"
     ],
-    "armor": { "bash": 4, "cut": 16, "bullet": 13, "stab": 16 }
+    "armor": { "bash": 6, "cut": 18, "bullet": 10, "stab": 18, "acid": 5 }
   },
   {
     "id": "mon_crows_m240",
@@ -245,7 +242,7 @@
         "move_cost": 150,
         "gun_type": "m240",
         "ammo_type": "762_51",
-        "fake_skills": [ [ "gun", 8 ], [ "rifle", 8 ] ],
+        "fake_skills": [ [ "gun", 7 ], [ "rifle", 7 ] ],
         "fake_dex": 12,
         "ranges": [ [ 0, 60, "DEFAULT" ] ],
         "require_targeting_npc": true,
@@ -259,7 +256,6 @@
         "no_ammo_sound": "a chk!"
       }
     ],
-    "special_when_hit": [ "RETURN_FIRE", 100 ],
     "death_drops": {  },
     "death_function": { "corpse_type": "BROKEN" },
     "flags": [
@@ -275,7 +271,7 @@
       "CONSOLE_DESPAWN",
       "NO_TRAIN"
     ],
-    "armor": { "bash": 4, "cut": 16, "bullet": 13, "stab": 16 }
+    "armor": { "bash": 6, "cut": 18, "bullet": 10, "stab": 18, "acid": 5 }
   },
   {
     "id": "mon_turret_riot",
@@ -336,7 +332,7 @@
       "ID_CARD_DESPAWN",
       "NO_TRAIN"
     ],
-    "armor": { "bash": 3, "cut": 16, "bullet": 8, "stab": 16 }
+    "armor": { "bash": 3, "cut": 18, "bullet": 10, "stab": 18, "acid": 5 }
   },
   {
     "id": "mon_turret_speaker",
@@ -363,6 +359,6 @@
     "death_function": { "corpse_type": "BROKEN" },
     "death_drops": { "groups": [ [ "turret_speaker", 1 ] ] },
     "flags": [ "SEES", "NOHEAD", "BIOLOGICALPROOF", "ELECTRONIC", "IMMOBILE", "NO_BREATHE", "NO_TRAIN" ],
-    "armor": { "bash": 3, "cut": 16, "bullet": 14, "stab": 16 }
+    "armor": { "bash": 2, "cut": 14, "bullet": 10, "stab": 14, "acid": 5 }
   }
 ]
