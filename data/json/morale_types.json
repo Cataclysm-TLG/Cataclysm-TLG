@@ -172,7 +172,7 @@
   {
     "id": "morale_sweettooth",
     "type": "morale_type",
-    "text": "Enjoyed something sugary"
+    "text": "Ate junk food"
   },
   {
     "id": "morale_no_digest",
@@ -212,7 +212,7 @@
   {
     "id": "morale_killed_friend",
     "type": "morale_type",
-    "text": "Killed a friend"
+    "text": "Killed an ally"
   },
   {
     "id": "morale_killed_monster",
@@ -232,7 +232,7 @@
   {
     "id": "morale_mutagen_chimera",
     "type": "morale_type",
-    "text": "Chimerical mutation"
+    "text": "Chimera mutation"
   },
   {
     "id": "morale_mutagen_mutation",
@@ -352,7 +352,7 @@
   {
     "id": "morale_butcher",
     "type": "morale_type",
-    "text": "Anguished by memories of butchering a human corpse"
+    "text": "Butchered a human like an animal"
   },
   {
     "id": "morale_gravedigger",
