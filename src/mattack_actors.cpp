@@ -546,7 +546,8 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
                    eff_grab_strength, grab_data.pull_chance );
 
     // Handle seatbelts and weight limits for pulls/drags TODO: tear you out depending on grab str?
-    if( ( grab_data.pull_chance > -1 || grab_data.drag_distance > 0 ) && !target->has_effect( effect_pulled ) ) {
+    if( ( grab_data.pull_chance > -1 || grab_data.drag_distance > 0 ) &&
+        !target->has_effect( effect_pulled ) ) {
         if( target->get_weight() > z.get_weight() * grab_data.pull_weight_ratio ) {
             target->add_msg_player_or_npc( msg_type, grab_data.pull_fail_msg_u, grab_data.pull_fail_msg_npc,
                                            mon_name );

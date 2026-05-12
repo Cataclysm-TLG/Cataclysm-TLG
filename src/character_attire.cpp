@@ -1285,13 +1285,13 @@ static ret_val<void> test_only_one_conflicts( const item &clothing, const item &
     };
 
     if( i.has_flag( flag_ONLY_ONE ) && i.typeId() == clothing.typeId() ) {
-        return ret_val<void>::make_failure( _( "Can't wear more than one %s!" ), clothing.tname() );
+        return ret_val<void>::make_failure( _( "Can't wear more than one %s." ), clothing.tname() );
     }
 
     if( this_restricts_only_one || i.has_flag( json_flag_ONE_PER_LAYER ) ) {
         std::optional<side> overlaps = clothing.covers_overlaps( i );
         if( overlaps && sidedness_conflicts( *overlaps ) ) {
-            return ret_val<void>::make_failure( _( "%1$s conflicts with %2$s!" ), clothing.tname(), i.tname() );
+            return ret_val<void>::make_failure( _( "%1$s conflicts with %2$s." ), clothing.tname(), i.tname() );
         }
     }
 
@@ -1319,32 +1319,73 @@ ret_val<void> outfit::only_one_conflicts( const item &clothing ) const
     return ret_val<void>::make_success();
 }
 
-static ret_val<void> rigid_test( const item &clothing, const item &i,
-                                 const std::unordered_set<sub_bodypart_id> &to_test )
+static ret_val<void> rigid_test(
+    const item &clothing,
+    const item &i,
+    const std::unordered_set<sub_bodypart_id> &to_test )
 {
-    // check each sublimb individually
     for( const sub_bodypart_id &sbp : to_test ) {
-        // skip if the item doesn't currently cover the bp
-        if( !i.covers( sbp ) ) {
-            continue;
-        }
-
-        // skip if either item cares only about its layer and they don't match up
-        if( ( i.is_bp_rigid_selective( sbp ) || clothing.is_bp_rigid_selective( sbp ) ) &&
-            !i.has_layer( clothing.get_layer( sbp ), sbp ) ) {
-            continue;
-        }
-
-        // allow wearing splints on integrated armor such as protective bark
+        // Allow splints on integrated armor such as protective bark.
         if( i.has_flag( flag_INTEGRATED ) && clothing.has_flag( flag_SPLINT ) ) {
             continue;
         }
-
-        if( i.is_bp_rigid( sbp ) ) {
-            return ret_val<void>::make_failure( _( "Can't wear more than one rigid item on %s!" ), sbp->name );
+        if( i.is_ablative() ) {
+            for( const item_pocket *p : i.get_all_ablative_pockets() ) {
+                for( const item *content : p->all_items_top() ) {
+                    if( content->is_null() ) {
+                        continue;
+                    }
+                    if( !content->covers( sbp ) ) {
+                        continue;
+                    }
+                    if( ( content->is_bp_rigid_selective( sbp ) ||
+                          clothing.is_bp_rigid_selective( sbp ) ) &&
+                        !content->has_layer( clothing.get_layer( sbp ), sbp ) ) {
+                        continue;
+                    }
+                    if( content->is_bp_rigid( sbp ) ) {
+                        return ret_val<void>::make_failure(
+                                   _( "Can't wear more than one rigid item on %s." ),
+                                   sbp->name );
+                    }
+                }
+            }
+        }
+        if( i.covers( sbp ) ) {
+            if( ( i.is_bp_rigid_selective( sbp ) ||
+                  clothing.is_bp_rigid_selective( sbp ) ) &&
+                !i.has_layer( clothing.get_layer( sbp ), sbp ) ) {
+                continue;
+            }
+            if( i.is_bp_rigid( sbp ) ) {
+                return ret_val<void>::make_failure(
+                           _( "Can't wear more than one rigid item on %s." ),
+                           sbp->name );
+            }
+        }
+        if( clothing.is_ablative() ) {
+            for( const item_pocket *p : clothing.get_all_ablative_pockets() ) {
+                for( const item *content : p->all_items_top() ) {
+                    if( content->is_null() ) {
+                        continue;
+                    }
+                    if( !content->covers( sbp ) ) {
+                        continue;
+                    }
+                    if( ( content->is_bp_rigid_selective( sbp ) ||
+                          i.is_bp_rigid_selective( sbp ) ) &&
+                        !content->has_layer( i.get_layer( sbp ), sbp ) ) {
+                        continue;
+                    }
+                    if( content->is_bp_rigid( sbp ) ) {
+                        return ret_val<void>::make_failure(
+                                   _( "Can't wear more than one rigid item on %s." ),
+                                   sbp->name );
+                    }
+                }
+            }
         }
     }
-
     return ret_val<void>::make_success();
 }
 
