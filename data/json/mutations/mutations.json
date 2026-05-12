@@ -779,7 +779,8 @@
       "BATRACHIAN",
       "CHIMERA",
       "GASTROPOD",
-      "CRUSTACEAN"
+      "CRUSTACEAN",
+      "LIZARD"
     ]
   },
   {
@@ -3902,7 +3903,7 @@
     "prereqs": [ "POISRESIST" ],
     "changes_to": [ "POISONOUS2" ],
     "flags": [ "VENOM1" ],
-    "category": [ "SLIME", "TROGLOBITE", "SPIDER", "CEPHALOPOD", "GASTROPOD", "CHIMERA", "INSECT" ]
+    "category": [ "SLIME", "SPIDER", "CEPHALOPOD", "GASTROPOD", "CHIMERA", "INSECT", "LIZARD" ]
   },
   {
     "type": "mutation",
