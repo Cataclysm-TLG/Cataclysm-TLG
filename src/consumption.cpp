@@ -489,19 +489,19 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
     // As float to avoid rounding too many times
     float fun = comest.get_comestible_fun();
     // Food doesn't taste as good when you're sick
-    if( ( has_effect( effect_common_cold ) || has_effect( effect_flu ) ) && fun > 0 ) {
-        fun /= 3;
+    if( ( has_effect( effect_common_cold ) || has_effect( effect_flu ) ) && fun > 0.f ) {
+        fun /= 3.f;
     }
     // Rotten food should be pretty disgusting
     const float relative_rot = comest.get_relative_rot();
     if( relative_rot > 1.0f && !has_trait( trait_SAPROPHAGE ) && !has_trait( trait_SAPROVORE ) ) {
-        const float rottedness = clamp( 2 * relative_rot - 2.0f, 0.1f, 1.0f );
+        const float rottedness = clamp( 2.f * relative_rot - 2.0f, 0.1f, 1.0f );
         // Three effects:
         // penalty for rot goes from -2 to -20
         // bonus for tasty food drops from 90% to 0%
         // disgusting food unfun increases from 110% to 200%
-        fun -= rottedness * 10;
-        if( fun > 0 ) {
+        fun -= rottedness * 10.f;
+        if( fun > 0.f ) {
             fun *= ( 1.0f - rottedness );
         } else {
             fun *= ( 1.0f + rottedness );
@@ -516,34 +516,35 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
                 fun -= comest.get_comestible()->monotony_penalty;
                 // This effect can't drop fun below 0, unless the food has the right flag.
                 // 0 is the lowest we'll go, no need to keep looping.
-                if( fun <= 0 && !comest.has_flag( flag_NEGATIVE_MONOTONY_OK ) ) {
-                    fun = 0;
+                if( fun <= 0.f && !comest.has_flag( flag_NEGATIVE_MONOTONY_OK ) ) {
+                    fun = 0.f;
                     break;
                 }
             }
         }
     }
 
-    float fun_max = fun < 0 ? fun * 6.0f : fun * 3.0f;
+    float fun_max = fun < 0.f ? fun * 6.0f : fun * 3.0f;
     if( comest.has_flag( flag_EATEN_COLD ) && comest.has_flag( flag_COLD ) ) {
-        if( fun > 0 ) {
-            fun *= 2;
+        if( fun > 0.f ) {
+            fun *= 2.f;
         } else {
-            fun = 1;
-            fun_max = 5;
+            fun = 1.f;
+            fun_max = 5.f;
         }
     }
 
     if( comest.has_flag( flag_MELTS ) && !comest.has_flag( flag_FROZEN ) ) {
         if( fun > 0 ) {
-            fun *= 0.5;
+            fun *= 0.5f;
         } else {
             // Melted freezable food tastes 25% worse than frozen freezable food.
             // Frozen freezable food... say that 5 times fast
-            fun *= 1.25;
+            fun *= 1.25f;
         }
     }
 
+    // Foods designed for specific animals are tasty to those sorts of mutants, and (usually) gross to humans, so invert and half.
     if( ( comest.has_flag( flag_LUPINE ) && has_trait( trait_THRESH_LUPINE ) ) ||
         ( comest.has_flag( flag_CATTLE ) && has_trait( trait_THRESH_CATTLE ) ) ||
         ( comest.has_flag( flag_RABBIT ) && has_trait( trait_THRESH_RABBIT ) ) ||
@@ -551,12 +552,9 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
         ( comest.has_flag( flag_RAT ) && has_trait( trait_THRESH_RAT ) ) ||
         ( comest.has_flag( flag_BIRD ) && has_trait( trait_THRESH_BIRD ) ) ||
         ( comest.has_flag( flag_FELINE ) && has_trait( trait_THRESH_FELINE ) ) ) {
-        if( fun < 0 ) {
+        if( fun < 0.f ) {
             fun = -fun;
-            fun /= 2;
-        }
-        if( fun == 0 ) {
-            fun = 2;
+            fun /= 2.f;
         }
     }
 
@@ -564,25 +562,25 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
     // This is automatically handled by raw blood having negative fun
     if( comest.has_flag( flag_HEMOVORE_FUN ) ) {
         if( has_flag( json_flag_BLOODFEEDER ) ) {
-            if( fun <= 0 ) {
-                fun += 25;
+            if( fun <= 0.f ) {
+                fun += 25.f;
             } else {
-                fun *= 1.2;
+                fun *= 1.2f;
             }
         } else if( has_flag( json_flag_HEMOVORE ) ) {
-            if( fun <= 0 ) {
-                fun += 13;
+            if( fun <= 0.f ) {
+                fun += 13.f;
             } else {
                 fun *= 1.1;
             }
         }
-        fun_max = 25;
+        fun_max = 25.f;
     }
 
     // Non junk food is less enjoyable to sweet tooth/snackaholic characters.
     if( !comest.has_flag( flag_ALLERGEN_JUNK ) ) {
         if( has_trait( trait_PROJUNK ) || has_trait( trait_PROJUNK2 ) ) {
-            if( fun > 0 ) {
+            if( fun > 0.f ) {
                 fun *= 0.75f;
             }
         }
@@ -590,15 +588,15 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
 
     // This cherry soda's just not the same...
     if( has_flag( json_flag_BLOODFEEDER ) && !comest.has_flag( flag_HEMOVORE_FUN ) && fun > 0 ) {
-        fun *= 0.5;
+        fun *= 0.5f;
     }
 
     if( has_trait( trait_GOURMAND ) ) {
         if( fun < -1.f ) {
             fun_max = fun;
             fun *= 0.75f;
-        } else if( fun > 0 ) {
-            fun_max *= 3;
+        } else if( fun > 0.f ) {
+            fun_max *= 3.f;
             fun = fun * 3 / 2;
         }
     }
@@ -606,7 +604,7 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
     if( fun < 0 && has_active_bionic( bio_taste_blocker ) &&
         get_power_level() > units::from_kilojoule( static_cast<std::int64_t>( std::abs(
                     comest.get_comestible_fun() ) ) ) ) {
-        fun = 0;
+        fun = 0.f;
     }
 
     // Zombie meat doesn't taste good, but it's tolerable for those who can eat it.
@@ -617,7 +615,7 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
         }
     }
 
-    return { static_cast< int >( fun ), static_cast< int >( fun_max ) };
+    return { static_cast< int >( std::round( fun ) ), static_cast< int >( std::round( fun_max ) ) };
 }
 
 time_duration Character::vitamin_rate( const vitamin_id &vit ) const
