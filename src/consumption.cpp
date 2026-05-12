@@ -580,10 +580,10 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
     }
 
     // Non junk food is less enjoyable to sweet tooth/snackaholic characters.
-    if( comest.has_flag( flag_ALLERGEN_JUNK ) ) {
+    if( !comest.has_flag( flag_ALLERGEN_JUNK ) ) {
         if( has_trait( trait_PROJUNK ) || has_trait( trait_PROJUNK2 ) ) {
             if( fun > 0 ) {
-                fun *= 0.75;
+                fun *= 0.75f;
             }
         }
     }
