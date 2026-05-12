@@ -161,12 +161,13 @@
       {
         "id": "buff_barbaran_static",
         "name": "Barbaran Represa",
-        "description": "Sliding footwork enhances the crushing continuity of your attacks.\n\nArmor penetration increased by 75% of Strength.",
+        "description": "Sliding footwork enhances the crushing continuity of your attacks.\n\nArmor penetration increased by 50% of Strength.",
         "melee_allowed": true,
+        "forbidden_buffs_all": [ "buff_barbaran_onmove" ],
         "flat_bonuses": [
-          { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 0.75 },
-          { "stat": "arpen", "type": "cut", "scaling-stat": "str", "scale": 0.75 },
-          { "stat": "arpen", "type": "stab", "scaling-stat": "str", "scale": 0.75 }
+          { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "arpen", "type": "cut", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "arpen", "type": "stab", "scaling-stat": "str", "scale": 0.5 }
         ]
       }
     ],
@@ -209,14 +210,14 @@
       {
         "id": "buff_barbaran_onpause",
         "name": "Vulgar Preparation",
-        "description": "You prepare for the final crushing strike.\n\nAccuracy increased by 15% of Strength, armor penetration increased by 225% of Strength.\nLasts 1 second.",
+        "description": "You prepare for the final crushing strike.\n\nAccuracy increased by 15% of Strength, armor penetration increased by 50% of Strength.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 4 } ],
         "melee_allowed": true,
         "flat_bonuses": [
           { "stat": "hit", "scaling-stat": "str", "scale": 0.15 },
-          { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 2.25 },
-          { "stat": "arpen", "type": "cut", "scaling-stat": "str", "scale": 2.25 },
-          { "stat": "arpen", "type": "stab", "scaling-stat": "str", "scale": 2.25 }
+          { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "arpen", "type": "cut", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "arpen", "type": "stab", "scaling-stat": "str", "scale": 0.5 }
         ],
         "buff_duration": 1
       }
