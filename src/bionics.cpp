@@ -820,11 +820,12 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
         for( const itype_id &pseudo : bio.info().toggled_pseudo_items ) {
             item tmparmor( pseudo );
             if( tmparmor.has_flag( flag_INTEGRATED ) ) {
-                if( can_wear( tmparmor ).success() ) {
-                    wear_item( tmparmor, false );
+                ret_val<void> result = get_player_character().worn.check_rigid_conflicts( tmparmor );
+                if( can_wear( tmparmor ).success() && result.success() ) {
+                        wear_item( tmparmor, false );
                 } else {
                     add_msg_if_player( m_info,
-                                       _( "Your %s is unable to engage due to other equipment being in the way." ), bio.info().id.str() );
+                                       _( "You are unable to engage your %s." ), bio.info().name );
                     refund_power();
                     bio.powered = false;
                     return false;
