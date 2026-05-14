@@ -625,20 +625,17 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         first = false;
     }
 
-    // We need to store bounce targets safely.
-    std::vector<Creature *> bounce_targets;
-
-    // /Check for bounce effect and gather valid bounce targets first.
-    if( proj.proj_effects.count( ammo_effect_BOUNCE ) ) {
+    // Hits are currently hard capped at 6 here, because otherwise the attack would just go forever.
+    if( proj.proj_effects.count( ammo_effect_BOUNCE ) && attack.targets_hit.size() < 6 ) {
         Creature *mon_ptr = g->get_creature_if( [&]( const Creature & z ) {
             if( &z == origin ) {
                 return false;
             }
             // Search for creatures in radius 4 around impact site.
-            if( trig_dist( z.pos_bub( *here ), tp ) <= 4 &&
-                here->clear_path( z.pos_bub( *here ), tp, 4, 1, 100 ) && ( z.pos_bub( *here ) != tp ) ) {
-                // Don't hit targets that have already been hit
-                for( const auto &it : attack.targets_hit ) {
+            if( trig_dist( z.pos_bub( *here ), tp ) <= 4 && trig_dist( z.pos_bub( *here ), tp ) > 0 &&
+                here->sees( z.pos_bub( *here ), tp, -1 ) ) {
+                // Don't hit targets that have already been hit.
+                for( auto it : attack.targets_hit ) {
                     if( &z == it.first ) {
                         return false;
                     }
@@ -648,26 +645,14 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             return false;
         } );
         if( mon_ptr ) {
-            bounce_targets.push_back( mon_ptr );
-        }
-    }
-
-    // Now safely process all bounce targets
-    for( Creature *z : bounce_targets ) {
-        if( !z || z->is_dead_state() ) {
-            continue; // Skip invalid or dead creatures.
-        }
-
-        add_msg( _( "The attack bounced to %s!" ), z->disp_name() );
-
-        // Perform the projectile attack on the bounce target.
-        projectile_attack( attack, proj, here, tp, z->pos_bub(), dispersion, origin, in_veh );
-
-        // Play sound if applicable.
-        if( here == &reality_bubble() ) {
-            sfx::play_variant_sound( "fire_gun", "bio_lightning_tail",
-                                     sfx::get_heard_volume( z->pos_bub() ),
-                                     sfx::get_heard_angle( z->pos_bub() ) );
+            Creature &z = *mon_ptr;
+            attack.targets_hit[&z].first += 0;
+            add_msg( _( "The attack bounced to %s!" ), z.get_name() );
+            projectile_attack( attack, proj, here, tp, z.pos_bub(), dispersion, origin, in_veh );
+            if( here == &reality_bubble() ) {
+                sfx::play_variant_sound( "fire_gun", "bio_lightning_tail",
+                                         sfx::get_heard_volume( z.pos_bub() ), sfx::get_heard_angle( z.pos_bub() ) );
+            }
         }
     }
 
