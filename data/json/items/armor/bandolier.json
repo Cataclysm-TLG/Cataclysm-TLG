@@ -116,11 +116,9 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "bandolier_shotgun",
-    "//": "It's very much similar to the torso shotgun bandolier I'm patterning this off of, so I'm keeping the data the same.",
     "name": { "str": "torso grenade bandolier" },
-    "description": "A leather bandolier strapped around the torso for keeping 40mm grenades close to hand.  For some reason, wearing this makes you feel Austrian.",
+    "description": "A leather bandolier strapped around the torso for keeping 40mm grenades close to hand.",
     "pocket_data": [ { "ammo_restriction": { "40x46mm": 6, "40x53mm": 6 }, "moves": 20, "volume_encumber_modifier": 0.3 } ],
-    "//2": "The image I found when I went looking showed Arnie carrying six grenades in a bandolier.",
     "flags": [ "WATER_FRIENDLY", "BELTED", "OVERSIZE" ]
   },
   {
@@ -220,13 +218,13 @@
     "id": "grenade_pouch",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "grenade pouch", "str_pl": "grenade pouches" },
-    "description": "A small pouch for storing cartridge grenades, with straps for attaching it to your belt or other webbing.",
+    "name": { "str": "40mm ammo pouch", "str_pl": "40mm ammo pouches" },
+    "description": "A pouch consisting of four sleeves sized specifically for grenade launcher ammunition.  Nylon loops across the back allow it to be attached to MOLLE webbing.",
     "weight": "90 g",
     "volume": "250 ml",
     "price": "59 USD",
     "price_postapoc": "7 USD 50 cent",
-    "material": [ "nylon", "plastic" ],
+    "material": [ { "type": "nylon", "portion": 4 }, { "type": "plastic", "portion": 1 } ],
     "symbol": "[",
     "looks_like": "ammo_satchel",
     "color": "dark_gray",
@@ -248,16 +246,16 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "large grenade pouch", "str_pl": "large grenade pouches" },
-    "description": "A pouch for holding up to four full-sized grenades of various types, with straps for attaching it to your belt or other webbing.",
+    "description": "A pouch with individual sleeves for holding up to four hand grenades, with straps for attaching it to your belt or other webbing.",
     "weight": "600 g",
     "volume": "1250 ml",
     "price": "30 USD",
-    "price_postapoc": "12 USD 50 cent",
-    "material": [ "nylon" ],
+    "price_postapoc": "50 cent",
+    "material": [ { "type": "nylon", "portion": 4 }, { "type": "plastic", "portion": 1 } ],
     "symbol": "[",
     "looks_like": "leather_belt",
     "color": "dark_gray",
-    "material_thickness": 2,
+    "material_thickness": 1,
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -311,7 +309,7 @@
     "symbol": "[",
     "looks_like": "leather_pouch",
     "color": "brown",
-    "material_thickness": 0.1,
+    "material_thickness": 0.2,
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -364,7 +362,7 @@
     "symbol": "[",
     "looks_like": "leather_pouch",
     "color": "brown",
-    "material_thickness": 1,
+    "material_thickness": 0.4,
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -391,7 +389,7 @@
     "symbol": "[",
     "looks_like": "leather_pouch",
     "color": "brown",
-    "material_thickness": 1,
+    "material_thickness": 0.4,
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
