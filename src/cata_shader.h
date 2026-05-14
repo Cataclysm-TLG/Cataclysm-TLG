@@ -11,11 +11,24 @@
 // SDL3-only.
 #if SDL_MAJOR_VERSION >= 3
 
+#include <array>
 #include <memory>
 #include <string>
 
 namespace cata_shader
 {
+
+// Sprite-variant kinds for the GPU shader path. NORMAL has no shader and
+// uses the atlas directly. MEMORY has no shader either; the memory atlas
+// drives MEMORIZED draws.
+enum class variant_kind : int {
+    NORMAL = 0,
+    SHADOW,       // lit_level::LOW without nightvision
+    NIGHT,        // nightvision active at lit_level::LOW
+    OVEREXPOSED,  // nightvision active at lit_level above LOW
+    MEMORY,       // lit_level::MEMORIZED
+    count
+};
 
 // RAII over SDL_GPUShader *. Lifetime is tied to the SDL_GPUDevice that
 // created the shader (device-scoped).
@@ -122,6 +135,56 @@ class gpu_state_scope
 
     private:
         SDL_Renderer *renderer_ = nullptr;
+        bool active_ = false;
+};
+
+// Owns one SDL_GPUShader + SDL_GPURenderState per supported variant and
+// brackets bind/unbind around per-sprite draws. SDL_SetGPURenderStateFragmentUniforms
+// is not used: per-call uploads leak host memory on the SDL3 GPU renderer
+// without recycling, so each variant gets its own state and the dispatch
+// is a state switch rather than a uniform mutation.
+//
+// Lifecycle:
+//   - construct with renderer (no work).
+//   - probe() lazily on first use; loads shaders, creates states for
+//     SHADOW/NIGHT/OVEREXPOSED. Either every variant succeeds or every
+//     variant is marked unavailable (single decision, no per-variant
+//     gating). NORMAL and MEMORY are never probed: neither has a shader.
+//   - try_begin(v) returns true iff v has an active shader path AND bind
+//     succeeded. Caller must call end() iff try_begin returned true.
+//   - end() returns true on clean unbind. False sets session_disabled
+//     (one-way) so subsequent try_begin returns false; recovers on
+//     restart.
+//   - destruction releases held shader/state slots.
+class variant_pass
+{
+    public:
+        explicit variant_pass( SDL_Renderer *renderer );
+        ~variant_pass();
+
+        variant_pass( const variant_pass & ) = delete;
+        variant_pass &operator=( const variant_pass & ) = delete;
+        variant_pass( variant_pass && ) = delete;
+        variant_pass &operator=( variant_pass && ) = delete;
+
+        // True iff probe ran successfully AND session not disabled by
+        // late failure. Cheap, safe in a hot path.
+        bool available() const {
+            return probed_ok_ && !session_disabled_;
+        }
+
+        bool try_begin( variant_kind v );
+        bool end();
+
+    private:
+        void probe();
+
+        SDL_Renderer *renderer_ = nullptr;
+        std::array<shader, static_cast<size_t>( variant_kind::count )> shaders_;
+        std::array<render_state, static_cast<size_t>( variant_kind::count )> states_;
+        bool probe_attempted_ = false;
+        bool probed_ok_ = false;
+        bool session_disabled_ = false;
         bool active_ = false;
 };
 

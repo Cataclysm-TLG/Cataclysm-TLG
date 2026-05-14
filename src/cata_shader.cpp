@@ -5,6 +5,7 @@
 #if SDL_MAJOR_VERSION >= 3
 
 #include <array>
+#include <cstdlib>
 #include <fstream>
 #include <iterator>
 #include <vector>
@@ -213,6 +214,232 @@ bool gpu_state_scope::unbind()
         DebugLog( D_ERROR, DC_ALL )
                 << "cata_shader::gpu_state_scope: SDL_SetGPURenderState(NULL) failed: "
                 << SDL_GetError();
+        return false;
+    }
+    return true;
+}
+
+namespace
+{
+
+const char *shader_basename_for( variant_kind v )
+{
+    switch( v ) {
+        case variant_kind::SHADOW:
+            return "grayscale.frag";
+        case variant_kind::NIGHT:
+            return "nightvision.frag";
+        case variant_kind::OVEREXPOSED:
+            return "overexposed.frag";
+        case variant_kind::NORMAL:
+        case variant_kind::MEMORY:
+        case variant_kind::count:
+            return nullptr;
+    }
+    return nullptr;
+}
+
+} // namespace
+
+variant_pass::variant_pass( SDL_Renderer *renderer )
+    : renderer_( renderer )
+{
+}
+
+variant_pass::~variant_pass()
+{
+    if( active_ ) {
+        ( void )SDL_SetGPURenderState( renderer_, nullptr );
+    }
+}
+
+namespace
+{
+
+// Renders a single 1x1 mid-gray sprite via `state` to a 1x1 offscreen RT
+// and reads the result back. Mid-gray (128,128,128,255) is chosen because
+// every variant transform produces a distinctive output for it: grayscale
+// stays gray-but-dimmer, nightvision/overexposed produce a green tint
+// (G > R+20 and G > B+20). That distinguishes "shader ran" from "shader
+// bind was silently ignored" (the latter returns the unmodulated gray).
+bool variant_draw_probe( SDL_Renderer *renderer, SDL_GPURenderState *state,
+                         variant_kind v )
+{
+    SDL_Surface *src_surf = SDL_CreateSurface( 1, 1, SDL_PIXELFORMAT_RGBA32 );
+    if( !src_surf ) {
+        return false;
+    }
+    // Mid-gray opaque: 0x80, 0x80, 0x80, 0xFF in RGBA32.
+    SDL_FillSurfaceRect( src_surf, nullptr, 0xFF808080u );
+    SDL_Texture *src = SDL_CreateTextureFromSurface( renderer, src_surf );
+    SDL_DestroySurface( src_surf );
+    if( !src ) {
+        return false;
+    }
+    SDL_Texture *rt = SDL_CreateTexture( renderer, SDL_PIXELFORMAT_RGBA32,
+                                         SDL_TEXTUREACCESS_TARGET, 1, 1 );
+    if( !rt ) {
+        SDL_DestroyTexture( src );
+        return false;
+    }
+    SDL_Texture *prior_target = SDL_GetRenderTarget( renderer );
+    bool ok = false;
+    if( SDL_SetRenderTarget( renderer, rt ) ) {
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+        SDL_RenderClear( renderer );
+        if( SDL_SetGPURenderState( renderer, state ) ) {
+            const SDL_FRect dst{ 0.0f, 0.0f, 1.0f, 1.0f };
+            if( SDL_RenderTexture( renderer, src, nullptr, &dst ) ) {
+                SDL_SetGPURenderState( renderer, nullptr );
+                const SDL_Rect rect{ 0, 0, 1, 1 };
+                SDL_Surface *out = SDL_RenderReadPixels( renderer, &rect );
+                if( out ) {
+                    SDL_Surface *rgba = out->format == SDL_PIXELFORMAT_RGBA32
+                                        ? out
+                                        : SDL_ConvertSurface( out, SDL_PIXELFORMAT_RGBA32 );
+                    if( rgba != out ) {
+                        SDL_DestroySurface( out );
+                    }
+                    if( rgba ) {
+                        const Uint8 *p = static_cast<const Uint8 *>( rgba->pixels );
+                        const int r = p[0];
+                        const int g = p[1];
+                        const int b = p[2];
+                        const int a = p[3];
+                        if( a < 250 ) {
+                            ok = false;
+                        } else {
+                            switch( v ) {
+                                case variant_kind::SHADOW:
+                                    // Grayscale: gray-toned (R~=G~=B within 8 LSB) AND
+                                    // strictly darker than input mid-gray (128).
+                                    ok = std::abs( r - g ) < 8 && std::abs( g - b ) < 8
+                                         && r < 120;
+                                    break;
+                                case variant_kind::NIGHT:
+                                case variant_kind::OVEREXPOSED:
+                                    // Both variants emit green-tinted output: G clearly
+                                    // greater than R and B. Margin 20 covers driver
+                                    // rounding without false-positiving the unmodulated
+                                    // gray (R==G==B).
+                                    ok = g > r + 20 && g > b + 20;
+                                    break;
+                                default:
+                                    // NORMAL/MEMORY are not probed (no shader path).
+                                    ok = false;
+                                    break;
+                            }
+                        }
+                        SDL_DestroySurface( rgba );
+                    }
+                }
+            } else {
+                SDL_SetGPURenderState( renderer, nullptr );
+            }
+        }
+    }
+    SDL_SetRenderTarget( renderer, prior_target );
+    SDL_DestroyTexture( rt );
+    SDL_DestroyTexture( src );
+    return ok;
+}
+
+} // namespace
+
+void variant_pass::probe()
+{
+    probe_attempted_ = true;
+    if( !renderer_ ) {
+        return;
+    }
+    SDL_GPUDevice *const device = SDL_GetGPURendererDevice( renderer_ );
+    if( !device ) {
+        DebugLog( D_INFO, DC_ALL )
+                << "cata_shader::variant_pass: SDL_GetGPURendererDevice "
+                "returned NULL (renderer is not gpu); shader variant path disabled";
+        return;
+    }
+    for( int i = 0; i < static_cast<int>( variant_kind::count ); ++i ) {
+        const variant_kind v = static_cast<variant_kind>( i );
+        const char *basename = shader_basename_for( v );
+        if( !basename ) {
+            continue;
+        }
+        shader frag = shader::load_fragment( device, basename, 1, 0 );
+        if( !frag.is_valid() ) {
+            DebugLog( D_ERROR, DC_ALL )
+                    << "cata_shader::variant_pass: shader load failed for "
+                    << basename << "; shader variant path disabled";
+            return;
+        }
+        render_state state = render_state::create( renderer_, frag );
+        if( !state.is_valid() ) {
+            DebugLog( D_ERROR, DC_ALL )
+                    << "cata_shader::variant_pass: render_state::create failed for "
+                    << basename << "; shader variant path disabled";
+            return;
+        }
+        if( !variant_draw_probe( renderer_, state.get(), v ) ) {
+            DebugLog( D_ERROR, DC_ALL )
+                    << "cata_shader::variant_pass: textured-draw probe failed for "
+                    << basename << " (silent miswire? readback did not match "
+                    "expected variant transform); shader variant path disabled";
+            return;
+        }
+        shaders_[i] = std::move( frag );
+        states_[i] = std::move( state );
+    }
+    probed_ok_ = true;
+}
+
+bool variant_pass::try_begin( variant_kind v )
+{
+    if( session_disabled_ ) {
+        return false;
+    }
+    if( !probe_attempted_ ) {
+        probe();
+    }
+    if( !probed_ok_ ) {
+        return false;
+    }
+    if( active_ ) {
+        // try_begin called without preceding end(); programming error.
+        DebugLog( D_ERROR, DC_ALL )
+                << "cata_shader::variant_pass: try_begin while bind active; "
+                "session disabled to prevent state bleed";
+        session_disabled_ = true;
+        ( void )SDL_SetGPURenderState( renderer_, nullptr );
+        active_ = false;
+        return false;
+    }
+    SDL_GPURenderState *state = states_[static_cast<size_t>( v )].get();
+    if( !state ) {
+        // NORMAL/MEMORY/unhandled: no shader path for this variant.
+        return false;
+    }
+    if( !SDL_SetGPURenderState( renderer_, state ) ) {
+        DebugLog( D_ERROR, DC_ALL )
+                << "cata_shader::variant_pass: SDL_SetGPURenderState failed: "
+                << SDL_GetError();
+        session_disabled_ = true;
+        return false;
+    }
+    active_ = true;
+    return true;
+}
+
+bool variant_pass::end()
+{
+    if( !active_ ) {
+        return true;
+    }
+    active_ = false;
+    if( !SDL_SetGPURenderState( renderer_, nullptr ) ) {
+        DebugLog( D_ERROR, DC_ALL )
+                << "cata_shader::variant_pass: SDL_SetGPURenderState(NULL) failed: "
+                << SDL_GetError();
+        session_disabled_ = true;
         return false;
     }
     return true;
