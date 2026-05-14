@@ -29,13 +29,16 @@
 static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
 static const efftype_id effect_cig( "cig" );
 static const efftype_id effect_nausea( "nausea" );
-static const efftype_id effect_opioid_effect( "opioid_effect" );
+static const efftype_id effect_opioid_eff( "opioid_eff" );
 static const efftype_id effect_withdrawal_alcohol( "withdrawal_alcohol" );
 static const efftype_id effect_withdrawal_alcohol_detoxed( "withdrawal_alcohol_detoxed" );
 static const efftype_id effect_withdrawal_alcohol_timer( "withdrawal_alcohol_timer" );
 static const efftype_id effect_withdrawal_nicotine( "withdrawal_nicotine" );
 static const efftype_id effect_withdrawal_nicotine_detoxed( "withdrawal_nicotine_detoxed" );
 static const efftype_id effect_withdrawal_nicotine_timer( "withdrawal_nicotine_timer" );
+static const efftype_id effect_withdrawal_opioid( "withdrawal_opioid" );
+static const efftype_id effect_withdrawal_opioid_detoxed( "withdrawal_opioid_detoxed" );
+static const efftype_id effect_withdrawal_opioid_timer( "withdrawal_opioid_timer" );
 static const efftype_id effect_hallu( "hallu" );
 static const efftype_id effect_shakes( "shakes" );
 
@@ -293,13 +296,26 @@ static bool diazepam_effect( Character &u, addiction &add )
 
 static bool opioid_effect( Character &u, addiction &add )
 {
-    if( u.has_effect( effect_opioid_effect ) ) {
+    if( u.has_effect( effect_opioid_eff ) ) {
         add.sated = 0_turns;
         u.remove_effect( effect_shakes );
         return false;
     }
-    static time_point last_dream = calendar::turn_zero;
+
+    bool ret;
+    
     const int in = std::min( 20, add.intensity );
+    int timer_int = std::min( in / 3, 3 );
+
+    if( x_in_y( in, 24 ) && !u.in_sleep_state() ) {
+        if( !u.has_effect( effect_withdrawal_opioid_detoxed ) &&
+            ( !u.has_effect( effect_withdrawal_opioid_timer ) ||
+              u.get_effect_int( effect_withdrawal_opioid_timer ) < timer_int ) ) {
+            u.add_effect( effect_withdrawal_opioid_timer, 48_hours * timer_int, false, timer_int );
+        }
+        ret = true;
+    }
+    static time_point last_dream = calendar::turn_zero;
     if( u.get_pain() < in * 2 ) {
         u.mod_pain( 1 );
     }
@@ -313,8 +329,8 @@ static bool opioid_effect( Character &u, addiction &add )
             last_dream = calendar::turn;
         } else {
             u.add_morale( morale_craving_opioid, -40, -4 * in, 1_hours, 30_minutes, true );
-            u.add_effect( effect_shakes, 2_minutes + in * 30_seconds );
         }
+        ret = true;
     } else if( one_in( 40 ) && dice( 2, 30 ) < in &&
                ( !u.in_sleep_state() || calendar::turn - last_dream > 4_hours ) ) {
         const std::string msg =
@@ -326,10 +342,12 @@ static bool opioid_effect( Character &u, addiction &add )
         } else {
             u.add_morale( morale_craving_opioid, -30, -4 * in, 1_hours, 30_minutes, true );
         }
+        ret = true;
     } else if( one_in( 50 ) && dice( 3, 50 ) < in ) {
         u.vomit();
+        ret = true;
     }
-    return true;
+    return ret;
 }
 
 static bool amphetamine_effect( Character &u, addiction &add )
