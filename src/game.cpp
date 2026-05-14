@@ -923,7 +923,7 @@ bool game::start_game()
 
     background_pane background;
     static_popup popup;
-    popup.message( "%s", _( "Please wait as we build your world" ) );
+    popup.message( "%s", _( "Please wait while the world is built." ) );
     ui_manager::redraw();
     refresh_display();
 
