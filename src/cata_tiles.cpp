@@ -161,6 +161,27 @@ auto simple_point_hash = []( const point &p )
 
 } // namespace
 
+#if SDL_MAJOR_VERSION >= 3
+// Translate (lit_level, use_night_vision_tiles) to the variant_kind enum the
+// GPU shader path consumes. Mirrors the atlas-variant branch in
+// draw_sprite_at; keep them in lockstep when one moves.
+cata_shader::variant_kind compute_variant_kind( lit_level ll, bool use_nv_tiles )
+{
+    if( ll == lit_level::MEMORIZED ) {
+        return cata_shader::variant_kind::MEMORY;
+    }
+    if( use_nv_tiles ) {
+        return ll == lit_level::LOW
+               ? cata_shader::variant_kind::NIGHT
+               : cata_shader::variant_kind::OVEREXPOSED;
+    }
+    if( ll == lit_level::LOW ) {
+        return cata_shader::variant_kind::SHADOW;
+    }
+    return cata_shader::variant_kind::NORMAL;
+}
+#endif
+
 static int msgtype_to_tilecolor( const game_message_type type, const bool bOldMsg )
 {
     const int iBold = bOldMsg ? 0 : 8;
@@ -217,6 +238,10 @@ cata_tiles::cata_tiles( const SDL_Renderer_Ptr &renderer, const GeometryRenderer
     minimap( renderer, geometry )
 {
     cata_assert( renderer );
+
+#if SDL_MAJOR_VERSION >= 3
+    m_variant_pass = std::make_unique<cata_shader::variant_pass>( renderer.get() );
+#endif
 
     tile_height = 0;
     tile_width = 0;
@@ -2455,36 +2480,44 @@ bool cata_tiles::draw_sprite_at(
     const int sprite_index = spritelist[sprite_num];
     const texture *sprite_tex = tileset_ptr->get_tile( sprite_index );
 
-    // Use night vision colors when in use.
-    // Then use low light tile if available.
-    if( rp.ll == lit_level::MEMORIZED ) {
-        if( const texture *ptr = tileset_ptr->get_memory_tile( sprite_index ) ) {
-            sprite_tex = ptr;
+    bool shader_bound = false;
+#if SDL_MAJOR_VERSION >= 3
+    // Try the GPU shader variant first. On success the main atlas drives
+    // the render and the variant transform happens per-pixel in the
+    // fragment shader. On failure or unsupported variant
+    // (NORMAL/MEMORY/late session-disable) the fallthrough below picks the
+    // matching pre-baked variant atlas.
+    if( m_variant_pass ) {
+        const cata_shader::variant_kind v =
+            compute_variant_kind( rp.ll, rp.use_night_vision_tiles );
+        if( v != cata_shader::variant_kind::NORMAL
+            && v != cata_shader::variant_kind::MEMORY ) {
+            shader_bound = m_variant_pass->try_begin( v );
         }
-    } else if( rp.use_night_vision_tiles ) {
-        if( rp.ll != lit_level::LOW ) {
-            if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
+    }
+#endif
+
+    //use night vision colors when in use
+    //then use low light tile if available
+    if( !shader_bound ) {
+        if( rp.ll == lit_level::MEMORIZED ) {
+            if( const texture *ptr = tileset_ptr->get_memory_tile( sprite_index ) ) {
                 sprite_tex = ptr;
             }
-        } else {
-            if( const texture *ptr = tileset_ptr->get_night_tile( sprite_index ) ) {
+        } else if( rp.use_night_vision_tiles ) {
+            if( rp.ll != lit_level::LOW ) {
+                if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
+                    sprite_tex = ptr;
+                }
+            } else {
+                if( const texture *ptr = tileset_ptr->get_night_tile( sprite_index ) ) {
+                    sprite_tex = ptr;
+                }
+            }
+        } else if( rp.ll == lit_level::LOW ) {
+            if( const texture *ptr = tileset_ptr->get_shadow_tile( sprite_index ) ) {
                 sprite_tex = ptr;
             }
-        }
-        // TODO: Review if this works for remote view e.g. RC cars.
-        // } else if( rp.use_night_vision_tiles && get_player_character().is_underwater() ) {
-        //     if( rp.ll != lit_level::LOW ) {
-        //         if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
-        //             sprite_tex = ptr;
-        //         }
-        //     } else {
-        //         if( const auto ptr = tileset_ptr->get_underwater_dark_tile( sprite_index ) ) {
-        //             sprite_tex = ptr;
-        //         }
-        //     }
-    } else if( rp.ll == lit_level::LOW ) {
-        if( const texture *ptr = tileset_ptr->get_shadow_tile( sprite_index ) ) {
-            sprite_tex = ptr;
         }
     }
 
@@ -2688,6 +2721,11 @@ bool cata_tiles::draw_sprite_at(
     }
 
     printErrorIf( ret != 0, "SDL_RenderCopyEx() failed" );
+#if SDL_MAJOR_VERSION >= 3
+    if( shader_bound ) {
+        ( void )m_variant_pass->end();
+    }
+#endif
     // this reference passes all the way back up the call chain back to
     // cata_tiles::draw() here.draw_points_cache[z][row][col].com.height_3d
     // where we are accumulating the height of every sprite stacked up in a tile
