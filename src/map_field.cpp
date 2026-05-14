@@ -2008,10 +2008,12 @@ void map::monster_in_field( monster &z )
         }
         if( cur_field_type == fd_toxic_gas ) {
             if( !z.has_flag( mon_flag_NO_BREATHE ) ) {
-                dam += cur.get_field_intensity();
-                z.mod_moves( -cur.get_field_intensity() );
+                const int intensity = cur.get_field_intensity();
+                if( one_in( 10 - intensity ) ) { 
+                    z.mod_moves( -rng( 0, 10 ) );
+                    dam += rng( 1, 2 * intensity );
+                }
             }
-
         }
         if( cur_field_type == fd_nuke_gas ) {
             if( !z.has_flag( mon_flag_NO_BREATHE ) ) {
