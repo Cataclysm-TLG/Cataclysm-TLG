@@ -35,6 +35,9 @@
 #include "calendar_ui.h"
 #include "cata_assert.h"
 #include "cata_path.h"
+#if defined(TILES) && defined(USE_SDL3)
+#include "cata_shader.h"
+#endif
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "character.h"
@@ -286,6 +289,7 @@ std::string enum_to_string<debug_menu::debug_menu_index>( debug_menu::debug_menu
 		case debug_menu::debug_menu_index::WRITE_CITY_LIST: return "WRITE_CITY_LIST";
         case debug_menu::debug_menu_index::TALK_TOPIC: return "TALK_TOPIC";
         case debug_menu::debug_menu_index::VEHICLE_EFFECTS: return "VEHICLE_EFFECTS";
+        case debug_menu::debug_menu_index::RELOAD_GPU_SHADERS: return "RELOAD_GPU_SHADERS";
         // *INDENT-ON*
         case debug_menu::debug_menu_index::last:
             break;
@@ -4425,6 +4429,13 @@ void debug()
 
         case debug_menu_index::WRITE_CITY_LIST:
             write_city_list();
+            break;
+
+        case debug_menu_index::RELOAD_GPU_SHADERS:
+#if defined(TILES) && defined(USE_SDL3)
+            cata_shader::request_reprobe();
+            add_msg( _( "GPU shaders will reload on next frame." ) );
+#endif
             break;
 
         case debug_menu_index::TALK_TOPIC:
