@@ -7627,9 +7627,9 @@ int Character::item_retrieve_cost( const item &it, const item &container, bool p
     return item_store_cost( it, container, penalties, base_cost );
 }
 
-void Character::cough( bool harmful, int loudness )
+void Character::cough( bool harmful, bool force, int loudness )
 {
-    if( has_effect( effect_cough_suppress ) && !one_in( 100 ) ) {
+    if( !force && has_effect( effect_cough_suppress ) && !one_in( 100 ) ) {
         return;
     }
 
