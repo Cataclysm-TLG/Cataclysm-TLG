@@ -4631,27 +4631,6 @@
   },
   {
     "type": "effect_type",
-    "id": "stim",
-    "name": [ "Stimulants" ],
-    "desc": [ "You're very jittery and pumped up, probably from some stimulants." ],
-    "max_intensity": 1000,
-    "int_dur_factor": "1 s",
-    "scaling_mods": { "speed_mod": [ 0.08 ], "per_mod": [ 0.04 ] },
-    "blood_analysis_description": "Stimulants"
-  },
-  {
-    "type": "effect_type",
-    "id": "depressants",
-    "name": [ "Depressants" ],
-    "desc": [ "You are under the influence of depressants, and in a bit of a daze." ],
-    "max_intensity": 1000,
-    "int_dur_factor": "1 s",
-    "scaling_mods": { "speed_mod": [ -0.1 ], "dex_mod": [ -0.05 ] },
-    "miss_messages": [ [ "You feel woozy.", 1 ] ],
-    "blood_analysis_description": "Depressants"
-  },
-  {
-    "type": "effect_type",
     "id": "stim_overdose",
     "name": [ "Stimulant Overdose" ],
     "desc": [ "You can't sit still as you feel your heart pounding out of your chest.  You probably overdosed on those stims." ],

@@ -231,11 +231,10 @@ constexpr inline int operator-( const T &lhs, const fatigue_levels &rhs )
 /** @brief five levels of consequences for days without sleep
     @details Sleep deprivation, distinct from fatigue, is defined in minutes. Although most
     calculations scale linearly, malus is bestowed only upon reaching the tiers defined below.
+    Sleep deprivation is intended to scale with sleep-affecting mutations, but not generally
+    with stimulants. It is the mostly unavoidable consequence for avoiding sleep.
     @note Sleep deprivation increases fatigue. Fatigue increase scales with the severity of sleep
     deprivation.
-    @note Sleep deprivation kicks in if lack of sleep is avoided with stimulants or otherwise for
-    long periods of time
-    @see https://github.com/CleverRaven/Cataclysm-DDA/blob/master/src/character.cpp#L5566
 */
 enum sleep_deprivation_levels {
     /// 2 days
@@ -994,7 +993,7 @@ class Character : public Creature, public visitable
         void update_cached_mutations();
         /** Returns true if character is the player or a member of their faction, otherwise false. */
         bool needs_food() const;
-        /** Increases hunger, thirst, fatigue and stimulants wearing off. `rate_multiplier` is for retroactive updates. */
+        /** Increases hunger, thirst, and fatigue. `rate_multiplier` is for retroactive updates. */
         void update_needs( int rate_multiplier );
         needs_rates calc_needs_rates() const;
         void calc_sleep_recovery_rate( needs_rates &rates ) const;
