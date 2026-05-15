@@ -1298,30 +1298,6 @@ void Character::modify_health( const islot_comestible &comest )
     mod_daily_health( effective_health, effective_health >= 0 ? health_cap : -health_cap );
 }
 
-void Character::modify_stimulation( const islot_comestible &comest )
-{
-    if( comest.stim == 0 ) {
-        return;
-    }
-    const int current_stim = get_stim();
-    if( ( std::abs( comest.stim ) * 3 ) > std::abs( current_stim ) ) {
-        mod_stim( comest.stim );
-    } else {
-        comest.stim > 0 ? mod_stim( std::max( comest.stim / 2, 1 ) ) : mod_stim( std::min( comest.stim / 2,
-                -1 ) );
-    }
-    if( has_trait( trait_STIMBOOST ) && ( current_stim > 30 ) &&
-        ( comest.addictions.count( STATIC( addiction_id( "caffeine" ) ) ) ||
-          comest.addictions.count( STATIC( addiction_id( "amphetamine" ) ) ) ||
-          comest.addictions.count( STATIC( addiction_id( "cocaine" ) ) ) ||
-          comest.addictions.count( STATIC( addiction_id( "crack" ) ) ) ) ) {
-        int hallu_duration = ( current_stim - comest.stim < 30 ) ? current_stim - 30 : comest.stim;
-        add_effect( effect_visuals, hallu_duration * 30_minutes );
-        add_msg_if_player( m_bad, SNIPPET.random_from_category( "comest_stimulant" ).value_or(
-                               translation() ).translated() );
-    }
-}
-
 void Character::modify_fatigue( const islot_comestible &comest )
 {
     mod_fatigue( -comest.fatigue_mod );
@@ -1655,7 +1631,6 @@ bool Character::consume_effects( item &food )
     if( !skip_health ) {
         modify_health( comest );
     }
-    modify_stimulation( comest );
     modify_fatigue( comest );
     modify_addiction( comest );
     modify_morale( food, nutr );
@@ -1918,7 +1893,6 @@ static bool consume_med( item &target, Character &you )
         const islot_comestible &comest = *target.get_comestible();
         // Assume that parenteral meds don't spoil, so don't apply rot
         you.modify_health( comest );
-        you.modify_stimulation( comest );
         you.modify_fatigue( comest );
         you.modify_addiction( comest );
         you.modify_morale( target );

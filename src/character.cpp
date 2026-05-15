@@ -281,6 +281,8 @@ static const efftype_id effect_transition_contacts( "transition_contacts" );
 static const efftype_id effect_weed_high( "weed_high" );
 static const efftype_id effect_winded( "winded" );
 static const efftype_id effect_withdrawal_timer_alcohol( "withdrawal_timer_alcohol" );
+static const efftype_id effect_withdrawal_timer_nicotine( "withdrawal_timer_nicotine" );
+static const efftype_id effect_withdrawal_timer_opioid( "withdrawal_timer_opioid" );
 
 static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 
@@ -5736,20 +5738,8 @@ bool Character::has_mission_item( int mission_id ) const
 
 void Character::check_needs_extremes()
 {
-    // Check if we've overdosed... in any deadly way.
-    if( get_stim() > 250 ) {
-        add_msg_player_or_npc( m_bad,
-                               _( "You have a sudden heart attack!" ),
-                               _( "<npcname> has a sudden heart attack!" ) );
-        get_event_bus().send<event_type::dies_from_drug_overdose>( getID(), efftype_id() );
-        set_part_hp_cur( body_part_torso, 0 );
-    } else if( get_stim() < -200 || get_painkiller() > 240 ) {
-        add_msg_player_or_npc( m_bad,
-                               _( "Your breathing stops completely." ),
-                               _( "<npcname>'s breathing stops completely." ) );
-        get_event_bus().send<event_type::dies_from_drug_overdose>( getID(), efftype_id() );
-        set_part_hp_cur( body_part_torso, 0 );
-    } else if( has_effect( effect_jetinjector ) && get_effect_dur( effect_jetinjector ) > 40_minutes ) {
+    // TODO: Remove hardcoded overdoses.
+    if( has_effect( effect_jetinjector ) && get_effect_dur( effect_jetinjector ) > 40_minutes ) {
         if( !has_flag( json_flag_PAIN_IMMUNE ) ) {
             add_msg_player_or_npc( m_bad,
                                    _( "Your heart spasms painfully and stops." ),
@@ -5766,15 +5756,9 @@ void Character::check_needs_extremes()
                                _( "<npcname>'s heart spasms and stops." ) );
         get_event_bus().send<event_type::dies_from_drug_overdose>( getID(), effect_adrenaline );
         set_part_hp_cur( body_part_torso, 0 );
-    } else if( get_effect_int( effect_drunk ) > 4 ) {
-        add_msg_player_or_npc( m_bad,
-                               _( "Your breathing slows down to a stop." ),
-                               _( "<npcname>'s breathing slows down to a stop." ) );
-        get_event_bus().send<event_type::dies_from_drug_overdose>( getID(), effect_drunk );
-        set_part_hp_cur( body_part_torso, 0 );
     }
 
-    // check if we've starved
+    // Check if we've starved.
     if( needs_food() ) {
         if( get_stored_kcal() <= 0 ) {
             add_msg_if_player( m_bad, _( "You have starved to death." ) );
@@ -5821,7 +5805,7 @@ void Character::check_needs_extremes()
             get_event_bus().send<event_type::dies_of_thirst>( getID() );
             set_part_hp_cur( body_part_torso, 0 );
         } else if( get_thirst() >= 1000 && calendar::once_every( 30_minutes ) ) {
-            add_msg_if_player( m_warning, _( "Even your eyes feel dry…" ) );
+            add_msg_if_player( m_warning, _( "You need water badly.  It's hard to think about anything else." ) );
         } else if( get_thirst() >= 800 && calendar::once_every( 30_minutes ) ) {
             add_msg_if_player( m_warning, _( "You are THIRSTY!" ) );
         } else if( calendar::once_every( 30_minutes ) ) {
@@ -5832,7 +5816,7 @@ void Character::check_needs_extremes()
     // Check if we're falling asleep, unless we're sleeping
     if( get_fatigue() >= fatigue_levels::EXHAUSTED + 25 && !in_sleep_state() ) {
         if( get_fatigue() >= fatigue_levels::MASSIVE_FATIGUE ) {
-            add_msg_if_player( m_bad, _( "Survivor sleep now." ) );
+            add_msg_if_player( m_bad, _( "You're so sleepy, you can't help blacking out." ) );
             get_event_bus().send<event_type::falls_asleep_from_exhaustion>( getID() );
             mod_fatigue( -10 );
             fall_asleep();
@@ -5848,7 +5832,7 @@ void Character::check_needs_extremes()
     if( get_fatigue() >= fatigue_levels::DEAD_TIRED && !in_sleep_state() ) {
         if( get_fatigue() >= 700 ) {
             if( calendar::once_every( 30_minutes ) ) {
-                add_msg_if_player( m_warning, _( "You're too physically tired to stop yawning." ) );
+                add_msg_if_player( m_warning, _( "You need sleep." ) );
                 add_effect( effect_lack_sleep, 30_minutes + 1_turns );
             }
             /** @EFFECT_INT slightly decreases occurrence of short naps when dead tired */
@@ -5879,7 +5863,7 @@ void Character::check_needs_extremes()
         if( calendar::once_every( 60_minutes ) ) {
             if( sleep_deprivation < SLEEP_DEPRIVATION_MINOR ) {
                 add_msg_if_player( m_warning,
-                                   _( "Your mind feels tired.  It's been a while since you've slept well." ) );
+                                   _( "It's been a while since you've slept well, it's fraying at your nerves." ) );
                 mod_fatigue( 1 );
             } else if( sleep_deprivation < SLEEP_DEPRIVATION_SERIOUS ) {
                 add_msg_if_player( m_bad,
@@ -5891,7 +5875,7 @@ void Character::check_needs_extremes()
                 }
             } else if( sleep_deprivation < SLEEP_DEPRIVATION_MAJOR ) {
                 add_msg_if_player( m_bad,
-                                   _( "Your mind feels hazy, and you dread every wakeful minute that passes.  You crave sleep, and feel like you're about to collapse." ) );
+                                   _( "You feel dazed from lack of sleep." ) );
                 mod_fatigue( 10 );
 
                 if( one_in( 5 ) ) {
@@ -5899,13 +5883,10 @@ void Character::check_needs_extremes()
                 }
             } else if( sleep_deprivation < SLEEP_DEPRIVATION_MASSIVE ) {
                 add_msg_if_player( m_bad,
-                                   _( "You haven't slept decently for so long that your whole body is screaming for mercy.  It's a miracle that you're still awake, but it feels more like a curse now." ) );
+                                   _( "You can't concentrate.  You need sleep." ) );
                 mod_fatigue( 40 );
-
                 mod_daily_health( -5, -10 );
             }
-            // else you pass out for 20 hours, guaranteed
-
             // Microsleeps are slightly worse if you're sleep deprived, but not by much. (chance: 1 in (75 + int_cur) at lethal sleep deprivation)
             // Note: these can coexist with fatigue-related microsleeps
             /** @EFFECT_INT slightly decreases occurrence of short naps when sleep deprived */
@@ -5913,17 +5894,13 @@ void Character::check_needs_extremes()
                 fall_asleep( 30_seconds );
             }
 
-            // Stimulants can be used to stay awake a while longer, but after a while you'll just collapse.
-            bool can_pass_out = ( get_stim() < 30 && sleep_deprivation >= SLEEP_DEPRIVATION_MINOR ) ||
-                                sleep_deprivation >= SLEEP_DEPRIVATION_MAJOR;
-
-            if( can_pass_out && calendar::once_every( 10_minutes ) ) {
+            if( calendar::once_every( 10_minutes ) ) {
                 /** @EFFECT_PER slightly increases resilience against passing out from sleep deprivation */
                 if( one_in( static_cast<int>( ( 1 - sleep_deprivation_pct ) * 100 ) + per_cur ) ||
                     sleep_deprivation >= SLEEP_DEPRIVATION_MASSIVE ) {
                     add_msg_player_or_npc( m_bad,
-                                           _( "Your body collapses due to sleep deprivation, your neglected fatigue rushing back all at once, and you pass out on the spot." )
-                                           , _( "<npcname> collapses to the ground from exhaustion." ) );
+                                           _( "Your pass out, unable to go on without sleep." )
+                                           , _( "<npcname> passes out, unable to go on without sleep." ) );
                     if( get_fatigue() < fatigue_levels::EXHAUSTED ) {
                         set_fatigue( fatigue_levels::EXHAUSTED );
                     }
@@ -7353,7 +7330,6 @@ void Character::update_stamina( int turns )
     // This allows it to scale more quickly than your stamina, so that at higher fitness levels you
     // recover stamina faster.
     const float effective_regen_rate = base_regen_rate * get_cardiofit() / get_cardio_acc_base();
-    const int current_stim = get_stim();
     // Values above or below normal will increase or decrease stamina regen
     const float mod_regen = enchantment_cache->modify_value( enchant_vals::mod::STAMINA_REGEN_MOD, 0 );
     // Mutated stamina works even when winded
@@ -7363,7 +7339,7 @@ void Character::update_stamina( int turns )
 
 
     // Recover some stamina every turn. Start with zero, then increase recovery factor based on
-    // mutations, stimulants, and bionics before rolling random recovery based on this factor.
+    // mutations and bionics before rolling random recovery based on this factor.
     float stamina_recovery = 0.0f;
     // But mouth encumbrance interferes, even with mutated stamina.
     stamina_recovery += stamina_multiplier * std::max( 1.0f,
@@ -7372,21 +7348,8 @@ void Character::update_stamina( int turns )
     if( !has_bionic( bio_synlungs ) ) {
         stamina_recovery = enchantment_cache->modify_value( enchant_vals::mod::REGEN_STAMINA,
                            stamina_recovery );
-        // TODO: recovering stamina causes hunger/thirst/fatigue.
-        // TODO: Tiredness slowing recovery
-
-        // stim recovers stamina (or impairs recovery)
-        if( current_stim > 0 ) {
-            // TODO: Make stamina recovery with stims cost health
-            stamina_recovery += std::min( 5.0f, current_stim / 15.0f );
-        } else if( current_stim < 0 ) {
-            // Affect it less near 0 and more near full
-            // Negative stim kill at -200
-            // At -100 stim it inflicts -20 malus to regen at 100%  stamina,
-            // effectivly countering stamina gain of default 20,
-            // at 50% stamina its -10 (50%), cuts by 25% at 25% stamina
-            stamina_recovery += current_stim / 5.0f * get_stamina() / get_stamina_max();
-        }
+        // TODO: Sweat from exertion.
+        // TODO: Sleep deprivation and weariness slowing recovery.
     }
     const int max_stam = get_stamina_max();
 
@@ -11800,30 +11763,32 @@ bool Character::can_sleep()
     last_sleep_check = now;
 
     int sleepy = get_comfort_at( pos_bub() ).comfort;
+    // Addictions can affect sleepiness. This effect has a floor of -5 to prevent it being simply impossible to get any rest.
+    int addiction_mod = 0;
     if( has_addiction( addiction_sleeping_pill ) ) {
-        sleepy -= 4;
+        addiction_mod -= 4;
     }
     if( addiction_level( addiction_alcohol ) > 5 ) {
-        sleepy -= 1;
+        addiction_mod -= 1;
     }
     if( addiction_level( addiction_cannabis ) > 5 && !has_effect( effect_weed_high ) ) {
-        sleepy -= 1;
+        addiction_mod -= 1;
     }
     if( has_effect( effect_withdrawal_timer_alcohol ) ) {
-        sleepy -= get_effect_int( effect_withdrawal_timer_alcohol );
+        addiction_mod -= get_effect_int( effect_withdrawal_timer_alcohol );
     }
+    if( has_effect( effect_withdrawal_timer_nicotine ) ) {
+        addiction_mod -= get_effect_int( effect_withdrawal_timer_nicotine );
+    }
+    if( has_effect( effect_withdrawal_timer_opioid ) ) {
+        addiction_mod -= get_effect_int( effect_withdrawal_timer_opioid );
+    }
+    sleepy -= std::min( addiction_mod, -5 );
     sleepy = enchantment_cache->modify_value( enchant_vals::mod::SLEEPY, sleepy );
     if( get_fatigue() < fatigue_levels::TIRED + 1 ) {
         sleepy -= int( ( fatigue_levels::TIRED + 1 - get_fatigue() ) / 4 );
     } else {
         sleepy += int( ( get_fatigue() - fatigue_levels::TIRED + 1 ) / 16 );
-    }
-    const int current_stim = get_stim();
-    if( current_stim > 0 || !has_trait( trait_INSOMNIA ) ) {
-        sleepy -= 2 * current_stim;
-    } else {
-        // Make it harder for insomniac to get around the trait
-        sleepy -= current_stim;
     }
 
     sleepy += rng( -8, 8 );
@@ -12102,11 +12067,8 @@ int Character::intimidation() const
         }
     }
 
-    if( get_stim() > 20 ) {
-        ret += 2;
-    }
     if( has_effect( effect_drunk ) ) {
-        ret -= 4;
+        ret -= get_effect_int( effect_drunk );
     }
     ret = enchantment_cache->modify_value( enchant_vals::mod::SOCIAL_INTIMIDATE, ret );
     return ret;

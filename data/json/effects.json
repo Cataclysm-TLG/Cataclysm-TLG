@@ -2138,7 +2138,6 @@
     "id": "took_xanax",
     "max_duration": 14400,
     "dur_add_perc": 22,
-    "base_mods": { "stim_tick": [ 150 ], "stim_min": [ -1 ], "stim_min_val": [ -1 ] },
     "rating": "good",
     "blood_analysis_description": "Alprazolam"
   },
@@ -3889,7 +3888,6 @@
     "type": "effect_type",
     "id": "valium",
     "removes_effects": [ "shakes" ],
-    "base_mods": { "stim_tick": [ 150 ], "stim_chance": [ 2 ], "stim_min": [ 1 ], "stim_min_val": [ -1 ] },
     "rating": "good",
     "blood_analysis_description": "Benzodiazepines",
     "max_duration": 64800,
@@ -4451,6 +4449,12 @@
       { "limb_score": "swim", "modifier": 1.0, "scaling": -0.2 }
     ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
+  },
+    {
+    "type": "effect_type",
+    "id": "lithium",
+    "max_duration": "86000 s",
+    "//": "Invisible effect from taking lithium tablets.  Helps with the Mood Swings trait."
   },
   {
     "type": "effect_type",

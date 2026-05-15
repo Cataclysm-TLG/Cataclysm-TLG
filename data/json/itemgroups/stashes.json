@@ -61,7 +61,7 @@
       { "prob": 4, "group": "oxycodone_bottle_plastic_pill_prescription_1_10" },
       { "item": "morphine", "prob": 4, "count": [ 1, 4 ] },
       { "prob": 10, "group": "xanax_bottle_plastic_pill_prescription_1_10" },
-      { "prob": 10, "group": "adderall_bottle_plastic_pill_prescription_1_10" },
+      { "prob": 10, "group": "adderall_bottle_plastic_pill_prescription_0_10" },
       [ "pipe_tobacco", 2 ],
       { "prob": 2, "group": "tobacco_bag_plastic_1_20" },
       [ "adrenaline_injector", 2 ],
@@ -77,7 +77,7 @@
       { "prob": 4, "group": "crack_bag_zipper_1_4" },
       { "item": "naloxone", "prob": 2 },
       [ "crackpipe", 4 ],
-      { "prob": 1, "group": "antifungal_bottle_plastic_pill_prescription_1_5" },
+      { "prob": 1, "group": "antifungal_bottle_plastic_pill_prescription_0_5" },
       { "prob": 2, "group": "antiparasitic_bottle_plastic_pill_prescription_1_10" },
       { "prob": 1, "group": "diazepam_bottle_plastic_pill_prescription_1_10" },
       { "item": "lsd", "prob": 6, "count": [ 1, 5 ] }
@@ -90,7 +90,7 @@
       { "prob": 4, "group": "oxycodone_bottle_plastic_pill_prescription_1_10" },
       { "item": "morphine", "prob": 4, "count": [ 1, 4 ] },
       { "prob": 10, "group": "xanax_bottle_plastic_pill_prescription_1_10" },
-      { "prob": 10, "group": "adderall_bottle_plastic_pill_prescription_1_10" },
+      { "prob": 10, "group": "adderall_bottle_plastic_pill_prescription_0_10" },
       [ "pipe_tobacco", 2 ],
       { "prob": 2, "group": "tobacco_bag_plastic_1_20" },
       [ "seed_tobacco", 15 ],
@@ -474,11 +474,11 @@
   },
   {
     "type": "item_group",
-    "id": "antifungal_bottle_plastic_pill_prescription_1_5",
+    "id": "antifungal_bottle_plastic_pill_prescription_0_5",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bottle_plastic_pill_prescription",
-    "entries": [ { "item": "antifungal", "container-item": "null", "count": [ 1, 5 ] } ]
+    "entries": [ { "item": "antifungal", "container-item": "null", "count": [ 0, 5 ] } ]
   },
   {
     "type": "item_group",

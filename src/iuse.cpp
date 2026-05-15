@@ -405,6 +405,7 @@ static const trait_id trait_WAYFARER( "WAYFARER" );
 static const trap_str_id tr_goo( "tr_goo" );
 static const trap_str_id tr_portal( "tr_portal" );
 
+static const vitamin_id vitamin_amphetamine( "amphetamine" );
 static const vitamin_id vitamin_blood( "blood" );
 static const vitamin_id vitamin_human_blood_vitamin( "human_blood_vitamin" );
 static const vitamin_id vitamin_redcells( "redcells" );
@@ -979,9 +980,6 @@ std::optional<int> iuse::oxygen_bottle( Character *p, item *it, const tripoint_b
         p->remove_effect( effect_teargas );
     } else if( p->has_effect( effect_asthma ) ) {
         p->remove_effect( effect_asthma );
-    } else if( p->get_stim() < 16 ) {
-        p->mod_stim( 8 );
-        p->mod_painkiller( 2 );
     }
     p->mod_painkiller( 2 );
     return 1;
@@ -1447,7 +1445,6 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint_bub_ms & )
         }
     } else if( p->has_trait( trait_THRESH_MYCUS ) ) {
         p->mod_painkiller( 5 );
-        p->mod_stim( 5 );
     } else { // In case someone gets one without having been adapted first.
         // Marloss is the Mycus' method of co-opting humans.  Mycus fruit is for symbiotes' maintenance and development.
         p->add_msg_if_player(
@@ -4915,8 +4912,8 @@ std::optional<int> iuse::jet_injector( Character *p, item *it, const tripoint_bu
         // Intensity is 2 here because intensity = 1 is the comedown
         p->add_effect( effect_jetinjector, 20_minutes, false, 2 );
         p->mod_painkiller( 20 );
-        p->mod_stim( 10 );
-        p->healall( 20 );
+        p->healall( 5 );
+        p->vitamin_mod( vitamin_amphetamine, 18 );
     }
 
     if( p->has_effect( effect_jetinjector ) ) {
@@ -4940,12 +4937,12 @@ std::optional<int> iuse::stimpack( Character *p, item *it, const tripoint_bub_ms
         return std::nullopt;
     } else {
         p->add_msg_if_player( _( "You inject yourself with the stimulants." ) );
-        // Intensity is 2 here because intensity = 1 is the comedown
+        // Intensity is 2 here because intensity = 1 is the comedown.
         p->add_effect( effect_stimpack, 25_minutes, false, 2 );
         p->mod_painkiller( 2 );
-        p->mod_stim( 20 );
         p->mod_fatigue( -100 );
-        p->set_stamina( p->get_stamina_max() );
+        p->mod_stamina( p->get_stamina_max() * 0.20 ); // 20% of max stamina.
+        p->vitamin_mod( vitamin_amphetamine, 10 );
     }
     return 1;
 }

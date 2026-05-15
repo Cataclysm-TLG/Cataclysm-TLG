@@ -242,7 +242,7 @@ static bool nicotine_effect( Character &u, addiction &add )
         ret = true;
     }
 
-    if( one_in( 90 - 3 * in ) ) {
+    if( one_in( 1800 - 10 * in ) ) {
         u.mod_fatigue( 1 );
     }
     return ret;

@@ -92,7 +92,7 @@
       { "category": "other", "purchase_rate": 0 },
       { "category": "maps", "purchase_rate": 0 },
       { "group": "drugs_medical_important", "purchase_rate": 0.5 },
-      { "group": "ultratech", "purchase_rate": 0.5 }
+      { "group": "ultratech_all", "purchase_rate": 0.5 }
     ],
     "relations": {
       "robofac": {

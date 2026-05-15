@@ -103,8 +103,13 @@
       [ "adrenaline_injector", 1 ],
       [ "inj_iron", 1 ],
       [ "prozac", 1 ],
+      [ "lithium_tablet", 1 ],
       [ "thorazine", 1 ],
-      [ "prussian_blue", 1 ]
+      [ "prussian_blue", 1 ],
+      [ "rx11_stimpack", 1 ],
+      [ "wearable_rx12", 1 ],
+      [ "ampoule", 1 ],
+      [ "stimpack_ammo", 1 ]
     ]
   },
   {
@@ -195,7 +200,11 @@
       "bot_robofac_skittergun",
       "plasma",
       "holo_cloak",
-      "optical_cloak"
+      "optical_cloak",
+      "rx11_stimpack",
+      "wearable_rx12",
+      "ampoule",
+      "stimpack_ammo"
     ]
   }
 ]

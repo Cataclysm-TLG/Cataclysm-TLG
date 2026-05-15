@@ -19,7 +19,7 @@
       { "prob": 5, "group": "prussian_blue_bottle_plastic_pill_supplement_1_10" },
       { "item": "inhaler", "prob": 14, "charges": [ 10, 100 ] },
       [ "eyedrops", 20 ],
-      { "prob": 10, "group": "adderall_bottle_plastic_pill_prescription_1_10" },
+      { "prob": 10, "group": "adderall_bottle_plastic_pill_prescription_0_10" },
       { "group": "wallets_science", "prob": 2 },
       { "item": "chem_ethanol", "prob": 10, "charges": [ 250, -1 ] },
       [ "badge_doctor", 2 ],
@@ -584,7 +584,7 @@
   },
   {
     "type": "item_group",
-    "id": "adderall_bottle_plastic_pill_prescription_1_10",
+    "id": "adderall_bottle_plastic_pill_prescription_0_10",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bottle_plastic_pill_prescription",

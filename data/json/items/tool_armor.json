@@ -2306,28 +2306,39 @@
     "symbol": "[",
     "color": "blue",
     "name": { "str": "wearable RX12 jet injector" },
-    "description": "A modified RX12 jet injector which can be worn on the body.  A label on the side warns against using more than two doses per hour.",
+    "description": "A modified RX12 jet injector which can be worn on the user's leg.  A label on the side warns against using more than two doses per hour.",
     "price": "400 USD",
     "price_postapoc": "10 USD",
-    "material": [ "plastic", "steel" ],
-    "flags": [ "OVERSIZE", "UNRESTRICTED", "SKINTIGHT", "SOFT", "PADDED" ],
+    "material": [ "plastic", "steel", "nylon" ],
+    "flags": [ "OVERSIZE", "UNRESTRICTED", "SKINTIGHT", "SOFT", "PADDED", "ONLY_ONE" ],
     "weight": "364 g",
     "volume": "750 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "ampoule": 2 } } ],
+    "sided": true,
     "armor": [
       {
         "material": [
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 0.1 },
-          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 }
+          { "type": "plastic", "covered_by_mat": 30, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.4 }
         ],
-        "covers": [ "torso" ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 1,
+        "encumbrance": 0
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 30, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "coverage": 1,
         "encumbrance": 0
       }
     ],
     "charges_per_use": 1,
-    "use_action": [ "JET_INJECTOR" ],
-    "material_thickness": 3
+    "use_action": [ "JET_INJECTOR" ]
   },
   {
     "id": "rx11_stimpack",
@@ -2337,29 +2348,40 @@
     "symbol": "[",
     "color": "dark_gray",
     "name": { "str_sp": "RX11 stimulant delivery system" },
-    "description": "A Rivtech RX11 stimulant delivery system, a jet autoinjector system worn on the user's body.  A simple press of its activator injects powerful chemical stimulants into the bloodstream without using a needle.",
+    "description": "A Rivtech RX11 stimulant delivery system, a jet autoinjector system worn on the user's leg.  A simple press of its activator injects powerful chemical stimulants into the bloodstream without using a needle.",
     "price": "400 USD",
     "price_postapoc": "10 USD",
-    "material": [ "plastic", "steel" ],
-    "flags": [ "OVERSIZE", "UNRESTRICTED", "SOFT", "PADDED" ],
+    "material": [ "plastic", "steel", "nylon" ],
+    "flags": [ "OVERSIZE", "UNRESTRICTED", "SOFT", "PADDED", "SKINTIGHT", "ONLY_ONE" ],
     "weight": "212 g",
     "volume": "750 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "stimpack_ammo": 5 } } ],
     "tool_ammo": "stimpack_ammo",
+    "sided": true,
     "armor": [
       {
         "material": [
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 0.1 },
-          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 }
+          { "type": "plastic", "covered_by_mat": 30, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.4 }
         ],
-        "covers": [ "torso" ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 1,
+        "encumbrance": 0
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 30, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "coverage": 1,
         "encumbrance": 0
       }
     ],
     "charges_per_use": 1,
-    "use_action": [ "STIMPACK" ],
-    "material_thickness": 3
+    "use_action": [ "STIMPACK" ]
   },
   {
     "id": "mask_h2osurvivor",
