@@ -1079,5 +1079,17 @@
       ]
     },
     "origins": [ "ORIGIN_GAME_START" ]
+  },
+    {
+    "type": "effect_type",
+    "id": "stim",
+    "max_intensity": 1,
+    "int_dur_factor": "1 s"
+  },
+  {
+    "type": "effect_type",
+    "id": "depressants",
+    "max_intensity": 1,
+    "int_dur_factor": "1 s"
   }
 ]
