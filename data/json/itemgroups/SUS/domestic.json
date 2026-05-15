@@ -994,6 +994,13 @@
             "entry-wrapper": "bottle_plastic_pill_prescription"
           },
           {
+            "item": "lithium_tablet",
+            "prob": 3,
+            "count": [ 1, 30 ],
+            "container-item": "null",
+            "entry-wrapper": "bottle_plastic_pill_prescription"
+          },
+          {
             "item": "thorazine",
             "prob": 3,
             "count": [ 1, 30 ],

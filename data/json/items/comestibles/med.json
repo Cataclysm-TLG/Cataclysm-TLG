@@ -46,6 +46,29 @@
       "vitamins": [ [ "amphetamine", 5 ] ]
     }
   },
+    {
+    "id": "lithium_tablet",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "MED",
+    "name": { "str_sp": "lithium tablet" },
+    "description": "A prescription mood stabilizer in the form of lithium carbonate.  This drug has long been used to treat bipolar disorder, and if taken once daily, helps to dampen the severity of mood swings.",
+    "material": [ "drug_filler" ],
+    "weight": "1 g",
+    "volume": "1 ml",
+    "price": "72 cent",
+    "price_postapoc": "30 cent",
+    "symbol": "!",
+    "color": "light_red",
+    "container": "bottle_plastic_pill_prescription",
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
+    "use_action": {
+      "type": "consume_drug",
+      "activation_message": "You take a lithium tablet.",
+      "//": "TODO: You should have to take these and antidepressants daily for a week or more to see results.",
+      "effects": [ { "id": "lithium", "duration": 86000 } ]
+    }
+  },
   {
     "id": "adrenaline_injector",
     "type": "ITEM",

@@ -103,8 +103,6 @@ static const efftype_id effect_sad( "sad" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_sleep_deprived( "sleep_deprived" );
 static const efftype_id effect_slept_through_alarm( "slept_through_alarm" );
-static const efftype_id effect_stim( "stim" );
-static const efftype_id effect_stim_overdose( "stim_overdose" );
 static const efftype_id effect_stunned( "stunned" );
 
 static const faction_id faction_your_followers( "your_followers" );
@@ -140,7 +138,6 @@ static const trait_id trait_INSECT_ARMS_OK( "INSECT_ARMS_OK" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
 static const trait_id trait_SHELL2( "SHELL2" );
 static const trait_id trait_SHELL3( "SHELL3" );
-static const trait_id trait_STIMBOOST( "STIMBOOST" );
 static const trait_id trait_THICK_SCALES( "THICK_SCALES" );
 static const trait_id trait_WHISKERS( "WHISKERS" );
 static const trait_id trait_WHISKERS_RAT( "WHISKERS_RAT" );
@@ -959,7 +956,6 @@ mfaction_id avatar::get_monster_faction() const
 
 void avatar::reset_stats()
 {
-    const int current_stim = get_stim();
 
     // Trait / mutation buffs
     if( has_trait( trait_THICK_SCALES ) ) {
@@ -1033,15 +1029,6 @@ void avatar::reset_stats()
     set_fake_effect_dur( effect_happy, 1_turns * morale );
     set_fake_effect_dur( effect_sad, 1_turns * -morale );
 
-    // Stimulants
-    // FIXME: are you fucking kidding me
-    set_fake_effect_dur( effect_stim, 1_turns * current_stim );
-    set_fake_effect_dur( effect_depressants, 1_turns * -current_stim );
-    if( has_trait( trait_STIMBOOST ) ) {
-        set_fake_effect_dur( effect_stim_overdose, 1_turns * ( current_stim - 60 ) );
-    } else {
-        set_fake_effect_dur( effect_stim_overdose, 1_turns * ( current_stim - 30 ) );
-    }
     // Starvation
     const float bmi = get_bmi_fat();
     if( bmi < character_weight_category::normal ) {

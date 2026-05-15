@@ -770,7 +770,7 @@
     "entries": [
       { "group": "mil_food_nodrugs", "prob": 1410 },
       { "prob": 15, "group": "codeine_bottle_plastic_pill_painkiller_1_10" },
-      { "prob": 25, "group": "antibiotics_bottle_plastic_pill_prescription_1_15" },
+      { "prob": 25, "group": "antibiotics_bottle_plastic_pill_prescription_0_15" },
       { "item": "purifier", "prob": 12 },
       { "item": "heatpack", "prob": 60 },
       { "prob": 20, "group": "pur_tablets_bottle_plastic_small_1_15" },
@@ -1021,6 +1021,14 @@
   },
   {
     "type": "item_group",
+    "id": "antiparasitic_bottle_plastic_pill_prescription_0_5",
+    "subtype": "collection",
+    "//": "This group was created automatically and may contain errors.",
+    "container-item": "bottle_plastic_pill_prescription",
+    "entries": [ { "item": "antiparasitic", "container-item": "null", "count": [ 0, 5 ] } ]
+  },
+  {
+    "type": "item_group",
     "id": "codeine_bottle_plastic_pill_painkiller_1_10",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
@@ -1029,7 +1037,7 @@
   },
   {
     "type": "item_group",
-    "id": "antibiotics_bottle_plastic_pill_prescription_1_15",
+    "id": "antibiotics_bottle_plastic_pill_prescription_0_15",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bottle_plastic_pill_prescription",

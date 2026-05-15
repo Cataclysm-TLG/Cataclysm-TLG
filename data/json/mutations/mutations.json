@@ -1733,7 +1733,7 @@
     "id": "JITTERY",
     "name": { "str": "Jittery" },
     "points": -3,
-    "description": "You tend to get a bad case of the shakes when you're hungry or under the effects of stimulants.",
+    "description": "You tend to get a bad case of the shakes when you're hungry or under the effects of stimulants.  Nicotine can help, and benzodiazepines will stop the effect entirely.",
     "starting_trait": true,
     "category": [ "MEDICAL", "MOUSE", "RABBIT" ]
   },
@@ -1762,7 +1762,7 @@
     "id": "MOODSWINGS",
     "name": { "str": "Mood Swings" },
     "points": -1,
-    "description": "Your morale will shift up and down at random, often dramatically.",
+    "description": "Your morale will shift up and down at random, often dramatically.  Lithium tablets can reduce the severity of this disorder.",
     "starting_trait": true,
     "category": [ "MEDICAL", "ELFA" ]
   },

@@ -86,6 +86,8 @@
 #include "weather.h"
 
 static const bionic_id bio_voice( "bio_voice" );
+
+static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
 static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_controlled( "controlled" );
 static const efftype_id effect_drunk( "drunk" );
@@ -94,6 +96,7 @@ static const efftype_id effect_infection( "infection" );
 static const efftype_id effect_mending( "mending" );
 static const efftype_id effect_npc_flee_player( "npc_flee_player" );
 static const efftype_id effect_npc_suspend( "npc_suspend" );
+static const efftype_id effect_opioid_eff( "opioid_eff" );
 static const efftype_id effect_took_analgesic( "took_analgesic" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
@@ -1757,12 +1760,17 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
     npc_values.fear += u_ugly / 2;
     npc_values.trust -= u_ugly / 3;
 
-    if( you.get_stim() > 20 ) {
-        npc_values.fear++;
-    }
 
+    // Weed and booze make you less frightening.  Amphetamines makes you scarier.
+    // TODO: Jaded characters shouldn't care.
+    if( you.has_effect( effect_high ) ) {
+        npc_values.fear -= you.get_effect_int( effect_high ) - 1;
+    }
     if( you.has_effect( effect_drunk ) ) {
-        npc_values.fear -= 2;
+        npc_values.fear -= you.get_effect_int( effect_drunk ) - 1;
+    }
+    if( you.has_effect( effect_amphetamine_eff ) ) {
+        npc_values.fear += you.get_effect_int( effect_amphetamine_eff ) - 1;
     }
 
     // TRUST
@@ -1789,17 +1797,20 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
     }
 
     // TODO: More effects
+
+    // Being visibly high makes you less trustworthy.
+    // TODO: Jaded or very innocent characters should care less.
     if( you.has_effect( effect_high ) ) {
-        npc_values.trust -= 1;
+        npc_values.trust -= you.get_effect_int( effect_high ) - 1;
     }
     if( you.has_effect( effect_drunk ) ) {
-        npc_values.trust -= 2;
+        npc_values.trust -= you.get_effect_int( effect_drunk ) - 1;
     }
-    if( you.get_stim() > 20 || you.get_stim() < -20 ) {
-        npc_values.trust -= 1;
+    if( you.has_effect( effect_opioid_eff ) ) {
+        npc_values.trust -= you.get_effect_int( effect_opioid_eff ) - 1;
     }
-    if( you.get_painkiller() > 30 ) {
-        npc_values.trust -= 1;
+    if( you.has_effect( effect_amphetamine_eff ) ) {
+        npc_values.trust -= you.get_effect_int( effect_amphetamine_eff ) - 1;
     }
 
     if( op_of_u.trust > 0 ) {
@@ -3705,6 +3716,7 @@ mfaction_id npc::get_monster_faction() const
         return monfaction_player.id();
     }
 
+    // TODO: This is unused, re-implement it for post-thresh insects once that's added.
     if( has_trait( trait_BEE ) ) {
         return monfaction_bee.id();
     }

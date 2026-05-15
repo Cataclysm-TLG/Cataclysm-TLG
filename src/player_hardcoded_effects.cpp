@@ -92,6 +92,7 @@ static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_tapeworm( "tapeworm" );
 static const efftype_id effect_teleglow( "teleglow" );
 static const efftype_id effect_tetanus( "tetanus" );
+static const efftype_id effect_took_xanax( "took_xanax" );
 static const efftype_id effect_tindrift( "tindrift" );
 static const efftype_id effect_toxin_buildup( "toxin_buildup" );
 static const efftype_id effect_valium( "valium" );
@@ -684,7 +685,7 @@ static void eff_fun_teleglow( Character &u, effect &it )
     }
     if( dur > 4_hours ) {
         // 8 teleports
-        if( one_turn_in( 1000_minutes - dur ) && !u.has_effect( effect_valium ) ) {
+        if( one_turn_in( 1000_minutes - dur ) && !u.has_effect( effect_valium ) && !u.has_effect( effect_took_xanax ) ) {
             u.add_effect( effect_shakes, rng( 4_minutes, 8_minutes ) );
         }
         if( one_turn_in( 1200_minutes - dur ) ) {
@@ -727,9 +728,6 @@ static void eff_fun_datura( Character &u, effect &it )
     const time_duration dur = it.get_duration();
     if( dur > 100_minutes && u.get_focus() >= 1 && one_in( 24 ) ) {
         u.mod_focus( -1 );
-    }
-    if( dur > 200_minutes && one_in( 48 ) && u.get_stim() < 20 ) {
-        u.mod_stim( 1 );
     }
     if( dur > 300_minutes && u.get_focus() >= 1 && one_in( 12 ) ) {
         u.mod_focus( -1 );
@@ -1410,7 +1408,7 @@ void Character::hardcoded_effects( effect &it )
             }
         }
         // to do: make muscle spasms not as dangerous if you have bionic limbs
-        if( !has_effect( effect_valium ) ) {
+        if( !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
             add_miss_reason( _( "Your muscles are locking up and you can't fight effectively." ), 4 );
             if( one_in( 3072 ) ) {
                 add_msg_if_player( m_bad, _( "Your muscles spasm." ) );
@@ -1648,7 +1646,7 @@ void Character::hardcoded_effects( effect &it )
         switch( intense ) {
             case 3:
                 // Tonic-clonic seizure (full body convulsive seizure)
-                if( one_turn_in( 3_days ) && !has_effect( effect_valium ) ) {
+                if( one_turn_in( 3_days ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
                     add_msg_if_player( m_bad, _( "You lose control of your body as it begins to convulse!" ) );
                     time_duration td = rng( 30_seconds, 4_minutes );
                     schedule_effect( effect_motor_seizure, td );
@@ -1665,7 +1663,7 @@ void Character::hardcoded_effects( effect &it )
             /* fallthrough */
             case 2:
                 // Myoclonic seizure (muscle spasm)
-                if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) ) {
+                if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
                     std::string limb = random_entry<std::vector<std::string>>( {
                         translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
                     } );
@@ -1695,7 +1693,7 @@ void Character::hardcoded_effects( effect &it )
                     }
                 }
                 // Atonic seizure (a.k.a. drop seizure)
-                if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) ) {
+                if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
                     add_msg_if_player( m_bad,
                                        _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
                     schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );

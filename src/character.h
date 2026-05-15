@@ -3491,11 +3491,9 @@ class Character : public Creature, public visitable
         */
         int get_acquirable_energy( const item &it ) const;
 
-        /** Used to apply stimulation modifications from food and medication **/
-        void modify_stimulation( const islot_comestible &comest );
         /** Used to apply fatigue modifications from food and medication **/
-        /** Used to apply radiation from food and medication **/
         void modify_fatigue( const islot_comestible &comest );
+        /** Used to apply radiation from food and medication **/
         void modify_radiation( const islot_comestible &comest );
         /** Used to apply addiction modifications from food and medication **/
         void modify_addiction( const islot_comestible &comest );

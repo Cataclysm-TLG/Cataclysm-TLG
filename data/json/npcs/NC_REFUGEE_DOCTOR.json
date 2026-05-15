@@ -117,6 +117,7 @@
       { "item": "adderall", "prob": 20 },
       { "item": "thorazine", "prob": 15 },
       { "item": "prozac", "prob": 20 },
+      { "item": "lithium_tablet", "prob": 6 },
       { "item": "antibiotics", "prob": 35 },
       { "item": "antifungal", "prob": 10 },
       { "item": "antiparasitic", "prob": 10 },

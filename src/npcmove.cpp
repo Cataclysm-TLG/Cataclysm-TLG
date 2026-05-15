@@ -1789,7 +1789,7 @@ void npc::execute_action( npc_action action )
         break;
 
         case npc_sleep: {
-            // TODO: Allow stims when not too tired
+            // TODO: Allow use of drugs when not too tired.
             // Find a nice spot to sleep
             tripoint_bub_ms best_spot = pos_bub();
             int best_sleepy = is_valid_sleep_candidate( pos_bub() )
@@ -1842,12 +1842,12 @@ void npc::execute_action( npc_action action )
                     if( !player_character.in_sleep_state() ) {
                         add_msg_if_player_sees( *this, _( "%s lies down to sleep." ), get_name() );
                     }
-                    // NPCs check can_sleep() for hard blockers (meth, stim)
-                    // but fall asleep directly on success. The lying_down ->
-                    // can_sleep() rng retry cycle is for the player who gets
-                    // "you try to sleep but can't" feedback. Without direct
-                    // fall_asleep(), NPC fatigue keeps incrementing while
-                    // they lie awake (recovery only runs while asleep).
+                    /* NPCs check can_sleep() for hard blockers but fall asleep
+                       directly on success. The lying_down -> can_sleep() rng
+                       retry cycle is for the player who gets "you try to sleep
+                       but can't" feedback. Without direct fall_asleep(), NPC 
+                       fatigue keeps incrementing while they lie awake
+                       (recovery only runs while asleep). */
                     if( !is_avatar() && can_sleep() ) {
                         fall_asleep();
                     } else {

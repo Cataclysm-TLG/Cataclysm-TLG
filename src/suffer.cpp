@@ -76,10 +76,13 @@ static const bionic_id bio_radleak( "bio_radleak" );
 static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
 static const bionic_id bio_synlungs( "bio_synlungs" );
 
+static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
 static const efftype_id effect_adrenaline( "adrenaline" );
 static const efftype_id effect_asthma( "asthma" );
 static const efftype_id effect_blind( "blind" );
+static const efftype_id effect_caffeine_eff( "caffeine_eff" );
 static const efftype_id effect_cig( "cig" );
+static const efftype_id effect_cocaine( "cocaine" );
 static const efftype_id effect_datura( "datura" );
 static const efftype_id effect_deaf( "deaf" );
 static const efftype_id effect_disabled( "disabled" );
@@ -89,6 +92,7 @@ static const efftype_id effect_formication( "formication" );
 static const efftype_id effect_hallu( "hallu" );
 static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_iodine( "iodine" );
+static const efftype_id effect_lithium( "lithium" );
 static const efftype_id effect_masked_scent( "masked_scent" );
 static const efftype_id effect_mending( "mending" );
 static const efftype_id effect_narcosis( "narcosis" );
@@ -98,6 +102,7 @@ static const efftype_id effect_shakes( "shakes" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_took_antiasthmatic( "took_antiasthmatic" );
 static const efftype_id effect_took_xanax( "took_xanax" );
+static const efftype_id effect_valium( "valium" );
 static const efftype_id effect_visuals( "visuals" );
 static const efftype_id effect_weary_0( "weary_0" );
 static const efftype_id effect_weary_1( "weary_1" );
@@ -216,7 +221,6 @@ static void from_item_dropping( Character &you );
 static void from_other_mutations( Character &you );
 static void from_radiation( Character &you );
 static void from_bad_bionics( Character &you );
-static void from_stimulants( Character &you, int current_stim );
 static void from_exertion( Character &you );
 static void without_sleep( Character &you, int sleep_deprivation );
 static void from_tourniquet( Character &you );
@@ -488,7 +492,7 @@ void suffer::while_awake( Character &you, const int current_stim )
         you.rem_morale( morale_perm_pessimist );
     }
 
-    if( you.has_flag( json_flag_NYCTOPHOBIA ) && !you.has_effect( effect_took_xanax ) ) {
+    if( you.has_flag( json_flag_NYCTOPHOBIA ) && !you.has_effect( effect_took_xanax ) && !you.has_effect( effect_valium ) ) {
         suffer::from_nyctophobia( you );
     }
 
@@ -510,10 +514,10 @@ void suffer::while_awake( Character &you, const int current_stim )
     }
 
     if( you.has_trait( trait_JITTERY ) && !you.has_effect( effect_shakes ) ) {
-        if( current_stim > 50 && one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
+        if( ( you.get_effect_int( effect_caffeine_eff ) > 1 || you.has_effect( effect_cocaine ) || you.has_effect( effect_amphetamine_eff ) ) && !you.has_effect( effect_cig ) && !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) && one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
             time_duration dur = 1_minutes * rng( 1, 30 );
             you.add_effect( effect_shakes, dur + 1_turns * current_stim );
-        } else if( ( you.get_hunger() > 80 || ( you.get_kcal_percent() < 0.9f &&
+        } else if( ( !you.has_effect( effect_cig ) || one_in( 3 ) ) && !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) && ( you.get_hunger() > 80 || ( you.get_kcal_percent() < 0.9f &&
                                                 you.get_hunger() > ( 80 - ( 100 - you.get_kcal_percent() * 100 ) ) ) )  &&
                    one_in( to_turns<int>( 50_minutes ) - ( you.get_hunger() * 6 ) ) ) {
             time_duration dur = 1_minutes * rng( 1, 30 );
@@ -521,13 +525,24 @@ void suffer::while_awake( Character &you, const int current_stim )
         }
     }
 
+    // Lithium shortens the duration and severity of mood swings, and makes them less common.
     if( you.has_trait( trait_MOODSWINGS ) && one_turn_in( 6_hours ) ) {
-        if( rng( 1, 20 ) > 9 ) {
-            // 55% chance
-            you.add_morale( morale_moodswing, -20, -100 );
-        } else {
-            // 45% chance
-            you.add_morale( morale_moodswing, 20, 100 );
+        if( you.has_effect( effect_lithium ) ? one_in( 3 ) : one_in( 2 ) ) {
+            if( rng( 1, 20 ) > 9 ) {
+                // 55% chance
+                if( you.has_effect( effect_lithium ) ) {
+                    you.add_morale( morale_moodswing, -5, -20, 4_hours, 1_hours, true );
+                } else {
+                    you.add_morale( morale_moodswing, -20, -100, 8_hours, 2_hours );
+                }
+            } else {
+                // 45% chance
+                if( you.has_effect( effect_lithium ) ) {
+                    you.add_morale( morale_moodswing, 5, 20, 4_hours, 1_hours, true );
+                } else {
+                    you.add_morale( morale_moodswing, 20, 100, 8_hours, 2_hours );
+                }
+            }
         }
     }
 
@@ -1446,73 +1461,6 @@ void suffer::from_bad_bionics( Character &you )
     }
 }
 
-void suffer::from_stimulants( Character &you, const int current_stim )
-{
-    // Stim +250 kills
-    if( current_stim > 210 ) {
-        if( one_turn_in( 2_minutes ) && !you.is_on_ground() ) {
-            you.add_msg_if_player( m_bad, _( "Your muscles spasm!" ) );
-            if( !you.is_on_ground() ) {
-                you.add_msg_if_player( m_bad, _( "You fall to the ground!" ) );
-                you.add_effect( effect_downed, rng( 6_turns, 20_turns ) );
-            }
-        }
-    }
-    if( current_stim > 170 ) {
-        if( !you.has_effect( effect_winded ) && calendar::once_every( 10_minutes ) ) {
-            you.add_msg_if_player( m_bad, _( "You feel short of breath." ) );
-            you.add_effect( effect_winded, 10_minutes + 1_turns );
-        }
-    }
-    if( current_stim > 110 ) {
-        if( !you.has_effect( effect_shakes ) && calendar::once_every( 10_minutes ) ) {
-            you.add_msg_if_player( _( "You shake uncontrollably." ) );
-            you.add_effect( effect_shakes, 15_minutes + 1_turns );
-        }
-    }
-    if( current_stim > 75 ) {
-        if( !one_turn_in( 2_minutes ) && !you.has_effect( effect_nausea ) ) {
-            you.add_msg_if_player( _( "You feel nauseous…" ) );
-            you.add_effect( effect_nausea, 5_minutes );
-        }
-    }
-
-    //stim -200 or painkillers 240 kills
-    if( current_stim < -160 || you.get_painkiller() > 200 ) {
-        if( one_turn_in( 3_minutes ) && !you.in_sleep_state() ) {
-            you.add_msg_if_player( m_bad, _( "You black out!" ) );
-            const time_duration dur = rng( 30_minutes, 60_minutes );
-            if( !you.is_on_ground() ) {
-                you.add_effect( effect_downed, dur );
-            }
-            you.add_effect( effect_blind, dur );
-            you.fall_asleep( dur );
-        }
-    }
-    if( current_stim < -120 || you.get_painkiller() > 160 ) {
-        if( !you.has_effect( effect_winded ) && calendar::once_every( 10_minutes ) ) {
-            you.add_msg_if_player( m_bad, _( "Your breathing slows down." ) );
-            you.add_effect( effect_winded, 10_minutes + 1_turns );
-        }
-    }
-    if( current_stim < -85 || you.get_painkiller() > 145 ) {
-        if( one_turn_in( 15_seconds ) && !you.has_effect( effect_sleep ) ) {
-            you.add_msg_if_player( m_bad, _( "You feel dizzy for a moment." ) );
-            you.mod_moves( -rng( 10, 30 ) );
-            if( one_in( 3 ) && !you.is_on_ground() ) {
-                you.add_msg_if_player( m_bad, _( "You stumble and fall over!" ) );
-                you.add_effect( effect_downed, rng( 3_turns, 10_turns ) );
-            }
-        }
-    }
-    if( current_stim < -60 || you.get_painkiller() > 130 ) {
-        if( calendar::once_every( 10_minutes ) ) {
-            you.add_msg_if_player( m_warning, _( "You feel tired…" ) );
-            you.mod_fatigue( rng( 1, 2 ) );
-        }
-    }
-}
-
 static void apply_weary_message( const Character &you, int level, int old )
 {
     if( level - old > 0 ) {
@@ -1873,17 +1821,6 @@ void Character::suffer()
     suffer::from_other_mutations( *this );
     suffer::from_radiation( *this );
     suffer::from_bad_bionics( *this );
-    suffer::from_stimulants( *this, current_stim );
-    int sleep_deprivation = in_sleep_state() ? 0 : get_sleep_deprivation();
-    // Stimulants can lessen the PERCEIVED effects of sleep deprivation, but
-    // they do nothing to cure it. As such, abuse is even more dangerous now.
-    if( current_stim > 0 ) {
-        // 100% of blacking out = 20160sd ; Max. stim modifier = 12500sd @ 250stim
-        // Note: Very high stim already has its own slew of bad effects,
-        // so the "useful" part of this bonus is actually lower.
-        sleep_deprivation -= current_stim * 50;
-    }
-
     suffer::without_sleep( *this, sleep_deprivation );
     suffer::from_tourniquet( *this );
     //Suffer from enchantments

@@ -1760,7 +1760,7 @@
       { "prob": 25, "group": "caffeine_bottle_plastic_pill_supplement_1_10" },
       { "prob": 4, "group": "oxycodone_bottle_plastic_pill_prescription_1_10" },
       { "item": "morphine", "prob": 4, "count": [ 1, 4 ] },
-      { "prob": 10, "group": "adderall_bottle_plastic_pill_prescription_1_10" },
+      { "prob": 10, "group": "adderall_bottle_plastic_pill_prescription_0_10" },
       { "prob": 10, "group": "xanax_bottle_plastic_pill_prescription_1_10" },
       { "item": "adrenaline_injector", "prob": 2 },
       { "prob": 2, "group": "crack_bag_zipper_1_4" },
