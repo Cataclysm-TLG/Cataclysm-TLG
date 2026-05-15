@@ -16,7 +16,7 @@ Website: cataclysmtlg.com
 
 Discord: 
 
-[https://discord.com/invite/zT9sXmZNCK](https://discord.com/invite/zT9sXmZNCK)
+[https://discord.com/invite/hsbAa6gMGx](https://discord.com/invite/hsbAa6gMGx)
 
 ## Contributions
 
