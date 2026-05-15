@@ -3379,6 +3379,23 @@ void monster::process_one_effect( effect &it, bool is_new )
         } else {
             it.set_duration( 0_turns );
         }
+    } else if( id == effect_poison ) {
+        // Poison from gas etc. doesn't work well for monsters, so give it some hardcoded help.
+        mod_speed_bonus( -10 );
+        if( one_in( 20 ) ) {
+            apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), rng( 1, 3 ) );
+            if( !it.is_permanent() ) {
+            it.mod_duration( -2_minutes );
+            }
+        }
+    } else if( id == effect_badpoison  ) {
+        mod_speed_bonus( -15 );
+        if( one_in( 20 ) ) {
+            apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), rng( 2, 4 ) );
+            if( !it.is_permanent() ) {
+            it.mod_duration( -2_minutes );
+            }
+        }
     } else if( id == effect_run ) {
         effect_cache[FLEEING] = true;
     } else if( id == effect_no_sight || id == effect_blind ) {

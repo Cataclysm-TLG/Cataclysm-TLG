@@ -70,6 +70,7 @@ static const damage_type_id damage_acid( "acid" );
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_electric( "electric" );
 static const damage_type_id damage_heat( "heat" );
+static const damage_type_id damage_pure( "pure" );
 
 static const efftype_id effect_badpoison( "badpoison" );
 static const efftype_id effect_blind( "blind" );
@@ -99,6 +100,7 @@ static const species_id species_FERAL( "FERAL" );
 static const species_id species_FUNGUS( "FUNGUS" );
 static const species_id species_INSECT( "INSECT" );
 static const species_id species_INSECT_FLYING( "INSECT_FLYING" );
+static const species_id species_MIGO( "MIGO" );
 static const species_id species_ROBOT( "ROBOT" );
 static const species_id species_ROBOT_FLYING( "ROBOT_FLYING" );
 static const species_id species_SPIDER( "SPIDER" );
@@ -111,6 +113,7 @@ static const trait_id trait_ACIDPROOF( "ACIDPROOF" );
 static const trait_id trait_COMPOUND_EYES( "COMPOUND_EYES" );
 static const trait_id trait_EYESTALKS_RIGID( "EYESTALKS_RIGID" );
 static const trait_id trait_GASTROPOD_FOOT( "GASTROPOD_FOOT" );
+static const trait_id trait_POISRESIST( "POISRESIST" );
 static const trait_id trait_M_IMMUNE( "M_IMMUNE" );
 static const trait_id trait_M_SKIN2( "M_SKIN2" );
 static const trait_id trait_M_SKIN3( "M_SKIN3" );
@@ -1643,6 +1646,24 @@ void map::player_in_field( Character &you )
                 you.add_env_effect( effect_blind, bodypart_id( "eyes" ), 1, cur.get_field_intensity() * 2_seconds );
             }
         }
+
+        if( ft == fd_toxic_gas ) {
+            int required_resist = 6;
+            const int intensity = cur.get_field_intensity();
+            if( ( intensity > 2 ) && !you.in_vehicle ) {
+                required_resist = 15;
+            }
+            if( you.get_env_resist( bodypart_id( "mouth" ) ) < rng( 1, required_resist ) &&
+              ( ( !you.has_trait( trait_POISRESIST ) && one_in( 8 - intensity ) ) ||
+               ( you.has_trait( trait_POISRESIST ) && one_in( 13 - intensity ) ) ) ) {
+                    if( one_in( 20 ) ) {
+                        you.add_msg_if_player( _( "The gas burns horribly as you breathe it in!" ) );
+                    }
+                    you.cough( true, true );
+                    you.deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_pure, rng( 1, intensity ) ) );
+            }
+        }
+
         if( ft == fd_fungal_haze ) {
             if( !you.has_trait( trait_M_IMMUNE ) && ( !inside || one_in( 4 ) ) ) {
                 you.add_env_effect( effect_fungus, bodypart_id( "mouth" ), 4, 10_minutes, true );
@@ -1954,9 +1975,12 @@ void map::monster_in_field( monster &z )
         if( cur_field_type == fd_smoke ) {
             if( !z.has_flag( mon_flag_NO_BREATHE ) ) {
                 if( cur.get_field_intensity() == 3 ) {
+                    if( one_in( 15 ) && !z.made_of( material_vegetable ) ) {
+                        dam += 1;
+                    }
                     z.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.1, 0.2 ) );
                 }
-                // Plants suffer from smoke even worse
+                // Plants are slowed down more by smoke.
                 if( z.made_of( material_vegetable ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.01, cur.get_field_intensity() * 0.12 ) );
                 }
@@ -2006,15 +2030,7 @@ void map::monster_in_field( monster &z )
             }
 
         }
-        if( cur_field_type == fd_toxic_gas ) {
-            if( !z.has_flag( mon_flag_NO_BREATHE ) ) {
-                const int intensity = cur.get_field_intensity();
-                if( one_in( 10 - intensity ) ) { 
-                    z.mod_moves( -rng( 0, 10 ) );
-                    dam += rng( 1, 2 * intensity );
-                }
-            }
-        }
+
         if( cur_field_type == fd_nuke_gas ) {
             if( !z.has_flag( mon_flag_NO_BREATHE ) ) {
                 if( cur.get_field_intensity() == 3 ) {
@@ -2100,28 +2116,42 @@ void map::monster_in_field( monster &z )
                 }
             }
         }
+        if( cur_field_type == fd_toxic_gas ) {
+            if( !z.has_flag( mon_flag_NO_BREATHE ) && !z.type->in_species( species_FUNGUS ) && !z.type->in_species( species_MIGO ) && !z.made_of( material_vegetable ) ) {
+                const int intensity = cur.get_field_intensity();
+                if( one_in( 5 - intensity ) ) {
+                    dam += rng( 1, ( 10 - size_factor ) * intensity );
+                    if( z.type->has_fear_trigger( mon_trigger::HURT ) ) {
+                        z.morale -= ( 2 * cur.get_field_intensity() );
+                    }
+                    if( z.type->has_anger_trigger( mon_trigger::HURT ) ) {
+                        z.anger += ( 2 * cur.get_field_intensity() );
+                    }
+                }
+            }
+        }
         if( cur_field_type == fd_fungal_haze ) {
             if( !z.type->in_species( species_FUNGUS ) &&
                 !z.type->has_flag( mon_flag_NO_BREATHE ) &&
                 !z.make_fungus() ) {
                 // Don't insta-kill jabberwocks, that's silly
                 const int intensity = cur.get_field_intensity();
-                z.mod_moves( -rng( 10 - size_factor * intensity, 30 - size_factor * intensity ) );
-                dam += rng( 0, 10 - size_factor * intensity );
+                z.mod_moves( -rng( ( 10 - size_factor ) * intensity, ( 30 - size_factor ) * intensity ) );
+                dam += rng( 0, ( 10 - size_factor ) * intensity );
             }
         }
         if( cur_field_type == fd_fungicidal_gas ) {
             if( z.type->in_species( species_FUNGUS ) ) {
                 const int intensity = cur.get_field_intensity();
-                z.mod_moves( -rng( 10 - size_factor * intensity, 30 - size_factor * intensity ) );
-                dam += rng( 1, 8 - size_factor * intensity );
+                z.mod_moves( -rng( ( 10 - size_factor ) * intensity, ( 30 - size_factor ) * intensity ) );
+                dam += rng( 1, ( 10 - size_factor ) * intensity );
             }
         }
         if( cur_field_type == fd_insecticidal_gas ) {
             if( z.made_of( material_iflesh ) && !z.has_flag( mon_flag_INSECTICIDEPROOF ) ) {
                 const int intensity = cur.get_field_intensity();
-                z.mod_moves( -rng( 10 - size_factor * intensity, 30 - size_factor * intensity ) );
-                dam += rng( 1, 8 - size_factor * intensity );
+                z.mod_moves( -rng( ( 10 - size_factor ) * intensity, ( 30 - size_factor ) * intensity ) );
+                dam += rng( 1, ( 10 - size_factor ) * intensity );
             }
         }
     }

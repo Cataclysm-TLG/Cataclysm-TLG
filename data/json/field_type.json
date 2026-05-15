@@ -686,6 +686,15 @@
         "concentration": 1,
         "effects": [
           {
+            "effect_id": "smoke_eyes",
+            "body_part": "eyes",
+            "intensity": 2,
+            "min_duration": "10 seconds",
+            "max_duration": "10 seconds",
+            "immunity_data": { "body_part_env_resistance": [ [ "sensor", 6 ] ] },
+            "immune_inside_vehicle": true
+          },
+          {
             "effect_id": "poison",
             "body_part": "torso",
             "intensity": 2,
@@ -706,6 +715,15 @@
         "concentration": 2,
         "effects": [
           {
+            "effect_id": "smoke_eyes",
+            "body_part": "eyes",
+            "intensity": 3,
+            "min_duration": "20 seconds",
+            "max_duration": "20 seconds",
+            "immunity_data": { "body_part_env_resistance": [ [ "sensor", 6 ] ] },
+            "immune_inside_vehicle": true
+          },
+          {
             "effect_id": "poison",
             "body_part": "torso",
             "intensity": 5,
@@ -724,6 +742,24 @@
         "translucency": 0,
         "concentration": 4,
         "effects": [
+          {
+            "effect_id": "smoke_eyes",
+            "body_part": "eyes",
+            "intensity": 4,
+            "min_duration": "10 seconds",
+            "max_duration": "30 seconds",
+            "immunity_data": { "body_part_env_resistance": [ [ "sensor", 12 ] ] },
+            "immune_inside_vehicle": true
+          },
+          {
+            "effect_id": "smoke_eyes",
+            "body_part": "eyes",
+            "intensity": 2,
+            "min_duration": "2 seconds",
+            "max_duration": "2 seconds",
+            "immunity_data": { "body_part_env_resistance": [ [ "sensor", 6 ] ] },
+            "immune_outside_vehicle": true
+          },
           {
             "effect_id": "poison",
             "body_part": "torso",

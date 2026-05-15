@@ -1344,7 +1344,7 @@ class Character : public Creature, public visitable
         /** Reduce healing effect intensity, return initial intensity of the effect */
         int reduce_healing_effect( const efftype_id &eff_id, int remove_med, const bodypart_id &hurt );
 
-        void cough( bool harmful = false, int loudness = 4 );
+        void cough( bool harmful = false, bool force = false, int loudness = 4 );
         /**
          * Check for relevant passive, non-clothing that can absorb damage, and reduce by specified
          * damage unit.  Only flat bonuses are checked here.  Multiplicative ones are checked in
