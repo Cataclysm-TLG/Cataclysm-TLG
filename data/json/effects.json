@@ -4453,7 +4453,7 @@
     ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
   },
-    {
+  {
     "type": "effect_type",
     "id": "lithium",
     "max_duration": "86000 s",

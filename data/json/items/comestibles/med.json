@@ -46,7 +46,7 @@
       "vitamins": [ [ "amphetamine", 5 ] ]
     }
   },
-    {
+  {
     "id": "lithium_tablet",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],

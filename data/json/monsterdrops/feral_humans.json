@@ -542,7 +542,12 @@
                           { "item": "sundress", "prob": 45, "damage": [ -1, 5 ] },
                           { "item": "santa_dress_long", "prob": 1, "damage": [ -1, 5 ] },
                           { "item": "dress_costume", "prob": 2, "variant": "sinister_dress", "damage": [ -1, 5 ] },
-                          { "item": "dress_costume_skimpy", "prob": 2, "variant": "gothic_dress", "damage": [ -1, 5 ] },
+                          {
+                            "item": "dress_costume_skimpy",
+                            "prob": 2,
+                            "variant": "gothic_dress",
+                            "damage": [ -1, 5 ]
+                          },
                           {
                             "collection": [ { "item": "dress_wedding", "damage": [ -1, 5 ] }, { "item": "veil_wedding", "damage": [ -1, 5 ] } ],
                             "prob": 1
@@ -877,13 +882,19 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "mon_feral_sailor_mop_death_drops",
-    "entries": [ { "item": "mop_folded", "prob": 100, "damage": [ -1, 5 ] }, { "group": "mon_zombie_sailor_death_drops", "prob": 100 } ]
+    "entries": [
+      { "item": "mop_folded", "prob": 100, "damage": [ -1, 5 ] },
+      { "group": "mon_zombie_sailor_death_drops", "prob": 100 }
+    ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "mon_feral_sailor_lug_wrench_death_drops",
-    "entries": [ { "item": "lug_wrench", "prob": 100, "damage": [ -1, 5 ] }, { "group": "mon_zombie_sailor_death_drops", "prob": 100 } ]
+    "entries": [
+      { "item": "lug_wrench", "prob": 100, "damage": [ -1, 5 ] },
+      { "group": "mon_zombie_sailor_death_drops", "prob": 100 }
+    ]
   },
   {
     "id": "mon_feral_marine_death_drops",

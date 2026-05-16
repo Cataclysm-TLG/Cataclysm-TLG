@@ -327,7 +327,7 @@
     },
     "effect": [ { "u_lose_effect": "withdrawal_nicotine_detoxed" }, { "u_lose_effect": "withdrawal_nicotine" } ]
   },
-    {
+  {
     "type": "effect_on_condition",
     "id": "EOC_OPIOID_WITHDRAWAL_1",
     "recurrence": [ "10 minutes", "20 hours" ],
