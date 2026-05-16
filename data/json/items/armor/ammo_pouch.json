@@ -1315,49 +1315,6 @@
     "armor": [ { "encumbrance": 2, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ]
   },
   {
-    "id": "xlkevlar",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "Kevlar vest" },
-    "description": "A massive handmade imitation of a proper ballistic vest for abnormally large folks.  Large and heavy, but will still fit under an abnormally large coat.",
-    "weight": "4210 g",
-    "volume": "8 L",
-    "price_postapoc": "25 USD",
-    "to_hit": -3,
-    "material": [ "kevlar_layered", "nylon" ],
-    "symbol": "[",
-    "looks_like": "ballistic_vest_concealable",
-    "color": "light_gray",
-    "warmth": 20,
-    "material_thickness": 5,
-    "flags": [ "STURDY", "OVERSIZE", "PREFIX_XL" ],
-    "armor": [
-      {
-        "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
-        ],
-        "encumbrance": 6,
-        "coverage": 98,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      },
-      {
-        "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
-        ],
-        "//": "encumbrance handled above",
-        "encumbrance": 0,
-        "coverage": 92,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ]
-      }
-    ],
-    "melee_damage": { "bash": 6 }
-  },
-  {
     "id": "ammo_satchel_leather",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],

@@ -21,7 +21,12 @@
         "prob": 20
       },
       { "group": "scarfs_unisex", "damage": [ -1, 5 ], "custom-flags": [ "UNDERSIZE" ], "prob": 20 },
-      { "group": "accesories_personal_unisex_child", "damage": [ -1, 5 ], "custom-flags": [ "UNDERSIZE" ], "prob": 15 },
+      {
+        "group": "accesories_personal_unisex_child",
+        "damage": [ -1, 5 ],
+        "custom-flags": [ "UNDERSIZE" ],
+        "prob": 15
+      },
       {
         "distribution": [
           {
@@ -54,7 +59,12 @@
                 "prob": 30
               },
               { "group": "socks_unisex", "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ], "prob": 50 },
-              { "group": "accesories_personal_mens", "prob": 15, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] }
+              {
+                "group": "accesories_personal_mens",
+                "prob": 15,
+                "custom-flags": [ "UNDERSIZE" ],
+                "damage": [ -1, 5 ]
+              }
             ]
           },
           {
@@ -74,8 +84,18 @@
                       {
                         "distribution": [
                           { "group": "child_shoes", "prob": 50, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] },
-                          { "group": "shoes_unisex", "prob": 30, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] },
-                          { "group": "shoes_womens", "prob": 20, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] }
+                          {
+                            "group": "shoes_unisex",
+                            "prob": 30,
+                            "custom-flags": [ "UNDERSIZE" ],
+                            "damage": [ -1, 5 ]
+                          },
+                          {
+                            "group": "shoes_womens",
+                            "prob": 20,
+                            "custom-flags": [ "UNDERSIZE" ],
+                            "damage": [ -1, 5 ]
+                          }
                         ],
                         "prob": 30
                       },
@@ -88,7 +108,12 @@
                               { "item": "tights", "prob": 50, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] }
                             ]
                           },
-                          { "group": "socks_unisex", "prob": 50, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] }
+                          {
+                            "group": "socks_unisex",
+                            "prob": 50,
+                            "custom-flags": [ "UNDERSIZE" ],
+                            "damage": [ -1, 5 ]
+                          }
                         ]
                       }
                     ],
@@ -106,7 +131,12 @@
                         "distribution": [
                           { "group": "dress_shoes", "prob": 60, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] },
                           { "group": "child_shoes", "prob": 20, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] },
-                          { "group": "shoes_womens", "prob": 20, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] }
+                          {
+                            "group": "shoes_womens",
+                            "prob": 20,
+                            "custom-flags": [ "UNDERSIZE" ],
+                            "damage": [ -1, 5 ]
+                          }
                         ],
                         "prob": 30
                       },
@@ -152,7 +182,12 @@
                               }
                             ]
                           },
-                          { "group": "socks_unisex", "prob": 50, "custom-flags": [ "UNDERSIZE" ], "damage": [ -1, 5 ] }
+                          {
+                            "group": "socks_unisex",
+                            "prob": 50,
+                            "custom-flags": [ "UNDERSIZE" ],
+                            "damage": [ -1, 5 ]
+                          }
                         ]
                       }
                     ],

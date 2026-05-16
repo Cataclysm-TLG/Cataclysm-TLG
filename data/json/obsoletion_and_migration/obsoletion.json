@@ -1080,7 +1080,7 @@
     },
     "origins": [ "ORIGIN_GAME_START" ]
   },
-    {
+  {
     "type": "effect_type",
     "id": "stim",
     "max_intensity": 1,

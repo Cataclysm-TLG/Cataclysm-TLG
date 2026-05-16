@@ -16,6 +16,12 @@
     "info": "This plate will fit in <info>medium</info> armor pockets.",
     "restriction": "Item must be a medium ablative plate"
   },
+    {
+    "id": "ABLATIVE_LARGE_XL",
+    "type": "json_flag",
+    "info": "This plate will fit in <info>oversized</info> armor pockets.",
+    "restriction": "Item must be an XL ablative plate"
+  },
   {
     "id": "ACTIVE_CLOAKING",
     "type": "json_flag",

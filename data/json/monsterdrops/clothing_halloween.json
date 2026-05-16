@@ -1273,7 +1273,10 @@
             ]
           },
           {
-            "distribution": [ { "item": "santa_belt", "prob": 60, "damage": [ -1, 5 ] }, { "item": "leather_belt", "prob": 40, "damage": [ -1, 5 ] } ]
+            "distribution": [
+              { "item": "santa_belt", "prob": 60, "damage": [ -1, 5 ] },
+              { "item": "leather_belt", "prob": 40, "damage": [ -1, 5 ] }
+            ]
           },
           {
             "distribution": [

@@ -36,8 +36,7 @@
     "entries": [
       { "item": "esapi_plate", "prob": 50 },
       { "item": "stab_plate", "prob": 50 },
-      { "item": "steel_ballistic_plate", "prob": 50 },
-      { "item": "heavy_steel_ballistic_plate", "prob": 50 },
+      { "item": "steel_esapi_plate", "prob": 50 },
       { "item": "esbi_plate", "prob": 50 }
     ]
   },
@@ -80,18 +79,8 @@
     "//": "ESAPI plates for light vest",
     "subtype": "collection",
     "entries": [
-      { "item": "steel_ballistic_plate", "damage": [ -1, 2 ], "prob": 30 },
-      { "item": "steel_ballistic_plate", "damage": [ -1, 2 ], "prob": 30 }
-    ]
-  },
-  {
-    "id": "some_heavy_steel_front_plates",
-    "type": "item_group",
-    "//": "ESAPI plates for light vest",
-    "subtype": "collection",
-    "entries": [
-      { "item": "heavy_steel_ballistic_plate", "damage": [ -1, 2 ], "prob": 30 },
-      { "item": "heavy_steel_ballistic_plate", "damage": [ -1, 2 ], "prob": 30 }
+      { "item": "steel_esapi_plate", "damage": [ -1, 2 ], "prob": 30 },
+      { "item": "steel_esapi_plate", "damage": [ -1, 2 ], "prob": 30 }
     ]
   },
   {

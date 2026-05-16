@@ -4062,5 +4062,30 @@
     "type": "MIGRATION",
     "id": "button_horn",
     "replace": "button_bone"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "heavy_steel_ballistic_plate",
+    "replace": "steel_esapi_plate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "steel_ballistic_plate",
+    "replace": "steel_esapi_plate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_ballistic_vest_steel",
+    "replace": "plate_carrier_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_ballistic_vest",
+    "replace": "plate_carrier_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xlkevlar",
+    "replace": "ballistic_vest_concealable_xl"
   }
 ]

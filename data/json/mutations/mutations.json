@@ -684,7 +684,9 @@
     "cancels": [ "GOURMAND" ],
     "category": [ "FISH", "LIZARD", "CHIMERA", "BATRACHIAN" ],
     "enchantments": [
-      { "values": [ { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.4 }, { "value": "CONSUME_TIME_MOD", "multiply": -0.5 } ] }
+      {
+        "values": [ { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.4 }, { "value": "CONSUME_TIME_MOD", "multiply": -0.5 } ]
+      }
     ]
   },
   {
