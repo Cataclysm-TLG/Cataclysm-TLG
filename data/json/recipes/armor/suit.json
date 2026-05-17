@@ -726,7 +726,7 @@
       [ [ "kevlar_sheet_layered", 6 ] ],
       [ [ "duct_tape", 150 ] ],
       [
-        [ "ballistic_vest_concealable", 1 ],
+        [ "ballistic_vest_concealable_xs", 1 ],
         [ "ballistic_vest_light", 1 ],
         [ "ballistic_vest_esapi", 1 ],
         [ "kevlar_sheet_layered", 18 ]

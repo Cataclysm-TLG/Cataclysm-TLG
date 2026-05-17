@@ -26,6 +26,7 @@
     "entries": [
       { "item": "vest", "prob": 40 },
       { "item": "ballistic_vest_concealable", "prob": 15 },
+      { "item": "ballistic_vest_concealable_xs", "prob": 1 },
       { "item": "jacket_army", "prob": 30 },
       { "item": "longcoat", "prob": 25 },
       { "item": "longcoat_leather", "prob": 20 },
