@@ -1064,7 +1064,7 @@ class vehicle
         void stop_engines( map &here );
         // Attempt to start the vehicle's active engines
         void start_engines( map &here, Character *driver = nullptr, bool take_control = false,
-                            bool autodrive = false );
+                            bool autodrive = false, bool power_armor = false );
 
         // Engine backfire, making a loud noise
         void backfire( map *here, const vehicle_part &vp ) const;

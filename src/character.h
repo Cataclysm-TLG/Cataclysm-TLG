@@ -563,6 +563,8 @@ class Character : public Creature, public visitable
         bool death_drops;
         /// Is currently in control of a vehicle
         bool controlling_vehicle = false;
+        /// Is currently in control of power armor
+        bool controlling_power_armor = false;
 
         /// @brief Character stats
         /// @todo Make those protected
