@@ -1203,6 +1203,46 @@
     "damage_reduction": { "all": 6 },
     "variants": [ { "symbols": "$", "symbols_broken": "$" } ]
   },
+    {
+    "type": "vehicle_part",
+    "id": "power_armor_controls",
+    "name": { "str": "power armor controls" },
+    "categories": [ "operations" ],
+    "broken_color": "red",
+    "damage_modifier": 10,
+    "durability": 250,
+    "description": "A control system for a suit of power armor.",
+    "bonus": 10,
+    "folded_volume": "1500 ml",
+    "//": "120 cm of weld to install the whole assembly",
+    "item": "vehicle_controls",
+    "requirements": {
+      "install": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 120 ], [ "vehicle_bolt_install", 2 ] ]
+      },
+      "removal": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "15 m",
+        "using": [ [ "vehicle_weld_removal", 15 ], [ "vehicle_wrench_2", 1 ] ]
+      },
+      "repair": {
+        "skills": [ [ "mechanics", 3 ] ],
+        "time": "30 m",
+        "using": [ [ "repair_welding_standard", 3 ], [ "soldering_standard", 8 ], [ "vehicle_wrench_1", 1 ], [ "vehicle_screw", 1 ] ]
+      }
+    },
+    "flags": [ "POWER_ARMOR_CONTROLS", "NEED_LEG", "INOPERABLE_SMALL", "NO_COVER", "WALKS" ],
+    "breaks_into": [
+      { "item": "steel_chunk" },
+      { "item": "steel_fragment", "count": [ 1, 3 ] },
+      { "item": "scrap", "count": [ 1, 3 ] },
+      { "item": "cable", "charges": [ 0, 4 ] }
+    ],
+    "damage_reduction": { "all": 6 },
+    "variants": [ { "symbols": "$", "symbols_broken": "$" } ]
+  },
   {
     "type": "vehicle_part",
     "id": "hand_controls",

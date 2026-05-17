@@ -811,6 +811,15 @@ void map::vehmove()
         }
         level_cache &cache = *cache_lazy;
         for( vehicle *veh : cache.vehicle_list ) {
+            bool skip = false;
+            for( const vpart_reference &vp : veh->get_all_parts() ) {
+                if( vp.has_feature( VPFLAG_WALKS ) ) {
+                    skip = true;
+                }
+            }
+            if( skip ) {
+                continue;
+            }
             if( veh->is_following ) {
                 veh->drive_to_local_target( this, player_pos, true );
             } else if( veh->is_patrolling ) {

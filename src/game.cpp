@@ -5991,14 +5991,20 @@ void game::control_vehicle()
     vehicle *veh = nullptr;
     bool controls_ok = false;
     bool reins_ok = false;
+    bool power_armor_controls_ok = false;
     if( const optional_vpart_position vp = here.veh_at( u.pos_bub() ) ) {
         veh = &vp->vehicle();
         const int controls_idx = veh->avail_part_with_feature( vp->mount_pos(), "CONTROLS" );
         const int reins_idx = veh->avail_part_with_feature( vp->mount_pos(), "CONTROL_ANIMAL" );
-        controls_ok = controls_idx >= 0; // controls available to "drive"
-        reins_ok = reins_idx >= 0 // reins + animal available to "drive"
+        const int power_armor_controls_idx = veh->avail_part_with_feature( vp->mount_pos(), "POWER_ARMOR_CONTROLS" );
+        controls_ok = controls_idx >= 0; // Controls available to drive.
+        reins_ok = reins_idx >= 0 // Reins + animal available to drive.
                    && veh->has_engine_type( fuel_type_animal, false )
                    && veh->get_harnessed_animal( here );
+        power_armor_controls_ok = power_armor_controls_idx >= 0; // Power armor controls available to drive.
+
+                // NEED TO BUILD POWER ARMOR CONTROL MENU INSTEAD OF INTERACT_WITH()
+
         if( veh->player_in_control( here, u ) ) {
             // player already "driving" - offer ways to leave
             if( controls_ok ) {
