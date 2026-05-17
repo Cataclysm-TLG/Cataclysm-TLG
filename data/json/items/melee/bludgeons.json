@@ -18,7 +18,7 @@
     "volume": "2700 ml",
     "price": "500 USD",
     "price_postapoc": "20 USD",
-    "melee_damage": { "bash": 34 }
+    "melee_damage": { "bash": 36 }
   },
   {
     "type": "ITEM",

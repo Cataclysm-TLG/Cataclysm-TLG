@@ -89,6 +89,7 @@ static const bionic_id bio_voice( "bio_voice" );
 
 static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
 static const efftype_id effect_bouldering( "bouldering" );
+static const efftype_id effect_cocaine( "cocaine" );
 static const efftype_id effect_controlled( "controlled" );
 static const efftype_id effect_drunk( "drunk" );
 static const efftype_id effect_high( "high" );
@@ -1761,7 +1762,7 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
     npc_values.trust -= u_ugly / 3;
 
 
-    // Weed and booze make you less frightening.  Amphetamines makes you scarier.
+    // Weed and booze make you less frightening.  Stimulants makes you scarier.
     // TODO: Jaded characters shouldn't care.
     if( you.has_effect( effect_high ) ) {
         npc_values.fear -= you.get_effect_int( effect_high ) - 1;
@@ -1771,6 +1772,9 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
     }
     if( you.has_effect( effect_amphetamine_eff ) ) {
         npc_values.fear += you.get_effect_int( effect_amphetamine_eff ) - 1;
+    }
+    if( you.has_effect( effect_cocaine ) ) {
+        npc_values.fear += you.get_effect_int( effect_cocaine ) - 1;
     }
 
     // TRUST
@@ -1811,6 +1815,9 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
     }
     if( you.has_effect( effect_amphetamine_eff ) ) {
         npc_values.trust -= you.get_effect_int( effect_amphetamine_eff ) - 1;
+    }
+    if( you.has_effect( effect_cocaine ) ) {
+        npc_values.trust -= you.get_effect_int( effect_cocaine ) - 1;
     }
 
     if( op_of_u.trust > 0 ) {

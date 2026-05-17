@@ -110,6 +110,7 @@
       { "item": "case_cigar", "prob": 5 },
       [ "vest", 40 ],
       [ "ballistic_vest_concealable", 15 ],
+      { "item": "ballistic_vest_concealable_xs", "prob": 1 },
       [ "jacket_army_modern", 30 ],
       [ "longcoat", 25 ],
       [ "longcoat_leather", 20 ],
