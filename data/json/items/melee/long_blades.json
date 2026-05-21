@@ -789,18 +789,18 @@
     "price": "20 USD",
     "price_postapoc": "7 USD 50 cent",
     "material": [ "wood" ],
-    "weight": "200 g",
-    "volume": "600 ml",
-    "longest_side": "80 cm",
+    "weight": "700 g",
+    "volume": "1400 ml",
+    "longest_side": "100 cm",
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
     "looks_like": "cane",
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
         "rigid": true,
-        "max_contains_volume": "320 ml",
-        "max_contains_weight": "450 g",
-        "max_item_length": "80 cm",
+        "max_contains_volume": "1360 ml",
+        "max_contains_weight": "950 g",
+        "max_item_length": "95 cm",
         "moves": 80,
         "flag_restriction": [ "SHEATH_SWORD" ]
       }
@@ -821,15 +821,15 @@
     "price": "20 USD",
     "price_postapoc": "30 USD",
     "material": [ "steel" ],
-    "weight": "450 g",
-    "volume": "320 ml",
-    "longest_side": "80 cm",
+    "weight": "950 g",
+    "volume": "1360 ml",
+    "longest_side": "90 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "point", "balance": "good" },
     "looks_like": "rapier",
-    "techniques": [ "PRECISE", "RAPID", "WBLOCK_2" ],
+    "techniques": [ "PRECISE", "RAPID", "WBLOCK_1" ],
     "flags": [ "SHEATH_SWORD" ],
-    "weapon_category": [ "MEDIUM_SWORDS", "FENCING_WEAPONRY" ],
-    "melee_damage": { "bash": 2, "stab": 25 }
+    "weapon_category": [ "FENCING_WEAPONRY" ],
+    "melee_damage": { "bash": 1, "stab": 23 }
   },
   {
     "id": "broadsword",
