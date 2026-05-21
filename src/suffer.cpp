@@ -1571,7 +1571,7 @@ void suffer::without_sleep( Character &you, const int sleep_deprivation )
                                                _( "<npcname> stretches their back." ) );
                     break;
                 case 4:
-                    you.add_msg_player_or_npc( m_warning, _( "You feel mentally tired." ),
+                    you.add_msg_player_or_npc( m_warning, _( "You've gone too long without sleep." ),
                                                _( "<npcname> lets out a huge yawn." ) );
                     break;
             }
@@ -1580,11 +1580,11 @@ void suffer::without_sleep( Character &you, const int sleep_deprivation )
     // Minor discomfort
     if( sleep_deprivation >= SLEEP_DEPRIVATION_MINOR ) {
         if( one_turn_in( 75_minutes ) ) {
-            you.add_msg_if_player( m_warning, _( "You feel lightheaded for a moment." ) );
+            you.add_msg_if_player( m_warning, _( "You briefly lose track of what you were doing." ) );
             you.mod_moves( -to_moves<int>( 1_seconds ) * 0.1 );
         }
-        if( one_turn_in( 100_minutes ) ) {
-            you.add_msg_if_player( m_warning, _( "Your muscles spasm uncomfortably." ) );
+        if( one_turn_in( 100_minutes ) && !you.has_flag( json_flag_PAIN_IMMUNE ) ) {
+            you.add_msg_if_player( m_warning, _( "Your body is sore and aching." ) );
             you.mod_pain( 2 );
         }
         if( !you.has_effect( effect_visuals ) && one_turn_in( 150_minutes ) ) {
@@ -1595,15 +1595,15 @@ void suffer::without_sleep( Character &you, const int sleep_deprivation )
     // Slight disability
     if( sleep_deprivation >= SLEEP_DEPRIVATION_SERIOUS ) {
         if( one_turn_in( 75_minutes ) ) {
-            you.add_msg_if_player( m_bad, _( "Your mind lapses into unawareness briefly." ) );
+            you.add_msg_if_player( m_bad, _( "You zone out for a moment." ) );
             you.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.2, 0.8 ) );
         }
-        if( one_turn_in( 125_minutes ) ) {
-            you.add_msg_if_player( m_bad, _( "Your muscles ache in stressfully unpredictable ways." ) );
+        if( one_turn_in( 125_minutes ) && !you.has_flag( json_flag_PAIN_IMMUNE ) ) {
+            you.add_msg_if_player( m_bad, _( "Your muscles and joints ache." ) );
             you.mod_pain( rng( 2, 10 ) );
         }
-        if( one_turn_in( 5_hours ) ) {
-            you.add_msg_if_player( m_bad, _( "You have a distractingly painful headache." ) );
+        if( one_turn_in( 5_hours ) && !you.has_flag( json_flag_PAIN_IMMUNE ) ) {
+            you.add_msg_if_player( m_bad, _( "You have a headache." ) );
             you.mod_pain( rng( 10, 25 ) );
         }
     }
@@ -1615,17 +1615,15 @@ void suffer::without_sleep( Character &you, const int sleep_deprivation )
             you.add_effect( effect_nausea, rng( 5_minutes, 30_minutes ) );
         }
         if( one_turn_in( 5_hours ) ) {
-            you.add_msg_if_player( m_bad, _( "Your mind is so tired that you feel you can't trust "
-                                             "your eyes anymore." ) );
+            you.add_msg_if_player( m_bad, _( "Waking dreams haunt the corners of your vision." ) );
             you.add_effect( effect_hallu, rng( 5_minutes, 60_minutes ) );
         }
         if( !you.has_effect( effect_shakes ) && one_turn_in( 425_minutes ) ) {
-            you.add_msg_if_player( m_bad, _( "Your muscles spasm uncontrollably, and you have "
-                                             "trouble keeping your balance." ) );
+            you.add_msg_if_player( m_bad, _( "Your body trembles, pushed to its limit by lack of sleep." ) );
             you.add_effect( effect_shakes, 15_minutes );
         } else if( you.has_effect( effect_shakes ) && one_turn_in( 75_seconds ) ) {
             you.mod_moves( -to_moves<int>( 1_seconds ) * 0.1 );
-            you.add_msg_player_or_npc( m_warning, _( "Your shaking legs make you stumble." ),
+            you.add_msg_player_or_npc( m_warning, _( "You stumble." ),
                                        _( "<npcname> stumbles." ) );
             if( !you.is_on_ground() && one_in( 10 ) ) {
                 you.add_msg_player_or_npc( m_bad, _( "You fall over!" ), _( "<npcname> falls over!" ) );
