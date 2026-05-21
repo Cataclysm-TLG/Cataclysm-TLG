@@ -9239,7 +9239,7 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
             // thickness - when it comes to chemicals, a material burns, or it does not. Nonphysical attacks
             // don't respect thickness, but average the protection of all layers, surface or no. Acid rolls
             // for portion total (and thus can bypass layers that dont fully cover), other stuff doesn't.
-            const int total = type->mat_portion_total == 0 ? 1 : type->mat_portion_total;
+
             // Iterate through armor_mats in order. Outermost layers come first both here and in json entries.
             for( auto it = armor_mats.begin(); it != armor_mats.end(); ++it ) {
                 const part_material *m = *it;
@@ -9276,10 +9276,6 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
                     resist += tmp_add;
                 }
             }
-            if( !dmg_type->physical ) {
-                // Average by portion of materials
-                resist /= total;
-            }
         }
         // The end result of all these checks is averaged to give us the item's final overall armor value.
         return resist + mod;
@@ -9296,8 +9292,8 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
             } else {
                 tmp_add = m.first->resist( dmg_type ) * m.second;
             }
+            resist += tmp_add;
         }
-        resist += tmp_add;
         // Average by portion of materials
         resist /= total;
     }

@@ -567,7 +567,7 @@
       { "fuel": 2, "smoke": 1, "burn": 0.04 },
       { "fuel": 3, "smoke": 1, "burn": 0.06 }
     ],
-    "resist": { "bash": 1, "cut": 1, "acid": 2, "heat": 0, "bullet": 1 },
+    "resist": { "bash": 1, "cut": 1, "acid": 2, "heat": 1, "bullet": 1 },
     "repair_difficulty": 1
   },
   {
@@ -578,7 +578,7 @@
     "copy-from": "cotton",
     "repaired_with": "null",
     "wind_resist": 75,
-    "resist": { "bash": 2, "cut": 2, "acid": 2, "heat": 0, "bullet": 1.5 }
+    "resist": { "bash": 2, "cut": 2, "acid": 2, "heat": 2, "bullet": 1.5 }
   },
   {
     "type": "material",
@@ -604,7 +604,7 @@
       { "fuel": 2, "smoke": 1, "burn": 0.04 },
       { "fuel": 3, "smoke": 1, "burn": 0.06 }
     ],
-    "resist": { "bash": 2, "cut": 2.25, "acid": 3, "heat": 0, "bullet": 2 },
+    "resist": { "bash": 2, "cut": 2.25, "acid": 3, "heat": 2, "bullet": 2 },
     "repair_difficulty": 2
   },
   {
@@ -630,7 +630,7 @@
       { "fuel": 2, "smoke": 1, "burn": 0.04 },
       { "fuel": 3, "smoke": 1, "burn": 0.06 }
     ],
-    "resist": { "bash": 2, "cut": 2.5, "acid": 4, "heat": 0, "bullet": 2 },
+    "resist": { "bash": 2, "cut": 2.5, "acid": 4, "heat": 2, "bullet": 2 },
     "repair_difficulty": 2
   },
   {
@@ -641,7 +641,7 @@
     "copy-from": "canvas",
     "repaired_with": "null",
     "wind_resist": 90,
-    "resist": { "bash": 2, "cut": 3, "acid": 4, "heat": 0, "bullet": 2 }
+    "resist": { "bash": 2, "cut": 3, "acid": 4, "heat": 2, "bullet": 2 }
   },
   {
     "type": "material",
@@ -2727,7 +2727,7 @@
       { "fuel": 1.8, "smoke": 1, "burn": 0.075 }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1, "cut": 1, "acid": 4, "heat": 0, "bullet": 1 },
+    "resist": { "bash": 1, "cut": 1, "acid": 4, "heat": 1, "bullet": 1 },
     "repair_difficulty": 1
   },
   {
@@ -2738,7 +2738,7 @@
     "copy-from": "wool",
     "repaired_with": "null",
     "wind_resist": 65,
-    "resist": { "bash": 2, "cut": 2, "acid": 4, "heat": 0, "bullet": 1.5 }
+    "resist": { "bash": 2, "cut": 2, "acid": 4, "heat": 1, "bullet": 1.5 }
   },
   {
     "type": "material",
@@ -2790,7 +2790,7 @@
       { "fuel": 0, "smoke": 3, "burn": 0.002 },
       { "fuel": 0, "smoke": 5, "burn": 0.005 }
     ],
-    "resist": { "bash": 1, "cut": 1, "acid": 2, "heat": 1, "bullet": 1 }
+    "resist": { "bash": 1, "cut": 1, "acid": 2, "heat": 0, "bullet": 1 }
   },
   {
     "type": "material",
