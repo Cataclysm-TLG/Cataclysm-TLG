@@ -84,6 +84,10 @@ template <typename T, typename W> struct weighted_list {
          */
         //TODO: Shouldn't this remove on weight <= 0?
         T *add_or_replace( const T &obj, const W &weight ) {
+            if( weight == 0 ) {
+                remove( obj );
+                return nullptr;
+            }
             if( weight > 0 ) {
                 invalidate_precalc();
                 for( auto &itr : objects ) {
