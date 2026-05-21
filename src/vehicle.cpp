@@ -4858,6 +4858,16 @@ bool vehicle::is_rotorcraft( map &here ) const
            has_sufficient_rotorlift( here );
 }
 
+bool vehicle::is_power_armor() const
+{
+    for( const vpart_reference &vp : get_all_parts() ) {
+        if( vp.has_feature( "POWER_ARMOR_CONTROLS" ) ) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool vehicle::is_flyable() const
 {
     return flyable;

@@ -1233,7 +1233,7 @@
         "using": [ [ "repair_welding_standard", 3 ], [ "soldering_standard", 8 ], [ "vehicle_wrench_1", 1 ], [ "vehicle_screw", 1 ] ]
       }
     },
-    "flags": [ "POWER_ARMOR_CONTROLS", "NEED_LEG", "INOPERABLE_SMALL", "NO_COVER", "WALKS" ],
+    "flags": [ "POWER_ARMOR_CONTROLS", "NEED_LEG", "INOPERABLE_SMALL", "NO_COVER" ],
     "breaks_into": [
       { "item": "steel_chunk" },
       { "item": "steel_fragment", "count": [ 1, 3 ] },

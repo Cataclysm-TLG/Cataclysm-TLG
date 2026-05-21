@@ -6052,17 +6052,23 @@ void game::control_vehicle()
             }
         }
     }
-    if( !controls_ok && !reins_ok ) { // No controls or reins under player position, search nearby.
+    if( !controls_ok && !reins_ok && !power_armor_controls_ok ) { // No controls or reins under player position, search nearby.
         int num_valid_controls = 0;
         std::optional<tripoint_bub_ms> vehicle_position;
         std::optional<vpart_reference> vehicle_controls;
         for( const tripoint_bub_ms &elem : here.points_in_radius( get_player_character().pos_bub(), 1 ) ) {
             if( const optional_vpart_position vp = here.veh_at( elem ) ) {
                 const std::optional<vpart_reference> controls = vp.value().part_with_feature( "CONTROLS", true );
+                const std::optional<vpart_reference> power_armor_controls = vp.value().part_with_feature( "POWER_ARMOR_CONTROLS", true );
                 if( controls ) {
                     num_valid_controls++;
                     vehicle_position = elem;
                     vehicle_controls = controls;
+                }
+                if( power_armor_controls ) {
+                    num_valid_controls++;
+                    vehicle_position = elem;
+                    vehicle_controls = power_armor_controls;
                 }
             }
         }
