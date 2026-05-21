@@ -206,9 +206,7 @@
     "condition": {
       "and": [
         { "compare_string": [ "withdrawal_alcohol_timer", { "context_val": "effect" } ] },
-        { "not": { "u_has_effect": "drunk" } },
-        { "not": { "u_has_effect": "sleep" } },
-        { "not": { "u_has_effect": "narcosis" } }
+        { "not": { "u_has_effect": "drunk" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_alcohol_detoxed", "duration": "PERMANENT" }
@@ -458,9 +456,7 @@
     "condition": {
       "and": [
         { "compare_string": [ "withdrawal_opioid_timer", { "context_val": "effect" } ] },
-        { "not": { "u_has_effect": "drunk" } },
-        { "not": { "u_has_effect": "sleep" } },
-        { "not": { "u_has_effect": "narcosis" } }
+        { "not": { "u_has_effect": "opioid_eff" } }
       ]
     },
     "effect": { "u_add_effect": "withdrawal_opioid_detoxed", "duration": "PERMANENT" }
