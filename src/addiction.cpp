@@ -102,8 +102,7 @@ static bool alcohol_add( Character &u, int in )
     bool ret = false;
     if( x_in_y( in, 24 ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_alcohol_detoxed ) &&
-            ( !u.has_effect( effect_withdrawal_alcohol_timer ) ||
-              u.get_effect_int( effect_withdrawal_alcohol_timer ) < timer_int ) ) {
+            ( !u.has_effect( effect_withdrawal_alcohol_timer ) ) ) {
             u.add_effect( effect_withdrawal_alcohol_timer, 24_hours * timer_int, false, timer_int );
         }
         ret = true;
@@ -217,8 +216,7 @@ static bool nicotine_effect( Character &u, addiction &add )
     bool ret = false;
     if( x_in_y( in, 48 ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_nicotine_detoxed ) &&
-            ( !u.has_effect( effect_withdrawal_nicotine_timer ) ||
-              u.get_effect_int( effect_withdrawal_nicotine_timer ) < timer_int ) ) {
+            ( !u.has_effect( effect_withdrawal_nicotine_timer ) ) ) {
             u.add_effect( effect_withdrawal_nicotine_timer, 32_hours * timer_int, false, timer_int );
         }
         ret = true;
@@ -309,8 +307,7 @@ static bool opioid_effect( Character &u, addiction &add )
 
     if( x_in_y( in, 24 ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_opioid_detoxed ) &&
-            ( !u.has_effect( effect_withdrawal_opioid_timer ) ||
-              u.get_effect_int( effect_withdrawal_opioid_timer ) < timer_int ) ) {
+            ( !u.has_effect( effect_withdrawal_opioid_timer ) ) ) {
             u.add_effect( effect_withdrawal_opioid_timer, 48_hours * timer_int, false, timer_int );
         }
         ret = true;
