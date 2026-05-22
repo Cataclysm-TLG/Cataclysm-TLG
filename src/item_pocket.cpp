@@ -496,6 +496,15 @@ std::list<const item *> item_pocket::all_items_top() const
     return items;
 }
 
+units::ememory item_pocket::occupied_ememory() const
+{
+    units::ememory total = 0_KB;
+    for( const item &it : contents ) {
+        total += it.ememory_size();
+    }
+    return total;
+}
+
 std::list<item *> item_pocket::all_items_ptr( pocket_type pk_type )
 {
     if( !is_type( pk_type ) ) {

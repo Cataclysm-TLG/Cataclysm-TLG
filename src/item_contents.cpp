@@ -1955,6 +1955,17 @@ std::vector<const item *> item_contents::efiles() const
     return efiles;
 }
 
+units::ememory item_contents::occupied_ememory() const
+{
+    units::ememory total = 0_KB;
+    for( const item_pocket &pocket : contents ) {
+        if( pocket.is_type( pocket_type::E_FILE_STORAGE ) ) {
+            total += pocket.occupied_ememory();
+        }
+    }
+    return total;
+}
+
 std::vector<item *> item_contents::cables()
 {
     std::vector<item *> cables;

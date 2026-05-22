@@ -15,6 +15,8 @@
 #include <sstream>
 #include <string>
 #include <tuple>
+#include <string_view>
+#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 
@@ -146,6 +148,8 @@ static const efftype_id effect_shakes( "shakes" );
 static const efftype_id effect_sleep( "sleep" );
 static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 static const fault_id fault_overheat_safety( "fault_overheat_safety" );
+
+static const flag_id json_flag_LOCATION_PRECISE_CLOSEST_CITY( "LOCATION_PRECISE_CLOSEST_CITY" );
 
 static const furn_str_id furn_f_metal_smoking_rack_active( "f_metal_smoking_rack_active" );
 static const furn_str_id furn_f_smoking_rack_active( "f_smoking_rack_active" );
@@ -1600,6 +1604,32 @@ bool _stacks_location_hint( item const &lhs, item const &rhs )
     return false;
 }
 
+bool _stacks_location_precise_closest_city( item const &lhs, item const &rhs )
+{
+    // Skip the closest_city sort unless both items can actually display the segment.
+    if( !lhs.has_flag( json_flag_LOCATION_PRECISE_CLOSEST_CITY ) ||
+        !rhs.has_flag( json_flag_LOCATION_PRECISE_CLOSEST_CITY ) ) {
+        return true;
+    }
+    static const std::string omt_loc_var = "spawn_location";
+    const tripoint_abs_ms this_loc( lhs.get_var( omt_loc_var, tripoint_abs_ms::invalid ) );
+    const tripoint_abs_ms that_loc( rhs.get_var( omt_loc_var, tripoint_abs_ms::invalid ) );
+    if( this_loc == that_loc ) {
+        return true;
+    } else if( this_loc != tripoint_abs_ms::invalid && that_loc != tripoint_abs_ms::invalid ) {
+        const tripoint_abs_omt this_omt = project_to<coords::omt>( this_loc );
+        const tripoint_abs_sm this_sm = project_to<coords::sm>( this_omt );
+        const city_reference this_city = overmap_buffer.closest_city( this_sm );
+
+        const tripoint_abs_omt that_omt = project_to<coords::omt>( that_loc );
+        const tripoint_abs_sm that_sm = project_to<coords::sm>( that_omt );
+        const city_reference that_city = overmap_buffer.closest_city( that_sm );
+
+        return this_city.city == that_city.city;
+    }
+    return false;
+}
+
 bool _stacks_rot( item const &lhs, item const &rhs, bool combine_liquid )
 {
     // Stack items that fall into the same "bucket" of freshness.
@@ -1795,8 +1825,9 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     bits.set( tname::segments::BROKEN, is_broken() == rhs.is_broken() );
     bits.set( tname::segments::UPS, _stacks_ups( *this, rhs ) );
     // Guns that differ only by dirt/shot_counter can still stack,
-    // but other item_vars such as label/note will prevent stacking
-    static const std::set<std::string> ignore_keys = { "dirt", "shot_counter", "spawn_location", "ethereal", "last_act_by_char_id" };
+    // but other item_vars such as label/note will prevent stacking.
+    // CAMERA_*_PHOTOS_count and EIPC_RECIPES_count are derived caches; not part of identity.
+    static const std::set<std::string> ignore_keys = { "dirt", "shot_counter", "spawn_location", "ethereal", "last_act_by_char_id", "activity_var", "CAMERA_EXTENDED_PHOTOS_count", "CAMERA_MONSTER_PHOTOS_count", "EIPC_RECIPES_count" };
     bits.set( tname::segments::VARS, map_equal_ignoring_keys( item_vars, rhs.item_vars, ignore_keys ) );
     bits.set( tname::segments::ETHEREAL, _stacks_ethereal( *this, rhs ) );
     bits.set( tname::segments::LOCATION_HINT, _stacks_location_hint( *this, rhs ) );
@@ -1834,8 +1865,15 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
               link_length() == rhs.link_length() && max_link_length() == rhs.max_link_length() );
     bits.set( tname::segments::MODS, _stacks_mods( *this, rhs ) );
     //checking browsed status is not necessary, equal vars are checked earlier
+    const bool lhs_estorage = is_estorage();
+    const bool rhs_estorage = rhs.is_estorage();
+    // Non-estorage pairs short-circuit true (printer skips segment); mixed pairs
+    // stay false so aggregated headers drop free-mem when grouped with non-estorage.
     bits.set( tname::segments::EMEMORY,
-              occupied_ememory() == rhs.occupied_ememory() && total_ememory() == rhs.total_ememory() );
+              lhs_estorage == rhs_estorage &&
+              ( !lhs_estorage ||
+                ( occupied_ememory() == rhs.occupied_ememory() &&
+                  total_ememory() == rhs.total_ememory() ) ) );
     bits.set( tname::segments::last_segment );
 
     // only check contents if everything else matches
@@ -8941,11 +8979,37 @@ bool item::efiles_all_browsed() const
     return true;
 }
 
+static int count_valid_recipes( const std::string_view csv )
+{
+    // Match get_saved_recipes() semantics: deduplicate via set so a malformed
+    // CSV like ",balclava,balclava," returns 1, not 2.
+    std::set<recipe_id> seen;
+    for( const std::string &rid_str : string_split( csv, ',' ) ) {
+        const recipe_id rid( rid_str );
+        if( !rid.is_empty() && rid.is_valid() ) {
+            seen.emplace( rid );
+        }
+    }
+    return static_cast<int>( seen.size() );
+}
+
 units::ememory item::ememory_size() const
 {
     units::ememory ememory_return = type->ememory_size;
     if( typeId() == itype_efile_recipes ) {
-        ememory_return *= get_saved_recipes().size();
+        if( is_broken_on_active() ) {
+            return 0_KB;
+        }
+        // Reading a cached count avoids parsing EIPC_RECIPES and validating
+        // every recipe_id in stacks_with.
+        int n;
+        if( has_var( "EIPC_RECIPES_count" ) ) {
+            n = static_cast<int>( get_var( "EIPC_RECIPES_count", 0.0 ) );
+        } else {
+            n = count_valid_recipes( get_var( "EIPC_RECIPES" ) );
+            const_cast<item *>( this )->set_var( "EIPC_RECIPES_count", n );
+        }
+        ememory_return *= n;
     } else if( typeId() == itype_efile_photos ) {
         ememory_return *= total_photos();
     }
@@ -8954,12 +9018,7 @@ units::ememory item::ememory_size() const
 
 units::ememory item::occupied_ememory() const
 {
-    std::vector<const item *> all_efiles = efiles();
-    units::ememory total = 0_KB;
-    for( const item *i : all_efiles ) {
-        total += i->ememory_size();
-    }
-    return total;
+    return contents.occupied_ememory();
 }
 
 units::ememory item::total_ememory() const
@@ -9029,10 +9088,20 @@ const item *item::get_photo_gallery() const
 
 int item::total_photos() const
 {
-    std::vector<item::extended_photo_def> extended_photos;
-    read_extended_photos( extended_photos, "CAMERA_EXTENDED_PHOTOS", true );
-    read_extended_photos( extended_photos, "CAMERA_MONSTER_PHOTOS", true );
-    return extended_photos.size();
+    // Reading a cached count avoids reparsing the JSON blob in stacks_with.
+    const auto count_for = [this]( const std::string & var_name ) -> int {
+        const std::string count_var = var_name + "_count";
+        if( has_var( count_var ) )
+        {
+            return static_cast<int>( get_var( count_var, 0.0 ) );
+        }
+        std::vector<item::extended_photo_def> v;
+        read_extended_photos( v, var_name, true );
+        const int n = static_cast<int>( v.size() );
+        const_cast<item *>( this )->set_var( count_var, n );
+        return n;
+    };
+    return count_for( "CAMERA_EXTENDED_PHOTOS" ) + count_for( "CAMERA_MONSTER_PHOTOS" );
 }
 
 bool item::is_software() const
@@ -10969,7 +11038,11 @@ std::set<recipe_id> item::get_saved_recipes() const
 
 void item::set_saved_recipes( const std::set<recipe_id> &recipes )
 {
-    set_var( "EIPC_RECIPES", string_join( recipes, "," ) );
+    const std::string csv = string_join( recipes, "," );
+    set_var( "EIPC_RECIPES", csv );
+    // Compute from the persisted CSV so the cache reflects steady-state validity,
+    // not transient state like is_broken_on_active().
+    set_var( "EIPC_RECIPES_count", count_valid_recipes( csv ) );
 }
 
 void item::generate_recipes()
