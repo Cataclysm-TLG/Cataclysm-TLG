@@ -3391,15 +3391,15 @@ void monster::process_one_effect( effect &it, bool is_new )
         if( one_in( 20 ) ) {
             apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), rng( 1, 3 ) );
             if( !it.is_permanent() ) {
-            it.mod_duration( -2_minutes );
+                it.mod_duration( -2_minutes );
             }
         }
-    } else if( id == effect_badpoison  ) {
+    } else if( id == effect_badpoison ) {
         mod_speed_bonus( -15 );
         if( one_in( 20 ) ) {
             apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), rng( 2, 4 ) );
             if( !it.is_permanent() ) {
-            it.mod_duration( -2_minutes );
+                it.mod_duration( -2_minutes );
             }
         }
     } else if( id == effect_run ) {

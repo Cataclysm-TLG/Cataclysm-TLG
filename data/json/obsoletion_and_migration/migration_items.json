@@ -4087,5 +4087,10 @@
     "type": "MIGRATION",
     "id": "xlkevlar",
     "replace": "ballistic_vest_concealable_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wash_kit",
+    "replace": "washboard"
   }
 ]

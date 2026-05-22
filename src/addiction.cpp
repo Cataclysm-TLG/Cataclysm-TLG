@@ -301,7 +301,7 @@ static bool opioid_effect( Character &u, addiction &add )
     }
 
     bool ret;
-    
+
     const int in = std::min( 20, add.intensity );
     int timer_int = std::min( in / 3, 3 );
 

@@ -1948,25 +1948,23 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
         }
     }
 
-    //Check for moving into/out of water
-    // Use map-based check for current location because `underwater` member
-    // always out-of-sync for monsters; was_water only affects messaging, not logic.
-    // This will remove tons of unnecessary msg.
+    // Check for moving into/out of water. Use map-based check for current location because
+    // the "underwater" member is always out-of-sync for monsters.
     bool was_water = is_likely_underwater( here );
     bool will_be_water =
         on_ground && (
-            // AQUATIC monsters always "swim under" the vehicles, while other swimming monsters are forced to surface
+            // AQUATIC monsters always swim under the vehicles, while other swimming monsters are forced to surface.
             has_flag( mon_flag_AQUATIC ) || ( can_submerge() && !here.veh_at( destination ) ) ||
             // If the destination terrain has SWIM_UNDER, swimmers should remain submerged there.
             ( swims() && here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) )
         ) && ( here.is_divable( destination ) ||
                here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) ||
-               // AQUATIC creatures stay submerged in any swimmable terrain (including shallow water)
+               // AQUATIC creatures stay submerged in any swimmable terrain (including shallow water).
                ( has_flag( mon_flag_AQUATIC ) &&
                  here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, destination ) ) );
 
     if( get_option<bool>( "LOG_MONSTER_MOVEMENT" ) ) {
-        // Birds and other flying creatures flying over the deep water terrain
+        // Birds and other flying creatures flying over the deep water terrain.
         Character &player_character = get_player_character();
         if( was_water && flies() && sees( here, player_character ) &&
             attitude_to( player_character ) == Attitude::HOSTILE ) {
@@ -1976,7 +1974,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
             }
         } else if( was_water && sees( here, player_character ) && !will_be_water &&
                    attitude_to( player_character ) == Attitude::HOSTILE ) {
-            // Use more dramatic messages for swimming monsters
+            // Use more dramatic messages for swimming monsters.
             add_msg_if_player_sees( *this, m_warning,
                                     //~ Message when a monster emerges from water
                                     //~ %1$s: monster name, %2$s: leaps/emerges, %3$s: terrain name

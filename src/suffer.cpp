@@ -492,7 +492,8 @@ void suffer::while_awake( Character &you, const int current_stim )
         you.rem_morale( morale_perm_pessimist );
     }
 
-    if( you.has_flag( json_flag_NYCTOPHOBIA ) && !you.has_effect( effect_took_xanax ) && !you.has_effect( effect_valium ) ) {
+    if( you.has_flag( json_flag_NYCTOPHOBIA ) && !you.has_effect( effect_took_xanax ) &&
+        !you.has_effect( effect_valium ) ) {
         suffer::from_nyctophobia( you );
     }
 
@@ -514,11 +515,16 @@ void suffer::while_awake( Character &you, const int current_stim )
     }
 
     if( you.has_trait( trait_JITTERY ) && !you.has_effect( effect_shakes ) ) {
-        if( ( you.get_effect_int( effect_caffeine_eff ) > 1 || you.has_effect( effect_cocaine ) || you.has_effect( effect_amphetamine_eff ) ) && !you.has_effect( effect_cig ) && !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) && one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
+        if( ( you.get_effect_int( effect_caffeine_eff ) > 1 || you.has_effect( effect_cocaine ) ||
+              you.has_effect( effect_amphetamine_eff ) ) && !you.has_effect( effect_cig ) &&
+            !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) &&
+            one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
             time_duration dur = 1_minutes * rng( 1, 30 );
             you.add_effect( effect_shakes, dur + 1_turns * current_stim );
-        } else if( ( !you.has_effect( effect_cig ) || one_in( 3 ) ) && !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) && ( you.get_hunger() > 80 || ( you.get_kcal_percent() < 0.9f &&
-                                                you.get_hunger() > ( 80 - ( 100 - you.get_kcal_percent() * 100 ) ) ) )  &&
+        } else if( ( !you.has_effect( effect_cig ) || one_in( 3 ) ) && !you.has_effect( effect_valium ) &&
+                   !you.has_effect( effect_took_xanax ) && ( you.get_hunger() > 80 ||
+                           ( you.get_kcal_percent() < 0.9f &&
+                             you.get_hunger() > ( 80 - ( 100 - you.get_kcal_percent() * 100 ) ) ) )  &&
                    one_in( to_turns<int>( 50_minutes ) - ( you.get_hunger() * 6 ) ) ) {
             time_duration dur = 1_minutes * rng( 1, 30 );
             you.add_effect( effect_shakes, dur );

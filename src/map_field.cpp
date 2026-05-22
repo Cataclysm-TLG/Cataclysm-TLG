@@ -1654,13 +1654,14 @@ void map::player_in_field( Character &you )
                 required_resist = 15;
             }
             if( you.get_env_resist( bodypart_id( "mouth" ) ) < rng( 1, required_resist ) &&
-              ( ( !you.has_trait( trait_POISRESIST ) && one_in( 8 - intensity ) ) ||
-               ( you.has_trait( trait_POISRESIST ) && one_in( 13 - intensity ) ) ) ) {
-                    if( one_in( 20 ) ) {
-                        you.add_msg_if_player( _( "The gas burns horribly as you breathe it in!" ) );
-                    }
-                    you.cough( true, true );
-                    you.deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_pure, rng( 1, intensity ) ) );
+                ( ( !you.has_trait( trait_POISRESIST ) && one_in( 8 - intensity ) ) ||
+                  ( you.has_trait( trait_POISRESIST ) && one_in( 13 - intensity ) ) ) ) {
+                if( one_in( 20 ) ) {
+                    you.add_msg_if_player( _( "The gas burns horribly as you breathe it in!" ) );
+                }
+                you.cough( true, true );
+                you.deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_pure, rng( 1,
+                                 intensity ) ) );
             }
         }
 
@@ -2117,7 +2118,8 @@ void map::monster_in_field( monster &z )
             }
         }
         if( cur_field_type == fd_toxic_gas ) {
-            if( !z.has_flag( mon_flag_NO_BREATHE ) && !z.type->in_species( species_FUNGUS ) && !z.type->in_species( species_MIGO ) && !z.made_of( material_vegetable ) ) {
+            if( !z.has_flag( mon_flag_NO_BREATHE ) && !z.type->in_species( species_FUNGUS ) &&
+                !z.type->in_species( species_MIGO ) && !z.made_of( material_vegetable ) ) {
                 const int intensity = cur.get_field_intensity();
                 if( one_in( 5 - intensity ) ) {
                     dam += rng( 1, ( 10 - size_factor ) * intensity );

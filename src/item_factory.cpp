@@ -2124,8 +2124,6 @@ void Item_factory::init()
     add_iuse( "VIEW_RECIPES", &iuse::view_recipes );
     add_iuse( "HAND_CRANK", &iuse::hand_crank );
     add_iuse( "VORTEX", &iuse::vortex );
-    add_iuse( "WASH_SOFT_ITEMS", &iuse::wash_soft_items );
-    add_iuse( "WASH_HARD_ITEMS", &iuse::wash_hard_items );
     add_iuse( "WASH_ALL_ITEMS", &iuse::wash_all_items );
     add_iuse( "HEAT_LIQUID_ITEMS", &iuse::heat_liquid_items );
     add_iuse( "HEAT_SOLID_ITEMS", &iuse::heat_solid_items );
