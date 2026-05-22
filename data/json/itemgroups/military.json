@@ -806,7 +806,7 @@
       { "group": "guns_rifle_milspec", "prob": 10 },
       { "item": "human_flesh", "prob": 4, "count": [ 1, 10 ] },
       { "item": "bone_human", "prob": 10, "count": [ 1, 5 ] },
-      { "item": "cotton_patch", "prob": 10, "count": [ 1, 10 ], "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 10, "count": [ 1, 6 ], "custom-flags": [ "FILTHY" ] },
       { "item": "sheet_metal", "prob": 22 },
       { "item": "seat", "prob": 4 },
       { "item": "chain", "prob": 20 },
