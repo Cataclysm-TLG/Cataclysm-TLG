@@ -104,8 +104,8 @@ static bool alcohol_add( Character &u, int in )
         if( !u.has_effect( effect_withdrawal_alcohol_detoxed ) &&
             ( !u.has_effect( effect_withdrawal_alcohol_timer ) ) ) {
             u.add_effect( effect_withdrawal_alcohol_timer, 24_hours * timer_int, false, timer_int );
+            ret = true;
         }
-        ret = true;
     }
 
     // If you're not drunk, you want to be.
@@ -218,8 +218,8 @@ static bool nicotine_effect( Character &u, addiction &add )
         if( !u.has_effect( effect_withdrawal_nicotine_detoxed ) &&
             ( !u.has_effect( effect_withdrawal_nicotine_timer ) ) ) {
             u.add_effect( effect_withdrawal_nicotine_timer, 32_hours * timer_int, false, timer_int );
+            ret = true;
         }
-        ret = true;
     }
 
     if( x_in_y( in, 60 ) && ( !u.in_sleep_state() || calendar::turn - last_dream > 3_hours ) ) {
@@ -309,8 +309,8 @@ static bool opioid_effect( Character &u, addiction &add )
         if( !u.has_effect( effect_withdrawal_opioid_detoxed ) &&
             ( !u.has_effect( effect_withdrawal_opioid_timer ) ) ) {
             u.add_effect( effect_withdrawal_opioid_timer, 48_hours * timer_int, false, timer_int );
+            ret = true;
         }
-        ret = true;
     }
     static time_point last_dream = calendar::turn_zero;
     if( u.get_pain() < in * 2 ) {
