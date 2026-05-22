@@ -744,7 +744,7 @@
   {
     "id": "ACT_WASH",
     "type": "activity_type",
-    "activity_level": "MODERATE_EXERCISE",
+    "activity_level": "ACTIVE_EXERCISE",
     "verb": "washing",
     "rooted": true,
     "based_on": "speed"

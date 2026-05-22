@@ -2750,5 +2750,15 @@
     "id": "SNOWWALKING",
     "type": "json_flag",
     "info": "Your movement is not slowed regardless of snow depth."
+  },
+  {
+    "id": "WASH_SOFT",
+    "type": "json_flag",
+    "info": "This item makes it easier to wash soft things like clothing with soap and water."
+  },
+  {
+    "id": "WASH_HARD",
+    "type": "json_flag",
+    "info": "This item makes it easier to wash rigid items using soap and water."
   }
 ]

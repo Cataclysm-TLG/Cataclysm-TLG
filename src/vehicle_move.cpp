@@ -2321,9 +2321,9 @@ float map::vehicle_wheel_traction( const vehicle &veh, bool ignore_movement_modi
         // Reduce traction contribution on thick ice
         constexpr float THICK_ICE_TRACTION_FACTOR = 0.3f;
         if( tr.has_flag( ter_furn_flag::TFLAG_THICK_ICE ) ) {
-            traction_wheel_area += 2.0 * vp.contact_area() / move_mod * THICK_ICE_TRACTION_FACTOR;
+            traction_wheel_area += 2.0 * vpi.wheel_info->contact_area / move_mod * THICK_ICE_TRACTION_FACTOR;
         } else {
-            traction_wheel_area += 2.0 * vp.contact_area() / move_mod;
+            traction_wheel_area += 2.0 * vpi.wheel_info->contact_area / move_mod;
         }
     }
 

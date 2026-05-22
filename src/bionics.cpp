@@ -822,7 +822,7 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
             if( tmparmor.has_flag( flag_INTEGRATED ) ) {
                 ret_val<void> result = get_player_character().worn.check_rigid_conflicts( tmparmor );
                 if( can_wear( tmparmor ).success() && result.success() ) {
-                        wear_item( tmparmor, false );
+                    wear_item( tmparmor, false );
                 } else {
                     add_msg_if_player( m_info,
                                        _( "You are unable to engage your %s." ), bio.info().name );

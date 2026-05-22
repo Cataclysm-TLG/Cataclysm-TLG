@@ -2190,19 +2190,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "result": "wash_kit",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "survival",
-    "reversible": true,
-    "time": "1 s",
-    "autolearn": true,
-    "components": [ [ [ "washboard", 1 ] ], [ [ "sponge", 1 ], [ "cotton_patch", 1 ], [ "brush", 1 ], [ "dish_towel", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
-  },
-  {
-    "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "result": "chain_link",
     "id_suffix": "fabrication",

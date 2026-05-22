@@ -685,7 +685,8 @@ static void eff_fun_teleglow( Character &u, effect &it )
     }
     if( dur > 4_hours ) {
         // 8 teleports
-        if( one_turn_in( 1000_minutes - dur ) && !u.has_effect( effect_valium ) && !u.has_effect( effect_took_xanax ) ) {
+        if( one_turn_in( 1000_minutes - dur ) && !u.has_effect( effect_valium ) &&
+            !u.has_effect( effect_took_xanax ) ) {
             u.add_effect( effect_shakes, rng( 4_minutes, 8_minutes ) );
         }
         if( one_turn_in( 1200_minutes - dur ) ) {
@@ -1663,7 +1664,8 @@ void Character::hardcoded_effects( effect &it )
             /* fallthrough */
             case 2:
                 // Myoclonic seizure (muscle spasm)
-                if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
+                if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) &&
+                    !has_effect( effect_took_xanax ) ) {
                     std::string limb = random_entry<std::vector<std::string>>( {
                         translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
                     } );
@@ -1693,7 +1695,8 @@ void Character::hardcoded_effects( effect &it )
                     }
                 }
                 // Atonic seizure (a.k.a. drop seizure)
-                if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
+                if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) &&
+                    !has_effect( effect_took_xanax ) ) {
                     add_msg_if_player( m_bad,
                                        _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
                     schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );

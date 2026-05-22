@@ -5805,7 +5805,8 @@ void Character::check_needs_extremes()
             get_event_bus().send<event_type::dies_of_thirst>( getID() );
             set_part_hp_cur( body_part_torso, 0 );
         } else if( get_thirst() >= 1000 && calendar::once_every( 30_minutes ) ) {
-            add_msg_if_player( m_warning, _( "You need water badly.  It's hard to think about anything else." ) );
+            add_msg_if_player( m_warning,
+                               _( "You need water badly.  It's hard to think about anything else." ) );
         } else if( get_thirst() >= 800 && calendar::once_every( 30_minutes ) ) {
             add_msg_if_player( m_warning, _( "You are THIRSTY!" ) );
         } else if( calendar::once_every( 30_minutes ) ) {

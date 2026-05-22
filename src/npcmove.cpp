@@ -1845,7 +1845,7 @@ void npc::execute_action( npc_action action )
                     /* NPCs check can_sleep() for hard blockers but fall asleep
                        directly on success. The lying_down -> can_sleep() rng
                        retry cycle is for the player who gets "you try to sleep
-                       but can't" feedback. Without direct fall_asleep(), NPC 
+                       but can't" feedback. Without direct fall_asleep(), NPC
                        fatigue keeps incrementing while they lie awake
                        (recovery only runs while asleep). */
                     if( !is_avatar() && can_sleep() ) {

@@ -334,7 +334,7 @@ bool mon_spellcasting_actor::call( monster &mon ) const
     spell_instance.set_message( spell_data.trigger_message );
 
     if( !spell_data.self && !allow_no_target ) {
-        Creature *tgt_creature = get_creature_tracker().creature_at( target );
+        Creature *tgt_creature = get_creature_tracker().creature_at( target_pos );
         if( tgt_creature && mon.is_underwater() && !tgt_creature->is_underwater() &&
             get_map().has_flag_ter_or_furn( ter_furn_flag::TFLAG_SWIM_UNDER, mon.pos_bub() ) ) {
             return false;
@@ -342,7 +342,7 @@ bool mon_spellcasting_actor::call( monster &mon ) const
     }
 
     // Bail out if the target is out of range.
-    if( !spell_data.self && trig_dist( mon.pos_bub(), target ) > spell_instance.range( mon ) ) {
+    if( !spell_data.self && trig_dist( mon.pos_bub(), target_pos ) > spell_instance.range( mon ) ) {
         return false;
     }
 

@@ -334,7 +334,8 @@
     "weight": "10 g",
     "ammo_type": "soap",
     "count": 10,
-    "stack_size": 10
+    "stack_size": 10,
+    "use_action": [ "WASH_ALL_ITEMS" ]
   },
   {
     "type": "ITEM",
@@ -1279,7 +1280,7 @@
     "category": "spare_parts",
     "price": "1 USD 50 cent",
     "price_postapoc": "50 cent",
-    "name": { "str": "chain link" },
+    "name": { "str": "chainmail link" },
     "symbol": "=",
     "color": "light_gray",
     "description": "A set of small metal rings, suitable for constructing chainmail.",
