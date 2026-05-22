@@ -154,7 +154,7 @@ bool leap_actor::call( monster &z ) const
     std::vector<tripoint_bub_ms> options;
     const tripoint_abs_ms target_abs = z.get_dest();
     // Calculate distance to target
-    const float best_float = rl_dist( z.pos_abs(), target_abs );
+    const float best_float = trig_dist( z.pos_abs(), target_abs );
     add_msg_debug( debugmode::DF_MATTACK, "Target distance %.1f", best_float );
     if( best_float < min_consider_range || best_float > max_consider_range ) {
         add_msg_debug( debugmode::DF_MATTACK, "Best float outside of considered range" );
@@ -332,23 +332,6 @@ bool mon_spellcasting_actor::call( monster &mon ) const
 
     spell spell_instance = spell_data.get_spell( mon );
     spell_instance.set_message( spell_data.trigger_message );
-<<<<<<< HEAD
-    if( !spell_data.self && target ) {
-        // Bail out if the target is out of range.
-        if( mon.pos_bub().z() == target->pos_bub().z() ) {
-            if( !spell_data.self && target &&
-                trig_dist( mon.pos_bub(), target_pos ) > spell_instance.range( mon ) ) {
-                return false;
-            }
-        } else {
-            // Round up to ensure Z levels count properly as 2.
-            if( !spell_data.self && target &&
-                static_cast<int>( std::ceil( trig_dist_precise( mon.pos_bub(),
-                                             target_pos ) ) ) > spell_instance.range( mon ) ) {
-                return false;
-            }
-        }
-=======
 
     if( !spell_data.self && !allow_no_target ) {
         Creature *tgt_creature = get_creature_tracker().creature_at( target );
@@ -359,9 +342,8 @@ bool mon_spellcasting_actor::call( monster &mon ) const
     }
 
     // Bail out if the target is out of range.
-    if( !spell_data.self && rl_dist( mon.pos_bub(), target ) > spell_instance.range( mon ) ) {
+    if( !spell_data.self && trig_dist( mon.pos_bub(), target ) > spell_instance.range( mon ) ) {
         return false;
->>>>>>> Fix monster attacking through terrain with TFLAG_SWIM_UNDER (#86390)
     }
 
     std::string target_name;
@@ -602,7 +584,7 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
     if( grab_data.pull_chance > -1 && x_in_y( grab_data.pull_chance, 100 ) ) {
         add_msg_debug( debugmode::DF_MATTACK, "Pull chance roll succeeded" );
 
-        int pull_range = std::min( range, rl_dist( monster_pos, target_pos ) + 1 );
+        int pull_range = std::min( range, trig_dist( monster_pos, target_pos ) + 1 );
         tripoint_bub_ms pt = target_pos;
         while( pull_range > 0 ) {
             // Recalculate the ray each step
@@ -1303,16 +1285,12 @@ bool gun_actor::call( monster &z ) const
         }
     }
 
-<<<<<<< HEAD
-    const int dist = trig_dist( z.pos_bub(), aim_at );
-=======
     if( target && z.is_underwater() && !target->is_underwater() &&
         here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_SWIM_UNDER, z.pos_bub() ) ) {
         return false;
     }
 
-    const int dist = rl_dist( z.pos_bub(), aim_at );
->>>>>>> Fix monster attacking through terrain with TFLAG_SWIM_UNDER (#86390)
+    const int dist = trig_dist( z.pos_bub(), aim_at );
     if( target ) {
         add_msg_debug( debugmode::DF_MATTACK, "Target %s at range %d", target->disp_name(), dist );
     } else {
