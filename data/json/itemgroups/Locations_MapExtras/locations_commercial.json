@@ -1931,7 +1931,6 @@
       [ "hacksaw", 5 ],
       [ "gloves_rubber", 25 ],
       [ "apron_plastic", 15 ],
-      { "item": "cotton_patch", "prob": 10, "custom-flags": [ "FILTHY" ] },
       [ "bag_plastic", 20 ],
       [ "string_6", 5 ]
     ]
@@ -1950,8 +1949,7 @@
       [ "towel", 20 ],
       { "item": "soap", "prob": 10, "charges": [ 1, 10 ] },
       [ "gloves_medical", 20 ],
-      [ "cotton_patch", 15 ],
-      { "item": "cotton_patch", "prob": 2, "custom-flags": [ "FILTHY" ] },
+      [ "bandages", 15 ],
       [ "bag_plastic", 20 ],
       [ "jerky", 40 ]
     ]

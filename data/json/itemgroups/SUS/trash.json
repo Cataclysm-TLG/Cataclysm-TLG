@@ -15,7 +15,6 @@
     "//2": "This group is for small amount of trash on the floor of a building",
     "items": [
       { "group": "SUS_trash_glass", "prob": 10, "count": [ 1, 2 ] },
-      { "//": "Containers" },
       { "item": "wrapper", "prob": 10, "count": [ 1, 2 ] },
       { "item": "wrapper_foil", "prob": 10, "count": [ 1, 2 ] },
       { "item": "wrapper_foil_roll", "prob": 2 },
@@ -34,7 +33,6 @@
       { "item": "box_cigarette", "prob": 10 },
       { "item": "bag_paper_powder", "prob": 5 },
       { "item": "bottle_glass_seasoning", "prob": 1 },
-      { "//": "Loose items" },
       { "item": "bubblewrap", "prob": 5 },
       { "item": "wire", "prob": 1 },
       { "item": "string_6", "prob": 5, "count": [ 1, 2 ] },
@@ -55,9 +53,8 @@
       { "item": "splinter", "prob": 5, "count": [ 3, 6 ] },
       { "item": "scrap", "prob": 5 },
       { "item": "ceramic_shard", "prob": 5, "count": [ 1, 2 ] },
-      { "item": "cotton_patch", "prob": 5, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 5, "custom-flags": [ "FILTHY" ] },
       { "item": "cig_butt", "prob": 10, "count": [ 1, 5 ] },
-      { "//": "Lore items" },
       { "group": "SUS_book_nonf_zine_news", "prob": 5 },
       { "item": "flyer", "prob": 5 }
     ]
@@ -114,7 +111,7 @@
       { "item": "splinter", "prob": 20, "count": [ 5, 20 ] },
       { "item": "scrap", "prob": 20, "count": [ 1, 2 ] },
       { "item": "ceramic_shard", "prob": 20, "count": [ 2, 4 ] },
-      { "item": "cotton_patch", "prob": 20, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 10, "custom-flags": [ "FILTHY" ] },
       { "item": "cig_butt", "prob": 20, "count": [ 3, 6 ] },
       { "//": "Lore items" },
       { "group": "SUS_book_nonf_zine_news", "prob": 20 },

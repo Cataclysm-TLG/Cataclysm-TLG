@@ -31,11 +31,11 @@
     "type": "item_group",
     "subtype": "collection",
     "items": [
-      { "prob": 50, "group": "iodine_bottle_plastic_pill_supplement_10" },
-      { "prob": 75, "group": "prussian_blue_bottle_plastic_pill_supplement_10" },
+      { "prob": 50, "group": "iodine_bottle_plastic_pill_supplement_1_10" },
+      { "prob": 75, "group": "prussian_blue_bottle_plastic_pill_supplement_1_10" },
       { "group": "full_1st_aid", "prob": 30 },
       { "item": "gloves_medical", "prob": 20 },
-      { "item": "cotton_patch", "prob": 30, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages" },
       { "group": "drugs_emergency", "prob": 30 },
       { "group": "drugs_heal_simple", "prob": 20 },
       { "group": "drugs_analgesic", "prob": 10 }

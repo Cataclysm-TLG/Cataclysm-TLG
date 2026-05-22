@@ -29,8 +29,9 @@
     "subtype": "collection",
     "id": "mon_zombie_hulk_death_drops",
     "entries": [
+      { "item": "cotton_sheet", "damage": [ -1, 5 ], "count": [ 0, 1 ] },
       { "item": "cotton_patch", "damage": [ -1, 5 ], "count": [ 1, 4 ] },
-      { "group": "pants", "damage": [ -1, 5 ] },
+      { "group": "pants", "damage": [ 4, 5 ] },
       { "group": "default_zombie_items" },
       { "group": "wallets", "damage": [ -1, 5 ] }
     ]
@@ -86,9 +87,10 @@
     "id": "mon_zombie_thorny_death_drops",
     "subtype": "collection",
     "entries": [
+      { "item": "cotton_sheet", "damage": [ -1, 5 ], "count": [ 0, 1 ] },
       { "item": "cotton_patch", "damage": [ -1, 5 ], "count": [ 1, 4 ] },
-      { "group": "pants", "damage": [ -1, 5 ] },
-      { "group": "shoes", "damage": [ -1, 5 ] },
+      { "group": "pants", "damage": [ 3, 5 ] },
+      { "group": "shoes", "damage": [ 1, 5 ] },
       { "group": "default_zombie_items" },
       { "group": "wallets", "damage": [ -1, 5 ], "prob": 10 },
       { "item": "fighter_sting", "prob": 60 }
