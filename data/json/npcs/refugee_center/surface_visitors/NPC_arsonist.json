@@ -181,9 +181,7 @@
     "type": "talk_topic",
     "id": "TALK_ARSONIST_DOING",
     "dynamic_line": "I burn down buildings and sell the materials.  Nails, rebar, wire, whatever metal I can pull out of the ashes.",
-    "responses": [
-      { "text": "I'll buy.", "effect": "start_trade", "topic": "TALK_ARSONIST" }
-    ]
+    "responses": [ { "text": "I'll buy.", "effect": "start_trade", "topic": "TALK_ARSONIST" } ]
   },
   {
     "id": "MISSION_ARSONIST_1_AMMONIUM_NITRATE",

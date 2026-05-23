@@ -34,16 +34,190 @@
       "palettes": [ "lodge_palette" ],
       "place_monsters": [
         { "monster": "GROUP_ZOMBIE", "x": 29, "y": 4 },
+        { "monster": "GROUP_FERAL", "x": 29, "y": 5 },
         { "monster": "GROUP_ZOMBIE", "x": 29, "y": 11 },
+        { "monster": "GROUP_ROACH", "x": 21, "y": 11, "chance": 40 },
+        { "monster": "GROUP_ROACH", "x": 22, "y": 11, "chance": 40 },
+        { "monster": "GROUP_ROACH", "x": 23, "y": 11, "chance": 40 },
+        { "monster": "GROUP_ZOMBIE", "x": 13, "y": 4, "chance": 60 },
         { "monster": "GROUP_ZOMBIE", "x": 16, "y": 4 }
+      ],
+      "place_monster": [
+        { "monster": "mon_feral_militia", "x": 29, "y": 1, "chance": 10 },
+        { "monster": "mon_feral_militia", "x": 29, "y": 2, "chance": 5 },
+        { "monster": "mon_zombie_dog", "x": 15, "y": 4 },
+        { "monster": "mon_zombie_dog", "x": 14, "y": 4, "chance": 40 }
       ],
       "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 16, 17 ], "y": [ 2, 3 ] } ],
       "place_nested": [
         {
-          "chunks": [ [ "lodge_pantry_15x15", 80 ], [ "lodge_cannibal_15x15", 20 ], [ "lodge_hunting_15x15", 50 ] ],
+          "chunks": [ [ "lodge_pantry_15x15", 50 ], [ "lodge_hunting_15x15", 20 ], [ "lodge_empty_15x15", 30 ] ],
           "x": 8,
           "y": 9
         }
+      ],
+      "set": [
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 0, 23 ], "repeat": [ 0, 30 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 0, 23 ], "repeat": [ 0, 30 ] },
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 24, 47 ], "repeat": [ 0, 30 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 24, 47 ], "repeat": [ 0, 30 ] }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "lodge_ground_feral1", "lodge_ground_feral2" ] ],
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_floor",
+      "rows": [
+        ".%##W###W###W###W###+##W#################%......",
+        ".*#c B#c B#B c#B c#  #h s#a            >#*......",
+        ".*Wd B#d B#B d#B d#  #h T#^   a ZZZ OC  W*......",
+        ".*##=###=###=###=##  ##=##a   a ZZZ OC  #*......",
+        ".*#                           a ZZZ OC  #*......",
+        ".*W                                     W*......",
+        ".*#    YY   YY  AAAAAAAA  ata ^        >#*......",
+        ".%########+########################   ###*......",
+        "ooooooooooGGGGGGG~~~~~~~~~~~~~~~~~#   #%**......",
+        "ooooooooooooooooG~~~~~%############   #*........",
+        "ooooooooooooooooG~~~~~*w              #*........",
+        "ooooooooooooooooG~~~~~*#Y   c c c     w*........",
+        "ooooooooooooooooGGGGGGG+    ttttt    bw*........",
+        "ooooooooooooooooGGGGGGG+    ttttt    bw*........",
+        "oooooooooooooooo~~~~~G*#Y   c c c     w*........",
+        "oooooooooooooooo~~~~~G*w              w*........",
+        "oooooooooooooooo~~~~~G*#####   ########*........",
+        "oooooooooooooooo~~~~~G***#<#   #********........",
+        "oooooooooooooooo%~~~~GGGG+ #   #%****...........",
+        "......*###-###-###-#########   #####*...........",
+        ".....0*#UU URU URU URU #12C     5 é#*...........",
+        ".....0*#R              z      C   uW*...........",
+        ".....0*#UU URU URU URU #3CC&  4CVuF#*...........",
+        "......%###-###-###-##########+######%..........."
+      ],
+      "palettes": [ "lodge_palette" ],
+      "place_monsters": [
+        { "monster": "GROUP_FERAL", "x": 28, "y": 4 },
+        { "monster": "GROUP_FERAL", "x": 27, "y": 4, "chance": 50 },
+        { "monster": "GROUP_FERAL", "x": 26, "y": 4, "chance": 50 },
+        { "monster": "GROUP_FERAL", "x": 25, "y": 4, "chance": 30 }
+      ],
+      "place_monster": [
+        { "monster": "mon_feral_militia", "x": 29, "y": 4 },
+        { "monster": "mon_feral_survivalist", "x": 29, "y": 11 },
+        { "monster": "mon_feral_militia", "x": 16, "y": 4 },
+        { "monster": "mon_feral_pyromaniac", "x": 16, "y": 4, "chance": 10 }
+      ],
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 16, 17 ], "y": [ 2, 3 ] } ],
+      "place_nested": [ { "chunks": [ [ "lodge_cannibal_15x15", 80 ], [ "lodge_empty_15x15", 20 ] ], "x": 8, "y": 9 } ],
+      "set": [
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 0, 23 ], "repeat": [ 0, 10 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 0, 23 ], "repeat": [ 0, 10 ] },
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 24, 47 ], "repeat": [ 0, 10 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 24, 47 ], "repeat": [ 0, 10 ] },
+        { "point": "trap", "id": "tr_shotgun_1", "x": 24, "y": 13, "chance": 80 }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "lodge_ground_spider1", "lodge_ground_spider2" ] ],
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_floor",
+      "rows": [
+        ".%##W###W###W###W###+##W#################%......",
+        ".*#c B#c B#B c#B c#  #h s#a            >#*......",
+        ".*Wd B#d B#B d#B d#  #h T#^   a ZZZ OC  W*......",
+        ".*##=###=###=###=##  ##=##a   a ZZZ OC  #*......",
+        ".*#                                     #*......",
+        ".*W                                     W*......",
+        ".*#    YY   YY  AAAAAAAA  ata ^        >#*......",
+        ".%########+########################   ###*......",
+        "ooooooooooGGGGGGG~~~~~~~~~~~~~~~~~#   #%**......",
+        "ooooooooooooooooG~~~~~%############   #*........",
+        "ooooooooooooooooG~~~~~*w              #*........",
+        "ooooooooooooooooG~~~~~*#Y             w*........",
+        "ooooooooooooooooGGGGGGG+             bw*........",
+        "ooooooooooooooooGGGGGGG+             bw*........",
+        "oooooooooooooooo~~~~~G*#Y             w*........",
+        "oooooooooooooooo~~~~~G*w              w*........",
+        "oooooooooooooooo~~~~~G*#####   ########*........",
+        "oooooooooooooooo~~~~~G***#<#   #********........",
+        "oooooooooooooooo%~~~~GGGG+ #   #%****...........",
+        "......*###-###-###-#########   #####*...........",
+        ".....0*#UU URU URU URU #12C     5 é#*...........",
+        ".....0*#R              z      C   uW*...........",
+        ".....0*#UU URU URU URU #3CC&  4CVuF#*...........",
+        "......%###-###-###-##########+######%..........."
+      ],
+      "palettes": [ "lodge_empty_palette" ],
+      "place_monsters": [
+        { "monster": "GROUP_SPIDER_WIDOW", "x": 29, "y": 4 },
+        { "monster": "GROUP_SPIDER_WIDOW", "x": 28, "y": 4 },
+        { "monster": "GROUP_SPIDER_WIDOW", "x": 27, "y": 4, "chance": 50 },
+        { "monster": "GROUP_SPIDER_WIDOW", "x": 26, "y": 4, "chance": 50 },
+        { "monster": "GROUP_SPIDER_WIDOW", "x": 25, "y": 4, "chance": 30 },
+        { "monster": "GROUP_SPIDER_WIDOW", "x": 29, "y": 11 },
+        { "monster": "GROUP_SPIDER_WIDOW", "x": 16, "y": 4 },
+        { "monster": "GROUP_SPIDER_WIDOW", "x": 16, "y": 4, "chance": 10 }
+      ],
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 16, 17 ], "y": [ 2, 3 ] } ],
+      "place_nested": [ { "chunks": [ "lodge_empty_15x15" ], "x": 8, "y": 9 } ],
+      "set": [
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 0, 23 ], "repeat": [ 0, 50 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 0, 23 ], "repeat": [ 0, 50 ] },
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 24, 47 ], "repeat": [ 0, 50 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 24, 47 ], "repeat": [ 0, 50 ] }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "lodge_ground_empty1", "lodge_ground_empty2" ] ],
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_floor",
+      "rows": [
+        ".%##W###W###W###W###+##W#################%......",
+        ".*#c B#c B#B c#B c#  #h s#a            >#*......",
+        ".*Wd B#d B#B d#B d#  #h T#^   a ZZZ OC  W*......",
+        ".*##=###=###=###=##  ##=##a   a ZZZ OC  #*......",
+        ".*#                                     #*......",
+        ".*W                                     W*......",
+        ".*#    YY   YY  AAAAAAAA  ata ^        >#*......",
+        ".%########+########################   ###*......",
+        "ooooooooooGGGGGGG~~~~~~~~~~~~~~~~~#   #%**......",
+        "ooooooooooooooooG~~~~~%############   #*........",
+        "ooooooooooooooooG~~~~~*w              #*........",
+        "ooooooooooooooooG~~~~~*#Y             w*........",
+        "ooooooooooooooooGGGGGGG+             bw*........",
+        "ooooooooooooooooGGGGGGG+             bw*........",
+        "oooooooooooooooo~~~~~G*#Y             w*........",
+        "oooooooooooooooo~~~~~G*w              w*........",
+        "oooooooooooooooo~~~~~G*#####   ########*........",
+        "oooooooooooooooo~~~~~G***#<#   #********........",
+        "oooooooooooooooo%~~~~GGGG+ #   #%****...........",
+        "......*###-###-###-#########   #####*...........",
+        ".....0*#UU URU URU URU #12C     5 é#*...........",
+        ".....0*#R              z      C   uW*...........",
+        ".....0*#UU URU URU URU #3CC&  4CVuF#*...........",
+        "......%###-###-###-##########+######%..........."
+      ],
+      "palettes": [ "lodge_empty_palette" ],
+      "place_monster": [
+        { "monster": "mon_rat", "x": 29, "y": 4 },
+        { "monster": "mon_rat", "x": 25, "y": 4, "chance": 30 },
+        { "monster": "mon_rat", "x": 16, "y": 4 }
+      ],
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 16, 17 ], "y": [ 2, 3 ] } ],
+      "place_nested": [ { "chunks": [ "lodge_empty_15x15" ], "x": 8, "y": 9 } ],
+      "set": [
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 0, 23 ], "repeat": [ 0, 40 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 0, 23 ], "repeat": [ 0, 40 ] },
+        { "point": "bash", "x": [ 1, 23 ], "y": [ 24, 47 ], "repeat": [ 0, 40 ] },
+        { "point": "bash", "x": [ 24, 47 ], "y": [ 24, 47 ], "repeat": [ 0, 40 ] }
       ]
     }
   },
@@ -119,11 +293,11 @@
       ],
       "palettes": [ "lodge_2ndfloor_palette" ],
       "place_items": [
-        { "item": "roof_trash", "x": [ 35, 37 ], "y": [ 8, 9 ], "chance": 50, "repeat": [ 1, 3 ] },
-        { "item": "roof_trash", "x": [ 24, 37 ], "y": [ 10, 15 ], "chance": 50, "repeat": [ 1, 3 ] },
-        { "item": "roof_trash", "x": [ 26, 30 ], "y": [ 16, 19 ], "chance": 50, "repeat": [ 1, 3 ] },
-        { "item": "roof_trash", "x": [ 8, 23 ], "y": [ 20, 22 ], "chance": 50, "repeat": [ 1, 3 ] },
-        { "item": "roof_trash", "x": [ 24, 34 ], "y": [ 20, 22 ], "chance": 50, "repeat": [ 1, 3 ] }
+        { "item": "roof_trash", "x": [ 35, 37 ], "y": [ 8, 9 ], "chance": 30, "repeat": [ 1, 3 ] },
+        { "item": "roof_trash", "x": [ 24, 37 ], "y": [ 10, 15 ], "chance": 30, "repeat": [ 1, 3 ] },
+        { "item": "roof_trash", "x": [ 26, 30 ], "y": [ 16, 19 ], "chance": 30, "repeat": [ 1, 3 ] },
+        { "item": "roof_trash", "x": [ 8, 23 ], "y": [ 20, 22 ], "chance": 30, "repeat": [ 1, 3 ] },
+        { "item": "roof_trash", "x": [ 24, 34 ], "y": [ 20, 22 ], "chance": 30, "repeat": [ 1, 3 ] }
       ],
       "place_nested": [
         {
@@ -137,6 +311,58 @@
           "x": [ 24, 34 ],
           "y": [ 10, 12 ]
         }
+      ],
+      "place_monster": [
+        { "group": "GROUP_ROOF_ANIMAL", "x": [ 35, 37 ], "y": [ 8, 9 ], "repeat": [ 1, 2 ], "chance": 4 },
+        { "group": "GROUP_ROOF_ANIMAL", "x": [ 26, 30 ], "y": [ 16, 19 ], "repeat": [ 1, 2 ], "chance": 4 },
+        { "group": "GROUP_ROOF_ANIMAL", "x": [ 8, 23 ], "y": [ 20, 22 ], "repeat": [ 1, 2 ], "chance": 4 }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "lodge_2ndfloor_empty1", "lodge_2ndfloor_empty2" ] ],
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_open_air",
+      "rows": [
+        " %##W###W###W###W###w##W#################%      ",
+        "  #hh_________DD____/__________________<#       ",
+        "  Whh__///_________/_/____OOOOO_ZZZ_____W       ",
+        "  #____/_/________/___/___O_____ZZZ_///D#       ",
+        "  #__O_///O________/___/________ZZZ_/_/D#       ",
+        "  W__OOOOOO_________/_/____hhh______///_W       ",
+        "  #_________éFF______/_____hhh_________<#       ",
+        " %########w#######wwww#############www###       ",
+        "                                  -...%         ",
+        "                       5-----------...-         ",
+        "                       -..............-         ",
+        "                       -..............-         ",
+        "                       -..............-         ",
+        "                       -..............-         ",
+        "                       -..............-         ",
+        "                       -..............-         ",
+        "                       ---.....--------         ",
+        "                         -.....-                ",
+        "                         -.....-                ",
+        "       ---------5---------.....5----            ",
+        "       -...........................-            ",
+        "       -...........................-            ",
+        "       -........................=..-            ",
+        "       5---------------------------5            "
+      ],
+      "palettes": [ "lodge_2ndfloor_empty_palette" ],
+      "place_items": [
+        { "item": "roof_trash", "x": [ 35, 37 ], "y": [ 8, 9 ], "chance": 30, "repeat": [ 1, 3 ] },
+        { "item": "roof_trash", "x": [ 24, 37 ], "y": [ 10, 15 ], "chance": 30, "repeat": [ 1, 3 ] },
+        { "item": "roof_trash", "x": [ 26, 30 ], "y": [ 16, 19 ], "chance": 30, "repeat": [ 1, 3 ] },
+        { "item": "roof_trash", "x": [ 8, 23 ], "y": [ 20, 22 ], "chance": 30, "repeat": [ 1, 3 ] },
+        { "item": "roof_trash", "x": [ 24, 34 ], "y": [ 20, 22 ], "chance": 30, "repeat": [ 1, 3 ] }
+      ],
+      "place_monster": [
+        { "group": "GROUP_ROOF_ANIMAL", "x": [ 35, 37 ], "y": [ 8, 9 ], "repeat": [ 1, 2 ], "chance": 8 },
+        { "group": "GROUP_ROOF_ANIMAL", "x": [ 26, 30 ], "y": [ 16, 19 ], "repeat": [ 1, 2 ], "chance": 8 },
+        { "group": "GROUP_ROOF_ANIMAL", "x": [ 8, 23 ], "y": [ 20, 22 ], "repeat": [ 1, 2 ], "chance": 8 }
       ]
     }
   },
@@ -217,10 +443,11 @@
       "place_monsters": [
         { "monster": "GROUP_ZOMBIE", "x": 7, "y": 4 },
         { "monster": "GROUP_ZOMBIE", "x": 38, "y": 4 },
+        { "monster": "GROUP_FERAL", "x": 38, "y": 6 },
         { "monster": "GROUP_ZOMBIE", "x": 38, "y": 7 }
       ],
       "place_nested": [
-        { "chunks": [ [ "lodge_game_6x6", 80 ], [ "lodge_dungeon_6x6", 20 ], [ "lodge_drug_6x6", 50 ] ], "x": 2, "y": 1 },
+        { "chunks": [ [ "lodge_game_6x6", 90 ], [ "lodge_dungeon_6x6", 10 ], [ "lodge_drug_6x6", 10 ] ], "x": 2, "y": 1 },
         { "chunks": [ [ "5x5_sauna_W", 30 ], [ "5x5_pool", 10 ], [ "5x5_gym_W", 60 ] ], "x": 24, "y": 1 },
         {
           "chunks": [ [ "room_6x6_woodworker", 5 ], [ "room_6x6_bike", 15 ], [ "room_6x6_office_E", 5 ] ],
@@ -268,6 +495,172 @@
         { "chunks": [ [ "room_6x6_woodworker", 5 ], [ "room_6x6_bike", 15 ], [ "room_6x6_office_E", 5 ] ], "x": 26, "y": 10 }
       ],
       "place_monsters": [ { "monster": "GROUP_ZOMBIE", "x": 32, "y": 12 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "lodge_basement_spider1", "lodge_basement_spider2" ] ],
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_soil",
+      "rows": [
+        " ########################################       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " ####################################_###       ",
+        "                                    #_#         ",
+        "                         ############_#         ",
+        "                         #__________RR#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         ###______#####         ",
+        "                         #<#______#             ",
+        "                         #_+______#             ",
+        "                         ##########             ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                "
+      ],
+      "palettes": [ "standard_domestic_basement_palette" ],
+      "terrain": { "_": "t_carpet_green", "R": "t_carpet_green" },
+      "place_monsters": [
+        { "monster": "GROUP_SPIDER_CELLAR", "x": 7, "y": 4 },
+        { "monster": "GROUP_SPIDER_CELLAR", "x": 8, "y": 4, "chance": 50 },
+        { "monster": "GROUP_SPIDER_CELLAR", "x": 9, "y": 4, "chance": 50 },
+        { "monster": "GROUP_SPIDER_CELLAR", "x": 38, "y": 4 },
+        { "monster": "GROUP_SPIDER_CELLAR", "x": 38, "y": 7 }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "lodge_basement_spider3", "lodge_basement_spider4" ] ],
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_soil",
+      "rows": [
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                         ##############         ",
+        "                         #__________RR#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         ###______#####         ",
+        "                         #<#______#             ",
+        "                         #_+______#             ",
+        "                         ##########             ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                "
+      ],
+      "palettes": [ "standard_domestic_basement_palette" ],
+      "terrain": { "_": "t_carpet_green", "R": "t_carpet_green" },
+      "mapping": { "_": { "items": { "item": "trash", "chance": 1 } } },
+      "place_monsters": [
+        { "monster": "GROUP_SPIDER_CELLAR_GIANT", "x": 32, "y": 12 },
+        { "monster": "GROUP_SPIDER_CELLAR_GIANT", "x": 33, "y": 12 }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "lodge_basement_empty1", "lodge_basement_empty2" ] ],
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_soil",
+      "rows": [
+        " ########################################       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " #______________________________________#       ",
+        " ####################################_###       ",
+        "                                    #_#         ",
+        "                         ############_#         ",
+        "                         #__________RR#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         ###______#####         ",
+        "                         #<#______#             ",
+        "                         #_+______#             ",
+        "                         ##########             ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                "
+      ],
+      "palettes": [ "standard_domestic_basement_palette" ],
+      "terrain": { "_": "t_carpet_green", "R": "t_carpet_green" },
+      "mapping": { "_": { "items": { "item": "trash", "chance": 1 } } },
+      "place_monsters": [
+        { "monster": "GROUP_ROACH", "x": 7, "y": 4 },
+        { "monster": "GROUP_ROACH", "x": 8, "y": 4, "chance": 50 },
+        { "monster": "GROUP_ROACH", "x": 9, "y": 4, "chance": 50 },
+        { "monster": "GROUP_ROACH", "x": 38, "y": 4 },
+        { "monster": "GROUP_ROACH", "x": 38, "y": 7, "chance": 50 }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "lodge_basement_empty3", "lodge_basement_empty4" ] ],
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_soil",
+      "rows": [
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                         ##############         ",
+        "                         #__________RR#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         #____________#         ",
+        "                         ###______#####         ",
+        "                         #<#______#             ",
+        "                         #_+______#             ",
+        "                         ##########             ",
+        "                                                ",
+        "                                                ",
+        "                                                ",
+        "                                                "
+      ],
+      "palettes": [ "standard_domestic_basement_palette" ],
+      "terrain": { "_": "t_carpet_green", "R": "t_carpet_green" },
+      "mapping": { "_": { "items": { "item": "trash", "chance": 1 } } },
+      "place_monsters": [ { "monster": "GROUP_SPIDER_CELLAR_GIANT", "x": 32, "y": 12, "chance": 50 } ]
     }
   },
   {

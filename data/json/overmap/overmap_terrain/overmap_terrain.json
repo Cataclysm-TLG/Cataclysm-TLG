@@ -313,6 +313,39 @@
   },
   {
     "type": "overmap_terrain",
+    "id": [ "lodge_ground_spider1", "lodge_ground_spider2" ],
+    "name": "hunting lodge",
+    "sym": "L",
+    "vision_levels": "isolated_building",
+    "copy-from": "generic_forest",
+    "color": "light_green",
+    "see_cost": "high",
+    "extend": { "flags": [ "SOURCE_GUN", "SOURCE_AMMO" ] }
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "lodge_ground_empty1", "lodge_ground_empty2" ],
+    "name": "hunting lodge",
+    "sym": "L",
+    "vision_levels": "isolated_building",
+    "copy-from": "generic_forest",
+    "color": "light_green",
+    "see_cost": "high",
+    "extend": { "flags": [ "SOURCE_GUN", "SOURCE_AMMO" ] }
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "lodge_ground_feral1", "lodge_ground_feral2" ],
+    "name": "hunting lodge",
+    "sym": "L",
+    "vision_levels": "isolated_building",
+    "copy-from": "generic_forest",
+    "color": "light_green",
+    "see_cost": "high",
+    "extend": { "flags": [ "SOURCE_GUN", "SOURCE_AMMO" ] }
+  },
+  {
+    "type": "overmap_terrain",
     "id": [ "lodge_ground_glooscap1", "lodge_ground_glooscap2" ],
     "name": "hunting lodge",
     "sym": "L",
@@ -325,6 +358,16 @@
   {
     "type": "overmap_terrain",
     "id": [ "lodge_2ndfloor1", "lodge_2ndfloor2" ],
+    "name": "second floor hunting lodge",
+    "vision_levels": "isolated_building",
+    "copy-from": "generic_forest",
+    "sym": "L",
+    "see_cost": "high",
+    "color": "light_green"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "lodge_2ndfloor_empty1", "lodge_2ndfloor_empty2" ],
     "name": "second floor hunting lodge",
     "vision_levels": "isolated_building",
     "copy-from": "generic_forest",
@@ -350,6 +393,26 @@
       "lodge_basement_residential3",
       "lodge_basement_residential4"
     ],
+    "name": "hunting lodge basement",
+    "vision_levels": "underground_dirt",
+    "copy-from": "generic_forest",
+    "sym": "L",
+    "see_cost": "full_high",
+    "color": "light_green"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "lodge_basement_empty1", "lodge_basement_empty2", "lodge_basement_empty3", "lodge_basement_empty4" ],
+    "name": "hunting lodge basement",
+    "vision_levels": "underground_dirt",
+    "copy-from": "generic_forest",
+    "sym": "L",
+    "see_cost": "full_high",
+    "color": "light_green"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "lodge_basement_spider1", "lodge_basement_spider2", "lodge_basement_spider3", "lodge_basement_spider4" ],
     "name": "hunting lodge basement",
     "vision_levels": "underground_dirt",
     "copy-from": "generic_forest",

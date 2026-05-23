@@ -763,7 +763,7 @@
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
   {
-    "id": "mon_zombie_deer_frail",
+    "id": "mon_zeer_frail",
     "type": "MONSTER",
     "name": { "str_sp": "frail zombie deer" },
     "looks_like": "mon_deer",

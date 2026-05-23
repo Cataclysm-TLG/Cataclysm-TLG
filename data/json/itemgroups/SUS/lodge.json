@@ -16,6 +16,8 @@
       { "item": "woodgreatbow", "prob": 2 },
       { "item": "shortbow", "prob": 2 },
       { "item": "compositebow", "prob": 1 },
+      { "item": "latchet_crossbow", "prob": 1 },
+      { "item": "huge_crossbow", "prob": 1 },
       { "item": "quiver_takedown_bow", "prob": 1 },
       { "item": "bow_sling", "prob": 10 }
     ]
@@ -56,23 +58,37 @@
     "//": "items found in a most dangerous game space",
     "subtype": "distribution",
     "entries": [
-      { "group": "guns_shotgun_common", "prob": 30 },
-      { "group": "SUS_hunting_rifle", "prob": 20 },
-      { "group": "guns_smg_rare", "prob": 15 }
+      { "group": "guns_shotgun_common", "prob": 30, "dirt": [ 0, 3000 ] },
+      { "group": "SUS_hunting_rifle", "prob": 20, "dirt": [ 0, 3000 ] },
+      { "group": "guns_smg_rare", "prob": 15, "dirt": [ 0, 3000 ] }
     ]
   },
   {
     "id": "cannibal_food",
     "type": "item_group",
     "subtype": "collection",
-    "//": "Cannibal food, currently lacking any cannibalism as cannibalism is no longer defined by flag.",
     "entries": [
       { "item": "machete", "prob": 20 },
-      { "group": "preserved_food", "prob": 30 },
-      { "group": "preserved_food", "prob": 20 },
-      { "group": "dry_goods", "prob": 30 },
-      { "group": "dry_goods", "prob": 60 },
-      { "group": "pantry", "prob": 10 }
+      { "item": "knife_meat_cleaver", "prob": 10 },
+      { "item": "knife_butcher", "prob": 10 },
+      { "item": "meat_salted", "components": [ "human_flesh", "salt" ], "prob": 30 },
+      { "item": "meat_salted", "components": [ "mutant_human_flesh", "salt" ], "prob": 2 },
+      { "item": "meat_salted", "components": [ "mutant_meat", "salt" ], "prob": 30 },
+      { "group": "preserved_food", "prob": 10 },
+      { "group": "dry_goods", "prob": 20 },
+      { "item": "meat_smoked", "components": [ "human_flesh" ], "prob": 60 },
+      { "item": "meat_smoked", "components": [ "mutant_human_flesh" ], "prob": 2 },
+      { "item": "meat_smoked", "components": [ "mutant_meat" ], "prob": 30 },
+      { "item": "human_flesh", "prob": 60 },
+      { "item": "mutant_human_flesh", "prob": 60 },
+      { "item": "mutant_meat", "prob": 60 },
+      { "item": "human_flesh", "prob": 60 },
+      { "item": "bone_human", "prob": 60 },
+      { "item": "bone", "prob": 60 },
+      { "item": "skull_human", "prob": 10 },
+      { "item": "skull_canis", "prob": 10 },
+      { "item": "skull_feline_small", "prob": 10 },
+      { "group": "SUS_pantry", "prob": 10 }
     ]
   }
 ]

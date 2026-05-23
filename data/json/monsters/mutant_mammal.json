@@ -149,7 +149,7 @@
     "material": [ "flesh" ],
     "symbol": "d",
     "color": "brown",
-    "looks_like": "mon_coyote_wolf",
+    "looks_like": "mon_coyote",
     "aggression": 30,
     "morale": 12,
     "melee_skill": 6,
