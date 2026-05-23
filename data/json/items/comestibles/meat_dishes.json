@@ -1225,10 +1225,10 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "meat_salted",
-    "name": { "str_sp": "salted meat slice" },
+    "name": { "str_sp": "salted meat" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "salted simpleton slice" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "salted human flesh" } },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "salted mutant meat" } }
     ],
     "copy-from": "meat_cooked",
     "color": "red",
@@ -1250,8 +1250,8 @@
     "id": "spaghetti_bolognese",
     "name": { "str_sp": "spaghetti bolognese" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "scoundrel spaghetti" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "gnarly %s" } }
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "cannibal spaghetti" } },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "spaghetti mostruoso" } }
     ],
     "weight": "150 g",
     "color": "red",

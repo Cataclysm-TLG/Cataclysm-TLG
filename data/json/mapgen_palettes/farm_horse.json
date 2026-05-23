@@ -113,6 +113,6 @@
     },
     "items": { ".": { "item": "sometimes_manure", "chance": 1 } },
     "furniture": { "e": "f_showjump_end", "j": "f_showjump" },
-    "monsters": { ".": { "monster": "GROUP_HORSES", "chance": 900, "density": 0.01 } }
+    "monsters": { ".": { "monster": "GROUP_HORSES", "chance": 500, "density": 0.01 } }
   }
 ]

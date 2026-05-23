@@ -745,7 +745,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "FOOD",
     "name": { "str_sp": "roasted bone marrow" },
-    "conditional_names": [ { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "Marvin marrow" } } ],
+    "conditional_names": [ { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "roasted human bone marrow" } } ],
     "description": "Bone marrow, fully cooked to eliminate any parasites.  Tasty!",
     "symbol": "%",
     "color": "red",
@@ -764,8 +764,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "FOOD",
-    "name": { "str_sp": "roasted pepper bone marrow" },
-    "conditional_names": [ { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "Marvin marrow" } } ],
+    "name": { "str_sp": "peppered bone marrow" },
+    "conditional_names": [ { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "peppered human bone marrow" } } ],
     "description": "Bone marrow, fully cooked to eliminate any parasites and properly seasoned with black pepper and salt.  Tasty!",
     "symbol": "%",
     "color": "red",
@@ -921,7 +921,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str_sp": "meat jerky" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "jerk jerky" } },
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human jerky" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "monster jerky" } }
     ],
     "description": "Salty dried meat that lasts for a long time, but will make you thirsty.",
@@ -986,8 +986,8 @@
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str_sp": "smoked meat" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "smoked sucker" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "smoked human flesh" } },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "monster mutant meat" } }
     ],
     "description": "Tasty meat that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
     "color": "brown",
@@ -1863,8 +1863,8 @@
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str_sp": "fried meat" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "fried fool" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "fried human flesh" } },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "fried mutant meat" } }
     ],
     "description": "Delicious oil-fried meat.",
     "color": "brown",

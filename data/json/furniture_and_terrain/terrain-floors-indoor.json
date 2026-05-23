@@ -735,10 +735,7 @@
       "str_max": 15,
       "str_min_supported": 100,
       "bash_below": true,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "count": 1 }, { "item": "nail", "charges": [ 2, 5 ] } ], "ter_set": "t_floor" }
   },
@@ -816,10 +813,7 @@
       "str_max": 15,
       "str_min_supported": 100,
       "bash_below": true,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": {
       "items": [ { "item": "r_carpet", "count": 1 }, { "item": "nail", "charges": [ 2, 5 ] } ],
@@ -903,10 +897,7 @@
       "str_max": 15,
       "str_min_supported": 100,
       "bash_below": true,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_thconc_floor" }
   },
@@ -983,10 +974,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_metal_floor" }
   },
@@ -1065,10 +1053,7 @@
       "str_max": 15,
       "str_min_supported": 100,
       "bash_below": true,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_strconc_floor" }
   },
@@ -1145,10 +1130,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_rock_floor" }
   },
@@ -1225,10 +1207,7 @@
       "str_max": 15,
       "str_min_supported": 100,
       "bash_below": true,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor_primitive" }
   },
@@ -1306,10 +1285,7 @@
       "str_max": 15,
       "str_min_supported": 100,
       "bash_below": true,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_linoleum_gray" }
   },
@@ -1387,10 +1363,7 @@
       "str_max": 15,
       "str_min_supported": 100,
       "bash_below": true,
-      "items": [
-        { "item": "carpet_scrap", "count": [ 0, 6 ] },
-        { "item": "nail", "charges": [ 0, 3 ] }
-      ]
+      "items": [ { "item": "carpet_scrap", "count": [ 0, 6 ] }, { "item": "nail", "charges": [ 0, 3 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_linoleum_white" }
   },
