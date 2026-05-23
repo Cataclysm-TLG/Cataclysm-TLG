@@ -1472,6 +1472,20 @@ void item_contents::clear_items()
     }
 }
 
+void item_contents::begin_bulk_fill()
+{
+    for( item_pocket &pocket : contents ) {
+        pocket.begin_bulk_fill();
+    }
+}
+
+void item_contents::end_bulk_fill()
+{
+    for( item_pocket &pocket : contents ) {
+        pocket.end_bulk_fill();
+    }
+}
+
 void item_contents::clear_magazines()
 {
     for( item_pocket &pocket : contents ) {

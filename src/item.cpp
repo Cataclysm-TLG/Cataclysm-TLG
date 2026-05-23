@@ -10158,6 +10158,16 @@ bool item::is_corpse() const
     return corpse != nullptr && has_flag( flag_CORPSE );
 }
 
+void item::begin_bulk_fill()
+{
+    contents.begin_bulk_fill();
+}
+
+void item::end_bulk_fill()
+{
+    contents.end_bulk_fill();
+}
+
 const mtype *item::get_mtype() const
 {
     return corpse;
