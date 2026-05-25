@@ -2037,7 +2037,8 @@ void Character::mend( int rate_multiplier )
             needs_splint = false;
         }
 
-        if( needs_splint && !worn_with_flag( flag_SPLINT, bp ) && !bp->has_flag( json_flag_LIMB_BONELESS ) ) {
+        if( needs_splint && !worn_with_flag( flag_SPLINT, bp ) &&
+            !bp->has_flag( json_flag_LIMB_BONELESS ) ) {
             continue;
         }
 

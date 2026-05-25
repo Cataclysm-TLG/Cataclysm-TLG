@@ -715,11 +715,11 @@ void clear_techniques_and_martial_arts()
 
 bool ma_requirements::buff_requirements_satisfied( const Character &u ) const
 {
-    const auto has_buff = [&u]( const mabuff_id &id ) {
+    const auto has_buff = [&u]( const mabuff_id & id ) {
         return u.has_mabuff( id );
     };
 
-    const auto has_effect = [&u]( const efftype_id &id ) {
+    const auto has_effect = [&u]( const efftype_id & id ) {
         return u.has_effect( id );
     };
 
@@ -745,7 +745,7 @@ bool ma_requirements::buff_requirements_satisfied( const Character &u ) const
     return
         std::all_of( req_buffs_all.begin(), req_buffs_all.end(), has_buff ) &&
         ( req_buffs_any.empty() ||
-        std::any_of( req_buffs_any.begin(), req_buffs_any.end(), has_buff ) );
+          std::any_of( req_buffs_any.begin(), req_buffs_any.end(), has_buff ) );
 }
 
 bool ma_requirements::is_valid_character( const Character &u ) const
