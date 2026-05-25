@@ -205,10 +205,11 @@
     "description": "Dodge chance modifier <color_dark_gray>(Balance, Movement, Footing)</color>",
     "mod_type": "x",
     "value": {
-      "limb_score": [ [ "balance", 1.5 ], "move_speed", "footing" ],
+      "limb_score": [ [ "balance", 1.25 ], "move_speed", "footing" ],
       "override_encumb": true,
       "limb_score_op": "x",
-      "min": 0.0
+      "min": 0.0,
+      "max": 4.0
     }
   }
 ]

@@ -3158,9 +3158,9 @@
     "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, requires <info>Cross Hands</info>",
     "knockback_dist": 1,
     "mult_bonuses": [
-      { "stat": "damage", "type": "bash", "scale": 1.25 },
-      { "stat": "damage", "type": "cut", "scale": 1.25 },
-      { "stat": "damage", "type": "stab", "scale": 1.25 }
+      { "stat": "damage", "type": "bash", "scale": 1.15 },
+      { "stat": "damage", "type": "cut", "scale": 1.15 },
+      { "stat": "damage", "type": "stab", "scale": 1.15 }
     ],
     "attack_vectors": [ "vector_palm" ]
   },
@@ -3185,12 +3185,7 @@
     },
     "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, requires <info>Repulse the Monkey</info>",
     "down_dur": 1,
-    "mult_bonuses": [
-      { "stat": "movecost", "scale": 0.75 },
-      { "stat": "damage", "type": "bash", "scale": 1.25 },
-      { "stat": "damage", "type": "cut", "scale": 1.25 },
-      { "stat": "damage", "type": "stab", "scale": 1.25 }
-    ],
+    "mult_bonuses": [ { "stat": "movecost", "scale": 0.75 } ],
     "attack_vectors": [ "vector_grasp" ]
   },
   {
@@ -3230,9 +3225,9 @@
     "tech_effects": [ { "id": "staggered", "chance": 80, "duration": 200, "on_damage": true, "message": "%s is knocked off-balance!" } ],
     "knockback_dist": 1,
     "mult_bonuses": [
-      { "stat": "damage", "type": "bash", "scale": 1.75 },
-      { "stat": "damage", "type": "cut", "scale": 1.75 },
-      { "stat": "damage", "type": "stab", "scale": 1.75 }
+      { "stat": "damage", "type": "bash", "scale": 1.5 },
+      { "stat": "damage", "type": "cut", "scale": 1.5 },
+      { "stat": "damage", "type": "stab", "scale": 1.5 }
     ],
     "attack_vectors": [ "vector_palm" ]
   },
