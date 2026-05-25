@@ -8521,10 +8521,10 @@ void Character::on_hit( map *here, Creature *source, bodypart_id bp_hit,
         if( stability_roll() < dice( rolls, 10 ) ) {
             if( !is_avatar() ) {
                 if( u_see ) {
-                    add_msg( _( "%1$s loses their balance while being hit!" ), get_name() );
+                    add_msg( _( "The hit makes %1$s lose their balance!" ), get_name() );
                 }
             } else {
-                add_msg( m_bad, _( "You lose your balance while being hit!" ) );
+                add_msg( m_bad, _( "The hit makes you lose your balance!" ) );
             }
             if( in_skater_vehicle ) {
                 g->fling_creature( this, rng_float( 0_degrees, 360_degrees ), 10 );

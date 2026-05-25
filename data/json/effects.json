@@ -4550,8 +4550,8 @@
     "name": [ { "ctxt": "physically", "str": "Disabled" } ],
     "desc": [ "This limb is damaged beyond use and may require a splint to recover." ],
     "//": "This sounds weird. We need <bp_affected> tag or something",
-    "apply_message": "Your limb breaks!",
-    "remove_message": "The broken limb has mended.",
+    "apply_message": "A body part has been critically injured!",
+    "remove_message": "Your disabled body part has recovered enough for use.",
     "max_duration": "2 s",
     "rating": "bad"
   },

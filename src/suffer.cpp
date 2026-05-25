@@ -126,6 +126,7 @@ static const json_character_flag json_flag_ETHEREAL( "ETHEREAL" );
 static const json_character_flag json_flag_GILLS( "GILLS" );
 static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
 static const json_character_flag json_flag_GRAB( "GRAB" );
+static const json_character_flag json_flag_LIMB_BONELESS( "LIMB_BONELESS" );
 static const json_character_flag json_flag_MEND_ALL( "MEND_ALL" );
 static const json_character_flag json_flag_MEND_LIMB( "MEND_LIMB" );
 static const json_character_flag json_flag_NO_DRENCH( "NO_DRENCH" );
@@ -2036,7 +2037,8 @@ void Character::mend( int rate_multiplier )
             needs_splint = false;
         }
 
-        if( needs_splint && !worn_with_flag( flag_SPLINT,  bp ) ) {
+        if( needs_splint && !worn_with_flag( flag_SPLINT, bp ) &&
+            !bp->has_flag( json_flag_LIMB_BONELESS ) ) {
             continue;
         }
 

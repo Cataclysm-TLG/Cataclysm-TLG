@@ -17,7 +17,7 @@
     "warmth": 8,
     "material_thickness": 1,
     "flags": [ "OUTER", "SPLINT" ],
-    "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "arm_l", "arm_r" ] } ]
+    "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] } ]
   },
   {
     "id": "arm_xlsplint",
@@ -330,23 +330,7 @@
     "warmth": 5,
     "material_thickness": 1,
     "flags": [ "OUTER", "SPLINT", "ALLOWS_TAIL" ],
-    "armor": [
-      {
-        "encumbrance": 70,
-        "coverage": 75,
-        "covers": [
-          "leg_l",
-          "leg_r",
-          "cephalopod_arm_1",
-          "cephalopod_arm_2",
-          "cephalopod_arm_3",
-          "cephalopod_arm_4",
-          "cephalopod_arm_5",
-          "cephalopod_arm_6",
-          "long_tail"
-        ]
-      }
-    ]
+    "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "leg_l", "leg_r" ] } ]
   },
   {
     "id": "leg_xlsplint",
