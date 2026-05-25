@@ -4355,6 +4355,16 @@
     "components": [ [ [ "nylon_patch", 10 ] ], [ [ "kevlar_sheet_layered", 12 ] ] ]
   },
   {
+    "result": "plate_carrier_xl",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "15 m",
+    "skill_used": "tailor",
+    "difficulty": 3,
+    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "components": [ [ [ "nylon_patch", 20 ] ], [ [ "kevlar_sheet_layered", 20 ] ] ]
+  },
+  {
     "result": "soft_3a_vest",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
