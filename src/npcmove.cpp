@@ -2717,6 +2717,11 @@ npc_action npc::address_needs( float danger )
         }
     }
 
+    // Hallucinations have a chance of disappearing each turn.
+    if( is_hallucination() && one_in( 25 ) ) {
+        die( &here, nullptr );
+    }
+
     // Warmth: wearing clothes costs a turn but hypothermia is life-threatening.
     // Before danger gate, like extreme food.
     if( needs_warmth && wear_warmest_item() ) {
@@ -2733,35 +2738,57 @@ npc_action npc::address_needs( float danger )
         }
     }
 
-    // Extreme thirst or hunger, bypass safety check.
-    if( get_thirst() > 80 ||
-        get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
+    // Extreme food/water pathing: the pre-gate block only consumed adjacent
+    // resources. If extreme need persists and we passed the danger gate,
+    // path to distant ground food or water deterministically.
+    if( get_thirst() > 80 || get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
         if( consume_food_from_camp() ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS,
+                           "NPC %s consuming food or drink from camp due to extreme need.", get_name() );
             return npc_noop;
         }
         if( consume_food() ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS,
+                           "NPC %s consuming food or drink from inventory due to extreme need.", get_name() );
             return npc_noop;
         }
-        // Adjacent ground food, instant.
         for( scored_item &c : find_nearby_food() ) {
             if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
                 if( consume_food_at( c.loc ) ) {
+                    add_msg_debug( debugmode::DF_NPC_NEEDS,
+                                   "NPC %s consuming food or drink from nearby due to extreme need.", get_name() );
+                    return npc_noop;
+                }
+            } else {
+                if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
+                    if( one_in( 3 ) ) {
+                        add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s moving to get food or drink due to extreme need.",
+                                       get_name() );
+                    }
                     return npc_noop;
                 }
             }
         }
-        // Adjacent water terrain, instant.
-        for( scored_water_source &ws : find_nearby_water_sources() ) {
-            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
-                if( drink_from_water_source( ws.pos ) ) {
-                    return npc_noop;
+        // Re-check for thirst so that hunger alone doesn't make us go pathing to water.
+        if( get_thirst() > 80 ) {
+            for( scored_water_source &ws : find_nearby_water_sources() ) {
+                if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
+                    if( drink_from_water_source( ws.pos ) ) {
+                        add_msg_debug( debugmode::DF_NPC_NEEDS,
+                                       "NPC %s drinking from terrain due to thirst due to extreme need.", get_name() );
+                        return npc_noop;
+                    }
+                } else {
+                    if( move_to_and_verify( ws.pos ) ) {
+                        if( one_in( 3 ) ) {
+                            add_msg_debug( debugmode::DF_NPC_NEEDS,
+                                           "NPC %s moving to try and get a drink from terrain due to extreme need.", get_name() );
+                        }
+                        return npc_noop;
+                    }
                 }
             }
         }
-    }
-    // Hallucinations have a chance of disappearing each turn.
-    if( is_hallucination() && one_in( 25 ) ) {
-        die( &here, nullptr );
     }
 
     if( danger > NPC_DANGER_VERY_LOW ) {
@@ -2781,64 +2808,48 @@ npc_action npc::address_needs( float danger )
         }
     }
 
-    // Extreme food/water pathing: the pre-gate block only consumed adjacent
-    // resources. If extreme need persists and we passed the danger gate,
-    // path to distant ground food or water deterministically.
-    if( get_thirst() > 80 ||
-        get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
-        for( scored_item &c : find_nearby_food() ) {
-            if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
-                if( consume_food_at( c.loc ) ) {
-                    return npc_noop;
-                }
-            } else {
-                if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
-                    return npc_noop;
-                }
-            }
-        }
-        for( scored_water_source &ws : find_nearby_water_sources() ) {
-            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
-                if( drink_from_water_source( ws.pos ) ) {
-                    return npc_noop;
-                }
-            } else {
-                if( move_to_and_verify( ws.pos ) ) {
-                    return npc_noop;
-                }
-            }
-        }
-    }
-
     // Normal food/drink: camp -> inventory -> ground food -> terrain water.
     // All under the same random gate so ground never outranks camp/inventory.
-    if( one_in( 3 ) && ( get_thirst() > NPC_THIRST_CONSUME ||
-                         get_hunger() > NPC_HUNGER_CONSUME ) ) {
+    if( one_in( 3 ) && ( get_thirst() > NPC_THIRST_CONSUME || get_hunger() > NPC_HUNGER_CONSUME ) ) {
         if( consume_food_from_camp() ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s consuming food or drink from camp.", get_name() );
             return npc_noop;
         }
         if( consume_food() ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s consuming food or drink from inventory.",
+                           get_name() );
             return npc_noop;
         }
         for( scored_item &c : find_nearby_food() ) {
             if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
                 if( consume_food_at( c.loc ) ) {
+                    add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s consuming food or drink from nearby.", get_name() );
                     return npc_noop;
                 }
             } else {
                 if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
+                    if( one_in( 3 ) ) {
+                        add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s moving to try and get food or drink.", get_name() );
+                    }
                     return npc_noop;
                 }
             }
         }
-        for( scored_water_source &ws : find_nearby_water_sources() ) {
-            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
-                if( drink_from_water_source( ws.pos ) ) {
-                    return npc_noop;
-                }
-            } else {
-                if( move_to_and_verify( ws.pos ) ) {
-                    return npc_noop;
+        if( get_thirst() > NPC_THIRST_CONSUME ) {
+            for( scored_water_source &ws : find_nearby_water_sources() ) {
+                if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
+                    if( drink_from_water_source( ws.pos ) ) {
+                        add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s drinking from terrain.", get_name() );
+                        return npc_noop;
+                    }
+                } else {
+                    if( move_to_and_verify( ws.pos ) ) {
+                        if( one_in( 3 ) ) {
+                            add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s moving to try and get a drink from terrain.",
+                                           get_name() );
+                        }
+                        return npc_noop;
+                    }
                 }
             }
         }
@@ -3879,7 +3890,7 @@ void npc::find_item()
     }
 
     if( is_player_ally() && !rules.has_flag( ally_rule::allow_pick_up ) ) {
-        // Grabbing stuff not allowed by our "owner"
+        // Our rules forbid pickup.
         add_msg_debug( debugmode::DF_NPC_ITEMAI,
                        "%s considered picking something up but player said not to.", name );
         return;
@@ -3896,15 +3907,17 @@ void npc::find_item()
     //int range = sight_range( g->light_level( posz() ) );
     //range = std::max( 1, std::min( 12, range ) );
 
-    if( volume_allowed <= 0_ml || weight_allowed <= 0_gram ) {
+    if( volume_allowed <= 0_ml || weight_allowed <= 0_gram )
+    {
         add_msg_debug( debugmode::DF_NPC_ITEMAI, "%s considered picking something up, but no storage left.",
-                       name );
+                    name );
         return;
     }
 
     const auto consider_item =
         [&best_value, this]
-    ( const item & it, const tripoint_bub_ms & p ) {
+        ( const item &it, const tripoint_bub_ms &p )
+    {
         if( ::good_for_pickup( it, *this, p ) ) {
             wanted_item_pos = p;
             best_value = has_item_whitelist() ? 1000 : value( it );
@@ -3918,7 +3931,8 @@ void npc::find_item()
     // Harvest item doesn't exist, so we'll be checking by its name
     std::string wanted_name;
     const auto consider_terrain =
-    [ this, volume_allowed, &wanted_name, &here ]( const tripoint_bub_ms & p ) {
+        [ this, volume_allowed, &wanted_name, &here ]( const tripoint_bub_ms &p )
+    {
         // We only want to pick plants when there are no items to pick
         if( !has_item_whitelist() || wanted_item.get_item() != nullptr || !wanted_name.empty() ||
             volume_allowed < 250_ml ) {
@@ -3935,12 +3949,13 @@ void npc::find_item()
         }
     };
 
-    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), range ) ) {
+    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), range ) )
+    {
         // TODO: Make this sight check not overdraw nearby tiles
         // TODO: Optimize that zone check
         if( is_player_ally() && g->check_zone( zone_type_NO_NPC_PICKUP, p ) ) {
             add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                           "%s didn't pick up an item because it's in a no-pickup zone.", name );
+                        "%s didn't pick up an item because it's in a no-pickup zone.", name );
             continue;
         }
 
@@ -4005,11 +4020,13 @@ void npc::find_item()
         cache_tile();
     }
 
-    if( wanted_item.get_item() != nullptr ) {
+    if( wanted_item.get_item() != nullptr )
+    {
         wanted_name = wanted_item->tname();
     }
 
-    if( wanted_name.empty() ) {
+    if( wanted_name.empty() )
+    {
         return;
     }
 
@@ -4018,17 +4035,20 @@ void npc::find_item()
     // TODO: Move that check above, make it multi-target pathing and use it
     // to limit tiles available for choice of items
     const int dist_to_item = trig_dist( wanted_item_pos, pos_bub() );
-    if( const std::optional<tripoint_bub_ms> dest = nearest_passable( wanted_item_pos, pos_bub() ) ) {
+    if( const std::optional<tripoint_bub_ms> dest = nearest_passable( wanted_item_pos, pos_bub() ) )
+    {
         update_path( *dest );
     }
 
-    if( path.empty() && dist_to_item > 1 ) {
+    if( path.empty() && dist_to_item > 1 )
+    {
         // Item not reachable, let's just totally give up for now
         fetching_item = false;
         wanted_item = {};
     }
 
-    if( fetching_item && square_dist( wanted_item_pos, pos_bub() ) > 1 && is_walking_with() ) {
+    if( fetching_item && square_dist( wanted_item_pos, pos_bub() ) > 1 && is_walking_with() )
+    {
         say( _( "Hold on, I want to pick up that %s." ), wanted_name );
     }
 }
