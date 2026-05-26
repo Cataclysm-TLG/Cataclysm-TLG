@@ -23,5 +23,10 @@
     "type": "overmap_special_migration",
     "id": "Isherwood Farm Mutable",
     "new_id": "Farm Mutable"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Hunting Lodge - Normal",
+    "new_id": "Hunting Lodge"
   }
 ]
