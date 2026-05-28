@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
+# Defaults to CMAKE_SOURCE_DIR for in-tree builds; Android sets it explicitly.
+if(NOT DEFINED CATA_REPO_ROOT)
+    set(CATA_REPO_ROOT "${CMAKE_SOURCE_DIR}")
+endif()
+
 # Don't clang-tidy third party code
 set(CMAKE_CXX_CLANG_TIDY "")
 
@@ -29,7 +34,7 @@ target_include_directories(
 target_include_directories(
         flatbuffers
         PUBLIC
-        ${CMAKE_SOURCE_DIR}/src)
+        ${CATA_REPO_ROOT}/src)
 
 file(GLOB GHC_HEADERS ${THIRD_PARTY_SOURCE_DIR}/ghc/*.hpp)
 
