@@ -1980,14 +1980,13 @@
   },
   {
     "type": "profession",
-    "id": "medic",
-    "name": "Medical Resident",
-    "description": "Fresh out of med school, you've got little in the way of practical experience and just a handful of first-aid supplies.  You just hope it will be enough if 'physician, heal thyself' turns out to be more literal than you expected.",
+    "id": "surgeon",
+    "name": "Surgeon",
+    "description": "Whether you worked in aesthetics, oncology, or orthopedics, you're going to have to get used to the fact that pretty much everyone with your skillset is now first and foremost a trauma surgeon.",
     "npc_background": "BG_survival_story_MEDICAL",
-    "points": 2,
-    "skills": [ { "level": 5, "name": "firstaid" } ],
-    "proficiencies": [ "prof_field_medic", "prof_intro_biology", "prof_physiology", "prof_burn_care", "prof_dissect_humans" ],
-    "traits": [ "PROF_MED" ],
+    "points": 3,
+    "skills": [ { "level": 5, "name": "firstaid" }, { "level": 2, "name": "chemistry" } ],
+    "proficiencies": [ "prof_field_medic", "prof_intro_biology", "prof_physiology", "prof_burn_care", "prof_dissect_humans", "prof_surgery" ],
     "items": {
       "both": {
         "entries": [
@@ -2000,9 +1999,10 @@
           { "item": "glasses_safety" },
           { "item": "wristwatch" },
           { "item": "water_clean" },
+          { "item": "scalpel" },
           { "item": "bandages", "count": 3 },
           { "item": "adhesive_bandages", "count": 10 },
-          { "item": "aspirin" },
+          { "item": "acetaminophen" },
           { "item": "stethoscope" },
           { "item": "pants" },
           { "group": "charged_smart_phone" },
@@ -2283,7 +2283,6 @@
       { "level": 2, "name": "survival" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "pets": [ { "name": "mon_dog_trained", "amount": 1 } ],
     "items": {
@@ -2327,7 +2326,6 @@
       { "level": 2, "name": "dodge" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "pets": [ { "name": "mon_horse_police", "amount": 1 } ],
     "items": {
@@ -2430,7 +2428,6 @@
       { "level": 2, "name": "dodge" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "items": {
       "both": {
@@ -2462,7 +2459,6 @@
     "description": "You were on the brink of a major breakthrough in your latest homicide case when the Cataclysm struck.  Now your prime suspect is dead.  Everyone's dead.  You could really use a smoke.",
     "npc_background": "BG_survival_story_POLICE",
     "points": 3,
-    "traits": [ "PROF_PD_DET" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning" ],
     "items": {
       "both": {
@@ -2523,7 +2519,6 @@
       { "level": 1, "name": "traps" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_SWAT" ],
     "items": {
       "both": {
         "entries": [
@@ -2576,7 +2571,6 @@
       { "level": 1, "name": "dodge" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "items": {
       "both": {
         "entries": [
@@ -2622,7 +2616,6 @@
       { "level": 1, "name": "dodge" },
       { "level": 3, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "items": {
       "both": {
@@ -2665,7 +2658,6 @@
       { "level": 3, "name": "driving" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "vehicle": "motorcycle",
     "items": {
@@ -3093,7 +3085,6 @@
     ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_driver", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "vehicle": "policecar",
-    "traits": [ "PROF_POLICE" ],
     "items": {
       "both": {
         "entries": [
@@ -5319,7 +5310,6 @@
     "points": 3,
     "skills": [ { "level": 4, "name": "firstaid" }, { "level": 3, "name": "driving" }, { "level": 1, "name": "mechanics" } ],
     "proficiencies": [ "prof_field_medic", "prof_intro_biology", "prof_physiology", "prof_burn_care", "prof_driver" ],
-    "traits": [ "PROF_MED" ],
     "vehicle": "ambulance",
     "items": {
       "both": {
@@ -5360,7 +5350,6 @@
       { "level": 2, "name": "survival" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_MED" ],
     "proficiencies": [
       "prof_spotting",
       "prof_field_medic",
@@ -5446,11 +5435,10 @@
     "id": "hazmat_unit",
     "name": "Hazmat Unit",
     "description": "You were deployed to autopsy one of the rioters showing feral behavior before being put down.  When they got back up, you knew this was out of your pay grade.",
-    "points": 4,
+    "points": 3,
     "npc_background": "BG_survival_story_WORKER_FIREFIGHTER",
-    "skills": [ { "level": 6, "name": "firstaid" } ],
+    "skills": [ { "level": 5, "name": "firstaid" } ],
     "proficiencies": [ "prof_intro_biology", "prof_physiology", "prof_burn_care", "prof_dissect_humans" ],
-    "traits": [ "PROF_MED" ],
     "items": {
       "both": {
         "entries": [
@@ -5962,11 +5950,10 @@
     "id": "bionic_installer",
     "name": "Augmentation Associate",
     "npc_background": "BG_survival_story_MEDICAL",
-    "description": "When bionics first emerged, you were quick to make them into your career, and spent your days overseeing their installation.  That makes you one of the few non-zombies in the world that can calibrate an Autodoc, which might come in handy.",
+    "description": "Bionics are bleeding edge tech and you were poised to embark on a very promising career installing them in people.  The world has fallen apart, but maybe your skillset will still come in handy.",
     "points": 4,
-    "skills": [ { "level": 4, "name": "firstaid" }, { "level": 4, "name": "electronics" } ],
-    "proficiencies": [ "prof_intro_biology", "prof_physiology", "prof_field_medic", "prof_dissect_humans" ],
-    "traits": [ "PROF_AUTODOC" ],
+    "skills": [ { "level": 4, "name": "firstaid" }, { "level": 4, "name": "computer" }, { "level": 2, "name": "electronics" } ],
+    "proficiencies": [ "prof_intro_biology", "prof_physiology", "prof_field_medic", "prof_dissect_humans", "prof_surgery", "prof_robotic_programming" ],
     "items": {
       "both": {
         "entries": [
