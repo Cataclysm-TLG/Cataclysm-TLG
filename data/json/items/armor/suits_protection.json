@@ -769,6 +769,7 @@
       },
       {
         "covers": [ "leg_l", "leg_r" ],
+        "volume_encumber_modifier": 0,
         "encumbrance": 3,
         "coverage": 90,
         "material": [
@@ -780,6 +781,7 @@
       },
       {
         "covers": [ "foot_l", "foot_r" ],
+        "volume_encumber_modifier": 0,
         "encumbrance": 2,
         "coverage": 75,
         "material": [ { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.5 } ],
@@ -789,6 +791,7 @@
       },
       {
         "covers": [ "arm_l", "arm_r" ],
+        "volume_encumber_modifier": 0,
         "encumbrance": 3,
         "coverage": 90,
         "material": [
