@@ -877,7 +877,7 @@
     "using": [ [ "soldering_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" } ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
-    "tools": [ [ [ "laptop", -1 ] ] ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "components": [
       [ [ "targeting_module", 1 ] ],
       [ [ "ai_module", 1 ] ],

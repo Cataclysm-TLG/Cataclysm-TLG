@@ -157,6 +157,7 @@ static const material_id material_wood( "wood" );
 static const proficiency_id proficiency_prof_traps( "prof_traps" );
 static const proficiency_id proficiency_prof_trapsetting( "prof_trapsetting" );
 static const proficiency_id proficiency_prof_field_medic( "prof_field_medic" );
+static const proficiency_id proficiency_prof_robotic_programming( "prof_robotic_programming" );
 
 static const quality_id qual_DIG( "DIG" );
 static const quality_id qual_MOP( "MOP" );
@@ -165,6 +166,10 @@ static const skill_id skill_fabrication( "fabrication" );
 static const skill_id skill_firstaid( "firstaid" );
 static const skill_id skill_survival( "survival" );
 static const skill_id skill_traps( "traps" );
+
+static const species_id species_CYBORG( "CYBORG" );
+static const species_id species_ROBOT( "ROBOT" );
+static const species_id species_ROBOT_FLYING( "ROBOT_FLYING" );
 
 static const std::string flag_CARGO( "CARGO" );
 static const std::string flag_FLUIDTANK( "FLUIDTANK" );
@@ -963,10 +968,13 @@ std::optional<int> place_monster_iuse::use( Character *p, item &it, map *here,
     for( const skill_id &sk : skills ) {
         skill_offset += p->get_skill_level( sk ) / 2.0f;
     }
+    if( p->has_proficiency( proficiency_prof_robotic_programming ) && ( newmon.in_species( species_ROBOT ) || newmon.in_species( species_CYBORG ) || newmon.in_species( species_ROBOT_FLYING ) ) ) {
+        skill_offset += 2;
+    }
     /** @EFFECT_INT increases chance of a placed turret being friendly */
     if( rng( 0, p->int_cur / 2 ) + skill_offset < rng( 0, difficulty ) ) {
         if( hostile_msg.empty() ) {
-            p->add_msg_if_player( m_bad, _( "You deploy the %s wrong.  It is hostile!" ), newmon.name() );
+            p->add_msg_if_player( m_bad, _( "You deploy the %s improperly.  It is hostile!" ), newmon.name() );
         } else {
             p->add_msg_if_player( m_bad, "%s", hostile_msg );
         }

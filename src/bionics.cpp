@@ -171,6 +171,12 @@ static const morale_type morale_feeling_good( "morale_feeling_good" );
 static const morale_type morale_pyromania_nofire( "morale_pyromania_nofire" );
 static const morale_type morale_pyromania_startfire( "morale_pyromania_startfire" );
 
+static const proficiency_id proficiency_prof_dissect_humans( "prof_dissect_humans" );
+static const proficiency_id proficiency_prof_intro_biology( "prof_intro_biology" );
+static const proficiency_id proficiency_prof_robotic_programming( "prof_robotic_programming" );
+static const proficiency_id proficiency_prof_surgery( "prof_surgery" );
+static const proficiency_id proficiency_prof_wp_cyborg( "prof_wp_cyborg" );
+
 static const requirement_id requirement_data_anesthetic( "anesthetic" );
 
 static const skill_id skill_computer( "computer" );
@@ -182,8 +188,6 @@ static const trait_id trait_CENOBITE( "CENOBITE" );
 static const trait_id trait_DEBUG_BIONICS( "DEBUG_BIONICS" );
 static const trait_id trait_MASOCHIST_MED( "MASOCHIST_MED" );
 static const trait_id trait_NONE( "NONE" );
-static const trait_id trait_PROF_AUTODOC( "PROF_AUTODOC" );
-static const trait_id trait_PROF_MED( "PROF_MED" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
 static const trait_id trait_THRESH_MEDICAL( "THRESH_MEDICAL" );
 
@@ -2173,15 +2177,23 @@ int Character::bionics_pl_skill( bool autodoc, int skill_level ) const
         pl_skill = 12 * skill_level;
     }
 
-    // Medical residents have some idea what they're doing.
-    // TODO: Move this to a learnable proficiency.
-    if( has_trait( trait_PROF_MED ) ) {
-        pl_skill += 3;
+    // Knowing the basics about people or cyborgs helps.
+    if( has_proficiency( proficiency_prof_intro_biology ) ||
+        has_proficiency( proficiency_prof_wp_cyborg ) ) {
+        pl_skill += 1;
     }
 
-    // People trained in bionics gain an additional advantage towards using it.
-    if( has_trait( trait_PROF_AUTODOC ) ) {
-        pl_skill += 7;
+    // Surgeons understand the process pretty well.
+    if( has_proficiency( proficiency_prof_surgery ) ) {
+        pl_skill += 3;
+    } else if( has_proficiency( proficiency_prof_dissect_humans ) ) {
+        // Dissection isn't as good but it's better than nothing.
+        pl_skill += 1;
+    }
+
+    // What we are doing here is programming a robot.  Being specifically trained for that helps a lot.
+    if( has_proficiency( proficiency_prof_robotic_programming ) ) {
+        pl_skill += 6;
     }
     return round( pl_skill );
 }
@@ -2265,7 +2277,6 @@ bool Character::can_uninstall_bionic( const bionic &bio, Character &installer, b
             return false;
         }
     }
-
     return true;
 }
 
@@ -2316,6 +2327,8 @@ bool Character::uninstall_bionic( const bionic &bio, Character &installer, bool 
         add_effect( effect_under_operation, difficulty * 20_minutes, elem.first.id(), true, difficulty );
     }
 
+    installer.practice_proficiency( proficiency_prof_surgery, 10_minutes );
+    installer.practice_proficiency( proficiency_prof_robotic_programming, 10_minutes );
     return true;
 }
 
@@ -2612,7 +2625,11 @@ bool Character::install_bionics( const itype &type, Character &installer, bool a
     activity.str_values.emplace_back( "install" );
     activity.str_values.push_back( bioid.str() );
 
-    if( installer.has_trait( trait_PROF_MED ) || installer.has_trait( trait_PROF_AUTODOC ) ) {
+    if( installer.has_proficiency( proficiency_prof_surgery ) ||
+        installer.has_proficiency( proficiency_prof_robotic_programming ) ||
+        ( ( installer.has_proficiency( proficiency_prof_wp_cyborg ) ||
+            installer.has_proficiency( proficiency_prof_intro_biology ) ) &&
+          installer.has_proficiency( proficiency_prof_dissect_humans ) ) ) {
         activity.str_values.push_back( installer.disp_name( true ) );
     } else {
         activity.str_values.emplace_back( "NOT_MED" );
@@ -2625,6 +2642,8 @@ bool Character::install_bionics( const itype &type, Character &installer, bool a
     for( const std::pair<const bodypart_str_id, size_t> &elem : bioid->occupied_bodyparts ) {
         add_effect( effect_under_operation, difficulty * 20_minutes, elem.first.id(), true, difficulty );
     }
+    installer.practice_proficiency( proficiency_prof_surgery, 10_minutes );
+    installer.practice_proficiency( proficiency_prof_robotic_programming, 10_minutes );
 
     return true;
 }

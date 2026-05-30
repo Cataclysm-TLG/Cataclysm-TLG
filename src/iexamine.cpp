@@ -5751,7 +5751,7 @@ void iexamine::autodoc( Character &you, const tripoint_bub_ms &examp )
                     }
                     you.invalidate_inventory();
                 }
-                installer.mod_moves( -to_moves<int>( 1_minutes ) );
+                installer.mod_moves( -to_moves<int>( 10_minutes ) );
 
                 patient.install_bionics( ( *itemtype ), installer, true, has_install_program ? 10 : -1 );
 
@@ -5800,7 +5800,7 @@ void iexamine::autodoc( Character &you, const tripoint_bub_ms &examp )
                 if( needs_anesthesia ) {
                     you.consume_tools( anesth_kit, volume_anesth );
                 }
-                installer.mod_moves( -to_moves<int>( 1_minutes ) );
+                installer.mod_moves( -to_moves<int>( 10_minutes ) );
                 patient.uninstall_bionic( *bionics[bionic_index], installer, true );
             }
             break;

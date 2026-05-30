@@ -29,6 +29,16 @@
     "ememory_size": "128 MB"
   },
   {
+    "id": "software_robotics",
+    "copy-from": "abstract_software",
+    "type": "ITEM",
+    "name": { "str_sp": "robOS" },
+    "description": "A deceptively simple program that can be used to give autonomous robots complex preprogrammed instructions.",
+    "price": "8 USD",
+    "price_postapoc": "20 USD",
+    "ememory_size": "128 MB"
+  },
+  {
     "id": "software_medical",
     "copy-from": "abstract_software",
     "type": "ITEM",

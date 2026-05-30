@@ -8483,36 +8483,6 @@
   },
   {
     "type": "mutation",
-    "id": "PROF_POLICE",
-    "name": { "str": "Police Officer" },
-    "points": 0,
-    "description": "You are a duly sworn law enforcement officer, with jurisdiction throughout the New England region thanks to interstate agreements.  Whether that means anything now is another question.",
-    "valid": false,
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_SWAT",
-    "name": { "str": "SWAT Officer" },
-    "points": 0,
-    "description": "You are a duly sworn law enforcement officer, with jurisdiction throughout the New England region thanks to interstate agreements.  Whether that means anything now is another question.",
-    "valid": false,
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_PD_DET",
-    "name": { "str": "Police Detective" },
-    "points": 0,
-    "description": "You are a duly sworn law enforcement investigator, with jurisdiction throughout the New England region thanks to interstate agreements.  Whether your shield means anything now is another question.",
-    "valid": false,
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
     "id": "PROF_FED",
     "name": { "str": "US Marshal" },
     "points": 0,
@@ -8529,27 +8499,6 @@
     "points": 0,
     "description": "You are known to be a capable and resourceful mercenary at the employ of Hub 01.",
     "cancels": [ "PROF_FED" ],
-    "valid": false,
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_FOODP",
-    "name": { "str": "True Foodperson" },
-    "points": 0,
-    "description": "You are the true Foodperson, some might think Foodperson is just a mascot, but you know better.  You are Foodperson, the mask has become your face; you are real, and the only thing standing between this world and oblivion is you.",
-    "valid": false,
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_MED",
-    "name": { "str": "MD" },
-    "points": 0,
-    "//": "In the US, a medical 'residency' is essentially an extended post-graduate, on-the-job medical training.  The idea here is that hospital computer systems would recognize the PC as a valid user and grant access.",
-    "description": "You were just through with the administrative formalities for your residency when the Cataclysm struck.  \"Your\" hospital was overrun and evacuated, but there's always work for a good doctor.",
     "valid": false,
     "purifiable": false,
     "profession": true
@@ -8584,16 +8533,6 @@
     "valid": false,
     "purifiable": false,
     "player_display": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_AUTODOC",
-    "name": { "str": "Autodoc Specialist" },
-    "points": 0,
-    "description": "You're trained in proper operation of the Autodoc, an advanced machine used for surgical procedures.  Operations involving it will be moderately more likely to succeed.",
-    "valid": false,
-    "purifiable": false,
     "profession": true
   },
   {

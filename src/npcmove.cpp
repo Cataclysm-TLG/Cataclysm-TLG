@@ -3907,17 +3907,15 @@ void npc::find_item()
     //int range = sight_range( g->light_level( posz() ) );
     //range = std::max( 1, std::min( 12, range ) );
 
-    if( volume_allowed <= 0_ml || weight_allowed <= 0_gram )
-    {
+    if( volume_allowed <= 0_ml || weight_allowed <= 0_gram ) {
         add_msg_debug( debugmode::DF_NPC_ITEMAI, "%s considered picking something up, but no storage left.",
-                    name );
+                       name );
         return;
     }
 
     const auto consider_item =
         [&best_value, this]
-        ( const item &it, const tripoint_bub_ms &p )
-    {
+    ( const item & it, const tripoint_bub_ms & p ) {
         if( ::good_for_pickup( it, *this, p ) ) {
             wanted_item_pos = p;
             best_value = has_item_whitelist() ? 1000 : value( it );
@@ -3931,8 +3929,7 @@ void npc::find_item()
     // Harvest item doesn't exist, so we'll be checking by its name
     std::string wanted_name;
     const auto consider_terrain =
-        [ this, volume_allowed, &wanted_name, &here ]( const tripoint_bub_ms &p )
-    {
+    [ this, volume_allowed, &wanted_name, &here ]( const tripoint_bub_ms & p ) {
         // We only want to pick plants when there are no items to pick
         if( !has_item_whitelist() || wanted_item.get_item() != nullptr || !wanted_name.empty() ||
             volume_allowed < 250_ml ) {
@@ -3949,13 +3946,12 @@ void npc::find_item()
         }
     };
 
-    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), range ) )
-    {
+    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), range ) ) {
         // TODO: Make this sight check not overdraw nearby tiles
         // TODO: Optimize that zone check
         if( is_player_ally() && g->check_zone( zone_type_NO_NPC_PICKUP, p ) ) {
             add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                        "%s didn't pick up an item because it's in a no-pickup zone.", name );
+                           "%s didn't pick up an item because it's in a no-pickup zone.", name );
             continue;
         }
 
@@ -4020,13 +4016,11 @@ void npc::find_item()
         cache_tile();
     }
 
-    if( wanted_item.get_item() != nullptr )
-    {
+    if( wanted_item.get_item() != nullptr ) {
         wanted_name = wanted_item->tname();
     }
 
-    if( wanted_name.empty() )
-    {
+    if( wanted_name.empty() ) {
         return;
     }
 
@@ -4035,20 +4029,17 @@ void npc::find_item()
     // TODO: Move that check above, make it multi-target pathing and use it
     // to limit tiles available for choice of items
     const int dist_to_item = trig_dist( wanted_item_pos, pos_bub() );
-    if( const std::optional<tripoint_bub_ms> dest = nearest_passable( wanted_item_pos, pos_bub() ) )
-    {
+    if( const std::optional<tripoint_bub_ms> dest = nearest_passable( wanted_item_pos, pos_bub() ) ) {
         update_path( *dest );
     }
 
-    if( path.empty() && dist_to_item > 1 )
-    {
+    if( path.empty() && dist_to_item > 1 ) {
         // Item not reachable, let's just totally give up for now
         fetching_item = false;
         wanted_item = {};
     }
 
-    if( fetching_item && square_dist( wanted_item_pos, pos_bub() ) > 1 && is_walking_with() )
-    {
+    if( fetching_item && square_dist( wanted_item_pos, pos_bub() ) > 1 && is_walking_with() ) {
         say( _( "Hold on, I want to pick up that %s." ), wanted_name );
     }
 }
