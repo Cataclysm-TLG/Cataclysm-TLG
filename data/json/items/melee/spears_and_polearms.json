@@ -178,7 +178,7 @@
     "description": "A sturdy pole with a broad cutting blade securely bolted to one end.  It's intimidating despite being clearly homemade.",
     "price": "50 USD",
     "price_postapoc": "2 USD 50 cent",
-    "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "uneven" },
+    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "uneven" },
     "material": [ { "type": "steel", "portion": 3 }, { "type": "wood", "portion": 7 } ],
     "symbol": "/",
     "color": "light_gray",
