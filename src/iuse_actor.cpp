@@ -968,7 +968,9 @@ std::optional<int> place_monster_iuse::use( Character *p, item &it, map *here,
     for( const skill_id &sk : skills ) {
         skill_offset += p->get_skill_level( sk ) / 2.0f;
     }
-    if( p->has_proficiency( proficiency_prof_robotic_programming ) && ( newmon.in_species( species_ROBOT ) || newmon.in_species( species_CYBORG ) || newmon.in_species( species_ROBOT_FLYING ) ) ) {
+    if( p->has_proficiency( proficiency_prof_robotic_programming ) &&
+        ( newmon.in_species( species_ROBOT ) || newmon.in_species( species_CYBORG ) ||
+          newmon.in_species( species_ROBOT_FLYING ) ) ) {
         skill_offset += 2;
     }
     /** @EFFECT_INT increases chance of a placed turret being friendly */

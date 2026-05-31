@@ -56,6 +56,7 @@ static const ammo_effect_str_id ammo_effect_STREAM( "STREAM" );
 static const ammo_effect_str_id ammo_effect_STREAM_BIG( "STREAM_BIG" );
 static const ammo_effect_str_id ammo_effect_STREAM_TINY( "STREAM_TINY" );
 static const ammo_effect_str_id ammo_effect_TANGLE( "TANGLE" );
+static const ammo_effect_str_id ammo_effect_TRIP( "TRIP" );
 static const ammo_effect_str_id ammo_effect_WIDE( "WIDE" );
 
 static const itype_id itype_glass_shard( "glass_shard" );
@@ -126,7 +127,8 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
     bool mon_there = mon != nullptr && !mon->is_dead_state();
     // And if we actually want to embed
     bool embed = mon_there && effects.count( ammo_effect_NO_EMBED ) == 0 &&
-                 effects.count( ammo_effect_TANGLE ) == 0;
+                 effects.count( ammo_effect_TANGLE ) == 0 &&
+                 effects.count( ammo_effect_TRIP ) == 0;
     // Don't embed in small creatures
     if( embed ) {
         const creature_size critter_size = mon->get_size();
@@ -155,6 +157,9 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
         // players and NPCs just get the downed effect, and item is dropped.
         // TODO: storing the item on player until they recover from downed
         if( effects.count( ammo_effect_TANGLE ) && mon_there ) {
+            do_drop = false;
+        }
+        if( effects.count( ammo_effect_TRIP ) && mon_there ) {
             do_drop = false;
         }
         if( effects.count( ammo_effect_ACT_ON_RANGED_HIT ) ) {

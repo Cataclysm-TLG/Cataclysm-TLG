@@ -5,7 +5,7 @@
     "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "bolas", "str_pl": "bolases" },
-    "description": "Some ropes with weights, designed to tangle the legs of a target when thrown, usually at an animal.  Used by the Gauchos of Argentina.",
+    "description": "A rope with stone weights at either end.  If thrown, these might trip a person or animal, provided it isn't too small or too big.",
     "weight": "400 g",
     "volume": "750 ml",
     "price": "6 USD",
@@ -16,7 +16,7 @@
     "color": "blue",
     "to_hit": -1,
     "ammo_type": "thrown",
-    "flags": [ "NOGIB", "TANGLE", "PRIMITIVE_RANGED_WEAPON" ]
+    "flags": [ "NOGIB", "TRIP", "PRIMITIVE_RANGED_WEAPON" ]
   },
   {
     "type": "ITEM",
@@ -56,7 +56,7 @@
     "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "net" },
-    "description": "A mesh of string and weights, traditionally used to catch fish and to entangle opponents in combat.",
+    "description": "A mesh of weights and cordage designed to entangle opponents in combat.  It probably won't work on anything too small or too big.",
     "weight": "1100 g",
     "volume": "1500 ml",
     "price": "6 USD 50 cent",

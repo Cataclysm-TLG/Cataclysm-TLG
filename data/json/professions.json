@@ -5953,7 +5953,14 @@
     "description": "Bionics are bleeding edge tech and you were poised to embark on a very promising career installing them in people.  The world has fallen apart, but maybe your skillset will still come in handy.",
     "points": 4,
     "skills": [ { "level": 4, "name": "firstaid" }, { "level": 4, "name": "computer" }, { "level": 2, "name": "electronics" } ],
-    "proficiencies": [ "prof_intro_biology", "prof_physiology", "prof_field_medic", "prof_dissect_humans", "prof_surgery", "prof_robotic_programming" ],
+    "proficiencies": [
+      "prof_intro_biology",
+      "prof_physiology",
+      "prof_field_medic",
+      "prof_dissect_humans",
+      "prof_surgery",
+      "prof_robotic_programming"
+    ],
     "items": {
       "both": {
         "entries": [

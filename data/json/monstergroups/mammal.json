@@ -128,7 +128,16 @@
   {
     "name": "GROUP_HORSES_STABLES",
     "type": "monstergroup",
-    "monsters": [ { "monster": "mon_null", "weight": 50 }, { "group": "GROUP_HORSES", "weight": 50, "ends": "6 days" } ]
+    "monsters": [
+      { "monster": "mon_null", "weight": 60 },
+      { "group": "GROUP_HORSES", "weight": 40 },
+      { "monster": "mon_zombie_horse_lame", "weight": 10 },
+      { "monster": "mon_zombie_horse", "weight": 10 },
+      { "group": "GROUP_HORSES", "weight": 50, "ends": "6 days" },
+      { "monster": "mon_zombie_horse", "weight": 50, "starts": "6 days" },
+      { "monster": "mon_zombie_horse", "weight": 50, "starts": "18 days" },
+      { "monster": "mon_zombie_horse_lame", "weight": 10, "starts": "6 days" }
+    ]
   },
   {
     "name": "GROUP_MOOSE",

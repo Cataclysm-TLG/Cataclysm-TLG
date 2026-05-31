@@ -92,6 +92,7 @@ static const ammo_effect_str_id ammo_effect_NO_DAMAGE_SCALING( "NO_DAMAGE_SCALIN
 static const ammo_effect_str_id ammo_effect_PARALYZEPOISON( "PARALYZEPOISON" );
 static const ammo_effect_str_id ammo_effect_ROBOT_DAZZLE( "ROBOT_DAZZLE" );
 static const ammo_effect_str_id ammo_effect_TANGLE( "TANGLE" );
+static const ammo_effect_str_id ammo_effect_TRIP( "TRIP" );
 
 static const anatomy_id anatomy_human_anatomy( "human_anatomy" );
 
@@ -1101,32 +1102,46 @@ double Creature::accuracy_projectile_attack( const int &speed, const double &mis
 void projectile::apply_effects_damage( Creature &target, Creature *source,
                                        const dealt_damage_instance &dealt_dam, bool critical ) const
 {
-    const map &here = get_map();
+    map &here = get_map();
 
     int dam = dealt_dam.total_damage();
     // Apply ammo effects to target.
     if( proj_effects.count( ammo_effect_TANGLE ) ) {
-        // if its a tameable animal, its a good way to catch them if they are running away, like them ranchers do!
-        // we assume immediate success, then certain monster types immediately break free in monster.cpp move_effects()
-        if( target.is_monster() ) {
-            const item &drop_item = get_drop();
-            if( !drop_item.is_null() ) {
-                target.add_effect( effect_source( source ), effect_tied, 1_turns, true );
-                target.as_monster()->tied_item = cata::make_value<item>( drop_item );
-            } else {
-                add_msg_debug( debugmode::DF_CREATURE,
-                               "projectile with TANGLE effect, but no drop item specified" );
+        const item &drop_item = get_drop();
+        // Break free in monster.cpp move_effects()
+        if( !drop_item.is_null() ) {
+            bool success = false;
+            if( target.enum_size() > 1 && target.enum_size() < 5 && !one_in( 6 ) ) {
+                if( target.is_monster() && !target.is_immune_effect( effect_downed ) ) {
+                    target.add_effect( effect_source( source ), effect_tied, 1_turns, true );
+                    target.as_monster()->tied_item = cata::make_value<item>( drop_item );
+                    success = true;
+                } else if( ( target.is_npc() || target.is_avatar() ) &&
+                           !target.is_immune_effect( effect_downed ) ) {
+                    target.add_effect( effect_source( source ), effect_downed, 1_turns );
+                    target.add_effect( effect_source( source ), effect_stunned, rng( 1_turns, 8_turns ) );
+                    success = true;
+                }
             }
-        } else if( ( target.is_npc() || target.is_avatar() ) &&
-                   !target.is_immune_effect( effect_downed ) ) {
-            // no tied up effect for people yet, just down them and stun them, its close enough to the desired effect.
-            // we can assume a person knows how to untangle their legs eventually and not panic like an animal.
-            target.add_effect( effect_source( source ), effect_downed, 1_turns );
-            // stunned to simulate staggering around and stumbling trying to get the entangled thing off of them.
-            target.add_effect( effect_source( source ), effect_stunned, rng( 3_turns, 8_turns ) );
+            if( !success ) {
+                here.add_item_or_charges( target.pos_bub(), drop_item );
+            }
         }
     }
-
+    if( proj_effects.count( ammo_effect_TRIP ) ) {
+        const item &drop_item = get_drop();
+        if( !drop_item.is_null() ) {
+            if( !one_in( 4 ) && target.enum_size() > 1 && target.enum_size() < 5 ) {
+                if( target.is_monster() && !target.is_immune_effect( effect_downed ) ) {
+                    target.add_effect( effect_source( source ), effect_downed, 1_turns, true );
+                } else if( ( target.is_npc() || target.is_avatar() ) &&
+                           !target.is_immune_effect( effect_downed ) ) {
+                    target.add_effect( effect_source( source ), effect_downed, 1_turns );
+                }
+            }
+            here.add_item_or_charges( target.pos_bub(), drop_item );
+        }
+    }
     Character &player_character = get_player_character();
     int amount = dam > 2 ? dam / 2 : one_in( 2 );
     if( proj_effects.count( ammo_effect_INCENDIARY ) ) {
