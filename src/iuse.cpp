@@ -1486,7 +1486,8 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
         const pet_food_data &petfood = mon->type->petfood;
         const std::set<std::string> &itemfood = it->get_comestible()->petfood;
         for( const std::string &food : petfood.food ) {
-            if( itemfood.find( food ) != itemfood.end() && mon->attitude_to( *p ) != Creature::Attitude::HOSTILE ) {
+            if( itemfood.find( food ) != itemfood.end() &&
+                mon->attitude_to( *p ) != Creature::Attitude::HOSTILE ) {
                 can_feed = true;
                 break;
             }
