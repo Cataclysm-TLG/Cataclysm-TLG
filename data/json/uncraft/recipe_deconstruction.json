@@ -2357,7 +2357,7 @@
     "result": "knife_meat_cleaver",
     "time": "5 m",
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "blade", 1 ], [ "scrap", 10 ] ] ]
+    "components": [ [ [ "scrap", 10 ] ] ]
   },
   {
     "type": "uncraft",
