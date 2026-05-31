@@ -1092,7 +1092,7 @@
     "max_intensity": 1,
     "int_dur_factor": "1 s"
   },
-    {
+  {
     "type": "mutation",
     "id": "PROF_MED",
     "name": { "str": "MD" },
@@ -1102,7 +1102,7 @@
     "random_at_chargen": false,
     "valid": false
   },
-    {
+  {
     "type": "mutation",
     "id": "PROF_AUTODOC",
     "name": { "str": "Augmentation Associate" },
@@ -1112,7 +1112,7 @@
     "random_at_chargen": false,
     "valid": false
   },
-    {
+  {
     "type": "mutation",
     "id": "PROF_POLICE",
     "name": { "str": "Police Officer" },
@@ -1122,7 +1122,7 @@
     "random_at_chargen": false,
     "valid": false
   },
-    {
+  {
     "type": "mutation",
     "id": "PROF_SWAT",
     "name": { "str": "SWAT Officer" },
@@ -1132,7 +1132,7 @@
     "random_at_chargen": false,
     "valid": false
   },
-    {
+  {
     "type": "mutation",
     "id": "PROF_PD_DET",
     "name": { "str": "Police Detective" },
