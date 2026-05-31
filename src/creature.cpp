@@ -1131,21 +1131,15 @@ void projectile::apply_effects_damage( Creature &target, Creature *source,
     if( proj_effects.count( ammo_effect_TRIP ) ) {
         const item &drop_item = get_drop();
         if( !drop_item.is_null() ) {
-            bool success = false;
             if( !one_in( 4 ) && target.enum_size() > 1 && target.enum_size() < 5 ) {
                 if( target.is_monster() && !target.is_immune_effect( effect_downed ) ) {
                     target.add_effect( effect_source( source ), effect_downed, 1_turns, true );
-                    target.as_monster()->tied_item = cata::make_value<item>( drop_item );
-                    success = true;
                 } else if( ( target.is_npc() || target.is_avatar() ) &&
                            !target.is_immune_effect( effect_downed ) ) {
                     target.add_effect( effect_source( source ), effect_downed, 1_turns );
-                    success = true;
                 }
             }
-            if( !success ) {
-                here.add_item_or_charges( target.pos_bub(), drop_item );
-            }
+            here.add_item_or_charges( target.pos_bub(), drop_item );
         }
     }
     Character &player_character = get_player_character();
