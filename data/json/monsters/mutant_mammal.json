@@ -258,7 +258,8 @@
     "path_settings": { "max_dist": 10 },
     "grab_strength": 55,
     "special_attacks": [
-      [ "EAT_FOOD", 60 ], [ "EAT_CARRION", 60 ],
+      [ "EAT_FOOD", 60 ],
+      [ "EAT_CARRION", 60 ],
       {
         "type": "bite",
         "cooldown": 5,
@@ -710,7 +711,7 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "extend": { "flags": [ "NO_BREED", "CAN_OPEN_DOORS" ] }
   },
-    {
+  {
     "id": "mon_horse_destrier",
     "type": "MONSTER",
     "name": { "str": "destrier" },
@@ -743,11 +744,17 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 2 },
-    "special_attacks": [ { "id": "smash", "throw_strength": 58, "cooldown": 13 },
+    "special_attacks": [
+      { "id": "smash", "throw_strength": 58, "cooldown": 13 },
       { "id": "scratch", "cooldown": 10 },
-      { "type": "bite", "cooldown": 30, "infection_chance": 50 }, [ "EAT_CARRION", 60 ] ],
+      { "type": "bite", "cooldown": 30, "infection_chance": 50 },
+      [ "EAT_CARRION", 60 ]
+    ],
     "zombify_into": "mon_zombie_horse",
-    "petfood": { "food": [ "PREDATOR_FUN" ], "feed": "The %s devours the meat.  It growls low at you, but no longer seems quite as unfriendly." },
+    "petfood": {
+      "food": [ "PREDATOR_FUN" ],
+      "feed": "The %s devours the meat.  It growls low at you, but no longer seems quite as unfriendly."
+    },
     "mountable_weight_ratio": 0.35,
     "flags": [
       "SEES",
