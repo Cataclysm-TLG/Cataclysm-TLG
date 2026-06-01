@@ -282,6 +282,12 @@ class tileset
         // the tileset defines its own ITEM_HIGHLIGHT.
         std::optional<int> default_item_highlight_index;
 
+        // Renderer-instance and device-texture epochs the textures were
+        // uploaded against. A bundle whose epochs differ from the live ones
+        // is stale and must be reuploaded before use.
+        uint64_t renderer_instance_generation_at_upload = 0;
+        uint64_t gpu_textures_generation_at_upload = 0;
+
         std::unordered_set<std::string> duplicate_ids;
 
         std::unordered_map<std::string, tile_type> tile_ids;
@@ -373,6 +379,16 @@ class tileset
         void set_default_item_highlight_index( std::optional<int> idx ) {
             default_item_highlight_index = idx;
         }
+        uint64_t get_renderer_instance_generation_at_upload() const {
+            return renderer_instance_generation_at_upload;
+        }
+        uint64_t get_gpu_textures_generation_at_upload() const {
+            return gpu_textures_generation_at_upload;
+        }
+        void set_upload_generations( uint64_t renderer_instance_gen, uint64_t gpu_textures_gen ) {
+            renderer_instance_generation_at_upload = renderer_instance_gen;
+            gpu_textures_generation_at_upload = gpu_textures_gen;
+        }
 
         tile_type &create_tile_type( const std::string &id, tile_type &&new_tile_type );
         const tile_type *find_tile_type( const std::string &id ) const;
@@ -396,10 +412,9 @@ class tileset
                 season_type season ) const;
 };
 
-// Hashes the options baked into tileset textures so changing any of them
-// invalidates the cache key and forces a reupload. Always folds in
-// SCALING_MODE; adds MEMORY_RGB_{DARK,BRIGHT}_{R,G,B} and MEMORY_GAMMA under
-// the "color_pixel_custom" memory map mode.
+// Hash of color-filter configuration that affects pre-baked texture variants.
+// Currently covers MEMORY_RGB_{DARK,BRIGHT}_{R,G,B} and MEMORY_GAMMA when
+// MEMORY_MAP_MODE is "color_pixel_custom"; zero otherwise.
 uint64_t compute_tileset_filter_fingerprint( const std::string &memory_map_mode );
 
 struct tileset_cache_key {
