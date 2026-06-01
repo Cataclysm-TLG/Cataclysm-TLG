@@ -1858,16 +1858,10 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
 
     RenderSetClipRect( renderer, nullptr );
 #if SDL_MAJOR_VERSION >= 3
-    // Flush failure means the shader bind boundary forbids a target switch:
-    // abort the scope's unbind, latch recovery, and throw to unwind
-    // curses_drawwindow instead of drawing terrain overlays on a dead renderer.
-    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
-        if( !vp->flush() ) {
-            draw_scope.abort_unbind();
-            display_buffer_scope_signal_recovery_required();
-            throw std::runtime_error(
-                "cata_tiles::draw_om: variant_pass flush failed at end of frame; renderer in undefined state" );
-        }
+    // Flush so GPU shader state from sprite draws is not left bound across a
+    // following target switch.
+    if( m_variant_pass ) {
+        m_variant_pass->flush();
     }
 #endif
 }
