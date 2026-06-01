@@ -228,6 +228,20 @@ struct atlas_replay_descriptor {
     int expected_tilecount = 0;
 };
 
+// Inputs needed to re-upload one atlas after renderer recreate or
+// device-texture reset. image_path_u8 is a UTF-8 byte sequence so the
+// descriptor avoids a cata_path dependency.
+struct atlas_replay_descriptor {
+    std::string image_path_u8;
+    int color_key_r = -1;
+    int color_key_g = -1;
+    int color_key_b = -1;
+    int sprite_width = 0;
+    int sprite_height = 0;
+    int atlas_offset = 0;
+    int expected_tilecount = 0;
+};
+
 class tileset
 {
     private:
@@ -267,12 +281,6 @@ class tileset
         // Sprite index of the synthetic highlight overlay, or nullopt when
         // the tileset defines its own ITEM_HIGHLIGHT.
         std::optional<int> default_item_highlight_index;
-
-        // Renderer-instance and device-texture epochs the textures were
-        // uploaded against. A bundle whose epochs differ from the live ones
-        // is stale and must be reuploaded before use.
-        uint64_t renderer_instance_generation_at_upload = 0;
-        uint64_t gpu_textures_generation_at_upload = 0;
 
         std::unordered_set<std::string> duplicate_ids;
 
@@ -364,16 +372,6 @@ class tileset
         }
         void set_default_item_highlight_index( std::optional<int> idx ) {
             default_item_highlight_index = idx;
-        }
-        uint64_t get_renderer_instance_generation_at_upload() const {
-            return renderer_instance_generation_at_upload;
-        }
-        uint64_t get_gpu_textures_generation_at_upload() const {
-            return gpu_textures_generation_at_upload;
-        }
-        void set_upload_generations( uint64_t renderer_instance_gen, uint64_t gpu_textures_gen ) {
-            renderer_instance_generation_at_upload = renderer_instance_gen;
-            gpu_textures_generation_at_upload = gpu_textures_gen;
         }
 
         tile_type &create_tile_type( const std::string &id, tile_type &&new_tile_type );
