@@ -209,7 +209,8 @@
     "description": "The stomach of a human.  It is surprisingly durable.",
     "material": [ "hflesh" ],
     "delete": { "flags": [ "PREDATOR_FUN" ] },
-    "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ],
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "hstomach_large",
@@ -296,7 +297,9 @@
     "cooks_like": "meat_cooked",
     "vitamins": [ [ "calcium", 2 ], [ "iron", 12 ], [ "meat_allergen", 1 ] ],
     "flags": [ "SMOKABLE", "RAW", "PREDATOR_FUN" ],
-    "smoking_result": "meat_smoked"
+    "use_action": [ "PETFOOD" ],
+    "smoking_result": "meat_smoked",
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "animal_blood",
@@ -317,7 +320,7 @@
     "charges": 1,
     "phase": "liquid",
     "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ] ],
-    "flags": [ "TRADER_AVOID", "RAW", "PREDATOR_FUN" ]
+    "flags": [ "TRADER_AVOID", "RAW", "HEMOVORE_FUN" ]
   },
   {
     "id": "porkbelly",
@@ -335,7 +338,9 @@
     "fun": -10,
     "vitamins": [ [ "vitC", 0 ], [ "calcium", 0 ], [ "iron", 0 ], [ "meat_allergen", 1 ] ],
     "flags": [ "SMOKABLE", "RAW", "PREDATOR_FUN" ],
-    "smoking_result": "meat_smoked"
+    "use_action": [ "PETFOOD" ],
+    "smoking_result": "meat_smoked",
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "raw_cured_fatty_meat",
@@ -425,7 +430,9 @@
     "cooks_like": "mutant_meat_cooked",
     "proportional": { "price": 0.2, "calories": 0.5, "parasites": 0.75 },
     "vitamins": [ [ "vitC", 2 ], [ "calcium", 1 ], [ "iron", 6 ], [ "mutant_toxin", 25 ], [ "meat_allergen", 1 ] ],
-    "flags": [ "SMOKABLE", "BAD_TASTE", "RAW", "PREDATOR_FUN" ]
+    "flags": [ "SMOKABLE", "BAD_TASTE", "RAW", "PREDATOR_FUN" ],
+    "use_action": [ "PETFOOD" ],
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "mutant_blood",
@@ -447,7 +454,7 @@
     "phase": "liquid",
     "spoils_in": "1 day",
     "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "mutant_toxin", 25 ] ],
-    "flags": [ "TRADER_AVOID", "RAW", "BAD_TASTE", "PREDATOR_FUN" ]
+    "flags": [ "TRADER_AVOID", "RAW", "BAD_TASTE", "HEMOVORE_FUN" ]
   },
   {
     "id": "mutant_meat_scrap",
@@ -498,7 +505,7 @@
     "phase": "liquid",
     "spoils_in": "1 day",
     "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "mutant_toxin", 25 ], [ "human_flesh_vitamin", 1 ] ],
-    "flags": [ "TRADER_AVOID", "RAW", "BAD_TASTE", "PREDATOR_FUN" ]
+    "flags": [ "TRADER_AVOID", "RAW", "BAD_TASTE", "HEMOVORE_FUN" ]
   },
   {
     "id": "mutant_human_cooked",
@@ -903,7 +910,8 @@
     "calories": 60,
     "quench": 1,
     "fun": -15,
-    "extend": { "flags": [ "PREDATOR_FUN" ] }
+    "extend": { "flags": [ "PREDATOR_FUN" ] },
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "stomach_large",
@@ -1055,7 +1063,9 @@
     "fun": -10,
     "calories": 40,
     "vitamins": [ [ "vitC", 9 ], [ "calcium", 0 ], [ "iron", 14 ], [ "meat_allergen", 1 ] ],
-    "extend": { "flags": [ "PREDATOR_FUN" ] }
+    "extend": { "flags": [ "PREDATOR_FUN" ] },
+    "use_action": [ "PETFOOD" ],
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "human_lung",
@@ -1117,7 +1127,9 @@
     "fun": -10,
     "calories": 67,
     "vitamins": [ [ "vitC", "3 mg" ], [ "calcium", "2840 μg" ], [ "iron", "2660 μg" ], [ "meat_allergen", 1 ] ],
-    "extend": { "flags": [ "PREDATOR_FUN" ] }
+    "extend": { "flags": [ "PREDATOR_FUN" ] },
+    "use_action": [ "PETFOOD" ],
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "human_heart",
@@ -1128,7 +1140,8 @@
     "name": { "str": "piece of raw human heart", "str_pl": "pieces of raw human heart" },
     "description": "A portion of heart from a human.  It's tough but not that chewy, and it spoils very quickly.  It appears to have been extracted too crudely to ever be useful as a transplant.",
     "material": [ "hflesh" ],
-    "vitamins": [ [ "vitC", 0 ], [ "calcium", 3 ], [ "iron", 14 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
+    "vitamins": [ [ "vitC", 0 ], [ "calcium", 3 ], [ "iron", 14 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ],
+    "use_action": [ "PETFOOD" ]
   },
   {
     "id": "heart_cooked",
@@ -1255,7 +1268,9 @@
     "calories": 471,
     "fun": -3,
     "vitamins": [ [ "iron", 17 ], [ "meat_allergen", 1 ] ],
-    "flags": [ "RAW", "PREDATOR_FUN" ]
+    "flags": [ "RAW", "PREDATOR_FUN" ],
+    "use_action": [ "PETFOOD" ],
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "human_marrow",
@@ -1276,7 +1291,8 @@
     "description": "Soft, spongy and oddly-colored marrow tissue from the bone of a heavily mutated animal.",
     "proportional": { "price": 0.2, "calories": 0.5 },
     "vitamins": [ [ "iron", 7 ], [ "mutant_toxin", 25 ], [ "meat_allergen", 1 ] ],
-    "flags": [ "BAD_TASTE", "RAW", "PREDATOR_FUN" ]
+    "flags": [ "BAD_TASTE", "RAW", "PREDATOR_FUN" ],
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "id": "mutant_human_marrow",
@@ -1467,7 +1483,7 @@
     "charges": 1,
     "phase": "liquid",
     "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ],
-    "flags": [ "TRADER_AVOID", "RAW", "PREDATOR_FUN" ]
+    "flags": [ "TRADER_AVOID", "RAW", "HEMOVORE_FUN" ]
   },
   {
     "type": "ITEM",
@@ -1815,7 +1831,9 @@
     "volume": "500 ml",
     "fun": -25,
     "vitamins": [ [ "mutagen_beast", 300 ], [ "meat_allergen", 1 ] ],
-    "flags": [ "PREDATOR_FUN" ]
+    "flags": [ "PREDATOR_FUN" ],
+    "use_action": [ "PETFOOD" ],
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "type": "ITEM",
@@ -1835,7 +1853,9 @@
     "volume": "1 L",
     "fun": -25,
     "vitamins": [ [ "mutagen_beast", 300 ], [ "meat_allergen", 1 ] ],
-    "flags": [ "PREDATOR_FUN" ]
+    "flags": [ "PREDATOR_FUN" ],
+    "use_action": [ "PETFOOD" ],
+    "petfood": [ "PREDATOR_FUN" ]
   },
   {
     "type": "ITEM",
