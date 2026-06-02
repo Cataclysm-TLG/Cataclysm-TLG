@@ -62,6 +62,7 @@
 #include "input_context.h"
 #include "json.h"
 #include "line.h"
+#include "loading_ui.h"
 #include "map.h"
 #include "map_extras.h"
 #include "mapbuffer.h"
@@ -1000,6 +1001,11 @@ bool renderer_should_abort_frame()
     return renderer_coordinator.should_abort_frame();
 }
 
+uint64_t renderer_resource_generation()
+{
+    return renderer_coordinator.resource_generation();
+}
+
 void get_display_buffer_dims( int *w, int *h )
 {
     int buf_w = 0;
@@ -1460,111 +1466,6 @@ recipe_result renderer_resource_coordinator::run_recipe_for( renderer_recovery_s
     return r;
 }
 
-
-recipe_result renderer_resource_coordinator::recipe_device_lost()
-{
-    // Teardown before install_renderer_with_fallback is best-effort: the
-    // renderer is dying, so a failed flush force-abandons local shader state
-    // instead of calling SDL again, and the unbind ignores its result.
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-#if SDL_MAJOR_VERSION >= 3
-    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
-        if( !vp->flush() ) {
-            vp->force_abandon_gpu_resources();
-        }
-    }
-#endif
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    // A prior attempt may have already torn the renderer down before a pause;
-    // there is no target to unbind in that case.
-    if( renderer ) {
-        permanent_render_target_bind( renderer, nullptr, shared_variant_pass_or_null() );
-    }
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    reset_context_minimaps();
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    reset_context_tint_masks();
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    // Drop atlas textures against the dying-but-still-live renderer before it
-    // is destroyed in the fallback install below.
-    release_live_atlases();
-    // The renderer is about to be destroyed: abandon any quarantined replay
-    // candidates so their deleters skip SDL_DestroyTexture on the dead
-    // renderer.
-    replay_quarantine_.abandon_pre_lost_renderer();
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    release_font_roots();
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    if( geometry ) {
-        geometry->release_gpu_resources();
-    }
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-#if defined(__ANDROID__)
-    touch_joystick.reset();
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-#endif
-    display_buffer.reset();
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-#if SDL_MAJOR_VERSION >= 3
-    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
-        vp->release_gpu_resources();
-    }
-#endif
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    if( !install_renderer_with_fallback() ) {
-        return { recipe_outcome::failure };
-    }
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    // Reselect geometry strategy now the final installed backend is known --
-    // a software fallback may not support color-modulated textures.
-    rebuild_geometry_strategy( software_renderer_ );
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-    rebuild_font_roots();
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-#if defined(__ANDROID__)
-    touch_joystick = CreateTextureFromSurface( renderer, load_image( "android/joystick.png" ) );
-    if( check_pause_abort() ) {
-        return { recipe_outcome::failure };
-    }
-#endif
-    const atlas_upload_interrupt replay = replay_live_atlases();
-    if( replay != atlas_upload_interrupt::none ) {
-        return map_replay_interrupt( replay );
-    }
-    ++renderer_resource_generation_;
-    display_buffer_scope_clear_recovery_required();
-    run_post_success_full_invalidation();
-    return { recipe_outcome::success };
-}
-
 void renderer_resource_coordinator::assert_recipe_postcondition(
     [[maybe_unused]] const uint64_t resource_gen_before,
     [[maybe_unused]] const renderer_texture_generations gens_before ) const
@@ -1738,6 +1639,7 @@ recipe_result renderer_resource_coordinator::recipe_device_reset()
         return { recipe_outcome::failure };
     }
 #endif
+    loading_ui::release_gpu_resources();
     display_buffer.reset();
     if( check_pause_abort() ) {
         return { recipe_outcome::failure };
@@ -1856,6 +1758,111 @@ bool renderer_resource_coordinator::install_renderer_with_fallback()
         return true;
     }
     return false;
+}
+
+recipe_result renderer_resource_coordinator::recipe_device_lost()
+{
+    // Teardown before install_renderer_with_fallback is best-effort: the
+    // renderer is dying, so a failed flush force-abandons local shader state
+    // instead of calling SDL again, and the unbind ignores its result.
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+#if SDL_MAJOR_VERSION >= 3
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
+        if( !vp->flush() ) {
+            vp->force_abandon_gpu_resources();
+        }
+    }
+#endif
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    // A prior attempt may have already torn the renderer down before a pause;
+    // there is no target to unbind in that case.
+    if( renderer ) {
+        permanent_render_target_bind( renderer, nullptr, shared_variant_pass_or_null() );
+    }
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    reset_context_minimaps();
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    reset_context_tint_masks();
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    // Drop atlas textures against the dying-but-still-live renderer before it
+    // is destroyed in the fallback install below.
+    release_live_atlases();
+    // The renderer is about to be destroyed: abandon any quarantined replay
+    // candidates so their deleters skip SDL_DestroyTexture on the dead
+    // renderer.
+    replay_quarantine_.abandon_pre_lost_renderer();
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    release_font_roots();
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    if( geometry ) {
+        geometry->release_gpu_resources();
+    }
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+#if defined(__ANDROID__)
+    touch_joystick.reset();
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+#endif
+    loading_ui::release_gpu_resources();
+    display_buffer.reset();
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+#if SDL_MAJOR_VERSION >= 3
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
+        vp->release_gpu_resources();
+    }
+#endif
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    if( !install_renderer_with_fallback() ) {
+        return { recipe_outcome::failure };
+    }
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    // Reselect geometry strategy now the final installed backend is known --
+    // a software fallback may not support color-modulated textures.
+    rebuild_geometry_strategy( software_renderer_ );
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+    rebuild_font_roots();
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+#if defined(__ANDROID__)
+    touch_joystick = CreateTextureFromSurface( renderer, load_image( "android/joystick.png" ) );
+    if( check_pause_abort() ) {
+        return { recipe_outcome::failure };
+    }
+#endif
+    const atlas_upload_interrupt replay = replay_live_atlases();
+    if( replay != atlas_upload_interrupt::none ) {
+        return map_replay_interrupt( replay );
+    }
+    ++renderer_resource_generation_;
+    display_buffer_scope_clear_recovery_required();
+    run_post_success_full_invalidation();
+    return { recipe_outcome::success };
 }
 
 void renderer_resource_coordinator::record_display_buffer_dims()
