@@ -283,42 +283,19 @@ gpu_handle_graveyard &setup_target_quarantine()
 }
 } // namespace
 
-// Terminal-sized intermediate buffer dimensions: logical window size over
-// scaling_factor, independent of backing-store pixels.
-static point compute_display_buffer_dims()
-{
-    return point{ WindowWidth / scaling_factor, WindowHeight / scaling_factor };
-}
-
-// Backing-store pixel dimensions of the window, tracked independently of the
-// logical size so a DPI-only change leaves the display buffer alone.
-[[maybe_unused]] static point compute_drawable_dims()
-{
-    int pw = 0;
-    int ph = 0;
-    GetWindowSizeInPixels( ::window.get(), &pw, &ph );
-    return point{ pw, ph };
-}
-
 static bool SetupRenderTarget()
 {
     SetRenderDrawBlendMode( renderer, SDL_BLENDMODE_NONE );
     // Stage into a local so a failed bind leaves the previous display_buffer
     // intact rather than orphaning a still-referenced target.
-    const point buffer_dims = compute_display_buffer_dims();
     SDL_Texture_Ptr staged = CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888,
-                                            SDL_TEXTUREACCESS_TARGET, buffer_dims.x,
-                                            buffer_dims.y );
+                                            SDL_TEXTUREACCESS_TARGET, WindowWidth / scaling_factor,
+                                            WindowHeight / scaling_factor );
     if( printErrorIf( !staged, "Failed to create window buffer" ) ) {
         return false;
     }
-#if SDL_MAJOR_VERSION >= 3
-    cata_shader::variant_pass *vp = get_shared_variant_pass();
-#else
-    cata_shader::variant_pass *vp = nullptr;
-#endif
     {
-        const bind_result r = permanent_render_target_bind( renderer, staged.get(), vp );
+        const bind_result r = permanent_render_target_bind( renderer, staged.get() );
         if( r == bind_result::failed_in_switch ) {
             // Boundary undefined: quarantine staged so its dtor cannot race the
             // active target. The previous display_buffer is untouched.
@@ -326,13 +303,13 @@ static bool SetupRenderTarget()
             return false;
         }
         if( r != bind_result::ok ) {
-            // variant_pass refused before binding; staged never bound, drop it.
+            // Refused before binding; staged was never bound, drop it.
             return false;
         }
     }
     ClearScreen();
     {
-        const bind_result r = permanent_render_target_bind( renderer, nullptr, vp );
+        const bind_result r = permanent_render_target_bind( renderer, nullptr );
         if( r == bind_result::failed_in_switch ) {
             // Detach failed: staged is still the active target, so quarantine
             // rather than destroy.
@@ -788,20 +765,15 @@ void refresh_display()
     // Present from the window target. The buffer stays unbound; draw paths
     // re-bind it next frame. Go through the pass-aware helper so variant_pass
     // can flush before the switch.
-#if SDL_MAJOR_VERSION >= 3
-    cata_shader::variant_pass *present_vp = get_shared_variant_pass();
-#else
-    cata_shader::variant_pass *present_vp = nullptr;
-#endif
     {
-        const bind_result r = permanent_render_target_bind( renderer, nullptr, present_vp );
+        const bind_result r = permanent_render_target_bind( renderer, nullptr );
         if( r == bind_result::failed_in_switch ) {
             // Helper already latched; signal again defensively and skip present.
             display_buffer_scope_signal_recovery_required();
             return;
         }
         if( r != bind_result::ok ) {
-            // variant_pass refused; skip this frame.
+            // Refused; skip this frame.
             return;
         }
     }
@@ -947,13 +919,6 @@ void convert_event_to_display_buffer_coords( SDL_Event *event )
     }
 }
 
-#if SDL_MAJOR_VERSION >= 3
-cata_shader::variant_pass *get_shared_variant_pass()
-{
-    return shared_variant_pass.get();
-}
-#endif
-
 namespace
 {
 // Draw-scope state. depth counts nested scopes. aborted lets an inner
@@ -1021,12 +986,7 @@ display_buffer_draw_scope::display_buffer_draw_scope()
         // rebuilds the renderer.
         return;
     }
-#if SDL_MAJOR_VERSION >= 3
-    cata_shader::variant_pass *vp = get_shared_variant_pass();
-#else
-    cata_shader::variant_pass *vp = nullptr;
-#endif
-    const bind_result r = permanent_render_target_bind( renderer, display_buffer.get(), vp );
+    const bind_result r = permanent_render_target_bind( renderer, display_buffer.get() );
     if( r == bind_result::failed_in_switch ) {
         // Boundary undefined: latch recovery so this and later scopes refuse.
         display_buffer_scope_recovery_required = true;
@@ -1034,7 +994,7 @@ display_buffer_draw_scope::display_buffer_draw_scope()
         return;
     }
     if( r != bind_result::ok ) {
-        // variant_pass refused, boundary intact: skip the draw, do not latch.
+        // Refused, boundary intact: skip the draw but do not latch recovery.
         display_buffer_scope_invalid = true;
         return;
     }
@@ -1065,112 +1025,10 @@ display_buffer_draw_scope::~display_buffer_draw_scope()
         // -- another switch on the undefined renderer would deepen corruption.
         return;
     }
-#if SDL_MAJOR_VERSION >= 3
-    cata_shader::variant_pass *vp = get_shared_variant_pass();
-#else
-    cata_shader::variant_pass *vp = nullptr;
-#endif
-    if( permanent_render_target_bind( renderer, nullptr, vp )
+    if( permanent_render_target_bind( renderer, nullptr )
         == bind_result::failed_in_switch ) {
         // Boundary undefined: latch so later scopes refuse until rebuild.
         display_buffer_scope_recovery_required = true;
-    }
-}
-
-static void invalidate_framebuffer( std::vector<curseline> &framebuffer, const point &p, int width,
-                                    int height )
-{
-    for( int j = 0, fby = p.y; j < height; j++, fby++ ) {
-        std::fill_n( framebuffer[fby].chars.begin() + p.x, width, cursecell( "" ) );
-    }
-}
-
-static void invalidate_framebuffer( std::vector<curseline> &framebuffer )
-{
-    for( curseline &i : framebuffer ) {
-        std::fill_n( i.chars.begin(), i.chars.size(), cursecell( "" ) );
-    }
-}
-
-void reinitialize_framebuffer( const bool force_invalidate )
-{
-    static int prev_height = -1;
-    static int prev_width = -1;
-    //Re-initialize the framebuffer with new values.
-    const int new_height = std::max( { TERMY, OVERMAP_WINDOW_HEIGHT, TERRAIN_WINDOW_HEIGHT } );
-    const int new_width = std::max( { TERMX, OVERMAP_WINDOW_WIDTH, TERRAIN_WINDOW_WIDTH } );
-    if( new_height != prev_height || new_width != prev_width ) {
-        prev_height = new_height;
-        prev_width = new_width;
-        oversized_framebuffer.resize( new_height );
-        for( int i = 0; i < new_height; i++ ) {
-            oversized_framebuffer[i].chars.assign( new_width, cursecell( "" ) );
-        }
-        terminal_framebuffer.resize( new_height );
-        for( int i = 0; i < new_height; i++ ) {
-            terminal_framebuffer[i].chars.assign( new_width, cursecell( "" ) );
-        }
-    } else if( force_invalidate || need_invalidate_framebuffers ) {
-        need_invalidate_framebuffers = false;
-        invalidate_framebuffer( oversized_framebuffer );
-        invalidate_framebuffer( terminal_framebuffer );
-    }
-}
-
-static void invalidate_framebuffer_proportion( cata_cursesport::WINDOW *win )
-{
-    const int oversized_width = std::max( TERMX, std::max( OVERMAP_WINDOW_WIDTH,
-                                          TERRAIN_WINDOW_WIDTH ) );
-    const int oversized_height = std::max( TERMY, std::max( OVERMAP_WINDOW_HEIGHT,
-                                           TERRAIN_WINDOW_HEIGHT ) );
-
-    // check if the framebuffers/windows have been prepared yet
-    if( oversized_height == 0 || oversized_width == 0 ) {
-        return;
-    }
-    if( !g || win == nullptr ) {
-        return;
-    }
-    if( win == g->w_overmap || win == g->w_terrain ) {
-        return;
-    }
-
-    // track the dimensions for conversion
-    const point termpixel( win->pos.x * font->width, win->pos.y * font->height );
-    const int termpixel_x2 = termpixel.x + win->width * font->width - 1;
-    const int termpixel_y2 = termpixel.y + win->height * font->height - 1;
-
-    if( map_font != nullptr && map_font->width != 0 && map_font->height != 0 ) {
-        const point mapfont( termpixel.x / map_font->width, termpixel.y / map_font->height );
-        const int mapfont_x2 = std::min( termpixel_x2 / map_font->width, oversized_width - 1 );
-        const int mapfont_y2 = std::min( termpixel_y2 / map_font->height, oversized_height - 1 );
-        const int mapfont_width = mapfont_x2 - mapfont.x + 1;
-        const int mapfont_height = mapfont_y2 - mapfont.y + 1;
-        invalidate_framebuffer( oversized_framebuffer, mapfont, mapfont_width,
-                                mapfont_height );
-    }
-
-    if( overmap_font != nullptr && overmap_font->width != 0 && overmap_font->height != 0 ) {
-        const point overmapfont( termpixel.x / overmap_font->width, termpixel.y / overmap_font->height );
-        const int overmapfont_x2 = std::min( termpixel_x2 / overmap_font->width, oversized_width - 1 );
-        const int overmapfont_y2 = std::min( termpixel_y2 / overmap_font->height,
-                                             oversized_height - 1 );
-        const int overmapfont_width = overmapfont_x2 - overmapfont.x + 1;
-        const int overmapfont_height = overmapfont_y2 - overmapfont.y + 1;
-        invalidate_framebuffer( oversized_framebuffer, overmapfont,
-                                overmapfont_width,
-                                overmapfont_height );
-    }
-}
-
-// clear the framebuffer when werase is called on certain windows that don't use the main terminal font
-void cata_cursesport::handle_additional_window_clear( WINDOW *win )
-{
-    if( !g ) {
-        return;
-    }
-    if( win == g->w_terrain || win == g->w_overmap ) {
-        invalidate_framebuffer( oversized_framebuffer );
     }
 }
 
@@ -2833,6 +2691,17 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
     }
 
     RenderSetClipRect( renderer, nullptr );
+#if SDL_MAJOR_VERSION >= 3
+    // Flush failure means the shader bind boundary forbids a target switch:
+    // abort the scope's unbind, latch recovery, and throw to unwind
+    // curses_drawwindow instead of drawing terrain overlays on a dead renderer.
+    if( m_variant_pass && !m_variant_pass->flush() ) {
+        draw_scope.abort_unbind();
+        display_buffer_scope_signal_recovery_required();
+        throw std::runtime_error(
+            "cata_tiles::draw_om: variant_pass flush failed at end of frame; renderer in undefined state" );
+    }
+#endif
 }
 
 static bool draw_window( Font_Ptr &font, const catacurses::window &w, const point &offset,
@@ -4787,6 +4656,9 @@ static void CheckMessages()
     bool render_target_reset = false;
     using cata::options::mouse;
 
+    int imgui_buf_w = 0;
+    int imgui_buf_h = 0;
+    get_display_buffer_dims( &imgui_buf_w, &imgui_buf_h );
     while( SDL_PollEvent( &ev ) ) {
         // Window events: SDL3 flattens the SDL_WINDOWEVENT+subtype to top-level events.
         // IsWindowEvent/GetWindowEventID normalize across versions.

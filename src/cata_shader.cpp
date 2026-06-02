@@ -532,36 +532,8 @@ void variant_pass::reset()
     clear_state_arrays( !flushed );
     probe_attempted_ = false;
     probed_ok_ = false;
-    // On flush failure leave session_disabled_ set so callers refuse the
-    // boundary; the rebuild driving reset() decides when to clear it.
-    if( flushed ) {
-        session_disabled_ = false;
-        unbind_required_ = false;
-    }
-}
-
-void variant_pass::clear_state_arrays( bool abandon_handles )
-{
-    if( abandon_handles ) {
-        for( shader &s : shaders_ ) {
-            s.abandon();
-        }
-        for( render_state &s : states_ ) {
-            s.abandon();
-        }
-        for( shader &s : memory_shaders_ ) {
-            s.abandon();
-        }
-        for( render_state &s : memory_states_ ) {
-            s.abandon();
-        }
-    }
-    // Render states reference their fragment shader; clear states before
-    // shaders so SDL does not see a dangling reference on the clean path.
-    states_ = {};
-    memory_states_ = {};
-    shaders_ = {};
-    memory_shaders_ = {};
+    session_disabled_ = false;
+    unbind_required_ = false;
 }
 
 void variant_pass::probe()
@@ -671,7 +643,7 @@ variant_pass::begin_result variant_pass::try_begin( variant_kind v )
         // currently_bound_ so operator== rejects the boundary, and force the
         // next flush() to call null-state even if currently_bound_ was empty.
         unbind_required_ = true;
-        return begin_result::abort_frame;
+        return false;
     }
     if( target ) {
         currently_bound_ = v;
@@ -679,7 +651,7 @@ variant_pass::begin_result variant_pass::try_begin( variant_kind v )
         currently_bound_.reset();
     }
     unbind_required_ = false;
-    return target != nullptr ? begin_result::bound : begin_result::use_atlas;
+    return target != nullptr;
 }
 
 bool variant_pass::end()
@@ -689,10 +661,6 @@ bool variant_pass::end()
 
 bool variant_pass::flush()
 {
-    if( abandoned_pending_rebind_ ) {
-        // Embargo raised: refuse without SDL. false signals the boundary loss.
-        return false;
-    }
     if( !currently_bound_ && !unbind_required_ ) {
         return true;
     }
