@@ -218,7 +218,7 @@ class renderer_resource_coordinator
         // bootstrapping; rendering is not yet allowed.
         void seed_renderer_policy( const std::string &renderer_name );
         // Move bootstrapping -> ready once the base renderer, display buffer,
-        // shader pass, ImGui, and fonts are up. Rendering and recovery are
+        // shader pass and fonts are up. Rendering and recovery are
         // allowed from here, before any world-load atlas upload.
         void finish_bootstrap();
 

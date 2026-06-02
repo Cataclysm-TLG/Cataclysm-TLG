@@ -344,8 +344,10 @@ void ui_adaptor::redraw_invalidated()
     }
 #if defined(TILES)
     display_buffer_draw_scope draw_scope;
-    if( display_buffer_scope_is_invalid() ) {
-        // Bind failed; skip the redraw. Invalidation is preserved for retry.
+    if( !draw_scope.should_draw() ) {
+        // Return before the redraw callbacks clear their invalidation flags, so a
+        // queued recovery, a failed bind, or a watcher race all leave invalidation
+        // intact for the next drain to replay the full UI.
         return;
     }
     int buf_w = 0;

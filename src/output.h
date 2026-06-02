@@ -1196,7 +1196,7 @@ void refresh_display();
 void drain_renderer_recovery();
 
 /**
- * Sync OS cursor and ImGui cursor-handling flags with the current
+ * Sync OS cursor-handling flags with the current
  * ENABLE_MOUSE and HIDE_CURSOR option values. No-op in curses builds.
  */
 void refresh_mouse_config();
