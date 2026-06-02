@@ -877,15 +877,12 @@ static android_visible_frame_inbox visible_frame_inbox;
 
 extern "C" {
 
-    JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeVisibleDisplayFrameChanged(
-        JNIEnv *env, jclass jcls, jint left, jint top, jint right, jint bottom,
-        jboolean visible )
+    JNIEXPORT void JNICALL Java_com_cleverraven_cataclysmdda_CataclysmDDA_onNativeImeInsetsChanged(
+        JNIEnv *env, jclass jcls, jint left, jint top, jint right, jint bottom, jboolean visible )
     {
         ( void )env; // unused
         ( void )jcls; // unused
         visible_frame_inbox.publish( left, top, right, bottom, visible == JNI_TRUE );
-        // inbox read by CheckMessages; wake a blocked input wait
-        PushWakeEvent();
     }
 
 } // "C"
@@ -927,16 +924,16 @@ SDL_Rect get_android_render_rect( float DisplayBufferWidth, float DisplayBufferH
         dstrect.y = bounds.y;
     }
 
-    // Make sure the destination rectangle fits within the visible area.
-    // FIXME: has_visible_display_frame is fed by the SDL2 onNativeVisibleDisplayFrameChanged
-    // JNI hook, which the SDL3 Android AAR never calls (it reports insets through
-    // onNativeInsetsChanged and the keyboard as a shown/hidden bool with no rectangle).
-    // So this keyboard-avoidance clamp is inert under SDL3 and needs an IME-inset source.
-    if( get_option<bool>( "ANDROID_KEYBOARD_SCREEN_SCALE" ) && has_visible_display_frame ) {
-        int vdf_right = visible_display_frame.x + visible_display_frame.w;
-        int vdf_bottom = visible_display_frame.y + visible_display_frame.h;
-        if( vdf_right < dstrect.x + dstrect.w ) {
-            dstrect.w = vdf_right - dstrect.x;
+    SDL_Rect ime_visible_frame;
+    bool has_ime_visible_frame = false;
+    bool ime_visible = false;
+    visible_frame_inbox.read_frame( ime_visible_frame, has_ime_visible_frame, ime_visible );
+    if( get_option<bool>( "ANDROID_KEYBOARD_SCREEN_SCALE" ) && has_ime_visible_frame &&
+        ime_visible && ime_visible_frame.w > 0 && ime_visible_frame.h > 0 ) {
+        const int ime_right = ime_visible_frame.x + ime_visible_frame.w;
+        const int ime_bottom = ime_visible_frame.y + ime_visible_frame.h;
+        if( ime_right < dstrect.x + dstrect.w ) {
+            dstrect.w = std::max( 1, ime_right - dstrect.x );
         }
         if( vdf_bottom < dstrect.y + dstrect.h ) {
             dstrect.h = vdf_bottom - dstrect.y;
