@@ -1,6 +1,9 @@
 #include "cursesdef.h" // IWYU pragma: associated
 #include "sdltiles.h" // IWYU pragma: associated
 
+#if SDL_MAJOR_VERSION >= 3
+#include "cata_shader.h"
+#endif
 #include "cuboid_rectangle.h"
 #include "point.h"
 
@@ -135,6 +138,9 @@ static SDL_Renderer_Ptr renderer;
 static Uint32 pixel_format = SDL_PIXELFORMAT_UNKNOWN;
 static SDL_Texture_Ptr display_buffer;
 static GeometryRenderer_Ptr geometry;
+#if SDL_MAJOR_VERSION >= 3
+static std::unique_ptr<cata_shader::variant_pass> shared_variant_pass;
+#endif
 #if defined(__ANDROID__)
 static SDL_Texture_Ptr touch_joystick;
 #endif
@@ -285,8 +291,13 @@ static bool SetupRenderTarget()
     if( printErrorIf( !staged, "Failed to create window buffer" ) ) {
         return false;
     }
+#if SDL_MAJOR_VERSION >= 3
+    cata_shader::variant_pass *vp = get_shared_variant_pass();
+#else
+    cata_shader::variant_pass *vp = nullptr;
+#endif
     {
-        const bind_result r = permanent_render_target_bind( renderer, staged.get() );
+        const bind_result r = permanent_render_target_bind( renderer, staged.get(), vp );
         if( r == bind_result::failed_in_switch ) {
             // Boundary undefined: quarantine staged so its dtor cannot race the
             // active target. The previous display_buffer is untouched.
@@ -294,13 +305,13 @@ static bool SetupRenderTarget()
             return false;
         }
         if( r != bind_result::ok ) {
-            // Refused before binding; staged was never bound, drop it.
+            // variant_pass refused before binding; staged never bound, drop it.
             return false;
         }
     }
     ClearScreen();
     {
-        const bind_result r = permanent_render_target_bind( renderer, nullptr );
+        const bind_result r = permanent_render_target_bind( renderer, nullptr, vp );
         if( r == bind_result::failed_in_switch ) {
             // Detach failed: staged is still the active target, so quarantine
             // rather than destroy.
@@ -590,14 +601,12 @@ static void WinCreate()
     // Set up audio mixer.
     init_sound();
 
-    DebugLog( D_INFO, DC_ALL ) << "USE_COLOR_MODULATED_TEXTURES is set to " <<
-                               get_option<bool>( "USE_COLOR_MODULATED_TEXTURES" );
-    //initialize the alternate rectangle texture for replacing SDL_RenderFillRect
-    if( get_option<bool>( "USE_COLOR_MODULATED_TEXTURES" ) && !software_renderer ) {
-        geometry = std::make_unique<ColorModulatedGeometryRenderer>( renderer );
-    } else {
-        geometry = std::make_unique<DefaultGeometryRenderer>();
-    }
+    rebuild_geometry_strategy( software_renderer );
+
+#if SDL_MAJOR_VERSION >= 3
+    shared_variant_pass = std::make_unique<cata_shader::variant_pass>( renderer.get() );
+#endif
+
 }
 
 static void WinDestroy()
@@ -610,6 +619,9 @@ static void WinDestroy()
     tilecontext.reset();
     gamepad::quit();
     geometry.reset();
+#if SDL_MAJOR_VERSION >= 3
+    shared_variant_pass.reset();
+#endif
     display_buffer.reset();
     renderer.reset();
     ::window.reset();
@@ -718,15 +730,20 @@ void refresh_display()
     // Present from the window target. The buffer stays unbound; draw paths
     // re-bind it next frame. Go through the pass-aware helper so variant_pass
     // can flush before the switch.
+#if SDL_MAJOR_VERSION >= 3
+    cata_shader::variant_pass *present_vp = get_shared_variant_pass();
+#else
+    cata_shader::variant_pass *present_vp = nullptr;
+#endif
     {
-        const bind_result r = permanent_render_target_bind( renderer, nullptr );
+        const bind_result r = permanent_render_target_bind( renderer, nullptr, present_vp );
         if( r == bind_result::failed_in_switch ) {
             // Helper already latched; signal again defensively and skip present.
             display_buffer_scope_signal_recovery_required();
             return;
         }
         if( r != bind_result::ok ) {
-            // Refused; skip this frame.
+            // variant_pass refused; skip this frame.
             return;
         }
     }
@@ -872,6 +889,13 @@ void convert_event_to_display_buffer_coords( SDL_Event *event )
     }
 }
 
+#if SDL_MAJOR_VERSION >= 3
+cata_shader::variant_pass *get_shared_variant_pass()
+{
+    return shared_variant_pass.get();
+}
+#endif
+
 namespace
 {
 // Draw-scope state. depth counts nested scopes. aborted lets an inner
@@ -939,7 +963,12 @@ display_buffer_draw_scope::display_buffer_draw_scope()
         // rebuilds the renderer.
         return;
     }
-    const bind_result r = permanent_render_target_bind( renderer, display_buffer.get() );
+#if SDL_MAJOR_VERSION >= 3
+    cata_shader::variant_pass *vp = get_shared_variant_pass();
+#else
+    cata_shader::variant_pass *vp = nullptr;
+#endif
+    const bind_result r = permanent_render_target_bind( renderer, display_buffer.get(), vp );
     if( r == bind_result::failed_in_switch ) {
         // Boundary undefined: latch recovery so this and later scopes refuse.
         display_buffer_scope_recovery_required = true;
@@ -947,7 +976,7 @@ display_buffer_draw_scope::display_buffer_draw_scope()
         return;
     }
     if( r != bind_result::ok ) {
-        // Refused, boundary intact: skip the draw but do not latch recovery.
+        // variant_pass refused, boundary intact: skip the draw, do not latch.
         display_buffer_scope_invalid = true;
         return;
     }
@@ -978,7 +1007,12 @@ display_buffer_draw_scope::~display_buffer_draw_scope()
         // -- another switch on the undefined renderer would deepen corruption.
         return;
     }
-    if( permanent_render_target_bind( renderer, nullptr )
+#if SDL_MAJOR_VERSION >= 3
+    cata_shader::variant_pass *vp = get_shared_variant_pass();
+#else
+    cata_shader::variant_pass *vp = nullptr;
+#endif
+    if( permanent_render_target_bind( renderer, nullptr, vp )
         == bind_result::failed_in_switch ) {
         // Boundary undefined: latch so later scopes refuse until rebuild.
         display_buffer_scope_recovery_required = true;
@@ -1772,11 +1806,13 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
     // Flush failure means the shader bind boundary forbids a target switch:
     // abort the scope's unbind, latch recovery, and throw to unwind
     // curses_drawwindow instead of drawing terrain overlays on a dead renderer.
-    if( m_variant_pass && !m_variant_pass->flush() ) {
-        draw_scope.abort_unbind();
-        display_buffer_scope_signal_recovery_required();
-        throw std::runtime_error(
-            "cata_tiles::draw_om: variant_pass flush failed at end of frame; renderer in undefined state" );
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
+        if( !vp->flush() ) {
+            draw_scope.abort_unbind();
+            display_buffer_scope_signal_recovery_required();
+            throw std::runtime_error(
+                "cata_tiles::draw_om: variant_pass flush failed at end of frame; renderer in undefined state" );
+        }
     }
 #endif
 }
