@@ -76,6 +76,10 @@ class ui_adaptor;
 #   include "sdl_version_wrappers.h"
 #endif
 
+#if defined(TILES)
+#   include "sdltiles.h"
+#endif
+
 #if defined(__ANDROID__)
 #include <android/log.h>
 #include <unistd.h>
@@ -830,9 +834,9 @@ int main( int argc, const char *argv[] )
 
 #if defined(LOCALIZE)
     if( get_option<std::string>( "USE_LANG" ).empty() && !SystemLocale::Language().has_value() ) {
-        const std::string lang = select_language();
-        get_options().get_option( "USE_LANG" ).setValue( lang );
-        set_language_from_options();
+            const std::string lang = select_language();
+            get_options().get_option( "USE_LANG" ).setValue( lang );
+            set_language_from_options();
     }
 #endif
     replay_buffered_debugmsg_prompts();

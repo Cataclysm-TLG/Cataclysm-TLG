@@ -60,8 +60,6 @@ enum class direction : unsigned int;
 enum class lit_level : uint8_t;
 enum class visibility_type : int;
 
-extern void set_displaybuffer_rendertarget();
-using ter_str_id = string_id<ter_t>;
 
 /** Structures */
 struct tile_type {
