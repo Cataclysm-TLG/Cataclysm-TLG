@@ -154,7 +154,6 @@ class BitmapFont : public Font
                          unsigned char color, float opacity = 1.0f );
         void draw_ascii_lines( const SDL_Renderer_Ptr &renderer, const GeometryRenderer_Ptr &geometry,
                                unsigned char line_id, const point &p, unsigned char color ) const override;
-        void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
         void release_gpu_resources() override;
     protected:
         // Build the per-color glyph atlases from typeface_path against
@@ -186,7 +185,6 @@ class FontFallbackList : public Font
                          const std::string &ch,
                          const point &p,
                          unsigned char color, float opacity = 1.0f ) override;
-        void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
         void release_gpu_resources() override;
     protected:
         std::vector<std::unique_ptr<Font>> fonts;
