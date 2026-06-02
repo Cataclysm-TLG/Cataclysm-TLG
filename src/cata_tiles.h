@@ -955,6 +955,18 @@ class cata_tiles
         pimpl<pixel_minimap> minimap;
 
     public:
+        // True if the last draw() rendered any animated tiles.
+        bool has_animated_tiles() const {
+            return has_animated_tiles_;
+        }
+
+        // True if the minimap rendered critters with blinking beacons.
+        bool has_blinking_minimap() const;
+
+        // Drop the pixel minimap's renderer-owned resources and cache so
+        // they rebuild against the live renderer on the next draw.
+        void reset_minimap();
+
         // Draw caches persist data between draws and are only recalculated when dirty
         void set_draw_cache_dirty();
 
