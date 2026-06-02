@@ -1333,6 +1333,10 @@ void renderer_resource_coordinator::run_post_success_full_invalidation()
         }
     }
     ui_manager::invalidate_all_ui_adaptors();
+    // Force every curses window to re-emit in full on its next refresh, then
+    // request a present so the rebuilt buffer reaches the screen.
+    cata_cursesport::bump_curses_render_epoch();
+    needupdate = true;
 }
 
 recipe_result renderer_resource_coordinator::recipe_targets_reset()
