@@ -236,6 +236,7 @@ class variant_pass
         // Drop shader + render-state slots. abandon_handles=true skips SDL
         // destroy on each (renderer undefined or about to die); false runs the
         // destructors normally to release the SDL handles.
+        void clear_state_arrays( bool abandon_handles );
         SDL_GPURenderState *state_for( variant_kind v ) const;
 
         SDL_Renderer *renderer_ = nullptr;

@@ -302,8 +302,13 @@ static bool SetupRenderTarget()
     if( printErrorIf( !staged, "Failed to create window buffer" ) ) {
         return false;
     }
+#if SDL_MAJOR_VERSION >= 3
+    cata_shader::variant_pass *vp = get_shared_variant_pass();
+#else
+    cata_shader::variant_pass *vp = nullptr;
+#endif
     {
-        const bind_result r = permanent_render_target_bind( renderer, staged.get() );
+        const bind_result r = permanent_render_target_bind( renderer, staged.get(), vp );
         if( r == bind_result::failed_in_switch ) {
             // Boundary undefined: quarantine staged so its dtor cannot race the
             // active target. The previous display_buffer is untouched.
@@ -311,13 +316,13 @@ static bool SetupRenderTarget()
             return false;
         }
         if( r != bind_result::ok ) {
-            // Refused before binding; staged was never bound, drop it.
+            // variant_pass refused before binding; staged never bound, drop it.
             return false;
         }
     }
     ClearScreen();
     {
-        const bind_result r = permanent_render_target_bind( renderer, nullptr );
+        const bind_result r = permanent_render_target_bind( renderer, nullptr, vp );
         if( r == bind_result::failed_in_switch ) {
             // Detach failed: staged is still the active target, so quarantine
             // rather than destroy.
@@ -773,15 +778,20 @@ void refresh_display()
     // Present from the window target. The buffer stays unbound; draw paths
     // re-bind it next frame. Go through the pass-aware helper so variant_pass
     // can flush before the switch.
+#if SDL_MAJOR_VERSION >= 3
+    cata_shader::variant_pass *present_vp = get_shared_variant_pass();
+#else
+    cata_shader::variant_pass *present_vp = nullptr;
+#endif
     {
-        const bind_result r = permanent_render_target_bind( renderer, nullptr );
+        const bind_result r = permanent_render_target_bind( renderer, nullptr, present_vp );
         if( r == bind_result::failed_in_switch ) {
             // Helper already latched; signal again defensively and skip present.
             display_buffer_scope_signal_recovery_required();
             return;
         }
         if( r != bind_result::ok ) {
-            // Refused; skip this frame.
+            // variant_pass refused; skip this frame.
             return;
         }
     }
@@ -927,6 +937,13 @@ void convert_event_to_display_buffer_coords( SDL_Event *event )
     }
 }
 
+#if SDL_MAJOR_VERSION >= 3
+cata_shader::variant_pass *get_shared_variant_pass()
+{
+    return shared_variant_pass.get();
+}
+#endif
+
 namespace
 {
 // Draw-scope state. depth counts nested scopes. aborted lets an inner
@@ -994,7 +1011,12 @@ display_buffer_draw_scope::display_buffer_draw_scope()
         // rebuilds the renderer.
         return;
     }
-    const bind_result r = permanent_render_target_bind( renderer, display_buffer.get() );
+#if SDL_MAJOR_VERSION >= 3
+    cata_shader::variant_pass *vp = get_shared_variant_pass();
+#else
+    cata_shader::variant_pass *vp = nullptr;
+#endif
+    const bind_result r = permanent_render_target_bind( renderer, display_buffer.get(), vp );
     if( r == bind_result::failed_in_switch ) {
         // Boundary undefined: latch recovery so this and later scopes refuse.
         display_buffer_scope_recovery_required = true;
@@ -1002,7 +1024,7 @@ display_buffer_draw_scope::display_buffer_draw_scope()
         return;
     }
     if( r != bind_result::ok ) {
-        // Refused, boundary intact: skip the draw but do not latch recovery.
+        // variant_pass refused, boundary intact: skip the draw, do not latch.
         display_buffer_scope_invalid = true;
         return;
     }
@@ -1033,7 +1055,12 @@ display_buffer_draw_scope::~display_buffer_draw_scope()
         // -- another switch on the undefined renderer would deepen corruption.
         return;
     }
-    if( permanent_render_target_bind( renderer, nullptr )
+#if SDL_MAJOR_VERSION >= 3
+    cata_shader::variant_pass *vp = get_shared_variant_pass();
+#else
+    cata_shader::variant_pass *vp = nullptr;
+#endif
+    if( permanent_render_target_bind( renderer, nullptr, vp )
         == bind_result::failed_in_switch ) {
         // Boundary undefined: latch so later scopes refuse until rebuild.
         display_buffer_scope_recovery_required = true;

@@ -532,8 +532,12 @@ void variant_pass::reset()
     clear_state_arrays( !flushed );
     probe_attempted_ = false;
     probed_ok_ = false;
-    session_disabled_ = false;
-    unbind_required_ = false;
+    // On flush failure leave session_disabled_ set so callers refuse the
+    // boundary; the rebuild driving reset() decides when to clear it.
+    if( flushed ) {
+        session_disabled_ = false;
+        unbind_required_ = false;
+    }
 }
 
 void variant_pass::clear_state_arrays( bool abandon_handles )
@@ -551,21 +555,13 @@ void variant_pass::clear_state_arrays( bool abandon_handles )
         for( render_state &s : memory_states_ ) {
             s.abandon();
         }
-        tint_shader_.abandon();
-        tint_state_.abandon();
     }
-    release_lit( abandon_handles );
-    resource_generation_ = next_resource_generation();
-    // rebuilt resources are probed again
-    lit_capability_.reset();
     // Render states reference their fragment shader; clear states before
     // shaders so SDL does not see a dangling reference on the clean path.
     states_ = {};
     memory_states_ = {};
-    tint_state_ = {};
     shaders_ = {};
     memory_shaders_ = {};
-    tint_shader_ = {};
 }
 
 void variant_pass::probe()
@@ -693,6 +689,10 @@ bool variant_pass::end()
 
 bool variant_pass::flush()
 {
+    if( abandoned_pending_rebind_ ) {
+        // Embargo raised: refuse without SDL. false signals the boundary loss.
+        return false;
+    }
     if( !currently_bound_ && !unbind_required_ ) {
         return true;
     }
