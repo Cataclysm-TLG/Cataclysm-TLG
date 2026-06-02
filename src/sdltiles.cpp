@@ -286,9 +286,17 @@ gpu_handle_graveyard &setup_target_quarantine()
 // scaling_factor, independent of backing-store pixels.
 static point compute_display_buffer_dims()
 {
-    // On desktop this matches the window over scaling up to a sub-cell remainder;
-    // on android TERMINAL follows orientation and options, not exact window size
-    return point{ TERMINAL_WIDTH * fontwidth, TERMINAL_HEIGHT * fontheight };
+    return point{ WindowWidth / scaling_factor, WindowHeight / scaling_factor };
+}
+
+// Backing-store pixel dimensions of the window, tracked independently of the
+// logical size so a DPI-only change leaves the display buffer alone.
+[[maybe_unused]] static point compute_drawable_dims()
+{
+    int pw = 0;
+    int ph = 0;
+    GetWindowSizeInPixels( ::window.get(), &pw, &ph );
+    return point{ pw, ph };
 }
 
 static bool SetupRenderTarget()
@@ -296,9 +304,10 @@ static bool SetupRenderTarget()
     SetRenderDrawBlendMode( renderer, SDL_BLENDMODE_NONE );
     // Stage into a local so a failed bind leaves the previous display_buffer
     // intact rather than orphaning a still-referenced target.
+    const point buffer_dims = compute_display_buffer_dims();
     SDL_Texture_Ptr staged = CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888,
-                                            SDL_TEXTUREACCESS_TARGET, WindowWidth / scaling_factor,
-                                            WindowHeight / scaling_factor );
+                                            SDL_TEXTUREACCESS_TARGET, buffer_dims.x,
+                                            buffer_dims.y );
     if( printErrorIf( !staged, "Failed to create window buffer" ) ) {
         return false;
     }
