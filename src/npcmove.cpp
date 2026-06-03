@@ -841,7 +841,7 @@ void npc::assess_danger()
     preferred_close_range = std::min( preferred_close_range, preferred_medium_range / 2 );
 
     Character &player_character = get_player_character();
-    bool sees_player = sees( here, player_character.pos_bub( here ) );
+    bool sees_player = sees( here, player_character );
     const bool self_defense_only = rules.engagement == combat_engagement::NO_MOVE ||
                                    rules.engagement == combat_engagement::NONE;
     const bool no_fighting = rules.has_flag( ally_rule::forbid_engage );
@@ -1271,8 +1271,10 @@ void npc::act_on_danger_assessment()
                 add_msg_debug( debugmode::DF_NPC_COMBATAI, "%s upgrades reposition to flat out retreat.", name );
                 mem_combat.repositioning = false; // we're not just moving, we're running.
                 warn_about( "run_away", run_away_for );
-                set_attitude( NPCATT_FLEE_TEMP );
-                if( mem_combat.panic > 5 && is_player_ally() && sees( here, player_character.pos_bub( here ) ) ) {
+                if( !is_player_ally() ) {
+                    set_attitude( NPCATT_FLEE_TEMP );
+                }
+                if( mem_combat.panic > 5 && is_player_ally() && sees( here, player_character ) ) {
                     // consider warning player about panic
                     int panic_alert = trig_dist( pos_bub(), player_character.pos_bub() ) - player_character.get_per();
                     if( mem_combat.panic - personality.bravery > panic_alert ) {

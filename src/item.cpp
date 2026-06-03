@@ -6535,7 +6535,7 @@ void item::handle_pickup_ownership( Character &c )
                     owned_by = is_owned_by( *as_monster );
                 }
                 return &cr != &c && owned_by && rl_dist( cr.pos_abs(), c.pos_abs() ) < MAX_VIEW_DISTANCE &&
-                       cr.sees( here, c.pos_bub( here ) );
+                       cr.sees( here, c );
             };
             const auto sort_criteria = []( const Creature * lhs, const Creature * rhs ) {
                 const npc *const lnpc = lhs->as_npc();
@@ -13337,6 +13337,9 @@ const item_category &item::get_category_of_contents( int depth, int maxdepth ) c
             cached_category = { cat.get_id(), calendar::turn };
             return cat;
         }
+        item_category const &cat = this->get_category_shallow();
+        cached_category = { cat.get_id(), calendar::turn };
+        return cat;
     }
     return this->get_category_shallow();
 }

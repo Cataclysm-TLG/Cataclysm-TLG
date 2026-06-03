@@ -11908,11 +11908,12 @@ npc_attitude Character::get_attitude() const
     return NPCATT_NULL;
 }
 
-bool Character::sees( const map &here, const tripoint_bub_ms &t, bool, int ) const
+bool Character::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
+                      int range_mod ) const
 {
     const int wanted_range = rl_dist( pos_bub( here ), t );
     bool can_see = this->is_avatar() ? here.pl_sees( t, std::min( sight_max, wanted_range ) ) :
-                   Creature::sees( here, t );
+                   Creature::sees( here, t, is_avatar, range_mod );
     // Clairvoyance is now pretty cheap, so we can check it early
     if( wanted_range < MAX_CLAIRVOYANCE && wanted_range < clairvoyance() ) {
         return true;
