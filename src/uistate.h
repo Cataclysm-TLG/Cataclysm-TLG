@@ -190,6 +190,7 @@ class uistatedata
         bool distraction_mutation = true;
         bool distraction_oxygen = true;
         bool distraction_withdrawal = true;
+        bool distraction_craft_step_complete = true;
         bool distraction_all = true; // NOLINT(cata-serialize)
         bool numpad_navigation = false;
         bool is_toggle = false; // NOLINT(cata-serialize)
