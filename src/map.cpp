@@ -58,6 +58,7 @@
 #include "item_factory.h"
 #include "item_group.h"
 #include "item_location.h"
+#include "item_wakeup.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -9267,17 +9268,67 @@ void map::load( const tripoint_abs_sm &w, const bool update_vehicle,
         }
     }
 
-    auto walk_character = [&wakeups]( Character & c ) {
-        // all_items_loc() is already recursive; rebuild per location directly.
-        for( item_location &loc : c.all_items_loc() ) {
-            if( loc && loc.get_item() != nullptr ) {
-                wakeups.rebuild_for_item( loc );
-            }
+    reconcile_item_wakeups();
+}
+
+void map::reconcile_item_wakeups()
+{
+    item_wakeup_manager &wakeups = get_item_wakeups();
+    auto reconcile_recursive = [&wakeups]( auto & self, item_location loc ) -> void {
+        if( !loc )
+        {
+            return;
+        }
+        item *outer = loc.get_item();
+        if( outer == nullptr )
+        {
+            return;
+        }
+        wakeups.rebuild_for_item( loc );
+        for( item *child : outer->all_items_top() )
+        {
+            item_location child_loc( loc, child );
+            self( self, child_loc );
         }
     };
-    walk_character( get_avatar() );
-    for( npc &n : g->all_npcs() ) {
-        walk_character( n );
+
+    for( int gridx = 0; gridx < my_MAPSIZE; gridx++ ) {
+        for( int gridy = 0; gridy < my_MAPSIZE; gridy++ ) {
+            const int zmin = zlevels ? -OVERMAP_DEPTH : abs_sub.z();
+            const int zmax = zlevels ? OVERMAP_HEIGHT : abs_sub.z();
+            for( int gridz = zmin; gridz <= zmax; gridz++ ) {
+                const tripoint_rel_sm grid( gridx, gridy, gridz );
+                submap *const sm = get_submap_at_grid( grid );
+                if( sm == nullptr ) {
+                    continue;
+                }
+                for( int sx = 0; sx < SEEX; ++sx ) {
+                    for( int sy = 0; sy < SEEY; ++sy ) {
+                        for( item &it : sm->get_items( { sx, sy } ) ) {
+                            const tripoint_bub_ms p( sx + gridx * SEEX,
+                                                     sy + gridy * SEEY, gridz );
+                            const tripoint_abs_ms abs = get_abs( p );
+                            item_location loc( map_cursor( abs ), &it );
+                            reconcile_recursive( reconcile_recursive, loc );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for( wrapped_vehicle &wv : get_vehicles() ) {
+        if( wv.v == nullptr ) {
+            continue;
+        }
+        for( const vpart_reference &vpr : wv.v->get_all_parts() ) {
+            vehicle_part &vp = wv.v->part( vpr.part_index() );
+            for( item &it : wv.v->get_items( vp ) ) {
+                vehicle_cursor vc( *wv.v, vpr.part_index() );
+                item_location loc( vc, &it );
+                reconcile_recursive( reconcile_recursive, loc );
+            }
+        }
     }
 }
 
@@ -9469,6 +9520,9 @@ void map::shift( const point_rel_sm &sp )
     // with entities at the edges
     for( tripoint_rel_sm loaded_grid : loaded_grids ) {
         actualize( loaded_grid );
+    }
+    if( !loaded_grids.empty() ) {
+        reconcile_item_wakeups();
     }
 }
 

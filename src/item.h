@@ -1515,11 +1515,13 @@ class item : public visitable
         bool leak( map &here, Character *carrier, const tripoint_bub_ms &pos,
                    item_pocket *pocke = nullptr );
 
-        // Producer for the wakeup scheduler.  Default empty.
-        std::vector<desired_wakeup> enumerate_scheduled_wakeups() const;
+        // Producer for the wakeup scheduler.  Default empty.  `loc` lets
+        // producers vary their wakeups by where the item lives.
+        std::vector<desired_wakeup> enumerate_scheduled_wakeups( const item_location &loc ) const;
 
         // Idempotent: receiving (kind, now) twice must not corrupt state.
-        void actualize_scheduled( item_wakeup_kind kind, time_point now );
+        void actualize_scheduled( item_wakeup_kind kind, time_point now,
+                                  const item_location &loc );
 
         struct link_data {
             /// State of the link's source connection, the end usually represented by the device/cable item itself. @ref link_state.
