@@ -744,6 +744,7 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 2 },
+    "vision_night": 4,
     "special_attacks": [
       { "id": "smash", "throw_strength": 58, "cooldown": 13 },
       { "id": "scratch", "cooldown": 10 },

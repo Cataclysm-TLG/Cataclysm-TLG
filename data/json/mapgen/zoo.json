@@ -2,6 +2,7 @@
   {
     "name": "GROUP_BEARS_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [
       { "group": "GROUP_BEARS", "weight": 600, "ends": "15 days" },
       { "group": "GROUP_BEARS", "weight": 80 },
@@ -11,6 +12,7 @@
   {
     "name": "GROUP_MOOSE_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [
       { "group": "GROUP_MOOSE", "weight": 600, "ends": "10 days" },
       { "group": "GROUP_MOOSE", "weight": 80 },
@@ -20,16 +22,19 @@
   {
     "name": "GROUP_PIGS_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [ { "group": "GROUP_PIGS", "weight": 600 }, { "monster": "mon_zombie_pig", "weight": 400 } ]
   },
   {
     "name": "GROUP_SHEEP_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [ { "group": "GROUP_SHEEP", "weight": 600, "ends": "7 days" }, { "monster": "mon_zombie_sheep", "weight": 400 } ]
   },
   {
     "name": "GROUP_TIGERS_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [
       { "monster": "mon_tiger", "weight": 600, "ends": "20 days" },
       { "monster": "mon_tiger", "weight": 100, "ends": "400 days" },
@@ -39,6 +44,7 @@
   {
     "name": "GROUP_COYOTES_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [
       { "group": "GROUP_COYOTES", "weight": 600, "ends": "20 days" },
       { "group": "GROUP_COYOTES", "weight": 200 },
@@ -48,6 +54,7 @@
   {
     "name": "GROUP_WOLVES_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [
       { "monster": "mon_wolf", "weight": 600, "ends": "18 days" },
       { "monster": "mon_wolf", "weight": 100 },
@@ -57,6 +64,7 @@
   {
     "name": "GROUP_COYOTES_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [
       { "monster": "mon_coyote", "weight": 600, "ends": "18 days" },
       { "monster": "mon_coyote", "weight": 100 },
@@ -66,6 +74,7 @@
   {
     "name": "GROUP_DEER_ZOO",
     "type": "monstergroup",
+    "is_animal": true,
     "monsters": [
       { "group": "GROUP_DEER", "weight": 600, "ends": "10 days" },
       { "monster": "mon_zeer", "weight": 400 },
