@@ -3482,7 +3482,7 @@
   {
     "type": "effect_type",
     "id": "cig",
-    "name": [ "Nicotine", "Nicotine Overdose" ],
+    "name": [ "Nicotine Buzz", "Nicotine Overdose" ],
     "desc": [ "You feel a slight buzz from the tobacco.", "You feel awful, you've had far too much." ],
     "max_intensity": 2,
     "base_mods": {

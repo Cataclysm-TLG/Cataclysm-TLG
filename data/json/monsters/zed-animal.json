@@ -338,8 +338,8 @@
   {
     "id": "mon_zombie_pig",
     "type": "MONSTER",
-    "name": { "str": "zombie boar" },
-    "description": "The body of a stout, scruffy wild pig, reanimated now and somehow even angrier than it was in life.",
+    "name": { "str": "zombie pig" },
+    "description": "The body of a stout, scruffy pig, reanimated now and somehow even angrier than it was in life.",
     "default_faction": "zombie",
     "bodytype": "pig",
     "species": [ "ZOMBIE" ],
@@ -362,6 +362,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "vision_day": 50,
     "harvest": "zombie_leather",
+    "fungalize_into": "mon_zombie_pig_fungus",
     "path_settings": { "max_dist": 10 },
     "special_attacks": [ { "type": "bite", "attack_upper": false, "cooldown": 2 } ],
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
