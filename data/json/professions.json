@@ -722,7 +722,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "jeans_skinny" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "jeans_skinny" } ] }
     }
   },
   {
@@ -760,8 +760,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -780,7 +780,7 @@
           { "item": "molle_pack" },
           { "item": "winter_pants_army" },
           { "item": "winter_jacket_army" },
-          { "item": "undershirt" },
+          { "item": "longshirt" },
           { "item": "socks" },
           { "item": "boots_combat" },
           { "item": "sweatshirt" },
@@ -798,7 +798,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -838,8 +838,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -871,8 +871,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -902,8 +902,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -934,8 +934,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -965,7 +965,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -1002,8 +1002,8 @@
           { "item": "lighter", "charges": 100 }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "age_lower": 18
   },
@@ -1031,8 +1031,8 @@
           { "item": "honey_scraper", "container-item": "sheath" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -1066,7 +1066,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16
   },
@@ -1092,7 +1092,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16
   },
@@ -1127,7 +1127,7 @@
         ]
       },
       "male": { "entries": [ { "item": "under_armor_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16
   },
@@ -1155,8 +1155,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "sports_bra" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -1187,8 +1187,8 @@
           { "item": "spray_can", "charges": 10 }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "sports_bra" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -1212,7 +1212,7 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "undershirt" },
+          { "item": "tank_top" },
           { "item": "officer_uniform" },
           { "item": "jacket_army_modern" },
           { "item": "gloves_liner" },
@@ -1231,7 +1231,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_SOCIAL_BUTTERFLY" ],
     "age_lower": 45
@@ -1293,7 +1293,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -1346,7 +1346,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -1431,7 +1431,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1464,7 +1464,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -1489,7 +1489,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1517,7 +1517,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -1539,7 +1539,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1569,7 +1569,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
           { "item": "gloves_liner" },
@@ -1586,7 +1586,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1622,7 +1622,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -1647,7 +1647,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1681,7 +1681,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -1706,7 +1706,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1763,7 +1763,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -1827,7 +1827,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -1884,7 +1884,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1911,8 +1911,8 @@
       },
       "female": {
         "entries": [
-          { "item": "panties" },
-          { "item": "bra" },
+          { "group": "female_underwear_bottom" },
+          { "group": "female_underwear_top" },
           { "item": "stockings" },
           { "item": "garter_belt" },
           { "item": "heels" },
@@ -1974,7 +1974,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -2010,7 +2010,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2053,7 +2053,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "gold_dental_grill" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "gold_hairpin" }, { "item": "gold_ear" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "gold_hairpin" }, { "item": "gold_ear" } ] }
     }
   },
   {
@@ -2090,7 +2090,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2124,7 +2124,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2156,7 +2156,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2212,7 +2212,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -2233,11 +2233,12 @@
           { "item": "pockknife" },
           { "item": "survivormap" },
           { "group": "charged_matches" },
-          { "item": "pants" }
+          { "item": "tshirt" },
+          { "item": "jeans" }
         ]
       },
-      "male": { "entries": [ { "item": "undershirt" } ] },
-      "female": { "entries": [ { "item": "camisole" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 18
   },
@@ -2264,7 +2265,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2307,7 +2308,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2349,7 +2350,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2378,7 +2379,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_DOG_LOVER" ]
   },
@@ -2410,7 +2411,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2449,7 +2450,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2484,8 +2485,8 @@
           { "item": "sw_619", "ammo-item": "357mag_fmj", "charges": 7, "container-item": "holster" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "skills": [
       { "level": 4, "name": "gun" },
@@ -2545,7 +2546,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2595,7 +2596,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2639,7 +2640,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2666,7 +2667,7 @@
           { "item": "socks" },
           { "item": "police_breeches" },
           { "item": "badge_deputy" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "police_belt" },
           { "item": "motor_police_boots" },
           { "item": "whistle" },
@@ -2683,7 +2684,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2714,7 +2715,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2752,7 +2753,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2794,7 +2795,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2833,7 +2834,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2872,7 +2873,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2911,7 +2912,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2947,7 +2948,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2975,7 +2976,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3000,7 +3001,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "bra" }, { "item": "jeans_skinny" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" }, { "item": "jeans_skinny" } ] }
     }
   },
   {
@@ -3037,7 +3038,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "bra" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -3064,7 +3065,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "bra" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -3106,7 +3107,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3153,7 +3154,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 18
   },
@@ -3213,7 +3214,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3247,7 +3248,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -3270,8 +3271,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16
   },
@@ -3300,8 +3301,8 @@
           { "group": "charged_electrical_measuring" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3326,11 +3327,11 @@
           { "item": "portable_game", "charges": 150 },
           { "item": "pants" },
           { "group": "charged_smart_phone" },
-          { "group": "charged_laptop" }
+          { "group": "charged_laptop", "contents-item": "software_hacking" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3356,7 +3357,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3384,7 +3385,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16,
     "age_upper": 25
@@ -3426,7 +3427,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "tank_top" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3442,8 +3443,8 @@
       "male": { "entries": [ { "item": "briefs" }, { "item": "tux" }, { "item": "dress_shoes" } ] },
       "female": {
         "entries": [
-          { "item": "bra" },
-          { "item": "panties" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
           { "item": "dress" },
           { "item": "heels" },
           { "item": "purse", "custom-flags": [ "auto_wield" ] }
@@ -3470,8 +3471,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ],
     "missions": [ "MISSION_PATIENT" ],
@@ -3486,8 +3487,8 @@
     "points": -1,
     "items": {
       "both": [ "subsuit_xl" ],
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ],
     "age_lower": 16
@@ -3502,7 +3503,7 @@
     "items": {
       "both": [ "house_coat", "slippers", "towel", "guidebook" ],
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -3535,7 +3536,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -3561,8 +3562,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3587,8 +3588,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3611,8 +3612,8 @@
           { "item": "balloon", "count": 20 }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_CLOWN" ]
   },
@@ -3664,7 +3665,7 @@
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "dress_shirt" }, { "item": "pants" }, { "item": "pocketwatch" } ] },
       "female": {
-        "entries": [ { "item": "panties" }, { "item": "bra" }, { "item": "dress" }, { "item": "fanny" }, { "item": "gold_watch" } ]
+        "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" }, { "item": "dress" }, { "item": "fanny" }, { "item": "gold_watch" } ]
       }
     },
     "age_lower": 50
@@ -3697,7 +3698,7 @@
           { "item": "sockmitts" },
           { "item": "skirt" },
           { "item": "stockings" },
-          { "item": "panties" }
+          { "group": "female_underwear_bottom" }
         ]
       }
     },
@@ -3729,8 +3730,8 @@
           { "item": "stockings" },
           { "item": "garter_belt" },
           { "item": "dress_shoes" },
-          { "item": "bra" },
-          { "item": "panties" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
           { "item": "purse" },
           { "item": "long_glove_white" },
           { "item": "silver_tiara" },
@@ -3765,7 +3766,7 @@
       },
       "male": { "entries": [ { "item": "jeans_skinny" }, { "item": "tank_top" }, { "item": "briefs" } ] },
       "female": {
-        "entries": [ { "item": "skirt" }, { "item": "corset" }, { "item": "panties" }, { "item": "stockings" }, { "item": "sockmitts" } ]
+        "entries": [ { "item": "skirt" }, { "item": "corset" }, { "group": "female_underwear_bottom" }, { "item": "stockings" }, { "item": "sockmitts" } ]
       }
     }
   },
@@ -3824,8 +3825,8 @@
           { "group": "charged_ref_lighter" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3855,8 +3856,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3883,8 +3884,8 @@
           { "item": "glass_shiv" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3913,8 +3914,8 @@
           { "item": "polaroid_photo", "container-item": "ankle_wallet_pouch" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -3938,8 +3939,8 @@
           { "item": "fried_seeds" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -3971,8 +3972,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3999,8 +4000,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4022,7 +4023,7 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "dress_shirt" }, { "item": "suit" }, { "item": "pants" } ] },
-      "female": { "entries": [ { "item": "dress" }, { "item": "purse" }, { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "item": "dress" }, { "item": "purse" }, { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4059,8 +4060,8 @@
           { "item": "nun_habit" },
           { "item": "dress_shirt" },
           { "item": "purse" },
-          { "item": "bra" },
-          { "item": "panties" }
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" }
         ]
       }
     }
@@ -4085,8 +4086,8 @@
           { "item": "holy_symbol", "variant": "buddhist_necklace" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4112,8 +4113,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4140,8 +4141,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4169,8 +4170,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4198,8 +4199,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4227,7 +4228,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4255,7 +4256,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4285,7 +4286,7 @@
     "items": {
       "both": [ "tangzhuang", "tank_top", "pants", "mouthpiece", "shoes_slip_on" ],
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4305,7 +4306,7 @@
     "items": {
       "both": [ "jacket_windbreaker", "tank_top", "sweatpants", "mouthpiece", "socks_ankle", "sneakers" ],
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4332,8 +4333,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4372,7 +4373,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4405,7 +4406,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4457,7 +4458,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -4511,7 +4512,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -4542,7 +4543,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4637,7 +4638,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4752,8 +4753,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16,
     "age_upper": 21
@@ -4785,8 +4786,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16,
     "age_upper": 21
@@ -4827,7 +4828,7 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "jeans_skinny" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "item": "jeans_skinny" } ] }
     },
     "age_lower": 16,
     "age_upper": 18
@@ -4856,8 +4857,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16,
     "age_upper": 18
@@ -4885,7 +4886,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "bra" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -4917,8 +4918,8 @@
           { "item": "tank_top" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4953,7 +4954,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "sports_bra" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -4983,7 +4984,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5020,7 +5021,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5107,7 +5108,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "gold_ring" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "gold_earring" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "gold_earring" } ] }
     },
     "missions": [ "MISSION_SOCIAL_BUTTERFLY" ]
   },
@@ -5142,7 +5143,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5180,8 +5181,8 @@
       "female": {
         "entries": [
           { "item": "polo_shirt" },
-          { "item": "bra" },
-          { "item": "panties" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
           { "item": "skirt" },
           { "item": "heels" },
           { "item": "stockings" },
@@ -5225,7 +5226,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -5250,7 +5251,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -5296,7 +5297,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ],
     "missions": [ "MISSION_HELICOPTER_PILOT" ]
@@ -5328,7 +5329,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5365,7 +5366,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tank_top" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "gloves_liner" },
@@ -5401,7 +5402,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -5454,7 +5455,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5486,8 +5487,8 @@
           { "item": "crack", "count": 25, "container-item": "null", "entry-wrapper": "bag_zipper" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "traits": [ "LIAR" ]
   },
@@ -5503,7 +5504,7 @@
       "both": { "entries": [ { "item": "pom_poms" }, { "item": "socks_ankle" }, { "item": "sneakers" }, { "item": "tank_top" } ] },
       "male": { "entries": [ { "item": "briefs" }, { "item": "shorts" }, { "item": "tank_top" }, { "item": "sweater" } ] },
       "female": {
-        "entries": [ { "item": "sports_bra" }, { "item": "panties" }, { "item": "cheerleader_dress" }, { "item": "jacket_varsity" } ]
+        "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "cheerleader_dress" }, { "item": "jacket_varsity" } ]
       }
     },
     "missions": [ "MISSION_SOCIAL_BUTTERFLY" ],
@@ -5529,7 +5530,7 @@
       },
       "male": {
         "entries": [
-          { "item": "undershirt" },
+          { "item": "tank_top" },
           { "item": "sneakers" },
           { "item": "jumpsuit_long", "variant": "flag_suit" },
           { "item": "briefs" }
@@ -5587,7 +5588,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5701,8 +5702,8 @@
       },
       "female": {
         "entries": [
-          { "item": "panties" },
-          { "item": "bra" },
+          { "group": "female_underwear_bottom" },
+          { "group": "female_underwear_top" },
           { "item": "stockings" },
           { "item": "garter_belt" },
           { "item": "heels" },
@@ -5753,8 +5754,8 @@
           { "item": "m1a", "ammo-item": "762_51", "charges": 20, "contents-item": [ "shoulder_strap_simple" ] }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "bra" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     },
     "age_lower": 50
   },
@@ -5792,7 +5793,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER", "MISSION_FIND_RIFLE" ]
   },
@@ -5819,7 +5820,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "bra" }, { "item": "jeans_skinny" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" }, { "item": "jeans_skinny" } ] }
     }
   },
   {
@@ -5854,7 +5855,7 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "undershirt" },
+          { "item": "tank_top" },
           { "item": "pants_army" },
           { "item": "socks" },
           { "item": "boots_combat" },
@@ -5872,7 +5873,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -5897,7 +5898,7 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "socks" }, { "item": "pants" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "stockings" }, { "item": "skirt" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "stockings" }, { "item": "skirt" } ] }
     }
   },
   {
@@ -5933,8 +5934,8 @@
       "male": { "entries": [ { "item": "briefs" }, { "item": "socks" }, { "item": "pants" }, { "item": "gold_cufflinks" } ] },
       "female": {
         "entries": [
-          { "item": "bra" },
-          { "item": "panties" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
           { "item": "stockings" },
           { "item": "gold_bracelet" },
           { "item": "garter_belt" },
@@ -5981,7 +5982,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -6010,8 +6011,8 @@
           { "item": "tshirt", "variant": "generic_tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_PATIENT" ]
   },
@@ -6084,7 +6085,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -6138,7 +6139,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -6169,7 +6170,7 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "silver_ring" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "silver_earring" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "silver_earring" } ] }
     }
   },
   {
@@ -6211,8 +6212,8 @@
     ],
     "items": {
       "both": { "entries": [ { "item": "subsuit_xl" }, { "item": "footrags" }, { "item": "hat_noise_cancelling" } ] },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_BIONICS_FAULTY" ]
   },
@@ -6222,7 +6223,7 @@
     "name": "Drone Operator",
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "description": "You had a job programming machines such as automatic street cleaners, newsbots, and pizza delivery drones.  Bionic implants helped you control them remotely.  Now all the drones carry guns instead of pizza.  At least you still have an… RC car?",
-    "points": 2,
+    "points": 3,
     "proficiencies": [ "prof_robotic_programming" ],
     "CBMs": [ "bio_cable", "bio_power_storage", "bio_remote" ],
     "skills": [ { "level": 2, "name": "computer" } ],
@@ -6234,12 +6235,13 @@
           { "item": "boots" },
           { "item": "wristwatch" },
           { "item": "mbag" },
-          { "group": "charged_cell_phone" },
-          { "group": "toy_radio_car" }
+          { "group": "charged_smart_phone" },
+          { "group": "toy_radio_car" },
+          { "group": "charged_laptop", "contents-item": "software_robotics" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -6273,8 +6275,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   }
 ]

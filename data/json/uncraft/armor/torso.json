@@ -39,14 +39,6 @@
     ]
   },
   {
-    "result": "tank_top",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "5 m",
-    "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "cotton_sheet", 3 ] ], [ [ "thread", 10 ] ] ]
-  },
-  {
     "result": "coat_faux_fur",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
