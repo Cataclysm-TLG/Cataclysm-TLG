@@ -1084,13 +1084,25 @@
     "type": "effect_type",
     "id": "stim",
     "max_intensity": 1,
-    "int_dur_factor": "1 s"
+    "max_duration": "1 s"
   },
   {
     "type": "effect_type",
     "id": "depressants",
     "max_intensity": 1,
-    "int_dur_factor": "1 s"
+    "max_duration": "1 s"
+  },
+  {
+    "type": "effect_type",
+    "id": "winded_cephalopod_arm_upper",
+    "max_intensity": 1,
+    "max_duration": "1 s"
+  },
+    {
+    "type": "effect_type",
+    "id": "winded_cephalopod_arm_lower",
+    "max_intensity": 1,
+    "max_duration": "1 s"
   },
   {
     "type": "mutation",
