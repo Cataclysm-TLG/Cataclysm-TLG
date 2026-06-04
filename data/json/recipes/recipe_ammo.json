@@ -24,6 +24,7 @@
     "time": "45 m",
     "autolearn": true,
     "tools": [ [ [ "fake_clay_kiln", 10 ], [ "kiln", 10 ], [ "surface_heat", 10, "LIST" ] ] ],
+    "result_mult": 10,
     "components": [ [ [ "any_water", 1, "LIST" ] ], [ [ "clay_lump", 1 ] ] ]
   },
   {
