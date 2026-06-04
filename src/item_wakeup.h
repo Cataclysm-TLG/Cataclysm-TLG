@@ -24,6 +24,7 @@ class item_location;
 // Distinct kinds coexist per item.
 enum class item_wakeup_kind : uint8_t {
     alarm = 0,
+    env_check,
     ready_check,
     fail_check,
     last

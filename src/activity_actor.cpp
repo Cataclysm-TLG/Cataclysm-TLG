@@ -4515,9 +4515,28 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
             if( craft.get_passive_started_at() == calendar::before_time_starts ) {
                 craft_stamp_passive_entry( craft, crafter, calendar::turn, craft_item );
                 mode_ = derive_mode();
+                // Back-dated entry can leave alarm and/or ready already due.
+                // Alarm runs first; the alarm handler elides itself if ready
+                // also fires same turn.
+                if( craft.get_alarm_at() != calendar::before_time_starts &&
+                    calendar::turn >= craft.get_alarm_at() ) {
+                    craft_actualize_scheduled( craft, item_wakeup_kind::alarm,
+                                               calendar::turn, craft_item );
+                }
+                if( craft.get_ready_at() != calendar::before_time_starts &&
+                    calendar::turn >= craft.get_ready_at() ) {
+                    craft_actualize_scheduled( craft, item_wakeup_kind::ready_check,
+                                               calendar::turn, craft_item );
+                    return;
+                }
             }
 
             if( plan.choice == step_choice::do_wait ) {
+                // Per-turn env check fast-path.  do_something / set_timer
+                // rely on the periodic env_check wakeup at 1-minute cadence
+                // since no actor runs for those modes.
+                craft_actualize_scheduled( craft, item_wakeup_kind::env_check,
+                                           calendar::turn, craft_item );
                 crafter.set_moves( 0 );
                 return;
             }
@@ -4565,6 +4584,7 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
     // item_counter represents the percent progress relative to the base batch time
     // stored precise to 5 decimal places ( e.g. 67.32 percent would be stored as 6732000 )
     const int old_counter = craft.item_counter;
+    const int old_moves = crafter.get_moves();
 
     // Delta progress in moves adjusted for current crafting speed /
     //crafter.exertion_adjusted_move_multiplier( exertion_level() )
@@ -4582,7 +4602,23 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
     craft.item_counter = std::min( craft.item_counter, 10000000 );
 
     // Step transitions: accumulate work and advance through step boundaries.
+    // Each closing step gets a final non-charged tool sweep before its index
+    // is incremented; a missing tool rewinds the whole turn.
+    int old_step = 0;
+    double old_step_progress = 0.0;
+    const auto rewind_turn = [&]() {
+        if( rec.has_steps() ) {
+            craft.set_current_step( old_step );
+            craft.set_step_progress( old_step_progress );
+        }
+        craft.item_counter = old_counter;
+        crafter.set_moves( old_moves );
+        craft.erase_var( "crafter" );
+        crafter.cancel_activity();
+    };
     if( rec.has_steps() ) {
+        old_step = craft.get_current_step();
+        old_step_progress = craft.get_step_progress();
         craft.mod_step_progress( delta_progress );
         const int last_step_idx = static_cast<int>( rec.steps().size() ) - 1;
         while( craft.get_current_step() < last_step_idx ) {
@@ -4592,9 +4628,29 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
             if( craft.get_step_progress() < budget ) {
                 break;
             }
+            if( !crafter.verify_step_tools( craft, craft.get_current_step(),
+                                            crafter.pos_bub(), PICKUP_RANGE, /*pin_to_map=*/false ) ) {
+                rewind_turn();
+                return;
+            }
             craft.set_step_progress( craft.get_step_progress() - budget );
             craft.set_current_step( craft.get_current_step() + 1 );
         }
+    }
+    // Verify before debit so a rejected closure does not burn charges first.
+    if( craft.item_counter >= 10000000 ) {
+        const int closing_step = rec.has_steps()
+                                 ? static_cast<int>( rec.steps().size() ) - 1 : 0;
+        if( !crafter.verify_step_tools( craft, closing_step,
+                                        crafter.pos_bub(), PICKUP_RANGE, /*pin_to_map=*/false ) ) {
+            rewind_turn();
+            return;
+        }
+    }
+    // Charge shortfall rewinds the turn before any skill gain.
+    if( !crafter.craft_consume_step_tools( craft ) ) {
+        rewind_turn();
+        return;
     }
 
     // This nominal craft time is also how many practice ticks to perform
@@ -4621,20 +4677,6 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
         use_cached_workbench_multiplier = false;
     }
 
-    // Unlike skill, tools are consumed once at the start and should not be consumed at the end
-    if( craft.item_counter >= 10000000 ) {
-        --five_percent_steps;
-    }
-
-    if( five_percent_steps > 0 ) {
-        if( !crafter.craft_consume_tools( craft, five_percent_steps, false ) ) {
-            // So we don't skip over any tool comsuption
-            craft.item_counter -= craft.item_counter % 500000 + 1;
-            craft.erase_var( "crafter" );
-            crafter.cancel_activity();
-            return;
-        }
-    }
 
     // if item_counter has reached 100% or more
     if( craft.item_counter >= 10000000 ) {

@@ -10158,6 +10158,16 @@ bool item::is_corpse() const
     return corpse != nullptr && has_flag( flag_CORPSE );
 }
 
+void item::begin_bulk_fill()
+{
+    contents.begin_bulk_fill();
+}
+
+void item::end_bulk_fill()
+{
+    contents.end_bulk_fill();
+}
+
 const mtype *item::get_mtype() const
 {
     return corpse;
@@ -15902,16 +15912,16 @@ bool item::has_tools_to_continue() const
     return craft_data_->tools_to_continue;
 }
 
-void item::set_cached_tool_selections( const std::vector<comp_selection<tool_comp>> &selections )
+void item::set_step_tool_allocs( const std::vector<std::vector<step_tool_alloc>> &allocs )
 {
     cata_assert( craft_data_ );
-    craft_data_->cached_tool_selections = selections;
+    craft_data_->step_tool_allocs = allocs;
 }
 
-const std::vector<comp_selection<tool_comp>> &item::get_cached_tool_selections() const
+const std::vector<std::vector<step_tool_alloc>> &item::get_step_tool_allocs() const
 {
     cata_assert( craft_data_ );
-    return craft_data_->cached_tool_selections;
+    return craft_data_->step_tool_allocs;
 }
 
 int item::get_current_step() const
@@ -16054,6 +16064,18 @@ void item::set_saved_fail_at( time_point t )
 {
     cata_assert( craft_data_ );
     craft_data_->saved_fail_at = t;
+}
+
+time_point item::get_env_check_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->env_check_at;
+}
+
+void item::set_env_check_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->env_check_at = t;
 }
 
 character_id item::get_crafter_id() const

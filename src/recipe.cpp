@@ -802,25 +802,15 @@ void recipe::finalize()
         add_requirements( reqs_internal );  // root components
         reqs_internal.clear();
 
+        // Snapshot the root-only requirements so root tools stay attributable
+        // after per-step requirements merge into requirements_ below.
+        root_requirements_ = requirements_;
+
         for( recipe_step &step : steps_ ) {
             // Resolve each step's inline requirements
             step.requirements = std::accumulate(
                                     step.reqs_internal.begin(), step.reqs_internal.end(),
                                     step.requirements );
-            // TODO: charged-tool consumption is not modeled on unattended steps
-            // (the active 5%-loop debit path is bypassed).  Reject after
-            // requirements are fully resolved so step-level "using" injections
-            // are also caught.  Lift once metered charge debit is implemented.
-            if( step.attention == step_attention::unattended ) {
-                for( const std::vector<tool_comp> &tool_group : step.requirements.get_tools() ) {
-                    for( const tool_comp &t : tool_group ) {
-                        if( t.by_charges() ) {
-                            debugmsg( "recipe %s step '%s' is unattended and cannot require charged tools yet",
-                                      ident().str(), step.name.translated() );
-                        }
-                    }
-                }
-            }
             // Merge step requirements into recipe-level for whole-recipe gating
             requirements_ = requirements_ + step.requirements;
             step.reqs_internal.clear();

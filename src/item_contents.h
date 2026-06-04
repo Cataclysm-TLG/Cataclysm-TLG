@@ -310,7 +310,10 @@ class item_contents
         /** Spill items that don't fit in the container. */
         void overflow( map &here, const tripoint_bub_ms &pos, const item_location &loc );
         void clear_items();
-        // clears all items from magazine type pockets
+        /** Engage bulk-fill mode on all pockets. See item_pocket::begin_bulk_fill. */
+        void begin_bulk_fill();
+        void end_bulk_fill();
+        /** Clear all items from magazine type pockets. */
         void clear_magazines();
         void clear_pockets_if( const std::function<bool( item_pocket const & )> &filter );
         void update_open_pockets();
