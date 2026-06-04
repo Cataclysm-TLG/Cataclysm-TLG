@@ -25,6 +25,8 @@
 #include "debug.h"
 #include "output.h"
 #include "string_formatter.h"
+#include "string_id.h"
+#include "type_id.h"
 
 json_error_output_colors_t json_error_output_colors = json_error_output_colors_t::unset;
 
