@@ -72,7 +72,6 @@
     "time": "15 m",
     "charges": 5,
     "batch_time_factors": [ 50, 4 ],
-    "autolearn": true,
     "book_learn": [ [ "cookbook_native", 1 ] ],
     "qualities": [ { "id": "COOK", "level": 2 } ],
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_frying" } ],
@@ -292,7 +291,10 @@
     "time": "35 m",
     "charges": 15,
     "batch_time_factors": [ 50, 4 ],
-    "autolearn": true,
+    "book_learn": [
+      [ "atomic_survival", 6 ],
+      [ "cookbook", 3 ]
+    ],
     "qualities": [ { "id": "COOK", "level": 2 }, { "id": "HAMMER", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_baking" }, { "proficiency": "prof_scav_cooking" } ],
     "tools": [ [ [ "surface_heat", 35, "LIST" ] ] ],
@@ -330,7 +332,13 @@
     "difficulty": 3,
     "time": "10 m",
     "//": "Making the very first starter is a lot more finnicky than splitting it once it's mature.",
-    "autolearn": true,
+    "book_learn": [
+      [ "family_cookbook", 2 ],
+      [ "baking_book", 2 ],
+      [ "cookbook", 2 ],
+      [ "cookbook_italian", 3 ],
+      [ "atomic_survival", 6 ]
+    ],
     "qualities": [ { "id": "CONTAIN", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_fermenting" }, { "proficiency": "prof_lactofermenting" } ],
     "components": [ [ [ "water_clean", 1 ] ], [ [ "flour_any", 4, "LIST" ] ] ]
@@ -344,7 +352,13 @@
     "skill_used": "cooking",
     "difficulty": 1,
     "time": "5 m",
-    "autolearn": true,
+    "book_learn": [
+      [ "family_cookbook", 2 ],
+      [ "baking_book", 2 ],
+      [ "cookbook", 2 ],
+      [ "cookbook_italian", 3 ],
+      [ "atomic_survival", 6 ]
+    ],
     "qualities": [ { "id": "CONTAIN", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_fermenting" }, { "proficiency": "prof_lactofermenting" } ],
     "components": [ [ [ "water_clean", 1 ] ], [ [ "flour_any", 4, "LIST" ] ], [ [ "sourdough_starter_uncovered", 1 ] ] ],
@@ -362,7 +376,13 @@
     "time": "20 m",
     "batch_time_factors": [ 50, 4 ],
     "charges": 10,
-    "autolearn": true,
+    "book_learn": [
+      [ "family_cookbook", 2 ],
+      [ "baking_book", 2 ],
+      [ "cookbook", 2 ],
+      [ "cookbook_italian", 3 ],
+      [ "atomic_survival", 6 ]
+    ],
     "qualities": [ { "id": "OVEN", "level": 2 } ],
     "proficiencies": [
       { "proficiency": "prof_baking" },

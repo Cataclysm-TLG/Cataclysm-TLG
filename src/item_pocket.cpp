@@ -2502,7 +2502,7 @@ units::mass item_pocket::contains_weight() const
 
 void item_pocket::begin_bulk_fill()
 {
-    bulk_fill_volume = contents_volume();
+    bulk_fill_volume = contains_volume();
     bulk_fill_weight = contains_weight();
 }
 
@@ -2535,7 +2535,7 @@ int item_pocket::charges_per_remaining_volume( const item &it ) const
     }
     // Single pass: subtract the volume of every item that doesn't stack with
     // `it`, and tally charges of those that do. When nothing stacks this
-    // reduces to volume_capacity() - contents_volume() == remaining_volume().
+    // reduces to volume_capacity() - contains_volume() == remaining_volume().
     units::volume non_it_volume = volume_capacity();
     int contained_charges = 0;
     for( const item &contained : contents ) {
