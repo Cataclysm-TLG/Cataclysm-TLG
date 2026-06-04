@@ -1724,7 +1724,14 @@
   {
     "type": "item_group",
     "id": "female_underwear_top",
-    "items": [ [ "bra", 40 ], [ "sports_bra", 60 ], [ "tank_top", 4 ], [ "camisole", 5 ], [ "under_armor", 1 ] ]
+    "items": [
+      [ "bra", 40 ],
+      [ "sports_bra", 60 ],
+      [ "tank_top", 20 ],
+      [ "halter_top", 10 ],
+      [ "camisole", 5 ],
+      [ "under_armor", 1 ]
+    ]
   },
   {
     "type": "item_group",
@@ -1790,7 +1797,6 @@
       { "item": "tank_top", "prob": 50 },
       { "item": "camisole", "prob": 30 },
       { "item": "bra", "prob": 30 },
-      { "item": "tank_top", "prob": 30 },
       { "item": "boxer_shorts", "prob": 30 },
       { "item": "briefs", "prob": 15 },
       { "item": "boxer_briefs", "prob": 20 },
@@ -2881,7 +2887,6 @@
       [ "tank_top", 50 ],
       [ "camisole", 30 ],
       [ "bra", 30 ],
-      [ "tank_top", 30 ],
       [ "boxer_shorts", 30 ],
       [ "briefs", 15 ],
       [ "boxer_briefs", 20 ],
