@@ -1061,7 +1061,7 @@
   {
     "id": "wedding_suits",
     "type": "item_group",
-    "items": [ [ "tux", 100 ], [ "suit", 80 ], [ "waistcoat", 50 ], [ "dress_shirt", 100 ], [ "undershirt", 50 ] ]
+    "items": [ [ "tux", 100 ], [ "suit", 80 ], [ "waistcoat", 50 ], [ "dress_shirt", 100 ], [ "tank_top", 50 ] ]
   },
   {
     "id": "neckties",
@@ -1146,7 +1146,7 @@
       [ "barrette", 15 ],
       [ "tieclip", 10 ],
       [ "collarpin", 10 ],
-      [ "undershirt", 70 ],
+      [ "tank_top", 70 ],
       [ "boxer_shorts", 50 ],
       [ "briefs", 40 ],
       [ "boxer_briefs", 45 ],
@@ -1440,7 +1440,7 @@
       { "group": "neckties", "prob": 50 },
       [ "tieclip", 30 ],
       [ "collarpin", 30 ],
-      [ "undershirt", 100 ],
+      [ "tank_top", 100 ],
       [ "suit", 100 ],
       [ "waistcoat", 70 ],
       [ "tophat", 30 ],
@@ -1724,43 +1724,41 @@
   {
     "type": "item_group",
     "id": "female_underwear_top",
-    "items": [ [ "corset", 5 ], [ "binder_top", 1 ], [ "corset_waist", 5 ], { "group": "female_underwear_top_child", "prob": 190 } ]
+    "items": [
+      [ "bra", 40 ],
+      [ "sports_bra", 60 ],
+      [ "tank_top", 20 ],
+      [ "halter_top", 10 ],
+      [ "camisole", 5 ],
+      [ "under_armor", 1 ]
+    ]
   },
   {
     "type": "item_group",
     "id": "female_underwear_top_child",
-    "items": [ [ "bra", 30 ], [ "sports_bra", 60 ], [ "camisole", 30 ], [ "halter_top", 60 ], [ "bikini_top", 5 ] ]
+    "items": [ [ "bra", 5 ], [ "sports_bra", 60 ], [ "tank_top", 20 ], [ "camisole", 50 ], [ "under_armor", 1 ] ]
   },
   {
     "type": "item_group",
     "id": "female_underwear_bottom",
-    "items": [ [ "panties", 70 ], [ "boy_shorts", 50 ], [ "bikini_bottom", 1 ] ]
+    "items": [ [ "panties", 70 ], [ "boy_shorts", 50 ], [ "under_armor_shorts", 5 ] ]
   },
   {
     "type": "item_group",
     "id": "male_underwear_top",
     "items": [
-      [ "undershirt", 50 ],
-      [ "binder_top", 2 ],
-      [ "long_undertop", 20 ],
-      [ "thermal_shirt", 10 ],
-      [ "under_armor", 20 ],
-      [ "tank_top", 50 ]
+      [ "tank_top", 800 ],
+      [ "binder_top", 1 ],
+      [ "long_undertop", 100 ],
+      [ "thermal_shirt", 100 ],
+      [ "under_armor", 100 ],
+      [ "tank_top", 500 ]
     ]
   },
   {
     "type": "item_group",
     "id": "male_underwear_bottom",
-    "items": [
-      [ "boxer_shorts", 70 ],
-      [ "briefs", 30 ],
-      [ "boxer_briefs", 50 ],
-      [ "long_underpants", 20 ],
-      [ "under_armor_shorts", 20 ],
-      [ "trunks", 10 ],
-      [ "swim_briefs", 5 ],
-      [ "speedo", 1 ]
-    ]
+    "items": [ [ "boxer_shorts", 70 ], [ "briefs", 30 ], [ "boxer_briefs", 50 ], [ "under_armor_shorts", 5 ] ]
   },
   {
     "type": "item_group",
@@ -1799,7 +1797,6 @@
       { "item": "tank_top", "prob": 50 },
       { "item": "camisole", "prob": 30 },
       { "item": "bra", "prob": 30 },
-      { "item": "undershirt", "prob": 30 },
       { "item": "boxer_shorts", "prob": 30 },
       { "item": "briefs", "prob": 15 },
       { "item": "boxer_briefs", "prob": 20 },
@@ -2890,7 +2887,6 @@
       [ "tank_top", 50 ],
       [ "camisole", 30 ],
       [ "bra", 30 ],
-      [ "undershirt", 30 ],
       [ "boxer_shorts", 30 ],
       [ "briefs", 15 ],
       [ "boxer_briefs", 20 ],
@@ -3194,7 +3190,7 @@
       { "item": "thermal_suit", "prob": 7 },
       { "item": "long_undertop", "prob": 30 },
       { "item": "under_armor", "prob": 10 },
-      { "item": "undershirt", "prob": 40 },
+      { "item": "tank_top", "prob": 40 },
       { "item": "under_armor_shorts", "prob": 10 },
       { "item": "long_underpants", "prob": 30 }
     ]
@@ -3403,9 +3399,7 @@
         "distribution": [
           {
             "collection": [
-              {
-                "collection": [ { "item": "undershirt", "prob": 30 }, { "item": "dress_shirt" }, { "item": "waistcoat", "prob": 20 } ]
-              },
+              { "collection": [ { "item": "tank_top", "prob": 30 }, { "item": "dress_shirt" }, { "item": "waistcoat", "prob": 20 } ] },
               { "item": "breeches" }
             ]
           },

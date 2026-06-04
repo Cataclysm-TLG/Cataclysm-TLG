@@ -17,12 +17,12 @@
   {
     "type": "item_group",
     "id": "NC_BUNKER_MERCHANT_shirt_male",
-    "items": [ [ "undershirt", 30 ], [ "sweatshirt", 20 ], [ "under_armor", 20 ], [ "longshirt", 20 ] ]
+    "items": [ [ "tank_top", 30 ], [ "sweatshirt", 20 ], [ "under_armor", 20 ], [ "longshirt", 20 ] ]
   },
   {
     "type": "item_group",
     "id": "NC_BUNKER_MERCHANT_shirt_female",
-    "items": [ [ "undershirt", 30 ], [ "sweatshirt", 20 ], [ "under_armor", 20 ], [ "longshirt", 20 ] ]
+    "items": [ [ "tank_top", 30 ], [ "sweatshirt", 20 ], [ "under_armor", 20 ], [ "longshirt", 20 ] ]
   },
   {
     "type": "item_group",

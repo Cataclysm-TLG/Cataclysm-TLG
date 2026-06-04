@@ -4092,5 +4092,10 @@
     "type": "MIGRATION",
     "id": "wash_kit",
     "replace": "washboard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "undershirt",
+    "replace": "tank_top"
   }
 ]

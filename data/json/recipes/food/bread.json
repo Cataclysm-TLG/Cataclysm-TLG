@@ -291,10 +291,7 @@
     "time": "35 m",
     "charges": 15,
     "batch_time_factors": [ 50, 4 ],
-    "book_learn": [
-      [ "atomic_survival", 6 ],
-      [ "cookbook", 3 ]
-    ],
+    "book_learn": [ [ "atomic_survival", 6 ], [ "cookbook", 3 ] ],
     "qualities": [ { "id": "COOK", "level": 2 }, { "id": "HAMMER", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_baking" }, { "proficiency": "prof_scav_cooking" } ],
     "tools": [ [ [ "surface_heat", 35, "LIST" ] ] ],
