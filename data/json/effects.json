@@ -591,7 +591,7 @@
   },
   {
     "type": "effect_type",
-    "id": "winded_cephalopod_arm_lower",
+    "id": "winded_cephalopod_arm",
     "name": [ "Winded (Arms)" ],
     "desc": [ "You're short of breath.  Your arms have impaired function until you recover." ],
     "rating": "bad",
@@ -618,8 +618,8 @@
   },
   {
     "type": "effect_type",
-    "id": "winded_cephalopod_arm_upper",
-    "name": [ "Winded (Arms)" ],
+    "id": "winded_cephalopod_tentacle",
+    "name": [ "Winded (Tentacles)" ],
     "desc": [ "You're short of breath.  Your arms have impaired function until you recover." ],
     "rating": "bad",
     "max_duration": "30 s",
@@ -3281,8 +3281,8 @@
       "winded_leg_r",
       "winded_arm_l",
       "winded_arm_r",
-      "winded_cephalopod_arm_upper",
-      "winded_cephalopod_arm_lower",
+      "winded_cephalopod_tentacle",
+      "winded_cephalopod_arm",
       "winded_gastropod_foot"
     ],
     "base_mods": { "str_mod": [ -1 ], "dex_mod": [ -2 ], "per_mod": [ -2 ], "int_mod": [ -1 ] },
@@ -3305,8 +3305,8 @@
       "winded_leg_r",
       "winded_arm_l",
       "winded_arm_r",
-      "winded_cephalopod_arm_upper",
-      "winded_cephalopod_arm_lower",
+      "winded_cephalopod_tentacle",
+      "winded_cephalopod_arm",
       "winded_gastropod_foot"
     ],
     "base_mods": { "speed_mod": [ -5 ], "dex_mod": [ -2 ], "per_mod": [ -1 ], "int_mod": [ -2 ] },
@@ -3338,8 +3338,8 @@
       "winded_leg_r",
       "winded_arm_l",
       "winded_arm_r",
-      "winded_cephalopod_arm_upper",
-      "winded_cephalopod_arm_lower",
+      "winded_cephalopod_arm",
+      "winded_cephalopod_tentacle",
       "winded_gastropod_foot"
     ],
     "base_mods": {
