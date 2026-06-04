@@ -49,6 +49,8 @@
 #include "field.h"
 #include "field_type.h"
 #include "flag.h"
+#include "flat_set.h" // IWYU pragma: keep
+#include "flexbuffer_json.h"
 #include "fungal_effects.h"
 #include "game.h"
 #include "game_constants.h"

@@ -1737,15 +1737,16 @@ bool _stacks_components( item const &lhs, item const &rhs, bool check_components
 stacking_info item::stacks_with( const item &rhs, bool check_components, bool combine_liquid,
                                  bool check_cat, int depth, int maxdepth, bool precise ) const
 {
+    // Type mismatch cannot stack without a CATEGORY check.
+    if( type != rhs.type && !check_cat ) {
+        return {};
+    }
+
     tname::segment_bitset bits;
     if( type == rhs.type ) {
         bits.set( tname::segments::TYPE );
         bits.set( tname::segments::WHEEL_DIAMETER );
         bits.set( tname::segments::WHITEBLACKLIST, _stacks_whiteblacklist( *this, rhs ) );
-    }
-
-    if( !check_cat && bits.none() ) {
-        return {};
     }
 
     bits.set( tname::segments::CATEGORY,
@@ -1900,12 +1901,14 @@ int item::insert_cost( const item &it ) const
 }
 
 ret_val<void> item::put_in( const item &payload, pocket_type pk_type,
-                            const bool unseal_pockets, Character *carrier )
+                            const bool unseal_pockets, Character *carrier, const bool quiet )
 {
     ret_val<item *> result = contents.insert_item( payload, pk_type, false, unseal_pockets );
     if( !result.success() ) {
-        debugmsg( "tried to put an item (%s) count (%d) in a container (%s) that cannot contain it: %s",
-                  payload.typeId().str(), payload.count(), typeId().str(), result.str() );
+                if( !quiet ) {
+            debugmsg( "tried to put an item (%s) count (%d) in a container (%s) that cannot contain it: %s",
+                      payload.typeId().str(), payload.count(), typeId().str(), result.str() );
+        }
         return ret_val<void>::make_failure( result.str() );
     }
     if( pk_type == pocket_type::MOD ) {
@@ -6595,7 +6598,7 @@ void item::update_inherited_flags()
     auto const inehrit_flags = [this]( FlagsSetType const & Flags ) {
         for( flag_id const &f : Flags ) {
             if( f->inherit() ) {
-                inherited_tags_cache.emplace( f );
+                inherited_tags_cache.insert( f );
             }
         }
     };
@@ -6644,10 +6647,10 @@ void item::update_prefix_suffix_flags()
 void item::update_prefix_suffix_flags( const flag_id &f )
 {
     if( !f->item_prefix().empty() ) {
-        prefix_tags_cache.emplace( f );
+        prefix_tags_cache.insert( f );
     }
     if( !f->item_suffix().empty() ) {
-        suffix_tags_cache.emplace( f );
+        suffix_tags_cache.insert( f );
     }
 }
 
@@ -7570,26 +7573,19 @@ bool item::has_own_flag( const flag_id &f ) const
 
 bool item::has_flag( const flag_id &f ) const
 {
-    bool ret = false;
     if( !f.is_valid() ) {
         debugmsg( "Attempted to check invalid flag_id %s", f.str() );
         return false;
     }
 
-    ret = inherited_tags_cache.find( f ) != inherited_tags_cache.end();
-    if( ret ) {
-        return ret;
+    // Itype flags cover the common case; check them first.
+    if( type->has_flag( f ) ) {
+        return true;
     }
-
-    // other item type flags
-    ret = type->has_flag( f );
-    if( ret ) {
-        return ret;
+    if( inherited_tags_cache.find( f ) != inherited_tags_cache.end() ) {
+        return true;
     }
-
-    // now check for item specific flags
-    ret = has_own_flag( f );
-    return ret;
+    return has_own_flag( f );
 }
 
 item &item::set_flag( const flag_id &flag )

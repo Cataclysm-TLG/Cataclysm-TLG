@@ -41,6 +41,7 @@
 #include "enums.h"
 #include "faction.h"
 #include "flag.h"
+#include "flat_set.h" // IWYU pragma: keep
 #include "game.h"
 #include "game_constants.h"
 #include "game_inventory.h"
