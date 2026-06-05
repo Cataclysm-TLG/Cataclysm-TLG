@@ -693,6 +693,7 @@
     "squeamish_penalty": 5,
     "base_hp": 46,
     "drench_capacity": 600,
+    "mend_rate": 150,
     "smash_message": "You tail-slap the %s.",
     "flags": [ "LIMB_LOWER", "LIMB_BONELESS" ],
     "sub_parts": [ "fish_tail_base", "fish_tail_tip", "fish_tail_draped" ],
@@ -806,6 +807,7 @@
     "squeamish_penalty": 5,
     "base_hp": 46,
     "drench_capacity": 600,
+    "mend_rate": 150,
     "smash_message": "You tail-whip the %s.",
     "flags": [ "LIMB_LOWER", "LIMB_BONELESS" ],
     "sub_parts": [ "long_tail_base", "long_tail_tip", "long_tail_draped" ],
@@ -912,7 +914,7 @@
     "opposite_part": "cephalopod_arm_4",
     "hit_size": 4,
     "hit_difficulty": 0.85,
-    "mend_rate": 400,
+    "mend_rate": 300,
     "limb_types": [ [ "arm", 1.0 ], [ "hand", 1.0 ], [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.12, 1.1 ],
@@ -1041,7 +1043,7 @@
     "opposite_part": "cephalopod_arm_5",
     "hit_size": 4,
     "hit_difficulty": 0.85,
-    "mend_rate": 400,
+    "mend_rate": 300,
     "limb_types": [ [ "arm", 1.0 ], [ "hand", 1.0 ], [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.12, 1.1 ],
@@ -1170,7 +1172,7 @@
     "opposite_part": "cephalopod_arm_6",
     "hit_size": 4,
     "hit_difficulty": 0.85,
-    "mend_rate": 400,
+    "mend_rate": 300,
     "limb_types": [ [ "arm", 1.0 ], [ "hand", 1.0 ], [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.12, 1.1 ],
@@ -1299,7 +1301,7 @@
     "opposite_part": "cephalopod_arm_1",
     "hit_size": 4,
     "hit_difficulty": 0.85,
-    "mend_rate": 400,
+    "mend_rate": 300,
     "limb_types": [ [ "arm", 1.0 ], [ "hand", 1.0 ], [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.12, 1.1 ],
@@ -1428,7 +1430,7 @@
     "opposite_part": "cephalopod_arm_2",
     "hit_size": 4,
     "hit_difficulty": 0.85,
-    "mend_rate": 400,
+    "mend_rate": 300,
     "limb_types": [ [ "arm", 1.0 ], [ "hand", 1.0 ], [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.12, 1.1 ],
@@ -1557,7 +1559,7 @@
     "opposite_part": "cephalopod_arm_3",
     "hit_size": 4,
     "hit_difficulty": 0.85,
-    "mend_rate": 400,
+    "mend_rate": 300,
     "limb_types": [ [ "arm", 1.0 ], [ "hand", 1.0 ], [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.12, 1.1 ],

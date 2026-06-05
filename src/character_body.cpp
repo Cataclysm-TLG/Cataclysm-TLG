@@ -1282,8 +1282,8 @@ bodypart_id Character::body_window( const std::string &menu_header,
         const nc_color all_state_col = display::limb_color( *this, bp, true, true, true );
         // Broken means no HP can be restored, it requires surgical attention.
         const bool limb_is_broken = is_limb_broken( bp );
-        const bool limb_is_mending = worn_with_flag( flag_SPLINT, bp ) ||
-                                     bp->has_flag( json_flag_LIMB_BONELESS );
+        const bool limb_is_mending = limb_is_broken && ( worn_with_flag( flag_SPLINT, bp ) ||
+                                     bp->has_flag( json_flag_LIMB_BONELESS ) );
         // How much this treatment would help, if applied to this bodypart.
         // The value itself is just a sorting number and has no actual meaning in itself, but is roughly ranged at:
         // 0-30=bandage, 30-60=disinfectant, 60-70=bitten/infected, 70-80=bleeding

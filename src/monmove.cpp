@@ -2304,13 +2304,13 @@ void monster::stumble()
     }
     const tripoint_bub_ms above( pos_bub() + tripoint::above );
     const bool stair_up = here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos_bub() ) &&
-                            !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos_bub() );
+                          !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos_bub() );
     const bool ladder_up = here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos_bub() ) &&
-                            can_climb() &&
-                            here.has_floor_or_support( above );
+                           can_climb() &&
+                           here.has_floor_or_support( above );
     const bool swim_up = swims() &&
-                            here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) &&
-                            here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, above );
+                         here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) &&
+                         here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, above );
     if( ( flies() || stair_up || ladder_up || swim_up ) &&
         here.valid_move( pos_bub(), above, false, flies() ) ) {
         valid_stumbles.push_back( above );
