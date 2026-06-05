@@ -456,7 +456,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
-    "name": { "str_sp": "fur" },
+    "name": { "str_sp": "rabbit fur" },
     "description": "A soft, fluffy coating of fur.  It isn't the best protection against predators, but stays warm in bad weather.",
     "weight": "400 g",
     "volume": "400 ml",
