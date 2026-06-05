@@ -32,7 +32,9 @@
 #include <string>
 #include <vector>
 
-#include <cata_shader.h>
+namespace cata_shader {
+    class variant_pass;
+}
 
 struct point;
 
