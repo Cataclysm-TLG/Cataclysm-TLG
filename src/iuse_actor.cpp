@@ -184,6 +184,119 @@ static const trap_str_id tr_firewood_source( "tr_firewood_source" );
 
 static const zone_type_id zone_type_SOURCE_FIREWOOD( "SOURCE_FIREWOOD" );
 
+template<typename T>
+item_location form_loc_recursive( T &loc, item &it )
+{
+    item *parent = loc.find_parent( it );
+    if( parent != nullptr ) {
+        return item_location( form_loc_recursive( loc, *parent ), &it );
+    }
+
+    return item_location( loc, &it );
+}
+
+//explict template instantiation
+template item_location form_loc_recursive<Character>( Character &loc, item &it );
+template item_location form_loc_recursive<npc>( npc &loc, item &it );
+
+static std::optional<item_location> try_form_loc( Character &you, map *here,
+        const tripoint_bub_ms &p, item &it )
+{
+    if( you.has_item( it ) ) {
+        return form_loc_recursive( you, it );
+    }
+    if( here ) {
+        map_cursor mc( here, p );
+        if( mc.has_item( it ) ) {
+            return form_loc_recursive( mc, it );
+        }
+        const optional_vpart_position vp = here->veh_at( p );
+        if( vp ) {
+            vehicle_cursor vc( vp->vehicle(), vp->part_index() );
+            if( vc.has_item( it ) ) {
+                return form_loc_recursive( vc, it );
+            }
+        }
+    }
+    return std::nullopt;
+}
+
+static item_location form_loc( Character &you, map *here, const tripoint_bub_ms &p, item &it )
+{
+    if( std::optional<item_location> loc = try_form_loc( you, here, p, it ) ) {
+        return *loc;
+    }
+    debugmsg( "Couldn't find item %s to form item_location, forming dummy location to ensure minimum functionality",
+              it.display_name() );
+    return item_location( you, &it );
+}
+
+// Like parents_can_contain_recursive but with replacement semantics: an
+// in-place transform swaps `it` out, so each level credits `it`'s footprint.
+static ret_val<void> transform_fits_parent_pocket( const Character &p, const item &it,
+        const item &result, map *here, const tripoint_bub_ms &pos )
+{
+    const std::optional<item_location> loc = try_form_loc(
+                const_cast<Character &>( p ), here, pos, const_cast<item &>( it ) );
+    if( !loc || !loc->has_parent() ) {
+        return ret_val<void>::make_success();
+    }
+
+    units::mass result_weight = result.weight();
+    units::volume result_volume = result.volume();
+    units::length result_length = result.length();
+    units::mass it_weight = it.weight();
+    units::volume it_volume = it.volume();
+    units::length it_length = it.length();
+    const std::vector<const item_pocket *> innermost = loc->get_item()->get_all_standard_pockets();
+    const item_pocket *current_pocket = innermost.empty() ? nullptr : innermost.front();
+    const pocket_data *current_pocket_data = current_pocket ? current_pocket->get_pocket_data()
+            : nullptr;
+
+    item_location current = *loc;
+    while( current.has_parent() ) {
+        const item_pocket *parent_pocket = current.parent_pocket();
+        if( parent_pocket == nullptr ) {
+            break;
+        }
+        if( current_pocket && current_pocket->rigid() ) {
+            result_volume = 0_ml;
+            result_length = 0_mm;
+            it_volume = 0_ml;
+            it_length = 0_mm;
+        }
+        if( current_pocket_data ) {
+            result_weight = result_weight * current_pocket_data->weight_multiplier;
+            result_volume = result_volume * current_pocket_data->volume_multiplier;
+            result_length = result_length * std::cbrt( current_pocket_data->volume_multiplier );
+            it_weight = it_weight * current_pocket_data->weight_multiplier;
+            it_volume = it_volume * current_pocket_data->volume_multiplier;
+            it_length = it_length * std::cbrt( current_pocket_data->volume_multiplier );
+        }
+
+        if( result_weight - it_weight > parent_pocket->remaining_weight() ) {
+            return ret_val<void>::make_failure(
+                       _( "The %1$s would not fit in its container after transforming: item is too heavy for a parent pocket" ),
+                       result.tname() );
+        }
+        if( result_volume - it_volume > parent_pocket->remaining_volume() ) {
+            return ret_val<void>::make_failure(
+                       _( "The %1$s would not fit in its container after transforming: item is too big for a parent pocket" ),
+                       result.tname() );
+        }
+        if( result_length > parent_pocket->get_pocket_data()->max_item_length ) {
+            return ret_val<void>::make_failure(
+                       _( "The %1$s would not fit in its container after transforming: item is too long for a parent pocket" ),
+                       result.tname() );
+        }
+
+        current_pocket = parent_pocket;
+        current_pocket_data = current_pocket->get_pocket_data();
+        current = current.parent_item();
+    }
+    return ret_val<void>::make_success();
+}
+
 std::unique_ptr<iuse_actor> iuse_transform::clone() const
 {
     return std::make_unique<iuse_transform>( *this );
@@ -307,7 +420,7 @@ std::optional<int> iuse_transform::use( Character *p, item &it, map *,
 }
 
 ret_val<void> iuse_transform::can_use( const Character &p, const item &it,
-                                       map *here, const tripoint_bub_ms & ) const
+                                       map *here, const tripoint_bub_ms &pos ) const
 {
     if( need_worn && !p.is_worn( it ) ) {
         return ret_val<void>::make_failure( _( "You need to wear the %1$s before activating it." ),
@@ -320,6 +433,16 @@ ret_val<void> iuse_transform::can_use( const Character &p, const item &it,
     if( need_empty && !it.empty() ) {
         return ret_val<void>::make_failure( _( "You need to empty the %1$s before activating it." ),
                                             it.tname() );
+    }
+
+    if( transform.target_group.is_empty() && !transform.target.is_empty() ) {
+        const item result = transform.container.is_empty()
+                            ? item( transform.target )
+                            : item( transform.container );
+        ret_val<void> fits = transform_fits_parent_pocket( p, it, result, here, pos );
+        if( !fits.success() ) {
+            return fits;
+        }
     }
 
     if( p.is_worn( it ) ) {
@@ -2663,39 +2786,6 @@ bool holster_actor::store( Character &you, item &holster, item &obj ) const
     you.as_character()->store( holster, obj, true, holster.insert_cost( obj ),
                                pocket_type::CONTAINER, true );
     return true;
-}
-
-template<typename T>
-static item_location form_loc_recursive( T &loc, item &it )
-{
-    item *parent = loc.find_parent( it );
-    if( parent != nullptr ) {
-        return item_location( form_loc_recursive( loc, *parent ), &it );
-    }
-
-    return item_location( loc, &it );
-}
-
-static item_location form_loc( Character &you, map *here, const tripoint_bub_ms &p, item &it )
-{
-    if( you.has_item( it ) ) {
-        return form_loc_recursive( you, it );
-    }
-    map_cursor mc( here, p );
-    if( mc.has_item( it ) ) {
-        return form_loc_recursive( mc, it );
-    }
-    const optional_vpart_position vp = here->veh_at( p );
-    if( vp ) {
-        vehicle_cursor vc( vp->vehicle(), vp->part_index() );
-        if( vc.has_item( it ) ) {
-            return form_loc_recursive( vc, it );
-        }
-    }
-
-    debugmsg( "Couldn't find item %s to form item_location, forming dummy location to ensure minimum functionality",
-              it.display_name() );
-    return item_location( you, &it );
 }
 
 std::optional<int> holster_actor::use( Character *you, item &it, map *here,

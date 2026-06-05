@@ -15201,6 +15201,11 @@ bool item::process_internal( map &here, Character *carrier, const tripoint_bub_m
             } else {
                 return true;
             }
+            // Result may not fit current pocket; queue overflow to spill
+            // into a fitting ancestor pocket or onto the ground.
+            if( carrier ) {
+                carrier->invalidate_inventory_validity_cache();
+            }
         }
 
         for( const emit_id &e : type->emits ) {
