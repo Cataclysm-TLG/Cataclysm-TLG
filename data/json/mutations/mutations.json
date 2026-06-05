@@ -2032,6 +2032,7 @@
     "prereqs": [ "NIGHTVISION2" ],
     "leads_to": [ "INFRARED" ],
     "types": [ "VISION" ],
+    "threshreq": [ "FISH", "TROGLOBITE", "SPIDER", "INSECT" ],
     "category": [ "FISH", "TROGLOBITE", "SPIDER", "INSECT" ]
   },
   {
