@@ -168,7 +168,8 @@ class item_location::impl
                 if( i ) {
                     what = i->get_safe_reference();
                 } else {
-                    debugmsg( "item_location lost its target item during a save/load cycle" );
+                    // FIXME: This is still an issue, but the player doesn't need this information.
+                    // debugmsg( "item_location lost its target item during a save/load cycle" );
                 }
                 needs_unpacking = false;
             }
@@ -1016,7 +1017,8 @@ void item_location::deserialize( const JsonObject &obj )
         obj.read( "parent", parent );
         if( !parent.ptr->valid() ) {
             if( parent == nowhere ) {
-                debugmsg( "parent location doesn't exist.  Item_location has lost its target over a save/load cycle." );
+                // FIXME: This is still an issue, but the player doesn't need this information.
+                // debugmsg( "parent location doesn't exist.  Item_location has lost its target over a save/load cycle." );
                 ptr = std::make_shared<impl::nowhere>();
                 return;
             }
@@ -1035,7 +1037,8 @@ void item_location::deserialize( const JsonObject &obj )
                 }
             }
             if( !found ) {
-                debugmsg( "item_location UID not found in container contents" );
+                // FIXME: This is still an issue, but the player doesn't need this information.
+                // debugmsg( "item_location UID not found in container contents" );
                 ptr = std::make_shared<impl::nowhere>();
                 return;
             }
