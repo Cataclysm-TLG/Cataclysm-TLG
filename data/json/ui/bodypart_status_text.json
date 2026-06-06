@@ -1101,5 +1101,237 @@
       { "id": "bitten", "text": "ARM 6", "color": "blue", "condition": { "u_has_effect": "bite" } }
     ],
     "flags": [ "W_LABEL_NONE" ]
+  },
+  {
+    "id": "bodypart_crab_leg_1_status_text",
+    "type": "widget",
+    "bodypart": "crab_leg_1",
+    "style": "text",
+    "default_clause": { "text": "LEG 1" },
+    "clauses": [
+      {
+        "id": "bleedingAndBitten3",
+        "text": "LEG 1",
+        "color": "magenta_red",
+        "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
+      },
+      {
+        "id": "bleedingAndBitten12",
+        "text": "LEG 1",
+        "color": "magenta",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bite" },
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding3",
+        "text": "LEG 1",
+        "color": "red_red",
+        "condition": { "u_has_effect": "bleed", "intensity": 21 }
+      },
+      {
+        "id": "bleeding2",
+        "text": "LEG 1",
+        "color": "red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 11 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding1",
+        "text": "LEG 1",
+        "color": "light_red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+          ]
+        }
+      },
+      { "id": "infected", "text": "LEG 1", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "LEG 1", "color": "blue", "condition": { "u_has_effect": "bite" } }
+    ],
+    "flags": [ "W_LABEL_NONE" ]
+  },
+  {
+    "id": "bodypart_crab_leg_2_status_text",
+    "type": "widget",
+    "bodypart": "crab_leg_2",
+    "style": "text",
+    "default_clause": { "text": "LEG 2" },
+    "clauses": [
+      {
+        "id": "bleedingAndBitten3",
+        "text": "LEG 2",
+        "color": "magenta_red",
+        "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
+      },
+      {
+        "id": "bleedingAndBitten12",
+        "text": "LEG 2",
+        "color": "magenta",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bite" },
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding3",
+        "text": "LEG 2",
+        "color": "red_red",
+        "condition": { "u_has_effect": "bleed", "intensity": 21 }
+      },
+      {
+        "id": "bleeding2",
+        "text": "LEG 2",
+        "color": "red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 11 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding1",
+        "text": "LEG 2",
+        "color": "light_red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+          ]
+        }
+      },
+      { "id": "infected", "text": "LEG 2", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "LEG 2", "color": "blue", "condition": { "u_has_effect": "bite" } }
+    ],
+    "flags": [ "W_LABEL_NONE" ]
+  },
+  {
+    "id": "bodypart_crab_leg_3_status_text",
+    "type": "widget",
+    "bodypart": "crab_leg_3",
+    "style": "text",
+    "default_clause": { "text": "LEG 3" },
+    "clauses": [
+      {
+        "id": "bleedingAndBitten3",
+        "text": "LEG 3",
+        "color": "magenta_red",
+        "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
+      },
+      {
+        "id": "bleedingAndBitten12",
+        "text": "LEG 3",
+        "color": "magenta",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bite" },
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding3",
+        "text": "LEG 3",
+        "color": "red_red",
+        "condition": { "u_has_effect": "bleed", "intensity": 21 }
+      },
+      {
+        "id": "bleeding2",
+        "text": "LEG 3",
+        "color": "red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 11 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding1",
+        "text": "LEG 3",
+        "color": "light_red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+          ]
+        }
+      },
+      { "id": "infected", "text": "LEG 3", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "LEG 3", "color": "blue", "condition": { "u_has_effect": "bite" } }
+    ],
+    "flags": [ "W_LABEL_NONE" ]
+  },
+  {
+    "id": "bodypart_crab_leg_4_status_text",
+    "type": "widget",
+    "bodypart": "crab_leg_4",
+    "style": "text",
+    "default_clause": { "text": "LEG 4" },
+    "clauses": [
+      {
+        "id": "bleedingAndBitten3",
+        "text": "LEG 4",
+        "color": "magenta_red",
+        "condition": { "and": [ { "u_has_effect": "bite" }, { "u_has_effect": "bleed", "intensity": 21 } ] }
+      },
+      {
+        "id": "bleedingAndBitten12",
+        "text": "LEG 4",
+        "color": "magenta",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bite" },
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding3",
+        "text": "LEG 4",
+        "color": "red_red",
+        "condition": { "u_has_effect": "bleed", "intensity": 21 }
+      },
+      {
+        "id": "bleeding2",
+        "text": "LEG 4",
+        "color": "red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 11 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+          ]
+        }
+      },
+      {
+        "id": "bleeding1",
+        "text": "LEG 4",
+        "color": "light_red",
+        "condition": {
+          "and": [
+            { "u_has_effect": "bleed", "intensity": 1 },
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+          ]
+        }
+      },
+      { "id": "infected", "text": "LEG 4", "color": "green", "condition": { "u_has_effect": "infected" } },
+      { "id": "bitten", "text": "LEG 4", "color": "blue", "condition": { "u_has_effect": "bite" } }
+    ],
+    "flags": [ "W_LABEL_NONE" ]
   }
 ]

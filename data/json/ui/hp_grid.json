@@ -120,6 +120,26 @@
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
+    "id": "ll_crab_leg_1_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "crab_leg_1",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_crab_leg_1" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_crab_leg_2_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "crab_leg_2",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_crab_leg_2" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
     "id": "ll_cephalopod_arm_1_layout",
     "type": "widget",
     "style": "layout",
@@ -177,6 +197,26 @@
     "bodypart": "cephalopod_arm_6",
     "text_align": "right",
     "widgets": [ "status_hpg_layout_cephalopod_arm_6" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_crab_leg_3_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "crab_leg_3",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_crab_leg_3" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_crab_leg_4_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "crab_leg_4",
+    "text_align": "right",
+    "widgets": [ "status_hpg_layout_crab_leg_4" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
@@ -287,6 +327,66 @@
     "bodypart": "leg_r",
     "text_align": "right",
     "widgets": [ "status_hpn_layout_rleg" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_crab_leg_1_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "crab_leg_1",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_crab_leg_1" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_crab_leg_2_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "crab_leg_2",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_crab_leg_2" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_crab_leg_3_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "crab_leg_3",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_crab_leg_3" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_crab_leg_4_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "crab_leg_4",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_crab_leg_4" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_tentacle_l_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_tentacle_l",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_cephalopod_tentacle_l" ],
+    "flags": [ "W_DISABLED_WHEN_EMPTY" ]
+  },
+  {
+    "id": "ll_cephalopod_tentacle_r_sa_layout",
+    "type": "widget",
+    "style": "layout",
+    "arrange": "rows",
+    "bodypart": "cephalopod_tentacle_r",
+    "text_align": "right",
+    "widgets": [ "status_hpn_layout_cephalopod_tentacle_r" ],
     "flags": [ "W_DISABLED_WHEN_EMPTY" ]
   },
   {
@@ -470,6 +570,46 @@
     "widgets": [ "bodypart_rleg_status_text", "hp_right_leg_graph_no_label" ]
   },
   {
+    "id": "status_hpg_layout_crab_leg_1",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "crab_leg_1",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_crab_leg_1_status_text", "hp_crab_leg_1_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_crab_leg_2",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "crab_leg_2",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_crab_leg_2_status_text", "hp_crab_leg_2_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_crab_leg_3",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "crab_leg_3",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_crab_leg_3_status_text", "hp_crab_leg_3_graph_no_label" ]
+  },
+  {
+    "id": "status_hpg_layout_crab_leg_4",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "crab_leg_4",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_crab_leg_4_status_text", "hp_crab_leg_4_graph_no_label" ]
+  },
+  {
     "id": "status_hpg_layout_cephalopod_arm_1",
     "type": "widget",
     "style": "layout",
@@ -614,6 +754,46 @@
     "width": 11,
     "height": 0,
     "widgets": [ "bodypart_wing_bird_r_status_text", "hp_wing_bird_r_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_crab_leg_1",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "crab_leg_1",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_crab_leg_1_status_text", "hp_crab_leg_1_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_crab_leg_2",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "crab_leg_2",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_crab_leg_2_status_text", "hp_crab_leg_2_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_crab_leg_3",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "crab_leg_3",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_crab_leg_3_status_text", "hp_crab_leg_3_num_no_label" ]
+  },
+  {
+    "id": "status_hpn_layout_crab_leg_4",
+    "type": "widget",
+    "style": "layout",
+    "bodypart": "crab_leg_4",
+    "arrange": "columns",
+    "width": 11,
+    "height": 0,
+    "widgets": [ "bodypart_crab_leg_4_status_text", "hp_crab_leg_4_num_no_label" ]
   },
   {
     "id": "status_hpn_layout_cephalopod_tentacle_l",
@@ -805,6 +985,34 @@
     "copy-from": "hitpoint_graph_no_label"
   },
   {
+    "id": "hp_crab_leg_1_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "crab_leg_1",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_crab_leg_2_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "crab_leg_2",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_crab_leg_3_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "crab_leg_3",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
+    "id": "hp_crab_leg_4_graph_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "crab_leg_4",
+    "copy-from": "hitpoint_graph_no_label"
+  },
+  {
     "id": "hp_cephalopod_arm_1_graph_no_label",
     "type": "widget",
     "var": "bp_hp",
@@ -935,6 +1143,34 @@
     "type": "widget",
     "var": "bp_hp",
     "bodypart": "leg_r",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_crab_leg_1_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "crab_leg_1",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_crab_leg_2_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "crab_leg_2",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_crab_leg_3_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "crab_leg_3",
+    "copy-from": "hitpoint_num_no_label"
+  },
+  {
+    "id": "hp_crab_leg_4_num_no_label",
+    "type": "widget",
+    "var": "bp_hp",
+    "bodypart": "crab_leg_4",
     "copy-from": "hitpoint_num_no_label"
   },
   {
