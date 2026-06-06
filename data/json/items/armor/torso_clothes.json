@@ -786,7 +786,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin shirt" },
-    "description": "An overshirt made of very thin, lightweight leather.",
+    "description": "An overshirt made of thin, lightweight leather.",
     "weight": "500 g",
     "volume": "1250 ml",
     "price": "42 USD",
@@ -796,14 +796,14 @@
     "symbol": "[",
     "looks_like": "shirt_western",
     "color": "brown",
-    "warmth": 2,
-    "material_thickness": 0.5,
+    "warmth": 15,
+    "material_thickness": 1.0,
     "flags": [ "VARSIZE" ],
     "armor": [
-      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 16 },
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 14 },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 16 },
-      { "coverage": 95, "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "encumbrance": 16 }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 14 },
+      { "coverage": 95, "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "encumbrance": 14 }
     ]
   },
   {
@@ -831,7 +831,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "buckskin vest" },
-    "description": "A vest made of very thin, lightweight leather.",
+    "description": "A vest made of thin, lightweight leather.",
     "weight": "500 g",
     "volume": "1250 ml",
     "price": "42 USD",
@@ -841,11 +841,11 @@
     "symbol": "[",
     "looks_like": "tacvest",
     "color": "brown",
-    "warmth": 2,
-    "material_thickness": 0.5,
+    "warmth": 15,
+    "material_thickness": 1.0,
     "flags": [ "VARSIZE" ],
     "armor": [
-      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 18 },
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 14 },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 }
     ]
   },

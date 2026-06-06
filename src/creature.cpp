@@ -494,7 +494,7 @@ bool Creature::is_ranged_attacker() const
             }
         }
     }
-    //TODO Potentially add check for this as npc wielding ranged weapon
+    //TODO: Potentially add check for this as Character wielding ranged weapon.
 
     return false;
 }

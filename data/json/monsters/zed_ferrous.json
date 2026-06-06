@@ -389,15 +389,22 @@
     "weakpoint_sets": [ "wps_metal_shell_armor" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_hulk" ],
     "bleed_rate": 10,
-    "vision_day": 6,
+    "vision_day": 7,
     "vision_night": 6,
     "harvest": "zombie_humanoid_multiple",
-    "special_attacks": [ { "id": "scratch_humanoid" }, { "id": "smash", "throw_strength": 96 } ],
+    "special_attacks": [ { "id": "scratch_humanoid", "cooldown": 16 },
+      {
+        "type": "spell",
+        "spell_data": { "id": "spell_charge", "min_level": 1 },
+        "monster_message": "The %s charges!",
+        "cooldown": 28
+      } ],
     "flags": [
       "SEES",
       "HEARS",
       "SMELLS",
       "GOODHEARING",
+      "KEENNOSE",
       "STUMBLES",
       "WARM",
       "BASHES",
@@ -410,6 +417,6 @@
       "FILTHY",
       "LOUDMOVES"
     ],
-    "armor": { "bash": 35, "cut": 60, "bullet": 38, "acid": 15, "heat": 25, "electric": 15 }
+    "armor": { "bash": 35, "cut": 60, "bullet": 38, "acid": 15, "heat": 25 }
   }
 ]
