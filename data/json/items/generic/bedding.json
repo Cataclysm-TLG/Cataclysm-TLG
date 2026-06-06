@@ -93,7 +93,7 @@
       {
         "coverage": 90,
         "encumbrance": 15,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -169,7 +169,7 @@
       {
         "coverage": 90,
         "encumbrance": 25,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -239,7 +239,7 @@
       {
         "coverage": 90,
         "encumbrance": 30,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -315,7 +315,7 @@
       {
         "coverage": 90,
         "encumbrance": 35,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -390,7 +390,7 @@
       {
         "coverage": 90,
         "encumbrance": 35,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -457,7 +457,7 @@
       {
         "coverage": 90,
         "encumbrance": 35,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -532,7 +532,7 @@
       {
         "coverage": 90,
         "encumbrance": 30,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -595,13 +595,19 @@
           "leg_r",
           "foot_l",
           "foot_r",
-          "gastropod_foot",
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
           "cephalopod_arm_4",
           "cephalopod_arm_5",
-          "cephalopod_arm_6"
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "long_tail",
+          "fish_tail",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ]
       },
       {

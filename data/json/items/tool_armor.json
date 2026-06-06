@@ -3273,7 +3273,7 @@
       {
         "encumbrance": [ 10, 10 ],
         "coverage": 90,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",

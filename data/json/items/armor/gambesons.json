@@ -71,7 +71,7 @@
       {
         "coverage": 72,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -196,7 +196,7 @@
       {
         "coverage": 72,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -302,7 +302,7 @@
         "material": [ { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.0 } ],
         "coverage": 72,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -424,7 +424,7 @@
         "material": [ { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.0 } ],
         "coverage": 72,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",

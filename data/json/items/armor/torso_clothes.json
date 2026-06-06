@@ -41,7 +41,7 @@
       {
         "coverage": 70,
         "encumbrance": 2,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -125,7 +125,7 @@
       {
         "coverage": 22,
         "volume_encumber_modifier": 0.3,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",

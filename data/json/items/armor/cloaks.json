@@ -49,7 +49,7 @@
       {
         "coverage": 60,
         "encumbrance": 5,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -1915,7 +1915,7 @@
       {
         "coverage": 95,
         "encumbrance": 6,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -1988,7 +1988,7 @@
       {
         "coverage": 65,
         "encumbrance": 4,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2061,7 +2061,7 @@
       {
         "coverage": 65,
         "encumbrance": 2,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2141,7 +2141,7 @@
       {
         "coverage": 65,
         "encumbrance": 3,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2220,7 +2220,7 @@
       {
         "coverage": 50,
         "encumbrance": 2,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2312,7 +2312,7 @@
       {
         "coverage": 65,
         "encumbrance": 2,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2403,7 +2403,7 @@
       {
         "coverage": 65,
         "encumbrance": 4,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2480,7 +2480,7 @@
       {
         "coverage": 65,
         "encumbrance": 4,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2557,7 +2557,7 @@
       {
         "coverage": 65,
         "encumbrance": 3,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2646,7 +2646,7 @@
       {
         "coverage": 65,
         "encumbrance": 10,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2763,7 +2763,7 @@
       {
         "coverage": 65,
         "encumbrance": 10,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",

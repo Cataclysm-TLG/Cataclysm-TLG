@@ -54,7 +54,7 @@
       {
         "coverage": 65,
         "encumbrance": 14,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -165,7 +165,7 @@
       {
         "coverage": 90,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -248,7 +248,7 @@
       {
         "coverage": 65,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -391,7 +391,7 @@
       {
         "coverage": 75,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -504,7 +504,7 @@
       {
         "coverage": 65,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -585,7 +585,7 @@
       {
         "coverage": 65,
         "encumbrance": 8,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -688,7 +688,7 @@
       {
         "coverage": 85,
         "encumbrance": [ 8, 12 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -817,7 +817,7 @@
       {
         "coverage": 85,
         "encumbrance": [ 12, 16 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -1012,7 +1012,7 @@
       {
         "coverage": 85,
         "encumbrance": [ 10, 14 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -1159,7 +1159,7 @@
       {
         "coverage": 85,
         "encumbrance": [ 10, 12 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -1293,7 +1293,7 @@
       {
         "coverage": 35,
         "encumbrance": [ 2, 2 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2459,7 +2459,7 @@
       },
       {
         "coverage": 20,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2531,7 +2531,7 @@
       {
         "coverage": 75,
         "encumbrance": 10,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2743,7 +2743,7 @@
       {
         "coverage": 85,
         "encumbrance": [ 8, 12 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2844,7 +2844,7 @@
       {
         "coverage": 96,
         "encumbrance": 2,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -2936,7 +2936,7 @@
       {
         "coverage": 86,
         "encumbrance": 2,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -3029,7 +3029,7 @@
       {
         "coverage": 92,
         "encumbrance": 2,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -3118,7 +3118,7 @@
       {
         "coverage": 98,
         "encumbrance": [ 6, 6 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -3446,7 +3446,7 @@
       {
         "coverage": 85,
         "encumbrance": [ 8, 12 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -3582,7 +3582,7 @@
       {
         "coverage": 85,
         "encumbrance": [ 12, 16 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -3746,7 +3746,7 @@
       {
         "coverage": 85,
         "encumbrance": [ 10, 14 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -3889,7 +3889,7 @@
       {
         "coverage": 60,
         "encumbrance": 4,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -4010,7 +4010,7 @@
       {
         "coverage": 40,
         "encumbrance": 4,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -4082,7 +4082,7 @@
       {
         "coverage": 30,
         "encumbrance": 4,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -4362,7 +4362,7 @@
       {
         "coverage": 95,
         "encumbrance": 12,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -4446,7 +4446,7 @@
       {
         "coverage": 95,
         "encumbrance": 10,
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",

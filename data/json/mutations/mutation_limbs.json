@@ -1923,7 +1923,14 @@
     "hit_size": 6,
     "hit_difficulty": 0.85,
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
-    "limb_scores": [ [ "manip", 0.05, 0.1 ], [ "move_speed", 0.25 ], [ "swim", 0.26 ], [ "block", 0.8 ], [ "crawl", 0.2 ], [ "footing", 0.25 ] ],
+    "limb_scores": [
+      [ "manip", 0.05, 0.1 ],
+      [ "move_speed", 0.25 ],
+      [ "swim", 0.26 ],
+      [ "block", 0.8 ],
+      [ "crawl", 0.2 ],
+      [ "footing", 0.25 ]
+    ],
     "side": "left",
     "stylish_bonus": 1,
     "hot_morale_mod": 0.5,

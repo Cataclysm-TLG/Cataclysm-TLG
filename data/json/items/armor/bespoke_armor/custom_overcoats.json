@@ -70,7 +70,7 @@
         ],
         "coverage": 86,
         "encumbrance": [ 5, 6 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",
@@ -235,7 +235,7 @@
         ],
         "coverage": 86,
         "encumbrance": [ 5, 6 ],
-         "covers": [
+        "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
           "cephalopod_arm_3",

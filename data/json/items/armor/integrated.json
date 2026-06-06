@@ -44,7 +44,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 1,
@@ -93,7 +97,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 14
@@ -142,7 +150,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 16
@@ -192,7 +204,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 10
@@ -250,7 +266,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 18
@@ -390,7 +410,11 @@
           "cephalopod_arm_6",
           "gastropod_foot",
           "wing_bird_l",
-          "wing_bird_r"
+          "wing_bird_r",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 80,
         "encumbrance": 2
@@ -438,7 +462,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 80,
         "encumbrance": 6
@@ -492,7 +520,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 80,
         "encumbrance": 6
@@ -552,7 +584,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 90,
         "encumbrance": 8
@@ -606,7 +642,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 90,
         "encumbrance": 6
@@ -667,7 +707,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 80,
         "encumbrance": 6
@@ -728,7 +772,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 80,
         "encumbrance": 5
@@ -782,7 +830,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 90,
         "encumbrance": 6
@@ -876,7 +928,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 8
@@ -949,7 +1005,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 14
@@ -1025,7 +1085,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 16
@@ -1264,7 +1328,11 @@
           "cephalopod_arm_4",
           "cephalopod_arm_5",
           "cephalopod_arm_6",
-          "gastropod_foot"
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 100,
         "encumbrance": 2
@@ -1349,6 +1417,31 @@
         "rigid_layer_only": true
       },
       {
+        "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [
+          "crab_leg_1_merus",
+          "crab_leg_1_carpus",
+          "crab_leg_1_propodus",
+          "crab_leg_1_dactyl",
+          "crab_leg_2_merus",
+          "crab_leg_2_carpus",
+          "crab_leg_2_propodus",
+          "crab_leg_2_dactyl",
+          "crab_leg_3_merus",
+          "crab_leg_3_carpus",
+          "crab_leg_3_propodus",
+          "crab_leg_3_dactyl",
+          "crab_leg_4_merus",
+          "crab_leg_4_carpus",
+          "crab_leg_4_propodus",
+          "crab_leg_4_dactyl"
+        ],
+        "coverage": 95,
+        "encumbrance": 13,
+        "rigid_layer_only": true
+      },
+      {
         "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 1 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_knee_l", "leg_hip_r", "leg_knee_r" ],
@@ -1426,11 +1519,28 @@
         "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1 } ],
-        "covers": [ "leg_l", "leg_r" ],
-        "specifically_covers": [ "leg_hip_l", "leg_knee_l", "leg_hip_r", "leg_knee_r" ],
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [
+          "crab_leg_1_merus",
+          "crab_leg_1_carpus",
+          "crab_leg_1_propodus",
+          "crab_leg_1_dactyl",
+          "crab_leg_2_merus",
+          "crab_leg_2_carpus",
+          "crab_leg_2_propodus",
+          "crab_leg_2_dactyl",
+          "crab_leg_3_merus",
+          "crab_leg_3_carpus",
+          "crab_leg_3_propodus",
+          "crab_leg_3_dactyl",
+          "crab_leg_4_merus",
+          "crab_leg_4_carpus",
+          "crab_leg_4_propodus",
+          "crab_leg_4_dactyl"
+        ],
         "coverage": 95,
-        "encumbrance": 0,
+        "encumbrance": 8,
         "rigid_layer_only": true
       }
     ]
@@ -1492,7 +1602,7 @@
         "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 2 } ],
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.4 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_knee_l", "leg_hip_r", "leg_knee_r" ],
         "coverage": 95,
@@ -1511,6 +1621,31 @@
         "covers": [ "hand_l", "hand_r" ],
         "coverage": 95,
         "encumbrance": 16,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 2 } ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [
+          "crab_leg_1_merus",
+          "crab_leg_1_carpus",
+          "crab_leg_1_propodus",
+          "crab_leg_1_dactyl",
+          "crab_leg_2_merus",
+          "crab_leg_2_carpus",
+          "crab_leg_2_propodus",
+          "crab_leg_2_dactyl",
+          "crab_leg_3_merus",
+          "crab_leg_3_carpus",
+          "crab_leg_3_propodus",
+          "crab_leg_3_dactyl",
+          "crab_leg_4_merus",
+          "crab_leg_4_carpus",
+          "crab_leg_4_propodus",
+          "crab_leg_4_dactyl"
+        ],
+        "coverage": 95,
+        "encumbrance": 24,
         "rigid_layer_only": true
       }
     ],
@@ -1573,7 +1708,7 @@
         "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 2 } ],
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.2 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_knee_l", "leg_hip_r", "leg_knee_r" ],
         "coverage": 90,
@@ -1592,6 +1727,31 @@
         "covers": [ "hand_l", "hand_r" ],
         "coverage": 90,
         "encumbrance": 12,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [
+          "crab_leg_1_merus",
+          "crab_leg_1_carpus",
+          "crab_leg_1_propodus",
+          "crab_leg_1_dactyl",
+          "crab_leg_2_merus",
+          "crab_leg_2_carpus",
+          "crab_leg_2_propodus",
+          "crab_leg_2_dactyl",
+          "crab_leg_3_merus",
+          "crab_leg_3_carpus",
+          "crab_leg_3_propodus",
+          "crab_leg_3_dactyl",
+          "crab_leg_4_merus",
+          "crab_leg_4_carpus",
+          "crab_leg_4_propodus",
+          "crab_leg_4_dactyl"
+        ],
+        "coverage": 95,
+        "encumbrance": 18,
         "rigid_layer_only": true
       }
     ]
@@ -1931,7 +2091,11 @@
           "cephalopod_arm_3",
           "cephalopod_arm_4",
           "cephalopod_arm_5",
-          "cephalopod_arm_6"
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 45,
         "encumbrance": 3,
@@ -1996,7 +2160,11 @@
           "cephalopod_arm_3",
           "cephalopod_arm_4",
           "cephalopod_arm_5",
-          "cephalopod_arm_6"
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 45,
         "encumbrance": 3,
@@ -2059,7 +2227,11 @@
           "cephalopod_arm_3",
           "cephalopod_arm_4",
           "cephalopod_arm_5",
-          "cephalopod_arm_6"
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 50,
         "encumbrance": 3,
@@ -2141,7 +2313,11 @@
           "cephalopod_arm_3",
           "cephalopod_arm_4",
           "cephalopod_arm_5",
-          "cephalopod_arm_6"
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "coverage": 60,
         "encumbrance": 3,
