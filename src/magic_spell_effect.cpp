@@ -73,6 +73,8 @@ static const damage_type_id damage_acid( "acid" );
 
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_corroding( "corroding" );
+static const efftype_id effect_dashing( "dashing" );
+static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_invisibility( "invisibility" );
 static const efftype_id effect_jumping( "jumping" );
 static const efftype_id effect_pet( "pet" );
@@ -1936,6 +1938,8 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
         caster.add_effect( effect_airborne, 1_seconds, true );
         caster.add_effect( effect_jumping, 1_seconds, true, jump_vert );
         jumping = true;
+    } else {
+        caster.add_effect( effect_dashing, 1_seconds, true );
     }
     while( walk_point != trajectory.end() ) {
         if( caster_you != nullptr ) {
@@ -1943,7 +1947,7 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
             if( jumping && ( walk_point + 1 ) == trajectory.end() ) {
                 caster.remove_effect( effect_airborne );
             }
-            if( creatures.creature_at( here.get_bub( *walk_point ) ) ||
+            if( caster.has_effect( effect_downed ) || creatures.creature_at( here.get_bub( *walk_point ) ) ||
                 !g->walk_move( here.get_bub( *walk_point ), false ) ) {
                 if( walk_point != trajectory.begin() ) {
                     --walk_point;
@@ -1957,7 +1961,7 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
             if( jumping && ( walk_point + 1 ) == trajectory.end() ) {
                 caster.remove_effect( effect_airborne );
             }
-            if( creatures.creature_at( here.get_bub( *walk_point ) ) ) {
+            if( caster.has_effect( effect_downed ) || creatures.creature_at( here.get_bub( *walk_point ) ) ) {
                 if( walk_point != trajectory.begin() ) {
                     --walk_point;
                 }
@@ -1974,6 +1978,8 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
         // Redundant effect removal for safety's sake.
         caster.remove_effect( effect_airborne );
         caster.remove_effect( effect_jumping );
+    } else {
+        caster.remove_effect( effect_dashing );
     }
     caster.set_moves( cur_moves );
     tripoint_bub_ms far_target;

@@ -291,7 +291,7 @@
     "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "RANDOM_DAMAGE", "NO_EXPLOSION_SFX" ],
     "effect": "dash",
     "shape": "line",
-    "min_range": 4,
+    "min_range": 3,
     "max_range": 4,
     "extra_effects": [ { "id": "spell_bull_charge_attack", "hit_self": false, "max_level": 1 } ]
   },
