@@ -410,7 +410,16 @@
     "vision_night": 6,
     "//grab": "Assuming it's grabbing with its mouth a bit grabbier than a zed should be about right",
     "grab_strength": 30,
-    "special_attacks": [ { "id": "smash", "throw_strength": 108, "cooldown": 30 }, { "id": "grab", "cooldown": 7 } ],
+    "special_attacks": [
+      { "id": "smash", "throw_strength": 108, "cooldown": 30 },
+      {
+        "type": "spell",
+        "spell_data": { "id": "spell_bull_charge", "min_level": 1 },
+        "monster_message": "The %s charges!",
+        "cooldown": 35
+      },
+      { "id": "grab", "cooldown": 7 }
+    ],
     "flags": [
       "SEES",
       "HEARS",
