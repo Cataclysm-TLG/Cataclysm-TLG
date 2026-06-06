@@ -3,7 +3,6 @@
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
     "result": "screwdriver",
-    "id_suffix": "forged",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
