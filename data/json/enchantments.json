@@ -400,6 +400,21 @@
   },
   {
     "type": "enchantment",
+    "id": "ench_crab_legs",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "foot_l" },
+      { "lose": "foot_r" },
+      { "lose": "leg_l" },
+      { "lose": "leg_r" },
+      { "gain": "crab_leg_1" },
+      { "gain": "crab_leg_2" },
+      { "gain": "crab_leg_3" },
+      { "gain": "crab_leg_4" }
+    ]
+  },
+  {
+    "type": "enchantment",
     "id": "ench_hooves",
     "condition": "ALWAYS",
     "modified_bodyparts": [ { "lose": "foot_l" }, { "lose": "foot_r" }, { "gain": "hoof_l" }, { "gain": "hoof_r" } ],
