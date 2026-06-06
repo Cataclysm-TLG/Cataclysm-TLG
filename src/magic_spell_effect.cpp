@@ -1953,6 +1953,20 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
                 sp.create_field( here.get_bub( *( walk_point - 1 ) ), caster );
                 g->draw_ter();
             }
+        } else {
+            if( jumping && ( walk_point + 1 ) == trajectory.end() ) {
+                caster.remove_effect( effect_airborne );
+            }
+            if( creatures.creature_at( here.get_bub( *walk_point ) ) ) {
+                if( walk_point != trajectory.begin() ) {
+                    --walk_point;
+                }
+                break;
+            } else if( walk_point != trajectory.begin() ) {
+                sp.create_field( here.get_bub( *( walk_point - 1 ) ), caster );
+                g->draw_ter();
+            }
+            caster.setpos( here, here.get_bub( *walk_point ), !jumping );
         }
         ++walk_point;
     }
@@ -1972,6 +1986,21 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
     const std::set<tripoint_bub_ms> hit_area = spell_effect_cone_range_override( params, source,
             far_target );
     damage_targets( sp, caster, hit_area );
+}
+
+void spell_effect::fling_away( const spell &sp, Creature &caster, const tripoint_bub_ms &target )
+{
+    int throwforce = sp.damage( caster );
+    if( throwforce <= 0 ) {
+        debugmsg( "ERROR: fling_away spell effect called with no damage.  Damage is required for throwforce." );
+        return;
+    }
+    creature_tracker &creatures = get_creature_tracker();
+    if( !creatures.creature_at( target ) || caster.pos_bub() == target ) {
+        return;
+    }
+    units::angle target_angle = coord_to_angle( caster.pos_bub(), target );
+    g->fling_creature( creatures.creature_at( target ), target_angle, throwforce, false );
 }
 
 void spell_effect::banishment( const spell &sp, Creature &caster, const tripoint_bub_ms &target )
