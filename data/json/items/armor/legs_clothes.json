@@ -1212,11 +1212,11 @@
       }
     ],
     "warmth": 25,
-    "material_thickness": 0.75,
+    "material_thickness": 1.0,
     "flags": [ "VARSIZE", "RAINPROOF" ],
     "armor": [
       {
-        "encumbrance": [ 15, 17 ],
+        "encumbrance": [ 14, 18 ],
         "coverage": 98,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
