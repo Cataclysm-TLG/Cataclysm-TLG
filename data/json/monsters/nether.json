@@ -1452,13 +1452,15 @@
     "emit_fields": [ { "emit_id": "emit_toxic_stream_reduced", "delay": "1 s" } ],
     "harvest": "exempt",
     "anger_triggers": [ "STALK", "HURT", "PLAYER_CLOSE", "PLAYER_WEAK" ],
-    "special_attacks": [ { "type": "leap", "cooldown": 51, "max_range": 4 },
+    "special_attacks": [
+      { "type": "leap", "cooldown": 51, "max_range": 4 },
       {
         "type": "spell",
         "spell_data": { "id": "spell_charge", "min_level": 1 },
         "monster_message": "The %s charges!",
         "cooldown": 35
-      } ],
+      }
+    ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
     "flags": [
       "SEES",

@@ -392,13 +392,15 @@
     "vision_day": 7,
     "vision_night": 6,
     "harvest": "zombie_humanoid_multiple",
-    "special_attacks": [ { "id": "scratch_humanoid", "cooldown": 16 },
+    "special_attacks": [
+      { "id": "scratch_humanoid", "cooldown": 16 },
       {
         "type": "spell",
         "spell_data": { "id": "spell_charge", "min_level": 1 },
         "monster_message": "The %s charges!",
         "cooldown": 28
-      } ],
+      }
+    ],
     "flags": [
       "SEES",
       "HEARS",

@@ -282,7 +282,7 @@
     "min_range": 5,
     "max_range": 5
   },
-    {
+  {
     "type": "SPELL",
     "id": "spell_bull_charge",
     "name": "Charge",
