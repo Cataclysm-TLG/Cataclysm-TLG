@@ -1387,7 +1387,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
     "name": { "str": "nicotine patch", "str_pl": "nicotine patches" },
-    "description": "An adhesive patch that promises to fight cravings and help smokers quit by slowly delivering nicotine into the body over the course of 16 hours as a replacement for smoking.  ",
+    "description": "An adhesive patch that promises to fight cravings and help smokers quit by slowly delivering nicotine into the body over the course of 16 hours as a replacement for smoking.",
     "weight": "3 g",
     "volume": "2 ml",
     "price": "10 cent",
@@ -1397,7 +1397,7 @@
     "addiction_type": "nicotine",
     "addiction_potential": 75,
     "flags": [ "NO_INGEST", "NO_TEMP" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You apply a nicotine patch.", "vitamins": [ [ "nicotine_slow", 48 ] ] }
+    "use_action": { "type": "consume_drug", "activation_message": "You apply a nicotine patch.", "vitamins": [ [ "nicotine_slow", 24 ] ] }
   },
   {
     "id": "nyquil",

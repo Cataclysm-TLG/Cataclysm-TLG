@@ -111,8 +111,8 @@
     "name": { "str": "Slow-release Nicotine" },
     "min": 0,
     "max": 48,
-    "rate": "20 m",
-    "decays_into": [ [ "nicotine", 2 ] ]
+    "rate": "40 m",
+    "decays_into": [ [ "nicotine", 1 ] ]
   },
   {
     "id": "nicotine",
