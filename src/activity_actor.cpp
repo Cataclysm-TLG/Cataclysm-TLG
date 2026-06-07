@@ -1348,9 +1348,11 @@ int hacksaw_activity_actor::get_tool_quality() const
             }
         }
     } else {
+        if( !tool || !tool->type ) {
+            return 0;
+        }
         qual = tool->get_quality( qual_SAW_M );
     }
-
     return qual;
 }
 
@@ -1360,12 +1362,10 @@ void hacksaw_activity_actor::set_resume_values_internal( const activity_actor &o
     // This method recalculates moves_left based on tool quality comparison but it doesn't have
     // access to update the moves_left on the corresponding player_activity.  You must set the
     // player_activity's moves_left separately after resuming the activity_actor.
-
     const hacksaw_activity_actor &actor = static_cast<const hacksaw_activity_actor &>( other );
-
+    tool = actor.tool;
     int actor_qual = actor.get_tool_quality();
     int qual = get_tool_quality();
-
     int new_moves_left = -1;
     if( actor_qual > 1 ) {
         new_moves_left = moves_left * ( qual - 1 ) / ( actor_qual - 1 );
@@ -1374,7 +1374,6 @@ void hacksaw_activity_actor::set_resume_values_internal( const activity_actor &o
                    "Hacksaw resume.  Actor quality: %d, quality: %d, moves_left: %d, new_moves_left: %d.",
                    actor_qual, qual, moves_left, new_moves_left );
     moves_left = new_moves_left;
-    tool = actor.tool;
 }
 
 void hacksaw_activity_actor::serialize( JsonOut &jsout ) const
