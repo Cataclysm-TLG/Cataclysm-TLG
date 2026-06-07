@@ -48,7 +48,13 @@
       },
       { "id": "drag_followup" },
       { "id": "scratch_grab_required" },
-      { "id": "bite_grab_required" }
+      { "id": "bite_grab_required" },
+      {
+        "type": "spell",
+        "spell_data": { "id": "spell_bull_charge", "min_level": 1 },
+        "monster_message": "The %s charges!",
+        "cooldown": 55
+      }
     ],
     "anger_triggers": [ "HURT", "PLAYER_CLOSE" ],
     "fear_triggers": [ "SOUND" ],

@@ -155,7 +155,18 @@
     "melee_skill": 6,
     "melee_dice": 4,
     "melee_dice_sides": 3,
-    "special_attacks": [ { "id": "mutant_antler" }, { "id": "mutant_hoof" }, [ "GRAZE", 120 ], [ "BROWSE", 120 ] ],
+    "special_attacks": [
+      {
+        "type": "spell",
+        "spell_data": { "id": "spell_bull_charge", "min_level": 1 },
+        "monster_message": "The %s charges!",
+        "cooldown": 55
+      },
+      { "id": "mutant_antler" },
+      { "id": "mutant_hoof" },
+      [ "GRAZE", 120 ],
+      [ "BROWSE", 120 ]
+    ],
     "dodge": 6,
     "bleed_rate": 70,
     "vision_day": 25,
