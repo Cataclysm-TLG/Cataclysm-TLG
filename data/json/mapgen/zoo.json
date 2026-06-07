@@ -1082,8 +1082,8 @@
         { "monster": "mon_fish_bluegill", "x": 13, "y": 15 }
       ],
       "place_monsters": [
-        { "chance": 7, "density": 0, "monster": "GROUP_FOREST", "x": 15, "y": 19 },
-        { "chance": 7, "density": 0, "monster": "GROUP_FOREST", "x": 4, "y": 19 }
+        { "chance": 6, "density": 0, "monster": "GROUP_FOREST", "x": 15, "y": 19 },
+        { "chance": 6, "density": 0, "monster": "GROUP_FOREST", "x": 4, "y": 19 }
       ],
       "place_toilets": [
         { "x": 17, "y": 2 },
