@@ -7998,6 +7998,25 @@ void Character::recalculate_bodyparts()
     tally_organic_size();
     recalc_limb_energy_usage();
 
+    // Remove effects from body parts that we no longer have.
+    effects_map &effs = *effects;
+    for( auto eff_it = effs.begin(); eff_it != effs.end(); ) {
+        auto &bp_map = eff_it->second;
+        for( auto bp_it = bp_map.begin(); bp_it != bp_map.end(); ) {
+            const bodypart_id &bp = bp_it->first.id();
+            if( bp != bodypart_str_id::NULL_ID().id() && !has_part( bp ) ) {
+                bp_it = bp_map.erase( bp_it );
+            } else {
+                ++bp_it;
+            }
+        }
+        if( bp_map.empty() ) {
+            eff_it = effs.erase( eff_it );
+        } else {
+            ++eff_it;
+        }
+    }
+
     add_msg_debug( debugmode::DF_ANATOMY_BP, "New healthy kcal %d",
                    get_healthy_kcal() );
     calc_encumbrance();
