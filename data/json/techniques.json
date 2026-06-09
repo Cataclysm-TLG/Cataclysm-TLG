@@ -2293,7 +2293,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.4 },
       { "stat": "damage", "type": "stab", "scale": 1.4 }
     ],
-    "attack_vectors": [ "vector_shin", "vector_foot_toes", "vector_talon", "vector_hoof_toe" ]
+    "attack_vectors": [ "vector_shin" ]
   },
   {
     "type": "technique",

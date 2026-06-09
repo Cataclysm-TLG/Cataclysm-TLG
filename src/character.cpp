@@ -8019,7 +8019,7 @@ void Character::recalculate_bodyparts()
 
     // Remove any items which were worn exclusively on parts we no longer have.
     std::list<item> removed = worn.remove_worn_items_with(
-    [this]( item &it ) {
+    [this]( item & it ) {
         if( it.has_flag( flag_INTEGRATED ) ) {
             return false;
         }
