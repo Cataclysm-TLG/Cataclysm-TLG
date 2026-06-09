@@ -73,11 +73,7 @@
         "weight": 65,
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
       },
-      {
-        "group": "GROUP_WILDERNESS_FOREST_INSECT",
-        "weight": 250,
-        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
-      },
+      { "group": "GROUP_WILDERNESS_FOREST_INSECT", "weight": 250, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
       {
         "group": "GROUP_WILDERNESS_FOREST_INSECT",
         "weight": 120,
