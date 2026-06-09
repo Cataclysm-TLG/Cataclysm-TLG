@@ -1320,6 +1320,7 @@
   },
   {
     "id": "CHALLENGE",
+    "//": "Scenario flag.",
     "type": "json_flag"
   },
   {
@@ -1328,6 +1329,7 @@
   },
   {
     "id": "CITY_START",
+    "//": "Scenario flag.",
     "type": "json_flag"
   },
   {
