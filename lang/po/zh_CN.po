@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-06-05 15:03-0700\n"
-"PO-Revision-Date: 2026-06-08 14:57+0800\n"
+"PO-Revision-Date: 2026-06-09 09:20+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -71002,7 +71002,7 @@ msgstr "一本完整的合气道指南。"
 #. ~ Description of "Bōjutsu The Matsumoto System"
 #: data/json/items/book/martial.json
 msgid "A complete guide to Bōjutsu."
-msgstr "一部完整的日本枪术指南。"
+msgstr "一部完整的日本棒术指南。"
 
 #. ~ Description of "Capoeira 100"
 #: data/json/items/book/martial.json
@@ -71140,7 +71140,7 @@ msgstr[0] "得道成拳"
 #: data/json/items/book/martial.json
 msgid "Bōjutsu The Matsumoto System"
 msgid_plural "copies of Bōjutsu The Matsumoto System"
-msgstr[0] "松本式棒术"
+msgstr[0] "棒术 松本流"
 
 #. ~ Item name
 #: data/json/items/book/martial.json
@@ -71196,7 +71196,7 @@ msgstr[0] "Las Nueve Reglas de la Montante"
 #. ~ Description of "Kerala's Ancient Martial Art"
 #: data/json/items/book/martial.json
 msgid "Martial arts manual written in the twentietch century which discusses the core elements of Kalaripayattu, a Malayalam phrase which roughly translates to, \"Practice in the Arts of the Battlefield.\"."
-msgstr ""
+msgstr "一本二十世纪编写的武术手册，讨论了卡拉里帕亚图的核心元素，卡拉里帕亚图是马拉雅拉姆语短语，大致可以翻译作：“战场艺术的练习”。"
 
 #. ~ Item name
 #: data/json/items/book/martial.json
@@ -148865,19 +148865,19 @@ msgstr ""
 #. ~ Name of martial art
 #: data/json/martialarts.json
 msgid "Bōjutsu"
-msgstr "日本棍术"
+msgstr "日本棒术"
 
 #. ~ Buff name of martial art "Bōjutsu"
 #. ~ Clause text "buff_bojutsu_static" of UI widget
 #. "ma_buff_indicator_template"
 #: data/json/martialarts.json data/json/ui/ma_style.json
 msgid "Bōjutsu Stance"
-msgstr "日本棍术步法"
+msgstr "日本棒术步法"
 
 #. ~ Description of martial art "Bōjutsu"
 #: data/json/martialarts.json
 msgid "Bōjutsu, \"The Way of the Staff\", is the Japanese martial art of fighting with a staff.  Bōjutsu focuses on maintaining a good stance to effectively block and counterattack."
-msgstr "日本棍术，又称\"棍之道\"，是一种源自日本的使用棍棒作战的武术。日本棍术专注于保持良好的姿态，以有效格挡和反击敌人。"
+msgstr "日本棒术（「棒術」），又称\"棍之道\"，是一种源自日本的使用棍棒作战的武术。日本棒术专注于保持良好的姿态，以有效格挡和反击敌人。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -149315,12 +149315,12 @@ msgstr ""
 #. ~ Name of martial art
 #: data/json/martialarts.json
 msgid "Kalaripayattu"
-msgstr "卡利阿拉姆"
+msgstr "卡拉里帕亚图"
 
 #. ~ Description of martial art "Kalaripayattu"
 #: data/json/martialarts.json
 msgid "Kalaripayattu originates from India's Kerala region.  In modern times it was frequently seen as performance, but its roots go back to the battlefields of the 11th century, where warriors with blades and little to no armor needed a combat system that would keep them out of harm's way long enough to deliver a decisive blow."
-msgstr "卡利阿拉姆是印度喀拉拉邦的传统武术。在现代，它经常被视为一种表演艺术，但其根源可以追溯到11世纪的战场。在那里，手持刀剑且几乎没有装甲保护的战士需要一套战斗系统，以帮助他们避开危险足够长的时间，从而能够给予对手致命一击。"
+msgstr "卡拉里帕亚图是印度喀拉拉邦的传统武术。在现代，它经常被视为一种表演艺术，但其根源可以追溯到11世纪的战场。在那里，手持刀剑且几乎没有装甲保护的战士需要一套战斗系统，以帮助他们避开危险足够长的时间，从而能够给予对手致命一击。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -149671,7 +149671,7 @@ msgstr "招架"
 #. ~ Description of martial art "Silat"
 #: data/json/martialarts.json
 msgid "Pencak Silat, of Indonesian origin, is a fighting style that covers the use of short blades and batons.  Fighters stay low and mobile to avoid attacks, then unleash deadly critical hits."
-msgstr ""
+msgstr "班卡苏拉刀术，起源于印度尼西亚，是一种格斗风格，涉及使用短刀和警棍。格斗者保持低姿态和灵活移动以躲避攻击，然后进行致命的关键打击。"
 
 #. ~ Buff name of martial art "Judo"
 #. ~ Clause text "buff_judo_ondodge" of UI widget "ma_buff_indicator_template"
@@ -149864,7 +149864,7 @@ msgstr "日本枪术步法"
 #. ~ Description of martial art "Sōjutsu"
 #: data/json/martialarts.json
 msgid "Sōjutsu, \"The Way of the Spear\", is the Japanese martial art of fighting with a spear.  Sōjutsu focuses on keeping opponents at a distance in order to maintain the advantage in combat.  Standing still gives you an extra block attempt but moving will briefly increase your damage."
-msgstr "日本枪术是一种源自日本的使用长矛作战的武术。日本枪术专注于在战斗中保持同对手的距离，以便维持自身战斗优势。当你站立不动时，你会获得一次额外的格挡，而你移动时则会短暂地提高伤害。"
+msgstr "日本枪术，又称“枪之道”，是日本的使用长枪进行战斗的武术。日本枪术强调通过保持与对手的距离来在战斗中保持优势。站立不动可以获得额外的格挡机会，而移动则会暂时增加你的伤害。"
 
 #. ~ Buff name of martial art "Fior Di Battaglia"
 #. ~ Clause text "buff_medievalpole_onmiss" of UI widget
@@ -150774,6 +150774,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 block attempt, +2 blocking effectiveness."
 msgstr ""
+"你的训练在使用长矛时提供更好的防御。\n"
+"\n"
+"如果被击倒、眩晕或虚弱，效果会消失。\n"
+" +1 次格挡尝试，+2 防御效果。"
 
 #. ~ Description of buff "Krav Maga" in martial art "Krav Maga Stance"
 #: data/json/martialarts.json
@@ -173357,7 +173361,7 @@ msgstr "你的背上长出一对半透明的大翅膀。它们太小了，抬不
 #. ~ Description of mutation "Tentacles"
 #: data/json/mutations/mutations.json
 msgid "A long pair of tentacles like those of a squid grow from your shoulders in place of human arms.  The underside of the paddle-shaped tips are lined with suckers that aid in grasping tools and prey alike."
-msgstr ""
+msgstr "一对像鱿鱼一样的长触手从你的肩膀上长出，代替了人类的手臂。桨形触手的下侧排列着吸盘，方便抓握工具和猎物。"
 
 #. ~ Description of mutation "Electroreceptors"
 #: data/json/mutations/mutations.json
@@ -173557,7 +173561,7 @@ msgstr "水下安生"
 #. ~ Description of mutation "Barbed Tentacles"
 #: data/json/mutations/mutations.json
 msgid "Arms?  No, you've got a pair of long tentacles with broad paddle-shaped structures at the tips, granting the ability to strike while prone at a reduced penalty.  Their grasping surface is lined with suckers and dozens of swiveling hooks that function like vicious claws."
-msgstr ""
+msgstr "手臂？不，你拥有一对长长的触手，触手尖端有宽大的桨状结构，使你能俯卧时攻击，且惩罚更少。它们的抓握表面布满了吸盘和数十个旋转钩，就像凶狠的爪子一样。"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -173657,7 +173661,7 @@ msgstr "杀死所有呼吸者。"
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
 msgid "Barbed Tentacles"
-msgstr ""
+msgstr "带刺触手"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -174695,7 +174699,7 @@ msgstr "鸡皮疙瘩"
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
 msgid "Gorger"
-msgstr ""
+msgstr "吃货"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -175053,7 +175057,7 @@ msgstr "代替头发的是长长的草叶，它们在冬天休眠，变得像稻
 #. ~ Description of mutation "Gastropod Foot"
 #: data/json/mutations/mutations.json
 msgid "In place of legs you have a single muscular 'foot' like that of a snail.  You are slower, but your footing is stable, your movement nearly silent, and you are immune to the effects of sludge."
-msgstr ""
+msgstr "你没有双腿，取而代之的是一个像蜗牛一样的强壮‘足部’。你虽然动作更慢，但站得稳，移动几乎无声，而且不会受到泥浆的影响。"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -176630,7 +176634,7 @@ msgstr "触手吸盘"
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
 msgid "Tentacles"
-msgstr ""
+msgstr "触手"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -178035,7 +178039,7 @@ msgstr "绿色眼睛。"
 #. ~ Description of mutation "Melee Weapon Training"
 #: data/json/mutations/mutations.json
 msgid "You have practiced fighting with weapons.  You start with your choice of Barbaran Montante, Bōjutsu, Eskrima, Fencing, Fior Di Battaglia, Kalaripayattu, Medieval Swordsmanship, Niten Ichi-Ryu, Pencak Silat, or Sōjutsu."
-msgstr ""
+msgstr "你已经练习过使用武器进行战斗。你可以从以下选项中选择开始：巴巴兰重剑术、日本棒术、菲律宾剑棍术、击剑、战斗之花、卡拉里帕亚图、中世纪剑术、二天一流、班卡苏拉刀术、日本枪术。"
 
 #. ~ Description of mutation "Meat Intolerance"
 #: data/json/mutations/mutations.json
@@ -178301,12 +178305,12 @@ msgstr "你开始发光，即使在最黑暗的夜晚也能进行调试。"
 #. ~ Description of mutation "Chemical Imbalance"
 #: data/json/mutations/mutations.json
 msgid "You suffer from a minor chemical imbalance, whether mental or physical.  Minor changes to your internal chemistry will manifest themselves on occasion, such as hunger, fatigue, pain, etc."
-msgstr ""
+msgstr "你有轻微的化学失衡，无论是心理上的还是身体上的。体内化学物质的轻微变化有时会表现出来，比如饥饿、疲劳、疼痛等。"
 
 #. ~ Description of mutation "Jittery"
 #: data/json/mutations/mutations.json
 msgid "You tend to get a bad case of the shakes when you're hungry or under the effects of stimulants.  Nicotine can help, and benzodiazepines will stop the effect entirely."
-msgstr ""
+msgstr "当处于饥饿或受兴奋剂影响时，你往往会严重地发抖。这种颤抖尼古丁可以缓解，苯二氮卓类药物则能完全消除。"
 
 #. ~ Description of mutation "Seasonal Allergies"
 #: data/json/mutations/mutations.json
@@ -179337,7 +179341,7 @@ msgstr "你的四肢好像能够再主动\"伸远\"一点点。敏捷 +1。"
 #. ~ Description of mutation "Tentacle Bracing"
 #: data/json/mutations/mutations.json
 msgid "Your lower arms have developed strong suckers, perfect for walking along lake beds and ocean floors.  They make land movement marginally more tiring, but do a good job of keeping you set in place."
-msgstr ""
+msgstr "你的前臂长出了强壮的吸盘，非常适合在湖床和海底行走。你在陆地上运动会略显吃力，但它们能很好帮助你固定在原位。"
 
 #. ~ Description of mutation "Bow-legged"
 #: data/json/mutations/mutations.json
@@ -179362,12 +179366,12 @@ msgstr "你是顶级掠食者，你的意识和大脑已经适应了你在世界
 #. ~ Description of mutation "Mood Swings"
 #: data/json/mutations/mutations.json
 msgid "Your morale will shift up and down at random, often dramatically.  Lithium tablets can reduce the severity of this disorder."
-msgstr ""
+msgstr "你的情绪会随机上下波动，通常变化很大。锂片可以减轻这种紊乱的严重程度。"
 
 #. ~ Description of mutation "Proboscis"
 #: data/json/mutations/mutations.json
 msgid "Your mouth is now a long, flexible tube.  You can no longer consume solid food and must find liquid nourishment instead."
-msgstr ""
+msgstr "你的嘴现在变成了长而灵活的管子。你不能再吃固体食物，必须改吃液体食物。"
 
 #. ~ Description of mutation "Quick"
 #: data/json/mutations/mutations.json
@@ -179640,7 +179644,7 @@ msgstr "你的皮肤无法承受阳光中的紫外线辐射，暴露在阳光下
 #. ~ Description of mutation "Gorger"
 #: data/json/mutations/mutations.json
 msgid "Your stomach can expand quite a bit.  This comes in handy as you tend to swallow food whole."
-msgstr ""
+msgstr "你的肚子可以膨胀得相当大。这很有用，因为你往往会整口吞食食物。"
 
 #. ~ Description of mutation "Rabbit Tail"
 #: data/json/mutations/mutations.json
@@ -287573,13 +287577,13 @@ msgstr "掉进一个尖刺陷坑。"
 #: data/json/traps.json
 msgctxt "memorial_female"
 msgid "Fell through thin ice into water."
-msgstr ""
+msgstr "掉进了薄冰下的水中。"
 
 #. ~ Memorial message of trap "tr_thin_ice"
 #: data/json/traps.json
 msgctxt "memorial_male"
 msgid "Fell through thin ice into water."
-msgstr ""
+msgstr "掉进了薄冰下的水中。"
 
 #. ~ Spell name
 #: data/json/traps.json
@@ -295812,7 +295816,7 @@ msgstr "空样板"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Acetaminophen"
-msgstr ""
+msgstr "对乙酰氨基酚"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -295827,7 +295831,7 @@ msgstr "新人类诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Amphetamine"
-msgstr ""
+msgstr "安非他命"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -295867,7 +295871,7 @@ msgstr "牛科诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Caffeine"
-msgstr ""
+msgstr "咖啡因"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -295882,7 +295886,7 @@ msgstr "犬类诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Cannabis"
-msgstr ""
+msgstr "大麻"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -295902,7 +295906,7 @@ msgstr "蝙蝠诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Cocaine"
-msgstr ""
+msgstr "可卡因"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -295922,12 +295926,12 @@ msgstr "寄生蜂幼体"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Dextromethorphan"
-msgstr ""
+msgstr "右美沙芬"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Diphenhydramine"
-msgstr ""
+msgstr "苯海拉明"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -295972,7 +295976,7 @@ msgstr "奶"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Morphine Milligram Equivalent"
-msgstr ""
+msgstr "吗啡毫克当量"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -295987,17 +295991,17 @@ msgstr "诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "NSAID (Blood Pressure)"
-msgstr ""
+msgstr "非甾体抗炎药（血压）"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Naloxone"
-msgstr ""
+msgstr "纳洛酮"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Naproxen Sodium"
-msgstr ""
+msgstr "萘普生钠"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -296007,7 +296011,7 @@ msgstr "尼古丁"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Non-Steroidal Anti-Inflammatory Drug"
-msgstr ""
+msgstr "非甾体抗炎药"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -296047,7 +296051,7 @@ msgstr "变形怪诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Slow-release Nicotine"
-msgstr ""
+msgstr "缓释尼古丁"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -296067,7 +296071,7 @@ msgstr "毒素"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Tramadol"
-msgstr ""
+msgstr "曲马多"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
