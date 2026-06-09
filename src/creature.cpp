@@ -3101,7 +3101,7 @@ std::vector<bodypart_id> Creature::get_all_body_parts( get_body_part_flags flags
         sort_body_parts( all_bps, this );
     }
 
-    return  all_bps;
+    return all_bps;
 }
 
 std::vector<bodypart_id> Creature::get_random_body_parts( const std::vector<bodypart_id> &bp_list,
