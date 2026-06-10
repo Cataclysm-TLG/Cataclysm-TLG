@@ -873,7 +873,7 @@
           "or": [
             { "npc_bodytype": "human" },
             { "npc_bodytype": "mi-go" },
-            { "npc_bodytype": "kangoroo" },
+            { "npc_bodytype": "kangaroo" },
             { "npc_bodytype": "horse" },
             { "npc_bodytype": "bear" },
             { "npc_bodytype": "angel" }
@@ -1905,7 +1905,7 @@
           "or": [
             { "npc_bodytype": "human" },
             { "npc_bodytype": "mi-go" },
-            { "npc_bodytype": "kangoroo" },
+            { "npc_bodytype": "kangaroo" },
             { "npc_bodytype": "horse" },
             { "npc_bodytype": "bear" },
             { "npc_bodytype": "angel" }
