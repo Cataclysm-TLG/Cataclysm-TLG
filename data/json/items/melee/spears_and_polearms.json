@@ -337,7 +337,7 @@
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "melee_damage": { "bash": 5, "stab": 24 },
-    "thrown_damage": [ { "damage_type": "bash", "amount": 3 }, { "damage_type": "stab", "amount": 12 } ]
+    "thrown_damage": [ { "damage_type": "bash", "amount": 3 }, { "damage_type": "stab", "amount": 18 } ]
   },
   {
     "id": "spear_short_bronze",
@@ -360,7 +360,7 @@
     "flags": [ "SPEAR", "SHEATH_SPEAR", "NONCONDUCTIVE", "WALKING_AID" ],
     "weapon_category": [ "SPEARS" ],
     "melee_damage": { "bash": 5, "stab": 23 },
-    "thrown_damage": [ { "damage_type": "bash", "amount": 3 }, { "damage_type": "stab", "amount": 11 } ]
+    "thrown_damage": [ { "damage_type": "bash", "amount": 3 }, { "damage_type": "stab", "amount": 17 } ]
   },
   {
     "type": "ITEM",
