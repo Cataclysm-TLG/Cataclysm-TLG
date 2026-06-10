@@ -388,6 +388,30 @@
   },
   {
     "type": "mapgen",
+    "nested_mapgen_id": "1x1_earth_ramp_down_high",
+    "object": {
+      "mapgensize": [ 1, 1 ],
+      "terrain": { " ": "t_earth_ramp_down_high" },
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "1x1_earth_ramp_down_low",
+    "object": { "mapgensize": [ 1, 1 ], "terrain": { " ": "t_earth_ramp_down_low" }, "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ] }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "1x1_earth_ramp_up_high",
+    "object": { "mapgensize": [ 1, 1 ], "terrain": { " ": "t_earth_ramp_up_high" }, "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ] }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "1x1_earth_ramp_up_low",
+    "object": { "mapgensize": [ 1, 1 ], "terrain": { " ": "t_earth_ramp_up_low" }, "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ] }
+  },
+  {
+    "type": "mapgen",
     "//": "A nested map bash damage.",
     "nested_mapgen_id": "1x1_2z_bash",
     "object": {

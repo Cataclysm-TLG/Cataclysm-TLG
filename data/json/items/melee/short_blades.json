@@ -861,7 +861,7 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", -18 ] ],
     "melee_damage": { "bash": 5, "cut": 3 }
   },
-    {
+  {
     "type": "ITEM",
     "category": "weapons",
     "id": "sai",
