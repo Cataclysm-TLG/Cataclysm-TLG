@@ -111,7 +111,7 @@
         "message": "%s has lost control of their weapon!"
       }
     ],
-    "attack_vectors": [ "vector_grasp" ]
+    "attack_vectors": [ "vector_grasp", "vector_null" ]
   },
   {
     "type": "technique",

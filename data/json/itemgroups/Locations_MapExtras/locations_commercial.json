@@ -303,6 +303,8 @@
       { "item": "tanto", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
       { "item": "1h_flail_steel", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
       { "item": "morningstar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
+      { "item": "sai", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2 },
+      { "item": "jitte", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "group": "cigar_box_opened", "prob": 10, "count": [ 1, 2 ] },
       [ "hollow_cane", 5 ],
       [ "cane_toy", 3 ],
