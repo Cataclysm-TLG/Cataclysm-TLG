@@ -926,10 +926,7 @@
     "difficulty": 6,
     "time": "7 h",
     "book_learn": [ [ "textbook_weapeast", 5 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" }
-    ],
+    "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_blacksmithing" } ],
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ], [ [ "stick", 1 ], [ "2x4", 1 ] ] ],
