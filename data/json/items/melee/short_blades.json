@@ -860,5 +860,25 @@
     "to_hit": -3,
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", -18 ] ],
     "melee_damage": { "bash": 5, "cut": 3 }
+  },
+    {
+    "type": "ITEM",
+    "category": "weapons",
+    "id": "sai",
+    "name": { "str_sp": "sai" },
+    "description": "An okinawan weapon consisting of a slender spike with two hooked tines just above the hilt.",
+    "weight": "550 g",
+    "volume": "290 ml",
+    "longest_side": "43 cm",
+    "color": "dark_gray",
+    "symbol": "/",
+    "material": [ { "type": "steel", "portion": 9 }, { "type": "wood", "portion": 1 } ],
+    "techniques": [ "WBLOCK_2", "DEF_DISARM" ],
+    "weapon_category": [ "SHIVS", "HOOKING_WEAPONRY", "KARATE_WEAPONS" ],
+    "flags": [ "BELT_CLIP" ],
+    "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "good" },
+    "price": "50 USD",
+    "price_postapoc": "2 USD",
+    "melee_damage": { "bash": 1, "stab": 12 }
   }
 ]

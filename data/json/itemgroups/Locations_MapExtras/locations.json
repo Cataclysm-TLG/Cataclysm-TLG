@@ -1251,10 +1251,14 @@
       { "item": "wakizashi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30, "damage": [ -1, 5 ] },
       { "item": "nodachi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 5, "damage": [ -1, 5 ] },
       { "item": "tanto", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25, "damage": [ -1, 5 ] },
+      { "item": "sai", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2, "damage": [ -1, 5 ] },
+      { "item": "jitte", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1, "damage": [ -1, 5 ] },
       { "item": "katana", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "wakizashi", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "nodachi", "prob": 2, "damage": [ -1, 5 ] },
-      { "item": "tanto", "prob": 10, "damage": [ -1, 5 ] }
+      { "item": "tanto", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "sai", "prob": 2, "damage": [ -1, 5 ] },
+      { "item": "jitte", "prob": 1, "damage": [ -1, 5 ] }
     ]
   },
   {

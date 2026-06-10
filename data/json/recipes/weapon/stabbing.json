@@ -859,7 +859,6 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_STABBING",
     "skill_used": "fabrication",
-    "skills_required": [ "unarmed", 2 ],
     "difficulty": 1,
     "time": "5 m",
     "reversible": true,
@@ -916,5 +915,24 @@
     "copy-from": "knuckle_skewer",
     "time": "4h",
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "BRISK_EXERCISE",
+    "result": "sai",
+    "category": "CC_WEAPON",
+    "subcategory": "CSC_WEAPON_STABBING",
+    "skill_used": "fabrication",
+    "difficulty": 6,
+    "time": "7 h",
+    "book_learn": [ [ "textbook_weapeast", 5 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_metalworking" },
+      { "proficiency": "prof_blacksmithing" }
+    ],
+    "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
+    "qualities": [ { "id": "GRIND", "level": 2 } ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ], [ [ "stick", 1 ], [ "2x4", 1 ] ] ],
+    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   }
 ]
