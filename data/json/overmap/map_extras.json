@@ -9,6 +9,7 @@
     "sym": "o",
     "color": "red",
     "autonote": false,
+    "travel_cost_type": "impassable",
     "flags": [ "CLASSIC" ]
   },
   {
@@ -21,6 +22,7 @@
     "sym": "o",
     "color": "red",
     "autonote": false,
+    "travel_cost_type": "impassable",
     "flags": [ "CLASSIC" ]
   },
   {
@@ -163,6 +165,18 @@
     "description": "Helicopter crashed here.",
     "generator": { "generator_method": "map_extra_function", "generator_id": "mx_helicopter" },
     "min_max_zlevel": [ 0, 0 ],
+    "sym": "X",
+    "color": "light_blue",
+    "autonote": false,
+    "flags": [ "MAN_MADE", "CLASSIC" ]
+  },
+  {
+    "id": "mx_helicopter_ravine",
+    "type": "map_extra",
+    "name": { "str": "Helicopter Crash" },
+    "description": "Helicopter crashed here.",
+    "generator": { "generator_method": "map_extra_function", "generator_id": "mx_helicopter" },
+    "min_max_zlevel": [ -2, -2 ],
     "sym": "X",
     "color": "light_blue",
     "autonote": false,
@@ -329,6 +343,7 @@
     "sym": "p",
     "color": "blue",
     "autonote": false,
+    "travel_cost_type": "impassable",
     "flags": [ "CLASSIC", "WATER" ]
   },
   {
@@ -339,6 +354,7 @@
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_pond_forest" },
     "min_max_zlevel": [ 0, 0 ],
     "autonote": false,
+    "travel_cost_type": "impassable",
     "flags": [ "CLASSIC", "WATER" ]
   },
   {
@@ -348,6 +364,7 @@
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_pond_forest_2" },
     "min_max_zlevel": [ 0, 0 ],
     "autonote": false,
+    "travel_cost_type": "impassable",
     "flags": [ "CLASSIC", "WATER" ]
   },
   {
