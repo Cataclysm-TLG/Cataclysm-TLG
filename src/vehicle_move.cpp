@@ -1575,7 +1575,6 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
     // This is a very rough check to try to figure out if we're offroad and should be training offroad driving proficiency.
     bool is_offroad = !( is_flying || in_deep_water || wheelcache.empty() ) &&
                       ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
-    // Check if you're piloting on land or water, and reduce effective driving skill proportional to relevant proficiencies (10% Boat Proficiency = 10% driving skill on water)
     if( !driver.has_proficiency( proficiency_prof_driver ) && !in_deep_water && is_offroad ) {
         is_non_proficient = true;
         vehicle_proficiency = driver.get_proficiency_practice( proficiency_prof_driver );

@@ -991,7 +991,7 @@
       [ "mx_rock_formation", 500 ],
       [ "mx_spider", 200 ],
       [ "mx_knotweed_patch", 120 ],
-      [ "mx_helicopter", 1 ],
+      [ "mx_helicopter_ravine", 2 ],
       [ "mx_nest_wasp_ravine", 50 ],
       [ "mx_grass2_ravine", 40 ],
       [ "mx_casings", 30 ],
@@ -1001,7 +1001,7 @@
       [ "mx_crater_ravine", 10 ],
       [ "mx_portal", 3 ],
       [ "mx_portal_in", 3 ],
-      [ "mx_jabberwock", 2 ],
+      [ "mx_jabberwock", 4 ],
       [ "mx_beehive_natural_ravine", 20 ]
     ]
   },
