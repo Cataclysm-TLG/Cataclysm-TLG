@@ -872,6 +872,7 @@
     "longest_side": "43 cm",
     "color": "dark_gray",
     "symbol": "/",
+    "looks_like": "knife_combat",
     "material": [ { "type": "steel", "portion": 9 }, { "type": "wood", "portion": 1 } ],
     "techniques": [ "WBLOCK_2", "DEF_DISARM" ],
     "weapon_category": [ "SHIVS", "HOOKING_WEAPONRY", "KARATE_WEAPONS" ],

@@ -354,6 +354,7 @@
     "longest_side": "40 cm",
     "color": "dark_gray",
     "symbol": "/",
+    "looks_like": "cudgel",
     "material": [ { "type": "steel", "portion": 9 }, { "type": "wood", "portion": 1 } ],
     "techniques": [ "WBLOCK_2", "PRECISE", "DEF_DISARM" ],
     "weapon_category": [ "BATONS", "HOOKING_WEAPONRY" ],
