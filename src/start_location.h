@@ -52,7 +52,6 @@ class start_location
 
         std::string name() const;
         int targets_count() const;
-        omt_types_parameters random_target() const;
         const std::set<std::string> &flags() const;
 
         /**
