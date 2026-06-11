@@ -626,7 +626,17 @@
     "reproduction": { "baby_monster": "mon_cow_calf", "baby_count": 1, "baby_timer": 343 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "biosignature": { "biosig_item": "feces_cow", "biosig_timer": 1 },
-    "special_attacks": [ { "id": "smash", "throw_strength": 60 }, [ "GRAZE", 20 ], [ "EAT_CROP", 60 ] ],
+    "special_attacks": [
+      { "id": "smash", "throw_strength": 60, "cooldown": 60 },
+      {
+        "type": "spell",
+        "spell_data": { "id": "spell_bull_charge", "min_level": 1 },
+        "monster_message": "The %s charges!",
+        "cooldown": 55
+      },
+      [ "GRAZE", 20 ],
+      [ "EAT_CROP", 60 ]
+    ],
     "petfood": { "food": [ "CATTLEFOOD" ], "feed": "The %s seems to like you!  It lets you pat its head and seems friendly." },
     "flags": [
       "SEES",
@@ -1316,7 +1326,7 @@
     "aggro_character": false,
     "melee_skill": 6,
     "melee_dice": 3,
-    "melee_dice_sides": 4,
+    "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 1 } ],
     "dodge": 1,
     "stomach_size": 8000,
@@ -1333,7 +1343,17 @@
     "dissect": "dissect_cattle_sample_large",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 8 },
-    "special_attacks": [ { "id": "smash", "throw_strength": 60 }, [ "EAT_CROP", 60 ], [ "GRAZE", 50 ] ],
+    "special_attacks": [
+      { "id": "smash", "throw_strength": 60, "cooldown": 40 },
+      {
+        "type": "spell",
+        "spell_data": { "id": "spell_bull_charge", "min_level": 1 },
+        "monster_message": "The %s charges!",
+        "cooldown": 55
+      },
+      [ "EAT_CROP", 60 ],
+      [ "GRAZE", 50 ]
+    ],
     "flags": [ "SEES", "HEARS", "SMELLS", "PET_MOUNTABLE", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CORNERED_FIGHTER", "EATS" ],
     "armor": { "bash": 5, "cut": 6, "bullet": 8, "electric": 1 }
   },
@@ -1399,7 +1419,17 @@
     "melee_dice": 5,
     "melee_dice_sides": 4,
     "melee_damage": [ { "damage_type": "cut", "amount": 5 } ],
-    "special_attacks": [ { "id": "smash", "throw_strength": 72 }, [ "EAT_CROP", 60 ], [ "GRAZE", 50 ] ],
+    "special_attacks": [
+      { "id": "smash", "throw_strength": 72, "cooldown": 18 },
+      {
+        "type": "spell",
+        "spell_data": { "id": "spell_bull_charge", "min_level": 1 },
+        "monster_message": "The %s charges!",
+        "cooldown": 45
+      },
+      [ "EAT_CROP", 60 ],
+      [ "GRAZE", 50 ]
+    ],
     "dodge": 1,
     "stomach_size": 9000,
     "vision_night": 7,

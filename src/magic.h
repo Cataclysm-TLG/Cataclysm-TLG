@@ -866,6 +866,7 @@ void charm_monster( const spell &sp, Creature &caster, const tripoint_bub_ms &ta
 void mutate( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
 void bash( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
 void dash( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
+void fling_away( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
 void banishment( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
 // revives a monster into some kind of zombie if the monster has the revives flag
 void revive( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
@@ -921,6 +922,7 @@ effect_map{
     { "mutate", spell_effect::mutate },
     { "bash", spell_effect::bash },
     { "dash", spell_effect::dash },
+    { "fling_away", spell_effect::fling_away },
     { "banishment", spell_effect::banishment },
     { "revive", spell_effect::revive },
     { "revive_dormant", spell_effect::revive_dormant },

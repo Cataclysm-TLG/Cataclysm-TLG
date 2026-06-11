@@ -654,7 +654,7 @@
       },
       [ "signal_flare", 20 ],
       { "item": "sm_extinguisher", "prob": 20, "charges": 10 },
-      [ "whistle", 20 ],
+      [ "whistle", 10 ],
       [ "hand_crank_charger", 15 ],
       [ "flint_steel", 5 ],
       { "item": "tinderbox", "prob": 2, "charges": [ 0, 100 ] },

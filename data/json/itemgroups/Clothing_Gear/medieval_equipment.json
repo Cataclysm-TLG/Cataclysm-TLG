@@ -157,7 +157,9 @@
       { "item": "kanabo_wood", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
       { "item": "spear_steel", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
       { "item": "longbow", "prob": 10 },
-      { "item": "naginata", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 }
+      { "item": "naginata", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "jitte", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
+      { "item": "sai", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2 }
     ]
   },
   {
@@ -171,7 +173,9 @@
       { "item": "kanabo_wood", "prob": 20 },
       { "item": "spear_steel", "prob": 20 },
       { "item": "woodgreatbow", "prob": 10 },
-      { "item": "naginata", "prob": 30 }
+      { "item": "naginata", "prob": 30 },
+      { "item": "jitte", "prob": 1 },
+      { "item": "sai", "prob": 2 }
     ]
   },
   {

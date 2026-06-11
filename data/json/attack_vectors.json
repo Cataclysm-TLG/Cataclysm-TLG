@@ -273,7 +273,11 @@
       "cephalopod_arm_3",
       "cephalopod_arm_4",
       "cephalopod_arm_5",
-      "cephalopod_arm_6"
+      "cephalopod_arm_6",
+      "crab_leg_1",
+      "crab_leg_2",
+      "crab_leg_3",
+      "crab_leg_4"
     ],
     "contact_area": [
       "foot_toes_l",
@@ -283,7 +287,11 @@
       "cephalopod_arm_3_tip",
       "cephalopod_arm_4_tip",
       "cephalopod_arm_5_tip",
-      "cephalopod_arm_6_tip"
+      "cephalopod_arm_6_tip",
+      "crab_leg_1_dactyl",
+      "crab_leg_2_dactyl",
+      "crab_leg_3_dactyl",
+      "crab_leg_4_dactyl"
     ],
     "limb_req": [ [ "leg", 2 ] ]
   },
@@ -298,7 +306,11 @@
       "cephalopod_arm_3",
       "cephalopod_arm_4",
       "cephalopod_arm_5",
-      "cephalopod_arm_6"
+      "cephalopod_arm_6",
+      "crab_leg_1",
+      "crab_leg_2",
+      "crab_leg_3",
+      "crab_leg_4"
     ],
     "contact_area": [
       "foot_sole_l",
@@ -308,7 +320,11 @@
       "cephalopod_arm_3_tip",
       "cephalopod_arm_4_tip",
       "cephalopod_arm_5_tip",
-      "cephalopod_arm_6_tip"
+      "cephalopod_arm_6_tip",
+      "crab_leg_1_dactyl",
+      "crab_leg_2_dactyl",
+      "crab_leg_3_dactyl",
+      "crab_leg_4_dactyl"
     ],
     "limb_req": [ [ "leg", 2 ] ]
   },
@@ -323,7 +339,11 @@
       "cephalopod_arm_3",
       "cephalopod_arm_4",
       "cephalopod_arm_5",
-      "cephalopod_arm_6"
+      "cephalopod_arm_6",
+      "crab_leg_1",
+      "crab_leg_2",
+      "crab_leg_3",
+      "crab_leg_4"
     ],
     "contact_area": [
       "foot_heel_l",
@@ -333,7 +353,11 @@
       "cephalopod_arm_3_tip",
       "cephalopod_arm_4_tip",
       "cephalopod_arm_5_tip",
-      "cephalopod_arm_6_tip"
+      "cephalopod_arm_6_tip",
+      "crab_leg_1_dactyl",
+      "crab_leg_2_dactyl",
+      "crab_leg_3_dactyl",
+      "crab_leg_4_dactyl"
     ],
     "limb_req": [ [ "leg", 2 ] ]
   },
@@ -364,8 +388,8 @@
   {
     "type": "attack_vector",
     "id": "vector_knee",
-    "limbs": [ "leg_l", "leg_r" ],
-    "contact_area": [ "leg_knee_l", "leg_knee_r" ],
+    "limbs": [ "leg_l", "leg_r", "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+    "contact_area": [ "leg_knee_l", "leg_knee_r", "crab_leg_1_carpus", "crab_leg_2_carpus", "crab_leg_3_carpus", "crab_leg_4_carpus" ],
     "limb_req": [ [ "leg", 2 ] ]
   },
   {
@@ -379,7 +403,11 @@
       "cephalopod_arm_3",
       "cephalopod_arm_4",
       "cephalopod_arm_5",
-      "cephalopod_arm_6"
+      "cephalopod_arm_6",
+      "crab_leg_1",
+      "crab_leg_2",
+      "crab_leg_3",
+      "crab_leg_4"
     ],
     "contact_area": [
       "leg_lower_l",
@@ -389,7 +417,11 @@
       "cephalopod_arm_3_tip",
       "cephalopod_arm_4_tip",
       "cephalopod_arm_5_tip",
-      "cephalopod_arm_6_tip"
+      "cephalopod_arm_6_tip",
+      "crab_leg_1_propodus",
+      "crab_leg_2_propodus",
+      "crab_leg_3_propodus",
+      "crab_leg_4_propodus"
     ],
     "bp_hp_limit": 50,
     "limb_req": [ [ "leg", 2 ] ]

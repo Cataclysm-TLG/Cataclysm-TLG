@@ -221,6 +221,7 @@
     "durability": 200,
     "description": "A wheel.",
     "damage_modifier": 50,
+    "wheel_offroad_rating": 0.35,
     "breaks_into": [
       { "item": "steel_chunk", "count": [ 1, 2 ] },
       { "item": "steel_fragment", "count": [ 1, 2 ] },
@@ -243,7 +244,7 @@
     "type": "vehicle_part",
     "name": { "str": "racing slick" },
     "item": "wheel_slick",
-    "wheel_offroad_rating": 0.3,
+    "wheel_offroad_rating": 0.2,
     "wheel_terrain_modifiers": { "FLAT": [ 0, 5 ], "ROAD": [ 0, 2 ] },
     "contact_area": 180,
     "damage_reduction": { "bash": 12 }
@@ -315,6 +316,7 @@
     "durability": 40,
     "description": "A thin bicycle wheel.",
     "damage_modifier": 50,
+    "wheel_offroad_rating": 0.4,
     "folded_volume": "3500 ml",
     "breaks_into": [
       { "item": "steel_chunk", "prob": 50 },
@@ -492,6 +494,7 @@
     "durability": 90,
     "description": "A small wheel from a motorcycle.",
     "damage_modifier": 50,
+    "wheel_offroad_rating": 0.4,
     "breaks_into": [
       { "item": "steel_chunk", "count": [ 1, 3 ] },
       { "item": "steel_fragment", "count": [ 1, 3 ] },
@@ -564,6 +567,7 @@
     "durability": 30,
     "description": "A set of three plastic wheels, with a larger one in the front, mounted with bolts.",
     "damage_modifier": 50,
+    "wheel_offroad_rating": 0.4,
     "breaks_into": [ { "item": "plastic_chunk", "count": [ 1, 3 ] } ],
     "requirements": {
       "install": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_1", 1 ] ] },
@@ -589,6 +593,7 @@
     "durability": 40,
     "description": "A small wheel.",
     "damage_modifier": 50,
+    "wheel_offroad_rating": 0.35,
     "folded_volume": "3500 ml",
     "breaks_into": [
       { "item": "steel_chunk", "prob": 50 },
@@ -650,6 +655,7 @@
     "durability": 400,
     "description": "A wide wheel that provides more traction and better off-road performance.",
     "damage_modifier": 50,
+    "wheel_offroad_rating": 0.4,
     "breaks_into": [
       { "item": "steel_chunk", "count": [ 2, 3 ] },
       { "item": "steel_fragment", "count": [ 2, 3 ] },

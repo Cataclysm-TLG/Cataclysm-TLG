@@ -927,7 +927,6 @@ void avatar_action::eat( avatar &you, item_location &loc )
 
     if( !loc ) {
         you.cancel_activity();
-        add_msg( _( "Nevermind." ) );
         return;
     }
     loc.overflow( here );
@@ -937,10 +936,12 @@ void avatar_action::eat( avatar &you, item_location &loc )
 
 void avatar_action::eat_or_use( avatar &you, item_location loc )
 {
-    if( loc && loc->is_medical_tool() ) {
-        avatar_action::use_item( you, loc, "heal" );
-    } else {
-        avatar_action::eat( you, loc );
+    if( loc ) {
+        if( loc->is_medical_tool() ) {
+            avatar_action::use_item( you, loc, "heal" );
+        } else {
+            avatar_action::eat( you, loc );
+        }
     }
 }
 

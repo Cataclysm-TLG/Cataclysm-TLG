@@ -7998,6 +7998,59 @@ void Character::recalculate_bodyparts()
     tally_organic_size();
     recalc_limb_energy_usage();
 
+    // Remove effects from body parts that we no longer have.
+    effects_map &effs = *effects;
+    for( auto eff_it = effs.begin(); eff_it != effs.end(); ) {
+        auto &bp_map = eff_it->second;
+        for( auto bp_it = bp_map.begin(); bp_it != bp_map.end(); ) {
+            const bodypart_id &bp = bp_it->first.id();
+            if( bp != bodypart_str_id::NULL_ID().id() && !has_part( bp ) ) {
+                bp_it = bp_map.erase( bp_it );
+            } else {
+                ++bp_it;
+            }
+        }
+        if( bp_map.empty() ) {
+            eff_it = effs.erase( eff_it );
+        } else {
+            ++eff_it;
+        }
+    }
+
+    // Remove any items which were worn exclusively on parts we no longer have.
+    std::list<item> removed = worn.remove_worn_items_with(
+    [this]( item & it ) {
+        if( it.has_flag( flag_INTEGRATED ) ) {
+            return false;
+        }
+        const body_part_set covered_bps  = it.get_covered_body_parts( nullptr );
+        const std::vector<sub_bodypart_id> covered_sbps = it.get_covered_sub_body_parts( nullptr );
+        if( covered_bps.none() && covered_sbps.empty() ) {
+            return false;
+        }
+        for( const bodypart_str_id &bp : covered_bps ) {
+            if( has_part( bp.id() ) ) {
+                return false;
+            }
+        }
+        for( const int_id<sub_body_part_type> &sbp : covered_sbps ) {
+            if( has_part( sbp->parent ) ) {
+                return false;
+            }
+        }
+        return true;
+    }, *this, false );
+
+    map &here = get_map();
+
+    for( item &it : removed ) {
+        add_msg_player_or_npc( m_bad,
+                               _( "Your %s comes free!" ),
+                               _( "<npcname>'s %s comes free!" ),
+                               it.tname() );
+        here.add_item_or_charges( pos_bub(), it );
+    }
+
     add_msg_debug( debugmode::DF_ANATOMY_BP, "New healthy kcal %d",
                    get_healthy_kcal() );
     calc_encumbrance();

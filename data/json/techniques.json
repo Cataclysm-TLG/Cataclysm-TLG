@@ -111,7 +111,7 @@
         "message": "%s has lost control of their weapon!"
       }
     ],
-    "attack_vectors": [ "vector_grasp" ]
+    "attack_vectors": [ "vector_grasp", "vector_null" ]
   },
   {
     "type": "technique",
@@ -873,7 +873,7 @@
           "or": [
             { "npc_bodytype": "human" },
             { "npc_bodytype": "mi-go" },
-            { "npc_bodytype": "kangoroo" },
+            { "npc_bodytype": "kangaroo" },
             { "npc_bodytype": "horse" },
             { "npc_bodytype": "bear" },
             { "npc_bodytype": "angel" }
@@ -1905,7 +1905,7 @@
           "or": [
             { "npc_bodytype": "human" },
             { "npc_bodytype": "mi-go" },
-            { "npc_bodytype": "kangoroo" },
+            { "npc_bodytype": "kangaroo" },
             { "npc_bodytype": "horse" },
             { "npc_bodytype": "bear" },
             { "npc_bodytype": "angel" }
@@ -2293,7 +2293,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.4 },
       { "stat": "damage", "type": "stab", "scale": 1.4 }
     ],
-    "attack_vectors": [ "vector_shin", "vector_foot_toes", "vector_talon", "vector_hoof_toe" ]
+    "attack_vectors": [ "vector_shin" ]
   },
   {
     "type": "technique",

@@ -51,9 +51,9 @@
     "armor": { "bash": 4, "cut": 12, "bullet": 10, "electric": 2 }
   },
   {
-    "id": "mon_mi_go_slaver",
+    "id": "mon_mi_go_abductor",
     "type": "MONSTER",
-    "name": { "str": "mi-go slaver" },
+    "name": { "str": "mi-go abductor" },
     "description": "An alien creature of uncertain origin.  Its shapeless pink body bears numerous sets of paired appendages of unknown function, and a pair of ribbed, membranous wings which seem to be quite useless.  Its odd, vaguely pyramid-shaped head bristles with numerous wavering antennae, and it moves with an uncanny fluidity on its many legs.  It is carrying an oblong object that hums with an odd keening sound.",
     "default_faction": "mi-go",
     "bodytype": "migo",
@@ -194,8 +194,8 @@
     "scents_ignored": [ "sc_fetid" ],
     "special_attacks": [
       [ "PARROT", 100 ],
-      [ "SHRIEK_ALERT", 5 ],
-      [ "SHRIEK_STUN", 4 ],
+      [ "SHRIEK_ALERT", 120 ],
+      [ "SHRIEK_STUN", 34 ],
       [ "TAZER", 5 ],
       { "id": "scratch", "damage_max_instance": [ { "damage_type": "cut", "amount": 35, "armor_multiplier": 0.7 } ] },
       {

@@ -250,6 +250,7 @@ static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_contacts( "contacts" );
 static const efftype_id effect_cramped_space( "cramped_space" );
+static const efftype_id effect_dashing( "dashing" );
 static const efftype_id effect_docile( "docile" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_fake_common_cold( "fake_common_cold" );
@@ -10225,7 +10226,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     }
 
     std::vector<std::string> harmful_stuff = get_dangerous_tile( dest_loc );
-    if( !shifting_furniture && !pushing && !harmful_stuff.empty() ) {
+    if( !shifting_furniture && !pushing && !harmful_stuff.empty() && !u.has_effect( effect_dashing ) ) {
         if( harmful_stuff.size() == 1 && harmful_stuff[0] == "ledge" ) {
             iexamine::ledge( u, tripoint_bub_ms( dest_loc ) );
             return true;

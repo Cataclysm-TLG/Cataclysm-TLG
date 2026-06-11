@@ -19,8 +19,8 @@
     "material": [ "wheat" ],
     "flags": [ "EDIBLE_FROZEN", "USE_EAT_VERB" ],
     "looks_like": "cereal",
-    "vitamins": [ [ "vitC", 7 ], [ "calcium", 7 ], [ "iron", 32 ], [ "wheat_allergen", 1 ] ],
-    "fun": 8
+    "vitamins": [ [ "vitC", 10 ], [ "calcium", 10 ], [ "iron", 45 ], [ "wheat_allergen", 1 ] ],
+    "fun": 5
   },
   {
     "type": "ITEM",
@@ -40,8 +40,8 @@
     "price_postapoc": "25 cent",
     "material": [ "junk" ],
     "volume": "62 ml",
-    "vitamins": [ [ "vitC", 17 ], [ "calcium", 13 ], [ "iron", 48 ], [ "junk_allergen", 1 ] ],
-    "fun": 10
+    "vitamins": [ [ "vitC", 7 ], [ "calcium", 8 ], [ "iron", 44 ], [ "junk_allergen", 1 ], [ "meat_allergen", 1 ] ],
+    "fun": 8
   },
   {
     "type": "ITEM",
@@ -50,12 +50,13 @@
     "name": { "str_sp": "wheat cereal" },
     "weight": "52 g",
     "volume": "62 ml",
-    "calories": 180,
-    "description": "Whole-grain wheat cereal.  It's surprisingly good, and allegedly good for your heart.",
+    "calories": 140,
+    "description": "Whole-grain wheat cereal.  It's allegedly good for your heart.",
     "price_postapoc": "150 cent",
     "flags": [ "EDIBLE_FROZEN" ],
-    "vitamins": [ [ "vitC", 2 ], [ "calcium", 2 ], [ "iron", 9 ] ],
-    "copy-from": "cereal_tpl"
+    "vitamins": [ [ "vitC", 10 ], [ "calcium", 10 ], [ "iron", 45 ], [ "wheat_allergen", 1 ] ],
+    "copy-from": "cereal_tpl",
+    "fun": 3
   },
   {
     "type": "ITEM",
@@ -69,14 +70,14 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "quench": -2,
-    "calories": 155,
-    "description": "Plain cornflake cereal.  They're not that good, but it beats nothing.",
+    "calories": 140,
+    "description": "Unsweetened breakfast cereal made from corn.  As cereals go it's a healthier choice, but not the most exciting.",
     "price": "75 cent",
     "price_postapoc": "18 cent",
     "material": [ "junk" ],
     "volume": "62 ml",
     "flags": [ "EDIBLE_FROZEN" ],
-    "vitamins": [ [ "iron", 42 ], [ "junk_allergen", 1 ] ],
+    "vitamins": [ [ "iron", 45 ] ],
     "fun": 3
   }
 ]

@@ -5591,6 +5591,13 @@
   },
   {
     "type": "effect_type",
+    "id": "dashing",
+    "max_intensity": 20,
+    "max_duration": "1 s",
+    "//": "Helper for airborne effect, handles interactions with terrain, traps etc when dashing via spells while not airborne."
+  },
+  {
+    "type": "effect_type",
     "id": "wall_crawl",
     "name": [ "Wall Crawl" ],
     "desc": [ "You are especially adept at climbing and can scale most vertical surfaces with ease." ],
