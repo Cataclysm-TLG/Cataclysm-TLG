@@ -259,7 +259,7 @@
     "om_terrain": "house_w_1_basement",
     "weight": 8,
     "object": {
-      "fill_ter": "t_sewage",
+      "fill_ter": "t_sewage_underground",
       "rows": [
         "                        ",
         " ||||||||               ",

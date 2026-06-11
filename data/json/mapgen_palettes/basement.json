@@ -84,24 +84,24 @@
     "terrain": {
       " ": "t_soil",
       "+": "t_door_c",
-      ".": "t_sewage",
+      ".": "t_sewage_underground",
       "|": "t_concrete_wall",
       "<": "t_wood_stairs_up",
       "%": "t_wall_w",
-      "a": "t_sewage",
-      "A": "t_sewage",
-      "F": "t_sewage",
-      "J": "t_sewage",
-      "S": "t_sewage",
-      "U": "t_sewage",
-      "W": "t_sewage",
-      "Z": "t_sewage",
-      "8": "t_sewage",
-      "9": "t_sewage",
-      "g": "t_sewage",
-      "v": "t_sewage",
-      "z": "t_sewage",
-      "é": "t_sewage"
+      "a": "t_sewage_underground",
+      "A": "t_sewage_underground",
+      "F": "t_sewage_underground",
+      "J": "t_sewage_underground",
+      "S": "t_sewage_underground",
+      "U": "t_sewage_underground",
+      "W": "t_sewage_underground",
+      "Z": "t_sewage_underground",
+      "8": "t_sewage_underground",
+      "9": "t_sewage_underground",
+      "g": "t_sewage_underground",
+      "v": "t_sewage_underground",
+      "z": "t_sewage_underground",
+      "é": "t_sewage_underground"
     },
     "furniture": {
       "a": "f_fireplace",
@@ -120,7 +120,6 @@
       "é": "f_freezer"
     },
     "toilets": { "t": {  } },
-    "liquids": { "g": { "liquid": "sewage", "amount": [ 0, 100 ] } },
     "items": {
       "t": { "item": "SUS_toilet", "chance": 10, "repeat": [ 1, 3 ] },
       "v": [
