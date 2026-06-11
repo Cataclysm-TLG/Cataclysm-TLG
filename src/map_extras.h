@@ -11,6 +11,7 @@
 #include "color.h"
 #include "coords_fwd.h"
 #include "flat_set.h"
+#include "omdata.h"
 #include "string_id.h"
 #include "translations.h"
 #include "type_id.h"

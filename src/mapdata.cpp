@@ -337,6 +337,8 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_REGION_PSEUDO: return "REGION_PSEUDO";
         case ter_furn_flag::TFLAG_PHASE_BACK: return "PHASE_BACK";
         case ter_furn_flag::TFLAG_SOAKING_TUB: return "SOAKING_TUB";
+        case ter_furn_flag::TFLAG_TIRE_DAMAGE: return "TIRE_DAMAGE";
+        case ter_furn_flag::TFLAG_TIRE_SAFE: return "TIRE_SAFE";
 
         // *INDENT-ON*
         case ter_furn_flag::NUM_TFLAG_FLAGS:

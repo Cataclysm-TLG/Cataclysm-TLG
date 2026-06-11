@@ -176,6 +176,7 @@ static const itype_id itype_maple_sap( "maple_sap" );
 static const itype_id itype_nail( "nail" );
 static const itype_id itype_pipe( "pipe" );
 static const itype_id itype_rock( "rock" );
+static const itype_id itype_rough_terrain( "rough_terrain" );
 static const itype_id itype_scrap( "scrap" );
 static const itype_id itype_splinter( "splinter" );
 static const itype_id itype_steel_chunk( "steel_chunk" );
@@ -1132,17 +1133,73 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
 
             veh.handle_trap( this, wheel_p, vp_wheel );
             // dont use vp_wheel or vp_wheel_idx below this - handle_trap might've removed it from parts
+            bool has_item = has_items( wheel_p ) &&
+                            !has_flag( ter_furn_flag::TFLAG_SEALED, wheel_p );
 
-            if( has_items( wheel_p ) && !has_flag( ter_furn_flag::TFLAG_SEALED, wheel_p ) ) {
-                // Damage is calculated based on the weight of the vehicle,
-                // The area of it's wheels, and the area of the wheel running over the items.
-                // This number is multiplied by weight_to_damage_factor to get reasonable results, damage-wise.
-                const int wheel_damage = vpi_wheel.wheel_info->contact_area / vehicle_grounded_wheel_area *
-                                         vehicle_mass_kg * weight_to_damage_factor;
+            if( has_item ) {
+                const int wheel_damage =
+                    vpi_wheel.wheel_info->contact_area /
+                    vehicle_grounded_wheel_area *
+                    vehicle_mass_kg * weight_to_damage_factor;
 
-                //~ %1$s: vehicle name
-                smash_items( wheel_p, wheel_damage, string_format( _( "weight of %1$s" ), veh.disp_name() ),
+                smash_items( wheel_p, wheel_damage,
+                             string_format( _( "weight of %1$s" ), veh.disp_name() ),
                              &vp_wheel, &veh );
+            }
+
+            auto *driver = veh.get_driver( *this );
+            if( driver == nullptr ) {
+                continue;
+            }
+            const int velocity = std::max( std::abs( veh.velocity ), 1 );
+            if( velocity <= 5 ) {
+                continue;
+            }
+
+            const bool hazard =
+                has_flag( ter_furn_flag::TFLAG_TIRE_DAMAGE, wheel_p ) ||
+                has_flag( ter_furn_flag::TFLAG_SHARP, wheel_p ) ||
+                ( has_flag( ter_furn_flag::TFLAG_DIGGABLE, wheel_p ) &&
+                  !has_flag( ter_furn_flag::TFLAG_ROAD, wheel_p ) &&
+                  !has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, wheel_p ) );
+
+
+            float divisor = 250000.0f / velocity;
+            const int chance = std::clamp( static_cast<int>( divisor ), 50, 150 );
+            add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to damage: 1 / %s.", chance );
+            if( !hazard ||
+                vp_wheel.info().wheel_info->offroad_rating >= 0.6f ||
+                !one_in( chance ) ) {
+                continue;
+            }
+
+            float driver_skill = driver->get_skill_level( skill_driving );
+            float driver_spot  = driver->spot_check();
+            float avoidance = std::min(
+                                  driver_skill * 0.02f + driver_spot * 0.01f,
+                                  0.75f
+                              );
+            item rough_terrain( itype_rough_terrain, calendar::turn );
+            float hit_chance = vehicle::hit_probability( rough_terrain, &vp_wheel );
+            float effective_hit = hit_chance * ( 1.f - avoidance );
+            if( rng_float( 0.f, 1.f ) < effective_hit ) {
+                int damage_levels = 1;
+                std::vector<std::string> wheel_damage_messages;
+                veh.damage_wheel_on_item(
+                    &vp_wheel, rough_terrain,
+                    &damage_levels,
+                    &wheel_damage_messages
+                );
+                if( damage_levels > 0 ) {
+                    veh.damage_direct( *this, vp_wheel, damage_levels );
+                    const bool player_is_driver = &get_player_character() == veh.get_driver( *this );
+                    const bool player_sees_damage = get_player_character().sees( *this, wheel_p );
+                    if( !wheel_damage_messages.empty() && ( player_is_driver || player_sees_damage ) ) {
+                        for( const std::string &msg : wheel_damage_messages ) {
+                            add_msg( m_bad, msg );
+                        }
+                    }
+                }
             }
         }
     }
@@ -2558,6 +2615,8 @@ std::string map::features( const tripoint_bub_ms &p ) const
     add_if( has_flag( ter_furn_flag::TFLAG_FLAMMABLE, p ) ||
             has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, p ) ||
             has_flag( ter_furn_flag::TFLAG_FLAMMABLE_HARD, p ), _( "Flammable." ) );
+    add_if( has_flag( ter_furn_flag::TFLAG_TIRE_DAMAGE, p ), _( "Damages Tires." ) );
+    add_if( has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, p ), _( "Safe for Tires." ) );
     return result;
 }
 
@@ -4258,9 +4317,6 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
                 i++;
                 continue;
             }
-        }
-
-        if( vp_wheel != nullptr ) {
             veh->damage_wheel_on_item( vp_wheel, *i, &damage_levels, &wheel_damage_messages );
         }
 
@@ -4378,17 +4434,6 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
             for( const std::string &msg : wheel_damage_messages ) {
                 add_msg( m_bad, msg );
             }
-        }
-
-        bool existing = false;
-        for( int wheel : veh->wheelcache ) {
-            if( veh->bub_part_pos( *this, veh->part( wheel ) ) == p ) {
-                existing = true;
-                break;
-            }
-        }
-        if( existing ) {
-            add_msg( m_bad, _( "The %s has been degraded by the damage" ), vp_wheel->name() );
         }
     }
 
