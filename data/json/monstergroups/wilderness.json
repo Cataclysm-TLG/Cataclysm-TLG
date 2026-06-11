@@ -73,10 +73,10 @@
         "weight": 65,
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
       },
-      { "group": "GROUP_WILDERNESS_FOREST_INSECT", "weight": 250, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      { "group": "GROUP_WILDERNESS_FOREST_INSECT", "weight": 100, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
       {
         "group": "GROUP_WILDERNESS_FOREST_INSECT",
-        "weight": 120,
+        "weight": 80,
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
         "starts": "20 days"
       },
@@ -84,13 +84,13 @@
         "group": "GROUP_WILDERNESS_FOREST_INSECT",
         "weight": 75,
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
-        "starts": "40 days"
+        "starts": "180 days"
       },
       {
         "group": "GROUP_WILDERNESS_FOREST_INSECT",
         "weight": 75,
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
-        "starts": "90 days"
+        "starts": "360 days"
       },
       {
         "group": "GROUP_WILDERNESS_FOREST_ZOMBIE",
@@ -106,7 +106,7 @@
       },
       {
         "group": "GROUP_WILDERNESS_FOREST_ZOMBIE",
-        "weight": 50,
+        "weight": 20,
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
         "starts": "112 days"
       },
@@ -233,9 +233,9 @@
     "is_animal": true,
     "monsters": [
       { "monster": "mon_fly_small", "weight": 1, "cost_multiplier": 0 },
-      { "monster": "mon_spider_jumping_small", "weight": 4, "cost_multiplier": 0 },
-      { "monster": "mon_spider_wolf_small", "weight": 6, "cost_multiplier": 0 },
-      { "monster": "mon_mantis_small", "weight": 3, "cost_multiplier": 10 },
+      { "monster": "mon_spider_jumping_small", "weight": 2, "cost_multiplier": 0 },
+      { "monster": "mon_spider_wolf_small", "weight": 4, "cost_multiplier": 0 },
+      { "monster": "mon_mantis_small", "weight": 2, "cost_multiplier": 10 },
       { "monster": "mon_lady_bug", "weight": 1, "cost_multiplier": 10 },
       { "monster": "mon_aphid", "weight": 1, "pack_size": [ 1, 5 ], "cost_multiplier": 0 },
       { "monster": "mon_locust_small", "weight": 1, "pack_size": [ 3, 9 ], "cost_multiplier": 0 },
