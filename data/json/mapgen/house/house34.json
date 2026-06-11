@@ -236,7 +236,7 @@
   {
     "type": "mapgen",
     "om_terrain": "house_34_basement",
-    "weight": 10,
+    "weight": 8,
     "object": {
       "fill_ter": "t_water_sh_flood",
       "rows": [
@@ -266,6 +266,59 @@
         "                        "
       ],
       "palettes": [ "basement_empty_flooded" ],
+      "nested": {
+        "2": { "chunks": [ [ "room_10x10_junk_S", 30 ] ] },
+        "4": {
+          "chunks": [
+            [ "5x5_holdout_W", 2 ],
+            [ "livingroom_5x5_S_1", 30 ],
+            [ "livingroom_5x5_E_1", 30 ],
+            [ "livingroom_5x5_N_1", 30 ],
+            [ "livingroom_5x5_W_1", 30 ],
+            [ "livingroom_5x5_S_2", 30 ],
+            [ "livingroom_5x5_E_2", 30 ],
+            [ "livingroom_5x5_N_2", 30 ],
+            [ "livingroom_5x5_W_2", 30 ],
+            [ "home_office_4x4_N", 20 ],
+            [ "home_office_4x4_S", 20 ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "house_34_basement",
+    "weight": 6,
+    "object": {
+      "fill_ter": "t_sewage",
+      "rows": [
+        "                        ",
+        "                        ",
+        "         ||||||||||||   ",
+        "  ||||||||2.........|   ",
+        "  |.................|   ",
+        "  |.................|   ",
+        "  |.................|   ",
+        "  |.................|   ",
+        "  |.................|   ",
+        "  |.................|   ",
+        "  |.................|   ",
+        "  |g..<.............|   ",
+        "  |W................|   ",
+        "  |J........4.......|   ",
+        "  |J................|   ",
+        "  |Z.UU.F...........|   ",
+        "  ||||||||..........|   ",
+        "         |..........|   ",
+        "         ||||||||||||   ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "palettes": [ "basement_empty_flooded_sewage" ],
       "nested": {
         "2": { "chunks": [ [ "room_10x10_junk_S", 30 ] ] },
         "4": {
