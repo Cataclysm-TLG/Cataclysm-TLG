@@ -77,7 +77,7 @@
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "spear_shaft", 1 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ] ]
   },
   {
     "result": "sword_cane",
@@ -251,8 +251,7 @@
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
       [ [ "bronze_fragment", 4 ] ],
-      [ [ "spear_shaft", 1 ] ],
-      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
+      [ [ "spear_shaft", 1 ] ]
     ]
   },
   {
@@ -293,7 +292,7 @@
     "using": [ [ "blacksmithing_basic", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "long_pole", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "long_pole", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -340,7 +339,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "long_pole", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "long_pole", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -633,8 +632,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "book_learn": [ [ "manual_knives", 4 ], [ "recipe_melee", 5 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -883,7 +881,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ] ]
   },
   {
     "result": "knuckle_skewer",
