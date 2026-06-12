@@ -31,7 +31,7 @@
     "book_learn": [ [ "cookbook_mexican", 1 ] ],
     "batch_time_factors": [ 83, 3 ],
     "charges": 50,
-    "tools": [ [ [ "surface_heat", 3, "LIST" ] ], [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
+    "tools": [ [ [ "surface_heat", 3, "LIST" ] ], [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "chili_pepper", 1 ], [ "chili_pepper_cut", 2 ] ] ]
   },
   {
@@ -47,7 +47,7 @@
     "book_learn": [ [ "cookbook_mexican", 1 ] ],
     "batch_time_factors": [ 83, 3 ],
     "charges": 50,
-    "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ], [ "mortar_pestle", -1 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ], [ "mortar_pestle", -1 ] ] ],
     "components": [ [ [ "dry_chili", 1 ] ] ]
   },
   {
@@ -98,7 +98,7 @@
     "autolearn": true,
     "book_learn": [ [ "cookbook_mexican", 1 ] ],
     "batch_time_factors": [ 83, 3 ],
-    "tools": [ [ [ "surface_heat", 5, "LIST" ] ], [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
+    "tools": [ [ [ "surface_heat", 5, "LIST" ] ], [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "dry_corn", 1 ], [ "kernels", 1 ] ] ]
   },
   {
@@ -127,7 +127,6 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "cooking",
-    "skills_required": [ [ "survival", 1 ] ],
     "difficulty": 2,
     "time": "1 h 7 m 30 s",
     "autolearn": true,
@@ -171,7 +170,7 @@
     "autolearn": false,
     "flags": [ "SECRET" ],
     "tools": [  ],
-    "components": [ [ [ "barley", 1 ], [ "starch", 1 ], [ "wheat", 1 ] ] ]
+    "components": [ [ [ "barley", 1 ], [ "wheat", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -186,8 +185,8 @@
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
     "flags": [ "BLIND_EASY" ],
-    "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
-    "components": [ [ [ "wheat", 1 ], [ "barley", 1 ], [ "starch", 1 ] ] ]
+    "tools": [ [ [ "rock_quern", -1 ] ] ],
+    "components": [ [ [ "wheat", 1 ], [ "barley", 1 ] ] ]
   },
   {
     "result": "flour",
@@ -203,7 +202,7 @@
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
     "tools": [ [ [ "food_processor", 20 ] ] ],
-    "components": [ [ [ "wheat", 1 ], [ "barley", 1 ], [ "starch", 1 ] ] ]
+    "components": [ [ [ "wheat", 1 ], [ "barley", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -213,7 +212,6 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "cooking",
-    "skills_required": [ [ "survival", 1 ] ],
     "difficulty": 2,
     "charges": 15,
     "time": "1 h 7 m 30 s",
@@ -221,7 +219,7 @@
     "batch_time_factors": [ 83, 3 ],
     "flags": [ "BLIND_EASY" ],
     "qualities": [ { "id": "FINE_GRIND", "level": 1 } ],
-    "components": [ [ [ "wheat", 1 ], [ "barley", 1 ], [ "starch", 1 ] ] ]
+    "components": [ [ [ "wheat", 1 ], [ "barley", 1 ] ] ]
   },
   {
     "//": "For use by mills, so the only entries used are the charges and components.",
@@ -311,7 +309,7 @@
     "autolearn": false,
     "flags": [ "SECRET" ],
     "tools": [  ],
-    "components": [ [ [ "roasted_cattail_rhizome", 2 ] ] ]
+    "components": [ [ [ "starch_dry", 2 ] ] ]
   },
   {
     "//": "For use by mills, so the only entries used are the charges and components.",
@@ -362,12 +360,12 @@
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
     "flags": [ "BLIND_EASY" ],
-    "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [
       [
         [ "buckwheat", 1 ],
         [ "acorns_cooked", 10 ],
-        [ "roasted_cattail_rhizome", 2 ],
+        [ "starch_dry", 2 ],
         [ "dry_rice", 5 ],
         [ "dry_soybean", 15 ],
         [ "dry_wild_rice", 5 ],
@@ -394,7 +392,7 @@
       [
         [ "buckwheat", 1 ],
         [ "acorns_cooked", 10 ],
-        [ "roasted_cattail_rhizome", 2 ],
+        [ "starch_dry", 2 ],
         [ "dry_rice", 5 ],
         [ "dry_soybean", 15 ],
         [ "dry_wild_rice", 5 ],
@@ -411,7 +409,6 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "cooking",
-    "skills_required": [ [ "survival", 1 ] ],
     "difficulty": 2,
     "charges": 15,
     "time": "1 h 7 m 30 s",
@@ -423,7 +420,7 @@
       [
         [ "buckwheat", 1 ],
         [ "acorns_cooked", 10 ],
-        [ "roasted_cattail_rhizome", 2 ],
+        [ "starch_dry", 2 ],
         [ "dry_rice", 5 ],
         [ "dry_soybean", 15 ],
         [ "dry_wild_rice", 5 ],
@@ -464,7 +461,7 @@
     "book_learn": [ [ "cookbook_italian", 1 ] ],
     "batch_time_factors": [ 83, 3 ],
     "charges": 50,
-    "tools": [ [ [ "surface_heat", 3, "LIST" ] ], [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
+    "tools": [ [ [ "surface_heat", 3, "LIST" ] ], [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "garlic_clove", 1 ] ] ]
   },
   {
@@ -481,7 +478,7 @@
     "book_learn": [ [ "cookbook_italian", 1 ] ],
     "batch_time_factors": [ 83, 3 ],
     "charges": 50,
-    "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ], [ "mortar_pestle", -1 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ], [ "mortar_pestle", -1 ] ] ],
     "components": [ [ [ "dry_garlic", 1 ] ] ]
   },
   {
@@ -519,6 +516,23 @@
     "components": [ [ [ "bone_edible", 1, "LIST" ] ] ]
   },
   {
+    "//": "For use by mills, so the only entries used are the charges and components.",
+    "//1": "Note that there should only be a single component with no extras such as lubricants, etc.",
+    "result": "meal_bone",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "id_suffix": "mill_25_1",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_OTHER",
+    "skill_used": "cooking",
+    "difficulty": 2,
+    "time": "0 s",
+    "autolearn": false,
+    "flags": [ "SECRET" ],
+    "tools": [  ],
+    "components": [ [ [ "skewer_bone", 25 ] ] ]
+  },
+  {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "result": "meal_bone",
@@ -530,7 +544,7 @@
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
     "flags": [ "BLIND_EASY" ],
-    "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "bone_edible", 1, "LIST" ] ] ],
     "charges": 4
   },
@@ -558,7 +572,6 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "cooking",
-    "skills_required": [ [ "survival", 1 ] ],
     "difficulty": 2,
     "time": "1 h 30 m",
     "autolearn": true,
@@ -641,24 +654,6 @@
     "components": [ [ [ "bone_tainted", 1 ] ] ]
   },
   {
-    "//": "For use by mills, so the only entries used are the charges and components.",
-    "//1": "Note that there should only be a single component with no extras such as lubricants, etc.",
-    "result": "meal_bone_tainted",
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "id_suffix": "mill_6_1",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_OTHER",
-    "skill_used": "cooking",
-    "difficulty": 2,
-    "charges": 1,
-    "time": "0 s",
-    "autolearn": false,
-    "flags": [ "SECRET" ],
-    "tools": [  ],
-    "components": [ [ [ "skewer_bone", 6 ] ] ]
-  },
-  {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "result": "meal_bone_tainted",
@@ -670,8 +665,8 @@
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
     "flags": [ "BLIND_EASY" ],
-    "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
-    "components": [ [ [ "bone_tainted", 1 ], [ "skewer_bone", 25 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ] ] ],
+    "components": [ [ [ "bone_tainted", 1 ] ] ],
     "charges": 4
   },
   {
@@ -698,14 +693,13 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "cooking",
-    "skills_required": [ [ "survival", 1 ] ],
     "difficulty": 2,
     "time": "1 h 30 m",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
     "flags": [ "BLIND_EASY" ],
     "qualities": [ { "id": "FINE_GRIND", "level": 1 } ],
-    "components": [ [ [ "bone_tainted", 1 ], [ "skewer_bone", 25 ] ] ],
+    "components": [ [ [ "bone_tainted", 1 ] ] ],
     "charges": 4
   },
   {
@@ -738,7 +732,7 @@
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
     "flags": [ "BLIND_EASY" ],
-    "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "chitin_piece", 1 ], [ "acidchitin_piece", 1 ], [ "endochitin", 1 ], [ "insect_dust", 1 ] ] ],
     "charges": 4
   },
@@ -750,7 +744,6 @@
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
     "skill_used": "cooking",
-    "skills_required": [ [ "survival", 1 ] ],
     "difficulty": 2,
     "time": "1 h 30 m",
     "autolearn": true,
@@ -856,7 +849,7 @@
     "batch_time_factors": [ 20, 1 ],
     "charges": 1,
     "autolearn": true,
-    "tools": [ [ [ "clay_quern", -1 ], [ "rock_quern", -1 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [
       [
         [ "almond_shelled", 10 ],
@@ -925,7 +918,7 @@
     "batch_time_factors": [ 20, 1 ],
     "charges": 1,
     "autolearn": true,
-    "tools": [ [ [ "clay_quern", -1 ], [ "rock_quern", -1 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [
       [
         [ "seed_cotton_boll", 8 ],

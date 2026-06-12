@@ -1838,7 +1838,7 @@
     "skill_used": "cooking",
     "difficulty": 1,
     "byproducts": [ [ "plant_fibre" ] ],
-    "skills_required": [ "survival", 1 ],
+    "skills_required": [ "survival", 2 ],
     "time": "18 m",
     "autolearn": true,
     "batch_time_factors": [ 40, 5 ],
@@ -1884,7 +1884,7 @@
     "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "cooking",
     "difficulty": 1,
-    "skills_required": [ "survival", 1 ],
+    "skills_required": [ "survival", 2 ],
     "time": "4 m",
     "autolearn": true,
     "qualities": [ { "id": "COOK", "level": 1 } ],
@@ -3099,7 +3099,7 @@
     "batch_time_factors": [ 53, 1 ],
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "CONTAIN", "level": 1 } ],
-    "components": [ [ [ "cattail_rhizome", 2 ] ] ]
+    "components": [ [ [ "cattail_rhizome", 5 ] ] ]
   },
   {
     "type": "recipe",
@@ -4489,7 +4489,7 @@
     "autolearn": true,
     "batch_time_factors": [ 80, 1 ],
     "charges": 1,
-    "tools": [ [ [ "surface_heat", 3, "LIST" ] ], [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
+    "tools": [ [ [ "surface_heat", 3, "LIST" ] ], [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "oats", 1 ] ] ]
   },
   {
@@ -8783,7 +8783,7 @@
     "autolearn": true,
     "charges": 25,
     "batch_time_factors": [ 83, 3 ],
-    "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ] ] ],
+    "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "seed_mustard", 1 ] ] ]
   },
   {

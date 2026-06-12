@@ -456,7 +456,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "pipe quiver" },
-    "description": "A makeshift quiver fashioned from a pipe, worn at the waist.  Heavier and thinner than a typical quiver, it can only hold six arrows or eight bolts.",
+    "description": "A makeshift quiver fashioned from sections of pipe strapped together and worn at the waist.  Heavier and thinner than a typical quiver, it can only hold six arrows or eight bolts.",
     "weight": "800 g",
     "volume": "370 ml",
     "price": "65 USD",
