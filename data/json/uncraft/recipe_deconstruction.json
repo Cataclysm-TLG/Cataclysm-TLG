@@ -2844,7 +2844,7 @@
     "time": "6 m",
     "activity_level": "MODERATE_EXERCISE",
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "blade_scythe", 1 ] ], [ [ "spear_shaft", 1 ] ] ]
+    "components": [ [ [ "blade_scythe", 1 ] ], [ [ "stick", 1 ] ] ]
   },
   {
     "result": "sf_watch",

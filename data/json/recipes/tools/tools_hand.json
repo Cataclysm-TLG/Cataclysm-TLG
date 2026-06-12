@@ -958,7 +958,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -1021,7 +1021,7 @@
     "using": [ [ "blacksmithing_standard", 24 ], [ "steel_standard", 6 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ] ]
+    "components": [ [ [ "2x4", 2 ], [ "stick_long", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1182,7 +1182,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ] ]
   },
   {
     "result": "bronze_brush_axe",

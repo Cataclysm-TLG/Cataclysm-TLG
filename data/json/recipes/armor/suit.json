@@ -635,7 +635,6 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 2,
-    "skills_required": [ "survival", 1 ],
     "time": "5 h",
     "reversible": true,
     "autolearn": true,

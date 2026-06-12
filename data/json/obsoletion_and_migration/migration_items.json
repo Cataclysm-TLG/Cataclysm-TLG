@@ -4097,5 +4097,10 @@
     "type": "MIGRATION",
     "id": "undershirt",
     "replace": "tank_top"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "clay_quern",
+    "replace": "rock_quern"
   }
 ]
