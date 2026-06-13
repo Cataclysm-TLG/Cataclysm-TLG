@@ -1152,7 +1152,7 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
                 continue;
             }
             const int velocity = std::max( std::abs( veh.velocity ), 1 );
-            if( velocity <= 5 ) {
+            if( velocity <= 500 ) {
                 continue;
             }
 
