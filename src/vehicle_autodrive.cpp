@@ -746,7 +746,7 @@ bool vehicle::autodrive_controller::check_drivable( map &here, const tripoint_bu
                 pt.z()
             );
             if( ( here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, neighbor ) ||
-                here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, neighbor ) ) &&
+                  here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, neighbor ) ) &&
                 !here.has_flag( ter_furn_flag::TFLAG_ROAD, neighbor ) ) {
                 return false;
             }
