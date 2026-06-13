@@ -1941,7 +1941,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "pride_flag",
@@ -1949,7 +1949,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "american_flag",
@@ -1957,7 +1957,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "state_flag",
@@ -1965,7 +1965,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "canvas_sheet",
