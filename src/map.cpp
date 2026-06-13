@@ -1152,14 +1152,11 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
                 continue;
             }
             const int velocity = std::max( std::abs( veh.velocity ), 1 );
-            if( velocity <= 500 ) {
-                continue;
-            }
 
             const bool hazard =
                 has_flag( ter_furn_flag::TFLAG_TIRE_DAMAGE, wheel_p ) ||
                 has_flag( ter_furn_flag::TFLAG_SHARP, wheel_p ) ||
-                ( has_flag( ter_furn_flag::TFLAG_DIGGABLE, wheel_p ) &&
+                ( velocity > 500 && has_flag( ter_furn_flag::TFLAG_DIGGABLE, wheel_p ) &&
                   !has_flag( ter_furn_flag::TFLAG_ROAD, wheel_p ) &&
                   !has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, wheel_p ) );
 
