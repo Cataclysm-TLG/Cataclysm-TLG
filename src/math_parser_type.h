@@ -4,6 +4,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <utility>
 
 #include "string_formatter.h"
 
@@ -43,6 +44,15 @@ using syntax_error = math_exception_impl<0>;
 using runtime_error = math_exception_impl<5>;
 // math parser entered an unexpected state
 using internal_error = math_exception_impl<10>;
+
+// Throw the given math exception. Marked [[noreturn]] so callers that always
+// throw -- notably lambdas, which cannot themselves be marked [[noreturn]] --
+// don't trip -Wmissing-noreturn.
+template<typename Exception, typename... Args>
+[[noreturn]] inline void raise( Args &&...args )
+{
+    throw Exception( std::forward<Args>( args )... );
+}
 
 template<int severity>
 constexpr std::string_view _severity_str()

@@ -1171,7 +1171,7 @@ void game::chat()
             message = _( "loudly." );
             break;
         case NPC_CHAT_SENTENCE: {
-            std::string popupdesc = ( _( "Enter a sentence to %s" ), shout_sound );
+            std::string popupdesc = string_format( _( "Enter a sentence to %s" ), shout_sound );
             string_input_popup popup;
             popup.title _( "Yell a sentence" )
             .width( 64 )
