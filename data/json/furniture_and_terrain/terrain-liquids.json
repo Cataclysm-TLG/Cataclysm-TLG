@@ -392,8 +392,7 @@
     "light_emitted": 50,
     "heat_radiation": 3,
     "trap": "tr_lava",
-    "flags": [ "TRANSPARENT", "LIQUID", "NO_SCENT", "DESTROY_ITEM", "USABLE_FIRE" ],
-    "//": "lava-seared moose meat? yes, please"
+    "flags": [ "TRANSPARENT", "LIQUID", "NO_SCENT", "DESTROY_ITEM", "USABLE_FIRE", "TIRE_DAMAGE" ]
   },
   {
     "type": "terrain",
@@ -568,7 +567,7 @@
     "color": "light_blue",
     "move_cost": 3,
     "liquid_source": { "id": "water_murky", "count": [ 40, 240 ], "min_temp": 2.2 },
-    "flags": [ "TRANSPARENT", "LIQUIDCONT", "NO_SCENT", "SWIMMABLE", "SHALLOW_WATER" ],
+    "flags": [ "TRANSPARENT", "LIQUIDCONT", "NO_SCENT", "SWIMMABLE", "SHALLOW_WATER", "TIRE_DAMAGE" ],
     "examine_action": "finite_water_source",
     "phase_targets": [ "t_ice_sh_thick", "t_ice_sh_thin", "t_pseudo_phase" ],
     "phase_temps": [ -15, -10 ],
@@ -585,7 +584,7 @@
     "move_cost": 3,
     "connect_groups": "INDOORFLOOR",
     "liquid_source": { "id": "water_murky", "count": [ 40, 240 ], "min_temp": 2.2 },
-    "flags": [ "TRANSPARENT", "LIQUIDCONT", "INDOORS", "NO_SCENT", "SWIMMABLE", "SHALLOW_WATER" ],
+    "flags": [ "TRANSPARENT", "LIQUIDCONT", "INDOORS", "NO_SCENT", "SWIMMABLE", "SHALLOW_WATER", "TIRE_DAMAGE" ],
     "examine_action": "finite_water_source",
     "phase_targets": [ "t_ice_sh_thick", "t_ice_sh_thin", "t_pseudo_phase" ],
     "phase_temps": [ -15, -10 ],
