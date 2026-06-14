@@ -2358,6 +2358,9 @@ ret_val<void> play_instrument_iuse::can_use( const Character &p, const item &it,
         return ret_val<void>::make_failure( _( "You need to hold %s to play it." ),
                                             it.type_name() );
     }
+    if( p.controlling_vehicle ) {
+        return ret_val<void>::make_failure( _( "You can't do that while driving." ) );
+    }
     // No one-man band for now
     // Remove/rework this check after we will be able to distinguish between wind, string, and percussion instruments
     // TODO: allow playing several string/percussion instruments if you have additional arms

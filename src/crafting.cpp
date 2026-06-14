@@ -100,6 +100,7 @@ static const activity_id ACT_DISASSEMBLE( "ACT_DISASSEMBLE" );
 static const activity_id ACT_MULTIPLE_CRAFT( "ACT_MULTIPLE_CRAFT" );
 
 static const efftype_id effect_contacts( "contacts" );
+static const efftype_id effect_playing_instrument( "playing_instrument" );
 static const efftype_id effect_transition_contacts( "transition_contacts" );
 
 static const furn_str_id furn_f_fake_bench_hands( "f_fake_bench_hands" );
@@ -168,7 +169,15 @@ static bool crafting_allowed( const Character &p, const recipe &rec )
         // One day, NPCs may be able to drive.
         p.add_msg_player_or_npc( m_info,
                                  _( "You can't craft while driving!" ),
-                                 _( "<npcname> refuses to violate road safety guidelines by crafting while driving!" ) );
+                                 _( "<npcname> can't craft while driving!" ) );
+        return false;
+    }
+
+    if( p.has_effect( effect_playing_instrument ) ) {
+        // One day, NPCs may be able to drive.
+        p.add_msg_player_or_npc( m_info,
+                                 _( "You can't craft while playing an instrument!" ),
+                                 _( "<npcname> can't craft while playing an instrument!" ) );
         return false;
     }
 

@@ -33,6 +33,7 @@
 #include "contents_change_handler.h"
 #include "creature_tracker.h"
 #include "debug.h"
+#include "effect.h"
 #include "enums.h"
 #include "faction.h"
 #include "fault.h"
@@ -78,6 +79,8 @@
 static const activity_id ACT_VEHICLE( "ACT_VEHICLE" );
 
 static const ammotype ammo_battery( "battery" );
+
+static const efftype_id effect_playing_instrument( "effect_playing_instrument" );
 
 static const faction_id faction_no_faction( "no_faction" );
 
@@ -635,6 +638,7 @@ void veh_interact::cache_tool_availability_update_lifting( const tripoint_bub_ms
  *         LACK_SKILL if the player's skill isn't high enough,
  *         LOW_MORALE if the player's morale is too low while trying to perform
  *             an action requiring a minimum morale,
+ *         BUSY if playing an instrument or something.
  *         UNKNOWN_TASK if the requested operation is unrecognized.
  */
 task_reason veh_interact::cant_do( const map &here,  char mode )
@@ -647,6 +651,7 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
     bool enough_light = true;
     const vehicle_part_range vpr = veh->get_all_parts();
     avatar &player_character = get_avatar();
+    bool busy = !player_character.has_effect( effect_playing_instrument );
     switch( mode ) {
         case 'i':
             // install mode
@@ -774,6 +779,9 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
     // TODO: that is always false!
     if( !has_skill ) {
         return task_reason::LACK_SKILL;
+    }
+    if( busy ) {
+        return task_reason::BUSY;
     }
     return task_reason::CAN_DO;
 }
@@ -1053,6 +1061,9 @@ void veh_interact::do_install( map &here )
                 case task_reason::MOVING_VEHICLE:
                     msg = _( "You can't install parts while driving." );
                     return;
+                            case task_reason::BUSY:
+                        msg = _( "You are busy doing something else." );
+                        return;
                 default:
                     break;
             }
@@ -1145,6 +1156,9 @@ void veh_interact::do_repair( map &here )
                 return false;
             case task_reason::INVALID_TARGET:
                 msg = _( "There are no parts which can be repaired on this vehicle." );
+                return false;
+            case task_reason::BUSY:
+                msg = _( "You are busy doing something else." );
                 return false;
             default:
                 break;
@@ -1275,6 +1289,9 @@ void veh_interact::do_mend( map &here )
         case task_reason::MOVING_VEHICLE:
             msg = _( "You can't mend stuff while driving." );
             return;
+        case task_reason::BUSY:
+                msg = _( "You are busy doing something else." );
+                return;
         default:
             break;
     }
@@ -1309,6 +1326,10 @@ void veh_interact::do_refill( map &here )
 
         case task_reason::INVALID_TARGET:
             msg = _( "No parts can currently be refilled." );
+            return;
+
+        case task_reason::BUSY:
+            msg = _( "You are busy doing something else." );
             return;
 
         default:
@@ -1870,6 +1891,9 @@ void veh_interact::do_remove( map &here )
                 case task_reason::MOVING_VEHICLE:
                     msg = _( "Better not remove something while driving." );
                     return;
+                case task_reason::BUSY:
+                        msg = _( "You are busy doing something else." );
+                        return;
                 default:
                     break;
             }
@@ -1913,6 +1937,10 @@ void veh_interact::do_siphon( map &here )
             msg = _( "You can't siphon from a moving vehicle." );
             return;
 
+        case task_reason::BUSY:
+            msg = _( "You are busy doing something else." );
+            return;
+
         default:
             break;
     }
@@ -1951,6 +1979,10 @@ bool veh_interact::do_unload( map &here )
 
         case task_reason::MOVING_VEHICLE:
             msg = _( "You can't unload from a moving vehicle." );
+            return false;
+
+        case task_reason::BUSY:
+            msg = _( "You are busy doing something else." );
             return false;
 
         default:
