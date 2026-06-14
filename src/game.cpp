@@ -263,6 +263,7 @@ static const efftype_id effect_led_by_leash( "led_by_leash" );
 static const efftype_id effect_no_sight( "no_sight" );
 static const efftype_id effect_onfire( "onfire" );
 static const efftype_id effect_pet( "pet" );
+static const efftype_id effect_playing_instrument( "playing_instrument" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
@@ -9492,6 +9493,9 @@ void game::butcher()
         }
     }
 
+    if( u.has_effect( effect_playing_instrument ) ) {
+            add_msg( m_info, _( "You can't do that while playing an instrument." ) );
+    }
     if( !u.has_morale_to_craft() ) {
         if( butcher_select == BUTCHER_CORPSE || indexer_index == MULTIBUTCHER ) {
             add_msg( m_info,
