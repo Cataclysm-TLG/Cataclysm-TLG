@@ -2354,8 +2354,8 @@ ret_val<void> play_instrument_iuse::can_use( const Character &p, const item &it,
     if( p.is_mounted() ) {
         return ret_val<void>::make_failure( _( "You can't do that while mounted." ) );
     }
-    if( !p.is_worn( it ) && !p.is_wielding( it ) ) {
-        return ret_val<void>::make_failure( _( "You need to hold or wear %s to play it." ),
+    if( !p.is_wielding( it ) ) {
+        return ret_val<void>::make_failure( _( "You need to hold %s to play it." ),
                                             it.type_name() );
     }
     // No one-man band for now
@@ -2399,6 +2399,10 @@ std::optional<int> musical_instrument_actor::use( Character *p, item &it,
         return std::nullopt;
     }
 
+    if ( it.is_null() ) {
+        return std::nullopt;
+    }
+
     if( !p->is_npc() && music::is_active_music_id( music::music_id::instrument ) ) {
         music::deactivate_music_id( music::music_id::instrument );
         // Because musical instrument creates musical sound too
@@ -2423,7 +2427,7 @@ std::optional<int> musical_instrument_actor::use( Character *p, item &it,
 
     // Stop playing a wind instrument when winded or even eventually become winded while playing it?
     // It's impossible to distinguish instruments for now anyways.
-    if( p->has_effect( effect_sleep ) || p->has_effect( effect_stunned ) ||
+    if( p->in_sleep_state() || p->has_effect( effect_stunned ) ||
         p->has_effect( effect_asthma ) ) {
         p->add_msg_player_or_npc( m_bad,
                                   _( "You stop playing your %s." ),
@@ -2433,19 +2437,27 @@ std::optional<int> musical_instrument_actor::use( Character *p, item &it,
         return std::nullopt;
     }
 
-    // Check for worn or wielded - no "floating"/bionic instruments for now
-    // TODO: Distinguish instruments played with hands and with mouth, consider encumbrance
-    const int inv_pos = p->get_item_position( &it );
-    if( inv_pos >= 0 || inv_pos == INT_MIN ) {
+    // TODO: Allow playing instruments while deaf if extremely skilled.
+    if( p->is_deaf() ) {
         p->add_msg_player_or_npc( m_bad,
-                                  _( "You need to hold or wear %s to play it." ),
-                                  _( "<npcname> needs to hold or wear %s to play it." ),
+                                  _( "You can't hear anything, so you stop playing your %s." ),
+                                  _( "<npcname> can't hear anything, so they stops playing their %s." ),
                                   it.display_name() );
         it.active = false;
         return std::nullopt;
     }
 
-    // At speed this low you can't coordinate your actions well enough to play the instrument
+    // TODO: Distinguish instruments played with hands and with mouth, consider encumbrance.
+    if( &it != p->get_wielded_item().get_item() ) {
+        p->add_msg_player_or_npc( m_bad,
+                                  _( "You need to hold %s to play it." ),
+                                  _( "<npcname> needs to hold %s to play it." ),
+                                  it.display_name() );
+        it.active = false;
+        return std::nullopt;
+    }
+
+    // At speed this low you can't coordinate your actions well enough to play the instrument.
     if( p->get_speed() <= 25 + speed_penalty ) {
         p->add_msg_player_or_npc( m_bad,
                                   _( "You feel too weak to play your %s." ),
@@ -2455,7 +2467,7 @@ std::optional<int> musical_instrument_actor::use( Character *p, item &it,
         return std::nullopt;
     }
 
-    // We can play the music now
+    // We can play the music now.
     if( !p->is_npc() ) {
         music::activate_music_id( music::music_id::instrument );
     }
@@ -2496,13 +2508,13 @@ std::optional<int> musical_instrument_actor::use( Character *p, item &it,
     }
 
     if( !p->has_effect( effect_music ) && p->can_hear( p->pos_bub( *here ), volume ) ) {
-        // Sound code doesn't describe noises at the player position
+        // Sound code doesn't describe noises at the player position.
         if( desc != "music" ) {
             p->add_msg_if_player( m_info, desc );
         }
     }
 
-    // We already played the sounds, just handle applying effects now
+    // We already played the sounds, just handle applying effects now.
     iuse::play_music( p, p->pos_bub( *here ), volume, morale_effect, /*play_sounds=*/false );
 
     return 0;
