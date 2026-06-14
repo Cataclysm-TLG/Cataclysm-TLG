@@ -813,6 +813,16 @@ void map::vehmove()
         }
         level_cache &cache = *cache_lazy;
         for( vehicle *veh : cache.vehicle_list ) {
+            bool skip = false;
+            for( const vpart_reference &vp : veh->get_all_parts() ) {
+                // TODO: This is probably not efficient.
+                if( veh->avail_part_with_feature( vp.mount_pos(), "POWER_ARMOR_CONTROLS" ) ) {
+                    skip = true;
+                }
+            }
+            if( skip ) {
+                continue;
+            }
             if( veh->is_following ) {
                 veh->drive_to_local_target( this, player_pos, true );
             } else if( veh->is_patrolling ) {
@@ -970,7 +980,7 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
     // Split into vertical and horizontal movement
     const int &coll_velocity = vertical ? veh.vertical_velocity : veh.velocity;
     const int velocity_before = coll_velocity;
-    if( velocity_before == 0 && !veh.is_rotorcraft( *this ) && !veh.is_flying_in_air() ) {
+    if( velocity_before == 0 && !veh.is_rotorcraft( *this ) && !veh.is_flying_in_air() && !veh.is_power_armor() ) {
         debugmsg( "%s tried to move %s with no velocity",
                   veh.name, vertical ? "vertically" : "horizontally" );
         return &veh;

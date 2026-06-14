@@ -1070,7 +1070,7 @@ class vehicle
         void stop_engines( map &here );
         // Attempt to start the vehicle's active engines
         void start_engines( map &here, Character *driver = nullptr, bool take_control = false,
-                            bool autodrive = false );
+                            bool autodrive = false, bool power_armor = false );
 
         // Engine backfire, making a loud noise
         void backfire( map *here, const vehicle_part &vp ) const;
@@ -1776,6 +1776,7 @@ class vehicle
         bool is_flying_in_air() const;
         void set_flying( bool new_flying_value );
         bool is_rotorcraft( map &here ) const;
+        bool is_power_armor() const;
         // Can the vehicle safely fly? E.g. there haven't been any player modifications
         // of non-simple parts
         bool is_flyable() const;

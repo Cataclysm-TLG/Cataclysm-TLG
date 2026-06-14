@@ -219,6 +219,14 @@ tripoint_bub_ms Creature::pos_bub( const map &here ) const
 void Creature::setpos( map &here, const tripoint_bub_ms &p, bool check_gravity/* = true*/ )
 {
     const tripoint_abs_ms old_loc = pos_abs();
+    if( !is_monster() && as_character()->controlling_power_armor ) {
+        optional_vpart_position vp = here.veh_at( old_loc );
+        vehicle *veh = ( !vp ) ? nullptr : &vp->vehicle();
+        if( veh != nullptr ) {
+            const tripoint_rel_ms delta = p - here.get_bub( old_loc );
+            here.move_vehicle( *veh, delta, veh->face );
+        }
+    }
     set_pos_abs_only( here.get_abs( p ) );
     on_move( old_loc );
     if( check_gravity ) {
@@ -232,6 +240,15 @@ void Creature::setpos( map &here, const tripoint_bub_ms &p, bool check_gravity/*
 void Creature::setpos( const tripoint_abs_ms &p, bool check_gravity/* = true*/ )
 {
     const tripoint_abs_ms old_loc = pos_abs();
+    if( !is_monster() && as_character()->controlling_power_armor ) {
+        map &here = get_map();
+        optional_vpart_position vp = here.veh_at( old_loc );
+        vehicle *veh = ( !vp ) ? nullptr : &vp->vehicle();
+        if( veh != nullptr ) {
+            const tripoint_rel_ms delta = p - old_loc;
+            here.move_vehicle( *veh, delta, veh->face );
+        }
+    }
     set_pos_abs_only( p );
     on_move( old_loc );
     if( check_gravity ) {

@@ -5992,23 +5992,26 @@ void game::control_vehicle()
     vehicle *veh = nullptr;
     bool controls_ok = false;
     bool reins_ok = false;
+    bool power_armor_controls_ok = false;
     if( const optional_vpart_position vp = here.veh_at( u.pos_bub() ) ) {
         veh = &vp->vehicle();
         const int controls_idx = veh->avail_part_with_feature( vp->mount_pos(), "CONTROLS" );
         const int reins_idx = veh->avail_part_with_feature( vp->mount_pos(), "CONTROL_ANIMAL" );
-        controls_ok = controls_idx >= 0; // controls available to "drive"
-        reins_ok = reins_idx >= 0 // reins + animal available to "drive"
+        const int power_armor_controls_idx = veh->avail_part_with_feature( vp->mount_pos(), "POWER_ARMOR_CONTROLS" );
+        controls_ok = controls_idx >= 0; // Controls available to drive.
+        reins_ok = reins_idx >= 0 // Reins + animal available to drive.
                    && veh->has_engine_type( fuel_type_animal, false )
                    && veh->get_harnessed_animal( here );
+        power_armor_controls_ok = power_armor_controls_idx >= 0; // Power armor controls available to drive.
         if( veh->player_in_control( here, u ) ) {
-            // player already "driving" - offer ways to leave
-            if( controls_ok ) {
+            // Player already driving. Offer ways to leave.
+            if( controls_ok || power_armor_controls_ok ) {
                 veh->interact_with( &here, u.pos_bub() );
             } else if( reins_idx >= 0 ) {
                 u.controlling_vehicle = false;
                 add_msg( m_info, _( "You let go of the reins." ) );
             }
-        } else if( u.in_vehicle && ( controls_ok || reins_ok ) ) {
+        } else if( u.in_vehicle && ( controls_ok || reins_ok || power_armor_controls_ok ) ) {
             // player not driving but has controls or reins on tile
             if( veh->is_locked ) {
                 veh->interact_with( &here, u.pos_bub() );
@@ -6023,19 +6026,10 @@ void game::control_vehicle()
                     add_msg( m_info, _( "Something you are wearing hinders the use of both hands." ) );
                     return;
                 }
-                if( !u.has_two_arms_lifting() ) {
+                // Power armor needs two free hands. Most other vehicles just need one.
+                if( power_armor_controls_ok || ( !u.has_two_arms_lifting() || weapon->is_two_handed( u ) ) ) {
                     if( query_yn(
-                            _( "You can't drive because you have to wield a %s.\n\nPut it away?" ),
-                            weapon->tname() ) ) {
-                        if( !u.unwield() ) {
-                            return;
-                        }
-                    } else {
-                        return;
-                    }
-                } else if( weapon->is_two_handed( u ) ) {
-                    if( query_yn(
-                            _( "You can't drive because you have to wield a %s with both hands.\n\nPut it away?" ),
+                            _( "You can't operate the controls because you're holding a %s.\n\nPut it away?" ),
                             weapon->tname() ) ) {
                         if( !u.unwield() ) {
                             return;
@@ -6046,24 +6040,36 @@ void game::control_vehicle()
                 }
             }
             if( veh->engine_on ) {
-                u.controlling_vehicle = true;
-                add_msg( _( "You take control of the %s." ), veh->name );
+                if( power_armor_controls_ok ) {
+                    u.controlling_power_armor = true;
+                    add_msg( _( "You take control of the %s." ), veh->name );
+
+                } else {
+                    u.controlling_vehicle = true;
+                    add_msg( _( "You take control of the %s." ), veh->name );
+                }
             } else {
-                veh->start_engines( here, &u, true );
+                veh->start_engines( here, &u, true, false, power_armor_controls_ok );
             }
         }
     }
-    if( !controls_ok && !reins_ok ) { // no controls or reins under player position, search nearby
+    if( !controls_ok && !reins_ok && !power_armor_controls_ok ) { // No controls or reins under player position, search nearby.
         int num_valid_controls = 0;
         std::optional<tripoint_bub_ms> vehicle_position;
         std::optional<vpart_reference> vehicle_controls;
         for( const tripoint_bub_ms &elem : here.points_in_radius( get_player_character().pos_bub(), 1 ) ) {
             if( const optional_vpart_position vp = here.veh_at( elem ) ) {
                 const std::optional<vpart_reference> controls = vp.value().part_with_feature( "CONTROLS", true );
+                const std::optional<vpart_reference> power_armor_controls = vp.value().part_with_feature( "POWER_ARMOR_CONTROLS", true );
                 if( controls ) {
                     num_valid_controls++;
                     vehicle_position = elem;
                     vehicle_controls = controls;
+                }
+                if( power_armor_controls ) {
+                    num_valid_controls++;
+                    vehicle_position = elem;
+                    vehicle_controls = power_armor_controls;
                 }
             }
         }
