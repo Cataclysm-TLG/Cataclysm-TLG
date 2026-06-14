@@ -651,7 +651,7 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
     bool enough_light = true;
     const vehicle_part_range vpr = veh->get_all_parts();
     avatar &player_character = get_avatar();
-    bool busy = !player_character.has_effect( effect_playing_instrument );
+    bool busy = player_character.has_effect( effect_playing_instrument );
     switch( mode ) {
         case 'i':
             // install mode
