@@ -680,7 +680,7 @@ void monster::try_biosignature()
         return;
     }
     // Keep poops from being uniform, especially when monsters first spawn.
-    if( one_in( 2 ) ) {
+    if( one_in( 4 ) ) {
         return;
     }
     if( !biosignatures ) {

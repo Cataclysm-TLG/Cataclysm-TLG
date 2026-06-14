@@ -173,8 +173,8 @@
         }
       ],
       "place_monsters": [
-        { "monster": "DUMP_ANIMALS", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 5 },
-        { "monster": "DUMP_ZOMBIES", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 10 }
+        { "monster": "DUMP_ANIMALS", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 6 },
+        { "monster": "DUMP_ZOMBIES", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 12 }
       ]
     }
   },
