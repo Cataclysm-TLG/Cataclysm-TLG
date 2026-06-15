@@ -651,7 +651,7 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
     bool enough_light = true;
     const vehicle_part_range vpr = veh->get_all_parts();
     avatar &player_character = get_avatar();
-    bool busy = !player_character.has_effect( effect_playing_instrument );
+    bool busy = player_character.has_effect( effect_playing_instrument );
     switch( mode ) {
         case 'i':
             // install mode
@@ -1061,9 +1061,9 @@ void veh_interact::do_install( map &here )
                 case task_reason::MOVING_VEHICLE:
                     msg = _( "You can't install parts while driving." );
                     return;
-                            case task_reason::BUSY:
-                        msg = _( "You are busy doing something else." );
-                        return;
+                case task_reason::BUSY:
+                    msg = _( "You are busy doing something else." );
+                    return;
                 default:
                     break;
             }
@@ -1290,8 +1290,8 @@ void veh_interact::do_mend( map &here )
             msg = _( "You can't mend stuff while driving." );
             return;
         case task_reason::BUSY:
-                msg = _( "You are busy doing something else." );
-                return;
+            msg = _( "You are busy doing something else." );
+            return;
         default:
             break;
     }
@@ -1892,8 +1892,8 @@ void veh_interact::do_remove( map &here )
                     msg = _( "Better not remove something while driving." );
                     return;
                 case task_reason::BUSY:
-                        msg = _( "You are busy doing something else." );
-                        return;
+                    msg = _( "You are busy doing something else." );
+                    return;
                 default:
                     break;
             }

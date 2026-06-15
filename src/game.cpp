@@ -9494,7 +9494,7 @@ void game::butcher()
     }
 
     if( u.has_effect( effect_playing_instrument ) ) {
-            add_msg( m_info, _( "You can't do that while playing an instrument." ) );
+        add_msg( m_info, _( "You can't do that while playing an instrument." ) );
     }
     if( !u.has_morale_to_craft() ) {
         if( butcher_select == BUTCHER_CORPSE || indexer_index == MULTIBUTCHER ) {
