@@ -2402,7 +2402,7 @@ std::optional<int> musical_instrument_actor::use( Character *p, item &it,
         return std::nullopt;
     }
 
-    if ( it.is_null() ) {
+    if( it.is_null() ) {
         return std::nullopt;
     }
 
