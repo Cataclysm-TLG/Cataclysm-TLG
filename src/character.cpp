@@ -3244,7 +3244,7 @@ float Character::throwforce( Creature &victim ) const
     // stamina, pain etc. while monsters are not.
     float strength_factor = 0;
     if( get_arm_str() > 10 ) {
-        strength_factor = get_arm_str() / 100;
+        strength_factor = get_arm_str() / 100.f;
     }
     // TODO: Get encumbrance and burden involved here.
     float throwforce = ( ( ( get_arm_str() * ( 1.1 + strength_factor ) + ( ( get_skill_level(
@@ -13102,7 +13102,9 @@ int Character::mod_pain( int npain )
 
 int Character::max_injury_pain( bodypart_id part )
 {
-    return 300 - ( 300 * ( get_part_hp_cur( part ) / get_part_hp_max( part ) ) );
+    const int hp_cur = get_part_hp_cur( part );
+    const int hp_max = get_part_hp_max( part );
+    return 300 - ( 300 * hp_cur ) / hp_max;
 }
 
 void Character::set_pain( int npain )
