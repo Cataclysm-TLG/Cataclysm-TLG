@@ -2413,7 +2413,6 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
         if( psg && veh.player_in_control( here, *psg ) ) {
             const int lose_ctrl_roll = rng( 0, d_vel );
             ///\EFFECT_DEX reduces chance of losing control of vehicle when shaken
-
             ///\EFFECT_DRIVING reduces chance of losing control of vehicle when shaken
             if( lose_ctrl_roll > psg->dex_cur * 2 + psg->get_skill_level( skill_driving ) * 3 ) {
                 psg->add_msg_player_or_npc( m_warning,

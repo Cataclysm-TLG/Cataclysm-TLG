@@ -6021,5 +6021,15 @@
     "time": "4 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "carpet_scrap", 10 ] ] ]
+  },
+  {
+    "result": "wood_door",
+    "type": "uncraft",
+    "activity_level": "MODERATE_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "10 m",
+    "autolearn": true,
+    "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "components": [ [ [ "wood_panel", 1 ] ], [ [ "hinge", 2 ] ], [ [ "scrap", 6 ] ] ]
   }
 ]

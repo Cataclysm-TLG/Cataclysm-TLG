@@ -114,7 +114,10 @@
   {
     "id": "cattails_winter_harv",
     "type": "harvest",
-    "entries": [ { "drop": "cattail_rhizome", "base_num": [ 0, 2 ], "difficulty": 8 }, { "drop": "withered", "base_num": [ 1, 5 ], "difficulty": 3 } ]
+    "entries": [
+      { "drop": "cattail_rhizome", "base_num": [ 0, 2 ], "difficulty": 8 },
+      { "drop": "withered", "base_num": [ 1, 5 ], "difficulty": 3 }
+    ]
   },
   {
     "id": "cattails_summer_harv",
