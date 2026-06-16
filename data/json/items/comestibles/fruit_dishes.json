@@ -30,21 +30,41 @@
       { "type": "COMPONENT_ID", "condition": "apple", "name": { "str_sp": "apple fruit leather" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "apricot", "name": { "str_sp": "apricot fruit leather" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "banana", "name": { "str_sp": "banana fruit leather" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "blackberries", "name": { "str_sp": "blackberry fruit leather" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "blueberries", "name": { "str_sp": "blueberry fruit leather" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "blackberries",
+        "name": { "str_sp": "blackberry fruit leather" }
+      },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "blueberries",
+        "name": { "str_sp": "blueberry fruit leather" }
+      },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "cherries", "name": { "str_sp": "cherry fruit leather" } },
       { "type": "COMPONENT_ID", "condition": "chokeberries", "name": { "str_sp": "chokeberry fruit leather" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "crabapple", "name": { "str_sp": "crabapple fruit leather" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "elderberries", "name": { "str_sp": "elderberry fruit leather" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "elderberries",
+        "name": { "str_sp": "elderberry fruit leather" }
+      },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "grapefruit", "name": { "str_sp": "grapefruit leather" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "grapes", "name": { "str_sp": "grape fruit leather" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "guayaba", "name": { "str_sp": "guava fruit leather" } },
       { "type": "COMPONENT_ID", "condition": "hobbleberries", "name": { "str_sp": "hobbleberry fruit leather" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "huckleberries", "name": { "str_sp": "huckleberry fruit leather" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "huckleberries",
+        "name": { "str_sp": "huckleberry fruit leather" }
+      },
       { "type": "COMPONENT_ID", "condition": "irradiated_apple", "name": { "str_sp": "apple fruit leather" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "kiwi", "name": { "str_sp": "kiwi fruit leather" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "lulo", "name": { "str_sp": "lulo fruit leather" } },
-      { "type": "COMPONENT_ID", "condition": "m_stellatum_berries", "name": { "str_sp": "Solomon's seal fruit leather" } },
+      {
+        "type": "COMPONENT_ID",
+        "condition": "m_stellatum_berries",
+        "name": { "str_sp": "Solomon's seal fruit leather" }
+      },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mango", "name": { "str_sp": "mang fruit leathero" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "maracuya", "name": { "str_sp": "passionfruit leather" } },
       { "type": "COMPONENT_ID", "condition": "mayapple", "name": { "str_sp": "mayapple fruit leather" } },
@@ -57,14 +77,34 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "pear", "name": { "str_sp": "pear fruit leather" } },
       { "type": "COMPONENT_ID", "condition": "pineapple_chunks", "name": { "str_sp": "pineapple fruit leather" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "plums", "name": { "str_sp": "plum fruit leather" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "pomegranate", "name": { "str_sp": "pomegranate fruit leather" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "pomegranate",
+        "name": { "str_sp": "pomegranate fruit leather" }
+      },
       { "type": "COMPONENT_ID", "condition": "pumpkin_cut", "name": { "str_sp": "pumpkin fruit leather" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "raspberries", "name": { "str_sp": "raspberry fruit leather" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "rose_hips_cut", "name": { "str_sp": "rose hip fruit leather" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "strawberries", "name": { "str_sp": "strawberry fruit leather" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "raspberries",
+        "name": { "str_sp": "raspberry fruit leather" }
+      },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "rose_hips_cut",
+        "name": { "str_sp": "rose hip fruit leather" }
+      },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "strawberries",
+        "name": { "str_sp": "strawberry fruit leather" }
+      },
       { "type": "COMPONENT_ID", "condition": "tupelo_fruit", "name": { "str_sp": "tupelo fruit fruit leather" } },
       { "type": "COMPONENT_ID", "condition": "watermelon_wedge", "name": { "str_sp": "watermelon fruit leather" } },
-      { "type": "COMPONENT_ID", "condition": "wintergreen_berry", "name": { "str_sp": "wintergreen berry fruit leather" } }
+      {
+        "type": "COMPONENT_ID",
+        "condition": "wintergreen_berry",
+        "name": { "str_sp": "wintergreen berry fruit leather" }
+      }
     ],
     "weight": "34 g",
     "color": "pink",
@@ -311,7 +351,11 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "blackberries", "name": { "str_sp": "dehydrated blackberry" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "blueberries", "name": { "str_sp": "dehydrated blueberry" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "cherries", "name": { "str_sp": "dehydrated cherry" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "chokeberries", "name": { "str_sp": "dehydrated chokeberries" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "chokeberries",
+        "name": { "str_sp": "dehydrated chokeberries" }
+      },
       { "type": "COMPONENT_ID", "condition": "cholla_bud", "name": { "str_sp": "dehydrated cholla bud" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "coconut", "name": { "str_sp": "dehydrated coconut" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "crabapple", "name": { "str_sp": "dehydrated crabapple" } },
@@ -321,12 +365,20 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "grapes", "name": { "str_sp": "dehydrated grape" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "guayaba", "name": { "str_sp": "dehydrated guava" } },
       { "type": "COMPONENT_ID", "condition": "hobbleberries", "name": { "str_sp": "dehydrated hobbleberry" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "huckleberries", "name": { "str_sp": "dehydrated huckleberry" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "huckleberries",
+        "name": { "str_sp": "dehydrated huckleberry" }
+      },
       { "type": "COMPONENT_ID", "condition": "juice_pulp", "name": { "str_sp": "dehydrated juice pulp" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "kiwi", "name": { "str_sp": "dehydrated kiwi" } },
       { "type": "COMPONENT_ID", "condition": "lemon", "name": { "str_sp": "dehydrated lemon" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "lulo", "name": { "str_sp": "dehydrated lulo" } },
-      { "type": "COMPONENT_ID", "condition": "m_stellatum_berries", "name": { "str_sp": "dehydrated Solomon's seal" } },
+      {
+        "type": "COMPONENT_ID",
+        "condition": "m_stellatum_berries",
+        "name": { "str_sp": "dehydrated Solomon's seal" }
+      },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mango", "name": { "str_sp": "dehydrated mango" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "maracuya", "name": { "str_sp": "dehydrated passionfruit" } },
       { "type": "COMPONENT_ID", "condition": "mayapple", "name": { "str_sp": "dehydrated mayapple" } },
@@ -347,7 +399,11 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "strawberries", "name": { "str_sp": "dehydrated strawberry" } },
       { "type": "COMPONENT_ID", "condition": "tupelo_fruit", "name": { "str_sp": "dehydrated tupelo fruit" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "watermelon", "name": { "str_sp": "dehydrated watermelon" } },
-      { "type": "COMPONENT_ID", "condition": "wintergreen_berry", "name": { "str_sp": "dehydrated wintergreen berry" } }
+      {
+        "type": "COMPONENT_ID",
+        "condition": "wintergreen_berry",
+        "name": { "str_sp": "dehydrated wintergreen berry" }
+      }
     ],
     "weight": "75 g",
     "color": "magenta",
@@ -390,12 +446,20 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "grapes", "name": { "str_sp": "rehydrated grape" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "guayaba", "name": { "str_sp": "rehydrated guava" } },
       { "type": "COMPONENT_ID", "condition": "hobbleberries", "name": { "str_sp": "rehydrated hobbleberry" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "huckleberries", "name": { "str_sp": "rehydrated huckleberry" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "huckleberries",
+        "name": { "str_sp": "rehydrated huckleberry" }
+      },
       { "type": "COMPONENT_ID", "condition": "juice_pulp", "name": { "str_sp": "rehydrated juice pulp" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "kiwi", "name": { "str_sp": "rehydrated kiwi" } },
       { "type": "COMPONENT_ID", "condition": "lemon", "name": { "str_sp": "rehydrated lemon" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "lulo", "name": { "str_sp": "rehydrated lulo" } },
-      { "type": "COMPONENT_ID", "condition": "m_stellatum_berries", "name": { "str_sp": "rehydrated Solomon's seal" } },
+      {
+        "type": "COMPONENT_ID",
+        "condition": "m_stellatum_berries",
+        "name": { "str_sp": "rehydrated Solomon's seal" }
+      },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mango", "name": { "str_sp": "rehydrated mango" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "maracuya", "name": { "str_sp": "rehydrated passionfruit" } },
       { "type": "COMPONENT_ID", "condition": "mayapple", "name": { "str_sp": "rehydrated mayapple" } },
@@ -416,7 +480,11 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "strawberries", "name": { "str_sp": "rehydrated strawberry" } },
       { "type": "COMPONENT_ID", "condition": "tupelo_fruit", "name": { "str_sp": "rehydrated tupelo fruit" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "watermelon", "name": { "str_sp": "rehydrated watermelon" } },
-      { "type": "COMPONENT_ID", "condition": "wintergreen_berry", "name": { "str_sp": "rehydrated wintergreen berry" } }
+      {
+        "type": "COMPONENT_ID",
+        "condition": "wintergreen_berry",
+        "name": { "str_sp": "rehydrated wintergreen berry" }
+      }
     ],
     "weight": "150 g",
     "color": "pink",
@@ -453,7 +521,11 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "grapes", "name": { "str_sp": "grapes in syrup" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "guayaba", "name": { "str_sp": "guava in syrup" } },
       { "type": "COMPONENT_ID", "condition": "hobbleberries", "name": { "str_sp": "hobbleberries in syrup" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "huckleberries", "name": { "str_sp": "huckleberries in syrup" } },
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "huckleberries",
+        "name": { "str_sp": "huckleberries in syrup" }
+      },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "kiwi", "name": { "str_sp": "kiwi in syrup" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "lulo", "name": { "str_sp": "lulo in syrup" } },
       { "type": "COMPONENT_ID", "condition": "m_stellatum_berries", "name": { "str_sp": "Solomon's seal in syrup" } },
@@ -476,7 +548,11 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "strawberries", "name": { "str_sp": "strawberries in syrup" } },
       { "type": "COMPONENT_ID", "condition": "tupelo_fruit", "name": { "str_sp": "tupelo fruit in syrup" } },
       { "type": "COMPONENT_ID", "condition": "watermelon_wedge", "name": { "str_sp": "watermelon in syrup" } },
-      { "type": "COMPONENT_ID", "condition": "wintergreen_berry", "name": { "str_sp": "wintergreen berries in syrup" } }
+      {
+        "type": "COMPONENT_ID",
+        "condition": "wintergreen_berry",
+        "name": { "str_sp": "wintergreen berries in syrup" }
+      }
     ],
     "weight": "42 g",
     "color": "red",
