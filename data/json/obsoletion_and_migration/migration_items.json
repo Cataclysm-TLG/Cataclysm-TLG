@@ -4102,5 +4102,35 @@
     "type": "MIGRATION",
     "id": "clay_quern",
     "replace": "rock_quern"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_farmor",
+    "replace": "leather_armor_suit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_armor_farmor",
+    "replace": "leather_armor_suit_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_farmor_xs",
+    "replace": "leather_armor_suit_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_faux_farmor",
+    "replace": "leather_armor_suit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_armor_faux_farmor",
+    "replace": "leather_armor_suit_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_faux_farmor_xs",
+    "replace": "leather_armor_suit_xs"
   }
 ]

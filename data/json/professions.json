@@ -1959,7 +1959,7 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "armor_farmor" },
+          { "item": "leather_armor_suit" },
           { "item": "socks" },
           { "item": "boots_fur" },
           { "item": "hat_fur" },
