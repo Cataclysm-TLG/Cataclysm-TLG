@@ -1351,7 +1351,7 @@
       "items": {
         "-": { "item": "clutter_mansion", "chance": 1 },
         ".": { "item": "clutter_basement", "chance": 1 },
-        "x": { "item": "television", "chance": 80 },
+        "x": { "item": "a_television", "chance": 80 },
         "J": { "item": "fridgesnacks", "chance": 45 },
         "!": { "item": "crate_stack", "chance": 100 },
         "m": { "item": "vending_food", "chance": 40 },
