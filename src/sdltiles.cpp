@@ -4651,12 +4651,36 @@ void draw_terminal_size_preview()
     }
 }
 
+// Mark the frame dirty after an Android keyboard / shortcut-bar state change so
+// the strip is rebuilt to reflect the new state on the next draw pass.
+static void android_request_repaint()
+{
+    needupdate = true;
+    ui_manager::redraw_invalidated();
+}
+
+// The SDL "text input active" flag can be set while the keyboard never actually
+// appeared on screen, which would wrongly hide the shortcut strip. Trust the
+// platform IME-insets report once we have one; fall back to the SDL flag only
+// until the first report arrives.
+static bool android_keyboard_occludes_shortcuts()
+{
+    if( !IsTextInputActive( ::window.get() ) ) {
+        return false;
+    }
+    SDL_Rect frame;
+    bool has_frame = false;
+    bool visible = false;
+    visible_frame_inbox.read_frame( frame, has_frame, visible );
+    return has_frame ? ( visible && frame.h > 0 ) : true;
+}
+
 // Draw quick shortcuts on top of the game view
 void draw_quick_shortcuts()
 {
 
     if( !quick_shortcuts_enabled ||
-        IsTextInputActive( ::window.get() ) ||
+        android_keyboard_occludes_shortcuts() ||
         ( get_option<bool>( "ANDROID_HIDE_HOLDS" ) && !is_quick_shortcut_touch && finger_down_time > 0 &&
           GetTicks() - finger_down_time >= static_cast<uint32_t>(
               get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) ) { // player is swipe + holding in a direction
@@ -5016,6 +5040,14 @@ bool is_string_input( input_context &ctx )
            || category == "HELP_KEYBINDINGS";
 }
 
+// True when the soft keyboard is legitimately wanted for this context and CDDA
+// must not auto-hide it or convert keystrokes to quick shortcuts: a legacy
+// string-input/curses context, or an inventory quantity field.
+static bool android_wants_text_input( input_context &ctx )
+{
+    return is_string_input( ctx ) || ctx.allow_text_entry;
+}
+
 int get_key_event_from_string( const std::string &str )
 {
     if( !str.empty() ) {
@@ -5224,13 +5256,198 @@ static void CheckMessages()
         input_context *new_input_context = *--input_context::input_context_stack.end();
         if( new_input_context && *new_input_context != touch_input_context ) {
 
-            // If we were in an allow_text_entry input context, and text input is still active, and we're auto-managing keyboard, hide it.
-            if( touch_input_context.allow_text_entry &&
-                !new_input_context->allow_text_entry &&
-                !is_string_input( *new_input_context ) &&
-                IsTextInputActive( ::window.get() ) &&
-                get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
-                focus_aware_stop_text_input();
+        // If we were in an allow_text_entry input context, and text input is still active, and we're auto-managing keyboard, hide it.
+        if( touch_input_context.allow_text_entry &&
+            !android_wants_text_input( *new_input_context ) &&
+            IsTextInputActive( ::window.get() ) &&
+            get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
+            focus_aware_stop_text_input();
+        }
+
+        touch_input_context = *new_input_context;
+        needupdate = true;
+        ui_manager::redraw_invalidated();
+    }
+
+    bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
+    quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
+                                 touch_input_context.get_category() )];
+
+    // Don't do this logic if we already need an update, otherwise we're likely to overload the game with too much input on hold repeat events
+    if( !needupdate ) {
+
+        // Check action weightings and auto-add any immediate-surrounding actions as quick shortcuts
+        // This code is based heavily off action.cpp handle_action_menu() which puts common shortcuts at the top
+        if( is_default_mode && get_option<bool>( "ANDROID_SHORTCUT_AUTOADD" ) ) {
+            static int last_moves_since_last_save = -1;
+            if( last_moves_since_last_save != g->get_moves_since_last_save() ) {
+                last_moves_since_last_save = g->get_moves_since_last_save();
+
+                // Actions to add
+                std::set<action_id> actions;
+
+                // Actions to remove - we only want to remove things that we're 100% sure won't be useful to players otherwise
+                std::set<action_id> actions_remove;
+
+                Character &player_character = get_player_character();
+                // Check if we're in a potential combat situation, if so, sort a few actions to the top.
+                if( !player_character.get_hostile_creatures( MAX_VIEW_DISTANCE ).empty() ) {
+                    // Only prioritize movement options if we're not driving.
+                    if( !player_character.controlling_vehicle ) {
+                        actions.insert( ACTION_CYCLE_MOVE );
+                    }
+                    // Only prioritize fire weapon options if we're wielding a ranged weapon.
+                    item_location wielded = player_character.get_wielded_item();
+                    if( wielded ) {
+                        if( wielded->is_gun() || wielded->has_flag( flag_REACH_ATTACK ) ) {
+                            actions.insert( ACTION_FIRE );
+                        }
+                    }
+                }
+
+                // If we're already running, make it simple to toggle running to off.
+                if( player_character.is_running() ) {
+                    actions.insert( ACTION_TOGGLE_RUN );
+                }
+                // If we're already crouching, make it simple to toggle crouching to off.
+                if( player_character.is_crouching() ) {
+                    actions.insert( ACTION_TOGGLE_CROUCH );
+                }
+                // If we're already prone, make it simple to toggle prone to off.
+                if( player_character.is_prone() ) {
+                    actions.insert( ACTION_TOGGLE_PRONE );
+                }
+
+                // We're not already running or in combat, so remove cycle walk/run
+                if( std::find( actions.begin(), actions.end(), ACTION_CYCLE_MOVE ) == actions.end() ) {
+                    actions_remove.insert( ACTION_CYCLE_MOVE );
+                }
+
+                map &here = get_map();
+                // Check if we can perform one of our actions on nearby terrain. If so,
+                // display that action at the top of the list.
+                for( int dx = -1; dx <= 1; dx++ ) {
+                    for( int dy = -1; dy <= 1; dy++ ) {
+                        int x = player_character.posx( here ) + dx;
+                        int y = player_character.posy( here ) + dy;
+                        int z = player_character.posz();
+                        const tripoint pos( x, y, z );
+                        const tripoint_bub_ms bub_pos( pos );
+                        // Check if we're near a vehicle, if so, vehicle controls should be top.
+                        {
+                            const optional_vpart_position vp = here.veh_at( bub_pos );
+                            if( vp ) {
+                                if( const std::optional<vpart_reference> controlpart = vp.part_with_feature( "CONTROLS", true ) ) {
+                                    actions.insert( ACTION_CONTROL_VEHICLE );
+                                }
+                                const std::optional<vpart_reference> openablepart = vp.part_with_feature( "OPENABLE", true );
+                                if( openablepart && openablepart->part().open && ( dx != 0 ||
+                                        dy != 0 ) ) { // an open door adjacent to us
+                                    actions.insert( ACTION_CLOSE );
+                                }
+                                const std::optional<vpart_reference> curtainpart = vp.part_with_feature( "CURTAIN", true );
+                                if( curtainpart && curtainpart->part().open && ( dx != 0 || dy != 0 ) ) {
+                                    actions.insert( ACTION_CLOSE );
+                                }
+                                const std::optional<vpart_reference> cargopart = vp.cargo();
+                                if( cargopart && ( !cargopart->items().empty() ) ) {
+                                    actions.insert( ACTION_PICKUP );
+                                }
+                            }
+                        }
+
+                        if( dx != 0 || dy != 0 ) {
+                            // Check for actions that work on nearby tiles
+                            //if( can_interact_at( ACTION_OPEN, here, pos ) ) {
+                            // don't bother with open since user can just walk into target
+                            //}
+                            if( can_interact_at( ACTION_CLOSE, here, bub_pos ) ) {
+                                actions.insert( ACTION_CLOSE );
+                            }
+                            if( can_interact_at( ACTION_EXAMINE, here, bub_pos ) ) {
+                                actions.insert( ACTION_EXAMINE );
+                            }
+                        } else {
+                            // Check for actions that work on own tile only
+                            if( can_interact_at( ACTION_BUTCHER, here, bub_pos ) ) {
+                                actions.insert( ACTION_BUTCHER );
+                            } else {
+                                actions_remove.insert( ACTION_BUTCHER );
+                            }
+
+                            if( can_interact_at( ACTION_MOVE_UP, here, bub_pos ) ) {
+                                actions.insert( ACTION_MOVE_UP );
+                            } else {
+                                actions_remove.insert( ACTION_MOVE_UP );
+                            }
+
+                            if( can_interact_at( ACTION_MOVE_DOWN, here, bub_pos ) ) {
+                                actions.insert( ACTION_MOVE_DOWN );
+                            } else {
+                                actions_remove.insert( ACTION_MOVE_DOWN );
+                            }
+                        }
+
+                        // Check for actions that work on nearby tiles and own tile
+                        if( can_interact_at( ACTION_PICKUP, here, bub_pos ) ) {
+                            actions.insert( ACTION_PICKUP );
+                        }
+                    }
+                }
+
+                // We're not near a vehicle, so remove control vehicle
+                if( std::find( actions.begin(), actions.end(), ACTION_CONTROL_VEHICLE ) == actions.end() ) {
+                    actions_remove.insert( ACTION_CONTROL_VEHICLE );
+                }
+
+                // We're not able to close anything nearby, so remove it
+                if( std::find( actions.begin(), actions.end(), ACTION_CLOSE ) == actions.end() ) {
+                    actions_remove.insert( ACTION_CLOSE );
+                }
+
+                // We're not able to examine anything nearby, so remove it
+                if( std::find( actions.begin(), actions.end(), ACTION_EXAMINE ) == actions.end() ) {
+                    actions_remove.insert( ACTION_EXAMINE );
+                }
+
+                // We're not able to pickup anything nearby, so remove it
+                if( std::find( actions.begin(), actions.end(), ACTION_PICKUP ) == actions.end() ) {
+                    actions_remove.insert( ACTION_PICKUP );
+                }
+
+                // Check if we can't move because of safe mode - if so, add ability to ignore
+                if( g && !g->check_safe_mode_allowed( false ) ) {
+                    actions.insert( ACTION_IGNORE_ENEMY );
+                    actions.insert( ACTION_TOGGLE_SAFEMODE );
+                } else {
+                    actions_remove.insert( ACTION_IGNORE_ENEMY );
+                    actions_remove.insert( ACTION_TOGGLE_SAFEMODE );
+                }
+
+                // Check if we're significantly hungry or thirsty - if so, add eat
+                if( player_character.get_hunger() > 100 || player_character.get_thirst() > 40 ) {
+                    actions.insert( ACTION_EAT );
+                }
+
+                // Check if we're dead tired - if so, add sleep
+                if( player_character.get_sleepiness() > sleepiness_levels::DEAD_TIRED ) {
+                    actions.insert( ACTION_SLEEP );
+                }
+
+                for( const auto &action : actions ) {
+                    if( add_best_key_for_action_to_quick_shortcuts( action, touch_input_context.get_category(),
+                            !get_option<bool>( "ANDROID_SHORTCUT_AUTOADD_FRONT" ) ) ) {
+                        needupdate = true;
+                    }
+                }
+
+                size_t old_size = qsl.size();
+                for( const auto &action_remove : actions_remove ) {
+                    remove_action_from_quick_shortcuts( action_remove, touch_input_context.get_category() );
+                }
+                if( qsl.size() != old_size ) {
+                    needupdate = true;
+                }
             }
         }
 
@@ -5425,6 +5642,7 @@ static void CheckMessages()
             if( !quick_shortcuts_toggle_handled ) {
                 quick_shortcuts_enabled = !quick_shortcuts_enabled;
                 quick_shortcuts_toggle_handled = true;
+                android_request_repaint();
                 refresh_display();
 
                 // Display an Android toast message
@@ -5598,7 +5816,7 @@ static void CheckMessages()
                             last_input = input_event( lc, input_event_t::keyboard_char );
 #if defined(__ANDROID__)
                             if( !android_is_hardware_keyboard_available() ) {
-                                if( !is_string_input( touch_input_context ) && !touch_input_context.allow_text_entry ) {
+                                if( !android_wants_text_input( touch_input_context ) ) {
                                     if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
                                         focus_aware_stop_text_input();
                                     }
@@ -5610,7 +5828,7 @@ static void CheckMessages()
                                                                      touch_input_context.get_category() )];
                                         qsl.remove( last_input );
                                         add_quick_shortcut( qsl, last_input, false, true );
-                                        ui_manager::redraw_invalidated();
+                                        android_request_repaint();
                                         refresh_display();
                                     }
                                 } else if( lc == '\n' || lc == KEY_ESCAPE ) {
@@ -5632,11 +5850,9 @@ static void CheckMessages()
                     if( GetKeysym( ev ).sym == SDLK_AC_BACK ) {
                         if( ticks - ac_back_down_time <= static_cast<uint32_t>
                             ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-                            if( IsTextInputActive( ::window.get() ) ) {
-                                focus_aware_stop_text_input();
-                            } else {
                                 focus_aware_start_text_input();
                             }
+                            android_request_repaint();
                         }
                         ac_back_down_time = 0;
                     }
@@ -5668,7 +5884,7 @@ static void CheckMessages()
                             last_input = input_event( lc, input_event_t::keyboard_char );
 #if defined(__ANDROID__)
                             if( !android_is_hardware_keyboard_available() ) {
-                                if( !is_string_input( touch_input_context ) && !touch_input_context.allow_text_entry ) {
+                                if( !android_wants_text_input( touch_input_context ) ) {
                                     if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
                                         focus_aware_stop_text_input();
                                     }
@@ -5677,6 +5893,7 @@ static void CheckMessages()
                                                                  touch_input_context.get_category() )];
                                     qsl.remove( last_input );
                                     add_quick_shortcut( qsl, last_input, false, true );
+                                    android_request_repaint();
                                     refresh_display();
                                 } else if( lc == '\n' || lc == KEY_ESCAPE ) {
                                     if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
@@ -6030,8 +6247,8 @@ static void CheckMessages()
                         is_three_finger_touch = false;
                         finger_down_time = 0;
                         finger_repeat_time = 0;
-                        needupdate = true; // ensure virtual joystick and quick shortcuts are updated properly
-                        ui_manager::redraw_invalidated();
+                        // ensure virtual joystick and quick shortcuts are updated properly
+                        android_request_repaint();
                         refresh_display(); // as above, but actually redraw it now as well
                     } else if( slot == 1 ) {
                         if( is_two_finger_touch ) {
