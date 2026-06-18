@@ -293,7 +293,7 @@
     "dynamic_line": {
       "npc_has_var": "general_none_Alonso_accent",
       "value": "asked",
-      "no": "Alonso has many a tale to tell, all slow and drawn-out like, a sensual seduction of the -- how you say?  Ears.  There are dark days ahead, but perhaps together we can bring a little light?  Or at least a little heat.  This is a science joke I make for you.  Friction, it is the joke.",
+      "no": "Alonso has many a tale to tell, all slow and drawn-out like, a sensual seduction of the -- how you say?  Ears.  The times, they are bad now, but perhaps together we can bring a little light?  Or at least a little heat.  This is a science joke I make for you.  Friction, it is the joke.",
       "yes": "I'm tryin' ta forget, y'know?  Don't like thinkin' about the past.  Better to plan for the future, even if the future looks grim."
     },
     "responses": [

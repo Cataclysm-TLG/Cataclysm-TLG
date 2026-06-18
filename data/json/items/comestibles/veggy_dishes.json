@@ -622,7 +622,7 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 525,
-    "description": "A tofu stirfry with rice and a sweet, bold flavor sure to stay on your mind through these dark days.",
+    "description": "A tofu stirfry with rice and a sweet, bold flavor.",
     "price": "3 USD",
     "price_postapoc": "50 cent",
     "material": [ "vegetable" ],
