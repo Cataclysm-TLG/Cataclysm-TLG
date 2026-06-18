@@ -5588,14 +5588,8 @@ void Character::update_needs( int rate_multiplier )
         set_stim( std::max( current_stim - rate_multiplier, 0 ) );
     }
 
-    // Only spend painkiller to treat pain we actually feel.
-    if( get_painkiller() > 0 && get_perceived_pain() > 0 ) {
-        const int spend = std::min( {
-            get_painkiller(),
-            rate_multiplier,
-            get_perceived_pain()
-        } );
-        mod_painkiller( -spend );
+    if( get_painkiller() > 0 ) {
+        mod_painkiller( -std::min( get_painkiller(), rate_multiplier ) );
     }
 
     if( get_bp_effect_mod() > 0 ) {
