@@ -2639,7 +2639,7 @@ bool cata_tiles::draw_from_id_string_internal(
     if( !tt ) {
         if( category == TILE_CATEGORY::TERRAIN && !here.dont_draw_lower_floor( tripoint_bub_ms( pos ) ) ) {
             draw_zlevel_overlay( tripoint_bub_ms( pos ), ll, height_3d );
-            if( id == "t_open_air" ) {
+            if( id == "t_open_air" || here.has_flag_ter( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, pos ) ) {
                 return true;
             }
         }

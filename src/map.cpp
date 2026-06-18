@@ -8110,6 +8110,8 @@ bool map::dont_draw_lower_floor( const tripoint_bub_ms &p ) const
         return true;
     } else if( !inbounds( p ) ) {
         return false;
+    } else if( has_flag_ter( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, p ) ) {
+        return false;
     } else {
         return get_cache( p.z() ).floor_cache[p.x()][p.y()];
     }
@@ -10924,12 +10926,6 @@ void map::build_outside_cache( const int zlev )
     cata::mdarray<bool, point_bub_ms, padded_w, padded_h> padded_cache;
 
     auto &outside_cache = ch.outside_cache;
-    if( zlev < 0 ) {
-        std::uninitialized_fill_n(
-            &outside_cache[0][0], MAPSIZE_X * MAPSIZE_Y, false );
-        return;
-    }
-
     padded_cache.fill( true );
 
     for( int smx = 0; smx < my_MAPSIZE; ++smx ) {

@@ -5766,7 +5766,6 @@ bool game::is_sheltered( map *here, const tripoint_bub_ms &p )
     bool is_inside = vp && vp->is_inside();
 
     return !here->is_outside( p ) ||
-           p.z() < 0 ||
            is_inside;
 }
 

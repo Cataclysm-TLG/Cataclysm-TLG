@@ -244,7 +244,6 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_RAIL: return "RAIL";
         case ter_furn_flag::TFLAG_THIN_OBSTACLE: return "THIN_OBSTACLE";
         case ter_furn_flag::TFLAG_SMALL_PASSAGE: return "SMALL_PASSAGE";
-        case ter_furn_flag::TFLAG_Z_TRANSPARENT: return "Z_TRANSPARENT";
         case ter_furn_flag::TFLAG_SUN_ROOF_ABOVE: return "SUN_ROOF_ABOVE";
         case ter_furn_flag::TFLAG_FUNGUS: return "FUNGUS";
         case ter_furn_flag::TFLAG_LOCKED: return "LOCKED";
