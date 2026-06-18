@@ -77,7 +77,7 @@
     "vitamins": [ [ "vegetable_allergen", 1 ] ],
     "flags": [ "EDIBLE_FROZEN" ],
     "into": "flour",
-    "recipe": "flour_mill_2_15"
+    "recipe": "flour_wheat_free_mill_2_15"
   },
   {
     "type": "ITEM",
