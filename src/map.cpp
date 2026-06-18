@@ -10926,12 +10926,6 @@ void map::build_outside_cache( const int zlev )
     cata::mdarray<bool, point_bub_ms, padded_w, padded_h> padded_cache;
 
     auto &outside_cache = ch.outside_cache;
-    if( zlev < 0 ) {
-        std::uninitialized_fill_n(
-            &outside_cache[0][0], MAPSIZE_X * MAPSIZE_Y, false );
-        return;
-    }
-
     padded_cache.fill( true );
 
     for( int smx = 0; smx < my_MAPSIZE; ++smx ) {
