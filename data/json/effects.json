@@ -4402,10 +4402,10 @@
     "id": "opioid_eff",
     "//": "Pain relief increases linearly. Vomit chance increases and then becomes impossible due to CNS depression. Sleep is mostly impossible but ramps up sharply at i4 toward 100% at i7.",
     "name": [
-      "Pain Relief",
-      "Painkillers",
-      "Heavy Opioid Euphoria",
+      "Opioid Painkillers",
+      "Opipid Buzz",
       "Opioid High",
+      "Heavy Opioid High",
       "Nodding Out",
       "Opioid Overdose",
       "Severe Opioid Overdose"
@@ -4422,7 +4422,7 @@
     "blood_analysis_description": "Opioids",
     "max_intensity": 7,
     "miss_messages": [ [ "You feel numb.", 1 ] ],
-    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 250000 ], [ 1, 50000 ], [ 1, 5000 ] ],
+    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 500000 ], [ 1, 100000 ], [ 1, 5000 ] ],
     "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
     "pkill_addict_reduces": true,
     "base_mods": {
@@ -4434,10 +4434,10 @@
       "fatigue_max_val": [ 150 ],
       "cough_chance": [ -1002 ],
       "sleep_chance": [ -584 ],
-      "sleep_chance_bot": [ 1000 ],
+      "sleep_chance_bot": [ 6000 ],
       "sleep_tick": [ 1800 ],
       "sleep_min": [ 5 ],
-      "sleep_max": [ 10 ],
+      "sleep_max": [ 50 ],
       "pkill_max_val": [ 15 ],
       "pkill_min": [ 1 ],
       "pkill_tick": [ 45 ]
