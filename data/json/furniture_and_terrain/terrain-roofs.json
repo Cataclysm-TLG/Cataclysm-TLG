@@ -390,7 +390,7 @@
     "symbol": "#",
     "color": [ "light_green", "green", "yellow_yellow", "brown" ],
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "CLIMBABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "CLIMBABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -400,7 +400,7 @@
     "symbol": "#",
     "color": [ "green" ],
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -410,7 +410,7 @@
     "symbol": "#",
     "color": "brown",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -420,7 +420,7 @@
     "symbol": "#",
     "color": "brown",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -430,7 +430,7 @@
     "symbol": "#",
     "color": "brown",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -440,7 +440,7 @@
     "symbol": "#",
     "color": "brown",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -451,7 +451,7 @@
     "symbol": "#",
     "color": "brown",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -462,7 +462,17 @@
     "symbol": "#",
     "color": "brown",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_treetop_willow",
+    "name": "giant fern top",
+    "description": "The top of a willow tree.  There is enough room to perch up here, but only just.",
+    "symbol": "#",
+    "color": "red",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -472,6 +482,6 @@
     "symbol": "#",
     "color": "red",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   }
 ]

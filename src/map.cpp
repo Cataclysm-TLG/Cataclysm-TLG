@@ -8110,6 +8110,8 @@ bool map::dont_draw_lower_floor( const tripoint_bub_ms &p ) const
         return true;
     } else if( !inbounds( p ) ) {
         return false;
+    } else if( has_flag_ter( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, p ) ) {
+        return false;
     } else {
         return get_cache( p.z() ).floor_cache[p.x()][p.y()];
     }
