@@ -59,7 +59,7 @@
     "type": "item_group",
     "id": "REFUGEE_Fatima_carried",
     "subtype": "collection",
-    "entries": [ { "item": "weldtank" } ]
+    "entries": [ { "item": "tinyweldtank" } ]
   },
   {
     "type": "item_group",
