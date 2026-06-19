@@ -73,7 +73,7 @@
           [ "null", 440 ]
         ]
       },
-      "2": { "chunks": [ [ "industrial_1x1_solar", 4 ], [ "industrial_1x1_solar_v2", 1 ] ] },
+      "2": { "chunks": [ [ "industrial_1x1_solar", 4 ], [ "industrial_1x1_solar_v2", 1 ], [ "null", 3 ] ] },
       "3": {
         "chunks": [
           [ "null", 15 ],

@@ -779,6 +779,15 @@
     ]
   },
   {
+    "id": "racing_tire_used",
+    "type": "item_group",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "tire_medium_slick", "prob": 50, "damage": [ 0, 5 ] },
+      { "item": "tire_medium", "prob": 50, "damage": [ 0, 5 ] }
+    ]
+  },
+  {
     "id": "supplies_spares_vehicle",
     "type": "item_group",
     "//": "Spare parts for crafting or mending vehicle parts",
