@@ -65,8 +65,8 @@
       "0": "f_manual_tire_changer",
       "8": "f_gas_tank"
     },
-    "item": { "X": { "item": "racing_tire_used", "repeat": [ 1, 3 ] } },
     "items": {
+      "X": { "item": "racing_tire_used", "repeat": [ 1, 3 ] },
       "b": [
         { "item": "softdrinks_canned", "chance": 1, "repeat": [ 0, 2 ] },
         { "item": "snacks", "chance": 1, "repeat": [ 0, 2 ] },
