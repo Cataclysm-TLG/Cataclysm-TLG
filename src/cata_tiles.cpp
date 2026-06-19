@@ -2634,10 +2634,17 @@ bool cata_tiles::draw_from_id_string_internal(
 
     map &here = get_map();
     const std::string &found_id = res ? res->id() : id;
+    // lit_level lower_ll = ll;
+    // if( ll != lit_level::DARK ) {
+    //     lower_ll = lit_level::DARK;
+    // }
+    if( category == TILE_CATEGORY::TERRAIN && here.has_flag( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, pos ) && id != "t_open_air" ) {
+        draw_zlevel_overlay( tripoint_bub_ms( pos ), ll, height_3d );
+    }
 
     // Unknown tile fallback
     if( !tt ) {
-        if( category == TILE_CATEGORY::TERRAIN && !here.dont_draw_lower_floor( tripoint_bub_ms( pos ) ) ) {
+        if( category == TILE_CATEGORY::TERRAIN && !here.dont_draw_lower_floor( tripoint_bub_ms( pos ) ) && !here.has_flag( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, pos ) ) {
             draw_zlevel_overlay( tripoint_bub_ms( pos ), ll, height_3d );
             if( id == "t_open_air" ) {
                 return true;
@@ -3353,6 +3360,7 @@ bool cata_tiles::draw_terrain_below( const tripoint_bub_ms &p, const lit_level, 
     } else if( curr_ter.has_flag( ter_furn_flag::TFLAG_SEEN_FROM_ABOVE ) ||
                curr_ter.has_flag( ter_furn_flag::TFLAG_NO_FLOOR ) ||
                curr_ter.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER ) ||
+               curr_ter.has_flag( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR ) ||
                curr_ter.movecost == 0 ) {
         col = curr_ter.color();
     } else {
