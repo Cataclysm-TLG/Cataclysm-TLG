@@ -1605,7 +1605,7 @@ bool npc::wield( item &it )
     if( has_wield_conflicts( it ) && !get_wielded_item()->has_item( it ) ) {
         stow_item( *get_wielded_item() );
     }
-    if( !Character::wield( it ) ) {
+    if( !Character::wield( it, true ) ) {
         return false;
     }
     if( get_wielded_item() ) {

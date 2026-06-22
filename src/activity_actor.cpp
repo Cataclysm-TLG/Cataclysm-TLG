@@ -3159,6 +3159,10 @@ void efile_activity_actor::start( player_activity &act, Character &who )
         }
     }
     for( item_location &i : target_edevices ) {
+        if( i->is_null() ) {
+            who.cancel_activity();
+            return;
+        }
         if( !i->has_pocket_type( pocket_type::E_FILE_STORAGE ) ) {
             debugmsg( "invalid item %s provided to efile activity; must have \"E_FILE_STORAGE\" pocket",
                       i->tname() );
@@ -3539,6 +3543,10 @@ void efile_activity_actor::combo_next_activity( Character &who )
 
     if( combo_type == COMBO_MOVE_ONTO_BROWSE ) {
         for( item_location &edevice : target_edevices_copy ) {
+            if( edevice->is_null() ) {
+                who.cancel_activity();
+                return;
+            }
             for( item *efile : edevice->efiles() ) {
                 all_updated_files.emplace_back( edevice, efile );
             }
@@ -3546,6 +3554,10 @@ void efile_activity_actor::combo_next_activity( Character &who )
 
         units::ememory total_ememory;
         for( item_location &edevice : target_edevices_copy ) {
+            if( edevice->is_null() ) {
+                who.cancel_activity();
+                return;
+            }
             if( edevice->is_browsed() ) {
                 for( item *efile : edevice->efiles() ) {
                     total_ememory += efile->ememory_size();
@@ -3754,6 +3766,9 @@ bool efile_activity_actor::efile_action_is_from( efile_action action_type )
 bool efile_activity_actor::efile_skip_copy( const efile_transfer &transfer, const item &efile )
 {
     auto check_for_file = [&efile]( const item_location & edevice ) {
+        if( edevice->is_null() ) {
+            return true;
+        }
         for( const item *i : edevice->efiles() ) {
             if( i->typeId() == efile.typeId() ) {
                 return true;
