@@ -646,11 +646,12 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     std::string weapon_string;
     if( !cur_weap.is_null() ) {
         weapon_string = string_format(
-            _( "<color_light_red>Attacking your %s will take a long time. Are you sure you want to continue?</color>" ),
-            cur_weap.display_name()
-        );
+                            _( "<color_light_red>Attacking your %s will take a long time. Are you sure you want to continue?</color>" ),
+                            cur_weap.display_name()
+                        );
     } else {
-        weapon_string = _( "<color_light_red>Attacking unarmed will take a long time. Are you sure you want to continue?</color>" );
+        weapon_string =
+            _( "<color_light_red>Attacking unarmed will take a long time. Are you sure you want to continue?</color>" );
     }
 
     if( is_avatar() && move_cost >= 500 && calendar::turn > melee_warning_turn ) {
