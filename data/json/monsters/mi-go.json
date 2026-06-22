@@ -112,7 +112,7 @@
   {
     "id": "mon_mi_go_surgeon",
     "type": "MONSTER",
-    "name": { "str": "mi-go surgeon" },
+    "name": { "str": "mi-go vivisector" },
     "description": "This mi-go has a slender body with snaking carapace along it, and even more paired clawed appendages.  Its claws are smaller and more delicate looking, but that does not make them less unnerving.",
     "default_faction": "mi-go",
     "bodytype": "migo",
@@ -164,7 +164,7 @@
   {
     "id": "mon_mi_go_guard",
     "type": "MONSTER",
-    "name": { "str": "mi-go guard" },
+    "name": { "str": "mi-go defender" },
     "description": "A more heavily armored version of the common mi-go.  Its trunk is a shapeless mass of strange flesh encased in an iridescent carapace, from which sprout several appendages terminating in what appear to be devices of some sort.  Its pyramidal head is encrusted in barnacle-like armor, aside from the bristling antennae that serve as its - you assume - sensory devices and mouth.",
     "default_faction": "mi-go",
     "bodytype": "migo",
@@ -226,7 +226,7 @@
   {
     "id": "mon_mi_go_myrmidon",
     "type": "MONSTER",
-    "name": { "str": "mi-go myrmidon" },
+    "name": { "str": "giant mi-go" },
     "description": "This creature resembles the smaller mi-go like a grizzly bear resembles a human.  Its enormous, thick body is covered in an iridescent segmented carapace, like a scarab crossed with an isopod.  It boasts several pairs of deadly looking claws and other appendages, and it moves with a strange, slow grace, like an otherworldly dancer.  It appears to be carrying weaponry.",
     "default_faction": "mi-go",
     "bodytype": "migo",
@@ -288,7 +288,7 @@
   {
     "id": "mon_mi_go_captured",
     "type": "MONSTER",
-    "name": { "str": "partially harvested mi-go" },
+    "name": { "str": "vivisected mi-go" },
     "description": "This creature resembles the smaller mi-go like a grizzly bear resembles a human.  Its enormous, thick body is covered in an iridescent segmented carapace, like a scarab crossed with an isopod.  It has been mostly pulled apart and is stuck to a surgical table that seems to be keeping it alive.",
     "default_faction": "mi-go",
     "bodytype": "migo",
