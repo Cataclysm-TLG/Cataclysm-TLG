@@ -8449,7 +8449,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
     // Range and bounds checks.
     if( std::abs( F.z() - T.z() ) > fov_3d_z_range ||
         ( range >= 0 && range < rl_dist( F, T ) ) ||
-        !inbounds( T ) ) {
+        !inbounds( T ) || !inbounds( F ) ) {
         bresenham_slope = 0;
         return result; // Out of range. Visible is already false, no further checks needed.
     }
