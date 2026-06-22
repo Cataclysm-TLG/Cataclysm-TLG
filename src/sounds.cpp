@@ -647,9 +647,9 @@ void sounds::process_sound_markers( Character *you )
             you->volume = std::max( you->volume, noise );
         }
 
-        // Secure the flag before wake_up() clears the effect
+        // Secure the flag before wake_up() clears the effect.
         bool slept_through = you->has_effect( effect_slept_through_alarm );
-        // See if we need to wake someone up
+        // See if we need to wake someone up.
         if( you->in_sleep_state() ) {
             if( ( ( !( you->has_trait( trait_HEAVYSLEEPER ) ||
                        you->has_trait( trait_HEAVYSLEEPER2 ) ) && dice( 2, 15 ) < heard_volume ) ||
@@ -657,7 +657,7 @@ void sounds::process_sound_markers( Character *you )
                   ( you->has_trait( trait_HEAVYSLEEPER2 ) && dice( 6, 15 ) < heard_volume ) ) &&
                 !you->has_effect( effect_narcosis ) &&
                 !you->has_bionic( bio_sleep_shutdown ) ) {
-                //Not kidding about sleep-through-firefight
+                // Not kidding about sleep-through-firefight.
                 you->wake_up();
                 you->add_msg_if_player( m_warning, _( "Something is making noise." ) );
             } else {

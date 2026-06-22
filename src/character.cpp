@@ -6638,11 +6638,6 @@ float Character::healing_rate_medicine( float at_rest_quality, const bodypart_id
     // Sufficiently negative rest quality can completely eliminate your healing, but never turn it negative.
     rate_medicine *= 1.0f + std::max( at_rest_quality, -1.0f );
 
-    // increase healing if character has both effects
-    if( has_effect( effect_bandaged, bp ) && has_effect( effect_disinfected, bp ) ) {
-        rate_medicine *= 1.1;
-    }
-
     if( get_lifestyle() > 0.0f ) {
         rate_medicine *= 1.0f + get_lifestyle() / 220.0f;
     } else {
@@ -11590,13 +11585,13 @@ void Character::process_effects()
         !has_trait( trait_COMPOUND_EYES ) && !has_effect( effect_pre_conjunctivitis_bacterial ) &&
         !has_effect( effect_pre_conjunctivitis_viral ) && !has_effect( effect_conjunctivitis_bacterial ) &&
         !has_effect( effect_conjunctivitis_viral ) ) {
-        //Washing your eyes out in time may save you from getting pinkeye.
+        // Washing your eyes out in time may save you from getting pinkeye.
         float checked_health = get_lifestyle() + 200.0;
-        //Some animal eyes are more vulnerable to infection.
+        // Some animal eyes are more vulnerable to infection.
         if( has_trait_flag( json_flag_EYE_MEMBRANE ) ) {
             checked_health -= 50;
         }
-        //Ditto for contact lenses.
+        // Ditto for contact lenses.
         if( has_effect( effect_contacts ) || has_effect( effect_transition_contacts ) ) {
             checked_health -= 50;
         }

@@ -137,6 +137,7 @@ static void eff_fun_onfire( Character &u, effect &it )
     u.deal_damage( nullptr, it.get_bp(), damage_instance( STATIC( damage_type_id( "heat" ) ),
                    rng( 1, intense * 2 ) ) );
 }
+
 static void eff_fun_spores( Character &u, effect &it )
 {
     // Equivalent to X in 150000 + health * 100
@@ -146,6 +147,7 @@ static void eff_fun_spores( Character &u, effect &it )
         u.add_effect( effect_fungus, 1_turns, true );
     }
 }
+
 static void eff_fun_antifungal( Character &u, effect & )
 {
     // antifungal drugs are deadly poison for Marloss people
@@ -161,6 +163,7 @@ static void eff_fun_antifungal( Character &u, effect & )
         u.apply_damage( nullptr, random_bpart, 1 );
     }
 }
+
 static void eff_fun_fake_common_cold( Character &u, effect & )
 {
     if( calendar::once_every( time_duration::from_seconds( rng( 30, 300 ) ) ) && one_in( 2 ) ) {
@@ -172,6 +175,7 @@ static void eff_fun_fake_common_cold( Character &u, effect & )
         you.get_sick( false );
     }
 }
+
 static void eff_fun_fake_flu( Character &u, effect & )
 {
     if( calendar::once_every( time_duration::from_seconds( rng( 30, 300 ) ) ) && one_in( 2 ) ) {
@@ -183,6 +187,7 @@ static void eff_fun_fake_flu( Character &u, effect & )
         you.get_sick( true );
     }
 }
+
 static void eff_fun_fungus( Character &u, effect &it )
 {
     const int intense = it.get_intensity();
@@ -207,7 +212,7 @@ static void eff_fun_fungus( Character &u, effect &it )
                 u.add_msg_if_player( m_warning, _( "You feel nauseous." ) );
             }
             if( one_in( 600 + bonus * 6 ) ) {
-                u.add_msg_if_player( m_warning, _( "You smell and taste mushrooms." ) );
+                u.add_msg_if_player( m_warning, _( "The back of your throat is filled with a musty smell that you can almost taste." ) );
             }
             break;
         case 2:
@@ -283,6 +288,7 @@ static void eff_fun_fungus( Character &u, effect &it )
             break;
     }
 }
+
 static void eff_fun_rat( Character &u, effect &it )
 {
     const int dur = to_turns<int>( it.get_duration() );
@@ -305,6 +311,7 @@ static void eff_fun_rat( Character &u, effect &it )
         }
     }
 }
+
 static void eff_fun_bleed( Character &u, effect &it )
 {
     map &here = get_map();
@@ -387,6 +394,7 @@ static void eff_fun_bleed( Character &u, effect &it )
         }
     }
 }
+
 static void eff_fun_hallu( Character &u, effect &it )
 {
     // TODO: Redo this to allow for variable durations
@@ -1106,7 +1114,7 @@ static void eff_fun_sleep( Character &u, effect &it )
         // People who can see while sleeping are acclimated to the light.
         if( !u.has_flag( json_flag_SEESLEEP ) ) {
             if( u.has_trait( trait_HEAVYSLEEPER2 ) && !u.has_trait( trait_HIBERNATE ) ) {
-                // So you can too sleep through noon
+                // So you can too sleep through noon.
                 if( ( tirednessVal * 1.25 ) < here.ambient_light_at( u.pos_bub() ) && ( u.get_fatigue() < 10 ||
                         one_in( u.get_fatigue() / 2 ) ) ) {
                     u.add_msg_if_player( _( "It's too bright to sleep." ) );
@@ -1156,7 +1164,7 @@ static void eff_fun_sleep( Character &u, effect &it )
                 if( curr_temp < BODYTEMP_FREEZING - fatigue_modifier ||
                     one_in( units::to_celsius( curr_temp ) * 3000 + 16500 ) ) {
                     u.add_msg_if_player( m_bad, _( "It's too cold to sleep." ) );
-                    // Set ourselves up for removal
+                    // Set ourselves up for removal.
                     it.set_duration( 0_turns );
                     woke_up = true;
                     break;
@@ -1168,7 +1176,7 @@ static void eff_fun_sleep( Character &u, effect &it )
                 if( curr_temp > BODYTEMP_SCORCHING + fatigue_modifier ||
                     one_in( 76500 - units::to_celsius( curr_temp ) * 500 ) ) {
                     u.add_msg_if_player( m_bad, _( "It's too hot to sleep." ) );
-                    // Set ourselves up for removal
+                    // Set ourselves up for removal.
                     it.set_duration( 0_turns );
                     woke_up = true;
                     break;
