@@ -466,7 +466,6 @@ static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_ELFA_FNV( "ELFA_FNV" );
 static const trait_id trait_ELFA_NV( "ELFA_NV" );
 static const trait_id trait_FACIAL_HAIR_NONE( "FACIAL_HAIR_NONE" );
-static const trait_id trait_FAERIECREATURE( "FAERIECREATURE" );
 static const trait_id trait_FAT( "FAT" );
 static const trait_id trait_FEL_NV( "FEL_NV" );
 static const trait_id trait_GASTROPOD_BALANCE( "GASTROPOD_BALANCE" );
@@ -517,7 +516,6 @@ static const trait_id trait_STRONGBACK( "STRONGBACK" );
 static const trait_id trait_SUNLIGHT_DEPENDENT( "SUNLIGHT_DEPENDENT" );
 static const trait_id trait_THORNS( "THORNS" );
 static const trait_id trait_TRANSPIRATION( "TRANSPIRATION" );
-static const trait_id trait_UNDINE_SLEEP_WATER( "UNDINE_SLEEP_WATER" );
 static const trait_id trait_URSINE_EYE( "URSINE_EYE" );
 static const trait_id trait_VISCOUS( "VISCOUS" );
 static const trait_id trait_WATERSLEEP( "WATERSLEEP" );
@@ -12944,14 +12942,6 @@ bool Character::is_hallucination() const
 bool Character::is_electrical() const
 {
     // for now this is false. In the future should have rules
-    return false;
-}
-
-bool Character::is_fae() const
-{
-    if( has_trait( trait_FAERIECREATURE ) ) {
-        return true;
-    }
     return false;
 }
 

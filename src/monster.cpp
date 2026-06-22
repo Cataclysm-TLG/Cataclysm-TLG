@@ -127,6 +127,8 @@ static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_run( "run" );
 static const efftype_id effect_slippery_terrain( "slippery_terrain" );
+static const efftype_id effect_smoke_eyes( "smoke_eyes" );
+static const efftype_id effect_smoke_lungs( "smoke_lungs" );
 static const efftype_id effect_spooked( "spooked" );
 static const efftype_id effect_spooked_recent( "spooked_recent" );
 static const efftype_id effect_stunned( "stunned" );
@@ -175,6 +177,7 @@ static const mfaction_str_id monfaction_acid_ant( "acid_ant" );
 static const mfaction_str_id monfaction_ant( "ant" );
 static const mfaction_str_id monfaction_bee( "bee" );
 static const mfaction_str_id monfaction_nether_player_hate( "nether_player_hate" );
+static const mfaction_str_id monfaction_fire_( "fire ant" );
 static const mfaction_str_id monfaction_wasp( "wasp" );
 
 static const species_id species_AMPHIBIAN( "AMPHIBIAN" );
@@ -183,14 +186,17 @@ static const species_id species_FISH( "FISH" );
 static const species_id species_SLIME( "SLIME" );
 static const species_id species_FUNGUS( "FUNGUS" );
 static const species_id species_HORROR( "HORROR" );
+static const species_id species_INSECT( "INSECT" );
+static const species_id species_INSECT( "INSECT_FLYING" );
 static const species_id species_MAMMAL( "MAMMAL" );
 static const species_id species_MIGO( "MIGO" );
 static const species_id species_MOLLUSK( "MOLLUSK" );
 static const species_id species_NETHER( "NETHER" );
 static const species_id species_PLANT( "PLANT" );
+static const species_id species_PSI_NULL( "PSI_NULL" );
 static const species_id species_ROBOT( "ROBOT" );
 static const species_id species_ROBOT_FLYING( "ROBOT_FLYING" );
-static const species_id species_PSI_NULL( "PSI_NULL" );
+static const species_id species_SPIDER( "SPIDER" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
 static const species_id species_nether_player_hate( "nether_player_hate" );
 
@@ -1656,6 +1662,7 @@ monster_attitude monster::attitude( const Character *u ) const
         }
 
         if( ( faction == monfaction_acid_ant || faction == monfaction_ant || faction == monfaction_bee ||
+              faction == monfaction_fire_ant ||
               faction == monfaction_wasp ) && effective_anger >= 10 && u->has_trait( trait_PHEROMONE_INSECT ) ) {
             effective_anger -= 20;
         }
@@ -1665,12 +1672,6 @@ monster_attitude monster::attitude( const Character *u ) const
         }
 
         if( has_flag( mon_flag_ANIMAL ) ) {
-            if( u->has_effect( effect_natures_commune ) ) {
-                effective_anger -= 10;
-                if( effective_anger < 10 ) {
-                    effective_morale += 55;
-                }
-            }
             if( u->has_trait( trait_ANIMALEMPATH ) ) {
                 effective_anger -= 10;
                 if( effective_anger < 10 ) {
@@ -1885,6 +1886,22 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
                has_flag( mon_flag_FIREY );
     }
 
+    if( effect == effect_smoke_eyes ) {
+        return !type->has_flag( mon_flag_SEES ) || !made_of_any( Creature::cmat_flesh ) ||
+               type->in_species( species_INSECT ) || type->in_species( species_MIGO ) ||
+               type->in_species( species_SPIDER ) || type->in_species( species_CENTIPEDE ) ||
+               type->in_species( species_CYBORG ) || type->in_species( species_INSECT_FLYING );
+    }
+
+    if( effect == effect_smoke_lungs ) {
+        return !type->has_flag( mon_flag_BREATHES );
+    }
+
+    // Currently monsters aren't affected by radiation.
+    if( effect == effect_fallout ) {
+        return true;
+    }
+
     if( effect == effect_bleed ) {
         return ( type->bloodType() == fd_null || type->bleed_rate == 0 );
     }
@@ -1906,7 +1923,8 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
     }
 
     if( effect == effect_tpollen ) {
-        return type->in_species( species_PLANT );
+        return type->in_species( species_PLANT ) ||  type->in_species( species_CENTIPEDE ) ||
+               type->in_species( species_ROBOT_FLYING );
     }
 
     if( effect == effect_stunned ) {
@@ -3707,11 +3725,6 @@ bool monster::is_electrical() const
 {
     return in_species( species_ROBOT ) || in_species( species_ROBOT_FLYING ) ||
            has_flag( mon_flag_ELECTRIC ) || in_species( species_CYBORG );
-}
-
-bool monster::is_fae() const
-{
-    return has_flag( mon_flag_FAE_CREATURE );
 }
 
 bool monster::is_hallucination() const

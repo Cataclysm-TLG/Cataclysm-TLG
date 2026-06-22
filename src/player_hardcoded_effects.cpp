@@ -212,7 +212,8 @@ static void eff_fun_fungus( Character &u, effect &it )
                 u.add_msg_if_player( m_warning, _( "You feel nauseous." ) );
             }
             if( one_in( 600 + bonus * 6 ) ) {
-                u.add_msg_if_player( m_warning, _( "The back of your throat is filled with a musty smell that you can almost taste." ) );
+                u.add_msg_if_player( m_warning,
+                                     _( "The back of your throat is filled with a musty smell that you can almost taste." ) );
             }
             break;
         case 2:
