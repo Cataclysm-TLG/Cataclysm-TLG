@@ -1139,7 +1139,7 @@ void suffer::from_sunburn( Character &you, bool severe )
     auto warn_and_wake_up = [ &you, &all_parts_list]
     ( const char *message, game_message_type type ) {
         you.add_msg_if_player( type, message, all_parts_list );
-        // Wake up from skin irritation/burning
+        // Wake up from skin irritation/burning.
         if( you.has_effect( effect_sleep ) ) {
             you.wake_up();
         }
