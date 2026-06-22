@@ -1896,7 +1896,7 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
     }
 
     if( effect == effect_smoke_lungs ) {
-        return !type->has_flag( mon_flag_BREATHES );
+        return !type->has_flag( mon_flag_NO_BREATHE );
     }
 
     // Currently monsters aren't affected by radiation.
