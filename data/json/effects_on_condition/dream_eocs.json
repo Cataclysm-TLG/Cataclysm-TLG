@@ -51,7 +51,7 @@
           { "case": -100, "effect": { "u_message": "health_horrible", "snippet": true, "type": "bad" } },
           { "case": -50, "effect": { "u_message": "health_very_bad", "snippet": true, "type": "bad" } },
           { "case": -10, "effect": { "u_message": "health_bad", "snippet": true, "type": "bad" } },
-          { "case": 25, "effect": { "u_message": "" } },
+          { "case": 10, "effect": { "u_message": "" } },
           { "case": 50, "effect": { "u_message": "health_good", "snippet": true, "type": "good" } },
           { "case": 100, "effect": { "u_message": "health_very_good", "snippet": true, "type": "good" } },
           { "case": 200, "effect": { "u_message": "health_great", "snippet": true, "type": "good" } }
