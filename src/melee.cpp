@@ -643,19 +643,25 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         add_msg( m_bad, _( "This weapon is too unwieldy to attack with!" ) );
         return false;
     }
+    std::string weapon_string;
+    if( !cur_weap.is_null() ) {
+        weapon_string = string_format(
+            _( "<color_light_red>Attacking your %s will take a long time. Are you sure you want to continue?</color>" ),
+            cur_weap.display_name()
+        );
+    } else {
+        weapon_string = _( "<color_light_red>Attacking unarmed will take a long time. Are you sure you want to continue?</color>" );
+    }
 
-    if( is_avatar() && move_cost > 400 && calendar::turn > melee_warning_turn ) {
+    if( is_avatar() && move_cost >= 500 && calendar::turn > melee_warning_turn ) {
         const std::string &action = query_popup()
                                     .context( "CANCEL_ACTIVITY_OR_IGNORE_QUERY" )
-                                    .message( _( "<color_light_red>Attacking with your %1$s will take a long time.  "
-                                              "Are you sure you want to continue?</color>" ),
-                                              cur_weap.display_name() )
+                                    .message( "%s", weapon_string )
                                     .option( "YES" )
                                     .option( "NO" )
                                     .option( "IGNORE" )
                                     .query()
                                     .action;
-
         if( action == "NO" ) {
             return false;
         }
