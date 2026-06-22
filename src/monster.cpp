@@ -102,6 +102,7 @@ static const efftype_id effect_dripping_mechanical_fluid( "dripping_mechanical_f
 static const efftype_id effect_emp( "emp" );
 static const efftype_id effect_fake_common_cold( "fake_common_cold" );
 static const efftype_id effect_fake_flu( "fake_flu" );
+static const efftype_id effect_fallout( "fallout" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_has_bag( "has_bag" );
 static const efftype_id effect_heavysnare( "heavysnare" );
@@ -177,17 +178,18 @@ static const mfaction_str_id monfaction_acid_ant( "acid_ant" );
 static const mfaction_str_id monfaction_ant( "ant" );
 static const mfaction_str_id monfaction_bee( "bee" );
 static const mfaction_str_id monfaction_nether_player_hate( "nether_player_hate" );
-static const mfaction_str_id monfaction_fire_( "fire ant" );
+static const mfaction_str_id monfaction_fire_ant( "fire ant" );
 static const mfaction_str_id monfaction_wasp( "wasp" );
 
 static const species_id species_AMPHIBIAN( "AMPHIBIAN" );
+static const species_id species_CENTIPEDE( "CENTIPEDE" );
 static const species_id species_CYBORG( "CYBORG" );
 static const species_id species_FISH( "FISH" );
 static const species_id species_SLIME( "SLIME" );
 static const species_id species_FUNGUS( "FUNGUS" );
 static const species_id species_HORROR( "HORROR" );
 static const species_id species_INSECT( "INSECT" );
-static const species_id species_INSECT( "INSECT_FLYING" );
+static const species_id species_INSECT_FLYING( "INSECT_FLYING" );
 static const species_id species_MAMMAL( "MAMMAL" );
 static const species_id species_MIGO( "MIGO" );
 static const species_id species_MOLLUSK( "MOLLUSK" );
