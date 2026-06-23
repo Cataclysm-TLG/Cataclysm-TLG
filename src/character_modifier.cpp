@@ -363,8 +363,10 @@ float character_modifier::modifier( const Character &c, const skill_id &skill ) 
 
     // score == 0
     if( score < std::numeric_limits<float>::epsilon() ) {
-        return min_val > std::numeric_limits<float>::epsilon() ? min_val :
-               max_val > std::numeric_limits<float>::epsilon() ? max_val : 0.0f;
+        if( nominator > std::numeric_limits<float>::epsilon() ) {
+            return max_val > std::numeric_limits<float>::epsilon() ? max_val : 0.0f;
+        }
+        return min_val > std::numeric_limits<float>::epsilon() ? min_val : 0.0f;
     }
     if( nominator > std::numeric_limits<float>::epsilon() ) {
         score = ( nominator / denominator ) / score;
