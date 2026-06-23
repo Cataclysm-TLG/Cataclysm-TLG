@@ -4239,7 +4239,8 @@
     "flags": [ "TOUGH_FEET" ],
     "restricts_gear": [ "foot_toes_l", "foot_toes_r" ],
     "allowed_items": [ "ALLOWS_TALONS" ],
-    "integrated_armor": [ "integrated_toe_talons" ]
+    "integrated_armor": [ "integrated_toe_talons" ],
+    "threshreq": [ "THRESH_RAPTOR" ]
   },
   {
     "type": "mutation",
