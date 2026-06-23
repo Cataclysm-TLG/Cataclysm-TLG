@@ -507,9 +507,9 @@ void martialart::load( const JsonObject &jo, std::string_view src )
     optional( jo, was_loaded, "force_unarmed", force_unarmed, false );
     optional( jo, was_loaded, "prevent_weapon_blocking", prevent_weapon_blocking, false );
 
-    optional( jo, was_loaded, "leg_block", leg_block, 99 );
-    optional( jo, was_loaded, "arm_block", arm_block, 99 );
-    optional( jo, was_loaded, "nonstandard_block", nonstandard_block, 99 );
+    optional( jo, was_loaded, "leg_block", leg_block, -1 );
+    optional( jo, was_loaded, "arm_block", arm_block, -1 );
+    optional( jo, was_loaded, "nonstandard_block", nonstandard_block, -1 );
 
     optional( jo, was_loaded, "arm_block_with_bio_armor_arms", arm_block_with_bio_armor_arms, false );
     optional( jo, was_loaded, "leg_block_with_bio_armor_legs", leg_block_with_bio_armor_legs, false );
@@ -1169,6 +1169,7 @@ martialart::martialart()
 {
     leg_block = -1;
     arm_block = -1;
+    nonstandard_block = -1;
 }
 
 // simultaneously check and add all buffs. this is so that buffs that have
@@ -1705,11 +1706,11 @@ bool character_martial_arts::can_leg_block( const Character &owner ) const
     const int unarmed_skill = owner.has_active_bionic( bio_cqb ) ? 5 : owner.get_skill_level(
                                   skill_unarmed );
 
-    // Before we check our legs, can you block at all?
-    const bool block_with_skill = unarmed_skill >= ma.leg_block;
+    // Before we check our legs, can we leg block at all?
+    const bool block_with_skill = ma.leg_block >= 0 && unarmed_skill >= ma.leg_block;
     const bool block_with_bio_armor = ma.leg_block_with_bio_armor_legs &&
                                       owner.has_bionic( bio_armor_legs );
-    if( !( block_with_skill || block_with_bio_armor ) ) {
+    if( !block_with_skill && !block_with_bio_armor ) {
         return false;
     }
 
@@ -1740,16 +1741,16 @@ bool character_martial_arts::can_arm_block( const Character &owner ) const
     const int unarmed_skill = owner.has_active_bionic( bio_cqb ) ? 5 : owner.get_skill_level(
                                   skill_unarmed );
 
-    // before we check our arms, can you block at all?
-    const bool block_with_skill = unarmed_skill >= ma.arm_block;
+    // Before we check our arms, can we block at all?
+    const bool block_with_skill = ma.arm_block >= 0 && unarmed_skill >= ma.arm_block;
     const bool block_with_bio_armor = ma.arm_block_with_bio_armor_arms &&
                                       owner.has_bionic( bio_armor_arms );
-    if( !( block_with_skill || block_with_bio_armor ) ) {
+    if( !block_with_skill && !block_with_bio_armor ) {
         return false;
     }
 
     // Success conditions.
-    // Do we have boring human anatomy? Use the basic calculation
+    // Do we have boring human anatomy? Use the basic calculation.
     if( !owner.has_flag( json_flag_NONSTANDARD_BLOCK ) ) {
         return owner.get_limb_score( limb_score_block, body_part_type::type::arm ) >= 0.5f;
     } else {
@@ -2277,36 +2278,23 @@ bool ma_style_callback::key( const input_context &ctxt, const input_event &event
 
         buffer += "--\n";
 
-        if( ma.arm_block_with_bio_armor_arms || ma.arm_block != 99 ||
-            ma.leg_block_with_bio_armor_legs || ma.leg_block != 99  ||
-            ma.nonstandard_block != 99 ) {
-            Character &u = get_player_character();
-            int unarmed_skill =  u.get_skill_level( skill_unarmed );
-            if( u.has_active_bionic( bio_cqb ) ) {
-                unarmed_skill = BIO_CQB_LEVEL;
-            }
+        if( ma.arm_block_with_bio_armor_arms || ma.arm_block >= 0 ||
+            ma.leg_block_with_bio_armor_legs || ma.leg_block >= 0 ) {
             if( ma.arm_block_with_bio_armor_arms ) {
                 buffer += _( "You can <info>arm block</info> by installing the <info>Arms Alloy Plating CBM</info>" );
                 buffer += "\n";
-            } else if( ma.arm_block != 99 ) {
+            } else if( ma.arm_block >= 0 ) {
                 buffer += string_format(
-                              _( "You can <info>arm block</info> at <info>unarmed combat:</info> <stat>%s</stat>/<stat>%s</stat>" ),
-                              unarmed_skill, ma.arm_block ) + "\n";
+                              _( "You can <info>arm block</info> at <info>unarmed rank:</info> <stat>%s</stat>" ),
+                              ma.arm_block ) + "\n";
             }
-
             if( ma.leg_block_with_bio_armor_legs ) {
                 buffer += _( "You can <info>leg block</info> by installing the <info>Legs Alloy Plating CBM</info>" );
                 buffer += "\n";
-            } else if( ma.leg_block != 99 ) {
+            } else if( ma.leg_block >= 0 ) {
                 buffer += string_format(
-                              _( "You can <info>leg block</info> at <info>unarmed combat:</info> <stat>%s</stat>/<stat>%s</stat>" ),
-                              unarmed_skill, ma.leg_block );
-                buffer += "\n";
-            }
-            if( ma.nonstandard_block != 99 ) {
-                buffer += string_format(
-                              _( "You can <info>block with mutated limbs</info> at <info>unarmed combat:</info> <stat>%s</stat>/<stat>%s</stat>" ),
-                              unarmed_skill, ma.nonstandard_block );
+                              _( "You can <info>leg block</info> at <info>unarmed rank:</info> <stat>%s</stat>" ),
+                              ma.leg_block );
                 buffer += "\n";
             }
             buffer += "--\n";

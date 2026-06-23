@@ -2272,6 +2272,10 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     // Get the rest of our block modifiers to tally up a final score.
     if( can_block_unarmed ) {
         bp_hit = select_blocking_part( arm_block, leg_block, nonstandard_block );
+        // Bail out if all our blocking parts are unavailable.
+        if( bp_hit == bodypart_str_id::NULL_ID().id() ) {
+            return false;
+        }
         body_block_score *= get_part( bp_hit )->get_limb_score( limb_score_block );
         add_msg_debug( debugmode::DF_MELEE, "Body block score after limb score multiplier: %d",
                        body_block_score );

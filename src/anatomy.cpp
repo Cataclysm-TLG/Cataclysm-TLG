@@ -281,8 +281,8 @@ bodypart_id anatomy::select_blocking_part( const Creature *blocker, bool arm, bo
             block_score *= u->worn_with_flag( flag_BLOCK_WHILE_WORN, bp ) ? 5 : 1;
         }
 
-        // Filter out nonblocking / broken limbs
-        if( block_score == 0 ) {
+        // Filter out nonblocking / broken limbs. Avoid weird float remainders by checking <= 0.001f.
+        if( block_score <= 0.0001f ) {
             add_msg_debug( debugmode::DF_MELEE, "BP %s discarded, no blocking score",
                            body_part_name( bp ) );
             continue;
@@ -297,19 +297,19 @@ bodypart_id anatomy::select_blocking_part( const Creature *blocker, bool arm, bo
         }
 
         // Can we block with our normal boring arm?
-        if( bp->limbtypes.count( body_part_type::type::arm ) == 0 &&
+        if( bp->limbtypes.count( body_part_type::type::arm ) > 0 &&
             !bp->has_flag( json_flag_NONSTANDARD_BLOCK ) &&
             !arm ) {
             add_msg_debug( debugmode::DF_MELEE, "BP %s discarded, no arm blocks allowed",
                            body_part_name( bp ) );
             continue;
-            // Can we block with our normal boring legs?
-        } else if( bp->limbtypes.count( body_part_type::type::leg ) == 0 &&
+        // Can we block with our normal boring legs?
+        } else if( bp->limbtypes.count( body_part_type::type::leg ) > 0 &&
                    !bp->has_flag( json_flag_NONSTANDARD_BLOCK ) && !leg ) {
             add_msg_debug( debugmode::DF_MELEE, "BP %s discarded, no leg blocks allowed",
                            body_part_name( bp ) );
             continue;
-            // Can we block with our non-normal non-arms/non-legs?
+        // Can we block with our non-normal non-arms/non-legs?
         } else if( bp->has_flag( json_flag_NONSTANDARD_BLOCK ) && !nonstandard ) {
             add_msg_debug( debugmode::DF_MELEE, "BP %s discarded, no nonstandard blocks allowed",
                            body_part_name( bp ) );
@@ -326,7 +326,7 @@ bodypart_id anatomy::select_blocking_part( const Creature *blocker, bool arm, bo
 
     const bodypart_id *ret = block_scores.pick();
     if( ret == nullptr ) {
-        debugmsg( "Attempted to select body part from empty anatomy %s", id.c_str() );
+        add_msg_debug( debugmode::DF_MELEE, "No intact body parts available for blocking. Aborting block." );
         return bodypart_str_id::NULL_ID().id();
     }
 
