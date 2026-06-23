@@ -1600,7 +1600,7 @@ bool npc::wield( item &it )
     if( is_wielding( it ) ) {
         return true;
     }
-    item * const held_item = get_wielded_item().get_item();
+    item *const held_item = get_wielded_item().get_item();
     const bool stow =
         has_wield_conflicts( it ) && held_item && held_item->has_item( it );
     if( stow && held_item ) {
@@ -1609,7 +1609,7 @@ bool npc::wield( item &it )
     if( !Character::wield( it ) ) {
         return false;
     }
-    item * const new_item = get_wielded_item().get_item();
+    item *const new_item = get_wielded_item().get_item();
     if( new_item ) {
         add_msg_if_player_sees(
             *this, m_info,
