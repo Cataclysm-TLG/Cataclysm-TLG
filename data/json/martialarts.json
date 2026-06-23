@@ -1681,8 +1681,9 @@
     "description": "A secret martial art used only by developers and cheaters.",
     "initiate": [ "You get ready pwn some zeds!", "%s prepares to cheat at martial arts!" ],
     "priority": 1,
-    "arm_block": 99,
-    "leg_block": 99,
+    "arm_block": 0,
+    "leg_block": 0,
+    "nonstandard_block": 0,
     "static_buffs": [
       {
         "id": "debug_elem_resist",

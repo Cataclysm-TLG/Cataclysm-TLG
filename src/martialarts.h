@@ -415,9 +415,9 @@ class martialart
         skill_id primary_skill;
         bool teachable = true;
         int learn_difficulty = 0;
-        int arm_block = 0;
-        int leg_block = 0;
-        int nonstandard_block = 0;
+        int arm_block = -1;
+        int leg_block = -1;
+        int nonstandard_block = -1;
         bool arm_block_with_bio_armor_arms = false;
         bool leg_block_with_bio_armor_legs = false;
         std::set<matec_id> techniques; // all available techniques
