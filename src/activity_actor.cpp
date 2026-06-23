@@ -3141,12 +3141,13 @@ item_location &efile_activity_actor::get_currently_processed_efile()
 {
     return currently_processed_efiles.back();
 }
+
 void efile_activity_actor::start( player_activity &act, Character &who )
 {
     if( combo_type == COMBO_MOVE_ONTO_BROWSE ) {
         target_edevices_copy = target_edevices;
     }
-    //handle combo move e-device (browsing may have included used e-device)
+    // Handle combo move e-device (browsing may have included used e-device).
     if( action_type == EF_MOVE_ONTO_THIS ) {
         auto i = target_edevices.begin();
         while( i != target_edevices.end() ) {
@@ -3170,7 +3171,7 @@ void efile_activity_actor::start( player_activity &act, Character &who )
         add_msg_debug( debugmode::DF_ACT_EBOOK, "initialized with edevice %s with %d efiles",
                        i->display_name(), i->efiles().size() );
     }
-    //only skip if loaded through deserialization
+    // Only skip if loaded through deserialization.
     if( !started_processing ) {
         started_processing = true;
         computer_low_skill = who.get_skill_level( skill_computer ) < 1;
@@ -3211,48 +3212,49 @@ void efile_activity_actor::do_turn( player_activity &act, Character &who )
         return true;
     };
 
-    //check for zero devices selected, for combo call
+    // Check for zero devices selected, for combo call.
     if( act.moves_left > 0 ) {
-        //if an e-device was booted, make sure it still exists
+        // If an e-device was booted, make sure it still exists.
         if( !!turns_left_on_current_edevice ) {
             if( !used_edevice || !edevice_reduce_charge( used_edevice ) ) {
                 //if the used device runs out of power or is missing, fail all remaining devices
                 do {
                     failed_processing_current_edevice();
                 } while( !done_processing );
+                return;
             } else {
                 item_location next_edevice = get_currently_processed_edevice();
                 if( !next_edevice || !edevice_reduce_charge( next_edevice ) ) {
                     failed_processing_current_edevice();
+                    return;
                 }
             }
         }
     }
-    //done check (handles return)
+    // Done check (handles return).
     if( done_processing ) {
         act.moves_left = 0;
         add_msg_debug( debugmode::DF_ACT_EBOOK, "efile_transfer completed through done_processing" );
         return;
     }
-    //computer practice
+    // Computer practice.
     if( one_in( 3 ) && computer_low_skill ) {
         if( who.practice( skill_computer, 1 ) ) {
             computer_low_skill = false;
         }
     }
-
     if( !next_edevice_booted ) {
         if( !turns_left_on_current_edevice ) {
-            start_processing_next_edevice(); //only sets if device exists
+            start_processing_next_edevice(); // Only sets if device exists.
         }
         ( *turns_left_on_current_edevice )--;
         if( turns_left_on_current_edevice == 0 ) {
             next_edevice_booted = true;
-            start_processing_next_efile( act, who ); //sets turns_left_file if file exists
+            start_processing_next_efile( act, who ); // Sets turns_left_file if file exists.
         }
     }
-    if( next_edevice_booted ) { //should not be an "else" because files start processing in same turn
-        //current file exists check
+    if( next_edevice_booted ) { // Should not be an "else" because files start processing in same turn.
+        // Current file exists check.
         if( !get_currently_processed_efile() ) {
             failed_processing_current_efile( act, who );
         } else if( turns_left_on_current_efile > 0 ) {
