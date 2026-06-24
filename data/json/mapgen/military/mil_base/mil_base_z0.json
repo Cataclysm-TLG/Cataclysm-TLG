@@ -539,8 +539,6 @@
         { "group": "sugar_various", "x": 38, "y": 53, "chance": 75, "repeat": [ 0, 150 ] },
         { "group": "salt_various", "x": 37, "y": 53, "chance": 75, "repeat": [ 0, 150 ] },
         { "item": "cooking_oil", "x": 36, "y": 53, "chance": 75, "repeat": [ 0, 150 ] },
-        { "item": "meat_salted", "x": [ 45, 46 ], "y": 48, "chance": 75, "repeat": [ 0, 150 ] },
-        { "item": "salted_fish", "x": [ 43, 44 ], "y": 48, "chance": 75, "repeat": [ 0, 150 ] },
         { "group": "milk_powder_various", "x": [ 41, 42 ], "y": 48, "chance": 75, "repeat": [ 0, 150 ] },
         {
           "group": "powder_eggs_bottle_plastic_small_16",

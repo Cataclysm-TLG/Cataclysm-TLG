@@ -1309,7 +1309,6 @@
       { "item": "sausage", "prob": 4 },
       { "item": "sweet_sausage", "prob": 2 },
       { "item": "bratwurst_sausage", "prob": 4, "count": 10 },
-      { "item": "meat_salted", "prob": 2 },
       { "item": "meat_canned", "prob": 2 },
       { "item": "offal_canned", "prob": 2 },
       { "item": "meat_smoked", "prob": 2 },

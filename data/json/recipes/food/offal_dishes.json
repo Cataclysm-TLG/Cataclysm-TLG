@@ -557,7 +557,6 @@
         [ "dry_meat", 2 ],
         [ "jerky", 2 ],
         [ "meat_smoked", 2 ],
-        [ "meat_salted", 2 ],
         [ "meat_fried", 2 ]
       ],
       [ [ "sausage_casings", 6 ], [ "sausage_casings_artificial", 6 ] ],

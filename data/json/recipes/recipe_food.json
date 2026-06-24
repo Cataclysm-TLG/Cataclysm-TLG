@@ -560,7 +560,7 @@
     "qualities": [ { "id": "BOIL", "level": 1 } ],
     "tools": [ [ [ "water_boiling_heat", 2, "LIST" ] ] ],
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
-    "components": [ [ [ "earthworm", 10 ], [ "earthworm_handful", 1 ] ], [ [ "water", 1 ], [ "water_clean", 1 ], [ "salt_water", 1 ] ] ]
+    "components": [ [ [ "earthworm", 10 ] ], [ [ "water", 1 ], [ "water_clean", 1 ], [ "salt_water", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -3230,7 +3230,6 @@
     "result": "jerky",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_MEAT",
-    "delete_flags": [ "BAD_TASTE" ],
     "skill_used": "cooking",
     "difficulty": 3,
     "time": "1 h",
@@ -3240,52 +3239,6 @@
     "tools": [ [ [ "surface_heat", 25, "LIST" ] ] ],
     "//": "300g meat + 25% to dry it out a bit more",
     "components": [ [ [ "salt_preservation", 1, "LIST" ] ], [ [ "meat_red_raw", 1, "LIST" ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "salted_fish",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_MEAT",
-    "skill_used": "cooking",
-    "difficulty": 3,
-    "time": "30 m",
-    "batch_time_factors": [ 83, 5 ],
-    "autolearn": true,
-    "charges": 2,
-    "tools": [ [ [ "surface_heat", 13, "LIST" ] ] ],
-    "//": "150g meat + 25%",
-    "components": [ [ [ "salt_preservation", 1, "LIST" ] ], [ [ "fish", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "meat_salted",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_MEAT",
-    "skill_used": "cooking",
-    "difficulty": 3,
-    "time": "30 m",
-    "batch_time_factors": [ 83, 5 ],
-    "autolearn": true,
-    "tools": [ [ [ "surface_heat", 25, "LIST" ] ] ],
-    "//": "20u for one chunk of meat per standard + 25%",
-    "components": [ [ [ "salt_preservation", 1, "LIST" ] ], [ [ "meat", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "salted_mollusk",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_MEAT",
-    "skill_used": "cooking",
-    "difficulty": 3,
-    "time": "30 m",
-    "batch_time_factors": [ 83, 5 ],
-    "autolearn": true,
-    "tools": [ [ [ "surface_heat", 13, "LIST" ] ] ],
-    "//": "150g meat + 25%",
-    "components": [ [ [ "salt_preservation", 1, "LIST" ] ], [ [ "mollusk", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -3860,7 +3813,6 @@
         [ "meat_smoked", 1 ],
         [ "dry_meat", 1 ],
         [ "rehydrated_meat", 1 ],
-        [ "meat_salted", 1 ],
         [ "sausage", 1 ],
         [ "sausage_cooked", 1 ],
         [ "bratwurst_sausage", 2 ],
@@ -4308,8 +4260,6 @@
         [ "fish_smoked", 1 ],
         [ "dry_fish", 1 ],
         [ "rehydrated_fish", 1 ],
-        [ "salted_fish", 1 ],
-        [ "meat_salted", 1 ],
         [ "fish_canned", 1 ],
         [ "lobster", 1 ],
         [ "lobster_smoked", 1 ],
@@ -5537,8 +5487,6 @@
         [ "fish", 1 ],
         [ "rehydrated_fish", 1 ],
         [ "dry_fish", 1 ],
-        [ "salted_fish", 1 ],
-        [ "meat_salted", 1 ],
         [ "fish_canned", 1 ],
         [ "can_tuna", 1 ]
       ],
@@ -5758,12 +5706,10 @@
       [
         [ "meat_cooked", 2, "LIST" ],
         [ "can_chicken", 2 ],
-        [ "meat_salted", 2 ],
         [ "dry_meat", 2 ],
         [ "fish", 2 ],
         [ "fish_canned", 2 ],
         [ "can_tuna", 2 ],
-        [ "salted_fish", 2 ],
         [ "rehydrated_fish", 2 ],
         [ "dry_fish", 2 ],
         [ "tofu", 2 ],
@@ -5861,12 +5807,10 @@
       [
         [ "meat_cooked", 2, "LIST" ],
         [ "can_chicken", 2 ],
-        [ "meat_salted", 2 ],
         [ "dry_meat", 2 ],
         [ "fish", 2 ],
         [ "fish_canned", 2 ],
         [ "can_tuna", 2 ],
-        [ "salted_fish", 2 ],
         [ "rehydrated_fish", 2 ],
         [ "dry_fish", 2 ]
       ],
@@ -6018,41 +5962,6 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "meat_salted",
-    "id_suffix": "vacuum_packed",
-    "container": "plastic_bag_vac",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_MEAT",
-    "skill_used": "cooking",
-    "difficulty": 4,
-    "charges": 2,
-    "time": "5 m",
-    "batch_time_factors": [ 10, 3 ],
-    "autolearn": true,
-    "book_learn": [ [ "vacuum_sealing", 1 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
-    "using": [ [ "vacuum_sealing_standard", 1 ] ],
-    "//": "since vacuum sealed meat is cooked, need 40u surface_heat - sealing in salt is not sufficient to cook it",
-    "components": [
-      [
-        [ "meat_cooked", 2 ],
-        [ "meat_fatty_cooked", 2 ],
-        [ "meat_scrap_cooked", 20 ],
-        [ "mutant_meat_cooked", 2 ],
-        [ "mutant_meat_scrap_cooked", 20 ],
-        [ "human_cooked", 2 ],
-        [ "mutant_human_cooked", 2 ],
-        [ "meat_pickled", 2 ],
-        [ "meat_smoked", 2 ],
-        [ "rehydrated_meat", 2 ],
-        [ "meat_fried", 2 ]
-      ],
-      [ [ "salt_preservation", 2, "LIST" ] ]
-    ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "cured_roe",
     "id_suffix": "vacuum_packed",
     "container": "plastic_bag_vac",
@@ -6068,25 +5977,6 @@
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
     "using": [ [ "vacuum_sealing_standard", 1 ] ],
     "components": [ [ [ "curing_roe", 2 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "salted_fish",
-    "id_suffix": "vacuum_packed",
-    "container": "plastic_bag_vac",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_MEAT",
-    "skill_used": "cooking",
-    "difficulty": 4,
-    "charges": 10,
-    "time": "5 m",
-    "batch_time_factors": [ 10, 3 ],
-    "autolearn": true,
-    "book_learn": [ [ "vacuum_sealing", 1 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
-    "using": [ [ "vacuum_sealing_standard", 1 ] ],
-    "components": [ [ [ "fish", 5 ] ], [ [ "salt_preservation", 5, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -7857,7 +7747,7 @@
         [ "milk_powder", 1 ],
         [ "con_milk", 1 ]
       ],
-      [ [ "dry_fish", 1 ], [ "salted_fish", 1 ], [ "fish_smoked", 1 ], [ "fish_pickled", 1 ] ]
+      [ [ "dry_fish", 1 ], [ "fish_smoked", 1 ], [ "fish_pickled", 1 ] ]
     ]
   },
   {
@@ -8291,7 +8181,6 @@
         [ "dry_meat", 2 ],
         [ "jerky", 2 ],
         [ "meat_smoked", 2 ],
-        [ "meat_salted", 2 ],
         [ "meat_fried", 2 ],
         [ "meat_brain", 10, "LIST" ]
       ],
@@ -8362,7 +8251,6 @@
         [ "dry_meat", 2 ],
         [ "jerky", 2 ],
         [ "meat_smoked", 2 ],
-        [ "meat_salted", 2 ],
         [ "meat_fried", 2 ],
         [ "meat_brain", 10, "LIST" ]
       ],
@@ -8962,7 +8850,6 @@
         [ "dry_meat", 1 ],
         [ "can_chicken", 1 ],
         [ "can_spam", 2 ],
-        [ "meat_salted", 1 ],
         [ "gastropod_purged", 4 ]
       ],
       [
