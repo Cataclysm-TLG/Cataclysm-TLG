@@ -4172,5 +4172,20 @@
     "type": "MIGRATION",
     "id": "peppermutant_human",
     "replace": "mutant_human_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "meat_salted",
+    "replace": "jerky"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "salted_fish",
+    "replace": "fish_smoked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "salted_mollusk",
+    "replace": "mollusk_smoked"
   }
 ]

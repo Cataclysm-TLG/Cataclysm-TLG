@@ -526,8 +526,6 @@
         [ "fish", 1 ],
         [ "rehydrated_fish", 1 ],
         [ "dry_fish", 1 ],
-        [ "salted_fish", 1 ],
-        [ "meat_salted", 1 ],
         [ "fish_canned", 1 ],
         [ "can_tuna", 1 ]
       ],
