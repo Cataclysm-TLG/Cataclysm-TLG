@@ -248,14 +248,15 @@
     "sequence": 2,
     "chance": 80,
     "types": [
-      [ "t_trunk", 128 ],
-      [ "t_dirtmound", 128 ],
-      [ "f_boulder_small", 128 ],
-      [ "f_rubble_rock", 32 ],
-      [ "f_boulder_medium", 8 ],
-      [ "f_boulder_large", 1 ],
-      [ "t_pit", 1 ],
-      [ "t_pit_shallow", 1 ]
+      [ "t_trunk", 256 ],
+      [ "t_dirtmound", 256 ],
+      [ "f_boulder_small", 256 ],
+      [ "f_rubble_rock", 64 ],
+      [ "f_boulder_medium", 16 ],
+      [ "f_boulder_large", 2 ],
+      [ "t_pit", 2 ],
+      [ "t_pit_shallow", 2 ],
+      [ "f_region_forest", 3 ]
     ]
   },
   {
@@ -285,14 +286,15 @@
     "copy-from": "clutter_forest",
     "chance": 64,
     "types": [
-      [ "t_trunk", 64 ],
-      [ "t_dirtmound", 64 ],
-      [ "f_boulder_small", 32 ],
-      [ "f_rubble_rock", 32 ],
-      [ "f_boulder_medium", 16 ],
-      [ "f_boulder_large", 4 ],
-      [ "t_pit", 1 ],
-      [ "t_pit_shallow", 1 ]
+      [ "t_trunk", 128 ],
+      [ "t_dirtmound", 128 ],
+      [ "f_boulder_small", 64 ],
+      [ "f_rubble_rock", 64 ],
+      [ "f_boulder_medium", 32 ],
+      [ "f_boulder_large", 8 ],
+      [ "t_pit", 2 ],
+      [ "t_pit_shallow", 2 ],
+      [ "f_region_forest_dense", 3 ]
     ]
   },
   {
@@ -352,7 +354,7 @@
     "id": "clutter_forest_water",
     "copy-from": "clutter_forest",
     "chance": 75,
-    "types": [ [ "t_trunk", 1 ], [ "f_boulder_small", 2 ], [ "f_boulder_medium", 1 ] ]
+    "types": [ [ "t_trunk", 50 ], [ "f_boulder_small", 100 ], [ "f_boulder_medium", 50 ], [ "f_region_forest_water", 2 ] ]
   },
   {
     "type": "forest_biome_component",
@@ -1691,7 +1693,13 @@
     "type": "region_terrain_furniture",
     "id": "default_f_region_forest_water",
     "furn_id": "f_region_forest_water",
-    "replace_with_furniture": [ [ "f_burdock", 4 ], [ "f_purple_loosestrife", 3 ], [ "f_japanese_knotweed", 2 ], [ "f_lily", 1 ] ]
+    "replace_with_furniture": [
+      [ "f_burdock", 40 ],
+      [ "f_purple_loosestrife", 30 ],
+      [ "f_japanese_knotweed", 20 ],
+      [ "f_lily", 10 ],
+      [ "f_plant_dead", 1 ]
+    ]
   },
   {
     "type": "region_terrain_furniture",
