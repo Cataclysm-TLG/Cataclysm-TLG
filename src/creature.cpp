@@ -473,7 +473,6 @@ bool Creature::is_likely_underwater( const map &here ) const
                here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, pos_bub( here ) ) ) );
 }
 
-// Detects whether a target is sapient or not (or barely sapient, since ferals count)
 bool Creature::has_mind() const
 {
     return false;

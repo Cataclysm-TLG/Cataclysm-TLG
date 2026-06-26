@@ -506,7 +506,7 @@ class monster : public Creature
 
         bool is_nether() const override;    // true if the monster is from the nether
 
-        bool has_mind() const override;    // true if the monster is sapient and capable of reason
+        bool has_mind() const override;
 
         field_type_id bloodType() const override;
         field_type_id gibType() const override;
