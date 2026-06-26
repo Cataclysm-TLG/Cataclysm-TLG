@@ -1153,20 +1153,20 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
             }
             const int velocity = std::max( std::abs( veh.velocity ), 1 );
             const bool extra_hazard = has_flag( ter_furn_flag::TFLAG_TIRE_DAMAGE, wheel_p ) ||
-                                      has_flag( ter_furn_flag::TFLAG_SHARP, wheel_p );
+                                    has_flag( ter_furn_flag::TFLAG_SHARP, wheel_p );
 
-            const bool hazard = extra_hazard || ( has_flag( ter_furn_flag::TFLAG_DIGGABLE, wheel_p ) &&
-                                                  !has_flag( ter_furn_flag::TFLAG_ROAD, wheel_p ) &&
-                                                  !has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, wheel_p ) );
+            const bool hazard = extra_hazard ||
+                                ( has_flag( ter_furn_flag::TFLAG_DIGGABLE, wheel_p ) &&
+                                !has_flag( ter_furn_flag::TFLAG_ROAD, wheel_p ) &&
+                                !has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, wheel_p ) );
 
             if( !hazard || ( vp_wheel.info().wheel_info->offroad_rating >= 0.6f && !extra_hazard ) ) {
                 continue;
             }
 
-            int chance = std::clamp( 250000 / velocity, 50, 150 );
-
+            int chance = std::clamp( 250000 / velocity, 100, 200 );
             if( extra_hazard ) {
-                chance *= 0.75;
+                chance = chance * 3 / 4;
             }
 
             add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to damage: 1 / %d.", chance );
