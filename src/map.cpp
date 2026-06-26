@@ -1163,10 +1163,11 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
             if( !hazard || ( vp_wheel.info().wheel_info->offroad_rating >= 0.6f && !extra_hazard ) ) {
                 continue;
             }
-
-            int chance = std::clamp( 250000 / velocity, 80, 200 );
+            // Turn this numerator down if you want to make procs more likely, up if you want less.
+            // Turn the big side of the clamp up if you want it safer for slow drivers.
+            int chance = std::clamp( 80000 / velocity, 25, 125 );
             if( extra_hazard ) {
-                chance = chance * 3 / 4;
+                chance = chance / 2;
             }
 
             add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to proc rough terrain: 1 / %d.", chance );
