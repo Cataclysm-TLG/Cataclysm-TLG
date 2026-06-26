@@ -1164,12 +1164,12 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
                 continue;
             }
 
-            int chance = std::clamp( 250000 / velocity, 100, 200 );
+            int chance = std::clamp( 250000 / velocity, 80, 200 );
             if( extra_hazard ) {
                 chance = chance * 3 / 4;
             }
 
-            add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to damage: 1 / %d.", chance );
+            add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to proc rough terrain: 1 / %d.", chance );
 
             if( !one_in( chance ) ) {
                 continue;
