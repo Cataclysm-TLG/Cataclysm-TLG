@@ -47,6 +47,7 @@
 
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_cut( "cut" );
+static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_bleed( "bleed" );
@@ -1334,22 +1335,29 @@ double vehicle::wheel_damage_chance_vs_item( const item &it, vehicle_part &vp_wh
     // Wheels use the worst/softest possible value, the squishy parts. In other words, a wheel is damaged
     // if its rubber tire is punctured.
     double wheel_hardness = item_hardness_calc( vp_wheel.get_base() ).first;
-    if( vp_wheel.info().has_flag( "RESIST_RUNOVER_DAMAGE" ) ) {
-        // Wheels with the flag have double effective hardness due to their design, etc.
-        wheel_hardness = wheel_hardness * 2.0;
-    }
     // Items attempting to do damage use the best/hardest possible value, the pointy bits.
     double item_hardness = item_hardness_calc( it ).second;
+    // Stab armor protects wheels from damage. Wheels do not benefit from other armor on their tile, it checks the wheel itself.
+    // TODO: Make different items use different damage types.
+    double armor = std::clamp( vp_wheel.info().damage_reduction.at( damage_stab ) / 100.0, 0.0, 0.75 ) / rng_float( 1.0, 4.0 );
     // It is exponentially more difficult for soft items to damage wheels, even if you're hitting a lot of them.
-    const double chance_to_damage = std::min( std::pow( item_hardness / wheel_hardness, 2.0 ) / 10,
-                                    0.5 );
-    add_msg_debug( debugmode::DF_VEHICLE_MOVE,
-                   "Vehicle %s running over item %s."
-                   "\n Chance to damage: %f%%."
-                   "\n Item hardness: %f"
-                   "\n Wheel hardness: %f",
-                   disp_name(), it.tname(), chance_to_damage * 100.0, item_hardness,
-                   wheel_hardness );
+    const double base_chance = std::min( std::pow( item_hardness / wheel_hardness, 2.0 ) / 10, 0.5 );
+    const double chance_to_damage = std::max( 0.0, base_chance - armor );
+    add_msg_debug(
+        debugmode::DF_VEHICLE_MOVE,
+        "Vehicle %s running over item %s."
+        "\n Item hardness: %f"
+        "\n Wheel hardness: %f"
+        "\n Base chance: %f%%"
+        "\n Armor reduction: %f%%"
+        "\n Final chance: %f%%",
+        disp_name(), it.tname(),
+        item_hardness,
+        wheel_hardness,
+        base_chance * 100.0,
+        armor * 100.0,
+        chance_to_damage * 100.0
+    );
     return chance_to_damage;
 }
 
