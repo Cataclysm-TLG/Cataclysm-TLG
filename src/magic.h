@@ -698,7 +698,7 @@ class spell
 
         // Casts the spell effect from an item.  Less functionality compared to creature casting.
         void cast_spell_effect( const tripoint_bub_ms &target ) const;
-        // Casts the spell effect. returns true if successful
+        // Casts the spell effect.
         void cast_spell_effect( Creature &source, const tripoint_bub_ms &target ) const;
         // Goes through all effects when casting from an item.
         void cast_all_effects( const tripoint_bub_ms &target ) const;

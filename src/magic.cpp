@@ -1822,7 +1822,6 @@ void spell::cast_spell_effect( Creature &source, const tripoint_bub_ms &target )
                 this->get_difficulty( source ), this->energy_cost( *caster ), this->casting_time( *caster ),
                 this->damage( source ) );
     }
-
     type->effect( *this, source, target );
 }
 
