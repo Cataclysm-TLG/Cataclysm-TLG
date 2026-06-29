@@ -399,6 +399,7 @@ static const mtype_id mon_player_blob( "mon_player_blob" );
 static const proficiency_id proficiency_prof_parkour( "prof_parkour" );
 static const proficiency_id proficiency_prof_skating( "prof_skating" );
 static const proficiency_id proficiency_prof_spotting( "prof_spotting" );
+static const proficiency_id proficiency_prof_swimming( "prof_swimming" );
 static const proficiency_id proficiency_prof_traps( "prof_traps" );
 static const proficiency_id proficiency_prof_trapsetting( "prof_trapsetting" );
 static const proficiency_id proficiency_prof_field_medic( "prof_field_medic" );
@@ -1662,9 +1663,9 @@ int Character::swim_speed() const
     units::mass effective_weight = std::max( 0_gram,
                                    ( weight_carried() + bionics_weight() ) - ( str_cur * 1_kilogram ) );
     float swim_speed_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_SWIM_MOD, 1 );
-    ret = ( 750 * swim_speed_mult ) +
-          effective_weight / ( 60_gram / swim_speed_mult ) -
-          50 * get_skill_level( skill_swimming );
+    // Swimming proficiency grants an effective +4 skill, capped at 10.
+    const int swim_skill = std::min( 10, static_cast<int>( std::round( get_skill_level( skill_swimming ) + ( has_proficiency( proficiency_prof_swimming ) ? 4.0f : 0.0f ) ) ) );
+    ret = ( 750 * swim_speed_mult ) + effective_weight / ( 60_gram / swim_speed_mult ) - 50 * swim_skill;
     /** @EFFECT_STR increases swim speed bonus from swim_fins */
     if( worn_with_flag( flag_FIN, body_part_foot_l ) ||
         worn_with_flag( flag_FIN, body_part_foot_r ) ) {
@@ -13432,9 +13433,9 @@ void Character::knock_back_to( const tripoint_bub_ms &to )
         if( !is_npc() ) {
             avatar_action::swim( here, get_avatar(), to );
         }
+        // FIXME: NPCs REALLY NEED TO BE ABLE TO SWIM!!
         // TODO: NPCs can't swim!
-    } else if( here.impassable( to ) ) { // Wait, it's a wall
-
+    } else if( here.impassable( to ) ) { // Wait, it's a wall.
         // It's some kind of wall.
         // TODO: who knocked us back? Maybe that creature should be the source of the damage?
         apply_damage( nullptr, bodypart_id( "torso" ), 3 );
