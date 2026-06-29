@@ -851,7 +851,9 @@ static void haul()
 
     if( hauling && !autohaul ) {
         if( haul_qty == 0 ) {
-            debugmsg( "Invalid hauling state: hauling enabled, nothing is being hauled, autohaul is off." );
+            add_msg( _( "You have lost track of what you were hauling." ) );
+            player_character.stop_hauling();
+            return;
         } else {
             status_header = string_format( _( "You are currently hauling %d items.\nAutohaul is disabled." ),
                                            haul_qty );

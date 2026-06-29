@@ -2418,8 +2418,15 @@ void move_items_activity_actor::do_turn( player_activity &act, Character &who )
             }
 
             if( overflow ) {
-                add_msg( m_warning,
-                         _( "You lose track of some hauled items as they didn't fit on the current tile." ) );
+                std::vector<item_location> &haul_list = who.haul_list;
+                int haul_qty = haul_list.size();
+                if( haul_qty < 1 ) {
+                add_msg( m_warning, _( "You have lost track of what you were hauling." ) );
+                who.stop_hauling();
+                } else {
+                    add_msg( m_warning,
+                             _( "You lose track of some items as there isn't room to haul them along." ) );
+                }
             }
         }
     }
