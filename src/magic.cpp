@@ -1801,6 +1801,17 @@ int spell::heal( const tripoint_bub_ms &target, Creature &caster ) const
     return -1;
 }
 
+void spell::cast_spell_effect( const tripoint_bub_ms &target ) const
+{
+    map &here = get_map();
+    avatar fake_avatar;
+    fake_avatar.setpos( here, target );
+    get_event_bus().send<event_type::character_casts_spell>( character_id( -1 ),
+            this->id(), this->spell_class(),
+            0, 0, 0, this->damage( fake_avatar ) );
+    type->effect( *this, fake_avatar, target );
+}
+
 void spell::cast_spell_effect( Creature &source, const tripoint_bub_ms &target ) const
 {
     Character *caster = source.as_character();
@@ -1813,6 +1824,36 @@ void spell::cast_spell_effect( Creature &source, const tripoint_bub_ms &target )
     }
 
     type->effect( *this, source, target );
+}
+
+void spell::cast_all_effects( const tripoint_bub_ms &target ) const
+{
+    map &here = get_map();
+    avatar fake_avatar;
+    fake_avatar.setpos( here, target );
+    if( has_flag( spell_flag::WONDER ) ) {
+        const auto iter = type->additional_spells.begin();
+        for( int num_spells = std::abs( damage( fake_avatar ) ); num_spells > 0; num_spells-- ) {
+            if( type->additional_spells.empty() ) {
+                debugmsg( "ERROR: %s has WONDER flag but no spells to choose from!", type->id.c_str() );
+                return;
+            }
+            const int rand_spell = rng( 0, type->additional_spells.size() - 1 );
+            spell sp = ( iter + rand_spell )->get_spell( fake_avatar, get_effective_level() );
+            // This spell flag makes it so the message of the spell that's cast using this spell will be sent.
+            // if a message is added to the casting spell, it will be sent as well.
+            add_msg( sp.message() );
+            sp.cast_all_effects( target );
+        }
+    } else {
+        if( has_flag( spell_flag::EXTRA_EFFECTS_FIRST ) ) {
+            cast_extra_spell_effects( target );
+            cast_spell_effect( target );
+        } else {
+            cast_spell_effect( target );
+            cast_extra_spell_effects( target );
+        }
+    }
 }
 
 void spell::cast_all_effects( Creature &source, const tripoint_bub_ms &target ) const
@@ -1853,6 +1894,17 @@ void spell::cast_all_effects( Creature &source, const tripoint_bub_ms &target ) 
             cast_spell_effect( source, target );
             cast_extra_spell_effects( source, target );
         }
+    }
+}
+
+void spell::cast_extra_spell_effects( const tripoint_bub_ms &target ) const
+{
+    map &here = get_map();
+    avatar fake_avatar;
+    fake_avatar.setpos( here, target );
+    for( const fake_spell &extra_spell : type->additional_spells ) {
+        spell sp = extra_spell.get_spell( fake_avatar, get_effective_level() );
+        sp.cast_all_effects( target );
     }
 }
 

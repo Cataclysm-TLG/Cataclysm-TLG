@@ -48,8 +48,8 @@ class event;
 template <typename E> struct enum_traits;
 
 enum class spell_flag : int {
-    AIRBORNE,
-    CHARM_PET, // Applies the pet friendliness adjustment to a monster when charming them
+    AIRBORNE, // This dash effect will treat the caster as airborne until they reach their destination.
+    CHARM_PET, // Applies the pet friendliness adjustment to a monster when charming them.
     CONCENTRATE, // Focus affects spell fail %.
     DODGEABLE, // The target can dodge this attack completely if they succeed on a dodge roll against its spell level. Implies NO_DODGE_MITIGATION.
     EXTRA_EFFECTS_FIRST, // The extra effects are cast before the main spell.
@@ -696,11 +696,17 @@ class spell
         // heals the critter at the location, returns amount healed (Character heals each body part)
         int heal( const tripoint_bub_ms &target, Creature &caster ) const;
 
-        // casts the spell effect. returns true if successful
+        // Casts the spell effect from an item.  Less functionality compared to creature casting.
+        void cast_spell_effect( const tripoint_bub_ms &target ) const;
+        // Casts the spell effect. returns true if successful
         void cast_spell_effect( Creature &source, const tripoint_bub_ms &target ) const;
-        // goes through the spell effect and all of its internal spells
+        // Goes through all effects when casting from an item.
+        void cast_all_effects( const tripoint_bub_ms &target ) const;
+        // Goes through the spell effect and all of its internal spells.
         void cast_all_effects( Creature &source, const tripoint_bub_ms &target ) const;
-        // goes through the spell effect and all of its internal spells
+        // Casts extra_effects when casting from an item (labeled as additional_spells internally)
+        void cast_extra_spell_effects( const tripoint_bub_ms &target ) const;
+        // Casts extra_effects (labeled as additional_spells internally)
         void cast_extra_spell_effects( Creature &source, const tripoint_bub_ms &target ) const;
         // uses up the components in @guy's inventory
         void use_components( Character &guy ) const;
