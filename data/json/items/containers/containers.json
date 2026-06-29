@@ -129,9 +129,9 @@
     "id": "bag_durasack",
     "type": "ITEM",
     "category": "container",
-    "name": { "str": "reusable plastic sack" },
+    "name": { "str": "woven plastic sack" },
     "looks_like": "bag_plastic",
-    "description": "A large and sturdy sack, made out of some plastic material.  Popular choice to store sand, gravel, cement, or stop some local flood.",
+    "description": "A large and sturdy bag made out of plastic canvas.  These are frequently used as sandbags, or for storing gravel.",
     "//": "durasack woven polypropylene bags",
     "weight": "750 g",
     "volume": "750 ml",
@@ -147,22 +147,16 @@
     "id": "bag_durasack_cement",
     "type": "ITEM",
     "subtypes": [ "BOOK" ],
-    "name": { "str": "durable plastic sack, cement" },
+    "name": { "str": "cement bag" },
     "looks_like": "bag_plastic",
     "description": "A big bag made of woven plastic.  Simple instructions printed on the side explain how to make mortar for all your masonry needs.",
     "//": "durasack woven polypropylene bags",
     "copy-from": "bag_durasack",
-    "use_action": {
-      "type": "effect_on_conditions",
-      "description": "Instructions on what to do with the contents of the bag.",
-      "effect_on_conditions": [ "EOC_CEMENT_INSTRUCTIONS" ]
-    }
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_CEMENT_INSTRUCTIONS",
-    "condition": { "and": [ { "u_has_trait": "ILLITERATE" }, { "not": "u_driving" } ] },
-    "effect": [ { "u_learn_recipe": "mortar_build" } ]
+    "required_level": 2,
+    "max_level": 2,
+    "intelligence": 6,
+    "time": "2 m",
+    "read_fun": -1
   },
   {
     "id": "bag_canvas",
