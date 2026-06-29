@@ -1250,7 +1250,8 @@
       "prof_gun_cleaning",
       "prof_knives_familiar",
       "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
+      "prof_auto_pistols_familiar",
+      "prof_swimming"
     ],
     "skills": [
       { "level": 5, "name": "gun" },
@@ -1312,7 +1313,8 @@
       "prof_metalworking",
       "prof_welding_basic",
       "prof_welding",
-      "prof_gun_cleaning"
+      "prof_gun_cleaning",
+      "prof_swimming"
     ],
     "skills": [
       { "level": 5, "name": "mechanics" },
@@ -1365,7 +1367,8 @@
       "prof_gun_cleaning",
       "prof_knives_familiar",
       "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
+      "prof_auto_pistols_familiar",
+      "prof_swimming"
     ],
     "skills": [
       { "level": 6, "name": "swimming" },
@@ -1713,64 +1716,6 @@
   },
   {
     "type": "profession",
-    "id": "seal_sniper",
-    "name": "Navy SEAL Marksmen",
-    "description": "Recruited into the ranks of the US Navy's Special Warfare forces as a designated sniper, your training in precision marksmanship and maritime operations was extensive.  As a proficient soldier and combative in all respects, you provided overwatch and long-range elimination services in the line of duty.  Now, with naval command imploding and your spotter MIA, your skills with a rifle and covert operations are the only things standing between you and the Cataclysm.",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "points": 7,
-    "proficiencies": [
-      "prof_gunsmithing_basic",
-      "prof_spotting",
-      "prof_field_medic",
-      "prof_gun_cleaning",
-      "prof_knives_familiar",
-      "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
-    ],
-    "skills": [
-      { "level": 7, "name": "gun" },
-      { "level": 7, "name": "rifle" },
-      { "level": 5, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "stabbing" },
-      { "level": 2, "name": "dodge" },
-      { "level": 2, "name": "firstaid" },
-      { "level": 4, "name": "survival" },
-      { "level": 2, "name": "throw" },
-      { "level": 3, "name": "swimming" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "tank_top" },
-          { "item": "combat_shirt" },
-          { "item": "tac_fullhelmet" },
-          { "item": "mask_ski" },
-          { "item": "gloves_liner" },
-          { "item": "gloves_tactical" },
-          { "item": "socks" },
-          { "item": "diving_watch" },
-          { "item": "load_bearing_vest" },
-          { "item": "boots_combat" },
-          { "group": "loaded_webbing_belt" },
-          { "group": "charged_two_way_radio" },
-          { "group": "charged_powered_earmuffs" },
-          { "item": "pants_army" },
-          { "item": "water_clean", "container-item": "canteen" },
-          { "item": "legpouch_large", "contents-group": "army_mags_tac338" },
-          { "item": "knife_rm42", "container-item": "sheath" },
-          { "item": "p226_9mm", "ammo-item": "9mm", "container-item": "holster", "charges": 15 },
-          { "item": "p226mag_15rd_9x19mm", "ammo-item": "9mm", "charges": 15, "count": 2 },
-          { "item": "tac338", "ammo-item": "338lapua_fmjbt", "charges": 5, "contents-item": [ "shoulder_strap" ] }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    },
-    "flags": [ "SCEN_ONLY" ]
-  },
-  {
-    "type": "profession",
     "id": "seal",
     "name": "Navy SEAL",
     "description": "You were a member of the SEALs; a key component of the US Navy's special forces and a proficient combatant in both maritime and ground operations.  'The only easy day was yesterday', and with the chain of command in ruins, you may fulfill your final mission in any way you see fit.",
@@ -1783,7 +1728,8 @@
       "prof_gun_cleaning",
       "prof_knives_familiar",
       "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
+      "prof_auto_pistols_familiar",
+      "prof_swimming"
     ],
     "skills": [
       { "level": 7, "name": "gun" },
@@ -1832,62 +1778,6 @@
       "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
-  },
-  {
-    "type": "profession",
-    "id": "specops",
-    "name": "Special Operator",
-    "description": "You were the best of the best, the military's finest.  That's why you're still alive, even after all your comrades fell to the undead.  As far as you can tell, military command abandoned you in this hellhole when you missed the emergency evac.",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "points": 7,
-    "proficiencies": [
-      "prof_gunsmithing_basic",
-      "prof_traps",
-      "prof_disarming",
-      "prof_spotting",
-      "prof_gun_cleaning",
-      "prof_knives_familiar",
-      "prof_auto_rifles_familiar"
-    ],
-    "skills": [
-      { "level": 7, "name": "gun" },
-      { "level": 7, "name": "smg" },
-      { "level": 7, "name": "rifle" },
-      { "level": 4, "name": "melee" },
-      { "level": 4, "name": "stabbing" },
-      { "level": 3, "name": "dodge" },
-      { "level": 4, "name": "traps" },
-      { "level": 2, "name": "firstaid" },
-      { "level": 3, "name": "throw" },
-      { "level": 4, "name": "swimming" },
-      { "level": 3, "name": "survival" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "wetsuit" },
-          { "item": "pants_army" },
-          { "item": "wetsuit_hood" },
-          { "group": "tac_helmet_nvg" },
-          { "item": "wetsuit_gloves" },
-          { "item": "gloves_tactical" },
-          { "item": "socks" },
-          { "item": "boots_combat" },
-          { "item": "dive_bag" },
-          { "item": "diving_watch" },
-          { "item": "single_sling" },
-          { "group": "charged_two_way_radio" },
-          { "item": "water_clean", "container-item": "canteen" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "glasses_bal", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "kukri", "container-item": "sheath" },
-          { "item": "chestrig", "contents-group": "army_mags_mp5" },
-          { "item": "hk_mp5", "ammo-item": "9mm", "charges": 30, "contents-item": [ "suppressor", "holo_sight" ] }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    }
   },
   {
     "type": "profession",
@@ -2695,38 +2585,6 @@
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
-  },
-  {
-    "type": "profession",
-    "id": "modern_archer",
-    "name": "Modern Archer",
-    "description": "A great fan of the archers of old, but at the same time a follower of the latest trends in archery.  You always tried to keep up with the times, acquiring a takedown bow as well as several accessories to complement it.  You can only hope all the training you did with them can help you survive in this trying times.",
-    "npc_background": "BG_survival_story_SPORTS",
-    "points": 4,
-    "proficiencies": [ "prof_bow_basic", "prof_bow_expert" ],
-    "skills": [ { "level": 4, "name": "gun" }, { "level": 4, "name": "archery" }, { "level": 2, "name": "swimming" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "whistle" },
-          { "item": "socks" },
-          { "item": "boots_steel" },
-          { "item": "pants_cargo" },
-          { "item": "jacket_leather" },
-          { "item": "fancy_sunglasses" },
-          { "item": "hat_boonie" },
-          { "item": "diving_watch" },
-          { "item": "caff_gum" },
-          { "group": "charged_smart_phone" },
-          { "item": "rashguard" },
-          { "item": "takedown_recurbow", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "quiver_takedown_bow", "contents-group": "quiver_modern_archer" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    },
-    "missions": [ "MISSION_HUNTER" ]
   },
   {
     "type": "profession",
@@ -3570,32 +3428,6 @@
           { "item": "fire_gauntlets" },
           { "item": "wristwatch" },
           { "item": "hammer" },
-          { "group": "charged_smart_phone" }
-        ]
-      },
-      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "jeweler",
-    "name": "Jeweler",
-    "description": "You were an independent artisan, who made gorgeous rings and pendants for the people who afforded your services.  You doubt the market for your work has fared well after the end of the world, but perhaps your proficiency with fine tools and metals will come in handy somehow.",
-    "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 2,
-    "skills": [ { "level": 6, "name": "fabrication" }, { "level": 2, "name": "swimming" } ],
-    "proficiencies": [ "prof_metalworking", "prof_redsmithing", "prof_fine_metalsmithing", "prof_gem_setting" ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "jeans" },
-          { "item": "socks" },
-          { "item": "boots" },
-          { "item": "longshirt" },
-          { "item": "wristwatch" },
-          { "item": "apron_leather" },
-          { "item": "chisel" },
           { "group": "charged_smart_phone" }
         ]
       },
@@ -4926,6 +4758,7 @@
     "description": "It was hard enough getting kids to run laps without having to worry about them trying to eat your brains.  Zombies won't even line up when you blow your whistle.",
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "points": 2,
+    "proficiencies": [ "prof_swimming" ],
     "skills": [
       { "level": 3, "name": "swimming" },
       { "level": 3, "name": "speech" },
@@ -5634,8 +5467,9 @@
     "name": "Swimmer",
     "description": "You were looking forward to a nice, relaxing day at the beach.  You had to run when some lunatics tried to rip your head off and play beach volleyball with it, but at least you managed to grab your bag on the way out.",
     "npc_background": "BG_survival_story_TOURIST",
-    "points": 0,
-    "skills": [ { "level": 2, "name": "swimming" } ],
+    "points": 2,
+    "proficiencies": [ "prof_swimming" ],
+    "skills": [ { "level": 3, "name": "swimming" } ],
     "items": {
       "both": {
         "entries": [
@@ -5667,7 +5501,8 @@
     "name": "Diver",
     "description": "You were exploring below the waves close to shore when you noticed something weird on the nearby beach, you decided to swim away when you heard the screams.",
     "npc_background": "BG_survival_story_SPORTS",
-    "points": 2,
+    "points": 3,
+    "proficiencies": [ "prof_swimming" ],
     "skills": [ { "level": 5, "name": "swimming" } ],
     "traits": [ "OUTDOORSMAN" ],
     "items": {
