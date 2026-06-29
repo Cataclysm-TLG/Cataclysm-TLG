@@ -8,7 +8,7 @@
     "looks_like": "t_pavement",
     "color": "yellow",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "SWIM_UNDER" ],
+    "flags": [ "TRANSPARENT", "FLAT", "SWIM_UNDER", "INDOORS" ],
     "connect_groups": "WATER"
   },
   {

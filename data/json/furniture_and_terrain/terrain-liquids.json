@@ -378,7 +378,7 @@
     "color": "light_green",
     "move_cost": 6,
     "liquid_source": { "id": "water_sewage" },
-    "flags": [ "TRANSPARENT", "SWIMMABLE", "SHALLOW_WATER" ],
+    "flags": [ "TRANSPARENT", "SWIMMABLE", "SHALLOW_WATER", "INDOORS" ],
     "examine_action": "water_source"
   },
   {
