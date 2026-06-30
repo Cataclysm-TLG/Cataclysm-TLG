@@ -101,12 +101,11 @@ static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_electric( "electric" );
 static const damage_type_id damage_heat( "heat" );
 
-static const efftype_id effect_all_fours( "all_fours" );
+static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_foamcrete_slow( "foamcrete_slow" );
 static const efftype_id effect_invisibility( "invisibility" );
-static const efftype_id effect_knockdown( "knockdown" );
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_monster_dodged( "monster_dodged" );
 static const efftype_id effect_no_sight( "no_sight" );
@@ -282,6 +281,23 @@ bool Creature::can_move_to_vehicle_tile( const tripoint_abs_ms &loc, bool &cramp
     const monster *mon = as_monster();
 
     vehicle &veh = vp_there->vehicle();
+
+    int vehicle_speed = vp_there->vehicle().velocity;
+
+    // You simply cannot purposefully enter a vehicle when it is going extremely fast, unless you can fly.
+    if( get_speed() * 35 < vehicle_speed ) {
+        if( !here.veh_at( pos_bub() ) ) {
+            if( mon ) {
+                if( !mon->flies() && !mon->has_effect( effect_airborne ) ) {
+                    return false;
+                }
+            } else {
+                if( !has_effect( effect_airborne ) ) {
+                    return false;
+                }
+            }
+        }
+    }
 
     std::vector<vehicle_part *> cargo_parts;
     cargo_parts = veh.get_parts_at( loc, "CARGO", part_status_flag::any );
@@ -641,11 +657,10 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return false;
     }
 
-    if( has_water_camouflage && target_range > this->spot_check() ) {
-        if( is_underwater ||
-            here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, critter.pos_bub( here ) ) ||
-            ( here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, critter.pos_bub( here ) ) &&
-              critter.get_size() < creature_size::medium ) ) {
+    if( is_underwater || here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, critter.pos_bub( here ) ) ||
+        ( here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, critter.pos_bub( here ) ) &&
+          critter.get_size() < creature_size::medium ) ) {
+        if( has_water_camouflage && target_range > this->spot_check() ) {
             return false;
         }
     }
@@ -1971,8 +1986,8 @@ void Creature::add_effect( const effect_source &source, const efftype_id &eff_id
     if( !force && is_immune_effect( eff_id ) ) {
         return;
     }
-    if( eff_id == effect_knockdown && ( has_effect( effect_ridden ) ||
-                                        has_effect( effect_riding ) ) ) {
+    if( eff_id == effect_downed && ( has_effect( effect_ridden ) ||
+                                     has_effect( effect_riding ) ) ) {
         monster *mons = dynamic_cast<monster *>( this );
         if( mons && mons->mounted_player ) {
             mons->mounted_player->forced_dismount();
