@@ -1490,8 +1490,10 @@ void Character::modify_morale( item &food, const int nutr )
         if( has_trait( trait_PICKYEATER ) ) {
             nausea_chance += 5;
         }
-        if( get_str_base() > 10 ) {
-            nausea_chance -= ( std::min( get_str(), get_str_base() ) / 2 );
+        int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                                get_str_base() );
+        if( strength_adjusted > 10 ) {
+            nausea_chance -= ( std::min( get_str(), strength_adjusted ) / 2 );
         }
     }
     if( nausea_chance > 0 && x_in_y( std::min( 100, nausea_chance ), 100 ) ) {

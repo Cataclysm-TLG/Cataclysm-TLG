@@ -2840,7 +2840,9 @@ void Character::recalc_hp()
     float hp_mod = 1.0f + enchantment_cache->get_value_multiply( enchant_vals::mod::MAX_HP );
     float hp_adjustment = ( str_boost_val * 3 ) +
                           enchantment_cache->get_value_add( enchant_vals::mod::MAX_HP );
-    calc_all_parts_hp( hp_mod, hp_adjustment, get_str_base(), get_dex_base(), get_per_base(),
+    int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                            get_str_base() );
+    calc_all_parts_hp( hp_mod, hp_adjustment, strength_adjusted, get_dex_base(), get_per_base(),
                        get_int_base(), get_lifestyle(), get_fat_to_hp() );
     cached_dead_state.reset();
 }
@@ -6655,12 +6657,14 @@ float Character::get_bmi() const
 
 float Character::get_bmi_lean() const
 {
+    int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                            get_str_base() );
     //strength BMIs decrease to zero as you starve (muscle atrophy)
     if( get_bmi_fat() < character_weight_category::normal ) {
         const stat_mod wpen = get_weight_penalty();
-        return 12.0f + get_str_base() - wpen.strength;
+        return 12.0f + strength_adjusted - wpen.strength;
     }
-    return 12.0f + get_str_base();
+    return 12.0f + strength_adjusted;
 }
 
 float Character::get_bmi_fat() const
