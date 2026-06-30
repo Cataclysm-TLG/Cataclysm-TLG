@@ -255,13 +255,14 @@ class messages_impl
             }
 
             if( is_drunk ) {
-                const int intensity = p_char->get_effect_int( effect_drunk ) - 1;
-                if( intensity > 0 ) {
+                const int intensity = p_char->get_effect_int( effect_drunk );
+                // Don't mangle text if we're only buzzed.
+                if( intensity > 1 ) {
                     // String length determines how many errors are added. Increase the divisor to reduce number of errors.
                     const float length_factor = static_cast<float>( msg.size() ) / 16.0f;
-                    // Insensity multiplier increases the amount of errors.
+                    // Insensity multiplier increases the frequency of errors.
                     const float expected = length_factor * ( 0.7f * intensity );
-                    // Expected multiplier makes it more chaotic.
+                    // Expected multiplier increases the randomness of errors.
                     int slurred_words = std::max( 0, static_cast<int>(
                                                       round( rng_normal( expected, expected * 0.75f ) )
                                                   ) );
@@ -270,7 +271,7 @@ class messages_impl
                         return static_cast<unsigned char>( c ) < 0x80;
                     };
                     std::vector<bool> unsafe( msg.size(), false );
-                    // Exclude up to 8 characters adjacent to these markup symbols.
+                    // Exclude up to 8 characters adjacent to these markup symbols to ensure we don't accidentally break formatting.
                     for( size_t i = 0; i < msg.size(); i++ ) {
                         if( msg[i] == '%' || msg[i] == '\\' || msg[i] == '$' ) {
                             for( int d = -8; d <= 8; d++ ) {
@@ -301,7 +302,7 @@ class messages_impl
                             if( in_tag ) {
                                 continue;
                             }
-                            // Ensure that we only mess up ASCII text.
+                            // Ensure that we only mess up ASCII text. Other text (e.g. cyrillic) is not bit-safe.
                             if( !is_ascii_char( c ) ) {
                                 if( start != std::string::npos ) {
                                     ranges.emplace_back( start, i - start );
@@ -317,7 +318,7 @@ class messages_impl
                                 }
                                 continue;
                             }
-                            // Exclude markup symbols and stuff they're attached to.
+                            // Exclude markup symbols and stuff they're attached to. I forget why we do this twice but there's probably a reason.
                             if( c == '_' || c == ' ' || c == '/' || c == '|' ) {
                                 if( start != std::string::npos ) {
                                     ranges.emplace_back( start, i - start );
