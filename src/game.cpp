@@ -5049,10 +5049,10 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
             if( !here.has_flag( ter_furn_flag::TFLAG_LIQUID, targ_pos ) &&
                 targ->has_flag( mon_flag_AQUATIC ) &&
                 !targ->is_dead() ) {
-                targ->die( &here, nullptr );
                 if( u.sees( here, *targ ) ) {
-                    add_msg( _( "The %s flops around and dies!" ), targ->name() );
+                    add_msg( _( "The %s flops around in a vain attempt to return to the water." ), targ->name() );
                 }
+                targ->die( &here, nullptr );
             }
             tp = traj[i];
         }

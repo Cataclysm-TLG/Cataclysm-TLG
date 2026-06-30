@@ -1117,7 +1117,17 @@
       }
     ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s fades away." },
-    "flags": [ "FLIES", "NO_BREATHE", "SEES", "BIOLOGICALPROOF", "RANGED_ATTACKER", "IMMOBILE", "NOHEAD", "STUN_IMMUNE", "ACIDPROOF" ]
+    "flags": [
+      "FLIES",
+      "NO_BREATHE",
+      "SEES",
+      "BIOLOGICALPROOF",
+      "RANGED_ATTACKER",
+      "IMMOBILE",
+      "NOHEAD",
+      "STUN_IMMUNE",
+      "ACIDPROOF"
+    ]
   },
   {
     "id": "mon_memory",

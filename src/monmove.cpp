@@ -929,6 +929,15 @@ void monster::move()
         return;
     }
 
+    // If the monster is aquatic and not a zombie, it will soon die out of water.
+    if( !here.has_flag_ter( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) &&
+        !here.has_flag_ter( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_LIQUID, pos_bub() )
+        && has_flag( mon_flag_AQUATIC ) && !has_flag( mon_flag_NO_BREATHE ) && one_in( 20 ) ) {
+        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ), name() );
+        die( &here, nullptr );
+    }
+
     if( moves < 0 ) {
         return;
     }
@@ -962,7 +971,7 @@ void monster::move()
     const std::optional<vpart_reference> vp_boardable = ovp.part_with_feature( "BOARDABLE", true );
     if( vp_boardable && friendly != 0 ) {
         const vehicle &veh = vp_boardable->vehicle();
-        if( veh.is_moving() && veh.get_monster( here,  vp_boardable->part_index() ) ) {
+        if( veh.is_moving() && veh.get_monster( here, vp_boardable->part_index() ) ) {
             moves = 0;
             return; // don't move if friendly and passenger in a moving vehicle
         }
@@ -2387,11 +2396,13 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
     // If we're still in the function at this point, we're actually moving a tile!
     // die_if_drowning will kill the monster if necessary, but if the deep water
     // tile is on a vehicle, we should check for swimmers out of water
-    if( !die_if_drowning( to ) && has_flag( mon_flag_AQUATIC ) ) {
+    if( !here.has_flag_ter( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) &&
+        !here.has_flag_ter( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_LIQUID, pos_bub() )
+        && has_flag( mon_flag_AQUATIC ) && !has_flag( mon_flag_NO_BREATHE ) && one_in( 20 ) ) {
+        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ),
+                                name() );
         die( &here, nullptr );
-        if( u_see ) {
-            add_msg( _( "The %s flops around and dies!" ), name() );
-        }
     }
 
     // It's some kind of wall.

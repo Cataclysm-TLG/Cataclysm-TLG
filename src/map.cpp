@@ -5649,53 +5649,50 @@ bool map::open_door( Creature const &u, const tripoint_bub_ms &p, const bool ins
         if( has_flag( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE, p ) && !inside ) {
             return false;
         }
-
         if( !check_only ) {
             sounds::sound( p, 6, sounds::sound_t::movement, _( "swish" ), true,
                            "open_door", ter.id.str() );
             ter_set( p, ter.open );
-
             if( u.has_trait( trait_SCHIZOPHRENIC ) && u.is_avatar() &&
                 one_in( 50 ) && !ter.has_flag( ter_furn_flag::TFLAG_TRANSPARENT ) ) {
                 tripoint_bub_ms mp = p + point_rel_ms( -2 * u.pos_bub().xy().raw() ) + tripoint_rel_ms{ 2 * p.x(), 2 * p.y(), p.z() };
                 g->spawn_hallucination( mp );
             }
         }
-
         return true;
     } else if( furn.open ) {
         if( has_flag( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE, p ) && !inside ) {
             return false;
         }
-
         if( !check_only ) {
             sounds::sound( p, 6, sounds::sound_t::movement, _( "swish" ), true,
                            "open_door", furn.id.str() );
             furn_set( p, furn.open );
         }
-
         return true;
-    } else if( const optional_vpart_position vp = veh_at( p ) ) {
-        const optional_vpart_position creature_veh = veh_at( u.pos_bub() );
-        const bool creature_outside = !creature_veh.has_value() ||
-                                      &creature_veh->vehicle() != &veh_at( p )->vehicle();
-
-        const int openable = vp->vehicle().next_part_to_open( vp->part_index(), creature_outside );
-        if( openable >= 0 ) {
-            if( !check_only ) {
-                if( ( u.is_npc() || u.is_avatar() ) &&
-                    !vp->vehicle().handle_potential_theft( *u.as_character() ) ) {
-                    return false;
-                }
-                vp->vehicle().open_all_at( *this, openable );
+        } else if( const optional_vpart_position vp = veh_at( p ) ) {
+            const optional_vpart_position creature_veh = veh_at( u.pos_bub() );
+            const bool creature_outside =
+                !creature_veh.has_value() ||
+                &creature_veh->vehicle() != &vp->vehicle();
+            const bool player_can_lock = u.is_monster() && vp->vehicle().player_is_driving_this_veh( this );
+            if( player_can_lock ) {
+                return false;
             }
-
-            return true;
-        }
-
+            const int openable =
+                vp->vehicle().next_part_to_open( vp->part_index(), creature_outside );
+            if( openable >= 0 ) {
+                if( !check_only ) {
+                    if( ( u.is_npc() || u.is_avatar() ) &&
+                        !vp->vehicle().handle_potential_theft( *u.as_character() ) ) {
+                        return false;
+                    }
+                    vp->vehicle().open_all_at( *this, openable );
+                }
+                return true;
+            }
         return false;
     }
-
     return false;
 }
 
