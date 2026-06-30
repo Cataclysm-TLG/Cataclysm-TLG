@@ -112,6 +112,8 @@ static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 
 static const mongroup_id GROUP_NETHER( "GROUP_NETHER" );
 
+static const mtype_id mon_impossible_shape( "mon_impossible_shape" );
+
 static const mutation_category_id mutation_category_MYCUS( "MYCUS" );
 static const mutation_category_id mutation_category_RAT( "RAT" );
 static const mutation_category_id mutation_category_TROGLOBITE( "TROGLOBITE" );
@@ -630,12 +632,48 @@ static void eff_fun_teleglow( Character &u, effect &it )
             }
         }
     }
-    if( one_in( 7200 - ( dur - 360_minutes ) / 4_turns ) ) {
-        //Spawn a tindalos rift via effect_tindrift rather than it being hard-coded to teleglow
+    if( one_in( 7000 - ( dur - 360_minutes ) / 4_turns ) ) {
+        creature_tracker &creatures = get_creature_tracker();
+        tripoint_bub_ms dest( 0, 0, pos.z() );
+        int &x = dest.x();
+        int &y = dest.y();
+        int tries = 0;
+        do {
+            x = pos.x() + rng( -4, 4 );
+            y = pos.y() + rng( -4, 4 );
+            tries++;
+            if( tries >= 5 ) {
+                break;
+            }
+        } while( creatures.creature_at( dest ) );
+        if( tries < 5 ) {
+            if( !here.impassable( dest ) ) {
+                g->place_critter_at( mon_impossible_shape, dest );
+                if( uistate.distraction_hostile_spotted && player_character.sees( here, dest ) ) {
+                    g->cancel_activity_or_ignore_query( distraction_type::hostile_spotted_far,
+                                                        _( "A monster appears nearby!" ) );
+                    add_msg( m_warning, _( "Space folds impossibly around itself!" ) );
+                }
+            }
+            if( one_in( 6 ) ) {
+                // Set ourselves up for removal
+                it.set_duration( 0_turns );
+            }
+        }
+    }
+    if( one_in( 21000 - ( dur - 360_minutes ) / 4_turns ) ) {
+        u.add_msg_if_player( m_bad, _( "You shudder suddenly." ) );
+        u.mutate();
+        if( one_in( 4 ) ) {
+            // Set ourselves up for removal.
+            it.set_duration( 0_turns );
+        }
+    }
+    if( one_in( 8000 - ( dur - 360_minutes ) / 4_turns ) ) {
+        // Spawn a tindalos rift via effect_tindrift rather than it being hard-coded to teleglow.
         u.add_effect( effect_tindrift, 5_turns );
-
         if( one_in( 2 ) ) {
-            // Set ourselves up for removal
+            // Set ourselves up for removal.
             it.set_duration( 0_turns );
         }
     }
@@ -643,7 +681,7 @@ static void eff_fun_teleglow( Character &u, effect &it )
         u.add_msg_if_player( m_bad, _( "You pass out." ) );
         u.fall_asleep( 2_hours );
         if( one_in( 6 ) ) {
-            // Set ourselves up for removal
+            // Set ourselves up for removal.
             it.set_duration( 0_turns );
         }
     }
@@ -725,8 +763,6 @@ static void eff_fun_teleglow( Character &u, effect &it )
     if( one_in( 10000 ) ) {
         if( !u.has_trait( trait_M_IMMUNE ) ) {
             u.add_effect( effect_fungus, 1_turns, true );
-        } else {
-            u.add_msg_if_player( m_info, _( "We have many colonists awaiting passage." ) );
         }
         // Set ourselves up for removal
         it.set_duration( 0_turns );
