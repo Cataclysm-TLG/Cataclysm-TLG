@@ -5675,7 +5675,7 @@ bool map::open_door( Creature const &u, const tripoint_bub_ms &p, const bool ins
             const bool creature_outside =
                 !creature_veh.has_value() ||
                 &creature_veh->vehicle() != &vp->vehicle();
-            const bool player_can_lock = u.is_monster() && vp->vehicle().player_is_driving_this_veh( this );
+            const bool player_can_lock = u.attitude_to( get_player_character() ) != Creature::Attitude::FRIENDLY && vp->vehicle().player_is_driving_this_veh( this );
             if( player_can_lock ) {
                 return false;
             }
