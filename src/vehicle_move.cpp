@@ -1185,7 +1185,7 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
             if( !vert_coll ) {
                 if( std::fabs( vel2_a ) > 10.0f ||
                     std::fabs( e * mass * vel1_a ) > std::fabs( mass2 * ( 10.0f - vel2_a ) ) ) {
-                    const units::angle angle = rng_float( -60_degrees, 60_degrees );
+                    const units::angle angle = rng_float( -80_degrees, 80_degrees );
                     // Also handle the weird case when we don't have enough force
                     // but still have to push (in such case compare momentum)
                     const float push_force = std::max<float>( std::fabs( vel2_a ), 10.1f );
@@ -1339,7 +1339,8 @@ double vehicle::wheel_damage_chance_vs_item( const item &it, vehicle_part &vp_wh
     double item_hardness = item_hardness_calc( it ).second;
     // Stab armor protects wheels from damage. Wheels do not benefit from other armor on their tile, it checks the wheel itself.
     // TODO: Make different items use different damage types.
-    double armor = std::clamp( vp_wheel.info().damage_reduction.at( damage_stab ) / 100.0, 0.0, 0.75 ) / rng_float( 1.0, 4.0 );
+    double armor = std::clamp( vp_wheel.info().damage_reduction.at( damage_stab ) / 100.0, 0.0,
+                               0.75 ) / rng_float( 1.0, 4.0 );
     // It is exponentially more difficult for soft items to damage wheels, even if you're hitting a lot of them.
     const double base_chance = std::min( std::pow( item_hardness / wheel_hardness, 2.0 ) / 10, 0.5 );
     const double chance_to_damage = std::max( 0.0, base_chance - armor );

@@ -13380,6 +13380,9 @@ void game::animate_weather()
                 if( !m.is_outside( u.pos_bub( here ) ) && !m.is_outside( mapp ) ) {
                     continue;
                 }
+                if( u.pos_bub().z() < 0 && m.is_roofed( u.pos_bub( here ) ) ) {
+                    continue;
+                }
                 wPrint.vdrops.emplace_back( screen_point.x(), screen_point.y() );
             }
         }

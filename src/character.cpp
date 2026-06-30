@@ -1664,8 +1664,11 @@ int Character::swim_speed() const
                                    ( weight_carried() + bionics_weight() ) - ( str_cur * 1_kilogram ) );
     float swim_speed_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_SWIM_MOD, 1 );
     // Swimming proficiency grants an effective +4 skill, capped at 10.
-    const int swim_skill = std::min( 10, static_cast<int>( std::round( get_skill_level( skill_swimming ) + ( has_proficiency( proficiency_prof_swimming ) ? 4.0f : 0.0f ) ) ) );
-    ret = ( 750 * swim_speed_mult ) + effective_weight / ( 60_gram / swim_speed_mult ) - 50 * swim_skill;
+    const int swim_skill = std::min( 10,
+                                     static_cast<int>( std::round( get_skill_level( skill_swimming ) + ( has_proficiency(
+                                             proficiency_prof_swimming ) ? 4.0f : 0.0f ) ) ) );
+    ret = ( 750 * swim_speed_mult ) + effective_weight / ( 60_gram / swim_speed_mult ) - 50 *
+          swim_skill;
     /** @EFFECT_STR increases swim speed bonus from swim_fins */
     if( worn_with_flag( flag_FIN, body_part_foot_l ) ||
         worn_with_flag( flag_FIN, body_part_foot_r ) ) {
