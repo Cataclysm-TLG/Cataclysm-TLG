@@ -1107,7 +1107,7 @@ std::string monster::extended_description() const
     describe_properties( _( "It can %s." ), {
         {swims(), pgettext( "Swim as an action", "swim" )},
         {flies(), pgettext( "Fly as an action", "fly" )},
-        {can_dig(), pgettext( "Dig as an action", "dig" )},
+        {can_dig(), pgettext( "Burrow as an action", "burrow" )},
         {climbs(), pgettext( "Climb as an action", "climb" )}
     } );
 
@@ -1116,10 +1116,6 @@ std::string monster::extended_description() const
         {mon_flag_VENOM, pgettext( "Poison as an action", "poison" )},
         {mon_flag_PARALYZEVENOM, pgettext( "Paralyze as an action", "paralyze" )}
     } );
-
-    if( !type->has_flag( mon_flag_NOHEAD ) ) {
-        ss += std::string( _( "It has a head." ) ) + "\n";
-    }
 
     if( debug_mode ) {
         ss += "--\n";

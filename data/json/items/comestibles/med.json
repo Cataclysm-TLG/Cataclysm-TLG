@@ -1482,7 +1482,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "MED",
-    "name": { "str": "zolpidem" },
+    "name": { "str_sp": "zolpidem" },
     "description": "A prescription-strength sedative with a variety of psychoactive side effects.  Used in the treatment of insomnia.",
     "weight": "1 g",
     "volume": "1 ml",

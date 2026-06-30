@@ -3550,7 +3550,8 @@
   },
   {
     "type": "effect_type",
-    "id": "teleglow"
+    "id": "teleglow",
+    "max_duration": "960 m"
   },
   {
     "type": "effect_type",
