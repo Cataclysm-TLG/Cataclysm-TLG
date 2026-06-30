@@ -255,7 +255,7 @@ class messages_impl
             }
 
             if( is_drunk ) {
-                const int intensity = p_char->get_effect_int( effect_drunk );
+                const int intensity = p_char->get_effect_int( effect_drunk ) - 1;
                 if( intensity > 0 ) {
                     // String length determines how many errors are added. Increase the divisor to reduce number of errors.
                     const float length_factor = static_cast<float>( msg.size() ) / 16.0f;
@@ -317,7 +317,6 @@ class messages_impl
                                 }
                                 continue;
                             }
-
                             // Exclude markup symbols and stuff they're attached to.
                             if( c == '_' || c == ' ' || c == '/' || c == '|' ) {
                                 if( start != std::string::npos ) {
@@ -355,6 +354,7 @@ class messages_impl
                         auto [rstart, rlen] = random_entry( usable );
                         int slurred_roll = rng( 0, intensity + 1 );
                         if( slurred_roll <= 1 ) {
+                            // Decapitalization.
                             size_t pos = rstart + rng( 0, rlen - 1 );
                             char &c = msg[pos];
                             if( !is_ascii_char( c ) || unsafe[pos] ) {
@@ -365,9 +365,17 @@ class messages_impl
                             } else {
                                 c = static_cast<char>( tolower( c ) );
                             }
+                        } else if( slurred_roll <= 2 ) {
+                            // Letter duplication.
+                            size_t pos = rstart + rng( 0, rlen - 1 );
+                            if( !is_ascii_char( msg[pos] ) || unsafe[pos] ) {
+                                continue;
+                            }
+                            char c = msg[pos];
+                            msg.insert( pos + 1, 1, c );
                         } else if( slurred_roll <= 3 && rlen >= 4 ) {
+                            // Letter swapping.
                             size_t pos = rstart + rng( 0, rlen - 2 );
-
                             if( !is_ascii_char( msg[pos] ) ||
                                 !is_ascii_char( msg[pos + 1] ) ||
                                 unsafe[pos] || unsafe[pos + 1] ) {
@@ -375,6 +383,7 @@ class messages_impl
                             }
                             std::swap( msg[pos], msg[pos + 1] );
                         } else {
+                            // Letter deletion.
                             size_t pos = rstart + rng( 0, rlen - 1 );
                             if( !is_ascii_char( msg[pos] ) || unsafe[pos] ) {
                                 continue;
