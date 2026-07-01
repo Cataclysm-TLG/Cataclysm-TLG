@@ -3962,7 +3962,12 @@
     "category": [ "SLIME" ],
     "enchantments": [
       {
-        "values": [ { "value": "MAX_HP", "add": 3 }, { "value": "STRENGTH", "add": -2 }, { "value": "DEXTERITY", "add": 3 } ]
+        "values": [
+          { "value": "MAX_HP", "add": 3 },
+          { "value": "STRENGTH", "add": -2 },
+          { "value": "STRENGTH_NATURAL", "add": -2 },
+          { "value": "DEXTERITY", "add": 3 }
+        ]
       }
     ]
   },
@@ -3984,7 +3989,12 @@
     "flags": [ "PSEUDOPOD_GRASP" ],
     "enchantments": [
       {
-        "values": [ { "value": "MAX_HP", "add": 6 }, { "value": "STRENGTH", "add": -4 }, { "value": "DEXTERITY", "add": 4 } ]
+        "values": [
+          { "value": "MAX_HP", "add": 6 },
+          { "value": "STRENGTH", "add": -4 },
+          { "value": "STRENGTH_NATURAL", "add": -4 },
+          { "value": "DEXTERITY", "add": 4 }
+        ]
       }
     ]
   },
@@ -3996,7 +4006,11 @@
     "visibility": 1,
     "description": "Your extremities have gained strength but lost fine motor skills.  -1 Dexterity +2 Strength.",
     "category": [ "GASTROPOD" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "DEXTERITY", "add": -1 } ] } ]
+    "enchantments": [
+      {
+        "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "STRENGTH_NATURAL", "add": 2 }, { "value": "DEXTERITY", "add": -1 } ]
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -4331,7 +4345,11 @@
     "//": "Trading X for Y usually means reducing X to gain Y, so I switched the order.",
     "threshreq": [ "THRESH_TROGLOBITE" ],
     "category": [ "TROGLOBITE" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "DEXTERITY", "add": -2 } ] } ]
+    "enchantments": [
+      {
+        "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "STRENGTH_NATURAL", "add": 2 }, { "value": "DEXTERITY", "add": -2 } ]
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -5635,6 +5653,7 @@
       {
         "values": [
           { "value": "STRENGTH", "add": 2 },
+          { "value": "STRENGTH_NATURAL", "add": 2 },
           { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.5 },
           { "value": "CARRY_WEIGHT", "multiply": 0.05 }
         ]
@@ -5659,6 +5678,7 @@
       {
         "values": [
           { "value": "STRENGTH", "add": 2 },
+          { "value": "STRENGTH_NATURAL", "add": 2 },
           { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.5 },
           { "value": "CARRY_WEIGHT", "multiply": 0.05 }
         ]
@@ -5686,6 +5706,7 @@
         "values": [
           { "value": "MAX_HP", "add": -6 },
           { "value": "STRENGTH", "add": 4 },
+          { "value": "STRENGTH_NATURAL", "add": 4 },
           { "value": "FATIGUE_REGEN", "multiply": -0.15 },
           { "value": "FATIGUE", "multiply": 0.15 },
           { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 1 },
@@ -5715,6 +5736,7 @@
       {
         "values": [
           { "value": "STRENGTH", "add": 4 },
+          { "value": "STRENGTH_NATURAL", "add": 4 },
           { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 1 },
           { "value": "CARRY_WEIGHT", "multiply": 0.1 }
         ]
@@ -5745,7 +5767,7 @@
       "URSINE",
       "CRUSTACEAN"
     ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 1 }, { "value": "STRENGTH_NATURAL", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -5757,7 +5779,7 @@
     "prereqs": [ "STR_UP" ],
     "changes_to": [ "STR_UP_3", "STR_ALPHA" ],
     "category": [ "LIZARD", "CATTLE", "PLANT", "ALPHA", "CHIMERA", "LUPINE", "TROGLOBITE", "BEAST", "URSINE", "CRUSTACEAN" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "STRENGTH_NATURAL", "add": 2 } ] } ]
   },
   {
     "type": "mutation",
@@ -5779,7 +5801,7 @@
       "THRESH_CATTLE",
       "THRESH_CRUSTACEAN"
     ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 4 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 4 }, { "value": "STRENGTH_NATURAL", "add": 4 } ] } ]
   },
   {
     "type": "mutation",
@@ -5793,7 +5815,7 @@
     "prereqs": [ "STR_UP_3" ],
     "threshreq": [ "THRESH_BEAST", "THRESH_URSINE", "THRESH_CRUSTACEAN" ],
     "category": [ "BEAST", "URSINE", "CRUSTACEAN" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 7 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 7 }, { "value": "STRENGTH_NATURAL", "add": 7 } ] } ]
   },
   {
     "type": "mutation",
@@ -5805,7 +5827,14 @@
     "prereqs": [ "STR_UP_2" ],
     "threshreq": [ "THRESH_ALPHA" ],
     "category": [ "ALPHA" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": { "math": [ "alpha_stat_bonus(u_val('strength_base'))" ] } } ] } ]
+    "enchantments": [
+      {
+        "values": [
+          { "value": "STRENGTH", "add": { "math": [ "alpha_stat_bonus(u_val('strength_base'))" ] } },
+          { "value": "STRENGTH_NATURAL", "add": { "math": [ "alpha_stat_bonus(u_val('strength_base'))" ] } }
+        ]
+      }
+    ]
   },
   {
     "type": "mutation",

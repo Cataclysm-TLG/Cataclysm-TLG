@@ -58,6 +58,7 @@ namespace io
         switch ( data ) {
             case enchant_vals::mod::ARTIFACT_RESONANCE: return "ARTIFACT_RESONANCE";
             case enchant_vals::mod::STRENGTH: return "STRENGTH";
+            case enchant_vals::mod::STRENGTH_NATURAL: return "STRENGTH_NATURAL";
             case enchant_vals::mod::DEXTERITY: return "DEXTERITY";
             case enchant_vals::mod::PERCEPTION: return "PERCEPTION";
             case enchant_vals::mod::INTELLIGENCE: return "INTELLIGENCE";
