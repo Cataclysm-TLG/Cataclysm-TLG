@@ -425,7 +425,7 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 4,
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE"  ],
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
     "armor": [
       {
         "encumbrance": 6,
@@ -452,7 +452,7 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 8,
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE"  ],
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
     "armor": [
       {
         "encumbrance": 3,
@@ -479,7 +479,7 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 6,
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE"  ],
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
     "armor": [
       {
         "encumbrance": 3,
@@ -567,7 +567,7 @@
     "material": [ "steel" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "PREFIX_XL", "OVERSIZE"  ],
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "PREFIX_XL", "OVERSIZE" ],
     "armor": [
       {
         "material": [
