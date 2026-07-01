@@ -1362,7 +1362,7 @@ static std::string assemble_stat_details( avatar &u, int sel )
                        "\n- Chance of hacking/programming computers, card readers, robots, etc."
                        "\n- Chance of bypassing vehicle security system"
                        "\n- Chance to get better results when disassembling items"
-                       "\n- Bash damage with whip-type weapons"
+                       "\n- Bash damage with whips and flails"
                        "\n- Chance of being paralyzed by fear attack" ),
                     c_green );
         }
@@ -1391,13 +1391,10 @@ static std::string assemble_stat_details( avatar &u, int sel )
                        "\n- Throwing accuracy"
                        "\n- Disinfecting your own wounds and using first aid on others"
                        "\n- Chance of losing control of vehicle when driving"
-                       "\n- Chance of spotting hidden creatures"
-                       "\n- Speed and effectiveness of lockpicking"
-                       "\n- Speed and effectiveness of foraging"
-                       "\n- Detection and disarming traps"
+                       "\n- Chance of spotting hidden creatures and traps"
+                       "\n- Speed and effectiveness of lockpicking and foraging"
                        "\n- Morale bonus when playing a musical instrument"
-                       "\n- Effectiveness of repairing and modifying clothes and armor"
-                       "\n- Chance of critical hits in melee combat" ),
+                       "\n- Effectiveness of repairing and modifying clothes and armor" ),
                     c_green );
         }
         break;
