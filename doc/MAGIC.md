@@ -959,7 +959,7 @@ Character status value  | Description
 `STEALTH_MODIFIER`      | Amount to be subtracted from player's visibility range, capped to 60.  Negative values work, but are not very effective due to the way vision ranges are capped.
 `STOMACH_SIZE_MULTIPLIER`   | Changes how much food you can consume at once. `"add": 1000` adds 1 L to stomach size
 `STRENGTH`              | Affects the strength stat. Formula for all stat affecting enchantments are `(base_stat + enchantment_addition) * (enchantment_multiplier + 1)`. Str 8 with enchantment `add 2, multiply 1` result in `(8+2) * (1+1) = 10 * 2 =` 20 str
-`STRENGTH_NATURAL`      | Affects factors, such as max HP and muscle BMI, that are affected by base strength but are not affected by enchantments that raise strength through temporary or artifical means. Does not raise strength itself; should be used in addition.
+`STRENGTH_NATURAL`      | Affects factors, such as max HP and muscle BMI, that are affected by base strength but are not affected by enchantments that raise strength through temporary or artifical means. Does not raise strength itself; should be used in addition to the STRENGTH enchantment.
 `SWEAT_MULTIPLIER`      | Affects how much your body can sweat. Affects all bodyparts at once. Since it's a percent, using `multiply` is recommended.
 `THIRST`                | 
 `THROW_STR`             | Increases your strength for throwing purposes. Not limited by your throwing skill (you still throw it as precise as your skill allows you, just further). Only additive. Rule of thumb: one additional point of strength allow you to throw 113 g object 10 tiles further, or 1130 g object 1 tile further, limited by [ str * 3 + skill ]. Full calculations are in Character::throw_range
