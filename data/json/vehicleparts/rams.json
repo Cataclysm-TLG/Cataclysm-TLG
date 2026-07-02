@@ -257,7 +257,7 @@
     "name": { "str": "blade" },
     "damage_modifier": 250,
     "durability": 200,
-    "description": "A blade, welded to the vehicle, for cutting up zombies.",
+    "description": "A blade welded to the vehicle for cutting up zombies.",
     "item": "blade",
     "folded_volume": "750 ml",
     "requirements": {
@@ -279,7 +279,7 @@
     "color": "white",
     "extend": { "flags": [ "NO_COVER" ] },
     "broken_color": "white",
-    "description": "A metal spike, welded to the vehicle, to increase injury when crashing into things.",
+    "description": "A metal spike welded to the vehicle to increase injury when crashing into things.",
     "item": "spike",
     "folded_volume": "250 ml",
     "breaks_into": [ { "item": "steel_fragment", "count": [ 1, 2 ] } ],
@@ -295,7 +295,7 @@
     "broken_color": "brown",
     "damage_modifier": 115,
     "durability": 150,
-    "description": "A wooden spike, attached to the vehicle, to increase injury when crashing into things.",
+    "description": "A wooden spike attached to the vehicle to increase injury when crashing into things.",
     "item": "pointy_stick",
     "folded_volume": "1250 ml",
     "requirements": {

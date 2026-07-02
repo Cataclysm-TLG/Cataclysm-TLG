@@ -942,28 +942,6 @@
     ]
   },
   {
-    "id": "undershirt",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "undershirt" },
-    "description": "A simple white undershirt.  Worn beneath your regular clothes, it provides a little extra warmth.",
-    "weight": "100 g",
-    "volume": "250 ml",
-    "price": "10 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "cotton" ],
-    "symbol": "[",
-    "looks_like": "tshirt",
-    "color": "white",
-    "warmth": 5,
-    "material_thickness": 0.1,
-    "flags": [ "VARSIZE", "SKINTIGHT" ],
-    "armor": [
-      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100 },
-      { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 90 }
-    ]
-  },
-  {
     "id": "unitard",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],

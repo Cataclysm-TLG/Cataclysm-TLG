@@ -399,6 +399,7 @@ static const mtype_id mon_player_blob( "mon_player_blob" );
 static const proficiency_id proficiency_prof_parkour( "prof_parkour" );
 static const proficiency_id proficiency_prof_skating( "prof_skating" );
 static const proficiency_id proficiency_prof_spotting( "prof_spotting" );
+static const proficiency_id proficiency_prof_swimming( "prof_swimming" );
 static const proficiency_id proficiency_prof_traps( "prof_traps" );
 static const proficiency_id proficiency_prof_trapsetting( "prof_trapsetting" );
 static const proficiency_id proficiency_prof_field_medic( "prof_field_medic" );
@@ -466,7 +467,6 @@ static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_ELFA_FNV( "ELFA_FNV" );
 static const trait_id trait_ELFA_NV( "ELFA_NV" );
 static const trait_id trait_FACIAL_HAIR_NONE( "FACIAL_HAIR_NONE" );
-static const trait_id trait_FAERIECREATURE( "FAERIECREATURE" );
 static const trait_id trait_FAT( "FAT" );
 static const trait_id trait_FEL_NV( "FEL_NV" );
 static const trait_id trait_GASTROPOD_BALANCE( "GASTROPOD_BALANCE" );
@@ -517,7 +517,6 @@ static const trait_id trait_STRONGBACK( "STRONGBACK" );
 static const trait_id trait_SUNLIGHT_DEPENDENT( "SUNLIGHT_DEPENDENT" );
 static const trait_id trait_THORNS( "THORNS" );
 static const trait_id trait_TRANSPIRATION( "TRANSPIRATION" );
-static const trait_id trait_UNDINE_SLEEP_WATER( "UNDINE_SLEEP_WATER" );
 static const trait_id trait_URSINE_EYE( "URSINE_EYE" );
 static const trait_id trait_VISCOUS( "VISCOUS" );
 static const trait_id trait_WATERSLEEP( "WATERSLEEP" );
@@ -1665,9 +1664,12 @@ int Character::swim_speed() const
     units::mass effective_weight = std::max( 0_gram,
                                    ( weight_carried() + bionics_weight() ) - ( str_cur * 1_kilogram ) );
     float swim_speed_mult = enchantment_cache->modify_value( enchant_vals::mod::MOVECOST_SWIM_MOD, 1 );
-    ret = ( 750 * swim_speed_mult ) +
-          effective_weight / ( 60_gram / swim_speed_mult ) -
-          50 * get_skill_level( skill_swimming );
+    // Swimming proficiency grants an effective +4 skill, capped at 10.
+    const int swim_skill = std::min( 10,
+                                     static_cast<int>( std::round( get_skill_level( skill_swimming ) + ( has_proficiency(
+                                             proficiency_prof_swimming ) ? 4.0f : 0.0f ) ) ) );
+    ret = ( 750 * swim_speed_mult ) + effective_weight / ( 60_gram / swim_speed_mult ) - 50 *
+          swim_skill;
     /** @EFFECT_STR increases swim speed bonus from swim_fins */
     if( worn_with_flag( flag_FIN, body_part_foot_l ) ||
         worn_with_flag( flag_FIN, body_part_foot_r ) ) {
@@ -2839,7 +2841,9 @@ void Character::recalc_hp()
     float hp_mod = 1.0f + enchantment_cache->get_value_multiply( enchant_vals::mod::MAX_HP );
     float hp_adjustment = ( str_boost_val * 3 ) +
                           enchantment_cache->get_value_add( enchant_vals::mod::MAX_HP );
-    calc_all_parts_hp( hp_mod, hp_adjustment, get_str_base(), get_dex_base(), get_per_base(),
+    int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                            get_str_base() );
+    calc_all_parts_hp( hp_mod, hp_adjustment, strength_adjusted, get_dex_base(), get_per_base(),
                        get_int_base(), get_lifestyle(), get_fat_to_hp() );
     cached_dead_state.reset();
 }
@@ -3245,7 +3249,7 @@ float Character::throwforce( Creature &victim ) const
     // stamina, pain etc. while monsters are not.
     float strength_factor = 0;
     if( get_arm_str() > 10 ) {
-        strength_factor = get_arm_str() / 100;
+        strength_factor = get_arm_str() / 100.f;
     }
     // TODO: Get encumbrance and burden involved here.
     float throwforce = ( ( ( get_arm_str() * ( 1.1 + strength_factor ) + ( ( get_skill_level(
@@ -5589,14 +5593,8 @@ void Character::update_needs( int rate_multiplier )
         set_stim( std::max( current_stim - rate_multiplier, 0 ) );
     }
 
-    // Only spend painkiller to treat pain we actually feel.
-    if( get_painkiller() > 0 && get_perceived_pain() > 0 ) {
-        const int spend = std::min( {
-            get_painkiller(),
-            rate_multiplier,
-            get_perceived_pain()
-        } );
-        mod_painkiller( -spend );
+    if( get_painkiller() > 0 ) {
+        mod_painkiller( -std::min( get_painkiller(), rate_multiplier ) );
     }
 
     if( get_bp_effect_mod() > 0 ) {
@@ -5806,7 +5804,8 @@ void Character::check_needs_extremes()
             get_event_bus().send<event_type::dies_of_thirst>( getID() );
             set_part_hp_cur( body_part_torso, 0 );
         } else if( get_thirst() >= 1000 && calendar::once_every( 30_minutes ) ) {
-            add_msg_if_player( m_warning, _( "You need water badly.  It's hard to think about anything else." ) );
+            add_msg_if_player( m_warning,
+                               _( "You need water badly.  It's hard to think about anything else." ) );
         } else if( get_thirst() >= 800 && calendar::once_every( 30_minutes ) ) {
             add_msg_if_player( m_warning, _( "You are THIRSTY!" ) );
         } else if( calendar::once_every( 30_minutes ) ) {
@@ -6644,11 +6643,6 @@ float Character::healing_rate_medicine( float at_rest_quality, const bodypart_id
     // Sufficiently negative rest quality can completely eliminate your healing, but never turn it negative.
     rate_medicine *= 1.0f + std::max( at_rest_quality, -1.0f );
 
-    // increase healing if character has both effects
-    if( has_effect( effect_bandaged, bp ) && has_effect( effect_disinfected, bp ) ) {
-        rate_medicine *= 1.1;
-    }
-
     if( get_lifestyle() > 0.0f ) {
         rate_medicine *= 1.0f + get_lifestyle() / 220.0f;
     } else {
@@ -6664,12 +6658,14 @@ float Character::get_bmi() const
 
 float Character::get_bmi_lean() const
 {
+    int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                            get_str_base() );
     //strength BMIs decrease to zero as you starve (muscle atrophy)
     if( get_bmi_fat() < character_weight_category::normal ) {
         const stat_mod wpen = get_weight_penalty();
-        return 12.0f + get_str_base() - wpen.strength;
+        return 12.0f + strength_adjusted - wpen.strength;
     }
-    return 12.0f + get_str_base();
+    return 12.0f + strength_adjusted;
 }
 
 float Character::get_bmi_fat() const
@@ -7998,6 +7994,59 @@ void Character::recalculate_bodyparts()
     tally_organic_size();
     recalc_limb_energy_usage();
 
+    // Remove effects from body parts that we no longer have.
+    effects_map &effs = *effects;
+    for( auto eff_it = effs.begin(); eff_it != effs.end(); ) {
+        auto &bp_map = eff_it->second;
+        for( auto bp_it = bp_map.begin(); bp_it != bp_map.end(); ) {
+            const bodypart_id &bp = bp_it->first.id();
+            if( bp != bodypart_str_id::NULL_ID().id() && !has_part( bp ) ) {
+                bp_it = bp_map.erase( bp_it );
+            } else {
+                ++bp_it;
+            }
+        }
+        if( bp_map.empty() ) {
+            eff_it = effs.erase( eff_it );
+        } else {
+            ++eff_it;
+        }
+    }
+
+    // Remove any items which were worn exclusively on parts we no longer have.
+    std::list<item> removed = worn.remove_worn_items_with(
+    [this]( item & it ) {
+        if( it.has_flag( flag_INTEGRATED ) ) {
+            return false;
+        }
+        const body_part_set covered_bps  = it.get_covered_body_parts( nullptr );
+        const std::vector<sub_bodypart_id> covered_sbps = it.get_covered_sub_body_parts( nullptr );
+        if( covered_bps.none() && covered_sbps.empty() ) {
+            return false;
+        }
+        for( const bodypart_str_id &bp : covered_bps ) {
+            if( has_part( bp.id() ) ) {
+                return false;
+            }
+        }
+        for( const int_id<sub_body_part_type> &sbp : covered_sbps ) {
+            if( has_part( sbp->parent ) ) {
+                return false;
+            }
+        }
+        return true;
+    }, *this, false );
+
+    map &here = get_map();
+
+    for( item &it : removed ) {
+        add_msg_player_or_npc( m_bad,
+                               _( "Your %s comes free!" ),
+                               _( "<npcname>'s %s comes free!" ),
+                               it.tname() );
+        here.add_item_or_charges( pos_bub(), it );
+    }
+
     add_msg_debug( debugmode::DF_ANATOMY_BP, "New healthy kcal %d",
                    get_healthy_kcal() );
     calc_encumbrance();
@@ -8521,10 +8570,10 @@ void Character::on_hit( map *here, Creature *source, bodypart_id bp_hit,
         if( stability_roll() < dice( rolls, 10 ) ) {
             if( !is_avatar() ) {
                 if( u_see ) {
-                    add_msg( _( "%1$s loses their balance while being hit!" ), get_name() );
+                    add_msg( _( "The hit makes %1$s lose their balance!" ), get_name() );
                 }
             } else {
-                add_msg( m_bad, _( "You lose your balance while being hit!" ) );
+                add_msg( m_bad, _( "The hit makes you lose your balance!" ) );
             }
             if( in_skater_vehicle ) {
                 g->fling_creature( this, rng_float( 0_degrees, 360_degrees ), 10 );
@@ -10432,10 +10481,12 @@ std::unordered_set<trait_id> Character::get_opposite_traits( const trait_id &fla
 float Character::adjust_for_focus( float amount ) const
 {
     float effective_focus = get_focus();
-    effective_focus = enchantment_cache->modify_value( enchant_vals::mod::LEARNING_FOCUS,
-                      effective_focus );
-    effective_focus = effective_focus * 1.0 + ( 0.01f * ( get_int() - 8 ) * 5 );
-    effective_focus = std::max( effective_focus, 1.f );
+    // Scale bonus down as base focus decreases, because a flat bonus would create an
+    // artificially high floor and sufficiently bonused characters would never reach ~0 focus.
+    float bonus = ( get_int() - 10.0f ) * 2.5f;
+    bonus = enchantment_cache->modify_value( enchant_vals::mod::LEARNING_FOCUS, bonus );
+    effective_focus += bonus * ( effective_focus / 100.0f );
+    effective_focus = std::max( effective_focus, 1.0f );
     return amount * ( effective_focus / 100.0f );
 }
 
@@ -11543,13 +11594,13 @@ void Character::process_effects()
         !has_trait( trait_COMPOUND_EYES ) && !has_effect( effect_pre_conjunctivitis_bacterial ) &&
         !has_effect( effect_pre_conjunctivitis_viral ) && !has_effect( effect_conjunctivitis_bacterial ) &&
         !has_effect( effect_conjunctivitis_viral ) ) {
-        //Washing your eyes out in time may save you from getting pinkeye.
+        // Washing your eyes out in time may save you from getting pinkeye.
         float checked_health = get_lifestyle() + 200.0;
-        //Some animal eyes are more vulnerable to infection.
+        // Some animal eyes are more vulnerable to infection.
         if( has_trait_flag( json_flag_EYE_MEMBRANE ) ) {
             checked_health -= 50;
         }
-        //Ditto for contact lenses.
+        // Ditto for contact lenses.
         if( has_effect( effect_contacts ) || has_effect( effect_transition_contacts ) ) {
             checked_health -= 50;
         }
@@ -11908,11 +11959,12 @@ npc_attitude Character::get_attitude() const
     return NPCATT_NULL;
 }
 
-bool Character::sees( const map &here, const tripoint_bub_ms &t, bool, int ) const
+bool Character::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
+                      int range_mod ) const
 {
     const int wanted_range = rl_dist( pos_bub( here ), t );
     bool can_see = this->is_avatar() ? here.pl_sees( t, std::min( sight_max, wanted_range ) ) :
-                   Creature::sees( here, t );
+                   Creature::sees( here, t, is_avatar, range_mod );
     // Clairvoyance is now pretty cheap, so we can check it early
     if( wanted_range < MAX_CLAIRVOYANCE && wanted_range < clairvoyance() ) {
         return true;
@@ -12904,14 +12956,6 @@ bool Character::is_electrical() const
     return false;
 }
 
-bool Character::is_fae() const
-{
-    if( has_trait( trait_FAERIECREATURE ) ) {
-        return true;
-    }
-    return false;
-}
-
 bool Character::is_nether() const
 {
     // for now this is false. In the future should have rules
@@ -13048,7 +13092,9 @@ int Character::mod_pain( int npain )
 
 int Character::max_injury_pain( bodypart_id part )
 {
-    return 300 - ( 300 * ( get_part_hp_cur( part ) / get_part_hp_max( part ) ) );
+    const int hp_cur = get_part_hp_cur( part );
+    const int hp_max = get_part_hp_max( part );
+    return 300 - ( 300 * hp_cur ) / hp_max;
 }
 
 void Character::set_pain( int npain )
@@ -13397,9 +13443,9 @@ void Character::knock_back_to( const tripoint_bub_ms &to )
         if( !is_npc() ) {
             avatar_action::swim( here, get_avatar(), to );
         }
+        // FIXME: NPCs REALLY NEED TO BE ABLE TO SWIM!!
         // TODO: NPCs can't swim!
-    } else if( here.impassable( to ) ) { // Wait, it's a wall
-
+    } else if( here.impassable( to ) ) { // Wait, it's a wall.
         // It's some kind of wall.
         // TODO: who knocked us back? Maybe that creature should be the source of the damage?
         apply_damage( nullptr, bodypart_id( "torso" ), 3 );

@@ -125,6 +125,8 @@ struct ma_requirements {
     std::set<mabuff_id> req_buffs_any; // any listed buffs required to trigger this bonus
     std::set<mabuff_id> forbid_buffs_all; // all listed buffs prevent triggering this bonus
     std::set<mabuff_id> forbid_buffs_any; // any listed buffs prevent triggering this bonus
+    std::set<efftype_id> forbid_effects_all; // all listed effects prevent trigger
+    std::set<efftype_id> forbid_effects_any; // any listed effects prevent trigger
 
     std::set<flag_id> req_flags; // any item flags required for this technique
     cata::flat_set<json_character_flag> req_char_flags; // any listed character flags required
@@ -413,9 +415,9 @@ class martialart
         skill_id primary_skill;
         bool teachable = true;
         int learn_difficulty = 0;
-        int arm_block = 0;
-        int leg_block = 0;
-        int nonstandard_block = 0;
+        int arm_block = -1;
+        int leg_block = -1;
+        int nonstandard_block = -1;
         bool arm_block_with_bio_armor_arms = false;
         bool leg_block_with_bio_armor_legs = false;
         std::set<matec_id> techniques; // all available techniques

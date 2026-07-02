@@ -17,7 +17,7 @@
     "warmth": 8,
     "material_thickness": 1,
     "flags": [ "OUTER", "SPLINT" ],
-    "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "arm_l", "arm_r" ] } ]
+    "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] } ]
   },
   {
     "id": "arm_xlsplint",
@@ -330,23 +330,7 @@
     "warmth": 5,
     "material_thickness": 1,
     "flags": [ "OUTER", "SPLINT", "ALLOWS_TAIL" ],
-    "armor": [
-      {
-        "encumbrance": 70,
-        "coverage": 75,
-        "covers": [
-          "leg_l",
-          "leg_r",
-          "cephalopod_arm_1",
-          "cephalopod_arm_2",
-          "cephalopod_arm_3",
-          "cephalopod_arm_4",
-          "cephalopod_arm_5",
-          "cephalopod_arm_6",
-          "long_tail"
-        ]
-      }
-    ]
+    "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "leg_l", "leg_r" ] } ]
   },
   {
     "id": "leg_xlsplint",
@@ -1944,7 +1928,7 @@
     "color": "light_gray",
     "name": { "str": "firefighter PBA mask" },
     "description": "A full-face mask commonly used by firefighters.  The protective breathing apparatus provides excellent protection from smoke, flame, and other dangers.  It must be prepared before use.",
-    "flags": [ "WATERPROOF", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "PADDED" ],
+    "flags": [ "WATERPROOF", "STURDY", "SLEEP_IGNORE", "PADDED" ],
     "price": "1000 USD",
     "price_postapoc": "7 USD 50 cent",
     "material": [ "nomex", "plastic" ],
@@ -2335,6 +2319,16 @@
         "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "coverage": 1,
         "encumbrance": 0
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 30, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "coverage": 1,
+        "encumbrance": 0
       }
     ],
     "charges_per_use": 1,
@@ -2376,6 +2370,16 @@
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.4 }
         ],
         "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "coverage": 1,
+        "encumbrance": 0
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 30, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
         "coverage": 1,
         "encumbrance": 0
       }
@@ -2742,8 +2746,8 @@
       "noise_message": "FWEEEET!",
       "noise_id": "misc",
       "noise_variant": "whistle",
-      "noise": 100,
-      "moves": 100
+      "noise": 75,
+      "moves": 75
     },
     "armor": [ { "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ]
   },
@@ -3305,6 +3309,13 @@
           "cephalopod_arm_5_draped",
           "cephalopod_arm_6_draped"
         ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "encumbrance": [ 10, 10 ],
+        "coverage": 90,
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [ "crab_leg_1_draped", "crab_leg_2_draped", "crab_leg_3_draped", "crab_leg_4_draped" ],
         "layers": [ "BELTED" ]
       }
     ],

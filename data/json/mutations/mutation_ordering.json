@@ -207,7 +207,7 @@
       },
       { "id": [ "FANGS", "MANDIBLES", "SABER_TEETH" ], "order": 7500 },
       { "id": [ "FORKED_TONGUE", "active_bio_ads", "active_bio_ods" ], "order": 8000 },
-      { "id": [ "PROF_FED", "PROF_PD_DET", "PROF_POLICE", "PROF_SWAT", "PHEROMONE_INSECT" ], "order": 8500 },
+      { "id": [ "PROF_FED", "PHEROMONE_INSECT" ], "order": 8500 },
       { "id": [ "WINGS_BAT", "WINGS_BIRD" ], "order": 9000 },
       { "id": [ "BEAK", "DRILL_BEAK", "BEAK_PECK" ], "order": 9500 }
     ]

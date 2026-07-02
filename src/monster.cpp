@@ -102,6 +102,7 @@ static const efftype_id effect_dripping_mechanical_fluid( "dripping_mechanical_f
 static const efftype_id effect_emp( "emp" );
 static const efftype_id effect_fake_common_cold( "fake_common_cold" );
 static const efftype_id effect_fake_flu( "fake_flu" );
+static const efftype_id effect_fallout( "fallout" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_has_bag( "has_bag" );
 static const efftype_id effect_heavysnare( "heavysnare" );
@@ -127,6 +128,8 @@ static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_run( "run" );
 static const efftype_id effect_slippery_terrain( "slippery_terrain" );
+static const efftype_id effect_smoke_eyes( "smoke_eyes" );
+static const efftype_id effect_smoke_lungs( "smoke_lungs" );
 static const efftype_id effect_spooked( "spooked" );
 static const efftype_id effect_spooked_recent( "spooked_recent" );
 static const efftype_id effect_stunned( "stunned" );
@@ -175,22 +178,27 @@ static const mfaction_str_id monfaction_acid_ant( "acid_ant" );
 static const mfaction_str_id monfaction_ant( "ant" );
 static const mfaction_str_id monfaction_bee( "bee" );
 static const mfaction_str_id monfaction_nether_player_hate( "nether_player_hate" );
+static const mfaction_str_id monfaction_fire_ant( "fire_ant" );
 static const mfaction_str_id monfaction_wasp( "wasp" );
 
 static const species_id species_AMPHIBIAN( "AMPHIBIAN" );
+static const species_id species_CENTIPEDE( "CENTIPEDE" );
 static const species_id species_CYBORG( "CYBORG" );
 static const species_id species_FISH( "FISH" );
 static const species_id species_SLIME( "SLIME" );
 static const species_id species_FUNGUS( "FUNGUS" );
 static const species_id species_HORROR( "HORROR" );
+static const species_id species_INSECT( "INSECT" );
+static const species_id species_INSECT_FLYING( "INSECT_FLYING" );
 static const species_id species_MAMMAL( "MAMMAL" );
 static const species_id species_MIGO( "MIGO" );
 static const species_id species_MOLLUSK( "MOLLUSK" );
 static const species_id species_NETHER( "NETHER" );
 static const species_id species_PLANT( "PLANT" );
+static const species_id species_PSI_NULL( "PSI_NULL" );
 static const species_id species_ROBOT( "ROBOT" );
 static const species_id species_ROBOT_FLYING( "ROBOT_FLYING" );
-static const species_id species_PSI_NULL( "PSI_NULL" );
+static const species_id species_SPIDER( "SPIDER" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
 static const species_id species_nether_player_hate( "nether_player_hate" );
 
@@ -680,7 +688,7 @@ void monster::try_biosignature()
         return;
     }
     // Keep poops from being uniform, especially when monsters first spawn.
-    if( one_in( 2 ) ) {
+    if( one_in( 4 ) ) {
         return;
     }
     if( !biosignatures ) {
@@ -1099,7 +1107,7 @@ std::string monster::extended_description() const
     describe_properties( _( "It can %s." ), {
         {swims(), pgettext( "Swim as an action", "swim" )},
         {flies(), pgettext( "Fly as an action", "fly" )},
-        {can_dig(), pgettext( "Dig as an action", "dig" )},
+        {can_dig(), pgettext( "Burrow as an action", "burrow" )},
         {climbs(), pgettext( "Climb as an action", "climb" )}
     } );
 
@@ -1108,10 +1116,6 @@ std::string monster::extended_description() const
         {mon_flag_VENOM, pgettext( "Poison as an action", "poison" )},
         {mon_flag_PARALYZEVENOM, pgettext( "Paralyze as an action", "paralyze" )}
     } );
-
-    if( !type->has_flag( mon_flag_NOHEAD ) ) {
-        ss += std::string( _( "It has a head." ) ) + "\n";
-    }
 
     if( debug_mode ) {
         ss += "--\n";
@@ -1656,6 +1660,7 @@ monster_attitude monster::attitude( const Character *u ) const
         }
 
         if( ( faction == monfaction_acid_ant || faction == monfaction_ant || faction == monfaction_bee ||
+              faction == monfaction_fire_ant ||
               faction == monfaction_wasp ) && effective_anger >= 10 && u->has_trait( trait_PHEROMONE_INSECT ) ) {
             effective_anger -= 20;
         }
@@ -1665,12 +1670,6 @@ monster_attitude monster::attitude( const Character *u ) const
         }
 
         if( has_flag( mon_flag_ANIMAL ) ) {
-            if( u->has_effect( effect_natures_commune ) ) {
-                effective_anger -= 10;
-                if( effective_anger < 10 ) {
-                    effective_morale += 55;
-                }
-            }
             if( u->has_trait( trait_ANIMALEMPATH ) ) {
                 effective_anger -= 10;
                 if( effective_anger < 10 ) {
@@ -1885,6 +1884,22 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
                has_flag( mon_flag_FIREY );
     }
 
+    if( effect == effect_smoke_eyes ) {
+        return !type->has_flag( mon_flag_SEES ) || !made_of_any( Creature::cmat_flesh ) ||
+               type->in_species( species_INSECT ) || type->in_species( species_MIGO ) ||
+               type->in_species( species_SPIDER ) || type->in_species( species_CENTIPEDE ) ||
+               type->in_species( species_CYBORG ) || type->in_species( species_INSECT_FLYING );
+    }
+
+    if( effect == effect_smoke_lungs ) {
+        return !type->has_flag( mon_flag_NO_BREATHE );
+    }
+
+    // Currently monsters aren't affected by radiation.
+    if( effect == effect_fallout ) {
+        return true;
+    }
+
     if( effect == effect_bleed ) {
         return ( type->bloodType() == fd_null || type->bleed_rate == 0 );
     }
@@ -1906,7 +1921,8 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
     }
 
     if( effect == effect_tpollen ) {
-        return type->in_species( species_PLANT );
+        return type->in_species( species_PLANT ) ||  type->in_species( species_CENTIPEDE ) ||
+               type->in_species( species_ROBOT_FLYING );
     }
 
     if( effect == effect_stunned ) {
@@ -2027,6 +2043,12 @@ bool monster::melee_attack( Creature &target, float accuracy )
     }
     if( !sees( here, target ) && !target.is_hallucination() ) {
         debugmsg( "Z-Level view violation: %s tried to attack %s.", disp_name(), target.disp_name() );
+        return false;
+    }
+    // Prevent monsters from attacking THROUGH terrain if they are submerged under it & target isn't.
+    if( is_underwater() && !target.is_underwater() &&
+        ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, pos_bub() ) ||
+          here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, target.pos_bub() ) ) ) {
         return false;
     }
 
@@ -3385,15 +3407,15 @@ void monster::process_one_effect( effect &it, bool is_new )
         if( one_in( 20 ) ) {
             apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), rng( 1, 3 ) );
             if( !it.is_permanent() ) {
-            it.mod_duration( -2_minutes );
+                it.mod_duration( -2_minutes );
             }
         }
-    } else if( id == effect_badpoison  ) {
+    } else if( id == effect_badpoison ) {
         mod_speed_bonus( -15 );
         if( one_in( 20 ) ) {
             apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), rng( 2, 4 ) );
             if( !it.is_permanent() ) {
-            it.mod_duration( -2_minutes );
+                it.mod_duration( -2_minutes );
             }
         }
     } else if( id == effect_run ) {
@@ -3701,11 +3723,6 @@ bool monster::is_electrical() const
 {
     return in_species( species_ROBOT ) || in_species( species_ROBOT_FLYING ) ||
            has_flag( mon_flag_ELECTRIC ) || in_species( species_CYBORG );
-}
-
-bool monster::is_fae() const
-{
-    return has_flag( mon_flag_FAE_CREATURE );
 }
 
 bool monster::is_hallucination() const

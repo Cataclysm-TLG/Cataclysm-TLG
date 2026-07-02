@@ -4087,5 +4087,105 @@
     "type": "MIGRATION",
     "id": "xlkevlar",
     "replace": "ballistic_vest_concealable_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wash_kit",
+    "replace": "washboard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "undershirt",
+    "replace": "tank_top"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "clay_quern",
+    "replace": "rock_quern"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_farmor",
+    "replace": "leather_armor_suit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_armor_farmor",
+    "replace": "leather_armor_suit_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_farmor_xs",
+    "replace": "leather_armor_suit_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_faux_farmor",
+    "replace": "leather_armor_suit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_armor_faux_farmor",
+    "replace": "leather_armor_suit_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_faux_farmor_xs",
+    "replace": "leather_armor_suit_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "peppermeat",
+    "replace": "meat_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperfat",
+    "replace": "meat_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "peppermutant",
+    "replace": "mutant_meat_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperscrap",
+    "replace": "meat_scrap_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperscrap_mutant",
+    "replace": "mutant_meat_scrap_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperbone",
+    "replace": "cooked_marrow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperhuman",
+    "replace": "human_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "peppermutant_human",
+    "replace": "mutant_human_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "meat_salted",
+    "replace": "jerky"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "salted_fish",
+    "replace": "fish_smoked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "salted_mollusk",
+    "replace": "mollusk_smoked"
   }
 ]

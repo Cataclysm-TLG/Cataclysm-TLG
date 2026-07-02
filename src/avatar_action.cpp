@@ -51,6 +51,7 @@
 #include "pimpl.h"
 #include "popup.h"
 #include "point.h"
+#include "proficiency.h"
 #include "projectile.h"
 #include "ranged.h"
 #include "ret_val.h"
@@ -93,6 +94,8 @@ static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const json_character_flag json_flag_ITEM_WATERPROOFING( "ITEM_WATERPROOFING" );
 
 static const move_mode_id move_mode_prone( "prone" );
+
+static const proficiency_id proficiency_prof_swimming( "prof_swimming" );
 
 static const skill_id skill_swimming( "swimming" );
 static const skill_id skill_throw( "throw" );
@@ -602,6 +605,9 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
     g->water_affect_items( you );
 
     int movecost = you.swim_speed();
+    if( !you.has_proficiency( proficiency_prof_swimming ) ) {
+        you.practice_proficiency( proficiency_prof_swimming, 1_seconds );
+    }
     you.practice( skill_swimming, you.is_underwater() ? 2 : 1 );
     if( movecost >= 500 || you.has_effect( effect_winded ) ) {
         if( !you.is_underwater() &&
@@ -927,7 +933,6 @@ void avatar_action::eat( avatar &you, item_location &loc )
 
     if( !loc ) {
         you.cancel_activity();
-        add_msg( _( "Nevermind." ) );
         return;
     }
     loc.overflow( here );
@@ -937,10 +942,12 @@ void avatar_action::eat( avatar &you, item_location &loc )
 
 void avatar_action::eat_or_use( avatar &you, item_location loc )
 {
-    if( loc && loc->is_medical_tool() ) {
-        avatar_action::use_item( you, loc, "heal" );
-    } else {
-        avatar_action::eat( you, loc );
+    if( loc ) {
+        if( loc->is_medical_tool() ) {
+            avatar_action::use_item( you, loc, "heal" );
+        } else {
+            avatar_action::eat( you, loc );
+        }
     }
 }
 

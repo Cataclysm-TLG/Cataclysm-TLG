@@ -16,5 +16,14 @@
     "description": "You suffer lower penalties to dodging and are less likely to fall down if hit in melee combat while riding a skateboard or wearing skates.",
     "can_learn": true,
     "time_to_learn": "8 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_swimming",
+    "category": "prof_athletics",
+    "name": { "str": "Swimming" },
+    "description": "You are acquainted with the principles of swimming and staying afloat.  This does not necessarily mean you can always swim in all conditions, but it certainly helps.",
+    "can_learn": true,
+    "time_to_learn": "2 h"
   }
 ]

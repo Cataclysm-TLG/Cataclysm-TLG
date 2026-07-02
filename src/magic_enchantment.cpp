@@ -58,6 +58,7 @@ namespace io
         switch ( data ) {
             case enchant_vals::mod::ARTIFACT_RESONANCE: return "ARTIFACT_RESONANCE";
             case enchant_vals::mod::STRENGTH: return "STRENGTH";
+            case enchant_vals::mod::STRENGTH_NATURAL: return "STRENGTH_NATURAL";
             case enchant_vals::mod::DEXTERITY: return "DEXTERITY";
             case enchant_vals::mod::PERCEPTION: return "PERCEPTION";
             case enchant_vals::mod::INTELLIGENCE: return "INTELLIGENCE";
@@ -568,7 +569,6 @@ void enchant_cache::load( const JsonObject &jo, std::string_view,
             "ITEM_DAMAGE_BASH",
             "SIGHT_RANGE_ELECTRIC",
             "MOTION_VISION_RANGE",
-            "SIGHT_RANGE_FAE",
             "SIGHT_RANGE_NETHER",
             "SIGHT_RANGE_MINDS",
             "ARMOR_ACID",

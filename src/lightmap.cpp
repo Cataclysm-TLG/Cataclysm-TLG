@@ -472,7 +472,8 @@ void map::generate_lightmap( const int zlev )
                     const point_bub_ms p2( sx + smx * SEEX, sy + smy * SEEY );
                     const tripoint_bub_ms p( p2, zlev );
                     // Project light into any openings into buildings.
-                    if( !outside_cache[p.x()][p.y()] || ( !top_floor && prev_floor_cache[p.x()][p.y()] ) ) {
+                    if( !outside_cache[p.x()][p.y()] || ( !top_floor && prev_floor_cache[p.x()][p.y()] ) ||
+                        cur_submap->get_ter( { sx, sy } ).obj().has_flag( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR ) ) {
                         // Apply light sources for external/internal divide
                         for( int i = 0; i < 4; ++i ) {
                             point_bub_ms neighbour = p.xy() + point( dir_x[i], dir_y[i] );

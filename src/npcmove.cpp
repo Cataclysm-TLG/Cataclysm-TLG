@@ -841,7 +841,7 @@ void npc::assess_danger()
     preferred_close_range = std::min( preferred_close_range, preferred_medium_range / 2 );
 
     Character &player_character = get_player_character();
-    bool sees_player = sees( here, player_character.pos_bub( here ) );
+    bool sees_player = sees( here, player_character );
     const bool self_defense_only = rules.engagement == combat_engagement::NO_MOVE ||
                                    rules.engagement == combat_engagement::NONE;
     const bool no_fighting = rules.has_flag( ally_rule::forbid_engage );
@@ -1271,8 +1271,10 @@ void npc::act_on_danger_assessment()
                 add_msg_debug( debugmode::DF_NPC_COMBATAI, "%s upgrades reposition to flat out retreat.", name );
                 mem_combat.repositioning = false; // we're not just moving, we're running.
                 warn_about( "run_away", run_away_for );
-                set_attitude( NPCATT_FLEE_TEMP );
-                if( mem_combat.panic > 5 && is_player_ally() && sees( here, player_character.pos_bub( here ) ) ) {
+                if( !is_player_ally() ) {
+                    set_attitude( NPCATT_FLEE_TEMP );
+                }
+                if( mem_combat.panic > 5 && is_player_ally() && sees( here, player_character ) ) {
                     // consider warning player about panic
                     int panic_alert = trig_dist( pos_bub(), player_character.pos_bub() ) - player_character.get_per();
                     if( mem_combat.panic - personality.bravery > panic_alert ) {
@@ -1845,7 +1847,7 @@ void npc::execute_action( npc_action action )
                     /* NPCs check can_sleep() for hard blockers but fall asleep
                        directly on success. The lying_down -> can_sleep() rng
                        retry cycle is for the player who gets "you try to sleep
-                       but can't" feedback. Without direct fall_asleep(), NPC 
+                       but can't" feedback. Without direct fall_asleep(), NPC
                        fatigue keeps incrementing while they lie awake
                        (recovery only runs while asleep). */
                     if( !is_avatar() && can_sleep() ) {
@@ -2717,6 +2719,11 @@ npc_action npc::address_needs( float danger )
         }
     }
 
+    // Hallucinations have a chance of disappearing each turn.
+    if( is_hallucination() && one_in( 25 ) ) {
+        die( &here, nullptr );
+    }
+
     // Warmth: wearing clothes costs a turn but hypothermia is life-threatening.
     // Before danger gate, like extreme food.
     if( needs_warmth && wear_warmest_item() ) {
@@ -2733,35 +2740,57 @@ npc_action npc::address_needs( float danger )
         }
     }
 
-    // Extreme thirst or hunger, bypass safety check.
-    if( get_thirst() > 80 ||
-        get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
+    // Extreme food/water pathing: the pre-gate block only consumed adjacent
+    // resources. If extreme need persists and we passed the danger gate,
+    // path to distant ground food or water deterministically.
+    if( get_thirst() > 80 || get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
         if( consume_food_from_camp() ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS,
+                           "NPC %s consuming food or drink from camp due to extreme need.", get_name() );
             return npc_noop;
         }
         if( consume_food() ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS,
+                           "NPC %s consuming food or drink from inventory due to extreme need.", get_name() );
             return npc_noop;
         }
-        // Adjacent ground food, instant.
         for( scored_item &c : find_nearby_food() ) {
             if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
                 if( consume_food_at( c.loc ) ) {
+                    add_msg_debug( debugmode::DF_NPC_NEEDS,
+                                   "NPC %s consuming food or drink from nearby due to extreme need.", get_name() );
+                    return npc_noop;
+                }
+            } else {
+                if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
+                    if( one_in( 3 ) ) {
+                        add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s moving to get food or drink due to extreme need.",
+                                       get_name() );
+                    }
                     return npc_noop;
                 }
             }
         }
-        // Adjacent water terrain, instant.
-        for( scored_water_source &ws : find_nearby_water_sources() ) {
-            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
-                if( drink_from_water_source( ws.pos ) ) {
-                    return npc_noop;
+        // Re-check for thirst so that hunger alone doesn't make us go pathing to water.
+        if( get_thirst() > 80 ) {
+            for( scored_water_source &ws : find_nearby_water_sources() ) {
+                if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
+                    if( drink_from_water_source( ws.pos ) ) {
+                        add_msg_debug( debugmode::DF_NPC_NEEDS,
+                                       "NPC %s drinking from terrain due to thirst due to extreme need.", get_name() );
+                        return npc_noop;
+                    }
+                } else {
+                    if( move_to_and_verify( ws.pos ) ) {
+                        if( one_in( 3 ) ) {
+                            add_msg_debug( debugmode::DF_NPC_NEEDS,
+                                           "NPC %s moving to try and get a drink from terrain due to extreme need.", get_name() );
+                        }
+                        return npc_noop;
+                    }
                 }
             }
         }
-    }
-    // Hallucinations have a chance of disappearing each turn.
-    if( is_hallucination() && one_in( 25 ) ) {
-        die( &here, nullptr );
     }
 
     if( danger > NPC_DANGER_VERY_LOW ) {
@@ -2781,64 +2810,48 @@ npc_action npc::address_needs( float danger )
         }
     }
 
-    // Extreme food/water pathing: the pre-gate block only consumed adjacent
-    // resources. If extreme need persists and we passed the danger gate,
-    // path to distant ground food or water deterministically.
-    if( get_thirst() > 80 ||
-        get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
-        for( scored_item &c : find_nearby_food() ) {
-            if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
-                if( consume_food_at( c.loc ) ) {
-                    return npc_noop;
-                }
-            } else {
-                if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
-                    return npc_noop;
-                }
-            }
-        }
-        for( scored_water_source &ws : find_nearby_water_sources() ) {
-            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
-                if( drink_from_water_source( ws.pos ) ) {
-                    return npc_noop;
-                }
-            } else {
-                if( move_to_and_verify( ws.pos ) ) {
-                    return npc_noop;
-                }
-            }
-        }
-    }
-
     // Normal food/drink: camp -> inventory -> ground food -> terrain water.
     // All under the same random gate so ground never outranks camp/inventory.
-    if( one_in( 3 ) && ( get_thirst() > NPC_THIRST_CONSUME ||
-                         get_hunger() > NPC_HUNGER_CONSUME ) ) {
+    if( one_in( 3 ) && ( get_thirst() > NPC_THIRST_CONSUME || get_hunger() > NPC_HUNGER_CONSUME ) ) {
         if( consume_food_from_camp() ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s consuming food or drink from camp.", get_name() );
             return npc_noop;
         }
         if( consume_food() ) {
+            add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s consuming food or drink from inventory.",
+                           get_name() );
             return npc_noop;
         }
         for( scored_item &c : find_nearby_food() ) {
             if( square_dist( pos_bub(), c.loc.pos_bub( here ) ) <= 1 ) {
                 if( consume_food_at( c.loc ) ) {
+                    add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s consuming food or drink from nearby.", get_name() );
                     return npc_noop;
                 }
             } else {
                 if( move_to_and_verify( c.loc.pos_bub( here ) ) ) {
+                    if( one_in( 3 ) ) {
+                        add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s moving to try and get food or drink.", get_name() );
+                    }
                     return npc_noop;
                 }
             }
         }
-        for( scored_water_source &ws : find_nearby_water_sources() ) {
-            if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
-                if( drink_from_water_source( ws.pos ) ) {
-                    return npc_noop;
-                }
-            } else {
-                if( move_to_and_verify( ws.pos ) ) {
-                    return npc_noop;
+        if( get_thirst() > NPC_THIRST_CONSUME ) {
+            for( scored_water_source &ws : find_nearby_water_sources() ) {
+                if( square_dist( pos_bub(), ws.pos ) <= 1 ) {
+                    if( drink_from_water_source( ws.pos ) ) {
+                        add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s drinking from terrain.", get_name() );
+                        return npc_noop;
+                    }
+                } else {
+                    if( move_to_and_verify( ws.pos ) ) {
+                        if( one_in( 3 ) ) {
+                            add_msg_debug( debugmode::DF_NPC_NEEDS, "NPC %s moving to try and get a drink from terrain.",
+                                           get_name() );
+                        }
+                        return npc_noop;
+                    }
                 }
             }
         }
@@ -3879,7 +3892,7 @@ void npc::find_item()
     }
 
     if( is_player_ally() && !rules.has_flag( ally_rule::allow_pick_up ) ) {
-        // Grabbing stuff not allowed by our "owner"
+        // Our rules forbid pickup.
         add_msg_debug( debugmode::DF_NPC_ITEMAI,
                        "%s considered picking something up but player said not to.", name );
         return;

@@ -489,8 +489,8 @@
         "effect": [
           { "u_add_effect": "infected", "duration": 10 },
           { "npc_add_effect": "infected", "duration": "PERMANENT" },
-          { "u_add_trait": "PROF_SWAT" },
-          { "npc_add_trait": "PROF_SWAT" },
+          { "u_add_trait": "PROF_FED" },
+          { "npc_add_trait": "PROF_FED" },
           { "u_spend_cash": 1000 },
           { "u_spawn_item": "manual_speech" },
           { "u_spawn_item": "dnd_handbook" },

@@ -263,6 +263,18 @@ void ma_requirements::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "required_buffs_any", req_buffs_any, string_id_reader<::ma_buff> {} );
     optional( jo, was_loaded, "forbidden_buffs_all", forbid_buffs_all, string_id_reader<::ma_buff> {} );
     optional( jo, was_loaded, "forbidden_buffs_any", forbid_buffs_any, string_id_reader<::ma_buff> {} );
+    forbid_effects_any.clear();
+    if( jo.has_array( "forbidden_effects_all" ) ) {
+        for( const JsonValue &v : jo.get_array( "forbidden_effects_all" ) ) {
+            forbid_effects_all.emplace( efftype_id( v.get_string() ) );
+        }
+    }
+    forbid_effects_any.clear();
+    if( jo.has_array( "forbidden_effects_any" ) ) {
+        for( const JsonValue &v : jo.get_array( "forbidden_effects_any" ) ) {
+            forbid_effects_any.emplace( efftype_id( v.get_string() ) );
+        }
+    }
 
     optional( jo, was_loaded, "req_flags", req_flags, string_id_reader<::json_flag> {} );
     optional( jo, was_loaded, "required_char_flags", req_char_flags );
@@ -495,9 +507,9 @@ void martialart::load( const JsonObject &jo, std::string_view src )
     optional( jo, was_loaded, "force_unarmed", force_unarmed, false );
     optional( jo, was_loaded, "prevent_weapon_blocking", prevent_weapon_blocking, false );
 
-    optional( jo, was_loaded, "leg_block", leg_block, 99 );
-    optional( jo, was_loaded, "arm_block", arm_block, 99 );
-    optional( jo, was_loaded, "nonstandard_block", nonstandard_block, 99 );
+    optional( jo, was_loaded, "leg_block", leg_block, -1 );
+    optional( jo, was_loaded, "arm_block", arm_block, -1 );
+    optional( jo, was_loaded, "nonstandard_block", nonstandard_block, -1 );
 
     optional( jo, was_loaded, "arm_block_with_bio_armor_arms", arm_block_with_bio_armor_arms, false );
     optional( jo, was_loaded, "leg_block_with_bio_armor_legs", leg_block_with_bio_armor_legs, false );
@@ -566,6 +578,19 @@ static void check( const ma_requirements &req, const std::string &display_text )
             debugmsg( "ma buff %s of %s does not exist", r.c_str(), display_text );
         }
     }
+
+    for( const efftype_id &e : req.forbid_effects_all ) {
+        if( !e.is_valid() ) {
+            debugmsg( "effect %s of %s does not exist", e.c_str(), display_text );
+        }
+    }
+
+    for( const efftype_id &e : req.forbid_effects_any ) {
+        if( !e.is_valid() ) {
+            debugmsg( "effect %s of %s does not exist", e.c_str(), display_text );
+        }
+    }
+
 }
 
 void check_martialarts()
@@ -690,22 +715,37 @@ void clear_techniques_and_martial_arts()
 
 bool ma_requirements::buff_requirements_satisfied( const Character &u ) const
 {
-    const auto having_buff = [&u]( const mabuff_id & buff_id ) {
-        return u.has_mabuff( buff_id );
+    const auto has_buff = [&u]( const mabuff_id & id ) {
+        return u.has_mabuff( id );
     };
 
-    if( std::any_of( forbid_buffs_any.begin(), forbid_buffs_any.end(), having_buff ) ) {
+    const auto has_effect = [&u]( const efftype_id & id ) {
+        return u.has_effect( id );
+    };
+
+    if( std::any_of( forbid_buffs_any.begin(), forbid_buffs_any.end(), has_buff ) ) {
+        return false;
+    }
+
+    if( std::any_of( forbid_effects_any.begin(), forbid_effects_any.end(), has_effect ) ) {
         return false;
     }
 
     if( !forbid_buffs_all.empty() ) {
-        if( std::all_of( forbid_buffs_all.begin(), forbid_buffs_all.end(), having_buff ) ) {
+        if( std::all_of( forbid_buffs_all.begin(), forbid_buffs_all.end(), has_buff ) ) {
+            return false;
+        }
+    }
+    if( !forbid_effects_all.empty() ) {
+        if( std::all_of( forbid_effects_all.begin(), forbid_effects_all.end(), has_effect ) ) {
             return false;
         }
     }
 
-    return std::all_of( req_buffs_all.begin(), req_buffs_all.end(), having_buff ) &&
-           ( req_buffs_any.empty() || std::any_of( req_buffs_any.begin(), req_buffs_any.end(), having_buff ) );
+    return
+        std::all_of( req_buffs_all.begin(), req_buffs_all.end(), has_buff ) &&
+        ( req_buffs_any.empty() ||
+          std::any_of( req_buffs_any.begin(), req_buffs_any.end(), has_buff ) );
 }
 
 bool ma_requirements::is_valid_character( const Character &u ) const
@@ -861,7 +901,7 @@ std::string ma_requirements::get_description( bool buff ) const
     }
 
     if( !req_buffs_all.empty() ) {
-        dump += _( "<bold>Requires (all):</bold> " );
+        dump += _( "<bold>Requires:</bold> " );
 
         dump += enumerate_as_string( req_buffs_all.begin(),
         req_buffs_all.end(), []( const mabuff_id & bid ) {
@@ -870,7 +910,7 @@ std::string ma_requirements::get_description( bool buff ) const
     }
 
     if( !req_buffs_any.empty() ) {
-        dump += _( "<bold>Requires (any):</bold> " );
+        dump += _( "<bold>Requires any of:</bold> " );
 
         dump += enumerate_as_string( req_buffs_any.begin(),
         req_buffs_any.end(), []( const mabuff_id & bid ) {
@@ -879,7 +919,7 @@ std::string ma_requirements::get_description( bool buff ) const
     }
 
     if( !forbid_buffs_all.empty() ) {
-        dump += _( "<bold>Forbidden (all):</bold> " );
+        dump += _( "<bold>Lost if you have:</bold> " );
 
         dump += enumerate_as_string( forbid_buffs_all.begin(),
         forbid_buffs_all.end(), []( const mabuff_id & bid ) {
@@ -888,7 +928,7 @@ std::string ma_requirements::get_description( bool buff ) const
     }
 
     if( !forbid_buffs_any.empty() ) {
-        dump += _( "<bold>Forbidden (any):</bold> " );
+        dump += _( "<bold>Lost if you have any of:</bold> " );
 
         dump += enumerate_as_string( forbid_buffs_any.begin(),
         forbid_buffs_any.end(), []( const mabuff_id & bid ) {
@@ -1129,6 +1169,7 @@ martialart::martialart()
 {
     leg_block = -1;
     arm_block = -1;
+    nonstandard_block = -1;
 }
 
 // simultaneously check and add all buffs. this is so that buffs that have
@@ -1665,11 +1706,11 @@ bool character_martial_arts::can_leg_block( const Character &owner ) const
     const int unarmed_skill = owner.has_active_bionic( bio_cqb ) ? 5 : owner.get_skill_level(
                                   skill_unarmed );
 
-    // Before we check our legs, can you block at all?
-    const bool block_with_skill = unarmed_skill >= ma.leg_block;
+    // Before we check our legs, can we leg block at all?
+    const bool block_with_skill = ma.leg_block >= 0 && unarmed_skill >= ma.leg_block;
     const bool block_with_bio_armor = ma.leg_block_with_bio_armor_legs &&
                                       owner.has_bionic( bio_armor_legs );
-    if( !( block_with_skill || block_with_bio_armor ) ) {
+    if( !block_with_skill && !block_with_bio_armor ) {
         return false;
     }
 
@@ -1700,16 +1741,16 @@ bool character_martial_arts::can_arm_block( const Character &owner ) const
     const int unarmed_skill = owner.has_active_bionic( bio_cqb ) ? 5 : owner.get_skill_level(
                                   skill_unarmed );
 
-    // before we check our arms, can you block at all?
-    const bool block_with_skill = unarmed_skill >= ma.arm_block;
+    // Before we check our arms, can we block at all?
+    const bool block_with_skill = ma.arm_block >= 0 && unarmed_skill >= ma.arm_block;
     const bool block_with_bio_armor = ma.arm_block_with_bio_armor_arms &&
                                       owner.has_bionic( bio_armor_arms );
-    if( !( block_with_skill || block_with_bio_armor ) ) {
+    if( !block_with_skill && !block_with_bio_armor ) {
         return false;
     }
 
     // Success conditions.
-    // Do we have boring human anatomy? Use the basic calculation
+    // Do we have boring human anatomy? Use the basic calculation.
     if( !owner.has_flag( json_flag_NONSTANDARD_BLOCK ) ) {
         return owner.get_limb_score( limb_score_block, body_part_type::type::arm ) >= 0.5f;
     } else {
@@ -2237,36 +2278,23 @@ bool ma_style_callback::key( const input_context &ctxt, const input_event &event
 
         buffer += "--\n";
 
-        if( ma.arm_block_with_bio_armor_arms || ma.arm_block != 99 ||
-            ma.leg_block_with_bio_armor_legs || ma.leg_block != 99  ||
-            ma.nonstandard_block != 99 ) {
-            Character &u = get_player_character();
-            int unarmed_skill =  u.get_skill_level( skill_unarmed );
-            if( u.has_active_bionic( bio_cqb ) ) {
-                unarmed_skill = BIO_CQB_LEVEL;
-            }
+        if( ma.arm_block_with_bio_armor_arms || ma.arm_block >= 0 ||
+            ma.leg_block_with_bio_armor_legs || ma.leg_block >= 0 ) {
             if( ma.arm_block_with_bio_armor_arms ) {
                 buffer += _( "You can <info>arm block</info> by installing the <info>Arms Alloy Plating CBM</info>" );
                 buffer += "\n";
-            } else if( ma.arm_block != 99 ) {
+            } else if( ma.arm_block >= 0 ) {
                 buffer += string_format(
-                              _( "You can <info>arm block</info> at <info>unarmed combat:</info> <stat>%s</stat>/<stat>%s</stat>" ),
-                              unarmed_skill, ma.arm_block ) + "\n";
+                              _( "You can <info>arm block</info> at <info>unarmed rank:</info> <stat>%s</stat>" ),
+                              ma.arm_block ) + "\n";
             }
-
             if( ma.leg_block_with_bio_armor_legs ) {
                 buffer += _( "You can <info>leg block</info> by installing the <info>Legs Alloy Plating CBM</info>" );
                 buffer += "\n";
-            } else if( ma.leg_block != 99 ) {
+            } else if( ma.leg_block >= 0 ) {
                 buffer += string_format(
-                              _( "You can <info>leg block</info> at <info>unarmed combat:</info> <stat>%s</stat>/<stat>%s</stat>" ),
-                              unarmed_skill, ma.leg_block );
-                buffer += "\n";
-            }
-            if( ma.nonstandard_block != 99 ) {
-                buffer += string_format(
-                              _( "You can <info>block with mutated limbs</info> at <info>unarmed combat:</info> <stat>%s</stat>/<stat>%s</stat>" ),
-                              unarmed_skill, ma.nonstandard_block );
+                              _( "You can <info>leg block</info> at <info>unarmed rank:</info> <stat>%s</stat>" ),
+                              ma.leg_block );
                 buffer += "\n";
             }
             buffer += "--\n";

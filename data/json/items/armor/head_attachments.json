@@ -26,9 +26,9 @@
     ],
     "use_action": {
       "type": "transform",
-      "menu_text": "Press tightly to ears",
+      "menu_text": "Wear",
       "target": "attachable_ear_muffs_on",
-      "msg": "You put the ear muffs tightly to your ears.",
+      "msg": "You move the ear muffs over your ears.",
       "moves": 100
     }
   },
@@ -42,9 +42,9 @@
     "extend": { "flags": [ "DEAF" ] },
     "use_action": {
       "type": "transform",
-      "menu_text": "Put away from ears",
+      "menu_text": "Remove",
       "target": "attachable_ear_muffs",
-      "msg": "You put the ear muffs away from your ears.",
+      "msg": "You move the ear muffs away from your ears.",
       "moves": 100
     }
   },

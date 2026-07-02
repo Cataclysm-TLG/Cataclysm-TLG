@@ -4,7 +4,7 @@
     "id": "EOC_FALLOUT_WARN_OR_CAUSE_RECURRING",
     "recurrence": [
       { "global_val": "fallout_min_recurrence", "default": "3 days" },
-      { "global_val": "fallout_max_recurrence", "default": "100 days" }
+      { "global_val": "fallout_max_recurrence", "default": "70 days" }
     ],
     "global": true,
     "effect": { "run_eocs": "EOC_CAUSE_FALLOUT" }
@@ -34,8 +34,8 @@
       {
         "run_eocs": "EOC_CANCEL_FALLOUT",
         "time_in_future": [
-          { "global_val": "fallout_min_length", "default": "4 hours" },
-          { "global_val": "fallout_max_length", "default": "48 hours" }
+          { "global_val": "fallout_min_length", "default": "10 hours" },
+          { "global_val": "fallout_max_length", "default": "60 hours" }
         ]
       }
     ]

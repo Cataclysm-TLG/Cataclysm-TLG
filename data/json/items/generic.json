@@ -27,6 +27,20 @@
   },
   {
     "type": "ITEM",
+    "id": "rough_terrain",
+    "symbol": "$",
+    "color": "light_gray",
+    "name": { "str_sp": "rough terrain" },
+    "//": "pseudo item, only used for damaging vehicle tires when offroading",
+    "description": "Seeing this is a bug.",
+    "material": [ "stone" ],
+    "weight": "657 g",
+    "volume": "250 ml",
+    "flags": [ "DAMAGE_VEHICLE_WHEELS" ],
+    "price": "0 cent"
+  },
+  {
+    "type": "ITEM",
     "id": "cottonwood_tree_boll",
     "name": { "str": "cottonwood tree boll" },
     "category": "other",

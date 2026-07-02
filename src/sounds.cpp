@@ -331,7 +331,10 @@ void sounds::sound( const tripoint_bub_ms &p, int vol, sound_t category,
     }
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-    recent_sounds.emplace_back( p, monster_sound_event{ vol, is_provocative( category ) } );
+    // Silent sounds are inaudible to monsters and would divide by zero in cluster_sounds.
+    if( vol > 0 ) {
+        recent_sounds.emplace_back( p, monster_sound_event{ vol, is_provocative( category ) } );
+    }
     sounds_since_last_turn.emplace_back( p,
                                          sound_event{ vol, category, description, ambient,
                                                  false, id, variant, seas_str } );
@@ -412,6 +415,11 @@ static std::vector<centroid> cluster_sounds(
         }
         const float volume_sum = static_cast<float>( sound_event_pair.second.volume ) +
                                  found_centroid->weight;
+        if( volume_sum <= 0.0f ) {
+            // Both the sound and its nearest cluster are silent; averaging their
+            // positions would divide by zero and corrupt the centroid.
+            continue;
+        }
         // Set the centroid location to the average of the two locations, weighted by volume.
         found_centroid->x = static_cast<float>( ( sound_event_pair.first.x() *
                                                 sound_event_pair.second.volume ) +
@@ -639,9 +647,9 @@ void sounds::process_sound_markers( Character *you )
             you->volume = std::max( you->volume, noise );
         }
 
-        // Secure the flag before wake_up() clears the effect
+        // Secure the flag before wake_up() clears the effect.
         bool slept_through = you->has_effect( effect_slept_through_alarm );
-        // See if we need to wake someone up
+        // See if we need to wake someone up.
         if( you->in_sleep_state() ) {
             if( ( ( !( you->has_trait( trait_HEAVYSLEEPER ) ||
                        you->has_trait( trait_HEAVYSLEEPER2 ) ) && dice( 2, 15 ) < heard_volume ) ||
@@ -649,7 +657,7 @@ void sounds::process_sound_markers( Character *you )
                   ( you->has_trait( trait_HEAVYSLEEPER2 ) && dice( 6, 15 ) < heard_volume ) ) &&
                 !you->has_effect( effect_narcosis ) &&
                 !you->has_bionic( bio_sleep_shutdown ) ) {
-                //Not kidding about sleep-through-firefight
+                // Not kidding about sleep-through-firefight.
                 you->wake_up();
                 you->add_msg_if_player( m_warning, _( "Something is making noise." ) );
             } else {

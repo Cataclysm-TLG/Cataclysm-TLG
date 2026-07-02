@@ -70,8 +70,8 @@ template <typename T>
 T _read_from_string( std::string_view s, const std::vector<std::pair<std::string, T>> &units )
 {
     auto const error = [s]( char const * suffix, size_t /* offset */ ) {
-        throw math::runtime_error( R"(Failed to convert "%s" to a %s value: %s)", s,
-                                   _str_type_of<T>(), suffix );
+        math::raise<math::runtime_error>( R"(Failed to convert "%s" to a %s value: %s)", s,
+                                          _str_type_of<T>(), suffix );
     };
     return detail::read_from_json_string_common<T>( s, units, error );
 }

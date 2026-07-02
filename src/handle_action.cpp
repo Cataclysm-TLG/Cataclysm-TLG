@@ -169,7 +169,6 @@ static const skill_id skill_unarmed( "unarmed" );
 static const trait_id trait_CLAWS_TENTACLE( "CLAWS_TENTACLE" );
 static const trait_id trait_HIBERNATE( "HIBERNATE" );
 static const trait_id trait_PAWS_LARGE( "PAWS_LARGE" );
-static const trait_id trait_PROF_CHURL( "PROF_CHURL" );
 static const trait_id trait_SHELL2( "SHELL2" );
 static const trait_id trait_SHELL3( "SHELL3" );
 static const trait_id trait_THRESH_FISH( "THRESH_FISH" );
@@ -852,7 +851,9 @@ static void haul()
 
     if( hauling && !autohaul ) {
         if( haul_qty == 0 ) {
-            debugmsg( "Invalid hauling state: hauling enabled, nothing is being hauled, autohaul is off." );
+            add_msg( _( "You have lost track of what you were hauling." ) );
+            player_character.stop_hauling();
+            return;
         } else {
             status_header = string_format( _( "You are currently hauling %d items.\nAutohaul is disabled." ),
                                            haul_qty );
@@ -2814,11 +2815,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                 }
                 set_safe_mode( SAFE_MODE_ON );
             } else if( player_character.has_effect( effect_laserlocked ) ) {
-                if( player_character.has_trait( trait_PROF_CHURL ) ) {
-                    add_msg( m_warning, _( "You make the sign of the cross." ) );
-                } else {
-                    add_msg( m_info, _( "Ignoring laser targeting!" ) );
-                }
+                add_msg( m_info, _( "Ignoring laser targeting!" ) );
                 player_character.remove_effect( effect_laserlocked );
                 safe_mode_warning_logged = false;
             }

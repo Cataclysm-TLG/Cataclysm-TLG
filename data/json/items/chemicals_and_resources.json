@@ -1435,6 +1435,7 @@
     "volume": "250 ml",
     "weight": "1 g",
     "flags": [ "DETERGENT" ],
+    "use_action": [ "WASH_ALL_ITEMS" ],
     "ammo_type": "components",
     "container": "box_small",
     "count": 20
@@ -1455,6 +1456,7 @@
     "weight": "1 g",
     "ammo_type": "components",
     "flags": [ "DETERGENT" ],
+    "use_action": [ "WASH_ALL_ITEMS" ],
     "count": 20
   },
   {
@@ -2116,6 +2118,7 @@
     "volume": "250 ml",
     "phase": "liquid",
     "flags": [ "DETERGENT" ],
+    "use_action": [ "WASH_ALL_ITEMS" ],
     "comestible_type": "INVALID",
     "charges": 5
   },

@@ -38,6 +38,8 @@
 #include "coordinates.h"
 #include "craft_command.h"
 #include "crafting_gui.h"
+#include "crafting.h"
+#include "crafting_enums.h"
 #include "creature.h"
 #include "creature_tracker.h"
 #include "debug.h"
@@ -63,6 +65,7 @@
 #include "item_components.h"
 #include "item_contents.h"
 #include "item_location.h"
+#include "item_wakeup.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -130,6 +133,7 @@ static const activity_id ACT_CLEAR_RUBBLE( "ACT_CLEAR_RUBBLE" );
 static const activity_id ACT_CONSUME( "ACT_CONSUME" );
 static const activity_id ACT_CRACKING( "ACT_CRACKING" );
 static const activity_id ACT_CRAFT( "ACT_CRAFT" );
+static const activity_id ACT_CRAFT_WAIT( "ACT_CRAFT_WAIT" );
 static const activity_id ACT_DISABLE( "ACT_DISABLE" );
 static const activity_id ACT_DISASSEMBLE( "ACT_DISASSEMBLE" );
 static const activity_id ACT_DROP( "ACT_DROP" );
@@ -1344,9 +1348,11 @@ int hacksaw_activity_actor::get_tool_quality() const
             }
         }
     } else {
+        if( !tool || !tool->type ) {
+            return 0;
+        }
         qual = tool->get_quality( qual_SAW_M );
     }
-
     return qual;
 }
 
@@ -1356,12 +1362,10 @@ void hacksaw_activity_actor::set_resume_values_internal( const activity_actor &o
     // This method recalculates moves_left based on tool quality comparison but it doesn't have
     // access to update the moves_left on the corresponding player_activity.  You must set the
     // player_activity's moves_left separately after resuming the activity_actor.
-
     const hacksaw_activity_actor &actor = static_cast<const hacksaw_activity_actor &>( other );
-
+    tool = actor.tool;
     int actor_qual = actor.get_tool_quality();
     int qual = get_tool_quality();
-
     int new_moves_left = -1;
     if( actor_qual > 1 ) {
         new_moves_left = moves_left * ( qual - 1 ) / ( actor_qual - 1 );
@@ -1370,7 +1374,6 @@ void hacksaw_activity_actor::set_resume_values_internal( const activity_actor &o
                    "Hacksaw resume.  Actor quality: %d, quality: %d, moves_left: %d, new_moves_left: %d.",
                    actor_qual, qual, moves_left, new_moves_left );
     moves_left = new_moves_left;
-    tool = actor.tool;
 }
 
 void hacksaw_activity_actor::serialize( JsonOut &jsout ) const
@@ -2415,8 +2418,15 @@ void move_items_activity_actor::do_turn( player_activity &act, Character &who )
             }
 
             if( overflow ) {
-                add_msg( m_warning,
-                         _( "You lose track of some hauled items as they didn't fit on the current tile." ) );
+                std::vector<item_location> &haul_list = who.haul_list;
+                int haul_qty = haul_list.size();
+                if( haul_qty < 1 ) {
+                    add_msg( m_warning, _( "You have lost track of what you were hauling." ) );
+                    who.stop_hauling();
+                } else {
+                    add_msg( m_warning,
+                             _( "You lose track of some items as there isn't room to haul them along." ) );
+                }
             }
         }
     }
@@ -3138,12 +3148,13 @@ item_location &efile_activity_actor::get_currently_processed_efile()
 {
     return currently_processed_efiles.back();
 }
+
 void efile_activity_actor::start( player_activity &act, Character &who )
 {
     if( combo_type == COMBO_MOVE_ONTO_BROWSE ) {
         target_edevices_copy = target_edevices;
     }
-    //handle combo move e-device (browsing may have included used e-device)
+    // Handle combo move e-device (browsing may have included used e-device).
     if( action_type == EF_MOVE_ONTO_THIS ) {
         auto i = target_edevices.begin();
         while( i != target_edevices.end() ) {
@@ -3156,6 +3167,10 @@ void efile_activity_actor::start( player_activity &act, Character &who )
         }
     }
     for( item_location &i : target_edevices ) {
+        if( i->is_null() ) {
+            who.cancel_activity();
+            return;
+        }
         if( !i->has_pocket_type( pocket_type::E_FILE_STORAGE ) ) {
             debugmsg( "invalid item %s provided to efile activity; must have \"E_FILE_STORAGE\" pocket",
                       i->tname() );
@@ -3163,7 +3178,7 @@ void efile_activity_actor::start( player_activity &act, Character &who )
         add_msg_debug( debugmode::DF_ACT_EBOOK, "initialized with edevice %s with %d efiles",
                        i->display_name(), i->efiles().size() );
     }
-    //only skip if loaded through deserialization
+    // Only skip if loaded through deserialization.
     if( !started_processing ) {
         started_processing = true;
         computer_low_skill = who.get_skill_level( skill_computer ) < 1;
@@ -3204,48 +3219,49 @@ void efile_activity_actor::do_turn( player_activity &act, Character &who )
         return true;
     };
 
-    //check for zero devices selected, for combo call
+    // Check for zero devices selected, for combo call.
     if( act.moves_left > 0 ) {
-        //if an e-device was booted, make sure it still exists
+        // If an e-device was booted, make sure it still exists.
         if( !!turns_left_on_current_edevice ) {
             if( !used_edevice || !edevice_reduce_charge( used_edevice ) ) {
                 //if the used device runs out of power or is missing, fail all remaining devices
                 do {
                     failed_processing_current_edevice();
                 } while( !done_processing );
+                return;
             } else {
                 item_location next_edevice = get_currently_processed_edevice();
                 if( !next_edevice || !edevice_reduce_charge( next_edevice ) ) {
                     failed_processing_current_edevice();
+                    return;
                 }
             }
         }
     }
-    //done check (handles return)
+    // Done check (handles return).
     if( done_processing ) {
         act.moves_left = 0;
         add_msg_debug( debugmode::DF_ACT_EBOOK, "efile_transfer completed through done_processing" );
         return;
     }
-    //computer practice
+    // Computer practice.
     if( one_in( 3 ) && computer_low_skill ) {
         if( who.practice( skill_computer, 1 ) ) {
             computer_low_skill = false;
         }
     }
-
     if( !next_edevice_booted ) {
         if( !turns_left_on_current_edevice ) {
-            start_processing_next_edevice(); //only sets if device exists
+            start_processing_next_edevice(); // Only sets if device exists.
         }
         ( *turns_left_on_current_edevice )--;
         if( turns_left_on_current_edevice == 0 ) {
             next_edevice_booted = true;
-            start_processing_next_efile( act, who ); //sets turns_left_file if file exists
+            start_processing_next_efile( act, who ); // Sets turns_left_file if file exists.
         }
     }
-    if( next_edevice_booted ) { //should not be an "else" because files start processing in same turn
-        //current file exists check
+    if( next_edevice_booted ) { // Should not be an "else" because files start processing in same turn.
+        // Current file exists check.
         if( !get_currently_processed_efile() ) {
             failed_processing_current_efile( act, who );
         } else if( turns_left_on_current_efile > 0 ) {
@@ -3536,6 +3552,10 @@ void efile_activity_actor::combo_next_activity( Character &who )
 
     if( combo_type == COMBO_MOVE_ONTO_BROWSE ) {
         for( item_location &edevice : target_edevices_copy ) {
+            if( edevice->is_null() ) {
+                who.cancel_activity();
+                return;
+            }
             for( item *efile : edevice->efiles() ) {
                 all_updated_files.emplace_back( edevice, efile );
             }
@@ -3543,6 +3563,10 @@ void efile_activity_actor::combo_next_activity( Character &who )
 
         units::ememory total_ememory;
         for( item_location &edevice : target_edevices_copy ) {
+            if( edevice->is_null() ) {
+                who.cancel_activity();
+                return;
+            }
             if( edevice->is_browsed() ) {
                 for( item *efile : edevice->efiles() ) {
                     total_ememory += efile->ememory_size();
@@ -3751,6 +3775,9 @@ bool efile_activity_actor::efile_action_is_from( efile_action action_type )
 bool efile_activity_actor::efile_skip_copy( const efile_transfer &transfer, const item &efile )
 {
     auto check_for_file = [&efile]( const item_location & edevice ) {
+        if( edevice->is_null() ) {
+            return true;
+        }
         for( const item *i : edevice->efiles() ) {
             if( i->typeId() == efile.typeId() ) {
                 return true;
@@ -4465,6 +4492,84 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
         }
     }
 
+    // Mode is derived from craft state every turn so wakeup handlers that
+    // advance current_step do not need to reach into the live actor.
+    auto derive_mode = [&]() -> mode {
+        if( !rec.has_steps() )
+        {
+            return mode::active;
+        }
+        const recipe_step &s = rec.steps()[craft.get_current_step()];
+        if( s.attention != step_attention::unattended )
+        {
+            return mode::active;
+        }
+        if( craft.get_passive_started_at() == calendar::before_time_starts )
+        {
+            return mode::active;
+        }
+        const std::vector<attention_plan> &plans = craft.get_step_plans();
+        const int idx = craft.get_current_step();
+        if( idx >= static_cast<int>( plans.size() ) )
+        {
+            return mode::waiting;
+        }
+        return plans[idx].choice == step_choice::do_wait ? mode::waiting : mode::active;
+    };
+    mode_ = derive_mode();
+
+    if( rec.has_steps() ) {
+        const recipe_step &cur_step = rec.steps()[craft.get_current_step()];
+        if( cur_step.attention == step_attention::unattended ) {
+            const std::vector<attention_plan> &plans = craft.get_step_plans();
+            const int idx = craft.get_current_step();
+            const attention_plan plan = idx < static_cast<int>( plans.size() ) ? plans[idx] :
+                                        attention_plan{};
+
+            // Past-due wakeup (off-bubble drop or same-turn race): advance inline.
+            if( craft.get_passive_started_at() != calendar::before_time_starts &&
+                craft.get_ready_at() != calendar::before_time_starts &&
+                calendar::turn >= craft.get_ready_at() ) {
+                craft_actualize_scheduled( craft, item_wakeup_kind::ready_check,
+                                           calendar::turn, craft_item );
+                return;
+            }
+
+            if( craft.get_passive_started_at() == calendar::before_time_starts ) {
+                craft_stamp_passive_entry( craft, crafter, calendar::turn, craft_item );
+                mode_ = derive_mode();
+                // Back-dated entry can leave alarm and/or ready already due.
+                // Alarm runs first; the alarm handler elides itself if ready
+                // also fires same turn.
+                if( craft.get_alarm_at() != calendar::before_time_starts &&
+                    calendar::turn >= craft.get_alarm_at() ) {
+                    craft_actualize_scheduled( craft, item_wakeup_kind::alarm,
+                                               calendar::turn, craft_item );
+                }
+                if( craft.get_ready_at() != calendar::before_time_starts &&
+                    calendar::turn >= craft.get_ready_at() ) {
+                    craft_actualize_scheduled( craft, item_wakeup_kind::ready_check,
+                                               calendar::turn, craft_item );
+                    return;
+                }
+            }
+
+            if( plan.choice == step_choice::do_wait ) {
+                // Per-turn env check fast-path.  do_something / set_timer
+                // rely on the periodic env_check wakeup at 1-minute cadence
+                // since no actor runs for those modes.
+                craft_actualize_scheduled( craft, item_wakeup_kind::env_check,
+                                           calendar::turn, craft_item );
+                crafter.set_moves( 0 );
+                return;
+            }
+            // do_something / set_timer: end activity without backlog.
+            act.set_to_null();
+            crafter.set_moves( 0 );
+            return;
+        }
+    }
+
     if( !use_cached_workbench_multiplier ) {
         cached_workbench_multiplier = crafter.workbench_crafting_speed_multiplier( craft, location );
         use_cached_workbench_multiplier = true;
@@ -4480,12 +4585,18 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
         return;
     }
 
+    // Book bonuses and tool speeds come from the nearby inventory, not the
+    // crafter's proficiency, so they survive the per-5% proficiency invalidation.
+    // batch_time still applies the live proficiency malus on top of this context,
+    // so the move totals stay current without rebuilding it each step.
+    if( !cost_ctx_ready ) {
+        cached_cost_ctx = { crafter.book_bonuses_nearby(), compute_tool_speeds( rec, crafter ) };
+        cost_ctx_ready = true;
+    }
+
     if( cached_crafting_speed != crafting_speed || cached_assistants != assistants ) {
         cached_crafting_speed = crafting_speed;
         cached_assistants = assistants;
-        // Recompute cost context: tool speeds + book proficiency bonuses
-        cached_cost_ctx = { crafter.book_bonuses_nearby(), compute_tool_speeds( rec, crafter ) };
-
         // Base moves for batch size with no speed modifier or assistants
         // Must ensure >= 1 so we don't divide by 0;
         cached_base_total_moves = std::max( static_cast<int64_t>( 1 ),
@@ -4502,6 +4613,7 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
     // item_counter represents the percent progress relative to the base batch time
     // stored precise to 5 decimal places ( e.g. 67.32 percent would be stored as 6732000 )
     const int old_counter = craft.item_counter;
+    const int old_moves = crafter.get_moves();
 
     // Delta progress in moves adjusted for current crafting speed /
     //crafter.exertion_adjusted_move_multiplier( exertion_level() )
@@ -4519,7 +4631,23 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
     craft.item_counter = std::min( craft.item_counter, 10000000 );
 
     // Step transitions: accumulate work and advance through step boundaries.
+    // Each closing step gets a final non-charged tool sweep before its index
+    // is incremented; a missing tool rewinds the whole turn.
+    int old_step = 0;
+    double old_step_progress = 0.0;
+    const auto rewind_turn = [&]() {
+        if( rec.has_steps() ) {
+            craft.set_current_step( old_step );
+            craft.set_step_progress( old_step_progress );
+        }
+        craft.item_counter = old_counter;
+        crafter.set_moves( old_moves );
+        craft.erase_var( "crafter" );
+        crafter.cancel_activity();
+    };
     if( rec.has_steps() ) {
+        old_step = craft.get_current_step();
+        old_step_progress = craft.get_step_progress();
         craft.mod_step_progress( delta_progress );
         const int last_step_idx = static_cast<int>( rec.steps().size() ) - 1;
         while( craft.get_current_step() < last_step_idx ) {
@@ -4529,9 +4657,29 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
             if( craft.get_step_progress() < budget ) {
                 break;
             }
+            if( !crafter.verify_step_tools( craft, craft.get_current_step(),
+                                            crafter.pos_bub(), PICKUP_RANGE, /*pin_to_map=*/false ) ) {
+                rewind_turn();
+                return;
+            }
             craft.set_step_progress( craft.get_step_progress() - budget );
             craft.set_current_step( craft.get_current_step() + 1 );
         }
+    }
+    // Verify before debit so a rejected closure does not burn charges first.
+    if( craft.item_counter >= 10000000 ) {
+        const int closing_step = rec.has_steps()
+                                 ? static_cast<int>( rec.steps().size() ) - 1 : 0;
+        if( !crafter.verify_step_tools( craft, closing_step,
+                                        crafter.pos_bub(), PICKUP_RANGE, /*pin_to_map=*/false ) ) {
+            rewind_turn();
+            return;
+        }
+    }
+    // Charge shortfall rewinds the turn before any skill gain.
+    if( !crafter.craft_consume_step_tools( craft, &cached_cost_ctx ) ) {
+        rewind_turn();
+        return;
     }
 
     // This nominal craft time is also how many practice ticks to perform
@@ -4558,20 +4706,6 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
         use_cached_workbench_multiplier = false;
     }
 
-    // Unlike skill, tools are consumed once at the start and should not be consumed at the end
-    if( craft.item_counter >= 10000000 ) {
-        --five_percent_steps;
-    }
-
-    if( five_percent_steps > 0 ) {
-        if( !crafter.craft_consume_tools( craft, five_percent_steps, false ) ) {
-            // So we don't skip over any tool comsuption
-            craft.item_counter -= craft.item_counter % 500000 + 1;
-            craft.erase_var( "crafter" );
-            crafter.cancel_activity();
-            return;
-        }
-    }
 
     // if item_counter has reached 100% or more
     if( craft.item_counter >= 10000000 ) {
@@ -4680,6 +4814,9 @@ void craft_activity_actor::serialize( JsonOut &jsout ) const
     jsout.member( "craft_loc", craft_item );
     jsout.member( "long", is_long );
     jsout.member( "activity_override", activity_override );
+    if( mode_ == mode::waiting ) {
+        jsout.member( "mode", "waiting" );
+    }
 
     jsout.end_object();
 }
@@ -4693,6 +4830,10 @@ std::unique_ptr<activity_actor> craft_activity_actor::deserialize( JsonValue &js
     data.read( "craft_loc", actor.craft_item );
     data.read( "long", actor.is_long );
     data.read( "activity_override", actor.activity_override );
+    std::string mode_str;
+    if( data.read( "mode", mode_str ) && mode_str == "waiting" ) {
+        actor.mode_ = mode::waiting;
+    }
 
     return actor.clone();
 }
@@ -9147,6 +9288,7 @@ deserialize_functions = {
     { ACT_CONSUME, &consume_activity_actor::deserialize },
     { ACT_CRACKING, &safecracking_activity_actor::deserialize },
     { ACT_CRAFT, &craft_activity_actor::deserialize },
+    { ACT_CRAFT_WAIT, &craft_activity_actor::deserialize },
     { ACT_DISABLE, &disable_activity_actor::deserialize },
     { ACT_DISASSEMBLE, &disassemble_activity_actor::deserialize },
     { ACT_DROP, &drop_activity_actor::deserialize },

@@ -58,6 +58,7 @@
 #include "item_factory.h"
 #include "item_group.h"
 #include "item_location.h"
+#include "item_wakeup.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -175,6 +176,7 @@ static const itype_id itype_maple_sap( "maple_sap" );
 static const itype_id itype_nail( "nail" );
 static const itype_id itype_pipe( "pipe" );
 static const itype_id itype_rock( "rock" );
+static const itype_id itype_rough_terrain( "rough_terrain" );
 static const itype_id itype_scrap( "scrap" );
 static const itype_id itype_splinter( "splinter" );
 static const itype_id itype_steel_chunk( "steel_chunk" );
@@ -1141,17 +1143,76 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
 
             veh.handle_trap( this, wheel_p, vp_wheel );
             // dont use vp_wheel or vp_wheel_idx below this - handle_trap might've removed it from parts
+            bool has_item = has_items( wheel_p ) &&
+                            !has_flag( ter_furn_flag::TFLAG_SEALED, wheel_p );
 
-            if( has_items( wheel_p ) && !has_flag( ter_furn_flag::TFLAG_SEALED, wheel_p ) ) {
-                // Damage is calculated based on the weight of the vehicle,
-                // The area of it's wheels, and the area of the wheel running over the items.
-                // This number is multiplied by weight_to_damage_factor to get reasonable results, damage-wise.
-                const int wheel_damage = vpi_wheel.wheel_info->contact_area / vehicle_grounded_wheel_area *
-                                         vehicle_mass_kg * weight_to_damage_factor;
+            if( has_item ) {
+                const int wheel_damage =
+                    vpi_wheel.wheel_info->contact_area /
+                    vehicle_grounded_wheel_area *
+                    vehicle_mass_kg * weight_to_damage_factor;
 
-                //~ %1$s: vehicle name
-                smash_items( wheel_p, wheel_damage, string_format( _( "weight of %1$s" ), veh.disp_name() ),
+                smash_items( wheel_p, wheel_damage,
+                             string_format( _( "weight of %1$s" ), veh.disp_name() ),
                              &vp_wheel, &veh );
+            }
+
+            auto *driver = veh.get_driver( *this );
+            if( driver == nullptr ) {
+                continue;
+            }
+            const int velocity = std::max( std::abs( veh.velocity ), 1 );
+            const bool extra_hazard = has_flag( ter_furn_flag::TFLAG_TIRE_DAMAGE, wheel_p ) ||
+                                      has_flag( ter_furn_flag::TFLAG_SHARP, wheel_p );
+
+            const bool hazard = extra_hazard ||
+                                ( has_flag( ter_furn_flag::TFLAG_DIGGABLE, wheel_p ) &&
+                                  !has_flag( ter_furn_flag::TFLAG_ROAD, wheel_p ) &&
+                                  !has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, wheel_p ) );
+
+            if( !hazard || ( vp_wheel.info().wheel_info->offroad_rating >= 0.6f && !extra_hazard ) ) {
+                continue;
+            }
+            // Turn this numerator down if you want to make procs more likely, up if you want less.
+            // Turn the big side of the clamp up if you want it safer for slow drivers.
+            int chance = std::clamp( 80000 / velocity, 25, 125 );
+            if( extra_hazard ) {
+                chance = chance / 2;
+            }
+
+            add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to proc rough terrain: 1 / %d.", chance );
+
+            if( !one_in( chance ) ) {
+                continue;
+            }
+
+            float driver_skill = driver->get_skill_level( skill_driving );
+            float driver_spot  = driver->spot_check();
+            float avoidance = std::min(
+                                  driver_skill * 0.02f + driver_spot * 0.01f,
+                                  0.75f
+                              );
+            item rough_terrain( itype_rough_terrain, calendar::turn );
+            float hit_chance = vehicle::hit_probability( rough_terrain, &vp_wheel );
+            float effective_hit = hit_chance * ( 1.f - avoidance );
+            if( rng_float( 0.f, 1.f ) < effective_hit ) {
+                int damage_levels = 1;
+                std::vector<std::string> wheel_damage_messages;
+                veh.damage_wheel_on_item(
+                    &vp_wheel, rough_terrain,
+                    &damage_levels,
+                    &wheel_damage_messages
+                );
+                if( damage_levels > 0 ) {
+                    veh.damage_direct( *this, vp_wheel, damage_levels );
+                    const bool player_is_driver = &get_player_character() == veh.get_driver( *this );
+                    const bool player_sees_damage = get_player_character().sees( *this, wheel_p );
+                    if( !wheel_damage_messages.empty() && ( player_is_driver || player_sees_damage ) ) {
+                        for( const std::string &msg : wheel_damage_messages ) {
+                            add_msg( m_bad, msg );
+                        }
+                    }
+                }
             }
         }
     }
@@ -2567,6 +2628,8 @@ std::string map::features( const tripoint_bub_ms &p ) const
     add_if( has_flag( ter_furn_flag::TFLAG_FLAMMABLE, p ) ||
             has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, p ) ||
             has_flag( ter_furn_flag::TFLAG_FLAMMABLE_HARD, p ), _( "Flammable." ) );
+    add_if( has_flag( ter_furn_flag::TFLAG_TIRE_DAMAGE, p ), _( "Damages Tires." ) );
+    add_if( has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, p ), _( "Safe for Tires." ) );
     return result;
 }
 
@@ -4267,9 +4330,6 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
                 i++;
                 continue;
             }
-        }
-
-        if( vp_wheel != nullptr ) {
             veh->damage_wheel_on_item( vp_wheel, *i, &damage_levels, &wheel_damage_messages );
         }
 
@@ -4387,17 +4447,6 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
             for( const std::string &msg : wheel_damage_messages ) {
                 add_msg( m_bad, msg );
             }
-        }
-
-        bool existing = false;
-        for( int wheel : veh->wheelcache ) {
-            if( veh->bub_part_pos( *this, veh->part( wheel ) ) == p ) {
-                existing = true;
-                break;
-            }
-        }
-        if( existing ) {
-            add_msg( m_bad, _( "The %s has been degraded by the damage" ), vp_wheel->name() );
         }
     }
 
@@ -5610,53 +5659,50 @@ bool map::open_door( Creature const &u, const tripoint_bub_ms &p, const bool ins
         if( has_flag( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE, p ) && !inside ) {
             return false;
         }
-
         if( !check_only ) {
             sounds::sound( p, 6, sounds::sound_t::movement, _( "swish" ), true,
                            "open_door", ter.id.str() );
             ter_set( p, ter.open );
-
             if( u.has_trait( trait_SCHIZOPHRENIC ) && u.is_avatar() &&
                 one_in( 50 ) && !ter.has_flag( ter_furn_flag::TFLAG_TRANSPARENT ) ) {
                 tripoint_bub_ms mp = p + point_rel_ms( -2 * u.pos_bub().xy().raw() ) + tripoint_rel_ms{ 2 * p.x(), 2 * p.y(), p.z() };
                 g->spawn_hallucination( mp );
             }
         }
-
         return true;
     } else if( furn.open ) {
         if( has_flag( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE, p ) && !inside ) {
             return false;
         }
-
         if( !check_only ) {
             sounds::sound( p, 6, sounds::sound_t::movement, _( "swish" ), true,
                            "open_door", furn.id.str() );
             furn_set( p, furn.open );
         }
-
         return true;
-    } else if( const optional_vpart_position vp = veh_at( p ) ) {
-        const optional_vpart_position creature_veh = veh_at( u.pos_bub() );
-        const bool creature_outside = !creature_veh.has_value() ||
-                                      &creature_veh->vehicle() != &veh_at( p )->vehicle();
-
-        const int openable = vp->vehicle().next_part_to_open( vp->part_index(), creature_outside );
-        if( openable >= 0 ) {
-            if( !check_only ) {
-                if( ( u.is_npc() || u.is_avatar() ) &&
-                    !vp->vehicle().handle_potential_theft( *u.as_character() ) ) {
-                    return false;
-                }
-                vp->vehicle().open_all_at( *this, openable );
+        } else if( const optional_vpart_position vp = veh_at( p ) ) {
+            const optional_vpart_position creature_veh = veh_at( u.pos_bub() );
+            const bool creature_outside =
+                !creature_veh.has_value() ||
+                &creature_veh->vehicle() != &vp->vehicle();
+            const bool player_can_lock = u.attitude_to( get_player_character() ) != Creature::Attitude::FRIENDLY && vp->vehicle().player_is_driving_this_veh( this );
+            if( player_can_lock ) {
+                return false;
             }
-
-            return true;
-        }
-
+            const int openable =
+                vp->vehicle().next_part_to_open( vp->part_index(), creature_outside );
+            if( openable >= 0 ) {
+                if( !check_only ) {
+                    if( ( u.is_npc() || u.is_avatar() ) &&
+                        !vp->vehicle().handle_potential_theft( *u.as_character() ) ) {
+                        return false;
+                    }
+                    vp->vehicle().open_all_at( *this, openable );
+                }
+                return true;
+            }
         return false;
     }
-
     return false;
 }
 
@@ -7325,6 +7371,16 @@ void map::remove_trap( const tripoint_bub_ms &p )
         if( iter != traps.end() ) {
             traps.erase( iter );
         }
+        // If this tile is a phased terrain placeholder (PHASE_BACK), restore
+        // the original terrain stored for this tile when removing the trap.
+        if( ter( p )->has_flag( "PHASE_BACK" ) ) {
+            if( has_original_terrain_at( p ) ) {
+                const ter_id orig = get_original_terrain_at( p );
+                ter_set( p, orig );
+            } else {
+                ter_set( p, ter( p ).obj().bash->ter_set );
+            }
+        }
     }
 }
 
@@ -8062,6 +8118,8 @@ bool map::dont_draw_lower_floor( const tripoint_bub_ms &p ) const
         return true;
     } else if( !inbounds( p ) ) {
         return false;
+    } else if( has_flag_ter( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, p ) ) {
+        return false;
     } else {
         return get_cache( p.z() ).floor_cache[p.x()][p.y()];
     }
@@ -8399,7 +8457,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
     // Range and bounds checks.
     if( std::abs( F.z() - T.z() ) > fov_3d_z_range ||
         ( range >= 0 && range < rl_dist( F, T ) ) ||
-        !inbounds( T ) ) {
+        !inbounds( T ) || !inbounds( F ) ) {
         bresenham_slope = 0;
         return result; // Out of range. Visible is already false, no further checks needed.
     }
@@ -9266,6 +9324,82 @@ void map::load( const tripoint_abs_sm &w, const bool update_vehicle,
             }
         }
     }
+
+    reconcile_item_wakeups();
+}
+
+void map::reconcile_item_wakeups()
+{
+    item_wakeup_manager &wakeups = get_item_wakeups();
+    auto reconcile_recursive = [&wakeups]( auto & self, item_location loc ) -> void {
+        if( !loc )
+        {
+            return;
+        }
+        item *outer = loc.get_item();
+        if( outer == nullptr )
+        {
+            return;
+        }
+        wakeups.rebuild_for_item( loc );
+        for( item *child : outer->all_items_top() )
+        {
+            item_location child_loc( loc, child );
+            self( self, child_loc );
+        }
+    };
+
+    for( int gridx = 0; gridx < my_MAPSIZE; gridx++ ) {
+        for( int gridy = 0; gridy < my_MAPSIZE; gridy++ ) {
+            const int zmin = zlevels ? -OVERMAP_DEPTH : abs_sub.z();
+            const int zmax = zlevels ? OVERMAP_HEIGHT : abs_sub.z();
+            for( int gridz = zmin; gridz <= zmax; gridz++ ) {
+                const tripoint_rel_sm grid( gridx, gridy, gridz );
+                submap *const sm = get_submap_at_grid( grid );
+                if( sm == nullptr ) {
+                    continue;
+                }
+                for( int sx = 0; sx < SEEX; ++sx ) {
+                    for( int sy = 0; sy < SEEY; ++sy ) {
+                        for( item &it : sm->get_items( { sx, sy } ) ) {
+                            const tripoint_bub_ms p( sx + gridx * SEEX,
+                                                     sy + gridy * SEEY, gridz );
+                            const tripoint_abs_ms abs = get_abs( p );
+                            item_location loc( map_cursor( abs ), &it );
+                            reconcile_recursive( reconcile_recursive, loc );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for( wrapped_vehicle &wv : get_vehicles() ) {
+        if( wv.v == nullptr ) {
+            continue;
+        }
+        for( const vpart_reference &vpr : wv.v->get_all_parts() ) {
+            vehicle_part &vp = wv.v->part( vpr.part_index() );
+            for( item &it : wv.v->get_items( vp ) ) {
+                vehicle_cursor vc( *wv.v, vpr.part_index() );
+                item_location loc( vc, &it );
+                reconcile_recursive( reconcile_recursive, loc );
+            }
+        }
+    }
+
+    auto walk_character = [&wakeups]( Character & c ) {
+        // all_items_loc() is already recursive; rebuild per location directly.
+        for( item_location &loc : c.all_items_loc() ) {
+            if( loc && loc.get_item() != nullptr ) {
+                wakeups.rebuild_for_item( loc );
+            }
+        }
+    };
+    walk_character( get_avatar() );
+    for( npc &n : g->all_npcs() ) {
+        walk_character( n );
+    }
 }
 
 void map::shift_traps( const point_rel_sm &shift )
@@ -9456,6 +9590,9 @@ void map::shift( const point_rel_sm &sp )
     // with entities at the edges
     for( tripoint_rel_sm loaded_grid : loaded_grids ) {
         actualize( loaded_grid );
+    }
+    if( !loaded_grids.empty() ) {
+        reconcile_item_wakeups();
     }
 }
 
@@ -10797,12 +10934,6 @@ void map::build_outside_cache( const int zlev )
     cata::mdarray<bool, point_bub_ms, padded_w, padded_h> padded_cache;
 
     auto &outside_cache = ch.outside_cache;
-    if( zlev < 0 ) {
-        std::uninitialized_fill_n(
-            &outside_cache[0][0], MAPSIZE_X * MAPSIZE_Y, false );
-        return;
-    }
-
     padded_cache.fill( true );
 
     for( int smx = 0; smx < my_MAPSIZE; ++smx ) {
@@ -11032,12 +11163,6 @@ bool map::build_floor_cache( const int zlev )
                         terrain.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER ) ||
                         terrain.has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ||
                         terrain.has_flag( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR ) ) {
-                        // If below SUPPORTS_ROOF then there is indeed a floor.
-                        if( below_submap &&
-                            ( below_submap->get_furn( sp ).obj().has_flag( ter_furn_flag::TFLAG_SUN_ROOF_ABOVE ) ||
-                              below_submap->get_ter( sp ).obj().has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) ) ) {
-                            continue;
-                        }
                         const point p( sx + smx * SEEX, sy + smy * SEEY );
                         floor_cache[p.x][p.y] = false;
                         no_floor_gaps = false;

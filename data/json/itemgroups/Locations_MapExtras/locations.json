@@ -1251,10 +1251,14 @@
       { "item": "wakizashi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30, "damage": [ -1, 5 ] },
       { "item": "nodachi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 5, "damage": [ -1, 5 ] },
       { "item": "tanto", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25, "damage": [ -1, 5 ] },
+      { "item": "sai", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2, "damage": [ -1, 5 ] },
+      { "item": "jitte", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1, "damage": [ -1, 5 ] },
       { "item": "katana", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "wakizashi", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "nodachi", "prob": 2, "damage": [ -1, 5 ] },
-      { "item": "tanto", "prob": 10, "damage": [ -1, 5 ] }
+      { "item": "tanto", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "sai", "prob": 2, "damage": [ -1, 5 ] },
+      { "item": "jitte", "prob": 1, "damage": [ -1, 5 ] }
     ]
   },
   {
@@ -1746,7 +1750,7 @@
       { "prob": 24, "group": "lsd_bag_zipper_1_5" },
       { "item": "naloxone", "prob": 2 },
       { "group": "ammo_casings", "prob": 20, "container-item": "bag_zipper", "count": [ 1, 5 ] },
-      { "item": "cotton_patch", "custom-flags": [ "FILTHY" ], "prob": 20 },
+      { "item": "bandages_makeshift", "custom-flags": [ "FILTHY" ], "prob": 20 },
       { "item": "slime_scrap", "prob": 3, "container-item": "bag_zipper" },
       { "item": "raw_hleather", "prob": 1, "container-item": "bag_zipper" }
     ]
@@ -2817,7 +2821,7 @@
     "id": "mil_base_bed_hospital",
     "type": "item_group",
     "subtype": "distribution",
-    "entries": [ { "item": "blanket", "prob": 200 }, { "item": "cotton_patch", "prob": 400, "custom-flags": [ "FILTHY" ] } ]
+    "entries": [ { "item": "blanket", "prob": 200 }, { "item": "bandages_makeshift", "prob": 40, "custom-flags": [ "FILTHY" ] } ]
   },
   {
     "id": "mil_base_table_hospital",
@@ -2825,7 +2829,7 @@
     "subtype": "distribution",
     "entries": [
       { "item": "bandages", "prob": 25, "count": [ 1, 3 ] },
-      { "item": "cotton_patch", "prob": 100, "custom-flags": [ "FILTHY" ] }
+      { "item": "bandages_makeshift", "prob": 50, "custom-flags": [ "FILTHY" ] }
     ]
   },
   {

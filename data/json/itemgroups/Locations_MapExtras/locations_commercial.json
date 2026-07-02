@@ -194,7 +194,6 @@
       [ "hotdogs_cooked", 35 ],
       [ "corndogs_frozen", 30 ],
       [ "blt", 40 ],
-      [ "salted_fish", 15 ],
       [ "pie", 20 ],
       [ "pie_meat", 20 ],
       [ "pie_vegetable", 20 ],
@@ -303,6 +302,8 @@
       { "item": "tanto", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
       { "item": "1h_flail_steel", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
       { "item": "morningstar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
+      { "item": "sai", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2 },
+      { "item": "jitte", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "group": "cigar_box_opened", "prob": 10, "count": [ 1, 2 ] },
       [ "hollow_cane", 5 ],
       [ "cane_toy", 3 ],
@@ -1422,7 +1423,7 @@
       [ "tieclip", 10 ],
       [ "collarpin", 10 ],
       [ "blazer", 35 ],
-      [ "undershirt", 30 ],
+      [ "tank_top", 30 ],
       [ "suit", 30 ],
       [ "waistcoat", 30 ],
       [ "gold_watch", 5 ],
@@ -1931,7 +1932,6 @@
       [ "hacksaw", 5 ],
       [ "gloves_rubber", 25 ],
       [ "apron_plastic", 15 ],
-      { "item": "cotton_patch", "prob": 10, "custom-flags": [ "FILTHY" ] },
       [ "bag_plastic", 20 ],
       [ "string_6", 5 ]
     ]
@@ -1950,8 +1950,7 @@
       [ "towel", 20 ],
       { "item": "soap", "prob": 10, "charges": [ 1, 10 ] },
       [ "gloves_medical", 20 ],
-      [ "cotton_patch", 15 ],
-      { "item": "cotton_patch", "prob": 2, "custom-flags": [ "FILTHY" ] },
+      [ "bandages", 15 ],
       [ "bag_plastic", 20 ],
       [ "jerky", 40 ]
     ]
@@ -2017,7 +2016,7 @@
       [ "tshirt", 30 ],
       [ "sneakers", 30 ],
       [ "hot_pants", 14 ],
-      [ "undershirt", 30 ],
+      [ "tank_top", 30 ],
       [ "hoodie", 20 ],
       [ "shorts", 30 ],
       { "prob": 3, "group": "coke_bag_zipper_1_8" },

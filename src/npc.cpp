@@ -1597,23 +1597,26 @@ void npc::stow_item( item &it )
 
 bool npc::wield( item &it )
 {
-    // dont unwield if you already wield the item
     if( is_wielding( it ) ) {
         return true;
     }
-    // instead of unwield(), call stow_item, allowing to wear it and check it is not inside wielded itm
-    if( has_wield_conflicts( it ) && !get_wielded_item()->has_item( it ) ) {
-        stow_item( *get_wielded_item() );
+    item *const held_item = get_wielded_item().get_item();
+    const bool stow =
+        has_wield_conflicts( it ) && held_item && held_item->has_item( it );
+    if( stow && held_item ) {
+        stow_item( *held_item );
     }
     if( !Character::wield( it ) ) {
         return false;
     }
-    if( get_wielded_item() ) {
-        // add_msg_if_player_sees does no internal npc name replacement
-        add_msg_if_player_sees( *this, m_info, replace_with_npc_name( _( "<npcname> wields a %s." ) ),
-                                get_wielded_item()->tname() );
+    item *const new_item = get_wielded_item().get_item();
+    if( new_item ) {
+        add_msg_if_player_sees(
+            *this, m_info,
+            replace_with_npc_name( _( "<npcname> wields a %s." ) ),
+            new_item->tname()
+        );
     }
-
 
     invalidate_range_cache();
     return true;
@@ -2087,7 +2090,7 @@ int npc::indoor_voice() const
     const int distance_to_player = rl_dist( pos_abs(), player.pos_abs() );
     if( is_following() || is_ally( player ) ) {
         wanted_volume = distance_to_player;
-    } else if( is_enemy() && sees( here, player.pos_bub( here ) ) ) {
+    } else if( is_enemy() && sees( here, player ) ) {
         // Battle cry! Bandits have no concept of indoor voice, even when not threatened.
         wanted_volume = max_volume;
     }

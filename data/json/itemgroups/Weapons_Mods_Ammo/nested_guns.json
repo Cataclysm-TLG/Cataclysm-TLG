@@ -59,8 +59,8 @@
     "ammo": 100,
     "entries": [
       { "item": "needlepistol", "charges": [ 0, 50 ] },
-      { "item": "5x50_20_mag" },
-      { "item": "5x50_40_mag", "prob": 50 },
+      { "item": "5x50_20_mag", "prob": 70 },
+      { "item": "5x50_40_mag", "prob": 40 },
       { "group": "on_hand_5x50" }
     ]
   },
@@ -72,21 +72,22 @@
     "ammo": 100,
     "entries": [
       { "item": "hk_usc45", "charges": [ 0, 20 ] },
-      { "item": "usc20mag" },
-      { "item": "usc20mag", "prob": 50 },
+      { "item": "usc20mag", "prob": 70 },
+      { "item": "usc20mag", "prob": 40 },
       { "group": "on_hand_45" }
     ]
   },
   {
     "id": "nested_glock_22",
     "type": "item_group",
-    "//": "this is a distribution for the gun, reasonable number of backup mags, and some ammo to repack",
+    "//": "Variable ammo type means we need to spawn the mag outside the gun.",
     "subtype": "collection",
     "ammo": 100,
     "entries": [
-      { "item": "glock_22", "charges": [ 0, 15 ] },
-      { "item": "glock40mag", "charges": [ 0, 15 ] },
-      { "item": "glock40mag", "charges": [ 0, 15 ], "prob": 50 },
+      { "item": "glock_22" },
+      { "item": "glock40mag", "ammo-item": "40sw", "charges": [ 0, 15 ] },
+      { "item": "glock40mag", "prob": 70 },
+      { "item": "glock40mag", "prob": 40 },
       { "group": "on_hand_40" }
     ]
   },

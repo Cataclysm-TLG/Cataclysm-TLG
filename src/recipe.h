@@ -18,6 +18,7 @@
 
 #include "build_reqs.h"
 #include "calendar.h"
+#include "crafting_enums.h"
 #include "proficiency.h"
 #include "requirements.h"
 #include "translations.h"
@@ -126,6 +127,13 @@ struct recipe_step {
     // Populated during finalize from reqs_internal
     requirement_data requirements;
 
+    step_attention attention = step_attention::none;
+    // nullopt = step waits indefinitely.
+    std::optional<time_duration> max_time;
+    // Buffer past max_time before destruction.  Requires max_time.
+    std::optional<time_duration> grace_period;
+    translation unattend_message;
+
     void load( const JsonObject &jo, const std::string &recipe_name, int step_index );
 };
 
@@ -214,6 +222,12 @@ class recipe
 
         const deduped_requirement_data &deduped_requirements() const {
             return deduped_requirements_;
+        }
+
+        // Root-level requirements (inline + "using"), captured before per-step
+        // requirements merge in.  Empty for stepless recipes.
+        const requirement_data &root_requirements() const {
+            return root_requirements_;
         }
 
         const recipe_id &ident() const {
@@ -309,6 +323,8 @@ class recipe
         const std::vector<recipe_step> &steps() const {
             return steps_;
         }
+        bool has_attention_steps() const;
+        bool has_remaining_attention_steps( int from_step ) const;
         // Returns aggregate proficiencies for step recipes, or the legacy
         // proficiencies field for stepless recipes.  This is a conservative
         // whole-recipe approximation used for display, gating, approximate
@@ -323,8 +339,11 @@ class recipe
             const book_proficiency_bonuses &books );
         // Per-step time budget in base moves (with proficiency malus and batch savings).
         // Same per-step formula that batch_time() uses internally.
+        // ignore_proficiencies skips the proficiency malus (passive steps run on
+        // wall-clock independent of crafter skill).
         double step_budget_moves( const Character &guy, size_t step_idx, int batch,
-                                  const crafting_cost_context &ctx ) const;
+                                  const crafting_cost_context &ctx,
+                                  recipe_time_flag flags = recipe_time_flag::none ) const;
 
         // This is used by the basecamp bulletin board.
         std::string required_all_skills_string( const std::map<skill_id, int> & ) const;
@@ -438,6 +457,9 @@ class recipe
 
         /** Combined requirements cached when recipe finalized */
         requirement_data requirements_;
+
+        /** Snapshot backing root_requirements() */
+        requirement_data root_requirements_;
 
         /** Deduped version constructed from the above requirements_ */
         deduped_requirement_data deduped_requirements_;

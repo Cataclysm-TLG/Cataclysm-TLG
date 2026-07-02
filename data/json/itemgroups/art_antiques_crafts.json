@@ -231,6 +231,8 @@
       { "item": "cavalry_sabre", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 4 },
       { "item": "wakizashi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 6 },
       { "item": "kris", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 8 },
+      { "item": "sai", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2 },
+      { "item": "jitte", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "item": "pistol_flintlock", "prob": 4 },
       { "item": "carbine_flintlock", "prob": 4 },
       { "item": "rifle_flintlock", "prob": 4 },

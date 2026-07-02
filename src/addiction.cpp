@@ -102,11 +102,10 @@ static bool alcohol_add( Character &u, int in )
     bool ret = false;
     if( x_in_y( in, 24 ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_alcohol_detoxed ) &&
-            ( !u.has_effect( effect_withdrawal_alcohol_timer ) ||
-              u.get_effect_int( effect_withdrawal_alcohol_timer ) < timer_int ) ) {
+            ( !u.has_effect( effect_withdrawal_alcohol_timer ) ) ) {
             u.add_effect( effect_withdrawal_alcohol_timer, 24_hours * timer_int, false, timer_int );
+            ret = true;
         }
-        ret = true;
     }
 
     // If you're not drunk, you want to be.
@@ -217,11 +216,10 @@ static bool nicotine_effect( Character &u, addiction &add )
     bool ret = false;
     if( x_in_y( in, 48 ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_nicotine_detoxed ) &&
-            ( !u.has_effect( effect_withdrawal_nicotine_timer ) ||
-              u.get_effect_int( effect_withdrawal_nicotine_timer ) < timer_int ) ) {
+            ( !u.has_effect( effect_withdrawal_nicotine_timer ) ) ) {
             u.add_effect( effect_withdrawal_nicotine_timer, 32_hours * timer_int, false, timer_int );
+            ret = true;
         }
-        ret = true;
     }
 
     if( x_in_y( in, 60 ) && ( !u.in_sleep_state() || calendar::turn - last_dream > 3_hours ) ) {
@@ -303,17 +301,16 @@ static bool opioid_effect( Character &u, addiction &add )
     }
 
     bool ret;
-    
+
     const int in = std::min( 20, add.intensity );
     int timer_int = std::min( in / 3, 3 );
 
     if( x_in_y( in, 24 ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_opioid_detoxed ) &&
-            ( !u.has_effect( effect_withdrawal_opioid_timer ) ||
-              u.get_effect_int( effect_withdrawal_opioid_timer ) < timer_int ) ) {
+            ( !u.has_effect( effect_withdrawal_opioid_timer ) ) ) {
             u.add_effect( effect_withdrawal_opioid_timer, 48_hours * timer_int, false, timer_int );
+            ret = true;
         }
-        ret = true;
     }
     static time_point last_dream = calendar::turn_zero;
     if( u.get_pain() < in * 2 ) {

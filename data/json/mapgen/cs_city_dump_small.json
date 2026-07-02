@@ -9,7 +9,7 @@
       [ "two_way_radio", 10 ],
       [ "eyedrops", 10 ],
       [ "cotton_patch", 20 ],
-      { "item": "cotton_patch", "prob": 20, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 20, "custom-flags": [ "FILTHY" ] },
       [ "microwave", 20 ]
     ]
   },

@@ -681,7 +681,7 @@
   {
     "id": "mon_feral_militia",
     "type": "MONSTER",
-    "name": { "str": "feral militia" },
+    "name": { "str_sp": "feral militia" },
     "description": "Wearing a tactical getup with a Kevlar vest, this person seems to have been a militia member, now lost to madness.  They scan for threats with bloodshot eyes and a semi-automatic rifle, and a flashlight strapped to their helmet illuminates their surroundings.",
     "copy-from": "mon_feral_human_pipe",
     "diff": 15,

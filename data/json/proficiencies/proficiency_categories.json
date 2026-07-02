@@ -14,13 +14,19 @@
   {
     "type": "proficiency_category",
     "id": "prof_chem",
-    "name": "Applied Science",
-    "description": "Proficiencies for scientific understanding and working with certain chemicals and substances."
+    "name": "Science",
+    "description": "Proficiencies for scientific understanding and safely working with certain chemicals and substances."
+  },
+  {
+    "type": "proficiency_category",
+    "id": "prof_computers",
+    "name": "Computers",
+    "description": "Proficiencies for working with specific types of software or computer systems."
   },
   {
     "type": "proficiency_category",
     "id": "prof_food",
-    "name": "Food Handling",
+    "name": "Cooking",
     "description": "Proficiencies for cooking and food preparation, as well as experience with food handling tools."
   },
   {

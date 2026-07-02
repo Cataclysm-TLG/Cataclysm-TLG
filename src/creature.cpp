@@ -92,6 +92,7 @@ static const ammo_effect_str_id ammo_effect_NO_DAMAGE_SCALING( "NO_DAMAGE_SCALIN
 static const ammo_effect_str_id ammo_effect_PARALYZEPOISON( "PARALYZEPOISON" );
 static const ammo_effect_str_id ammo_effect_ROBOT_DAZZLE( "ROBOT_DAZZLE" );
 static const ammo_effect_str_id ammo_effect_TANGLE( "TANGLE" );
+static const ammo_effect_str_id ammo_effect_TRIP( "TRIP" );
 
 static const anatomy_id anatomy_human_anatomy( "human_anatomy" );
 
@@ -100,12 +101,11 @@ static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_electric( "electric" );
 static const damage_type_id damage_heat( "heat" );
 
-static const efftype_id effect_all_fours( "all_fours" );
+static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_foamcrete_slow( "foamcrete_slow" );
 static const efftype_id effect_invisibility( "invisibility" );
-static const efftype_id effect_knockdown( "knockdown" );
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_monster_dodged( "monster_dodged" );
 static const efftype_id effect_no_sight( "no_sight" );
@@ -299,6 +299,23 @@ bool Creature::can_move_to_vehicle_tile( const tripoint_abs_ms &loc, bool &cramp
 
     vehicle &veh = vp_there->vehicle();
 
+    int vehicle_speed = vp_there->vehicle().velocity;
+
+    // You simply cannot purposefully enter a vehicle when it is going extremely fast, unless you can fly.
+    if( get_speed() * 35 < vehicle_speed ) {
+        if( !here.veh_at( pos_bub() ) ) {
+            if( mon ) {
+                if( !mon->flies() && !mon->has_effect( effect_airborne ) ) {
+                    return false;
+                }
+            } else {
+                if( !has_effect( effect_airborne ) ) {
+                    return false;
+                }
+            }
+        }
+    }
+
     std::vector<vehicle_part *> cargo_parts;
     cargo_parts = veh.get_parts_at( loc, "CARGO", part_status_flag::any );
 
@@ -489,7 +506,6 @@ bool Creature::is_likely_underwater( const map &here ) const
                here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, pos_bub( here ) ) ) );
 }
 
-// Detects whether a target is sapient or not (or barely sapient, since ferals count)
 bool Creature::has_mind() const
 {
     return false;
@@ -510,7 +526,7 @@ bool Creature::is_ranged_attacker() const
             }
         }
     }
-    //TODO Potentially add check for this as npc wielding ranged weapon
+    //TODO: Potentially add check for this as Character wielding ranged weapon.
 
     return false;
 }
@@ -658,11 +674,10 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return false;
     }
 
-    if( has_water_camouflage && target_range > this->spot_check() ) {
-        if( is_underwater ||
-            here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, critter.pos_bub( here ) ) ||
-            ( here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, critter.pos_bub( here ) ) &&
-              critter.get_size() < creature_size::medium ) ) {
+    if( is_underwater || here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, critter.pos_bub( here ) ) ||
+        ( here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, critter.pos_bub( here ) ) &&
+          critter.get_size() < creature_size::medium ) ) {
+        if( has_water_camouflage && target_range > this->spot_check() ) {
             return false;
         }
     }
@@ -1118,32 +1133,46 @@ double Creature::accuracy_projectile_attack( const int &speed, const double &mis
 void projectile::apply_effects_damage( Creature &target, Creature *source,
                                        const dealt_damage_instance &dealt_dam, bool critical ) const
 {
-    const map &here = get_map();
+    map &here = get_map();
 
     int dam = dealt_dam.total_damage();
     // Apply ammo effects to target.
     if( proj_effects.count( ammo_effect_TANGLE ) ) {
-        // if its a tameable animal, its a good way to catch them if they are running away, like them ranchers do!
-        // we assume immediate success, then certain monster types immediately break free in monster.cpp move_effects()
-        if( target.is_monster() ) {
-            const item &drop_item = get_drop();
-            if( !drop_item.is_null() ) {
-                target.add_effect( effect_source( source ), effect_tied, 1_turns, true );
-                target.as_monster()->tied_item = cata::make_value<item>( drop_item );
-            } else {
-                add_msg_debug( debugmode::DF_CREATURE,
-                               "projectile with TANGLE effect, but no drop item specified" );
+        const item &drop_item = get_drop();
+        // Break free in monster.cpp move_effects()
+        if( !drop_item.is_null() ) {
+            bool success = false;
+            if( target.enum_size() > 1 && target.enum_size() < 5 && !one_in( 6 ) ) {
+                if( target.is_monster() && !target.is_immune_effect( effect_downed ) ) {
+                    target.add_effect( effect_source( source ), effect_tied, 1_turns, true );
+                    target.as_monster()->tied_item = cata::make_value<item>( drop_item );
+                    success = true;
+                } else if( ( target.is_npc() || target.is_avatar() ) &&
+                           !target.is_immune_effect( effect_downed ) ) {
+                    target.add_effect( effect_source( source ), effect_downed, 1_turns );
+                    target.add_effect( effect_source( source ), effect_stunned, rng( 1_turns, 8_turns ) );
+                    success = true;
+                }
             }
-        } else if( ( target.is_npc() || target.is_avatar() ) &&
-                   !target.is_immune_effect( effect_downed ) ) {
-            // no tied up effect for people yet, just down them and stun them, its close enough to the desired effect.
-            // we can assume a person knows how to untangle their legs eventually and not panic like an animal.
-            target.add_effect( effect_source( source ), effect_downed, 1_turns );
-            // stunned to simulate staggering around and stumbling trying to get the entangled thing off of them.
-            target.add_effect( effect_source( source ), effect_stunned, rng( 3_turns, 8_turns ) );
+            if( !success ) {
+                here.add_item_or_charges( target.pos_bub(), drop_item );
+            }
         }
     }
-
+    if( proj_effects.count( ammo_effect_TRIP ) ) {
+        const item &drop_item = get_drop();
+        if( !drop_item.is_null() ) {
+            if( !one_in( 4 ) && target.enum_size() > 1 && target.enum_size() < 5 ) {
+                if( target.is_monster() && !target.is_immune_effect( effect_downed ) ) {
+                    target.add_effect( effect_source( source ), effect_downed, 1_turns, true );
+                } else if( ( target.is_npc() || target.is_avatar() ) &&
+                           !target.is_immune_effect( effect_downed ) ) {
+                    target.add_effect( effect_source( source ), effect_downed, 1_turns );
+                }
+            }
+            here.add_item_or_charges( target.pos_bub(), drop_item );
+        }
+    }
     Character &player_character = get_player_character();
     int amount = dam > 2 ? dam / 2 : one_in( 2 );
     if( proj_effects.count( ammo_effect_INCENDIARY ) ) {
@@ -1974,8 +2003,8 @@ void Creature::add_effect( const effect_source &source, const efftype_id &eff_id
     if( !force && is_immune_effect( eff_id ) ) {
         return;
     }
-    if( eff_id == effect_knockdown && ( has_effect( effect_ridden ) ||
-                                        has_effect( effect_riding ) ) ) {
+    if( eff_id == effect_downed && ( has_effect( effect_ridden ) ||
+                                     has_effect( effect_riding ) ) ) {
         monster *mons = dynamic_cast<monster *>( this );
         if( mons && mons->mounted_player ) {
             mons->mounted_player->forced_dismount();
@@ -3103,7 +3132,7 @@ std::vector<bodypart_id> Creature::get_all_body_parts( get_body_part_flags flags
         sort_body_parts( all_bps, this );
     }
 
-    return  all_bps;
+    return all_bps;
 }
 
 std::vector<bodypart_id> Creature::get_random_body_parts( const std::vector<bodypart_id> &bp_list,

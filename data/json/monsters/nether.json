@@ -1117,7 +1117,17 @@
       }
     ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s fades away." },
-    "flags": [ "FLIES", "NO_BREATHE", "SEES", "BIOLOGICALPROOF", "RANGED_ATTACKER", "IMMOBILE" ]
+    "flags": [
+      "FLIES",
+      "NO_BREATHE",
+      "SEES",
+      "BIOLOGICALPROOF",
+      "RANGED_ATTACKER",
+      "IMMOBILE",
+      "NOHEAD",
+      "STUN_IMMUNE",
+      "ACIDPROOF"
+    ]
   },
   {
     "id": "mon_memory",
@@ -1430,7 +1440,7 @@
     "name": { "str": "nuckalavee" },
     "description": "A four-legged monster that almost resembles a skinless rider and horse fused into one grotesque apparition.  Its arms hang nearly to the ground, and a noxious fog streams from both of its mouths.",
     "default_faction": "nether",
-    "bodytype": "blob",
+    "bodytype": "horse",
     "species": [ "NETHER" ],
     "volume": "108500 ml",
     "weight": "250 kg",
@@ -1439,7 +1449,7 @@
     "material": [ "flesh" ],
     "symbol": "N",
     "color": "dark_gray",
-    "aggression": 100,
+    "aggression": 5,
     "morale": 100,
     "melee_skill": 6,
     "melee_dice": 7,
@@ -1451,12 +1461,22 @@
     "weakpoint_sets": [ "wps_netherium_abomination" ],
     "emit_fields": [ { "emit_id": "emit_toxic_stream_reduced", "delay": "1 s" } ],
     "harvest": "exempt",
-    "special_attacks": [ { "type": "leap", "cooldown": 7, "max_range": 4 }, { "id": "smash", "cooldown": 10, "throw_strength": 96 } ],
+    "anger_triggers": [ "STALK", "HURT", "PLAYER_CLOSE", "PLAYER_WEAK" ],
+    "special_attacks": [
+      { "type": "leap", "cooldown": 51, "max_range": 4 },
+      {
+        "type": "spell",
+        "spell_data": { "id": "spell_charge", "min_level": 1 },
+        "monster_message": "The %s charges!",
+        "cooldown": 35
+      }
+    ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
     "flags": [
       "SEES",
       "SMELLS",
       "HEARS",
+      "GOODHEARING",
       "HAS_MIND",
       "WARM",
       "BASHES",
@@ -1465,7 +1485,10 @@
       "ATTACKMON",
       "ACIDPROOF",
       "NOGIB",
-      "NO_BREATHE"
+      "NO_BREATHE",
+      "RANGED_ATTACKER",
+      "PRIORITIZE_TARGETS",
+      "HIT_AND_RUN"
     ],
     "vision_day": 50,
     "vision_night": 8,

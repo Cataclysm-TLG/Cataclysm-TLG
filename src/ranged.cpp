@@ -96,6 +96,7 @@ static const ammo_effect_str_id ammo_effect_PLASMA( "PLASMA" );
 static const ammo_effect_str_id ammo_effect_SHATTER_SELF( "SHATTER_SELF" );
 static const ammo_effect_str_id ammo_effect_SHOT( "SHOT" );
 static const ammo_effect_str_id ammo_effect_TANGLE( "TANGLE" );
+static const ammo_effect_str_id ammo_effect_TRIP( "TRIP" );
 static const ammo_effect_str_id ammo_effect_WHIP( "WHIP" );
 static const ammo_effect_str_id ammo_effect_WIDE( "WIDE" );
 
@@ -148,6 +149,7 @@ static const fault_id fault_overheat_venting( "fault_overheat_venting" );
 static const flag_id json_flag_CROSSBOW( "CROSSBOW" );
 static const flag_id json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const flag_id json_flag_FILTHY( "FILTHY" );
+static const flag_id json_flag_TRIP( "TRIP" );
 
 static const limb_score_id limb_score_manip( "manip" );
 static const limb_score_id limb_score_night_vis( "night_vis" );
@@ -1567,6 +1569,9 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     // handling for tangling thrown items
     if( thrown.has_flag( flag_TANGLE ) ) {
         proj_effects.insert( ammo_effect_TANGLE );
+    }
+    if( thrown.has_flag( json_flag_TRIP ) ) {
+        proj_effects.insert( ammo_effect_TRIP );
     }
 
     Creature *critter = get_creature_tracker().creature_at( target, true );

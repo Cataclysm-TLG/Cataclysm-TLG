@@ -1487,7 +1487,7 @@ std::pair<std::string, nc_color> display::snow_depth_text_color( const Character
 
 std::pair<std::string, nc_color> display::weather_text_color( const Character &u )
 {
-    if( u.posz() < 0 ) {
+    if( u.posz() < 0 && get_map().is_roofed( u.pos_bub() ) ) {
         return std::make_pair( _( "Underground" ), c_light_gray );
     } else {
         weather_manager &weather = get_weather();

@@ -184,9 +184,14 @@ static item_location inv_internal( Character &u, const inventory_selector_preset
     }
 
     if( inv_s.empty() ) {
+        if( using_consume_menu && !cm_uistate.consume_menu_selected_items.empty() ) {
+            return item_location();
+        }
+
         const std::string msg = none_message.empty()
                                 ? _( "You don't have the necessary item at hand." )
                                 : none_message;
+
         popup( msg, PF_GET_KEY );
         return item_location();
     }

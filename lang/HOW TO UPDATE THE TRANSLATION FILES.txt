@@ -1,0 +1,19 @@
+This guide is for Worm Girl so she doesn't forget. If you're trying to update a translation file, please reach out on github or discord.
+
+1) run lang/update_pot.sh
+
+This extracts c++ and json text from the game and merges them into /lang/po/cataclysm-tlg.pot.
+
+2) run lang/merge_po.sh
+
+This takes the existing po files, preserving their translations where the parent text still matches the newly extracted text from step one, but discards translations which no longer match anything. It then updates all the .po files to reflect this.
+
+3) (may not be necessary anymore) run clear_fuzzy_translations.py.
+
+If we did everything correctly when we wrote this guide, fuzzy translations shouldn't be created anymore. If they are, running this after merge_po will fix them.
+
+4) run lang/compile_mo.sh
+
+This takes the po files and puts their contents into the mo files which the game actually reads.
+
+5) Compile the game as normal.

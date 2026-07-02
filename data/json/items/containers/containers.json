@@ -129,9 +129,9 @@
     "id": "bag_durasack",
     "type": "ITEM",
     "category": "container",
-    "name": { "str": "reusable plastic sack" },
+    "name": { "str": "woven plastic sack" },
     "looks_like": "bag_plastic",
-    "description": "A large and sturdy sack, made out of some plastic material.  Popular choice to store sand, gravel, cement, or stop some local flood.",
+    "description": "A large and sturdy bag made out of plastic canvas.  These are frequently used as sandbags, or for storing gravel.",
     "//": "durasack woven polypropylene bags",
     "weight": "750 g",
     "volume": "750 ml",
@@ -147,22 +147,16 @@
     "id": "bag_durasack_cement",
     "type": "ITEM",
     "subtypes": [ "BOOK" ],
-    "name": { "str": "durable plastic sack, cement" },
+    "name": { "str": "cement bag" },
     "looks_like": "bag_plastic",
     "description": "A big bag made of woven plastic.  Simple instructions printed on the side explain how to make mortar for all your masonry needs.",
     "//": "durasack woven polypropylene bags",
     "copy-from": "bag_durasack",
-    "use_action": {
-      "type": "effect_on_conditions",
-      "description": "Instructions on what to do with the contents of the bag.",
-      "effect_on_conditions": [ "EOC_CEMENT_INSTRUCTIONS" ]
-    }
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_CEMENT_INSTRUCTIONS",
-    "condition": { "and": [ { "u_has_trait": "ILLITERATE" }, { "not": "u_driving" } ] },
-    "effect": [ { "u_learn_recipe": "mortar_build" } ]
+    "required_level": 2,
+    "max_level": 2,
+    "intelligence": 6,
+    "time": "2 m",
+    "read_fun": -1
   },
   {
     "id": "bag_canvas",
@@ -258,7 +252,7 @@
     "category": "container",
     "name": { "str": "garbage bag" },
     "looks_like": "bag_canvas",
-    "description": "A hefty plastic bag, made to carry lots of trash.  It's sturdy and waterproof, and could easily be repurposed.",
+    "description": "A hefty plastic bag made to carry lots of trash.",
     "weight": "40 g",
     "volume": "42 ml",
     "price": "0 cent",
@@ -1892,6 +1886,13 @@
         "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
         "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
+      },
+      {
+        "encumbrance": 2,
+        "coverage": 15,
+        "covers": [ "crab_leg_1", "crab_leg_2" ],
+        "specifically_covers": [ "crab_leg_1_coxa", "crab_leg_2_coxa" ],
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "COLLAPSE_CONTENTS" ]
@@ -2310,9 +2311,17 @@
       },
       {
         "encumbrance": 2,
+        "coverage": 4,
         "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ]
+      },
+      {
+        "encumbrance": 2,
+        "coverage": 14,
+        "covers": [ "crab_leg_1", "crab_leg_2" ],
+        "specifically_covers": [ "crab_leg_1_coxa", "crab_leg_2_coxa" ],
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
     "qualities": [ [ "BOIL", 1 ] ],
@@ -2842,6 +2851,13 @@
         "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
         "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ]
+      },
+      {
+        "encumbrance": 1,
+        "coverage": 15,
+        "covers": [ "crab_leg_1", "crab_leg_2" ],
+        "specifically_covers": [ "crab_leg_1_coxa", "crab_leg_2_coxa" ],
+        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
     "flags": [ "BELTED", "WATER_FRIENDLY" ],

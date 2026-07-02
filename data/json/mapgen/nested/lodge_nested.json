@@ -76,6 +76,31 @@
   },
   {
     "type": "mapgen",
+    "nested_mapgen_id": "lodge_empty_15x15",
+    "object": {
+      "mapgensize": [ 15, 15 ],
+      "rows": [
+        "               ",
+        "               ",
+        "               ",
+        "               ",
+        "               ",
+        "               ",
+        "               ",
+        "               ",
+        "               ",
+        "               ",
+        "               ",
+        "&  &&   &   &  ",
+        "      &   &    ",
+        " &  &    & &&& ",
+        "               "
+      ],
+      "palettes": [ "lodge_items" ]
+    }
+  },
+  {
+    "type": "mapgen",
     "nested_mapgen_id": "lodge_game_6x6",
     "object": {
       "mapgensize": [ 6, 6 ],

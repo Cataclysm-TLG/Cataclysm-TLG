@@ -24,7 +24,7 @@
       [ "wire", 5 ],
       [ "splinter", 10 ],
       [ "cotton_patch", 15 ],
-      { "item": "cotton_patch", "prob": 10, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 5, "custom-flags": [ "FILTHY" ] },
       [ "plastic_shopping_bag", 10 ]
     ]
   },

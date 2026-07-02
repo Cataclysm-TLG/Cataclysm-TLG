@@ -118,6 +118,7 @@
 #include "item_pocket.h"
 #include "item_search.h"
 #include "item_stack.h"
+#include "item_wakeup.h"
 #include "iteminfo_query.h"
 #include "itype.h"
 #include "iuse.h"
@@ -249,6 +250,7 @@ static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_contacts( "contacts" );
 static const efftype_id effect_cramped_space( "cramped_space" );
+static const efftype_id effect_dashing( "dashing" );
 static const efftype_id effect_docile( "docile" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_fake_common_cold( "fake_common_cold" );
@@ -261,6 +263,7 @@ static const efftype_id effect_led_by_leash( "led_by_leash" );
 static const efftype_id effect_no_sight( "no_sight" );
 static const efftype_id effect_onfire( "onfire" );
 static const efftype_id effect_pet( "pet" );
+static const efftype_id effect_playing_instrument( "playing_instrument" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
@@ -369,7 +372,6 @@ static const trait_id trait_M_DEFENDER( "M_DEFENDER" );
 static const trait_id trait_M_IMMUNE( "M_IMMUNE" );
 static const trait_id trait_NPC_STARTING_NPC( "NPC_STARTING_NPC" );
 static const trait_id trait_NPC_STATIC_NPC( "NPC_STATIC_NPC" );
-static const trait_id trait_PROF_CHURL( "PROF_CHURL" );
 static const trait_id trait_PSYCHOPATH( "PSYCHOPATH" );
 static const trait_id trait_THICKSKIN( "THICKSKIN" );
 static const trait_id trait_VINES2( "VINES2" );
@@ -1369,7 +1371,7 @@ void game::on_witness_theft( const item &target )
     std::vector<npc *> witnesses;
     for( npc &elem : g->all_npcs() ) {
         if( rl_dist( elem.pos_bub(), p.pos_bub() ) < MAX_VIEW_DISTANCE &&
-            elem.sees( here, p.pos_bub( here ) ) &&
+            elem.sees( here, p ) &&
             target.is_owned_by( elem ) ) {
             witnesses.push_back( &elem );
         }
@@ -5047,10 +5049,10 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
             if( !here.has_flag( ter_furn_flag::TFLAG_LIQUID, targ_pos ) &&
                 targ->has_flag( mon_flag_AQUATIC ) &&
                 !targ->is_dead() ) {
-                targ->die( &here, nullptr );
                 if( u.sees( here, *targ ) ) {
-                    add_msg( _( "The %s flops around and dies!" ), targ->name() );
+                    add_msg( _( "The %s flops around in a vain attempt to return to the water." ), targ->name() );
                 }
+                targ->die( &here, nullptr );
             }
             tp = traj[i];
         }
@@ -5764,7 +5766,6 @@ bool game::is_sheltered( map *here, const tripoint_bub_ms &p )
     bool is_inside = vp && vp->is_inside();
 
     return !here->is_outside( p ) ||
-           p.z() < 0 ||
            is_inside;
 }
 
@@ -9497,6 +9498,9 @@ void game::butcher()
         }
     }
 
+    if( u.has_effect( effect_playing_instrument ) ) {
+        add_msg( m_info, _( "You can't do that while playing an instrument." ) );
+    }
     if( !u.has_morale_to_craft() ) {
         if( butcher_select == BUTCHER_CORPSE || indexer_index == MULTIBUTCHER ) {
             add_msg( m_info,
@@ -9790,7 +9794,7 @@ bool game::check_safe_mode_allowed( bool repeat_safe_mode_warnings )
 
     if( u.has_effect( effect_laserlocked ) ) {
         // Automatic and mandatory safemode.  Make BLOODY sure the player notices!
-        if( u.get_int_base() < 5 || u.has_trait( trait_PROF_CHURL ) ) {
+        if( u.get_int_base() < 5 ) {
             add_msg( game_message_params{ m_warning, gmf_bypass_cooldown },
                      _( "There's an angry red dot on your body, %s to brush it off." ), msg_ignore );
         } else {
@@ -10231,7 +10235,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     }
 
     std::vector<std::string> harmful_stuff = get_dangerous_tile( dest_loc );
-    if( !shifting_furniture && !pushing && !harmful_stuff.empty() ) {
+    if( !shifting_furniture && !pushing && !harmful_stuff.empty() && !u.has_effect( effect_dashing ) ) {
         if( harmful_stuff.size() == 1 && harmful_stuff[0] == "ledge" ) {
             iexamine::ledge( u, tripoint_bub_ms( dest_loc ) );
             return true;
@@ -13382,6 +13386,9 @@ void game::animate_weather()
                 if( !m.is_outside( u.pos_bub( here ) ) && !m.is_outside( mapp ) ) {
                     continue;
                 }
+                if( u.pos_bub().z() < 0 && m.is_roofed( u.pos_bub( here ) ) ) {
+                    continue;
+                }
                 wPrint.vdrops.emplace_back( screen_point.x(), screen_point.y() );
             }
         }
@@ -14036,6 +14043,11 @@ stats_tracker &get_stats()
 timed_event_manager &get_timed_events()
 {
     return g->timed_events;
+}
+
+item_wakeup_manager &get_item_wakeups()
+{
+    return *g->item_wakeup_manager_ptr;
 }
 
 weather_manager &get_weather()

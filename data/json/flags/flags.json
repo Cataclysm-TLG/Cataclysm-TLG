@@ -16,7 +16,7 @@
     "info": "This plate will fit in <info>medium</info> armor pockets.",
     "restriction": "Item must be a medium ablative plate"
   },
-    {
+  {
     "id": "ABLATIVE_LARGE_XL",
     "type": "json_flag",
     "info": "This plate will fit in <info>oversized</info> armor pockets.",
@@ -1320,6 +1320,7 @@
   },
   {
     "id": "CHALLENGE",
+    "//": "Scenario flag.",
     "type": "json_flag"
   },
   {
@@ -1328,6 +1329,7 @@
   },
   {
     "id": "CITY_START",
+    "//": "Scenario flag.",
     "type": "json_flag"
   },
   {
@@ -1852,6 +1854,10 @@
   },
   {
     "id": "TANGLE",
+    "type": "json_flag"
+  },
+  {
+    "id": "TRIP",
     "type": "json_flag"
   },
   {
@@ -2750,5 +2756,15 @@
     "id": "SNOWWALKING",
     "type": "json_flag",
     "info": "Your movement is not slowed regardless of snow depth."
+  },
+  {
+    "id": "WASH_SOFT",
+    "type": "json_flag",
+    "info": "This item makes it easier to wash soft things like clothing with soap and water."
+  },
+  {
+    "id": "WASH_HARD",
+    "type": "json_flag",
+    "info": "This item makes it easier to wash rigid items using soap and water."
   }
 ]

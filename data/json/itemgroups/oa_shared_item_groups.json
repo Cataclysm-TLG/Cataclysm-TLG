@@ -60,7 +60,7 @@
       { "group": "newspaper", "prob": 60 },
       [ "news_regional", 15 ],
       { "item": "paper", "prob": 20, "count": [ 5, 15 ] },
-      { "item": "cotton_patch", "prob": 35, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 35, "custom-flags": [ "FILTHY" ] },
       [ "mask_dust", 10 ],
       { "item": "gum", "prob": 6, "count": [ 1, 10 ] },
       { "item": "caff_gum", "prob": 6, "count": [ 1, 10 ] },

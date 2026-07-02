@@ -24,7 +24,7 @@
         { "item": "rock", "count": [ 4, 12 ] }
       ]
     },
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT" ]
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "TIRE_SAFE" ]
   },
   {
     "id": "t_railroad_track",

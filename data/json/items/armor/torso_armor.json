@@ -109,7 +109,7 @@
     "price": "1 USD 20 cent",
     "price_postapoc": "50 cent",
     "category": "armor",
-    "material": [ "carpet_pilling", "plastic" ],
+    "material": [ "carpet_pile", "plastic" ],
     "symbol": "[",
     "looks_like": "tunic_rag",
     "color": "red",
@@ -121,7 +121,7 @@
     "armor": [
       {
         "material": [
-          { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "encumbrance": 24,
@@ -130,7 +130,7 @@
       },
       {
         "material": [
-          { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "encumbrance": 8,
@@ -140,7 +140,7 @@
       },
       {
         "material": [
-          { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "encumbrance": 8,

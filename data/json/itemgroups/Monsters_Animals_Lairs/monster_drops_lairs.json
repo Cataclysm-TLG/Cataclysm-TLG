@@ -147,7 +147,7 @@
       { "item": "panties", "prob": 20 },
       { "item": "boy_shorts", "prob": 20 },
       { "item": "bra", "prob": 20 },
-      { "item": "undershirt", "prob": 40 },
+      { "item": "tank_top", "prob": 40 },
       { "item": "boxer_shorts", "prob": 30 },
       { "item": "briefs", "prob": 30 }
     ]

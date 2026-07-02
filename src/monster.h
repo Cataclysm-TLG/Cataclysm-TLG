@@ -504,11 +504,9 @@ class monster : public Creature
 
         bool is_electrical() const override;    // true if the monster produces electric radiation
 
-        bool is_fae() const override;    // true if the monster is a faerie creature
-
         bool is_nether() const override;    // true if the monster is from the nether
 
-        bool has_mind() const override;    // true if the monster is sapient and capable of reason
+        bool has_mind() const override;
 
         field_type_id bloodType() const override;
         field_type_id gibType() const override;

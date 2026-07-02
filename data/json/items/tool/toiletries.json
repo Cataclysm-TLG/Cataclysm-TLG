@@ -23,7 +23,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "scrub brush", "str_pl": "scrub brushes" },
-    "description": "A simple scrub brush for cleaning hard objects.",
+    "description": "A plastic scrub brush.  It will make cleaning hard objects much easier.",
     "weight": "70 g",
     "volume": "350 ml",
     "longest_side": "14 cm",
@@ -33,8 +33,7 @@
     "material": [ "plastic" ],
     "symbol": "/",
     "color": "light_gray",
-    "flags": [ "BELT_CLIP" ],
-    "use_action": [ "WASH_HARD_ITEMS" ],
+    "flags": [ "BELT_CLIP", "WASH_HARD" ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -50,10 +49,9 @@
     "price": "1 USD 27 cent",
     "price_postapoc": "20 cent",
     "material": [ "cotton" ],
-    "flags": [ "TINDER" ],
+    "flags": [ "TINDER", "WASH_HARD" ],
     "symbol": ",",
-    "color": "white",
-    "use_action": [ "WASH_HARD_ITEMS" ]
+    "color": "white"
   },
   {
     "id": "elec_hairtrimmer",
@@ -138,10 +136,6 @@
     "symbol": ",",
     "qualities": [ [ "SIEVE", 1 ], [ "STRAIN", 2 ] ],
     "color": "white",
-    "use_action": [
-      { "type": "heal", "move_cost": 200, "used_up_item": { "id": "cotton_patch", "quantity": 1, "flags": [ "FILTHY" ] } },
-      "WASH_HARD_ITEMS"
-    ],
     "flags": [ "NO_SALVAGE", "TINDER" ]
   },
   {
@@ -184,7 +178,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "sponge" },
-    "description": "A cleaning aid made of soft, porous material.  Typically used for cleaning hard objects.",
+    "description": "A cleaning aid made of soft, porous material.  It will make cleaning hard objects much easier.",
     "weight": "17 g",
     "volume": "156 ml",
     "price": "66 cent",
@@ -192,18 +186,7 @@
     "material": [ "plastic" ],
     "symbol": "s",
     "color": "yellow",
-    "use_action": [ "WASH_HARD_ITEMS" ],
-    "flags": [ "NO_SALVAGE" ],
-    "snippet_category": [
-      { "id": "spng1", "text": "A round smiley-face sponge." },
-      { "id": "spng2", "text": "A rectangular sponge with a green abrasive back." },
-      { "id": "spng4", "text": "A dolphin-shaped sponge.  It looks at home in the water." },
-      { "id": "spng5", "text": "A rectangular sponge." },
-      { "id": "spng6", "text": "A sponge cake-shaped sponge, the abrasive pad looks like frosting." },
-      { "id": "spng7", "text": "A sponge in the shape of a beloved character from a children's cartoon." },
-      { "id": "spng8", "text": "A cat-shaped sponge." }
-    ],
-    "//": "Based on https://www.amazon.com/dp/B08RFC3VH7"
+    "flags": [ "NO_SALVAGE", "WASH_HARD" ]
   },
   {
     "id": "survivor_hairtrimmer",
@@ -249,7 +232,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "washboard" },
-    "description": "A wooden washboard.  You can use it to wash filthy clothing if it's supplied with cleansing agent.",
+    "description": "A wooden washboard.  It will make washing clothing and other soft items much easier.",
     "weight": "1160 g",
     "volume": "900 ml",
     "longest_side": "40 cm",
@@ -259,25 +242,7 @@
     "material": [ "wood" ],
     "symbol": ";",
     "color": "white",
-    "use_action": [ "WASH_SOFT_ITEMS" ],
-    "flags": [ "ALLOWS_REMOTE_USE" ]
-  },
-  {
-    "id": "wash_kit",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "washing kit" },
-    "description": "A combination of a washboard and a scrubbing tool.  Everything you need to clean items after the apocalypse.",
-    "weight": "866 g",
-    "volume": "2246 ml",
-    "longest_side": "40 cm",
-    "price": "0 cent",
-    "price_postapoc": "50 cent",
-    "material": [ "wood", "plastic" ],
-    "symbol": "%",
-    "color": "yellow",
-    "use_action": [ "WASH_ALL_ITEMS" ],
-    "flags": [ "ALLOWS_REMOTE_USE", "NO_SALVAGE" ]
+    "flags": [ "ALLOWS_REMOTE_USE", "WASH_SOFT" ]
   },
   {
     "id": "hair_dye_kit",

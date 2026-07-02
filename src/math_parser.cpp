@@ -761,7 +761,7 @@ void math_exp::math_exp_impl::new_func()
             },
             []( auto /* v */ )
             {
-                throw math::internal_error( "Internal func error.  That's all we know." );
+                math::raise<math::internal_error>( "Internal func error.  That's all we know." );
             },
         },
         ops.top().op );
@@ -885,7 +885,7 @@ void math_exp::math_exp_impl::new_oper()
         []( auto /* v */ )
         {
             // we should never get here due to paren validation
-            throw math::internal_error( "Internal oper error.  That's all we know." );
+            math::raise<math::internal_error>( "Internal oper error.  That's all we know." );
         }
     },
     op.op );

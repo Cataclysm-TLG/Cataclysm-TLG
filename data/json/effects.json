@@ -492,6 +492,23 @@
   },
   {
     "type": "effect_type",
+    "id": "winded_crab_leg",
+    "name": [ "Winded (Crab Leg)" ],
+    "desc": [ "You're short of breath.  Your leg has impaired function until you recover." ],
+    "rating": "bad",
+    "max_duration": "30 s",
+    "base_mods": { "speed_mod": [ -3 ], "pain_min": [ 1 ], "pain_chance": [ 20 ], "pain_max_val": [ 20 ] },
+    "limb_score_mods": [
+      { "limb_score": "block", "modifier": 0.95 },
+      { "limb_score": "swim", "modifier": 0.85 },
+      { "limb_score": "move_speed", "modifier": 0.9 },
+      { "limb_score": "footing", "modifier": 0.9 },
+      { "limb_score": "balance", "modifier": 0.9 }
+    ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
+  },
+  {
+    "type": "effect_type",
     "id": "winded_leg_l",
     "name": [ "Winded (Left Leg)" ],
     "desc": [ "You're short of breath.  Your left leg has impaired function until you recover." ],
@@ -591,7 +608,7 @@
   },
   {
     "type": "effect_type",
-    "id": "winded_cephalopod_arm_lower",
+    "id": "winded_cephalopod_arm",
     "name": [ "Winded (Arms)" ],
     "desc": [ "You're short of breath.  Your arms have impaired function until you recover." ],
     "rating": "bad",
@@ -618,8 +635,8 @@
   },
   {
     "type": "effect_type",
-    "id": "winded_cephalopod_arm_upper",
-    "name": [ "Winded (Arms)" ],
+    "id": "winded_cephalopod_tentacle",
+    "name": [ "Winded (Tentacles)" ],
     "desc": [ "You're short of breath.  Your arms have impaired function until you recover." ],
     "rating": "bad",
     "max_duration": "30 s",
@@ -3281,8 +3298,8 @@
       "winded_leg_r",
       "winded_arm_l",
       "winded_arm_r",
-      "winded_cephalopod_arm_upper",
-      "winded_cephalopod_arm_lower",
+      "winded_cephalopod_tentacle",
+      "winded_cephalopod_arm",
       "winded_gastropod_foot"
     ],
     "base_mods": { "str_mod": [ -1 ], "dex_mod": [ -2 ], "per_mod": [ -2 ], "int_mod": [ -1 ] },
@@ -3305,8 +3322,8 @@
       "winded_leg_r",
       "winded_arm_l",
       "winded_arm_r",
-      "winded_cephalopod_arm_upper",
-      "winded_cephalopod_arm_lower",
+      "winded_cephalopod_tentacle",
+      "winded_cephalopod_arm",
       "winded_gastropod_foot"
     ],
     "base_mods": { "speed_mod": [ -5 ], "dex_mod": [ -2 ], "per_mod": [ -1 ], "int_mod": [ -2 ] },
@@ -3338,8 +3355,8 @@
       "winded_leg_r",
       "winded_arm_l",
       "winded_arm_r",
-      "winded_cephalopod_arm_upper",
-      "winded_cephalopod_arm_lower",
+      "winded_cephalopod_arm",
+      "winded_cephalopod_tentacle",
       "winded_gastropod_foot"
     ],
     "base_mods": {
@@ -3482,7 +3499,7 @@
   {
     "type": "effect_type",
     "id": "cig",
-    "name": [ "Nicotine", "Nicotine Overdose" ],
+    "name": [ "Nicotine Buzz", "Nicotine Overdose" ],
     "desc": [ "You feel a slight buzz from the tobacco.", "You feel awful, you've had far too much." ],
     "max_intensity": 2,
     "base_mods": {
@@ -3533,7 +3550,8 @@
   },
   {
     "type": "effect_type",
-    "id": "teleglow"
+    "id": "teleglow",
+    "max_duration": "960 m"
   },
   {
     "type": "effect_type",
@@ -3786,7 +3804,7 @@
   },
   {
     "type": "effect_type",
-    "id": "withdrawal_opoid_detoxed",
+    "id": "withdrawal_opioid_detoxed",
     "//": "Safe from withdrawals until you dose again."
   },
   {
@@ -4385,10 +4403,10 @@
     "id": "opioid_eff",
     "//": "Pain relief increases linearly. Vomit chance increases and then becomes impossible due to CNS depression. Sleep is mostly impossible but ramps up sharply at i4 toward 100% at i7.",
     "name": [
-      "Pain Relief",
-      "Painkillers",
-      "Heavy Opioid Euphoria",
+      "Opioid Painkillers",
+      "Opipid Buzz",
       "Opioid High",
+      "Heavy Opioid High",
       "Nodding Out",
       "Opioid Overdose",
       "Severe Opioid Overdose"
@@ -4405,7 +4423,7 @@
     "blood_analysis_description": "Opioids",
     "max_intensity": 7,
     "miss_messages": [ [ "You feel numb.", 1 ] ],
-    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 250000 ], [ 1, 50000 ], [ 1, 5000 ] ],
+    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 500000 ], [ 1, 100000 ], [ 1, 5000 ] ],
     "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
     "pkill_addict_reduces": true,
     "base_mods": {
@@ -4417,10 +4435,10 @@
       "fatigue_max_val": [ 150 ],
       "cough_chance": [ -1002 ],
       "sleep_chance": [ -584 ],
-      "sleep_chance_bot": [ 1000 ],
+      "sleep_chance_bot": [ 6000 ],
       "sleep_tick": [ 1800 ],
       "sleep_min": [ 5 ],
-      "sleep_max": [ 10 ],
+      "sleep_max": [ 50 ],
       "pkill_max_val": [ 15 ],
       "pkill_min": [ 1 ],
       "pkill_tick": [ 45 ]
@@ -4550,8 +4568,8 @@
     "name": [ { "ctxt": "physically", "str": "Disabled" } ],
     "desc": [ "This limb is damaged beyond use and may require a splint to recover." ],
     "//": "This sounds weird. We need <bp_affected> tag or something",
-    "apply_message": "Your limb breaks!",
-    "remove_message": "The broken limb has mended.",
+    "apply_message": "A body part has been critically injured!",
+    "remove_message": "Your disabled body part has recovered enough for use.",
     "max_duration": "2 s",
     "rating": "bad"
   },
@@ -5571,6 +5589,13 @@
     "max_intensity": 20,
     "max_duration": "1 s",
     "//": "Helper for airborne effect, handles interactions with terrain, traps etc when landing after using AIRBORNE spells."
+  },
+  {
+    "type": "effect_type",
+    "id": "dashing",
+    "max_intensity": 20,
+    "max_duration": "1 s",
+    "//": "Helper for airborne effect, handles interactions with terrain, traps etc when dashing via spells while not airborne."
   },
   {
     "type": "effect_type",

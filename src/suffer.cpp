@@ -126,6 +126,7 @@ static const json_character_flag json_flag_ETHEREAL( "ETHEREAL" );
 static const json_character_flag json_flag_GILLS( "GILLS" );
 static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
 static const json_character_flag json_flag_GRAB( "GRAB" );
+static const json_character_flag json_flag_LIMB_BONELESS( "LIMB_BONELESS" );
 static const json_character_flag json_flag_MEND_ALL( "MEND_ALL" );
 static const json_character_flag json_flag_MEND_LIMB( "MEND_LIMB" );
 static const json_character_flag json_flag_NO_DRENCH( "NO_DRENCH" );
@@ -492,7 +493,8 @@ void suffer::while_awake( Character &you, const int current_stim )
         you.rem_morale( morale_perm_pessimist );
     }
 
-    if( you.has_flag( json_flag_NYCTOPHOBIA ) && !you.has_effect( effect_took_xanax ) && !you.has_effect( effect_valium ) ) {
+    if( you.has_flag( json_flag_NYCTOPHOBIA ) && !you.has_effect( effect_took_xanax ) &&
+        !you.has_effect( effect_valium ) ) {
         suffer::from_nyctophobia( you );
     }
 
@@ -514,11 +516,16 @@ void suffer::while_awake( Character &you, const int current_stim )
     }
 
     if( you.has_trait( trait_JITTERY ) && !you.has_effect( effect_shakes ) ) {
-        if( ( you.get_effect_int( effect_caffeine_eff ) > 1 || you.has_effect( effect_cocaine ) || you.has_effect( effect_amphetamine_eff ) ) && !you.has_effect( effect_cig ) && !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) && one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
+        if( ( you.get_effect_int( effect_caffeine_eff ) > 1 || you.has_effect( effect_cocaine ) ||
+              you.has_effect( effect_amphetamine_eff ) ) && !you.has_effect( effect_cig ) &&
+            !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) &&
+            one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
             time_duration dur = 1_minutes * rng( 1, 30 );
             you.add_effect( effect_shakes, dur + 1_turns * current_stim );
-        } else if( ( !you.has_effect( effect_cig ) || one_in( 3 ) ) && !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) && ( you.get_hunger() > 80 || ( you.get_kcal_percent() < 0.9f &&
-                                                you.get_hunger() > ( 80 - ( 100 - you.get_kcal_percent() * 100 ) ) ) )  &&
+        } else if( ( !you.has_effect( effect_cig ) || one_in( 3 ) ) && !you.has_effect( effect_valium ) &&
+                   !you.has_effect( effect_took_xanax ) && ( you.get_hunger() > 80 ||
+                           ( you.get_kcal_percent() < 0.9f &&
+                             you.get_hunger() > ( 80 - ( 100 - you.get_kcal_percent() * 100 ) ) ) )  &&
                    one_in( to_turns<int>( 50_minutes ) - ( you.get_hunger() * 6 ) ) ) {
             time_duration dur = 1_minutes * rng( 1, 30 );
             you.add_effect( effect_shakes, dur );
@@ -1132,7 +1139,7 @@ void suffer::from_sunburn( Character &you, bool severe )
     auto warn_and_wake_up = [ &you, &all_parts_list]
     ( const char *message, game_message_type type ) {
         you.add_msg_if_player( type, message, all_parts_list );
-        // Wake up from skin irritation/burning
+        // Wake up from skin irritation/burning.
         if( you.has_effect( effect_sleep ) ) {
             you.wake_up();
         }
@@ -1571,7 +1578,7 @@ void suffer::without_sleep( Character &you, const int sleep_deprivation )
                                                _( "<npcname> stretches their back." ) );
                     break;
                 case 4:
-                    you.add_msg_player_or_npc( m_warning, _( "You feel mentally tired." ),
+                    you.add_msg_player_or_npc( m_warning, _( "You've gone too long without sleep." ),
                                                _( "<npcname> lets out a huge yawn." ) );
                     break;
             }
@@ -1580,11 +1587,11 @@ void suffer::without_sleep( Character &you, const int sleep_deprivation )
     // Minor discomfort
     if( sleep_deprivation >= SLEEP_DEPRIVATION_MINOR ) {
         if( one_turn_in( 75_minutes ) ) {
-            you.add_msg_if_player( m_warning, _( "You feel lightheaded for a moment." ) );
+            you.add_msg_if_player( m_warning, _( "You briefly lose track of what you were doing." ) );
             you.mod_moves( -to_moves<int>( 1_seconds ) * 0.1 );
         }
-        if( one_turn_in( 100_minutes ) ) {
-            you.add_msg_if_player( m_warning, _( "Your muscles spasm uncomfortably." ) );
+        if( one_turn_in( 100_minutes ) && !you.has_flag( json_flag_PAIN_IMMUNE ) ) {
+            you.add_msg_if_player( m_warning, _( "Your body is sore and aching." ) );
             you.mod_pain( 2 );
         }
         if( !you.has_effect( effect_visuals ) && one_turn_in( 150_minutes ) ) {
@@ -1595,15 +1602,15 @@ void suffer::without_sleep( Character &you, const int sleep_deprivation )
     // Slight disability
     if( sleep_deprivation >= SLEEP_DEPRIVATION_SERIOUS ) {
         if( one_turn_in( 75_minutes ) ) {
-            you.add_msg_if_player( m_bad, _( "Your mind lapses into unawareness briefly." ) );
+            you.add_msg_if_player( m_bad, _( "You zone out for a moment." ) );
             you.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.2, 0.8 ) );
         }
-        if( one_turn_in( 125_minutes ) ) {
-            you.add_msg_if_player( m_bad, _( "Your muscles ache in stressfully unpredictable ways." ) );
+        if( one_turn_in( 125_minutes ) && !you.has_flag( json_flag_PAIN_IMMUNE ) ) {
+            you.add_msg_if_player( m_bad, _( "Your muscles and joints ache." ) );
             you.mod_pain( rng( 2, 10 ) );
         }
-        if( one_turn_in( 5_hours ) ) {
-            you.add_msg_if_player( m_bad, _( "You have a distractingly painful headache." ) );
+        if( one_turn_in( 5_hours ) && !you.has_flag( json_flag_PAIN_IMMUNE ) ) {
+            you.add_msg_if_player( m_bad, _( "You have a headache." ) );
             you.mod_pain( rng( 10, 25 ) );
         }
     }
@@ -1615,17 +1622,15 @@ void suffer::without_sleep( Character &you, const int sleep_deprivation )
             you.add_effect( effect_nausea, rng( 5_minutes, 30_minutes ) );
         }
         if( one_turn_in( 5_hours ) ) {
-            you.add_msg_if_player( m_bad, _( "Your mind is so tired that you feel you can't trust "
-                                             "your eyes anymore." ) );
+            you.add_msg_if_player( m_bad, _( "Waking dreams haunt the corners of your vision." ) );
             you.add_effect( effect_hallu, rng( 5_minutes, 60_minutes ) );
         }
         if( !you.has_effect( effect_shakes ) && one_turn_in( 425_minutes ) ) {
-            you.add_msg_if_player( m_bad, _( "Your muscles spasm uncontrollably, and you have "
-                                             "trouble keeping your balance." ) );
+            you.add_msg_if_player( m_bad, _( "Your body trembles, pushed to its limit by lack of sleep." ) );
             you.add_effect( effect_shakes, 15_minutes );
         } else if( you.has_effect( effect_shakes ) && one_turn_in( 75_seconds ) ) {
             you.mod_moves( -to_moves<int>( 1_seconds ) * 0.1 );
-            you.add_msg_player_or_npc( m_warning, _( "Your shaking legs make you stumble." ),
+            you.add_msg_player_or_npc( m_warning, _( "You stumble." ),
                                        _( "<npcname> stumbles." ) );
             if( !you.is_on_ground() && one_in( 10 ) ) {
                 you.add_msg_player_or_npc( m_bad, _( "You fall over!" ), _( "<npcname> falls over!" ) );
@@ -2032,7 +2037,8 @@ void Character::mend( int rate_multiplier )
             needs_splint = false;
         }
 
-        if( needs_splint && !worn_with_flag( flag_SPLINT,  bp ) ) {
+        if( needs_splint && !worn_with_flag( flag_SPLINT, bp ) &&
+            !bp->has_flag( json_flag_LIMB_BONELESS ) ) {
             continue;
         }
 

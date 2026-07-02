@@ -179,10 +179,8 @@
     "skill_used": "fabrication",
     "time": "15 m",
     "autolearn": true,
-    "components": [
-      [ [ "y_carpet", 1 ], [ "r_carpet", 1 ], [ "p_carpet", 1 ], [ "g_carpet", 1 ] ],
-      [ [ "cordage", 4, "LIST" ], [ "duct_tape", 50 ] ]
-    ],
+    "reversible": true,
+    "components": [ [ [ "carpet_scrap", 4 ] ], [ [ "cordage", 4, "LIST" ], [ "duct_tape", 50 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -194,10 +192,8 @@
     "skill_used": "fabrication",
     "time": "15 m",
     "autolearn": true,
-    "components": [
-      [ [ "y_carpet", 1 ], [ "r_carpet", 1 ], [ "p_carpet", 1 ], [ "g_carpet", 1 ] ],
-      [ [ "cordage", 2, "LIST" ], [ "duct_tape", 25 ] ]
-    ],
+    "reversible": true,
+    "components": [ [ [ "carpet_scrap", 2 ] ], [ [ "cordage", 2, "LIST" ], [ "duct_tape", 25 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {

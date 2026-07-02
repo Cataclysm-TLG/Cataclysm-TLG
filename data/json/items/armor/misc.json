@@ -146,7 +146,7 @@
     "warmth": 100,
     "material_thickness": 5,
     "environmental_protection": 1,
-    "flags": [ "OVERSIZE", "OUTER" ],
+    "flags": [ "OVERSIZE", "OUTER", "COLLAR", "BELTED", "POCKETS", "HOOD" ],
     "use_action": {
       "menu_text": "Roll up",
       "type": "transform",
@@ -157,7 +157,31 @@
       {
         "encumbrance": 80,
         "coverage": 100,
-        "covers": [ "torso", "head", "mouth", "arm_l", "arm_r", "hand_l", "hand_r", "leg_l", "leg_r", "foot_l", "foot_r" ]
+        "covers": [
+          "torso",
+          "leg_l",
+          "leg_r",
+          "foot_l",
+          "foot_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "long_tail",
+          "fish_tail",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ]
+      },
+      {
+        "encumbrance": 60,
+        "coverage": 80,
+        "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ]
       }
     ]
   },
@@ -336,7 +360,11 @@
           "cephalopod_arm_3",
           "cephalopod_arm_4",
           "cephalopod_arm_5",
-          "cephalopod_arm_6"
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "specifically_covers": [
           "cephalopod_arm_1_draped",
@@ -344,7 +372,11 @@
           "cephalopod_arm_3_draped",
           "cephalopod_arm_4_draped",
           "cephalopod_arm_5_draped",
-          "cephalopod_arm_6_draped"
+          "cephalopod_arm_6_draped",
+          "crab_leg_1_draped",
+          "crab_leg_2_draped",
+          "crab_leg_3_draped",
+          "crab_leg_4_draped"
         ],
         "layers": [ "BELTED" ]
       }
@@ -424,7 +456,11 @@
           "cephalopod_arm_3",
           "cephalopod_arm_4",
           "cephalopod_arm_5",
-          "cephalopod_arm_6"
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
         ],
         "specifically_covers": [
           "cephalopod_arm_1_draped",
@@ -432,7 +468,11 @@
           "cephalopod_arm_3_draped",
           "cephalopod_arm_4_draped",
           "cephalopod_arm_5_draped",
-          "cephalopod_arm_6_draped"
+          "cephalopod_arm_6_draped",
+          "crab_leg_1_draped",
+          "crab_leg_2_draped",
+          "crab_leg_3_draped",
+          "crab_leg_4_draped"
         ],
         "layers": [ "BELTED" ]
       }

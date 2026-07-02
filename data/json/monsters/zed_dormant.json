@@ -56,6 +56,153 @@
     ]
   },
   {
+    "id": "mon_pseudo_dormant_zombie_rot",
+    "type": "MONSTER",
+    "name": { "str": "decayed zombie" },
+    "description": "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
+    "copy-from": "mon_zombie",
+    "looks_like": "corpse_mon_zombie",
+    "speed": 1,
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "zombify_into": "mon_zombie_rot",
+    "special_attacks": [
+      {
+        "id": "pseudo_dormant_trap_setup_attk",
+        "type": "spell",
+        "spell_data": { "id": "pseudo_dormant_trap_setup", "hit_self": true },
+        "cooldown": 1,
+        "allow_no_target": true,
+        "monster_message": ""
+      }
+    ]
+  },
+  {
+    "id": "mon_pseudo_dormant_zombie_fat",
+    "type": "MONSTER",
+    "name": { "str": "fat zombie" },
+    "description": "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
+    "copy-from": "mon_zombie",
+    "looks_like": "corpse_mon_zombie",
+    "speed": 1,
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "zombify_into": "mon_zombie_fat",
+    "special_attacks": [
+      {
+        "id": "pseudo_dormant_trap_setup_attk",
+        "type": "spell",
+        "spell_data": { "id": "pseudo_dormant_trap_setup", "hit_self": true },
+        "cooldown": 1,
+        "allow_no_target": true,
+        "monster_message": ""
+      }
+    ]
+  },
+  {
+    "id": "mon_pseudo_dormant_zombie_tough",
+    "type": "MONSTER",
+    "name": { "str": "tough zombie" },
+    "description": "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
+    "copy-from": "mon_zombie",
+    "looks_like": "corpse_mon_zombie",
+    "speed": 1,
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "zombify_into": "mon_zombie_tough",
+    "special_attacks": [
+      {
+        "id": "pseudo_dormant_trap_setup_attk",
+        "type": "spell",
+        "spell_data": { "id": "pseudo_dormant_trap_setup", "hit_self": true },
+        "cooldown": 1,
+        "allow_no_target": true,
+        "monster_message": ""
+      }
+    ]
+  },
+  {
+    "id": "mon_pseudo_dormant_zombie_child",
+    "type": "MONSTER",
+    "name": { "str": "zombie child" },
+    "description": "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
+    "copy-from": "mon_zombie",
+    "looks_like": "corpse_mon_zombie",
+    "speed": 1,
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "zombify_into": "mon_zombie_child",
+    "special_attacks": [
+      {
+        "id": "pseudo_dormant_trap_setup_attk",
+        "type": "spell",
+        "spell_data": { "id": "pseudo_dormant_trap_setup", "hit_self": true },
+        "cooldown": 1,
+        "allow_no_target": true,
+        "monster_message": ""
+      }
+    ]
+  },
+  {
+    "id": "mon_pseudo_dormant_zombie_crawler",
+    "type": "MONSTER",
+    "name": { "str": "zombie crawler" },
+    "description": "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
+    "copy-from": "mon_zombie",
+    "looks_like": "corpse_mon_zombie",
+    "speed": 1,
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "zombify_into": "mon_zombie_crawler",
+    "special_attacks": [
+      {
+        "id": "pseudo_dormant_trap_setup_attk",
+        "type": "spell",
+        "spell_data": { "id": "pseudo_dormant_trap_setup", "hit_self": true },
+        "cooldown": 1,
+        "allow_no_target": true,
+        "monster_message": ""
+      }
+    ]
+  },
+  {
+    "id": "mon_pseudo_dormant_zombie_brainless",
+    "type": "MONSTER",
+    "name": { "str": "headless zombie" },
+    "description": "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
+    "copy-from": "mon_zombie",
+    "looks_like": "corpse_mon_zombie",
+    "speed": 1,
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "zombify_into": "mon_zombie_brainless",
+    "special_attacks": [
+      {
+        "id": "pseudo_dormant_trap_setup_attk",
+        "type": "spell",
+        "spell_data": { "id": "pseudo_dormant_trap_setup", "hit_self": true },
+        "cooldown": 1,
+        "allow_no_target": true,
+        "monster_message": ""
+      }
+    ]
+  },
+  {
+    "id": "mon_pseudo_dormant_zombie_swimmer_base",
+    "type": "MONSTER",
+    "name": { "str": "drowned zombie" },
+    "description": "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
+    "copy-from": "mon_zombie",
+    "looks_like": "corpse_mon_zombie",
+    "speed": 1,
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "AQUATIC", "WATER_CAMOUFLAGE" ],
+    "zombify_into": "mon_zombie_swimmer_base",
+    "special_attacks": [
+      {
+        "id": "pseudo_dormant_trap_setup_attk",
+        "type": "spell",
+        "spell_data": { "id": "pseudo_dormant_trap_setup", "hit_self": true },
+        "cooldown": 1,
+        "allow_no_target": true,
+        "monster_message": ""
+      }
+    ]
+  },
+  {
     "type": "trap",
     "id": "tr_dormant_corpse",
     "name": "dormant zombie corpse",
@@ -81,14 +228,14 @@
     "max_level": 1,
     "shape": "blast",
     "effect": "noise",
-    "flags": [ "NO_EXPLOSION_SFX" ],
+    "flags": [ "NO_EXPLOSION_SFX", "RANDOM_DAMAGE" ],
     "sound_type": "combat",
     "sound_id": "melee_attack",
     "sound_variant": "monster_melee_hit",
     "sound_description": "a zombie moaning!",
-    "min_damage": 60,
-    "max_damage": 60,
-    "//": "volume is damage/3, so 20"
+    "min_damage": 42,
+    "max_damage": 90,
+    "//": "volume is damage/3, so 14 to 30"
   },
   {
     "type": "SPELL",

@@ -249,7 +249,7 @@
     "death_function": {
       "message": "The %s bursts, releasing its vile contents!",
       "corpse_type": "NO_CORPSE",
-      "effect": { "id": "death_gas", "hit_self": true }
+      "effect": { "id": "death_gas", "hit_self": true, "min_level": 4 }
     }
   }
 ]

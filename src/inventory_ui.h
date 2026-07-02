@@ -93,6 +93,7 @@ class inventory_entry
         inventory_entry( const inventory_entry &entry, const item_category *custom_category ) :
             inventory_entry( entry ) {
             this->custom_category = custom_category;
+            this->cached_category_ptr = nullptr;
         }
 
         explicit inventory_entry( const std::vector<item_location> &locations,
@@ -197,6 +198,7 @@ class inventory_entry
 
         void set_custom_category( const item_category *category ) {
             custom_category = category;
+            cached_category_ptr = nullptr;
         }
 
         void reset_collation() {
@@ -218,6 +220,7 @@ class inventory_entry
 
     private:
         mutable item_category const *custom_category = nullptr;
+        mutable item_category const *cached_category_ptr = nullptr;
     protected:
         // indents the entry if it is contained in an item
         bool _indent = true;

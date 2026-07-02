@@ -191,7 +191,6 @@ static const trait_id trait_THRESH_PLANT( "THRESH_PLANT" );
 static const trait_id trait_THRESH_RABBIT( "THRESH_RABBIT" );
 static const trait_id trait_THRESH_RAT( "THRESH_RAT" );
 static const trait_id trait_THRESH_URSINE( "THRESH_URSINE" );
-static const trait_id trait_UNDINE_SLEEP_WATER( "UNDINE_SLEEP_WATER" );
 static const trait_id trait_VEGAN( "VEGAN" );
 static const trait_id trait_VEGETARIAN( "VEGETARIAN" );
 static const trait_id trait_WATERSLEEP( "WATERSLEEP" );
@@ -847,8 +846,8 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
     // TODO: This condition occurs way too often. Unify it.
     // update Sep. 26 2018: this apparently still occurs way too often. yay!
     if( is_underwater() &&
-        ( ( !has_trait( trait_WATERSLEEP ) && !has_trait( trait_UNDINE_SLEEP_WATER ) ) ||
-          ( ( has_trait( trait_WATERSLEEP ) || has_trait( trait_UNDINE_SLEEP_WATER ) ) && drinkable ) ) ) {
+        ( !has_trait( trait_WATERSLEEP ) ||
+          ( ( has_trait( trait_WATERSLEEP ) ) && drinkable ) ) ) {
         return ret_val<edible_rating>::make_failure( _( "You can't do that while underwater." ) );
     }
 
@@ -1491,8 +1490,10 @@ void Character::modify_morale( item &food, const int nutr )
         if( has_trait( trait_PICKYEATER ) ) {
             nausea_chance += 5;
         }
-        if( get_str_base() > 10 ) {
-            nausea_chance -= ( std::min( get_str(), get_str_base() ) / 2 );
+        int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                                get_str_base() );
+        if( strength_adjusted > 10 ) {
+            nausea_chance -= ( std::min( get_str(), strength_adjusted ) / 2 );
         }
     }
     if( nausea_chance > 0 && x_in_y( std::min( 100, nausea_chance ), 100 ) ) {
@@ -1739,8 +1740,9 @@ bool Character::can_estimate_rot() const
 bool Character::can_consume_as_is( const item &it ) const
 {
     if( it.is_comestible() ) {
-        return !it.has_flag( flag_FROZEN ) || it.has_flag( flag_EDIBLE_FROZEN ) ||
-               it.has_flag( flag_MELTS );
+        return !it.has_flag( flag_NO_INGEST ) && ( !it.has_flag( flag_FROZEN ) ||
+                it.has_flag( flag_EDIBLE_FROZEN ) ||
+                it.has_flag( flag_MELTS ) );
     }
     return false;
 }
@@ -1922,7 +1924,7 @@ trinary Character::consume( item &target, bool force )
         add_msg_if_player( m_info, _( "You do not have that item." ) );
         return trinary::NONE;
     }
-    if( ( !has_trait( trait_WATERSLEEP ) && !has_trait( trait_UNDINE_SLEEP_WATER ) ) &&
+    if( ( !has_trait( trait_WATERSLEEP ) ) &&
         cant_do_underwater() ) {
         return trinary::NONE;
     }

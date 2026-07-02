@@ -929,6 +929,15 @@ void monster::move()
         return;
     }
 
+    // If the monster is aquatic and not a zombie, it will soon die out of water.
+    if( !here.has_flag_ter( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) &&
+        !here.has_flag_ter( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_LIQUID, pos_bub() )
+        && has_flag( mon_flag_AQUATIC ) && !has_flag( mon_flag_NO_BREATHE ) && one_in( 20 ) ) {
+        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ), name() );
+        die( &here, nullptr );
+    }
+
     if( moves < 0 ) {
         return;
     }
@@ -962,7 +971,7 @@ void monster::move()
     const std::optional<vpart_reference> vp_boardable = ovp.part_with_feature( "BOARDABLE", true );
     if( vp_boardable && friendly != 0 ) {
         const vehicle &veh = vp_boardable->vehicle();
-        if( veh.is_moving() && veh.get_monster( here,  vp_boardable->part_index() ) ) {
+        if( veh.is_moving() && veh.get_monster( here, vp_boardable->part_index() ) ) {
             moves = 0;
             return; // don't move if friendly and passenger in a moving vehicle
         }
@@ -1948,22 +1957,23 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
         }
     }
 
-    //Check for moving into/out of water
-    bool was_water = underwater;
+    // Check for moving into/out of water. Use map-based check for current location because
+    // the "underwater" member is always out-of-sync for monsters.
+    bool was_water = is_likely_underwater( here );
     bool will_be_water =
         on_ground && (
-            // AQUATIC monsters always "swim under" the vehicles, while other swimming monsters are forced to surface
+            // AQUATIC monsters always swim under the vehicles, while other swimming monsters are forced to surface.
             has_flag( mon_flag_AQUATIC ) || ( can_submerge() && !here.veh_at( destination ) ) ||
             // If the destination terrain has SWIM_UNDER, swimmers should remain submerged there.
             ( swims() && here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) )
         ) && ( here.is_divable( destination ) ||
                here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) ||
-               // AQUATIC creatures stay submerged in any swimmable terrain (including shallow water)
+               // AQUATIC creatures stay submerged in any swimmable terrain (including shallow water).
                ( has_flag( mon_flag_AQUATIC ) &&
                  here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, destination ) ) );
 
     if( get_option<bool>( "LOG_MONSTER_MOVEMENT" ) ) {
-        // Birds and other flying creatures flying over the deep water terrain
+        // Birds and other flying creatures flying over the deep water terrain.
         Character &player_character = get_player_character();
         if( was_water && flies() && sees( here, player_character ) &&
             attitude_to( player_character ) == Attitude::HOSTILE ) {
@@ -1973,7 +1983,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
             }
         } else if( was_water && sees( here, player_character ) && !will_be_water &&
                    attitude_to( player_character ) == Attitude::HOSTILE ) {
-            // Use more dramatic messages for swimming monsters
+            // Use more dramatic messages for swimming monsters.
             add_msg_if_player_sees( *this, m_warning,
                                     //~ Message when a monster emerges from water
                                     //~ %1$s: monster name, %2$s: leaps/emerges, %3$s: terrain name
@@ -2294,9 +2304,25 @@ void monster::stumble()
             }
         }
     }
+
+    // The same-z radius scan above cannot produce straight-up or straight-down
+    // candidates; add them here, gated by stair / climb / swim / fly rules.
     const tripoint_bub_ms below( pos_bub() + tripoint::below );
     if( here.valid_move( pos_bub(), below, false, true ) ) {
         valid_stumbles.push_back( below );
+    }
+    const tripoint_bub_ms above( pos_bub() + tripoint::above );
+    const bool stair_up = here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos_bub() ) &&
+                          !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos_bub() );
+    const bool ladder_up = here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos_bub() ) &&
+                           can_climb() &&
+                           here.has_floor_or_support( above );
+    const bool swim_up = swims() &&
+                         here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) &&
+                         here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, above );
+    if( ( flies() || stair_up || ladder_up || swim_up ) &&
+        here.valid_move( pos_bub(), above, false, flies() ) ) {
+        valid_stumbles.push_back( above );
     }
 
     creature_tracker &creatures = get_creature_tracker();
@@ -2370,11 +2396,13 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
     // If we're still in the function at this point, we're actually moving a tile!
     // die_if_drowning will kill the monster if necessary, but if the deep water
     // tile is on a vehicle, we should check for swimmers out of water
-    if( !die_if_drowning( to ) && has_flag( mon_flag_AQUATIC ) ) {
+    if( !here.has_flag_ter( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) &&
+        !here.has_flag_ter( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_LIQUID, pos_bub() )
+        && has_flag( mon_flag_AQUATIC ) && !has_flag( mon_flag_NO_BREATHE ) && one_in( 20 ) ) {
+        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ),
+                                name() );
         die( &here, nullptr );
-        if( u_see ) {
-            add_msg( _( "The %s flops around and dies!" ), name() );
-        }
     }
 
     // It's some kind of wall.

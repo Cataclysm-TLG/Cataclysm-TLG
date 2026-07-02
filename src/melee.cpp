@@ -643,19 +643,26 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         add_msg( m_bad, _( "This weapon is too unwieldy to attack with!" ) );
         return false;
     }
+    std::string weapon_string;
+    if( !cur_weap.is_null() ) {
+        weapon_string = string_format(
+                            _( "<color_light_red>Attacking your %s will take a long time. Are you sure you want to continue?</color>" ),
+                            cur_weap.display_name()
+                        );
+    } else {
+        weapon_string =
+            _( "<color_light_red>Attacking unarmed will take a long time. Are you sure you want to continue?</color>" );
+    }
 
-    if( is_avatar() && move_cost > 400 && calendar::turn > melee_warning_turn ) {
+    if( is_avatar() && move_cost >= 500 && calendar::turn > melee_warning_turn ) {
         const std::string &action = query_popup()
                                     .context( "CANCEL_ACTIVITY_OR_IGNORE_QUERY" )
-                                    .message( _( "<color_light_red>Attacking with your %1$s will take a long time.  "
-                                              "Are you sure you want to continue?</color>" ),
-                                              cur_weap.display_name() )
+                                    .message( "%s", weapon_string )
                                     .option( "YES" )
                                     .option( "NO" )
                                     .option( "IGNORE" )
                                     .query()
                                     .action;
-
         if( action == "NO" ) {
             return false;
         }
@@ -2265,6 +2272,10 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     // Get the rest of our block modifiers to tally up a final score.
     if( can_block_unarmed ) {
         bp_hit = select_blocking_part( arm_block, leg_block, nonstandard_block );
+        // Bail out if all our blocking parts are unavailable.
+        if( bp_hit == bodypart_str_id::NULL_ID().id() ) {
+            return false;
+        }
         body_block_score *= get_part( bp_hit )->get_limb_score( limb_score_block );
         add_msg_debug( debugmode::DF_MELEE, "Body block score after limb score multiplier: %d",
                        body_block_score );
