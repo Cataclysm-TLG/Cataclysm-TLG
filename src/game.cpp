@@ -6042,8 +6042,7 @@ void game::control_vehicle()
             if( veh->engine_on ) {
                 if( power_armor_controls_ok ) {
                     u.controlling_power_armor = true;
-                    add_msg( _( "You take control of the %s." ), veh->name );
-
+                    add_msg( _( "You take control of power armor." ), veh->name );
                 } else {
                     u.controlling_vehicle = true;
                     add_msg( _( "You take control of the %s." ), veh->name );

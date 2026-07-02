@@ -245,7 +245,8 @@ void Creature::setpos( const tripoint_abs_ms &p, bool check_gravity/* = true*/ )
         vehicle *veh = ( !vp ) ? nullptr : &vp->vehicle();
         if( veh != nullptr ) {
             const tripoint_rel_ms delta = p - old_loc;
-            here.move_vehicle( *veh, delta, veh->face );
+            tileray move_dir( delta.xy() );
+            here.move_vehicle( *veh, delta, move_dir );
         }
     }
     set_pos_abs_only( p );

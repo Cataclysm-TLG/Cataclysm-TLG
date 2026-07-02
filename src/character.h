@@ -1047,10 +1047,6 @@ class Character : public Creature, public visitable
         // formats and prints encumbrance info to specified window
         void print_encumbrance( ui_adaptor &ui, const catacurses::window &win, int line = -1,
                                 const item *selected_clothing = nullptr ) const;
-        /** Returns true if the character is wearing power armor */
-        bool is_wearing_power_armor( bool *hasHelmet = nullptr ) const;
-        /** Returns true if the character is wearing active power */
-        bool is_wearing_active_power_armor() const;
         /** Returns true if the player is wearing an active optical cloak */
         bool is_wearing_active_optcloak() const;
 
