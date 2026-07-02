@@ -10480,10 +10480,12 @@ std::unordered_set<trait_id> Character::get_opposite_traits( const trait_id &fla
 float Character::adjust_for_focus( float amount ) const
 {
     float effective_focus = get_focus();
-    effective_focus = enchantment_cache->modify_value( enchant_vals::mod::LEARNING_FOCUS,
-                      effective_focus );
-    effective_focus = effective_focus * 1.0 + ( 0.01f * ( get_int() - 8 ) * 5 );
-    effective_focus = std::max( effective_focus, 1.f );
+    // Scale bonus down as base focus decreases, because a flat bonus would create an
+    // artificially high floor and sufficiently bonused characters would never reach ~0 focus.
+    float bonus = ( get_int() - 10.0f ) * 2.5f;
+    bonus = enchantment_cache->modify_value( enchant_vals::mod::LEARNING_FOCUS, bonus );
+    effective_focus += bonus * ( effective_focus / 100.0f );
+    effective_focus = std::max( effective_focus, 1.0f );
     return amount * ( effective_focus / 100.0f );
 }
 

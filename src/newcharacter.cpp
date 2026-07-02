@@ -1342,12 +1342,21 @@ static std::string assemble_stat_details( avatar &u, int sel )
 
         case 2: {
             const int read_spd = u.read_speed();
+            // It's actually a float, but we use a double here for legibility.
+            const double effective_focus = ( u.get_int() - 10.0 ) * 2.5;
             description_str =
                 colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_int() ) ),
                           c_light_blue )
+
                 + colorize( string_format( _( "\nRead times: %d%%" ), read_spd ),
                             ( read_spd == 100 ? COL_STAT_NEUTRAL :
-                              ( read_spd < 100 ? COL_STAT_BONUS : COL_STAT_PENALTY ) ) )
+                                            ( read_spd < 100 ? COL_STAT_BONUS : COL_STAT_PENALTY ) ) )
+                + colorize(
+                    string_format( _( "\nFocus modifier: %+g%%" ), effective_focus ),
+                    effective_focus == 0.0 ? COL_STAT_NEUTRAL :
+                    effective_focus > 0.0 ? COL_STAT_BONUS :
+                    COL_STAT_PENALTY
+                )
                 + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + colorize( string_format( _( "\nCrafting bonus: %2d%%" ), u.get_int() ),
                             COL_STAT_BONUS )
