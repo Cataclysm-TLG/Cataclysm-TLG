@@ -735,6 +735,26 @@
     "color": "light_gray"
   },
   {
+    "id": "mx_rock_formation_2",
+    "type": "map_extra",
+    "name": { "str": "Rock formation" },
+    "description": "Rocky ground and some boulders.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_rock_formation_2" },
+    "sym": ".",
+    "autonote": false,
+    "color": "light_gray"
+  },
+    {
+    "id": "mx_rock_formation_3",
+    "type": "map_extra",
+    "name": { "str": "Rock formation" },
+    "description": "Rocky ground and some boulders.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_rock_formation_3" },
+    "sym": ".",
+    "autonote": false,
+    "color": "light_gray"
+  },
+  {
     "id": "mx_toxic_waste",
     "type": "map_extra",
     "name": { "str": "Toxic waste" },
