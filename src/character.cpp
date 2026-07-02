@@ -643,6 +643,7 @@ Character::Character() :
     oxygen = 0;
     in_vehicle = false;
     controlling_vehicle = false;
+    controlling_power_armor = false;
     grab_point = tripoint_rel_ms::zero;
     hauling = false;
     set_focus( 100 );
