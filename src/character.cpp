@@ -10482,7 +10482,7 @@ float Character::adjust_for_focus( float amount ) const
     float effective_focus = get_focus();
     effective_focus = enchantment_cache->modify_value( enchant_vals::mod::LEARNING_FOCUS,
                       effective_focus );
-    effective_focus = effective_focus * 1.0 + ( 0.01f * ( get_int() - 8 ) * 5 );
+    effective_focus = effective_focus * 1.0f + ( ( get_int() - 10.f ) * 2.5f );
     effective_focus = std::max( effective_focus, 1.f );
     return amount * ( effective_focus / 100.0f );
 }
