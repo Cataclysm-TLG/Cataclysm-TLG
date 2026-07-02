@@ -5863,11 +5863,11 @@ void Character::check_needs_extremes()
             if( sleep_deprivation < SLEEP_DEPRIVATION_MINOR ) {
                 add_msg_if_player( m_warning,
                                    _( "It's been a while since you've slept well, it's fraying at your nerves." ) );
-                mod_fatigue( 1 );
+                mod_fatigue( 5 );
             } else if( sleep_deprivation < SLEEP_DEPRIVATION_SERIOUS ) {
                 add_msg_if_player( m_bad,
                                    _( "Your mind feels foggy from a lack of good sleep, and your eyes keep trying to close against your will." ) );
-                mod_fatigue( 5 );
+                mod_fatigue( 20 );
 
                 if( one_in( 10 ) ) {
                     mod_daily_health( -1, -10 );
@@ -5875,7 +5875,7 @@ void Character::check_needs_extremes()
             } else if( sleep_deprivation < SLEEP_DEPRIVATION_MAJOR ) {
                 add_msg_if_player( m_bad,
                                    _( "You feel dazed from lack of sleep." ) );
-                mod_fatigue( 10 );
+                mod_fatigue( 35 );
 
                 if( one_in( 5 ) ) {
                     mod_daily_health( -2, -10 );
@@ -5883,7 +5883,7 @@ void Character::check_needs_extremes()
             } else if( sleep_deprivation < SLEEP_DEPRIVATION_MASSIVE ) {
                 add_msg_if_player( m_bad,
                                    _( "You can't concentrate.  You need sleep." ) );
-                mod_fatigue( 40 );
+                mod_fatigue( 50 );
                 mod_daily_health( -5, -10 );
             }
             // Microsleeps are slightly worse if you're sleep deprived, but not by much. (chance: 1 in (75 + int_cur) at lethal sleep deprivation)
