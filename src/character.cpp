@@ -11834,6 +11834,7 @@ bool Character::can_sleep()
     if( has_effect( effect_withdrawal_opioid_timer ) ) {
         addiction_mod -= get_effect_int( effect_withdrawal_opioid_timer );
     }
+    // The lower adiction_mod is, the more it decreases sleepy.
     sleepy += std::max( addiction_mod, -5 );
     sleepy = enchantment_cache->modify_value( enchant_vals::mod::SLEEPY, sleepy );
     if( get_fatigue() < fatigue_levels::TIRED + 1 ) {
