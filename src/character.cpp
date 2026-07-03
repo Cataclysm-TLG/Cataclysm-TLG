@@ -280,9 +280,9 @@ static const efftype_id effect_tied( "tied" );
 static const efftype_id effect_transition_contacts( "transition_contacts" );
 static const efftype_id effect_weed_high( "weed_high" );
 static const efftype_id effect_winded( "winded" );
-static const efftype_id effect_withdrawal_timer_alcohol( "withdrawal_timer_alcohol" );
-static const efftype_id effect_withdrawal_timer_nicotine( "withdrawal_timer_nicotine" );
-static const efftype_id effect_withdrawal_timer_opioid( "withdrawal_timer_opioid" );
+static const efftype_id effect_withdrawal_timer_alcohol( "withdrawal_alcohol_timer" );
+static const efftype_id effect_withdrawal_timer_nicotine( "withdrawal_nicotine_timer" );
+static const efftype_id effect_withdrawal_timer_opioid( "withdrawal_opioid_timer" );
 
 static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 
