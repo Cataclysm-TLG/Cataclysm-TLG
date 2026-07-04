@@ -775,7 +775,7 @@ static float get_stagger_adjust( const tripoint_bub_ms &source, const tripoint_b
                                  const tripoint_bub_ms &next_step )
 {
     const float initial_dist =
-        trig_dist( source, destination );
+        trig_dist_precise( source, destination );
     const float new_dist =
         trig_dist_precise( next_step, destination );
     // If we return 0, it wil cancel the action.
@@ -2419,81 +2419,6 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
         setpos( here, to );
     }
     check_dead_state( &here );
-}
-
-/* will_reach() is used for determining whether we'll get to stairs (and
- * potentially other locations of interest).  It is generally permissive.
- * TODO: Pathfinding;
-         Make sure that non-smashing monsters won't "teleport" through windows
-         Injure monsters if they're gonna be walking through pits or whatever
- */
-bool monster::will_reach( const point_bub_ms &p )
-{
-    const map &here = get_map();
-    const tripoint_bub_ms t = { p, posz() };
-
-    monster_attitude att = attitude( &get_player_character() );
-    if( att != MATT_FOLLOW && att != MATT_ATTACK && att != MATT_FRIEND ) {
-        return false;
-    }
-
-    if( digs() || has_flag( mon_flag_AQUATIC ) ) {
-        return false;
-    }
-
-    if( ( has_flag( mon_flag_IMMOBILE ) ||
-          has_flag( json_flag_CANNOT_MOVE ) ) &&
-        ( pos_bub().xy() != p ) ) {
-        return false;
-    }
-
-    const std::vector<tripoint_bub_ms> path = here.route( *this, pathfinding_target::point( t ) );
-    if( path.empty() ) {
-        return false;
-    }
-
-    if( has_flag( mon_flag_SMELLS ) && get_scent().get( pos_bub() ) > 0 &&
-        get_scent().get( tripoint_bub_ms( { p, posz() } ) ) > get_scent().get( pos_bub() ) ) {
-        return true;
-    }
-
-    if( can_hear() && wandf > 0 && rl_dist( here.get_bub( wander_pos ).xy(), p ) <= 2 &&
-        rl_dist( pos_abs().xy(), wander_pos.xy() ) <= wandf ) {
-        return true;
-    }
-
-    if( can_see() && sees( here, tripoint_bub_ms( p, posz() ) ) ) {
-        return true;
-    }
-
-    return false;
-}
-
-int monster::turns_to_reach( const point_bub_ms &p )
-{
-    map &here = get_map();
-    const tripoint_bub_ms t = { p, posz() };
-    // HACK: This function is a(n old) temporary hack that should soon be removed
-    const std::vector<tripoint_bub_ms> path = here.route( *this, pathfinding_target::point( t ) );
-    if( path.empty() ) {
-        return 999;
-    }
-
-    double turns = 0.;
-    for( size_t i = 0; i < path.size(); i++ ) {
-        const tripoint_bub_ms &next = path[i];
-        if( here.impassable( next ) ) {
-            // No bashing through, it looks stupid when you go back and find
-            // the doors intact.
-            return 999;
-        } else if( i == 0 ) {
-            turns += static_cast<double>( calc_movecost( pos_bub(), next ) ) / get_speed();
-        } else {
-            turns += static_cast<double>( calc_movecost( path[i - 1], next ) ) / get_speed();
-        }
-    }
-
-    return static_cast<int>( turns + .9 ); // Halve (to get turns) and round up
 }
 
 void monster::shove_vehicle( const tripoint_bub_ms &remote_destination,
