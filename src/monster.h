@@ -223,9 +223,6 @@ class monster : public Creature
         bool know_danger_at( const tripoint_bub_ms &p ) const;
         bool know_danger_at( map *here, const tripoint_bub_ms &p ) const;
 
-        bool will_reach( const point_bub_ms &p ); // Do we have plans to get to (x, y)?
-        int  turns_to_reach( const point_bub_ms &p ); // How long will it take?
-
         // Returns true if the monster has a current goal
         bool has_dest() const;
         // Returns point at the end of the monster's current plans
