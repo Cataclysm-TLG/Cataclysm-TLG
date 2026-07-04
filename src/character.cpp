@@ -280,9 +280,9 @@ static const efftype_id effect_tied( "tied" );
 static const efftype_id effect_transition_contacts( "transition_contacts" );
 static const efftype_id effect_weed_high( "weed_high" );
 static const efftype_id effect_winded( "winded" );
-static const efftype_id effect_withdrawal_timer_alcohol( "withdrawal_timer_alcohol" );
-static const efftype_id effect_withdrawal_timer_nicotine( "withdrawal_timer_nicotine" );
-static const efftype_id effect_withdrawal_timer_opioid( "withdrawal_timer_opioid" );
+static const efftype_id effect_withdrawal_alcohol_timer( "withdrawal_alcohol_timer" );
+static const efftype_id effect_withdrawal_nicotine_timer( "withdrawal_nicotine_timer" );
+static const efftype_id effect_withdrawal_opioid_timer( "withdrawal_opioid_timer" );
 
 static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 
@@ -11825,16 +11825,17 @@ bool Character::can_sleep()
     if( addiction_level( addiction_cannabis ) > 5 && !has_effect( effect_weed_high ) ) {
         addiction_mod -= 1;
     }
-    if( has_effect( effect_withdrawal_timer_alcohol ) ) {
-        addiction_mod -= get_effect_int( effect_withdrawal_timer_alcohol );
+    if( has_effect( effect_withdrawal_alcohol_timer ) ) {
+        addiction_mod -= get_effect_int( effect_withdrawal_alcohol_timer );
     }
-    if( has_effect( effect_withdrawal_timer_nicotine ) ) {
-        addiction_mod -= get_effect_int( effect_withdrawal_timer_nicotine );
+    if( has_effect( effect_withdrawal_nicotine_timer ) ) {
+        addiction_mod -= get_effect_int( effect_withdrawal_nicotine_timer );
     }
-    if( has_effect( effect_withdrawal_timer_opioid ) ) {
-        addiction_mod -= get_effect_int( effect_withdrawal_timer_opioid );
+    if( has_effect( effect_withdrawal_opioid_timer ) ) {
+        addiction_mod -= get_effect_int( effect_withdrawal_opioid_timer );
     }
-    sleepy -= std::min( addiction_mod, -5 );
+    // The lower adiction_mod is, the more it decreases sleepy.
+    sleepy += std::max( addiction_mod, -5 );
     sleepy = enchantment_cache->modify_value( enchant_vals::mod::SLEEPY, sleepy );
     if( get_fatigue() < fatigue_levels::TIRED + 1 ) {
         sleepy -= int( ( fatigue_levels::TIRED + 1 - get_fatigue() ) / 4 );
