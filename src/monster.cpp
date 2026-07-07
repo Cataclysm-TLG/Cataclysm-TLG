@@ -130,6 +130,7 @@ static const efftype_id effect_run( "run" );
 static const efftype_id effect_slippery_terrain( "slippery_terrain" );
 static const efftype_id effect_smoke_eyes( "smoke_eyes" );
 static const efftype_id effect_smoke_lungs( "smoke_lungs" );
+static const efftype_id effect_sound_triggered( "sound_triggered" );
 static const efftype_id effect_spooked( "spooked" );
 static const efftype_id effect_spooked_recent( "spooked_recent" );
 static const efftype_id effect_stunned( "stunned" );
@@ -4093,8 +4094,11 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
         return;
     }
     // Only trigger this if the monster is not friendly or the source isn't us or the player.
-    if( source != pos_bub() && ( friendly == 0 || source != get_player_character().pos_bub() ) ) {
-        process_trigger( mon_trigger::SOUND, volume );
+    // Skip if the sound is quiet-ish, or we've already hear a louder sound recently.
+    if( source != pos_bub() && volume > 15 && ( friendly == 0 || source != get_player_character().pos_bub() ) && get_effect_int( effect_sound_triggered ) < volume ) {
+        add_effect( effect_sound_triggered, ( 1_seconds * rng( 2, 10 ) ), false, std::min( volume, 400 ) );
+        int trigger_strength = std::max( 0, volume - 15 );
+        process_trigger( mon_trigger::SOUND, trigger_strength );
     }
     provocative_sound = tmp_provocative;
     if( morale >= 0 && anger >= 10 ) {

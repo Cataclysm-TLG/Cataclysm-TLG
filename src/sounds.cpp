@@ -443,8 +443,8 @@ static std::vector<centroid> cluster_sounds(
 
 static int get_signal_for_hordes( const centroid &centr )
 {
-    //Volume in  tiles. Signal for hordes in submaps
-    //modify vol using weather vol.Weather can reduce monster hearing
+    //Volume in tiles. Signal for hordes in submaps
+    //modify vol using weather vol. Weather can reduce monster hearing.
     const int vol = centr.volume - get_weather().weather_id->sound_attn;
     const int min_vol_cap = 60; //Hordes can't hear volume lower than this
     const int underground_div = 2; //Coefficient for volume reduction underground
@@ -479,9 +479,13 @@ void sounds::process_sounds()
         const tripoint_bub_ms source = tripoint_bub_ms( this_centroid.x, this_centroid.y, this_centroid.z );
         // --- Monster sound handling here ---
         // Alert all hordes
-        int sig_power = get_signal_for_hordes( this_centroid );
-        if( sig_power > 0 ) {
 
+        int sig_power = get_signal_for_hordes( this_centroid );
+        bool outside = here.is_outside( source );
+        if( !outside ) {
+            sig_power *= 0.8;
+        }
+        if( sig_power > 0 ) {
             const point_abs_ms abs_ms = here.get_abs( source ).xy();
             const point_abs_sm abs_sm( coords::project_to<coords::sm>( abs_ms ) );
             const tripoint_abs_sm target( abs_sm, source.z() );
@@ -490,12 +494,14 @@ void sounds::process_sounds()
         // Alert all monsters (that can hear) to the sound.
         for( monster &critter : g->all_monsters() ) {
             // TODO: Generalize this to Creature::hear_sound
-            const int dist = sound_distance( source, critter.pos_bub() );
+            tripoint_bub_ms target_bub = critter.pos_bub();
+            const int dist = sound_distance( source, target_bub );
             if( vol * 2 > dist && critter.has_flag( mon_flag_HEARS ) && !critter.has_effect( effect_deaf ) ) {
                 // Exclude monsters that certainly won't hear the sound
                 critter.hear_sound( source, vol, dist, this_centroid.provocative );
                 if( raw_volume >= 150 && !critter.is_immune_effect( effect_deaf ) ) {
-                    const int felt_volume = raw_volume - dist;
+                    const bool both_inside = !outside && !here.is_outside( target_bub );
+                    const int felt_volume = ( raw_volume - dist * 2 ) * ( both_inside ? 100 : 80 ) / 100;
                     const bool is_sound_deafening = felt_volume >= 150;
                     if( is_sound_deafening ) {
                         // Reduced deafness for monsters (zombies adapt, animals have better ears, etc)

@@ -281,6 +281,14 @@
   },
   {
     "type": "effect_type",
+    "id": "sound_triggered",
+    "name": [ "Heard Sound" ],
+    "max_intensity": 400,
+    "max_duration": "10 s",
+    "desc": [ "AI tag used for monsters responding to sound.  This is a bug if you have it." ]
+  },
+  {
+    "type": "effect_type",
     "id": "worked_on",
     "name": [ "Worked On" ],
     "desc": [ "AI tag used for robots being disabled.  This is a bug if you have it." ]

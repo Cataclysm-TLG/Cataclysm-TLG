@@ -2309,7 +2309,7 @@ std::optional<int> iuse::radio_on( Character *, item *it, const tripoint_bub_ms 
 
 std::optional<int> iuse::noise_emitter_on( Character *, item *, const tripoint_bub_ms &pos )
 {
-    sounds::sound( pos, 30, sounds::sound_t::alarm, _( "KXSHHHHRRCRKLKKK!" ), true, "tool",
+    sounds::sound( pos, 50, sounds::sound_t::alarm, _( "KXSHHHHRRCRKLKKK!" ), true, "tool",
                    "noise_emitter" );
     return 1;
 }
