@@ -8481,6 +8481,12 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             }
 
             tripoint_bub_ms tp( new_point.x(), new_point.y(), T.z() );
+            // Inbounds check because monsters are using this too, and their view range can be OOB.
+            if( !inbounds( tp ) ) {
+                visible = false;
+                return false;
+            }
+
             point_bub_ms T_point( T.x(), T.y() );
             point_bub_ms F_point( F.x(), F.y() );
             // Concealment check only for tiles adjacent to target.
@@ -8541,6 +8547,11 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             }
             // Exit before checking the last square only if it's not a vertical transition.
             if( new_point == T && last_point.z() == T.z() ) {
+                return false;
+            }
+            // Inbounds check because monster view can be OOB.
+            if( !inbounds( new_point ) ) {
+                visible = false;
                 return false;
             }
             // Concealment check only for tiles adjacent to target.
