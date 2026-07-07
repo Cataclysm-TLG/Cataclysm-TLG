@@ -34,7 +34,8 @@
     "symbol": "/",
     "color": "light_gray",
     "flags": [ "BELT_CLIP", "WASH_HARD" ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 1 },
+    "use_action": [ "WASH_ALL_ITEMS" ]
   },
   {
     "id": "dish_towel",
@@ -51,7 +52,8 @@
     "material": [ "cotton" ],
     "flags": [ "TINDER", "WASH_HARD" ],
     "symbol": ",",
-    "color": "white"
+    "color": "white",
+    "use_action": [ "WASH_ALL_ITEMS" ]
   },
   {
     "id": "elec_hairtrimmer",
@@ -186,7 +188,8 @@
     "material": [ "plastic" ],
     "symbol": "s",
     "color": "yellow",
-    "flags": [ "NO_SALVAGE", "WASH_HARD" ]
+    "flags": [ "NO_SALVAGE", "WASH_HARD" ],
+    "use_action": [ "WASH_ALL_ITEMS" ]
   },
   {
     "id": "survivor_hairtrimmer",
@@ -242,7 +245,8 @@
     "material": [ "wood" ],
     "symbol": ";",
     "color": "white",
-    "flags": [ "ALLOWS_REMOTE_USE", "WASH_SOFT" ]
+    "flags": [ "ALLOWS_REMOTE_USE", "WASH_SOFT" ],
+    "use_action": [ "WASH_ALL_ITEMS" ]
   },
   {
     "id": "hair_dye_kit",
