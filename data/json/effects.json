@@ -1893,7 +1893,6 @@
     "max_intensity": 3,
     "resist_traits": [ "THRESH_URSINE" ],
     "base_mods": {
-      "str_mod": [ 1 ],
       "fatigue_min": [ 1 ],
       "fatigue_chance": [ 1100 ],
       "hurt_min": [ 1 ],
