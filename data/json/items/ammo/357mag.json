@@ -19,7 +19,7 @@
     "stack_size": 50,
     "ammo_type": "357mag",
     "casing": "357mag_casing",
-    "range": 16,
+    "range": 19,
     "damage": {
       "damage_type": "bullet",
       "amount": 33,

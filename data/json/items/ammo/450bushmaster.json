@@ -18,7 +18,7 @@
     "stack_size": 20,
     "ammo_type": "450",
     "casing": "450_casing",
-    "range": 23,
+    "range": 26,
     "damage": {
       "damage_type": "bullet",
       "amount": 56,

@@ -18,7 +18,7 @@
     "stack_size": 20,
     "ammo_type": "44",
     "casing": "44_casing",
-    "range": 16,
+    "range": 19,
     "//": ".429in, 240gr, Speer HP GD 4455, 15.1gr ADI AP 90",
     "damage": {
       "damage_type": "bullet",
