@@ -135,62 +135,62 @@
       }
     ],
     "passive_add_procgen_values": [
-      { "weight": 100, "min_value": -3, "max_value": 4, "type": "STRENGTH", "increment": 1, "power_per_increment": 250 },
+      { "weight": 100, "min_value": -3, "max_value": 2, "type": "STRENGTH", "increment": 1, "power_per_increment": 500 },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "DEXTERITY",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "PERCEPTION",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "INTELLIGENCE",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -20,
-        "max_value": 20,
+        "max_value": 10,
         "type": "SPEED",
         "increment": 5,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 50,
-        "min_value": -20,
-        "max_value": 50,
+        "min_value": -10,
+        "max_value": 20,
         "type": "ATTACK_SPEED",
         "increment": 5,
-        "power_per_increment": -150
+        "power_per_increment": -300
       },
       {
         "weight": 50,
         "min_value": -2500,
-        "max_value": 10000,
+        "max_value": 2000,
         "type": "MAX_STAMINA",
         "increment": 250,
-        "power_per_increment": 50
+        "power_per_increment": 100
       },
       {
         "weight": 50,
         "min_value": -20000,
-        "max_value": 20000,
+        "max_value": 10000,
         "type": "CARRY_WEIGHT",
         "increment": 1000,
-        "power_per_increment": 25
+        "power_per_increment": 100
       },
       {
         "weight": 10,
@@ -198,7 +198,7 @@
         "max_value": 10,
         "type": "EFFECTIVE_HEALTH_MOD",
         "increment": 2,
-        "power_per_increment": 100
+        "power_per_increment": 200
       }
     ],
     "type_weights": [
@@ -358,62 +358,62 @@
       }
     ],
     "passive_add_procgen_values": [
-      { "weight": 100, "min_value": -3, "max_value": 4, "type": "STRENGTH", "increment": 1, "power_per_increment": 250 },
+      { "weight": 100, "min_value": -3, "max_value": 2, "type": "STRENGTH", "increment": 1, "power_per_increment": 500 },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "DEXTERITY",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "PERCEPTION",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "INTELLIGENCE",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -20,
-        "max_value": 20,
+        "max_value": 10,
         "type": "SPEED",
         "increment": 5,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 50,
-        "min_value": -20,
-        "max_value": 50,
+        "min_value": -10,
+        "max_value": 20,
         "type": "ATTACK_SPEED",
         "increment": 5,
-        "power_per_increment": -150
+        "power_per_increment": -300
       },
       {
         "weight": 50,
         "min_value": -2500,
-        "max_value": 10000,
+        "max_value": 2000,
         "type": "MAX_STAMINA",
         "increment": 250,
-        "power_per_increment": 50
+        "power_per_increment": 100
       },
       {
         "weight": 50,
         "min_value": -20000,
-        "max_value": 20000,
+        "max_value": 10000,
         "type": "CARRY_WEIGHT",
         "increment": 1000,
-        "power_per_increment": 25
+        "power_per_increment": 50
       },
       {
         "weight": 10,
@@ -421,7 +421,7 @@
         "max_value": 10,
         "type": "EFFECTIVE_HEALTH_MOD",
         "increment": 2,
-        "power_per_increment": 100
+        "power_per_increment": 200
       }
     ],
     "type_weights": [
@@ -585,62 +585,62 @@
       }
     ],
     "passive_add_procgen_values": [
-      { "weight": 100, "min_value": -3, "max_value": 4, "type": "STRENGTH", "increment": 1, "power_per_increment": 250 },
+      { "weight": 100, "min_value": -3, "max_value": 2, "type": "STRENGTH", "increment": 1, "power_per_increment": 500 },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "DEXTERITY",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "PERCEPTION",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -3,
-        "max_value": 4,
+        "max_value": 2,
         "type": "INTELLIGENCE",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
         "min_value": -20,
-        "max_value": 20,
+        "max_value": 10,
         "type": "SPEED",
         "increment": 5,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 50,
-        "min_value": -20,
-        "max_value": 50,
+        "min_value": -10,
+        "max_value": 20,
         "type": "ATTACK_SPEED",
         "increment": 5,
-        "power_per_increment": -150
+        "power_per_increment": -300
       },
       {
         "weight": 50,
         "min_value": -2500,
-        "max_value": 10000,
+        "max_value": 2000,
         "type": "MAX_STAMINA",
         "increment": 250,
-        "power_per_increment": 50
+        "power_per_increment": 100
       },
       {
         "weight": 50,
         "min_value": -20000,
-        "max_value": 20000,
+        "max_value": 10000,
         "type": "CARRY_WEIGHT",
         "increment": 1000,
-        "power_per_increment": 25
+        "power_per_increment": 50
       },
       {
         "weight": 10,
@@ -648,7 +648,7 @@
         "max_value": 10,
         "type": "EFFECTIVE_HEALTH_MOD",
         "increment": 2,
-        "power_per_increment": 100
+        "power_per_increment": 200
       }
     ],
     "type_weights": [
@@ -680,30 +680,30 @@
     "type": "relic_procgen_data",
     "id": "held_passive_bad",
     "passive_add_procgen_values": [
-      { "weight": 100, "min_value": 1, "max_value": 2, "type": "STRENGTH", "increment": 1, "power_per_increment": 250 },
+      { "weight": 100, "min_value": -3, "max_value": 2, "type": "STRENGTH", "increment": 1, "power_per_increment": 500 },
       {
         "weight": 100,
-        "min_value": 1,
+        "min_value": -3,
         "max_value": 2,
         "type": "DEXTERITY",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
-        "min_value": 1,
+        "min_value": -3,
         "max_value": 2,
         "type": "PERCEPTION",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       },
       {
         "weight": 100,
-        "min_value": 1,
+        "min_value": -3,
         "max_value": 2,
         "type": "INTELLIGENCE",
         "increment": 1,
-        "power_per_increment": 250
+        "power_per_increment": 500
       }
     ],
     "passive_mult_procgen_values": [

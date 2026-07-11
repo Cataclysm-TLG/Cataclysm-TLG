@@ -805,7 +805,7 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
             { _( "Field types" ), &field_types::finalize_all },
             { _( "Ammo effects" ), &ammo_effects::finalize_all },
             { _( "Emissions" ), &emit::finalize },
-            { _( "Enchantments" ), &enchantment::finalize_all },
+            { _( "Modifiers" ), &enchantment::finalize_all },
             { _( "Event Statistics" ), &event_statistic::finalize_all },
             { _( "Event Transformations" ), &event_transformation::finalize_all },
             { _( "Faults" ), &faults::finalize },
