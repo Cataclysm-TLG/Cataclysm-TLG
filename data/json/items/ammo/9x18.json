@@ -18,7 +18,7 @@
     "stack_size": 50,
     "ammo_type": "9x18",
     "casing": "9x18mm_casing",
-    "range": 13,
+    "range": 16,
     "damage": { "damage_type": "bullet", "amount": 16, "armor_penetration": 2 },
     "dispersion": 60,
     "recoil": 300,

@@ -54,7 +54,7 @@
     "name": { "str_sp": "40x46mm M576 buckshot" },
     "description": "A 40x46mm buckshot load, designed for use in thick vegetation or room clearing.  Due to the limitations of weapons built to fire 40x46mm grenades, it's much less powerful than you'd expect.",
     "weight": "120 g",
-    "range": 12,
+    "range": 14,
     "damage": { "damage_type": "bullet", "amount": 28 },
     "recoil": 1000,
     "casing": "40x46mm_m199_casing",

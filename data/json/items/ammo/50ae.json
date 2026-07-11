@@ -17,7 +17,7 @@
     "stack_size": 20,
     "ammo_type": "50ae",
     "casing": "50ae_casing",
-    "range": 18,
+    "range": 20,
     "//": ".500in, 300gr, Speer HP GD 4493, 30.1gr Norma R123",
     "damage": {
       "damage_type": "bullet",

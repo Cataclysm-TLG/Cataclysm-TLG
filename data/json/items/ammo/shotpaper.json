@@ -29,7 +29,7 @@
     "shot_damage": { "damage_type": "bullet", "amount": 0.18 },
     "projectile_count": 100,
     "shot_spread": 20,
-    "range": 12,
+    "range": 14,
     "extend": { "effects": [ "NOGIB", "SHOT" ] }
   },
   {
@@ -53,7 +53,7 @@
     "subtypes": [ "AMMO" ],
     "name": { "str": "buckshot paper cartridge" },
     "description": "A paper cartridge containing a premeasured amount of black powder and an equal volume of 00 buckshot.",
-    "range": 12,
+    "range": 14,
     "damage": { "damage_type": "bullet", "amount": 40 },
     "shot_damage": { "damage_type": "bullet", "amount": 12 },
     "projectile_count": 9,

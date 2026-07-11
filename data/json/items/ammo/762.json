@@ -18,7 +18,7 @@
     "stack_size": 20,
     "ammo_type": "762",
     "casing": "762_casing",
-    "range": 30,
+    "range": 33,
     "damage": {
       "damage_type": "bullet",
       "amount": 44,

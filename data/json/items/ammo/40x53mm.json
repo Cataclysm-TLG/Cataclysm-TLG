@@ -22,7 +22,7 @@
     "name": { "str_sp": "40x53mm M1001 flechette" },
     "description": "A 40x53mm canister shot load, with 115 17-grain flechettes.",
     "damage": { "damage_type": "bullet", "amount": 150, "armor_penetration": 12 },
-    "range": 14,
+    "range": 16,
     "recoil": 18750,
     "extend": { "effects": [ "SHOT" ] }
   },
