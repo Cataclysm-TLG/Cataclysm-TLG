@@ -13082,7 +13082,7 @@ void game::autosave()
     if( std::time( nullptr ) < last_save_timestamp + 60 * get_option<int>( "AUTOSAVE_MINUTES" ) ) {
         return;
     }
-    quicksave();    //Driving checks are handled by quicksave()
+    quicksave();    // Driving checks are handled by quicksave()
 }
 
 void game::start_calendar()

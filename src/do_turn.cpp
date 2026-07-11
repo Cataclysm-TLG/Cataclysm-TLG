@@ -521,10 +521,10 @@ bool do_turn()
 
     u.update_body();
 
-    // Auto-save if autosave is enabled
+    // Autosave if autosave is enabled and we're not in an activity.
     if( get_option<bool>( "AUTOSAVE" ) &&
         calendar::once_every( 1_turns * get_option<int>( "AUTOSAVE_TURNS" ) ) &&
-        !u.is_dead_state() ) {
+        !u.is_dead_state() && !u.activity ) {
         g->autosave();
     }
 
