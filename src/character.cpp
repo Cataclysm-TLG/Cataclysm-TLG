@@ -8847,7 +8847,7 @@ void Character::healall( int dam )
     }
 }
 
-void Character::hurtall( int dam, Creature *source, bool disturb /*= true*/ )
+void Character::hurtall( int dam, Creature *source, bool disturb /*= true*/, bool bionic )
 {
     if( is_dead_state() || has_effect( effect_incorporeal ) ||
         dam <= 0 || has_flag( json_flag_CANNOT_TAKE_DAMAGE ) ) {
@@ -8859,6 +8859,9 @@ void Character::hurtall( int dam, Creature *source, bool disturb /*= true*/ )
 
     std::vector<bodypart_id> body_parts = get_all_body_parts( get_body_part_flags::only_main );
     for( const bodypart_id &bp : body_parts ) {
+        if( !bionic && bp->has_flag( json_flag_BIONIC_LIMB ) ) {
+            continue;
+        }
         // Don't use apply_damage here or it will annoy the player with 6 queries
         const int dam_to_bodypart = std::min( dam, get_part_hp_cur( bp ) );
         mod_part_hp_cur( bp, - dam_to_bodypart );
