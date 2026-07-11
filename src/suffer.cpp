@@ -152,7 +152,9 @@ static const trait_id trait_ASTHMA( "ASTHMA" );
 static const trait_id trait_CHAOTIC( "CHAOTIC" );
 static const trait_id trait_CHAOTIC_BAD( "CHAOTIC_BAD" );
 static const trait_id trait_CHEMIMBALANCE( "CHEMIMBALANCE" );
+static const trait_id trait_CHITIN2( "CHITIN2" );
 static const trait_id trait_CHLOROMORPH( "CHLOROMORPH" );
+static const trait_id trait_CRUSTACEAN_CARAPACE( "CRUSTACEAN_CARAPACE" );
 static const trait_id trait_FRESHWATEROSMOSIS( "FRESHWATEROSMOSIS" );
 static const trait_id trait_HAS_NEMESIS( "HAS_NEMESIS" );
 static const trait_id trait_JAUNDICE( "JAUNDICE" );
@@ -1363,41 +1365,50 @@ void suffer::from_radiation( Character &you )
         // 200 rads = 100 / 10000 = 1 / 100
         // 1000 rads = 900 / 10000 = 9 / 100 = 10% !!!
         // 2000 rads = 2000 / 10000 = 1 / 5 = 20% !!!
-        if( rng( 100, 10000 ) < you.get_rad() ) {
-            get_event_bus().send<event_type::character_radioactively_mutates>( you.getID() );
+        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) || !one_in( 4 ) ) {
+            if( rng( 100, 10000 ) < you.get_rad() ) {
+                get_event_bus().send<event_type::character_radioactively_mutates>( you.getID() );
+            }
+            if( you.get_rad() > 50 && rng( 1, 3000 ) < you.get_rad() &&
+                ( you.stomach.contains() > 0_ml || radiation_increasing || !you.in_sleep_state() ) ) {
+                you.vomit();
+            }
         }
-        if( you.get_rad() > 50 && rng( 1, 3000 ) < you.get_rad() &&
-            ( you.stomach.contains() > 0_ml || radiation_increasing || !you.in_sleep_state() ) ) {
-            you.vomit();
-            you.mod_rad( -1 );
-        }
+        you.mod_rad( -1 );
     }
 
     const bool radiogenic = you.has_trait( trait_RADIOGENIC );
     if( radiogenic && calendar::once_every( 30_minutes ) && you.get_rad() > 0 ) {
-        // At 200 radioactivity, we heal about 48 hp/day.
-        if( x_in_y( you.get_rad(), 400 ) ) {
-            you.healall( 1 );
-            if( rad_mut == 0 ) {
-                // The RADIOACTIVE mutation is gone, but this bit of code was to prevent
-                // losing radioactivity if you had it.
-                you.mod_rad( -2 );
+        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) || !one_in( 4 ) ) {
+            // At 200 radioactivity, we heal about 48 hp/day.
+            if( x_in_y( you.get_rad(), 400 ) ) {
+                you.healall( 1 );
+                if( rad_mut == 0 ) {
+                    // The RADIOACTIVE mutation is gone, but this bit of code was to prevent
+                    // losing radioactivity if you had it.
+                    you.mod_rad( -2 );
+                }
             }
         }
     }
 
     if( calendar::once_every( 1_days ) ) {
-        int lifestyle_modifier = you.get_rad();
-        if( lifestyle_modifier > 0 ) {
-            if( you.has_trait( trait_RADIOGENIC ) ) {
-                lifestyle_modifier /= 2;
+        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) || !one_in( 4 ) ) {
+            int lifestyle_modifier = you.get_rad();
+            if( lifestyle_modifier > 0 ) {
+                if( you.has_trait( trait_RADIOGENIC ) ) {
+                    lifestyle_modifier /= 2;
+                }
+                you.mod_daily_health( -lifestyle_modifier, -200 );
             }
-            you.mod_daily_health( -lifestyle_modifier, -200 );
         }
+        you.mod_rad( -1 );
     }
 
     if( you.get_rad() > 200 && calendar::once_every( 10_minutes ) && x_in_y( you.get_rad(), 1000 ) ) {
-        you.hurtall( 1, nullptr );
+        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) || !one_in( 4 ) ) {
+            you.hurtall( 1, nullptr, true, false );
+        }
         you.mod_rad( -5 );
     }
 

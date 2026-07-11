@@ -128,6 +128,7 @@ static const trait_id trait_HEAVYSLEEPER2( "HEAVYSLEEPER2" );
 static const trait_id trait_HIBERNATE( "HIBERNATE" );
 static const trait_id trait_INFRESIST( "INFRESIST" );
 static const trait_id trait_M_IMMUNE( "M_IMMUNE" );
+static const trait_id trait_POISRESIST( "POISRESIST" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
 
 static const vitamin_id vitamin_blood( "blood" );
@@ -1692,72 +1693,78 @@ void Character::hardcoded_effects( effect &it )
         switch( intense ) {
             case 3:
                 // Tonic-clonic seizure (full body convulsive seizure)
-                if( one_turn_in( 3_days ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
-                    add_msg_if_player( m_bad, _( "You lose control of your body as it begins to convulse!" ) );
-                    time_duration td = rng( 30_seconds, 4_minutes );
-                    schedule_effect( effect_motor_seizure, td );
-                    if( !is_on_ground() ) {
-                        schedule_effect( effect_downed, td );
-                    }
-                    schedule_effect( effect_stunned, td );
-                    if( one_in( 3 ) ) {
-                        add_msg_if_player( m_bad, _( "You lose consciousness!" ) );
-                        fall_asleep( td );
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 3_days ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
+                        add_msg_if_player( m_bad, _( "You lose control of your body as it begins to convulse!" ) );
+                        time_duration td = rng( 30_seconds, 4_minutes );
+                        schedule_effect( effect_motor_seizure, td );
+                        if( !is_on_ground() ) {
+                            schedule_effect( effect_downed, td );
+                        }
+                        schedule_effect( effect_stunned, td );
+                        if( one_in( 3 ) ) {
+                            add_msg_if_player( m_bad, _( "You lose consciousness!" ) );
+                            fall_asleep( td );
+                        }
                     }
                 }
                 mod *= 2;
             /* fallthrough */
             case 2:
                 // Myoclonic seizure (muscle spasm)
-                if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) &&
-                    !has_effect( effect_took_xanax ) ) {
-                    std::string limb = random_entry<std::vector<std::string>>( {
-                        translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
-                    } );
-                    add_msg_if_player( m_bad, string_format(
-                                           _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
-                    if( limb == "arm" ) {
-                        mod_dex_bonus( -8 );
-                        release_grapple();
-                        recoil = MAX_RECOIL;
-                    } else if( limb == "hand" ) {
-                        release_grapple();
-                        if( is_armed() && can_drop( *get_wielded_item() ).success() ) {
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) &&
+                        !has_effect( effect_took_xanax ) ) {
+                        std::string limb = random_entry<std::vector<std::string>>( {
+                            translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
+                        } );
+                        add_msg_if_player( m_bad, string_format(
+                                            _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
+                        if( limb == "arm" ) {
+                            mod_dex_bonus( -8 );
+                            release_grapple();
+                            recoil = MAX_RECOIL;
+                        } else if( limb == "hand" ) {
+                            release_grapple();
+                            if( is_armed() && can_drop( *get_wielded_item() ).success() ) {
+                                if( dice( 4, 4 ) > get_dex() ) {
+                                    cancel_activity();  //Prevent segfaults from activities trying to access missing item
+                                    put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
+                                } else {
+                                    add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
+                                                    get_wielded_item()->tname() );
+                                }
+                            }
+                        } else if( limb == "leg" && !is_on_ground() ) {
                             if( dice( 4, 4 ) > get_dex() ) {
-                                cancel_activity();  //Prevent segfaults from activities trying to access missing item
-                                put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
+                                schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
                             } else {
-                                add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
-                                                   get_wielded_item()->tname() );
+                                add_msg_if_player( m_neutral, _( "However, you manage to keep your footing." ) );
                             }
                         }
-                    } else if( limb == "leg" && !is_on_ground() ) {
-                        if( dice( 4, 4 ) > get_dex() ) {
-                            schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
-                        } else {
-                            add_msg_if_player( m_neutral, _( "However, you manage to keep your footing." ) );
-                        }
                     }
-                }
-                // Atonic seizure (a.k.a. drop seizure)
-                if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) &&
-                    !has_effect( effect_took_xanax ) ) {
-                    add_msg_if_player( m_bad,
-                                       _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
-                    schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
-                    if( !is_on_ground() ) {
-                        schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
+                    // Atonic seizure (a.k.a. drop seizure)
+                    if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) &&
+                        !has_effect( effect_took_xanax ) ) {
+                        add_msg_if_player( m_bad,
+                                        _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
+                        schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
+                        if( !is_on_ground() ) {
+                            schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
+                        }
                     }
                 }
                 mod *= 2;
             /* fallthrough */
             case 1:
                 // Migraine
-                if( one_turn_in( 2_days / mod ) ) {
-                    add_msg_if_player( m_bad, _( "You have a splitting headache." ) );
-                    mod_pain( 12 );
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 2_days / mod ) ) {
+                        add_msg_if_player( m_bad, _( "You have a splitting headache." ) );
+                        mod_pain( 12 );
+                    }
                 }
-                break;
+            break;
         }
     }
 }
