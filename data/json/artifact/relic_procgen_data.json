@@ -112,10 +112,10 @@
       {
         "weight": 50,
         "min_value": -0.5,
-        "max_value": 1.0,
+        "max_value": 0.5,
         "type": "REGEN_STAMINA",
         "increment": 0.1,
-        "power_per_increment": 100
+        "power_per_increment": 200
       },
       {
         "weight": 25,
@@ -127,7 +127,7 @@
       },
       {
         "weight": 35,
-        "min_value": -0.75,
+        "min_value": -0.25,
         "max_value": 0.5,
         "type": "WEAPON_DISPERSION",
         "increment": 0.05,
@@ -310,15 +310,15 @@
       },
       {
         "weight": 50,
-        "min_value": -0.4,
-        "max_value": 0.2,
+        "min_value": -0.2,
+        "max_value": 0.4,
         "type": "MOVE_COST",
         "increment": 0.1,
         "power_per_increment": -250
       },
       {
         "weight": 100,
-        "min_value": -0.5,
+        "min_value": -0.2,
         "max_value": 0.5,
         "type": "ATTACK_SPEED",
         "increment": 0.1,
@@ -335,10 +335,10 @@
       {
         "weight": 50,
         "min_value": -0.5,
-        "max_value": 1.0,
+        "max_value": 0.5,
         "type": "REGEN_STAMINA",
         "increment": 0.1,
-        "power_per_increment": 100
+        "power_per_increment": 200
       },
       {
         "weight": 25,
@@ -350,7 +350,7 @@
       },
       {
         "weight": 35,
-        "min_value": -0.75,
+        "min_value": -0.25,
         "max_value": 0.5,
         "type": "WEAPON_DISPERSION",
         "increment": 0.05,
@@ -537,15 +537,15 @@
       },
       {
         "weight": 50,
-        "min_value": -0.4,
-        "max_value": 0.2,
+        "min_value": -0.2,
+        "max_value": 0.4,
         "type": "MOVE_COST",
         "increment": 0.1,
         "power_per_increment": -250
       },
       {
         "weight": 100,
-        "min_value": -0.5,
+        "min_value": -0.2,
         "max_value": 0.5,
         "type": "ATTACK_SPEED",
         "increment": 0.1,
@@ -562,10 +562,10 @@
       {
         "weight": 50,
         "min_value": -0.5,
-        "max_value": 1.0,
+        "max_value": 0.5,
         "type": "REGEN_STAMINA",
         "increment": 0.1,
-        "power_per_increment": 100
+        "power_per_increment": 200
       },
       {
         "weight": 25,
@@ -577,7 +577,7 @@
       },
       {
         "weight": 35,
-        "min_value": -0.75,
+        "min_value": -0.25,
         "max_value": 0.5,
         "type": "WEAPON_DISPERSION",
         "increment": 0.05,
