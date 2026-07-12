@@ -5094,19 +5094,22 @@ std::optional<int> iuse::toolmod_attach( Character *p, item *it, const tripoint_
     }
 
     auto filter = [&it]( const item & e ) {
-        // don't allow ups or bionic battery mods on a UPS or UPS-powered/bionic-powered tools
+        // Don't allow ups or bionic battery mods on a UPS or UPS-powered/bionic-powered tools.
         if( ( it->has_flag( flag_USE_UPS ) || it->has_flag( flag_USES_BIONIC_POWER ) ) &&
             ( e.has_flag( flag_IS_UPS ) || e.has_flag( flag_USE_UPS ) ||
               e.has_flag( flag_USES_BIONIC_POWER ) ) ) {
             return false;
         }
-
-        // can't mod non-tool, or a tool with existing mods, or a battery currently installed
+        // FIXME: Make internal batteries compatible with toolmods.
+        if( e.can_link_up() && e.link().charge_rate > 0 ) {
+            return false;
+        }
+        // Can't mod non-tool, or a tool with existing mods, or a battery currently installed.
         if( !e.is_tool() || !e.toolmods().empty() || e.magazine_current() ) {
             return false;
         }
 
-        // can't mod integrated tools
+        // Can't mod integrated tools
         if( e.has_flag( flag_INTEGRATED ) ) {
             return false;
         }

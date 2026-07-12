@@ -3838,6 +3838,16 @@ void fish_activity_actor::do_turn( player_activity &, Character &who )
 
     float fish_chance = 1.0f;
     float survival_skill = who.get_skill_level( skill_survival );
+    // Recover from an invalid item_location, which can occur after NPC unload/reload.
+    if( !fishing_rod ) {
+        const item_location &wielded = who.get_wielded_item();
+        if( wielded && wielded->has_quality( qual_FISHING_ROD ) ) {
+            fishing_rod = wielded;
+        } else {
+            who.cancel_activity();
+            return;
+        }
+    }
     switch( fishing_rod->get_quality( qual_FISHING_ROD ) ) {
         case 1:
             survival_skill += dice( 1, 6 );
@@ -3856,13 +3866,13 @@ void fish_activity_actor::do_turn( player_activity &, Character &who )
     if( fishables.empty() ) {
         fish_chance += survival_skill / 2;
     } else {
-        // if they are visible however, it implies a larger population
+        // If they are visible however, it implies a larger population.
         for( monster *elem : fishables ) {
             fish_chance += elem->fish_population;
         }
         fish_chance += survival_skill;
     }
-    // no matter the population of fish, your skill and tool limits the ease of catching.
+    // No matter the population of fish, your skill and tool limits the ease of catching.
     fish_chance = std::min( survival_skill * 10, fish_chance );
     if( x_in_y( fish_chance, 500000 ) ) {
         who.add_msg_if_player( m_good, _( "You feel a tug on your line!" ) );
@@ -6870,7 +6880,6 @@ time_duration prying_activity_actor::prying_time( const activity_data_common &da
 void prying_activity_actor::start( player_activity &act, Character &who )
 {
     const map &here = get_map();
-
     if( here.has_furn( target ) ) {
         const furn_id &furn_type = here.furn( target );
         if( !furn_type->prying->valid() ) {
@@ -6917,9 +6926,11 @@ void prying_activity_actor::start( player_activity &act, Character &who )
 void prying_activity_actor::do_turn( player_activity &/*act*/, Character &who )
 {
     map &here = get_map();
-
+    if( !tool ) {
+        who.cancel_activity();
+        return;
+    }
     std::string method = "CROWBAR";
-
     if( tool->ammo_sufficient( &who, method ) ) {
         int ammo_consumed = tool->ammo_required();
         std::map<std::string, int>::const_iterator iter = tool->type->ammo_scale.find( method );
