@@ -64,7 +64,7 @@
       {
         "weight": 100,
         "min_value": -0.5,
-        "max_value": 2,
+        "max_value": 1.5,
         "type": "MAX_HP",
         "increment": 0.1,
         "power_per_increment": 100
@@ -72,10 +72,10 @@
       {
         "weight": 100,
         "min_value": -0.5,
-        "max_value": 2,
+        "max_value": 1.5,
         "type": "REGEN_HP",
         "increment": 0.1,
-        "power_per_increment": 50
+        "power_per_increment": 100
       },
       {
         "weight": 100,
