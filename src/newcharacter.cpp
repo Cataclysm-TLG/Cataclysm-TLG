@@ -1350,7 +1350,7 @@ static std::string assemble_stat_details( avatar &u, int sel )
 
                 + colorize( string_format( _( "\nRead times: %d%%" ), read_spd ),
                             ( read_spd == 100 ? COL_STAT_NEUTRAL :
-                                            ( read_spd < 100 ? COL_STAT_BONUS : COL_STAT_PENALTY ) ) )
+                              ( read_spd < 100 ? COL_STAT_BONUS : COL_STAT_PENALTY ) ) )
                 + colorize(
                     string_format( _( "\nFocus modifier: %+g%%" ), effective_focus ),
                     effective_focus == 0.0 ? COL_STAT_NEUTRAL :

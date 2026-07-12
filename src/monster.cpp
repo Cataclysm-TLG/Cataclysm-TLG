@@ -4095,7 +4095,9 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
     }
     // Only trigger this if the monster is not friendly or the source isn't us or the player.
     // Skip if the sound is quiet-ish, or we've already hear a louder sound recently.
-    if( source != pos_bub() && volume > 15 && ( friendly == 0 || source != get_player_character().pos_bub() ) && get_effect_int( effect_sound_triggered ) < volume ) {
+    if( source != pos_bub() && volume > 15 && ( friendly == 0 ||
+            source != get_player_character().pos_bub() ) &&
+        get_effect_int( effect_sound_triggered ) < volume ) {
         add_effect( effect_sound_triggered, ( 1_seconds * rng( 2, 10 ) ), false, std::min( volume, 400 ) );
         int trigger_strength = std::max( 0, volume - 15 );
         process_trigger( mon_trigger::SOUND, trigger_strength );

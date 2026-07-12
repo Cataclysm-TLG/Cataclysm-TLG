@@ -934,7 +934,8 @@ void monster::move()
         !here.has_flag_ter( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) &&
         !here.has_flag( ter_furn_flag::TFLAG_LIQUID, pos_bub() )
         && has_flag( mon_flag_AQUATIC ) && !has_flag( mon_flag_NO_BREATHE ) && one_in( 20 ) ) {
-        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ), name() );
+        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ),
+                                name() );
         die( &here, nullptr );
     }
 

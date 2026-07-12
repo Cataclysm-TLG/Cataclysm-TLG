@@ -1365,7 +1365,8 @@ void suffer::from_radiation( Character &you )
         // 200 rads = 100 / 10000 = 1 / 100
         // 1000 rads = 900 / 10000 = 9 / 100 = 10% !!!
         // 2000 rads = 2000 / 10000 = 1 / 5 = 20% !!!
-        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) || !one_in( 3 ) ) {
+        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) ||
+            !one_in( 3 ) ) {
             if( rng( 100, 10000 ) < you.get_rad() ) {
                 get_event_bus().send<event_type::character_radioactively_mutates>( you.getID() );
             }
@@ -1379,7 +1380,8 @@ void suffer::from_radiation( Character &you )
 
     const bool radiogenic = you.has_trait( trait_RADIOGENIC );
     if( radiogenic && calendar::once_every( 30_minutes ) && you.get_rad() > 0 ) {
-        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) || !one_in( 3 ) ) {
+        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) ||
+            !one_in( 3 ) ) {
             // At 200 radioactivity, we heal about 48 hp/day.
             if( x_in_y( you.get_rad(), 400 ) ) {
                 you.healall( 1 );
@@ -1393,7 +1395,8 @@ void suffer::from_radiation( Character &you )
     }
 
     if( calendar::once_every( 1_days ) ) {
-        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) || !one_in( 3 ) ) {
+        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) ||
+            !one_in( 3 ) ) {
             int lifestyle_modifier = you.get_rad();
             if( lifestyle_modifier > 0 ) {
                 if( you.has_trait( trait_RADIOGENIC ) ) {
@@ -1406,7 +1409,8 @@ void suffer::from_radiation( Character &you )
     }
 
     if( you.get_rad() > 200 && calendar::once_every( 10_minutes ) && x_in_y( you.get_rad(), 1000 ) ) {
-        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) || !one_in( 3 ) ) {
+        if( ( !you.has_trait( trait_CHITIN2 ) && !you.has_trait( trait_CRUSTACEAN_CARAPACE ) ) ||
+            !one_in( 3 ) ) {
             you.hurtall( 1, nullptr, true, false );
         }
         you.mod_rad( -5 );
