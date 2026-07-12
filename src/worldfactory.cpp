@@ -1476,12 +1476,9 @@ int worldfactory::show_worldgen_basic( WORLD *world )
         recalc_startpos = true;
         const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
         const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
-
         w_confirmation = catacurses::newwin( TERMY, iMinScreenWidth, point( iOffsetX, 0 ) );
-
         win_height = getmaxy( w_confirmation );
         content_height = win_height - namebar_pos.y - 10;
-
         ui.position_from_window( w_confirmation );
     };
     init_windows( ui );
