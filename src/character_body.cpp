@@ -494,7 +494,9 @@ std::map<bodypart_id, temp_warning_record> last_temp_warnings;
 
 void Character::update_bodytemp()
 {
-    if( has_trait( trait_DEBUG_NOTEMP ) ) {
+    npc *n = as_npc();
+    if( has_trait( trait_DEBUG_NOTEMP ) ||
+        ( !is_avatar() && n && !n->is_player_ally() ) ) {
         set_all_parts_temp_conv( BODYTEMP_NORM );
         set_all_parts_temp_cur( BODYTEMP_NORM );
         return;
