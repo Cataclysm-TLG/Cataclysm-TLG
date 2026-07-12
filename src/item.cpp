@@ -14163,9 +14163,7 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
         if( has_flag( flag_TOBACCO ) ) {
             // Try not to go over 3mg nicotine if we started at 0.
             if( typeId() == itype_cigar_lit ) {
-                puff_chance = 30;
-            } else {
-                puff_chance = 20;
+                puff_chance = 14;
             }
             if( one_in( puff_chance ) ) {
                 carrier->vitamin_mod( vitamin_nicotine, 1 );
@@ -14200,8 +14198,8 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
             // Lit cigarette can start fires, but they won't always.
             for( const item &i : here.i_at( pos ) ) {
                 if( i.typeId() == typeId() ) {
-                    if( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE, pos ) && one_in( 4 ) ||
-                        here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, pos ) && one_in( 2 ) ) {
+                    if( ( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE, pos ) && one_in( 4 ) ) ||
+                        ( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, pos ) && one_in( 2 ) ) ) {
                         here.add_field( pos, fd_fire, 1 );
                         break;
                     }
