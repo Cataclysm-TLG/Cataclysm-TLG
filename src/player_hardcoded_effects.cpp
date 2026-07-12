@@ -1719,7 +1719,7 @@ void Character::hardcoded_effects( effect &it )
                             translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
                         } );
                         add_msg_if_player( m_bad, string_format(
-                                            _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
+                                               _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
                         if( limb == "arm" ) {
                             mod_dex_bonus( -8 );
                             release_grapple();
@@ -1732,7 +1732,7 @@ void Character::hardcoded_effects( effect &it )
                                     put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
                                 } else {
                                     add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
-                                                    get_wielded_item()->tname() );
+                                                       get_wielded_item()->tname() );
                                 }
                             }
                         } else if( limb == "leg" && !is_on_ground() ) {
@@ -1747,7 +1747,7 @@ void Character::hardcoded_effects( effect &it )
                     if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) &&
                         !has_effect( effect_took_xanax ) ) {
                         add_msg_if_player( m_bad,
-                                        _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
+                                           _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
                         schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
                         if( !is_on_ground() ) {
                             schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
@@ -1764,7 +1764,7 @@ void Character::hardcoded_effects( effect &it )
                         mod_pain( 12 );
                     }
                 }
-            break;
+                break;
         }
     }
 }
