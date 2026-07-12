@@ -14104,33 +14104,38 @@ bool item::process_fake_smoke( map &here, Character * /*carrier*/, const tripoin
 
 bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms &pos )
 {
-    bool is_joint = ( carrier != nullptr && typeId() == itype_joint_lit );
-    // It dies out.
+    // cig dies out
     if( item_counter == 0 ) {
         if( carrier != nullptr ) {
             carrier->add_msg_if_player( m_neutral, _( "You finish your %s." ), type_name() );
         }
-        const bool had_transform = ( type->transform_into.operator bool() );
-        if( had_transform ) {
-            auto transform_item = type->transform_into.value();
-            transform_item.transform( carrier, *this, true );
+        if( type->transform_into ) {
+            type->transform_into.value().transform( carrier, *this, true );
+            if( !this->is_null() ) {
+                here.add_item_or_charges( carrier->pos_bub(), *this );
+                on_drop( carrier->pos_bub(), here );
+                carrier->i_rem( this );
+            }
         } else {
             type->invoke( carrier, *this, pos, "transform" );
+            if( !this->is_null() ) {
+                here.add_item_or_charges( carrier->pos_bub(), *this );
+                on_drop( carrier->pos_bub(), here );
+                carrier->i_rem( this );
+            }
         }
-        if( carrier != nullptr ) {
-            carrier->i_rem( this );
-        }
-        active = false;
-        if( is_joint && carrier != nullptr ) {
+        if( typeId() == itype_joint_lit && carrier != nullptr ) {
             carrier->vitamin_mod( vitamin_cannabis, 2 ); // one last puff
             here.add_field( pos + point( rng( -1, 1 ), rng( -1, 1 ) ), field_type_id( "fd_weedsmoke" ), 2 );
             weed_msg( *carrier );
         }
+        active = false;
         return false;
     }
+
     if( carrier != nullptr ) {
-        // No lit cigs in inventory, only in hands or in mouth, so if we're taking
-        // cig off or unwielding it, extinguish it first.
+        // No lit cigs in inventory, only in hands or in mouth
+        // So if we're taking cig off or unwielding it, extinguish it first
         if( !carrier->is_worn( *this ) && !carrier->is_wielding( *this ) ) {
             if( type->transform_into ) {
                 carrier->add_msg_if_player( m_neutral, _( "You extinguish your %s and put it away." ),
@@ -14143,65 +14148,72 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
             return false;
         }
     }
+
     if( !one_in( 10 ) ) {
         return false;
     }
     process_extinguish( here, carrier, pos );
+    // process_extinguish might have extinguished the item already
     if( !active ) {
         return false;
     }
+    // if carried by someone:
     if( carrier != nullptr ) {
         int puff_chance = 4;
-        bool is_tobacco = has_flag( flag_TOBACCO );
-        if( is_tobacco ) {
+        if( has_flag( flag_TOBACCO ) ) {
+            // Try not to go over 3mg nicotine if we started at 0.
             if( typeId() == itype_cigar_lit ) {
                 puff_chance = 30;
             } else {
                 puff_chance = 20;
             }
-        }
-        if( one_in( puff_chance ) ) {
-            if( is_tobacco ) {
+            if( one_in( puff_chance ) ) {
                 carrier->vitamin_mod( vitamin_nicotine, 1 );
-            } else {
-                carrier->vitamin_mod( vitamin_cannabis, 1 );
+                carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
             }
-            carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
+        } else {
+            // Aim for around 10mg cannabis per joint.
+            if( one_in( puff_chance ) ) {
+                carrier->vitamin_mod( vitamin_cannabis, 1 );
+                carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
+            }
         }
         carrier->mod_moves( -to_moves<int>( 1_seconds ) * 0.15 );
+
         if( ( carrier->has_effect( effect_shakes ) && one_in( 10 ) ) ||
             ( carrier->has_trait( trait_JITTERY ) && one_in( 200 ) ) ) {
             carrier->add_msg_if_player( m_bad, _( "Your shaking hand causes you to drop your %s." ),
                                         type_name() );
             here.add_item_or_charges( pos + point( rng( -1, 1 ), rng( -1, 1 ) ), *this );
-            return true;
+            return true; // Removes the item that has just been added to the map.
         }
 
         if( carrier->has_effect( effect_sleep ) ) {
             carrier->add_msg_if_player( m_bad, _( "You fall asleep and drop your %s." ),
                                         type_name() );
             here.add_item_or_charges( pos + point( rng( -1, 1 ), rng( -1, 1 ) ), *this );
-            return true;
+            return true; // Removes the item that has just been added to the map.
         }
     } else {
         // If not carried by someone, but laying on the ground:
         if( item_counter % 5 == 0 ) {
-            // Lit cigarette can start fires.
+            // Lit cigarette can start fires, but they won't always.
             for( const item &i : here.i_at( pos ) ) {
                 if( i.typeId() == typeId() ) {
-                    if( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE, pos ) ||
-                        here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, pos ) ) {
+                    if( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE, pos ) && one_in( 4 ) ||
+                        here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, pos ) && one_in( 2 ) ) {
                         here.add_field( pos, fd_fire, 1 );
                         break;
                     }
-                } else if( i.flammable( 0 ) ) {
+                } else if( i.flammable( 0 ) && one_in( 3 ) ) {
                     here.add_field( pos, fd_fire, 1 );
                     break;
                 }
             }
         }
     }
-    // Item remains.
+
+    // Item remains
     return false;
 }
 
