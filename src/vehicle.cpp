@@ -342,8 +342,6 @@ void vehicle::init_state( map &placed_on, int init_veh_fuel, int init_veh_status
     bool destroyTank = false;
     bool destroyEngine = false;
     bool destroyTires = false;
-    bool blood_covered = false;
-    bool blood_inside = false;
     bool has_no_key = false;
     bool destroyAlarm = false;
 
@@ -465,14 +463,6 @@ void vehicle::init_state( map &placed_on, int init_veh_fuel, int init_veh_status
             }
         }
 
-        if( one_in( 10 ) ) {
-            blood_covered = true;
-        }
-
-        if( one_in( 8 ) ) {
-            blood_inside = true;
-        }
-
         for( const vpart_reference &vp : get_parts_including_carried( "FRIDGE" ) ) {
             vp.part().enabled = true;
         }
@@ -486,7 +476,6 @@ void vehicle::init_state( map &placed_on, int init_veh_fuel, int init_veh_status
         }
     }
 
-    std::optional<point_rel_ms> blood_inside_pos;
     for( const vpart_reference &vp : get_all_parts() ) {
         const size_t p = vp.part_index();
         vehicle_part &pt = vp.part();
@@ -560,35 +549,6 @@ void vehicle::init_state( map &placed_on, int init_veh_fuel, int init_veh_status
             //Solar panels have 25% of being destroyed
             if( vp.has_feature( "SOLAR_PANEL" ) && one_in( 4 ) && init_veh_status != 2 ) {
                 set_hp( pt, 0, false );
-            }
-
-            /* Bloodsplatter the front-end parts. Assume anything with x > 0 is
-            * the "front" of the vehicle (since the driver's seat is at (0, 0).
-            * We'll be generous with the blood, since some may disappear before
-            * the player gets a chance to see the vehicle. */
-            if( blood_covered && vp.mount_pos().x() > 0 ) {
-                if( one_in( 3 ) ) {
-                    //Loads of blood. (200 = completely red vehicle part)
-                    pt.blood = rng( 200, 600 );
-                } else {
-                    //Some blood
-                    pt.blood = rng( 50, 200 );
-                }
-            }
-
-            if( blood_inside ) {
-                // blood is splattered around (blood_inside_pos),
-                // coordinates relative to mount point; the center is always a seat
-                if( blood_inside_pos ) {
-                    const int distSq = std::pow( blood_inside_pos->x() - vp.mount_pos().x(), 2 ) +
-                                       std::pow( blood_inside_pos->y() - vp.mount_pos().y(), 2 );
-                    if( distSq <= 1 ) {
-                        pt.blood = rng( 200, 400 ) - distSq * 100;
-                    }
-                } else if( vp.has_feature( "SEAT" ) ) {
-                    // Set the center of the bloody mess inside
-                    blood_inside_pos.emplace( vp.mount_pos() );
-                }
             }
         }
         //sets the vehicle to locked, if there is no key and an alarm part exists
@@ -4447,25 +4407,6 @@ int vehicle::safe_velocity( map &here, const bool fueled ) const
     }
 }
 
-bool vehicle::do_environmental_effects( map &here ) const
-{
-    bool needed = false;
-    // check for smoking parts
-    for( const vpart_reference &vp : get_all_parts() ) {
-        /* Only lower blood level if:
-         * - The part is outside.
-         * - The weather is any effect that would cause the player to be wet. */
-        if( vp.part().blood > 0 && here.is_outside( vp.pos_bub( here ) ) ) {
-            needed = true;
-            if( get_weather().weather_id->rains &&
-                get_weather().weather_id->precip != precip_class::very_light ) {
-                vp.part().blood--;
-            }
-        }
-    }
-    return needed;
-}
-
 void vehicle::spew_field( map &here, double joules, int part, field_type_id type,
                           int intensity ) const
 {
@@ -6651,10 +6592,6 @@ void vehicle::gain_moves( map &here )
         get_connected_vehicles( here, vehs );
     }
 
-    if( check_environmental_effects ) {
-        check_environmental_effects = do_environmental_effects( here );
-    }
-
     // turrets which are enabled will try to reload and then automatically fire
     // Turrets which are disabled but have targets set are a special case
     for( vehicle_part *e : turrets() ) {
@@ -6945,7 +6882,6 @@ void vehicle::refresh()
 
     // NB: using the _old_ pivot point, don't recalc here, we only do that when moving!
     precalc_mounts( 0, pivot_rotation[0], pivot_anchor[0] );
-    check_environmental_effects = true;
     insides_dirty = true;
     zones_dirty = true;
     coeff_air_dirty = true;
@@ -8396,8 +8332,6 @@ void vehicle::update_time( map &here, const time_point &update_to )
     time_duration elapsed = update_to - last_update;
     last_update = update_to;
 
-    // Weather stuff, only for z-levels >= 0
-    // TODO: Have it wash cars from blood?
     if( funnels.empty() && solar_panels.empty() && wind_turbines.empty() && water_wheels.empty() ) {
         return;
     }

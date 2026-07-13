@@ -13040,7 +13040,6 @@ bool item::allow_crafting_component() const
         return true;
     }
 
-    // fixes #18886 - turret installation may require items with irremovable mods
     if( is_gun() ) {
         bool valid = true;
         visit_items( [&]( const item * it, item * ) {

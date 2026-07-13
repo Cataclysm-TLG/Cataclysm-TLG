@@ -4118,10 +4118,6 @@ bool map::terrain_moppable( const tripoint_bub_ms &p )
         vehicle *const veh = &ovp->vehicle();
         for( const int elem : veh->parts_at_relative( ovp->mount_pos(), true ) ) {
             const vehicle_part &vp = veh->part( elem );
-            if( vp.blood > 0 ) {
-                return true;
-            }
-
             const vehicle_stack items = veh->get_items( vp );
             auto found = std::find_if( items.begin(), items.end(), []( const item & it ) {
                 return it.made_of( phase_id::LIQUID );
@@ -4163,11 +4159,7 @@ bool map::mop_spills( const tripoint_bub_ms &p )
         vehicle *const veh = &ovp->vehicle();
         for( const int elem : veh->parts_at_relative( ovp->mount_pos(), true ) ) {
             vehicle_part &vp = veh->part( elem );
-            if( vp.blood > 0 ) {
-                vp.blood = 0;
-                retval = true;
-            }
-            //remove any liquids that somehow didn't fall through to the ground
+            // Remove any liquids that somehow didn't fall through to the ground.
             vehicle_stack here = veh->get_items( vp );
             auto new_end = std::remove_if( here.begin(), here.end(), []( const item & it ) {
                 return it.made_of( phase_id::LIQUID );
@@ -7693,17 +7685,6 @@ void map::add_splatter( const field_type_id &type, const tripoint_bub_ms &where,
 {
     if( intensity <= 0 ) {
         return;
-    }
-    if( type.obj().is_splattering ) {
-        if( const optional_vpart_position vp = veh_at( where ) ) {
-            vehicle *const veh = &vp->vehicle();
-            // Might be -1 if all the vehicle's parts at where are marked for removal
-            const int part = veh->part_displayed_at( vp->mount_pos(), true );
-            if( part != -1 ) {
-                veh->part( part ).blood += 200 * std::min( intensity, 3 ) / 3;
-                return;
-            }
-        }
     }
     mod_field_intensity( where, type, intensity );
 }

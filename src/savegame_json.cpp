@@ -3599,7 +3599,6 @@ void vehicle_part::deserialize( const JsonObject &data )
     int direction_int;
     data.read( "direction", direction_int );
     direction = units::from_degrees( direction_int );
-    data.read( "blood", blood );
     data.read( "enabled", enabled );
     data.read( "flags", flags );
     data.read( "passenger_id", passenger_id );
@@ -3655,7 +3654,6 @@ void vehicle_part::serialize( JsonOut &json ) const
     json.member( "mount_dy", mount.y() );
     json.member( "open", open );
     json.member( "direction", std::lround( to_degrees( direction ) ) );
-    json.member( "blood", blood );
     json.member( "enabled", enabled );
     json.member( "flags", flags );
     if( !carried_stack.empty() ) {

@@ -508,9 +508,6 @@ struct vehicle_part {
         npc &get_targeting_npc( vehicle &veh );
         /*@}*/
 
-        /** how much blood covers part (in turns). */
-        int blood = 0;
-
         /**
          * if tile provides cover.
          * WARNING: do not read it directly, use vpart_position::is_inside() instead
@@ -846,9 +843,6 @@ class vehicle
 
         // convert watts over time to battery energy (kJ)
         int power_to_energy_bat( units::power power, const time_duration &d ) const;
-
-        // Do stuff like clean up blood and produce smoke from broken parts. Returns false if nothing needs doing.
-        bool do_environmental_effects( map &here ) const;
 
         // Vehicle fuel indicator (by fuel)
         // TODO: Figure out what coordinate system "point" is in and type it.
@@ -2494,8 +2488,6 @@ class vehicle
         bool precollision_on = true;
         // skidding mode
         bool skidding = false;
-        // has bloody or smoking parts
-        bool check_environmental_effects = false; // NOLINT(cata-serialize)
         // "inside" flags are outdated and need refreshing
         bool insides_dirty = true; // NOLINT(cata-serialize)
         // Is the vehicle hanging in the air and expected to fall down in the next turn?
