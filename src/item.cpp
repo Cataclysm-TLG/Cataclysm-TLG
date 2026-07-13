@@ -777,7 +777,7 @@ item &item::ammo_set( const itype_id &ammo, int qty )
         return *this;
     }
 
-    // check ammo is valid for the item
+    // Check whether ammo is valid for the item.
     std::set<itype_id> mags = magazine_compatible();
     if( ammo_types().count( ammo_type ) == 0 && !( magazine_current() &&
             magazine_current()->ammo_types().count( ammo_type ) ) &&
@@ -3013,12 +3013,12 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
                 insert_separation_line( info );
                 if( default_bore_type_id != itype_id::NULL_ID() ) {
                     info.emplace_back( "GUN",
-                                       _( "Weapon is <bad>not attached a bore mod</bad>, so stats below assume the default bore mod: " ),
+                                       _( "Weapon <bad>has no receiver</bad>, so stats below assume the default: " ),
                                        string_format( "<stat>%s</stat>",
                                                       default_bore_type_id->nname( 1 ) ) );
                 } else {
                     info.emplace_back( "GUN",
-                                       _( "Weapon is <bad>not attached a bore mod</bad>. " ) );
+                                       _( "Weapon <bad>has no receiver and cannot be fired</bad>. " ) );
                     return;
                 }
 
@@ -13039,14 +13039,20 @@ bool item::allow_crafting_component() const
     if( is_magazine() && ammo_types().count( ammo_battery ) ) {
         return true;
     }
-
     if( is_gun() ) {
+        // Ensure that this is a gun that can actually be fired.
+        if( ammo_types().size() == 1 &&
+            *ammo_types().begin() == ammotype::NULL_ID() ) {
+            return false;
+        }
         bool valid = true;
-        visit_items( [&]( const item * it, item * ) {
+        visit_items( [&]( const item *it, item * ) {
             if( this == it ) {
                 return VisitResponse::NEXT;
             }
-            if( !( it->is_magazine() || ( it->is_gunmod() && it->is_irremovable() ) ) ) {
+            // Disallow all gun mods except "bore" (receivers) and integrated (irremovable) parts.
+            if( !( it->is_magazine() || ( it->is_gunmod() && ( it->is_irremovable() ||
+                    it->type->gunmod->location.name() == "bore" ) ) ) ) {
                 valid = false;
                 return VisitResponse::ABORT;
             }

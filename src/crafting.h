@@ -29,9 +29,9 @@ struct enum_traits<craft_flags> {
 
 // removes any (removable) ammo from the item and stores it in the
 // players inventory.
-void remove_ammo( item &dis_item, Character &p );
+void remove_ammo( item &dis_item, Character &p, bool receiver );
 // same as above but for each item in the list
-void remove_ammo( std::list<item> &dis_items, Character &p );
+void remove_ammo( std::list<item> &dis_items, Character &p, bool receiver );
 
 void drop_or_handle( const item &newit, Character &p );
 

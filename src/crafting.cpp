@@ -4353,10 +4353,10 @@ void Character::complete_disassemble( item_location &target, const recipe &dis )
     }
 }
 
-void remove_ammo( std::list<item> &dis_items, Character &p )
+void remove_ammo( std::list<item> &dis_items, Character &p, bool receiver = true )
 {
     for( item &dis_item : dis_items ) {
-        remove_ammo( dis_item, p );
+        remove_ammo( dis_item, p, receiver );
     }
 }
 
@@ -4374,11 +4374,13 @@ void drop_or_handle( const item &newit, Character &p )
     }
 }
 
-void remove_ammo( item &dis_item, Character &p )
+void remove_ammo( item &dis_item, Character &p, bool receiver = true )
 {
-    dis_item.remove_items_with( [&p]( const item & it ) {
-        if( it.is_irremovable() || !( it.is_gunmod() || it.is_toolmod() || ( it.is_magazine() &&
-                                      !it.is_tool() ) ) ) {
+    dis_item.remove_items_with( [&p, receiver]( const item &it ) {
+        if( it.is_irremovable() ||
+            ( !receiver && it.is_gunmod() && it.type->gunmod->location.name() == "bore" ) ||
+            !( it.is_gunmod() || it.is_toolmod() ||
+               ( it.is_magazine() && !it.is_tool() ) ) ) {
             return false;
         }
         drop_or_handle( it, p );
