@@ -2766,5 +2766,10 @@
     "id": "WASH_HARD",
     "type": "json_flag",
     "info": "This item makes it easier to wash rigid items using soap and water."
+  },
+  {
+    "id": "CHEW",
+    "type": "json_flag",
+    "//": "This item is gum or chewing tobacco or something else that you consume by chewing it, but it isn't food."
   }
 ]
