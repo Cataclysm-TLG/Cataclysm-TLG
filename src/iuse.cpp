@@ -1073,13 +1073,6 @@ std::optional<int> iuse::plantblech( Character *p, item *it, const tripoint_bub_
     }
 }
 
-std::optional<int> iuse::chew( Character *p, item *it, const tripoint_bub_ms & )
-{
-    // TODO: Add more effects?
-    p->add_msg_if_player( _( "You chew your %s." ), it->tname() );
-    return 1;
-}
-
 // Helper to handle the logic of removing some random mutations.
 static void do_purify( Character &p )
 {

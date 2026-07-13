@@ -28,8 +28,7 @@
     "symbol": "*",
     "color": "pink",
     "fun": 2,
-    "flags": [ "NO_INGEST", "NO_TEMP" ],
-    "use_action": [ "CHEW" ]
+    "flags": [ "NO_INGEST", "NO_TEMP", "CHEW" ]
   },
   {
     "type": "ITEM",

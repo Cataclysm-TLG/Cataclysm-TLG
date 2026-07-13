@@ -66,6 +66,7 @@ const flag_id flag_CASING( "CASING" );
 const flag_id flag_CATTLE( "CATTLE" );
 const flag_id flag_CHALLENGE( "CHALLENGE" );
 const flag_id flag_CHARGEDIM( "CHARGEDIM" );
+const flag_id flag_CHEW( "CHEW" );
 const flag_id flag_CHOKE( "CHOKE" );
 const flag_id flag_CITY_START( "CITY_START" );
 const flag_id flag_COLD( "COLD" );

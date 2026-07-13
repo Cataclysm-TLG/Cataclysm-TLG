@@ -296,9 +296,8 @@
     "symbol": "*",
     "color": "white",
     "fun": 1,
-    "flags": [ "NO_INGEST" ],
-    "vitamins": [ [ "caffeine", 90 ] ],
-    "use_action": [ "CHEW" ]
+    "flags": [ "NO_INGEST", "CHEW", "NO_TEMP" ],
+    "vitamins": [ [ "caffeine", 90 ] ]
   },
   {
     "id": "caffeine",
@@ -1378,8 +1377,7 @@
     "addiction_type": "nicotine",
     "addiction_potential": 25,
     "vitamins": [ [ "nicotine_slow", 3 ] ],
-    "flags": [ "NO_INGEST" ],
-    "use_action": [ "CHEW" ]
+    "flags": [ "NO_INGEST", "CHEW", "NO_TEMP" ]
   },
   {
     "id": "nicotine_patch",
