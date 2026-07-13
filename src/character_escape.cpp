@@ -41,6 +41,7 @@ static const efftype_id effect_heavysnare( "heavysnare" );
 static const efftype_id effect_in_pit( "in_pit" );
 static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_lightsnare( "lightsnare" );
+static const efftype_id effect_onfire( "onfire" );
 static const efftype_id effect_webbed( "webbed" );
 
 static const flag_id json_flag_GRAB( "GRAB" );
@@ -64,13 +65,39 @@ static const ter_str_id ter_t_pit( "t_pit" );
 static const ter_str_id ter_t_pit_glass( "t_pit_glass" );
 static const ter_str_id ter_t_pit_spiked( "t_pit_spiked" );
 
+static const trait_id trait_BENDY1( "BENDY1" );
+static const trait_id trait_BENDY2( "BENDY2" );
+static const trait_id trait_BENDY3( "BENDY3" );
 static const trait_id trait_SLIMY( "SLIMY" );
 static const trait_id trait_VISCOUS( "VISCOUS" );
 
-bool Character::can_escape_trap( int difficulty, bool manip = false ) const
+bool Character::can_escape_trap( int difficulty, bool manip = false, bool ligature = false ) const
 {
     int chance = get_arm_str();
     chance *= manip ? get_limb_score( limb_score_manip ) : get_limb_score( limb_score_grip );
+    if( ligature ) {
+        bool slimy = has_trait( trait_SLIMY );
+        bool viscous = has_trait( trait_VISCOUS );
+        // TODO: Map worn.clothing_wetness_mult( eff.get_bp() ) for each bp and their relative sizes and use that instead of bodypart_exposure()
+        if( slimy || viscous ) {
+            float exposure = 0.0f;
+            const std::map<bodypart_id, float> bp_exposure = bodypart_exposure();
+            for( const auto &bp_exp : bp_exposure ) {
+                exposure += bp_exp.second;
+            }
+            if( !bp_exposure.empty() ) {
+                exposure /= bp_exposure.size();
+            }
+            chance += static_cast<int>( std::round( exposure * ( slimy ? 2.f : 3.f ) ) );
+        }
+        if( has_trait( trait_BENDY1 ) ) {
+            chance += 2;
+        } else if( has_trait( trait_BENDY2 ) ) {
+            chance += 6;
+        } else if( has_trait( trait_BENDY3 ) ) {
+            chance += 12; 
+        }
+    }
     return x_in_y( chance, difficulty );
 }
 
@@ -118,7 +145,7 @@ void Character::try_remove_bear_trap()
             }
         }
     } else {
-        if( can_escape_trap( 100 ) ) {
+        if( can_escape_trap( 100, true ) ) {
             remove_effect( effect_beartrap );
             add_msg_player_or_npc( m_good, _( "You free yourself from the bear trap!" ),
                                    _( "<npcname> frees themselves from the bear trap!" ) );
@@ -143,7 +170,7 @@ void Character::try_remove_lightsnare()
             here.spawn_item( pos_bub(), "light_snare_kit" );
         }
     } else {
-        if( can_escape_trap( 12 ) ) {
+        if( can_escape_trap( 12, true, true ) ) {
             map &here = get_map();
             remove_effect( effect_lightsnare );
             add_msg_player_or_npc( m_good, _( "You free yourself from the light snare!" ),
@@ -171,7 +198,7 @@ void Character::try_remove_heavysnare()
             }
         }
     } else {
-        if( can_escape_trap( 32 - dex_cur, true ) ) {
+        if( can_escape_trap( 32 - dex_cur, true, true ) ) {
             remove_effect( effect_heavysnare );
             add_msg_player_or_npc( m_good, _( "You free yourself from the heavy snare!" ),
                                    _( "<npcname> frees themselves from the heavy snare!" ) );
@@ -397,82 +424,72 @@ bool Character::try_remove_grab( bool attacking )
     return true;
 }
 
-void Character::try_remove_webs()
+bool Character::try_remove_impeding_effect()
 {
-    if( is_mounted() ) {
-        auto *mon = mounted_creature.get();
-        if( x_in_y( mon->type->melee_dice * mon->type->melee_sides,
-                    6 * get_effect_int( effect_webbed ) ) ) {
-            add_msg( _( "The %s breaks free of the webs!" ), mon->get_name() );
-            mon->remove_effect( effect_webbed );
-            remove_effect( effect_webbed );
-        }
-    } else if( can_escape_trap( 6 * get_effect_int( effect_webbed ) ) ) {
-        add_msg_player_or_npc( m_good, _( "You free yourself from the webs!" ),
-                               _( "<npcname> frees themselves from the webs!" ) );
-        remove_effect( effect_webbed );
-    } else {
-        add_msg_if_player( _( "You try to free yourself from the webs, but can't get loose!" ) );
-    }
-}
-
-void Character::try_remove_impeding_effect()
-{
+    bool removed_any = false;
+    bool removed_all = true;
+    int extra_difficulty = 0;
     for( const effect &eff : get_effects_with_flag( flag_EFFECT_IMPEDING ) ) {
         const efftype_id &eff_id = eff.get_id();
+        const int difficulty = 6 * get_effect_int( eff_id ) + extra_difficulty;
+        bool removed = false;
         if( is_mounted() ) {
             auto *mon = mounted_creature.get();
+            add_msg( _( "The %s struggles against its bonds!" ), mon->get_name() );
             if( x_in_y( mon->type->melee_dice * mon->type->melee_sides,
-                        6 * get_effect_int( eff_id ) ) ) {
-                add_msg( _( "The %s breaks free!" ), mon->get_name() );
+                        difficulty ) ) {
                 mon->remove_effect( eff_id );
                 remove_effect( eff_id );
+                removed = true;
             }
-            /** @EFFECT_STR increases chance to escape webs */
-        } else if( can_escape_trap( 6 * get_effect_int( eff_id ) ) ) {
-            add_msg_player_or_npc( m_good, _( "You free yourself!" ),
-                                   _( "<npcname> frees themselves!" ) );
+        } else if( can_escape_trap( difficulty, true, true ) ) {
+            removed = true;
             remove_effect( eff_id );
+        }
+        if( removed ) {
+            removed_any = true;
+            extra_difficulty += 6 * get_effect_int( eff_id );
         } else {
-            add_msg_if_player( _( "You try to free yourself, but can't!" ) );
+            removed_all = false;
         }
     }
+    if( removed_all ) {
+        add_msg_player_or_npc( m_good, _( "You free yourself!" ),
+                               _( "<npcname> frees themselves!" ) );
+    } else if( removed_any ) {
+        add_msg_if_player( _( "You only manage to partially break free." ) );
+    } else {
+        add_msg_if_player( _( "You try to free yourself, but can't!" ) );
+    }
+    return removed_all;
 }
 
 bool Character::move_effects( bool attacking, tripoint_bub_ms dest_loc )
 {
-    if( has_effect( effect_downed ) && !attacking ) {
-        try_remove_downed();
-        return false;
+    if( has_effect_with_flag( flag_EFFECT_IMPEDING ) && !attacking ) {
+        return try_remove_impeding_effect();
     }
-    if( has_effect( effect_webbed ) ) {
-        try_remove_webs();
+    if( has_effect( effect_beartrap ) && !attacking ) {
+        try_remove_bear_trap();
         return false;
     }
     if( has_effect( effect_lightsnare ) && !attacking ) {
         try_remove_lightsnare();
         return false;
-
     }
     if( has_effect( effect_heavysnare ) && !attacking ) {
         try_remove_heavysnare();
-        return false;
-    }
-    if( has_effect( effect_beartrap ) && !attacking ) {
-        try_remove_bear_trap();
         return false;
     }
     if( has_effect( effect_crushed ) ) {
         try_remove_crushed();
         return false;
     }
-    if( has_effect_with_flag( flag_EFFECT_IMPEDING ) ) {
-        try_remove_impeding_effect();
+    if( has_effect( effect_downed ) && !attacking ) {
+        try_remove_downed();
         return false;
     }
-
     // Below this point are things that allow for movement if they succeed
-
     // Currently we only have one thing that forces movement if you succeed, should we get more
     // than this will need to be reworked to only have success effects if /all/ checks succeed
     if( has_effect( effect_in_pit ) ) {
@@ -501,13 +518,58 @@ bool Character::move_effects( bool attacking, tripoint_bub_ms dest_loc )
     if( has_flag( json_flag_GRAB ) ) {
         return try_remove_grab( attacking );
     }
+    // I'm not even sure how we accomplished this but we successfully moved without moving or attacking?
+    if( !attacking && pos_bub() == dest_loc ) {
+        martial_arts_data->ma_onpause_effects( *this );
+    }
     return true;
 }
 
 void Character::wait_effects( bool attacking )
 {
-    if( has_effect( effect_downed ) ) {
-        try_remove_downed();
+    map &here = get_map();
+    if( has_effect( effect_onfire ) ) {
+        time_duration total_removed = 0_turns;
+        time_duration total_left = 0_turns;
+        bool on_ground = is_prone();
+        for( const bodypart_id &bp : get_all_body_parts() ) {
+            effect &eff = get_effect( effect_onfire, bp );
+            if( eff.is_null() ) {
+                continue;
+            }
+            // TODO: Tools and skills.
+            total_left += eff.get_duration();
+            // Being on the ground will smother the fire much faster because you can roll.
+            const time_duration dur_removed = on_ground ? 4_turns : 1_turns;
+            eff.mod_duration( -dur_removed );
+            total_removed += dur_removed;
+        }
+
+        // Don't drop on the ground when the ground is on fire.
+        if( total_left > 30_turns && !is_dangerous_fields( here.field_at( pos_bub() ) ) ) {
+            add_effect( effect_downed, 2_turns, false, 0, true );
+            add_msg_player_or_npc( m_warning,
+                                _( "You drop and roll on the ground, trying to smother the fire!" ),
+                                _( "<npcname> drops and rolls on the ground!" ) );
+        } else if( total_removed > 0_turns ) {
+            if( on_ground ) {
+                add_msg_player_or_npc( m_warning,
+                                    _( "You roll on the ground, trying to smother the fire!" ),
+                                    _( "<npcname> rolls on the ground!" )
+                                    );
+            } else {
+                add_msg_player_or_npc( m_warning,
+                                    _( "You attempt to put out the fire on you!" ),
+                                    _( "<npcname> attempts to put out the fire on them!" ) );
+            }
+        }
+    }
+    // This deals with webs, it could probably be expanded to handle snares at least.
+    if( has_effect_with_flag( flag_EFFECT_IMPEDING ) ) {
+        try_remove_impeding_effect();
+        return;
+    }
+    if( has_flag( json_flag_GRAB ) && !attacking && !try_remove_grab( false ) ) {
         return;
     }
     if( has_effect( effect_beartrap ) ) {
@@ -522,16 +584,11 @@ void Character::wait_effects( bool attacking )
         try_remove_heavysnare();
         return;
     }
-    if( has_effect( effect_webbed ) ) {
-        try_remove_webs();
+    if( has_effect( effect_downed ) ) {
+        try_remove_downed();
         return;
     }
-    if( has_effect_with_flag( flag_EFFECT_IMPEDING ) ) {
-        try_remove_impeding_effect();
-        return;
-    }
-    if( has_flag( json_flag_GRAB ) && !attacking && !try_remove_grab( false ) ) {
-        return;
-    }
+    // On-pause effects for martial arts.
+    martial_arts_data->ma_onpause_effects( *this );
 }
 

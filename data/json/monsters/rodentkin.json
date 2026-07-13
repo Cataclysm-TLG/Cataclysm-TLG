@@ -6,7 +6,7 @@
     "description": "This cat-sized rat snuffles along the ground looking for things to eat.  It hisses at anything that comes near it, baring sizable teeth.",
     "default_faction": "ratkin",
     "bodytype": "pig",
-    "species": [ "MUTANT" ],
+    "species": [ "MUTANT", "MAMMAL" ],
     "volume": "4 L",
     "weight": "4 kg",
     "hp": 25,

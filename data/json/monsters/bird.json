@@ -437,7 +437,8 @@
       "SMALL_HIDER",
       "HIT_AND_RUN",
       "CORNERED_FIGHTER",
-      "SWARMS"
+      "SWARMS",
+      "ANIMAL"
     ]
   },
   {
@@ -477,7 +478,7 @@
       [ "EAT_CARRION", 40 ],
       [ "EAT_FOOD", 120 ]
     ],
-    "flags": [ "SEES", "HEARS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER" ]
+    "flags": [ "SEES", "HEARS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER", "ANIMAL" ]
   },
   {
     "id": "mon_pigeon",

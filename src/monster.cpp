@@ -178,8 +178,9 @@ static const material_id material_vegetable( "vegetable" );
 static const mfaction_str_id monfaction_acid_ant( "acid_ant" );
 static const mfaction_str_id monfaction_ant( "ant" );
 static const mfaction_str_id monfaction_bee( "bee" );
-static const mfaction_str_id monfaction_nether_player_hate( "nether_player_hate" );
 static const mfaction_str_id monfaction_fire_ant( "fire_ant" );
+static const mfaction_str_id monfaction_nether_player_hate( "nether_player_hate" );
+static const mfaction_str_id monfaction_roach( "roach" );
 static const mfaction_str_id monfaction_wasp( "wasp" );
 
 static const species_id species_AMPHIBIAN( "AMPHIBIAN" );
@@ -189,6 +190,7 @@ static const species_id species_FISH( "FISH" );
 static const species_id species_SLIME( "SLIME" );
 static const species_id species_FUNGUS( "FUNGUS" );
 static const species_id species_HORROR( "HORROR" );
+static const species_id species_HUMAN( "HUMAN" );
 static const species_id species_INSECT( "INSECT" );
 static const species_id species_INSECT_FLYING( "INSECT_FLYING" );
 static const species_id species_MAMMAL( "MAMMAL" );
@@ -202,6 +204,8 @@ static const species_id species_ROBOT_FLYING( "ROBOT_FLYING" );
 static const species_id species_SPIDER( "SPIDER" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
 static const species_id species_nether_player_hate( "nether_player_hate" );
+
+static const skill_id skill_survival( "survival" );
 
 static const ter_str_id ter_t_gas_pump( "t_gas_pump" );
 static const ter_str_id ter_t_gas_pump_a( "t_gas_pump_a" );
@@ -1520,7 +1524,7 @@ Creature *monster::attack_target()
 
     Creature *target = get_creature_tracker().creature_at( get_dest() );
     if( target == nullptr || target == this ||
-        attitude_to( *target ) == Attitude::FRIENDLY || !sees( here,  *target ) ||
+        attitude_to( *target ) == Attitude::FRIENDLY || !sees( here, *target ) ||
         target->is_hallucination() ) {
         return nullptr;
     }
@@ -1634,6 +1638,7 @@ monster_attitude monster::attitude( const Character *u ) const
 
     if( u != nullptr ) {
         if( faction == monfaction_bee ) {
+            // TODO: Use this for the planned insect eusocial super-specializations.
             if( u->has_trait( trait_BEE ) ) {
                 return MATT_FRIEND;
             } else if( u->has_trait( trait_FLOWERS ) ) {
@@ -1660,40 +1665,57 @@ monster_attitude monster::attitude( const Character *u ) const
             effective_anger -= 20;
         }
 
-        if( ( faction == monfaction_acid_ant || faction == monfaction_ant || faction == monfaction_bee ||
-              faction == monfaction_fire_ant ||
-              faction == monfaction_wasp ) && effective_anger >= 10 && u->has_trait( trait_PHEROMONE_INSECT ) ) {
+        if( effective_anger >= 10 && u->has_trait( trait_PHEROMONE_INSECT ) && ( faction == monfaction_acid_ant || faction == monfaction_ant || faction == monfaction_bee ||
+              faction == monfaction_fire_ant || faction == monfaction_wasp || faction == monfaction_roach ) ) {
             effective_anger -= 20;
         }
 
+        bool fishable = has_flag( mon_flag_FISHABLE );
+        bool animal = has_flag( mon_flag_ANIMAL );
         if( u->has_trait( trait_TERRIFYING ) ) {
-            effective_morale -= 10;
+            if( animal || ( in_species( species_HUMAN 
+            ) && !in_species( species_ZOMBIE ) ) || has_flag( mon_flag_HAS_MIND ) ) {
+                effective_morale -= 10;
+            }
         }
-
-        if( has_flag( mon_flag_ANIMAL ) ) {
+        if( animal || fishable ) {
+            double anger_mod = u->get_skill_level( skill_survival );
+            if( fishable && !animal ) {
+                anger_mod *= 0.5;
+            }
             if( u->has_trait( trait_ANIMALEMPATH ) ) {
-                effective_anger -= 10;
+                anger_mod = std::max( 3.0, anger_mod * 2.0 );
                 if( effective_anger < 10 ) {
-                    effective_morale += 55;
+                    effective_morale += static_cast<int>( std::round( anger_mod * 2.0 ) );
+                } else {
+                    effective_anger -= static_cast<int>( anger_mod );
                 }
             } else if( u->has_trait( trait_ANIMALEMPATH2 ) ) {
-                effective_anger -= 20;
-                if( effective_anger < 20 ) {
-                    effective_morale += 80;
+                anger_mod = std::max( 4.0, anger_mod * 2.5 );
+                if( effective_anger < 10 ) {
+                    effective_morale += static_cast<int>( std::round( anger_mod * 2.5 ) );
+                } else {
+                    effective_anger -= static_cast<int>( anger_mod );
                 }
             } else if( u->has_trait( trait_ANIMALDISCORD ) ) {
                 if( effective_anger >= 10 ) {
-                    effective_anger += 10;
+                    effective_anger += 15 - static_cast<int>( anger_mod );
                 }
                 if( effective_anger < 10 ) {
-                    effective_morale -= 5;
+                    effective_morale -= 13 - static_cast<int>( anger_mod );
                 }
-            } else if( u->has_trait( trait_ANIMALDISCORD2 ) ) {
-                if( effective_anger >= 20 ) {
-                    effective_anger += 20;
+            }  else if( u->has_trait( trait_ANIMALDISCORD2 ) ) {
+                if( effective_anger >= 10 ) {
+                    effective_anger += 25 - static_cast<int>( anger_mod );
                 }
-                if( effective_anger < 20 ) {
-                    effective_morale -= 5;
+                if( effective_anger < 10 ) {
+                    effective_morale -= 13 - static_cast<int>( anger_mod );
+                }
+            } else {
+                if( effective_anger < 10 ) {
+                    effective_morale += static_cast<int>( std::round( anger_mod * 2.0 ) );
+                } else {
+                    effective_anger -= static_cast<int>( anger_mod );
                 }
             }
         }

@@ -148,8 +148,8 @@
     "description": "a worm",
     "footsteps": "rustle.",
     "fear_triggers": [ "HURT" ],
-    "bleeds": "fd_blood_invertebrate",
-    "flags": [ "DRACULIN_IMMUNE" ]
+    "//": "Today I learned that earthworms use hemoglobin and their blood clots similarly to a human's.",
+    "bleeds": "fd_blood"
   },
   {
     "type": "SPECIES",

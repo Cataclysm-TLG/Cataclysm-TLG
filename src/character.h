@@ -1098,10 +1098,10 @@ class Character : public Creature, public visitable
         void try_remove_lightsnare();
         void try_remove_heavysnare();
         void try_remove_crushed();
-        void try_remove_webs();
-        void try_remove_impeding_effect();
-        // Calculate generic trap escape chance
-        bool can_escape_trap( int difficulty, bool manip ) const;
+        // Genericized function for getting out of webs and other things. Currently just webs though.
+        bool try_remove_impeding_effect();
+        // Calculate generic trap escape chance. manip includes manipulation score, ligature is for e.g. ropes, snares.
+        bool can_escape_trap( int difficulty, bool manip, bool ligature ) const;
 
         /** Check against the character's current movement mode */
         bool movement_mode_is( const move_mode_id &mode ) const;
@@ -4212,7 +4212,7 @@ class Character : public Creature, public visitable
          * Clothing layers are multiplied, ex. two layers of 50% coverage will leave only 25% exposed.
          * Used to determine suffering effects of albinism and solar sensitivity.
          */
-        std::map<bodypart_id, float> bodypart_exposure();
+        std::map<bodypart_id, float> bodypart_exposure() const;
     private:
         /**
          * Check whether the other creature is in range and can be seen by this creature.

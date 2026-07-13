@@ -14077,106 +14077,69 @@ void Character::pause()
     map &here = get_map();
     // Check if we're in water and see if we need to do something about it.
     water_immersion();
-    // Try to put out clothing/hair fire
-    if( has_effect( effect_onfire ) ) {
-        time_duration total_removed = 0_turns;
-        time_duration total_left = 0_turns;
-        bool on_ground = is_prone();
-        for( const bodypart_id &bp : get_all_body_parts() ) {
-            effect &eff = get_effect( effect_onfire, bp );
-            if( eff.is_null() ) {
-                continue;
+    // You are not doing any of this shit while a brute has you in a headlock.
+    // TODO: Move this stuff to wait_effects.
+    if( !has_effect_with_flag( flag_EFFECT_IMPEDING ) && !has_effect_with_flag( json_flag_GRAB ) ) {
+        // Try to put out clothing/hair fire.
+
+
+        // Put pressure on bleeding wound, prioritizing most severe bleeding that you can compress.
+        if( !controlling_vehicle && !is_armed() && has_effect( effect_bleed ) ) {
+            int max = 0;
+            bodypart_id bp_id = most_staunchable_bp( max );
+
+            // Don't warn about encumbrance if your arms are broken.
+            int num_broken_arms = get_num_broken_body_parts_of_type( body_part_type::type::arm );
+            if( num_broken_arms ) {
+                add_msg_player_or_npc( m_warning,
+                                    _( "Your broken limb significantly hampers your efforts to put pressure on a bleeding wound!" ),
+                                    _( "<npcname>'s broken limb significantly hampers their effort to put pressure on a bleeding wound!" ) );
+            } else if( max < 10 ) {
+                add_msg_player_or_npc( m_warning,
+                                    _( "Your hands are too encumbered to effectively put pressure on a bleeding wound!" ),
+                                    _( "<npcname>'s hands are too encumbered to effectively put pressure on a bleeding wound!" ) );
             }
 
-            // TODO: Tools and skills
-            total_left += eff.get_duration();
-            // Being on the ground will smother the fire much faster because you can roll
-            const time_duration dur_removed = on_ground ? 4_turns : 1_turns;
-            eff.mod_duration( -dur_removed );
-            total_removed += dur_removed;
-        }
-
-        // Don't drop on the ground when the ground is on fire
-        if( total_left > 30_turns && !is_dangerous_fields( here.field_at( pos_bub() ) ) ) {
-            add_effect( effect_downed, 2_turns, false, 0, true );
-            add_msg_player_or_npc( m_warning,
-                                   _( "You drop and roll on the ground, trying to smother the fire!" ),
-                                   _( "<npcname> drops and rolls on the ground!" ) );
-        } else if( total_removed > 0_turns ) {
-            if( on_ground ) {
+            if( bp_id == bodypart_str_id::NULL_ID() ) {
+                // We're bleeding, but couldn't find any bp we can staunch.
                 add_msg_player_or_npc( m_warning,
-                                       _( "You roll on the ground, trying to smother the fire!" ),
-                                       _( "<npcname> rolls on the ground!" )
-                                     );
+                                    _( "Your bleeding is beyond staunching barehanded!  A tourniquet might help." ),
+                                    _( "<npcname>'s bleeding is beyond staunching barehanded!" ) );
             } else {
+                // 5 - 30 sec per turn (with standard hands).
+                time_duration benefit = 5_turns + 1_turns * max;
+                effect &e = get_effect( effect_bleed, bp_id );
+                e.mod_duration( - benefit );
                 add_msg_player_or_npc( m_warning,
-                                       _( "You attempt to put out the fire on you!" ),
-                                       _( "<npcname> attempts to put out the fire on them!" ) );
+                                    _( "You put pressure on the bleeding wound…" ),
+                                    _( "<npcname> puts pressure on the bleeding wound…" ) );
+                practice_proficiency( proficiency_prof_field_medic, 1_turns );
             }
         }
     }
-
-    // put pressure on bleeding wound, prioritizing most severe bleeding that you can compress
-    if( !controlling_vehicle && !is_armed() && has_effect( effect_bleed ) ) {
-        int max = 0;
-        bodypart_id bp_id = most_staunchable_bp( max );
-
-        // Don't warn about encumbrance if your arms are broken
-        int num_broken_arms = get_num_broken_body_parts_of_type( body_part_type::type::arm );
-        if( num_broken_arms ) {
-            add_msg_player_or_npc( m_warning,
-                                   _( "Your broken limb significantly hampers your efforts to put pressure on a bleeding wound!" ),
-                                   _( "<npcname>'s broken limb significantly hampers their effort to put pressure on a bleeding wound!" ) );
-        } else if( max < 10 ) {
-            add_msg_player_or_npc( m_warning,
-                                   _( "Your hands are too encumbered to effectively put pressure on a bleeding wound!" ),
-                                   _( "<npcname>'s hands are too encumbered to effectively put pressure on a bleeding wound!" ) );
-        }
-
-        if( bp_id == bodypart_str_id::NULL_ID() ) {
-            // We're bleeding, but couldn't find any bp we can staunch
-            add_msg_player_or_npc( m_warning,
-                                   _( "Your bleeding is beyond staunching barehanded!  A tourniquet might help." ),
-                                   _( "<npcname>'s bleeding is beyond staunching barehanded!" ) );
-        } else {
-            // 5 - 30 sec per turn (with standard hands)
-            time_duration benefit = 5_turns + 1_turns * max;
-            effect &e = get_effect( effect_bleed, bp_id );
-            e.mod_duration( - benefit );
-            add_msg_player_or_npc( m_warning,
-                                   _( "You put pressure on the bleeding wound…" ),
-                                   _( "<npcname> puts pressure on the bleeding wound…" ) );
-            practice_proficiency( proficiency_prof_field_medic, 1_turns );
-        }
-    }
-    // on-pause effects for martial arts
-    martial_arts_data->ma_onpause_effects( *this );
-
-    if( is_npc() ) {
-        // The stuff below doesn't apply to NPCs
-        // search_surroundings should eventually do, though
-        return;
-    }
-
-    if( in_vehicle && one_in( 8 ) ) {
-        VehicleList vehs = here.get_vehicles();
-        vehicle *veh = nullptr;
-        for( wrapped_vehicle &v : vehs ) {
-            veh = v.v;
-            if( veh && veh->is_moving() && veh->player_in_control( here, *this ) ) {
-                double exp_temp = 1 + veh->total_mass( here ) / 400.0_kilogram +
-                                  std::abs( veh->velocity / 3200.0 );
-                int experience = static_cast<int>( exp_temp );
-                if( exp_temp - experience > 0 && x_in_y( exp_temp - experience, 1.0 ) ) {
-                    experience++;
+    // Vehicle control and trap detection are at present player-only.
+    // TODO: fix this.
+    if( !is_npc() ) {
+        if( in_vehicle && one_in( 8 ) ) {
+            VehicleList vehs = here.get_vehicles();
+            vehicle *veh = nullptr;
+            for( wrapped_vehicle &v : vehs ) {
+                veh = v.v;
+                if( veh && veh->is_moving() && veh->player_in_control( here, *this ) ) {
+                    double exp_temp = 1 + veh->total_mass( here ) / 400.0_kilogram +
+                                    std::abs( veh->velocity / 3200.0 );
+                    int experience = static_cast<int>( exp_temp );
+                    if( exp_temp - experience > 0 && x_in_y( exp_temp - experience, 1.0 ) ) {
+                        experience++;
+                    }
+                    practice( skill_driving, experience );
+                    break;
                 }
-                practice( skill_driving, experience );
-                break;
             }
         }
+        search_surroundings();
     }
-
-    search_surroundings();
+    // NPCs get wait effects.
     wait_effects();
 }
 
