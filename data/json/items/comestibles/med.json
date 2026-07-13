@@ -338,8 +338,7 @@
     "fun": 4,
     "addiction_potential": 40,
     "addiction_type": "nicotine",
-    "flags": [ "NO_INGEST" ],
-    "use_action": [ "CHEW" ]
+    "flags": [ "NO_INGEST", "CHEW" ]
   },
   {
     "id": "chem_hydrogen_peroxide",
