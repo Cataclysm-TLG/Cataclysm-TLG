@@ -2333,7 +2333,7 @@
       { "limb_score": "breathing", "modifier": 0.9, "scaling": -0.1 },
       { "limb_score": "balance", "modifier": 0.8, "scaling": -0.2 }
     ],
-    "flags": [ "EFFECT_LIMB_SCORE_MOD" ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD", "EFFECT_IMPEDING", "PREVENT_TRAINING" ],
     "show_in_info": true,
     "show_intensity": false
   },

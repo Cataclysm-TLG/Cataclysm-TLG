@@ -914,7 +914,7 @@ void suffer::in_sunlight( Character &you, outfit &worn )
     }
 }
 
-std::map<bodypart_id, float> Character::bodypart_exposure()
+std::map<bodypart_id, float> Character::bodypart_exposure() const
 {
     std::map<bodypart_id, float> bp_exposure;
     // May need to iterate over all body parts several times, so make a copy

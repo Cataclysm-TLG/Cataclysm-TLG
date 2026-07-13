@@ -744,7 +744,7 @@
     "autonote": false,
     "color": "light_gray"
   },
-    {
+  {
     "id": "mx_rock_formation_3",
     "type": "map_extra",
     "name": { "str": "Rock formation" },

@@ -7941,12 +7941,12 @@ void forage_activity_actor::finish( player_activity &act, Character &who )
     const tripoint_bub_ms bush_pos = here.get_bub( act.placement );
     here.ter_set( bush_pos, next_ter );
 
-    // Survival gives a bigger boost, and Perception is leveled a bit.
-    // Both survival and perception affect time to forage
+    // Ecology gives a bigger boost, and Perception is leveled a bit.
+    // Both ecology and perception affect time to forage
 
     ///\EFFECT_PER slightly increases forage success chance got_anything = ( std::max( survival_skill * 2 + survival_skill * ( ( per_cur - 10 ) / 10.0 ), 19 ) > forage_roll )
     ///\EFFECT_SURVIVAL increases forage success chance
-    // The survival+per check here is unlikely to ever get anywhere near 84, but we may as well keep parity with act_harvest's fail chance.
+    // The ecology+per check here is unlikely to ever get anywhere near 84, but we may as well keep parity with act_harvest's fail chance.
     // per_cur is not divided by 2 here because foraging underbrush is more about searching for hidden things.
     if( vegetable_chance < ( std::min( ( who.get_skill_level( skill_survival ) * 3 + who.per_cur ),
                                        84.0f ) ) ) {

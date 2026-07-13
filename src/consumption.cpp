@@ -905,7 +905,8 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
     }
 
     // Here's why PROBOSCIS is such a negative trait.
-    if( has_trait( trait_PROBOSCIS ) && !drinkable && ( !food.is_medication() || food.has_flag( flag_CHEW ) ) ) {
+    if( has_trait( trait_PROBOSCIS ) && !drinkable && ( !food.is_medication() ||
+            food.has_flag( flag_CHEW ) ) ) {
         return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION, _( "Ugh, you can't drink that!" ) );
     }
 
@@ -1743,7 +1744,8 @@ bool Character::can_consume_as_is( const item &it ) const
         return false;
     }
 
-    return ( !it.has_flag( flag_NO_INGEST ) || it.get_comestible()->comesttype == "MED" || it.has_flag( flag_CHEW ) ) &&
+    return ( !it.has_flag( flag_NO_INGEST ) || it.get_comestible()->comesttype == "MED" ||
+             it.has_flag( flag_CHEW ) ) &&
            ( !it.has_flag( flag_FROZEN ) || it.has_flag( flag_EDIBLE_FROZEN ) || it.has_flag( flag_MELTS ) );
 }
 
