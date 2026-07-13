@@ -2102,9 +2102,10 @@
   },
   {
     "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
+    "subtypes": [ "AMMO" ],
     "id": "liquid_soap",
     "name": { "str_sp": "liquid soap" },
+    "ammo_type": "components",
     "category": "chems",
     "weight": "46 g",
     "//": "Density of around 0.92 g/ml",
@@ -2119,8 +2120,7 @@
     "phase": "liquid",
     "flags": [ "DETERGENT" ],
     "use_action": [ "WASH_ALL_ITEMS" ],
-    "comestible_type": "INVALID",
-    "charges": 5
+    "count": 5
   },
   {
     "id": "pine_resin",

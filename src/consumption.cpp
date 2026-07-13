@@ -1739,12 +1739,12 @@ bool Character::can_estimate_rot() const
 
 bool Character::can_consume_as_is( const item &it ) const
 {
-    if( it.is_comestible() ) {
-        return !it.has_flag( flag_NO_INGEST ) && ( !it.has_flag( flag_FROZEN ) ||
-                it.has_flag( flag_EDIBLE_FROZEN ) ||
-                it.has_flag( flag_MELTS ) );
+    if( !it.is_comestible() ) {
+        return false;
     }
-    return false;
+
+    return ( !it.has_flag( flag_NO_INGEST ) || it.get_comestible()->comesttype == "MED" || it.type->can_use( "CHEW" ) ) &&
+           ( !it.has_flag( flag_FROZEN ) || it.has_flag( flag_EDIBLE_FROZEN ) || it.has_flag( flag_MELTS ) );
 }
 
 bool Character::can_consume_rot() const
