@@ -905,7 +905,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
     }
 
     // Here's why PROBOSCIS is such a negative trait.
-    if( has_trait( trait_PROBOSCIS ) && !( drinkable || food.is_medication() || food.has_flag( flag_CHEW ) ) ) {
+    if( has_trait( trait_PROBOSCIS ) && !drinkable && ( !food.is_medication() || food.has_flag( flag_CHEW ) ) ) {
         return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION, _( "Ugh, you can't drink that!" ) );
     }
 
