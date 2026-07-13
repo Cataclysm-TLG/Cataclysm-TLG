@@ -115,13 +115,6 @@ vpart_display vehicle::get_display_of_tile( const point_rel_ms &dp, bool rotate,
         }
     }
 
-    // blood color override
-    if( vp.blood > 200 ) {
-        ret.color = c_red;
-    } else if( vp.blood > 0 ) {
-        ret.color = c_light_red;
-    }
-
     // if cargo has items color is inverted
     const int cargo_part = part_with_feature( dp, VPFLAG_CARGO, true );
     if( cargo_part >= 0 && !get_items( part( cargo_part ) ).empty() ) {
