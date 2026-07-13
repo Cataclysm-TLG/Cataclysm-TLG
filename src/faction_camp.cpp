@@ -871,7 +871,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         entry = string_format( _( "Notes:\n"
                                   "Send a companion to gather materials for the next camp "
                                   "upgrade.\n\n"
-                                  "Skill used: survival\n"
+                                  "Skill used: ecology\n"
                                   "Difficulty: N/A\n"
                                   "Gathering Possibilities:\n"
                                   "%s\n"
@@ -894,7 +894,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         comp_list npc_list = get_mission_workers( miss_id );
         entry = string_format( _( "Notes:\n"
                                   "Send a companion to gather light brush and stout branches.\n\n"
-                                  "Skill used: survival\n"
+                                  "Skill used: ecology\n"
                                   "Difficulty: N/A\n"
                                   "Gathering Possibilities:\n"
                                   "> stout branches\n"
@@ -998,7 +998,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         entry = string_format( _( "Notes:\n"
                                   "Send a companion to build an improvised shelter and stock it "
                                   "with equipment at a distant map location.\n\n"
-                                  "Skill used: survival\n"
+                                  "Skill used: ecology\n"
                                   "Difficulty: 3\n"
                                   "Effects:\n"
                                   "> Good for setting up resupply or contingency points.\n"
@@ -1023,7 +1023,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         comp_list npc_list = get_mission_workers( miss_id );
         entry = string_format( _( "Notes:\n"
                                   "Push gear out to a hide site or bring gear back from one.\n\n"
-                                  "Skill used: survival\n"
+                                  "Skill used: ecology\n"
                                   "Difficulty: 1\n"
                                   "Effects:\n"
                                   "> Good for returning equipment you left in the hide site "
@@ -1050,7 +1050,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         comp_list npc_list = get_mission_workers( miss_id );
         entry = string_format( _( "Notes:\n"
                                   "Send a companion to forage for edible plants.\n\n"
-                                  "Skill used: survival\n"
+                                  "Skill used: ecology\n"
                                   "Difficulty: N/A\n"
                                   "Foraging Possibilities:\n"
                                   "> wild vegetables\n"
@@ -1075,7 +1075,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         comp_list npc_list = get_mission_workers( miss_id );
         entry = string_format( _( "Notes:\n"
                                   "Send a companion to set traps for small game.\n\n"
-                                  "Skills used: Devices, Survival\n"
+                                  "Skills used: Devices, Ecology\n"
                                   "Stats used: Perception\n"
                                   "Difficulty: Low\n"
                                   "Trapping Possibilities:\n"
@@ -1100,7 +1100,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         comp_list npc_list = get_mission_workers( miss_id );
         entry = string_format( _( "Notes:\n"
                                   "Send a companion to hunt large animals.\n\n"
-                                  "Skills used: Marksmanship, Survival\n"
+                                  "Skills used: Marksmanship, Ecology\n"
                                   "Stats used: Perception\n"
                                   "Difficulty: Medium\n"
                                   "Hunting Possibilities:\n"
@@ -1185,7 +1185,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
                                   "Send a companion out into the great unknown.  High survival "
                                   "skills are needed to avoid combat but you should expect an "
                                   "encounter or two.\n\n"
-                                  "Skill used: survival\n"
+                                  "Skill used: ecology\n"
                                   "Difficulty: 3\n"
                                   "Effects:\n"
                                   "> Select checkpoints to customize path.\n"
@@ -1213,7 +1213,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
                                   "kill anything hostile they encounter and return when "
                                   "their wounds are too great or the odds are stacked against "
                                   "them.\n\n"
-                                  "Skill used: survival\n"
+                                  "Skill used: ecology\n"
                                   "Difficulty: 4\n"
                                   "Effects:\n"
                                   "> Pulls creatures encountered into combat instead of "
@@ -1351,7 +1351,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
                        "tilled.\n\n" ) +
                     farm_description( dir, plots, farm_ops::plant ) +
                     _( "\n\n"
-                       "Skill used: survival\n"
+                       "Skill used: ecology\n"
                        "Difficulty: N/A\n"
                        "Effects:\n"
                        "> Choose which seed type or all of your seeds.\n"
@@ -1385,7 +1385,7 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
                        "Harvest any plants that are ripe and bring the produce back.\n\n" ) +
                     farm_description( dir, plots, farm_ops::harvest ) +
                     _( "\n\n"
-                       "Skill used: survival\n"
+                       "Skill used: ecology\n"
                        "Difficulty: N/A\n"
                        "Effects:\n"
                        "> Will dump all harvesting products onto your location.\n\n"

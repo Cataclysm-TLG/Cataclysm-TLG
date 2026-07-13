@@ -1665,7 +1665,8 @@ monster_attitude monster::attitude( const Character *u ) const
             effective_anger -= 20;
         }
 
-        if( effective_anger >= 10 && u->has_trait( trait_PHEROMONE_INSECT ) && ( faction == monfaction_acid_ant || faction == monfaction_ant || faction == monfaction_bee ||
+        if( effective_anger >= 10 && u->has_trait( trait_PHEROMONE_INSECT ) &&
+            ( faction == monfaction_acid_ant || faction == monfaction_ant || faction == monfaction_bee ||
               faction == monfaction_fire_ant || faction == monfaction_wasp || faction == monfaction_roach ) ) {
             effective_anger -= 20;
         }
@@ -1673,8 +1674,8 @@ monster_attitude monster::attitude( const Character *u ) const
         bool fishable = has_flag( mon_flag_FISHABLE );
         bool animal = has_flag( mon_flag_ANIMAL );
         if( u->has_trait( trait_TERRIFYING ) ) {
-            if( animal || ( in_species( species_HUMAN 
-            ) && !in_species( species_ZOMBIE ) ) || has_flag( mon_flag_HAS_MIND ) ) {
+            if( animal || ( in_species( species_HUMAN
+                                      ) && !in_species( species_ZOMBIE ) ) || has_flag( mon_flag_HAS_MIND ) ) {
                 effective_morale -= 10;
             }
         }

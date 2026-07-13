@@ -103,7 +103,7 @@
   {
     "type": "item_group",
     "id": "book_survival_2",
-    "//": "Survival skill books weighted according to level",
+    "//": "Ecology skill books weighted according to level",
     "subtype": "distribution",
     "entries": [
       { "item": "atomic_survival", "prob": 12 },

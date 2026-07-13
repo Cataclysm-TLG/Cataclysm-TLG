@@ -95,7 +95,7 @@ bool Character::can_escape_trap( int difficulty, bool manip = false, bool ligatu
         } else if( has_trait( trait_BENDY2 ) ) {
             chance += 6;
         } else if( has_trait( trait_BENDY3 ) ) {
-            chance += 12; 
+            chance += 12;
         }
     }
     return x_in_y( chance, difficulty );
@@ -549,18 +549,18 @@ void Character::wait_effects( bool attacking )
         if( total_left > 30_turns && !is_dangerous_fields( here.field_at( pos_bub() ) ) ) {
             add_effect( effect_downed, 2_turns, false, 0, true );
             add_msg_player_or_npc( m_warning,
-                                _( "You drop and roll on the ground, trying to smother the fire!" ),
-                                _( "<npcname> drops and rolls on the ground!" ) );
+                                   _( "You drop and roll on the ground, trying to smother the fire!" ),
+                                   _( "<npcname> drops and rolls on the ground!" ) );
         } else if( total_removed > 0_turns ) {
             if( on_ground ) {
                 add_msg_player_or_npc( m_warning,
-                                    _( "You roll on the ground, trying to smother the fire!" ),
-                                    _( "<npcname> rolls on the ground!" )
-                                    );
+                                       _( "You roll on the ground, trying to smother the fire!" ),
+                                       _( "<npcname> rolls on the ground!" )
+                                     );
             } else {
                 add_msg_player_or_npc( m_warning,
-                                    _( "You attempt to put out the fire on you!" ),
-                                    _( "<npcname> attempts to put out the fire on them!" ) );
+                                       _( "You attempt to put out the fire on you!" ),
+                                       _( "<npcname> attempts to put out the fire on them!" ) );
             }
         }
     }

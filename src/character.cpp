@@ -1512,7 +1512,7 @@ int Character::overmap_sight_range( float light_level ) const
 
     // If sight got changed due OVERMAP_SIGHT, process the rest of the modifiers, otherwise skip them
     if( sight > 0 ) {
-        // The higher your perception and survival, the farther you can see.
+        // The higher your perception and ecology, the farther you can see.
         sight += static_cast<int>( get_per() / 2 + get_skill_level( skill_survival ) / 3 );
     }
 
@@ -14092,27 +14092,27 @@ void Character::pause()
             int num_broken_arms = get_num_broken_body_parts_of_type( body_part_type::type::arm );
             if( num_broken_arms ) {
                 add_msg_player_or_npc( m_warning,
-                                    _( "Your broken limb significantly hampers your efforts to put pressure on a bleeding wound!" ),
-                                    _( "<npcname>'s broken limb significantly hampers their effort to put pressure on a bleeding wound!" ) );
+                                       _( "Your broken limb significantly hampers your efforts to put pressure on a bleeding wound!" ),
+                                       _( "<npcname>'s broken limb significantly hampers their effort to put pressure on a bleeding wound!" ) );
             } else if( max < 10 ) {
                 add_msg_player_or_npc( m_warning,
-                                    _( "Your hands are too encumbered to effectively put pressure on a bleeding wound!" ),
-                                    _( "<npcname>'s hands are too encumbered to effectively put pressure on a bleeding wound!" ) );
+                                       _( "Your hands are too encumbered to effectively put pressure on a bleeding wound!" ),
+                                       _( "<npcname>'s hands are too encumbered to effectively put pressure on a bleeding wound!" ) );
             }
 
             if( bp_id == bodypart_str_id::NULL_ID() ) {
                 // We're bleeding, but couldn't find any bp we can staunch.
                 add_msg_player_or_npc( m_warning,
-                                    _( "Your bleeding is beyond staunching barehanded!  A tourniquet might help." ),
-                                    _( "<npcname>'s bleeding is beyond staunching barehanded!" ) );
+                                       _( "Your bleeding is beyond staunching barehanded!  A tourniquet might help." ),
+                                       _( "<npcname>'s bleeding is beyond staunching barehanded!" ) );
             } else {
                 // 5 - 30 sec per turn (with standard hands).
                 time_duration benefit = 5_turns + 1_turns * max;
                 effect &e = get_effect( effect_bleed, bp_id );
                 e.mod_duration( - benefit );
                 add_msg_player_or_npc( m_warning,
-                                    _( "You put pressure on the bleeding wound…" ),
-                                    _( "<npcname> puts pressure on the bleeding wound…" ) );
+                                       _( "You put pressure on the bleeding wound…" ),
+                                       _( "<npcname> puts pressure on the bleeding wound…" ) );
                 practice_proficiency( proficiency_prof_field_medic, 1_turns );
             }
         }
@@ -14127,7 +14127,7 @@ void Character::pause()
                 veh = v.v;
                 if( veh && veh->is_moving() && veh->player_in_control( here, *this ) ) {
                     double exp_temp = 1 + veh->total_mass( here ) / 400.0_kilogram +
-                                    std::abs( veh->velocity / 3200.0 );
+                                      std::abs( veh->velocity / 3200.0 );
                     int experience = static_cast<int>( exp_temp );
                     if( exp_temp - experience > 0 && x_in_y( exp_temp - experience, 1.0 ) ) {
                         experience++;
