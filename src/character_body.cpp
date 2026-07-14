@@ -276,11 +276,13 @@ void Character::update_body( const time_point &from, const time_point &to )
         needs_rates tmp_rates;
         calc_sleep_recovery_rate( tmp_rates );
         const float fatigue_regen_rate = tmp_rates.recovery;
-        const int turns = to_turns<int>( to - from );
-        const time_duration effective_time_slept = time_duration::from_turns(
-                    roll_remainder( turns * fatigue_regen_rate ) );
-        mod_daily_sleep( effective_time_slept );
-        mod_continuous_sleep( effective_time_slept );
+        if( fatigue_regen_rate > 0.0f ) {
+            const int turns = to_turns<int>( to - from );
+            const time_duration effective_time_slept = time_duration::from_turns(
+                        roll_remainder( turns * fatigue_regen_rate ) );
+            mod_daily_sleep( effective_time_slept );
+            mod_continuous_sleep( effective_time_slept );
+        }
     }
     if( was_sleeping && !in_sleep_state() ) {
         if( get_continuous_sleep() >= 6_hours ) {
