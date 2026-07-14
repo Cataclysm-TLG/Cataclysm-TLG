@@ -3820,16 +3820,16 @@ class Character : public Creature, public visitable
                                bool npc_query = false, const recipe *rec = nullptr );
         std::list<item> consume_items( const comp_selection<item_comp> &is, int batch,
                                        const std::function<bool( const item & )> &filter = return_true<item>, bool select_ind = false,
-                                       bool disable_preference = false );
+                                       bool disable_preference = false, bool keep_receiver = false );
         std::list<item> consume_items( map &m, const comp_selection<item_comp> &is, int batch,
                                        const std::function<bool( const item & )> &filter = return_true<item>,
                                        const std::vector<tripoint_bub_ms> &reachable_pts = {}, bool select_ind = false,
-                                       bool disable_preference = false );
+                                       bool disable_preference = false, bool keep_receiver = false );
         // Selects one entry in components using select_item_component and consumes those items.
         std::list<item> consume_items( const std::vector<item_comp> &components, int batch = 1,
                                        const std::function<bool( const item & )> &filter = return_true<item>,
                                        const std::function<bool( const itype_id & )> &select_ind = return_false<itype_id>,
-                                       bool can_cancel = false, bool disable_preference = false );
+                                       bool can_cancel = false, bool disable_preference = false, bool keep_receiver = false );
         bool consume_software_container( const itype_id &software_id );
         comp_selection<tool_comp>
         select_tool_component( const std::vector<tool_comp> &tools, int batch, read_only_visitable &map_inv,
