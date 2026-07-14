@@ -1041,9 +1041,6 @@ int vpart_info::format_description( std::string &msg, const nc_color &format_col
                 base.put_in( tmp_mag, pocket_type::MAGAZINE_WELL );
             }
         }
-        long_descrip += string_format( _( "\nRange: %1$5d     Damage: %2$5.0f" ),
-                                       base.gun_range( true ),
-                                       base.gun_damage().total_damage() );
     }
 
     if( !get_pseudo_tools().empty() ) {

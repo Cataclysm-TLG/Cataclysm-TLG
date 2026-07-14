@@ -3080,7 +3080,7 @@ static void empty_buckets( Character &p )
 }
 
 std::list<item> Character::consume_items( const comp_selection<item_comp> &is, int batch,
-        const std::function<bool( const item & )> &filter, bool select_ind, bool disable_preference )
+        const std::function<bool( const item & )> &filter, bool select_ind, bool disable_preference, bool keep_receiver )
 {
     map &m = get_map();
     std::list<item> ret;
@@ -3091,13 +3091,13 @@ std::list<item> Character::consume_items( const comp_selection<item_comp> &is, i
     // populate a grid of spots that can be reached
     const std::vector<tripoint_bub_ms> &reachable_pts = m.reachable_flood_steps( pos_bub(),
             PICKUP_RANGE, 1, 100 );
-    return consume_items( m, is, batch, filter, reachable_pts, select_ind, disable_preference );
+    return consume_items( m, is, batch, filter, reachable_pts, select_ind, disable_preference, keep_receiver );
 }
 
 std::list<item> Character::consume_items( map &m, const comp_selection<item_comp> &is, int batch,
         const std::function<bool( const item & )> &filter,
         const std::vector<tripoint_bub_ms> &reachable_pts,
-        bool select_ind, bool disable_preference )
+        bool select_ind, bool disable_preference, bool keep_receiver )
 {
     std::function<bool( const item & )> active_preferred_filter = [&filter]( const item & it ) {
         return filter( it ) && is_preferred_component( it );
@@ -3127,7 +3127,7 @@ std::list<item> Character::consume_items( map &m, const comp_selection<item_comp
         } else {
             std::list<item> tmp = m.use_amount( reachable_pts, selected_comp.type, real_count, preferred_filter,
                                                 select_ind );
-            remove_ammo( tmp, *this );
+            remove_ammo( tmp, *this, keep_receiver );
             ret.splice( ret.end(), tmp );
         }
     }
@@ -3142,7 +3142,7 @@ std::list<item> Character::consume_items( map &m, const comp_selection<item_comp
         } else {
             std::list<item> tmp = use_amount( selected_comp.type, real_count, preferred_filter, select_ind );
             real_count -= tmp.size();  // The use_amount operation above doesn't deduct what's been used...
-            remove_ammo( tmp, *this );
+            remove_ammo( tmp, *this, keep_receiver );
             ret.splice( ret.end(), tmp );
         }
     }
@@ -3155,7 +3155,7 @@ std::list<item> Character::consume_items( map &m, const comp_selection<item_comp
             } else {
                 std::list<item> tmp = m.use_amount( reachable_pts, selected_comp.type, real_count, filter,
                                                     select_ind );
-                remove_ammo( tmp, *this );
+                remove_ammo( tmp, *this, keep_receiver );
                 ret.splice( ret.end(), tmp );
             }
         }
@@ -3167,7 +3167,7 @@ std::list<item> Character::consume_items( map &m, const comp_selection<item_comp
             } else {
                 std::list<item> tmp = use_amount( selected_comp.type, real_count, filter, select_ind );
                 // The use_amount operation above doesn't deduct what's been used, but we're not going to use real_count again.
-                remove_ammo( tmp, *this );
+                remove_ammo( tmp, *this, keep_receiver );
                 ret.splice( ret.end(), tmp );
             }
         }
@@ -3203,13 +3203,13 @@ to consume_items */
 std::list<item> Character::consume_items( const std::vector<item_comp> &components, int batch,
         const std::function<bool( const item & )> &filter,
         const std::function<bool( const itype_id & )> &select_ind,
-        const bool can_cancel, const bool disable_preference )
+        const bool can_cancel, const bool disable_preference, bool keep_receiver )
 {
     inventory map_inv;
     map_inv.form_from_map( pos_bub(), PICKUP_RANGE, this );
     comp_selection<item_comp> sel = select_item_component( components, batch, map_inv, can_cancel,
                                     filter );
-    return consume_items( sel, batch, filter, select_ind( sel.comp.type ), disable_preference );
+    return consume_items( sel, batch, filter, select_ind( sel.comp.type ), disable_preference, keep_receiver );
 }
 
 bool Character::consume_software_container( const itype_id &software_id )
@@ -4353,10 +4353,10 @@ void Character::complete_disassemble( item_location &target, const recipe &dis )
     }
 }
 
-void remove_ammo( std::list<item> &dis_items, Character &p, bool receiver = true )
+void remove_ammo( std::list<item> &dis_items, Character &p, bool keep_receiver )
 {
     for( item &dis_item : dis_items ) {
-        remove_ammo( dis_item, p, receiver );
+        remove_ammo( dis_item, p, keep_receiver );
     }
 }
 
@@ -4374,11 +4374,11 @@ void drop_or_handle( const item &newit, Character &p )
     }
 }
 
-void remove_ammo( item &dis_item, Character &p, bool receiver = true )
+void remove_ammo( item &dis_item, Character &p, bool keep_receiver )
 {
-    dis_item.remove_items_with( [&p, receiver]( const item &it ) {
+    dis_item.remove_items_with( [&p, keep_receiver]( const item & it ) {
         if( it.is_irremovable() ||
-            ( !receiver && it.is_gunmod() && it.type->gunmod->location.name() == "bore" ) ||
+            ( keep_receiver && it.is_gunmod() && it.type->gunmod->location.name() == "bore" ) ||
             !( it.is_gunmod() || it.is_toolmod() ||
                ( it.is_magazine() && !it.is_tool() ) ) ) {
             return false;

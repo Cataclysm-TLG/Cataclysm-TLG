@@ -1966,7 +1966,7 @@ void salvage_actor::cut_up( Character &p, item_location &cut ) const
     const bool filthy = cut.get_item()->is_filthy();
 
     // Clean up before removing the item.
-    remove_ammo( *cut.get_item(), p );
+    remove_ammo( *cut.get_item(), p, false );
     // Original item has been consumed.
     cut.remove_item();
     // Force an encumbrance update in case they were wearing that item.

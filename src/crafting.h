@@ -27,11 +27,11 @@ struct enum_traits<craft_flags> {
     static constexpr bool is_flag_enum = true;
 };
 
-// removes any (removable) ammo from the item and stores it in the
-// players inventory.
-void remove_ammo( item &dis_item, Character &p, bool receiver );
-// same as above but for each item in the list
-void remove_ammo( std::list<item> &dis_items, Character &p, bool receiver );
+// Removes any (removable) ammo from the item and stores it in p's inventory.
+// keep_receiver will leave any "bore" gunmods attached to the gun, if applicable.
+void remove_ammo( item &dis_item, Character &p, bool keep_receiver = false );
+// Same as above but for each item in the list.
+void remove_ammo( std::list<item> &dis_items, Character &p, bool keep_receiver = false );
 
 void drop_or_handle( const item &newit, Character &p );
 

@@ -13046,13 +13046,13 @@ bool item::allow_crafting_component() const
             return false;
         }
         bool valid = true;
-        visit_items( [&]( const item *it, item * ) {
+        visit_items( [&]( const item * it, item * ) {
             if( this == it ) {
                 return VisitResponse::NEXT;
             }
             // Disallow all gun mods except "bore" (receivers) and integrated (irremovable) parts.
             if( !( it->is_magazine() || ( it->is_gunmod() && ( it->is_irremovable() ||
-                    it->type->gunmod->location.name() == "bore" ) ) ) ) {
+                                          it->type->gunmod->location.name() == "bore" ) ) ) ) {
                 valid = false;
                 return VisitResponse::ABORT;
             }

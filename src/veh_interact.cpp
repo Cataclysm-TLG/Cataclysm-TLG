@@ -923,7 +923,6 @@ bool veh_interact::update_part_requirements( map &here )
     }
 
     sel_vpart_info->format_description( nmsg, c_light_gray, getmaxx( w_msg ) - 4 );
-
     msg = colorize( nmsg, c_light_gray );
     return ok || player_character.has_trait( trait_DEBUG_HS );
 }
@@ -3128,7 +3127,7 @@ void veh_interact::complete_vehicle( map &here, Character &you )
             for( const std::vector<item_comp> &e : reqs.get_components() ) {
                 for( item &obj : you.consume_items( e, 1, is_crafting_component, [&vpinfo]( const itype_id & itm ) {
                 return itm == vpinfo.base_item;
-            }, false, true ) ) {
+            }, false, true, true ) ) {
                     if( obj.typeId() == vpinfo.base_item ) {
                         base = obj;
                     } else {
