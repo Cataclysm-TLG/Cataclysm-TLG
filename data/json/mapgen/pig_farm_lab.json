@@ -265,6 +265,9 @@
         "I": "t_metal_railing",
         "=": "t_concrete_roof"
       },
+      "furniture": {
+        "=": "f_null"
+      },
       "rows": [
         "                                                                        ",
         "                       =======IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII ",
@@ -312,13 +315,13 @@
         " -..............5-------      =       =       =       =       =       = ",
         " -..............-             IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII ",
         " -..............-            v________________________________________I ",
-        " -..=...........-             IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII_I ",
+        " -..............-             IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII_I ",
         " -..............-                                                   I_I ",
         " 5..............-                                                   I_I ",
         " -..............-                                                   I_I ",
         " -..............-                                                   I_I ",
         " -..............-                                                   I_I ",
-        " -..=...........-                                                   I_I ",
+        " -..............-                                                   I_I ",
         " -..............-                                                   I_I ",
         " -..............-                                                   I_I ",
         " -..............-                                                   I_I ",
