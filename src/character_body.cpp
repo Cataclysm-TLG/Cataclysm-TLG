@@ -342,13 +342,18 @@ void Character::update_body( const time_point &from, const time_point &to )
             mod_daily_health( 1, 200 );
         }
 
+        // Low morale flags last a day, unless their morale still meets the threshold throughout days.
         if( !get_value( "got_to_low_morale" ).is_empty() ) {
             mod_daily_health( -1, -100 );
-            remove_value( "got_to_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_LOW ) {
+                remove_value( "got_to_low_morale" );
+            }
         }
         if( !get_value( "got_to_very_low_morale" ).is_empty() ) {
             mod_daily_health( -2, -200 );
-            remove_value( "got_to_very_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_VERY_LOW ) {
+                remove_value( "got_to_very_low_morale" );
+            }
         }
 
         // Being badly injured is not healthy, though your immune system might be able to handle it.

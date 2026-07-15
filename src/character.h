@@ -260,6 +260,15 @@ enum sleep_deprivation_levels {
     SLEEP_DEPRIVATION_MASSIVE = 14 * 24 * 60
 };
 
+/** @brief thresholds of morale at which health is impacted
+    @details If the player reaches low morale at some point in a day, their lifestyle score
+    is decreased.
+*/
+enum morale_levels {
+    MORALE_UNHEALTHY_LOW = -25,
+    MORALE_UNHEALTHY_VERY_LOW = -50
+};
+
 enum class blood_type {
     blood_O,
     blood_A,
