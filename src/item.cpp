@@ -10055,7 +10055,7 @@ int item::get_reload_time() const
 
 bool item::is_silent() const
 {
-    return gun_noise().volume < 5;
+    return gun_noise().volume < 16;
 }
 
 bool item::is_gunmod() const
