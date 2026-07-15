@@ -2663,6 +2663,10 @@ double Character::gun_value( const item &weap, int ammo ) const
 {
     // TODO: Mods
     // TODO: Allow using a specified type of ammo rather than default or current
+    if( weap.is_null() ) {
+        return 0.0;
+    }
+
     if( !weap.type->gun ) {
         return 0.0;
     }
@@ -2707,7 +2711,6 @@ double Character::gun_value( const item &weap, int ammo ) const
 
     int move_cost = time_to_attack( *this, *weap.type );
     if( gun.clip != 0 && gun.clip < 10 ) {
-        // TODO: RELOAD_ONE should get a penalty here
         int reload_cost = gun.reload_time + encumb( bodypart_id( "hand_l" ) ) + encumb(
                               bodypart_id( "hand_r" ) );
         reload_cost /= gun.clip;
@@ -2715,7 +2718,7 @@ double Character::gun_value( const item &weap, int ammo ) const
     }
 
     // "Medium range" below means 9 tiles, "short range" means 4
-    // Those are guarantees (assuming maximum time spent aiming)
+    // These are merely estimates and are impacted by RNG, limb scores, and perception.
     static const std::vector<std::pair<float, float>> dispersion_thresholds = {{
             // Headshots all the time
             { 0.0f, 5.0f },
@@ -2731,18 +2734,19 @@ double Character::gun_value( const item &weap, int ammo ) const
             { 700.0f, 1.5f },
             // Glances at medium, criticals at point blank
             { 1000.0f, 1.0f },
+            // Iffy
+            { 1500.0f, 0.75f },
             // Nothing guaranteed, pure gamble
             { 2000.0f, 0.1f },
         }
     };
 
     static const std::vector<std::pair<float, float>> move_cost_thresholds = {{
-            { 10.0f, 4.0f },
-            { 25.0f, 3.0f },
-            { 100.0f, 1.0f },
-            { 500.0f, 0.5f },
-        }
-    };
+        { 10.0f, 2.0f },
+        { 25.0f, 1.75f },
+        { 100.0f, 1.0f },
+        { 500.0f, 0.8f },
+    }};
 
     float move_cost_factor = multi_lerp( move_cost_thresholds, move_cost );
 
@@ -2756,21 +2760,24 @@ double Character::gun_value( const item &weap, int ammo ) const
 
     float dispersion_factor = multi_lerp( dispersion_thresholds, total_dispersion );
 
+    // Some consideration for perception here.
+    dispersion_factor *= 1.f * std::clamp( 0.75f, 2.f, ( static_cast<float>(get_per() ) / 10.f ) );
+
     float damage_and_accuracy = damage_factor * dispersion_factor;
 
-    // TODO: Some better approximation of the ability to keep on shooting
+    // TODO: Some better approximation of the ability to keep on shooting.
     static const std::vector<std::pair<float, float>> capacity_thresholds = {{
-            { 1.0f, 0.5f },
+            { 1.0f, 0.75f },
             { 5.0f, 1.0f },
-            { 10.0f, 1.5f },
-            { 20.0f, 2.0f },
-            { 50.0f, 3.0f },
+            { 10.0f, 1.25f },
+            { 20.0f, 1.75f },
+            { 50.0f, 2.5f },
         }
     };
 
-    // How much until reload
+    // How much until reload?
     float capacity = gun.clip > 0 ? std::min<float>( gun.clip, ammo ) : ammo;
-    // How much until dry and a new weapon is needed
+    // How much until dry and a new weapon is needed?
     capacity += std::min<float>( 1.0, ammo / 20.0 );
     double capacity_factor = multi_lerp( capacity_thresholds, capacity );
 
