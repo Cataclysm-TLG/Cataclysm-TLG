@@ -275,10 +275,14 @@ void Character::update_body( const time_point &from, const time_point &to )
     if( in_sleep_state() && was_sleeping ) {
         needs_rates tmp_rates;
         calc_sleep_recovery_rate( tmp_rates );
-        const int fatigue_regen_rate = tmp_rates.recovery;
-        const time_duration effective_time_slept = ( to - from ) * fatigue_regen_rate;
-        mod_daily_sleep( effective_time_slept );
-        mod_continuous_sleep( effective_time_slept );
+        const float fatigue_regen_rate = tmp_rates.recovery;
+        if( fatigue_regen_rate > 0.0f ) {
+            const int turns = to_turns<int>( to - from );
+            const time_duration effective_time_slept = time_duration::from_turns(
+                        roll_remainder( turns * fatigue_regen_rate ) );
+            mod_daily_sleep( effective_time_slept );
+            mod_continuous_sleep( effective_time_slept );
+        }
     }
     if( was_sleeping && !in_sleep_state() ) {
         if( get_continuous_sleep() >= 6_hours ) {
@@ -338,21 +342,24 @@ void Character::update_body( const time_point &from, const time_point &to )
             mod_daily_health( 1, 200 );
         }
 
+        // Low morale flags last a day, unless their morale still meets the threshold throughout days.
         if( !get_value( "got_to_low_morale" ).is_empty() ) {
             mod_daily_health( -1, -100 );
-        } else {
-            remove_value( "got_to_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_LOW ) {
+                remove_value( "got_to_low_morale" );
+            }
         }
         if( !get_value( "got_to_very_low_morale" ).is_empty() ) {
             mod_daily_health( -2, -200 );
-        } else {
-            remove_value( "got_to_very_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_VERY_LOW ) {
+                remove_value( "got_to_very_low_morale" );
+            }
         }
 
         // Being badly injured is not healthy, though your immune system might be able to handle it.
         bool wounded = false;
         for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
-            if( get_part_hp_cur( bp ) < ( get_part_hp_cur( bp ) / 2 ) ) {
+            if( get_part_hp_cur( bp ) < ( get_part_hp_max( bp ) / 2 ) ) {
                 wounded = true;
             }
         }
@@ -409,7 +416,7 @@ void Character::update_body( const time_point &from, const time_point &to )
                 // "RDA" for our character and roll a chance to get a penalty tied to how much we ate.
                 if( ( toxin_RDA > 0 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
                     int toxin_malus = static_cast<int>( std::ceil( toxin_RDA / 10.0 ) );
-                    mod_daily_health( std::max( -5, toxin_malus ), -200 );
+                    mod_daily_health( std::max( -5, -toxin_malus ), -200 );
                 }
             }
 
