@@ -15,7 +15,8 @@
       [ "recipe_animal", 6 ],
       [ "recipe_maiar", 5 ],
       [ "recipe_serum", 5 ],
-      [ "recipe_labchem", 5 ]
+      [ "recipe_labchem", 5 ],
+      [ "binder_mutagen_basic", 6 ]
     ],
     "using": [ [ "mutagen_production_standard", 25 ] ],
     "proficiencies": [
@@ -1084,7 +1085,7 @@
     "difficulty": 7,
     "time": "45 m",
     "batch_time_factors": [ 80, 20 ],
-    "book_learn": [ [ "record_patient", 7 ], [ "recipe_maiar", 6 ], [ "recipe_labchem", 5 ] ],
+    "book_learn": [ [ "record_patient", 7 ], [ "recipe_maiar", 6 ], [ "recipe_labchem", 5 ], [ "binder_mutagen_basic", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_intro_chemistry" },
       { "proficiency": "prof_inorganic_chemistry" },
