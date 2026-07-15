@@ -2896,22 +2896,26 @@ int Character::attack_speed( const item &weap ) const
     return std::round( move_cost );
 }
 
-double Character::weapon_value( const item &weap, int ammo ) const
+double Character::weapon_value( const item &weap, int ammo, bool prompt ) const
 {
-    if( is_wielding( weap ) || ( !get_wielded_item() && weap.is_null() ) ) {
-        auto cached_value = cached_info.find( "weapon_value" );
-        if( cached_value != cached_info.end() ) {
-            return cached_value->second;
+    if( !prompt ) {
+        if( is_wielding( weap ) || ( !get_wielded_item() && weap.is_null() ) ) {
+            auto cached_value = cached_info.find( "weapon_value" );
+            if( cached_value != cached_info.end() ) {
+            add_msg_debug( debugmode::DF_NPC_ITEMAI,
+                        "<color_magenta>weapon_value</color>%s returned cached weapon value of <color_light_cyan>%1.2f</color>.",
+                        disp_name( true ), cached_value->second );
+                return cached_value->second;
+            }
         }
     }
     double val_gun = gun_value( weap, ammo );
     val_gun = val_gun /
-              5.0f; // This is an emergency patch to get melee and ranged in approximate parity.
+              4.0; // This is an emergency patch to get melee and ranged in approximate parity.
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
                    "<color_magenta>weapon_value</color>%s %s valued at <color_light_cyan>%1.2f as a ranged weapon</color>.",
                    disp_name( true ), weap.type->get_id().str(), val_gun );
     double val_melee = melee_value( weap );
-    val_melee *= val_melee; // Same emergency patch.
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
                    "%s %s valued at <color_light_cyan>%1.2f as a melee weapon</color>.", disp_name( true ),
                    weap.type->get_id().str(), val_melee );
@@ -2920,7 +2924,7 @@ double Character::weapon_value( const item &weap, int ammo ) const
 
     // A small bonus for guns you can also use to hit stuff with (bayonets etc.)
     const double my_val = more + ( less / 2.0 );
-    add_msg_debug( debugmode::DF_MELEE, "%s (%ld ammo) sum value: %.1f", weap.type->get_id().str(),
+    add_msg_debug( debugmode::DF_NPC_ITEMAI, "%s (%ld ammo) sum value: %.1f", weap.type->get_id().str(),
                    ammo, my_val );
     if( is_wielding( weap ) || ( !get_wielded_item() && weap.is_null() ) ) {
         cached_info.emplace( "weapon_value", my_val );
@@ -2945,8 +2949,14 @@ double Character::melee_value( const item &weap ) const
         }
         my_value += total;
         my_value += weap.type->m_to_hit * 2;
+        if( weap.has_technique( WBLOCK_2 ) ) {
+            my_value += 6.0;
+        } else if( weap.has_technique( WBLOCK_1 ) ) {
+            my_value += 4.0;
+        }
+        // TODO: Smarter scaling here. But it's a start!
         if( weap.weight() > 0_gram ) {
-            my_value *= 1.0 / ( 1.0 + ( weap.weight() / 3000_gram ) );
+            my_value *= 1.0 / ( 1.0 + ( weap.weight() / ( get_str() * 400_gram ) ) );
         }
         float reach = weap.reach_range( *this );
         if( reach > 1.0f ) {
@@ -2964,11 +2974,7 @@ double Character::melee_value( const item &weap ) const
         if( !martial_arts_data->enumerate_known_styles( weap.type->get_id() ).empty() ) {
             my_value *= 1.2;
         }
-        if( weap.type != nullptr ) {
-            add_msg_debug( debugmode::DF_MELEE, "%s as melee: %.1f", weap.type->get_id().str(), my_value );
-        } else {
-            add_msg_debug( debugmode::DF_MELEE, "Unarmed as melee: 0.0" );
-        }
+        add_msg_debug( debugmode::DF_MELEE, "%s as melee: %.1f", weap.type->get_id().str(), my_value );
         return std::max( 0.0, my_value );
     } else {
         return unarmed_value();

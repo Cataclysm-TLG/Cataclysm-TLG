@@ -398,15 +398,23 @@ std::string talker_npc::give_item_to( const bool to_use )
     bool taken = false;
     std::string reason = me_npc->chat_snippets().snip_give_nope.translated();
     const item_location weapon = me_npc->get_wielded_item();
-    int our_ammo = me_npc->ammo_count_for( weapon );
-    int new_ammo = me_npc->ammo_count_for( loc );
-    const double new_weapon_value = me_npc->weapon_value( given, new_ammo );
     const item &weap = weapon ? *weapon : null_item_reference();
-    const double cur_weapon_value = me_npc->weapon_value( weap, our_ammo );
-    add_msg_debug( debugmode::DF_TALKER, "NPC evaluates own %s (%d ammo): %0.1f",
-                   weap.typeId().str(), our_ammo, cur_weapon_value );
-    add_msg_debug( debugmode::DF_TALKER, "NPC evaluates your %s (%d ammo): %0.1f",
-                   given.typeId().str(), new_ammo, new_weapon_value );
+    double new_weapon_value = 0.0;
+    double cur_weapon_value = 0.0;
+    int new_ammo = 0;
+    int our_ammo = 0;
+    if( weap.type->gun ) {
+        our_ammo = me_npc->ammo_count_for( weapon );
+    }
+    if( given.type->gun ) {
+        new_ammo = me_npc->ammo_count_for( loc );
+    }
+    new_weapon_value = me_npc->weapon_value( given, new_ammo, true );
+    cur_weapon_value = me_npc->weapon_value( weap, our_ammo, true );
+    add_msg_debug( debugmode::DF_NPC_ITEMAI, "NPC evaluates own %s (%d ammo): %0.1f",
+                weap.typeId().str(), our_ammo, cur_weapon_value );
+    add_msg_debug( debugmode::DF_NPC_ITEMAI, "NPC evaluates your %s (%d ammo): %0.1f",
+                given.typeId().str(), new_ammo, new_weapon_value );
     if( to_use ) {
         // Eating first, to avoid evaluating bread as a weapon
         const consumption_result consume_res = try_consume( *me_npc, given, reason );
@@ -440,10 +448,18 @@ std::string talker_npc::give_item_to( const bool to_use )
                 }
             }
         } else {
-            add_msg_debug( debugmode::DF_TALKER, "New weapon value %.1f is lower than current value %.1f",
+            add_msg_debug( debugmode::DF_NPC_ITEMAI, "New weapon value %.1f is lower than current value %.1f",
                            new_weapon_value, cur_weapon_value );
-            if( query_yn( _( "I think my %1s is better, do you really want me to use the %2s?" ), weap.tname(),
-                          given.tname() ) ) {
+            std::string weapon_query = string_format(
+                _( "I think I might be better off barehanded, do you really want me to use the %s?" ),
+                given.tname() );
+            if( !weap.is_null() ) {
+                weapon_query = string_format(
+                    _( "I think my %s is better, do you really want me to use the %s?" ),
+                    weap.tname(),
+                    given.tname() );
+            }
+            if( query_yn( weapon_query ) ) {
                 me_npc->wield( given );
                 reason = me_npc->chat_snippets().snip_give_wield.translated();
                 taken = true;
