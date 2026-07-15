@@ -220,6 +220,8 @@ class hacksaw_activity_actor : public activity_actor
         void start( player_activity &act, Character &who ) override;
         void do_turn( player_activity &/*act*/, Character &who ) override;
         void finish( player_activity &act, Character &who ) override;
+        float exertion_level() const override;
+        int get_tool_quality() const;
 
         std::unique_ptr<activity_actor> clone() const override {
             return std::make_unique<hacksaw_activity_actor>( *this );
@@ -228,6 +230,7 @@ class hacksaw_activity_actor : public activity_actor
         void serialize( JsonOut &jsout ) const override;
         static std::unique_ptr<activity_actor> deserialize( JsonValue &jsin );
 
+        int moves_left;
         // debugmsg causes a backtrace when fired during cata_test
         bool testing = false;  // NOLINT(cata-serialize)
     private:
@@ -235,8 +238,16 @@ class hacksaw_activity_actor : public activity_actor
         item_location tool;
         std::optional<itype_id> type;
         std::optional<tripoint_bub_ms> veh_pos;
+
         bool can_resume_with_internal( const activity_actor &other,
-                                       const Character &/*who*/ ) const override;
+                                       const Character &/*who*/ ) const override {
+            const hacksaw_activity_actor &actor = static_cast<const hacksaw_activity_actor &>
+                                                  ( other );
+            return actor.target == target;
+        }
+
+        void set_resume_values_internal( const activity_actor &other,
+                                         const Character &/*who*/ ) override;
 };
 
 class hacking_activity_actor : public activity_actor
@@ -460,6 +471,7 @@ class read_activity_actor : public activity_actor
         void start( player_activity &act, Character &who ) override;
         void do_turn( player_activity &act, Character &who ) override;
         void finish( player_activity &act, Character &who ) override;
+        void canceled( player_activity &act, Character &who ) override;
 
         std::string get_progress_message( const player_activity & ) const override;
 
@@ -923,6 +935,35 @@ class efile_activity_actor : public activity_actor
         time_duration charge_time( efile_action action_type );
 };
 
+class fish_activity_actor : public activity_actor
+{
+    public:
+        fish_activity_actor() = default;
+        fish_activity_actor( const item_location &fishing_rod,
+                             const std::unordered_set<tripoint_abs_ms> &fishing_zone,
+                             time_duration fishing_duration ) :
+            fishing_rod( fishing_rod ), fishing_zone( fishing_zone ), fishing_duration( fishing_duration ) {};
+
+        const activity_id &get_type() const override {
+            static const activity_id ACT_FISH( "ACT_FISH" );
+            return ACT_FISH;
+        }
+
+        void start( player_activity &act, Character & ) override;
+        void do_turn( player_activity &, Character &who ) override;
+        void finish( player_activity &act, Character &who ) override;
+
+        std::unique_ptr<activity_actor> clone() const override {
+            return std::make_unique<fish_activity_actor>( *this );
+        }
+        void serialize( JsonOut &jsout ) const override;
+        static std::unique_ptr<activity_actor> deserialize( JsonValue &jsin );
+    private:
+        item_location fishing_rod;
+        std::unordered_set<tripoint_abs_ms> fishing_zone;
+        time_duration fishing_duration;
+};
+
 class migration_cancel_activity_actor : public activity_actor
 {
     public:
@@ -989,11 +1030,10 @@ class consume_activity_actor : public activity_actor
     private:
         item_location consume_location;
         item consume_item;
-        std::vector<int> consume_menu_selections;
-        std::vector<item_location> consume_menu_selected_items;
-        std::string consume_menu_filter;
         bool canceled = false;
-        activity_id type;
+        // whether to show the consume menu after this activity finishes
+        bool reprompt_consume_menu = false;
+
         /**
          * @pre @p other is a consume_activity_actor
          */
@@ -1003,21 +1043,12 @@ class consume_activity_actor : public activity_actor
                    canceled == c_actor.canceled && &consume_item == &c_actor.consume_item;
         }
     public:
-        consume_activity_actor( const item_location &consume_location,
-                                std::vector<int> consume_menu_selections,
-                                const std::vector<item_location> &consume_menu_selected_items,
-                                const std::string &consume_menu_filter, activity_id type ) :
-            consume_location( consume_location ),
-            consume_menu_selections( std::move( consume_menu_selections ) ),
-            consume_menu_selected_items( consume_menu_selected_items ),
-            consume_menu_filter( consume_menu_filter ),
-            type( type ) {}
+        explicit consume_activity_actor( const item_location &consume_location,
+                                         bool reprompt_consume_menu = false ) :
+            consume_location( consume_location ), reprompt_consume_menu( reprompt_consume_menu ) {}
 
-        explicit consume_activity_actor( const item_location &consume_location ) :
-            consume_location( consume_location ) {}
-
-        explicit consume_activity_actor( const item &consume_item ) :
-            consume_item( consume_item ) {}
+        explicit consume_activity_actor( const item &consume_item, bool reprompt_consume_menu = false ) :
+            consume_item( consume_item ), reprompt_consume_menu( reprompt_consume_menu ) {}
 
         const activity_id &get_type() const override {
             static const activity_id ACT_CONSUME( "ACT_CONSUME" );
@@ -1143,16 +1174,21 @@ class unload_activity_actor : public activity_actor
 
 class craft_activity_actor : public activity_actor
 {
+    public:
+        enum class mode : uint8_t { active, waiting };
     private:
         craft_activity_actor() = default;
 
         item_location craft_item;
         bool is_long;
+        mode mode_ = mode::active;
 
         float activity_override = NO_EXERCISE;
         std::optional<requirement_data> cached_continuation_requirements; // NOLINT(cata-serialize)
         float cached_crafting_speed; // NOLINT(cata-serialize)
         int cached_assistants; // NOLINT(cata-serialize)
+        crafting_cost_context cached_cost_ctx; // NOLINT(cata-serialize)
+        bool cost_ctx_ready = false; // NOLINT(cata-serialize)
         double cached_base_total_moves; // NOLINT(cata-serialize)
         double cached_cur_total_moves; // NOLINT(cata-serialize)
         float cached_workbench_multiplier; // NOLINT(cata-serialize)
@@ -1163,7 +1199,8 @@ class craft_activity_actor : public activity_actor
 
         const activity_id &get_type() const override {
             static const activity_id ACT_CRAFT( "ACT_CRAFT" );
-            return ACT_CRAFT;
+            static const activity_id ACT_CRAFT_WAIT( "ACT_CRAFT_WAIT" );
+            return mode_ == mode::waiting ? ACT_CRAFT_WAIT : ACT_CRAFT;
         }
 
         void start( player_activity &act, Character &crafter ) override;
@@ -1355,15 +1392,13 @@ class harvest_activity_actor : public activity_actor
     private:
         tripoint_bub_ms target;
         bool exam_furn = false;
-        bool nectar = false;
         bool auto_forage = false;
 
         bool can_resume_with_internal( const activity_actor &other,
                                        const Character &/*who*/ ) const override {
             const harvest_activity_actor &actor = static_cast<const harvest_activity_actor &>
                                                   ( other );
-            return target == actor.target && auto_forage == actor.auto_forage &&
-                   exam_furn == actor.exam_furn && nectar == actor.nectar;
+            return target == actor.target && auto_forage == actor.auto_forage;
         }
 };
 
@@ -1663,6 +1698,12 @@ class oxytorch_activity_actor : public activity_actor
         tripoint_bub_ms target;
         item_location tool;
 
+        void set_resume_values_internal( const activity_actor &other,
+                                         const Character &/*who*/ ) override {
+            const oxytorch_activity_actor &actor = static_cast<const oxytorch_activity_actor &>
+                                                   ( other );
+            tool = actor.tool;
+        }
         bool can_resume_with_internal( const activity_actor &other,
                                        const Character &/*who*/ ) const override {
             const oxytorch_activity_actor &actor = static_cast<const oxytorch_activity_actor &>

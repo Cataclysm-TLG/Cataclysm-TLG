@@ -51,6 +51,7 @@ class event_transformation
         void load( const JsonObject &, std::string_view );
         void check() const;
         static void load_transformation( const JsonObject &, const std::string & );
+        static void finalize_all();
         static void check_consistency();
         static void reset();
 
@@ -77,6 +78,7 @@ class event_statistic
         void load( const JsonObject &, std::string_view );
         void check() const;
         static void load_statistic( const JsonObject &, const std::string & );
+        static void finalize_all();
         static void check_consistency();
         static void reset();
 
@@ -109,6 +111,7 @@ class score
         void load( const JsonObject &, std::string_view );
         void check() const;
         static void load_score( const JsonObject &, const std::string & );
+        static void finalize_all();
         static void check_consistency();
         static const std::vector<score> &get_all();
         static void reset();

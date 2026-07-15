@@ -487,8 +487,8 @@
       { "condition": "ACTIVE", "values": [ { "value": "DEXTERITY", "add": 2 } ] },
       { "condition": "INACTIVE", "values": [ { "value": "DEXTERITY", "add": -1 } ] }
     ],
-    "act_cost": "4 J",
-    "react_cost": "4 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -613,8 +613,8 @@
       { "condition": "INACTIVE", "values": [ { "value": "PERCEPTION", "add": -1 } ] }
     ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY" ],
-    "act_cost": "4 J",
-    "react_cost": "4 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -715,8 +715,8 @@
     "name": { "str": "Cranial Flashlight" },
     "description": "Surgically mounted between your eyes is a small but powerful LED flashlight.",
     "occupied_bodyparts": [ [ "head", 1 ] ],
-    "act_cost": "2 J",
-    "react_cost": "2 J",
+    "act_cost": "250 mJ",
+    "react_cost": "250 mJ",
     "time": "1 s",
     "flags": [ "BIONIC_TOGGLED" ],
     "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "LUMINATION", "add": 60 } ] } ],
@@ -728,8 +728,8 @@
     "type": "bionic",
     "name": { "str": "Ultrabright Flashlight" },
     "description": "You can greatly intensify the power of your bionic flashlight to be much brighter at a much higher power cost.",
-    "act_cost": "15 J",
-    "react_cost": "15 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s",
     "included": true,
     "flags": [ "BIONIC_TOGGLED" ],
@@ -741,8 +741,8 @@
     "type": "bionic",
     "name": { "str": "LED Tattoo" },
     "description": "A small LED display just beneath your dermal layer can be illuminated on command to show patterns of your choice at dim or bright luminosity.  It doesn't provide enough light to comfortably read or craft, but it can suffice if you have nothing else.",
-    "act_cost": "1 J",
-    "react_cost": "1 J",
+    "act_cost": "30 mJ",
+    "react_cost": "30 mJ",
     "time": "1 s",
     "flags": [ "BIONIC_TOGGLED" ],
     "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "LUMINATION", "add": 5 } ] } ]
@@ -762,15 +762,6 @@
     "description": "Tiny sensors implanted in your body are able to detect acute radiation syndrome through a gamma-H2AX assay, cross-checking blood cell counts to rapidly inform you of the severity of your exposure.  A separate sensor also scans your immediate environment to alert you to the presence of ionizing radiation.",
     "occupied_bodyparts": [ [ "torso", 2 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
     "act_cost": "10 kJ"
-  },
-  {
-    "id": "bio_gills",
-    "type": "bionic",
-    "name": { "str": "Respirator" },
-    "description": "A complex respiration augmentation system.  Improves respiration ability in air and allows breathing water.  Will automatically turn on when drowning.  Turn on to recharge stamina faster, at moderate power cost.  Asthmatics may also use it to stop asthma attacks.",
-    "occupied_bodyparts": [ [ "torso", 8 ], [ "head", 2 ], [ "mouth", 2 ] ],
-    "flags": [ "BIONIC_TOGGLED" ],
-    "trigger_cost": "25 kJ"
   },
   {
     "id": "bio_ground_sonar",
@@ -887,8 +878,8 @@
       { "condition": "ACTIVE", "values": [ { "value": "INTELLIGENCE", "add": 2 } ] },
       { "condition": "INACTIVE", "values": [ { "value": "INTELLIGENCE", "add": -1 } ] }
     ],
-    "act_cost": "4 J",
-    "react_cost": "4 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -1132,10 +1123,15 @@
     "id": "bio_purifier",
     "type": "bionic",
     "name": { "str": "Air Filtration System" },
-    "description": "Surgically implanted in your trachea is an advanced filtration system.  If toxins or airborne diseases find their way into your windpipe, the filter will attempt to remove them.",
+    "description": "An advanced system of filters have been surgically implanted throughout your airway.  They provide minor protection from smoke and irritants even while unpowered, and when powered will filter out most all harmful airborne compounds.",
     "occupied_bodyparts": [ [ "torso", 5 ], [ "mouth", 1 ] ],
-    "env_protec": [ [ "mouth", 15 ] ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "env_protec": [ [ "mouth", 8 ] ],
+    "encumbrance": [ [ "mouth", 10 ] ],
+    "toggled_pseudo_items": [ "armor_bio_filter" ],
+    "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "act_cost": "15 J",
+    "react_cost": "15 J",
+    "time": "1 s"
   },
   {
     "id": "bio_radio",
@@ -1195,7 +1191,7 @@
     "description": "A small module connected to your brain allows you to interface with nearby devices with wireless capabilities.",
     "occupied_bodyparts": [ [ "head", 2 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
-    "react_cost": 1,
+    "react_cost": "1 kJ",
     "time": "24 s"
   },
   {
@@ -1204,7 +1200,7 @@
     "name": { "str": "Sonic Resonator" },
     "description": "Your entire body may resonate at very high power, creating a short-range shockwave.  While it will not do much damage to creatures, solid objects such as walls and doors will be damaged.",
     "occupied_bodyparts": [ [ "torso", 15 ], [ "head", 1 ], [ "arm_l", 2 ], [ "arm_r", 2 ], [ "leg_l", 4 ], [ "leg_r", 4 ] ],
-    "act_cost": 100
+    "act_cost": "100 kJ"
   },
   {
     "id": "bio_scent_mask",
@@ -1214,8 +1210,8 @@
     "occupied_bodyparts": [ [ "torso", 3 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "active_flags": [ "NO_SCENT" ],
-    "act_cost": 1,
-    "react_cost": 1,
+    "act_cost": "1 kJ",
+    "react_cost": "1 kJ",
     "time": "1 m"
   },
   {
@@ -1235,7 +1231,6 @@
     "flags": [ "BIONIC_TOGGLED" ],
     "active_flags": [ "STOP_SLEEP_DEPRIVATION" ],
     "occupied_bodyparts": [ [ "head", 1 ], [ "torso", 1 ] ],
-    "act_cost": 0,
     "react_cost": "1 kJ",
     "time": "100 s"
   },
@@ -1254,7 +1249,7 @@
     "name": { "str": "Shockwave Generator" },
     "description": "You generate a powerful shockwave, knocking back all nearby creatures.  Targets are stunned briefly, take damage and additional stun upon impact with impassable terrain, and knockback any creatures they collide with.",
     "occupied_bodyparts": [ [ "torso", 20 ] ],
-    "act_cost": 250
+    "act_cost": "250 kJ"
   },
   {
     "id": "bio_sleepy",
@@ -1322,8 +1317,8 @@
       { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 2 } ] },
       { "condition": "INACTIVE", "values": [ { "value": "STRENGTH", "add": -1 } ] }
     ],
-    "act_cost": "4 J",
-    "react_cost": "4 J",
+    "act_cost": "5 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -1395,7 +1390,7 @@
     "name": { "str": "Teleportation Unit" },
     "description": "This highly experimental unit folds space over short distances, instantly transporting your body up to 25 feet at the cost of much power.  Note that prolonged or frequent use may have dangerous side effects.",
     "occupied_bodyparts": [ [ "torso", 16 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 4 ], [ "leg_r", 4 ] ],
-    "act_cost": 250
+    "act_cost": "250 kJ"
   },
   {
     "id": "bio_thumbs",
@@ -1424,7 +1419,7 @@
       [ "foot_l", 1 ],
       [ "foot_r", 1 ]
     ],
-    "act_cost": 50
+    "act_cost": "50 kJ"
   },
   {
     "id": "bio_tools",
@@ -1624,9 +1619,9 @@
   {
     "id": "bio_faulty_grossfood",
     "type": "bionic",
-    "name": { "str": "Taste Fouler" },
-    "occupied_bodyparts": [ [ "head", 1 ], [ "mouth", 1 ] ],
-    "description": "A malfunctioning processor haphazardly interfaced with your taste receptors has given everything you consume a horrid bitter taste.  Food and drink will severely harm your morale.",
+    "name": { "str": "Emetic Inducer" },
+    "occupied_bodyparts": [ [ "torso", 1 ], [ "mouth", 1 ] ],
+    "description": "A malfunctioning bionic attached to your digestive system causes intermittent nausea, making it difficult to keep food down.",
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -1666,7 +1661,7 @@
     "description": "An implant that works on simple physics rather than electronics, this CBM replaces the ulnar collateral ligaments with assistive biocompatible tethers that automatically constrict and relax to improve the user's throwing distance and accuracy.",
     "occupied_bodyparts": [ [ "arm_l", 1 ], [ "arm_r", 1 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
-    "enchantments": [ { "condition": "ALWAYS", "skills": [ { "value": "throw", "add": 3 } ] } ]
+    "enchantments": [ { "condition": "ALWAYS", "skills": [ { "value": "throw", "add": 2 } ] } ]
   },
   {
     "id": "bio_railgun",

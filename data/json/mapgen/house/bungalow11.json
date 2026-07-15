@@ -60,6 +60,7 @@
         { "chunks": [ [ "null", 80 ], [ "carcrash_10x10_rand", 20 ] ], "x": 10, "y": 0 }
       ],
       "place_loot": [
+        { "item": "fire_poker", "x": 14, "y": 8, "chance": 15 },
         { "item": "television", "x": 18, "y": 5, "chance": 90 },
         { "group": "child_items", "x": [ 2, 6 ], "y": [ 7, 8 ], "chance": 60, "repeat": [ 3, 4 ] }
       ]

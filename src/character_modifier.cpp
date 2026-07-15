@@ -59,6 +59,11 @@ void character_modifier::load_character_modifiers( const JsonObject &jo, const s
     character_modifier_factory.load( jo, src );
 }
 
+void character_modifier::finalize_all()
+{
+    character_modifier_factory.finalize();
+}
+
 void character_modifier::reset()
 {
     character_modifier_factory.reset();
@@ -256,12 +261,6 @@ float Character::get_limb_score( const limb_score_id &score, const body_part_typ
                 if( local.has_flag( flag_EFFECT_LIMB_SCORE_MOD_LOCAL ) ) {
                     local_mul = local.get_limb_score_mod( score, resists_effect( local ) );
                     mod *= local_mul;
-                    if( local_mul != 1.0f ) {
-                        add_msg_debug( debugmode::DF_CHARACTER,
-                                       "Local limb score modifier %s for limb score %s on BP %s found, effect multiplier %.1f, score contribution after modifier %.1f",
-                                       local.disp_name(),
-                                       score.c_str(), id.first.c_str(), local_mul, mod );
-                    }
                 }
             }
         }
@@ -364,8 +363,10 @@ float character_modifier::modifier( const Character &c, const skill_id &skill ) 
 
     // score == 0
     if( score < std::numeric_limits<float>::epsilon() ) {
-        return min_val > std::numeric_limits<float>::epsilon() ? min_val :
-               max_val > std::numeric_limits<float>::epsilon() ? max_val : 0.0f;
+        if( nominator > std::numeric_limits<float>::epsilon() ) {
+            return max_val > std::numeric_limits<float>::epsilon() ? max_val : 0.0f;
+        }
+        return min_val > std::numeric_limits<float>::epsilon() ? min_val : 0.0f;
     }
     if( nominator > std::numeric_limits<float>::epsilon() ) {
         score = ( nominator / denominator ) / score;

@@ -215,7 +215,7 @@ void Character::gunmod_add( item &gun, item &mod )
         if( !query_yn( _( "Permanently install your %1$s in your %2$s?" ),
                        colorize( moved_mod.tname(), moved_mod.color_in_inventory() ),
                        colorize( wielded_gun->tname(), wielded_gun->color_in_inventory() ) ) ) {
-            add_msg_if_player( _( "Never mind." ) );
+            add_msg_if_player( _( "Nevermind." ) );
             return; // player canceled installation
         }
     }
@@ -234,7 +234,7 @@ void Character::gunmod_add( item &gun, item &mod )
 
         prompt.query();
         if( prompt.ret < 0 ) {
-            add_msg_if_player( _( "Never mind." ) );
+            add_msg_if_player( _( "Nevermind." ) );
             return; // player canceled installation
         }
         actions[prompt.ret]();

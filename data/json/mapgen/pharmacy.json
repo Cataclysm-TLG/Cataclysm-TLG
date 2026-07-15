@@ -34,8 +34,8 @@
       "terrain": {
         ",": "t_region_groundcover_urban",
         "_": "t_concrete",
-        "O": "t_reinforced_glass_shutter_open",
-        "!": "t_reinforced_glass",
+        "O": "t_laminated_glass_shutter_open",
+        "!": "t_laminated_glass",
         "+": "t_door_c",
         ".": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         " ": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },

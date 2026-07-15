@@ -114,17 +114,6 @@
         "topic": "TALK_REFUGEE_Boris_MakeDoWith3"
       },
       {
-        "text": "I spoke with everyone I could, but only four people agreed to help.  I can pitch in if you want.",
-        "condition": {
-          "and": [
-            { "u_has_mission": "MISSION_REFUGEE_Boris_CLEANUP" },
-            { "not": { "npc_has_var": "mission_Boris_mission_1_cleanup_asked", "value": "yes" } },
-            { "math": [ "u_mission_cleanup_promises_Boris_mission_1", "==", "4" ] }
-          ]
-        },
-        "topic": "TALK_REFUGEE_Boris_MakeDoWith4"
-      },
-      {
         "text": "Is there anything I can help you out with?",
         "topic": "TALK_REFUGEE_Boris_Work1",
         "condition": { "not": { "u_has_var": "mission_completed_Boris_mission_1", "value": "yes" } }
@@ -490,29 +479,14 @@
     }
   },
   {
-    "type": "talk_topic",
-    "id": "TALK_REFUGEE_Boris_MakeDoWith4",
-    "dynamic_line": {
-      "gendered_line": "That is quite alright, four should be enough though I appreciate your offer.  Four people will make the job much easier and I will do my best even if it is painful.  My thanks, friend.",
-      "relevant_genders": [ "u" ]
-    },
-    "responses": [ { "text": "Good to hear.  I'm sure everyone will appreciate that place being cleaned up.", "topic": "TALK_DONE" } ],
-    "speaker_effect": {
-      "effect": [
-        { "math": [ "u_mission_cleanup_promises_Boris_mission_1", "++" ] },
-        { "npc_add_var": "mission_Boris_mission_1_cleanup_asked", "value": "yes" }
-      ]
-    }
-  },
-  {
     "id": "MISSION_REFUGEE_Boris_CLEANUP",
     "type": "mission_definition",
     "name": { "str": "Find someone to clean up the back bay." },
-    "description": "Boris in the refugee center is looking for at least five people to help clean up the back bay",
+    "description": "Boris in the refugee center is looking for at least four people to help clean up the back bay",
     "difficulty": 1,
     "value": 0,
     "goal": "MGOAL_CONDITION",
-    "goal_condition": { "math": [ "u_mission_cleanup_promises_Boris_mission_1", ">=", "5" ] },
+    "goal_condition": { "math": [ "u_mission_cleanup_promises_Boris_mission_1", ">=", "4" ] },
     "followup": "MISSION_REFUGEE_Boris_WORKSPACE",
     "origins": [ "ORIGIN_SECONDARY" ],
     "has_generic_rewards": false,
@@ -583,13 +557,7 @@
     "origins": [ "ORIGIN_SECONDARY" ],
     "has_generic_rewards": false,
     "start": {
-      "assign_mission_target": {
-        "om_terrain": "shelter_2_vandal",
-        "om_special": "Evac Shelter Vandalized 3",
-        "reveal_radius": 1,
-        "random": true,
-        "search_range": 120
-      },
+      "assign_mission_target": { "om_terrain": "shelter", "om_special": "Evac Shelter", "reveal_radius": 1, "random": true, "search_range": 120 },
       "update_mapgen": { "place_item": [ { "item": "laptop_boris", "x": 15, "y": 12 }, { "item": "mbag", "x": 15, "y": 12 } ] }
     },
     "dialogue": {

@@ -27,6 +27,7 @@
 #include "weakpoint.h"
 
 class Creature;
+class JsonValue;
 class monster;
 struct dealt_projectile_attack;
 template <typename E> struct enum_traits;
@@ -37,7 +38,6 @@ using mon_action_death  = void ( * )( monster & );
 using mon_action_attack = bool ( * )( monster * );
 using mon_action_defend = void ( * )( monster &, Creature *, dealt_projectile_attack const * );
 using bodytype_id = std::string;
-class JsonArray;
 class JsonObject;
 
 // These are triggers which may affect the monster's anger or morale.
@@ -70,6 +70,7 @@ struct mon_flag {
 
     void load( const JsonObject &jo, std::string_view src );
     static void load_mon_flags( const JsonObject &jo, const std::string &src );
+    static void finalize_all();
     static void reset();
     static const std::vector<mon_flag> &get_all();
 };
@@ -118,7 +119,6 @@ extern mon_flag_id mon_flag_ACIDPROOF,
        mon_flag_ELECTRIC,
        mon_flag_ELECTRIC_FIELD,
        mon_flag_ELECTRONIC,
-       mon_flag_FAE_CREATURE,
        mon_flag_FILTHY,
        mon_flag_FIREPROOF,
        mon_flag_FIREY,
@@ -145,8 +145,6 @@ extern mon_flag_id mon_flag_ACIDPROOF,
        mon_flag_KEENNOSE,
        mon_flag_KEEP_DISTANCE,
        mon_flag_LOUDMOVES,
-       mon_flag_MECH_DEFENSIVE,
-       mon_flag_MECH_RECON_VISION,
        mon_flag_MILKABLE,
        mon_flag_NEMESIS,
        mon_flag_NEVER_WANDER,
@@ -180,7 +178,6 @@ extern mon_flag_id mon_flag_ACIDPROOF,
        mon_flag_RANGED_ATTACKER,
        mon_flag_REVIVES,
        mon_flag_REVIVES_HEALTHY,
-       mon_flag_RIDEABLE_MECH,
        mon_flag_SEES,
        mon_flag_SHORTACIDTRAIL,
        mon_flag_SILENT_DISAPPEAR,
@@ -225,6 +222,9 @@ struct mon_effect_data {
 
     mon_effect_data();
     void load( const JsonObject &jo );
+    void deserialize( const JsonObject &jo ) {
+        load( jo );
+    }
 };
 
 /** Pet food data */
@@ -280,12 +280,16 @@ struct mount_item_data {
      * If this monster is a rideable mount that spawns with storage bags, this is the storage item id
      */
     itype_id storage;
+
+    void deserialize( const JsonObject &jo );
 };
 
 struct revive_type {
     std::function<bool( const_dialogue const & )> condition;
     mtype_id revive_mon = mtype_id::NULL_ID();
     mongroup_id revive_monster_group = mongroup_id::NULL_ID();
+
+    void deserialize( const JsonObject &jo );
 };
 struct mtype {
     private:
@@ -330,14 +334,6 @@ struct mtype {
          * of this type (if it's friendly).
          */
         itype_id revert_to_itype;
-        /**
-         * If this monster is a rideable mech with built-in weapons, this is the weapons id
-         */
-        itype_id mech_weapon;
-        /**
-         * If this monster is a rideable mech it needs a power source battery type
-         */
-        itype_id mech_battery;
 
         /** Stores effect data for effects placed on attack */
         std::vector<mon_effect_data> atk_effs;
@@ -364,7 +360,14 @@ struct mtype {
         bodytype_id bodytype;
         shearing_data shearing;
 
-        std::map<itype_id, int> starting_ammo; // Amount of ammo the monster spawns with.
+        // Amount of ammo the monster spawns with.
+        std::map<itype_id, int> starting_ammo;
+        /**
+         * Monster will spawn with a random ammo count between this and starting_ammo.
+         * If starting_ammo_min > starting_ammo, ammo will not be randomized.
+        */
+        int starting_ammo_min = 0;
+
         // Name of item group that is used to create item dropped upon death, or empty.
         item_group_id death_drops;
 
@@ -424,7 +427,6 @@ struct mtype {
         int agro = 0;           /** chance will attack [-100,100] */
         int morale = 0;         /** initial morale level at spawn */
         int stomach_size = 0;         /** how many times this monster will eat */
-        int amount_eaten = 0;         /** how many times it has eaten */
 
         // how close the monster is willing to approach its target while under the MATT_FOLLOW attitude
         int tracking_distance = 8;
@@ -477,11 +479,6 @@ struct mtype {
 
         // Monster reproduction variables
         int baby_count;
-
-        /**
-         * If this monster is a rideable mech with enhanced strength, this is the strength it gives to the player
-         */
-        int mech_str_bonus = 0;
 
         // Grinding cap for training player's melee skills when hitting this monster, defaults to MAX_SKILL.
         int melee_training_cap;
@@ -554,24 +551,7 @@ struct mtype {
         void faction_display( catacurses::window &w, const point &top_left, int width ) const;
 
         // Historically located in monstergenerator.cpp
-        void load( const JsonObject &jo, const std::string &src );
-
-    private:
-
-        void add_special_attacks( const JsonObject &jo, std::string_view member_name,
-                                  const std::string &src );
-        void remove_special_attacks( const JsonObject &jo, std::string_view member_name,
-                                     std::string_view src );
-
-        void add_special_attack( const JsonArray &inner, std::string_view src );
-        void add_special_attack( const JsonObject &obj, const std::string &src );
-
-        void add_regeneration_modifiers( const JsonObject &jo, std::string_view member_name,
-                                         std::string_view src );
-        void remove_regeneration_modifiers( const JsonObject &jo, std::string_view member_name,
-                                            std::string_view src );
-
-        void add_regeneration_modifier( const JsonArray &inner, std::string_view src );
+        void load( const JsonObject &jo, std::string_view src );
 };
 
 #endif // CATA_SRC_MTYPE_H

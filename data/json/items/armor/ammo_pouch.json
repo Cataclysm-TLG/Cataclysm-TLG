@@ -456,7 +456,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "pipe quiver" },
-    "description": "A makeshift quiver fashioned from a pipe, worn at the waist.  Heavier and thinner than a typical quiver, it can only hold six arrows or eight bolts.",
+    "description": "A makeshift quiver fashioned from sections of pipe strapped together and worn at the waist.  Heavier and thinner than a typical quiver, it can only hold six arrows or eight bolts.",
     "weight": "800 g",
     "volume": "370 ml",
     "price": "65 USD",
@@ -1136,6 +1136,24 @@
         "coverage": 5,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 2,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 2,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
+      },
+      {
+        "encumbrance": [ 2, 3 ],
+        "coverage": 2,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
       }
     ]
   },
@@ -1183,14 +1201,13 @@
     "id": "tactical_grenade_pouch",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "//": " stats taken from: https://www.tacticalassaultgearstore.com/molle-frag-grenade-pouch.html",
     "name": { "str": "tactical grenade pouch", "str_pl": "tactical grenade pouches" },
-    "description": "A pouch designed to hold one military grenade, keeping it both accessible and secure.  Has MOLLE straps for attaching to a belt or vest.",
+    "description": "A pouch designed to hold one hand grenade, keeping it both accessible and secure.  Has MOLLE straps for attaching to a belt or vest.",
     "weight": "200 g",
     "volume": "100 ml",
     "price": "20 USD",
-    "price_postapoc": "2 USD",
-    "material": [ "nylon" ],
+    "price_postapoc": "50 cent",
+    "material": [ { "type": "nylon", "portion": 4 }, { "type": "plastic", "portion": 1 } ],
     "symbol": "[",
     "looks_like": "holster",
     "color": "dark_gray",
@@ -1302,49 +1319,6 @@
     "material_thickness": 0.5,
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "PALS_MEDIUM" ],
     "armor": [ { "encumbrance": 2, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ]
-  },
-  {
-    "id": "xlkevlar",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "Kevlar vest" },
-    "description": "A massive handmade imitation of a proper ballistic vest for abnormally large folks.  Large and heavy, but will still fit under an abnormally large coat.",
-    "weight": "4210 g",
-    "volume": "8 L",
-    "price_postapoc": "25 USD",
-    "to_hit": -3,
-    "material": [ "kevlar_layered", "nylon" ],
-    "symbol": "[",
-    "looks_like": "ballistic_vest_concealable",
-    "color": "light_gray",
-    "warmth": 20,
-    "material_thickness": 5,
-    "flags": [ "STURDY", "OVERSIZE", "PREFIX_XL" ],
-    "armor": [
-      {
-        "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
-        ],
-        "encumbrance": 6,
-        "coverage": 98,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      },
-      {
-        "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
-        ],
-        "//": "encumbrance handled above",
-        "encumbrance": 0,
-        "coverage": 92,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ]
-      }
-    ],
-    "melee_damage": { "bash": 6 }
   },
   {
     "id": "ammo_satchel_leather",

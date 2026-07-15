@@ -51,9 +51,9 @@
     "armor": { "bash": 4, "cut": 12, "bullet": 10, "electric": 2 }
   },
   {
-    "id": "mon_mi_go_slaver",
+    "id": "mon_mi_go_abductor",
     "type": "MONSTER",
-    "name": { "str": "mi-go slaver" },
+    "name": { "str": "mi-go abductor" },
     "description": "An alien creature of uncertain origin.  Its shapeless pink body bears numerous sets of paired appendages of unknown function, and a pair of ribbed, membranous wings which seem to be quite useless.  Its odd, vaguely pyramid-shaped head bristles with numerous wavering antennae, and it moves with an uncanny fluidity on its many legs.  It is carrying an oblong object that hums with an odd keening sound.",
     "default_faction": "mi-go",
     "bodytype": "migo",
@@ -112,7 +112,7 @@
   {
     "id": "mon_mi_go_surgeon",
     "type": "MONSTER",
-    "name": { "str": "mi-go surgeon" },
+    "name": { "str": "mi-go vivisector" },
     "description": "This mi-go has a slender body with snaking carapace along it, and even more paired clawed appendages.  Its claws are smaller and more delicate looking, but that does not make them less unnerving.",
     "default_faction": "mi-go",
     "bodytype": "migo",
@@ -164,7 +164,7 @@
   {
     "id": "mon_mi_go_guard",
     "type": "MONSTER",
-    "name": { "str": "mi-go guard" },
+    "name": { "str": "mi-go defender" },
     "description": "A more heavily armored version of the common mi-go.  Its trunk is a shapeless mass of strange flesh encased in an iridescent carapace, from which sprout several appendages terminating in what appear to be devices of some sort.  Its pyramidal head is encrusted in barnacle-like armor, aside from the bristling antennae that serve as its - you assume - sensory devices and mouth.",
     "default_faction": "mi-go",
     "bodytype": "migo",
@@ -194,8 +194,8 @@
     "scents_ignored": [ "sc_fetid" ],
     "special_attacks": [
       [ "PARROT", 100 ],
-      [ "SHRIEK_ALERT", 5 ],
-      [ "SHRIEK_STUN", 4 ],
+      [ "SHRIEK_ALERT", 120 ],
+      [ "SHRIEK_STUN", 34 ],
       [ "TAZER", 5 ],
       { "id": "scratch", "damage_max_instance": [ { "damage_type": "cut", "amount": 35, "armor_multiplier": 0.7 } ] },
       {
@@ -226,7 +226,7 @@
   {
     "id": "mon_mi_go_myrmidon",
     "type": "MONSTER",
-    "name": { "str": "mi-go myrmidon" },
+    "name": { "str": "giant mi-go" },
     "description": "This creature resembles the smaller mi-go like a grizzly bear resembles a human.  Its enormous, thick body is covered in an iridescent segmented carapace, like a scarab crossed with an isopod.  It boasts several pairs of deadly looking claws and other appendages, and it moves with a strange, slow grace, like an otherworldly dancer.  It appears to be carrying weaponry.",
     "default_faction": "mi-go",
     "bodytype": "migo",
@@ -288,7 +288,7 @@
   {
     "id": "mon_mi_go_captured",
     "type": "MONSTER",
-    "name": { "str": "partially harvested mi-go" },
+    "name": { "str": "vivisected mi-go" },
     "description": "This creature resembles the smaller mi-go like a grizzly bear resembles a human.  Its enormous, thick body is covered in an iridescent segmented carapace, like a scarab crossed with an isopod.  It has been mostly pulled apart and is stuck to a surgical table that seems to be keeping it alive.",
     "default_faction": "mi-go",
     "bodytype": "migo",

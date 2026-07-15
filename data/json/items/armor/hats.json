@@ -15,7 +15,7 @@
     "color": "brown",
     "warmth": 8,
     "material_thickness": 0.3,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
@@ -50,7 +50,7 @@
     "color": "blue",
     "warmth": 5,
     "material_thickness": 0.1,
-    "environmental_protection": 1,
+    "environmental_protection": 3,
     "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 70, "covers": [ "head" ] } ]
   },
   {
@@ -121,7 +121,7 @@
     "color": "dark_gray",
     "warmth": 5,
     "material_thickness": 0.3,
-    "environmental_protection": 1,
+    "environmental_protection": 3,
     "flags": [ "FANCY", "VARSIZE" ],
     "armor": [
       {
@@ -147,6 +147,7 @@
     "looks_like": "hat_cotton",
     "color": "dark_gray",
     "material_thickness": 0.1,
+    "environmental_protection": 2,
     "flags": [ "OVERSIZE", "WATER_FRIENDLY", "ALLOWS_NATURAL_ATTACKS", "SOFT" ],
     "armor": [
       {
@@ -173,7 +174,7 @@
     "color": "brown",
     "warmth": 7,
     "material_thickness": 0.3,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
@@ -199,6 +200,7 @@
     "weight": "733 g",
     "volume": "1500 ml",
     "material_thickness": 0.2,
+    "environmental_protection": 4,
     "pocket_data": [
       {
         "max_contains_volume": "500 ml",
@@ -229,7 +231,7 @@
     "color": "dark_gray",
     "warmth": 4,
     "material_thickness": 0.2,
-    "environmental_protection": 1,
+    "environmental_protection": 2,
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -255,7 +257,7 @@
     "color": "dark_gray",
     "warmth": 5,
     "material_thickness": 0.3,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
@@ -282,7 +284,7 @@
     "color": "dark_gray",
     "warmth": 5,
     "material_thickness": 0.3,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
@@ -309,7 +311,7 @@
     "color": "dark_gray",
     "warmth": 5,
     "material_thickness": 0.3,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
@@ -337,7 +339,7 @@
     "color": "dark_gray",
     "warmth": 5,
     "material_thickness": 0.1,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "SUN_SHADE" ],
     "armor": [
       {
@@ -364,7 +366,7 @@
     "color": "white",
     "warmth": 5,
     "material_thickness": 0.1,
-    "environmental_protection": 1,
+    "environmental_protection": 2,
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -390,7 +392,7 @@
     "color": "dark_gray",
     "warmth": 15,
     "material_thickness": 0.1,
-    "environmental_protection": 1,
+    "environmental_protection": 3,
     "flags": [ "VARSIZE" ],
     "armor": [
       {
@@ -417,7 +419,7 @@
     "color": "brown",
     "warmth": 60,
     "material_thickness": 0.3,
-    "environmental_protection": 2,
+    "environmental_protection": 4,
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -455,7 +457,7 @@
     "color": "yellow",
     "warmth": 5,
     "material_thickness": 4,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "RAINPROOF", "PADDED", "OUTER", "NORMAL" ],
     "armor": [
@@ -551,7 +553,7 @@
     "warmth": 4,
     "material_thickness": 4,
     "techniques": [ "WBLOCK_1" ],
-    "environmental_protection": 1,
+    "environmental_protection": 5,
     "flags": [ "RAINPROOF", "PADDED", "SUN_SHADE", "OUTER", "NORMAL" ],
     "armor": [
       {
@@ -622,7 +624,7 @@
     "color": "light_red",
     "warmth": 45,
     "material_thickness": 0.3,
-    "environmental_protection": 2,
+    "environmental_protection": 3,
     "flags": [ "VARSIZE" ],
     "armor": [
       {
@@ -649,7 +651,7 @@
     "color": "dark_gray",
     "warmth": 45,
     "material_thickness": 0.5,
-    "environmental_protection": 2,
+    "environmental_protection": 3,
     "flags": [ "VARSIZE" ],
     "armor": [
       {
@@ -730,7 +732,7 @@
     "color": "light_red",
     "warmth": 15,
     "material_thickness": 0.2,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "OUTER", "SUN_SHADE" ],
     "armor": [
       {
@@ -876,7 +878,7 @@
     "color": "blue",
     "warmth": 6,
     "material_thickness": 0.1,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "SUN_SHADE" ],
     "armor": [
       {
@@ -903,7 +905,7 @@
     "color": "red",
     "warmth": 20,
     "material_thickness": 0.3,
-    "environmental_protection": 1,
+    "environmental_protection": 3,
     "flags": [ "VARSIZE", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
     "armor": [
       {
@@ -930,7 +932,7 @@
     "color": "dark_gray",
     "warmth": 2,
     "material_thickness": 0.2,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "SUN_SHADE", "NORMAL", "OUTER", "BELTED" ],
     "armor": [
       {
@@ -957,6 +959,7 @@
     "looks_like": "hat_cotton",
     "warmth": 5,
     "color": "white",
+    "environmental_protection": 3,
     "flags": [ "PSYSHIELD_PARTIAL", "SKINTIGHT", "TRADER_AVOID", "NO_REPAIR", "SOFT" ],
     "armor": [
       {
@@ -983,7 +986,7 @@
     "color": "dark_gray",
     "warmth": 8,
     "material_thickness": 0.2,
-    "environmental_protection": 1,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "SUPER_FANCY", "SUN_SHADE", "NORMAL", "OUTER", "BELTED" ],
     "armor": [
       {
@@ -1010,7 +1013,7 @@
     "color": "brown",
     "warmth": 7,
     "material_thickness": 0.6,
-    "environmental_protection": 1,
+    "environmental_protection": 5,
     "flags": [ "VARSIZE", "RAINPROOF", "WATER_FRIENDLY", "SUN_SHADE", "NORMAL", "OUTER", "BELTED" ],
     "armor": [
       { "encumbrance_modifiers": [ "NONE" ], "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] },
@@ -1039,7 +1042,7 @@
     "color": "white",
     "warmth": 8,
     "material_thickness": 0.3,
-    "environmental_protection": 1,
+    "environmental_protection": 3,
     "flags": [ "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
     "armor": [
       {
@@ -1066,7 +1069,7 @@
     "color": "dark_gray",
     "warmth": 5,
     "material_thickness": 0.1,
-    "environmental_protection": 1,
+    "environmental_protection": 2,
     "flags": [ "SUN_SHADE" ],
     "armor": [
       {
@@ -1092,7 +1095,7 @@
     "color": "light_blue",
     "warmth": 8,
     "material_thickness": 0.2,
-    "environmental_protection": 1,
+    "environmental_protection": 3,
     "flags": [ "VARSIZE" ],
     "armor": [
       {

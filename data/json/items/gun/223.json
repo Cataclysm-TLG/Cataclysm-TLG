@@ -31,8 +31,7 @@
       [ "stock accessory", 1 ],
       [ "stock", 1 ]
     ],
-    "flags": [ "NO_TURRET", "FIRE_TWOHAND" ],
-    "//3": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
+    "flags": [ "FIRE_TWOHAND" ],
     "melee_damage": { "bash": 12 }
   },
   {
@@ -67,7 +66,7 @@
       [ "stock", 1 ]
     ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
-    "flags": [ "NO_TURRET", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "NO_TURRET" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -101,16 +100,8 @@
     "looks_like": "oa93",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "Rifle caliber pistol" },
+    "name": { "str": "Kel-Tec PLR16 pistol" },
     "description": "This is a semi-automatic pistol chambered in 5.56x45, using a gas piston to reduce length and a frame constructed from reinforced polymer to make it both durable and light-weight.  This one comes with a plastic handguard.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "plr16",
-        "name": { "str": "Kel-Tec PLR16 pistol" },
-        "description": "This is a semi-automatic pistol chambered in 5.56 NATO, using a gas piston to reduce length and a frame constructed from reinforced polymer to make it both durable and light-weight.  This one comes with a plastic handguard."
-      }
-    ],
     "weight": "1800 g",
     "volume": "1665 ml",
     "longest_side": "485 mm",
@@ -127,7 +118,6 @@
     "dispersion": 300,
     "durability": 6,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "min_cycle_recoil": 1350,
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -259,8 +249,7 @@
       [ "stock", 1 ]
     ],
     "melee_damage": { "bash": 12 },
-    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
-    "//3": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow."
+    "flags": [ "FIRE_TWOHAND" ]
   },
   {
     "id": "scar_l",
@@ -450,7 +439,7 @@
     "subtypes": [ "GUN" ],
     "copy-from": "rifle_auto",
     "name": { "str": "M4 carbine" },
-    "description": "A popular carbine, long used by the US military.  Though accurate, small, and lightweight, it is infamous for its unreliability when not properly maintained.  It is chambered in 5.56x45mm and accepts STANAG magazines.",
+    "description": "A popular carbine, long used by the US military.  Though accurate, small, and lightweight, it is infamous for its unreliability when not properly maintained.",
     "weight": "880 g",
     "volume": "1760 ml",
     "longest_side": "470 mm",
@@ -490,8 +479,7 @@
       [ "stock accessory", 1 ],
       [ "stock", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
-    "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
+    "flags": [ "FIRE_TWOHAND" ],
     "melee_damage": { "bash": 12 }
   },
   {
@@ -533,8 +521,7 @@
       [ "stock accessory", 1 ],
       [ "stock", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
-    "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
+    "flags": [ "FIRE_TWOHAND" ],
     "melee_damage": { "bash": 12 }
   },
   {
@@ -559,8 +546,7 @@
       }
     ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "AUTO", "auto", 4 ] ],
-    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
-    "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow."
+    "flags": [ "FIRE_TWOHAND" ]
   },
   {
     "id": "m231pfw",
@@ -652,7 +638,6 @@
     "ammo": [ "223" ],
     "skill": "pistol",
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "range": -6,
     "dispersion": 380,
     "durability": 6,
@@ -984,8 +969,7 @@
       [ "stock accessory", 2 ],
       [ "underbarrel", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
-    "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
+    "flags": [ "FIRE_TWOHAND" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -1126,8 +1110,7 @@
       [ "stock accessory", 2 ],
       [ "stock", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "NO_TURRET", "EASY_CLEAN" ],
-    "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
+    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN" ],
     "melee_damage": { "bash": 10 }
   },
   {

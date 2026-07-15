@@ -14,7 +14,7 @@
     "flags": [ "TRANSPARENT" ],
     "deconstruct": {
       "items": [
-        { "item": "pipe", "count": 1 },
+        { "item": "cu_pipe", "count": 1 },
         { "item": "scrap", "count": [ 2, 6 ] },
         { "item": "steel_fragment", "count": [ 1, 3 ] },
         { "item": "sheet_metal", "count": [ 2, 6 ] },

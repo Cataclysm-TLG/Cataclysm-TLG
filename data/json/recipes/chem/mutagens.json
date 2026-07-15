@@ -27,9 +27,16 @@
     ],
     "components": [
       [
+        [ "slime_scrap", 20 ],
         [ "meat_tainted", 3 ],
+        [ "meat_mutant_tainted", 3 ],
+        [ "meat_tainted_human", 3 ],
         [ "dry_meat_tainted", 3 ],
+        [ "dry_meat_tainted_human", 3 ],
         [ "tainted_innards", 4 ],
+        [ "tainted_innards_human", 4 ],
+        [ "blood_tainted", 4 ],
+        [ "blood_tainted_human", 4 ],
         [ "fetus", 1 ],
         [ "arm", 2 ],
         [ "leg", 2 ]
@@ -399,7 +406,12 @@
     "components": [
       [ [ "mutagen", 1 ] ],
       [ [ "rat_sample", 1 ] ],
-      [ [ "meat_tainted", 6 ], [ "dry_meat_tainted", 6 ] ],
+      [
+        [ "meat_tainted", 6 ],
+        [ "dry_meat_tainted", 6 ],
+        [ "meat_tainted_human", 6 ],
+        [ "dry_meat_tainted_human", 6 ]
+      ],
       [ [ "quikclot", 2 ], [ "rat_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]
@@ -448,8 +460,8 @@
     "components": [
       [ [ "mutagen", 1 ] ],
       [ [ "chiropteran_sample", 1 ] ],
-      [ [ "animal_blood", 6 ], [ "mutant_blood", 6 ] ],
-      [ [ "meal_bone_tainted", 1 ], [ "chiropteran_sample", 1 ] ]
+      [ [ "animal_blood", 6 ], [ "mutant_blood", 6 ], [ "blood", 6 ] ],
+      [ [ "tainted_marrow", 1 ], [ "tainted_marrow_human", 1 ], [ "chiropteran_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]
   },
@@ -675,7 +687,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "mutagen_lupine",
+    "result": "mutagen_canine",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "chemistry",
@@ -702,7 +714,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "iv_mutagen_lupine",
+    "result": "iv_mutagen_canine",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "chemistry",
@@ -718,7 +730,7 @@
       { "proficiency": "prof_chem_synth" }
     ],
     "using": [ [ "serum_production_standard", 37 ] ],
-    "components": [ [ [ "mutagen_lupine", 2 ] ], [ [ "canine_sample", 1 ] ] ],
+    "components": [ [ [ "mutagen_canine", 2 ] ], [ [ "canine_sample", 1 ] ] ],
     "flags": [ "SECRET" ]
   },
   {
@@ -792,8 +804,8 @@
     "components": [
       [ [ "mutagen", 1 ] ],
       [ [ "cephalopod_sample", 1 ] ],
-      [ [ "meat_tainted", 6 ], [ "dry_meat_tainted", 6 ], [ "can_chowder", 1 ], [ "can_clams", 1 ] ],
-      [ [ "permanent_ink", 800 ], [ "cephalopod_sample", 1 ] ]
+      [ [ "can_chowder", 1 ], [ "can_clams", 1 ], [ "mollusk", 1 ], [ "mollusk_cooked", 2 ] ],
+      [ [ "cephalopod_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]
   },
@@ -1418,7 +1430,7 @@
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_MUTAGEN",
     "skill_used": "chemistry",
-    "skills_required": [ "survival", 3 ],
+    "skills_required": [ "firstaid", 3 ],
     "difficulty": 5,
     "time": "5 m",
     "batch_time_factors": [ 20, 5 ],
@@ -1445,7 +1457,7 @@
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_MUTAGEN",
     "skill_used": "chemistry",
-    "skills_required": [ "survival", 3 ],
+    "skills_required": [ "firstaid", 3 ],
     "difficulty": 5,
     "time": "30 m",
     "batch_time_factors": [ 20, 5 ],
@@ -1472,7 +1484,6 @@
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_MUTAGEN",
     "skill_used": "chemistry",
-    "skills_required": [ "survival", 3 ],
     "difficulty": 6,
     "time": "20 m",
     "batch_time_factors": [ 20, 5 ],
@@ -1494,7 +1505,7 @@
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_MUTAGEN",
     "skill_used": "chemistry",
-    "skills_required": [ "survival", 3 ],
+    "skills_required": [ "firstaid", 3 ],
     "difficulty": 6,
     "time": "5 m",
     "batch_time_factors": [ 20, 5 ],
@@ -1530,22 +1541,16 @@
     "components": [
       [ [ "human_sample", 1 ] ],
       [
-        [ "heroin", 5 ],
-        [ "oxycodone", 10 ],
-        [ "tramadol", 15 ],
-        [ "diazepam", 15 ],
-        [ "codeine", 20 ],
-        [ "poppy_pain", 20 ]
+        [ "heroin", 1 ],
+        [ "oxycodone", 2 ],
+        [ "tramadol", 5 ],
+        [ "codeine", 5 ],
+        [ "opium_tar", 8 ],
+        [ "xanax", 3 ],
+        [ "diazepam", 3 ],
+        [ "pills_sleep", 5 ]
       ],
-      [
-        [ "lsd", 5 ],
-        [ "prozac", 10 ],
-        [ "thorazine", 10 ],
-        [ "adderall", 10 ],
-        [ "xanax", 10 ],
-        [ "pills_sleep", 10 ],
-        [ "poppy_sleep", 15 ]
-      ],
+      [ [ "lsd", 1 ], [ "meth", 1 ], [ "adderall", 2 ] ],
       [ [ "vitamins", 5 ], [ "iodine", 5 ], [ "disinfectant", 25 ], [ "protein_powder", 20 ] ]
     ],
     "flags": [ "SECRET" ]
@@ -1557,7 +1562,7 @@
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_MUTAGEN",
     "skill_used": "chemistry",
-    "skills_required": [ "survival", 3 ],
+    "skills_required": [ "firstaid", 3 ],
     "difficulty": 7,
     "time": "5 m",
     "batch_time_factors": [ 20, 5 ],

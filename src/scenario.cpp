@@ -105,6 +105,7 @@ void scenario::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "requirement", _requirement );
 
     optional( jo, was_loaded, "reveal_locale", reveal_locale, true );
+    optional( jo, was_loaded, "distance_initial_visibility", distance_initial_visibility, 15 );
 
     optional( jo, was_loaded, "eoc", _eoc, auto_flags_reader<effect_on_condition_id> {} );
 
@@ -231,11 +232,14 @@ void scenario::reset()
     all_scenarios.reset();
 }
 
-void scenario::finalize()
+void scenario::check_all()
 {
-    for( const scenario &scen : all_scenarios.get_all() ) {
-        scen.check_definition();
-    }
+    all_scenarios.check();
+}
+
+void scenario::finalize_all()
+{
+    all_scenarios.finalize();
     sc_blacklist.finalize();
 }
 
@@ -248,7 +252,7 @@ static void check_traits( const std::set<trait_id> &traits, const string_id<scen
     }
 }
 
-void scenario::check_definition() const
+void scenario::check() const
 {
     for( const auto &p : professions ) {
         if( !p.is_valid() ) {
@@ -577,6 +581,11 @@ std::optional<achievement_id> scenario::get_requirement() const
 bool scenario::get_reveal_locale() const
 {
     return reveal_locale;
+}
+
+bool scenario::get_distance_initial_visibility() const
+{
+    return distance_initial_visibility;
 }
 
 void scenario::normalize_calendar() const

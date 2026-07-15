@@ -7,11 +7,12 @@
     "memorial_male": { "ctxt": "memorial_male", "str": "Stepped on bubble wrap." },
     "memorial_female": { "ctxt": "memorial_female", "str": "Stepped on bubble wrap." },
     "symbol": "_",
-    "visibility": 0,
+    "visibility": -1,
     "avoidance": 8,
     "difficulty": 0,
     "action": "bubble",
     "drops": [ "bubblewrap" ],
+    "benign": true,
     "vehicle_data": { "sound_volume": 18, "sound": "Pop!" }
   },
   {
@@ -27,6 +28,7 @@
     "difficulty": 0,
     "action": "glass",
     "drops": [ "glass_shard" ],
+    "benign": true,
     "vehicle_data": { "sound_volume": 10, "sound": "Crunch!" }
   },
   {
@@ -230,7 +232,7 @@
     "flags": [ "ECHOLOCATION_DETECTABLE" ],
     "vehicle_data": {
       "damage": 300,
-      "sound_volume": 8,
+      "sound_volume": 16,
       "sound": "SNAP!",
       "sound_type": "trap",
       "sound_variant": "bear_trap",
@@ -255,7 +257,7 @@
     "flags": [ "SONAR_DETECTABLE" ],
     "vehicle_data": {
       "damage": 300,
-      "sound_volume": 8,
+      "sound_volume": 16,
       "sound": "SNAP!",
       "sound_type": "trap",
       "sound_variant": "bear_trap",
@@ -341,7 +343,7 @@
     "vehicle_data": {
       "chance": 30,
       "damage": 300,
-      "sound_volume": 1,
+      "sound_volume": 10,
       "sound": "Clank!",
       "sound_type": "fire_gun",
       "sound_variant": "crossbow",
@@ -392,7 +394,7 @@
     "vehicle_data": {
       "chance": 70,
       "damage": 300,
-      "sound_volume": 60,
+      "sound_volume": 160,
       "sound": "Bang!",
       "sound_type": "fire_gun",
       "sound_variant": "shotgun_d",
@@ -418,43 +420,13 @@
     "vehicle_data": {
       "chance": 70,
       "damage": 300,
-      "sound_volume": 60,
+      "sound_volume": 160,
       "sound": "Bang!",
       "sound_type": "fire_gun",
       "sound_variant": "shotgun_s",
       "remove_trap": true,
       "spawn_items": [ "four_winds_shotgun", "string_6" ]
     }
-  },
-  {
-    "type": "trap",
-    "id": "tr_engine",
-    "trigger_weight": "200 g",
-    "name": "spinning blade engine",
-    "flags": [ "ECHOLOCATION_DETECTABLE" ],
-    "color": "light_red",
-    "symbol": "_",
-    "visibility": 0,
-    "avoidance": 0,
-    "difficulty": 2,
-    "trap_radius": 1,
-    "action": "none",
-    "drops": [ "motor_small", "blade", "blade", "string_36" ]
-  },
-  {
-    "type": "trap",
-    "id": "tr_blade",
-    "name": "spinning blade",
-    "color": "cyan",
-    "memorial_male": { "ctxt": "memorial_male", "str": "Triggered a blade trap." },
-    "memorial_female": { "ctxt": "memorial_female", "str": "Triggered a blade trap." },
-    "flags": [ "ECHOLOCATION_DETECTABLE" ],
-    "symbol": "\\",
-    "visibility": 0,
-    "avoidance": 4,
-    "difficulty": 99,
-    "action": "blade",
-    "vehicle_data": { "damage": 300, "sound_volume": 1, "sound": "Swinnng!", "sound_type": "smash_success", "sound_variant": "hit_vehicle" }
   },
   {
     "type": "trap",
@@ -475,7 +447,7 @@
       "do_explosion": true,
       "damage": 1000,
       "shrapnel": 8,
-      "sound_volume": 10,
+      "sound_volume": 90,
       "sound": "Boom!",
       "sound_type": "explosion",
       "sound_variant": "default"
@@ -500,7 +472,7 @@
       "do_explosion": true,
       "damage": 1000,
       "shrapnel": 8,
-      "sound_volume": 10,
+      "sound_volume": 90,
       "sound": "Boom!",
       "sound_type": "explosion",
       "sound_variant": "default"
@@ -578,6 +550,22 @@
     "difficulty": 99,
     "action": "pit",
     "vehicle_data": { "damage": 500 }
+  },
+  {
+    "type": "trap",
+    "id": "tr_thin_ice",
+    "name": "thin ice",
+    "color": "light_cyan",
+    "memorial_male": { "ctxt": "memorial_male", "str": "Fell through thin ice into water." },
+    "memorial_female": { "ctxt": "memorial_female", "str": "Fell through thin ice into water." },
+    "flags": [ "ECHOLOCATION_DETECTABLE" ],
+    "symbol": "/",
+    "visibility": 99,
+    "avoidance": 12,
+    "difficulty": 99,
+    "action": "thin_ice",
+    "trigger_message_u": "The ice cracks beneath you!",
+    "vehicle_data": { "chance": 80, "damage": 30, "remove_trap": true }
   },
   {
     "type": "trap",

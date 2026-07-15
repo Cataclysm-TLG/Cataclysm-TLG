@@ -343,9 +343,9 @@
         "%#++#%"
       ],
       "terrain": {
-        "#": "t_reinforced_glass_shutter_open",
-        "+": "t_reinforced_door_glass_c",
-        "%": "t_reinforced_glass_shutter",
+        "#": "t_laminated_glass_shutter_open",
+        "+": "t_laminated_door_glass_c",
+        "%": "t_laminated_glass_shutter",
         "$": "t_wall_glass"
       },
       "furniture": { "S": "f_statue" },
@@ -368,9 +368,9 @@
         "%#++#%"
       ],
       "terrain": {
-        "#": "t_reinforced_glass_shutter_open",
-        "+": "t_reinforced_door_glass_c",
-        "%": "t_reinforced_glass_shutter",
+        "#": "t_laminated_glass_shutter_open",
+        "+": "t_laminated_door_glass_c",
+        "%": "t_laminated_glass_shutter",
         "$": "t_wall_glass"
       },
       "sealed_item": { "1": { "item": { "item": "seed_sugar_beet" }, "furniture": "f_planter_mature" } },
@@ -393,9 +393,9 @@
         "%#++#%"
       ],
       "terrain": {
-        "#": "t_reinforced_glass_shutter_open",
-        "+": "t_reinforced_door_glass_c",
-        "%": "t_reinforced_glass_shutter",
+        "#": "t_laminated_glass_shutter_open",
+        "+": "t_laminated_door_glass_c",
+        "%": "t_laminated_glass_shutter",
         "$": "t_wall_glass"
       },
       "furniture": { "a": "f_stool" },
@@ -424,7 +424,7 @@
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "terrain": { "B": "t_railroad_rubble" },
       "furniture": { "b": "f_bench", "B": [ "f_birdbath", "f_statue" ] },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling" } }
+      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling", "chance": 60 } }
     }
   },
   {
@@ -444,7 +444,7 @@
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "terrain": { "_": "t_railroad_rubble", "b": "t_railroad_rubble", "B": "t_railroad_rubble" },
       "furniture": { "B": [ "f_birdbath", "f_statue" ], "b": "f_bench" },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling" } }
+      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling", "chance": 60 } }
     }
   },
   {

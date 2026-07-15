@@ -2,89 +2,89 @@
   {
     "type": "addiction_type",
     "id": "caffeine",
-    "name": "Caffeine Withdrawal",
+    "name": "Craving Caffeine",
     "type_name": "caffeine",
-    "description": "Strength - 1;   Slight sluggishness;   Occasional cravings",
+    "description": "Life without caffeine is rough, but there are worse things to be hooked on.",
+    "sated": "4 hours",
     "craving_morale": "morale_craving_caffeine",
     "effect_on_condition": "EOC_CAFFEINE_ADDICTION"
   },
   {
     "type": "addiction_type",
     "id": "nicotine",
-    "name": "Nicotine Withdrawal",
+    "name": "Craving Nicotine",
     "type_name": "nicotine",
-    "description": "Intelligence - 1;   Occasional cravings",
+    "description": "A cigarette, a vape, even the gum would be better than going without.",
+    "sated": "3 hours",
     "craving_morale": "morale_craving_nicotine",
     "builtin": "nicotine_effect"
   },
   {
     "type": "addiction_type",
     "id": "alcohol",
-    "name": "Alcohol Withdrawal",
+    "name": "Craving Alcohol",
     "type_name": "alcohol",
-    "description": "Perception - 1;   Intelligence - 1;   Occasional Cravings;\nRisk of delirium tremens",
+    "description": "A drink would make everything better.",
+    "sated": "6 hours",
     "craving_morale": "morale_craving_alcohol",
     "builtin": "alcohol_effect"
   },
   {
     "type": "addiction_type",
     "id": "sleeping pill",
-    "name": "Sleeping Pill Dependence",
+    "name": "Sleeping Pill Insomnia",
     "type_name": "sleeping pills",
-    "description": "You may find it difficult to sleep without medication.",
+    "description": "You will have a hard time sleeping without help.",
+    "sated": "6 hours",
     "effect_on_condition": "EOC_SLEEP_ADDICTION"
   },
   {
     "type": "addiction_type",
     "id": "opioid",
-    "name": "Opioid Withdrawal",
+    "name": "Craving Opioids",
     "type_name": "opioids",
-    "description": "Strength - 1;   Perception - 1;   Dexterity - 1;\nDepression and physical pain to some degree.  Frequent cravings.  Vomiting.",
+    "description": "You really need some painkillers.",
+    "sated": "6 hours",
     "craving_morale": "morale_craving_opioid",
     "builtin": "opioid_effect"
   },
   {
     "type": "addiction_type",
     "id": "amphetamine",
-    "name": "Amphetamine Withdrawal",
+    "name": "Craving Amphetamines",
     "type_name": "amphetamine",
-    "description": "Strength - 1;   Intelligence - 1;\nMovement rate reduction.  Depression.  Weak immune system.  Frequent cravings.",
+    "description": "Everything is too much and too loud, and you can't keep up.",
+    "sated": "6 hours",
     "craving_morale": "morale_craving_speed",
     "builtin": "amphetamine_effect"
   },
   {
     "type": "addiction_type",
     "id": "cocaine",
-    "name": "Cocaine Withdrawal",
+    "name": "Craving Cocaine",
     "type_name": "cocaine",
-    "description": "Perception - 1;   Intelligence - 1;   Frequent cravings.",
+    "description": "Just a bump would fix you.",
+    "sated": "2 hours",
     "craving_morale": "morale_craving_cocaine",
     "builtin": "cocaine_effect"
   },
   {
     "type": "addiction_type",
-    "id": "crack",
-    "name": "Crack Cocaine Withdrawal",
-    "type_name": "crack cocaine",
-    "description": "Perception - 2;   Intelligence - 2;   Frequent cravings.",
-    "craving_morale": "morale_craving_crack",
-    "builtin": "crack_effect"
-  },
-  {
-    "type": "addiction_type",
-    "id": "mutagen",
-    "name": "Mutation Withdrawal",
-    "type_name": "mutation",
-    "description": "You've gotten a taste for mutating and the chemicals that cause it.  But you can stop, yeah, any time you want.",
-    "craving_morale": "morale_craving_mutagen",
-    "effect_on_condition": "EOC_MUTAGEN_ADDICTION"
+    "id": "cannabis",
+    "name": "Craving Cannabis",
+    "type_name": "cannabis",
+    "description": "You could use some herb right now.",
+    "sated": "8 hours",
+    "craving_morale": "morale_craving_cannabis",
+    "builtin": "cannabis_effect"
   },
   {
     "type": "addiction_type",
     "id": "diazepam",
-    "name": "Diazepam Withdrawal",
+    "name": "Craving Benzodiazepines",
     "type_name": "diazepam",
-    "description": "Perception - 1;   Intelligence - 1;\nAnxiety, nausea, hallucinations, and general malaise.",
+    "description": "The world is way too much, you're freaking out.  You just need a chill pill, that's all.",
+    "sated": "6 hours",
     "craving_morale": "morale_craving_diazepam",
     "builtin": "diazepam_effect"
   },
@@ -94,6 +94,7 @@
     "name": "Marloss Longing",
     "type_name": "Marloss berries",
     "description": "You should try some of those pink berries.",
+    "sated": "8 hours",
     "craving_morale": "morale_craving_marloss",
     "effect_on_condition": "EOC_MARLOSS_R_ADDICTION"
   },
@@ -103,6 +104,7 @@
     "name": "Marloss Desire",
     "type_name": "Marloss seeds",
     "description": "You should try some of those cyan seeds.",
+    "sated": "8 hours",
     "craving_morale": "morale_craving_marloss",
     "effect_on_condition": "EOC_MARLOSS_B_ADDICTION"
   },
@@ -112,6 +114,7 @@
     "name": "Marloss Cravings",
     "type_name": "Marloss gel",
     "description": "You should try some of that golden gel.",
+    "sated": "8 hours",
     "craving_morale": "morale_craving_marloss",
     "effect_on_condition": "EOC_MARLOSS_Y_ADDICTION"
   }

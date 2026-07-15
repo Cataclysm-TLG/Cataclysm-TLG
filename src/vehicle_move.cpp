@@ -33,10 +33,12 @@
 #include "options.h"
 #include "rng.h"
 #include "sounds.h"
+#include "string_formatter.h"
 #include "translations.h"
 #include "trap.h"
 #include "units.h"
 #include "units_utility.h"
+#include "value_ptr.h"
 #include "veh_type.h"
 #include "vpart_position.h"
 #include "vpart_range.h"
@@ -45,6 +47,7 @@
 
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_cut( "cut" );
+static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_bleed( "bleed" );
@@ -53,6 +56,7 @@ static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_stunned( "stunned" );
 
 static const flag_id json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
+static const flag_id json_flag_DAMAGE_VEHICLE_WHEELS( "DAMAGE_VEHICLE_WHEELS" );
 
 static const itype_id fuel_type_animal( "animal" );
 static const itype_id fuel_type_battery( "battery" );
@@ -492,6 +496,24 @@ void vehicle::thrust( map &here, int thd, int z )
     // TODO: Pass this as an argument to avoid recalculating
     float traction = k_traction( here, here.vehicle_wheel_traction( *this ) );
 
+    // If vehicle has wheels on thick ice, increase chance to start skidding
+    if( !skidding && !wheelcache.empty() ) {
+        int thick_ice_wheels = 0;
+        for( const int wheel_idx : wheelcache ) {
+            const vehicle_part &wp = part( wheel_idx );
+            const tripoint_bub_ms pwp = bub_part_pos( here, wp );
+            if( here.ter( pwp ).obj().has_flag( ter_furn_flag::TFLAG_THICK_ICE ) ) {
+                thick_ice_wheels++;
+            }
+        }
+        if( thick_ice_wheels > 0 ) {
+            // Higher speeds make skidding more likely
+            if( one_in( 4 ) || std::abs( velocity ) > 1000 ) {
+                skidding = true;
+            }
+        }
+    }
+
     if( thrusting ) {
         smart_controller_handle_turn( here, traction );
     }
@@ -517,8 +539,18 @@ void vehicle::thrust( map &here, int thd, int z )
         return;
     }
     const int max_vel = traction * max_velocity( here );
-    // maximum braking is 20 mph/s, assumes high friction tires
-    const int max_brake = 20 * 100;
+    // maximum braking is 20 mph/s, assumes high friction tires; reduce on thick ice
+    bool on_thick_ice = false;
+    for( const int wheel_idx : wheelcache ) {
+        const vehicle_part &wp = part( wheel_idx );
+        const tripoint_bub_ms pwp = bub_part_pos( here, wp );
+        if( here.ter( pwp ).obj().has_flag( ter_furn_flag::TFLAG_THICK_ICE ) ) {
+            on_thick_ice = true;
+            break;
+        }
+    }
+    const float ICE_BRAKE_FACTOR = 0.25f;
+    const int max_brake = static_cast<int>( 20 * 100 * ( on_thick_ice ? ICE_BRAKE_FACTOR : 1.0f ) );
     //pos or neg if accelerator or brake
     int vel_inc = ( accel + ( thrusting ? 0 : max_brake ) ) * thd;
     // Reverse is only 60% acceleration, unless an electric motor is in use
@@ -530,7 +562,12 @@ void vehicle::thrust( map &here, int thd, int z )
     //so 1000 = 100% and 453 = 45.3%
     int load;
     if( accel != 0 ) {
-        int effective_cruise = std::min( cruise_velocity, max_vel );
+        int effective_cruise;
+        if( cruise_velocity > 0 ) {
+            effective_cruise = std::min( cruise_velocity, max_vel );
+        } else {
+            effective_cruise = std::max( cruise_velocity, -max_vel );
+        }
         if( thd > 0 ) {
             vel_inc = std::min( vel_inc, effective_cruise - velocity );
         } else {
@@ -1080,10 +1117,10 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
         if( ret.type == veh_coll_bashable ) {
             // Something bashable -- use map::bash to determine outcome
             // NOTE: Floor bashing disabled for balance reasons
-            //       Floor values are still used to set damage dealt to vehicle
+            //       Floor values are still used to set damage dealt  to vehicle
             smashed = here.is_bashable_ter_furn( pos, false ) &&
                       here.bash_resistance( pos, bash_floor ) <= obj_dmg &&
-                      here.bash( pos, obj_dmg, false, false, false, this ).success;
+                      here.bash( pos, obj_dmg, false, false, false, false, this ).success;
             if( smashed ) {
                 if( here.is_bashable_ter_furn( pos, bash_floor ) ) {
                     // There's new terrain there to smash
@@ -1106,18 +1143,6 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
             // We know critter is set for this type.  Assert to inform static
             // analysis.
             cata_assert( critter );
-
-            // No blood from hallucinations
-            if( !critter->is_hallucination() ) {
-                if( vpi.has_flag( "SHARP" ) ) {
-                    vp.blood += 100 + 5 * dam;
-                } else if( dam > rng( 10, 30 ) ) {
-                    vp.blood += 50 + dam * 5 / 2;
-                }
-
-                check_environmental_effects = true;
-            }
-
             time_stunned = time_duration::from_turns( ( rng( 0, dam ) > 10 ) + ( rng( 0, dam ) > 40 ) );
             if( time_stunned > 0_turns ) {
                 critter->add_effect( effect_stunned, time_stunned );
@@ -1148,7 +1173,7 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
             if( !vert_coll ) {
                 if( std::fabs( vel2_a ) > 10.0f ||
                     std::fabs( e * mass * vel1_a ) > std::fabs( mass2 * ( 10.0f - vel2_a ) ) ) {
-                    const units::angle angle = rng_float( -60_degrees, 60_degrees );
+                    const units::angle angle = rng_float( -80_degrees, 80_degrees );
                     // Also handle the weird case when we don't have enough force
                     // but still have to push (in such case compare momentum)
                     const float push_force = std::max<float>( std::fabs( vel2_a ), 10.1f );
@@ -1241,6 +1266,109 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
 
     ret.imp = part_dmg;
     return ret;
+}
+
+// Simple boilerplate extracted to a static to re-use.
+static std::pair<double, double> item_hardness_calc( const item &it )
+{
+    // To prevent DBZ. A material's chip resist could well be 0!
+    const double min_value_clamp = 0.001;
+    const double max_value_clamp = 1000.0;
+    // These are intentionally "reversed".
+    double min_hardness = max_value_clamp;
+    double max_hardness = min_value_clamp;
+    const std::map<material_id, int> &mats = it.made_of();
+    if( mats.empty() ) {
+        // weird item, no defined materials. Just skip it.
+        return std::make_pair( min_value_clamp, max_value_clamp );
+    }
+    for( const std::pair<const material_id, int> &mat_pair : mats ) {
+        const double chip_resist = mat_pair.first->chip_resist();
+        min_hardness = std::min( min_hardness, chip_resist );
+        max_hardness = std::max( max_hardness, chip_resist );
+    }
+    min_hardness = std::clamp( min_hardness, min_value_clamp, max_value_clamp );
+    max_hardness = std::clamp( max_hardness, min_value_clamp, max_value_clamp );
+    return std::make_pair( min_hardness, max_hardness );
+}
+
+double vehicle::hit_probability( const item &it, const vehicle_part *vp_wheel )
+{
+    const double wheel = vp_wheel->get_base().type->wheel->width * 0.0254;
+
+    /* We can't get the exact dimensions of the item, but we can make a guess
+       here with volume/length, using rng and a 0.001 multiplier to simulate
+       random orientation. Running over stuff isn't dangerous, it's hitting it
+       at the wrong angle that blows your tires. */
+
+    // I don't feel like figuring out how to std::max length right now, so guard
+    // against division by zero.
+    units::length length = it.length();
+    if( length < 1_mm ) {
+        length = 1_mm;
+    }
+    const double item = ( units::to_milliliter( it.volume() ) * 1000.0 /
+                          units::to_millimeter( length ) ) *
+                        0.001 * rng_float( 0.5, 1.0 );
+
+    return std::min( wheel + item, 1.0 );
+}
+
+
+double vehicle::wheel_damage_chance_vs_item( const item &it, vehicle_part &vp_wheel ) const
+{
+    if( !it.has_flag( json_flag_DAMAGE_VEHICLE_WHEELS ) ) {
+        return 0.0;
+    }
+    // Wheels use the worst/softest possible value, the squishy parts. In other words, a wheel is damaged
+    // if its rubber tire is punctured.
+    double wheel_hardness = item_hardness_calc( vp_wheel.get_base() ).first;
+    // Items attempting to do damage use the best/hardest possible value, the pointy bits.
+    double item_hardness = item_hardness_calc( it ).second;
+    // Stab armor protects wheels from damage. Wheels do not benefit from other armor on their tile, it checks the wheel itself.
+    // TODO: Make different items use different damage types.
+    double armor = std::clamp( vp_wheel.info().damage_reduction.at( damage_stab ) / 100.0, 0.0,
+                               0.75 ) / rng_float( 1.0, 4.0 );
+    // It is exponentially more difficult for soft items to damage wheels, even if you're hitting a lot of them.
+    const double base_chance = std::min( std::pow( item_hardness / wheel_hardness, 2.0 ) / 10, 0.5 );
+    const double chance_to_damage = std::max( 0.0, base_chance - armor );
+    add_msg_debug(
+        debugmode::DF_VEHICLE_MOVE,
+        "Vehicle %s running over item %s."
+        "\n Item hardness: %f"
+        "\n Wheel hardness: %f"
+        "\n Base chance: %f%%"
+        "\n Armor reduction: %f%%"
+        "\n Final chance: %f%%",
+        disp_name(), it.tname(),
+        item_hardness,
+        wheel_hardness,
+        base_chance * 100.0,
+        armor * 100.0,
+        chance_to_damage * 100.0
+    );
+    return chance_to_damage;
+}
+
+void vehicle::damage_wheel_on_item( vehicle_part *vp_wheel, const item &it, int *damage_levels,
+                                    std::vector<std::string> *messages ) const
+{
+    // bullshit to work around vehicle::damage_direct() --> vehicle::mod_hp() doing incorrect(??) calculations.
+    // Each damage instance should be worth exactly one 'level' of vehicle part damage.
+    const int one_damage_level = vp_wheel->info().durability *
+                                 ( static_cast<double>( itype::damage_scale ) / vp_wheel->max_damage() );
+
+    const double chance_to_damage = wheel_damage_chance_vs_item( it, *vp_wheel );
+    add_msg_debug( debugmode::DF_VEHICLE_MOVE,
+                   "Final chance to damage: %f%%.", chance_to_damage * 100 );
+    if( chance_to_damage > 0.0 ) {
+        if( chance_to_damage >= rng_float( 0.0, 1.0 ) ) {
+            *damage_levels += one_damage_level;
+            //~%1$s vehicle name, %1$s vehicle part name, %3$s name of item being run over
+            messages->emplace_back( string_format( _( "The %1$s's %2$s is damaged by running over the %3$s!" ),
+                                                   disp_name(), vp_wheel->info().name(), it.tname() ) );
+        }
+    }
 }
 
 void vehicle::handle_trap( map *here, const tripoint_bub_ms &p, vehicle_part &vp_wheel )
@@ -1446,7 +1574,6 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
     // This is a very rough check to try to figure out if we're offroad and should be training offroad driving proficiency.
     bool is_offroad = !( is_flying || in_deep_water || wheelcache.empty() ) &&
                       ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
-    // Check if you're piloting on land or water, and reduce effective driving skill proportional to relevant proficiencies (10% Boat Proficiency = 10% driving skill on water)
     if( !driver.has_proficiency( proficiency_prof_driver ) && !in_deep_water && is_offroad ) {
         is_non_proficient = true;
         vehicle_proficiency = driver.get_proficiency_practice( proficiency_prof_driver );
@@ -2189,7 +2316,13 @@ float map::vehicle_wheel_traction( const vehicle &veh, bool ignore_movement_modi
             continue;
         }
 
-        traction_wheel_area += 2.0 * vpi.wheel_info->contact_area / move_mod;
+        // Reduce traction contribution on thick ice
+        constexpr float THICK_ICE_TRACTION_FACTOR = 0.3f;
+        if( tr.has_flag( ter_furn_flag::TFLAG_THICK_ICE ) ) {
+            traction_wheel_area += 2.0 * vpi.wheel_info->contact_area / move_mod * THICK_ICE_TRACTION_FACTOR;
+        } else {
+            traction_wheel_area += 2.0 * vpi.wheel_info->contact_area / move_mod;
+        }
     }
 
     return traction_wheel_area;
@@ -2277,7 +2410,6 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
         if( psg && veh.player_in_control( here, *psg ) ) {
             const int lose_ctrl_roll = rng( 0, d_vel );
             ///\EFFECT_DEX reduces chance of losing control of vehicle when shaken
-
             ///\EFFECT_DRIVING reduces chance of losing control of vehicle when shaken
             if( lose_ctrl_roll > psg->dex_cur * 2 + psg->get_skill_level( skill_driving ) * 3 ) {
                 psg->add_msg_player_or_npc( m_warning,

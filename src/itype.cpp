@@ -124,10 +124,10 @@ int itype::damage_level( int damage ) const
 bool itype::has_any_quality( std::string_view quality ) const
 {
     return std::any_of( qualities.begin(),
-    qualities.end(), [&quality]( const std::pair<quality_id, int> &e ) {
+    qualities.end(), [&quality]( const auto & e ) {
         return lcmatch( e.first->name, quality );
     } ) || std::any_of( charged_qualities.begin(),
-    charged_qualities.end(), [&quality]( const std::pair<quality_id, int> &e ) {
+    charged_qualities.end(), [&quality]( const auto & e ) {
         return lcmatch( e.first->name, quality );
     } );
 }
@@ -278,6 +278,16 @@ bool itype::is_basic_component() const
         }
     }
     return false;
+}
+
+const std::vector<std::pair<flag_id, time_duration>> &islot_seed::get_growth_stages() const
+{
+    return growth_stages;
+}
+
+units::temperature islot_seed::get_growth_temp() const
+{
+    return growth_temp;
 }
 
 int islot_armor::avg_env_resist() const
@@ -497,5 +507,8 @@ void item_melee_damage::deserialize( const JsonObject &jo )
 {
     damage_map = load_damage_map( jo );
     //we can do this because items are always loaded after damage types
+    // ^this is not true, objects are loaded as they are encountered, and in mod load order
+    // Being loaded in mod load order particularly is the risk here!
+    // FIXME: call finalize in the right place
     finalize();
 }

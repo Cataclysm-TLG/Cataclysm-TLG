@@ -14,7 +14,6 @@
       { "item": "flashlight", "prob": 30 },
       { "item": "light_battery_cell", "prob": 10 },
       { "item": "lighter", "prob": 20, "charges": [ 60, 100 ] },
-      { "item": "whistle", "prob": 70 },
       { "item": "water_clean", "count": [ 1, 2 ], "prob": 80 },
       { "item": "protein_bar", "count": [ 1, 2 ], "prob": 40 },
       {

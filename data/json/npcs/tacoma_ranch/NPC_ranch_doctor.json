@@ -82,29 +82,18 @@
       "yes": {
         "npc_has_effect": "currently_busy",
         "yes": "I have other patients to attend to.  Come back later.",
-        "no": "What can I help you with?"
+        "no": "Sure.  It'll be twelve merch.  What seems to be the problem?"
       },
       "no": "I can't right now, I have other matters to attend to."
     },
     "responses": [
       {
-        "text": "[80 merch, 30m] I need you to patch me up.",
+        "text": "I need medical attention.",
         "topic": "TALK_RANCH_DOCTOR_AID_DONE",
-        "effect": [ { "u_consume_item": "FMCNote", "count": 80 }, "give_aid" ],
+        "effect": [ { "u_consume_item": "FMCNote", "count": 12 }, "give_aid" ],
         "condition": {
           "and": [
-            { "u_has_items": { "item": "FMCNote", "count": 80 } },
-            { "npc_has_var": "dialogue_tacoma_ranch_provides_aid", "value": "yes" }
-          ]
-        }
-      },
-      {
-        "text": "[200 merch, 1h] I need you to patch my friends up.",
-        "topic": "TALK_RANCH_DOCTOR_AID_DONE",
-        "effect": [ { "u_consume_item": "FMCNote", "count": 200 }, "give_all_aid" ],
-        "condition": {
-          "and": [
-            { "u_has_items": { "item": "FMCNote", "count": 200 } },
+            { "u_has_items": { "item": "FMCNote", "count": 12 } },
             { "npc_has_var": "dialogue_tacoma_ranch_provides_aid", "value": "yes" }
           ]
         }

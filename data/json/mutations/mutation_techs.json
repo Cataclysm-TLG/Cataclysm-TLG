@@ -1687,5 +1687,102 @@
         "req_flag": "VENOM2"
       }
     ]
+  },
+  {
+    "type": "technique",
+    "id": "STINGER_STAB",
+    "name": "Sting",
+    "melee_allowed": true,
+    "messages": [ "You sting %s", "<npcname> stings %s" ],
+    "unarmed_allowed": true,
+    "basic": true,
+    "weighting": -3,
+    "reach_ok": false,
+    "crit_ok": true,
+    "attack_vectors": [ "vector_tail_tip" ],
+    "tech_effects": [
+      {
+        "id": "anticoagulant_draculin",
+        "chance": 90,
+        "duration": 3000,
+        "on_damage": true,
+        "message": "Venom is injected into the wound!",
+        "req_flag": "DRACULIN_VENOM"
+      },
+      {
+        "id": "venom_player1",
+        "chance": 90,
+        "duration": 600,
+        "on_damage": true,
+        "message": "Venom is injected into the wound!",
+        "req_flag": "VENOM1"
+      },
+      {
+        "id": "venom_player2",
+        "chance": 90,
+        "duration": 3000,
+        "on_damage": true,
+        "message": "Venom is injected into the wound!",
+        "req_flag": "VENOM2"
+      }
+    ]
+  },
+  {
+    "type": "technique",
+    "id": "TAIL_CLUB",
+    "name": "Tail Club",
+    "melee_allowed": true,
+    "messages": [ "You club %s with your tail", "<npcname> clubs %s with their tail" ],
+    "unarmed_allowed": true,
+    "basic": true,
+    "weighting": -3,
+    "reach_ok": false,
+    "crit_ok": true,
+    "condition": { "not": { "u_has_flag": "GRAB" } },
+    "attack_vectors": [ "vector_tail_tip" ]
+  },
+  {
+    "type": "technique",
+    "id": "TAIL_CLUB_KNOCKDOWN",
+    "name": "Tail Club",
+    "melee_allowed": true,
+    "messages": [ "You club %s with your tail", "<npcname> clubs %s with their tail" ],
+    "unarmed_allowed": true,
+    "basic": true,
+    "weighting": -3,
+    "reach_ok": false,
+    "crit_ok": true,
+    "attack_vectors": [ "vector_tail_tip" ],
+    "//": "Enemy must be of a similar size, logically downable, and not flying.",
+    "tech_effects": [ { "id": "downed", "duration": 150, "on_damage": true, "message": "The attack knocks %s down!" } ],
+    "condition": {
+      "and": [
+        {
+          "and": [
+            { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+            { "not": { "npc_has_effect": "downed" } },
+            { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } },
+            { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
+          ]
+        },
+        { "not": { "and": [ { "u_has_flag": "GRAB_FILTER" }, { "npc_has_flag": "GRAB" } ] } },
+        { "not": { "and": [ { "npc_has_flag": "GRAB_FILTER" }, { "u_has_flag": "GRAB" } ] } }
+      ]
+    }
+  },
+  {
+    "type": "technique",
+    "id": "TAIL_WHIP",
+    "name": "Tail Lash",
+    "melee_allowed": true,
+    "messages": [ "You lash %s with your tail", "<npcname> lashes %s with their tail" ],
+    "unarmed_allowed": true,
+    "basic": true,
+    "fallback": true,
+    "weighting": -8,
+    "reach_ok": false,
+    "crit_ok": true,
+    "condition": { "and": [ { "u_has_trait": "THICK_TAIL" }, { "not": { "u_has_flag": "GRAB" } } ] },
+    "attack_vectors": [ "vector_tail_tip" ]
   }
 ]

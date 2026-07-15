@@ -6,12 +6,13 @@
     "entries": [
       { "group": "textbooks", "prob": 40, "count": [ 1, 2 ] },
       { "group": "lab_bookshelves", "prob": 60, "count": [ 1, 3 ] },
-      { "item": "software_hacking", "prob": 20 },
+      { "item": "software_hacking", "prob": 15 },
       { "item": "software_electronics_reference", "prob": 20 },
       { "item": "efile_lore", "prob": 60 },
       { "item": "efile_map", "prob": 10 },
       { "item": "efile_recipes_science", "prob": 80 },
-      { "item": "efile_junk", "prob": 100, "count": [ 12, 24 ] }
+      { "item": "efile_junk", "prob": 100, "count": [ 12, 24 ] },
+      { "item": "software_robotics", "prob": 20 }
     ]
   },
   {
@@ -22,6 +23,7 @@
       { "item": "software_useless", "prob": 25 },
       { "item": "software_math", "prob": 15 },
       { "item": "software_medical", "prob": 5 },
+      { "item": "software_robotics", "prob": 2 },
       { "item": "software_hacking", "prob": 1 }
     ]
   },
@@ -36,7 +38,8 @@
       { "item": "efile_lore", "prob": 60 },
       { "item": "efile_map", "prob": 10 },
       { "item": "efile_recipes_science", "prob": 80 },
-      { "item": "efile_junk", "prob": 100, "count": [ 12, 24 ] }
+      { "item": "efile_junk", "prob": 100, "count": [ 12, 24 ] },
+      { "item": "software_robotics", "prob": 1 }
     ]
   },
   {
@@ -50,7 +53,8 @@
       { "item": "efile_map", "prob": 10 },
       { "item": "efile_recipes", "prob": 80 },
       { "item": "efile_junk", "prob": 100, "count": [ 12, 24 ] },
-      { "group": "efiles_contraband", "prob": 2 }
+      { "group": "efiles_contraband", "prob": 2 },
+      { "item": "software_robotics", "prob": 2 }
     ]
   },
   {
@@ -63,7 +67,8 @@
       { "item": "efile_map", "prob": 5 },
       { "item": "efile_recipes", "prob": 5 },
       { "item": "efile_junk", "prob": 100, "count": [ 24, 36 ] },
-      { "group": "efiles_contraband", "prob": 2 }
+      { "group": "efiles_contraband", "prob": 2 },
+      { "item": "software_robotics", "prob": 2 }
     ]
   },
   {
@@ -75,7 +80,8 @@
       { "item": "efile_map", "prob": 10 },
       { "item": "efile_recipes", "prob": 5 },
       { "item": "efile_junk", "prob": 100, "count": [ 24, 36 ] },
-      { "group": "efiles_contraband", "prob": 1 }
+      { "group": "efiles_contraband", "prob": 1 },
+      { "item": "software_robotics", "prob": 1 }
     ]
   },
   {
@@ -91,7 +97,8 @@
       { "item": "efile_lore", "prob": 70 },
       { "item": "efile_map", "prob": 5 },
       { "item": "efile_recipes", "prob": 50 },
-      { "item": "efile_junk", "prob": 100, "count": [ 24, 36 ] }
+      { "item": "efile_junk", "prob": 100, "count": [ 24, 36 ] },
+      { "item": "software_robotics", "prob": 1 }
     ]
   },
   {
@@ -104,7 +111,8 @@
       { "group": "literature", "prob": 50 },
       { "item": "photo_album", "prob": 25, "count": [ 1, 5 ] },
       { "item": "efile_recipes", "prob": 25 },
-      { "group": "efiles_contraband", "prob": 1 }
+      { "group": "efiles_contraband", "prob": 1 },
+      { "item": "software_robotics", "prob": 1 }
     ]
   },
   {
@@ -131,7 +139,8 @@
       { "group": "literature", "prob": 50, "count": [ 1, 3 ] },
       { "item": "efile_recipes", "prob": 40 },
       { "item": "software_useless", "prob": 20 },
-      { "group": "efiles_contraband", "prob": 2 }
+      { "group": "efiles_contraband", "prob": 2 },
+      { "item": "software_robotics", "prob": 1 }
     ]
   },
   {

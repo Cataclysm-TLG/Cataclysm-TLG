@@ -109,7 +109,7 @@
     "price": "1 USD 20 cent",
     "price_postapoc": "50 cent",
     "category": "armor",
-    "material": [ "carpet_pilling", "plastic" ],
+    "material": [ "carpet_pile", "plastic" ],
     "symbol": "[",
     "looks_like": "tunic_rag",
     "color": "red",
@@ -121,7 +121,7 @@
     "armor": [
       {
         "material": [
-          { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "encumbrance": 24,
@@ -130,7 +130,7 @@
       },
       {
         "material": [
-          { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "encumbrance": 8,
@@ -140,7 +140,7 @@
       },
       {
         "material": [
-          { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "encumbrance": 8,
@@ -235,7 +235,7 @@
           { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 }
         ],
         "covers": [ "torso" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 22
       },
       {
@@ -244,6 +244,15 @@
           { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 }
         ],
         "covers": [ "arm_l", "arm_r" ],
+        "coverage": 98,
+        "encumbrance": 22
+      },
+      {
+        "material": [
+          { "type": "cotton", "covered_by_mat": 80, "thickness": 2.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 100,
         "encumbrance": 22
       }
@@ -412,7 +421,13 @@
     "warmth": 20,
     "material_thickness": 3,
     "flags": [ "STURDY" ],
-    "armor": [ { "encumbrance": 14, "coverage": 100, "covers": [ "torso", "arm_l", "arm_r" ] } ]
+    "armor": [
+      {
+        "encumbrance": 14,
+        "coverage": 98,
+        "covers": [ "torso", "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ]
+      }
+    ]
   },
   {
     "id": "jacket_leather_mod",
@@ -433,7 +448,7 @@
     "armor": [
       {
         "covers": [ "torso" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": [ 34, 38 ],
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
@@ -442,8 +457,8 @@
         "rigid_layer_only": true
       },
       {
-        "covers": [ "arm_l", "arm_r" ],
-        "coverage": 100,
+        "covers": [ "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 98,
         "encumbrance": [ 36, 36 ],
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
@@ -490,7 +505,7 @@
     "armor": [
       {
         "covers": [ "torso" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": [ 32, 36 ],
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
@@ -499,8 +514,8 @@
         "rigid_layer_only": true
       },
       {
-        "covers": [ "arm_l", "arm_r" ],
-        "coverage": 100,
+        "covers": [ "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 98,
         "encumbrance": [ 34, 34 ],
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
@@ -591,7 +606,7 @@
     "armor": [
       {
         "covers": [ "torso" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": [ 46, 48 ],
         "material": [
           { "type": "rubber", "covered_by_mat": 80, "thickness": 3.0 },
@@ -600,8 +615,8 @@
         "rigid_layer_only": true
       },
       {
-        "covers": [ "arm_l", "arm_r" ],
-        "coverage": 100,
+        "covers": [ "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 98,
         "encumbrance": [ 46, 48 ],
         "material": [
           { "type": "rubber", "covered_by_mat": 75, "thickness": 3.0 },
@@ -831,6 +846,18 @@
           { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 6 }
         ],
         "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r", "leg_upper_l", "leg_upper_r" ],
+        "rigid_layer_only": true
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "volume_encumber_modifier": 0,
+        "encumbrance": 4,
+        "coverage": 50,
+        "material": [
+          { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.5 },
+          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 6 }
+        ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
         "rigid_layer_only": true
       },
       {
@@ -1087,7 +1114,6 @@
       "msg": "You adjust your mail for a closer fit.",
       "target": "chainmail_junk_vest",
       "menu_text": "Tighten"
-    },
-    "delete": { "flags": [ "STURDY" ] }
+    }
   }
 ]

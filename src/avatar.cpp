@@ -92,20 +92,16 @@ static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
 
 static const efftype_id effect_alarm_clock( "alarm_clock" );
 static const efftype_id effect_boomered( "boomered" );
-static const efftype_id effect_depressants( "depressants" );
 static const efftype_id effect_happy( "happy" );
 static const efftype_id effect_irradiated( "irradiated" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_onfire( "onfire" );
-static const efftype_id effect_pkill( "pkill" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_relax_gas( "relax_gas" );
 static const efftype_id effect_sad( "sad" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_sleep_deprived( "sleep_deprived" );
 static const efftype_id effect_slept_through_alarm( "slept_through_alarm" );
-static const efftype_id effect_stim( "stim" );
-static const efftype_id effect_stim_overdose( "stim_overdose" );
 static const efftype_id effect_stunned( "stunned" );
 
 static const faction_id faction_your_followers( "your_followers" );
@@ -141,7 +137,6 @@ static const trait_id trait_INSECT_ARMS_OK( "INSECT_ARMS_OK" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
 static const trait_id trait_SHELL2( "SHELL2" );
 static const trait_id trait_SHELL3( "SHELL3" );
-static const trait_id trait_STIMBOOST( "STIMBOOST" );
 static const trait_id trait_THICK_SCALES( "THICK_SCALES" );
 static const trait_id trait_WHISKERS( "WHISKERS" );
 static const trait_id trait_WHISKERS_RAT( "WHISKERS_RAT" );
@@ -149,7 +144,6 @@ static const trait_id trait_WHISKERS_RAT( "WHISKERS_RAT" );
 avatar::avatar()
 {
     player_map_memory = std::make_unique<map_memory>();
-    show_map_memory = true;
     active_mission = nullptr;
     grab_type = object_type::NONE;
     calorie_diary.emplace_front( );
@@ -247,11 +241,6 @@ void avatar::longpull( const std::string &name )
     Creature::longpull( name, traj.back() );
 }
 
-void avatar::toggle_map_memory()
-{
-    show_map_memory = !show_map_memory;
-}
-
 bool avatar::is_map_memory_valid() const
 {
     return player_map_memory->is_valid();
@@ -262,7 +251,7 @@ bool avatar::should_show_map_memory() const
     if( get_timed_events().get( timed_event_type::OVERRIDE_PLACE ) ) {
         return false;
     }
-    return show_map_memory;
+    return true;
 }
 
 bool avatar::save_map_memory()
@@ -273,6 +262,11 @@ bool avatar::save_map_memory()
 void avatar::load_map_memory()
 {
     player_map_memory->load( pos_abs() );
+}
+
+void avatar::clear_map_memory()
+{
+    player_map_memory->clear();
 }
 
 void avatar::prepare_map_memory_region( const tripoint_abs_ms &p1, const tripoint_abs_ms &p2 )
@@ -286,6 +280,12 @@ const memorized_tile &avatar::get_memorized_tile( const tripoint_abs_ms &p ) con
         return player_map_memory->get_tile( p );
     }
     return mm_submap::default_tile;
+}
+
+bool avatar::has_memory_at( const tripoint_abs_ms &p ) const
+{
+    const memorized_tile &mt = get_memorized_tile( p );
+    return !mt.get_ter_id().empty() || !mt.get_dec_id().empty();
 }
 
 void avatar::memorize_terrain( const tripoint_abs_ms &p, std::string_view id,
@@ -357,6 +357,15 @@ void avatar::set_active_mission( mission &cur_mission )
     }
 }
 
+void avatar::update_active_mission()
+{
+    if( active_missions.empty() ) {
+        active_mission = nullptr;
+    } else {
+        active_mission = active_missions.front();
+    }
+}
+
 void avatar::on_mission_assignment( mission &new_mission )
 {
     active_missions.push_back( &new_mission );
@@ -385,11 +394,7 @@ void avatar::on_mission_finished( mission &cur_mission )
         active_missions.erase( iter );
     }
     if( &cur_mission == active_mission ) {
-        if( active_missions.empty() ) {
-            active_mission = nullptr;
-        } else {
-            active_mission = active_missions.front();
-        }
+        update_active_mission();
     }
 }
 
@@ -415,11 +420,7 @@ void avatar::remove_active_mission( mission &cur_mission )
     }
 
     if( &cur_mission == active_mission ) {
-        if( active_missions.empty() ) {
-            active_mission = nullptr;
-        } else {
-            active_mission = active_missions.front();
-        }
+        update_active_mission();
     }
 }
 
@@ -434,7 +435,7 @@ diary *avatar::get_avatar_diary()
 bool avatar::read( item_location &book, item_location ereader )
 {
     if( !book ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return false;
     }
 
@@ -603,7 +604,7 @@ bool avatar::read( item_location &book, item_location ereader )
 
         menu.query( true );
         if( menu.ret == UILIST_CANCEL ) {
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             return false;
         } else if( menu.ret >= 2 ) {
             continuous = true;
@@ -625,7 +626,7 @@ bool avatar::read( item_location &book, item_location ereader )
         menu.addentry( 2, true, '0', _( "Train until tired or success" ) );
         menu.query( true );
         if( menu.ret == UILIST_CANCEL ) {
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             return false;
         } else if( menu.ret == 1 ) {
             continuous = false;
@@ -954,7 +955,6 @@ mfaction_id avatar::get_monster_faction() const
 
 void avatar::reset_stats()
 {
-    const int current_stim = get_stim();
 
     // Trait / mutation buffs
     if( has_trait( trait_THICK_SCALES ) ) {
@@ -1003,8 +1003,6 @@ void avatar::reset_stats()
             remove_effect( type );
         }
     };
-    // Painkiller
-    set_fake_effect_dur( effect_pkill, 1_turns * get_painkiller() );
 
     // Pain
     if( get_perceived_pain() > 0 ) {
@@ -1030,25 +1028,15 @@ void avatar::reset_stats()
     set_fake_effect_dur( effect_happy, 1_turns * morale );
     set_fake_effect_dur( effect_sad, 1_turns * -morale );
 
-    // Stimulants
-    set_fake_effect_dur( effect_stim, 1_turns * current_stim );
-    set_fake_effect_dur( effect_depressants, 1_turns * -current_stim );
-    if( has_trait( trait_STIMBOOST ) ) {
-        set_fake_effect_dur( effect_stim_overdose, 1_turns * ( current_stim - 60 ) );
-    } else {
-        set_fake_effect_dur( effect_stim_overdose, 1_turns * ( current_stim - 30 ) );
-    }
     // Starvation
     const float bmi = get_bmi_fat();
     if( bmi < character_weight_category::normal ) {
-        const int str_penalty = std::floor( ( 1.0f - ( get_bmi_fat() /
-                                              character_weight_category::normal ) ) * str_max );
-        const int dexint_penalty = std::floor( ( character_weight_category::normal - bmi ) * 3.0f );
+        const stat_mod wpen = get_weight_penalty();
         add_miss_reason( _( "You're weak from hunger." ),
                          static_cast<unsigned>( ( get_starvation() + 300 ) / 1000 ) );
-        mod_str_bonus( -1 * str_penalty );
-        mod_dex_bonus( -1 * dexint_penalty );
-        mod_int_bonus( -1 * dexint_penalty );
+        mod_str_bonus( -wpen.strength );
+        mod_dex_bonus( -wpen.dexterity );
+        mod_int_bonus( -wpen.intelligence );
     }
     // Thirst
     if( get_thirst() >= 200 ) {
@@ -1315,7 +1303,7 @@ void avatar::set_movement_mode( const move_mode_id &new_mode )
         // Enchantments based on move modes can stack inappropriately without a recalc here
         recalculate_enchantment_cache();
         // crouching affects visibility
-        //TODO: Replace with dirtying vision_transparency_cache
+        // TODO: Replace with dirtying vision_transparency_cache
         here.set_transparency_cache_dirty( pos_bub() );
         here.set_seen_cache_dirty( posz() );
         recoil = MAX_RECOIL;
@@ -1420,7 +1408,7 @@ bool avatar::invoke_item( item *used, const tripoint_bub_ms &pt, int pre_obtain_
     const std::map<std::string, use_function> &use_methods = used->type->use_methods;
     const int num_methods = use_methods.size();
 
-    const bool has_relic = used->has_relic_activation();
+    const bool has_relic = used->has_relic_activation() && used->can_use_relic( *this );
     if( use_methods.empty() && !has_relic ) {
         return false;
     } else if( num_methods == 1 && !has_relic ) {

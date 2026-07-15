@@ -35,6 +35,8 @@
 #include "units.h"
 #include "units_utility.h"
 
+static const itype_id itype_water( "water" );
+
 namespace io
 {
 // *INDENT-OFF*
@@ -454,7 +456,7 @@ bool item_pocket::is_funnel_container( units::volume &bigger_than ) const
     // should not be static, since after reloading some members of the item objects,
     // such as item types, may be invalidated.
     const std::vector<item> allowed_liquids{
-        item( "water", calendar::turn_zero, 1 ),
+        item( itype_water, calendar::turn_zero, 1 ),
     };
     if( !data->watertight ) {
         return false;
@@ -492,6 +494,15 @@ std::list<const item *> item_pocket::all_items_top() const
         items.push_back( &it );
     }
     return items;
+}
+
+units::ememory item_pocket::occupied_ememory() const
+{
+    units::ememory total = 0_KB;
+    for( const item &it : contents ) {
+        total += it.ememory_size();
+    }
+    return total;
 }
 
 std::list<item *> item_pocket::all_items_ptr( pocket_type pk_type )
@@ -932,7 +943,7 @@ void item_pocket::set_item_defaults()
 {
     for( item &contained_item : contents ) {
         /* for guns and other items defined to have a magazine but don't use "ammo" */
-        if( contained_item.is_magazine() ) {
+        if( contained_item.is_magazine() && !contained_item.ammo_default().is_null() ) {
             contained_item.ammo_set(
                 contained_item.ammo_default(),
                 contained_item.ammo_capacity( item_controller->find_template(
@@ -970,7 +981,7 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
     if( is_ablative() ) {
         // its an ablative pocket volume and weight maxes don't matter
         info.emplace_back( "DESCRIPTION",
-                           _( "Holds a <info>single armored plate</info>." ) );
+                           _( "Holds a <info>single armor add-on or attachment</info>." ) );
     } else if( data->ammo_restriction.empty() ) {
         info.push_back( vol_to_info( cont_type_str, _( "Volume: " ),
                                      volume_capacity(), 2, false ) );
@@ -1482,7 +1493,7 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
             return ret_val<item_pocket::contain_code>::make_success();
         } else {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_MOD, _( "only mods can go into mod pocket" ) );
+                       contain_code::ERR_MOD, _( "Only mods can go into mod slots." ) );
         }
     }
 
@@ -1496,7 +1507,7 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
             return ret_val<item_pocket::contain_code>::make_success();
         } else {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_MOD, _( "only books, e-scannable items can go into e-file pocket" ) );
+                       contain_code::ERR_MOD, _( "Only e-scannable items can go into e-file containers." ) );
         }
     }
 
@@ -1505,13 +1516,13 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
             return ret_val<item_pocket::contain_code>::make_success();
         } else {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_MOD, _( "only cables can go into cable pocket" ) );
+                       contain_code::ERR_MOD, _( "Only cables can go into cable pockets." ) );
         }
     }
 
     if( it.has_flag( flag_NO_UNWIELD ) ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_MOD, _( "cannot unwield item" ) );
+                   contain_code::ERR_MOD, _( "Cannot unwield item." ) );
     }
 
     if( !data->item_id_restriction.empty() || !data->get_flag_restrictions().empty() ||
@@ -1520,7 +1531,7 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
             !it.has_any_flag( data->get_flag_restrictions() ) &&
             !data->material_restriction.count( it.get_base_material().id ) ) {
             return ret_val<item_pocket::contain_code>::make_failure( contain_code::ERR_FLAG,
-                    _( "holster does not accept this item type or form factor" ) );
+                    _( "Incorrect item type." ) );
         }
     }
 
@@ -1528,14 +1539,14 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
     if( !data->ammo_restriction.empty() ) {
         if( !it.is_ammo() ) {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_AMMO, _( "item is not ammunition" ) );
+                       contain_code::ERR_AMMO, _( "Item is not ammunition." ) );
         }
 
         const auto ammo_restriction_iter = data->ammo_restriction.find( it.ammo_type() );
 
         if( ammo_restriction_iter == data->ammo_restriction.end() ) {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_AMMO, _( "item is not the correct ammo type" ) );
+                       contain_code::ERR_AMMO, _( "Item is not the correct ammo type." ) );
         }
 
         return ret_val<item_pocket::contain_code>::make_success();
@@ -1544,13 +1555,13 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
     if( it.made_of( phase_id::LIQUID ) ) {
         if( !data->watertight && !it.has_flag( flag_FROM_FROZEN_LIQUID ) ) {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_LIQUID, _( "can't contain liquid" ) );
+                       contain_code::ERR_LIQUID, _( "Can't contain liquid." ) );
         }
     }
     if( it.made_of( phase_id::GAS ) ) {
         if( !data->airtight ) {
             return ret_val<item_pocket::contain_code>::make_failure(
-                       contain_code::ERR_GAS, _( "can't contain gas" ) );
+                       contain_code::ERR_GAS, _( "Can't contain gas." ) );
         }
     }
 
@@ -1561,21 +1572,22 @@ ret_val<item_pocket::contain_code> item_pocket::is_compatible( const item &it ) 
         !it.is_frozen_liquid() && data->max_item_volume &&
         !charges_per_volume_recursive( *data->max_item_volume, it ) ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_TOO_BIG, _( "item is too big" ) );
+                   contain_code::ERR_TOO_BIG, _( "Item is too big." ) );
     }
     if( it.length() > data->max_item_length ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_TOO_BIG, _( "item is too long" ) );
+                   contain_code::ERR_TOO_BIG, _( "Item is too long." ) );
     }
 
     if( it.length() < data->min_item_length ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_TOO_SMALL, _( "item is too short" ) );
+                   contain_code::ERR_TOO_SMALL, _( "Item is too short." ) );
     }
 
-    if( it.volume() < data->min_item_volume ) {
+    if( ( it.count_by_charges() ? it.volume( false, false, 1 ) : it.volume() )
+        < data->min_item_volume ) {
         return ret_val<item_pocket::contain_code>::make_failure(
-                   contain_code::ERR_TOO_SMALL, _( "item is too small" ) );
+                   contain_code::ERR_TOO_SMALL, _( "Item is too small." ) );
     }
     return ret_val<item_pocket::contain_code>::make_success();
 }
@@ -1681,16 +1693,16 @@ ret_val<item_pocket::contain_code> item_pocket::_can_contain( const item &it,
                 return ret_val<item_pocket::contain_code>::make_success();
             } else {
                 return ret_val<item_pocket::contain_code>::make_failure(
-                           contain_code::ERR_NO_SPACE, _( "ablative pocket already contains a plate" ) );
+                           contain_code::ERR_NO_SPACE, _( "Already contains an insert." ) );
             }
         }
 
         if( it.is_rigid() ) {
             for( const sub_bodypart_id &sbp : it.get_covered_sub_body_parts() ) {
-                if( it.is_bp_rigid( sbp ) && std::count( no_rigid.begin(), no_rigid.end(), sbp ) != 0 ) {
+                if( it.is_bp_rigid_selective( sbp ) && std::count( no_rigid.begin(), no_rigid.end(), sbp ) != 0 ) {
                     return ret_val<item_pocket::contain_code>::make_failure(
                                contain_code::ERR_NO_SPACE,
-                               _( "ablative pocket is being worn with hard armor can't support hard plate" ) );
+                               _( "Insert would conflict with another worn rigid item." ) );
                 }
             }
         }
@@ -2267,12 +2279,20 @@ void item_pocket::add( const item &it, item **ret )
     } else {
         *ret = restack( &contents.back() );
     }
+    if( bulk_fill_volume ) {
+        *bulk_fill_volume += it.volume();
+        *bulk_fill_weight += it.weight();
+    }
 }
 
 void item_pocket::add( const item &it, const int copies, std::vector<item *> &added )
 {
     for( auto iter = contents.insert( contents.end(), copies, it ); iter != contents.end(); iter++ ) {
         added.push_back( &*iter );
+    }
+    if( bulk_fill_volume ) {
+        *bulk_fill_volume += it.volume() * copies;
+        *bulk_fill_weight += it.weight() * copies;
     }
 }
 
@@ -2358,6 +2378,12 @@ ret_val<item *> item_pocket::insert_item( const item &it,
     }
     if( restack_charges ) {
         inserted = restack( inserted );
+    }
+    if( bulk_fill_volume ) {
+        // restack conserves total volume/weight, so the inserted item's own
+        // contribution is the delta regardless of any merge.
+        *bulk_fill_volume += it.volume();
+        *bulk_fill_weight += it.weight();
     }
     return ret_val<item *>::make_success( inserted );
 }
@@ -2452,6 +2478,9 @@ units::length item_pocket::min_containable_length() const
 
 units::volume item_pocket::contains_volume() const
 {
+    if( bulk_fill_volume ) {
+        return *bulk_fill_volume;
+    }
     units::volume vol = 0_ml;
     for( const item &it : contents ) {
         vol += it.volume();
@@ -2461,11 +2490,26 @@ units::volume item_pocket::contains_volume() const
 
 units::mass item_pocket::contains_weight() const
 {
+    if( bulk_fill_weight ) {
+        return *bulk_fill_weight;
+    }
     units::mass weight = 0_gram;
     for( const item &it : contents ) {
         weight += it.weight();
     }
     return weight;
+}
+
+void item_pocket::begin_bulk_fill()
+{
+    bulk_fill_volume = contains_volume();
+    bulk_fill_weight = contains_weight();
+}
+
+void item_pocket::end_bulk_fill()
+{
+    bulk_fill_volume.reset();
+    bulk_fill_weight.reset();
 }
 
 units::mass item_pocket::remaining_weight() const
@@ -2475,38 +2519,65 @@ units::mass item_pocket::remaining_weight() const
 
 int item_pocket::charges_per_remaining_volume( const item &it ) const
 {
-    if( it.count_by_charges() ) {
-        units::volume non_it_volume = volume_capacity();
-        int contained_charges = 0;
-        for( const item &contained : contents ) {
-            if( contained.stacks_with( it ) ) {
-                contained_charges += contained.charges;
-            } else {
-                non_it_volume -= contained.volume();
-            }
-        }
-        return it.charges_per_volume( non_it_volume, true ) - contained_charges;
-    } else {
+    if( !it.count_by_charges() ) {
         return it.charges_per_volume( remaining_volume(), true );
     }
+    // Skip contents walk when no typeId match is possible.
+    bool any_same_type = false;
+    for( const item &contained : contents ) {
+        if( contained.typeId() == it.typeId() ) {
+            any_same_type = true;
+            break;
+        }
+    }
+    if( !any_same_type ) {
+        return it.charges_per_volume( remaining_volume(), true );
+    }
+    units::volume non_it_volume = volume_capacity();
+    int contained_charges = 0;
+    for( const item &contained : contents ) {
+        if( contained.typeId() != it.typeId() ) {
+            non_it_volume -= contained.volume();
+            continue;
+        }
+        if( contained.stacks_with( it ) ) {
+            contained_charges += contained.charges;
+        } else {
+            non_it_volume -= contained.volume();
+        }
+    }
+    return it.charges_per_volume( non_it_volume, true ) - contained_charges;
 }
 
 int item_pocket::charges_per_remaining_weight( const item &it ) const
 {
-    if( it.count_by_charges() ) {
-        units::mass non_it_weight = weight_capacity();
-        int contained_charges = 0;
-        for( const item &contained : contents ) {
-            if( contained.stacks_with( it ) ) {
-                contained_charges += contained.charges;
-            } else {
-                non_it_weight -= contained.weight();
-            }
-        }
-        return it.charges_per_weight( non_it_weight, true ) - contained_charges;
-    } else {
+    if( !it.count_by_charges() ) {
         return it.charges_per_weight( remaining_weight(), true );
     }
+    bool any_same_type = false;
+    for( const item &contained : contents ) {
+        if( contained.typeId() == it.typeId() ) {
+            any_same_type = true;
+            break;
+        }
+    }
+    if( !any_same_type ) {
+        return it.charges_per_weight( remaining_weight(), true );
+    }
+    units::mass non_it_weight = weight_capacity();
+    int contained_charges = 0;
+    for( const item &contained : contents ) {
+        if( contained.typeId() != it.typeId() ) {
+            non_it_weight -= contained.weight();
+            continue;
+        }
+        if( contained.stacks_with( it ) ) {
+            contained_charges += contained.charges;
+        } else {
+            non_it_weight -= contained.weight();
+        }
+    }
+    return it.charges_per_weight( non_it_weight, true ) - contained_charges;
 }
 
 int item_pocket::best_quality( const quality_id &id ) const

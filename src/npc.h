@@ -200,6 +200,9 @@ std::string npc_class_name_str( const npc_class_id & );
 
 enum npc_action : int;
 
+// Legacy need ranking used by decide_needs() and set_omt_destination().
+// The behavior tree (npc_behavior.json) is the intended replacement
+// for immediate survival needs (warmth, food, water). See #28681.
 enum npc_need {
     need_none,
     need_ammo, need_weapon, need_gun,
@@ -968,6 +971,7 @@ class npc : public Character
         bool has_painkiller();
         bool took_painkiller() const;
         void use_painkiller();
+        float rate_food( const Character &who, const item &it, int want_nutr, int want_quench );
         void activate_item( item &it );
         bool has_identified( const itype_id & ) const override {
             return true;
@@ -1096,6 +1100,11 @@ class npc : public Character
         // Movement; the following are defined in npcmove.cpp
         void move(); // Picks an action & a target and calls execute_action
         void execute_action( npc_action action ); // Performs action
+        // Returns true if p is in an NPC_NO_GO zone for this NPC's faction.
+        bool is_no_go_position( const tripoint_abs_ms &p ) const;
+        // Returns true if p is a valid sleep target: not in NPC_NO_GO and
+        // reachable without bashing. Does not check occupancy.
+        bool is_valid_sleep_candidate( const tripoint_bub_ms &p ) const;
         void process_turn() override;
 
         using Character::invoke_item;
@@ -1128,6 +1137,31 @@ class npc : public Character
 
         npc_action address_needs();
         npc_action address_needs( float danger );
+        bool wear_warmest_item();
+        bool take_shelter_nearby();
+        // Local resource acquisition: find helpers return scored candidates
+        // for callers to iterate best-first, skipping unpathable targets.
+        struct scored_item {
+            item_location loc;
+            float score;
+        };
+        struct scored_water_source {
+            tripoint_bub_ms pos;
+            int dist;
+        };
+        struct scored_shelter {
+            tripoint_bub_ms pos;
+            int dist;
+        };
+        std::vector<scored_water_source> find_nearby_water_sources() const;
+        std::vector<scored_item> find_nearby_food();
+        std::vector<scored_item> find_nearby_warm_clothing();
+        std::vector<scored_shelter> find_nearby_shelters() const;
+        std::vector<scored_water_source> find_nearby_harvestable() const;
+        bool drink_from_water_source( const tripoint_bub_ms &water_pos );
+        bool consume_food_at( item_location loc );
+        bool wear_item_at( item_location loc );
+        bool move_to_and_verify( const tripoint_bub_ms &target );
         npc_action address_player();
         npc_action long_term_goal_action();
         int evaluate_sleep_spot( tripoint_bub_ms p );
@@ -1164,6 +1198,8 @@ class npc : public Character
         void update_cardio_acc() override {};
 
         void aim( const Target_attributes &target_attributes );
+
+        int estimate_reload_time( const item &it );
         void do_reload( const item_location &it );
 
         // Physical movement from one tile to the next
@@ -1343,6 +1379,31 @@ class npc : public Character
             return ai_cache.current_attack_evaluation;
         }
 
+        // Accessors for BT oracle predicates (character_oracle_t)
+        float get_ai_danger() const {
+            return ai_cache.danger;
+        }
+        weak_ptr_fast<Creature> get_ai_target() const {
+            return ai_cache.target;
+        }
+        bool has_ai_sound_alerts() const {
+            return !ai_cache.sound_alerts.empty();
+        }
+        std::optional<tripoint_abs_ms> get_ai_guard_pos() const {
+            return ai_cache.guard_pos;
+        }
+        // Effective guard position: ai_cache (ephemeral, from sound investigation)
+        // falls back to persistent guard_pos (from mission/dialogue assignment).
+        std::optional<tripoint_abs_ms> get_effective_guard_pos() const {
+            if( ai_cache.guard_pos ) {
+                return ai_cache.guard_pos;
+            }
+            return guard_pos;
+        }
+        void push_ai_sound_alert( const tripoint_abs_ms &pos, sounds::sound_t type, int vol ) {
+            ai_cache.sound_alerts.push_back( { pos, type, vol } );
+        }
+
         // Where we last saw the player
         std::optional<tripoint_abs_ms> last_player_seen_pos;
         // Player orders a friendly NPC to move to this position
@@ -1416,6 +1477,11 @@ class npc : public Character
          * Update body, but throttled.
          */
         void npc_update_body();
+        /**
+         * Recompute body temperature and wetness from current weather.
+         * Shared between npc_update_body() and on_load() catch-up.
+         */
+        void update_bodytemp_and_wetness();
 
         bool get_known_to_u() const;
 
@@ -1471,8 +1537,8 @@ class standard_npc : public npc
     public:
         explicit standard_npc( const std::string &name = "",
                                const tripoint_bub_ms &pos = tripoint_bub_ms( HALF_MAPSIZE_X, HALF_MAPSIZE_Y, 0 ),
-                               const std::vector<std::string> &clothing = {},
-                               int sk_lvl = 4, int s_str = 8, int s_dex = 8, int s_int = 8, int s_per = 8 );
+                               const std::vector<itype_id> &clothing = {},
+                               int sk_lvl = 4, int s_str = 10, int s_dex = 10, int s_int = 10, int s_per = 10 );
 };
 
 // instances of this can be accessed via string_id<npc_template>.

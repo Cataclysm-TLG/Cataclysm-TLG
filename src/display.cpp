@@ -81,6 +81,11 @@ disp_overmap_cache::disp_overmap_cache()
     _width = 0;
 }
 
+void display::invalidate_overmap_cache()
+{
+    disp_om_cache.invalidate();
+}
+
 disp_bodygraph_cache::disp_bodygraph_cache( bodygraph_var var )
 {
     _var = var;
@@ -635,6 +640,9 @@ std::pair<std::string, nc_color> display::weight_text_color( const Character &u 
         weight_color = c_light_gray;
     } else if( bmi > character_weight_category::underweight ) {
         weight_string = translate_marker( "Underweight" );
+        weight_color = c_light_gray;
+    } else if( bmi > character_weight_category::skinny ) {
+        weight_string = translate_marker( "Skinny" );
         weight_color = c_yellow;
     } else if( bmi > character_weight_category::emaciated ) {
         weight_string = translate_marker( "Emaciated" );
@@ -691,7 +699,9 @@ std::string display::weight_long_description( const Character &u )
     } else if( bmi > character_weight_category::normal ) {
         return _( "You look to be a pretty healthy weight, with some fat to last you through the winter, but nothing excessive." );
     } else if( bmi > character_weight_category::underweight ) {
-        return _( "You are thin, thinner than is healthy.  You are less resilient to going without food." );
+        return _( "You are a little on the slim side.  It might be a good idea to put on some weight before it gets too bad." );
+    } else if( bmi > character_weight_category::skinny ) {
+        return _( "You are thinner than is healthy.  You're weak from lack of energy and it's getting bad enough to lead to health problems." );
     } else if( bmi > character_weight_category::emaciated ) {
         return _( "You are very unhealthily underweight, nearing starvation." );
     } else {
@@ -1444,9 +1454,40 @@ std::string display::colorized_bodygraph_text( const Character &u, const std::st
     return ret;
 }
 
-std::pair<std::string, nc_color> display::weather_text_color( const Character &u )
+std::pair<std::string, nc_color> display::snow_depth_text_color( const Character &u )
 {
     if( u.posz() < 0 ) {
+        return std::make_pair( std::string(), c_light_gray );
+    }
+    const map &here = get_map();
+    if( !here.is_outside( u.pos_bub() ) || here.is_roofed( u.pos_bub() ) ) {
+        return std::make_pair( std::string(), c_light_gray );
+    }
+    const double depth = get_weather().get_snow_depth_mm( u.pos_abs_omt() );
+    if( depth < 1.0 ) {
+        return std::make_pair( std::string(), c_light_gray );
+    }
+    std::string text;
+    nc_color color;
+    if( depth >= 500 ) {
+        text = _( "Deep snow" );
+        color = c_white;
+    } else if( depth >= 250 ) {
+        text = _( "Snow" );
+        color = c_light_blue;
+    } else if( depth >= 100 ) {
+        text = _( "Light snow" );
+        color = c_light_cyan;
+    } else {
+        text = _( "Dusting" );
+        color = c_cyan;
+    }
+    return std::make_pair( text, color );
+}
+
+std::pair<std::string, nc_color> display::weather_text_color( const Character &u )
+{
+    if( u.posz() < 0 && get_map().is_roofed( u.pos_bub() ) ) {
         return std::make_pair( _( "Underground" ), c_light_gray );
     } else {
         weather_manager &weather = get_weather();

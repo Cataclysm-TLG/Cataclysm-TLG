@@ -397,7 +397,11 @@ void uistatedata::serialize( JsonOut &json ) const
     json.member( "distraction_mutation", distraction_mutation );
     json.member( "distraction_oxygen", distraction_oxygen );
     json.member( "distraction_withdrawal", distraction_withdrawal );
+    json.member( "distraction_craft_step_complete", distraction_craft_step_complete );
     json.member( "numpad_navigation", numpad_navigation );
+
+    json.member( "consume_menu_uistate" );
+    consume_uistate.serialize( json );
 
     json.member( "input_history" );
     json.start_object();
@@ -446,6 +450,7 @@ void uistatedata::deserialize( const JsonObject &jo )
     jo.read( "overmap_show_hordes", overmap_show_hordes );
     jo.read( "overmap_show_revealed_omts", overmap_show_revealed_omts );
     jo.read( "overmap_show_forest_trails", overmap_show_forest_trails );
+    jo.read( "consume_menu_uistate", consume_uistate );
     jo.read( "hidden_recipes", hidden_recipes );
     jo.read( "favorite_recipes", favorite_recipes );
     jo.read( "expanded_recipes", expanded_recipes );
@@ -470,6 +475,7 @@ void uistatedata::deserialize( const JsonObject &jo )
     jo.read( "distraction_mutation", distraction_mutation );
     jo.read( "distraction_oxygen", distraction_oxygen );
     jo.read( "distraction_withdrawal", distraction_withdrawal );
+    jo.read( "distraction_craft_step_complete", distraction_craft_step_complete );
     jo.read( "numpad_navigation", numpad_navigation );
 
     if( !jo.read( "vmenu_show_items", vmenu_show_items ) ) {
@@ -609,13 +615,18 @@ void inventory_entry::cache_denial( inventory_selector_preset const &preset ) co
 
 const item_category *inventory_entry::get_category_ptr() const
 {
+    if( cached_category_ptr != nullptr ) {
+        return cached_category_ptr;
+    }
     if( custom_category != nullptr ) {
-        return custom_category;
+        cached_category_ptr = custom_category;
+        return cached_category_ptr;
     }
     if( !is_item() ) {
         return nullptr;
     }
-    return &any_item()->get_category_of_contents();
+    cached_category_ptr = &any_item()->get_category_of_contents();
+    return cached_category_ptr;
 }
 
 inventory_column::inventory_column( const inventory_selector_preset &preset ) :
@@ -678,6 +689,11 @@ inventory_selector_preset::inventory_selector_preset()
     std::function<std::string( const inventory_entry & )>( [ this ]( const inventory_entry & entry ) {
         return get_caption( entry );
     } ) );
+}
+
+bool inventory_selector_preset::is_shown( const item_location & ) const
+{
+    return true;
 }
 
 bool inventory_selector_preset::sort_compare( const inventory_entry &lhs,
@@ -1290,15 +1306,16 @@ inventory_entry *inventory_column::add_entry( const inventory_entry &entry )
     paging_is_valid = false;
     if( entry.is_item() ) {
         item_location entry_item = entry.locations.front();
+        item_category const *entry_cat_ptr = entry.get_category_ptr();
 
         auto entry_with_loc = std::find_if( dest.begin(),
-        dest.end(), [&entry, &entry_item, this]( const inventory_entry & e ) {
+        dest.end(), [&entry_item, entry_cat_ptr, this]( const inventory_entry & e ) {
             if( !e.is_item() ) {
                 return false;
             }
             item_location found_entry_item = e.locations.front();
             return !e.is_collated() &&
-                   e.get_category_ptr() == entry.get_category_ptr() &&
+                   e.get_category_ptr() == entry_cat_ptr &&
                    entry_item.where() == found_entry_item.where() &&
                    entry_item.pos_abs() == found_entry_item.pos_abs() &&
                    entry_item.parent_item() == found_entry_item.parent_item() &&
@@ -2026,9 +2043,14 @@ bool inventory_selector::add_contained_items( item_location &container, inventor
         return false;
     }
 
-    std::list<item *> const items = preset.get_pocket_type() == pocket_type::LAST
-                                    ? container->all_items_top()
-                                    : container->all_items_top( preset.get_pocket_type() );
+    std::list<item *> items;
+    if( preset.get_pocket_type().size() == 1 && preset.has_pocket_type( pocket_type::LAST ) ) {
+        items = container->all_items_top();
+    } else {
+        for( const pocket_type pt : preset.get_pocket_type() ) {
+            items.splice( items.begin(), container->all_items_top( pt ) );
+        }
+    }
 
     bool vis_top = false;
     inventory_column temp( preset );
@@ -3074,7 +3096,7 @@ void inventory_column::remove_duplicate_itypes( bool include_variants )
             }
         }
     };
-    //sort out duplicates, clear list, then reconstruct entries
+    // Sort out duplicates, clear list, then reconstruct entries.
     audit_entries( entries );
     audit_entries( entries_hidden );
     clear();
@@ -4231,8 +4253,13 @@ inventory_selector::stats inventory_insert_selector::get_raw_stats() const
                         }
                     }
                 }
-                selected_weight += w * overflow_counter;
-                selected_volume += v * overflow_counter;
+                if( e->any_item()->count_by_charges() ) {
+                    selected_weight += w * overflow_counter / e->get_total_charges();
+                    selected_volume += v * overflow_counter / e->get_total_charges();
+                } else {
+                    selected_weight += w * overflow_counter;
+                    selected_volume += v * overflow_counter;
+                }
             }
         }
     }

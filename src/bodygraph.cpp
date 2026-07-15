@@ -448,12 +448,19 @@ void bodygraph_display::prepare_partlist()
     partlist.clear();
     for( const auto &bgp : id->parts ) {
         for( const bodypart_id &bid : bgp.second.bodyparts ) {
-            partlist.emplace_back( bid, static_cast<const sub_body_part_type *>( nullptr ),
-                                   &bgp.second, u->has_part( bid, body_part_filter::equivalent ) );
+            if( !u->has_part( bid ) ) {
+                continue;
+            }
+            partlist.emplace_back( bid, nullptr, &bgp.second,
+                                   u->has_part( bid, body_part_filter::equivalent ) );
         }
         for( const sub_bodypart_id &sid : bgp.second.sub_bodyparts ) {
+            if( !sid.is_valid() || !u->has_part( sid->parent ) ) {
+                continue;
+            }
             const bodypart_id bid = sid->parent.id();
-            partlist.emplace_back( bid, &*sid, &bgp.second, u->has_part( bid, body_part_filter::equivalent ) );
+            partlist.emplace_back( bid, &*sid, &bgp.second,
+                                   u->has_part( bid, body_part_filter::equivalent ) );
         }
     }
     std::sort( partlist.begin(), partlist.end(),

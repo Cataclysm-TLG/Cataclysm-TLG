@@ -1,11 +1,6 @@
 [
   {
     "type": "overmap_special_migration",
-    "id": "Isherwood Farms",
-    "new_id": "Isherwood Farm Mutable"
-  },
-  {
-    "type": "overmap_special_migration",
     "id": "solar_farm",
     "new_id": "power_station_small"
   },
@@ -18,5 +13,20 @@
     "type": "overmap_special_migration",
     "id": "Occupied Lumbermill",
     "new_id": "Lumbermill"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "cemetery_lacroix",
+    "new_id": "cemetery_religious"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Isherwood Farm Mutable",
+    "new_id": "Farm Mutable"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Hunting Lodge - Normal",
+    "new_id": "Hunting Lodge"
   }
 ]

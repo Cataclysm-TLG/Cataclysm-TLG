@@ -34,7 +34,7 @@
     "color": "green",
     "see_cost": "spaced_high",
     "extras": "forest",
-    "spawns": { "group": "GROUP_FOREST", "population": [ 0, 3 ], "chance": 13 },
+    "spawns": { "group": "GROUP_FOREST", "population": [ 0, 3 ], "chance": 14 },
     "travel_cost_type": "forest",
     "flags": [ "NO_ROTATE", "SOURCE_FORAGE" ]
   },

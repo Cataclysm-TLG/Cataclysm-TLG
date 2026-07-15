@@ -112,8 +112,7 @@
         "_": { "item": "mercenary_battle_traces", "chance": 40 },
         "A": { "item": "altered_object_i", "chance": 100 },
         "Ñ": [ { "item": "guns_milspec", "chance": 10 }, { "item": "ammo_milspec", "chance": 70 } ],
-        "Ó": { "item": "yrax_scrap", "chance": 100, "repeat": 3 },
-        "ü": { "item": "xedra_kill_team_set", "chance": 100 }
+        "ü": { "item": "kill_team_set", "chance": 100 }
       },
       "computers": {
         "9": {

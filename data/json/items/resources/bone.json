@@ -32,7 +32,7 @@
     "vitamins": [ [ "calcium", "25588 mg" ], [ "meat_allergen", 1 ] ],
     "melee_damage": { "bash": 3 },
     "to_hit": { "grip": "none", "length": "short", "surface": "any", "balance": "uneven" },
-    "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ],
+    "flags": [ "RAW", "INEDIBLE", "NO_TEMP", "DAMAGE_VEHICLE_WHEELS" ],
     "into": "meal_bone",
     "recipe": "meal_bone_mill_1_4"
   },
@@ -57,7 +57,7 @@
     "melee_damage": { "bash": 15 },
     "calories": 110,
     "vitamins": [ [ "calcium", "1561750 mg" ], [ "meat_allergen", 1 ] ],
-    "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ]
+    "flags": [ "RAW", "INEDIBLE", "NO_TEMP", "DAMAGE_VEHICLE_WHEELS" ]
   },
   {
     "type": "ITEM",
@@ -69,6 +69,7 @@
     "volume": "320 ml",
     "color": "light_gray",
     "comestible_type": "FOOD",
+    "material": [ "bone" ],
     "symbol": "%",
     "calories": 17,
     "description": "Gray-brown cracks and gouges mar this bone like decay in an old tooth.",
@@ -104,7 +105,7 @@
     "price_postapoc": "2 cent",
     "material": [ "powder" ],
     "volume": "62 ml",
-    "flags": [ "NO_TEMP" ],
+    "flags": [ "NO_TEMP", "INEDIBLE" ],
     "fun": -10
   },
   {
@@ -123,7 +124,7 @@
     "price_postapoc": "1 cent",
     "material": [ "powder" ],
     "volume": "62 ml",
-    "flags": [ "NO_TEMP" ],
+    "flags": [ "NO_TEMP", "INEDIBLE" ],
     "fun": -10
   },
   {
@@ -136,20 +137,20 @@
     "description": "A thin skewer carved from bone.  Sadly, it won't make squirrel on a stick taste better.",
     "category": "other",
     "material": [ "bone" ],
-    "flags": [ "NO_SALVAGE", "TRADER_AVOID" ],
+    "flags": [ "NO_SALVAGE", "TRADER_AVOID", "DAMAGE_VEHICLE_WHEELS" ],
     "weight": "10 g",
     "volume": "25 ml",
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
-    "into": "meal_bone_tainted",
-    "recipe": "meal_bone_tainted_mill_6_1"
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_25_1"
   },
   {
     "type": "ITEM",
     "abstract": "skull_abstract",
     "name": { "str": "abstract skull" },
     "description": "This is a dummy item.  If you see it something went wrong.",
-    "flags": [ "TRADER_AVOID" ],
+    "flags": [ "TRADER_AVOID", "DAMAGE_VEHICLE_WHEELS" ],
     "category": "spare_parts",
     "weight": "1 kg",
     "volume": "1400 ml",
@@ -173,6 +174,7 @@
     "description": "The stained skull of what was once a human being.  It is rotted and noticeably warped from its lively form.  Carrying this around probably isn't going to win you any friends.",
     "copy-from": "skull_abstract",
     "looks_like": "skull_human",
+    "delete": { "flags": [ "DAMAGE_VEHICLE_WHEELS" ] },
     "snippet_category": "skull_human_tainted_desc"
   },
   {

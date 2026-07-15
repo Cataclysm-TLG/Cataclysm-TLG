@@ -29,7 +29,7 @@
       [ "story_book", 5 ],
       [ "syringe", 3 ],
       [ "tall_tales", 5 ],
-      { "item": "teddy_bear", "custom-flags": [ "FILTHY" ], "damage": [ 0, 3 ], "prob": 15 },
+      { "item": "teddy_bear", "custom-flags": [ "FILTHY" ], "damage": [ -1, 3 ], "prob": 15 },
       [ "teleumbrella", 2 ],
       [ "thawb", 1 ],
       [ "umbrella", 10 ],
@@ -131,7 +131,6 @@
         "b": "f_bench",
         "n": "f_slab"
       },
-      "place_nested": [ { "chunks": [ [ "SEER_Brigitte_LaCroix_spawn", 20 ], [ "null", 80 ] ], "x": 42, "y": 30 } ],
       "signs": { "P": { "signage": "Closed at sunset." }, "p": { "signage": "Maintained by the <city> Church." } },
       "items": {
         "X": { "item": "grave_memories", "chance": 1 },

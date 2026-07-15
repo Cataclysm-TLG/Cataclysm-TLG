@@ -18,8 +18,6 @@
     "symbol": "~",
     "color": "light_green",
     "healthy": -2,
-    "addiction_potential": 2,
-    "addiction_type": "mutagen",
     "flags": [ "NO_INGEST", "NUTRIENT_OVERRIDE" ],
     "vitamins": [  ],
     "material": [ "water" ],
@@ -38,9 +36,7 @@
     "volume": "10 ml",
     "symbol": "!",
     "color": "green",
-    "healthy": -6,
-    "stim": -5,
-    "addiction_potential": 6,
+    "healthy": -4,
     "container": "test_tube",
     "tool": "syringe",
     "flags": [ "NO_INGEST", "MUTAGEN_PRIMER" ]
@@ -51,10 +47,8 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str_sp": "mutagenic infusion" },
-    "description": "A processed, purified, and condensed dose of mutagenic drugs.  This will cause you to acquire mutations over time.",
-    "healthy": -10,
-    "stim": -10,
-    "addiction_potential": 12,
+    "description": "A processed, purified, and condensed dose of mutagenic drugs.  This will cause you to acquire random mutations over time.",
+    "healthy": -5,
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You inject the mutagenic infusion.",
@@ -154,9 +148,7 @@
     "price": "4000 USD",
     "looks_like": "iv_mutagen",
     "color": "red",
-    "healthy": -15,
-    "stim": -10,
-    "addiction_potential": 4,
+    "healthy": -7,
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You inject the chimera infusion.",
@@ -174,7 +166,6 @@
     "price": "4000 USD",
     "looks_like": "iv_mutagen",
     "color": "red",
-    "addiction_potential": 4,
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You inject the chiropteran infusion.",
@@ -264,7 +255,7 @@
     }
   },
   {
-    "id": "iv_mutagen_lupine",
+    "id": "iv_mutagen_canine",
     "copy-from": "iv_mutagen_flavor",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
@@ -276,7 +267,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the canine infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_lupine", 220, 320 ] ]
+      "vitamins": [ [ "mutagen_canine", 220, 320 ] ]
     }
   },
   {
@@ -289,7 +280,7 @@
     "price": "3000 USD",
     "looks_like": "iv_mutagen",
     "color": "light_red",
-    "healthy": -4,
+    "healthy": -3,
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You inject the medical infusion.",
@@ -495,8 +486,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str_sp": "mutagen" },
-    "description": "A syrupy black goop that reeks of noxious chemicals.  Drinking this may cause you to mutate.",
-    "addiction_potential": 6,
+    "description": "A syrupy black goop that reeks of noxious chemicals.  Drinking this may cause you to mutate randomly.",
     "use_action": { "type": "consume_drug", "activation_message": "You drink the mutagen.", "vitamins": [ [ "mutagen", 120, 220 ] ] }
   },
   {
@@ -508,7 +498,6 @@
     "description": "A thick, soupy red liquid.  It looks and smells disgusting, and seems to bubble with an intelligence of its own…",
     "looks_like": "mutagen",
     "color": "red",
-    "addiction_potential": 0,
     "charges": 5,
     "weight": "50 g",
     "fun": -10,
@@ -684,7 +673,7 @@
     }
   },
   {
-    "id": "mutagen_lupine",
+    "id": "mutagen_canine",
     "copy-from": "mutagen_flavor",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
@@ -693,7 +682,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the canine mutagen.",
-      "vitamins": [ [ "mutagen_lupine", 120, 220 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_canine", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -884,7 +873,6 @@
     "price_postapoc": "250 cent",
     "color": "pink",
     "healthy": -3,
-    "addiction_potential": 8,
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the purifier.",
@@ -901,7 +889,6 @@
     "price": "9000 USD",
     "price_postapoc": "5 USD",
     "color": "pink",
-    "addiction_potential": 8,
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You inject the processed purifier.",
@@ -926,7 +913,7 @@
     "container": "test_tube",
     "symbol": "?",
     "color": "white",
-    "healthy": -30,
+    "healthy": -10,
     "flags": [ "NUTRIENT_OVERRIDE" ],
     "material": [ "water" ],
     "freezing_point": -8,
@@ -953,8 +940,7 @@
     "material": [ "plastic" ],
     "symbol": "!",
     "color": "magenta",
-    "healthy": -6,
-    "stim": -5,
+    "healthy": -8,
     "use_action": [ "PURIFY_SMART" ],
     "flags": [ "NPC_SAFE", "TRADER_AVOID", "NUTRIENT_OVERRIDE", "NO_INGEST" ]
   },

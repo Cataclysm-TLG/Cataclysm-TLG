@@ -758,7 +758,7 @@
     "type": "nested_category",
     "activity_level": "MODERATE_EXERCISE",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_LEGS",
+    "subcategory": "CSC_ARMOR_HEAD",
     "name": "platemail head protection",
     "description": "Recipes related to constructing steel plate armor for the head.",
     "skill_used": "fabrication",
@@ -1161,9 +1161,7 @@
       "flour_mortar",
       "flour_wheat_free",
       "flour_wheat_free_with_from_food_processor",
-      "flour_wheat_free_mortar",
-      "bread_flour",
-      "bread_flour_with_from_food_processor"
+      "flour_wheat_free_mortar"
     ],
     "difficulty": 2
   },
@@ -2058,18 +2056,6 @@
     "nested_category_data": [ "marble", "bearing", "pebble_clay", "pebble" ]
   },
   {
-    "id": "nested_ammo_rockets",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_AMMO",
-    "subcategory": "CSC_AMMO_OTHER",
-    "name": "homemade rockets",
-    "description": "Recipes related to creating inaccurate, but powerful homemade rockets.",
-    "skill_used": "fabrication",
-    "nested_category_data": [ "spiked_rocket", "incendiary_hm_rocket", "explosive_hm_rocket" ],
-    "difficulty": 3
-  },
-  {
     "id": "nested_adjustable_wrenches",
     "type": "nested_category",
     "activity_level": "BRISK_EXERCISE",
@@ -2180,128 +2166,6 @@
     ]
   },
   {
-    "id": "nested_bionic_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "bionic weaponry",
-    "description": "Recipes for practice with bionic weaponry for combat.",
-    "skill_used": "cutting",
-    "nested_category_data": [
-      "prac_cutting_beg_bionics",
-      "prac_cutting_int_bionics",
-      "prac_cutting_beg_bionic_sword",
-      "prac_cutting_int_bionic_sword"
-    ],
-    "difficulty": 1
-  },
-  {
-    "id": "nested_axes_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "axes",
-    "description": "Recipes for combat practice with axes.",
-    "skill_used": "cutting",
-    "nested_category_data": [ "prac_cutting_beg_great_axe", "prac_cutting_int_great_axe", "prac_cutting_beg_hand_axe", "prac_cutting_int_hand_axe" ],
-    "difficulty": 1
-  },
-  {
-    "id": "nested_cutting_swords_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "cutting swords",
-    "description": "Recipes for combat practice of slashing swords of all sizes.",
-    "skill_used": "cutting",
-    "nested_category_data": [
-      "prac_cutting_beg_short_sword",
-      "prac_cutting_int_short_sword",
-      "prac_cutting_beg_med_sword",
-      "prac_cutting_int_med_sword",
-      "prac_cutting_beg_long_sword",
-      "prac_cutting_int_long_sword",
-      "prac_cutting_beg_great_sword",
-      "prac_cutting_int_great_sword"
-    ],
-    "difficulty": 1
-  },
-  {
-    "id": "nested_stabbing_swords_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "stabbing swords",
-    "description": "Recipes for combat practice of thrusting swords, which require a different training from just slashing with your sword.",
-    "skill_used": "stabbing",
-    "nested_category_data": [ "prac_stabbing_beg_fencing", "prac_stabbing_int_fencing", "prac_stabbing_beg_thrust", "prac_stabbing_int_thrust" ],
-    "difficulty": 1
-  },
-  {
-    "id": "nested_spears_polearms_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "spears and polearms",
-    "description": "Recipes for combat practice with long pointed objects, like spears and polearms.",
-    "skill_used": "stabbing",
-    "nested_category_data": [ "prac_stabbing_beg_spear", "prac_stabbing_int_spear", "prac_stabbing_beg_polearm", "prac_stabbing_int_polearm" ],
-    "difficulty": 1
-  },
-  {
-    "id": "nested_knives_shivs_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "knives and shivs",
-    "description": "Recipes for combat practice with small pointed objects, like knives and shivs.",
-    "skill_used": "stabbing",
-    "nested_category_data": [ "prac_stabbing_beg_knife", "prac_stabbing_int_knife", "prac_stabbing_beg_shiv", "prac_stabbing_int_shiv" ],
-    "difficulty": 1
-  },
-  {
-    "id": "nested_batons_and_staffs_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "batons and quarterstaves",
-    "description": "Recipes for combat practice with thin, stick-like bludgeons like batons and quarterstaves.",
-    "skill_used": "bashing",
-    "nested_category_data": [ "prac_bashing_beg_baton", "prac_bashing_int_baton", "prac_bashing_beg_staff", "prac_bashing_int_staff" ],
-    "difficulty": 1
-  },
-  {
-    "id": "nested_maces_and_hammers_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "maces and great hammers",
-    "description": "Recipes for combat practice with weighty, smashing bludgeons, like maces and great hammers.",
-    "skill_used": "bashing",
-    "nested_category_data": [ "prac_bashing_beg_mace", "prac_bashing_int_mace", "prac_bashing_beg_great_hammer", "prac_bashing_int_great_hammer" ],
-    "difficulty": 1
-  },
-  {
-    "id": "nested_firearm_cqc_practice",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_PRACTICE",
-    "subcategory": "CSC_PRACTICE_MELEE",
-    "name": "firearms CQC",
-    "description": "Recipes for CQC practice with firearms.",
-    "skill_used": "bashing",
-    "nested_category_data": [ "prac_bashing_beg_rifle", "prac_bashing_int_rifle", "prac_bashing_beg_pistol", "prac_bashing_int_pistol" ],
-    "difficulty": 1
-  },
-  {
     "id": "nested_methanol_tank",
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
@@ -2322,25 +2186,6 @@
     "description": "Recipes related to creating scrap aluminum.",
     "skill_used": "fabrication",
     "nested_category_data": [ "scrap_aluminum_melted_foil", "scrap_aluminum_assorted_scrap" ]
-  },
-  {
-    "id": "nested_aketon_canvas",
-    "type": "nested_category",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
-    "name": "canvas aketons",
-    "description": "Recipes related to canvas cloth armor meant to be worn under other armor.",
-    "skill_used": "tailor",
-    "nested_category_data": [
-      "aketon_canvas",
-      "xl_aketon_canvas",
-      "xs_aketon_canvas",
-      "aketon_canvas_vest",
-      "xl_aketon_canvas_vest",
-      "xs_aketon_canvas_vest"
-    ],
-    "difficulty": 3
   },
   {
     "id": "nested_aketon_wool",
@@ -2413,7 +2258,14 @@
     "name": "pemmican",
     "description": "Recipes related to making pemmican.",
     "skill_used": "cooking",
-    "nested_category_data": [ "pemmican", "pemmican_vegetable", "pemmican_meat" ]
+    "nested_category_data": [
+      "pemmican",
+      "pemmican_with_food_processor",
+      "pemmican_vegetable",
+      "pemmican_vegetable_with_food_processor",
+      "pemmican_meat",
+      "pemmican_meat_with_food_processor"
+    ]
   },
   {
     "id": "nested_chairs",
@@ -2527,7 +2379,6 @@
       "bot_manhack",
       "bot_dispatch",
       "bot_dispatch_military",
-      "bot_turret_searchlight",
       "bot_molebot",
       "bot_nursebot",
       "bot_skitterbot",
@@ -2717,7 +2568,7 @@
       "iv_mutagen_spider",
       "iv_mutagen_raptor",
       "iv_mutagen_cattle",
-      "iv_mutagen_lupine",
+      "iv_mutagen_canine",
       "iv_mutagen_insect",
       "iv_mutagen_lizard",
       "iv_mutagen_chimera",
@@ -2759,7 +2610,7 @@
       "mutagen_spider",
       "mutagen_raptor",
       "mutagen_cattle",
-      "mutagen_lupine",
+      "mutagen_canine",
       "mutagen_insect",
       "mutagen_lizard",
       "mutagen_chimera",
@@ -2810,7 +2661,7 @@
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_PIERCING",
+    "subcategory": "CSC_WEAPON_STABBING",
     "name": "spears",
     "description": "Recipes related to making spears from various materials.",
     "skill_used": "fabrication",
@@ -2843,11 +2694,23 @@
     "difficulty": 3
   },
   {
-    "id": "nested_ballistic_plates",
+    "id": "nested_ballistic_plates_all",
     "type": "nested_category",
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
+    "name": "ballistic plates",
+    "description": "Recipes related to constructing ballistic armor inserts.",
+    "skill_used": "fabrication",
+    "nested_category_data": [ "nested_ballistic_plates", "nested_ballistic_plates_xl" ],
+    "difficulty": 5
+  },
+  {
+    "id": "nested_ballistic_plates",
+    "type": "nested_category",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
     "name": "makeshift ballistic plates",
     "description": "Recipes related to constructing makeshift ESAPI and ESBI plates.",
     "skill_used": "fabrication",
@@ -2862,6 +2725,24 @@
       "fiberglass_esbi_plate",
       "paper_esapi_plate",
       "paper_esbi_plate"
+    ],
+    "difficulty": 5
+  },
+  {
+    "id": "nested_ballistic_plates_xl",
+    "type": "nested_category",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "name": "XL makeshift ballistic plates",
+    "description": "Recipes related to constructing oversized makeshift ESAPI plates.",
+    "skill_used": "fabrication",
+    "nested_category_data": [
+      "scrap_esapi_plate_xl",
+      "steel_esapi_plate_xl",
+      "wood_esapi_plate_xl",
+      "fiberglass_esapi_plate_xl",
+      "paper_esapi_plate_xl"
     ],
     "difficulty": 5
   }

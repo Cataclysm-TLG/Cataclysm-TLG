@@ -386,13 +386,13 @@
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
-    "result": "long_pole",
+    "result": "soaking_long_pole_active",
     "byproducts": [ [ "splinter", 30 ] ],
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
     "difficulty": 3,
-    "time": "5 h 40 m",
+    "time": "1 h 40 m",
     "book_learn": [ [ "textbook_weapeast", 2 ], [ "textbook_weapwest", 2 ] ],
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 1.25, "max_experience": "100 m" } ],
@@ -402,7 +402,6 @@
       { "id": "CUT_FINE", "level": 1 },
       { "id": "FILE", "level": 1 }
     ],
-    "//": "a long pole is a single piece of wood, and the stout branch just isn't large enough.",
     "components": [
       [ [ "wood_beam", 1 ] ],
       [ [ "any_shortening", 32, "LIST" ], [ "cooking_oil", 32 ], [ "lamp_oil", 500 ], [ "motor_oil", 500 ] ]
@@ -411,14 +410,14 @@
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
-    "result": "spear_shaft",
+    "result": "soaking_spear_shaft_active",
     "byproducts": [ [ "splinter", 12 ] ],
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
     "difficulty": 3,
     "book_learn": [ [ "textbook_weapeast", 2 ], [ "textbook_weapwest", 2 ] ],
-    "time": "5 h 40 m",
+    "time": "1 h 40 m",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 1.25, "max_experience": "100 m" } ],
     "qualities": [
@@ -550,46 +549,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "ACTIVE_EXERCISE",
-    "result": "reinforced_glass_sheet",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_MATERIALS",
-    "skill_used": "fabrication",
-    "difficulty": 4,
-    "time": "20 m",
-    "reversible": true,
-    "decomp_learn": 3,
-    "autolearn": true,
-    "//": "240cm total, the panes are pretty thick so they should be joined with 2 lines of weld",
-    "using": [ [ "welding_standard", 240 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_glassblowing", "required": false, "time_multiplier": 1.5, "skill_penalty": 0.15 },
-      { "proficiency": "prof_welding_basic", "skill_penalty": 0.5 }
-    ],
-    "qualities": [ { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "reinforced_glass_pane", 4 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "ACTIVE_EXERCISE",
-    "result": "reinforced_glass_pane",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_MATERIALS",
-    "skill_used": "fabrication",
-    "difficulty": 2,
-    "time": "40 m",
-    "book_learn": [ [ "textbook_fabrication", 3 ], [ "textbook_mechanics", 3 ], [ "welding_book", 5 ] ],
-    "using": [ [ "welding_standard", 80 ], [ "glue_strong", 250 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_welding_basic", "skill_penalty": 0.5 },
-      { "proficiency": "prof_welding" }
-    ],
-    "qualities": [ { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "glass_sheet", 1 ] ], [ [ "wire", 8 ] ] ]
-  },
-  {
-    "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
     "result": "pipe_fittings",
     "category": "CC_OTHER",
@@ -657,7 +616,7 @@
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
-    "result": "soft_adobe_brick",
+    "result": "soft_adobe_brick_active",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
     "skill_used": "fabrication",
@@ -685,7 +644,7 @@
     "difficulty": 2,
     "time": "30 m",
     "autolearn": true,
-    "components": [ [ [ "soft_adobe_brick", 20 ] ], [ [ "frame_wood_light", 1 ] ] ]
+    "components": [ [ [ "soft_adobe_brick_active", 20 ] ], [ [ "frame_wood_light", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -712,7 +671,7 @@
     "difficulty": 2,
     "time": "10 m",
     "autolearn": false,
-    "book_learn": [ [ "concrete_book", 2 ] ],
+    "book_learn": [ [ "concrete_book", 2 ], [ "bag_durasack_cement", 2 ] ],
     "tools": [ [ [ "concrete_mix_tool", 50 ] ] ],
     "components": [ [ [ "material_cement", 50 ] ], [ [ "material_sand", 150 ] ] ]
   },

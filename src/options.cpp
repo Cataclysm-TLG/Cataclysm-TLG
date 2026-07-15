@@ -92,12 +92,14 @@ void option_slider::load_option_sliders( const JsonObject &jo, const std::string
     option_slider_factory.load( jo, src );
 }
 
+void option_slider::finalize()
+{
+    reorder_opts();
+}
+
 void option_slider::finalize_all()
 {
-    for( const option_slider &opt : option_slider::get_all() ) {
-        option_slider &o = const_cast<option_slider &>( opt );
-        o.reorder_opts();
-    }
+    option_slider_factory.finalize();
 }
 
 void option_slider::check_consistency()
@@ -308,15 +310,12 @@ static options_manager::cOpt::COPT_VALUE_TYPE get_value_type( const std::string 
 
 //add hidden external option with value
 void options_manager::add_external( const std::string &sNameIn, const std::string &sPageIn,
-                                    const std::string &sType,
-                                    const translation &sMenuTextIn, const translation &sTooltipIn )
+                                    const std::string &sType )
 {
     cOpt thisOpt;
 
     thisOpt.sName = sNameIn;
     thisOpt.sPage = sPageIn;
-    thisOpt.sMenuText = sMenuTextIn;
-    thisOpt.sTooltip = sTooltipIn;
     thisOpt.sType = sType;
     thisOpt.verbose = false;
 
@@ -1297,6 +1296,38 @@ std::vector<options_manager::id_and_option> options_manager::build_tilesets_list
                      "tileset",
                      PATH_INFO::tileset_conf() );
 
+    auto iter = result.begin();
+
+    // Block nonfunctional out-of-repo tilesets.
+    std::vector<std::string> unusable_list = {
+        "MshockRealXotto",
+        "UNDEAD_PEOPLE_BASE",
+        "UNDEAD_PEOPLE",
+        "UNDEAD"
+    };
+
+    while( iter != result.end() ) {
+        const std::string checked_tileset_id = iter->first;
+        bool kill_with_fire = false;
+        for( std::string unusable_tileset : unusable_list ) {
+            if( checked_tileset_id.find( unusable_tileset ) != std::string::npos ) {
+                kill_with_fire = true;
+                break;
+            }
+        }
+
+        if( kill_with_fire ) {
+            iter = result.erase( iter );
+        } else {
+            iter++;
+        }
+    }
+
+    // Default values
+    if( result.empty() ) {
+        result.emplace_back( "hoder", to_translation( "Hoder's" ) );
+    }
+
     // Default values
     if( result.empty() ) {
         result.emplace_back( "hoder", to_translation( "Hoder's" ) );
@@ -1655,8 +1686,8 @@ void options_manager::add_options_general()
                                         to_translation( "Options regarding auto notes." ) ),
     [&]( const std::string & page_id ) {
         add( "AUTO_NOTES", page_id, to_translation( "Auto notes" ),
-             to_translation( "If true, automatically sets notes." ),
-             false
+             to_translation( "If true, automatically sets notes on the map." ),
+             true
            );
 
         add( "AUTO_NOTES_STAIRS", page_id, to_translation( "Auto notes (stairs)" ),
@@ -1668,7 +1699,7 @@ void options_manager::add_options_general()
 
         add( "AUTO_NOTES_DROPPED_FAVORITES", page_id, to_translation( "Auto notes (dropped favorites)" ),
              to_translation( "If true, automatically sets notes when player drops favorited items." ),
-             false
+             true
            );
 
         get_option( "AUTO_NOTES_DROPPED_FAVORITES" ).setPrerequisite( "AUTO_NOTES" );
@@ -1782,9 +1813,6 @@ void options_manager::add_options_interface()
             { "24h", to_translation( "24h" ) }
         },
         "12h" );
-        add( "SHOW_VITAMIN_MASS", page_id, to_translation( "Show vitamin masses" ),
-             to_translation( "Display the masses of vitamins in addition to units/RDA values in item descriptions." ),
-             true );
     } );
 
     add_empty_line();
@@ -1820,9 +1848,6 @@ void options_manager::add_options_interface()
     add_option_group( "interface", Group( "naming_opts", to_translation( "Naming Options" ),
                                           to_translation( "Options regarding the naming of items." ) ),
     [&]( const std::string & page_id ) {
-        add( "SHOW_DRUG_VARIANTS", page_id, to_translation( "Show drug brand names" ),
-             to_translation( "If true, show brand names for drugs, instead of generic functional names - 'Adderall', instead of 'prescription stimulant'." ),
-             false );
         add( "AMMO_IN_NAMES", page_id, to_translation( "Add ammo to weapon/magazine names" ),
              to_translation( "If true, the default ammo is added to weapon and magazine names.  For example \"Mosin-Nagant M44 (4/5)\" becomes \"Mosin-Nagant M44 (4/5 7.62x54mm)\"." ),
              true
@@ -2656,41 +2681,26 @@ void options_manager::add_options_world_default()
 
     add_empty_line();
 
-    add_option_group( "world_default", Group( "game_world_opts", to_translation( "Game World Options" ),
-                      to_translation( "Options regarding game world." ) ),
-    [&]( const std::string & page_id ) {
-        add( "CITY_SIZE", page_id, to_translation( "Size of cities" ),
-             to_translation( "A number determining how large cities are.  A higher number means larger cities.  0 disables cities, roads and any scenario requiring a city start." ),
-             0, 16, 8
-           );
+    // These optiosn are purposefully and permanently hidden. It can only be modified through the sliders when creating a new world.
+    // As such there is no name or description to show, those are blanked.
+    add( "CITY_SIZE", "world_default", translation(), translation(), 0, 16, 8, COPT_ALWAYS_HIDE
+       );
 
-        add( "CITY_SPACING", page_id, to_translation( "City spacing" ),
-             to_translation( "A number determining how far apart cities are.  A higher number means cities are further apart.  Warning, small numbers lead to very slow mapgen." ),
-             0, 8, 4
-           );
+    add( "CITY_SPACING", "world_default", translation(), translation(), 0, 8, 4, COPT_ALWAYS_HIDE
+       );
 
-        add( "SPAWN_DENSITY", page_id, to_translation( "Spawn rate scaling factor" ),
-             to_translation( "A scaling factor that determines density of monster spawns.  A higher number means more monsters." ),
-             0.0, 50.0, 1.0, 0.1
-           );
+    add( "SPAWN_DENSITY", "world_default", translation(), translation(), 0.0, 50.0, 1.0, 0.1,
+         COPT_ALWAYS_HIDE
+       );
 
-        add( "NPC_SPAWNTIME", page_id, to_translation( "Random NPC spawn time" ),
-             to_translation( "Baseline average number of days between random NPC spawns.  Average duration goes up with the number of NPCs already spawned.  A higher number means fewer NPCs.  Set to 0 days to disable random NPCs." ),
-             0.0, 100.0, 4.0, 0.01
-           );
+    add( "NPC_SPAWNTIME", "world_default", translation(), translation(), 0.0, 100.0, 4.0, 0.01,
+         COPT_ALWAYS_HIDE
+       );
 
-        add( "EVOLUTION_INVERSE_MULTIPLIER", page_id,
-             to_translation( "Monster evolution slowdown" ),
-             to_translation( "A multiplier for the time between monster upgrades.  For example a value of 2.00 would cause evolution to occur at half speed.  Set to 0.00 to turn off monster upgrades." ),
-             0.0, 100, 1.0, 0.01
-           );
-    } );
-
-    add_empty_line();
-
-    add( "DEFAULT_REGION", "world_default", to_translation( "Default region type" ),
-         to_translation( "(WIP feature) Determines terrain, shops, plants, and more." ),
-    { { "default", to_translation( "default" ) } }, "default"
+    add( "EVOLUTION_INVERSE_MULTIPLIER", "world_default",
+         to_translation( "Monster evolution slowdown" ),
+         to_translation( "A multiplier for the time between monster upgrades.  For example a value of 2.00 would cause evolution to occur at half speed.  Set to 0.00 to turn off monster upgrades." ),
+         0.0, 100, 1.0, 0.01
        );
 
     add_empty_line();
@@ -2718,11 +2728,6 @@ void options_manager::add_options_world_default()
     add_option_group( "world_default", Group( "misc_worlddef_opts", to_translation( "Misc Options" ),
                       to_translation( "Miscellaneous options." ) ),
     [&]( const std::string & page_id ) {
-        add( "WANDER_SPAWNS", page_id, to_translation( "Wandering hordes" ),
-             to_translation( "If true, emulates zombie hordes.  Zombies can group together into hordes, which can wander around cities and will sometimes move towards noise.  Note: This feature is still in development, but should be mostly bug-free." ),
-             true
-           );
-
         add( "BLACK_ROAD", page_id, to_translation( "Surrounded start" ),
              to_translation( "If true, spawn zombies at shelters.  Makes the starting game a lot harder." ),
              false

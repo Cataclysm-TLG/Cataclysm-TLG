@@ -24,8 +24,7 @@
     },
     "valid_mod_locations": [ [ "mechanism", 2 ], [ "sling", 1 ], [ "underbarrel mount", 1 ] ],
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "uneven" },
-    "extend": { "flags": [ "ALLOWS_BODY_BLOCK" ] },
-    "delete": { "flags": [ "FIRE_TWOHAND" ], "weapon_category": [ "AUTOMATIC_RIFLES" ] },
+    "delete": { "flags": [ "FIRE_TWOHAND" ] },
     "melee_damage": { "bash": 6 }
   },
   {
@@ -45,7 +44,7 @@
     "valid_mod_locations": [  ],
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 14 ] ],
-    "flags": [ "DURABLE_MELEE", "ALLOWS_BODY_BLOCK", "NO_TURRET", "EASY_CLEAN" ],
+    "flags": [ "DURABLE_MELEE", "NO_TURRET", "EASY_CLEAN" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS", "SHIVS" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "32": 2 } } ],
     "melee_damage": { "stab": 8 }

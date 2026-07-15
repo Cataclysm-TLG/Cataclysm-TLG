@@ -60,6 +60,7 @@ class scenario
         std::optional<achievement_id> _requirement;
 
         bool reveal_locale = true;
+        int distance_initial_visibility = 0;
 
         time_point _default_start_of_cataclysm;
         time_point _default_fall_of_civilization;
@@ -89,10 +90,12 @@ class scenario
 
         // clear scenario map, every scenario pointer becomes invalid!
         static void reset();
-        /** calls @ref check_definition for each scenario */
-        static void finalize();
+
+        static void finalize_all();
+        static void check_all();
+
         /** Check that item definitions are valid */
-        void check_definition() const;
+        void check() const;
 
         const string_id<scenario> &ident() const;
         std::string gender_appropriate_name( bool male ) const;
@@ -106,6 +109,7 @@ class scenario
         std::optional<achievement_id> get_requirement() const;
 
         bool get_reveal_locale() const;
+        bool get_distance_initial_visibility() const;
 
         void normalize_calendar() const;
         void reset_calendar() const;

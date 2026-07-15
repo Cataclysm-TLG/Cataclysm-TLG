@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [ ! -d lang/po ]
-then
-    if [ -d ../lang/po ]
-    then
+set -e
+
+if [ ! -d lang/po ]; then
+    if [ -d ../lang/po ]; then
         cd ..
     else
         echo "Error: Could not find lang/po subdirectory."
@@ -11,41 +11,37 @@ then
     fi
 fi
 
-function merge_lang
-{
-    f="lang/incoming/${n}.po"
-    o="lang/po/${n}.po"
-    if [ -f ${o} ]
-    then
-        echo "merging ${f}"
-        msgcat -F --use-first ${f} ${o} -o ${o} && rm ${f}
-    else
-        echo "importing ${f}"
-        mv ${f} ${o}
+merge_lang() {
+    local n="$1"
+    local o="lang/po/${n}.po"
+
+    if [ ! -f "$o" ]; then
+        echo "skip missing $o"
+        return
     fi
 
-    # merge lang/po/cataclysm-tlg.pot with .po file
     echo "updating $o"
-    msgmerge --sort-by-file --no-fuzzy-matching $o lang/po/cataclysm-tlg.pot | msgattrib --sort-by-file --no-obsolete -o $o
+
+    tmp=$(mktemp)
+
+    # merge against template (preserves fuzzy flags as-is)
+    msgmerge --sort-by-file "$o" lang/po/cataclysm-tlg.pot > "$tmp"
+
+    # overwrite safely
+    mv "$tmp" "$o"
 }
 
-# merge incoming translations for each language specified on the commandline
-if [ $# -gt 0 ]
-then
-    for n in $@
-    do
-        if [ -f lang/incoming/${n}.po ]
-        then
-            merge_lang "${n}"
-        fi
+# specific languages
+if [ $# -gt 0 ]; then
+    for n in "$@"; do
+        merge_lang "$n"
     done
-# if nothing specified, merge all incoming translations
-elif [ -d lang/incoming ]
-then
-    shopt -s nullglob # work as expected if nothing matches *.po
-    for f in lang/incoming/*.po
-    do
-        n=`basename ${f} .po`
-        merge_lang "${n}"
+
+# all languages
+elif [ -d lang/po ]; then
+    shopt -s nullglob
+    for f in lang/po/*.po; do
+        n=$(basename "$f" .po)
+        merge_lang "$n"
     done
 fi

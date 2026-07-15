@@ -14,6 +14,7 @@
 #include "colony.h"
 #include "debug.h"
 #include "enums.h"
+#include "faction.h"
 #include "game.h"
 #include "input.h"
 #include "input_context.h"
@@ -190,13 +191,23 @@ static bool pick_one_up( item_location &loc, int quantity, bool &got_water, bool
     //new item (copy)
     item newit = it;
 
+    // Clear activity_var if it differs from the picker's name
+    if( it.has_var( "activity_var" ) && it.get_var( "activity_var", "" ) != player_character.name ) {
+        it.erase_var( "activity_var" );
+        newit.erase_var( "activity_var" );
+    }
+
     if( !newit.is_owned_by( player_character, true ) ) {
-        // Has the player given input on if stealing is ok?
-        if( player_character.get_value( "THIEF_MODE" ).str() == "THIEF_ASK" ) {
-            Pickup::query_thief();
-        }
-        if( player_character.get_value( "THIEF_MODE" ).str() == "THIEF_HONEST" ) {
-            return true; // Since we are honest, return no problem before picking up
+        // Don't flag taking items from hostile factions as stealing.
+        const faction *owner_fac = g->faction_manager_ptr->get( newit.get_owner(), false );
+        if( !owner_fac || owner_fac->likes_u >= -10 ) {
+            // Has the player given input on if stealing is ok?
+            if( player_character.get_value( "THIEF_MODE" ).str() == "THIEF_ASK" ) {
+                Pickup::query_thief();
+            }
+            if( player_character.get_value( "THIEF_MODE" ).str() == "THIEF_HONEST" ) {
+                return true; // Since we are honest, return no problem before picking up
+            }
         }
     }
     if( newit.invlet != '\0' &&

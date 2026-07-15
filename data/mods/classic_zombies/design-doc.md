@@ -60,7 +60,7 @@ The first wave of zombies further spread the illness due to unreadiness and the 
 Within three months, the world was collapsing. In the game area of Central Alberta, a wave of refugees from overrun urban centers in the South, especially the US, began flooding the highways, attempting to get away from the hell occurring in more populous regions. Instead of escaping, they brought it with them. Survivors banded together in small groups, now aware of the signs and symptoms of the illness and the danger of a bite. You are one of those survivors. For the last few weeks you've been somewhere safe, holed up, waiting for things to die down, but it's clear now that things aren't going to die down.
 
 ### Factions
-The default CDDA factions do not fit with DDotD without significant change. It is possible that some, like Isherwood, could be rewritten and readded.
+The default CTLG factions do not fit with DDotD without significant change.
 
 #### The Montana Army National Guard
 An early faction I'd like to see: the Montana National Guard should have a forward base in Alberta. This group was sent up in the later part of the apocalypse to aid Canada's self-defense and try (ineffectively) to corral Americans fleeing North. Within a few days, they lost contact with command. They have chosen to establish a reinforced base, and are fighting off zombies and attempting to rally survivors. They may, at some point, change their name once their makeup is less than half American. They have been here for weeks and are running low on supplies.

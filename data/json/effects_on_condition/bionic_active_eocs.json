@@ -72,10 +72,6 @@
         "then": [ { "u_lose_effect": "adrenaline" }, { "u_add_effect": "adrenaline", "duration": "150 s" } ]
       },
       {
-        "if": { "u_has_effect": "meth" },
-        "then": [ { "u_lose_effect": "meth" }, { "u_add_effect": "meth", "duration": "200 s" } ]
-      },
-      {
         "u_lose_effect": [
           "fungus",
           "dermatik",
@@ -83,9 +79,9 @@
           "tetanus",
           "poison",
           "badpoison",
-          "pkill1_generic",
-          "pkill1_acetaminophen",
-          "pkill1_nsaid",
+          "nsaid_analgesic",
+          "nsaid_bp",
+          "acetaminophen_analgesic",
           "pkill2",
           "pkill3",
           "pkill_l",
@@ -100,7 +96,6 @@
           "took_xanax",
           "took_prozac",
           "took_prozac_bad",
-          "took_flumed",
           "antifungal",
           "venom_weaken",
           "venom_dmg",

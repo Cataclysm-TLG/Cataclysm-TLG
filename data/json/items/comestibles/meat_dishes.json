@@ -733,7 +733,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "pemmican",
-    "name": { "str_sp": "pemmican" },
+    "name": { "str_sp": "pemmican with fruit" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "prepper %s" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "pernicious %s" } }
@@ -758,7 +758,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "pemmican_vegetable",
-    "name": { "str_sp": "pemmican" },
+    "name": { "str_sp": "pemmican with vegetables" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "prepper %s" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "pernicious %s" } }
@@ -783,7 +783,7 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "id": "pemmican_meat",
-    "name": { "str_sp": "pemmican (meat only)" },
+    "name": { "str_sp": "pemmican" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "prepper %s" } },
       { "type": "COMPONENT_ID", "condition": "mutant", "name": { "str_sp": "pernicious %s" } }
@@ -1224,34 +1224,11 @@
   {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "id": "meat_salted",
-    "name": { "str_sp": "salted meat slice" },
-    "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "salted simpleton slice" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
-    ],
-    "copy-from": "meat_cooked",
-    "color": "red",
-    "spoils_in": "42 days",
-    "container": "plastic_bag_vac",
-    "quench": -5,
-    "description": "Meat slices cured in brine.  Salty but tasty in a pinch.",
-    "price": "5 USD",
-    "price_postapoc": "3 USD",
-    "material": [ "flesh" ],
-    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
-    "primary_material": "cured_meat",
-    "fun": 2,
-    "vitamins": [ [ "meat_allergen", 1 ] ]
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
     "id": "spaghetti_bolognese",
     "name": { "str_sp": "spaghetti bolognese" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "scoundrel spaghetti" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "gnarly %s" } }
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "cannibal spaghetti" } },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "spaghetti mostruoso" } }
     ],
     "weight": "150 g",
     "color": "red",
@@ -1498,7 +1475,6 @@
     "description": "A serving of crisply brined and canned meat.  Tasty and nutritious.",
     "price": "2 USD 50 cent",
     "price_postapoc": "3 USD",
-    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
     "fun": 6
   },
   {
@@ -1570,7 +1546,6 @@
     "description": "Reconstituted meat flakes, which are much more enjoyable to eat now that they have been rehydrated.",
     "price": "9 USD",
     "price_postapoc": "1 USD",
-    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
     "fun": 2
   },
   {
@@ -1660,7 +1635,7 @@
     "weight": "85 g",
     "color": "red",
     "spoils_in": "360 days",
-    "use_action": [ "POISON" ],
+    "use_action": [ "POISON_TAINTED" ],
     "quench": -3,
     "description": "Pieces of poisonous meat that have been dried to prevent them from rotting away.  They're still unsafe to eat.",
     "price": "0 cent",
@@ -1670,6 +1645,26 @@
     "flags": [ "EDIBLE_FROZEN" ],
     "fun": -7,
     "vitamins": [ [ "meat_allergen", 1 ] ]
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "id": "dry_meat_tainted_human",
+    "name": { "str_sp": "dehydrated tainted human flesh" },
+    "copy-from": "meat_tainted",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "use_action": [ "POISON_TAINTED" ],
+    "quench": -3,
+    "description": "Pieces of poisonous meat that have been dried to prevent them from rotting away.  They're still unsafe to eat.",
+    "price": "0 cent",
+    "price_postapoc": "10 cent",
+    "material": [ "flesh" ],
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ],
+    "fun": -7,
+    "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
     "type": "ITEM",

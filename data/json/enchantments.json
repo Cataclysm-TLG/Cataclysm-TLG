@@ -340,9 +340,78 @@
   },
   {
     "type": "enchantment",
+    "id": "ench_gastropod_foot",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "foot_l" }, { "lose": "foot_r" }, { "lose": "leg_l" }, { "lose": "leg_r" }, { "gain": "gastropod_foot" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_gastropod_foot_bonuses",
+    "condition": { "not": { "u_has_move_mode": "prone" } },
+    "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_fish_tail",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "gain": "fish_tail" }, { "lose": "long_tail" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_long_tail",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "gain": "long_tail" }, { "lose": "fish_tail" } ]
+  },
+  {
+    "type": "enchantment",
     "id": "ench_eyes_frog",
     "condition": "ALWAYS",
     "modified_bodyparts": [ { "lose": "eyes" }, { "gain": "eyes_frog" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_leg_tentacles",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "foot_l" },
+      { "lose": "foot_r" },
+      { "lose": "leg_l" },
+      { "lose": "leg_r" },
+      { "gain": "cephalopod_arm_1" },
+      { "gain": "cephalopod_arm_2" },
+      { "gain": "cephalopod_arm_3" },
+      { "gain": "cephalopod_arm_4" },
+      { "gain": "cephalopod_arm_5" },
+      { "gain": "cephalopod_arm_6" }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_arm_tentacles",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "hand_l" },
+      { "lose": "hand_r" },
+      { "lose": "arm_l" },
+      { "lose": "arm_r" },
+      { "gain": "cephalopod_tentacle_l" },
+      { "gain": "cephalopod_tentacle_r" }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_crab_legs",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "foot_l" },
+      { "lose": "foot_r" },
+      { "lose": "leg_l" },
+      { "lose": "leg_r" },
+      { "gain": "crab_leg_1" },
+      { "gain": "crab_leg_2" },
+      { "gain": "crab_leg_3" },
+      { "gain": "crab_leg_4" }
+    ]
   },
   {
     "type": "enchantment",

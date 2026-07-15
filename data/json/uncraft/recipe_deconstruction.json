@@ -1941,7 +1941,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "pride_flag",
@@ -1949,7 +1949,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "american_flag",
@@ -1957,7 +1957,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "state_flag",
@@ -1965,7 +1965,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "canvas_sheet",
@@ -2264,7 +2264,7 @@
     "difficulty": 1,
     "time": "6 m",
     "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "cable", 12 ] ], [ [ "amplifier", 2 ] ], [ [ "lightstrip_inactive", 1 ] ], [ [ "scrap_aluminum", 4 ] ] ]
+    "components": [ [ [ "cable", 12 ] ], [ [ "amplifier", 2 ] ], [ [ "scrap_aluminum", 4 ] ] ]
   },
   {
     "result": "holy_symbol",
@@ -2357,7 +2357,7 @@
     "result": "knife_meat_cleaver",
     "time": "5 m",
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "blade", 1 ], [ "scrap", 10 ] ] ]
+    "components": [ [ [ "scrap", 10 ] ] ]
   },
   {
     "type": "uncraft",
@@ -2615,25 +2615,6 @@
     ]
   },
   {
-    "result": "multi_cooker",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "skill_used": "electronics",
-    "time": "1 h 15 m",
-    "qualities": [ { "id": "SCREW", "level": 1 } ],
-    "components": [
-      [ [ "processor", 1 ] ],
-      [ [ "RAM", 1 ] ],
-      [ [ "cable", 8 ] ],
-      [ [ "element", 4 ] ],
-      [ [ "amplifier", 1 ] ],
-      [ [ "power_supply", 4 ] ],
-      [ [ "plastic_chunk", 12 ] ],
-      [ [ "e_scrap", 4 ] ],
-      [ [ "scrap", 10 ] ]
-    ]
-  },
-  {
     "result": "silver_necklace",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
@@ -2863,7 +2844,7 @@
     "time": "6 m",
     "activity_level": "MODERATE_EXERCISE",
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "blade_scythe", 1 ] ], [ [ "stick_long", 1 ] ] ]
+    "components": [ [ [ "blade_scythe", 1 ] ], [ [ "stick", 1 ] ] ]
   },
   {
     "result": "sf_watch",
@@ -3057,7 +3038,7 @@
       [ [ "water_faucet", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "30gal_drum", 1 ] ],
-      [ [ "material_aluminium_ingot", 2 ] ]
+      [ [ "aluminum_chunk", 2 ] ]
     ],
     "//": "drum assumed to be from model XE36S06ST45U0 water heater <https://images.thdstatic.com/catalog/pdfImages/2d/2d7ed116-1a8c-439d-b7fe-a62a0a98f806.pdf>"
   },
@@ -3081,7 +3062,7 @@
       [ [ "water_faucet", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "55gal_drum", 1 ] ],
-      [ [ "material_aluminium_ingot", 4 ] ]
+      [ [ "aluminum_chunk", 4 ] ]
     ],
     "//": "drum assumed to be from model XG55T06EC50UO water heater <https://images.thdstatic.com/catalog/pdfImages/7e/7e7928b1-8b4f-472a-8ee8-b48eb1e7932a.pdf>"
   },
@@ -3499,52 +3480,6 @@
       [ [ "motor_tiny", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "cu_pipe", 5 ] ]
-    ]
-  },
-  {
-    "//": "TODO: use copy-from inheritance for solarpack uncrafts -- it is currently not working properly #24702",
-    "result": "solarpack",
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
-    "skill_used": "electronics",
-    "difficulty": 8,
-    "skills_required": [ [ "fabrication", 2 ], [ "mechanics", 2 ] ],
-    "time": "50 m",
-    "using": [ [ "soldering_standard", 35 ], [ "welding_standard", 20 ] ],
-    "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [
-      [ [ "power_supply", 2 ] ],
-      [ [ "amplifier", 2 ] ],
-      [ [ "solar_panel", 1 ] ],
-      [ [ "cable", 20 ] ],
-      [ [ "sheet_metal", 1 ] ],
-      [ [ "sheet_metal_small", 4 ] ],
-      [ [ "steel_fragment", 4 ] ],
-      [ [ "scrap", 8 ] ],
-      [ [ "rope_6", 1 ] ]
-    ]
-  },
-  {
-    "//": "TODO: use copy-from inheritance for solarpack uncrafts -- it is currently not working properly #24702",
-    "result": "solarpack_on",
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
-    "skill_used": "electronics",
-    "difficulty": 8,
-    "skills_required": [ [ "fabrication", 2 ], [ "mechanics", 2 ] ],
-    "time": "50 m",
-    "using": [ [ "soldering_standard", 35 ], [ "welding_standard", 20 ] ],
-    "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [
-      [ [ "power_supply", 2 ] ],
-      [ [ "amplifier", 2 ] ],
-      [ [ "solar_panel", 1 ] ],
-      [ [ "cable", 20 ] ],
-      [ [ "sheet_metal", 1 ] ],
-      [ [ "sheet_metal_small", 4 ] ],
-      [ [ "steel_fragment", 4 ] ],
-      [ [ "scrap", 8 ] ],
-      [ [ "rope_6", 1 ] ]
     ]
   },
   {
@@ -4420,6 +4355,16 @@
     "components": [ [ [ "nylon_patch", 10 ] ], [ [ "kevlar_sheet_layered", 12 ] ] ]
   },
   {
+    "result": "plate_carrier_xl",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "15 m",
+    "skill_used": "tailor",
+    "difficulty": 3,
+    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "components": [ [ [ "nylon_patch", 20 ] ], [ [ "kevlar_sheet_layered", 20 ] ] ]
+  },
+  {
     "result": "soft_3a_vest",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
@@ -4782,7 +4727,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 6 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 6 ] ] ]
   },
   {
     "result": "guitar_stand",
@@ -4790,7 +4735,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 2 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 2 ] ] ]
   },
   {
     "result": "bat_metal",
@@ -4798,7 +4743,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 3 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 3 ] ] ]
   },
   {
     "result": "cotton_sheet",
@@ -4890,7 +4835,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 63 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 63 ] ] ]
   },
   {
     "result": "esbit_stove",
@@ -5071,7 +5016,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "scrap_aluminum", 3 ] ], [ [ "material_aluminium_ingot", 6 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 3 ] ], [ [ "aluminum_chunk", 6 ] ] ]
   },
   {
     "result": "foldxlframe",
@@ -5079,7 +5024,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "scrap_aluminum", 3 ] ], [ [ "material_aluminium_ingot", 6 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 3 ] ], [ [ "aluminum_chunk", 6 ] ] ]
   },
   {
     "result": "aquarium_medium",
@@ -5106,7 +5051,7 @@
     "flags": [ "BLIND_EASY" ]
   },
   {
-    "result": "material_aluminium_ingot",
+    "result": "aluminum_chunk",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",
@@ -5119,7 +5064,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "30 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 20 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 20 ] ] ]
   },
   {
     "result": "crutches",
@@ -5143,7 +5088,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "30 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 1 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 29 ] ], [ [ "cotton_sheet", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 29 ] ], [ [ "cotton_sheet", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
   },
   {
     "result": "stethoscope",
@@ -5561,7 +5506,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "1 h",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "scrap_aluminum", 1 ] ], [ [ "material_aluminium_ingot", 10 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 1 ] ], [ [ "aluminum_chunk", 10 ] ] ]
   },
   {
     "result": "55gal_drum_aluminum",
@@ -5569,7 +5514,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "1 h",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 40 ] ] ]
+    "components": [ [ [ "aluminum_chunk", 40 ] ] ]
   },
   {
     "result": "sweater",
@@ -5604,28 +5549,12 @@
     "components": [ [ [ "yarn", 90 ] ] ]
   },
   {
-    "result": "long_knit_scarf",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "20 m",
-    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "yarn", 180 ] ] ]
-  },
-  {
     "result": "scarf",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "15 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "yarn", 90 ] ] ]
-  },
-  {
-    "result": "scarf_long",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "20 m",
-    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "yarn", 160 ] ] ]
   },
   {
     "result": "gloves_wool",
@@ -5642,6 +5571,22 @@
     "time": "10 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "yarn", 40 ] ] ]
+  },
+  {
+    "result": "xlsocks_wool",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "2 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "yarn", 80 ] ] ]
+  },
+  {
+    "result": "xssocks_wool",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "2 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "yarn", 30 ] ] ]
   },
   {
     "result": "bottle_metal",
@@ -5818,7 +5763,7 @@
     "skill_used": "tailor",
     "time": "15 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 26 ] ], [ [ "thread_kevlar", 80 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 12 ] ], [ [ "thread_kevlar", 80 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5826,9 +5771,89 @@
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "skill_used": "tailor",
-    "time": "10 m",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 25 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "armguard_cut_resistant_xs",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "15 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 2 ] ], [ [ "thread_kevlar", 10 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "armguard_cut_resistant_xl",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "45 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 6 ] ], [ [ "thread_kevlar", 50 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "cephalopod_sleeves_cut_resistant",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 8 ] ], [ [ "thread_kevlar", 25 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "cephalopod_sleeves_cut_resistant_xs",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "15 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 10 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "cephalopod_sleeves_cut_resistant_xl",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "45 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "kevlar_sheet", 12 ] ], [ [ "thread_kevlar", 50 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_sleeve_cut_resistant",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "15 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 2 ] ], [ [ "thread_kevlar", 18 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_sleeve_cut_resistant_xs",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "5 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 1 ] ], [ [ "thread_kevlar", 5 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_sleeve_cut_resistant_xl",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 25 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5960,5 +5985,51 @@
     "time": "20 s",
     "tools": [ [ "boltcutters", [ "oxy_torch", 8 ] ] ],
     "components": [ [ [ "chain", 2 ] ] ]
+  },
+  {
+    "result": "p_carpet",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "4 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "carpet_scrap", 10 ] ] ]
+  },
+  {
+    "result": "y_carpet",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "4 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "carpet_scrap", 10 ] ] ]
+  },
+  {
+    "result": "r_carpet",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "4 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "carpet_scrap", 10 ] ] ]
+  },
+  {
+    "result": "g_carpet",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "4 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "carpet_scrap", 10 ] ] ]
+  },
+  {
+    "result": "wood_door",
+    "type": "uncraft",
+    "activity_level": "MODERATE_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "10 m",
+    "autolearn": true,
+    "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "components": [ [ [ "wood_panel", 1 ] ], [ [ "hinge", 2 ] ], [ [ "scrap", 6 ] ] ]
   }
 ]

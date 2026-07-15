@@ -350,6 +350,24 @@
         "coverage": 15,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "encumbrance": [ 1, 2 ],
+        "coverage": 8,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 15,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 15,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },
@@ -388,6 +406,24 @@
         "coverage": 15,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "encumbrance": [ 2, 3 ],
+        "coverage": 8,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 15,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 15,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },
@@ -426,6 +462,24 @@
         "coverage": 15,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "encumbrance": [ 2, 3 ],
+        "coverage": 8,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 15,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 12,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },
@@ -464,6 +518,24 @@
         "coverage": 15,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "encumbrance": [ 2, 3 ],
+        "coverage": 8,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 15,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": [ 3, 4 ],
+        "coverage": 12,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },
@@ -500,8 +572,26 @@
       {
         "coverage": 5,
         "covers": [ "leg_l", "leg_r" ],
-        "encumbrance": [ 0, 1 ],
+        "encumbrance": [ 1, 2 ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "encumbrance": [ 1, 2 ],
+        "coverage": 3,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": [ 1, 2 ],
+        "coverage": 5,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": [ 1, 2 ],
+        "coverage": 4,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },
@@ -538,8 +628,14 @@
       {
         "coverage": 5,
         "covers": [ "leg_l", "leg_r" ],
-        "encumbrance": [ 0, 1 ],
+        "encumbrance": [ 1, 2 ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "encumbrance": [ 1, 2 ],
+        "coverage": 3,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
       }
     ]
   },

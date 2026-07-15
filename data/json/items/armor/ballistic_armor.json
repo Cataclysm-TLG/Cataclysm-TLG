@@ -11,7 +11,7 @@
     "price": "350 USD",
     "price_postapoc": "12 USD 50 cent",
     "to_hit": -3,
-    "material": [ "kevlar_layered", "nylon" ],
+    "material": [ "nylon", "kevlar_layered" ],
     "symbol": "[",
     "looks_like": "vest_leather",
     "color": "light_gray",
@@ -40,6 +40,34 @@
         "specifically_covers": [ "torso_lower" ]
       }
     ]
+  },
+  {
+    "id": "ballistic_vest_concealable_xs",
+    "type": "ITEM",
+    "copy-from": "ballistic_vest_concealable",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "concealable ballistic vest" },
+    "description": "A level II Kevlar vest, rated for low-caliber pistol rounds and designed to be worn under clothing.  Concerningly, it is sized for a toddler.",
+    "weight": "910 g",
+    "volume": "2 L",
+    "price": "300 USD",
+    "price_postapoc": "5 USD 50 cent",
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "ballistic_vest_concealable_xl",
+    "type": "ITEM",
+    "copy-from": "ballistic_vest_concealable",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "concealable ballistic vest" },
+    "description": "A preposterously sized Kevlar vest faced with ballistic nylon  Its low-profile design is perfect for wearing under clothing.",
+    "weight": "3900 g",
+    "volume": "7 L",
+    "price": "0 USD",
+    "price_postapoc": "5 USD 50 cent",
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "ballistic_vest_esapi",
@@ -279,8 +307,8 @@
     "volume": "1915 ml",
     "longest_side": "32 cm",
     "//": "ESAPI Medium are 24.13cm x 31.75cm and 2.5cm thick",
-    "price": "600 USD",
-    "price_postapoc": "1 USD",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "material": [ "ceramic" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -309,8 +337,8 @@
     "volume": "770 ml",
     "longest_side": "32 cm",
     "//": "ESAPI Medium are 24.13cm x 31.75cm and 2.5cm thick",
-    "price": "600 USD",
-    "price_postapoc": "1 USD",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "material": [ "wood" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -337,8 +365,8 @@
     "volume": "920 ml",
     "longest_side": "32 cm",
     "//": "ESAPI Medium are 24.13cm x 31.75cm and 2.5cm thick",
-    "price": "600 USD",
-    "price_postapoc": "1 USD",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "material": [ "paper" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -364,13 +392,94 @@
     "weight": "890 g",
     "volume": "920 ml",
     "longest_side": "32 cm",
-    "price": "600 USD",
-    "price_postapoc": "1 USD",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "material": [ "fiberglass" ],
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 6,
     "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
+    "armor": [
+      {
+        "encumbrance": 3,
+        "coverage": 45,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "wood_esapi_plate_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "wooden ballistic plate" },
+    "description": "A panel of wood cut into an irregular hexagon, slightly concave.  It would fit in a plate carrier sized for a giant, and while by no means capable of stopping gunfire, it may still hold up against other threats.",
+    "weight": "1300 g",
+    "volume": "1500 ml",
+    "longest_side": "70 cm",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
+    "material": [ "wood" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 4,
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
+    "armor": [
+      {
+        "encumbrance": 6,
+        "coverage": 45,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "paper_esapi_plate_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "paper ballistic plate" },
+    "description": "A great many layers of paper stacked and laminated together with a generous portion of glue to form an armor plate for the front or back of the torso.  This could be used in an oversized plate carrier, though it probably won't stand up to much.",
+    "weight": "2600 g",
+    "volume": "2080 ml",
+    "longest_side": "70 cm",
+    "price": "0 USD",
+    "price_postapoc": "0 USD",
+    "material": [ "paper" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 8,
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
+    "armor": [
+      {
+        "encumbrance": 3,
+        "coverage": 45,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "fiberglass_esapi_plate_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "fiberglass ballistic plate" },
+    "description": "Several layers of woven fiberglass stacked and laminated together with epoxy to form an armor plate for a giant's torso.  In a pinch, this could be used in an oversized plate carrier to provide a modicum of protection.",
+    "weight": "4270 g",
+    "volume": "2310 ml",
+    "longest_side": "70 cm",
+    "price": "0 USD",
+    "price_postapoc": "0 USD",
+    "material": [ "fiberglass" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 6,
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
     "armor": [
       {
         "encumbrance": 3,
@@ -412,79 +521,12 @@
     ]
   },
   {
-    "id": "steel_ballistic_plate",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "steel ballistic plate" },
-    "//": "based on 3a plates. Discuss high temp quenching so gonna assume tempered steel",
-    "description": "A concave ballistic plate made of hard steel, designed to stop small-caliber rounds.  \"NIJ III A PROTECTION\" is etched into the back of the plate.  This is intended to be inserted into a ballistic vest, and can't be worn on its own.",
-    "weight": "1400 g",
-    "//2": "30cm x 25cm x .35cm",
-    "volume": "262 ml",
-    "price": "600 USD",
-    "longest_side": "30 cm",
-    "price_postapoc": "1 USD",
-    "material": [ "steel", "nylon" ],
-    "repairs_with": [ "steel" ],
-    "symbol": ",",
-    "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
-    "armor": [
-      {
-        "material": [
-          { "type": "steel", "covered_by_mat": 100, "thickness": 2 },
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 }
-        ],
-        "encumbrance": 8,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
-  },
-  {
-    "id": "heavy_steel_ballistic_plate",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "heavy steel ballistic plate" },
-    "//": "based on level 3 plates. Discuss high temp quenching so gonna assume tempered steel",
-    "description": "A heavy concave ballistic plate made of tempered steel, designed to stop small-caliber rounds.  \"NIJ III PROTECTION\" is etched into the back of the plate.  This is intended to be inserted into a ballistic vest, and can't be worn on its own.",
-    "weight": "3912 g",
-    "//2": "25.4cm x 30.48cm x 0.635cm plate measurements (thin plate!)",
-    "volume": "194 ml",
-    "longest_side": "30 cm",
-    "price": "600 USD",
-    "price_postapoc": "1 USD",
-    "material": [ "steel", "nylon" ],
-    "repairs_with": [ "steel" ],
-    "symbol": ",",
-    "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
-    "//3": "Should be closer to 6mm steel, but thickness needs to be fixed first or the protection values become astronomical.",
-    "armor": [
-      {
-        "material": [
-          { "type": "steel", "covered_by_mat": 100, "thickness": 3 },
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 }
-        ],
-        "encumbrance": 10,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
-  },
-  {
     "id": "scrap_esapi_plate",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
-    "name": { "str": "scrap ESAPI plate" },
-    "description": "A crudely-hammered piece of salvaged steel, wrapped in rags in an attempt to prevent spalling.  If used in a ballistic vest, it might offer some protection.",
+    "name": { "str": "scrap ballistic plate" },
+    "description": "A crudely-hammered piece of sheet metal, wrapped in rags in an attempt to prevent spalling.  If used in a ballistic vest, it might offer some protection.",
     "weight": "1181 g",
     "//3": "30cm x 25cm x 0.2cm",
     "longest_side": "30 cm",
@@ -494,7 +536,6 @@
     "material": [ "steel" ],
     "symbol": ",",
     "color": "dark_gray",
-    "material_thickness": 3,
     "flags": [ "ABLATIVE_LARGE", "CANT_WEAR" ],
     "armor": [
       {
@@ -511,13 +552,76 @@
     ]
   },
   {
+    "id": "scrap_esapi_plate_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "scrap ballistic plate" },
+    "description": "A crudely-hammered piece of sheet metal, wrapped in rags in an attempt to prevent spalling.  If used in a ballistic vest, it might offer some protection.",
+    "weight": "6000 g",
+    "//2": "70cm x 55cm x .2cm",
+    "longest_side": "70 cm",
+    "volume": "7700 ml",
+    "price": "0 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "steel" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "PREFIX_XL", "OVERSIZE" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 90, "thickness": 1.8 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1 }
+        ],
+        "encumbrance": 8,
+        "coverage": 45,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "steel_esapi_plate_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "steel ballistic plate" },
+    "description": "A hand-forged steel ballistic plate more than double the standard size.  It can't be worn on its own, and would need to be inserted into an equally gigantic plate carrier vest to be of any benefit.",
+    "weight": "10500 g",
+    "//2": "70cm x 55cm x .35cm",
+    "volume": "1350 ml",
+    "price": "600 USD",
+    "longest_side": "30 cm",
+    "price_postapoc": "1 USD",
+    "material": [ "steel" ],
+    "repairs_with": [ "steel" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "STURDY", "NO_SALVAGE", "PREFIX_XL", "OVERSIZE" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 }
+        ],
+        "encumbrance": 10,
+        "coverage": 45,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
     "id": "steel_esapi_plate",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "scrap_esapi_plate",
     "looks_like": "scrap_esapi_plate",
     "repairs_like": "platemail_cuirass",
-    "name": { "str": "steel ESAPI plate" },
+    "name": { "str": "steel ballistic plate" },
     "description": "A hand-forged steel ballistic plate, designed to be used in a ballistic vest.",
     "weight": "1300 g",
     "volume": "262 ml",
@@ -1147,14 +1251,14 @@
     ]
   },
   {
-    "id": "xl_ballistic_vest",
+    "id": "plate_carrier_xl",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate carrier" },
-    "description": "An enormous handmade ballistic vest built with of lots of salvaged ballistic Kevlar panels.  It's bulkier than a factory made US Army vest, but it is customized for the benefit of an abnormally large mutant who couldn't wear such armors otherwise.  Coated in MOLLE webbing to support modular loadouts for the tacticool mutant.  It could be outfitted with steel plates for further protection.",
-    "weight": "4500 g",
-    "volume": "9 L",
+    "description": "An enormous handmade ballistic vest with MOLLE webbing for attaching accessories.  No factory ever made ESAPI plates that would fit in this thing, but it ought to be possible to make some out of steel or other materials.",
+    "weight": "6500 g",
+    "volume": "12 L",
     "price": "1600 USD",
     "price_postapoc": "10 USD",
     "symbol": "[",
@@ -1163,48 +1267,52 @@
     "warmth": 15,
     "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "OVERSIZE", "PREFIX_XL" ],
     "use_action": [ { "type": "attach_molle", "size": 12 }, { "type": "detach_molle" } ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "4000 ml",
+        "max_contains_weight": "10500 g",
+        "max_item_length": "75 cm",
+        "moves": 800,
+        "description": "Pocket for an oversized ballistic armor plate.",
+        "flag_restriction": [ "ABLATIVE_LARGE_XL" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "4000 ml",
+        "max_contains_weight": "10500 g",
+        "max_item_length": "75 cm",
+        "moves": 800,
+        "description": "Pocket for an oversized ballistic armor plate.",
+        "flag_restriction": [ "ABLATIVE_LARGE_XL" ]
+      }
+    ],
     "armor": [
       {
         "material": [
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
-        "encumbrance": 13,
+        "encumbrance": 11,
         "coverage": 95,
         "covers": [ "torso" ],
-        "volume_encumber_modifier": 0.25
-      }
-    ],
-    "looks_like": "ballistic_vest_esapi"
-  },
-  {
-    "id": "xl_ballistic_vest_steel",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "steel-plated plate carrier" },
-    "description": "An enormous handmade ballistic vest built with lots of salvaged ballistic Kevlar panels and homemade \"ballistic inserts\" made of steel.  The thin metal isn't the most protective, but it's probably better than just plain Kevlar.",
-    "weight": "12500 g",
-    "volume": "9 L",
-    "price_postapoc": "15 USD",
-    "symbol": "[",
-    "material": [ "nylon", "kevlar_layered", "steel" ],
-    "color": "light_gray",
-    "warmth": 20,
-    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "OVERSIZE", "PREFIX_XL" ],
-    "use_action": [ { "type": "attach_molle", "size": 12 }, { "type": "detach_molle" } ],
-    "armor": [
+        "specifically_covers": [ "torso_upper" ],
+        "volume_encumber_modifier": 0.3
+      },
       {
         "material": [
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 },
-          { "type": "steel", "covered_by_mat": 85, "thickness": 1.5 }
+          { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
-        "encumbrance": 25,
+        "encumbrance": 0,
         "coverage": 95,
         "covers": [ "torso" ],
-        "volume_encumber_modifier": 0.25,
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_lower" ],
+        "volume_encumber_modifier": 0
       }
     ],
     "looks_like": "ballistic_vest_esapi"

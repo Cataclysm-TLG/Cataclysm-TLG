@@ -11,6 +11,8 @@
 #include <utility>
 #include <vector>
 
+#include <stdint.h>
+
 #include "animation.h"
 #include "cata_type_traits.h"
 #include "creature.h"
@@ -32,6 +34,9 @@
 class Character;
 class JsonObject;
 class pixel_minimap;
+enum class direction : unsigned int;
+enum class lit_level : uint8_t;
+enum class visibility_type : int;
 
 extern void set_displaybuffer_rendertarget();
 using ter_str_id = string_id<ter_t>;
@@ -435,6 +440,23 @@ class cata_tiles
                     tileset_cache &cache );
         ~cata_tiles();
 
+        struct draw_options {
+            TILE_CATEGORY category = TILE_CATEGORY::NONE;
+            std::string subcategory;
+
+            int intensity = 0;
+            std::string variant;
+
+            point offset = point::zero;
+
+            float scale_x = 1.0f;
+            float scale_y = 1.0f;
+
+            // Unused currently, a placeholder for future shenanigans.
+            uint32_t tint_rgba = 0;
+        };
+
+
         /** Reload tileset, with the given scale. Scale is divided by 16 to allow for scales < 1 without risking
          *  float inaccuracies. */
         void set_draw_scale( int scale );
@@ -490,18 +512,37 @@ class cata_tiles
         bool find_overlay_looks_like( bool male, const std::string &overlay, const std::string &variant,
                                       std::string &draw_id );
 
-        bool draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll,
-                                  bool apply_visual_effects );
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects );
+        // New bub_ms headers
+        bool draw_from_id_string(
+            const std::string &id,
+            const tripoint_bub_ms &pos,
+            int subtile,
+            int rota,
+            lit_level ll,
+            bool apply_visual_effects
+        );
 
-        // TODO: DDA removed this one, find out why. See DDA 78815
-        bool draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll,
-                                  bool apply_visual_effects, int &height_3d );
-
+        bool draw_from_id_string(
+            const std::string &id,
+            const tripoint_bub_ms &pos,
+            int subtile,
+            int rota,
+            lit_level ll,
+            bool apply_visual_effects,
+            int &height_3d,
+            const draw_options &opts
+        );
+        bool draw_from_id_string_internal(
+            const std::string &id,
+            const tripoint_bub_ms &pos,
+            int subtile,
+            int rota,
+            lit_level ll,
+            int retract,
+            bool apply_visual_effects,
+            int &height_3d,
+            const draw_options &opts
+        );
 
         // used by sdltiles for overmap drawing.
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
@@ -510,27 +551,6 @@ class cata_tiles
                                   bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
 
 
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level );
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level,
-                                  const std::string &variant );
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                  lit_level ll, bool apply_visual_effects, int &height_3d, int intensity_level,
-                                  const std::string &variant, const point &offset );
-        bool draw_from_id_string_internal( const std::string &id, const tripoint_bub_ms &pos, int subtile,
-                                           int rota,
-                                           lit_level ll, int retract, bool apply_visual_effects, int &height_3d );
-        bool draw_from_id_string_internal( const std::string &id, TILE_CATEGORY category,
-                                           const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
-                                           lit_level ll, int retract, bool apply_visual_effects, int &height_3d, int intensity_level,
-                                           const std::string &variant, const point &offset, float scale_x, float scale_y );
         bool draw_sprite_at(
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
@@ -567,7 +587,6 @@ class cata_tiles
         static int get_rotation_edge_ew( char rot_to );
 
         /** Map memory */
-        bool has_memory_at( const tripoint_abs_ms &p ) const;
         const memorized_tile &get_terrain_memory_at( const tripoint_abs_ms &p ) const;
         const memorized_tile &get_furniture_memory_at( const tripoint_abs_ms &p ) const;
         const memorized_tile &get_trap_memory_at( const tripoint_abs_ms &p ) const;
@@ -612,7 +631,6 @@ class cata_tiles
         void draw_zlevel_overlay( const tripoint_bub_ms &p, lit_level ll, int &height_3d );
         void draw_entity_with_overlays( const Character &ch, const tripoint_bub_ms &p, lit_level ll,
                                         int &height_3d, float scale_x, float scale_y );
-
         void draw_entity_with_overlays( const monster &mon, const tripoint_bub_ms &p, lit_level ll,
                                         int &height_3d );
 

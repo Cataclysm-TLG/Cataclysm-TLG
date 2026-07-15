@@ -395,6 +395,9 @@ class const_talker
                                    const itype_id & = itype_id::NULL_ID() ) const {
             return false;
         }
+        virtual bool in_bath() const {
+            return false;
+        }
 
         // missions
         virtual std::vector<mission *> available_missions() const {

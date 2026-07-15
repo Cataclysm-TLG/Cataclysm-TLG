@@ -21,12 +21,12 @@
   },
   {
     "type": "mapgen",
-    "om_terrain": [ "special_forest", "special_forest_isherwood" ],
+    "om_terrain": [ "special_forest" ],
     "object": { "predecessor_mapgen": "forest" }
   },
   {
     "type": "mapgen",
-    "om_terrain": [ "special_forest_thick", "special_forest_thick_isherwood" ],
+    "om_terrain": [ "special_forest_thick" ],
     "object": { "predecessor_mapgen": "forest_thick" }
   },
   {

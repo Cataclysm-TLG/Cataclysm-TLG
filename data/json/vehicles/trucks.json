@@ -689,6 +689,7 @@
       { "x": 0, "y": 0, "chance": 25, "items": [ "file" ] },
       { "x": 0, "y": 1, "chance": 25, "items": [ "file" ] },
       { "x": 0, "y": 1, "chance": 5, "items": [ "energy_drink" ] },
+      { "x": 0, "y": 1, "chance": 5, "items": [ "diet_energy_drink" ] },
       { "x": 0, "y": 1, "chance": 5, "items": [ "sports_drink" ] },
       { "x": 0, "y": 1, "chance": 5, "items": [ "irish_coffee" ] },
       { "x": 0, "y": 1, "chance": 5, "items": [ "dog_whistle" ] },

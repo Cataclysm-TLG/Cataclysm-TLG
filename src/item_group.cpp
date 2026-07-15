@@ -131,34 +131,41 @@ static void put_into_container(
         ctr.set_itype_variant( *container_variant );
     }
     Item_spawn_data::ItemList excess;
+    // ctr is a fresh, isolated container; nothing else touches its contents
+    // during this loop, so its pockets can track volume/weight incrementally
+    // and avoid re-walking all prior contents on every insertion (O(n^2) when
+    // a group spawns many items into one container, e.g. container depots).
+    ctr.begin_bulk_fill();
     for( auto it = items.end() - num_items; it != items.end(); ++it ) {
-        ret_val<void> ret = ctr.can_contain_directly( *it );
+        // quiet=true: caller handles failure via the overflow path below.
+        const pocket_type pk_type = guess_pocket_for( ctr, *it );
+        ret_val<void> ret = ctr.put_in( *it, pk_type, false, nullptr, /*quiet=*/true );
         if( ret.success() ) {
-            const pocket_type pk_type = guess_pocket_for( ctr, *it );
-            ctr.put_in( *it, pk_type );
-        } else if( ctr.is_corpse() ) {
-            const pocket_type pk_type = guess_pocket_for( ctr, *it );
+            continue;
+        }
+        if( ctr.is_corpse() ) {
             ctr.force_insert_item( *it, pk_type );
-        } else {
-            switch( on_overflow ) {
-                case Item_spawn_data::overflow_behaviour::none:
-                    debugmsg( "item %s could not be put in container %s when spawning item group %s: %s.  "
-                              "This can be resolved either by changing the container or contents "
-                              "to ensure that they fit, or by specifying an overflow behaviour via "
-                              "\"on_overflow\" on the item group.",
-                              it->typeId().str(), container_type->str(), context, ret.str() );
-                    break;
-                case Item_spawn_data::overflow_behaviour::spill:
-                    excess.push_back( *it );
-                    break;
-                case Item_spawn_data::overflow_behaviour::discard:
-                    break;
-                case Item_spawn_data::overflow_behaviour::last:
-                    debugmsg( "Invalid overflow_behaviour" );
-                    break;
-            }
+            continue;
+        }
+        switch( on_overflow ) {
+            case Item_spawn_data::overflow_behaviour::none:
+                debugmsg( "item %s could not be put in container %s when spawning item group %s: %s.  "
+                          "This can be resolved either by changing the container or contents "
+                          "to ensure that they fit, or by specifying an overflow behaviour via "
+                          "\"on_overflow\" on the item group.",
+                          it->typeId().str(), container_type->str(), context, ret.str() );
+                break;
+            case Item_spawn_data::overflow_behaviour::spill:
+                excess.push_back( *it );
+                break;
+            case Item_spawn_data::overflow_behaviour::discard:
+                break;
+            case Item_spawn_data::overflow_behaviour::last:
+                debugmsg( "Invalid overflow_behaviour" );
+                break;
         }
     }
+    ctr.end_bulk_fill();
     ctr.add_automatic_whitelist();
     if( sealed ) {
         ctr.seal();
@@ -193,20 +200,20 @@ item Single_item_creator::create_single_without_container( const time_point &bir
 {
     // Check direct return conditions first.
     if( type == S_NONE ) {
-        return item( null_item_id, birthday );
+        return item( itype_id::NULL_ID(), birthday );
     }
     Item_spawn_data *isd = nullptr;
     if( type == S_ITEM_GROUP ) {
         item_group_id group_id( id );
         if( std::find( rec.begin(), rec.end(), group_id ) != rec.end() ) {
             debugmsg( "recursion in item spawn list %s", id.c_str() );
-            return item( null_item_id, birthday );
+            return item( itype_id::NULL_ID(), birthday );
         }
         rec.push_back( group_id );
         isd = item_controller->get_group( group_id );
         if( isd == nullptr ) {
             debugmsg( "unknown item spawn list %s", id.c_str() );
-            return item( null_item_id, birthday );
+            return item( itype_id::NULL_ID(), birthday );
         }
     }
 
@@ -224,7 +231,7 @@ item Single_item_creator::create_single_without_container( const time_point &bir
             if( id == "corpse" ) {
                 return item::make_corpse( mtype_id::NULL_ID(), birthday );
             } else {
-                return item( id, birthday );
+                return item( itype_id( id ), birthday );
             }
         }
     } )();
@@ -609,7 +616,7 @@ void Item_modifier::modify( item &new_item, const std::string &context ) const
                         mag.ammo_set( mag.ammo_default(), ch );
                     }
                     new_item.put_in( mag, pocket_type::MAGAZINE_WELL );
-                } else if( new_item.is_magazine() ) {
+                } else if( new_item.is_magazine() && !new_item.ammo_default().is_null() ) {
                     new_item.ammo_set( new_item.ammo_default(), ch );
                 } else if( new_item.magazine_current() ) {
                     new_item.ammo_set( new_item.magazine_current()->ammo_default(), ch );
@@ -827,6 +834,7 @@ void Item_group::add_entry( std::unique_ptr<Item_spawn_data> ptr )
         sic->inherit_ammo_mag_chances( with_ammo, with_magazine );
     }
     items.push_back( std::move( ptr ) );
+    cached_cum_prob.clear();
 }
 
 std::size_t Item_group::create( Item_spawn_data::ItemList &list,
@@ -841,17 +849,8 @@ std::size_t Item_group::create( Item_spawn_data::ItemList &list,
             elem->create( list, birthday, rec, flags );
         }
     } else if( type == G_DISTRIBUTION ) {
-        int p = rng( 0, sum_prob - 1 );
-        for( const auto &elem : items ) {
-            bool ev_based = elem->is_event_based();
-            int prob = elem->get_probability( false );
-            int real_prob = elem->get_probability( true );
-            p -= real_prob;
-            if( ( ev_based && prob == 0 ) || p >= 0 ) {
-                continue;
-            }
+        if( const Item_spawn_data *elem = pick_distribution_entry() ) {
             elem->create( list, birthday, rec, flags );
-            break;
         }
     }
     const std::size_t items_created = list.size() - prev_list_size;
@@ -871,19 +870,40 @@ item Item_group::create_single( const time_point &birthday, RecursionList &rec )
             return elem->create_single( birthday, rec );
         }
     } else if( type == G_DISTRIBUTION ) {
-        int p = rng( 0, sum_prob - 1 );
-        for( const auto &elem : items ) {
-            bool ev_based = elem->is_event_based();
-            int prob = elem->get_probability( false );
-            int real_prob = elem->get_probability( true );
-            p -= real_prob;
-            if( ( ev_based && prob == 0 ) || p >= 0 ) {
-                continue;
-            }
+        if( const Item_spawn_data *elem = pick_distribution_entry() ) {
             return elem->create_single( birthday, rec );
         }
     }
-    return item( null_item_id, birthday );
+    return item( itype_id::NULL_ID(), birthday );
+}
+
+const Item_spawn_data *Item_group::pick_distribution_entry() const
+{
+    if( sum_prob <= 0 || items.empty() ) {
+        return nullptr;
+    }
+    // Lazy cumulative-probability table for binary-search picks.
+    if( cached_cum_prob.size() != items.size() ) {
+        cached_cum_prob.clear();
+        cached_cum_prob.reserve( items.size() );
+        int acc = 0;
+        for( const std::unique_ptr<Item_spawn_data> &elem : items ) {
+            acc += elem->get_probability( true );
+            cached_cum_prob.push_back( acc );
+        }
+    }
+    const int picked = rng( 1, sum_prob );
+    const auto it = std::lower_bound( cached_cum_prob.begin(), cached_cum_prob.end(), picked );
+    if( it == cached_cum_prob.end() ) {
+        return nullptr;
+    }
+    const Item_spawn_data *elem = items[std::distance( cached_cum_prob.begin(), it )].get();
+    // Event-based entries reserve their slot in sum_prob even when inactive:
+    // a pick that lands on one yields no spawn rather than falling through.
+    if( elem->is_event_based() && elem->get_probability( false ) == 0 ) {
+        return nullptr;
+    }
+    return elem;
 }
 
 void Item_group::check_consistency( bool actually_spawn ) const
@@ -920,6 +940,7 @@ bool Item_group::remove_item( const itype_id &itemid )
         if( ( *a )->remove_item( itemid ) ) {
             sum_prob -= ( *a )->get_probability( true );
             a = items.erase( a );
+            cached_cum_prob.clear();
         } else {
             ++a;
         }

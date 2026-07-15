@@ -1,0 +1,139 @@
+[
+  {
+    "type": "npc",
+    "id": "SEER_Brigitte_LaCroix",
+    "//": "Obsolete template from removed Kindred faction content.",
+    "class": "NC_BONE_SEER",
+    "attitude": 7,
+    "mission": 3,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "KINDRED_Darren_Cooper",
+    "//": "Obsolete template from removed Kindred faction content.",
+    "class": "NC_KINDRED_COOPER",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_barry",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_BARRY",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_carlos",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_CARLOS",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_chris",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_CHRIS",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_claire",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_CLAIRE",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_eddie",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_EDDIE",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_jack",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_JACK",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_jesse",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_JESSE",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_lisa",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_LISA",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "isherwood_luke",
+    "//": "Obsolete template from removed Isherwood faction content.",
+    "class": "NC_ISHERWOOD_LUKE",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "ancilla_doctor",
+    "class": "NC_ANCILLA_DOCTOR",
+    "attitude": 0,
+    "mission": 3,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "FM_caravan_merchant_godco_predatory",
+    "class": "NC_TRADER_PREDATORY",
+    "attitude": 0,
+    "mission": 3,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "FM_caravan_guard_predatory",
+    "class": "NC_BOUNTY_HUNTER",
+    "attitude": 0,
+    "mission": 3,
+    "chat": "TALK_DONE",
+    "faction": "no_faction"
+  }
+]

@@ -140,34 +140,28 @@
   {
     "type": "talk_topic",
     "id": "TALK_ARSONIST_NEW",
-    "dynamic_line": "Guess that makes two of us.  Well, kind of.  I don't think we're open, though.  Full up as hell; it's almost a crowd downstairs.  Did you see the trader at the entrance?  There's the one to ask.",
-    "responses": [ { "text": "Sucks…", "topic": "TALK_ARSONIST" } ]
-  },
-  {
-    "type": "talk_topic",
-    "id": "TALK_ARSONIST_DOING_REBAR",
-    "dynamic_line": "Well, there's a guy downstairs who got a working pneumatic cannon.  It shoots metal like… like a cannon without the bang.  Cost-efficient as hell.  And there's no shortage of improvised weapons you can make.  The big thing though, seems to be continuing construction of fortifications.  Very few of those monsters seem to be able to break through a fence or wall constructed with the stuff.",
-    "responses": [ { "text": "Well, then…", "topic": "TALK_ARSONIST" } ]
+    "dynamic_line": "You should talk to the trader guy at the entrance.  He's usually dressed like a firefighter, has a shop in one of the booths.",
+    "responses": [ { "text": "I see.", "topic": "TALK_ARSONIST" } ]
   },
   {
     "type": "talk_topic",
     "id": "TALK_ARSONIST_WORLD",
-    "dynamic_line": "Nothing optimistic, at least.  Had a pal on the road with a ham radio, but she's gone and so is that thing.  Kaput.",
+    "dynamic_line": "Nothing good.  Had a pal on the road with a ham radio, but she's gone like everyone else.",
     "responses": [
       { "text": "…", "topic": "TALK_ARSONIST" },
-      { "text": "Nothing optimistic?", "topic": "TALK_ARSONIST_WORLD_OPTIMISTIC" }
+      { "text": "Nothing good?  So you have heard something", "topic": "TALK_ARSONIST_WORLD_SOMETHING" }
     ]
   },
   {
     "type": "talk_topic",
-    "id": "TALK_ARSONIST_WORLD_OPTIMISTIC",
-    "dynamic_line": "Most of the emergency camps have dissolved by now.  The cities are mobbed, the forests crawling with glowing eyes and zombies.  Some insane shit out there, and everyone with a radio seems to feel like documenting their last awful moments.",
+    "id": "TALK_ARSONIST_WORLD_SOMETHING",
+    "dynamic_line": "I mean, there was a nuclear war and now the dead are walking, what do you want me to say?  The monsters are getting bigger and weirder, and there are fewer people every day.  Game over, man.",
     "responses": [ { "text": "I feel bad for asking.", "topic": "TALK_ARSONIST" } ]
   },
   {
     "type": "talk_topic",
     "id": "TALK_ARSONIST_JOIN",
-    "dynamic_line": "I don't know.  I mean, if you can make yourself useful.  But that's become a real hazy thing nowadays.  It depends who you ask.  The merchant definitely doesn't want me here when I'm not selling, but… some people get away with it.",
+    "dynamic_line": "Group?  You think they'd let someone like me live here?  Nah, I'm on my own and that's how I like it, I just come here to trade.",
     "responses": [ { "text": "…", "topic": "TALK_ARSONIST" } ]
   },
   {
@@ -175,8 +169,8 @@
     "id": "TALK_ARSONIST_MUTATION",
     "dynamic_line": {
       "u_has_any_trait": [ "CANINE_EARS", "LUPINE_EARS", "FELINE_EARS", "URSINE_EARS", "ELFA_EARS" ],
-      "yes": "Same way you got yours, I bet.  Keep quiet about it, some people here look down on people like us.",
-      "no": "Ssh.  Some people in here hate… mutations.  This was an accident."
+      "yes": "They just showed up one day, probably the same as yours.  Keep quiet about it, some people here don't like our kind.",
+      "no": "Ssh.  Some people in here hate mutants.  They just showed up one day, OK?"
     },
     "responses": [
       { "text": "Sorry to ask.", "topic": "TALK_ARSONIST" },
@@ -186,11 +180,8 @@
   {
     "type": "talk_topic",
     "id": "TALK_ARSONIST_DOING",
-    "dynamic_line": "I burn down buildings and sell the Free Merchants the materials.  No, seriously.  If you've seen burned wreckage in place of suburbs or even see the pile of rebar for sale, that's probably me.  They've kept me well off in exchange, I guess.",
-    "responses": [
-      { "text": "I'll buy.", "effect": "start_trade", "topic": "TALK_ARSONIST" },
-      { "text": "Who needs rebar?", "topic": "TALK_ARSONIST_DOING_REBAR" }
-    ]
+    "dynamic_line": "I burn down buildings and sell the materials.  Nails, rebar, wire, whatever metal I can pull out of the ashes.",
+    "responses": [ { "text": "I'll buy.", "effect": "start_trade", "topic": "TALK_ARSONIST" } ]
   },
   {
     "id": "MISSION_ARSONIST_1_AMMONIUM_NITRATE",

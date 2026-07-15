@@ -67,7 +67,7 @@
         { "furn": "f_cattails", "x": [ 10, 16 ], "y": [ 21, 23 ], "repeat": [ 3, 7 ] },
         { "furn": "f_boulder_large", "x": [ 10, 16 ], "y": [ 21, 23 ], "repeat": [ 1, 3 ] }
       ],
-      "sealed_item": { "=": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling" } },
+      "sealed_item": { "=": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 10 } },
       "place_monster": [ { "group": "GROUP_POND_FISH_2", "x": 13, "y": 21, "chance": 100, "repeat": [ 4, 8 ] } ],
       "place_items": [
         { "item": "book_survival_2", "x": 11, "y": 14, "chance": 100, "repeat": [ 1, 3 ] },
@@ -103,7 +103,7 @@
   {
     "type": "item_group",
     "id": "book_survival_2",
-    "//": "Survival skill books weighted according to level",
+    "//": "Ecology skill books weighted according to level",
     "subtype": "distribution",
     "entries": [
       { "item": "atomic_survival", "prob": 12 },
@@ -133,7 +133,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "corpse_child_survival",
-    "entries": [ { "group": "corpse_child_survival_undam", "damage": [ 3, 4 ], "prob": 100 } ]
+    "entries": [ { "group": "corpse_child_survival_undam", "damage": [ 3, 5 ], "prob": 100 } ]
   },
   {
     "type": "item_group",
@@ -152,7 +152,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "corpse_female_survival",
-    "entries": [ { "group": "corpse_female_survival_undam", "damage": [ 3, 4 ], "prob": 100 } ]
+    "entries": [ { "group": "corpse_female_survival_undam", "damage": [ 3, 5 ], "prob": 100 } ]
   },
   {
     "type": "item_group",
@@ -165,7 +165,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "corpses_unisex_survival",
-    "entries": [ { "group": "corpses_unisex_survival_undam", "damage": [ 3, 4 ], "prob": 100 } ]
+    "entries": [ { "group": "corpses_unisex_survival_undam", "damage": [ 3, 5 ], "prob": 100 } ]
   },
   {
     "type": "item_group",

@@ -27,6 +27,8 @@
 #include "construction_group.h"
 #include "coordinates.h"
 #include "craft_command.h"
+#include "crafting.h"
+#include "crafting_enums.h"
 #include "creature.h"
 #include "creature_tracker.h"
 #include "cursesdef.h"
@@ -37,6 +39,7 @@
 #include "event_bus.h"
 #include "field_type.h"
 #include "flag.h"
+#include "flat_set.h" // IWYU pragma: keep
 #include "fungal_effects.h"
 #include "game.h"
 #include "game_constants.h"
@@ -121,7 +124,6 @@ static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_infected( "infected" );
 static const efftype_id effect_mending( "mending" );
 static const efftype_id effect_pblue( "pblue" );
-static const efftype_id effect_pkill2( "pkill2" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_slow_descent( "slow_descent" );
 static const efftype_id effect_strong_antibiotic( "strong_antibiotic" );
@@ -162,10 +164,12 @@ static const itype_id itype_2x4( "2x4" );
 static const itype_id itype_arm_splint( "arm_splint" );
 static const itype_id itype_bot_broken_cyborg( "bot_broken_cyborg" );
 static const itype_id itype_bot_prototype_cyborg( "bot_prototype_cyborg" );
+static const itype_id itype_cactus_pad( "cactus_pad" );
 static const itype_id itype_cash_card( "cash_card" );
 static const itype_id itype_charcoal( "charcoal" );
 static const itype_id itype_chem_carbide( "chem_carbide" );
 static const itype_id itype_corpse( "corpse" );
+static const itype_id itype_dahlia_root( "dahlia_root" );
 static const itype_id itype_disassembly( "disassembly" );
 static const itype_id itype_fake_milling_item( "fake_milling_item" );
 static const itype_id itype_fake_smoke_plume( "fake_smoke_plume" );
@@ -181,12 +185,18 @@ static const itype_id itype_marloss_seed( "marloss_seed" );
 static const itype_id itype_mycus_fruit( "mycus_fruit" );
 static const itype_id itype_nail( "nail" );
 static const itype_id itype_nanomaterial( "nanomaterial" );
+static const itype_id itype_nectar( "nectar" );
 static const itype_id itype_petrified_eye( "petrified_eye" );
+static const itype_id itype_poppy_bud( "poppy_bud" );
+static const itype_id itype_poppy_nectar( "poppy_nectar" );
+static const itype_id itype_seed_cactus( "seed_cactus" );
+static const itype_id itype_seed_dahlia( "seed_dahlia" );
 static const itype_id itype_sheet( "sheet" );
 static const itype_id itype_stick( "stick" );
 static const itype_id itype_string_36( "string_36" );
 static const itype_id itype_unfinished_cac2( "unfinished_cac2" );
 static const itype_id itype_unfinished_charcoal( "unfinished_charcoal" );
+static const itype_id itype_withered( "withered" );
 
 static const json_character_flag json_flag_ATTUNEMENT( "ATTUNEMENT" );
 static const json_character_flag json_flag_GLIDE( "GLIDE" );
@@ -342,9 +352,7 @@ void iexamine::cvdmachine( Character &you, const tripoint_bub_ms & )
     item_location loc = g->inv_map_splice( []( const item & e ) {
         return e.has_edged_damage() &&
                !e.has_flag( flag_DIAMOND ) && !e.has_flag( flag_NO_CVD ) &&
-               ( e.made_of( material_steel ) || e.made_of( material_ch_steel ) ||
-                 e.made_of( material_hc_steel ) || e.made_of( material_lc_steel ) ||
-                 e.made_of( material_mc_steel ) || e.made_of( material_qt_steel ) );
+               ( e.made_of( material_steel ) );
     }, _( "Apply diamond coating" ), 1, _( "You don't have a suitable item to coat with diamond" ) );
 
     if( !loc ) {
@@ -483,7 +491,8 @@ void iexamine::nanofab( Character &you, const tripoint_bub_ms &examp )
             return;
         }
 
-        new_item = item( nanofab_template->get_var( "NANOFAB_ITEM_ID" ), calendar::turn );
+        //TODO: Allow variables to be cata_variant ids
+        new_item = item( itype_id( nanofab_template->get_var( "NANOFAB_ITEM_ID" ) ), calendar::turn );
         int qty = std::max( 1, new_item.volume() / 250_ml );
         reqs = *nanofab_template->type->template_requirements * qty;
     }
@@ -819,7 +828,7 @@ class atm_menu
                 return false;
             }
 
-            item card( "cash_card", calendar::turn );
+            item card( itype_cash_card, calendar::turn );
             card.ammo_set( card.ammo_default(), 0 );
             you.i_add( card );
             you.cash -= 1000;
@@ -1743,7 +1752,7 @@ void iexamine::pit_covered( Character &you, const tripoint_bub_ms &examp )
     }
 
     map &here = get_map();
-    item plank( "2x4", calendar::turn );
+    item plank( itype_2x4, calendar::turn );
     add_msg( _( "You remove the plank." ) );
     here.add_item_or_charges( you.pos_bub(), plank );
     const ter_id &ter_pit = here.ter( examp );
@@ -1755,6 +1764,18 @@ void iexamine::pit_covered( Character &you, const tripoint_bub_ms &examp )
         here.ter_set( examp, ter_t_pit_glass );
     }
     you.mod_moves( -to_moves<int>( 1_seconds ) );
+}
+
+void iexamine::thin_ice( Character &you, const tripoint_bub_ms &examp )
+{
+    map &here = get_map();
+    const trap &tr = here.tr_at( examp );
+    if( !you.knows_trap( examp ) ) {
+        you.add_msg_if_player( m_warning, _( "The ice looks thin and won't support your weight." ) );
+        you.add_known_trap( examp, tr );
+    } else {
+        you.add_msg_if_player( m_info, _( "The ice here is thin." ) );
+    }
 }
 
 
@@ -2096,7 +2117,7 @@ void iexamine::door_peephole( Character &you, const tripoint_bub_ms &examp )
         here.open_door( you, examp, true, false );
         you.add_msg_if_player( _( "You open the door." ) );
     } else {
-        you.add_msg_if_player( _( "Never mind." ) );
+        you.add_msg_if_player( _( "Nevermind." ) );
     }
 }
 
@@ -2120,37 +2141,11 @@ static bool dead_plant( bool flower, Character &you, const tripoint_bub_ms &exam
 }
 
 /**
- * Helper method to see if player has traits, hunger and mouthwear for drinking nectar.
- */
-static bool can_drink_nectar( const Character &you )
-{
-    return ( you.has_active_mutation( trait_PROBOSCIS )  ||
-             you.has_active_mutation( trait_BEAK_HUM ) ) &&
-           ( you.get_hunger() > 0 ) && ( !you.wearing_something_on( bodypart_id( "mouth" ) ) );
-}
-
-/**
- * Consume Nectar. -15 hunger.
- */
-bool iexamine_helper::drink_nectar( Character &you )
-{
-    if( can_drink_nectar( you ) ) {
-        add_msg( _( "You drink some nectar." ) );
-        item nectar( "nectar", calendar::turn, 1 );
-        you.assign_activity( consume_activity_actor( nectar ) );
-        return true;
-    }
-
-    return false;
-}
-
-/**
  * Spawn an item after harvesting the plant
  */
-void iexamine_helper::handle_harvest( Character &you, const std::string &itemid,
-                                      bool force_drop )
+void iexamine_helper::handle_harvest( Character &you, const itype_id &itemid, bool force_drop )
 {
-    item harvest = item( itemid );
+    item harvest( itemid );
     if( harvest.has_temperature() ) {
         harvest.set_item_temperature( get_weather().get_temperature( you.pos_bub() ) );
     }
@@ -2165,9 +2160,8 @@ void iexamine_helper::handle_harvest( Character &you, const std::string &itemid,
 }
 
 /**
- * Prompt pick (or drink nectar if able) poppy bud. Not safe for player.
+ * Prompt pick poppy bud. Not safe for player.
  *
- * Drinking causes: -25 hunger, +20 fatigue, pkill2-70 effect and, 1 in 20 pkiller-1 addiction.
  * Picking w/ env_resist < 5 causes 1 in 3  sleep for 12 min and 4 dmg to each leg
  */
 void iexamine::flower_poppy( Character &you, const tripoint_bub_ms &examp )
@@ -2176,23 +2170,6 @@ void iexamine::flower_poppy( Character &you, const tripoint_bub_ms &examp )
         return;
     }
     map &here = get_map();
-    // TODO: Get rid of this section and move it to eating
-    // Two y/n prompts is just too much
-    if( can_drink_nectar( you ) ) {
-        if( !query_yn( _( "You feel woozy as you explore the %s. Drink?" ),
-                       here.furnname( examp ) ) ) {
-            return;
-        }
-        add_msg( _( "You slowly suck up the nectar." ) );
-        item poppy( "poppy_nectar", calendar::turn, 1 );
-        you.assign_activity( consume_activity_actor( poppy ) );
-        you.mod_fatigue( 20 );
-        you.add_effect( effect_pkill2, 7_minutes );
-        // Please drink poppy nectar responsibly.
-        if( one_in( 20 ) ) {
-            you.add_addiction( STATIC( addiction_id( "opioid" ) ), 1 );
-        }
-    }
     if( !query_yn( _( "Pick %s?" ), here.furnname( examp ) ) ) {
         none( you, examp );
         return;
@@ -2222,8 +2199,8 @@ void iexamine::flower_poppy( Character &you, const tripoint_bub_ms &examp )
 
     here.furn_set( examp, furn_str_id::NULL_ID() );
 
-    iexamine_helper::handle_harvest( you, "poppy_bud", false );
-    iexamine_helper::handle_harvest( you, "withered", false );
+    iexamine_helper::handle_harvest( you, itype_poppy_bud, false );
+    iexamine_helper::handle_harvest( you, itype_withered, false );
 }
 
 /**
@@ -2249,20 +2226,16 @@ void iexamine::flower_cactus( Character &you, const tripoint_bub_ms &examp )
 
     here.furn_set( examp, furn_str_id::NULL_ID() );
 
-    iexamine_helper::handle_harvest( you, "cactus_pad", false );
-    iexamine_helper::handle_harvest( you, "seed_cactus", false );
+    iexamine_helper::handle_harvest( you, itype_cactus_pad, false );
+    iexamine_helper::handle_harvest( you, itype_seed_cactus, false );
 }
 
 /**
- * Dig up its roots or drink its nectar if you can.
+ * Dig up its roots if you can.
  */
 void iexamine::flower_dahlia( Character &you, const tripoint_bub_ms &examp )
 {
     if( dead_plant( true, you, examp ) ) {
-        return;
-    }
-
-    if( iexamine_helper::drink_nectar( you ) ) {
         return;
     }
 
@@ -2285,10 +2258,10 @@ void iexamine::flower_dahlia( Character &you, const tripoint_bub_ms &examp )
     here.furn_set( examp, furn_str_id::NULL_ID() );
 
     if( can_get_root ) {
-        iexamine_helper::handle_harvest( you, "dahlia_root", false );
+        iexamine_helper::handle_harvest( you, itype_dahlia_root, false );
     }
-    iexamine_helper::handle_harvest( you, "seed_dahlia", false );
-    iexamine_helper::handle_harvest( you, "withered", false );
+    iexamine_helper::handle_harvest( you, itype_seed_dahlia, false );
+    iexamine_helper::handle_harvest( you, itype_withered, false );
     // There was a bud and flower spawn here
     // But those were useless, don't re-add until they get useful
 }
@@ -2323,32 +2296,10 @@ static bool query_pick( Character &who, const tripoint_bub_ms &target )
     return true;
 }
 
-void iexamine::harvest_furn_nectar( Character &you, const tripoint_bub_ms &examp )
-{
-    bool auto_forage = get_option<bool>( "AUTO_FEATURES" ) &&
-                       get_option<std::string>( "AUTO_FORAGING" ) == "all";
-    if( !auto_forage && !query_pick( you, examp ) ) {
-        return;
-    }
-    you.assign_activity( harvest_activity_actor( examp, auto_forage ) );
-}
-
 void iexamine::harvest_furn( Character &you, const tripoint_bub_ms &examp )
 {
     bool auto_forage = get_option<bool>( "AUTO_FEATURES" ) &&
                        get_option<std::string>( "AUTO_FORAGING" ) == "all";
-    if( !auto_forage && !query_pick( you, examp ) ) {
-        return;
-    }
-    you.assign_activity( harvest_activity_actor( examp, auto_forage ) );
-}
-
-void iexamine::harvest_ter_nectar( Character &you, const tripoint_bub_ms &examp )
-{
-    bool auto_forage = get_option<bool>( "AUTO_FEATURES" ) &&
-                       ( get_option<std::string>( "AUTO_FORAGING" ) == "all" ||
-                         get_option<std::string>( "AUTO_FORAGING" ) == "bushes" ||
-                         get_option<std::string>( "AUTO_FORAGING" ) == "trees" );
     if( !auto_forage && !query_pick( you, examp ) ) {
         return;
     }
@@ -2381,24 +2332,13 @@ void iexamine::flower_marloss( Character &you, const tripoint_bub_ms &examp )
         add_msg( m_info, _( "This flower is still alive, despite the harsh conditions…" ) );
     }
     map &here = get_map();
-    if( can_drink_nectar( you ) ) {
-        if( !query_yn( _( "You feel out of place as you explore the %s. Drink?" ),
-                       here.furnname( examp ) ) ) {
-            return;
-        }
-        you.mod_moves( -to_moves<int>
-                       ( 30_seconds ) ); // Takes 30 seconds, more or less if faster/slower than 100 speed
-        add_msg( m_bad, _( "This flower tastes very wrong…" ) );
-        // If you can drink flowers, you're post-thresh and the Mycus does not want you.
-        you.add_effect( effect_teleglow, 10_minutes );
-    }
     if( !query_yn( _( "Pick %s?" ), here.furnname( examp ) ) ) {
         none( you, examp );
         return;
     }
     here.furn_set( examp, furn_str_id::NULL_ID() );
     here.spawn_item( you.pos_bub(), itype_marloss_seed, 1, 3, calendar::turn );
-    iexamine_helper::handle_harvest( you, "withered", false );
+    iexamine_helper::handle_harvest( you, itype_withered, false );
 }
 
 /**
@@ -2483,11 +2423,6 @@ void iexamine::plant_seed( Character &you, const tripoint_bub_ms &examp, const i
  */
 void iexamine::dirtmound( Character &you, const tripoint_bub_ms &examp )
 {
-
-    if( !warm_enough_to_plant( get_player_character().pos_bub() ) ) {
-        add_msg( m_info, _( "It is too cold to plant anything now." ) );
-        return;
-    }
     map &here = get_map();
     /* ambient_light_at() not working?
     if (here.ambient_light_at(examp) < LIGHT_AMBIENT_LOW) {
@@ -2513,7 +2448,13 @@ void iexamine::dirtmound( Character &you, const tripoint_bub_ms &examp )
         add_msg( _( "You saved your seeds for later." ) );
         return;
     }
-    const auto &seed_id = std::get<0>( seed_entries[seed_index] );
+    const itype_id &seed_id = std::get<0>( seed_entries[seed_index] );
+
+    ret_val<void>can_plant = warm_enough_to_plant( examp, seed_id );
+    if( !can_plant.success() ) {
+        you.add_msg_if_player( m_info, can_plant.c_str() );
+        return;
+    }
 
     if( !here.has_flag_ter_or_furn( seed_id->seed->required_terrain_flag, examp ) ) {
         add_msg( _( "This type of seed can not be planted in this location." ) );
@@ -2666,14 +2607,19 @@ void iexamine::harvest_plant( Character &you, const tripoint_bub_ms &examp, bool
             player_activity act( ACT_HARVEST, to_moves<int>( 60_seconds ) );
             you.assign_activity( act );
             here.i_clear( examp );
-
-            int skillLevel = round( you.get_skill_level( skill_survival ) );
-            ///\EFFECT_SURVIVAL increases number of plants harvested from a seed
-            int plant_count = rng( skillLevel / 2, skillLevel );
+            float skillLevel = you.get_skill_level( skill_survival );
+            ///\EFFECT_SURVIVAL increases number of plants harvested from a seed.
+            float skill_divisor = 4.f;
+            // Fertilizer reduces the odds of a bad harvest.
+            if( here.i_at( examp ).size() > 1 ) {
+                skill_divisor = 2.f;
+            }
+            float plant_count = rng_float( skillLevel / skill_divisor, skillLevel );
             const auto &fp = here.furn( examp )->plant;
             plant_count *= fp->harvest_multiplier;
-            plant_count = std::min( std::max( plant_count, 1 ), 12 );
-            int seedCount = std::max( 1, rng( plant_count / 4, plant_count / 2 ) );
+            int plant_count_int = static_cast<int>( std::round( plant_count ) );
+            plant_count = std::min( std::max( plant_count_int, 1 ), 10 );
+            int seedCount = rng( plant_count_int / 4, plant_count_int / 2 );
             for( item &i : get_harvest_items( type, plant_count, seedCount, true ) ) {
                 if( from_activity ) {
                     i.set_var( "activity_var", you.name );
@@ -2696,10 +2642,14 @@ ret_val<void> iexamine::can_fertilize( Character &you, const tripoint_bub_ms &ti
 {
     map &here = get_map();
     if( !here.has_flag_furn( ter_furn_flag::TFLAG_PLANT, tile ) ) {
-        return ret_val<void>::make_failure( _( "Tile isn't a plant" ) );
+        return ret_val<void>::make_failure( _( "That isn't a plant you can fertilize." ) );
+    }
+    if( here.has_flag_furn( ter_furn_flag::TFLAG_PLANT, tile ) &&
+        harvestable_now( tile ) ) {
+        return ret_val<void>::make_failure( _( "There's no point in fertilizing a mature plant." ) );
     }
     if( here.i_at( tile ).size() > 1 ) {
-        return ret_val<void>::make_failure( _( "Tile is already fertilized" ) );
+        return ret_val<void>::make_failure( _( "That area has already been fertilized." ) );
     }
     if( ( fertilizer->count_by_charges() && !you.has_charges( fertilizer, 1 ) ) ||
         !you.has_amount( fertilizer, 1 ) ) {
@@ -2727,10 +2677,6 @@ void iexamine::fertilize_plant( Character &you, const tripoint_bub_ms &tile,
         planted = you.use_amount( fertilizer, 1 );
     }
 
-    // Reduce the amount of time it takes until the next stage of the plant by
-    // 20% of a seasons length. (default 2.8 days).
-    const time_duration fertilizerEpoch = calendar::season_length() * 0.2;
-
     map &here = get_map();
     // Can't use item_stack::only_item() since there might be fertilizer
     map_stack items = here.i_at( tile );
@@ -2744,11 +2690,6 @@ void iexamine::fertilize_plant( Character &you, const tripoint_bub_ms &tile,
         return;
     }
 
-    // TODO: item should probably clamp the value on its own
-    seed->set_birthday( seed->birthday() - fertilizerEpoch );
-    // The plant furniture has the NOITEM token which prevents adding items on that square,
-    // spawned items are moved to an adjacent field instead, but the fertilizer token
-    // must be on the square of the plant, therefore this hack:
     const furn_id &old_furn = here.furn( tile );
     here.furn_set( tile, furn_str_id::NULL_ID() );
     here.spawn_item( tile, itype_fertilizer, 1, 1, calendar::turn );
@@ -2976,7 +2917,7 @@ void iexamine::kiln_full( Character &, const tripoint_bub_ms &examp )
         }
     }
 
-    item result( "charcoal", calendar::turn );
+    item result( itype_charcoal, calendar::turn );
     result.charges = char_type->charges_per_volume( total_volume );
     here.add_item( examp, result );
     here.furn_set( examp, next_kiln_type );
@@ -3050,7 +2991,7 @@ void iexamine::arcfurnace_empty( Character &you, const tripoint_bub_ms &examp )
     you.consume_ups( 1250_kJ );
     here.i_clear( examp );
     here.furn_set( examp, next_arcfurnace_type );
-    item result( "unfinished_cac2", calendar::turn );
+    item result( itype_unfinished_cac2, calendar::turn );
     result.charges = char_charges;
     here.add_item( examp, result );
     add_msg( _( "You turn on the furnace." ) );
@@ -3107,7 +3048,7 @@ void iexamine::arcfurnace_full( Character &, const tripoint_bub_ms &examp )
         }
     }
 
-    item result( "chem_carbide", calendar::turn );
+    item result( itype_chem_carbide, calendar::turn );
     result.charges = char_type->charges_per_volume( total_volume );
     here.add_item( examp, result );
     here.furn_set( examp, next_arcfurnace_type );
@@ -3146,11 +3087,6 @@ void iexamine::stook_empty( Character &, const tripoint_bub_ms &examp )
     } else if( !here.is_outside( examp ) ) {
         add_msg( _( "The stook will need to be set up outside to dry." ) );
         return;
-    } else {
-        add_msg( _( "This pile contains grain that is ready to be left out for drying." ) );
-        if( !query_yn( _( "Stand the grain up to dry?" ) ) ) {
-            return;
-        }
     }
 
     here.furn_set( examp, next_stook_type );
@@ -3328,7 +3264,7 @@ static void add_firestarter( item *it, std::multimap<int, item *> &firestarters,
     const use_function *usef = it->type->get_use( "firestarter" );
     if( usef != nullptr && usef->get_actor_ptr() != nullptr ) {
         const firestarter_actor *actor = dynamic_cast<const firestarter_actor *>( usef->get_actor_ptr() );
-        if( actor->can_use( you, *it, examp ).success() ) {
+        if( actor->can_use( you, *it, &get_map(), examp ).success() ) {
             firestarters.insert( std::pair<int, item *>( actor->moves_cost_fast, it ) );
         }
     }
@@ -3407,9 +3343,9 @@ void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
                 const use_function *usef = it->type->get_use( "firestarter" );
                 const firestarter_actor *actor = dynamic_cast<const firestarter_actor *>( usef->get_actor_ptr() );
                 you.add_msg_if_player( _( "You attempt to start a fire with your %s…" ), it->tname() );
-                const ret_val<void> can_use = actor->can_use( you, *it, examp );
+                const ret_val<void> can_use = actor->can_use( you, *it, &get_map(), examp );
                 if( can_use.success() ) {
-                    const int charges = actor->use( &you, *it, examp ).value_or( 0 );
+                    const int charges = actor->use( &you, *it, &get_map(), examp ).value_or( 0 );
                     you.use_charges( it->typeId(), charges );
                     return;
                 } else {
@@ -3564,7 +3500,7 @@ void iexamine::fvat_empty( Character &you, const tripoint_bub_ms &examp )
                 break;
             }
             default:
-                add_msg( _( "Never mind." ) );
+                add_msg( _( "Nevermind." ) );
                 return;
         }
     }
@@ -3793,7 +3729,7 @@ void iexamine::compost_empty( Character &you, const tripoint_bub_ms &examp )
                 break;
             }
             default:
-                add_msg( _( "Never mind." ) );
+                add_msg( _( "Nevermind." ) );
                 return;
         }
     }
@@ -4274,7 +4210,7 @@ void iexamine::tree_hickory( Character &you, const tripoint_bub_ms &examp )
 
 static item_location maple_tree_sap_container()
 {
-    const item maple_sap = item( "maple_sap", calendar::turn_zero );
+    const item maple_sap = item( itype_maple_sap, calendar::turn_zero );
     return g->inv_map_splice( [&]( const item & it ) {
         return it.get_remaining_capacity_for_liquid( maple_sap, true ) > 0;
     }, _( "Use which container to collect sap?" ), PICKUP_RANGE,
@@ -4860,7 +4796,7 @@ void iexamine::curtains( Character &you, const tripoint_bub_ms &examp )
         you.mod_moves( -to_moves<int>( 10_seconds ) );
         you.add_msg_if_player( _( "You tear the curtains and curtain rod off the windowframe." ) );
     } else {
-        you.add_msg_if_player( _( "Never mind." ) );
+        you.add_msg_if_player( _( "Nevermind." ) );
     }
 }
 
@@ -5818,7 +5754,7 @@ void iexamine::autodoc( Character &you, const tripoint_bub_ms &examp )
                     }
                     you.invalidate_inventory();
                 }
-                installer.mod_moves( -to_moves<int>( 1_minutes ) );
+                installer.mod_moves( -to_moves<int>( 10_minutes ) );
 
                 patient.install_bionics( ( *itemtype ), installer, true, has_install_program ? 10 : -1 );
 
@@ -5867,7 +5803,7 @@ void iexamine::autodoc( Character &you, const tripoint_bub_ms &examp )
                 if( needs_anesthesia ) {
                     you.consume_tools( anesth_kit, volume_anesth );
                 }
-                installer.mod_moves( -to_moves<int>( 1_minutes ) );
+                installer.mod_moves( -to_moves<int>( 10_minutes ) );
                 patient.uninstall_bionic( *bionics[bionic_index], installer, true );
             }
             break;
@@ -5891,7 +5827,7 @@ void iexamine::autodoc( Character &you, const tripoint_bub_ms &examp )
                     continue;
                 }
                 broken_limbs_count++;
-                patient.mod_moves( -to_moves<int>( 5_seconds ) );
+                patient.mod_moves( -to_moves<int>( 240_seconds ) );
                 // TODO: fail here if unable to perform the action, i.e. can't wear more, trait mismatch.
                 int quantity = 1;
                 if( part == bodypart_id( "arm_l" ) || part == bodypart_id( "arm_r" ) ) {
@@ -6214,7 +6150,7 @@ static void mill_activate( Character &you, const tripoint_bub_ms &examp )
         }
     }
     here.furn_set( examp, next_mill_type );
-    item result( "fake_milling_item", calendar::turn );
+    item result( itype_fake_milling_item, calendar::turn );
     result.item_counter = to_turns<int>( milling_time );
     result.activate();
     here.add_item( examp, result );
@@ -6320,7 +6256,7 @@ static void smoker_activate( Character &you, const tripoint_bub_ms &examp )
     } else {
         charcoal->charges -= char_charges;
     }
-    item result( "fake_smoke_plume", calendar::turn );
+    item result( itype_fake_smoke_plume, calendar::turn );
     result.item_counter = to_turns<int>( 6_hours );
     result.activate();
     here.add_item( examp, result );
@@ -6638,7 +6574,7 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
     smenu.query();
 
     if( smenu.ret < 0 || static_cast<size_t>( smenu.ret ) >= entries.size() ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return;
     }
     int count = 0;
@@ -6656,7 +6592,7 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
     int amount = max_count;
     if( !query_int( amount, true, _( "Insert how many %s into the mill?" ),
                     item::nname( what->typeId(), count ) ) || amount <= 0 ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return;
     } else if( amount > count ) {
         add_msg( m_info, _( "You don't have that many." ) );
@@ -6855,7 +6791,7 @@ void iexamine::quern_examine( Character &you, const tripoint_bub_ms &examp )
             }
             break;
         default:
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             break;
         case 4:
             const furn_id &f = here.furn( examp );
@@ -7088,7 +7024,7 @@ void iexamine::smoker_options( Character &you, const tripoint_bub_ms &examp )
         }
         break;
         default:
-            add_msg( m_info, _( "Never mind." ) );
+            add_msg( m_info, _( "Nevermind." ) );
             break;
         case 7:
             if( portable ) {
@@ -7242,16 +7178,38 @@ void iexamine::workbench_internal( Character &you, const tripoint_bub_ms &examp,
             if( selected_craft->typeId() == itype_disassembly ) {
                 you.disassemble( crafts[amenu2.ret], true );
             } else {
+                craft_resolve_overdue_passive( *selected_craft, calendar::turn, crafts[amenu2.ret] );
+                if( !crafts[amenu2.ret] || !crafts[amenu2.ret].get_item() ) {
+                    break;
+                }
+                selected_craft = crafts[amenu2.ret].get_item();
+                const recipe &rec = selected_craft->get_making();
+                std::optional<std::vector<attention_plan>> chosen;
+                if( rec.has_remaining_attention_steps( selected_craft->get_current_step() )
+                    && you.is_avatar() ) {
+                    chosen = show_craft_planning_modal( rec, you,
+                                                        selected_craft->get_making_batch_size(),
+                                                        selected_craft->get_current_step(),
+                                                        selected_craft->get_step_plans(),
+                                                        selected_craft );
+                    if( !chosen ) {
+                        break;
+                    }
+                }
                 if( !you.can_continue_craft( *selected_craft ) ) {
                     break;
                 }
-                const recipe &rec = selected_craft->get_making();
                 if( !you.has_recipe( &rec ) ) {
                     you.add_msg_player_or_npc(
                         _( "You don't know the recipe for the %s and can't continue crafting." ),
                         _( "<npcname> doesn't know the recipe for the %s and can't continue crafting." ),
                         rec.result_name() );
                     break;
+                }
+                if( chosen ) {
+                    selected_craft->set_step_plans( std::move( *chosen ) );
+                    selected_craft->set_crafter_id( you.getID() );
+                    craft_apply_resume_replan( crafts[amenu2.ret] );
                 }
                 you.add_msg_player_or_npc(
                     pgettext( "in progress craft", "You start working on the %s." ),
@@ -7315,6 +7273,7 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
             { "portable_structure", &iexamine::portable_structure },
             { "pit", &iexamine::pit },
             { "pit_covered", &iexamine::pit_covered },
+            { "thin_ice", &iexamine::thin_ice },
             { "safe", &iexamine::safe },
             { "bulletin_board", &iexamine::bulletin_board },
             { "pedestal_wyrm", &iexamine::pedestal_wyrm },
@@ -7331,9 +7290,7 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
             { "compost_empty", &iexamine::compost_empty },
             { "compost_full", &iexamine::compost_full },
             { "keg", &iexamine::keg },
-            { "harvest_furn_nectar", &iexamine::harvest_furn_nectar },
             { "harvest_furn", &iexamine::harvest_furn },
-            { "harvest_ter_nectar", &iexamine::harvest_ter_nectar },
             { "harvest_ter", &iexamine::harvest_ter },
             { "clear_overgrown", &iexamine::clear_overgrown },
             { "harvest_plant_ex", &iexamine::harvest_plant_ex },
@@ -7375,9 +7332,7 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
     };
 
     static const std::set<std::string> harvestable_functions = {
-        "harvest_furn_nectar",
         "harvest_furn",
-        "harvest_ter_nectar",
         "harvest_ter",
         "harvest_plant",
     };

@@ -2,17 +2,84 @@
   {
     "name": "GROUP_BEARS_ZOO",
     "type": "monstergroup",
-    "monsters": [ { "group": "GROUP_BEARS", "weight": 950 }, { "monster": "mon_zombear", "weight": 50 } ]
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_BEARS", "weight": 600, "ends": "15 days" },
+      { "group": "GROUP_BEARS", "weight": 80 },
+      { "monster": "mon_zombear", "weight": 400 }
+    ]
   },
   {
     "name": "GROUP_MOOSE_ZOO",
     "type": "monstergroup",
-    "monsters": [ { "group": "GROUP_MOOSE", "weight": 950 }, { "monster": "mon_zoose", "weight": 50 } ]
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_MOOSE", "weight": 600, "ends": "10 days" },
+      { "group": "GROUP_MOOSE", "weight": 80 },
+      { "monster": "mon_zoose", "weight": 400 }
+    ]
   },
   {
     "name": "GROUP_PIGS_ZOO",
     "type": "monstergroup",
-    "monsters": [ { "group": "GROUP_PIGS", "weight": 950 }, { "monster": "mon_zombie_pig", "weight": 50 } ]
+    "is_animal": true,
+    "monsters": [ { "group": "GROUP_PIGS", "weight": 600 }, { "monster": "mon_zombie_pig", "weight": 400 } ]
+  },
+  {
+    "name": "GROUP_SHEEP_ZOO",
+    "type": "monstergroup",
+    "is_animal": true,
+    "monsters": [ { "group": "GROUP_SHEEP", "weight": 600, "ends": "7 days" }, { "monster": "mon_zombie_sheep", "weight": 400 } ]
+  },
+  {
+    "name": "GROUP_TIGERS_ZOO",
+    "type": "monstergroup",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_tiger", "weight": 600, "ends": "20 days" },
+      { "monster": "mon_tiger", "weight": 100, "ends": "400 days" },
+      { "monster": "mon_ziger", "weight": 400 }
+    ]
+  },
+  {
+    "name": "GROUP_COYOTES_ZOO",
+    "type": "monstergroup",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_COYOTES", "weight": 600, "ends": "20 days" },
+      { "group": "GROUP_COYOTES", "weight": 200 },
+      { "monster": "mon_zombie_dog", "weight": 400 }
+    ]
+  },
+  {
+    "name": "GROUP_WOLVES_ZOO",
+    "type": "monstergroup",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_wolf", "weight": 600, "ends": "18 days" },
+      { "monster": "mon_wolf", "weight": 100 },
+      { "monster": "mon_dog_zombie_brute", "weight": 400 }
+    ]
+  },
+  {
+    "name": "GROUP_COYOTES_ZOO",
+    "type": "monstergroup",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_coyote", "weight": 600, "ends": "18 days" },
+      { "monster": "mon_coyote", "weight": 100 },
+      { "monster": "mon_zombie_dog", "weight": 400 }
+    ]
+  },
+  {
+    "name": "GROUP_DEER_ZOO",
+    "type": "monstergroup",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_DEER", "weight": 600, "ends": "10 days" },
+      { "monster": "mon_zeer", "weight": 400 },
+      { "monster": "mon_zeer_frail", "weight": 100 }
+    ]
   },
   {
     "om_terrain": "zoo_0_0",
@@ -89,17 +156,17 @@
         "-__|..|i..r..#|....|__ss"
       ],
       "terrain": {
-        "+": "t_reinforced_door_glass_c",
+        "+": "t_laminated_door_glass_c",
         "-": "t_brick_wall",
         "D": "t_dirt",
         "_": [ "t_bamboo", "t_bamboo_long", "t_bamboo_tall", "t_grass" ],
         "b": "t_dirt",
         "d": "t_door_metal_c",
         "f": "t_dirt",
-        "r": "t_reinforced_glass",
+        "r": "t_laminated_glass",
         "s": "t_sidewalk",
         "v": "t_sidewalk",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         ".": "t_floor",
         "|": "t_brick_wall"
       },
@@ -122,23 +189,23 @@
       },
       "place_item": [ { "item": "rock", "repeat": 1, "x": 9, "y": 15 }, { "item": "pine_bough", "repeat": 1, "x": 9, "y": 21 } ],
       "place_items": [
-        { "chance": 55, "item": "toy_store", "x": 12, "y": [ 6, 7 ], "repeat": [ 1, 16 ] },
+        { "chance": 55, "item": "toy_store", "x": 12, "y": [ 6, 7 ], "repeat": [ 1, 8 ] },
         { "chance": 75, "item": "vending_food", "x": 20, "y": 2 },
         { "chance": 55, "item": "trash", "x": 13, "y": 15 },
         { "chance": 55, "item": "trash", "x": 13, "y": 10 },
-        { "chance": 55, "item": "snacks", "x": 10, "y": 11, "repeat": [ 1, 16 ] },
-        { "chance": 55, "item": "snacks", "x": [ 7, 8 ], "y": 4, "repeat": [ 1, 16 ] },
-        { "chance": 55, "item": "candy_shop", "x": 10, "y": [ 6, 7 ], "repeat": [ 1, 16 ] },
+        { "chance": 55, "item": "snacks", "x": 10, "y": 11, "repeat": [ 1, 8 ] },
+        { "chance": 55, "item": "snacks", "x": [ 7, 8 ], "y": 4, "repeat": [ 1, 8 ] },
+        { "chance": 55, "item": "candy_shop", "x": 10, "y": [ 6, 7 ], "repeat": [ 1, 8 ] },
         { "chance": 75, "item": "shirts", "x": 10, "y": 12, "repeat": [ 1, 5 ] },
         { "chance": 45, "item": "shirts", "x": 4, "y": 11, "repeat": [ 1, 3 ] },
         { "chance": 75, "item": "vending_drink", "x": 20, "y": 1 },
         { "chance": 25, "item": "waitingroom", "x": 18, "y": [ 16, 22 ], "repeat": [ 1, 3 ] }
       ],
       "place_monster": [
-        { "group": "GROUP_WOLVES", "x": 8, "y": 16 },
-        { "group": "GROUP_WOLVES", "x": 9, "y": 17 },
-        { "group": "GROUP_BEARS", "x": 8, "y": 20 },
-        { "group": "GROUP_BEARS", "x": 8, "y": 21 }
+        { "group": "GROUP_WOLVES_ZOO", "x": 8, "y": 16, "chance": 85 },
+        { "group": "GROUP_WOLVES_ZOO", "x": 9, "y": 17, "chance": 85 },
+        { "group": "GROUP_BEARS_ZOO", "x": 8, "y": 20, "chance": 85 },
+        { "group": "GROUP_BEARS_ZOO", "x": 8, "y": 21, "chance": 85 }
       ]
     }
   },
@@ -175,17 +242,17 @@
         "-__|..|i..r..#|....|__ss"
       ],
       "terrain": {
-        "+": "t_reinforced_door_glass_c",
+        "+": "t_laminated_door_glass_c",
         "-": "t_brick_wall",
         "D": "t_dirt",
         "_": [ "t_bamboo", "t_bamboo_long", "t_bamboo_tall", "t_grass" ],
         "b": "t_dirt",
         "d": "t_door_metal_c",
         "f": "t_dirt",
-        "r": "t_reinforced_glass",
+        "r": "t_laminated_glass",
         "s": "t_sidewalk",
         "v": "t_sidewalk",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         ".": "t_floor",
         "|": "t_brick_wall"
       },
@@ -208,23 +275,23 @@
       },
       "place_item": [ { "item": "rock", "repeat": 1, "x": 9, "y": 15 }, { "item": "pine_bough", "repeat": 1, "x": 9, "y": 21 } ],
       "place_items": [
-        { "chance": 55, "item": "toy_store", "x": 12, "y": [ 6, 7 ], "repeat": [ 1, 16 ] },
+        { "chance": 55, "item": "toy_store", "x": 12, "y": [ 6, 7 ], "repeat": [ 1, 9 ] },
         { "chance": 75, "item": "vending_food", "x": 20, "y": 2 },
         { "chance": 55, "item": "trash", "x": 13, "y": 15 },
         { "chance": 55, "item": "trash", "x": 13, "y": 10 },
-        { "chance": 55, "item": "snacks", "x": 10, "y": 11, "repeat": [ 1, 16 ] },
-        { "chance": 55, "item": "snacks", "x": [ 7, 8 ], "y": 4, "repeat": [ 1, 16 ] },
-        { "chance": 55, "item": "candy_shop", "x": 10, "y": [ 6, 7 ], "repeat": [ 1, 16 ] },
+        { "chance": 55, "item": "snacks", "x": 10, "y": 11, "repeat": [ 1, 6 ] },
+        { "chance": 55, "item": "snacks", "x": [ 7, 8 ], "y": 4, "repeat": [ 1, 6 ] },
+        { "chance": 55, "item": "candy_shop", "x": 10, "y": [ 6, 7 ], "repeat": [ 1, 6 ] },
         { "chance": 75, "item": "shirts", "x": 10, "y": 12, "repeat": [ 1, 5 ] },
         { "chance": 45, "item": "shirts", "x": 4, "y": 11, "repeat": [ 1, 3 ] },
         { "chance": 75, "item": "vending_drink", "x": 20, "y": 1 },
         { "chance": 25, "item": "waitingroom", "x": 18, "y": [ 16, 22 ], "repeat": [ 1, 3 ] }
       ],
       "place_monster": [
-        { "monster": "mon_tiger", "x": 8, "y": 16 },
-        { "monster": "mon_tiger", "x": 9, "y": 17 },
-        { "group": "GROUP_BEARS", "x": 8, "y": 20 },
-        { "group": "GROUP_BEARS", "x": 8, "y": 21 }
+        { "group": "GROUP_TIGERS_ZOO", "x": 8, "y": 16, "chance": 85 },
+        { "group": "GROUP_TIGERS_ZOO", "x": 8, "y": 17, "chance": 85 },
+        { "group": "GROUP_BEARS_ZOO", "x": 8, "y": 20, "chance": 85 },
+        { "group": "GROUP_BEARS_ZOO", "x": 8, "y": 21, "chance": 85 }
       ]
     }
   },
@@ -262,17 +329,17 @@
         "-__|..|i..w..#|....|__ss"
       ],
       "terrain": {
-        "+": "t_reinforced_door_glass_c",
+        "+": "t_laminated_door_glass_c",
         "-": "t_brick_wall",
         "D": "t_dirt",
         "_": [ "t_bamboo", "t_bamboo_long", "t_bamboo_tall", "t_grass" ],
         "b": "t_dirt",
         "d": "t_door_metal_c",
         "f": "t_dirt",
-        "r": "t_reinforced_glass",
+        "r": "t_laminated_glass",
         "s": "t_sidewalk",
         "v": "t_sidewalk",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         "|": "t_brick_wall"
       },
       "furniture": {
@@ -293,13 +360,13 @@
         "{": "f_rack"
       },
       "place_items": [
-        { "chance": 55, "item": "toy_store", "x": 12, "y": [ 6, 7 ], "repeat": [ 1, 16 ] },
+        { "chance": 55, "item": "toy_store", "x": 12, "y": [ 6, 7 ], "repeat": [ 1, 7 ] },
         { "chance": 75, "item": "vending_food", "x": 20, "y": 2 },
         { "chance": 55, "item": "trash", "x": 13, "y": 15 },
         { "chance": 55, "item": "trash", "x": 13, "y": 10 },
-        { "chance": 55, "item": "snacks", "x": 10, "y": 11, "repeat": [ 1, 16 ] },
-        { "chance": 55, "item": "snacks", "x": [ 7, 8 ], "y": 4, "repeat": [ 1, 16 ] },
-        { "chance": 55, "item": "candy_shop", "x": 10, "y": [ 6, 7 ], "repeat": [ 1, 16 ] },
+        { "chance": 55, "item": "snacks", "x": 10, "y": 11, "repeat": [ 1, 7 ] },
+        { "chance": 55, "item": "snacks", "x": [ 7, 8 ], "y": 4, "repeat": [ 1, 7 ] },
+        { "chance": 55, "item": "candy_shop", "x": 10, "y": [ 6, 7 ], "repeat": [ 1, 7 ] },
         { "chance": 75, "item": "shirts", "x": 10, "y": 12, "repeat": [ 1, 5 ] },
         { "chance": 45, "item": "shirts", "x": 4, "y": 11, "repeat": [ 1, 3 ] },
         { "chance": 75, "item": "vending_drink", "x": 20, "y": 1 },
@@ -312,8 +379,8 @@
         { "item": "glass_shard", "repeat": [ 42, 84 ], "x": 11, "y": [ 21, 23 ] }
       ],
       "place_monster": [
-        { "monster": "mon_coyote", "x": 8, "y": 16 },
-        { "monster": "mon_coyote", "x": 9, "y": 17 },
+        { "group": "GROUP_COYOTES_ZOO", "x": 8, "y": 16, "chance": 85 },
+        { "group": "GROUP_COYOTES_ZOO", "x": 9, "y": 17, "chance": 85 },
         { "group": "GROUP_BEARS_ZOO", "x": [ 8, 12 ], "y": [ 21, 23 ], "repeat": [ 1, 3 ], "chance": 85 }
       ]
     }
@@ -394,7 +461,7 @@
         "4": "t_tree_pine",
         "7": "t_tree_maple_tapped",
         "B": "t_brick_wall_halfway",
-        "D": "t_reinforced_door_glass_c",
+        "D": "t_laminated_door_glass_c",
         "^": "t_floor",
         "_": "t_grass",
         "a": "t_door_metal_c",
@@ -402,7 +469,7 @@
         "c": "t_floor",
         "d": "t_dirt",
         "h": "t_floor",
-        "r": "t_reinforced_glass",
+        "r": "t_laminated_glass",
         "s": "t_sidewalk",
         "{": "t_floor",
         "|": "t_brick_wall",
@@ -430,13 +497,13 @@
         { "chance": 25, "item": "waitingroom", "x": [ 16, 17 ], "y": 7, "repeat": [ 1, 3 ] }
       ],
       "place_monster": [
-        { "monster": "mon_bobcat", "x": 8, "y": 5 },
+        { "monster": "mon_bobcat", "x": 8, "y": 5, "chance": 30 },
         { "monster": "mon_spider_jumping_small", "x": 18, "y": 9 },
         { "monster": "mon_bat", "x": 18, "y": 12 },
-        { "monster": "mon_opossum", "x": 9, "y": 13 },
-        { "monster": "mon_opossum", "x": 8, "y": 16 },
+        { "monster": "mon_opossum", "x": 9, "y": 13, "chance": 30 },
+        { "monster": "mon_opossum", "x": 8, "y": 16, "chance": 30 },
         { "monster": "mon_rattlesnake", "x": 11, "y": 16 },
-        { "monster": "mon_chipmunk", "x": 18, "y": 16 }
+        { "monster": "mon_chipmunk", "x": 18, "y": 16, "chance": 30 }
       ]
     }
   },
@@ -571,7 +638,7 @@
         "s": "t_water_pool_shallow_outdoors",
         "t": "t_sidewalk",
         "u": "t_underbrush",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         "{": "t_sidewalk",
         "|": "t_brick_wall"
       },
@@ -608,15 +675,13 @@
         { "chance": 15, "item": "waitingroom", "x": [ 15, 16 ], "y": 19 }
       ],
       "place_monster": [
-        { "group": "GROUP_DEER", "x": [ 18, 20 ], "y": [ 2, 5 ], "repeat": [ 2, 4 ], "chance": 85 },
-        { "monster": "mon_coyote_wolf", "x": 19, "y": 8 },
-        { "monster": "mon_coyote_wolf", "x": 21, "y": 9 },
-        { "monster": "mon_coyote_wolf", "x": 18, "y": 10 },
-        { "monster": "mon_otter", "x": 19, "y": 12 },
-        { "monster": "mon_otter", "x": 17, "y": 13 },
-        { "group": "GROUP_MOOSE", "x": [ 7, 9 ], "y": [ 12, 15 ], "repeat": [ 1, 3 ], "chance": 85 },
-        { "monster": "mon_otter", "x": 19, "y": 14 },
-        { "monster": "mon_otter", "x": 19, "y": 15 }
+        { "group": "GROUP_DEER_ZOO", "x": [ 18, 20 ], "y": [ 2, 5 ], "repeat": [ 1, 4 ], "chance": 85 },
+        { "group": "GROUP_WOLVES_ZOO", "x": 19, "y": 8, "chance": 85 },
+        { "monster": "mon_otter", "x": 19, "y": 12, "chance": 30 },
+        { "monster": "mon_otter", "x": 17, "y": 13, "chance": 30 },
+        { "group": "GROUP_MOOSE_ZOO", "x": [ 7, 9 ], "y": [ 12, 15 ], "repeat": [ 1, 3 ], "chance": 65 },
+        { "monster": "mon_otter", "x": 19, "y": 14, "chance": 30 },
+        { "monster": "mon_otter", "x": 19, "y": 15, "chance": 30 }
       ],
       "place_toilets": [ { "x": 5, "y": 2 }, { "x": 7, "y": 2 }, { "x": 7, "y": 7 } ]
     }
@@ -675,7 +740,7 @@
         "s": "t_water_pool_shallow_outdoors",
         "t": "t_sidewalk",
         "u": "t_underbrush",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         "{": "t_sidewalk",
         "|": "t_brick_wall"
       },
@@ -717,14 +782,14 @@
         { "item": "scrap", "repeat": [ 1, 2 ], "x": [ 6, 8 ], "y": 17 }
       ],
       "place_monster": [
-        { "group": "GROUP_DEER", "x": [ 18, 20 ], "y": [ 2, 5 ], "repeat": [ 1, 3 ], "chance": 85 },
-        { "monster": "mon_coyote_wolf", "x": 19, "y": 8 },
-        { "monster": "mon_coyote_wolf", "x": 21, "y": 9 },
-        { "monster": "mon_coyote_wolf", "x": 18, "y": 10 },
-        { "monster": "mon_otter", "x": 19, "y": 12 },
-        { "monster": "mon_otter", "x": 17, "y": 13 },
-        { "monster": "mon_otter", "x": 19, "y": 14 },
-        { "monster": "mon_otter", "x": 19, "y": 15 },
+        { "group": "GROUP_DEER_ZOO", "x": [ 18, 20 ], "y": [ 2, 5 ], "repeat": [ 1, 3 ], "chance": 85 },
+        { "group": "GROUP_WOLVES_ZOO", "x": 19, "y": 8, "chance": 85 },
+        { "group": "GROUP_WOLVES_ZOO", "x": 21, "y": 9, "chance": 85 },
+        { "group": "GROUP_WOLVES_ZOO", "x": 18, "y": 10, "chance": 60 },
+        { "monster": "mon_otter", "x": 19, "y": 12, "chance": 30 },
+        { "monster": "mon_otter", "x": 17, "y": 13, "chance": 30 },
+        { "monster": "mon_otter", "x": 19, "y": 14, "chance": 30 },
+        { "monster": "mon_otter", "x": 19, "y": 15, "chance": 30 },
         { "group": "GROUP_MOOSE_ZOO", "x": [ 7, 9 ], "y": [ 12, 16 ], "repeat": [ 1, 3 ], "chance": 85 }
       ],
       "place_toilets": [ { "x": 5, "y": 2 }, { "x": 7, "y": 2 }, { "x": 7, "y": 7 } ]
@@ -798,8 +863,8 @@
         "bbbbbbbbbbbbbbbbbbbbbbbb"
       ],
       "terrain": {
-        "+": "t_reinforced_door_glass_c",
-        "-": "t_reinforced_glass",
+        "+": "t_laminated_door_glass_c",
+        "-": "t_laminated_glass",
         ".": "t_floor",
         "_": "t_sidewalk",
         "b": "t_brick_wall",
@@ -845,17 +910,17 @@
         { "chance": 35, "item": "birdfood", "x": 20, "y": [ 3, 10 ], "repeat": [ 4, 8 ] },
         { "chance": 90, "item": "birdfood", "x": 17, "y": 12, "repeat": [ 5, 10 ] }
       ],
-      "sealed_item": { "^": { "item": { "item": "seed_sugar_beet" }, "furniture": "f_plant_seed" } },
+      "sealed_item": { "^": { "item": { "item": "seed_sugar_beet" }, "furniture": "f_plant_seed", "chance": 10 } },
       "place_monster": [
         { "monster": "mon_crow", "x": 9, "y": 3 },
         { "monster": "mon_crow", "x": 11, "y": 3 },
-        { "monster": "mon_crow", "x": 12, "y": 4 },
-        { "monster": "mon_duck", "x": 20, "y": 4 },
-        { "monster": "mon_duck", "x": 19, "y": 5 },
-        { "monster": "mon_turkey", "x": 21, "y": 7 },
-        { "monster": "mon_chicken", "x": 19, "y": 10 },
+        { "monster": "mon_crow", "x": 12, "y": 4, "chance": 85 },
+        { "monster": "mon_duck", "x": 20, "y": 4, "chance": 30 },
+        { "monster": "mon_duck", "x": 19, "y": 5, "chance": 30 },
+        { "monster": "mon_turkey", "x": 21, "y": 7, "chance": 30 },
+        { "monster": "mon_chicken", "x": 19, "y": 10, "chance": 30 },
         { "monster": "mon_bat", "x": 9, "y": 12 },
-        { "monster": "mon_bat", "x": 10, "y": 12 }
+        { "monster": "mon_bat", "x": 10, "y": 12, "chance": 85 }
       ]
     }
   },
@@ -970,7 +1035,7 @@
       ],
       "terrain": {
         "#": "t_sidewalk",
-        "+": "t_reinforced_door_glass_c",
+        "+": "t_laminated_door_glass_c",
         "-": "t_brick_wall",
         ".": "t_floor",
         "4": "t_tree_pine",
@@ -983,7 +1048,7 @@
         "d": "t_dirt",
         "f": "t_dirt",
         "s": "t_swater_sh",
-        "w": "t_reinforced_glass",
+        "w": "t_laminated_glass",
         "|": "t_brick_wall"
       },
       "furniture": {
@@ -998,22 +1063,22 @@
         "f": "f_dahlia"
       },
       "place_monster": [
-        { "monster": "mon_fish_sbass", "x": 0, "y": 2 },
-        { "monster": "mon_fish_sbass", "x": 1, "y": 3 },
+        { "monster": "mon_fish_sbass", "x": 0, "y": 2, "chance": 50 },
+        { "monster": "mon_fish_sbass", "x": 1, "y": 3, "chance": 30 },
         { "monster": "mon_fish_lobster", "x": 14, "y": 3 },
-        { "monster": "mon_fish_lbass", "x": 1, "y": 5 },
-        { "monster": "mon_fish_crayfish", "x": 15, "y": 5 },
-        { "monster": "mon_fish_eel", "x": 8, "y": 6 },
-        { "monster": "mon_fish_crayfish", "x": 14, "y": 6 },
-        { "monster": "mon_fish_lbass", "x": 2, "y": 7 },
-        { "monster": "mon_fish_eel", "x": 7, "y": 8 },
-        { "monster": "mon_fish_pickerel", "x": 14, "y": 8 },
-        { "monster": "mon_fish_carp", "x": 1, "y": 11 },
+        { "monster": "mon_fish_lbass", "x": 1, "y": 5, "chance": 50 },
+        { "monster": "mon_fish_crayfish", "x": 15, "y": 5, "chance": 85 },
+        { "monster": "mon_fish_eel", "x": 8, "y": 6, "chance": 85 },
+        { "monster": "mon_fish_crayfish", "x": 14, "y": 6, "chance": 85 },
+        { "monster": "mon_fish_lbass", "x": 2, "y": 7, "chance": 85 },
+        { "monster": "mon_fish_eel", "x": 7, "y": 8, "chance": 50 },
+        { "monster": "mon_fish_pickerel", "x": 14, "y": 8, "chance": 85 },
+        { "monster": "mon_fish_carp", "x": 1, "y": 11, "chance": 50 },
         { "monster": "mon_fish_carp", "x": 2, "y": 11 },
-        { "monster": "mon_fish_bluegill", "x": 13, "y": 11 },
-        { "monster": "mon_fish_carp", "x": 1, "y": 13 },
-        { "monster": "mon_fish_bluegill", "x": 15, "y": 13 },
-        { "monster": "mon_fish_carp", "x": 1, "y": 14 },
+        { "monster": "mon_fish_bluegill", "x": 13, "y": 11, "chance": 50 },
+        { "monster": "mon_fish_carp", "x": 1, "y": 13, "chance": 85 },
+        { "monster": "mon_fish_bluegill", "x": 15, "y": 13, "chance": 85 },
+        { "monster": "mon_fish_carp", "x": 1, "y": 14, "chance": 50 },
         { "monster": "mon_fish_bluegill", "x": 13, "y": 15 }
       ],
       "place_monsters": [
@@ -1131,13 +1196,13 @@
       "place_monster": [
         { "monster": "mon_chicken", "x": 14, "y": 7 },
         { "monster": "mon_duck", "x": 11, "y": 11 },
-        { "group": "GROUP_SHEEP", "x": 10, "y": 17 },
-        { "monster": "mon_rabbit", "x": 15, "y": 17 },
-        { "group": "GROUP_SHEEP", "x": 19, "y": 17 },
-        { "group": "GROUP_SHEEP", "x": 9, "y": 19 },
-        { "group": "GROUP_SHEEP", "x": 12, "y": 19 },
-        { "monster": "mon_rabbit", "x": 18, "y": 19 },
-        { "group": "GROUP_PIGS_ZOO", "x": [ 14, 20 ], "y": [ 10, 18 ], "repeat": [ 1, 5 ], "chance": 85 }
+        { "group": "GROUP_SHEEP_ZOO", "x": 10, "y": 17 },
+        { "monster": "mon_rabbit", "x": 15, "y": 17, "chance": 60 },
+        { "group": "GROUP_SHEEP_ZOO", "x": 19, "y": 17 },
+        { "group": "GROUP_SHEEP_ZOO", "x": 9, "y": 19 },
+        { "group": "GROUP_SHEEP_ZOO", "x": 12, "y": 19, "chance": 20 },
+        { "monster": "mon_rabbit", "x": 18, "y": 19, "chance": 30 },
+        { "group": "GROUP_PIGS_ZOO", "x": [ 14, 20 ], "y": [ 10, 18 ], "repeat": [ 1, 5 ] }
       ]
     }
   },

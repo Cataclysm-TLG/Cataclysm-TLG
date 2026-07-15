@@ -135,7 +135,7 @@ class monster : public Creature
         int get_hp_max( const bodypart_id & ) const override;
         int get_hp_max() const override;
         int hp_percentage() const override;
-        int get_eff_per() const override;
+        int spot_check() const override;
         void witness_thievery( item *it ) override;
 
         float get_mountable_weight_ratio() const;
@@ -222,9 +222,6 @@ class monster : public Creature
         bool will_move_to( map *here, const tripoint_bub_ms &p ) const;
         bool know_danger_at( const tripoint_bub_ms &p ) const;
         bool know_danger_at( map *here, const tripoint_bub_ms &p ) const;
-
-        bool will_reach( const point_bub_ms &p ); // Do we have plans to get to (x, y)?
-        int  turns_to_reach( const point_bub_ms &p ); // How long will it take?
 
         // Returns true if the monster has a current goal
         bool has_dest() const;
@@ -490,9 +487,6 @@ class monster : public Creature
         * @param amt amount of energy to consume. Is rounded down to kJ precision. Do not use negative values.
         * @return Actual amount of energy consumed
         */
-        units::energy use_mech_power( units::energy amt );
-        bool check_mech_powered() const;
-        int mech_str_addition() const;
 
         /**
          * Makes monster react to heard sound
@@ -507,11 +501,9 @@ class monster : public Creature
 
         bool is_electrical() const override;    // true if the monster produces electric radiation
 
-        bool is_fae() const override;    // true if the monster is a faerie creature
-
         bool is_nether() const override;    // true if the monster is from the nether
 
-        bool has_mind() const override;    // true if the monster is sapient and capable of reason
+        bool has_mind() const override;
 
         field_type_id bloodType() const override;
         field_type_id gibType() const override;

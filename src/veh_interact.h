@@ -29,15 +29,16 @@ struct requirement_data;
 
 /** Represents possible return values from the cant_do function. */
 enum class task_reason : int {
-    UNKNOWN_TASK = -1, //No such task
-    CAN_DO, //Task can be done
-    INVALID_TARGET, //No valid target i.e. can't "change tire" if no tire present
-    LACK_TOOLS, //Player doesn't have all the tools they need
-    NOT_FREE, //Part is attached to something else and can't be unmounted
-    LACK_SKILL, //Player doesn't have high enough mechanics skill
-    MOVING_VEHICLE, // vehicle is moving, no modifications allowed
-    LOW_MORALE, // Player has too low morale (for operations that require it)
-    LOW_LIGHT // Player cannot see enough to work (for operations that require it)
+    UNKNOWN_TASK = -1, // No such task.
+    CAN_DO, // Task can be done.
+    INVALID_TARGET, // No valid target i.e. can't "change tire" if no tire present.
+    LACK_TOOLS, // Lacking necessary tools.
+    NOT_FREE, // Part is attached to something else and can't be unmounted.
+    LACK_SKILL, // Not enough mechanics skill.
+    MOVING_VEHICLE, // Behicle is moving, no modifications allowed.
+    LOW_MORALE, // Morale too low (for operations that require it).
+    LOW_LIGHT, // Cannot see enough to work (for operations that require it).
+    BUSY, // Occupied with some other task.
 };
 
 class ui_adaptor;

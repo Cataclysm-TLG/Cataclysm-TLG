@@ -73,8 +73,11 @@ static const damage_type_id damage_acid( "acid" );
 
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_corroding( "corroding" );
-static const efftype_id effect_jumping( "jumping" );
+static const efftype_id effect_dashing( "dashing" );
+static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_invisibility( "invisibility" );
+static const efftype_id effect_jumping( "jumping" );
+static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_teleglow( "teleglow" );
 
 static const flag_id json_flag_FIT( "FIT" );
@@ -1324,7 +1327,7 @@ void spell_effect::spawn_ethereal_item( const spell &sp, Creature &caster,
                                             calendar::turn );
             granted.insert( granted.end(), group_items.begin(), group_items.end() );
         } else {
-            granted.emplace_back( sp.effect_data(), calendar::turn );
+            granted.emplace_back( itype_id( sp.effect_data() ), calendar::turn );
         }
     }
 
@@ -1669,6 +1672,10 @@ void spell_effect::charm_monster( const spell &sp, Creature &caster, const tripo
             mon->get_hp() <= sp.damage( caster ) ) {
             mon->unset_dest();
             mon->friendly += sp.duration( caster ) / 100;
+            if( mon->friendly != -1 && sp.has_flag( spell_flag::CHARM_PET ) ) {
+                mon->friendly = -1;
+                mon->add_effect( effect_pet, 1_turns, true );
+            }
         }
     }
 }
@@ -1931,6 +1938,8 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
         caster.add_effect( effect_airborne, 1_seconds, true );
         caster.add_effect( effect_jumping, 1_seconds, true, jump_vert );
         jumping = true;
+    } else {
+        caster.add_effect( effect_dashing, 1_seconds, true );
     }
     while( walk_point != trajectory.end() ) {
         if( caster_you != nullptr ) {
@@ -1938,7 +1947,7 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
             if( jumping && ( walk_point + 1 ) == trajectory.end() ) {
                 caster.remove_effect( effect_airborne );
             }
-            if( creatures.creature_at( here.get_bub( *walk_point ) ) ||
+            if( caster.has_effect( effect_downed ) || creatures.creature_at( here.get_bub( *walk_point ) ) ||
                 !g->walk_move( here.get_bub( *walk_point ), false ) ) {
                 if( walk_point != trajectory.begin() ) {
                     --walk_point;
@@ -1948,6 +1957,20 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
                 sp.create_field( here.get_bub( *( walk_point - 1 ) ), caster );
                 g->draw_ter();
             }
+        } else {
+            if( jumping && ( walk_point + 1 ) == trajectory.end() ) {
+                caster.remove_effect( effect_airborne );
+            }
+            if( caster.has_effect( effect_downed ) || creatures.creature_at( here.get_bub( *walk_point ) ) ) {
+                if( walk_point != trajectory.begin() ) {
+                    --walk_point;
+                }
+                break;
+            } else if( walk_point != trajectory.begin() ) {
+                sp.create_field( here.get_bub( *( walk_point - 1 ) ), caster );
+                g->draw_ter();
+            }
+            caster.setpos( here, here.get_bub( *walk_point ), !jumping );
         }
         ++walk_point;
     }
@@ -1955,6 +1978,8 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
         // Redundant effect removal for safety's sake.
         caster.remove_effect( effect_airborne );
         caster.remove_effect( effect_jumping );
+    } else {
+        caster.remove_effect( effect_dashing );
     }
     caster.set_moves( cur_moves );
     tripoint_bub_ms far_target;
@@ -1967,6 +1992,21 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
     const std::set<tripoint_bub_ms> hit_area = spell_effect_cone_range_override( params, source,
             far_target );
     damage_targets( sp, caster, hit_area );
+}
+
+void spell_effect::fling_away( const spell &sp, Creature &caster, const tripoint_bub_ms &target )
+{
+    int throwforce = sp.damage( caster );
+    if( throwforce <= 0 ) {
+        debugmsg( "ERROR: fling_away spell effect called with no damage.  Damage is required for throwforce." );
+        return;
+    }
+    creature_tracker &creatures = get_creature_tracker();
+    if( !creatures.creature_at( target ) || caster.pos_bub() == target ) {
+        return;
+    }
+    units::angle target_angle = coord_to_angle( caster.pos_bub(), target );
+    g->fling_creature( creatures.creature_at( target ), target_angle, throwforce, false );
 }
 
 void spell_effect::banishment( const spell &sp, Creature &caster, const tripoint_bub_ms &target )
@@ -2106,7 +2146,15 @@ void spell_effect::slime_split_on_death( const spell &sp, Creature &caster,
             }
 
             shared_ptr_fast<monster> mon = make_shared_fast<monster>( slime_id );
-            mon->ammo = mon->type->starting_ammo;
+            if( !mon->type->starting_ammo.empty() ) {
+                for( const auto &pair : mon->type->starting_ammo ) {
+                    const itype_id &ammo_type = pair.first;
+                    int max_amt = pair.second;
+                    int min_amt = std::min( mon->type->starting_ammo_min, pair.second );
+                    int qty = rng( min_amt, max_amt );
+                    mon->ammo[ ammo_type ] = qty;
+                }
+            }
             if( mon->will_move_to( dest ) && mon->know_danger_at( dest ) ) {
                 if( monster *const blob = g->place_critter_around( mon, dest, 0 ) ) {
                     sp.make_sound( dest, caster );

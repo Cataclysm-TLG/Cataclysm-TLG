@@ -19,8 +19,13 @@
 #include "calendar.h"
 #include "cata_lazy.h"
 #include "cata_utility.h"
+#include "character_id.h"
 #include "compatibility.h"
+#include "coordinates.h"
+#include "craft_command.h"
+#include "crafting_enums.h"
 #include "enums.h"
+#include "flat_set.h"
 #include "global_vars.h"
 #include "gun_mode.h"
 #include "io_tags.h"
@@ -28,6 +33,7 @@
 #include "item_contents.h"
 #include "item_location.h"
 #include "item_tname.h"
+#include "item_uid.h"
 #include "material.h"
 #include "math_parser_diag_value.h"
 #include "point.h"
@@ -45,6 +51,8 @@ class Character;
 class Creature;
 class JsonObject;
 class JsonOut;
+struct desired_wakeup;
+enum class item_wakeup_kind : uint8_t;
 class book_proficiency_bonuses;
 class enchantment;
 class enchant_cache;
@@ -200,7 +208,7 @@ struct stacking_info {
 class item : public visitable
 {
     public:
-        using FlagsSetType = std::set<flag_id>;
+        using FlagsSetType = cata::flat_set<flag_id>;
 
         item();
 
@@ -228,18 +236,17 @@ class item : public visitable
         /** For constructing in-progress disassemblies */
         item( const recipe *rec, int qty, item &component );
 
-        // Legacy constructor for constructing from string rather than itype_id
-        // TODO: remove this and migrate code using it.
-        template<typename... Args>
-        explicit item( const std::string &itype, Args &&... args ) :
-            item( itype_id( itype ), std::forward<Args>( args )... )
-        {}
-
         ~item() override;
 
         /** Return a pointer-like type that's automatically invalidated if this
          * item is destroyed or assigned-to */
         safe_reference<item> get_safe_reference();
+
+        /** Persistent unique identifier for this item instance.
+         * Returns const ref to avoid triggering item_uid's copy-generates-new semantics. */
+        const item_uid &uid() const {
+            return uid_;
+        }
 
         /**
          * Filter converting this instance to another type preserving all other aspects
@@ -882,6 +889,8 @@ class item : public visitable
         std::vector<item_pocket *> get_all_standard_pockets();
         std::vector<item_pocket *> get_all_ablative_pockets();
         std::vector<const item_pocket *> get_all_ablative_pockets() const;
+        std::vector<const item_pocket *> get_all_contained_and_mod_pockets() const;
+        std::vector<item_pocket *> get_all_contained_and_mod_pockets();
         /**
          * Updates the pockets of this item to be correct based on the mods that are installed.
          * Pockets which are modified that contain an item will be spilled
@@ -988,10 +997,12 @@ class item : public visitable
         int insert_cost( const item &it ) const;
 
         /**
-         * Puts the given item into this one.
+         * Puts the given item into this one. When @p quiet is true, failure
+         * returns silently instead of triggering a debugmsg.
          */
         ret_val<void> put_in( const item &payload, pocket_type pk_type,
-                              bool unseal_pockets = false, Character *carrier = nullptr );
+                              bool unseal_pockets = false, Character *carrier = nullptr,
+                              bool quiet = false );
         void force_insert_item( const item &it, pocket_type pk_type );
 
         /**
@@ -1041,6 +1052,14 @@ class item : public visitable
          * @param strict_boiling True if containers must be empty to have BOIL quality
          */
         int get_quality( const quality_id &id, bool strict_boiling = true ) const;
+        /**
+         * Speed modifier for a quality this item provides at >= level.
+         * Mirrors get_quality() resolution: inherent, charged (if crafter provided),
+         * BOIL special case, contained items.
+         * Returns 1.0f if item doesn't qualify or has no speed modifier.
+         */
+        float get_quality_speed( const quality_id &id, int level,
+                                 const Character *crafter = nullptr ) const;
 
         /**
          * Return true if this item's type is counted by charges
@@ -1164,7 +1183,7 @@ class item : public visitable
 
         /** an item is about to become rotten when shelf life has nearly elapsed */
         bool is_going_bad() const {
-            return get_relative_rot() > 0.9;
+            return goes_bad() && get_shelf_life() - rot < 12_hours;
         }
 
         /** returns true if item is now rotten after all shelf life has elapsed */
@@ -1498,6 +1517,14 @@ class item : public visitable
 
         bool leak( map &here, Character *carrier, const tripoint_bub_ms &pos,
                    item_pocket *pocke = nullptr );
+
+        // Producer for the wakeup scheduler.  Default empty.  `loc` lets
+        // producers vary their wakeups by where the item lives.
+        std::vector<desired_wakeup> enumerate_scheduled_wakeups( const item_location &loc ) const;
+
+        // Idempotent: receiving (kind, now) twice must not corrupt state.
+        void actualize_scheduled( item_wakeup_kind kind, time_point now,
+                                  const item_location &loc );
 
         struct link_data {
             /// State of the link's source connection, the end usually represented by the device/cable item itself. @ref link_state.
@@ -1920,9 +1947,9 @@ class item : public visitable
          * Callback when a player starts wielding the item. The item is already in the weapon
          * slot and is called from there.
          * @param p player that has started wielding item
-         * @param mv number of moves *already* spent wielding the weapon
+         * @param combat wielding for combat purposes
          */
-        void on_wield( Character &you );
+        void on_wield( Character &you, bool combat = true );
         /**
          * Callback when a player starts carrying the item. The item is already in the inventory
          * and is called from there. This is not called when the item is added to the inventory
@@ -1934,6 +1961,7 @@ class item : public visitable
          */
         void on_contents_changed();
 
+        bool can_use_relic( const Character &guy ) const;
         bool use_relic( Character &guy, const tripoint_bub_ms &pos );
         bool has_relic_recharge() const;
         bool has_relic_activation() const;
@@ -1969,6 +1997,7 @@ class item : public visitable
          * already used somewhere.
          */
         /*@{*/
+        //TODO: Add a set_var( const std::string &name, const cata_variant &id ) overload rather than using raw strings where appropriate
         double get_var( const std::string &key, double default_value ) const;
         std::string get_var( const std::string &key, std::string default_value = {} ) const;
         tripoint_abs_ms get_var( const std::string &key, tripoint_abs_ms default_value ) const;
@@ -1982,7 +2011,6 @@ class item : public visitable
         void remove_var( const std::string &key );
         diag_value const &get_value( const std::string &name ) const;
         diag_value const *maybe_get_value( const std::string &name ) const;
-        /** Whether the variable is defined at all. */
         bool has_var( const std::string &name ) const;
         /** Erase the value of the given variable. */
         void erase_var( const std::string &name );
@@ -2146,11 +2174,6 @@ class item : public visitable
          * Whether this is actually a seed, the seed functions won't be of much use for non-seeds.
          */
         bool is_seed() const;
-        /**
-         * Time it takes to grow from one stage to another. There are normally 4 plant stages:
-         * seed, seedling, mature and harvest. Non-seed items return 0.
-         */
-        time_duration get_plant_epoch( int num_epochs = 3 ) const;
         /**
          * The name of the plant as it appears in the various informational menus. This should be
          * translated. Returns an empty string for non-seed items.
@@ -2481,10 +2504,9 @@ class item : public visitable
         bool is_gun() const;
 
         /**
-         * Does this item have a variant associated with it
-         * If check_option, the return of this is dependent on the SHOW_x_VARIANTS option
+         * Does this item have a variant associated with it?
          */
-        bool has_itype_variant( bool check_option = true ) const;
+        bool has_itype_variant() const;
 
         /**
          * The variant associated with this item
@@ -2765,6 +2787,12 @@ class item : public visitable
         int gun_range( bool with_ammo = true ) const;
 
         /**
+         * Ratio (percent given as an int) of gun length to character height minus a 75% allowance.
+         * Creates problems if it's above 75%. At 125% (50% awkwardness) the weapon becomes unusable.
+         */
+        int gun_awkwardness( const Character &p ) const;
+
+        /**
          *  Get effective recoil considering handling, loaded ammo and effects of attached gunmods
          *  @param p player stats such as STR can alter effective recoil
          *  @param bipod whether any bipods should be considered
@@ -3001,8 +3029,50 @@ class item : public visitable
 
         void set_tools_to_continue( bool value );
         bool has_tools_to_continue() const;
-        void set_cached_tool_selections( const std::vector<comp_selection<tool_comp>> &selections );
-        const std::vector<comp_selection<tool_comp>> &get_cached_tool_selections() const;
+        // Per-step tool allocations, indexed by recipe step (single entry for
+        // stepless recipes).
+        void set_step_tool_allocs( const std::vector<std::vector<step_tool_alloc>> &allocs );
+        const std::vector<std::vector<step_tool_alloc>> &get_step_tool_allocs() const;
+
+        // Step iteration state for step recipes.
+        // get_current_step clamps to valid range as a defensive measure.
+        int get_current_step() const;
+        void set_current_step( int step );
+        double get_step_progress() const;
+        void set_step_progress( double progress );
+        void mod_step_progress( double delta );
+
+        // Per-step plan from the craft planning modal.
+        const std::vector<attention_plan> &get_step_plans() const;
+        void set_step_plans( std::vector<attention_plan> plans );
+
+        // Calendar tracking for the active passive step.
+        time_point get_passive_started_at() const;
+        void set_passive_started_at( time_point t );
+        time_point get_ready_at() const;
+        void set_ready_at( time_point t );
+        time_point get_alarm_at() const;
+        void set_alarm_at( time_point t );
+        time_point get_fail_at() const;
+        void set_fail_at( time_point t );
+        time_point get_pause_started_at() const;
+        void set_pause_started_at( time_point t );
+        time_point get_saved_ready_at() const;
+        void set_saved_ready_at( time_point t );
+        time_point get_saved_alarm_at() const;
+        void set_saved_alarm_at( time_point t );
+        time_point get_saved_fail_at() const;
+        void set_saved_fail_at( time_point t );
+        time_point get_env_check_at() const;
+        void set_env_check_at( time_point t );
+
+        character_id get_crafter_id() const;
+        void set_crafter_id( character_id id );
+
+        int get_passive_start_counter() const;
+        void set_passive_start_counter( int c );
+        int get_passive_end_counter() const;
+        void set_passive_end_counter( int c );
 
         std::vector<enchant_cache> get_proc_enchantments() const;
         std::vector<enchantment> get_defined_enchantments() const;
@@ -3087,6 +3157,9 @@ class item : public visitable
         std::list<const item *> all_ablative_armor() const;
 
         void clear_items();
+        /** Engage bulk-fill mode on this container's pockets. See item_pocket::begin_bulk_fill. */
+        void begin_bulk_fill();
+        void end_bulk_fill();
         bool empty() const;
         // ignores all pockets except CONTAINER pockets to check if this contents is empty.
         bool empty_container() const;
@@ -3258,9 +3331,45 @@ class item : public visitable
                 // If the crafter has insufficient tools to continue to the next 5% progress step
                 bool tools_to_continue = false;
                 int batch_size = -1;
-                std::vector<comp_selection<tool_comp>> cached_tool_selections;
+                std::vector<std::vector<step_tool_alloc>> step_tool_allocs;
                 std::optional<units::mass> cached_weight; // NOLINT(cata-serialize)
                 std::optional<units::volume> cached_volume; // NOLINT(cata-serialize)
+
+                // Step iteration state for step recipes.
+                // Authoritative: advanced by tracking consumed work against step budgets.
+                int current_step = 0;
+                double step_progress = 0.0; // base-speed moves consumed within current step
+
+                // Per-step plan from the planning modal.  Aligned with recipe steps_.
+                std::vector<attention_plan> step_plans;
+
+                // Calendar tracking for the active passive step.
+                // before_time_starts when no passive step is in flight.
+                time_point passive_started_at = calendar::before_time_starts;
+                time_point ready_at  = calendar::before_time_starts;
+                time_point alarm_at  = calendar::before_time_starts;
+                time_point fail_at   = calendar::before_time_starts;
+                // While paused, ready_at is the polling cursor; saved_* park
+                // the originals for restoration on unpause (slid by paused
+                // duration).  Without saving ready_at too, multiple pause
+                // polls would mutate it and lose the original deadline.
+                time_point pause_started_at = calendar::before_time_starts;
+                time_point saved_ready_at = calendar::before_time_starts;
+                time_point saved_alarm_at = calendar::before_time_starts;
+                time_point saved_fail_at  = calendar::before_time_starts;
+                // Periodic env-check cursor while step is live, has env
+                // reqs, and is not env-paused.  before_time_starts otherwise
+                // (during pause, ready_at is the 1-minute polling cursor).
+                time_point env_check_at = calendar::before_time_starts;
+
+                // Counter bounds snapshotted at passive-step entry; item_tname
+                // projects linearly between them without mutation.
+                int passive_start_counter = 0;
+                int passive_end_counter = 0;
+
+                // Original crafter (for env-check fallback when craft is on
+                // map/vehicle and the crafter is no longer on top of it).
+                character_id crafter_id;
 
                 // if this is an in progress disassembly as opposed to craft
                 bool disassembly = false;
@@ -3323,6 +3432,7 @@ class item : public visitable
         time_point last_temp_check = calendar::turn_zero;
         /// The time the item was created.
         time_point bday;
+        item_uid uid_; // persistent unique identifier, survives save/load
         /**
          * Current phase state, inherits a default at room temperature from
          * itype and can be changed through item processing.  This is a static

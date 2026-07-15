@@ -33,9 +33,10 @@
       {
         "id": "buff_aikido_static1",
         "name": "Aikido Stance",
-        "description": "By disregarding offense in favor of defense, you are better at protecting yourself.\n\nBlocked damage reduced by 100% of Dexterity, +2 blocking effectiveness, +1.0 Dodging skill.",
+        "description": "By disregarding offense in favor of defense, you are better at protecting yourself.\n\nEffects lost if downed, stunned, or staggered.\nBlocked damage reduced by 100% of Dexterity, +2 blocking effectiveness, +1 Dodge ability.",
         "unarmed_allowed": true,
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [
           { "stat": "block", "scaling-stat": "dex", "scale": 1.0 },
           { "stat": "block_effectiveness", "scale": 2.0 },
@@ -45,10 +46,11 @@
       {
         "id": "buff_aikido_static2",
         "name": "Intermediate Aikido",
-        "description": "An intermediate Aikido practitioner can protect themselves against multiple opponents.\n\nBlocked damage reduced by 100% of Dexterity, +1 blocking effectiveness, +1 block attempt, +1 dodge attempt.",
+        "description": "An intermediate Aikido practitioner can protect themselves against multiple opponents.\n\nEffects lost if downed, stunned, or staggered.\nBlocked damage reduced by 100% of Dexterity, +1 blocking effectiveness, +1 block attempt, +1 dodge attempt.",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "bonus_dodges": 1,
         "bonus_blocks": 1,
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "dex", "scale": 1.0 }, { "stat": "block_effectiveness", "scale": 1.0 } ]
@@ -56,10 +58,11 @@
       {
         "id": "buff_aikido_static3",
         "name": "Advanced Aikido",
-        "description": "An advanced Aikido practitioner can protect themselves against even more opponents than normal.\n\n+1 blocking effectiveness, +1 block attempt, +1 dodge attempt.",
+        "description": "An advanced Aikido practitioner can protect themselves against even more opponents than normal.\n\nEffects lost if downed, stunned, or staggered.\n+1 blocking effectiveness, +1 block attempt, +1 dodge attempt.",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 5 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "bonus_dodges": 1,
         "bonus_blocks": 1,
         "flat_bonuses": [ { "stat": "block_effectiveness", "scale": 1.0 } ]
@@ -110,14 +113,16 @@
       {
         "id": "buff_bojutsu_static",
         "name": "Bōjutsu Stance",
-        "description": "A agile stance that allows your blocks to reduce incoming damage.\n\nBlocked damage reduced by 100% of Dexterity.",
+        "description": "A agile stance that allows your blocks to reduce incoming damage.\n\nEffects lost if downed, stunned, or staggered.\nBlocked damage reduced by 100% of Dexterity.",
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "melee_allowed": true,
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "dex", "scale": 1 } ]
       },
       {
         "id": "buff_bojutsu_static2",
         "name": "Skilled Striking",
-        "description": "As you get more skilled you're able to begin targeting striking points that allow more for damage.\n\nMelee skill increases bash damage cap.",
+        "description": "As you get more skilled you're able to begin targeting striking points that allow more for damage.\n\nEffects lost if downed, stunned, or staggered.\nMelee skill increases bash damage cap.",
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "melee_allowed": true,
         "melee_bash_damage_cap_bonus": true,
         "skill_requirements": [ { "name": "melee", "level": 1 } ]
@@ -127,8 +132,9 @@
       {
         "id": "buff_bojutsu_onmove",
         "name": "Rolling Staff",
-        "description": "As you move you begin to rapidly and fluidly roll your staff between your hands.\n\n+10% bash damage.\nEnables \"Rolling Strike\" technique.\nLasts 1 second.",
+        "description": "As you move you begin to rapidly and fluidly roll your staff between your hands.\n\nEffects lost if downed, stunned, or staggered.\n+10% bash damage.\nEnables \"Rolling Strike\" technique.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "melee_allowed": true,
         "buff_duration": 1,
         "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.1 } ]
@@ -161,12 +167,14 @@
       {
         "id": "buff_barbaran_static",
         "name": "Barbaran Represa",
-        "description": "Sliding footwork enhances the crushing continuity of your attacks.\n\nArmor penetration increased by 75% of Strength.",
+        "description": "Sliding footwork enhances the crushing continuity of your attacks.\n\nEffects lost if downed, stunned, or staggered.\nArmor penetration increased by 50% of Strength.",
         "melee_allowed": true,
+        "forbidden_buffs_all": [ "buff_barbaran_onmove" ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [
-          { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 0.75 },
-          { "stat": "arpen", "type": "cut", "scaling-stat": "str", "scale": 0.75 },
-          { "stat": "arpen", "type": "stab", "scaling-stat": "str", "scale": 0.75 }
+          { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "arpen", "type": "cut", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "arpen", "type": "stab", "scaling-stat": "str", "scale": 0.5 }
         ]
       }
     ],
@@ -174,8 +182,9 @@
       {
         "id": "buff_barbaran_onblock",
         "name": "Reversing Destreza",
-        "description": "Blocking a key strike will turn the battle around.\n\n+5% move speed.\nLasts 3 seconds.  Stacks 2 times.",
+        "description": "Blocking a key strike will turn the battle around.\n\nEffects lost if downed, stunned, or staggered.\n+5% move speed.\nLasts 3 seconds.  Stacks 2 times.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "melee_allowed": true,
         "max_stacks": 2,
         "mult_bonuses": [ { "stat": "movecost", "scale": 0.95 } ],
@@ -186,8 +195,9 @@
       {
         "id": "buff_barbaran_onkill",
         "name": "Movimiento Natural",
-        "description": "Formal victory is attained, and your mind is cleared to focus on your next moves.\n\n+1 block attempt.\nLasts 5 seconds.",
+        "description": "Formal victory is attained, and your mind is cleared to focus on your next moves.\n\nEffects lost if downed, stunned, or staggered.\n+1 block attempt.\nLasts 5 seconds.",
         "skill_requirements": [ { "name": "melee", "level": 5 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "melee_allowed": true,
         "buff_duration": 5,
         "bonus_blocks": 1
@@ -197,8 +207,9 @@
       {
         "id": "buff_barbaran_onmove",
         "name": "Ricasso Step",
-        "description": "You switch or sturdy your grip mid-step to aid your blocking.\n\nBlocked damage reduced by 40% of Strength.\nLasts 3 seconds.  Stacks 3 times.",
+        "description": "You switch or sturdy your grip mid-step to aid your blocking.\n\nEffects lost if downed, stunned, or staggered.\nBlocked damage reduced by 40% of Strength.\nLasts 3 seconds.  Stacks 3 times.",
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "melee_allowed": true,
         "max_stacks": 3,
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "str", "scale": 0.4 } ],
@@ -209,14 +220,14 @@
       {
         "id": "buff_barbaran_onpause",
         "name": "Vulgar Preparation",
-        "description": "You prepare for the final crushing strike.\n\nAccuracy increased by 15% of Strength, armor penetration increased by 225% of Strength.\nLasts 1 second.",
+        "description": "You prepare for the final crushing strike.\n\nAccuracy increased by 15% of Strength, armor penetration increased by 50% of Strength.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 4 } ],
         "melee_allowed": true,
         "flat_bonuses": [
           { "stat": "hit", "scaling-stat": "str", "scale": 0.15 },
-          { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 2.25 },
-          { "stat": "arpen", "type": "cut", "scaling-stat": "str", "scale": 2.25 },
-          { "stat": "arpen", "type": "stab", "scaling-stat": "str", "scale": 2.25 }
+          { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "arpen", "type": "cut", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "arpen", "type": "stab", "scaling-stat": "str", "scale": 0.5 }
         ],
         "buff_duration": 1
       }
@@ -237,8 +248,9 @@
       {
         "id": "buff_boxing_static",
         "name": "Boxing Stance",
-        "description": "A solid stance allows you block more damage than normal and deliver better punches.\n\n+1 accuracy, blocked damage reduced by 50% of Strength.",
+        "description": "A solid stance allows you block more damage than normal and deliver better punches.\n\nEffects lost if downed, stunned, or staggered.\n+1 accuracy, blocked damage reduced by 50% of Strength.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "hit", "scale": 1.0 }, { "stat": "block", "scaling-stat": "str", "scale": 0.5 } ]
       }
     ],
@@ -246,8 +258,9 @@
       {
         "id": "buff_boxing_onmove",
         "name": "Footwork",
-        "description": "You make yourself harder to hit by bobbing and weaving as you move.\n\n+1.0 Dodging skill.\nLasts 1 second.  Stacks 2 times.",
+        "description": "You make yourself harder to hit by bobbing and weaving as you move.\n\nEffects lost if downed, stunned, or staggered.\n+1 Dodge ability.\nLasts 1 second.  Stacks 2 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "unarmed_allowed": true,
         "buff_duration": 1,
         "max_stacks": 2,
@@ -296,8 +309,8 @@
     "onpause_buffs": [
       {
         "id": "buff_brawling_onpause",
-        "name": "Preparation to Hit",
-        "description": "You take a moment to prepare your stance before the enemy, allowing you to hit a little more accurately.\n\n+1 accuracy.  Lasts 2 seconds.  Stacks 2 times",
+        "name": "Wind-Up",
+        "description": "By taking a moment to prepare your swing, you can be more confident it will connect.\n\n+1 accuracy.  Lasts 2 seconds.  Stacks 2 times",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
@@ -330,8 +343,9 @@
       {
         "id": "buff_capoeira_static",
         "name": "Capoeira Stance",
-        "description": "You never stop moving while performing the ginga.  This makes you very mobile while fighting.\n\n+1.0 Dodging skill, +1 dodge attempt.",
+        "description": "You never stop moving while performing the ginga.  This makes you very mobile while fighting.\n\nEffects lost if stunned or staggered.\n+1 Dodge ability, +1 dodge attempt.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "bonus_dodges": 1,
         "flat_bonuses": [ { "stat": "dodge", "scale": 1.0 } ]
       }
@@ -340,9 +354,10 @@
       {
         "id": "buff_capoeira_onmiss",
         "name": "Capoeira Tempo",
-        "description": "Hit or miss, it's just part of the dance!  And the best part is about to start!\n\n+5% damage.\nLasts 1 second.  Stacks 3 times.",
+        "description": "Hit or miss, it's just part of the dance!  And the best part is about to start!\n\nEffects lost if stunned or staggered.\n+5% damage.\nLasts 1 second.  Stacks 3 times.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "buff_duration": 1,
         "max_stacks": 3,
         "mult_bonuses": [
@@ -356,9 +371,10 @@
       {
         "id": "buff_capoeira_onmove",
         "name": "Capoeira Momentum",
-        "description": "You can feel the rhythm as you move.  You are harder to hit, and your kicks are even more amazing!\n\n+1.0 Dodging skill.\nEnables \"Spin Kick\" and \"Sweep Kick\" techniques.\nLasts 3 seconds.",
+        "description": "You can feel the rhythm as you move.  You are harder to hit, and your kicks are even more amazing!\n\nEffects lost if stunned or staggered.\n+1 Dodge ability.\nEnables \"Spin Kick\" and \"Sweep Kick\" techniques.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "buff_duration": 3,
         "flat_bonuses": [ { "stat": "dodge", "scale": 1.0 } ]
       }
@@ -384,8 +400,9 @@
       {
         "id": "buff_crane_static1",
         "name": "Crane's Precision",
-        "description": "Your attacks strike at your opponents' weak spots with speed and precision instead of brute force.\n\nBash damage increased by 75% of Dexterity but decreased by 75% of Strength.",
+        "description": "Your attacks strike at your opponents' weak spots with speed and precision instead of brute force.\n\nEffects lost if downed, stunned, or staggered.\nBash damage increased by 75% of Dexterity but decreased by 75% of Strength.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [
           { "stat": "damage", "type": "bash", "scaling-stat": "dex", "scale": 0.75 },
           { "stat": "damage", "type": "bash", "scaling-stat": "str", "scale": -0.75 }
@@ -394,14 +411,16 @@
       {
         "id": "buff_crane_static2",
         "name": "Crane's Stance",
-        "description": "Like the beautiful crane, you are very skilled at evading danger.\n\n+2.0 Dodging skill.",
+        "description": "Like the beautiful crane, you are very skilled at evading danger.\n\nEffects lost if downed, stunned, or staggered.\n+2.0 Dodging skill.",
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "unarmed_allowed": true,
         "flat_bonuses": [ { "stat": "dodge", "scale": 2.0 } ]
       },
       {
         "id": "buff_crane_static3",
         "name": "Crane's Grace",
-        "description": "Masters of the Crane style can evade multiple foes with ease.\n\n+2 dodge attempts.",
+        "description": "Masters of the Crane style can evade multiple foes with ease.\n\nEffects lost if downed, stunned, or staggered.\n+2 dodge attempts.",
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 5 } ],
         "bonus_dodges": 2
@@ -411,9 +430,10 @@
       {
         "id": "buff_crane_ondodge",
         "name": "Crane's Flight",
-        "description": "Much like the crane, you are quick to avoid danger and strike back.\n\n+1 accuracy, +1.0 Dodging skill.\nEnables \"Crane Kick\" and \"Crane Strike\" techniques.\nLasts 3 seconds.",
+        "description": "Much like the crane, you are quick to avoid danger and strike back.\n\nEffects lost if downed, stunned, or staggered.\n+1 accuracy, +1 Dodge ability.\nEnables \"Crane Kick\" and \"Crane Strike\" techniques.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 3,
         "flat_bonuses": [ { "stat": "hit", "scale": 1.0 }, { "stat": "dodge", "scale": 1.0 } ]
       }
@@ -441,8 +461,9 @@
       {
         "id": "buff_dragon_static",
         "name": "Dragon's Knowledge",
-        "description": "You plan your attacks far in advance, relying on your intuition instead of your speed to strike true.\n\nAccuracy increased by 25% of Intelligence but decreased by 25% of Dexterity, bash damage increased by 75% of Intelligence but decreased by 75% of Strength.",
+        "description": "You plan your attacks far in advance, relying on your intuition instead of your speed to strike true.\n\nEffects lost if stunned.\nAccuracy increased by 25% of Intelligence but decreased by 25% of Dexterity, bash damage increased by 75% of Intelligence but decreased by 75% of Strength.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "stunned" ],
         "flat_bonuses": [
           { "stat": "hit", "scaling-stat": "int", "scale": 0.25 },
           { "stat": "hit", "scaling-stat": "dex", "scale": -0.25 },
@@ -455,9 +476,10 @@
       {
         "id": "buff_dragon_onblock",
         "name": "Dragon's Vortex",
-        "description": "Life and combat are a circle.  An attack leads to a counter and to an attack once again.  Seek to complete this loop.\n\n+10% damage.\nLasts 3 seconds.",
+        "description": "Life and combat are a circle.  An attack leads to a counter and to an attack once again.  Seek to complete this loop.\n\nEffects lost if stunned.\n+10% damage.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
+        "forbidden_effects_any": [ "stunned" ],
         "buff_duration": 3,
         "mult_bonuses": [
           { "stat": "damage", "type": "bash", "scale": 1.1 },
@@ -470,9 +492,10 @@
       {
         "id": "buff_dragon_ondodge",
         "name": "Dragon Wing",
-        "description": "Life and combat are a circle.  An attack leads to a counter and to an attack once again.  Seek to complete this loop.\n\n+10% damage.\nLasts 3 seconds.",
+        "description": "Life and combat are a circle.  An attack leads to a counter and to an attack once again.  Seek to complete this loop.\n\nEffects lost if stunned.\n+10% damage.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
+        "forbidden_effects_any": [ "stunned" ],
         "buff_duration": 3,
         "mult_bonuses": [
           { "stat": "damage", "type": "bash", "scale": 1.1 },
@@ -485,9 +508,10 @@
       {
         "id": "buff_dragon_onpause",
         "name": "Dragon Power",
-        "description": "You take a moment to reflect on battles past and to come.  This insight will protect you from future harm.\n\n+2 blocking effectiveness, blocked damage reduced by 100% of Intelligence, +1.0 Dodging skill.\nLasts 2 seconds.",
+        "description": "You take a moment to reflect on battles past and to come.  This insight will protect you from future harm.\n\nEffects lost if stunned.\n+2 blocking effectiveness, blocked damage reduced by 100% of Intelligence, +1 Dodge ability.\nLasts 2 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
+        "forbidden_effects_any": [ "stunned" ],
         "buff_duration": 2,
         "flat_bonuses": [
           { "stat": "block_effectiveness", "scale": 2.0 },
@@ -513,8 +537,9 @@
       {
         "id": "buff_eskrima_static",
         "name": "Eskrima Stance",
-        "description": "You are skilled at getting the most out of your weapons.  The term 'weapon' might be very subjective.\n\n+2 accuracy.",
+        "description": "You are skilled at getting the most out of your weapons.  The term 'weapon' might be very subjective.\n\nEffects lost if downed, stunned, or staggered.\n+2 accuracy.",
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "hit", "scale": 2.0 } ]
       }
     ],
@@ -558,8 +583,9 @@
       {
         "id": "buff_fencing_static",
         "name": "Fencing Stance",
-        "description": "Your side stance reduces the chance that you will be harmed in combat.\n\nBlocked damage reduced by 50% of Dexterity.",
+        "description": "Your side stance reduces the chance that you will be harmed in combat.\n\nEffects lost if downed, stunned, or staggered.\nBlocked damage reduced by 50% of Dexterity.",
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "dex", "scale": 0.5 } ]
       }
     ],
@@ -567,9 +593,10 @@
       {
         "id": "buff_fencing_onblock",
         "name": "Parry",
-        "description": "Your next strike will find its mark much easier after your parry.\n\n+1 accuracy.\nLasts 1 second.",
+        "description": "Your next strike will find its mark much easier after your parry.\n\nEffects lost if downed, stunned, or staggered.\n+1 accuracy.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 1,
         "flat_bonuses": [ { "stat": "hit", "scale": 1.0 } ]
       }
@@ -613,8 +640,9 @@
       {
         "id": "buff_medievalpole_static",
         "name": "Stand Your Ground",
-        "description": "You are stalwart and will not budge against any threat.\n\n+2 blocking effectiveness, +1 block attempt, -1.0 Dodging skill, blocked damage reduced by 50% of Strength.",
+        "description": "You are stalwart and will not budge against any threat.\n\nEffects lost if downed, stunned, or staggered.\n+2 blocking effectiveness, +1 block attempt, -1 Dodge ability, blocked damage reduced by 50% of Strength.",
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "bonus_blocks": 1,
         "flat_bonuses": [
           { "stat": "block_effectiveness", "scale": 2.0 },
@@ -627,7 +655,7 @@
       {
         "id": "buff_medievalpole_onmove",
         "name": "Tactical Retreat",
-        "description": "You moved and nullified the effects of Stand Your Ground!\n\n-2 blocking effectiveness, -1 block attempt, +1.0 Dodging skill, blocked damage increased by 50% of Strength.\nPrevents \"High Round Strike\" technique.\nLasts 2 seconds.",
+        "description": "You moved and nullified the effects of Stand Your Ground!\n\n-2 blocking effectiveness, -1 block attempt, +1 Dodge ability, blocked damage increased by 50% of Strength.\nPrevents \"High Round Strike\" technique.\nLasts 2 seconds.",
         "melee_allowed": true,
         "persists": true,
         "buff_duration": 2,
@@ -643,8 +671,9 @@
       {
         "id": "buff_medievalpole_onmiss",
         "name": "Tactical Feinting",
-        "description": "They fell for your feint!\n\nEnables \"Hook and Drag\" technique.\nLasts 1 second.",
+        "description": "They fell for your feint!\n\nEffects lost if downed, stunned, or staggered.\nEnables \"Hook and Drag\" technique.\nLasts 1 second.",
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
         "buff_duration": 1
       }
@@ -653,9 +682,10 @@
       {
         "id": "buff_medievalpole_onblock",
         "name": "Defense Break",
-        "description": "Each successful block reveals an opening in your opponent's guard.\n\n+1 accuracy.\nEnables \"Displace and Hook\" technique.\nLasts 1 second.  Stacks 3 times.",
+        "description": "Each successful block reveals an opening in your opponent's guard.\n\nEffects lost if downed, stunned, or staggered.\n+1 accuracy.\nEnables \"Displace and Hook\" technique.\nLasts 1 second.  Stacks 3 times.",
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 1,
         "max_stacks": 3,
         "flat_bonuses": [ { "stat": "hit", "scale": 1.0 } ]
@@ -720,9 +750,10 @@
       {
         "id": "buff_karate_static",
         "name": "Karate Stance",
-        "description": "Your no-nonsense stance allows you hit more accurately.\n\n+2 accuracy.",
+        "description": "Your no-nonsense stance allows you hit more accurately.\n\nEffects lost if downed, stunned, or staggered.\n+2 accuracy.",
         "unarmed_allowed": true,
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "hit", "scale": 2.0 } ]
       }
     ],
@@ -730,19 +761,58 @@
       {
         "id": "buff_karate_onhit",
         "name": "Karate Kata",
-        "description": "Landing a hit allows you to perfectly position yourself for maximum defense against multiple opponents.\n\n+1 block attempt, +1 dodge attempt, blocked damage reduced by 50% of Strength, +10% move speed.\nLasts 2 seconds.",
+        "description": "Landing a hit allows you to perfectly position yourself for maximum defense against multiple opponents.\n\nEffects lost if downed, stunned, or staggered.\n+1 block attempt, +1 dodge attempt, blocked damage reduced by 50% of Strength, +10% move speed.\nLasts 2 seconds.",
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
         "buff_duration": 2,
         "bonus_blocks": 1,
         "bonus_dodges": 1,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "str", "scale": 0.5 } ],
         "mult_bonuses": [ { "stat": "movecost", "scale": 0.9 } ]
       }
     ],
     "techniques": [ "tec_karate_rapid", "tec_karate_precise", "tec_karate_roundhouse", "tec_karate_weapon", "tec_karate_weapon_crit" ],
     "weapon_category": [ "QUARTERSTAVES", "KARATE_WEAPONS" ]
+  },
+  {
+    "type": "martial_art",
+    "id": "style_kalaripayattu",
+    "name": { "str": "Kalaripayattu" },
+    "description": "Kalaripayattu originates from India's Kerala region.  In modern times it was frequently seen as performance, but its roots go back to the battlefields of the 11th century, where warriors with blades and little to no armor needed a combat system that would keep them out of harm's way long enough to deliver a decisive blow.",
+    "initiate": [ "You dip low and assume a grounded stance.", "%s dips low and assumes a grounded stance." ],
+    "priority": 1,
+    "learn_difficulty": 4,
+    "static_buffs": [
+      {
+        "id": "buff_kalaripayattu_chuvadu",
+        "name": "Chuvadu",
+        "description": "The steps for attack keep you mobile and centered as you seek an opening.\n\nEffects lost if downed, stunned, or staggered.\n+1 Dodge ability,\n+1 Dodge attempt.",
+        "melee_allowed": true,
+        "bonus_dodges": 1,
+        "forbidden_buffs_all": [ "buff_kalaripayattu_simha_vadivu" ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
+        "flat_bonuses": [ { "stat": "dodge", "scale": 1.0 } ]
+      }
+    ],
+    "oncrit_buffs": [
+      {
+        "id": "buff_kalaripayattu_simha_vadivu",
+        "name": "Simha Vadivu",
+        "melee_allowed": true,
+        "description": "After striking a critical blow, you have entered the lion stance, foregoing evasion and mobility to press the attack with deadly precision.",
+        "skill_requirements": [ { "name": "melee", "level": 3 } ],
+        "buff_duration": 5
+      }
+    ],
+    "techniques": [
+      "tec_kalaripayattu_successive_strike",
+      "tec_kalaripayattu_chakra_veeshu",
+      "tec_kalaripayattu_marma_sastram",
+      "tec_kalaripayattu_focused_strike"
+    ],
+    "weapon_category": [ "BATONS", "KNIVES", "MEDIUM_SWORDS", "SHORT_SWORDS", "WHIPS" ]
   },
   {
     "type": "martial_art",
@@ -758,8 +828,9 @@
       {
         "id": "buff_kickboxing_stance_static",
         "name": "Kick stance",
-        "description": "You have adopted a stance which allows for greater mobility and stability.  Your hands are in a guard position with elbows forward to protect yourself.\n\nBlocked damage reduced by 25% of Strength.\n+1.0 Dodging skill",
+        "description": "You have adopted a stance which allows for greater mobility and stability.  Your hands are in a guard position with elbows forward to protect yourself.\n\nEffects lost if stunned, or staggered.\nBlocked damage reduced by 25% of Strength.\n+1 Dodge ability",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "str", "scale": 0.5 }, { "stat": "dodge", "scale": 1.0 } ]
       }
     ],
@@ -785,10 +856,11 @@
       {
         "id": "buff_krav_maga_static",
         "name": "Krav Maga Stance",
-        "description": "Your training makes it easier to land hits and fight multiple opponents.\n\n+1 accuracy, +1 block attempt.",
+        "description": "Your training makes it easier to land hits and fight multiple opponents.\n\nEffects lost if stunned, or staggered.\n+1 accuracy, +1 block attempt.",
         "melee_allowed": true,
         "unarmed_allowed": true,
         "bonus_blocks": 1,
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "hit", "scale": 1.0 } ]
       }
     ],
@@ -826,8 +898,9 @@
       {
         "id": "buff_leopard_static1",
         "name": "Leopard's Strategy",
-        "description": "You fight by overwhelming your opponents with speedy strikes that are much harder to defend against.\n\nBash damage increased by 75% of Dexterity but decreased by 75% of Strength.",
+        "description": "You fight by overwhelming your opponents with speedy strikes that are much harder to defend against.\n\nEffects lost if downed, stunned, or staggered.\nBash damage increased by 75% of Dexterity but decreased by 75% of Strength.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [
           { "stat": "damage", "type": "bash", "scaling-stat": "dex", "scale": 0.75 },
           { "stat": "damage", "type": "bash", "scaling-stat": "str", "scale": -0.75 }
@@ -836,8 +909,9 @@
       {
         "id": "buff_leopard_static2",
         "name": "Leopard's Ambush",
-        "description": "Go for the throat and take out your foes immediately!\n\nCritical hit chance increased by 100% of Dexterity.",
+        "description": "Go for the throat and take out your foes immediately!\n\nEffects lost if stunned or staggered.\nCritical hit chance increased by 100% of Dexterity.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "crit_chance", "scaling-stat": "dex", "scale": 1.0 } ]
       }
     ],
@@ -845,7 +919,7 @@
       {
         "id": "buff_leopard_oncrit",
         "name": "Leopard's Agility",
-        "description": "Just like a cat, you are quick, agile, and hard to pin down.\n\n+1.0 Dodging skill.\nLasts 2 seconds.",
+        "description": "Just like a cat, you are quick, agile, and hard to pin down.\n\n+1 Dodge ability.\nLasts 2 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "buff_duration": 2,
@@ -877,9 +951,10 @@
       {
         "id": "buff_swordsmanship_static",
         "name": "Swordsman's Stance",
-        "description": "Through chivalry and vigilance, your defense with a blade has increased.\n\n+1 block attempt, blocked damage reduced by 50% of Strength.",
+        "description": "Through chivalry and vigilance, your defense with a blade has increased.\n\nEffects lost if downed, stunned, or staggered.\n+1 block attempt, blocked damage reduced by 50% of Strength.",
         "melee_allowed": true,
         "bonus_blocks": 1,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "str", "scale": 0.5 } ]
       }
     ],
@@ -940,6 +1015,7 @@
         "name": "Muay Thai Stance",
         "description": "Strength is everything in Muay Thai and you know how to make the most of yours.\n\nBlocked damage reduced by 50% of Strength.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "str", "scale": 0.5 } ]
       }
     ],
@@ -980,19 +1056,21 @@
       {
         "id": "buff_ninjutsu_static1",
         "name": "Ninjutsu Stance",
-        "description": "Your training allows you to make no noise when attacking and less noise when moving around.\n\nMelee and unarmed attacks generate 0 noise, moving generates 1/2 as much noise.",
+        "description": "Your training allows you to make no noise when attacking and less noise when moving around.\n\nEffects lost if downed, stunned, or staggered.\nMelee and unarmed attacks generate 0 noise, moving generates 1/2 as much noise.",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "quiet": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "stealthy": true
       },
       {
         "id": "buff_ninjutsu_static2",
         "name": "Sneak Attack",
-        "description": "To a true shinobi, the first strike and the last strike are one and the same.\n\n+25% critical hit chance.",
+        "description": "To a true shinobi, the first strike and the last strike are one and the same.\n\nEffects lost if downed, stunned, or staggered.\n+25% critical hit chance.",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "forbidden_buffs_all": [ "buff_ninjutsu_onattack" ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "crit_chance", "scale": 25.0 } ]
       }
     ],
@@ -1011,10 +1089,11 @@
       {
         "id": "buff_ninjutsu_onmove",
         "name": "Momentum Shift",
-        "description": "Ninja are trained to be extremely agile and mobile.\n\n+1.0 Dodging skill, accuracy increased by 20% of Dexterity.\nLasts 1 second.",
+        "description": "Ninja are trained to be extremely agile and mobile.\n\nEffects lost if downed, stunned, or staggered.\n+1 Dodge ability, accuracy increased by 20% of Dexterity.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 1,
         "flat_bonuses": [ { "stat": "dodge", "scale": 1.0 }, { "stat": "hit", "scaling-stat": "dex", "scale": 0.2 } ]
       }
@@ -1058,8 +1137,9 @@
       {
         "id": "buff_niten_static",
         "name": "Niten Ichi-Ryu Stance",
-        "description": "Cautious watchful eyes,\nmeasure and display your skill.\nPractice makes perfect.\n\nArmor penetration increased by 50% of Perception, blocked damage reduced by 100% of Perception.",
+        "description": "Cautious watchful eyes,\nmeasure and display your skill.\nPractice makes perfect.\n\nEffects lost if downed, stunned, or staggered.\nArmor penetration increased by 50% of Perception, blocked damage reduced by 100% of Perception.",
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [
           { "stat": "arpen", "type": "bash", "scaling-stat": "per", "scale": 0.5 },
           { "stat": "arpen", "type": "cut", "scaling-stat": "per", "scale": 0.5 },
@@ -1083,7 +1163,7 @@
       {
         "id": "buff_niten_onattack",
         "name": "Falling Leaf",
-        "description": "A sharp sword cuts true.\nAlthough, all things fade with time.\nRestraint hones your skills.\n\n-1.0 Dodging skill, -5% damage.\nLasts 1 second.  Stacks 5 times.",
+        "description": "A sharp sword cuts true.\nAlthough, all things fade with time.\nRestraint hones your skills.\n\n-1 Dodge ability, -5% damage.\nLasts 1 second.  Stacks 5 times.",
         "melee_allowed": true,
         "buff_duration": 1,
         "max_stacks": 5,
@@ -1133,8 +1213,9 @@
       {
         "id": "buff_pankration_ondodge",
         "name": "Counter Chance",
-        "description": "The enemy has presented an opening in their defense.\n\n+10% damage.\nEnables \"Close Combat\" buff.\nLasts 1 second.",
+        "description": "The enemy has presented an opening in their defense.\n\nEffects lost if stunned or staggered.\n+10% damage.\nEnables \"Close Combat\" buff.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "unarmed_allowed": true,
         "buff_duration": 1,
         "mult_bonuses": [
@@ -1148,10 +1229,11 @@
       {
         "id": "buff_pankration_oncrit",
         "name": "Close Combat",
-        "description": "You have your opponent right where you want them!\n\n+20% damage.\nLasts 1 second.",
+        "description": "You have your opponent right where you want them!\n\nEffects lost if stunned or staggered.\n+20% damage.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 4 } ],
         "unarmed_allowed": true,
         "required_buffs_all": [ "buff_pankration_ondodge" ],
+        "forbidden_effects_any": [ "staggered", "stunned" ],
         "buff_duration": 1,
         "mult_bonuses": [
           { "stat": "damage", "type": "bash", "scale": 1.2 },
@@ -1172,7 +1254,7 @@
     "type": "martial_art",
     "id": "style_silat",
     "name": { "str": "Silat" },
-    "description": "Pencak Silat, of Indonesian origin, is a fighting style that covers the use of short blades and bludgeons.  Fighters stay low and mobile to avoid attacks, then unleash deadly critical hits.",
+    "description": "Pencak Silat, of Indonesian origin, is a fighting style that covers the use of short blades and batons.  Fighters stay low and mobile to avoid attacks, then unleash deadly critical hits.",
     "initiate": [ "You give a salute of respect as you prepare for combat.", "%s gives a combat salute." ],
     "priority": 1,
     "learn_difficulty": 7,
@@ -1182,8 +1264,9 @@
       {
         "id": "buff_silat_static",
         "name": "Silat Stance",
-        "description": "You try to stay as loose as possible when fighting to have more chances to dodge.\n\n+1 dodge attempt.",
+        "description": "You try to stay as loose as possible when fighting to have more chances to dodge.\n\nEffects lost if downed, stunned, or staggered.\n+1 dodge attempt.",
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "bonus_dodges": 1
       }
     ],
@@ -1191,9 +1274,10 @@
       {
         "id": "buff_silat_ondodge",
         "name": "Silat Appraisal",
-        "description": "Each time you dodge an attack, you learn a bit more about your opponent's fighting style.  This allows you to make more precise attacks against them.\n\nAccuracy increased by 15% of Dexterity.\nLasts 2 seconds.  Stacks 3 times.",
+        "description": "Each time you dodge an attack, you learn a bit more about your opponent's fighting style.  This allows you to make more precise attacks against them.\n\nEffects lost if downed, stunned, or staggered.\nAccuracy increased by 15% of Dexterity.\nLasts 2 seconds.  Stacks 3 times.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 2,
         "max_stacks": 3,
         "flat_bonuses": [ { "stat": "hit", "scaling-stat": "dex", "scale": 0.15 } ]
@@ -1203,9 +1287,10 @@
       {
         "id": "buff_silat_onmove",
         "name": "Silat Ambush",
-        "description": "You stay low as you move, making it harder for enemies to defend against you.\n\n+5% critical hit chance.\nLasts 1 second.",
+        "description": "You stay low as you move, making it harder for enemies to defend against you.\n\nEffects lost if downed, stunned, or staggered.\n+5% critical hit chance.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 1,
         "flat_bonuses": [ { "stat": "crit_chance", "scale": 5.0 } ]
       }
@@ -1226,8 +1311,9 @@
       {
         "id": "buff_snake_static",
         "name": "Snake's Sight",
-        "description": "You are patient and know where to hit your opponent for best results.\n\nAccuracy increased by 25% of Perception but decreased by 25% of Dexterity, bash damage increased by 75% of Perception but decreased by 75% of Strength.",
+        "description": "You are patient and know where to hit your opponent for best results.\n\nEffects lost if downed, stunned, or staggered.\nAccuracy increased by 25% of Perception but decreased by 25% of Dexterity, bash damage increased by 75% of Perception but decreased by 75% of Strength.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [
           { "stat": "hit", "scaling-stat": "per", "scale": 0.25 },
           { "stat": "hit", "scaling-stat": "dex", "scale": -0.25 },
@@ -1240,9 +1326,10 @@
       {
         "id": "buff_snake_onhit",
         "name": "Snake Bite",
-        "description": "Each snake bite is more painful than the last.\n\nArmor penetration increased by 25% of Perception.\nLasts 2 seconds.  Stacks 4 times.",
+        "description": "Each snake bite is more painful than the last.\n\nEffects lost if downed, stunned, or staggered.\nArmor penetration increased by 25% of Perception.\nLasts 2 seconds.  Stacks 4 times.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 2,
         "max_stacks": 4,
         "flat_bonuses": [
@@ -1256,9 +1343,10 @@
       {
         "id": "buff_snake_oncrit",
         "name": "Snake Fang",
-        "description": "You hit a weakpoint!  Your next attack will be extra painful.\n\nArmor penetration increased by 100% of Perception.\nLasts 1 second.",
+        "description": "You hit a weakpoint!  Your next attack will be extra painful.\n\nEffects lost if downed, stunned, or staggered.\nArmor penetration increased by 100% of Perception.\nLasts 1 second.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 1,
         "flat_bonuses": [
           { "stat": "arpen", "type": "bash", "scaling-stat": "per", "scale": 1.0 },
@@ -1271,8 +1359,9 @@
       {
         "id": "buff_snake_onpause",
         "name": "Snake's Coil",
-        "description": "Every snake waits for the perfect moment to strike.  Aim as your opponents approach and attack their weak spots without mercy!\n\n+1 accuracy, +1 blocking effectiveness, +5% critical hit chance.\nLasts 4 seconds.  Stacks 3 times.",
+        "description": "Every snake waits for the perfect moment to strike.  Aim as your opponents approach and attack their weak spots without mercy!\n\nEffects lost if downed, stunned, or staggered.\n+1 accuracy, +1 blocking effectiveness, +5% critical hit chance.\nLasts 4 seconds.  Stacks 3 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "unarmed_allowed": true,
         "buff_duration": 4,
         "max_stacks": 3,
@@ -1307,8 +1396,9 @@
       {
         "id": "buff_sojutsu_static",
         "name": "Sōjutsu Stance",
-        "description": "Your training grants better defense while using a spear.\n\n+1 block attempt, +2 blocking effectiveness.",
+        "description": "Your training grants better defense while using a spear.\n\nEffects lost if downed, stunned, or staggered.\n+1 block attempt, +2 blocking effectiveness.",
         "melee_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "bonus_blocks": 1,
         "flat_bonuses": [ { "stat": "block_effectiveness", "scale": 2.0 } ]
       }
@@ -1348,16 +1438,18 @@
       {
         "id": "buff_taekwondo_static",
         "name": "Taekwondo Stance",
-        "description": "Using your legs to attack keeps your hands free for better defense.\n\nBlocked damage reduced by 50% of Strength.",
+        "description": "Using your legs to attack keeps your hands free for better defense.\n\nEffects lost if downed, stunned, or staggered.\nBlocked damage reduced by 50% of Strength.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "str", "scale": 0.5 } ]
       },
       {
         "id": "buff_taekwondo_static2",
         "name": "Unhindered",
-        "description": "Your attacks are stronger if you are not holding anything in your hands.\n\n+33% damage when not using a weapon.",
+        "description": "Your attacks are stronger if you are not holding anything in your hands.\n\nEffects lost if downed, stunned, or staggered.\n+33% damage when not using a weapon.",
         "unarmed_allowed": true,
         "strictly_unarmed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "mult_bonuses": [
           { "stat": "damage", "type": "bash", "scale": 1.33 },
           { "stat": "damage", "type": "cut", "scale": 1.33 },
@@ -1387,8 +1479,9 @@
       {
         "id": "buff_tai_chi_static",
         "name": "Tai Chi Stance",
-        "description": "You are focused on defense and predicting your opponents' attacks.\n\n+1 block attempt, blocked damage reduced by 100% Perception.",
+        "description": "You are focused on defense and predicting your opponents' attacks.\n\nEffects lost if downed, stunned, or staggered.\n+1 block attempt, blocked damage reduced by 100% Perception.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "bonus_blocks": 1,
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "per", "scale": 1.0 } ]
       }
@@ -1397,9 +1490,10 @@
       {
         "id": "buff_tai_chi_onblock",
         "name": "Repulse the Monkey",
-        "description": "By perfectly positioning yourself and your opponent, you have become more accurate and can bypass your opponent's defenses.\n\nAccuracy increased by 20% of Perception, armor penetration increased by 50% of Perception.\nLasts 2 seconds.",
+        "description": "By perfectly positioning yourself and your opponent, you have become more accurate and can bypass your opponent's defenses.\n\nEffects lost if downed, stunned, or staggered.\nAccuracy increased by 20% of Perception, armor penetration increased by 50% of Perception.\nLasts 2 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "buff_duration": 2,
         "flat_bonuses": [
           { "stat": "arpen", "type": "bash", "scaling-stat": "per", "scale": 0.5 },
@@ -1413,10 +1507,11 @@
       {
         "id": "buff_tai_chi_onpause",
         "name": "Cross Hands",
-        "description": "By taking a moment to prepare yourself, you are able to use your entire body fully for attacking and defending.\n\n+2 blocking effectiveness, blocked damage reduced by 50% of Perception.\nEnables \"Palm Strike\" and \"Double Palm Strike\" techniques.\nLasts 3 seconds.",
+        "description": "By taking a moment to prepare yourself, you are able to use your entire body fully for attacking and defending.\n\nEffects lost if downed, stunned, or staggered.\n+2 blocking effectiveness, blocked damage reduced by 50% of Perception.\nEnables \"Palm Strike\" and \"Double Palm Strike\" techniques.\nEffects lost if downed, stunned, or staggered.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "buff_duration": 3,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "block_effectiveness", "scale": 2.0 }, { "stat": "block", "scaling-stat": "per", "scale": 0.5 } ]
       }
     ],
@@ -1484,8 +1579,9 @@
       {
         "id": "buff_wingchun_static",
         "name": "Chi-Sao Sensitivity",
-        "description": "You have a greater understanding of balance and technique.  This gives you a better chance to avoid your opponent's attacks.\n\nDodging skill increased by 25% of Perception, blocked damage reduced by 50% of Perception.",
+        "description": "You have a greater understanding of balance and technique.  This gives you a better chance to avoid your opponent's attacks.\n\nEffects lost if downed, stunned, or staggered.\nEffects lost if downed, stunned, or staggered.\nDodging skill increased by 25% of Perception, blocked damage reduced by 50% of Perception.",
         "unarmed_allowed": true,
+        "forbidden_effects_any": [ "downed", "staggered", "stunned" ],
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "per", "scale": 0.5 }, { "stat": "dodge", "scaling-stat": "per", "scale": 0.25 } ]
       }
     ],
@@ -1542,7 +1638,7 @@
       {
         "id": "buff_zuiquan_onmove",
         "name": "Drunken Stumble",
-        "description": "With a few quick steps, you can completely change your orientation and dodge attacks easier.\n\n+1.0 Dodging skill.\nLasts 1 second.  Stacks 2 times.",
+        "description": "With a few quick steps, you can completely change your orientation and dodge attacks easier.\n\n+1 Dodge ability.\nLasts 1 second.  Stacks 2 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 5 } ],
         "unarmed_allowed": true,
         "buff_duration": 1,
@@ -1585,8 +1681,9 @@
     "description": "A secret martial art used only by developers and cheaters.",
     "initiate": [ "You get ready pwn some zeds!", "%s prepares to cheat at martial arts!" ],
     "priority": 1,
-    "arm_block": 99,
-    "leg_block": 99,
+    "arm_block": 0,
+    "leg_block": 0,
+    "nonstandard_block": 0,
     "static_buffs": [
       {
         "id": "debug_elem_resist",

@@ -12,6 +12,7 @@
 #include "magic.h"
 #include "magic_spell_effect_helpers.h"
 #include "map.h"
+#include "mapdata.h"
 #include "messages.h"
 #include "npc.h"
 #include "point.h"
@@ -347,7 +348,8 @@ void npc_attack_melee::use( npc &source, const tripoint_bub_ms &location ) const
 
 tripoint_range<tripoint_bub_ms> npc_attack_melee::targetable_points( const npc &source ) const
 {
-    return get_map().points_in_radius( source.pos_bub(), 8 );
+    // Must be sight_max or we won't even consider approaching enemies, even if they shoot at us.
+    return get_map().points_in_radius( source.pos_bub(), source.sight_max );
 }
 
 npc_attack_rating npc_attack_melee::evaluate( const npc &source,
@@ -359,8 +361,12 @@ npc_attack_rating npc_attack_melee::evaluate( const npc &source,
     }
     const int time_penalty = base_time_penalty( source );
     creature_tracker &creatures = get_creature_tracker();
+    map &here = get_map();
     for( const tripoint_bub_ms &targetable_point : targetable_points( source ) ) {
         if( Creature *critter = creatures.creature_at( targetable_point ) ) {
+            if( !source.sees( here, *critter ) ) {
+                continue;
+            }
             if( source.attitude_to( *critter ) != Creature::Attitude::HOSTILE ) {
                 // no point in swinging a sword at a friendly!
                 continue;
@@ -414,6 +420,14 @@ npc_attack_rating npc_attack_melee::evaluate_critter( const npc &source,
 {
     if( !critter ) {
         return npc_attack_rating{};
+    }
+
+    // Can't melee creatures that are underwater beneath a solid surface
+    if( critter->is_underwater() ) {
+        const map &here = get_map();
+        if( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, critter->pos_bub() ) ) {
+            return npc_attack_rating{};
+        }
     }
 
     // TODO: Give bashing weapons a better

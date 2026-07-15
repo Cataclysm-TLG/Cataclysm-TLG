@@ -47,6 +47,7 @@ static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
 
 static const efftype_id effect_adrenaline( "adrenaline" );
 static const efftype_id effect_alarm_clock( "alarm_clock" );
+static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
 static const efftype_id effect_anemia( "anemia" );
 static const efftype_id effect_antibiotic( "antibiotic" );
 static const efftype_id effect_antifungal( "antifungal" );
@@ -74,7 +75,6 @@ static const efftype_id effect_hypovolemia( "hypovolemia" );
 static const efftype_id effect_infected( "infected" );
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_mending( "mending" );
-static const efftype_id effect_meth( "meth" );
 static const efftype_id effect_motor_seizure( "motor_seizure" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_onfire( "onfire" );
@@ -92,6 +92,7 @@ static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_tapeworm( "tapeworm" );
 static const efftype_id effect_teleglow( "teleglow" );
 static const efftype_id effect_tetanus( "tetanus" );
+static const efftype_id effect_took_xanax( "took_xanax" );
 static const efftype_id effect_tindrift( "tindrift" );
 static const efftype_id effect_toxin_buildup( "toxin_buildup" );
 static const efftype_id effect_valium( "valium" );
@@ -111,6 +112,8 @@ static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 
 static const mongroup_id GROUP_NETHER( "GROUP_NETHER" );
 
+static const mtype_id mon_impossible_shape( "mon_impossible_shape" );
+
 static const mutation_category_id mutation_category_MYCUS( "MYCUS" );
 static const mutation_category_id mutation_category_RAT( "RAT" );
 static const mutation_category_id mutation_category_TROGLOBITE( "TROGLOBITE" );
@@ -125,6 +128,7 @@ static const trait_id trait_HEAVYSLEEPER2( "HEAVYSLEEPER2" );
 static const trait_id trait_HIBERNATE( "HIBERNATE" );
 static const trait_id trait_INFRESIST( "INFRESIST" );
 static const trait_id trait_M_IMMUNE( "M_IMMUNE" );
+static const trait_id trait_POISRESIST( "POISRESIST" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
 
 static const vitamin_id vitamin_blood( "blood" );
@@ -136,6 +140,7 @@ static void eff_fun_onfire( Character &u, effect &it )
     u.deal_damage( nullptr, it.get_bp(), damage_instance( STATIC( damage_type_id( "heat" ) ),
                    rng( 1, intense * 2 ) ) );
 }
+
 static void eff_fun_spores( Character &u, effect &it )
 {
     // Equivalent to X in 150000 + health * 100
@@ -145,6 +150,7 @@ static void eff_fun_spores( Character &u, effect &it )
         u.add_effect( effect_fungus, 1_turns, true );
     }
 }
+
 static void eff_fun_antifungal( Character &u, effect & )
 {
     // antifungal drugs are deadly poison for Marloss people
@@ -160,6 +166,7 @@ static void eff_fun_antifungal( Character &u, effect & )
         u.apply_damage( nullptr, random_bpart, 1 );
     }
 }
+
 static void eff_fun_fake_common_cold( Character &u, effect & )
 {
     if( calendar::once_every( time_duration::from_seconds( rng( 30, 300 ) ) ) && one_in( 2 ) ) {
@@ -171,6 +178,7 @@ static void eff_fun_fake_common_cold( Character &u, effect & )
         you.get_sick( false );
     }
 }
+
 static void eff_fun_fake_flu( Character &u, effect & )
 {
     if( calendar::once_every( time_duration::from_seconds( rng( 30, 300 ) ) ) && one_in( 2 ) ) {
@@ -182,6 +190,7 @@ static void eff_fun_fake_flu( Character &u, effect & )
         you.get_sick( true );
     }
 }
+
 static void eff_fun_fungus( Character &u, effect &it )
 {
     const int intense = it.get_intensity();
@@ -206,7 +215,8 @@ static void eff_fun_fungus( Character &u, effect &it )
                 u.add_msg_if_player( m_warning, _( "You feel nauseous." ) );
             }
             if( one_in( 600 + bonus * 6 ) ) {
-                u.add_msg_if_player( m_warning, _( "You smell and taste mushrooms." ) );
+                u.add_msg_if_player( m_warning,
+                                     _( "The back of your throat is filled with a musty smell that you can almost taste." ) );
             }
             break;
         case 2:
@@ -282,6 +292,7 @@ static void eff_fun_fungus( Character &u, effect &it )
             break;
     }
 }
+
 static void eff_fun_rat( Character &u, effect &it )
 {
     const int dur = to_turns<int>( it.get_duration() );
@@ -304,6 +315,7 @@ static void eff_fun_rat( Character &u, effect &it )
         }
     }
 }
+
 static void eff_fun_bleed( Character &u, effect &it )
 {
     map &here = get_map();
@@ -386,6 +398,7 @@ static void eff_fun_bleed( Character &u, effect &it )
         }
     }
 }
+
 static void eff_fun_hallu( Character &u, effect &it )
 {
     // TODO: Redo this to allow for variable durations
@@ -620,12 +633,48 @@ static void eff_fun_teleglow( Character &u, effect &it )
             }
         }
     }
-    if( one_in( 7200 - ( dur - 360_minutes ) / 4_turns ) ) {
-        //Spawn a tindalos rift via effect_tindrift rather than it being hard-coded to teleglow
+    if( one_in( 7000 - ( dur - 360_minutes ) / 4_turns ) ) {
+        creature_tracker &creatures = get_creature_tracker();
+        tripoint_bub_ms dest( 0, 0, pos.z() );
+        int &x = dest.x();
+        int &y = dest.y();
+        int tries = 0;
+        do {
+            x = pos.x() + rng( -4, 4 );
+            y = pos.y() + rng( -4, 4 );
+            tries++;
+            if( tries >= 5 ) {
+                break;
+            }
+        } while( creatures.creature_at( dest ) );
+        if( tries < 5 ) {
+            if( !here.impassable( dest ) ) {
+                g->place_critter_at( mon_impossible_shape, dest );
+                if( uistate.distraction_hostile_spotted && player_character.sees( here, dest ) ) {
+                    g->cancel_activity_or_ignore_query( distraction_type::hostile_spotted_far,
+                                                        _( "A monster appears nearby!" ) );
+                    add_msg( m_warning, _( "Space folds impossibly around itself!" ) );
+                }
+            }
+            if( one_in( 6 ) ) {
+                // Set ourselves up for removal
+                it.set_duration( 0_turns );
+            }
+        }
+    }
+    if( one_in( 21000 - ( dur - 360_minutes ) / 4_turns ) ) {
+        u.add_msg_if_player( m_bad, _( "You shudder suddenly." ) );
+        u.mutate();
+        if( one_in( 4 ) ) {
+            // Set ourselves up for removal.
+            it.set_duration( 0_turns );
+        }
+    }
+    if( one_in( 8000 - ( dur - 360_minutes ) / 4_turns ) ) {
+        // Spawn a tindalos rift via effect_tindrift rather than it being hard-coded to teleglow.
         u.add_effect( effect_tindrift, 5_turns );
-
         if( one_in( 2 ) ) {
-            // Set ourselves up for removal
+            // Set ourselves up for removal.
             it.set_duration( 0_turns );
         }
     }
@@ -633,7 +682,7 @@ static void eff_fun_teleglow( Character &u, effect &it )
         u.add_msg_if_player( m_bad, _( "You pass out." ) );
         u.fall_asleep( 2_hours );
         if( one_in( 6 ) ) {
-            // Set ourselves up for removal
+            // Set ourselves up for removal.
             it.set_duration( 0_turns );
         }
     }
@@ -684,7 +733,8 @@ static void eff_fun_teleglow( Character &u, effect &it )
     }
     if( dur > 4_hours ) {
         // 8 teleports
-        if( one_turn_in( 1000_minutes - dur ) && !u.has_effect( effect_valium ) ) {
+        if( one_turn_in( 1000_minutes - dur ) && !u.has_effect( effect_valium ) &&
+            !u.has_effect( effect_took_xanax ) ) {
             u.add_effect( effect_shakes, rng( 4_minutes, 8_minutes ) );
         }
         if( one_turn_in( 1200_minutes - dur ) ) {
@@ -714,8 +764,6 @@ static void eff_fun_teleglow( Character &u, effect &it )
     if( one_in( 10000 ) ) {
         if( !u.has_trait( trait_M_IMMUNE ) ) {
             u.add_effect( effect_fungus, 1_turns, true );
-        } else {
-            u.add_msg_if_player( m_info, _( "We have many colonists awaiting passage." ) );
         }
         // Set ourselves up for removal
         it.set_duration( 0_turns );
@@ -727,9 +775,6 @@ static void eff_fun_datura( Character &u, effect &it )
     const time_duration dur = it.get_duration();
     if( dur > 100_minutes && u.get_focus() >= 1 && one_in( 24 ) ) {
         u.mod_focus( -1 );
-    }
-    if( dur > 200_minutes && one_in( 48 ) && u.get_stim() < 20 ) {
-        u.mod_stim( 1 );
     }
     if( dur > 300_minutes && u.get_focus() >= 1 && one_in( 12 ) ) {
         u.mod_focus( -1 );
@@ -863,7 +908,7 @@ static void eff_fun_hypovolemia( Character &u, effect &it )
                     break;
                 case 2:
                     warning = _( "You feel tired and you breathe heavily." );
-                    // Upstream renamed fatigue->sleepiness. We did not. Mind this while backporting.
+                    // Upstream renamed fatigue->fatigue. We did not. Mind this while backporting.
                     u.mod_fatigue( 3 * intense );
                     break;
                 case 3:
@@ -1107,7 +1152,7 @@ static void eff_fun_sleep( Character &u, effect &it )
         // People who can see while sleeping are acclimated to the light.
         if( !u.has_flag( json_flag_SEESLEEP ) ) {
             if( u.has_trait( trait_HEAVYSLEEPER2 ) && !u.has_trait( trait_HIBERNATE ) ) {
-                // So you can too sleep through noon
+                // So you can too sleep through noon.
                 if( ( tirednessVal * 1.25 ) < here.ambient_light_at( u.pos_bub() ) && ( u.get_fatigue() < 10 ||
                         one_in( u.get_fatigue() / 2 ) ) ) {
                     u.add_msg_if_player( _( "It's too bright to sleep." ) );
@@ -1157,7 +1202,7 @@ static void eff_fun_sleep( Character &u, effect &it )
                 if( curr_temp < BODYTEMP_FREEZING - fatigue_modifier ||
                     one_in( units::to_celsius( curr_temp ) * 3000 + 16500 ) ) {
                     u.add_msg_if_player( m_bad, _( "It's too cold to sleep." ) );
-                    // Set ourselves up for removal
+                    // Set ourselves up for removal.
                     it.set_duration( 0_turns );
                     woke_up = true;
                     break;
@@ -1169,7 +1214,7 @@ static void eff_fun_sleep( Character &u, effect &it )
                 if( curr_temp > BODYTEMP_SCORCHING + fatigue_modifier ||
                     one_in( 76500 - units::to_celsius( curr_temp ) * 500 ) ) {
                     u.add_msg_if_player( m_bad, _( "It's too hot to sleep." ) );
-                    // Set ourselves up for removal
+                    // Set ourselves up for removal.
                     it.set_duration( 0_turns );
                     woke_up = true;
                     break;
@@ -1234,19 +1279,27 @@ void Character::hardcoded_effects( effect &it )
     creature_tracker &creatures = get_creature_tracker();
     if( id == effect_formication ) {
         ///\EFFECT_INT decreases occurrence of itching from formication effect
-        if( x_in_y( intense, 600 + 300 * get_int() ) && !has_effect( effect_narcosis ) ) {
+        if( x_in_y( intense, 700 + 300 * get_int() ) && !in_sleep_state() ) {
             if( !is_npc() ) {
-                //~ %s is bodypart in accusative.
                 add_msg( m_warning, _( "You start scratching your %s." ),
                          body_part_name_accusative( bp ) );
             } else {
-                //~ 1$s is NPC name, 2$s is bodypart in accusative.
                 add_msg_if_player_sees( pos, _( "%1$s starts scratching their %2$s." ), get_name(),
                                         body_part_name_accusative( bp ) );
             }
             mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
             mod_pain( 1 );
-            apply_damage( nullptr, bp, 1 );
+            float part_hp = static_cast<float>( get_part_hp_cur( bp ) );
+            float part_hp_max = static_cast<float>( get_part_hp_max( bp ) );
+            if( part_hp > 0 ) {
+                float part_hp_percent = part_hp / part_hp_max;
+                if( part_hp_percent > 0.5f && part_hp > 1 ) {
+                    apply_damage( nullptr, bp, 1 );
+                }
+                if( one_in( 20 ) ) {
+                    add_effect( effect_bite, 1_turns, bp, true );
+                }
+            }
         }
     } else if( id == effect_evil ) {
         // Major effects, all bad.
@@ -1283,31 +1336,26 @@ void Character::hardcoded_effects( effect &it )
                 it.mult_duration( .25 );
             }
         }
-    } else if( id == effect_meth ) {
-        if( intense == 1 ) {
-            add_miss_reason( _( "Everything feels like it's sped up, and you're being left behind." ), 2 );
-            if( one_in( 900 ) ) {
-                add_msg_if_player( m_bad, _( "You feel paranoid.  Is someone watching you?" ) );
+    } else if( id == effect_amphetamine_eff ) {
+        if( intense > 2 ) {
+            add_miss_reason( _( "Too fast.  You're too fast!  Everything's too fast!" ), 2 );
+            if( one_in( 5000 ) ) {
+                add_msg_if_player( m_bad, _( "You feel paranoid." ) );
                 mod_pain( 1 );
                 mod_fatigue( dice( 1, 6 ) );
-            } else if( one_in( 3000 ) ) {
+            } else if( one_in( 6000 ) ) {
                 add_msg_if_player( m_bad,
                                    _( "You can't stop clenching your jaw." ) );
                 mod_pain( 1 );
-            } else if( one_in( 3000 ) ) {
+            } else if( one_in( 6000 ) ) {
                 if( one_in( 10 ) ) {
                     add_msg_if_player( m_bad, _( "The bugs are back." ) );
                 } else {
                     add_msg_if_player( m_bad, _( "It feels like there are tiny bugs crawling over your body." ) );
                 }
                 const bodypart_id &itch = random_body_part( true );
-                schedule_effect( effect_formication, 60_minutes * rng_float( 0.75f, 1.25f ), itch );
+                schedule_effect( effect_formication, 30_minutes * rng_float( 0.25f, 1.25f ), itch );
                 mod_pain( 1 );
-            } else if( one_in( 3000 ) ) {
-                add_msg_if_player( m_bad,
-                                   _( "You taste bile and your vision throbs." ) );
-                vomit();
-                mod_fatigue( dice( 1, 6 ) );
             }
         }
     } else if( id == effect_tindrift ) {
@@ -1407,7 +1455,7 @@ void Character::hardcoded_effects( effect &it )
             }
         }
         // to do: make muscle spasms not as dangerous if you have bionic limbs
-        if( !has_effect( effect_valium ) ) {
+        if( !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
             add_miss_reason( _( "Your muscles are locking up and you can't fight effectively." ), 4 );
             if( one_in( 3072 ) ) {
                 add_msg_if_player( m_bad, _( "Your muscles spasm." ) );
@@ -1645,68 +1693,76 @@ void Character::hardcoded_effects( effect &it )
         switch( intense ) {
             case 3:
                 // Tonic-clonic seizure (full body convulsive seizure)
-                if( one_turn_in( 3_days ) && !has_effect( effect_valium ) ) {
-                    add_msg_if_player( m_bad, _( "You lose control of your body as it begins to convulse!" ) );
-                    time_duration td = rng( 30_seconds, 4_minutes );
-                    schedule_effect( effect_motor_seizure, td );
-                    if( !is_on_ground() ) {
-                        schedule_effect( effect_downed, td );
-                    }
-                    schedule_effect( effect_stunned, td );
-                    if( one_in( 3 ) ) {
-                        add_msg_if_player( m_bad, _( "You lose consciousness!" ) );
-                        fall_asleep( td );
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 3_days ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
+                        add_msg_if_player( m_bad, _( "You lose control of your body as it begins to convulse!" ) );
+                        time_duration td = rng( 30_seconds, 4_minutes );
+                        schedule_effect( effect_motor_seizure, td );
+                        if( !is_on_ground() ) {
+                            schedule_effect( effect_downed, td );
+                        }
+                        schedule_effect( effect_stunned, td );
+                        if( one_in( 3 ) ) {
+                            add_msg_if_player( m_bad, _( "You lose consciousness!" ) );
+                            fall_asleep( td );
+                        }
                     }
                 }
                 mod *= 2;
             /* fallthrough */
             case 2:
                 // Myoclonic seizure (muscle spasm)
-                if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) ) {
-                    std::string limb = random_entry<std::vector<std::string>>( {
-                        translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
-                    } );
-                    add_msg_if_player( m_bad, string_format(
-                                           _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
-                    if( limb == "arm" ) {
-                        mod_dex_bonus( -8 );
-                        release_grapple();
-                        recoil = MAX_RECOIL;
-                    } else if( limb == "hand" ) {
-                        release_grapple();
-                        if( is_armed() && can_drop( *get_wielded_item() ).success() ) {
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) &&
+                        !has_effect( effect_took_xanax ) ) {
+                        std::string limb = random_entry<std::vector<std::string>>( {
+                            translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
+                        } );
+                        add_msg_if_player( m_bad, string_format(
+                                               _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
+                        if( limb == "arm" ) {
+                            mod_dex_bonus( -8 );
+                            release_grapple();
+                            recoil = MAX_RECOIL;
+                        } else if( limb == "hand" ) {
+                            release_grapple();
+                            if( is_armed() && can_drop( *get_wielded_item() ).success() ) {
+                                if( dice( 4, 4 ) > get_dex() ) {
+                                    cancel_activity();  //Prevent segfaults from activities trying to access missing item
+                                    put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
+                                } else {
+                                    add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
+                                                       get_wielded_item()->tname() );
+                                }
+                            }
+                        } else if( limb == "leg" && !is_on_ground() ) {
                             if( dice( 4, 4 ) > get_dex() ) {
-                                cancel_activity();  //Prevent segfaults from activities trying to access missing item
-                                put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
+                                schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
                             } else {
-                                add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
-                                                   get_wielded_item()->tname() );
+                                add_msg_if_player( m_neutral, _( "However, you manage to keep your footing." ) );
                             }
                         }
-                    } else if( limb == "leg" && !is_on_ground() ) {
-                        if( dice( 4, 4 ) > get_dex() ) {
-                            schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
-                        } else {
-                            add_msg_if_player( m_neutral, _( "However, you manage to keep your footing." ) );
-                        }
                     }
-                }
-                // Atonic seizure (a.k.a. drop seizure)
-                if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) ) {
-                    add_msg_if_player( m_bad,
-                                       _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
-                    schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
-                    if( !is_on_ground() ) {
-                        schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
+                    // Atonic seizure (a.k.a. drop seizure)
+                    if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) &&
+                        !has_effect( effect_took_xanax ) ) {
+                        add_msg_if_player( m_bad,
+                                           _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
+                        schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
+                        if( !is_on_ground() ) {
+                            schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
+                        }
                     }
                 }
                 mod *= 2;
             /* fallthrough */
             case 1:
                 // Migraine
-                if( one_turn_in( 2_days / mod ) ) {
-                    add_msg_if_player( m_bad, _( "You have a splitting headache." ) );
-                    mod_pain( 12 );
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 2_days / mod ) ) {
+                        add_msg_if_player( m_bad, _( "You have a splitting headache." ) );
+                        mod_pain( 12 );
+                    }
                 }
                 break;
         }

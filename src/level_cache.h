@@ -8,11 +8,16 @@
 #include <unordered_map>
 #include <utility>
 
+
+#include "coordinates.h"
 #include "game_constants.h"
 #include "lightmap.h"
+#include "map_scale_constants.h"
 #include "point.h"
+#include "mdarray.h"
 #include "shadowcasting.h"
 #include "value_ptr.h"
+#include <stdint.h>
 
 class vehicle;
 
@@ -21,6 +26,7 @@ struct diagonal_blocks {
     bool nw;
     bool ne;
 };
+enum class lit_level : uint8_t;
 
 struct level_cache {
     public:

@@ -8,11 +8,13 @@
 #include <queue>
 #include <type_traits>
 
-#include "assign.h"
 #include "cata_utility.h"
 #include "debug.h"
 #include "dependency_tree.h"
 #include "filesystem.h"
+#include "flexbuffer_json.h"
+#include "generic_factory.h"
+#include "input_context.h"
 #include "json.h"
 #include "localized_comparator.h"
 #include "path_info.h"
@@ -253,19 +255,20 @@ void mod_manager::load_modfile( const JsonObject &jo, const cata_path &path )
     modfile.category = p_cat;
 
     std::string mod_json_path;
-    if( assign( jo, "path", mod_json_path ) ) {
+    if( jo.has_member( "path" ) ) {
+        optional( jo, false, "path", mod_json_path );
         modfile.path = path / mod_json_path;
     } else {
         modfile.path = path;
     }
 
-    assign( jo, "authors", modfile.authors );
-    assign( jo, "maintainers", modfile.maintainers );
-    assign( jo, "description", modfile.description );
-    assign( jo, "version", modfile.version );
-    assign( jo, "dependencies", modfile.dependencies );
-    assign( jo, "core", modfile.core );
-    assign( jo, "obsolete", modfile.obsolete );
+    optional( jo, false, "authors", modfile.authors );
+    optional( jo, false, "maintainers", modfile.maintainers );
+    optional( jo, false, "description", modfile.description );
+    optional( jo, false, "version", modfile.version );
+    optional( jo, false, "dependencies", modfile.dependencies );
+    optional( jo, false, "core", modfile.core, false );
+    optional( jo, false, "obsolete", modfile.obsolete, false );
 
     if( std::find( modfile.dependencies.begin(), modfile.dependencies.end(),
                    modfile.ident ) != modfile.dependencies.end() ) {

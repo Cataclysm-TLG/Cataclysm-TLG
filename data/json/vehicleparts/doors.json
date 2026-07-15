@@ -6,7 +6,7 @@
     "categories": [ "hull" ],
     "color": "cyan",
     "damage_modifier": 80,
-    "damage_reduction": { "all": 20 },
+    "damage_reduction": { "bash": 6, "cut": 12, "stab": 10, "bullet": 10 },
     "description": "A door.  Has a window so you can see out of it, even when closed.",
     "durability": 225,
     "flags": [ "CARGO", "CARGO_PASSABLE", "OBSTACLE", "OPENABLE", "BOARDABLE", "WINDOW", "DOOR", "LOCKABLE_DOOR", "HUGE_OK" ],
@@ -74,6 +74,7 @@
     "copy-from": "door",
     "description": "A door.  Solid construction means you can't see through it when closed.",
     "durability": 240,
+    "damage_reduction": { "bash": 7, "cut": 14, "stab": 12, "bullet": 12 },
     "name": { "str": "opaque door" },
     "extend": { "flags": [ "OPAQUE" ] },
     "delete": { "flags": [ "WINDOW" ] },
@@ -84,7 +85,7 @@
     "id": "hddoor",
     "copy-from": "door",
     "breaks_into": "ig_vp_hdframe",
-    "damage_reduction": { "all": 30 },
+    "damage_reduction": { "bash": 18, "cut": 20, "stab": 18, "bullet": 16 },
     "description": "A strong door.  Has a window so you can see out of it, even when closed.",
     "durability": 600,
     "item": "hdframe",
@@ -104,6 +105,7 @@
     "description": "A strong door.  Solid construction means you can't see through it when closed.",
     "durability": 660,
     "looks_like": "door_opaque",
+    "damage_reduction": { "bash": 20, "cut": 24, "stab": 20, "bullet": 18 },
     "name": { "str": "heavy-duty opaque door" },
     "extend": { "flags": [ "OPAQUE" ] },
     "delete": { "flags": [ "WINDOW" ] },
@@ -116,6 +118,7 @@
     "damage_modifier": 75,
     "description": "An interior door.  Solid construction means you can't see through it when closed.",
     "name": { "str": "internal door" },
+    "damage_reduction": { "bash": 7, "cut": 14, "stab": 12, "bullet": 12 },
     "type": "vehicle_part"
   },
   {
@@ -124,6 +127,7 @@
     "description": "A strong door.  A window lets you see through it when closed.",
     "durability": 420,
     "name": { "str": "hatch" },
+    "damage_reduction": { "bash": 7, "cut": 14, "stab": 12, "bullet": 12 },
     "//": "30 cm of weld per quadrant of damage, 4x that to install",
     "requirements": {
       "install": {
@@ -148,6 +152,7 @@
     "description": "A strong door.  Solid construction means you can't see through it when closed.",
     "durability": 450,
     "looks_like": "door_opaque",
+    "damage_reduction": { "bash": 7, "cut": 14, "stab": 12, "bullet": 12 },
     "name": { "str": "opaque hatch" },
     "extend": { "flags": [ "OPAQUE" ] },
     "delete": { "flags": [ "WINDOW" ] },
@@ -157,7 +162,7 @@
     "id": "hdhatch",
     "copy-from": "hatch",
     "breaks_into": "ig_vp_hdframe",
-    "damage_reduction": { "all": 30 },
+    "damage_reduction": { "bash": 20, "cut": 24, "stab": 20, "bullet": 18 },
     "description": "A very strong door.  A window lets you see through it when closed.",
     "durability": 900,
     "item": "hdframe",
@@ -185,9 +190,35 @@
     "description": "A very strong door.  Solid construction means you can't see through it when closed.",
     "durability": 1000,
     "looks_like": "hatch_opaque",
+    "damage_reduction": { "bash": 20, "cut": 24, "stab": 20, "bullet": 18 },
     "name": { "str": "heavy-duty opaque hatch" },
     "extend": { "flags": [ "OPAQUE" ] },
     "delete": { "flags": [ "WINDOW" ] },
+    "type": "vehicle_part"
+  },
+  {
+    "id": "hatchback_trunk",
+    "copy-from": "hatch",
+    "description": "A fold up door covering trunk space.  A window lets you see through it when closed.",
+    "durability": 420,
+    "damage_reduction": { "bash": 6, "cut": 12, "stab": 10, "bullet": 10 },
+    "name": { "str": "hatchback trunk" },
+    "//": "30 cm of weld per quadrant of damage, 4x that to install",
+    "requirements": {
+      "install": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "70 m",
+        "using": [ [ "welding_standard", 120 ], [ "vehicle_bolt_install", 1 ] ]
+      },
+      "removal": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "40 m",
+        "using": [ [ "vehicle_weld_removal", 1 ], [ "vehicle_wrench_2", 1 ] ]
+      },
+      "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 3 ] ] }
+    },
+    "size": "125000 ml",
+    "extend": { "flags": [ "LOCKABLE_CARGO", "MULTISQUARE", "COVERED" ] },
     "type": "vehicle_part"
   },
   {
@@ -196,6 +227,7 @@
     "copy-from": "door",
     "name": { "str": "wooden door" },
     "looks_like": "t_door_c",
+    "damage_reduction": { "bash": 4, "cut": 7, "stab": 5, "bullet": 3 },
     "color": "brown",
     "broken_color": "brown",
     "durability": 90,
@@ -208,8 +240,7 @@
     },
     "breaks_into": [ { "item": "splinter", "count": [ 7, 9 ] } ],
     "extend": { "flags": [ "SIMPLE_PART" ] },
-    "delete": { "flags": [ "CARGO", "CARGO_PASSABLE" ] },
-    "damage_reduction": { "all": 4 }
+    "delete": { "flags": [ "CARGO", "CARGO_PASSABLE" ] }
   },
   {
     "type": "vehicle_part",
@@ -220,7 +251,7 @@
     "description": "A door.  Solid construction means you can't see through it when closed.",
     "extend": { "flags": [ "OPAQUE" ] },
     "delete": { "flags": [ "WINDOW" ] },
-    "damage_reduction": { "all": 5 }
+    "damage_reduction": { "bash": 5, "cut": 5, "stab": 5, "bullet": 4 }
   },
   {
     "type": "vehicle_part",
@@ -229,6 +260,7 @@
     "name": { "str": "trunk door" },
     "durability": 150,
     "size": "0 ml",
+    "damage_reduction": { "bash": 6, "cut": 12, "stab": 10, "bullet": 10 },
     "description": "A short door.  You can always see over it, open or closed.",
     "requirements": {
       "install": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
@@ -244,6 +276,7 @@
     "copy-from": "door_trunk",
     "name": { "str": "heavy-duty trunk door" },
     "durability": 750,
+    "damage_reduction": { "bash": 18, "cut": 20, "stab": 18, "bullet": 16 },
     "description": "A strong, short door.  You can always see over it, open or closed.",
     "item": "hdframe",
     "requirements": {
@@ -252,8 +285,7 @@
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "60 m", "using": [ [ "repair_welding_standard", 4 ] ] }
     },
     "breaks_into": "ig_vp_hdframe",
-    "delete": { "flags": [ "NO_ROOF_NEEDED" ] },
-    "damage_reduction": { "all": 30 }
+    "delete": { "flags": [ "NO_ROOF_NEEDED" ] }
   },
   {
     "type": "vehicle_part",
@@ -263,6 +295,7 @@
     "size": "0 ml",
     "durability": 95,
     "description": "A strong door.  Solid construction means you can't see through it when closed.",
+    "damage_reduction": { "bash": 7, "cut": 14, "stab": 12, "bullet": 12 },
     "item": "sheet_metal",
     "requirements": {
       "install": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
@@ -271,14 +304,14 @@
     },
     "breaks_into": "ig_vp_sheet_metal",
     "extend": { "flags": [ "OPAQUE", "SIMPLE_PART" ] },
-    "delete": { "flags": [ "CARGO", "CARGO_PASSABLE", "COVERED", "LOCKABLE_CARGO", "WINDOW" ] },
-    "damage_reduction": { "all": 7 }
+    "delete": { "flags": [ "CARGO", "CARGO_PASSABLE", "COVERED", "LOCKABLE_CARGO", "WINDOW" ] }
   },
   {
     "type": "vehicle_part",
     "id": "door_sliding",
     "copy-from": "door_trunk",
     "name": { "str": "sliding door" },
+    "damage_reduction": { "bash": 6, "cut": 12, "stab": 10, "bullet": 10 },
     "looks_like": "door",
     "description": "A door.  A window lets you see through it when closed.",
     "breaks_into": "ig_vp_frame",

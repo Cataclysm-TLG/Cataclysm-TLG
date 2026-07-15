@@ -369,7 +369,7 @@
     "carry_override": "GODCO_jane_carried",
     "weapon_override": "GODCO_jane_wield",
     "traits": [ { "group": "NPC_starting_traits" }, { "group": "Appearance_demographics" }, { "trait": "NO_BASH" } ],
-    "skills": [ { "bonus": { "rng": [ 4, 5 ] }, "skill": "firstaid" } ]
+    "skills": [ { "bonus": { "rng": [ 5, 6 ] }, "skill": "firstaid" } ]
   },
   {
     "type": "npc_class",
@@ -571,24 +571,6 @@
     ]
   },
   {
-    "type": "npc_class",
-    "id": "NC_TRADER_PREDATORY",
-    "name": { "str": "Trader" },
-    "job_description": "I'm collecting gear and selling it at a high interest.",
-    "traits": [ { "group": "BG_survival_story_EVACUEE" }, { "group": "NPC_starting_traits" }, { "group": "Appearance_demographics" } ],
-    "shopkeeper_item_group": [ { "group": "NC_EVAC_SHOPKEEP_misc", "rigid": true } ],
-    "shopkeeper_price_rules": [
-      { "item": "icon", "price": 1 },
-      {
-        "group": "NC_EVAC_SHOPKEEP_misc",
-        "condition": { "not": { "npc_has_var": "general_meeting_u_paidoff", "value": "yes" } },
-        "markup": 3
-      }
-    ],
-    "bonus_int": { "one_in": 4 },
-    "bonus_per": { "one_in": 4 }
-  },
-  {
     "type": "item_group",
     "id": "GODCO_helena_worn",
     "subtype": "collection",
@@ -666,7 +648,7 @@
       { "item": "boots" },
       { "item": "boxer_shorts" },
       { "item": "jeans" },
-      { "item": "undershirt" },
+      { "item": "tank_top" },
       { "item": "leather_belt" },
       { "item": "gloves_work" },
       { "item": "gold_ear" },
@@ -755,7 +737,7 @@
       { "item": "tank_top", "variant": "tank_top_camo" },
       { "item": "bandolier_rifle", "contents-group": "bandolier_rifle_hunter" },
       { "item": "jacket_army" },
-      { "item": "knit_scarf" },
+      { "item": "scarf" },
       { "item": "backpack_hiking" },
       { "item": "duffelbag" },
       { "item": "sheath", "contents-item": "knife_hunting" },
@@ -1114,9 +1096,7 @@
       [ "esbit_stove", 10 ],
       { "item": "wild_herbs", "prob": 100, "count": [ 20, 200 ] },
       { "item": "thyme", "prob": 75, "count": [ 1, 10 ] },
-      { "item": "hickory_nut", "prob": 66, "count": [ 1, 10 ] },
-      { "prob": 80, "group": "poppy_pain_jar_glass_sealed_2" },
-      { "prob": 80, "group": "poppy_sleep_jar_glass_sealed_2" }
+      { "item": "hickory_nut", "prob": 66, "count": [ 1, 10 ] }
     ]
   },
   {
@@ -1303,21 +1283,5 @@
     "type": "item_group",
     "id": "NC_GODCO_MERCHANT_sell",
     "items": [ { "group": "NC_EVAC_SHOPKEEP_misc", "prob": 100 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "poppy_pain_jar_glass_sealed_2",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "jar_glass_sealed",
-    "entries": [ { "item": "poppy_pain", "count": 2 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "poppy_sleep_jar_glass_sealed_2",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "jar_glass_sealed",
-    "entries": [ { "item": "poppy_sleep", "count": 2 } ]
   }
 ]

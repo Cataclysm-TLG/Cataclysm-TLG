@@ -14,6 +14,8 @@
     "book_learn": [ [ "recipe_lab_elec", 6 ], [ "textbook_robots", 7 ] ],
     "using": [ [ "soldering_standard", 10 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "components": [
       [ [ "ai_module_basic", 1 ] ],
       [ [ "RAM", 1 ] ],
@@ -40,6 +42,8 @@
     "book_learn": [ [ "recipe_lab_elec", 6 ], [ "textbook_robots", 7 ] ],
     "using": [ [ "soldering_standard", 10 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "components": [
       [ [ "grenade", 1 ] ],
       [ [ "ai_module_basic", 1 ] ],
@@ -66,6 +70,8 @@
     "book_learn": [ [ "recipe_lab_elec", 6 ], [ "textbook_robots", 7 ] ],
     "using": [ [ "soldering_standard", 10 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "components": [
       [ [ "gasbomb", 1 ] ],
       [ [ "ai_module_basic", 1 ] ],
@@ -92,6 +98,8 @@
     "book_learn": [ [ "recipe_lab_elec", 6 ], [ "textbook_robots", 7 ] ],
     "using": [ [ "soldering_standard", 10 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "components": [
       [ [ "grenade_emp", 1 ] ],
       [ [ "ai_module_basic", 1 ] ],
@@ -118,6 +126,8 @@
     "book_learn": [ [ "recipe_lab_elec", 6 ], [ "textbook_robots", 7 ] ],
     "using": [ [ "soldering_standard", 10 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "components": [
       [ [ "flashbang", 1 ] ],
       [ [ "ai_module_basic", 1 ] ],
@@ -144,6 +154,8 @@
     "book_learn": [ [ "recipe_lab_elec", 6 ], [ "textbook_robots", 7 ] ],
     "using": [ [ "soldering_standard", 10 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "components": [
       [ [ "c4", 1 ] ],
       [ [ "ai_module_basic", 1 ] ],
@@ -170,6 +182,8 @@
     "book_learn": [ [ "recipe_lab_elec", 7 ], [ "textbook_robots", 9 ] ],
     "//": "200cm weld",
     "using": [ [ "steel_standard", 1 ], [ "welding_standard", 200 ], [ "soldering_standard", 14 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -207,7 +221,9 @@
     "reversible": true,
     "decomp_learn": 8,
     "book_learn": [ [ "recipe_lab_elec", 7 ], [ "textbook_robots", 9 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
     "using": [ [ "soldering_standard", 14 ] ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -240,7 +256,9 @@
     "reversible": true,
     "decomp_learn": 8,
     "book_learn": [ [ "recipe_lab_elec", 7 ], [ "textbook_robots", 9 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
     "using": [ [ "soldering_standard", 14 ] ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -275,6 +293,8 @@
     "time": "2 h",
     "//": "200cm welding",
     "using": [ [ "soldering_standard", 20 ], [ "welding_standard", 200 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -309,6 +329,8 @@
     "time": "20 m",
     "//": "200cm welding",
     "using": [ [ "soldering_standard", 20 ], [ "welding_standard", 200 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -343,6 +365,8 @@
     "time": "3 h",
     "//": "200cm weld",
     "using": [ [ "steel_standard", 1 ], [ "soldering_standard", 20 ], [ "welding_standard", 200 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -382,6 +406,8 @@
     "time": "3 h",
     "//": "200cm weld",
     "using": [ [ "steel_standard", 1 ], [ "soldering_standard", 20 ], [ "welding_standard", 200 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -421,6 +447,8 @@
     "time": "50 m",
     "//": "100cm weld",
     "using": [ [ "soldering_standard", 20 ], [ "welding_standard", 100 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -453,6 +481,8 @@
     "time": "30 m",
     "//": "50cm weld",
     "using": [ [ "soldering_standard", 10 ], [ "welding_standard", 50 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -484,6 +514,8 @@
     "time": "140 m",
     "//": "200cm weld",
     "using": [ [ "soldering_standard", 20 ], [ "welding_standard", 200 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -520,6 +552,8 @@
     "time": "40 m",
     "//": "200cm weld",
     "using": [ [ "soldering_standard", 20 ], [ "welding_standard", 200 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -555,6 +589,8 @@
     "difficulty": 5,
     "time": "30 m",
     "using": [ [ "soldering_standard", 10 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -588,6 +624,8 @@
     "difficulty": 5,
     "time": "1 h 15 m",
     "using": [ [ "soldering_standard", 10 ] ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "qualities": [
       { "id": "SCREW", "level": 1 },
       { "id": "SCREW_FINE", "level": 1 },
@@ -610,37 +648,6 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "bot_turret_searchlight",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "skill_used": "electronics",
-    "skills_required": [ [ "mechanics", 4 ], [ "computer", 2 ] ],
-    "reversible": true,
-    "decomp_learn": 5,
-    "book_learn": [ [ "schematics_searchlight", 7 ] ],
-    "difficulty": 3,
-    "time": "1 h 15 m",
-    "using": [ [ "soldering_standard", 10 ] ],
-    "qualities": [
-      { "id": "SCREW", "level": 1 },
-      { "id": "SCREW_FINE", "level": 1 },
-      { "id": "WRENCH", "level": 2 },
-      { "id": "WRENCH_FINE", "level": 1 }
-    ],
-    "components": [
-      [ [ "ai_module_basic", 1 ] ],
-      [ [ "identification_module", 1 ] ],
-      [ [ "sensor_module", 1 ] ],
-      [ [ "targeting_module", 1 ] ],
-      [ [ "medium_storage_battery", 3 ] ],
-      [ [ "power_supply", 1 ] ],
-      [ [ "floodlight", 1 ] ],
-      [ [ "turret_chassis", 1 ] ]
-    ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "bot_tazer_hack",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
@@ -653,6 +660,8 @@
     "book_learn": [ [ "recipe_lab_elec", 5 ], [ "textbook_robots", 6 ] ],
     "using": [ [ "soldering_standard", 10 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
+    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
     "components": [
       [ [ "tazer", 1 ] ],
       [ [ "ai_module_basic", 1 ] ],

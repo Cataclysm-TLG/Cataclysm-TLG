@@ -8,6 +8,9 @@
 #include <iosfwd>
 #include <set>
 #include <string>
+#include <string_view>
+#include <utility>
+#include <variant>
 #include <vector>
 
 #include "calendar.h"
@@ -21,16 +24,19 @@
 #include "units.h"
 #include "value_ptr.h"
 
-struct ter_t;
-
-using ter_str_id = string_id<ter_t>;
-
 class JsonObject;
 class Character;
 struct iexamine_actor;
+class JsonValue;
+struct connect_group;
+struct ter_t;
 struct furn_t;
 struct itype;
 struct tripoint;
+
+
+template<>
+int_id<ter_t> string_id<ter_t>::id() const;
 
 // size of connect groups bitset; increase if needed
 const int NUM_TERCONN = 256;
@@ -262,6 +268,9 @@ enum class ter_furn_flag : int {
     TFLAG_SHALLOW_WATER,
     TFLAG_WATER_CUBE,
     TFLAG_CURRENT,
+    TFLAG_THIN_ICE,
+    TFLAG_THICK_ICE,
+    TFLAG_SWIM_UNDER,
     TFLAG_HARVESTED,
     TFLAG_PERMEABLE,
     TFLAG_AUTO_WALL_SYMBOL,
@@ -281,7 +290,6 @@ enum class ter_furn_flag : int {
     TFLAG_RAIL,
     TFLAG_THIN_OBSTACLE,
     TFLAG_SMALL_PASSAGE,
-    TFLAG_Z_TRANSPARENT,
     TFLAG_SUN_ROOF_ABOVE,
     TFLAG_FUNGUS,
     TFLAG_LOCKED,
@@ -309,6 +317,7 @@ enum class ter_furn_flag : int {
     TFLAG_CAN_SIT,
     TFLAG_FLAT_SURF,
     TFLAG_BUTCHER_EQ,
+    TFLAG_GROWTH_SEED,
     TFLAG_GROWTH_SEEDLING,
     TFLAG_GROWTH_MATURE,
     TFLAG_WORKOUT_ARMS,
@@ -323,6 +332,7 @@ enum class ter_furn_flag : int {
     TFLAG_CLIMB_SIMPLE,
     TFLAG_NANOFAB_TABLE,
     TFLAG_ROAD,
+    TFLAG_RUG,
     TFLAG_TINY,
     TFLAG_SHORT,
     TFLAG_NOCOLLIDE,
@@ -366,7 +376,13 @@ enum class ter_furn_flag : int {
     TFLAG_HIT_WITHOUT_COVER,
     TFLAG_DEPLOYED_FURNITURE_ABOVE,
     TFLAG_NATURAL_UNDERGROUND,
+    TFLAG_PHASE_BACK,
     TFLAG_WIRED_WALL,
+    TFLAG_MON_AVOID_STRICT,
+    TFLAG_REGION_PSEUDO,
+    TFLAG_SOAKING_TUB,
+    TFLAG_TIRE_DAMAGE,
+    TFLAG_TIRE_SAFE,
 
     NUM_TFLAG_FLAGS
 };
@@ -555,7 +571,7 @@ struct map_data_common_t {
         // Maximal volume of items that can be stored in/on this furniture/terrain
         units::volume max_volume = DEFAULT_TILE_VOLUME;
 
-        std::string liquid_source_item_id; // id of a liquid this tile provides
+        itype_id liquid_source_item_id = itype_id::NULL_ID(); // id of a liquid this tile provides
         double liquid_source_min_temp = 4; // in centigrades, cold water as default value
         std::pair<int, int> liquid_source_count = { 0, 0 }; // charges of liquid, if it's finite source
 
@@ -663,6 +679,17 @@ struct ter_t : map_data_common_t {
     std::optional<map_ter_bash_info> bash;
     std::optional<map_ter_deconstruct_info> deconstruct;
 
+    // Phase-change configuration
+    // List of terrain ids that this terrain can transform into under a phase change
+    // (e.g. ice/steam variants). One entry may be empty to indicate "itself".
+    std::vector<ter_str_id> phase_targets;
+    // Corresponding list of temperatures (interpreted as degrees Celsius in JSON)
+    // at which the terrain will pick the corresponding phase target.
+    std::vector<units::temperature> phase_temps;
+    // Method describing how to apply the phase change (string identifier)
+    // Example values: "thresholds", "closest", "gradient" etc.
+    std::string phase_method;
+
     ter_str_id lockpick_result; // Lockpick action: transform when successfully lockpicked
 
     cata::value_ptr<activity_data_ter> boltcut; // Bolt cutting action data
@@ -745,8 +772,22 @@ struct furn_t : map_data_common_t {
     void check() const override;
 };
 
+//holds either a ter_id OR furn_id (not both!), for loading JSON
+struct ter_furn_id {
+    std::variant<ter_id, furn_id> ter_furn;
+    void deserialize( const JsonValue &jo );
+    ter_furn_id();
+    explicit ter_furn_id( const std::string &name );
+    bool operator==( const ter_furn_id &rhs ) const {
+        return ter_furn == rhs.ter_furn;
+    }
+    bool resolve( const std::string &name );
+};
+
 void load_furniture( const JsonObject &jo, const std::string &src );
+void finalize_furniture();
 void load_terrain( const JsonObject &jo, const std::string &src );
+void finalize_terrain();
 
 class ter_furn_migrations
 {

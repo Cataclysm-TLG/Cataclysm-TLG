@@ -168,10 +168,8 @@
     "skill_used": "fabrication",
     "time": "10 m",
     "autolearn": true,
-    "components": [
-      [ [ "y_carpet", 1 ], [ "r_carpet", 1 ], [ "p_carpet", 1 ], [ "g_carpet", 1 ] ],
-      [ [ "cordage", 8, "LIST" ], [ "duct_tape", 200 ] ]
-    ],
+    "reversible": true,
+    "components": [ [ [ "carpet_scrap", 8 ] ], [ [ "cordage", 8, "LIST" ], [ "duct_tape", 200 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -229,7 +227,8 @@
     "result": "xs_bra",
     "type": "recipe",
     "copy-from": "bra",
-    "using": [ [ "tailoring_cotton_sheet", 1 ], [ "fastener_small", 1 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 1 ], [ "fastener_small", 1 ] ],
+    "components": [ [ [ "wire", 1 ] ] ]
   },
   {
     "result": "bellyband",
@@ -336,10 +335,8 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",
-    "skills_required": [ "survival", 5 ],
     "difficulty": 5,
     "time": "10 h",
-    "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "book_learn": [ [ "trappers_companion", 6 ], [ "survival_book", 4 ] ],
     "components": [ [ [ "stomach_sealed", 16 ], [ "large_stomach_sealed", 10 ] ], [ [ "filament", 60, "LIST" ] ] ],
@@ -366,7 +363,6 @@
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",
     "difficulty": 6,
-    "skills_required": [ "survival", 8 ],
     "time": "8 d",
     "book_learn": [ [ "tailor_japanese", 6 ] ],
     "proficiencies": [ { "proficiency": "prof_basketweaving" } ],
@@ -485,7 +481,6 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 3,
-    "skills_required": [ "survival", 1 ],
     "time": "10 h",
     "autolearn": true,
     "reversible": true,
@@ -1117,6 +1112,22 @@
     "time": "80 m",
     "autolearn": true,
     "components": [ [ [ "wood_panel", 1 ] ] ],
+    "byproducts": [ [ "splinter", 6 ] ],
+    "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 2 } ]
+  },
+  {
+    "result": "wood_esapi_plate_xl",
+    "type": "recipe",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "fabrication",
+    "difficulty": 3,
+    "time": "160 m",
+    "autolearn": true,
+    "components": [ [ [ "wood_panel", 1 ] ] ],
+    "byproducts": [ [ "splinter", 2 ] ],
     "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 2 } ]
   },
@@ -1147,6 +1158,18 @@
     "components": [ [ [ "paper", 300 ] ], [ [ "glue_any", 15, "LIST" ] ] ]
   },
   {
+    "result": "paper_esapi_plate_xl",
+    "type": "recipe",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "fabrication",
+    "difficulty": 3,
+    "time": "160 m",
+    "book_learn": [ [ "recipe_melee", 2 ], [ "textbook_armschina", 2 ] ],
+    "components": [ [ [ "paper", 600 ] ], [ [ "glue_any", 30, "LIST" ] ] ]
+  },
+  {
     "result": "paper_esbi_plate",
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
@@ -1169,8 +1192,25 @@
     "time": "100 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_melee", 2 ] ],
-    "using": [ [ "cordage", 1 ], [ "mixed_steel", 1 ] ],
-    "components": [ [ [ "cotton_patch", 3 ] ] ],
+    "using": [ [ "cordage", 1 ] ],
+    "components": [ [ [ "cotton_sheet", 4 ] ], [ [ "sheet_metal", 1 ] ] ],
+    "byproducts": [ [ "sheet_metal_small", 1 ] ],
+    "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ]
+  },
+  {
+    "result": "scrap_esapi_plate_xl",
+    "type": "recipe",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "fabrication",
+    "difficulty": 2,
+    "time": "100 m",
+    "autolearn": true,
+    "book_learn": [ [ "recipe_melee", 2 ] ],
+    "using": [ [ "cordage", 1 ] ],
+    "components": [ [ [ "cotton_sheet", 8 ] ], [ [ "sheet_metal", 1 ] ] ],
+    "byproducts": [ [ "scrap", 2 ] ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ]
   },
   {
@@ -1181,10 +1221,30 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
     "difficulty": 5,
-    "time": "4 d",
+    "time": "6 h",
     "autolearn": true,
     "book_learn": [ [ "recipe_melee", 7 ] ],
     "using": [ [ "tailoring_nylon_sheet", 1 ], [ "blacksmithing_standard", 16 ], [ "steel_standard", 4 ] ],
+    "qualities": [ { "id": "CHISEL", "level": 3 } ],
+    "tools": [ [ [ "swage", -1 ] ] ],
+    "proficiencies": [
+      { "proficiency": "prof_armorsmithing" },
+      { "proficiency": "prof_metalworking" },
+      { "proficiency": "prof_blacksmithing" }
+    ]
+  },
+  {
+    "result": "steel_esapi_plate_xl",
+    "type": "recipe",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "fabrication",
+    "difficulty": 5,
+    "time": "10 h",
+    "autolearn": true,
+    "book_learn": [ [ "recipe_melee", 7 ] ],
+    "using": [ [ "tailoring_nylon_sheet", 2 ], [ "blacksmithing_standard", 16 ], [ "steel_standard", 8 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "swage", -1 ] ] ],
     "proficiencies": [
@@ -1204,8 +1264,9 @@
     "time": "30 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_melee", 2 ] ],
-    "using": [ [ "cordage", 1 ], [ "mixed_steel", 1 ] ],
-    "components": [ [ [ "cotton_patch", 2 ] ] ],
+    "using": [ [ "cordage", 1 ] ],
+    "components": [ [ [ "cotton_sheet", 2 ] ], [ [ "sheet_metal_small", 1 ] ] ],
+    "byproducts": [ [ "scrap", 4 ] ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ]
   },
   {
@@ -1216,7 +1277,7 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
     "difficulty": 5,
-    "time": "4 d",
+    "time": "4 h",
     "autolearn": true,
     "book_learn": [ [ "recipe_melee", 6 ] ],
     "using": [ [ "tailoring_nylon_sheet", 1 ], [ "blacksmithing_standard", 16 ], [ "steel_standard", 4 ] ],
@@ -1893,7 +1954,6 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 3,
-    "skills_required": [ "survival", 1 ],
     "time": "7 h 45 m",
     "autolearn": true,
     "reversible": true,
@@ -1913,7 +1973,6 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 3,
-    "skills_required": [ "survival", 1 ],
     "time": "7 h 20 m",
     "autolearn": true,
     "reversible": true,
@@ -1933,7 +1992,6 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 3,
-    "skills_required": [ "survival", 1 ],
     "time": "8 h",
     "autolearn": true,
     "reversible": true,
@@ -2203,18 +2261,6 @@
     "using": [ [ "tailoring_cotton_sheet", 14 ] ]
   },
   {
-    "result": "tank_top",
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
-    "skill_used": "tailor",
-    "difficulty": 2,
-    "time": "38 m",
-    "autolearn": true,
-    "using": [ [ "tailoring_cotton_sheet", 4 ] ]
-  },
-  {
     "result": "thermal_shirt",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
@@ -2235,7 +2281,6 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 3,
-    "skills_required": [ "survival", 1 ],
     "time": "8 h 20 m",
     "reversible": true,
     "autolearn": true,
@@ -2347,7 +2392,7 @@
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
-    "result": "undershirt",
+    "result": "tank_top",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
@@ -2385,23 +2430,39 @@
     "decomp_learn": 6,
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 2 } ],
-    "using": [ [ "armor_kevlar_layered", 4 ], [ "tailoring_nylon_sheet", 12 ] ],
+    "using": [ [ "armor_kevlar_layered", 4 ], [ "tailoring_nylon_sheet", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_polymerworking", "required": false, "time_multiplier": 1.25 } ]
   },
   {
-    "result": "xlkevlar",
+    "result": "ballistic_vest_concealable_xl",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",
     "difficulty": 6,
-    "time": "75 h",
+    "time": "34 h",
     "reversible": true,
     "decomp_learn": 6,
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 2 } ],
-    "using": [ [ "armor_kevlar_layered", 12 ], [ "tailoring_nylon_sheet", 30 ] ],
+    "using": [ [ "armor_kevlar_layered", 8 ], [ "tailoring_nylon_sheet", 6 ] ],
+    "proficiencies": [ { "proficiency": "prof_polymerworking", "required": false, "time_multiplier": 1.25 } ]
+  },
+  {
+    "result": "ballistic_vest_concealable_xs",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_TORSO",
+    "skill_used": "tailor",
+    "difficulty": 6,
+    "time": "24 h",
+    "reversible": true,
+    "decomp_learn": 6,
+    "autolearn": true,
+    "qualities": [ { "id": "SEW", "level": 2 } ],
+    "using": [ [ "armor_kevlar_layered", 2 ], [ "tailoring_nylon_sheet", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_polymerworking", "required": false, "time_multiplier": 1.25 } ]
   },
   {
@@ -2832,7 +2893,8 @@
     "components": [ [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
   },
   {
-    "result": "xl_ballistic_vest",
+    "result": "plate_carrier_xl",
+    "//": "Todo: Improve this recipe, make one for the regular sized carrier, remove autolearn and put them in a book.",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
@@ -2842,7 +2904,7 @@
     "time": "15 h",
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 2 } ],
-    "using": [ [ "armor_kevlar_layered", 20 ], [ "tailoring_nylon_sheet", 30 ] ],
+    "using": [ [ "armor_kevlar_layered", 24 ], [ "tailoring_nylon_sheet", 30 ] ],
     "proficiencies": [ { "proficiency": "prof_polymerworking" }, { "proficiency": "prof_closures" } ],
     "components": [
       [
@@ -2853,17 +2915,5 @@
       ],
       [ [ "light_load_bearing_vest", 1 ], [ "webbing_belt", 1 ], [ "molle_pack", 1 ] ]
     ]
-  },
-  {
-    "result": "xl_ballistic_vest_steel",
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
-    "time": "10 m",
-    "skill_used": "fabrication",
-    "autolearn": true,
-    "reversible": true,
-    "components": [ [ [ "xl_ballistic_vest", 1 ] ], [ [ "sheet_metal_small", 20 ] ] ]
   }
 ]

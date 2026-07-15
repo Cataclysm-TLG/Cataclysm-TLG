@@ -75,7 +75,9 @@
       "PERSONAL",
       "NO_REPAIR",
       "ALLOWS_NATURAL_ATTACKS",
-      "USES_BIONIC_POWER"
+      "USES_BIONIC_POWER",
+      "NO_UNLOAD",
+      "NO_RELOAD"
     ]
   },
   {
@@ -440,5 +442,13 @@
     "name": { "str": "concrete mixer" },
     "copy-from": "fake_appliance_tool",
     "charges_per_use": 20
+  },
+  {
+    "id": "fake_lathe",
+    "copy-from": "fake_appliance_tool",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "name": { "str": "lathe" },
+    "charges_per_use": 25
   }
 ]

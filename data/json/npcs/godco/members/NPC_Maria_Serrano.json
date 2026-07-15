@@ -180,17 +180,7 @@
         "topic": "TALK_GODCO_Maria_Tailor_Start"
       },
       {
-        "text": "I'll have a duster.",
-        "condition": { "u_has_items": { "item": "icon", "count": 6 } },
-        "effect": [
-          { "npc_add_var": "general_trade_u_want_duster", "value": "yes" },
-          { "math": [ "n_timer_trade_knitting = time('now')" ] },
-          { "u_sell_item": "icon", "count": 6 }
-        ],
-        "topic": "TALK_GODCO_Maria_Tailor_Start"
-      },
-      {
-        "text": "I'll have a long coat.",
+        "text": "I'll have a longcoat.",
         "condition": { "u_has_items": { "item": "icon", "count": 6 } },
         "effect": [
           { "npc_add_var": "general_trade_u_want_longcoat", "value": "yes" },
@@ -288,21 +278,6 @@
           { "npc_lose_var": "general_trade_u_want_dress" },
           { "npc_lose_var": "timer_trade_knitting" },
           { "u_spawn_item": "dress" }
-        ],
-        "topic": "TALK_GODCO_Maria_Tailor_Done"
-      },
-      {
-        "text": "I ordered a duster.",
-        "condition": {
-          "and": [
-            { "npc_has_var": "general_trade_u_want_duster", "value": "yes" },
-            { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('4 d')" ] }
-          ]
-        },
-        "effect": [
-          { "npc_lose_var": "general_trade_u_want_duster" },
-          { "npc_lose_var": "timer_trade_knitting" },
-          { "u_spawn_item": "duster" }
         ],
         "topic": "TALK_GODCO_Maria_Tailor_Done"
       },

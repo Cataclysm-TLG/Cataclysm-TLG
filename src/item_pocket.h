@@ -172,6 +172,10 @@ class item_pocket
         std::list<item *> all_items_ptr( pocket_type pk_type );
         std::list<const item *> all_items_ptr( pocket_type pk_type ) const;
 
+        // Sum of ememory_size() across top-level contents. Only meaningful
+        // for E_FILE_STORAGE pockets, used by item::occupied_ememory().
+        units::ememory occupied_ememory() const;
+
         item &back();
         const item &back() const;
         item &front();
@@ -212,6 +216,14 @@ class item_pocket
         // combined volume of contained items
         units::volume contains_volume() const;
         units::volume remaining_volume() const;
+
+        // While bulk-fill is active, contents_volume()/contains_weight() return
+        // a running total updated on each insertion rather than re-summing all
+        // contents, turning an O(n^2) fill into O(n). Only correct while nothing
+        // else mutates the contents between the paired calls (e.g. filling one
+        // fresh container); end_bulk_fill() drops the totals.
+        void begin_bulk_fill();
+        void end_bulk_fill();
         // how many more of @it can this pocket hold?
         int remaining_capacity_for_item( const item &it ) const;
         units::volume volume_capacity() const;
@@ -416,6 +428,9 @@ class item_pocket
         // the items inside the pocket
         std::list<item> contents;
         bool _sealed = false;
+        // Running totals tracked only between begin_bulk_fill()/end_bulk_fill().
+        std::optional<units::volume> bulk_fill_volume; // NOLINT(cata-serialize)
+        std::optional<units::mass> bulk_fill_weight; // NOLINT(cata-serialize)
         // list of sub body parts that can't currently support rigid ablative armor
         std::set<sub_bodypart_id> no_rigid;
 
@@ -456,7 +471,7 @@ struct pocket_noise {
 class pocket_data
 {
     public:
-        using FlagsSetType = std::set<flag_id>;
+        using FlagsSetType = cata::flat_set<flag_id>;
 
         bool was_loaded = false;
 

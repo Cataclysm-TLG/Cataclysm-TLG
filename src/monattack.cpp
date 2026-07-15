@@ -47,6 +47,8 @@
 #include "harvest.h"
 #include "item.h"
 #include "item_stack.h"
+#include "item_location.h"
+#include "item_transformation.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -168,6 +170,8 @@ static const itype_id itype_bot_manhack( "bot_manhack" );
 static const itype_id itype_bot_mininuke_hack( "bot_mininuke_hack" );
 static const itype_id itype_bot_pacification_hack( "bot_pacification_hack" );
 static const itype_id itype_e_handcuffs( "e_handcuffs" );
+static const itype_id itype_processor( "processor" );
+static const itype_id itype_m4_carbine( "m4_carbine" );
 
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 
@@ -231,11 +235,6 @@ static const ter_str_id ter_t_underbrush( "t_underbrush" );
 static const trait_id trait_MARLOSS( "MARLOSS" );
 static const trait_id trait_MARLOSS_BLUE( "MARLOSS_BLUE" );
 static const trait_id trait_PARAIMMUNE( "PARAIMMUNE" );
-static const trait_id trait_PROF_CHURL( "PROF_CHURL" );
-static const trait_id trait_PROF_FED( "PROF_FED" );
-static const trait_id trait_PROF_PD_DET( "PROF_PD_DET" );
-static const trait_id trait_PROF_POLICE( "PROF_POLICE" );
-static const trait_id trait_PROF_SWAT( "PROF_SWAT" );
 static const trait_id trait_THRESH_MARLOSS( "THRESH_MARLOSS" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
 
@@ -249,14 +248,26 @@ static bool within_visual_range( monster *z, int max_range )
               !z->sees( here, player_character ) );
 }
 
-static bool within_target_range( const monster *const z, const Creature *const target, int range )
+static bool within_target_range( const monster *const z, const Creature *const target,
+                                 int range )
 {
+    if( target == nullptr ) {
+        return false;
+    }
     const map &here = get_map();
-
-    return target != nullptr &&
-           ( z->is_adjacent( target, true ) ||
-             trig_dist( z->pos_bub(), target->pos_bub() ) <= range ) &&
-           z->sees( here, *target );
+    if( z->is_adjacent( target, true ) ) {
+        return z->sees( here, *target );
+    }
+    bool in_range = false;
+    if( z->pos_bub().z() == target->pos_bub().z() ) {
+        in_range = trig_dist( z->pos_bub(), target->pos_bub() ) <= range;
+    } else {
+        // If we're on different Z levels, round up to make sure they count properly for 2.
+        in_range = static_cast<int>(
+                       std::ceil(
+                           trig_dist_precise( z->pos_bub(), target->pos_bub() ) ) ) <= range;
+    }
+    return in_range && z->sees( here, *target );
 }
 
 static Creature *sting_get_target( monster *z, float range = 5.0f )
@@ -709,7 +720,7 @@ bool mattack::shriek_stun( monster *z )
         }
         // Affect the target
         // Small bash to every square, silent to not flood message box. Only affects glass/crystal items.
-        here.bash( cone, 4, true, false, false, nullptr, true );
+        here.bash( cone, 4, true, false, false, false, nullptr, true );
 
         // If a monster is there, chance for stun
         Creature *target = creatures.creature_at( cone );
@@ -1075,7 +1086,7 @@ bool mattack::pull_metal_weapon( monster *z )
                     proj.speed = 50;
                     proj.impact = damage_instance( damage_bash, pulled_weapon.weight() / 250_gram );
                     // make the projectile stop one tile short to prevent hitting the monster
-                    proj.range = rl_dist( foe->pos_bub(), z->pos_bub() ) - 1;
+                    proj.range = trig_dist( foe->pos_bub(), z->pos_bub() ) - 1;
                     proj.proj_effects = { { ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET } };
 
                     dealt_projectile_attack dealt;
@@ -1353,9 +1364,6 @@ void mattack::smash_specific( monster *z, Creature *target )
 {
     if( target == nullptr || !z->is_adjacent( target, false ) ) {
         return;
-    }
-    if( z->has_flag( mon_flag_RIDEABLE_MECH ) ) {
-        z->use_mech_power( 5_kJ );
     }
     z->set_dest( target->pos_abs() );
     smash( z );
@@ -2241,7 +2249,15 @@ bool mattack::formblob( monster *z )
             if( z->get_speed_base() > mon_blob_small->speed + 35 && rng( 0, 250 ) < z->get_speed_base() ) {
                 // If we're big enough, spawn a baby blob.
                 shared_ptr_fast<monster> mon = make_shared_fast<monster>( mon_blob_small );
-                mon->ammo = mon->type->starting_ammo;
+                if( !mon->type->starting_ammo.empty() ) {
+                    for( const auto &pair : mon->type->starting_ammo ) {
+                        const itype_id &ammo_type = pair.first;
+                        int max_amt = pair.second;
+                        int min_amt = std::min( mon->type->starting_ammo_min, pair.second );
+                        int qty = rng( min_amt, max_amt );
+                        mon->ammo[ ammo_type ] = qty;
+                    }
+                }
                 if( mon->will_move_to( dest ) && mon->know_danger_at( dest ) ) {
                     didit = true;
                     z->set_speed_base( z->get_speed_base() - mon_blob_small->speed );
@@ -2675,72 +2691,64 @@ bool mattack::photograph( monster *z )
     // Badges should NOT be swappable between roles.
     // Hence separate checking.
     // If you are in fact listed as a police officer
-    if( player_character.has_trait( trait_PROF_POLICE ) ) {
+    if( player_character.is_wearing( itype_badge_deputy ) ) {
         // And you're wearing your badge
-        if( player_character.is_wearing( itype_badge_deputy ) ) {
-            if( one_in( 3 ) ) {
-                add_msg( m_info, _( "The %s flashes a LED and departs.  Human officer on scene." ),
-                         z->name() );
-                z->no_corpse_quiet = true;
-                z->no_extra_death_drops = true;
-                z->die( &here, nullptr );
-                return false;
-            } else {
-                add_msg( m_info,
-                         _( "The %s acknowledges you as an officer responding, but hangs around to watch." ),
-                         z->name() );
-                add_msg( m_info, _( "Probably some now-obsolete Internal Affairs subroutine…" ) );
-                return true;
-            }
-        }
-    }
-
-    if( player_character.has_trait( trait_PROF_PD_DET ) ) {
-        // And you have your shield on
-        if( player_character.is_wearing( itype_badge_detective ) ) {
-            if( one_in( 4 ) ) {
-                add_msg( m_info, _( "The %s flashes a LED and departs.  Human officer on scene." ),
-                         z->name() );
-                z->no_corpse_quiet = true;
-                z->no_extra_death_drops = true;
-                z->die( &here, nullptr );
-                return false;
-            } else {
-                add_msg( m_info,
-                         _( "The %s acknowledges you as an officer responding, but hangs around to watch." ),
-                         z->name() );
-                add_msg( m_info, _( "Ops used to do that in case you needed backup…" ) );
-                return true;
-            }
-        }
-    } else if( player_character.has_trait( trait_PROF_SWAT ) ) {
-        // And you're wearing your badge
-        if( player_character.is_wearing( itype_badge_swat ) ) {
-            if( one_in( 3 ) ) {
-                add_msg( m_info, _( "The %s flashes a LED and departs.  SWAT's working the area." ),
-                         z->name() );
-                z->no_corpse_quiet = true;
-                z->no_extra_death_drops = true;
-                z->die( &here, nullptr );
-                return false;
-            } else {
-                add_msg( m_info, _( "The %s acknowledges you as SWAT onsite, but hangs around to watch." ),
-                         z->name() );
-                add_msg( m_info, _( "Probably some now-obsolete Internal Affairs subroutine…" ) );
-                return true;
-            }
-        }
-    }
-
-    if( player_character.has_trait( trait_PROF_FED ) ) {
-        // And you're wearing your badge
-        if( player_character.is_wearing( itype_badge_marshal ) ) {
-            add_msg( m_info, _( "The %s flashes a LED and departs.  The Feds got this." ), z->name() );
+        if( one_in( 3 ) ) {
+            add_msg( m_info, _( "The %s flashes a LED and departs.  Human officer on scene." ),
+                     z->name() );
             z->no_corpse_quiet = true;
             z->no_extra_death_drops = true;
             z->die( &here, nullptr );
             return false;
+        } else {
+            add_msg( m_info,
+                     _( "The %s acknowledges you as an officer responding, but hangs around to watch." ),
+                     z->name() );
+            add_msg( m_info, _( "Probably some now-obsolete Internal Affairs subroutine…" ) );
+            return true;
         }
+    }
+
+    if( player_character.is_wearing( itype_badge_detective ) ) {
+        // And you have your shield on
+        if( one_in( 4 ) ) {
+            add_msg( m_info, _( "The %s flashes a LED and departs.  Human officer on scene." ),
+                     z->name() );
+            z->no_corpse_quiet = true;
+            z->no_extra_death_drops = true;
+            z->die( &here, nullptr );
+            return false;
+        } else {
+            add_msg( m_info,
+                     _( "The %s acknowledges you as an officer responding, but hangs around to watch." ),
+                     z->name() );
+            add_msg( m_info, _( "Ops used to do that in case you needed backup…" ) );
+            return true;
+        }
+    } else if( player_character.is_wearing( itype_badge_swat ) ) {
+        // And you're wearing your badge
+        if( one_in( 3 ) ) {
+            add_msg( m_info, _( "The %s flashes a LED and departs.  SWAT's working the area." ),
+                     z->name() );
+            z->no_corpse_quiet = true;
+            z->no_extra_death_drops = true;
+            z->die( &here, nullptr );
+            return false;
+        } else {
+            add_msg( m_info, _( "The %s acknowledges you as SWAT onsite, but hangs around to watch." ),
+                     z->name() );
+            add_msg( m_info, _( "Probably some now-obsolete Internal Affairs subroutine…" ) );
+            return true;
+        }
+    }
+
+    if( player_character.is_wearing( itype_badge_marshal ) ) {
+        // And you're wearing your badge
+        add_msg( m_info, _( "The %s flashes a LED and departs.  The Feds got this." ), z->name() );
+        z->no_corpse_quiet = true;
+        z->no_extra_death_drops = true;
+        z->die( &here, nullptr );
+        return false;
     }
 
     if( z->friendly || ( weapon && weapon->typeId() == itype_e_handcuffs ) ) {
@@ -2890,7 +2898,8 @@ void mattack::rifle( monster *z, Creature *target )
     }
     add_msg_if_player_sees( *z, m_warning, _( "The %s opens up with its rifle!" ), z->name() );
 
-    tmp.set_wielded_item( item( "m4_carbine" ).ammo_set( ammo_type, z->ammo[ ammo_type ] ) );
+    tmp.set_wielded_item( item( itype_m4_carbine, calendar::turn_zero ).ammo_set( ammo_type,
+                          z->ammo[ ammo_type ] ) );
 
     item_location weapon = tmp.get_wielded_item();
     int burst = std::max( weapon->gun_get_mode( gun_mode_AUTO ).qty, 1 );
@@ -2923,7 +2932,7 @@ bool mattack::searchlight( monster *z )
         creature_tracker &creatures = get_creature_tracker();
         for( int i = 0; i < max_lamp_count; i++ ) {
 
-            item settings( "processor", calendar::turn_zero );
+            item settings( itype_processor, calendar::turn_zero );
 
             settings.set_var( "SL_PREFER_UP", "TRUE" );
             settings.set_var( "SL_PREFER_DOWN", "TRUE" );
@@ -3437,7 +3446,8 @@ bool mattack::blow_whistle( monster *z )
         return false;
     }
     add_msg_if_player_sees( *z, m_warning, _( "The %1$s loudly blows their whistle!" ), z->name() );
-    sounds::sound( z->pos_bub( here ), 40, sounds::sound_t::alarm, _( "FWEEEET!" ), false, "misc",
+    // should match the loudness of whistle item
+    sounds::sound( z->pos_bub( here ), 100, sounds::sound_t::alarm, _( "FWEEEET!" ), false, "misc",
                    "whistle" );
 
     return true;
@@ -3684,7 +3694,7 @@ bool mattack::riotbot( monster *z )
         if( choice == ur_arrest ) {
             z->anger = 0;
 
-            item handcuffs( "e_handcuffs", calendar::turn_zero );
+            item handcuffs( itype_e_handcuffs, calendar::turn_zero );
             handcuffs.charges = handcuffs.type->maximum_charges();
             handcuffs.active = true;
             const tripoint_bub_ms foe_pos = foe->pos_bub( here );
@@ -4266,8 +4276,8 @@ bool mattack::kamikaze( monster *z )
         z->disable_special( "KAMIKAZE" );
         return true;
     }
-    act_bomb_type = item::find_type( actor->target );
-    int delay = to_seconds<int>( actor->target_timer );
+    act_bomb_type = item::find_type( actor->transform.target );
+    int delay = to_seconds<int>( actor->transform.target_timer );
 
     // HACK: HORRIBLE HACK ALERT! Remove the following code completely once we have working monster inventory processing
     if( z->has_effect( effect_countdown ) ) {

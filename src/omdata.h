@@ -14,13 +14,13 @@
 #include <string>
 #include <vector>
 
-#include "assign.h"
 #include "catacharset.h"
 #include "color.h"
 #include "common_types.h"
 #include "coordinates.h"
 #include "cube_direction.h"
 #include "enum_bitset.h"
+#include "flat_set.h"
 #include "mapgen_parameter.h"
 #include "point.h"
 #include "translations.h"
@@ -38,6 +38,8 @@ class overmap;
 class overmap_connection;
 class overmap_special;
 class overmap_special_batch;
+enum class om_vision_level : int8_t;
+struct map_data_summary;
 struct mapgen_arguments;
 struct oter_t;
 struct overmap_location;
@@ -140,7 +142,7 @@ class overmap_land_use_code
 
         // Used by generic_factory
         bool was_loaded = false;
-        void load( const JsonObject &jo, const std::string &src );
+        void load( const JsonObject &jo, std::string_view src );
         void finalize();
         void check() const;
 };
@@ -278,6 +280,7 @@ class oter_vision
         const level *viewed( om_vision_level ) const;
 
         static void load_oter_vision( const JsonObject &jo, const std::string &src );
+        static void finalize_all();
         static void reset();
         static void check_oter_vision();
         static const std::vector<oter_vision> &get_all();
@@ -312,6 +315,7 @@ struct oter_type_t {
         nc_color color = c_black;
     public:
         overmap_land_use_code_id land_use_code = overmap_land_use_code_id::NULL_ID();
+        string_id<map_data_summary> default_map_data;
         std::vector<std::string> looks_like;
         enum class see_costs : uint8_t {
             all_clear, // no vertical or horizontal obstacles
@@ -364,7 +368,7 @@ struct oter_type_t {
             flags.set( flag, value );
         }
 
-        void load( const JsonObject &jo, const std::string &src );
+        void load( const JsonObject &jo, std::string_view src );
         void check() const;
         void finalize();
 
@@ -630,14 +634,7 @@ struct overmap_special_connection {
     string_id<overmap_connection> connection;
     bool existing = false;
 
-    void deserialize( const JsonValue &jsin ) {
-        JsonObject jo = jsin.get_object();
-        jo.read( "point", p );
-        jo.read( "terrain", terrain );
-        jo.read( "existing", existing );
-        jo.read( "connection", connection );
-        assign( jo, "from", from );
-    }
+    void deserialize( const JsonObject &jo );
 };
 
 struct overmap_special_placement_constraints {
@@ -724,7 +721,7 @@ class overmap_special
 
         // Used by generic_factory
         bool was_loaded = false;
-        void load( const JsonObject &jo, const std::string &src );
+        void load( const JsonObject &jo, std::string_view src );
         void finalize();
         void finalize_mapgen_parameters();
         void check() const;
@@ -747,6 +744,7 @@ class overmap_special
 struct overmap_special_migration {
     public:
         static void load_migrations( const JsonObject &jo, const std::string &src );
+        static void finalize_all();
         static void reset();
         void load( const JsonObject &jo, std::string_view src );
         static void check();

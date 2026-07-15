@@ -128,10 +128,10 @@ bool string_id<effect_type>::is_valid() const
 
 void weed_msg( Character &p )
 {
-    const time_duration howhigh = p.get_effect_dur( effect_weed_high );
+    const int howhigh = p.get_effect_int( effect_weed_high );
     ///\EFFECT_INT changes messages when smoking weed
     int smarts = p.get_int();
-    if( howhigh > 12_minutes && one_in( 7 ) ) {
+    if( howhigh > 3 && one_in( 10 ) ) {
         int msg = rng( 0, 5 );
         switch( msg ) {
             case 0:
@@ -141,7 +141,6 @@ void weed_msg( Character &p )
             case 1:
                 p.add_msg_if_player( "%s", SNIPPET.random_from_category( "weed_Simpsons_1" ).value_or(
                                          translation() ) );
-                p.mod_hunger( 2 );
                 return;
             case 2:
                 if( smarts > 8 ) {
@@ -190,7 +189,7 @@ void weed_msg( Character &p )
             default:
                 return;
         }
-    } else if( howhigh > 10_minutes && one_in( 5 ) ) {
+    } else if( howhigh > 2 && one_in( 8 ) ) {
         int msg = rng( 0, 5 );
         switch( msg ) {
             case 0:
@@ -241,7 +240,7 @@ void weed_msg( Character &p )
             default:
                 return;
         }
-    } else if( howhigh > 5_minutes && one_in( 3 ) ) {
+    } else if( howhigh > 1 && one_in( 6 ) ) {
         int msg = rng( 0, 5 );
         switch( msg ) {
             case 0:
@@ -251,7 +250,6 @@ void weed_msg( Character &p )
             case 1:
                 p.add_msg_if_player( "%s", SNIPPET.random_from_category( "weed_Real_Life_1" ).value_or(
                                          translation() ) );
-                p.mod_hunger( 4 );
                 if( p.has_trait( trait_VEGETARIAN ) ) {
                     p.add_msg_if_player( "%s", SNIPPET.random_from_category( "weed_Real_Life_2" ).value_or(
                                              translation() ) );
@@ -400,6 +398,18 @@ void effect_type::load_mod_data( const JsonObject &j )
         {"stim_chance",      mod_action::CHANCE_TOP},
         {"stim_chance_bot",  mod_action::CHANCE_BOT},
         {"stim_tick",        mod_action::TICK},
+    } );
+
+    // Then focus
+    extract_effect( to_extract, "FOCUS", {
+        {"focus_amount",      mod_action::AMOUNT},
+        {"focus_min",         mod_action::MIN},
+        {"focus_max",         mod_action::MAX},
+        {"focus_min_val",     mod_action::MIN_VAL},
+        {"focus_max_val",     mod_action::MAX_VAL},
+        {"focus_chance",      mod_action::CHANCE_TOP},
+        {"focus_chance_bot",  mod_action::CHANCE_BOT},
+        {"focus_tick",        mod_action::TICK},
     } );
 
     // Then health
@@ -899,19 +909,22 @@ std::string effect::disp_desc( bool reduced ) const
                          _( "pain" ) );
     val = get_avg_mod( "HURT", reduced );
     values.emplace_back( get_percentage( "HURT", val, reduced ), val, _( "damage" ),
-                         _( "damage" ) );
+                         _( "healing" ) );
     val = get_avg_mod( "STAMINA", reduced );
     values.emplace_back( get_percentage( "STAMINA", val, reduced ), val,
-                         _( "stamina recovery" ), _( "fatigue" ) );
+                         _( "invigoration" ), _( "dyspnea" ) );
     val = get_avg_mod( "THIRST", reduced );
     values.emplace_back( get_percentage( "THIRST", val, reduced ), val, _( "thirst" ),
                          _( "quench" ) );
     val = get_avg_mod( "HUNGER", reduced );
     values.emplace_back( get_percentage( "HUNGER", val, reduced ), val, _( "hunger" ),
-                         _( "sate" ) );
+                         _( "satiation" ) );
     val = get_avg_mod( "FATIGUE", reduced );
-    values.emplace_back( get_percentage( "FATIGUE", val, reduced ), val, _( "sleepiness" ),
-                         _( "rest" ) );
+    values.emplace_back( get_percentage( "FATIGUE", val, reduced ), val, _( "fatigue" ),
+                         _( "alertness" ) );
+    val = get_avg_mod( "FOCUS", reduced );
+    values.emplace_back( get_percentage( "FOCUS", val, reduced ), val, _( "focus" ),
+                         _( "distraction" ) );
     val = get_avg_mod( "COUGH", reduced );
     values.emplace_back( get_percentage( "COUGH", val, reduced ), val, _( "coughing" ),
                          _( "coughing" ) );
@@ -1076,16 +1089,10 @@ time_duration effect::get_max_duration() const
 void effect::set_duration( const time_duration &dur, bool alert )
 {
     duration = dur;
-    // Cap to max_duration
-    if( duration > eff_type->max_duration ) {
-        duration = eff_type->max_duration;
-    }
 
-    // Force intensity if it is duration based
-    if( eff_type->int_dur_factor != 0_turns ) {
-        const int intensity = std::ceil( duration / eff_type->int_dur_factor );
-        set_intensity( std::max( 1, intensity ), alert );
-    }
+    clamp_duration();
+
+    apply_int_dur_factor( alert );
 
     add_msg_debug( debugmode::DF_EFFECT, "ID: %s, Duration %s", get_id().c_str(),
                    to_string_writable( duration ) );
@@ -1097,6 +1104,11 @@ void effect::mod_duration( const time_duration &dur, bool alert )
 void effect::mult_duration( double dur, bool alert )
 {
     set_duration( duration * dur, alert );
+}
+void effect::clamp_duration()
+{
+    duration = std::min( duration, eff_type->max_duration );
+
 }
 
 static int cap_to_size( const int max, int attempt )
@@ -1208,13 +1220,9 @@ int effect::get_effective_intensity() const
 
 int effect::set_intensity( int val, bool alert )
 {
-    if( intensity < 1 ) {
-        // Fix bad intensity
-        add_msg_debug( debugmode::DF_EFFECT, "Bad intensity, ID: %s", get_id().c_str() );
-        intensity = 1;
-    }
+    clamp_intensity();
 
-    val = std::max( std::min( val, eff_type->max_intensity ), 0 );
+    val = std::clamp( val, 0, eff_type->max_intensity );
     if( val == intensity ) {
         // Nothing to change
         return intensity;
@@ -1238,9 +1246,29 @@ int effect::set_intensity( int val, bool alert )
     return intensity;
 }
 
+int effect::clamp_intensity()
+{
+    if( intensity < 1 ) {
+        add_msg_debug( debugmode::DF_CREATURE, "Bad intensity, ID: %s", eff_type->id.c_str() );
+        intensity = 1;
+    } else if( intensity > eff_type->max_intensity ) {
+        intensity = eff_type->max_intensity;
+    }
+    return intensity;
+}
+
 int effect::mod_intensity( int mod, bool alert )
 {
     return set_intensity( intensity + mod, alert );
+}
+
+int effect::apply_int_dur_factor( bool alert )
+{
+    if( eff_type->int_dur_factor != 0_turns ) {
+        const int new_intensity = std::ceil( duration / eff_type->int_dur_factor );
+        set_intensity( std::max( 1, new_intensity ), alert );
+    }
+    return intensity;
 }
 
 const std::vector<trait_id> &effect::get_resist_traits() const

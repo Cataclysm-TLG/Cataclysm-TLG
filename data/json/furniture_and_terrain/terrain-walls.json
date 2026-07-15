@@ -1503,26 +1503,27 @@
   },
   {
     "type": "terrain",
-    "id": "t_wall_glass_lab",
-    "copy-from": "t_wall_glass",
-    "bash": {
-      "str_min": 4,
-      "str_max": 12,
-      "sound": "glass breaking!",
-      "sound_fail": "whack!",
-      "sound_vol": 16,
-      "sound_fail_vol": 10,
-      "ter_set": "t_strconc_floor",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] } ]
-    }
-  },
-  {
-    "type": "terrain",
     "id": "t_laminated_glass",
     "copy-from": "t_abstract_wall_glass",
     "name": "laminated glass wall",
-    "looks_like": "t_reinforced_glass",
+    "looks_like": "t_laminated_glass",
     "description": "A barrier made of laminated safety glass.  It's a lot tougher than regular glass, and is designed to break into fragments that are nowhere near as sharp.",
+    "bash": {
+      "str_min": 20,
+      "str_max": 60,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": 20,
+      "sound_fail_vol": 14,
+      "ter_set": "t_floor",
+      "items": [ { "item": "tempered_glass_shard", "charges": [ 20, 44 ] } ]
+    },
+    "shoot": { "reduce_damage": [ 2, 12 ], "reduce_damage_laser": [ 0, 7 ], "destroy_damage": [ 40, 120 ], "no_laser_destroy": true }
+  },
+  {
+    "type": "terrain",
+    "id": "t_laminated_glass_lab",
+    "copy-from": "t_laminated_glass",
     "bash": {
       "str_min": 20,
       "str_max": 60,
@@ -1540,7 +1541,7 @@
     "id": "t_ballistic_glass",
     "copy-from": "t_abstract_wall_glass",
     "name": "ballistic glass wall",
-    "looks_like": "t_reinforced_glass",
+    "looks_like": "t_laminated_glass",
     "description": "A ballistic glass barrier, consisting of layers of laminated glass.  Its heavyweight construction is tough enough that even bullets that get through are unlikely to fully shatter it.",
     "bash": {
       "str_min": 25,
@@ -1561,44 +1562,10 @@
   },
   {
     "type": "terrain",
-    "id": "t_reinforced_glass",
-    "copy-from": "t_abstract_wall_glass",
-    "name": "wired glass",
-    "looks_like": "t_glass",
-    "description": "A thicker pane of glass with an embedded grid of wire to help hold it together in case of damage.",
-    "bash": {
-      "str_min": 14,
-      "str_max": 50,
-      "sound": "glass breaking!",
-      "sound_fail": "whack!",
-      "sound_vol": 20,
-      "sound_fail_vol": 14,
-      "ter_set": "t_floor",
-      "items": [ { "item": "glass_shard", "charges": [ 15, 34 ] }, { "item": "wire", "prob": 20 } ]
-    },
-    "shoot": { "reduce_damage": [ 5, 10 ], "reduce_damage_laser": [ 0, 10 ], "destroy_damage": [ 4, 25 ], "no_laser_destroy": true }
-  },
-  {
-    "type": "terrain",
-    "id": "t_reinforced_glass_lab",
-    "copy-from": "t_reinforced_glass",
-    "bash": {
-      "str_min": 40,
-      "str_max": 210,
-      "sound": "glass breaking!",
-      "sound_fail": "whack!",
-      "sound_vol": 20,
-      "sound_fail_vol": 14,
-      "ter_set": "t_strconc_floor",
-      "items": [ { "item": "glass_shard", "charges": [ 15, 34 ] }, { "item": "wire", "prob": 20 } ]
-    }
-  },
-  {
-    "type": "terrain",
-    "id": "t_reinforced_glass_shutter",
-    "name": "wired glass with closed shutters",
+    "id": "t_laminated_glass_shutter",
+    "name": "laminated glass with closed shutters",
     "looks_like": "t_wall_metal",
-    "description": "Metal shutters cover this wired glass barrier, blocking out the view and adding some sturdy protection.  They should be openable, but only from the inside.",
+    "description": "Metal shutters cover this safety glass barrier, blocking out the view and adding some sturdy protection.  They should be openable, but only from the inside.",
     "symbol": "#",
     "color": "light_gray",
     "move_cost": 0,
@@ -1608,7 +1575,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE", "MINEABLE", "BLOCK_WIND" ],
-    "open": "t_reinforced_glass_shutter_open",
+    "open": "t_laminated_glass_shutter_open",
     "bash": {
       "str_min": 60,
       "str_max": 210,
@@ -1617,11 +1584,7 @@
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_floor",
-      "items": [
-        { "item": "glass_shard", "count": [ 20, 44 ] },
-        { "item": "wire", "prob": 20 },
-        { "item": "scrap", "count": [ 3, 5 ] }
-      ]
+      "items": [ { "item": "tempered_glass_shard", "charges": [ 20, 44 ] } ]
     },
     "shoot": {
       "reduce_damage": [ 20, 40 ],
@@ -1632,9 +1595,9 @@
   },
   {
     "type": "terrain",
-    "id": "t_reinforced_glass_shutter_open",
-    "name": "wired glass with open shutters",
-    "looks_like": "t_reinforced_glass",
+    "id": "t_laminated_glass_shutter_open",
+    "name": "laminated glass with open shutters",
+    "looks_like": "t_laminated_glass",
     "description": "Hanging metal shutters that haven't been deployed, exposing the wired glass.  It appears as though the metal shutters can only be closed from the inside.",
     "symbol": "#",
     "color": "light_cyan",
@@ -1655,27 +1618,18 @@
       "BLOCK_WIND",
       "UNCLINGABLE"
     ],
-    "close": "t_reinforced_glass_shutter",
+    "close": "t_laminated_glass_shutter",
     "bash": {
-      "str_min": 16,
-      "str_max": 50,
+      "str_min": 20,
+      "str_max": 60,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_floor",
-      "items": [
-        { "item": "glass_shard", "charges": [ 20, 44 ] },
-        { "item": "wire", "prob": 20 },
-        { "item": "scrap", "count": [ 3, 5 ] }
-      ]
+      "items": [ { "item": "tempered_glass_shard", "charges": [ 20, 44 ] } ]
     },
-    "shoot": {
-      "reduce_damage": [ 5, 10 ],
-      "reduce_damage_laser": [ 15, 25 ],
-      "destroy_damage": [ 60, 160 ],
-      "no_laser_destroy": true
-    }
+    "shoot": { "reduce_damage": [ 2, 12 ], "reduce_damage_laser": [ 0, 7 ], "destroy_damage": [ 40, 120 ], "no_laser_destroy": true }
   },
   {
     "type": "terrain",

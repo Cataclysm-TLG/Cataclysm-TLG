@@ -138,166 +138,6 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-    "id": "armor_farmor",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "fur body armor" },
-    "description": "Thick body armor made from furs.",
-    "weight": "3414 g",
-    "volume": "10 L",
-    "price": "1000 USD",
-    "price_postapoc": "15 USD",
-    "to_hit": -5,
-    "material": [ "fur" ],
-    "symbol": "[",
-    "longest_side": "30 cm",
-    "looks_like": "leather_armor_suit",
-    "color": "brown",
-    "armor": [
-      {
-        "covers": [ "torso" ],
-        "coverage": 95,
-        "encumbrance": 24,
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ]
-      },
-      {
-        "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 18,
-        "coverage": 90,
-        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
-      },
-      {
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
-        "coverage": 100,
-        "encumbrance": 8,
-        "rigid_layer_only": true
-      },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 14 }
-    ],
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "3 kg",
-        "max_item_length": "165 mm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "3 kg",
-        "max_item_length": "165 mm",
-        "moves": 80
-      }
-    ],
-    "warmth": 45,
-    "material_thickness": 4,
-    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY", "OUTER", "ALLOWS_TAIL" ],
-    "melee_damage": { "bash": 2 }
-  },
-  {
-    "id": "xl_armor_farmor",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "fur body armor" },
-    "copy-from": "armor_farmor",
-    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
-  },
-  {
-    "id": "armor_farmor_xs",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "armor_farmor",
-    "looks_like": "armor_farmor",
-    "name": { "str": "fur body armor" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY", "OUTER", "UNDERSIZE", "PREFIX_XS" ]
-  },
-  {
-    "id": "armor_faux_farmor",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "faux fur body armor" },
-    "description": "Thick body armor made from faux furs.",
-    "weight": "3414 g",
-    "volume": "10 L",
-    "price": "1000 USD",
-    "price_postapoc": "15 USD",
-    "to_hit": -5,
-    "material": [ "faux_fur" ],
-    "symbol": "[",
-    "longest_side": "30 cm",
-    "looks_like": "leather_armor_suit",
-    "color": "brown",
-    "armor": [
-      {
-        "covers": [ "torso" ],
-        "coverage": 95,
-        "encumbrance": 24,
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ]
-      },
-      {
-        "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 18,
-        "coverage": 90,
-        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
-      },
-      {
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
-        "coverage": 100,
-        "encumbrance": 8,
-        "rigid_layer_only": true
-      },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 14 }
-    ],
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "3 kg",
-        "max_item_length": "165 mm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "3 kg",
-        "max_item_length": "165 mm",
-        "moves": 80
-      }
-    ],
-    "warmth": 40,
-    "material_thickness": 4,
-    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY", "OUTER", "ALLOWS_TAIL" ],
-    "melee_damage": { "bash": 2 }
-  },
-  {
-    "id": "xl_armor_faux_farmor",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "faux fur body armor" },
-    "copy-from": "armor_faux_farmor",
-    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
-  },
-  {
-    "id": "armor_faux_farmor_xs",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "armor_faux_farmor",
-    "looks_like": "armor_farmor",
-    "name": { "str": "faux fur body armor" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY", "OUTER", "UNDERSIZE", "PREFIX_XS" ]
-  },
-  {
     "id": "leather_armor_suit",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -769,6 +609,7 @@
       },
       {
         "covers": [ "leg_l", "leg_r" ],
+        "volume_encumber_modifier": 0,
         "encumbrance": 3,
         "coverage": 90,
         "material": [
@@ -780,6 +621,7 @@
       },
       {
         "covers": [ "foot_l", "foot_r" ],
+        "volume_encumber_modifier": 0,
         "encumbrance": 2,
         "coverage": 75,
         "material": [ { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.5 } ],
@@ -789,6 +631,7 @@
       },
       {
         "covers": [ "arm_l", "arm_r" ],
+        "volume_encumber_modifier": 0,
         "encumbrance": 3,
         "coverage": 90,
         "material": [
@@ -1545,10 +1388,9 @@
     "weight": "11556 g",
     "volume": "8255 ml",
     "price": "200 USD",
-    "price_postapoc": "100 USD",
+    "price_postapoc": "2 USD",
     "to_hit": -5,
-    "//": "real bite suits are made with linen, but we don't have linen, so denim is the closest approx. (canvas is always waterproofed and these suits are not)",
-    "material": [ "kevlar", "denim" ],
+    "material": [ "cotton", "kevlar" ],
     "symbol": "[",
     "looks_like": "coat_winter",
     "color": "light_gray",
@@ -1558,8 +1400,8 @@
     "armor": [
       {
         "material": [
-          { "type": "kevlar", "covered_by_mat": 95, "thickness": 4 },
-          { "type": "denim", "covered_by_mat": 100, "thickness": 3 }
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 4 }
         ],
         "covers": [ "torso" ],
         "coverage": 100,
@@ -1567,8 +1409,8 @@
       },
       {
         "material": [
-          { "type": "kevlar", "covered_by_mat": 100, "thickness": 4 },
-          { "type": "denim", "covered_by_mat": 100, "thickness": 3 }
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 4 }
         ],
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_upper_l", "arm_lower_l", "arm_upper_r", "arm_lower_r" ],
@@ -1597,8 +1439,6 @@
   },
   {
     "id": "hazmat_suit",
-    "//": "Should be substantially more difficult to repair than ordinary rubber - glass is difficulty 7",
-    "repairs_like": "glass",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "hazmat suit" },

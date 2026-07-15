@@ -42,7 +42,6 @@
 
 static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_run( "run" );
-static const itype_id itype_null( "null" );
 
 static const mission_type_id mission_NULL( "NULL" );
 
@@ -51,6 +50,7 @@ mission mission_type::create( const character_id &npc_id ) const
     mission ret;
     ret.uid = g->assign_mission_id();
     ret.type = this;
+    ret.dimension = g->get_dimension_prefix();
     ret.npc_id = npc_id;
     ret.item_id = item_id;
     ret.item_count = item_count;
@@ -406,7 +406,7 @@ void mission::wrap_up()
             std::map<itype_id, int> matches = std::map<itype_id, int>();
             get_all_item_group_matches(
                 items, grp_type, matches,
-                container, itype_null, specific_container_required );
+                container, itype_id::NULL_ID(), specific_container_required );
 
             for( std::pair<const itype_id, int> &cnt : matches ) {
                 comps.emplace_back( cnt.first, cnt.second );
@@ -502,7 +502,7 @@ bool mission::is_complete( const character_id &_npc_id ) const
             std::map<itype_id, int> matches = std::map<itype_id, int>();
             get_all_item_group_matches(
                 items, grp_type, matches,
-                container, itype_null, specific_container_required );
+                container, itype_id::NULL_ID(), specific_container_required );
 
             int total_match = std::accumulate( matches.begin(), matches.end(), 0,
             []( const std::size_t previous, const std::pair<const itype_id, std::size_t> &p ) {
@@ -710,6 +710,11 @@ std::string mission::get_description() const
     return type->description.translated();
 }
 
+std::string mission::get_dimension() const
+{
+    return dimension;
+}
+
 bool mission::has_target() const
 {
     return !target.is_invalid();
@@ -796,6 +801,11 @@ bool mission::has_generic_rewards() const
 void mission::set_deadline( time_point new_deadline )
 {
     deadline = new_deadline;
+}
+
+void mission::set_dimension( const std::string &dimension_prefix )
+{
+    dimension = dimension_prefix;
 }
 
 void mission::set_target( const tripoint_abs_omt &p )

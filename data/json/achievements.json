@@ -1269,7 +1269,7 @@
         "event_statistic": "num_gains_survival_level_4",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 4"
+        "description": "Gain ecology skill level 4"
       }
     ]
   },
@@ -1283,7 +1283,7 @@
         "event_statistic": "num_gains_survival_level_7",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 7"
+        "description": "Gain ecology skill level 7"
       }
     ],
     "hidden_by": [ "achievement_lvl_4_survival" ]
@@ -1298,7 +1298,7 @@
         "event_statistic": "num_gains_survival_level_10",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 10"
+        "description": "Gain ecology skill level 10"
       }
     ],
     "hidden_by": [ "achievement_lvl_7_survival" ]
@@ -1978,20 +1978,6 @@
         "target": [ "overmap_special_id", "New England Church Retreat" ],
         "visible": "when_achievement_completed",
         "description": "Do you have a few minutes to talk about our lord and saviour Jesus Christ?"
-      }
-    ]
-  },
-  {
-    "id": "achievement_reach_isherwood_farms",
-    "type": "achievement",
-    "name": "Open Fields",
-    "requirements": [
-      {
-        "event_statistic": "last_overmap_special_avatar_entered",
-        "is": "==",
-        "target": [ "overmap_special_id", "Isherwood Farm Mutable" ],
-        "visible": "when_achievement_completed",
-        "description": "Reach Isherwood Farms"
       }
     ]
   },

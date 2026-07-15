@@ -6,6 +6,9 @@
 #include <iterator>
 #include <memory>
 #include <numeric>
+#include <queue>
+#include <unordered_map>
+#include <unordered_set>
 #include <utility>
 
 #include "action.h"
@@ -28,10 +31,12 @@
 #include "enums.h"
 #include "event.h"
 #include "event_bus.h"
+#include "flag.h"
 #include "flexbuffer_json-inl.h"
 #include "flexbuffer_json.h"
 #include "game.h"
 #include "game_constants.h"
+#include "generic_factory.h"
 #include "input.h"
 #include "input_context.h"
 #include "inventory.h"
@@ -82,7 +87,6 @@ static const activity_id ACT_MULTIPLE_CONSTRUCTION( "ACT_MULTIPLE_CONSTRUCTION" 
 static const construction_category_id construction_category_ALL( "ALL" );
 static const construction_category_id construction_category_APPLIANCE( "APPLIANCE" );
 static const construction_category_id construction_category_DECONSTRUCT( "DECONSTRUCT" );
-static const construction_category_id construction_category_DECORATE( "DECORATE" );
 static const construction_category_id construction_category_FILTER( "FILTER" );
 static const construction_category_id construction_category_REPAIR( "REPAIR" );
 
@@ -104,6 +108,7 @@ static const item_group_id Item_spawn_data_jewelry_front( "jewelry_front" );
 static const itype_id itype_2x4( "2x4" );
 static const itype_id itype_bone_human( "bone_human" );
 static const itype_id itype_nail( "nail" );
+static const itype_id itype_rope_30( "rope_30" );
 static const itype_id itype_sheet( "sheet" );
 static const itype_id itype_stick( "stick" );
 static const itype_id itype_string_36( "string_36" );
@@ -154,7 +159,6 @@ static const vpart_id vpart_frame( "frame" );
 
 static const vproto_id vehicle_prototype_none( "none" );
 
-static const std::string flag_INITIAL_PART( "INITIAL_PART" );
 static const std::string flag_WIRING( "WIRING" );
 
 static bool finalized = false;
@@ -248,16 +252,29 @@ static bool has_pre_terrain( const construction &con, const tripoint_bub_ms &p )
 
     map &here = get_map();
     if( con.pre_is_furniture ) {
-        furn_id f = furn_id( con.pre_terrain );
-        return here.furn( p ) == f;
+        furn_id f = here.furn( p );
+        for( const auto &pre_terrain : con.pre_terrain ) {
+            if( f == furn_id( pre_terrain ) ) {
+                return true;
+            }
+        }
     } else {
-        ter_id t = ter_id( con.pre_terrain );
-        return here.ter( p ) == t;
+        ter_id t = here.ter( p );
+        for( const auto &pre_terrain : con.pre_terrain ) {
+            if( t == ter_id( pre_terrain ) ) {
+                return true;
+            }
+        }
     }
+    return false;
 }
 
 static bool has_pre_terrain( const construction &con )
 {
+    if( con.pre_terrain.empty() ) {
+        return true;
+    }
+
     tripoint_bub_ms avatar_pos = get_player_character().pos_bub();
     for( const tripoint_bub_ms &p : get_map().points_in_radius( avatar_pos, 1 ) ) {
         if( p != avatar_pos && has_pre_terrain( con, p ) ) {
@@ -461,6 +478,8 @@ static shared_ptr_fast<game::draw_callback_t> construction_preview_callback(
         }
     } );
 }
+
+static std::string has_pre_flags_colorize( const construction &con );
 
 construction_id construction_menu( const bool blueprint )
 {
@@ -672,14 +691,26 @@ construction_id construction_menu( const bool blueprint )
                 // Example: First step of dig pit could say something about
                 // requiring diggable ground.
                 if( !current_con->pre_terrain.empty() ) {
-                    std::string require_string;
+                    // C++20 will allow this to be generated on demand with a std::ranges::views::transform
+                    std::vector<std::string> require_names( current_con->pre_terrain.size() );
                     if( current_con->pre_is_furniture ) {
-                        require_string = furn_str_id( current_con->pre_terrain )->name();
+                        std::transform( current_con->pre_terrain.cbegin(), current_con->pre_terrain.cend(),
+                        require_names.begin(), []( std::string pre_terrain ) {
+                            return furn_str_id( pre_terrain )->name();
+                        } );
                     } else {
-                        require_string = ter_str_id( current_con->pre_terrain )->name();
+                        std::transform( current_con->pre_terrain.cbegin(), current_con->pre_terrain.cend(),
+                        require_names.begin(), []( std::string pre_terrain ) {
+                            return ter_str_id( pre_terrain )->name();
+                        } );
                     }
+                    //TODO: per-requirement colorizing like has_pre_flags_colorize
                     nc_color pre_color = has_pre_terrain( *current_con ) ? c_green : c_red;
-                    add_line( _( "Requires: " ) + colorize( require_string, pre_color ) );
+                    add_line( _( "Requires: " ) + colorize( enumerate_as_string( require_names,
+                                                            enumeration_conjunction::or_ ), pre_color ) );
+                }
+                if( !current_con->pre_flags.empty() ) {
+                    add_line( string_format( _( "Required conditions: %s" ), has_pre_flags_colorize( *current_con ) ) );
                 }
                 if( !current_con->pre_note.empty() ) {
                     add_line( _( "Annotation: " ) + colorize( current_con->pre_note, color_data ) );
@@ -1134,13 +1165,83 @@ bool player_can_see_to_build( Character &you, const construction_group_str_id &g
     return false;
 }
 
-bool can_construct_furn_ter( const construction &con, furn_id const &f, ter_id const &t )
+bool has_pre_flags( const construction &con, furn_id const &f, ter_id const &t )
 {
     return std::all_of( con.pre_flags.begin(), con.pre_flags.end(), [&f, &t]( auto const & flag ) {
         const bool use_ter = flag.second || f == furn_str_id::NULL_ID();
         return ( use_ter || f->has_flag( flag.first ) ) &&
                ( !use_ter || t->has_flag( flag.first ) );
     } );
+}
+
+// static bool has_pre_flags( const construction &con, const tripoint_bub_ms &p )
+// {
+//     if( con.pre_flags.empty() ) {
+//         return true;
+//     }
+//     const map &here = get_map();
+//     furn_id f = here.furn( p );
+//     ter_id t = here.ter( p );
+//     return has_pre_flags( con, f, t );
+// }
+
+// static bool has_pre_flags( const construction &con )
+// {
+//     if( con.pre_flags.empty() ) {
+//         return true;
+//     }
+//     const tripoint_bub_ms &avatar_pos = get_player_character().pos_bub();
+//     for( const tripoint_bub_ms &p : get_map().points_in_radius( avatar_pos, 1 ) ) {
+//         if( p != avatar_pos && has_pre_flags( con, p ) ) {
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+
+// Returns a colorized list of pre_flags, red for unmatched flags, green for matched flags.
+static std::string has_pre_flags_colorize( const construction &con )
+{
+    if( con.pre_flags.empty() ) {
+        return "";
+    }
+
+    std::vector<std::string> flags_colorized;
+
+    const map &here = get_map();
+
+    const tripoint_bub_ms &avatar_pos = get_player_character().pos_bub();
+    const auto points = get_map().points_in_radius( avatar_pos, 1 );
+    // which of the surrounding points have all the necessary flags
+    std::vector<bool> good_points( 9, true );
+    // can't build in the player's location
+    good_points[4] = false;
+    for( const auto &flag : con.pre_flags ) {
+        bool has_flag = false;
+        size_t index = 0;
+        for( const auto &p : points ) {
+            if( p != avatar_pos ) {
+                const furn_id &f = here.furn( p );
+                const ter_id &t = here.ter( p );
+                const bool use_ter = flag.second || f == furn_str_id::NULL_ID();
+                has_flag = ( use_ter || f->has_flag( flag.first ) ) && ( !use_ter || t->has_flag( flag.first ) );
+                if( !has_flag ) {
+                    good_points[ index ] = false;
+                }
+            }
+            index++;
+        }
+        const nc_color color = has_flag ? c_green : c_red;
+        flags_colorized.emplace_back( colorize( flag_id( flag.first )->name(), color ) );
+    }
+    // It's possible that each flag is green because some adjacent location has it
+    // but no single location has every flag. That is represented here by coloring
+    // the commas and conjunction red.
+    const bool has_good_point = std::any_of( good_points.begin(), good_points.end(), []( bool a ) {
+        return a;
+    } );
+    const nc_color color = has_good_point ? c_green : c_red;
+    return colorize( enumerate_as_string( flags_colorized ), color );
 }
 
 bool can_construct( const construction &con, const tripoint_bub_ms &p )
@@ -1158,7 +1259,7 @@ bool can_construct( const construction &con, const tripoint_bub_ms &p )
         return false;
     }
     if( !has_pre_terrain( con, p ) || // terrain type
-        !can_construct_furn_ter( con, f, t ) ) { // flags
+        !has_pre_flags( con, f, t ) ) { // flags
         return false;
     }
     if( !con.post_terrain.empty() ) { // make sure the construction would actually do something
@@ -1673,7 +1774,7 @@ void construct::done_grave( const tripoint_bub_ms &p, Character &player_characte
 static vpart_id vpart_from_item( const itype_id &item_id )
 {
     for( const vpart_info &vpi : vehicles::parts::get_all() ) {
-        if( vpi.base_item == item_id && vpi.has_flag( flag_INITIAL_PART ) ) {
+        if( vpi.base_item == item_id && vpi.has_flag( flag_INITIAL_PART.str() ) ) {
             return vpi.id;
         }
     }
@@ -1693,7 +1794,7 @@ void construct::done_vehicle( const tripoint_bub_ms &p, Character & )
 {
     std::string name = string_input_popup()
                        .title( _( "Enter new vehicle name:" ) )
-                       .width( 20 )
+                       .width( 60 )
                        .query_string();
     if( name.empty() ) {
         name = _( "Car" );
@@ -1854,7 +1955,7 @@ void construct::done_deconstruct( const tripoint_bub_ms &p, Character &player_ch
 static void unroll_digging( const int numer_of_2x4s )
 {
     // refund components!
-    item rope( "rope_30" );
+    item rope( itype_rope_30 );
     map &here = get_map();
     tripoint_bub_ms avatar_pos = get_player_character().pos_bub();
     here.add_item_or_charges( avatar_pos, rope );
@@ -2250,11 +2351,14 @@ void load_construction( const JsonObject &jo )
     }
 
     jo.read( "pre_note", con.pre_note );
-    con.pre_terrain = jo.get_string( "pre_terrain", "" );
-    if( con.pre_terrain.size() > 1
-        && con.pre_terrain[0] == 'f'
-        && con.pre_terrain[1] == '_' ) {
-        con.pre_is_furniture = true;
+    con.pre_terrain = jo.get_as_string_set( "pre_terrain" );
+    if( !con.pre_terrain.empty() ) {
+        const std::string &first_pre_terrain = *con.pre_terrain.begin();
+        if( first_pre_terrain.size() > 1
+            && first_pre_terrain[0] == 'f'
+            && first_pre_terrain[1] == '_' ) {
+            con.pre_is_furniture = true;
+        }
     }
 
     con.post_terrain = jo.get_string( "post_terrain", "" );
@@ -2264,14 +2368,8 @@ void load_construction( const JsonObject &jo )
         con.post_is_furniture = true;
     }
 
-    std::string activity_level = jo.get_string( "activity_level", "MODERATE_EXERCISE" );
-    const auto activity_it = activity_levels_map.find( activity_level );
-    if( activity_it != activity_levels_map.end() ) {
-        con.activity_level = activity_it->second;
-    } else {
-        jo.throw_error( string_format( "Invalid activity level %s in construction %s", activity_level,
-                                       con.str_id.str() ) );
-    }
+    optional( jo, false/*con.was_loaded*/, "activity_level", con.activity_level,
+              activity_level_reader{}, MODERATE_EXERCISE );
 
     if( jo.has_member( "pre_flags" ) ) {
         con.pre_flags.clear();
@@ -2425,12 +2523,14 @@ void check_constructions()
         }
 
         if( !c.pre_terrain.empty() ) {
-            if( c.pre_is_furniture ) {
-                if( !furn_str_id( c.pre_terrain ).is_valid() ) {
-                    debugmsg( "Unknown pre_terrain (furniture) %s in %s", c.pre_terrain, display_name );
+            for( const auto &pre_terrain : c.pre_terrain ) {
+                if( c.pre_is_furniture ) {
+                    if( !furn_str_id( pre_terrain ).is_valid() ) {
+                        debugmsg( "Unknown pre_terrain (furniture) %s in %s", pre_terrain, display_name );
+                    }
+                } else if( !ter_str_id( pre_terrain ).is_valid() ) {
+                    debugmsg( "Unknown pre_terrain (terrain) %s in %s", pre_terrain, display_name );
                 }
-            } else if( !ter_str_id( c.pre_terrain ).is_valid() ) {
-                debugmsg( "Unknown pre_terrain (terrain) %s in %s", c.pre_terrain, display_name );
             }
         }
         if( !c.post_terrain.empty() ) {
@@ -2500,7 +2600,7 @@ void finalize_constructions()
 {
     std::vector<item_comp> frame_items;
     for( const vpart_info &vpi : vehicles::parts::get_all() ) {
-        if( !vpi.has_flag( flag_INITIAL_PART ) ) {
+        if( !vpi.has_flag( flag_INITIAL_PART.str() ) ) {
             continue;
         }
         if( vpi.id == vpart_frame ) {
@@ -2555,6 +2655,84 @@ void finalize_constructions()
     finalized = true;
 }
 
+// Using BFS to find the shortest route to create target terrain from empty or base terrain,
+std::vector<construction_id> find_build_sequence( const std::string &target_id,
+        std::function<bool( construction const & )> const &filter,
+        std::function<bool( construction const & )> const &can_build )
+{
+    // make a post_terrain->construction multimap for speedy search
+    std::unordered_multimap<std::string, const construction *> construction_map;
+    for( construction const &cons : constructions ) {
+        if( !filter( cons ) ) {
+            continue;
+        }
+        construction_map.insert( { cons.post_terrain, &cons } );
+    }
+
+    std::queue<std::string> terrain_queue;
+    std::unordered_map<std::string, std::pair<const construction *, std::string>>
+            parent; // pre, cons , post
+    std::unordered_set<std::string> visited;
+
+    terrain_queue.push( target_id );
+    visited.insert( target_id );
+    std::string base_terrain; // Does this route require base_ter as pre_terrain or not
+    bool found = false;
+    while( !terrain_queue.empty() && !found ) {
+        std::string cur_terrain = terrain_queue.front();
+        terrain_queue.pop();
+
+        // find all constructions whose post_terrain == cur_terrain
+        const auto &range = construction_map.equal_range( cur_terrain );
+        const auto &it = parent.find( cur_terrain );
+        if( it != parent.end() ) {
+            const auto& [cons_ptr, next_terrain] = it->second;
+            if( can_build( *cons_ptr ) ) {
+                base_terrain = cur_terrain;
+                break;
+            }
+        }
+
+        for( auto it = range.first; it != range.second; ++it ) {
+            const construction *cons = it->second;
+            // Does this construction require a pre_terrain or not
+            std::string pre_terrain = cons->pre_terrain.empty() ? "" : *cons->pre_terrain.begin();
+
+            // skip visited terrain
+            if( visited.find( pre_terrain ) != visited.end() ) {
+                continue;
+            }
+            // keep record that this pre_terrain turns into cur_terrain through cons
+            visited.insert( pre_terrain );
+            parent[pre_terrain] = std::make_pair( cons, cur_terrain );
+            terrain_queue.push( pre_terrain );
+
+            // success
+            if( can_build( *cons ) ) {
+                found = true;
+                base_terrain = pre_terrain;
+                break;
+            }
+        }
+    }
+    // reconstruct the route from base_ter or empty string
+    std::string current_terrain = base_terrain;
+    // count == 0 means we cannot find a valid route to construct this terrain from the ground up
+    // thus skip it.
+    if( !found ) {
+        return {};
+    }
+    std::vector<construction_id> ret;
+    // go through the parent chain until we find target_terrain
+    while( current_terrain != target_id ) {
+        auto it = parent.find( current_terrain );
+        const auto& [cons_ptr, next_terrain] = it->second;
+        ret.push_back( cons_ptr->id );
+        current_terrain = next_terrain;
+    }
+    return ret;
+}
+
 build_reqs get_build_reqs_for_furn_ter_ids(
     const std::pair<std::map<ter_id, int>, std::map<furn_id, int>> &changed_ids,
     ter_id const &base_ter )
@@ -2567,94 +2745,40 @@ build_reqs get_build_reqs_for_furn_ter_ids(
     }
     std::map<construction_id, int> total_builds;
 
-    // iteratively recurse through the pre-terrains until the pre-terrain is empty, adding
-    // the constructions to the total_builds map
-    const auto add_builds = [&total_builds, &base_ter]( const construction & build, int count ) {
-        if( total_builds.find( build.id ) == total_builds.end() ) {
-            total_builds[build.id] = 0;
+    // find the shortest route to create target terrain from empty or base terrain,
+    // adding the constructions to the total_builds map
+    const auto add_builds = [&total_builds, &base_ter]( const std::string & target_id, int count ) {
+
+        std::vector<construction_id> construction_chain = find_build_sequence( target_id, [](
+        construction const & cons ) {
+            return !( cons.post_terrain.empty() || cons.pre_terrain.size() > 1 ||
+                      cons.category == construction_category_REPAIR ||
+                      cons.category == construction_category_DECONSTRUCT );
+        }, [&base_ter]( construction const & cons ) {
+            return cons.pre_terrain.empty() || *cons.pre_terrain.begin() == base_ter.id().str();
+        } );
+
+        // count == 0 means we cannot find a valid route to construct this terrain from the ground up
+        // thus skip it.
+        if( construction_chain.empty() ) {
+            return;
         }
-        total_builds[build.id] += count;
-        std::string build_pre_ter = build.pre_terrain;
-        while( !build_pre_ter.empty() ) {
-            bool found_pre = false;
-            // only consider DECORATE constructions if there's no other way to build the target
-            // this will allow painting walls, but will skip un-painting walls as a way to make a wall
-            for( bool allow_decorate : {
-                     false, true
-                 } ) {
-                for( const construction &pre_build : constructions ) {
-                    if( ( pre_build.category == construction_category_DECORATE ) != allow_decorate ) {
-                        continue;
-                    }
-                    if( pre_build.category == construction_category_REPAIR ) {
-                        continue;
-                    }
-                    if( ( pre_build.post_terrain.empty() ||
-                          ( !pre_build.post_is_furniture &&
-                            ter_id( pre_build.post_terrain ) != base_ter ) ) &&
-                        ( pre_build.pre_terrain.empty() ||
-                          ( pre_build.post_is_furniture &&
-                            ter_id( pre_build.pre_terrain ) == base_ter ) ) &&
-                        pre_build.post_terrain == build_pre_ter &&
-                        pre_build.pre_terrain != build.post_terrain ) {
-                        if( total_builds.find( pre_build.id ) == total_builds.end() ) {
-                            total_builds[pre_build.id] = 0;
-                        }
-                        total_builds[pre_build.id] += count;
-                        build_pre_ter = pre_build.pre_terrain;
-                        found_pre = true;
-                        break;
-                    }
-                }
-                if( found_pre ) {
-                    break;
-                }
+        for( const construction_id con_id : construction_chain ) {
+            if( total_builds.find( con_id ) == total_builds.end() ) {
+                total_builds[con_id] = 0;
             }
-            if( !found_pre ) {
-                break;
-            }
+            total_builds[con_id] += count;
         }
     };
 
     // go through the list of terrains and add their constructions and any pre-constructions
     // to the map of total builds
     for( const auto &ter_data : changed_ids.first ) {
-        bool found = false;
-        // only consider DECORATE constructions if there's no other way to build the target
-        // this will allow painting walls, but will skip un-painting walls as a way to make a wall
-        for( bool allow_decorate : {
-                 false, true
-             } ) {
-            for( const construction &build : constructions ) {
-                if( build.post_terrain.empty() || build.post_is_furniture ||
-                    build.category == construction_category_REPAIR ||
-                    build.category == construction_category_DECONSTRUCT ||
-                    ( build.category == construction_category_DECORATE ) != allow_decorate ) {
-                    continue;
-                }
-                if( ter_id( build.post_terrain ) == ter_data.first ) {
-                    add_builds( build, ter_data.second );
-                    found = true;
-                    break;
-                }
-            }
-            if( found ) {
-                break;
-            }
-        }
+        add_builds( ter_data.first.id().str(), ter_data.second );
     }
     // same, but for furniture
     for( const auto &furn_data : changed_ids.second ) {
-        for( const construction &build : constructions ) {
-            if( build.post_terrain.empty() || !build.post_is_furniture ||
-                build.category == construction_category_REPAIR ) {
-                continue;
-            }
-            if( furn_id( build.post_terrain ) == furn_data.first ) {
-                add_builds( build, furn_data.second );
-                break;
-            }
-        }
+        add_builds( furn_data.first.id().str(), furn_data.second );
     }
 
     for( const auto &build_data : total_builds ) {

@@ -31,7 +31,8 @@
         [ "knife_swissarmy", -1 ],
         [ "punch_dagger", -1 ],
         [ "knuckle_katar", -1 ],
-        [ "balisong", -1 ]
+        [ "balisong", -1 ],
+        [ "sai", -1 ]
       ]
     ]
   },
@@ -75,7 +76,9 @@
         [ "glaive", -1 ],
         [ "battleaxe", -1 ],
         [ "lucerne_hammer", -1 ],
-        [ "warhammer", -1 ]
+        [ "warhammer", -1 ],
+        [ "jitte", -1 ],
+        [ "sai", -1 ]
       ]
     ]
   },
@@ -150,7 +153,7 @@
     "id": "basic_short_swords",
     "type": "requirement",
     "//": "Any basic thing you could use as a short sword, exlcudes high-quality things.",
-    "tools": [ [ [ "makeshift_machete", -1 ], [ "machete_gimmick", -1 ], [ "machete", -1 ] ] ]
+    "tools": [ [ [ "makeshift_machete", -1 ], [ "machete_gimmick", -1 ] ] ]
   },
   {
     "id": "real_short_swords",
@@ -163,7 +166,8 @@
         [ "sword_bronze", -1 ],
         [ "sword_bayonet", -1 ],
         [ "butterfly_swords", -1 ],
-        [ "arisaka_bayonet", -1 ]
+        [ "arisaka_bayonet", -1 ],
+        [ "machete", -1 ]
       ]
     ]
   },
@@ -286,7 +290,16 @@
     "id": "real_batons",
     "type": "requirement",
     "//": "Any one-handed weapon designed primarily to bash or smash things.  Reserved for quality items.",
-    "tools": [ [ [ "blackjack", -1 ], [ "shocktonfa_off", -1 ], [ "baton-extended", -1 ], [ "tonfa", -1 ], [ "tonfa_wood", -1 ] ] ]
+    "tools": [
+      [
+        [ "blackjack", -1 ],
+        [ "shocktonfa_off", -1 ],
+        [ "baton-extended", -1 ],
+        [ "tonfa", -1 ],
+        [ "tonfa_wood", -1 ],
+        [ "jitte", -1 ]
+      ]
+    ]
   },
   {
     "id": "basic_flails",

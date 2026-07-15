@@ -328,6 +328,7 @@
     "//2": "When taken down.",
     "price_postapoc": "20 USD",
     "flags": [ "NO_TURRET" ],
+    "ammo": [ "arrow" ],
     "modes": [ [ "DEFAULT", "disassembled", 0, [ "MELEE" ] ] ],
     "valid_mod_locations": [ [ "underbarrel", 1 ], [ "sights", 1 ], [ "stabilizer", 1 ], [ "dampening", 1 ], [ "arrow rest", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "arrow": 1 }, "open_container": true } ],

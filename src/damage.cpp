@@ -70,6 +70,11 @@ void damage_type::load_damage_types( const JsonObject &jo, const std::string &sr
     damage_type_factory.load( jo, src );
 }
 
+void damage_type::finalize_all()
+{
+    damage_type_factory.finalize();
+}
+
 void damage_type::reset()
 {
     damage_type_factory.reset();
@@ -575,7 +580,7 @@ bool damage_instance::handle_proportional( const JsonValue &jval )
         prop_damage.unconditional_res_mult *= read_proportional_entry( jo, "constant_armor_multiplier" );
         prop_damage.unconditional_damage_mult *= read_proportional_entry( jo,
                 "constant_damage_multiplier" );
-        float barrel_mult = read_proportional_entry( jo, "barrels" );
+        float barrel_mult = read_proportional_entry( jo, "amount" );
         for( barrel_desc &bd : prop_damage.barrels ) {
             bd.amount *= barrel_mult;
         }

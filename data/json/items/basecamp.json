@@ -45,7 +45,7 @@
     "copy-from": "fake_crafting_tool",
     "name": { "str": "basecamp clay kiln" },
     "description": "A fake clay kiln used for basecamps.",
-    "sub": "brick_kiln",
+    "sub": "kiln",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "charcoal": 2000, "coal": 10000 } } ],
     "tool_ammo": [ "charcoal", "coal" ]
   },

@@ -87,8 +87,8 @@
       { "item": "razorclaw_roe", "prob": 5 },
       { "item": "stick", "prob": 95 },
       { "item": "survivormap", "prob": 1 },
-      { "item": "wetsuit", "prob": 10, "damage": [ 2, 4 ] },
-      { "item": "wetsuit_thick", "prob": 10, "damage": [ 2, 4 ] },
+      { "item": "wetsuit", "prob": 10, "damage": [ 2, 5 ] },
+      { "item": "wetsuit_thick", "prob": 10, "damage": [ 2, 5 ] },
       { "item": "homemade_bomb_act", "prob": 1 }
     ]
   },
@@ -147,7 +147,7 @@
       { "item": "panties", "prob": 20 },
       { "item": "boy_shorts", "prob": 20 },
       { "item": "bra", "prob": 20 },
-      { "item": "undershirt", "prob": 40 },
+      { "item": "tank_top", "prob": 40 },
       { "item": "boxer_shorts", "prob": 30 },
       { "item": "briefs", "prob": 30 }
     ]
@@ -255,21 +255,21 @@
     "subtype": "distribution",
     "ammo": 10,
     "entries": [
-      { "group": "allclothes", "damage": [ 2, 4 ], "prob": 150 },
-      { "group": "clothing_outdoor_set", "damage": [ 2, 4 ], "prob": 10 },
-      { "group": "clothing_hunting", "damage": [ 2, 4 ], "prob": 10 },
-      { "group": "clothing_work_set", "damage": [ 2, 4 ], "prob": 10 },
-      { "group": "everyday_gear", "damage": [ 2, 4 ], "prob": 50 },
-      { "group": "gear_homeless", "damage": [ 2, 4 ], "prob": 30 },
-      { "group": "child_items", "damage": [ 2, 4 ], "prob": 30 },
-      { "group": "traveler", "damage": [ 2, 4 ], "prob": 10 },
-      { "group": "default_zombie_clothes", "damage": [ 2, 4 ], "prob": 30 },
-      { "group": "default_zombie_items_bags", "damage": [ 2, 4 ], "prob": 30 },
-      { "group": "default_zombie_items_pockets", "damage": [ 2, 4 ], "prob": 30 },
-      { "group": "mon_zombie_scientist_death_drops", "damage": [ 2, 4 ], "prob": 5 },
-      { "group": "mon_zombie_labsecurity_death_drops", "damage": [ 2, 4 ], "prob": 5 },
-      { "group": "mon_zombie_kevlar_death_drops", "damage": [ 2, 4 ], "prob": 15 },
-      { "group": "mon_zombie_military_pilot_death_drops", "damage": [ 2, 4 ], "prob": 5 }
+      { "group": "allclothes", "damage": [ 2, 5 ], "prob": 150 },
+      { "group": "clothing_outdoor_set", "damage": [ 2, 5 ], "prob": 10 },
+      { "group": "clothing_hunting", "damage": [ 2, 5 ], "prob": 10 },
+      { "group": "clothing_work_set", "damage": [ 2, 5 ], "prob": 10 },
+      { "group": "everyday_gear", "damage": [ 2, 5 ], "prob": 50 },
+      { "group": "gear_homeless", "damage": [ 2, 5 ], "prob": 30 },
+      { "group": "child_items", "damage": [ 2, 5 ], "prob": 30 },
+      { "group": "traveler", "damage": [ 2, 5 ], "prob": 10 },
+      { "group": "default_zombie_clothes", "damage": [ 2, 5 ], "prob": 30 },
+      { "group": "default_zombie_items_bags", "damage": [ 2, 5 ], "prob": 30 },
+      { "group": "default_zombie_items_pockets", "damage": [ 2, 5 ], "prob": 30 },
+      { "group": "mon_zombie_scientist_death_drops", "damage": [ 2, 5 ], "prob": 5 },
+      { "group": "mon_zombie_labsecurity_death_drops", "damage": [ 2, 5 ], "prob": 5 },
+      { "group": "mon_zombie_kevlar_death_drops", "damage": [ 2, 5 ], "prob": 15 },
+      { "group": "mon_zombie_military_pilot_death_drops", "damage": [ 2, 5 ], "prob": 5 }
     ]
   },
   {
@@ -323,8 +323,7 @@
       { "item": "radiocontrol", "prob": 15, "charges": [ 0, 100 ] },
       { "item": "thermometer", "prob": 10 },
       { "item": "hygrometer", "prob": 10 },
-      { "item": "barometer", "prob": 10 },
-      { "item": "weather_reader", "prob": 1 }
+      { "item": "barometer", "prob": 10 }
     ]
   },
   {

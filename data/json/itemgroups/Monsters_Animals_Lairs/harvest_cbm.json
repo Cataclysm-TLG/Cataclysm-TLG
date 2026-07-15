@@ -152,7 +152,6 @@
       [ "bio_digestion", 15 ],
       [ "bio_evap", 15 ],
       [ "bio_fingerhack", 20 ],
-      [ "bio_gills", 10 ],
       [ "bio_purifier", 10 ],
       [ "bio_radscrubber", 20 ],
       [ "bio_recycler", 20 ],

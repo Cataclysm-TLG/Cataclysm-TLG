@@ -23,10 +23,10 @@
     "id": "arredondo_chute_benelli_sa",
     "type": "ITEM",
     "subtypes": [ "GUNMOD" ],
-    "name": { "str": "speedloader chute, 4-round waterfowl shotgun" },
-    "description": "A metal ramp that is installed near a shotgun's feeding port to index speedloader tubes.  This one is for 4-round waterfowl shotgun.",
+    "name": { "str": "speedloader chute, Benelli Super" },
+    "description": "A metal ramp that is installed near a shotgun's feeding port to index speedloader tubes.  This one is for Benelli's Super line of shotguns.",
     "copy-from": "arredondo_chute",
-    "mod_targets": [ "benelli_sa" ],
+    "mod_targets": [ "sbe", "m2", "m2_tac" ],
     "pocket_mods": [
       {
         "pocket_type": "MAGAZINE",

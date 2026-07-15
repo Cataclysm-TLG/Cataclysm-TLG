@@ -77,6 +77,7 @@ const std::unordered_map<std::string, relationship> relation_strs = { {
 struct faction_price_rule: public icg_entry {
     double markup = 1.0;
     double premium = 1.0;
+    double purchase_rate = 1.0;
     std::optional<double> fixed_adj = std::nullopt;
     std::optional<int> price = std::nullopt;
 

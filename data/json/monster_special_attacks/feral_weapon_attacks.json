@@ -26,7 +26,7 @@
     "id": "feral_bite",
     "cooldown": 10,
     "move_cost": 100,
-    "condition": { "or": [ { "not": { "test_eoc": "is_disarmed" } }, { "u_has_flag": "GRAB" }, { "u_has_flag": "GRAB_FILTER" } ] }
+    "condition": { "or": [ { "u_has_flag": "GRAB" }, { "u_has_flag": "GRAB_FILTER" } ] }
   },
   {
     "type": "monster_attack",
@@ -568,8 +568,8 @@
         { "not": { "u_has_effect": "maimed_arm" } }
       ]
     },
-    "hit_dmg_u": "%1$s hits your %2$s with a machete!",
-    "hit_dmg_npc": "%1$s hits <npcname>'s %2$s with a machete!",
+    "hit_dmg_u": "%1$s slashes your %2$s!",
+    "hit_dmg_npc": "%1$s slashes <npcname>'s %2$s!",
     "miss_msg_u": "%1$s tries to hit you, but you dodge!",
     "miss_msg_npc": "%1$s tries to hit <npcname>, but they dodge!",
     "no_dmg_msg_u": "%1$s hits your %2$s without penetrating your armor.",

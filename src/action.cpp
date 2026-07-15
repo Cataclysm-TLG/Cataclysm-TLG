@@ -140,8 +140,6 @@ std::string action_ident( action_id act )
             return "LEVEL_DOWN";
         case ACTION_MOVE_UP:
             return "LEVEL_UP";
-        case ACTION_TOGGLE_MAP_MEMORY:
-            return "toggle_map_memory";
         case ACTION_CENTER:
             return "center";
         case ACTION_SHIFT_N:
@@ -404,8 +402,6 @@ std::string action_ident( action_id act )
             return "open_options";
         case ACTION_AUTOPICKUP:
             return "open_autopickup";
-        case ACTION_AUTONOTES:
-            return "open_autonotes";
         case ACTION_SAFEMODE:
             return "open_safemode";
         case ACTION_COLOR:
@@ -425,7 +421,6 @@ bool can_action_change_worldstate( const action_id act )
 {
     switch( act ) {
         // Shift view
-        case ACTION_TOGGLE_MAP_MEMORY:
         case ACTION_CENTER:
         case ACTION_SHIFT_N:
         case ACTION_SHIFT_NE:
@@ -459,7 +454,6 @@ bool can_action_change_worldstate( const action_id act )
         case ACTION_KEYBINDINGS:
         case ACTION_OPTIONS:
         case ACTION_AUTOPICKUP:
-        case ACTION_AUTONOTES:
         case ACTION_SAFEMODE:
         case ACTION_COLOR:
         case ACTION_WORLD_MODS:
@@ -935,6 +929,7 @@ action_id handle_action_menu( map &here )
             REGISTER_ACTION( ACTION_DISPLAY_SCENT );
             REGISTER_ACTION( ACTION_DISPLAY_SCENT_TYPE );
             REGISTER_ACTION( ACTION_DISPLAY_TEMPERATURE );
+            REGISTER_ACTION( ACTION_DISPLAY_SNOW_DEPTH );
             REGISTER_ACTION( ACTION_DISPLAY_VEHICLE_AI );
             REGISTER_ACTION( ACTION_DISPLAY_VISIBILITY );
             REGISTER_ACTION( ACTION_DISPLAY_LIGHTING );
@@ -1077,15 +1072,11 @@ action_id handle_main_menu()
     REGISTER_ACTION( ACTION_OPTIONS );
     REGISTER_ACTION( ACTION_TOGGLE_PANEL_ADM );
     REGISTER_ACTION( ACTION_AUTOPICKUP );
-    REGISTER_ACTION( ACTION_AUTONOTES );
     REGISTER_ACTION( ACTION_SAFEMODE );
     REGISTER_ACTION( ACTION_DISTRACTION_MANAGER );
     REGISTER_ACTION( ACTION_COLOR );
     REGISTER_ACTION( ACTION_WORLD_MODS );
-    REGISTER_ACTION( ACTION_ACTIONMENU );
-    REGISTER_ACTION( ACTION_QUICKSAVE );
     REGISTER_ACTION( ACTION_SAVE );
-    REGISTER_ACTION( ACTION_DEBUG, 'd' );
 
     uilist smenu;
     smenu.settext( _( "MAIN MENU" ) );
@@ -1167,7 +1158,7 @@ std::optional<tripoint_rel_ms> choose_direction( const std::string &message,
         }
     } while( !done );
 
-    add_msg( _( "Never mind." ) );
+    add_msg( _( "Nevermind." ) );
     return std::nullopt;
 }
 

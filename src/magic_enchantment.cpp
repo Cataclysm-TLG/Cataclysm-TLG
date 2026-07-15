@@ -58,6 +58,7 @@ namespace io
         switch ( data ) {
             case enchant_vals::mod::ARTIFACT_RESONANCE: return "ARTIFACT_RESONANCE";
             case enchant_vals::mod::STRENGTH: return "STRENGTH";
+            case enchant_vals::mod::STRENGTH_NATURAL: return "STRENGTH_NATURAL";
             case enchant_vals::mod::DEXTERITY: return "DEXTERITY";
             case enchant_vals::mod::PERCEPTION: return "PERCEPTION";
             case enchant_vals::mod::INTELLIGENCE: return "INTELLIGENCE";
@@ -205,18 +206,13 @@ void load_add_and_multiply( const JsonObject &jo, const bool &is_child,
             mandatory( value_obj, false, type_key, value );
 
             if( value_obj.has_member( "add" ) ) {
-                dbl_or_var add = get_dbl_or_var( value_obj, "add", false );
+                dbl_or_var add = get_dbl_or_var( value_obj, "add" );
                 add_map.emplace( value, add );
             }
 
             if( value_obj.has_member( "multiply" ) ) {
-                dbl_or_var mult;
-                if( value_obj.has_float( "multiply" ) ) {
-                    mult.max.dbl_val = mult.min.dbl_val = value_obj.get_float( "multiply" );
-                } else {
-                    mult = get_dbl_or_var( value_obj, "multiply", false );
+                dbl_or_var mult = get_dbl_or_var( value_obj, "multiply" );
 
-                }
                 mult_map.emplace( value, mult );
             }
 
@@ -250,6 +246,11 @@ void load_add_and_multiply( const JsonObject &jo, std::string_view array_key,
 void enchantment::load_enchantment( const JsonObject &jo, const std::string &src )
 {
     spell_factory.load( jo, src );
+}
+
+void enchantment::finalize_all()
+{
+    spell_factory.finalize();
 }
 
 void enchantment::reset()
@@ -539,7 +540,7 @@ void enchantment::load( const JsonObject &jo, std::string_view,
                 }
             }
 
-            _vision.range = get_dbl_or_var( vision_obj, "distance" );
+            mandatory( vision_obj, was_loaded, "distance", _vision.range );
             read_condition( vision_obj, "condition", _vision.condition, true );
             optional( vision_obj, was_loaded, "precise", _vision.precise );
             optional( vision_obj, was_loaded, "ignores_aiming_cone", _vision.ignores_aiming_cone );
@@ -568,7 +569,6 @@ void enchant_cache::load( const JsonObject &jo, std::string_view,
             "ITEM_DAMAGE_BASH",
             "SIGHT_RANGE_ELECTRIC",
             "MOTION_VISION_RANGE",
-            "SIGHT_RANGE_FAE",
             "SIGHT_RANGE_NETHER",
             "SIGHT_RANGE_MINDS",
             "ARMOR_ACID",
@@ -616,7 +616,7 @@ void enchant_cache::load( const JsonObject &jo, std::string_view,
                 }
             } catch( ... ) {
                 if( legacy_values.find( value_obj.get_string( "value", "" ) ) == legacy_values.end() ) {
-                    debugmsg( "A relic attempted to load invalid enchantment %s.", value_obj.get_string( "value",
+                    debugmsg( "A relic attempted to load invalid modifier %s.", value_obj.get_string( "value",
                               "" ) );
                 }
             }
@@ -947,110 +947,63 @@ void enchant_cache::force_add( const enchantment &rhs, const vehicle &veh )
 void enchant_cache::force_add( const enchantment &rhs )
 {
     const_dialogue d( nullptr, nullptr );
-    force_add_with_dialogue( rhs, d, false );
+    force_add_with_dialogue( rhs, d );
 }
 
-void enchant_cache::force_add_with_dialogue( const enchantment &rhs, const const_dialogue &d,
-        const bool evaluate )
+void enchant_cache::force_add_with_dialogue( const enchantment &rhs, const const_dialogue &d )
 {
     for( const std::pair<const enchant_vals::mod, dbl_or_var> &pair_values :
          rhs.values_add ) {
-        if( evaluate ) {
-            values_add[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            values_add[pair_values.first] += pair_values.second.constant();
-        }
+        values_add[pair_values.first] += pair_values.second.evaluate( d );
     }
     for( const std::pair<const enchant_vals::mod, dbl_or_var> &pair_values :
          rhs.values_multiply ) {
         // values do not multiply against each other, they add.
         // so +10% and -10% will add to 0%
-        if( evaluate ) {
-            values_multiply[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            values_multiply[pair_values.first] += pair_values.second.constant();
-        }
+        values_multiply[pair_values.first] += pair_values.second.evaluate( d );
     }
 
     for( const std::pair<const skill_id, dbl_or_var> &pair_values :
          rhs.skill_values_add ) {
-        if( evaluate ) {
-            skill_values_add[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            skill_values_add[pair_values.first] += pair_values.second.constant();
-        }
+        skill_values_add[pair_values.first] += pair_values.second.evaluate( d );
     }
     for( const std::pair<const skill_id, dbl_or_var> &pair_values :
          rhs.skill_values_multiply ) {
         // values do not multiply against each other, they add.
         // so +10% and -10% will add to 0%
-        if( evaluate ) {
-            skill_values_multiply[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            skill_values_multiply[pair_values.first] += pair_values.second.constant();
-        }
+        skill_values_multiply[pair_values.first] += pair_values.second.evaluate( d );
     }
 
     for( const std::pair<const damage_type_id, dbl_or_var> &pair_values :
          rhs.damage_values_add ) {
-        if( evaluate ) {
-            damage_values_add[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            damage_values_add[pair_values.first] += pair_values.second.constant();
-        }
+        damage_values_add[pair_values.first] += pair_values.second.evaluate( d );
     }
     for( const std::pair<const damage_type_id, dbl_or_var> &pair_values :
          rhs.damage_values_multiply ) {
-        if( evaluate ) {
-            damage_values_multiply[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            damage_values_multiply[pair_values.first] += pair_values.second.constant();
-        }
+        damage_values_multiply[pair_values.first] += pair_values.second.evaluate( d );
     }
 
     for( const std::pair<const damage_type_id, dbl_or_var> &pair_values :
          rhs.armor_values_add ) {
-        if( evaluate ) {
-            armor_values_add[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            armor_values_add[pair_values.first] += pair_values.second.constant();
-        }
+        armor_values_add[pair_values.first] += pair_values.second.evaluate( d );
     }
     for( const std::pair<const damage_type_id, dbl_or_var> &pair_values :
          rhs.armor_values_multiply ) {
-        if( evaluate ) {
-            armor_values_multiply[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            armor_values_multiply[pair_values.first] += pair_values.second.constant();
-        }
+        armor_values_multiply[pair_values.first] += pair_values.second.evaluate( d );
     }
 
     for( const std::pair<const damage_type_id, dbl_or_var> &pair_values :
          rhs.extra_damage_add ) {
-        if( evaluate ) {
-            extra_damage_add[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            extra_damage_add[pair_values.first] += pair_values.second.constant();
-        }
+        extra_damage_add[pair_values.first] += pair_values.second.evaluate( d );
     }
     for( const std::pair<const damage_type_id, dbl_or_var> &pair_values :
          rhs.extra_damage_multiply ) {
-        if( evaluate ) {
-            extra_damage_multiply[pair_values.first] += pair_values.second.evaluate( d );
-        } else {
-            extra_damage_multiply[pair_values.first] += pair_values.second.constant();
-        }
+        extra_damage_multiply[pair_values.first] += pair_values.second.evaluate( d );
     }
     for( const enchantment::special_vision &struc : rhs.special_vision_vector ) {
-        if( evaluate ) {
-            special_vision_vector.emplace_back( special_vision{
-                struc.special_vision_descriptions_vector, struc.condition, struc.range.evaluate( d ),
-                struc.precise, struc.ignores_aiming_cone } );
-        } else {
-            special_vision_vector.emplace_back( special_vision{
-                struc.special_vision_descriptions_vector, struc.condition, struc.range.constant(),
-                struc.precise, struc.ignores_aiming_cone } );
-        }
+        special_vision_vector.emplace_back( special_vision{
+            struc.special_vision_descriptions_vector, struc.condition, struc.range.evaluate( d ),
+            struc.precise, struc.ignores_aiming_cone } );
     }
 
     hit_me_effect.insert( hit_me_effect.end(), rhs.hit_me_effect.begin(), rhs.hit_me_effect.end() );

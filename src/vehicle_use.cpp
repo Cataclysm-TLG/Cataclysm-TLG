@@ -86,8 +86,9 @@ static const itype_id itype_detergent( "detergent" );
 static const itype_id itype_fungal_seeds( "fungal_seeds" );
 static const itype_id itype_large_repairkit( "large_repairkit" );
 static const itype_id itype_marloss_seed( "marloss_seed" );
-static const itype_id itype_null( "null" );
+static const itype_id itype_power_cord( "power_cord" );
 static const itype_id itype_pseudo_magazine( "pseudo_magazine" );
+static const itype_id itype_pseudo_magazine_mod( "pseudo_magazine_mod" );
 static const itype_id itype_small_repairkit( "small_repairkit" );
 static const itype_id itype_soldering_iron( "soldering_iron" );
 static const itype_id itype_water( "water" );
@@ -357,7 +358,7 @@ void vehicle::build_electronics_menu( map &here, veh_menu &menu )
     add_toggle( pgettext( "electronics menu option", "planter" ),
                 "TOGGLE_PLANTER", "PLANTER" );
     add_toggle( pgettext( "electronics menu option", "rockwheel" ),
-                "TOGGLE_PLOW", "ROCKWHEEL" );
+                "TOGGLE_ROCKWHEEL", "ROCKWHEEL" );
     add_toggle( pgettext( "electronics menu option", "roadheader" ),
                 "TOGGLE_PLOW", "ROADHEAD" );
     add_toggle( pgettext( "electronics menu option", "scoop" ),
@@ -490,7 +491,7 @@ void vehicle::autopilot_patrol_check( map &here )
     if( mgr.has_near( zone_type_VEHICLE_PATROL, pos_abs(), MAX_VIEW_DISTANCE ) ) {
         enable_patrol( here );
     } else {
-        g->zones_manager();
+        zone_manager_ui::display_zone_manager();
     }
 }
 
@@ -580,7 +581,7 @@ void vehicle::connect( map *here, const tripoint_bub_ms &source_pos,
         return;
     }
 
-    item cord( "power_cord" );
+    item cord( itype_power_cord );
     if( !cord.link_to( prev_vp, sel_vp, link_state::vehicle_port ).success() ) {
         debugmsg( "Failed to connect the %s, it tried to make an invalid connection!", cord.tname() );
     }
@@ -897,7 +898,7 @@ void vehicle::reload_seeds( map *here, const tripoint_bub_ms &pos )
     std::vector<item *> seed_inv = player_character.cache_get_items_with( "is_seed", &item::is_seed );
 
     auto seed_entries = iexamine::get_seed_entries( seed_inv );
-    seed_entries.emplace( seed_entries.begin(), itype_null, _( "No seed" ), 0 );
+    seed_entries.emplace( seed_entries.begin(), itype_id::NULL_ID(), _( "No seed" ), 0 );
 
     int seed_index = iexamine::query_seed( seed_entries );
 
@@ -1099,7 +1100,14 @@ void vehicle::operate_planter( map &here )
                     //then don't put the item there.
                     break;
                 } else if( t == ter_t_dirtmound ) {
-                    here.set( loc, ter_t_dirt, furn_f_plant_seed );
+                    ret_val<void>can_plant = warm_enough_to_plant( loc, i->typeId() );
+                    if( can_plant.success() ) {
+                        // Plant the seed once it gets dropped.
+                        here.set( loc, ter_t_dirt, furn_f_plant_seed );
+                    } else {
+                        // Leave the seed on the ground.
+                        add_msg_if_player_sees( loc, can_plant.c_str() );
+                    }
                 } else if( !here.has_flag( ter_furn_flag::TFLAG_PLOWABLE, loc ) ) {
                     //If it isn't plowable terrain, then it will most likely be damaged.
                     damage( here, planter_id, rng( 1, 10 ), damage_bash, false );
@@ -1638,12 +1646,17 @@ static void pickup_furniture_for_carry( map &here, vehicle_part &part )
     const furn_str_id picked_up_furn = here.furn( *selected_tile )->id;
 
     const Character &you = get_player_character();
-    const int lifting_str_available = you.get_lift_str() + you.get_lift_assist();
+    // FURNITURE_LIFT_ASSIST gives 5 bonus strength for the lift check
+    const int part_lifting_bonus = part.info().has_flag( "FURNITURE_LIFT_ASSIST" ) ? 5 : 0;
+    const int lifting_str_available = you.get_lift_str() + you.get_lift_assist() + part_lifting_bonus;
+
+    // This handles cranes, the actual "LIFT" quality, and all that. Sure, you can boom crane a freezer onto the back of a truck. Why not.
+    const bool crane_lift = you.best_nearby_lifting_assist() >= picked_up_furn->mass;
 
     if( picked_up_furn->move_str_req < 0 ) {
         add_msg( _( "That furniture can't be moved." ) );
         return;
-    } else if( picked_up_furn->move_str_req > lifting_str_available ) {
+    } else if( !crane_lift && picked_up_furn->move_str_req > lifting_str_available ) {
         if( you.get_lift_assist() > 0 ) {
             add_msg( string_format( _( "Even working together, you are unable to lift the %s." ),
                                     picked_up_furn->name() ) );
@@ -1725,7 +1738,7 @@ void vehicle::use_harness( int part, map *here, const tripoint_bub_ms &pos )
                 *here, _( "Where is the creature to harness?" ), _( "There is no creature to harness nearby." ), f,
                 false );
     if( !pnt_ ) {
-        add_msg( m_info, _( "Never mind." ) );
+        add_msg( m_info, _( "Nevermind." ) );
         return;
     }
 
@@ -1875,7 +1888,7 @@ int vehicle::prepare_tool( map &here, item &tool ) const
     if( ammo_itype_id.is_null() ) {
         return 0; // likely tool needs no ammo
     }
-    item mag_mod( "pseudo_magazine_mod" );
+    item mag_mod( itype_pseudo_magazine_mod );
     mag_mod.set_flag( STATIC( flag_id( "IRREMOVABLE" ) ) );
     if( !tool.put_in( mag_mod, pocket_type::MOD ).success() ) {
         debugmsg( "tool %s has no space for a %s, this is likely a bug",
@@ -2501,7 +2514,7 @@ void vehicle::build_interact_menu( veh_menu &menu, map *here, const tripoint_bub
 
             if( !loc )
             {
-                you.add_msg_if_player( _( "Never mind." ) );
+                you.add_msg_if_player( _( "Nevermind." ) );
                 return;
             }
 

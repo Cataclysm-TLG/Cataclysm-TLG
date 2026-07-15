@@ -7,7 +7,6 @@
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
     "difficulty": 2,
-    "skills_required": [ "survival", 1 ],
     "time": "1 h",
     "autolearn": true,
     "reversible": true,
@@ -91,25 +90,14 @@
       [
         [ "bandana", 1 ],
         [ "scarf", 1 ],
-        [ "scarf_long", 1 ],
         [ "patchwork_scarf", 1 ],
-        [ "long_patchwork_scarf", 1 ],
         [ "scarf_fur", 1 ],
-        [ "scarf_fur_long", 1 ],
+        [ "scarf_faux_fur", 1 ],
         [ "knit_scarf", 1 ],
-        [ "long_knit_scarf", 1 ],
-        [ "scarf_loose", 1 ],
-        [ "scarf_long_loose", 1 ],
-        [ "patchwork_scarf_loose", 1 ],
-        [ "long_patchwork_scarf_loose", 1 ],
-        [ "scarf_fur_loose", 1 ],
-        [ "scarf_fur_long_loose", 1 ],
-        [ "knit_scarf_loose", 1 ],
-        [ "long_knit_scarf_loose", 1 ],
         [ "bandages", 2 ],
         [ "bandages_makeshift", 2 ],
         [ "bandages_makeshift_sanitized", 2 ],
-        [ "cotton_sheet", 1 ]
+        [ "cotton_sheet", 2 ]
       ]
     ],
     "flags": [ "BLIND_EASY", "NO_RESIZE" ]
@@ -383,8 +371,7 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
-    "difficulty": 2,
-    "skills_required": [ "survival", 1 ],
+    "difficulty": 3,
     "time": "2 h",
     "autolearn": true,
     "using": [ [ "tailoring_fur_sheet", 1 ] ],
@@ -504,6 +491,7 @@
     "copy-from": "helmet_barbute",
     "time": "12 h",
     "using": [ [ "blacksmithing_standard", 28 ], [ "steel_standard", 7 ] ],
+    "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "components": [ [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
@@ -798,7 +786,7 @@
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
+    "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
     "difficulty": 5,
     "time": "2 h",
@@ -1064,7 +1052,7 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "fabrication",
-    "skills_required": [ "survival", 1 ],
+    "skills_required": [ "survival", 4 ],
     "difficulty": 2,
     "time": "3 h",
     "autolearn": true,
@@ -1216,24 +1204,28 @@
     "type": "recipe",
     "copy-from": "mask_fsurvivor",
     "using": [ [ "sewing_aramids", 7 ], [ "tailoring_leather_sheet", 2 ] ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
     "components": [
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "nomex_patch", 3 ], [ "nomex_hood", 1 ] ],
       [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
-    ]
+    ],
+    "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ]
   },
   {
     "result": "mask_fsurvivor_xl",
     "type": "recipe",
     "copy-from": "mask_fsurvivor",
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_leather_sheet", 2 ] ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 }, { "id": "COOK", "level": 3 } ],
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "nomex_patch", 6 ], [ "nomex_hood", 1 ] ],
       [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
-    ]
+    ],
+    "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ]
   },
   {
     "result": "mask_gas",
@@ -1428,6 +1420,15 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "using": [ [ "sewing_standard", 8 ], [ "tailoring_leather_sheet", 1 ] ],
+    "qualities": [
+      { "id": "LEATHER_AWL", "level": 1 },
+      { "id": "FABRIC_CUT", "level": 2 },
+      { "id": "OVEN", "level": 1 },
+      { "id": "HAMMER", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "DRILL", "level": 1 }
+    ],
+    "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
@@ -1442,6 +1443,15 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "using": [ [ "sewing_standard", 13 ], [ "tailoring_leather_sheet", 3 ] ],
+    "qualities": [
+      { "id": "LEATHER_AWL", "level": 1 },
+      { "id": "FABRIC_CUT", "level": 2 },
+      { "id": "OVEN", "level": 1 },
+      { "id": "HAMMER", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "DRILL", "level": 1 }
+    ],
+    "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
@@ -1482,6 +1492,8 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "using": [ [ "sewing_standard", 8 ], [ "tailoring_leather_sheet", 1 ] ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 }, { "id": "OVEN", "level": 1 } ],
+    "tools": [ [ [ "surface_heat", 18, "LIST" ] ] ],
     "components": [
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ] ]
@@ -1494,6 +1506,8 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "using": [ [ "sewing_standard", 13 ], [ "tailoring_leather_sheet", 3 ] ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 }, { "id": "OVEN", "level": 1 } ],
+    "tools": [ [ [ "surface_heat", 22, "LIST" ] ] ],
     "components": [
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
@@ -1560,6 +1574,8 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "using": [ [ "sewing_standard", 8 ], [ "tailoring_leather_sheet", 1 ] ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 }, { "id": "OVEN", "level": 1 } ],
+    "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
@@ -1573,6 +1589,8 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "using": [ [ "sewing_standard", 13 ], [ "tailoring_leather_sheet", 3 ] ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 }, { "id": "OVEN", "level": 1 } ],
+    "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
@@ -1814,58 +1832,11 @@
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
     "difficulty": 1,
-    "skills_required": [ "survival", 1 ],
     "time": "1 h",
     "reversible": true,
     "autolearn": true,
     "using": [ [ "tailoring_fur_sheet_simple", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ]
-  },
-  {
-    "result": "scarf_fur_long",
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "id_suffix": "merge_scarves",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_HEAD",
-    "skill_used": "tailor",
-    "difficulty": 2,
-    "skills_required": [ "survival", 1 ],
-    "time": "30 m",
-    "reversible": true,
-    "autolearn": true,
-    "using": [ [ "sewing_simple", 3 ] ],
-    "components": [ [ [ "scarf_fur", 2 ] ] ],
-    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ]
-  },
-  {
-    "result": "scarf_fur_long",
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_HEAD",
-    "//": "You try keeping 12 feet of fur sorted out!",
-    "skill_used": "tailor",
-    "difficulty": 2,
-    "skills_required": [ "survival", 1 ],
-    "time": "2 h",
-    "reversible": true,
-    "autolearn": true,
-    "using": [ [ "tailoring_fur_sheet_simple", 2 ] ],
-    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ]
-  },
-  {
-    "result": "scarf_long",
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_HEAD",
-    "skill_used": "tailor",
-    "difficulty": 3,
-    "time": "1 h 20 m",
-    "autolearn": true,
-    "proficiencies": [ { "proficiency": "prof_knitting" }, { "proficiency": "prof_knitting_speed" } ],
-    "using": [ [ "tailoring_wool_knitting", 160 ] ]
   },
   {
     "result": "straw_fedora",
@@ -1938,7 +1909,7 @@
     "using": [ [ "sewing_standard", 8 ], [ "soldering_standard", 20 ] ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" } ],
     "components": [
-      [ [ "cotton_patch", 4 ], [ "scarf", 2 ], [ "scarf_long", 1 ], [ "balaclava", 1 ] ],
+      [ [ "cotton_patch", 4 ], [ "scarf", 2 ], [ "balaclava", 1 ] ],
       [ [ "element", 2 ], [ "crude_heating_element", 3 ] ],
       [ [ "cable", 6 ] ]
     ]
@@ -2274,10 +2245,8 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
-    "skills_required": [ "survival", 5 ],
     "difficulty": 5,
     "time": "3 h",
-    "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "book_learn": [ [ "trappers_companion", 6 ], [ "survival_book", 4 ] ],
     "components": [ [ [ "stomach_sealed", 3 ], [ "large_stomach_sealed", 2 ] ], [ [ "filament", 12, "LIST" ] ] ],
@@ -2486,7 +2455,6 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 2,
     "time": "1 h",
     "autolearn": true,
@@ -2500,7 +2468,6 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 2,
     "time": "1 h",
     "autolearn": true,
@@ -2514,7 +2481,6 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 2,
     "time": "1 h",
     "autolearn": true,
@@ -2528,7 +2494,6 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 2,
     "time": "1 h",
     "autolearn": true,
@@ -2542,7 +2507,6 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 2,
     "time": "1 h",
     "autolearn": true,
@@ -2556,7 +2520,6 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 2,
     "time": "1 h",
     "autolearn": true,

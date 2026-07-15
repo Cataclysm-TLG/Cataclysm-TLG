@@ -237,8 +237,8 @@ class options_manager
         cOpt &get_option( const std::string &name );
 
         //add hidden external option with value
-        void add_external( const std::string &sNameIn, const std::string &sPageIn, const std::string &sType,
-                           const translation &sMenuTextIn, const translation &sTooltipIn );
+        void add_external( const std::string &sNameIn, const std::string &sPageIn,
+                           const std::string &sType );
 
         //add string select option
         void add( const std::string &sNameIn, const std::string &sPageIn,
@@ -430,6 +430,7 @@ struct option_slider {
         static void finalize_all();
         static void check_consistency();
         void load( const JsonObject &jo, std::string_view src );
+        void finalize();
         void check() const;
         static const std::vector<option_slider> &get_all();
 

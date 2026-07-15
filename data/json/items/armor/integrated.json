@@ -11,6 +11,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "wood", "vegetable" ],
+    "to_hit": 0,
     "symbol": "x",
     "color": "light_green",
     "warmth": 1,
@@ -23,7 +24,32 @@
           { "type": "vegetable", "covered_by_mat": 100, "thickness": 1.5 },
           { "type": "wood", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 1,
         "breathability": "GOOD"
@@ -41,6 +67,7 @@
     "volume": "7500 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "wood" ],
     "symbol": "x",
     "color": "brown",
@@ -50,7 +77,32 @@
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 75, "thickness": 2 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 14
       }
@@ -63,11 +115,12 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "distributed bark" },
-    "description": "Your bark is spread evenly across your body.",
+    "description": "Bark evenly spread evenly across the body.",
     "weight": "12 kg",
     "volume": "15 L",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "wood" ],
     "symbol": "x",
     "color": "brown",
@@ -77,7 +130,32 @@
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 75, "thickness": 4 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 16
       }
@@ -90,10 +168,11 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "consolidated bark" },
-    "description": "Your bark is pulled together to protect your torso.",
+    "description": "Bark, thicker around the trunk.",
     "weight": "12 kg",
     "volume": "15 L",
     "price": "0 cent",
+    "to_hit": 0,
     "price_postapoc": "0 cent",
     "material": [ "wood" ],
     "symbol": "x",
@@ -110,7 +189,27 @@
       },
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 4 }, { "type": "wood", "covered_by_mat": 50, "thickness": 3 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "head",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 10
       },
@@ -136,9 +235,10 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "latticed bark" },
-    "description": "Your bark is latticed into a larger frame.",
+    "description": "Bark, latticed to provide strong but uneven protection.",
     "weight": "12 kg",
     "volume": "15 L",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "wood" ],
@@ -150,7 +250,28 @@
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 4 }, { "type": "wood", "covered_by_mat": 75, "thickness": 6 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 18
       },
@@ -185,6 +306,7 @@
     "description": "A coat of soft plumage, growing right out of the skin to cover the head and much of the body.",
     "weight": "640 g",
     "volume": "800 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "feathers" ],
@@ -196,12 +318,12 @@
     "armor": [
       {
         "material": [ { "type": "feathers", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "arm_l", "arm_r", "torso", "head" ],
+        "covers": [ "arm_l", "arm_r", "torso", "head", "long_tail" ],
         "coverage": 100,
         "encumbrance": 4
       },
       {
-        "material": [ { "type": "feathers", "covered_by_mat": 100, "thickness": 4 } ],
+        "material": [ { "type": "feathers", "covered_by_mat": 100, "thickness": 5 } ],
         "covers": [ "wing_bird_l", "wing_bird_r" ],
         "coverage": 100,
         "encumbrance": 4
@@ -212,6 +334,42 @@
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "coverage": 80,
         "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "feathers", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r"
+        ],
+        "specifically_covers": [
+          "gastropod_foot_upper",
+          "gastropod_foot_lower",
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_1_tip",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_2_tip",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_3_tip",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_4_tip",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_5_tip",
+          "cephalopod_arm_6_base",
+          "cephalopod_arm_6_tip",
+          "cephalopod_tentacle_l_base",
+          "cephalopod_tentacle_r_base",
+          "cephalopod_tentacle_l_tip",
+          "cephalopod_tentacle_r_tip"
+        ],
+        "coverage": 60,
+        "encumbrance": 2
       }
     ]
   },
@@ -221,9 +379,10 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "light fur" },
-    "description": "A light coat of fur that grows across much of the body.",
+    "description": "A light coat of fur growing in patches all over the body.",
     "weight": "300 g",
     "volume": "300 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur" ],
@@ -235,7 +394,28 @@
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "wing_bird_l",
+          "wing_bird_r",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 80,
         "encumbrance": 2
       }
@@ -250,6 +430,7 @@
     "description": "A warm furry hide.",
     "weight": "700 g",
     "volume": "700 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur" ],
@@ -257,7 +438,7 @@
     "color": "light_gray",
     "warmth": 20,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "WATER_FRIENDLY" ],
+    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 2 } ],
@@ -267,9 +448,92 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 2 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 80,
         "encumbrance": 6
+      },
+      {
+        "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "mouth" ],
+        "coverage": 85,
+        "encumbrance": 0
+      }
+    ]
+  },
+  {
+    "id": "integrated_rabbit_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "rabbit fur" },
+    "description": "A soft, fluffy coating of fur.  It isn't the best protection against predators, but stays warm in bad weather.",
+    "weight": "400 g",
+    "volume": "400 ml",
+    "to_hit": 0,
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "fur" ],
+    "symbol": "x",
+    "color": "light_gray",
+    "warmth": 25,
+    "environmental_protection": 1,
+    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "RAINPROOF" ],
+    "armor": [
+      {
+        "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.8 } ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso" ],
+        "coverage": 100,
+        "encumbrance": 6
+      },
+      {
+        "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.8 } ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "coverage": 80,
+        "encumbrance": 6
+      },
+      {
+        "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.8 } ],
+        "covers": [ "wing_bird_l", "wing_bird_r" ],
+        "coverage": 60,
+        "encumbrance": 3
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1 } ],
@@ -288,6 +552,7 @@
     "description": "A heavy shag carpet of fur, somewhere between a ballistic vest and attic insulation.",
     "weight": "2 kg",
     "volume": "2 L",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur" ],
@@ -305,7 +570,26 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 90,
         "encumbrance": 8
       },
@@ -326,6 +610,7 @@
     "description": "While still formidable, this furry hide has lost a lot of its bulk to better endure the summer months.",
     "weight": "2 kg",
     "volume": "2 L",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur" ],
@@ -343,7 +628,26 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 90,
         "encumbrance": 6
       },
@@ -364,6 +668,7 @@
     "description": "The shaggy fur of a wild beast.",
     "weight": "1 kg",
     "volume": "1 L",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur" ],
@@ -371,11 +676,11 @@
     "color": "dark_gray",
     "warmth": 25,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "WATER_FRIENDLY" ],
+    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "torso" ],
+        "covers": [ "torso", "long_tail" ],
         "coverage": 100,
         "encumbrance": 14,
         "layers": [ "SKINTIGHT", "NORMAL" ]
@@ -388,7 +693,26 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 2 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 80,
         "encumbrance": 6
       },
@@ -409,6 +733,7 @@
     "description": "A covering of fur that has thinned out for the summer.",
     "weight": "1 kg",
     "volume": "1 L",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur" ],
@@ -416,11 +741,11 @@
     "color": "dark_gray",
     "warmth": 18,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "WATER_FRIENDLY" ],
+    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3.5 } ],
-        "covers": [ "torso" ],
+        "covers": [ "torso", "long_tail" ],
         "coverage": 100,
         "encumbrance": 12,
         "layers": [ "SKINTIGHT", "NORMAL" ]
@@ -433,7 +758,26 @@
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 2 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 80,
         "encumbrance": 5
       },
@@ -451,9 +795,10 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sleek fur" },
-    "description": "The fur of a proud, wise creature.",
+    "description": "The fur of a proud hunter.",
     "weight": "1 kg",
     "volume": "1 L",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur" ],
@@ -465,13 +810,32 @@
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso" ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "long_tail" ],
         "coverage": 100,
         "encumbrance": 6
       },
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "covers": [
+          "hand_l",
+          "hand_r",
+          "foot_l",
+          "foot_r",
+          "head",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 90,
         "encumbrance": 6
       },
@@ -488,10 +852,11 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
-    "name": { "str": "lynx fur" },
-    "description": "A pile of fur around the neck, protecting from foes that go for the throat.",
+    "name": { "str": "mane" },
+    "description": "A thick ruff of fur around the throat.",
     "weight": "200 g",
     "volume": "200 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur" ],
@@ -519,6 +884,7 @@
     "description": "Skin like a spilled tub of paints, splattered in abstract shapes of hide, fur, and scale.",
     "weight": "1 kg",
     "volume": "1 L",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "fur", "scales", "leather_arthropod", "wool", "hflesh" ],
@@ -546,7 +912,28 @@
           { "type": "wool", "covered_by_mat": 20, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 8
       },
@@ -558,7 +945,7 @@
           { "type": "leather_arthropod", "covered_by_mat": 20, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r" ],
+        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "wing_bird_l", "wing_bird_r" ],
         "coverage": 100,
         "encumbrance": 5
       }
@@ -573,6 +960,7 @@
     "description": "A hideous amalgam of scale, skin, and fur, knotted with osteoderms and patches of shining scales.",
     "weight": "2 kg",
     "volume": "500 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "scales", "fur", "chitin", "feathers", "wool", "leather_arthropod", "hflesh" ],
@@ -601,7 +989,28 @@
           { "type": "leather_arthropod", "covered_by_mat": 20, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 14
       },
@@ -613,7 +1022,7 @@
           { "type": "leather_arthropod", "covered_by_mat": 20, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r" ],
+        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "wing_bird_l", "wing_bird_r" ],
         "coverage": 100,
         "encumbrance": 8
       }
@@ -628,6 +1037,7 @@
     "description": "A dense calico of scale and fur compete with variegated skin, feathers, and horn buds across this armored hide.",
     "weight": "3 kg",
     "volume": "800 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "bone", "keratin", "fur", "scales", "acidchitin", "feathers", "wool", "leather_arthropod", "flesh", "hflesh" ],
@@ -659,7 +1069,28 @@
           { "type": "flesh", "covered_by_mat": 33, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "head",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 16
       },
@@ -673,7 +1104,7 @@
           { "type": "flesh", "covered_by_mat": 33, "thickness": 1 },
           { "type": "hflesh", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r" ],
+        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "wing_bird_l", "wing_bird_r" ],
         "coverage": 100,
         "encumbrance": 10
       }
@@ -688,6 +1119,7 @@
     "description": "These are much better than puny human mouthparts.",
     "weight": "800 g",
     "volume": "1000 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "chitin" ],
@@ -706,7 +1138,6 @@
       "NATURAL_WEAPON"
     ],
     "techniques": [ "MANDIBLES_BITE", "MANDIBLES_BITE_NATURAL" ],
-    "to_hit": -1,
     "armor": [
       {
         "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 3 } ],
@@ -726,6 +1157,7 @@
     "description": "Your fangs have properly developed, and are prepared for the kill.  They are easier to use against prey that is vulnerable or webbed.",
     "weight": "600 g",
     "volume": "800 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "sclerotin" ],
@@ -763,6 +1195,7 @@
     "description": "Though this tongue fits neatly within the mouth, it can extend to an astonishing length.  Sharp chitin barbs like a grotesque parody of a cat's tongue line the surface, and the barb at the tip looks more like a whaler's harpoon than something that belongs in a mouth.",
     "weight": "800 g",
     "volume": "1200 ml",
+    "to_hit": 0,
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "sclerotin", "flesh" ],
@@ -792,6 +1225,75 @@
     "melee_damage": { "stab": 14 }
   },
   {
+    "id": "integrated_stinging_tail",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "stinger" },
+    "description": "A hypodermic barb of glass-sharp chitin.",
+    "weight": "800 g",
+    "volume": "1200 ml",
+    "to_hit": 0,
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "sclerotin", "iflesh" ],
+    "symbol": ";",
+    "color": "black",
+    "flags": [
+      "INTEGRATED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "WATER_FRIENDLY",
+      "PADDED",
+      "NO_SALVAGE",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
+    "techniques": [ "STINGER_STAB" ],
+    "armor": [
+      {
+        "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_tip" ],
+        "coverage": 8,
+        "encumbrance": 3
+      }
+    ],
+    "melee_damage": { "stab": 11 }
+  },
+  {
+    "id": "integrated_club_tail",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "tail club" },
+    "description": "A weighty knob of fused vertebrae and osteoderms weighing down the tip of the tail like a ball and chain.",
+    "weight": "2300 g",
+    "volume": "2200 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "bone", "scales", "flesh" ],
+    "symbol": ";",
+    "color": "brown",
+    "warmth": 8,
+    "material_thickness": 3,
+    "flags": [
+      "INTEGRATED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "WATER_FRIENDLY",
+      "PADDED",
+      "NO_SALVAGE",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
+    "techniques": [ "TAIL_CLUB" ],
+    "armor": [ { "covers": [ "long_tail" ], "specifically_covers": [ "long_tail_tip" ], "coverage": 8, "encumbrance": 3 } ],
+    "melee_damage": { "bash": 12 }
+  },
+  {
     "id": "integrated_chitin",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -811,7 +1313,27 @@
     "armor": [
       {
         "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1 } ],
-        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso" ],
+        "covers": [
+          "leg_l",
+          "leg_r",
+          "arm_l",
+          "arm_r",
+          "torso",
+          "long_tail",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "gastropod_foot",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
         "coverage": 100,
         "encumbrance": 2
       },
@@ -872,7 +1394,7 @@
       },
       {
         "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 2.5 } ],
-        "covers": [ "arm_l", "arm_r" ],
+        "covers": [ "arm_l", "arm_r", "long_tail" ],
         "specifically_covers": [ "arm_upper_l", "arm_lower_l", "arm_upper_r", "arm_lower_r" ],
         "coverage": 95,
         "encumbrance": 13,
@@ -890,6 +1412,31 @@
         "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 2.5 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_lower_l", "leg_upper_r", "leg_lower_r" ],
+        "coverage": 95,
+        "encumbrance": 13,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [
+          "crab_leg_1_merus",
+          "crab_leg_1_carpus",
+          "crab_leg_1_propodus",
+          "crab_leg_1_dactyl",
+          "crab_leg_2_merus",
+          "crab_leg_2_carpus",
+          "crab_leg_2_propodus",
+          "crab_leg_2_dactyl",
+          "crab_leg_3_merus",
+          "crab_leg_3_carpus",
+          "crab_leg_3_propodus",
+          "crab_leg_3_dactyl",
+          "crab_leg_4_merus",
+          "crab_leg_4_carpus",
+          "crab_leg_4_propodus",
+          "crab_leg_4_dactyl"
+        ],
         "coverage": 95,
         "encumbrance": 13,
         "rigid_layer_only": true
@@ -949,7 +1496,7 @@
       },
       {
         "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "covers": [ "arm_l", "arm_r" ],
+        "covers": [ "arm_l", "arm_r", "long_tail" ],
         "specifically_covers": [ "arm_upper_l", "arm_lower_l", "arm_upper_r", "arm_lower_r" ],
         "coverage": 95,
         "encumbrance": 8,
@@ -972,11 +1519,28 @@
         "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1 } ],
-        "covers": [ "leg_l", "leg_r" ],
-        "specifically_covers": [ "leg_hip_l", "leg_knee_l", "leg_hip_r", "leg_knee_r" ],
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [
+          "crab_leg_1_merus",
+          "crab_leg_1_carpus",
+          "crab_leg_1_propodus",
+          "crab_leg_1_dactyl",
+          "crab_leg_2_merus",
+          "crab_leg_2_carpus",
+          "crab_leg_2_propodus",
+          "crab_leg_2_dactyl",
+          "crab_leg_3_merus",
+          "crab_leg_3_carpus",
+          "crab_leg_3_propodus",
+          "crab_leg_3_dactyl",
+          "crab_leg_4_merus",
+          "crab_leg_4_carpus",
+          "crab_leg_4_propodus",
+          "crab_leg_4_dactyl"
+        ],
         "coverage": 95,
-        "encumbrance": 0,
+        "encumbrance": 8,
         "rigid_layer_only": true
       }
     ]
@@ -1038,7 +1602,7 @@
         "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 2 } ],
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.4 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_knee_l", "leg_hip_r", "leg_knee_r" ],
         "coverage": 95,
@@ -1057,6 +1621,31 @@
         "covers": [ "hand_l", "hand_r" ],
         "coverage": 95,
         "encumbrance": 16,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 2 } ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [
+          "crab_leg_1_merus",
+          "crab_leg_1_carpus",
+          "crab_leg_1_propodus",
+          "crab_leg_1_dactyl",
+          "crab_leg_2_merus",
+          "crab_leg_2_carpus",
+          "crab_leg_2_propodus",
+          "crab_leg_2_dactyl",
+          "crab_leg_3_merus",
+          "crab_leg_3_carpus",
+          "crab_leg_3_propodus",
+          "crab_leg_3_dactyl",
+          "crab_leg_4_merus",
+          "crab_leg_4_carpus",
+          "crab_leg_4_propodus",
+          "crab_leg_4_dactyl"
+        ],
+        "coverage": 95,
+        "encumbrance": 24,
         "rigid_layer_only": true
       }
     ],
@@ -1119,7 +1708,7 @@
         "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 2 } ],
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.2 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_knee_l", "leg_hip_r", "leg_knee_r" ],
         "coverage": 90,
@@ -1138,6 +1727,31 @@
         "covers": [ "hand_l", "hand_r" ],
         "coverage": 90,
         "encumbrance": 12,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [
+          "crab_leg_1_merus",
+          "crab_leg_1_carpus",
+          "crab_leg_1_propodus",
+          "crab_leg_1_dactyl",
+          "crab_leg_2_merus",
+          "crab_leg_2_carpus",
+          "crab_leg_2_propodus",
+          "crab_leg_2_dactyl",
+          "crab_leg_3_merus",
+          "crab_leg_3_carpus",
+          "crab_leg_3_propodus",
+          "crab_leg_3_dactyl",
+          "crab_leg_4_merus",
+          "crab_leg_4_carpus",
+          "crab_leg_4_propodus",
+          "crab_leg_4_dactyl"
+        ],
+        "coverage": 95,
+        "encumbrance": 18,
         "rigid_layer_only": true
       }
     ]
@@ -1274,6 +1888,39 @@
         "encumbrance": 0,
         "layers": [ "BELTED" ],
         "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 8 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "specifically_covers": [
+          "gastropod_foot_draped",
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped",
+          "crab_leg_1_draped",
+          "crab_leg_2_draped",
+          "crab_leg_3_draped",
+          "crab_leg_4_draped"
+        ],
+        "coverage": 90,
+        "encumbrance": 8,
+        "layers": [ "BELTED" ],
+        "rigid_layer_only": true
       }
     ]
   },
@@ -1328,6 +1975,39 @@
         "specifically_covers": [ "torso_hanging_back" ],
         "coverage": 8,
         "encumbrance": 0,
+        "layers": [ "BELTED" ],
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 10 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "specifically_covers": [
+          "gastropod_foot_draped",
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped",
+          "crab_leg_1_draped",
+          "crab_leg_2_draped",
+          "crab_leg_3_draped",
+          "crab_leg_4_draped"
+        ],
+        "coverage": 90,
+        "encumbrance": 8,
         "layers": [ "BELTED" ],
         "rigid_layer_only": true
       }
@@ -1395,8 +2075,29 @@
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.0 } ],
-        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r", "long_tail" ],
         "coverage": 65,
+        "encumbrance": 3,
+        "breathability": "GOOD"
+      },
+      {
+        "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "coverage": 45,
         "encumbrance": 3,
         "breathability": "GOOD"
       },
@@ -1436,7 +2137,7 @@
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r", "long_tail" ],
         "coverage": 85,
         "encumbrance": 6,
         "breathability": "POOR"
@@ -1447,6 +2148,27 @@
         "coverage": 80,
         "encumbrance": 3,
         "breathability": "POOR"
+      },
+      {
+        "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "coverage": 45,
+        "encumbrance": 3,
+        "breathability": "GOOD"
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 0.5 } ],
@@ -1484,7 +2206,7 @@
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 2 } ],
-        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r", "long_tail" ],
         "coverage": 95,
         "encumbrance": 6
       },
@@ -1493,6 +2215,27 @@
         "covers": [ "hand_l", "hand_r", "foot_l", "foot_r" ],
         "coverage": 90,
         "encumbrance": 4
+      },
+      {
+        "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "coverage": 50,
+        "encumbrance": 3,
+        "breathability": "GOOD"
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 2 } ],
@@ -1555,9 +2298,30 @@
           { "type": "bone", "covered_by_mat": 30, "thickness": 2.0 },
           { "type": "scales", "covered_by_mat": 100, "thickness": 3.0 }
         ],
-        "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "arm_l", "arm_r", "leg_l", "leg_r", "long_tail" ],
         "coverage": 98,
         "encumbrance": 16
+      },
+      {
+        "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [
+          "gastropod_foot",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r",
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "coverage": 60,
+        "encumbrance": 3,
+        "breathability": "GOOD"
       },
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.5 } ],
@@ -1571,6 +2335,35 @@
         "coverage": 85,
         "encumbrance": 0,
         "layers": [ "PERSONAL" ]
+      }
+    ]
+  },
+  {
+    "id": "armor_bio_filter",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "bionic filtration system" },
+    "description": "A powered system of filters working to keep the airways clear of dust, smoke, and airborne toxins.",
+    "weight": "180 g",
+    "volume": "250 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "to_hit": -2,
+    "material": [ "plastic", "steel" ],
+    "symbol": "[",
+    "color": "dark_gray",
+    "warmth": 0,
+    "environmental_protection": 16,
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR", "NO_SALVAGE" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 }
+        ],
+        "covers": [ "mouth" ],
+        "coverage": 0
       }
     ]
   },
@@ -1732,6 +2525,7 @@
     "price_postapoc": "0 cent",
     "material": [ "keratin" ],
     "weapon_category": [ "CLAWS" ],
+    "to_hit": 0,
     "symbol": ";",
     "color": "dark_gray",
     "flags": [
@@ -1770,6 +2564,7 @@
     "price_postapoc": "0 cent",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 9 ], [ "CUT_FINE", 2 ], [ "FABRIC_CUT", 1 ] ],
     "weapon_category": [ "CLAWS" ],
+    "to_hit": 0,
     "material": [ "steel" ],
     "symbol": ";",
     "color": "dark_gray",
@@ -1810,6 +2605,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "weapon_category": [ "CLAWS" ],
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ";",
     "color": "dark_gray",
@@ -1850,6 +2646,7 @@
     "material": [ "sclerotin" ],
     "symbol": ";",
     "weapon_category": [ "CLAWS" ],
+    "to_hit": 0,
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
@@ -1885,6 +2682,7 @@
     "volume": "1200 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "bone" ],
     "symbol": ",",
     "color": "white",
@@ -1913,6 +2711,7 @@
     "volume": "40 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "bone" ],
     "symbol": ",",
     "color": "white",
@@ -1951,6 +2750,7 @@
     "volume": "200 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "bone" ],
     "symbol": ",",
     "color": "white",
@@ -1979,6 +2779,7 @@
     "volume": "250 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "bone" ],
     "symbol": ",",
     "color": "white",
@@ -2007,6 +2808,7 @@
     "volume": "125 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "bone" ],
     "symbol": ",",
     "color": "white",
@@ -2040,6 +2842,7 @@
     "volume": "12 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "bone" ],
     "symbol": ",",
     "color": "white",
@@ -2066,6 +2869,7 @@
     "volume": "125 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "chitin" ],
     "symbol": ",",
     "color": "white",
@@ -2103,6 +2907,7 @@
     "volume": "125 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "chitin" ],
     "symbol": ",",
     "color": "yellow",
@@ -2140,6 +2945,7 @@
     "volume": "500 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -2187,6 +2993,7 @@
     "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 12 ] ],
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -2227,6 +3034,7 @@
     "volume": "300 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -2265,6 +3073,7 @@
     "volume": "300 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -2292,6 +3101,7 @@
     "volume": "300 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -2319,6 +3129,7 @@
     "volume": "600 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -2358,6 +3169,7 @@
     "volume": "600 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -2397,6 +3209,7 @@
     "volume": "600 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
@@ -2436,6 +3249,7 @@
     "volume": "150 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
+    "to_hit": 0,
     "material": [ "titanium_alloy" ],
     "symbol": ",",
     "color": "dark_gray",

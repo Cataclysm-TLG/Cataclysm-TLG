@@ -4,10 +4,10 @@
     "subtype": "collection",
     "id": "mon_zombie_scientist_death_drops",
     "entries": [
-      { "group": "lab_shoes", "damage": [ 1, 4 ] },
-      { "group": "lab_torso", "damage": [ 1, 4 ] },
-      { "group": "lab_pants", "damage": [ 1, 4 ] },
-      { "group": "underwear", "damage": [ 1, 4 ] },
+      { "group": "lab_shoes", "damage": [ -1, 5 ] },
+      { "group": "lab_torso", "damage": [ -1, 5 ] },
+      { "group": "lab_pants", "damage": [ -1, 5 ] },
+      { "group": "underwear", "damage": [ -1, 5 ] },
       {
         "collection": [
           { "group": "harddrugs", "prob": 25 },
@@ -22,7 +22,7 @@
           { "group": "lab_files_generic", "prob": 15 }
         ]
       },
-      { "group": "wallets_science", "damage": [ 1, 4 ], "prob": 5 }
+      { "group": "wallets_science", "damage": [ -1, 5 ], "prob": 5 }
     ]
   },
   {
@@ -48,46 +48,46 @@
     "subtype": "collection",
     "entries": [
       { "group": "default_zombie_items_pockets" },
-      { "group": "security_armor", "damage": [ 0, 4 ] },
+      { "group": "security_armor", "damage": [ -1, 5 ] },
       { "group": "security_gear" },
-      { "group": "cop_gloves", "prob": 40, "damage": [ 0, 4 ] },
+      { "group": "cop_gloves", "prob": 40, "damage": [ -1, 5 ] },
       {
         "collection": [
-          { "item": "pants", "variant": "pants_black", "damage": [ 0, 4 ] },
+          { "item": "pants", "variant": "pants_black", "damage": [ -1, 5 ] },
           {
             "distribution": [
-              { "item": "leather_belt", "damage": [ 0, 4 ] },
-              { "item": "webbing_belt", "contents-item": "dump_pouch", "damage": [ 0, 4 ] }
+              { "item": "leather_belt", "damage": [ -1, 5 ] },
+              { "item": "webbing_belt", "contents-item": "dump_pouch", "damage": [ -1, 5 ] }
             ]
           }
         ]
       },
-      { "group": "security_shoes", "damage": [ 0, 4 ] },
-      { "item": "dress_shirt", "damage": [ 0, 4 ] },
+      { "group": "security_shoes", "damage": [ -1, 5 ] },
+      { "item": "dress_shirt", "damage": [ -1, 5 ] },
       { "item": "dog_tag", "prob": 20 },
       {
         "collection": [
-          { "item": "tazer", "charges": [ 250, 500 ], "damage": [ 0, 4 ] },
+          { "item": "tazer", "charges": [ 250, 500 ], "damage": [ -1, 5 ] },
           {
             "distribution": [
               {
                 "collection": [
-                  { "item": "holster", "damage": [ 0, 4 ] },
-                  { "item": "m9", "charges": [ 0, 15 ], "damage": [ 0, 4 ] },
-                  { "item": "m9mag", "charges": [ 0, 15 ], "count": [ 1, 2 ], "damage": [ 0, 4 ] }
+                  { "item": "holster", "damage": [ -1, 5 ] },
+                  { "item": "m9", "charges": [ 0, 15 ], "damage": [ -1, 5 ] },
+                  { "item": "m9mag", "charges": [ 0, 15 ], "count": [ 1, 2 ], "damage": [ -1, 5 ] }
                 ]
               },
-              { "item": "baton", "damage": [ 0, 4 ] }
+              { "item": "baton", "damage": [ -1, 5 ] }
             ]
           }
         ],
         "prob": 70
       },
-      { "group": "underwear", "damage": [ 0, 4 ] },
-      { "group": "socks_unisex", "damage": [ 0, 4 ] },
-      { "group": "clothing_glasses", "damage": [ 0, 4 ] },
-      { "group": "clothing_watch", "damage": [ 0, 4 ] },
-      { "group": "wallets", "damage": [ 0, 4 ] }
+      { "group": "underwear", "damage": [ -1, 5 ] },
+      { "group": "socks_unisex", "damage": [ -1, 5 ] },
+      { "group": "clothing_glasses", "damage": [ -1, 5 ] },
+      { "group": "clothing_watch", "damage": [ -1, 5 ] },
+      { "group": "wallets", "damage": [ -1, 5 ] }
     ]
   },
   {
@@ -120,11 +120,11 @@
     "entries": [
       {
         "distribution": [
-          { "item": "broken_dimensional_anchor", "count": 1, "damage": [ 1, 4 ], "prob": 19, "charges": [ 0, 1500 ] },
+          { "item": "broken_dimensional_anchor", "count": 1, "damage": [ -1, 5 ], "prob": 19, "charges": [ 0, 1500 ] },
           { "item": "dimensional_anchor", "count": 1, "prob": 1 }
         ]
       },
-      { "item": "xedra_enviro_suit", "damage": [ 1, 4 ] }
+      { "item": "xedra_enviro_suit", "damage": [ -1, 5 ] }
     ]
   }
 ]

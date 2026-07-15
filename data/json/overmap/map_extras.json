@@ -12,12 +12,24 @@
     "flags": [ "CLASSIC" ]
   },
   {
+    "id": "mx_crater_ravine",
+    "type": "map_extra",
+    "name": { "str": "Crater" },
+    "description": "There is a crater here.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_crater" },
+    "min_max_zlevel": [ -2, -2 ],
+    "sym": "o",
+    "color": "red",
+    "autonote": false,
+    "flags": [ "CLASSIC" ]
+  },
+  {
     "id": "mx_collegekids",
     "type": "map_extra",
     "name": { "str": "College Kids" },
     "description": "Several corpses of college kids are here.",
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_collegekids" },
-    "min_max_zlevel": [ -1, 0 ],
+    "min_max_zlevel": [ -2, 0 ],
     "sym": "c",
     "color": "light_red",
     "autonote": false,
@@ -151,6 +163,18 @@
     "description": "Helicopter crashed here.",
     "generator": { "generator_method": "map_extra_function", "generator_id": "mx_helicopter" },
     "min_max_zlevel": [ 0, 0 ],
+    "sym": "X",
+    "color": "light_blue",
+    "autonote": false,
+    "flags": [ "MAN_MADE", "CLASSIC" ]
+  },
+  {
+    "id": "mx_helicopter_ravine",
+    "type": "map_extra",
+    "name": { "str": "Helicopter Crash" },
+    "description": "Helicopter crashed here.",
+    "generator": { "generator_method": "map_extra_function", "generator_id": "mx_helicopter" },
+    "min_max_zlevel": [ -2, -2 ],
     "sym": "X",
     "color": "light_blue",
     "autonote": false,
@@ -395,6 +419,25 @@
     "flags": [ "CLASSIC" ]
   },
   {
+    "id": "mx_grass_ravine",
+    "type": "map_extra",
+    "name": { "str": "Tall grass" },
+    "description": "A meadow of tall grass.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_grass_map" },
+    "min_max_zlevel": [ -2, -2 ],
+    "autonote": false,
+    "flags": [ "CLASSIC" ]
+  },
+  {
+    "id": "mx_grass2_ravine",
+    "type": "map_extra",
+    "copy-from": "mx_grass",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_grass2_map" },
+    "min_max_zlevel": [ -2, -2 ],
+    "autonote": false,
+    "flags": [ "CLASSIC" ]
+  },
+  {
     "id": "mx_fallen_shed",
     "type": "map_extra",
     "name": { "str": "Derelict shed" },
@@ -413,6 +456,18 @@
     "description": "Small clay deposit is here.",
     "generator": { "generator_method": "map_extra_function", "generator_id": "mx_clay_deposit" },
     "min_max_zlevel": [ 0, 0 ],
+    "sym": "c",
+    "color": "brown",
+    "autonote": false,
+    "flags": [ "CLASSIC" ]
+  },
+  {
+    "id": "mx_clay_deposit_ravine",
+    "type": "map_extra",
+    "name": { "str": "Clay Deposit" },
+    "description": "Small clay deposit is here.",
+    "generator": { "generator_method": "map_extra_function", "generator_id": "mx_clay_deposit" },
+    "min_max_zlevel": [ -2, -2 ],
     "sym": "c",
     "color": "brown",
     "autonote": false,
@@ -461,6 +516,18 @@
     "description": "Burned ground is here.",
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_burned_ground" },
     "min_max_zlevel": [ 0, 0 ],
+    "sym": ".",
+    "color": "light_gray",
+    "autonote": false,
+    "flags": [ "CLASSIC" ]
+  },
+  {
+    "id": "mx_point_burned_ground_ravine",
+    "type": "map_extra",
+    "name": { "str": "Burned Ground" },
+    "description": "Burned ground is here.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_burned_ground" },
+    "min_max_zlevel": [ -2, -2 ],
     "sym": ".",
     "color": "light_gray",
     "autonote": false,
@@ -546,6 +613,18 @@
     "flags": [ "WASP" ]
   },
   {
+    "id": "mx_nest_wasp_ravine",
+    "type": "map_extra",
+    "name": { "str": "Wasp Nest" },
+    "description": "A wasp nest.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_nest_wasp" },
+    "min_max_zlevel": [ -2, 9 ],
+    "sym": "W",
+    "color": "yellow",
+    "autonote": false,
+    "flags": [ "WASP" ]
+  },
+  {
     "id": "mx_nest_dermatik",
     "type": "map_extra",
     "name": { "str": "Dermatik Nest" },
@@ -580,23 +659,23 @@
     "flags": [ "MAN_MADE", "CLASSIC" ]
   },
   {
+    "id": "mx_mass_grave_jabberwock",
+    "type": "map_extra",
+    "name": { "str": "Mass Grave" },
+    "description": "A mass grave.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_mass_grave_jabberwock" },
+    "min_max_zlevel": [ 0, 0 ],
+    "sym": "X",
+    "color": "yellow",
+    "autonote": false,
+    "flags": [ "MAN_MADE", "CLASSIC" ]
+  },
+  {
     "id": "mx_grave",
     "type": "map_extra",
     "name": { "str": "Grave" },
     "description": "A grave.",
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_grave" },
-    "min_max_zlevel": [ 0, 0 ],
-    "autonote": false,
-    "flags": [ "MAN_MADE", "CLASSIC" ]
-  },
-  {
-    "id": "mx_city_trap",
-    "type": "map_extra",
-    "name": { "str": "Zombie Trap" },
-    "description": "Someone put up a trap against zombies here.",
-    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_city_trap" },
-    "sym": "I",
-    "color": "green",
     "min_max_zlevel": [ 0, 0 ],
     "autonote": false,
     "flags": [ "MAN_MADE", "CLASSIC" ]
@@ -656,6 +735,26 @@
     "color": "light_gray"
   },
   {
+    "id": "mx_rock_formation_2",
+    "type": "map_extra",
+    "name": { "str": "Rock formation" },
+    "description": "Rocky ground and some boulders.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_rock_formation_2" },
+    "sym": ".",
+    "autonote": false,
+    "color": "light_gray"
+  },
+  {
+    "id": "mx_rock_formation_3",
+    "type": "map_extra",
+    "name": { "str": "Rock formation" },
+    "description": "Rocky ground and some boulders.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_rock_formation_3" },
+    "sym": ".",
+    "autonote": false,
+    "color": "light_gray"
+  },
+  {
     "id": "mx_toxic_waste",
     "type": "map_extra",
     "name": { "str": "Toxic waste" },
@@ -696,6 +795,16 @@
     "min_max_zlevel": [ 0, 0 ]
   },
   {
+    "id": "mx_beehive_natural_ravine",
+    "type": "map_extra",
+    "name": { "str": "Beehive" },
+    "description": "An ordinary beehive.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_beehive_natural" },
+    "autonote": false,
+    "flags": [ "BEE" ],
+    "min_max_zlevel": [ -2, -2 ]
+  },
+  {
     "id": "mx_poison_ivy_patch_field",
     "type": "map_extra",
     "name": { "str": "Poison Ivy Patch" },
@@ -712,6 +821,15 @@
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_poison_ivy_patch_forest" },
     "autonote": false,
     "min_max_zlevel": [ 0, 0 ]
+  },
+  {
+    "id": "mx_poison_ivy_patch_ravine",
+    "type": "map_extra",
+    "name": { "str": "Poison Ivy Patch" },
+    "description": "Poison ivy grows here.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_poison_ivy_patch_forest" },
+    "autonote": false,
+    "min_max_zlevel": [ -2, -2 ]
   },
   {
     "id": "mx_worm_sign",
@@ -733,6 +851,56 @@
     "min_max_zlevel": [ 0, 0 ],
     "sym": "~",
     "color": "yellow",
+    "flags": [ "CLASSIC" ]
+  },
+  {
+    "id": "mx_grove_ravine",
+    "type": "map_extra",
+    "name": { "str": "Grove" },
+    "description": "This area is covered with a single type of trees.",
+    "generator": { "generator_method": "map_extra_function", "generator_id": "mx_grove" },
+    "min_max_zlevel": [ -2, -2 ],
+    "sym": "F",
+    "color": "light_green",
+    "flags": [ "CLASSIC" ]
+  },
+  {
+    "id": "mx_pond_ravine",
+    "type": "map_extra",
+    "name": { "str": "Pond" },
+    "description": "Small pond is here.",
+    "generator": { "generator_method": "map_extra_function", "generator_id": "mx_pond" },
+    "min_max_zlevel": [ -2, -2 ],
+    "sym": "p",
+    "color": "blue",
+    "flags": [ "CLASSIC", "WATER" ]
+  },
+  {
+    "id": "mx_pond_forest_ravine",
+    "type": "map_extra",
+    "name": { "str": "basin" },
+    "description": "Small basin is here.",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_pond_forest" },
+    "min_max_zlevel": [ -2, -2 ],
+    "flags": [ "CLASSIC", "WATER" ]
+  },
+  {
+    "id": "mx_pond_forest_2_ravine",
+    "type": "map_extra",
+    "copy-from": "mx_pond_forest",
+    "generator": { "generator_method": "update_mapgen", "generator_id": "mx_pond_forest_2" },
+    "min_max_zlevel": [ -2, -2 ],
+    "flags": [ "CLASSIC", "WATER" ]
+  },
+  {
+    "id": "mx_shrubbery_ravine",
+    "type": "map_extra",
+    "name": { "str": "Shrubbery" },
+    "description": "This area is covered with a single type of shrubs.",
+    "generator": { "generator_method": "map_extra_function", "generator_id": "mx_shrubbery" },
+    "min_max_zlevel": [ -2, -2 ],
+    "sym": "s",
+    "color": "light_green",
     "flags": [ "CLASSIC" ]
   }
 ]

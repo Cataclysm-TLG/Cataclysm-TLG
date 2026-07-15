@@ -182,7 +182,7 @@
     "dialogue": {
       "describe": "We need scrap metal to assemble a drone…",
       "offer": "I've been sitting here for a long time, and all that time I was wondering how bad everything is outside.  I want to build a drone that I can use to fly over New England, check the air condition, take a few pictures from above to get a glimpse of how is it.  There were a lot of things in our back room that could be useful, but still I'm missing a lot of things.  You look like an experienced survivalist.  Can you help me?",
-      "accepted": "Good.  I just need a little stuff: 50 scrap, 6 medium batteries, 5 small high-quality lenses and a radio remote control.  Bring the scrap for now, but don't forget about the rest.",
+      "accepted": "Good.  I just need a little stuff: 50 scrap, 6 lithium batteries, 5 small high-quality lenses and a radio remote control.  Bring the scrap for now, but don't forget about the rest.",
       "rejected": "Maybe another time…",
       "advice": "I don't think this is a difficult task.  Surely there is a lot of it underfoot.",
       "inquire": "How's it going?",
@@ -196,7 +196,7 @@
     "type": "mission_definition",
     "has_generic_rewards": false,
     "name": { "str": "Find batteries for the meteorologist" },
-    "description": "The meteorologist asked to bring him 6 medium batteries.",
+    "description": "The meteorologist asked to bring 6 lithium batteries.",
     "goal": "MGOAL_FIND_ITEM",
     "item": "medium_battery_cell",
     "count": 6,
@@ -206,7 +206,7 @@
     "followup": "MISSION_meteorologist_3",
     "dialogue": {
       "describe": "We need batteries to assemble a drone…",
-      "offer": "Well, what's next on the list… yeah, batteries.  6 medium batteries would be enough.",
+      "offer": "Well, what's next on the list… yeah, batteries.  6 lithium batteries would be enough.",
       "accepted": "I'm waiting for you.",
       "rejected": "Maybe another time…",
       "advice": "Try looking for some battery-powered trinkets and take them apart.",

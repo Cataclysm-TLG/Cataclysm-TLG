@@ -590,11 +590,6 @@
   },
   {
     "type": "construction_group",
-    "id": "build_reinforced_glass_window",
-    "name": "Build Reinforced Glass Window"
-  },
-  {
-    "type": "construction_group",
     "id": "build_river_bridge",
     "name": "Build River Bridge"
   },
@@ -1377,26 +1372,6 @@
   },
   {
     "type": "construction_group",
-    "id": "place_wind_turbine",
-    "name": "Place Wind Turbine"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_xl_wind_turbine",
-    "name": "Place Large Wind Turbine"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_water_wheel",
-    "name": "Place Water Wheel"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_xl_water_wheel",
-    "name": "Place Large Water Wheel"
-  },
-  {
-    "type": "construction_group",
     "id": "place_small_battery",
     "name": "Place Small Battery"
   },
@@ -2024,5 +1999,10 @@
     "type": "construction_group",
     "id": "build_vent_pipe",
     "name": "Build Vent Pipe"
+  },
+  {
+    "type": "construction_group",
+    "id": "place_lathe",
+    "name": "Place a lathe"
   }
 ]

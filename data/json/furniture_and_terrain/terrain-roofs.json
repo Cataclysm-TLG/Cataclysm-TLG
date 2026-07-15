@@ -390,7 +390,7 @@
     "symbol": "#",
     "color": [ "light_green", "green", "yellow_yellow", "brown" ],
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "CLIMBABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "CLIMBABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -400,7 +400,7 @@
     "symbol": "#",
     "color": [ "green" ],
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -410,7 +410,69 @@
     "symbol": "#",
     "color": "brown",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_treetop_deadpine",
+    "name": "dead treetop",
+    "description": "The bare upper branches of a dead tree.  There's just enough room to perch here.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_treetop_hickory",
+    "name": "treetop",
+    "description": "The upper branches of a tree.  There's just enough room to perch here.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_treetop_maple",
+    "name": "treetop",
+    "description": "The upper branches of a tree.  There's just enough room to perch here.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_treetop_fruit",
+    "//": "Mostly but not always used for fruit trees.",
+    "name": "treetop",
+    "description": "The upper branches of a tree.  There's just enough room to perch here.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_treetop_nut",
+    "//": "Mostly but not always used for nut trees.",
+    "name": "treetop",
+    "description": "The upper branches of a tree.  There's just enough room to perch here.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_treetop_willow",
+    "name": "giant fern top",
+    "description": "The top of a willow tree.  There is enough room to perch up here, but only just.",
+    "symbol": "#",
+    "color": "red",
+    "move_cost": 8,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -420,6 +482,6 @@
     "symbol": "#",
     "color": "red",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "SINGLE_SUPPORT", "TRANSPARENT_FLOOR" ]
   }
 ]

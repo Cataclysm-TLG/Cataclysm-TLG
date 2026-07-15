@@ -2,6 +2,8 @@
 #ifndef CATA_SRC_ITEM_LOCATION_H
 #define CATA_SRC_ITEM_LOCATION_H
 
+#include <cstdint>
+#include <list>
 #include <memory>
 #include <string>
 
@@ -133,6 +135,12 @@ class item_location
         bool is_efile() const;
 
         /**
+        * Returns true if the item is a gunmod, is installed on a gun
+        * and allowed to be used directly from inventory
+        */
+        bool is_invisible_installed_gunmod() const;
+
+        /**
         * Returns available volume capacity where this item is located.
         */
         units::volume volume_capacity() const;
@@ -151,21 +159,6 @@ class item_location
         * true if the item is inside a not open watertight container
         **/
         bool protected_from_liquids() const;
-
-        /**
-        * Checks if item can have fault, and if so, applies it
-        * `force` allow to bypass check and apply fault item do not define
-        * `message` defines if fault message will be printed
-        **/
-        void set_fault( const fault_id &fault_id, bool force = false, bool message = true );
-
-        /**
-        * Checks if item has any fault of type, and if so, applies it
-        * `force` allow to bypass check and apply fault item do not define
-        * `message` defines if fault message will be printed
-        **/
-        void set_random_fault_of_type( const std::string &fault_type, bool force = false,
-                                       bool message = true );
 
         ret_val<void> parents_can_contain_recursive( item *it ) const;
         ret_val<int> max_charges_by_parent_recursive( const item &it ) const;
@@ -202,4 +195,14 @@ class item_location
 std::unique_ptr<talker> get_talker_for( item_location &it );
 std::unique_ptr<const_talker> get_const_talker_for( const item_location &it );
 std::unique_ptr<talker> get_talker_for( item_location *it );
+
+struct item_locator_hint;
+
+// Resolve an item by its uid, starting from the hint.  Returns invalid
+// item_location if not found within the accepted resolution boundary.
+item_location find_item_by_uid( int64_t uid, const item_locator_hint &hint );
+
+using drop_location = std::pair<item_location, int>;
+using drop_locations = std::list<drop_location>;
+
 #endif // CATA_SRC_ITEM_LOCATION_H

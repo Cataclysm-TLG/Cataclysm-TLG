@@ -733,6 +733,26 @@ bool vehicle::autodrive_controller::check_drivable( map &here, const tripoint_bu
         return &ovp->vehicle() == &driven_veh;
     }
 
+    constexpr int ramp_padding = 3;
+
+    for( int dx = -ramp_padding; dx <= ramp_padding; ++dx ) {
+        for( int dy = -ramp_padding; dy <= ramp_padding; ++dy ) {
+            if( dx == 0 && dy == 0 ) {
+                continue;
+            }
+            const tripoint_bub_ms neighbor(
+                pt.x() + dx,
+                pt.y() + dy,
+                pt.z()
+            );
+            if( ( here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, neighbor ) ||
+                  here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, neighbor ) ) &&
+                !here.has_flag( ter_furn_flag::TFLAG_ROAD, neighbor ) ) {
+                return false;
+            }
+        }
+    }
+
     const tripoint_abs_ms pt_abs = here.get_abs( pt );
     const tripoint_abs_omt pt_omt = project_to<coords::omt>( pt_abs );
     // only check visibility for the current OMT, we'll check other OMTs when
@@ -770,6 +790,11 @@ bool vehicle::autodrive_controller::check_drivable( map &here, const tripoint_bu
         return false;
     }
 
+    // don't drive over junk which could damage our wheels, the player must always manually do that.
+    if( here.has_items( pt ) ) {
+        return false;
+    }
+
     // check for furniture that hinders movement; furniture with 0 move cost
     // can be driven on
     const furn_id &furniture = here.furn( pt );
@@ -779,6 +804,14 @@ bool vehicle::autodrive_controller::check_drivable( map &here, const tripoint_bu
 
     const ter_id &terrain = here.ter( pt );
     if( terrain == ter_str_id::NULL_ID() ) {
+        return false;
+    }
+
+    const bool is_ramp =
+        here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, pt ) ||
+        here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, pt );
+
+    if( is_ramp && !here.has_flag( ter_furn_flag::TFLAG_ROAD, pt ) ) {
         return false;
     }
     // open air is an obstacle to non-flying vehicles; it is drivable
@@ -829,23 +862,28 @@ void vehicle::autodrive_controller::compute_obstacles( map &here )
     compute_obstacles_from_enqueued_ramp_points( ramp_points, here );
 }
 
-// Checks whether `p` is a drivable ramp up or down,
-// and if so adds the ramp's destination tripoint to `ramp_points`
-void vehicle::autodrive_controller::enqueue_if_ramp( point_queue &ramp_points,
-        const map &here, const tripoint_bub_ms &p ) const
+void vehicle::autodrive_controller::enqueue_if_ramp(
+    point_queue &ramp_points,
+    const map &here,
+    const tripoint_bub_ms &p ) const
 {
     if( !data.land_ok ) {
         return;
     }
-    // Please don't drive into craters.
-    if( !here.has_flag( ter_furn_flag::TFLAG_ROAD, p ) ) {
+    const bool road = here.has_flag( ter_furn_flag::TFLAG_ROAD, p );
+    if( !road ) {
+        return;
+    }
+    const bool ramp_up = here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, p );
+    const bool ramp_down = here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, p );
+    if( !ramp_up && !ramp_down ) {
         return;
     }
     ramp_points.visited.emplace( p );
-    if( p.z() < OVERMAP_HEIGHT && here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, p ) ) {
+    if( ramp_up && p.z() < OVERMAP_HEIGHT ) {
         ramp_points.enqueue( p + tripoint::above );
     }
-    if( p.z() > -OVERMAP_DEPTH && here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, p ) ) {
+    if( ramp_down && p.z() > -OVERMAP_DEPTH ) {
         ramp_points.enqueue( p + tripoint::below );
     }
 }
@@ -862,8 +900,8 @@ void vehicle::autodrive_controller::compute_obstacles_from_enqueued_ramp_points(
     while( !ramp_points.to_check.empty() ) {
         const tripoint_bub_ms ramp_point = ramp_points.to_check.front();
         ramp_points.to_check.pop();
-        for( const tripoint_bub_ms &p : ff::point_flood_fill_4_connected( ramp_point, ramp_points.visited,
-                is_drivable ) ) {
+        for( const tripoint_bub_ms &p : ff::point_flood_fill_4_connected<std::vector>( ramp_point,
+                ramp_points.visited, is_drivable ) ) {
             const point pt_view = data.to_view( here, p );
             if( !data.view_bounds.contains( pt_view ) ) {
                 continue;
@@ -1300,7 +1338,6 @@ std::optional<navigation_step> vehicle::autodrive_controller::compute_next_step(
             square_dist( first_step.pos.xy().raw(), second_step.pos.xy().raw() ) !=
             square_dist( first_step.pos.xy().raw(), veh_pos.xy().raw() ) &&
             first_step.steering_dir == second_step.steering_dir ) {
-            data.path.pop_back();
             maintain_speed = true;
             data.path.clear();
         } else {
@@ -1440,8 +1477,18 @@ autodrive_result vehicle::do_autodrive( map &here, Character &driver )
     const tripoint_abs_ms veh_pos = pos_abs();
     const tripoint_abs_omt veh_omt = project_to<coords::omt>( veh_pos );
     std::vector<tripoint_abs_omt> &omt_path = driver.omt_path;
-    while( !omt_path.empty() && veh_omt.xy() == omt_path.back().xy() ) {
-        omt_path.pop_back();
+    // following code finds the last overmap path tile matched to the vehicle coordinates
+    // usually it's just the last in the path vector, but we may skip it is we drive fast and cross the tile in a corner
+    const auto veh_on_path = std::find_if( omt_path.rbegin(),
+    omt_path.rend(), [xy = veh_omt.xy()]( const auto & path ) {
+        return path.xy() == xy;
+    } );
+    if( veh_on_path != omt_path.rend() ) {
+        omt_path.erase( ( veh_on_path + 1 ).base(), omt_path.end() );
+        // it removes XY duplicates spanned across mupltiple Z levels
+        while( !omt_path.empty() && veh_omt.xy() == omt_path.back().xy() ) {
+            omt_path.pop_back();
+        }
     }
     if( omt_path.empty() ) {
         stop_autodriving( false );

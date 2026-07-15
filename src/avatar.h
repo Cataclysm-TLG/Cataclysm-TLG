@@ -99,6 +99,7 @@ class avatar : public Character
         void deserialize( const JsonObject &data ) override;
         bool save_map_memory();
         void load_map_memory();
+        void clear_map_memory();
 
         // newcharacter.cpp
         bool create( character_type type, const std::string &tempname = "" );
@@ -140,12 +141,12 @@ class avatar : public Character
         using Character::query_yn;
         bool query_yn( const std::string &mes ) const override;
 
-        void toggle_map_memory();
         //! @copydoc map_memory::is_valid() const
         bool is_map_memory_valid() const;
         bool should_show_map_memory() const;
         void prepare_map_memory_region( const tripoint_abs_ms &p1, const tripoint_abs_ms &p2 );
         const memorized_tile &get_memorized_tile( const tripoint_abs_ms &p ) const;
+        bool has_memory_at( const tripoint_abs_ms &p ) const;
         void memorize_terrain( const tripoint_abs_ms &p, std::string_view id,
                                int subtile, int rotation );
         void memorize_decoration( const tripoint_abs_ms &p, std::string_view id,
@@ -382,7 +383,6 @@ class avatar : public Character
         std::string save_id;
 
         std::unique_ptr<map_memory> player_map_memory;
-        bool show_map_memory;
 
         friend class debug_menu::mission_debug;
         /**
@@ -402,6 +402,7 @@ class avatar : public Character
          * The currently active mission, or null if no mission is currently in progress.
          */
         mission *active_mission;
+        void update_active_mission();
         /**
         * diary to track player progression and to write the players stroy
         */

@@ -78,11 +78,10 @@ void deployed_furniture( Character &you, const tripoint_bub_ms &pos );
 void portable_structure( Character &you, const tripoint_bub_ms &examp );
 void pit( Character &you, const tripoint_bub_ms &examp );
 void pit_covered( Character &you, const tripoint_bub_ms &examp );
+void thin_ice( Character &you, const tripoint_bub_ms &examp );
 void safe( Character &you, const tripoint_bub_ms &examp );
 void gunsafe_el( Character &you, const tripoint_bub_ms &examp );
-void harvest_furn_nectar( Character &you, const tripoint_bub_ms &examp );
 void harvest_furn( Character &you, const tripoint_bub_ms &examp );
-void harvest_ter_nectar( Character &you, const tripoint_bub_ms &examp );
 void harvest_ter( Character &you, const tripoint_bub_ms &examp );
 void harvested_plant( Character &you, const tripoint_bub_ms &examp );
 void locked_object( Character &you, const tripoint_bub_ms &examp );
@@ -173,8 +172,7 @@ void practice_survival_while_foraging( Character &who );
 
 namespace iexamine_helper
 {
-bool drink_nectar( Character &you );
-void handle_harvest( Character &you, const std::string &itemid, bool force_drop );
+void handle_harvest( Character &you, const itype_id &itemid, bool force_drop );
 } // namespace iexamine_helper
 
 using iexamine_examine_function = void ( * )( Character &, const tripoint_bub_ms & );

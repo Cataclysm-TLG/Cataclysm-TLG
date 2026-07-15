@@ -8,7 +8,7 @@
     "can_learn": true,
     "default_time_multiplier": 2,
     "default_skill_penalty": 0.25,
-    "time_to_learn": "12 h"
+    "time_to_learn": "9 h"
   },
   {
     "type": "proficiency",
@@ -19,9 +19,7 @@
     "can_learn": true,
     "default_time_multiplier": 2,
     "default_skill_penalty": 0.25,
-    "time_to_learn": "12 h",
-    "default_weakpoint_bonus": 2,
-    "default_weakpoint_penalty": 0
+    "time_to_learn": "9 h"
   },
   {
     "type": "proficiency",
@@ -34,5 +32,27 @@
     "default_skill_penalty": 0.25,
     "time_to_learn": "1000 h",
     "required_proficiencies": [ "prof_physiology" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_surgery",
+    "category": "prof_firstaid",
+    "name": { "str": "Surgery" },
+    "description": "Beneath the skin, the body is merely an enormously complex machine.  A trained eye can guide a steady blade through the inner workings of that machine with minimal harm to the patient.",
+    "can_learn": true,
+    "default_time_multiplier": 2,
+    "default_skill_penalty": 0.25,
+    "time_to_learn": "20 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_intro_biology",
+    "category": "prof_firstaid",
+    "name": { "str": "Principles of Biology" },
+    "description": "You are beginning to gain a general idea of how various living beings function.",
+    "can_learn": true,
+    "default_time_multiplier": 1.5,
+    "default_skill_penalty": 0.4,
+    "time_to_learn": "12 h"
   }
 ]

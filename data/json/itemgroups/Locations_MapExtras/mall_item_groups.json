@@ -24,7 +24,7 @@
       [ "wire", 5 ],
       [ "splinter", 10 ],
       [ "cotton_patch", 15 ],
-      { "item": "cotton_patch", "prob": 10, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 5, "custom-flags": [ "FILTHY" ] },
       [ "plastic_shopping_bag", 10 ]
     ]
   },
@@ -66,7 +66,6 @@
       [ "disinfectant", 15 ],
       { "group": "protein_bottle_full", "prob": 40 },
       { "item": "caff_gum", "prob": 30, "count": 5 },
-      { "item": "nic_gum", "prob": 25, "count": 5 },
       [ "bathroom_scale", 20 ]
     ]
   },
@@ -245,7 +244,7 @@
       { "item": "seed_tobacco", "prob": 5 },
       { "item": "rolling_paper", "prob": 45 },
       { "item": "pipe_glass", "prob": 20 },
-      { "prob": 60, "group": "cig_box_cigarette_20" },
+      { "prob": 60, "group": "cig_box_cigarette_full" },
       { "prob": 60, "group": "chaw_wrapper_20" }
     ]
   },
@@ -277,10 +276,11 @@
       [ "mag_glam", 40 ],
       [ "mag_beauty", 30 ],
       [ "hairpin", 40 ],
-      [ "scarf", 10 ],
-      [ "scarf_long", 5 ],
-      [ "knit_scarf", 10 ],
-      [ "long_knit_scarf", 5 ],
+      { "item": "scarf", "prob": 10 },
+      { "item": "knit_scarf", "prob": 15 },
+      { "item": "patchwork_scarf", "prob": 5 },
+      { "item": "scarf_fur", "prob": 1 },
+      { "item": "scarf_faux_fur", "prob": 1 },
       [ "bellyband", 5 ],
       [ "barrette", 5 ],
       [ "eyedrops", 35 ],

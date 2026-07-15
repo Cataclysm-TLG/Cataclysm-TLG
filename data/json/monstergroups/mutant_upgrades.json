@@ -123,5 +123,14 @@
       { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 },
       { "monster": "mon_dog_mutant_loper", "weight": 3, "cost_multiplier": 0 }
     ]
+  },
+  {
+    "name": "GROUP_HORSE_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_horse",
+    "monsters": [
+      { "monster": "mon_horse", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_horse_destrier", "weight": 3, "cost_multiplier": 0 }
+    ]
   }
 ]

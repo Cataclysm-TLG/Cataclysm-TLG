@@ -70,7 +70,7 @@
     "longest_side": "130 cm",
     "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "uneven" },
     "price_postapoc": "5 USD",
-    "flags": [ "SHEATH_SWORD" ],
+    "flags": [ "SHEATH_SWORD", "ALWAYS_TWOHAND" ],
     "weapon_category": [ "GREAT_SWORDS" ],
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -20 ] ],
     "techniques": [ "WBLOCK_1", "RAPID", "WIDE", "BRUTAL" ],
@@ -157,7 +157,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "material": [ { "type": "wood", "portion": 0.85 }, { "type": "steel", "portion": 80 } ],
     "repairs_with": [ "steel" ],
-    "techniques": [ "WBLOCK_2" ],
+    "techniques": [ "WBLOCK_1" ],
     "qualities": [ [ "CUT", 2 ], [ "GRASS_CUT", 1 ], [ "BUTCHER", 15 ] ],
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE", "SHEATH_SWORD" ],
     "weapon_category": [ "SHORT_SWORDS" ],
@@ -181,6 +181,7 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 8 ], [ "SAW_W", 1 ], [ "DIG", 1 ], [ "PRY", 1 ], [ "GRASS_CUT", 1 ] ],
     "flags": [ "SHEATH_SWORD", "FRAGILE_MELEE" ],
     "weapon_category": [ "SHORT_SWORDS" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "bash": 2, "cut": 14 }
   },
   {
@@ -336,7 +337,7 @@
     "volume": "130 ml",
     "longest_side": "65 cm",
     "price": "120 USD",
-    "price_postapoc": "25 USD",
+    "price_postapoc": "15 USD",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "material": [ "bronze" ],
     "symbol": "!",
@@ -358,7 +359,7 @@
     "volume": "125 ml",
     "longest_side": "52 cm",
     "price": "120 USD",
-    "price_postapoc": "30 USD",
+    "price_postapoc": "20 USD",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "neutral" },
     "material": [ "bronze" ],
     "symbol": "/",
@@ -380,7 +381,7 @@
     "volume": "130 ml",
     "longest_side": "70 cm",
     "price": "125 USD",
-    "price_postapoc": "35 USD",
+    "price_postapoc": "25 USD",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "material": [ "bronze" ],
     "symbol": "/",
@@ -402,7 +403,7 @@
     "volume": "140 ml",
     "longest_side": "50 cm",
     "price": "110 USD",
-    "price_postapoc": "20 USD",
+    "price_postapoc": "10 USD",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "neutral" },
     "material": [ "bronze" ],
     "symbol": "!",
@@ -426,7 +427,7 @@
     "volume": "293 ml",
     "longest_side": "56 cm",
     "price": "250 USD",
-    "price_postapoc": "40 USD",
+    "price_postapoc": "20 USD",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "material": [ "steel" ],
     "symbol": "/",
@@ -469,9 +470,9 @@
     "category": "weapons",
     "name": { "str_sp": "tanto" },
     "description": "An ornate knife that dates back to the Heian period in Japan.  Originally a backup weapon for samurai, these blades took on a ceremonial purpose, becoming the instrument used for seppuku.",
-    "weight": "558 g",
-    "volume": "100 ml",
-    "longest_side": "53 cm",
+    "weight": "528 g",
+    "volume": "240 ml",
+    "longest_side": "35 cm",
     "symbol": "/",
     "color": "dark_gray",
     "price": "180 USD",
@@ -480,8 +481,9 @@
     "material": [ { "type": "leather", "portion": 1.1 }, { "type": "steel", "portion": 48 } ],
     "repairs_with": [ "steel" ],
     "qualities": [ [ "CUT", 1 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 18 ] ],
-    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES", "NINJUTSU_WEAPONS" ],
+    "techniques": [ "WBLOCK_0" ],
     "melee_damage": { "stab": 14 }
   },
   {
@@ -521,7 +523,7 @@
     "volume": "82 ml",
     "longest_side": "15 cm",
     "to_hit": { "grip": "none", "length": "hand", "surface": "line", "balance": "good" },
-    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE", "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE", "FRAGILE_MELEE" ],
     "weapon_category": [ "SHIVS" ],
     "qualities": [ [ "BUTCHER", -18 ] ],
     "melee_damage": { "cut": 6 }
@@ -548,7 +550,7 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -31 ] ],
     "weapon_category": [ "LONG_THRUSTING_SWORDS", "GREAT_SWORDS" ],
-    "melee_damage": { "bash": 10, "cut": 33 }
+    "melee_damage": { "bash": 13, "cut": 33 }
   },
   {
     "id": "karambit",
@@ -563,12 +565,12 @@
     "price": "64 USD",
     "price_postapoc": "50 cent",
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "good" },
-    "techniques": [ "PRECISE" ],
+    "techniques": [ "PRECISE", "WBLOCK_0" ],
     "material": [ "steel" ],
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
     "melee_damage": { "stab": 12 }
   },
@@ -590,7 +592,8 @@
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "techniques": [ "WBLOCK_0" ],
+    "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
     "melee_damage": { "stab": 16 }
   },
@@ -611,12 +614,12 @@
     "price_postapoc": "100 USD",
     "material": [ { "type": "leather", "portion": 1.1 }, { "type": "steel", "portion": 128 } ],
     "repairs_with": [ "steel" ],
-    "flags": [ "ALWAYS_TWOHAND", "DURABLE_MELEE", "SHEATH_SWORD", "CONDUCTIVE" ],
+    "flags": [ "ALWAYS_TWOHAND", "DURABLE_MELEE", "SHEATH_SWORD", "CONDUCTIVE", "REACH_ATTACK", "POLEARM" ],
     "techniques": [ "WBLOCK_2", "RAPID", "WIDE" ],
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 9 ] ],
     "weapon_category": [ "GREAT_SWORDS" ],
-    "melee_damage": { "bash": 4, "cut": 50 }
+    "melee_damage": { "bash": 3, "cut": 42 }
   },
   {
     "id": "fencing_foil",
@@ -786,18 +789,18 @@
     "price": "20 USD",
     "price_postapoc": "7 USD 50 cent",
     "material": [ "wood" ],
-    "weight": "200 g",
-    "volume": "600 ml",
-    "longest_side": "80 cm",
+    "weight": "700 g",
+    "volume": "1400 ml",
+    "longest_side": "100 cm",
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
     "looks_like": "cane",
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
         "rigid": true,
-        "max_contains_volume": "320 ml",
-        "max_contains_weight": "450 g",
-        "max_item_length": "80 cm",
+        "max_contains_volume": "1360 ml",
+        "max_contains_weight": "950 g",
+        "max_item_length": "95 cm",
         "moves": 80,
         "flag_restriction": [ "SHEATH_SWORD" ]
       }
@@ -818,15 +821,15 @@
     "price": "20 USD",
     "price_postapoc": "30 USD",
     "material": [ "steel" ],
-    "weight": "450 g",
-    "volume": "320 ml",
-    "longest_side": "80 cm",
+    "weight": "950 g",
+    "volume": "1360 ml",
+    "longest_side": "90 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "point", "balance": "good" },
     "looks_like": "rapier",
-    "techniques": [ "PRECISE", "RAPID", "WBLOCK_2" ],
+    "techniques": [ "PRECISE", "RAPID", "WBLOCK_1" ],
     "flags": [ "SHEATH_SWORD" ],
-    "weapon_category": [ "MEDIUM_SWORDS", "FENCING_WEAPONRY" ],
-    "melee_damage": { "bash": 2, "stab": 25 }
+    "weapon_category": [ "FENCING_WEAPONRY" ],
+    "melee_damage": { "bash": 1, "stab": 23 }
   },
   {
     "id": "broadsword",
@@ -994,183 +997,6 @@
     "melee_damage": { "bash": 5, "cut": 26 }
   },
   {
-    "id": "combatsaw_off",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "category": "weapons",
-    "name": { "str": "combat chainsaw (off)", "str_pl": "combat chainsaws (off)" },
-    "description": "A chainsaw that has been lightened, tuned, and extensively modified to be easier to handle as a weapon.  Unfortunately, these modifications have rendered it much less effective as a woodcutting tool.",
-    "weight": "5122 g",
-    "volume": "4250 ml",
-    "longest_side": "70 cm",
-    "price": "250 USD",
-    "price_postapoc": "30 USD",
-    "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "neutral" },
-    "material": [ "steel", "plastic" ],
-    "symbol": "/",
-    "color": "light_gray",
-    "tool_ammo": [ "gasoline" ],
-    "charges_per_use": 5,
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "watertight": true, "ammo_restriction": { "gasoline": 450 } } ],
-    "use_action": {
-      "type": "effect_on_conditions",
-      "menu_text": "Turn on",
-      "effect_on_conditions": [
-        {
-          "id": "EOC_toolweapon_activate__combatsaw",
-          "effect": {
-            "run_eocs": "EOC_toolweapon_activate",
-            "variables": {
-              "turn_cost": "0.6",
-              "transform_target": "combatsaw_on",
-              "success_message": { "i18n": true, "str": "With a snarl, the <npc_name> screams to life!" },
-              "volume": "30",
-              "failure_message": { "i18n": true, "str": "You yank the cord, but nothing happens." }
-            }
-          }
-        }
-      ]
-    },
-    "techniques": [ "WBLOCK_1", "SWEEP" ],
-    "flags": [ "ALWAYS_TWOHAND", "FRAGILE_MELEE" ],
-    "melee_damage": { "bash": 8 }
-  },
-  {
-    "id": "combatsaw_on",
-    "copy-from": "combatsaw_off",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "combat chainsaw (on)", "str_pl": "combat chainsaws (on)" },
-    "description": "This combat chainsaw is on, and is continuously draining gasoline.  Use it to turn it off.",
-    "to_hit": { "grip": "weapon", "length": "short", "surface": "every", "balance": "neutral" },
-    "turns_per_charge": 4,
-    "charges_per_use": 0,
-    "revert_to": "combatsaw_off",
-    "qualities": [ [ "AXE", 3 ], [ "BUTCHER", -120 ] ],
-    "use_action": {
-      "type": "effect_on_conditions",
-      "ammo_scale": 0,
-      "menu_text": "Turn off",
-      "effect_on_conditions": [
-        {
-          "id": "EOC_toolweapon_deactivate__combatsaw",
-          "effect": { "run_eocs": "EOC_toolweapon_deactivate", "variables": { "transform_target": "combatsaw_off" } }
-        }
-      ]
-    },
-    "tick_action": {
-      "type": "effect_on_conditions",
-      "effect_on_conditions": [
-        {
-          "id": "EOC_toolweapon_running__combatsaw",
-          "effect": {
-            "run_eocs": "EOC_toolweapon_running",
-            "variables": {
-              "sound_chance": "12",
-              "sound_message": { "i18n": true, "str": "Your combat chainsaw growls." },
-              "volume": "18",
-              "revert_to": "combatsaw_off"
-            }
-          }
-        }
-      ]
-    },
-    "extend": { "flags": [ "MESSY", "TRADER_AVOID", "POWERED" ] },
-    "relative": { "melee_damage": { "cut": 50 } }
-  },
-  {
-    "id": "e_combatsaw_off",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "category": "weapons",
-    "name": { "str": "electric combat chainsaw (off)", "str_pl": "electric combat chainsaws (off)" },
-    "description": "An electric chainsaw that has been lightened, tuned, and extensively modified to be easier to handle as a weapon.  Unfortunately, these modifications have rendered it much less effective as a woodcutting tool.",
-    "weight": "5122 g",
-    "volume": "4250 ml",
-    "longest_side": "70 cm",
-    "price": "250 USD",
-    "price_postapoc": "30 USD",
-    "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "neutral" },
-    "material": [ "steel", "plastic" ],
-    "symbol": "/",
-    "color": "light_gray",
-    "tool_ammo": [ "battery" ],
-    "charges_per_use": 5,
-    "use_action": {
-      "type": "effect_on_conditions",
-      "menu_text": "Turn on",
-      "effect_on_conditions": [
-        {
-          "id": "EOC_toolweapon_activate__e_combatsaw",
-          "effect": {
-            "run_eocs": "EOC_toolweapon_activate",
-            "variables": {
-              "turn_cost": "0.6",
-              "transform_target": "e_combatsaw_on",
-              "success_message": { "i18n": true, "str": "With a snarl, the <npc_name> screams to life!" },
-              "volume": "30",
-              "failure_message": { "i18n": true, "str": "You flip the switch, but nothing happens." }
-            }
-          }
-        }
-      ]
-    },
-    "techniques": [ "WBLOCK_1", "SWEEP" ],
-    "flags": [ "ALWAYS_TWOHAND", "FRAGILE_MELEE", "WATER_BREAK", "ELECTRONIC" ],
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "magazine_well": "200 ml",
-        "flag_restriction": [ "BATTERY_MEDIUM" ],
-        "default_magazine": "medium_battery_cell"
-      }
-    ],
-    "melee_damage": { "bash": 8 }
-  },
-  {
-    "id": "e_combatsaw_on",
-    "copy-from": "e_combatsaw_off",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "electric combat chainsaw (on)", "str_pl": "electric combat chainsaws (on)" },
-    "description": "This electric combat chainsaw is on, and is continuously draining power.  Use it to turn it off.",
-    "to_hit": { "grip": "weapon", "length": "short", "surface": "every", "balance": "neutral" },
-    "power_draw": "2 kW",
-    "charges_per_use": 0,
-    "revert_to": "e_combatsaw_off",
-    "qualities": [ [ "AXE", 3 ] ],
-    "use_action": {
-      "type": "effect_on_conditions",
-      "ammo_scale": 0,
-      "menu_text": "Turn off",
-      "effect_on_conditions": [
-        {
-          "id": "EOC_toolweapon_deactivate__e_combatsaw",
-          "effect": { "run_eocs": "EOC_toolweapon_deactivate", "variables": { "transform_target": "e_combatsaw_off" } }
-        }
-      ]
-    },
-    "tick_action": {
-      "type": "effect_on_conditions",
-      "effect_on_conditions": [
-        {
-          "id": "EOC_toolweapon_running__e_combatsaw",
-          "effect": {
-            "run_eocs": "EOC_toolweapon_running",
-            "variables": {
-              "sound_chance": "12",
-              "sound_message": { "i18n": true, "str": "Your electric combat chainsaw growls." },
-              "volume": "18",
-              "revert_to": "e_combatsaw_off"
-            }
-          }
-        }
-      ]
-    },
-    "extend": { "flags": [ "MESSY", "TRADER_AVOID", "POWERED" ] },
-    "relative": { "melee_damage": { "cut": 50 } }
-  },
-  {
     "type": "ITEM",
     "id": "punch_dagger",
     "name": { "str": "punch dagger" },
@@ -1184,7 +1010,7 @@
     "volume": "51 ml",
     "longest_side": "17 cm",
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
-    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE" ],
     "weapon_category": [ "SHIVS" ],
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 14 ] ],
     "melee_damage": { "bash": 2, "stab": 12 }
@@ -1202,7 +1028,6 @@
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "any", "balance": "neutral" },
     "price_postapoc": "5 USD",
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "techniques": [ "WBLOCK_1" ],
     "melee_damage": { "bash": 3, "stab": 14 },
     "weapon_category": [ "SHIVS" ]

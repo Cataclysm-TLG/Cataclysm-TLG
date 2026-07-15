@@ -4,15 +4,15 @@
     "type": "item_group",
     "subtype": "collection",
     "entries": [
-      { "group": "clothing_work_set", "damage": [ 1, 4 ] },
-      { "group": "underwear", "damage": [ 1, 4 ] },
-      { "group": "default_zombie_items_pockets", "prob": 80, "damage": [ 0, 2 ] },
+      { "group": "clothing_work_set", "damage": [ -1, 5 ] },
+      { "group": "underwear", "damage": [ -1, 5 ] },
+      { "group": "default_zombie_items_pockets", "prob": 80, "damage": [ -1, 2 ] },
       {
         "distribution": [ { "group": "tools_workshop", "prob": 30 }, { "group": "tools_toolbox", "prob": 70 } ],
         "prob": 50
       },
       { "group": "supplies_electronics", "count": [ 1, 3 ], "prob": 70 },
-      { "group": "wallets", "damage": [ 1, 4 ], "prob": 60 },
+      { "group": "wallets", "damage": [ -1, 5 ], "prob": 60 },
       { "item": "id_industrial", "prob": 20 }
     ]
   },
@@ -41,9 +41,9 @@
     "type": "item_group",
     "subtype": "collection",
     "entries": [
-      { "group": "clothing_work_set", "damage": [ 1, 4 ] },
-      { "group": "underwear", "damage": [ 1, 4 ] },
-      { "group": "default_zombie_items_pockets", "prob": 80, "damage": [ 0, 2 ] },
+      { "group": "clothing_work_set", "damage": [ -1, 5 ] },
+      { "group": "underwear", "damage": [ -1, 5 ] },
+      { "group": "default_zombie_items_pockets", "prob": 80, "damage": [ -1, 2 ] },
       { "group": "supplies_electronics", "count": [ 1, 3 ], "prob": 60 },
       { "item": "spike", "prob": 15 },
       { "item": "spike", "prob": 10 },
@@ -53,7 +53,7 @@
       { "item": "scrap", "prob": 5 },
       { "item": "nail", "charges": [ 1, 3 ], "prob": 25 },
       { "item": "magnet", "prob": 1 },
-      { "group": "wallets", "damage": [ 1, 4 ], "prob": 60 },
+      { "group": "wallets", "damage": [ -1, 5 ], "prob": 60 },
       { "item": "id_industrial", "prob": 5 }
     ]
   },
@@ -82,13 +82,13 @@
     "type": "item_group",
     "subtype": "collection",
     "entries": [
-      { "group": "clothing_work_boots", "prob": 60, "damage": [ 1, 4 ] },
-      { "group": "clothing_work_glasses", "prob": 60, "damage": [ 1, 4 ] },
-      { "group": "clothing_work_gloves", "prob": 50, "damage": [ 1, 4 ] },
-      { "group": "clothing_work_mask", "prob": 40, "damage": [ 1, 4 ] },
-      { "group": "default_zombie_items_pockets", "prob": 80, "damage": [ 0, 2 ] },
-      { "group": "wallets", "damage": [ 1, 4 ], "prob": 40 },
-      { "item": "tool_belt", "prob": 25, "damage": [ 1, 4 ] },
+      { "group": "clothing_work_boots", "prob": 60, "damage": [ -1, 5 ] },
+      { "group": "clothing_work_glasses", "prob": 60, "damage": [ -1, 5 ] },
+      { "group": "clothing_work_gloves", "prob": 50, "damage": [ -1, 5 ] },
+      { "group": "clothing_work_mask", "prob": 40, "damage": [ -1, 5 ] },
+      { "group": "default_zombie_items_pockets", "prob": 80, "damage": [ -1, 2 ] },
+      { "group": "wallets", "damage": [ -1, 5 ], "prob": 40 },
+      { "item": "tool_belt", "prob": 25, "damage": [ -1, 5 ] },
       {
         "distribution": [ { "item": "pickaxe", "prob": 10, "damage": [ 1, 3 ] }, { "item": "shovel", "prob": 50, "damage": [ 1, 3 ] } ],
         "prob": 40
@@ -120,7 +120,7 @@
               },
               {
                 "distribution": [
-                  { "item": "ear_plugs", "prob": 15, "damage": [ 0, 1 ] },
+                  { "item": "ear_plugs", "prob": 15, "damage": [ -1, 1 ] },
                   { "group": "tools_lighting_industrial", "damage": [ 1, 3 ], "prob": 15 },
                   { "item": "electric_lantern", "charges": [ 0, 100 ], "damage": [ 1, 3 ], "prob": 10 }
                 ]
@@ -129,7 +129,7 @@
           },
           {
             "group": "hat_hard_flashlight",
-            "damage": [ 1, 4 ],
+            "damage": [ -1, 5 ],
             "contents-group": "worker_kitted_hard_hat",
             "prob": 20
           }
@@ -140,14 +140,14 @@
       {
         "distribution": [
           {
-            "collection": [ { "group": "clothing_work_pants", "damage": [ 1, 4 ] }, { "group": "clothing_work_torso", "damage": [ 1, 4 ] } ],
+            "collection": [ { "group": "clothing_work_pants", "damage": [ -1, 5 ] }, { "group": "clothing_work_torso", "damage": [ -1, 5 ] } ],
             "prob": 70
           },
-          { "item": "technician_coveralls", "prob": 20, "damage": [ 1, 4 ] },
-          { "item": "jumpsuit", "prob": 10, "damage": [ 1, 4 ] }
+          { "item": "technician_coveralls", "prob": 20, "damage": [ -1, 5 ] },
+          { "item": "jumpsuit", "prob": 10, "damage": [ -1, 5 ] }
         ]
       },
-      { "group": "underwear", "damage": [ 1, 4 ] }
+      { "group": "underwear", "damage": [ -1, 5 ] }
     ]
   }
 ]

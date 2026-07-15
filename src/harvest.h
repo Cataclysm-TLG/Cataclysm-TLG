@@ -22,6 +22,7 @@ class harvest_drop_type
 {
     public:
         static void load_harvest_drop_types( const JsonObject &jo, const std::string &src );
+        static void finalize_all();
         static void reset();
         void load( const JsonObject &jo, std::string_view src );
         static const std::vector<harvest_drop_type> &get_all();
@@ -77,6 +78,10 @@ struct harvest_entry {
     // This is multiplied by survival and added to the above
     // TODO: Make it a map: skill->scaling
     std::pair<float, float> scale_num = { 0.0f, 0.0f };
+    /* Assuming perfect visibility and 10 perception, entry.difficulty is the
+       survival skill that would be required to reach the cap. We can and should
+       set it above 10 for hard-to-find items. 0 difficulty allows 100% harvest rates. */
+    int difficulty = 10;
 
     int max = 1000;
     harvest_drop_type_id type;
@@ -140,6 +145,7 @@ class harvest_list
 
         /** Fills out the set of cached names. */
         static void finalize_all();
+        void finalize();
 
         /** Check consistency of all loaded harvest data */
         static void check_consistency();
@@ -157,7 +163,6 @@ class harvest_list
         translation message_;
         butchery_requirements_id butchery_requirements_;
 
-        void finalize();
 };
 
 #endif // CATA_SRC_HARVEST_H

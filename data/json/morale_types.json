@@ -80,6 +80,11 @@
     "text": "Craving caffeine"
   },
   {
+    "id": "morale_craving_cannabis",
+    "type": "morale_type",
+    "text": "Craving cannabis"
+  },
+  {
     "id": "morale_craving_alcohol",
     "type": "morale_type",
     "text": "Craving alcohol"
@@ -92,17 +97,12 @@
   {
     "id": "morale_craving_speed",
     "type": "morale_type",
-    "text": "Craving speed"
+    "text": "Craving amphetamines"
   },
   {
     "id": "morale_craving_cocaine",
     "type": "morale_type",
     "text": "Craving cocaine"
-  },
-  {
-    "id": "morale_craving_crack",
-    "type": "morale_type",
-    "text": "Craving crack cocaine"
   },
   {
     "id": "morale_craving_mutagen",
@@ -112,7 +112,7 @@
   {
     "id": "morale_craving_diazepam",
     "type": "morale_type",
-    "text": "Craving prescription sedatives"
+    "text": "Craving benzodiazepines"
   },
   {
     "id": "morale_craving_marloss",
@@ -172,7 +172,7 @@
   {
     "id": "morale_sweettooth",
     "type": "morale_type",
-    "text": "Enjoyed something sugary"
+    "text": "Ate junk food"
   },
   {
     "id": "morale_no_digest",
@@ -205,11 +205,6 @@
     "text": "Feeling bad"
   },
   {
-    "id": "morale_bad_protein_bar",
-    "type": "morale_type",
-    "text": "Demoralizing food"
-  },
-  {
     "id": "morale_killed_innocent",
     "type": "morale_type",
     "text": "Killed an innocent person"
@@ -217,7 +212,7 @@
   {
     "id": "morale_killed_friend",
     "type": "morale_type",
-    "text": "Killed a friend"
+    "text": "Killed an ally"
   },
   {
     "id": "morale_killed_monster",
@@ -232,12 +227,12 @@
   {
     "id": "morale_mutagen_elf",
     "type": "morale_type",
-    "text": "Fey mutation"
+    "text": "Sylvan mutation"
   },
   {
     "id": "morale_mutagen_chimera",
     "type": "morale_type",
-    "text": "Chimerical mutation"
+    "text": "Chimera mutation"
   },
   {
     "id": "morale_mutagen_mutation",
@@ -357,7 +352,7 @@
   {
     "id": "morale_butcher",
     "type": "morale_type",
-    "text": "Anguished by memories of butchering a human corpse"
+    "text": "Butchered a human like an animal"
   },
   {
     "id": "morale_gravedigger",

@@ -508,9 +508,6 @@ struct vehicle_part {
         npc &get_targeting_npc( vehicle &veh );
         /*@}*/
 
-        /** how much blood covers part (in turns). */
-        int blood = 0;
-
         /**
          * if tile provides cover.
          * WARNING: do not read it directly, use vpart_position::is_inside() instead
@@ -523,6 +520,8 @@ struct vehicle_part {
          */
         bool removed = false; // NOLINT(cata-serialize)
         bool enabled = true;
+        // set by power_parts() on deficit, cleared by grid resolution on recovery
+        bool power_disabled = false; // NOLINT(cata-serialize)
 
         /** ID of player passenger */
         character_id passenger_id;
@@ -824,10 +823,12 @@ class vehicle
         bool is_connected( const vehicle_part &to, const vehicle_part &from,
                            const vehicle_part &excluded ) const;
 
+    public:
         // direct damage to part (armor protection and internals are not counted)
         // @returns damage still left to apply
         int damage_direct( map &here, vehicle_part &vp, int dmg,
                            const damage_type_id &type = damage_type_id( "pure" ) );
+    private:
         // Removes the part, breaks it into pieces and possibly removes parts attached to it
         int break_off( map &here, vehicle_part &vp, int dmg );
         // Returns if it did actually explode
@@ -842,9 +843,6 @@ class vehicle
 
         // convert watts over time to battery energy (kJ)
         int power_to_energy_bat( units::power power, const time_duration &d ) const;
-
-        // Do stuff like clean up blood and produce smoke from broken parts. Returns false if nothing needs doing.
-        bool do_environmental_effects( map &here ) const;
 
         // Vehicle fuel indicator (by fuel)
         // TODO: Figure out what coordinate system "point" is in and type it.
@@ -978,6 +976,12 @@ class vehicle
                          bool force_status = false );
 
         // damages all parts of a vehicle by a random amount
+        void damage_all_parts( float hp_percent_loss_min = 0.1f, float hp_percent_loss_max = 1.2f,
+                               float percent_of_parts_to_affect = 1.0f,
+                               point_rel_ms damage_origin = point_rel_ms::zero,
+                               float damage_size = 0 );
+
+        // damage_all_parts, plus deduplication of overlapping parts
         void smash( map &m, float hp_percent_loss_min = 0.1f, float hp_percent_loss_max = 1.2f,
                     float percent_of_parts_to_affect = 1.0f, point_rel_ms damage_origin = point_rel_ms::zero,
                     float damage_size = 0 );
@@ -1552,6 +1556,12 @@ class vehicle
         units::power total_wind_epower( map &here ) const;
         // Total power currently being produced by all water wheels.
         units::power total_water_wheel_epower( map &here ) const;
+        // Rated (max) power from solar panels, ignoring weather and position.
+        units::power rated_solar_epower() const;
+        // Rated (max) power from wind turbines, ignoring weather and position.
+        units::power rated_wind_epower() const;
+        // Rated (max) power from water wheels, ignoring position.
+        units::power rated_water_epower() const;
         // Total power drain across all vehicle accessories.
         units::power total_accessory_epower() const;
         // Total power draw from all cable-connected devices. Is cleared every turn during idle().
@@ -1847,6 +1857,16 @@ class vehicle
         // Returns collision, which has type, impulse, part, & target.
         veh_collision part_collision( map &here, int part, const tripoint_abs_ms &p,
                                       bool just_detect, bool bash_floor );
+
+        // Probability that the wheel will hit the item.
+        static double hit_probability( const item &it, const vehicle_part *vp_wheel );
+
+        // extracted helper for calculating damage chance in damage_wheel_on_item(). Used for tests.
+        double wheel_damage_chance_vs_item( const item &it, vehicle_part &vp_wheel ) const;
+
+        // Calculates damage on the wheel from running over item and adds damage levels and messages to the vector if needed.
+        void damage_wheel_on_item( vehicle_part *vp_wheel, const item &it, int *damage_levels,
+                                   std::vector<std::string> *messages ) const;
 
         // Process the trap beneath
         void handle_trap( map *here, const tripoint_bub_ms &p, vehicle_part &vp_wheel );
@@ -2219,6 +2239,9 @@ class vehicle
         // Retroactively pass time spent outside bubble
         // Funnels, solar panels
         void update_time( map &here, const time_point &update_to );
+        // Catch up renewable generation for off-map vehicles using absolute positions.
+        // Returns energy generated in kJ. Updates last_update to prevent double-charge.
+        int catchup_off_map_renewables( const time_point &now );
 
         // The faction that owns this vehicle.
         faction_id owner = faction_id::NULL_ID();
@@ -2465,8 +2488,6 @@ class vehicle
         bool precollision_on = true;
         // skidding mode
         bool skidding = false;
-        // has bloody or smoking parts
-        bool check_environmental_effects = false; // NOLINT(cata-serialize)
         // "inside" flags are outdated and need refreshing
         bool insides_dirty = true; // NOLINT(cata-serialize)
         // Is the vehicle hanging in the air and expected to fall down in the next turn?

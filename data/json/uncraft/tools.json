@@ -49,10 +49,9 @@
     "qualities": [ { "id": "SCREW", "level": 1 } ],
     "components": [
       [ [ "plastic_chunk", 4 ] ],
-      [ [ "blade", 2 ] ],
       [ [ "motor_micro", 1 ] ],
       [ [ "power_supply", 1 ] ],
-      [ [ "scrap", 1 ] ],
+      [ [ "scrap", 5 ] ],
       [ [ "cable", 4 ] ]
     ]
   },

@@ -26,7 +26,7 @@
     "valid_mod_locations": [ [ "grip mount", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ], [ "underbarrel mount", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "nail": 20 } } ],
     "melee_damage": { "bash": 6 },
-    "flags": [ "ALLOWS_BODY_BLOCK", "WONT_TRAIN_MARKSMANSHIP" ]
+    "flags": [ "WONT_TRAIN_MARKSMANSHIP" ]
   },
   {
     "id": "coilgun",

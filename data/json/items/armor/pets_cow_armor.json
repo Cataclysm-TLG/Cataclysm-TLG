@@ -35,7 +35,7 @@
     "name": { "str": "biosilicified chitin cow armor" },
     "description": "A makeshift assembly of criniere, peytral and croupiere made from biosilicified chitin fitted to a thin mesh.  You could put this on a friendly cow.  Acid-resistant but brittle.",
     "price": "1450 USD",
-    "price_postapoc": "100 USD",
+    "price_postapoc": "10 USD",
     "material": [ "acidchitin" ],
     "weight": "40 kg",
     "volume": "180 L",

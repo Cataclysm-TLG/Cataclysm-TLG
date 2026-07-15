@@ -95,7 +95,7 @@
     "price_postapoc": "10 USD",
     "material": [ "paper", "leather" ],
     "symbol": "?",
-    "looks_like": "isherwood_herbal_remedies",
+    "looks_like": "textbook_herbal_remedies",
     "color": "light_gray",
     "required_level": 5,
     "max_level": 8,

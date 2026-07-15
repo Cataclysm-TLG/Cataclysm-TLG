@@ -6,11 +6,18 @@
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
-    "time": "2 m",
+    "difficulty": 4,
+    "time": "2 h",
     "autolearn": true,
-    "using": [ [ "steel_tiny", 2 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 2 } ],
-    "components": [ [ [ "duct_tape", 30 ], [ "2x4", 1 ], [ "stick", 1 ] ] ]
+    "using": [ [ "blacksmithing_simple", 2 ], [ "steel_tiny", 1 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_metalworking" },
+      { "proficiency": "prof_blacksmithing" },
+      { "proficiency": "prof_toolsmithing" }
+    ],
+    "qualities": [ { "id": "SAW_M", "level": 2 }, { "id": "CUT", "level": 2 } ],
+    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
+    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -21,9 +28,9 @@
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
     "difficulty": 6,
-    "time": "3 h",
+    "time": "5 h",
     "autolearn": true,
-    "using": [ [ "blacksmithing_standard", 2 ], [ "steel_tiny", 2 ] ],
+    "using": [ [ "blacksmithing_simple", 2 ], [ "steel_tiny", 2 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -31,7 +38,7 @@
     ],
     "qualities": [ { "id": "SAW_M", "level": 2 }, { "id": "CUT", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "plastic_chunk", 2 ], [ "2x4", 1 ], [ "stick", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -51,7 +58,7 @@
     ],
     "qualities": [ { "id": "SAW_M", "level": 2 }, { "id": "CUT", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "plastic_chunk", 1 ], [ "2x4", 1 ], [ "stick", 1 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -81,7 +88,7 @@
     "difficulty": 4,
     "time": "2 h",
     "autolearn": true,
-    "using": [ [ "blacksmithing_standard", 1 ] ],
+    "using": [ [ "blacksmithing_basic", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -99,7 +106,7 @@
     "difficulty": 3,
     "time": "30 m",
     "autolearn": true,
-    "using": [ [ "blacksmithing_standard", 1 ], [ "steel_tiny", 1 ] ],
+    "using": [ [ "blacksmithing_simple", 1 ], [ "steel_tiny", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -219,7 +226,7 @@
     "time": "45 m",
     "autolearn": true,
     "book_learn": [ [ "textbook_fabrication", 3 ], [ "textbook_weparabic", 5 ], [ "bronze_book", 4 ] ],
-    "using": [ [ "redsmithing_standard", 2 ] ],
+    "using": [ [ "redsmithing_simple", 2 ] ],
     "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
@@ -313,7 +320,7 @@
     "difficulty": 5,
     "time": "2 h",
     "autolearn": true,
-    "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
+    "using": [ [ "blacksmithing_basic", 4 ], [ "steel_standard", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -951,7 +958,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -1014,14 +1021,14 @@
     "using": [ [ "blacksmithing_standard", 24 ], [ "steel_standard", 6 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ] ]
+    "components": [ [ [ "2x4", 2 ], [ "stick_long", 1 ] ] ]
   },
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
     "result": "pockknife",
     "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_PIERCING",
+    "subcategory": "CSC_WEAPON_STABBING",
     "skill_used": "fabrication",
     "difficulty": 7,
     "time": "4 h 20 m",
@@ -1037,7 +1044,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "result": "knife_steak",
     "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_PIERCING",
+    "subcategory": "CSC_WEAPON_STABBING",
     "skill_used": "fabrication",
     "difficulty": 3,
     "time": "1 h",
@@ -1055,7 +1062,7 @@
     "activity_level": "BRISK_EXERCISE",
     "result": "knife_butcher",
     "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_PIERCING",
+    "subcategory": "CSC_WEAPON_STABBING",
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "4 h",
@@ -1175,7 +1182,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ] ]
   },
   {
     "result": "bronze_brush_axe",
@@ -1450,7 +1457,7 @@
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
-      [ [ "material_aluminium_ingot", 1 ] ],
+      [ [ "aluminum_chunk", 1 ] ],
       [ [ "filament", 100, "LIST" ] ],
       [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
     ]

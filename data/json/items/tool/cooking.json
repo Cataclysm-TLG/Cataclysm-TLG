@@ -100,10 +100,10 @@
             "effect": {
               "run_eocs": "EOC_toolweapon_activate",
               "variables": {
-                "turn_cost": "0.8",
+                "turn_cost": 0.8,
                 "transform_target": "carver_on",
                 "success_message": { "i18n": true, "str": "The electric carver's serrated blades start buzzing!" },
-                "volume": "20",
+                "volume": 20,
                 "failure_message": { "i18n": true, "str": "You pull the trigger, but nothing happens." }
               }
             }
@@ -149,16 +149,16 @@
           "effect": {
             "run_eocs": "EOC_toolweapon_running",
             "variables": {
-              "sound_chance": "10",
-              "sound_message": { "i18n": true, "str": "Your electric carver buzzes." },
-              "volume": "8",
+              "sound_chance": 5,
+              "sound_message": { "i18n": true, "str": "The electric carver buzzes." },
+              "volume": 10,
               "revert_to": "carver_off"
             }
           }
         }
       ]
     },
-    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "WATER_BREAK" ],
+    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "WATER_BREAK", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 2, "cut": 8 }
   },
   {
@@ -286,20 +286,6 @@
     "melee_damage": { "bash": 1 }
   },
   {
-    "id": "clay_quern",
-    "type": "ITEM",
-    "category": "tools",
-    "name": { "str": "clay quern" },
-    "description": "A simple hand-powered clay quern for grinding grain.",
-    "weight": "2264 g",
-    "volume": "1500 ml",
-    "price": "30 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "clay" ],
-    "symbol": ":",
-    "color": "brown"
-  },
-  {
     "id": "clay_teapot",
     "type": "ITEM",
     "category": "tools",
@@ -369,7 +355,7 @@
     "tool_ammo": [ "battery" ]
   },
   {
-    "id": "eggs_ferment",
+    "id": "eggs_ferment_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str": "fermenting eggs jar" },
@@ -382,16 +368,9 @@
     "material": [ "glass", "egg" ],
     "symbol": "%",
     "color": "white",
-    "use_action": {
-      "target": "pickled_egg",
-      "container": "jar_glass_sealed",
-      "target_charges": 10,
-      "msg": "You examine the batch and see that the pickling solution has done its job, so you seal the jar up for storage.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 201600,
-      "not_ready_msg": "The eggs are not done yet."
-    },
+    "countdown_interval": "56 hours",
+    "transform_into": { "target": "pickled_egg", "container": "jar_glass_sealed", "target_charges": 10 },
+    "flags": [ "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -416,7 +395,7 @@
     "tool_ammo": [ "esbit" ]
   },
   {
-    "id": "flask_yeast",
+    "id": "flask_yeast_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str_sp": "sealed yeast culture" },
@@ -429,18 +408,9 @@
     "material": [ "glass", "powder" ],
     "symbol": "%",
     "color": "white",
-    "use_action": {
-      "target": "yeast",
-      "msg": "You open the jar and harvest the culture.",
-      "container": "jar_glass_sealed",
-      "target_charges": 50,
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 43200,
-      "not_ready_msg": "The yeast isn't done culturing yet.",
-      "//": "12 hours"
-    },
-    "flags": [ "TRADER_AVOID" ],
+    "countdown_interval": "12 hours",
+    "transform_into": { "target": "yeast", "container": "jar_glass_sealed", "target_charges": 50 },
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -624,7 +594,7 @@
     "melee_damage": { "bash": 8 }
   },
   {
-    "id": "milk_cream_rising",
+    "id": "milk_cream_rising_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str": "rising cream jar" },
@@ -637,15 +607,10 @@
     "material": [ "glass" ],
     "symbol": "%",
     "looks_like": "jar_glass_sealed",
+    "countdown_interval": "6 hours",
+    "revert_to": "milk_cream_jar",
+    "flags": [ "SPAWN_ACTIVE" ],
     "color": "white",
-    "use_action": {
-      "target": "milk_cream_jar",
-      "msg": "You examine the batch and see that the cream has risen to the top, so you seal the jar up for storage.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 21600,
-      "not_ready_msg": "The cream has not risen yet."
-    },
     "melee_damage": { "bash": 8 }
   },
   {
@@ -666,47 +631,6 @@
     "use_action": [ "HEAT_LIQUID_ITEMS" ],
     "qualities": [ [ "BOIL", 2 ], [ "CONTAIN", 1 ], [ "FINE_GRIND", 1 ], [ "HAMMER", 1 ] ],
     "melee_damage": { "bash": 3 }
-  },
-  {
-    "id": "multi_cooker",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "multi-cooker" },
-    "description": "A professional-grade multi-cooker, with a short electric cord.  Its multitude of settings and features promise to handle any sort of cooking, from parboiling potatoes to cooking curry to popping popcorn.  There's no manual, but you're sure you can work it out.",
-    "weight": "11339 g",
-    "volume": "3750 ml",
-    "price": "200 USD",
-    "price_postapoc": "2 USD 50 cent",
-    "to_hit": -3,
-    "material": [ "steel", "plastic" ],
-    "symbol": ";",
-    "color": "red",
-    "flags": [ "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE" ],
-    "power_draw": "100 W",
-    "qualities": [ [ "CONTAIN", 1 ] ],
-    "tick_action": "MULTICOOKER_TICK",
-    "use_action": [ "MULTICOOKER", { "type": "link_up", "cable_length": 2, "charge_rate": "1000 W" } ],
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "watertight": true,
-        "rigid": true,
-        "max_contains_volume": "2 L",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "35 cm",
-        "moves": 50
-      }
-    ],
-    "tool_ammo": [ "battery" ]
-  },
-  {
-    "id": "multi_cooker_filled",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "copy-from": "multi_cooker",
-    "name": { "str": "multi-cooker - cooking", "str_pl": "multi-cookers - cooking" },
-    "description": "A professional-grade multi-cooker, with a battery slot for camping trips or tailgating.  There is a dish cooking inside it.",
-    "delete": { "qualities": [ "CONTAIN" ] }
   },
   {
     "id": "oil_cooker",
@@ -784,7 +708,7 @@
     "melee_damage": { "bash": 10 }
   },
   {
-    "id": "pickles_ferment",
+    "id": "pickles_ferment_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str": "fermenting pickle jar" },
@@ -797,17 +721,9 @@
     "material": [ "glass", "vegetable" ],
     "symbol": "%",
     "color": "white",
-    "use_action": {
-      "target": "pickle",
-      "container": "jar_glass_sealed",
-      "target_charges": 2,
-      "msg": "You test the batch, and it tastes good, so you seal the jar up for storage.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 201600,
-      "not_ready_msg": "The pickles are not done fermenting yet.",
-      "//": "2 1/3 days, from the suggested recipe of 1 rl week"
-    },
+    "countdown_interval": "56 hours",
+    "transform_into": { "target": "pickle", "container": "jar_glass_sealed", "target_charges": 8 },
+    "flags": [ "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -870,7 +786,7 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "id": "sauerkraut_ferment",
+    "id": "sauerkraut_ferment_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str": "fermenting sauerkraut jar" },
@@ -883,17 +799,9 @@
     "material": [ "glass", "vegetable" ],
     "symbol": "%",
     "color": "white",
-    "use_action": {
-      "target": "sauerkraut",
-      "container": "jar_glass_sealed",
-      "target_charges": 2,
-      "msg": "You test the batch, and it tastes good, so you seal the jar up for storage.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 201600,
-      "not_ready_msg": "The sauerkraut isn't done fermenting yet.",
-      "//": "2 1/3 days, from the suggested recipe of 1 rl week"
-    },
+    "countdown_interval": "56 hours",
+    "transform_into": { "target": "sauerkraut", "container": "jar_glass_sealed", "target_charges": 2 },
+    "flags": [ "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 4 }
   },
   {
@@ -1169,7 +1077,7 @@
     "material": [ "steel", "plastic" ],
     "weight": "11339 g",
     "volume": "9 L",
-    "use_action": [ "HEAT_SOLID_ITEMS", { "type": "link_up", "cable_length": 2, "charge_rate": "1800 W" } ],
+    "use_action": [ "HEAT_SOLID_ITEMS", "HOTPLATE", { "type": "link_up", "cable_length": 2, "charge_rate": "1800 W" } ],
     "qualities": [ [ "COOK", 1 ], [ "OVEN", 1 ], [ "HOTPLATE", 1 ] ],
     "flags": [ "WATER_BREAK", "ALLOWS_REMOTE_USE" ],
     "charges_per_use": 25,

@@ -23,7 +23,6 @@ class JsonObject;
 class JsonOut;
 class item;
 struct dialogue;
-struct dbl_or_var;
 class monster;
 class vehicle;
 struct const_dialogue;
@@ -37,6 +36,7 @@ enum class mod : int {
     ARTIFACT_RESONANCE,
     // effects for the Character
     STRENGTH,
+    STRENGTH_NATURAL,
     DEXTERITY,
     PERCEPTION,
     INTELLIGENCE,
@@ -173,6 +173,7 @@ class enchantment
         };
 
         static void load_enchantment( const JsonObject &jo, const std::string &src );
+        static void finalize_all();
         static void reset();
         void load( const JsonObject &jo, std::string_view src = {},
                    const std::optional<std::string> &inline_id = std::nullopt, bool is_child = false );
@@ -318,8 +319,7 @@ class enchant_cache : public enchantment
         void force_add( const enchantment &rhs, const vehicle &veh );
         void force_add( const enchantment &rhs );
         void force_add( const enchant_cache &rhs );
-        void force_add_with_dialogue( const enchantment &rhs, const const_dialogue &d,
-                                      bool evaluate = true );
+        void force_add_with_dialogue( const enchantment &rhs, const const_dialogue &d );
         // adds enchantment mutations to the cache
         void force_add_mutation( const enchantment &rhs );
 

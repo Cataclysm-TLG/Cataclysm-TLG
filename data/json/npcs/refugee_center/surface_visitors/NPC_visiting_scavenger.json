@@ -76,18 +76,6 @@
     },
     "responses": [
       {
-        "text": "I'm always open to meet new survivors.  Where are these acquaintances of yours?",
-        "topic": "TALK_RC_SURVIVOR_Tips2",
-        "condition": {
-          "and": [
-            { "math": [ "npc_randomize_dialogue_direction", "==", "2" ] },
-            { "not": { "u_has_var": "teamster_mission_directions", "value": "isherwood" } }
-          ]
-        },
-        "effect": { "assign_mission": "directions_isherwood" },
-        "switch": true
-      },
-      {
         "text": "Ah, yeah, I've heard of that too.  It's a weird world out there, hey?",
         "topic": "TALK_NONE",
         "switch": true,

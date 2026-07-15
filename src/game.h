@@ -4,6 +4,7 @@
 
 #include <array>
 #include <chrono>
+#include <cstdint>
 #include <ctime>
 #include <functional>
 #include <iosfwd>
@@ -78,6 +79,7 @@ class eoc_events;
 class event_bus;
 class faction_manager;
 class field_entry;
+class inventory_selector_preset;
 class item;
 class kill_tracker;
 class live_view;
@@ -89,6 +91,7 @@ class monster;
 class npc;
 class npc_template;
 class overmap;
+class power_network_manager;
 class save_t;
 class scenario;
 class scent_map;
@@ -96,6 +99,7 @@ class spell_events;
 class static_popup;
 class stats_tracker;
 class timed_event_manager;
+class item_wakeup_manager;
 class ui_adaptor;
 class uilist;
 class vehicle;
@@ -146,7 +150,6 @@ class game
 {
         friend class editmap;
         friend class main_menu;
-        friend class exosuit_interact;
         friend class swap_map;
         friend achievements_tracker &get_achievements();
         friend event_bus &get_event_bus();
@@ -162,6 +165,7 @@ class game
         friend stats_tracker &get_stats();
         friend scent_map &get_scent();
         friend timed_event_manager &get_timed_events();
+        friend item_wakeup_manager &get_item_wakeups();
         friend memorial_logger &get_memorial();
         friend bool do_turn();
         friend bool turn_handler::cleanup_at_end();
@@ -215,6 +219,8 @@ class game
         void serialize_json( std::ostream &fout ); // for save
         void unserialize( std::istream &fin, const cata_path &path ); // for load
         void unserialize( std::string fin ); // for load
+        void unserialize_dimension_data( const cata_path &file_name, std::istream &fin ); // for load
+        void unserialize_dimension_data( const JsonValue &jv ); // for load
         void unserialize_master( const cata_path &file_name, std::istream &fin ); // for load
         void unserialize_master( const JsonValue &jv ); // for load
     private:
@@ -300,6 +306,22 @@ class game
          */
         void vertical_move( int z, bool force, bool peeking = false );
         void start_hauling( const tripoint_bub_ms &pos );
+
+        /**
+         * Moves the player to an alternate dimension.
+         * @param prefix identifies the dimension and its properties.
+         * @param npc_travellers vector of NPCs that should be brought along when travelling to another dimension
+         */
+        bool travel_to_dimension( const std::string &prefix, const std::string &region_type,
+                                  const std::vector<npc *> &npc_travellers );
+        /**
+         * Retrieve the identifier of the current dimension.
+         * TODO: this should be a dereferencable id that gives properties of the dimension.
+         */
+        std::string get_dimension_prefix() {
+            return dimension_prefix;
+        }
+
         /** Returns the other end of the stairs (if any). May query, affect u etc.
         * @param pos Disable queries and msgs if not the same position as player.
         */
@@ -631,6 +653,7 @@ class game
         unsigned char light_level( int zlev ) const;
         void reset_light_level();
         character_id assign_npc_id();
+        int64_t assign_item_uid();
         Creature *is_hostile_nearby();
         Creature *is_hostile_very_close( bool dangerous = false );
         field_entry *is_in_dangerous_field();
@@ -648,7 +671,9 @@ class game
         /** Checks whether or not there is a zone of particular type nearby */
         bool check_near_zone( const zone_type_id &type, const tripoint_bub_ms &where ) const;
         bool is_zones_manager_open() const;
-        void zones_manager();
+        void set_zones_manager_open( bool zm_open ) {
+            zones_manager_open = zm_open;
+        };
 
         /// @brief attempt to find a safe route (avoids tiles dangerous to '@ref who').
         /// @param who character to use for evaluating danger tiles and pathfinding start position
@@ -716,6 +741,8 @@ class game
         /** Custom-filtered menu for inventory and nearby items and those that within specified radius */
         item_location inv_map_splice( const item_filter &filter, const std::string &title, int radius = 0,
                                       const std::string &none_message = "" );
+        item_location inv_map_splice( const inventory_selector_preset &preset, const std::string &title,
+                                      int radius = 0, const std::string &none_message = "" );
         item_location inv_map_splice( const item_location_filter &filter, const std::string &title,
                                       int radius = 0, const std::string &none_message = "" );
 
@@ -871,7 +898,10 @@ class game
         //private save functions.
         // returns false if saving failed for whatever reason
         bool save_factions_missions_npcs();
+        bool save_dimension_data();
+        bool load_dimension_data();
         void reset_npc_dispositions();
+        void serialize_dimension_data( std::ostream &fout );
         void serialize_master( std::ostream &fout );
         // returns false if saving failed for whatever reason
         bool save_maps();
@@ -1097,6 +1127,7 @@ class game
         live_view &liveview; // NOLINT(cata-serialize)
         pimpl<scent_map> scent_ptr; // NOLINT(cata-serialize)
         pimpl<timed_event_manager> timed_event_manager_ptr; // NOLINT(cata-serialize)
+        pimpl<item_wakeup_manager> item_wakeup_manager_ptr;
         pimpl<event_bus> event_bus_ptr; // NOLINT(cata-serialize)
         pimpl<stats_tracker> stats_tracker_ptr;
         pimpl<achievements_tracker> achievements_tracker_ptr;
@@ -1104,6 +1135,7 @@ class game
         pimpl<memorial_logger> memorial_logger_ptr; // NOLINT(cata-serialize)
         pimpl<spell_events> spell_events_ptr; // NOLINT(cata-serialize)
         pimpl<eoc_events> eoc_events_ptr; // NOLINT(cata-serialize)
+        pimpl<power_network_manager> power_networks_ptr;
 
         map &m; // NOLINT(cata-serialize)
         // 'current_map' will be identical to 'm' as you can save only at the top of the main loop.
@@ -1128,6 +1160,7 @@ class game
         queued_eocs queued_global_effect_on_conditions;
 
         spell_events &spell_events_subscriber();
+        power_network_manager &power_networks();
 
         pimpl<creature_tracker> critter_tracker;
         pimpl<faction_manager> faction_manager_ptr; // NOLINT(cata-serialize)
@@ -1204,6 +1237,7 @@ class game
         bool bVMonsterLookFire = false;
         character_id next_npc_id; // NOLINT(cata-serialize)
         int next_mission_id = 0; // NOLINT(cata-serialize)
+        int64_t next_item_uid = 1; // NOLINT(cata-serialize)
         // Keep track of follower NPC IDs
         std::set<character_id> follower_ids; // NOLINT(cata-serialize)
 
@@ -1322,6 +1356,12 @@ class game
             const tripoint_bub_ms &examp,
             climbing_aid_id aid,
             bool deploy_affordance = false );
+        //currently used as a hacky workaround for dimension swapping
+        bool swapping_dimensions = false; // NOLINT (cata-serialize)
+    private:
+        // Stores the currently occupied dimension.
+        // TODO: should be an id instead of a string.
+        std::string dimension_prefix;
 };
 
 // Returns temperature modifier from direct heat radiation of nearby sources

@@ -89,7 +89,7 @@
         "+": "t_door_metal_c",
         "-": "t_door_metal_locked",
         "|": "t_concrete_wall",
-        "=": "t_reinforced_glass",
+        "=": "t_laminated_glass",
         "'": "t_carpet_concrete_red",
         "o": "t_carpet_concrete_red",
         "m": "t_carpet_concrete_red",

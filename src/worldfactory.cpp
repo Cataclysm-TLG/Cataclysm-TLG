@@ -97,6 +97,7 @@ void WORLD::COPY_WORLD( const WORLD *world_to_copy )
     world_name = world_to_copy->world_name + "_copy";
     WORLD_OPTIONS = world_to_copy->WORLD_OPTIONS;
     active_mod_order = world_to_copy->active_mod_order;
+    is_compressed = world_to_copy->is_compressed;
 }
 
 cata_path WORLD::folder_path() const
@@ -1443,35 +1444,6 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win,
     return tab_output;
 }
 
-static std::string get_opt_slider( int width, int current, int max, bool no_color,
-                                   bool no_selector = false )
-{
-    int new_cur = clamp<int>( std::round( ( width * current ) / static_cast<float>( max ) ),
-                              0, width - 1 );
-    if( no_selector ) {
-        new_cur = -2;
-    }
-
-    std::string ret;
-    for( int i = 0; i < width; i++ ) {
-        char ch = '-';
-        if( i == new_cur - 1 ) {
-            ch = '<';
-        } else if( i == new_cur + 1 ) {
-            ch = '>';
-        } else if( i == new_cur ) {
-            ch = '|';
-        }
-        if( !no_color && ch != '-' ) {
-            ret.append( colorize( std::string( 1, ch ), c_yellow ) );
-        } else {
-            ret.append( 1, ch );
-        }
-    }
-
-    return ret;
-}
-
 int worldfactory::show_worldgen_basic( WORLD *world )
 {
     catacurses::window w_confirmation;
@@ -1498,54 +1470,32 @@ int worldfactory::show_worldgen_basic( WORLD *world )
     ctxt.register_action( "MOUSE_MOVE" );
 
     int win_height = 0;
-    int content_height = 0; // buttons & sliders
+    int content_height = 0;
     bool recalc_startpos = false;
     const auto init_windows = [&]( ui_adaptor & ui ) {
         recalc_startpos = true;
         const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
         const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
-
         w_confirmation = catacurses::newwin( TERMY, iMinScreenWidth, point( iOffsetX, 0 ) );
-
         win_height = getmaxy( w_confirmation );
         content_height = win_height - namebar_pos.y - 10;
-
         ui.position_from_window( w_confirmation );
     };
     init_windows( ui );
     ui.on_screen_resize( init_windows );
 
     bool noname = false;
-    bool custom_opts = false;
 
     std::map<int, inclusive_rectangle<point>> btn_map;
-    std::map<int, inclusive_rectangle<point>> slider_inc_map;
-    std::vector<option_slider_id> wg_sliders; // option sliders
-    std::vector<int> wg_slevels; // current slider levels
     std::string worldname = world->world_name;
     int sel_opt = 0;
     int top_opt = 0;
 
-    for( const option_slider &osl : option_slider::get_all() ) {
-        if( osl.context() == "WORLDGEN" ) {
-            wg_sliders.emplace_back( osl.id );
-            wg_slevels.emplace_back( osl.default_level() );
-        }
-    }
-    const std::vector<int> wg_slvl_default = wg_slevels; // save default slider levels
-
     ui.on_redraw( [&]( const ui_adaptor & ) {
-        slider_inc_map.clear();
         btn_map.clear();
         const int win_width = getmaxx( w_confirmation ) - 2;
 
         int start = top_opt == 0 ? 0 : ( 2 + ( top_opt - 1 ) * 3 );
-        int sel_y = sel_opt == 0 ? 0 :
-                    ( sel_opt <= static_cast<int>( wg_sliders.size() ) ?
-                      ( 2 + ( sel_opt - 1 ) * 3 ) : ( 2 + wg_sliders.size() * 3 ) );
-        if( recalc_startpos ) {
-            calcStartPos( start, sel_y, content_height, wg_sliders.size() * 3 + 4 );
-        }
         top_opt = start < 2 ? 0 : start / 3 + 1;
 
         werase( w_confirmation );
@@ -1570,80 +1520,11 @@ int worldfactory::show_worldgen_basic( WORLD *world )
                              namebar_pos + point( name_txt_width, 0 ) ) );
         }
 
-        // Slider options
-        int y = namebar_pos.y + ( top_opt == 0 ? 2 : 0 );
-        bool all_sliders_drawn = false;
-        for( int i = top_opt == 0 ? 0 : top_opt - 1;
-             i < static_cast<int>( wg_sliders.size() ) && y < content_height - 2; i++, y++ ) {
-            std::string sl_txt = get_opt_slider( win_width / 2 - 2, wg_slevels[i],
-                                                 wg_sliders[i]->count() - 1,
-                                                 i == sel_opt - 1, custom_opts );
-            trim_and_print( w_confirmation, point( 3, y++ ), win_width,
-                            c_white, wg_sliders[i]->name().translated() );
-            trim_and_print( w_confirmation, point( 3, y ), win_width,
-                            i == sel_opt - 1 ? hilite( c_white ) : c_white, sl_txt );
-            if( i == sel_opt - 1 ) {
-                mvwputch( w_confirmation, point( 1, y ), hilite( c_yellow ), '<' );
-                mvwputch( w_confirmation, point( 2 + win_width / 2, y ), hilite( c_yellow ), '>' );
-            }
-            slider_inc_map.emplace( i * 2, inclusive_rectangle<point>( point( 1, y ), point( 1, y ) ) );
-            slider_inc_map.emplace( i * 2 + 1, inclusive_rectangle<point>( point( 2 + win_width / 2, y ),
-                                    point( 2 + win_width / 2, y ) ) );
-            mvwprintz( w_confirmation, point( 5 + win_width / 2, y++ ), c_white,
-                       custom_opts ? _( "Custom" ) : wg_sliders[i]->level_name( wg_slevels[i] ).translated() );
-            btn_map.emplace( 1 + i,
-                             inclusive_rectangle<point>( point( 1, y - 1 ), point( 2 + win_width / 2, y - 1 ) ) );
-            if( i == static_cast<int>( wg_sliders.size() ) - 1 ) {
-                all_sliders_drawn = true;
-            }
-        }
-
-        auto get_clr = []( const nc_color & base, bool hi ) {
-            return hi ? hilite( base ) : base;
-        };
-
-        if( all_sliders_drawn && y <= content_height ) {
-            // Finish button
-            nc_color acc_clr = get_clr( c_yellow, sel_opt == static_cast<int>( wg_sliders.size() + 1 ) );
-            nc_color acc_clr2 = get_clr( c_light_green, sel_opt == static_cast<int>( wg_sliders.size() + 1 ) );
-            nc_color base_clr = get_clr( c_white, sel_opt == static_cast<int>( wg_sliders.size() + 1 ) );
-            std::string btn_txt = string_format( "%s%s%s %s %s", colorize( "[", acc_clr ),
-                                                 colorize( ctxt.get_desc( "FINALIZE", 1U ), acc_clr2 ),
-                                                 colorize( "][", acc_clr ), _( "Finish" ), colorize( "]", acc_clr ) );
-            const point finish_pos( win_width / 4 - utf8_width( btn_txt, true ) / 2, y );
-            print_colored_text( w_confirmation, finish_pos, base_clr, base_clr, btn_txt );
-            btn_map.emplace( static_cast<int>( wg_sliders.size() + 1 ),
-                             inclusive_rectangle<point>( finish_pos, finish_pos + point( utf8_width( btn_txt, true ), 0 ) ) );
-            // Reset button
-            acc_clr = get_clr( c_yellow, sel_opt == static_cast<int>( wg_sliders.size() + 2 ) );
-            acc_clr2 = get_clr( c_light_green, sel_opt == static_cast<int>( wg_sliders.size() + 2 ) );
-            base_clr = get_clr( c_white, sel_opt == static_cast<int>( wg_sliders.size() + 2 ) );
-            btn_txt = string_format( "%s%s%s %s %s", colorize( "[", acc_clr ),
-                                     colorize( ctxt.get_desc( "RESET", 1U ), acc_clr2 ),
-                                     colorize( "][", acc_clr ), _( "Reset" ), colorize( "]", acc_clr ) );
-            const point reset_pos( win_width / 2 - utf8_width( btn_txt, true ) / 2, y );
-            print_colored_text( w_confirmation, reset_pos, base_clr, base_clr, btn_txt );
-            btn_map.emplace( static_cast<int>( wg_sliders.size() + 2 ),
-                             inclusive_rectangle<point>( reset_pos, reset_pos + point( utf8_width( btn_txt, true ), 0 ) ) );
-            // Randomize button
-            acc_clr = get_clr( c_yellow, sel_opt == static_cast<int>( wg_sliders.size() + 3 ) );
-            acc_clr2 = get_clr( c_light_green, sel_opt == static_cast<int>( wg_sliders.size() + 3 ) );
-            base_clr = get_clr( c_white, sel_opt == static_cast<int>( wg_sliders.size() + 3 ) );
-            btn_txt = string_format( "%s%s%s %s %s", colorize( "[", acc_clr ),
-                                     colorize( ctxt.get_desc( "RANDOMIZE", 1U ), acc_clr2 ),
-                                     colorize( "][", acc_clr ), _( "Randomize" ), colorize( "]", acc_clr ) );
-            const point rand_pos( ( win_width * 3 ) / 4 - utf8_width( btn_txt, true ) / 2, y++ );
-            print_colored_text( w_confirmation, rand_pos, base_clr, base_clr, btn_txt );
-            btn_map.emplace( static_cast<int>( wg_sliders.size() + 3 ),
-                             inclusive_rectangle<point>( rand_pos, rand_pos + point( utf8_width( btn_txt, true ), 0 ) ) );
-        }
-
         // Content scrollbar
         scrollbar()
         .border_color( BORDER_COLOR )
         .offset_x( 0 )
         .offset_y( 1 )
-        .content_size( wg_sliders.size() * 3 + 3 )
         .viewport_pos( top_opt * 3 )
         .viewport_size( content_height )
         .apply( w_confirmation );
@@ -1656,36 +1537,34 @@ int worldfactory::show_worldgen_basic( WORLD *world )
         wattroff( w_confirmation, BORDER_COLOR );
 
         // Hint text
-        std::string hint_txt =
-            string_format( _( "Press [<color_yellow>%s</color>] to pick a random name for your world.\n"
-                              "Navigate options with [<color_yellow>directional keys</color>] "
-                              "and confirm with [<color_yellow>%s</color>].\n"
-                              "Press [<color_yellow>%s</color>] to see additional control information." ),
-                           ctxt.get_desc( "PICK_RANDOM_WORLDNAME", 1U ), ctxt.get_desc( "CONFIRM", 1U ),
+        nc_color dummy = c_light_gray;
+        std::string finalize_txt =
+            string_format( _( "Press [<color_yellow>%s</color>] to finalize your world." ),
+                           ctxt.get_desc( "FINALIZE", 1U ) );
+
+        print_colored_text( w_confirmation, point( 2, win_height - 9 ), dummy, c_light_gray, finalize_txt );
+
+        std::string randomize_txt =
+            string_format( _( "Press [<color_yellow>%s</color>] to pick a random name for your world." ),
+                           ctxt.get_desc( "PICK_RANDOM_WORLDNAME", 1U ) );
+
+        print_colored_text( w_confirmation, point( 2, win_height - 8 ), dummy, c_light_gray,
+                            randomize_txt );
+
+        std::string keybind_txt =
+            string_format( _( "Press [<color_yellow>%s</color>] to see additional control information." ),
                            ctxt.get_desc( "HELP_KEYBINDINGS", 1U ) );
-        if( !custom_opts && sel_opt > 0 && sel_opt <= static_cast<int>( wg_sliders.size() ) ) {
-            hint_txt = wg_sliders[sel_opt - 1]->level_desc( wg_slevels[sel_opt - 1] ).translated();
-        }
-        y += fold_and_print( w_confirmation, point( 2, win_height - 9 ),
-                             win_width - 1, c_light_gray, hint_txt ) + 1;
+
+        print_colored_text( w_confirmation, point( 2, win_height - 7 ), dummy, c_light_gray, keybind_txt );
 
         // Advanced settings legend
-        nc_color dummy = c_light_gray;
         std::string sctxt = string_format( _( "[<color_yellow>%s</color>] - Advanced options" ),
                                            ctxt.get_desc( "ADVANCED_SETTINGS", 1U ) );
         mvwprintz( w_confirmation, point( 2, win_height - 4 ), c_light_gray, _( "Advanced settings:" ) );
         print_colored_text( w_confirmation, point( 2, win_height - 3 ), dummy, c_light_gray, sctxt );
-        btn_map.emplace( static_cast<int>( wg_sliders.size() + 4 ),
-                         inclusive_rectangle<point>(
-                             point( 2, win_height - 3 ),
-                             point( 2 + utf8_width( sctxt, true ), win_height - 3 ) ) );
         sctxt = string_format( _( "[<color_yellow>%s</color>] - Open mod manager" ),
                                ctxt.get_desc( "PICK_MODS", 1U ) );
         print_colored_text( w_confirmation, point( 2, win_height - 2 ), dummy, c_light_gray, sctxt );
-        btn_map.emplace( static_cast<int>( wg_sliders.size() + 5 ),
-                         inclusive_rectangle<point>(
-                             point( 2, win_height - 2 ),
-                             point( 2 + utf8_width( sctxt, true ), win_height - 2 ) ) );
         wnoutrefresh( w_confirmation );
     } );
 
@@ -1694,44 +1573,32 @@ int worldfactory::show_worldgen_basic( WORLD *world )
 
         recalc_startpos = false;
         std::string action = ctxt.handle_input();
-        // Handle mouse input
-        if( action == "MOUSE_MOVE" || action == "SELECT" ) {
-            std::optional<point> coord = ctxt.get_coordinates_text( w_confirmation );
-            if( !!coord ) {
-                int orig_opt = sel_opt;
-                bool found = run_for_point_in<int, point>( btn_map, *coord,
-                [&sel_opt]( const std::pair<int, inclusive_rectangle<point>> &p ) {
-                    sel_opt = p.first;
-                } ) > 0;
-                if( found && action == "SELECT" ) {
-                    if( sel_opt == static_cast<int>( wg_sliders.size() + 4 ) ) {
-                        action = "ADVANCED_SETTINGS";
-                    } else if( sel_opt == static_cast<int>( wg_sliders.size() + 5 ) ) {
-                        action = "PICK_MODS";
-                    } else {
-                        action = "CONFIRM";
-                        run_for_point_in<int, point>( slider_inc_map, *coord,
-                        [&action]( const std::pair<int, inclusive_rectangle<point>> &p ) {
-                            action = p.first % 2 == 0 ? "LEFT" : "RIGHT";
-                        } );
-                    }
-                }
-                if( sel_opt > static_cast<int>( wg_sliders.size() + 3 ) ) {
-                    sel_opt = orig_opt;
-                }
-            }
-        }
 
         // Button shortcuts
         if( action == "FINALIZE" ) {
-            action = "CONFIRM";
-            sel_opt = wg_sliders.size() + 1;
+            if( worldname.empty() ) {
+                noname = true;
+                ui.invalidate_ui();
+                if( !query_yn( _( "Are you sure you're finished?  World name will be randomly generated." ) ) ) {
+                    noname = false;
+                    continue;
+                } else {
+                    noname = false;
+                    world->world_name = pick_random_name();
+                    if( !valid_worldname( world->world_name ) ) {
+                        continue;
+                    }
+                    return 1;
+                }
+            } else if( valid_worldname( worldname ) && query_yn( _( "Are you sure you're finished?" ) ) ) {
+                world->world_name = worldname;
+                return 1;
+            }
         } else if( action == "RESET" ) {
-            action = "CONFIRM";
-            sel_opt = wg_sliders.size() + 2;
+            world->active_mod_order = world_generator->get_mod_manager().get_default_mods();
+            world->world_name = worldname = pick_random_name();
         } else if( action == "RANDOMIZE" ) {
-            action = "CONFIRM";
-            sel_opt = wg_sliders.size() + 3;
+            world->world_name = worldname = pick_random_name();
         }
 
         // Handle other inputs
@@ -1742,62 +1609,6 @@ int worldfactory::show_worldgen_basic( WORLD *world )
                 if( !ret.value_or( "" ).empty() ) {
                     world->world_name = worldname = ret.value();
                 }
-            } else if( sel_opt == static_cast<int>( wg_sliders.size() + 1 ) ) {
-                // finish
-                if( worldname.empty() ) {
-                    noname = true;
-                    ui.invalidate_ui();
-                    if( !query_yn( _( "Are you SURE you're finished?  World name will be randomly generated." ) ) ) {
-                        noname = false;
-                        continue;
-                    } else {
-                        noname = false;
-                        world->world_name = pick_random_name();
-                        if( !valid_worldname( world->world_name ) ) {
-                            continue;
-                        }
-                        return 1;
-                    }
-                } else if( valid_worldname( worldname ) && query_yn( _( "Are you SURE you're finished?" ) ) ) {
-                    world->world_name = worldname;
-                    return 1;
-                }
-            } else if( sel_opt == static_cast<int>( wg_sliders.size() + 2 ) &&
-                       query_yn( _( "Are you sure you want to reset this world?" ) ) ) {
-                // reset
-                world->WORLD_OPTIONS = get_options().get_world_defaults();
-                world->world_saves.clear();
-                world->active_mod_order = world_generator->get_mod_manager().get_default_mods();
-                wg_slevels = wg_slvl_default;
-                custom_opts = false;
-            } else if( sel_opt == static_cast<int>( wg_sliders.size() + 3 ) ) {
-                // randomize
-                for( int i = 0; i < static_cast<int>( wg_sliders.size() ); i++ ) {
-                    wg_slevels[i] = wg_sliders[i]->random_level();
-                }
-            }
-        } else if( navigate_ui_list( action, sel_opt, 1, wg_sliders.size() + 2, true ) ) {
-            recalc_startpos = true;
-        } else if( action == "LEFT" || action == "RIGHT" ) {
-            if( sel_opt > 0 && sel_opt <= static_cast<int>( wg_sliders.size() ) ) {
-                if( custom_opts && query_yn( _( "Currently using customized advanced options.  "
-                                                "Reset world options to defaults?" ) ) ) {
-                    world->WORLD_OPTIONS = get_options().get_world_defaults();
-                    wg_slevels = wg_slvl_default;
-                    custom_opts = false;
-                    continue;
-                } else if( custom_opts ) {
-                    continue;
-                }
-                int lvl = wg_slevels[sel_opt - 1] + ( action == "LEFT" ? -1 : 1 );
-                wg_slevels[sel_opt - 1] = clamp<int>( lvl, 0, wg_sliders[sel_opt - 1]->count() - 1 );
-                wg_sliders[sel_opt - 1]->apply_opts( wg_slevels[sel_opt - 1], world->WORLD_OPTIONS );
-            } else if( sel_opt > static_cast<int>( wg_sliders.size() ) ) {
-                if( action == "LEFT" && sel_opt > static_cast<int>( wg_sliders.size() + 1 ) ) {
-                    sel_opt--;
-                } else if( action == "RIGHT" && sel_opt < static_cast<int>( wg_sliders.size() + 3 ) ) {
-                    sel_opt++;
-                }
             }
         } else if( action == "PICK_MODS" ) {
             show_worldgen_tab_modselection( w_confirmation, world, false );
@@ -1806,7 +1617,6 @@ int worldfactory::show_worldgen_basic( WORLD *world )
             show_worldgen_tab_options( w_confirmation, world, false );
             for( auto &iter : WOPTIONS_OLD ) {
                 if( iter.second != world->WORLD_OPTIONS[iter.first] ) {
-                    custom_opts = true;
                     break;
                 }
             }
@@ -2048,11 +1858,10 @@ void load_external_option( const JsonObject &jo )
     std::string stype = jo.get_string( "stype" );
     options_manager &opts = get_options();
     if( !opts.has_option( name ) ) {
-        translation sinfo;
-        jo.get_member( "info" ).read( sinfo );
-        opts.add_external( name, "external_options", stype, sinfo, sinfo );
+        opts.add_external( name, "external_options", stype );
     }
     options_manager::cOpt &opt = opts.get_option( name );
+    // TODO: Hook up to cata_variant instead?
     if( stype == "float" ) {
         opt.setValue( static_cast<float>( jo.get_float( "value" ) ) );
     } else if( stype == "int" ) {
@@ -2068,25 +1877,25 @@ void load_external_option( const JsonObject &jo )
     } else {
         jo.throw_error_at( "stype", "Unknown or unsupported stype for external option" );
     }
-    // Just visit this member if it exists
-    if( jo.has_member( "info" ) ) {
-        jo.get_string( "info" );
-    }
     options_manager::update_options_cache();
 }
 
 bool WORLD::has_compression_enabled() const
 {
-    cata_path world_folder_path = folder_path();
-    return std::filesystem::exists( ( world_folder_path / "maps.dict" ).get_unrelative_path() ) ||
-           std::filesystem::exists( ( world_folder_path / "mmr.dict" ).get_unrelative_path() ) ||
-           std::filesystem::exists( ( world_folder_path / "overmaps.dict" ).get_unrelative_path() );
+    if( !is_compressed.has_value() ) {
+        cata_path world_folder_path = folder_path();
+        is_compressed.emplace(
+            std::filesystem::exists( ( world_folder_path / "maps.dict" ).get_unrelative_path() ) ||
+            std::filesystem::exists( ( world_folder_path / "mmr.dict" ).get_unrelative_path() ) ||
+            std::filesystem::exists( ( world_folder_path / "overmaps.dict" ).get_unrelative_path() ) );
+    }
+    return is_compressed.value();
 }
 
-bool WORLD::set_compression_enabled( bool enabled ) const
+bool WORLD::set_compression_enabled( bool enabled )
 {
     // Return immediately if we're already in the desired state.
-    if( enabled == has_compression_enabled() ) {
+    if( enabled == is_compressed ) {
         return true;
     }
     static_popup popup;
@@ -2100,275 +1909,285 @@ bool WORLD::set_compression_enabled( bool enabled ) const
         std::vector<cata_path> folders_to_clean;
         std::vector<cata_path> files_to_clean;
 
-        {
-            std::vector<cata_path> maps_folders = get_directories( world_folder_path / "maps" );
-            std::filesystem::path maps_dict_path = maps_dict.get_unrelative_path();
-            size_t done = 0;
-            for( const cata_path &map_folder : maps_folders ) {
-                popup.message( _( "Compressing maps [%d/%d]" ), done++, maps_folders.size() );
-                ui_manager::redraw();
-                refresh_display();
-                inp_mngr.pump_events();
-                if( !zzip::create_from_folder( ( map_folder + zzip_suffix ).get_unrelative_path(),
-                                               map_folder.get_unrelative_path(), maps_dict_path ) ) {
-                    return false;
-                }
-            }
-            folders_to_clean = std::move( maps_folders );
-        }
-        {
-            std::vector<cata_path> overmaps = get_files_from_path( "o.", world_folder_path );
-            files_to_clean.reserve( files_to_clean.size() + overmaps.size() );
-            size_t done = 0;
-            std::error_code ec;
-            assure_dir_exist( world_folder_path / zzip_overmap_directory );
-            std::filesystem::path world_folder_unrelative_path = world_folder_path.get_unrelative_path();
-            for( const cata_path &overmap : overmaps ) {
-                // Some random other files might have `o.` in the name. We only care about the actual
-                // overmap files whose names start with `o.`.
-                std::filesystem::path overmap_file_path = overmap.get_unrelative_path();
-                std::filesystem::path overmap_file_name = overmap_file_path.filename();
-                if( overmap_file_name.generic_u8string().find( "o." ) != 0 ) {
-                    continue;
-                }
-                popup.message( _( "Compressing overmaps [%d/%d]" ), done++, overmaps.size() );
-                ui_manager::redraw();
-                refresh_display();
-                inp_mngr.pump_events();
+        std::vector<cata_path> dimension_folders = get_directories( world_folder_path / "dimensions" );
+        dimension_folders.push_back( world_folder_path );
 
-                // Each overmap gets put into its own zzip indexed by its own file name.
-                std::optional<zzip> overmap_zzip = zzip::create_from_folder_with_files( (
-                                                       world_folder_path / zzip_overmap_directory / overmap_file_name +
-                                                       zzip_suffix ).get_unrelative_path(),
-                                                   world_folder_unrelative_path, { overmap_file_path }, 0,
-                                                   overmaps_dict.get_unrelative_path() );
-                if( !overmap_zzip ) {
-                    return false;
-                }
-                files_to_clean.push_back( overmap );
-            }
-        }
-        {
-            std::vector<cata_path> character_map_memories;
-            size_t done = 0;
-            // Each of these is a folder for per-character map memory.
-            // We compress each into a zzip_stack, with the same folder name for simplicity.
-            // Each map memory region file inside the folders is compressed separately.
-            character_map_memories = get_files_from_path( ".mm1", folder_path(), false, true );
-            for( const cata_path &character_map_memory_folder : character_map_memories ) {
-                popup.message( _( "Compressing map memory [%d/%d]" ), done++, character_map_memories.size() );
-                ui_manager::redraw();
-                refresh_display();
-                inp_mngr.pump_events();
+        copy_file( maps_dict, world_folder_path / "maps.dict" );
+        copy_file( overmaps_dict, world_folder_path / "overmaps.dict" );
+        copy_file( mmr_dict, world_folder_path / "mmr.dict" );
 
-                std::vector<cata_path> character_map_memory_files = get_files_from_path( ".mmr",
-                        character_map_memory_folder, false, true );
-                std::filesystem::path mmr_path = character_map_memory_folder.get_unrelative_path();
-                for( const cata_path &map_memory : character_map_memory_files ) {
-                    std::filesystem::path map_memory_filename = map_memory.get_unrelative_path().filename();
-                    std::shared_ptr<zzip_stack> map_memory_zzip = zzip_stack::create_from_folder_with_files(
-                                character_map_memory_folder.get_unrelative_path(),
-                                mmr_path, { mmr_path / map_memory_filename }, 0,
-                                mmr_dict.get_unrelative_path() );
-                    if( !map_memory_zzip ) {
+        for( const cata_path &dimension_folder : dimension_folders ) {
+            {
+                std::vector<cata_path> maps_folders = get_directories( dimension_folder / "maps" );
+                std::filesystem::path maps_dict_path = maps_dict.get_unrelative_path();
+                size_t done = 0;
+                for( const cata_path &map_folder : maps_folders ) {
+                    popup.message( _( "Compressing maps [%d/%d]" ), done++, maps_folders.size() );
+                    ui_manager::redraw();
+                    refresh_display();
+                    inp_mngr.pump_events();
+                    if( !zzip::create_from_folder( ( map_folder + ".zzip" ).get_unrelative_path(),
+                                                   map_folder.get_unrelative_path(), maps_dict_path ) ) {
                         return false;
                     }
                 }
-
-                files_to_clean.insert( files_to_clean.end(), character_map_memory_files.begin(),
-                                       character_map_memory_files.end() );
+                folders_to_clean = std::move( maps_folders );
             }
-        }
-        {
-            std::vector<cata_path> saves;
+            {
+                std::vector<cata_path> overmaps = get_files_from_path( "o.", dimension_folder );
+                files_to_clean.reserve( files_to_clean.size() + overmaps.size() );
+                size_t done = 0;
+                std::error_code ec;
+                assure_dir_exist( dimension_folder / "overmaps" );
+                std::filesystem::path world_folder_unrelative_path = dimension_folder.get_unrelative_path();
+                for( const cata_path &overmap : overmaps ) {
+                    // Some random other files might have `o.` in the name. We only care about the actual
+                    // overmap files whose names start with `o.`.
+                    std::filesystem::path overmap_file_path = overmap.get_unrelative_path();
+                    std::filesystem::path overmap_file_name = overmap_file_path.filename();
+                    if( overmap_file_name.generic_u8string().find( "o." ) != 0 ) {
+                        continue;
+                    }
+                    popup.message( _( "Compressing overmaps [%d/%d]" ), done++, overmaps.size() );
+                    ui_manager::redraw();
+                    refresh_display();
+                    inp_mngr.pump_events();
+
+                    // Each overmap gets put into its own zzip indexed by its own file name.
+                    std::optional<zzip> overmap_zzip = zzip::create_from_folder_with_files( (
+                                                           dimension_folder / "overmaps" / overmap_file_name + ".zzip" ).get_unrelative_path(),
+                                                       world_folder_unrelative_path, { overmap_file_path }, 0,
+                                                       overmaps_dict.get_unrelative_path() );
+                    if( !overmap_zzip ) {
+                        return false;
+                    }
+                    files_to_clean.push_back( overmap );
+                }
+            }
+            {
+                std::vector<cata_path> character_map_memories;
+                size_t done = 0;
+                // Each of these is a folder for per-character map memory.
+                // We compress each into a zzip_stack, with the same folder name for simplicity.
+                // Each map memory region file inside the folders is compressed separately.
+                character_map_memories = get_files_from_path( ".mm1", dimension_folder, false, true );
+                for( const cata_path &character_map_memory_folder : character_map_memories ) {
+                    popup.message( _( "Compressing map memory [%d/%d]" ), done++, character_map_memories.size() );
+                    ui_manager::redraw();
+                    refresh_display();
+                    inp_mngr.pump_events();
+
+                    std::vector<cata_path> character_map_memory_files = get_files_from_path( ".mmr",
+                            character_map_memory_folder, false, true );
+                    std::filesystem::path mmr_path = character_map_memory_folder.get_unrelative_path();
+                    for( const cata_path &map_memory : character_map_memory_files ) {
+                        std::filesystem::path map_memory_filename = map_memory.get_unrelative_path().filename();
+                        std::shared_ptr<zzip_stack> map_memory_zzip = zzip_stack::create_from_folder_with_files(
+                                    character_map_memory_folder.get_unrelative_path(),
+                                    mmr_path, { mmr_path / map_memory_filename }, 0,
+                                    mmr_dict.get_unrelative_path() );
+                        if( !map_memory_zzip ) {
+                            return false;
+                        }
+                    }
+
+                    files_to_clean.insert( files_to_clean.end(), character_map_memory_files.begin(),
+                                           character_map_memory_files.end() );
+                }
+            }
+            {
+                std::vector<cata_path> saves;
+                size_t done = 0;
+                std::error_code ec;
+                saves = get_files_from_path( ".sav", dimension_folder );
+                for( const cata_path &save : saves ) {
+                    popup.message( _( "Compressing main save files [%d/%d]" ), done++, saves.size() );
+                    ui_manager::redraw();
+                    refresh_display();
+                    inp_mngr.pump_events();
+
+                    // Each save gets put into its own zzip indexed by its own file name.
+                    std::filesystem::path save_file_path = save.get_unrelative_path();
+                    std::filesystem::path save_file_name = save_file_path.filename();
+
+                    // But first, we have to do some surgery.
+                    // Current the first line of a save file is a hokey line like
+                    // # version <number>
+                    // This is outdated from a time when the file had to be loaded linearly
+                    // in text. We now parse to a binary format and can random access anything
+                    // in constant time. The new format encodes the version as a regular json
+                    // member. The compressed save load path requires that. So first we test if
+                    // the first line is this format and we insert it manually textually if it is.
+                    std::string savefile_contents = read_entire_file( save_file_path );
+                    if( savefile_contents.empty() ) {
+                        // Eh just skip it.
+                        continue;
+                    }
+                    if( savefile_contents[0] == '#' ) {
+                        // Parse the version header.
+                        std::string temp_savefile_contents = std::move( savefile_contents );
+                        savefile_contents.clear();
+                        size_t newline = temp_savefile_contents.find( '\n' );
+                        size_t char_after_open_brace = temp_savefile_contents.find_first_not_of( '{', newline + 1 );
+                        std::string_view header{ temp_savefile_contents.data(), newline };
+                        std::string_view savefile_json{ temp_savefile_contents.data() + char_after_open_brace, temp_savefile_contents.size() - char_after_open_brace };
+                        int temp_savefile_version = std::strtol( header.data() + header.find_last_of( ' ' ), nullptr, 10 );
+                        savefile_contents.reserve( savefile_json.size() + 32 ); // 30 for text and 2 for digits.
+                        savefile_contents.append( "{\"savegame_loading_version\":" );
+                        savefile_contents.append( std::to_string( temp_savefile_version ) );
+                        savefile_contents.append( ",\n" );
+                        savefile_contents.append( savefile_json );
+                    };
+
+                    std::optional<zzip> save_zzip = zzip::load( ( dimension_folder / save_file_name +
+                                                    ".zzip" ).get_unrelative_path() );
+                    if( !save_zzip ) {
+                        return false;
+                    }
+                    save_zzip->add_file( save_file_name, savefile_contents );
+                    files_to_clean.push_back( save );
+                }
+            }
+
             size_t done = 0;
-            std::error_code ec;
-            saves = get_files_from_path( ".sav", world_folder_path );
-            for( const cata_path &save : saves ) {
-                popup.message( _( "Compressing main save files [%d/%d]" ), done++, saves.size() );
+            size_t to_do = folders_to_clean.size() + files_to_clean.size();
+            for( const cata_path &folder : folders_to_clean ) {
+                popup.message( _( "Cleaning up [%d/%d]" ), done++, to_do );
                 ui_manager::redraw();
                 refresh_display();
                 inp_mngr.pump_events();
-
-                // Each save gets put into its own zzip indexed by its own file name.
-                std::filesystem::path save_file_path = save.get_unrelative_path();
-                std::filesystem::path save_file_name = save_file_path.filename();
-
-                // But first, we have to do some surgery.
-                // Current the first line of a save file is a hokey line like
-                // # version <number>
-                // This is outdated from a time when the file had to be loaded linearly
-                // in text. We now parse to a binary format and can random access anything
-                // in constant time. The new format encodes the version as a regular json
-                // member. The compressed save load path requires that. So first we test if
-                // the first line is this format and we insert it manually textually if it is.
-                std::string savefile_contents = read_entire_file( save_file_path );
-                if( savefile_contents.empty() ) {
-                    // Eh just skip it.
-                    continue;
-                }
-                if( savefile_contents[0] == '#' ) {
-                    // Parse the version header.
-                    std::string temp_savefile_contents = std::move( savefile_contents );
-                    savefile_contents.clear();
-                    size_t newline = temp_savefile_contents.find( '\n' );
-                    size_t char_after_open_brace = temp_savefile_contents.find_first_not_of( '{', newline + 1 );
-                    std::string_view header{ temp_savefile_contents.data(), newline };
-                    std::string_view savefile_json{ temp_savefile_contents.data() + char_after_open_brace, temp_savefile_contents.size() - char_after_open_brace };
-                    int temp_savefile_version = std::strtol( header.data() + header.find_last_of( ' ' ), nullptr, 10 );
-                    savefile_contents.reserve( savefile_json.size() + 32 ); // 30 for text and 2 for digits.
-                    savefile_contents.append( "{\"savegame_loading_version\":" );
-                    savefile_contents.append( std::to_string( temp_savefile_version ) );
-                    savefile_contents.append( ",\n" );
-                    savefile_contents.append( savefile_json );
-                };
-
-                std::optional<zzip> save_zzip = zzip::load( ( world_folder_path / save_file_name +
-                                                zzip_suffix ).get_unrelative_path() );
-                if( !save_zzip ) {
-                    return false;
-                }
-                save_zzip->add_file( save_file_name, savefile_contents );
-                files_to_clean.push_back( save );
+                std::error_code ec;
+                std::filesystem::remove_all( folder.get_unrelative_path(), ec );
+            }
+            for( const cata_path &file : files_to_clean ) {
+                popup.message( _( "Cleaning up [%d/%d]" ), done++, to_do );
+                ui_manager::redraw();
+                refresh_display();
+                inp_mngr.pump_events();
+                std::error_code ec;
+                std::filesystem::remove( file.get_unrelative_path(), ec );
             }
         }
-        copy_file( maps_dict, folder_path() / "maps.dict" );
-        copy_file( overmaps_dict, folder_path() / "overmaps.dict" );
-        copy_file( mmr_dict, folder_path() / "mmr.dict" );
-        size_t done = 0;
-        size_t to_do = folders_to_clean.size() + files_to_clean.size();
-        for( const cata_path &folder : folders_to_clean ) {
-            popup.message( _( "Cleaning up [%d/%d]" ), done++, to_do );
-            ui_manager::redraw();
-            refresh_display();
-            inp_mngr.pump_events();
-            std::error_code ec;
-            std::filesystem::remove_all( folder.get_unrelative_path(), ec );
-        }
-        for( const cata_path &file : files_to_clean ) {
-            popup.message( _( "Cleaning up [%d/%d]" ), done++, to_do );
-            ui_manager::redraw();
-            refresh_display();
-            inp_mngr.pump_events();
-            std::error_code ec;
-            std::filesystem::remove( file.get_unrelative_path(), ec );
-        }
     } else {
+        std::vector<cata_path> dimension_folders = get_directories( world_folder_path / "dimensions" );
+        dimension_folders.push_back( world_folder_path );
+
         cata_path maps_dict = world_folder_path / "maps.dict";
         cata_path overmaps_dict = world_folder_path / "overmaps.dict";
         cata_path mmr_dict = world_folder_path / "mmr.dict";
-        std::vector<cata_path> zzips_to_clean;
 
-        std::vector<cata_path> maps_zzips = get_files_from_path( "zzip", folder_path() / "maps", false,
-                                            true );
-        std::vector<cata_path> overmap_zzips = get_files_from_path( "zzip",
-                                               folder_path() / zzip_overmap_directory,
-                                               false, true );
-        std::vector<cata_path> character_map_memory_folders = get_files_from_path( ".mm1",
-                world_folder_path, false, true );
-        std::vector<cata_path> save_zzips = get_files_from_path( ".sav" + std::string( zzip_suffix ),
-                                            world_folder_path,
-                                            false, true );
+        for( const cata_path &dimension_folder : dimension_folders ) {
 
-        zzips_to_clean.reserve( maps_zzips.size() + overmap_zzips.size() +
-                                character_map_memory_folders.size() * 3 );
+            std::vector<cata_path> zzips_to_clean;
 
-        size_t done = 0;
-        {
-            std::filesystem::path maps_dict_path = maps_dict.get_unrelative_path();
-            for( const cata_path &map_zzip : maps_zzips ) {
-                popup.message( _( "Decompressing maps [%d/%d]" ), done++, maps_zzips.size() );
-                ui_manager::redraw();
-                refresh_display();
-                inp_mngr.pump_events();
-                std::filesystem::path zzip_path = map_zzip.get_unrelative_path();
-                std::filesystem::path dest_folder_name = zzip_path.parent_path() / zzip_path.stem();
-                if( !zzip::extract_to_folder( zzip_path, dest_folder_name, maps_dict_path ) ) {
-                    return false;
-                }
-            }
-            zzips_to_clean.insert( zzips_to_clean.end(), maps_zzips.begin(), maps_zzips.end() );
-        }
-        {
+            std::vector<cata_path> maps_zzips = get_files_from_path( "zzip", dimension_folder / "maps", false,
+                                                true );
+            std::vector<cata_path> overmap_zzips = get_files_from_path( "zzip", dimension_folder / "overmaps",
+                                                   false, true );
+            std::vector<cata_path> character_map_memory_folders = get_files_from_path( ".mm1",
+                    dimension_folder, false, true );
+            std::vector<cata_path> save_zzips = get_files_from_path( ".sav.zzip", dimension_folder,
+                                                false, true );
+
+            zzips_to_clean.reserve( maps_zzips.size() + overmap_zzips.size() +
+                                    character_map_memory_folders.size() * 3 );
+
             size_t done = 0;
-            std::filesystem::path overmaps_dict_path = overmaps_dict.get_unrelative_path();
-            zzips_to_clean.reserve( zzips_to_clean.size() + overmap_zzips.size() );
-            std::filesystem::path dest_folder_name = folder_path().get_unrelative_path();
-            for( cata_path &overmap_zzip : overmap_zzips ) {
+            {
+                std::filesystem::path maps_dict_path = maps_dict.get_unrelative_path();
+                for( const cata_path &map_zzip : maps_zzips ) {
+                    popup.message( _( "Decompressing maps [%d/%d]" ), done++, maps_zzips.size() );
+                    ui_manager::redraw();
+                    refresh_display();
+                    inp_mngr.pump_events();
+                    std::filesystem::path zzip_path = map_zzip.get_unrelative_path();
+                    std::filesystem::path dest_folder_name = zzip_path.parent_path() / zzip_path.stem();
+                    if( !zzip::extract_to_folder( zzip_path, dest_folder_name, maps_dict_path ) ) {
+                        return false;
+                    }
+                }
+                zzips_to_clean.insert( zzips_to_clean.end(), maps_zzips.begin(), maps_zzips.end() );
+            }
+            {
+                size_t done = 0;
+                std::filesystem::path overmaps_dict_path = overmaps_dict.get_unrelative_path();
+                zzips_to_clean.reserve( zzips_to_clean.size() + overmap_zzips.size() );
+                std::filesystem::path dest_folder_name = dimension_folder.get_unrelative_path();
+                for( cata_path &overmap_zzip : overmap_zzips ) {
 
-                popup.message( _( "Decompressing overmaps [%d/%d]" ), done++, overmap_zzips.size() );
+                    popup.message( _( "Decompressing overmaps [%d/%d]" ), done++, overmap_zzips.size() );
+                    ui_manager::redraw();
+                    refresh_display();
+                    inp_mngr.pump_events();
+
+                    std::filesystem::path zzip_path = overmap_zzip.get_unrelative_path();
+                    if( !zzip::extract_to_folder( zzip_path, dest_folder_name, overmaps_dict_path ) ) {
+                        return false;
+                    }
+                    zzips_to_clean.push_back( std::move( overmap_zzip ) );
+                }
+                zzips_to_clean.push_back( dimension_folder / "overmaps" );
+            }
+            {
+                size_t done = 0;
+                std::filesystem::path mmr_dict_path = mmr_dict.get_unrelative_path();
+                std::vector<cata_path> character_map_memory_zzips;
+                for( const cata_path &character_map_memory_zzip : character_map_memory_folders ) {
+                    popup.message( _( "Decompressing map memory [%d/%d]" ), done++,
+                                   character_map_memory_folders.size() );
+                    ui_manager::redraw();
+                    refresh_display();
+                    inp_mngr.pump_events();
+
+                    std::filesystem::path zzip_path = character_map_memory_zzip.get_unrelative_path();
+                    // We reuse the same folder for the map memory files.
+                    const std::filesystem::path &dest_folder_name = zzip_path;
+                    if( !zzip_stack::extract_to_folder( zzip_path, dest_folder_name, mmr_dict_path ) ) {
+                        return false;
+                    }
+
+                    character_map_memory_zzips.emplace_back( character_map_memory_zzip /
+                            dest_folder_name.filename().concat( ".cold.zzip" ) ); // NOLINT(cata-u8-path)
+                    character_map_memory_zzips.emplace_back( character_map_memory_zzip /
+                            dest_folder_name.filename().concat( ".warm.zzip" ) ); // NOLINT(cata-u8-path)
+                    character_map_memory_zzips.emplace_back( character_map_memory_zzip /
+                            dest_folder_name.filename().concat( ".hot.zzip" ) ); // NOLINT(cata-u8-path)
+                }
+                zzips_to_clean.insert( zzips_to_clean.end(), character_map_memory_zzips.begin(),
+                                       character_map_memory_zzips.end() );
+            }
+            {
+                size_t done = 0;
+                std::filesystem::path dest_folder_name = dimension_folder.get_unrelative_path();
+                for( cata_path &save_zzip : save_zzips ) {
+
+                    popup.message( _( "Decompressing main save files [%d/%d]" ), done++, overmap_zzips.size() );
+                    ui_manager::redraw();
+                    refresh_display();
+                    inp_mngr.pump_events();
+
+                    std::filesystem::path zzip_path = save_zzip.get_unrelative_path();
+                    if( !zzip::extract_to_folder( zzip_path, dest_folder_name ) ) {
+                        return false;
+                    }
+                    zzips_to_clean.push_back( std::move( save_zzip ) );
+                }
+            }
+            remove_file( maps_dict );
+            remove_file( overmaps_dict );
+            remove_file( mmr_dict );
+            done = 0;
+            for( const cata_path &zzip_to_clean : zzips_to_clean ) {
+                popup.message( _( "Cleaning up [%d/%d]" ), done++, zzips_to_clean.size() );
                 ui_manager::redraw();
                 refresh_display();
                 inp_mngr.pump_events();
-
-                std::filesystem::path zzip_path = overmap_zzip.get_unrelative_path();
-                if( !zzip::extract_to_folder( zzip_path, dest_folder_name, overmaps_dict_path ) ) {
-                    return false;
-                }
-                zzips_to_clean.push_back( std::move( overmap_zzip ) );
+                std::error_code ec;
+                std::filesystem::remove( zzip_to_clean.get_unrelative_path(), ec );
             }
-            zzips_to_clean.push_back( world_folder_path / zzip_overmap_directory );
-        }
-        {
-            size_t done = 0;
-            std::filesystem::path mmr_dict_path = mmr_dict.get_unrelative_path();
-            std::vector<cata_path> character_map_memory_zzips;
-            for( const cata_path &character_map_memory_zzip : character_map_memory_folders ) {
-                popup.message( _( "Decompressing map memory [%d/%d]" ), done++,
-                               character_map_memory_folders.size() );
-                ui_manager::redraw();
-                refresh_display();
-                inp_mngr.pump_events();
-
-                std::filesystem::path zzip_path = character_map_memory_zzip.get_unrelative_path();
-                // We reuse the same folder for the map memory files.
-                const std::filesystem::path &dest_folder_name = zzip_path;
-                if( !zzip_stack::extract_to_folder( zzip_path, dest_folder_name, mmr_dict_path ) ) {
-                    return false;
-                }
-
-                character_map_memory_zzips.emplace_back( character_map_memory_zzip /
-                        dest_folder_name.filename().concat( ".cold" + std::string(
-                                    zzip_suffix ) ) ); // NOLINT(cata-u8-path)
-                character_map_memory_zzips.emplace_back( character_map_memory_zzip /
-                        dest_folder_name.filename().concat( ".warm" + std::string(
-                                    zzip_suffix ) ) ); // NOLINT(cata-u8-path)
-                character_map_memory_zzips.emplace_back( character_map_memory_zzip /
-                        dest_folder_name.filename().concat( ".hot" + std::string( zzip_suffix ) ) ); // NOLINT(cata-u8-path)
-            }
-            zzips_to_clean.insert( zzips_to_clean.end(), character_map_memory_zzips.begin(),
-                                   character_map_memory_zzips.end() );
-        }
-        {
-            size_t done = 0;
-            std::filesystem::path dest_folder_name = world_folder_path.get_unrelative_path();
-            for( cata_path &save_zzip : save_zzips ) {
-
-                popup.message( _( "Decompressing main save files [%d/%d]" ), done++, overmap_zzips.size() );
-                ui_manager::redraw();
-                refresh_display();
-                inp_mngr.pump_events();
-
-                std::filesystem::path zzip_path = save_zzip.get_unrelative_path();
-                if( !zzip::extract_to_folder( zzip_path, dest_folder_name ) ) {
-                    return false;
-                }
-                zzips_to_clean.push_back( std::move( save_zzip ) );
-            }
-        }
-        remove_file( maps_dict );
-        remove_file( overmaps_dict );
-        remove_file( mmr_dict );
-        done = 0;
-        for( const cata_path &zzip_to_clean : zzips_to_clean ) {
-            popup.message( _( "Cleaning up [%d/%d]" ), done++, zzips_to_clean.size() );
-            ui_manager::redraw();
-            refresh_display();
-            inp_mngr.pump_events();
-            std::error_code ec;
-            std::filesystem::remove( zzip_to_clean.get_unrelative_path(), ec );
         }
     }
+    is_compressed = enabled;
     return true;
 }
 

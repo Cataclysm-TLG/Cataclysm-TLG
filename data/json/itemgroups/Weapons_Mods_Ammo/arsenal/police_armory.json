@@ -109,7 +109,7 @@
       { "item": "usp_9mm", "prob": 25 },
       { "item": "usp9mag", "count": [ 1, 4 ] },
       { "group": "police_armory_full_usp9mag_9mm", "count": [ 0, 3 ], "prob": 30 },
-      { "group": "police_armory_full_usp9mag_9mmfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_usp9mag_9mmfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_9mm", "prob": 30 },
       { "group": "police_armory_boxes_9mmfmj", "prob": 30 },
       { "group": "police_armory_boxes_9mmP", "prob": 25 },
@@ -126,8 +126,8 @@
       { "item": "glock_19", "prob": 30 },
       { "item": "glock_19", "prob": 25 },
       { "item": "glockmag", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glockmag_9mm", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glockmag_9mmfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_glockmag_9mm", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_glockmag_9mmfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_9mm", "prob": 30 },
       { "group": "police_armory_boxes_9mmfmj", "prob": 30 },
       { "group": "police_armory_boxes_9mmP", "prob": 25 },
@@ -144,8 +144,8 @@
       { "item": "glock_17", "prob": 30 },
       { "item": "glock_17", "prob": 25 },
       { "item": "glock17_17", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glock17mag_9mm", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glock17mag_9mmfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_glock17mag_9mm", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_glock17mag_9mmfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_9mm", "prob": 30 },
       { "group": "police_armory_boxes_9mmfmj", "prob": 30 },
       { "group": "police_armory_boxes_9mmP", "prob": 25 },
@@ -161,9 +161,9 @@
       { "item": "m9", "variant": "m9" },
       { "item": "m9", "variant": "m9", "prob": 30 },
       { "item": "m9", "variant": "m9", "prob": 25 },
-      { "item": "m9mag", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_m9mag_9mm", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_m9mag_9mmfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "item": "m9mag", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_m9mag_9mm", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_m9mag_9mmfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_9mm", "prob": 30 },
       { "group": "police_armory_boxes_9mmfmj", "prob": 30 },
       { "group": "police_armory_boxes_9mmP", "prob": 25 },
@@ -180,8 +180,8 @@
       { "item": "sp2022", "prob": 50 },
       { "item": "sp2022", "prob": 25 },
       { "item": "sp2022mag_15rd_9mm", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_sp2022mag_9mm", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_sp2022mag_9mmfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_sp2022mag_9mm", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_sp2022mag_9mmfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_9mm", "prob": 30 },
       { "group": "police_armory_boxes_9mmfmj", "prob": 30 },
       { "group": "police_armory_boxes_9mmP", "prob": 25 },
@@ -198,8 +198,8 @@
       { "item": "px4", "prob": 50 },
       { "item": "px4", "prob": 25 },
       { "item": "px4mag", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_px4mag_9mm", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_px4mag_9mmfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_px4mag_9mm", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_px4mag_9mmfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_9mm", "prob": 30 },
       { "group": "police_armory_boxes_9mmfmj", "prob": 30 },
       { "group": "police_armory_boxes_9mmP", "prob": 25 },
@@ -698,8 +698,8 @@
       { "item": "p226_357sig", "prob": 50 },
       { "item": "p226_357sig", "prob": 25 },
       { "item": "p226mag_12rd_357sig", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_p226mag_357sigjhp", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_p226mag_357sigfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_p226mag_357sigjhp", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_p226mag_357sigfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_357sigjhp", "prob": 30 },
       { "group": "police_armory_boxes_357sigfmj", "prob": 30 },
       { "group": "police_armory_boxes_357sigjhp", "prob": 15 },
@@ -716,8 +716,8 @@
       { "item": "glock_31", "prob": 50 },
       { "item": "glock_31", "prob": 25 },
       { "item": "glock40mag", "count": [ 1, 4 ] },
-      { "group": "police_armory_full_glock40mag_357sigjhp", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glock40mag_357sigfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_glock40mag_357sigjhp", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_glock40mag_357sigfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_357sigjhp", "prob": 30 },
       { "group": "police_armory_boxes_357sigfmj", "prob": 30 },
       { "group": "police_armory_boxes_357sigjhp", "prob": 15 },
@@ -734,8 +734,8 @@
       { "item": "p320_357sig", "prob": 50 },
       { "item": "p320_357sig", "prob": 25 },
       { "item": "p320mag_13rd_357sig", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_p320mag_357sigjhp", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_p320mag_357sigfmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_p320mag_357sigjhp", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_p320mag_357sigfmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_357sigjhp", "prob": 30 },
       { "group": "police_armory_boxes_357sigfmj", "prob": 30 },
       { "group": "police_armory_boxes_357sigjhp", "prob": 15 },
@@ -791,7 +791,7 @@
     "entries": [
       { "group": "police_armory_box_some_357sigjhp", "prob": 30 },
       { "group": "police_armory_box_some_357sigjhp", "prob": 65 },
-      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 30 ], "prob": 30 },
       { "group": "police_armory_box_full_357sigjhp", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -802,7 +802,7 @@
     "entries": [
       { "group": "police_armory_box_some_357sigfmj", "prob": 30 },
       { "group": "police_armory_box_some_357sigfmj", "prob": 75 },
-      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 30 ], "prob": 30 },
       { "group": "police_armory_box_full_357sigfmj", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -855,8 +855,8 @@
       { "item": "sig_40", "prob": 50 },
       { "item": "sig_40", "prob": 25 },
       { "item": "sig40mag", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_sig40mag_40sw", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_sig40mag_40fmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_sig40mag_40sw", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_sig40mag_40fmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_40sw", "prob": 30 },
       { "group": "police_armory_boxes_40fmj", "prob": 30 },
       { "group": "police_armory_boxes_40sw", "prob": 15 },
@@ -873,8 +873,8 @@
       { "item": "glock_22", "prob": 50 },
       { "item": "glock_22", "prob": 25 },
       { "item": "glock40mag", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glock40mag_40sw", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glock40mag_40fmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_glock40mag_40sw", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_glock40mag_40fmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_40sw", "prob": 30 },
       { "group": "police_armory_boxes_40fmj", "prob": 30 },
       { "group": "police_armory_boxes_40sw", "prob": 15 },
@@ -891,8 +891,8 @@
       { "item": "px4_40", "prob": 50 },
       { "item": "px4_40", "prob": 25 },
       { "item": "px4_40mag", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_px4_40mag_40sw", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_px4_40mag_40fmj", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_px4_40mag_40sw", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_px4_40mag_40fmj", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_40sw", "prob": 30 },
       { "group": "police_armory_boxes_40fmj", "prob": 30 },
       { "group": "police_armory_boxes_40sw", "prob": 15 },
@@ -980,7 +980,7 @@
     "entries": [
       { "group": "police_armory_box_some_40sw", "prob": 30 },
       { "group": "police_armory_box_some_40sw", "prob": 75 },
-      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 30 ], "prob": 30 },
       { "group": "police_armory_box_full_40sw", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -991,7 +991,7 @@
     "entries": [
       { "group": "police_armory_box_some_40fmj", "prob": 30 },
       { "group": "police_armory_box_some_40fmj", "prob": 75 },
-      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 30 ], "prob": 30 },
       { "group": "police_armory_box_full_40fmj", "count": [ 0, 6 ], "prob": 30 }
     ]
   },
@@ -1040,8 +1040,8 @@
       { "item": "usp_45", "variant": "usp_45", "prob": 50 },
       { "item": "usp_45", "variant": "usp_45", "prob": 25 },
       { "item": "usp45mag", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_usp45mag_45_acp", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_usp45mag_45_jhp", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_usp45mag_45_acp", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_usp45mag_45_jhp", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_45_acp", "prob": 30 },
       { "group": "police_armory_boxes_45_jhp", "prob": 30 },
       { "group": "police_armory_boxes_45_super", "prob": 30 }
@@ -1057,8 +1057,8 @@
       { "item": "glock_21", "prob": 50 },
       { "item": "glock_21", "prob": 25 },
       { "item": "glock_21mag", "count": [ 1, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glock_21mag_45_acp", "count": [ 0, 4 ], "prob": 30 },
-      { "group": "police_armory_full_glock_21mag_45_jhp", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_full_glock_21mag_45_acp", "count": [ 0, 3 ], "prob": 30 },
+      { "group": "police_armory_full_glock_21mag_45_jhp", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_boxes_45_acp", "prob": 30 },
       { "group": "police_armory_boxes_45_jhp", "prob": 30 },
       { "group": "police_armory_boxes_45_super", "prob": 30 }
@@ -1130,7 +1130,7 @@
     "entries": [
       { "group": "police_armory_box_some_45_jhp", "prob": 30 },
       { "group": "police_armory_box_some_45_jhp", "prob": 75 },
-      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 30 ], "prob": 30 },
       { "group": "police_armory_box_full_45_jhp", "count": [ 0, 5 ], "prob": 30 }
     ]
   },
@@ -1141,7 +1141,7 @@
     "entries": [
       { "group": "police_armory_box_some_45_acp", "prob": 30 },
       { "group": "police_armory_box_some_45_acp", "prob": 75 },
-      { "item": "ammo_box", "count": [ 30, 40 ], "prob": 30 },
+      { "item": "ammo_box", "count": [ 30, 30 ], "prob": 30 },
       { "group": "police_armory_box_full_45_acp", "count": [ 0, 5 ], "prob": 30 }
     ]
   },
@@ -1671,7 +1671,7 @@
       { "group": "police_armory_box_some_762_51" },
       { "group": "police_armory_box_some_762_51", "prob": 30 },
       { "item": "ammo_box", "count": [ 3, 20 ], "prob": 30 },
-      { "group": "police_armory_box_full_762_51", "count": [ 0, 4 ], "prob": 30 }
+      { "group": "police_armory_box_full_762_51", "count": [ 0, 3 ], "prob": 30 }
     ]
   },
   {
@@ -1936,11 +1936,11 @@
     "//": "Pick a random police shotgun.",
     "subtype": "distribution",
     "entries": [
-      { "item": "benelli_tsa", "variant": "mossberg_500_security", "prob": 30 },
+      { "item": "mossberg_500_security", "prob": 30 },
       { "item": "remington_870_express", "prob": 35 },
-      { "item": "mossberg_590", "variant": "mossberg_590", "prob": 23 },
-      { "item": "mossberg_930", "variant": "mossberg_930", "prob": 8 },
-      { "item": "mossberg_930", "variant": "m1014", "prob": 2 },
+      { "item": "mossberg_590", "prob": 23 },
+      { "item": "mossberg_930", "prob": 8 },
+      { "item": "m1014", "prob": 2 },
       { "item": "remington_870_breacher", "prob": 2 }
     ]
   },
@@ -1952,7 +1952,7 @@
       { "group": "police_armory_box_some_shot_beanbag" },
       { "group": "police_armory_box_some_shot_beanbag", "prob": 50 },
       { "group": "police_armory_box_some_shot_00", "prob": 75 },
-      { "group": "police_armory_box_full_shot_beanbag", "count": [ 0, 4 ], "prob": 30 },
+      { "group": "police_armory_box_full_shot_beanbag", "count": [ 0, 3 ], "prob": 30 },
       { "group": "police_armory_box_full_shot_00", "count": [ 0, 2 ], "prob": 30 }
     ]
   },

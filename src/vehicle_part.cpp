@@ -390,7 +390,7 @@ int vehicle_part::ammo_consume( int qty, map *here, const tripoint_bub_ms &pos )
 
 units::energy vehicle_part::consume_energy( const itype_id &ftype, units::energy wanted_energy )
 {
-    if( !is_fuel_store() ) {
+    if( !is_fuel_store() || has_flag( vp_flag::carried_flag ) ) {
         return 0_J;
     }
 
@@ -734,13 +734,6 @@ bool vehicle::can_enable( map &here, const vehicle_part &pt, bool alert ) const
     }
 
     if( pt.is_broken() ) {
-        return false;
-    }
-
-    if( pt.info().has_flag( "PLANTER" ) && !warm_enough_to_plant( get_player_character().pos_bub() ) ) {
-        if( alert ) {
-            add_msg( m_bad, _( "It is too cold to plant anything now." ) );
-        }
         return false;
     }
 

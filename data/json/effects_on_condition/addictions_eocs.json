@@ -13,15 +13,15 @@
     "condition": { "math": [ "rand(2000)", "<=", "addiction_rational(2000, 20, u_addiction_intensity('caffeine'))" ] },
     "effect": [
       { "u_message": "You want some caffeine.", "type": "warning" },
-      { "u_add_morale": "morale_craving_caffeine", "bonus": -5, "max_bonus": -30 },
+      { "u_add_morale": "morale_craving_caffeine", "bonus": -5, "max_bonus": -25 },
       {
         "if": {
           "and": [
-            { "math": [ "u_val('stim')", ">", "u_addiction_intensity('caffeine') * -10" ] },
+            { "math": [ "u_val('fatigue')", ">", "u_addiction_intensity('caffeine') * -10" ] },
             { "math": [ "rand(10)", "<", "u_addiction_intensity('caffeine')" ] }
           ]
         },
-        "then": { "math": [ "u_val('stim')", "--" ] }
+        "then": { "math": [ "u_val('fatigue')", "--" ] }
       },
       {
         "if": {
@@ -31,8 +31,8 @@
           ]
         },
         "then": [
-          { "u_message": "Your hands start shaking… you need it bad!", "type": "bad" },
-          { "u_add_effect": "shakes", "duration": "2 minutes" }
+          { "u_message": "You've got a headache.  You need caffeine to function.", "type": "bad" },
+          { "math": [ "u_pain('type': 'perceived') += 7" ] }
         ]
       }
     ]
@@ -76,48 +76,401 @@
   },
   {
     "type": "effect_on_condition",
-    "id": "EOC_MUTAGEN_ADDICTION",
-    "condition": { "u_has_trait": "MUT_JUNKIE" },
-    "effect": [
-      {
-        "if": { "math": [ "rand(600)", "<=", "addiction_rational(600, 50, u_addiction_intensity('mutagen'))" ] },
-        "then": [
-          {
-            "if": { "math": [ "rand(6)", "<", "u_addiction_intensity('mutagen')" ] },
-            "then": { "u_message": "You so miss the exquisite rainbow of post-humanity.", "type": "warning" },
-            "else": { "u_message": "Your body is SOO booorrrring.  Just a little sip to liven things up?", "type": "warning" }
-          },
-          { "u_add_morale": "morale_craving_mutagen", "bonus": -20, "max_bonus": -200 }
-        ]
-      },
-      {
-        "if": {
-          "and": [
-            { "math": [ "u_val('focus')", ">", "40" ] },
-            { "math": [ "rand(800)", "<=", "addiction_rational(800, 20, u_addiction_intensity('mutagen'))" ] }
-          ]
-        },
-        "then": [
-          { "math": [ "u_val('focus')", "-=", "u_addiction_intensity('mutagen')" ] },
-          {
-            "u_message": "You daydream what it'd be like if you were *different*.  Different is good.",
-            "type": "warning"
-          }
-        ]
-      }
-    ],
-    "false_effect": [
-      {
-        "if": { "math": [ "rand(500)", "<=", "addiction_rational(500, 15, u_addiction_intensity('mutagen'))" ] },
-        "then": [
-          {
-            "if": { "math": [ "rand(6)", "<", "u_addiction_intensity('mutagen')" ] },
-            "then": { "u_message": "You haven't had any mutagen lately.", "type": "warning" },
-            "else": { "u_message": "You could use some new parts…", "type": "warning" }
-          },
-          { "u_add_morale": "morale_craving_mutagen", "bonus": -5, "max_bonus": -50 }
-        ]
-      }
-    ]
+    "id": "EOC_ALCOHOL_WITHDRAWAL_1",
+    "recurrence": [ "10 minutes", "10 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 1 },
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_WITHDRAWAL_2_1",
+    "recurrence": [ "10 minutes", "48 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 2 },
+        { "not": { "u_has_effect": "withdrawal_alcohol", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_WITHDRAWAL_2_2",
+    "recurrence": [ "12 hours", "48 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 2 },
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 2, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_WITHDRAWAL_3_1",
+    "recurrence": [ "10 minutes", "10 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_alcohol", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_WITHDRAWAL_3_2",
+    "recurrence": [ "12 hours", "72 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_alcohol", "intensity": 3 } },
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 2, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_WITHDRAWAL_3_3",
+    "recurrence": [ "20 hours", "72 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_alcohol_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_alcohol_detoxed" } },
+        { "not": { "u_has_effect": "valium" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_alcohol", "intensity": 3, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_WITHDRAWAL_3_SHAKES",
+    "recurrence": [ "18 minutes", "12 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_alcohol", "intensity": 3 },
+        { "not": { "u_has_effect": "valium" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "shakes", "intensity": 3, "duration": { "math": [ "300 + rand(5) * 60" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_WITHDRAWAL_3_HALLU",
+    "recurrence": [ "18 minutes", "12 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_alcohol", "intensity": 3 },
+        { "not": { "u_has_effect": "valium" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "hallu", "duration": { "math": [ "1800 + rand(6) * 3600" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_DETOX",
+    "eoc_type": "EVENT",
+    "required_event": "character_loses_effect",
+    "condition": {
+      "and": [
+        { "compare_string": [ "withdrawal_alcohol_timer", { "context_val": "effect" } ] },
+        { "not": { "u_has_effect": "drunk" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_alcohol_detoxed", "duration": "PERMANENT" }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ALCOHOL_RETOX",
+    "recurrence": [ "30 seconds", "5 minutes" ],
+    "condition": {
+      "and": [
+        { "or": [ { "u_has_effect": "withdrawal_alcohol" }, { "u_has_effect": "withdrawal_alcohol_detoxed" } ] },
+        { "u_has_effect": "drunk" }
+      ]
+    },
+    "effect": [ { "u_lose_effect": "withdrawal_alcohol_detoxed" }, { "u_lose_effect": "withdrawal_alcohol" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_1",
+    "recurrence": [ "10 minutes", "6 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 1 },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_2_1",
+    "recurrence": [ "10 minutes", "6 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 2 },
+        { "not": { "u_has_effect": "withdrawal_nicotine", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_2_2",
+    "recurrence": [ "20 hours", "28 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 2 },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 2, "duration": { "math": [ "3600 + rand(2) * 3600" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_3_1",
+    "recurrence": [ "10 minutes", "10 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_nicotine", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 1, "duration": { "math": [ "1800 + rand(2) * 1800" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_WITHDRAWAL_3_2",
+    "recurrence": [ "12 hours", "72 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_nicotine_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_nicotine_detoxed" } },
+        { "not": { "u_has_effect": "cig" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine", "intensity": 2, "duration": { "math": [ "7200 + rand(2) * 3600" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_DETOX",
+    "eoc_type": "EVENT",
+    "required_event": "character_loses_effect",
+    "condition": {
+      "and": [
+        { "compare_string": [ "withdrawal_nicotine_timer", { "context_val": "effect" } ] },
+        { "not": { "u_has_effect": "cig" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_nicotine_detoxed", "duration": "PERMANENT" }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_NICOTINE_RETOX",
+    "recurrence": [ "30 seconds", "5 minutes" ],
+    "condition": {
+      "and": [
+        { "or": [ { "u_has_effect": "withdrawal_nicotine" }, { "u_has_effect": "withdrawal_nicotine_detoxed" } ] },
+        { "u_has_effect": "cig" }
+      ]
+    },
+    "effect": [ { "u_lose_effect": "withdrawal_nicotine_detoxed" }, { "u_lose_effect": "withdrawal_nicotine" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_WITHDRAWAL_1",
+    "recurrence": [ "10 minutes", "20 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_opioid_timer", "intensity": 1 },
+        { "not": { "u_has_effect": "withdrawal_opioid_detoxed" } },
+        { "not": { "u_has_effect": "opioid_eff" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_opioid", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_WITHDRAWAL_2_1",
+    "recurrence": [ "10 minutes", "48 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_opioid_timer", "intensity": 2 },
+        { "not": { "u_has_effect": "withdrawal_opioid", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_opioid_detoxed" } },
+        { "not": { "u_has_effect": "opioid_eff" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_opioid", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_WITHDRAWAL_2_2",
+    "recurrence": [ "12 hours", "48 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_opioid_timer", "intensity": 2 },
+        { "not": { "u_has_effect": "withdrawal_opioid_detoxed" } },
+        { "not": { "u_has_effect": "opioid_eff" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_opioid", "intensity": 2, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_WITHDRAWAL_3_1",
+    "recurrence": [ "10 minutes", "10 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_opioid_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_opioid", "intensity": 2 } },
+        { "not": { "u_has_effect": "withdrawal_opioid_detoxed" } },
+        { "not": { "u_has_effect": "opioid_eff" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_opioid", "intensity": 1, "duration": { "math": [ "7200 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_WITHDRAWAL_3_2",
+    "recurrence": [ "12 hours", "72 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_opioid_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_opioid", "intensity": 3 } },
+        { "not": { "u_has_effect": "withdrawal_opioid_detoxed" } },
+        { "not": { "u_has_effect": "opioid_eff" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_opioid", "intensity": 2, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_WITHDRAWAL_3_3",
+    "recurrence": [ "18 hours", "30 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_opioid_timer", "intensity": 3 },
+        { "not": { "u_has_effect": "withdrawal_opioid_detoxed" } },
+        { "not": { "u_has_effect": "opioid_eff" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_opioid", "intensity": 3, "duration": { "math": [ "14400 + rand(2) * 7200" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_WITHDRAWAL_3_SHAKES",
+    "recurrence": [ "18 minutes", "24 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_opioid", "intensity": 3 },
+        { "not": { "u_has_effect": "valium" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "shakes", "intensity": 3, "duration": { "math": [ "300 + rand(5) * 60" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_WITHDRAWAL_3_HALLU",
+    "recurrence": [ "18 minutes", "100 hours" ],
+    "condition": {
+      "and": [
+        { "u_has_effect": "withdrawal_opioid", "intensity": 3 },
+        { "not": { "u_has_effect": "valium" } },
+        { "not": { "u_has_effect": "drunk" } },
+        { "not": { "u_has_effect": "sleep" } },
+        { "not": { "u_has_effect": "narcosis" } }
+      ]
+    },
+    "effect": { "u_add_effect": "hallu", "duration": { "math": [ "1800 + rand(6) * 3600" ] } }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_DETOX",
+    "eoc_type": "EVENT",
+    "required_event": "character_loses_effect",
+    "condition": {
+      "and": [
+        { "compare_string": [ "withdrawal_opioid_timer", { "context_val": "effect" } ] },
+        { "not": { "u_has_effect": "opioid_eff" } }
+      ]
+    },
+    "effect": { "u_add_effect": "withdrawal_opioid_detoxed", "duration": "PERMANENT" }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_OPIOID_RETOX",
+    "recurrence": [ "30 seconds", "5 minutes" ],
+    "condition": {
+      "and": [
+        { "or": [ { "u_has_effect": "withdrawal_opioid" }, { "u_has_effect": "withdrawal_opioid_detoxed" } ] },
+        { "u_has_effect": "drunk" }
+      ]
+    },
+    "effect": [ { "u_lose_effect": "withdrawal_opioid_detoxed" }, { "u_lose_effect": "withdrawal_opioid" } ]
   }
 ]

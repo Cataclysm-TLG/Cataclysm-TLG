@@ -88,6 +88,8 @@ static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_wet( "wet" );
 
+
+
 static const json_character_flag json_flag_BARKY( "BARKY" );
 static const json_character_flag json_flag_CANNOT_CHANGE_TEMPERATURE( "CANNOT_CHANGE_TEMPERATURE" );
 static const json_character_flag json_flag_COLDBLOOD( "COLDBLOOD" );
@@ -97,6 +99,7 @@ static const json_character_flag json_flag_ECTOTHERM( "ECTOTHERM" );
 static const json_character_flag json_flag_HEATSINK( "HEATSINK" );
 static const json_character_flag json_flag_HEAT_IMMUNE( "HEAT_IMMUNE" );
 static const json_character_flag json_flag_IGNORE_TEMP( "IGNORE_TEMP" );
+static const json_character_flag json_flag_LIMB_BONELESS( "LIMB_BONELESS" );
 static const json_character_flag json_flag_LIMB_LOWER( "LIMB_LOWER" );
 static const json_character_flag json_flag_NO_THIRST( "NO_THIRST" );
 static const json_character_flag json_flag_PAIN_IMMUNE( "PAIN_IMMUNE" );
@@ -272,10 +275,14 @@ void Character::update_body( const time_point &from, const time_point &to )
     if( in_sleep_state() && was_sleeping ) {
         needs_rates tmp_rates;
         calc_sleep_recovery_rate( tmp_rates );
-        const int fatigue_regen_rate = tmp_rates.recovery;
-        const time_duration effective_time_slept = ( to - from ) * fatigue_regen_rate;
-        mod_daily_sleep( effective_time_slept );
-        mod_continuous_sleep( effective_time_slept );
+        const float fatigue_regen_rate = tmp_rates.recovery;
+        if( fatigue_regen_rate > 0.0f ) {
+            const int turns = to_turns<int>( to - from );
+            const time_duration effective_time_slept = time_duration::from_turns(
+                        roll_remainder( turns * fatigue_regen_rate ) );
+            mod_daily_sleep( effective_time_slept );
+            mod_continuous_sleep( effective_time_slept );
+        }
     }
     if( was_sleeping && !in_sleep_state() ) {
         if( get_continuous_sleep() >= 6_hours ) {
@@ -335,21 +342,24 @@ void Character::update_body( const time_point &from, const time_point &to )
             mod_daily_health( 1, 200 );
         }
 
+        // Low morale flags last a day, unless their morale still meets the threshold throughout days.
         if( !get_value( "got_to_low_morale" ).is_empty() ) {
             mod_daily_health( -1, -100 );
-        } else {
-            remove_value( "got_to_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_LOW ) {
+                remove_value( "got_to_low_morale" );
+            }
         }
         if( !get_value( "got_to_very_low_morale" ).is_empty() ) {
             mod_daily_health( -2, -200 );
-        } else {
-            remove_value( "got_to_very_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_VERY_LOW ) {
+                remove_value( "got_to_very_low_morale" );
+            }
         }
 
         // Being badly injured is not healthy, though your immune system might be able to handle it.
         bool wounded = false;
         for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
-            if( get_part_hp_cur( bp ) < ( get_part_hp_cur( bp ) / 2 ) ) {
+            if( get_part_hp_cur( bp ) < ( get_part_hp_max( bp ) / 2 ) ) {
                 wounded = true;
             }
         }
@@ -406,7 +416,7 @@ void Character::update_body( const time_point &from, const time_point &to )
                 // "RDA" for our character and roll a chance to get a penalty tied to how much we ate.
                 if( ( toxin_RDA > 0 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
                     int toxin_malus = static_cast<int>( std::ceil( toxin_RDA / 10.0 ) );
-                    mod_daily_health( std::max( -5, toxin_malus ), -200 );
+                    mod_daily_health( std::max( -5, -toxin_malus ), -200 );
                 }
             }
 
@@ -491,7 +501,9 @@ std::map<bodypart_id, temp_warning_record> last_temp_warnings;
 
 void Character::update_bodytemp()
 {
-    if( has_trait( trait_DEBUG_NOTEMP ) ) {
+    npc *n = as_npc();
+    if( has_trait( trait_DEBUG_NOTEMP ) ||
+        ( !is_avatar() && n && !n->is_player_ally() ) ) {
         set_all_parts_temp_conv( BODYTEMP_NORM );
         set_all_parts_temp_cur( BODYTEMP_NORM );
         return;
@@ -880,16 +892,13 @@ void Character::update_bodytemp()
         // Otherwise, if any other body part is BODYTEMP_VERY_COLD, or 31C
         // AND you have frostbite, then that also prevents you from sleeping
         if( in_sleep_state() && !has_effect( effect_narcosis ) ) {
-            if( bp == body_part_torso && temp_after <= BODYTEMP_COLD && calendar::once_every( 1_hours ) ) {
-                add_msg( m_warning, _( "You feel cold and shiver." ) );
-            }
             if( temp_after <= BODYTEMP_VERY_COLD &&
                 get_fatigue() <= fatigue_levels::DEAD_TIRED && !has_bionic( bio_sleep_shutdown ) ) {
                 if( bp == body_part_torso ) {
-                    add_msg( m_warning, _( "Your shivering prevents you from sleeping." ) );
+                    add_msg( m_warning, _( "You are too cold to sleep." ) );
                     wake_up();
                 } else if( has_effect( effect_frostbite ) ) {
-                    add_msg( m_warning, _( "You are too cold.  Your frostbite prevents you from sleeping." ) );
+                    add_msg( m_warning, _( "You are too cold.  If you sleep now, you might never wake up." ) );
                     wake_up();
                 }
             }
@@ -1182,7 +1191,7 @@ void Character::update_stomach( const time_point &from, const time_point &to )
             hunger_effect = effect_hunger_hungry;
         } else if( recently_ate ) {
             hunger_effect = effect_hunger_very_hungry;
-        } else if( get_bmi_fat() < character_weight_category::underweight ) {
+        } else if( get_bmi_fat() < character_weight_category::skinny ) {
             hunger_effect = effect_hunger_near_starving;
         } else if( get_bmi_fat() < character_weight_category::emaciated ) {
             hunger_effect = effect_hunger_starving;
@@ -1279,7 +1288,8 @@ bodypart_id Character::body_window( const std::string &menu_header,
         const nc_color all_state_col = display::limb_color( *this, bp, true, true, true );
         // Broken means no HP can be restored, it requires surgical attention.
         const bool limb_is_broken = is_limb_broken( bp );
-        const bool limb_is_mending = worn_with_flag( flag_SPLINT, bp );
+        const bool limb_is_mending = limb_is_broken && ( worn_with_flag( flag_SPLINT, bp ) ||
+                                     bp->has_flag( json_flag_LIMB_BONELESS ) );
         // How much this treatment would help, if applied to this bodypart.
         // The value itself is just a sorting number and has no actual meaning in itself, but is roughly ranged at:
         // 0-30=bandage, 30-60=disinfectant, 60-70=bitten/infected, 70-80=bleeding
@@ -1319,8 +1329,13 @@ bodypart_id Character::body_window( const std::string &menu_header,
         const auto &aligned_name = std::string( max_bp_name_len - utf8_width( e.name ), ' ' ) + e.name;
         std::string hp_str;
         if( limb_is_mending ) {
-            desc += colorize( _( "It is broken, but has been set, and just needs time to heal." ),
-                              c_blue ) + "\n";
+            if( bp->has_flag( json_flag_LIMB_BONELESS ) ) {
+                desc += colorize( _( "It is injured beyond use, but will recover on its own in time." ),
+                                  c_blue ) + "\n";
+            } else {
+                desc += colorize( _( "It is broken, but has been set, and just needs time to heal." ),
+                                  c_blue ) + "\n";
+            }
             if( no_feeling ) {
                 hp_str = colorize( "==%==", c_blue );
             } else {
@@ -1510,19 +1525,11 @@ void Character::update_heartrate_index()
     // The influence of stamina on heartrate seemeed excessive and was toned down.
     const float hr_stamina_mod = 1.6f * ( 1.0f - stamina_level );
 
-    const int stim_level = get_stim();
-    float hr_stim_mod = 0.0f;
-    if( stim_level > 0 ) {
-        //that's asymptotical function that is equal to 1 at around 30 stim level
-        //and slows down all the time almost reaching 2.
-        //Tweaking x*x multiplier will accordingly change effect accumulation
-        hr_stim_mod = 2 - 2 / ( 1 + 0.001 * stim_level * stim_level );
-    }
     float hr_nicotine_mod = 0.0f;
-    if( get_effect_dur( effect_cig ) > 0_turns ) {
-        //Nicotine-induced tachycardia
-        if( get_effect_dur( effect_cig ) >
-            10_minutes * ( addiction_level( STATIC( addiction_id( "nicotine" ) ) ) + 1 ) ) {
+    if( has_effect( effect_cig ) ) {
+        // Nicotine-induced tachycardia
+        if( get_effect_int( effect_cig ) > ( addiction_level( STATIC( addiction_id( "nicotine" ) ) ) -
+                                             9 ) ) {
             hr_nicotine_mod = 0.2f;
         } else {
             hr_nicotine_mod = 0.1f;
@@ -1603,7 +1610,7 @@ void Character::update_heartrate_index()
     constexpr float HR_EFFECT_INT_TO_FLOAT_MULT = 0.0001f;
     const float hr_effect_mod = effect_mod * HR_EFFECT_INT_TO_FLOAT_MULT;
 
-    heart_rate_index = 1.0f + hr_temp_mod + hr_activity_mods + hr_stim_mod + hr_nicotine_mod
+    heart_rate_index = 1.0f + hr_temp_mod + hr_activity_mods + hr_nicotine_mod
                        + hr_bp_loss_mod + hr_effect_mod;
 }
 

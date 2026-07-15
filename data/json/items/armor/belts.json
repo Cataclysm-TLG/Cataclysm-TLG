@@ -12,7 +12,7 @@
     "material": [ "leather", "steel" ],
     "symbol": "[",
     "looks_like": "holster",
-    "repairs_like": "leather",
+    "repairs_like": "leather_belt",
     "color": "yellow",
     "pocket_data": [
       { "max_contains_volume": "1 L", "max_contains_weight": "1500 g", "moves": 100 },
@@ -143,7 +143,6 @@
     "volume": "350 ml",
     "price": "20 USD",
     "price_postapoc": "1 USD",
-    "repairs_like": "leather",
     "material": [ { "type": "leather", "portion": 75 }, { "type": "steel", "portion": 25 } ],
     "symbol": "[",
     "color": "brown",
@@ -215,7 +214,7 @@
     "material": [ "leather", "steel" ],
     "symbol": "[",
     "looks_like": "fireman_belt",
-    "repairs_like": "leather",
+    "repairs_like": "leather_belt",
     "color": "brown",
     "pocket_data": [
       {
@@ -291,7 +290,7 @@
     "material": [ "leather", "steel" ],
     "symbol": "[",
     "looks_like": "leather_belt",
-    "repairs_like": "leather",
+    "repairs_like": "leather_belt",
     "color": "dark_gray",
     "material_thickness": 1.5,
     "pocket_data": [
@@ -417,7 +416,6 @@
     "material": [ "nylon", "steel" ],
     "symbol": "[",
     "looks_like": "leather_belt",
-    "repairs_like": "nylon",
     "color": "yellow",
     "material_thickness": 1.5,
     "pocket_data": [

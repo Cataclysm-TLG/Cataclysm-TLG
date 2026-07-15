@@ -58,6 +58,24 @@
       },
       {
         "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
+        ],
+        "covers": [ "cephalopod_tentacle_r", "cephalopod_tentacle_l" ],
+        "encumbrance": [ 14, 18 ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
+        ],
+        "covers": [ "cephalopod_tentacle_r", "cephalopod_tentacle_l" ],
+        "encumbrance": [ 14, 18 ],
+        "coverage": 95
+      },
+      {
+        "material": [
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 },
           { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.25 }
         ],
@@ -127,8 +145,7 @@
     ],
     "warmth": 7,
     "environmental_protection": 3,
-    "flags": [ "VARSIZE", "POCKETS", "STURDY" ],
-    "melee_damage": { "bash": 6 }
+    "flags": [ "VARSIZE", "POCKETS", "STURDY" ]
   },
   {
     "id": "lsurvivor_suit_xl",
@@ -209,6 +226,16 @@
       },
       {
         "material": [
+          { "type": "soft_rubber", "covered_by_mat": 90, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
+        ],
+        "covers": [ "cephalopod_tentacle_r", "cephalopod_tentacle_l" ],
+        "encumbrance": [ 14, 18 ],
+        "coverage": 95
+      },
+      {
+        "material": [
           { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.1 },
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 },
           { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.25 }
@@ -264,9 +291,8 @@
       }
     ],
     "warmth": 25,
-    "environmental_protection": 3,
-    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY" ],
-    "melee_damage": { "bash": 6 }
+    "environmental_protection": 7,
+    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY" ]
   },
   {
     "id": "survivor_suit_xl",
@@ -324,6 +350,17 @@
         "covers": [ "torso" ],
         "coverage": 100,
         "encumbrance": [ 16, 22 ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 60, "thickness": 0.1 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
+        ],
+        "covers": [ "cephalopod_tentacle_r", "cephalopod_tentacle_l" ],
+        "encumbrance": [ 14, 18 ],
+        "coverage": 95
       },
       {
         "material": [

@@ -2,7 +2,7 @@
   {
     "id": "LOOT_AMMO",
     "type": "LOOT_ZONE",
-    "name": "Loot: Ammo",
+    "name": "Storage: Ammo",
     "display_field": "fd_ammo_loot_zone",
     "can_be_personal": true,
     "description": "Destination for ammo."
@@ -10,7 +10,7 @@
   {
     "id": "LOOT_ARMOR",
     "type": "LOOT_ZONE",
-    "name": "Loot: Armor",
+    "name": "Storage: Armor",
     "display_field": "fd_armor_loot_zone",
     "can_be_personal": true,
     "description": "Destination for armor.  Does include filthy armor if such zone is not specified."
@@ -18,7 +18,7 @@
   {
     "id": "LOOT_ARTIFACTS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Artifacts",
+    "name": "Storage: Artifacts",
     "display_field": "fd_artifacts_loot_zone",
     "can_be_personal": true,
     "description": "Destination for artifacts."
@@ -26,7 +26,7 @@
   {
     "id": "LOOT_BIONICS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Bionics",
+    "name": "Storage: Bionics",
     "display_field": "fd_bionics_loot_zone",
     "can_be_personal": true,
     "description": "Destination for Compact Bionic Modules, a.k.a. CBMs."
@@ -34,7 +34,7 @@
   {
     "id": "LOOT_BOOKS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Books",
+    "name": "Storage: Books",
     "display_field": "fd_books_loot_zone",
     "can_be_personal": true,
     "description": "Destination for books and magazines."
@@ -42,7 +42,7 @@
   {
     "id": "LOOT_CHEMICAL",
     "type": "LOOT_ZONE",
-    "name": "Loot: Chemical",
+    "name": "Storage: Chemical",
     "display_field": "fd_chemical_loot_zone",
     "can_be_personal": true,
     "description": "Destination for chemicals."
@@ -50,7 +50,7 @@
   {
     "id": "LOOT_CLOTHING",
     "type": "LOOT_ZONE",
-    "name": "Loot: Clothing",
+    "name": "Storage: Clothing",
     "display_field": "fd_clothing_loot_zone",
     "can_be_personal": true,
     "description": "Destination for clothing.  Does include filthy clothing if such zone is not specified."
@@ -58,7 +58,7 @@
   {
     "id": "LOOT_CONTAINERS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Containers",
+    "name": "Storage: Containers",
     "display_field": "fd_containers_loot_zone",
     "can_be_personal": true,
     "description": "Destination for empty containers."
@@ -66,7 +66,7 @@
   {
     "id": "LOOT_CORPSE",
     "type": "LOOT_ZONE",
-    "name": "Loot: Corpses",
+    "name": "Storage: Corpses",
     "display_field": "fd_corpses_loot_zone",
     "can_be_personal": true,
     "description": "Destination for corpses."
@@ -74,7 +74,7 @@
   {
     "id": "LOOT_CURRENCY",
     "type": "LOOT_ZONE",
-    "name": "Loot: Currency",
+    "name": "Storage: Currency",
     "display_field": "fd_currency_loot_zone",
     "can_be_personal": true,
     "description": "Destination for currency."
@@ -82,7 +82,7 @@
   {
     "id": "LOOT_CUSTOM",
     "type": "LOOT_ZONE",
-    "name": "Loot: Custom",
+    "name": "Storage: Custom",
     "display_field": "fd_custom_loot_zone",
     "can_be_personal": true,
     "description": "Destination for loot with a custom filter that you can modify."
@@ -90,7 +90,7 @@
   {
     "id": "LOOT_DEFAULT",
     "type": "LOOT_ZONE",
-    "name": "Loot: Default",
+    "name": "Storage: Default",
     "display_field": "fd_default_loot_zone",
     "can_be_personal": true,
     "description": "Destination for any loot without a more specific zone defined."
@@ -98,7 +98,7 @@
   {
     "id": "LOOT_DRINK",
     "type": "LOOT_ZONE",
-    "name": "Loot: Drink",
+    "name": "Storage: Drink",
     "display_field": "fd_drink_loot_zone",
     "can_be_personal": true,
     "description": "Destination for drinks.  Does include perishable drinks if such zone is not specified."
@@ -106,7 +106,7 @@
   {
     "id": "LOOT_DRUGS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Drugs",
+    "name": "Storage: Drugs",
     "display_field": "fd_drugs_loot_zone",
     "can_be_personal": true,
     "description": "Destination for drugs and other medical items."
@@ -114,7 +114,7 @@
   {
     "id": "LOOT_FARMOR",
     "type": "LOOT_ZONE",
-    "name": "Loot: Filthy Armor",
+    "name": "Storage: Filthy Armor",
     "display_field": "fd_filthy_armor_loot_zone",
     "can_be_personal": true,
     "description": "Destination for filthy armor."
@@ -122,7 +122,7 @@
   {
     "id": "LOOT_FCLOTHING",
     "type": "LOOT_ZONE",
-    "name": "Loot: Filthy Clothing",
+    "name": "Storage: Filthy Clothing",
     "display_field": "fd_filthy_clothing_loot_zone",
     "can_be_personal": true,
     "description": "Destination for filthy clothing."
@@ -130,15 +130,15 @@
   {
     "id": "LOOT_FOOD",
     "type": "LOOT_ZONE",
-    "name": "Loot: Food",
+    "name": "Storage: Food",
     "display_field": "fd_food_loot_zone",
     "can_be_personal": true,
-    "description": "Destination for comestibles.  If more specific food zone is not defined, all food is moved here."
+    "description": "Destination for comestibles.  If a more specific food zone is not defined, all food is moved here."
   },
   {
     "id": "LOOT_FUEL",
     "type": "LOOT_ZONE",
-    "name": "Loot: Fuel",
+    "name": "Storage: Fuel",
     "display_field": "fd_fuel_loot_zone",
     "can_be_personal": true,
     "description": "Destination for gasoline, diesel, kerosene and other substances used as a fuel."
@@ -146,7 +146,7 @@
   {
     "id": "LOOT_GUNS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Guns",
+    "name": "Storage: Guns",
     "display_field": "fd_guns_loot_zone",
     "can_be_personal": true,
     "description": "Destination for guns, bows and similar weapons."
@@ -154,23 +154,23 @@
   {
     "id": "LOOT_IGNORE",
     "type": "LOOT_ZONE",
-    "name": "Loot: Ignore",
+    "name": "Storage: Ignore",
     "display_field": "fd_ignore_loot_zone",
     "can_be_personal": true,
-    "description": "Items inside of this zone are ignored by \"sort out loot\" zone-action."
+    "description": "Items inside of this zone are ignored by the \"sort out items\" zone action."
   },
   {
     "id": "LOOT_IGNORE_FAVORITES",
     "type": "LOOT_ZONE",
-    "name": "Loot: Ignore Favorites",
+    "name": "Storage: Ignore Favorites",
     "display_field": "fd_ignore_favorites_loot_zone",
     "can_be_personal": true,
-    "description": "Favorite items inside of this zone are ignored by \"sort out loot\" zone-action."
+    "description": "Favorite items inside of this zone are ignored by the \"sort out items\" zone action."
   },
   {
     "id": "LOOT_ITEM_GROUP",
     "type": "LOOT_ZONE",
-    "name": "Loot: Item Group",
+    "name": "Storage: Item Group",
     "display_field": "fd_item_group_loot_zone",
     "can_be_personal": false,
     "hidden": true,
@@ -179,7 +179,7 @@
   {
     "id": "LOOT_KEYS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Keys",
+    "name": "Storage: Keys",
     "display_field": "fd_keys_loot_zone",
     "can_be_personal": true,
     "description": "Destination for keys."
@@ -187,7 +187,7 @@
   {
     "id": "LOOT_MAGAZINES",
     "type": "LOOT_ZONE",
-    "name": "Loot: Magazines",
+    "name": "Storage: Magazines",
     "display_field": "fd_magazines_loot_zone",
     "can_be_personal": true,
     "description": "Destination for gun magazines."
@@ -195,7 +195,7 @@
   {
     "id": "LOOT_MANUALS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Manuals",
+    "name": "Storage: Manuals",
     "display_field": "fd_manuals_loot_zone",
     "can_be_personal": true,
     "description": "Destination for instructional books and magazines."
@@ -203,7 +203,7 @@
   {
     "id": "LOOT_MAPS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Maps",
+    "name": "Storage: Maps",
     "display_field": "fd_maps_loot_zone",
     "can_be_personal": true,
     "description": "Destination for maps."
@@ -211,7 +211,7 @@
   {
     "id": "LOOT_MA_MANUALS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Martial arts manuals",
+    "name": "Storage: Martial arts manuals",
     "display_field": "fd_martial_arts_manuals_loot_zone",
     "can_be_personal": true,
     "description": "Destination for manuals for martial arts."
@@ -219,7 +219,7 @@
   {
     "id": "LOOT_MODS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Mods",
+    "name": "Storage: Mods",
     "display_field": "fd_mods_loot_zone",
     "can_be_personal": true,
     "description": "Destination for firearm modifications and similar items."
@@ -227,7 +227,7 @@
   {
     "id": "LOOT_MUTAGENS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Mutagens",
+    "name": "Storage: Mutagens",
     "display_field": "fd_mutagens_loot_zone",
     "can_be_personal": true,
     "description": "Destination for mutagens, serums, and purifiers."
@@ -235,7 +235,7 @@
   {
     "id": "LOOT_OTHER",
     "type": "LOOT_ZONE",
-    "name": "Loot: Other",
+    "name": "Storage: Other",
     "display_field": "fd_other_loot_zone",
     "can_be_personal": true,
     "description": "Destination for other miscellaneous items."
@@ -243,7 +243,7 @@
   {
     "id": "LOOT_PDRINK",
     "type": "LOOT_ZONE",
-    "name": "Loot: Perishable Drink",
+    "name": "Storage: Perishable Drink",
     "display_field": "fd_perishable_drink_loot_zone",
     "can_be_personal": true,
     "description": "Destination for perishable drinks."
@@ -251,7 +251,7 @@
   {
     "id": "LOOT_PFOOD",
     "type": "LOOT_ZONE",
-    "name": "Loot: Perishable Food",
+    "name": "Storage: Perishable Food",
     "display_field": "fd_perishable_food_loot_zone",
     "can_be_personal": true,
     "description": "Destination for perishable comestibles.  Does include perishable drinks if such zone is not specified."
@@ -259,7 +259,7 @@
   {
     "id": "LOOT_SEEDS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Seeds",
+    "name": "Storage: Seeds",
     "display_field": "fd_seeds_loot_zone",
     "can_be_personal": true,
     "description": "Destination for seeds, stems and similar items."
@@ -267,7 +267,7 @@
   {
     "id": "LOOT_SPARE_PARTS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Spare Parts",
+    "name": "Storage: Spare Parts",
     "display_field": "fd_spare_parts_loot_zone",
     "can_be_personal": true,
     "description": "Destination for spare parts."
@@ -275,7 +275,7 @@
   {
     "id": "LOOT_TOOL_MAGAZINE",
     "type": "LOOT_ZONE",
-    "name": "Loot: Tool Magazines",
+    "name": "Storage: Tool Magazines",
     "display_field": "fd_tool_magazines_loot_zone",
     "can_be_personal": true,
     "description": "Destination for tool magazines."
@@ -283,7 +283,7 @@
   {
     "id": "LOOT_TOOLS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Tools",
+    "name": "Storage: Tools",
     "display_field": "fd_tools_loot_zone",
     "can_be_personal": true,
     "description": "Destination for tools."
@@ -291,7 +291,7 @@
   {
     "id": "LOOT_TRAPS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Traps",
+    "name": "Storage: Traps",
     "display_field": "fd_traps_loot_zone",
     "can_be_personal": true,
     "description": "Destination for traps."
@@ -299,15 +299,15 @@
   {
     "id": "LOOT_UNSORTED",
     "type": "LOOT_ZONE",
-    "name": "Loot: Unsorted",
+    "name": "Storage: Unsorted",
     "display_field": "fd_unsorted_loot_zone",
     "can_be_personal": true,
-    "description": "Place to drop unsorted loot.  You can use \"sort out loot\" zone-action to sort items inside.  It can overlap with Loot zones of different types."
+    "description": "A space for items which are to be sorted into other storage zones.  You can use the \"sort out items\" zone action to automatically move items from here to any valid destinations, including ones contained within this zone."
   },
   {
     "id": "LOOT_VEHICLE_PARTS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Vehicle Parts",
+    "name": "Storage: Vehicle Parts",
     "display_field": "fd_vehicle_parts_loot_zone",
     "can_be_personal": true,
     "description": "Destination for vehicle parts."
@@ -315,7 +315,7 @@
   {
     "id": "LOOT_WEAPONS",
     "type": "LOOT_ZONE",
-    "name": "Loot: Weapons",
+    "name": "Storage: Melee Weapons",
     "display_field": "fd_weapons_loot_zone",
     "can_be_personal": true,
     "description": "Destination for melee weapons."
@@ -323,15 +323,15 @@
   {
     "id": "LOOT_WOOD",
     "type": "LOOT_ZONE",
-    "name": "Loot: Wood",
+    "name": "Storage: Wood",
     "display_field": "fd_wood_loot_zone",
     "can_be_personal": true,
-    "description": "Destination for firewood and items that can be used as such."
+    "description": "Destination for firewood and lumber.  Items stored here will not automatically be used to fuel fires unless this area is also designated as a firewood zone."
   },
   {
     "id": "STRIP_CORPSES",
     "type": "LOOT_ZONE",
-    "name": "Loot: Strip Corpses",
+    "name": "Storage: Strip Corpses",
     "display_field": "fd_strip_corpses_loot_zone",
     "can_be_personal": true,
     "description": "Corpses in this zone you don't otherwise sort will have everything taken off them and dropped on the same tile."
@@ -339,7 +339,7 @@
   {
     "id": "UNLOAD_ALL",
     "type": "LOOT_ZONE",
-    "name": "Loot: Unload Everything",
+    "name": "Storage: Unload Everything",
     "display_field": "fd_unload_everything_loot_zone",
     "can_be_personal": true,
     "description": "Any containers in this zone you don't otherwise sort will have their contents dumped out and placed on the same tile.  This includes corpses, magazines, and magazine wells."

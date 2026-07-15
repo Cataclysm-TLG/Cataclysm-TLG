@@ -150,6 +150,9 @@ static const efftype_id effect_bleed( "bleed" );
 static const faction_id faction_no_faction( "no_faction" );
 static const faction_id faction_your_followers( "your_followers" );
 
+static const itype_id itype_architect_cube( "architect_cube" );
+static const itype_id itype_debug_backpack( "debug_backpack" );
+
 static const matype_id style_none( "style_none" );
 
 static const mongroup_id GROUP_DEBUG_EXACTLY_ONE( "GROUP_DEBUG_EXACTLY_ONE" );
@@ -224,6 +227,7 @@ std::string enum_to_string<debug_menu::debug_menu_index>( debug_menu::debug_menu
         case debug_menu::debug_menu_index::BLEED_SELF: return "BLEED_SELF";
         case debug_menu::debug_menu_index::SHOW_SOUND: return "SHOW_SOUND";
         case debug_menu::debug_menu_index::DISPLAY_WEATHER: return "DISPLAY_WEATHER";
+        case debug_menu::debug_menu_index::DISPLAY_SNOW_DEPTH: return "DISPLAY_SNOW_DEPTH";
         case debug_menu::debug_menu_index::DISPLAY_SCENTS: return "DISPLAY_SCENTS";
         case debug_menu::debug_menu_index::CHANGE_TIME: return "CHANGE_TIME";
         case debug_menu::debug_menu_index::FORCE_TEMP: return "FORCE_TEMP";
@@ -619,16 +623,16 @@ static void monster_ammo_edit( monster &mon )
     }
 }
 
-// static std::string query_npctalkvar_new_value()
-// {
-//     std::string value;
-//     string_input_popup popup_val;
-//     popup_val
-//     .title( _( "Value" ) )
-//     .width( 85 )
-//     .edit( value );
-//     return value;
-// }
+static std::string query_var_value_text()
+{
+    std::string value;
+    string_input_popup popup_val;
+    popup_val
+    .title( _( "Text value:" ) )
+    .width( 85 )
+    .edit( value );
+    return value;
+}
 
 static void edit_vars( std::string const &title, global_variables::impl_t &vars )
 {
@@ -664,9 +668,23 @@ static void edit_vars( std::string const &title, global_variables::impl_t &vars 
         .title( _( "Key\n" ) )
         .width( 85 )
         .edit( key );
-        // globvars.set_global_value( key, query_npctalkvar_new_value() );
+        if( query_yn( "Is the value a number or a text?  [Y]es for number, [N]o for text." ) ) {
+            int value;
+            query_int( value, false, "Numeric value:" );
+            get_globals().set_global_value( key, value );
+        } else {
+            const std::string value = query_var_value_text();
+            get_globals().set_global_value( key, value );
+        }
     } else if( selected_globvar > 0 && selected_globvar <= static_cast<int>( keymap_index.size() ) ) {
-        // globvars.set_global_value( keymap_index[selected_globvar], query_npctalkvar_new_value() );
+        if( query_yn( "Is the value a number or a text?  [Y]es for number, [N]o for text." ) ) {
+            int value;
+            query_int( value, false, "Numeric value:" );
+            get_globals().set_global_value( keymap_index[selected_globvar], value );
+        } else {
+            const std::string value = query_var_value_text();
+            get_globals().set_global_value( keymap_index[selected_globvar], value );
+        }
     }
 }
 
@@ -895,6 +913,7 @@ static int info_uilist( bool display_all_entries = true )
             { uilist_entry( debug_menu_index::TEST_IT_GROUP, true, 'i', _( "Test item group" ) ) },
             { uilist_entry( debug_menu_index::SHOW_SOUND, true, 'c', _( "Show sound clustering" ) ) },
             { uilist_entry( debug_menu_index::DISPLAY_WEATHER, true, 'w', _( "Display weather" ) ) },
+            { uilist_entry( debug_menu_index::DISPLAY_SNOW_DEPTH, true, 'W', _( "Toggle display snow depth" ) ) },
             { uilist_entry( debug_menu_index::DISPLAY_SCENTS, true, 'S', _( "Display overmap scents" ) ) },
             { uilist_entry( debug_menu_index::DISPLAY_SCENTS_LOCAL, true, 's', _( "Toggle display local scents" ) ) },
             { uilist_entry( debug_menu_index::DISPLAY_SCENTS_TYPE_LOCAL, true, 'y', _( "Toggle display local scents type" ) ) },
@@ -3976,10 +3995,8 @@ void debug()
 
         case debug_menu_index::SPAWN_HORDE: {
             const tripoint_abs_ms &player_abs_ms = get_player_character().pos_abs();
-            tripoint_abs_sm horde_dest = project_to<coords::sm>( player_abs_ms );
-            horde_dest = horde_dest + point{0, -20}; // 20 submaps to the north
-            overmap &om = overmap_buffer.get( project_to<coords::om>( player_abs_ms ).xy() );
-            om.debug_force_add_group( mongroup( GROUP_DEBUG_EXACTLY_ONE, horde_dest, 1 ) );
+            tripoint_abs_sm horde_dest = project_to<coords::sm>( player_abs_ms + point{0, -240} );
+            overmap_buffer.spawn_mongroup( horde_dest, GROUP_DEBUG_EXACTLY_ONE, 1 );
         }
         break;
 
@@ -4065,7 +4082,7 @@ void debug()
             break;
 
         case debug_menu_index::SPAWN_CLAIRVOYANCE:
-            player_character.i_add( item( "architect_cube", calendar::turn ) );
+            player_character.i_add( item( itype_architect_cube, calendar::turn ) );
             break;
 
         case debug_menu_index::MAP_EDITOR:
@@ -4103,6 +4120,7 @@ void debug()
             g->cleanup_dead();
         }
         break;
+
         case debug_menu_index::DISPLAY_HORDES:
             ui::omap::display_hordes();
             break;
@@ -4142,6 +4160,9 @@ void debug()
             break;
         case debug_menu_index::DISPLAY_TEMP:
             g->display_toggle_overlay( ACTION_DISPLAY_TEMPERATURE );
+            break;
+        case debug_menu_index::DISPLAY_SNOW_DEPTH:
+            g->display_toggle_overlay( ACTION_DISPLAY_SNOW_DEPTH );
             break;
         case debug_menu_index::DISPLAY_VEHICLE_AI:
             g->display_toggle_overlay( ACTION_DISPLAY_VEHICLE_AI );
@@ -4378,7 +4399,7 @@ void debug()
             u.set_mutations( setup_traits );
             u.remove_weapon();
             u.clear_worn();
-            item backpack( "debug_backpack" );
+            item backpack( itype_debug_backpack );
             u.wear_item( backpack );
             for( const std::pair<const skill_id, SkillLevel> &pair : u.get_all_skills() ) {
                 u.set_skill_level( pair.first, 10 );

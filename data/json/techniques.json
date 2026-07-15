@@ -60,6 +60,15 @@
   },
   {
     "type": "technique",
+    "id": "WBLOCK_0",
+    "name": "Block",
+    "dummy": true,
+    "mult_bonuses": [ { "stat": "movecost", "scale": 0.0 } ],
+    "messages": [ "You block %s!", "<npcname> blocks %s!" ],
+    "description": "Poor blocking ability"
+  },
+  {
+    "type": "technique",
     "id": "WBLOCK_1",
     "name": "Block",
     "dummy": true,
@@ -102,7 +111,7 @@
         "message": "%s has lost control of their weapon!"
       }
     ],
-    "attack_vectors": [ "vector_grasp" ]
+    "attack_vectors": [ "vector_grasp", "vector_null" ]
   },
   {
     "type": "technique",
@@ -139,6 +148,21 @@
     "messages": [ "You pierce straight through %s", "<npcname> pierces through %s!" ],
     "aoe": "impale",
     "description": "Attack target and another one behind it, crit only, min 4 melee",
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_aoe_secondary",
+    "name": "Area Attack (secondary)",
+    "//": "Weakened generic hit that serves as the second part of all aoe attacks.",
+    "messages": [ "You catch %s with your attack", "<npcname> catches %s with their attack" ],
+    "melee_allowed": true,
+    "mult_bonuses": [
+      { "stat": "damage", "type": "bash", "scale": 0.5 },
+      { "stat": "damage", "type": "cut", "scale": 0.5 },
+      { "stat": "damage", "type": "stab", "scale": 0.5 },
+      { "stat": "movecost", "scale": 0.0 }
+    ],
     "attack_vectors": [ "vector_null" ]
   },
   {
@@ -245,7 +269,8 @@
         },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
-        { "not": { "npc_bodytype": "snake" } }
+        { "not": { "npc_bodytype": "snake" } },
+        { "not": { "npc_has_effect": "downed" } }
       ]
     },
     "condition_desc": "* Only works on a target of <info>similar size</info>, tests intelligence and strength",
@@ -272,7 +297,8 @@
         },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
-        { "not": { "npc_bodytype": "snake" } }
+        { "not": { "npc_bodytype": "snake" } },
+        { "not": { "npc_has_effect": "downed" } }
       ]
     },
     "mult_bonuses": [
@@ -847,7 +873,7 @@
           "or": [
             { "npc_bodytype": "human" },
             { "npc_bodytype": "mi-go" },
-            { "npc_bodytype": "kangoroo" },
+            { "npc_bodytype": "kangaroo" },
             { "npc_bodytype": "horse" },
             { "npc_bodytype": "bear" },
             { "npc_bodytype": "angel" }
@@ -1728,6 +1754,80 @@
   },
   {
     "type": "technique",
+    "id": "tec_kalaripayattu_successive_strike",
+    "name": "Successive Strike",
+    "messages": [ "You quickly attack %s", "<npcname> quickly attack %s!" ],
+    "melee_allowed": true,
+    "reach_ok": true,
+    "weighting": 2,
+    "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
+    "skill_requirements": [ { "name": "melee", "level": 2 } ],
+    "mult_bonuses": [
+      { "stat": "movecost", "scale": 0.5 },
+      { "stat": "damage", "type": "bash", "scale": 0.66 },
+      { "stat": "damage", "type": "cut", "scale": 0.66 },
+      { "stat": "damage", "type": "stab", "scale": 0.66 }
+    ],
+    "description": "50% moves, 66% damage, min 2 melee",
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_kalaripayattu_marma_sastram",
+    "name": "Marma Sastram",
+    "messages": [ "You spot your opening and strike at %s", "<npcname> spots an opening and strikes at %s!" ],
+    "melee_allowed": true,
+    "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
+    "crit_tec": true,
+    "reach_ok": true,
+    "weighting": 2,
+    "skill_requirements": [ { "name": "melee", "level": 2 } ],
+    "flat_bonuses": [
+      { "stat": "damage", "type": "bash", "scaling-stat": "per", "scale": 0.5 },
+      { "stat": "damage", "type": "cut", "scaling-stat": "per", "scale": 0.5 },
+      { "stat": "damage", "type": "stab", "scaling-stat": "per", "scale": 0.5 }
+    ],
+    "description": "50% of perception added to damage, grants Simha Vadivu.",
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_kalaripayattu_chakra_veeshu",
+    "name": "Chakra Veeshu",
+    "messages": [
+      "You lash in a wide circle, hitting %s and everything around you",
+      "<npcname> lashes in a wide circle, hitting %s and everything around them!"
+    ],
+    "skill_requirements": [ { "name": "melee", "level": 5 } ],
+    "required_buffs_all": [ "buff_kalaripayattu_chuvadu" ],
+    "melee_allowed": true,
+    "weapon_categories_allowed": [ "WHIPS" ],
+    "aoe": "spin",
+    "condition": { "and": [ { "not": { "u_has_flag": "GRAB_FILTER" } }, { "not": { "u_has_flag": "GRAB" } } ] },
+    "mult_bonuses": [ { "stat": "movecost", "scale": 1.33 } ],
+    "description": "Whip-only AOE attack.",
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_kalaripayattu_focused_strike",
+    "name": "Focused Strike",
+    "messages": [ "You press the attack, striking %s", "<npcname> presses the attack, striking %s!" ],
+    "melee_allowed": true,
+    "reach_ok": true,
+    "required_buffs_all": [ "buff_kalaripayattu_simha_vadivu" ],
+    "crit_ok": true,
+    "weighting": 2,
+    "skill_requirements": [ { "name": "melee", "level": 3 } ],
+    "flat_bonuses": [
+      { "stat": "damage", "type": "bash", "scaling-stat": "per", "scale": 0.5 },
+      { "stat": "damage", "type": "cut", "scaling-stat": "per", "scale": 0.5 },
+      { "stat": "damage", "type": "stab", "scaling-stat": "per", "scale": 0.5 }
+    ],
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
     "id": "tec_kickboxing_rapid",
     "name": "Jab",
     "messages": [ "You quickly jab %s", "<npcname> quickly jabs at %s!" ],
@@ -1805,7 +1905,7 @@
           "or": [
             { "npc_bodytype": "human" },
             { "npc_bodytype": "mi-go" },
-            { "npc_bodytype": "kangoroo" },
+            { "npc_bodytype": "kangaroo" },
             { "npc_bodytype": "horse" },
             { "npc_bodytype": "bear" },
             { "npc_bodytype": "angel" }
@@ -2193,7 +2293,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.4 },
       { "stat": "damage", "type": "stab", "scale": 1.4 }
     ],
-    "attack_vectors": [ "vector_shin", "vector_foot_toes", "vector_talon", "vector_hoof_toe" ]
+    "attack_vectors": [ "vector_shin" ]
   },
   {
     "type": "technique",
@@ -3058,9 +3158,9 @@
     "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, requires <info>Cross Hands</info>",
     "knockback_dist": 1,
     "mult_bonuses": [
-      { "stat": "damage", "type": "bash", "scale": 1.5 },
-      { "stat": "damage", "type": "cut", "scale": 1.5 },
-      { "stat": "damage", "type": "stab", "scale": 1.5 }
+      { "stat": "damage", "type": "bash", "scale": 1.15 },
+      { "stat": "damage", "type": "cut", "scale": 1.15 },
+      { "stat": "damage", "type": "stab", "scale": 1.15 }
     ],
     "attack_vectors": [ "vector_palm" ]
   },
@@ -3085,12 +3185,7 @@
     },
     "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, requires <info>Repulse the Monkey</info>",
     "down_dur": 1,
-    "mult_bonuses": [
-      { "stat": "movecost", "scale": 0.75 },
-      { "stat": "damage", "type": "bash", "scale": 1.2 },
-      { "stat": "damage", "type": "cut", "scale": 1.2 },
-      { "stat": "damage", "type": "stab", "scale": 1.2 }
-    ],
+    "mult_bonuses": [ { "stat": "movecost", "scale": 0.75 } ],
     "attack_vectors": [ "vector_grasp" ]
   },
   {
@@ -3130,9 +3225,9 @@
     "tech_effects": [ { "id": "staggered", "chance": 80, "duration": 200, "on_damage": true, "message": "%s is knocked off-balance!" } ],
     "knockback_dist": 1,
     "mult_bonuses": [
-      { "stat": "damage", "type": "bash", "scale": 2.0 },
-      { "stat": "damage", "type": "cut", "scale": 2.0 },
-      { "stat": "damage", "type": "stab", "scale": 2.0 }
+      { "stat": "damage", "type": "bash", "scale": 1.5 },
+      { "stat": "damage", "type": "cut", "scale": 1.5 },
+      { "stat": "damage", "type": "stab", "scale": 1.5 }
     ],
     "attack_vectors": [ "vector_palm" ]
   },

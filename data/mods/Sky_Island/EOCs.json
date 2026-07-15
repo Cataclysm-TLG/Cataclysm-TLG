@@ -38,8 +38,9 @@
               },
               {
                 "location_variable_adjust": { "global_val": "OM_missionspot" },
-                "x_adjust": [ -2, -1, 1, 2 ],
-                "y_adjust": [ -2, -1, 1, 2 ]
+                "//": "Adjust by 1 or 2 in either direction",
+                "x_adjust": { "math": [ "((-1) ^ rand(1)) * (rand(1) + 1)" ] },
+                "y_adjust": { "math": [ "((-1) ^ rand(1)) * (rand(1) + 1)" ] }
               }
             ]
           }
@@ -69,8 +70,8 @@
               { "u_teleport": { "global_val": "OM_HQ_origin_npc" }, "force": true },
               {
                 "location_variable_adjust": { "global_val": "OM_HQ_origin_npc" },
-                "x_adjust": [ -2, -1, 1, 2 ],
-                "y_adjust": [ -2, -1, 1, 2 ]
+                "x_adjust": [ -2, 2 ],
+                "y_adjust": [ -2, 2 ]
               }
             ]
           }

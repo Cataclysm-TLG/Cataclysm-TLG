@@ -66,7 +66,7 @@
 
 ## Notes
 
-- Some flags (items, effects, vehicle parts) have to be defined in `flags.json` or `vp_flags.json` (with type: `json_flag`) to work correctly.
+- Some flags (items, effects, vehicle parts, construction pre_flags) have to be defined in `flags.json` or `vp_flags.json` (with type: `json_flag`) to work correctly.
 - Many of the flags intended for one category or item type can be used in other categories or item types.  Experiment to see where else flags can be used.
 - Offensive and defensive flags can be used on any item type that can be wielded.
 
@@ -420,6 +420,7 @@ Character flags can be `trait_id`, `json_flag_id` or `flag_id`.  Some of these a
 - ```SHAPESHIFT_SIZE_SMALL``` Changes your size to `creature_size::small`.  Checked second of the shapeshift size category flags and before any normal size flag.
 - ```SHAPESHIFT_SIZE_TINY``` Changes your size to `creature_size::tiny`.  Checked second of the shapeshift size category flags and before any normal size flag.
 - ```SLUDGE_IMMUNE``` Critter is immune to sludge trail field (`fd_sludge`)
+- ```SNOWWALKING``` Character's movement is not slowed by snow depth
 - ```SMALL``` Changes your size to `creature_size::small`.  Checked second of the size category flags.
 - ```SPIRITUAL``` Changes character's moral behaviour in some situations.
 - ```STAB_IMMUNE``` You are immune to stabbing damage.
@@ -587,6 +588,7 @@ These are checked by hardcode for monsters (introducing new flags will require C
 ## Furniture and Terrain
 
 List of known flags, used in both `furniture` and `terrain`.  Some work for both, others are limited to either.
+Can also be used as `pre_flags` for `construction`.
 
 - ```ALARMED``` Sets off an alarm if smashed.
 - ```ALLOW_FIELD_EFFECT``` Apply field effects to items inside `SEALED` terrain/furniture.
@@ -642,9 +644,10 @@ List of known flags, used in both `furniture` and `terrain`.  Some work for both
 - ```FRESH_WATER``` Source of fresh water.  Will spawn fresh water (once) on terrains with `SPAWN_WITH_LIQUID` flag.
 - ```GOES_DOWN``` Can use <kbd>></kbd> to go down a level.
 - ```GOES_UP``` Can use <kbd><</kbd> to go up a level.
-- ```GROWTH_HARVEST``` This plant is ready for harvest.
-- ```GROWTH_MATURE``` This plant is in a mature stage of a growth.
-- ```GROWTH_SEEDLING``` This plant is in its seedling stage of growth.
+- ```GROWTH_HARVEST``` This plant is ready for harvest. Generic json flag, not all plants may use this!
+- ```GROWTH_MATURE``` This plant is in a mature stage of a growth. Generic json flag, not all plants may use this!
+- ```GROWTH_SEEDLING``` This plant is in its seedling stage of growth. Generic json flag, not all plants may use this!
+- ```GROWTH_SEED``` This plant was just planted, not grown yet. Generic json flag, not all plants may use this!
 - ```HARVESTED``` Marks the harvested version of a terrain type (e.g. harvesting an apple tree turns it into a harvested tree, which later becomes an apple tree again).
 - ```HIDE_PLACE``` Creatures on this tile can't be seen by creatures not standing on adjacent tiles.
 - ```INDOORS``` Has a roof over it; blocks rain, sunlight, etc.
@@ -681,6 +684,7 @@ List of known flags, used in both `furniture` and `terrain`.  Some work for both
 - ```RAMP_UP``` The end of a ramp that leads up, walking into this moves you one z-level up.  Overrides `WALL`, while still displaying the tile as Impassable.
 - ```RAMP``` Can be used to move up a z-level.
 - ```REDUCE_SCENT``` Reduces scent diffusion (not total amount of scent in area); only works if also bashable.
+- ```REGION_PSEUDO``` Replaced by other terrain/furniture during mapgen; should not spawn.
 - ```ROAD``` Flat and hard enough to drive or skate (with rollerblades) on.
 - ```ROUGH``` May hurt the player's feet.
 - ```RUBBLE``` Furniture behaves like rubble: it can be cleared by the `CLEAR_RUBBLE` item action.  Can be applied to terrain, but it "clears up the nothing".
@@ -777,6 +781,7 @@ These flags can be applied via JSON item definition to most items.  Not to be co
 - ```CRUTCHES``` Item with this flag helps characters not to fall down if their legs are broken.
 - ```CUSTOM_EXPLOSION``` Flag, automatically applied to items that has defined `explosion` data in definition.  See `JSON_INFO.md`.
 - ```CUT_HARVEST``` You need a grass-cutting tool like sickle to harvest this plant.
+- ```DAMAGE_VEHICLE_WHEELS``` This item can damage a vehicle's wheels when it is run over.
 - ```DANGEROUS``` NPCs will not accept this item.  Explosion iuse actor implies this flag.  Implies `NPC_THROW_NOW`.
 - ```DETERGENT``` This item can be used as a detergent in a washing machine.
 - ```DISCOUNT_VALUE_1``` This item gives a small discount for fuel, bought in automated gas console.
@@ -1470,7 +1475,6 @@ Techniques may be used by tools, armors, weapons and anything else that can be w
 - ```FIRE``` Item will start a fire immediately.
 - ```HAS_RECIPE``` Used by the E-Ink tablet to indicate it's currently showing a recipe.
 - ```IS_UPS``` Item is Unified Power Supply.  Used in active item processing.
-- ```LIGHT_[X]``` Illuminates the area with light intensity `[X]` where `[X]` is an intensity value (e.g. `LIGHT_4` or `LIGHT_100`).  Note: this flags sets `itype::light_emission` field and then is removed (can't be found using `has_flag`).
 - ```NO_DROP``` Item should never exist on map tile as a discrete item (must be contained by another item).
 - ```NO_UNLOAD``` Cannot be unloaded.
 - ```POWERED``` If turned ON, item uses its own source of power, instead of relying on power of the user.
@@ -1515,8 +1519,6 @@ These flags apply to the `use_action` field, instead of the `flags` field.
 - ```EXTINGUISHER``` Put out fires.
 - ```FIRECRACKER_ACT``` The saddest Fourth of July.
 - ```FIRECRACKER_PACK_ACT``` Keep the change you filthy animal.
-- ```FIRECRACKER_PACK``` Light an entire packet of firecrackers.
-- ```FIRECRACKER``` Light a singular firecracker.
 - ```FLASHBANG``` Pull the pin on a flashbang.
 - ```GEIGER``` Detect local radiation levels.
 - ```GRANADE_ACT``` Assaults enemies with source code fixes?
@@ -1552,7 +1554,6 @@ These flags apply to the `use_action` field, instead of the `flags` field.
 - ```PLACE_RANDOMLY``` This is very much like the flag in the `manhack` iuse, it prevents the item from querying the player as to where they want the monster unloaded to, and instead chooses randomly.
 - ```PORTABLE_GAME``` Play games.
 - ```PORTAL``` Create portal traps.
-- ```RADIO_OFF``` Turn the radio on.
 - ```RADIO_ON``` Turn the radio off.
 - ```RAG``` Stop the bleeding.
 - ```RESTAURANTMAP``` Learn of local eateries, and show roads.
@@ -1669,6 +1670,8 @@ Note: Vehicle parts requiring other parts is defined by setting a `requires_flag
 - ```FREEZER``` Can freeze items in below zero degrees Celsius temperature.
 - ```FRIDGE``` Can refrigerate items.
 - ```FUNNEL``` If installed over a vehicle tank, can collect rainwater during rains.
+- ```FURNITURE_LIFT_ASSIST``` This part has bonus effective strength when 'e'xamining it to load furniture onto it. Requires the part to also be FURNITURE_TIEDOWN. Bonus is currently set to 5.
+- ```FURNITURE_TIEDOWN``` This part can have furniture loaded onto it. Requires the part to also be CARGO.
 - ```HALF_CIRCLE_LIGHT``` Projects a directed half-circular radius of light when turned on.
 - ```HANDHELD_BATTERY_MOUNT``` Same as `BATTERY_MOUNT`, but for handheld battery mount.
 - ```HARNESS_bodytype``` Replace bodytype with `any` to accept any type, or with the targeted type.
@@ -1711,6 +1714,7 @@ Note: Vehicle parts requiring other parts is defined by setting a `requires_flag
 - ```REAPER``` Cuts down mature crops, depositing them on the square.
 - ```RECHARGE``` Recharge items with the same flag (currently only the rechargeable battery mod).
 - ```REMOTE_CONTROLS``` Once installed, allows using vehicle through remote controls.
+- ```RESIST_RUNOVER_DAMAGE``` For wheels, doubles effective hardness when calculating chance to be damaged when running over items. Only useful on WHEEL parts.
 - ```REVERSIBLE``` Removal has identical requirements to installation but is twice as quick.
 - ```ROOF``` Covers a section of the vehicle.  Areas of the vehicle that have a roof and roofs on surrounding sections, are considered inside.  Otherwise they're outside.
 - ```SCOOP``` Pulls items from underneath the vehicle to the cargo space of the part.  Also mops up liquids.

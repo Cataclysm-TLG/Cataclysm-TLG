@@ -54,7 +54,6 @@ static const faction_id faction_your_followers( "your_followers" );
 static const item_category_id item_category_food( "food" );
 
 static const itype_id itype_disassembly( "disassembly" );
-static const itype_id itype_null( "null" );
 
 static const zone_type_id zone_type_AUTO_DRINK( "AUTO_DRINK" );
 static const zone_type_id zone_type_AUTO_EAT( "AUTO_EAT" );
@@ -153,6 +152,11 @@ void zone_type::load_zones( const JsonObject &jo, const std::string &src )
     zone_type_factory.load( jo, src );
 }
 
+void zone_type::finalize_all()
+{
+    zone_type_factory.finalize();
+}
+
 void zone_type::reset()
 {
     zone_type_factory.reset();
@@ -222,7 +226,7 @@ construction_id blueprint_options::get_final_construction(
         }
         const construction &con_next = list_constructions[i];
         if( con.group == con_next.group &&
-            con.post_terrain == con_next.pre_terrain ) {
+            ( con_next.pre_terrain.find( con.post_terrain ) != con_next.pre_terrain.end() ) ) {
             skip_index.insert( idx );
             return get_final_construction( list_constructions, construction_id( i ), skip_index );
         }
@@ -319,7 +323,7 @@ plot_options::query_seed_result plot_options::query_seed()
         }
     }
     std::vector<seed_tuple> seed_entries = iexamine::get_seed_entries( seed_inv );
-    seed_entries.emplace( seed_entries.begin(), itype_null, _( "No seed" ), 0 );
+    seed_entries.emplace( seed_entries.begin(), itype_id::NULL_ID(), _( "No seed" ), 0 );
 
     int seed_index = iexamine::query_seed( seed_entries );
 
@@ -418,9 +422,9 @@ std::string blueprint_options::get_zone_name_suggestion() const
 std::string loot_options::get_zone_name_suggestion() const
 {
     if( !mark.empty() ) {
-        return string_format( _( "Loot: Custom: %s" ), mark );
+        return string_format( _( "Custom Storage: %s" ), mark );
     }
-    return _( "Loot: Custom: No Filter" );
+    return _( "Custom Storage: No Filter" );
 }
 
 std::string plot_options::get_zone_name_suggestion() const
@@ -1152,6 +1156,10 @@ bool zone_manager::custom_loot_has( const tripoint_abs_ms &where, const item *it
     }
     item const *const check_it = it->this_or_single_content();
     for( zone_data const *zone : zones ) {
+        if( !zone->get_enabled() ) {
+            continue;
+        }
+
         loot_options const &options = dynamic_cast<const loot_options &>( zone->get_options() );
         std::string const filter_string = options.get_mark();
         bool has = false;

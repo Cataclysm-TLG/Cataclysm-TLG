@@ -33,7 +33,6 @@
       { "item": "fish", "count": [ 5, 20 ] },
       { "item": "fish_smoked", "count": [ 1, 4 ] },
       { "item": "fish_cooked", "count": [ 4, 14 ] },
-      { "item": "salted_fish", "count": [ 2, 6 ] },
       { "item": "fish_fried", "count": [ 2, 6 ] },
       { "item": "soup_fish", "count": [ 35, 50 ], "container-item": "bottle_plastic" },
       { "item": "fishspear", "prob": 20, "count": [ 4, 8 ] },

@@ -18,7 +18,7 @@
     "stack_size": 20,
     "ammo_type": "410shot",
     "casing": "410shot_hull",
-    "range": 12,
+    "range": 15,
     "//": ".408in, 110gr, Thug Slug(yes it's called that, ugh), 20.5gr Alliant 2400",
     "damage": {
       "damage_type": "bullet",
@@ -69,7 +69,7 @@
     "name": { "str_sp": ".410 slug, reloaded" },
     "proportional": { "price": 0.7, "price_postapoc": 0.7, "damage": { "damage_type": "bullet", "amount": 0.9 }, "dispersion": 1.1 },
     "extend": { "effects": [ "RECYCLED" ] },
-    "delete": { "effects": [ "NEVER_MISFIRES" ], "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
+    "delete": { "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
   },
   {
     "id": "bp_410shot_slug",
@@ -78,8 +78,7 @@
     "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".410 slug, black powder" },
     "proportional": { "price": 0.6, "price_postapoc": 0.6, "damage": { "damage_type": "bullet", "amount": 0.8 }, "dispersion": 1.2 },
-    "extend": { "effects": [ "RECYCLED", "MUZZLE_SMOKE", "BLACKPOWDER" ] },
-    "delete": { "effects": [ "NEVER_MISFIRES" ], "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
+    "extend": { "effects": [ "RECYCLED", "MUZZLE_SMOKE", "BLACKPOWDER" ] }
   },
   {
     "id": "410shot_000",
@@ -88,7 +87,7 @@
     "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".410 000 shot" },
     "description": "A .410 shotshell loaded with five 000 pellets.  Good for a hunting or combat load.",
-    "range": 24,
+    "range": 26,
     "dispersion": 100,
     "shot_damage": { "damage_type": "bullet", "amount": 14 },
     "projectile_count": 5,
@@ -106,7 +105,7 @@
     "name": { "str_sp": ".410 000 shot, reloaded" },
     "proportional": { "price": 0.7, "price_postapoc": 0.7, "damage": { "damage_type": "bullet", "amount": 0.9 }, "dispersion": 1.1 },
     "extend": { "effects": [ "RECYCLED" ] },
-    "delete": { "effects": [ "NEVER_MISFIRES" ], "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
+    "delete": { "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
   },
   {
     "id": "bp_410shot_000",
@@ -115,8 +114,7 @@
     "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".410 000 shot, black powder" },
     "proportional": { "price": 0.6, "price_postapoc": 0.6, "damage": { "damage_type": "bullet", "amount": 0.8 }, "dispersion": 1.2 },
-    "extend": { "effects": [ "RECYCLED", "MUZZLE_SMOKE", "BLACKPOWDER" ] },
-    "delete": { "effects": [ "NEVER_MISFIRES" ], "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
+    "extend": { "effects": [ "RECYCLED", "MUZZLE_SMOKE", "BLACKPOWDER" ] }
   },
   {
     "id": "410shot_bird",
@@ -142,7 +140,7 @@
     "name": { "str_sp": ".410 birdshot, reloaded" },
     "proportional": { "price": 0.7, "price_postapoc": 0.7, "damage": { "damage_type": "bullet", "amount": 0.9 }, "dispersion": 1.1 },
     "extend": { "effects": [ "RECYCLED" ] },
-    "delete": { "effects": [ "NEVER_MISFIRES" ], "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
+    "delete": { "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
   },
   {
     "id": "bp_410shot_bird",
@@ -151,8 +149,7 @@
     "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".410 birdshot, black powder" },
     "proportional": { "price": 0.6, "price_postapoc": 0.6, "damage": { "damage_type": "bullet", "amount": 0.8 }, "dispersion": 1.2 },
-    "extend": { "effects": [ "RECYCLED", "MUZZLE_SMOKE", "BLACKPOWDER" ] },
-    "delete": { "effects": [ "NEVER_MISFIRES" ], "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
+    "extend": { "effects": [ "RECYCLED", "MUZZLE_SMOKE", "BLACKPOWDER" ] }
   },
   {
     "id": "410shot_scrap",
@@ -163,7 +160,7 @@
     "description": "A .410 shotshell filled with whatever scrap metal was lying around.  More damaging than birdshot, but fairly inaccurate.",
     "proportional": { "price": 0.4, "price_postapoc": 0.4, "damage": { "damage_type": "bullet", "amount": 0.6 }, "shot_spread": 1.2 },
     "extend": { "effects": [ "RECYCLED" ] },
-    "delete": { "effects": [ "NEVER_MISFIRES" ], "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
+    "delete": { "flags": [ "IRREPLACEABLE_CONSUMABLE" ] }
   },
   {
     "id": "bp_410shot_scrap",

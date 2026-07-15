@@ -103,7 +103,7 @@
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Feline Evolution" },
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more feline traits.",
-    "delete": { "cancels": [ "MUTAGEN" ] }
+    "delete": { "cancels": [ "MUTATING_GRADUAL_FELINE" ] }
   },
   {
     "type": "mutation",

@@ -97,6 +97,13 @@
     "chance": 14
   },
   {
+    "id": "emit_small_toxic_stream",
+    "type": "emit",
+    "field": "fd_toxic_gas",
+    "intensity": 2,
+    "qty": 10
+  },
+  {
     "id": "emit_toxic_stream",
     "type": "emit",
     "//": "Steady stream of toxic gas",

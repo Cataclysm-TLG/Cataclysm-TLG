@@ -504,19 +504,6 @@
     "difficulty": 3
   },
   {
-    "id": "bio_gills",
-    "copy-from": "bionic_general",
-    "type": "ITEM",
-    "subtypes": [ "BIONIC_ITEM" ],
-    "name": { "str": "Respirator CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "A complex respiration augmentation system that increases the user's maximal oxygen uptake and allows for underwater breathing akin to gills.  Will automatically activate if the user is drowning.",
-    "price": "4500 USD",
-    "price_postapoc": "15 USD",
-    "weight": "700 g",
-    "difficulty": 6
-  },
-  {
     "id": "bio_ground_sonar",
     "copy-from": "bionic_general",
     "type": "ITEM",
@@ -830,7 +817,7 @@
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Air Filtration System CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "An advanced filtration system that is implanted in the user's trachea.  If toxins or airborne diseases find their way into the windpipe, the filter will attempt to remove them.",
+    "description": "A system of complex filters to be installed throughout the user's airways.  These will restrict breathing slightly, but will offer decent protection from smoke, dust, and airborne contaminants when unpowered, and unparalleled protection when powered.",
     "price": "4500 USD",
     "price_postapoc": "60 USD",
     "weight": "100 g",

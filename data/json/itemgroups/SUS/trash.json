@@ -15,7 +15,6 @@
     "//2": "This group is for small amount of trash on the floor of a building",
     "items": [
       { "group": "SUS_trash_glass", "prob": 10, "count": [ 1, 2 ] },
-      { "//": "Containers" },
       { "item": "wrapper", "prob": 10, "count": [ 1, 2 ] },
       { "item": "wrapper_foil", "prob": 10, "count": [ 1, 2 ] },
       { "item": "wrapper_foil_roll", "prob": 2 },
@@ -34,7 +33,6 @@
       { "item": "box_cigarette", "prob": 10 },
       { "item": "bag_paper_powder", "prob": 5 },
       { "item": "bottle_glass_seasoning", "prob": 1 },
-      { "//": "Loose items" },
       { "item": "bubblewrap", "prob": 5 },
       { "item": "wire", "prob": 1 },
       { "item": "string_6", "prob": 5, "count": [ 1, 2 ] },
@@ -55,9 +53,8 @@
       { "item": "splinter", "prob": 5, "count": [ 3, 6 ] },
       { "item": "scrap", "prob": 5 },
       { "item": "ceramic_shard", "prob": 5, "count": [ 1, 2 ] },
-      { "item": "cotton_patch", "prob": 5, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 5, "custom-flags": [ "FILTHY" ] },
       { "item": "cig_butt", "prob": 10, "count": [ 1, 5 ] },
-      { "//": "Lore items" },
       { "group": "SUS_book_nonf_zine_news", "prob": 5 },
       { "item": "flyer", "prob": 5 }
     ]
@@ -114,7 +111,7 @@
       { "item": "splinter", "prob": 20, "count": [ 5, 20 ] },
       { "item": "scrap", "prob": 20, "count": [ 1, 2 ] },
       { "item": "ceramic_shard", "prob": 20, "count": [ 2, 4 ] },
-      { "item": "cotton_patch", "prob": 20, "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 10, "custom-flags": [ "FILTHY" ] },
       { "item": "cig_butt", "prob": 20, "count": [ 3, 6 ] },
       { "//": "Lore items" },
       { "group": "SUS_book_nonf_zine_news", "prob": 20 },
@@ -499,6 +496,40 @@
       { "item": "bottle_glass", "prob": 2, "count": [ 1, 2 ] },
       { "item": "jar_glass_sealed", "prob": 2 },
       { "item": "jar_3l_glass_sealed", "prob": 1 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "SUS_trash_highway_shoulder",
+    "//": "Trash that's often found on the side of the highway.",
+    "subtype": "distribution",
+    "items": [
+      [ "rubber_tire_chunk", 300 ],
+      [ "wrapper", 100 ],
+      [ "plastic_shopping_bag", 100 ],
+      { "group": "SUS_trash_trashcan", "prob": 50 },
+      [ "plastic_chunk", 50 ],
+      { "item": "cup_plastic", "prob": 50, "count": [ 1, 3 ] },
+      [ "jug_plastic", 5 ],
+      { "item": "bottle_plastic", "prob": 50, "count": [ 1, 3 ] },
+      { "item": "bottle_plastic_small", "prob": 10, "count": [ 1, 5 ] },
+      [ "can_drink", 50 ],
+      [ "can_food", 50 ],
+      [ "box_cigarette", 50 ],
+      [ "bubblewrap", 5 ],
+      [ "flyer", 5 ],
+      [ "paper", 5 ],
+      [ "steel_fragment", 50 ],
+      [ "steel_chunk", 35 ],
+      [ "cardboard", 25 ],
+      [ "bag_zipper", 25 ],
+      [ "box_snack", 25 ],
+      [ "box_small", 10 ],
+      [ "box_small_folded", 10 ],
+      [ "box_medium_folded", 5 ],
+      [ "box_large_folded", 5 ],
+      { "group": "dresser", "prob": 10, "damage": [ -1, 5 ] },
+      { "group": "shoes", "prob": 10, "damage": [ -1, 5 ] }
     ]
   }
 ]

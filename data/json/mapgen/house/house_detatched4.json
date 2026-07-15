@@ -65,6 +65,7 @@
       "place_nested": [ { "chunks": [ "rolling_trash_can_1x1" ], "x": 1, "y": 0 } ],
       "furniture": { "?": "f_beaded_door", "!": "f_region_flower" },
       "place_item": [ { "item": "television", "repeat": 1, "x": 5, "y": 3 } ],
+      "place_loot": [ { "item": "fire_poker", "x": 21, "y": 10, "chance": 20 } ],
       "place_items": [
         { "chance": 10, "item": "stoner", "x": 7, "y": 4 },
         { "chance": 25, "item": "pool_side", "x": 14, "y": 21 },
@@ -166,7 +167,7 @@
         "    -..1.......X......- ",
         "    -.................- ",
         "    -.................- ",
-        "    5....=...........~- ",
+        "    5.=..............~- ",
         "    -..........N......- ",
         "    -.................- ",
         "    -.................- ",

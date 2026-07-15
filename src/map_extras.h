@@ -11,6 +11,7 @@
 #include "color.h"
 #include "coords_fwd.h"
 #include "flat_set.h"
+#include "omdata.h"
 #include "string_id.h"
 #include "translations.h"
 #include "type_id.h"
@@ -70,6 +71,8 @@ class map_extra
         // Used by generic_factory
         bool was_loaded = false;
         void load( const JsonObject &jo, std::string_view src );
+        static void finalize_all();
+        void finalize() const;
         void check() const;
     private:
         translation name_;

@@ -17,39 +17,9 @@
     "flags": [ "IS_PET_ARMOR" ],
     "material_thickness": 2.0,
     "max_pet_vol": "60 L",
-    "min_pet_vol": "25000 ml",
+    "min_pet_vol": "15000 ml",
     "pet_bodytype": "dog",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "5 L",
-        "max_contains_weight": "10 kg",
-        "max_item_length": "60 cm",
-        "moves": 200
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "5 L",
-        "max_contains_weight": "10 kg",
-        "max_item_length": "60 cm",
-        "moves": 200
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "1250 ml",
-        "max_contains_weight": "2 kg",
-        "max_item_length": "20 cm",
-        "moves": 200
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "1250 ml",
-        "max_contains_weight": "2 kg",
-        "max_item_length": "20 cm",
-        "moves": 200
-      }
-    ],
-    "melee_damage": { "bash": 5 }
+    "environmental_protection": 4
   },
   {
     "type": "ITEM",
@@ -63,7 +33,7 @@
     "price_postapoc": "25 USD",
     "material": [ "acidchitin" ],
     "weight": "5362 g",
-    "environmental_protection": 7
+    "environmental_protection": 1
   },
   {
     "type": "ITEM",
@@ -75,7 +45,7 @@
     "price": "350 USD",
     "price_postapoc": "20 USD",
     "material": [ "chitin" ],
-    "environmental_protection": 4
+    "environmental_protection": 1
   },
   {
     "type": "ITEM",
@@ -84,10 +54,7 @@
     "copy-from": "kevlar_harness",
     "color": "light_red",
     "name": { "str": "chainmail dog coat" },
-    "description": {
-      "str": "Protecteth yon hund fram ful daemons!  You could put this on a friendly dog.",
-      "//~": "Description is reference to Churl scenario text - 'protect your dog from foul undead'."
-    },
+    "description": "Chainmail armor, for dogs!  You could put this on a friendly animal.",
     "price": "250 USD",
     "price_postapoc": "35 USD",
     "material": [ "iron", "budget_steel" ],
@@ -133,8 +100,8 @@
     "material": [ "neoprene", "plastic", "rubber" ],
     "weight": "1960 g",
     "material_thickness": 0.1,
-    "environmental_protection": 10,
-    "min_pet_vol": "15000 ml",
+    "environmental_protection": 8,
+    "min_pet_vol": "10000 ml",
     "extend": { "flags": [ "NO_SALVAGE" ] }
   }
 ]

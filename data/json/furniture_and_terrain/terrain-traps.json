@@ -7,7 +7,7 @@
     "symbol": "0",
     "color": "yellow",
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "DIGGABLE_CAN_DEEPEN" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "DIGGABLE_CAN_DEEPEN", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -28,7 +28,7 @@
     "connects_to": "PIT_DEEP",
     "move_cost": 10,
     "trap": "tr_pit",
-    "flags": [ "TRANSPARENT" ],
+    "flags": [ "TRANSPARENT", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -47,7 +47,7 @@
     "symbol": "#",
     "color": "green",
     "move_cost": 5,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "PIT_FILLABLE" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "PIT_FILLABLE", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -90,7 +90,7 @@
     "connects_to": "PIT_DEEP",
     "move_cost": 10,
     "trap": "tr_spike_pit",
-    "flags": [ "TRANSPARENT", "PIT_FILLABLE" ],
+    "flags": [ "TRANSPARENT", "PIT_FILLABLE", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -111,7 +111,7 @@
     "connect_groups": "PIT_DEEP",
     "connects_to": "PIT_DEEP",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "ROAD" ],
+    "flags": [ "TRANSPARENT", "ROAD", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -133,7 +133,7 @@
     "connects_to": "PIT_DEEP",
     "move_cost": 10,
     "trap": "tr_glass_pit",
-    "flags": [ "TRANSPARENT", "PIT_FILLABLE" ],
+    "flags": [ "TRANSPARENT", "PIT_FILLABLE", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -211,7 +211,7 @@
     "color": "yellow",
     "looks_like": "t_den_large",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "DIGGABLE" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -230,7 +230,7 @@
     "color": "yellow",
     "looks_like": "t_pit_shallow",
     "move_cost": 6,
-    "flags": [ "TRANSPARENT", "DIGGABLE" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -248,6 +248,6 @@
     "symbol": "~",
     "color": "green",
     "move_cost": 6,
-    "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "PLACE_ITEM" ]
+    "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM" ]
   }
 ]

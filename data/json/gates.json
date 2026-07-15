@@ -13,7 +13,7 @@
       "fail": "The gate can't be closed!"
     },
     "moves": 1800,
-    "bashing_damage": 40
+    "bashing_damage": 5
   },
   {
     "type": "gate",
@@ -38,7 +38,7 @@
       "fail": "The gate can't be closed!"
     },
     "moves": 1800,
-    "bashing_damage": 40
+    "bashing_damage": 10
   },
   {
     "type": "gate",
@@ -84,7 +84,7 @@
       "fail": "The barn doors can't be closed!"
     },
     "moves": 1800,
-    "bashing_damage": 40
+    "bashing_damage": 0
   },
   {
     "type": "gate",
@@ -99,7 +99,7 @@
       "fail": "The palisade gate can't be closed!"
     },
     "moves": 1800,
-    "bashing_damage": 30
+    "bashing_damage": 5
   },
   {
     "type": "gate",
@@ -114,7 +114,7 @@
       "fail": "The palisade gate can't be closed!"
     },
     "moves": 1800,
-    "bashing_damage": 30
+    "bashing_damage": 5
   },
   {
     "type": "gate",
@@ -129,6 +129,6 @@
       "fail": "The door can't be closed!"
     },
     "moves": 1200,
-    "bashing_damage": 60
+    "bashing_damage": 5
   }
 ]

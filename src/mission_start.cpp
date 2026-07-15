@@ -39,6 +39,7 @@ static const itype_id itype_software_hacking( "software_hacking" );
 static const itype_id itype_software_math( "software_math" );
 static const itype_id itype_software_medical( "software_medical" );
 static const itype_id itype_software_useless( "software_useless" );
+static const itype_id itype_usb_drive( "usb_drive" );
 
 static const mission_type_id
 mission_MISSION_GET_ZOMBIE_BLOOD_ANAL( "MISSION_GET_ZOMBIE_BLOOD_ANAL" );
@@ -153,7 +154,7 @@ void mission_start::place_npc_software( mission *miss )
         debugmsg( "Couldn't find NPC!  %d", miss->npc_id.get_value() );
         return;
     }
-    get_player_character().i_add( item( "usb_drive", calendar::turn_zero ) );
+    get_player_character().i_add( item( itype_usb_drive, calendar::turn_zero ) );
     add_msg( _( "%s gave you a USB drive." ), dev->get_name() );
 
     std::string type = "house";
@@ -239,7 +240,7 @@ void mission_start::place_deposit_box( mission *miss )
             }
         }
     }
-    const tripoint_omt_ms fallback( rng( 6, SEEX * 2 - 7 ), rng( 6, SEEY * 2 - 7 ), site.z() );
+    const tripoint_omt_ms fallback = rng_map_point<tripoint_omt_ms>( 6, site.z() );
     const tripoint_omt_ms comppoint = random_entry( valid, fallback );
     compmap.spawn_item( comppoint, "safe_box" );
     compmap.save();
@@ -302,22 +303,12 @@ void mission_start::place_book( mission * )
 void mission_start::reveal_refugee_center( mission *miss )
 {
     mission_target_params t;
-    str_or_var overmap_terrain;
-    overmap_terrain.str_val = "refctr_S3e";
-    t.overmap_terrain = overmap_terrain;
-    str_or_var overmap_special;
-    overmap_special.str_val = "evac_center";
-    t.overmap_special = overmap_special;
+    t.overmap_terrain = "refctr_S3e";
+    t.overmap_special = "evac_center";
     t.mission_pointer = miss;
-    dbl_or_var search_range;
-    search_range.min.dbl_val = 0;
-    t.search_range = search_range;
-    dbl_or_var reveal_radius;
-    reveal_radius.min.dbl_val = 1;
-    t.reveal_radius = reveal_radius;
-    dbl_or_var min_distance;
-    min_distance.min.dbl_val = 0;
-    t.min_distance = min_distance;
+    t.search_range = 0;
+    t.reveal_radius = 1;
+    t.min_distance = 0;
 
     dialogue d( get_talker_for( get_avatar() ), nullptr );
     std::optional<tripoint_abs_omt> target_pos = mission_util::assign_mission_target( t, d );
@@ -334,12 +325,8 @@ void mission_start::reveal_refugee_center( mission *miss )
 
     if( overmap_buffer.reveal_route( source_road, dest_road, 1, true ) ) {
         //reset the mission target to the refugee center entrance and reveal path from the road
-        str_or_var overmap_terrain;
-        overmap_terrain.str_val = "refctr_S3e";
-        t.overmap_terrain = overmap_terrain;
-        dbl_or_var reveal_radius;
-        reveal_radius.min.dbl_val = 3;
-        t.reveal_radius = reveal_radius;
+        t.overmap_terrain = "refctr_S3e";
+        t.reveal_radius = 3;
         target_pos = mission_util::assign_mission_target( t, d );
         const tripoint_abs_omt dest_refugee_center = overmap_buffer.find_closest( *target_pos,
                 "evac_center_18", 1, false );

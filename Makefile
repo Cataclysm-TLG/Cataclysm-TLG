@@ -86,10 +86,6 @@
 #  make ASTYLE=0
 # Disable format check of whitelisted json files.
 #  make LINTJSON=0
-# Disable building tests.
-#  make TESTS=0
-# Enable running tests.
-#  make RUNTESTS=1
 # Build source files in order of how often the matching header is included
 #  make HEADERPOPULARITY=1
 
@@ -184,48 +180,6 @@ endif
 # Enable json format check by default
 ifndef LINTJSON
   LINTJSON = 1
-endif
-
-# We don't want to have both 'check' and 'tests' as targets, because that will
-# result in make trying to build the tests twice in parallel, wasting time
-# (The tests target will be launched parallel to the check target, and both
-#  will build the tests executable)
-# There are three possible outcomes we expect:
-#   a. Tests are built and run (check)
-#   b. Tests are built (tests)
-#   c. Tests are not built
-#
-# This table defines the expected behavior for the possible values of TESTS and
-# RUNTESTS.
-# TESTS defaults to 1, RUNTESTS defaults to 0.
-#
-#   RUNTESTS
-# T # | 0 | 1
-# E ----------
-# S 0 | c | c
-# T ----------
-# S 1 | b | a
-#
-
-# Enable building tests by default
-ifndef TESTS
-  TESTS = 1
-endif
-
-# Disable running tests by default
-ifndef RUNTESTS
-  RUNTESTS = 0
-endif
-
-# Can't run tests if we aren't going to build them
-ifeq ($(TESTS), 1)
-  ifeq ($(RUNTESTS), 1)
-    # Build and run the tests
-    TESTSTARGET = check
-  else
-    # Only build the tests
-    TESTSTARGET = tests
-  endif
 endif
 
 ifndef PCH
@@ -402,6 +356,10 @@ ifneq ($(SANITIZE),)
   endif
   CXXFLAGS += $(SANITIZE_FLAGS)
   LDFLAGS += $(SANITIZE_FLAGS)
+endif
+
+ifeq ($(MJ), 1)
+  MJFLAG = -MJ $@.json
 endif
 
 # enable optimizations. slow to build
@@ -953,7 +911,7 @@ OBJECT_CREATOR_SOURCES := $(wildcard $object_creator/*.cpp)
 OBJECT_CREATOR_HEADERS := $(wildcard $object_creator/*.h)
 TESTSRC := $(wildcard tests/*.cpp)
 TESTHDR := $(wildcard tests/*.h)
-JSON_FORMATTER_SOURCES := $(wildcard tools/format/*.cpp) src/wcwidth.cpp src/json.cpp
+JSON_FORMATTER_SOURCES := $(wildcard tools/format/*.cpp) src/wcwidth.cpp src/json.cpp src/string_id.cpp
 JSON_FORMATTER_HEADERS := $(wildcard tools/format/*.h)
 ZZIP_SOURCES := tools/save/zzip_main.cpp
 CHKJSON_SOURCES := $(wildcard src/chkjson/*.cpp) src/wcwidth.cpp src/json.cpp
@@ -1049,7 +1007,7 @@ endif
 
 LDFLAGS += -lz
 
-all: version prefix $(CHECKS) $(TARGET) $(L10N) $(TESTSTARGET) $(ZZIP_BIN)
+all: version prefix $(CHECKS) $(TARGET) $(L10N) $(ZZIP_BIN)
 	@
 
 $(TARGET): $(OBJS)
@@ -1096,16 +1054,15 @@ $(ODIR)/%.inc: $(SRC_DIR)/%.c
 
 .PHONY: includes
 includes: $(OBJS:.o=.inc)
-	+make -C tests includes
 
 $(ODIR)/third-party/%.o: $(SRC_DIR)/third-party/%.cpp
-	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -w -MMD -MP -c $< -o $@
+	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -w -MMD -MP $(MJFLAG) -c $< -o $@
 
 $(ODIR)/third-party/%.o: $(SRC_DIR)/third-party/%.c
-	$(CXX) -x c $(CPPFLAGS) $(DEFINES) $(CFLAGS) -w -MMD -MP -c $< -o $@
+	$(CXX) -x c $(CPPFLAGS) $(DEFINES) $(CFLAGS) -w -MMD -MP $(MJFLAG) -c $< -o $@
 
 $(ODIR)/%.o: $(SRC_DIR)/%.cpp $(PCH_P)
-	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -MMD -MP $(PCHFLAGS) -c $< -o $@
+	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -MMD -MP $(PCHFLAGS) $(MJFLAG) -c $< -o $@
 
 $(ODIR)/%.o: $(SRC_DIR)/%.rc
 	$(RC) $(RFLAGS) $< -o $@
@@ -1138,7 +1095,7 @@ $(CHKJSON_BIN): $(CHKJSON_SOURCES)
 json-check: $(CHKJSON_BIN)
 	./$(CHKJSON_BIN)
 
-clean: clean-tests clean-object_creator clean-pch clean-lang
+clean: clean-object_creator clean-pch clean-lang
 	rm -rf *$(TARGET_NAME) *$(TILES_TARGET_NAME)
 	rm -rf *$(TILES_TARGET_NAME).exe *$(TARGET_NAME).exe *$(TARGET_NAME).a
 	rm -rf *obj *objwin
@@ -1406,15 +1363,6 @@ $(ZZIP_BIN): $(ZZIP_SOURCES) $(BUILD_PREFIX)zstd.a
 python-check:
 	flake8
 
-tests: version $(BUILD_PREFIX)cataclysm.a $(LOCALIZE_TEST_DEPS)
-	$(MAKE) -C tests
-
-check: version $(BUILD_PREFIX)cataclysm.a $(LOCALIZE_TEST_DEPS)
-	$(MAKE) -C tests check
-
-clean-tests:
-	$(MAKE) -C tests clean
-
 object_creator: version $(BUILD_PREFIX)cataclysm.a
 	$(MAKE) -C object_creator
 
@@ -1428,11 +1376,10 @@ clean-pch:
 	rm -f pch/*pch.hpp.gch
 	rm -f pch/*pch.hpp.pch
 	rm -f pch/*pch.hpp.d
-	$(MAKE) -C tests clean-pch
 
 clean-lang:
 	$(MAKE) -C lang clean
 
-.PHONY: tests check ctags etags clean-tests clean-object_creator clean-pch clean-lang install lint
+.PHONY: ctags etags clean-object_creator clean-pch clean-lang install lint
 
 -include ${OBJS:.o=.d}

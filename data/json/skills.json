@@ -1,13 +1,12 @@
 [
   {
     "type": "skill",
-    "id": "speech",
-    "name": { "str": "social" },
-    "description": "Your skill in speaking to other people.  Covers ability in boasting, flattery, threats, persuasion, lies, bartering, and other facets of interpersonal communication.  Works best in conjunction with a high level of intelligence.",
-    "companion_survival_rank_factor": 1,
+    "id": "swimming",
+    "name": { "str": "athletics" },
+    "description": "Your athletic ability, including swimming, climbing, rowing, balancing, cycling, and how much you can carry.  Athletic skill also improves your overall cardio fitness and stamina.",
     "display_category": "display_interaction",
-    "sort_rank": 26000,
-    "companion_skill_practice": [ { "skill": "recruiting", "weight": 15 }, { "skill": "recruiting", "weight": 70 } ]
+    "sort_rank": 21000,
+    "companion_skill_practice": [ { "skill": "", "weight": 5 }, { "skill": "gathering", "weight": 5 }, { "skill": "trapping", "weight": 5 } ]
   },
   {
     "type": "skill",
@@ -15,7 +14,46 @@
     "name": { "str": "computers" },
     "description": "Your skill in accessing and manipulating computers.  Higher levels can allow a user to navigate complex software systems and even bypass their security.",
     "display_category": "display_interaction",
-    "sort_rank": 24000
+    "sort_rank": 22000
+  },
+  {
+    "type": "skill",
+    "id": "traps",
+    "name": { "str": "devices" },
+    "description": "Your skill in setting, detecting, disabling, repairing, and crafting fine devices like security systems, traps, locks, some firearm components, and explosives.  This skill does not affect the evasion of traps that are triggered.",
+    "companion_survival_rank_factor": 1,
+    "display_category": "display_interaction",
+    "sort_rank": 23000,
+    "companion_skill_practice": [ { "skill": "", "weight": 15 }, { "skill": "gathering", "weight": 15 }, { "skill": "trapping", "weight": 80 } ]
+  },
+  {
+    "type": "skill",
+    "id": "survival",
+    "name": { "str": "ecology" },
+    "description": "Your skill at dealing with your environment.  This includes working with plants and animals, exploring, making fire, and scouting.",
+    "companion_survival_rank_factor": 1,
+    "display_category": "display_interaction",
+    "sort_rank": 24000,
+    "companion_skill_practice": [
+      { "skill": "", "weight": 80 },
+      { "skill": "gathering", "weight": 80 },
+      { "skill": "trapping", "weight": 15 },
+      { "skill": "hunting", "weight": 15 },
+      { "skill": "menial", "weight": 10 },
+      { "skill": "construction", "weight": 10 },
+      { "skill": "recruiting", "weight": 25 },
+      { "skill": "combat", "weight": 10 }
+    ]
+  },
+  {
+    "type": "skill",
+    "id": "mechanics",
+    "name": { "str": "mechanics" },
+    "description": "Your skill in engineering, maintaining and repairing vehicles and other mechanical systems.  This skill also covers crafting and constructing things with complex moving parts.",
+    "companion_industry_rank_factor": 1,
+    "display_category": "display_interaction",
+    "sort_rank": 26000,
+    "companion_skill_practice": [ { "skill": "menial", "weight": 10 }, { "skill": "construction", "weight": 20 } ]
   },
   {
     "type": "skill",
@@ -30,23 +68,13 @@
   },
   {
     "type": "skill",
-    "id": "mechanics",
-    "name": { "str": "mechanics" },
-    "description": "Your skill in engineering, maintaining and repairing vehicles and other mechanical systems.  This skill also covers crafting and constructing things with complex moving parts.",
-    "companion_industry_rank_factor": 1,
-    "display_category": "display_interaction",
-    "sort_rank": 22000,
-    "companion_skill_practice": [ { "skill": "menial", "weight": 10 }, { "skill": "construction", "weight": 20 } ]
-  },
-  {
-    "type": "skill",
-    "id": "traps",
-    "name": { "str": "devices" },
-    "description": "Your skill in setting, detecting, disabling, repairing, and crafting fine devices like security systems, traps, locks, some firearm components, and explosives.  This skill does not affect the evasion of traps that are triggered.",
+    "id": "speech",
+    "name": { "str": "social" },
+    "description": "Your skill in speaking to other people.  Covers ability in boasting, flattery, threats, persuasion, lies, bartering, and other facets of interpersonal communication.  Works best in conjunction with a high level of intelligence.",
     "companion_survival_rank_factor": 1,
     "display_category": "display_interaction",
-    "sort_rank": 23000,
-    "companion_skill_practice": [ { "skill": "", "weight": 15 }, { "skill": "gathering", "weight": 15 }, { "skill": "trapping", "weight": 80 } ]
+    "sort_rank": 27000,
+    "companion_skill_practice": [ { "skill": "recruiting", "weight": 15 }, { "skill": "recruiting", "weight": 70 } ]
   },
   {
     "type": "skill",
@@ -55,16 +83,7 @@
     "description": "Your skill in operating and steering a vehicle in motion, from cars and boats to helicopters and hot air balloons.  A higher level allows greater control over vehicles at higher speeds, and reduces the penalty of shooting while driving.",
     "display_category": "display_interaction",
     "consumes_focus": false,
-    "sort_rank": 27000
-  },
-  {
-    "type": "skill",
-    "id": "swimming",
-    "name": { "str": "athletics" },
-    "description": "Your athletic ability, including swimming, climbing, rowing, balancing, cycling, and how much you can carry.  Athletic skill also improves your overall cardio fitness and stamina.",
-    "display_category": "display_interaction",
-    "sort_rank": 21000,
-    "companion_skill_practice": [ { "skill": "", "weight": 5 }, { "skill": "gathering", "weight": 5 }, { "skill": "trapping", "weight": 5 } ]
+    "sort_rank": 28000
   },
   {
     "type": "skill",
@@ -101,25 +120,6 @@
     "display_category": "display_crafting",
     "sort_rank": 20000,
     "companion_skill_practice": [ { "skill": "menial", "weight": 15 } ]
-  },
-  {
-    "type": "skill",
-    "id": "survival",
-    "name": { "str": "survival" },
-    "description": "Your skill in surviving the wilderness, and in crafting various basic survival items.  This also covers your ability to skin and butcher animals for meat and hides.",
-    "companion_survival_rank_factor": 1,
-    "display_category": "display_crafting",
-    "sort_rank": 15000,
-    "companion_skill_practice": [
-      { "skill": "", "weight": 80 },
-      { "skill": "gathering", "weight": 80 },
-      { "skill": "trapping", "weight": 15 },
-      { "skill": "hunting", "weight": 15 },
-      { "skill": "menial", "weight": 10 },
-      { "skill": "construction", "weight": 10 },
-      { "skill": "recruiting", "weight": 25 },
-      { "skill": "combat", "weight": 10 }
-    ]
   },
   {
     "type": "skill",

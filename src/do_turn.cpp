@@ -35,9 +35,11 @@
 #include "game_constants.h"
 #include "gamemode.h"
 #include "help.h"
+#include "item_wakeup.h"
 #include "input.h"
 #include "input_context.h"
 #include "line.h"
+#include "magic_enchantment.h"
 #include "make_static.h"
 #include "map.h"
 #include "map_iterator.h"
@@ -466,7 +468,10 @@ bool do_turn()
         g->gamemode->per_turn();
         calendar::turn += 1_turns;
     }
-
+    //used for dimension swapping
+    if( g->swapping_dimensions ) {
+        g->swapping_dimensions = false;
+    }
     play_music( music::get_music_id_string() );
 
     // starting a new turn, clear out temperature cache
@@ -478,6 +483,7 @@ bool do_turn()
 
     timed_event_manager &timed_events = get_timed_events();
     timed_events.process();
+    get_item_wakeups().process( calendar::turn );
     mission::process_all();
     avatar &u = get_avatar();
     map &m = get_map();
@@ -503,28 +509,22 @@ bool do_turn()
         overmap_buffer.process_mongroups();
     }
 
-    // Move hordes every 2.5 min
+    // Move hordes every turn, move_hordes has its own rate limiting
+    overmap_buffer.move_hordes();
     if( calendar::once_every( time_duration::from_minutes( 2.5 ) ) ) {
-
-        if( get_option<bool>( "WANDER_SPAWNS" ) ) {
-            overmap_buffer.move_hordes();
-        }
         if( u.has_trait( trait_HAS_NEMESIS ) ) {
             overmap_buffer.move_nemesis();
         }
-        // Hordes that reached the reality bubble need to spawn,
-        // make them spawn in invisible areas only.
-        m.spawn_monsters( false );
     }
 
     g->debug_hour_timer.print_time();
 
     u.update_body();
 
-    // Auto-save if autosave is enabled
+    // Autosave if autosave is enabled and we're not in an activity.
     if( get_option<bool>( "AUTOSAVE" ) &&
         calendar::once_every( 1_turns * get_option<int>( "AUTOSAVE_TURNS" ) ) &&
-        !u.is_dead_state() ) {
+        !u.is_dead_state() && !u.activity ) {
         g->autosave();
     }
 

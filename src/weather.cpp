@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <climits>
 #include <cmath>
 #include <functional>
 #include <memory>
@@ -24,6 +25,9 @@
 #include "game.h"
 #include "game_constants.h"
 #include "item.h"
+#include "item_contents.h"
+#include "item_location.h"
+#include "itype.h"
 #include "line.h"
 #include "map.h"
 #include "map_iterator.h"
@@ -44,6 +48,7 @@
 #include "trap.h"
 #include "uistate.h"
 #include "units.h"
+#include "value_ptr.h"
 #include "weather_gen.h"
 
 static const activity_id ACT_WAIT_WEATHER( "ACT_WAIT_WEATHER" );
@@ -77,9 +82,7 @@ bool is_creature_outside( const Creature &target )
 {
     map &here = get_map();
     const tripoint_bub_ms pos = target.pos_bub( here );
-
-    return here.is_outside( tripoint_bub_ms( pos.xy(), here.get_abs_sub().z() ) ) &&
-           here.get_abs_sub().z() >= 0;
+    return here.is_outside( tripoint_bub_ms( pos.xy(), here.get_abs_sub().z() ) );
 }
 
 weather_type_id get_bad_weather()
@@ -101,7 +104,7 @@ weather_type_id get_bad_weather()
 void glare( const weather_type_id &w )
 {
     Character &player_character = get_player_character();//todo npcs, also
-    //General prerequisites for glare
+    // General prerequisites for glare
     if( g->is_sheltered( player_character.pos_bub() ) ||
         player_character.in_sleep_state() ||
         player_character.worn_with_flag( json_flag_SUN_GLASSES ) ||
@@ -153,23 +156,9 @@ float incident_sun_irradiance( const weather_type_id &wtype, const time_point &t
 static void proc_weather_sum( const weather_type_id &wtype, weather_sum &data,
                               const time_point &t, const time_duration &tick_size )
 {
-    int amount = 0;
-    if( wtype->rains ) {
-        switch( wtype->precip ) {
-            case precip_class::very_light:
-                amount = 1 * to_turns<int>( tick_size );
-                break;
-            case precip_class::light:
-                amount = 4 * to_turns<int>( tick_size );
-                break;
-            case precip_class::heavy:
-                amount = 8 * to_turns<int>( tick_size );
-                break;
-            default:
-                break;
-        }
+    if( wtype->rains && wtype->precip != precip_class::none ) {
+        data.rain_amount += precip_mm_per_hour( wtype->precip ) * to_turns<double>( tick_size );
     }
-    data.rain_amount += amount;
 
     // TODO: Change this sunlight "sampling" here into a proper interpolation
     const float tick_sunlight = incident_sunlight( wtype, t );
@@ -233,7 +222,9 @@ void retroactively_fill_from_funnel( item &it, const trap &tr, const time_point 
     // Technically 0.0 division is OK, but it will be cleaner without it
     if( data.rain_amount > 0 ) {
         const double turns = to_turns<double>( end - start );
-        const double charges_per_turn = 1.0 / tr.funnel_turns_per_charge( data.rain_amount );
+        // rain_amount is sum of (mm/hour * turns), so dividing by turns gives average mm/hour
+        const double avg_mm_per_hour = data.rain_amount / turns;
+        const double charges_per_turn = 1.0 / tr.funnel_turns_per_charge( avg_mm_per_hour );
         const int rain = roll_remainder( charges_per_turn * turns );
         it.add_rain_to_container( rain );
         // add_msg_debug( "Retroactively adding %d water from turn %d to %d", rain, startturn, endturn);
@@ -248,7 +239,7 @@ void item::add_rain_to_container( int charges )
     if( charges <= 0 ) {
         return;
     }
-    item ret( "water", calendar::turn );
+    item ret( itype_water, calendar::turn );
     const int capa = get_remaining_capacity_for_liquid( ret, true );
     ret.charges = std::min( charges, capa );
     if( contents.can_contain( ret ).success() ) {
@@ -285,7 +276,7 @@ double funnel_charges_per_turn( const double surface_area_mm2, const double rain
     }
 
     // Calculate once, because that part is expensive
-    static const item water( "water", calendar::turn_zero );
+    static const item water( itype_water, calendar::turn_zero );
     // 250ml
     static const double charge_ml = static_cast<double>( to_gram( water.weight() ) ) /
                                     water.charges;
@@ -460,7 +451,7 @@ void weather_sound( const translation &sound_message, const std::string &sound_e
     Character &player_character = get_player_character();
     map &here = get_map();
     if( !player_character.has_effect( effect_sleep ) && !player_character.is_deaf() ) {
-        if( here.get_abs_sub().z() >= 0 ) {
+        if( here.is_outside( player_character.pos_bub() ) ) {
             add_msg( sound_message );
             if( !sound_effect.empty() ) {
                 sfx::play_variant_sound( "environment", sound_effect, 80, random_direction() );
@@ -509,10 +500,10 @@ void handle_weather_effects( const weather_type_id &w )
             wetness = 60;
         }
         here.decay_fields_and_scent( decay_time );
-        const bool no_roof_above = here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR,
-                                   target.pos_bub() + tripoint::above );
-        // This runs every 6 seconds for legacy reasons.
-        if( calendar::once_every( 6_seconds ) && is_creature_outside( target ) && no_roof_above ) {
+        // Runs every 6 seconds to maintain proper soak level for legacy reasons.
+        // Precipitation is vertical - only roofs/floors block it, not walls.
+        // is_roofed() walks upward through all z-levels for a complete check.
+        if( calendar::once_every( 6_seconds ) && !here.is_roofed( target.pos_bub() ) ) {
             wet_character( target, wetness );
         }
     }
@@ -922,15 +913,85 @@ rl_vec2d convert_wind_to_coord( const int angle )
     return rl_vec2d( 0, 0 );
 }
 
-bool warm_enough_to_plant( const tripoint_bub_ms &pos )
+static units::temperature highest_temp_on_day( time_point &base_date, const tripoint_abs_omt &pos,
+        const weather_generator &weather_gen )
 {
-    // semi-appropriate temperature for most plants
-    return get_weather().get_temperature( pos ) >= units::from_fahrenheit( 50 );
+    units::temperature highest_temp = 0_C;
+    // we search a 24 hour period around the base_date, the base_date is exactly in the center
+    const time_duration search_radius = 12_hours;
+    // how long between each check. The performance on this shouldn't be a problem, but if we want more/less granularity this is a simple lever.
+    const time_duration check_interval = 15_minutes;
+
+    // Iterate through the search window, checking temp each check_interval. Highest found value in the entire range is what ends up being returned.
+    time_point check_date = base_date - search_radius;
+    while( check_date <= base_date + search_radius ) {
+        const w_point &w = weather_gen.get_weather( project_to<coords::ms>( pos ), check_date,
+                           g->get_seed() );
+        const units::temperature checked_temp = w.temperature;
+        highest_temp = std::max( highest_temp, checked_temp );
+        check_date = check_date + check_interval;
+    }
+
+    return highest_temp;
 }
 
-bool warm_enough_to_plant( const tripoint_abs_omt &pos )
+static bool has_sunlight_access( const tripoint_bub_ms &pos )
 {
-    return get_weather().get_temperature( pos ) >= units::from_fahrenheit( 50 );
+    tripoint_bub_ms checked_pnt = pos;
+    const map &here = get_map();
+    while( checked_pnt.z() < OVERMAP_HEIGHT ) {
+        const tripoint_bub_ms pnt_above = {checked_pnt.xy(), checked_pnt.z() + 1 };
+        const bool should_check_above = pnt_above.z() < OVERMAP_HEIGHT;
+        // If checking above would take us outside of game bounds, just assume that it's all open air up there.
+        const bool transparent_roof = should_check_above ?
+                                      here.has_flag_ter( "NO_FLOOR", pnt_above ) || here.has_flag_ter( "TRANSPARENT_FLOOR", pnt_above ) :
+                                      true;
+        if( !here.is_outside( checked_pnt ) && !transparent_roof ) {
+            return false;
+        }
+        checked_pnt = pnt_above;
+    }
+    return true;
+}
+
+ret_val<void> warm_enough_to_plant( const tripoint_bub_ms &pos, const itype_id &it )
+{
+    std::map<time_point, units::temperature> planting_times;
+
+    if( !has_sunlight_access( pos ) ) {
+        return ret_val<void>::make_failure( _( "Plants need sunlight to grow!  You can't plant there." ) );
+    }
+
+    const tripoint_abs_ms abs = get_map().get_abs( pos );
+    const tripoint_abs_omt checked_omt = project_to<coords::omt>( abs );
+
+    const std::vector<std::pair<flag_id, time_duration>> &growth_stages = it->seed->get_growth_stages();
+    // we will iterate a copy of the weather into the future to see if they'll be plantable then as well.
+    const weather_generator weather_gen = get_weather().get_cur_weather_gen();
+    // initialize the first...
+    time_point check_date = calendar::turn;
+    planting_times[check_date] = highest_temp_on_day( check_date, checked_omt, weather_gen );
+    for( const auto &pair : growth_stages ) {
+        // TODO: Replace epoch checks with data from a farmer's almanac
+        check_date = check_date + pair.second;
+        // The [] operator in std::map inserts an entry if it doesn't already exist.
+        planting_times[check_date] = highest_temp_on_day( check_date, checked_omt, weather_gen );
+    }
+    for( const std::pair<const time_point, units::temperature> &pair : planting_times ) {
+        // This absolutely needs to be a time point.
+        add_msg_debug( debugmode::DF_MAP,
+                       "Checking plant time %s, highest temperature %s…",
+                       //NOLINTNEXTLINE(cata-translations-in-debug-messages)
+                       to_string( pair.first ), print_temperature( pair.second, 2 ) );
+        if( pair.second < it->seed->get_growth_temp() ) {
+            add_msg_debug( debugmode::DF_MAP, "Planting failure!  %s needs temperature of %s but found only %s",
+                           it->nname( 1 ), print_temperature( it->seed->get_growth_temp(), 2 ),
+                           print_temperature( pair.second, 2 ) );
+            return ret_val<void>::make_failure(
+                       _( "If you plant now, the cold will kill this plant before it can be harvested!" ) );
+        }
+    }
+    return ret_val<void>::make_success();
 }
 
 weather_manager::weather_manager()
@@ -945,8 +1006,7 @@ weather_manager::weather_manager()
 const weather_generator &weather_manager::get_cur_weather_gen() const
 {
     const overmap &om = g->get_cur_om();
-    const regional_settings &settings = om.get_settings();
-    return settings.weather;
+    return om.get_settings().get_settings_weather();
 }
 
 void weather_manager::update_weather()
@@ -976,7 +1036,7 @@ void weather_manager::update_weather()
         map &here = get_map();
         if( uistate.distraction_weather_change &&
             weather_id != old_weather && weather_id->dangerous &&
-            here.get_abs_sub().z() >= 0 && here.is_outside( player_character.pos_bub() )
+            has_sunlight_access( player_character.pos_bub() ) && here.is_outside( player_character.pos_bub() )
             && !player_character.has_activity( ACT_WAIT_WEATHER ) ) {
             g->cancel_activity_or_ignore_query( distraction_type::weather_change,
                                                 string_format( _( "The weather changed to %s!" ), weather_id->name ) );
@@ -996,6 +1056,114 @@ void weather_manager::update_weather()
             effect_on_conditions::process_reactivate();
         }
     }
+    update_snow_depth();
+}
+
+// Maximum time delta to apply in a single catch-up update (1 hour).
+// Beyond this, weather has certainly changed and the approximation is too coarse.
+static constexpr time_duration max_snow_catchup = 1_hours;
+// Snow-water equivalent ratio: 1mm liquid precipitation = 12mm snow depth
+static constexpr double snow_water_ratio = 12.0;
+// Melt rate in mm snow per degree-C above freezing per hour.
+// Derived from degree-day factor ~4 mm SWE/C/day at 12:1 ratio:
+// 4/24 * 12 = 2.0.  Real-world range is 1.5-3.0 for open ground.
+static constexpr double melt_rate_per_deg_per_hour = 2.0;
+// Maximum snow depth in mm
+static constexpr double max_snow_depth = 800.0;
+
+// Snow depth is tracked at z=0 only; weather is uniform across z-levels.
+static tripoint_abs_omt ground_level_omt( const tripoint_abs_omt &omt )
+{
+    return tripoint_abs_omt( omt.x(), omt.y(), 0 );
+}
+
+void weather_manager::update_snow_depth()
+{
+    if( !calendar::once_every( 1_minutes ) ) {
+        return;
+    }
+
+    // Prune dead entries once per hour
+    if( calendar::once_every( 1_hours ) ) {
+        for( auto it = snow_depth_map.begin(); it != snow_depth_map.end(); ) {
+            if( it->second.depth_mm <= 0.001 &&
+                calendar::turn - it->second.last_update > 6_hours ) {
+                it = snow_depth_map.erase( it );
+            } else {
+                ++it;
+            }
+        }
+    }
+
+    if( weather_id == WEATHER_NULL ) {
+        // No valid weather yet - just keep timestamps current
+        for( auto &pair : snow_depth_map ) {
+            pair.second.last_update = calendar::turn;
+        }
+        return;
+    }
+
+    // Ensure the player's current OMT is tracked, seeded from nearest neighbor
+    const tripoint_abs_omt player_omt = ground_level_omt(
+                                            get_player_character().pos_abs_omt() );
+    if( snow_depth_map.find( player_omt ) == snow_depth_map.end() ) {
+        omt_snow_state seeded;
+        seeded.depth_mm = get_snow_depth_mm( player_omt );
+        seeded.last_update = calendar::turn;
+        snow_depth_map[player_omt] = seeded;
+    }
+
+    const bool is_snowing = weather_id->precip != precip_class::none && !weather_id->rains;
+    const double accum_rate = is_snowing ?
+                              precip_mm_per_hour( weather_id->precip ) * snow_water_ratio : 0.0;
+    const bool is_melting = temperature > 0_C;
+    const double melt_rate = is_melting ?
+                             melt_rate_per_deg_per_hour * units::to_celsius( temperature ) : 0.0;
+
+    for( auto &pair : snow_depth_map ) {
+        omt_snow_state &state = pair.second;
+
+        time_duration dt = calendar::turn - state.last_update;
+        if( dt > max_snow_catchup ) {
+            dt = max_snow_catchup;
+        }
+        if( dt <= 0_seconds ) {
+            state.last_update = calendar::turn;
+            continue;
+        }
+
+        const double hours = to_seconds<double>( dt ) / 3600.0;
+
+        if( accum_rate > 0 ) {
+            state.depth_mm += accum_rate * hours;
+        }
+        if( is_melting && state.depth_mm > 0 ) {
+            state.depth_mm -= melt_rate * hours;
+        }
+
+        state.depth_mm = std::clamp( state.depth_mm, 0.0, max_snow_depth );
+        state.last_update = calendar::turn;
+    }
+}
+
+double weather_manager::get_snow_depth_mm( const tripoint_abs_omt &omt_pos ) const
+{
+    const tripoint_abs_omt ground_pos = ground_level_omt( omt_pos );
+    auto it = snow_depth_map.find( ground_pos );
+    if( it != snow_depth_map.end() ) {
+        return it->second.depth_mm;
+    }
+    // Seed from nearest neighbor that has data
+    double best_depth = 0.0;
+    int best_dist = INT_MAX;
+    for( const auto &pair : snow_depth_map ) {
+        const int dist = square_dist( ground_pos, pair.first );
+        if( dist < best_dist ) {
+            best_dist = dist;
+            best_depth = pair.second.depth_mm;
+        }
+    }
+    return best_depth;
 }
 
 void weather_manager::set_nextweather( time_point t )
@@ -1014,11 +1182,12 @@ units::temperature weather_manager::get_temperature( const tripoint_bub_ms &loca
     if( cached != temperature_cache.end() ) {
         return cached->second;
     }
-
+    map &here = get_map();
     //underground temperature = average New England temperature = 43F/6C
-    units::temperature temp = location.z() < 0 ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
+    units::temperature temp = location.z() < 0 &&
+                              !here.is_outside( location ) ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
 
-    if( !g->new_game ) {
+    if( !g->new_game && !g->swapping_dimensions ) {
         units::temperature_delta temp_mod;
         temp_mod = get_heat_radiation( location );
         temp_mod += get_convection_temperature( location );
@@ -1031,7 +1200,7 @@ units::temperature weather_manager::get_temperature( const tripoint_bub_ms &loca
     return temp;
 }
 
-units::temperature weather_manager::get_temperature( const tripoint_abs_omt &location ) const
+units::temperature weather_manager::get_area_temperature( const tripoint_abs_omt &location ) const
 {
     return location.z() < 0 ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
 }

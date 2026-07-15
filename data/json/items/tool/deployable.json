@@ -15,6 +15,7 @@
     "material": [ "steel" ],
     "symbol": ";",
     "color": "light_gray",
+    "techniques": [ "WBLOCK_0" ],
     "use_action": { "type": "deploy_furn", "furn_type": "f_brazier" },
     "qualities": [ [ "COOK", 1 ], [ "BOIL", 2 ], [ "CONTAIN", 1 ] ],
     "melee_damage": { "bash": 7 },
@@ -37,6 +38,7 @@
         "max_contains_weight": "20 kg"
       }
     ],
+    "techniques": [ "WBLOCK_0" ],
     "use_action": { "type": "deploy_furn", "furn_type": "f_makeshift_brazier" },
     "qualities": [ [ "COOK", 1 ], [ "BOIL", 1 ], [ "CONTAIN", 1 ] ]
   },
@@ -132,6 +134,7 @@
     "material": [ { "type": "steel", "portion": 975 }, { "type": "cotton", "portion": 25 } ],
     "symbol": "#",
     "color": "light_gray",
+    "techniques": [ "WBLOCK_0" ],
     "use_action": { "type": "deploy_furn", "furn_type": "f_camp_chair" },
     "flags": [ "FRAGILE_MELEE" ]
   },
@@ -150,6 +153,7 @@
     "material": [ { "type": "wood", "portion": 90 }, { "type": "cotton", "portion": 10 } ],
     "symbol": "#",
     "color": "brown",
+    "techniques": [ "WBLOCK_0" ],
     "use_action": { "type": "deploy_furn", "furn_type": "f_deckchair" },
     "flags": [ "FRAGILE_MELEE" ]
   },
@@ -168,6 +172,7 @@
     "material": [ { "type": "plastic", "portion": 60 }, { "type": "steel" } ],
     "symbol": "#",
     "color": "light_gray",
+    "techniques": [ "WBLOCK_0" ],
     "use_action": { "type": "deploy_furn", "furn_type": "f_chair_folding" },
     "flags": [ "FRAGILE_MELEE" ]
   },
@@ -311,7 +316,7 @@
     "id": "churn",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
-    "name": { "str": "folded butter churn" },
+    "name": { "str": "butter churn" },
     "description": "A large wooden container used to turn raw milk into butter and buttermilk.  This model uses a foot crank and holds three gallons of raw milk.",
     "weight": "6464 g",
     "volume": "11356 ml",

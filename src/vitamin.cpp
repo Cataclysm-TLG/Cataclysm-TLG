@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <map>
 
-#include "assign.h"
 #include "calendar.h"
 #include "debug.h"
 #include "enum_conversions.h"
@@ -147,7 +146,7 @@ int vitamin::units_from_mass( vitamin_units::mass val ) const
 
 std::pair<std::string, std::string> vitamin::mass_str_from_units( int units ) const
 {
-    if( !weight_per_unit.has_value() || !get_option<bool>( "SHOW_VITAMIN_MASS" ) ) {
+    if( !weight_per_unit.has_value() ) {
         return {"", ""};
     }
     return weight_to_string( units * *weight_per_unit );

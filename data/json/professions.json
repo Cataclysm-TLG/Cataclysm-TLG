@@ -140,6 +140,12 @@
   {
     "type": "item_group",
     "subtype": "collection",
+    "id": "charged_handheld_game",
+    "entries": [ { "item": "portable_game", "charges": 48 } ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
     "id": "charged_two_way_radio",
     "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 300, "container-item": "two_way_radio" } ]
   },
@@ -328,18 +334,6 @@
   {
     "type": "item_group",
     "subtype": "collection",
-    "id": "bandolier_swat_cqc1",
-    "entries": [ { "item": "shot_00", "charges": 12 } ]
-  },
-  {
-    "type": "item_group",
-    "subtype": "collection",
-    "id": "bandolier_swat_cqc2",
-    "entries": [ { "item": "shot_slug", "charges": 12 } ]
-  },
-  {
-    "type": "item_group",
-    "subtype": "collection",
     "id": "quiver_naturalist",
     "entries": [ { "item": "arrow_wood", "count": 12 } ]
   },
@@ -393,6 +387,11 @@
   },
   {
     "type": "profession_item_substitutions",
+    "item": "wool_sockmitts",
+    "sub": [ { "present": [ "WOOLALLERGY" ], "new": [ "jacket_leather" ] }, { "present": [ "VEGAN" ], "new": [ "sockmitts" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
     "item": "suit",
     "sub": [
       { "present": [ "WOOLALLERGY" ], "new": [ "jacket_light", "pants", "dress_shirt" ] },
@@ -442,6 +441,16 @@
   {
     "type": "profession_item_substitutions",
     "item": "boots_hiking",
+    "sub": [ { "present": [ "VEGAN" ], "new": [ "motorbike_boots" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
+    "item": "boots_steel",
+    "sub": [ { "present": [ "VEGAN" ], "new": [ "motorbike_boots" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
+    "item": "boots_western",
     "sub": [ { "present": [ "VEGAN" ], "new": [ "motorbike_boots" ] } ]
   },
   {
@@ -713,7 +722,9 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "jeans_skinny" } ] }
+      "female": {
+        "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "jeans_skinny" } ]
+      }
     }
   },
   {
@@ -751,8 +762,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -771,7 +782,7 @@
           { "item": "molle_pack" },
           { "item": "winter_pants_army" },
           { "item": "winter_jacket_army" },
-          { "item": "undershirt" },
+          { "item": "longshirt" },
           { "item": "socks" },
           { "item": "boots_combat" },
           { "item": "sweatshirt" },
@@ -789,7 +800,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -829,8 +840,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -862,8 +873,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -893,44 +904,9 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
-  },
-  {
-    "type": "profession",
-    "id": "churl",
-    "name": "Churl",
-    "description": "What the deuyl?  Ye ne wist noo thing of this straunge plaas nor what wycked enchauntment brought ye hidder.  Wyth this accoustrement ye must needs underfongen to find newe lyflode in the most hidous Cataclysm man hath witnessed sithen that deluge Noe rood out in his greet schippe.",
-    "npc_background": "BG_survival_story_EVACUEE",
-    "points": 0,
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "footrags" },
-          { "item": "loincloth" },
-          { "item": "cloak_wool" },
-          { "item": "ragpouch" },
-          { "item": "small_relic" },
-          { "item": "gloves_wraps" },
-          { "item": "tunic_rag" },
-          { "item": "knife_baselard", "container-item": "sheath" }
-        ]
-      },
-      "female": { "entries": [ { "item": "chestwrap" } ] }
-    },
-    "proficiencies": [ "prof_fibers", "prof_carving", "prof_leatherworking_basic", "prof_knives_familiar" ],
-    "skills": [
-      { "level": 3, "name": "melee" },
-      { "level": 3, "name": "throw" },
-      { "level": 3, "name": "archery" },
-      { "level": 3, "name": "fabrication" },
-      { "level": 3, "name": "tailor" },
-      { "level": 3, "name": "survival" },
-      { "level": 3, "name": "cooking" }
-    ],
-    "traits": [ "PROF_CHURL", "ILLITERATE" ],
-    "flags": [ "SCEN_ONLY", "SKIP_DEFAULT_BACKGROUND" ]
   },
   {
     "type": "profession",
@@ -960,8 +936,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -991,7 +967,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -1028,8 +1004,8 @@
           { "item": "lighter", "charges": 100 }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "age_lower": 18
   },
@@ -1057,8 +1033,8 @@
           { "item": "honey_scraper", "container-item": "sheath" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -1092,7 +1068,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16
   },
@@ -1118,7 +1094,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16
   },
@@ -1153,7 +1129,7 @@
         ]
       },
       "male": { "entries": [ { "item": "under_armor_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16
   },
@@ -1181,8 +1157,40 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "sports_bra" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
+    }
+  },
+  {
+    "type": "profession",
+    "id": "vandal",
+    "name": "Vandal",
+    "description": "When the riots started, you took to the streets to join in the mayhem.  Now the old world is gone, and you're ready to bring havoc to the new one.",
+    "npc_background": "BG_survival_story_CRIMINAL",
+    "points": 3,
+    "skills": [ { "level": 3, "name": "traps" }, { "level": 1, "name": "fabrication" } ],
+    "items": {
+      "both": {
+        "entries": [
+          { "item": "mask_rioter" },
+          { "item": "sunglasses" },
+          { "item": "hoodie" },
+          { "item": "backpack" },
+          { "item": "longshirt" },
+          { "item": "gloves_work" },
+          { "item": "claw_bar" },
+          { "item": "pants_cargo" },
+          { "item": "molotov", "count": 3 },
+          { "item": "socks" },
+          { "item": "boots_steel" },
+          { "group": "charged_flashlight" },
+          { "item": "textbook_anarch" },
+          { "item": "lighter", "charges": 100 },
+          { "item": "spray_can", "charges": 10 }
+        ]
+      },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -1206,7 +1214,7 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "undershirt" },
+          { "item": "tank_top" },
           { "item": "officer_uniform" },
           { "item": "jacket_army_modern" },
           { "item": "gloves_liner" },
@@ -1225,7 +1233,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_SOCIAL_BUTTERFLY" ],
     "age_lower": 45
@@ -1242,7 +1250,8 @@
       "prof_gun_cleaning",
       "prof_knives_familiar",
       "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
+      "prof_auto_pistols_familiar",
+      "prof_swimming"
     ],
     "skills": [
       { "level": 5, "name": "gun" },
@@ -1287,7 +1296,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -1304,7 +1313,8 @@
       "prof_metalworking",
       "prof_welding_basic",
       "prof_welding",
-      "prof_gun_cleaning"
+      "prof_gun_cleaning",
+      "prof_swimming"
     ],
     "skills": [
       { "level": 5, "name": "mechanics" },
@@ -1340,7 +1350,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -1357,7 +1367,8 @@
       "prof_gun_cleaning",
       "prof_knives_familiar",
       "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
+      "prof_auto_pistols_familiar",
+      "prof_swimming"
     ],
     "skills": [
       { "level": 6, "name": "swimming" },
@@ -1425,7 +1436,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1458,7 +1469,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -1483,7 +1494,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1511,7 +1522,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -1533,7 +1544,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1563,7 +1574,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
           { "item": "gloves_liner" },
@@ -1580,7 +1591,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1616,7 +1627,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -1633,8 +1644,7 @@
           { "item": "knife_combat_army", "variant": "m9bayonet", "container-item": "sheath" },
           { "item": "shot_00", "count": 2 },
           {
-            "item": "mossberg_930",
-            "variant": "m1014",
+            "item": "m1014",
             "ammo-item": "shot_00",
             "charges": 8,
             "contents-item": [ "shoulder_strap", "holo_sight" ]
@@ -1642,7 +1652,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -1676,7 +1686,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -1701,66 +1711,8 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
-  },
-  {
-    "type": "profession",
-    "id": "seal_sniper",
-    "name": "Navy SEAL Marksmen",
-    "description": "Recruited into the ranks of the US Navy's Special Warfare forces as a designated sniper, your training in precision marksmanship and maritime operations was extensive.  As a proficient soldier and combative in all respects, you provided overwatch and long-range elimination services in the line of duty.  Now, with naval command imploding and your spotter MIA, your skills with a rifle and covert operations are the only things standing between you and the Cataclysm.",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "points": 7,
-    "proficiencies": [
-      "prof_gunsmithing_basic",
-      "prof_spotting",
-      "prof_field_medic",
-      "prof_gun_cleaning",
-      "prof_knives_familiar",
-      "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
-    ],
-    "skills": [
-      { "level": 7, "name": "gun" },
-      { "level": 7, "name": "rifle" },
-      { "level": 5, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "stabbing" },
-      { "level": 2, "name": "dodge" },
-      { "level": 2, "name": "firstaid" },
-      { "level": 4, "name": "survival" },
-      { "level": 2, "name": "throw" },
-      { "level": 3, "name": "swimming" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "tank_top" },
-          { "item": "combat_shirt" },
-          { "item": "tac_fullhelmet" },
-          { "item": "mask_ski" },
-          { "item": "gloves_liner" },
-          { "item": "gloves_tactical" },
-          { "item": "socks" },
-          { "item": "diving_watch" },
-          { "item": "load_bearing_vest" },
-          { "item": "boots_combat" },
-          { "group": "loaded_webbing_belt" },
-          { "group": "charged_two_way_radio" },
-          { "group": "charged_powered_earmuffs" },
-          { "item": "pants_army" },
-          { "item": "water_clean", "container-item": "canteen" },
-          { "item": "legpouch_large", "contents-group": "army_mags_tac338" },
-          { "item": "knife_rm42", "container-item": "sheath" },
-          { "item": "p226_9mm", "ammo-item": "9mm", "container-item": "holster", "charges": 15 },
-          { "item": "p226mag_15rd_9x19mm", "ammo-item": "9mm", "charges": 15, "count": 2 },
-          { "item": "tac338", "ammo-item": "338lapua_fmjbt", "charges": 5, "contents-item": [ "shoulder_strap" ] }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
-    },
-    "flags": [ "SCEN_ONLY" ]
   },
   {
     "type": "profession",
@@ -1776,7 +1728,8 @@
       "prof_gun_cleaning",
       "prof_knives_familiar",
       "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
+      "prof_auto_pistols_familiar",
+      "prof_swimming"
     ],
     "skills": [
       { "level": 7, "name": "gun" },
@@ -1822,65 +1775,9 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
-  },
-  {
-    "type": "profession",
-    "id": "specops",
-    "name": "Special Operator",
-    "description": "You were the best of the best, the military's finest.  That's why you're still alive, even after all your comrades fell to the undead.  As far as you can tell, military command abandoned you in this hellhole when you missed the emergency evac.",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "points": 7,
-    "proficiencies": [
-      "prof_gunsmithing_basic",
-      "prof_traps",
-      "prof_disarming",
-      "prof_spotting",
-      "prof_gun_cleaning",
-      "prof_knives_familiar",
-      "prof_auto_rifles_familiar"
-    ],
-    "skills": [
-      { "level": 7, "name": "gun" },
-      { "level": 7, "name": "smg" },
-      { "level": 7, "name": "rifle" },
-      { "level": 4, "name": "melee" },
-      { "level": 4, "name": "stabbing" },
-      { "level": 3, "name": "dodge" },
-      { "level": 4, "name": "traps" },
-      { "level": 2, "name": "firstaid" },
-      { "level": 3, "name": "throw" },
-      { "level": 4, "name": "swimming" },
-      { "level": 3, "name": "survival" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "wetsuit" },
-          { "item": "pants_army" },
-          { "item": "wetsuit_hood" },
-          { "group": "tac_helmet_nvg" },
-          { "item": "wetsuit_gloves" },
-          { "item": "gloves_tactical" },
-          { "item": "socks" },
-          { "item": "boots_combat" },
-          { "item": "dive_bag" },
-          { "item": "diving_watch" },
-          { "item": "single_sling" },
-          { "group": "charged_two_way_radio" },
-          { "item": "water_clean", "container-item": "canteen" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "glasses_bal", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "kukri", "container-item": "sheath" },
-          { "item": "chestrig", "contents-group": "army_mags_mp5" },
-          { "item": "hk_mp5", "ammo-item": "9mm", "charges": 30, "contents-item": [ "suppressor", "holo_sight" ] }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
-    }
   },
   {
     "type": "profession",
@@ -1906,8 +1803,8 @@
       },
       "female": {
         "entries": [
-          { "item": "panties" },
-          { "item": "bra" },
+          { "group": "female_underwear_bottom" },
+          { "group": "female_underwear_top" },
           { "item": "stockings" },
           { "item": "garter_belt" },
           { "item": "heels" },
@@ -1952,7 +1849,7 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "armor_farmor" },
+          { "item": "leather_armor_suit" },
           { "item": "socks" },
           { "item": "boots_fur" },
           { "item": "hat_fur" },
@@ -1969,20 +1866,19 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
   {
     "type": "profession",
-    "id": "medic",
-    "name": "Medical Resident",
-    "description": "Fresh out of med school, you've got little in the way of practical experience and just a handful of first-aid supplies.  You just hope it will be enough if 'physician, heal thyself' turns out to be more literal than you expected.",
+    "id": "surgeon",
+    "name": "Surgeon",
+    "description": "Whether you worked in aesthetics, oncology, or orthopedics, you're going to have to get used to the fact that pretty much everyone with your skillset is now first and foremost a trauma surgeon.",
     "npc_background": "BG_survival_story_MEDICAL",
-    "points": 2,
-    "skills": [ { "level": 5, "name": "firstaid" } ],
-    "proficiencies": [ "prof_field_medic", "prof_intro_biology", "prof_physiology", "prof_burn_care", "prof_dissect_humans" ],
-    "traits": [ "PROF_MED" ],
+    "points": 3,
+    "skills": [ { "level": 5, "name": "firstaid" }, { "level": 2, "name": "chemistry" } ],
+    "proficiencies": [ "prof_field_medic", "prof_intro_biology", "prof_physiology", "prof_burn_care", "prof_dissect_humans", "prof_surgery" ],
     "items": {
       "both": {
         "entries": [
@@ -1995,9 +1891,10 @@
           { "item": "glasses_safety" },
           { "item": "wristwatch" },
           { "item": "water_clean" },
+          { "item": "scalpel" },
           { "item": "bandages", "count": 3 },
           { "item": "adhesive_bandages", "count": 10 },
-          { "item": "aspirin" },
+          { "item": "acetaminophen" },
           { "item": "stethoscope" },
           { "item": "pants" },
           { "group": "charged_smart_phone" },
@@ -2005,7 +1902,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2048,7 +1945,14 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "gold_dental_grill" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "gold_hairpin" }, { "item": "gold_ear" } ] }
+      "female": {
+        "entries": [
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
+          { "item": "gold_hairpin" },
+          { "item": "gold_ear" }
+        ]
+      }
     }
   },
   {
@@ -2085,7 +1989,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2119,7 +2023,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2151,7 +2055,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2207,7 +2111,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -2228,11 +2132,12 @@
           { "item": "pockknife" },
           { "item": "survivormap" },
           { "group": "charged_matches" },
-          { "item": "pants" }
+          { "item": "tshirt" },
+          { "item": "jeans" }
         ]
       },
-      "male": { "entries": [ { "item": "undershirt" } ] },
-      "female": { "entries": [ { "item": "camisole" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 18
   },
@@ -2259,7 +2164,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2278,7 +2183,6 @@
       { "level": 2, "name": "survival" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "pets": [ { "name": "mon_dog_trained", "amount": 1 } ],
     "items": {
@@ -2303,7 +2207,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2322,7 +2226,6 @@
       { "level": 2, "name": "dodge" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "pets": [ { "name": "mon_horse_police", "amount": 1 } ],
     "items": {
@@ -2346,7 +2249,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2375,7 +2278,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_DOG_LOVER" ]
   },
@@ -2407,7 +2310,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2425,7 +2328,6 @@
       { "level": 2, "name": "dodge" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "items": {
       "both": {
@@ -2447,7 +2349,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2457,7 +2359,6 @@
     "description": "You were on the brink of a major breakthrough in your latest homicide case when the Cataclysm struck.  Now your prime suspect is dead.  Everyone's dead.  You could really use a smoke.",
     "npc_background": "BG_survival_story_POLICE",
     "points": 3,
-    "traits": [ "PROF_PD_DET" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning" ],
     "items": {
       "both": {
@@ -2483,8 +2384,8 @@
           { "item": "sw_619", "ammo-item": "357mag_fmj", "charges": 7, "container-item": "holster" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "skills": [
       { "level": 4, "name": "gun" },
@@ -2518,7 +2419,6 @@
       { "level": 1, "name": "traps" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_SWAT" ],
     "items": {
       "both": {
         "entries": [
@@ -2545,7 +2445,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2571,7 +2471,6 @@
       { "level": 1, "name": "dodge" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "items": {
       "both": {
         "entries": [
@@ -2596,7 +2495,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2617,7 +2516,6 @@
       { "level": 1, "name": "dodge" },
       { "level": 3, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "items": {
       "both": {
@@ -2641,7 +2539,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2660,7 +2558,6 @@
       { "level": 3, "name": "driving" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_POLICE" ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "vehicle": "motorcycle",
     "items": {
@@ -2669,7 +2566,7 @@
           { "item": "socks" },
           { "item": "police_breeches" },
           { "item": "badge_deputy" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "police_belt" },
           { "item": "motor_police_boots" },
           { "item": "whistle" },
@@ -2686,40 +2583,8 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
-  },
-  {
-    "type": "profession",
-    "id": "modern_archer",
-    "name": "Modern Archer",
-    "description": "A great fan of the archers of old, but at the same time a follower of the latest trends in archery.  You always tried to keep up with the times, acquiring a takedown bow as well as several accessories to complement it.  You can only hope all the training you did with them can help you survive in this trying times.",
-    "npc_background": "BG_survival_story_SPORTS",
-    "points": 4,
-    "proficiencies": [ "prof_bow_basic", "prof_bow_expert" ],
-    "skills": [ { "level": 4, "name": "gun" }, { "level": 4, "name": "archery" }, { "level": 2, "name": "swimming" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "whistle" },
-          { "item": "socks" },
-          { "item": "boots_steel" },
-          { "item": "pants_cargo" },
-          { "item": "jacket_leather" },
-          { "item": "fancy_sunglasses" },
-          { "item": "hat_boonie" },
-          { "item": "diving_watch" },
-          { "item": "caff_gum" },
-          { "group": "charged_smart_phone" },
-          { "item": "rashguard" },
-          { "item": "takedown_recurbow", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "quiver_takedown_bow", "contents-group": "quiver_modern_archer" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
-    },
-    "missions": [ "MISSION_HUNTER" ]
   },
   {
     "type": "profession",
@@ -2755,7 +2620,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2797,7 +2662,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2836,7 +2701,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2875,7 +2740,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2914,7 +2779,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
   },
@@ -2950,7 +2815,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -2978,7 +2843,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3003,7 +2868,9 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "bra" }, { "item": "jeans_skinny" } ] }
+      "female": {
+        "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" }, { "item": "jeans_skinny" } ]
+      }
     }
   },
   {
@@ -3040,7 +2907,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "bra" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -3067,7 +2934,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "bra" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -3088,7 +2955,6 @@
     ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_driver", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "vehicle": "policecar",
-    "traits": [ "PROF_POLICE" ],
     "items": {
       "both": {
         "entries": [
@@ -3110,7 +2976,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3157,7 +3023,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 18
   },
@@ -3217,7 +3083,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3251,7 +3117,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -3274,8 +3140,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16
   },
@@ -3304,8 +3170,8 @@
           { "group": "charged_electrical_measuring" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3330,11 +3196,11 @@
           { "item": "portable_game", "charges": 150 },
           { "item": "pants" },
           { "group": "charged_smart_phone" },
-          { "group": "charged_laptop" }
+          { "group": "charged_laptop", "contents-item": "software_hacking" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3360,7 +3226,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3388,7 +3254,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16,
     "age_upper": 25
@@ -3430,7 +3296,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "tank_top" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3446,8 +3312,8 @@
       "male": { "entries": [ { "item": "briefs" }, { "item": "tux" }, { "item": "dress_shoes" } ] },
       "female": {
         "entries": [
-          { "item": "bra" },
-          { "item": "panties" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
           { "item": "dress" },
           { "item": "heels" },
           { "item": "purse", "custom-flags": [ "auto_wield" ] }
@@ -3474,8 +3340,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ],
     "missions": [ "MISSION_PATIENT" ],
@@ -3484,44 +3350,17 @@
   {
     "type": "profession",
     "id": "mutant_patient",
-    "name": "Unwilling Mutant",
+    "name": "Test Subject",
     "description": "You were a human guinea pig, used by laboratory technicians to understand the immense power of mutation.  You are determined to live on, if only to spite them for what they did to you.",
     "npc_background": "BG_survival_story_EVACUEE",
     "points": -1,
     "items": {
       "both": [ "subsuit_xl" ],
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ],
     "age_lower": 16
-  },
-  {
-    "type": "profession",
-    "id": "mutant_volunteer",
-    "name": "Volunteer Mutant",
-    "description": "Your dreams of becoming a mutant superhero through genetic alteration may have fallen a bit short, but the scientists say you're ready.  It's time for a field test.",
-    "npc_background": "BG_survival_story_EVACUEE",
-    "points": 2,
-    "skills": [ { "level": 4, "name": "chemistry" }, { "level": 4, "name": "electronics" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "dress_shirt" },
-          { "item": "pants" },
-          { "item": "socks" },
-          { "item": "boots" },
-          { "item": "knit_scarf" },
-          { "item": "coat_lab" },
-          { "item": "glasses_safety" },
-          { "item": "wristwatch" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
-    },
-    "flags": [ "SCEN_ONLY" ],
-    "missions": [ "MISSION_MUTANT_VOLUNTEER" ]
   },
   {
     "type": "profession",
@@ -3533,7 +3372,7 @@
     "items": {
       "both": [ "house_coat", "slippers", "towel", "guidebook" ],
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -3566,7 +3405,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -3592,34 +3431,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "jeweler",
-    "name": "Jeweler",
-    "description": "You were an independent artisan, who made gorgeous rings and pendants for the people who afforded your services.  You doubt the market for your work has fared well after the end of the world, but perhaps your proficiency with fine tools and metals will come in handy somehow.",
-    "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 2,
-    "skills": [ { "level": 6, "name": "fabrication" }, { "level": 2, "name": "swimming" } ],
-    "proficiencies": [ "prof_metalworking", "prof_redsmithing", "prof_fine_metalsmithing", "prof_gem_setting" ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "jeans" },
-          { "item": "socks" },
-          { "item": "boots" },
-          { "item": "longshirt" },
-          { "item": "wristwatch" },
-          { "item": "apron_leather" },
-          { "item": "chisel" },
-          { "group": "charged_smart_phone" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3642,8 +3455,8 @@
           { "item": "balloon", "count": 20 }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_CLOWN" ]
   },
@@ -3695,7 +3508,13 @@
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "dress_shirt" }, { "item": "pants" }, { "item": "pocketwatch" } ] },
       "female": {
-        "entries": [ { "item": "panties" }, { "item": "bra" }, { "item": "dress" }, { "item": "fanny" }, { "item": "gold_watch" } ]
+        "entries": [
+          { "group": "female_underwear_bottom" },
+          { "group": "female_underwear_top" },
+          { "item": "dress" },
+          { "item": "fanny" },
+          { "item": "gold_watch" }
+        ]
       }
     },
     "age_lower": 50
@@ -3704,32 +3523,33 @@
     "type": "profession",
     "id": "otaku",
     "name": "Otaku",
-    "description": "After many late nights with friends watching anime and eating snacks, you decided to make the trip to the premier anime convention in the Northeast.  Now zombies are eating everyone, and even worse, the convention is cancelled!  At least you were ready in case your costume tore.",
+    "description": "You have recently attended what might be the last anime convention ever.  There are zombies everywhere now, buty you picked up something at the merch tables that might even the odds.  This is just like one of your Japanese Animes!",
     "npc_background": "BG_survival_story_ECCENTRIC",
-    "points": 0,
-    "skills": [ { "level": 2, "name": "tailor" } ],
+    "points": 2,
     "items": {
       "both": {
         "entries": [
-          { "item": "shorts" },
-          { "item": "socks" },
           { "item": "sneakers" },
-          { "item": "tank_top" },
+          { "item": "tshirt" },
           { "item": "mbag" },
           { "item": "mag_animecon" },
-          { "item": "cheeseburger" },
+          { "item": "diet_energy_drink" },
+          { "item": "chips" },
           { "group": "charged_smart_phone" },
-          { "item": "eink_tablet_pc", "charges": 150 },
-          {
-            "item": "light_minus_battery_cell",
-            "ammo-item": "battery",
-            "charges": 50,
-            "container-item": "game_watch"
-          }
+          { "group": "charged_handheld_game" },
+          { "item": "katana", "custom-flags": [ "REPLICA_EQUIPMENT", "auto_wield" ] }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "item": "fedora" }, { "item": "boxer_shorts" }, { "item": "shorts_cargo" }, { "item": "socks" } ] },
+      "female": {
+        "entries": [
+          { "item": "faux_fur_cat_ears" },
+          { "item": "sockmitts" },
+          { "item": "skirt" },
+          { "item": "stockings" },
+          { "group": "female_underwear_bottom" }
+        ]
+      }
     },
     "missions": [ "MISSION_OTAKU" ]
   },
@@ -3759,8 +3579,8 @@
           { "item": "stockings" },
           { "item": "garter_belt" },
           { "item": "dress_shoes" },
-          { "item": "bra" },
-          { "item": "panties" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
           { "item": "purse" },
           { "item": "long_glove_white" },
           { "item": "silver_tiara" },
@@ -3795,7 +3615,13 @@
       },
       "male": { "entries": [ { "item": "jeans_skinny" }, { "item": "tank_top" }, { "item": "briefs" } ] },
       "female": {
-        "entries": [ { "item": "skirt" }, { "item": "corset" }, { "item": "panties" }, { "item": "stockings" }, { "item": "sockmitts" } ]
+        "entries": [
+          { "item": "skirt" },
+          { "item": "corset" },
+          { "group": "female_underwear_bottom" },
+          { "item": "stockings" },
+          { "item": "sockmitts" }
+        ]
       }
     }
   },
@@ -3854,8 +3680,8 @@
           { "group": "charged_ref_lighter" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3885,8 +3711,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3913,8 +3739,8 @@
           { "item": "glass_shiv" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -3943,8 +3769,8 @@
           { "item": "polaroid_photo", "container-item": "ankle_wallet_pouch" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -3968,8 +3794,8 @@
           { "item": "fried_seeds" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -4001,8 +3827,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4029,8 +3855,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4052,7 +3878,14 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "dress_shirt" }, { "item": "suit" }, { "item": "pants" } ] },
-      "female": { "entries": [ { "item": "dress" }, { "item": "purse" }, { "item": "bra" }, { "item": "panties" } ] }
+      "female": {
+        "entries": [
+          { "item": "dress" },
+          { "item": "purse" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" }
+        ]
+      }
     }
   },
   {
@@ -4089,8 +3922,8 @@
           { "item": "nun_habit" },
           { "item": "dress_shirt" },
           { "item": "purse" },
-          { "item": "bra" },
-          { "item": "panties" }
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" }
         ]
       }
     }
@@ -4115,8 +3948,8 @@
           { "item": "holy_symbol", "variant": "buddhist_necklace" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4142,8 +3975,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4170,8 +4003,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4199,8 +4032,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4228,8 +4061,8 @@
           { "item": "pants" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4257,7 +4090,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4285,7 +4118,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4315,7 +4148,7 @@
     "items": {
       "both": [ "tangzhuang", "tank_top", "pants", "mouthpiece", "shoes_slip_on" ],
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4335,7 +4168,7 @@
     "items": {
       "both": [ "jacket_windbreaker", "tank_top", "sweatpants", "mouthpiece", "socks_ankle", "sneakers" ],
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4362,8 +4195,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4402,7 +4235,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4435,7 +4268,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4487,7 +4320,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -4541,7 +4374,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ]
   },
@@ -4572,7 +4405,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -4667,20 +4500,24 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
     "type": "profession",
     "id": "reenactor",
-    "name": { "male": "Historical Reenactor", "female": "Ahistorical Reenactor" },
-    "description": {
-      "npc_background": "BG_survival_story_EVACUEE",
-      "male": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world permanently derailed your plans.",
-      "female": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world made traditional gender roles obsolete."
-    },
-    "points": 2,
-    "proficiencies": [ "prof_gunsmithing_basic", "prof_metalworking", "prof_gunsmithing_antique", "prof_gun_cleaning" ],
+    "name": { "male": "Historical Reenactor", "female": "Historical Reenactor" },
+    "description": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world permanently derailed your plans.",
+    "points": 4,
+    "proficiencies": [
+      "prof_gunsmithing_basic",
+      "prof_metalworking",
+      "prof_gunsmithing_antique",
+      "prof_gun_cleaning",
+      "prof_spinning",
+      "prof_gun_cleaning",
+      "prof_weaving"
+    ],
     "skills": [
       { "level": 3, "name": "gun" },
       { "level": 3, "name": "rifle" },
@@ -4689,7 +4526,7 @@
       { "level": 2, "name": "cooking" }
     ],
     "items": {
-      "both": {
+      "male": {
         "entries": [
           { "item": "stockings" },
           { "item": "pockknife" },
@@ -4716,31 +4553,10 @@
           { "item": "flintlock_ammo", "charges": 15 },
           { "item": "vinegar", "container-item": "bottle_plastic_small" },
           { "item": "lamp_oil", "container-item": "bottle_plastic_small" },
-          { "group": "charged_smart_phone" },
-          { "group": "charged_matches" }
+          { "item": "ref_matches", "charges": 32 }
         ]
-      }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "reenactor2",
-    "name": { "male": "Ahistorical Reenactor", "female": "Historical Reenactor" },
-    "description": {
-      "npc_background": "BG_survival_story_EVACUEE",
-      "male": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world made traditional gender roles obsolete.",
-      "female": "You were on your way to the Annual All New England Revolutionary War Living History exhibition when the end of the world permanently derailed your plans."
-    },
-    "points": 2,
-    "proficiencies": [ "prof_spinning", "prof_closures", "prof_knitting", "prof_gun_cleaning" ],
-    "skills": [
-      { "level": 4, "name": "tailor" },
-      { "level": 4, "name": "cooking" },
-      { "level": 2, "name": "gun" },
-      { "level": 2, "name": "rifle" }
-    ],
-    "items": {
-      "both": {
+      },
+      "female": {
         "entries": [
           { "item": "stockings" },
           { "item": "pockknife" },
@@ -4748,18 +4564,26 @@
           { "item": "tobacco" },
           { "item": "backpack" },
           { "item": "dress" },
-          { "item": "apron_leather" },
+          { "item": "apron_cotton" },
           { "item": "boots" },
-          { "item": "gloves_leather" },
-          { "item": "long_knit_scarf" },
+          { "item": "wool_sockmitts" },
+          { "item": "knit_scarf" },
           { "item": "hat_fur" },
           { "item": "purse" },
           { "item": "pot" },
           { "item": "cornmeal" },
+          {
+            "item": "rifle_flintlock",
+            "ammo-item": "flintlock_ammo",
+            "charges": 1,
+            "contents-item": "shoulder_strap_simple"
+          },
+          { "item": "flintlock_pouch", "contents-group": "flintlock_pouch_reenactor" },
+          { "item": "flintlock_ammo", "charges": 15 },
           { "item": "salt" },
           { "item": "needle_wood", "ammo-item": "thread", "charges": 200 },
           { "item": "oil_lamp", "charges": 750 },
-          { "group": "charged_smart_phone" },
+          { "item": "ref_matches", "charges": 32 },
           { "group": "charged_matches" }
         ]
       }
@@ -4791,8 +4615,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16,
     "age_upper": 21
@@ -4824,8 +4648,8 @@
           { "item": "tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16,
     "age_upper": 21
@@ -4866,116 +4690,19 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "jeans_skinny" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "item": "jeans_skinny" } ] }
     },
     "age_lower": 16,
     "age_upper": 18
   },
   {
     "type": "profession",
-    "id": "jr_survivalist",
-    "name": "Survivalist Jr.",
-    "description": "Your parents were crazy preppers who thought some \"Cataclysm\" was coming, and insisted on preparing you for it.  Turns out they were right.  You didn't get a chance to thank them.  The only thing you can do for them now is what they always hoped you would do in the dark days ahead: survive.",
-    "npc_background": "BG_survival_story_TEENAGER",
-    "points": 2,
-    "skills": [
-      { "level": 3, "name": "fabrication" },
-      { "level": 3, "name": "survival" },
-      { "level": 3, "name": "firstaid" },
-      { "level": 3, "name": "traps" }
-    ],
-    "proficiencies": [ "prof_fibers", "prof_fibers_rope", "prof_lockpicking", "prof_gun_cleaning" ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "jacket_light" },
-          { "item": "pants_cargo" },
-          { "item": "socks" },
-          { "item": "boots" },
-          { "item": "knit_scarf" },
-          { "item": "backpack" },
-          { "item": "granola" },
-          { "item": "water_clean" },
-          { "item": "scissors" },
-          { "item": "magnifying_glass" },
-          { "item": "wristwatch" },
-          { "item": "whistle" },
-          { "group": "charged_cell_phone" },
-          { "group": "full_1st_aid" },
-          { "group": "charged_flashlight" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
-    },
-    "age_lower": 16,
-    "age_upper": 18
-  },
-  {
-    "type": "profession",
-    "id": "dodgeball_player",
-    "name": "Dodgeball Player",
-    "description": "In dodgeball, failing to dodge meant taking a ball to the head and being out of the game.  In the Cataclysm, it means getting eaten by monsters.  Don't slip up.",
-    "npc_background": "BG_survival_story_SPORTS",
-    "points": 2,
-    "skills": [ { "level": 5, "name": "dodge" }, { "level": 4, "name": "throw" }, { "level": 3, "name": "swimming" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "jacket_light" },
-          { "item": "jeans" },
-          { "item": "socks_ankle" },
-          { "item": "lowtops" },
-          { "item": "slingpack" },
-          { "item": "juice" },
-          { "group": "charged_smart_phone" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" } ] }
-    },
-    "age_lower": 16,
-    "age_upper": 18
-  },
-  {
-    "type": "profession",
-    "id": "science_club_mem",
-    "name": "Science Club Member",
-    "description": "The school never let your club play with the really fun chemicals, the kind that make things go boom, but there aren't any teachers around to enforce the rules anymore.",
+    "id": "nerd",
+    "name": "Nerd",
+    "description": "You studied hard, but you never fit in with the cool kids.  Then the bombs fell, and only you survived.  The geek shall inherit the earth!",
     "npc_background": "BG_survival_story_TEENAGER",
     "points": 1,
-    "skills": [ { "level": 2, "name": "fabrication" }, { "level": 2, "name": "mechanics" }, { "level": 2, "name": "chemistry" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "jacket_light" },
-          { "item": "jeans" },
-          { "item": "socks" },
-          { "item": "sneakers" },
-          { "item": "knit_scarf" },
-          { "item": "backpack" },
-          { "item": "basic_chemistry" },
-          { "item": "wristwatch" },
-          { "group": "charged_smart_phone" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "panties" } ] }
-    },
-    "age_lower": 16,
-    "age_upper": 18
-  },
-  {
-    "type": "profession",
-    "id": "av_club_mem",
-    "name": "A/V Club Member",
-    "description": "You were a member of the school A/V club.  You're sure there's some way you can use your technical skills to help you stay alive.  You just haven't figured out how to make an awesome death ray yet.",
-    "npc_background": "BG_survival_story_TEENAGER",
-    "points": 1,
-    "skills": [ { "level": 3, "name": "electronics" }, { "level": 3, "name": "computer" } ],
+    "skills": [ { "level": 2, "name": "electronics" }, { "level": 3, "name": "computer" }, { "level": 3, "name": "chemistry" } ],
     "items": {
       "both": {
         "entries": [
@@ -4987,43 +4714,16 @@
           { "item": "knit_scarf" },
           { "item": "backpack" },
           { "item": "mag_electronics" },
+          { "item": "basic_chemistry" },
           { "item": "wristwatch" },
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
     },
     "age_lower": 16,
     "age_upper": 18
-  },
-  {
-    "type": "profession",
-    "id": "teacher",
-    "name": "Teacher",
-    "description": "You've been teaching kids all your life, experiencing the joy and aggravation of imparting knowledge to young minds.  If zombies have any interest in education, they're not showing it.",
-    "npc_background": "BG_survival_story_WORKER_PUBLIC",
-    "points": 1,
-    "skills": [ { "level": 4, "name": "speech" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "dress_shirt" },
-          { "item": "blazer" },
-          { "item": "socks" },
-          { "item": "dress_shoes" },
-          { "item": "tie_skinny" },
-          { "item": "tieclip" },
-          { "item": "poetry_book" },
-          { "item": "wristwatch" },
-          { "group": "charged_smart_phone" },
-          { "item": "permanent_marker", "charges": 500 },
-          { "item": "pants" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
-    }
   },
   {
     "type": "profession",
@@ -5048,7 +4748,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "bra" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -5058,6 +4758,7 @@
     "description": "It was hard enough getting kids to run laps without having to worry about them trying to eat your brains.  Zombies won't even line up when you blow your whistle.",
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "points": 2,
+    "proficiencies": [ "prof_swimming" ],
     "skills": [
       { "level": 3, "name": "swimming" },
       { "level": 3, "name": "speech" },
@@ -5080,8 +4781,8 @@
           { "item": "tank_top" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5090,8 +4791,8 @@
     "name": "Miner",
     "description": "Your canteen is dry, your jackhammer is out of gas, and you're on your last pair of batteries for your mining helmet…",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 1,
-    "skills": [ { "level": 2, "name": "mechanics" }, { "level": 2, "name": "swimming" } ],
+    "points": 2,
+    "skills": [ { "level": 2, "name": "mechanics" }, { "level": 2, "name": "swimming" }, { "level": 1, "name": "traps" } ],
     "items": {
       "both": {
         "entries": [
@@ -5110,72 +4811,14 @@
           { "group": "charged_smart_phone" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "jackhammer", "charges": 0 },
+          { "item": "dynamite", "count": 4 },
           { "item": "light_battery_cell", "charges": 100 },
           { "group": "hat_hard_flashlight" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "sports_bra" } ] }
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
-  },
-  {
-    "type": "profession",
-    "id": "demolition_expert",
-    "name": "Demolition Expert",
-    "description": "Before this all began, you were having the time of your life at your dream job: blowing stuff up.  The Cataclysm means you're finally allowed to do it full time.",
-    "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "skills": [ { "level": 4, "name": "fabrication" }, { "level": 3, "name": "chemistry" }, { "level": 3, "name": "throw" } ],
-    "points": 2,
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "socks" },
-          { "item": "boots_steel" },
-          { "item": "gloves_work" },
-          { "item": "jumpsuit" },
-          { "item": "canteen" },
-          { "item": "tool_belt" },
-          { "item": "mbag" },
-          { "item": "briefcase" },
-          { "item": "wristwatch" },
-          { "item": "hat_hard" },
-          { "group": "charged_matches" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "dynamite", "count": 8 },
-          { "item": "dynamite", "count": 4 },
-          { "group": "charged_smart_phone" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "sports_bra" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "parkour_practitioner",
-    "name": { "male": "Traceur", "female": "Traceuse" },
-    "description": "You've practiced parkour for many years, and made the world your playground.  It wouldn't be a lie to say that running is your life.  Which is good, because now that the end has come, you're running FOR your life.",
-    "npc_background": "BG_survival_story_SPORTS",
-    "points": 3,
-    "proficiencies": [ "prof_parkour" ],
-    "skills": [ { "level": 6, "name": "dodge" }, { "level": 4, "name": "swimming" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "hoodie" },
-          { "item": "pants_cargo" },
-          { "item": "socks_ankle" },
-          { "item": "sneakers" },
-          { "item": "runner_bag" },
-          { "item": "wristwatch" },
-          { "group": "charged_smart_phone" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
-    },
-    "age_lower": 18
   },
   {
     "type": "profession",
@@ -5204,7 +4847,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5241,7 +4884,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5328,7 +4971,9 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "gold_ring" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "gold_earring" } ] }
+      "female": {
+        "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "gold_earring" } ]
+      }
     },
     "missions": [ "MISSION_SOCIAL_BUTTERFLY" ]
   },
@@ -5363,7 +5008,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5401,8 +5046,8 @@
       "female": {
         "entries": [
           { "item": "polo_shirt" },
-          { "item": "bra" },
-          { "item": "panties" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
           { "item": "skirt" },
           { "item": "heels" },
           { "item": "stockings" },
@@ -5446,7 +5091,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tshirt" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "mask_ski" },
@@ -5471,7 +5116,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -5517,7 +5162,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "flags": [ "SCEN_ONLY" ],
     "missions": [ "MISSION_HELICOPTER_PILOT" ]
@@ -5531,7 +5176,6 @@
     "points": 3,
     "skills": [ { "level": 4, "name": "firstaid" }, { "level": 3, "name": "driving" }, { "level": 1, "name": "mechanics" } ],
     "proficiencies": [ "prof_field_medic", "prof_intro_biology", "prof_physiology", "prof_burn_care", "prof_driver" ],
-    "traits": [ "PROF_MED" ],
     "vehicle": "ambulance",
     "items": {
       "both": {
@@ -5550,7 +5194,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5572,14 +5216,12 @@
       { "level": 2, "name": "survival" },
       { "level": 2, "name": "swimming" }
     ],
-    "traits": [ "PROF_MED" ],
     "proficiencies": [
       "prof_spotting",
       "prof_field_medic",
       "prof_intro_biology",
       "prof_physiology",
       "prof_burn_care",
-      "prof_dissect_humans",
       "prof_gun_cleaning",
       "prof_knives_familiar",
       "prof_auto_rifles_familiar",
@@ -5589,7 +5231,7 @@
       "both": {
         "entries": [
           { "item": "pants_army" },
-          { "item": "undershirt" },
+          { "item": "tank_top" },
           { "item": "combat_shirt" },
           { "item": "helmet_army" },
           { "item": "gloves_liner" },
@@ -5601,7 +5243,7 @@
           { "item": "bandages", "count": 3 },
           { "item": "scalpel" },
           { "item": "syringe" },
-          { "item": "morphine" },
+          { "group": "morphine_vial_glass_4" },
           { "item": "aspirin" },
           { "item": "antibiotics" },
           { "item": "disinfectant" },
@@ -5625,7 +5267,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -5659,11 +5301,10 @@
     "id": "hazmat_unit",
     "name": "Hazmat Unit",
     "description": "You were deployed to autopsy one of the rioters showing feral behavior before being put down.  When they got back up, you knew this was out of your pay grade.",
-    "points": 4,
+    "points": 3,
     "npc_background": "BG_survival_story_WORKER_FIREFIGHTER",
-    "skills": [ { "level": 6, "name": "firstaid" } ],
+    "skills": [ { "level": 5, "name": "firstaid" } ],
     "proficiencies": [ "prof_intro_biology", "prof_physiology", "prof_burn_care", "prof_dissect_humans" ],
-    "traits": [ "PROF_MED" ],
     "items": {
       "both": {
         "entries": [
@@ -5679,7 +5320,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5711,8 +5352,8 @@
           { "item": "crack", "count": 25, "container-item": "null", "entry-wrapper": "bag_zipper" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "traits": [ "LIAR" ]
   },
@@ -5728,7 +5369,12 @@
       "both": { "entries": [ { "item": "pom_poms" }, { "item": "socks_ankle" }, { "item": "sneakers" }, { "item": "tank_top" } ] },
       "male": { "entries": [ { "item": "briefs" }, { "item": "shorts" }, { "item": "tank_top" }, { "item": "sweater" } ] },
       "female": {
-        "entries": [ { "item": "sports_bra" }, { "item": "panties" }, { "item": "cheerleader_dress" }, { "item": "jacket_varsity" } ]
+        "entries": [
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
+          { "item": "cheerleader_dress" },
+          { "item": "jacket_varsity" }
+        ]
       }
     },
     "missions": [ "MISSION_SOCIAL_BUTTERFLY" ],
@@ -5754,7 +5400,7 @@
       },
       "male": {
         "entries": [
-          { "item": "undershirt" },
+          { "item": "tank_top" },
           { "item": "sneakers" },
           { "item": "jumpsuit_long", "variant": "flag_suit" },
           { "item": "briefs" }
@@ -5812,7 +5458,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5821,8 +5467,9 @@
     "name": "Swimmer",
     "description": "You were looking forward to a nice, relaxing day at the beach.  You had to run when some lunatics tried to rip your head off and play beach volleyball with it, but at least you managed to grab your bag on the way out.",
     "npc_background": "BG_survival_story_TOURIST",
-    "points": 0,
-    "skills": [ { "level": 2, "name": "swimming" } ],
+    "points": 2,
+    "proficiencies": [ "prof_swimming" ],
+    "skills": [ { "level": 3, "name": "swimming" } ],
     "items": {
       "both": {
         "entries": [
@@ -5854,7 +5501,8 @@
     "name": "Diver",
     "description": "You were exploring below the waves close to shore when you noticed something weird on the nearby beach, you decided to swim away when you heard the screams.",
     "npc_background": "BG_survival_story_SPORTS",
-    "points": 2,
+    "points": 3,
+    "proficiencies": [ "prof_swimming" ],
     "skills": [ { "level": 5, "name": "swimming" } ],
     "traits": [ "OUTDOORSMAN" ],
     "items": {
@@ -5901,7 +5549,7 @@
         "entries": [
           { "item": "fancy_sunglasses" },
           { "item": "platinum_watch" },
-          { "item": "knit_scarf_loose" },
+          { "item": "knit_scarf" },
           { "item": "gloves_liner" },
           { "item": "polaroid_photo" },
           { "item": "suppressor" },
@@ -5926,8 +5574,8 @@
       },
       "female": {
         "entries": [
-          { "item": "panties" },
-          { "item": "bra" },
+          { "group": "female_underwear_bottom" },
+          { "group": "female_underwear_top" },
           { "item": "stockings" },
           { "item": "garter_belt" },
           { "item": "heels" },
@@ -5978,8 +5626,8 @@
           { "item": "m1a", "ammo-item": "762_51", "charges": 20, "contents-item": [ "shoulder_strap_simple" ] }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "boy_shorts" }, { "item": "bra" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     },
     "age_lower": 50
   },
@@ -6017,7 +5665,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER", "MISSION_FIND_RIFLE" ]
   },
@@ -6044,7 +5692,9 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "panties" }, { "item": "bra" }, { "item": "jeans_skinny" } ] }
+      "female": {
+        "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" }, { "item": "jeans_skinny" } ]
+      }
     }
   },
   {
@@ -6079,11 +5729,11 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "undershirt" },
+          { "item": "tank_top" },
           { "item": "pants_army" },
           { "item": "socks" },
           { "item": "boots_combat" },
-          { "item": "attached_ear_plugs_off" },
+          { "item": "attached_ear_plugs_off", "custom-flags": [ "no_auto_equip" ] },
           { "item": "helmet_eod" },
           { "item": "nomex_gloves" },
           { "item": "gloves_eod" },
@@ -6097,7 +5747,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -6122,7 +5772,14 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "socks" }, { "item": "pants" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "stockings" }, { "item": "skirt" } ] }
+      "female": {
+        "entries": [
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
+          { "item": "stockings" },
+          { "item": "skirt" }
+        ]
+      }
     }
   },
   {
@@ -6158,8 +5815,8 @@
       "male": { "entries": [ { "item": "briefs" }, { "item": "socks" }, { "item": "pants" }, { "item": "gold_cufflinks" } ] },
       "female": {
         "entries": [
-          { "item": "bra" },
-          { "item": "panties" },
+          { "group": "female_underwear_top" },
+          { "group": "female_underwear_bottom" },
           { "item": "stockings" },
           { "item": "gold_bracelet" },
           { "item": "garter_belt" },
@@ -6175,11 +5832,17 @@
     "id": "bionic_installer",
     "name": "Augmentation Associate",
     "npc_background": "BG_survival_story_MEDICAL",
-    "description": "When bionics first emerged, you were quick to make them into your career, and spent your days overseeing their installation.  That makes you one of the few non-zombies in the world that can calibrate an Autodoc, which might come in handy.",
+    "description": "Bionics are bleeding edge tech and you were poised to embark on a very promising career installing them in people.  The world has fallen apart, but maybe your skillset will still come in handy.",
     "points": 4,
-    "skills": [ { "level": 4, "name": "firstaid" }, { "level": 4, "name": "electronics" } ],
-    "proficiencies": [ "prof_intro_biology", "prof_physiology", "prof_field_medic", "prof_dissect_humans" ],
-    "traits": [ "PROF_AUTODOC" ],
+    "skills": [ { "level": 4, "name": "firstaid" }, { "level": 4, "name": "computer" }, { "level": 2, "name": "electronics" } ],
+    "proficiencies": [
+      "prof_intro_biology",
+      "prof_physiology",
+      "prof_field_medic",
+      "prof_dissect_humans",
+      "prof_surgery",
+      "prof_robotic_programming"
+    ],
     "items": {
       "both": {
         "entries": [
@@ -6200,7 +5863,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -6229,8 +5892,8 @@
           { "item": "tshirt", "variant": "generic_tshirt" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_PATIENT" ]
   },
@@ -6303,7 +5966,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -6357,7 +6020,7 @@
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boxer_shorts" } ] }
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     }
   },
   {
@@ -6388,7 +6051,9 @@
         ]
       },
       "male": { "entries": [ { "item": "briefs" }, { "item": "silver_ring" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "silver_earring" } ] }
+      "female": {
+        "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" }, { "item": "silver_earring" } ]
+      }
     }
   },
   {
@@ -6430,8 +6095,8 @@
     ],
     "items": {
       "both": { "entries": [ { "item": "subsuit_xl" }, { "item": "footrags" }, { "item": "hat_noise_cancelling" } ] },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_BIONICS_FAULTY" ]
   },
@@ -6441,7 +6106,8 @@
     "name": "Drone Operator",
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "description": "You had a job programming machines such as automatic street cleaners, newsbots, and pizza delivery drones.  Bionic implants helped you control them remotely.  Now all the drones carry guns instead of pizza.  At least you still have an… RC car?",
-    "points": 1,
+    "points": 3,
+    "proficiencies": [ "prof_robotic_programming" ],
     "CBMs": [ "bio_cable", "bio_power_storage", "bio_remote" ],
     "skills": [ { "level": 2, "name": "computer" } ],
     "items": {
@@ -6452,12 +6118,13 @@
           { "item": "boots" },
           { "item": "wristwatch" },
           { "item": "mbag" },
-          { "group": "charged_cell_phone" },
-          { "group": "toy_radio_car" }
+          { "group": "charged_smart_phone" },
+          { "group": "toy_radio_car" },
+          { "group": "charged_laptop", "contents-item": "software_robotics" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -6491,8 +6158,8 @@
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" } ] },
-      "female": { "entries": [ { "item": "sports_bra" }, { "item": "boy_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   }
 ]

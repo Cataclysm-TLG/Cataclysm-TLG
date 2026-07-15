@@ -56,6 +56,7 @@ static const ammo_effect_str_id ammo_effect_STREAM( "STREAM" );
 static const ammo_effect_str_id ammo_effect_STREAM_BIG( "STREAM_BIG" );
 static const ammo_effect_str_id ammo_effect_STREAM_TINY( "STREAM_TINY" );
 static const ammo_effect_str_id ammo_effect_TANGLE( "TANGLE" );
+static const ammo_effect_str_id ammo_effect_TRIP( "TRIP" );
 static const ammo_effect_str_id ammo_effect_WIDE( "WIDE" );
 
 static const itype_id itype_glass_shard( "glass_shard" );
@@ -97,7 +98,7 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
                        drop_item.tname(), nb_of_dropped_shard, max_nb_of_shards - 1, to_gram( drop_item.type->weight ) );*/
 
         for( int i = 0; i < nb_of_dropped_shard; ++i ) {
-            item shard( "glass_shard" );
+            item shard( itype_glass_shard );
             //actual dropping of shards
             here->add_item_or_charges( pt, shard );
         }
@@ -126,7 +127,8 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
     bool mon_there = mon != nullptr && !mon->is_dead_state();
     // And if we actually want to embed
     bool embed = mon_there && effects.count( ammo_effect_NO_EMBED ) == 0 &&
-                 effects.count( ammo_effect_TANGLE ) == 0;
+                 effects.count( ammo_effect_TANGLE ) == 0 &&
+                 effects.count( ammo_effect_TRIP ) == 0;
     // Don't embed in small creatures
     if( embed ) {
         const creature_size critter_size = mon->get_size();
@@ -155,6 +157,9 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
         // players and NPCs just get the downed effect, and item is dropped.
         // TODO: storing the item on player until they recover from downed
         if( effects.count( ammo_effect_TANGLE ) && mon_there ) {
+            do_drop = false;
+        }
+        if( effects.count( ammo_effect_TRIP ) && mon_there ) {
             do_drop = false;
         }
         if( effects.count( ammo_effect_ACT_ON_RANGED_HIT ) ) {
@@ -520,6 +525,16 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             }
 
             if( !skip_hit && critter != nullptr && cur_missed_by < 1.0 ) {
+                // Prevent shots from hitting underwater creatures that are beneath surface (except thin ice);
+                // treat the shot as hitting the terrain instead.
+                if( critter->is_underwater() &&
+                    here->has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, critter->pos_bub() ) &&
+                    !here->has_flag( ter_furn_flag::TFLAG_THIN_ICE, critter->pos_bub() ) ) {
+                    if( origin != nullptr && origin->is_avatar() ) {
+                        add_msg( m_info, _( "Your shot is blocked by the surface." ) );
+                    }
+                    continue;
+                }
                 if( in_veh != nullptr && veh_pointer_or_null( here->veh_at( tp ) ) == in_veh &&
                     critter->is_avatar() ) {
                     // Turret either was aimed by the player (who is now ducking) and shoots from above
@@ -615,20 +630,17 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         first = false;
     }
 
-    // We need to store bounce targets safely.
-    std::vector<Creature *> bounce_targets;
-
-    // /Check for bounce effect and gather valid bounce targets first.
-    if( proj.proj_effects.count( ammo_effect_BOUNCE ) ) {
+    // Hits are currently hard capped at 6 here, because otherwise the attack would just go forever.
+    if( proj.proj_effects.count( ammo_effect_BOUNCE ) && attack.targets_hit.size() < 6 ) {
         Creature *mon_ptr = g->get_creature_if( [&]( const Creature & z ) {
             if( &z == origin ) {
                 return false;
             }
             // Search for creatures in radius 4 around impact site.
-            if( trig_dist( z.pos_bub( *here ), tp ) <= 4 &&
-                here->clear_path( z.pos_bub( *here ), tp, 4, 1, 100 ) && ( z.pos_bub( *here ) != tp ) ) {
-                // Don't hit targets that have already been hit
-                for( const auto &it : attack.targets_hit ) {
+            if( trig_dist( z.pos_bub( *here ), tp ) <= 4 && trig_dist( z.pos_bub( *here ), tp ) > 0 &&
+                here->sees( z.pos_bub( *here ), tp, -1 ) ) {
+                // Don't hit targets that have already been hit.
+                for( auto it : attack.targets_hit ) {
                     if( &z == it.first ) {
                         return false;
                     }
@@ -638,26 +650,14 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             return false;
         } );
         if( mon_ptr ) {
-            bounce_targets.push_back( mon_ptr );
-        }
-    }
-
-    // Now safely process all bounce targets
-    for( Creature *z : bounce_targets ) {
-        if( !z || z->is_dead_state() ) {
-            continue; // Skip invalid or dead creatures.
-        }
-
-        add_msg( _( "The attack bounced to %s!" ), z->disp_name() );
-
-        // Perform the projectile attack on the bounce target.
-        projectile_attack( attack, proj, here, tp, z->pos_bub(), dispersion, origin, in_veh );
-
-        // Play sound if applicable.
-        if( here == &reality_bubble() ) {
-            sfx::play_variant_sound( "fire_gun", "bio_lightning_tail",
-                                     sfx::get_heard_volume( z->pos_bub() ),
-                                     sfx::get_heard_angle( z->pos_bub() ) );
+            Creature &z = *mon_ptr;
+            attack.targets_hit[&z].first += 0;
+            add_msg( _( "The attack bounced to %s!" ), z.get_name() );
+            projectile_attack( attack, proj, here, tp, z.pos_bub(), dispersion, origin, in_veh );
+            if( here == &reality_bubble() ) {
+                sfx::play_variant_sound( "fire_gun", "bio_lightning_tail",
+                                         sfx::get_heard_volume( z.pos_bub() ), sfx::get_heard_angle( z.pos_bub() ) );
+            }
         }
     }
 

@@ -237,17 +237,6 @@
   },
   {
     "type": "keybinding",
-    "id": "ENABLE_MAPEXTRA_NOTE",
-    "category": "AUTO_NOTES",
-    "name": "Enable auto notes for map extras",
-    "bindings": [
-      { "input_method": "keyboard_any", "key": "e" },
-      { "input_method": "keyboard_char", "key": "E" },
-      { "input_method": "keyboard_code", "key": "e", "mod": [ "shift" ] }
-    ]
-  },
-  {
-    "type": "keybinding",
     "id": "SWITCH_AUTO_NOTE_OPTION",
     "category": "AUTO_NOTES",
     "name": "Toggle auto notes option",
@@ -256,24 +245,6 @@
       { "input_method": "keyboard_char", "key": "S" },
       { "input_method": "keyboard_code", "key": "s", "mod": [ "shift" ] }
     ]
-  },
-  {
-    "type": "keybinding",
-    "id": "DISABLE_MAPEXTRA_NOTE",
-    "category": "AUTO_NOTES",
-    "name": "Disable auto notes for map extras",
-    "bindings": [
-      { "input_method": "keyboard_any", "key": "d" },
-      { "input_method": "keyboard_char", "key": "D" },
-      { "input_method": "keyboard_code", "key": "d", "mod": [ "shift" ] }
-    ]
-  },
-  {
-    "type": "keybinding",
-    "id": "CHANGE_MAPEXTRA_CHARACTER",
-    "category": "AUTO_NOTES",
-    "name": "Change a symbol for map extra",
-    "bindings": [ { "input_method": "keyboard_any", "key": "=" } ]
   },
   {
     "type": "keybinding",
@@ -1100,6 +1071,13 @@
     "category": "OVERMAP_NOTES",
     "name": "Mark danger",
     "bindings": [ { "input_method": "keyboard_char", "key": "R" }, { "input_method": "keyboard_code", "key": "r", "mod": [ "shift" ] } ]
+  },
+  {
+    "type": "keybinding",
+    "id": "look",
+    "category": "OVERMAP",
+    "name": "Look around",
+    "bindings": [ { "input_method": "keyboard_any", "key": ";" } ]
   },
   {
     "type": "keybinding",
@@ -2202,6 +2180,13 @@
   },
   {
     "type": "keybinding",
+    "id": "TOGGLE_SHUTDOWN",
+    "category": "BIONICS",
+    "name": "Toggle automatic shutdown on empty fuel",
+    "bindings": [ { "input_method": "keyboard_char", "key": "P" }, { "input_method": "keyboard_code", "key": "p", "mod": [ "shift" ] } ]
+  },
+  {
+    "type": "keybinding",
     "id": "TOGGLE_SPRITE",
     "category": "BIONICS",
     "name": "Toggle sprite",
@@ -2793,6 +2778,12 @@
   },
   {
     "type": "keybinding",
+    "name": "View map",
+    "id": "map",
+    "bindings": [ { "input_method": "keyboard_any", "key": ";" } ]
+  },
+  {
+    "type": "keybinding",
     "name": "Look at the sky",
     "category": "DEFAULTMODE",
     "id": "sky"
@@ -2958,7 +2949,7 @@
   },
   {
     "type": "keybinding",
-    "name": "Quicksave",
+    "name": "Quicksave (Warning: may cause save corruption!)",
     "category": "DEFAULTMODE",
     "id": "quicksave"
   },
@@ -3039,12 +3030,6 @@
     "name": "Auto pickup manager",
     "category": "DEFAULTMODE",
     "id": "open_autopickup"
-  },
-  {
-    "type": "keybinding",
-    "name": "Auto notes manager",
-    "category": "DEFAULTMODE",
-    "id": "open_autonotes"
   },
   {
     "type": "keybinding",
@@ -3476,6 +3461,28 @@
       { "input_method": "keyboard_any", "key": "x" },
       { "input_method": "keyboard_char", "key": "X" },
       { "input_method": "keyboard_code", "key": "x", "mod": [ "shift" ] }
+    ]
+  },
+  {
+    "type": "keybinding",
+    "id": "ENABLE_VEHICLE_ZONES",
+    "category": "ZONES_MANAGER",
+    "name": "Enable vehicle zones",
+    "bindings": [
+      { "input_method": "keyboard_any", "key": "c" },
+      { "input_method": "keyboard_char", "key": "C" },
+      { "input_method": "keyboard_code", "key": "c", "mod": [ "shift" ] }
+    ]
+  },
+  {
+    "type": "keybinding",
+    "id": "DISABLE_VEHICLE_ZONES",
+    "category": "ZONES_MANAGER",
+    "name": "Disable vehicle zones",
+    "bindings": [
+      { "input_method": "keyboard_any", "key": "v" },
+      { "input_method": "keyboard_char", "key": "V" },
+      { "input_method": "keyboard_code", "key": "v", "mod": [ "shift" ] }
     ]
   },
   {
@@ -4313,6 +4320,13 @@
     "category": "INVENTORY",
     "name": "Switch to modifying whitelist",
     "bindings": [ { "input_method": "keyboard_any", "key": "w" } ]
+  },
+  {
+    "type": "keybinding",
+    "id": "FAV_WHITELIST_CONTENTS",
+    "category": "INVENTORY",
+    "name": "Whitelist Contents",
+    "bindings": [ { "input_method": "keyboard_char", "key": "W" }, { "input_method": "keyboard_code", "key": "w", "mod": [ "shift" ] } ]
   },
   {
     "type": "keybinding",

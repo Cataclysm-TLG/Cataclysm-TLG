@@ -42,7 +42,7 @@
     "price": "20 cent",
     "price_postapoc": "10 cent",
     "to_hit": 1,
-    "material": [ "carpet_pilling", "plastic" ],
+    "material": [ "carpet_pile", "plastic" ],
     "symbol": "[",
     "looks_like": "arm_warmers",
     "color": "red",
@@ -53,7 +53,7 @@
     "armor": [
       {
         "material": [
-          { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "covers": [ "arm_l", "arm_r" ],
@@ -76,7 +76,7 @@
     "price": "10 cent",
     "price_postapoc": "5 cent",
     "to_hit": 1,
-    "material": [ "carpet_pilling", "plastic" ],
+    "material": [ "carpet_pile", "plastic" ],
     "symbol": "[",
     "looks_like": "arm_warmers",
     "color": "red",
@@ -87,7 +87,7 @@
     "armor": [
       {
         "material": [
-          { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "covers": [ "arm_l", "arm_r" ],
@@ -207,8 +207,18 @@
           { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 }
         ],
         "covers": [ "arm_l", "arm_r" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 16
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
+        "encumbrance": 16,
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 }
+        ]
       }
     ],
     "warmth": 35,
@@ -532,7 +542,7 @@
     "warmth": 20,
     "material_thickness": 2,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
+    "flags": [ "SKINTIGHT", "WATER_FRIENDLY" ],
     "armor": [
       {
         "material": [
@@ -540,12 +550,31 @@
           { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 5,
+        "encumbrance": 6,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
         "coverage": 95
       },
       { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ], "coverage": 100 },
-      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ], "coverage": 80 }
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ], "coverage": 80 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 5,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 16,
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ]
+      }
     ]
   },
   {
@@ -574,8 +603,8 @@
     "category": "armor",
     "name": { "str": "quilted sleeves", "str_pl": "pairs of quilted sleeves" },
     "description": "Medieval cloth armor for the arms consisting of a pair of quilted sleeves stuffed with batting.  Adjustable ties along their length allow them to be worn under or over other gear.  Activate to change thier fit.",
-    "weight": "1380 g",
-    "volume": "500 ml",
+    "weight": "2250 g",
+    "volume": "1000 ml",
     "price": "12 USD",
     "price_postapoc": "4 USD",
     "to_hit": 1,
@@ -601,6 +630,16 @@
         ],
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 98,
+        "encumbrance": 28
+      },
+      {
+        "material": [
+          { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 }
+        ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
         "encumbrance": 28
       }
     ]
@@ -642,8 +681,8 @@
     "category": "armor",
     "name": { "str": "quilted sleeves", "str_pl": "pairs of quilted sleeves" },
     "description": "Medieval cloth armor for the arms consisting of a pair of quilted sleeves stuffed with batting.  Adjustable ties along their length allow them to be worn under or over other gear.  Activate to change thier fit.",
-    "weight": "1380 g",
-    "volume": "500 ml",
+    "weight": "2250 g",
+    "volume": "1000 ml",
     "price": "12 USD",
     "price_postapoc": "4 USD",
     "to_hit": 1,
@@ -664,6 +703,15 @@
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 98,
         "encumbrance": 28
+      },
+      {
+        "material": [
+          { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 }
+        ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95
       }
     ],
     "use_action": {
@@ -756,6 +804,19 @@
         "specifically_covers": [ "arm_lower_l", "arm_lower_r" ],
         "coverage": 95,
         "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "coverage": 98,
+        "encumbrance": 10
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "coverage": 95
       }
     ],
     "melee_damage": { "bash": 2 }
@@ -866,7 +927,7 @@
       "target": "chainmail_junk_sleeves",
       "menu_text": "Tighten"
     },
-    "delete": { "flags": [ "NORMAL", "STURDY" ] },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -1003,12 +1064,74 @@
     "id": "armguard_cut_resistant",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "cut-resistant arm sleeves", "str_pl": "pairs of cut-resistant arm sleeves" },
-    "description": "A long pair of cut-resistant Kevlar sleeves with thumbholes.  These were often used by loggers and landscapers for protection from thorns and chainsaw accidents.",
-    "weight": "450 g",
-    "copy-from": "armguard_soft",
+    "category": "armor",
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "description": "A long, stretchy pair of Kevlar sleeves with thumbholes.  These were often used by loggers and landscapers for protection from thorns and chainsaw accidents.",
+    "weight": "220 g",
+    "volume": "410 ml",
     "price": "12 USD",
-    "material": [ "kevlar" ]
+    "price_postapoc": "2 USD",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "yellow",
+    "warmth": 10,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 4,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
+        "coverage": 95
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ],
+        "coverage": 100
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_upper_l", "arm_upper_r" ],
+        "coverage": 10
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "coverage": 5,
+        "encumbrance": 10
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "armguard_cut_resistant_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "copy-from": "armguard_cut_resistant",
+    "weight": "330 g",
+    "volume": "615 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "armguard_cut_resistant_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "copy-from": "armguard_cut_resistant",
+    "weight": "110 g",
+    "volume": "205 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
   },
   {
     "id": "platemail_arm_guards",

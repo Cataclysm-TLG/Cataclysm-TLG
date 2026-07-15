@@ -15,6 +15,8 @@
 #include <sstream>
 #include <string>
 #include <tuple>
+#include <string_view>
+#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 
@@ -61,7 +63,9 @@
 #include "item_factory.h"
 #include "item_group.h"
 #include "item_tname.h"
+#include "item_transformation.h"
 #include "iteminfo_query.h"
+#include "item_wakeup.h"
 #include "itype.h"
 #include "iuse.h"
 #include "iuse_actor.h"
@@ -141,11 +145,8 @@ static const damage_type_id damage_heat( "heat" );
 static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_bleed( "bleed" );
-static const efftype_id effect_cig( "cig" );
 static const efftype_id effect_shakes( "shakes" );
 static const efftype_id effect_sleep( "sleep" );
-static const efftype_id effect_weed_high( "weed_high" );
-
 static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 static const fault_id fault_overheat_safety( "fault_overheat_safety" );
 
@@ -172,12 +173,15 @@ static const itype_id itype_blood( "blood" );
 static const itype_id itype_brass_catcher( "brass_catcher" );
 static const itype_id itype_bullet_crossbow( "bullet_crossbow" );
 static const itype_id itype_cash_card( "cash_card" );
+static const itype_id itype_cigar_lit( "cigar_lit" );
+static const itype_id itype_corpse( "corpse" );
+static const itype_id itype_corpse_generic_human( "corpse_generic_human" );
+static const itype_id itype_craft( "craft" );
 static const itype_id itype_disassembly( "disassembly" );
 static const itype_id itype_efile_photos( "efile_photos" );
 static const itype_id itype_efile_recipes( "efile_recipes" );
 static const itype_id itype_hand_crossbow( "hand_crossbow" );
 static const itype_id itype_joint_lit( "joint_lit" );
-static const itype_id itype_null( "null" );
 static const itype_id itype_power_cord( "power_cord" );
 static const itype_id itype_rad_badge( "rad_badge" );
 static const itype_id itype_stock_none( "stock_none" );
@@ -224,6 +228,8 @@ static const trait_id trait_TOLERANCE( "TOLERANCE" );
 static const trait_id trait_WOOLALLERGY( "WOOLALLERGY" );
 
 static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
+static const vitamin_id vitamin_cannabis( "cannabis" );
+static const vitamin_id vitamin_nicotine( "nicotine" );
 
 // vitamin flags
 static const std::string flag_NO_DISPLAY( "NO_DISPLAY" );
@@ -302,7 +308,8 @@ item::item() : bday( calendar::start_of_cataclysm )
     select_itype_variant();
 }
 
-item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( turn )
+item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( turn ),
+    uid_( generate_next_item_uid() )
 {
     contents = item_contents( type->pockets );
     if( type->countdown_interval > 0_seconds ) {
@@ -532,7 +539,7 @@ static void inherit_rot_from_components( item &it )
 }
 
 item::item( const recipe *rec, int qty, item_components items, std::vector<item_comp> selections )
-    : item( "craft", calendar::turn )
+    : item( itype_craft, calendar::turn )
 {
     craft_data_ = cata::make_value<craft_data>();
     craft_data_->making = rec;
@@ -566,7 +573,7 @@ item::item( const recipe *rec, int qty, item_components items, std::vector<item_
 }
 
 item::item( const recipe *rec, int qty, item &component )
-    : item( "disassembly", calendar::turn )
+    : item( itype_disassembly, calendar::turn )
 {
     craft_data_ = cata::make_value<craft_data>();
     craft_data_->making = rec;
@@ -613,7 +620,7 @@ item item::make_corpse( const mtype_id &mt, time_point turn, const std::string &
         debugmsg( "tried to make a corpse with an invalid mtype id" );
     }
 
-    std::string corpse_type = mt == mtype_id::NULL_ID() ? "corpse_generic_human" : "corpse";
+    itype_id corpse_type = mt == mtype_id::NULL_ID() ? itype_corpse_generic_human : itype_corpse;
 
     item result( corpse_type, turn );
     result.corpse = &mt.obj();
@@ -678,11 +685,11 @@ item &item::deactivate( Character *ch, bool alert )
         return *this; // no-op
     }
 
-    if( type->revert_to ) {
+    if( type->transform_into ) {
         if( ch && alert && !type->tool->revert_msg.empty() ) {
             ch->add_msg_if_player( m_info, type->tool->revert_msg.translated(), tname() );
         }
-        convert( *type->revert_to );
+        type->transform_into.value().transform( ch, *this, true );
         active = false;
 
         if( ch ) {
@@ -770,7 +777,7 @@ item &item::ammo_set( const itype_id &ammo, int qty )
         return *this;
     }
 
-    // check ammo is valid for the item
+    // Check whether ammo is valid for the item.
     std::set<itype_id> mags = magazine_compatible();
     if( ammo_types().count( ammo_type ) == 0 && !( magazine_current() &&
             magazine_current()->ammo_types().count( ammo_type ) ) &&
@@ -1155,8 +1162,13 @@ const std::array<bodypart_str_id, 4> &right_side_parts()
 
 } // namespace
 
-static void iterate_helper_sbp( const item *i, const side s,
-                                const std::function<void( const sub_bodypart_str_id & )> &cb )
+static void iterate_helper_sbp_masked( const item *i, const side s,
+                                       const std::function<void( const sub_bodypart_str_id & )> &cb,
+                                       const body_part_set *mask = nullptr );
+
+static void iterate_helper_sbp_masked( const item *i, const side s,
+                                       const std::function<void( const sub_bodypart_str_id & )> &cb,
+                                       const body_part_set *mask )
 {
     const islot_armor *armor = i->find_armor_data();
     if( armor == nullptr ) {
@@ -1165,64 +1177,64 @@ static void iterate_helper_sbp( const item *i, const side s,
 
     for( const armor_portion_data &data : armor->sub_data ) {
         if( !data.sub_coverage.empty() ) {
-            if( !armor->sided || s == side::BOTH || s == side::num_sides ) {
-                for( const sub_bodypart_str_id &bpid : data.sub_coverage ) {
-                    cb( bpid );
+            for( const sub_bodypart_str_id &sbp : data.sub_coverage ) {
+                if( s != side::BOTH && s != side::num_sides ) {
+                    if( sbp->part_side != s && sbp->part_side != side::BOTH ) {
+                        continue;
+                    }
                 }
-                continue;
-            }
-            for( const sub_bodypart_str_id &bpid : data.sub_coverage ) {
-                if( bpid->part_side == s || bpid->part_side == side::BOTH ) {
-                    cb( bpid );
+                if( mask == nullptr || mask->test( sbp->parent ) ) {
+                    cb( sbp );
                 }
             }
         }
     }
 }
+
+
+
+static void iterate_helper_masked( const item *i, const side s,
+                                   const std::function<void( const bodypart_str_id & )> &cb,
+                                   const body_part_set *mask = nullptr );
 
 void item::iterate_covered_sub_body_parts_internal( const side s,
         const std::function<void( const sub_bodypart_str_id & )> &cb,
         bool check_ablative_armor ) const
-
 {
-    iterate_helper_sbp( this, s, cb );
-
-    //check for ablative armor too
+    body_part_set parent_coverage;
+    iterate_helper_masked( this, s, [&]( const bodypart_str_id & bp ) {
+        parent_coverage.set( bp );
+    } );
+    iterate_helper_sbp_masked( this, s, cb, &parent_coverage );
     if( check_ablative_armor && is_ablative() ) {
         for( const item_pocket *pocket : get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
-
-                iterate_helper_sbp( &ablative_armor, s, cb );
+                iterate_helper_sbp_masked( &ablative_armor, s, cb, &parent_coverage );
             }
         }
     }
 }
 
-static void iterate_helper( const item *i, const side s,
-                            const std::function<void( const bodypart_str_id & )> &cb )
+static void iterate_helper_masked( const item *i, const side s,
+                                   const std::function<void( const bodypart_str_id & )> &cb,
+                                   const body_part_set *mask )
 {
     const islot_armor *armor = i->find_armor_data();
     if( armor == nullptr ) {
         return;
     }
-
-    // If we are querying for only one side of the body, we ignore coverage
-    // for parts on the opposite side of the body.
     const auto &opposite_side_parts = s == side::LEFT ? right_side_parts() : left_side_parts();
-
     for( const armor_portion_data &data : armor->data ) {
         if( data.covers.has_value() ) {
-            if( !armor->sided || s == side::BOTH || s == side::num_sides ) {
-                for( const bodypart_str_id &bpid : data.covers.value() ) {
-                    cb( bpid );
-                }
-                continue;
-            }
             for( const bodypart_str_id &bpid : data.covers.value() ) {
-                if( std::find( opposite_side_parts.begin(), opposite_side_parts.end(),
-                               bpid ) == opposite_side_parts.end() ) {
+                if( s != side::BOTH && s != side::num_sides ) {
+                    if( std::find( opposite_side_parts.begin(), opposite_side_parts.end(),
+                                   bpid ) != opposite_side_parts.end() ) {
+                        continue;
+                    }
+                }
+                if( mask == nullptr || mask->test( bpid ) ) {
                     cb( bpid );
                 }
             }
@@ -1234,16 +1246,20 @@ void item::iterate_covered_body_parts_internal( const side s,
         const std::function<void( const bodypart_str_id & )> &cb,
         bool check_ablative_armor ) const
 {
-    iterate_helper( this, s, cb );
-
-    //check for ablative armor too
+    body_part_set parent_coverage;
+    iterate_helper_masked( this, s, [&]( const bodypart_str_id & bp ) {
+        parent_coverage.set( bp );
+        cb( bp );
+    } );
     if( check_ablative_armor && is_ablative() ) {
         for( const item_pocket *pocket : get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
-
-                iterate_helper( &ablative_armor, s, cb );
+                iterate_helper_masked( &ablative_armor, s, [&]( const bodypart_str_id & bp ) {
+                    if( parent_coverage.test( bp ) ) {
+                        cb( bp );
+                    }
+                } );
             }
         }
     }
@@ -1313,7 +1329,7 @@ bool item::is_worn_by_player() const
 
 item item::in_its_container( int qty ) const
 {
-    return in_container( type->default_container.value_or( itype_null ), qty,
+    return in_container( type->default_container.value_or( itype_id::NULL_ID() ), qty,
                          type->default_container_sealed, type->default_container_variant.value_or( "" ) );
 }
 
@@ -1518,8 +1534,8 @@ bool item::same_for_rle( const item &rhs ) const
     if( !contents.empty_with_no_mods() || !rhs.contents.empty_with_no_mods() ) {
         return false;
     }
-    if( has_itype_variant( false ) != rhs.has_itype_variant( false ) ||
-        ( has_itype_variant( false ) && rhs.has_itype_variant( false ) &&
+    if( has_itype_variant() != rhs.has_itype_variant() ||
+        ( has_itype_variant() && rhs.has_itype_variant() &&
           itype_variant().id != rhs.itype_variant().id ) ) {
         return false;
     }
@@ -1721,15 +1737,16 @@ bool _stacks_components( item const &lhs, item const &rhs, bool check_components
 stacking_info item::stacks_with( const item &rhs, bool check_components, bool combine_liquid,
                                  bool check_cat, int depth, int maxdepth, bool precise ) const
 {
+    // Type mismatch cannot stack without a CATEGORY check.
+    if( type != rhs.type && !check_cat ) {
+        return {};
+    }
+
     tname::segment_bitset bits;
     if( type == rhs.type ) {
         bits.set( tname::segments::TYPE );
         bits.set( tname::segments::WHEEL_DIAMETER );
         bits.set( tname::segments::WHITEBLACKLIST, _stacks_whiteblacklist( *this, rhs ) );
-    }
-
-    if( !check_cat && bits.none() ) {
-        return {};
     }
 
     bits.set( tname::segments::CATEGORY,
@@ -1782,8 +1799,9 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     bits.set( tname::segments::BROKEN, is_broken() == rhs.is_broken() );
     bits.set( tname::segments::UPS, _stacks_ups( *this, rhs ) );
     // Guns that differ only by dirt/shot_counter can still stack,
-    // but other item_vars such as label/note will prevent stacking
-    static const std::set<std::string> ignore_keys = { "dirt", "shot_counter", "spawn_location", "ethereal", "last_act_by_char_id" };
+    // but other item_vars such as label/note will prevent stacking.
+    // CAMERA_*_PHOTOS_count and EIPC_RECIPES_count are derived caches; not part of identity.
+    static const std::set<std::string> ignore_keys = { "dirt", "shot_counter", "spawn_location", "ethereal", "last_act_by_char_id", "activity_var", "CAMERA_EXTENDED_PHOTOS_count", "CAMERA_MONSTER_PHOTOS_count", "EIPC_RECIPES_count" };
     bits.set( tname::segments::VARS, map_equal_ignoring_keys( item_vars, rhs.item_vars, ignore_keys ) );
     bits.set( tname::segments::ETHEREAL, _stacks_ethereal( *this, rhs ) );
     bits.set( tname::segments::LOCATION_HINT, _stacks_location_hint( *this, rhs ) );
@@ -1821,8 +1839,15 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
               link_length() == rhs.link_length() && max_link_length() == rhs.max_link_length() );
     bits.set( tname::segments::MODS, _stacks_mods( *this, rhs ) );
     //checking browsed status is not necessary, equal vars are checked earlier
+    const bool lhs_estorage = is_estorage();
+    const bool rhs_estorage = rhs.is_estorage();
+    // Non-estorage pairs short-circuit true (printer skips segment); mixed pairs
+    // stay false so aggregated headers drop free-mem when grouped with non-estorage.
     bits.set( tname::segments::EMEMORY,
-              occupied_ememory() == rhs.occupied_ememory() && total_ememory() == rhs.total_ememory() );
+              lhs_estorage == rhs_estorage &&
+              ( !lhs_estorage ||
+                ( occupied_ememory() == rhs.occupied_ememory() &&
+                  total_ememory() == rhs.total_ememory() ) ) );
     bits.set( tname::segments::last_segment );
 
     // only check contents if everything else matches
@@ -1876,12 +1901,14 @@ int item::insert_cost( const item &it ) const
 }
 
 ret_val<void> item::put_in( const item &payload, pocket_type pk_type,
-                            const bool unseal_pockets, Character *carrier )
+                            const bool unseal_pockets, Character *carrier, const bool quiet )
 {
     ret_val<item *> result = contents.insert_item( payload, pk_type, false, unseal_pockets );
     if( !result.success() ) {
-        debugmsg( "tried to put an item (%s) count (%d) in a container (%s) that cannot contain it: %s",
-                  payload.typeId().str(), payload.count(), typeId().str(), result.str() );
+        if( !quiet ) {
+            debugmsg( "tried to put an item (%s) count (%d) in a container (%s) that cannot contain it: %s",
+                      payload.typeId().str(), payload.count(), typeId().str(), result.str() );
+        }
         return ret_val<void>::make_failure( result.str() );
     }
     if( pk_type == pocket_type::MOD ) {
@@ -2017,14 +2044,10 @@ static std::string get_freshness_description( const item &food_item )
         }
     } else if( food_item.is_going_bad() ) {
         // Old food likewise is assumed to be fairly obvious.
-        if( player_character.can_estimate_rot() ) {
-            return string_format( _( "* This food looks <bad>old</bad>.  "
-                                     "It's just <info>%s</info> from becoming inedible." ),
-                                  to_string_approx( time_left ) );
-        } else {
-            return _( "* This food looks <bad>old</bad>.  "
-                      "It's on the brink of becoming inedible." );
-        }
+        // At this point, even skilled characters cannot tell the exact time of expiration
+        // (which would be at hour or minute precision).
+        return _( "* This food looks <bad>old</bad>.  "
+                  "It's on the brink of becoming inedible." );
     }
 
     if( !player_character.can_estimate_rot() ) {
@@ -2467,10 +2490,10 @@ void item::debug_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
             }
 
             std::string faults;
-            for( const weighted_object<int, fault_id> &fault : type->faults ) {
-                const int weight_percent = static_cast<float>( fault.weight ) / type->faults.get_weight() * 100;
-                faults += colorize( fault.obj.str() + string_format( " (%d, %d%%)\n", fault.weight,
-                                    weight_percent ), has_fault( fault.obj ) ? c_yellow : c_white );
+            for( const std::pair<fault_id, int> &fault : type->faults ) {
+                const int weight_percent = static_cast<float>( fault.second ) / type->faults.get_weight() * 100;
+                faults += colorize( fault.first.str() + string_format( " (%d, %d%%)\n", fault.second,
+                                    weight_percent ), has_fault( fault.first ) ? c_yellow : c_white );
             }
             info.emplace_back( "BASE", string_format( "faults: %s", faults ) );
         }
@@ -2844,7 +2867,7 @@ void item::ammo_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
                                multiplier );
         }
         if( parts->test( iteminfo_parts::AMMO_DAMAGE_AP ) ) {
-            info.emplace_back( "AMMO", space + _( "Armor-pierce: " ), get_ranged_pierce( ammo ) );
+            info.emplace_back( "AMMO", space + _( "Armor penetration: " ), get_ranged_pierce( ammo ) );
         }
         if( parts->test( iteminfo_parts::AMMO_DAMAGE_RANGE ) ) {
             info.emplace_back( "AMMO", _( "Range: " ), "<num>" + space,
@@ -2990,12 +3013,12 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
                 insert_separation_line( info );
                 if( default_bore_type_id != itype_id::NULL_ID() ) {
                     info.emplace_back( "GUN",
-                                       _( "Weapon is <bad>not attached a bore mod</bad>, so stats below assume the default bore mod: " ),
+                                       _( "Weapon <bad>has no receiver</bad>, so stats below assume the default: " ),
                                        string_format( "<stat>%s</stat>",
                                                       default_bore_type_id->nname( 1 ) ) );
                 } else {
                     info.emplace_back( "GUN",
-                                       _( "Weapon is <bad>not attached a bore mod</bad>. " ) );
+                                       _( "Weapon <bad>has no receiver and cannot be fired</bad>. " ) );
                     return;
                 }
 
@@ -3122,7 +3145,7 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
     // TODO: This doesn't cover multiple damage types
 
     if( parts->test( iteminfo_parts::GUN_ARMORPIERCE ) ) {
-        info.emplace_back( "GUN", _( "Armor-pierce: " ), "",
+        info.emplace_back( "GUN", _( "Armor penetration: " ), "",
                            iteminfo::no_newline, get_ranged_pierce( gun ) );
     }
     if( mod->ammo_required() ) {
@@ -3204,15 +3227,33 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
                                iteminfo::lower_is_better | iteminfo::no_name,
                                loaded_mod->gun_recoil( player_character, true ) );
         }
-
+        if( parts->test( iteminfo_parts::GUN_AWKWARDNESS ) ) {
+            info.back().bNewLine = true;
+            int awkward_percent = gun_awkwardness( get_player_character() );
+            if( awkward_percent < 75 ) {
+                info.emplace_back(
+                    "GUN",
+                    _( "Height penalty: " ),
+                    string_format( "<neutral>%d%%</neutral>", awkward_percent ),
+                    iteminfo::lower_is_better
+                );
+            } else {
+                info.emplace_back(
+                    "GUN",
+                    _( "Height penalty: " ),
+                    string_format( "<bad>%d%%</bad>", awkward_percent ),
+                    iteminfo::lower_is_better
+                );
+            }
+        }
         if( parts->test( iteminfo_parts::GUN_RECOIL_THEORETICAL_MINIMUM ) ) {
             info.back().bNewLine = true;
             info.emplace_back( "GUN", _( "Theoretical minimum recoil: " ), "",
                                iteminfo::no_newline | iteminfo::lower_is_better, loaded_mod->gun_recoil( player_character, true,
                                        true ) );
         }
-        if( parts->test( iteminfo_parts:: GUN_IDEAL_STRENGTH ) ) {
-            info.emplace_back( "GUN", "ideal_strength", _( " (when strength reaches: <num>)" ),
+        if( parts->test( iteminfo_parts::GUN_IDEAL_STRENGTH ) ) {
+            info.emplace_back( "GUN", "ideal_strength", _( " (Requires <num> strength)" ),
                                iteminfo::lower_is_better | iteminfo::no_name,
                                loaded_mod->gun_base_weight() / 333.0_gram );
         }
@@ -3458,11 +3499,11 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
     }
     int pierce = get_ranged_pierce( mod );
     if( get_ranged_pierce( mod ) != 0 && parts->test( iteminfo_parts::GUNMOD_ARMORPIERCE ) ) {
-        info.emplace_back( "GUNMOD", _( "Armor-pierce: " ), "", iteminfo::show_plus,
+        info.emplace_back( "GUNMOD", _( "Armor penetration: " ), "", iteminfo::show_plus,
                            pierce );
     }
     if( mod.to_hit_mod != 0 && parts->test( iteminfo_parts::GUNMOD_TO_HIT_MODIFIER ) ) {
-        info.emplace_back( "GUNMOD", _( "To-hit modifier: " ), "",
+        info.emplace_back( "GUNMOD", _( "To-hit modifier when installed: " ), "",
                            iteminfo::show_plus, mod.to_hit_mod );
     }
     if( mod.range != 0 && parts->test( iteminfo_parts::GUNMOD_RANGE ) ) {
@@ -3484,8 +3525,8 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
     }
     if( mod.loudness_multiplier != 1.0 && parts->test( iteminfo_parts::GUNMOD_LOUDNESS_MULTIPLIER ) ) {
         info.emplace_back( "GUNMOD", _( "Loudness multiplier: " ), "",
-                           iteminfo::lower_is_better | iteminfo::show_plus,
-                           mod.loudness );
+                           iteminfo::lower_is_better | iteminfo::is_decimal,
+                           mod.loudness_multiplier );
     }
     if( !type->mod->ammo_modifier.empty() && parts->test( iteminfo_parts::GUNMOD_AMMO ) ) {
         for( const ammotype &at : type->mod->ammo_modifier ) {
@@ -3581,18 +3622,17 @@ static bool armor_encumb_header_info( const item &it, std::vector<iteminfo> &inf
         if( sizing_level == item::sizing::human_sized_small_char ) {
             format = _( " <bad>(too big)</bad>" );
         } else if( sizing_level == item::sizing::big_sized_small_char ) {
-            format = _( " <bad>(huge!)</bad>" );
+            format = _( " <bad>(way too big)</bad>" );
         } else if( sizing_level == item::sizing::small_sized_human_char ||
                    sizing_level == item::sizing::human_sized_big_char ) {
             format = _( " <bad>(too small)</bad>" );
         } else if( sizing_level == item::sizing::small_sized_big_char ) {
-            format = _( " <bad>(tiny!)</bad>" );
+            format = _( " <bad>(way too small)</bad>" );
         }
     }
     if( format.empty() ) {
         return false;
     }
-
     //~ The size or fit of an article of clothing (fits / poor fit)
     info.emplace_back( "ARMOR", _( "<bold>Size/Fit</bold>:" ) + format );
     return true;
@@ -3603,51 +3643,78 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
 {
     bool divider_needed = false;
     const std::string space = "  ";
-
     bool ret = false;
+
     if( const islot_armor *t = find_armor_data() ) {
         if( t->data.empty() ) {
             return ret;
         }
         std::set<sub_bodypart_id> character_subparts;
-        for( const bodypart_id &bp : you.get_all_body_parts() ) {
+        for( const bodypart_id bp : you.get_all_body_parts() ) {
             for( const sub_bodypart_str_id &sbp : bp->sub_parts ) {
-                character_subparts.insert( sbp.id() );
+                if( sbp.is_valid() ) {
+                    character_subparts.insert( sbp.id() );
+                }
             }
         }
-
+        std::set<bodypart_id> character_parts;
+        for( const bodypart_id bp : you.get_all_body_parts() ) {
+            character_parts.insert( bp );
+        }
         for( const armor_portion_data &p : t->sub_data ) {
-            if( divider_needed ) {
-                insert_separation_line( info );
+            std::vector<sub_bodypart_id> covered_subparts;
+            for( const sub_bodypart_str_id &sbp_str : p.sub_coverage ) {
+                if( !sbp_str.is_valid() ) {
+                    continue;
+                }
+                sub_bodypart_id sid = sbp_str.id();
+                if( character_subparts.count( sid ) > 0 ) {
+                    covered_subparts.push_back( sid );
+                }
             }
 
-            std::vector<sub_bodypart_id> covered;
-            for( const sub_bodypart_str_id &sbp_str : p.sub_coverage ) {
-                sub_bodypart_id sid = sbp_str.id();
-                if( character_subparts.count( sid ) > 0 &&
-                    std::find( covered.begin(), covered.end(), sid ) == covered.end() ) {
-                    covered.push_back( sid );
-                }
-                for( const sub_bodypart_str_id &similar : sbp_str->similar_bodyparts ) {
-                    sub_bodypart_id similar_id = similar.id();
-                    if( character_subparts.count( similar_id ) > 0 &&
-                        std::find( covered.begin(), covered.end(), similar_id ) == covered.end() ) {
-                        covered.push_back( similar_id );
+            std::vector<bodypart_id> covered_main;
+            if( p.covers ) {
+                for( const bodypart_id bp : *p.covers ) {
+                    if( character_parts.count( bp ) > 0 ) {
+                        covered_main.push_back( bp );
                     }
                 }
             }
 
-            std::set<translation, localized_comparator> to_print = body_part_type::consolidate( covered );
-            std::string coverage = _( "<bold>Protection for</bold>:" );
-            for( const translation &entry : to_print ) {
-                coverage += string_format( _( " The <info>%s</info>." ), entry );
+            if( covered_subparts.empty() && covered_main.empty() ) {
+                continue;
+            }
+
+            if( divider_needed ) {
+                insert_separation_line( info );
+            }
+
+            std::string coverage = "<bold>Protection for</bold>:";
+            if( !covered_subparts.empty() ) {
+                // Only show subparts explicitly listed in the item json.
+                for( const sub_bodypart_id sbp : covered_subparts ) {
+                    coverage += string_format( " The <info>%s</info>.", sbp->name );
+                }
+            } else {
+                // Show body parts only if no subparts were defined.
+                for( const bodypart_id bp : covered_main ) {
+                    coverage += string_format( " The <info>%s</info>.", bp->name );
+                }
             }
             info.emplace_back( "ARMOR", coverage );
-
-            // the following function need one representative sub limb from which to query data
-            armor_material_info( info, parts, 0, false, *p.sub_coverage.begin() );
-            armor_attribute_info( info, parts, 0, false, *p.sub_coverage.begin() );
-            armor_protection_info( info, parts, 0, false, *p.sub_coverage.begin() );
+            // Pick a representative subpart to populate armor data.
+            sub_bodypart_id rep;
+            if( !covered_subparts.empty() ) {
+                rep = covered_subparts.front();
+            } else if( !p.sub_coverage.empty() ) {
+                rep = ( *p.sub_coverage.begin() ).id();
+            } else {
+                rep = sub_bodypart_id();
+            }
+            armor_material_info( info, parts, 0, false, rep );
+            armor_attribute_info( info, parts, 0, false, rep );
+            armor_protection_info( info, parts, 0, false, rep );
             ret = true;
             divider_needed = true;
         }
@@ -3655,26 +3722,21 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
         if( divider_needed ) {
             insert_separation_line( info );
         }
-        //right now all eligible gunmods (shoulder_strap, belt_clip) have the is_armor flag and use the torso
-        info.emplace_back( "ARMOR", _( "Torso:" ) + space, "",
-                           iteminfo::no_flags | iteminfo::lower_is_better, get_avg_encumber( get_avatar() ) );
-
-        //~ Limb-specific coverage (for guns strapped to torso)
-        info.emplace_back( "DESCRIPTION", _( "<bold>Torso coverage</bold>:" ) );
-        //~ Regular/Default coverage
-        info.emplace_back( "ARMOR", "",
-                           iteminfo::no_flags, get_coverage( body_part_torso.id() ) );
+        info.emplace_back( "ARMOR", "Torso:" + space, "",
+                           iteminfo::no_flags | iteminfo::lower_is_better,
+                           get_avg_encumber( get_avatar() ) );
+        info.emplace_back( "DESCRIPTION", "<bold>Torso coverage</bold>:" );
+        info.emplace_back( "ARMOR", "", iteminfo::no_flags,
+                           get_coverage( body_part_torso.id() ) );
     }
-
     return ret;
 }
 
 static void armor_protect_dmg_info( int dmg, std::vector<iteminfo> &info )
 {
     if( dmg > 0 ) {
-        info.emplace_back( "ARMOR", _( "Protection and coverage are <bad>reduced by damage</bad> "
-                                       "and you may be able to <info>improve them by repairing "
-                                       "this item</info>." ) );
+        info.emplace_back( "ARMOR", _( "Protection and coverage are <bad>reduced by damage</bad>."
+                                       "You may be able to <info>improve them by making repairs</info>." ) );
     }
 }
 
@@ -3706,57 +3768,52 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
     if( !is_armor() && !is_pet_armor() ) {
         return;
     }
-
+    if( !sbp.is_valid() ) {
+        return;
+    }
+    if( !portion_for_bodypart( sbp ) ) {
+        return;
+    }
     if( parts->test( iteminfo_parts::ARMOR_PROTECTION ) ) {
         const std::string space = "  ";
-        // NOLINTNEXTLINE(cata-translate-string-literal)
         std::string bp_cat = string_format( "ARMOR" );
         std::string layering;
-
-        // get the layers this bit of the armor covers if its unique compared to the rest of the armor
         for( const layer_level &ll : get_layer( sbp ) ) {
             layering += string_format( " <stat>%s</stat>.", item::layer_to_string( ll ) );
         }
-        //~ Limb-specific coverage (%s = name of limb)
-        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Layer</bold>:%s" ), layering ) );
-        //~ Regular/Default coverage
-        info.emplace_back( bp_cat, string_format( "%s%s%s", space, _( "Coverage:" ), space ), "",
-                           iteminfo::no_flags, get_coverage( sbp ) );
-
+        info.emplace_back( "DESCRIPTION",
+                           string_format( _( "<bold>Layer</bold>:%s" ), layering ) );
+        info.emplace_back( bp_cat,
+                           string_format( "%s%s%s", space, _( "Coverage:" ), space ),
+                           "", iteminfo::no_flags, get_coverage( sbp ) );
         bool printed_any = false;
-
-        // gather all the protection data
-        // the rolls are basically a perfect hit for protection and a
-        // worst possible
         resistances worst_res = resistances( *this, false, 99, sbp );
         resistances best_res = resistances( *this, false, 0, sbp );
         resistances median_res = resistances( *this, false, 50, sbp );
-
         int percent_best = 100;
         int percent_worst = 0;
         const armor_portion_data *portion = portion_for_bodypart( sbp );
-        // if there isn't a portion this is probably pet armor
         if( portion ) {
             percent_best = portion->best_protection_chance;
             percent_worst = portion->worst_protection_chance;
         }
-
         bool display_median = percent_best < 50 && percent_worst < 50;
-
         if( display_median ) {
             info.emplace_back( "DESCRIPTION",
-                               string_format( "<bold>%s</bold>: <bad>%d%%</bad>, <color_c_yellow>Median</color>, <good>%d%%</good>",
-                                              _( "Protection" ), percent_worst, percent_best ) );
+                               string_format(
+                                   "<bold>%s</bold>: <bad>%d%%</bad>, <color_c_yellow>Median</color>, <good>%d%%</good>",
+                                   _( "Protection" ), percent_worst, percent_best ) );
         } else if( percent_worst > 0 ) {
             info.emplace_back( "DESCRIPTION",
-                               string_format( "<bold>%s</bold>: <bad>%d%%</bad>, <good>%d%%</good>", _( "Protection" ),
-                                              percent_worst, percent_best ) );
+                               string_format(
+                                   "<bold>%s</bold>: <bad>%d%%</bad>, <good>%d%%</good>",
+                                   _( "Protection" ), percent_worst, percent_best ) );
         } else {
-            info.emplace_back( "DESCRIPTION", string_format( "<bold>%s</bold>:", _( "Protection" ) ) );
+            info.emplace_back( "DESCRIPTION",
+                               string_format( "<bold>%s</bold>:", _( "Protection" ) ) );
         }
-
-        for( const damage_info_order &dio : damage_info_order::get_all(
-                 damage_info_order::info_type::PROT ) ) {
+        for( const damage_info_order &dio :
+             damage_info_order::get_all( damage_info_order::info_type::PROT ) ) {
             if( best_res.resist_vals.count( dio.dmg_type ) <= 0 ||
                 best_res.type_resist( dio.dmg_type ) < 1.0f ) {
                 continue;
@@ -3765,76 +3822,113 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
             if( dio.info_display == damage_info_order::info_disp::DETAILED ) {
                 if( display_median ) {
                     info.emplace_back( bp_cat,
-                                       string_format( "%s%s:  <bad>%.2f</bad>, <color_c_yellow>%.2f</color>, <good>%.2f</good>", space,
-                                                      uppercase_first_letter( dio.dmg_type->name.translated() ), worst_res.type_resist( dio.dmg_type ),
-                                                      median_res.type_resist( dio.dmg_type ), best_res.type_resist( dio.dmg_type ) ), "",
-                                       iteminfo::no_flags );
+                                       string_format(
+                                           "%s%s:  <bad>%.2f</bad>, <color_c_yellow>%.2f</color>, <good>%.2f</good>",
+                                           space,
+                                           uppercase_first_letter(
+                                               dio.dmg_type->name.translated() ),
+                                           worst_res.type_resist( dio.dmg_type ),
+                                           median_res.type_resist( dio.dmg_type ),
+                                           best_res.type_resist( dio.dmg_type ) ),
+                                       "", iteminfo::no_flags );
                     printed_any = true;
                 } else if( percent_worst > 0 ) {
-                    info.emplace_back( bp_cat, string_format( "%s%s:  <bad>%.2f</bad>, <good>%.2f</good>", space,
-                                       uppercase_first_letter( dio.dmg_type->name.translated() ),
-                                       worst_res.type_resist( dio.dmg_type ), best_res.type_resist( dio.dmg_type ) ), "",
-                                       iteminfo::no_flags );
+                    info.emplace_back( bp_cat,
+                                       string_format(
+                                           "%s%s:  <bad>%.2f</bad>, <good>%.2f</good>",
+                                           space,
+                                           uppercase_first_letter(
+                                               dio.dmg_type->name.translated() ),
+                                           worst_res.type_resist( dio.dmg_type ),
+                                           best_res.type_resist( dio.dmg_type ) ),
+                                       "", iteminfo::no_flags );
                     printed_any = true;
                 } else {
                     skipped_detailed = true;
                 }
             }
-            if( skipped_detailed || dio.info_display == damage_info_order::info_disp::BASIC ) {
-                info.emplace_back( bp_cat, string_format( "%s%s: ", space,
-                                   uppercase_first_letter( dio.dmg_type->name.translated() ) ), "",
-                                   iteminfo::is_decimal, best_res.type_resist( dio.dmg_type ) );
+            if( skipped_detailed ||
+                dio.info_display == damage_info_order::info_disp::BASIC ) {
+                info.emplace_back( bp_cat,
+                                   string_format(
+                                       "%s%s: ",
+                                       space,
+                                       uppercase_first_letter(
+                                           dio.dmg_type->name.translated() ) ),
+                                   "",
+                                   iteminfo::is_decimal,
+                                   best_res.type_resist( dio.dmg_type ) );
+
                 printed_any = true;
             }
         }
         if( get_base_env_resist( *this ) >= 1 ) {
-            info.emplace_back( bp_cat, string_format( "%s%s", space, _( "Environmental: " ) ),
+            info.emplace_back( bp_cat,
+                               string_format( "%s%s", space, _( "Environmental: " ) ),
                                get_base_env_resist( *this ) );
+
             printed_any = true;
         }
-        // if we haven't printed any armor data acknowledge that
         if( !printed_any ) {
-            info.emplace_back( bp_cat, string_format( "%s%s", space, _( "Negligible Protection" ) ) );
+            info.emplace_back( bp_cat,
+                               string_format( "%s%s",
+                                              space,
+                                              _( "Negligible Protection" ) ) );
         }
-        if( type->can_use( "GASMASK" ) || type->can_use( "DIVE_TANK" ) ) {
-            info.emplace_back( "ARMOR", string_format( "<bold>%s</bold>:",
-                               _( "Protection when active" ) ) );
-            info.emplace_back( bp_cat, space + _( "Acid: " ), "",
-                               iteminfo::no_newline | iteminfo::is_decimal,
-                               resist( damage_acid, false, sbp ) );
-            info.emplace_back( bp_cat, space + _( "Fire: " ), "",
-                               iteminfo::no_newline | iteminfo::is_decimal,
-                               resist( damage_heat, false, sbp ) );
-            info.emplace_back( bp_cat, space + _( "Environmental: " ),
-                               get_env_resist( get_base_env_resist_w_filter() ) );
+        if( type->can_use( "GASMASK_ACTIVATE" ) ||
+            type->can_use( "DIVE_TANK" ) ) {
+            info.emplace_back(
+                "ARMOR",
+                string_format(
+                    "<bold>%s</bold>:",
+                    _( "Protection when active" ) ) );
+            info.emplace_back(
+                bp_cat,
+                space + _( "Environmental: " ),
+                get_env_resist(
+                    get_base_env_resist_w_filter() ) );
         }
-
         if( sbp == sub_bodypart_id() && damage() > 0 ) {
             armor_protect_dmg_info( damage(), info );
         }
     }
 }
+
 void item::armor_material_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                                 int /*batch*/, bool /*debug*/, const sub_bodypart_id &sbp ) const
 {
     if( !is_armor() && !is_pet_armor() ) {
         return;
     }
-
+    if( !sbp.is_valid() ) {
+        return;
+    }
+    if( !portion_for_bodypart( sbp ) ) {
+        return;
+    }
     if( parts->test( iteminfo_parts::ARMOR_MATERIALS ) ) {
         const std::string space = "  ";
-        // NOLINTNEXTLINE(cata-translate-string-literal)
         std::string bp_cat = string_format( "ARMOR" );
         std::string materials_list;
-        std::string units_info = pgettext( "length unit: milimeter", "mm" );
+        std::string units_info =
+            pgettext( "length unit: milimeter", "mm" );
         for( const part_material *mat : armor_made_of( sbp ) ) {
-
-            materials_list.append( string_format( "  %s %.2f%s (%d%%).", mat->id->name(), mat->thickness,
-                                                  units_info, mat->cover ) );
+            materials_list.append(
+                string_format(
+                    "  %s %.2f%s (%d%%).",
+                    mat->id->name(),
+                    mat->thickness,
+                    units_info,
+                    mat->cover ) );
         }
-
-        info.emplace_back( bp_cat, string_format( "%s%s", _( "<bold>Materials</bold>:" ),
-                           materials_list ), "", iteminfo::no_flags );
+        info.emplace_back(
+            bp_cat,
+            string_format(
+                "%s%s",
+                _( "<bold>Materials</bold>:" ),
+                materials_list ),
+            "",
+            iteminfo::no_flags );
     }
 }
 
@@ -3844,16 +3938,24 @@ void item::armor_attribute_info( std::vector<iteminfo> &info, const iteminfo_que
     if( !is_armor() && !is_pet_armor() ) {
         return;
     }
-
+    if( !sbp.is_valid() ) {
+        return;
+    }
+    if( !portion_for_bodypart( sbp ) ) {
+        return;
+    }
     if( parts->test( iteminfo_parts::ARMOR_ADDITIONAL_INFO ) ) {
         const std::string space = "  ";
-        // NOLINTNEXTLINE(cata-translate-string-literal)
-        std::string bp_cat = string_format( "ARMOR" );
-
-        if( const armor_portion_data *portion_data = portion_for_bodypart( sbp ) ) {
+        std::string bp_cat =
+            string_format( "ARMOR" );
+        if( const armor_portion_data *portion_data =
+                portion_for_bodypart( sbp ) ) {
             if( portion_data->rigid_layer_only ) {
-                info.emplace_back( bp_cat, _( "<info>Rigid items only conflict on shared layers</info>" ),
-                                   "", iteminfo::no_flags );
+                info.emplace_back(
+                    bp_cat,
+                    _( "<info>Rigid items only conflict on shared layers</info>" ),
+                    "",
+                    iteminfo::no_flags );
             }
         }
     }
@@ -3923,8 +4025,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     const std::string space = "  ";
     body_part_set covered_parts = get_covered_body_parts();
-    // Remove any parts from the list which we do not have.
-    // TODO: Maybe parts we don't have could be displayed another way?
     std::vector<bodypart_str_id> to_reset;
     for( const bodypart_str_id &bp : covered_parts ) {
         if( !you.has_part( bp ) ) {
@@ -3934,56 +4034,41 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     for( const bodypart_str_id &bp : to_reset ) {
         covered_parts.reset( bp );
     }
-
     bool covers_anything = covered_parts.any();
     const bool show_bodygraph = get_option<bool>( "ITEM_BODYGRAPH" ) &&
                                 parts->test( iteminfo_parts::ARMOR_BODYGRAPH );
-
     if( parts->test( iteminfo_parts::ARMOR_BODYPARTS ) ) {
         insert_separation_line( info );
-        std::vector<sub_bodypart_id> covered;
-        const Character &you = get_player_character();
-
-        for( const sub_bodypart_id sbp : get_covered_sub_body_parts() ) {
-            if( you.has_part( sbp->parent ) ) {
-                covered.push_back( sbp );
+        std::vector<bodypart_id> covered;
+        for( const bodypart_id bp : get_covered_body_parts() ) {
+            if( !you.has_part( bp ) ) {
+                continue;
             }
+            covered.push_back( bp );
         }
-
         std::string coverage = _( "<bold>Covers</bold>:" );
-
         if( !covered.empty() ) {
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( covered );
             for( const translation &entry : to_print ) {
                 coverage += string_format( _( " The <info>%s</info>." ), entry );
             }
         }
-
         if( !covers_anything ) {
             coverage += _( " <info>Nothing</info>." );
         }
-
         info.emplace_back( "ARMOR", coverage );
     }
-
     if( parts->test( iteminfo_parts::ARMOR_RIGIDITY ) && ( is_rigid() || is_ablative() ) ) {
-        // if the item has no armor data it doesn't cover that part
         const islot_armor *armor = find_armor_data();
         if( armor != nullptr ) {
             if( armor->rigid ) {
-                std::string coverage = _( "<bold>This armor is rigid</bold>" );
-                info.emplace_back( "ARMOR", coverage );
+                info.emplace_back( "ARMOR", _( "<bold>This armor is rigid</bold>" ) );
             } else {
-                // only some parts are rigid
                 std::string coverage = _( "<bold>Rigid Locations</bold>:" );
                 std::set<sub_bodypart_id> covered;
-                // if ablative check if there are hard plates in locations
                 if( armor->ablative ) {
-                    // if item has ablative armor we should check those too.
                     for( const item_pocket *pocket : get_all_contained_pockets() ) {
-                        // if the pocket is ablative and not empty we should use its values
                         if( pocket->get_pocket_data()->ablative && !pocket->empty() ) {
-                            // get the contained plate
                             const item &ablative_armor = pocket->front();
                             for( const armor_portion_data &entry : ablative_armor.find_armor_data()->sub_data ) {
                                 if( entry.rigid ) {
@@ -4002,7 +4087,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                         }
                     }
                 }
-
                 if( !covered.empty() ) {
                     std::vector<sub_bodypart_id> covered_vec( covered.begin(), covered.end() );
                     std::set<translation, localized_comparator> to_print = body_part_type::consolidate( covered_vec );
@@ -4014,22 +4098,21 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
             }
         }
     }
-
     if( parts->test( iteminfo_parts::ARMOR_RIGIDITY ) && is_comfortable() ) {
-        // if the item has no armor data it doesn't cover that part
         const islot_armor *armor = find_armor_data();
         if( armor != nullptr ) {
             if( armor->comfortable ) {
-                std::string coverage = _( "<bold>This armor is comfortable</bold>" );
-                info.emplace_back( "ARMOR", coverage );
+                info.emplace_back( "ARMOR", _( "<bold>This armor is comfortable</bold>" ) );
             } else {
-                // only some parts are comfortable
                 std::string coverage = _( "<bold>Comfortable Locations</bold>:" );
                 std::vector<sub_bodypart_id> covered;
                 for( const armor_portion_data &entry : armor->sub_data ) {
                     if( entry.comfortable ) {
                         for( const sub_bodypart_str_id &sbp : entry.sub_coverage ) {
-                            covered.emplace_back( sbp );
+                            sub_bodypart_id sid = sbp.id();
+                            if( sid.is_valid() ) {
+                                covered.push_back( sid );
+                            }
                         }
                     }
                 }
@@ -4043,7 +4126,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
             }
         }
     }
-
     if( parts->test( iteminfo_parts::ARMOR_COVERAGE ) && covers_anything ) {
         std::map<int, std::vector<bodypart_id>> limb_groups;
         for( const bodypart_str_id &bp : covered_parts ) {
@@ -4055,13 +4137,11 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                 limb_groups[ get_coverage( bp ) ].emplace_back( bp );
             }
         }
-        // keep on one line if only 1 entry
         if( limb_groups.size() == 1 ) {
             info.emplace_back( "ARMOR", _( "<bold>Total Coverage</bold>" ), iteminfo::no_newline );
         } else {
             info.emplace_back( "ARMOR", _( "<bold>Total Coverage</bold>:" ) );
         }
-
         for( auto &entry : limb_groups ) {
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( entry.second );
             std::string coverage;
@@ -4075,47 +4155,42 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     if( parts->test( iteminfo_parts::ARMOR_ENCUMBRANCE ) && covers_anything ) {
         std::map<armor_encumb_data, std::vector<bodypart_id>> limb_groups;
-        const Character &c = get_player_character();
-
         armor_encumb_header_info( *this, info );
         for( const bodypart_str_id &bp : covered_parts ) {
-            armor_encumb_data encumbrance( get_encumber( c, bp, item::encumber_flags::assume_empty ),
-                                           get_encumber( c, bp ), get_encumber( c, bp, item::encumber_flags::assume_full ) );
-
+            armor_encumb_data encumbrance(
+                get_encumber( you, bp, item::encumber_flags::assume_empty ),
+                get_encumber( you, bp ),
+                get_encumber( you, bp, item::encumber_flags::assume_full )
+            );
             limb_groups[encumbrance].emplace_back( bp );
         }
-        // keep on one line if only 1 entry
+
         if( limb_groups.size() == 1 ) {
             info.emplace_back( "ARMOR", _( "<bold>Encumbrance</bold>" ), iteminfo::no_newline );
         } else {
             info.emplace_back( "ARMOR", _( "<bold>Encumbrance</bold>:" ) );
         }
+
         for( auto &entry : limb_groups ) {
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( entry.second );
             std::string coverage;
-            std::string encumbrance_info;
             for( const translation &entry : to_print ) {
                 coverage += string_format( _( " The <info>%s</info>." ), entry );
             }
 
-            //encumbrance_info = string_format( "%d", entry.first.encumb );
-
-            // NOLINTNEXTLINE(cata-translate-string-literal)
             info.emplace_back( "ARMOR", space, "", iteminfo::no_newline | iteminfo::lower_is_better,
                                entry.first.encumb );
 
-            // if it has a max value
             if( entry.first.encumb != entry.first.encumb_max ) {
-                std::string when_full_message = _( ", When full" ) + space;
-                info.emplace_back( "ARMOR", when_full_message, "", iteminfo::no_newline | iteminfo::lower_is_better,
+                info.emplace_back( "ARMOR", _( ", When full" ) + space, "",
+                                   iteminfo::no_newline | iteminfo::lower_is_better,
                                    entry.first.encumb_max );
             }
 
-            // if it has a min value
             if( entry.first.encumb != entry.first.encumb_min ) {
-                std::string when_empty_message = _( ", When empty" ) + space;
-                info.emplace_back( "ARMOR", when_empty_message, "",
-                                   iteminfo::no_newline | iteminfo::lower_is_better, entry.first.encumb_min );
+                info.emplace_back( "ARMOR", _( ", When empty" ) + space, "",
+                                   iteminfo::no_newline | iteminfo::lower_is_better,
+                                   entry.first.encumb_min );
             }
             info.emplace_back( "ARMOR", string_format( ":%s", coverage ) );
         }
@@ -4126,7 +4201,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         for( const bodypart_str_id &bp : covered_parts ) {
             limb_groups[get_warmth( bp )].emplace_back( bp );
         }
-        // keep on one line if only 1 entry
         if( limb_groups.size() == 1 ) {
             info.emplace_back( "ARMOR", _( "<bold>Warmth</bold>" ), iteminfo::no_newline );
         } else {
@@ -4144,7 +4218,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     }
 
     if( parts->test( iteminfo_parts::ARMOR_BREATHABILITY ) && covers_anything ) {
-
         std::map<int, std::vector<bodypart_id>> limb_groups;
         for( const bodypart_str_id &bp : covered_parts ) {
             const armor_portion_data *portion = portion_for_bodypart( bp );
@@ -4152,12 +4225,13 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                 limb_groups[portion->breathability].emplace_back( bp );
             }
         }
-        // keep on one line if only 1 entry
+
         if( limb_groups.size() == 1 ) {
             info.emplace_back( "ARMOR", _( "<bold>Breathability</bold>" ), iteminfo::no_newline );
         } else {
             info.emplace_back( "ARMOR", _( "<bold>Breathability</bold>:" ) );
         }
+
         for( auto &entry : limb_groups ) {
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( entry.second );
             std::string coverage;
@@ -4168,9 +4242,7 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                                entry.first );
         }
     }
-
     insert_separation_line( info );
-
 
     if( covers_anything ) {
         bool print_prot = true;
@@ -4183,13 +4255,12 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         armor_protect_dmg_info( damage(), info );
     }
 
-
-    // Whatever the last entry was, we want a newline at this point
-    info.back().bNewLine = true;
+    if( !info.empty() ) {
+        info.back().bNewLine = true;
+    }
 
     if( show_bodygraph ) {
         insert_separation_line( info );
-
         auto bg_cb = [this]( const bodygraph_part * bgp, const std::string & sym ) {
             if( !bgp ) {
                 return colorize( sym, bodygraph_full_body_iteminfo->fill_color );
@@ -4201,6 +4272,9 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
             nc_color clr = c_dark_gray;
             int cov_val = 0;
             for( const sub_bodypart_id &sid : grp ) {
+                if( !sid.is_valid() ) {
+                    continue;
+                }
                 int tmp = get_coverage( sid );
                 cov_val = tmp > cov_val ? tmp : cov_val;
             }
@@ -5092,7 +5166,7 @@ void item::disassembly_info( std::vector<iteminfo> &info, const iteminfo_query *
     const requirement_data &req = dis.disassembly_requirements();
     if( !req.is_empty() ) {
         const std::string approx_time = to_string_approx( dis.time_to_craft( get_player_character(),
-                                        recipe_time_flag::ignore_proficiencies ) );
+                                        {}, recipe_time_flag::ignore_proficiencies ) );
 
         const requirement_data::alter_item_comp_vector &comps_list = req.get_components();
         const std::string comps_str = enumerate_as_string( comps_list,
@@ -5159,9 +5233,17 @@ void item::qualities_info( std::vector<iteminfo> &info, const iteminfo_query *pa
     if( parts->test( iteminfo_parts::QUALITIES ) && has_any_qualities ) {
         insert_separation_line( info );
         // List all inherent (unconditional) qualities
+        // Helper to extract level-only pairs for display from item_quality maps
+        const auto to_level_pairs = []( const std::map<quality_id, itype::item_quality> &qmap ) {
+            std::map<quality_id, int> result;
+            for( const auto &e : qmap ) {
+                result[e.first] = e.second.level;
+            }
+            return result;
+        };
         if( !type->qualities.empty() ) {
             info.emplace_back( "QUALITIES", "", _( "<bold>Has qualities</bold>:" ) );
-            for( const std::pair<quality_id, int> &q : sorted_lex( type->qualities ) ) {
+            for( const std::pair<quality_id, int> &q : sorted_lex( to_level_pairs( type->qualities ) ) ) {
                 name_quality( q );
             }
         }
@@ -5176,7 +5258,8 @@ void item::qualities_info( std::vector<iteminfo> &info, const iteminfo_query *pa
                                    string_format( _( "<bad>Needs %d or more charges</bad> for qualities:" ),
                                                   type->charges_to_use() ) );
             }
-            for( const std::pair<quality_id, int> &q : sorted_lex( type->charged_qualities ) ) {
+            for( const std::pair<quality_id, int> &q : sorted_lex(
+                     to_level_pairs( type->charged_qualities ) ) ) {
                 name_quality( q );
             }
         }
@@ -5191,11 +5274,11 @@ void item::qualities_info( std::vector<iteminfo> &info, const iteminfo_query *pa
         info.emplace_back( "QUALITIES", "", _( "Contains items with qualities:" ) );
         std::map<quality_id, int, quality_id::LexCmp> most_quality;
         for( const item *e : contents.all_items_top() ) {
-            for( const std::pair<const quality_id, int> &q : e->type->qualities ) {
-                auto emplace_result = most_quality.emplace( q );
+            for( const auto &q : e->type->qualities ) {
+                auto emplace_result = most_quality.emplace( q.first, q.second.level );
                 if( !emplace_result.second &&
-                    most_quality.at( emplace_result.first->first ) < q.second ) {
-                    most_quality[ q.first ] = q.second;
+                    most_quality.at( emplace_result.first->first ) < q.second.level ) {
+                    most_quality[ q.first ] = q.second.level;
                 }
             }
         }
@@ -5899,7 +5982,9 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
         print_parts( vparts, _( "You could install it in a vehicle: %s" ),
         []( const vpart_info & vp ) {
-            return !vp.has_flag( vpart_bitflags::VPFLAG_APPLIANCE );
+            return !vp.has_flag( vpart_bitflags::VPFLAG_APPLIANCE ) &&
+                   !vp.has_flag( "NO_INSTALL_HIDDEN" ) &&
+                   !vp.has_flag( "NO_INSTALL_PLAYER" );
         } );
 
         print_parts( vparts, _( "You could install it as an appliance: %s" ),
@@ -6055,7 +6140,19 @@ std::string item::info( std::vector<iteminfo> &info, const iteminfo_query *parts
             bionic_info( info, parts, batch, debug );
 
         } else if( blockname == "contents" ) {
-
+            const use_function *action = type->get_use( "attach_molle" );
+            if( action ) {
+                const molle_attach_actor *actor = dynamic_cast<const molle_attach_actor *>
+                                                  ( action->get_actor_ptr() );
+                const int size = actor->size;
+                const int vacancies = size - get_contents().get_additional_space_used();
+                insert_separation_line( info );
+                info.emplace_back( "CONTAINER",
+                                   _( "* <bold><info>MOLLE-compatible</info> pouches can be attached to this item</bold>." ) );
+                info.emplace_back( "CONTAINER", _( "Total space: " ), _( "<num>.  " ), iteminfo::no_newline, size );
+                info.emplace_back( "CONTAINER", _( "Spare space: " ), _( "<num>." ), iteminfo::no_flags,
+                                   vacancies );
+            }
             contents.info( info, parts );
             contents_info( info, parts, batch, debug );
 
@@ -6395,7 +6492,7 @@ int item::on_wield_cost( const Character &you ) const
     return mv;
 }
 
-void item::on_wield( Character &you )
+void item::on_wield( Character &you, bool combat )
 {
     int wield_cost = on_wield_cost( you );
     you.mod_moves( -wield_cost );
@@ -6410,7 +6507,7 @@ void item::on_wield( Character &you )
     }
     you.add_msg_if_player( m_neutral, msg, tname() );
 
-    if( !you.martial_arts_data->selected_is_none() ) {
+    if( combat && !you.martial_arts_data->selected_is_none() ) {
         you.martial_arts_data->martialart_use_message( you );
     }
 
@@ -6442,7 +6539,7 @@ void item::handle_pickup_ownership( Character &c )
                     owned_by = is_owned_by( *as_monster );
                 }
                 return &cr != &c && owned_by && rl_dist( cr.pos_abs(), c.pos_abs() ) < MAX_VIEW_DISTANCE &&
-                       cr.sees( here, c.pos_bub( here ) );
+                       cr.sees( here, c );
             };
             const auto sort_criteria = []( const Creature * lhs, const Creature * rhs ) {
                 const npc *const lnpc = lhs->as_npc();
@@ -6501,7 +6598,7 @@ void item::update_inherited_flags()
     auto const inehrit_flags = [this]( FlagsSetType const & Flags ) {
         for( flag_id const &f : Flags ) {
             if( f->inherit() ) {
-                inherited_tags_cache.emplace( f );
+                inherited_tags_cache.insert( f );
             }
         }
     };
@@ -6550,10 +6647,10 @@ void item::update_prefix_suffix_flags()
 void item::update_prefix_suffix_flags( const flag_id &f )
 {
     if( !f->item_prefix().empty() ) {
-        prefix_tags_cache.emplace( f );
+        prefix_tags_cache.insert( f );
     }
     if( !f->item_suffix().empty() ) {
-        suffix_tags_cache.emplace( f );
+        suffix_tags_cache.insert( f );
     }
 }
 
@@ -6913,6 +7010,10 @@ int item::price_no_contents( bool practical, std::optional<int> price_override )
         price = std::max( price - PRICE_FILTHY_MALUS, 0 );
     }
 
+    if( has_flag( flag_REPLICA_EQUIPMENT ) ) {
+        price /= 10;
+    }
+
     for( fault_id fault : faults ) {
         price *= fault->price_mod();
     }
@@ -7107,10 +7208,10 @@ units::length item::barrel_length() const
     if( is_gun() ) {
         units::length l = type->gun->barrel_length;
         for( const item *mod : mods() ) {
-            // if a gun has a barrel length specifying mod then use that length for sure
-            if( mod->type->gunmod->barrel_length > 0_mm ) {
+            // If a gun has a barrel length specifying mod then use that length for sure.
+            if( !mod->is_gun() && mod->type->gunmod->barrel_length > 0_mm ) {
                 l = mod->type->gunmod->barrel_length;
-                // if we find an explicit barrel mod then use that and quit the loop
+                // If we find an explicit barrel mod then use that and quit the loop.
                 break;
             }
         }
@@ -7178,7 +7279,7 @@ units::volume item::corpse_volume( const mtype *corpse ) const
     if( corpse_volume > 0_ml ) {
         return corpse_volume;
     }
-    debugmsg( "invalid monster volume for corpse" );
+    debugmsg( "invalid monster volume for corpse of %s", corpse->id.str() );
     return 0_ml;
 }
 
@@ -7472,26 +7573,19 @@ bool item::has_own_flag( const flag_id &f ) const
 
 bool item::has_flag( const flag_id &f ) const
 {
-    bool ret = false;
     if( !f.is_valid() ) {
         debugmsg( "Attempted to check invalid flag_id %s", f.str() );
         return false;
     }
 
-    ret = inherited_tags_cache.find( f ) != inherited_tags_cache.end();
-    if( ret ) {
-        return ret;
+    // Itype flags cover the common case; check them first.
+    if( type->has_flag( f ) ) {
+        return true;
     }
-
-    // other item type flags
-    ret = type->has_flag( f );
-    if( ret ) {
-        return ret;
+    if( inherited_tags_cache.find( f ) != inherited_tags_cache.end() ) {
+        return true;
     }
-
-    // now check for item specific flags
-    ret = has_own_flag( f );
-    return ret;
+    return has_own_flag( f );
 }
 
 item &item::set_flag( const flag_id &flag )
@@ -7594,9 +7688,9 @@ void item::set_random_fault_of_type( const std::string &fault_type, bool force, 
     }
 
     weighted_int_list<fault_id> faults_by_type;
-    for( const weighted_object<int, fault_id> &f : type->faults ) {
-        if( f.obj.obj().type() == fault_type && can_have_fault( f.obj ) ) {
-            faults_by_type.add( f.obj, f.weight );
+    for( const std::pair<fault_id, int> &f : type->faults ) {
+        if( f.first.obj().type() == fault_type && can_have_fault( f.first ) ) {
+            faults_by_type.add( f.first, f.second );
         }
 
     }
@@ -7697,9 +7791,9 @@ int item::get_quality_nonrecursive( const quality_id &id, const bool strict_boil
     int return_quality = INT_MIN;
 
     // Check for inherent item quality
-    for( const std::pair<const quality_id, int> &quality : type->qualities ) {
+    for( const auto &quality : type->qualities ) {
         if( quality.first == id ) {
-            return_quality = quality.second;
+            return_quality = quality.second.level;
         }
     }
 
@@ -7707,9 +7801,9 @@ int item::get_quality_nonrecursive( const quality_id &id, const bool strict_boil
     // (using ammo_remaining() with player character to include bionic/UPS power)
     if( !type->charged_qualities.empty() && ammo_sufficient( &get_player_character() ) ) {
         // see if any charged qualities are better than the current one
-        for( const std::pair<const quality_id, int> &quality : type->charged_qualities ) {
+        for( const auto &quality : type->charged_qualities ) {
             if( quality.first == id ) {
-                return_quality = std::max( return_quality, quality.second );
+                return_quality = std::max( return_quality, quality.second.level );
             }
         }
     }
@@ -7776,6 +7870,68 @@ std::set<matec_id> item::get_techniques() const
     std::set<matec_id> result = type->techniques;
     result.insert( techniques.begin(), techniques.end() );
     return result;
+}
+float item::get_quality_speed( const quality_id &id, int level,
+                               const Character *crafter ) const
+{
+    // BOIL special case: empty containers only (mirrors get_quality)
+    if( id == qual_BOIL && !contents.empty_container() ) {
+        return 1.0f;
+    }
+
+    bool found = false;
+    float best_speed = 1.0f;
+
+    // Helper: consider a source that provides the quality at qual_level with speed s
+    const auto consider = [&]( int qual_level, float s ) {
+        if( qual_level >= level ) {
+            if( !found || s < best_speed ) {
+                best_speed = s;
+                found = true;
+            }
+        }
+    };
+
+    // Inherent qualities
+    auto it = type->qualities.find( id );
+    if( it != type->qualities.end() ) {
+        consider( it->second.level, it->second.speed );
+    }
+
+    // Charged qualities (only if crafter provided for ammo_sufficient check)
+    if( crafter && !type->charged_qualities.empty() && ammo_sufficient( crafter ) ) {
+        auto cit = type->charged_qualities.find( id );
+        if( cit != type->charged_qualities.end() ) {
+            consider( cit->second.level, cit->second.speed );
+        }
+    }
+
+    // Contained items: recursive through contents (mirrors get_quality -> contents.best_quality)
+    for( const item *contained : contents.all_items_top() ) {
+        // Recurse: child checks its own inherent, charged, and contained items
+        float child_speed = contained->get_quality_speed( id, level, crafter );
+        // Child already returns 1.0 if it doesn't qualify, but we use found flag
+        // to distinguish "qualifies at 1.0" from "doesn't qualify". Check the
+        // child's quality level directly without leaking get_player_character():
+        // use the same crafter-aware resolution we do above.
+        int child_level = INT_MIN;
+        auto cit = contained->type->qualities.find( id );
+        if( cit != contained->type->qualities.end() ) {
+            child_level = cit->second.level;
+        }
+        if( crafter && !contained->type->charged_qualities.empty() &&
+            contained->ammo_sufficient( crafter ) ) {
+            auto ccit = contained->type->charged_qualities.find( id );
+            if( ccit != contained->type->charged_qualities.end() ) {
+                child_level = std::max( child_level, ccit->second.level );
+            }
+        }
+        if( child_level >= level ) {
+            consider( child_level, child_speed );
+        }
+    }
+
+    return best_speed;
 }
 
 int item::get_comestible_fun() const
@@ -8006,7 +8162,7 @@ bool item::process_decay( Character *carrier, int decay_hours,
         time_duration decay_countdown = time_duration::from_seconds( item_counter ) + time_delta *
                                         rng_normal( 0.9, 1.1 );
         if( decay_countdown >= time_duration::from_hours( decay_hours ) ) {
-            convert( *type->revert_to, carrier );
+            type->transform_into.value().transform( carrier, *this, true );
             return true;
         }
         item_counter = to_seconds<int>( decay_countdown );
@@ -8023,7 +8179,7 @@ bool item::process_decay_in_air( map &here, Character *carrier, const tripoint_b
         time_duration new_air_exposure = time_duration::from_seconds( item_counter ) + time_delta *
                                          rng_normal( 0.9, 1.1 ) * environment_multiplier;
         if( new_air_exposure >= time_duration::from_hours( decay_hours ) ) {
-            convert( *type->revert_to, carrier );
+            type->transform_into.value().transform( carrier, *this, true );
             return true;
         }
         item_counter = to_seconds<int>( new_air_exposure );
@@ -8366,7 +8522,6 @@ int item::get_coverage( const sub_bodypart_id &bodypart ) const
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
                 adjusted_coverage = std::max( adjusted_coverage, ablative_armor.get_coverage( bodypart ) );
             }
@@ -8386,39 +8541,69 @@ bool item::has_sublocations() const
 
 const armor_portion_data *item::portion_for_bodypart( const bodypart_id &bodypart ) const
 {
-    const islot_armor *t = find_armor_data();
-    if( !t ) {
+    if( !bodypart.is_valid() ) {
         return nullptr;
     }
-    for( const armor_portion_data &entry : t->data ) {
-        if( entry.covers.has_value() && entry.covers->test( bodypart.id() ) ) {
-            return &entry;
-        }
-    }
-    return nullptr;
-}
 
-
-const armor_portion_data *item::portion_for_bodypart( const sub_bodypart_id &bodypart ) const
-{
     const islot_armor *t = find_armor_data();
-    if( !t ) {
-        return nullptr;
-    }
-    const sub_bodypart_str_id &bodypart_sid = bodypart.id();
-    for( const armor_portion_data &entry : t->sub_data ) {
-        if( entry.sub_coverage.count( bodypart_sid ) > 0 ) {
-            return &entry;
-        }
-    }
-    // Try similar sub-bodyparts
-    for( const sub_bodypart_str_id &similar : bodypart->similar_bodyparts ) {
-        for( const armor_portion_data &entry : t->sub_data ) {
-            if( entry.sub_coverage.count( similar ) > 0 ) {
+    if( t ) {
+        for( const armor_portion_data &entry : t->data ) {
+            if( entry.covers.has_value() && entry.covers->test( bodypart.id() ) ) {
                 return &entry;
             }
         }
     }
+
+    if( is_ablative() ) {
+        for( const item_pocket *pocket : get_all_ablative_pockets() ) {
+            if( !pocket->empty() ) {
+                const item &ablative_armor = pocket->front();
+                const armor_portion_data *entry = ablative_armor.portion_for_bodypart( bodypart );
+                if( entry != nullptr ) {
+                    return entry;
+                }
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+const armor_portion_data *item::portion_for_bodypart( const sub_bodypart_id &bodypart ) const
+{
+    if( !bodypart.is_valid() ) {
+        return nullptr;
+    }
+
+    const islot_armor *t = find_armor_data();
+    const sub_bodypart_str_id &bodypart_sid = bodypart.id();
+
+    if( t ) {
+        for( const armor_portion_data &entry : t->sub_data ) {
+            if( entry.sub_coverage.count( bodypart_sid ) > 0 ) {
+                return &entry;
+            }
+
+            for( const sub_bodypart_str_id &similar : bodypart->similar_bodyparts ) {
+                if( similar.is_valid() && entry.sub_coverage.count( similar ) > 0 ) {
+                    return &entry;
+                }
+            }
+        }
+    }
+
+    if( is_ablative() ) {
+        for( const item_pocket *pocket : get_all_ablative_pockets() ) {
+            if( !pocket->empty() ) {
+                const item &ablative_armor = pocket->front();
+                const armor_portion_data *entry = ablative_armor.portion_for_bodypart( bodypart );
+                if( entry != nullptr ) {
+                    return entry;
+                }
+            }
+        }
+    }
+
     return nullptr;
 }
 
@@ -8497,39 +8682,52 @@ int item::get_warmth() const
 
 int item::get_warmth( const bodypart_id &bp ) const
 {
-    double warmth_val = 0.0;
-    float limb_coverage = 0.0f;
     bool check_ablative_armor = false;
     if( !covers( bp, check_ablative_armor ) ) {
         return 0;
     }
-    warmth_val = get_warmth();
-    // calculate how much of the limb the armor ideally covers
-    // idea being that an item that covers the shoulders and torso shouldn't
-    // heat the whole arm like it covers it
-    // TODO: fully configure this per armor entry
+
+    double warmth_val = get_warmth();
+    float limb_coverage = 0.0f;
+
+    // If no sublocations, assume full coverage.
     if( !has_sublocations() ) {
-        // if it doesn't have sublocations it has 100% covered
-        limb_coverage = 100;
+        limb_coverage = 100.0f;
     } else {
+        // Build a set of subparts the character actually has and are valid.
+        std::set<sub_bodypart_id> actual_subparts;
         for( const sub_bodypart_str_id &sbp : bp->sub_parts ) {
-            if( !covers( sbp, check_ablative_armor ) ) {
-                continue;
+            if( sbp.id().is_valid() ) {
+                actual_subparts.insert( sbp.id() );
+            }
+        }
+
+        // Sum coverage only for actual subparts
+        for( const sub_bodypart_str_id &sbp : bp->sub_parts ) {
+            sub_bodypart_id sid = sbp.id();
+            if( !actual_subparts.count( sid ) ) {
+                continue; // Skip subparts the character doesn't have.
             }
 
-            // TODO: handle non 100% sub body part coverages
+            if( !covers( sbp, check_ablative_armor ) ) {
+                continue; // Skip if armor doesn't cover this subpart.
+            }
+
+            // TODO: handle partial coverage per subpart if needed
             limb_coverage += sbp->max_coverage;
         }
     }
-    int warmth = std::round( warmth_val * limb_coverage / 100.0f );
 
+    // Calculate warmth scaled by coverage.
+    int warmth = std::round( warmth_val * limb_coverage / 100.0f );
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
-            if( !pocket->empty() ) {
-                // get the contained plate
-                const item &ablative_armor = pocket->front();
-                warmth += ablative_armor.get_warmth( bp );
+            if( pocket->empty() ) {
+                continue;
             }
+
+            const item &ablative_armor = pocket->front();
+            warmth += ablative_armor.get_warmth( bp );
         }
     }
 
@@ -8597,7 +8795,7 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
     if( !can_revive() ) {
         return false;
     }
-    if( here.veh_at( pos ) ) {
+    if( here.veh_at( pos ) && !here.passable( pos ) ) {
         return false;
     }
 
@@ -8750,11 +8948,37 @@ bool item::efiles_all_browsed() const
     return true;
 }
 
+static int count_valid_recipes( const std::string_view csv )
+{
+    // Match get_saved_recipes() semantics: deduplicate via set so a malformed
+    // CSV like ",balclava,balclava," returns 1, not 2.
+    std::set<recipe_id> seen;
+    for( const std::string &rid_str : string_split( csv, ',' ) ) {
+        const recipe_id rid( rid_str );
+        if( !rid.is_empty() && rid.is_valid() ) {
+            seen.emplace( rid );
+        }
+    }
+    return static_cast<int>( seen.size() );
+}
+
 units::ememory item::ememory_size() const
 {
     units::ememory ememory_return = type->ememory_size;
     if( typeId() == itype_efile_recipes ) {
-        ememory_return *= get_saved_recipes().size();
+        if( is_broken_on_active() ) {
+            return 0_KB;
+        }
+        // Reading a cached count avoids parsing EIPC_RECIPES and validating
+        // every recipe_id in stacks_with.
+        int n;
+        if( has_var( "EIPC_RECIPES_count" ) ) {
+            n = static_cast<int>( get_var( "EIPC_RECIPES_count", 0.0 ) );
+        } else {
+            n = count_valid_recipes( get_var( "EIPC_RECIPES" ) );
+            const_cast<item *>( this )->set_var( "EIPC_RECIPES_count", n );
+        }
+        ememory_return *= n;
     } else if( typeId() == itype_efile_photos ) {
         ememory_return *= total_photos();
     }
@@ -8763,12 +8987,7 @@ units::ememory item::ememory_size() const
 
 units::ememory item::occupied_ememory() const
 {
-    std::vector<const item *> all_efiles = efiles();
-    units::ememory total = 0_KB;
-    for( const item *i : all_efiles ) {
-        total += i->ememory_size();
-    }
-    return total;
+    return contents.occupied_ememory();
 }
 
 units::ememory item::total_ememory() const
@@ -8838,10 +9057,20 @@ const item *item::get_photo_gallery() const
 
 int item::total_photos() const
 {
-    std::vector<item::extended_photo_def> extended_photos;
-    read_extended_photos( extended_photos, "CAMERA_EXTENDED_PHOTOS", true );
-    read_extended_photos( extended_photos, "CAMERA_MONSTER_PHOTOS", true );
-    return extended_photos.size();
+    // Reading a cached count avoids reparsing the JSON blob in stacks_with.
+    const auto count_for = [this]( const std::string & var_name ) -> int {
+        const std::string count_var = var_name + "_count";
+        if( has_var( count_var ) )
+        {
+            return static_cast<int>( get_var( count_var, 0.0 ) );
+        }
+        std::vector<item::extended_photo_def> v;
+        read_extended_photos( v, var_name, true );
+        const int n = static_cast<int>( v.size() );
+        const_cast<item *>( this )->set_var( count_var, n );
+        return n;
+    };
+    return count_for( "CAMERA_EXTENDED_PHOTOS" ) + count_for( "CAMERA_MONSTER_PHOTOS" );
 }
 
 bool item::is_software() const
@@ -9048,7 +9277,7 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
             // thickness - when it comes to chemicals, a material burns, or it does not. Nonphysical attacks
             // don't respect thickness, but average the protection of all layers, surface or no. Acid rolls
             // for portion total (and thus can bypass layers that dont fully cover), other stuff doesn't.
-            const int total = type->mat_portion_total == 0 ? 1 : type->mat_portion_total;
+
             // Iterate through armor_mats in order. Outermost layers come first both here and in json entries.
             for( auto it = armor_mats.begin(); it != armor_mats.end(); ++it ) {
                 const part_material *m = *it;
@@ -9085,10 +9314,6 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
                     resist += tmp_add;
                 }
             }
-            if( !dmg_type->physical ) {
-                // Average by portion of materials
-                resist /= total;
-            }
         }
         // The end result of all these checks is averaged to give us the item's final overall armor value.
         return resist + mod;
@@ -9105,8 +9330,8 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
             } else {
                 tmp_add = m.first->resist( dmg_type ) * m.second;
             }
+            resist += tmp_add;
         }
-        resist += tmp_add;
         // Average by portion of materials
         resist /= total;
     }
@@ -9510,7 +9735,7 @@ void item::mitigate_damage( damage_unit &du, const sub_bodypart_id &bp, int roll
 
 bool item::is_two_handed( const Character &guy ) const
 {
-    if( has_flag( flag_ALWAYS_TWOHAND ) ) {
+    if( has_flag( flag_ALWAYS_TWOHAND ) || has_flag( flag_FIRE_TWOHAND ) ) {
         return true;
     }
     ///\EFFECT_STR determines which weapons can be wielded with one hand
@@ -9746,21 +9971,12 @@ bool item::possible_itype_variant( const std::string &test ) const
                          variant_looking_for ) != type->variants.end();
 }
 
-bool item::has_itype_variant( bool check_option ) const
+bool item::has_itype_variant() const
 {
     if( _itype_variant == nullptr ) {
         return false;
-    } else if( !check_option ) {
-        return true;
     }
-
-    switch( type->variant_kind ) {
-        case itype_variant_kind::drug:
-            return get_option<bool>( "SHOW_DRUG_VARIANTS" );
-        default:
-            return true;
-    }
-    return false;
+    return true;
 }
 
 const itype_variant_data &item::itype_variant() const
@@ -9839,7 +10055,7 @@ int item::get_reload_time() const
 
 bool item::is_silent() const
 {
-    return gun_noise().volume < 5;
+    return gun_noise().volume < 16;
 }
 
 bool item::is_gunmod() const
@@ -9936,6 +10152,16 @@ bool item::has_temperature() const
 bool item::is_corpse() const
 {
     return corpse != nullptr && has_flag( flag_CORPSE );
+}
+
+void item::begin_bulk_fill()
+{
+    contents.begin_bulk_fill();
+}
+
+void item::end_bulk_fill()
+{
+    contents.end_bulk_fill();
 }
 
 const mtype *item::get_mtype() const
@@ -10144,6 +10370,16 @@ std::vector<const item_pocket *> item::get_all_ablative_pockets() const
     return contents.get_all_ablative_pockets();
 }
 
+std::vector<const item_pocket *> item::get_all_contained_and_mod_pockets() const
+{
+    return contents.get_all_contained_and_mod_pockets();
+}
+
+std::vector<item_pocket *> item::get_all_contained_and_mod_pockets()
+{
+    return contents.get_all_contained_and_mod_pockets();
+}
+
 item_pocket *item::contained_where( const item &contained )
 {
     return contents.contained_where( contained );
@@ -10242,8 +10478,8 @@ int item::wind_resist() const
 std::set<fault_id> item::faults_potential() const
 {
     std::set<fault_id> res;
-    for( const weighted_object<int, fault_id> &fault_pair : type->faults ) {
-        res.insert( fault_pair.obj );
+    for( const std::pair<fault_id, int> &fault_pair : type->faults ) {
+        res.insert( fault_pair.first );
     }
     return res;
 }
@@ -10251,9 +10487,9 @@ std::set<fault_id> item::faults_potential() const
 std::set<fault_id> item::faults_potential_of_type( const std::string &fault_type ) const
 {
     std::set<fault_id> res;
-    for( const weighted_object<int, fault_id> &some_fault : type->faults ) {
-        if( some_fault.obj->type() == fault_type ) {
-            res.emplace( some_fault.obj );
+    for( const std::pair<fault_id, int> &some_fault : type->faults ) {
+        if( some_fault.first->type() == fault_type ) {
+            res.emplace( some_fault.first );
         }
     }
     return res;
@@ -10380,7 +10616,7 @@ bool item::is_emissive() const
         return true;
     }
 
-    for( const item_pocket *pkt : get_all_contained_pockets() ) {
+    for( const item_pocket *pkt : get_all_contained_and_mod_pockets() ) {
         if( pkt->transparent() ) {
             for( const item *it : pkt->all_items_top() ) {
                 if( it->is_emissive() ) {
@@ -10437,6 +10673,11 @@ bool item::has_relic_recharge() const
 bool item::has_relic_activation() const
 {
     return is_relic() && relic_data->has_activation();
+}
+
+bool item::can_use_relic( const Character &guy ) const
+{
+    return is_relic() && relic_data->can_activate( *this, guy );
 }
 
 std::vector<enchant_cache> item::get_proc_enchantments() const
@@ -10776,7 +11017,11 @@ std::set<recipe_id> item::get_saved_recipes() const
 
 void item::set_saved_recipes( const std::set<recipe_id> &recipes )
 {
-    set_var( "EIPC_RECIPES", string_join( recipes, "," ) );
+    const std::string csv = string_join( recipes, "," );
+    set_var( "EIPC_RECIPES", csv );
+    // Compute from the persisted CSV so the cache reflects steady-state validity,
+    // not transient state like is_broken_on_active().
+    set_var( "EIPC_RECIPES_count", count_valid_recipes( csv ) );
 }
 
 void item::generate_recipes()
@@ -10953,7 +11198,7 @@ int item::gun_dispersion( bool with_ammo, bool with_scaling ) const
     for( const item *mod : gunmods() ) {
         dispersion_sum += mod->type->gunmod->dispersion;
     }
-    int dispPerDamage = get_option< int >( "DISPERSION_PER_GUN_DAMAGE" );
+    int dispPerDamage = 30;
     dispersion_sum += damage_level() * dispPerDamage;
     dispersion_sum = std::max( dispersion_sum, 0 );
     if( with_ammo && has_ammo() ) {
@@ -10966,7 +11211,9 @@ int item::gun_dispersion( bool with_ammo, bool with_scaling ) const
     // Dividing dispersion by 15 temporarily as a gross adjustment,
     // will bake that adjustment into individual gun definitions in the future.
     // Absolute minimum gun dispersion is 1.
-    double divider = get_option< float >( "GUN_DISPERSION_DIVIDER" );
+
+    // FIXME: Move divider to global constant gun_dispersion_divider (deprecated option)
+    double divider = 18;
     dispersion_sum = std::max( static_cast<int>( std::round( dispersion_sum / divider ) ), 1 );
 
     return dispersion_sum;
@@ -11068,15 +11315,23 @@ units::mass item::gun_base_weight() const
     return base_weight;
 
 }
+
+int item::gun_awkwardness( const Character &p ) const
+{
+    float gun_length = ( length() / 10_mm );
+    float length_ratio = gun_length / p.height();
+    float awkwardness = 1.f;
+    const float threshold = 0.75f;
+    awkwardness = length_ratio / threshold;
+    return std::max( 0, static_cast<int>( std::round( ( awkwardness - 1.f ) * 100.f ) ) );
+}
+
 int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) const
 {
     if( !is_gun() || ( ammo_required() && !ammo_remaining( ) ) ) {
         return 0;
     }
-
-    ///\ARM_STR improves the handling of heavier weapons
-    // we consider only base weight to avoid exploits
-    // now we need to add weight of receiver
+    ///\ARM_STR improves the handling of heavier weapons.
     double wt = ideal_strength ? gun_base_weight() / 333.0_gram : std::min( gun_base_weight(),
                 p.get_arm_str() * 333_gram ) / 333.0_gram;
 
@@ -11087,10 +11342,10 @@ int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) cons
         }
     }
 
-    // rescale from JSON units which are intentionally specified as integral values
+    // $escale from JSON units which are intentionally specified as integral values.
     handling /= 10;
 
-    // algorithm is biased so heavier weapons benefit more from improved handling
+    // Algorithm is biased so heavier weapons benefit more from improved handling.
     handling = std::pow( wt, 0.8 ) * std::pow( handling, 1.2 );
 
     int qty = type->gun->recoil;
@@ -11098,11 +11353,16 @@ int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) cons
         qty += ammo_data()->ammo->recoil;
     }
 
-    // handling could be either a bonus or penalty dependent upon installed mods
+    float awkwardness = 1.f;
+    if( !bipod ) {
+        // Divide by 100 to turn the int back into a percent.
+        awkwardness += gun_awkwardness( p ) / 100.f;
+    }
+    // Handling could be either a bonus or penalty dependent upon installed mods.
     if( handling > 1.0 ) {
-        return qty / handling;
+        return static_cast<int>( std::round( qty / handling * awkwardness ) );
     } else {
-        return qty * ( 1.0 + std::abs( handling ) );
+        return static_cast<int>( std::round( qty * ( 1.0 + std::abs( handling ) ) * awkwardness ) );
     }
 }
 
@@ -11330,7 +11590,7 @@ units::energy item::energy_remaining( const Character *carrier, bool ignoreExter
     if( is_magazine() ) {
         ret += energy;
         for( const item *e : contents.all_items_top( pocket_type::MAGAZINE ) ) {
-            if( e->typeId() == itype_battery ) {
+            if( e->ammo_type() == ammo_battery ) {
                 ret += units::from_kilojoule( static_cast<std::int64_t>( e->charges ) );
             }
         }
@@ -12565,7 +12825,16 @@ int item::getlight_emit() const
     float lumint = type->light_emission;
 
     if( lumint == 0 ) {
-        return 0;
+        // gunmods can create light, but cache_visit_items_with() do not check items inside mod pockets
+        // we will check it here
+        if( is_gun() && !gunmods().empty() ) {
+            for( const item *maybe_flashlight : gunmods() ) {
+                if( maybe_flashlight->type->light_emission != 0 ) {
+                    return maybe_flashlight->getlight_emit();
+                }
+            }
+            return 0;
+        }
     }
 
     if( ammo_required() == 0 || ( has_flag( flag_USE_UPS ) && ammo_capacity( ammo_battery ) == 0 ) ||
@@ -12770,15 +13039,20 @@ bool item::allow_crafting_component() const
     if( is_magazine() && ammo_types().count( ammo_battery ) ) {
         return true;
     }
-
-    // fixes #18886 - turret installation may require items with irremovable mods
     if( is_gun() ) {
+        // Ensure that this is a gun that can actually be fired.
+        if( ammo_types().size() == 1 &&
+            *ammo_types().begin() == ammotype::NULL_ID() ) {
+            return false;
+        }
         bool valid = true;
         visit_items( [&]( const item * it, item * ) {
             if( this == it ) {
                 return VisitResponse::NEXT;
             }
-            if( !( it->is_magazine() || ( it->is_gunmod() && it->is_irremovable() ) ) ) {
+            // Disallow all gun mods except "bore" (receivers) and integrated (irremovable) parts.
+            if( !( it->is_magazine() || ( it->is_gunmod() && ( it->is_irremovable() ||
+                                          it->type->gunmod->location.name() == "bore" ) ) ) ) {
                 valid = false;
                 return VisitResponse::ABORT;
             }
@@ -13075,6 +13349,9 @@ const item_category &item::get_category_of_contents( int depth, int maxdepth ) c
             cached_category = { cat.get_id(), calendar::turn };
             return cat;
         }
+        item_category const &cat = this->get_category_shallow();
+        cached_category = { cat.get_id(), calendar::turn };
+        return cat;
     }
     return this->get_category_shallow();
 }
@@ -13381,9 +13658,9 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
     time_point time = last_temp_check;
     item_internal::scoped_goes_bad_cache _cache( this );
     const bool process_rot = goes_bad() && spoil_modifier != 0;
-    const bool decays = has_flag( flag_DECAYS ) && type->revert_to;
+    const bool decays = has_flag( flag_DECAYS ) && type->transform_into;
     const bool decays_in_air = !watertight_container && has_flag( flag_DECAYS_IN_AIR ) &&
-                               type->revert_to;
+                               type->transform_into;
     int64_t decay_hours = ( decays || decays_in_air ) ? get_property_int64_t( "decay_hours" ) :
                           0;
     if( now - time > 1_hours ) {
@@ -13394,7 +13671,7 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
 
         units::temperature_delta temp_mod;
         // Toilets and vending machines will try to get the heat radiation and convection during mapgen and segfault.
-        if( !g->new_game ) {
+        if( !g->new_game && !g->swapping_dimensions ) {
             temp_mod = get_heat_radiation( pos );
             temp_mod += get_convection_temperature( pos );
             temp_mod += here.get_temperature_mod( pos );
@@ -13837,13 +14114,23 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
         if( carrier != nullptr ) {
             carrier->add_msg_if_player( m_neutral, _( "You finish your %s." ), type_name() );
         }
-        if( type->revert_to ) {
-            convert( *type->revert_to, carrier );
+        if( type->transform_into ) {
+            type->transform_into.value().transform( carrier, *this, true );
+            if( !this->is_null() ) {
+                here.add_item_or_charges( carrier->pos_bub(), *this );
+                on_drop( carrier->pos_bub(), here );
+                carrier->i_rem( this );
+            }
         } else {
             type->invoke( carrier, *this, pos, "transform" );
+            if( !this->is_null() ) {
+                here.add_item_or_charges( carrier->pos_bub(), *this );
+                on_drop( carrier->pos_bub(), here );
+                carrier->i_rem( this );
+            }
         }
         if( typeId() == itype_joint_lit && carrier != nullptr ) {
-            carrier->add_effect( effect_weed_high, 1_minutes ); // one last puff
+            carrier->vitamin_mod( vitamin_cannabis, 2 ); // one last puff
             here.add_field( pos + point( rng( -1, 1 ), rng( -1, 1 ) ), field_type_id( "fd_weedsmoke" ), 2 );
             weed_msg( *carrier );
         }
@@ -13855,10 +14142,10 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
         // No lit cigs in inventory, only in hands or in mouth
         // So if we're taking cig off or unwielding it, extinguish it first
         if( !carrier->is_worn( *this ) && !carrier->is_wielding( *this ) ) {
-            if( type->revert_to ) {
+            if( type->transform_into ) {
                 carrier->add_msg_if_player( m_neutral, _( "You extinguish your %s and put it away." ),
                                             type_name() );
-                convert( *type->revert_to, carrier );
+                type->transform_into.value().transform( carrier, *this, true );
             } else {
                 type->invoke( carrier, *this, pos, "transform" );
             }
@@ -13877,17 +14164,22 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
     }
     // if carried by someone:
     if( carrier != nullptr ) {
-        time_duration duration = 15_seconds;
-        if( carrier->has_trait( trait_TOLERANCE ) ) {
-            duration = 7_seconds;
-        } else if( carrier->has_trait( trait_LIGHTWEIGHT ) ) {
-            duration = 30_seconds;
-        }
-        carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
+        int puff_chance = 4;
         if( has_flag( flag_TOBACCO ) ) {
-            carrier->add_effect( effect_cig, duration );
+            // Try not to go over 3mg nicotine if we started at 0.
+            if( typeId() == itype_cigar_lit ) {
+                puff_chance = 14;
+            }
+            if( one_in( puff_chance ) ) {
+                carrier->vitamin_mod( vitamin_nicotine, 1 );
+                carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
+            }
         } else {
-            carrier->add_effect( effect_weed_high, duration / 2 );
+            // Aim for around 10mg cannabis per joint.
+            if( one_in( puff_chance ) ) {
+                carrier->vitamin_mod( vitamin_cannabis, 1 );
+                carrier->add_msg_if_player( m_neutral, _( "You take a puff of your %s." ), type_name() );
+            }
         }
         carrier->mod_moves( -to_moves<int>( 1_seconds ) * 0.15 );
 
@@ -13896,27 +14188,27 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
             carrier->add_msg_if_player( m_bad, _( "Your shaking hand causes you to drop your %s." ),
                                         type_name() );
             here.add_item_or_charges( pos + point( rng( -1, 1 ), rng( -1, 1 ) ), *this );
-            return true; // removes the item that has just been added to the map
+            return true; // Removes the item that has just been added to the map.
         }
 
         if( carrier->has_effect( effect_sleep ) ) {
             carrier->add_msg_if_player( m_bad, _( "You fall asleep and drop your %s." ),
                                         type_name() );
             here.add_item_or_charges( pos + point( rng( -1, 1 ), rng( -1, 1 ) ), *this );
-            return true; // removes the item that has just been added to the map
+            return true; // Removes the item that has just been added to the map.
         }
     } else {
         // If not carried by someone, but laying on the ground:
         if( item_counter % 5 == 0 ) {
-            // lit cigarette can start fires
+            // Lit cigarette can start fires, but they won't always.
             for( const item &i : here.i_at( pos ) ) {
                 if( i.typeId() == typeId() ) {
-                    if( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE, pos ) ||
-                        here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, pos ) ) {
+                    if( ( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE, pos ) && one_in( 4 ) ) ||
+                        ( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, pos ) && one_in( 2 ) ) ) {
                         here.add_field( pos, fd_fire, 1 );
                         break;
                     }
-                } else if( i.flammable( 0 ) ) {
+                } else if( i.flammable( 0 ) && one_in( 3 ) ) {
                     here.add_field( pos, fd_fire, 1 );
                     break;
                 }
@@ -13982,8 +14274,8 @@ bool item::process_extinguish( map &here, Character *carrier, const tripoint_bub
         }
     }
 
-    if( type->revert_to ) {
-        convert( *type->revert_to, carrier );
+    if( type->transform_into ) {
+        type->transform_into.value().transform( carrier, *this, true );
     } else {
         type->invoke( carrier, *this, pos, "transform" );
     }
@@ -14023,7 +14315,13 @@ bool item::has_link_data() const
 
 bool item::can_link_up() const
 {
-    return has_link_data() || type->can_use( "link_up" );
+    const bool can_link = has_link_data() || type->can_use( "link_up" );
+    if( can_link && !get_use( "link_up" ) ) {
+        debugmsg( "can_link_up() found no link_up use function for %s. Most likely missing link_up in item transform",
+                  type_name() );
+        return false;
+    }
+    return can_link;
 }
 
 bool item::link_has_state( link_state state ) const
@@ -14333,13 +14631,24 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
             std::string cable_name = is_cable_item ? string_format( _( "over-extended %s" ), label( 1 ) ) :
                                      string_format( _( "%s's over-extended cable" ), label( 1 ) );
             if( carrier != nullptr ) {
-                carrier->add_msg_if_player( m_bad, _( "Your %s breaks loose!" ), cable_name );
+                if( carrier->is_npc() ) {
+                    add_msg_if_player_sees( *carrier, m_bad, _( "%s's %s breaks loose!" ),
+                                            carrier->disp_name( true, true ), cable_name );
+                } else {
+                    carrier->add_msg_if_player( m_bad, _( "Your %s breaks loose!" ), cable_name );
+                }
             } else {
-                add_msg_if_player_sees( pos, m_bad, _( "Your %s breaks loose!" ), cable_name );
+                add_msg_if_player_sees( pos, m_bad, _( "The %s breaks loose!" ), cable_name );
             }
             return true;
         } else if( link().length + M_SQRT2 >= link().max_length + 1 && carrier != nullptr ) {
-            carrier->add_msg_if_player( m_warning, _( "Your %s is stretched to its limit!" ), link_name() );
+            if( carrier->is_npc() ) {
+                add_msg_if_player_sees( *carrier, m_warning, _( "%s's %s is stretched to its limit!" ),
+                                        carrier->disp_name( true, true ), link_name() );
+            } else {
+                carrier->add_msg_if_player( m_warning, _( "Your %s is stretched to its limit!" ),
+                                            link_name() );
+            }
         }
         return false;
     };
@@ -14355,6 +14664,12 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
     if( !link().t_veh ) {
         vehicle *found_veh = vehicle::find_vehicle( here, link().t_abs_pos );
         if( !found_veh ) {
+            if( last_t_abs_pos_is_oob ) {
+                // Target is outside the reality bubble -- its submap is probably
+                // just unloaded. Skip processing this turn; the cable will
+                // reconnect when the target submap loads back in.
+                return false;
+            }
             return reset_link( true, carrier, -2, true, pos );
         }
         if( debug_mode ) {
@@ -14433,8 +14748,10 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
     }
 
     // If either of the link's connected sides moved, check the cable's length.
+    // Use Chebyshev (square) distance so that diagonal movement costs the same as cardinal,
+    // matching player intuition that "N tiles" means N moves in any direction.
     if( length_check_needed ) {
-        link().length = rl_dist( pos, t_veh_bub_pos + t_veh->part( link_vp_index ).precalc[0].raw() );
+        link().length = square_dist( pos, t_veh_bub_pos + t_veh->part( link_vp_index ).precalc[0].raw() );
         if( check_length() ) {
             return reset_link( true, carrier, link_vp_index );
         }
@@ -14489,36 +14806,89 @@ int item::charge_linked_batteries( vehicle &linked_veh, int turns_elapsed )
     }
 
     // Normally efficiency is the chance to get a charge every charge_interval, but if we're catching up from
-    // time spent ouside the reality bubble it should be applied as a percentage of the total instead.
+    // time spent outside the reality bubble it should be applied as a percentage of the total instead.
     bool short_time_passed = turns_elapsed <= link().charge_interval;
 
     if( turns_elapsed < 1 || ( short_time_passed &&
                                !calendar::once_every( time_duration::from_turns( link().charge_interval ) ) ) ) {
+        // Too early to get any charge.
         return link().charge_rate;
     }
 
-    // If a long time passed, multiply the total by the efficiency rather than cancelling a charge.
-    int transfer_total = short_time_passed ? 1 :
-                         ( turns_elapsed * 1.0f / link().charge_interval ) * link().charge_interval;
-
     if( power_in ) {
-        const int battery_deficit = linked_veh.discharge_battery( here, transfer_total, true );
-        // Around 85% efficient by default; a few of the discharges don't actually recharge
-        if( battery_deficit == 0 && ( !short_time_passed || rng_float( 0.0, 1.0 ) <= link().efficiency ) ) {
-            ammo_set( itype_battery, ammo_remaining( ) + transfer_total );
+        int available_charges = linked_veh.connected_battery_power_level( here ).first;
+        int wanted_charges = ammo_capacity( ammo_battery ) - ammo_remaining( );
+
+        // Nothing to charge or nothing to charge with
+        if( wanted_charges == 0 || available_charges == 0 ) {
+            return link().charge_rate;
         }
-    } else {
-        // Around 85% efficient by default; a few of the discharges don't actually charge
-        if( !short_time_passed || rng_float( 0.0, 1.0 ) <= link().efficiency ) {
-            const int battery_surplus = linked_veh.charge_battery( here, transfer_total, true );
-            if( battery_surplus == 0 ) {
-                ammo_set( itype_battery, ammo_remaining( ) - transfer_total );
+
+        if( short_time_passed ) {
+            // Single charge - subtract one from source, roll against efficiency to add one to destination
+            int deficit = linked_veh.discharge_battery( here, 1, true );
+            if( deficit == 0 && rng_float( 0.0, 1.0 ) <= link().efficiency ) {
+                ammo_set( itype_battery, ammo_remaining( ) + 1 );
             }
         } else {
-            const std::pair<int, int> linked_levels = linked_veh.connected_battery_power_level( here );
-            if( linked_levels.first < linked_levels.second ) {
-                ammo_set( itype_battery, ammo_remaining( ) - transfer_total );
+            // Multiple charges - get minimum from available charges, possible transfer in given time and
+            // amount of charges destination needs to charge itself to full with given efficiency.
+            // Subtract that value from the source and after reduction by efficiency add it to the destination.
+            int possible_transfer =
+                static_cast<int>( turns_elapsed * 1.0f / link().charge_interval );
+            int required_charges = static_cast<int>( wanted_charges / link().efficiency );
+            int spent_charges = std::min( { possible_transfer, available_charges, required_charges } );
+            int deficit = linked_veh.discharge_battery( here, spent_charges, true );
+            int actual_spent = spent_charges - deficit;
+            // Avoid rounding error on full charge
+            int received_charges = actual_spent >= required_charges
+                                   ? wanted_charges
+                                   : static_cast<int>( actual_spent * link().efficiency );
+            ammo_set( itype_battery, ammo_remaining( ) + received_charges );
+        }
+    } else {
+        const auto [bat_remaining, bat_capacity] = linked_veh.connected_battery_power_level( here );
+        int available_charges = ammo_remaining( );
+        int wanted_charges = bat_capacity - bat_remaining;
+
+        // Nothing to charge or nothing to charge with
+        if( wanted_charges == 0 || available_charges == 0 ) {
+            return link().charge_rate;
+        }
+
+        if( short_time_passed ) {
+            // Single charge - subtract one from source, roll against efficiency to add one to destination
+            ammo_set( itype_battery, ammo_remaining( ) - 1 );
+            if( rng_float( 0.0, 1.0 ) <= link().efficiency ) {
+                int surplus = linked_veh.charge_battery( here, 1, true );
+                if( surplus != 0 ) {
+                    // Battery couldn't accept the charge, refund it
+                    ammo_set( itype_battery, ammo_remaining( ) + 1 );
+                }
             }
+        } else {
+            // Multiple charges - get minimum from available charges, possible transfer in given time and
+            // amount of charges destination needs to charge itself to full with given efficiency.
+            // Subtract that value from the source and after reduction by efficiency add it to the destination.
+            int possible_transfer =
+                static_cast<int>( turns_elapsed * 1.0f / link().charge_interval );
+            int required_charges = static_cast<int>( wanted_charges / link().efficiency );
+            int spent_charges = std::min( { possible_transfer, available_charges, required_charges } );
+            // Avoid rounding error on full charge
+            int received_charges = spent_charges == required_charges
+                                   ? wanted_charges
+                                   : static_cast<int>( spent_charges * link().efficiency );
+
+            int surplus = linked_veh.charge_battery( here, received_charges, true );
+            int actual_received = received_charges - surplus;
+            // Only deduct from source what was actually accepted (accounting for efficiency)
+            int actual_spent = actual_received == wanted_charges
+                               ? required_charges
+                               : static_cast<int>( actual_received / link().efficiency );
+            // Ensure we don't spend more than planned
+            actual_spent = std::min( actual_spent, spent_charges );
+
+            ammo_set( itype_battery, ammo_remaining( ) - actual_spent );
         }
     }
     return link().charge_rate;
@@ -14611,8 +14981,8 @@ bool item::process_linked_item( Character *carrier, const tripoint_bub_ms & /*po
 bool item::process_wet( Character *carrier, const tripoint_bub_ms & /*pos*/ )
 {
     if( item_counter == 0 ) {
-        if( type->revert_to ) {
-            convert( *type->revert_to, carrier );
+        if( type->transform_into ) {
+            type->transform_into.value().transform( carrier, *this, true );
         }
         unset_flag( flag_WET );
         active = false;
@@ -14645,7 +15015,7 @@ bool item::process_tool( Character *carrier, const tripoint_bub_ms &pos )
         if( carrier ) {
             carrier->add_msg_if_player( m_info, _( "The %s ran out of energy!" ), tname() );
         }
-        if( type->revert_to.has_value() ) {
+        if( type->transform_into.has_value() ) {
             deactivate( carrier );
             return false;
         } else {
@@ -14725,6 +15095,17 @@ bool item::process_gun_cooling( Character *carrier )
         }
     }
     return false;
+}
+
+std::vector<desired_wakeup> item::enumerate_scheduled_wakeups( const item_location &loc ) const
+{
+    return enumerate_scheduled_dispatch( *this, loc );
+}
+
+void item::actualize_scheduled( item_wakeup_kind kind, time_point now,
+                                const item_location &loc )
+{
+    actualize_scheduled_dispatch( *this, kind, now, loc );
 }
 
 bool item::process( map &here, Character *carrier, const tripoint_bub_ms &pos, float insulation,
@@ -14816,12 +15197,17 @@ bool item::process_internal( map &here, Character *carrier, const tripoint_bub_m
                 type->countdown_action.call( carrier, *this, pos );
             }
             countdown_point = calendar::turn_max;
-            if( type->revert_to ) {
-                convert( *type->revert_to, carrier );
+            if( type->transform_into ) {
+                type->transform_into.value().transform( carrier, *this, true );
 
                 active = needs_processing();
             } else {
                 return true;
+            }
+            // Result may not fit current pocket; queue overflow to spill
+            // into a fitting ancestor pocket or onto the ground.
+            if( carrier ) {
+                carrier->invalidate_inventory_validity_cache();
             }
         }
 
@@ -14946,20 +15332,6 @@ bool item::is_seed() const
     return !!type->seed;
 }
 
-time_duration item::get_plant_epoch( int num_epochs ) const
-{
-    if( !type->seed ) {
-        return 0_turns;
-    }
-    // Growing times have been based around real world season length rather than
-    // the default in-game season length to give
-    // more accuracy for longer season lengths
-    // Also note that seed->grow is the time it takes from seeding to harvest, this is
-    // divided by number of growth stages (usually 3) to get the time it takes from one plant state to the next.
-    // TODO: move this into the islot_seed
-    return type->seed->grow * calendar::season_ratio() / num_epochs;
-}
-
 std::string item::get_plant_name() const
 {
     if( !type->seed ) {
@@ -15066,32 +15438,27 @@ bool item::is_comfortable() const
 template <typename T>
 bool item::is_bp_rigid( const T &bp ) const
 {
-    // overrides for the item overall
+    // Item flags override all.
     if( has_flag( flag_SOFT ) ) {
         return false;
     } else if( has_flag( flag_HARD ) ) {
         return true;
     }
-
     const armor_portion_data *portion = portion_for_bodypart( bp );
-
     bool is_rigid = false;
-
     if( portion ) {
+        // If the override is set in armor data, that takes precedent over materials.
         is_rigid |= portion->rigid;
     }
 
-    // check if ablative pieces are rigid too
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
-                // get the contained plate
                 const item &ablative_armor = pocket->front();
                 is_rigid |= ablative_armor.is_bp_rigid( bp );
             }
         }
     }
-
     return is_rigid;
 }
 
@@ -15549,16 +15916,206 @@ bool item::has_tools_to_continue() const
     return craft_data_->tools_to_continue;
 }
 
-void item::set_cached_tool_selections( const std::vector<comp_selection<tool_comp>> &selections )
+void item::set_step_tool_allocs( const std::vector<std::vector<step_tool_alloc>> &allocs )
 {
     cata_assert( craft_data_ );
-    craft_data_->cached_tool_selections = selections;
+    craft_data_->step_tool_allocs = allocs;
 }
 
-const std::vector<comp_selection<tool_comp>> &item::get_cached_tool_selections() const
+const std::vector<std::vector<step_tool_alloc>> &item::get_step_tool_allocs() const
 {
     cata_assert( craft_data_ );
-    return craft_data_->cached_tool_selections;
+    return craft_data_->step_tool_allocs;
+}
+
+int item::get_current_step() const
+{
+    cata_assert( craft_data_ );
+    if( craft_data_->making && craft_data_->making->has_steps() ) {
+        int max_step = static_cast<int>( craft_data_->making->steps().size() ) - 1;
+        return std::clamp( craft_data_->current_step, 0, max_step );
+    }
+    return 0;
+}
+
+void item::set_current_step( int step )
+{
+    cata_assert( craft_data_ );
+    craft_data_->current_step = step;
+}
+
+double item::get_step_progress() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->step_progress;
+}
+
+void item::set_step_progress( double progress )
+{
+    cata_assert( craft_data_ );
+    craft_data_->step_progress = progress;
+}
+
+void item::mod_step_progress( double delta )
+{
+    cata_assert( craft_data_ );
+    craft_data_->step_progress += delta;
+}
+
+const std::vector<attention_plan> &item::get_step_plans() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->step_plans;
+}
+
+void item::set_step_plans( std::vector<attention_plan> plans )
+{
+    cata_assert( craft_data_ );
+    craft_data_->step_plans = std::move( plans );
+}
+
+time_point item::get_passive_started_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->passive_started_at;
+}
+
+void item::set_passive_started_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->passive_started_at = t;
+}
+
+time_point item::get_ready_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->ready_at;
+}
+
+void item::set_ready_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->ready_at = t;
+}
+
+time_point item::get_alarm_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->alarm_at;
+}
+
+void item::set_alarm_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->alarm_at = t;
+}
+
+time_point item::get_fail_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->fail_at;
+}
+
+void item::set_fail_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->fail_at = t;
+}
+
+time_point item::get_pause_started_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->pause_started_at;
+}
+
+void item::set_pause_started_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->pause_started_at = t;
+}
+
+time_point item::get_saved_ready_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->saved_ready_at;
+}
+
+void item::set_saved_ready_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->saved_ready_at = t;
+}
+
+time_point item::get_saved_alarm_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->saved_alarm_at;
+}
+
+void item::set_saved_alarm_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->saved_alarm_at = t;
+}
+
+time_point item::get_saved_fail_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->saved_fail_at;
+}
+
+void item::set_saved_fail_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->saved_fail_at = t;
+}
+
+time_point item::get_env_check_at() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->env_check_at;
+}
+
+void item::set_env_check_at( time_point t )
+{
+    cata_assert( craft_data_ );
+    craft_data_->env_check_at = t;
+}
+
+character_id item::get_crafter_id() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->crafter_id;
+}
+
+void item::set_crafter_id( character_id id )
+{
+    cata_assert( craft_data_ );
+    craft_data_->crafter_id = id;
+}
+
+int item::get_passive_start_counter() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->passive_start_counter;
+}
+
+void item::set_passive_start_counter( int c )
+{
+    cata_assert( craft_data_ );
+    craft_data_->passive_start_counter = c;
+}
+
+int item::get_passive_end_counter() const
+{
+    cata_assert( craft_data_ );
+    return craft_data_->passive_end_counter;
+}
+
+void item::set_passive_end_counter( int c )
+{
+    cata_assert( craft_data_ );
+    craft_data_->passive_end_counter = c;
 }
 
 const cata::value_ptr<islot_comestible> &item::get_comestible() const
@@ -15685,14 +16242,15 @@ const
 int item::get_recursive_disassemble_moves( const Character &guy ) const
 {
     int moves = recipe_dictionary::get_uncraft( type->get_id() ).time_to_craft_moves( guy,
-                recipe_time_flag::ignore_proficiencies );
+                {}, recipe_time_flag::ignore_proficiencies );
     std::vector<item_comp> to_be_disassembled = get_uncraft_components();
     while( !to_be_disassembled.empty() ) {
         item_comp current_comp = to_be_disassembled.back();
         to_be_disassembled.pop_back();
         const recipe &r = recipe_dictionary::get_uncraft( current_comp.type->get_id() );
         if( r.ident() != recipe_id::NULL_ID() ) {
-            moves += r.time_to_craft_moves( guy ) * current_comp.count;
+            moves += r.time_to_craft_moves( guy,
+                                            crafting_cost_context::for_proficiencies( guy ) ) * current_comp.count;
             std::vector<item_comp> components = item( current_comp.type->get_id() ).get_uncraft_components();
             for( item_comp &component : components ) {
                 component.count *= current_comp.count;
