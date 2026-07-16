@@ -8787,7 +8787,7 @@ bool item::can_revive() const
            !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
               has_flag( flag_QUARTERED ) ||
               has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) || has_flag( flag_GIBBED ) ||
-              has_flag( flag_FROZEN ) );
+              ( has_flag( flag_FROZEN ) && !corpse->has_flag( mon_flag_DORMANT ) ) );
 }
 
 bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
