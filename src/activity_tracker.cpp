@@ -157,17 +157,16 @@ void activity_tracker::new_turn( bool sleeping )
         // High-impact activity is less efficient in terms of weariness over time.
         // Because the system is just kcal spent = weariness, we need to track strenous
         // activity separately and apply a malus to weariness later in suffer.cpp.
-        if( current_activity == BRISK_EXERCISE ) {
-            brisk_activity += current_activity;
-        }
-        if( current_activity == ACTIVE_EXERCISE ) {
-            active_activity += current_activity;
-        }
-        if( current_activity == EXTRA_EXERCISE ) {
-            extra_activity += current_activity;
-        }
-        if( current_activity == EXPLOSIVE_EXERCISE ) {
-            explosive_activity += current_activity;
+        if( current_activity > MODERATE_EXERCISE ) {
+            if( current_activity <= BRISK_EXERCISE ) {
+                brisk_activity += current_activity;
+            } else if( current_activity <= ACTIVE_EXERCISE ) {
+                active_activity += current_activity;
+            } else if( current_activity <= EXTRA_EXERCISE ) {
+                extra_activity += current_activity;
+            } else if( current_activity <= EXPLOSIVE_EXERCISE ) {
+                explosive_activity += current_activity;
+            }
         }
         // Then handle the interventing turns that had no activity logged.
         int num_turns = to_turns<int>( calendar::turn - current_turn );
