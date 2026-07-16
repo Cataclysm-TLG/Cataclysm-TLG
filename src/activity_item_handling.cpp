@@ -125,6 +125,8 @@ static const quality_id qual_WELD( "WELD" );
 
 static const requirement_id requirement_data_mining_standard( "mining_standard" );
 
+static const skill_id skill_survival( "survival" );
+
 static const species_id species_FERAL( "FERAL" );
 static const species_id species_HUMAN( "HUMAN" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
@@ -2623,13 +2625,16 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
 
 static int chop_moves( Character &you, item &it )
 {
-    // quality of tool
+    // Quality of tool.
     const int quality = it.get_quality( qual_AXE );
 
-    // attribute; regular tools - based on STR, powered tools - based on DEX
+    // Attribute; regular tools - based on STR, powered tools - based on DEX.
     const int attr = it.has_flag( flag_POWERED ) ? you.dex_cur : you.get_arm_str();
 
-    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr ) / std::pow( 2, quality - 1 ) );
+    // Ecology skill cuts chopping time.
+    int skill_modifier = std::clamp( 100 - static_cast<int>( ( you.get_skill_level( skill_survival ) * 10.f ) ), 0, 100 );
+
+    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr + skill_modifier ) / std::pow( 2, quality - 1 ) );
     const int helpersize = you.get_num_crafting_helpers( 3 );
     moves *= ( 1.0f - ( helpersize / 10.0f ) );
     return moves;
