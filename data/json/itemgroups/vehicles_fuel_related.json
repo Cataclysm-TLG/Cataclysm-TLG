@@ -195,16 +195,71 @@
     "id": "wheels",
     "type": "item_group",
     "items": [
-      [ "wheel_wood", 25 ],
+      [ "wheel_wood", 5 ],
       [ "wheel_metal", 25 ],
       [ "wheel_small", 35 ],
       [ "wheel_motorbike", 25 ],
       [ "wheel_bicycle", 40 ],
-      [ "wheel_wide_or", 25 ],
-      [ "wheel_bicycle_or", 25 ],
-      [ "wheel_motorbike_or", 25 ],
-      [ "wheel_slick", 25 ],
+      [ "wheel_wide_or", 20 ],
+      [ "wheel_bicycle_or", 20 ],
+      [ "wheel_motorbike_or", 20 ],
+      [ "wheel_slick", 10 ],
       [ "wheel", 50 ]
+    ]
+  },
+  {
+    "id": "wheels_damaged",
+    "type": "item_group",
+    "items": [
+      { "item": "wheel_wood", "prob": 5, "damage": [ -1, 5 ] },
+      { "item": "wheel_metal", "prob": 25, "damage": [ -1, 5 ] },
+      { "item": "wheel_small", "prob": 35, "damage": [ -1, 5 ] },
+      { "item": "wheel_motorbike", "prob": 25, "damage": [ -1, 5 ] },
+      { "item": "wheel_bicycle", "prob": 40, "damage": [ -1, 5 ] },
+      { "item": "wheel_wide_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "wheel_wide", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "wheel_bicycle_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "wheel_motorbike_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "wheel_slick", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "wheel", "prob": 50, "damage": [ -1, 5 ] }
+    ]
+  },
+  {
+    "id": "tires",
+    "type": "item_group",
+    "items": [
+      [ "tire_wide_or", 20 ],
+      [ "tire_bicycle", 40 ],
+      [ "tire_wide", 10 ],
+      [ "tire_motorbike_or", 20 ],
+      [ "tire_motorbike", 25 ],
+      [ "tire_medium_slick", 10 ],
+      [ "tire_medium", 50 ],
+      [ "tire_bicycle_or", 20 ]
+    ]
+  },
+    {
+    "id": "tires_damaged",
+    "type": "item_group",
+    "items": [
+      { "item": "tire_wide_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "tire_bicycle", "prob": 40, "damage": [ -1, 5 ] },
+      { "item": "tire_wide", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "tire_motorbike_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "tire_motorbike", "prob": 25, "damage": [ -1, 5 ] },
+      { "item": "tire_medium_slick", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "tire_medium", "prob": 50, "damage": [ -1, 5 ] },
+      { "item": "tire_bicycle_or", "prob": 20, "damage": [ -1, 5 ] }
+    ]
+  },
+  {
+    "id": "rims",
+    "type": "item_group",
+    "items": [
+        { "item": "wheel_rim_medium", "prob": 2 },
+        { "item": "wheel_rim_wide", "prob": 2 },
+        { "item": "wheel_rim_motorbike", "prob": 2 },
+        { "item": "wheel_rim_bicycle", "prob": 2 }
     ]
   }
 ]

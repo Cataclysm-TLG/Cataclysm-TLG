@@ -245,6 +245,8 @@ static const efftype_id effect_webbed( "webbed" );
 static const efftype_id effect_zapped( "zapped" );
 
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
+static const flag_id json_flag_NUMB( "NUMB" );
+static const flag_id json_flag_VERMINOUS( "VERMINOUS" );
 static const flag_id json_flag_WASH_HARD( "WASH_HARD" );
 static const flag_id json_flag_WASH_SOFT( "WASH_SOFT" );
 
@@ -4004,6 +4006,18 @@ std::optional<int> iuse::vibe( Character *p, item *it, const tripoint_bub_ms & )
     if( p->is_npc() ) {
         // Long action
         // Also, that would be creepy as fuck, seriously
+        return std::nullopt;
+    }
+    if( !p->has_trait( trait_PYROMANIA ) && p->has_effect( effect_onfire ) ) {
+        p->add_msg_if_player( m_bad, _( "This is hardly the time!" ) );
+        return std::nullopt;
+    }
+    if( it->has_flag( flag_FILTHY ) && !p->has_flag( json_flag_VERMINOUS ) ) {
+        p->add_msg_if_player( m_bad, _( "Oh HELL NO." ) );
+        return std::nullopt;
+    }
+    if( p->get_morale_level() <= -25 || ( p->get_morale_level() <= 0 && p->has_flag( json_flag_NUMB ) ) ) {
+        p->add_msg_if_player( m_info, _( "You just aren't in the mood." ) );
         return std::nullopt;
     }
     if( p->is_mounted() ) {

@@ -1475,9 +1475,9 @@ void iexamine::rubble( Character &you, const tripoint_bub_ms &examp )
     int moves;
     if( you.has_quality( qual_DIG, 3 ) || you.has_trait( trait_BURROW ) ||
         you.has_trait( trait_BURROWLARGE ) ) {
-        moves = to_moves<int>( 1_minutes );
+        moves = to_moves<int>( 6_minutes );
     } else if( you.has_quality( qual_DIG, 2 ) ) {
-        moves = to_moves<int>( 2_minutes );
+        moves = to_moves<int>( 12_minutes );
     } else {
         add_msg( m_info, _( "If only you had a shovel…" ) );
         return;
