@@ -172,19 +172,21 @@ void activity_tracker::new_turn( bool sleeping )
         // Then handle the interventing turns that had no activity logged.
         int num_turns = to_turns<int>( calendar::turn - current_turn );
         if( num_turns > 1 ) {
+            // accumulated_activity is updated on the assumption that the past num_turns turns were at activity level NO_EXERCISE.
             accumulated_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-            //
+
+            // For high activity weariness, it is assumed that the past num_turns were at the activity level in current_activity.
             if( brisk_activity > brisk_activity_new ) {
-                brisk_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
+                brisk_activity += ( num_turns - 1 ) * current_activity;
             }
             if( active_activity > active_activity_new ) {
-                active_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
+                active_activity += ( num_turns - 1 ) * current_activity;
             }
             if( extra_activity > extra_activity_new ) {
-                extra_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
+                extra_activity += ( num_turns - 1 ) * current_activity;
             }
             if( explosive_activity > explosive_activity_new ) {
-                explosive_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
+                explosive_activity += ( num_turns - 1 ) * current_activity;
             }
             num_events += num_turns - 1;
             process_activity_weariness_penalty();
