@@ -238,7 +238,7 @@
       [ "tire_bicycle_or", 20 ]
     ]
   },
-    {
+  {
     "id": "tires_damaged",
     "type": "item_group",
     "items": [
@@ -256,10 +256,10 @@
     "id": "rims",
     "type": "item_group",
     "items": [
-        { "item": "wheel_rim_medium", "prob": 2 },
-        { "item": "wheel_rim_wide", "prob": 2 },
-        { "item": "wheel_rim_motorbike", "prob": 2 },
-        { "item": "wheel_rim_bicycle", "prob": 2 }
+      { "item": "wheel_rim_medium", "prob": 2 },
+      { "item": "wheel_rim_wide", "prob": 2 },
+      { "item": "wheel_rim_motorbike", "prob": 2 },
+      { "item": "wheel_rim_bicycle", "prob": 2 }
     ]
   }
 ]

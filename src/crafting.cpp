@@ -3080,7 +3080,8 @@ static void empty_buckets( Character &p )
 }
 
 std::list<item> Character::consume_items( const comp_selection<item_comp> &is, int batch,
-        const std::function<bool( const item & )> &filter, bool select_ind, bool disable_preference, bool keep_receiver )
+        const std::function<bool( const item & )> &filter, bool select_ind, bool disable_preference,
+        bool keep_receiver )
 {
     map &m = get_map();
     std::list<item> ret;
@@ -3091,7 +3092,8 @@ std::list<item> Character::consume_items( const comp_selection<item_comp> &is, i
     // populate a grid of spots that can be reached
     const std::vector<tripoint_bub_ms> &reachable_pts = m.reachable_flood_steps( pos_bub(),
             PICKUP_RANGE, 1, 100 );
-    return consume_items( m, is, batch, filter, reachable_pts, select_ind, disable_preference, keep_receiver );
+    return consume_items( m, is, batch, filter, reachable_pts, select_ind, disable_preference,
+                          keep_receiver );
 }
 
 std::list<item> Character::consume_items( map &m, const comp_selection<item_comp> &is, int batch,
@@ -3209,7 +3211,8 @@ std::list<item> Character::consume_items( const std::vector<item_comp> &componen
     map_inv.form_from_map( pos_bub(), PICKUP_RANGE, this );
     comp_selection<item_comp> sel = select_item_component( components, batch, map_inv, can_cancel,
                                     filter );
-    return consume_items( sel, batch, filter, select_ind( sel.comp.type ), disable_preference, keep_receiver );
+    return consume_items( sel, batch, filter, select_ind( sel.comp.type ), disable_preference,
+                          keep_receiver );
 }
 
 bool Character::consume_software_container( const itype_id &software_id )

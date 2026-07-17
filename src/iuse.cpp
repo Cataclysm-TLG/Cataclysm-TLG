@@ -4016,7 +4016,8 @@ std::optional<int> iuse::vibe( Character *p, item *it, const tripoint_bub_ms & )
         p->add_msg_if_player( m_bad, _( "Oh HELL NO." ) );
         return std::nullopt;
     }
-    if( p->get_morale_level() <= -25 || ( p->get_morale_level() <= 0 && p->has_flag( json_flag_NUMB ) ) ) {
+    if( p->get_morale_level() <= -25 || ( p->get_morale_level() <= 0 &&
+                                          p->has_flag( json_flag_NUMB ) ) ) {
         p->add_msg_if_player( m_info, _( "You just aren't in the mood." ) );
         return std::nullopt;
     }

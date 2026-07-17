@@ -2902,9 +2902,9 @@ double Character::weapon_value( const item &weap, int ammo, bool prompt ) const
         if( is_wielding( weap ) || ( !get_wielded_item() && weap.is_null() ) ) {
             auto cached_value = cached_info.find( "weapon_value" );
             if( cached_value != cached_info.end() ) {
-            add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                        "<color_magenta>weapon_value</color>%s returned cached weapon value of <color_light_cyan>%1.2f</color>.",
-                        disp_name( true ), cached_value->second );
+                add_msg_debug( debugmode::DF_NPC_ITEMAI,
+                               "<color_magenta>weapon_value</color>%s returned cached weapon value of <color_light_cyan>%1.2f</color>.",
+                               disp_name( true ), cached_value->second );
                 return cached_value->second;
             }
         }

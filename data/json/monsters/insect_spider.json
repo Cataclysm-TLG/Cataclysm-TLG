@@ -1730,13 +1730,7 @@
     "melee_dice_sides": 8,
     "melee_damage": [ { "damage_type": "cut", "amount": 4 } ],
     "dodge": 3,
-    "special_attacks": [
-      {
-        "id": "spider_bite",
-        "min_mul": 0.6,
-        "max_mul": 0.8
-      }
-    ],
+    "special_attacks": [ { "id": "spider_bite", "min_mul": 0.6, "max_mul": 0.8 } ],
     "upgrades": { "half_life": 80, "into": "mon_spider_wolf_giant" },
     "dissect": "dissect_spider_sample_single",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
@@ -1768,13 +1762,7 @@
     "melee_dice_sides": 8,
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
     "dodge": 4,
-      "special_attacks": [
-      {
-        "id": "spider_bite",
-        "min_mul": 0.8,
-        "max_mul": 1.2
-      }
-    ],
+    "special_attacks": [ { "id": "spider_bite", "min_mul": 0.8, "max_mul": 1.2 } ],
     "//": "5 hits to max intensity, 6 hits to max duration",
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_spider" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug", "prof_wp_spider" ],
@@ -1823,7 +1811,7 @@
     "weight": "615 kg",
     "melee_dice": 2,
     "dissect": "dissect_spider_sample_huge",
-      "special_attacks": [
+    "special_attacks": [
       {
         "id": "spider_bite",
         "cooldown": 5,

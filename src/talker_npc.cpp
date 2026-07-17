@@ -412,9 +412,9 @@ std::string talker_npc::give_item_to( const bool to_use )
     new_weapon_value = me_npc->weapon_value( given, new_ammo, true );
     cur_weapon_value = me_npc->weapon_value( weap, our_ammo, true );
     add_msg_debug( debugmode::DF_NPC_ITEMAI, "NPC evaluates own %s (%d ammo): %0.1f",
-                weap.typeId().str(), our_ammo, cur_weapon_value );
+                   weap.typeId().str(), our_ammo, cur_weapon_value );
     add_msg_debug( debugmode::DF_NPC_ITEMAI, "NPC evaluates your %s (%d ammo): %0.1f",
-                given.typeId().str(), new_ammo, new_weapon_value );
+                   given.typeId().str(), new_ammo, new_weapon_value );
     if( to_use ) {
         // Eating first, to avoid evaluating bread as a weapon
         const consumption_result consume_res = try_consume( *me_npc, given, reason );
@@ -451,13 +451,13 @@ std::string talker_npc::give_item_to( const bool to_use )
             add_msg_debug( debugmode::DF_NPC_ITEMAI, "New weapon value %.1f is lower than current value %.1f",
                            new_weapon_value, cur_weapon_value );
             std::string weapon_query = string_format(
-                _( "I think I might be better off barehanded, do you really want me to use the %s?" ),
-                given.tname() );
+                                           _( "I think I might be better off barehanded, do you really want me to use the %s?" ),
+                                           given.tname() );
             if( !weap.is_null() ) {
                 weapon_query = string_format(
-                    _( "I think my %s is better, do you really want me to use the %s?" ),
-                    weap.tname(),
-                    given.tname() );
+                                   _( "I think my %s is better, do you really want me to use the %s?" ),
+                                   weap.tname(),
+                                   given.tname() );
             }
             if( query_yn( weapon_query ) ) {
                 me_npc->wield( given );

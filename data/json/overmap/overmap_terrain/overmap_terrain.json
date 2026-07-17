@@ -1182,9 +1182,7 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [
-      "pig_farm_lab_ground_NW"
-    ],
+    "id": [ "pig_farm_lab_ground_NW" ],
     "name": "industrial pig farm parking",
     "sym": "O",
     "color": "dark_gray",
@@ -1194,11 +1192,7 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [
-      "pig_farm_lab_ground_W",
-      "pig_farm_lab_ground_SW",
-      "pig_farm_lab_ground_S"
-    ],
+    "id": [ "pig_farm_lab_ground_W", "pig_farm_lab_ground_SW", "pig_farm_lab_ground_S" ],
     "name": "industrial pig farm",
     "sym": "L",
     "color": "brown",
@@ -1224,11 +1218,7 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [
-      "pig_farm_lab_roof_W",
-      "pig_farm_lab_roof_SW",
-      "pig_farm_lab_roof_S"
-    ],
+    "id": [ "pig_farm_lab_roof_W", "pig_farm_lab_roof_SW", "pig_farm_lab_roof_S" ],
     "name": "industrial pig farm roof",
     "sym": "L",
     "color": "brown",
