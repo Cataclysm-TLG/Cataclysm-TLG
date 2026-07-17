@@ -2633,7 +2633,7 @@ static int chop_moves( Character &you, item &it )
 
     // Ecology skill cuts chopping time.
     int skill_modifier = 450 - std::clamp( static_cast<int>( ( you.get_skill_level(
-                                         skill_survival ) * 40.f ) ), 0, 400 );
+            skill_survival ) * 40.f ) ), 0, 400 );
 
     if( it.has_flag( flag_POWERED ) ) {
         skill_modifier = 50 + ( skill_modifier - 50 ) * 0.5f;
