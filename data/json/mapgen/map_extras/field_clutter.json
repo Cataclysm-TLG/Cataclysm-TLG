@@ -33,24 +33,58 @@
       "terrain": { " ": [ "t_region_groundcover" ] },
       "place_nested": [ { "chunks": [ [ "depressions_surface_12x12", 1 ] ], "x": [ 0, 11 ], "y": [ 0, 11 ] } ],
       "nested": {
-        " ": { "chunks": [ [ "lone_boulder_1x1", 5 ], [ "lone_trunk_1x1", 3 ], [ "lone_stump_1x1", 2 ], [ "1x1_t_region_tree_forest", 3 ], [ "1x1_t_region_tree_forest_dense", 1 ], [ "null", 400 ] ] }
+        " ": {
+          "chunks": [
+            [ "lone_boulder_1x1", 5 ],
+            [ "lone_trunk_1x1", 3 ],
+            [ "lone_stump_1x1", 2 ],
+            [ "1x1_t_region_tree_forest", 3 ],
+            [ "1x1_t_region_tree_forest_dense", 1 ],
+            [ "null", 400 ]
+          ]
+        }
       }
     }
   },
-  { "type": "mapgen",
+  {
+    "type": "mapgen",
     "nested_mapgen_id": "depressions_surface_12x12",
     "object": {
       "mapgensize": [ 1, 1 ],
-      "place_nested": [ { "chunks": [ [ "depression_surface_1_12x12", 1 ], [ "depression_surface_2_12x12", 1 ], [ "depression_surface_3_12x12", 1 ], [ "depressions_surface_5x5", 2 ], [ "mudpuddle_3x3", 1 ], [ "null", 6 ] ],
-        "x": 0, "y": 0 } ]
+      "place_nested": [
+        {
+          "chunks": [
+            [ "depression_surface_1_12x12", 1 ],
+            [ "depression_surface_2_12x12", 1 ],
+            [ "depression_surface_3_12x12", 1 ],
+            [ "depressions_surface_5x5", 2 ],
+            [ "mudpuddle_3x3", 1 ],
+            [ "null", 6 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
     }
   },
-  { "type": "mapgen",
+  {
+    "type": "mapgen",
     "nested_mapgen_id": "depressions_surface_5x5",
     "object": {
       "mapgensize": [ 1, 1 ],
-      "place_nested": [ { "chunks": [ [ "depression_surface_1_5x5", 1 ], [ "depression_surface_2_5x5", 1 ], [ "depression_surface_3_5x5", 1 ], [ "depression_surface_4_5x5", 1 ], [ "mudpuddle_5x5", 1 ] ],
-        "x": 0, "y": 0 } ]
+      "place_nested": [
+        {
+          "chunks": [
+            [ "depression_surface_1_5x5", 1 ],
+            [ "depression_surface_2_5x5", 1 ],
+            [ "depression_surface_3_5x5", 1 ],
+            [ "depression_surface_4_5x5", 1 ],
+            [ "mudpuddle_5x5", 1 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
     }
   },
   {
@@ -58,12 +92,8 @@
     "nested_mapgen_id": "lone_boulder_1x1",
     "object": {
       "mapgensize": [ 1, 1 ],
-      "rows": [
-        " "
-      ],
-      "furniture": {
-        " ": [ [ "f_boulder_small", 15 ], [ "f_boulder_medium", 8 ], [ "f_boulder_large", 1 ], [ "f_rubble_rock", 2 ] ]
-      },
+      "rows": [ " " ],
+      "furniture": { " ": [ [ "f_boulder_small", 15 ], [ "f_boulder_medium", 8 ], [ "f_boulder_large", 1 ], [ "f_rubble_rock", 2 ] ] },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
@@ -72,12 +102,8 @@
     "nested_mapgen_id": "lone_trunk_1x1",
     "object": {
       "mapgensize": [ 1, 1 ],
-      "rows": [
-        " "
-      ],
-      "terrain": {
-        " ": [ "t_trunk" ]
-      },
+      "rows": [ " " ],
+      "terrain": { " ": [ "t_trunk" ] },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
@@ -86,12 +112,8 @@
     "nested_mapgen_id": "lone_stump_1x1",
     "object": {
       "mapgensize": [ 1, 1 ],
-      "rows": [
-        " "
-      ],
-      "terrain": {
-        " ": [ "t_stump" ]
-      },
+      "rows": [ " " ],
+      "terrain": { " ": [ "t_stump" ] },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
@@ -105,9 +127,7 @@
         "   ",
         "   "
       ],
-      "terrain": {
-        " ": [ [ "t_mud", 2 ], [ "t_water_murky", 3 ], [ "t_region_groundcover", 1 ] ]
-      },
+      "terrain": { " ": [ [ "t_mud", 2 ], [ "t_water_murky", 3 ], [ "t_region_groundcover", 1 ] ] },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
@@ -123,9 +143,7 @@
         "     ",
         "     "
       ],
-      "terrain": {
-        " ": [ [ "t_mud", 1 ], [ "t_water_murky", 4 ], [ "t_region_groundcover", 2 ] ]
-      },
+      "terrain": { " ": [ [ "t_mud", 1 ], [ "t_water_murky", 4 ], [ "t_region_groundcover", 2 ] ] },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
@@ -141,11 +159,7 @@
         " ### ",
         "   # "
       ],
-      "terrain": {
-        "#": [ "t_open_air" ],
-        ">": [ "t_earth_ramp_down_high" ],
-        "v": [ "t_earth_ramp_down_low" ]
-      },
+      "terrain": { "#": [ "t_open_air" ], ">": [ "t_earth_ramp_down_high" ], "v": [ "t_earth_ramp_down_low" ] },
       "place_nested": [ { "chunks": [ "depression_bottom_1_5x5" ], "x": 0, "y": 0, "z": -1 } ],
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
@@ -182,11 +196,7 @@
         "  vv>",
         "  >> "
       ],
-      "terrain": {
-        "#": [ "t_open_air" ],
-        ">": [ "t_earth_ramp_down_high" ],
-        "v": [ "t_earth_ramp_down_low" ]
-      },
+      "terrain": { "#": [ "t_open_air" ], ">": [ "t_earth_ramp_down_high" ], "v": [ "t_earth_ramp_down_low" ] },
       "place_nested": [ { "chunks": [ "depression_bottom_2_5x5" ], "x": 0, "y": 0, "z": -1 } ],
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
@@ -211,8 +221,7 @@
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
-
-    {
+  {
     "type": "mapgen",
     "nested_mapgen_id": "depression_surface_3_5x5",
     "object": {
@@ -224,11 +233,7 @@
         "v##  ",
         ">    "
       ],
-      "terrain": {
-        "#": [ "t_open_air" ],
-        ">": [ "t_earth_ramp_down_high" ],
-        "v": [ "t_earth_ramp_down_low" ]
-      },
+      "terrain": { "#": [ "t_open_air" ], ">": [ "t_earth_ramp_down_high" ], "v": [ "t_earth_ramp_down_low" ] },
       "place_nested": [ { "chunks": [ "depression_bottom_3_5x5" ], "x": 0, "y": 0, "z": -1 } ],
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
@@ -252,13 +257,20 @@
         "^": [ "t_earth_ramp_up_low" ]
       },
       "nested": {
-      "T": {"chunks": [
-        [ "1x1_t_region_tree_forest", 3 ], [ "lone_trunk_1x1", 1 ], [ "1x1_t_region_shrub_forest", 2 ], [ "lone_boulder_1x1", 2 ], [ "null", 30 ]
-      ] } },
+        "T": {
+          "chunks": [
+            [ "1x1_t_region_tree_forest", 3 ],
+            [ "lone_trunk_1x1", 1 ],
+            [ "1x1_t_region_shrub_forest", 2 ],
+            [ "lone_boulder_1x1", 2 ],
+            [ "null", 30 ]
+          ]
+        }
+      },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
-    {
+  {
     "type": "mapgen",
     "nested_mapgen_id": "depression_surface_4_5x5",
     "object": {
@@ -270,11 +282,7 @@
         ">vvv>",
         " >>> "
       ],
-      "terrain": {
-        "#": [ "t_open_air" ],
-        ">": [ "t_earth_ramp_down_high" ],
-        "v": [ "t_earth_ramp_down_low" ]
-      },
+      "terrain": { "#": [ "t_open_air" ], ">": [ "t_earth_ramp_down_high" ], "v": [ "t_earth_ramp_down_low" ] },
       "place_nested": [ { "chunks": [ "depression_bottom_4_5x5" ], "x": 0, "y": 0, "z": -1 } ],
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
@@ -298,9 +306,16 @@
         "^": [ "t_earth_ramp_up_low" ]
       },
       "nested": {
-      "T": {"chunks": [
-        [ "1x1_t_region_tree_forest", 3 ], [ "lone_trunk_1x1", 1 ], [ "1x1_t_region_shrub_forest", 2 ], [ "lone_boulder_1x1", 2 ], [ "null", 30 ]
-      ] } },
+        "T": {
+          "chunks": [
+            [ "1x1_t_region_tree_forest", 3 ],
+            [ "lone_trunk_1x1", 1 ],
+            [ "1x1_t_region_shrub_forest", 2 ],
+            [ "lone_boulder_1x1", 2 ],
+            [ "null", 30 ]
+          ]
+        }
+      },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
@@ -323,11 +338,7 @@
         "    >v#     ",
         "     >      "
       ],
-      "terrain": {
-        "#": [ "t_open_air" ],
-        ">": [ "t_earth_ramp_down_high" ],
-        "v": [ "t_earth_ramp_down_low" ]
-      },
+      "terrain": { "#": [ "t_open_air" ], ">": [ "t_earth_ramp_down_high" ], "v": [ "t_earth_ramp_down_low" ] },
       "place_nested": [ { "chunks": [ "depression_bottom_1_12x12" ], "x": 0, "y": 0, "z": -1 } ],
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
@@ -358,15 +369,20 @@
         "^": [ "t_earth_ramp_up_low" ]
       },
       "nested": {
-      "T": {"chunks": [
-        [ "1x1_t_region_tree_forest", 3 ], [ "lone_trunk_1x1", 1 ], [ "1x1_t_region_shrub_forest", 2 ], [ "lone_boulder_1x1", 2 ], [ "null", 20 ]
-      ] } },
+        "T": {
+          "chunks": [
+            [ "1x1_t_region_tree_forest", 3 ],
+            [ "lone_trunk_1x1", 1 ],
+            [ "1x1_t_region_shrub_forest", 2 ],
+            [ "lone_boulder_1x1", 2 ],
+            [ "null", 20 ]
+          ]
+        }
+      },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
-
-
-    {
+  {
     "type": "mapgen",
     "nested_mapgen_id": "depression_surface_2_12x12",
     "object": {
@@ -385,11 +401,7 @@
         "            ",
         "            "
       ],
-      "terrain": {
-        "#": [ "t_open_air" ],
-        ">": [ "t_earth_ramp_down_high" ],
-        "v": [ "t_earth_ramp_down_low" ]
-      },
+      "terrain": { "#": [ "t_open_air" ], ">": [ "t_earth_ramp_down_high" ], "v": [ "t_earth_ramp_down_low" ] },
       "place_nested": [ { "chunks": [ "depression_bottom_2_12x12" ], "x": 0, "y": 0, "z": -1 } ],
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
@@ -419,14 +431,20 @@
         "^": [ "t_earth_ramp_up_low" ]
       },
       "nested": {
-      "T": {"chunks": [
-        [ "1x1_t_region_tree_forest", 3 ], [ "1x1_t_region_shrub_forest", 2 ], [ "lone_boulder_1x1", 2 ], [ "lone_trunk_1x1", 1 ], [ "null", 15 ]
-      ] } },
+        "T": {
+          "chunks": [
+            [ "1x1_t_region_tree_forest", 3 ],
+            [ "1x1_t_region_shrub_forest", 2 ],
+            [ "lone_boulder_1x1", 2 ],
+            [ "lone_trunk_1x1", 1 ],
+            [ "null", 15 ]
+          ]
+        }
+      },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
-
-      {
+  {
     "type": "mapgen",
     "nested_mapgen_id": "depression_surface_3_12x12",
     "object": {
@@ -445,11 +463,7 @@
         "    >>v###  ",
         "            "
       ],
-      "terrain": {
-        "#": [ "t_open_air" ],
-        ">": [ "t_earth_ramp_down_high" ],
-        "v": [ "t_earth_ramp_down_low" ]
-      },
+      "terrain": { "#": [ "t_open_air" ], ">": [ "t_earth_ramp_down_high" ], "v": [ "t_earth_ramp_down_low" ] },
       "place_nested": [ { "chunks": [ "depression_bottom_3_12x12" ], "x": 0, "y": 0, "z": -1 } ],
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
@@ -481,9 +495,17 @@
         "^": [ "t_earth_ramp_up_low" ]
       },
       "nested": {
-      "T": {"chunks": [
-        [ "1x1_t_region_tree_forest", 3 ], [ "1x1_t_region_tree_forest_dense", 1 ], [ "1x1_t_region_shrub_forest", 2 ], [ "lone_boulder_1x1", 2 ], [ "lone_trunk_1x1", 1 ], [ "null", 15 ]
-      ] } },
+        "T": {
+          "chunks": [
+            [ "1x1_t_region_tree_forest", 3 ],
+            [ "1x1_t_region_tree_forest_dense", 1 ],
+            [ "1x1_t_region_shrub_forest", 2 ],
+            [ "lone_boulder_1x1", 2 ],
+            [ "lone_trunk_1x1", 1 ],
+            [ "null", 15 ]
+          ]
+        }
+      },
       "flags": [ "SKIP_ON_OPEN_AIR", "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   }

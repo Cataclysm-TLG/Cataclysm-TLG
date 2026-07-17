@@ -2632,9 +2632,11 @@ static int chop_moves( Character &you, item &it )
     const int attr = it.has_flag( flag_POWERED ) ? you.dex_cur : you.get_arm_str();
 
     // Ecology skill cuts chopping time.
-    int skill_modifier = std::clamp( 100 - static_cast<int>( ( you.get_skill_level( skill_survival ) * 10.f ) ), 0, 100 );
+    int skill_modifier = std::clamp( 100 - static_cast<int>( ( you.get_skill_level(
+                                         skill_survival ) * 10.f ) ), 0, 100 );
 
-    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr + skill_modifier ) / std::pow( 2, quality - 1 ) );
+    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr + skill_modifier ) / std::pow( 2,
+                               quality - 1 ) );
     const int helpersize = you.get_num_crafting_helpers( 3 );
     moves *= ( 1.0f - ( helpersize / 10.0f ) );
     return moves;

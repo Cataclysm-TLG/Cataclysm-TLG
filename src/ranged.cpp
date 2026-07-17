@@ -2742,11 +2742,12 @@ double Character::gun_value( const item &weap, int ammo ) const
     };
 
     static const std::vector<std::pair<float, float>> move_cost_thresholds = {{
-        { 10.0f, 2.0f },
-        { 25.0f, 1.75f },
-        { 100.0f, 1.0f },
-        { 500.0f, 0.8f },
-    }};
+            { 10.0f, 2.0f },
+            { 25.0f, 1.75f },
+            { 100.0f, 1.0f },
+            { 500.0f, 0.8f },
+        }
+    };
 
     float move_cost_factor = multi_lerp( move_cost_thresholds, move_cost );
 
@@ -2761,7 +2762,7 @@ double Character::gun_value( const item &weap, int ammo ) const
     float dispersion_factor = multi_lerp( dispersion_thresholds, total_dispersion );
 
     // Some consideration for perception here.
-    dispersion_factor *= 1.f * std::clamp( 0.75f, 2.f, ( static_cast<float>(get_per() ) / 10.f ) );
+    dispersion_factor *= 1.f * std::clamp( 0.75f, 2.f, ( static_cast<float>( get_per() ) / 10.f ) );
 
     float damage_and_accuracy = damage_factor * dispersion_factor;
 
