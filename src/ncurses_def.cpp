@@ -318,10 +318,10 @@ void catacurses::resizeterm()
 void catacurses::init_interface()
 {
 #ifdef SDL_SOUND
-    if (SDL_Init(SDL_INIT_AUDIO) != 0) {
+    if( SDL_Init( SDL_INIT_AUDIO ) != 0 ) {
         throw std::runtime_error( "SDL_Init failed" );
     }
-    if (!init_sound()) {
+    if( !init_sound() ) {
         throw std::runtime_error( "init_sound failed" );
     }
     if( atexit( SDL_Quit ) ) {

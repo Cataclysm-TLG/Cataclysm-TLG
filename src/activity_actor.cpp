@@ -7682,11 +7682,11 @@ void chop_tree_activity_actor::finish( player_activity &act, Character &who )
             }
         }
     }
-
+    who.practice( skill_survival, 3, 3 );
     here.cut_down_tree( pos, direction.xy() );
 
     who.add_msg_if_player( m_good, _( "You finish chopping down a tree." ) );
-    // sound of falling tree
+    // Sound of falling tree.
     here.collapse_at( pos, false, true, false );
     sfx::play_variant_sound( "misc", "timber",
                              sfx::get_heard_volume( here.get_bub( act.placement ) ) );
