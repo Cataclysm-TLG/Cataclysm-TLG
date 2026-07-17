@@ -29,7 +29,9 @@
 #include "options.h"
 #include "path_info.h"
 #include "rng.h"
+#ifdef TILES
 #include "sdl_wrappers.h"
+#endif
 #include "sounds.h"
 #include "units.h"
 #include "avatar.h"

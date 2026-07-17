@@ -34,8 +34,8 @@
 #  make RELEASE=1
 # Tiles (uses SDL rather than ncurses)
 #  make TILES=1
-# Sound (requires SDL, so TILES must be enabled)
-#  make TILES=1 SOUND=1
+# Sound
+#  make SOUND=1
 # Disable gettext, on some platforms the dependencies are hard to wrangle.
 #  make LOCALIZE=0
 # Disable backtrace support, not available on all platforms
@@ -692,9 +692,7 @@ endif
 PKG_CONFIG = $(CROSS)pkg-config
 
 ifeq ($(SOUND), 1)
-  ifneq ($(TILES),1)
-    $(error "SOUND=1 only works with TILES=1")
-  endif
+  SDL = 1
   ifeq ($(NATIVE),osx)
     ifndef FRAMEWORK # libsdl build
       ifeq ($(MACPORTS), 1)
@@ -716,10 +714,6 @@ ifeq ($(SOUND), 1)
   endif
 
   CXXFLAGS += -DSDL_SOUND
-endif
-
-ifeq ($(SDL), 1)
-  TILES = 1
 endif
 
 ifeq ($(TILES), 1)

@@ -27,6 +27,10 @@
 #include <memory>
 #include <stdexcept>
 
+#ifdef SDL_SOUND
+#include <SDL2/SDL.h>
+#endif
+
 #include "cached_options.h"
 #include "cata_utility.h"
 #include "catacharset.h"
@@ -36,6 +40,9 @@
 #include "game_ui.h"
 #include "output.h"
 #include "ui_manager.h"
+#ifdef SDL_SOUND
+#include "sdlsound.h"
+#endif
 
 static void curses_check_result( const int result, const int expected, const char *const /*name*/ )
 {
@@ -194,6 +201,9 @@ void catacurses::erase()
 
 void catacurses::endwin()
 {
+#ifdef SDL_SOUND
+    shutdown_sound();
+#endif
     ui_manager::reset();
     return curses_check_result( ::endwin(), OK, "endwin" );
 }
@@ -307,6 +317,18 @@ void catacurses::resizeterm()
 // wincurse.cpp for Windows builds without SDL and sdltiles.cpp for SDL builds.
 void catacurses::init_interface()
 {
+#ifdef SDL_SOUND
+    if (SDL_Init(SDL_INIT_AUDIO) != 0) {
+        throw std::runtime_error( "SDL_Init failed" );
+    }
+    if (!init_sound()) {
+        throw std::runtime_error( "init_sound failed" );
+    }
+    if( atexit( SDL_Quit ) ) {
+        debugmsg( "atexit failed to register SDL_Quit" );
+    }
+    load_soundset();
+#endif
     // ::endwin will free the pointer returned by ::initscr
     stdscr = window( std::shared_ptr<void>( ::initscr(), []( void *const ) { } ) );
     if( !stdscr ) {
