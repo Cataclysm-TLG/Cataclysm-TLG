@@ -138,6 +138,7 @@ void activity_tracker::new_turn( bool sleeping )
     float base_activity_level = sleeping ? SLEEP_EXERCISE : NO_EXERCISE;
 
     if( activity_reset ) {
+        process_activity_weariness_penalty();
         activity_reset = false;
         previous_turn_activity = current_activity;
         current_activity = base_activity_level;
@@ -175,29 +176,42 @@ void activity_tracker::new_turn( bool sleeping )
             //
             if( brisk_activity > brisk_activity_new ) {
                 brisk_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-                tracker += std::max( 0.0f, ( brisk_activity - brisk_activity_new ) * 12.5f );
-                brisk_activity_new = brisk_activity;
             }
             if( active_activity > active_activity_new ) {
                 active_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-                tracker += std::max( 0.0f, ( active_activity - active_activity_new ) * 25.0f );
-                active_activity_new = active_activity;
             }
             if( extra_activity > extra_activity_new ) {
                 extra_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-                tracker += std::max( 0.0f, ( extra_activity - extra_activity_new ) * 50.0f );
-                extra_activity_new = extra_activity;
             }
             if( explosive_activity > explosive_activity_new ) {
                 explosive_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-                tracker += std::max( 0.0f, ( explosive_activity - explosive_activity_new ) * 120.0f );
-                explosive_activity_new = explosive_activity;
             }
             num_events += num_turns - 1;
+            process_activity_weariness_penalty();
         }
         previous_turn_activity = current_activity;
         current_activity = base_activity_level;
         num_events++;
+    }
+}
+
+void activity_tracker::process_activity_weariness_penalty()
+{
+    if( brisk_activity > brisk_activity_new ) {
+        tracker += std::max( 0.0f, ( brisk_activity - brisk_activity_new ) * 12.5f );
+        brisk_activity_new = brisk_activity;
+    }
+    if( active_activity > active_activity_new ) {
+        tracker += std::max( 0.0f, ( active_activity - active_activity_new ) * 25.0f );
+        active_activity_new = active_activity;
+    }
+    if( extra_activity > extra_activity_new ) {
+        tracker += std::max( 0.0f, ( extra_activity - extra_activity_new ) * 50.0f );
+        extra_activity_new = extra_activity;
+    }
+    if( explosive_activity > explosive_activity_new ) {
+        tracker += std::max( 0.0f, ( explosive_activity - explosive_activity_new ) * 120.0f );
+        explosive_activity_new = explosive_activity;
     }
 }
 

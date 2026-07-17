@@ -40,6 +40,8 @@ class activity_tracker
         void log_activity( float new_level );
         // Informs the tracker that a new turn has started.
         void new_turn( bool sleeping = false );
+        // Processes the weariness penalty from high activity levels.
+        void process_activity_weariness_penalty();
         // Resets accumulated activity level.
         void reset_activity_level();
         // Outputs player activity level to a printable string.
