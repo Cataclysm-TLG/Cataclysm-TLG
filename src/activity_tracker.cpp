@@ -138,6 +138,7 @@ void activity_tracker::new_turn( bool sleeping )
     float base_activity_level = sleeping ? SLEEP_EXERCISE : NO_EXERCISE;
 
     if( activity_reset ) {
+        process_activity_weariness_penalty();
         activity_reset = false;
         previous_turn_activity = current_activity;
         current_activity = base_activity_level;
@@ -157,48 +158,62 @@ void activity_tracker::new_turn( bool sleeping )
         // High-impact activity is less efficient in terms of weariness over time.
         // Because the system is just kcal spent = weariness, we need to track strenous
         // activity separately and apply a malus to weariness later in suffer.cpp.
-        if( current_activity == BRISK_EXERCISE ) {
-            brisk_activity += current_activity;
-        }
-        if( current_activity == ACTIVE_EXERCISE ) {
-            active_activity += current_activity;
-        }
-        if( current_activity == EXTRA_EXERCISE ) {
-            extra_activity += current_activity;
-        }
-        if( current_activity == EXPLOSIVE_EXERCISE ) {
-            explosive_activity += current_activity;
+        if( current_activity > MODERATE_EXERCISE ) {
+            if( current_activity <= BRISK_EXERCISE ) {
+                brisk_activity += current_activity;
+            } else if( current_activity <= ACTIVE_EXERCISE ) {
+                active_activity += current_activity;
+            } else if( current_activity <= EXTRA_EXERCISE ) {
+                extra_activity += current_activity;
+            } else {
+                explosive_activity += current_activity;
+            }
         }
         // Then handle the interventing turns that had no activity logged.
         int num_turns = to_turns<int>( calendar::turn - current_turn );
         if( num_turns > 1 ) {
+            // accumulated_activity is updated on the assumption that the past num_turns turns were at activity level NO_EXERCISE.
             accumulated_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-            //
+
+            // For high activity weariness, it is assumed that the past num_turns were at the activity level in current_activity.
             if( brisk_activity > brisk_activity_new ) {
-                brisk_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-                tracker += std::max( 0.0f, ( brisk_activity - brisk_activity_new ) * 12.5f );
-                brisk_activity_new = brisk_activity;
+                brisk_activity += ( num_turns - 1 ) * current_activity;
             }
             if( active_activity > active_activity_new ) {
-                active_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-                tracker += std::max( 0.0f, ( active_activity - active_activity_new ) * 25.0f );
-                active_activity_new = active_activity;
+                active_activity += ( num_turns - 1 ) * current_activity;
             }
             if( extra_activity > extra_activity_new ) {
-                extra_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-                tracker += std::max( 0.0f, ( extra_activity - extra_activity_new ) * 50.0f );
-                extra_activity_new = extra_activity;
+                extra_activity += ( num_turns - 1 ) * current_activity;
             }
             if( explosive_activity > explosive_activity_new ) {
-                explosive_activity += ( num_turns - 1 ) * std::min( NO_EXERCISE, current_activity );
-                tracker += std::max( 0.0f, ( explosive_activity - explosive_activity_new ) * 120.0f );
-                explosive_activity_new = explosive_activity;
+                explosive_activity += ( num_turns - 1 ) * current_activity;
             }
             num_events += num_turns - 1;
+            process_activity_weariness_penalty();
         }
         previous_turn_activity = current_activity;
         current_activity = base_activity_level;
         num_events++;
+    }
+}
+
+void activity_tracker::process_activity_weariness_penalty()
+{
+    if( brisk_activity > brisk_activity_new ) {
+        tracker += std::max( 0.0f, ( brisk_activity - brisk_activity_new ) * 12.5f );
+        brisk_activity_new = brisk_activity;
+    }
+    if( active_activity > active_activity_new ) {
+        tracker += std::max( 0.0f, ( active_activity - active_activity_new ) * 25.0f );
+        active_activity_new = active_activity;
+    }
+    if( extra_activity > extra_activity_new ) {
+        tracker += std::max( 0.0f, ( extra_activity - extra_activity_new ) * 50.0f );
+        extra_activity_new = extra_activity;
+    }
+    if( explosive_activity > explosive_activity_new ) {
+        tracker += std::max( 0.0f, ( explosive_activity - explosive_activity_new ) * 120.0f );
+        explosive_activity_new = explosive_activity;
     }
 }
 
