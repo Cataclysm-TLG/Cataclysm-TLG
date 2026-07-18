@@ -4003,6 +4003,7 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                 if( !has_drawn_field ) {
                     draw_options opts{};
                     opts.intensity = intensity;
+                    opts.category = TILE_CATEGORY::FIELD;
                     draw_from_id_string(
                         fld.id().str(),
                         p,
