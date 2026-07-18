@@ -5424,7 +5424,7 @@ float Character::maximum_exertion_level() const
 {
     switch( weariness_level() ) {
         case 0:
-            return EXTRA_EXERCISE;
+            return EXPLOSIVE_EXERCISE;
         case 1:
             return ACTIVE_EXERCISE;
         case 2:
@@ -5447,7 +5447,8 @@ float Character::exertion_adjusted_move_multiplier( float level ) const
     if( level <= 0 ) {
         level = activity_history.activity( in_sleep_state() );
     }
-    const float max = maximum_exertion_level();
+    // Exertion levels are calculated out of 10, not 12. max is 10 for explosive activity.
+    const float max = std::min( 10.0f, maximum_exertion_level() );
     if( level < max ) {
         return 1.0f;
     }
