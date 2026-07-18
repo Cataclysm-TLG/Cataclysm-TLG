@@ -75,13 +75,14 @@
   {
     "id": "fish_scrap",
     "copy-from": "fish",
-    "proportional": { "weight": 0.1, "volume": 0.1, "price": 0.1},
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str": "scrap of fish", "str_pl": "scraps of fish" },
     "description": "A tiny scrap of edible fish.  It's not much, but it'll do in a pinch.",
     "cooks_like": "fish_scrap_cooked",
-    "calories": 51,
+    "calories": 26,
+    "weight": "15 g",
+    "volume": "25 ml",
     "delete": { "flags": [ "SMOKABLE" ] },
     "vitamins": [ [ "calcium", 1 ], [ "iron", 1 ], [ "meat_allergen", 1 ] ]
   },
@@ -94,7 +95,9 @@
     "parasites": 0,
     "spoils_in": "1 day",
     "flags": [ "NUTRIENT_OVERRIDE" ],
-    "calories": 51
+    "calories": 26,
+    "weight": "15 g",
+    "volume": "25 ml"
   },
   {
     "id": "fish_cooked",
@@ -245,6 +248,20 @@
     "extend": { "flags": [ "BAD_TASTE" ] }
   },
   {
+    "id": "human_cooked",
+    "copy-from": "human_flesh",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "name": { "str_sp": "cooked human flesh" },
+    "description": "A cooked portion of human flesh.",
+    "material": [ "hflesh" ],
+    "parasites": 0,
+    "fun": 0,
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 12 ], [ "human_flesh_vitamin", 1 ], [ "meat_allergen", 1 ] ],
+    "calories": 402,
+    "flags": [ "EATEN_HOT" ]
+  },
+  {
     "id": "human_flesh",
     "copy-from": "meat",
     "type": "ITEM",
@@ -254,19 +271,9 @@
     "description": "A chunk of raw meat, butchered from a human body.",
     "material": [ "hflesh" ],
     "vitamins": [ [ "calcium", 2 ], [ "iron", 12 ], [ "human_flesh_vitamin", 1 ], [ "meat_allergen", 1 ] ],
+    "calories": 402,
+    "fun": -10,
     "delete": { "flags": [ "PREDATOR_FUN" ] }
-  },
-  {
-    "id": "human_cooked",
-    "copy-from": "human_flesh",
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
-    "name": { "str_sp": "cooked human flesh" },
-    "description": "A cooked portion of human flesh.",
-    "proportional": { "price": 1.5 },
-    "parasites": 0,
-    "fun": 0,
-    "flags": [ "EATEN_HOT" ]
   },
   {
     "id": "meat",
@@ -391,7 +398,13 @@
     "name": { "str": "scrap of meat", "str_pl": "scraps of meat" },
     "description": "A tiny scrap of raw meat.  It's not much, but it'll do in a pinch.",
     "cooks_like": "meat_scrap_cooked",
-    "proportional": { "weight": 0.1, "volume": 0.1, "price_postapoc": 0.1, "calories": 0.1 },
+    "weight": "28 g",
+    "volume": "25 ml",
+    "calories": 40,
+    "fun": -10,
+    "spoils_in": "1 day",
+    "price": "50 cent",
+    "price_postapoc": "5 cent",
     "delete": { "flags": [ "SMOKABLE" ] },
     "vitamins": [ [ "calcium", 0 ], [ "iron", 1 ], [ "meat_allergen", 1 ] ]
   },
@@ -401,7 +414,11 @@
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str": "cooked scrap of meat", "str_pl": "cooked scraps of meat" },
-    "proportional": { "weight": 0.1, "volume": 0.1, "price_postapoc": 0.1, "calories": 0.1 },
+    "calories": 40,
+    "weight": "28 g",
+    "volume": "25 ml",
+    "price": "75 cent",
+    "price_postapoc": "10 cent",
     "parasites": 0,
     "fun": 0,
     "vitamins": [ [ "calcium", 0 ], [ "iron", 1 ], [ "meat_allergen", 1 ] ]
