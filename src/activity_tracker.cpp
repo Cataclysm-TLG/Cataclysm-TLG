@@ -165,7 +165,7 @@ void activity_tracker::new_turn( bool sleeping )
                 active_activity += current_activity;
             } else if( current_activity <= EXTRA_EXERCISE ) {
                 extra_activity += current_activity;
-            } else if( current_activity <= EXPLOSIVE_EXERCISE ) {
+            } else {
                 explosive_activity += current_activity;
             }
         }
