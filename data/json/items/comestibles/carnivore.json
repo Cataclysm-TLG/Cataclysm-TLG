@@ -75,12 +75,13 @@
   {
     "id": "fish_scrap",
     "copy-from": "fish",
+    "proportional": { "weight": 0.1, "volume": 0.1, "price": 0.1},
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str": "scrap of fish", "str_pl": "scraps of fish" },
     "description": "A tiny scrap of edible fish.  It's not much, but it'll do in a pinch.",
     "cooks_like": "fish_scrap_cooked",
-    "proportional": { "weight": 0.1, "volume": 0.1, "price": 0.1, "calories": 0.1 },
+    "calories": 51,
     "delete": { "flags": [ "SMOKABLE" ] },
     "vitamins": [ [ "calcium", 1 ], [ "iron", 1 ], [ "meat_allergen", 1 ] ]
   },
@@ -469,8 +470,9 @@
     "description": "A tiny scrap of raw meat from a heavily mutated animal.  It smells unappealing, to say the least.",
     "looks_like": "meat_scrap",
     "cooks_like": "mutant_meat_scrap_cooked",
+    "calories": 20,
     "fun": -4,
-    "proportional": { "weight": 0.1, "volume": 0.1, "price_postapoc": 0.1, "calories": 0.1 },
+    "proportional": { "weight": 0.1, "volume": 0.1, "price_postapoc": 0.1 },
     "flags": [ "BAD_TASTE", "PREDATOR_FUN", "RAW" ],
     "vitamins": [ [ "mutant_toxin", 2 ], [ "meat_allergen", 1 ] ]
   },
@@ -482,9 +484,10 @@
     "name": { "str": "cooked scrap of foul meat", "str_pl": "cooked scraps of foul meat" },
     "description": "A tiny scrap of cooked meat from a mutated animal.  It still smells unappealing.",
     "looks_like": "meat_scrap_cooked",
+    "calories": 20,
     "fun": -1,
     "flags": [ "EATEN_HOT", "BAD_TASTE" ],
-    "proportional": { "weight": 0.1, "volume": 0.1, "price_postapoc": 0.1, "calories": 0.1 },
+    "proportional": { "weight": 0.1, "volume": 0.1, "price_postapoc": 0.1 },
     "vitamins": [ [ "mutant_toxin", 2 ], [ "meat_allergen", 1 ] ]
   },
   {
