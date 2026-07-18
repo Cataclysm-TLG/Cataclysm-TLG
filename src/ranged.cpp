@@ -1895,7 +1895,7 @@ static recoil_prediction predict_recoil( const Character &you, const item &weapo
 * The returned vector contains all the
 * a mapping of all weapon aiming modes to their chance predictions.
 * Inside each prediction there is a vector of "confidences";
-* they represent the great/hit/graze/miss chances.
+* they represent how Great/Good/Poor we think our odds are.
 */
 static std::vector<aim_type_prediction> calculate_ranged_chances(
     const target_ui &ui, const Character &you,
@@ -1957,12 +1957,12 @@ static std::vector<aim_type_prediction> calculate_ranged_chances(
             prediction.steadiness = calc_steadiness( you, weapon, pos, aim_to_type.recoil );
         }
 
-        // make a copy of the given dispersion, apply the aiming and calculate hit confidence
+        // Make a copy of the given dispersion, apply the aiming and calculate hit confidence.
         dispersion_sources current_dispersion = dispersion;
         current_dispersion.add_range( aim_type.has_threshold ? aim_type.threshold :
                                       aim_to_selected.recoil );
 
-        // this loop fills in the "confidence" values; the chances of great/good/graze outcomes
+        // This loop fills in the "confidence" values which fill out our aim level in the sidebar.
         prediction.confidence = confidence_estimate( target, current_dispersion );
         for( const confidence_rating &rating : confidence_ratings ) {
             const int chance = std::min<int>( 100, 100 * rating.aim_level * prediction.confidence )
@@ -1971,9 +1971,6 @@ static std::vector<aim_type_prediction> calculate_ranged_chances(
             prediction.chances.push_back( {rating.label, rating.color, chance} );
             prediction.chance_to_hit += chance;
         }
-
-        // Adds the "miss" outcome
-        prediction.chances.push_back( { _( "Miss" ), "light_gray", 100 - prediction.chance_to_hit } );
 
         aim_outputs.push_back( prediction );
     }
@@ -2046,8 +2043,8 @@ static int print_ranged_chance( const catacurses::window &w, int line_number,
             print_confidence_ratings( w, aim_chances.front().ratings, line_number, width, column_number, col );
             width -= bars_pad;
         } else {
-            std::string symbols = _( " <color_green>Great</color> <color_light_gray>Normal</color>"
-                                     " <color_magenta>Graze</color> <color_dark_gray>Miss</color> <color_light_blue>Moves</color>" );
+            std::string symbols = _( " <color_green>Great</color> <color_light_gray>Good</color>"
+                                     " <color_magenta>Doubtful</color> <color_light_blue>Moves</color>" );
             fold_and_print( w, point( 1, line_number++ ), width + bars_pad, c_dark_gray, symbols );
             int len = utf8_width( symbols ) - 121; // to subtract color codes
             if( len > width + bars_pad ) {
@@ -2111,7 +2108,7 @@ static int print_ranged_chance( const catacurses::window &w, int line_number,
 
         int column_number = 1;
         if( !( panel_type == "compact" || panel_type == "labels-narrow" ) ) {
-            std::string label = _( "Symbols:" );
+            std::string label = _( "Confidence:" );
             mvwprintw( w, point( column_number, line_number ), label );
             column_number += utf8_width( label ) + 1; // 1 for whitespace after 'Symbols:'
         }
@@ -2222,8 +2219,8 @@ static int print_aim( const target_ui &ui, Character &you, const catacurses::win
     // This could be extracted, to allow more/less verbose displays
     static const std::vector<confidence_rating> confidence_config = {{
             { accuracy_critical, '*', "green", translate_marker_context( "aim_confidence", "Great" ) },
-            { accuracy_standard, '+', "light_gray", translate_marker_context( "aim_confidence", "Normal" ) },
-            { accuracy_grazing, '|', "magenta", translate_marker_context( "aim_confidence", "Graze" ) }
+            { accuracy_standard, '+', "light_gray", translate_marker_context( "aim_confidence", "Good" ) },
+            { accuracy_grazing, '|', "magenta", translate_marker_context( "aim_confidence", "Poor" ) }
         }
     };
 
@@ -2255,8 +2252,8 @@ static void draw_throw_aim( const target_ui &ui, const Character &you, const cat
 
     static const std::vector<confidence_rating> confidence_config_critter = {{
             { accuracy_critical, '*', "green", translate_marker_context( "aim_confidence", "Great" ) },
-            { accuracy_standard, '+', "light_gray", translate_marker_context( "aim_confidence", "Normal" ) },
-            { accuracy_grazing, '|', "magenta", translate_marker_context( "aim_confidence", "Graze" ) }
+            { accuracy_standard, '+', "light_gray", translate_marker_context( "aim_confidence", "Good" ) },
+            { accuracy_grazing, '|', "magenta", translate_marker_context( "aim_confidence", "Poor" ) }
         }
     };
     static const std::vector<confidence_rating> confidence_config_object = {{
@@ -2304,8 +2301,8 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
     throwforce *= distance;
     static const std::vector<confidence_rating> throwforce_config_critter = {{
             { 80, '*', "green", translate_marker_context( "aim_confidence", "Great" ) },
-            { 60, '+', "light_gray", translate_marker_context( "aim_confidence", "Normal" ) },
-            { accuracy_grazing, '|', "magenta", translate_marker_context( "aim_confidence", "Graze" ) }
+            { 60, '+', "light_gray", translate_marker_context( "aim_confidence", "Good" ) },
+            { accuracy_grazing, '|', "magenta", translate_marker_context( "aim_confidence", "Poor" ) }
         }
     };
     const target_ui::TargetMode throwing_target_mode = target_ui::TargetMode::ThrowCreature;
