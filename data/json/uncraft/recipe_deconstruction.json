@@ -1928,6 +1928,14 @@
     "components": [ [ [ "cotton_patch", 6 ] ], [ [ "down_feather", 40 ] ] ]
   },
   {
+    "result": "kevlar_sheet_layered",
+    "type": "uncraft",
+    "time": "10 m",
+    "activity_level": "NO_EXERCISE",
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
+    "components": [ [ [ "kevlar_sheet", 16 ] ], [ [ "thread_kevlar", 6 ] ] ]
+  },
+  {
     "result": "sheet",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
