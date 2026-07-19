@@ -1,0 +1,46 @@
+[
+  {
+    "type": "overmap_terrain",
+    "abstract": "generic_hill",
+    "copy-from": "generic_open_land",
+    "name": "hill",
+    "sym": "^",
+    "color": "brown",
+    "travel_cost_type": "forest",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "hill_core",
+    "sym": "#",
+    "copy-from": "generic_hill",
+    "extend": { "flags": [ "NO_ROTATE" ] }
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "hill_end",
+    "copy-from": "generic_hill"
+  },
+  {
+    "type": "overmap_terrain",
+    "abstract": "generic_hill_top",
+    "copy-from": "generic_open_land",
+    "name": "hilltop",
+    "sym": ",",
+    "color": "brown",
+    "travel_cost_type": "forest",
+    "spawns": { "group": "GROUP_FOREST", "population": [ 0, 1 ], "chance": 13 },
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "hill_top_core",
+    "copy-from": "generic_hill",
+    "extend": { "flags": [ "NO_ROTATE" ] }
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "hill_top_end",
+    "copy-from": "generic_hill"
+  }
+]
