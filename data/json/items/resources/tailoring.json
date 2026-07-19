@@ -272,16 +272,15 @@
     "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "ballistic Kevlar panel" },
-    "description": "16 layers of ballistic Kevlar sheets quilted together into a soft, flexible panel.  This kind of Kevlar is precision-made by machine and features an extremely tight and uniform weave which cannot be replicated by hand.",
+    "description": "16 layers of ballistic Kevlar sheets stacked and stitched together into a soft, flexible panel.  This kind of Kevlar is precision-made by machine and features an extremely tight and uniform weave which cannot be replicated by hand.",
     "weight": "428 g",
     "volume": "818 ml",
     "//": "12 inch by 24 inch sheets, 16 layers thick. Values actually nearly identically matched panels available for purchase.",
     "price": "150 USD",
     "price_postapoc": "1 USD 50 cent",
     "material": [ "kevlar_layered" ],
-    "flags": [ "NO_SALVAGE" ],
     "symbol": ",",
-    "color": "green"
+    "color": "yellow"
   },
   {
     "id": "kevlar_plate",
