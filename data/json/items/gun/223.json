@@ -553,7 +553,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "copy-from": "modular_m4_carbine",
-    "name": { "str": "M16 firing port gun" },
+    "name": { "str": "M231 firing port rifle" },
     "description": "The M16 firing port gun is an M16 rifle modified to fire with an open-bolt design at ludicrous speeds, without sights.  It has a threaded handguard to screw into an armored vehicle's firing ports.  It is chambered in 5.56x45mm and accepts STANAG magazines.",
     "weight": "3330 g",
     "volume": "2400 ml",
@@ -561,14 +561,6 @@
     "barrel_length": "396 mm",
     "price": "34500 USD",
     "price_postapoc": "35 USD",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "m231pfw",
-        "name": { "str": "M231 port firing weapon" },
-        "description": "The M231 PFW is an adaptation of the M16 assault rifle, designed to be used in the firing ports of the M2 Bradley Infantry Fighting Vehicle.  It does not have a buttstock or front sight post, and the smooth front hand guard does nothing to protect you from the potentially scorching hot barrel collar, making it slightly less than ergonomic.  You could screw it into a firing port if you were so inclined.  The fire selector says only 'SAFE' and 'AUTO'.  You can't help but wonder which one is preferable."
-      }
-    ],
     "symbol": "(",
     "color": "dark_gray",
     "material": [ "aluminum", "steel", "plastic" ],
@@ -712,6 +704,8 @@
       [ "mechanism", 2 ],
       [ "sling", 1 ],
       [ "stock accessory", 1 ],
+      [ "sights mount", 1 ],
+      [ "rail mount", 1],
       [ "stock", 1 ]
     ],
     "pocket_data": [
@@ -729,7 +723,7 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "SIG civilian rifle" },
+    "name": { "str": "SIG SG 556 rifle" },
     "description": "A civilian variant of an automatic Swiss rifle for military service.  Accepts STANAG magazines.",
     "weight": "4100 g",
     "volume": "3146 ml",
@@ -737,14 +731,6 @@
     "barrel_length": "406 mm",
     "price": "3200 USD",
     "price_postapoc": "30 USD",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "sig553",
-        "name": { "str": "SIG SG 556 rifle" },
-        "description": "The SG 556 is a civilian model of the Swiss SIG SG 550 series, manufactured in New Hampshire.  It lacks any automatic fire capability and has a 16 inch barrel, but still retains a folding stock, with the feature of feeding from STANAG magazines instead of the SG 550 series magazines."
-      }
-    ],
     "to_hit": -1,
     "material": [ "steel", "plastic" ],
     "ammo": [ "223" ],
@@ -796,22 +782,14 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "AUG assault rifle" },
-    "description": "An assault rifle chambered in 5.56x45mm and accepting AUG magazines",
+    "name": { "str": "Steyr AUG carbine" },
+    "description": "The Steyr AUG is an Austrian assault rifle that uses a bullpup design.  It is used in the armed forces and police forces of many nations, and enjoys low recoil and high accuracy.",
     "weight": "3500 g",
     "volume": "3520 ml",
     "longest_side": "715 mm",
     "barrel_length": "508 mm",
     "price": "4900 USD",
     "price_postapoc": "60 USD",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "steyr_aug",
-        "name": { "str": "Steyr AUG carbine" },
-        "description": "The Steyr AUG is an Austrian assault rifle that uses a bullpup design.  It is used in the armed forces and police forces of many nations, and enjoys low recoil and high accuracy."
-      }
-    ],
     "to_hit": -1,
     "material": [ "steel", "plastic" ],
     "symbol": "(",
@@ -844,16 +822,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "5.56x45mm AK rifle" },
-    "description": "A civilian AK pattern rifle, chambered in 5.56x45 NATO.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "zpapm90",
-        "name": { "str": "ZPAP M90 rifle" },
-        "description": "A Serbian-made AK pattern rifle made by Zastava in 5.56x45mm NATO.  To avoid import restrictions, Zastava USA has added a number of American-made parts."
-      }
-    ],
+    "name": { "str": "ZPAP M90 rifle" },
+    "description": "A Serbian-made AK pattern rifle made by Zastava in 5.56x45mm NATO.  To avoid import restrictions, Zastava USA has added a number of American-made parts.",
     "weight": "3402 g",
     "volume": "2167 ml",
     "longest_side": "99 cm",
@@ -888,16 +858,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "5.56x45mm Mini Draco rifle" },
-    "description": "A civilian AK pattern rifle, chambered in 5.56x45 NATO.  This one is shorter and without a stock",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "zpap85",
-        "name": { "str": "ZPAP 85 rifle" },
-        "description": "A Serbian-made AK pattern rifle made by Zastava in 5.56x45mm NATO.  To avoid import restrictions, Zastava USA has added a number of American-made parts.  This one is shorter and without a stock"
-      }
-    ],
+    "name": { "str": "ZPAP 85 Mini Draco pistol" },
+    "description": "A Serbian-made AK pattern rifle made by Zastava in 5.56x45mm NATO.  To avoid import restrictions, Zastava USA has added a number of American-made parts.",
     "weight": "2563 g",
     "volume": "1286 ml",
     "longest_side": "48 cm",
@@ -934,16 +896,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "Desert Tech bullpup carbine" },
+    "name": { "str": "Desert Tech MDRX carbine" },
     "description": "Produced by the Desert Tech gun company, this is a highly modular, semi-automatic rifle of remarkably modest dimensions.  The weapon is notable for the simplicity of converting it to fire a wide number of different cartridges, with retool kits for .223 Remington, .308 Winchester, and .300 AAC Blackout being available.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "mdrx",
-        "name": { "str": "Desert Tech MDRX carbine" },
-        "description": "Bringing a compact, highly modular, and soft-recoiling weapon system to the table, the Desert Tech Micro Dynamic Rifle Extreme (MDRX) is a gas-operated bullpup carbine originally unveiled in 2014, with this updated model of the weapon having been released in 2019.  One of the rifle's most notable features is the utter simplicity of swapping the carbine's chambering, with an easy change of the barrel, bolt, and a handful of other components being all the steps required to chamber the MDRX for either .223 Remington, .308 Winchester, or .300 AAC Blackout."
-      }
-    ],
     "weight": "3080 g",
     "volume": "3121 ml",
     "longest_side": "402 mm",
@@ -1008,16 +962,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "Bren 5.56x45mm carbine" },
+    "name": { "str": "CZ Bren 2 carbine" },
     "description": "A semi-automatic clone of the Czech Republic's standard infantry carbine, sold for civilian sport shooting and recreational use, this modular rifle makes use of the 7.62x39mm Soviet cartridge and uses proprietary magazines.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "bren2_556",
-        "name": { "str": "CZ Bren 2 carbine" },
-        "description": "Hailing from the Czech Republic, this modular carbine supplanted the older CZ 805 rifle within Czech military use, improving upon the former's features and bringing fully ambidextrous controls, a streamlined design, and an easily adjustable gas system to the table.  Chambered for the 5.56x45mm NATO cartridge, this particular weapon possesses a 16.5-inch barrel and is a civilian MS, 'modular semi-automatic,' model.  Incorporating a number of US-made parts, the weapon features a removable muzzle break rather than the flash hider that comes standard with military rifles."
-      }
-    ],
     "weight": "3450 g",
     "volume": "4200 ml",
     "longest_side": "91 cm",
@@ -1077,16 +1023,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "bolt-action trail carbine" },
-    "description": "Compact, svelte, and lightweight, this Leen bolt-action rifle packs the same features of larger sporting weapons into a backpack-sized package.  Possessing an adjustable buttstock, a detachable magazine-based system, and a quick-swap barrel that can be exchanged to accommodate the firing of .223 Remington or 7.62x39mm Soviet ammunition, the weapon is a commendable backpacker or prepper rifle.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "cz600",
-        "name": { "str": "CZ 600 TRAIL rifle" },
-        "description": "A handy bolt-action offering from CZ, the 600 Trail is a box magazine-fed ranch rifle that utilizes an aluminum chassis to keep its overall heft to a minimum.  Possessing an extendable buttstock, extensive modularity, and a quick-swap barrel assembly switchable to accommodate the firing of either .223 or 7.62x39mm ammunition, the rifle was intended for use by backpackers, trail hikers, and preppers."
-      }
-    ],
+    "name": { "str": "CZ 600 TRAIL rifle" },
+    "description":"A handy bolt-action offering from CZ, the 600 Trail is a box magazine-fed ranch rifle that utilizes an aluminum chassis to keep its overall heft to a minimum.  Possessing an extendable buttstock, extensive modularity, and a quick-swap barrel assembly switchable to accommodate the firing of either .223 or 7.62x39mm ammunition, the rifle was intended for use by backpackers, trail hikers, and preppers.",
     "weight": "1800 g",
     "volume": "2500 ml",
     "longest_side": "384 mm",
@@ -1119,16 +1057,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "5.56x45mm bullpup rifle" },
+    "name": { "str": "Kel-Tec RDB rifle" },
     "description": "This is a semi-automatic bullpup rifle with a lightened body due to the use of polymers and aluminum, using standard magazines of the AR-15 platform and a 5.56x45mm cartridge.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "rdb_223",
-        "name": { "str": "Kel-Tec RDB rifle" },
-        "description": "This is a semi-automatic bullpup rifle with a lightened body due to the use of polymers and aluminum, using standard magazines from the AR-15 platform and the 5.56 NATO cartridge.  The name stands for rifle, downward-ejection, bullpup, and its design was intended to incorporate some technical solutions, such as downward case ejection and convenience for left-handers, to solve some problems with bullpup guns.  However, the good idea's execution is not as perfect as the manufacturer (and user) would like.  No good idea from Kel-Tec is immune to Kel-Tec manufacturing issues, sadly."
-      }
-    ],
     "weight": "3200 g",
     "volume": "3421 ml",
     "longest_side": "693 mm",
