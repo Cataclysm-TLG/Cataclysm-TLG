@@ -301,7 +301,7 @@
     "symbol": ">",
     "color": "dark_gray",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "ROAD", "TRANSPARENT_FLOOR" ]
+    "flags": [ "TRANSPARENT", "ROAD", "TRANSPARENT_FLOOR", "RAMP_DOWN_HIGH" ]
   },
   {
     "type": "terrain",
@@ -337,7 +337,7 @@
     "symbol": "<",
     "color": "dark_gray",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "ROAD" ]
+    "flags": [ "TRANSPARENT", "ROAD", "RAMP_UP_LOW" ]
   },
   {
     "type": "terrain",
@@ -346,16 +346,18 @@
     "description": "The upper end of an earth ramp leading down.",
     "symbol": ">",
     "color": "brown",
+    "connect_groups": "RAMP",
+    "connects_to": "RAMP",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "TRANSPARENT_FLOOR" ]
+    "flags": [ "TRANSPARENT", "TRANSPARENT_FLOOR", "RAMP_DOWN_HIGH" ]
   },
   {
     "type": "terrain",
     "id": "t_earth_ramp_down_low",
     "name": "earth ramp down (low end)",
     "description": "The lower end of an earth ramp leading down.",
-    "connect_groups": "WALL",
-    "connects_to": "WALL",
+    "connect_groups": "RAMP",
+    "connects_to": "RAMP",
     "symbol": ">",
     "color": "brown",
     "move_cost": 2,
@@ -365,8 +367,8 @@
     "type": "terrain",
     "id": "t_earth_ramp_up_high",
     "name": "earth ramp up (high end)",
-    "connect_groups": "WALL",
-    "connects_to": "WALL",
+    "connect_groups": "RAMP",
+    "connects_to": "RAMP",
     "description": "The upper end of an earth ramp leading up.",
     "symbol": "<",
     "color": "brown",
@@ -378,10 +380,12 @@
     "id": "t_earth_ramp_up_low",
     "name": "earth ramp up (low end)",
     "description": "The lower end of an earth ramp leading up.",
+    "connect_groups": "RAMP",
+    "connects_to": "RAMP",
     "symbol": "<",
     "color": "brown",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT" ]
+    "flags": [ "TRANSPARENT", "RAMP_UP_LOW" ]
   },
   {
     "type": "terrain",
@@ -393,7 +397,7 @@
     "symbol": ">",
     "color": "light_gray",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "ROAD", "TRANSPARENT_FLOOR" ]
+    "flags": [ "TRANSPARENT", "ROAD", "TRANSPARENT_FLOOR", "RAMP_DOWN_HIGH" ]
   },
   {
     "type": "terrain",
@@ -427,7 +431,7 @@
     "symbol": "<",
     "color": "light_gray",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "ROAD" ]
+    "flags": [ "TRANSPARENT", "ROAD", "RAMP_UP_LOW" ]
   },
   {
     "type": "terrain",
@@ -439,7 +443,7 @@
     "symbol": ">",
     "color": "brown",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "GOES_DOWN", "PLACE_ITEM" ]
+    "flags": [ "TRANSPARENT", "GOES_DOWN", "PLACE_ITEM", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",
@@ -517,7 +521,7 @@
     "symbol": ">",
     "color": "dark_gray",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "RAIL", "TRANSPARENT_FLOOR" ]
+    "flags": [ "TRANSPARENT", "RAIL", "TRANSPARENT_FLOOR", "RAMP_DOWN_HIGH" ]
   },
   {
     "type": "terrain",
@@ -553,7 +557,7 @@
     "symbol": "<",
     "color": "dark_gray",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "RAIL" ]
+    "flags": [ "TRANSPARENT", "RAIL", "RAMP_UP_LOW" ]
   },
   {
     "type": "terrain",
@@ -565,7 +569,7 @@
     "symbol": ">",
     "color": "light_gray",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "ROAD", "TRANSPARENT_FLOOR" ]
+    "flags": [ "TRANSPARENT", "ROAD", "TRANSPARENT_FLOOR", "RAMP_DOWN_HIGH" ]
   },
   {
     "type": "terrain",
@@ -599,6 +603,6 @@
     "symbol": "<",
     "color": "light_gray",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "ROAD" ]
+    "flags": [ "TRANSPARENT", "ROAD", "RAMP_UP_LOW" ]
   }
 ]

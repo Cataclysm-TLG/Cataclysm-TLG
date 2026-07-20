@@ -247,8 +247,16 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         return true;
     }
     bool via_ramp = false;
-    if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, you_pos ) &&
-        m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
+    // TODO: Ledge check instead.
+    if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN_HIGH, you_pos ) &&
+        m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest_loc ) ) {
+        return false;
+        // TODO: Climb check if you're tall enough.
+    } else if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_UP_LOW, you_pos ) &&
+               m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
+        return false;
+    } else if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, you_pos ) &&
+               m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
         dest_loc.z() += 1;
         via_ramp = true;
     } else if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, you_pos ) &&
