@@ -1651,7 +1651,7 @@
     "warmth": 15,
     "material_thickness": 2.6,
     "environmental_protection": 4,
-    "flags": [ "PADDED", "OUTER" ],
+    "flags": [ "PADDED", "OUTER", "NORMAL" ],
     "armor": [
       {
         "encumbrance": 22,
