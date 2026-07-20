@@ -1,5 +1,4 @@
 #include "dispersion.h"
-
 #include "rng.h"
 
 double dispersion_sources::roll() const
@@ -14,13 +13,14 @@ double dispersion_sources::roll() const
     for( const double &source : multipliers ) {
         this_roll *= source;
     }
+
     return std::min( this_roll, 3600.0 );
 }
 
 double dispersion_sources::max() const
 {
     double sum = 0.0;
-    for( const double &source : linear_sources ) {
+    for( const auto &source : linear_sources ) {
         sum += source;
     }
     for( const double &source : normal_sources ) {

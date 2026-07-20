@@ -2910,7 +2910,7 @@ double map::ranged_target_size( const tripoint_bub_ms &p ) const
         return 0.0;
     }
 
-    // TODO: Handle cases like shrubs, trees, furniture, sandbags...
+    // 0.1 strikes the floor. All other cases are handled by cover.
     return 0.1;
 }
 
