@@ -993,7 +993,7 @@
     "autolearn": true,
     "using": [ [ "sewing_standard", 60 ], [ "fastener_large", 1 ] ],
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 1 }, { "id": "DRILL", "level": 2 } ],
-    "components": [ [ [ "jacket_jean", 1 ] ], [ [ "sheet_metal_small", 12 ] ] ],
+    "components": [ [ [ "vest_jean", 1 ] ], [ [ "sheet_metal_small", 12 ] ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_closures" } ]
   },
   {
