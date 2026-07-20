@@ -1,5 +1,4 @@
 #include "dispersion.h"
-#include "messages.h"
 #include "rng.h"
 
 double dispersion_sources::roll() const
