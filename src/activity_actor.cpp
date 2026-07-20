@@ -1747,9 +1747,9 @@ void read_activity_actor::start( player_activity &act, Character &who )
                                   ereader->type->maximum_charges() : link_actor->cable_length;
             bool plugged_in = false;
             for( const tripoint_bub_ms &pt : here.points_in_radius( who.pos_bub(), cable_len ) ) {
-                // points_in_radius uses Chebyshev (square), but process_link uses rl_dist (Euclidean).
+                // points_in_radius uses Chebyshev (square), but process_link uses trig_dist (rounded Euclidean).
                 // Skip tiles that would immediately exceed max_length after plugging in.
-                if( rl_dist( who.pos_bub(), pt ) > cable_len ) {
+                if( trig_dist( who.pos_bub(), pt ) > cable_len ) {
                     continue;
                 }
                 const optional_vpart_position ovp = here.veh_at( pt );
@@ -2388,7 +2388,7 @@ void move_items_activity_actor::do_turn( player_activity &act, Character &who )
         // This is for hauling across zlevels, remove when going up and down stairs
         // is no longer teleportation
         const tripoint_bub_ms src = target.pos_bub( here );
-        const int distance = src.z() == dest.z() ? std::max( rl_dist( src, dest ), 1 ) : 1;
+        const int distance = src.z() == dest.z() ? std::max( trig_dist( src, dest ), 1 ) : 1;
         // Yuck, I'm sticking weariness scaling based on activity level here
         const float weary_mult = who.exertion_adjusted_move_multiplier( exertion_level() );
         who.mod_moves( -Pickup::cost_to_move_item( who, newit ) * distance / weary_mult );

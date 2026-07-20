@@ -12,6 +12,7 @@ class dispersion_sources
         std::vector<double> linear_sources;
         std::vector<double> multipliers;
         double spread_sources = 0.0;
+
     public:
         explicit dispersion_sources( double normal_source = 0.0 ) {
             if( normal_source != 0.0 ) {

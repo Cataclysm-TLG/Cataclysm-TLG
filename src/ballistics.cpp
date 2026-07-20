@@ -91,11 +91,7 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
 
         const units::mass shard_mass = itype_glass_shard->weight;
         const int max_nb_of_shards = floor( to_gram( drop_item.type->weight ) / to_gram( shard_mass ) );
-        //between half and max_nb_of_shards-1 will be usable
         const int nb_of_dropped_shard = std::max( 0, rng( max_nb_of_shards / 2, max_nb_of_shards - 1 ) );
-        //feel free to remove this msg_debug
-        /*add_msg_debug( "Shattered %s dropped %i shards out of a max of %i, based on mass %i g",
-                       drop_item.tname(), nb_of_dropped_shard, max_nb_of_shards - 1, to_gram( drop_item.type->weight ) );*/
 
         for( int i = 0; i < nb_of_dropped_shard; ++i ) {
             item shard( itype_glass_shard );
@@ -107,7 +103,7 @@ static void drop_or_embed_projectile( map *here, const dealt_projectile_attack &
     }
 
     if( effects.count( ammo_effect_BURST ) ) {
-        // Drop the contents, not the thrown item
+        // Drop the contents, not the thrown item.
         add_msg_if_player_sees( reality_bubble().get_bub( here->get_abs( pt ) ), _( "The %s bursts!" ),
                                 drop_item.tname() );
 
@@ -211,12 +207,11 @@ projectile_attack_aim projectile_attack_roll( const dispersion_sources &dispersi
     // the error angle between where the shot was aimed and where this one actually went
     // NB: some cases pass dispersion == 0 for a "never misses" shot e.g. bio_magnet,
     aim.dispersion = dispersion.roll();
-    add_msg_debug( debugmode::DF_BALLISTIC, "Dispersion rolled / max : %f / %f; %f / %f degrees",
+    add_msg_debug( debugmode::DF_RANGED, "Dispersion rolled / max possible : %f / %f; %f / %f degrees",
                    aim.dispersion, dispersion.max(), aim.dispersion / 60.0, dispersion.max() / 60.0 );
 
     // an isosceles triangle is formed by the intended and actual target tiles
     aim.missed_by_tiles = iso_tangent( range, units::from_arcmin( aim.dispersion ) );
-
     // fraction we missed a monster target by (0.0 = perfect hit, 1.0 = miss)
     if( target_size > 0.0 ) {
         aim.missed_by = std::min( 1.0, aim.missed_by_tiles / target_size );
@@ -253,28 +248,34 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
 
     if( target_critter != nullptr ) {
         const monster *mon = target_critter->as_monster();
-        if( mon && proj_arg.proj_effects.count( ammo_effect_WIDE ) ) {
-            // ammo with ammo_effect_WIDE ignores mon_flag_HARDTOSHOOT
-            target_size = occupied_tile_fraction( mon->get_size() );
+        if( ( mon && mon->has_flag( mon_flag_HARDTOSHOOT ) ) || ( !mon &&
+                target_critter->as_character()->has_flag( json_flag_HARDTOHIT ) ) ) {
+            if( proj_arg.proj_effects.count( ammo_effect_WIDE ) ||
+                x_in_y( proj_arg.count + proj_arg.shot_spread * 2, 1000 ) ) {
+                /* Ammo with ammo_effect_WIDE ignores mon_flag_HARDTOSHOOT.
+                Multishots have a chance to do this as well. At the time
+                of this writing, birshot is 350 pellets and 350 dispersion,
+                so it's basically guaranteed unless there's a choke or
+                something, and buckshot comes out to around 61%.
+                */
+                target_size = occupied_tile_fraction( target_critter->get_size() );
+                add_msg_debug( debugmode::DF_RANGED,
+                               "Shot spread or WIDE ammo effect negates HARDTOSHOOT/HARDTOHIT.  Target size %s", target_size );
+            } else {
+                target_size = target_critter->ranged_target_size();
+                add_msg_debug( debugmode::DF_RANGED,
+                               "HARDTOSHOOT/HARDTOHIT targets are harder to hit.  Target size: %s", target_size );
+            }
         } else {
             target_size = target_critter->ranged_target_size();
+            add_msg_debug( debugmode::DF_RANGED, "Target creature size: %s", target_size );
         }
     } else {
         target_size = here->ranged_target_size( target_arg );
+        add_msg_debug( debugmode::DF_RANGED, "Target size for tile: %s", target_size );
     }
+
     projectile_attack_aim aim = projectile_attack_roll( dispersion, range, target_size );
-
-    if( target_critter && target_critter->as_character() &&
-        target_critter->as_character()->has_flag( json_flag_HARDTOHIT ) ) {
-
-        projectile_attack_aim lucky_aim = projectile_attack_roll( dispersion, range, target_size );
-        // if the target's lucky they're more likely to be missed
-        if( lucky_aim.missed_by > aim.missed_by ) {
-            aim = lucky_aim;
-        }
-    }
-
-    // TODO: move to-hit roll back in here
 
     attack.proj = proj_arg;
     attack.last_hit_critter = nullptr;
@@ -339,7 +340,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         }
 
         // Don't extend range further, miss here can mean hitting the ground near the target
-        range = rl_dist( source, target );
+        range = trig_dist_precise( source, target );
         extend_to_range = range;
 
         if( reality_bubble().inbounds( here->get_abs( target ) ) ) {
@@ -353,7 +354,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
     //Use find clear path to draw the trajectory with optimal initial tile offsets.
     trajectory = here->find_clear_path( source, target );
 
-    add_msg_debug( debugmode::DF_BALLISTIC,
+    add_msg_debug( debugmode::DF_RANGED,
                    "missed_by_tiles: %.2f; missed_by: %.2f; target (orig/hit): %s/%s",
                    aim.missed_by_tiles, aim.missed_by, target_arg.to_string_writable(),
                    target.to_string_writable() );
@@ -419,14 +420,14 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                     t_copy.insert( t_copy.end(), extension.begin(), extension.end() );
                 }
             }
-            add_msg_debug( debugmode::DF_BALLISTIC,
+            add_msg_debug( debugmode::DF_RANGED,
                            "shot_spread: %d; spread roll/max_spread: %.2f/%.2f; target (orig/hit): %s/%s",
                            proj.shot_spread, spread, max_spread,
                            target_arg.to_string_writable(), target_c.to_string_writable() );
         }
         // Range can be 0.
         size_t traj_len = t_copy.size();
-        while( traj_len > 0 && rl_dist( source, t_copy[traj_len - 1] ) > proj_arg.range ) {
+        while( traj_len > 0 && trig_dist_precise( source, t_copy[traj_len - 1] ) > proj_arg.range ) {
             --traj_len;
         }
 

@@ -4606,9 +4606,20 @@ body_part_set Character::exclusive_flag_coverage( const flag_id &flag ) const
 
 double Character::dispersion_variance() const
 {
-    return rng( 900.0 - ( std::min( 800.0,
-                                    ( 40.0 * ( get_per() * ( ( get_limb_score( limb_score_manip ) + get_limb_score(
-                                            limb_score_vision ) ) / 2.0 ) ) ) ) ), -200 );
+    double ability = static_cast<double>( get_per() ) *
+                     ( ( get_limb_score( limb_score_manip ) +
+                         get_limb_score( limb_score_vision ) ) / 2.0 );
+    ability = std::clamp( ability, 0.01, 20.0 );
+    double low;
+    if( ability <= 10.0 ) {
+        low = -20.0 + ability;
+    } else {
+        low = -10.0 + ( ability - 10.0 ) * 0.5;
+    }
+    double high = 5.0 + ability * 0.5;
+    double variance = rng_float( low, high );
+    add_msg_debug( debugmode::DF_RANGED, "Semi-random variance adds %1f dispersion.", variance );
+    return variance;
 }
 
 double Character::expected_dispersion_variance() const
