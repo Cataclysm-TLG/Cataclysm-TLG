@@ -1363,7 +1363,7 @@
     "id": "sugar_house_drum",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [ { "item": "syrup", "container-item": "55gal_drum", "charges": [ 2, 150 ] } ]
+    "entries": [ { "item": "syrup", "container-item": "55gal_drum", "charges": [ 2, 100 ] } ]
   },
   {
     "id": "petstore_misc",
