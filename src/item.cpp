@@ -11318,12 +11318,12 @@ units::mass item::gun_base_weight() const
 
 int item::gun_awkwardness( const Character &p ) const
 {
-    float gun_length = ( length() / 10_mm );
-    float length_ratio = gun_length / p.height();
-    float awkwardness = 1.f;
-    const float threshold = 0.75f;
-    awkwardness = length_ratio / threshold;
-    return std::max( 0, static_cast<int>( std::round( ( awkwardness - 1.f ) * 100.f ) ) );
+    double gun_length = length() / 10_mm;
+    double length_ratio = gun_length / p.height();
+    double threshold = 0.75;
+    double awkwardness = length_ratio / threshold;
+
+    return std::max( 0, static_cast<int>( std::round( ( awkwardness - 1.0 ) * 75.0 ) ) );
 }
 
 int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) const

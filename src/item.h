@@ -2787,8 +2787,10 @@ class item : public visitable
         int gun_range( bool with_ammo = true ) const;
 
         /**
-         * Ratio (percent given as an int) of gun length to character height minus a 75% allowance.
-         * Creates problems if it's above 75%. At 125% (50% awkwardness) the weapon becomes unusable.
+         * Ratio (percent given as an int) of gun length to character height minus a 75%
+         * allowance. Adds penalties if it's above threshold. At 125% (50% awkwardness) the
+         * weapon becomes unusable. Threshold defaults to 75% but other thresholds
+         * can be used for functions like get_tracking_dispersion()
          */
         int gun_awkwardness( const Character &p ) const;
 
