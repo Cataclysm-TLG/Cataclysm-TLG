@@ -2673,6 +2673,7 @@ dispersion_sources Character::get_tracking_dispersion( const item *obj, const Cr
     const int distance = trig_dist( pos_bub(), target->pos_bub() );
     const double distance_factor = std::max( 0, 11 - distance ) / 10.0;
     const double gun_length = ( obj->length() / 1_mm );
+    // x12 and 800 gram multiplier to length_factor and lifting_capacity are arbitrary figures used to produce a reasonable outcome.
     const double length_factor = ( gun_length / this->height() ) * 12;
     const double lifting_capacity = std::max( 0.0, to_gram( static_cast<double>( get_arm_str() ) * 800_gram ) );
     const double weight_factor = std::max( 0.0, to_gram( obj->weight() ) / lifting_capacity );
