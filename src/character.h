@@ -1285,6 +1285,13 @@ class Character : public Creature, public visitable
          */
         dispersion_sources get_weapon_dispersion( const item &obj ) const;
 
+        /* Returns a dispersion value based on how difficult it is to keep a bead on the 
+        target. Considerations whether the target is aware that the shooter is trying to
+        kill it, how close it is to the shooter, weapon length/handling plus strength/weight,
+        and target speed and dodge skill. The intent is to simulate the difficulty of trying
+        to shoot in a hectic melee without overly impacting things like shooting a bird at 25 meters. */
+        dispersion_sources get_tracking_dispersion( const item *obj, const Creature *target, bool report = false, bool rng = true ) const;
+
         // If average == true, adds expected values of random rolls instead of rolling.
         /** Adds all 3 types of physical damage to instance */
         void roll_all_damage( bool crit, damage_instance &di, bool average, const item &weap,
