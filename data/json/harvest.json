@@ -2164,6 +2164,7 @@
       { "drop": "triffid_meat", "type": "flesh", "mass_ratio": 0.2 },
       { "drop": "triffid_meat", "type": "offal", "mass_ratio": 0.05 },
       { "drop": "stick", "type": "bone", "mass_ratio": 0.05 },
+      { "drop": "latex", "type": "blood", "mass_ratio": 0.1 },
       { "drop": "venom_paralytic", "type": "offal", "mass_ratio": 0.0075 }
     ]
   },
@@ -2201,6 +2202,7 @@
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.15 },
       { "drop": "triffid_meat", "type": "flesh", "mass_ratio": 0.2 },
       { "drop": "triffid_meat", "type": "offal", "mass_ratio": 0.05 },
+      { "drop": "latex", "type": "blood", "mass_ratio": 0.1 },
       { "drop": "venom_paralytic", "type": "offal", "mass_ratio": 0.02 }
     ]
   },
