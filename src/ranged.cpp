@@ -632,7 +632,7 @@ double occupied_tile_fraction( creature_size target_size )
 {
     switch( target_size ) {
         case creature_size::tiny:
-            return 0.25;
+            return 0.2;
         case creature_size::small:
             return 0.35;
         case creature_size::medium:
