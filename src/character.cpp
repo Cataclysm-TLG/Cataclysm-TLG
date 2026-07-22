@@ -1288,8 +1288,12 @@ double Character::aim_per_move( const item &gun, double recoil,
     }
     // Finally multiply everything by a harsh function that is eliminated by 7.5 weapon skill.
     aim_speed /= std::max( 1.0, 2.5 - 0.2 * get_skill_level( gun_skill ) );
-    // Use a milder attenuation function to replace the previous logarithmic attenuation function when recoil is closed to 0.
-    aim_speed *= std::max( recoil / MAX_RECOIL, 1 - logarithmic_range( 0, MAX_RECOIL, recoil ) );
+    // Getting some aim bar is fast, but it slows as you build it.
+    double recoil_factor = 
+       std::max( recoil / MAX_RECOIL, 1 - logarithmic_range( 0, MAX_RECOIL, recoil ) );
+
+    recoil_factor = std::pow( recoil_factor, 1.05 );
+    aim_speed *= recoil_factor;
     // Add 4 max aim speed per skill up to 5 skill, then 1 per skill for skill 5-10.
     double base_aim_speed_cap = 5.0 +  1.0 * get_skill_level( gun_skill ) + std::max( 10.0,
                                 3.0 * get_skill_level( gun_skill ) );
