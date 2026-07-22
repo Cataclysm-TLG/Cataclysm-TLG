@@ -2692,7 +2692,9 @@ dispersion_sources Character::get_tracking_dispersion( const item *obj, const Cr
     }
     tracking_dispersion *= distance_factor;
     if( rng ) {
-    tracking_dispersion *= rng_float( 0.25, 1.5 );
+        // Weight RNG by range so close firefights are more chaotic.
+        const double rng_max = 1.0 + ( 1.75 * distance_factor );
+        tracking_dispersion *= rng_float( 0.25, rng_max );
     }
     if( report ) {
     add_msg_debug( debugmode::DF_RANGED,
@@ -2932,6 +2934,7 @@ target_handler::trajectory target_ui::run()
     if( reentered ) {
         if( !try_reacquire_target( resume_critter, initial_dst ) ) {
             // Target lost
+            you->recoil = MAX_RECOIL;
             action.clear();
             attack_was_confirmed = false;
         }
@@ -2940,7 +2943,8 @@ target_handler::trajectory target_ui::run()
     }
     set_cursor_pos( initial_dst );
     if( dst != initial_dst ) {
-        // Our target moved out of range
+        // Our target moved out of range.
+        you->recoil = MAX_RECOIL;
         action.clear();
         attack_was_confirmed = false;
     }
@@ -2955,6 +2959,7 @@ target_handler::trajectory target_ui::run()
         if( !action.empty() && !prompt_friendlies_in_lof() ) {
             // A friendly creature moved into line of fire during aim-and-shoot,
             // and player decided to stop aiming
+            you->recoil = MAX_RECOIL;
             action.clear();
             attack_was_confirmed = false;
         }

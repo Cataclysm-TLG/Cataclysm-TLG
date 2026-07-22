@@ -1074,7 +1074,7 @@ int Character::point_shooting_limit( const item &gun )const
 aim_mods_cache Character::gen_aim_mods_cache( const item &gun )const
 {
     parallax_cache parallaxes{ get_character_parallax( true ), get_character_parallax( false ) };
-    return { get_modifier( character_modifier_aim_speed_skill_mod, gun.gun_skill() ), get_modifier( character_modifier_aim_speed_dex_mod ), get_modifier( character_modifier_aim_speed_mod ), most_accurate_aiming_method_limit( gun ), aim_factor_from_volume( gun ), aim_factor_from_length( gun ), parallaxes };
+    return { get_modifier( character_modifier_aim_speed_skill_mod, gun.gun_skill() ), get_modifier( character_modifier_aim_speed_dex_mod ), get_modifier( character_modifier_aim_speed_mod ), most_accurate_aiming_method_limit( gun ), aim_factor_from_length( gun ), aim_factor_from_volume( gun ), aim_factor_from_weight( gun ), parallaxes };
 }
 
 double Character::fastest_aiming_method_speed( const item &gun, double recoil,
@@ -1183,21 +1183,38 @@ int Character::most_accurate_aiming_method_limit( const item &gun ) const
 
 double Character::aim_factor_from_volume( const item &gun ) const
 {
-    skill_id gun_skill = gun.gun_skill();
+    if( !is_wielding( gun ) ) {
+        return 1.0;
+    }
     double wielded_volume = gun.volume() / 1_ml;
-    // this is only here for mod support
+    // This is only here for mod support.
     if( gun.has_flag( flag_COLLAPSIBLE_STOCK ) ) {
-        // use the unfolded volume
+        // Use the unfolded volume.
         wielded_volume += gun.collapsed_volume_delta() / 1_ml;
     }
-
-    double factor = gun_skill == skill_pistol ? 4 : 1;
-    double min_volume_without_debuff =  800;
-    if( wielded_volume > min_volume_without_debuff ) {
-        factor *= std::pow( min_volume_without_debuff / wielded_volume, 0.333333 );
+    // Thresholds are cheaper than std::pow(), otherwise we'd just use that.
+    constexpr double volume_thresholds[] = { 200.0, 400.0, 800.0, 1600.0, 3200.0 };
+    const double max_volume_without_slowdown = volume_thresholds[get_size() - 1];
+    double factor = 1.0;
+    if( wielded_volume > max_volume_without_slowdown ) {
+        factor = std::cbrt( max_volume_without_slowdown / wielded_volume );
     }
+    return std::max( factor, 0.2 );
+}
 
-    return std::max( factor, 0.2 ) ;
+double Character::aim_factor_from_weight( const item &gun ) const
+{
+    if( !is_wielding( gun ) ) {
+        return 1.0;
+    }
+    double wielded_weight = gun.weight() / 1_gram;
+    const double effective_strength = get_arm_str() * std::clamp( (static_cast<double>( get_stamina() ) / static_cast<double>( get_stamina_max() ) ), 0.4, 1.0 );
+    const double max_weight_without_slowdown = effective_strength * 100.0;
+    double factor = 1.0;
+    if( wielded_weight > max_weight_without_slowdown ) {
+        factor = std::cbrt( max_weight_without_slowdown / wielded_weight );
+    }
+    return std::max( factor, 0.2 );
 }
 
 static bool is_obstacle( tripoint_bub_ms pos )
@@ -1208,22 +1225,28 @@ static bool is_obstacle( tripoint_bub_ms pos )
 double Character::aim_factor_from_length( const item &gun ) const
 {
     tripoint_bub_ms cur_pos = pos_bub();
-    bool nw_to_se = is_obstacle( cur_pos + tripoint::south_east ) &&
-                    is_obstacle( cur_pos + tripoint::north_west );
-    bool w_to_e = is_obstacle( cur_pos + tripoint::west ) &&
-                  is_obstacle( cur_pos + tripoint::east );
-    bool sw_to_ne = is_obstacle( cur_pos + tripoint::south_west ) &&
-                    is_obstacle( cur_pos + tripoint::north_east );
-    bool n_to_s = is_obstacle( cur_pos + tripoint::north ) &&
-                  is_obstacle( cur_pos + tripoint::south );
-    double wielded_length = gun.length() / 1_mm;
-    double factor = 1.0;
-
-    if( nw_to_se || w_to_e || sw_to_ne || n_to_s ) {
-        factor = 1.0 - static_cast<float>( ( wielded_length - 300 ) / 1000 );
-        factor =  std::min( factor, 1.0 );
+    const int length = gun.length() / 1_mm;
+    if( length <= 200 ) {
+        return 1.0;
     }
-    return std::max( factor, 0.2 ) ;
+    const bool confined =
+        in_vehicle ||
+        ( is_obstacle( cur_pos + tripoint::south_east ) &&
+        is_obstacle( cur_pos + tripoint::north_west ) ) ||
+        ( is_obstacle( cur_pos + tripoint::west ) &&
+        is_obstacle( cur_pos + tripoint::east ) ) ||
+        ( is_obstacle( cur_pos + tripoint::south_west ) &&
+        is_obstacle( cur_pos + tripoint::north_east ) ) ||
+        ( is_obstacle( cur_pos + tripoint::north ) &&
+        is_obstacle( cur_pos + tripoint::south ) );
+
+    if( !confined ) {
+        return 1.0;
+    }
+    const double factor = std::clamp(
+        1.0 - ( length - 200.0 ) / 1125.0,
+        0.2, 1.0 );
+    return factor;
 }
 
 double Character::aim_per_move( const item &gun, double recoil,
@@ -1242,64 +1265,53 @@ double Character::aim_per_move( const item &gun, double recoil,
         // No suitable sights (already at maximum aim).
         return 0;
     }
-
     // Overall strategy for determining aim speed is to sum the factors that contribute to it,
     // then scale that speed by current recoil level.
     // Player capabilities make aiming faster, and aim speed slows down as it approaches 0.
     // Base speed is non-zero to prevent extreme rate changes as aim speed approaches 0.
     double aim_speed = 10.0;
-
     skill_id gun_skill = gun.gun_skill();
-
     aim_speed += sight_speed_modifier;
-
     if( !use_cache ) {
-        // Ranges [-1.5 - 3.5] for archery Ranges [0 - 2.5] for others
+        // Ranges [-1.5 - 3.5] for archery/throwing, ranges [0 - 2.5] for others.
         aim_speed += get_modifier( character_modifier_aim_speed_skill_mod, gun_skill );
 
         /** @EFFECT_DEX increases aiming speed */
-        // every DEX increases 0.5 aim_speed
+        // Every DEX above 9 adds 0.5 aim_speed.  This is hardcoded in character_modifiers.cpp.
         aim_speed += get_modifier( character_modifier_aim_speed_dex_mod );
 
         aim_speed *= get_modifier( character_modifier_aim_speed_mod );
     } else {
         aim_speed += aim_cache.value().get().aim_speed_skill_mod;
-
         aim_speed += aim_cache.value().get().aim_speed_dex_mod;
-
         aim_speed *= aim_cache.value().get().aim_speed_mod;
     }
-
-    // finally multiply everything by a harsh function that is eliminated by 7.5 gunskill
+    // Finally multiply everything by a harsh function that is eliminated by 7.5 weapon skill.
     aim_speed /= std::max( 1.0, 2.5 - 0.2 * get_skill_level( gun_skill ) );
-    // Use a milder attenuation function to replace the previous logarithmic attenuation function when recoil is closed to 0.
-    aim_speed *= std::max( recoil / MAX_RECOIL, 1 - logarithmic_range( 0, MAX_RECOIL, recoil ) );
-
-    // add 4 max aim speed per skill up to 5 skill, then 1 per skill for skill 5-10
+    // Getting some aim bar is fast, but it slows as you build it.
+    double recoil_factor = 
+       std::max( recoil / MAX_RECOIL, 1 - logarithmic_range( 0, MAX_RECOIL, recoil ) );
+    recoil_factor = std::pow( recoil_factor, 1.05 );
+    aim_speed *= recoil_factor;
+    // Add 4 max aim speed per skill up to 5 skill, then 1 per skill for skill 5-10.
     double base_aim_speed_cap = 5.0 +  1.0 * get_skill_level( gun_skill ) + std::max( 10.0,
                                 3.0 * get_skill_level( gun_skill ) );
     if( !use_cache ) {
-        // This upper limit usually only affects the first half of the aiming process
-        // Pistols have a much higher aiming speed limit
-        aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_volume( gun ) );
-
-        // When the character is in an open area, it will not be affected by the length of the weapon.
-        // This upper limit usually only affects the first half of the aiming process
-        // Weapons shorter than carbine are usually not affected by it
         aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_length( gun ) );
+        aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_volume( gun ) );
+        aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_weight( gun ) );
     } else {
         aim_speed = std::min( aim_speed,
-                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_volume );
-
+                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_length ); 
         aim_speed = std::min( aim_speed,
-                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_length );
+                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_volume );                         
+        aim_speed = std::min( aim_speed,
+                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_weight );
     }
     // Just a raw scaling factor.
     aim_speed *= 2.4;
-
     // Minimum improvement is 0.01MoA.  This is just to prevent data anomalies
     aim_speed = std::max( aim_speed, MIN_RECOIL_IMPROVEMENT );
-
     // Never improve by more than the currently used sights permit.
     return std::min( aim_speed, recoil - limit );
 }

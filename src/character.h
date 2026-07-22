@@ -416,8 +416,9 @@ struct aim_mods_cache {
     float aim_speed_dex_mod;
     float aim_speed_mod;
     int limit;
-    double aim_factor_from_volume;
     double aim_factor_from_length;
+    double aim_factor_from_volume;
+    double aim_factor_from_weight;
     parallax_cache parallaxes;
 };
 
@@ -860,8 +861,15 @@ class Character : public Creature, public visitable
                                             const Target_attributes &target_attributes = Target_attributes(),
                                             std::optional<std::reference_wrapper<const parallax_cache>> parallax_cache = std::nullopt ) const;
         int most_accurate_aiming_method_limit( const item &gun ) const;
-        double aim_factor_from_volume( const item &gun ) const;
+        /* Aim speed penalty from the general bulk of the weapon.
+           This scales with the shooter's size category. */
         double aim_factor_from_length( const item &gun ) const;
+        /* Length penalties to aim speed are only assessed when the shooter is in a vehicle or
+           against a wall. These do not scale with the shooter's height as it's more about gun
+           vs environment. Guns under 200mm (about 8 inches) are unaffected. */
+        double aim_factor_from_volume( const item &gun ) const;
+        // Heavier guns are slower to aim. This is checked against get_arm_str() and stamina.
+        double aim_factor_from_weight( const item &gun ) const;
         aim_mods_cache gen_aim_mods_cache( const item &gun )const;
 
         // Get the value of the specified character modifier.
