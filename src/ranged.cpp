@@ -1968,7 +1968,7 @@ static std::vector<aim_type_prediction> calculate_ranged_chances(
         // Make a copy of the given dispersion, apply the aiming and calculate hit confidence.
         dispersion_sources current_dispersion = dispersion;
         current_dispersion.add_range( aim_type.has_threshold ? aim_type.threshold :
-                                    aim_to_selected.recoil );
+                                      aim_to_selected.recoil );
         if( tracking_dispersion ) {
             current_dispersion.add_range( tracking_dispersion_average.avg() );
         }
@@ -2664,7 +2664,8 @@ dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
     return dispersion;
 }
 
-dispersion_sources Character::get_tracking_dispersion( const item *obj, const Creature *target, bool report, bool rng ) const
+dispersion_sources Character::get_tracking_dispersion( const item *obj, const Creature *target,
+        bool report, bool rng ) const
 {
     dispersion_sources dispersion;
     if( !target || !obj ) {
@@ -2675,12 +2676,14 @@ dispersion_sources Character::get_tracking_dispersion( const item *obj, const Cr
     const double gun_length = ( obj->length() / 1_mm );
     // x12 and 800 gram multiplier to length_factor and lifting_capacity are arbitrary figures used to produce a reasonable outcome.
     const double length_factor = ( gun_length / this->height() ) * 12;
-    const double lifting_capacity = std::max( 0.0, to_gram( static_cast<double>( get_arm_str() ) * 800_gram ) );
+    const double lifting_capacity = std::max( 0.0,
+                                    to_gram( static_cast<double>( get_arm_str() ) * 800_gram ) );
     const double weight_factor = std::max( 0.0, to_gram( obj->weight() ) / lifting_capacity );
     map &here = get_map();
     bool aware = target->sees( here, *this );
     std::string debug_awareness = aware ? _( "aware" ) : _( "unaware" );
-    bool mobile = !target->is_on_ground() && !target->has_flag( mon_flag_IMMOBILE ) && !target->has_effect_with_flag( json_flag_CANNOT_MOVE ) && !target->in_sleep_state();
+    bool mobile = !target->is_on_ground() && !target->has_flag( mon_flag_IMMOBILE ) &&
+                  !target->has_effect_with_flag( json_flag_CANNOT_MOVE ) && !target->in_sleep_state();
     const int speed = target->get_speed();
     const int dodge = target->get_dodge();
     double tracking_dispersion = 0.0;
@@ -2697,15 +2700,15 @@ dispersion_sources Character::get_tracking_dispersion( const item *obj, const Cr
         tracking_dispersion *= rng_float( 0.25, rng_max );
     }
     if( report ) {
-    add_msg_debug( debugmode::DF_RANGED,
-                "Tracking dispersion: At a distance of %d vs %s target with effective speed %d and dodge %d, length_factor %.1f and weight_factor %.2f contribute (with RNG) %.3f dispersion.",
-                trig_dist( pos_bub(), target->pos_bub() ),
-                debug_awareness,
-                speed,
-                dodge,
-                length_factor,
-                weight_factor,
-                tracking_dispersion );
+        add_msg_debug( debugmode::DF_RANGED,
+                       "Tracking dispersion: At a distance of %d vs %s target with effective speed %d and dodge %d, length_factor %.1f and weight_factor %.2f contribute (with RNG) %.3f dispersion.",
+                       trig_dist( pos_bub(), target->pos_bub() ),
+                       debug_awareness,
+                       speed,
+                       dodge,
+                       length_factor,
+                       weight_factor,
+                       tracking_dispersion );
     }
     dispersion.add_range( tracking_dispersion );
     return dispersion;
