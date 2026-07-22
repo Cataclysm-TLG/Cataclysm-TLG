@@ -1208,7 +1208,8 @@ double Character::aim_factor_from_weight( const item &gun ) const
         return 1.0;
     }
     double wielded_weight = gun.weight() / 1_gram;
-    const double effective_strength = get_arm_str() * std::clamp( (static_cast<double>( get_stamina() ) / static_cast<double>( get_stamina_max() ) ), 0.4, 1.0 );
+    const double effective_strength = get_arm_str() * std::clamp( ( static_cast<double>
+                                      ( get_stamina() ) / static_cast<double>( get_stamina_max() ) ), 0.4, 1.0 );
     const double max_weight_without_slowdown = effective_strength * 100.0;
     double factor = 1.0;
     if( wielded_weight > max_weight_without_slowdown ) {
@@ -1232,20 +1233,20 @@ double Character::aim_factor_from_length( const item &gun ) const
     const bool confined =
         in_vehicle ||
         ( is_obstacle( cur_pos + tripoint::south_east ) &&
-        is_obstacle( cur_pos + tripoint::north_west ) ) ||
+          is_obstacle( cur_pos + tripoint::north_west ) ) ||
         ( is_obstacle( cur_pos + tripoint::west ) &&
-        is_obstacle( cur_pos + tripoint::east ) ) ||
+          is_obstacle( cur_pos + tripoint::east ) ) ||
         ( is_obstacle( cur_pos + tripoint::south_west ) &&
-        is_obstacle( cur_pos + tripoint::north_east ) ) ||
+          is_obstacle( cur_pos + tripoint::north_east ) ) ||
         ( is_obstacle( cur_pos + tripoint::north ) &&
-        is_obstacle( cur_pos + tripoint::south ) );
+          is_obstacle( cur_pos + tripoint::south ) );
 
     if( !confined ) {
         return 1.0;
     }
     const double factor = std::clamp(
-        1.0 - ( length - 200.0 ) / 1125.0,
-        0.2, 1.0 );
+                              1.0 - ( length - 200.0 ) / 1125.0,
+                              0.2, 1.0 );
     return factor;
 }
 
@@ -1289,8 +1290,8 @@ double Character::aim_per_move( const item &gun, double recoil,
     // Finally multiply everything by a harsh function that is eliminated by 7.5 weapon skill.
     aim_speed /= std::max( 1.0, 2.5 - 0.2 * get_skill_level( gun_skill ) );
     // Getting some aim bar is fast, but it slows as you build it.
-    double recoil_factor = 
-       std::max( recoil / MAX_RECOIL, 1 - logarithmic_range( 0, MAX_RECOIL, recoil ) );
+    double recoil_factor =
+        std::max( recoil / MAX_RECOIL, 1 - logarithmic_range( 0, MAX_RECOIL, recoil ) );
     recoil_factor = std::pow( recoil_factor, 1.05 );
     aim_speed *= recoil_factor;
     // Add 4 max aim speed per skill up to 5 skill, then 1 per skill for skill 5-10.
@@ -1302,9 +1303,9 @@ double Character::aim_per_move( const item &gun, double recoil,
         aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_weight( gun ) );
     } else {
         aim_speed = std::min( aim_speed,
-                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_length ); 
+                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_length );
         aim_speed = std::min( aim_speed,
-                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_volume );                         
+                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_volume );
         aim_speed = std::min( aim_speed,
                               base_aim_speed_cap * aim_cache.value().get().aim_factor_from_weight );
     }
