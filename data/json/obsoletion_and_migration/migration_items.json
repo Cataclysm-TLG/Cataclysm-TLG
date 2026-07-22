@@ -4187,5 +4187,20 @@
     "type": "MIGRATION",
     "id": "salted_mollusk",
     "replace": "mollusk_smoked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_armor_dog",
+    "replace": "leather_armor_dog"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_armor_cow",
+    "replace": "leather_armor_cow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_armor_horse",
+    "replace": "leather_armor_horse"
   }
 ]

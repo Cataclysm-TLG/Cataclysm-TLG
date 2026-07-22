@@ -91,21 +91,6 @@
   {
     "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
-    "id": "leatherbone_armor_horse",
-    "copy-from": "horse_armor",
-    "color": "green",
-    "name": { "str": "boiled leather horse barding with bones", "str_pl": "boiled leather horse bardings with bones" },
-    "description": "Decorative bones affixed to leather horse barding to invoke fear in bandits and raiders and traders all!  You could put this on a friendly horse.",
-    "price": "450 USD",
-    "price_postapoc": "30 USD",
-    "material": [ "leather" ],
-    "weight": "17 kg",
-    "volume": "150 L",
-    "material_thickness": 6
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "PET_ARMOR" ],
     "id": "rubber_armor_horse",
     "copy-from": "horse_armor",
     "color": "green",
