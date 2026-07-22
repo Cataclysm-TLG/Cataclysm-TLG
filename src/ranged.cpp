@@ -2934,6 +2934,7 @@ target_handler::trajectory target_ui::run()
     if( reentered ) {
         if( !try_reacquire_target( resume_critter, initial_dst ) ) {
             // Target lost
+            you->recoil = MAX_RECOIL;
             action.clear();
             attack_was_confirmed = false;
         }
@@ -2942,7 +2943,8 @@ target_handler::trajectory target_ui::run()
     }
     set_cursor_pos( initial_dst );
     if( dst != initial_dst ) {
-        // Our target moved out of range
+        // Our target moved out of range.
+        you->recoil = MAX_RECOIL;
         action.clear();
         attack_was_confirmed = false;
     }
@@ -2957,6 +2959,7 @@ target_handler::trajectory target_ui::run()
         if( !action.empty() && !prompt_friendlies_in_lof() ) {
             // A friendly creature moved into line of fire during aim-and-shoot,
             // and player decided to stop aiming
+            you->recoil = MAX_RECOIL;
             action.clear();
             attack_was_confirmed = false;
         }
