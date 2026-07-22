@@ -2692,7 +2692,9 @@ dispersion_sources Character::get_tracking_dispersion( const item *obj, const Cr
     }
     tracking_dispersion *= distance_factor;
     if( rng ) {
-    tracking_dispersion *= rng_float( 0.25, 1.5 );
+        // Weight RNG by range so close firefights are more chaotic.
+        const double rng_max = 1.0 + ( 1.75 * distance_factor );
+        tracking_dispersion *= rng_float( 0.25, rng_max );
     }
     if( report ) {
     add_msg_debug( debugmode::DF_RANGED,

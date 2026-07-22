@@ -1074,7 +1074,7 @@ int Character::point_shooting_limit( const item &gun )const
 aim_mods_cache Character::gen_aim_mods_cache( const item &gun )const
 {
     parallax_cache parallaxes{ get_character_parallax( true ), get_character_parallax( false ) };
-    return { get_modifier( character_modifier_aim_speed_skill_mod, gun.gun_skill() ), get_modifier( character_modifier_aim_speed_dex_mod ), get_modifier( character_modifier_aim_speed_mod ), most_accurate_aiming_method_limit( gun ), aim_factor_from_length( gun ), aim_factor_from_volume( gun ), parallaxes };
+    return { get_modifier( character_modifier_aim_speed_skill_mod, gun.gun_skill() ), get_modifier( character_modifier_aim_speed_dex_mod ), get_modifier( character_modifier_aim_speed_mod ), most_accurate_aiming_method_limit( gun ), aim_factor_from_length( gun ), aim_factor_from_volume( gun ), aim_factor_from_weight( gun ), parallaxes };
 }
 
 double Character::fastest_aiming_method_speed( const item &gun, double recoil,
@@ -1296,20 +1296,14 @@ double Character::aim_per_move( const item &gun, double recoil,
     if( !use_cache ) {
         aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_length( gun ) );
         aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_volume( gun ) );
-        // aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_weight( gun ) );
+        aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_weight( gun ) );
     } else {
         aim_speed = std::min( aim_speed,
                               base_aim_speed_cap * aim_cache.value().get().aim_factor_from_length ); 
         aim_speed = std::min( aim_speed,
                               base_aim_speed_cap * aim_cache.value().get().aim_factor_from_volume );                         
-        // aim_speed = std::min( aim_speed,
-                             // base_aim_speed_cap * aim_cache.value().get().aim_factor_from_weight );
-    }
-    int stamina = get_stamina();
-    int stamina_max = get_stamina_max();
-    if( stamina < stamina_max ) {
-        double stamina_mod = std::max( 0.6, stamina_max / stamina_mod );
-        aim_speed *= stamina_mod;
+        aim_speed = std::min( aim_speed,
+                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_weight );
     }
     // Just a raw scaling factor.
     aim_speed *= 2.4;

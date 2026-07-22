@@ -418,7 +418,7 @@ struct aim_mods_cache {
     int limit;
     double aim_factor_from_length;
     double aim_factor_from_volume;
-//    double aim_factor_from_weight;
+    double aim_factor_from_weight;
     parallax_cache parallaxes;
 };
 
