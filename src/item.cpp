@@ -14111,6 +14111,7 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
 {
     // cig dies out
     if( item_counter == 0 ) {
+        bool remove = false;
         if( carrier != nullptr ) {
             carrier->add_msg_if_player( m_neutral, _( "You finish your %s." ), type_name() );
         }
@@ -14119,14 +14120,14 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
             if( !this->is_null() ) {
                 here.add_item_or_charges( carrier->pos_bub(), *this );
                 on_drop( carrier->pos_bub(), here );
-                carrier->i_rem( this );
+                remove = true;
             }
         } else {
             type->invoke( carrier, *this, pos, "transform" );
             if( !this->is_null() ) {
                 here.add_item_or_charges( carrier->pos_bub(), *this );
                 on_drop( carrier->pos_bub(), here );
-                carrier->i_rem( this );
+                remove = true;
             }
         }
         if( typeId() == itype_joint_lit && carrier != nullptr ) {
@@ -14135,7 +14136,7 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
             weed_msg( *carrier );
         }
         active = false;
-        return false;
+        return remove;
     }
 
     if( carrier != nullptr ) {
