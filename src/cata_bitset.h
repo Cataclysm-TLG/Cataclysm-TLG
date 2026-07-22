@@ -41,10 +41,13 @@ class tiny_bitset
         // In 64 bit this is 256 bits. Seems unlikely we'll need more than this.
         static constexpr size_t kMinimumBlockPerAlloc = 4;
 
+        static constexpr size_t blocks_needed( size_t bits ) noexcept {
+            return ( bits + kBitsPerBlock - 1 ) / kBitsPerBlock;
+        }
+
         tiny_bitset() noexcept : tiny_bitset( kMaxInlineBits ) { }
 
         explicit tiny_bitset( size_t initial_capacity ) noexcept {
-            storage_ = kStorageIsInlineMask;
             resize( initial_capacity );
         }
 
@@ -60,7 +63,7 @@ class tiny_bitset
                 storage_ = rhs.storage_;
             } else {
                 resize( rhs.capacity() );
-                memcpy( bits(), rhs.bits(), rhs.size() / kBitsPerBlock );
+                memcpy( bits(), rhs.bits(), blocks_needed( rhs.size() ) * sizeof( block_t ) );
             }
         }
 
@@ -76,7 +79,7 @@ class tiny_bitset
                 storage_ = rhs.storage_;
             } else {
                 resize( rhs.capacity() );
-                memcpy( bits(), rhs.bits(), rhs.size() / kBitsPerBlock );
+                memcpy( bits(), rhs.bits(), blocks_needed( rhs.size() ) * sizeof( block_t ) );
             }
             return *this;
         }
@@ -124,6 +127,18 @@ class tiny_bitset
 
         void resize( size_t requested_bits ) noexcept {
             if( is_inline() && requested_bits <= kMaxInlineBits ) {
+                const size_t old_size = size();
+                if (requested_bits > old_size) {
+                    // Initialize newly exposed bits, so they don't unexpectedly hold old data.
+                    if (old_size == 0) {
+                        storage_ &= kMetaMask;
+                    } else {
+                        storage_ &= ( 
+                            ~( ( kLowBit << ( kBitsPerBlock - old_size ) ) - 1) | 
+                            kMetaMask
+                        );
+                    }
+                }
                 set_size( requested_bits );
                 return;
             }
@@ -246,7 +261,7 @@ class tiny_bitset
         // the existing value in what is written.
         template<typename Op>
         void map( Op &&op ) {
-            size_t bits_used = size();
+            const size_t bits_used = size();
             if( bits_used == 0 ) {
                 return;
             }
@@ -256,40 +271,21 @@ class tiny_bitset
                 return;
             }
 
-            // The compiler auto vectorizer is too smart and inserts a bunch of code
-            // to handle various cases of how big the data is. We expect things to be
-            // small, so we can hand roll a loop which doesn't blow up code size or
-            // insert a huge number of conditionals into the hot path, and probably
-            // not measurably slower than the fully expanded vectorized code which handles
-            // 128 bytes (1,024 bits!) in one pass.
-            size_t used_blocks = bits_used / kBitsPerBlock;
-            // The final block requires special handling.
-            size_t used_bits_in_final_block = bits_used % kBitsPerBlock;
-            size_t used_whole_blocks = used_bits_in_final_block > 0 &&
-                                       used_blocks > 0 ? used_blocks - 1 : used_blocks;
+            const size_t whole_blocks = bits_used / kBitsPerBlock;
+            const size_t partial_bits = bits_used % kBitsPerBlock;            
 
-            // Process 4 at a time for some manual unrolling.
-            block_t *blocks = bits();
-            size_t i = 0;
-            for( size_t end = used_whole_blocks; i + 3 < end; i += 4 ) {
-                op( blocks[i + 0] );
-                op( blocks[i + 1] );
-                op( blocks[i + 2] );
-                op( blocks[i + 3] );
-            }
-            // final whole blocks that don't fit in unrolled loop.
-            for( ; i < used_whole_blocks; ++i ) {
+            block_t *const blocks = bits();
+            for(size_t i = 0 ; i < whole_blocks; ++i ) {
                 op( blocks[i] );
             }
             // final, partial block
-            block_t unused_mask;
-            if( used_bits_in_final_block != 0 ) {
+            if( partial_bits != 0 ) {
                 // Create mask which is all bits set for bits not used in capacity.
                 // If we used N bits, create a mask of the k - N least significant bits by
                 // shifting a 1 k-N times, into the k-N'th bit _index_ (or k-N+1'th bit) then
                 // subtracting one, setting k-N of the least significant bits to 1.
-                unused_mask = ( kLowBit << ( kBitsPerBlock - used_bits_in_final_block ) ) - 1;
-                op( blocks[i], unused_mask );
+                const block_t unused_mask = ( kLowBit << ( kBitsPerBlock - partial_bits ) ) - 1;
+                op( blocks[whole_blocks], unused_mask );
             }
         }
 
@@ -327,7 +323,7 @@ class tiny_bitset
         // way, have a nickel get yourself a better computer.
         // This could probably be some extremely complicated thing with a union and other
         // stuff but some constraints and assumptions make it work out simply.
-        uintptr_t storage_;
+        uintptr_t storage_ = kStorageIsInlineMask;
 
         static_assert( std::numeric_limits<uintptr_t>::radix == 2, "Non binary integers are forbidden" );
         static_assert( std::numeric_limits<uintptr_t>::digits > 0, "Must be > 0 bits are in uintptr_t" );

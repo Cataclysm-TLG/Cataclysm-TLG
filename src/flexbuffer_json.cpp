@@ -263,8 +263,11 @@ void JsonObject::report_unvisited() const
         skipped_members.reserve( visited_fields_bitset_.size() );
         tiny_bitset::block_t *bits = visited_fields_bitset_.bits();
         size_t block_idx = 0;
-        for( size_t last_whole_block = visited_fields_bitset_.size() / tiny_bitset::kBitsPerBlock;
-             block_idx < last_whole_block; ++block_idx ) {
+
+        const size_t whole_blocks = visited_fields_bitset_.size() / tiny_bitset::kBitsPerBlock;
+        const size_t partial_bits = visited_fields_bitset_.size() % tiny_bitset::kBitsPerBlock;
+
+        for(; block_idx < whole_blocks; ++block_idx ) {
             tiny_bitset::block_t block = bits[block_idx];
             tiny_bitset::block_t mask = tiny_bitset::kLowBit << ( tiny_bitset::kBitsPerBlock - 1 );
             for( size_t bit_idx = 0; bit_idx < tiny_bitset::kBitsPerBlock; ++bit_idx ) {
@@ -275,14 +278,16 @@ void JsonObject::report_unvisited() const
             }
         }
 
-        tiny_bitset::block_t block = bits[block_idx];
-        tiny_bitset::block_t mask = tiny_bitset::kLowBit << ( tiny_bitset::kBitsPerBlock - 1 );
-        for( size_t bit_idx = 0, end = visited_fields_bitset_.size() % tiny_bitset::kBitsPerBlock;
-             bit_idx < end; ++bit_idx ) {
-            if( !( block & mask ) ) {
-                skipped_members.emplace_back( block_idx * tiny_bitset::kBitsPerBlock + bit_idx );
+        if (partial_bits > 0) {
+            tiny_bitset::block_t block = bits[block_idx];
+            tiny_bitset::block_t mask = tiny_bitset::kLowBit << ( tiny_bitset::kBitsPerBlock - 1 );
+            for( size_t bit_idx = 0, end = visited_fields_bitset_.size() % tiny_bitset::kBitsPerBlock;
+                bit_idx < end; ++bit_idx ) {
+                if( !( block & mask ) ) {
+                    skipped_members.emplace_back( block_idx * tiny_bitset::kBitsPerBlock + bit_idx );
+                }
+                mask >>= 1;
             }
-            mask >>= 1;
         }
 
         // Don't error on skipped comments.
