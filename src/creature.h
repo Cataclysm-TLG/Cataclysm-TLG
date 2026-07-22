@@ -323,7 +323,7 @@ class Creature : public viewer
         void setpos( map &here, const tripoint_bub_ms &p, bool check_gravity = true );
         void setpos( const tripoint_abs_ms &p, bool check_gravity = true );
 
-        // Convert size to int. TODO: use this everywhere instead of enuming every time.
+        // Convert size to int. Useful when working in classes like avatar so we don't have to jump through hoops.
         int enum_size() const;
         /** Checks if the creature fits into a given tile. Set the boolean argument to true if the creature would barely fit. */
         bool can_move_to_vehicle_tile( const tripoint_abs_ms &loc, bool &cramped ) const;
