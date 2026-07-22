@@ -4190,8 +4190,8 @@
   },
   {
     "type": "MIGRATION",
-    "id": "leatherbone_armor_dog",
-    "replace": "leather_armor_dog"
+    "id": "leatherbone_harness_dog",
+    "replace": "leather_harness_dog"
   },
   {
     "type": "MIGRATION",
