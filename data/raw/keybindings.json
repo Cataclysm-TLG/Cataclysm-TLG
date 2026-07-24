@@ -3014,6 +3014,12 @@
   },
   {
     "type": "keybinding",
+    "name": "Autokite",
+    "category": "DEFAULTMODE",
+    "id": "autokite"
+  },
+  {
+    "type": "keybinding",
     "name": "Main menu",
     "category": "DEFAULTMODE",
     "id": "main_menu",

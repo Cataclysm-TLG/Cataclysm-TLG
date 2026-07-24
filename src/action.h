@@ -203,6 +203,8 @@ enum action_id : int {
     ACTION_SORT_ARMOR,
     /** Auto select and attack hostile creature within range */
     ACTION_AUTOATTACK,
+    /** Automatically kite enemies: retreat, wait, strike once, repeat */
+    ACTION_AUTOKITE,
     /**@}*/
 
     // Long-term / special actions

@@ -392,6 +392,8 @@ std::string action_ident( action_id act )
             return "CLICK_AND_DRAG";
         case ACTION_AUTOATTACK:
             return "autoattack";
+        case ACTION_AUTOKITE:
+            return "autokite";
         case ACTION_MAIN_MENU:
             return "main_menu";
         case ACTION_DIARY:
@@ -973,6 +975,7 @@ action_id handle_action_menu( map &here )
             REGISTER_ACTION( ACTION_PICK_STYLE );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_TRAVEL_MODE );
             REGISTER_ACTION( ACTION_TOGGLE_SAFEMODE );
+            REGISTER_ACTION( ACTION_AUTOKITE );
             REGISTER_ACTION( ACTION_TOGGLE_AUTOSAFE );
             REGISTER_ACTION( ACTION_IGNORE_ENEMY );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_FEATURES );

@@ -503,6 +503,14 @@
     "can_resume": false
   },
   {
+    "id": "ACT_AUTOKITE",
+    "type": "activity_type",
+    "activity_level": "MODERATE_EXERCISE",
+    "verb": "kiting",
+    "based_on": "neither",
+    "can_resume": false
+  },
+  {
     "id": "ACT_TRAVELLING",
     "type": "activity_type",
     "activity_level": "NO_EXERCISE",

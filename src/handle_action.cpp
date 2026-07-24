@@ -3098,6 +3098,19 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             avatar_action::autoattack( player_character, here );
             break;
 
+        case ACTION_AUTOKITE: {
+            const std::optional<tripoint_rel_ms> dir =
+                choose_direction( _( "Autokite drifting which direction?" ) );
+            if( !dir ) {
+                break;
+            }
+            if( query_yn(
+                    _( "Start autokiting?  You will retreat, wait, and strike, drifting in the chosen direction.  Any damage, grab, or knockdown cancels it." ) ) ) {
+                player_character.assign_activity( autokite_activity_actor( *dir ) );
+            }
+            break;
+        }
+
         default:
             break;
     }

@@ -1712,6 +1712,40 @@ class oxytorch_activity_actor : public activity_actor
         }
 };
 
+class autokite_activity_actor : public activity_actor
+{
+    public:
+        autokite_activity_actor() = default;
+        explicit autokite_activity_actor( const tripoint_rel_ms &bias ) : bias( bias ) {}
+        const activity_id &get_type() const override {
+            static const activity_id ACT_AUTOKITE( "ACT_AUTOKITE" );
+            return ACT_AUTOKITE;
+        }
+
+        void start( player_activity &act, Character &who ) override;
+        void do_turn( player_activity &act, Character &who ) override;
+        void finish( player_activity &, Character & ) override {}
+
+        std::unique_ptr<activity_actor> clone() const override {
+            return std::make_unique<autokite_activity_actor>( *this );
+        }
+
+        void serialize( JsonOut &jsout ) const override;
+        static std::unique_ptr<activity_actor> deserialize( JsonValue &jsin );
+
+    private:
+        // Preferred drift direction chosen by the player.
+        tripoint_rel_ms bias;
+        // Strict strike/retreat alternation: never swing twice in a row.
+        bool just_attacked = false;
+        // Consecutive turns spent standing still; ends the kite when nothing
+        // ever comes into reach.
+        int turns_waited = 0;
+        // Baselines for the abort-on-anything-bad checks; -1 = not yet sampled.
+        int last_hp = -1;
+        int last_pain = -1;
+};
+
 class meditate_activity_actor : public activity_actor
 {
     public:

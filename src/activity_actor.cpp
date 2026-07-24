@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <climits>
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
@@ -120,6 +121,7 @@
 
 static const activity_id ACT_AIM( "ACT_AIM" );
 static const activity_id ACT_AUTODRIVE( "ACT_AUTODRIVE" );
+static const activity_id ACT_AUTOKITE( "ACT_AUTOKITE" );
 static const activity_id ACT_BASH( "ACT_BASH" );
 static const activity_id ACT_BIKERACK_RACKING( "ACT_BIKERACK_RACKING" );
 static const activity_id ACT_BIKERACK_UNRACKING( "ACT_BIKERACK_UNRACKING" );
@@ -203,11 +205,13 @@ static const damage_type_id damage_stab( "stab" );
 static const efftype_id effect_docile( "docile" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_gliding( "gliding" );
+static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_paid( "paid" );
 static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_sensor_stun( "sensor_stun" );
 static const efftype_id effect_sheared( "sheared" );
 static const efftype_id effect_sleep( "sleep" );
+static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_tied( "tied" );
 static const efftype_id effect_took_thorazine( "took_thorazine" );
 static const efftype_id effect_worked_on( "worked_on" );
@@ -6796,6 +6800,176 @@ std::unique_ptr<activity_actor> reel_cable_activity_actor::deserialize( JsonValu
     return actor.clone();
 }
 
+void autokite_activity_actor::start( player_activity &, Character &who )
+{
+    who.add_msg_if_player( m_info,
+                           _( "You begin kiting: retreat, wait, strike.  Anything unexpected will snap you out of it." ) );
+}
+
+void autokite_activity_actor::do_turn( player_activity &act, Character &who )
+{
+    map &here = get_map();
+    avatar *you = who.as_avatar();
+    if( you == nullptr ) {
+        act.set_to_null();
+        return;
+    }
+
+    // First tick: sample baselines.
+    if( last_hp < 0 ) {
+        last_hp = who.get_hp();
+        last_pain = who.get_pain();
+    }
+
+    // Abort the moment anything bad happens: the whole point is that the
+    // automation is more paranoid than tired hands are.
+    const auto bail = [&]( const std::string & why ) {
+        who.add_msg_if_player( m_warning, why );
+        act.set_to_null();
+    };
+    if( who.get_hp() < last_hp ) {
+        bail( _( "You were hurt — autokite canceled." ) );
+        return;
+    }
+    if( who.get_pain() > last_pain ) {
+        bail( _( "Your pain is rising — autokite canceled." ) );
+        return;
+    }
+    if( who.has_effect( effect_grabbed ) ) {
+        bail( _( "You were grabbed — autokite canceled!" ) );
+        return;
+    }
+    if( who.has_effect( effect_downed ) || who.has_effect( effect_stunned ) ) {
+        bail( _( "You are knocked off balance — autokite canceled!" ) );
+        return;
+    }
+    if( who.get_stamina() < who.get_stamina_max() / 5 ) {
+        bail( _( "You are too winded to keep kiting — autokite canceled." ) );
+        return;
+    }
+    last_hp = who.get_hp();
+    last_pain = who.get_pain();
+
+    const std::vector<Creature *> hostiles = who.get_hostile_creatures( 20 );
+    if( hostiles.empty() ) {
+        who.add_msg_if_player( m_good, _( "No enemies in sight.  Autokite complete." ) );
+        act.set_to_null();
+        return;
+    }
+
+    // Strike phase: hit once, never twice in a row.
+    if( !just_attacked ) {
+        const item_location weapon = who.get_wielded_item();
+        const int reach = weapon ? weapon->current_reach_range( who ) : 1;
+        Creature *target = nullptr;
+        int target_dist = INT_MAX;
+        for( Creature *critter : who.get_targetable_creatures( reach, true ) ) {
+            if( critter->attitude_to( who ) != Creature::Attitude::HOSTILE ) {
+                continue;
+            }
+            const int dist = rl_dist( who.pos_bub(), critter->pos_bub() );
+            if( dist < target_dist ) {
+                target_dist = dist;
+                target = critter;
+            }
+        }
+        if( target != nullptr ) {
+            just_attacked = true;
+            turns_waited = 0;
+            if( target_dist <= 1 ) {
+                who.melee_attack( *target, true );
+            } else {
+                who.reach_attack( target->pos_bub() );
+            }
+            return;
+        }
+    }
+    just_attacked = false;
+
+    // A tile is safe when no hostile could hit us there without moving first.
+    const auto threat_distance = [&hostiles]( const tripoint_bub_ms & p ) {
+        int min_dist = INT_MAX;
+        for( const Creature *critter : hostiles ) {
+            min_dist = std::min( min_dist, rl_dist( p, critter->pos_bub() ) );
+        }
+        return min_dist;
+    };
+    const bool here_safe = threat_distance( who.pos_bub() ) >= 2;
+
+    // Retreat phase: among safe adjacent tiles prefer the player's chosen
+    // drift direction, then distance from the pack.
+    creature_tracker &creatures = get_creature_tracker();
+    tripoint_bub_ms best_tile = who.pos_bub();
+    int best_score = INT_MIN;
+    for( const tripoint_bub_ms &p : here.points_in_radius( who.pos_bub(), 1 ) ) {
+        if( p == who.pos_bub() || p.z() != who.pos_bub().z() ) {
+            continue;
+        }
+        if( here.impassable( p ) || g->is_dangerous_tile( p ) ||
+            creatures.creature_at( p ) != nullptr ) {
+            continue;
+        }
+        const int threat = threat_distance( p );
+        if( threat < 2 ) {
+            continue;
+        }
+        const tripoint_rel_ms d = p - who.pos_bub();
+        const int score = ( d.x() * bias.x() + d.y() * bias.y() ) * 10 +
+                          std::min( threat, 10 );
+        if( score > best_score ) {
+            best_score = score;
+            best_tile = p;
+        }
+    }
+
+    if( !here_safe && best_score > INT_MIN ) {
+        turns_waited = 0;
+        const tripoint_rel_ms delta = best_tile - who.pos_bub();
+        avatar_action::move( *you, here, delta );
+        if( who.get_moves() > 0 ) {
+            // The step was refused for some reason; don't spin.
+            who.pause();
+        }
+        return;
+    }
+    if( here_safe ) {
+        // Wait phase: let them come to you, but not forever.
+        if( ++turns_waited > 30 ) {
+            who.add_msg_if_player( m_info,
+                                   _( "Nothing is coming for you.  Autokite ends." ) );
+            act.set_to_null();
+            return;
+        }
+        who.pause();
+        return;
+    }
+    bail( _( "You're cornered — nowhere safe to retreat.  Autokite canceled!" ) );
+}
+
+void autokite_activity_actor::serialize( JsonOut &jsout ) const
+{
+    jsout.start_object();
+    jsout.member( "bias_x", bias.x() );
+    jsout.member( "bias_y", bias.y() );
+    jsout.member( "just_attacked", just_attacked );
+    jsout.member( "turns_waited", turns_waited );
+    jsout.member( "last_hp", last_hp );
+    jsout.member( "last_pain", last_pain );
+    jsout.end_object();
+}
+
+std::unique_ptr<activity_actor> autokite_activity_actor::deserialize( JsonValue &jsin )
+{
+    autokite_activity_actor actor;
+    JsonObject data = jsin.get_object();
+    actor.bias = tripoint_rel_ms( data.get_int( "bias_x" ), data.get_int( "bias_y" ), 0 );
+    actor.just_attacked = data.get_bool( "just_attacked" );
+    actor.turns_waited = data.get_int( "turns_waited" );
+    actor.last_hp = data.get_int( "last_hp" );
+    actor.last_pain = data.get_int( "last_pain" );
+    return actor.clone();
+}
+
 void meditate_activity_actor::start( player_activity &act, Character & )
 {
     act.moves_total = to_moves<int>( 20_minutes );
@@ -9285,6 +9459,7 @@ const std::unordered_map<activity_id, std::unique_ptr<activity_actor>( * )( Json
 deserialize_functions = {
     { ACT_AIM, &aim_activity_actor::deserialize },
     { ACT_AUTODRIVE, &autodrive_activity_actor::deserialize },
+    { ACT_AUTOKITE, &autokite_activity_actor::deserialize },
     { ACT_BASH, &bash_activity_actor::deserialize },
     { ACT_BIKERACK_RACKING, &bikerack_racking_activity_actor::deserialize },
     { ACT_BIKERACK_UNRACKING, &bikerack_unracking_activity_actor::deserialize },
