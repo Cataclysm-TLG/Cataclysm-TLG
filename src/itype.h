@@ -176,9 +176,6 @@ struct islot_comestible {
         /** list of addictions and their potential */
         std::map<addiction_id, int> addictions;
 
-        /** stimulant effect */
-        int stim = 0;
-
         /**fatigue altering effect*/
         int fatigue_mod = 0;
 

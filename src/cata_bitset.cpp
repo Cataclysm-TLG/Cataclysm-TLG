@@ -40,12 +40,12 @@ void tiny_bitset::resize_heap( size_t requested_bits ) noexcept
         cata_assert( data != nullptr );
     }
 
-    if (requested_bits > old_size) {
+    if( requested_bits > old_size ) {
         size_t first_block = old_size / kBitsPerBlock;
         const size_t first_bit = old_size % kBitsPerBlock;
         block_t *new_storage = data + 1;
 
-        if (first_bit != 0) {
+        if( first_bit != 0 ) {
             // Clear the bits in the first block that are beyond the old size.
             block_t new_suffix = ( kLowBit << ( kBitsPerBlock - first_bit ) ) - 1;
             new_storage[first_block] &= ~new_suffix;
@@ -54,7 +54,7 @@ void tiny_bitset::resize_heap( size_t requested_bits ) noexcept
 
         const size_t end_block = blocks_needed - 1;
 
-        if (first_block < end_block) {
+        if( first_block < end_block ) {
             // Clear all blocks between the first and last block.
             memset( new_storage + first_block, 0, sizeof( block_t ) * ( end_block - first_block ) );
         }

@@ -481,9 +481,6 @@ class const_talker
         virtual int get_size() const {
             return 0;
         }
-        virtual int get_stim() const {
-            return 0;
-        }
         virtual int get_addiction_intensity( const addiction_id & ) const {
             return 0;
         }
@@ -829,7 +826,6 @@ class talker: virtual public const_talker
         virtual void set_addiction_turns( const addiction_id &, int ) {}
         virtual void mod_stored_kcal( int, bool ) {}
         virtual void set_stored_kcal( int ) {}
-        virtual void set_stim( int ) {}
         virtual void set_thirst( int ) {}
         virtual void say( const std::string & ) {}
         virtual void shout( const std::string & = "", bool = false ) {}

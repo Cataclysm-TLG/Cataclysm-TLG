@@ -4394,6 +4394,22 @@
   },
   {
     "type": "effect_type",
+    "id": "bionic_painkiller",
+    "max_intensity": 150,
+    "max_duration": "30 s",
+    "int_add_val": 1,
+    "base_mods": {
+      "pkill_max_val": [ 1 ],
+      "pkill_min": [ 1 ],
+      "pkill_max": [ 1 ],
+      "pkill_tick": [ 1 ]
+    },
+    "scaling_mods": {
+      "pkill_max_val": [ 1 ]
+    }
+  },
+  {
+    "type": "effect_type",
     "id": "toxin_buildup",
     "name": [ "", "Concerning symptoms", "Unnerving symptoms" ],
     "desc": [
@@ -4411,7 +4427,7 @@
     "//": "Pain relief increases linearly. Vomit chance increases and then becomes impossible due to CNS depression. Sleep is mostly impossible but ramps up sharply at i4 toward 100% at i7.",
     "name": [
       "Opioid Painkillers",
-      "Opipid Buzz",
+      "Opioid Buzz",
       "Opioid High",
       "Heavy Opioid High",
       "Nodding Out",

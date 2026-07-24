@@ -127,6 +127,7 @@ static const bionic_id bio_water_extractor( "bio_water_extractor" );
 
 static const efftype_id effect_assisted( "assisted" );
 static const efftype_id effect_asthma( "asthma" );
+static const efftype_id effect_bionic_painkiller( "bionic_painkiller" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_heating_bionic( "heating_bionic" );
@@ -1724,13 +1725,11 @@ static bool attempt_recharge( Character &p, bionic &bio, units::energy &amount )
 
 void Character::process_bionic( bionic &bio )
 {
-
     // Only powered bionics should be processed
     if( !bio.powered ) {
         burn_fuel( bio );
         return;
     }
-
     if( bio.get_uid() == get_weapon_bionic_uid() ) {
         const bool wrong_weapon_wielded = weapon.typeId() != bio.get_weapon().typeId() ||
                                           !weapon.has_flag( flag_NO_UNWIELD );
@@ -1832,16 +1831,13 @@ void Character::process_bionic( bionic &bio )
             }
         }
     } else if( bio.id == bio_painkiller ) {
-        const int pkill = get_painkiller();
-        const int pain = get_pain();
+        const int pain = get_perceived_pain();
         const units::energy trigger_cost = bio.info().power_trigger;
-        int max_pkill = std::min( 150, pain );
-        if( pkill < max_pkill ) {
-            mod_painkiller( 1 );
-            if( one_in( 10 ) ) {
-                mod_fatigue( 1 );
-            }
-            mod_power_level( -trigger_cost );
+        int max_applied = std::min( 150, pain );
+        int painkiller_intensity = get_effect_int( effect_bionic_painkiller );
+            if( painkiller_intensity < max_applied ) {
+                add_effect( effect_bionic_painkiller, 1_seconds, true, 150 );
+                mod_power_level( -trigger_cost );
         }
     } else if( bio.id == bio_evap ) {
         if( is_underwater() ) {

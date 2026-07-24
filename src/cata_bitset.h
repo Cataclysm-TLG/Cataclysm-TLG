@@ -128,15 +128,15 @@ class tiny_bitset
         void resize( size_t requested_bits ) noexcept {
             if( is_inline() && requested_bits <= kMaxInlineBits ) {
                 const size_t old_size = size();
-                if (requested_bits > old_size) {
+                if( requested_bits > old_size ) {
                     // Initialize newly exposed bits, so they don't unexpectedly hold old data.
-                    if (old_size == 0) {
+                    if( old_size == 0 ) {
                         storage_ &= kMetaMask;
                     } else {
-                        storage_ &= ( 
-                            ~( ( kLowBit << ( kBitsPerBlock - old_size ) ) - 1) | 
-                            kMetaMask
-                        );
+                        storage_ &= (
+                                        ~( ( kLowBit << ( kBitsPerBlock - old_size ) ) - 1 ) |
+                                        kMetaMask
+                                    );
                     }
                 }
                 set_size( requested_bits );
@@ -272,10 +272,10 @@ class tiny_bitset
             }
 
             const size_t whole_blocks = bits_used / kBitsPerBlock;
-            const size_t partial_bits = bits_used % kBitsPerBlock;            
+            const size_t partial_bits = bits_used % kBitsPerBlock;
 
             block_t *const blocks = bits();
-            for(size_t i = 0 ; i < whole_blocks; ++i ) {
+            for( size_t i = 0 ; i < whole_blocks; ++i ) {
                 op( blocks[i] );
             }
             // final, partial block
