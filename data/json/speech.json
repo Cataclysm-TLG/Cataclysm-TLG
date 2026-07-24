@@ -1723,6 +1723,48 @@
   },
   {
     "type": "speech",
+    "speaker": [ "mon_shoggoth", "mon_mi_go", "mon_mi_go_abductor", "mon_mi_go_surgeon", "mon_mi_go_guard", "mon_mi_go_myrmidon" ],
+    "sound": "\"HhhhHheee…\"",
+    "volume": 10
+  },
+  {
+    "type": "speech",
+    "speaker": [ "mon_shoggoth", "mon_mi_go", "mon_mi_go_abductor", "mon_mi_go_surgeon", "mon_mi_go_guard", "mon_mi_go_myrmidon" ],
+    "sound": "\"He…he…haha…\"",
+    "volume": 10
+  },
+  {
+    "type": "speech",
+    "speaker": [ "mon_shoggoth", "mon_mi_go", "mon_mi_go_abductor", "mon_mi_go_surgeon", "mon_mi_go_guard", "mon_mi_go_myrmidon" ],
+    "sound": "\"U…uugh…\"",
+    "volume": 10
+  },
+  {
+    "type": "speech",
+    "speaker": [ "mon_shoggoth", "mon_mi_go", "mon_mi_go_abductor", "mon_mi_go_surgeon", "mon_mi_go_guard", "mon_mi_go_myrmidon" ],
+    "sound": "\"Gllllrrrr…\"",
+    "volume": 10
+  },
+  {
+    "type": "speech",
+    "speaker": [ "mon_shoggoth", "mon_mi_go", "mon_mi_go_abductor", "mon_mi_go_surgeon", "mon_mi_go_guard", "mon_mi_go_myrmidon" ],
+    "sound": "\"He…lp…\"",
+    "volume": 10
+  },
+  {
+    "type": "speech",
+    "speaker": [ "mon_shoggoth", "mon_mi_go", "mon_mi_go_abductor", "mon_mi_go_surgeon", "mon_mi_go_guard", "mon_mi_go_myrmidon" ],
+    "sound": "\"C-can't…\"",
+    "volume": 10
+  },
+  {
+    "type": "speech",
+    "speaker": [ "mon_shoggoth", "mon_mi_go", "mon_mi_go_abductor", "mon_mi_go_surgeon", "mon_mi_go_guard", "mon_mi_go_myrmidon" ],
+    "sound": "\"Hahaha!\"",
+    "volume": 20
+  },
+  {
+    "type": "speech",
     "speaker": [ "mon_broken_cyborg", "mon_mi_go", "mon_mi_go_abductor" ],
     "sound": "\"WHY!  WHY, WHYYY!\"",
     "volume": 32
