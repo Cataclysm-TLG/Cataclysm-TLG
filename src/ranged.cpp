@@ -2123,16 +2123,17 @@ static int print_ranged_chance( const catacurses::window &w, int line_number,
             mvwprintw( w, point( column_number, line_number ), label );
             column_number += utf8_width( label ) + 1; // 1 for whitespace after 'Symbols:'
         }
-
         print_confidence_ratings( w, sorted.front().ratings, line_number, width, column_number, col );
-
+        if( time != 0 ) {
+            std::string ras_time = string_format( "<color_light_gray>%1s</color>: %2s",
+                                                  _( "Moves to load" ), time );
+            print_colored_text( w, point( 1, line_number++ ), col, col, ras_time );
+        }
         for( const aim_type_prediction &out : sorted ) {
             std::string col_hl = out.is_default ? "light_green" : "light_gray";
-            std::string desc = time ==  0 ?
-                               string_format( "<color_white>[%s]</color> <color_%s>%s %s</color> | %s: <color_light_blue>%3d</color>",
-                                              out.hotkey, col_hl, out.name, _( "Aim" ), _( "Moves to fire" ), out.moves ) :
-                               string_format( "<color_white>[%s]</color> <color_%s>%s %s</color> | %s: <color_light_blue>%3d</color> (%d)",
-                                              out.hotkey, col_hl, out.name, _( "Aim" ), _( "Moves to fire" ), out.moves, time );
+            std::string desc =
+                string_format( "<color_white>[%s]</color> <color_%s>%s %s</color> | %s: <color_light_blue>%3d</color>",
+                               out.hotkey, col_hl, out.name, _( "Aim" ), _( "Moves to fire" ), out.moves );
 
             print_colored_text( w, point( 1, line_number++ ), col, col, desc );
 

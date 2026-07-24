@@ -2050,10 +2050,21 @@
     "activity_level": "MODERATE_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_OTHER",
-    "name": "slingshot ammunition",
-    "description": "Recipes related to creating pebbles, pellets, and other small objects for use in slings and slingshots.",
+    "name": "sling ammunition",
+    "description": "Recipes related to creating pebbles, pellets, and other small ammunition for slings.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "marble", "bearing", "pebble_clay", "pebble" ]
+    "nested_category_data": [ "pebble", "pebble_clay", "pebble_lead" ]
+  },
+  {
+    "id": "nested_ammo_gravel",
+    "type": "nested_category",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_AMMO",
+    "subcategory": "CSC_AMMO_OTHER",
+    "name": "slingshot ammunition",
+    "description": "Recipes related to creating gravel, bearings, and other tiny ammunition for slingshots.",
+    "skill_used": "fabrication",
+    "nested_category_data": [ "gravel", "marble", "bearing" ]
   },
   {
     "id": "nested_adjustable_wrenches",
