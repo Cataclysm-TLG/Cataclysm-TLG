@@ -4398,16 +4398,8 @@
     "max_intensity": 150,
     "max_duration": "30 s",
     "int_add_val": 1,
-    "base_mods": {
-      "pkill_max_val": [ 1 ],
-      "pkill_min": [ 1 ],
-      "pkill_max": [ 1 ],
-      "pkill_tick": [ 1 ]
-    },
-    "scaling_mods": {
-      "pkill_max_val": [ 1 ],
-      "per_mod": [ -0.03 ]
-    }
+    "base_mods": { "pkill_max_val": [ 1 ], "pkill_min": [ 1 ], "pkill_max": [ 1 ], "pkill_tick": [ 1 ] },
+    "scaling_mods": { "pkill_max_val": [ 1 ], "per_mod": [ -0.03 ] }
   },
   {
     "type": "effect_type",

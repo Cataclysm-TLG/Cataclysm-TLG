@@ -41,7 +41,12 @@
     "difficulty": 4,
     "time": "210 m",
     "book_learn": [ [ "textbook_weapwest", 3 ] ],
-    "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 }, { "id": "HAMMER", "level": 1 } ],
+    "qualities": [
+      { "id": "SAW_W", "level": 1 },
+      { "id": "CUT", "level": 2 },
+      { "id": "FILE", "level": 1 },
+      { "id": "HAMMER", "level": 1 }
+    ],
     "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 2 } ],
     "components": [ [ [ "wooden_post_long", 1 ] ], [ [ "pipe_fittings", 1 ] ], [ [ "nail", 2 ] ], [ [ "spike", 1 ] ] ]
   },
@@ -55,7 +60,12 @@
     "book_learn": [ [ "textbook_weapwest", 3 ] ],
     "difficulty": 3,
     "time": "180 m",
-    "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "FILE", "level": 1 }, { "id": "CHISEL_WOOD", "level": 2 }, { "id": "HAMMER", "level": 1 } ],
+    "qualities": [
+      { "id": "SAW_W", "level": 1 },
+      { "id": "FILE", "level": 1 },
+      { "id": "CHISEL_WOOD", "level": 2 },
+      { "id": "HAMMER", "level": 1 }
+    ],
     "tools": [ [ [ "fake_lathe", -1 ] ] ],
     "components": [ [ [ "wooden_post_long", 1 ] ], [ [ "pipe_fittings", 1 ] ], [ [ "nail", 2 ] ], [ [ "spike", 1 ] ] ],
     "byproducts": [ [ "splinter", 30 ] ],

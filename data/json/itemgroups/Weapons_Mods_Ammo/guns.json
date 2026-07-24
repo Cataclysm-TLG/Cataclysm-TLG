@@ -1575,7 +1575,14 @@
       { "item": "glock_31", "damage": [ -1, 3 ], "dirt": [ 0, 7050 ], "prob": 4 },
       { "item": "p226_357sig", "damage": [ -1, 3 ], "dirt": [ 0, 7050 ], "prob": 2 },
       { "item": "p320_357sig", "damage": [ -1, 3 ], "dirt": [ 0, 7050 ], "prob": 2 },
-      { "item": "glock_22", "ammo-item": "40sw", "prob": 100, "charges": [ 0, 15 ], "damage": [ -1, 3 ], "dirt": [ 0, 7050 ] },
+      {
+        "item": "glock_22",
+        "ammo-item": "40sw",
+        "prob": 100,
+        "charges": [ 0, 15 ],
+        "damage": [ -1, 3 ],
+        "dirt": [ 0, 7050 ]
+      },
       { "item": "px4_40", "damage": [ -1, 3 ], "dirt": [ 0, 7050 ], "prob": 5 },
       { "item": "sig_40", "damage": [ -1, 3 ], "dirt": [ 0, 7050 ], "prob": 10 },
       { "item": "glock_21", "damage": [ -1, 3 ], "dirt": [ 0, 7050 ], "prob": 10 },

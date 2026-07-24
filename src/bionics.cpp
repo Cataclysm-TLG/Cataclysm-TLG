@@ -1835,9 +1835,9 @@ void Character::process_bionic( bionic &bio )
         const units::energy trigger_cost = bio.info().power_trigger;
         int max_applied = std::min( 150, pain );
         int painkiller_intensity = get_effect_int( effect_bionic_painkiller );
-            if( painkiller_intensity < max_applied ) {
-                add_effect( effect_bionic_painkiller, 1_seconds, true, 150 );
-                mod_power_level( -trigger_cost );
+        if( painkiller_intensity < max_applied ) {
+            add_effect( effect_bionic_painkiller, 1_seconds, true, 150 );
+            mod_power_level( -trigger_cost );
         }
     } else if( bio.id == bio_evap ) {
         if( is_underwater() ) {

@@ -161,7 +161,7 @@
     "flags": [ "SMELLS", "HEARS", "PLASTIC", "NO_BREATHE", "NOHEAD", "NOGIB" ],
     "armor": { "bash": 10, "electric": 2 }
   },
-    {
+  {
     "id": "mon_shoggoth",
     "type": "MONSTER",
     "name": { "str": "shoggoth" },
