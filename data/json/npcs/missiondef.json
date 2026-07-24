@@ -55,7 +55,7 @@
       ]
     },
     "end": { "effect": [ { "u_sell_item": "inhaler" }, "stop_guard", { "set_npc_rule": "investigate_noises" }, "npc_thankful" ] },
-    "fail": { "effect": "npc_die" }
+    "fail": { "effect": { "if": "has_beta", "then": "npc_die" } }
   },
   {
     "id": "MISSION_GET_ANTIBIOTICS",
@@ -107,7 +107,7 @@
         "npc_thankful"
       ]
     },
-    "fail": { "effect": "npc_die" }
+    "fail": { "effect": { "if": "has_beta", "then": "npc_die" } }
   },
   {
     "id": "MISSION_GET_BLACK_BOX",
