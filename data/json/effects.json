@@ -4405,7 +4405,8 @@
       "pkill_tick": [ 1 ]
     },
     "scaling_mods": {
-      "pkill_max_val": [ 1 ]
+      "pkill_max_val": [ 1 ],
+      "per_mod": [ -0.03 ]
     }
   },
   {
