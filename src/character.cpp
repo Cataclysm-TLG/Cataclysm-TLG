@@ -291,6 +291,7 @@ static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 static const field_type_str_id field_fd_clairvoyant( "fd_clairvoyant" );
 static const field_type_str_id field_fd_web( "fd_web" );
 
+static const flag_id json_flag_CROSSBOW( "CROSSBOW" );
 static const flag_id json_flag_PIT( "PIT" );
 
 static const itype_id fuel_type_animal( "animal" );
@@ -1213,25 +1214,28 @@ double Character::aim_factor_from_weight( const item &gun ) const
     const double effective_strength = get_arm_str() * std::clamp( ( static_cast<double>
                                       ( get_stamina() ) / static_cast<double>( get_stamina_max() ) ), 0.4, 1.0 );
     double weight_allowance_multiplier = 100.0;
-    bool using_bipod = false;
-    for( const item *mod : gun.gunmods() ) {
-        if( mod->has_flag( flag_BIPOD ) ) {
-            map &here = get_map();
-            if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, pos_bub( here ) ) ||
-                 is_prone() ) {
-                using_bipod = true;
-            } else {
-                const optional_vpart_position vp = here.veh_at( pos_abs( ) );
-                using_bipod = vp->vehicle().has_part( pos_abs( ), "MOUNTABLE" );
+    if( gun.gun_skill() != skill_throw && ( gun.gun_skill() != skill_archery ||
+                                            gun.has_flag( json_flag_CROSSBOW ) ) ) {
+        bool using_bipod = false;
+        for( const item *mod : gun.gunmods() ) {
+            if( mod->has_flag( flag_BIPOD ) ) {
+                map &here = get_map();
+                if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, pos_bub( here ) ) ||
+                    is_prone() ) {
+                    using_bipod = true;
+                } else {
+                    const optional_vpart_position vp = here.veh_at( pos_abs( ) );
+                    using_bipod = vp->vehicle().has_part( pos_abs( ), "MOUNTABLE" );
+                }
             }
         }
-    }
-    if( using_bipod ) {
-        weight_allowance_multiplier = 200.0;
-    } else if( is_on_ground() ) {
-        weight_allowance_multiplier = 160.0;
-    } else if( is_crouching() ) {
-        weight_allowance_multiplier = 120.0;
+        if( using_bipod ) {
+            weight_allowance_multiplier = 200.0;
+        } else if( is_on_ground() ) {
+            weight_allowance_multiplier = 160.0;
+        } else if( is_crouching() ) {
+            weight_allowance_multiplier = 120.0;
+        }
     }
     const double max_weight_without_slowdown = effective_strength * weight_allowance_multiplier;
     double factor = 1.0;
