@@ -3818,7 +3818,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
         chosen_fish->fish_population -= 1;
         if( chosen_fish->fish_population <= 0 ) {
             Character *who_ptr = &who;
-            g->catch_a_monster( chosen_fish, who.pos_bub(), who_ptr, 50_hours );
+            g->catch_a_monster( chosen_fish, who.pos_bub(), who_ptr );
         } else {
             if( chosen_fish->type != nullptr ) {
                 caught_corpse( who, here, *( chosen_fish->type ) );
