@@ -759,7 +759,46 @@ void avatar_action::autokite_step( avatar &you, map &m )
         return;
     }
 
-    if( !struck_last_step && !you.has_flag( json_flag_CANNOT_ATTACK ) ) {
+    // Retreat only ever follows a strike.
+    if( struck_last_step ) {
+        struck_last_step = false;
+        const auto threat_distance = [&hostiles]( const tripoint_bub_ms & p ) {
+            int min_dist = INT_MAX;
+            for( const Creature *critter : hostiles ) {
+                min_dist = std::min( min_dist, rl_dist( p, critter->pos_bub() ) );
+            }
+            return min_dist;
+        };
+        const int here_threat = threat_distance( you.pos_bub() );
+        creature_tracker &creatures = get_creature_tracker();
+        tripoint_bub_ms best_tile = you.pos_bub();
+        int best_threat = here_threat;
+        for( const tripoint_bub_ms &p : m.points_in_radius( you.pos_bub(), 1 ) ) {
+            if( p == you.pos_bub() || p.z() != you.pos_bub().z() ) {
+                continue;
+            }
+            if( m.impassable( p ) || g->is_dangerous_tile( p ) ||
+                creatures.creature_at( p ) != nullptr ) {
+                continue;
+            }
+            const int threat = threat_distance( p );
+            if( threat > best_threat ) {
+                best_threat = threat;
+                best_tile = p;
+            }
+        }
+        if( best_threat > here_threat ) {
+            move( you, m, tripoint_rel_ms( ( best_tile - you.pos_bub() ).xy(), 0 ) );
+            return;
+        }
+        // No turn passes here: getting cornered must never quietly cost time.
+        add_msg( m_bad, _( "You are surrounded — nowhere better to retreat to!" ) );
+        popup( _( "You are surrounded — nowhere better to retreat to!" ) );
+        return;
+    }
+
+    // Strike the first press something is in reach.
+    if( !you.has_flag( json_flag_CANNOT_ATTACK ) ) {
         const item_location weapon = you.get_wielded_item();
         const int reach = weapon ? weapon->reach_range( you ) : std::max( 1,
                           static_cast<int>( you.calculate_by_enchantment( 1,
@@ -790,40 +829,12 @@ void avatar_action::autokite_step( avatar &you, map &m )
             return;
         }
     }
-    struck_last_step = false;
 
-    const auto threat_distance = [&hostiles]( const tripoint_bub_ms & p ) {
-        int min_dist = INT_MAX;
-        for( const Creature *critter : hostiles ) {
-            min_dist = std::min( min_dist, rl_dist( p, critter->pos_bub() ) );
-        }
-        return min_dist;
-    };
-    const int here_threat = threat_distance( you.pos_bub() );
-    creature_tracker &creatures = get_creature_tracker();
-    tripoint_bub_ms best_tile = you.pos_bub();
-    int best_threat = here_threat;
-    for( const tripoint_bub_ms &p : m.points_in_radius( you.pos_bub(), 1 ) ) {
-        if( p == you.pos_bub() || p.z() != you.pos_bub().z() ) {
-            continue;
-        }
-        if( m.impassable( p ) || g->is_dangerous_tile( p ) ||
-            creatures.creature_at( p ) != nullptr ) {
-            continue;
-        }
-        const int threat = threat_distance( p );
-        if( threat > best_threat ) {
-            best_threat = threat;
-            best_tile = p;
-        }
+    // Nothing in reach and nothing to retreat from: hold position.
+    if( g->check_safe_mode_allowed() ) {
+        add_msg( m_info, _( "You hold your ground, waiting for them to come." ) );
+        you.pause();
     }
-    if( best_threat > here_threat ) {
-        move( you, m, tripoint_rel_ms( ( best_tile - you.pos_bub() ).xy(), 0 ) );
-        return;
-    }
-    // No turn passes here: getting cornered must never quietly cost time.
-    add_msg( m_bad, _( "You are surrounded — nowhere better to retreat to!" ) );
-    popup( _( "You are surrounded — nowhere better to retreat to!" ) );
 }
 
 // TODO: Move data/functions related to targeting out of game class
