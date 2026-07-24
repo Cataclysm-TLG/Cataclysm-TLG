@@ -3797,8 +3797,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
     map &here = get_map();
     constexpr auto caught_corpse = []( Character & who, map & here, const mtype & corpse_type ) {
         item corpse = item::make_corpse( corpse_type.id,
-                                         calendar::turn + rng( 0_turns,
-                                                 3_hours ) );
+                                         calendar::turn );
         corpse.set_var( "activity_var", who.name );
         item_location loc = here.add_item_or_charges_ret_loc( who.pos_bub(), corpse );
         if( who.is_avatar() ) {
@@ -3808,7 +3807,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
             who.may_activity_occupancy_after_end_items_loc.push_back( loc );
         }
     };
-    //if the vector is empty (no fish around) the player is still given a small chance to get a (let us say it was hidden) fish
+    // If the vector is empty (no fish around) the player is still given a small chance to get a (let us say it was hidden) fish.
     if( fishables.empty() ) {
         const std::vector<mtype_id> fish_group = MonsterGroupManager::GetMonstersFromGroup(
                     GROUP_FISH, true );
@@ -3819,7 +3818,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
         chosen_fish->fish_population -= 1;
         if( chosen_fish->fish_population <= 0 ) {
             Character *who_ptr = &who;
-            g->catch_a_monster( chosen_fish, who.pos_bub(), who_ptr, 50_hours );
+            g->catch_a_monster( chosen_fish, who.pos_bub(), who_ptr );
         } else {
             if( chosen_fish->type != nullptr ) {
                 caught_corpse( who, here, *( chosen_fish->type ) );
