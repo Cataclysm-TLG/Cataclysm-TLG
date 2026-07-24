@@ -168,6 +168,7 @@ static const bionic_id bio_armor_torso( "bio_armor_torso" );
 static const bionic_id bio_ground_sonar( "bio_ground_sonar" );
 static const bionic_id bio_memory( "bio_memory" );
 static const bionic_id bio_ods( "bio_ods" );
+static const bionic_id bio_painkiller( "bio_painkiller" );
 static const bionic_id bio_railgun( "bio_railgun" );
 static const bionic_id bio_shock_absorber( "bio_shock_absorber" );
 static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
@@ -213,6 +214,7 @@ static const efftype_id effect_alarm_clock( "alarm_clock" );
 static const efftype_id effect_bandaged( "bandaged" );
 static const efftype_id effect_beartrap( "beartrap" );
 static const efftype_id effect_bile( "bile" );
+static const efftype_id effect_bionic_painkiller( "bionic_painkiller" );
 static const efftype_id effect_bite( "bite" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_blind( "blind" );
@@ -11604,6 +11606,9 @@ void Character::process_effects()
     if( ( has_effect( effect_winded ) || in_sleep_state() ) &&
         has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
         release_grapple();
+    }
+    if( has_effect( effect_bionic_painkiller ) && !has_active_bionic( bio_painkiller ) ) {
+        remove_effect( effect_bionic_painkiller );
     }
     // Clear hardcoded bonuses from last turn
     // Recalculated in process_one_effect
