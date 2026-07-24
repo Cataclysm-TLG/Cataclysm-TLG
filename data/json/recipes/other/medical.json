@@ -165,6 +165,7 @@
     "book_learn": [ [ "atomic_survival", 1 ], [ "textbook_firstaid", 2 ], [ "emergency_book", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" } ],
     "time": "30 s",
+    "charges": 10,
     "components": [ [ [ "water_clean", 10 ] ], [ [ "bleach", 1 ] ] ]
   },
   {
