@@ -91,7 +91,7 @@
           { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 8,
+        "encumbrance": 9,
         "coverage": 90,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
       }
@@ -369,7 +369,7 @@
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 10,
+        "encumbrance": 9,
         "coverage": 80,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
         "rigid_layer_only": true
@@ -446,11 +446,11 @@
       {
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
-          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 }
         ],
         "covers": [ "arm_l", "arm_r" ],
         "encumbrance": 8,
-        "coverage": 75,
+        "coverage": 95,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
         "rigid_layer_only": true
       }
@@ -1034,7 +1034,7 @@
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 8,
+        "encumbrance": 6,
         "coverage": 95,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
       }
