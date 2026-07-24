@@ -3014,6 +3014,12 @@
   },
   {
     "type": "keybinding",
+    "name": "Toggle kiting mode",
+    "category": "DEFAULTMODE",
+    "id": "toggle_autokite"
+  },
+  {
+    "type": "keybinding",
     "name": "Main menu",
     "category": "DEFAULTMODE",
     "id": "main_menu",

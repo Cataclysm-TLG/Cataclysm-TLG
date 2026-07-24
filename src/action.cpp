@@ -290,6 +290,8 @@ std::string action_ident( action_id act )
             return "auto_travel_mode";
         case ACTION_TOGGLE_SAFEMODE:
             return "safemode";
+        case ACTION_TOGGLE_AUTOKITE:
+            return "toggle_autokite";
         case ACTION_TOGGLE_AUTOSAFE:
             return "autosafe";
         case ACTION_TOGGLE_THIEF_MODE:
@@ -973,6 +975,7 @@ action_id handle_action_menu( map &here )
             REGISTER_ACTION( ACTION_PICK_STYLE );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_TRAVEL_MODE );
             REGISTER_ACTION( ACTION_TOGGLE_SAFEMODE );
+            REGISTER_ACTION( ACTION_TOGGLE_AUTOKITE );
             REGISTER_ACTION( ACTION_TOGGLE_AUTOSAFE );
             REGISTER_ACTION( ACTION_IGNORE_ENEMY );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_FEATURES );

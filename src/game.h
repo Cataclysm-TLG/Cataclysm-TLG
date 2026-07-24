@@ -1209,6 +1209,9 @@ class game
         bool auto_travel_mode = false;
         bool queue_screenshot = false; // NOLINT(cata-serialize)
         safe_mode_type safe_mode;
+        // When true, the autoattack action performs a kite step
+        // (strike once when in reach, otherwise retreat) instead.
+        bool kiting_tab = false;
 
         // tracks time since last monster seen to allow automatically
         // reactivating safe mode.

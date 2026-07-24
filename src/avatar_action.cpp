@@ -716,6 +716,90 @@ void avatar_action::autoattack( avatar &you, map &m )
     you.reach_attack( best.pos_bub() );
 }
 
+void avatar_action::autokite_step( avatar &you, map &m )
+{
+    // Strike only when something first comes into reach, then retreat.  The
+    // flag resets whenever the kite is broken off for a turn or more.
+    static time_point last_step = calendar::turn_zero;
+    static bool struck_last_step = false;
+    if( calendar::turn - last_step > 1_turns ) {
+        struck_last_step = false;
+    }
+    last_step = calendar::turn;
+
+    const std::vector<Creature *> hostiles = you.get_hostile_creatures( 20 );
+    if( hostiles.empty() ) {
+        add_msg( m_info, _( "No enemies in sight to kite." ) );
+        return;
+    }
+
+    if( !struck_last_step && !you.has_flag( json_flag_CANNOT_ATTACK ) ) {
+        const item_location weapon = you.get_wielded_item();
+        const int reach = weapon ? weapon->reach_range( you ) : std::max( 1,
+                          static_cast<int>( you.calculate_by_enchantment( 1,
+                                            enchant_vals::mod::MELEE_RANGE_MODIFIER ) ) );
+        std::vector<Creature *> critters = you.get_targetable_creatures( reach, true );
+        critters.erase( std::remove_if( critters.begin(), critters.end(), [&you,
+        reach]( const Creature * c ) {
+            if( reach == 1 && !you.is_adjacent( c, true ) ) {
+                return true;
+            }
+            if( !c->is_npc() ) {
+                return false;
+            }
+            return !dynamic_cast<const npc &>( *c ).is_enemy();
+        } ), critters.end() );
+        if( !critters.empty() ) {
+            Creature &best = **std::max_element( critters.begin(), critters.end(),
+            []( const Creature * l, const Creature * r ) {
+                return rate_critter( *l ) > rate_critter( *r );
+            } );
+            struck_last_step = true;
+            const tripoint_rel_ms diff = best.pos_bub() - you.pos_bub();
+            if( std::abs( diff.x() ) <= 1 && std::abs( diff.y() ) <= 1 && diff.z() == 0 ) {
+                move( you, m, tripoint_rel_ms( diff.xy(), 0 ) );
+            } else {
+                you.reach_attack( best.pos_bub() );
+            }
+            return;
+        }
+    }
+    struck_last_step = false;
+
+    const auto threat_distance = [&hostiles]( const tripoint_bub_ms & p ) {
+        int min_dist = INT_MAX;
+        for( const Creature *critter : hostiles ) {
+            min_dist = std::min( min_dist, rl_dist( p, critter->pos_bub() ) );
+        }
+        return min_dist;
+    };
+    const int here_threat = threat_distance( you.pos_bub() );
+    creature_tracker &creatures = get_creature_tracker();
+    tripoint_bub_ms best_tile = you.pos_bub();
+    int best_threat = here_threat;
+    for( const tripoint_bub_ms &p : m.points_in_radius( you.pos_bub(), 1 ) ) {
+        if( p == you.pos_bub() || p.z() != you.pos_bub().z() ) {
+            continue;
+        }
+        if( m.impassable( p ) || g->is_dangerous_tile( p ) ||
+            creatures.creature_at( p ) != nullptr ) {
+            continue;
+        }
+        const int threat = threat_distance( p );
+        if( threat > best_threat ) {
+            best_threat = threat;
+            best_tile = p;
+        }
+    }
+    if( best_threat > here_threat ) {
+        move( you, m, tripoint_rel_ms( ( best_tile - you.pos_bub() ).xy(), 0 ) );
+        return;
+    }
+    // No turn passes here: getting cornered must never quietly cost time.
+    add_msg( m_bad, _( "You are surrounded — nowhere better to retreat to!" ) );
+    popup( _( "You are surrounded — nowhere better to retreat to!" ) );
+}
+
 // TODO: Move data/functions related to targeting out of game class
 bool avatar_action::can_fire_weapon( avatar &you, const map &m, const item &weapon )
 {

@@ -38,6 +38,10 @@ void swim( map &m, avatar &you, const tripoint_bub_ms &p );
 
 void autoattack( avatar &you, map &m );
 
+/** One kite step: strike once when a hostile first comes into reach, otherwise
+ *  retreat to the adjacent tile farthest from all hostiles. */
+void autokite_step( avatar &you, map &m );
+
 void mend( avatar &you, item_location loc );
 
 /**

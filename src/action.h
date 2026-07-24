@@ -227,6 +227,8 @@ enum action_id : int {
     ACTION_TOGGLE_AUTO_TRAVEL_MODE,
     /** Turn safemode on/off, while leaving autosafemode intact */
     ACTION_TOGGLE_SAFEMODE,
+    /** Toggle kiting mode: autoattack key retreats/strikes instead */
+    ACTION_TOGGLE_AUTOKITE,
     /** Turn automatic triggering of safemode on/off */
     ACTION_TOGGLE_AUTOSAFE,
     /** Toggle permanent attitude to stealing */

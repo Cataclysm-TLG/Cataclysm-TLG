@@ -3095,7 +3095,20 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_AUTOATTACK:
-            avatar_action::autoattack( player_character, here );
+            if( kiting_tab ) {
+                avatar_action::autokite_step( player_character, here );
+            } else {
+                avatar_action::autoattack( player_character, here );
+            }
+            break;
+
+        case ACTION_TOGGLE_AUTOKITE:
+            kiting_tab = !kiting_tab;
+            if( kiting_tab ) {
+                add_msg( m_info, _( "Kiting mode ON.  The autoattack key now strikes once and retreats." ) );
+            } else {
+                add_msg( m_info, _( "Kiting mode OFF." ) );
+            }
             break;
 
         default:
