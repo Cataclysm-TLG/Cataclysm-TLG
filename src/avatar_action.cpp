@@ -68,6 +68,7 @@ static const bionic_id bio_railgun( "bio_railgun" );
 static const character_modifier_id
 character_modifier_melee_stamina_cost_mod( "melee_stamina_cost_mod" );
 
+static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
@@ -726,6 +727,31 @@ void avatar_action::autokite_step( avatar &you, map &m )
         struck_last_step = false;
     }
     last_step = calendar::turn;
+
+    // A kite only works while you can freely move and outpace the enemy.
+    // Anything that breaks that assumption must wake the player up with a
+    // blocking popup, never quietly fail.  No game time passes here.
+    const auto kite_broken = [&]( const std::string & why ) {
+        add_msg( m_bad, why );
+        popup( why );
+    };
+    if( you.has_effect( effect_grabbed ) ) {
+        kite_broken( _( "You are GRABBED!  The kite is broken — break free before anything else." ) );
+        return;
+    }
+    if( you.has_effect( effect_downed ) ) {
+        kite_broken( _( "You are KNOCKED DOWN!  The kite is broken — get up!" ) );
+        return;
+    }
+    if( you.has_effect( effect_stunned ) || you.has_effect( effect_psi_stunned ) ) {
+        kite_broken( _( "You are STUNNED!  The kite is broken — you cannot trust your feet." ) );
+        return;
+    }
+    if( you.has_effect( effect_winded ) ||
+        you.get_stamina() < you.get_stamina_max() / 4 ) {
+        kite_broken( _( "You are too WINDED to keep kiting — you can no longer outpace them." ) );
+        return;
+    }
 
     const std::vector<Creature *> hostiles = you.get_hostile_creatures( 20 );
     if( hostiles.empty() ) {
