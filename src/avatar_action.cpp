@@ -777,6 +777,12 @@ void avatar_action::autokite_step( avatar &you, map &m )
             if( p == you.pos_bub() || p.z() != you.pos_bub().z() ) {
                 continue;
             }
+            // Axial steps only: diagonals cost more moves, which is exactly
+            // the margin that lets a pursuer catch up and grab you.
+            const tripoint_rel_ms d = p - you.pos_bub();
+            if( d.x() != 0 && d.y() != 0 ) {
+                continue;
+            }
             if( m.impassable( p ) || g->is_dangerous_tile( p ) ||
                 creatures.creature_at( p ) != nullptr ) {
                 continue;
