@@ -954,6 +954,8 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "copy-from": "disinfectant",
+    "weight": "260 g",
+    "charges": 1,
     "description": "A makeshift antiseptic made from bleach and water.  The volatile chlorine compounds break down quickly, so it won't stay good for long.",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "DECAYS" ],
     "//": "Gentler but less effective than ethanol.",
