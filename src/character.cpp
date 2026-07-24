@@ -2754,11 +2754,11 @@ void Character::process_turn()
         const time_point now = calendar::turn;
         time_duration decay_time = 0_days;
         if( has_trait( trait_NOMAD ) ) {
-            decay_time = 7_days;
+            decay_time = 2_days;
         } else if( has_trait( trait_NOMAD2 ) ) {
-            decay_time = 14_days;
+            decay_time = 5_days;
         } else if( has_trait( trait_NOMAD3 ) ) {
-            decay_time = 28_days;
+            decay_time = 10_days;
         }
         auto it = overmap_time.begin();
         while( it != overmap_time.end() ) {
@@ -5617,8 +5617,26 @@ void Character::update_needs( int rate_multiplier )
         set_stim( std::max( current_stim - rate_multiplier, 0 ) );
     }
 
-    if( get_painkiller() > 0 ) {
-        mod_painkiller( -std::min( get_painkiller(), rate_multiplier ) );
+    if( !pkill_sources.empty() ) {
+        for( pkill_source &source : pkill_sources ) {
+            source.amount = std::max( 0, source.amount - rate_multiplier );
+        }
+        pkill_sources.erase(
+            std::remove_if(
+                pkill_sources.begin(),
+                pkill_sources.end(),
+        []( const pkill_source & source ) {
+            return source.amount == 0;
+        }
+            ),
+        pkill_sources.end()
+        );
+        int total_pkill = 0;
+        for( const pkill_source &source : pkill_sources ) {
+            total_pkill += source.amount;
+        }
+        set_painkiller( total_pkill );
+        recalculate_painkiller();
     }
 
     if( get_bp_effect_mod() > 0 ) {
@@ -7364,7 +7382,7 @@ void Character::update_stamina( int turns )
     // But mouth encumbrance interferes, even with mutated stamina.
     stamina_recovery += stamina_multiplier * std::max( 1.0f,
                         effective_regen_rate * get_modifier( character_modifier_stamina_recovery_breathing_mod ) );
-    // only apply stim-related and mutant stamina boosts if you don't have bionic lungs
+    // only apply stim-related and mutant stamina boosts if you don't have bionic lungs.
     if( !has_bionic( bio_synlungs ) ) {
         stamina_recovery = enchantment_cache->modify_value( enchant_vals::mod::REGEN_STAMINA,
                            stamina_recovery );
@@ -10276,9 +10294,27 @@ bool Character::has_fire( const int quantity ) const
     return false;
 }
 
-void Character::mod_painkiller( int npkill )
+void Character::mod_painkiller( const efftype_id &source, int amount, int max )
 {
-    set_painkiller( pkill + npkill );
+    auto iter = std::find_if(
+                    pkill_sources.begin(),
+                    pkill_sources.end(),
+    [&]( const pkill_source & s ) {
+        return s.source == source;
+    }
+                );
+
+    if( iter == pkill_sources.end() ) {
+        pkill_sources.push_back( { source, 0 } );
+        iter = std::prev( pkill_sources.end() );
+    }
+
+    iter->amount = std::clamp( iter->amount + amount, 0, max );
+
+    pkill = 0;
+    for( const pkill_source &s : pkill_sources ) {
+        pkill += s.amount;
+    }
 }
 
 void Character::set_painkiller( int npkill )
@@ -10295,6 +10331,15 @@ void Character::set_painkiller( int npkill )
             on_stat_change( "perceived_pain", cur_pain );
         }
     }
+}
+
+void Character::recalculate_painkiller()
+{
+    int total = 0;
+    for( const pkill_source &source : pkill_sources ) {
+        total += source.amount;
+    }
+    set_painkiller( total );
 }
 
 int Character::get_painkiller() const
@@ -11302,17 +11347,6 @@ void Character::process_one_effect( effect &it, bool is_new )
         }
     }
 
-    // Handle stim
-    val = get_effect( "STIM", reduced );
-    if( val != 0 ) {
-        mod = 1;
-        if( is_new || it.activated( calendar::turn, "STIM", val, reduced, mod ) ) {
-            mod_stim( bound_mod_to_vals( get_stim(), val, it.get_max_val( "STIM", reduced ),
-                                         it.get_min_val( "STIM", reduced ) ) );
-        }
-    }
-
-
     // Handle hunger
     val = get_effect( "HUNGER", reduced );
     if( val != 0 ) {
@@ -11459,8 +11493,13 @@ void Character::process_one_effect( effect &it, bool is_new )
     if( val != 0 ) {
         mod = it.get_addict_mod( "PKILL", addiction_level( addiction_opioid ) );
         if( is_new || it.activated( calendar::turn, "PKILL", val, reduced, mod ) ) {
-            mod_painkiller( bound_mod_to_vals( get_painkiller(), val, it.get_max_val( "PKILL", reduced ), 0 ) );
+            mod_painkiller(
+                it.get_id(),
+                val,
+                it.get_max_val( "PKILL", reduced )
+            );
         }
+        recalculate_painkiller();
     }
 
     // Handle Blood Pressure

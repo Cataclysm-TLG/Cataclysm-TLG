@@ -3357,11 +3357,14 @@ class Character : public Creature, public visitable
         scenttype_id get_type_of_scent() const;
         /**restore scent after masked_scent effect run out or is removed by water*/
         void restore_scent();
-        /** Modifies intensity of painkillers  */
-        void mod_painkiller( int npkill );
-        /** Sets intensity of painkillers  */
+
+        /** Modifies intensity of painkillers from a given source.  */
+        void mod_painkiller( const efftype_id &source, int amount, int max );
+        /** Sets intensity of painkillers.  */
         void set_painkiller( int npkill );
-        /** Returns intensity of painkillers  */
+        /** Recalculates painkillers from all effects. */
+        void recalculate_painkiller();
+        /** Returns intensity of painkillers.  */
         int get_painkiller() const;
         void react_to_felt_pain( int intensity );
 
@@ -4309,7 +4312,14 @@ class Character : public Creature, public visitable
         mutable bool using_lifting_assist = false;
 
         int stim;
-        int pkill;
+
+        struct pkill_source {
+            efftype_id source;
+            int amount;
+        };
+
+        int pkill;                 // Current overall painkiller value.
+        std::vector<pkill_source> pkill_sources;  // Contributions per effect.
 
         int bp_effect_mod = 0;
         int heart_rate_effect_mod = 0;

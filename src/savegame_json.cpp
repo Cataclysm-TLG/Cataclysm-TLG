@@ -773,7 +773,6 @@ void Character::load( const JsonObject &data )
     }
 
     //energy
-    data.read( "stim", stim );
     data.read( "stamina", stamina );
 
     // stats through kills
@@ -1424,7 +1423,6 @@ void Character::store( JsonOut &json ) const
         json.member( "fetch_data", things_to_fetch );
     }
 
-    json.member( "stim", stim );
     json.member( "type_of_scent", type_of_scent );
     json.member( "focus_pool", focus_pool );
 

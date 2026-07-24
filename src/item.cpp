@@ -2518,12 +2518,6 @@ void item::med_info( const item *med_item, std::vector<iteminfo> &info, const it
         info.emplace_back( "MED", _( "Health: " ), healthy_bar( med_com->healthy ) );
     }
 
-    if( med_com->stim != 0 && parts->test( iteminfo_parts::MED_STIMULATION ) ) {
-        std::string name = string_format( "%s<stat>%s</stat>", _( "Stimulation: " ),
-                                          med_com->stim > 0 ? _( "Upper" ) : _( "Downer" ) );
-        info.emplace_back( "MED", name );
-    }
-
     if( parts->test( iteminfo_parts::MED_PORTIONS ) ) {
         info.emplace_back( "MED", _( "Portions: " ),
                            std::abs( static_cast<int>( med_item->count() ) * batch ) );

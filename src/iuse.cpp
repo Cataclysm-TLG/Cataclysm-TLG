@@ -989,7 +989,6 @@ std::optional<int> iuse::oxygen_bottle( Character *p, item *it, const tripoint_b
     } else if( p->has_effect( effect_asthma ) ) {
         p->remove_effect( effect_asthma );
     }
-    p->mod_painkiller( 2 );
     return 1;
 }
 
@@ -1226,7 +1225,6 @@ static void marloss_common( Character &p, item &it, const trait_id &current_colo
         p.mod_fatigue( 5 );
     } else if( effect <= 6 ) { // Radiation cleanse is below
         p.add_msg_if_player( m_good, _( "You feel better all over." ) );
-        p.mod_painkiller( 30 );
         p.mod_pain( -40 );
         if( effect == 6 ) {
             p.set_rad( 0 );
@@ -1377,7 +1375,6 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint_bub_ms & )
         p->add_msg_if_player( m_neutral,
                               _( "It tastes amazing, and you finish it quickly." ) );
         p->add_msg_if_player( m_good, _( "You feel better all over." ) );
-        p->mod_painkiller( 30 );
         p->set_rad( 0 );
         p->healall( 4 ); // Can't make you a whole new person, but not for lack of trying
         p->add_msg_if_player( m_good,
@@ -1444,9 +1441,9 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint_bub_ms & )
             p->mod_fatigue( 5 );
             p->add_morale( morale_marloss, 25, 200 ); // still covers up mutation pain
         }
-    } else if( p->has_trait( trait_THRESH_MYCUS ) ) {
-        p->mod_painkiller( 5 );
-    } else { // In case someone gets one without having been adapted first.
+    }
+    if( !p->has_trait( trait_THRESH_MYCUS ) ) {
+        // In case someone gets one without having been adapted first.
         // Marloss is the Mycus' method of co-opting humans.  Mycus fruit is for symbiotes' maintenance and development.
         p->add_msg_if_player(
             _( "This tastes really weird!  You're not sure it's good for you…" ) );
@@ -4926,7 +4923,6 @@ std::optional<int> iuse::jet_injector( Character *p, item *it, const tripoint_bu
         p->add_msg_if_player( _( "You inject yourself with the jet injector." ) );
         // Intensity is 2 here because intensity = 1 is the comedown
         p->add_effect( effect_jetinjector, 20_minutes, false, 2 );
-        p->mod_painkiller( 20 );
         p->healall( 5 );
         p->vitamin_mod( vitamin_amphetamine, 18 );
     }
@@ -4954,7 +4950,6 @@ std::optional<int> iuse::stimpack( Character *p, item *it, const tripoint_bub_ms
         p->add_msg_if_player( _( "You inject yourself with the stimulants." ) );
         // Intensity is 2 here because intensity = 1 is the comedown.
         p->add_effect( effect_stimpack, 25_minutes, false, 2 );
-        p->mod_painkiller( 2 );
         p->mod_fatigue( -100 );
         p->mod_stamina( p->get_stamina_max() * 0.20 ); // 20% of max stamina.
         p->vitamin_mod( vitamin_amphetamine, 10 );

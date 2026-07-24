@@ -2187,6 +2187,7 @@ bool Creature::remove_effect( const efftype_id &eff_id, const bodypart_id &bp )
             }
         }
         get_event_bus().send<event_type::character_loses_effect>( ch->getID(), bp.id(), eff_id );
+        ch->recalculate_painkiller();
     }
 
     // bp_null means remove all of a given effect id
