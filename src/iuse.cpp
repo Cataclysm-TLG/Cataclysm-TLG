@@ -1794,7 +1794,7 @@ std::optional<int> iuse::fish_trap_tick( Character *p, item *it, const tripoint_
             return 0;
         }
 
-        //get the fishables around the trap's spot
+        // Get the fishables around the trap's spot.
         std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub(
                     MAX_VIEW_DISTANCE, pos );
         std::vector<monster *> fishables = g->get_fishable_monsters( fishable_locations );
@@ -1811,20 +1811,14 @@ std::optional<int> iuse::fish_trap_tick( Character *p, item *it, const tripoint_
                                               calendar::turn ) );
                 }
             } else {
-                //there will always be a chance that the player will get lucky and catch a fish
-                //not existing in the fishables vector. (maybe it was in range, but wandered off)
-                //lets say it is a 5% chance per fish to catch
+                // There will always be a chance that the player will get lucky and catch a fish
+                // not existing in the fishables vector, as fish can always be hiding or whatever.
                 if( one_in( 20 ) ) {
                     const std::vector<mtype_id> fish_group = MonsterGroupManager::GetMonstersFromGroup(
                                 GROUP_FISH, true );
                     const mtype_id &fish_mon = random_entry_ref( fish_group );
-                    //Yes, we can put fishes in the trap like knives in the boot,
-                    //and then get fishes via activation of the item,
-                    //but it's not as comfortable as if you just put fishes in the same tile with the trap.
-                    //Also: corpses and comestibles do not rot in containers like this, but on the ground they will rot.
-                    //we don't know when it was caught so use a random turn
                     here.add_item_or_charges( pos, item::make_corpse( fish_mon, calendar::turn ) );
-                    break; //this can happen only once
+                    break;
                 }
             }
         }
