@@ -1574,18 +1574,16 @@ void game::set_driving_view_offset( const point_rel_ms &p )
         driving_view_offset.raw(); // TODO: Implement -= etc. for relative coordinates.
 }
 
-void game::catch_a_monster( monster *fish, const tripoint_bub_ms &pos, Character *p,
-                            const time_duration &catch_duration ) // catching function
+void game::catch_a_monster( monster *fish, const tripoint_bub_ms &pos, Character *p )
 {
     map &here = get_map();
 
-    //spawn the corpse, rotten by a part of the duration
-    here.add_item_or_charges( pos, item::make_corpse( fish->type->id, calendar::turn + rng( 0_turns,
-                              catch_duration ) ) );
+    // Apawn the corpse, rotten by a part of the duration.
+    here.add_item_or_charges( pos, item::make_corpse( fish->type->id, calendar::turn ) );
     if( u.sees( here, pos ) ) {
         u.add_msg_if_player( m_good, _( "You caught a %s." ), fish->type->nname() );
     }
-    //quietly kill the caught
+    // Quietly kill whatever we caught.
     fish->no_corpse_quiet = true;
     fish->die( &here, p );
 }
