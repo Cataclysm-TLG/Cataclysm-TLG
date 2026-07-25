@@ -24,7 +24,6 @@
 #include "ammo.h"
 #include "avatar.h"
 #include "bionics.h"
-#include "bodygraph.h"
 #include "bodypart.h"
 #include "calendar.h"
 #include "cata_assert.h"
@@ -134,8 +133,6 @@ static const ammotype ammo_money( "money" );
 static const ammotype ammo_plutonium( "plutonium" );
 
 static const bionic_id bio_digestion( "bio_digestion" );
-
-static const bodygraph_id bodygraph_full_body_iteminfo( "full_body_iteminfo" );
 
 static const damage_type_id damage_acid( "acid" );
 static const damage_type_id damage_bash( "bash" );
@@ -4030,8 +4027,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         covered_parts.reset( bp );
     }
     bool covers_anything = covered_parts.any();
-    const bool show_bodygraph = get_option<bool>( "ITEM_BODYGRAPH" ) &&
-                                parts->test( iteminfo_parts::ARMOR_BODYGRAPH );
     if( parts->test( iteminfo_parts::ARMOR_BODYPARTS ) ) {
         insert_separation_line( info );
         std::vector<bodypart_id> covered;
@@ -4252,48 +4247,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     if( !info.empty() ) {
         info.back().bNewLine = true;
-    }
-
-    if( show_bodygraph ) {
-        insert_separation_line( info );
-        auto bg_cb = [this]( const bodygraph_part * bgp, const std::string & sym ) {
-            if( !bgp ) {
-                return colorize( sym, bodygraph_full_body_iteminfo->fill_color );
-            }
-            std::set<sub_bodypart_id> grp{ bgp->sub_bodyparts.begin(), bgp->sub_bodyparts.end() };
-            for( const bodypart_id &bid : bgp->bodyparts ) {
-                grp.insert( bid->sub_parts.begin(), bid->sub_parts.end() );
-            }
-            nc_color clr = c_dark_gray;
-            int cov_val = 0;
-            for( const sub_bodypart_id &sid : grp ) {
-                if( !sid.is_valid() ) {
-                    continue;
-                }
-                int tmp = get_coverage( sid );
-                cov_val = tmp > cov_val ? tmp : cov_val;
-            }
-            if( cov_val <= 5 ) {
-                clr = c_dark_gray;
-            } else if( cov_val <= 10 ) {
-                clr = c_light_gray;
-            } else if( cov_val <= 25 ) {
-                clr = c_light_red;
-            } else if( cov_val <= 60 ) {
-                clr = c_yellow;
-            } else if( cov_val <= 80 ) {
-                clr = c_green;
-            } else {
-                clr = c_light_green;
-            }
-            return colorize( sym, clr );
-        };
-        std::vector<std::string> bg_lines = get_bodygraph_lines( get_player_character(), bg_cb,
-                                            bodygraph_full_body_iteminfo );
-        for( const std::string &line : bg_lines ) {
-            info.emplace_back( "ARMOR", line );
-        }
-        insert_separation_line( info );
     }
 }
 
