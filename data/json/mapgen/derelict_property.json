@@ -107,7 +107,7 @@
     "items": {
       "{": { "item": "homebooks", "chance": 20, "repeat": [ 1, 2 ] },
       "p": { "item": "fireplace_fill", "chance": 60, "repeat": [ 1, 2 ] },
-      "R": [ { "item": "tools_earthworking", "chance": 10 }, { "item": "farming_seeds", "chance": 30, "repeat": [ 1, 4 ] } ],
+      "R": [ { "item": "tools_earthworking", "chance": 10 }, { "item": "garden_seeds", "chance": 30, "repeat": [ 1, 4 ] } ],
       "O": [
         { "item": "tools_carpentry", "chance": 20, "repeat": [ 1, 2 ] },
         { "item": "tools_construction", "chance": 20, "repeat": [ 1, 2 ] },
