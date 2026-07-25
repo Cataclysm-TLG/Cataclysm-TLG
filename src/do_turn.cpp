@@ -23,7 +23,6 @@
 #include "bionics.h"
 #include "cached_options.h"
 #include "calendar.h"
-#include "caution.h"
 #include "cata_variant.h"
 #include "clzones.h"
 #include "coordinates.h"
@@ -680,7 +679,6 @@ bool do_turn()
     }
     g->mon_info_update();
     u.process_turn();
-    caution::check_turn( u );
     if( u.get_moves() < 0 && get_option<bool>( "FORCE_REDRAW" ) ) {
         ui_manager::redraw();
         refresh_display();
