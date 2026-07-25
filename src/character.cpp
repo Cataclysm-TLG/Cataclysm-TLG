@@ -27,7 +27,6 @@
 #include "cata_assert.h"
 #include "cata_utility.h"
 #include "catacharset.h"
-#include "caution.h"
 #include "character_attire.h"
 #include "character_martial_arts.h"
 #include "city.h"
@@ -8988,9 +8987,6 @@ void Character::on_hurt( Creature *source, bool disturb /*= true*/ )
             } else {
                 g->cancel_activity_or_ignore_query( distraction_type::attacked, _( "You were hurt!" ) );
             }
-        }
-        if( is_avatar() && !is_dead_state() ) {
-            caution::on_avatar_hurt( *this );
         }
     }
 
