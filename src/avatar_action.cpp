@@ -16,6 +16,7 @@
 #include "action.h"
 #include "activity_actor_definitions.h"
 #include "avatar.h"
+#include "caution.h"
 #include "bionics.h"
 #include "body_part_set.h"
 #include "calendar.h"
@@ -401,6 +402,9 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
                     return false;
                 }
             }
+            if( !caution::confirm_attack( you ) ) {
+                return false;
+            }
             you.melee_attack( critter, true );
             if( critter.is_hallucination() ) {
                 critter.die( &m, &you );
@@ -429,6 +433,9 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
             return false;
         }
 
+        if( !caution::confirm_attack( you ) ) {
+            return false;
+        }
         you.melee_attack( np, true );
         np.make_angry();
         return false;

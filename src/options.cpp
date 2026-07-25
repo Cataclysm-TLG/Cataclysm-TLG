@@ -1657,6 +1657,129 @@ void options_manager::add_options_general()
 
     add_empty_line();
 
+    add_option_group( "general", Group( "caution_mode_opts", to_translation( "Caution Mode Options" ),
+                                        to_translation( "Options regarding caution mode, which warns you when you fight or keep moving while impaired." ) ),
+    [&]( const std::string & page_id ) {
+        add( "CAUTION_MODE", page_id, to_translation( "Caution mode" ),
+             to_translation( "If true, enables caution mode: warning popups and confirmations when you are impaired, hurt, grabbed, or surrounded.  Each warning can be toggled individually below." ),
+             false
+           );
+
+        add( "CAUTION_SPEED_THRESHOLD", page_id, to_translation( "Caution: speed threshold" ),
+             to_translation( "Your speed is considered impaired when below this value.  Base speed is 100.  Used by the speed warning, the attack confirmation, and the hurt warning." ),
+             10, 300, 90
+           );
+
+        get_option( "CAUTION_SPEED_THRESHOLD" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_WARN_COOLDOWN", page_id, to_translation( "Caution: seconds between warnings" ),
+             to_translation( "Base number of seconds between repeated speed warnings.  More hostiles nearby shortens the interval." ),
+             3, 300, 15
+           );
+
+        get_option( "CAUTION_WARN_COOLDOWN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_SPEED_WARN", page_id, to_translation( "Caution: warn when slowed near enemies" ),
+             to_translation( "If true, shows a warning popup when your speed is below the threshold while hostiles are nearby." ),
+             true
+           );
+
+        get_option( "CAUTION_SPEED_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_ATTACK_CONFIRM", page_id, to_translation( "Caution: confirm attacks while slowed" ),
+             to_translation( "If true, asks for confirmation before you melee attack while your speed is below the threshold." ),
+             true
+           );
+
+        get_option( "CAUTION_ATTACK_CONFIRM" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_HURT_WARN", page_id, to_translation( "Caution: warn when hurt while slowed" ),
+             to_translation( "If true, shows a warning popup when you take damage while your speed is below the threshold." ),
+             true
+           );
+
+        get_option( "CAUTION_HURT_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_GRAB_WARN", page_id, to_translation( "Caution: warn when grabbed" ),
+             to_translation( "If true, shows a warning popup the moment something grabs you." ),
+             true
+           );
+
+        get_option( "CAUTION_GRAB_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_STAMINA_WARN", page_id, to_translation( "Caution: warn when winded near enemies" ),
+             to_translation( "If true, shows a warning popup when your stamina drops below the stamina threshold while hostiles are nearby." ),
+             true
+           );
+
+        get_option( "CAUTION_STAMINA_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_STAMINA_PCT", page_id, to_translation( "Caution: stamina threshold percent" ),
+             to_translation( "Stamina is considered dangerously low when below this percentage of your maximum." ),
+             5, 95, 25
+           );
+
+        get_option( "CAUTION_STAMINA_PCT" ).setPrerequisite( "CAUTION_STAMINA_WARN" );
+
+        add( "CAUTION_BLEED_WARN", page_id, to_translation( "Caution: nag while bleeding" ),
+             to_translation( "If true, shows a repeating warning popup while you are bleeding." ),
+             true
+           );
+
+        get_option( "CAUTION_BLEED_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_BITE_WARN", page_id, to_translation( "Caution: warn on bites and infection" ),
+             to_translation( "If true, warns you when you receive a bite wound, and nags aggressively while a wound is infected." ),
+             true
+           );
+
+        get_option( "CAUTION_BITE_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_SURROUND_WARN", page_id, to_translation( "Caution: warn when surrounded" ),
+             to_translation( "If true, shows a warning popup when three or more hostiles are within four tiles of you." ),
+             true
+           );
+
+        get_option( "CAUTION_SURROUND_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_PAIN_WARN", page_id, to_translation( "Caution: warn on rising pain" ),
+             to_translation( "If true, shows a warning popup each time your pain climbs past 20, 40, and 60." ),
+             true
+           );
+
+        get_option( "CAUTION_PAIN_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_LIMB_WARN", page_id, to_translation( "Caution: warn on critical torso or head" ),
+             to_translation( "If true, shows a warning popup when your torso or head HP falls below the limb threshold." ),
+             true
+           );
+
+        get_option( "CAUTION_LIMB_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_LIMB_PCT", page_id, to_translation( "Caution: limb threshold percent" ),
+             to_translation( "Torso or head HP is considered critical when below this percentage of its maximum." ),
+             10, 90, 30
+           );
+
+        get_option( "CAUTION_LIMB_PCT" ).setPrerequisite( "CAUTION_LIMB_WARN" );
+
+        add( "CAUTION_FIGHT_WARN", page_id, to_translation( "Caution: warn after prolonged danger" ),
+             to_translation( "If true, shows a warning popup after hostiles have been continuously nearby for the configured time, reminding you to reassess." ),
+             true
+           );
+
+        get_option( "CAUTION_FIGHT_WARN" ).setPrerequisite( "CAUTION_MODE" );
+
+        add( "CAUTION_FIGHT_SECONDS", page_id, to_translation( "Caution: prolonged danger seconds" ),
+             to_translation( "Number of consecutive seconds with hostiles nearby before the prolonged danger warning fires." ),
+             60, 3600, 300
+           );
+
+        get_option( "CAUTION_FIGHT_SECONDS" ).setPrerequisite( "CAUTION_FIGHT_WARN" );
+    } );
+
+    add_empty_line();
+
     add_option_group( "general", Group( "auto_save_opts", to_translation( "Autosave Options" ),
                                         to_translation( "Options regarding autosave." ) ),
     [&]( const std::string & page_id ) {
