@@ -197,6 +197,7 @@ static const json_character_flag json_flag_SAPIOVORE( "SAPIOVORE" );
 
 static const matec_id RAPID( "RAPID" );
 
+static const material_id material_migo_flesh( "migo_flesh" );
 static const material_id material_wool( "wool" );
 
 static const mod_id MOD_INFORMATION_tlg( "tlg" );
@@ -7957,9 +7958,9 @@ bool item::goes_bad() const
         return false;
     }
     if( is_corpse() ) {
-        // Corpses rot only if they are made of rotting materials
-        // They also only rot if they are not dormant
-        if( corpse->has_flag( mon_flag_DORMANT ) ) {
+        // Corpses rot only if they are made of rotting materials.
+        // Dormant and reviving corpses aren't actually dead.
+        if( corpse->has_flag( mon_flag_DORMANT ) || can_revive() ) {
             return false;
         }
         return made_of_any( materials::get_rotting() );
@@ -7973,6 +7974,10 @@ time_duration item::get_shelf_life() const
         if( is_comestible() ) {
             return get_comestible()->spoils;
         } else if( is_corpse() ) {
+            // Mi-go are aliens and nothing on earth eats them, so their corpses just sit there for a long time.
+            if( made_of( material_migo_flesh ) ) {
+                return 90_days;
+            }
             return 24_hours;
         }
     }
@@ -8824,7 +8829,16 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
         }
     }
 
-    time_duration elapsed = calendar::turn - birthday();
+    time_duration frozen = time_duration::from_turns(
+        std::stoi( get_var( "frozen_time_turns", "0" ) ) );
+
+    if( has_var( "frozen_start_turn" ) ) {
+        frozen += calendar::turn -
+                ( calendar::turn_zero +
+                    std::stoi( get_var( "frozen_start_turn", "0" ) ) * 1_turns );
+    }
+
+    time_duration elapsed = calendar::turn - birthday() - frozen;
 
     /* If we're not cold, we can revive when the timer is half over. This allows
     refrigeration to slow revival without a lot of fuss when temperatures change. */
@@ -8859,7 +8873,7 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
     // REVIVE_SPECIAL is used by dormant zombies.
     const bool isReviveSpecial = has_flag( flag_REVIVE_SPECIAL );
     if( isReviveSpecial ) {
-        const int distance = rl_dist( pos, get_player_character().pos_bub() );
+        const int distance = trig_dist( pos, get_player_character().pos_bub() );
         if( distance > 3 ) {
             return false;
         }
@@ -13951,8 +13965,9 @@ void item::set_temp_flags( units::temperature new_temperature, float freeze_perc
     } else if( new_temperature < temperatures::cold ) {
         set_flag( flag_COLD );
     }
-
-    // Convert water into clean water if it starts boiling
+    // Handle zombies thawing and freezing.
+    update_frozen_timer();
+    // Convert water into clean water if it starts boiling.
     if( typeId() == itype_water && new_temperature > temperatures::boiling ) {
         convert( itype_water_clean ).poison = 0;
     }
@@ -13971,6 +13986,8 @@ void item::heat_up()
     unset_flag( flag_SHREDDED );
     set_flag( flag_HOT );
     current_phase = type->phase;
+    // Did you just microwave a frozen zombie?
+    update_frozen_timer();
     // Set item temperature to 60 C (333.15 K, 122 F)
     // Also set the energy to match
     temperature = units::from_celsius( 60 );
@@ -13986,17 +14003,35 @@ void item::cold_up()
     unset_flag( flag_SHREDDED );
     set_flag( flag_COLD );
     current_phase = type->phase;
+    update_frozen_timer();
     // Set item temperature to 3 C (276.15 K, 37.4 F)
     // Also set the energy to match
     temperature = units::from_celsius( 3 );
     specific_energy = get_specific_energy_from_temperature( units::from_celsius( 3 ) );
-
     reset_temp_check();
 }
 
 void item::reset_temp_check()
 {
     last_temp_check = calendar::turn;
+}
+
+void item::update_frozen_timer()
+{
+    if( !can_revive() ) {
+        return;
+    }
+    if( has_own_flag( flag_FROZEN ) ) {
+        if( !has_var( "frozen_start_turn" ) ) {
+            set_var( "frozen_start_turn", to_turn<int>( calendar::turn ) );
+        }
+    } else if( has_var( "frozen_start_turn" ) ) {
+        const int frozen_start = std::stoi( get_var( "frozen_start_turn", "0" ) );
+        const int frozen_time = std::stoi( get_var( "frozen_time_turns", "0" ) ) +
+                                to_turn<int>( calendar::turn ) - frozen_start;
+        set_var( "frozen_time_turns", frozen_time );
+        erase_var( "frozen_start_turn" );
+    }
 }
 
 void item::overwrite_relic( const relic &nrelic )

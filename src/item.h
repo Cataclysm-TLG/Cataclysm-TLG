@@ -377,6 +377,9 @@ class item : public visitable
          */
         bool ready_to_revive( map &here, const tripoint_bub_ms &pos );
 
+        // Helper that takes care of updating the timer for frozen/thawing revivable corpses.
+        void update_frozen_timer();
+
         bool is_money() const;
     private:
         bool is_money( const std::set<ammotype> &ammo ) const;
