@@ -3981,10 +3981,8 @@ std::unique_ptr<activity_actor> open_gate_activity_actor::deserialize( JsonValue
 void consume_activity_actor::start( player_activity &act, Character &guy )
 {
     int moves = 0;
-    Character &player_character = get_player_character();
-    //TODO: why use both `player_character` and `guy`?
-    auto player_will_eat = [this, &moves, &player_character, &guy]( const item & it ) {
-        ret_val<edible_rating> ret = player_character.will_eat( it, true );
+    auto character_will_eat = [this, &moves, &guy]( const item & it ) {
+        ret_val<edible_rating> ret = guy.will_eat( it, true );
         if( !ret.success() ) {
             canceled = true;
             uistate.consume_uistate.clear();
@@ -3994,9 +3992,9 @@ void consume_activity_actor::start( player_activity &act, Character &guy )
     };
 
     if( consume_location ) {
-        player_will_eat( *consume_location );
+        character_will_eat( *consume_location );
     } else if( !consume_item.is_null() ) {
-        player_will_eat( consume_item );
+        character_will_eat( consume_item );
     } else {
         debugmsg( "Item/location to be consumed should not be null." );
         canceled = true;

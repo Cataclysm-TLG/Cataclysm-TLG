@@ -138,6 +138,7 @@ static const itype_id itype_stock_none( "stock_none" );
 static const itype_id itype_syringe( "syringe" );
 
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
+static const json_character_flag json_flag_GRAPNEL( "GRAPNEL" );
 static const json_character_flag json_flag_MANUAL_CBM_INSTALLATION( "MANUAL_CBM_INSTALLATION" );
 
 static const morale_type morale_pyromania_nofire( "morale_pyromania_nofire" );
@@ -1215,6 +1216,7 @@ static ret_val<tripoint_bub_ms> check_deploy_square( Character *p, item &it,
         return ret_val<tripoint_bub_ms>::make_failure( pos );
     }
     tripoint_bub_ms pnt( pos );
+
     if( pos == p->pos_bub( *here ) ) {
         // TODO: Use map aware 'choose_adjacent' when available, or reject operation if not reality bubble map
         if( const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent( _( "Deploy where?" ) ) ) {
@@ -1227,6 +1229,32 @@ static ret_val<tripoint_bub_ms> check_deploy_square( Character *p, item &it,
     if( pnt == p->pos_bub( *here ) ) {
         return ret_val<tripoint_bub_ms>::make_failure( pos,
                 _( "You attempt to become one with the %s.  It doesn't work." ), it.tname() );
+    }
+
+
+    if( it.has_flag( json_flag_GRAPNEL ) ) {
+        if( pnt.z() != pos.z() ) {
+            return ret_val<tripoint_bub_ms>::make_failure( pos, _( "You must pick an adjacent tile on the same level." ) );
+        }
+        const tripoint_bub_ms above = pnt + tripoint::above;
+
+        if( !here->ter( above )->has_flag( "EMPTY_SPACE" ) ) {
+            return ret_val<tripoint_bub_ms>::make_failure(
+                pos, _( "The grapnel needs open space above it." ) );
+        }
+
+        bool found_anchor = false;
+        for( const tripoint_bub_ms &adj : here->points_in_radius( above, 1 ) ) {
+            if( here->has_floor( adj ) && !here->impassable( adj ) ) {
+                found_anchor = true;
+                break;
+            }
+        }
+
+        if( !found_anchor ) {
+            return ret_val<tripoint_bub_ms>::make_failure(
+                pos, _( "There is no ledge above to anchor it to." ) );
+        }
     }
 
     tripoint_bub_ms where = pnt;

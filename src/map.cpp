@@ -2949,22 +2949,23 @@ int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
             bool furn_supports_weight = true;
             bool ter_supports_weight = true;
             if( !veh_at( pt ) ) {
-                if( you.get_weight() / 10000_gram > here.ter( pt ).obj().bash->str_min ) {
-                    you.add_msg_if_player( _( "The %s can't support your weight." ), here.ter( pt ).obj().name() );
-                    ter_supports_weight = false;
-                }
                 // Specifically check for climbable furniture so that we don't get irrelevant messages about nonclimbable furniture.
                 if( here.has_furn( pt ) ) {
                     const furn_id &climbing_furniture = furn( pt );
                     // I don't think we need this null guard, but it can hardly hurt.
                     if( climbing_furniture != furn_str_id::NULL_ID() ) {
-                        if( climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) {
+                        if( climbing_furniture.obj().bash && ( climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) || climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_LADDER ) ) ) {
                             if( you.get_weight() / 10000_gram > here.furn( pt ).obj().bash->str_min ) {
                                 you.add_msg_if_player( _( "The %s can't support your weight." ), here.furn( pt ).obj().name() );
                                 furn_supports_weight = false;
                             }
                         }
                     }
+                }
+                ter_t climbing_terrain = here.ter( pt ).obj();
+                if( climbing_terrain.bash && ( ( climbing_terrain.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) || climbing_terrain.has_flag( ter_furn_flag::TFLAG_LADDER ) ) && you.get_weight() / 10000_gram > here.ter( pt ).obj().bash->str_min ) ) {
+                        you.add_msg_if_player( _( "The %s can't support your weight." ), here.ter( pt ).obj().name() );
+                        ter_supports_weight = false;
                 }
                 if( furn_supports_weight && ter_supports_weight ) {
                     best_difficulty = 5;
