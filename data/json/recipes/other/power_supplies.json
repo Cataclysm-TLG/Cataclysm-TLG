@@ -214,7 +214,6 @@
     "time": "1 h",
     "reversible": true,
     "decomp_learn": 2,
-    "autolearn": true,
     "using": [ [ "soldering_standard", 35 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
@@ -243,7 +242,6 @@
     "time": "3 h",
     "reversible": true,
     "decomp_learn": 2,
-    "autolearn": true,
     "book_learn": [ [ "manual_electronics", 4 ], [ "textbook_electronics", 4 ], [ "advanced_electronics", 4 ] ],
     "//": "100cm weld",
     "using": [ [ "welding_standard", 100 ], [ "soldering_standard", 35 ] ],

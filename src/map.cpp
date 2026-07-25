@@ -2954,7 +2954,9 @@ int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
                     const furn_id &climbing_furniture = furn( pt );
                     // I don't think we need this null guard, but it can hardly hurt.
                     if( climbing_furniture != furn_str_id::NULL_ID() ) {
-                        if( climbing_furniture.obj().bash && ( climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) || climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_LADDER ) ) ) {
+                        if( climbing_furniture.obj().bash &&
+                            ( climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ||
+                              climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_LADDER ) ) ) {
                             if( you.get_weight() / 10000_gram > here.furn( pt ).obj().bash->str_min ) {
                                 you.add_msg_if_player( _( "The %s can't support your weight." ), here.furn( pt ).obj().name() );
                                 furn_supports_weight = false;
@@ -2963,9 +2965,11 @@ int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
                     }
                 }
                 ter_t climbing_terrain = here.ter( pt ).obj();
-                if( climbing_terrain.bash && ( ( climbing_terrain.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) || climbing_terrain.has_flag( ter_furn_flag::TFLAG_LADDER ) ) && you.get_weight() / 10000_gram > here.ter( pt ).obj().bash->str_min ) ) {
-                        you.add_msg_if_player( _( "The %s can't support your weight." ), here.ter( pt ).obj().name() );
-                        ter_supports_weight = false;
+                if( climbing_terrain.bash && ( ( climbing_terrain.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ||
+                                                 climbing_terrain.has_flag( ter_furn_flag::TFLAG_LADDER ) ) &&
+                                               you.get_weight() / 10000_gram > here.ter( pt ).obj().bash->str_min ) ) {
+                    you.add_msg_if_player( _( "The %s can't support your weight." ), here.ter( pt ).obj().name() );
+                    ter_supports_weight = false;
                 }
                 if( furn_supports_weight && ter_supports_weight ) {
                     best_difficulty = 5;
@@ -3696,6 +3700,7 @@ bool map::is_roofed( const tripoint_bub_ms &p ) const
             }
             // Transparent floors (glass, ramps, grates) are marked as "no floor"
             // in floor_cache but are physical surfaces that block precipitation
+            // TODO: grates should not block precipitation???
             if( has_flag_ter( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, check_pos ) ) {
                 return true;
             }

@@ -8783,11 +8783,11 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
     }
 
     time_duration frozen = time_duration::from_turns(
-        std::stoi( get_var( "frozen_time_turns", "0" ) ) );
+                               std::stoi( get_var( "frozen_time_turns", "0" ) ) );
 
     if( has_var( "frozen_start_turn" ) ) {
         frozen += calendar::turn -
-                ( calendar::turn_zero +
+                  ( calendar::turn_zero +
                     std::stoi( get_var( "frozen_start_turn", "0" ) ) * 1_turns );
     }
 
