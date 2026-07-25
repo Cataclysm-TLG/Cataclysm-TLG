@@ -1234,13 +1234,15 @@ static ret_val<tripoint_bub_ms> check_deploy_square( Character *p, item &it,
 
     if( it.has_flag( json_flag_GRAPNEL ) ) {
         if( pnt.z() != pos.z() ) {
-            return ret_val<tripoint_bub_ms>::make_failure( pos, _( "You must pick an adjacent tile on the same level." ) );
+            return ret_val<tripoint_bub_ms>::make_failure( pos,
+                    _( "You must pick an adjacent tile on the same level." ) );
         }
         const tripoint_bub_ms above = pnt + tripoint::above;
 
+        // TODO: Hook onto ladders that don't reach down far enough.
         if( !here->ter( above )->has_flag( "EMPTY_SPACE" ) ) {
             return ret_val<tripoint_bub_ms>::make_failure(
-                pos, _( "The grapnel needs open space above it." ) );
+                       pos, _( "There needs to be open air up above." ) );
         }
 
         bool found_anchor = false;
@@ -1253,7 +1255,7 @@ static ret_val<tripoint_bub_ms> check_deploy_square( Character *p, item &it,
 
         if( !found_anchor ) {
             return ret_val<tripoint_bub_ms>::make_failure(
-                pos, _( "There is no ledge above to anchor it to." ) );
+                       pos, _( "There is no ledge above to anchor it to." ) );
         }
     }
 

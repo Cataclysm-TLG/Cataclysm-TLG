@@ -18,7 +18,7 @@
     "id": "constr_palisade_pulley",
     "group": "build_rope_pulley_system",
     "category": "CONSTRUCT",
-    "required_skills": [ [ "fabrication", 5 ], [ "mechanics", 2 ] ],
+    "required_skills": [ [ "fabrication", 5 ], [ "mechanics", 3 ] ],
     "time": "60 m",
     "components": [
       [ [ "rope_natural", 1, "LIST" ] ],
@@ -34,7 +34,7 @@
     "id": "constr_palisade_pulley_wood",
     "group": "build_rope_pulley_system",
     "category": "CONSTRUCT",
-    "required_skills": [ [ "fabrication", 5 ], [ "mechanics", 2 ] ],
+    "required_skills": [ [ "fabrication", 5 ], [ "mechanics", 3 ] ],
     "time": "60 m",
     "components": [
       [ [ "rope_natural", 1, "LIST" ] ],
