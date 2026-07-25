@@ -83,7 +83,7 @@
         "#": "t_wall_log"
       },
       "furniture": { "0": "f_water_mill", "♦": "f_kiln_empty", "♣": "f_clay_kiln", "]": "f_rack_wood" },
-      "sealed_item": { "=": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_harvest" } },
+      "sealed_item": { "=": { "items": { "item": "garden_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 30 } },
       "place_loot": [ { "item": "stereo", "x": 22, "y": 44, "chance": 15 }, { "item": "television", "x": 22, "y": 43, "chance": 75 } ],
       "place_monsters": [ { "monster": "GROUP_BEACH", "x": [ 1, 22 ], "y": [ 1, 22 ], "density": 0.1 } ],
       "place_nested": [ { "chunks": [ [ "firepit_5x5_2", 100 ] ], "x": 7, "y": 5 } ],
@@ -282,7 +282,7 @@
         "r": { "item": "preserved_food", "chance": 50, "repeat": [ 2, 8 ] },
         "c": { "item": "condiments", "chance": 50, "repeat": [ 2, 8 ] },
         "e": { "item": "pantry_liquids", "chance": 50, "repeat": [ 2, 8 ] },
-        "l": { "item": "farming_seeds", "chance": 50, "repeat": [ 2, 8 ] },
+        "l": { "item": "garden_seeds", "chance": 50, "repeat": [ 2, 8 ] },
         "b": [
           { "item": "supplies_farming", "chance": 30, "repeat": [ 1, 2 ] },
           { "item": "tools_earthworking", "chance": 40, "repeat": [ 1, 2 ] }
