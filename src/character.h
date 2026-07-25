@@ -243,7 +243,8 @@ constexpr inline int operator-( const T &lhs, const fatigue_levels &rhs )
     @details Sleep deprivation, distinct from fatigue, is defined in minutes. Although most
     calculations scale linearly, malus is bestowed only upon reaching the tiers defined below.
     Sleep deprivation is intended to scale with sleep-affecting mutations, but not generally
-    with stimulants. It is the mostly unavoidable consequence for avoiding sleep.
+    with drugs. A cat needs less sleep than a human. A meth addict, whatever they may believe,
+    does not. It is intended to be largely unavoidable.
     @note Sleep deprivation increases fatigue. Fatigue increase scales with the severity of sleep
     deprivation.
 */
@@ -1023,7 +1024,7 @@ class Character : public Creature, public visitable
         void update_needs( int rate_multiplier );
         needs_rates calc_needs_rates() const;
         void calc_sleep_recovery_rate( needs_rates &rates ) const;
-        /** Kills the player if too hungry, stimmed up etc., forces tired player to sleep and prints warnings. */
+        /** Kills the player if too hungry, forces tired player to sleep, and prints warnings. */
         void check_needs_extremes();
         /** Handles the chance to be infected by random diseases */
         void get_sick( bool is_flu = false );
@@ -3216,10 +3217,6 @@ class Character : public Creature, public visitable
         std::map<bodypart_id, int> get_all_armor_type( const damage_type_id &dt,
                 const std::map<bodypart_id, std::vector<const item *>> &clothing_map ) const;
 
-        int get_stim() const;
-        void set_stim( int new_stim );
-        void mod_stim( int mod );
-
         int get_rad() const;
         void set_rad( int new_rad );
         void mod_rad( int mod );
@@ -4310,8 +4307,6 @@ class Character : public Creature, public visitable
         bool check_encumbrance = true;
         bool cache_inventory_is_valid = false;
         mutable bool using_lifting_assist = false;
-
-        int stim;
 
         struct pkill_source {
             efftype_id source;
