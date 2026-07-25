@@ -609,7 +609,6 @@ Character::Character() :
     continuous_sleep = 0_turns;
     radiation = 0;
     slow_rad = 0;
-    set_stim( 0 );
     arms_power_use = 0;
     legs_power_use = 0;
     arms_stam_mult = 1.0f;
@@ -5532,7 +5531,6 @@ bool Character::needs_food() const
 
 void Character::update_needs( int rate_multiplier )
 {
-    const int current_stim = get_stim();
     // Hunger, thirst, & fatigue up every 5 minutes
     effect &sleep = get_effect( effect_sleep );
     // No food/thirst/fatigue clock at all
@@ -5636,12 +5634,6 @@ void Character::update_needs( int rate_multiplier )
         } else {
             g->cancel_activity_query( _( "You're feeling tired." ) );
         }
-    }
-
-    if( current_stim < 0 ) {
-        set_stim( std::min( current_stim + rate_multiplier, 0 ) );
-    } else if( current_stim > 0 ) {
-        set_stim( std::max( current_stim - rate_multiplier, 0 ) );
     }
 
     if( !pkill_sources.empty() ) {
@@ -5924,7 +5916,7 @@ void Character::check_needs_extremes()
         }
     }
 
-    // Sleep deprivation kicks in if lack of sleep is avoided with stimulants or otherwise for long periods of time
+    // Fatigue is what helps you sleep.  Sleep deprivation is your punishment for not doing so.
     int sleep_deprivation = get_sleep_deprivation();
     float sleep_deprivation_pct = sleep_deprivation / static_cast<float>( SLEEP_DEPRIVATION_MASSIVE );
 
@@ -7105,21 +7097,6 @@ void Character::mend_item( item_location &&obj, bool interactive )
     }
 }
 
-int Character::get_stim() const
-{
-    return stim;
-}
-
-void Character::set_stim( int new_stim )
-{
-    stim = new_stim;
-}
-
-void Character::mod_stim( int mod )
-{
-    stim += mod;
-}
-
 int Character::get_rad() const
 {
     return radiation;
@@ -7409,7 +7386,7 @@ void Character::update_stamina( int turns )
     // But mouth encumbrance interferes, even with mutated stamina.
     stamina_recovery += stamina_multiplier * std::max( 1.0f,
                         effective_regen_rate * get_modifier( character_modifier_stamina_recovery_breathing_mod ) );
-    // only apply stim-related and mutant stamina boosts if you don't have bionic lungs.
+    // Only apply stamina boosts from enchantments (i.e. mutations) if you don't have bionic lungs.
     if( !has_bionic( bio_synlungs ) ) {
         stamina_recovery = enchantment_cache->modify_value( enchant_vals::mod::REGEN_STAMINA,
                            stamina_recovery );
@@ -13983,7 +13960,6 @@ void Character::environmental_revert_effect()
     set_fatigue( 0 );
     set_lifestyle( 0 );
     set_daily_health( 0 );
-    set_stim( 0 );
     set_pain( 0 );
     set_painkiller( 0 );
     set_rad( 0 );

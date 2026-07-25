@@ -217,9 +217,9 @@ static void mutation_power( Character &you, const trait_id &mut_id );
 static void while_underwater( Character &you );
 static void while_grabbed( Character &you );
 static void from_addictions( Character &you );
-static void while_awake( Character &you, int current_stim );
+static void while_awake( Character &you );
 static void from_chemimbalance( Character &you );
-static void from_asthma( Character &you, int current_stim );
+static void from_asthma( Character &you );
 static void from_item_dropping( Character &you );
 static void from_other_mutations( Character &you );
 static void from_radiation( Character &you );
@@ -469,7 +469,7 @@ void suffer::from_addictions( Character &you )
     }
 }
 
-void suffer::while_awake( Character &you, const int current_stim )
+void suffer::while_awake( Character &you )
 {
     if( you.weight_carried() > 4 * you.weight_capacity() ) {
         if( you.has_effect( effect_downed ) ) {
@@ -521,9 +521,9 @@ void suffer::while_awake( Character &you, const int current_stim )
         if( ( you.get_effect_int( effect_caffeine_eff ) > 1 || you.has_effect( effect_cocaine ) ||
               you.has_effect( effect_amphetamine_eff ) ) && !you.has_effect( effect_cig ) &&
             !you.has_effect( effect_valium ) && !you.has_effect( effect_took_xanax ) &&
-            one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
+            one_in( to_turns<int>( 30_minutes ) ) ) {
             time_duration dur = 1_minutes * rng( 1, 30 );
-            you.add_effect( effect_shakes, dur + 1_turns * current_stim );
+            you.add_effect( effect_shakes, dur );
         } else if( ( !you.has_effect( effect_cig ) || one_in( 3 ) ) && !you.has_effect( effect_valium ) &&
                    !you.has_effect( effect_took_xanax ) && ( you.get_hunger() > 80 ||
                            ( you.get_kcal_percent() < 0.9f &&
@@ -628,7 +628,7 @@ void suffer::from_chemimbalance( Character &you )
     }
 }
 
-void suffer::from_asthma( Character &you, const int current_stim )
+void suffer::from_asthma( Character &you )
 {
     if( you.has_effect( effect_adrenaline ) ||
         you.has_effect( effect_datura ) ||
@@ -637,7 +637,7 @@ void suffer::from_asthma( Character &you, const int current_stim )
     }
     //cap asthma attacks to 1 per minute (or risk instantly killing players that rely on oxygen tanks)
     if( !one_in( std::max( to_turns<int>( 1_minutes ),
-                           ( to_turns<int>( 6_hours ) - current_stim * 300 ) ) *
+                           ( to_turns<int>( 6_hours ) ) ) *
                  ( you.has_effect( effect_sleep ) ? 10 : 1 ) ) ) {
         return;
     }
@@ -1786,8 +1786,6 @@ void suffer::from_artifact_resonance( Character &you, int amt )
 
 void Character::suffer()
 {
-    const int current_stim = get_stim();
-
     for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
         if( is_limb_broken( bp ) ) {
             add_effect( effect_disabled, 1_turns, bp, true );
@@ -1822,11 +1820,11 @@ void Character::suffer()
     }
 
     if( !in_sleep_state() ) {
-        suffer::while_awake( *this, current_stim );
+        suffer::while_awake( *this );
     } // Done with while-awake-only effects
 
     if( has_trait( trait_ASTHMA ) ) {
-        suffer::from_asthma( *this, current_stim );
+        suffer::from_asthma( *this );
     }
 
     if( has_effect_with_flag( flag_MUTAGEN_EFFECT ) &&
