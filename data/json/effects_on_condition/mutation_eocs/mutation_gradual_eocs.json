@@ -53,8 +53,8 @@
       { "u_lose_trait": "MUTATING_GRADUAL_ARANEAN" },
       { "u_lose_trait": "MUTATING_GRADUAL_TROGLOBITE" },
       { "u_lose_trait": "MUTATING_GRADUAL_URSINE" },
-      { "u_lose_var": "u_MUTATING_GRADUAL_threshold)" },
-      { "u_lose_var": "u_MUTATING_GRADUAL_vitamin)" }
+      { "u_lose_var": "u_MUTATING_GRADUAL_threshold" },
+      { "u_lose_var": "u_MUTATING_GRADUAL_vitamin" }
     ]
   },
   {
