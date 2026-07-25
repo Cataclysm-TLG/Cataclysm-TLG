@@ -1771,6 +1771,7 @@
       "EXAMINE_FROM_ABOVE",
       "DIFFICULT_Z",
       "ALLOW_ON_OPEN_AIR",
+      "FLOATS_IN_AIR",
       "DEPLOYED_FURNITURE_ABOVE"
     ],
     "deployed_item": "grapnel",

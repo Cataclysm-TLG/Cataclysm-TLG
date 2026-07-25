@@ -2771,5 +2771,10 @@
     "id": "CHEW",
     "type": "json_flag",
     "//": "This item is gum or chewing tobacco or something else that you consume by chewing it, but it isn't food."
+  },
+  {
+    "id": "GRAPNEL",
+    "type": "json_flag",
+    "//": "Used on the grappling hook item to make it check for ledges above when deployed."
   }
 ]
