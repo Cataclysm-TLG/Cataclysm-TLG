@@ -1038,7 +1038,9 @@ std::string Character::get_throw_descriptor( int throwforce )
         throw_descriptor = _( "throw" );
     } else if( throwforce < 70 ) {
         throw_descriptor = _( "hurl" );
-    } else if( throwforce > 71 ) {
+    } else if( one_in( 100 ) ) {
+        throw_descriptor = _( "yeet" );
+    } else {
         throw_descriptor = _( "launch" );
     }
     return throw_descriptor;
