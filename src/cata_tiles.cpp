@@ -3074,17 +3074,41 @@ bool cata_tiles::draw_sprite_at(
 
     int width = 0;
     int height = 0;
+    int tileset_width = tileset_ptr->get_tile_width();
+    int tileset_height = tileset_ptr->get_tile_height();
     std::tie( width, height ) = sprite_tex->dimension();
-    point draw_offset = point::zero;
-    // Overlays might not all be the same size. draw_offset adjusts the offsets according to image dimensions
-    // to keep all mutations, gear etc in proper relation to each other when characters are dynamically scaled.
+    float offset_x = 0.0f;
+    float offset_y = 0.0f;
+    // If we are scaling or rotating a character tile, we need to do some annoying math to make sure
+    // that all the overlays line up even if they're different sizes from the tile itself.
+    if( rota != 0 && rota != -1 && ( width != tileset_width || height != tileset_height ) ) {
+        const float effective_scale_y = scale_y != 0 ? scale_y : 1.0f;
+        const float scaled_height = height * effective_scale_y;
+        const float scaled_tileset_height = tileset_height * effective_scale_y;
+        const float rotation_offset = ( scaled_height - scaled_tileset_height ) / 2.0f;
+
+        if( rota == 1 ) {
+            offset_x -= rotation_offset;
+            offset_y += rotation_offset;
+        } else if( rota == 3 ) {
+            offset_x += rotation_offset;
+            offset_y += rotation_offset;
+        }
+    }
+
     if( scale_x != 0 ) {
-        // Rescaled tiles need to be horizontally centered.
-        draw_offset.x = round( ( width / 2 ) * ( 1 - scale_x ) );
+        offset_x += ( width / 2.0f ) * ( 1 - scale_x );
     }
+
     if( scale_y != 0 ) {
-        draw_offset.y = height - ( height * scale_y );
+        offset_y += height - ( height * scale_y );
     }
+
+    point draw_offset = point(
+        static_cast<int>( std::round( offset_x ) ),
+        static_cast<int>( std::round( offset_y ) )
+    );
+
     const point &tile_offset = retract <= 0
                                ? tile.offset
                                : ( retract >= 100
@@ -3096,14 +3120,14 @@ bool cata_tiles::draw_sprite_at(
 
     // Using divide_round_down because the offset might be negative.
     destination.x = p.x + divide_round_down( ( tile_offset.x + offset.x + draw_offset.x ) * tile_width,
-                    tileset_ptr->get_tile_width() );
+                    tileset_width );
     destination.y = p.y + divide_round_down( ( tile_offset.y + offset.y - height_3d + draw_offset.y ) *
                     tile_width,
-                    tileset_ptr->get_tile_width() );
+                    tileset_width );
     destination.w = static_cast<int>( width * tile_width * tile.pixelscale /
-                                      tileset_ptr->get_tile_width() * scale_x );
+                                      tileset_width * scale_x );
     destination.h = static_cast<int>( height * tile_height * tile.pixelscale /
-                                      tileset_ptr->get_tile_height() * scale_y );
+                                      tileset_height * scale_y );
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
 
