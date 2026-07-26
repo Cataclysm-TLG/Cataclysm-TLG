@@ -647,6 +647,11 @@
   {
     "id": "DRACULIN_IMMUNE",
     "type": "monster_flag",
-    "//": "Immune to Chiropteran saliva. Use for any creature with nonstandard blood (ie mi-go, insects, but probably not zombies or fungalized animals, unless they have acid blood or something)."
+    "//": "Immune to Chiropteran saliva. Use for any creature with blood that doesn't clot via hemoglobin (ie mi-go, insects, but probably not zombies or fungalized animals, unless they have acid blood or something)."
+  },
+  {
+    "id": "BELLYUP",
+    "type": "monster_flag",
+    "//": "Checked by cata_tiles to see if the monster tile flips 180 instead of 90 degrees when downed."
   }
 ]

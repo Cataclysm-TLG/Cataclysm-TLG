@@ -86,6 +86,7 @@ static const damage_type_id damage_stab( "stab" );
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_badpoison( "badpoison" );
 static const efftype_id effect_beartrap( "beartrap" );
+static const efftype_id effect_bite( "bite" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_bouldering( "bouldering" );
@@ -107,8 +108,9 @@ static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_has_bag( "has_bag" );
 static const efftype_id effect_heavysnare( "heavysnare" );
 static const efftype_id effect_hit_by_player( "hit_by_player" );
-static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_in_pit( "in_pit" );
+static const efftype_id effect_incorporeal( "incorporeal" );
+static const efftype_id effect_infected( "infected" );
 static const efftype_id effect_leashed( "leashed" );
 static const efftype_id effect_lightsnare( "lightsnare" );
 static const efftype_id effect_maimed_arm( "maimed_arm" );
@@ -1902,6 +1904,11 @@ bool monster::is_elec_immune() const
 
 bool monster::is_immune_effect( const efftype_id &effect ) const
 {
+    // Currently monsters aren't affected by radiation.
+    if( effect == effect_bite || effect == effect_infected || effect == effect_fallout ) {
+        return true;
+    }
+
     if( effect == effect_onfire ) {
         return is_immune_damage( damage_heat ) ||
                made_of( phase_id::LIQUID ) ||
@@ -1917,11 +1924,6 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
 
     if( effect == effect_smoke_lungs ) {
         return !type->has_flag( mon_flag_NO_BREATHE );
-    }
-
-    // Currently monsters aren't affected by radiation.
-    if( effect == effect_fallout ) {
-        return true;
     }
 
     if( effect == effect_bleed ) {
