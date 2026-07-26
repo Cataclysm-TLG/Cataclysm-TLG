@@ -451,6 +451,8 @@ class cata_tiles
 
             float scale_x = 1.0f;
             float scale_y = 1.0f;
+            // 0 == No mirroring, 1 == horizontal, 2 == vertical.
+            int mirror = 0;
 
             // Unused currently, a placeholder for future shenanigans.
             uint32_t tint_rgba = 0;
@@ -555,11 +557,11 @@ class cata_tiles
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
             bool apply_visual_effects, int retract, int &height_3d, const point &offset,
-            float scale_x, float scale_y );
+            float scale_x, float scale_y, int mirror );
         bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
                            lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
                            const point &offset,
-                           float scale_x, float scale_y );
+                           float scale_x, float scale_y, int mirror );
 
         /* Tile Picking */
         void get_tile_values( int t, const std::array<int, 4> &tn, int &subtile, int &rotation,

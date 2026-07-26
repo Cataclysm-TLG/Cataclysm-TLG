@@ -12486,7 +12486,7 @@ int Character::book_fun_for( const item &book, const Character &p ) const
         return 0;
     }
 
-    // If you don't have a problem with eating humans, To Serve Man becomes rewarding
+    // Don't you like serving humans?!
     if( ( p.has_trait( trait_CANNIBAL ) || p.has_trait( trait_PSYCHOPATH ) ||
           p.has_trait( trait_SAPIOVORE ) ) &&
         book.typeId() == itype_cookbook_human ) {
@@ -12496,12 +12496,12 @@ int Character::book_fun_for( const item &book, const Character &p ) const
     }
 
     if( has_trait( trait_LOVES_BOOKS ) ) {
-        fun_bonus++;
+        fun_bonus = std::max( fun_bonus + 2, static_cast<int>( std::round( fun_bonus * 1.2 ) ) );
     } else if( has_trait( trait_HATES_BOOKS ) ) {
         if( book.type->book->fun > 0 ) {
-            fun_bonus = 0;
+            fun_bonus = std::min( fun_bonus - 2, fun_bonus / 2 );
         } else {
-            fun_bonus--;
+            fun_bonus -= 2;
         }
     }
 

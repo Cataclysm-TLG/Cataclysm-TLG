@@ -11,6 +11,7 @@
     "id": "AMPHIBIAN",
     "description": "an amphibian",
     "fear_triggers": [ "HURT", "FIRE" ],
+    "flags": [ "BELLYUP" ],
     "bleeds": "fd_blood"
   },
   {
@@ -39,6 +40,7 @@
     "id": "FISH",
     "description": "a fish",
     "fear_triggers": [ "HURT", "FRIEND_ATTACKED" ],
+    "flags": [ "BELLYUP" ],
     "bleeds": "fd_blood"
   },
   {
@@ -47,7 +49,9 @@
     "description": "a cephalopod",
     "footsteps": "slithering.",
     "fear_triggers": [ "HURT", "FRIEND_ATTACKED" ],
-    "bleeds": "fd_blood"
+    "flags": [ "BELLYUP" ],
+    "//": "Cephalopods use hemoglobin or a close analogue, so no draculin immunity.",
+    "bleeds": "fd_blood_invertebrate"
   },
   {
     "type": "SPECIES",
@@ -97,7 +101,7 @@
     "anger_triggers": [ "FRIEND_DIED" ],
     "fear_triggers": [ "HURT", "FIRE" ],
     "bleeds": "fd_blood_insect",
-    "flags": [ "DRACULIN_IMMUNE" ]
+    "flags": [ "DRACULIN_IMMUNE", "BELLYUP" ]
   },
   {
     "type": "SPECIES",
@@ -106,7 +110,7 @@
     "footsteps": "skittering.",
     "fear_triggers": [ "FIRE" ],
     "bleeds": "fd_blood_insect",
-    "flags": [ "DRACULIN_IMMUNE" ]
+    "flags": [ "DRACULIN_IMMUNE", "BELLYUP" ]
   },
   {
     "type": "SPECIES",
@@ -114,7 +118,7 @@
     "description": "a flying insect",
     "footsteps": "BZZZZZZZZZZZZZZZZZ",
     "anger_triggers": [ "FRIEND_DIED" ],
-    "flags": [ "LOUDMOVES", "DRACULIN_IMMUNE" ],
+    "flags": [ "LOUDMOVES", "DRACULIN_IMMUNE", "BELLYUP" ],
     "bleeds": "fd_blood_insect"
   },
   {
@@ -124,7 +128,7 @@
     "anger_triggers": [ "FRIEND_DIED" ],
     "fear_triggers": [ "HURT", "FIRE" ],
     "bleeds": "fd_blood_insect",
-    "flags": [ "DRACULIN_IMMUNE" ]
+    "flags": [ "DRACULIN_IMMUNE", "BELLYUP" ]
   },
   {
     "type": "SPECIES",

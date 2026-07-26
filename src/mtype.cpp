@@ -36,6 +36,7 @@ static const material_id material_iflesh( "iflesh" );
 static const material_id material_vegetable( "vegetable" );
 
 static const species_id species_MOLLUSK( "MOLLUSK" );
+static const species_id species_KRAKEN( "KRAKEN" );
 
 // NOLINTNEXTLINE(cata-static-int_id-constants)
 mon_flag_id mon_flag_ACIDPROOF,
@@ -52,6 +53,7 @@ mon_flag_id mon_flag_ACIDPROOF,
             mon_flag_ATTACK_UPPER,
             mon_flag_BADVENOM,
             mon_flag_BASHES,
+            mon_flag_BELLYUP,
             mon_flag_BILE_BLOOD,
             mon_flag_BORES,
             mon_flag_CAMOUFLAGE,
@@ -175,6 +177,7 @@ void set_mon_flag_ids()
     mon_flag_ATTACK_UPPER = mon_flag_id( "ATTACK_UPPER" );
     mon_flag_BADVENOM = mon_flag_id( "BADVENOM" );
     mon_flag_BASHES = mon_flag_id( "BASHES" );
+    mon_flag_BELLYUP = mon_flag_id( "BELLYUP" );
     mon_flag_BILE_BLOOD = mon_flag_id( "BILE_BLOOD" );
     mon_flag_BORES = mon_flag_id( "BORES" );
     mon_flag_CAMOUFLAGE = mon_flag_id( "CAMOUFLAGE" );
@@ -440,7 +443,7 @@ field_type_id mtype::bloodType() const
 
 field_type_id mtype::gibType() const
 {
-    if( in_species( species_MOLLUSK ) ) {
+    if( in_species( species_MOLLUSK ) || in_species( species_KRAKEN ) ) {
         return fd_gibs_invertebrate;
     }
     if( made_of( material_vegetable ) ) {
@@ -449,7 +452,7 @@ field_type_id mtype::gibType() const
     if( made_of( material_iflesh ) ) {
         return fd_gibs_insect;
     }
-    if( made_of( material_flesh ) ) {
+    if( made_of( material_flesh ) || made_of( material_hflesh ) ) {
         return fd_gibs_flesh;
     }
     // There are other materials not listed here like steel, protoplasmic, powder, null, stone, bone

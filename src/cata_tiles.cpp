@@ -78,6 +78,7 @@
 
 #define dbg(x) DebugLog((x),D_SDL) << __FILE__ << ":" << __LINE__ << ": "
 
+static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_ridden( "ridden" );
 
 static const itype_id itype_corpse( "corpse" );
@@ -2578,6 +2579,7 @@ bool cata_tiles::draw_from_id_string_internal(
     point offset = opts.offset;
     float scale_x = opts.scale_x;
     float scale_y = opts.scale_y;
+    int mirror = opts.mirror;
     // ##############################
     // uint32_t tint = opts.tint_rgba;
     // ##############################
@@ -2993,7 +2995,7 @@ bool cata_tiles::draw_from_id_string_internal(
 
     // Draw the tile
     draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll, nv_color_active, retract,
-                  height_3d, offset, scale_x, scale_y );
+                  height_3d, offset, scale_x, scale_y, mirror );
 
     return true;
 }
@@ -3002,7 +3004,7 @@ bool cata_tiles::draw_sprite_at(
     const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
     const point &p, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
     bool apply_visual_effects, int retract, int &height_3d, const point &offset, float scale_x,
-    float scale_y )
+    float scale_y, int mirror )
 {
     const std::vector<int> *picked = svlist.pick( loc_rand );
     if( !picked ) {
@@ -3103,9 +3105,15 @@ bool cata_tiles::draw_sprite_at(
     destination.h = static_cast<int>( height * tile_height * tile.pixelscale /
                                       tileset_ptr->get_tile_height() * scale_y );
 
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+    if( mirror == 1 ) {
+        flip = static_cast<SDL_RendererFlip>( flip | SDL_FLIP_HORIZONTAL );
+    } else if( mirror == 2 ) {
+        flip = static_cast<SDL_RendererFlip>( flip | SDL_FLIP_VERTICAL );
+    }
     if( rotate_sprite ) {
         if( rota == -1 ) {
-            // flip horizontally
             ret = sprite_tex->render_copy_ex(
                       renderer, &destination, 0, nullptr,
                       static_cast<SDL_RendererFlip>( SDL_FLIP_HORIZONTAL ) );
@@ -3115,7 +3123,7 @@ bool cata_tiles::draw_sprite_at(
                 case 0:
                     // unrotated (and 180, with just two sprites)
                     ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
-                                                      SDL_FLIP_NONE );
+                                                      flip );
                     break;
                 case 1:
                     // 90 degrees (and 270, with just two sprites)
@@ -3129,7 +3137,7 @@ bool cata_tiles::draw_sprite_at(
                     if( !is_isometric() ) {
                         // never rotate isometric tiles
                         ret = sprite_tex->render_copy_ex( renderer, &destination, -90, nullptr,
-                                                          SDL_FLIP_NONE );
+                                                          flip );
                     } else {
                         ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
                                                           SDL_FLIP_NONE );
@@ -3144,7 +3152,7 @@ bool cata_tiles::draw_sprite_at(
                                   static_cast<SDL_RendererFlip>( SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL ) );
                     } else {
                         ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
-                                                          SDL_FLIP_NONE );
+                                                          flip );
                     }
                     break;
                 case 3:
@@ -3159,7 +3167,7 @@ bool cata_tiles::draw_sprite_at(
                     if( !is_isometric() ) {
                         // never rotate isometric tiles
                         ret = sprite_tex->render_copy_ex( renderer, &destination, 90, nullptr,
-                                                          SDL_FLIP_NONE );
+                                                          flip );
                     } else {
                         ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
                                                           SDL_FLIP_NONE );
@@ -3168,8 +3176,8 @@ bool cata_tiles::draw_sprite_at(
             }
         }
     } else {
-        // don't rotate, same as case 0 above
-        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr, SDL_FLIP_NONE );
+        // Same as case 0 above
+        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr, flip );
     }
 
     printErrorIf( ret != 0, "SDL_RenderCopyEx() failed" );
@@ -3183,13 +3191,13 @@ bool cata_tiles::draw_sprite_at(
 bool cata_tiles::draw_tile_at(
     const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
     lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
-    const point &offset, float scale_x, float scale_y )
+    const point &offset, float scale_x, float scale_y, int mirror )
 {
     int fake_int = height_3d;
     draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, ll,
-                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y );
+                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y, mirror );
     draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, ll,
-                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y );
+                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y, mirror );
     return true;
 }
 
@@ -4434,8 +4442,6 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                     you.enchantment_cache->get_vision_description_struct( sees_with_special, d );
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-
-
                 return draw_from_id_string(
                            special_vis_desc.id,
                            p,
@@ -4460,6 +4466,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
             if( !m->type->species.empty() ) {
                 ent_subcategory = m->type->species.begin()->str();
             }
+            draw_options opts{};
             const int subtile = corner;
             // depending on the toggle flip sprite left or right
             int rot_facing = -2;
@@ -4467,6 +4474,20 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                 rot_facing = 0;
             } else if( m->facing == FacingDirection::LEFT ) {
                 rot_facing = -1;
+            }
+            int final_direction = rot_facing;
+            if( critter.has_effect( effect_downed ) ) {
+                const bool downed_upside_down = m->type->has_flag( mon_flag_BELLYUP );
+                if( downed_upside_down ) {
+                    final_direction = angle_to_dir4( 180_degrees );
+                } else if( rot_facing == -1 ) {
+                    final_direction = angle_to_dir4( 90_degrees );
+                    opts.offset.y += 4;
+                    opts.mirror = 1;
+                } else {
+                    final_direction = angle_to_dir4( 270_degrees );
+                    opts.offset.y += 4;
+                }
             }
             if( rot_facing >= -1 ) {
                 const mtype_id ent_name = m->type->id;
@@ -4482,14 +4503,13 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                         chosen_id = ridden_id;
                     }
                 }
-                draw_options opts{};
                 opts.category = ent_category;
                 opts.subcategory = ent_subcategory;
                 result = draw_from_id_string(
                              chosen_id,
                              p,
                              subtile,
-                             rot_facing,
+                             final_direction,
                              ll,
                              false,
                              height_3d,
@@ -4613,7 +4633,7 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
         scan_p.z()++;
     }
 
-    // Abort if no creature found
+    // Abort if no creature found.
     if( pcritter == nullptr ) {
         return false;
     }
@@ -4622,9 +4642,6 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
     // Draw shadow
     draw_options opts{};
     opts.category = TILE_CATEGORY::NONE;
-
-
-
 
     if( draw_from_id_string(
             "shadow",
@@ -4822,9 +4839,20 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
     false, []( const mutation_branch & mut ) {
         return mut.override_look.has_value();
     } );
-    // first draw the character itself(i guess this means a tileset that
-    // takes this seriously needs a naked sprite)
+    // Draw a naked sprite of the character.
     int prev_height_3d = height_3d;
+    int final_direction = ch.facing == FacingDirection::RIGHT ? 0 : -1;
+    const bool facing_right = final_direction == 0;
+    bool downed = ch.is_on_ground();
+
+    int mirror = 0;
+    if( downed ) {
+        final_direction = facing_right ? angle_to_dir4( 270_degrees ) : angle_to_dir4( 90_degrees );
+        if( !facing_right ) {
+            mirror = 1;
+        }
+    }
+
     if( override_look_muts.empty() ) {
         std::string ent_name;
         if( ch.is_npc() ) {
@@ -4832,32 +4860,36 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
         } else {
             ent_name = ch.male ? "player_male" : "player_female";
         }
-        // depending on the toggle flip sprite left or right
-        if( ch.facing == FacingDirection::RIGHT ) {
+        // Depending on the toggle flip sprite left or right.
+        if( final_direction == 0 || downed ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
             opts.scale_x = scale_x;
             opts.scale_y = scale_y;
+            opts.offset.y += downed ? 6 : 0;
+            opts.mirror = mirror;
             draw_from_id_string(
                 ent_name,
                 p,
                 corner,
-                0,
+                final_direction,
                 ll,
                 false,
                 height_3d,
                 opts
             );
-        } else if( ch.facing == FacingDirection::LEFT ) {
+        } else if( final_direction == -1 ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
             opts.scale_x = scale_x;
             opts.scale_y = scale_y;
+            opts.offset.y += downed ? 6 : 0;
+            opts.mirror = mirror;
             draw_from_id_string(
                 ent_name,
                 p,
                 corner,
-                -1,
+                final_direction,
                 ll,
                 false,
                 height_3d,
@@ -4874,31 +4906,35 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
             debugmsg( "invalid tile category %s", override_look.tile_category );
             category = TILE_CATEGORY::NONE;
         }
-        if( ch.facing == FacingDirection::RIGHT ) {
+        if( final_direction == 0 || downed ) {
             draw_options opts{};
             opts.category = category;
             opts.scale_x = scale_x;
             opts.scale_y = scale_y;
+            opts.offset.y += downed ? 6 : 0;
+            opts.mirror = mirror;
             draw_from_id_string(
                 override_look.id,
                 p,
                 corner,
-                0,
+                final_direction,
                 ll,
                 false,
                 height_3d,
                 opts
             );
-        } else if( ch.facing == FacingDirection::LEFT ) {
+        } else if( final_direction == -1 ) {
             draw_options opts{};
             opts.category = category;
             opts.scale_x = scale_x;
             opts.scale_y = scale_y;
+            opts.offset.y += downed ? 6 : 0;
+            opts.mirror = mirror;
             draw_from_id_string(
                 override_look.id,
                 p,
                 corner,
-                -1,
+                final_direction,
                 ll,
                 false,
                 height_3d,
@@ -4913,39 +4949,42 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint_
         std::string draw_id = overlay.first;
         if( find_overlay_looks_like( ch.male, overlay.first, overlay.second, draw_id ) ) {
             int overlay_height_3d = prev_height_3d;
-            if( ch.facing == FacingDirection::RIGHT ) {
+            if( final_direction == 0 || downed ) {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
                 opts.scale_x = scale_x;
                 opts.scale_y = scale_y;
+                opts.offset.y += downed ? 6 : 0;
+                opts.mirror = mirror;
                 draw_from_id_string(
                     draw_id,
                     p,
                     corner,
-                    0,
+                    final_direction,
                     ll,
                     false,
                     height_3d,
                     opts
                 );
-            } else if( ch.facing == FacingDirection::LEFT ) {
+            } else if( final_direction == -1 ) {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
                 opts.scale_x = scale_x;
                 opts.scale_y = scale_y;
-
+                opts.offset.y += downed ? 6 : 0;
+                opts.mirror = mirror;
                 draw_from_id_string(
                     draw_id,
                     p,
                     corner,
-                    -1,
+                    final_direction,
                     ll,
                     false,
                     height_3d,
                     opts
                 );
             }
-            // the tallest height-having overlay is the one that counts
+            // The tallest height-having overlay is the one that counts.
             height_3d = std::max( height_3d, overlay_height_3d );
         }
     }
