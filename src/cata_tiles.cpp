@@ -3105,9 +3105,9 @@ bool cata_tiles::draw_sprite_at(
     }
 
     point draw_offset = point(
-        static_cast<int>( std::round( offset_x ) ),
-        static_cast<int>( std::round( offset_y ) )
-    );
+                            static_cast<int>( std::round( offset_x ) ),
+                            static_cast<int>( std::round( offset_y ) )
+                        );
 
     const point &tile_offset = retract <= 0
                                ? tile.offset

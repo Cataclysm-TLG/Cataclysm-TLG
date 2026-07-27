@@ -562,7 +562,7 @@
     "common": false,
     "bonus_int": { "one_in": 4 },
     "bonus_per": { "one_in": 4 },
-    "shopkeeper_item_group": "NC_GODCO_MERCHANT_sell",
+    "shopkeeper_item_group": [ { "group": "NC_GODCO_MERCHANT_sell", "rigid": true } ],
     "skills": [
       {
         "skill": "ALL",

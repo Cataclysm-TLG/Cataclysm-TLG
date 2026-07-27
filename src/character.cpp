@@ -1226,7 +1226,9 @@ double Character::aim_factor_from_weight( const item &gun ) const
                     using_bipod = true;
                 } else {
                     const optional_vpart_position vp = here.veh_at( pos_abs( ) );
-                    using_bipod = vp->vehicle().has_part( pos_abs( ), "MOUNTABLE" );
+                    if( vp ) {
+                        using_bipod = vp->vehicle().has_part( pos_abs( ), "MOUNTABLE" );
+                    }
                 }
             }
         }
