@@ -546,22 +546,23 @@ class cata_tiles
             const draw_options &opts
         );
 
-        // used by sdltiles for overmap drawing.
+        // Used by sdltiles for overmap drawing.
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
                                   const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
                                   lit_level ll,
                                   bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
 
+        // Wrapper for draw_sprite_at()
+        bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
+                           lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
+                           const point &offset,
+                           float scale_x, float scale_y, int mirror );
 
         bool draw_sprite_at(
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
             bool apply_visual_effects, int retract, int &height_3d, const point &offset,
             float scale_x, float scale_y, int mirror );
-        bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
-                           lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
-                           const point &offset,
-                           float scale_x, float scale_y, int mirror );
 
         /* Tile Picking */
         void get_tile_values( int t, const std::array<int, 4> &tn, int &subtile, int &rotation,

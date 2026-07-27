@@ -2611,12 +2611,13 @@ bool cata_tiles::draw_from_id_string_internal(
                                                   1.0f ) ) );
         }
 
-        if( prevent_occlusion_transp && retract > 0 && category != TILE_CATEGORY::OVERMAP_VISION_LEVEL ) {
-            res = find_tile_looks_like( id + "_transparent", category, variant );
-            if( res ) {
-                tt = &res->tile();
-            }
-        }
+         if( prevent_occlusion_transp && retract > 0 && category != TILE_CATEGORY::OVERMAP_VISION_LEVEL ) {
+             res = find_tile_looks_like( id + "_transparent", category, variant );
+            
+             if( res ) {
+                 tt = &res->tile();
+             }
+         }
     }
 
     // Intensity lookup.
@@ -2908,7 +2909,7 @@ bool cata_tiles::draw_from_id_string_internal(
         case TILE_CATEGORY::FURNITURE: {
             const furn_str_id fid( found_id );
             if( fid.is_valid() && !fid.obj().is_movable() ) {
-                seed = simple_point_hash( pos.raw().xy() );
+                seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
             }
             break;
         }
@@ -2916,13 +2917,13 @@ bool cata_tiles::draw_from_id_string_internal(
         case TILE_CATEGORY::OVERMAP_TERRAIN:
         case TILE_CATEGORY::OVERMAP_VISION_LEVEL:
         case TILE_CATEGORY::MAP_EXTRA:
-            seed = simple_point_hash( pos.raw().xy() );
+            seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
             break;
         case TILE_CATEGORY::NONE:
             if( found_id == "graffiti" ) {
                 seed = std::hash<std::string> {}( here.graffiti_at( tripoint_bub_ms( pos ) ) );
             } else if( string_starts_with( found_id, "graffiti" ) ) {
-                seed = simple_point_hash( pos.raw().xy() );
+                seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
             }
             break;
         case TILE_CATEGORY::ITEM:
@@ -2992,11 +2993,23 @@ bool cata_tiles::draw_from_id_string_internal(
     if( !prevent_occlusion_retract ) {
         retract = 0;
     }
-
     // Draw the tile
     draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll, nv_color_active, retract,
                   height_3d, offset, scale_x, scale_y, mirror );
 
+    return true;
+}
+
+bool cata_tiles::draw_tile_at(
+    const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
+    lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
+    const point &offset, float scale_x, float scale_y, int mirror )
+{
+    int fake_int = height_3d;
+    draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, ll,
+                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y, mirror );
+    draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, ll,
+                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y, mirror );
     return true;
 }
 
@@ -3209,19 +3222,6 @@ bool cata_tiles::draw_sprite_at(
     // cata_tiles::draw() here.draw_points_cache[z][row][col].com.height_3d
     // where we are accumulating the height of every sprite stacked up in a tile
     height_3d += tile.height_3d;
-    return true;
-}
-
-bool cata_tiles::draw_tile_at(
-    const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
-    lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
-    const point &offset, float scale_x, float scale_y, int mirror )
-{
-    int fake_int = height_3d;
-    draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, ll,
-                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y, mirror );
-    draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, ll,
-                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y, mirror );
     return true;
 }
 
@@ -4778,7 +4778,6 @@ bool cata_tiles::draw_zombie_revival_indicators( const tripoint_bub_ms &pos, con
     if( memorize_only ) {
         return false;
     }
-
     map &here = get_map();
     if( tileset_ptr->find_tile_type( ZOMBIE_REVIVAL_INDICATOR ) && !invisible[0] &&
         item_override.find( pos ) == item_override.end() &&
@@ -4787,10 +4786,6 @@ bool cata_tiles::draw_zombie_revival_indicators( const tripoint_bub_ms &pos, con
             if( i.can_revive() ) {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::NONE;
-
-
-
-
                 return draw_from_id_string(
                            ZOMBIE_REVIVAL_INDICATOR,
                            pos,
@@ -4837,7 +4832,8 @@ void cata_tiles::draw_zlevel_overlay( const tripoint_bub_ms &p, const lit_level 
         draw_rect.h = tile_height;
     }
 
-    // Overlay color is based on light level. "Fog" here refers to occlusion, not actual weather.
+    // Overlay color is based on light level. "Fog" here refers to tile discoloration
+    // to depict height, not actual weather.
     SDL_Color fog_color = curses_color_to_SDL( c_black );
     if( ll == lit_level::BRIGHT_ONLY || ll == lit_level::BRIGHT || ll == lit_level::LIT ) {
         fog_color = curses_color_to_SDL( c_light_gray );
@@ -5667,26 +5663,21 @@ void cata_tiles::draw_sct_frame( std::multimap<point, formatted_text> &overlay_s
             } else {
                 for( char &it : sText ) {
                     const std::string generic_id = get_ascii_tile_id( it, FG, -1 );
-
                     if( tileset_ptr->find_tile_type( generic_id ) ) {
                         draw_options opts{};
                         opts.category = TILE_CATEGORY::NONE;
-
-
-
                         int height_3d = 0;
                         draw_from_id_string(
                             generic_id,
-                            iD + tripoint_bub_ms( point_bub_ms( iOffset ), player_pos.z() ), // position
+                            iD + tripoint_bub_ms( point_bub_ms( iOffset ), player_pos.z() ),
                             0,
                             0,
                             lit_level::LIT,
                             false,
-                            height_3d,  // reference to int height_3d
+                            height_3d,
                             opts
                         );
                     }
-
                     if( is_isometric() ) {
                         iOffset.y++;
                     }
@@ -5704,13 +5695,10 @@ void cata_tiles::draw_zones_frame()
         for( int iX = zone_start.x(); iX <= zone_end.x(); ++iX ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-
-
-
             int height_3d = 0;
             draw_from_id_string(
                 "highlight",
-                tripoint_bub_ms( iX, iY, player_pos.z() ) + zone_offset.xy(), // position
+                tripoint_bub_ms( iX, iY, player_pos.z() ) + zone_offset.xy(),
                 0,
                 0,
                 lit_level::LIT,
@@ -5757,16 +5745,11 @@ void cata_tiles::draw_footsteps_frame( const tripoint_bub_ms &center )
     static const std::string id_footstep = "footstep";
     static const std::string id_footstep_above = "footstep_above";
     static const std::string id_footstep_below = "footstep_below";
-
     const tile_type *tl_above = tileset_ptr->find_tile_type( id_footstep_above );
     const tile_type *tl_below = tileset_ptr->find_tile_type( id_footstep_below );
-
     for( const tripoint_bub_ms &pos : sounds::get_footstep_markers() ) {
         draw_options opts{};
-
-
         opts.category = TILE_CATEGORY::NONE;
-
         int height_3d = 0;
         if( pos.z() > center.z() && tl_above ) {
             draw_from_id_string( id_footstep_above, pos, 0, 0, lit_level::LIT, false, height_3d, opts );
