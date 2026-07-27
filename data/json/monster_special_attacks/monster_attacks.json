@@ -734,6 +734,36 @@
   {
     "type": "monster_attack",
     "attack_type": "melee",
+    "id": "low_charge",
+    "cooldown": 10,
+    "move_cost": 100,
+    "hitsize_min": 4,
+    "attack_upper": false,
+    "condition": {
+      "and": [
+        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "not": { "u_has_flag": "GRAB_FILTER" } },
+        { "not": { "u_has_flag": "GRAB" } },
+        { "not": { "npc_has_flag": "GRAB_FILTER" } },
+        { "not": { "npc_has_flag": "GRAB" } },
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "npc_has_effect": "downed" } }
+      ]
+    },
+    "damage_max_instance": [ { "damage_type": "bash", "amount": 18 } ],
+    "effects_require_dmg": false,
+    "hit_dmg_u": "%1$s slams into you!",
+    "hit_dmg_npc": "%1$s slams into <npcname>!",
+    "no_dmg_msg_u": "%1$s slams into you, but fails to do any damage.",
+    "no_dmg_msg_npc": "%1$s slams into <npcname>, but fails to do any damage.",
+    "miss_msg_u": "%s rushes you, but fails to make contact.",
+    "miss_msg_npc": "%s rushes <npcname>, but fails to make contact.",
+    "effects": [ { "id": "downed", "chance": 33, "duration": 3 } ]
+  },
+  {
+    "type": "monster_attack",
+    "attack_type": "melee",
     "id": "leg_sweep",
     "cooldown": 10,
     "move_cost": 100,
@@ -753,8 +783,8 @@
     "hit_dmg_npc": "%1$s knocks <npcname> prone!",
     "no_dmg_msg_u": "%1$s tries to knock you down, but your armor protects you.",
     "no_dmg_msg_npc": "%1$s tries to knock <npcname> down, but their armor protects them.",
-    "miss_msg_u": "%s goes for your legs!  You duck!",
-    "miss_msg_npc": "%s goes <npcname>'s legs, but they duck!",
+    "miss_msg_u": "%s goes for your legs, but fails to connect.",
+    "miss_msg_npc": "%s goes <npcname>'s legs, but fails to connect.",
     "effects": [ { "id": "downed", "chance": 33, "duration": 3 } ]
   },
   {

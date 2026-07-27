@@ -158,7 +158,7 @@
     },
     "bleed_rate": 50,
     "fungalize_into": "mon_zombie_pig_fungus",
-    "special_attacks": [ [ "SMASH", 30 ], { "id": "impale" } ],
+    "special_attacks": [ { "id": "low_charge", "cooldown": 12 }, [ "SMASH", 30 ], { "id": "impale" } ],
     "extend": { "flags": [ "GROUP_BASH", "PUSH_VEH", "HIT_AND_RUN" ] }
   },
   {
@@ -176,7 +176,7 @@
     "death_function": { "effect": { "id": "death_tearburst", "hit_self": true }, "message": "The %s explodes!", "corpse_type": "NO_CORPSE" },
     "death_drops": "explode_zed_beast",
     "fungalize_into": "mon_zombie_pig_fungus",
-    "special_attacks": [ { "id": "impale" } ],
+    "special_attacks": [ { "id": "low_charge", "cooldown": 12 }, { "id": "impale" } ],
     "extend": { "flags": [ "HIT_AND_RUN" ] }
   },
   {

@@ -11571,7 +11571,7 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
                     const int damage = rng( force, force * 2.0f ) / 6;
                     // zed_damage uses flvel because they take damage based on c's velocity, not their own size.
                     int zed_damage = rng( flvel, flvel * 2.0f ) / 6;
-                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name(), critter.disp_name() );
+                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( false, true ), critter.disp_name() );
                     c->impact( damage, pt );
                     zed_damage = std::max( 0, ( zed_damage - critter.get_armor_type( damage_bash,
                                                 bodypart_id( "torso" ) ) ) );
@@ -11591,7 +11591,7 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
                     const int damage = rng( force, force * 2.0f ) / 6;
                     // guy_damage uses flvel because they take damage based on c's velocity, not their own size.
                     int guy_damage = rng( flvel, flvel * 2.0f ) / 6;
-                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name(), guy.disp_name() );
+                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( false, true ), guy.disp_name() );
                     c->impact( damage, pt );
                     guy_damage = std::max( 0, ( guy_damage - guy.get_armor_type( damage_bash,
                                                 bodypart_id( "torso" ) ) ) );
