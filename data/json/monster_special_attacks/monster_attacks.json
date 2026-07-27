@@ -759,7 +759,7 @@
     "no_dmg_msg_npc": "%1$s slams into <npcname>, but fails to do any damage.",
     "miss_msg_u": "%s rushes you, but fails to make contact.",
     "miss_msg_npc": "%s rushes <npcname>, but fails to make contact.",
-    "effects": [ { "id": "downed", "chance": 33, "duration": 3 } ]
+    "effects": [ { "id": "downed", "chance": 80, "duration": 3 } ]
   },
   {
     "type": "monster_attack",

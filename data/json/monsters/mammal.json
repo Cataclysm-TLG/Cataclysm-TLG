@@ -329,7 +329,6 @@
       { "id": "low_charge", "cooldown": 12 },
       [ "EAT_FOOD", 20 ],
       [ "EAT_CARRION", 60 ],
-      [ "SMASH", 11 ],
       { "id": "impale" }
     ],
     "flags": [
@@ -1715,7 +1714,7 @@
     "anger_triggers": [ "PLAYER_WEAK", "FRIEND_ATTACKED", "HURT" ],
     "fear_triggers": [ "FIRE", "PLAYER_CLOSE" ],
     "zombify_into": "mon_zombie_pig",
-    "special_attacks": [ { "id": "low_charge", "cooldown": 12 }, { "id": "smash", "throw_strength": 22 }, [ "EAT_FOOD", 20 ] ],
+    "special_attacks": [ { "id": "low_charge", "cooldown": 12 }, [ "EAT_FOOD", 20 ] ],
     "flags": [
       "SEES",
       "HEARS",
