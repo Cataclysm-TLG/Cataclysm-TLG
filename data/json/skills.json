@@ -69,7 +69,7 @@
   {
     "type": "skill",
     "id": "speech",
-    "name": { "str": "social" },
+    "name": { "str": "socializing" },
     "description": "Your skill in speaking to other people.  Covers ability in boasting, flattery, threats, persuasion, lies, bartering, and other facets of interpersonal communication.  Works best in conjunction with a high level of intelligence.",
     "companion_survival_rank_factor": 1,
     "display_category": "display_interaction",
