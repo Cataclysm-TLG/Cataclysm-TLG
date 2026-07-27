@@ -36,7 +36,7 @@
         "   ##  ##  ##  ##  DD   ",
         "                        "
       ],
-      "terrain": { "a": [ "t_pit_corpsed_flesh" ], "#": [ "t_dirt" ], "D": [ [ "t_pit_corpsed_flesh", 1 ], [ "t_dirt", 1 ] ] },
+      "terrain": { "a": [ "t_pit_corpsed" ], "#": [ "t_dirt" ], "D": [ [ "t_pit_corpsed", 1 ], [ "t_dirt", 1 ] ] },
       "furniture": { "X": [ [ "f_null", 3 ], [ "f_battlefield_cross", 1 ] ] },
       "place_loot": [
         { "group": "mass_grave_casings", "repeat": [ 10, 15 ], "x": [ 2, 22 ], "y": [ 18, 23 ] },

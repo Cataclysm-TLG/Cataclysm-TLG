@@ -26,7 +26,7 @@
     "common": false,
     "bonus_int": { "one_in": 4 },
     "bonus_per": { "one_in": 4 },
-    "shopkeeper_item_group": "NC_SOLDIER_QMASTER_misc",
+    "shopkeeper_item_group": [ { "group": "NC_SOLDIER_QMASTER_misc", "rigid": true } ],
     "carry_override": "NC_SOLDIER_QMASTER_misc",
     "skills": [
       {

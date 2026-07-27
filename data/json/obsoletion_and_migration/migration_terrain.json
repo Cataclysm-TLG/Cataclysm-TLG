@@ -93,5 +93,10 @@
     "type": "ter_furn_migration",
     "from_furn": "f_mutpoppy",
     "to_furn": "f_poppy"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_pit_corpsed_flesh",
+    "to_ter": "t_pit_corpsed"
   }
 ]

@@ -1271,8 +1271,8 @@ static std::string assemble_stat_details( avatar &u, int sel )
                 string_format(
                     _( "Muscle, toughness, and raw fortitude, strength is a useful stat in and out of melee combat.  Strong characters are more resistant to illness, excellent at grappling, and can make excellent use of bashing weapons.\n\n" ) )
 
-                +colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_str() ) ),
-                          c_light_blue )
+                + colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_str() ) ),
+                            c_light_blue )
                 + string_format( _( "\nBase HP: %d" ), u.get_part_hp_max( bodypart_id( "head" ) ) )
                 + string_format( _( "\nCarry weight: %.1f %s" ), convert_weight( u.weight_capacity() ),
                                  weight_units() )
@@ -1314,7 +1314,7 @@ static std::string assemble_stat_details( avatar &u, int sel )
                 + colorize(
                     string_format( _( "\nMelee to-hit bonus: +%.2f" ), u.get_melee_hit_base() )
                     + string_format( _( "\nThrowing penalty per target's dodge: +%d" ),
-                                    u.throw_dispersion_per_dodge( false ) ),
+                                     u.throw_dispersion_per_dodge( false ) ),
                     COL_STAT_BONUS );
             if( u.ranged_dex_mod() != 0 ) {
                 description_str += colorize( string_format( _( "\nRanged penalty: -%d" ),
@@ -1387,7 +1387,7 @@ static std::string assemble_stat_details( avatar &u, int sel )
 
         case 3: {
             description_str = string_format(
-                    _( "A measure of wits, proprioception, and acuity.  Perceptive characters excel at ranged accuracy, critical hits, and striking weakpoints.  Perception is broadly useful in combat, but most benefits stabbing weapons.\n\n" ) );
+                                  _( "A measure of wits, proprioception, and acuity.  Perceptive characters excel at ranged accuracy, critical hits, and striking weakpoints.  Perception is broadly useful in combat, but most benefits stabbing weapons.\n\n" ) );
 
             if( u.ranged_per_mod() > 0 ) {
                 description_str +=
