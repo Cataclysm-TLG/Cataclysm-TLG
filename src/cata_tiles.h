@@ -556,13 +556,13 @@ class cata_tiles
         bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
                            lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
                            const point &offset,
-                           float scale_x, float scale_y, int mirror );
+                           float scale_x, float scale_y, int mirror, bool creature = false );
 
         bool draw_sprite_at(
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
             bool apply_visual_effects, int retract, int &height_3d, const point &offset,
-            float scale_x, float scale_y, int mirror );
+            float scale_x, float scale_y, int mirror, bool creature = false );
 
         /* Tile Picking */
         void get_tile_values( int t, const std::array<int, 4> &tn, int &subtile, int &rotation,

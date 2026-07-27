@@ -2886,6 +2886,7 @@ bool cata_tiles::draw_from_id_string_internal(
     // Seed PRNG for random tile selection
     unsigned int seed = 0;
     creature_tracker &creatures = get_creature_tracker();
+    bool creature = false;
     switch( category ) {
         case TILE_CATEGORY::TERRAIN:
         case TILE_CATEGORY::FIELD:
@@ -2938,14 +2939,17 @@ bool cata_tiles::draw_from_id_string_internal(
             if( monster_override.find( tripoint_bub_ms( pos ) ) == monster_override.end() ) {
                 seed = reinterpret_cast<uintptr_t>( creatures.creature_at<monster>( tripoint_bub_ms( pos ) ) );
             }
+            creature = true;
             break;
         default:
             if( string_starts_with( found_id, "player_" ) ) {
                 seed = std::hash<std::string> {}( get_player_character().name );
+                creature = true;
             } else if( string_starts_with( found_id, "npc_" ) ) {
                 if( npc *const guy = creatures.creature_at<npc>( tripoint_bub_ms( pos ) ) ) {
                     seed = guy->getID().get_value();
                 }
+                creature = true;
             }
             break;
     }
@@ -2995,7 +2999,7 @@ bool cata_tiles::draw_from_id_string_internal(
     }
     // Draw the tile
     draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll, nv_color_active, retract,
-                  height_3d, offset, scale_x, scale_y, mirror );
+                  height_3d, offset, scale_x, scale_y, mirror, creature );
 
     return true;
 }
@@ -3003,13 +3007,13 @@ bool cata_tiles::draw_from_id_string_internal(
 bool cata_tiles::draw_tile_at(
     const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
     lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
-    const point &offset, float scale_x, float scale_y, int mirror )
+    const point &offset, float scale_x, float scale_y, int mirror, bool creature )
 {
     int fake_int = height_3d;
     draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, ll,
-                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y, mirror );
+                    apply_visual_effects, retract, fake_int, offset, scale_x, scale_y, mirror, creature );
     draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, ll,
-                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y, mirror );
+                    apply_visual_effects, retract, height_3d, offset, scale_x, scale_y, mirror, creature );
     return true;
 }
 
@@ -3017,7 +3021,7 @@ bool cata_tiles::draw_sprite_at(
     const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
     const point &p, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
     bool apply_visual_effects, int retract, int &height_3d, const point &offset, float scale_x,
-    float scale_y, int mirror )
+    float scale_y, int mirror, bool creature )
 {
     const std::vector<int> *picked = svlist.pick( loc_rand );
     if( !picked ) {
@@ -3094,7 +3098,7 @@ bool cata_tiles::draw_sprite_at(
     float offset_y = 0.0f;
     // If we are scaling or rotating a character tile, we need to do some annoying math to make sure
     // that all the overlays line up even if they're different sizes from the tile itself.
-    if( rota != 0 && rota != -1 && ( width != tileset_width || height != tileset_height ) ) {
+    if( creature && rota != 0 && rota != -1 && ( width != tileset_width || height != tileset_height ) ) {
         const float effective_scale_y = scale_y != 0 ? scale_y : 1.0f;
         const float scaled_height = height * effective_scale_y;
         const float scaled_tileset_height = tileset_height * effective_scale_y;
