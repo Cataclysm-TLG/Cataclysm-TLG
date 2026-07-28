@@ -2748,7 +2748,7 @@ int outfit::clatter_sound() const
 {
     int max_volume = 0;
     for( const item &i : worn ) {
-        // if the item has noise making pockets we should check if they have clatered
+        // if the item has noise making pockets we should check if they have clattered.
         if( i.has_noisy_pockets() ) {
             for( const item_pocket *pocket : i.get_all_contained_pockets() ) {
                 int noise_chance = pocket->get_pocket_data()->activity_noise.chance;

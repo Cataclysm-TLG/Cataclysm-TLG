@@ -11255,6 +11255,7 @@ float Character::hearing_ability() const
 
     volume_multiplier = enchantment_cache->modify_value( enchant_vals::mod::HEARING_MULT,
                         volume_multiplier );
+    volume_multiplier += std::clamp( get_per() * 0.05f - 0.4f, 0.f, 0.5f );
 
     if( has_effect( effect_deaf ) ) {
         // Scale linearly up to 30 minutes
