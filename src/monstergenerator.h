@@ -33,6 +33,7 @@ struct species_type {
     bool was_loaded = false;
     translation description;
     translation footsteps;
+    translation flight_sound;
     std::set<mon_flag_str_id> flags;
     enum_bitset<mon_trigger> anger;
     enum_bitset<mon_trigger> fear;
@@ -40,6 +41,9 @@ struct species_type {
     field_type_str_id bleeds;
     std::string get_footsteps() const {
         return footsteps.translated();
+    }
+    std::string get_flight_sound() const {
+        return flight_sound.translated();
     }
 
     species_type(): id( species_id::NULL_ID() ) {

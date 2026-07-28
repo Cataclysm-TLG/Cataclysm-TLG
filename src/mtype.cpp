@@ -259,12 +259,14 @@ void set_mon_flag_ids()
     mon_flag_PUSH_VEH = mon_flag_id( "PUSH_VEH" );
     mon_flag_QUEEN = mon_flag_id( "QUEEN" );
     mon_flag_QUIETDEATH = mon_flag_id( "QUIETDEATH" );
+    mon_flag_QUIETMOVES = mon_flag_id( "QUIETMOVES" );
     mon_flag_RANGED_ATTACKER = mon_flag_id( "RANGED_ATTACKER" );
     mon_flag_REVIVES = mon_flag_id( "REVIVES" );
     mon_flag_REVIVES_HEALTHY = mon_flag_id( "REVIVES_HEALTHY" );
     mon_flag_SEES = mon_flag_id( "SEES" );
     mon_flag_SHORTACIDTRAIL = mon_flag_id( "SHORTACIDTRAIL" );
     mon_flag_SILENT_DISAPPEAR = mon_flag_id( "SILENT_DISAPPEAR" );
+    mon_flag_SILENTMOVES = mon_flag_id( "SILENTMOVES" );
     mon_flag_SLUDGEPROOF = mon_flag_id( "SLUDGEPROOF" );
     mon_flag_SLUDGETRAIL = mon_flag_id( "SLUDGETRAIL" );
     mon_flag_SMALLSLUDGETRAIL = mon_flag_id( "SMALLSLUDGETRAIL" );
@@ -504,13 +506,24 @@ std::string mtype::get_description() const
     return description.translated();
 }
 
-
 std::string mtype::get_footsteps() const
 {
     if( !species.empty() ) {
-        return species.begin()->obj().get_footsteps();
+        auto it = species.begin();
+        std::advance( it, rng( 0, static_cast<int>( species.size() ) - 1 ) );
+        return it->obj().get_footsteps();
     }
-    return _( "footsteps." );
+    return _( "movement." );
+}
+
+std::string mtype::get_flight_sound() const
+{
+    if( !species.empty() ) {
+        auto it = species.begin();
+        std::advance( it, rng( 0, static_cast<int>( species.size() ) - 1 ) );
+        return it->obj().get_flight_sound();
+    }
+    return _( "movement." );
 }
 
 void mtype::set_strategy()

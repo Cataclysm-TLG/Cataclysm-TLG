@@ -4,6 +4,7 @@
     "id": "MAMMAL",
     "description": "a mammal",
     "fear_triggers": [ "HURT", "FIRE", "FRIEND_DIED" ],
+    "flight_sound": "flapping.",
     "bleeds": "fd_blood"
   },
   {
@@ -11,6 +12,7 @@
     "id": "AMPHIBIAN",
     "description": "an amphibian",
     "fear_triggers": [ "HURT", "FIRE" ],
+    "flight_sound": "flapping.",
     "flags": [ "BELLYUP" ],
     "bleeds": "fd_blood"
   },
@@ -19,6 +21,7 @@
     "id": "BIRD",
     "description": "a bird",
     "fear_triggers": [ "HURT", "SOUND", "FRIEND_ATTACKED" ],
+    "flight_sound": "fluttering.",
     "bleeds": "fd_blood"
   },
   {
@@ -26,6 +29,7 @@
     "id": "CYBORG",
     "description": "a cyborg",
     "flags": [ "DRACULIN_IMMUNE" ],
+    "flight_sound": "WHIRR!",
     "footsteps": "heavy thuds."
   },
   {
@@ -33,6 +37,7 @@
     "id": "REPTILE",
     "description": "a reptile",
     "fear_triggers": [ "HURT", "FIRE" ],
+    "flight_sound": "flapping.",
     "bleeds": "fd_blood"
   },
   {
@@ -40,6 +45,7 @@
     "id": "FISH",
     "description": "a fish",
     "fear_triggers": [ "HURT", "FRIEND_ATTACKED" ],
+    "flight_sound": "flapping.",
     "flags": [ "BELLYUP" ],
     "bleeds": "fd_blood"
   },
@@ -56,11 +62,13 @@
   {
     "type": "SPECIES",
     "id": "MUTANT",
-    "description": "a mutant"
+    "description": "a mutant",
+    "flight_sound": "flapping."
   },
   {
     "type": "SPECIES",
     "id": "NETHER",
+    "flight_sound": "flapping.",
     "flags": [ "DRACULIN_IMMUNE" ]
   },
   {
@@ -73,12 +81,14 @@
     "type": "SPECIES",
     "id": "NETHER_EMANATION",
     "fear_triggers": [ "HURT" ],
+    "flight_sound": "whooshing.",
     "flags": [ "DRACULIN_IMMUNE" ]
   },
   {
     "type": "SPECIES",
     "id": "MIGO",
     "fear_triggers": [ "HURT" ],
+    "flight_sound": "flapping.",
     "flags": [ "DRACULIN_IMMUNE" ]
   },
   {
@@ -92,6 +102,7 @@
     "type": "SPECIES",
     "id": "FUNGUS",
     "fear_triggers": [ "HURT", "FIRE" ],
+    "flight_sound": "flapping.",
     "flags": [ "DRACULIN_IMMUNE" ]
   },
   {
@@ -101,6 +112,7 @@
     "anger_triggers": [ "FRIEND_DIED" ],
     "fear_triggers": [ "HURT", "FIRE" ],
     "bleeds": "fd_blood_insect",
+    "flight_sound": "flapping.",
     "flags": [ "DRACULIN_IMMUNE", "BELLYUP" ]
   },
   {
@@ -118,6 +130,7 @@
     "description": "a flying insect",
     "footsteps": "BZZZZZZZZZZZZZZZZZ",
     "anger_triggers": [ "FRIEND_DIED" ],
+    "flight_sound": "flapping.",
     "flags": [ "LOUDMOVES", "DRACULIN_IMMUNE", "BELLYUP" ],
     "bleeds": "fd_blood_insect"
   },
@@ -160,6 +173,7 @@
     "id": "ZOMBIE",
     "description": "a zombie",
     "footsteps": "shuffling.",
+    "flight_sound": "flapping.",
     "bleeds": "fd_blood"
   },
   {
@@ -174,14 +188,16 @@
     "description": "a robot",
     "footsteps": "mechanical whirring.",
     "bleeds": "fd_mechanical_fluid",
+    "flight_sound": "WHIRR!",
     "flags": [ "DRACULIN_IMMUNE" ]
   },
   {
     "type": "SPECIES",
     "id": "ROBOT_FLYING",
     "description": "a flying robot",
-    "footsteps": "WHIRR",
-    "flags": [ "LOUDMOVES" ]
+    "footsteps": "mechanical whirring.",
+    "flight_sound": "WHIRR!",
+    "flags": [ "LOUDMOVES", "DRACULIN_IMMUNE" ]
   },
   {
     "type": "SPECIES",
