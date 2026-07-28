@@ -835,7 +835,7 @@
     "max_intensity": 3,
     "int_dur_factor": "100 s",
     "show_in_info": true,
-    "base_mods": { "pain_min": [ 1 ], "pain_chance": [ -50 ], "pain_chance_bot": [ 1000 ] },
+    "base_mods": { "pain_min": [ 1 ], "pain_chance": [ -50 ], "pain_max_val": [ 15 ], "pain_chance_bot": [ 1000 ] },
     "scaling_mods": { "pain_max_val": [ 5 ], "pain_chance": [ 150 ] },
     "limb_score_mods": [ { "limb_score": "reaction", "modifier": 0.9, "scaling": -0.2 } ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
@@ -2855,7 +2855,19 @@
     "desc": [ "Your %s is uncomfortable.  Wearing something soft under your hard armor would help." ],
     "max_intensity": 1,
     "part_descs": true,
-    "base_mods": { "speed_mod": [ -2 ], "pain_min": [ 1 ], "pain_chance": [ 2 ], "pain_max_val": [ -1 ] }
+    "immune_bp_flags": [ "BIONIC_LIMB" ],
+    "base_mods": { "speed_mod": [ -4 ], "pain_min": [ 1 ], "pain_chance": [ 2 ], "pain_max_val": [ 15 ] },
+    "limb_score_mods": [
+      { "limb_score": "manip", "modifier": -0.05 },
+      { "limb_score": "grip", "modifier": -0.05 },
+      { "limb_score": "block", "modifier": -0.05 },
+      { "limb_score": "lift", "modifier": -0.05 },
+      { "limb_score": "move_speed", "modifier": -0.05 },
+      { "limb_score": "balance", "modifier": -0.05 },
+      { "limb_score": "swimming", "modifier": -0.05 },
+      { "limb_score": "crawl", "modifier": -0.05 }
+    ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD_LOCAL" ]
   },
   {
     "type": "effect_type",
@@ -2936,7 +2948,7 @@
     "desc": [ "Your %s is blistering from the intense heat." ],
     "main_parts_only": true,
     "part_descs": true,
-    "miss_messages": [ [ "Your blisters distract you", 1 ] ],
+    "miss_messages": [ [ "Your burns distract you.", 1 ] ],
     "immune_bp_flags": [ "BIONIC_LIMB" ],
     "base_mods": {
       "dex_mod": [ -1 ],
@@ -3422,7 +3434,8 @@
     "base_mods": {
       "focus_min": [ 1 ],
       "focus_max": [ 2 ],
-      "focus_max_val": [ 10 ],
+      "focus_max_val": [ 110 ],
+      "focus_min_val": [ 5 ],
       "focus_chance": [ 60 ],
       "int_mod": [ 1 ],
       "per_mod": [ 0.5 ],
@@ -3439,7 +3452,6 @@
     },
     "scaling_mods": {
       "focus_min": [ -1 ],
-      "focus_min_val": [ -10 ],
       "focus_max_val": [ 5 ],
       "speed_mod": [ 3 ],
       "str_mod": [ 0.5 ],
@@ -3470,7 +3482,8 @@
       "focus_min": [ 1 ],
       "focus_max": [ 2 ],
       "speed_mod": [ 3 ],
-      "focus_max_val": [ 6 ],
+      "focus_max_val": [ 106 ],
+      "focus_min_val": [ 20 ],
       "focus_chance": [ 40 ],
       "int_mod": [ 1 ],
       "per_mod": [ 0.5 ],
@@ -3515,35 +3528,34 @@
       "vomit_tick": [ 180 ],
       "focus_min": [ 1 ],
       "focus_max": [ 2 ],
-      "focus_chance": [ 10 ],
-      "focus_max_val": [ 8 ],
+      "focus_chance": [ 100 ],
+      "focus_max_val": [ 104 ],
+      "focus_min_val": [ 50 ],
       "fatigue_min": [ -1 ],
       "fatigue_max": [ -3 ],
       "fatigue_chance": [ 100 ],
-      "fatigue_max_val": [ -25 ]
+      "fatigue_min_val": [ 100 ]
     },
-    "scaling_mods": {
-      "focus_min_val": [ -8 ],
-      "focus_max_val": [ -8 ],
-      "focus_min": [ -1 ],
-      "vomit_chance": [ 21 ],
-      "int_mod": [ -1 ],
-      "per_mod": [ -1 ]
-    },
+    "scaling_mods": { "focus_min": [ -8 ], "focus_max": [ -4 ], "focus_min_val": [ -20 ], "vomit_chance": [ 21 ], "int_mod": [ -1 ], "per_mod": [ -1 ] },
     "blood_analysis_description": "Nicotine"
   },
   {
     "type": "effect_type",
     "id": "took_antihistamine",
     "rating": "good",
-    "base_mods": { "fatigue_min": [ 2 ], "fatigue_max": [ 10 ], "fatigue_chance": [ 60 ], "fatigue_max_val": [ 90 ] },
+    "base_mods": {
+      "fatigue_min": [ 0 ],
+      "fatigue_max": [ 5 ],
+      "fatigue_chance": [ 600 ],
+      "fatigue_max_val": [ 200 ]
+    },
     "blood_analysis_description": "Diphenhydramine"
   },
   {
     "type": "effect_type",
     "id": "zolpidem",
     "name": [ "Zolpidem" ],
-    "desc": [ "Medication is making you more drowsy by the minute" ],
+    "desc": [ "Medication is making you more drowsy by the minute." ],
     "rating": "good",
     "base_mods": {
       "int_mod": [ -1 ],
@@ -3551,7 +3563,7 @@
       "fatigue_min": [ 2 ],
       "fatigue_max": [ 60 ],
       "fatigue_chance": [ 60 ],
-      "fatigue_max_val": [ 350 ]
+      "fatigue_max_val": [ 500 ]
     },
     "blood_analysis_description": "Zolpidem"
   },
@@ -3582,7 +3594,7 @@
       "pkill_max_val": [ 7 ],
       "pkill_min": [ 1 ],
       "pkill_tick": [ 45 ],
-      "fatigue_max_val": [ 90 ],
+      "fatigue_max_val": [ 130 ],
       "fatigue_chance": [ 1000 ],
       "fatigue_min": [ 1 ]
     },
@@ -3735,6 +3747,7 @@
       "per_mod": [ -0.67 ],
       "dex_mod": [ -1.0 ],
       "int_mod": [ -1.67 ],
+      "pain_max_val": [ 15 ],
       "pain_chance": [ -500 ],
       "stamina_max": [ -500 ],
       "stamina_chance": [ -300 ],
@@ -3775,7 +3788,7 @@
     "miss_messages": [ [ "You feel horrible.", 1 ] ],
     "rating": "bad",
     "base_mods": {
-      "pain_max_val": [ 35 ],
+      "pain_max_val": [ 25 ],
       "pain_min": [ 1, 0 ],
       "pain_chance": [ 1800 ],
       "stamina_min": [ -100 ],
@@ -3783,6 +3796,7 @@
       "stamina_chance": [ 2400 ]
     },
     "scaling_mods": {
+      "pain_max_val": [ 15 ],
       "per_mod": [ -0.5 ],
       "dex_mod": [ -1.0 ],
       "int_mod": [ -1.0 ],
@@ -3844,6 +3858,7 @@
       "vomit_tick": [ 1800 ]
     },
     "scaling_mods": {
+      "pain_max_val": [ 15 ],
       "str_mod": [ -1.0 ],
       "per_mod": [ -0.67 ],
       "dex_mod": [ -1.34 ],
@@ -4398,8 +4413,23 @@
     "max_intensity": 150,
     "max_duration": "30 s",
     "int_add_val": 1,
-    "base_mods": { "pkill_max_val": [ 1 ], "pkill_min": [ 1 ], "pkill_max": [ 1 ], "pkill_tick": [ 1 ] },
-    "scaling_mods": { "pkill_max_val": [ 1 ], "per_mod": [ -0.03 ] }
+    "base_mods": {
+      "fatigue_min": [ 1 ],
+      "fatigue_max_val": [ 100 ],
+      "fatigue_chance": [ 190 ],
+      "pkill_max_val": [ 1 ],
+      "pkill_min": [ 1 ],
+      "pkill_max": [ 1 ],
+      "pkill_tick": [ 1 ]
+    },
+    "scaling_mods": {
+      "pkill_max_val": [ 1 ],
+      "per_mod": [ -0.03 ],
+      "dex_mod": [ -0.03 ],
+      "int_mod": [ -0.02 ],
+      "fatigue_max_val": [ 1 ],
+      "fatigue_chance": [ -1 ]
+    }
   },
   {
     "type": "effect_type",
@@ -4515,7 +4545,7 @@
       "focus_min": [ 1 ],
       "focus_max": [ 1 ],
       "focus_chance": [ 600 ],
-      "focus_max_val": [ 5 ],
+      "focus_max_val": [ 105 ],
       "fatigue_min": [ -1 ],
       "fatigue_max": [ -1 ],
       "fatigue_chance": [ 100 ],
@@ -4557,7 +4587,7 @@
   {
     "type": "effect_type",
     "id": "cough_suppress",
-    "base_mods": { "fatigue_min": [ 1 ], "fatigue_max": [ 6 ], "fatigue_chance": [ 60 ], "fatigue_max_val": [ 60 ] }
+    "base_mods": { "fatigue_min": [ 1 ], "fatigue_max": [ 6 ], "fatigue_chance": [ 60 ], "fatigue_max_val": [ 200 ] }
   },
   {
     "type": "effect_type",

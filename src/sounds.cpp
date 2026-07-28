@@ -556,16 +556,16 @@ static bool describe_sound( sounds::sound_t category, bool from_player_position 
         switch( category ) {
             case sounds::sound_t::background:
             case sounds::sound_t::weather:
-                return one_in( 80  );
+                return one_in( 80 );
             case sounds::sound_t::sensory:
                 return false;
             case sounds::sound_t::music:
-                return one_in( 80  );
+                return one_in( 80 );
             case sounds::sound_t::movement:
             case sounds::sound_t::activity:
-                return one_in( 50  );
+                return one_in( 50 );
             case sounds::sound_t::destructive_activity:
-                return one_in( 20  );
+                return one_in( 20 );
             case sounds::sound_t::speech:
             case sounds::sound_t::electronic_speech:
             case sounds::sound_t::alarm:
@@ -599,7 +599,7 @@ void sounds::process_sound_markers( Character *you )
         const int distance_to_sound = sound_distance( you_pos, pos );
         const int raw_volume = sound.volume;
         add_msg_debug( debugmode::DF_SOUND,
-            "sound vol %d dist %d", raw_volume, distance_to_sound );
+                       "sound vol %d dist %d", raw_volume, distance_to_sound );
         // The felt volume of a sound is not affected by negative multipliers, such as already
         // deafened players or players with sub-par hearing to begin with.
         int felt_volume = static_cast<int>( std::round( ( raw_volume * std::min( 1.0f,

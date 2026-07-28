@@ -325,12 +325,7 @@
     "anger_triggers": [ "PLAYER_WEAK", "FRIEND_ATTACKED", "HURT" ],
     "fear_triggers": [ "FIRE", "PLAYER_CLOSE" ],
     "zombify_into": "mon_zpig_brute",
-    "special_attacks": [
-      { "id": "low_charge", "cooldown": 12 },
-      [ "EAT_FOOD", 20 ],
-      [ "EAT_CARRION", 60 ],
-      { "id": "impale" }
-    ],
+    "special_attacks": [ { "id": "low_charge", "cooldown": 12 }, [ "EAT_FOOD", 20 ], [ "EAT_CARRION", 60 ], { "id": "impale" } ],
     "flags": [
       "SEES",
       "HEARS",

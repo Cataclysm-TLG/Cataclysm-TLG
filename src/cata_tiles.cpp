@@ -2611,13 +2611,13 @@ bool cata_tiles::draw_from_id_string_internal(
                                                   1.0f ) ) );
         }
 
-         if( prevent_occlusion_transp && retract > 0 && category != TILE_CATEGORY::OVERMAP_VISION_LEVEL ) {
-             res = find_tile_looks_like( id + "_transparent", category, variant );
-            
-             if( res ) {
-                 tt = &res->tile();
-             }
-         }
+        if( prevent_occlusion_transp && retract > 0 && category != TILE_CATEGORY::OVERMAP_VISION_LEVEL ) {
+            res = find_tile_looks_like( id + "_transparent", category, variant );
+
+            if( res ) {
+                tt = &res->tile();
+            }
+        }
     }
 
     // Intensity lookup.
@@ -3098,7 +3098,8 @@ bool cata_tiles::draw_sprite_at(
     float offset_y = 0.0f;
     // If we are scaling or rotating a character tile, we need to do some annoying math to make sure
     // that all the overlays line up even if they're different sizes from the tile itself.
-    if( creature && rota != 0 && rota != -1 && ( width != tileset_width || height != tileset_height ) ) {
+    if( creature && rota != 0 && rota != -1 && ( width != tileset_width ||
+            height != tileset_height ) ) {
         const float effective_scale_y = scale_y != 0 ? scale_y : 1.0f;
         const float scaled_height = height * effective_scale_y;
         const float scaled_tileset_height = tileset_height * effective_scale_y;

@@ -1461,7 +1461,7 @@ void monster::footsteps( const tripoint_bub_ms &p )
     } else if( has_flag( mon_flag_QUIETMOVES ) ) {
         volume -= 3;
     }
-    
+
     if( volume <= 0 ) {
         return;
     }
