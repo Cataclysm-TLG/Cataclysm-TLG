@@ -4,7 +4,7 @@
     "id": "constr_cardboard_fort",
     "group": "build_cardboard_fort",
     "category": "CONSTRUCT",
-    "required_skills": [ [ "fabrication", 0 ] ],
+    "required_skills": [ [ "fabrication", 1 ] ],
     "time": "15 m",
     "pre_special": "check_empty",
     "components": [

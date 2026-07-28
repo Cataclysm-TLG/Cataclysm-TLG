@@ -1179,5 +1179,104 @@
     "see_cost": "high",
     "vision_levels": "blends_till_outlines",
     "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "pig_farm_lab_ground_NW" ],
+    "name": "industrial pig farm parking",
+    "sym": "O",
+    "color": "dark_gray",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "pig_farm_lab_ground_W", "pig_farm_lab_ground_SW", "pig_farm_lab_ground_S" ],
+    "name": "industrial pig farm",
+    "sym": "L",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_ground_N",
+      "pig_farm_lab_ground_NE",
+      "pig_farm_lab_ground_M",
+      "pig_farm_lab_ground_E",
+      "pig_farm_lab_ground_SE"
+    ],
+    "name": "industrial pig farm",
+    "sym": "#",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "pig_farm_lab_roof_W", "pig_farm_lab_roof_SW", "pig_farm_lab_roof_S" ],
+    "name": "industrial pig farm roof",
+    "sym": "L",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_roof_NW",
+      "pig_farm_lab_roof_N",
+      "pig_farm_lab_roof_NE",
+      "pig_farm_lab_roof_M",
+      "pig_farm_lab_roof_E",
+      "pig_farm_lab_roof_SE"
+    ],
+    "name": "open air",
+    "sym": ".",
+    "color": "blue",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "abstract": "generic_ravine",
+    "name": "ravine",
+    "sym": "V",
+    "color": "light_gray",
+    "see_cost": "full_high"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "ravine_2way",
+      "ravine_3way",
+      "ravine_edge_mid",
+      "ravine_corner",
+      "ravine_2way_bottom",
+      "ravine_3way_bottom",
+      "ravine_edge_bottom",
+      "ravine_corner_bottom"
+    ],
+    "copy-from": "generic_ravine"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "ravine_bottom_forest",
+    "name": "ravine floor",
+    "extras": "ravine_bottom",
+    "copy-from": "forest"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "ravine_2way_ground", "ravine_3way_ground", "ravine_edge_ground", "ravine_corner_ground" ],
+    "copy-from": "generic_ravine",
+    "see_cost": "all_clear",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
   }
 ]

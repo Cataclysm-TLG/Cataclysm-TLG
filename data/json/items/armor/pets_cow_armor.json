@@ -91,21 +91,6 @@
   {
     "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
-    "id": "leatherbone_armor_cow",
-    "copy-from": "cow_armor",
-    "color": "green",
-    "name": { "str": "boiled leather cow barding with bones", "str_pl": "boiled leather cow bardings with bones" },
-    "description": "Decorative bones affixed to leather cow barding to invoke fear in bandits and raiders and traders all!  You could put this on a friendly cow.",
-    "price": "550 USD",
-    "price_postapoc": "35 USD",
-    "material": [ "leather" ],
-    "weight": "20 kg",
-    "volume": "180 L",
-    "material_thickness": 7
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "PET_ARMOR" ],
     "id": "rubber_armor_cow",
     "copy-from": "cow_armor",
     "color": "green",

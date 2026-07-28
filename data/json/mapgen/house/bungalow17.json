@@ -45,6 +45,7 @@
         "Q": "t_floor_waxed"
       },
       "place_nested": [ { "chunks": [ "rolling_trash_can_1x1" ], "x": 5, "y": 0 } ],
+      "place_loot": [ { "item": "fire_poker", "x": 11, "y": 19, "chance": 15 } ],
       "furniture": { "&": "f_boulder_large", "/": [ [ "f_null", 4 ], "f_ladder" ] }
     }
   },

@@ -281,6 +281,14 @@
   },
   {
     "type": "effect_type",
+    "id": "sound_triggered",
+    "name": [ "Heard Sound" ],
+    "max_intensity": 400,
+    "max_duration": "10 s",
+    "desc": [ "AI tag used for monsters responding to sound.  This is a bug if you have it." ]
+  },
+  {
+    "type": "effect_type",
     "id": "worked_on",
     "name": [ "Worked On" ],
     "desc": [ "AI tag used for robots being disabled.  This is a bug if you have it." ]
@@ -1885,7 +1893,6 @@
     "max_intensity": 3,
     "resist_traits": [ "THRESH_URSINE" ],
     "base_mods": {
-      "str_mod": [ 1 ],
       "fatigue_min": [ 1 ],
       "fatigue_chance": [ 1100 ],
       "hurt_min": [ 1 ],
@@ -2326,7 +2333,7 @@
       { "limb_score": "breathing", "modifier": 0.9, "scaling": -0.1 },
       { "limb_score": "balance", "modifier": 0.8, "scaling": -0.2 }
     ],
-    "flags": [ "EFFECT_LIMB_SCORE_MOD" ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD", "EFFECT_IMPEDING", "PREVENT_TRAINING" ],
     "show_in_info": true,
     "show_intensity": false
   },
@@ -3550,7 +3557,8 @@
   },
   {
     "type": "effect_type",
-    "id": "teleglow"
+    "id": "teleglow",
+    "max_duration": "960 m"
   },
   {
     "type": "effect_type",
@@ -3803,7 +3811,7 @@
   },
   {
     "type": "effect_type",
-    "id": "withdrawal_opoid_detoxed",
+    "id": "withdrawal_opioid_detoxed",
     "//": "Safe from withdrawals until you dose again."
   },
   {
@@ -4386,6 +4394,15 @@
   },
   {
     "type": "effect_type",
+    "id": "bionic_painkiller",
+    "max_intensity": 150,
+    "max_duration": "30 s",
+    "int_add_val": 1,
+    "base_mods": { "pkill_max_val": [ 1 ], "pkill_min": [ 1 ], "pkill_max": [ 1 ], "pkill_tick": [ 1 ] },
+    "scaling_mods": { "pkill_max_val": [ 1 ], "per_mod": [ -0.03 ] }
+  },
+  {
+    "type": "effect_type",
     "id": "toxin_buildup",
     "name": [ "", "Concerning symptoms", "Unnerving symptoms" ],
     "desc": [
@@ -4402,10 +4419,10 @@
     "id": "opioid_eff",
     "//": "Pain relief increases linearly. Vomit chance increases and then becomes impossible due to CNS depression. Sleep is mostly impossible but ramps up sharply at i4 toward 100% at i7.",
     "name": [
-      "Pain Relief",
-      "Painkillers",
-      "Heavy Opioid Euphoria",
+      "Opioid Painkillers",
+      "Opioid Buzz",
       "Opioid High",
+      "Heavy Opioid High",
       "Nodding Out",
       "Opioid Overdose",
       "Severe Opioid Overdose"
@@ -4422,7 +4439,7 @@
     "blood_analysis_description": "Opioids",
     "max_intensity": 7,
     "miss_messages": [ [ "You feel numb.", 1 ] ],
-    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 250000 ], [ 1, 50000 ], [ 1, 5000 ] ],
+    "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 500000 ], [ 1, 100000 ], [ 1, 5000 ] ],
     "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
     "pkill_addict_reduces": true,
     "base_mods": {
@@ -4434,10 +4451,10 @@
       "fatigue_max_val": [ 150 ],
       "cough_chance": [ -1002 ],
       "sleep_chance": [ -584 ],
-      "sleep_chance_bot": [ 1000 ],
+      "sleep_chance_bot": [ 6000 ],
       "sleep_tick": [ 1800 ],
       "sleep_min": [ 5 ],
-      "sleep_max": [ 10 ],
+      "sleep_max": [ 50 ],
       "pkill_max_val": [ 15 ],
       "pkill_min": [ 1 ],
       "pkill_tick": [ 45 ]

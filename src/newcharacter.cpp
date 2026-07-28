@@ -1268,12 +1268,15 @@ static std::string assemble_stat_details( avatar &u, int sel )
             u.recalc_hp();
             u.set_stored_kcal( u.get_healthy_kcal() );
             description_str =
-                colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_str() ) ),
-                          c_light_blue )
+                string_format(
+                    _( "Muscle, toughness, and raw fortitude, strength is a useful stat in and out of melee combat.  Strong characters are more resistant to illness, excellent at grappling, and can make excellent use of bashing weapons.\n\n" ) )
+
+                + colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_str() ) ),
+                            c_light_blue )
                 + string_format( _( "\nBase HP: %d" ), u.get_part_hp_max( bodypart_id( "head" ) ) )
                 + string_format( _( "\nCarry weight: %.1f %s" ), convert_weight( u.weight_capacity() ),
                                  weight_units() )
-                + string_format( _( "\nResistance to knock down effect when hit: %.1f" ), u.stability_roll() )
+                + string_format( _( "\nKnockdown resistance: %.1f" ), u.stability_roll() )
                 + string_format( _( "\nIntimidation: %i" ), u.intimidation() )
                 + string_format( _( "\nMaximum oxygen: %i" ), u.get_oxygen_max() )
                 + string_format( _( "\nShout volume: %i" ), u.get_shout_volume() )
@@ -1303,10 +1306,13 @@ static std::string assemble_stat_details( avatar &u, int sel )
 
         case 1: {
             description_str =
-                colorize(
-                    colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_dex() ) ),
-                              c_light_blue )
-                    + string_format( _( "\nMelee to-hit bonus: +%.2f" ), u.get_melee_hit_base() )
+                string_format(
+                    _( "Dexterity represents reaction speed, coordination, flexibility, and fine motor control.  Dextrous characters operate firearms more quickly, are faster and more accurate in melee combat, and can wriggle out of grabs even when they're not strong enough to overpower an opponent.\n\n" ) )
+                + colorize(
+                    string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_dex() ) ),
+                    c_light_blue )
+                + colorize(
+                    string_format( _( "\nMelee to-hit bonus: +%.2f" ), u.get_melee_hit_base() )
                     + string_format( _( "\nThrowing penalty per target's dodge: +%d" ),
                                      u.throw_dispersion_per_dodge( false ) ),
                     COL_STAT_BONUS );
@@ -1342,12 +1348,23 @@ static std::string assemble_stat_details( avatar &u, int sel )
 
         case 2: {
             const int read_spd = u.read_speed();
+            // It's actually a float, but we use a double here for legibility.
+            const double effective_focus = ( u.get_int() - 10.0 ) * 2.5;
             description_str =
-                colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_int() ) ),
-                          c_light_blue )
+                string_format(
+                    _( "Far more than just book smarts, intelligence represents willpower, analytical ability, open-mindedness, memory, and the ability to stay on-task even when bored or distracted.  Intelligent characters gain skills and proficiencies more quickly and complete crafting tasks with fewer delays.\n\n" ) )
+                + colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_int() ) ),
+                            c_light_blue )
+
                 + colorize( string_format( _( "\nRead times: %d%%" ), read_spd ),
                             ( read_spd == 100 ? COL_STAT_NEUTRAL :
                               ( read_spd < 100 ? COL_STAT_BONUS : COL_STAT_PENALTY ) ) )
+                + colorize(
+                    string_format( _( "\nEffective focus: %+g%%" ), effective_focus ),
+                    effective_focus == 0.0 ? COL_STAT_NEUTRAL :
+                    effective_focus > 0.0 ? COL_STAT_BONUS :
+                    COL_STAT_PENALTY
+                )
                 + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + colorize( string_format( _( "\nCrafting bonus: %2d%%" ), u.get_int() ),
                             COL_STAT_BONUS )
@@ -1362,15 +1379,18 @@ static std::string assemble_stat_details( avatar &u, int sel )
                        "\n- Chance of hacking/programming computers, card readers, robots, etc."
                        "\n- Chance of bypassing vehicle security system"
                        "\n- Chance to get better results when disassembling items"
-                       "\n- Bash damage with whip-type weapons"
+                       "\n- Bash damage with whips and flails"
                        "\n- Chance of being paralyzed by fear attack" ),
                     c_green );
         }
         break;
 
         case 3: {
+            description_str = string_format(
+                                  _( "A measure of wits, proprioception, and acuity.  Perceptive characters excel at ranged accuracy, critical hits, and striking weakpoints.  Perception is broadly useful in combat, but most benefits stabbing weapons.\n\n" ) );
+
             if( u.ranged_per_mod() > 0 ) {
-                description_str =
+                description_str +=
                     colorize( string_format( _( "%s\n" ), u.as_character()->get_stat_descriptor( u.get_per() ) ),
                               c_light_blue )
                     + colorize( string_format( _( "\nAiming penalty: -%d" ), u.ranged_per_mod() ),
@@ -1391,13 +1411,10 @@ static std::string assemble_stat_details( avatar &u, int sel )
                        "\n- Throwing accuracy"
                        "\n- Disinfecting your own wounds and using first aid on others"
                        "\n- Chance of losing control of vehicle when driving"
-                       "\n- Chance of spotting hidden creatures"
-                       "\n- Speed and effectiveness of lockpicking"
-                       "\n- Speed and effectiveness of foraging"
-                       "\n- Detection and disarming traps"
+                       "\n- Chance of spotting hidden creatures and traps"
+                       "\n- Speed and effectiveness of lockpicking and foraging"
                        "\n- Morale bonus when playing a musical instrument"
-                       "\n- Effectiveness of repairing and modifying clothes and armor"
-                       "\n- Chance of critical hits in melee combat" ),
+                       "\n- Effectiveness of repairing and modifying clothes and armor" ),
                     c_green );
         }
         break;

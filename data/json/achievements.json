@@ -1269,7 +1269,7 @@
         "event_statistic": "num_gains_survival_level_4",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 4"
+        "description": "Gain ecology skill level 4"
       }
     ]
   },
@@ -1283,7 +1283,7 @@
         "event_statistic": "num_gains_survival_level_7",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 7"
+        "description": "Gain ecology skill level 7"
       }
     ],
     "hidden_by": [ "achievement_lvl_4_survival" ]
@@ -1298,7 +1298,7 @@
         "event_statistic": "num_gains_survival_level_10",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 10"
+        "description": "Gain ecology skill level 10"
       }
     ],
     "hidden_by": [ "achievement_lvl_7_survival" ]

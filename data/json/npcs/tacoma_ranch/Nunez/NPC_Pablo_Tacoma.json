@@ -256,7 +256,7 @@
         }
       },
       {
-        "text": "[Survival 4, Fabrication 4] I know how to build a good root cellar.  Here, let me show you.",
+        "text": "[Ecology 4, Fabrication 4] I know how to build a good root cellar.  Here, let me show you.",
         "topic": "TALK_TACOMA_Pablo_Bakery-RootCellar1",
         "condition": {
           "and": [

@@ -86,6 +86,7 @@ static const damage_type_id damage_stab( "stab" );
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_badpoison( "badpoison" );
 static const efftype_id effect_beartrap( "beartrap" );
+static const efftype_id effect_bite( "bite" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_bouldering( "bouldering" );
@@ -102,12 +103,14 @@ static const efftype_id effect_dripping_mechanical_fluid( "dripping_mechanical_f
 static const efftype_id effect_emp( "emp" );
 static const efftype_id effect_fake_common_cold( "fake_common_cold" );
 static const efftype_id effect_fake_flu( "fake_flu" );
+static const efftype_id effect_fallout( "fallout" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_has_bag( "has_bag" );
 static const efftype_id effect_heavysnare( "heavysnare" );
 static const efftype_id effect_hit_by_player( "hit_by_player" );
-static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_in_pit( "in_pit" );
+static const efftype_id effect_incorporeal( "incorporeal" );
+static const efftype_id effect_infected( "infected" );
 static const efftype_id effect_leashed( "leashed" );
 static const efftype_id effect_lightsnare( "lightsnare" );
 static const efftype_id effect_maimed_arm( "maimed_arm" );
@@ -127,6 +130,9 @@ static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_run( "run" );
 static const efftype_id effect_slippery_terrain( "slippery_terrain" );
+static const efftype_id effect_smoke_eyes( "smoke_eyes" );
+static const efftype_id effect_smoke_lungs( "smoke_lungs" );
+static const efftype_id effect_sound_triggered( "sound_triggered" );
 static const efftype_id effect_spooked( "spooked" );
 static const efftype_id effect_spooked_recent( "spooked_recent" );
 static const efftype_id effect_stunned( "stunned" );
@@ -174,25 +180,34 @@ static const material_id material_vegetable( "vegetable" );
 static const mfaction_str_id monfaction_acid_ant( "acid_ant" );
 static const mfaction_str_id monfaction_ant( "ant" );
 static const mfaction_str_id monfaction_bee( "bee" );
+static const mfaction_str_id monfaction_fire_ant( "fire_ant" );
 static const mfaction_str_id monfaction_nether_player_hate( "nether_player_hate" );
+static const mfaction_str_id monfaction_roach( "roach" );
 static const mfaction_str_id monfaction_wasp( "wasp" );
 
 static const species_id species_AMPHIBIAN( "AMPHIBIAN" );
+static const species_id species_CENTIPEDE( "CENTIPEDE" );
 static const species_id species_CYBORG( "CYBORG" );
 static const species_id species_FISH( "FISH" );
 static const species_id species_SLIME( "SLIME" );
 static const species_id species_FUNGUS( "FUNGUS" );
 static const species_id species_HORROR( "HORROR" );
+static const species_id species_HUMAN( "HUMAN" );
+static const species_id species_INSECT( "INSECT" );
+static const species_id species_INSECT_FLYING( "INSECT_FLYING" );
 static const species_id species_MAMMAL( "MAMMAL" );
 static const species_id species_MIGO( "MIGO" );
 static const species_id species_MOLLUSK( "MOLLUSK" );
 static const species_id species_NETHER( "NETHER" );
 static const species_id species_PLANT( "PLANT" );
+static const species_id species_PSI_NULL( "PSI_NULL" );
 static const species_id species_ROBOT( "ROBOT" );
 static const species_id species_ROBOT_FLYING( "ROBOT_FLYING" );
-static const species_id species_PSI_NULL( "PSI_NULL" );
+static const species_id species_SPIDER( "SPIDER" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
 static const species_id species_nether_player_hate( "nether_player_hate" );
+
+static const skill_id skill_survival( "survival" );
 
 static const ter_str_id ter_t_gas_pump( "t_gas_pump" );
 static const ter_str_id ter_t_gas_pump_a( "t_gas_pump_a" );
@@ -680,7 +695,7 @@ void monster::try_biosignature()
         return;
     }
     // Keep poops from being uniform, especially when monsters first spawn.
-    if( one_in( 2 ) ) {
+    if( one_in( 4 ) ) {
         return;
     }
     if( !biosignatures ) {
@@ -1099,7 +1114,7 @@ std::string monster::extended_description() const
     describe_properties( _( "It can %s." ), {
         {swims(), pgettext( "Swim as an action", "swim" )},
         {flies(), pgettext( "Fly as an action", "fly" )},
-        {can_dig(), pgettext( "Dig as an action", "dig" )},
+        {can_dig(), pgettext( "Burrow as an action", "burrow" )},
         {climbs(), pgettext( "Climb as an action", "climb" )}
     } );
 
@@ -1108,10 +1123,6 @@ std::string monster::extended_description() const
         {mon_flag_VENOM, pgettext( "Poison as an action", "poison" )},
         {mon_flag_PARALYZEVENOM, pgettext( "Paralyze as an action", "paralyze" )}
     } );
-
-    if( !type->has_flag( mon_flag_NOHEAD ) ) {
-        ss += std::string( _( "It has a head." ) ) + "\n";
-    }
 
     if( debug_mode ) {
         ss += "--\n";
@@ -1515,7 +1526,7 @@ Creature *monster::attack_target()
 
     Creature *target = get_creature_tracker().creature_at( get_dest() );
     if( target == nullptr || target == this ||
-        attitude_to( *target ) == Attitude::FRIENDLY || !sees( here,  *target ) ||
+        attitude_to( *target ) == Attitude::FRIENDLY || !sees( here, *target ) ||
         target->is_hallucination() ) {
         return nullptr;
     }
@@ -1629,6 +1640,7 @@ monster_attitude monster::attitude( const Character *u ) const
 
     if( u != nullptr ) {
         if( faction == monfaction_bee ) {
+            // TODO: Use this for the planned insect eusocial super-specializations.
             if( u->has_trait( trait_BEE ) ) {
                 return MATT_FRIEND;
             } else if( u->has_trait( trait_FLOWERS ) ) {
@@ -1655,45 +1667,58 @@ monster_attitude monster::attitude( const Character *u ) const
             effective_anger -= 20;
         }
 
-        if( ( faction == monfaction_acid_ant || faction == monfaction_ant || faction == monfaction_bee ||
-              faction == monfaction_wasp ) && effective_anger >= 10 && u->has_trait( trait_PHEROMONE_INSECT ) ) {
+        if( effective_anger >= 10 && u->has_trait( trait_PHEROMONE_INSECT ) &&
+            ( faction == monfaction_acid_ant || faction == monfaction_ant || faction == monfaction_bee ||
+              faction == monfaction_fire_ant || faction == monfaction_wasp || faction == monfaction_roach ) ) {
             effective_anger -= 20;
         }
 
+        bool fishable = has_flag( mon_flag_FISHABLE );
+        bool animal = has_flag( mon_flag_ANIMAL );
         if( u->has_trait( trait_TERRIFYING ) ) {
-            effective_morale -= 10;
+            if( animal || ( in_species( species_HUMAN
+                                      ) && !in_species( species_ZOMBIE ) ) || has_flag( mon_flag_HAS_MIND ) ) {
+                effective_morale -= 10;
+            }
         }
-
-        if( has_flag( mon_flag_ANIMAL ) ) {
-            if( u->has_effect( effect_natures_commune ) ) {
-                effective_anger -= 10;
-                if( effective_anger < 10 ) {
-                    effective_morale += 55;
-                }
+        if( animal || fishable ) {
+            double anger_mod = u->get_skill_level( skill_survival );
+            if( fishable && !animal ) {
+                anger_mod *= 0.5;
             }
             if( u->has_trait( trait_ANIMALEMPATH ) ) {
-                effective_anger -= 10;
+                anger_mod = std::max( 3.0, anger_mod * 2.0 );
                 if( effective_anger < 10 ) {
-                    effective_morale += 55;
+                    effective_morale += static_cast<int>( std::round( anger_mod * 2.0 ) );
+                } else {
+                    effective_anger -= static_cast<int>( anger_mod );
                 }
             } else if( u->has_trait( trait_ANIMALEMPATH2 ) ) {
-                effective_anger -= 20;
-                if( effective_anger < 20 ) {
-                    effective_morale += 80;
+                anger_mod = std::max( 4.0, anger_mod * 2.5 );
+                if( effective_anger < 10 ) {
+                    effective_morale += static_cast<int>( std::round( anger_mod * 2.5 ) );
+                } else {
+                    effective_anger -= static_cast<int>( anger_mod );
                 }
             } else if( u->has_trait( trait_ANIMALDISCORD ) ) {
                 if( effective_anger >= 10 ) {
-                    effective_anger += 10;
+                    effective_anger += 15 - static_cast<int>( anger_mod );
                 }
                 if( effective_anger < 10 ) {
-                    effective_morale -= 5;
+                    effective_morale -= 13 - static_cast<int>( anger_mod );
                 }
-            } else if( u->has_trait( trait_ANIMALDISCORD2 ) ) {
-                if( effective_anger >= 20 ) {
-                    effective_anger += 20;
+            }  else if( u->has_trait( trait_ANIMALDISCORD2 ) ) {
+                if( effective_anger >= 10 ) {
+                    effective_anger += 25 - static_cast<int>( anger_mod );
                 }
-                if( effective_anger < 20 ) {
-                    effective_morale -= 5;
+                if( effective_anger < 10 ) {
+                    effective_morale -= 13 - static_cast<int>( anger_mod );
+                }
+            } else {
+                if( effective_anger < 10 ) {
+                    effective_morale += static_cast<int>( std::round( anger_mod * 2.0 ) );
+                } else {
+                    effective_anger -= static_cast<int>( anger_mod );
                 }
             }
         }
@@ -1879,10 +1904,26 @@ bool monster::is_elec_immune() const
 
 bool monster::is_immune_effect( const efftype_id &effect ) const
 {
+    // Currently monsters aren't affected by radiation.
+    if( effect == effect_bite || effect == effect_infected || effect == effect_fallout ) {
+        return true;
+    }
+
     if( effect == effect_onfire ) {
         return is_immune_damage( damage_heat ) ||
                made_of( phase_id::LIQUID ) ||
                has_flag( mon_flag_FIREY );
+    }
+
+    if( effect == effect_smoke_eyes ) {
+        return !type->has_flag( mon_flag_SEES ) || !made_of_any( Creature::cmat_flesh ) ||
+               type->in_species( species_INSECT ) || type->in_species( species_MIGO ) ||
+               type->in_species( species_SPIDER ) || type->in_species( species_CENTIPEDE ) ||
+               type->in_species( species_CYBORG ) || type->in_species( species_INSECT_FLYING );
+    }
+
+    if( effect == effect_smoke_lungs ) {
+        return !type->has_flag( mon_flag_NO_BREATHE );
     }
 
     if( effect == effect_bleed ) {
@@ -1906,7 +1947,8 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
     }
 
     if( effect == effect_tpollen ) {
-        return type->in_species( species_PLANT );
+        return type->in_species( species_PLANT ) ||  type->in_species( species_CENTIPEDE ) ||
+               type->in_species( species_ROBOT_FLYING );
     }
 
     if( effect == effect_stunned ) {
@@ -3709,11 +3751,6 @@ bool monster::is_electrical() const
            has_flag( mon_flag_ELECTRIC ) || in_species( species_CYBORG );
 }
 
-bool monster::is_fae() const
-{
-    return has_flag( mon_flag_FAE_CREATURE );
-}
-
 bool monster::is_hallucination() const
 {
     return hallucination;
@@ -4082,8 +4119,13 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
         return;
     }
     // Only trigger this if the monster is not friendly or the source isn't us or the player.
-    if( source != pos_bub() && ( friendly == 0 || source != get_player_character().pos_bub() ) ) {
-        process_trigger( mon_trigger::SOUND, volume );
+    // Skip if the sound is quiet-ish, or we've already hear a louder sound recently.
+    if( source != pos_bub() && volume > 15 && ( friendly == 0 ||
+            source != get_player_character().pos_bub() ) &&
+        get_effect_int( effect_sound_triggered ) < volume ) {
+        add_effect( effect_sound_triggered, ( 1_seconds * rng( 2, 10 ) ), false, std::min( volume, 400 ) );
+        int trigger_strength = std::max( 0, volume - 15 );
+        process_trigger( mon_trigger::SOUND, trigger_strength );
     }
     provocative_sound = tmp_provocative;
     if( morale >= 0 && anger >= 10 ) {

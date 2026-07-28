@@ -77,7 +77,7 @@
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "spear_shaft", 1 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ] ]
   },
   {
     "result": "sword_cane",
@@ -249,11 +249,7 @@
     "using": [ [ "redsmithing_standard", 4 ] ],
     "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "bronze_fragment", 4 ] ],
-      [ [ "spear_shaft", 1 ] ],
-      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
-    ]
+    "components": [ [ [ "bronze_fragment", 4 ] ], [ [ "spear_shaft", 1 ] ] ]
   },
   {
     "result": "spear_bronze",
@@ -293,7 +289,7 @@
     "using": [ [ "blacksmithing_basic", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "long_pole", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "long_pole", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -340,7 +336,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "long_pole", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "long_pole", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -456,7 +452,6 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 3,
     "time": "30 m",
     "autolearn": true,
@@ -501,7 +496,6 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 2,
     "time": "45 m",
     "autolearn": true,
@@ -633,8 +627,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "book_learn": [ [ "manual_knives", 4 ], [ "recipe_melee", 5 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -859,7 +852,6 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_STABBING",
     "skill_used": "fabrication",
-    "skills_required": [ "unarmed", 2 ],
     "difficulty": 1,
     "time": "5 m",
     "reversible": true,
@@ -884,7 +876,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ] ]
   },
   {
     "result": "knuckle_skewer",
@@ -916,5 +908,21 @@
     "copy-from": "knuckle_skewer",
     "time": "4h",
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "BRISK_EXERCISE",
+    "result": "sai",
+    "category": "CC_WEAPON",
+    "subcategory": "CSC_WEAPON_STABBING",
+    "skill_used": "fabrication",
+    "difficulty": 6,
+    "time": "7 h",
+    "book_learn": [ [ "textbook_weapeast", 5 ] ],
+    "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_blacksmithing" } ],
+    "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
+    "qualities": [ { "id": "GRIND", "level": 2 } ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ], [ [ "stick", 1 ], [ "2x4", 1 ] ] ],
+    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   }
 ]

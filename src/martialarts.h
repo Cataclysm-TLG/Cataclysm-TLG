@@ -415,15 +415,15 @@ class martialart
         skill_id primary_skill;
         bool teachable = true;
         int learn_difficulty = 0;
-        int arm_block = 0;
-        int leg_block = 0;
-        int nonstandard_block = 0;
+        int arm_block = -1;
+        int leg_block = -1;
+        int nonstandard_block = -1;
         bool arm_block_with_bio_armor_arms = false;
         bool leg_block_with_bio_armor_legs = false;
         std::set<matec_id> techniques; // all available techniques
         std::set<itype_id> weapons; // all style weapons
         std::set<weapon_category_id> weapon_category; // all style weapon categories
-        bool strictly_unarmed = false; // Punch daggers etc.
+        bool strictly_unarmed = false; // Must be wielding nothing.
         bool strictly_melee = false; // Must have a weapon.
         bool allow_all_weapons = false; // Can use unarmed or with ANY weapon
         bool force_unarmed = false; // Don't use ANY weapon - punch or kick if needed

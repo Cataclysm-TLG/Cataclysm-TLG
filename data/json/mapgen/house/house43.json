@@ -31,7 +31,7 @@
         "........................"
       ],
       "palettes": [ "parametrized_linoleum_palette", "domestic_general_and_variant_palette" ],
-      "terrain": { "$": "t_thconc_floor", "º": "t_water_pool" },
+      "terrain": { "$": "t_thconc_floor_no_roof", "º": "t_water_pool" },
       "place_monster": [ { "group": "GROUP_ZOMBIE_POOL", "x": 16, "y": 18, "chance": 50 } ],
       "place_loot": [
         { "item": "television", "x": 9, "y": 13 },

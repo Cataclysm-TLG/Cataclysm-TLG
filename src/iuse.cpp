@@ -245,6 +245,8 @@ static const efftype_id effect_webbed( "webbed" );
 static const efftype_id effect_zapped( "zapped" );
 
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
+static const flag_id json_flag_NUMB( "NUMB" );
+static const flag_id json_flag_VERMINOUS( "VERMINOUS" );
 static const flag_id json_flag_WASH_HARD( "WASH_HARD" );
 static const flag_id json_flag_WASH_SOFT( "WASH_SOFT" );
 
@@ -987,7 +989,6 @@ std::optional<int> iuse::oxygen_bottle( Character *p, item *it, const tripoint_b
     } else if( p->has_effect( effect_asthma ) ) {
         p->remove_effect( effect_asthma );
     }
-    p->mod_painkiller( 2 );
     return 1;
 }
 
@@ -1071,13 +1072,6 @@ std::optional<int> iuse::plantblech( Character *p, item *it, const tripoint_bub_
     } else {
         return blech( p, it, pos );
     }
-}
-
-std::optional<int> iuse::chew( Character *p, item *it, const tripoint_bub_ms & )
-{
-    // TODO: Add more effects?
-    p->add_msg_if_player( _( "You chew your %s." ), it->tname() );
-    return 1;
 }
 
 // Helper to handle the logic of removing some random mutations.
@@ -1231,7 +1225,6 @@ static void marloss_common( Character &p, item &it, const trait_id &current_colo
         p.mod_fatigue( 5 );
     } else if( effect <= 6 ) { // Radiation cleanse is below
         p.add_msg_if_player( m_good, _( "You feel better all over." ) );
-        p.mod_painkiller( 30 );
         p.mod_pain( -40 );
         if( effect == 6 ) {
             p.set_rad( 0 );
@@ -1382,7 +1375,6 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint_bub_ms & )
         p->add_msg_if_player( m_neutral,
                               _( "It tastes amazing, and you finish it quickly." ) );
         p->add_msg_if_player( m_good, _( "You feel better all over." ) );
-        p->mod_painkiller( 30 );
         p->set_rad( 0 );
         p->healall( 4 ); // Can't make you a whole new person, but not for lack of trying
         p->add_msg_if_player( m_good,
@@ -1449,9 +1441,9 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint_bub_ms & )
             p->mod_fatigue( 5 );
             p->add_morale( morale_marloss, 25, 200 ); // still covers up mutation pain
         }
-    } else if( p->has_trait( trait_THRESH_MYCUS ) ) {
-        p->mod_painkiller( 5 );
-    } else { // In case someone gets one without having been adapted first.
+    }
+    if( !p->has_trait( trait_THRESH_MYCUS ) ) {
+        // In case someone gets one without having been adapted first.
         // Marloss is the Mycus' method of co-opting humans.  Mycus fruit is for symbiotes' maintenance and development.
         p->add_msg_if_player(
             _( "This tastes really weird!  You're not sure it's good for you…" ) );
@@ -1802,7 +1794,7 @@ std::optional<int> iuse::fish_trap_tick( Character *p, item *it, const tripoint_
             return 0;
         }
 
-        //get the fishables around the trap's spot
+        // Get the fishables around the trap's spot.
         std::unordered_set<tripoint_bub_ms> fishable_locations = g->get_fishable_locations_bub(
                     MAX_VIEW_DISTANCE, pos );
         std::vector<monster *> fishables = g->get_fishable_monsters( fishable_locations );
@@ -1810,31 +1802,23 @@ std::optional<int> iuse::fish_trap_tick( Character *p, item *it, const tripoint_
             player.practice( skill_survival, rng( 3, 10 ) );
             if( !fishables.empty() ) {
                 monster *chosen_fish = random_entry( fishables );
-                // reduce the abstract fish_population marker of that fish
+                // Reduce the abstract fish_population marker of that fish.
                 chosen_fish->fish_population -= 1;
                 if( chosen_fish->fish_population <= 0 ) {
-                    g->catch_a_monster( chosen_fish, pos, p, 300_hours ); //catch the fish!
+                    g->catch_a_monster( chosen_fish, pos, p ); // Catch the fish!
                 } else {
                     here.add_item_or_charges( pos, item::make_corpse( chosen_fish->type->id,
-                                              calendar::turn + rng( 0_turns,
-                                                      3_hours ) ) );
+                                              calendar::turn ) );
                 }
             } else {
-                //there will always be a chance that the player will get lucky and catch a fish
-                //not existing in the fishables vector. (maybe it was in range, but wandered off)
-                //lets say it is a 5% chance per fish to catch
+                // There will always be a chance that the player will get lucky and catch a fish
+                // not existing in the fishables vector, as fish can always be hiding or whatever.
                 if( one_in( 20 ) ) {
                     const std::vector<mtype_id> fish_group = MonsterGroupManager::GetMonstersFromGroup(
                                 GROUP_FISH, true );
                     const mtype_id &fish_mon = random_entry_ref( fish_group );
-                    //Yes, we can put fishes in the trap like knives in the boot,
-                    //and then get fishes via activation of the item,
-                    //but it's not as comfortable as if you just put fishes in the same tile with the trap.
-                    //Also: corpses and comestibles do not rot in containers like this, but on the ground they will rot.
-                    //we don't know when it was caught so use a random turn
-                    here.add_item_or_charges( pos, item::make_corpse( fish_mon, it->birthday() + rng( 0_turns,
-                                              3_hours ) ) );
-                    break; //this can happen only once
+                    here.add_item_or_charges( pos, item::make_corpse( fish_mon, calendar::turn ) );
+                    break;
                 }
             }
         }
@@ -2309,7 +2293,7 @@ std::optional<int> iuse::radio_on( Character *, item *it, const tripoint_bub_ms 
 
 std::optional<int> iuse::noise_emitter_on( Character *, item *, const tripoint_bub_ms &pos )
 {
-    sounds::sound( pos, 30, sounds::sound_t::alarm, _( "KXSHHHHRRCRKLKKK!" ), true, "tool",
+    sounds::sound( pos, 50, sounds::sound_t::alarm, _( "KXSHHHHRRCRKLKKK!" ), true, "tool",
                    "noise_emitter" );
     return 1;
 }
@@ -4013,6 +3997,19 @@ std::optional<int> iuse::vibe( Character *p, item *it, const tripoint_bub_ms & )
         // Also, that would be creepy as fuck, seriously
         return std::nullopt;
     }
+    if( !p->has_trait( trait_PYROMANIA ) && p->has_effect( effect_onfire ) ) {
+        p->add_msg_if_player( m_bad, _( "This is hardly the time!" ) );
+        return std::nullopt;
+    }
+    if( it->has_flag( flag_FILTHY ) && !p->has_flag( json_flag_VERMINOUS ) ) {
+        p->add_msg_if_player( m_bad, _( "Oh HELL NO." ) );
+        return std::nullopt;
+    }
+    if( p->get_morale_level() <= -25 || ( p->get_morale_level() <= 0 &&
+                                          p->has_flag( json_flag_NUMB ) ) ) {
+        p->add_msg_if_player( m_info, _( "You just aren't in the mood." ) );
+        return std::nullopt;
+    }
     if( p->is_mounted() ) {
         p->add_msg_if_player( m_info, _( "You can't do… that while mounted." ) );
         return std::nullopt;
@@ -4918,7 +4915,6 @@ std::optional<int> iuse::jet_injector( Character *p, item *it, const tripoint_bu
         p->add_msg_if_player( _( "You inject yourself with the jet injector." ) );
         // Intensity is 2 here because intensity = 1 is the comedown
         p->add_effect( effect_jetinjector, 20_minutes, false, 2 );
-        p->mod_painkiller( 20 );
         p->healall( 5 );
         p->vitamin_mod( vitamin_amphetamine, 18 );
     }
@@ -4946,7 +4942,6 @@ std::optional<int> iuse::stimpack( Character *p, item *it, const tripoint_bub_ms
         p->add_msg_if_player( _( "You inject yourself with the stimulants." ) );
         // Intensity is 2 here because intensity = 1 is the comedown.
         p->add_effect( effect_stimpack, 25_minutes, false, 2 );
-        p->mod_painkiller( 2 );
         p->mod_fatigue( -100 );
         p->mod_stamina( p->get_stamina_max() * 0.20 ); // 20% of max stamina.
         p->vitamin_mod( vitamin_amphetamine, 10 );
@@ -5094,19 +5089,22 @@ std::optional<int> iuse::toolmod_attach( Character *p, item *it, const tripoint_
     }
 
     auto filter = [&it]( const item & e ) {
-        // don't allow ups or bionic battery mods on a UPS or UPS-powered/bionic-powered tools
+        // Don't allow ups or bionic battery mods on a UPS or UPS-powered/bionic-powered tools.
         if( ( it->has_flag( flag_USE_UPS ) || it->has_flag( flag_USES_BIONIC_POWER ) ) &&
             ( e.has_flag( flag_IS_UPS ) || e.has_flag( flag_USE_UPS ) ||
               e.has_flag( flag_USES_BIONIC_POWER ) ) ) {
             return false;
         }
-
-        // can't mod non-tool, or a tool with existing mods, or a battery currently installed
+        // FIXME: Make internal batteries compatible with toolmods.
+        if( e.can_link_up() && e.link().charge_rate > 0 ) {
+            return false;
+        }
+        // Can't mod non-tool, or a tool with existing mods, or a battery currently installed.
         if( !e.is_tool() || !e.toolmods().empty() || e.magazine_current() ) {
             return false;
         }
 
-        // can't mod integrated tools
+        // Can't mod integrated tools
         if( e.has_flag( flag_INTEGRATED ) ) {
             return false;
         }

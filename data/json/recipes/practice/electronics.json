@@ -16,7 +16,7 @@
     ],
     "book_learn": [ [ "manual_electronics", 1 ], [ "advanced_electronics", 2 ], [ "textbook_electronics", 3 ] ],
     "tools": [
-      [ [ "multimeter", 50 ], [ "integrated_multimeter", 50 ] ],
+      [ [ "multimeter", 2 ], [ "integrated_multimeter", 2 ] ],
       [ [ "breadboard", -1 ] ],
       [ [ "power_supply", -1 ] ],
       [ [ "amplifier", -1 ], [ "element", -1 ], [ "receiver", -1 ], [ "transponder", -1 ] ]
@@ -43,7 +43,7 @@
     ],
     "book_learn": [ [ "advanced_electronics", 4 ], [ "textbook_electronics", 4 ], [ "ic_reference_electronics", 3 ] ],
     "tools": [
-      [ [ "multimeter", 100 ], [ "integrated_multimeter", 100 ] ],
+      [ [ "multimeter", 2 ], [ "integrated_multimeter", 2 ] ],
       [ [ "breadboard", -1 ] ],
       [ [ "power_supply", -1 ] ],
       [ [ "processor", -1 ] ],

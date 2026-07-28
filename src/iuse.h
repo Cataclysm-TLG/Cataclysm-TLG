@@ -37,7 +37,6 @@ std::optional<int> antifungal( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> antiparasitic( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> blech( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> blech_because_unclean( Character *, item *, const tripoint_bub_ms & );
-std::optional<int> chew( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> coke( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> datura( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> ecig( Character *, item *, const tripoint_bub_ms & );

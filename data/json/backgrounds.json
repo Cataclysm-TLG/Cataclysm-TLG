@@ -276,6 +276,15 @@
     "missions": [ "MISSION_SKATES" ]
   },
   {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "swimming",
+    "name": "Swimming",
+    "description": "At some point in your life, you learned how to swim.  Whether you still can or not is a matter of your athletics skill and the overall shape you're in.",
+    "points": 1,
+    "proficiencies": [ "prof_swimming" ]
+  },
+  {
     "subtype": "hobby",
     "type": "profession",
     "name": "Tabletop Gaming",

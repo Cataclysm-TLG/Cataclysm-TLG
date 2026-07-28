@@ -1152,7 +1152,8 @@ void species_type::finalize_all()
 void species_type::load( const JsonObject &jo, std::string_view )
 {
     optional( jo, was_loaded, "description", description );
-    optional( jo, was_loaded, "footsteps", footsteps, to_translation( "footsteps." ) );
+    optional( jo, was_loaded, "footsteps", footsteps, to_translation( "movement." ) );
+    optional( jo, was_loaded, "flight_sound", flight_sound, to_translation( "movement." ) );
 
     optional( jo, was_loaded, "flags", flags, string_id_reader<mon_flag> {} );
 

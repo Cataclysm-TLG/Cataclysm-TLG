@@ -275,10 +275,14 @@ void Character::update_body( const time_point &from, const time_point &to )
     if( in_sleep_state() && was_sleeping ) {
         needs_rates tmp_rates;
         calc_sleep_recovery_rate( tmp_rates );
-        const int fatigue_regen_rate = tmp_rates.recovery;
-        const time_duration effective_time_slept = ( to - from ) * fatigue_regen_rate;
-        mod_daily_sleep( effective_time_slept );
-        mod_continuous_sleep( effective_time_slept );
+        const float fatigue_regen_rate = tmp_rates.recovery;
+        if( fatigue_regen_rate > 0.0f ) {
+            const int turns = to_turns<int>( to - from );
+            const time_duration effective_time_slept = time_duration::from_turns(
+                        roll_remainder( turns * fatigue_regen_rate ) );
+            mod_daily_sleep( effective_time_slept );
+            mod_continuous_sleep( effective_time_slept );
+        }
     }
     if( was_sleeping && !in_sleep_state() ) {
         if( get_continuous_sleep() >= 6_hours ) {
@@ -338,21 +342,24 @@ void Character::update_body( const time_point &from, const time_point &to )
             mod_daily_health( 1, 200 );
         }
 
+        // Low morale flags last a day, unless their morale still meets the threshold throughout days.
         if( !get_value( "got_to_low_morale" ).is_empty() ) {
             mod_daily_health( -1, -100 );
-        } else {
-            remove_value( "got_to_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_LOW ) {
+                remove_value( "got_to_low_morale" );
+            }
         }
         if( !get_value( "got_to_very_low_morale" ).is_empty() ) {
             mod_daily_health( -2, -200 );
-        } else {
-            remove_value( "got_to_very_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_VERY_LOW ) {
+                remove_value( "got_to_very_low_morale" );
+            }
         }
 
         // Being badly injured is not healthy, though your immune system might be able to handle it.
         bool wounded = false;
         for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
-            if( get_part_hp_cur( bp ) < ( get_part_hp_cur( bp ) / 2 ) ) {
+            if( get_part_hp_cur( bp ) < ( get_part_hp_max( bp ) / 2 ) ) {
                 wounded = true;
             }
         }
@@ -409,7 +416,7 @@ void Character::update_body( const time_point &from, const time_point &to )
                 // "RDA" for our character and roll a chance to get a penalty tied to how much we ate.
                 if( ( toxin_RDA > 0 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
                     int toxin_malus = static_cast<int>( std::ceil( toxin_RDA / 10.0 ) );
-                    mod_daily_health( std::max( -5, toxin_malus ), -200 );
+                    mod_daily_health( std::max( -5, -toxin_malus ), -200 );
                 }
             }
 
@@ -494,7 +501,9 @@ std::map<bodypart_id, temp_warning_record> last_temp_warnings;
 
 void Character::update_bodytemp()
 {
-    if( has_trait( trait_DEBUG_NOTEMP ) ) {
+    npc *n = as_npc();
+    if( has_trait( trait_DEBUG_NOTEMP ) ||
+        ( !is_avatar() && n && !n->is_player_ally() ) ) {
         set_all_parts_temp_conv( BODYTEMP_NORM );
         set_all_parts_temp_cur( BODYTEMP_NORM );
         return;
@@ -883,16 +892,13 @@ void Character::update_bodytemp()
         // Otherwise, if any other body part is BODYTEMP_VERY_COLD, or 31C
         // AND you have frostbite, then that also prevents you from sleeping
         if( in_sleep_state() && !has_effect( effect_narcosis ) ) {
-            if( bp == body_part_torso && temp_after <= BODYTEMP_COLD && calendar::once_every( 1_hours ) ) {
-                add_msg( m_warning, _( "You feel cold and shiver." ) );
-            }
             if( temp_after <= BODYTEMP_VERY_COLD &&
                 get_fatigue() <= fatigue_levels::DEAD_TIRED && !has_bionic( bio_sleep_shutdown ) ) {
                 if( bp == body_part_torso ) {
-                    add_msg( m_warning, _( "Your shivering prevents you from sleeping." ) );
+                    add_msg( m_warning, _( "You are too cold to sleep." ) );
                     wake_up();
                 } else if( has_effect( effect_frostbite ) ) {
-                    add_msg( m_warning, _( "You are too cold.  Your frostbite prevents you from sleeping." ) );
+                    add_msg( m_warning, _( "You are too cold.  If you sleep now, you might never wake up." ) );
                     wake_up();
                 }
             }

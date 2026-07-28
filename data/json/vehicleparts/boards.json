@@ -98,7 +98,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "10 m", "using": [ [ "repair_welding_standard", 5 ] ] }
     },
-    "damage_reduction": { "all": 7 }
+    "damage_reduction": { "bash": 7, "cut": 14, "stab": 12, "bullet": 12 }
   },
   {
     "id": "board",
@@ -175,7 +175,7 @@
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "10 m", "using": [ [ "repair_welding_standard", 5 ] ] }
     },
     "extend": { "categories": [ "cargo" ], "flags": [ "OPAQUE", "CARGO", "COVERED", "FULL_BOARD", "LOCKABLE_CARGO" ] },
-    "damage_reduction": { "all": 7 }
+    "damage_reduction": { "bash": 6, "cut": 12, "stab": 10, "bullet": 10 }
   },
   {
     "id": "hdstowboard",
@@ -186,7 +186,7 @@
     "color": "brown",
     "broken_color": "dark_gray",
     "proportional": { "durability": 4.15, "size": 0.76 },
-    "damage_reduction": { "all": 20 }
+    "damage_reduction": { "bash": 18, "cut": 20, "stab": 18, "bullet": 16 }
   },
   {
     "abstract": "hdboard_abstract",
@@ -207,7 +207,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "24 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "10 m", "using": [ [ "repair_welding_standard", 5 ] ] }
     },
-    "damage_reduction": { "all": 20 }
+    "damage_reduction": { "bash": 20, "cut": 24, "stab": 20, "bullet": 18 }
   },
   {
     "id": "hdboard",
@@ -239,7 +239,7 @@
       "removal": { "skills": [ [ "fabrication", 2 ] ], "time": "15 m", "using": [ [ "vehicle_nail_removal", 1 ] ] },
       "repair": { "skills": [ [ "fabrication", 2 ] ], "time": "10 m", "using": [ [ "adhesive", 2 ] ] }
     },
-    "damage_reduction": { "all": 5 }
+    "damage_reduction": { "bash": 5, "cut": 8, "stab": 6, "bullet": 4 }
   },
   {
     "id": "woodboard",
@@ -279,7 +279,7 @@
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
     "extend": { "flags": [ "HALF_BOARD" ] },
-    "damage_reduction": { "all": 5 }
+    "damage_reduction": { "bash": 5, "cut": 5, "stab": 5, "bullet": 4 }
   },
   {
     "id": "counterweight",
@@ -298,7 +298,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
-    "damage_reduction": { "all": 20 },
+    "damage_reduction": { "bash": 20, "cut": 24, "stab": 20, "bullet": 18 },
     "extend": { "flags": [ "HALF_BOARD" ] }
   }
 ]

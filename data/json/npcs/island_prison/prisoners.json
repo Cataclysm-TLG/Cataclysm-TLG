@@ -404,7 +404,7 @@
         "condition": { "u_has_strength": 11 }
       },
       {
-        "text": "[Survival 2] I have some survival expertise!",
+        "text": "[Ecology 2] I have some survival expertise!",
         "topic": "TALK_PRISONER_LEADER_NO",
         "condition": { "math": [ "u_skill('survival')", ">=", "2" ] }
       },

@@ -47,6 +47,7 @@
 
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_cut( "cut" );
+static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_bleed( "bleed" );
@@ -1142,18 +1143,6 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
             // We know critter is set for this type.  Assert to inform static
             // analysis.
             cata_assert( critter );
-
-            // No blood from hallucinations
-            if( !critter->is_hallucination() ) {
-                if( vpi.has_flag( "SHARP" ) ) {
-                    vp.blood += 100 + 5 * dam;
-                } else if( dam > rng( 10, 30 ) ) {
-                    vp.blood += 50 + dam * 5 / 2;
-                }
-
-                check_environmental_effects = true;
-            }
-
             time_stunned = time_duration::from_turns( ( rng( 0, dam ) > 10 ) + ( rng( 0, dam ) > 40 ) );
             if( time_stunned > 0_turns ) {
                 critter->add_effect( effect_stunned, time_stunned );
@@ -1184,7 +1173,7 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
             if( !vert_coll ) {
                 if( std::fabs( vel2_a ) > 10.0f ||
                     std::fabs( e * mass * vel1_a ) > std::fabs( mass2 * ( 10.0f - vel2_a ) ) ) {
-                    const units::angle angle = rng_float( -60_degrees, 60_degrees );
+                    const units::angle angle = rng_float( -80_degrees, 80_degrees );
                     // Also handle the weird case when we don't have enough force
                     // but still have to push (in such case compare momentum)
                     const float push_force = std::max<float>( std::fabs( vel2_a ), 10.1f );
@@ -1334,21 +1323,30 @@ double vehicle::wheel_damage_chance_vs_item( const item &it, vehicle_part &vp_wh
     // Wheels use the worst/softest possible value, the squishy parts. In other words, a wheel is damaged
     // if its rubber tire is punctured.
     double wheel_hardness = item_hardness_calc( vp_wheel.get_base() ).first;
-    if( vp_wheel.info().has_flag( "RESIST_RUNOVER_DAMAGE" ) ) {
-        // Wheels with the flag have double effective hardness due to their design, etc.
-        wheel_hardness = wheel_hardness * 2.0;
-    }
     // Items attempting to do damage use the best/hardest possible value, the pointy bits.
     double item_hardness = item_hardness_calc( it ).second;
+    // Stab armor protects wheels from damage. Wheels do not benefit from other armor on their tile, it checks the wheel itself.
+    // TODO: Make different items use different damage types.
+    double armor = std::clamp( vp_wheel.info().damage_reduction.at( damage_stab ) / 100.0, 0.0,
+                               0.75 ) / rng_float( 1.0, 4.0 );
     // It is exponentially more difficult for soft items to damage wheels, even if you're hitting a lot of them.
-    const double chance_to_damage = std::min( std::pow( item_hardness / wheel_hardness, 2.0 ), 1.0 );
-    add_msg_debug( debugmode::DF_VEHICLE_MOVE,
-                   "Vehicle %s running over item %s."
-                   "\n Chance to damage: %f%%."
-                   "\n Item hardness: %f"
-                   "\n Wheel hardness: %f",
-                   disp_name(), it.tname(), chance_to_damage * 100.0, item_hardness,
-                   wheel_hardness );
+    const double base_chance = std::min( std::pow( item_hardness / wheel_hardness, 2.0 ) / 10, 0.5 );
+    const double chance_to_damage = std::max( 0.0, base_chance - armor );
+    add_msg_debug(
+        debugmode::DF_VEHICLE_MOVE,
+        "Vehicle %s running over item %s."
+        "\n Item hardness: %f"
+        "\n Wheel hardness: %f"
+        "\n Base chance: %f%%"
+        "\n Armor reduction: %f%%"
+        "\n Final chance: %f%%",
+        disp_name(), it.tname(),
+        item_hardness,
+        wheel_hardness,
+        base_chance * 100.0,
+        armor * 100.0,
+        chance_to_damage * 100.0
+    );
     return chance_to_damage;
 }
 
@@ -1361,7 +1359,8 @@ void vehicle::damage_wheel_on_item( vehicle_part *vp_wheel, const item &it, int 
                                  ( static_cast<double>( itype::damage_scale ) / vp_wheel->max_damage() );
 
     const double chance_to_damage = wheel_damage_chance_vs_item( it, *vp_wheel );
-
+    add_msg_debug( debugmode::DF_VEHICLE_MOVE,
+                   "Final chance to damage: %f%%.", chance_to_damage * 100 );
     if( chance_to_damage > 0.0 ) {
         if( chance_to_damage >= rng_float( 0.0, 1.0 ) ) {
             *damage_levels += one_damage_level;
@@ -1575,7 +1574,6 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
     // This is a very rough check to try to figure out if we're offroad and should be training offroad driving proficiency.
     bool is_offroad = !( is_flying || in_deep_water || wheelcache.empty() ) &&
                       ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
-    // Check if you're piloting on land or water, and reduce effective driving skill proportional to relevant proficiencies (10% Boat Proficiency = 10% driving skill on water)
     if( !driver.has_proficiency( proficiency_prof_driver ) && !in_deep_water && is_offroad ) {
         is_non_proficient = true;
         vehicle_proficiency = driver.get_proficiency_practice( proficiency_prof_driver );
@@ -2412,7 +2410,6 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
         if( psg && veh.player_in_control( here, *psg ) ) {
             const int lose_ctrl_roll = rng( 0, d_vel );
             ///\EFFECT_DEX reduces chance of losing control of vehicle when shaken
-
             ///\EFFECT_DRIVING reduces chance of losing control of vehicle when shaken
             if( lose_ctrl_roll > psg->dex_cur * 2 + psg->get_skill_level( skill_driving ) * 3 ) {
                 psg->add_msg_player_or_npc( m_warning,

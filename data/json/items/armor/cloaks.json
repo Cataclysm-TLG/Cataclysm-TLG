@@ -10,7 +10,7 @@
     "price": "50 USD",
     "price_postapoc": "50 cent",
     "to_hit": -1,
-    "material": [ "cotton" ],
+    "material": [ "nylon" ],
     "symbol": "[",
     "looks_like": "towel",
     "color": "light_red",

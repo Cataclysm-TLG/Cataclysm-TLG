@@ -14,7 +14,7 @@
     "color": "white",
     "count": 25,
     "ammo_type": "36paper",
-    "range": 15,
+    "range": 17,
     "damage": { "damage_type": "bullet", "amount": 19 },
     "dispersion": 80,
     "recoil": 210,

@@ -105,7 +105,8 @@
     "id": "constr_showjump_end",
     "group": "build_showjump_end",
     "category": "CONSTRUCT",
-    "required_skills": [ [ "fabrication", 2 ], [ "survival", 1 ] ],
+    "//": "Ecology stays in the required skills because we have to know about horses.",
+    "required_skills": [ [ "fabrication", 2 ], [ "survival", 3 ] ],
     "time": "30 m",
     "qualities": [ [ { "id": "HAMMER", "level": 2 } ], [ { "id": "DIG", "level": 2 } ] ],
     "components": [

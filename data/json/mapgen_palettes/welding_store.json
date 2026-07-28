@@ -53,16 +53,16 @@
       "S": "f_rack"
     },
     "item": {
-      "f": { "item": "weldtank", "chance": 45, "repeat": [ 0, 2 ] },
-      "F": { "item": "weldtank", "chance": 40, "repeat": [ 0, 2 ] }
+      "f": { "item": "tinyweldtank", "chance": 25, "repeat": [ 1, 2 ] },
+      "F": { "item": "weldtank", "chance": 20, "repeat": [ 1, 2 ] }
     },
     "items": {
       "H": { "item": "cash_register_random" },
-      "s": { "item": "SUS_welding_gear", "chance": 40, "repeat": [ 0, 2 ] },
-      "C": { "item": "SUS_welding_gear", "chance": 35, "repeat": [ 0, 2 ] },
-      "r": { "item": "SUS_welding_gear", "chance": 35, "repeat": [ 0, 2 ] },
-      "S": { "item": "tools_common_small", "chance": 45, "repeat": [ 0, 2 ] },
-      "l": { "item": "clothing_work_set", "chance": 45, "repeat": [ 0, 1 ] }
+      "s": { "item": "SUS_welding_gear", "chance": 20, "repeat": [ 1, 2 ] },
+      "C": { "item": "SUS_welding_gear", "chance": 20, "repeat": [ 1, 2 ] },
+      "r": { "item": "SUS_welding_gear", "chance": 15, "repeat": [ 1, 2 ] },
+      "S": { "item": "tools_common_small", "chance": 30, "repeat": [ 1, 2 ] },
+      "l": { "item": "clothing_work_set", "chance": 35 }
     },
     "vehicles": {
       "=": { "vehicle": "welding_cart", "chance": 35, "rotation": 0 },

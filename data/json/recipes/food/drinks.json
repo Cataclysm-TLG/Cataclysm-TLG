@@ -6,7 +6,7 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "cooking",
-    "skills_required": [ "survival", 5 ],
+    "skills_required": [ "firstaid", 1 ],
     "difficulty": 4,
     "time": "12 m",
     "batch_time_factors": [ 80, 4 ],

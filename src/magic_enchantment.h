@@ -36,6 +36,7 @@ enum class mod : int {
     ARTIFACT_RESONANCE,
     // effects for the Character
     STRENGTH,
+    STRENGTH_NATURAL,
     DEXTERITY,
     PERCEPTION,
     INTELLIGENCE,

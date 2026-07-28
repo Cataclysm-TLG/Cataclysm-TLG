@@ -60,7 +60,6 @@
       { "item": "choc_drink", "prob": 30 },
       { "item": "jerky", "prob": 55 },
       { "item": "cracklins", "prob": 25 },
-      { "item": "salted_fish", "prob": 35 },
       { "item": "porkstick", "prob": 55 },
       { "item": "ravioli", "prob": 25 },
       { "item": "can_beans", "prob": 40 },

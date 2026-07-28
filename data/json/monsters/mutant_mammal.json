@@ -104,6 +104,15 @@
     "dissect": "dissect_mouse_sample_large",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
+    "special_attacks": [
+      { "id": "low_charge", "cooldown": 12 },
+      {
+        "type": "bite",
+        "attack_upper": false,
+        "cooldown": 5,
+        "damage_max_instance": [ { "damage_type": "stab", "amount": 12, "armor_penetration": 6 } ]
+      }
+    ],
     "fear_triggers": [ "SOUND" ],
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM" ],
     "armor": { "cut": 4 }
@@ -137,6 +146,15 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
     "fear_triggers": [ "SOUND" ],
+    "special_attacks": [
+      { "id": "low_charge", "cooldown": 12 },
+      {
+        "type": "bite",
+        "attack_upper": false,
+        "cooldown": 5,
+        "damage_max_instance": [ { "damage_type": "stab", "amount": 8, "armor_penetration": 2 } ]
+      }
+    ],
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM" ]
   },
   {
@@ -545,6 +563,7 @@
     "biosignature": { "biosig_item": "feces_dog", "biosig_timer": 6 },
     "anger_triggers": [ "HURT", "FRIEND_ATTACKED", "FRIEND_DIED" ],
     "special_attacks": [
+      { "id": "low_charge", "cooldown": 16 },
       {
         "type": "bite",
         "attack_upper": false,

@@ -197,7 +197,6 @@ class talker_character_const: virtual public const_talker
         int morale_cur() const override;
         int focus_cur() const override;
         int get_rad() const override;
-        int get_stim() const override;
         int get_addiction_intensity( const addiction_id &add_id ) const override;
         int get_addiction_turns( const addiction_id &add_id ) const override;
         int get_pkill() const override;
@@ -317,7 +316,6 @@ class talker_character: virtual public talker
         void set_addiction_turns( const addiction_id &add_id, int amount ) override;
         void mod_focus( int ) override;
         void set_rad( int ) override;
-        void set_stim( int ) override;
         void set_pkill( int ) override;
         void set_stamina( int ) override;
         void set_sleep_deprivation( int ) override;

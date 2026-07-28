@@ -754,7 +754,6 @@
     "professions": [
       "rifleman",
       "recruit",
-      "specops",
       "national_guard",
       "politician",
       "hitman",
@@ -797,7 +796,6 @@
       "unemployed",
       "recruit",
       "rifleman",
-      "specops",
       "labtech",
       "surgeon",
       "mil_auto_rifleman",

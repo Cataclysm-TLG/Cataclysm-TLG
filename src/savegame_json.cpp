@@ -773,7 +773,6 @@ void Character::load( const JsonObject &data )
     }
 
     //energy
-    data.read( "stim", stim );
     data.read( "stamina", stamina );
 
     // stats through kills
@@ -1424,7 +1423,6 @@ void Character::store( JsonOut &json ) const
         json.member( "fetch_data", things_to_fetch );
     }
 
-    json.member( "stim", stim );
     json.member( "type_of_scent", type_of_scent );
     json.member( "focus_pool", focus_pool );
 
@@ -3599,7 +3597,6 @@ void vehicle_part::deserialize( const JsonObject &data )
     int direction_int;
     data.read( "direction", direction_int );
     direction = units::from_degrees( direction_int );
-    data.read( "blood", blood );
     data.read( "enabled", enabled );
     data.read( "flags", flags );
     data.read( "passenger_id", passenger_id );
@@ -3655,7 +3652,6 @@ void vehicle_part::serialize( JsonOut &json ) const
     json.member( "mount_dy", mount.y() );
     json.member( "open", open );
     json.member( "direction", std::lround( to_degrees( direction ) ) );
-    json.member( "blood", blood );
     json.member( "enabled", enabled );
     json.member( "flags", flags );
     if( !carried_stack.empty() ) {

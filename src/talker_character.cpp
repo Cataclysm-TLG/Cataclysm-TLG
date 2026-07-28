@@ -969,11 +969,6 @@ int talker_character_const::get_rad() const
     return me_chr_const->get_rad();
 }
 
-int talker_character_const::get_stim() const
-{
-    return me_chr_const->get_stim();
-}
-
 int talker_character_const::get_addiction_intensity( const addiction_id &add_id ) const
 {
     return me_chr_const->addiction_level( add_id );
@@ -996,11 +991,6 @@ void talker_character::set_addiction_turns( const addiction_id &add_id, int amou
             add.sated += time_duration::from_turns( amount );
         }
     }
-}
-
-void talker_character::set_stim( int amount )
-{
-    me_chr->set_stim( amount );
 }
 
 int talker_character_const::get_pkill() const

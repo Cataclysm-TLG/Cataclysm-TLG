@@ -6,7 +6,7 @@
     "description": "This cat-sized rat snuffles along the ground looking for things to eat.  It hisses at anything that comes near it, baring sizable teeth.",
     "default_faction": "ratkin",
     "bodytype": "pig",
-    "species": [ "MUTANT" ],
+    "species": [ "MUTANT", "MAMMAL" ],
     "volume": "4 L",
     "weight": "4 kg",
     "hp": 25,
@@ -54,6 +54,7 @@
     "copy-from": "mon_big_rat",
     "volume": "20 L",
     "weight": "35 kg",
+    "bodytype": "dog",
     "hp": 45,
     "speed": 80,
     "attack_cost": 80,
@@ -67,7 +68,7 @@
     "upgrades": { "half_life": 120, "into_group": "GROUP_RATKIN_EVOLVED" },
     "path_settings": { "max_dist": 50, "avoid_traps": true, "avoid_sharp": true },
     "special_attacks": [
-      { "id": "scratch", "damage_max_instance": [ { "damage_type": "cut", "amount": 17, "armor_multiplier": 0.8 } ] },
+      { "id": "scratch", "damage_max_instance": [ { "damage_type": "cut", "amount": 14 } ] },
       {
         "type": "bite",
         "cooldown": 3,
@@ -91,7 +92,6 @@
     "name": { "str": "pack rat" },
     "description": "This mutated rodent stands on two legs, as tall as a man.  It has a habit of shoving shiny objects into its cheek pouches, and eyes its surroundings with too-human eyes that sparkle with greed, but not intellect.",
     "default_faction": "ratkin",
-    "//": "Ratty enough to fit in with mutant rats, though it didn't evolve from one.",
     "copy-from": "mon_big_rat",
     "volume": "75000 ml",
     "weight": "74000 g",

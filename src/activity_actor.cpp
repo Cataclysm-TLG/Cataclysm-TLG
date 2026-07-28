@@ -1747,9 +1747,9 @@ void read_activity_actor::start( player_activity &act, Character &who )
                                   ereader->type->maximum_charges() : link_actor->cable_length;
             bool plugged_in = false;
             for( const tripoint_bub_ms &pt : here.points_in_radius( who.pos_bub(), cable_len ) ) {
-                // points_in_radius uses Chebyshev (square), but process_link uses rl_dist (Euclidean).
+                // points_in_radius uses Chebyshev (square), but process_link uses trig_dist (rounded Euclidean).
                 // Skip tiles that would immediately exceed max_length after plugging in.
-                if( rl_dist( who.pos_bub(), pt ) > cable_len ) {
+                if( trig_dist( who.pos_bub(), pt ) > cable_len ) {
                     continue;
                 }
                 const optional_vpart_position ovp = here.veh_at( pt );
@@ -2388,7 +2388,7 @@ void move_items_activity_actor::do_turn( player_activity &act, Character &who )
         // This is for hauling across zlevels, remove when going up and down stairs
         // is no longer teleportation
         const tripoint_bub_ms src = target.pos_bub( here );
-        const int distance = src.z() == dest.z() ? std::max( rl_dist( src, dest ), 1 ) : 1;
+        const int distance = src.z() == dest.z() ? std::max( trig_dist( src, dest ), 1 ) : 1;
         // Yuck, I'm sticking weariness scaling based on activity level here
         const float weary_mult = who.exertion_adjusted_move_multiplier( exertion_level() );
         who.mod_moves( -Pickup::cost_to_move_item( who, newit ) * distance / weary_mult );
@@ -2418,8 +2418,15 @@ void move_items_activity_actor::do_turn( player_activity &act, Character &who )
             }
 
             if( overflow ) {
-                add_msg( m_warning,
-                         _( "You lose track of some hauled items as they didn't fit on the current tile." ) );
+                std::vector<item_location> &haul_list = who.haul_list;
+                int haul_qty = haul_list.size();
+                if( haul_qty < 1 ) {
+                    add_msg( m_warning, _( "You have lost track of what you were hauling." ) );
+                    who.stop_hauling();
+                } else {
+                    add_msg( m_warning,
+                             _( "You lose track of some items as there isn't room to haul them along." ) );
+                }
             }
         }
     }
@@ -3141,12 +3148,13 @@ item_location &efile_activity_actor::get_currently_processed_efile()
 {
     return currently_processed_efiles.back();
 }
+
 void efile_activity_actor::start( player_activity &act, Character &who )
 {
     if( combo_type == COMBO_MOVE_ONTO_BROWSE ) {
         target_edevices_copy = target_edevices;
     }
-    //handle combo move e-device (browsing may have included used e-device)
+    // Handle combo move e-device (browsing may have included used e-device).
     if( action_type == EF_MOVE_ONTO_THIS ) {
         auto i = target_edevices.begin();
         while( i != target_edevices.end() ) {
@@ -3159,6 +3167,10 @@ void efile_activity_actor::start( player_activity &act, Character &who )
         }
     }
     for( item_location &i : target_edevices ) {
+        if( i->is_null() ) {
+            who.cancel_activity();
+            return;
+        }
         if( !i->has_pocket_type( pocket_type::E_FILE_STORAGE ) ) {
             debugmsg( "invalid item %s provided to efile activity; must have \"E_FILE_STORAGE\" pocket",
                       i->tname() );
@@ -3166,7 +3178,7 @@ void efile_activity_actor::start( player_activity &act, Character &who )
         add_msg_debug( debugmode::DF_ACT_EBOOK, "initialized with edevice %s with %d efiles",
                        i->display_name(), i->efiles().size() );
     }
-    //only skip if loaded through deserialization
+    // Only skip if loaded through deserialization.
     if( !started_processing ) {
         started_processing = true;
         computer_low_skill = who.get_skill_level( skill_computer ) < 1;
@@ -3207,48 +3219,49 @@ void efile_activity_actor::do_turn( player_activity &act, Character &who )
         return true;
     };
 
-    //check for zero devices selected, for combo call
+    // Check for zero devices selected, for combo call.
     if( act.moves_left > 0 ) {
-        //if an e-device was booted, make sure it still exists
+        // If an e-device was booted, make sure it still exists.
         if( !!turns_left_on_current_edevice ) {
             if( !used_edevice || !edevice_reduce_charge( used_edevice ) ) {
                 //if the used device runs out of power or is missing, fail all remaining devices
                 do {
                     failed_processing_current_edevice();
                 } while( !done_processing );
+                return;
             } else {
                 item_location next_edevice = get_currently_processed_edevice();
                 if( !next_edevice || !edevice_reduce_charge( next_edevice ) ) {
                     failed_processing_current_edevice();
+                    return;
                 }
             }
         }
     }
-    //done check (handles return)
+    // Done check (handles return).
     if( done_processing ) {
         act.moves_left = 0;
         add_msg_debug( debugmode::DF_ACT_EBOOK, "efile_transfer completed through done_processing" );
         return;
     }
-    //computer practice
+    // Computer practice.
     if( one_in( 3 ) && computer_low_skill ) {
         if( who.practice( skill_computer, 1 ) ) {
             computer_low_skill = false;
         }
     }
-
     if( !next_edevice_booted ) {
         if( !turns_left_on_current_edevice ) {
-            start_processing_next_edevice(); //only sets if device exists
+            start_processing_next_edevice(); // Only sets if device exists.
         }
         ( *turns_left_on_current_edevice )--;
         if( turns_left_on_current_edevice == 0 ) {
             next_edevice_booted = true;
-            start_processing_next_efile( act, who ); //sets turns_left_file if file exists
+            start_processing_next_efile( act, who ); // Sets turns_left_file if file exists.
         }
     }
-    if( next_edevice_booted ) { //should not be an "else" because files start processing in same turn
-        //current file exists check
+    if( next_edevice_booted ) { // Should not be an "else" because files start processing in same turn.
+        // Current file exists check.
         if( !get_currently_processed_efile() ) {
             failed_processing_current_efile( act, who );
         } else if( turns_left_on_current_efile > 0 ) {
@@ -3539,6 +3552,10 @@ void efile_activity_actor::combo_next_activity( Character &who )
 
     if( combo_type == COMBO_MOVE_ONTO_BROWSE ) {
         for( item_location &edevice : target_edevices_copy ) {
+            if( edevice->is_null() ) {
+                who.cancel_activity();
+                return;
+            }
             for( item *efile : edevice->efiles() ) {
                 all_updated_files.emplace_back( edevice, efile );
             }
@@ -3546,6 +3563,10 @@ void efile_activity_actor::combo_next_activity( Character &who )
 
         units::ememory total_ememory;
         for( item_location &edevice : target_edevices_copy ) {
+            if( edevice->is_null() ) {
+                who.cancel_activity();
+                return;
+            }
             if( edevice->is_browsed() ) {
                 for( item *efile : edevice->efiles() ) {
                     total_ememory += efile->ememory_size();
@@ -3754,6 +3775,9 @@ bool efile_activity_actor::efile_action_is_from( efile_action action_type )
 bool efile_activity_actor::efile_skip_copy( const efile_transfer &transfer, const item &efile )
 {
     auto check_for_file = [&efile]( const item_location & edevice ) {
+        if( edevice->is_null() ) {
+            return true;
+        }
         for( const item *i : edevice->efiles() ) {
             if( i->typeId() == efile.typeId() ) {
                 return true;
@@ -3773,8 +3797,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
     map &here = get_map();
     constexpr auto caught_corpse = []( Character & who, map & here, const mtype & corpse_type ) {
         item corpse = item::make_corpse( corpse_type.id,
-                                         calendar::turn + rng( 0_turns,
-                                                 3_hours ) );
+                                         calendar::turn );
         corpse.set_var( "activity_var", who.name );
         item_location loc = here.add_item_or_charges_ret_loc( who.pos_bub(), corpse );
         if( who.is_avatar() ) {
@@ -3784,7 +3807,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
             who.may_activity_occupancy_after_end_items_loc.push_back( loc );
         }
     };
-    //if the vector is empty (no fish around) the player is still given a small chance to get a (let us say it was hidden) fish
+    // If the vector is empty (no fish around) the player is still given a small chance to get a (let us say it was hidden) fish.
     if( fishables.empty() ) {
         const std::vector<mtype_id> fish_group = MonsterGroupManager::GetMonstersFromGroup(
                     GROUP_FISH, true );
@@ -3795,7 +3818,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
         chosen_fish->fish_population -= 1;
         if( chosen_fish->fish_population <= 0 ) {
             Character *who_ptr = &who;
-            g->catch_a_monster( chosen_fish, who.pos_bub(), who_ptr, 50_hours );
+            g->catch_a_monster( chosen_fish, who.pos_bub(), who_ptr );
         } else {
             if( chosen_fish->type != nullptr ) {
                 caught_corpse( who, here, *( chosen_fish->type ) );
@@ -3814,6 +3837,16 @@ void fish_activity_actor::do_turn( player_activity &, Character &who )
 
     float fish_chance = 1.0f;
     float survival_skill = who.get_skill_level( skill_survival );
+    // Recover from an invalid item_location, which can occur after NPC unload/reload.
+    if( !fishing_rod ) {
+        const item_location &wielded = who.get_wielded_item();
+        if( wielded && wielded->has_quality( qual_FISHING_ROD ) ) {
+            fishing_rod = wielded;
+        } else {
+            who.cancel_activity();
+            return;
+        }
+    }
     switch( fishing_rod->get_quality( qual_FISHING_ROD ) ) {
         case 1:
             survival_skill += dice( 1, 6 );
@@ -3832,13 +3865,13 @@ void fish_activity_actor::do_turn( player_activity &, Character &who )
     if( fishables.empty() ) {
         fish_chance += survival_skill / 2;
     } else {
-        // if they are visible however, it implies a larger population
+        // If they are visible however, it implies a larger population.
         for( monster *elem : fishables ) {
             fish_chance += elem->fish_population;
         }
         fish_chance += survival_skill;
     }
-    // no matter the population of fish, your skill and tool limits the ease of catching.
+    // No matter the population of fish, your skill and tool limits the ease of catching.
     fish_chance = std::min( survival_skill * 10, fish_chance );
     if( x_in_y( fish_chance, 500000 ) ) {
         who.add_msg_if_player( m_good, _( "You feel a tug on your line!" ) );
@@ -3948,10 +3981,8 @@ std::unique_ptr<activity_actor> open_gate_activity_actor::deserialize( JsonValue
 void consume_activity_actor::start( player_activity &act, Character &guy )
 {
     int moves = 0;
-    Character &player_character = get_player_character();
-    //TODO: why use both `player_character` and `guy`?
-    auto player_will_eat = [this, &moves, &player_character, &guy]( const item & it ) {
-        ret_val<edible_rating> ret = player_character.will_eat( it, true );
+    auto character_will_eat = [this, &moves, &guy]( const item & it ) {
+        ret_val<edible_rating> ret = guy.will_eat( it, true );
         if( !ret.success() ) {
             canceled = true;
             uistate.consume_uistate.clear();
@@ -3961,9 +3992,9 @@ void consume_activity_actor::start( player_activity &act, Character &guy )
     };
 
     if( consume_location ) {
-        player_will_eat( *consume_location );
+        character_will_eat( *consume_location );
     } else if( !consume_item.is_null() ) {
-        player_will_eat( consume_item );
+        character_will_eat( consume_item );
     } else {
         debugmsg( "Item/location to be consumed should not be null." );
         canceled = true;
@@ -6846,7 +6877,6 @@ time_duration prying_activity_actor::prying_time( const activity_data_common &da
 void prying_activity_actor::start( player_activity &act, Character &who )
 {
     const map &here = get_map();
-
     if( here.has_furn( target ) ) {
         const furn_id &furn_type = here.furn( target );
         if( !furn_type->prying->valid() ) {
@@ -6893,9 +6923,11 @@ void prying_activity_actor::start( player_activity &act, Character &who )
 void prying_activity_actor::do_turn( player_activity &/*act*/, Character &who )
 {
     map &here = get_map();
-
+    if( !tool ) {
+        who.cancel_activity();
+        return;
+    }
     std::string method = "CROWBAR";
-
     if( tool->ammo_sufficient( &who, method ) ) {
         int ammo_consumed = tool->ammo_required();
         std::map<std::string, int>::const_iterator iter = tool->type->ammo_scale.find( method );
@@ -7647,11 +7679,11 @@ void chop_tree_activity_actor::finish( player_activity &act, Character &who )
             }
         }
     }
-
+    who.practice( skill_survival, 3, 3 );
     here.cut_down_tree( pos, direction.xy() );
 
     who.add_msg_if_player( m_good, _( "You finish chopping down a tree." ) );
-    // sound of falling tree
+    // Sound of falling tree.
     here.collapse_at( pos, false, true, false );
     sfx::play_variant_sound( "misc", "timber",
                              sfx::get_heard_volume( here.get_bub( act.placement ) ) );
@@ -7906,12 +7938,12 @@ void forage_activity_actor::finish( player_activity &act, Character &who )
     const tripoint_bub_ms bush_pos = here.get_bub( act.placement );
     here.ter_set( bush_pos, next_ter );
 
-    // Survival gives a bigger boost, and Perception is leveled a bit.
-    // Both survival and perception affect time to forage
+    // Ecology gives a bigger boost, and Perception is leveled a bit.
+    // Both ecology and perception affect time to forage
 
     ///\EFFECT_PER slightly increases forage success chance got_anything = ( std::max( survival_skill * 2 + survival_skill * ( ( per_cur - 10 ) / 10.0 ), 19 ) > forage_roll )
     ///\EFFECT_SURVIVAL increases forage success chance
-    // The survival+per check here is unlikely to ever get anywhere near 84, but we may as well keep parity with act_harvest's fail chance.
+    // The ecology+per check here is unlikely to ever get anywhere near 84, but we may as well keep parity with act_harvest's fail chance.
     // per_cur is not divided by 2 here because foraging underbrush is more about searching for hidden things.
     if( vegetable_chance < ( std::min( ( who.get_skill_level( skill_survival ) * 3 + who.per_cur ),
                                        84.0f ) ) ) {

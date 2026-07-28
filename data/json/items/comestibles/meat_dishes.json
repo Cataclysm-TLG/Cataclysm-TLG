@@ -1224,29 +1224,6 @@
   {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "id": "meat_salted",
-    "name": { "str_sp": "salted meat" },
-    "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "salted human flesh" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "salted mutant meat" } }
-    ],
-    "copy-from": "meat_cooked",
-    "color": "red",
-    "spoils_in": "42 days",
-    "container": "plastic_bag_vac",
-    "quench": -5,
-    "description": "Meat slices cured in brine.  Salty but tasty in a pinch.",
-    "price": "5 USD",
-    "price_postapoc": "3 USD",
-    "material": [ "flesh" ],
-    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
-    "primary_material": "cured_meat",
-    "fun": 2,
-    "vitamins": [ [ "meat_allergen", 1 ] ]
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
     "id": "spaghetti_bolognese",
     "name": { "str_sp": "spaghetti bolognese" },
     "conditional_names": [
@@ -1498,7 +1475,6 @@
     "description": "A serving of crisply brined and canned meat.  Tasty and nutritious.",
     "price": "2 USD 50 cent",
     "price_postapoc": "3 USD",
-    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
     "fun": 6
   },
   {
@@ -1570,7 +1546,6 @@
     "description": "Reconstituted meat flakes, which are much more enjoyable to eat now that they have been rehydrated.",
     "price": "9 USD",
     "price_postapoc": "1 USD",
-    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
     "fun": 2
   },
   {

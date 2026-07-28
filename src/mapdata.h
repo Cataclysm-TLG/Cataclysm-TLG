@@ -290,7 +290,6 @@ enum class ter_furn_flag : int {
     TFLAG_RAIL,
     TFLAG_THIN_OBSTACLE,
     TFLAG_SMALL_PASSAGE,
-    TFLAG_Z_TRANSPARENT,
     TFLAG_SUN_ROOF_ABOVE,
     TFLAG_FUNGUS,
     TFLAG_LOCKED,
@@ -382,6 +381,8 @@ enum class ter_furn_flag : int {
     TFLAG_MON_AVOID_STRICT,
     TFLAG_REGION_PSEUDO,
     TFLAG_SOAKING_TUB,
+    TFLAG_TIRE_DAMAGE,
+    TFLAG_TIRE_SAFE,
 
     NUM_TFLAG_FLAGS
 };

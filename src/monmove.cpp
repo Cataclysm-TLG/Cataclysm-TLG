@@ -68,6 +68,7 @@ static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_immobilization( "immobilization" );
 static const efftype_id effect_in_pit( "in_pit" );
+static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_invisibility( "invisibility" );
 static const efftype_id effect_led_by_leash( "led_by_leash" );
 static const efftype_id effect_no_sight( "no_sight" );
@@ -775,7 +776,7 @@ static float get_stagger_adjust( const tripoint_bub_ms &source, const tripoint_b
                                  const tripoint_bub_ms &next_step )
 {
     const float initial_dist =
-        trig_dist( source, destination );
+        trig_dist_precise( source, destination );
     const float new_dist =
         trig_dist_precise( next_step, destination );
     // If we return 0, it wil cancel the action.
@@ -929,6 +930,16 @@ void monster::move()
         return;
     }
 
+    // If the monster is aquatic and not a zombie, it will soon die out of water.
+    if( !here.has_flag_ter( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) &&
+        !here.has_flag_ter( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_LIQUID, pos_bub() )
+        && has_flag( mon_flag_AQUATIC ) && !has_flag( mon_flag_NO_BREATHE ) && one_in( 20 ) ) {
+        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ),
+                                name() );
+        die( &here, nullptr );
+    }
+
     if( moves < 0 ) {
         return;
     }
@@ -962,7 +973,7 @@ void monster::move()
     const std::optional<vpart_reference> vp_boardable = ovp.part_with_feature( "BOARDABLE", true );
     if( vp_boardable && friendly != 0 ) {
         const vehicle &veh = vp_boardable->vehicle();
-        if( veh.is_moving() && veh.get_monster( here,  vp_boardable->part_index() ) ) {
+        if( veh.is_moving() && veh.get_monster( here, vp_boardable->part_index() ) ) {
             moves = 0;
             return; // don't move if friendly and passenger in a moving vehicle
         }
@@ -1409,47 +1420,58 @@ void monster::footsteps( const tripoint_bub_ms &p )
     if( is_hallucination() ) {
         return;
     }
-
+    // This just tracks if we've already run this function this turn.
     if( made_footstep ) {
         return;
     }
     made_footstep = true;
-    int volume = 6; // same as player's footsteps
-    if( flies() || has_flag( mon_flag_SILENTMOVES ) ) {
-        volume = 0;    // Flying monsters don't have footsteps!
+    int volume = 6; // Same as base sound for a character's footsteps.
+
+    if( has_flag( mon_flag_SILENTMOVES ) || has_effect( effect_incorporeal ) ) {
+        return;
     }
     if( digging() ) {
         volume = 10;
     }
-    switch( type->size ) {
-        case creature_size::tiny:
-            volume = 0; // No sound for the tinies
-            break;
-        case creature_size::small:
-            volume /= 3;
-            break;
-        case creature_size::medium:
-            break;
-        case creature_size::large:
-            volume *= 1.5;
-            break;
-        case creature_size::huge:
-            volume *= 2;
-            break;
-        default:
-            break;
+    bool flying = flies();
+    if( flying ) { // Flight gets really loud for big boys.
+        volume = static_cast<int>( type->size ) * 2;
+    } else {
+        switch( type->size ) {
+            case creature_size::tiny:
+                volume = 0; // No sound for the tinies
+                break;
+            case creature_size::small:
+                volume /= 3;
+                break;
+            case creature_size::medium:
+                break;
+            case creature_size::large:
+                volume *= 1.5;
+                break;
+            case creature_size::huge:
+                volume *= 2;
+                break;
+            default:
+                break;
+        }
     }
     if( has_flag( mon_flag_LOUDMOVES ) ) {
         volume += 6;
     } else if( has_flag( mon_flag_QUIETMOVES ) ) {
         volume -= 3;
     }
-    if( volume == 0 ) {
+    
+    if( volume <= 0 ) {
         return;
     }
     int dist = trig_dist( p,
                           get_player_character().pos_bub() );
-    sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
+    if( flying ) {
+        sounds::add_footstep( p, volume, dist, this, type->get_flight_sound() );
+    } else {
+        sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
+    }
 }
 
 tripoint_bub_ms monster::scent_move()
@@ -2387,11 +2409,13 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
     // If we're still in the function at this point, we're actually moving a tile!
     // die_if_drowning will kill the monster if necessary, but if the deep water
     // tile is on a vehicle, we should check for swimmers out of water
-    if( !die_if_drowning( to ) && has_flag( mon_flag_AQUATIC ) ) {
+    if( !here.has_flag_ter( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) &&
+        !here.has_flag_ter( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_LIQUID, pos_bub() )
+        && has_flag( mon_flag_AQUATIC ) && !has_flag( mon_flag_NO_BREATHE ) && one_in( 20 ) ) {
+        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ),
+                                name() );
         die( &here, nullptr );
-        if( u_see ) {
-            add_msg( _( "The %s flops around and dies!" ), name() );
-        }
     }
 
     // It's some kind of wall.
@@ -2408,81 +2432,6 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
         setpos( here, to );
     }
     check_dead_state( &here );
-}
-
-/* will_reach() is used for determining whether we'll get to stairs (and
- * potentially other locations of interest).  It is generally permissive.
- * TODO: Pathfinding;
-         Make sure that non-smashing monsters won't "teleport" through windows
-         Injure monsters if they're gonna be walking through pits or whatever
- */
-bool monster::will_reach( const point_bub_ms &p )
-{
-    const map &here = get_map();
-    const tripoint_bub_ms t = { p, posz() };
-
-    monster_attitude att = attitude( &get_player_character() );
-    if( att != MATT_FOLLOW && att != MATT_ATTACK && att != MATT_FRIEND ) {
-        return false;
-    }
-
-    if( digs() || has_flag( mon_flag_AQUATIC ) ) {
-        return false;
-    }
-
-    if( ( has_flag( mon_flag_IMMOBILE ) ||
-          has_flag( json_flag_CANNOT_MOVE ) ) &&
-        ( pos_bub().xy() != p ) ) {
-        return false;
-    }
-
-    const std::vector<tripoint_bub_ms> path = here.route( *this, pathfinding_target::point( t ) );
-    if( path.empty() ) {
-        return false;
-    }
-
-    if( has_flag( mon_flag_SMELLS ) && get_scent().get( pos_bub() ) > 0 &&
-        get_scent().get( tripoint_bub_ms( { p, posz() } ) ) > get_scent().get( pos_bub() ) ) {
-        return true;
-    }
-
-    if( can_hear() && wandf > 0 && rl_dist( here.get_bub( wander_pos ).xy(), p ) <= 2 &&
-        rl_dist( pos_abs().xy(), wander_pos.xy() ) <= wandf ) {
-        return true;
-    }
-
-    if( can_see() && sees( here, tripoint_bub_ms( p, posz() ) ) ) {
-        return true;
-    }
-
-    return false;
-}
-
-int monster::turns_to_reach( const point_bub_ms &p )
-{
-    map &here = get_map();
-    const tripoint_bub_ms t = { p, posz() };
-    // HACK: This function is a(n old) temporary hack that should soon be removed
-    const std::vector<tripoint_bub_ms> path = here.route( *this, pathfinding_target::point( t ) );
-    if( path.empty() ) {
-        return 999;
-    }
-
-    double turns = 0.;
-    for( size_t i = 0; i < path.size(); i++ ) {
-        const tripoint_bub_ms &next = path[i];
-        if( here.impassable( next ) ) {
-            // No bashing through, it looks stupid when you go back and find
-            // the doors intact.
-            return 999;
-        } else if( i == 0 ) {
-            turns += static_cast<double>( calc_movecost( pos_bub(), next ) ) / get_speed();
-        } else {
-            turns += static_cast<double>( calc_movecost( path[i - 1], next ) ) / get_speed();
-        }
-    }
-
-    return static_cast<int>( turns + .9 ); // Halve (to get turns) and round up
 }
 
 void monster::shove_vehicle( const tripoint_bub_ms &remote_destination,

@@ -1153,5 +1153,15 @@
     "description": "Obsoleted trait.",
     "random_at_chargen": false,
     "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "MARTIAL_ARTS4",
+    "name": { "str": "Venom Mob Protege" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
   }
 ]

@@ -49,12 +49,11 @@
     "use_action": {
       "type": "manualnoise",
       "moves": 100,
-      "noise": 110,
+      "noise": 120,
       "noise_message": "HOOOOONK!",
       "noise_id": "misc",
       "noise_variant": "airhorn",
-      "use_message": "You honk your airhorn.",
-      "//": "Use of %s not currently supported."
+      "use_message": "You honk your airhorn."
     },
     "melee_damage": { "bash": 3 }
   },

@@ -10,7 +10,7 @@
     "coverage": 0,
     "connects_to": [ "DIRT", "CLAY", "SAND", "MUD", "DIRTMOUND", "CLAYMOUND", "SANDMOUND", "SANDGLASS", "CONCRETE" ],
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "TIRE_SAFE" ],
     "bash": { "sound": "thump", "ter_set": "t_open_air", "str_min": 50, "str_max": 100, "bash_below": true }
   },
   {
@@ -23,7 +23,7 @@
     "color": "light_gray",
     "looks_like": "t_railroad_rubble",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -43,7 +43,7 @@
     "looks_like": "t_moss",
     "move_cost": 2,
     "coverage": 0,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -107,7 +107,7 @@
     "connects_to": [ "CLAY", "CLAYMOUND" ],
     "move_cost": 2,
     "coverage": 0,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "TIRE_SAFE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
@@ -173,7 +173,7 @@
     "connects_to": "SANDGLASS",
     "move_cost": 3,
     "coverage": 0,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "TIRE_DAMAGE" ],
     "bash": { "sound": "crunch", "ter_set": "t_sand", "str_min": 25, "str_max": 100, "str_min_supported": 100 }
   },
   {
@@ -187,7 +187,7 @@
     "connects_to": "DIRTMOUND",
     "move_cost": 3,
     "coverage": 0,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "MOUNTABLE", "NOCOLLIDE", "PLANTABLE", "TREE_PLANTABLE" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "MOUNTABLE", "NOCOLLIDE", "PLANTABLE", "TREE_PLANTABLE", "TIRE_DAMAGE" ],
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",

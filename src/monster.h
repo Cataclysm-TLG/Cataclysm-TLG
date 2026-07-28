@@ -223,9 +223,6 @@ class monster : public Creature
         bool know_danger_at( const tripoint_bub_ms &p ) const;
         bool know_danger_at( map *here, const tripoint_bub_ms &p ) const;
 
-        bool will_reach( const point_bub_ms &p ); // Do we have plans to get to (x, y)?
-        int  turns_to_reach( const point_bub_ms &p ); // How long will it take?
-
         // Returns true if the monster has a current goal
         bool has_dest() const;
         // Returns point at the end of the monster's current plans
@@ -504,11 +501,9 @@ class monster : public Creature
 
         bool is_electrical() const override;    // true if the monster produces electric radiation
 
-        bool is_fae() const override;    // true if the monster is a faerie creature
-
         bool is_nether() const override;    // true if the monster is from the nether
 
-        bool has_mind() const override;    // true if the monster is sapient and capable of reason
+        bool has_mind() const override;
 
         field_type_id bloodType() const override;
         field_type_id gibType() const override;

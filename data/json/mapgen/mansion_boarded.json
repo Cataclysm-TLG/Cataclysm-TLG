@@ -85,7 +85,7 @@
         "o": "t_window_enhanced"
       },
       "furniture": { "&": "f_sofa" },
-      "items": { " ": { "item": "clutter_mansion", "chance": 2 }, "c": { "item": "suit_of_armor", "chance": 100 } },
+      "items": { " ": { "item": "clutter_mansion", "chance": 2 }, "c": { "item": "suit_of_armor", "chance": 50 } },
       "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 17, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
@@ -145,8 +145,8 @@
         ".": { "item": "clutter_basement", "chance": 1 },
         "!": { "item": "crate_stack", "chance": 100 },
         "H": { "item": "mansion_ammo", "chance": 40 },
-        "x": { "item": "a_television", "chance": 100 },
-        "c": { "item": "suit_of_armor", "chance": 80 }
+        "x": { "item": "a_television", "chance": 80 },
+        "c": { "item": "suit_of_armor", "chance": 40 }
       },
       "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ],
       "vehicles": { "Ł": { "vehicle": "hand_truck", "chance": 10 } }
@@ -214,13 +214,13 @@
       },
       "items": {
         "%": [
-          { "item": "SUS_tailoring_materials", "chance": 80, "repeat": [ 3, 6 ] },
-          { "item": "leather_shop_repair", "chance": 40, "repeat": [ 2, 4 ] }
+          { "item": "SUS_tailoring_materials", "chance": 60, "repeat": [ 1, 3 ] },
+          { "item": "leather_shop_repair", "chance": 40, "repeat": [ 1, 2 ] }
         ],
         "&": [
           { "item": "SUS_tailoring_materials", "chance": 50, "repeat": [ 1, 2 ] },
           { "item": "SUS_tailoring_fasteners", "chance": 30, "repeat": [ 1, 2 ] },
-          { "item": "leather_shop_repair", "chance": 40, "repeat": [ 2, 4 ] }
+          { "item": "leather_shop_repair", "chance": 40, "repeat": [ 1, 3 ] }
         ],
         "?": [
           { "item": "pants", "chance": 100 },
@@ -228,15 +228,15 @@
           { "item": "leather_shop_accessories", "chance": 10 }
         ],
         "r": [
-          { "item": "SUS_tailoring_tool_drawer", "chance": 60, "repeat": [ 0, 1 ] },
-          { "item": "tailorbooks", "chance": 60, "repeat": [ 0, 1 ] },
+          { "item": "SUS_tailoring_tool_drawer", "chance": 30 },
+          { "item": "tailorbooks", "chance": 30 },
           { "item": "SUS_tailoring_fasteners", "chance": 30, "repeat": [ 2, 6 ] }
         ],
         ".": { "item": "clutter_basement", "chance": 1 },
         "=": { "item": "sex_lair", "chance": 25, "repeat": [ 2, 4 ] },
         "!": { "item": "crate_stack", "chance": 100 },
-        "D": { "item": "sex_lair", "chance": 55, "repeat": [ 2, 6 ] },
-        "d": { "item": "sex_lair", "chance": 55, "repeat": [ 2, 6 ] }
+        "D": { "item": "sex_lair", "chance": 55, "repeat": [ 1, 4 ] },
+        "d": { "item": "sex_lair", "chance": 55, "repeat": [ 1, 4 ] }
       },
       "place_monster": [
         { "group": "GROUP_MANSION_ESCAPE", "x": [ 2, 23 ], "y": [ 2, 12 ], "chance": 35, "repeat": [ 1, 4 ] },
@@ -290,7 +290,7 @@
         "o": "t_window_enhanced"
       },
       "furniture": { ")": "f_bed" },
-      "place_loot": [ { "item": "television", "x": 4, "y": 16, "chance": 100 } ],
+      "place_loot": [ { "item": "television", "x": 4, "y": 16, "chance": 80 } ],
       "items": {
         ")": { "item": "bed", "chance": 40 },
         "-": { "item": "clutter_bedroom", "chance": 2 },
@@ -358,12 +358,12 @@
         "~": { "item": "clutter_bathroom", "chance": 10 },
         ")": { "item": "bed", "chance": 40 },
         "R": { "item": "mansion_bookcase", "chance": 100 },
-        "6": { "item": "panic_room", "chance": 65, "repeat": [ 2, 6 ] },
+        "6": { "item": "panic_room", "chance": 65, "repeat": [ 1, 4 ] },
         "I": { "item": "nightstand", "chance": 40 },
         "d": { "item": "dresser_stack", "chance": 100 }
       },
       "place_loot": [
-        { "group": "corpse_mansion", "x": [ 10, 12 ], "y": [ 5, 7 ], "chance": 50, "repeat": [ 0, 2 ] },
+        { "group": "corpse_mansion", "x": [ 10, 12 ], "y": [ 5, 7 ], "chance": 40, "repeat": [ 1, 2 ] },
         { "item": "television", "x": 12, "y": 17, "chance": 100 }
       ],
       "place_monster": [
@@ -418,10 +418,10 @@
       },
       "furniture": { "&": "f_bed" },
       "place_loot": [
-        { "item": "laptop", "x": 6, "y": 6, "chance": 50 },
-        { "item": "laptop", "x": 15, "y": 9, "chance": 50 },
+        { "item": "laptop", "x": 6, "y": 6, "chance": 30 },
+        { "item": "laptop", "x": 15, "y": 9, "chance": 30 },
         { "item": "stereo", "x": 23, "y": 8, "chance": 20 },
-        { "item": "television", "x": 23, "y": 9, "chance": 100 }
+        { "item": "television", "x": 23, "y": 9, "chance": 80 }
       ],
       "items": {
         "-": { "item": "clutter_bedroom", "chance": 2 },
@@ -477,10 +477,10 @@
       },
       "furniture": { "&": "f_armchair" },
       "place_loot": [
-        { "item": "laptop", "x": 9, "y": 9, "chance": 50 },
-        { "item": "laptop", "x": 20, "y": 4, "chance": 50 },
-        { "item": "stereo", "x": 4, "y": 4, "chance": 100 },
-        { "item": "television", "x": 14, "y": 9, "chance": 100 }
+        { "item": "laptop", "x": 9, "y": 9, "chance": 30 },
+        { "item": "laptop", "x": 20, "y": 4, "chance": 30 },
+        { "item": "stereo", "x": 4, "y": 4, "chance": 80 },
+        { "item": "television", "x": 14, "y": 9, "chance": 80 }
       ],
       "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 11 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
@@ -531,7 +531,7 @@
         "o": "t_window_enhanced"
       },
       "furniture": { ")": "f_speaker_cabinet" },
-      "place_loot": [ { "item": "stereo", "x": 18, "y": 0, "chance": 100 } ],
+      "place_loot": [ { "item": "stereo", "x": 18, "y": 0, "chance": 80 } ],
       "items": {
         ".": { "item": "clutter_yard", "chance": 1 },
         " ": { "item": "clutter_mansion", "chance": 1 },
@@ -582,7 +582,7 @@
         "o": "t_window_enhanced",
         "$": "t_secretdoor_concrete_c"
       },
-      "place_loot": [ { "item": "laptop", "x": 7, "y": 12, "chance": 100 }, { "item": "television", "x": 8, "y": 9, "chance": 100 } ],
+      "place_loot": [ { "item": "laptop", "x": 7, "y": 12, "chance": 80 }, { "item": "television", "x": 8, "y": 9, "chance": 80 } ],
       "items": {
         " ": { "item": "clutter_bedroom", "chance": 2 },
         "y": { "item": "stash_drugs", "chance": 20 },
@@ -695,7 +695,7 @@
       "place_loot": [
         { "item": "stereo", "x": 13, "y": 22, "chance": 100 },
         { "item": "television", "x": 14, "y": 22, "chance": 100 },
-        { "item": "lawn_dart", "x": [ 11, 14 ], "y": [ 4, 6 ], "chance": 100, "repeat": [ 1, 2 ] }
+        { "item": "lawn_dart", "x": [ 11, 14 ], "y": [ 4, 6 ], "chance": 80, "repeat": [ 1, 2 ] }
       ],
       "items": {
         " ": { "item": "clutter_mansion", "chance": 1 },
@@ -759,13 +759,13 @@
         "‡": [ "f_ergometer", "f_ergometer_mechanical" ],
         ")": "f_speaker_cabinet"
       },
-      "place_loot": [ { "item": "stereo", "x": 8, "y": 14, "chance": 100 }, { "item": "television", "x": 9, "y": 14, "chance": 100 } ],
+      "place_loot": [ { "item": "stereo", "x": 8, "y": 14, "chance": 80 }, { "item": "television", "x": 9, "y": 14, "chance": 80 } ],
       "items": {
         ".": { "item": "clutter_yard", "chance": 1 },
         " ": { "item": "clutter_mansion", "chance": 1 },
-        "x": { "item": "mansion_bookcase", "chance": 100 },
+        "x": { "item": "mansion_bookcase", "chance": 60 },
         "&": { "item": "table_card", "chance": 35 },
-        "c": { "item": "suit_of_armor", "chance": 100 },
+        "c": { "item": "suit_of_armor", "chance": 40 },
         "C": { "item": "wetbar_counter", "chance": 30 },
         "m": { "item": "wetbar_fridge", "chance": 45 },
         "J": { "item": "wetbar_stack", "chance": 100 },
@@ -820,9 +820,9 @@
       },
       "furniture": { "&": "f_bed", "?": "f_chair" },
       "place_loot": [
-        { "item": "laptop", "x": 9, "y": 16, "chance": 100 },
-        { "item": "laptop", "x": 22, "y": 9, "chance": 100 },
-        { "item": "television", "x": 17, "y": 12, "chance": 100 }
+        { "item": "laptop", "x": 9, "y": 16, "chance": 40 },
+        { "item": "laptop", "x": 22, "y": 9, "chance": 40 },
+        { "item": "television", "x": 17, "y": 12, "chance": 80 }
       ],
       "items": {
         "-": { "item": "clutter_bedroom", "chance": 2 },
@@ -885,7 +885,7 @@
         ".": { "item": "clutter_yard", "chance": 1 },
         " ": { "item": "clutter_mansion", "chance": 1 },
         "a": { "item": "fireplace_fill", "chance": 30 },
-        "R": { "item": "mansion_bookcase", "chance": 100 },
+        "R": { "item": "mansion_bookcase", "chance": 60 },
         ")": { "item": "table_livingroom", "chance": 30 }
       },
       "place_monster": [ { "group": "GROUP_MANSION", "x": [ 5, 23 ], "y": [ 6, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
@@ -940,12 +940,12 @@
         "o": "t_window_enhanced"
       },
       "furniture": { "&": "f_speaker_cabinet" },
-      "place_loot": [ { "item": "stereo", "x": 22, "y": 15, "chance": 100 } ],
+      "place_loot": [ { "item": "stereo", "x": 22, "y": 15, "chance": 80 } ],
       "items": {
         " ": { "item": "clutter_mansion", "chance": 1 },
         "M": { "item": "art", "chance": 100 },
         "s": { "item": "snacks_fancy", "chance": 20 },
-        "∞": { "item": "mansion_guns", "chance": 100 }
+        "∞": { "item": "mansion_guns", "chance": 70 }
       },
       "place_monster": [ { "group": "GROUP_MANSION", "x": [ 15, 23 ], "y": [ 9, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
@@ -1001,7 +1001,7 @@
         " ": { "item": "clutter_bedroom", "chance": 1 },
         "~": { "item": "clutter_bathroom", "chance": 10 },
         "i": { "item": "table_foyer", "chance": 20 },
-        "R": { "item": "mansion_bookcase", "chance": 100 },
+        "R": { "item": "mansion_bookcase", "chance": 60 },
         "s": { "item": "nightstand", "chance": 35 }
       },
       "place_monster": [ { "group": "GROUP_MANSION", "x": [ 10, 23 ], "y": [ 6, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]

@@ -249,24 +249,21 @@ static std::unordered_map<tripoint_bub_ms, sound_event> sound_markers;
 // This is an attempt to handle attenuation of sound for underground areas.
 // The main issue it addresses is that you can hear activity
 // relatively deep underground while on the surface.
-// My research indicates that attenuation through soil-like materials is as
-// high as 100x the attenuation through air, plus vertical distances are
-// roughly five times as large as horizontal ones.
 static int sound_distance( const tripoint_bub_ms &source, const tripoint_bub_ms &sink )
 {
     const int lower_z = std::min( source.z(), sink.z() );
     const int upper_z = std::max( source.z(), sink.z() );
     const int vertical_displacement = upper_z - lower_z;
-    int vertical_attenuation = vertical_displacement * 2;
+    int vertical_attenuation = vertical_displacement;
     if( lower_z < 0 && vertical_displacement > 0 ) {
-        // Apply a moderate bonus attenuation (5x) for the first level of vertical displacement.
-        vertical_attenuation += 4;
-        // At displacements greater than one, apply a large additional attenuation (100x) per level.
+        // We're assuming floors, soil etc. between Z levels so we add a lot of attenuation.
+        vertical_attenuation += 40;
+        // More attenuation at distances higher than 1.
         const int underground_displacement = std::min( -lower_z, vertical_displacement );
         vertical_attenuation += ( underground_displacement - 1 ) * 20;
     }
-    // Regardless of underground effects, scale the vertical distance by 5x.
-    vertical_attenuation *= 5;
+    // Regardless of underground effects, scale the vertical distance by 2x.
+    vertical_attenuation *= 2;
     return trig_dist( source.xy(), sink.xy() ) + vertical_attenuation;
 }
 
@@ -443,8 +440,8 @@ static std::vector<centroid> cluster_sounds(
 
 static int get_signal_for_hordes( const centroid &centr )
 {
-    //Volume in  tiles. Signal for hordes in submaps
-    //modify vol using weather vol.Weather can reduce monster hearing
+    //Volume in tiles. Signal for hordes in submaps
+    //modify vol using weather vol. Weather can reduce monster hearing.
     const int vol = centr.volume - get_weather().weather_id->sound_attn;
     const int min_vol_cap = 60; //Hordes can't hear volume lower than this
     const int underground_div = 2; //Coefficient for volume reduction underground
@@ -479,9 +476,13 @@ void sounds::process_sounds()
         const tripoint_bub_ms source = tripoint_bub_ms( this_centroid.x, this_centroid.y, this_centroid.z );
         // --- Monster sound handling here ---
         // Alert all hordes
-        int sig_power = get_signal_for_hordes( this_centroid );
-        if( sig_power > 0 ) {
 
+        int sig_power = get_signal_for_hordes( this_centroid );
+        bool outside = here.is_outside( source );
+        if( !outside ) {
+            sig_power *= 0.8;
+        }
+        if( sig_power > 0 ) {
             const point_abs_ms abs_ms = here.get_abs( source ).xy();
             const point_abs_sm abs_sm( coords::project_to<coords::sm>( abs_ms ) );
             const tripoint_abs_sm target( abs_sm, source.z() );
@@ -490,12 +491,14 @@ void sounds::process_sounds()
         // Alert all monsters (that can hear) to the sound.
         for( monster &critter : g->all_monsters() ) {
             // TODO: Generalize this to Creature::hear_sound
-            const int dist = sound_distance( source, critter.pos_bub() );
+            tripoint_bub_ms target_bub = critter.pos_bub();
+            const int dist = sound_distance( source, target_bub );
             if( vol * 2 > dist && critter.has_flag( mon_flag_HEARS ) && !critter.has_effect( effect_deaf ) ) {
                 // Exclude monsters that certainly won't hear the sound
                 critter.hear_sound( source, vol, dist, this_centroid.provocative );
                 if( raw_volume >= 150 && !critter.is_immune_effect( effect_deaf ) ) {
-                    const int felt_volume = raw_volume - dist;
+                    const bool both_inside = !outside && !here.is_outside( target_bub );
+                    const int felt_volume = ( raw_volume - dist * 2 ) * ( both_inside ? 100 : 80 ) / 100;
                     const bool is_sound_deafening = felt_volume >= 150;
                     if( is_sound_deafening ) {
                         // Reduced deafness for monsters (zombies adapt, animals have better ears, etc)
@@ -553,12 +556,16 @@ static bool describe_sound( sounds::sound_t category, bool from_player_position 
         switch( category ) {
             case sounds::sound_t::background:
             case sounds::sound_t::weather:
+                return one_in( 80  );
             case sounds::sound_t::sensory:
+                return false;
             case sounds::sound_t::music:
+                return one_in( 80  );
             case sounds::sound_t::movement:
             case sounds::sound_t::activity:
+                return one_in( 50  );
             case sounds::sound_t::destructive_activity:
-                return one_in( 100 );
+                return one_in( 20  );
             case sounds::sound_t::speech:
             case sounds::sound_t::electronic_speech:
             case sounds::sound_t::alarm:
@@ -581,6 +588,7 @@ void sounds::process_sound_markers( Character *you )
     bool is_deaf = you->is_deaf();
     const float volume_multiplier = you->hearing_ability();
     const int weather_vol = get_weather().weather_id->sound_attn;
+    tripoint_bub_ms you_pos = you->pos_bub();
     // NOLINTNEXTLINE(modernize-loop-convert)
     for( std::size_t i = 0; i < sounds_since_last_turn.size(); i++ ) {
         // copy values instead of making references here to fix use-after-free error
@@ -588,9 +596,10 @@ void sounds::process_sound_markers( Character *you )
         // so the references may become invalid after the vector enlarged its internal buffer
         const tripoint_bub_ms pos = tripoint_bub_ms( sounds_since_last_turn[i].first );
         const sound_event sound = sounds_since_last_turn[i].second;
-        const int distance_to_sound = sound_distance( you->pos_bub(), pos );
+        const int distance_to_sound = sound_distance( you_pos, pos );
         const int raw_volume = sound.volume;
-
+        add_msg_debug( debugmode::DF_SOUND,
+            "sound vol %d dist %d", raw_volume, distance_to_sound );
         // The felt volume of a sound is not affected by negative multipliers, such as already
         // deafened players or players with sub-par hearing to begin with.
         int felt_volume = static_cast<int>( std::round( ( raw_volume * std::min( 1.0f,
@@ -629,16 +638,15 @@ void sounds::process_sound_markers( Character *you )
         // The heard volume of a sound is the player heard volume, regardless of true volume level.
         const int heard_volume = static_cast<int>( std::round( ( ( raw_volume - weather_vol ) *
                                  volume_multiplier ) - distance_to_sound ) );
-
-        if( heard_volume < 1 && pos != you->pos_bub() ) {
+        // Player volume meter includes all sounds from their tile.
+        if( distance_to_sound < 1 && heard_volume > 0 ) {
+            // Min here because good hearing doesn't overestimate sounds, but bad will underestimate.
+            you->volume = std::min( you->volume, heard_volume );
             continue;
         }
-
-        // Player volume meter includes all sounds from their tile and adjacent tiles
-        if( distance_to_sound <= 1 ) {
-            you->volume = std::max( you->volume, heard_volume );
+        if( heard_volume < 1 ) {
+            continue;
         }
-
         // Noises from vehicle player is in.
         if( you->controlling_vehicle ) {
             vehicle *veh = veh_pointer_or_null( here.veh_at( you->pos_abs() ) );
@@ -647,9 +655,9 @@ void sounds::process_sound_markers( Character *you )
             you->volume = std::max( you->volume, noise );
         }
 
-        // Secure the flag before wake_up() clears the effect
+        // Secure the flag before wake_up() clears the effect.
         bool slept_through = you->has_effect( effect_slept_through_alarm );
-        // See if we need to wake someone up
+        // See if we need to wake someone up.
         if( you->in_sleep_state() ) {
             if( ( ( !( you->has_trait( trait_HEAVYSLEEPER ) ||
                        you->has_trait( trait_HEAVYSLEEPER2 ) ) && dice( 2, 15 ) < heard_volume ) ||
@@ -657,7 +665,7 @@ void sounds::process_sound_markers( Character *you )
                   ( you->has_trait( trait_HEAVYSLEEPER2 ) && dice( 6, 15 ) < heard_volume ) ) &&
                 !you->has_effect( effect_narcosis ) &&
                 !you->has_bionic( bio_sleep_shutdown ) ) {
-                //Not kidding about sleep-through-firefight
+                // Not kidding about sleep-through-firefight.
                 you->wake_up();
                 you->add_msg_if_player( m_warning, _( "Something is making noise." ) );
             } else {
@@ -677,8 +685,8 @@ void sounds::process_sound_markers( Character *you )
             music::activate_music_id( music::music_id::sound );
         }
 
-        // don't print our own noise or things without descriptions
-        if( !sound.ambient && ( pos != you->pos_bub() ) && !here.pl_sees( pos, distance_to_sound ) ) {
+        // Don't print our own noise or things without descriptions.
+        if( !sound.ambient && ( pos != you_pos ) && !here.pl_sees( pos, distance_to_sound ) ) {
             if( uistate.distraction_noise &&
                 !you->activity.is_distraction_ignored( distraction_type::noise ) &&
                 !get_safemode().is_sound_safe( sound.description, distance_to_sound, you->controlling_vehicle ) ) {
@@ -688,21 +696,21 @@ void sounds::process_sound_markers( Character *you )
             }
         }
 
-        // skip some sounds to avoid message spam
-        const bool from_player = pos == you->pos_bub() || ( sound.category == sound_t::movement &&
-                                 distance_to_sound < 2 );
+        // Skip some sounds to avoid message spam.
+        const bool from_player = pos == you_pos || ( sound.category == sound_t::movement &&
+                                 distance_to_sound < 3 );
         if( describe_sound( sound.category, from_player ) ) {
             game_message_type severity = m_info;
             if( sound.category == sound_t::combat || sound.category == sound_t::alarm ) {
                 severity = m_warning;
             }
             // if we can see it, don't print a direction
-            if( pos == you->pos_bub( here ) ) {
+            if( pos == you_pos ) {
                 add_msg( severity, _( "From your position you hear %1$s" ), description );
             } else if( you->sees( here, pos ) ) {
                 add_msg( severity, _( "You hear %1$s" ), description );
             } else {
-                std::string direction = direction_name( direction_from( you->pos_bub(), pos ) );
+                std::string direction = direction_name( direction_from( you_pos, pos ) );
                 add_msg( severity, _( "From the %1$s you hear %2$s" ), direction, description );
             }
         }
@@ -722,7 +730,7 @@ void sounds::process_sound_markers( Character *you )
                     add_msg( _( "Your alarm clock goes off and you haven't slept a wink." ) );
                     you->activity.set_to_null();
                 }
-                add_msg( _( "You turn off your alarm-clock." ) );
+                add_msg( _( "You turn off your alarm clock." ) );
                 you->get_effect( effect_alarm_clock ).set_duration( 0_turns );
             }
         }
@@ -740,12 +748,11 @@ void sounds::process_sound_markers( Character *you )
         // Place footstep markers.
         if( pos == you->pos_bub() || ( you->sees( here, pos ) &&
                                        ( sound.category != sound_t::sensory ) ) ) {
-            // If we are or can see the source, don't draw a marker, except for sonar etc
+            // If we are or can see the source, don't draw a marker, except for sonar etc.
             continue;
         }
 
         int err_offset;
-
         if( ( heard_volume + distance_to_sound ) / distance_to_sound < 2 ) {
             err_offset = rng( 0, 3 );
         } else if( ( heard_volume + distance_to_sound ) / distance_to_sound < 3 ) {
@@ -914,8 +921,8 @@ void sfx::do_vehicle_engine_sfx()
     static const channel ch = channel::interior_engine_sound;
     const Character &player_character = get_player_character();
     if( !player_character.in_vehicle ) {
+        // TODO: This or one like it was running like every turn. Is that fine?
         fade_audio_channel( ch, 300 );
-        add_msg_debug( debugmode::DF_SOUND, "STOP interior_engine_sound, OUT OF CAR" );
         return;
     }
     if( player_character.in_sleep_state() && !audio_muted ) {
@@ -934,7 +941,6 @@ void sfx::do_vehicle_engine_sfx()
     }
     if( !veh->engine_on ) {
         fade_audio_channel( ch, 100 );
-        add_msg_debug( debugmode::DF_SOUND, "STOP interior_engine_sound" );
         return;
     }
 
@@ -1056,7 +1062,6 @@ void sfx::do_vehicle_exterior_engine_sfx()
     // early bail-outs for efficiency
     if( player_character.in_vehicle ) {
         fade_audio_channel( ch, 300 );
-        add_msg_debug( debugmode::DF_SOUND, "STOP exterior_engine_sound, IN CAR" );
         return;
     }
     if( player_character.in_sleep_state() && !audio_muted ) {
@@ -1084,7 +1089,6 @@ void sfx::do_vehicle_exterior_engine_sfx()
     }
     if( !noise_factor || !veh ) {
         fade_audio_channel( ch, 300 );
-        add_msg_debug( debugmode::DF_SOUND, "STOP exterior_engine_sound, NO NOISE" );
         return;
     }
 
@@ -1119,20 +1123,13 @@ void sfx::do_vehicle_exterior_engine_sfx()
         if( engine_external_id_and_variant == id_and_variant ) {
             Mix_SetPosition( ch_int, to_degrees( get_heard_angle( veh->pos_bub( here ) ) ), 0 );
             set_channel_volume( ch, vol );
-            add_msg_debug( debugmode::DF_SOUND, "PLAYING exterior_engine_sound, vol: ex:%d true:%d", vol,
-                           Mix_Volume( ch_int, -1 ) );
         } else {
             engine_external_id_and_variant = id_and_variant;
             Mix_HaltChannel( ch_int );
-            add_msg_debug( debugmode::DF_SOUND, "STOP exterior_engine_sound, change id/var" );
             play_ambient_variant_sound( id_and_variant.first, id_and_variant.second,
                                         seas_str, indoors, night, 128, ch, 0 );
             Mix_SetPosition( ch_int, to_degrees( get_heard_angle( veh->pos_bub( here ) ) ), 0 );
             set_channel_volume( ch, vol );
-            add_msg_debug( debugmode::DF_SOUND, "START exterior_engine_sound %s %s vol: %d",
-                           id_and_variant.first,
-                           id_and_variant.second,
-                           Mix_Volume( ch_int, -1 ) );
         }
     } else {
         play_ambient_variant_sound( id_and_variant.first, id_and_variant.second,

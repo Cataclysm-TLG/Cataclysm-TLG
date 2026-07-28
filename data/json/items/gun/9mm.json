@@ -173,6 +173,17 @@
     "barrel_length": "146 mm",
     "price": "30000 USD",
     "price_postapoc": "140 USD",
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock", 1 ],
+      [ "underbarrel mount", 1 ]
+    ],
     "built_in_mods": [ "mp5sd_suppressor" ]
   },
   {

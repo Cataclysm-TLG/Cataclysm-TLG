@@ -825,7 +825,8 @@
       "SEALED",
       "ALLOW_FIELD_EFFECT",
       "TINY",
-      "RUBBLE"
+      "RUBBLE",
+      "TIRE_DAMAGE"
     ],
     "examine_action": "rubble"
   },
@@ -849,7 +850,8 @@
       "SEALED",
       "ALLOW_FIELD_EFFECT",
       "SHORT",
-      "RUBBLE"
+      "RUBBLE",
+      "TIRE_DAMAGE"
     ],
     "examine_action": "rubble"
   },
@@ -874,7 +876,8 @@
       "ALLOW_FIELD_EFFECT",
       "SMALL_HIDE",
       "SHORT",
-      "RUBBLE"
+      "RUBBLE",
+      "TIRE_DAMAGE"
     ],
     "examine_action": "rubble"
   },
@@ -901,7 +904,8 @@
       "ALLOW_FIELD_EFFECT",
       "SHORT",
       "SMALL_HIDE",
-      "RUBBLE"
+      "RUBBLE",
+      "TIRE_DAMAGE"
     ],
     "examine_action": "rubble"
   },
@@ -929,7 +933,8 @@
       "ALLOW_FIELD_EFFECT",
       "SHORT",
       "SMALL_HIDE",
-      "RUBBLE"
+      "RUBBLE",
+      "TIRE_DAMAGE"
     ],
     "examine_action": "rubble"
   },
@@ -957,7 +962,8 @@
       "ALLOW_FIELD_EFFECT",
       "SMALL_HIDE",
       "SHORT",
-      "RUBBLE"
+      "RUBBLE",
+      "TIRE_DAMAGE"
     ]
   },
   {

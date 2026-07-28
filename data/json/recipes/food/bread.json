@@ -286,7 +286,6 @@
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_BREAD",
     "skill_used": "cooking",
-    "skills_required": [ "survival", 1 ],
     "difficulty": 3,
     "time": "35 m",
     "charges": 15,

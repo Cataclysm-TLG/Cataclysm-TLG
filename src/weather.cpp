@@ -82,9 +82,7 @@ bool is_creature_outside( const Creature &target )
 {
     map &here = get_map();
     const tripoint_bub_ms pos = target.pos_bub( here );
-
-    return here.is_outside( tripoint_bub_ms( pos.xy(), here.get_abs_sub().z() ) ) &&
-           here.get_abs_sub().z() >= 0;
+    return here.is_outside( tripoint_bub_ms( pos.xy(), here.get_abs_sub().z() ) );
 }
 
 weather_type_id get_bad_weather()
@@ -106,7 +104,7 @@ weather_type_id get_bad_weather()
 void glare( const weather_type_id &w )
 {
     Character &player_character = get_player_character();//todo npcs, also
-    //General prerequisites for glare
+    // General prerequisites for glare
     if( g->is_sheltered( player_character.pos_bub() ) ||
         player_character.in_sleep_state() ||
         player_character.worn_with_flag( json_flag_SUN_GLASSES ) ||
@@ -453,7 +451,7 @@ void weather_sound( const translation &sound_message, const std::string &sound_e
     Character &player_character = get_player_character();
     map &here = get_map();
     if( !player_character.has_effect( effect_sleep ) && !player_character.is_deaf() ) {
-        if( here.get_abs_sub().z() >= 0 ) {
+        if( here.is_outside( player_character.pos_bub() ) ) {
             add_msg( sound_message );
             if( !sound_effect.empty() ) {
                 sfx::play_variant_sound( "environment", sound_effect, 80, random_direction() );
@@ -1038,7 +1036,7 @@ void weather_manager::update_weather()
         map &here = get_map();
         if( uistate.distraction_weather_change &&
             weather_id != old_weather && weather_id->dangerous &&
-            here.get_abs_sub().z() >= 0 && here.is_outside( player_character.pos_bub() )
+            has_sunlight_access( player_character.pos_bub() ) && here.is_outside( player_character.pos_bub() )
             && !player_character.has_activity( ACT_WAIT_WEATHER ) ) {
             g->cancel_activity_or_ignore_query( distraction_type::weather_change,
                                                 string_format( _( "The weather changed to %s!" ), weather_id->name ) );
@@ -1184,9 +1182,10 @@ units::temperature weather_manager::get_temperature( const tripoint_bub_ms &loca
     if( cached != temperature_cache.end() ) {
         return cached->second;
     }
-
+    map &here = get_map();
     //underground temperature = average New England temperature = 43F/6C
-    units::temperature temp = location.z() < 0 ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
+    units::temperature temp = location.z() < 0 &&
+                              !here.is_outside( location ) ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
 
     if( !g->new_game && !g->swapping_dimensions ) {
         units::temperature_delta temp_mod;

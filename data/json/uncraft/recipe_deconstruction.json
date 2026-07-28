@@ -1941,7 +1941,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "pride_flag",
@@ -1949,7 +1949,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "american_flag",
@@ -1957,7 +1957,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "state_flag",
@@ -1965,7 +1965,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "nylon_sheet", 4 ] ] ]
   },
   {
     "result": "canvas_sheet",
@@ -2844,7 +2844,7 @@
     "time": "6 m",
     "activity_level": "MODERATE_EXERCISE",
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "blade_scythe", 1 ] ], [ [ "spear_shaft", 1 ] ] ]
+    "components": [ [ [ "blade_scythe", 1 ] ], [ [ "stick", 1 ] ] ]
   },
   {
     "result": "sf_watch",
@@ -6021,5 +6021,15 @@
     "time": "4 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "carpet_scrap", 10 ] ] ]
+  },
+  {
+    "result": "wood_door",
+    "type": "uncraft",
+    "activity_level": "MODERATE_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "10 m",
+    "autolearn": true,
+    "qualities": [ { "id": "SCREW", "level": 1 } ],
+    "components": [ [ [ "wood_panel", 1 ] ], [ [ "hinge", 2 ] ], [ [ "scrap", 6 ] ] ]
   }
 ]

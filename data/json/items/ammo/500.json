@@ -18,7 +18,7 @@
     "stack_size": 10,
     "ammo_type": "500",
     "casing": "500_casing",
-    "range": 16,
+    "range": 19,
     "damage": { "damage_type": "bullet", "amount": 55, "armor_penetration": 8 },
     "dispersion": 30,
     "recoil": 3000,

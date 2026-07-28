@@ -92,63 +92,6 @@
     ]
   },
   {
-    "result": "leatherbone_harness_dog",
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "copy-from": "leather_harness_dog",
-    "difficulty": 2,
-    "time": "6 h",
-    "reversible": true,
-    "using": [ [ "sewing_standard", 15 ], [ "clasps", 3 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "bone", 13 ], [ "bone_human", 13 ] ], [ [ "vest_leather", 1 ] ] ],
-    "proficiencies": [
-      { "proficiency": "prof_leatherworking_basic" },
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_leatherworking" }
-    ]
-  },
-  {
-    "result": "leatherbone_harness_dog",
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "id_suffix": "from_leatherharness",
-    "category": "CC_ANIMALS",
-    "subcategory": "CSC_ANIMALS_CANINE ARMOR",
-    "skill_used": "tailor",
-    "difficulty": 2,
-    "time": "6 h",
-    "autolearn": true,
-    "reversible": true,
-    "using": [ [ "sewing_standard", 5 ], [ "clasps", 3 ] ],
-    "components": [ [ [ "bone_sturdy", 13, "LIST" ] ], [ [ "leather_harness_dog", 1 ] ] ],
-    "proficiencies": [
-      { "proficiency": "prof_leatherworking_basic" },
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_leatherworking" }
-    ]
-  },
-  {
-    "result": "leatherbone_harness_dog",
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "id_suffix": "from_scratch",
-    "category": "CC_ANIMALS",
-    "subcategory": "CSC_ANIMALS_CANINE ARMOR",
-    "skill_used": "tailor",
-    "difficulty": 4,
-    "time": "6 h",
-    "autolearn": true,
-    "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 3 ] ],
-    "using": [ [ "tailoring_leather_sheet", 8 ], [ "clasps", 3 ] ],
-    "components": [ [ [ "bone_sturdy", 13, "LIST" ] ] ],
-    "proficiencies": [
-      { "proficiency": "prof_leatherworking_basic" },
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_leatherworking" }
-    ]
-  },
-  {
     "result": "rubber_harness_dog",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",

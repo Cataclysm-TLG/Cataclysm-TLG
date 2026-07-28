@@ -106,7 +106,12 @@
     "volume": "5 ml",
     "weight": "8 g",
     "ammo_type": "gravel",
+    "damage": { "damage_type": "bash", "amount": 1 },
+    "range": 4,
+    "dispersion": 30,
+    "loudness": 0,
     "count": 1,
+    "recovery_chance": 70,
     "melee_damage": { "bash": 1 }
   },
   {
@@ -2102,9 +2107,10 @@
   },
   {
     "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
+    "subtypes": [ "AMMO" ],
     "id": "liquid_soap",
     "name": { "str_sp": "liquid soap" },
+    "ammo_type": "components",
     "category": "chems",
     "weight": "46 g",
     "//": "Density of around 0.92 g/ml",
@@ -2119,8 +2125,7 @@
     "phase": "liquid",
     "flags": [ "DETERGENT" ],
     "use_action": [ "WASH_ALL_ITEMS" ],
-    "comestible_type": "INVALID",
-    "charges": 5
+    "count": 5
   },
   {
     "id": "pine_resin",

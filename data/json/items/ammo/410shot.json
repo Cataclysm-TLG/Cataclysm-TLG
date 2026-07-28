@@ -18,7 +18,7 @@
     "stack_size": 20,
     "ammo_type": "410shot",
     "casing": "410shot_hull",
-    "range": 12,
+    "range": 15,
     "//": ".408in, 110gr, Thug Slug(yes it's called that, ugh), 20.5gr Alliant 2400",
     "damage": {
       "damage_type": "bullet",
@@ -87,7 +87,7 @@
     "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".410 000 shot" },
     "description": "A .410 shotshell loaded with five 000 pellets.  Good for a hunting or combat load.",
-    "range": 24,
+    "range": 26,
     "dispersion": 100,
     "shot_damage": { "damage_type": "bullet", "amount": 14 },
     "projectile_count": 5,

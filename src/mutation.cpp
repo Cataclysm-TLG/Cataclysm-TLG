@@ -72,7 +72,6 @@ static const mtype_id mon_player_blob( "mon_player_blob" );
 
 static const mutation_category_id mutation_category_ANY( "ANY" );
 
-static const trait_id trait_ARVORE_FOREST_MAPPING( "ARVORE_FOREST_MAPPING" );
 static const trait_id trait_BURROW( "BURROW" );
 static const trait_id trait_BURROWLARGE( "BURROWLARGE" );
 static const trait_id trait_CHAOTIC_BAD( "CHAOTIC_BAD" );
@@ -922,7 +921,7 @@ void Character::activate_cached_mutation( const trait_id &mut )
     } else if( mut == trait_ECHOLOCATION ) {
         echo_pulse();
         deactivate_mutation( mut );
-    } else if( mut == trait_TREE_COMMUNION || mut == trait_ARVORE_FOREST_MAPPING ) {
+    } else if( mut == trait_TREE_COMMUNION ) {
         tdata.powered = false;
         // Check for adjacent trees.
         bool adjacent_tree = false;

@@ -84,7 +84,8 @@ bool creature_tracker::add( const shared_ptr_fast<monster> &critter_ptr )
             return false;
         } else {
             // TODO: Is this literally ever something the player needs to know about?
-            // debugmsg( "there's already a monster at %s", critter.pos_abs().to_string_writable() );
+            dbg( D_ERROR ) << "Error: creature_tracker: There's already a monster at %s."
+                           << critter.pos_abs().to_string_writable();
             return false;
         }
     }

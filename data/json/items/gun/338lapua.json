@@ -145,16 +145,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "modular sniper rifle" },
+    "name": { "str": "Accuracy International AXMC rifle" },
     "description": "A weapon platform that prides itself on modularity and customizability, this highly accurate precision rifle may be configured with various caliber conversion kits that can allow it to fire either the .338 Lapua, .300 Win Mag, or .308 Winchester cartridges.  The rifle's size prevents it from being a particularly mobile piece of equipment, but the weapon's folding buttstock aids in portability.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "axmc",
-        "name": { "str": "Accuracy International AXMC rifle" },
-        "description": "Produced by the British precision rifle company Accuracy International, the AX Modular Caliber Weapon System is a highly-accurate combat sniper rifle offered to military, law enforcement, and civilian precision marksmen.  The rifle is compatible with a wide range of aftermarket components, including caliber conversion kits, and is built upon a base aluminum chassis, into which the weapon's parts may be installed or removed at the user's discretion."
-      }
-    ],
     "weight": "5420 g",
     "//": "Weight of gun plus muzzle break and empty 10-round magazine is 6.8 kg. Weights of these latter two have been deducted, as has the weight of a standard barrel.",
     "volume": "6050 ml",
@@ -180,8 +172,7 @@
       [ "underbarrel", 1 ],
       [ "stock", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN", "NO_TURRET" ],
-    "//3": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
+    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN" ],
     "melee_damage": { "bash": 12 }
   }
 ]

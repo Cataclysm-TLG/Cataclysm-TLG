@@ -25,8 +25,7 @@
         [ "cornbread", 1 ],
         [ "macaroni_raw", 1 ],
         [ "spaghetti_raw", 1 ],
-        [ "earthworm", 10 ],
-        [ "earthworm_handful", 1 ]
+        [ "earthworm", 10 ]
       ]
     ]
   },

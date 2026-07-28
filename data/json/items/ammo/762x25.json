@@ -18,7 +18,7 @@
     "stack_size": 40,
     "ammo_type": "762x25",
     "casing": "762_25_casing",
-    "range": 13,
+    "range": 16,
     "damage": { "damage_type": "bullet", "amount": 24, "armor_penetration": 2 },
     "dispersion": 120,
     "recoil": 540,

@@ -437,7 +437,8 @@
       "SMALL_HIDER",
       "HIT_AND_RUN",
       "CORNERED_FIGHTER",
-      "SWARMS"
+      "SWARMS",
+      "ANIMAL"
     ]
   },
   {
@@ -477,7 +478,7 @@
       [ "EAT_CARRION", 40 ],
       [ "EAT_FOOD", 120 ]
     ],
-    "flags": [ "SEES", "HEARS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER" ]
+    "flags": [ "SEES", "HEARS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER", "ANIMAL" ]
   },
   {
     "id": "mon_pigeon",
@@ -513,21 +514,24 @@
     "description": "A waterfowl well known for its loud honking and aggressive behavior.",
     "volume": "4025 ml",
     "weight": "3900 g",
-    "hp": 22,
+    "hp": 18,
     "looks_like": "mon_goose",
     "aggression": 0,
     "morale": 12,
     "aggro_character": false,
-    "dodge": 3,
+    "dodge": 1,
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bird" ],
     "weakpoint_sets": [ "wps_bird_body" ],
-    "melee_damage": [ { "damage_type": "cut", "amount": 2 } ],
+    "melee_dice": 1,
+    "melee_dice_sides": 4,
+    "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "fear_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "FIRE", "HURT", "SOUND" ],
     "anger_triggers": [ "PLAYER_CLOSE" ],
+    "placate_triggers": [ "PLAYER_WEAK" ],
     "reproduction": { "baby_egg": "egg_goose", "baby_count": 5, "baby_timer": 10 },
     "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 4 },
     "petfood": {
-      "food": [ "BIRDFOOD" ],
+      "food": [ "CATTLEFOOD", "BIRDFOOD" ],
       "feed": "The %s seems to like you!  It runs around your legs and seems friendly.",
       "pet": "The %s runs around your leg."
     },

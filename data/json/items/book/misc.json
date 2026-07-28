@@ -868,6 +868,25 @@
     "read_fun": -1
   },
   {
+    "id": "binder_mutagen_basic",
+    "type": "ITEM",
+    "subtypes": [ "BOOK" ],
+    "name": { "str": "unmarked notebook" },
+    "description": "Chemical formulae and complex diagrams handwritten in blue ball-point pen fill this notebook nearly cover to cover alongside uncomfortably detailed drawings of dissected pigs and humans.  What little text there is seems to describe steps in some sort of chemistry project, started and aborted again and again until on one dog-eared page toward the end, the nameless author outlines the collection of \"vital tissues\" and instructions for their use in some sort of experiment.",
+    "weight": "566 g",
+    "volume": "1250 ml",
+    "price": "0 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "paper" ],
+    "symbol": "?",
+    "looks_like": "record_patient",
+    "color": "light_green",
+    "intelligence": 15,
+    "time": "30 m",
+    "melee_damage": { "bash": 5 },
+    "read_fun": -2
+  },
+  {
     "id": "record_patient",
     "type": "ITEM",
     "subtypes": [ "BOOK" ],
@@ -883,7 +902,7 @@
     "intelligence": 8,
     "time": "30 m",
     "melee_damage": { "bash": 6 },
-    "read_fun": -1
+    "read_fun": -2
   },
   {
     "id": "record_weather",

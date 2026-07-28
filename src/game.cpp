@@ -263,6 +263,7 @@ static const efftype_id effect_led_by_leash( "led_by_leash" );
 static const efftype_id effect_no_sight( "no_sight" );
 static const efftype_id effect_onfire( "onfire" );
 static const efftype_id effect_pet( "pet" );
+static const efftype_id effect_playing_instrument( "playing_instrument" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
@@ -1573,18 +1574,16 @@ void game::set_driving_view_offset( const point_rel_ms &p )
         driving_view_offset.raw(); // TODO: Implement -= etc. for relative coordinates.
 }
 
-void game::catch_a_monster( monster *fish, const tripoint_bub_ms &pos, Character *p,
-                            const time_duration &catch_duration ) // catching function
+void game::catch_a_monster( monster *fish, const tripoint_bub_ms &pos, Character *p )
 {
     map &here = get_map();
 
-    //spawn the corpse, rotten by a part of the duration
-    here.add_item_or_charges( pos, item::make_corpse( fish->type->id, calendar::turn + rng( 0_turns,
-                              catch_duration ) ) );
+    // Apawn the corpse, rotten by a part of the duration.
+    here.add_item_or_charges( pos, item::make_corpse( fish->type->id, calendar::turn ) );
     if( u.sees( here, pos ) ) {
         u.add_msg_if_player( m_good, _( "You caught a %s." ), fish->type->nname() );
     }
-    //quietly kill the caught
+    // Quietly kill whatever we caught.
     fish->no_corpse_quiet = true;
     fish->die( &here, p );
 }
@@ -5048,10 +5047,10 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
             if( !here.has_flag( ter_furn_flag::TFLAG_LIQUID, targ_pos ) &&
                 targ->has_flag( mon_flag_AQUATIC ) &&
                 !targ->is_dead() ) {
-                targ->die( &here, nullptr );
                 if( u.sees( here, *targ ) ) {
-                    add_msg( _( "The %s flops around and dies!" ), targ->name() );
+                    add_msg( _( "The %s flops around in a vain attempt to return to the water." ), targ->name() );
                 }
+                targ->die( &here, nullptr );
             }
             tp = traj[i];
         }
@@ -5765,7 +5764,6 @@ bool game::is_sheltered( map *here, const tripoint_bub_ms &p )
     bool is_inside = vp && vp->is_inside();
 
     return !here->is_outside( p ) ||
-           p.z() < 0 ||
            is_inside;
 }
 
@@ -9492,6 +9490,9 @@ void game::butcher()
         }
     }
 
+    if( u.has_effect( effect_playing_instrument ) ) {
+        add_msg( m_info, _( "You can't do that while playing an instrument." ) );
+    }
     if( !u.has_morale_to_craft() ) {
         if( butcher_select == BUTCHER_CORPSE || indexer_index == MULTIBUTCHER ) {
             add_msg( m_info,
@@ -11570,7 +11571,7 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
                     const int damage = rng( force, force * 2.0f ) / 6;
                     // zed_damage uses flvel because they take damage based on c's velocity, not their own size.
                     int zed_damage = rng( flvel, flvel * 2.0f ) / 6;
-                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name(), critter.disp_name() );
+                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( false, true ), critter.disp_name() );
                     c->impact( damage, pt );
                     zed_damage = std::max( 0, ( zed_damage - critter.get_armor_type( damage_bash,
                                                 bodypart_id( "torso" ) ) ) );
@@ -11590,7 +11591,7 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
                     const int damage = rng( force, force * 2.0f ) / 6;
                     // guy_damage uses flvel because they take damage based on c's velocity, not their own size.
                     int guy_damage = rng( flvel, flvel * 2.0f ) / 6;
-                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name(), guy.disp_name() );
+                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( false, true ), guy.disp_name() );
                     c->impact( damage, pt );
                     guy_damage = std::max( 0, ( guy_damage - guy.get_armor_type( damage_bash,
                                                 bodypart_id( "torso" ) ) ) );
@@ -13079,7 +13080,7 @@ void game::autosave()
     if( std::time( nullptr ) < last_save_timestamp + 60 * get_option<int>( "AUTOSAVE_MINUTES" ) ) {
         return;
     }
-    quicksave();    //Driving checks are handled by quicksave()
+    quicksave();    // Driving checks are handled by quicksave()
 }
 
 void game::start_calendar()
@@ -13375,6 +13376,9 @@ void game::animate_weather()
                     continue;
                 }
                 if( !m.is_outside( u.pos_bub( here ) ) && !m.is_outside( mapp ) ) {
+                    continue;
+                }
+                if( u.pos_bub().z() < 0 && m.is_roofed( u.pos_bub( here ) ) ) {
                     continue;
                 }
                 wPrint.vdrops.emplace_back( screen_point.x(), screen_point.y() );

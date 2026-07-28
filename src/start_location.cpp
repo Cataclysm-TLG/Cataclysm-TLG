@@ -86,11 +86,6 @@ int start_location::targets_count() const
     return _locations.size();
 }
 
-omt_types_parameters start_location::random_target() const
-{
-    return random_entry( _locations );
-}
-
 bool start_location::requires_city() const
 {
     return constraints_.city_size.min > 0 ||
@@ -252,21 +247,46 @@ std::pair<tripoint_abs_omt, std::unordered_map<std::string, std::string>>
         start_location::find_player_initial_location( const point_abs_om &origin ) const
 {
     // Spiral out from the world origin scanning for a compatible starting location,
-    // creating overmaps as necessary.
-    const int radius = 3;
-    const omt_types_parameters chosen_target = random_target();
-    for( const point_abs_om &omp : closest_points_first( origin, radius ) ) {
-        overmap &omap = overmap_buffer.get( omp );
-        const tripoint_om_omt omtstart = omap.find_random_omt( std::make_pair( chosen_target.omt,
-                                         chosen_target.omt_type ) );
-        if( omtstart.raw() != tripoint::min ) {
-            return std::make_pair( project_combine( omp, omtstart ), chosen_target.parameters );
+    // creating overmaps as necessary. Any of this location's terrains is an
+    // acceptable match. If the initial radius comes up empty, widen the search
+    // ring by ring before giving up.
+    const int initial_radius = 3;
+    const int max_radius = 5;
+    const int min_z = constraints_.allowed_z_levels.min;
+    const int max_z = constraints_.allowed_z_levels.max;
+    for( int radius = initial_radius; radius <= max_radius; radius++ ) {
+        const int min_dist = radius == initial_radius ? 0 : radius;
+        for( const point_abs_om &omp : closest_points_first( origin, min_dist, radius ) ) {
+            overmap &omap = overmap_buffer.get( omp );
+            std::vector<std::pair<tripoint_om_omt, omt_types_parameters>> valid;
+            for( int i = 0; i < OMAPX; i++ ) {
+                for( int j = 0; j < OMAPY; j++ ) {
+                    for( int k = min_z; k <= max_z; k++ ) {
+                        const tripoint_om_omt p( i, j, k );
+                        const oter_id &ter = omap.ter( p );
+                        auto target_is_ot_match = [&]( const omt_types_parameters & target ) {
+                            return is_ot_match( target.omt, ter, target.omt_type );
+                        };
+                        auto it = std::find_if( _locations.begin(), _locations.end(),
+                                                target_is_ot_match );
+                        if( it != _locations.end() ) {
+                            valid.emplace_back( p, *it );
+                        }
+                    }
+                }
+            }
+            const std::pair<tripoint_om_omt, omt_types_parameters> random_valid = random_entry( valid,
+                    std::make_pair( tripoint_om_omt::invalid, omt_types_parameters() ) );
+            if( !random_valid.first.is_invalid() ) {
+                return std::make_pair( project_combine( omp, random_valid.first ),
+                                       random_valid.second.parameters );
+            }
         }
     }
     // Should never happen, if it does we messed up.
     popup( _( "Unable to generate a valid starting location %s [%s] in a radius of %d overmaps, please report this failure." ),
-           name(), id.str(), radius );
-    return std::make_pair( tripoint_abs_omt::invalid, chosen_target.parameters );
+           name(), id.str(), max_radius );
+    return std::make_pair( tripoint_abs_omt::invalid, std::unordered_map<std::string, std::string>() );
 }
 
 std::pair<tripoint_abs_omt, std::unordered_map<std::string, std::string>>

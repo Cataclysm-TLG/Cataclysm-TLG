@@ -12,7 +12,7 @@
       { "item": "lemonlime", "prob": 25, "container-item": "bottle_glass" },
       { "item": "orangesoda", "prob": 25, "container-item": "bottle_glass" },
       { "item": "colamdew", "prob": 25, "container-item": "bottle_glass" },
-      [ "salted_fish", 35 ],
+      [ "jerky", 35 ],
       [ "ravioli", 25 ],
       [ "cheese_hard", 15 ],
       [ "can_beans", 40 ],

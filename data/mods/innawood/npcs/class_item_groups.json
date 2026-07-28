@@ -395,7 +395,6 @@
     "entries": [
       { "item": "jerky", "prob": 55 },
       { "item": "cracklins", "prob": 25 },
-      { "item": "salted_fish", "prob": 35 },
       { "item": "salt", "prob": 10 },
       { "item": "pemmican", "prob": 10 }
     ]

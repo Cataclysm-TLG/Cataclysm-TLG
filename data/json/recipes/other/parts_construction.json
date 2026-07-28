@@ -671,7 +671,7 @@
     "difficulty": 2,
     "time": "10 m",
     "autolearn": false,
-    "book_learn": [ [ "concrete_book", 2 ] ],
+    "book_learn": [ [ "concrete_book", 2 ], [ "bag_durasack_cement", 2 ] ],
     "tools": [ [ [ "concrete_mix_tool", 50 ] ] ],
     "components": [ [ [ "material_cement", 50 ] ], [ [ "material_sand", 150 ] ] ]
   },

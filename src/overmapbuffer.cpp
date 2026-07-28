@@ -1015,9 +1015,10 @@ overmap_path_params overmap_path_params::for_land_vehicle( float offroad_coeff, 
     overmap_path_params ret;
     ret.set_cost( oter_travel_cost_type::highway, 3 );
     ret.set_cost( oter_travel_cost_type::road, 8 ); // limited by vehicle autodrive speed
-    const int field_cost = can_offroad ? std::lround( 12 / std::min( 1.0f, offroad_coeff ) ) : -1;
+    const int dirt_road_cost = can_offroad ? std::lround( 12 / offroad_coeff ) : -1;
+    const int field_cost = can_offroad ? std::lround( 18 / offroad_coeff ) : -1;
+    ret.set_cost( oter_travel_cost_type::dirt_road, dirt_road_cost );
     ret.set_cost( oter_travel_cost_type::field, field_cost );
-    ret.set_cost( oter_travel_cost_type::dirt_road, field_cost );
     ret.set_cost( oter_travel_cost_type::trail,
                   ( can_offroad && tiny ) ? field_cost + 10 : -1 );
     if( amphibious ) {

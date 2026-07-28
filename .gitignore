@@ -44,6 +44,8 @@ cata_test
 cata_test-tiles
 cataclysm
 *cataclysm-tiles
+*cataclysm-tlg
+*cataclysm-tlg-tiles
 cataclysm-vcpkg
 cataclysmdda-*
 chkjson*
@@ -52,6 +54,10 @@ DartConfiguration.tcl
 debug.log
 logg.txt
 json_formatter
+/zzip
+
+# macOS debug symbol bundles
+*.dSYM/
 
 # Visual Studio files
 *.code-workspace

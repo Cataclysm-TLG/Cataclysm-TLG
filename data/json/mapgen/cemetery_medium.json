@@ -67,7 +67,7 @@
       "toilets": { "T": {  } },
       "place_loot": [
         { "item": "shovel", "repeat": 1, "x": 17, "y": 4 },
-        { "group": "nested_glock_22", "chance": 50, "repeat": 1, "x": 18, "y": 19 }
+        { "group": "nested_glock_22", "chance": 40, "repeat": 1, "x": 18, "y": 19 }
       ],
       "place_items": [
         { "chance": 10, "item": "office", "x": 17, "y": 19 },

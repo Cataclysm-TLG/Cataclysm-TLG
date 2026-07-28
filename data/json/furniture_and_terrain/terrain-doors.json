@@ -17,8 +17,8 @@
     "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_laminated_door_glass_o",
     "bash": {
-      "str_min": 20,
-      "str_max": 60,
+      "str_min": 12,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
@@ -44,8 +44,8 @@
     "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
     "close": "t_laminated_door_glass_c",
     "bash": {
-      "str_min": 20,
-      "str_max": 60,
+      "str_min": 12,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
@@ -72,8 +72,8 @@
     "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_ballistic_door_glass_o",
     "bash": {
-      "str_min": 200,
-      "str_max": 400,
+      "str_min": 25,
+      "str_max": 100,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
@@ -104,8 +104,8 @@
     "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
     "close": "t_ballistic_door_glass_c",
     "bash": {
-      "str_min": 200,
-      "str_max": 400,
+      "str_min": 25,
+      "str_max": 100,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,

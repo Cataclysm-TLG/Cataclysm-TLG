@@ -51,6 +51,7 @@
 #include "pimpl.h"
 #include "popup.h"
 #include "point.h"
+#include "proficiency.h"
 #include "projectile.h"
 #include "ranged.h"
 #include "ret_val.h"
@@ -93,6 +94,8 @@ static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const json_character_flag json_flag_ITEM_WATERPROOFING( "ITEM_WATERPROOFING" );
 
 static const move_mode_id move_mode_prone( "prone" );
+
+static const proficiency_id proficiency_prof_swimming( "prof_swimming" );
 
 static const skill_id skill_swimming( "swimming" );
 static const skill_id skill_throw( "throw" );
@@ -244,10 +247,12 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         return true;
     }
     bool via_ramp = false;
-    if( m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
+    if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, you_pos ) &&
+        m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
         dest_loc.z() += 1;
         via_ramp = true;
-    } else if( m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest_loc ) ) {
+    } else if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, you_pos ) &&
+               m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest_loc ) ) {
         dest_loc.z() -= 1;
         via_ramp = true;
     }
@@ -602,6 +607,9 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
     g->water_affect_items( you );
 
     int movecost = you.swim_speed();
+    if( !you.has_proficiency( proficiency_prof_swimming ) ) {
+        you.practice_proficiency( proficiency_prof_swimming, 1_seconds );
+    }
     you.practice( skill_swimming, you.is_underwater() ? 2 : 1 );
     if( movecost >= 500 || you.has_effect( effect_winded ) ) {
         if( !you.is_underwater() &&

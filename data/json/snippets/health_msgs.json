@@ -52,14 +52,12 @@
     "category": "health_bad",
     "text": [
       "You feel cruddy.  Maybe you should consider eating a bit healthier.",
-      "You get up with a bit of a scratch in your throat.",
       "You stretch, but your muscles don't seem to be doing so good today.",
-      "You wake up congested and bleary-eyed.",
+      "You wake up bleary-eyed and lethargic.",
       "It's harder to get up today.",
       "You wake up feeling grouchy and foggy-headed.",
-      "Your body feels sluggish, making every movement an effort.",
-      "There's a nagging discomfort in your body, making it hard to focus on anything else.",
-      "You feel a general sense of malaise."
+      "Do you really need to get up yet?",
+      "You feel stiff and a little out of it."
     ]
   },
   {
@@ -68,7 +66,7 @@
     "text": [
       "Getting out of bed only comes with great difficulty, and your muscles resist the movement.",
       "Getting up seems like it should be easy, but all you want to do is lie there.",
-      "You feel like crap today.",
+      "You wake up feeling like crap. Maybe you should take better care of yourself.",
       "Alertness seems flighty today, and your body argues when you move towards it.",
       "You're up, but your body seems like it would rather stay in bed.",
       "You wake up feeling logy and your stomach is sour.",
@@ -88,9 +86,7 @@
       "Bleary-eyed and half-asleep, you consider why you are doing this to yourself.",
       "Awareness seems to only come with a battle… and your body seems to be on its side.",
       "You wake up feeling like you've been hit by a truck, every part of your body protesting.",
-      "You're so congested it's a wonder you didn't choke to death in your sleep.",
       "Your stomach feels sour, a sensation you can almost taste on the back of your tongue.",
-      "You feel a persistent ache in your body, as if you were fighting off a severe illness.",
       "Every joint and muscle screams in protest as you try to get up."
     ]
   },

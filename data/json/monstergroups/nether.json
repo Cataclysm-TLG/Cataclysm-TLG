@@ -10,6 +10,11 @@
     "monsters": [ { "monster": "mon_dark_wyrm" } ]
   },
   {
+    "name": "GROUP_IMPOSSIBLE_SHAPE",
+    "type": "monstergroup",
+    "monsters": [ { "monster": "mon_impossible_shape" } ]
+  },
+  {
     "type": "monstergroup",
     "name": "GROUP_NETHER_FATIGUE_FIELD",
     "default": "mon_blank",

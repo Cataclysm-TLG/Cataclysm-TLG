@@ -388,18 +388,6 @@ void effect_type::load_mod_data( const JsonObject &j )
         {"pkill_tick",        mod_action::TICK},
     } );
 
-    // Then stim
-    extract_effect( to_extract, "STIM", {
-        {"stim_amount",      mod_action::AMOUNT},
-        {"stim_min",         mod_action::MIN},
-        {"stim_max",         mod_action::MAX},
-        {"stim_min_val",     mod_action::MIN_VAL},
-        {"stim_max_val",     mod_action::MAX_VAL},
-        {"stim_chance",      mod_action::CHANCE_TOP},
-        {"stim_chance_bot",  mod_action::CHANCE_BOT},
-        {"stim_tick",        mod_action::TICK},
-    } );
-
     // Then focus
     extract_effect( to_extract, "FOCUS", {
         {"focus_amount",      mod_action::AMOUNT},

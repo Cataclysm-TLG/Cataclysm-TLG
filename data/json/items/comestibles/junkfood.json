@@ -422,6 +422,7 @@
     "price": "6 USD",
     "price_postapoc": "7 USD 50 cent",
     "material": [ "junk" ],
+    "flags": [ "NUTRIENT_OVERRIDE" ],
     "volume": "250 ml",
     "phase": "liquid",
     "charges": 16,

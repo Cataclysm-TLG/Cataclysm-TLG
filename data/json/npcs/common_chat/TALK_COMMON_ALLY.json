@@ -406,7 +406,7 @@
         "effect": { "toggle_npc_rule": "use_guns" }
       },
       {
-        "truefalsetext": { "condition": { "npc_rule": "use_silent" }, "true": "Don't worry about noise.", "false": "Use only silent weapons." },
+        "truefalsetext": { "condition": { "npc_rule": "use_silent" }, "true": "Don't worry about noise.", "false": "Don't use loud weapons." },
         "topic": "TALK_COMBAT_COMMANDS",
         "effect": { "toggle_npc_rule": "use_silent" }
       },

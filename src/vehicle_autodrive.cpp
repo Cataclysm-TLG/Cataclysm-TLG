@@ -733,6 +733,26 @@ bool vehicle::autodrive_controller::check_drivable( map &here, const tripoint_bu
         return &ovp->vehicle() == &driven_veh;
     }
 
+    constexpr int ramp_padding = 3;
+
+    for( int dx = -ramp_padding; dx <= ramp_padding; ++dx ) {
+        for( int dy = -ramp_padding; dy <= ramp_padding; ++dy ) {
+            if( dx == 0 && dy == 0 ) {
+                continue;
+            }
+            const tripoint_bub_ms neighbor(
+                pt.x() + dx,
+                pt.y() + dy,
+                pt.z()
+            );
+            if( ( here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, neighbor ) ||
+                  here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, neighbor ) ) &&
+                !here.has_flag( ter_furn_flag::TFLAG_ROAD, neighbor ) ) {
+                return false;
+            }
+        }
+    }
+
     const tripoint_abs_ms pt_abs = here.get_abs( pt );
     const tripoint_abs_omt pt_omt = project_to<coords::omt>( pt_abs );
     // only check visibility for the current OMT, we'll check other OMTs when
@@ -786,6 +806,14 @@ bool vehicle::autodrive_controller::check_drivable( map &here, const tripoint_bu
     if( terrain == ter_str_id::NULL_ID() ) {
         return false;
     }
+
+    const bool is_ramp =
+        here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, pt ) ||
+        here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, pt );
+
+    if( is_ramp && !here.has_flag( ter_furn_flag::TFLAG_ROAD, pt ) ) {
+        return false;
+    }
     // open air is an obstacle to non-flying vehicles; it is drivable
     // for flying vehicles
     if( terrain == ter_t_open_air ) {
@@ -834,24 +862,28 @@ void vehicle::autodrive_controller::compute_obstacles( map &here )
     compute_obstacles_from_enqueued_ramp_points( ramp_points, here );
 }
 
-// Checks whether `p` is a drivable ramp up or down,
-// and if so adds the ramp's destination tripoint to `ramp_points`
-void vehicle::autodrive_controller::enqueue_if_ramp( point_queue &ramp_points,
-        const map &here, const tripoint_bub_ms &p ) const
+void vehicle::autodrive_controller::enqueue_if_ramp(
+    point_queue &ramp_points,
+    const map &here,
+    const tripoint_bub_ms &p ) const
 {
     if( !data.land_ok ) {
         return;
     }
-    // Please don't drive into craters.
-    if( !here.has_flag( ter_furn_flag::TFLAG_ROAD, p ) ) {
-        ramp_points.visited.emplace( p );
+    const bool road = here.has_flag( ter_furn_flag::TFLAG_ROAD, p );
+    if( !road ) {
+        return;
+    }
+    const bool ramp_up = here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, p );
+    const bool ramp_down = here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, p );
+    if( !ramp_up && !ramp_down ) {
         return;
     }
     ramp_points.visited.emplace( p );
-    if( p.z() < OVERMAP_HEIGHT && here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, p ) ) {
+    if( ramp_up && p.z() < OVERMAP_HEIGHT ) {
         ramp_points.enqueue( p + tripoint::above );
     }
-    if( p.z() > -OVERMAP_DEPTH && here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, p ) ) {
+    if( ramp_down && p.z() > -OVERMAP_DEPTH ) {
         ramp_points.enqueue( p + tripoint::below );
     }
 }
