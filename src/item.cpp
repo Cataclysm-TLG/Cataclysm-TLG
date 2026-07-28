@@ -14092,7 +14092,7 @@ bool item::process_fake_smoke( map &here, Character * /*carrier*/, const tripoin
 bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms &pos )
 {
     // cig dies out
-    if( item_counter == 0 ) {
+    if( item_counter <= 0 ) {
         bool remove = false;
         if( carrier != nullptr ) {
             carrier->add_msg_if_player( m_neutral, _( "You finish your %s." ), type_name() );
@@ -14100,15 +14100,15 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
         if( type->transform_into ) {
             type->transform_into.value().transform( carrier, *this, true );
             if( !this->is_null() ) {
-                here.add_item_or_charges( carrier->pos_bub(), *this );
-                on_drop( carrier->pos_bub(), here );
+                here.add_item_or_charges( pos, *this );
+                on_drop( pos, here );
                 remove = true;
             }
         } else {
             type->invoke( carrier, *this, pos, "transform" );
             if( !this->is_null() ) {
-                here.add_item_or_charges( carrier->pos_bub(), *this );
-                on_drop( carrier->pos_bub(), here );
+                here.add_item_or_charges( pos, *this );
+                on_drop( pos, here );
                 remove = true;
             }
         }
@@ -14147,11 +14147,15 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
     }
     // if carried by someone:
     if( carrier != nullptr ) {
-        int puff_chance = 4;
+        int puff_chance = 24;
         if( has_flag( flag_TOBACCO ) ) {
-            // Try not to go over 3mg nicotine if we started at 0.
+            // Try not to go over 5mg nicotine if we started at 0.
             if( typeId() == itype_cigar_lit ) {
-                puff_chance = 14;
+                puff_chance = 36;
+            }
+            // Smokers reflexively puff more often if they need more nicotine.
+            if( carrier->vitamin_get( vitamin_nicotine ) < 5 ) {
+                puff_chance /= 6;
             }
             if( one_in( puff_chance ) ) {
                 carrier->vitamin_mod( vitamin_nicotine, 1 );
