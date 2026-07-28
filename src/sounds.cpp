@@ -738,9 +738,10 @@ void sounds::process_sound_markers( Character *you )
         const std::string &sfx_id = sound.id;
         const std::string &sfx_variant = sound.variant;
         const std::string &sfx_season = sound.season;
-        const bool indoors = !is_creature_outside( get_player_character() );
         const bool night = is_night( calendar::turn );
-        if( !sfx_id.empty() ) {
+        Character &player_character = get_player_character();
+            const bool indoors = !is_creature_outside( player_character );
+        if( !sfx_id.empty() && !player_character.activity ) {
             sfx::play_variant_sound( sfx_id, sfx_variant, sfx_season, indoors, night,
                                      sfx::get_heard_volume( pos ) );
         }
@@ -1478,11 +1479,20 @@ void sfx::sound_thread::operator()() const
     std::this_thread::sleep_for( std::chrono::milliseconds( rng( 1, 2 ) ) );
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-    const bool indoors = !is_creature_outside( get_player_character() );
+
+    
+    Character &player_character = get_player_character();
+    const bool indoors = !is_creature_outside( player_character );
     const bool night = is_night( calendar::turn );
 
     std::string skill_variant;
     std::string weapon_variant = weapon_id.str();
+
+    
+    if( !player_character.activity ) {
+        return;
+    }
+    
 
     if( weapon_skill == skill_bashing ) {
         skill_variant = ( weapon_volume > 8 ) ? "big_bash" : "small_bash";
@@ -1574,9 +1584,15 @@ void sfx::do_player_death_hurt( const Character &target, bool death )
         return;
     }
 
+    Character &player_character = get_player_character();
+
+    if( !player_character.activity ) {
+        return;
+    }
+
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-    const bool indoors = !is_creature_outside( get_player_character() );
+    const bool indoors = !is_creature_outside( player_character );
     const bool night = is_night( calendar::turn );
     int heard_volume = get_heard_volume( target.pos_bub() );
     if( heard_volume < 1 ) {
@@ -1725,9 +1741,10 @@ void sfx::do_hearing_loss( int turns )
         return;
     }
 
+    Character &player_character = get_player_character();
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-    const bool indoors = !is_creature_outside( get_player_character() );
+    const bool indoors = !is_creature_outside( player_character);
     const bool night = is_night( calendar::turn );
     g_sfx_volume_multiplier = .1;
     fade_audio_group( group::weather, 50 );
@@ -1735,6 +1752,11 @@ void sfx::do_hearing_loss( int turns )
     // Negative duration is just insuring we stay in sync with player condition,
     // don't play any of the sound effects for going deaf.
     if( turns == -1 ) {
+        return;
+    }
+
+
+    if( !player_character.activity ) {
         return;
     }
     play_variant_sound( "environment", "deafness_shock", seas_str, indoors, night, 100 );
@@ -1994,8 +2016,13 @@ void sfx::play_variant_sound( const std::string &id, const std::string &variant,
 {
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-    const bool indoors = !is_creature_outside( get_player_character() );
+    Character &player_character = get_player_character();
+    const bool indoors = !is_creature_outside( player_character );
+    if( player_character.activity ) {
+        return;
+    }
     const bool night = is_night( calendar::turn );
+
     play_variant_sound( id, variant, seas_str, indoors, night, volume );
 }
 
@@ -2004,7 +2031,11 @@ void sfx::play_variant_sound( const std::string &id, const std::string &variant,
 {
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-    const bool indoors = !is_creature_outside( get_player_character() );
+    Character &player_character = get_player_character();
+    const bool indoors = !is_creature_outside( player_character );
+    if( player_character.activity ) {
+        return;
+    }
     const bool night = is_night( calendar::turn );
     play_variant_sound( id, variant, seas_str, indoors, night,
                         volume, angle, pitch_min, pitch_max );
@@ -2015,7 +2046,11 @@ void sfx::play_ambient_variant_sound( const std::string &id, const std::string &
 {
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-    const bool indoors = !is_creature_outside( get_player_character() );
+        Character &player_character = get_player_character();
+    const bool indoors = !is_creature_outside( player_character );
+    if( player_character.activity ) {
+        return;
+    }
     const bool night = is_night( calendar::turn );
     play_ambient_variant_sound( id, variant, seas_str, indoors, night,
                                 volume, channel, fade_in_duration, pitch, loops );
