@@ -152,7 +152,7 @@
     "id": "constr_rootcellar",
     "group": "build_root_cellar",
     "category": "CONSTRUCT",
-    "required_skills": [ [ "survival", 4 ], [ "fabrication", 4 ] ],
+    "required_skills": [ [ "survival", 4 ], [ "cooking", 4 ] ],
     "time": "130 m",
     "qualities": [ [ { "id": "DIG", "level": 2 } ], [ { "id": "HAMMER", "level": 2 } ] ],
     "components": [
@@ -174,7 +174,6 @@
     "time": "50m",
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "components": [ [ [ "pointy_stick", 4 ] ], [ [ "string_36", 1 ], [ "string_6", 4 ] ], [ [ "tarp", 1 ], [ "plastic_sheet", 1 ] ] ],
-    "pre_note": "Can be deconstructed without tools.",
     "pre_flags": [ "DIGGABLE", "FLAT" ],
     "post_terrain": "t_tarptent"
   },
