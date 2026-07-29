@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-29 13:53+0800\n"
+"PO-Revision-Date: 2026-07-29 15:10+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -39295,7 +39295,7 @@ msgstr "一片高质量的坚固金属屋顶。"
 #. ~ Description of terrain "downspout"
 #: data/json/furniture_and_terrain/terrain-roofs.json
 msgid "A length of gutter running from the roof to the ground, you could place a container underneath it to collect rainwater.  It might be possible to climb up here, but it's too flimsy to support an adult."
-msgstr "一段从屋顶到地面的排水管道，你可以在它下方放一个容器来收集雨水。它虽然看起来很脆弱，但是你能够顺着它从这里爬上去。"
+msgstr "一段从屋顶延伸到地面的排水管，你可以在下面放个容器接雨水。也许能顺着它爬上去，但这东西太不结实了，承受不了一个成年人的重量。"
 
 #. ~ Description of terrain "brick roof"
 #: data/json/furniture_and_terrain/terrain-roofs.json
@@ -39340,7 +39340,7 @@ msgstr "一片草皮制成的屋顶。"
 #. ~ Description of terrain "gutter drop"
 #: data/json/furniture_and_terrain/terrain-roofs.json
 msgid "A spot in the gutter where the water flows into a downspout.  It might be possible to climb down here, but it's too flimsy to support an adult."
-msgstr "一段水从雨水槽中流进落水管的管道。它虽然看起来很脆弱，但你也许能够顺着它爬上爬下。"
+msgstr "一处连接落水管的排水槽。也许能从这里爬下去，但这东西太不结实了，承受不了一个成年人的重量。"
 
 #. ~ Description of terrain "red metal roof"
 #: data/json/furniture_and_terrain/terrain-roofs.json
@@ -315419,7 +315419,7 @@ msgstr "你不能用 %1$s 来撬钉子。"
 
 #: src/activity_actor.cpp:7179
 msgid "You open up your kit and shave."
-msgstr "你打开了你的刮胡刀工具包，开始刮胡子"
+msgstr ".你的刮胡刀工具包，开始刮胡子."
 
 #: src/activity_actor.cpp:7202
 msgid "You give your hair a trim."
@@ -318090,7 +318090,7 @@ msgstr "按 %s 潜入水中。"
 #: src/avatar_action.cpp:515 src/avatar_action.cpp:560 src/handle_action.cpp:549
 #, c-format
 msgid "You open the %s."
-msgstr "你打开了 %s。"
+msgstr "你打开了%s。"
 
 #. ~ %1$s - vehicle name, %2$s - part name
 #: src/avatar_action.cpp:543 src/avatar_action.cpp:558 src/handle_action.cpp:514 src/handle_action.cpp:527
