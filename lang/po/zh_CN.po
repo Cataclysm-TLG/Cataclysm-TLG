@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-29 18:11+0800\n"
+"PO-Revision-Date: 2026-07-30 01:01+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.8\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -236316,19 +236316,19 @@ msgstr "延长盐水管 9"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "100 gallon aquarium (drying) (obsolete)"
 msgid_plural "100 gallon aquariums (drying) (obsolete)"
-msgstr[0] ""
+msgstr[0] "100加仑水族箱（晾干中）（已废弃）"
 
 #. ~ Item name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "30 gallon aquarium (drying) (obsolete)"
 msgid_plural "30 gallon aquariums (drying) (obsolete)"
-msgstr[0] ""
+msgstr[0] "30加仑水族箱（晾干中）（已废弃）"
 
 #. ~ Item name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "50 gallon aquarium (drying) (obsolete)"
 msgid_plural "50 gallon aquariums (drying) (obsolete)"
-msgstr[0] ""
+msgstr[0] "50加仑水族箱（晾干中）（已废弃）"
 
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -257981,7 +257981,7 @@ msgstr "闪避"
 #. ~ Skill name
 #: data/json/skills.json
 msgid "ecology"
-msgstr ""
+msgstr "生态学"
 
 #. ~ Skill name
 #: data/json/skills.json
@@ -366521,17 +366521,17 @@ msgstr "_______未输入名字！_______"
 #: src/worldfactory.cpp:1542
 #, c-format
 msgid "Press [<color_yellow>%s</color>] to finalize your world."
-msgstr ""
+msgstr "按 [<color_yellow>%s</color>] 以完成你的世界。"
 
 #: src/worldfactory.cpp:1548
 #, c-format
 msgid "Press [<color_yellow>%s</color>] to pick a random name for your world."
-msgstr ""
+msgstr "按 [<color_yellow>%s</color>] 为你的世界取一个随机的名字。"
 
 #: src/worldfactory.cpp:1555
 #, c-format
 msgid "Press [<color_yellow>%s</color>] to see additional control information."
-msgstr ""
+msgstr "按 [<color_yellow>%s</color>] 查看额外控制信息。"
 
 #: src/worldfactory.cpp:1561
 #, c-format
@@ -366549,11 +366549,11 @@ msgstr "[<color_yellow>%s</color>]打开模组管理器"
 
 #: src/worldfactory.cpp:1582
 msgid "Are you sure you're finished?  World name will be randomly generated."
-msgstr ""
+msgstr "确定要结束吗？世界名称将随机生成。"
 
 #: src/worldfactory.cpp:1593
 msgid "Are you sure you're finished?"
-msgstr ""
+msgstr "确定完成了吗？"
 
 #: src/worldfactory.cpp:1626
 msgid "Do you want to abort World Generation?"
