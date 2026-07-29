@@ -9065,21 +9065,20 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
             for( const harvest_entry &entry : dead_mon->harvest.obj() ) {
                 if( entry.type == harvest_drop_skin && !( corpses[index]->has_flag( flag_SKINNED ) ||
                         corpses[index]->damage() >= corpses[index]->max_damage() ||
-                        ( corpses[index]->has_flag( flag_QUARTERED ) ) || ( corpses[index]->has_flag( flag_PULPED ) ) ||
-                        ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
+                        ( corpses[index]->has_flag( flag_QUARTERED ) ) || corpses[index]->has_flag( flag_PULPED ) ) ) {
                     has_skin = true;
                 }
                 if( entry.type == harvest_drop_offal && !( corpses[index]->has_flag( flag_QUARTERED ) ||
                         corpses[index]->has_flag( flag_FIELD_DRESS ) ||
                         corpses[index]->has_flag( flag_FIELD_DRESS_FAILED ) ||
-                        ( corpses[index]->has_flag( flag_PULPED ) ) || ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
+                        corpses[index]->has_flag( flag_PULPED ) ) ) {
                     has_organs = true;
                 }
                 if( entry.type == harvest_drop_blood && dead_mon->bleed_rate > 0 &&
                     !( corpses[index]->has_flag( flag_QUARTERED ) ||
                        corpses[index]->has_flag( flag_FIELD_DRESS ) ||
                        corpses[index]->has_flag( flag_FIELD_DRESS_FAILED ) || corpses[index]->has_flag( flag_BLED ) ||
-                       ( corpses[index]->has_flag( flag_PULPED ) ) || ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
+                       corpses[index]->has_flag( flag_PULPED ) ) ) {
                     has_blood = true;
                 }
                 /*
@@ -9094,8 +9093,7 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
                        corpses[index]->damage() >= corpses[index]->max_damage() ||
                        corpses[index]->has_flag( flag_FIELD_DRESS ) ||
                        corpses[index]->has_flag( flag_FIELD_DRESS_FAILED ) ||
-                       ( corpses[index]->has_flag( flag_SKINNED ) ) || ( corpses[index]->has_flag( flag_PULPED ) ) ||
-                       ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
+                       corpses[index]->has_flag( flag_SKINNED ) || corpses[index]->has_flag( flag_PULPED ) ) ) {
                     intact = true;
                 }
             }

@@ -7033,11 +7033,11 @@ units::mass item::weight( bool include_contents, bool integral ) const
         if( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ) {
             ret_mul *= 0.75;
         }
-        if( has_flag( flag_GIBBED ) ) {
+        if( has_flag( flag_PULPED ) ) {
             ret_mul *= 0.85;
         }
         if( has_flag( flag_SKINNED ) ) {
-            ret_mul *= 0.85;
+            ret_mul *= 0.95;
         }
         if( has_flag( flag_QUARTERED ) ) {
             ret_mul *= 0.25;
@@ -7214,11 +7214,11 @@ units::volume item::corpse_volume( const mtype *corpse ) const
     if( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ) {
         corpse_volume *= 0.75;
     }
-    if( has_flag( flag_GIBBED ) ) {
+    if( has_flag( flag_PULPED ) ) {
         corpse_volume *= 0.85;
     }
     if( has_flag( flag_SKINNED ) ) {
-        corpse_volume *= 0.85;
+        corpse_volume *= 0.95;
     }
     if( corpse_volume > MAX_ITEM_VOLUME ) {
         // Silently set volume so the corpse can still spawn but a mtype can have a volume > MAX_ITEM_VOLUME
@@ -8729,7 +8729,7 @@ bool item::pulpable() const
            damage() < max_damage() &&
            !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
               has_flag( flag_QUARTERED ) ||
-              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) || has_flag( flag_GIBBED ) );
+              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) );
 }
 
 bool item::can_revive() const
@@ -8738,7 +8738,7 @@ bool item::can_revive() const
            damage() < max_damage() &&
            !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
               has_flag( flag_QUARTERED ) ||
-              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) || has_flag( flag_GIBBED ) ||
+              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) ||
               ( has_flag( flag_FROZEN ) && !corpse->has_flag( mon_flag_DORMANT ) ) );
 }
 
@@ -9634,6 +9634,8 @@ std::string item::durability_indicator( bool include_intact ) const
                     return pgettext( "damage adjective", "damaged " );
                 case 3:
                     return pgettext( "damage adjective", "mangled " );
+                case 4:
+                    return pgettext( "damage adjective", "mutilated " );
                 default:
                     return pgettext( "damage adjective", "pulped " );
             }

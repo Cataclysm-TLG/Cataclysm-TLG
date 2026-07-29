@@ -6,11 +6,11 @@
     "description": "You should not see this.  Kills pseudo zombie to turn it into a corpse for revival.",
     "valid_targets": [ "self" ],
     "max_level": 1,
-    "flags": [ "SILENT", "NO_EXPLOSION_SFX", "PERCENTAGE_DAMAGE", "NO_FAIL" ],
+    "flags": [ "SILENT", "NO_EXPLOSION_SFX", "PERCENTAGE_DAMAGE", "RANDOM_DAMAGE", "NO_FAIL" ],
     "base_casting_time": 1,
     "shape": "blast",
     "min_damage": 100,
-    "max_damage": 100,
+    "max_damage": 150,
     "min_aoe": 1,
     "max_aoe": 1,
     "message": "",
@@ -42,7 +42,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
     "zombify_into": "mon_zombie",
     "special_attacks": [
       {
@@ -63,7 +63,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
     "zombify_into": "mon_zombie_rot",
     "special_attacks": [
       {
@@ -84,7 +84,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
     "zombify_into": "mon_zombie_fat",
     "special_attacks": [
       {
@@ -105,7 +105,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
     "zombify_into": "mon_zombie_tough",
     "special_attacks": [
       {
@@ -126,7 +126,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
     "zombify_into": "mon_zombie_child",
     "special_attacks": [
       {
@@ -147,7 +147,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
     "zombify_into": "mon_zombie_crawler",
     "special_attacks": [
       {
@@ -168,7 +168,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
     "zombify_into": "mon_zombie_brainless",
     "special_attacks": [
       {
@@ -189,7 +189,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "AQUATIC", "WATER_CAMOUFLAGE" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "AQUATIC", "WATER_CAMOUFLAGE", "REVIVES_HEALTHY" ],
     "zombify_into": "mon_zombie_swimmer_base",
     "special_attacks": [
       {
@@ -233,9 +233,9 @@
     "sound_id": "melee_attack",
     "sound_variant": "monster_melee_hit",
     "sound_description": "a zombie moaning!",
-    "min_damage": 42,
-    "max_damage": 90,
-    "//": "volume is damage/3, so 14 to 30"
+    "min_damage": 24,
+    "max_damage": 65,
+    "//": "volume is damage/3, so 8 to 20"
   },
   {
     "type": "SPELL",
