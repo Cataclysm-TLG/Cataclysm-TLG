@@ -2876,6 +2876,13 @@
     "special_attacks": [
       { "id": "ranged_pull", "cooldown": 12, "grab_data": { "pull_weight_ratio": 1.0 } },
       {
+        "type": "bite",
+        "cooldown": 5,
+        "accuracy": 5,
+        "infection_chance": 75,
+        "damage_max_instance": [ { "damage_type": "stab", "amount": 12, "armor_penetration": 6 } ]
+      },
+      {
         "type": "leap",
         "cooldown": 8,
         "max_range": 5,
