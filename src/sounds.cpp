@@ -740,7 +740,7 @@ void sounds::process_sound_markers( Character *you )
         const std::string &sfx_season = sound.season;
         const bool night = is_night( calendar::turn );
         Character &player_character = get_player_character();
-            const bool indoors = !is_creature_outside( player_character );
+        const bool indoors = !is_creature_outside( player_character );
         if( !sfx_id.empty() && !player_character.activity ) {
             sfx::play_variant_sound( sfx_id, sfx_variant, sfx_season, indoors, night,
                                      sfx::get_heard_volume( pos ) );
@@ -1480,7 +1480,7 @@ void sfx::sound_thread::operator()() const
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
 
-    
+
     Character &player_character = get_player_character();
     const bool indoors = !is_creature_outside( player_character );
     const bool night = is_night( calendar::turn );
@@ -1488,11 +1488,11 @@ void sfx::sound_thread::operator()() const
     std::string skill_variant;
     std::string weapon_variant = weapon_id.str();
 
-    
+
     if( !player_character.activity ) {
         return;
     }
-    
+
 
     if( weapon_skill == skill_bashing ) {
         skill_variant = ( weapon_volume > 8 ) ? "big_bash" : "small_bash";
@@ -1744,7 +1744,7 @@ void sfx::do_hearing_loss( int turns )
     Character &player_character = get_player_character();
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-    const bool indoors = !is_creature_outside( player_character);
+    const bool indoors = !is_creature_outside( player_character );
     const bool night = is_night( calendar::turn );
     g_sfx_volume_multiplier = .1;
     fade_audio_group( group::weather, 50 );
@@ -2046,7 +2046,7 @@ void sfx::play_ambient_variant_sound( const std::string &id, const std::string &
 {
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
-        Character &player_character = get_player_character();
+    Character &player_character = get_player_character();
     const bool indoors = !is_creature_outside( player_character );
     if( player_character.activity ) {
         return;
