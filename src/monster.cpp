@@ -3197,7 +3197,9 @@ void monster::die( map *here, Creature *nkiller )
             if( corpse ) {
                 corpse->put_in( it, pocket_type::CORPSE );
             } else {
-                here->add_item( pos_bub( *here ), it );
+                if( !it.has_flag( json_flag_MUTAGEN_SAMPLE ) ) {
+                    here->add_item( pos_bub( *here ), it );
+                }
             }
         }
     }
@@ -3912,8 +3914,8 @@ void monster::init_from_item( item &itm )
             // Mutagen samples do not survive this process.
             if( !itm.has_flag( json_flag_MUTAGEN_SAMPLE ) ) {
                 dissectable_inv.push_back( *dissectable );
-                itm.remove_item( *dissectable );
             }
+                itm.remove_item( *dissectable );
         }
     } else {
         // Must be a robot.
