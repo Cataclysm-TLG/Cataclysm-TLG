@@ -485,6 +485,17 @@
   },
   {
     "type": "overmap_special",
+    "id": "Scrapyard 1",
+    "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "smallscrapyard_north" } ],
+    "connections": [ { "point": [ -1, 0, 0 ], "terrain": "road", "from": [ 0, 0, 0 ] } ],
+    "locations": [ "forest", "field" ],
+    "city_distance": [ 30, -1 ],
+    "city_sizes": [ 0, 12 ],
+    "occurrences": [ 3, 100 ],
+    "flags": [ "CLASSIC", "MAN_MADE", "OVERMAP_UNIQUE" ]
+  },
+  {
+    "type": "overmap_special",
     "id": "Hunting Lodge",
     "overmaps": [
       { "point": [ 0, 0, 0 ], "overmap": "lodge_ground1_north" },
@@ -6162,21 +6173,6 @@
     "city_distance": [ 5, 10 ],
     "city_sizes": [ 4, -1 ],
     "occurrences": [ 0, 10 ],
-    "flags": [ "CLASSIC", "MAN_MADE", "GLOBALLY_UNIQUE" ]
-  },
-  {
-    "type": "overmap_special",
-    "id": "Occupied Scrap Yard",
-    "overmaps": [
-      { "point": [ 0, 0, 0 ], "overmap": "smallscrapyard_ocu_north", "camp": "wasteland_scavengers", "camp_name": "Scrapper" },
-      { "point": [ 0, 0, 1 ], "overmap": "smallscrapyard_ocu_roof_north" },
-      { "point": [ 0, -1, 0 ], "locations": [ "land", "road" ] }
-    ],
-    "connections": [ { "point": [ 0, -1, 0 ], "terrain": "road", "connection": "local_road", "from": [ 0, 0, 0 ] } ],
-    "locations": [ "field" ],
-    "city_distance": [ 5, 40 ],
-    "city_sizes": [ 1, -1 ],
-    "occurrences": [ 1, 10 ],
     "flags": [ "CLASSIC", "MAN_MADE", "GLOBALLY_UNIQUE" ]
   },
   {

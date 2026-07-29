@@ -1078,7 +1078,8 @@
       [ "mx_military", 5 ],
       [ "mx_science", 7 ],
       [ "mx_collegekids", 15 ],
-      [ "mx_dormant", 30 ],
+      [ "mx_dormant", 20 ],
+      [ "mx_dormant_few", 10 ],
       [ "mx_portal", 5 ],
       [ "mx_crater", 60 ],
       [ "mx_portal_in", 3 ],
@@ -1106,7 +1107,8 @@
       [ "mx_crater", 180 ],
       [ "mx_portal_in", 30 ],
       [ "mx_casings", 30 ],
-      [ "mx_dormant", 30 ]
+      [ "mx_dormant", 20 ],
+      [ "mx_dormant_few", 10 ]
     ]
   },
   {

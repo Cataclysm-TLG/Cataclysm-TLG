@@ -157,7 +157,7 @@ item_location mdeath::splatter( map *here, monster &z )
 
     const int max_hp = std::max( z.get_hp_max(), 1 );
     const float overflow_damage = std::max( -z.get_hp(), 0 );
-    const float corpse_damage = 2.5 * overflow_damage / max_hp;
+    const float corpse_damage = rng_float( 2.0, 4.0 ) * overflow_damage / max_hp;
 
     const field_type_id type_blood = z.bloodType();
     const field_type_id type_gib = z.gibType();
@@ -208,14 +208,13 @@ item_location mdeath::splatter( map *here, monster &z )
             scatter_chunks( here, leftover_id, chunk_amount, z, gib_distance,
                             chunk_amount / ( gib_distance + 1 ) );
         }
-        // add corpse with gib flag
+        // Add pulped corpse.
         item corpse = item::make_corpse( z.type->id, calendar::turn, z.unique_name, z.get_upgrade_time() );
         if( corpse.is_null() ) {
             return {};
         }
-        // Set corpse to damage that aligns with being pulped
         corpse.set_damage( 4000 );
-        corpse.set_flag( STATIC( flag_id( "GIBBED" ) ) );
+        corpse.set_flag( STATIC( flag_id( "PULPED" ) ) );
         if( z.has_effect( effect_no_ammo ) ) {
             corpse.set_var( "no_ammo", "no_ammo" );
         }

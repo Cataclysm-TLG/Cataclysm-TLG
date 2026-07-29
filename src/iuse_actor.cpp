@@ -3343,10 +3343,11 @@ static bool damage_item( Character &pl, item_location &fix )
     const std::string startdurability = fix->durability_indicator( true );
     const bool destroyed = fix->inc_damage();
     const std::string resultdurability = fix->durability_indicator( true );
-    pl.add_msg_if_player( m_bad, _( "You damage your %s!  ( %s-> %s)" ), fix->tname( 1, false ),
+    std::string iname = fix->tname( 1, false );
+    pl.add_msg_if_player( m_bad, _( "You damage your %s!  ( %s-> %s)" ), iname,
                           startdurability, resultdurability );
     if( destroyed ) {
-        pl.add_msg_if_player( m_bad, _( "You destroy it!" ) );
+        pl.add_msg_if_player( m_bad, _( "Your %s is destroyed!" ), iname );
         if( fix.where() == item_location::type::character ) {
             pl.i_rem_keep_contents( fix.get_item() );
         } else {
