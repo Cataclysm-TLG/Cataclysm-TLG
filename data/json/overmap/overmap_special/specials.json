@@ -486,9 +486,7 @@
   {
     "type": "overmap_special",
     "id": "Scrapyard 1",
-    "overmaps": [
-      { "point": [ 0, 0, 0 ], "overmap": "smallscrapyard_north" }
-    ],
+    "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "smallscrapyard_north" } ],
     "connections": [ { "point": [ -1, 0, 0 ], "terrain": "road", "from": [ 0, 0, 0 ] } ],
     "locations": [ "forest", "field" ],
     "city_distance": [ 30, -1 ],
