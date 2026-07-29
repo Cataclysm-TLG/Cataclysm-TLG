@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-29 13:09+0800\n"
+"PO-Revision-Date: 2026-07-30 01:01+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.8\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -137,7 +137,7 @@ msgstr "            此外还有许多其它类型的地点……找找看吧！
 #. ~ Help message in menu "<r|R>: Vehicles and Driving"
 #: data/core/help.json data/help/texts.json
 msgid "\"Offroad\" is a rough estimate of how efficient your vehicle moves when not on pavement.  Your vehicle's safe speed, top speed, and acceleration are multiplied by roughly the offroad percentage value when your vehicle is not on the pavement.  The offroad percentage decreases as vehicle mass increases, and increases with the size and number of wheels.  Tank treads will give your vehicle an excellent offroad percentage but your vehicle will be slower due to the treads' very high rolling drag."
-msgstr "越野率是对载具不在公路上行驶时的效率的粗略估计。当越野行驶时，载具的安全速度、最高速度和加速度需要乘上越野率计算。越野率随载具重量的增加而减小，随轮胎尺寸和数量增加而增大。坦克履带能提供极佳的越野率，然而依然会降低越野时的最高速度，因为履带的滚动阻力非常大。"
+msgstr "“越野效率”是大致衡量你的车辆在非铺装路面上的行驶效率的指标。当车辆在非铺装路面行驶时，车辆的安全速度、最高速度和加速度会大致乘以越野效率的百分比值。越野效率会随着车辆质量的增加而降低，并随着车轮尺寸和数量的增加而提高。履带会使你的车辆获得极高的越野效率，但也会因履带自身极高的滚动阻力而降低车辆的行驶速度。"
 
 #. ~ Help message in menu "List of item types and data"
 #. ~ Help message in menu "<1>: List of item types and data"
@@ -19167,7 +19167,7 @@ msgstr "你感觉头很疼。需要咖啡因才能打起精神。"
 #. ~ Player message in effect in EoC "EOC_CANCEL_FALLOUT_MESSAGE"
 #: data/json/effects_on_condition/anamolous_weather_eocs.json
 msgid "The ash has stopped falling, and the clouds no longer seem so ominous."
-msgstr ""
+msgstr "灰烬不再飘落，云层也不像之前那样阴森可怖了。"
 
 #. ~ Player message in effect in EoC "EOC_CAUSE_FALLOUT_MESSAGE"
 #: data/json/effects_on_condition/anamolous_weather_eocs.json
@@ -19928,12 +19928,12 @@ msgstr "这块地方开始长出一株小小的玻璃嫩芽。"
 #. ~ Player message in effect in EoC "EOC_toolweapon_deactivate"
 #: data/json/effects_on_condition/item_eocs.json
 msgid "The <npc_name> goes quiet."
-msgstr ""
+msgstr "<npc_name> 陷入了沉默。"
 
 #. ~ Player message in false effect in EoC "EOC_toolweapon_running"
 #: data/json/effects_on_condition/item_eocs.json
 msgid "The <npc_name> gurgles in the water and stops."
-msgstr ""
+msgstr "<npc_name> 在水中发出咕噜声，然后没了动静。"
 
 #. ~ Player message in false effect in EoC "EOC_toolweapon_activate"
 #: data/json/effects_on_condition/item_eocs.json
@@ -20262,12 +20262,12 @@ msgstr "你的腿太累了，跳不动了。"
 #. ~ value of variable 'message_fail' in effect in EoC "EOC_BULL_CHARGE"
 #: data/json/effects_on_condition/mutation_eocs/mutation_activation_eocs.json
 msgid "You are too tired to run."
-msgstr ""
+msgstr "你太累了，跑不动了。"
 
 #. ~ Player message in false effect in EoC "EOC_BULL_CHARGE"
 #: data/json/effects_on_condition/mutation_eocs/mutation_activation_eocs.json
 msgid "You can't move properly, so charging is out of the question."
-msgstr ""
+msgstr "你行动不便，更不用说冲锋了。"
 
 #. ~ Player message in false effect in EoC "EOC_FELINE_LEAP"
 #. ~ Player message in false effect in EoC "EOC_SHORT_LEAP"
@@ -20276,7 +20276,7 @@ msgstr ""
 #. ~ Player message in false effect in EoC "EOC_RAPTOR_LEAP"
 #: data/json/effects_on_condition/mutation_eocs/mutation_activation_eocs.json
 msgid "You can't move properly, so leaping is out of the question."
-msgstr ""
+msgstr "你行动不便，更不用说跳跃了。"
 
 #. ~ value of variable 'message_success' in effect in EoC "EOC_CRUSHING_LEAP"
 #: data/json/effects_on_condition/mutation_eocs/mutation_activation_eocs.json
@@ -20298,7 +20298,7 @@ msgstr "你摆出了一个开放式防御的姿态，随时准备出击。"
 #. ~ value of variable 'message_success' in effect in EoC "EOC_BULL_CHARGE"
 #: data/json/effects_on_condition/mutation_eocs/mutation_activation_eocs.json
 msgid "You lower your head and charge."
-msgstr ""
+msgstr "你低头猛冲。"
 
 #. ~ value of variable 'message_success' in effect in EoC "EOC_SLIME_SPRAY"
 #: data/json/effects_on_condition/mutation_eocs/mutation_activation_eocs.json
@@ -22859,7 +22859,7 @@ msgstr "推拉物体"
 #. ~ Field intensity level
 #: data/json/field_type.json
 msgid "radioactive ash"
-msgstr ""
+msgstr "放射性灰烬"
 
 #. ~ Field intensity level
 #: data/json/field_type.json
@@ -23163,7 +23163,7 @@ msgstr "你必须使用<bad>双手</bad>来手持这个物品。"
 #. ~ Description of JSON flag "FIRE_TWOHAND"
 #: data/json/flags/flags.json
 msgid "<bad>You must</bad> use two hands to operate this weapon."
-msgstr ""
+msgstr "<bad>你必须</bad>用双手操作这把武器。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "ONE_PER_LAYER"
@@ -23187,7 +23187,7 @@ msgstr "呼吸器滤芯"
 #. ~ Description of JSON flag "DIGGABLE"
 #: data/json/flags/flags.json
 msgid "A hole can be dug here."
-msgstr ""
+msgstr "这里可以挖个洞。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "ROBOFAC_ROBOT_MEDIUM"
@@ -23205,13 +23205,13 @@ msgstr "中号面罩滤芯"
 #. ~ Description of JSON flag "CHIP"
 #: data/json/flags/flags.json
 msgid "A paint chipper can be used to remove paint from this."
-msgstr ""
+msgstr "可以用刮漆刀刮掉上面的油漆。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "SUPPORTS_ROOF"
 #: data/json/flags/flags.json
 msgid "A roof can be built above this without other support."
-msgstr ""
+msgstr "可以直接在这上面建屋顶，无需额外支撑。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "ROBOFAC_ROBOT_SMALL"
@@ -23348,7 +23348,7 @@ msgstr "物品必须为中型装甲板"
 #. ~ Description of restriction of JSON flag "ABLATIVE_LARGE_XL"
 #: data/json/flags/flags.json
 msgid "Item must be an XL ablative plate"
-msgstr ""
+msgstr "物品必须是 XL 型烧蚀装甲板。"
 
 #. ~ Description of restriction of JSON flag "BANK_NOTE_SHAPED"
 #: data/json/flags/flags.json
@@ -23493,7 +23493,7 @@ msgstr "经过辐照消毒，可 <good>安全食用</good>。"
 #. ~ Description of JSON flag "SWIM_UNDER"
 #: data/json/flags/flags.json
 msgid "Terrain with this flag is treated as having water beneath a covering (e.g. ice); entities may be considered under water for swimming and related mechanics."
-msgstr ""
+msgstr "带有此标志的地形被视为覆盖物下方有水（例如冰面）；在进行游泳及相关机制判定时，实体可能被视为处于水下。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "BLEEDSLOW2"
@@ -24381,13 +24381,13 @@ msgstr "这件物品可以镀在一些盔甲上作为额外的镀层。"
 #. ~ Description of JSON flag "WASH_HARD"
 #: data/json/flags/flags.json
 msgid "This item makes it easier to wash rigid items using soap and water."
-msgstr ""
+msgstr "这件物品能让你更轻松地用水和肥皂清洗硬质物品。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "WASH_SOFT"
 #: data/json/flags/flags.json
 msgid "This item makes it easier to wash soft things like clothing with soap and water."
-msgstr ""
+msgstr "这件物品能让你更轻松地用水和肥皂清洗衣物等软质物品。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "CUSHION_FALL"
@@ -24489,7 +24489,7 @@ msgstr "这块装甲板能放进<info>中型</info>装甲板口袋。"
 #. ~ Description of JSON flag "ABLATIVE_LARGE_XL"
 #: data/json/flags/flags.json
 msgid "This plate will fit in <info>oversized</info> armor pockets."
-msgstr ""
+msgstr "此装甲板可装入<info>超大号</info>护甲口袋。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "EATEN_COLD"
@@ -24513,7 +24513,7 @@ msgstr "这个模板受版权保护，一次性使用后将被 <bad>销毁</bad>
 #. ~ Description of JSON flag "PHASE_BACK"
 #: data/json/flags/flags.json
 msgid "This terrain will phase back to its original terrain when no longer modified."
-msgstr ""
+msgstr "当地形不再被修改时，它会恢复到原始地形。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "OBSOLETE"
@@ -24669,7 +24669,7 @@ msgstr "你将这件衣物标记为穿戴时不显示图形。"
 #. ~ Description of JSON flag "SNOWWALKING"
 #: data/json/flags/flags.json
 msgid "Your movement is not slowed regardless of snow depth."
-msgstr ""
+msgstr "无论雪有多深，你的移动速度都不会降低。"
 
 #. ~ This is custom prefix added to item name. "REPLICA_EQUIPMENT"
 #: data/json/flags/flags.json
@@ -26729,7 +26729,7 @@ msgstr "这里什么都没有。甚至连时间和空间都没有。"
 #. ~ Description of furniture "fleshy altar"
 #: data/json/furniture_and_terrain/furniture-alien.json
 msgid "This pulsing protuberance juts from the floor, its sides covered in scaled, oozing skin.  The surface is flat, but undulates softly.  A handful of unidentifiable appendages reach from the sides, suggesting a sort of nightmarish robotic surgical bed."
-msgstr ""
+msgstr "这个脉动的突起物从地板伸出，表面覆盖着鳞片状、渗出液体的皮肤。顶面平坦，却又在微微起伏。侧面伸出几根无法辨认的附肢，看起来就像一张噩梦般的机器人手术台。"
 
 #. ~ Bashing failed sound of furniture "impaled officer"
 #. ~ Bashing failed sound of furniture "impaled mercenary"
@@ -28631,7 +28631,7 @@ msgstr "这株高大的植物长得很像向日葵，根茎很有营养。"
 #. ~ Description of furniture "poppy flower"
 #: data/json/furniture_and_terrain/furniture-flora.json
 msgid "Papaver somniferum, also known as the opium poppy.  These harmless-looking flowers were once widely cultivated for decorative purposes, but in summer their heads may be harvested and used in the production of a highly addictive painkiller."
-msgstr ""
+msgstr "罂粟，也就是鸦片罂粟。这些看似无害的花朵曾广泛作为观赏植物种植，但到了夏季，它们的蒴果可以被采集，并用于生产一种极易上瘾的止痛药。"
 
 #. ~ Description of furniture "starry false Solomon's seal"
 #: data/json/furniture_and_terrain/furniture-flora.json
@@ -28775,7 +28775,7 @@ msgstr "一堆树叶"
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-flora.json
 msgid "poppy flower"
-msgstr ""
+msgstr "罂粟花"
 
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-flora.json
@@ -30874,7 +30874,7 @@ msgstr "大型存储罐（1500L）"
 #: data/json/furniture_and_terrain/furniture-storage.json data/json/items/tool/deployable.json
 msgid "butter churn"
 msgid_plural "butter churns"
-msgstr[0] ""
+msgstr[0] "黄油搅拌器"
 
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-storage.json
@@ -34527,47 +34527,47 @@ msgstr "强化门（木板封死）"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed ballistic glass door"
-msgstr "防弹玻璃门（关）"
+msgstr "关闭的防弹玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed bar door"
-msgstr "栏杆门（关）"
+msgstr "关闭的栏杆门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed bulkhead door"
-msgstr "舱壁门（关）"
+msgstr "关闭的舱壁门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed corrugated metal door"
-msgstr "金属卷帘门（关）"
+msgstr "关闭的金属卷帘门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed door curtain"
-msgstr "门帘（关）"
+msgstr "关闭的门帘"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed frosted glass door"
-msgstr "毛玻璃门（关）"
+msgstr "关闭的毛玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed glass door"
-msgstr "玻璃门（关）"
+msgstr "关闭的玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed grass curtain"
-msgstr "草门帘（关）"
+msgstr "关闭的草门帘"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed laminated glass door"
-msgstr "夹层玻璃门（关）"
+msgstr "关闭的夹层玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
@@ -34577,37 +34577,37 @@ msgstr "八阶段仓库"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed makeshift door"
-msgstr "简易门（关）"
+msgstr "关闭的简易门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed metal door"
-msgstr "金属门（关）"
+msgstr "关闭的金属门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed metal door with peephole"
-msgstr "猫眼金属门（关）"
+msgstr "关闭的猫眼金属门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed reinforced wood door"
-msgstr "强化木门（关）"
+msgstr "关闭的强化木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed wood door"
-msgstr "木门（关）"
+msgstr "关闭的木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed wood door with an electronic lock"
-msgstr "带电子锁的木门（关）"
+msgstr "关闭的木门（带电子锁）"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed wood door with peephole"
-msgstr "猫眼木门（关）"
+msgstr "关闭的猫眼木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json data/json/furniture_and_terrain/terrain-walls.json
@@ -34632,7 +34632,7 @@ msgstr "猫眼木门（损坏）"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "electronic locked metal door"
-msgstr "电子锁金属门"
+msgstr "金属门（带电子锁）"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
@@ -34657,47 +34657,47 @@ msgstr "金属墙"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open ballistic glass door"
-msgstr "防弹玻璃门（开）"
+msgstr "打开的玻璃门（防弹）"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open bar door"
-msgstr "栏杆门（开）"
+msgstr "打开的栏杆门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open bulkhead door"
-msgstr "舱壁门（开）"
+msgstr "打开的舱壁门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open corrugated metal door"
-msgstr "金属卷帘门（开）"
+msgstr "打开的金属卷帘门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open door curtain"
-msgstr "门帘（开）"
+msgstr "打开的门帘"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open frosted glass door"
-msgstr "毛玻璃门（开）"
+msgstr "打开的毛玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open glass door"
-msgstr "玻璃门（开）"
+msgstr "打开的玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open grass curtain"
-msgstr "草门帘（开）"
+msgstr "打开的草门帘"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open laminated glass door"
-msgstr "夹层玻璃门（开）"
+msgstr "打开的夹层玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
@@ -34707,37 +34707,37 @@ msgstr "八阶段仓库"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open makeshift door"
-msgstr "简易门（开）"
+msgstr "打开的简易门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open metal door"
-msgstr "金属门（开）"
+msgstr "打开的金属门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open metal door with peephole"
-msgstr "猫眼金属门（开）"
+msgstr "打开的猫眼金属门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open reinforced wood door"
-msgstr "强化木门（开）"
+msgstr "打开的强化木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open secret door"
-msgstr "秘门（开）"
+msgstr "打开的秘门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open wood door"
-msgstr "木门（开）"
+msgstr "打开的木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open wood door with peephole"
-msgstr "猫眼木门（开）"
+msgstr "打开的猫眼木门"
 
 #. ~ Bashing failed sound of terrain "open secret door"
 #: data/json/furniture_and_terrain/terrain-doors.json
@@ -37060,7 +37060,7 @@ msgstr "属于一种古老的阔叶树种，以其硕大的白色花朵而闻名
 #. ~ Description of terrain "dead grass"
 #: data/json/furniture_and_terrain/terrain-flora.json
 msgid "Patchy grass which has withered and died."
-msgstr ""
+msgstr "一片枯死、斑驳的草地。"
 
 #. ~ Description of terrain "woodchips"
 #: data/json/furniture_and_terrain/terrain-flora.json
@@ -37720,43 +37720,43 @@ msgstr "真菌幼树"
 #. ~ Description of terrain "ice"
 #: data/json/furniture_and_terrain/terrain-ice.json
 msgid "A sheet of ice covering deep water."
-msgstr ""
+msgstr "一片覆盖深水的冰层。"
 
 #. ~ Description of terrain "ice"
 #: data/json/furniture_and_terrain/terrain-ice.json
 msgid "A sheet of ice covering shallow water."
-msgstr ""
+msgstr "一片覆盖浅水的冰层。"
 
 #. ~ Description of terrain "thin ice"
 #: data/json/furniture_and_terrain/terrain-ice.json
 msgid "A thin layer of ice covering deep water.  It may not support much weight."
-msgstr ""
+msgstr "一层覆盖深水的薄冰。可能承受不了太大的重量。"
 
 #. ~ Description of terrain "thin ice"
 #: data/json/furniture_and_terrain/terrain-ice.json
 msgid "A thin layer of ice covering shallow water.  It may not support much weight."
-msgstr ""
+msgstr "一层覆盖浅水的薄冰。可能承受不了太大的重量。"
 
 #. ~ Description of terrain "pseudo phase"
 #: data/json/furniture_and_terrain/terrain-ice.json
 msgid "Placeholder terrain representing the original tile for PHASE_BACK behavior.  Should not be seen in-game."
-msgstr ""
+msgstr "代表 PHASE_BACK 行为中原始地块的占位地形。在游戏中不应出现。"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-ice.json
 msgid "ice"
-msgstr ""
+msgstr "冰"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-ice.json
 msgid "pseudo phase"
-msgstr ""
+msgstr "伪相位"
 
 #. ~ Name of a trap
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-ice.json data/json/traps.json
 msgid "thin ice"
-msgstr ""
+msgstr "薄冰"
 
 #. ~ Description of terrain "surf"
 #: data/json/furniture_and_terrain/terrain-liquids.json
@@ -37841,7 +37841,7 @@ msgstr "这里水不太深。有水密容器的话，可以从这里收集盐水
 #. ~ Description of terrain "flood water"
 #: data/json/furniture_and_terrain/terrain-liquids.json
 msgid "This water isn't too deep, it seems to have either pooled here or risen from a pipe leaking nearby."
-msgstr ""
+msgstr "这里的水不算太深，看起来要么是积攒在这里的，要么是从附近漏水的管道里渗出来的。"
 
 #. ~ Description of terrain "submerged concrete"
 #: data/json/furniture_and_terrain/terrain-liquids.json
@@ -38916,7 +38916,7 @@ msgstr "门已经打开了。"
 #. succeeds
 #: data/json/furniture_and_terrain/terrain-mechanisms.json
 msgid "You opened the door!"
-msgstr "你打开了门。"
+msgstr "你打开了门！"
 
 #. ~ Message when terrain "Maintenance: green zone card reader"'s examine
 #. action succeeds
@@ -38924,7 +38924,7 @@ msgstr "你打开了门。"
 #. succeeds
 #: data/json/furniture_and_terrain/terrain-mechanisms.json
 msgid "You opened the gate!"
-msgstr "你打开了门。"
+msgstr "你打开了门！"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-mechanisms.json
@@ -39295,7 +39295,7 @@ msgstr "一片高质量的坚固金属屋顶。"
 #. ~ Description of terrain "downspout"
 #: data/json/furniture_and_terrain/terrain-roofs.json
 msgid "A length of gutter running from the roof to the ground, you could place a container underneath it to collect rainwater.  It might be possible to climb up here, but it's too flimsy to support an adult."
-msgstr "一段从屋顶到地面的排水管道，你可以在它下方放一个容器来收集雨水。它虽然看起来很脆弱，但是你能够顺着它从这里爬上去。"
+msgstr "一段从屋顶延伸到地面的排水管，你可以在下面放个容器接雨水。也许能顺着它爬上去，但这东西太不结实了，承受不了一个成年人的重量。"
 
 #. ~ Description of terrain "brick roof"
 #: data/json/furniture_and_terrain/terrain-roofs.json
@@ -39340,7 +39340,7 @@ msgstr "一片草皮制成的屋顶。"
 #. ~ Description of terrain "gutter drop"
 #: data/json/furniture_and_terrain/terrain-roofs.json
 msgid "A spot in the gutter where the water flows into a downspout.  It might be possible to climb down here, but it's too flimsy to support an adult."
-msgstr "一段水从雨水槽中流进落水管的管道。它虽然看起来很脆弱，但你也许能够顺着它爬上爬下。"
+msgstr "一处连接落水管的排水槽。也许能从这里爬下去，但这东西太不结实了，承受不了一个成年人的重量。"
 
 #. ~ Description of terrain "red metal roof"
 #: data/json/furniture_and_terrain/terrain-roofs.json
@@ -39365,7 +39365,7 @@ msgstr "枯树顶部光秃的枝干，这里的空间刚好够坐下。"
 #. ~ Description of terrain "giant fern top"
 #: data/json/furniture_and_terrain/terrain-roofs.json
 msgid "The top of a willow tree.  There is enough room to perch up here, but only just."
-msgstr ""
+msgstr "一棵柳树的树顶。上面的空间刚好够勉强落脚。"
 
 #. ~ Description of terrain "giant fern top"
 #: data/json/furniture_and_terrain/terrain-roofs.json
@@ -40388,7 +40388,7 @@ msgstr "悬挂着未拉上的金属百叶窗，露出了强化玻璃。看来金
 #. ~ Description of terrain "laminated glass with closed shutters"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "Metal shutters cover this safety glass barrier, blocking out the view and adding some sturdy protection.  They should be openable, but only from the inside."
-msgstr ""
+msgstr "金属百叶窗覆盖在这层安全玻璃屏障上，遮挡了视野，并提供了牢固的防护。它们应该可以从内部打开，但只能从里面操作。"
 
 #. ~ Description of terrain "half-built reinforced concrete wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
@@ -40664,12 +40664,12 @@ msgstr "夹层玻璃墙"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "laminated glass with closed shutters"
-msgstr ""
+msgstr "带闭合百叶窗的夹层玻璃"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "laminated glass with open shutters"
-msgstr ""
+msgstr "带开启百叶窗的夹层玻璃"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-walls.json
@@ -42363,7 +42363,7 @@ msgstr "你费力地砍开并仔细摸索了这只真菌生物的残骸。"
 #. ~ Harvest message
 #: data/json/harvest.json
 msgid "You messily hack apart the colossal mass of fused, rancid flesh.  Strangely, some of the meat looks fresh."
-msgstr ""
+msgstr "你胡乱地劈开了那团巨大、腐烂的融合血肉。奇怪的是，其中有些肉看起来还很新鲜。"
 
 #. ~ Harvest message
 #: data/json/harvest.json
@@ -43822,7 +43822,7 @@ msgstr "雾化的有毒刺激性液体，用来驱赶像人和熊这样的大体
 #. ~ Description of "pebble"
 #: data/json/items/ammo.json
 msgid "A palm-sized stone about the right shape to be used as ammunition for a sling."
-msgstr ""
+msgstr "一块巴掌大的石头，形状刚好适合用作投石索的弹药。"
 
 #. ~ Description of "RPG die"
 #: data/json/items/ammo.json
@@ -43929,7 +43929,7 @@ msgstr "一颗钢制的滚珠轴承，很适合当弹弓的弹药。"
 #. ~ Description of "rock"
 #: data/json/items/ammo.json
 msgid "A stone about the size of a baseball."
-msgstr ""
+msgstr "一块棒球大小的石头。"
 
 #. ~ Description of "rolling paper"
 #: data/json/items/ammo.json
@@ -43964,17 +43964,17 @@ msgstr "等效于0.01美元的货币单位。"
 #. ~ Description of "insecticidal gas"
 #: data/json/items/ammo.json
 msgid "Aerosolized pesticides formulated to kill all sorts of arthropods."
-msgstr ""
+msgstr "气雾型杀虫剂，专用于消灭各类节肢动物。"
 
 #. ~ Description of "clay sling bullet"
 #: data/json/items/ammo.json
 msgid "An oblong piece of hardened clay, designed for use as sling ammunition."
-msgstr ""
+msgstr "一块椭圆形的硬化黏土块，专为投石索弹药而设计。"
 
 #. ~ Description of "lead sling bullet"
 #: data/json/items/ammo.json
 msgid "An oblong piece of lead, designed for use as sling ammunition.  As sling ammo goes, these are about as accurate as it gets, and in the right hands can be surprisingly effective."
-msgstr ""
+msgstr "一块椭圆形的铅块，专为投石索弹药而设计。在投石索弹药中，这种弹丸的精度算是顶级的，在合适的人手中能发挥出惊人的威力。"
 
 #. ~ Item name
 #: data/json/items/ammo.json
@@ -44283,7 +44283,7 @@ msgstr[0] "美分"
 #: data/json/items/ammo.json
 msgid "chainmail link"
 msgid_plural "chainmail links"
-msgstr[0] ""
+msgstr[0] "锁子甲环"
 
 #. ~ Item name
 #. ~ Name of an ammunition type
@@ -44302,7 +44302,7 @@ msgstr[0] "橡胶块"
 #: data/json/items/ammo.json
 msgid "clay sling bullet"
 msgid_plural "clay sling bullets"
-msgstr[0] ""
+msgstr[0] "黏土投石弹"
 
 #. ~ Item name
 #. ~ Name of an ammunition type
@@ -44411,7 +44411,7 @@ msgstr[0] "氢气"
 #: data/json/items/ammo.json
 msgid "insecticidal gas"
 msgid_plural "insecticidal gas"
-msgstr[0] ""
+msgstr[0] "杀虫气体"
 
 #. ~ Item name
 #: data/json/items/ammo.json
@@ -44429,7 +44429,7 @@ msgstr[0] "大口径步枪子弹底火"
 #: data/json/items/ammo.json
 msgid "lead sling bullet"
 msgid_plural "lead sling bullets"
-msgstr[0] ""
+msgstr[0] "铅制投石弹"
 
 #. ~ Item name
 #. ~ Name of an ammunition type
@@ -47597,7 +47597,7 @@ msgstr "带有三角形钢箭头的带羽毛的木箭。  刀尖非常适合伤�
 #. ~ Description of "crude wooden arrow"
 #: data/json/items/ammo/arrows.json
 msgid "A sharpened stick with a notch cut into the back.  It lacks fletching, which reduces its accuracy but paradoxically allows it to fly a bit farther."
-msgstr ""
+msgstr "一根削尖的木棍，尾部开了一个凹槽。它缺少箭羽，这降低了精度，但反而让它能飞得更远一些。"
 
 #. ~ "menu_text" action message of item "flammable arrow"
 #: data/json/items/ammo/arrows.json
@@ -47775,7 +47775,7 @@ msgstr "一根经过粗略磨尖并用火烧硬的木制弩矢。"
 #. ~ Description of "crude wooden bolt"
 #: data/json/items/ammo/bolts.json
 msgid "A smoothed-down stick, sharp at one end and notched in the back.  It lacks fletching, which makes it less accurate but paradoxically allows it to fly farther."
-msgstr ""
+msgstr "一根打磨过的木棍，一端削尖，尾部有凹槽。它没有箭羽，这降低了精度，但反而让它射得更远。"
 
 #. ~ Item name
 #: data/json/items/ammo/bolts.json
@@ -48258,17 +48258,17 @@ msgstr "一瓶塞着一块长长引线的易燃液体，随时可以使用带有
 #. ~ Description of "sling-ready improvised grenade"
 #: data/json/items/ammo/sling-ready_grenade.json
 msgid "A grenade made from explosives sealed inside a metal canister, modified with a retaining fuse for use in a staff sling with a modified cradle.  To throw this item without a sling, use it to snap the fuse and activate the grenade.  You will then have 5 seconds before it explodes; throwing it would be a good idea."
-msgstr ""
+msgstr "一枚由金属罐封装爆炸物制成的榴弹，加装了固定引信，可用于带有改装托架的投石杖发射。若想不借助投石杖投掷此物，请使用它以折断引信并激活榴弹。随后你将有5秒时间，把它扔出去会是个好主意。"
 
 #. ~ Description of "sling-ready small improvised grenade"
 #: data/json/items/ammo/sling-ready_grenade.json
 msgid "A grenade made from explosives sealed inside a small metal canister, modified with a retaining fuse for use in a staff sling.  To throw this item without a sling, use it to snap the fuse and activate the grenade.  You will then have 5 seconds before it explodes; throwing it would be a good idea."
-msgstr ""
+msgstr "一枚由小型金属罐封装爆炸物制成的榴弹，加装了固定引信，可用于投石杖发射。若想不借助投石杖投掷此物，请使用它以折断引信并激活榴弹。随后你将有5秒时间，把它扔出去会是个好主意。"
 
 #. ~ Description of "sling-ready improvised HE grenade"
 #: data/json/items/ammo/sling-ready_grenade.json
 msgid "A grenade made from high explosive sealed inside a metal canister, modified with a retaining fuse for use in a staff sling with a modified cradle.  To throw this item without a sling, use it to snap the fuse and activate the grenade.  You will then have some amount of time before it explodes; throwing it would be a good idea."
-msgstr ""
+msgstr "一枚由金属罐封装高爆炸药制成的榴弹，加装了固定引信，可用于带有改装托架的投石杖发射。若想不借助投石杖投掷此物，请使用它以折断引信并激活榴弹。随后你将有一定时间余裕，把它扔出去会是个好主意。"
 
 #. ~ Description of "sling-ready grenade"
 #: data/json/items/ammo/sling-ready_grenade.json
@@ -48283,7 +48283,7 @@ msgstr "激活"
 #. ~ Description of "sling-ready small improvised HE grenade"
 #: data/json/items/ammo/sling-ready_grenade.json
 msgid "An grenade made from high explosive sealed inside a small metal canister, modified with a retaining fuse for use in a staff sling.  To throw this item without a sling, use it to snap the fuse and activate the grenade.  You will then have some amount of time before it explodes; throwing it would be a good idea."
-msgstr ""
+msgstr "一枚由小型金属罐封装高爆炸药制成的榴弹，加装了固定引信，可用于投石杖发射。若想不借助投石杖投掷此物，请使用它以折断引信并激活榴弹。随后你将有一定时间余裕，把它扔出去会是个好主意。"
 
 #. ~ "menu_text" action message of item "sling-ready small improvised grenade"
 #. ~ "menu_text" action message of item "sling-ready improvised grenade"
@@ -48334,25 +48334,25 @@ msgstr[0] "投射用手雷"
 #: data/json/items/ammo/sling-ready_grenade.json
 msgid "sling-ready improvised HE grenade"
 msgid_plural "sling-ready improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "可适配投石杖的自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/ammo/sling-ready_grenade.json
 msgid "sling-ready improvised grenade"
 msgid_plural "sling-ready improvised grenades"
-msgstr[0] ""
+msgstr[0] "可适配投石杖的自制榴弹"
 
 #. ~ Item name
 #: data/json/items/ammo/sling-ready_grenade.json
 msgid "sling-ready small improvised HE grenade"
 msgid_plural "sling-ready small improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "可适配投石杖的小型自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/ammo/sling-ready_grenade.json
 msgid "sling-ready small improvised grenade"
 msgid_plural "sling-ready small improvised grenades"
-msgstr[0] ""
+msgstr[0] "可适配投石杖的小型自制榴弹"
 
 #. ~ Description of "bronze tipped atlatl spear"
 #: data/json/items/ammo/spears.json
@@ -48819,7 +48819,7 @@ msgstr "弩矢"
 #: data/json/items/ammo_types.json data/json/items/tool/misc.json
 msgid "bug spray"
 msgid_plural "bug sprays"
-msgstr[0] ""
+msgstr[0] "杀虫喷雾"
 
 #. ~ Name of an ammunition type
 #. ~ Vehicle name
@@ -48951,7 +48951,7 @@ msgstr[0] "奶"
 #: data/json/items/ammo_types.json data/json/monster_special_attacks/monster_gun.json
 msgid "molotov cocktail"
 msgid_plural "molotov cocktails"
-msgstr[0] ""
+msgstr[0] "莫洛托夫鸡尾酒"
 
 #. ~ Name of an ammunition type
 #. ~ Item name
@@ -49572,7 +49572,7 @@ msgstr "一个用过软的织物临时凑合而成的背负式箭筒。虽然它
 #. ~ Description of "pipe quiver"
 #: data/json/items/armor/ammo_pouch.json
 msgid "A makeshift quiver fashioned from sections of pipe strapped together and worn at the waist.  Heavier and thinner than a typical quiver, it can only hold six arrows or eight bolts."
-msgstr ""
+msgstr "一个由数段管道捆扎而成、系在腰间的简易箭袋。它比普通箭袋更重也更薄，只能容纳六支箭或八支弩箭。"
 
 #. ~ Description of "H2O pouch"
 #: data/json/items/armor/ammo_pouch.json
@@ -49582,7 +49582,7 @@ msgstr "一个设计用来装水瓶的口袋，前面还有个战术口袋。有
 #. ~ Description of "tactical grenade pouch"
 #: data/json/items/armor/ammo_pouch.json
 msgid "A pouch designed to hold one hand grenade, keeping it both accessible and secure.  Has MOLLE straps for attaching to a belt or vest."
-msgstr ""
+msgstr "一个设计用来装一枚手榴弹的袋，既能方便取用，也能稳妥固定。配有MOLLE绑带，可挂于腰带或战术背心上。"
 
 #. ~ Description of "tactical shotshell pouch"
 #: data/json/items/armor/ammo_pouch.json
@@ -50364,7 +50364,7 @@ msgstr "笨重但舒适的装甲背心。  它没有用于弹道板插入物的�
 #. ~ Description of "scrap ballistic plate"
 #: data/json/items/armor/ballistic_armor.json
 msgid "A crudely-hammered piece of sheet metal, wrapped in rags in an attempt to prevent spalling.  If used in a ballistic vest, it might offer some protection."
-msgstr ""
+msgstr "一块粗略锤打过的金属板，用破布包裹以减少碎裂飞溅。如果装入防弹背心，或许能提供一定的防护。"
 
 #. ~ Description of "scrap ballistic side plate"
 #: data/json/items/armor/ballistic_armor.json
@@ -50379,7 +50379,7 @@ msgstr "将许多层纸堆叠并用大量胶水层压在一起，形成躯干正
 #. ~ Description of "paper ballistic plate"
 #: data/json/items/armor/ballistic_armor.json
 msgid "A great many layers of paper stacked and laminated together with a generous portion of glue to form an armor plate for the front or back of the torso.  This could be used in an oversized plate carrier, though it probably won't stand up to much."
-msgstr ""
+msgstr "大量纸张层层堆叠，并用大量胶水粘合压制而成，用于覆盖躯干前部或后部的装甲板。可用于超大号载板战术背心，不过估计也扛不住什么重击。"
 
 #. ~ Description of "paper ballistic side plate"
 #: data/json/items/armor/ballistic_armor.json
@@ -50389,7 +50389,7 @@ msgstr "将许多层纸堆叠并用大量胶水层压在一起，形成躯干侧
 #. ~ Description of "steel ballistic plate"
 #: data/json/items/armor/ballistic_armor.json
 msgid "A hand-forged steel ballistic plate more than double the standard size.  It can't be worn on its own, and would need to be inserted into an equally gigantic plate carrier vest to be of any benefit."
-msgstr ""
+msgstr "一块手工锻造的钢制防弹板，尺寸超过标准两倍以上。它无法单独穿戴，必须插入同样巨大的载板战术背心中才能发挥防护作用。"
 
 #. ~ Description of "steel ballistic plate"
 #: data/json/items/armor/ballistic_armor.json
@@ -50414,7 +50414,7 @@ msgstr "一块损坏破裂的大型防弹装甲板。它不再提供可靠的保
 #. ~ Description of "concealable ballistic vest"
 #: data/json/items/armor/ballistic_armor.json
 msgid "A level II Kevlar vest, rated for low-caliber pistol rounds and designed to be worn under clothing.  Concerningly, it is sized for a toddler."
-msgstr ""
+msgstr "一件II级凯夫拉防弹背心，可抵御小口径手枪弹，设计为可穿在衣物内。令人担忧的是，它是给幼童穿的尺码。"
 
 #. ~ Description of "concealable ballistic vest"
 #: data/json/items/armor/ballistic_armor.json
@@ -50439,7 +50439,7 @@ msgstr "一对 NIJ III 级防弹板，具有凹形轮廓，由 UHMW 聚乙烯制
 #. ~ Description of "wooden ballistic plate"
 #: data/json/items/armor/ballistic_armor.json
 msgid "A panel of wood cut into an irregular hexagon, slightly concave.  It would fit in a plate carrier sized for a giant, and while by no means capable of stopping gunfire, it may still hold up against other threats."
-msgstr ""
+msgstr "一块切成了不规则六边形的木板，略微内凹。它适合插入为巨人尺寸设计的载板背心，虽然绝对挡不住枪弹，但或许能抵御其他威胁。"
 
 #. ~ Description of "ESBI ballistic plate"
 #: data/json/items/armor/ballistic_armor.json
@@ -50459,7 +50459,7 @@ msgstr "具有轻微凹形轮廓的多边形破碎板，由薄层钢、超高分
 #. ~ Description of "concealable ballistic vest"
 #: data/json/items/armor/ballistic_armor.json
 msgid "A preposterously sized Kevlar vest faced with ballistic nylon  Its low-profile design is perfect for wearing under clothing."
-msgstr ""
+msgstr "一件尺寸大得离谱的凯夫拉防弹背心，外层为防弹尼龙。其低轮廓设计非常适合穿在衣物内。"
 
 #. ~ Description of "wooden ballistic side plate"
 #: data/json/items/armor/ballistic_armor.json
@@ -50499,7 +50499,7 @@ msgstr "由 Kevlar、Nomex 和泡沫填充物制成的装甲夹克，供爆炸�
 #. ~ Description of "plate carrier"
 #: data/json/items/armor/ballistic_armor.json
 msgid "An enormous handmade ballistic vest with MOLLE webbing for attaching accessories.  No factory ever made ESAPI plates that would fit in this thing, but it ought to be possible to make some out of steel or other materials."
-msgstr ""
+msgstr "一件巨大的手工防弹背心，带有MOLLE织带用于挂载附件。没有哪家工厂生产过能塞进这玩意儿里的ESAPI防弹板，不过用钢材或其他材料自制一些应该是可行的。"
 
 #. ~ Description of a pocket in item "heavy plate carrier"
 #: data/json/items/armor/ballistic_armor.json
@@ -50588,7 +50588,7 @@ msgstr "中型装甲板口袋"
 #. ~ Description of a pocket in item "plate carrier"
 #: data/json/items/armor/ballistic_armor.json
 msgid "Pocket for an oversized ballistic armor plate."
-msgstr ""
+msgstr "超大号防弹板插槽。"
 
 #. ~ Description of a pocket in item "tactical EOD jacket"
 #. ~ Description of a pocket in item "combat blouse"
@@ -50599,7 +50599,7 @@ msgstr "三角肌装甲板的口袋。"
 #. ~ Description of "fiberglass ballistic plate"
 #: data/json/items/armor/ballistic_armor.json
 msgid "Several layers of woven fiberglass stacked and laminated together with epoxy to form an armor plate for a giant's torso.  In a pinch, this could be used in an oversized plate carrier to provide a modicum of protection."
-msgstr ""
+msgstr "数层玻璃纤维布用环氧树脂粘合压制而成，形成一块用于巨人躯干的装甲板。在紧急情况下，它可以装入超大号载板背心，提供些许防护。"
 
 #. ~ Description of "fiberglass ballistic plate"
 #: data/json/items/armor/ballistic_armor.json
@@ -50711,7 +50711,7 @@ msgstr[0] "插板背心"
 #: data/json/items/armor/ballistic_armor.json
 msgid "scrap ballistic plate"
 msgid_plural "scrap ballistic plates"
-msgstr[0] ""
+msgstr[0] "废料防弹板"
 
 #. ~ Item name
 #: data/json/items/armor/ballistic_armor.json
@@ -50771,7 +50771,7 @@ msgstr[0] "木制防弹侧板"
 #: data/json/items/armor/bandolier.json
 msgid "40mm ammo pouch"
 msgid_plural "40mm ammo pouches"
-msgstr[0] ""
+msgstr[0] "40毫米弹药袋"
 
 #. ~ Item name
 #: data/json/items/armor/bandolier.json
@@ -50808,7 +50808,7 @@ msgstr "一个皮革子弹带，保证步枪子弹随手可得。"
 #. ~ Description of "torso grenade bandolier"
 #: data/json/items/armor/bandolier.json
 msgid "A leather bandolier strapped around the torso for keeping 40mm grenades close to hand."
-msgstr ""
+msgstr "一条绑在躯干上的皮革弹带，用于随身携带40毫米榴弹。"
 
 #. ~ Description of "torso shotgun bandolier"
 #: data/json/items/armor/bandolier.json
@@ -50823,12 +50823,12 @@ msgstr "一条缠在腰间的皮革子弹带，保证霰弹枪子弹随手可得
 #. ~ Description of "40mm ammo pouch"
 #: data/json/items/armor/bandolier.json
 msgid "A pouch consisting of four sleeves sized specifically for grenade launcher ammunition.  Nylon loops across the back allow it to be attached to MOLLE webbing."
-msgstr ""
+msgstr "一个设有四个专用插槽的袋，尺寸恰好适配榴弹发射器弹药。背面带有尼龙环，可挂载于MOLLE织带上。"
 
 #. ~ Description of "large grenade pouch"
 #: data/json/items/armor/bandolier.json
 msgid "A pouch with individual sleeves for holding up to four hand grenades, with straps for attaching it to your belt or other webbing."
-msgstr ""
+msgstr "一个设有独立插槽的袋，可容纳最多四枚手榴弹，配有绑带可挂于腰带或其他织带上。"
 
 #. ~ Description of "military 5.56 bandolier"
 #: data/json/items/armor/bandolier.json
@@ -51629,7 +51629,7 @@ msgstr "一些用塑料薄膜卷成的细管子。可以用来包裹头足类动
 #. ~ Description of "cephalopod socks"
 #: data/json/items/armor/boots.json
 msgid "A collection of thigh socks sewn too slender for human legs, but ideal for keeping the many arms of a cephalopod warm."
-msgstr ""
+msgstr "一套缝制得过细的长筒袜，不适合人类腿部，但非常适合为头足类生物的众多腕足保暖。"
 
 #. ~ Description of "steel-toed sneakers"
 #: data/json/items/armor/boots.json
@@ -51997,7 +51997,7 @@ msgstr[0] "保龄球鞋"
 #: data/json/items/armor/boots.json
 msgid "cephalopod socks"
 msgid_plural "sets of cephalopod socks"
-msgstr[0] ""
+msgstr[0] "头足类生物袜子"
 
 #. ~ Item name
 #. ~ name of the nested group
@@ -52076,7 +52076,7 @@ msgstr[0] "人字拖"
 #: data/json/items/armor/boots.json
 msgid "foot wraps"
 msgid_plural "pairs of foot wraps"
-msgstr[0] ""
+msgstr[0] "裹脚布"
 
 #. ~ Item name
 #: data/json/items/armor/boots.json
@@ -55578,7 +55578,7 @@ msgstr "一件耐用的、等身长的无袖防尘大衣，让你的手臂不受
 #. ~ Description of "sexy Santa jacket"
 #: data/json/items/armor/coats.json
 msgid "A short red jacket with white faux fur as trim.  It's sleeveless, so Santa can show off his guns when he comes down your chimney this year."
-msgstr ""
+msgstr "一件红色短夹克，镶着白色人造毛边。它是无袖的，所以圣诞老人今年从你家烟囱下来的时候，可以秀一把他的肌肉。"
 
 #. ~ Description of "sleeveless tunic"
 #: data/json/items/armor/coats.json
@@ -56046,7 +56046,7 @@ msgstr[0] "僧伽黎"
 #: data/json/items/armor/coats.json
 msgid "sexy Santa jacket"
 msgid_plural "sexy Santa jackets"
-msgstr[0] ""
+msgstr[0] "性感圣诞夹克"
 
 #. ~ Item name
 #: data/json/items/armor/coats.json
@@ -56978,7 +56978,7 @@ msgstr[0] "拆弹防护护手"
 #. ~ Description of "Nomex hand wraps"
 #: data/json/items/armor/gloves.json
 msgid "Long pieces of Nomex fabric that are meant to be wrapped around the hands."
-msgstr ""
+msgstr "用于包裹手部的诺梅克斯长条布料。"
 
 #. ~ Description of "hand wraps"
 #: data/json/items/armor/gloves.json
@@ -56994,7 +56994,7 @@ msgstr "各种穿在其他护甲下的较厚羊毛衬铠的配方。"
 #: data/json/items/armor/gloves.json
 msgid "Nomex hand wraps"
 msgid_plural "pairs of Nomex hand wraps"
-msgstr[0] ""
+msgstr[0] "诺梅克斯护手布"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -57010,7 +57010,7 @@ msgstr "各种穿在其他护甲下的较厚帆布衬铠的配方。"
 #. ~ Description of "faux fur hand wraps"
 #: data/json/items/armor/gloves.json
 msgid "Pieces of fake fur that are meant to be wrapped around the hands."
-msgstr ""
+msgstr "用于包裹手部的人造毛皮布片。"
 
 #. ~ Description of "leather hand wraps"
 #: data/json/items/armor/gloves.json
@@ -57117,7 +57117,7 @@ msgstr[0] "人造毛皮手套"
 #: data/json/items/armor/gloves.json
 msgid "faux fur hand wraps"
 msgid_plural "pairs of faux fur hand wraps"
-msgstr[0] ""
+msgstr[0] "人造毛皮护手布"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -57929,7 +57929,7 @@ msgstr "一个系在可调整的带子上的LED手电筒，可以把它穿在头
 #. ~ "menu_text" action message of item "attachable ear muffs (on)"
 #: data/json/items/armor/head_attachments.json
 msgid "Remove"
-msgstr ""
+msgstr "取下"
 
 #. ~ "need_charges_msg" action message of item "thermal electric socks"
 #. ~ "need_charges_msg" action message of item "thermal electric suit"
@@ -57971,12 +57971,12 @@ msgstr "你激活你的 %s。"
 #. ~ "msg" action message of item "attachable ear muffs (on)"
 #: data/json/items/armor/head_attachments.json
 msgid "You move the ear muffs away from your ears."
-msgstr ""
+msgstr "你将耳罩从耳朵旁移开。"
 
 #. ~ "msg" action message of item "attachable ear muffs"
 #: data/json/items/armor/head_attachments.json
 msgid "You move the ear muffs over your ears."
-msgstr ""
+msgstr "你将耳罩戴到耳朵上。"
 
 #. ~ "msg" action message of item "thermal electric socks (on)"
 #. ~ "msg" action message of item "thermal electric suit (on)"
@@ -58979,7 +58979,7 @@ msgstr "鳞片、皮肤和毛皮的可怕混合物，由骨皮和闪闪发光的
 #. ~ Description of "stinger"
 #: data/json/items/armor/integrated.json
 msgid "A hypodermic barb of glass-sharp chitin."
-msgstr ""
+msgstr "一根由玻璃般锋利的角质物制成的皮下注射针状刺。"
 
 #. ~ Description of "roomy shell"
 #: data/json/items/armor/integrated.json
@@ -58989,7 +58989,7 @@ msgstr "一个巨大的软体动物壳，大到足以让主人将身体缩进里
 #. ~ Description of "light fur"
 #: data/json/items/armor/integrated.json
 msgid "A light coat of fur growing in patches all over the body."
-msgstr ""
+msgstr "全身各处斑块状生长的薄毛皮。"
 
 #. ~ Description of "incisors"
 #: data/json/items/armor/integrated.json
@@ -59034,7 +59034,7 @@ msgstr "一层柔软而厚重的活植物物质。"
 #. ~ Description of "bionic filtration system"
 #: data/json/items/armor/integrated.json
 msgid "A powered system of filters working to keep the airways clear of dust, smoke, and airborne toxins."
-msgstr ""
+msgstr "一套由过滤器组成的动力系统，用于保持呼吸道畅通，过滤粉尘、烟雾和空气中的毒素。"
 
 #. ~ Description of "protective bark"
 #: data/json/items/armor/integrated.json
@@ -59064,7 +59064,7 @@ msgstr "鳞片的光泽覆盖了大部分皮肤。  它们很坚韧，但保持�
 #. ~ Description of "rabbit fur"
 #: data/json/items/armor/integrated.json
 msgid "A soft, fluffy coating of fur.  It isn't the best protection against predators, but stays warm in bad weather."
-msgstr ""
+msgstr "一层柔软蓬松的毛皮覆盖。虽然防不住捕食者的利爪，但在恶劣天气里还能保持温暖。"
 
 #. ~ Description of "crushing beak"
 #: data/json/items/armor/integrated.json
@@ -59114,17 +59114,17 @@ msgstr "几丁质装甲板在身体的大部分周围形成坚硬的外壳。"
 #. ~ Description of "distributed bark"
 #: data/json/items/armor/integrated.json
 msgid "Bark evenly spread evenly across the body."
-msgstr ""
+msgstr "树皮均匀覆盖全身。"
 
 #. ~ Description of "latticed bark"
 #: data/json/items/armor/integrated.json
 msgid "Bark, latticed to provide strong but uneven protection."
-msgstr ""
+msgstr "树皮呈网状排列，提供坚固但分布不均的防护。"
 
 #. ~ Description of "consolidated bark"
 #: data/json/items/armor/integrated.json
 msgid "Bark, thicker around the trunk."
-msgstr ""
+msgstr "树干周围的树皮更厚。"
 
 #. ~ Description of "cranial reinforcement"
 #: data/json/items/armor/integrated.json
@@ -59277,7 +59277,7 @@ msgstr[0] "红色厨师帽"
 #: data/json/items/armor/integrated.json
 msgid "bionic filtration system"
 msgid_plural "bionic filtration system"
-msgstr[0] ""
+msgstr[0] "生化过滤系统"
 
 #. ~ Item name
 #: data/json/items/armor/integrated.json
@@ -59498,7 +59498,7 @@ msgstr[0] "防护镜片"
 #: data/json/items/armor/integrated.json
 msgid "rabbit fur"
 msgid_plural "rabbit fur"
-msgstr[0] ""
+msgstr[0] "兔毛"
 
 #. ~ Item name
 #: data/json/items/armor/integrated.json
@@ -61079,7 +61079,7 @@ msgstr "一套柔软的皮革短靴、波林靴和护腿，绑在腿上，提供
 #. ~ Description of "cut-resistant cephalopod sleeves"
 #: data/json/items/armor/legs_armor.json
 msgid "A set of tubes of loosely woven Kevlar which should fit over a cephalopod's many arms."
-msgstr ""
+msgstr "一套由松散编织的凯夫拉制成的管状护套，应可套上头足类生物的众多腕足。"
 
 #. ~ Description of "tire tasset (loose)"
 #: data/json/items/armor/legs_armor.json
@@ -61104,7 +61104,7 @@ msgstr "一套覆盖在臀部的钢制裙甲。它可以调节尺寸，以便穿
 #. ~ Description of "cut-resistant tail sleeve"
 #: data/json/items/armor/legs_armor.json
 msgid "A slender tube of loosely woven Kevlar which should help protect the wearer's tail from cuts and scrapes."
-msgstr ""
+msgstr "一根由松散编织的凯夫拉制成的细长管状护套，有助于保护穿戴者的尾巴免受割伤和擦伤。"
 
 #. ~ Description of "leather tail sleeve"
 #: data/json/items/armor/legs_armor.json
@@ -61251,7 +61251,7 @@ msgstr[0] "甲壳护胫"
 #: data/json/items/armor/legs_armor.json
 msgid "cut-resistant cephalopod sleeves"
 msgid_plural "sets of cut-resistant cephalopod sleeves"
-msgstr[0] ""
+msgstr[0] "防割头足类护套"
 
 #. ~ Item name
 #: data/json/items/armor/legs_armor.json
@@ -62656,7 +62656,7 @@ msgstr "一层薄薄的能覆盖犬只全身的塑料布，能使狗在雨中保
 #. ~ Description of "chainmail dog coat"
 #: data/json/items/armor/pets_dog_armor.json
 msgid "Chainmail armor, for dogs!  You could put this on a friendly animal."
-msgstr ""
+msgstr "链甲护甲，专为狗设计！你可以把它穿在友好的动物身上。"
 
 #. ~ Item name
 #: data/json/items/armor/pets_dog_armor.json
@@ -62813,7 +62813,7 @@ msgstr[0] "钢马铠"
 #. ~ Description of "wool scarf"
 #: data/json/items/armor/scarfs.json
 msgid "A heavy scarf made of woven wool."
-msgstr ""
+msgstr "一条厚重的羊毛编织围巾。"
 
 #. ~ Description of "tallit gadol"
 #: data/json/items/armor/scarfs.json
@@ -62823,7 +62823,7 @@ msgstr "一种大型的祈祷披肩，是虔诚的犹太教徒在晨祷或其他
 #. ~ Description of "fur scarf"
 #: data/json/items/armor/scarfs.json
 msgid "A long strip of fur that once might have been fashionable.  Now it's an invaluable tool for winter survival."
-msgstr ""
+msgstr "一条曾经或许时髦过的毛皮长条。如今它成了冬季生存的宝贵工具。"
 
 #. ~ Description of "wimple"
 #: data/json/items/armor/scarfs.json
@@ -62838,7 +62838,7 @@ msgstr "戴在头上和脖子上的一块宽松的布。"
 #. ~ Description of "grass scarf"
 #: data/json/items/armor/scarfs.json
 msgid "A sheet of woven grass.  It's a bit itchy, but it might help keep warm in a survival situation."
-msgstr ""
+msgstr "一张草编垫子。有点扎人，但在求生情况下或许能帮忙保暖。"
 
 #. ~ Description of "knit cowl"
 #: data/json/items/armor/scarfs.json
@@ -62878,7 +62878,7 @@ msgstr "一条阿拉伯国家男子普遍穿戴的头巾，沙漠坏境产物，
 #. ~ Description of "knit scarf"
 #: data/json/items/armor/scarfs.json
 msgid "A warm knitted scarf, a quintessential piece of autumn fashion."
-msgstr ""
+msgstr "一条温暖的针织围巾，是秋季时尚的经典单品。"
 
 #. ~ Description of "chainmail aventail"
 #: data/json/items/armor/scarfs.json
@@ -62888,7 +62888,7 @@ msgstr "由相互锁扣的钢环片制成的护甲，可固定在颈部周围。
 #. ~ Description of "faux fur scarf"
 #: data/json/items/armor/scarfs.json
 msgid "Even the vegans can show off with this plush scarf made of cruelty-free fur.  It's not quite as warm as the real thing."
-msgstr ""
+msgstr "连素食者也能用这条不伤动物的毛绒围巾来展现风范。虽然不如真毛皮暖和。"
 
 #. ~ Item name
 #: data/json/items/armor/scarfs.json
@@ -62922,7 +62922,7 @@ msgstr "拔掉插销"
 #. ~ Description of "patchwork scarf"
 #: data/json/items/armor/scarfs.json
 msgid "When you get right down to it, it's just a rectangular strip of fabric, but it can be worn in a lot of different ways."
-msgstr ""
+msgstr "说到底，它只是一条长方形的布料，但可以有很多种不同的穿戴方式。"
 
 #. ~ Item name
 #: data/json/items/armor/scarfs.json
@@ -63020,7 +63020,7 @@ msgstr[0] "毛皮围巾"
 #: data/json/items/armor/scarfs.json
 msgid "grass scarf"
 msgid_plural "grass scarfs"
-msgstr[0] ""
+msgstr[0] "草编围巾"
 
 #. ~ Item name
 #: data/json/items/armor/scarfs.json
@@ -63062,7 +63062,7 @@ msgstr[0] "颈套（面罩升起）"
 #: data/json/items/armor/scarfs.json
 msgid "patchwork scarf"
 msgid_plural "patchwork scarves"
-msgstr[0] ""
+msgstr[0] "拼布围巾"
 
 #. ~ Item name
 #: data/json/items/armor/scarfs.json
@@ -65921,7 +65921,7 @@ msgstr "一件厚皮革制成的背心。"
 #. ~ Description of "buckskin vest"
 #: data/json/items/armor/torso_clothes.json
 msgid "A vest made of thin, lightweight leather."
-msgstr ""
+msgstr "一件由轻薄皮革制成的马甲。"
 
 #. ~ Description of "sweater"
 #: data/json/items/armor/torso_clothes.json
@@ -65953,7 +65953,7 @@ msgstr "一种奇怪匀称的长袖衬衫，躯干部分薄而透气，手臂部
 #. ~ Description of "buckskin shirt"
 #: data/json/items/armor/torso_clothes.json
 msgid "An overshirt made of thin, lightweight leather."
-msgstr ""
+msgstr "一件由轻薄皮革制成的罩衫。"
 
 #. ~ Item name
 #: data/json/items/armor/torso_clothes.json
@@ -67374,7 +67374,7 @@ msgstr "一种先进的压电式血液透析装置，植入了受体的体内，
 #. ~ Description of "Air Filtration System CBM"
 #: data/json/items/bionics.json
 msgid "A system of complex filters to be installed throughout the user's airways.  These will restrict breathing slightly, but will offer decent protection from smoke, dust, and airborne contaminants when unpowered, and unparalleled protection when powered."
-msgstr ""
+msgstr "一套将植入使用者整个呼吸道的复杂过滤系统。它将略微限制呼吸，但在未通电时能提供对烟雾、粉尘和空气污染物的良好防护，通电后则提供无与伦比的防护。"
 
 #. ~ Description of "Autonomous Surgical Scalpels CBM"
 #: data/json/items/bionics.json
@@ -71081,7 +71081,7 @@ msgstr[0] "中世纪剑术"
 #: data/json/items/book/martial.json
 msgid "Kerala's Ancient Martial Art"
 msgid_plural "copies of Kerala's Ancient Martial Art"
-msgstr[0] ""
+msgstr[0] "喀拉拉邦古代武术"
 
 #. ~ Item name
 #: data/json/items/book/martial.json
@@ -71100,7 +71100,7 @@ msgstr[0] "Las Nueve Reglas de la Montante"
 #. ~ Description of "Kerala's Ancient Martial Art"
 #: data/json/items/book/martial.json
 msgid "Martial arts manual written in the twentietch century which discusses the core elements of Kalaripayattu, a Malayalam phrase which roughly translates to, \"Practice in the Arts of the Battlefield.\"."
-msgstr ""
+msgstr "一本撰写于二十世纪的武术手册，论述了卡拉里帕亚图（Kalaripayattu）的核心要素。这个马拉雅拉姆语短语大致可译为“战场技艺的修习”。"
 
 #. ~ Item name
 #: data/json/items/book/martial.json
@@ -71808,7 +71808,7 @@ msgstr[0] "第二十二条军规"
 #. ~ Description of "unmarked notebook"
 #: data/json/items/book/misc.json
 msgid "Chemical formulae and complex diagrams handwritten in blue ball-point pen fill this notebook nearly cover to cover alongside uncomfortably detailed drawings of dissected pigs and humans.  What little text there is seems to describe steps in some sort of chemistry project, started and aborted again and again until on one dog-eared page toward the end, the nameless author outlines the collection of \"vital tissues\" and instructions for their use in some sort of experiment."
-msgstr ""
+msgstr "一本蓝色圆珠笔手写的化学公式和复杂图解几乎写满了这本笔记本，书页中还穿插着解剖猪和人体、细节逼真到令人不安的图纸。为数不多的文字似乎在描述某个化学项目的步骤——项目反复启动又中止，直到靠近末尾一张卷角的书页上，那位无名作者勾勒出了“活体组织”的采集方法，以及将它们用于某项实验的操作说明。"
 
 #. ~ Item name
 #: data/json/items/book/misc.json
@@ -73081,7 +73081,7 @@ msgstr[0] "国家气象记录"
 #: data/json/items/book/misc.json
 msgid "naughty magazine"
 msgid_plural "naughty magazines"
-msgstr[0] ""
+msgstr[0] "成人杂志"
 
 #. ~ Item name
 #: data/json/items/book/misc.json
@@ -73172,7 +73172,7 @@ msgstr[0] "悲剧小说"
 #: data/json/items/book/misc.json
 msgid "unmarked notebook"
 msgid_plural "unmarked notebooks"
-msgstr[0] ""
+msgstr[0] "无标记笔记本"
 
 #. ~ Item name
 #: data/json/items/book/misc.json
@@ -78520,7 +78520,7 @@ msgstr "一份人工合成出来的柠檬酸，通常用作食品添加剂、清
 #. ~ Description of "gravel"
 #: data/json/items/chemicals_and_resources.json
 msgid "A marble-sized bit of stone."
-msgstr ""
+msgstr "一块大理石大小的石头。"
 
 #. ~ Description of "steel grille"
 #: data/json/items/chemicals_and_resources.json
@@ -79922,7 +79922,7 @@ msgstr "一种由红茶和朗姆酒混合而成的鸡尾酒，最初起源于英
 #. ~ Description of "karsk"
 #: data/json/items/comestibles/alcohol.json
 msgid "A cocktail made by mixing coffee and pure alcohol, typically moonshine, originating from Scandinavia."
-msgstr ""
+msgstr "一种混合了咖啡和纯酒精（通常是私酿酒）的鸡尾酒，起源于斯堪的纳维亚地区。"
 
 #. ~ Description of "tequila"
 #: data/json/items/comestibles/alcohol.json
@@ -80780,7 +80780,7 @@ msgstr "干而无味的面饼，能够长时间保存而不变质。太干了，
 #. ~ Description of "juvenile sourdough starter"
 #: data/json/items/comestibles/bread.json
 msgid "A floury paste that is slowly fermenting.  Someday it will be sourdough."
-msgstr ""
+msgstr "一种缓慢发酵的面粉糊。总有一天它会变成酸面包。"
 
 #. ~ Description of "freshly fed sourdough starter"
 #: data/json/items/comestibles/bread.json
@@ -81496,7 +81496,7 @@ msgstr "一大块未煮过的龙虾肉。"
 #. ~ Description of "cooked foul meat"
 #: data/json/items/comestibles/carnivore.json
 msgid "A cooked chunk of meat from a mutated animal.  It still looks and smells all wrong."
-msgstr ""
+msgstr "一块煮熟的变异动物肉。它看起来和闻起来都不太对劲。"
 
 #. ~ Description of "cooked fish"
 #: data/json/items/comestibles/carnivore.json
@@ -81641,7 +81641,7 @@ msgstr "一些屠宰时挑选出来的内脏，还未经烹饪。富含必需的
 #. ~ Description of "chunk of tainted human meat"
 #: data/json/items/comestibles/carnivore.json
 msgid "A slab of human flesh that stinks to high heaven.  The tissue is breaking down far too quickly."
-msgstr ""
+msgstr "一块臭气熏天的人肉。组织分解得实在太快了。"
 
 #. ~ Description of "boiled human stomach"
 #: data/json/items/comestibles/carnivore.json
@@ -81666,7 +81666,7 @@ msgstr "一块厚厚的肉，表面看起来像哺乳动物的心脏。它有你
 #. ~ Description of "cooked scrap of foul meat"
 #: data/json/items/comestibles/carnivore.json
 msgid "A tiny scrap of cooked meat from a mutated animal.  It still smells unappealing."
-msgstr ""
+msgstr "一小片煮熟的变异动物肉。闻起来依然让人提不起食欲。"
 
 #. ~ Description of "scrap of fish"
 #: data/json/items/comestibles/carnivore.json
@@ -81691,7 +81691,7 @@ msgstr "一小块生的碎肉。虽然量不多，但在紧要关头也是肉。
 #. ~ Description of "portion of tainted bone marrow"
 #: data/json/items/comestibles/carnivore.json
 msgid "A wet, green chunk of spongy goop extracted from a rotten bone.  It looks and smells all wrong."
-msgstr ""
+msgstr "一块从腐骨中提取的湿漉漉的绿色海绵状黏糊糊的东西。看起来和闻起来都很不对劲。"
 
 #. ~ Description of "portion of tainted bone marrow"
 #: data/json/items/comestibles/carnivore.json
@@ -81773,7 +81773,7 @@ msgstr "呕。一团泥土、粪便、结缔组织、以及诸如毛发爪子之
 #. ~ Description of "smoked fish"
 #: data/json/items/comestibles/carnivore.json
 msgid "Fish that has been heavily smoked for long term preservation.  It could be further smoked to dehydrate it completely."
-msgstr ""
+msgstr "为长期保存而经过重度熏制的鱼。可以进一步熏制使其完全脱水。"
 
 #. ~ Description of "tainted blood"
 #: data/json/items/comestibles/carnivore.json
@@ -81783,7 +81783,7 @@ msgstr "污血正在迅速恶化。  与主人分离后，它似乎一心想尽�
 #. ~ Description of "tainted human blood"
 #: data/json/items/comestibles/carnivore.json
 msgid "Foul human blood that's rapidly getting worse.  Separated from its owner, it seems intent on congealing into a disgusting jelly as fast as possible."
-msgstr ""
+msgstr "恶臭的人血，正在迅速恶化。离开主人之后，它似乎急着要凝固成恶心的胶状物。"
 
 #. ~ Description of "mi-go ichor"
 #: data/json/items/comestibles/carnivore.json
@@ -81793,17 +81793,17 @@ msgstr "米戈体内的粘液，也许是某种血液?鉴于其粉红的颜色�
 #. ~ Description of "smoked lobster"
 #: data/json/items/comestibles/carnivore.json
 msgid "Lobster that has been heavily smoked for long term preservation.  It could be further smoked to dehydrate it completely."
-msgstr ""
+msgstr "为长期保存而经过重度熏制的龙虾。可以进一步熏制使其完全脱水。"
 
 #. ~ Description of "smoked meat"
 #: data/json/items/comestibles/carnivore.json
 msgid "Meat that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely."
-msgstr ""
+msgstr "为长期保存而经过重度熏制的肉。可以进一步熏制使其完全脱水。"
 
 #. ~ Description of "smoked mollusk"
 #: data/json/items/comestibles/carnivore.json
 msgid "Mollusk meat that has been heavily smoked for long term preservation.  It could be further smoked to dehydrate it completely."
-msgstr ""
+msgstr "为长期保存而经过重度熏制的软体动物肉。可以进一步熏制使其完全脱水。"
 
 #. ~ Description of "cooked piece of kidney"
 #: data/json/items/comestibles/carnivore.json
@@ -81839,7 +81839,7 @@ msgstr "从严重变异的人形生物身上切下的生肉块，内部散布着
 #. ~ Description of "chunk of foul meat"
 #: data/json/items/comestibles/carnivore.json
 msgid "Raw meat obviously taken from a heavily mutated animal.  It looks and smells all wrong."
-msgstr ""
+msgstr "一块显然来自重度变异动物的生肉。它看起来和闻起来都不对劲。"
 
 #. ~ Description of "mutant organs"
 #: data/json/items/comestibles/carnivore.json
@@ -81962,7 +81962,7 @@ msgstr[0] "罐装内脏"
 #: data/json/items/comestibles/carnivore.json
 msgid "chunk of foul meat"
 msgid_plural "chunks of foul meat"
-msgstr[0] ""
+msgstr[0] "一块恶臭的肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -81992,7 +81992,7 @@ msgstr[0] "五花肉块"
 #: data/json/items/comestibles/carnivore.json
 msgid "chunk of tainted human meat"
 msgid_plural "chunks of tainted human meat"
-msgstr[0] ""
+msgstr[0] "一块受污染的人肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82028,7 +82028,7 @@ msgstr[0] "熟鱼肉"
 #: data/json/items/comestibles/carnivore.json
 msgid "cooked foul meat"
 msgid_plural "cooked foul meat"
-msgstr[0] ""
+msgstr[0] "一块煮熟的恶臭肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82154,7 +82154,7 @@ msgstr[0] "熟碎鱼肉"
 #: data/json/items/comestibles/carnivore.json
 msgid "cooked scrap of foul meat"
 msgid_plural "cooked scraps of foul meat"
-msgstr[0] ""
+msgstr[0] "一块煮熟的恶臭肉屑"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82191,7 +82191,7 @@ msgstr[0] "生贝肉"
 #: data/json/items/comestibles/carnivore.json
 msgid "fried human flesh"
 msgid_plural "fried human flesh"
-msgstr[0] ""
+msgstr[0] "炸人肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82204,7 +82204,7 @@ msgstr[0] "煎肉"
 #: data/json/items/comestibles/carnivore.json
 msgid "fried mutant meat"
 msgid_plural "fried mutant meat"
-msgstr[0] ""
+msgstr[0] "炸变异肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82229,7 +82229,7 @@ msgstr[0] "人肉"
 #: data/json/items/comestibles/carnivore.json
 msgid "human jerky"
 msgid_plural "human jerky"
-msgstr[0] ""
+msgstr[0] "人肉干"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82519,7 +82519,7 @@ msgstr[0] "烤骨髓"
 #: data/json/items/comestibles/carnivore.json
 msgid "roasted human bone marrow"
 msgid_plural "roasted human bone marrow"
-msgstr[0] ""
+msgstr[0] "烤人骨髓"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82531,7 +82531,7 @@ msgstr[0] "碎鱼肉"
 #: data/json/items/comestibles/carnivore.json
 msgid "scrap of foul meat"
 msgid_plural "scraps of foul meat"
-msgstr[0] ""
+msgstr[0] "一块恶臭的肉屑"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82574,7 +82574,7 @@ msgstr[0] "熏鱼"
 #: data/json/items/comestibles/carnivore.json
 msgid "smoked foul meat"
 msgid_plural "smoked foul meat"
-msgstr[0] ""
+msgstr[0] "熏制恶臭肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82587,7 +82587,7 @@ msgstr[0] "烟熏蛙后腿"
 #: data/json/items/comestibles/carnivore.json
 msgid "smoked human flesh"
 msgid_plural "smoked human flesh"
-msgstr[0] ""
+msgstr[0] "熏制人肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82635,13 +82635,13 @@ msgstr[0] "被感染的生皮"
 #: data/json/items/comestibles/carnivore.json
 msgid "tainted human blood"
 msgid_plural "tainted human blood"
-msgstr[0] ""
+msgstr[0] "受污染的人血"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
 msgid "tainted human innards"
 msgid_plural "tainted human innards"
-msgstr[0] ""
+msgstr[0] "受污染的人内脏"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -82735,12 +82735,12 @@ msgstr "一盒甜甜的早餐麦片，里面有棉花糖。看着它，童年时
 #. ~ Description of "corn cereal"
 #: data/json/items/comestibles/cereal.json
 msgid "Unsweetened breakfast cereal made from corn.  As cereals go it's a healthier choice, but not the most exciting."
-msgstr ""
+msgstr "由玉米制成的无糖早餐麦片。在麦片里算是比较健康的选择，但算不上最吸引人的。"
 
 #. ~ Description of "wheat cereal"
 #: data/json/items/comestibles/cereal.json
 msgid "Whole-grain wheat cereal.  It's allegedly good for your heart."
-msgstr ""
+msgstr "全麦谷物麦片。据说对心脏有益。"
 
 #. ~ Item name
 #: data/json/items/comestibles/cereal.json
@@ -83445,7 +83445,7 @@ msgstr "柳树皮在水中煮制的苦茶，自古以来被人用作温和的止
 #. ~ Description of "cream soda"
 #: data/json/items/comestibles/drink.json
 msgid "A caffeine free carbonated beverage, flavorited with imitation vanilla."
-msgstr ""
+msgstr "一种无咖啡因的碳酸饮料，含有人造香草味。"
 
 #. ~ Description of "root beer"
 #: data/json/items/comestibles/drink.json
@@ -83465,7 +83465,7 @@ msgstr "含有化学添加剂和乳制品的巧克力味饮料。储存期很长
 #. ~ Description of "lemon-lime soda"
 #: data/json/items/comestibles/drink.json
 msgid "A clear, carbonated soft drink loaded with sugar and sour citrus flavor."
-msgstr ""
+msgstr "一种透明的含糖碳酸软饮料，带有浓郁的酸柑橘味。"
 
 #. ~ Description of "ayran"
 #: data/json/items/comestibles/drink.json
@@ -83520,12 +83520,12 @@ msgstr "有助健康的草药汤，把大戟花放入沸水中煮烂制成。可
 #. ~ Description of "diet energy drink"
 #: data/json/items/comestibles/drink.json
 msgid "A heavily-caffeinated soft drink spiked with artificial sweetener instead of the real thing."
-msgstr ""
+msgstr "一种含高浓度咖啡因的软饮料，添加了人造甜味剂而非真正的糖。"
 
 #. ~ Description of "energy drink"
 #: data/json/items/comestibles/drink.json
 msgid "A heavily-caffeinated soft drink, popular among those who need to stay up late or get up early."
-msgstr ""
+msgstr "一种高咖啡因软饮料，在需要熬夜或早起的人群中很受欢迎。"
 
 #. ~ Description of "grape drink"
 #: data/json/items/comestibles/drink.json
@@ -83580,22 +83580,22 @@ msgstr "一种无酒精版本的菠萝可乐达鸡尾酒，由菠萝汁和椰汁
 #. ~ Description of "caffeinated citrus soda"
 #: data/json/items/comestibles/drink.json
 msgid "An astonishingly sweet fluorescent green concoction, carbonated and dosed with almost twice the caffeine of most soft drinks."
-msgstr ""
+msgstr "一种甜得惊人的荧光绿色混合饮料，含碳酸，咖啡因含量几乎是大多数软饮料的两倍。"
 
 #. ~ Description of "sweetened coffee"
 #: data/json/items/comestibles/drink.json
 msgid "Black coffee with sweetener added to taste."
-msgstr ""
+msgstr "加甜味剂调味的黑咖啡。"
 
 #. ~ Description of "orange soda"
 #: data/json/items/comestibles/drink.json
 msgid "Caffeine free, carbonated, and citrus-sweet, this neon orange beverage has never been anywhere near a real orange."
-msgstr ""
+msgstr "无咖啡因、含碳酸、带有柑橘甜味，这种霓虹橙色的饮料从来没见过真正的橙子。"
 
 #. ~ Description of "cola"
 #: data/json/items/comestibles/drink.json
 msgid "Carbonated water loaded with sugar, caffeine, caramel color, and preservatives."
-msgstr ""
+msgstr "含糖、咖啡因、焦糖色和防腐剂的碳酸水。"
 
 #. ~ Description of "kompot"
 #: data/json/items/comestibles/drink.json
@@ -83652,7 +83652,7 @@ msgstr "由肯塔基咖啡树果实制成的自制非咖啡饮品，就像梅斯
 #. ~ Description of "sweetened coffee substitute"
 #: data/json/items/comestibles/drink.json
 msgid "Homemade not-coffee created from the Kentucky coffeetree, just like the Meskwaki tribe!  It Doesn't actually have any caffeine, but it'll pass in a pinch.  The added sweetener neutralizes the bitterness somewhat."
-msgstr ""
+msgstr "用肯塔基咖啡树自制的“非咖啡”，跟梅斯克瓦基部落做的一模一样！它其实不含任何咖啡因，但紧急情况下也能凑合。添加的甜味剂在一定程度上中和了苦味。"
 
 #. ~ Description of "sweetened milk tea"
 #: data/json/items/comestibles/drink.json
@@ -83895,7 +83895,7 @@ msgstr[0] "红茶"
 #: data/json/items/comestibles/drink.json
 msgid "caffeinated citrus soda"
 msgid_plural "caffeinated citrus soda"
-msgstr[0] ""
+msgstr[0] "含咖啡因的柑橘味汽水"
 
 #. ~ Item name
 #: data/json/items/comestibles/drink.json
@@ -83985,7 +83985,7 @@ msgstr[0] "蒲公英茶"
 #: data/json/items/comestibles/drink.json
 msgid "diet caffeinated citrus soda"
 msgid_plural "diet caffeinated citrus soda"
-msgstr[0] ""
+msgstr[0] "无糖含咖啡因柑橘味汽水"
 
 #. ~ Item name
 #: data/json/items/comestibles/drink.json
@@ -83997,7 +83997,7 @@ msgstr[0] "无糖可乐"
 #: data/json/items/comestibles/drink.json
 msgid "diet energy drink"
 msgid_plural "diet energy drink"
-msgstr[0] ""
+msgstr[0] "无糖能量饮料"
 
 #. ~ Item name
 #: data/json/items/comestibles/drink.json
@@ -85343,7 +85343,7 @@ msgstr[0] "被感染的肉块"
 #: data/json/items/comestibles/fats.json
 msgid "chunk of tainted human fat"
 msgid_plural "chunks of tainted human fat"
-msgstr[0] ""
+msgstr[0] "一块受污染的人体脂肪"
 
 #. ~ Item name
 #: data/json/items/comestibles/fats.json
@@ -85634,21 +85634,21 @@ msgstr "一些脱水后再水发的水果片，泡过水再吃更美味了。"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "Solomon's seal fruit leather"
 msgid_plural "Solomon's seal fruit leather"
-msgstr[0] ""
+msgstr[0] "玉竹果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "Solomon's seal in syrup"
 msgid_plural "Solomon's seal in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍玉竹"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "Solomon's seal jam"
 msgid_plural "Solomon's seal jam"
-msgstr[0] ""
+msgstr[0] "玉竹果酱"
 
 #. ~ Description of "lemonade drink mix"
 #: data/json/items/comestibles/fruit_dishes.json
@@ -85678,7 +85678,7 @@ msgstr ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "apple fruit leather"
 msgid_plural "apple fruit leather"
-msgstr[0] ""
+msgstr[0] "苹果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches apple
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
@@ -85686,7 +85686,7 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "apple in syrup"
 msgid_plural "apple in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍苹果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches apple
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
@@ -85694,98 +85694,98 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "apple jam"
 msgid_plural "apple jam"
-msgstr[0] ""
+msgstr[0] "苹果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "apricot fruit leather"
 msgid_plural "apricot fruit leather"
-msgstr[0] ""
+msgstr[0] "杏果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "apricot in syrup"
 msgid_plural "apricot in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍杏"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "apricot jam"
 msgid_plural "apricot jam"
-msgstr[0] ""
+msgstr[0] "杏果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "banana fruit leather"
 msgid_plural "banana fruit leather"
-msgstr[0] ""
+msgstr[0] "香蕉果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "banana in syrup"
 msgid_plural "banana in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍香蕉"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "banana jam"
 msgid_plural "banana jam"
-msgstr[0] ""
+msgstr[0] "香蕉果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "blackberries in syrup"
 msgid_plural "blackberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍黑莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "blackberry fruit leather"
 msgid_plural "blackberry fruit leather"
-msgstr[0] ""
+msgstr[0] "黑莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "blackberry jam"
 msgid_plural "blackberry jam"
-msgstr[0] ""
+msgstr[0] "黑莓果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. blueberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "blueberries in syrup"
 msgid_plural "blueberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍蓝莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. blueberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "blueberry fruit leather"
 msgid_plural "blueberry fruit leather"
-msgstr[0] ""
+msgstr[0] "蓝莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. blueberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "blueberry jam"
 msgid_plural "blueberry jam"
-msgstr[0] ""
+msgstr[0] "蓝莓果酱"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied Solomon's seal"
 msgid_plural "brandied Solomon's seal"
-msgstr[0] ""
+msgstr[0] "白兰地渍玉竹"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches apple
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
@@ -85793,63 +85793,63 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied apple"
 msgid_plural "brandied apple"
-msgstr[0] ""
+msgstr[0] "白兰地渍苹果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied apricot"
 msgid_plural "brandied apricot"
-msgstr[0] ""
+msgstr[0] "白兰地渍杏"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied banana"
 msgid_plural "brandied banana"
-msgstr[0] ""
+msgstr[0] "白兰地渍香蕉"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied blackberry"
 msgid_plural "brandied blackberry"
-msgstr[0] ""
+msgstr[0] "白兰地渍黑莓"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. blueberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied blueberry"
 msgid_plural "brandied blueberry"
-msgstr[0] ""
+msgstr[0] "白兰地渍蓝莓"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. cherries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied cherry"
 msgid_plural "brandied cherry"
-msgstr[0] ""
+msgstr[0] "白兰地渍樱桃"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied chokeberries"
 msgid_plural "brandied chokeberries"
-msgstr[0] ""
+msgstr[0] "白兰地渍野樱莓"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied crabapple"
 msgid_plural "brandied crabapple"
-msgstr[0] ""
+msgstr[0] "白兰地渍海棠果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied elderberry"
 msgid_plural "brandied elderberry"
-msgstr[0] ""
+msgstr[0] "白兰地渍接骨木果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -85862,195 +85862,195 @@ msgstr[0] "酒渍水果"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied grape"
 msgid_plural "brandied grape"
-msgstr[0] ""
+msgstr[0] "白兰地渍葡萄"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied grapefruit"
 msgid_plural "brandied grapefruit"
-msgstr[0] ""
+msgstr[0] "白兰地渍西柚"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied guava"
 msgid_plural "brandied guava"
-msgstr[0] ""
+msgstr[0] "白兰地渍石榴"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied hobbleberry"
 msgid_plural "brandied hobbleberry"
-msgstr[0] ""
+msgstr[0] "白兰地渍山楂"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied huckleberry"
 msgid_plural "brandied huckleberry"
-msgstr[0] ""
+msgstr[0] "白兰地渍山莓"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied kiwi"
 msgid_plural "brandied kiwi"
-msgstr[0] ""
+msgstr[0] "白兰地渍猕猴桃"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied lulo"
 msgid_plural "brandied lulo"
-msgstr[0] ""
+msgstr[0] "白兰地渍露露果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied mango"
 msgid_plural "brandied mango"
-msgstr[0] ""
+msgstr[0] "白兰地渍芒果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied mayapple"
 msgid_plural "brandied mayapple"
-msgstr[0] ""
+msgstr[0] "白兰地渍美洲曼陀罗果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied melon"
 msgid_plural "brandied melon"
-msgstr[0] ""
+msgstr[0] "白兰地渍甜瓜"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied mulberry"
 msgid_plural "brandied mulberry"
-msgstr[0] ""
+msgstr[0] "白兰地渍桑葚"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied nannyberries"
 msgid_plural "brandied nannyberries"
-msgstr[0] ""
+msgstr[0] "白兰地渍荚蒾果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied orange"
 msgid_plural "brandied orange"
-msgstr[0] ""
+msgstr[0] "白兰地渍橙子"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied papaya"
 msgid_plural "brandied papaya"
-msgstr[0] ""
+msgstr[0] "白兰地渍木瓜"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied passionfruit"
 msgid_plural "brandied passionfruit"
-msgstr[0] ""
+msgstr[0] "白兰地渍百香果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied peach"
 msgid_plural "brandied peach"
-msgstr[0] ""
+msgstr[0] "白兰地渍桃"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied pear"
 msgid_plural "brandied pear"
-msgstr[0] ""
+msgstr[0] "白兰地渍梨"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied pineapple"
 msgid_plural "brandied pineapple"
-msgstr[0] ""
+msgstr[0] "白兰地渍菠萝"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied plum"
 msgid_plural "brandied plum"
-msgstr[0] ""
+msgstr[0] "白兰地渍李子"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied pomegranate"
 msgid_plural "brandied pomegranate"
-msgstr[0] ""
+msgstr[0] "白兰地渍石榴"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied pumpkin"
 msgid_plural "brandied pumpkin"
-msgstr[0] ""
+msgstr[0] "白兰地渍南瓜"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied raspberry"
 msgid_plural "brandied raspberry"
-msgstr[0] ""
+msgstr[0] "白兰地渍覆盆子"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied rose hip"
 msgid_plural "brandied rose hip"
-msgstr[0] ""
+msgstr[0] "白兰地渍玫瑰果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied strawberry"
 msgid_plural "brandied strawberry"
-msgstr[0] ""
+msgstr[0] "白兰地渍草莓"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied tupelo fruit"
 msgid_plural "brandied tupelo fruit"
-msgstr[0] ""
+msgstr[0] "白兰地渍蓝果木果"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied watermelon"
 msgid_plural "brandied watermelon"
-msgstr[0] ""
+msgstr[0] "白兰地渍西瓜"
 
 #. ~ Conditional name for "brandied fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "brandied wintergreen berry"
 msgid_plural "brandied wintergreen berry"
-msgstr[0] ""
+msgstr[0] "白兰地渍冬青莓"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned Solomon's seal"
 msgid_plural "canned Solomon's seal"
-msgstr[0] ""
+msgstr[0] "玉竹罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches apple
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
@@ -86058,63 +86058,63 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned apple"
 msgid_plural "canned apple"
-msgstr[0] ""
+msgstr[0] "苹果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned apricot"
 msgid_plural "canned apricot"
-msgstr[0] ""
+msgstr[0] "杏罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned banana"
 msgid_plural "canned banana"
-msgstr[0] ""
+msgstr[0] "香蕉罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned blackberry"
 msgid_plural "canned blackberry"
-msgstr[0] ""
+msgstr[0] "黑莓罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. blueberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned blueberry"
 msgid_plural "canned blueberry"
-msgstr[0] ""
+msgstr[0] "蓝莓罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. cherries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned cherry"
 msgid_plural "canned cherry"
-msgstr[0] ""
+msgstr[0] "樱桃罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
 #. chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned chokeberries"
 msgid_plural "canned chokeberries"
-msgstr[0] ""
+msgstr[0] "野樱莓罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned crabapple"
 msgid_plural "canned crabapple"
-msgstr[0] ""
+msgstr[0] "海棠果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned elderberry"
 msgid_plural "canned elderberry"
-msgstr[0] ""
+msgstr[0] "接骨木果罐头"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -86127,118 +86127,118 @@ msgstr[0] "罐装水果"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned grape"
 msgid_plural "canned grape"
-msgstr[0] ""
+msgstr[0] "葡萄罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned grapefruit"
 msgid_plural "canned grapefruit"
-msgstr[0] ""
+msgstr[0] "西柚罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned guava"
 msgid_plural "canned guava"
-msgstr[0] ""
+msgstr[0] "番石榴罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned hobbleberry"
 msgid_plural "canned hobbleberry"
-msgstr[0] ""
+msgstr[0] "绊脚莓罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned huckleberry"
 msgid_plural "canned huckleberry"
-msgstr[0] ""
+msgstr[0] "越橘罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned kiwi"
 msgid_plural "canned kiwi"
-msgstr[0] ""
+msgstr[0] "猕猴桃罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned lulo"
 msgid_plural "canned lulo"
-msgstr[0] ""
+msgstr[0] "露露果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned mango"
 msgid_plural "canned mango"
-msgstr[0] ""
+msgstr[0] "芒果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned mayapple"
 msgid_plural "canned mayapple"
-msgstr[0] ""
+msgstr[0] "美洲曼陀罗果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned melon"
 msgid_plural "canned melon"
-msgstr[0] ""
+msgstr[0] "甜瓜罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned mulberry"
 msgid_plural "canned mulberry"
-msgstr[0] ""
+msgstr[0] "桑葚罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned nannyberries"
 msgid_plural "canned nannyberries"
-msgstr[0] ""
+msgstr[0] "荚蒾果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned orange"
 msgid_plural "canned orange"
-msgstr[0] ""
+msgstr[0] "橙子罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned papaya"
 msgid_plural "canned papaya"
-msgstr[0] ""
+msgstr[0] "木瓜罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned passionfruit"
 msgid_plural "canned passionfruit"
-msgstr[0] ""
+msgstr[0] "百香果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned peach"
 msgid_plural "canned peach"
-msgstr[0] ""
+msgstr[0] "桃子罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned pear"
 msgid_plural "canned pear"
-msgstr[0] ""
+msgstr[0] "梨罐头"
 
 #. ~ Item name
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
@@ -86253,14 +86253,14 @@ msgstr[0] "罐装菠萝"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned plum"
 msgid_plural "canned plum"
-msgstr[0] ""
+msgstr[0] "李子罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned pomegranate"
 msgid_plural "canned pomegranate"
-msgstr[0] ""
+msgstr[0] "石榴罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches pumpkin_cut
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
@@ -86268,97 +86268,97 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json data/json/items/comestibles/veggy_dishes.json
 msgid "canned pumpkin"
 msgid_plural "canned pumpkin"
-msgstr[0] ""
+msgstr[0] "南瓜罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned raspberry"
 msgid_plural "canned raspberry"
-msgstr[0] ""
+msgstr[0] "覆盆子罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned rose hip"
 msgid_plural "canned rose hip"
-msgstr[0] ""
+msgstr[0] "玫瑰果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned strawberry"
 msgid_plural "canned strawberry"
-msgstr[0] ""
+msgstr[0] "草莓罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned tupelo fruit"
 msgid_plural "canned tupelo fruit"
-msgstr[0] ""
+msgstr[0] "蓝果木果罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned watermelon"
 msgid_plural "canned watermelon"
-msgstr[0] ""
+msgstr[0] "西瓜罐头"
 
 #. ~ Conditional name for "canned fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "canned wintergreen berry"
 msgid_plural "canned wintergreen berry"
-msgstr[0] ""
+msgstr[0] "冬青莓罐头"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. cherries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cherries in syrup"
 msgid_plural "cherries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍樱桃"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. cherries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cherry fruit leather"
 msgid_plural "cherry fruit leather"
-msgstr[0] ""
+msgstr[0] "樱桃果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. cherries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cherry jam"
 msgid_plural "cherry jam"
-msgstr[0] ""
+msgstr[0] "樱桃果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "chokeberries in syrup"
 msgid_plural "chokeberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍野樱莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "chokeberry fruit leather"
 msgid_plural "chokeberry fruit leather"
-msgstr[0] ""
+msgstr[0] "野樱莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "chokeberry jam"
 msgid_plural "chokeberry jam"
-msgstr[0] ""
+msgstr[0] "野樱莓果酱"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked Solomon's seal"
 msgid_plural "cooked Solomon's seal"
-msgstr[0] ""
+msgstr[0] "煮玉竹"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches apple
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
@@ -86366,28 +86366,28 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked apple"
 msgid_plural "cooked apple"
-msgstr[0] ""
+msgstr[0] "煮苹果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked apricot"
 msgid_plural "cooked apricot"
-msgstr[0] ""
+msgstr[0] "煮杏"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked banana"
 msgid_plural "cooked banana"
-msgstr[0] ""
+msgstr[0] "煮香蕉"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked blackberry"
 msgid_plural "cooked blackberry"
-msgstr[0] ""
+msgstr[0] "煮黑莓"
 
 #. ~ Item name
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
@@ -86402,7 +86402,7 @@ msgstr[0] "煮蓝莓"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked cherry"
 msgid_plural "cooked cherry"
-msgstr[0] ""
+msgstr[0] "煮樱桃"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. chokeberries
@@ -236316,19 +236316,19 @@ msgstr "延长盐水管 9"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "100 gallon aquarium (drying) (obsolete)"
 msgid_plural "100 gallon aquariums (drying) (obsolete)"
-msgstr[0] ""
+msgstr[0] "100加仑水族箱（晾干中）（已废弃）"
 
 #. ~ Item name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "30 gallon aquarium (drying) (obsolete)"
 msgid_plural "30 gallon aquariums (drying) (obsolete)"
-msgstr[0] ""
+msgstr[0] "30加仑水族箱（晾干中）（已废弃）"
 
 #. ~ Item name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "50 gallon aquarium (drying) (obsolete)"
 msgid_plural "50 gallon aquariums (drying) (obsolete)"
-msgstr[0] ""
+msgstr[0] "50加仑水族箱（晾干中）（已废弃）"
 
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -257981,7 +257981,7 @@ msgstr "闪避"
 #. ~ Skill name
 #: data/json/skills.json
 msgid "ecology"
-msgstr ""
+msgstr "生态学"
 
 #. ~ Skill name
 #: data/json/skills.json
@@ -315419,7 +315419,7 @@ msgstr "你不能用 %1$s 来撬钉子。"
 
 #: src/activity_actor.cpp:7179
 msgid "You open up your kit and shave."
-msgstr "你打开了你的刮胡刀工具包，开始刮胡子"
+msgstr ".你的刮胡刀工具包，开始刮胡子."
 
 #: src/activity_actor.cpp:7202
 msgid "You give your hair a trim."
@@ -318090,7 +318090,7 @@ msgstr "按 %s 潜入水中。"
 #: src/avatar_action.cpp:515 src/avatar_action.cpp:560 src/handle_action.cpp:549
 #, c-format
 msgid "You open the %s."
-msgstr "你打开了 %s。"
+msgstr "你打开了%s。"
 
 #. ~ %1$s - vehicle name, %2$s - part name
 #: src/avatar_action.cpp:543 src/avatar_action.cpp:558 src/handle_action.cpp:514 src/handle_action.cpp:527
@@ -366521,17 +366521,17 @@ msgstr "_______未输入名字！_______"
 #: src/worldfactory.cpp:1542
 #, c-format
 msgid "Press [<color_yellow>%s</color>] to finalize your world."
-msgstr ""
+msgstr "按 [<color_yellow>%s</color>] 以完成你的世界。"
 
 #: src/worldfactory.cpp:1548
 #, c-format
 msgid "Press [<color_yellow>%s</color>] to pick a random name for your world."
-msgstr ""
+msgstr "按 [<color_yellow>%s</color>] 为你的世界取一个随机的名字。"
 
 #: src/worldfactory.cpp:1555
 #, c-format
 msgid "Press [<color_yellow>%s</color>] to see additional control information."
-msgstr ""
+msgstr "按 [<color_yellow>%s</color>] 查看额外控制信息。"
 
 #: src/worldfactory.cpp:1561
 #, c-format
@@ -366549,11 +366549,11 @@ msgstr "[<color_yellow>%s</color>]打开模组管理器"
 
 #: src/worldfactory.cpp:1582
 msgid "Are you sure you're finished?  World name will be randomly generated."
-msgstr ""
+msgstr "确定要结束吗？世界名称将随机生成。"
 
 #: src/worldfactory.cpp:1593
 msgid "Are you sure you're finished?"
-msgstr ""
+msgstr "确定完成了吗？"
 
 #: src/worldfactory.cpp:1626
 msgid "Do you want to abort World Generation?"
