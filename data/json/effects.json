@@ -3536,19 +3536,21 @@
       "fatigue_chance": [ 100 ],
       "fatigue_min_val": [ 100 ]
     },
-    "scaling_mods": { "focus_min": [ -8 ], "focus_max": [ -4 ], "focus_min_val": [ -20 ], "vomit_chance": [ 21 ], "int_mod": [ -1 ], "per_mod": [ -1 ] },
+    "scaling_mods": {
+      "focus_min": [ -8 ],
+      "focus_max": [ -4 ],
+      "focus_min_val": [ -20 ],
+      "vomit_chance": [ 21 ],
+      "int_mod": [ -1 ],
+      "per_mod": [ -1 ]
+    },
     "blood_analysis_description": "Nicotine"
   },
   {
     "type": "effect_type",
     "id": "took_antihistamine",
     "rating": "good",
-    "base_mods": {
-      "fatigue_min": [ 0 ],
-      "fatigue_max": [ 5 ],
-      "fatigue_chance": [ 600 ],
-      "fatigue_max_val": [ 200 ]
-    },
+    "base_mods": { "fatigue_min": [ 0 ], "fatigue_max": [ 5 ], "fatigue_chance": [ 600 ], "fatigue_max_val": [ 200 ] },
     "blood_analysis_description": "Diphenhydramine"
   },
   {

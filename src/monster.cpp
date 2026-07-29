@@ -3915,7 +3915,7 @@ void monster::init_from_item( item &itm )
             if( !itm.has_flag( json_flag_MUTAGEN_SAMPLE ) ) {
                 dissectable_inv.push_back( *dissectable );
             }
-                itm.remove_item( *dissectable );
+            itm.remove_item( *dissectable );
         }
     } else {
         // Must be a robot.
