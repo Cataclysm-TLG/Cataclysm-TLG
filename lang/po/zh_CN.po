@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-29 13:09+0800\n"
+"PO-Revision-Date: 2026-07-29 13:53+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -34527,47 +34527,47 @@ msgstr "强化门（木板封死）"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed ballistic glass door"
-msgstr "防弹玻璃门（关）"
+msgstr "关闭的防弹玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed bar door"
-msgstr "栏杆门（关）"
+msgstr "关闭的栏杆门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed bulkhead door"
-msgstr "舱壁门（关）"
+msgstr "关闭的舱壁门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed corrugated metal door"
-msgstr "金属卷帘门（关）"
+msgstr "关闭的金属卷帘门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed door curtain"
-msgstr "门帘（关）"
+msgstr "关闭的门帘"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed frosted glass door"
-msgstr "毛玻璃门（关）"
+msgstr "关闭的毛玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed glass door"
-msgstr "玻璃门（关）"
+msgstr "关闭的玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed grass curtain"
-msgstr "草门帘（关）"
+msgstr "关闭的草门帘"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed laminated glass door"
-msgstr "夹层玻璃门（关）"
+msgstr "关闭的夹层玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
@@ -34577,37 +34577,37 @@ msgstr "八阶段仓库"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed makeshift door"
-msgstr "简易门（关）"
+msgstr "关闭的简易门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed metal door"
-msgstr "金属门（关）"
+msgstr "关闭的金属门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed metal door with peephole"
-msgstr "猫眼金属门（关）"
+msgstr "关闭的猫眼金属门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed reinforced wood door"
-msgstr "强化木门（关）"
+msgstr "关闭的强化木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed wood door"
-msgstr "木门（关）"
+msgstr "关闭的木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed wood door with an electronic lock"
-msgstr "带电子锁的木门（关）"
+msgstr "关闭的木门（带电子锁）"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "closed wood door with peephole"
-msgstr "猫眼木门（关）"
+msgstr "关闭的猫眼木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json data/json/furniture_and_terrain/terrain-walls.json
@@ -34632,7 +34632,7 @@ msgstr "猫眼木门（损坏）"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "electronic locked metal door"
-msgstr "电子锁金属门"
+msgstr "金属门（带电子锁）"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
@@ -34657,47 +34657,47 @@ msgstr "金属墙"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open ballistic glass door"
-msgstr "防弹玻璃门（开）"
+msgstr "打开的玻璃门（防弹）"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open bar door"
-msgstr "栏杆门（开）"
+msgstr "打开的栏杆门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open bulkhead door"
-msgstr "舱壁门（开）"
+msgstr "打开的舱壁门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open corrugated metal door"
-msgstr "金属卷帘门（开）"
+msgstr "打开的金属卷帘门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open door curtain"
-msgstr "门帘（开）"
+msgstr "打开的门帘"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open frosted glass door"
-msgstr "毛玻璃门（开）"
+msgstr "打开的毛玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open glass door"
-msgstr "玻璃门（开）"
+msgstr "打开的玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open grass curtain"
-msgstr "草门帘（开）"
+msgstr "打开的草门帘"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open laminated glass door"
-msgstr "夹层玻璃门（开）"
+msgstr "打开的夹层玻璃门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
@@ -34707,37 +34707,37 @@ msgstr "八阶段仓库"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open makeshift door"
-msgstr "简易门（开）"
+msgstr "打开的简易门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open metal door"
-msgstr "金属门（开）"
+msgstr "打开的金属门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open metal door with peephole"
-msgstr "猫眼金属门（开）"
+msgstr "打开的猫眼金属门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open reinforced wood door"
-msgstr "强化木门（开）"
+msgstr "打开的强化木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open secret door"
-msgstr "秘门（开）"
+msgstr "打开的秘门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open wood door"
-msgstr "木门（开）"
+msgstr "打开的木门"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-doors.json
 msgid "open wood door with peephole"
-msgstr "猫眼木门（开）"
+msgstr "打开的猫眼木门"
 
 #. ~ Bashing failed sound of terrain "open secret door"
 #: data/json/furniture_and_terrain/terrain-doors.json
@@ -38916,7 +38916,7 @@ msgstr "门已经打开了。"
 #. succeeds
 #: data/json/furniture_and_terrain/terrain-mechanisms.json
 msgid "You opened the door!"
-msgstr "你打开了门。"
+msgstr "你打开了门！"
 
 #. ~ Message when terrain "Maintenance: green zone card reader"'s examine
 #. action succeeds
@@ -38924,7 +38924,7 @@ msgstr "你打开了门。"
 #. succeeds
 #: data/json/furniture_and_terrain/terrain-mechanisms.json
 msgid "You opened the gate!"
-msgstr "你打开了门。"
+msgstr "你打开了门！"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-mechanisms.json
