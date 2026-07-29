@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-29 11:11+0800\n"
+"PO-Revision-Date: 2026-07-29 13:09+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -17819,32 +17819,32 @@ msgstr "你发现你很难集中注意力观察你周围的环境。"
 #. ~ Description of effect type "Drunk"
 #: data/json/effects.json
 msgid "You had lots of alcohol.  Now you're feeling it."
-msgstr ""
+msgstr "你喝了不少酒。现在你开始感觉不舒服了。"
 
 #. ~ Description of effect type "Dead Drunk"
 #: data/json/effects.json
 msgid "You had so much alcohol that you're probably not going to remember this."
-msgstr ""
+msgstr "你都记不清你到底喝了多少酒了."
 
 #. ~ Description of effect type "Tipsy"
 #: data/json/effects.json
 msgid "You had some alcohol.  Party on!"
-msgstr ""
+msgstr "你喝了点酒。 尽情狂欢吧！"
 
 #. ~ Description of effect type "Buzzed"
 #: data/json/effects.json
 msgid "You had some alcohol.  You feel warm inside."
-msgstr ""
+msgstr "你喝了点酒。  感觉浑身暖洋洋的。"
 
 #. ~ Description of effect type "Wasted"
 #: data/json/effects.json
 msgid "You had too much alcohol.  It's the end of the world, what do you care?"
-msgstr ""
+msgstr "你喝的太多酒了.但现在是世界末日了，管他呢！"
 
 #. ~ Death message of effect type "Cocaine Buzz, Coked Up, Geeked, Whiteout"
 #: data/json/effects.json
 msgid "You have a heart attack!"
-msgstr ""
+msgstr "你心脏病发作了！"
 
 #. ~ Description of effect type "Dirty Wound, Contaminated Wound"
 #: data/json/effects.json
@@ -17876,7 +17876,7 @@ msgstr "你被攻击抓住并固定在原地。 在打破抓斗之前，您无�
 #. ~ Description of effect type "Necrotic Poison"
 #: data/json/effects.json
 msgid "You have been horribly poisoned!"
-msgstr ""
+msgstr "你已经严重中毒了！"
 
 #. ~ Description of effect type "Poisoned"
 #: data/json/effects.json
@@ -17891,7 +17891,7 @@ msgstr "你最近打了流感疫苗。"
 #. ~ Description of effect type "Major Smoke Inhalation"
 #: data/json/effects.json
 msgid "You have breathed in a significant amount of smoke."
-msgstr ""
+msgstr "你吸入了大量烟雾。"
 
 #. ~ Description of effect type "Influenza"
 #: data/json/effects.json
@@ -17933,7 +17933,7 @@ msgstr "你最近服用了抗哮喘药物。"
 #. ~ Description of effect type "Itchy, Very Itchy, Terribly Itchy"
 #: data/json/effects.json
 msgid "You have to fight the urge to scratch yourself."
-msgstr ""
+msgstr "你强忍着不去挠自己。"
 
 #. ~ Description of effect type "Lacking Sleep"
 #: data/json/effects.json
@@ -18011,7 +18011,7 @@ msgstr "你气喘吁吁，无法停止脚步，充满饥饿。"
 #. Withdrawal, Severe Alcohol Withdrawal"
 #: data/json/effects.json
 msgid "You really need a drink!"
-msgstr ""
+msgstr "你真得来一杯了！"
 
 #. ~ Description of effect type "Recently Trained"
 #: data/json/effects.json
@@ -18076,7 +18076,7 @@ msgstr ""
 #. ~ Description of effect type "Moderate Opioid Withdrawal"
 #: data/json/effects.json
 msgid "You swing between fever and chills, and you can't stop thinking about painkillers."
-msgstr ""
+msgstr "你在发烧和发冷之间反复折腾，满脑子都是止痛药。"
 
 #. ~ Description of effect type "Chiropteran Transformation"
 #: data/json/effects.json
@@ -18110,7 +18110,7 @@ msgid ""
 "Prescription note says its effect duration may vary, so your estimate may be inaccurate."
 msgstr ""
 "不久前你服用了抗惊厥药物，你可能仍然受它的影响。\n"
-"处方说明它的效果持续时间可能会有所差异，因此你的估计可能不准确。"
+"处方说明它的效果持续时间可能因人而异，因此你的估计可能不准确。"
 
 #. ~ Description of effect type "Melatonin Supplements"
 #: data/json/effects.json
@@ -18150,7 +18150,7 @@ msgstr "你被电击了！"
 #. ~ Description of effect type "Electrocuted"
 #: data/json/effects.json
 msgid "You're being shocked with electricity to the point of serious harm!"
-msgstr "你被电击并造成了严重伤害！"
+msgstr "你正遭受电击，已受到严重伤害！"
 
 #. ~ Apply message of effect type "Minor Bleeding, Bleeding, Bad Bleeding,
 #. Heavy Bleeding, Heavy Arterial Bleeding"
@@ -18214,12 +18214,12 @@ msgstr "你被恶臭黏液恶心到了。"
 #. ~ Description of effect type "Coked Up"
 #: data/json/effects.json
 msgid "You're feeling chatty and energized, and probably way too confident."
-msgstr ""
+msgstr "你感到健谈、精力充沛，而且有点自信心膨胀了。"
 
 #. ~ Description of effect type "Severe Opioid Withdrawal"
 #: data/json/effects.json
 msgid "You're horribly sick.  Everything hurts, and not a moment goes by that you aren't desperate to get your fix."
-msgstr ""
+msgstr "你病得厉害。浑身都疼，每一刻都在疯狂地渴望着你的“药”。"
 
 #. ~ Apply message of effect type "Downed"
 #: data/json/effects.json
@@ -18259,7 +18259,7 @@ msgstr ""
 #. ~ Description of effect type "Heavy Opioid High"
 #: data/json/effects.json
 msgid "You're really out of it.  That's OK…"
-msgstr ""
+msgstr "你真的是昏了头了。不过，也没关系……"
 
 #. ~ Description of effect type "Assisted"
 #: data/json/effects.json
@@ -18275,12 +18275,12 @@ msgstr "你气喘吁吁。跑步及打斗都将更困难，直到你回复。"
 #. ~ Description of effect type "Winded (Tentacles)"
 #: data/json/effects.json
 msgid "You're short of breath.  Your arms have impaired function until you recover."
-msgstr ""
+msgstr "你感到呼吸不畅。你的手臂功能受损，直到彻底健康才能恢复。"
 
 #. ~ Description of effect type "Winded (Foot)"
 #: data/json/effects.json
 msgid "You're short of breath.  Your foot has impaired function until you recover."
-msgstr ""
+msgstr "你感到呼吸不畅。脚部功能受损，直到彻底健康才能恢复。"
 
 #. ~ Description of effect type "Winded (Left Arm)"
 #: data/json/effects.json
@@ -18295,7 +18295,7 @@ msgstr "你气喘吁吁，在你恢复前左腿功能受损。"
 #. ~ Description of effect type "Winded (Crab Leg)"
 #: data/json/effects.json
 msgid "You're short of breath.  Your leg has impaired function until you recover."
-msgstr ""
+msgstr "你感到呼吸不畅。腿部功能受损，直到彻底健康才能恢复。"
 
 #. ~ Description of effect type "Winded (Right Arm)"
 #: data/json/effects.json
@@ -18310,7 +18310,7 @@ msgstr "你气喘吁吁，在你恢复前右腿功能受损。"
 #. ~ Description of effect type "Nodding Out"
 #: data/json/effects.json
 msgid "You're so high that it's difficult to keep your eyes open."
-msgstr ""
+msgstr "你嗨的眼睛都睁不开了."
 
 #. ~ Description of effect type "Bile Splashed"
 #: data/json/effects.json
@@ -18330,7 +18330,7 @@ msgstr "你踩到了淤泥！"
 #. ~ Description of effect type "Mild Alcohol Withdrawal"
 #: data/json/effects.json
 msgid "You're starting to feel sick.  You know a drink would fix this."
-msgstr ""
+msgstr "你开始感到难受了。得喝一杯才能缓解。"
 
 #. ~ Description of effect type "Stuck in a Pit"
 #: data/json/effects.json
@@ -18350,7 +18350,7 @@ msgstr "你正在撕裂自己。需要重新修好。应该再给你缝几针。
 #. ~ Miss message of effect type "Stoned, Baked, Blazed, Zooted"
 #: data/json/effects.json
 msgid "You're too stoned to keep up."
-msgstr ""
+msgstr "你太嗨了，跟不上进攻节奏。"
 
 #. ~ Miss message of effect type "Common Cold"
 #. ~ Miss message of effect type "Influenza"
@@ -18504,7 +18504,7 @@ msgstr "你身上沾了一点酸。"
 #. ~ Description of effect type "Cocaine Buzz"
 #: data/json/effects.json
 msgid "You've got a mild cocaine buzz going.  Feels good, feels clean."
-msgstr ""
+msgstr "你正处于轻微的可卡因兴奋中。感觉不错，大脑一片宁静。"
 
 #. ~ Description of effect type "Acid Splashed"
 #: data/json/effects.json
@@ -18514,7 +18514,7 @@ msgstr "你身上沾了一点酸液。"
 #. ~ Description of effect type "Caffeine Overdose"
 #: data/json/effects.json
 msgid "You've had far too much caffeine.  You feel shaky and irritable."
-msgstr ""
+msgstr "你摄入了太多咖啡因，感到心慌和烦躁。"
 
 #. ~ Description of effect type "Glowing Gas"
 #: data/json/effects.json
@@ -18633,7 +18633,7 @@ msgstr "%s 淋湿了。"
 #. ~ Description of effect type "Opioid Painkillers"
 #: data/json/effects.json
 msgid "Your aches and pains don't feel as bad."
-msgstr ""
+msgstr "你感觉不是那么疼了."
 
 #. ~ Description of effect type "Charged Acid Glands"
 #: data/json/effects.json
@@ -18689,7 +18689,7 @@ msgstr "你的血液量回升，感觉休克的症状好多了，但仍然面色
 #. ~ Description of effect type "Moderate Alcohol Withdrawal"
 #: data/json/effects.json
 msgid "Your body aches and you have chills, like you've got the flu."
-msgstr ""
+msgstr "你浑身酸痛，还发冷，就像得了流感一样。"
 
 #. ~ Description of effect type "Chimera Metamorphosis"
 #: data/json/effects.json
@@ -18699,7 +18699,7 @@ msgstr "你的身体艰难地起伏和变化，但杀不死你的东西只会让
 #. ~ Description of effect type "Severe Opioid Overdose"
 #: data/json/effects.json
 msgid "Your body is shutting down."
-msgstr ""
+msgstr "你的身体正在衰竭。"
 
 #. ~ Description of effect type "Weakened Inertia"
 #: data/json/effects.json
@@ -18722,7 +18722,7 @@ msgstr "你喘不过气来！"
 #. Overdose"
 #: data/json/effects.json
 msgid "Your breathing grows weaker and weaker, and then you are gone."
-msgstr ""
+msgstr "你的呼吸越来越微弱，然后你死了。"
 
 #. ~ Description of effect type "Maimed Legs"
 #: data/json/effects.json
@@ -18737,7 +18737,7 @@ msgstr "你身上的电容流淌着生物电，发出光亮。"
 #. ~ Description of effect type "Mild Smoke Inhalation"
 #: data/json/effects.json
 msgid "Your chest and throat burn a little."
-msgstr ""
+msgstr "你的胸部和喉咙有点灼痛。"
 
 #. ~ Apply message of effect type "Molting"
 #: data/json/effects.json
@@ -18757,12 +18757,12 @@ msgstr "药效一过你直接虚脱了。"
 #. ~ Remove message of effect type "Disabled"
 #: data/json/effects.json
 msgid "Your disabled body part has recovered enough for use."
-msgstr ""
+msgstr "你受损的身体部位已恢复，可以正常使用了。"
 
 #. ~ Description of effect type "Nicotine Withdrawal"
 #: data/json/effects.json
 msgid "Your ears ring and your head is pounding."
-msgstr ""
+msgstr "你耳鸣不止，头疼欲裂。"
 
 #. ~ Apply message of effect type "Impaired Hearing, Ringing Ears, Deaf"
 #: data/json/effects.json
@@ -18784,13 +18784,13 @@ msgstr "你的眼睛发痒，不断流着鼻涕。"
 #. Eye Irritation, Severe Eye Irritation"
 #: data/json/effects.json
 msgid "Your eyes are so badly inflamed that you can hardly see."
-msgstr ""
+msgstr "你的眼睛严重发炎，几乎看不清东西。"
 
 #. ~ Miss message of effect type "Mild Eye Irritation, Eye Irritation, Major
 #. Eye Irritation, Severe Eye Irritation"
 #: data/json/effects.json
 msgid "Your eyes are so irritated you can barely see."
-msgstr ""
+msgstr "你的眼睛刺痛难忍，几乎看不清东西。"
 
 #. ~ Description of effect type "Eye Irritation"
 #. ~ Apply message of effect type "Mild Eye Irritation, Eye Irritation, Major
@@ -18804,7 +18804,7 @@ msgstr "你泪流不止。"
 #. Eye Irritation, Severe Eye Irritation"
 #: data/json/effects.json
 msgid "Your eyes burn a little."
-msgstr ""
+msgstr "你的眼睛有点灼痛。"
 
 #. ~ Miss message of effect type "Tear Gas"
 #: data/json/effects.json
@@ -19074,7 +19074,7 @@ msgstr "你的尾巴残废了。这种消息听起来真够无厘头的。"
 #. ~ Description of effect type "Tweaking"
 #: data/json/effects.json
 msgid "Your thoughts are going a mile a minute.  Your whole body is burning up with chattery, nervous energy."
-msgstr ""
+msgstr "你的思绪飘远了。身体因焦躁不安的情绪而燥热难耐。"
 
 #. ~ Description of effect type "Wandering Mind"
 #: data/json/effects.json
@@ -19126,12 +19126,12 @@ msgstr "被电击"
 #. ~ Vitamin name
 #: data/json/effects.json data/json/vitamin.json
 msgid "Zolpidem"
-msgstr ""
+msgstr "唑吡坦"
 
 #. ~ Name of effect type id "weed_high"
 #: data/json/effects.json
 msgid "Zooted"
-msgstr ""
+msgstr "嗨爆了"
 
 #. ~ Remove message of effect type "Transition Contact Lenses (Plano)"
 #: data/json/effects.json
@@ -19162,7 +19162,7 @@ msgstr "你想要一些咖啡因来提提神。"
 #. "EOC_CAFFEINE_ADDICTION"
 #: data/json/effects_on_condition/addictions_eocs.json
 msgid "You've got a headache.  You need caffeine to function."
-msgstr ""
+msgstr "你感觉头很疼。需要咖啡因才能打起精神。"
 
 #. ~ Player message in effect in EoC "EOC_CANCEL_FALLOUT_MESSAGE"
 #: data/json/effects_on_condition/anamolous_weather_eocs.json
