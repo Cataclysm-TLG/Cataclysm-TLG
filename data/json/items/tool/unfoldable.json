@@ -22,6 +22,7 @@
     "description": "A folded Bicycle.",
     "weight": "20786 g",
     "volume": "18500 ml",
+    "longest_side": "90 cm",
     "symbol": "0",
     "color": "light_gray",
     "variables": {
@@ -38,6 +39,7 @@
     "description": "A folded Wheelchair.",
     "weight": "10586 g",
     "volume": "12000 ml",
+    "longest_side": "90 cm",
     "symbol": "/",
     "color": "light_gray",
     "variables": {
@@ -70,6 +72,7 @@
     "description": "A skateboard.",
     "weight": "2898 g",
     "volume": "3750 ml",
+    "longest_side": "80 cm",
     "symbol": "/",
     "color": "light_gray",
     "variables": {
