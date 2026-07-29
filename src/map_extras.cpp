@@ -633,13 +633,13 @@ static bool mx_minefield( map &, const tripoint_abs_sm &abs_sub )
             }
         }
 
-        //50% chance to spawn a blood trail of wounded soldier trying to escape,
-        //but eventually died out of blood loss and wounds and got devoured by zombies
+        // 50% chance to spawn a blood trail of wounded soldier trying to escape,
+        // but eventually died out of blood loss and wounds.
         if( one_in( 2 ) ) {
             m.add_splatter_trail( fd_blood, { 9, 15, abs_sub.z()}, {11, 18, abs_sub.z()} );
             m.add_splatter_trail( fd_blood, { 11, 18, abs_sub.z()}, {11, 21, abs_sub.z()} );
             for( const tripoint_omt_ms &loc : m.points_in_radius( tripoint_omt_ms{ 11, 21, abs_sub.z()}, 1 ) ) {
-                //50% chance to spawn gibs in every tile around corpse in 1-tile radius
+                // 50% chance to spawn gibs in every tile around corpse in 1-tile radius.
                 if( one_in( 2 ) ) {
                     m.add_field( { loc.xy(), abs_sub.z()}, fd_gibs_flesh, rng( 1, 3 ) );
                 }

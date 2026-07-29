@@ -495,9 +495,7 @@ mtype MonsterGenerator::generate_fake_pseudo_dormant_monster( const mtype &mon )
     //        "description" : "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
     //        "copy-from" : "mon_zombie",
     //        "looks_like" : "corpse_mon_zombie",
-    //        "hp" : 5,
-    //        "speed" : 1,
-    //        "flags" : ["FILTHY", "REVIVES", "DORMANT", "QUIETDEATH"] ,
+    //        "flags" : ["FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     //        "zombify_into" : "mon_zombie",
     //        "special_attacks" : [
     //    {

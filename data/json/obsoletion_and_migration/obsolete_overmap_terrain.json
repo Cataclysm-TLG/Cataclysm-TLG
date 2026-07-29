@@ -289,7 +289,17 @@
       "farm_isherwood_6_west": "farm_6_west",
       "farm_isherwood_7_west": "farm_7_west",
       "special_forest_isherwood": "special_forest",
-      "special_forest_thick_isherwood": "special_forest_thick"
+      "special_forest_thick_isherwood": "special_forest_thick",
+      "smallscrapyard_ocu": "smallscrapyard",
+      "smallscrapyard_ocu_roof": "smallscrapyard_roof",
+      "smallscrapyard_ocu_south": "smallscrapyard_south",
+      "smallscrapyard_ocu_roof_south": "smallscrapyard_roof_south",
+      "smallscrapyard_ocu_north": "smallscrapyard_north",
+      "smallscrapyard_ocu_roof_north": "smallscrapyard_roof_north",
+      "smallscrapyard_ocu_west": "smallscrapyard_west",
+      "smallscrapyard_ocu_roof_west": "smallscrapyard_roof_west",
+      "smallscrapyard_ocu_east": "smallscrapyard_east",
+      "smallscrapyard_ocu_roof_east": "smallscrapyard_roof_east"
     }
   }
 ]

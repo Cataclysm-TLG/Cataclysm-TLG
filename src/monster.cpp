@@ -2336,7 +2336,8 @@ void monster::apply_damage( Creature *source, bodypart_id /*bp*/, int dam,
     }
 
     if( hp < 1 ) {
-        set_killer( source );
+        map &here = get_map();
+        die( &here, source );
     } else if( dam > 0 ) {
         process_trigger( mon_trigger::HURT, 1 + static_cast<int>( dam / 3 ) );
         // Get angry at characters if hurt by one
@@ -3114,7 +3115,7 @@ void monster::die( map *here, Creature *nkiller )
     }
 
     if( type->mdeath_effect.eoc.has_value() ) {
-        //Not a hallucination, go process the death effects.
+        // Not a hallucination, go process the death effects.
         if( type->mdeath_effect.eoc.value().is_valid() ) {
             dialogue d( get_talker_for( *this ), nullptr );
             type->mdeath_effect.eoc.value()->activate( d );
@@ -3877,14 +3878,13 @@ bool monster::is_nemesis() const
 void monster::init_from_item( item &itm )
 {
     if( itm.is_corpse() ) {
-        set_speed_base( get_speed_base() * 0.8 );
+        set_speed_base( get_speed_base() );
         const int burnt_penalty = itm.burnt;
-        hp = static_cast<int>( hp * 0.7 );
         if( itm.damage_level() > 0 ) {
             if( itm.damage_level() > 1 ) {
-                set_speed_base( speed_base / 2 );
+                set_speed_base( speed_base * ( itm.damage_level() / 10.0 ) );
             }
-            hp /= itm.damage_level() + 1;
+            hp -= hp * ( rng_float( 0.5, 1.8 ) * itm.damage_level() / 10.0 );
         }
 
         hp -= burnt_penalty;
@@ -3915,7 +3915,7 @@ void monster::init_from_item( item &itm )
             if( !itm.has_flag( json_flag_MUTAGEN_SAMPLE ) ) {
                 dissectable_inv.push_back( *dissectable );
             }
-                itm.remove_item( *dissectable );
+            itm.remove_item( *dissectable );
         }
     } else {
         // Must be a robot.
@@ -3938,7 +3938,7 @@ item monster::to_item() const
     int percent_damage = std::max( 0, ( max_dmg + 1 ) - damfac );
 
     // Throwing a rock shouldn't gib a rabbit. Let's gate damage for sanity's sake.
-    int allowed_damage = std::clamp( -hp / 5, 0, 5 );
+    int allowed_damage = std::clamp( -hp / std::max( 5, ( type->hp / 10 ) ), 0, 5 );
     int final_damage = std::min( percent_damage, allowed_damage );
     result.set_damage( final_damage );
     return result;
