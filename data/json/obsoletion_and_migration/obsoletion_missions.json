@@ -377,5 +377,73 @@
     "global": true,
     "condition": { "u_has_mission": "MISSION_INVESTIGATE_TRADER" },
     "effect": [ { "remove_active_mission": "MISSION_INVESTIGATE_TRADER" } ]
+  },
+  {
+    "id": "MISSION_SCRAP_TRADER_GET_25_MAGNETRON",
+    "type": "mission_definition",
+    "name": { "str": "Collect 25 Magnetrons" },
+    "description": "Obsolete mission from removed scrap trader.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_GET_25_MAGNETRON_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_SCRAP_TRADER_GET_25_MAGNETRON" },
+    "effect": [ { "remove_active_mission": "MISSION_SCRAP_TRADER_GET_25_MAGNETRON" } ]
+  },
+  {
+    "id": "MISSION_SCRAP_TRADER_GET_75_CHARCOAL",
+    "type": "mission_definition",
+    "name": { "str": "Collect 25 Magnetrons" },
+    "description": "Obsolete mission from removed scrap trader.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_GET_75_CHARCOAL_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_SCRAP_TRADER_GET_75_CHARCOAL" },
+    "effect": [ { "remove_active_mission": "MISSION_SCRAP_TRADER_GET_75_CHARCOAL" } ]
+  },
+  {
+    "id": "MISSION_SCRAP_TRADER_GET_100_SOLDER",
+    "type": "mission_definition",
+    "name": { "str": "Collect 25 Magnetrons" },
+    "description": "Obsolete mission from removed scrap trader.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_GET_100_SOLDER_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_SCRAP_TRADER_GET_100_SOLDER" },
+    "effect": [ { "remove_active_mission": "MISSION_SCRAP_TRADER_GET_100_SOLDER" } ]
+  },
+  {
+    "id": "MISSION_SCRAP_TRADER_SET_TRADE_ROUTE",
+    "type": "mission_definition",
+    "name": { "str": "Collect 25 Magnetrons" },
+    "description": "Obsolete mission from removed scrap trader.",
+    "goal": "MGOAL_GO_TO",
+    "difficulty": 0,
+    "value": 0,
+    "has_generic_rewards": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MISSION_SET_TRADE_ROUTE_CLEANUP",
+    "global": true,
+    "condition": { "u_has_mission": "MISSION_SCRAP_TRADER_SET_TRADE_ROUTE" },
+    "effect": [ { "remove_active_mission": "MISSION_SCRAP_TRADER_SET_TRADE_ROUTE" } ]
   }
 ]

@@ -28,5 +28,10 @@
     "type": "overmap_special_migration",
     "id": "Hunting Lodge - Normal",
     "new_id": "Hunting Lodge"
+  },
+    {
+    "type": "overmap_special_migration",
+    "id": "Occupied Scrap Yard",
+    "new_id": "Scrapyard 1"
   }
 ]

@@ -89,5 +89,12 @@
     "name": { "str": "Trader" },
     "job_description": "Obsolete class from removed Hub 01 Ancilla Bar NPC.",
     "common": false
+  },
+  {
+    "type": "npc_class",
+    "id": "SCRAP_MERCHANT",
+    "name": { "str": "Scrap Merchant" },
+    "job_description": "Obsolete class from removed scrap merchant.",
+    "common": false
   }
 ]
