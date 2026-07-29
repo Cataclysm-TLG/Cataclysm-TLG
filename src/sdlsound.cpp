@@ -861,11 +861,11 @@ struct sound_effect_handler {
         }
 
         unsigned int chunk_already_playing_count = 0;
-        for ( int ch = 0; ch <= 128; ch++ ) {
-            if ( Mix_Playing( ch ) ) {
+        for( int ch = 0; ch <= 128; ch++ ) {
+            if( Mix_Playing( ch ) ) {
                 const Mix_Chunk *chunk = Mix_GetChunk( ch );
                 chunk_already_playing_count += static_cast<unsigned int>( chunk == audio_src );
-                if ( chunk_already_playing_count == 2 ) {
+                if( chunk_already_playing_count == 2 ) {
                     return true;
                 }
             }
