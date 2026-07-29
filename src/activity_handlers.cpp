@@ -231,6 +231,7 @@ static const quality_id qual_FISHING_ROD( "FISHING_ROD" );
 
 static const skill_id skill_computer( "computer" );
 static const skill_id skill_firstaid( "firstaid" );
+static const skill_id skill_social( "social" );
 static const skill_id skill_survival( "survival" );
 
 static const species_id species_FERAL( "FERAL" );
@@ -2137,7 +2138,12 @@ void activity_handlers::train_finish( player_activity *act, Character *you )
         const Skill &skill = sk.obj();
         std::string skill_name = skill.name();
         int old_skill_level = you->get_knowledge_level( sk );
-        you->practice( sk, 100, old_skill_level + 2 );
+        // Teacher intelligence, subject matter knowledge, and social skill matters most.
+        // Student intelligence and social skill is secondary.
+        int teacher_quality = ( teacher->get_int() + ( teacher->get_skill_level( skill_social ) + teacher->get_knowledge_level( sk ) ) ) * 4;
+        int student_quality = ( you->get_int() + (you->get_skill_level( skill_social ) * 2 ) ) * 4;
+        int teaching_effectiveness = std::min( 200, std::max( 10, ( teacher_quality * 2 + student_quality ) / 2 ) );
+        you->practice( sk, teaching_effectiveness, old_skill_level + 2 );
         int new_skill_level = you->get_knowledge_level( sk );
         if( old_skill_level != new_skill_level ) {
             if( you->is_avatar() ) {
