@@ -860,6 +860,17 @@ struct sound_effect_handler {
             channels_to_end_mutex.unlock();
         }
 
+        unsigned int chunk_already_playing_count = 0;
+        for ( int ch = 0; ch <= 128; ch++ ) {
+            if ( Mix_Playing( ch ) ) {
+                const Mix_Chunk *chunk = Mix_GetChunk( ch );
+                chunk_already_playing_count += static_cast<unsigned int>( chunk == audio_src );
+                if ( chunk_already_playing_count == 2 ) {
+                    return true;
+                }
+            }
+        }
+
         sound_effect_handler *handler = new sound_effect_handler();
         handler->active = true;
         handler->audio_src = audio_src;
