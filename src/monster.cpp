@@ -3884,7 +3884,8 @@ void monster::init_from_item( item &itm )
             if( itm.damage_level() > 1 ) {
                 set_speed_base( speed_base * ( itm.damage_level() / 10.0 ) );
             }
-            hp -= hp * ( rng_float( 0.5, 1.8 ) * itm.damage_level() / 10.0 );
+            hp -= static_cast<int>( std::max( 1.0, hp * ( ( ( rng_float( 0.5,
+                                              1.9 ) * itm.damage_level() + 1.0 ) / 10.0 ) ) ) );
         }
 
         hp -= burnt_penalty;

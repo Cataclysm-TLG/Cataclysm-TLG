@@ -2562,7 +2562,6 @@ std::string cata_tiles::get_multitile_base_id( const std::string &id,
 {
     if( category == TILE_CATEGORY::TERRAIN ) {
         const ter_t &current = ter_str_id( id ).obj();
-
         for( const ter_t &candidate : get_all_terrain_types() ) {
             if( candidate.id == current.id ||
                 candidate.connect_groups != current.connect_groups ) {
@@ -2575,7 +2574,6 @@ std::string cata_tiles::get_multitile_base_id( const std::string &id,
             }
         }
     }
-
     return id;
 }
 
