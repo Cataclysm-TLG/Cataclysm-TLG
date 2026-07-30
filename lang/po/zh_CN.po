@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-30 01:01+0800\n"
+"PO-Revision-Date: 2026-07-30 13:21+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -65586,7 +65586,7 @@ msgstr[0] "锁环胸甲"
 #: data/json/items/armor/torso_armor.json
 msgid "chainmail vest (loose)"
 msgid_plural "chainmail vest (loose)s"
-msgstr[0] "锁环胸甲"
+msgstr[0] "锁环胸甲（背心）"
 
 #. ~ Item name
 #: data/json/items/armor/torso_armor.json
@@ -65640,19 +65640,19 @@ msgstr[0] "钢制镜甲"
 #: data/json/items/armor/torso_armor.json
 msgid "motorcycle armor"
 msgid_plural "motorcycle armors"
-msgstr[0] "摩托车手上衣"
+msgstr[0] "摩托车护甲"
 
 #. ~ Item name
 #: data/json/items/armor/torso_armor.json
 msgid "padded sweatshirt"
 msgid_plural "padded sweatshirts"
-msgstr[0] "运动衫"
+msgstr[0] "运动衫（厚）"
 
 #. ~ Item name
 #: data/json/items/armor/torso_armor.json
 msgid "padded vest"
 msgid_plural "padded vests"
-msgstr[0] "衬布衬衫"
+msgstr[0] "马甲（厚）"
 
 #. ~ Item name
 #: data/json/items/armor/torso_armor.json
@@ -65702,7 +65702,7 @@ msgstr "一件有着醒目颜色的，能让你在水上保持垂直漂浮的背
 #. ~ Description of "grass shirt"
 #: data/json/items/armor/torso_clothes.json
 msgid "A crude and bulky short-sleeved shirt woven from grass.  Definitely not the most comfortable thing to wear."
-msgstr "一件粗糙而笨重的短袖衬衫，由草编织而成。绝对不是最舒服的衣服。"
+msgstr "一件用草编织的粗制宽大短袖衬衫。绝对不是穿着最舒服的衣服。"
 
 #. ~ Description of "makeshift flotation vest"
 #: data/json/items/armor/torso_clothes.json
@@ -65712,7 +65712,7 @@ msgstr "一件用充满气的动物毛皮制造而成的救生衣。"
 #. ~ Description of "wool hoodie"
 #: data/json/items/armor/torso_clothes.json
 msgid "A hooded wool shirt with a kangaroo pocket in the front."
-msgstr "一件带有兜帽和前置口袋的卫衣。"
+msgstr "一件带兜帽的羊毛衬衫，正面有一个袋鼠口袋。"
 
 #. ~ Description of variant "French maid outfit" of item "skimpy costume
 #. dress"
@@ -86409,27 +86409,27 @@ msgstr[0] "煮樱桃"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked chokeberries"
 msgid_plural "cooked chokeberries"
-msgstr[0] ""
+msgstr[0] "煮野樱莓"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. coconut_flesh
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked coconut"
 msgid_plural "cooked coconut"
-msgstr[0] ""
+msgstr[0] "煮椰子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked crabapple"
 msgid_plural "cooked crabapple"
-msgstr[0] ""
+msgstr[0] "煮海棠果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked elderberry"
 msgid_plural "cooked elderberry"
-msgstr[0] ""
+msgstr[0] "煮接骨木果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -86442,159 +86442,159 @@ msgstr[0] "煮水果"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked grape"
 msgid_plural "cooked grape"
-msgstr[0] ""
+msgstr[0] "煮葡萄"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked grapefruit"
 msgid_plural "cooked grapefruit"
-msgstr[0] ""
+msgstr[0] "煮西柚"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked guava"
 msgid_plural "cooked guava"
-msgstr[0] ""
+msgstr[0] "煮番石榴"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked hobbleberry"
 msgid_plural "cooked hobbleberry"
-msgstr[0] ""
+msgstr[0] "煮绊脚莓"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked huckleberry"
 msgid_plural "cooked huckleberry"
-msgstr[0] ""
+msgstr[0] "煮越橘"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked kiwi"
 msgid_plural "cooked kiwi"
-msgstr[0] ""
+msgstr[0] "煮猕猴桃"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked lulo"
 msgid_plural "cooked lulo"
-msgstr[0] ""
+msgstr[0] "煮露露果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked mango"
 msgid_plural "cooked mango"
-msgstr[0] ""
+msgstr[0] "煮芒果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked mayapple"
 msgid_plural "cooked mayapple"
-msgstr[0] ""
+msgstr[0] "煮美洲曼陀罗果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked melon"
 msgid_plural "cooked melon"
-msgstr[0] ""
+msgstr[0] "煮甜瓜"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked mulberry"
 msgid_plural "cooked mulberry"
-msgstr[0] ""
+msgstr[0] "煮桑葚"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked nannyberries"
 msgid_plural "cooked nannyberries"
-msgstr[0] ""
+msgstr[0] "煮荚蒾果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked orange"
 msgid_plural "cooked orange"
-msgstr[0] ""
+msgstr[0] "煮橙子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked papaya"
 msgid_plural "cooked papaya"
-msgstr[0] ""
+msgstr[0] "煮木瓜"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked passionfruit"
 msgid_plural "cooked passionfruit"
-msgstr[0] ""
+msgstr[0] "煮百香果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked peach"
 msgid_plural "cooked peach"
-msgstr[0] ""
+msgstr[0] "煮桃子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked pear"
 msgid_plural "cooked pear"
-msgstr[0] ""
+msgstr[0] "煮梨"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked pineapple"
 msgid_plural "cooked pineapple"
-msgstr[0] ""
+msgstr[0] "煮菠萝"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked plum"
 msgid_plural "cooked plum"
-msgstr[0] ""
+msgstr[0] "煮李子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked pomegranate"
 msgid_plural "cooked pomegranate"
-msgstr[0] ""
+msgstr[0] "煮石榴"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked pumpkin"
 msgid_plural "cooked pumpkin"
-msgstr[0] ""
+msgstr[0] "煮南瓜"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked raspberry"
 msgid_plural "cooked raspberry"
-msgstr[0] ""
+msgstr[0] "煮覆盆子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked rose hip"
 msgid_plural "cooked rose hip"
-msgstr[0] ""
+msgstr[0] "煮玫瑰果"
 
 #. ~ Item name
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
@@ -86609,49 +86609,49 @@ msgstr[0] "煮草莓"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked tupelo fruit"
 msgid_plural "cooked tupelo fruit"
-msgstr[0] ""
+msgstr[0] "煮蓝果木果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked watermelon"
 msgid_plural "cooked watermelon"
-msgstr[0] ""
+msgstr[0] "煮西瓜"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked wintergreen berry"
 msgid_plural "cooked wintergreen berry"
-msgstr[0] ""
+msgstr[0] "煮冬青莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "crabapple fruit leather"
 msgid_plural "crabapple fruit leather"
-msgstr[0] ""
+msgstr[0] "海棠果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "crabapple in syrup"
 msgid_plural "crabapple in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍海棠果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "crabapple jam"
 msgid_plural "crabapple jam"
-msgstr[0] ""
+msgstr[0] "海棠果酱"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated Solomon's seal"
 msgid_plural "dehydrated Solomon's seal"
-msgstr[0] ""
+msgstr[0] "脱水玉竹"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches apple
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
@@ -86659,84 +86659,84 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated apple"
 msgid_plural "dehydrated apple"
-msgstr[0] ""
+msgstr[0] "脱水苹果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated apricot"
 msgid_plural "dehydrated apricot"
-msgstr[0] ""
+msgstr[0] "脱水杏"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated banana"
 msgid_plural "dehydrated banana"
-msgstr[0] ""
+msgstr[0] "脱水香蕉"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated blackberry"
 msgid_plural "dehydrated blackberry"
-msgstr[0] ""
+msgstr[0] "脱水黑莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blueberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated blueberry"
 msgid_plural "dehydrated blueberry"
-msgstr[0] ""
+msgstr[0] "脱水蓝莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches cherries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated cherry"
 msgid_plural "dehydrated cherry"
-msgstr[0] ""
+msgstr[0] "脱水樱桃"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated chokeberries"
 msgid_plural "dehydrated chokeberries"
-msgstr[0] ""
+msgstr[0] "脱水野樱莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. cholla_bud
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated cholla bud"
 msgid_plural "dehydrated cholla bud"
-msgstr[0] ""
+msgstr[0] "脱水仙人掌花蕾"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches coconut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated coconut"
 msgid_plural "dehydrated coconut"
-msgstr[0] ""
+msgstr[0] "脱水椰子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated crabapple"
 msgid_plural "dehydrated crabapple"
-msgstr[0] ""
+msgstr[0] "脱水海棠果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. cranberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated cranberry"
 msgid_plural "dehydrated cranberry"
-msgstr[0] ""
+msgstr[0] "脱水蔓越莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated elderberry"
 msgid_plural "dehydrated elderberry"
-msgstr[0] ""
+msgstr[0] "脱水接骨木果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -86749,76 +86749,76 @@ msgstr[0] "脱水水果"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated grape"
 msgid_plural "dehydrated grape"
-msgstr[0] ""
+msgstr[0] "脱水葡萄"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated grapefruit"
 msgid_plural "dehydrated grapefruit"
-msgstr[0] ""
+msgstr[0] "脱水西柚"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated guava"
 msgid_plural "dehydrated guava"
-msgstr[0] ""
+msgstr[0] "脱水番石榴"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated hobbleberry"
 msgid_plural "dehydrated hobbleberry"
-msgstr[0] ""
+msgstr[0] "脱水绊脚莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated huckleberry"
 msgid_plural "dehydrated huckleberry"
-msgstr[0] ""
+msgstr[0] "脱水越橘"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. juice_pulp
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated juice pulp"
 msgid_plural "dehydrated juice pulp"
-msgstr[0] ""
+msgstr[0] "脱水果浆"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated kiwi"
 msgid_plural "dehydrated kiwi"
-msgstr[0] ""
+msgstr[0] "脱水猕猴桃"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches lemon
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated lemon"
 msgid_plural "dehydrated lemon"
-msgstr[0] ""
+msgstr[0] "脱水柠檬"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated lulo"
 msgid_plural "dehydrated lulo"
-msgstr[0] ""
+msgstr[0] "脱水露露果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated mango"
 msgid_plural "dehydrated mango"
-msgstr[0] ""
+msgstr[0] "脱水芒果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated mayapple"
 msgid_plural "dehydrated mayapple"
-msgstr[0] ""
+msgstr[0] "脱水美洲曼陀罗果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches melon
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
@@ -86826,77 +86826,77 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated melon"
 msgid_plural "dehydrated melon"
-msgstr[0] ""
+msgstr[0] "脱水甜瓜"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated mulberry"
 msgid_plural "dehydrated mulberry"
-msgstr[0] ""
+msgstr[0] "脱水桑葚"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated nannyberries"
 msgid_plural "dehydrated nannyberries"
-msgstr[0] ""
+msgstr[0] "脱水荚蒾果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated orange"
 msgid_plural "dehydrated orange"
-msgstr[0] ""
+msgstr[0] "脱水橙子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated papaya"
 msgid_plural "dehydrated papaya"
-msgstr[0] ""
+msgstr[0] "脱水木瓜"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated passionfruit"
 msgid_plural "dehydrated passionfruit"
-msgstr[0] ""
+msgstr[0] "脱水百香果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated peach"
 msgid_plural "dehydrated peach"
-msgstr[0] ""
+msgstr[0] "脱水桃子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pear
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated pear"
 msgid_plural "dehydrated pear"
-msgstr[0] ""
+msgstr[0] "脱水梨"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pineapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated pineapple"
 msgid_plural "dehydrated pineapple"
-msgstr[0] ""
+msgstr[0] "脱水菠萝"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches plums
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated plum"
 msgid_plural "dehydrated plum"
-msgstr[0] ""
+msgstr[0] "脱水李子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated pomegranate"
 msgid_plural "dehydrated pomegranate"
-msgstr[0] ""
+msgstr[0] "脱水石榴"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. pumpkin_cut
@@ -86905,76 +86905,76 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated pumpkin"
 msgid_plural "dehydrated pumpkin"
-msgstr[0] ""
+msgstr[0] "脱水南瓜"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches raspberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated raspberry"
 msgid_plural "dehydrated raspberry"
-msgstr[0] ""
+msgstr[0] "脱水覆盆子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated rose hip"
 msgid_plural "dehydrated rose hip"
-msgstr[0] ""
+msgstr[0] "脱水玫瑰果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches strawberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated strawberry"
 msgid_plural "dehydrated strawberry"
-msgstr[0] ""
+msgstr[0] "脱水草莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated tupelo fruit"
 msgid_plural "dehydrated tupelo fruit"
-msgstr[0] ""
+msgstr[0] "脱水蓝果木果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches watermelon
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated watermelon"
 msgid_plural "dehydrated watermelon"
-msgstr[0] ""
+msgstr[0] "脱水西瓜"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated wintergreen berry"
 msgid_plural "dehydrated wintergreen berry"
-msgstr[0] ""
+msgstr[0] "脱水冬青莓"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "elderberries in syrup"
 msgid_plural "elderberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍接骨木果"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "elderberry fruit leather"
 msgid_plural "elderberry fruit leather"
-msgstr[0] ""
+msgstr[0] "接骨木果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "elderberry jam"
 msgid_plural "elderberry jam"
-msgstr[0] ""
+msgstr[0] "接骨木果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "fruit in syrup"
 msgid_plural "fruit in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍水果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -86993,63 +86993,63 @@ msgstr[0] "果丹皮"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "grape fruit leather"
 msgid_plural "grape fruit leather"
-msgstr[0] ""
+msgstr[0] "葡萄果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. grapes
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "grape jam"
 msgid_plural "grape jam"
-msgstr[0] ""
+msgstr[0] "葡萄果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "grapefruit in syrup"
 msgid_plural "grapefruit in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍西柚"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "grapefruit jam"
 msgid_plural "grapefruit jam"
-msgstr[0] ""
+msgstr[0] "西柚果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "grapefruit leather"
 msgid_plural "grapefruit leather"
-msgstr[0] ""
+msgstr[0] "西柚果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. grapes
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "grapes in syrup"
 msgid_plural "grapes in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍葡萄"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "guava fruit leather"
 msgid_plural "guava fruit leather"
-msgstr[0] ""
+msgstr[0] "番石榴果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "guava in syrup"
 msgid_plural "guava in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍番石榴"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "guava jam"
 msgid_plural "guava jam"
-msgstr[0] ""
+msgstr[0] "番石榴果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87062,61 +87062,61 @@ msgstr[0] "硬面饼布丁"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "hobbleberries in syrup"
 msgid_plural "hobbleberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍绊脚莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "hobbleberry fruit leather"
 msgid_plural "hobbleberry fruit leather"
-msgstr[0] ""
+msgstr[0] "绊脚莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "hobbleberry jam"
 msgid_plural "hobbleberry jam"
-msgstr[0] ""
+msgstr[0] "绊脚莓果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "huckleberries in syrup"
 msgid_plural "huckleberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍越橘"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "huckleberry fruit leather"
 msgid_plural "huckleberry fruit leather"
-msgstr[0] ""
+msgstr[0] "越橘果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "huckleberry jam"
 msgid_plural "huckleberry jam"
-msgstr[0] ""
+msgstr[0] "越橘果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "kiwi fruit leather"
 msgid_plural "kiwi fruit leather"
-msgstr[0] ""
+msgstr[0] "猕猴桃果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "kiwi in syrup"
 msgid_plural "kiwi in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍猕猴桃"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "kiwi jam"
 msgid_plural "kiwi jam"
-msgstr[0] ""
+msgstr[0] "猕猴桃果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87129,204 +87129,204 @@ msgstr[0] "速溶柠檬粉"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "lulo fruit leather"
 msgid_plural "lulo fruit leather"
-msgstr[0] ""
+msgstr[0] "露露果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "lulo in syrup"
 msgid_plural "lulo in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍露露果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "lulo jam"
 msgid_plural "lulo jam"
-msgstr[0] ""
+msgstr[0] "露露果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mang fruit leathero"
 msgid_plural "mang fruit leathero"
-msgstr[0] ""
+msgstr[0] "芒果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mango in syrup"
 msgid_plural "mango in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍芒果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mango jam"
 msgid_plural "mango jam"
-msgstr[0] ""
+msgstr[0] "芒果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mayapple fruit leather"
 msgid_plural "mayapple fruit leather"
-msgstr[0] ""
+msgstr[0] "美洲曼陀罗果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mayapple in syrup"
 msgid_plural "mayapple in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍美洲曼陀罗果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mayapple jam"
 msgid_plural "mayapple jam"
-msgstr[0] ""
+msgstr[0] "美洲曼陀罗果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "melon fruit leather"
 msgid_plural "melon fruit leather"
-msgstr[0] ""
+msgstr[0] "甜瓜果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "melon in syrup"
 msgid_plural "melon in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍甜瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "melon jam"
 msgid_plural "melon jam"
-msgstr[0] ""
+msgstr[0] "甜瓜果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mulberries in syrup"
 msgid_plural "mulberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍桑葚"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mulberry fruit leather"
 msgid_plural "mulberry fruit leather"
-msgstr[0] ""
+msgstr[0] "桑葚果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "mulberry jam"
 msgid_plural "mulberry jam"
-msgstr[0] ""
+msgstr[0] "桑葚果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "nannyberries in syrup"
 msgid_plural "nannyberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍荚蒾果"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "nannyberry fruit leather"
 msgid_plural "nannyberry fruit leather"
-msgstr[0] ""
+msgstr[0] "荚蒾果果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "nannyberry jam"
 msgid_plural "nannyberry jam"
-msgstr[0] ""
+msgstr[0] "荚蒾果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "orange fruit leather"
 msgid_plural "orange fruit leather"
-msgstr[0] ""
+msgstr[0] "橙子果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "orange in syrup"
 msgid_plural "orange in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍橙子"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "orange jam"
 msgid_plural "orange jam"
-msgstr[0] ""
+msgstr[0] "橙子果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "papaya fruit leather"
 msgid_plural "papaya fruit leather"
-msgstr[0] ""
+msgstr[0] "木瓜果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "papaya in syrup"
 msgid_plural "papaya in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍木瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "papaya jam"
 msgid_plural "papaya jam"
-msgstr[0] ""
+msgstr[0] "木瓜果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "passionfruit in syrup"
 msgid_plural "passionfruit in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍百香果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "passionfruit jam"
 msgid_plural "passionfruit jam"
-msgstr[0] ""
+msgstr[0] "百香果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "passionfruit leather"
 msgid_plural "passionfruit leather"
-msgstr[0] ""
+msgstr[0] "百香果果干"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "peach fruit leather"
 msgid_plural "peach fruit leather"
-msgstr[0] ""
+msgstr[0] "桃子果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "peach in syrup"
 msgid_plural "peach in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍桃子"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "peach jam"
 msgid_plural "peach jam"
-msgstr[0] ""
+msgstr[0] "桃子果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87339,103 +87339,103 @@ msgstr[0] "糖水黄桃"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pear fruit leather"
 msgid_plural "pear fruit leather"
-msgstr[0] ""
+msgstr[0] "梨果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pear in syrup"
 msgid_plural "pear in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍梨"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches pear
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pear jam"
 msgid_plural "pear jam"
-msgstr[0] ""
+msgstr[0] "梨果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pineapple fruit leather"
 msgid_plural "pineapple fruit leather"
-msgstr[0] ""
+msgstr[0] "菠萝果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pineapple in syrup"
 msgid_plural "pineapple in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍菠萝"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pineapple jam"
 msgid_plural "pineapple jam"
-msgstr[0] ""
+msgstr[0] "菠萝果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "plum fruit leather"
 msgid_plural "plum fruit leather"
-msgstr[0] ""
+msgstr[0] "李子果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "plum in syrup"
 msgid_plural "plum in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍李子"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "plum jam"
 msgid_plural "plum jam"
-msgstr[0] ""
+msgstr[0] "李子果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pomegranate fruit leather"
 msgid_plural "pomegranate fruit leather"
-msgstr[0] ""
+msgstr[0] "石榴果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pomegranate in syrup"
 msgid_plural "pomegranate in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍石榴"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pomegranate jam"
 msgid_plural "pomegranate jam"
-msgstr[0] ""
+msgstr[0] "石榴果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pumpkin fruit leather"
 msgid_plural "pumpkin fruit leather"
-msgstr[0] ""
+msgstr[0] "南瓜果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pumpkin in syrup"
 msgid_plural "pumpkin in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍南瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "pumpkin jam"
 msgid_plural "pumpkin jam"
-msgstr[0] ""
+msgstr[0] "南瓜果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87448,28 +87448,28 @@ msgstr[0] "南瓜酵母面包"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "raspberries in syrup"
 msgid_plural "raspberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍覆盆子"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "raspberry fruit leather"
 msgid_plural "raspberry fruit leather"
-msgstr[0] ""
+msgstr[0] "覆盆子果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "raspberry jam"
 msgid_plural "raspberry jam"
-msgstr[0] ""
+msgstr[0] "覆盆子果酱"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated Solomon's seal"
 msgid_plural "rehydrated Solomon's seal"
-msgstr[0] ""
+msgstr[0] "复水玉竹"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches apple
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
@@ -87477,84 +87477,84 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated apple"
 msgid_plural "rehydrated apple"
-msgstr[0] ""
+msgstr[0] "复水苹果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated apricot"
 msgid_plural "rehydrated apricot"
-msgstr[0] ""
+msgstr[0] "复水杏"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated banana"
 msgid_plural "rehydrated banana"
-msgstr[0] ""
+msgstr[0] "复水香蕉"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated blackberry"
 msgid_plural "rehydrated blackberry"
-msgstr[0] ""
+msgstr[0] "复水黑莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blueberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated blueberry"
 msgid_plural "rehydrated blueberry"
-msgstr[0] ""
+msgstr[0] "复水蓝莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches cherries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated cherry"
 msgid_plural "rehydrated cherry"
-msgstr[0] ""
+msgstr[0] "复水樱桃"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated chokeberries"
 msgid_plural "rehydrated chokeberries"
-msgstr[0] ""
+msgstr[0] "复水野樱莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. cholla_bud
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated cholla bud"
 msgid_plural "rehydrated cholla bud"
-msgstr[0] ""
+msgstr[0] "复水仙人掌花蕾"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches coconut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated coconut"
 msgid_plural "rehydrated coconut"
-msgstr[0] ""
+msgstr[0] "复水椰子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated crabapple"
 msgid_plural "rehydrated crabapple"
-msgstr[0] ""
+msgstr[0] "复水海棠果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. cranberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated cranberry"
 msgid_plural "rehydrated cranberry"
-msgstr[0] ""
+msgstr[0] "复水蔓越莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated elderberry"
 msgid_plural "rehydrated elderberry"
-msgstr[0] ""
+msgstr[0] "复水接骨木果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87567,76 +87567,76 @@ msgstr[0] "水发果脯"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated grape"
 msgid_plural "rehydrated grape"
-msgstr[0] ""
+msgstr[0] "复水葡萄"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated grapefruit"
 msgid_plural "rehydrated grapefruit"
-msgstr[0] ""
+msgstr[0] "复水西柚"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated guava"
 msgid_plural "rehydrated guava"
-msgstr[0] ""
+msgstr[0] "复水番石榴"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated hobbleberry"
 msgid_plural "rehydrated hobbleberry"
-msgstr[0] ""
+msgstr[0] "复水绊脚莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated huckleberry"
 msgid_plural "rehydrated huckleberry"
-msgstr[0] ""
+msgstr[0] "复水越橘"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. juice_pulp
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated juice pulp"
 msgid_plural "rehydrated juice pulp"
-msgstr[0] ""
+msgstr[0] "复水果浆"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated kiwi"
 msgid_plural "rehydrated kiwi"
-msgstr[0] ""
+msgstr[0] "复水猕猴桃"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches lemon
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated lemon"
 msgid_plural "rehydrated lemon"
-msgstr[0] ""
+msgstr[0] "复水柠檬"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated lulo"
 msgid_plural "rehydrated lulo"
-msgstr[0] ""
+msgstr[0] "复水露露果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated mango"
 msgid_plural "rehydrated mango"
-msgstr[0] ""
+msgstr[0] "复水芒果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated mayapple"
 msgid_plural "rehydrated mayapple"
-msgstr[0] ""
+msgstr[0] "复水美洲曼陀罗果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches melon
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
@@ -87644,77 +87644,77 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated melon"
 msgid_plural "rehydrated melon"
-msgstr[0] ""
+msgstr[0] "复水甜瓜"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated mulberry"
 msgid_plural "rehydrated mulberry"
-msgstr[0] ""
+msgstr[0] "复水桑葚"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated nannyberries"
 msgid_plural "rehydrated nannyberries"
-msgstr[0] ""
+msgstr[0] "复水荚蒾果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated orange"
 msgid_plural "rehydrated orange"
-msgstr[0] ""
+msgstr[0] "复水橙子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated papaya"
 msgid_plural "rehydrated papaya"
-msgstr[0] ""
+msgstr[0] "复水木瓜"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated passionfruit"
 msgid_plural "rehydrated passionfruit"
-msgstr[0] ""
+msgstr[0] "复水百香果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated peach"
 msgid_plural "rehydrated peach"
-msgstr[0] ""
+msgstr[0] "复水桃子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pear
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated pear"
 msgid_plural "rehydrated pear"
-msgstr[0] ""
+msgstr[0] "复水梨"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pineapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated pineapple"
 msgid_plural "rehydrated pineapple"
-msgstr[0] ""
+msgstr[0] "复水菠萝"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches plums
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated plum"
 msgid_plural "rehydrated plum"
-msgstr[0] ""
+msgstr[0] "复水李子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated pomegranate"
 msgid_plural "rehydrated pomegranate"
-msgstr[0] ""
+msgstr[0] "复水石榴"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. pumpkin_cut
@@ -87723,77 +87723,77 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated pumpkin"
 msgid_plural "rehydrated pumpkin"
-msgstr[0] ""
+msgstr[0] "复水南瓜"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches raspberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated raspberry"
 msgid_plural "rehydrated raspberry"
-msgstr[0] ""
+msgstr[0] "复水覆盆子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated rose hip"
 msgid_plural "rehydrated rose hip"
-msgstr[0] ""
+msgstr[0] "复水玫瑰果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches strawberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated strawberry"
 msgid_plural "rehydrated strawberry"
-msgstr[0] ""
+msgstr[0] "复水草莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated tupelo fruit"
 msgid_plural "rehydrated tupelo fruit"
-msgstr[0] ""
+msgstr[0] "复水蓝果木果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches watermelon
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated watermelon"
 msgid_plural "rehydrated watermelon"
-msgstr[0] ""
+msgstr[0] "复水西瓜"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rehydrated wintergreen berry"
 msgid_plural "rehydrated wintergreen berry"
-msgstr[0] ""
+msgstr[0] "复水冬青莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rose hip fruit leather"
 msgid_plural "rose hip fruit leather"
-msgstr[0] ""
+msgstr[0] "玫瑰果果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rose hip jam"
 msgid_plural "rose hip jam"
-msgstr[0] ""
+msgstr[0] "玫瑰果果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "rose hips in syrup"
 msgid_plural "rose hips in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍玫瑰果"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "strawberries in syrup"
 msgid_plural "strawberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍草莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
