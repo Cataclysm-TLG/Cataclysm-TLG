@@ -55,6 +55,7 @@
 #include "translations.h"
 #include "type_id.h"
 #include "ui_manager.h"
+#include "zzip_main.h"
 #if defined(MACOSX) || defined(__CYGWIN__)
 #   include <unistd.h> // getpid()
 #endif
@@ -622,6 +623,9 @@ extern "C" int SDL_main( int argc, char **argv ) {
 int main( int argc, const char *argv[] )
 {
 #endif
+    if (argc > 1 && std::string(argv[1]) == "zzip") {
+        return zzip_main(argc - 1, argv + 1);
+    }
     ordered_static_globals();
     init_crash_handlers();
     reset_floating_point_mode();

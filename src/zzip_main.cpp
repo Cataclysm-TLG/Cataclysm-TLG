@@ -14,6 +14,8 @@
 #include <zstd/common/mem.h>
 #include <zstd/common/xxhash.h>
 
+#include "zzip_main.h"
+
 // This is a c++ utility written like a oneshot python script.
 // Do not consider code here to exemplify best practices.
 
@@ -663,8 +665,7 @@ static int handle_file_contextual( std::filesystem::path const &input_file )
                         dict );
 }
 
-int main( int argc, char **argv )
-{
+int zzip_main( int argc, const char **argv ) {
     if( argc == 2 ) {
         // If there's exactly one argument, it's 'something' that we need to deal with.
         // For example someone drag and dropping something onto the binary.
