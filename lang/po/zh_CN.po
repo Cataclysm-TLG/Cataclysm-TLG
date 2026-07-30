@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-30 01:01+0800\n"
+"PO-Revision-Date: 2026-07-30 14:37+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -86409,27 +86409,27 @@ msgstr[0] "煮樱桃"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked chokeberries"
 msgid_plural "cooked chokeberries"
-msgstr[0] ""
+msgstr[0] "煮野樱莓"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. coconut_flesh
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked coconut"
 msgid_plural "cooked coconut"
-msgstr[0] ""
+msgstr[0] "煮椰子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked crabapple"
 msgid_plural "cooked crabapple"
-msgstr[0] ""
+msgstr[0] "煮海棠果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked elderberry"
 msgid_plural "cooked elderberry"
-msgstr[0] ""
+msgstr[0] "煮接骨木果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -86442,159 +86442,159 @@ msgstr[0] "煮水果"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked grape"
 msgid_plural "cooked grape"
-msgstr[0] ""
+msgstr[0] "煮葡萄"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked grapefruit"
 msgid_plural "cooked grapefruit"
-msgstr[0] ""
+msgstr[0] "煮西柚"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked guava"
 msgid_plural "cooked guava"
-msgstr[0] ""
+msgstr[0] "煮番石榴"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked hobbleberry"
 msgid_plural "cooked hobbleberry"
-msgstr[0] ""
+msgstr[0] "煮绊脚莓"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked huckleberry"
 msgid_plural "cooked huckleberry"
-msgstr[0] ""
+msgstr[0] "煮越橘"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked kiwi"
 msgid_plural "cooked kiwi"
-msgstr[0] ""
+msgstr[0] "煮猕猴桃"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked lulo"
 msgid_plural "cooked lulo"
-msgstr[0] ""
+msgstr[0] "煮露露果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked mango"
 msgid_plural "cooked mango"
-msgstr[0] ""
+msgstr[0] "煮芒果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked mayapple"
 msgid_plural "cooked mayapple"
-msgstr[0] ""
+msgstr[0] "煮美洲曼陀罗果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked melon"
 msgid_plural "cooked melon"
-msgstr[0] ""
+msgstr[0] "煮甜瓜"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked mulberry"
 msgid_plural "cooked mulberry"
-msgstr[0] ""
+msgstr[0] "煮桑葚"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked nannyberries"
 msgid_plural "cooked nannyberries"
-msgstr[0] ""
+msgstr[0] "煮荚蒾果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked orange"
 msgid_plural "cooked orange"
-msgstr[0] ""
+msgstr[0] "煮橙子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked papaya"
 msgid_plural "cooked papaya"
-msgstr[0] ""
+msgstr[0] "煮木瓜"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked passionfruit"
 msgid_plural "cooked passionfruit"
-msgstr[0] ""
+msgstr[0] "煮百香果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked peach"
 msgid_plural "cooked peach"
-msgstr[0] ""
+msgstr[0] "煮桃子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked pear"
 msgid_plural "cooked pear"
-msgstr[0] ""
+msgstr[0] "煮梨"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked pineapple"
 msgid_plural "cooked pineapple"
-msgstr[0] ""
+msgstr[0] "煮菠萝"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked plum"
 msgid_plural "cooked plum"
-msgstr[0] ""
+msgstr[0] "煮李子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked pomegranate"
 msgid_plural "cooked pomegranate"
-msgstr[0] ""
+msgstr[0] "煮石榴"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked pumpkin"
 msgid_plural "cooked pumpkin"
-msgstr[0] ""
+msgstr[0] "煮南瓜"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked raspberry"
 msgid_plural "cooked raspberry"
-msgstr[0] ""
+msgstr[0] "煮覆盆子"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked rose hip"
 msgid_plural "cooked rose hip"
-msgstr[0] ""
+msgstr[0] "煮玫瑰果"
 
 #. ~ Item name
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID_SUBSTRING matches
@@ -86609,49 +86609,49 @@ msgstr[0] "煮草莓"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked tupelo fruit"
 msgid_plural "cooked tupelo fruit"
-msgstr[0] ""
+msgstr[0] "煮蓝果木果"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked watermelon"
 msgid_plural "cooked watermelon"
-msgstr[0] ""
+msgstr[0] "煮西瓜"
 
 #. ~ Conditional name for "cooked fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "cooked wintergreen berry"
 msgid_plural "cooked wintergreen berry"
-msgstr[0] ""
+msgstr[0] "煮冬青莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "crabapple fruit leather"
 msgid_plural "crabapple fruit leather"
-msgstr[0] ""
+msgstr[0] "海棠果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "crabapple in syrup"
 msgid_plural "crabapple in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍海棠果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "crabapple jam"
 msgid_plural "crabapple jam"
-msgstr[0] ""
+msgstr[0] "海棠果酱"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated Solomon's seal"
 msgid_plural "dehydrated Solomon's seal"
-msgstr[0] ""
+msgstr[0] "脱水玉竹"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches apple
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
@@ -86659,84 +86659,84 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated apple"
 msgid_plural "dehydrated apple"
-msgstr[0] ""
+msgstr[0] "脱水苹果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches apricot
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated apricot"
 msgid_plural "dehydrated apricot"
-msgstr[0] ""
+msgstr[0] "脱水杏"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches banana
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated banana"
 msgid_plural "dehydrated banana"
-msgstr[0] ""
+msgstr[0] "脱水香蕉"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blackberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated blackberry"
 msgid_plural "dehydrated blackberry"
-msgstr[0] ""
+msgstr[0] "脱水黑莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blueberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated blueberry"
 msgid_plural "dehydrated blueberry"
-msgstr[0] ""
+msgstr[0] "脱水蓝莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches cherries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated cherry"
 msgid_plural "dehydrated cherry"
-msgstr[0] ""
+msgstr[0] "脱水樱桃"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated chokeberries"
 msgid_plural "dehydrated chokeberries"
-msgstr[0] ""
+msgstr[0] "脱水野樱莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. cholla_bud
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated cholla bud"
 msgid_plural "dehydrated cholla bud"
-msgstr[0] ""
+msgstr[0] "脱水仙人掌花蕾"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches coconut
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated coconut"
 msgid_plural "dehydrated coconut"
-msgstr[0] ""
+msgstr[0] "脱水椰子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches crabapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated crabapple"
 msgid_plural "dehydrated crabapple"
-msgstr[0] ""
+msgstr[0] "脱水海棠果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. cranberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated cranberry"
 msgid_plural "dehydrated cranberry"
-msgstr[0] ""
+msgstr[0] "脱水蔓越莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches elderberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated elderberry"
 msgid_plural "dehydrated elderberry"
-msgstr[0] ""
+msgstr[0] "脱水接骨木果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -86749,76 +86749,76 @@ msgstr[0] "脱水水果"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated grape"
 msgid_plural "dehydrated grape"
-msgstr[0] ""
+msgstr[0] "脱水葡萄"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated grapefruit"
 msgid_plural "dehydrated grapefruit"
-msgstr[0] ""
+msgstr[0] "脱水西柚"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches guayaba
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated guava"
 msgid_plural "dehydrated guava"
-msgstr[0] ""
+msgstr[0] "脱水番石榴"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated hobbleberry"
 msgid_plural "dehydrated hobbleberry"
-msgstr[0] ""
+msgstr[0] "脱水绊脚莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated huckleberry"
 msgid_plural "dehydrated huckleberry"
-msgstr[0] ""
+msgstr[0] "脱水越橘"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. juice_pulp
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated juice pulp"
 msgid_plural "dehydrated juice pulp"
-msgstr[0] ""
+msgstr[0] "脱水果浆"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches kiwi
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated kiwi"
 msgid_plural "dehydrated kiwi"
-msgstr[0] ""
+msgstr[0] "脱水猕猴桃"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches lemon
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated lemon"
 msgid_plural "dehydrated lemon"
-msgstr[0] ""
+msgstr[0] "脱水柠檬"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches lulo
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated lulo"
 msgid_plural "dehydrated lulo"
-msgstr[0] ""
+msgstr[0] "脱水露露果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mango
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated mango"
 msgid_plural "dehydrated mango"
-msgstr[0] ""
+msgstr[0] "脱水芒果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. mayapple
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated mayapple"
 msgid_plural "dehydrated mayapple"
-msgstr[0] ""
+msgstr[0] "脱水美洲曼陀罗果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches melon
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
@@ -86826,155 +86826,175 @@ msgstr[0] ""
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated melon"
 msgid_plural "dehydrated melon"
-msgstr[0] ""
+msgstr[0] "脱水甜瓜"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mulberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "dehydrated mulberry"
 msgid_plural "dehydrated mulberry"
-msgstr[0] ""
+msgstr[0] "脱水桑葚"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated nannyberries"
 msgid_plural "dehydrated nannyberries"
-msgstr[0] ""
+msgstr[0] "脱水荚蒾果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches orange
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated orange"
 msgid_plural "dehydrated orange"
-msgstr[0] ""
+msgstr[0] "脱水橙子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches papaya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated papaya"
 msgid_plural "dehydrated papaya"
-msgstr[0] ""
+msgstr[0] "脱水木瓜"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches maracuya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated passionfruit"
 msgid_plural "dehydrated passionfruit"
-msgstr[0] ""
+msgstr[0] "脱水百香果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches peach
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated peach"
 msgid_plural "dehydrated peach"
-msgstr[0] ""
+msgstr[0] "脱水桃子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pear
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated pear"
 msgid_plural "dehydrated pear"
-msgstr[0] ""
+msgstr[0] "脱水梨"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pineapple
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated pineapple"
 msgid_plural "dehydrated pineapple"
-msgstr[0] ""
+msgstr[0] "脱水菠萝"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches plums
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated plum"
 msgid_plural "dehydrated plum"
-msgstr[0] ""
+msgstr[0] "脱水李子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated pomegranate"
 msgid_plural "dehydrated pomegranate"
-msgstr[0] ""
+msgstr[0] "脱水石榴"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. pumpkin_cut
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json data/json/items/comestibles/veggy_dishes.json
+#, fuzzy
 msgid "dehydrated pumpkin"
 msgid_plural "dehydrated pumpkin"
-msgstr[0] ""
+msgstr[0] "脱水南瓜"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches raspberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated raspberry"
 msgid_plural "dehydrated raspberry"
-msgstr[0] ""
+msgstr[0] "脱水覆盆子"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated rose hip"
 msgid_plural "dehydrated rose hip"
-msgstr[0] ""
+msgstr[0] "脱水玫瑰果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches strawberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated strawberry"
 msgid_plural "dehydrated strawberry"
-msgstr[0] ""
+msgstr[0] "脱水草莓"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated tupelo fruit"
 msgid_plural "dehydrated tupelo fruit"
-msgstr[0] ""
+msgstr[0] "脱水蓝果木果"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches watermelon
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated watermelon"
 msgid_plural "dehydrated watermelon"
-msgstr[0] ""
+msgstr[0] "脱水西瓜"
 
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "dehydrated wintergreen berry"
 msgid_plural "dehydrated wintergreen berry"
-msgstr[0] ""
+msgstr[0] "脱水冬青莓"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "elderberries in syrup"
 msgid_plural "elderberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍接骨木果"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "elderberry fruit leather"
 msgid_plural "elderberry fruit leather"
-msgstr[0] ""
+msgstr[0] "接骨木果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "elderberry jam"
 msgid_plural "elderberry jam"
-msgstr[0] ""
+msgstr[0] "接骨木果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "fruit in syrup"
 msgid_plural "fruit in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍水果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -86991,65 +87011,74 @@ msgstr[0] "果丹皮"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. grapes
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "grape fruit leather"
 msgid_plural "grape fruit leather"
-msgstr[0] ""
+msgstr[0] "葡萄果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. grapes
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "grape jam"
 msgid_plural "grape jam"
-msgstr[0] ""
+msgstr[0] "葡萄果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "grapefruit in syrup"
 msgid_plural "grapefruit in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍西柚"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "grapefruit jam"
 msgid_plural "grapefruit jam"
-msgstr[0] ""
+msgstr[0] "西柚果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "grapefruit leather"
 msgid_plural "grapefruit leather"
-msgstr[0] ""
+msgstr[0] "西柚果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. grapes
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "grapes in syrup"
 msgid_plural "grapes in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍葡萄"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "guava fruit leather"
 msgid_plural "guava fruit leather"
-msgstr[0] ""
+msgstr[0] "番石榴果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "guava in syrup"
 msgid_plural "guava in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍番石榴"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "guava jam"
 msgid_plural "guava jam"
-msgstr[0] ""
+msgstr[0] "番石榴果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87060,63 +87089,72 @@ msgstr[0] "硬面饼布丁"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "hobbleberries in syrup"
 msgid_plural "hobbleberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍绊脚莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "hobbleberry fruit leather"
 msgid_plural "hobbleberry fruit leather"
-msgstr[0] ""
+msgstr[0] "绊脚莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "hobbleberry jam"
 msgid_plural "hobbleberry jam"
-msgstr[0] ""
+msgstr[0] "绊脚莓果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "huckleberries in syrup"
 msgid_plural "huckleberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍越橘"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "huckleberry fruit leather"
 msgid_plural "huckleberry fruit leather"
-msgstr[0] ""
+msgstr[0] "越橘果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "huckleberry jam"
 msgid_plural "huckleberry jam"
-msgstr[0] ""
+msgstr[0] "越橘果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "kiwi fruit leather"
 msgid_plural "kiwi fruit leather"
-msgstr[0] ""
+msgstr[0] "猕猴桃果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "kiwi in syrup"
 msgid_plural "kiwi in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍猕猴桃"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches kiwi
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "kiwi jam"
 msgid_plural "kiwi jam"
-msgstr[0] ""
+msgstr[0] "猕猴桃果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87127,206 +87165,236 @@ msgstr[0] "速溶柠檬粉"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "lulo fruit leather"
 msgid_plural "lulo fruit leather"
-msgstr[0] ""
+msgstr[0] "露露果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "lulo in syrup"
 msgid_plural "lulo in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍露露果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches lulo
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "lulo jam"
 msgid_plural "lulo jam"
-msgstr[0] ""
+msgstr[0] "露露果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mang fruit leathero"
 msgid_plural "mang fruit leathero"
-msgstr[0] ""
+msgstr[0] "芒果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mango in syrup"
 msgid_plural "mango in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍芒果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mango jam"
 msgid_plural "mango jam"
-msgstr[0] ""
+msgstr[0] "芒果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mayapple fruit leather"
 msgid_plural "mayapple fruit leather"
-msgstr[0] ""
+msgstr[0] "美洲曼陀罗果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mayapple in syrup"
 msgid_plural "mayapple in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍美洲曼陀罗果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mayapple jam"
 msgid_plural "mayapple jam"
-msgstr[0] ""
+msgstr[0] "美洲曼陀罗果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "melon fruit leather"
 msgid_plural "melon fruit leather"
-msgstr[0] ""
+msgstr[0] "甜瓜果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "melon in syrup"
 msgid_plural "melon in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍甜瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "melon jam"
 msgid_plural "melon jam"
-msgstr[0] ""
+msgstr[0] "甜瓜果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mulberries in syrup"
 msgid_plural "mulberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍桑葚"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mulberry fruit leather"
 msgid_plural "mulberry fruit leather"
-msgstr[0] ""
+msgstr[0] "桑葚果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "mulberry jam"
 msgid_plural "mulberry jam"
-msgstr[0] ""
+msgstr[0] "桑葚果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "nannyberries in syrup"
 msgid_plural "nannyberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍荚蒾果"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "nannyberry fruit leather"
 msgid_plural "nannyberry fruit leather"
-msgstr[0] ""
+msgstr[0] "荚蒾果果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "nannyberry jam"
 msgid_plural "nannyberry jam"
-msgstr[0] ""
+msgstr[0] "荚蒾果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "orange fruit leather"
 msgid_plural "orange fruit leather"
-msgstr[0] ""
+msgstr[0] "橙子果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "orange in syrup"
 msgid_plural "orange in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍橙子"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "orange jam"
 msgid_plural "orange jam"
-msgstr[0] ""
+msgstr[0] "橙子果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "papaya fruit leather"
 msgid_plural "papaya fruit leather"
-msgstr[0] ""
+msgstr[0] "木瓜果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "papaya in syrup"
 msgid_plural "papaya in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍木瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "papaya jam"
 msgid_plural "papaya jam"
-msgstr[0] ""
+msgstr[0] "木瓜果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "passionfruit in syrup"
 msgid_plural "passionfruit in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍百香果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "passionfruit jam"
 msgid_plural "passionfruit jam"
-msgstr[0] ""
+msgstr[0] "百香果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "passionfruit leather"
 msgid_plural "passionfruit leather"
-msgstr[0] ""
+msgstr[0] "百香果果干"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "peach fruit leather"
 msgid_plural "peach fruit leather"
-msgstr[0] ""
+msgstr[0] "桃子果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "peach in syrup"
 msgid_plural "peach in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍桃子"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "peach jam"
 msgid_plural "peach jam"
-msgstr[0] ""
+msgstr[0] "桃子果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87337,105 +87405,120 @@ msgstr[0] "糖水黄桃"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pear fruit leather"
 msgid_plural "pear fruit leather"
-msgstr[0] ""
+msgstr[0] "梨果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pear in syrup"
 msgid_plural "pear in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍梨"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches pear
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pear jam"
 msgid_plural "pear jam"
-msgstr[0] ""
+msgstr[0] "梨果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pineapple fruit leather"
 msgid_plural "pineapple fruit leather"
-msgstr[0] ""
+msgstr[0] "菠萝果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pineapple in syrup"
 msgid_plural "pineapple in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍菠萝"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pineapple jam"
 msgid_plural "pineapple jam"
-msgstr[0] ""
+msgstr[0] "菠萝果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "plum fruit leather"
 msgid_plural "plum fruit leather"
-msgstr[0] ""
+msgstr[0] "李子果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "plum in syrup"
 msgid_plural "plum in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍李子"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "plum jam"
 msgid_plural "plum jam"
-msgstr[0] ""
+msgstr[0] "李子果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pomegranate fruit leather"
 msgid_plural "pomegranate fruit leather"
-msgstr[0] ""
+msgstr[0] "石榴果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pomegranate in syrup"
 msgid_plural "pomegranate in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍石榴"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pomegranate jam"
 msgid_plural "pomegranate jam"
-msgstr[0] ""
+msgstr[0] "石榴果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pumpkin fruit leather"
 msgid_plural "pumpkin fruit leather"
-msgstr[0] ""
+msgstr[0] "南瓜果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pumpkin in syrup"
 msgid_plural "pumpkin in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍南瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "pumpkin jam"
 msgid_plural "pumpkin jam"
-msgstr[0] ""
+msgstr[0] "南瓜果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87446,115 +87529,131 @@ msgstr[0] "南瓜酵母面包"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "raspberries in syrup"
 msgid_plural "raspberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍覆盆子"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "raspberry fruit leather"
 msgid_plural "raspberry fruit leather"
-msgstr[0] ""
+msgstr[0] "覆盆子果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "raspberry jam"
 msgid_plural "raspberry jam"
-msgstr[0] ""
+msgstr[0] "覆盆子果酱"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated Solomon's seal"
 msgid_plural "rehydrated Solomon's seal"
-msgstr[0] ""
+msgstr[0] "复水玉竹"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches apple
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. irradiated_apple
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated apple"
 msgid_plural "rehydrated apple"
-msgstr[0] ""
+msgstr[0] "复水苹果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches apricot
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated apricot"
 msgid_plural "rehydrated apricot"
-msgstr[0] ""
+msgstr[0] "复水杏"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches banana
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated banana"
 msgid_plural "rehydrated banana"
-msgstr[0] ""
+msgstr[0] "复水香蕉"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blackberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated blackberry"
 msgid_plural "rehydrated blackberry"
-msgstr[0] ""
+msgstr[0] "复水黑莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blueberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated blueberry"
 msgid_plural "rehydrated blueberry"
-msgstr[0] ""
+msgstr[0] "复水蓝莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches cherries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated cherry"
 msgid_plural "rehydrated cherry"
-msgstr[0] ""
+msgstr[0] "复水樱桃"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated chokeberries"
 msgid_plural "rehydrated chokeberries"
-msgstr[0] ""
+msgstr[0] "复水野樱莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. cholla_bud
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated cholla bud"
 msgid_plural "rehydrated cholla bud"
-msgstr[0] ""
+msgstr[0] "复水仙人掌花蕾"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches coconut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated coconut"
 msgid_plural "rehydrated coconut"
-msgstr[0] ""
+msgstr[0] "复水椰子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches crabapple
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated crabapple"
 msgid_plural "rehydrated crabapple"
-msgstr[0] ""
+msgstr[0] "复水海棠果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. cranberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated cranberry"
 msgid_plural "rehydrated cranberry"
-msgstr[0] ""
+msgstr[0] "复水蔓越莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches elderberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated elderberry"
 msgid_plural "rehydrated elderberry"
-msgstr[0] ""
+msgstr[0] "复水接骨木果"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
@@ -87565,235 +87664,268 @@ msgstr[0] "水发果脯"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches grapes
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated grape"
 msgid_plural "rehydrated grape"
-msgstr[0] ""
+msgstr[0] "复水葡萄"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated grapefruit"
 msgid_plural "rehydrated grapefruit"
-msgstr[0] ""
+msgstr[0] "复水西柚"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches guayaba
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated guava"
 msgid_plural "rehydrated guava"
-msgstr[0] ""
+msgstr[0] "复水番石榴"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated hobbleberry"
 msgid_plural "rehydrated hobbleberry"
-msgstr[0] ""
+msgstr[0] "复水绊脚莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated huckleberry"
 msgid_plural "rehydrated huckleberry"
-msgstr[0] ""
+msgstr[0] "复水越橘"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. juice_pulp
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated juice pulp"
 msgid_plural "rehydrated juice pulp"
-msgstr[0] ""
+msgstr[0] "复水果浆"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches kiwi
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated kiwi"
 msgid_plural "rehydrated kiwi"
-msgstr[0] ""
+msgstr[0] "复水猕猴桃"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches lemon
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated lemon"
 msgid_plural "rehydrated lemon"
-msgstr[0] ""
+msgstr[0] "复水柠檬"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches lulo
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated lulo"
 msgid_plural "rehydrated lulo"
-msgstr[0] ""
+msgstr[0] "复水露露果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mango
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated mango"
 msgid_plural "rehydrated mango"
-msgstr[0] ""
+msgstr[0] "复水芒果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. mayapple
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated mayapple"
 msgid_plural "rehydrated mayapple"
-msgstr[0] ""
+msgstr[0] "复水美洲曼陀罗果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches melon
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated melon"
 msgid_plural "rehydrated melon"
-msgstr[0] ""
+msgstr[0] "复水甜瓜"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mulberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated mulberry"
 msgid_plural "rehydrated mulberry"
-msgstr[0] ""
+msgstr[0] "复水桑葚"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated nannyberries"
 msgid_plural "rehydrated nannyberries"
-msgstr[0] ""
+msgstr[0] "复水荚蒾果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches orange
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated orange"
 msgid_plural "rehydrated orange"
-msgstr[0] ""
+msgstr[0] "复水橙子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches papaya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated papaya"
 msgid_plural "rehydrated papaya"
-msgstr[0] ""
+msgstr[0] "复水木瓜"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches maracuya
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated passionfruit"
 msgid_plural "rehydrated passionfruit"
-msgstr[0] ""
+msgstr[0] "复水百香果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches peach
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated peach"
 msgid_plural "rehydrated peach"
-msgstr[0] ""
+msgstr[0] "复水桃子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pear
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated pear"
 msgid_plural "rehydrated pear"
-msgstr[0] ""
+msgstr[0] "复水梨"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pineapple
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated pineapple"
 msgid_plural "rehydrated pineapple"
-msgstr[0] ""
+msgstr[0] "复水菠萝"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches plums
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated plum"
 msgid_plural "rehydrated plum"
-msgstr[0] ""
+msgstr[0] "复水李子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated pomegranate"
 msgid_plural "rehydrated pomegranate"
-msgstr[0] ""
+msgstr[0] "复水石榴"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. pumpkin_cut
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json data/json/items/comestibles/veggy_dishes.json
+#, fuzzy
 msgid "rehydrated pumpkin"
 msgid_plural "rehydrated pumpkin"
-msgstr[0] ""
+msgstr[0] "复水南瓜"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches raspberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated raspberry"
 msgid_plural "rehydrated raspberry"
-msgstr[0] ""
+msgstr[0] "复水覆盆子"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated rose hip"
 msgid_plural "rehydrated rose hip"
-msgstr[0] ""
+msgstr[0] "复水玫瑰果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches strawberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated strawberry"
 msgid_plural "rehydrated strawberry"
-msgstr[0] ""
+msgstr[0] "复水草莓"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated tupelo fruit"
 msgid_plural "rehydrated tupelo fruit"
-msgstr[0] ""
+msgstr[0] "复水蓝果木果"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches watermelon
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated watermelon"
 msgid_plural "rehydrated watermelon"
-msgstr[0] ""
+msgstr[0] "复水西瓜"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rehydrated wintergreen berry"
 msgid_plural "rehydrated wintergreen berry"
-msgstr[0] ""
+msgstr[0] "复水冬青莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rose hip fruit leather"
 msgid_plural "rose hip fruit leather"
-msgstr[0] ""
+msgstr[0] "玫瑰果果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rose hip jam"
 msgid_plural "rose hip jam"
-msgstr[0] ""
+msgstr[0] "玫瑰果果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "rose hips in syrup"
 msgid_plural "rose hips in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍玫瑰果"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
 #: data/json/items/comestibles/fruit_dishes.json
+#, fuzzy
 msgid "strawberries in syrup"
 msgid_plural "strawberries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍草莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
@@ -324018,12 +324150,12 @@ msgstr ""
 #: src/crafting.cpp:1329
 #, c-format
 msgid "Your timer goes off: %s"
-msgstr ""
+msgstr "你的计时器响起：%s"
 
 #: src/crafting.cpp:1605
 #, c-format
 msgid "You suddenly remember that the %s may have finished %s."
-msgstr ""
+msgstr "你突然想起，%s 可能已经完成了 %s。"
 
 #: src/crafting.cpp:1871 src/iexamine.cpp:7215 src/iuse.cpp:8143
 #, c-format
@@ -324258,12 +324390,12 @@ msgstr "<npcname>不再拥有%s，因此不能继续制造。"
 #: src/crafting.cpp:3612 src/crafting.cpp:3667
 #, c-format
 msgid "You no longer have the %s and can't continue crafting."
-msgstr ""
+msgstr "你不再拥有 %s，没法继续制作 "
 
 #: src/crafting.cpp:3613 src/crafting.cpp:3668
 #, c-format
 msgid "<npcname> no longer has the %s and can't continue crafting."
-msgstr ""
+msgstr "<npcname> 不再拥有 %s，没法继续制作 "
 
 #: src/crafting.cpp:3827
 msgid "You cannot disassemble this."
@@ -324306,10 +324438,12 @@ msgid ""
 "This item is marked as a favorite.\n"
 "Are you sure?"
 msgstr ""
+"这个物品被标记为收藏。\n"
+"你确定吗？"
 
 #: src/crafting.cpp:3964
 msgid "You must remove that before disassembling it."
-msgstr ""
+msgstr "在拆卸之前，你必须把那个取下来。"
 
 #: src/crafting.cpp:3972
 #, c-format
@@ -324410,7 +324544,7 @@ msgstr "无法制造"
 #: src/crafting_gui.cpp:85 src/crafting_gui.cpp:86
 #, c-format
 msgid "crafting speed %d%%: %s"
-msgstr ""
+msgstr "制作速度%d%%: %s"
 
 #: src/crafting_gui.cpp:87
 msgid "craftable"
@@ -324671,7 +324805,7 @@ msgstr "* 无隐藏配方 - 分类中共%s种配方 *"
 
 #: src/crafting_gui.cpp:1440
 msgid "manipulation"
-msgstr ""
+msgstr "操控"
 
 #: src/crafting_gui.cpp:1446
 msgid "traits"
@@ -324683,7 +324817,7 @@ msgstr "心情"
 
 #: src/crafting_gui.cpp:1469
 msgid "visibility"
-msgstr ""
+msgstr "可见度"
 
 #: src/crafting_gui.cpp:1475 src/effect.cpp:896 src/effect.cpp:897
 msgid "pain"
@@ -324897,7 +325031,7 @@ msgstr "制造所需<color_cyan>工具</color>"
 
 #: src/crafting_gui_helpers.cpp:647
 msgid "recipe <color_cyan>memorized</color> (or not)"
-msgstr ""
+msgstr "食谱 <color_cyan>已记住</color>（或未记住）"
 
 #: src/crafting_gui_helpers.cpp:648
 msgid "<color_cyan>proficiency</color> used to craft"
@@ -324939,6 +325073,11 @@ msgid ""
 "\n"
 "<color_white>Examples:</color>\n"
 msgstr ""
+"默认搜索结果名称。可以使用某些单字符前缀配合冒号 <color_red>:</color> 以其他方式进行搜索。多个筛选条件之间用逗号 <color_red>,</color> 隔开。\n"
+"按难度筛选时支持指定范围；例如 <color_yellow>l</color><color_white>:5~10</color> 可搜索难度在 5 到 10 之间的所有配方。\n"
+"\n"
+"\n"
+"<color_white>示例：</color>\n"
 
 #: src/crafting_gui_helpers.cpp:715
 msgid "<bold>Note:</bold> If crafted from poorly-fitting components, the resulting item may also be poorly-fitted."
@@ -325111,7 +325250,7 @@ msgstr "这里没有生物可以被你的%s拖拽！"
 #: src/creature.cpp:1734 src/creature.cpp:1767
 #, c-format
 msgid "%s is immobile and cannot be moved."
-msgstr ""
+msgstr "%s 无法移动，且不能被移动。"
 
 #: src/creature.cpp:1742
 #, c-format
@@ -325484,7 +325623,7 @@ msgstr "显示天气"
 
 #: src/debug_menu.cpp:916
 msgid "Toggle display snow depth"
-msgstr ""
+msgstr "切换显示积雪深度"
 
 #: src/debug_menu.cpp:917
 msgid "Display overmap scents"
@@ -327371,7 +327510,7 @@ msgstr "我 %s 的伤口被感染了……"
 #: src/dialogue_chatbin.h:128
 #, c-format
 msgid "I need some disinfectant for my %s wound."
-msgstr ""
+msgstr "我需要一些消毒剂来处理我的 %s 伤口。"
 
 #: src/dialogue_chatbin.h:129
 #, c-format
@@ -327783,11 +327922,11 @@ msgstr "你看上去体型很健康，有足够让你过冬的脂肪，但又不
 
 #: src/display.cpp:702
 msgid "You are a little on the slim side.  It might be a good idea to put on some weight before it gets too bad."
-msgstr ""
+msgstr "你稍微有点偏瘦。最好在情况变得太严重之前，设法增加一点体重。"
 
 #: src/display.cpp:704
 msgid "You are thinner than is healthy.  You're weak from lack of energy and it's getting bad enough to lead to health problems."
-msgstr ""
+msgstr "你瘦得不健康。由于缺乏能量，你身体虚弱，情况已严重到可能引发健康问题。"
 
 #: src/display.cpp:706
 msgid "You are very unhealthily underweight, nearing starvation."
@@ -327860,15 +327999,15 @@ msgstr "高度 %i，%d'%d，%d'%d"
 
 #: src/display.cpp:1473
 msgid "Deep snow"
-msgstr ""
+msgstr "大雪"
 
 #: src/display.cpp:1479
 msgid "Light snow"
-msgstr ""
+msgstr "小雪"
 
 #: src/display.cpp:1482
 msgid "Dusting"
-msgstr ""
+msgstr "尘烟"
 
 #: src/display.cpp:1491
 msgid "Underground"
@@ -327972,11 +328111,11 @@ msgstr "镇痛剂脱瘾症"
 
 #: src/distraction_manager.cpp:45
 msgid "Craft step complete"
-msgstr ""
+msgstr "制作步骤完成"
 
 #: src/distraction_manager.cpp:45
 msgid "This distraction will interrupt your activity when an unattended crafting step completes."
-msgstr ""
+msgstr "当不加注意的制作步骤完成时，走神会打断你当前的活动。"
 
 #: src/distraction_manager.cpp:46
 msgid "Toggle all"
@@ -328481,15 +328620,15 @@ msgstr "%s%s修正：x%.1f\n"
 
 #: src/effect.cpp:900
 msgid "healing"
-msgstr ""
+msgstr "恢复"
 
 #: src/effect.cpp:903
 msgid "dyspnea"
-msgstr ""
+msgstr "呼吸困难"
 
 #: src/effect.cpp:903
 msgid "invigoration"
-msgstr ""
+msgstr "精神焕发"
 
 #: src/effect.cpp:905
 msgid "thirst"
@@ -328505,7 +328644,7 @@ msgstr "饥饿"
 
 #: src/effect.cpp:909
 msgid "satiation"
-msgstr ""
+msgstr "饱足感"
 
 #: src/effect.cpp:911
 msgid "fatigue"
@@ -328513,15 +328652,15 @@ msgstr "疲劳"
 
 #: src/effect.cpp:912
 msgid "alertness"
-msgstr ""
+msgstr "警觉"
 
 #: src/effect.cpp:914
 msgid "focus"
-msgstr ""
+msgstr "集中"
 
 #: src/effect.cpp:915
 msgid "distraction"
-msgstr ""
+msgstr "走神"
 
 #: src/effect.cpp:917 src/effect.cpp:918
 msgid "coughing"
@@ -329392,6 +329531,17 @@ msgid ""
 "Time: 3 Hours, Repeated\n"
 "Positions: %d/3\n"
 msgstr ""
+"备注：\n"
+"派一名同伴收集下一次营地升级所需的材料。\n"
+"\n"
+"使用技能：生态学\n"
+"难度：无\n"
+"可收集物品：\n"
+"%s\n"
+"风险：极低\n"
+"强度：轻\n"
+"耗时：3小时（可重复）\n"
+"位置：%d/3\n"
 
 #: src/faction_camp.cpp:888
 msgid " Recover Ally from Gathering"
@@ -329415,6 +329565,20 @@ msgid ""
 "Time: 3 Hours, Repeated\n"
 "Positions: %d/3\n"
 msgstr ""
+"备注：\n"
+"派一名同伴去收集细碎灌木与粗壮枝干。\n"
+"\n"
+"使用技能：生态学\n"
+"难度：无\n"
+"可收集物品：\n"
+"> 粗壮枝干\n"
+"> 枯萎植物\n"
+"> 碎木\n"
+"\n"
+"风险：极低\n"
+"强度：轻\n"
+"耗时：3小时（可重复）\n"
+"位置：%d/3\n"
 
 #: src/faction_camp.cpp:912
 msgid " Recover Firewood Gatherers"
@@ -329547,6 +329711,20 @@ msgid ""
 "Time: 6 Hour Construction + Travel\n"
 "Positions: %d/1\n"
 msgstr ""
+"备注：\n"
+"派一名同伴前往地图上的远距离地点，搭建简易庇护所并储备装备。\n"
+"\n"
+"所需技能：生态学\n"
+"难度：3\n"
+"效果：\n"
+"> 适合建立补给点或应急点。\n"
+"> 装备处于无人看管状态，存在被盗风险。\n"
+"> 所需时间取决于预先运送的装备重量。\n"
+"\n"
+"风险：中等\n"
+"强度：轻\n"
+"耗时：6小时（建造 + 旅途）\n"
+"位置：%d/1\n"
 
 #: src/faction_camp.cpp:1016
 msgid " Recover Hide Setup"
@@ -329570,6 +329748,20 @@ msgid ""
 "Time: 1 Hour Base + Travel\n"
 "Positions: %d/1\n"
 msgstr ""
+"备注：\n"
+"将装备运送至隐蔽点，或从隐蔽点取回装备。\n"
+"\n"
+"使用技能：生态学\n"
+"难度：1\n"
+"效果：\n"
+"> 适合取回留在隐蔽点掩体内的装备。\n"
+"> 装备处于无人看管状态，存在被盗风险。\n"
+"> 所需时间取决于运送装备的重量。\n"
+"\n"
+"风险：中等\n"
+"强度：轻度\n"
+"时间：1小时（基础）+ 途中耗时\n"
+"位置：1/%d\n"
 
 #: src/faction_camp.cpp:1043
 msgid " Recover Hide Relay"
@@ -329592,6 +329784,19 @@ msgid ""
 "Time: 4 Hours, Repeated\n"
 "Positions: %d/3\n"
 msgstr ""
+"备注：\n"
+"派一名同伴去采集可食用植物。\n"
+"\n"
+"使用技能：生态学\n"
+"难度：无\n"
+"采集产出：\n"
+"> 野生蔬菜\n"
+"> 视季节而定的水果与坚果\n"
+"食物产出量可能少于消耗！\n"
+"风险：极低\n"
+"强度：轻度\n"
+"耗时：4小时（可重复）\n"
+"位置： %d/3\n"
 
 #: src/faction_camp.cpp:1068
 msgid " Recover Foragers"
@@ -329614,6 +329819,19 @@ msgid ""
 "Time: 14 Hours\n"
 "Positions: %d/2\n"
 msgstr ""
+"备注：\n"
+"派一个同伴铺设陷阱捕猎小型猎物。\n"
+"\n"
+"使用技能：机械学、生态学\n"
+"关联属性：感知\n"
+"难度：低\n"
+"捕猎概率收获：\n"
+"> 小型和微型动物尸体\n"
+"食物产出量可能少于消耗！\n"
+"风险：低\n"
+"强度：轻\n"
+"时间：14小时\n"
+"位置：%d/2\n"
 
 #: src/faction_camp.cpp:1093
 msgid " Recover Trappers"
@@ -329636,6 +329854,19 @@ msgid ""
 "Time: 18 Hours\n"
 "Positions: %d/1\n"
 msgstr ""
+"备注：\n"
+"派一个同伴去猎取大型动物。\n"
+"\n"
+"使用技能：射击，生态学\n"
+"关联属性：感知\n"
+"难度：中等\n"
+"狩猎概率收获：\n"
+"> 小型、中型或大型动物尸体\n"
+"食物产出量可能少于消耗！\n"
+"风险：中等\n"
+"强度：适中\n"
+"时间：18小时\n"
+"位置：%d/1\n"
 
 #: src/faction_camp.cpp:1118
 msgid " Recover Hunter"
@@ -329671,6 +329902,20 @@ msgid ""
 "Time: Travel\n"
 "Positions: %d/3\n"
 msgstr ""
+"备注：\n"
+"派一个伙伴去未知的地域。需要高生存技能以避免战斗，但你应预计会有一两次遭遇。\n"
+"\n"
+"使用技能：生态学\n"
+"难度：3\n"
+"效果：\n"
+"> 选择检查点来自定义路线。\n"
+"> 揭示路线周围的地形。\n"
+"> 可以借助隐蔽地点反击以扩大范围。\n"
+"\n"
+"风险：高\n"
+"强度：轻\n"
+"时间：持续\n"
+"位置：%d/3\n"
 
 #: src/faction_camp.cpp:1203
 msgid " Recover Scout"
@@ -329694,6 +329939,20 @@ msgid ""
 "Time: Travel\n"
 "Positions: %d/3\n"
 msgstr ""
+"备注：\n"
+"派一个同伴去清理废土。他们的目标是杀死遇到的任何敌对生物，并在伤势过重或对方占优势时返回。\n"
+"\n"
+"使用技能：生态学\n"
+"难度：4\n"
+"效果：\n"
+"> 遇到生物时将其拉入战斗，而不是逃跑。\n"
+"> 选择检查点来自定义路线。\n"
+"> 可以借助隐蔽地点反击以扩大范围。\n"
+"\n"
+"风险：非常高\n"
+"强度：轻\n"
+"时间：持续\n"
+"位置：%d/3\n"
 
 #: src/faction_camp.cpp:1232
 msgid " Recover Combat Patrol"
@@ -329800,6 +330059,19 @@ msgid ""
 "Time: 1 Min / Plot\n"
 "Positions: 0/1\n"
 msgstr ""
+"\n"
+"\n"
+"使用技能：生态学\n"
+"难度：无\n"
+"效果：\n"
+"> 选择某种种子类型或你的所有种子。\n"
+"> 当种子或种植地点用完时停止。\n"
+"> 将在扩展区域的所有土堆上种植。\n"
+"\n"
+"风险：无\n"
+"强度：中等\n"
+"耗时：每块地 1 分钟\n"
+"可用位置：0/1\n"
 
 #: src/faction_camp.cpp:1376
 msgid " (Finish) Plant Fields"
@@ -329829,6 +330101,16 @@ msgid ""
 "Time: 3 Min / Plot\n"
 "Positions: 0/1\n"
 msgstr ""
+"\n"
+"技能使用：生态学\n"
+"难度：无\n"
+"效果：\n"
+"> 会将所有采集的产品倒到你的位置。\n"
+"\n"
+"风险：无\n"
+"强度：中等\n"
+"耗时：每地块3分钟\n"
+"位置：0/1\n"
 
 #: src/faction_camp.cpp:1403
 msgid " (Finish) Harvest Fields"
@@ -329913,6 +330195,15 @@ msgid ""
 "or %d / %d / %d days' rations\n"
 "where the days is measured for Extra / Moderate / No exercise levels"
 msgstr ""
+"备注：\n"
+"将食物分发给你的追随者。把你想分发的食物放在食物分配区域。你必须有一个食物分配区域和一个工作存储区域，否则系统会提示你通过区域管理器创建它们。\n"
+"效果：\n"
+"> 增加你派系的食物储备值，这些储备会用于支付劳工的工作报酬。\n"
+"\n"
+"必要的享受值 >= -6\n"
+"总派系食物库存：%d 千卡\n"
+"或 %d / %d / %d 天的口粮\n"
+"其中天数是根据额外/适中/无运动水平来计算的"
 
 #: src/faction_camp.cpp:1527
 msgid ""
@@ -331413,7 +331704,7 @@ msgstr "%s淹死了！"
 #: src/game.cpp:5051 src/monmove.cpp:937 src/monmove.cpp:2404
 #, c-format
 msgid "The %s flops around in a vain attempt to return to the water."
-msgstr ""
+msgstr "%s 徒劳地扑腾着，试图回到水里。"
 
 #: src/game.cpp:5112
 #, c-format
@@ -332167,7 +332458,7 @@ msgstr "全部切割"
 
 #: src/game.cpp:9494
 msgid "You can't do that while playing an instrument."
-msgstr ""
+msgstr "你在演奏乐器的时候不能那么做。"
 
 #: src/game.cpp:9499
 msgid "You are not in the mood and the prospect of guts and blood on your hands convinces you to turn away."
@@ -332355,7 +332646,7 @@ msgstr "你的坐骑钻不进这里。"
 
 #: src/game.cpp:10144
 msgid "You're too scared to walk into the dark.  You must run in order to willingly go that way."
-msgstr ""
+msgstr "你太害怕走进黑暗了。你必须跑着才能朝那个方向去。"
 
 #: src/game.cpp:10151
 #, c-format
@@ -335469,11 +335760,11 @@ msgstr "你移除了木板。"
 
 #: src/iexamine.cpp:1774
 msgid "The ice looks thin and won't support your weight."
-msgstr ""
+msgstr "冰看起来很薄，承受不了你的重量。"
 
 #: src/iexamine.cpp:1777
 msgid "The ice here is thin."
-msgstr ""
+msgstr "这里的冰很薄。"
 
 #: src/iexamine.cpp:1812
 msgid "You carefully dial a combination… and it opens!"
@@ -335715,15 +336006,15 @@ msgstr "你收获了植物。"
 
 #: src/iexamine.cpp:2645
 msgid "That isn't a plant you can fertilize."
-msgstr ""
+msgstr "那不是你能施肥的植物。"
 
 #: src/iexamine.cpp:2649
 msgid "There's no point in fertilizing a mature plant."
-msgstr ""
+msgstr "给成熟的植物施肥没有意义。"
 
 #: src/iexamine.cpp:2652
 msgid "That area has already been fertilized."
-msgstr ""
+msgstr "那块区域已经施过肥了。"
 
 #: src/iexamine.cpp:2657
 #, c-format
@@ -339260,11 +339551,11 @@ msgstr "* 这种弹药 <neutral>可以生火</neutral>。"
 
 #: src/item.cpp:3008
 msgid "Weapon <bad>has no receiver</bad>, so stats below assume the default: "
-msgstr ""
+msgstr "武器<bad>没有枪机</bad>。所以以下统计假设是默认的："
 
 #: src/item.cpp:3013
 msgid "Weapon <bad>has no receiver and cannot be fired</bad>. "
-msgstr ""
+msgstr "武器<bad>没有枪机，无法发射</bad>。"
 
 #: src/item.cpp:3057
 msgid "Weapon is <bad>not loaded</bad>, so stats below assume the default ammo: "
@@ -339272,11 +339563,11 @@ msgstr "<bad>无弹药</bad>，使用默认弹药计算："
 
 #: src/item.cpp:3067
 msgid "<bold>Ranged damage</bold>: "
-msgstr ""
+msgstr "<bold>伤害范围</bold>："
 
 #: src/item.cpp:3109 src/item.cpp:3152 src/item.cpp:3174 src/item.cpp:3202
 msgid " = <num>"
-msgstr ""
+msgstr " = <num>"
 
 #: src/item.cpp:3117
 #, c-format
@@ -339305,7 +339596,7 @@ msgstr "（带双脚架 <num>）"
 
 #: src/item.cpp:3228 src/item.cpp:3235
 msgid "Height penalty: "
-msgstr ""
+msgstr "高度惩罚："
 
 #: src/item.cpp:3243
 msgid "Theoretical minimum recoil: "
@@ -339313,7 +339604,7 @@ msgstr "理论最小后坐力："
 
 #: src/item.cpp:3248
 msgid " (Requires <num> strength)"
-msgstr ""
+msgstr " (需要 <num> 力量)"
 
 #: src/item.cpp:3259 src/item.cpp:3339
 msgid "<num> moves"
@@ -339496,7 +339787,7 @@ msgstr "<bad>（太大）</bad>"
 
 #: src/item.cpp:3617
 msgid " <bad>(way too big)</bad>"
-msgstr ""
+msgstr " <bad>(太大了)</bad>"
 
 #: src/item.cpp:3620
 msgid " <bad>(too small)</bad>"
@@ -339504,7 +339795,7 @@ msgstr "<bad>（太小）</bad>"
 
 #: src/item.cpp:3622
 msgid " <bad>(way too small)</bad>"
-msgstr ""
+msgstr " <bad>(太小了)</bad>"
 
 #. ~ The size or fit of an article of clothing (fits / poor fit)
 #: src/item.cpp:3629
@@ -339513,7 +339804,7 @@ msgstr "<bold>尺寸/合身</bold>："
 
 #: src/item.cpp:3730
 msgid "Protection and coverage are <bad>reduced by damage</bad>.You may be able to <info>improve them by making repairs</info>."
-msgstr ""
+msgstr "保护和覆盖范围<bad>因受损减少</bad>。<info>可以通过修理来改善</info>。"
 
 #: src/item.cpp:3739
 msgid "Personal"
@@ -340152,7 +340443,7 @@ msgstr "少于 "
 #: src/item.cpp:5396
 #, c-format
 msgid "% stamina to swing."
-msgstr ""
+msgstr "% 耗力挥动。"
 
 #: src/item.cpp:5408
 msgid "<bold>Techniques when wielded</bold>: "
@@ -340379,23 +340670,23 @@ msgstr "已启用的 <info>配件（%s）</info> 属性已经显示。"
 
 #: src/item.cpp:6099
 msgid "* <bold><info>MOLLE-compatible</info> pouches can be attached to this item</bold>."
-msgstr ""
+msgstr "* <bold><info>兼容MOLLE系统</info>的口袋可以附加到这个物品上</bold>。"
 
 #: src/item.cpp:6100
 msgid "<num>.  "
-msgstr ""
+msgstr "<num>.  "
 
 #: src/item.cpp:6100
 msgid "Total space: "
-msgstr ""
+msgstr "总空间："
 
 #: src/item.cpp:6101
 msgid "<num>."
-msgstr ""
+msgstr "<num>."
 
 #: src/item.cpp:6101
 msgid "Spare space: "
-msgstr ""
+msgstr "剩余空间："
 
 #: src/item.cpp:6450
 #, c-format
@@ -340752,7 +341043,7 @@ msgstr "%s的电缆过长"
 #: src/item.cpp:14618
 #, c-format
 msgid "%s's %s breaks loose!"
-msgstr ""
+msgstr "%s 的 %s 失控了！"
 
 #: src/item.cpp:14621
 #, c-format
@@ -340762,12 +341053,12 @@ msgstr "你的%s脱落了！"
 #: src/item.cpp:14624
 #, c-format
 msgid "The %s breaks loose!"
-msgstr ""
+msgstr "%s 失控了！"
 
 #: src/item.cpp:14629
 #, c-format
 msgid "%s's %s is stretched to its limit!"
-msgstr ""
+msgstr "%s 的 %s 已经被拉伸到极限了！"
 
 #: src/item.cpp:14632
 #, c-format
@@ -341081,7 +341372,7 @@ msgstr "口袋 %d："
 
 #: src/item_pocket.cpp:984
 msgid "Holds a <info>single armor add-on or attachment</info>."
-msgstr ""
+msgstr "可以装一个<info>单独的护甲附加件或配件</info>。"
 
 #: src/item_pocket.cpp:1003 src/item_pocket.cpp:1214
 msgid "Holds: "
@@ -341233,55 +341524,55 @@ msgstr "<bold>内容物</bold>："
 
 #: src/item_pocket.cpp:1496
 msgid "Only mods can go into mod slots."
-msgstr ""
+msgstr "只有模组能放入模组槽位。"
 
 #: src/item_pocket.cpp:1510
 msgid "Only e-scannable items can go into e-file containers."
-msgstr ""
+msgstr "只有可以电子扫描的物品才能放进电子文件容器。"
 
 #: src/item_pocket.cpp:1519
 msgid "Only cables can go into cable pockets."
-msgstr ""
+msgstr "只有电缆可以放进电缆口袋。"
 
 #: src/item_pocket.cpp:1525
 msgid "Cannot unwield item."
-msgstr ""
+msgstr "无法卸下物品。"
 
 #: src/item_pocket.cpp:1534
 msgid "Incorrect item type."
-msgstr ""
+msgstr "错误的物品类型。"
 
 #: src/item_pocket.cpp:1542
 msgid "Item is not ammunition."
-msgstr ""
+msgstr "这不是弹药。"
 
 #: src/item_pocket.cpp:1549
 msgid "Item is not the correct ammo type."
-msgstr ""
+msgstr "这不是正确的弹药类型。"
 
 #: src/item_pocket.cpp:1558
 msgid "Can't contain liquid."
-msgstr ""
+msgstr "不能包含液体。"
 
 #: src/item_pocket.cpp:1564
 msgid "Can't contain gas."
-msgstr ""
+msgstr "不能包含气体。"
 
 #: src/item_pocket.cpp:1575
 msgid "Item is too big."
-msgstr ""
+msgstr "物品太大了。"
 
 #: src/item_pocket.cpp:1579
 msgid "Item is too long."
-msgstr ""
+msgstr "物品太长了。"
 
 #: src/item_pocket.cpp:1584
 msgid "Item is too short."
-msgstr ""
+msgstr "物品太短了。"
 
 #: src/item_pocket.cpp:1590
 msgid "Item is too small."
-msgstr ""
+msgstr "物品太小了。"
 
 #: src/item_pocket.cpp:1633
 msgid "can't mix liquid with contained item"
@@ -341321,11 +341612,11 @@ msgstr "无法混用不同弹药"
 
 #: src/item_pocket.cpp:1696
 msgid "Already contains an insert."
-msgstr ""
+msgstr "已包含一个插入件。"
 
 #: src/item_pocket.cpp:1705
 msgid "Insert would conflict with another worn rigid item."
-msgstr ""
+msgstr "插入会与另一个已磨损的硬质物品冲突。"
 
 #: src/item_pocket.cpp:1719
 msgid "holster already contains an item"
@@ -342906,15 +343197,15 @@ msgstr "你需要一个可充电电池来充能。"
 
 #: src/iuse.cpp:4001
 msgid "This is hardly the time!"
-msgstr ""
+msgstr "现在可不是时候！"
 
 #: src/iuse.cpp:4005
 msgid "Oh HELL NO."
-msgstr ""
+msgstr "哎呀，绝对不行。"
 
 #: src/iuse.cpp:4010
 msgid "You just aren't in the mood."
-msgstr ""
+msgstr "你没心情。"
 
 #: src/iuse.cpp:4014
 msgid "You can't do… that while mounted."
@@ -343057,7 +343348,7 @@ msgstr "使用 %1$s 切割金属？"
 #: src/iuse.cpp:4505
 #, c-format
 msgid "Resume cutting up metal using your %1$s?"
-msgstr ""
+msgstr "继续用你的 %1$s 切割金属吗？"
 
 #: src/iuse.cpp:4528
 #, c-format
@@ -343459,11 +343750,11 @@ msgstr "困"
 
 #: src/iuse.cpp:5681
 msgid " is <color_light_blue>stunned</color>."
-msgstr ""
+msgstr "受到<color_light_blue>惊吓</color>。"
 
 #: src/iuse.cpp:5682
 msgid " is <color_light_blue>dazed</color>."
-msgstr ""
+msgstr "被<color_light_blue>眩晕</color>。"
 
 #: src/iuse.cpp:5683
 msgid " is stuck in beartrap."
@@ -343519,7 +343810,7 @@ msgstr "看起来 <color_dark_gray>很疲惫</color>。"
 
 #: src/iuse.cpp:5695 src/iuse.cpp:5696
 msgid " is <color_blue>sleeping</color>."
-msgstr ""
+msgstr " 在<color_blue>睡眠中</color>。"
 
 #: src/iuse.cpp:5697
 msgid " is <color_yellow>lit</color>."
@@ -343666,7 +343957,7 @@ msgstr[0] "后面是%s。"
 #: src/iuse.cpp:6136
 #, c-format
 msgid "In the background you can see a %s"
-msgstr ""
+msgstr "在背景中你可以看到一个 %s"
 
 #: src/iuse.cpp:6139
 msgid ""
@@ -344517,17 +344808,17 @@ msgstr "%s 已经损坏，无法激活。"
 #: src/iuse_actor.cpp:280
 #, c-format
 msgid "The %1$s would not fit in its container after transforming: item is too heavy for a parent pocket"
-msgstr ""
+msgstr "%1$s 在变形后无法放入容器：物品对父口袋来说太重了"
 
 #: src/iuse_actor.cpp:285
 #, c-format
 msgid "The %1$s would not fit in its container after transforming: item is too big for a parent pocket"
-msgstr ""
+msgstr "%1$s 在变形后无法放入容器：物品对父口袋来说太大了"
 
 #: src/iuse_actor.cpp:290
 #, c-format
 msgid "The %1$s would not fit in its container after transforming: item is too long for a parent pocket"
-msgstr ""
+msgstr "%1$s 在变形后无法放入容器：物品对父口袋来说太长了"
 
 #: src/iuse_actor.cpp:321
 #, c-format
@@ -344671,7 +344962,7 @@ msgstr[0] "你把 %1$d x %2$s子弹装入%3$s。"
 #: src/iuse_actor.cpp:1103
 #, c-format
 msgid "You deploy the %s improperly.  It is hostile!"
-msgstr ""
+msgstr "你不当地部署了 %s。它是敌对的！"
 
 #: src/iuse_actor.cpp:1109
 #, c-format
@@ -344735,15 +345026,15 @@ msgstr "你尝试着让自己和%s合为一体，但并没成功。"
 
 #: src/iuse_actor.cpp:1238
 msgid "You must pick an adjacent tile on the same level."
-msgstr ""
+msgstr "你必须选择同一层级的相邻单位。"
 
 #: src/iuse_actor.cpp:1245
 msgid "There needs to be open air up above."
-msgstr ""
+msgstr "上面需要有开放的空间。"
 
 #: src/iuse_actor.cpp:1258
 msgid "There is no ledge above to anchor it to."
-msgstr ""
+msgstr "上面没有边缘可以固定它。"
 
 #: src/iuse_actor.cpp:1272
 #, c-format
@@ -345004,11 +345295,11 @@ msgstr "<npcname>开始演奏%s。"
 #: src/iuse_actor.cpp:2388 src/iuse_actor.cpp:2486
 #, c-format
 msgid "You need to hold %s to play it."
-msgstr ""
+msgstr "你要手持 %s 才能弹奏。"
 
 #: src/iuse_actor.cpp:2392
 msgid "You can't do that while driving."
-msgstr ""
+msgstr "你驾驶时不能那么做。"
 
 #: src/iuse_actor.cpp:2398
 msgid "You can't play multiple musical instruments at once."
@@ -345033,17 +345324,17 @@ msgstr "<npcname> 在水下时无法演奏。"
 #: src/iuse_actor.cpp:2476
 #, c-format
 msgid "You can't hear anything, so you stop playing your %s."
-msgstr ""
+msgstr "你听不到任何声音，所以你停下你的%s。"
 
 #: src/iuse_actor.cpp:2477
 #, c-format
 msgid "<npcname> can't hear anything, so they stops playing their %s."
-msgstr ""
+msgstr "<npcname> 什么都听不到，所以他们停下他们的 %s。"
 
 #: src/iuse_actor.cpp:2487
 #, c-format
 msgid "<npcname> needs to hold %s to play it."
-msgstr ""
+msgstr "<npcname> 需要拿着 %s 才能使用。"
 
 #: src/iuse_actor.cpp:2496
 #, c-format
@@ -345496,7 +345787,7 @@ msgstr "使用耗时："
 #: src/iuse_actor.cpp:4070
 #, c-format
 msgid "You should move before you place the %s there."
-msgstr ""
+msgstr "你应该先移动，然后再把 %s 放在那里。"
 
 #: src/iuse_actor.cpp:4078
 #, c-format
@@ -347319,11 +347610,11 @@ msgstr "可点燃"
 
 #: src/map.cpp:2621
 msgid "Damages Tires."
-msgstr ""
+msgstr "对轮胎有害。"
 
 #: src/map.cpp:2622
 msgid "Safe for Tires."
-msgstr ""
+msgstr "对轮胎安全。"
 
 #: src/map.cpp:2961 src/map.cpp:2971
 #, c-format
@@ -347625,7 +347916,7 @@ msgstr "你正躺在火上面！"
 
 #: src/map_field.cpp:1660
 msgid "The gas burns horribly as you breathe it in!"
-msgstr ""
+msgstr "这气体一吸进去就特别难受！"
 
 #: src/map_field.cpp:1695
 msgid "You're torched by flames!"
@@ -347769,19 +348060,19 @@ msgstr[0] "<bold>可用武器类别： </bold>"
 
 #: src/martialarts.cpp:904
 msgid "<bold>Requires:</bold> "
-msgstr ""
+msgstr "<bold>需要满足：</bold>"
 
 #: src/martialarts.cpp:913
 msgid "<bold>Requires any of:</bold> "
-msgstr ""
+msgstr "<bold>需要满足任一：</bold>"
 
 #: src/martialarts.cpp:922
 msgid "<bold>Lost if you have:</bold> "
-msgstr ""
+msgstr "<bold>你会丧失如果有：</bold> "
 
 #: src/martialarts.cpp:931
 msgid "<bold>Lost if you have any of:</bold> "
-msgstr ""
+msgstr "<bold>你会丧失如果有其一：</bold> "
 
 #: src/martialarts.cpp:939
 msgid "activate"
@@ -348010,7 +348301,7 @@ msgstr "你可以在安装<info>合金装甲-手臂CBM</info>后使用<info>手�
 #: src/martialarts.cpp:2288
 #, c-format
 msgid "You can <info>arm block</info> at <info>unarmed rank:</info> <stat>%s</stat>"
-msgstr ""
+msgstr "你可以在<info>未持武器等级</info><stat>%s</stat>时进行<info>手臂格挡</info>"
 
 #: src/martialarts.cpp:2292
 msgid "You can <info>leg block</info> by installing the <info>Legs Alloy Plating CBM</info>"
@@ -348019,7 +348310,7 @@ msgstr "你可以在安装<info>合金装甲-腿部CBM</info>后使用<info>腿�
 #: src/martialarts.cpp:2296
 #, c-format
 msgid "You can <info>leg block</info> at <info>unarmed rank:</info> <stat>%s</stat>"
-msgstr ""
+msgstr "你可以在<info>未持武器等级</info><stat>%s</stat>时进行<info>腿部格挡</info>"
 
 #: src/martialarts.cpp:2306
 #, c-format
@@ -348536,11 +348827,11 @@ msgstr "这把武器太过笨重，无法用来攻击！"
 #: src/melee.cpp:649
 #, c-format
 msgid "<color_light_red>Attacking your %s will take a long time. Are you sure you want to continue?</color>"
-msgstr ""
+msgstr "<color_light_red>攻击你的%s会花很长时间。你确定要吗？</color>"
 
 #: src/melee.cpp:654
 msgid "<color_light_red>Attacking unarmed will take a long time. Are you sure you want to continue?</color>"
-msgstr ""
+msgstr "<color_light_red>徒手攻击会花很长时间。你确定要吗？</color>"
 
 #: src/melee.cpp:719
 msgid "You miss and are thrown off balance by the momentum."
@@ -351046,7 +351337,7 @@ msgstr "你标记了难民中心的位置，但不知道怎么顺着路过去…
 
 #: src/mission_start.cpp:341
 msgid "You don't recognize this address.  It's surely out there somewhere, but it must be quite far away."
-msgstr ""
+msgstr "你不认识这个地址。它肯定在某个地方，但一定非常远。"
 
 #: src/mission_start.cpp:384 src/mission_start.cpp:405
 msgid "Workstation"
@@ -352221,17 +352512,17 @@ msgstr "鞍具"
 
 #: src/monexamine.cpp:107
 msgid "You need to have in hand something to stop the bleeding."
-msgstr ""
+msgstr "你需要手边有东西来止血。"
 
 #: src/monexamine.cpp:112 src/monexamine.cpp:123
 #, c-format
 msgid "You aren't going to stop %s bleeding with this %s."
-msgstr ""
+msgstr "你用这 个%s 止不住 %s 流血。"
 
 #: src/monexamine.cpp:120
 #, c-format
 msgid "The %s is no longer bleeding."
-msgstr ""
+msgstr "%s 不再流血。"
 
 #: src/monexamine.cpp:162
 #, c-format
@@ -352879,7 +353170,7 @@ msgstr "%s 的一部分从它身上伸了出来。"
 
 #: src/monster.cpp:969
 msgid "Seems to be familiar with people and could be tamed with:"
-msgstr ""
+msgstr "看着对人很亲近，可以用以下方法驯服："
 
 #: src/monster.cpp:984
 #, c-format
@@ -352985,7 +353276,7 @@ msgstr "飞翔"
 #: src/monster.cpp:1117
 msgctxt "Burrow as an action"
 msgid "burrow"
-msgstr ""
+msgstr "打地洞"
 
 #: src/monster.cpp:1118
 msgctxt "Climb as an action"
@@ -353926,6 +354217,8 @@ msgid ""
 "Muscle, toughness, and raw fortitude, strength is a useful stat in and out of melee combat.  Strong characters are more resistant to illness, excellent at grappling, and can make excellent use of bashing weapons.\n"
 "\n"
 msgstr ""
+"肌肉、坚韧和原始的勇毅，力量是在近战和非近战中都很有用的属性。力量高的角色更能抵抗疾病，擅长格斗，并且能很好地使用钝击武器。\n"
+"\n"
 
 #: src/newcharacter.cpp:1274 src/newcharacter.cpp:1312 src/newcharacter.cpp:1356 src/newcharacter.cpp:1394
 #, c-format
@@ -353956,6 +354249,8 @@ msgid ""
 "\n"
 "Knockdown resistance: %.1f"
 msgstr ""
+"\n"
+"击倒抗性: %.1f"
 
 #: src/newcharacter.cpp:1280
 #, c-format
@@ -354060,6 +354355,8 @@ msgid ""
 "Dexterity represents reaction speed, coordination, flexibility, and fine motor control.  Dextrous characters operate firearms more quickly, are faster and more accurate in melee combat, and can wriggle out of grabs even when they're not strong enough to overpower an opponent.\n"
 "\n"
 msgstr ""
+"敏捷代表反应速度、协调性、灵活性和精细运动控制。敏捷高的角色使用火器更快，近战战斗中更敏捷、命中率更高，即使力量不足以压制对手，也能从抓握中脱身。\n"
+"\n"
 
 #: src/newcharacter.cpp:1315
 #, c-format
@@ -354140,6 +354437,9 @@ msgid ""
 "Far more than just book smarts, intelligence represents willpower, analytical ability, open-mindedness, memory, and the ability to stay on-task even when bored or distracted.  Intelligent characters gain skills and proficiencies more quickly and complete crafting tasks with fewer delays.\n"
 "\n"
 msgstr ""
+"智力不仅仅是书本上的知识，它还代表意志力、分析能力、开放的心态、记忆力，以及即使感到无聊或分心也能保持专注的能力。智力高的角色学习技能和掌握熟练度的速度更快，完成制作任务时也会更少延误。\n"
+"\n"
+"\n"
 
 #: src/newcharacter.cpp:1359
 #, c-format
@@ -354156,6 +354456,8 @@ msgid ""
 "\n"
 "Effective focus: %+g%%"
 msgstr ""
+"\n"
+"有效专注度: %+g%%"
 
 #: src/newcharacter.cpp:1368 src/newcharacter.cpp:1402
 #, c-format
@@ -354192,12 +354494,26 @@ msgid ""
 "- Bash damage with whips and flails\n"
 "- Chance of being paralyzed by fear attack"
 msgstr ""
+"\n"
+"- 实践经验赶上理论知识的速度\n"
+"- 发现和拆除陷阱\n"
+"- 包扎伤口和止血\n"
+"- 安装生化插件的成功几率\n"
+"- 修改枪械时的成功几率\n"
+"- 从书籍学习制作配方的几率\n"
+"- 破解/编程电脑、刷卡机、机器人等的几率\n"
+"- 绕过车辆安全系统的几率\n"
+"- 分解物品时获得更好结果的几率\n"
+"- 使用鞭子和连枷造成的击打伤害\n"
+"- 被恐惧攻击麻痹的几率"
 
 #: src/newcharacter.cpp:1390
 msgid ""
 "A measure of wits, proprioception, and acuity.  Perceptive characters excel at ranged accuracy, critical hits, and striking weakpoints.  Perception is broadly useful in combat, but most benefits stabbing weapons.\n"
 "\n"
 msgstr ""
+"智力、身体感知和敏锐度的衡量标准。感知高的角色在远程精度、暴击以及打击弱点方面表现出色。感知在战斗中作用广泛，但大多数情况下对刺击武器更有利。\n"
+"\n"
 
 #: src/newcharacter.cpp:1396
 #, c-format
@@ -354234,6 +354550,20 @@ msgid ""
 "- Morale bonus when playing a musical instrument\n"
 "- Effectiveness of repairing and modifying clothes and armor"
 msgstr ""
+"\n"
+"- 将实际经验赶上理论知识的速度  \n"
+"- 远程攻击的精准度和可靠性  \n"
+"- 近战暴击几率大幅提升  \n"
+"- 减少刺击武器卡住的几率  \n"
+"- 地图上的视野距离  \n"
+"- 偷窃的效果  \n"
+"- 投掷准确度  \n"
+"- 自己消毒伤口和为他人进行急救的能力  \n"
+"- 驾驶时失去车辆控制的几率  \n"
+"- 发现隐藏生物和陷阱的几率  \n"
+"- 开锁和觅食的速度与效率  \n"
+"- 演奏乐器时的心情加成  \n"
+"- 修理和改造衣物及护甲的效果"
 
 #: src/newcharacter.cpp:1428
 #, c-format
@@ -355001,12 +355331,12 @@ msgstr "不戴眼镜我无法阅读。"
 #: src/npc.cpp:1484
 #, c-format
 msgid "%s starts reading ebook %s."
-msgstr ""
+msgstr "%s 开始阅读 %s 电子版。"
 
 #: src/npc.cpp:1485
 #, c-format
 msgid "%s starts reading %s."
-msgstr ""
+msgstr "%s 开始阅读 %s。"
 
 #: src/npc.cpp:1507
 msgid "This can't be worn."
@@ -355102,7 +355432,7 @@ msgstr "不会出售自己的设备"
 
 #: src/npc.cpp:2173
 msgid "Will not buy this"
-msgstr ""
+msgstr "不会买这个"
 
 #: src/npc.cpp:2177
 msgid "Will not buy filthy items"
@@ -356335,130 +356665,130 @@ msgstr "%1$s 给了你一个 %2$s"
 #: src/npctalk_funcs.cpp:723
 #, c-format
 msgid "%s administers a dose of naloxone to treat your opioid overdose."
-msgstr ""
+msgstr "%s 给你注射了一剂纳洛酮来治疗你的阿片类药物过量。"
 
 #: src/npctalk_funcs.cpp:724
 #, c-format
 msgid "%s administers a dose of naloxone to treat <npcname>'s opioid overdose."
-msgstr ""
+msgstr "%s 给 <npcname> 注射了一剂纳洛酮来治疗他的阿片类药物过量。"
 
 #: src/npctalk_funcs.cpp:730
 #, c-format
 msgid "%s administers a saline infusion to treat your hypovolemic shock."
-msgstr ""
+msgstr "%s 给你输盐水来治疗低血容量性休克。"
 
 #: src/npctalk_funcs.cpp:731
 #, c-format
 msgid "%s administers a saline infusion to treat <npcname>'s hypovolemic shock."
-msgstr ""
+msgstr "%s 给 <npcname> 输注生理盐水以治疗低血容量性休克。"
 
 #: src/npctalk_funcs.cpp:798
 msgid "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up."
-msgstr ""
+msgstr "你身上有某种寄生虫。它可能一时不会对生命造成威胁，吃抗寄生虫药应该能清除它。"
 
 #: src/npctalk_funcs.cpp:801
 msgid "Looks like you have a pretty serious fungal infection.  Taking antifungal medication should clear it up, but I'd hurry if I were you."
-msgstr ""
+msgstr "看上去你得了比较严重的真菌感染。吃抗真菌药应该能治好它，要是我是你的话就会马上行动。"
 
 #: src/npctalk_funcs.cpp:804
 msgid "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection."
-msgstr ""
+msgstr "你患有急性放射综合症。每隔三小时服用一次普鲁士蓝应有助于治疗。大多数暴露自环境中的细灰或灰尘，所以以后尽量戴口罩，穿防护环境的衣服。"
 
 #: src/npctalk_funcs.cpp:807
 msgid "You have a bacterial infection.  There's a chance a healthy person can fight this sort of thing off, but it can be lethal for just about anybody.  Find the strongest antibiotics you can and take one every twelve hours until it's cleared up."
-msgstr ""
+msgstr "你得了细菌感染。健康人能自己抵御这种情况，但几乎对任何人而言这都是可能致命的。找最强的抗生素，每十二小时服用一次，直到感染消退为止。"
 
 #: src/npctalk_funcs.cpp:810
 msgid "You probably feel pretty horrible, but it's just the flu.  It should resolve itself within two to twelve days from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any."
-msgstr ""
+msgstr "你可能感觉很糟，但这只是流感。从你出现症状算起，大约两到十二天内应该会自行好转。在此期间，你可以服用止咳糖浆来缓解大部分症状，或者找不到的话，也可以用类鸦片和抗组胺药。"
 
 #: src/npctalk_funcs.cpp:813
 msgid "It seems you've caught a cold.  It should resolve itself within two days to three weeks from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any."
-msgstr ""
+msgstr "你看起来感冒了。从你刚注意到症状起的两天到三周内感冒通常会自愈。在此期间，你可以服用止咳糖浆来缓解大部分症状，或者找不到的话，也可以使用阿片类药物和抗组胺药。"
 
 #: src/npctalk_funcs.cpp:817
 msgid "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, it won't have any effect."
-msgstr ""
+msgstr "你有轻微的结膜感染——也就是红眼病。一般几天就会自己好。如果痒得烦人，可以试试抗过敏药。咳嗽药水可能也有效，但别用那种不致困的类型。你也可以尝试每十二小时吃一次抗生素，不过若是病毒感染，是没有作用的。"
 
 #: src/npctalk_funcs.cpp:820
 msgid "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it."
-msgstr ""
+msgstr "那些烦人的抓痕看起来像是鼠咬热。你可以试着吃一些阿司匹林或布洛芬来缓解症状。等着让身体自己对抗也没问题，但你也可以每十二小时吃一次抗生素来应对。"
 
 #: src/npctalk_funcs.cpp:823
 msgid "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms."
-msgstr ""
+msgstr "你的肌肉痉挛是由破伤风引起的。每十二小时打一剂抗生素可能会治好，要不然你该找一些苯二氮卓类药物来缓解症状。"
 
 #: src/npctalk_funcs.cpp:826
 msgid "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time."
-msgstr ""
+msgstr "神经病变、抽筋和震颤。我不太确定你到底出了什么问题，但如果让我猜，你可能吃了或喝了什么有毒的东西。别再那样做了，也许随时间你的身体会把毒素排出去。"
 
 #: src/npctalk_funcs.cpp:829
 msgid "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself."
-msgstr ""
+msgstr "你得了贫血。通常是因为出血引起的，但有时也可能是饮食不良，现在两种情况发生的可能性一样。你需要补充铁，可以从绿叶蔬菜、多种维生素或红肉中获取，还需要休息，让身体恢复。"
 
 #: src/npctalk_funcs.cpp:832
 msgid "Scurvy.  That's a vitamin C deficiency.  You're going to want to look for fruit, greens, or organ meat, and it's got to be fresh, the preserved stuff usually won't do.  Vitamin supplements would also do the trick."
-msgstr ""
+msgstr "坏血病。那是维生素C缺乏症。你会想要找水果、蔬菜或动物内脏，而且一定要新鲜的，通常保存过的东西不行。维生素补充剂也能解决这个问题。"
 
 #: src/npctalk_funcs.cpp:848
 msgid "Your pulse is elevated and I'm not liking the look of your blood pressure.  You need more exercise."
-msgstr ""
+msgstr "你的脉搏升高了，我看你的血压状况也不太好。你需要多运动。"
 
 #: src/npctalk_funcs.cpp:850
 msgid "I'd say you could stand to get more exercise."
-msgstr ""
+msgstr "我想说你可以多运动运动。"
 
 #: src/npctalk_funcs.cpp:852
 msgid "Your vitals look good."
-msgstr ""
+msgstr "你的生命体征看着很好。"
 
 #: src/npctalk_funcs.cpp:854
 msgid "It seems like you're in pretty good shape.  Your vitals look great, anyway."
-msgstr ""
+msgstr "看起来你身体状况挺好的。而且，你的生命体征看上去极好。"
 
 #: src/npctalk_funcs.cpp:856
 msgid "You're in incredible shape!  What exactly have you been doing out there?"
-msgstr ""
+msgstr "你身材真棒！你到底在外面都做了些什么？"
 
 #: src/npctalk_funcs.cpp:861
 msgid "You probably don't need me to tell you this, but you're starving.  You're going to have a hard time staying healthy, let alone active, if your body doesn't have enough energy for its basic functions."
-msgstr ""
+msgstr "你可能不需要我告诉你这个，但你的确饿坏了。如果你的身体没有足够的能量来维持基本功能，你会很难保持健康，更别说活跃起来。"
 
 #: src/npctalk_funcs.cpp:863
 msgid "Your weight looks OK."
-msgstr ""
+msgstr "你体重看上去很OK。"
 
 #: src/npctalk_funcs.cpp:865
 msgid "You might benefit from losing some weight.  Things being how they are I'd say it's better to have too much than too little, but you're at the point where it's starting to put a strain on your body."
-msgstr ""
+msgstr "你减点体重可能会有好处。照现在的情况，我会说宁多勿少，但你现在已经到了开始给身体带来压力的程度。"
 
 #: src/npctalk_funcs.cpp:867
 msgid "We really should think about getting you on a diet.  I know, I know, I don't like saying it, but now more than ever, your health matters."
-msgstr ""
+msgstr "我们真的应该考虑让你节食了。我懂我懂，我也不喜欢这么说，但现在你的健康比以往任何时候都更重要。"
 
 #: src/npctalk_funcs.cpp:870
 msgid "I don't think your condition's going to improve without some sort of miracle, so you need to stay out of trouble."
-msgstr ""
+msgstr "我觉得你的情况要是没有某种奇迹是不会好转的，所以你得别惹麻烦。"
 
 #: src/npctalk_funcs.cpp:872
 msgid "One last thing: your immune system's probably shot.  That means you'll have a hard time fighting off infection and recovering from injury.  You need to avoid drugs and alcohol, mask up whenever possible, and don't eat anything weird.  Oh, and try to get some sleep.  You won't bounce back right away, but if you can stay active, stay clean, and try to maintain a healthy weight, you'll start feeling a lot better."
-msgstr ""
+msgstr "最后一件事：你的免疫系统可能已经很糟了。意味着你很难抵抗感染，也难以从受伤中恢复。你需要避免药物和酒精，尽可能戴上口罩，不吃奇怪的东西。哦，还要尽量睡觉。你不会立刻恢复，但如果你能保持活跃、保持清洁，并尽量维持健康体重，你会开始感觉好转。"
 
 #: src/npctalk_funcs.cpp:874
 msgid "That's everything.  You'd probably benefit from some lifestyle changes, though.  Little things, like exposure to toxins, junk food, smoke inhalation, even just dealing with a lot of negative emotions - all this stuff adds up, and it can really do a number on your health."
-msgstr ""
+msgstr "就这些了。不过你做些生活方式上的调整或许会有好处。一些小事，比如接触毒素、垃圾食品、吸入烟雾，甚至只是处理大量负面情绪——这些都会堆积起来，然后对你的健康产生影响。"
 
 #: src/npctalk_funcs.cpp:876
 msgid "It looks like apart from everything else, you've been maintaining good lifestyle habits.  Keep it up, it'll pay dividends the next time you're up against an injury or illness."
-msgstr ""
+msgstr "看着除其他方面外，你一直有保持良好的生活习惯。继续坚持下去，当你下一次受伤或生病，其中的好处就会显现。"
 
 #: src/npctalk_funcs.cpp:878
 msgid "Your health otherwise seems pretty good.  As long as you don't push it too far, you should be able to bounce back pretty well from most health problems."
-msgstr ""
+msgstr "你健康状况看起来还不错。只要不过度操劳，大多数健康问题应该你都能挺过去。"
 
 #: src/npctalk_funcs.cpp:880
 msgid "All else aside, your outlook seems great.  Clean living really is its own reward."
-msgstr ""
+msgstr "撇开其他不谈，你的气色看起来很棒。健康的生活方式本身就是最大的回报。"
 
 #: src/npctalk_funcs.cpp:897
 msgid "Choose a new facial hair style"
@@ -359915,7 +360245,7 @@ msgstr "你感到恶心。"
 
 #: src/player_hardcoded_effects.cpp:219
 msgid "The back of your throat is filled with a musty smell that you can almost taste."
-msgstr ""
+msgstr "你喉咙后面满是霉味，几乎能尝到它的味道。"
 
 #: src/player_hardcoded_effects.cpp:225
 msgid "You spasm suddenly!"
@@ -360226,7 +360556,7 @@ msgstr "有敌对生物出现在附近！"
 
 #: src/player_hardcoded_effects.cpp:656
 msgid "Space folds impossibly around itself!"
-msgstr ""
+msgstr "空间不可思议地在自我折叠！"
 
 #: src/player_hardcoded_effects.cpp:666 src/player_hardcoded_effects.cpp:726
 msgid "You shudder suddenly."
@@ -360465,11 +360795,11 @@ msgstr "为什么要把你的时间浪费在这个不起眼的斑点上？"
 
 #: src/player_hardcoded_effects.cpp:1341
 msgid "Too fast.  You're too fast!  Everything's too fast!"
-msgstr ""
+msgstr "太快了。你太快了！一切东西都太快了！"
 
 #: src/player_hardcoded_effects.cpp:1343
 msgid "You feel paranoid."
-msgstr ""
+msgstr "你感觉有点偏执。"
 
 #: src/player_hardcoded_effects.cpp:1348 src/player_hardcoded_effects.cpp:1452
 msgid "You can't stop clenching your jaw."
@@ -360918,7 +361248,7 @@ msgstr "当前"
 
 #: src/ranged.cpp:2057
 msgid " <color_green>Great</color> <color_light_gray>Good</color> <color_magenta>Doubtful</color> <color_light_blue>Moves</color>"
-msgstr ""
+msgstr " <color_green>极佳</color> <color_light_gray>不错</color> <color_magenta>怀疑</color> <color_light_blue>动摇</color>"
 
 #: src/ranged.cpp:2073
 #, c-format
@@ -360931,7 +361261,7 @@ msgstr "行动点"
 
 #: src/ranged.cpp:2122
 msgid "Confidence:"
-msgstr ""
+msgstr "信心"
 
 #: src/ranged.cpp:2129
 msgid "Moves to load"
@@ -360974,12 +361304,12 @@ msgstr "暴击"
 #: src/ranged.cpp:2234 src/ranged.cpp:2267 src/ranged.cpp:2316
 msgctxt "aim_confidence"
 msgid "Good"
-msgstr ""
+msgstr "十足"
 
 #: src/ranged.cpp:2235 src/ranged.cpp:2268 src/ranged.cpp:2317
 msgctxt "aim_confidence"
 msgid "Poor"
-msgstr ""
+msgstr "不准"
 
 #: src/ranged.cpp:2272
 msgctxt "aim_confidence"
@@ -361092,11 +361422,11 @@ msgstr "咔嘣！"
 
 #: src/ranged.cpp:2685
 msgid "aware"
-msgstr ""
+msgstr "知道的"
 
 #: src/ranged.cpp:2685
 msgid "unaware"
-msgstr ""
+msgstr "不知道的"
 
 #: src/ranged.cpp:2853
 #, c-format
@@ -361444,12 +361774,12 @@ msgstr "<color_cyan>无</color>"
 #: src/recipe.cpp:1677
 #, c-format
 msgid "%s per unit to %d units"
-msgstr ""
+msgstr "%s 每单位到 %d 单位"
 
 #: src/recipe.cpp:1679
 #, c-format
 msgid "%s per unit"
-msgstr ""
+msgstr "%s 每单位"
 
 #: src/recipe.cpp:1683
 #, c-format
@@ -361458,7 +361788,7 @@ msgstr "%d%%（大于 %d 批后）"
 
 #: src/recipe.cpp:1691
 msgid "varies by step"
-msgstr ""
+msgstr "因步骤而异"
 
 #: src/recipe.cpp:1862
 msgid "[bad param name]"
@@ -361987,15 +362317,15 @@ msgstr "你感到了一阵头晕目眩。"
 
 #: src/suffer.cpp:597
 msgid "Your mouth feels dry."
-msgstr ""
+msgstr "你感觉嘴干。"
 
 #: src/suffer.cpp:603
 msgid "You feel sleepy."
-msgstr ""
+msgstr "你感到困意连连。"
 
 #: src/suffer.cpp:609
 msgid "You feel restless."
-msgstr ""
+msgstr "你感到心神不宁。"
 
 #: src/suffer.cpp:651
 msgid "You have an asthma attack!"
@@ -362184,7 +362514,7 @@ msgstr "<npcname> 伸了伸懒腰。"
 
 #: src/suffer.cpp:1596
 msgid "You've gone too long without sleep."
-msgstr ""
+msgstr "你太久没睡觉了。"
 
 #: src/suffer.cpp:1597
 msgid "<npcname> lets out a huge yawn."
@@ -362192,11 +362522,11 @@ msgstr "<npcname> 重重地打了个哈欠。"
 
 #: src/suffer.cpp:1605
 msgid "You briefly lose track of what you were doing."
-msgstr ""
+msgstr "你短暂地忘了自己在做什么。"
 
 #: src/suffer.cpp:1609
 msgid "Your body is sore and aching."
-msgstr ""
+msgstr "你全身又酸又痛。"
 
 #: src/suffer.cpp:1613
 msgid "Your vision blurs a little."
@@ -362204,15 +362534,15 @@ msgstr "你的视野一阵阵模糊。"
 
 #: src/suffer.cpp:1620
 msgid "You zone out for a moment."
-msgstr ""
+msgstr "你发呆了会儿。"
 
 #: src/suffer.cpp:1624
 msgid "Your muscles and joints ache."
-msgstr ""
+msgstr "你的肌肉和关节疼。"
 
 #: src/suffer.cpp:1628
 msgid "You have a headache."
-msgstr ""
+msgstr "你头疼。"
 
 #: src/suffer.cpp:1635
 msgid "You feel heartburn and an acid taste in your mouth."
@@ -362220,15 +362550,15 @@ msgstr "你感到腹部灼热，嘴中反酸。"
 
 #: src/suffer.cpp:1640
 msgid "Waking dreams haunt the corners of your vision."
-msgstr ""
+msgstr "清醒时梦境萦绕在你视线的角落里。"
 
 #: src/suffer.cpp:1644
 msgid "Your body trembles, pushed to its limit by lack of sleep."
-msgstr ""
+msgstr "你的身体在颤抖，缺乏睡眠快到极限。"
 
 #: src/suffer.cpp:1648
 msgid "You stumble."
-msgstr ""
+msgstr "你绊了一下。"
 
 #: src/suffer.cpp:1649
 msgid "<npcname> stumbles."
@@ -362467,12 +362797,12 @@ msgstr "我该脱下些什么吗？"
 #: src/talker_npc.cpp:454
 #, c-format
 msgid "I think I might be better off barehanded, do you really want me to use the %s?"
-msgstr ""
+msgstr "我觉得我可能光着手更好，你真的想让我用%s吗？"
 
 #: src/talker_npc.cpp:458
 #, c-format
 msgid "I think my %s is better, do you really want me to use the %s?"
-msgstr ""
+msgstr "我觉得我的%s更好，你真的要我用%s吗？"
 
 #: src/talker_npc.cpp:467
 #, c-format
@@ -362793,11 +363123,11 @@ msgstr "你的 %s 踩到了一些气泡袋！"
 
 #: src/trapfunc.cpp:186
 msgid "You are underwater and struggling to stay afloat!"
-msgstr ""
+msgstr "你在水下，正拼命保持漂浮！"
 
 #: src/trapfunc.cpp:189
 msgid "You're wet and cold from the water."
-msgstr ""
+msgstr "你被水弄得又冷又湿。"
 
 #: src/trapfunc.cpp:207
 msgid "You step on some glass!"
@@ -363661,7 +363991,7 @@ msgstr "你在驾驶载具时无法安装部件。"
 
 #: src/veh_interact.cpp:1064 src/veh_interact.cpp:1160 src/veh_interact.cpp:1292 src/veh_interact.cpp:1331 src/veh_interact.cpp:1894 src/veh_interact.cpp:1940 src/veh_interact.cpp:1984
 msgid "You are busy doing something else."
-msgstr ""
+msgstr "你正忙于其他事情。"
 
 #: src/veh_interact.cpp:1074
 msgid "Installing this part will mean that this vehicle is no longer flightworthy.  Continue?"
