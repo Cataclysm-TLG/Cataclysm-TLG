@@ -1163,5 +1163,15 @@
     "description": "Obsoleted trait.",
     "random_at_chargen": false,
     "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_extremely_long",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Obsoleted hairstyle.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
   }
 ]
