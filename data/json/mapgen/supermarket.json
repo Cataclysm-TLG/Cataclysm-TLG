@@ -456,7 +456,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_oil_vinegar", "x": 0, "y": 0, "chance": 148 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_oil_vinegar", "x": 0, "y": 0, "chance": 14 } ]
     }
   },
   {
