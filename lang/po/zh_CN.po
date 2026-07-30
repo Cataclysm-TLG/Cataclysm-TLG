@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-30 14:37+0800\n"
+"PO-Revision-Date: 2026-07-30 19:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -87932,76 +87932,76 @@ msgstr[0] "糖渍草莓"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "strawberry fruit leather"
 msgid_plural "strawberry fruit leather"
-msgstr[0] ""
+msgstr[0] "草莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "strawberry jam"
 msgid_plural "strawberry jam"
-msgstr[0] ""
+msgstr[0] "草莓果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "tupelo fruit fruit leather"
 msgid_plural "tupelo fruit fruit leather"
-msgstr[0] ""
+msgstr[0] "蓝果木果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "tupelo fruit in syrup"
 msgid_plural "tupelo fruit in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍蓝果木果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "tupelo fruit jam"
 msgid_plural "tupelo fruit jam"
-msgstr[0] ""
+msgstr[0] "蓝果木果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "watermelon fruit leather"
 msgid_plural "watermelon fruit leather"
-msgstr[0] ""
+msgstr[0] "西瓜果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "watermelon in syrup"
 msgid_plural "watermelon in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍西瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "watermelon jam"
 msgid_plural "watermelon jam"
-msgstr[0] ""
+msgstr[0] "西瓜果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "wintergreen berries in syrup"
 msgid_plural "wintergreen berries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍冬青莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "wintergreen berry fruit leather"
 msgid_plural "wintergreen berry fruit leather"
-msgstr[0] ""
+msgstr[0] "冬青莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "wintergreen berry jam"
 msgid_plural "wintergreen berry jam"
-msgstr[0] ""
+msgstr[0] "冬青莓果酱"
 
 #. ~ Description of "chocolate bar"
 #: data/json/items/comestibles/junkfood.json
@@ -89522,7 +89522,7 @@ msgstr[0] "罐装金枪鱼"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "cannibal spaghetti"
 msgid_plural "cannibal spaghetti"
-msgstr[0] ""
+msgstr[0] "人肉意大利面"
 
 #. ~ Conditional name for "currywurst" when VITAMIN matches
 #. human_flesh_vitamin
@@ -89652,7 +89652,7 @@ msgstr[0] "脱水贝肉"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "dehydrated tainted human flesh"
 msgid_plural "dehydrated tainted human flesh"
-msgstr[0] ""
+msgstr[0] "脱水受污染人肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/meat_dishes.json
@@ -89980,13 +89980,13 @@ msgstr[0] "干肉饼"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "pemmican with fruit"
 msgid_plural "pemmican with fruit"
-msgstr[0] ""
+msgstr[0] "水果肉糜干"
 
 #. ~ Item name
 #: data/json/items/comestibles/meat_dishes.json
 msgid "pemmican with vegetables"
 msgid_plural "pemmican with vegetables"
-msgstr[0] ""
+msgstr[0] "蔬菜肉糜干"
 
 #. ~ Conditional name for "pelmeni" when COMPONENT_ID_SUBSTRING matches mutant
 #: data/json/items/comestibles/meat_dishes.json
@@ -90214,7 +90214,7 @@ msgstr[0] "意式番茄牛肉面"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "spaghetti mostruoso"
 msgid_plural "spaghetti mostruoso"
-msgstr[0] ""
+msgstr[0] "怪物意面"
 
 #. ~ Item name
 #: data/json/items/comestibles/meat_dishes.json
@@ -90325,7 +90325,7 @@ msgstr "调试用物品，可让NPC或自己入睡。"
 #. ~ Description of "alprazolam"
 #: data/json/items/comestibles/med.json
 msgid "A fast-acting benzodiazepine with a powerful sedative effect.  It is dangerously addictive, and withdrawal from regular use should be gradual."
-msgstr ""
+msgstr "一种起效迅速的苯二氮䓬类药物，具有强效镇静作用。具有危险的成瘾性，长期使用后应逐步戒断。"
 
 #. ~ Description of "flavored bone meal tablet"
 #: data/json/items/comestibles/med.json
@@ -90350,7 +90350,7 @@ msgstr "由漂白剂和水制成的临时防腐剂。  挥发性氯化合物会�
 #. ~ Description of "cocaine topical cream"
 #: data/json/items/comestibles/med.json
 msgid "A medical cream that provides both vascular restriction and anesthetic properties.  It won't get you high, but if used too frequently it may still be habit-forming."
-msgstr ""
+msgstr "一种兼具血管收缩和麻醉效果的医用乳膏。它不会让你兴奋，但如果使用过于频繁，仍可能产生依赖。"
 
 #. ~ Description of "cigarette"
 #: data/json/items/comestibles/med.json
@@ -90400,17 +90400,17 @@ msgstr "一种强力的化学药片，可以彻底清除生物体内的真菌感
 #. ~ Description of "lithium tablet"
 #: data/json/items/comestibles/med.json
 msgid "A prescription mood stabilizer in the form of lithium carbonate.  This drug has long been used to treat bipolar disorder, and if taken once daily, helps to dampen the severity of mood swings."
-msgstr ""
+msgstr "一种处方情绪稳定剂，成分为碳酸锂。该药长期以来用于治疗双相情感障碍，每日服用一次有助于减轻情绪波动的严重程度。"
 
 #. ~ Description of "dextroamphetamine"
 #: data/json/items/comestibles/med.json
 msgid "A prescription stimulant commonly prescribed for attention deficit disorder, often with levoamphetamine included.  It can be addictive if abused."
-msgstr ""
+msgstr "一种处方兴奋剂，常用于治疗注意缺陷障碍，通常含有左旋安非他命。如滥用可能产生成瘾性。"
 
 #. ~ Description of "zolpidem"
 #: data/json/items/comestibles/med.json
 msgid "A prescription-strength sedative with a variety of psychoactive side effects.  Used in the treatment of insomnia."
-msgstr ""
+msgstr "一种处方级镇静剂，具有多种精神活性副作用。用于治疗失眠。"
 
 #. ~ Description of "hand-rolled cigarette"
 #: data/json/items/comestibles/med.json
@@ -90420,7 +90420,7 @@ msgstr "一根你自己卷的香烟，刺激感知，并且降低进食欲望。
 #. ~ Description of "naloxone"
 #: data/json/items/comestibles/med.json
 msgid "A small plastic device with a nozzle on one end and a plunger on the other.  The drug inside can be administered nasally to rapidly reverse and block the effect of opioids, which could save someone's life during an overdose."
-msgstr ""
+msgstr "一种小型塑料装置，一端带有喷嘴，另一端带有推杆。内部的药物可通过鼻腔给药，迅速逆转并阻断阿片类药物的作用，在过量用药时可能挽救生命。"
 
 #. ~ Description of "injectable iron"
 #: data/json/items/comestibles/med.json
@@ -90450,12 +90450,12 @@ msgstr "一种强大的苯二氮卓类药物，用于治疗肌肉痉挛、焦虑
 #. ~ Description of "epinephrine autoinjector"
 #: data/json/items/comestibles/med.json
 msgid "A syringe filled with a shot of epinephrine, also called adrenaline.  It serves as a powerful stimulant when you inject yourself with it.  Asthmatics can use it in an emergency to clear an asthma attack."
-msgstr ""
+msgstr "一支装有肾上腺素（也叫肾上腺素）的注射器。注射后能起到强效兴奋剂的作用。哮喘患者在紧急情况下可用它来缓解哮喘发作。"
 
 #. ~ Description of "tramadol"
 #: data/json/items/comestibles/med.json
 msgid "A tablet containing 50mg of a slow-acting opioid.  It is slow-acting and relatively mild, but will last much longer than other opioids."
-msgstr ""
+msgstr "一种含有50毫克缓释阿片类药物的药片。其作用缓慢，相对温和，但持续时间比其他阿片类药物更长。"
 
 #. ~ Description of "Prussian blue tablet"
 #: data/json/items/comestibles/med.json
@@ -90482,12 +90482,12 @@ msgstr "对乙酰氨基酚是一种温和的止痛药，适合与阿司匹林等
 #. ~ Description of "cough syrup"
 #: data/json/items/comestibles/med.json
 msgid "Acetaminophen, dextromethorphan HBr, and diphenhydramine served in the form of a foul-tasting syrup.  It promises to fight flu symptoms like coughs, fever, and body aches, and thanks to the inclusion of a potent antihistamine, it should fight allergies and put you to sleep as well."
-msgstr ""
+msgstr "一种含有对乙酰氨基酚、氢溴酸右美沙芬和苯海拉明的口服液，味道不佳。宣称可对抗咳嗽、发热和身体酸痛等流感症状，且因含有强效抗组胺成分，还可缓解过敏并帮助入睡。"
 
 #. ~ Description of "aspirin"
 #: data/json/items/comestibles/med.json
 msgid "Acetylsalicylic acid, an NSAID that can treat pain and fever.  It is a blood thinner, and may exacerbate bleeding."
-msgstr ""
+msgstr "乙酰水杨酸，一种非甾体抗炎药，可治疗疼痛和发热。具有抗凝血作用，可能加重出血。"
 
 #. ~ Snippet of item "homeopathic pill"
 #: data/json/items/comestibles/med.json
@@ -90522,7 +90522,7 @@ msgstr "一种用于医院环境中治疗剧烈疼痛的成瘾性麻醉剂。你
 #. ~ Description of "nicotine patch"
 #: data/json/items/comestibles/med.json
 msgid "An adhesive patch that promises to fight cravings and help smokers quit by slowly delivering nicotine into the body over the course of 16 hours as a replacement for smoking."
-msgstr ""
+msgstr "一种透皮贴剂，宣称可通过在16小时内缓慢向体内释放尼古丁来替代吸烟，从而帮助吸烟者抑制烟瘾并戒烟。"
 
 #. ~ Description of "Panaceus"
 #: data/json/items/comestibles/med.json
@@ -90547,12 +90547,12 @@ msgstr "一份加入了冬青油的软膏。具有微弱的抗菌作用，可以
 #. ~ Description of "codeine"
 #: data/json/items/comestibles/med.json
 msgid "An opioid in tablet form, used in the suppression of pain, cough, and other ailments.  While relatively weak for a narcotic, it is still addictive, with a potential for overdose."
-msgstr ""
+msgstr "一种片剂形式的阿片类药物，用于抑制疼痛、咳嗽及其他症状。虽然作为麻醉剂而言相对较弱，但仍有成瘾性，并存在过量使用的风险。"
 
 #. ~ Description of "diphenhydramine"
 #: data/json/items/comestibles/med.json
 msgid "An over-the-counter allergy medication.  These tablets are meant to be taken once per day and can cause drowsiness."
-msgstr ""
+msgstr "一种非处方抗过敏药物。这些药片需每日服用一次，可能引起嗜睡。"
 
 #. ~ Description of "melatonin tablet"
 #: data/json/items/comestibles/med.json
@@ -90621,12 +90621,12 @@ msgstr "一份高度浓缩的大麻精油。这种精油经过了最多步骤的
 #. ~ Description of "bismuth subsalicylate"
 #: data/json/items/comestibles/med.json
 msgid "Creamy pink syrup that tastes of bubblegum and chalk.  It is used to treat digestive issues such as nausea and heartburn."
-msgstr ""
+msgstr "一种粉红色乳状糖浆，带有泡泡糖和白垩土的味道。用于治疗恶心和胃灼热等消化问题。"
 
 #. ~ Description of "cocaine"
 #: data/json/items/comestibles/med.json
 msgid "Crystalline extract of the coca leaf, or at least, a white powder with some of that in it.  It is a highly addictive stimulant."
-msgstr ""
+msgstr "古柯叶的结晶提取物，或者至少是一种含有部分该成分的白色粉末。它是一种高度成瘾性的兴奋剂。"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -90637,7 +90637,7 @@ msgstr[0] "达金溶液"
 #. ~ Description of "non-drowsy cough syrup"
 #: data/json/items/comestibles/med.json
 msgid "Daytime cold and flu medication consisting primarily of dextromethorphan HBr and acetaminophen.  It promises to suppress coughing, aching, headaches and fever without causing excessive drowsiness."
-msgstr ""
+msgstr "一种日间感冒和流感药物，主要成分为氢溴酸右美沙芬和对乙酰氨基酚。宣称可抑制咳嗽、疼痛、头痛和发热，且不会引起过度嗜睡。"
 
 #. ~ Description of "crack"
 #: data/json/items/comestibles/med.json
@@ -90662,7 +90662,7 @@ msgstr "身体必需的各种膳食营养成分被方便地包装成丸状。是
 #. ~ Description of "ibuprofen"
 #: data/json/items/comestibles/med.json
 msgid "Ibuprofen, a mild NSAID analgesic.  It relieves pain and swelling, but raises blood pressure more than other NSAIDs."
-msgstr ""
+msgstr "布洛芬，一种温和的非甾体抗炎镇痛药。可缓解疼痛和肿胀，但相比其他非甾体抗炎药更易升高血压。"
 
 #. ~ Description of "rolling tobacco"
 #: data/json/items/comestibles/med.json
@@ -90696,12 +90696,12 @@ msgstr "薄荷味的咀嚼烟草。虽然对你的健康十分不利，它曾经
 #. ~ Description of "naproxen"
 #: data/json/items/comestibles/med.json
 msgid "Naproxen, a slow-acting over-the-counter pain medicaton.  It takes up to an hour to kick in, but lasts longer than other NSAIDs."
-msgstr ""
+msgstr "萘普生，一种非处方缓释止痛药。需长达一小时才能起效，但持续时间比其他非甾体抗炎药更长。"
 
 #. ~ Description of "caffeine pill"
 #: data/json/items/comestibles/med.json
 msgid "Once favored by truckers and students who couldn't get a prescription and didn't want to break the law, of these pills is equivalent to a strong cup of coffee."
-msgstr ""
+msgstr "一种曾深受卡车司机和学生青睐的药片，他们既无法获得处方，又不想违法。每片效果相当于一杯浓咖啡。"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -90806,7 +90806,7 @@ msgstr "无菌的生理盐水滴眼液，可以用来治疗眼部干燥，也可
 #. ~ Description of "nicotine gum"
 #: data/json/items/comestibles/med.json
 msgid "Sugar-free chewing gum that slowly delivers nicotine over the course of an hour.  It's designed for smokers who want to quit, but that doesn't mean it can't be habit-forming."
-msgstr ""
+msgstr "一种无糖口香糖，可在长达一小时内缓慢释放尼古丁。专为想戒烟的吸烟者设计，但这并不意味着它不会产生依赖。"
 
 #. ~ Description of "caffeinated chewing gum"
 #: data/json/items/comestibles/med.json
@@ -90826,7 +90826,7 @@ msgstr "这个电池驱动的装置将尼古丁和调味剂的混合液蒸腾起
 #. ~ Description of "crystal meth"
 #: data/json/items/comestibles/med.json
 msgid "Tiny crystals of methamphetamine, one of the most potent and addictive stimulants around.  This sample is quite pure and should lead to a strong, reliable high."
-msgstr ""
+msgstr "甲基苯丙胺的微小晶体，是目前最强效、最具成瘾性的兴奋剂之一。这批样品纯度很高，应能带来强烈而稳定的欣快感。"
 
 #. ~ Description of "speed"
 #: data/json/items/comestibles/med.json
@@ -90836,7 +90836,7 @@ msgstr "微小的灰白色甲基苯丙胺晶体。其色泽暗示纯度存疑，
 #. ~ "activation_message" action message of item "nicotine patch"
 #: data/json/items/comestibles/med.json
 msgid "You apply a nicotine patch."
-msgstr ""
+msgstr "你贴上了尼古丁贴片。"
 
 #. ~ "description" action message of item "plano transition contact lenses
 #. (daily)"
@@ -90890,7 +90890,7 @@ msgstr "一股舒缓的感觉沿着血管流遍你的全身。"
 #. ~ "activation_message" action message of item "cough syrup"
 #: data/json/items/comestibles/med.json
 msgid "You drink your cough syrup."
-msgstr ""
+msgstr "你喝了咳嗽糖浆。"
 
 #. ~ "activation_message" action message of item "pink tab"
 #: data/json/items/comestibles/med.json
@@ -91109,7 +91109,7 @@ msgstr[0] "对乙酰氨基酚"
 #: data/json/items/comestibles/med.json
 msgid "alprazolam"
 msgid_plural "alprazolam"
-msgstr[0] ""
+msgstr[0] "阿普唑仑"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -163272,7 +163272,7 @@ msgstr[0] "河狸"
 #: data/json/monsters/mammal.json
 msgid "big dog"
 msgid_plural "big dogs"
-msgstr[0] "丧尸犬"
+msgstr[0] "大型犬"
 
 #. ~ Monster name
 #: data/json/monsters/mammal.json
@@ -166908,7 +166908,7 @@ msgstr[0] "邪恶孵化场"
 #: data/json/monsters/zed_children.json data/json/monsters/zed_dormant.json
 msgid "zombie child"
 msgid_plural "zombie childs"
-msgstr[0] ""
+msgstr[0] "儿童丧尸"
 
 #. ~ Description of monster "skeletal master"
 #: data/json/monsters/zed_command.json
@@ -323304,14 +323304,14 @@ msgstr ""
 #, c-format
 msgctxt "query_ynq"
 msgid "%s %s, %s, %s (Case sensitive)"
-msgstr "%s%s，%s，%s（大小写敏感）"
+msgstr "%s %s, %s, %s（大小写敏感）"
 
 #. ~ 1st: query string, 2nd-4th: keybinding descriptions
 #: src/computer_session.cpp:1787
 #, c-format
 msgctxt "query_ynq"
 msgid "%s %s, %s, %s"
-msgstr "%s%s，%s，%s"
+msgstr "%s %s, %s, %s"
 
 #: src/construction.cpp:354
 msgid " Construction "
@@ -332161,28 +332161,28 @@ msgstr "物品列表"
 #. ~ Sort type: distance.
 #: src/game.cpp:7908
 msgid "<s>ort: dist"
-msgstr "[s]排序：距离"
+msgstr "排序：距离"
 
 #. ~ Sort type: category.
 #: src/game.cpp:7911
 msgid "<s>ort: cat"
-msgstr "[s]排序：分类"
+msgstr "排序：分类"
 
 #: src/game.cpp:7920
 msgid "<R>eset"
-msgstr "<R>重置"
+msgstr "重置"
 
 #: src/game.cpp:7923
 msgid "<E>xamine"
-msgstr "<E>查看"
+msgstr "查看"
 
 #: src/game.cpp:7924
 msgid "<C>ompare"
-msgstr "<C>比较"
+msgstr "比较"
 
 #: src/game.cpp:7925
 msgid "<F>ilter"
-msgstr "<F>筛选"
+msgstr "筛选"
 
 #: src/game.cpp:7926
 msgid "<+/->Priority"
@@ -332242,11 +332242,11 @@ msgstr "你看不到任何怪物！"
 
 #: src/game.cpp:8661 src/game.cpp:8738
 msgid "<R>emove from safe mode blacklist"
-msgstr "<R>从安全模式黑名单中移除"
+msgstr "从安全模式黑名单中移除"
 
 #: src/game.cpp:8663 src/game.cpp:8740
 msgid "<A>dd to safe mode blacklist"
-msgstr "<A>添加至安全模式黑名单"
+msgstr "添加至安全模式黑名单"
 
 #: src/game.cpp:8725
 msgid "to look around"
