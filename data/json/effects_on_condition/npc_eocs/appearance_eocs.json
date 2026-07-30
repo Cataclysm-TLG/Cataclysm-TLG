@@ -90,23 +90,7 @@
                       { "u_lose_trait": "hair_messy" },
                       { "u_lose_trait": "hair_punk_long" },
                       { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_very_long" } }
-                    ],
-                    "else": {
-                      "if": { "or": [ { "u_has_trait": "hair_very_long" }, { "u_has_trait": "hair_twintails" }, { "u_has_trait": "hair_braid" } ] },
-                      "then": [
-                        { "u_lose_trait": "hair_very_long" },
-                        { "u_lose_trait": "hair_twintails" },
-                        { "u_lose_trait": "hair_braid" },
-                        { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_extremely_long" } }
-                      ],
-                      "else": {
-                        "if": { "or": [ { "u_has_trait": "hair_extremely_long" } ] },
-                        "then": [
-                          { "u_lose_trait": "hair_extremely_long" },
-                          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_body_length" } }
-                        ]
-                      }
-                    }
+                    ]
                   }
                 }
               }
@@ -310,12 +294,6 @@
                               "else": {
                                 "if": { "or": [ { "u_has_trait": "hair_very_long" } ] },
                                 "then": [ { "u_lose_trait": "hair_very_long" }, { "u_add_trait": "hair_very_long", "variant": { "context_val": "color_id" } } ],
-                                "else": {
-                                  "if": { "or": [ { "u_has_trait": "hair_extremely_long" } ] },
-                                  "then": [
-                                    { "u_lose_trait": "hair_extremely_long" },
-                                    { "u_add_trait": "hair_extremely_long", "variant": { "context_val": "color_id" } }
-                                  ],
                                   "else": {
                                     "if": { "or": [ { "u_has_trait": "hair_body_length" } ] },
                                     "then": [
@@ -323,7 +301,6 @@
                                       { "u_add_trait": "hair_body_length", "variant": { "context_val": "color_id" } }
                                     ]
                                   }
-                                }
                               }
                             }
                           }
