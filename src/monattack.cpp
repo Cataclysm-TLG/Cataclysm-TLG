@@ -67,6 +67,7 @@
 #include "mondefense.h"
 #include "monfaction.h"
 #include "monster.h"
+#include "mondeath.h"
 #include "mtype.h"
 #include "npc.h"
 #include "output.h"
@@ -237,6 +238,9 @@ static const trait_id trait_MARLOSS_BLUE( "MARLOSS_BLUE" );
 static const trait_id trait_PARAIMMUNE( "PARAIMMUNE" );
 static const trait_id trait_THRESH_MARLOSS( "THRESH_MARLOSS" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
+
+static const harvest_drop_type_id harvest_drop_bone( "bone" );
+static const harvest_drop_type_id harvest_drop_flesh( "flesh" );
 
 // shared utility functions
 static bool within_visual_range( monster *z, int max_range )
@@ -1325,6 +1329,49 @@ bool mattack::resurrect( monster *z )
     // NOLINTNEXTLINE(clang-analyzer-core.CallAndMessage)
     float corpse_damage = raised.second->damage_level();
     creature_tracker &creatures = get_creature_tracker();
+    // Check is probably unnecessary, but let's be sure to limit critfails to actual attempts.
+    if( found_eligible_corpse ) {
+        // Sometimes we screw up.
+        if( one_in( 100 - ( corpse_damage * 2 ) ) ) {
+            add_msg_if_player_sees( raised.first, _( "The %s bursts apart in a shower of gore!" ),
+                                    raised.second->tname() );
+            // limit gibbing to 15%
+            int gibbed_weight = to_gram( raised.second->weight() * ( 15.0 / 100.0 ) );
+            int gib_distance = std::round( rng( 2, 4 ) );
+            const mtype *mt = raised.second->get_mtype();
+            units::mass corpse_weight = raised.second->weight();
+            if( mt ) {
+                for( const harvest_entry &entry : mt->harvest->entries() ) {
+                    // only flesh and bones survive.
+                    if( entry.type == harvest_drop_flesh || entry.type == harvest_drop_bone ) {
+                        // the larger the overflow damage, the less you get
+                        const int chunk_amt =
+                            entry.mass_ratio / 2.0f / 10.0 *
+                            corpse_weight / item::find_type( itype_id( entry.drop ) )->weight;
+                        mdeath::scatter_chunks( &here, itype_id( entry.drop ), chunk_amt, *mt, raised.first, gib_distance,
+                                                chunk_amt / ( gib_distance - 1 ) );
+                        gibbed_weight -= entry.mass_ratio / 2.0 / 20 * to_gram( corpse_weight );
+                    }
+                }
+                if( gibbed_weight > 0 ) {
+                    const itype_id &leftover_id = mt->harvest->leftovers;
+                    const int chunk_amount =
+                        gibbed_weight / to_gram( item::find_type( leftover_id )->weight );
+                    mdeath::scatter_chunks( &here, leftover_id, chunk_amount, *mt, raised.first, gib_distance,
+                                            chunk_amount / ( gib_distance + 1 ) );
+                }
+            }
+            raised.second->set_damage( 4000 );
+            return false;
+        }
+        // Sometimes we REALLY screw up.
+        if( one_in( 200 ) ) {
+            add_msg_if_player_sees( *z, _( "The %s bursts apart in a shower of gore!" ),
+                                    z->disp_name() );
+            z->deal_damage( z, bodypart_id( "torso" ), damage_instance( damage_bash, 400 ) );
+            return false;
+        }
+    }
     // Did we successfully raise something?
     if( g->revive_corpse( raised.first, *raised.second ) ) {
         here.i_rem( raised.first, raised.second );
@@ -1347,16 +1394,14 @@ bool mattack::resurrect( monster *z )
             debugmsg( "Misplaced or failed to revive a zombie corpse" );
             return true;
         }
-
         zed->make_ally( *z );
         if( player_character.sees( here, *zed ) ) {
-            add_msg( m_warning, _( "A nearby %s rises from the dead!" ), zed->name() );
+            add_msg( m_warning, _( "A %s rises from the dead!" ), zed->name() );
         } else if( sees_necromancer ) {
             // We saw the necromancer but not the revival
             add_msg( m_info, _( "But nothing seems to happen." ) );
         }
     }
-
     return true;
 }
 
