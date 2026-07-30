@@ -2557,6 +2557,26 @@ void cata_tiles::set_disable_occlusion( const bool val )
     disable_occlusion = val;
 }
 
+std::string cata_tiles::get_multitile_base_id( const std::string &id,
+        TILE_CATEGORY category )
+{
+    if( category == TILE_CATEGORY::TERRAIN ) {
+        const ter_t &current = ter_str_id( id ).obj();
+        for( const ter_t &candidate : get_all_terrain_types() ) {
+            if( candidate.id == current.id ||
+                candidate.connect_groups != current.connect_groups ) {
+                continue;
+            }
+
+            const tile_type *tt = tileset_ptr->find_tile_type( candidate.id.str() );
+            if( tt && tt->multitile ) {
+                return candidate.id.str();
+            }
+        }
+    }
+    return id;
+}
+
 bool cata_tiles::draw_from_id_string_internal(
     const std::string &id,
     const tripoint_bub_ms &pos,
@@ -2886,14 +2906,16 @@ bool cata_tiles::draw_from_id_string_internal(
     // Seed PRNG for random tile selection
     unsigned int seed = 0;
     creature_tracker &creatures = get_creature_tracker();
-    bool creature = false;
+    bool creature = true;
     switch( category ) {
         case TILE_CATEGORY::TERRAIN:
         case TILE_CATEGORY::FIELD:
         case TILE_CATEGORY::LIGHTING:
+            creature = false;
             seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
             break;
         case TILE_CATEGORY::VEHICLE_PART: {
+            creature = false;
             const auto vp_override = vpart_override.find( tripoint_bub_ms( pos ) );
             const bool vp_overridden = vp_override != vpart_override.end();
             if( vp_overridden ) {
@@ -2908,6 +2930,7 @@ bool cata_tiles::draw_from_id_string_internal(
             break;
         }
         case TILE_CATEGORY::FURNITURE: {
+            creature = false;
             const furn_str_id fid( found_id );
             if( fid.is_valid() && !fid.obj().is_movable() ) {
                 seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
@@ -2918,6 +2941,7 @@ bool cata_tiles::draw_from_id_string_internal(
         case TILE_CATEGORY::OVERMAP_TERRAIN:
         case TILE_CATEGORY::OVERMAP_VISION_LEVEL:
         case TILE_CATEGORY::MAP_EXTRA:
+            creature = false;
             seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
             break;
         case TILE_CATEGORY::NONE:
@@ -2931,25 +2955,24 @@ bool cata_tiles::draw_from_id_string_internal(
         case TILE_CATEGORY::TRAP:
         case TILE_CATEGORY::BULLET:
         case TILE_CATEGORY::HIT_ENTITY:
+            creature = false;
             break;
         case TILE_CATEGORY::WEATHER:
+            creature = false;
             seed = rng_bits();
             break;
         case TILE_CATEGORY::MONSTER:
             if( monster_override.find( tripoint_bub_ms( pos ) ) == monster_override.end() ) {
                 seed = reinterpret_cast<uintptr_t>( creatures.creature_at<monster>( tripoint_bub_ms( pos ) ) );
             }
-            creature = true;
             break;
         default:
             if( string_starts_with( found_id, "player_" ) ) {
                 seed = std::hash<std::string> {}( get_player_character().name );
-                creature = true;
             } else if( string_starts_with( found_id, "npc_" ) ) {
                 if( npc *const guy = creatures.creature_at<npc>( tripoint_bub_ms( pos ) ) ) {
                     seed = guy->getID().get_value();
                 }
-                creature = true;
             }
             break;
     }
@@ -3442,12 +3465,8 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
         }
         // draw the actual terrain if there's no override
         if( !neighborhood_overridden ) {
-
-
             draw_options opts{};
             opts.category = TILE_CATEGORY::TERRAIN;
-
-
             return memorize_only
                    ? false
                    : draw_from_id_string(
@@ -3487,7 +3506,6 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
             const bool nv = !overridden;
             draw_options opts{};
             opts.category = TILE_CATEGORY::TERRAIN;
-
             return memorize_only
                    ? false
                    : draw_from_id_string(
@@ -3510,9 +3528,8 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
             } else {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::TERRAIN;
-
                 return draw_from_id_string(
-                           mt.get_ter_id(),
+                           tname,
                            p,
                            mt.get_ter_subtile(),
                            mt.get_ter_rotation(),

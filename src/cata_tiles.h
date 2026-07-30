@@ -727,6 +727,8 @@ class cata_tiles
 
         void set_disable_occlusion( bool val );
 
+        std::string get_multitile_base_id( const std::string &id, TILE_CATEGORY category );
+
         /**
          * Initialize the current tileset (load tile images, load mapping), using the current
          * tileset as it is set in the options.

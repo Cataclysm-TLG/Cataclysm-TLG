@@ -602,6 +602,12 @@ void load_season_array( const JsonObject &jo, const std::string &key, const std:
     }
 }
 
+// Accessor for terrain_data.
+const std::vector<ter_t> &get_all_terrain_types()
+{
+    return terrain_data.get_all();
+}
+
 std::string map_data_common_t::name() const
 {
     return name_.translated();

@@ -31,7 +31,7 @@
     "id": "constr_grave",
     "group": "dig_grave_and_bury_sealed_coffin",
     "category": "DIG",
-    "required_skills": [ [ "fabrication", 0 ] ],
+    "required_skills": [ [ "survival", 0 ] ],
     "time": "60 m",
     "qualities": [ [ { "id": "HAMMER", "level": 1 } ], [ { "id": "DIG", "level": 2 } ] ],
     "components": [ [ [ "rock", 20 ], [ "2x4", 2 ] ] ],

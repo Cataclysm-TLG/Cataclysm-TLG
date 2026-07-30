@@ -1700,8 +1700,7 @@
   {
     "result": "cable",
     "type": "uncraft",
-    "time": "8 s",
-    "//": "This may need to be modified, a plastic sheath would give plastic chunks, but there already is a plastic sheathed cable",
+    "time": "2 m",
     "activity_level": "LIGHT_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "copper_wire", 1 ] ] ]

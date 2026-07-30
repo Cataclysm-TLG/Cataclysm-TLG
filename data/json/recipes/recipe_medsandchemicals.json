@@ -18,8 +18,8 @@
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MEDICAL",
     "skill_used": "chemistry",
-    "difficulty": 2,
-    "skills_required": [ "firstaid", 2 ],
+    "difficulty": 0,
+    "skills_required": [ "firstaid", 1 ],
     "time": "30 m",
     "book_learn": [
       [ "textbook_firstaid", 2 ],
@@ -82,7 +82,7 @@
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_DRUGS",
     "skill_used": "chemistry",
-    "difficulty": 4,
+    "difficulty": 1,
     "time": "30 m",
     "book_learn": [ [ "textbook_chemistry", 4 ], [ "adv_chemistry", 4 ], [ "recipe_labchem", 4 ] ],
     "proficiencies": [
