@@ -88,9 +88,9 @@ item_location mdeath::normal( map *here, monster &z )
     return {};
 }
 
-static void scatter_chunks( map *here, const itype_id &chunk_name, int chunk_amt, monster &z,
-                            int distance,
-                            int pile_size = 1 )
+void mdeath::scatter_chunks( map *here, const itype_id &chunk_name, int chunk_amt,
+                             const mtype &z, const tripoint_bub_ms &pos,
+                             int distance, int pile_size )
 {
     // can't have less than one item in a pile or it would cause an infinite loop
     pile_size = std::max( pile_size, 1 );
@@ -101,11 +101,11 @@ static void scatter_chunks( map *here, const itype_id &chunk_name, int chunk_amt
     int placed_chunks = 0;
     while( placed_chunks < chunk_amt ) {
         bool drop_chunks = true;
-        tripoint_bub_ms tarp( z.pos_bub( *here ) + point( rng( -distance, distance ),
-                              rng( -distance,
-                                   distance ) ) );
-        const std::vector<tripoint_bub_ms> traj = line_to( z.pos_bub( *here ), tarp );
-        tripoint_bub_ms prev_point = z.pos_bub();
+        tripoint_bub_ms tarp( pos + point( rng( -distance, distance ),
+                                           rng( -distance,
+                                                distance ) ) );
+        const std::vector<tripoint_bub_ms> traj = line_to( pos, tarp );
+        tripoint_bub_ms prev_point = pos;
         for( size_t j = 0; j < traj.size(); j++ ) {
             tarp = traj[j];
             bool obstructed = false;
@@ -184,7 +184,7 @@ item_location mdeath::splatter( map *here, monster &z )
                                             ( overflow_damage / max_hp + 1 ) ) );
     const int z_weight = to_gram( z.get_weight() );
     // limit gibbing to 15%
-    gibbed_weight = std::min( gibbed_weight, z_weight * 15 / 100 );
+    gibbed_weight = std::min( gibbed_weight, static_cast<int>( round( z_weight * 15.0 / 100.0 ) ) );
 
     if( gibbable ) {
         float overflow_ratio = overflow_damage / max_hp + 1.0f;
@@ -196,8 +196,8 @@ item_location mdeath::splatter( map *here, monster &z )
                 const int chunk_amt =
                     entry.mass_ratio / overflow_ratio / 10 *
                     z.get_weight() / item::find_type( itype_id( entry.drop ) )->weight;
-                scatter_chunks( here, itype_id( entry.drop ), chunk_amt, z, gib_distance,
-                                chunk_amt / ( gib_distance - 1 ) );
+                scatter_chunks( here, itype_id( entry.drop ), chunk_amt, *z.type, z.pos_bub(),
+                                gib_distance, chunk_amt / ( gib_distance - 1 ) );
                 gibbed_weight -= entry.mass_ratio / overflow_ratio / 20 * to_gram( z.get_weight() );
             }
         }
@@ -205,7 +205,7 @@ item_location mdeath::splatter( map *here, monster &z )
             const itype_id &leftover_id = z.type->id->harvest->leftovers;
             const int chunk_amount =
                 gibbed_weight / to_gram( item::find_type( leftover_id )->weight );
-            scatter_chunks( here, leftover_id, chunk_amount, z, gib_distance,
+            scatter_chunks( here, leftover_id, chunk_amount, *z.type, z.pos_bub(), gib_distance,
                             chunk_amount / ( gib_distance + 1 ) );
         }
         // Add pulped corpse.
