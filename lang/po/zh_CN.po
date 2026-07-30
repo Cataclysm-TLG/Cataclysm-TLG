@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-30 01:01+0800\n"
+"PO-Revision-Date: 2026-07-30 11:35+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -345043,7 +345043,7 @@ msgstr ""
 #: src/iuse_actor.cpp:2487
 #, c-format
 msgid "<npcname> needs to hold %s to play it."
-msgstr ""
+msgstr "<npcname> 需要拿着 %s 才能使用。"
 
 #: src/iuse_actor.cpp:2496
 #, c-format
@@ -345496,7 +345496,7 @@ msgstr "使用耗时："
 #: src/iuse_actor.cpp:4070
 #, c-format
 msgid "You should move before you place the %s there."
-msgstr ""
+msgstr "你应该先移动，然后再把 %s 放在那里。"
 
 #: src/iuse_actor.cpp:4078
 #, c-format
@@ -347319,11 +347319,11 @@ msgstr "可点燃"
 
 #: src/map.cpp:2621
 msgid "Damages Tires."
-msgstr ""
+msgstr "对轮胎有害。"
 
 #: src/map.cpp:2622
 msgid "Safe for Tires."
-msgstr ""
+msgstr "对轮胎安全。"
 
 #: src/map.cpp:2961 src/map.cpp:2971
 #, c-format
@@ -347625,7 +347625,7 @@ msgstr "你正躺在火上面！"
 
 #: src/map_field.cpp:1660
 msgid "The gas burns horribly as you breathe it in!"
-msgstr ""
+msgstr "这气体一吸进去就特别难受！"
 
 #: src/map_field.cpp:1695
 msgid "You're torched by flames!"
@@ -347769,19 +347769,19 @@ msgstr[0] "<bold>可用武器类别： </bold>"
 
 #: src/martialarts.cpp:904
 msgid "<bold>Requires:</bold> "
-msgstr ""
+msgstr "<bold>需要满足：</bold>"
 
 #: src/martialarts.cpp:913
 msgid "<bold>Requires any of:</bold> "
-msgstr ""
+msgstr "<bold>需要满足任一：</bold>"
 
 #: src/martialarts.cpp:922
 msgid "<bold>Lost if you have:</bold> "
-msgstr ""
+msgstr "<bold>你会丧失如果有：</bold> "
 
 #: src/martialarts.cpp:931
 msgid "<bold>Lost if you have any of:</bold> "
-msgstr ""
+msgstr "<bold>你会丧失如果有其一：</bold> "
 
 #: src/martialarts.cpp:939
 msgid "activate"
@@ -348010,7 +348010,7 @@ msgstr "你可以在安装<info>合金装甲-手臂CBM</info>后使用<info>手�
 #: src/martialarts.cpp:2288
 #, c-format
 msgid "You can <info>arm block</info> at <info>unarmed rank:</info> <stat>%s</stat>"
-msgstr ""
+msgstr "你可以在<info>未持武器等级</info><stat>%s</stat>时进行<info>手臂格挡</info>"
 
 #: src/martialarts.cpp:2292
 msgid "You can <info>leg block</info> by installing the <info>Legs Alloy Plating CBM</info>"
@@ -348019,7 +348019,7 @@ msgstr "你可以在安装<info>合金装甲-腿部CBM</info>后使用<info>腿�
 #: src/martialarts.cpp:2296
 #, c-format
 msgid "You can <info>leg block</info> at <info>unarmed rank:</info> <stat>%s</stat>"
-msgstr ""
+msgstr "你可以在<info>未持武器等级</info><stat>%s</stat>时进行<info>腿部格挡</info>"
 
 #: src/martialarts.cpp:2306
 #, c-format
@@ -348536,11 +348536,11 @@ msgstr "这把武器太过笨重，无法用来攻击！"
 #: src/melee.cpp:649
 #, c-format
 msgid "<color_light_red>Attacking your %s will take a long time. Are you sure you want to continue?</color>"
-msgstr ""
+msgstr "<color_light_red>攻击你的%s会花很长时间。你确定要吗？</color>"
 
 #: src/melee.cpp:654
 msgid "<color_light_red>Attacking unarmed will take a long time. Are you sure you want to continue?</color>"
-msgstr ""
+msgstr "<color_light_red>徒手攻击会花很长时间。你确定要吗？</color>"
 
 #: src/melee.cpp:719
 msgid "You miss and are thrown off balance by the momentum."
@@ -351046,7 +351046,7 @@ msgstr "你标记了难民中心的位置，但不知道怎么顺着路过去…
 
 #: src/mission_start.cpp:341
 msgid "You don't recognize this address.  It's surely out there somewhere, but it must be quite far away."
-msgstr ""
+msgstr "你不认识这个地址。它肯定在某个地方，但一定非常远。"
 
 #: src/mission_start.cpp:384 src/mission_start.cpp:405
 msgid "Workstation"
@@ -352221,17 +352221,17 @@ msgstr "鞍具"
 
 #: src/monexamine.cpp:107
 msgid "You need to have in hand something to stop the bleeding."
-msgstr ""
+msgstr "你需要手边有东西来止血。"
 
 #: src/monexamine.cpp:112 src/monexamine.cpp:123
 #, c-format
 msgid "You aren't going to stop %s bleeding with this %s."
-msgstr ""
+msgstr "你用这 个%s 止不住 %s 流血。"
 
 #: src/monexamine.cpp:120
 #, c-format
 msgid "The %s is no longer bleeding."
-msgstr ""
+msgstr "%s 不再流血。"
 
 #: src/monexamine.cpp:162
 #, c-format
@@ -352879,7 +352879,7 @@ msgstr "%s 的一部分从它身上伸了出来。"
 
 #: src/monster.cpp:969
 msgid "Seems to be familiar with people and could be tamed with:"
-msgstr ""
+msgstr "看着对人很亲近，可以用以下方法驯服："
 
 #: src/monster.cpp:984
 #, c-format
@@ -352985,7 +352985,7 @@ msgstr "飞翔"
 #: src/monster.cpp:1117
 msgctxt "Burrow as an action"
 msgid "burrow"
-msgstr ""
+msgstr "打地洞"
 
 #: src/monster.cpp:1118
 msgctxt "Climb as an action"
@@ -353926,6 +353926,8 @@ msgid ""
 "Muscle, toughness, and raw fortitude, strength is a useful stat in and out of melee combat.  Strong characters are more resistant to illness, excellent at grappling, and can make excellent use of bashing weapons.\n"
 "\n"
 msgstr ""
+"肌肉、坚韧和原始的勇毅，力量是在近战和非近战中都很有用的属性。力量高的角色更能抵抗疾病，擅长格斗，并且能很好地使用钝击武器。\n"
+"\n"
 
 #: src/newcharacter.cpp:1274 src/newcharacter.cpp:1312 src/newcharacter.cpp:1356 src/newcharacter.cpp:1394
 #, c-format
@@ -353956,6 +353958,8 @@ msgid ""
 "\n"
 "Knockdown resistance: %.1f"
 msgstr ""
+"\n"
+"击倒抗性: %.1f"
 
 #: src/newcharacter.cpp:1280
 #, c-format
@@ -354060,6 +354064,8 @@ msgid ""
 "Dexterity represents reaction speed, coordination, flexibility, and fine motor control.  Dextrous characters operate firearms more quickly, are faster and more accurate in melee combat, and can wriggle out of grabs even when they're not strong enough to overpower an opponent.\n"
 "\n"
 msgstr ""
+"敏捷代表反应速度、协调性、灵活性和精细运动控制。敏捷高的角色使用火器更快，近战战斗中更敏捷、命中率更高，即使力量不足以压制对手，也能从抓握中脱身。\n"
+"\n"
 
 #: src/newcharacter.cpp:1315
 #, c-format
@@ -354140,6 +354146,9 @@ msgid ""
 "Far more than just book smarts, intelligence represents willpower, analytical ability, open-mindedness, memory, and the ability to stay on-task even when bored or distracted.  Intelligent characters gain skills and proficiencies more quickly and complete crafting tasks with fewer delays.\n"
 "\n"
 msgstr ""
+"智力不仅仅是书本上的知识，它还代表意志力、分析能力、开放的心态、记忆力，以及即使感到无聊或分心也能保持专注的能力。智力高的角色学习技能和掌握熟练度的速度更快，完成制作任务时也会更少延误。\n"
+"\n"
+"\n"
 
 #: src/newcharacter.cpp:1359
 #, c-format
@@ -354156,6 +354165,8 @@ msgid ""
 "\n"
 "Effective focus: %+g%%"
 msgstr ""
+"\n"
+"有效专注度: %+g%%"
 
 #: src/newcharacter.cpp:1368 src/newcharacter.cpp:1402
 #, c-format
@@ -354192,12 +354203,26 @@ msgid ""
 "- Bash damage with whips and flails\n"
 "- Chance of being paralyzed by fear attack"
 msgstr ""
+"\n"
+"- 实践经验赶上理论知识的速度\n"
+"- 发现和拆除陷阱\n"
+"- 包扎伤口和止血\n"
+"- 安装生化插件的成功几率\n"
+"- 修改枪械时的成功几率\n"
+"- 从书籍学习制作配方的几率\n"
+"- 破解/编程电脑、刷卡机、机器人等的几率\n"
+"- 绕过车辆安全系统的几率\n"
+"- 分解物品时获得更好结果的几率\n"
+"- 使用鞭子和连枷造成的击打伤害\n"
+"- 被恐惧攻击麻痹的几率"
 
 #: src/newcharacter.cpp:1390
 msgid ""
 "A measure of wits, proprioception, and acuity.  Perceptive characters excel at ranged accuracy, critical hits, and striking weakpoints.  Perception is broadly useful in combat, but most benefits stabbing weapons.\n"
 "\n"
 msgstr ""
+"智力、身体感知和敏锐度的衡量标准。感知高的角色在远程精度、暴击以及打击弱点方面表现出色。感知在战斗中作用广泛，但大多数情况下对刺击武器更有利。\n"
+"\n"
 
 #: src/newcharacter.cpp:1396
 #, c-format
@@ -354234,6 +354259,20 @@ msgid ""
 "- Morale bonus when playing a musical instrument\n"
 "- Effectiveness of repairing and modifying clothes and armor"
 msgstr ""
+"\n"
+"- 将实际经验赶上理论知识的速度  \n"
+"- 远程攻击的精准度和可靠性  \n"
+"- 近战暴击几率大幅提升  \n"
+"- 减少刺击武器卡住的几率  \n"
+"- 地图上的视野距离  \n"
+"- 偷窃的效果  \n"
+"- 投掷准确度  \n"
+"- 自己消毒伤口和为他人进行急救的能力  \n"
+"- 驾驶时失去车辆控制的几率  \n"
+"- 发现隐藏生物和陷阱的几率  \n"
+"- 开锁和觅食的速度与效率  \n"
+"- 演奏乐器时的心情加成  \n"
+"- 修理和改造衣物及护甲的效果"
 
 #: src/newcharacter.cpp:1428
 #, c-format
@@ -355001,12 +355040,12 @@ msgstr "不戴眼镜我无法阅读。"
 #: src/npc.cpp:1484
 #, c-format
 msgid "%s starts reading ebook %s."
-msgstr ""
+msgstr "%s 开始阅读 %s 电子版。"
 
 #: src/npc.cpp:1485
 #, c-format
 msgid "%s starts reading %s."
-msgstr ""
+msgstr "%s 开始阅读 %s。"
 
 #: src/npc.cpp:1507
 msgid "This can't be worn."
@@ -355102,7 +355141,7 @@ msgstr "不会出售自己的设备"
 
 #: src/npc.cpp:2173
 msgid "Will not buy this"
-msgstr ""
+msgstr "不会买这个"
 
 #: src/npc.cpp:2177
 msgid "Will not buy filthy items"
@@ -356335,130 +356374,130 @@ msgstr "%1$s 给了你一个 %2$s"
 #: src/npctalk_funcs.cpp:723
 #, c-format
 msgid "%s administers a dose of naloxone to treat your opioid overdose."
-msgstr ""
+msgstr "%s 给你注射了一剂纳洛酮来治疗你的阿片类药物过量。"
 
 #: src/npctalk_funcs.cpp:724
 #, c-format
 msgid "%s administers a dose of naloxone to treat <npcname>'s opioid overdose."
-msgstr ""
+msgstr "%s 给 <npcname> 注射了一剂纳洛酮来治疗他的阿片类药物过量。"
 
 #: src/npctalk_funcs.cpp:730
 #, c-format
 msgid "%s administers a saline infusion to treat your hypovolemic shock."
-msgstr ""
+msgstr "%s 给你输盐水来治疗低血容量性休克。"
 
 #: src/npctalk_funcs.cpp:731
 #, c-format
 msgid "%s administers a saline infusion to treat <npcname>'s hypovolemic shock."
-msgstr ""
+msgstr "%s 给 <npcname> 输注生理盐水以治疗低血容量性休克。"
 
 #: src/npctalk_funcs.cpp:798
 msgid "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up."
-msgstr ""
+msgstr "你身上有某种寄生虫。它可能一时不会对生命造成威胁，吃抗寄生虫药应该能清除它。"
 
 #: src/npctalk_funcs.cpp:801
 msgid "Looks like you have a pretty serious fungal infection.  Taking antifungal medication should clear it up, but I'd hurry if I were you."
-msgstr ""
+msgstr "看上去你得了比较严重的真菌感染。吃抗真菌药应该能治好它，要是我是你的话就会马上行动。"
 
 #: src/npctalk_funcs.cpp:804
 msgid "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection."
-msgstr ""
+msgstr "你患有急性放射综合症。每隔三小时服用一次普鲁士蓝应有助于治疗。大多数暴露自环境中的细灰或灰尘，所以以后尽量戴口罩，穿防护环境的衣服。"
 
 #: src/npctalk_funcs.cpp:807
 msgid "You have a bacterial infection.  There's a chance a healthy person can fight this sort of thing off, but it can be lethal for just about anybody.  Find the strongest antibiotics you can and take one every twelve hours until it's cleared up."
-msgstr ""
+msgstr "你得了细菌感染。健康人能自己抵御这种情况，但几乎对任何人而言这都是可能致命的。找最强的抗生素，每十二小时服用一次，直到感染消退为止。"
 
 #: src/npctalk_funcs.cpp:810
 msgid "You probably feel pretty horrible, but it's just the flu.  It should resolve itself within two to twelve days from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any."
-msgstr ""
+msgstr "你可能感觉很糟，但这只是流感。从你出现症状算起，大约两到十二天内应该会自行好转。在此期间，你可以服用止咳糖浆来缓解大部分症状，或者找不到的话，也可以用类鸦片和抗组胺药。"
 
 #: src/npctalk_funcs.cpp:813
 msgid "It seems you've caught a cold.  It should resolve itself within two days to three weeks from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any."
-msgstr ""
+msgstr "你看起来感冒了。从你刚注意到症状起的两天到三周内感冒通常会自愈。在此期间，你可以服用止咳糖浆来缓解大部分症状，或者找不到的话，也可以使用阿片类药物和抗组胺药。"
 
 #: src/npctalk_funcs.cpp:817
 msgid "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, it won't have any effect."
-msgstr ""
+msgstr "你有轻微的结膜感染——也就是红眼病。一般几天就会自己好。如果痒得烦人，可以试试抗过敏药。咳嗽药水可能也有效，但别用那种不致困的类型。你也可以尝试每十二小时吃一次抗生素，不过若是病毒感染，是没有作用的。"
 
 #: src/npctalk_funcs.cpp:820
 msgid "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it."
-msgstr ""
+msgstr "那些烦人的抓痕看起来像是鼠咬热。你可以试着吃一些阿司匹林或布洛芬来缓解症状。等着让身体自己对抗也没问题，但你也可以每十二小时吃一次抗生素来应对。"
 
 #: src/npctalk_funcs.cpp:823
 msgid "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms."
-msgstr ""
+msgstr "你的肌肉痉挛是由破伤风引起的。每十二小时打一剂抗生素可能会治好，要不然你该找一些苯二氮卓类药物来缓解症状。"
 
 #: src/npctalk_funcs.cpp:826
 msgid "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time."
-msgstr ""
+msgstr "神经病变、抽筋和震颤。我不太确定你到底出了什么问题，但如果让我猜，你可能吃了或喝了什么有毒的东西。别再那样做了，也许随时间你的身体会把毒素排出去。"
 
 #: src/npctalk_funcs.cpp:829
 msgid "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself."
-msgstr ""
+msgstr "你得了贫血。通常是因为出血引起的，但有时也可能是饮食不良，现在两种情况发生的可能性一样。你需要补充铁，可以从绿叶蔬菜、多种维生素或红肉中获取，还需要休息，让身体恢复。"
 
 #: src/npctalk_funcs.cpp:832
 msgid "Scurvy.  That's a vitamin C deficiency.  You're going to want to look for fruit, greens, or organ meat, and it's got to be fresh, the preserved stuff usually won't do.  Vitamin supplements would also do the trick."
-msgstr ""
+msgstr "坏血病。那是维生素C缺乏症。你会想要找水果、蔬菜或动物内脏，而且一定要新鲜的，通常保存过的东西不行。维生素补充剂也能解决这个问题。"
 
 #: src/npctalk_funcs.cpp:848
 msgid "Your pulse is elevated and I'm not liking the look of your blood pressure.  You need more exercise."
-msgstr ""
+msgstr "你的脉搏升高了，我看你的血压状况也不太好。你需要多运动。"
 
 #: src/npctalk_funcs.cpp:850
 msgid "I'd say you could stand to get more exercise."
-msgstr ""
+msgstr "我想说你可以多运动运动。"
 
 #: src/npctalk_funcs.cpp:852
 msgid "Your vitals look good."
-msgstr ""
+msgstr "你的生命体征看着很好。"
 
 #: src/npctalk_funcs.cpp:854
 msgid "It seems like you're in pretty good shape.  Your vitals look great, anyway."
-msgstr ""
+msgstr "看起来你身体状况挺好的。而且，你的生命体征看上去极好。"
 
 #: src/npctalk_funcs.cpp:856
 msgid "You're in incredible shape!  What exactly have you been doing out there?"
-msgstr ""
+msgstr "你身材真棒！你到底在外面都做了些什么？"
 
 #: src/npctalk_funcs.cpp:861
 msgid "You probably don't need me to tell you this, but you're starving.  You're going to have a hard time staying healthy, let alone active, if your body doesn't have enough energy for its basic functions."
-msgstr ""
+msgstr "你可能不需要我告诉你这个，但你的确饿坏了。如果你的身体没有足够的能量来维持基本功能，你会很难保持健康，更别说活跃起来。"
 
 #: src/npctalk_funcs.cpp:863
 msgid "Your weight looks OK."
-msgstr ""
+msgstr "你体重看上去很OK。"
 
 #: src/npctalk_funcs.cpp:865
 msgid "You might benefit from losing some weight.  Things being how they are I'd say it's better to have too much than too little, but you're at the point where it's starting to put a strain on your body."
-msgstr ""
+msgstr "你减点体重可能会有好处。照现在的情况，我会说宁多勿少，但你现在已经到了开始给身体带来压力的程度。"
 
 #: src/npctalk_funcs.cpp:867
 msgid "We really should think about getting you on a diet.  I know, I know, I don't like saying it, but now more than ever, your health matters."
-msgstr ""
+msgstr "我们真的应该考虑让你节食了。我懂我懂，我也不喜欢这么说，但现在你的健康比以往任何时候都更重要。"
 
 #: src/npctalk_funcs.cpp:870
 msgid "I don't think your condition's going to improve without some sort of miracle, so you need to stay out of trouble."
-msgstr ""
+msgstr "我觉得你的情况要是没有某种奇迹是不会好转的，所以你得别惹麻烦。"
 
 #: src/npctalk_funcs.cpp:872
 msgid "One last thing: your immune system's probably shot.  That means you'll have a hard time fighting off infection and recovering from injury.  You need to avoid drugs and alcohol, mask up whenever possible, and don't eat anything weird.  Oh, and try to get some sleep.  You won't bounce back right away, but if you can stay active, stay clean, and try to maintain a healthy weight, you'll start feeling a lot better."
-msgstr ""
+msgstr "最后一件事：你的免疫系统可能已经很糟了。意味着你很难抵抗感染，也难以从受伤中恢复。你需要避免药物和酒精，尽可能戴上口罩，不吃奇怪的东西。哦，还要尽量睡觉。你不会立刻恢复，但如果你能保持活跃、保持清洁，并尽量维持健康体重，你会开始感觉好转。"
 
 #: src/npctalk_funcs.cpp:874
 msgid "That's everything.  You'd probably benefit from some lifestyle changes, though.  Little things, like exposure to toxins, junk food, smoke inhalation, even just dealing with a lot of negative emotions - all this stuff adds up, and it can really do a number on your health."
-msgstr ""
+msgstr "就这些了。不过你做些生活方式上的调整或许会有好处。一些小事，比如接触毒素、垃圾食品、吸入烟雾，甚至只是处理大量负面情绪——这些都会堆积起来，然后对你的健康产生影响。"
 
 #: src/npctalk_funcs.cpp:876
 msgid "It looks like apart from everything else, you've been maintaining good lifestyle habits.  Keep it up, it'll pay dividends the next time you're up against an injury or illness."
-msgstr ""
+msgstr "看着除其他方面外，你一直有保持良好的生活习惯。继续坚持下去，当你下一次受伤或生病，其中的好处就会显现。"
 
 #: src/npctalk_funcs.cpp:878
 msgid "Your health otherwise seems pretty good.  As long as you don't push it too far, you should be able to bounce back pretty well from most health problems."
-msgstr ""
+msgstr "你健康状况看起来还不错。只要不过度操劳，大多数健康问题应该你都能挺过去。"
 
 #: src/npctalk_funcs.cpp:880
 msgid "All else aside, your outlook seems great.  Clean living really is its own reward."
-msgstr ""
+msgstr "撇开其他不谈，你的气色看起来很棒。健康的生活方式本身就是最大的回报。"
 
 #: src/npctalk_funcs.cpp:897
 msgid "Choose a new facial hair style"
@@ -359915,7 +359954,7 @@ msgstr "你感到恶心。"
 
 #: src/player_hardcoded_effects.cpp:219
 msgid "The back of your throat is filled with a musty smell that you can almost taste."
-msgstr ""
+msgstr "你喉咙后面满是霉味，几乎能尝到它的味道。"
 
 #: src/player_hardcoded_effects.cpp:225
 msgid "You spasm suddenly!"
@@ -360226,7 +360265,7 @@ msgstr "有敌对生物出现在附近！"
 
 #: src/player_hardcoded_effects.cpp:656
 msgid "Space folds impossibly around itself!"
-msgstr ""
+msgstr "空间不可思议地在自我折叠！"
 
 #: src/player_hardcoded_effects.cpp:666 src/player_hardcoded_effects.cpp:726
 msgid "You shudder suddenly."
@@ -360465,11 +360504,11 @@ msgstr "为什么要把你的时间浪费在这个不起眼的斑点上？"
 
 #: src/player_hardcoded_effects.cpp:1341
 msgid "Too fast.  You're too fast!  Everything's too fast!"
-msgstr ""
+msgstr "太快了。你太快了！一切东西都太快了！"
 
 #: src/player_hardcoded_effects.cpp:1343
 msgid "You feel paranoid."
-msgstr ""
+msgstr "你感觉有点偏执。"
 
 #: src/player_hardcoded_effects.cpp:1348 src/player_hardcoded_effects.cpp:1452
 msgid "You can't stop clenching your jaw."
@@ -360918,7 +360957,7 @@ msgstr "当前"
 
 #: src/ranged.cpp:2057
 msgid " <color_green>Great</color> <color_light_gray>Good</color> <color_magenta>Doubtful</color> <color_light_blue>Moves</color>"
-msgstr ""
+msgstr " <color_green>极佳</color> <color_light_gray>不错</color> <color_magenta>怀疑</color> <color_light_blue>动摇</color>"
 
 #: src/ranged.cpp:2073
 #, c-format
@@ -360931,7 +360970,7 @@ msgstr "行动点"
 
 #: src/ranged.cpp:2122
 msgid "Confidence:"
-msgstr ""
+msgstr "信心"
 
 #: src/ranged.cpp:2129
 msgid "Moves to load"
@@ -360974,12 +361013,12 @@ msgstr "暴击"
 #: src/ranged.cpp:2234 src/ranged.cpp:2267 src/ranged.cpp:2316
 msgctxt "aim_confidence"
 msgid "Good"
-msgstr ""
+msgstr "十足"
 
 #: src/ranged.cpp:2235 src/ranged.cpp:2268 src/ranged.cpp:2317
 msgctxt "aim_confidence"
 msgid "Poor"
-msgstr ""
+msgstr "不准"
 
 #: src/ranged.cpp:2272
 msgctxt "aim_confidence"
@@ -361092,11 +361131,11 @@ msgstr "咔嘣！"
 
 #: src/ranged.cpp:2685
 msgid "aware"
-msgstr ""
+msgstr "知道的"
 
 #: src/ranged.cpp:2685
 msgid "unaware"
-msgstr ""
+msgstr "不知道的"
 
 #: src/ranged.cpp:2853
 #, c-format
@@ -361444,12 +361483,12 @@ msgstr "<color_cyan>无</color>"
 #: src/recipe.cpp:1677
 #, c-format
 msgid "%s per unit to %d units"
-msgstr ""
+msgstr "%s 每单位到 %d 单位"
 
 #: src/recipe.cpp:1679
 #, c-format
 msgid "%s per unit"
-msgstr ""
+msgstr "%s 每单位"
 
 #: src/recipe.cpp:1683
 #, c-format
@@ -361458,7 +361497,7 @@ msgstr "%d%%（大于 %d 批后）"
 
 #: src/recipe.cpp:1691
 msgid "varies by step"
-msgstr ""
+msgstr "因步骤而异"
 
 #: src/recipe.cpp:1862
 msgid "[bad param name]"
@@ -361987,15 +362026,15 @@ msgstr "你感到了一阵头晕目眩。"
 
 #: src/suffer.cpp:597
 msgid "Your mouth feels dry."
-msgstr ""
+msgstr "你感觉嘴干。"
 
 #: src/suffer.cpp:603
 msgid "You feel sleepy."
-msgstr ""
+msgstr "你感到困意连连。"
 
 #: src/suffer.cpp:609
 msgid "You feel restless."
-msgstr ""
+msgstr "你感到心神不宁。"
 
 #: src/suffer.cpp:651
 msgid "You have an asthma attack!"
@@ -362184,7 +362223,7 @@ msgstr "<npcname> 伸了伸懒腰。"
 
 #: src/suffer.cpp:1596
 msgid "You've gone too long without sleep."
-msgstr ""
+msgstr "你太久没睡觉了。"
 
 #: src/suffer.cpp:1597
 msgid "<npcname> lets out a huge yawn."
@@ -362192,11 +362231,11 @@ msgstr "<npcname> 重重地打了个哈欠。"
 
 #: src/suffer.cpp:1605
 msgid "You briefly lose track of what you were doing."
-msgstr ""
+msgstr "你短暂地忘了自己在做什么。"
 
 #: src/suffer.cpp:1609
 msgid "Your body is sore and aching."
-msgstr ""
+msgstr "你全身又酸又痛。"
 
 #: src/suffer.cpp:1613
 msgid "Your vision blurs a little."
@@ -362204,15 +362243,15 @@ msgstr "你的视野一阵阵模糊。"
 
 #: src/suffer.cpp:1620
 msgid "You zone out for a moment."
-msgstr ""
+msgstr "你发呆了会儿。"
 
 #: src/suffer.cpp:1624
 msgid "Your muscles and joints ache."
-msgstr ""
+msgstr "你的肌肉和关节疼。"
 
 #: src/suffer.cpp:1628
 msgid "You have a headache."
-msgstr ""
+msgstr "你头疼。"
 
 #: src/suffer.cpp:1635
 msgid "You feel heartburn and an acid taste in your mouth."
@@ -362220,15 +362259,15 @@ msgstr "你感到腹部灼热，嘴中反酸。"
 
 #: src/suffer.cpp:1640
 msgid "Waking dreams haunt the corners of your vision."
-msgstr ""
+msgstr "清醒时梦境萦绕在你视线的角落里。"
 
 #: src/suffer.cpp:1644
 msgid "Your body trembles, pushed to its limit by lack of sleep."
-msgstr ""
+msgstr "你的身体在颤抖，缺乏睡眠快到极限。"
 
 #: src/suffer.cpp:1648
 msgid "You stumble."
-msgstr ""
+msgstr "你绊了一下。"
 
 #: src/suffer.cpp:1649
 msgid "<npcname> stumbles."
@@ -362467,12 +362506,12 @@ msgstr "我该脱下些什么吗？"
 #: src/talker_npc.cpp:454
 #, c-format
 msgid "I think I might be better off barehanded, do you really want me to use the %s?"
-msgstr ""
+msgstr "我觉得我可能光着手更好，你真的想让我用%s吗？"
 
 #: src/talker_npc.cpp:458
 #, c-format
 msgid "I think my %s is better, do you really want me to use the %s?"
-msgstr ""
+msgstr "我觉得我的%s更好，你真的要我用%s吗？"
 
 #: src/talker_npc.cpp:467
 #, c-format
@@ -362793,11 +362832,11 @@ msgstr "你的 %s 踩到了一些气泡袋！"
 
 #: src/trapfunc.cpp:186
 msgid "You are underwater and struggling to stay afloat!"
-msgstr ""
+msgstr "你在水下，正拼命保持漂浮！"
 
 #: src/trapfunc.cpp:189
 msgid "You're wet and cold from the water."
-msgstr ""
+msgstr "你被水弄得又冷又湿。"
 
 #: src/trapfunc.cpp:207
 msgid "You step on some glass!"
@@ -363661,7 +363700,7 @@ msgstr "你在驾驶载具时无法安装部件。"
 
 #: src/veh_interact.cpp:1064 src/veh_interact.cpp:1160 src/veh_interact.cpp:1292 src/veh_interact.cpp:1331 src/veh_interact.cpp:1894 src/veh_interact.cpp:1940 src/veh_interact.cpp:1984
 msgid "You are busy doing something else."
-msgstr ""
+msgstr "你正忙于其他事情。"
 
 #: src/veh_interact.cpp:1074
 msgid "Installing this part will mean that this vehicle is no longer flightworthy.  Continue?"
