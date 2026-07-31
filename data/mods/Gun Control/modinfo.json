@@ -1,0 +1,12 @@
+[
+  {
+    "type": "MOD_INFO",
+    "id": "gun_control",
+    "name": "Gun Control",
+    "authors": [ "Worm Girl" ],
+    "maintainers": [ "Worm Girl" ],
+    "description": "WIP mod that greatly reduces the presence of guns in the game.  You might find a bit of ammo here and there, but firearms are extremely rare.",
+    "category": "balance",
+    "dependencies": [ "tlg" ]
+  }
+]

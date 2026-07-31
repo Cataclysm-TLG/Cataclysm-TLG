@@ -3313,14 +3313,6 @@ static void debug_menu_force_temperature()
             if( ret ) {
                 forced_temp = units::from_celsius( *ret );
             }
-        } else if( option == "kelvin" ) {
-            if( forced_temp ) {
-                current = units::to_kelvin( *forced_temp );
-            }
-            std::optional<float> ret = ask( "K", current );
-            if( ret ) {
-                forced_temp = units::from_kelvin( *ret );
-            }
         } else {
             if( forced_temp ) {
                 current = units::to_fahrenheit( *forced_temp );

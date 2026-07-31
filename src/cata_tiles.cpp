@@ -1617,8 +1617,6 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                             std::string temp_str;
                             if( get_option<std::string>( "USE_CELSIUS" ) == "celsius" ) {
                                 temp_str = string_format( "%.0f", celsius_temp_value );
-                            } else if( get_option<std::string>( "USE_CELSIUS" ) == "kelvin" ) {
-                                temp_str = string_format( "%.0f", units::to_kelvin( temp_value ) );
                             } else {
                                 temp_str = string_format( "%.0f", units::to_fahrenheit( temp_value ) );
                             }

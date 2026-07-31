@@ -508,84 +508,10 @@
   },
   {
     "type": "mutation",
-    "id": "hair_extremely_long",
-    "name": { "str": "Hair: extremely long" },
-    "points": 0,
-    "description": "You have extremely long hair, which goes down to your knees.",
-    "starting_trait": true,
-    "valid": false,
-    "purifiable": false,
-    "player_display": true,
-    "variants": [
-      {
-        "id": "black",
-        "name": { "str": "Hair: black, extremely long" },
-        "description": "You have extremely long black hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "blond",
-        "name": { "str": "Hair: blond, extremely long" },
-        "description": "You have extremely long blond hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "blue",
-        "name": { "str": "Hair: blue, extremely long" },
-        "description": "You have extremely long blue hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "brown",
-        "name": { "str": "Hair: brown, extremely long" },
-        "description": "You have extremely long brown hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "gray",
-        "name": { "str": "Hair: gray, extremely long" },
-        "description": "You have extremely long gray hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "green",
-        "name": { "str": "Hair: green, extremely long" },
-        "description": "You have extremely long green hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "pink",
-        "name": { "str": "Hair: pink, extremely long" },
-        "description": "You have extremely long pink hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "purple",
-        "name": { "str": "Hair: purple, extremely long" },
-        "description": "You have extremely long purple hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "red",
-        "name": { "str": "Hair: red, extremely long" },
-        "description": "You have extremely long red hair, which goes down to your knees.",
-        "weight": 1
-      },
-      {
-        "id": "white",
-        "name": { "str": "Hair: white, extremely long" },
-        "description": "You have extremely long white hair, which goes down to your knees.",
-        "weight": 1
-      }
-    ],
-    "types": [ "hair_style" ]
-  },
-  {
-    "type": "mutation",
     "id": "hair_body_length",
-    "name": { "str": "Hair: body-length" },
+    "name": { "str": "Hair: floor-length" },
     "points": 0,
-    "description": "Your hair is now so long that it reaches the floor.",
+    "description": "Your hair is so long that it reaches the floor.",
     "starting_trait": true,
     "valid": false,
     "purifiable": false,
@@ -594,61 +520,61 @@
       {
         "id": "black",
         "name": { "str": "Hair: black, body-length" },
-        "description": "Your black hair is now so long that it reaches the floor.",
+        "description": "Your black hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "blond",
-        "name": { "str": "Hair: blond, body-length" },
-        "description": "Your blond hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: blond, floor-length" },
+        "description": "Your blond hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "blue",
-        "name": { "str": "Hair: blue, body-length" },
-        "description": "Your blue hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: blue, floor-length" },
+        "description": "Your blue hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "brown",
-        "name": { "str": "Hair: brown, body-length" },
-        "description": "Your brown hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: brown, floor-length" },
+        "description": "Your brown hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "gray",
-        "name": { "str": "Hair: gray, body-length" },
-        "description": "Your gray hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: gray, floor-length" },
+        "description": "Your gray hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "green",
-        "name": { "str": "Hair: green, body-length" },
-        "description": "Your green hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: green, floor-length" },
+        "description": "Your green hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "pink",
-        "name": { "str": "Hair: pink, body-length" },
-        "description": "Your pink hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: pink, floor-length" },
+        "description": "Your pink hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "purple",
-        "name": { "str": "Hair: purple, body-length" },
-        "description": "Your purple hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: purple, floor-length" },
+        "description": "Your purple hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "red",
-        "name": { "str": "Hair: red, body-length" },
-        "description": "Your red hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: red, floor-length" },
+        "description": "Your red hair is so long that it reaches the floor.",
         "weight": 1
       },
       {
         "id": "white",
-        "name": { "str": "Hair: white, body-length" },
-        "description": "Your white hair is now so long that it reaches the floor.",
+        "name": { "str": "Hair: white, floor-length" },
+        "description": "Your white hair is so long that it reaches the floor.",
         "weight": 1
       }
     ],
