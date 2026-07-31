@@ -1789,17 +1789,9 @@ void options_manager::add_options_interface()
     add_option_group( "interface", Group( "measurement_unit", to_translation( "Measurement Units" ),
                                           to_translation( "Options regarding measurement units." ) ),
     [&]( const std::string & page_id ) {
-        add( "UNIT_SYSTEM", page_id, to_translation( "Unit System" ),
-             to_translation( "Switch between metric and imperial units for speed, weight, volume, and distance." ),
-        {
-            { "imperial", to_translation( "Imperial (mph, lbs, quarts)" ) },
-            { "metric", to_translation( "Metric (km/h, kg, liters)" ) }
-        },
-        ( SystemLocale::UseMetricSystem().value_or( false ) ? "metric" : "imperial" ) );
-
         add( "USE_CELSIUS", page_id, to_translation( "Temperature units" ),
              to_translation( "Switch between Fahrenheit, Celsius, and Kelvin." ),
-        { { "fahrenheit", to_translation( "Fahrenheit" ) }, { "celsius", to_translation( "Celsius" ) }, { "kelvin", to_translation( "Kelvin" ) } },
+        { { "fahrenheit", to_translation( "Fahrenheit" ) }, { "celsius", to_translation( "Celsius" ) } },
         "fahrenheit"
            );
 
