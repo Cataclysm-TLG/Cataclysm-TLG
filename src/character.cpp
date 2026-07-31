@@ -6863,17 +6863,8 @@ void Character::mod_base_height( int mod )
 
 std::string Character::height_string() const
 {
-    const bool metric = get_option<std::string>( "UNIT_SYSTEM" ) == "metric";
-
-    if( metric ) {
-        std::string metric_string = _( "%d cm" );
-        return string_format( metric_string, height() );
-    }
-
-    int total_inches = std::round( height() / 2.54 );
-    int feet = std::floor( total_inches / 12 );
-    int remainder_inches = total_inches % 12;
-    return string_format( "%d\'%d\"", feet, remainder_inches );
+    std::string metric_string = _( "%d cm" );
+    return string_format( metric_string, height() );
 }
 
 int Character::height() const
@@ -6888,12 +6879,24 @@ int Character::height() const
 int Character::base_bmr() const
 {
     /**
-    Values are for males, and average!
+      The Mifflin–St Jeor equation would use +5 as equation_constant for men and -161 for women.
+      These are not magical sex-based constants, they're just general tendencies based on the
+      average differences in lean body mass between the sexes which are not otherwise accounted
+      for by body weight and height. We already track this via strength's effect on BMR elsewhere
+      in the code, so we use -78 to more accurately represent a midpoint which is later modified
+      by strength.
     */
-    const int equation_constant = 5;
+    const int equation_constant = -78;
     const int weight_factor = units::to_gram<int>( bodyweight() / 100.0 );
     const int height_factor = 6.25 * height();
-    const int age_factor = 5 * age();
+    /**
+      Age is clamped between 18 and 90 to avoid weird ages distorting the model. Younger characters
+      would be unduly penalized if it wasn't, and characters who somehow had their age set very high
+      would completely break the model. It might be more appropriate to use a different model for kids,
+      but clamping to 18 should be close enough that it doesn't really matter.
+    */
+    const int effective_age = std::clamp( age(), 18, 90 );
+    const int age_factor = 5 * effective_age;
     return metabolic_rate_base() * ( weight_factor + height_factor - age_factor + equation_constant );
 }
 
