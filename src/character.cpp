@@ -663,6 +663,7 @@ Character::Character() :
     }
     // Only call these if game is initialized.
     if( !!g && json_flag::is_ready() ) {
+        invalidate_tile_eye_level_cache();
         recalc_sight_limits();
         trait_flag_cache.clear();
         bio_flag_cache.clear();
@@ -1460,15 +1461,24 @@ int Character::eye_level() const
     // Standing:  Tiny = 20, Small = 40, Med = 60, Large = 80, Huge = 100
     // Crouching: Tiny = 12, Small = 24, Med = 36, Large = 48, Huge = 60
     // Prone:     Tiny = 6,  Small = 12, Med = 18, Large = 24, Huge = 30
-    int eye_level = static_cast<float>( enum_size() ) * 20;
-    if( flat ) {
-        eye_level *= 0.3;
-    } else if( low_profile ) {
-        eye_level *= 0.6;
+    static constexpr int standing_eye_level[]   = { 0, 20, 40, 60, 80, 100 };
+    static constexpr int crouching_eye_level[]  = { 0, 12, 24, 36, 48, 60 };
+    static constexpr int prone_eye_level[]      = { 0, 6, 12, 18, 24, 30 };
+    const int size = static_cast<int>( enum_size() );
+    int eye_level = flat ? prone_eye_level[size] :
+                    low_profile ? crouching_eye_level[size] :
+                    standing_eye_level[size];
+    return eye_level + tile_eye_level_bonus();
+}
+
+
+int Character::tile_eye_level_bonus() const
+{
+    if( !cached_tile_eye_level_bonus_dirty ) {
+        return cached_tile_eye_level_bonus;
     }
-
+    int bonus = 0;
     map &here = get_map();
-
     if( const optional_vpart_position vp = here.veh_at( pos_bub() ) ) {
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
         const vehicle &veh = vp->vehicle();
@@ -1480,34 +1490,38 @@ int Character::eye_level() const
             if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
                 vpi_here.location != "roof" ) {
                 all_no_cover = false;
-                break; // Early exit since at least one part provides cover.
+                break;
             }
         }
-        if( all_no_cover ) {
-            eye_level += 0;
-        } else if( !is_aisle ) {
-            // Non-aisle non-obstacle parts typically give 45 cover. We get less than that as we're inside the vehicle, not atop it.
-            // Return here to ensure we aren't stacking vehicle and furniture bonuses.
-            return eye_level += 20;
+        if( !all_no_cover && !is_aisle ) {
+            // Non-aisle non-obstacle parts typically give 45 cover. We get less than that as
+            // we're inside the vehicle, not atop it. Vehicle cover does not stack with furniture.
+            bonus = 20;
+            cached_tile_eye_level_bonus = bonus;
+            cached_tile_eye_level_bonus_dirty = false;
+            return bonus;
         }
     }
-
     const furn_id viewer_furn = here.furn( pos_bub() );
     const furn_t &furn = viewer_furn.obj();
-    if( !furn.id ) {
-        return eye_level;
-    }
-    if( furn.coverage <= 0 ) {
-        return eye_level;
-    }
-    if( ( furn.has_flag( ter_furn_flag::TFLAG_CAN_SIT ) ||
+    if( furn.id && furn.coverage > 0 &&
+        ( furn.has_flag( ter_furn_flag::TFLAG_CAN_SIT ) ||
           furn.has_flag( ter_furn_flag::TFLAG_MOUNTABLE ) ||
-          furn.has_flag( ter_furn_flag::TFLAG_FLAT_SURF ) || furn.has_flag( ter_furn_flag::TFLAG_FLAT ) ||
+          furn.has_flag( ter_furn_flag::TFLAG_FLAT_SURF ) ||
+          furn.has_flag( ter_furn_flag::TFLAG_FLAT ) ||
           furn.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) &&
         !furn.has_flag( ter_furn_flag::TFLAG_HIDE_PLACE ) ) {
-        eye_level += furn.coverage;
+        bonus = furn.coverage;
     }
-    return eye_level;
+
+    cached_tile_eye_level_bonus = bonus;
+    cached_tile_eye_level_bonus_dirty = false;
+    return bonus;
+}
+
+void Character::invalidate_tile_eye_level_cache() const
+{
+    cached_tile_eye_level_bonus_dirty = true;
 }
 
 bool Character::overmap_los( const tripoint_abs_omt &omt, int sight_points ) const
@@ -1923,6 +1937,7 @@ void Character::mount_creature( monster &z )
         guy.setpos( here, pnt );
     }
     z.facing = facing;
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     mod_moves( -100 );
 }
@@ -3568,6 +3583,8 @@ void Character::remove_mission_items( int mission_id )
 void Character::on_move( const tripoint_abs_ms &old_pos )
 {
     Creature::on_move( old_pos );
+    // Update the eye_level_cache in case we step on or off something that raises our eye_level.
+    invalidate_tile_eye_level_cache();
     // Ugly to compare a tripoint_bub_ms with a tripoint_abs_ms, but the 'z' component
     // is the same regardless of the x/y reference point.
     if( this->posz() != old_pos.z() ) {
@@ -7723,11 +7740,11 @@ void Character::wake_up()
     if( has_effect( effect_alarm_clock ) ) {
         get_effect( effect_alarm_clock ).set_duration( 0_turns );
     }
-    recalc_sight_limits();
-
     if( movement_mode_is( move_mode_prone ) ) {
         set_movement_mode( move_mode_walk );
     }
+    invalidate_tile_eye_level_cache();
+    recalc_sight_limits();
 }
 
 int Character::get_shout_volume() const
@@ -13055,6 +13072,7 @@ void Character::set_underwater( bool u )
 {
     if( underwater != u ) {
         underwater = u;
+        invalidate_tile_eye_level_cache();
         recalc_sight_limits();
     }
 }
@@ -13972,6 +13990,7 @@ void Character::environmental_revert_effect()
     set_painkiller( 0 );
     set_rad( 0 );
 
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     calc_encumbrance();
 }

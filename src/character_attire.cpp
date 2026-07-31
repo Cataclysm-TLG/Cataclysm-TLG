@@ -407,6 +407,7 @@ std::optional<std::list<item>::iterator> outfit::wear_item( Character &guy, cons
     }
 
     if( do_calc_encumbrance ) {
+        guy.invalidate_tile_eye_level_cache();
         guy.recalc_sight_limits();
         guy.calc_encumbrance();
         guy.calc_discomfort();
