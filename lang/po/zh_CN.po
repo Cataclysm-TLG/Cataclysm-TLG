@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-30 14:37+0800\n"
+"PO-Revision-Date: 2026-07-31 16:59+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -87932,76 +87932,76 @@ msgstr[0] "糖渍草莓"
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "strawberry fruit leather"
 msgid_plural "strawberry fruit leather"
-msgstr[0] ""
+msgstr[0] "草莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "strawberry jam"
 msgid_plural "strawberry jam"
-msgstr[0] ""
+msgstr[0] "草莓果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "tupelo fruit fruit leather"
 msgid_plural "tupelo fruit fruit leather"
-msgstr[0] ""
+msgstr[0] "蓝果木果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "tupelo fruit in syrup"
 msgid_plural "tupelo fruit in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍蓝果木果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "tupelo fruit jam"
 msgid_plural "tupelo fruit jam"
-msgstr[0] ""
+msgstr[0] "蓝果木果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "watermelon fruit leather"
 msgid_plural "watermelon fruit leather"
-msgstr[0] ""
+msgstr[0] "西瓜果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "watermelon in syrup"
 msgid_plural "watermelon in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍西瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
 #. watermelon_wedge
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "watermelon jam"
 msgid_plural "watermelon jam"
-msgstr[0] ""
+msgstr[0] "西瓜果酱"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "wintergreen berries in syrup"
 msgid_plural "wintergreen berries in syrup"
-msgstr[0] ""
+msgstr[0] "糖渍冬青莓"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "wintergreen berry fruit leather"
 msgid_plural "wintergreen berry fruit leather"
-msgstr[0] ""
+msgstr[0] "冬青莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
 msgid "wintergreen berry jam"
 msgid_plural "wintergreen berry jam"
-msgstr[0] ""
+msgstr[0] "冬青莓果酱"
 
 #. ~ Description of "chocolate bar"
 #: data/json/items/comestibles/junkfood.json
@@ -89522,7 +89522,7 @@ msgstr[0] "罐装金枪鱼"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "cannibal spaghetti"
 msgid_plural "cannibal spaghetti"
-msgstr[0] ""
+msgstr[0] "人肉意大利面"
 
 #. ~ Conditional name for "currywurst" when VITAMIN matches
 #. human_flesh_vitamin
@@ -89652,7 +89652,7 @@ msgstr[0] "脱水贝肉"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "dehydrated tainted human flesh"
 msgid_plural "dehydrated tainted human flesh"
-msgstr[0] ""
+msgstr[0] "脱水受污染人肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/meat_dishes.json
@@ -89980,13 +89980,13 @@ msgstr[0] "干肉饼"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "pemmican with fruit"
 msgid_plural "pemmican with fruit"
-msgstr[0] ""
+msgstr[0] "水果肉糜干"
 
 #. ~ Item name
 #: data/json/items/comestibles/meat_dishes.json
 msgid "pemmican with vegetables"
 msgid_plural "pemmican with vegetables"
-msgstr[0] ""
+msgstr[0] "蔬菜肉糜干"
 
 #. ~ Conditional name for "pelmeni" when COMPONENT_ID_SUBSTRING matches mutant
 #: data/json/items/comestibles/meat_dishes.json
@@ -90214,7 +90214,7 @@ msgstr[0] "意式番茄牛肉面"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "spaghetti mostruoso"
 msgid_plural "spaghetti mostruoso"
-msgstr[0] ""
+msgstr[0] "怪物意面"
 
 #. ~ Item name
 #: data/json/items/comestibles/meat_dishes.json
@@ -90325,7 +90325,7 @@ msgstr "调试用物品，可让NPC或自己入睡。"
 #. ~ Description of "alprazolam"
 #: data/json/items/comestibles/med.json
 msgid "A fast-acting benzodiazepine with a powerful sedative effect.  It is dangerously addictive, and withdrawal from regular use should be gradual."
-msgstr ""
+msgstr "一种起效迅速的苯二氮䓬类药物，具有强效镇静作用。具有危险的成瘾性，长期使用后应逐步戒断。"
 
 #. ~ Description of "flavored bone meal tablet"
 #: data/json/items/comestibles/med.json
@@ -90350,7 +90350,7 @@ msgstr "由漂白剂和水制成的临时防腐剂。  挥发性氯化合物会�
 #. ~ Description of "cocaine topical cream"
 #: data/json/items/comestibles/med.json
 msgid "A medical cream that provides both vascular restriction and anesthetic properties.  It won't get you high, but if used too frequently it may still be habit-forming."
-msgstr ""
+msgstr "一种兼具血管收缩和麻醉效果的医用乳膏。它不会让你兴奋，但如果使用过于频繁，仍可能产生依赖。"
 
 #. ~ Description of "cigarette"
 #: data/json/items/comestibles/med.json
@@ -90400,17 +90400,17 @@ msgstr "一种强力的化学药片，可以彻底清除生物体内的真菌感
 #. ~ Description of "lithium tablet"
 #: data/json/items/comestibles/med.json
 msgid "A prescription mood stabilizer in the form of lithium carbonate.  This drug has long been used to treat bipolar disorder, and if taken once daily, helps to dampen the severity of mood swings."
-msgstr ""
+msgstr "一种处方情绪稳定剂，成分为碳酸锂。该药长期以来用于治疗双相情感障碍，每日服用一次有助于减轻情绪波动的严重程度。"
 
 #. ~ Description of "dextroamphetamine"
 #: data/json/items/comestibles/med.json
 msgid "A prescription stimulant commonly prescribed for attention deficit disorder, often with levoamphetamine included.  It can be addictive if abused."
-msgstr ""
+msgstr "一种处方兴奋剂，常用于治疗注意缺陷障碍，通常含有左旋安非他命。如滥用可能产生成瘾性。"
 
 #. ~ Description of "zolpidem"
 #: data/json/items/comestibles/med.json
 msgid "A prescription-strength sedative with a variety of psychoactive side effects.  Used in the treatment of insomnia."
-msgstr ""
+msgstr "一种处方级镇静剂，具有多种精神活性副作用。用于治疗失眠。"
 
 #. ~ Description of "hand-rolled cigarette"
 #: data/json/items/comestibles/med.json
@@ -90420,7 +90420,7 @@ msgstr "一根你自己卷的香烟，刺激感知，并且降低进食欲望。
 #. ~ Description of "naloxone"
 #: data/json/items/comestibles/med.json
 msgid "A small plastic device with a nozzle on one end and a plunger on the other.  The drug inside can be administered nasally to rapidly reverse and block the effect of opioids, which could save someone's life during an overdose."
-msgstr ""
+msgstr "一种小型塑料装置，一端带有喷嘴，另一端带有推杆。内部的药物可通过鼻腔给药，迅速逆转并阻断阿片类药物的作用，在过量用药时可能挽救生命。"
 
 #. ~ Description of "injectable iron"
 #: data/json/items/comestibles/med.json
@@ -90450,12 +90450,12 @@ msgstr "一种强大的苯二氮卓类药物，用于治疗肌肉痉挛、焦虑
 #. ~ Description of "epinephrine autoinjector"
 #: data/json/items/comestibles/med.json
 msgid "A syringe filled with a shot of epinephrine, also called adrenaline.  It serves as a powerful stimulant when you inject yourself with it.  Asthmatics can use it in an emergency to clear an asthma attack."
-msgstr ""
+msgstr "一支装有肾上腺素（也叫肾上腺素）的注射器。注射后能起到强效兴奋剂的作用。哮喘患者在紧急情况下可用它来缓解哮喘发作。"
 
 #. ~ Description of "tramadol"
 #: data/json/items/comestibles/med.json
 msgid "A tablet containing 50mg of a slow-acting opioid.  It is slow-acting and relatively mild, but will last much longer than other opioids."
-msgstr ""
+msgstr "一种含有50毫克缓释阿片类药物的药片。其作用缓慢，相对温和，但持续时间比其他阿片类药物更长。"
 
 #. ~ Description of "Prussian blue tablet"
 #: data/json/items/comestibles/med.json
@@ -90482,12 +90482,12 @@ msgstr "对乙酰氨基酚是一种温和的止痛药，适合与阿司匹林等
 #. ~ Description of "cough syrup"
 #: data/json/items/comestibles/med.json
 msgid "Acetaminophen, dextromethorphan HBr, and diphenhydramine served in the form of a foul-tasting syrup.  It promises to fight flu symptoms like coughs, fever, and body aches, and thanks to the inclusion of a potent antihistamine, it should fight allergies and put you to sleep as well."
-msgstr ""
+msgstr "一种含有对乙酰氨基酚、氢溴酸右美沙芬和苯海拉明的口服液，味道不佳。宣称可对抗咳嗽、发热和身体酸痛等流感症状，且因含有强效抗组胺成分，还可缓解过敏并帮助入睡。"
 
 #. ~ Description of "aspirin"
 #: data/json/items/comestibles/med.json
 msgid "Acetylsalicylic acid, an NSAID that can treat pain and fever.  It is a blood thinner, and may exacerbate bleeding."
-msgstr ""
+msgstr "乙酰水杨酸，一种非甾体抗炎药，可治疗疼痛和发热。具有抗凝血作用，可能加重出血。"
 
 #. ~ Snippet of item "homeopathic pill"
 #: data/json/items/comestibles/med.json
@@ -90522,7 +90522,7 @@ msgstr "一种用于医院环境中治疗剧烈疼痛的成瘾性麻醉剂。你
 #. ~ Description of "nicotine patch"
 #: data/json/items/comestibles/med.json
 msgid "An adhesive patch that promises to fight cravings and help smokers quit by slowly delivering nicotine into the body over the course of 16 hours as a replacement for smoking."
-msgstr ""
+msgstr "一种透皮贴剂，宣称可通过在16小时内缓慢向体内释放尼古丁来替代吸烟，从而帮助吸烟者抑制烟瘾并戒烟。"
 
 #. ~ Description of "Panaceus"
 #: data/json/items/comestibles/med.json
@@ -90547,12 +90547,12 @@ msgstr "一份加入了冬青油的软膏。具有微弱的抗菌作用，可以
 #. ~ Description of "codeine"
 #: data/json/items/comestibles/med.json
 msgid "An opioid in tablet form, used in the suppression of pain, cough, and other ailments.  While relatively weak for a narcotic, it is still addictive, with a potential for overdose."
-msgstr ""
+msgstr "一种片剂形式的阿片类药物，用于抑制疼痛、咳嗽及其他症状。虽然作为麻醉剂而言相对较弱，但仍有成瘾性，并存在过量使用的风险。"
 
 #. ~ Description of "diphenhydramine"
 #: data/json/items/comestibles/med.json
 msgid "An over-the-counter allergy medication.  These tablets are meant to be taken once per day and can cause drowsiness."
-msgstr ""
+msgstr "一种非处方抗过敏药物。这些药片需每日服用一次，可能引起嗜睡。"
 
 #. ~ Description of "melatonin tablet"
 #: data/json/items/comestibles/med.json
@@ -90621,12 +90621,12 @@ msgstr "一份高度浓缩的大麻精油。这种精油经过了最多步骤的
 #. ~ Description of "bismuth subsalicylate"
 #: data/json/items/comestibles/med.json
 msgid "Creamy pink syrup that tastes of bubblegum and chalk.  It is used to treat digestive issues such as nausea and heartburn."
-msgstr ""
+msgstr "一种粉红色乳状糖浆，带有泡泡糖和白垩土的味道。用于治疗恶心和胃灼热等消化问题。"
 
 #. ~ Description of "cocaine"
 #: data/json/items/comestibles/med.json
 msgid "Crystalline extract of the coca leaf, or at least, a white powder with some of that in it.  It is a highly addictive stimulant."
-msgstr ""
+msgstr "古柯叶的结晶提取物，或者至少是一种含有部分该成分的白色粉末。它是一种高度成瘾性的兴奋剂。"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -90637,7 +90637,7 @@ msgstr[0] "达金溶液"
 #. ~ Description of "non-drowsy cough syrup"
 #: data/json/items/comestibles/med.json
 msgid "Daytime cold and flu medication consisting primarily of dextromethorphan HBr and acetaminophen.  It promises to suppress coughing, aching, headaches and fever without causing excessive drowsiness."
-msgstr ""
+msgstr "一种日间感冒和流感药物，主要成分为氢溴酸右美沙芬和对乙酰氨基酚。宣称可抑制咳嗽、疼痛、头痛和发热，且不会引起过度嗜睡。"
 
 #. ~ Description of "crack"
 #: data/json/items/comestibles/med.json
@@ -90662,7 +90662,7 @@ msgstr "身体必需的各种膳食营养成分被方便地包装成丸状。是
 #. ~ Description of "ibuprofen"
 #: data/json/items/comestibles/med.json
 msgid "Ibuprofen, a mild NSAID analgesic.  It relieves pain and swelling, but raises blood pressure more than other NSAIDs."
-msgstr ""
+msgstr "布洛芬，一种温和的非甾体抗炎镇痛药。可缓解疼痛和肿胀，但相比其他非甾体抗炎药更易升高血压。"
 
 #. ~ Description of "rolling tobacco"
 #: data/json/items/comestibles/med.json
@@ -90696,12 +90696,12 @@ msgstr "薄荷味的咀嚼烟草。虽然对你的健康十分不利，它曾经
 #. ~ Description of "naproxen"
 #: data/json/items/comestibles/med.json
 msgid "Naproxen, a slow-acting over-the-counter pain medicaton.  It takes up to an hour to kick in, but lasts longer than other NSAIDs."
-msgstr ""
+msgstr "萘普生，一种非处方缓释止痛药。需长达一小时才能起效，但持续时间比其他非甾体抗炎药更长。"
 
 #. ~ Description of "caffeine pill"
 #: data/json/items/comestibles/med.json
 msgid "Once favored by truckers and students who couldn't get a prescription and didn't want to break the law, of these pills is equivalent to a strong cup of coffee."
-msgstr ""
+msgstr "一种曾深受卡车司机和学生青睐的药片，他们既无法获得处方，又不想违法。每片效果相当于一杯浓咖啡。"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -90806,7 +90806,7 @@ msgstr "无菌的生理盐水滴眼液，可以用来治疗眼部干燥，也可
 #. ~ Description of "nicotine gum"
 #: data/json/items/comestibles/med.json
 msgid "Sugar-free chewing gum that slowly delivers nicotine over the course of an hour.  It's designed for smokers who want to quit, but that doesn't mean it can't be habit-forming."
-msgstr ""
+msgstr "一种无糖口香糖，可在长达一小时内缓慢释放尼古丁。专为想戒烟的吸烟者设计，但这并不意味着它不会产生依赖。"
 
 #. ~ Description of "caffeinated chewing gum"
 #: data/json/items/comestibles/med.json
@@ -90826,7 +90826,7 @@ msgstr "这个电池驱动的装置将尼古丁和调味剂的混合液蒸腾起
 #. ~ Description of "crystal meth"
 #: data/json/items/comestibles/med.json
 msgid "Tiny crystals of methamphetamine, one of the most potent and addictive stimulants around.  This sample is quite pure and should lead to a strong, reliable high."
-msgstr ""
+msgstr "甲基苯丙胺的微小晶体，是目前最强效、最具成瘾性的兴奋剂之一。这批样品纯度很高，应能带来强烈而稳定的欣快感。"
 
 #. ~ Description of "speed"
 #: data/json/items/comestibles/med.json
@@ -90836,7 +90836,7 @@ msgstr "微小的灰白色甲基苯丙胺晶体。其色泽暗示纯度存疑，
 #. ~ "activation_message" action message of item "nicotine patch"
 #: data/json/items/comestibles/med.json
 msgid "You apply a nicotine patch."
-msgstr ""
+msgstr "你贴上了尼古丁贴片。"
 
 #. ~ "description" action message of item "plano transition contact lenses
 #. (daily)"
@@ -90890,7 +90890,7 @@ msgstr "一股舒缓的感觉沿着血管流遍你的全身。"
 #. ~ "activation_message" action message of item "cough syrup"
 #: data/json/items/comestibles/med.json
 msgid "You drink your cough syrup."
-msgstr ""
+msgstr "你喝了咳嗽糖浆。"
 
 #. ~ "activation_message" action message of item "pink tab"
 #: data/json/items/comestibles/med.json
@@ -90942,12 +90942,12 @@ msgstr "你抽了一些大麻。"
 #. ~ "activation_message" action message of item "crack"
 #: data/json/items/comestibles/med.json
 msgid "You smoke your crack rocks."
-msgstr ""
+msgstr "你吸了你的霹雳可卡因。"
 
 #. ~ "activation_message" action message of item "cocaine"
 #: data/json/items/comestibles/med.json
 msgid "You snort a bump of cocaine."
-msgstr ""
+msgstr "你吸了一行可卡因。"
 
 #. ~ "activation_message" action message of item "crystal meth"
 #: data/json/items/comestibles/med.json
@@ -90957,12 +90957,12 @@ msgstr "你吸食了一点冰毒。"
 #. ~ "activation_message" action message of item "speed"
 #: data/json/items/comestibles/med.json
 msgid "You snort some speed."
-msgstr ""
+msgstr "你吸了一些安非他命。"
 
 #. ~ "activation_message" action message of item "naloxone"
 #: data/json/items/comestibles/med.json
 msgid "You spray the naloxone up your nose."
-msgstr ""
+msgstr "你把纳洛酮喷入鼻腔。"
 
 #. ~ "activation_message" action message of item "opium tar"
 #: data/json/items/comestibles/med.json
@@ -90992,17 +90992,17 @@ msgstr "你服下了一些钙片。"
 #. ~ "activation_message" action message of item "cannabis wax"
 #: data/json/items/comestibles/med.json
 msgid "You take a dab of wax."
-msgstr ""
+msgstr "你取了一小块蜡。"
 
 #. ~ "activation_message" action message of item "cannabis shatter"
 #: data/json/items/comestibles/med.json
 msgid "You take a dab."
-msgstr ""
+msgstr "你取了一小块。"
 
 #. ~ "activation_message" action message of item "dextroamphetamine"
 #: data/json/items/comestibles/med.json
 msgid "You take a dextroamphetamine pill."
-msgstr ""
+msgstr "你服用了一粒右旋安非他命药片。"
 
 #. ~ "activation_message" action message of item "flavored bone meal tablet"
 #: data/json/items/comestibles/med.json
@@ -91012,17 +91012,17 @@ msgstr "你服下了一些风味骨粉片。"
 #. ~ "activation_message" action message of item "cannabis distillate"
 #: data/json/items/comestibles/med.json
 msgid "You take a hit of distillate."
-msgstr ""
+msgstr "你吸了一口蒸馏物。"
 
 #. ~ "activation_message" action message of item "lithium tablet"
 #: data/json/items/comestibles/med.json
 msgid "You take a lithium tablet."
-msgstr ""
+msgstr "你服用了一片锂盐药片。"
 
 #. ~ "activation_message" action message of item "metaprolol"
 #: data/json/items/comestibles/med.json
 msgid "You take a metaprolol."
-msgstr ""
+msgstr "你服用了一片美托洛尔。"
 
 #. ~ "activation_message" action message of item "multivitamin"
 #: data/json/items/comestibles/med.json
@@ -91032,7 +91032,7 @@ msgstr "你服用了一粒复合维生素。"
 #. ~ "activation_message" action message of item "naproxen"
 #: data/json/items/comestibles/med.json
 msgid "You take a naproxen tablet."
-msgstr ""
+msgstr "你服用了一片萘普生。"
 
 #. ~ "activation_message" action message of item "zolpidem"
 #: data/json/items/comestibles/med.json
@@ -91057,12 +91057,12 @@ msgstr "你服用了抗组胺药。"
 #. ~ "activation_message" action message of item "aspirin"
 #: data/json/items/comestibles/med.json
 msgid "You take an aspirin."
-msgstr ""
+msgstr "你服用了一片阿司匹林。"
 
 #. ~ "activation_message" action message of item "ibuprofen"
 #: data/json/items/comestibles/med.json
 msgid "You take an ibuprofen."
-msgstr ""
+msgstr "你服用了一片布洛芬。"
 
 #. ~ "activation_message" action message of item "Prussian blue tablet"
 #: data/json/items/comestibles/med.json
@@ -91077,7 +91077,7 @@ msgstr "你服用了一些对乙酰氨基酚。"
 #. ~ "activation_message" action message of item "bismuth subsalicylate"
 #: data/json/items/comestibles/med.json
 msgid "You take some bismuth subsalicylate."
-msgstr ""
+msgstr "你服用了一些次水杨酸铋。"
 
 #. ~ "activation_message" action message of item "codeine"
 #: data/json/items/comestibles/med.json
@@ -91109,7 +91109,7 @@ msgstr[0] "对乙酰氨基酚"
 #: data/json/items/comestibles/med.json
 msgid "alprazolam"
 msgid_plural "alprazolam"
-msgstr[0] ""
+msgstr[0] "阿普唑仑"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91181,7 +91181,7 @@ msgstr[0] "双焦点过渡隐形眼镜（每周佩戴）"
 #: data/json/items/comestibles/med.json
 msgid "bismuth subsalicylate"
 msgid_plural "bismuth subsalicylate"
-msgstr[0] ""
+msgstr[0] "次水杨酸铋"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91247,7 +91247,7 @@ msgstr[0] "咀嚼烟草"
 #: data/json/items/comestibles/med.json
 msgid "chlorpromazine"
 msgid_plural "chlorpromazine"
-msgstr[0] ""
+msgstr[0] "氯丙嗪"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json data/json/items/generic.json
@@ -91301,13 +91301,13 @@ msgstr[0] "调试用氯仿布条"
 #: data/json/items/comestibles/med.json
 msgid "dextroamphetamine"
 msgid_plural "dextroamphetamine"
-msgstr[0] ""
+msgstr[0] "右旋安非他命"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
 msgid "diphenhydramine"
 msgid_plural "diphenhydramine"
-msgstr[0] ""
+msgstr[0] "苯海拉明"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91337,7 +91337,7 @@ msgstr[0] "流感疫苗"
 #: data/json/items/comestibles/med.json
 msgid "fluoxetine"
 msgid_plural "fluoxetine"
-msgstr[0] ""
+msgstr[0] "氟西汀"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91427,7 +91427,7 @@ msgstr[0] "手卷大麻烟"
 #: data/json/items/comestibles/med.json
 msgid "lithium tablet"
 msgid_plural "lithium tablet"
-msgstr[0] ""
+msgstr[0] "锂盐药片"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91499,7 +91499,7 @@ msgstr[0] "近视过渡隐形眼镜（每周）"
 #: data/json/items/comestibles/med.json
 msgid "naloxone"
 msgid_plural "naloxone"
-msgstr[0] ""
+msgstr[0] "纳洛酮"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91523,7 +91523,7 @@ msgstr[0] "尼古丁口香糖"
 #: data/json/items/comestibles/med.json
 msgid "nicotine patch"
 msgid_plural "nicotine patches"
-msgstr[0] ""
+msgstr[0] "尼古丁贴片"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91595,7 +91595,7 @@ msgstr[0] "臭鼬喷雾中和溶液"
 #: data/json/items/comestibles/med.json
 msgid "speed"
 msgid_plural "speed"
-msgstr[0] ""
+msgstr[0] "安非他命"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91625,7 +91625,7 @@ msgstr[0] "冬青油"
 #: data/json/items/comestibles/med.json
 msgid "zolpidem"
 msgid_plural "zolpidem"
-msgstr[0] ""
+msgstr[0] "唑吡坦"
 
 #. ~ Description of "MRE dessert"
 #: data/json/items/comestibles/mre.json
@@ -92343,7 +92343,7 @@ msgstr "一种经过处理的诱变剂引物。"
 #. ~ Description of "mutagenic infusion"
 #: data/json/items/comestibles/mutagen.json
 msgid "A processed, purified, and condensed dose of mutagenic drugs.  This will cause you to acquire random mutations over time."
-msgstr ""
+msgstr "一剂经过加工、纯化与浓缩的诱变药物。将随时间推移使你获得随机变异。"
 
 #. ~ Description of "abstract mutagen flavor"
 #: data/json/items/comestibles/mutagen.json
@@ -92358,7 +92358,7 @@ msgstr "内含许多阴影的诱变剂，看起来好像里面满是游来游去
 #. ~ Description of "mutagen"
 #: data/json/items/comestibles/mutagen.json
 msgid "A syrupy black goop that reeks of noxious chemicals.  Drinking this may cause you to mutate randomly."
-msgstr ""
+msgstr "一种散发着有害化学气味的黑色粘稠糖浆。喝下它可能会使你发生随机变异。"
 
 #. ~ Description of "gastropod mutagen"
 #: data/json/items/comestibles/mutagen.json
@@ -94003,7 +94003,7 @@ msgstr "在稀酸溶液中新鲜提取出的明胶。它需要过滤以将明胶
 #. ~ Description of "coffee powder"
 #: data/json/items/comestibles/other.json
 msgid "Ground coffee beans.  You can boil it into a mediocre stimulant, or something better if you had a coffee pot."
-msgstr ""
+msgstr "研磨好的咖啡豆。你可以将其煮沸制成一杯普通的提神饮品，如果有咖啡壶的话，味道会更好。"
 
 #. ~ Description of "candied honey"
 #: data/json/items/comestibles/other.json
@@ -95786,7 +95786,7 @@ msgstr "一堆粘糊糊的海藻。  它看起来不可食用，但如果干燥�
 #. ~ Description of "cattail rhizome"
 #: data/json/items/comestibles/raw_veggy.json
 msgid "A small tuber-like root from a cattail plant.  Its crisp white flesh is very starchy and fibrous, but you really ought to cook it before you attempt to eat it."
-msgstr ""
+msgstr "香蒲植物的块状小根。其脆嫩的白色肉质富含淀粉和纤维，但食用前最好先煮熟。"
 
 #. ~ Description of "bee balm"
 #: data/json/items/comestibles/raw_veggy.json
@@ -96972,7 +96972,7 @@ msgstr "一些洋葱种子。"
 #. ~ Description of "poppy seeds"
 #: data/json/items/comestibles/seed.json
 msgid "Some poppy seeds."
-msgstr ""
+msgstr "一些罂粟籽"
 
 #. ~ Description of "raspberry seeds"
 #: data/json/items/comestibles/seed.json
@@ -97447,7 +97447,7 @@ msgstr[0] "洋葱种子"
 #: data/json/items/comestibles/seed.json
 msgid "poppy seeds"
 msgid_plural "poppy seeds"
-msgstr[0] ""
+msgstr[0] "罂粟籽"
 
 #. ~ Item name
 #: data/json/items/comestibles/seed.json
@@ -98285,7 +98285,7 @@ msgstr "一个腌黄瓜，酸酸甜甜，美味可口而且保质期很长。"
 #. ~ Description of "tofu stirfry"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "A tofu stirfry with rice and a sweet, bold flavor."
-msgstr ""
+msgstr "一道加了米饭的豆腐炒菜，口味浓郁偏甜。"
 
 #. ~ Description of "onigiri"
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98402,7 +98402,7 @@ msgstr "把大蒜剥瓣，涂上一层油，然后烤熟。比生吃美味多了
 #. ~ Description of "dried starch"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "Fibrous clumps of carbohydrate-rich paste extracted from a root vegetable.  Now that it's dry, it could be milled into flour."
-msgstr ""
+msgstr "从根茎类蔬菜中提取的富含碳水化合物的糊状纤维团块。现已干燥，可研磨成面粉。"
 
 #. ~ Description of "sauteed fiddleheads"
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98503,7 +98503,7 @@ msgstr "上面覆盖着厚厚一层香蒜酱的意大利面。非常好吃！"
 #. ~ Description of "starch"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "Sticky, gooey carbohydrate paste extracted from a root vegetable.  It will spoils rather quickly if not prepared for storage."
-msgstr ""
+msgstr "从根茎类蔬菜中提取的粘稠碳水化合物糊状物。若未进行储存处理，会很快变质。"
 
 #. ~ Description of "boiled Jerusalem artichoke"
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98623,7 +98623,7 @@ msgstr[0] "煮土豆"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned Japanese knotweed"
 msgid_plural "canned Japanese knotweed"
-msgstr[0] ""
+msgstr[0] "虎杖罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. bamboo_cooked
@@ -98632,42 +98632,42 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned bamboo shoots"
 msgid_plural "canned bamboo shoots"
-msgstr[0] ""
+msgstr[0] "竹笋罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches bell_pepper
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned bell pepper"
 msgid_plural "canned bell pepper"
-msgstr[0] ""
+msgstr[0] "甜椒罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches broccoli
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned broccoli"
 msgid_plural "canned broccoli"
-msgstr[0] ""
+msgstr[0] "西兰花罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. raw_burdock
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned burdock"
 msgid_plural "canned burdock"
-msgstr[0] ""
+msgstr[0] "牛蒡罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. burdock_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned burdock greens"
 msgid_plural "canned burdock greens"
-msgstr[0] ""
+msgstr[0] "牛蒡叶罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches cabbage
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned cabbage"
 msgid_plural "canned cabbage"
-msgstr[0] ""
+msgstr[0] "卷心菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches carrot
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
@@ -98675,28 +98675,28 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned carrot"
 msgid_plural "canned carrot"
-msgstr[0] ""
+msgstr[0] "胡萝卜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. cattail_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned cattail stalk"
 msgid_plural "canned cattail stalk"
-msgstr[0] ""
+msgstr[0] "香蒲茎罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches celery
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned celery"
 msgid_plural "canned celery"
-msgstr[0] ""
+msgstr[0] "芹菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. plantain
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned cooking banana"
 msgid_plural "canned cooking banana"
-msgstr[0] ""
+msgstr[0] "大蕉罐头"
 
 #. ~ Item name
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
@@ -98714,104 +98714,104 @@ msgstr[0] "玉米罐头"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned cucumber"
 msgid_plural "canned cucumber"
-msgstr[0] ""
+msgstr[0] "黄瓜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. raw_dandelion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned dandelion"
 msgid_plural "canned dandelion"
-msgstr[0] ""
+msgstr[0] "蒲公英罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. dandelion_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned dandelion greens"
 msgid_plural "canned dandelion greens"
-msgstr[0] ""
+msgstr[0] "蒲公英叶罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. grape_leaves
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned grape leaves"
 msgid_plural "canned grape leaves"
-msgstr[0] ""
+msgstr[0] "葡萄叶罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned groundnut"
 msgid_plural "canned groundnut"
-msgstr[0] ""
+msgstr[0] "花生罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. horseradish_greens
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned horseradish greens"
 msgid_plural "canned horseradish greens"
-msgstr[0] ""
+msgstr[0] "辣根叶罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches lettuce
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned lettuce"
 msgid_plural "canned lettuce"
-msgstr[0] ""
+msgstr[0] "生菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. mushroom
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned mushroom"
 msgid_plural "canned mushroom"
-msgstr[0] ""
+msgstr[0] "蘑菇罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned onion"
 msgid_plural "canned onion"
-msgstr[0] ""
+msgstr[0] "洋葱罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. plant_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned plant stalk"
 msgid_plural "canned plant stalk"
-msgstr[0] ""
+msgstr[0] "植物茎罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned potato"
 msgid_plural "canned potato"
-msgstr[0] ""
+msgstr[0] "土豆罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches rhubarb
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned rhubarb"
 msgid_plural "canned rhubarb"
-msgstr[0] ""
+msgstr[0] "大黄罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. salsify_raw
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned salsify root"
 msgid_plural "canned salsify root"
-msgstr[0] ""
+msgstr[0] "婆罗门参根罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches spinach
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned spinach"
 msgid_plural "canned spinach"
-msgstr[0] ""
+msgstr[0] "菠菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. sugar_beet
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned sugar beet"
 msgid_plural "canned sugar beet"
-msgstr[0] ""
+msgstr[0] "糖用甜菜罐头"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98824,35 +98824,35 @@ msgstr[0] "罐装蔬菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned wild garlic"
 msgid_plural "canned wild garlic"
-msgstr[0] ""
+msgstr[0] "野蒜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. wild_herbs
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned wild herbs"
 msgid_plural "canned wild herbs"
-msgstr[0] ""
+msgstr[0] "野生香草罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. carrot_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned wild root"
 msgid_plural "canned wild root"
-msgstr[0] ""
+msgstr[0] "野生根茎罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned wild vegetables"
 msgid_plural "canned wild vegetables"
-msgstr[0] ""
+msgstr[0] "野生蔬菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned zucchini"
 msgid_plural "canned zucchini"
-msgstr[0] ""
+msgstr[0] "西葫芦罐头"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98931,7 +98931,7 @@ msgstr[0] "玉米面"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated Japanese knotweed"
 msgid_plural "dehydrated Japanese knotweed"
-msgstr[0] ""
+msgstr[0] "脱水虎杖"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. bamboo_cooked
@@ -98940,42 +98940,42 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated bamboo shoots"
 msgid_plural "dehydrated bamboo shoots"
-msgstr[0] ""
+msgstr[0] "脱水竹笋"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches bell_pepper
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated bell pepper"
 msgid_plural "dehydrated bell pepper"
-msgstr[0] ""
+msgstr[0] "脱水甜椒"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches broccoli
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated broccoli"
 msgid_plural "dehydrated broccoli"
-msgstr[0] ""
+msgstr[0] "脱水西兰花"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. raw_burdock
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated burdock"
 msgid_plural "dehydrated burdock"
-msgstr[0] ""
+msgstr[0] "脱水牛蒡"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. burdock_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated burdock greens"
 msgid_plural "dehydrated burdock greens"
-msgstr[0] ""
+msgstr[0] "脱水牛蒡叶"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches cabbage
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated cabbage"
 msgid_plural "dehydrated cabbage"
-msgstr[0] ""
+msgstr[0] "脱水卷心菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. carrot
@@ -98984,21 +98984,21 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated carrot"
 msgid_plural "dehydrated carrot"
-msgstr[0] ""
+msgstr[0] "脱水胡萝卜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. cattail_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated cattail stalk"
 msgid_plural "dehydrated cattail stalk"
-msgstr[0] ""
+msgstr[0] "脱水香蒲茎"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches celery
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated celery"
 msgid_plural "dehydrated celery"
-msgstr[0] ""
+msgstr[0] "脱水芹菜"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99011,7 +99011,7 @@ msgstr[0] "脱水辣椒"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated cooking banana"
 msgid_plural "dehydrated cooking banana"
-msgstr[0] ""
+msgstr[0] "脱水大蕉"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches corn_kernels
@@ -99026,21 +99026,21 @@ msgstr[0] "脱水玉米粒"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated cucumber"
 msgid_plural "dehydrated cucumber"
-msgstr[0] ""
+msgstr[0] "脱水黄瓜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. raw_dandelion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated dandelion"
 msgid_plural "dehydrated dandelion"
-msgstr[0] ""
+msgstr[0] "脱水蒲公英"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. dandelion_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated dandelion greens"
 msgid_plural "dehydrated dandelion greens"
-msgstr[0] ""
+msgstr[0] "脱水蒲公英叶"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. eggplant
@@ -99049,7 +99049,7 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated eggplant"
 msgid_plural "dehydrated eggplant"
-msgstr[0] ""
+msgstr[0] "脱水茄子"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99068,84 +99068,84 @@ msgstr[0] "脱水蒜瓣"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated grape leaves"
 msgid_plural "dehydrated grape leaves"
-msgstr[0] ""
+msgstr[0] "脱水葡萄叶"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated groundnut"
 msgid_plural "dehydrated groundnut"
-msgstr[0] ""
+msgstr[0] "脱水花生"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. horseradish_greens
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated horseradish greens"
 msgid_plural "dehydrated horseradish greens"
-msgstr[0] ""
+msgstr[0] "脱水辣根叶"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches lettuce
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated lettuce"
 msgid_plural "dehydrated lettuce"
-msgstr[0] ""
+msgstr[0] "脱水生菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated onion"
 msgid_plural "dehydrated onion"
-msgstr[0] ""
+msgstr[0] "脱水洋葱"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. plant_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated plant stalk"
 msgid_plural "dehydrated plant stalk"
-msgstr[0] ""
+msgstr[0] "脱水植物茎"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated potato"
 msgid_plural "dehydrated potato"
-msgstr[0] ""
+msgstr[0] "脱水土豆"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches rhubarb
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated rhubarb"
 msgid_plural "dehydrated rhubarb"
-msgstr[0] ""
+msgstr[0] "脱水大黄"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. salsify_raw
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated salsify root"
 msgid_plural "dehydrated salsify root"
-msgstr[0] ""
+msgstr[0] "脱水婆罗门参根"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. spinach
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated spinach"
 msgid_plural "dehydrated spinach"
-msgstr[0] ""
+msgstr[0] "脱水菠菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. sugar_beet
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated sugar beet"
 msgid_plural "dehydrated sugar beet"
-msgstr[0] ""
+msgstr[0] "脱水糖用甜菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated tomato"
 msgid_plural "dehydrated tomato"
-msgstr[0] ""
+msgstr[0] "脱水番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99158,35 +99158,35 @@ msgstr[0] "脱水蔬菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated wild garlic"
 msgid_plural "dehydrated wild garlic"
-msgstr[0] ""
+msgstr[0] "脱水野蒜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. wild_herbs
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated wild herbs"
 msgid_plural "dehydrated wild herbs"
-msgstr[0] ""
+msgstr[0] "脱水野生香草"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. carrot_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated wild root"
 msgid_plural "dehydrated wild root"
-msgstr[0] ""
+msgstr[0] "脱水野生根茎"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated wild vegetables"
 msgid_plural "dehydrated wild vegetables"
-msgstr[0] ""
+msgstr[0] "脱水野生蔬菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated zucchini"
 msgid_plural "dehydrated zucchini"
-msgstr[0] ""
+msgstr[0] "脱水西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99210,7 +99210,7 @@ msgstr[0] "即食沙拉（待冲泡）"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dried starch"
 msgid_plural "dried starch"
-msgstr[0] ""
+msgstr[0] "干淀粉"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99247,70 +99247,70 @@ msgstr[0] "面拖蒲公英配牛蒡"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled broccoli"
 msgid_plural "fried pickled broccoli"
-msgstr[0] ""
+msgstr[0] "炒腌西兰花"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_carrot
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled carrot"
 msgid_plural "fried pickled carrot"
-msgstr[0] ""
+msgstr[0] "炒腌胡萝卜"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_corn
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled corn"
 msgid_plural "fried pickled corn"
-msgstr[0] ""
+msgstr[0] "炒腌玉米"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_cucumber
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled cucumber"
 msgid_plural "fried pickled cucumber"
-msgstr[0] ""
+msgstr[0] "炒腌黄瓜"
 
 #. ~ Conditional name for "fried pickled vegetable" when COMPONENT_ID matches
 #. vegetable_pickled_garlic_clove
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled garlic"
 msgid_plural "fried pickled garlic"
-msgstr[0] ""
+msgstr[0] "炒腌蒜"
 
 #. ~ Conditional name for "fried pickled vegetable" when COMPONENT_ID matches
 #. vegetable_pickled_groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled groundnut"
 msgid_plural "fried pickled groundnut"
-msgstr[0] ""
+msgstr[0] "炒腌花生"
 
 #. ~ Conditional name for "fried pickled vegetable" when COMPONENT_ID matches
 #. vegetable_pickled_mushroom
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled mushroom"
 msgid_plural "fried pickled mushroom"
-msgstr[0] ""
+msgstr[0] "炒腌蘑菇"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled onion"
 msgid_plural "fried pickled onion"
-msgstr[0] ""
+msgstr[0] "炒腌洋葱"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled potato"
 msgid_plural "fried pickled potato"
-msgstr[0] ""
+msgstr[0] "炒腌土豆"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled tomato"
 msgid_plural "fried pickled tomato"
-msgstr[0] ""
+msgstr[0] "炒腌番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99323,21 +99323,21 @@ msgstr[0] "腌菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled wild garlic"
 msgid_plural "fried pickled wild garlic"
-msgstr[0] ""
+msgstr[0] "炒腌野蒜"
 
 #. ~ Conditional name for "fried pickled vegetable" when COMPONENT_ID matches
 #. vegetable_pickled_vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled wild vegetables"
 msgid_plural "fried pickled wild vegetables"
-msgstr[0] ""
+msgstr[0] "炒腌野生蔬菜  "
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled zucchini"
 msgid_plural "fried pickled zucchini"
-msgstr[0] ""
+msgstr[0] "炒腌西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99416,70 +99416,70 @@ msgstr[0] "泡菜黄瓜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled broccoli"
 msgid_plural "pickled broccoli"
-msgstr[0] ""
+msgstr[0] "腌西兰花"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches carrot
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled carrot"
 msgid_plural "pickled carrot"
-msgstr[0] ""
+msgstr[0] "腌胡萝卜"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches corn
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled corn"
 msgid_plural "pickled corn"
-msgstr[0] ""
+msgstr[0] "腌玉米"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches cucumber
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled cucumber"
 msgid_plural "pickled cucumber"
-msgstr[0] ""
+msgstr[0] "腌黄瓜"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID matches
 #. garlic_clove
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled garlic clove"
 msgid_plural "pickled garlic clove"
-msgstr[0] ""
+msgstr[0] "腌蒜瓣"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled ground nuts"
 msgid_plural "pickled ground nuts"
-msgstr[0] ""
+msgstr[0] "腌花生"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID matches
 #. mushroom
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled mushroom"
 msgid_plural "pickled mushroom"
-msgstr[0] ""
+msgstr[0] "腌蘑菇"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled onion"
 msgid_plural "pickled onion"
-msgstr[0] ""
+msgstr[0] "腌洋葱"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled potato"
 msgid_plural "pickled potato"
-msgstr[0] ""
+msgstr[0] "腌土豆"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled tomato"
 msgid_plural "pickled tomato"
-msgstr[0] ""
+msgstr[0] "腌番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99492,21 +99492,21 @@ msgstr[0] "腌菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled wild garlic"
 msgid_plural "pickled wild garlic"
-msgstr[0] ""
+msgstr[0] "腌野蒜"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled wild vegetables"
 msgid_plural "pickled wild vegetables"
-msgstr[0] ""
+msgstr[0] "腌野生蔬菜"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled zucchini"
 msgid_plural "pickled zucchini"
-msgstr[0] ""
+msgstr[0] "腌西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99519,7 +99519,7 @@ msgstr[0] "熟美国豆芋"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated Japanese knotweed"
 msgid_plural "rehydrated Japanese knotweed"
-msgstr[0] ""
+msgstr[0] "复水虎杖"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. bamboo_cooked
@@ -99528,42 +99528,42 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated bamboo shoots"
 msgid_plural "rehydrated bamboo shoots"
-msgstr[0] ""
+msgstr[0] "复水竹笋"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches bell_pepper
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated bell pepper"
 msgid_plural "rehydrated bell pepper"
-msgstr[0] ""
+msgstr[0] "复水甜椒"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches broccoli
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated broccoli"
 msgid_plural "rehydrated broccoli"
-msgstr[0] ""
+msgstr[0] "复水西兰花"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. raw_burdock
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated burdock"
 msgid_plural "rehydrated burdock"
-msgstr[0] ""
+msgstr[0] "复水牛蒡"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. burdock_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated burdock greens"
 msgid_plural "rehydrated burdock greens"
-msgstr[0] ""
+msgstr[0] "复水牛蒡叶"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches cabbage
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated cabbage"
 msgid_plural "rehydrated cabbage"
-msgstr[0] ""
+msgstr[0] "复水卷心菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. carrot
@@ -99572,21 +99572,21 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated carrot"
 msgid_plural "rehydrated carrot"
-msgstr[0] ""
+msgstr[0] "复水胡萝卜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. cattail_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated cattail stalk"
 msgid_plural "rehydrated cattail stalk"
-msgstr[0] ""
+msgstr[0] "复水香蒲茎"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches celery
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated celery"
 msgid_plural "rehydrated celery"
-msgstr[0] ""
+msgstr[0] "复水芹菜"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99599,7 +99599,7 @@ msgstr[0] "水发辣椒"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated cooking banana"
 msgid_plural "rehydrated cooking banana"
-msgstr[0] ""
+msgstr[0] "复水大蕉"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches corn_kernels
@@ -99614,21 +99614,21 @@ msgstr[0] "水发玉米粒"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated cucumber"
 msgid_plural "rehydrated cucumber"
-msgstr[0] ""
+msgstr[0] "复水黄瓜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. raw_dandelion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated dandelion"
 msgid_plural "rehydrated dandelion"
-msgstr[0] ""
+msgstr[0] "复水蒲公英"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. dandelion_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated dandelion greens"
 msgid_plural "rehydrated dandelion greens"
-msgstr[0] ""
+msgstr[0] "复水蒲公英叶"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99641,84 +99641,84 @@ msgstr[0] "水发蒜瓣"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated grape leaves"
 msgid_plural "rehydrated grape leaves"
-msgstr[0] ""
+msgstr[0] "复水葡萄叶"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated groundnut"
 msgid_plural "rehydrated groundnut"
-msgstr[0] ""
+msgstr[0] "复水花生"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. horseradish_greens
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated horseradish greens"
 msgid_plural "rehydrated horseradish greens"
-msgstr[0] ""
+msgstr[0] "复水辣根叶"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches lettuce
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated lettuce"
 msgid_plural "rehydrated lettuce"
-msgstr[0] ""
+msgstr[0] "复水生菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated onion"
 msgid_plural "rehydrated onion"
-msgstr[0] ""
+msgstr[0] "复水洋葱"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. plant_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated plant stalk"
 msgid_plural "rehydrated plant stalk"
-msgstr[0] ""
+msgstr[0] "复水植物茎"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated potato"
 msgid_plural "rehydrated potato"
-msgstr[0] ""
+msgstr[0] "复水土豆"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches rhubarb
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated rhubarb"
 msgid_plural "rehydrated rhubarb"
-msgstr[0] ""
+msgstr[0] "复水大黄"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. salsify_raw
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated salsify root"
 msgid_plural "rehydrated salsify root"
-msgstr[0] ""
+msgstr[0] "复水婆罗门参根"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. spinach
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated spinach"
 msgid_plural "rehydrated spinach"
-msgstr[0] ""
+msgstr[0] "复水菠菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. sugar_beet
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated sugar beet"
 msgid_plural "rehydrated sugar beet"
-msgstr[0] ""
+msgstr[0] "复水糖用甜菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated tomato"
 msgid_plural "rehydrated tomato"
-msgstr[0] ""
+msgstr[0] "复水番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99731,35 +99731,35 @@ msgstr[0] "水发蔬菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated wild garlic"
 msgid_plural "rehydrated wild garlic"
-msgstr[0] ""
+msgstr[0] "复水野蒜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. wild_herbs
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated wild herbs"
 msgid_plural "rehydrated wild herbs"
-msgstr[0] ""
+msgstr[0] "复水野生香草"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. carrot_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated wild root"
 msgid_plural "rehydrated wild root"
-msgstr[0] ""
+msgstr[0] "复水野生根茎"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated wild vegetables"
 msgid_plural "rehydrated wild vegetables"
-msgstr[0] ""
+msgstr[0] "复水野生蔬菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated zucchini"
 msgid_plural "rehydrated zucchini"
-msgstr[0] ""
+msgstr[0] "复水西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99809,7 +99809,7 @@ msgstr[0] "萨尔萨辣酱"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted Japanese knotweed"
 msgid_plural "salted Japanese knotweed"
-msgstr[0] ""
+msgstr[0] "盐渍虎杖"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. bamboo_cooked
@@ -99818,42 +99818,42 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted bamboo shoots"
 msgid_plural "salted bamboo shoots"
-msgstr[0] ""
+msgstr[0] "盐渍竹笋"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches bell_pepper
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted bell pepper"
 msgid_plural "salted bell pepper"
-msgstr[0] ""
+msgstr[0] "盐渍甜椒"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches broccoli
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted broccoli"
 msgid_plural "salted broccoli"
-msgstr[0] ""
+msgstr[0] "盐渍西兰花"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. raw_burdock
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted burdock"
 msgid_plural "salted burdock"
-msgstr[0] ""
+msgstr[0] "盐渍牛蒡"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. burdock_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted burdock greens"
 msgid_plural "salted burdock greens"
-msgstr[0] ""
+msgstr[0] "盐渍牛蒡叶"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches cabbage
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted cabbage"
 msgid_plural "salted cabbage"
-msgstr[0] ""
+msgstr[0] "盐渍卷心菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. carrot
@@ -99862,28 +99862,28 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted carrot"
 msgid_plural "salted carrot"
-msgstr[0] ""
+msgstr[0] "盐渍胡萝卜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. cattail_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted cattail stalk"
 msgid_plural "salted cattail stalk"
-msgstr[0] ""
+msgstr[0] "盐渍香蒲茎"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches celery
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted celery"
 msgid_plural "salted celery"
-msgstr[0] ""
+msgstr[0] "盐渍芹菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. plantain
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted cooking banana"
 msgid_plural "salted cooking banana"
-msgstr[0] ""
+msgstr[0] "盐渍大蕉"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. can_corn
@@ -99894,119 +99894,119 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted corn"
 msgid_plural "salted corn"
-msgstr[0] ""
+msgstr[0] "盐渍玉米"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches cucumber
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted cucumber"
 msgid_plural "salted cucumber"
-msgstr[0] ""
+msgstr[0] "盐渍黄瓜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. raw_dandelion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted dandelion"
 msgid_plural "salted dandelion"
-msgstr[0] ""
+msgstr[0] "盐渍蒲公英"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. dandelion_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted dandelion greens"
 msgid_plural "salted dandelion greens"
-msgstr[0] ""
+msgstr[0] "盐渍蒲公英叶"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. grape_leaves
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted grape leaves"
 msgid_plural "salted grape leaves"
-msgstr[0] ""
+msgstr[0] "盐渍葡萄叶"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted groundnut"
 msgid_plural "salted groundnut"
-msgstr[0] ""
+msgstr[0] "盐渍花生"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. horseradish_greens
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted horseradish greens"
 msgid_plural "salted horseradish greens"
-msgstr[0] ""
+msgstr[0] "盐渍辣根叶"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches lettuce
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted lettuce"
 msgid_plural "salted lettuce"
-msgstr[0] ""
+msgstr[0] "盐渍生菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted onion"
 msgid_plural "salted onion"
-msgstr[0] ""
+msgstr[0] "盐渍洋葱"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. plant_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted plant stalk"
 msgid_plural "salted plant stalk"
-msgstr[0] ""
+msgstr[0] "盐渍植物茎"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted potato"
 msgid_plural "salted potato"
-msgstr[0] ""
+msgstr[0] "盐渍土豆"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted pumpkin"
 msgid_plural "salted pumpkin"
-msgstr[0] ""
+msgstr[0] "盐渍南瓜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches rhubarb
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted rhubarb"
 msgid_plural "salted rhubarb"
-msgstr[0] ""
+msgstr[0] "盐渍大黄"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. salsify_raw
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted salsify root"
 msgid_plural "salted salsify root"
-msgstr[0] ""
+msgstr[0] "盐渍婆罗门参根"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. spinach
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted spinach"
 msgid_plural "salted spinach"
-msgstr[0] ""
+msgstr[0] "盐渍菠菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. sugar_beet
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted sugar beet"
 msgid_plural "salted sugar beet"
-msgstr[0] ""
+msgstr[0] "盐渍菠菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted tomato"
 msgid_plural "salted tomato"
-msgstr[0] ""
+msgstr[0] "盐渍番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -100019,35 +100019,35 @@ msgstr[0] "腌菜块"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted wild garlic"
 msgid_plural "salted wild garlic"
-msgstr[0] ""
+msgstr[0] "盐渍野蒜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. wild_herbs
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted wild herbs"
 msgid_plural "salted wild herbs"
-msgstr[0] ""
+msgstr[0] "盐渍野生香草"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. carrot_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted wild root"
 msgid_plural "salted wild root"
-msgstr[0] ""
+msgstr[0] "盐渍野生根茎"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted wild vegetables"
 msgid_plural "salted wild vegetables"
-msgstr[0] ""
+msgstr[0] "盐渍野生蔬菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted zucchini"
 msgid_plural "salted zucchini"
-msgstr[0] ""
+msgstr[0] "盐渍西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -100192,7 +100192,7 @@ msgstr "新英格兰经典食物，饱肚子有营养。"
 #. ~ Description of "flour"
 #: data/json/items/comestibles/wheat.json
 msgid "A fine powder made of ground wheat.  It's great for baking, not so good raw."
-msgstr ""
+msgstr "一种由小麦研磨而成的细粉。适合烘焙，生吃则不太美味。"
 
 #. ~ Description of "raw lasagne pasta"
 #: data/json/items/comestibles/wheat.json
@@ -100810,7 +100810,7 @@ msgstr "一个用干葫芦做成的硬质水密容器。可以像水壶一样使
 #. ~ Description of "garbage bag"
 #: data/json/items/containers/containers.json
 msgid "A hefty plastic bag made to carry lots of trash."
-msgstr ""
+msgstr "一个用于装载大量垃圾的大号塑料袋。"
 
 #. ~ Description of "wooden box"
 #: data/json/items/containers/containers.json
@@ -100845,7 +100845,7 @@ msgstr "一个大型铝制油罐，一般用于储存燃料。"
 #. ~ Description of "woven plastic sack"
 #: data/json/items/containers/containers.json
 msgid "A large and sturdy bag made out of plastic canvas.  These are frequently used as sandbags, or for storing gravel."
-msgstr ""
+msgstr "一种由塑料帆布制成的大型耐用袋子。常被用作沙袋或用于存放砾石。"
 
 #. ~ Description of "canvas sack"
 #: data/json/items/containers/containers.json
@@ -101232,7 +101232,7 @@ msgstr "一个有金属螺旋盖的 3 升玻璃罐，一般用来做罐头。在
 #. ~ Description of "glass vial"
 #: data/json/items/containers/containers.json
 msgid "A tiny glass ampoule commonly used to store medication in liquid form."
-msgstr ""
+msgstr "一种用于储存液体药剂的小型玻璃安瓿瓶。"
 
 #. ~ Description of "large plastic bottle"
 #: data/json/items/containers/containers.json
@@ -101562,7 +101562,7 @@ msgstr[0] "纸板盒"
 #: data/json/items/containers/containers.json
 msgid "cement bag"
 msgid_plural "cement bags"
-msgstr[0] ""
+msgstr[0] "水泥袋"
 
 #. ~ Item name
 #: data/json/items/containers/containers.json
@@ -102283,7 +102283,7 @@ msgstr[0] "木制酒杯"
 #: data/json/items/containers/containers.json
 msgid "woven plastic sack"
 msgid_plural "woven plastic sacks"
-msgstr[0] ""
+msgstr[0] "编织塑料麻袋"
 
 #. ~ Item name
 #: data/json/items/containers/containers.json
@@ -105500,7 +105500,7 @@ msgstr "一个能够挂在脖子上的扁平袋子，用于携带货币、身份
 #. ~ Description of "mower blade"
 #: data/json/items/generic.json
 msgid "A flat steel blade with openings for fasteners and one tapered edge on either end.  It's meant to function as part of a machine and in its present state would make an awkward weapon."
-msgstr ""
+msgstr "一种扁平钢制刀片，两端各有紧固件孔，且各有一侧呈锥形边缘。其设计用途为机器部件，以其当前形态作为武器使用会相当笨拙。"
 
 #. ~ Description of "lanyard"
 #: data/json/items/generic.json
@@ -106263,7 +106263,7 @@ msgstr[0] "内存"
 #. ~ Description of "rough terrain"
 #: data/json/items/generic.json
 msgid "Seeing this is a bug."
-msgstr ""
+msgstr "看到此消息说明遇到了 bug。"
 
 #. ~ Description of "file"
 #: data/json/items/generic.json
@@ -107408,7 +107408,7 @@ msgstr[0] "灰泥"
 #: data/json/items/generic.json
 msgid "mower blade"
 msgid_plural "mower blades"
-msgstr[0] ""
+msgstr[0] "割草机刀片"
 
 #. ~ Item name
 #: data/json/items/generic.json
@@ -107582,7 +107582,7 @@ msgstr[0] "制冷剂罐"
 #: data/json/items/generic.json
 msgid "rough terrain"
 msgid_plural "rough terrain"
-msgstr[0] ""
+msgstr[0] "崎岖地形"
 
 #. ~ Item name
 #: data/json/items/generic.json
@@ -107932,7 +107932,7 @@ msgstr "一把带有折叠铰链的梳子，想当油头滑面的时髦少年就
 #. ~ Description of "tampon"
 #: data/json/items/generic/bathroom_house.json
 msgid "A cylindrical wad of fabric with a plastic applicator.  These are intended for menstrual hygiene, but could be taken apart for some cotton and string."
-msgstr ""
+msgstr "一种带有塑料导管的圆柱形织物棉条。专用于经期卫生，但也可拆解获取棉线和棉絮。"
 
 #. ~ Description of "comb"
 #: data/json/items/generic/bathroom_house.json
@@ -108012,7 +108012,7 @@ msgstr "一根采用耐热陶瓷制成的短棒。当插入插座后，它能够
 #. ~ Description of "menstrual pad"
 #: data/json/items/generic/bathroom_house.json
 msgid "An absorbent sanitary napkin."
-msgstr ""
+msgstr "一种吸收性卫生巾。"
 
 #. ~ Description of "hairbrush"
 #: data/json/items/generic/bathroom_house.json
@@ -108185,7 +108185,7 @@ msgstr ""
 #. ~ Description of "emergency blanket"
 #: data/json/items/generic/bedding.json
 msgid "A blanket made of reflective Mylar that covers your most important body parts.  It folds into a very compact form when not in use."
-msgstr ""
+msgstr "一条由反光聚酯薄膜制成的毯子，可覆盖身体最重要的部位。不使用时，可折叠成非常紧凑的形态。"
 
 #. ~ Description of "fur blanket"
 #: data/json/items/generic/bedding.json
@@ -163272,7 +163272,7 @@ msgstr[0] "河狸"
 #: data/json/monsters/mammal.json
 msgid "big dog"
 msgid_plural "big dogs"
-msgstr[0] "丧尸犬"
+msgstr[0] "大型犬"
 
 #. ~ Monster name
 #: data/json/monsters/mammal.json
@@ -166908,7 +166908,7 @@ msgstr[0] "邪恶孵化场"
 #: data/json/monsters/zed_children.json data/json/monsters/zed_dormant.json
 msgid "zombie child"
 msgid_plural "zombie childs"
-msgstr[0] ""
+msgstr[0] "儿童丧尸"
 
 #. ~ Description of monster "skeletal master"
 #: data/json/monsters/zed_command.json
@@ -290759,7 +290759,7 @@ msgstr "智力/感知/安全"
 #. ~ Label of UI widget "legacy_labels_sidebar"
 #: data/json/ui/sidebar-legacy-labels.json
 msgid "Labels"
-msgstr ""
+msgstr "标签"
 
 #. ~ Label of UI widget "ll_str_dex_power_layout"
 #: data/json/ui/sidebar-legacy-labels.json
@@ -291959,7 +291959,7 @@ msgstr "疲惫惩罚"
 #. ~ Label of UI widget "snow_depth_desc"
 #: data/json/ui/weather.json
 msgid "Snow"
-msgstr ""
+msgstr "下雪"
 
 #. ~ Clause text "emaciated" of UI widget "weight_desc_label"
 #: data/json/ui/weight.json
@@ -291996,7 +291996,7 @@ msgstr "瘦骨伶仃"
 #. ~ Clause text "skinny" of UI widget "weight_desc_label"
 #: data/json/ui/weight.json
 msgid "Skinny"
-msgstr ""
+msgstr "紧凑"
 
 #. ~ Clause text "underweight" of UI widget "weight_desc_label"
 #: data/json/ui/weight.json
@@ -294392,7 +294392,7 @@ msgstr "一台巨大而沉重的电动机，其功率足以拉动火车。"
 #. ~ Description of vehicle part "blade"
 #: data/json/vehicleparts/rams.json
 msgid "A blade welded to the vehicle for cutting up zombies."
-msgstr ""
+msgstr "一把焊在车上的刀，用来切僵尸。"
 
 #. ~ Description of vehicle part "shredder"
 #: data/json/vehicleparts/rams.json
@@ -294407,7 +294407,7 @@ msgstr "一个绑到载具上的床垫，可以用来吸收冲击。"
 #. ~ Description of vehicle part "spike"
 #: data/json/vehicleparts/rams.json
 msgid "A metal spike welded to the vehicle to increase injury when crashing into things."
-msgstr ""
+msgstr "一个焊在车上的金属尖刺，用来在撞东西时增加伤害。"
 
 #. ~ Description of vehicle part ""
 #: data/json/vehicleparts/rams.json
@@ -294417,7 +294417,7 @@ msgstr "一个强化撞锤。将它安装在载具的边沿能减少碰撞对载
 #. ~ Description of vehicle part "wooden spike"
 #: data/json/vehicleparts/rams.json
 msgid "A wooden spike attached to the vehicle to increase injury when crashing into things."
-msgstr ""
+msgstr "一个木钉固定在车辆上，用来在撞东西时增加伤害。"
 
 #. ~ Vehicle part name
 #: data/json/vehicleparts/rams.json
@@ -294427,7 +294427,7 @@ msgstr "硅化甲壳撞锤"
 #. ~ Vehicle part name
 #: data/json/vehicleparts/rams.json
 msgid "blade"
-msgstr ""
+msgstr "刀片"
 
 #. ~ Vehicle part name
 #: data/json/vehicleparts/rams.json
@@ -295717,7 +295717,7 @@ msgstr "此处的照明物不能照亮附近的方格。"
 #. ~ Description of JSON flag "FURNITURE_LIFT_ASSIST"
 #: data/json/vehicleparts/vp_flags.json
 msgid "It's much easier to tie down a furniture here."
-msgstr ""
+msgstr "在这里把家具固定住要容易得多。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "CARGO_PASSABLE"
@@ -295925,7 +295925,7 @@ msgstr "你的载具需要至少一个转向轮来转向。"
 #. ~ Description of vehicle part "armored wheel"
 #: data/json/vehicleparts/wheel.json
 msgid "A heavy-duty wheel with a reinforced run-flat tire."
-msgstr ""
+msgstr "一个配有加固防爆轮胎的重型车轮。"
 
 #. ~ Description of vehicle part "skateboard trucks"
 #: data/json/vehicleparts/wheel.json
@@ -296095,7 +296095,7 @@ msgstr "由透明亚克力硬板制成的临时挡风玻璃。  它可以挡风�
 #. ~ Description of vehicle part "reinforced windshield"
 #: data/json/vehicleparts/windshields.json
 msgid "A sheet of glass that lets you see outside the vehicle.  Reinforced with metal brackets and slats to make it harder to break."
-msgstr ""
+msgstr "一块让你可以看向车外的玻璃。用金属支架和条纹加固，使其更难打破。"
 
 #. ~ Description of vehicle part "windshield"
 #: data/json/vehicleparts/windshields.json
@@ -297181,7 +297181,7 @@ msgstr "空样板"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Acetaminophen"
-msgstr ""
+msgstr "对乙酰氨基酚"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297196,7 +297196,7 @@ msgstr "新人类诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Amphetamine"
-msgstr ""
+msgstr "安非他命"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297236,7 +297236,7 @@ msgstr "牛科诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Caffeine"
-msgstr ""
+msgstr "咖啡因"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297251,7 +297251,7 @@ msgstr "犬类诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Cannabis"
-msgstr ""
+msgstr "大麻"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297271,7 +297271,7 @@ msgstr "蝙蝠诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Cocaine"
-msgstr ""
+msgstr "可卡因"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297291,12 +297291,12 @@ msgstr "寄生蜂幼体"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Dextromethorphan"
-msgstr ""
+msgstr "右美沙芬"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Diphenhydramine"
-msgstr ""
+msgstr "苯海拉明"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297341,7 +297341,7 @@ msgstr "奶"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Morphine Milligram Equivalent"
-msgstr ""
+msgstr "吗啡毫克当量"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297356,17 +297356,17 @@ msgstr "诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "NSAID (Blood Pressure)"
-msgstr ""
+msgstr "非甾体抗炎药（血压）"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Naloxone"
-msgstr ""
+msgstr "纳洛酮"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Naproxen Sodium"
-msgstr ""
+msgstr "萘普生钠"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297376,7 +297376,7 @@ msgstr "尼古丁"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Non-Steroidal Anti-Inflammatory Drug"
-msgstr ""
+msgstr "非甾体抗炎药"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297416,7 +297416,7 @@ msgstr "变形怪诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Slow-release Nicotine"
-msgstr ""
+msgstr "缓释尼古丁"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297436,7 +297436,7 @@ msgstr "毒素"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Tramadol"
-msgstr ""
+msgstr "曲马多"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297451,7 +297451,7 @@ msgstr "熊科诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Vegetable"
-msgstr ""
+msgstr "蔬菜"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297686,7 +297686,7 @@ msgstr "同伴调查噪音区域"
 #. ~ Field intensity level
 #: data/json/zone_field_type.json
 msgid "NPC no-go zone"
-msgstr ""
+msgstr "NPC 禁区"
 
 #. ~ Field intensity level
 #: data/json/zone_field_type.json
@@ -298151,7 +298151,7 @@ msgstr "同伴：噪音调查区"
 #. ~ Name of loot zone
 #: data/json/zones.json
 msgid "NPC No-Go Area"
-msgstr ""
+msgstr "NPC禁止的区域"
 
 #. ~ Name of loot zone
 #: data/json/zones.json
@@ -298161,7 +298161,7 @@ msgstr "同伴：撤退区"
 #. ~ Description of loot zone "NPC No-Go Area"
 #: data/json/zones.json
 msgid "NPCs of this faction will not seek needs-driven targets inside this zone."
-msgstr ""
+msgstr "这个阵营的NPC不会在这个区域内寻找基于需求的目标。"
 
 #. ~ Name of loot zone
 #: data/json/zones.json
@@ -302327,7 +302327,7 @@ msgstr "特大都市"
 #. ~ Description of MOD "Megacity"
 #: data/mods/Megacity/modinfo.json
 msgid "The world is entirely covered by a single, unending city.  NOTE: Expect long load times!"
-msgstr ""
+msgstr "整个世界都被一个单一的、无尽的城市覆盖。注意：加载时间可能会很长！"
 
 #. ~ Description of terrain "glyptodont-shell shelter"
 #: data/mods/Megafauna/furniture_and_terrain/terrain-manufactured.json
@@ -302816,7 +302816,7 @@ msgstr[0] "剑齿虎"
 #: data/mods/Megafauna/monsters/mf_predators.json
 msgid "saber-toothed cub"
 msgid_plural "saber-toothed cubs"
-msgstr[0] ""
+msgstr[0] "剑齿虎幼崽"
 
 #. ~ Monster name
 #: data/mods/Megafauna/monsters/mf_predators.json
@@ -312857,7 +312857,7 @@ msgstr "快速读取"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Quicksave (Warning: may cause save corruption!)"
-msgstr ""
+msgstr "快速保存（警告：可能会导致存档损坏！）"
 
 #. ~ Key binding name
 #: data/raw/keybindings.json
@@ -313657,7 +313657,7 @@ msgstr "切换自动清空"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Toggle automatic shutdown on empty fuel"
-msgstr ""
+msgstr "切换油空自动关机"
 
 #. ~ Key binding name
 #: data/raw/keybindings.json
@@ -314062,7 +314062,7 @@ msgstr "取消射击后是否卸载弓等"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Whitelist Contents"
-msgstr ""
+msgstr "白名单内容"
 
 #. ~ Key binding name
 #: data/raw/keybindings.json
@@ -314417,7 +314417,7 @@ msgstr "开/关充电器"
 #. ~ Key binding name
 #: data/raw/keybindings/vehicle.json
 msgid "Toggle rockwheel"
-msgstr ""
+msgstr "切换铣挖机"
 
 #. ~ Key binding name
 #: data/raw/keybindings/vehicle.json
@@ -314762,17 +314762,17 @@ msgstr "<npcname> 无法脱下自体护甲。"
 #: src/activity_actor.cpp:1764
 #, c-format
 msgid "You plug your %s into the %s."
-msgstr ""
+msgstr "你把你的%s插入%s。"
 
 #: src/activity_actor.cpp:1766
 #, c-format
 msgid "<npcname> plugs their %s into the %s."
-msgstr ""
+msgstr "<npcname> 把他们的%s插入%s。"
 
 #: src/activity_actor.cpp:1774
 #, c-format
 msgid "%1$s can't find a nearby power grid to plug their %2$s into."
-msgstr ""
+msgstr "%1$s 找不到附近的电网来给他们的 %2$s 插电。"
 
 #: src/activity_actor.cpp:1799 src/character.cpp:12830 src/npc.cpp:1381
 msgid "It's too dark to read!"
@@ -314854,42 +314854,42 @@ msgstr "%s 提升了他们的 %s 技能等级。"
 #: src/activity_actor.cpp:2228
 #, c-format
 msgid "You finish reading ebook %s."
-msgstr ""
+msgstr "你完成 %s 电子版的阅读。"
 
 #: src/activity_actor.cpp:2230
 #, c-format
 msgid "<npcname> finishes reading ebook %s."
-msgstr ""
+msgstr "<npcname> 完成 %s 电子版的阅读。"
 
 #: src/activity_actor.cpp:2234
 #, c-format
 msgid "You finish reading %s."
-msgstr ""
+msgstr "你完成 %s 的阅读。"
 
 #: src/activity_actor.cpp:2236
 #, c-format
 msgid "<npcname> finishes reading %s."
-msgstr ""
+msgstr "<npcname> 完成 %s 的阅读。"
 
 #: src/activity_actor.cpp:2250
 #, c-format
 msgid "You stop reading ebook %s."
-msgstr ""
+msgstr "你停止阅读 %s 电子版。"
 
 #: src/activity_actor.cpp:2252
 #, c-format
 msgid "<npcname> stops reading ebook %s."
-msgstr ""
+msgstr "<npcname> 停止阅读 %s 电子版。"
 
 #: src/activity_actor.cpp:2256
 #, c-format
 msgid "You stop reading %s."
-msgstr ""
+msgstr "你停止阅读 %s。"
 
 #: src/activity_actor.cpp:2258
 #, c-format
 msgid "<npcname> stops reading %s."
-msgstr ""
+msgstr "<npcname> 停止阅读 %s。"
 
 #. ~ skill_name current_skill_level -> next_skill_level (% to next level)
 #: src/activity_actor.cpp:2303
@@ -314900,11 +314900,11 @@ msgstr "%1$s %2$d -> %3$d（%4$d%%）"
 
 #: src/activity_actor.cpp:2424 src/handle_action.cpp:854
 msgid "You have lost track of what you were hauling."
-msgstr ""
+msgstr "你已失去搬运的东西。"
 
 #: src/activity_actor.cpp:2428
 msgid "You lose track of some items as there isn't room to haul them along."
-msgstr ""
+msgstr "你会丢失一些物品，因为没有空间带。"
 
 #: src/activity_actor.cpp:2483
 msgid "Moving canceled auto-pickup."
@@ -315495,7 +315495,7 @@ msgstr "%1$s（%2$d）"
 
 #: src/activity_actor.cpp:6371
 msgid "You can't disassemble an item while you're wearing it."
-msgstr ""
+msgstr "你没法拆解它因为你正穿着。"
 
 #: src/activity_actor.cpp:6377
 msgid "You no longer have the in progress disassembly in your possession.  You stop disassembling.  Reactivate the in progress disassembly to continue disassembling."
@@ -316716,22 +316716,22 @@ msgstr "完成%s任务所需的物品不可用。"
 #: src/activity_item_handling.cpp:3400
 #, c-format
 msgid "You start reading ebook %s."
-msgstr ""
+msgstr "你开始阅读 %s 电子版。"
 
 #: src/activity_item_handling.cpp:3401
 #, c-format
 msgid "<npcname> starts reading ebook %s."
-msgstr ""
+msgstr "<npcname> 开始阅读 %s 电子版。"
 
 #: src/activity_item_handling.cpp:3404
 #, c-format
 msgid "You start reading %s."
-msgstr ""
+msgstr "你开始阅读 %s。"
 
 #: src/activity_item_handling.cpp:3405
 #, c-format
 msgid "<npcname> starts reading %s."
-msgstr ""
+msgstr "<npcname> 开始阅读 %s。"
 
 #: src/activity_item_handling.cpp:3663
 msgid "It is too dark to work here."
@@ -318441,7 +318441,7 @@ msgstr "唰啦！"
 
 #: src/ballistics.cpp:535
 msgid "Your shot is blocked by the surface."
-msgstr ""
+msgstr "你的射击被表面挡住了。"
 
 #: src/ballistics.cpp:656
 #, c-format
@@ -318621,7 +318621,7 @@ msgstr "你没有足够能量激活%s。"
 #: src/bionics.cpp:833
 #, c-format
 msgid "You are unable to engage your %s."
-msgstr ""
+msgstr "你无法使用你的 %s 。"
 
 #: src/bionics.cpp:849
 #, c-format
@@ -318925,22 +318925,22 @@ msgstr "<npcname> 的 %s 燃料耗尽，停止工作。"
 #: src/bionics.cpp:1502
 #, c-format
 msgid "Your %s does not currently have enough fuel to produce energy."
-msgstr ""
+msgstr "你的 %s 目前燃料不足，无法产生能量。"
 
 #: src/bionics.cpp:1503
 #, c-format
 msgid "<npcname>'s %s does not currently have enough fuel to produce energy."
-msgstr ""
+msgstr "<npcname>的 %s 目前燃料不足，无法产生能量。"
 
 #: src/bionics.cpp:1595
 #, c-format
 msgid "Your %s runs out of fuel."
-msgstr ""
+msgstr "你的 %s 用完了燃料。"
 
 #: src/bionics.cpp:1596
 #, c-format
 msgid "<npcname>'s %s runs out of fuel."
-msgstr ""
+msgstr "<npcname>的 %s 用完了燃料。"
 
 #: src/bionics.cpp:1769
 #, c-format
@@ -319326,7 +319326,7 @@ msgstr "生化能量：<color_light_blue>%s</color>/<color_light_blue>%ikJ</colo
 #: src/bionics_ui.cpp:287
 #, c-format
 msgid "[<color_yellow>%s</color>] Reassign, [<color_yellow>%s</color>] Switch tabs, [<color_yellow>%s</color>] Toggle fuel saving mode, [<color_yellow>%s</color>] Toggle sprite visibility, [<color_yellow>%s</color>] Toggle shutdown on empty, "
-msgstr ""
+msgstr "[<color_yellow>%s</color>] 重新分配, [<color_yellow>%s</color>] 切换标签, [<color_yellow>%s</color>] 切换节能模式, [<color_yellow>%s</color>] 切换可见, [<color_yellow>%s</color>] 空时关闭, "
 
 #: src/bionics_ui.cpp:292
 #, c-format
@@ -319386,7 +319386,7 @@ msgstr "（失效）"
 
 #: src/bionics_ui.cpp:348
 msgid "(shutdown off)"
-msgstr ""
+msgstr "(关闭)"
 
 #: src/bionics_ui.cpp:351
 msgid "(hidden)"
@@ -319459,7 +319459,7 @@ msgstr "你不能在没有燃料的CBM上开关节能模式。"
 
 #: src/bionics_ui.cpp:885
 msgid "You can't toggle shutdown on empty mode on a non-fueled CBM."
-msgstr ""
+msgstr "你不能在没有燃料的 CBM 上切换无模式关机。"
 
 #: src/bionics_ui.cpp:953
 msgid "Select action"
@@ -320176,7 +320176,7 @@ msgstr "中世纪农夫"
 
 #: src/character.cpp:1042
 msgid "yeet"
-msgstr ""
+msgstr "扔"
 
 #: src/character.cpp:1044
 msgid "launch"
@@ -320422,7 +320422,7 @@ msgstr "你死于严重脱水。"
 
 #: src/character.cpp:5873
 msgid "You need water badly.  It's hard to think about anything else."
-msgstr ""
+msgstr "你非常需要水，除此之外不想要任何东西。"
 
 #: src/character.cpp:5875
 msgid "You are THIRSTY!"
@@ -320434,7 +320434,7 @@ msgstr "你感到嘴很干……"
 
 #: src/character.cpp:5884
 msgid "You're so sleepy, you can't help blacking out."
-msgstr ""
+msgstr "你太困了，不自觉地两眼发黑。"
 
 #: src/character.cpp:5889
 msgid "Anywhere would be a good place to sleep…"
@@ -320446,7 +320446,7 @@ msgstr "你觉得你好像好几天没有睡过觉了。"
 
 #: src/character.cpp:5900
 msgid "You need sleep."
-msgstr ""
+msgstr "你该睡下。"
 
 #: src/character.cpp:5910
 msgid "How much longer until bedtime?"
@@ -320458,7 +320458,7 @@ msgstr "*哈欠* 你真的该睡觉了。"
 
 #: src/character.cpp:5931
 msgid "It's been a while since you've slept well, it's fraying at your nerves."
-msgstr ""
+msgstr "你已经好久没睡好了，这让你神经绷紧。"
 
 #: src/character.cpp:5935
 msgid "Your mind feels foggy from a lack of good sleep, and your eyes keep trying to close against your will."
@@ -320466,19 +320466,19 @@ msgstr "你的头脑会因为睡眠不足而感到有些迷糊，你的眼睛总
 
 #: src/character.cpp:5942
 msgid "You feel dazed from lack of sleep."
-msgstr ""
+msgstr "你缺少睡眠而发困。"
 
 #: src/character.cpp:5950
 msgid "You can't concentrate.  You need sleep."
-msgstr ""
+msgstr "你无法集中精神。你该睡一下。"
 
 #: src/character.cpp:5966
 msgid "Your pass out, unable to go on without sleep."
-msgstr ""
+msgstr "你昏倒了，缺少睡眠而无法继续。"
 
 #: src/character.cpp:5967
 msgid "<npcname> passes out, unable to go on without sleep."
-msgstr ""
+msgstr "<npcname> 昏倒了，缺少睡眠而无法继续。"
 
 #: src/character.cpp:6093 src/character_guns.cpp:215
 #, c-format
@@ -320749,12 +320749,12 @@ msgstr "错误！"
 #: src/character.cpp:8093
 #, c-format
 msgid "Your %s comes free!"
-msgstr ""
+msgstr "你的 %s 挣脱束缚！"
 
 #: src/character.cpp:8094
 #, c-format
 msgid "<npcname>'s %s comes free!"
-msgstr ""
+msgstr "<npcname>的 %s 挣脱束缚！"
 
 #: src/character.cpp:8316
 msgid "You can't wield a part of your body."
@@ -320888,11 +320888,11 @@ msgstr "你的头发分开成 %s！"
 #: src/character.cpp:8622
 #, c-format
 msgid "The hit makes %1$s lose their balance!"
-msgstr ""
+msgstr "这一击让 %1$s 失去平衡！"
 
 #: src/character.cpp:8625
 msgid "The hit makes you lose your balance!"
-msgstr ""
+msgstr "这一击让你失去平衡！"
 
 #: src/character.cpp:8701
 #, c-format
@@ -321086,11 +321086,11 @@ msgstr "游泳脚蹼"
 
 #: src/character.cpp:10798
 msgid "Flat Ground"
-msgstr ""
+msgstr "平地"
 
 #: src/character.cpp:10804
 msgid "Rough Terrain"
-msgstr ""
+msgstr "崎岖地形"
 
 #: src/character.cpp:10811
 msgid "Bonuses Capped"
@@ -321126,7 +321126,7 @@ msgstr "右边没穿鞋"
 
 #: src/character.cpp:10895 src/character.cpp:10898 src/init.cpp:808
 msgid "Modifiers"
-msgstr ""
+msgstr "装饰"
 
 #: src/character.cpp:10905 src/options.cpp:1607
 msgid "Running"
@@ -321842,17 +321842,17 @@ msgstr "<npcname> 没有穿戴那件物品。"
 #: src/character_attire.cpp:1288
 #, c-format
 msgid "Can't wear more than one %s."
-msgstr ""
+msgstr "在 %s 之上不能再穿戴一件。"
 
 #: src/character_attire.cpp:1294
 #, c-format
 msgid "%1$s conflicts with %2$s."
-msgstr ""
+msgstr "%1$s 和 %2$s 相冲突。"
 
 #: src/character_attire.cpp:1348 src/character_attire.cpp:1362 src/character_attire.cpp:1382
 #, c-format
 msgid "Can't wear more than one rigid item on %s."
-msgstr ""
+msgstr "在 %s 之上无法再穿戴一件硬质物品。"
 
 #: src/character_attire.cpp:1947
 msgid "Droplets of"
@@ -321988,11 +321988,11 @@ msgstr "你感到你的%s开始升温。"
 
 #: src/character_body.cpp:898
 msgid "You are too cold to sleep."
-msgstr ""
+msgstr "你冷到睡不着。"
 
 #: src/character_body.cpp:901
 msgid "You are too cold.  If you sleep now, you might never wake up."
-msgstr ""
+msgstr "你感觉相当冷。如果现在睡恐怕一睡不起。"
 
 #: src/character_body.cpp:911
 #, c-format
@@ -322041,7 +322041,7 @@ msgstr "你 %s 上的已消毒伤口被完全污染了！"
 
 #: src/character_body.cpp:1333
 msgid "It is injured beyond use, but will recover on its own in time."
-msgstr ""
+msgstr "它受伤到残废，但时间久了会自行恢复。"
 
 #: src/character_body.cpp:1336
 msgid "It is broken, but has been set, and just needs time to heal."
@@ -322262,7 +322262,7 @@ msgstr "<npcname> 试着挣脱但是失败了！"
 #: src/character_escape.cpp:438
 #, c-format
 msgid "The %s struggles against its bonds!"
-msgstr ""
+msgstr "%s 正拼命挣脱束缚！"
 
 #: src/character_escape.cpp:457
 msgid "You free yourself!"
@@ -322274,7 +322274,7 @@ msgstr "<npcname> 挣脱了出来！"
 
 #: src/character_escape.cpp:460
 msgid "You only manage to partially break free."
-msgstr ""
+msgstr "你只能部分挣脱出来。"
 
 #: src/character_escape.cpp:462
 msgid "You try to free yourself, but can't!"
@@ -322442,11 +322442,11 @@ msgstr "无建筑"
 #: src/clzones.cpp:425
 #, c-format
 msgid "Custom Storage: %s"
-msgstr ""
+msgstr "自定义储放：%s"
 
 #: src/clzones.cpp:427
 msgid "Custom Storage: No Filter"
-msgstr ""
+msgstr "自定义储放：无过滤"
 
 #: src/clzones.cpp:448 src/clzones.cpp:495
 msgid "Unload: "
@@ -322910,15 +322910,15 @@ msgstr "错误：只能使用血液样品。"
 
 #: src/computer_session.cpp:1003
 msgid "Result: Human blood.  Results nominal."
-msgstr ""
+msgstr "结果：人类血型。结果正常。"
 
 #: src/computer_session.cpp:1006
 msgid "Result: Human blood.  Systemic necrosis detected."
-msgstr ""
+msgstr "结果：人类血型。检测到全身坏死。"
 
 #: src/computer_session.cpp:1008
 msgid "Result: Unknown blood type.  Systemic necrosis detected."
-msgstr ""
+msgstr "结果：血型不明。检测到全身坏死。"
 
 #: src/computer_session.cpp:1012
 msgid "Download data?"
@@ -323304,14 +323304,14 @@ msgstr ""
 #, c-format
 msgctxt "query_ynq"
 msgid "%s %s, %s, %s (Case sensitive)"
-msgstr "%s%s，%s，%s（大小写敏感）"
+msgstr "%s %s, %s, %s（大小写敏感）"
 
 #. ~ 1st: query string, 2nd-4th: keybinding descriptions
 #: src/computer_session.cpp:1787
 #, c-format
 msgctxt "query_ynq"
 msgid "%s %s, %s, %s"
-msgstr "%s%s，%s，%s"
+msgstr "%s %s, %s, %s"
 
 #: src/construction.cpp:354
 msgid " Construction "
@@ -323345,7 +323345,7 @@ msgstr "需求："
 #: src/construction.cpp:713
 #, c-format
 msgid "Required conditions: %s"
-msgstr ""
+msgstr "需要条件：%s"
 
 #: src/construction.cpp:716
 msgid "Annotation: "
@@ -323837,7 +323837,7 @@ msgstr "嗯，这是零食的味道。"
 #. with that information.
 #: src/consumption.cpp:1456
 msgid "A veritable smorgasbord!"
-msgstr ""
+msgstr "真正的美味大餐！"
 
 #: src/consumption.cpp:1458
 msgid "Snack attack!"
@@ -323968,15 +323968,15 @@ msgstr "你在驾驶载具时无法屠宰！"
 
 #: src/crafting.cpp:172
 msgid "<npcname> can't craft while driving!"
-msgstr ""
+msgstr "<npcname> 不能驾驶时制作！"
 
 #: src/crafting.cpp:179
 msgid "You can't craft while playing an instrument!"
-msgstr ""
+msgstr "你不能弹奏乐器时制作！"
 
 #: src/crafting.cpp:180
 msgid "<npcname> can't craft while playing an instrument!"
-msgstr ""
+msgstr "<npcname> 不能弹奏乐器时制作！"
 
 #: src/crafting.cpp:185
 msgid "Overmap terrain building recipes are not implemented yet!"
@@ -324115,37 +324115,39 @@ msgid ""
 "Step: %s (%s)\n"
 "What do you want to do?"
 msgstr ""
+"步骤：%s (%s)\n"
+"想做什么？"
 
 #: src/crafting.cpp:1099
 msgid "Wait for it to finish"
-msgstr ""
+msgstr "待其完成"
 
 #: src/crafting.cpp:1100
 msgid "Do something else"
-msgstr ""
+msgstr "做别的"
 
 #: src/crafting.cpp:1102
 msgid "Set a timer"
-msgstr ""
+msgstr "设置计时器"
 
 #: src/crafting.cpp:1118
 msgid "Set an alarm for when?"
-msgstr ""
+msgstr "设置什么时候的闹钟？"
 
 #: src/crafting.cpp:1124
 #, c-format
 msgid "When the step finishes (%s)"
-msgstr ""
+msgstr "什么单位时间结束（%s）"
 
 #: src/crafting.cpp:1127
 #, c-format
 msgid "5 minutes before (%s in)"
-msgstr ""
+msgstr "五分钟以前（%s 后）"
 
 #: src/crafting.cpp:1286 src/crafting.cpp:1328
 #, c-format
 msgid "%s is ready."
-msgstr ""
+msgstr "%s 准备待蓄。"
 
 #: src/crafting.cpp:1329
 #, c-format
@@ -324825,7 +324827,7 @@ msgstr "疼痛"
 
 #: src/crafting_gui.cpp:1482
 msgid "int bonus"
-msgstr ""
+msgstr "时效"
 
 #: src/crafting_gui.cpp:1532
 msgid "Searched"
@@ -332161,28 +332163,28 @@ msgstr "物品列表"
 #. ~ Sort type: distance.
 #: src/game.cpp:7908
 msgid "<s>ort: dist"
-msgstr "[s]排序：距离"
+msgstr "排序：距离"
 
 #. ~ Sort type: category.
 #: src/game.cpp:7911
 msgid "<s>ort: cat"
-msgstr "[s]排序：分类"
+msgstr "排序：分类"
 
 #: src/game.cpp:7920
 msgid "<R>eset"
-msgstr "<R>重置"
+msgstr "重置"
 
 #: src/game.cpp:7923
 msgid "<E>xamine"
-msgstr "<E>查看"
+msgstr "查看"
 
 #: src/game.cpp:7924
 msgid "<C>ompare"
-msgstr "<C>比较"
+msgstr "比较"
 
 #: src/game.cpp:7925
 msgid "<F>ilter"
-msgstr "<F>筛选"
+msgstr "筛选"
 
 #: src/game.cpp:7926
 msgid "<+/->Priority"
@@ -332242,11 +332244,11 @@ msgstr "你看不到任何怪物！"
 
 #: src/game.cpp:8661 src/game.cpp:8738
 msgid "<R>emove from safe mode blacklist"
-msgstr "<R>从安全模式黑名单中移除"
+msgstr "从安全模式黑名单中移除"
 
 #: src/game.cpp:8663 src/game.cpp:8740
 msgid "<A>dd to safe mode blacklist"
-msgstr "<A>添加至安全模式黑名单"
+msgstr "添加至安全模式黑名单"
 
 #: src/game.cpp:8725
 msgid "to look around"
@@ -361265,7 +361267,7 @@ msgstr "信心"
 
 #: src/ranged.cpp:2129
 msgid "Moves to load"
-msgstr ""
+msgstr "移动装填"
 
 #: src/ranged.cpp:2136
 msgid "Moves to fire"
