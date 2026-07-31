@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-30 19:00+0800\n"
+"PO-Revision-Date: 2026-07-31 14:36+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -90942,12 +90942,12 @@ msgstr "你抽了一些大麻。"
 #. ~ "activation_message" action message of item "crack"
 #: data/json/items/comestibles/med.json
 msgid "You smoke your crack rocks."
-msgstr ""
+msgstr "你吸了你的霹雳可卡因。"
 
 #. ~ "activation_message" action message of item "cocaine"
 #: data/json/items/comestibles/med.json
 msgid "You snort a bump of cocaine."
-msgstr ""
+msgstr "你吸了一行可卡因。"
 
 #. ~ "activation_message" action message of item "crystal meth"
 #: data/json/items/comestibles/med.json
@@ -90957,12 +90957,12 @@ msgstr "你吸食了一点冰毒。"
 #. ~ "activation_message" action message of item "speed"
 #: data/json/items/comestibles/med.json
 msgid "You snort some speed."
-msgstr ""
+msgstr "你吸了一些安非他命。"
 
 #. ~ "activation_message" action message of item "naloxone"
 #: data/json/items/comestibles/med.json
 msgid "You spray the naloxone up your nose."
-msgstr ""
+msgstr "你把纳洛酮喷入鼻腔。"
 
 #. ~ "activation_message" action message of item "opium tar"
 #: data/json/items/comestibles/med.json
@@ -90992,17 +90992,17 @@ msgstr "你服下了一些钙片。"
 #. ~ "activation_message" action message of item "cannabis wax"
 #: data/json/items/comestibles/med.json
 msgid "You take a dab of wax."
-msgstr ""
+msgstr "你取了一小块蜡。"
 
 #. ~ "activation_message" action message of item "cannabis shatter"
 #: data/json/items/comestibles/med.json
 msgid "You take a dab."
-msgstr ""
+msgstr "你取了一小块。"
 
 #. ~ "activation_message" action message of item "dextroamphetamine"
 #: data/json/items/comestibles/med.json
 msgid "You take a dextroamphetamine pill."
-msgstr ""
+msgstr "你服用了一粒右旋安非他命药片。"
 
 #. ~ "activation_message" action message of item "flavored bone meal tablet"
 #: data/json/items/comestibles/med.json
@@ -91012,17 +91012,17 @@ msgstr "你服下了一些风味骨粉片。"
 #. ~ "activation_message" action message of item "cannabis distillate"
 #: data/json/items/comestibles/med.json
 msgid "You take a hit of distillate."
-msgstr ""
+msgstr "你吸了一口蒸馏物。"
 
 #. ~ "activation_message" action message of item "lithium tablet"
 #: data/json/items/comestibles/med.json
 msgid "You take a lithium tablet."
-msgstr ""
+msgstr "你服用了一片锂盐药片。"
 
 #. ~ "activation_message" action message of item "metaprolol"
 #: data/json/items/comestibles/med.json
 msgid "You take a metaprolol."
-msgstr ""
+msgstr "你服用了一片美托洛尔。"
 
 #. ~ "activation_message" action message of item "multivitamin"
 #: data/json/items/comestibles/med.json
@@ -91032,7 +91032,7 @@ msgstr "你服用了一粒复合维生素。"
 #. ~ "activation_message" action message of item "naproxen"
 #: data/json/items/comestibles/med.json
 msgid "You take a naproxen tablet."
-msgstr ""
+msgstr "你服用了一片萘普生。"
 
 #. ~ "activation_message" action message of item "zolpidem"
 #: data/json/items/comestibles/med.json
@@ -91057,12 +91057,12 @@ msgstr "你服用了抗组胺药。"
 #. ~ "activation_message" action message of item "aspirin"
 #: data/json/items/comestibles/med.json
 msgid "You take an aspirin."
-msgstr ""
+msgstr "你服用了一片阿司匹林。"
 
 #. ~ "activation_message" action message of item "ibuprofen"
 #: data/json/items/comestibles/med.json
 msgid "You take an ibuprofen."
-msgstr ""
+msgstr "你服用了一片布洛芬。"
 
 #. ~ "activation_message" action message of item "Prussian blue tablet"
 #: data/json/items/comestibles/med.json
@@ -91077,7 +91077,7 @@ msgstr "你服用了一些对乙酰氨基酚。"
 #. ~ "activation_message" action message of item "bismuth subsalicylate"
 #: data/json/items/comestibles/med.json
 msgid "You take some bismuth subsalicylate."
-msgstr ""
+msgstr "你服用了一些次水杨酸铋。"
 
 #. ~ "activation_message" action message of item "codeine"
 #: data/json/items/comestibles/med.json
@@ -91181,7 +91181,7 @@ msgstr[0] "双焦点过渡隐形眼镜（每周佩戴）"
 #: data/json/items/comestibles/med.json
 msgid "bismuth subsalicylate"
 msgid_plural "bismuth subsalicylate"
-msgstr[0] ""
+msgstr[0] "次水杨酸铋"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91247,7 +91247,7 @@ msgstr[0] "咀嚼烟草"
 #: data/json/items/comestibles/med.json
 msgid "chlorpromazine"
 msgid_plural "chlorpromazine"
-msgstr[0] ""
+msgstr[0] "氯丙嗪"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json data/json/items/generic.json
@@ -91301,13 +91301,13 @@ msgstr[0] "调试用氯仿布条"
 #: data/json/items/comestibles/med.json
 msgid "dextroamphetamine"
 msgid_plural "dextroamphetamine"
-msgstr[0] ""
+msgstr[0] "右旋安非他命"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
 msgid "diphenhydramine"
 msgid_plural "diphenhydramine"
-msgstr[0] ""
+msgstr[0] "苯海拉明"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91337,7 +91337,7 @@ msgstr[0] "流感疫苗"
 #: data/json/items/comestibles/med.json
 msgid "fluoxetine"
 msgid_plural "fluoxetine"
-msgstr[0] ""
+msgstr[0] "氟西汀"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91427,7 +91427,7 @@ msgstr[0] "手卷大麻烟"
 #: data/json/items/comestibles/med.json
 msgid "lithium tablet"
 msgid_plural "lithium tablet"
-msgstr[0] ""
+msgstr[0] "锂盐药片"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91499,7 +91499,7 @@ msgstr[0] "近视过渡隐形眼镜（每周）"
 #: data/json/items/comestibles/med.json
 msgid "naloxone"
 msgid_plural "naloxone"
-msgstr[0] ""
+msgstr[0] "纳洛酮"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91523,7 +91523,7 @@ msgstr[0] "尼古丁口香糖"
 #: data/json/items/comestibles/med.json
 msgid "nicotine patch"
 msgid_plural "nicotine patches"
-msgstr[0] ""
+msgstr[0] "尼古丁贴片"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91595,7 +91595,7 @@ msgstr[0] "臭鼬喷雾中和溶液"
 #: data/json/items/comestibles/med.json
 msgid "speed"
 msgid_plural "speed"
-msgstr[0] ""
+msgstr[0] "安非他命"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -91625,7 +91625,7 @@ msgstr[0] "冬青油"
 #: data/json/items/comestibles/med.json
 msgid "zolpidem"
 msgid_plural "zolpidem"
-msgstr[0] ""
+msgstr[0] "唑吡坦"
 
 #. ~ Description of "MRE dessert"
 #: data/json/items/comestibles/mre.json
@@ -92343,7 +92343,7 @@ msgstr "一种经过处理的诱变剂引物。"
 #. ~ Description of "mutagenic infusion"
 #: data/json/items/comestibles/mutagen.json
 msgid "A processed, purified, and condensed dose of mutagenic drugs.  This will cause you to acquire random mutations over time."
-msgstr ""
+msgstr "一剂经过加工、纯化与浓缩的诱变药物。将随时间推移使你获得随机变异。"
 
 #. ~ Description of "abstract mutagen flavor"
 #: data/json/items/comestibles/mutagen.json
@@ -92358,7 +92358,7 @@ msgstr "内含许多阴影的诱变剂，看起来好像里面满是游来游去
 #. ~ Description of "mutagen"
 #: data/json/items/comestibles/mutagen.json
 msgid "A syrupy black goop that reeks of noxious chemicals.  Drinking this may cause you to mutate randomly."
-msgstr ""
+msgstr "一种散发着有害化学气味的黑色粘稠糖浆。喝下它可能会使你发生随机变异。"
 
 #. ~ Description of "gastropod mutagen"
 #: data/json/items/comestibles/mutagen.json
@@ -94003,7 +94003,7 @@ msgstr "在稀酸溶液中新鲜提取出的明胶。它需要过滤以将明胶
 #. ~ Description of "coffee powder"
 #: data/json/items/comestibles/other.json
 msgid "Ground coffee beans.  You can boil it into a mediocre stimulant, or something better if you had a coffee pot."
-msgstr ""
+msgstr "研磨好的咖啡豆。你可以将其煮沸制成一杯普通的提神饮品，如果有咖啡壶的话，味道会更好。"
 
 #. ~ Description of "candied honey"
 #: data/json/items/comestibles/other.json
@@ -95786,7 +95786,7 @@ msgstr "一堆粘糊糊的海藻。  它看起来不可食用，但如果干燥�
 #. ~ Description of "cattail rhizome"
 #: data/json/items/comestibles/raw_veggy.json
 msgid "A small tuber-like root from a cattail plant.  Its crisp white flesh is very starchy and fibrous, but you really ought to cook it before you attempt to eat it."
-msgstr ""
+msgstr "香蒲植物的块状小根。其脆嫩的白色肉质富含淀粉和纤维，但食用前最好先煮熟。"
 
 #. ~ Description of "bee balm"
 #: data/json/items/comestibles/raw_veggy.json
@@ -96972,7 +96972,7 @@ msgstr "一些洋葱种子。"
 #. ~ Description of "poppy seeds"
 #: data/json/items/comestibles/seed.json
 msgid "Some poppy seeds."
-msgstr ""
+msgstr "一些罂粟籽"
 
 #. ~ Description of "raspberry seeds"
 #: data/json/items/comestibles/seed.json
@@ -97447,7 +97447,7 @@ msgstr[0] "洋葱种子"
 #: data/json/items/comestibles/seed.json
 msgid "poppy seeds"
 msgid_plural "poppy seeds"
-msgstr[0] ""
+msgstr[0] "罂粟籽"
 
 #. ~ Item name
 #: data/json/items/comestibles/seed.json
@@ -98285,7 +98285,7 @@ msgstr "一个腌黄瓜，酸酸甜甜，美味可口而且保质期很长。"
 #. ~ Description of "tofu stirfry"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "A tofu stirfry with rice and a sweet, bold flavor."
-msgstr ""
+msgstr "一道加了米饭的豆腐炒菜，口味浓郁偏甜。"
 
 #. ~ Description of "onigiri"
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98402,7 +98402,7 @@ msgstr "把大蒜剥瓣，涂上一层油，然后烤熟。比生吃美味多了
 #. ~ Description of "dried starch"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "Fibrous clumps of carbohydrate-rich paste extracted from a root vegetable.  Now that it's dry, it could be milled into flour."
-msgstr ""
+msgstr "从根茎类蔬菜中提取的富含碳水化合物的糊状纤维团块。现已干燥，可研磨成面粉。"
 
 #. ~ Description of "sauteed fiddleheads"
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98503,7 +98503,7 @@ msgstr "上面覆盖着厚厚一层香蒜酱的意大利面。非常好吃！"
 #. ~ Description of "starch"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "Sticky, gooey carbohydrate paste extracted from a root vegetable.  It will spoils rather quickly if not prepared for storage."
-msgstr ""
+msgstr "从根茎类蔬菜中提取的粘稠碳水化合物糊状物。若未进行储存处理，会很快变质。"
 
 #. ~ Description of "boiled Jerusalem artichoke"
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98623,7 +98623,7 @@ msgstr[0] "煮土豆"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned Japanese knotweed"
 msgid_plural "canned Japanese knotweed"
-msgstr[0] ""
+msgstr[0] "虎杖罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. bamboo_cooked
@@ -98632,42 +98632,42 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned bamboo shoots"
 msgid_plural "canned bamboo shoots"
-msgstr[0] ""
+msgstr[0] "竹笋罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches bell_pepper
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned bell pepper"
 msgid_plural "canned bell pepper"
-msgstr[0] ""
+msgstr[0] "甜椒罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches broccoli
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned broccoli"
 msgid_plural "canned broccoli"
-msgstr[0] ""
+msgstr[0] "西兰花罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. raw_burdock
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned burdock"
 msgid_plural "canned burdock"
-msgstr[0] ""
+msgstr[0] "牛蒡罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. burdock_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned burdock greens"
 msgid_plural "canned burdock greens"
-msgstr[0] ""
+msgstr[0] "牛蒡叶罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches cabbage
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned cabbage"
 msgid_plural "canned cabbage"
-msgstr[0] ""
+msgstr[0] "卷心菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches carrot
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
@@ -98675,28 +98675,28 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned carrot"
 msgid_plural "canned carrot"
-msgstr[0] ""
+msgstr[0] "胡萝卜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. cattail_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned cattail stalk"
 msgid_plural "canned cattail stalk"
-msgstr[0] ""
+msgstr[0] "香蒲茎罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches celery
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned celery"
 msgid_plural "canned celery"
-msgstr[0] ""
+msgstr[0] "芹菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. plantain
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned cooking banana"
 msgid_plural "canned cooking banana"
-msgstr[0] ""
+msgstr[0] "大蕉罐头"
 
 #. ~ Item name
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
@@ -98714,104 +98714,104 @@ msgstr[0] "玉米罐头"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned cucumber"
 msgid_plural "canned cucumber"
-msgstr[0] ""
+msgstr[0] "黄瓜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. raw_dandelion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned dandelion"
 msgid_plural "canned dandelion"
-msgstr[0] ""
+msgstr[0] "蒲公英罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. dandelion_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned dandelion greens"
 msgid_plural "canned dandelion greens"
-msgstr[0] ""
+msgstr[0] "蒲公英叶罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. grape_leaves
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned grape leaves"
 msgid_plural "canned grape leaves"
-msgstr[0] ""
+msgstr[0] "葡萄叶罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned groundnut"
 msgid_plural "canned groundnut"
-msgstr[0] ""
+msgstr[0] "花生罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. horseradish_greens
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned horseradish greens"
 msgid_plural "canned horseradish greens"
-msgstr[0] ""
+msgstr[0] "辣根叶罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches lettuce
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned lettuce"
 msgid_plural "canned lettuce"
-msgstr[0] ""
+msgstr[0] "生菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. mushroom
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned mushroom"
 msgid_plural "canned mushroom"
-msgstr[0] ""
+msgstr[0] "蘑菇罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned onion"
 msgid_plural "canned onion"
-msgstr[0] ""
+msgstr[0] "洋葱罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. plant_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned plant stalk"
 msgid_plural "canned plant stalk"
-msgstr[0] ""
+msgstr[0] "植物茎罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned potato"
 msgid_plural "canned potato"
-msgstr[0] ""
+msgstr[0] "土豆罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches rhubarb
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned rhubarb"
 msgid_plural "canned rhubarb"
-msgstr[0] ""
+msgstr[0] "大黄罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. salsify_raw
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned salsify root"
 msgid_plural "canned salsify root"
-msgstr[0] ""
+msgstr[0] "婆罗门参根罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches spinach
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned spinach"
 msgid_plural "canned spinach"
-msgstr[0] ""
+msgstr[0] "菠菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. sugar_beet
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned sugar beet"
 msgid_plural "canned sugar beet"
-msgstr[0] ""
+msgstr[0] "糖用甜菜罐头"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98824,35 +98824,35 @@ msgstr[0] "罐装蔬菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned wild garlic"
 msgid_plural "canned wild garlic"
-msgstr[0] ""
+msgstr[0] "野蒜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. wild_herbs
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned wild herbs"
 msgid_plural "canned wild herbs"
-msgstr[0] ""
+msgstr[0] "野生香草罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. carrot_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned wild root"
 msgid_plural "canned wild root"
-msgstr[0] ""
+msgstr[0] "野生根茎罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned wild vegetables"
 msgid_plural "canned wild vegetables"
-msgstr[0] ""
+msgstr[0] "野生蔬菜罐头"
 
 #. ~ Conditional name for "canned vegetable" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "canned zucchini"
 msgid_plural "canned zucchini"
-msgstr[0] ""
+msgstr[0] "西葫芦罐头"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -98931,7 +98931,7 @@ msgstr[0] "玉米面"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated Japanese knotweed"
 msgid_plural "dehydrated Japanese knotweed"
-msgstr[0] ""
+msgstr[0] "脱水虎杖"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. bamboo_cooked
@@ -98940,42 +98940,42 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated bamboo shoots"
 msgid_plural "dehydrated bamboo shoots"
-msgstr[0] ""
+msgstr[0] "脱水竹笋"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches bell_pepper
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated bell pepper"
 msgid_plural "dehydrated bell pepper"
-msgstr[0] ""
+msgstr[0] "脱水甜椒"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches broccoli
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated broccoli"
 msgid_plural "dehydrated broccoli"
-msgstr[0] ""
+msgstr[0] "脱水西兰花"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. raw_burdock
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated burdock"
 msgid_plural "dehydrated burdock"
-msgstr[0] ""
+msgstr[0] "脱水牛蒡"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. burdock_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated burdock greens"
 msgid_plural "dehydrated burdock greens"
-msgstr[0] ""
+msgstr[0] "脱水牛蒡叶"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches cabbage
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated cabbage"
 msgid_plural "dehydrated cabbage"
-msgstr[0] ""
+msgstr[0] "脱水卷心菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. carrot
@@ -98984,21 +98984,21 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated carrot"
 msgid_plural "dehydrated carrot"
-msgstr[0] ""
+msgstr[0] "脱水胡萝卜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. cattail_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated cattail stalk"
 msgid_plural "dehydrated cattail stalk"
-msgstr[0] ""
+msgstr[0] "脱水香蒲茎"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches celery
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated celery"
 msgid_plural "dehydrated celery"
-msgstr[0] ""
+msgstr[0] "脱水芹菜"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99011,7 +99011,7 @@ msgstr[0] "脱水辣椒"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated cooking banana"
 msgid_plural "dehydrated cooking banana"
-msgstr[0] ""
+msgstr[0] "脱水大蕉"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches corn_kernels
@@ -99026,21 +99026,21 @@ msgstr[0] "脱水玉米粒"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated cucumber"
 msgid_plural "dehydrated cucumber"
-msgstr[0] ""
+msgstr[0] "脱水黄瓜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. raw_dandelion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated dandelion"
 msgid_plural "dehydrated dandelion"
-msgstr[0] ""
+msgstr[0] "脱水蒲公英"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. dandelion_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated dandelion greens"
 msgid_plural "dehydrated dandelion greens"
-msgstr[0] ""
+msgstr[0] "脱水蒲公英叶"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. eggplant
@@ -99049,7 +99049,7 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated eggplant"
 msgid_plural "dehydrated eggplant"
-msgstr[0] ""
+msgstr[0] "脱水茄子"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99068,84 +99068,84 @@ msgstr[0] "脱水蒜瓣"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated grape leaves"
 msgid_plural "dehydrated grape leaves"
-msgstr[0] ""
+msgstr[0] "脱水葡萄叶"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated groundnut"
 msgid_plural "dehydrated groundnut"
-msgstr[0] ""
+msgstr[0] "脱水花生"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. horseradish_greens
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated horseradish greens"
 msgid_plural "dehydrated horseradish greens"
-msgstr[0] ""
+msgstr[0] "脱水辣根叶"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches lettuce
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated lettuce"
 msgid_plural "dehydrated lettuce"
-msgstr[0] ""
+msgstr[0] "脱水生菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated onion"
 msgid_plural "dehydrated onion"
-msgstr[0] ""
+msgstr[0] "脱水洋葱"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. plant_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated plant stalk"
 msgid_plural "dehydrated plant stalk"
-msgstr[0] ""
+msgstr[0] "脱水植物茎"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated potato"
 msgid_plural "dehydrated potato"
-msgstr[0] ""
+msgstr[0] "脱水土豆"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches rhubarb
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated rhubarb"
 msgid_plural "dehydrated rhubarb"
-msgstr[0] ""
+msgstr[0] "脱水大黄"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. salsify_raw
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated salsify root"
 msgid_plural "dehydrated salsify root"
-msgstr[0] ""
+msgstr[0] "脱水婆罗门参根"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. spinach
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated spinach"
 msgid_plural "dehydrated spinach"
-msgstr[0] ""
+msgstr[0] "脱水菠菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. sugar_beet
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated sugar beet"
 msgid_plural "dehydrated sugar beet"
-msgstr[0] ""
+msgstr[0] "脱水糖用甜菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated tomato"
 msgid_plural "dehydrated tomato"
-msgstr[0] ""
+msgstr[0] "脱水番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99158,35 +99158,35 @@ msgstr[0] "脱水蔬菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated wild garlic"
 msgid_plural "dehydrated wild garlic"
-msgstr[0] ""
+msgstr[0] "脱水野蒜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. wild_herbs
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated wild herbs"
 msgid_plural "dehydrated wild herbs"
-msgstr[0] ""
+msgstr[0] "脱水野生香草"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. carrot_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated wild root"
 msgid_plural "dehydrated wild root"
-msgstr[0] ""
+msgstr[0] "脱水野生根茎"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated wild vegetables"
 msgid_plural "dehydrated wild vegetables"
-msgstr[0] ""
+msgstr[0] "脱水野生蔬菜"
 
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dehydrated zucchini"
 msgid_plural "dehydrated zucchini"
-msgstr[0] ""
+msgstr[0] "脱水西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99210,7 +99210,7 @@ msgstr[0] "即食沙拉（待冲泡）"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dried starch"
 msgid_plural "dried starch"
-msgstr[0] ""
+msgstr[0] "干淀粉"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99247,70 +99247,70 @@ msgstr[0] "面拖蒲公英配牛蒡"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled broccoli"
 msgid_plural "fried pickled broccoli"
-msgstr[0] ""
+msgstr[0] "炒腌西兰花"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_carrot
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled carrot"
 msgid_plural "fried pickled carrot"
-msgstr[0] ""
+msgstr[0] "炒腌胡萝卜"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_corn
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled corn"
 msgid_plural "fried pickled corn"
-msgstr[0] ""
+msgstr[0] "炒腌玉米"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_cucumber
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled cucumber"
 msgid_plural "fried pickled cucumber"
-msgstr[0] ""
+msgstr[0] "炒腌黄瓜"
 
 #. ~ Conditional name for "fried pickled vegetable" when COMPONENT_ID matches
 #. vegetable_pickled_garlic_clove
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled garlic"
 msgid_plural "fried pickled garlic"
-msgstr[0] ""
+msgstr[0] "炒腌蒜"
 
 #. ~ Conditional name for "fried pickled vegetable" when COMPONENT_ID matches
 #. vegetable_pickled_groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled groundnut"
 msgid_plural "fried pickled groundnut"
-msgstr[0] ""
+msgstr[0] "炒腌花生"
 
 #. ~ Conditional name for "fried pickled vegetable" when COMPONENT_ID matches
 #. vegetable_pickled_mushroom
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled mushroom"
 msgid_plural "fried pickled mushroom"
-msgstr[0] ""
+msgstr[0] "炒腌蘑菇"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled onion"
 msgid_plural "fried pickled onion"
-msgstr[0] ""
+msgstr[0] "炒腌洋葱"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled potato"
 msgid_plural "fried pickled potato"
-msgstr[0] ""
+msgstr[0] "炒腌土豆"
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled tomato"
 msgid_plural "fried pickled tomato"
-msgstr[0] ""
+msgstr[0] "炒腌番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99323,21 +99323,21 @@ msgstr[0] "腌菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled wild garlic"
 msgid_plural "fried pickled wild garlic"
-msgstr[0] ""
+msgstr[0] "炒腌野蒜"
 
 #. ~ Conditional name for "fried pickled vegetable" when COMPONENT_ID matches
 #. vegetable_pickled_vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled wild vegetables"
 msgid_plural "fried pickled wild vegetables"
-msgstr[0] ""
+msgstr[0] "炒腌野生蔬菜  "
 
 #. ~ Conditional name for "fried pickled vegetable" when
 #. COMPONENT_ID_SUBSTRING matches vegetable_pickled_zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "fried pickled zucchini"
 msgid_plural "fried pickled zucchini"
-msgstr[0] ""
+msgstr[0] "炒腌西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99416,70 +99416,70 @@ msgstr[0] "泡菜黄瓜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled broccoli"
 msgid_plural "pickled broccoli"
-msgstr[0] ""
+msgstr[0] "腌西兰花"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches carrot
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled carrot"
 msgid_plural "pickled carrot"
-msgstr[0] ""
+msgstr[0] "腌胡萝卜"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches corn
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled corn"
 msgid_plural "pickled corn"
-msgstr[0] ""
+msgstr[0] "腌玉米"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches cucumber
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled cucumber"
 msgid_plural "pickled cucumber"
-msgstr[0] ""
+msgstr[0] "腌黄瓜"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID matches
 #. garlic_clove
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled garlic clove"
 msgid_plural "pickled garlic clove"
-msgstr[0] ""
+msgstr[0] "腌蒜瓣"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled ground nuts"
 msgid_plural "pickled ground nuts"
-msgstr[0] ""
+msgstr[0] "腌花生"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID matches
 #. mushroom
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled mushroom"
 msgid_plural "pickled mushroom"
-msgstr[0] ""
+msgstr[0] "腌蘑菇"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled onion"
 msgid_plural "pickled onion"
-msgstr[0] ""
+msgstr[0] "腌洋葱"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled potato"
 msgid_plural "pickled potato"
-msgstr[0] ""
+msgstr[0] "腌土豆"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled tomato"
 msgid_plural "pickled tomato"
-msgstr[0] ""
+msgstr[0] "腌番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99492,21 +99492,21 @@ msgstr[0] "腌菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled wild garlic"
 msgid_plural "pickled wild garlic"
-msgstr[0] ""
+msgstr[0] "腌野蒜"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled wild vegetables"
 msgid_plural "pickled wild vegetables"
-msgstr[0] ""
+msgstr[0] "腌野生蔬菜"
 
 #. ~ Conditional name for "pickled vegetable" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "pickled zucchini"
 msgid_plural "pickled zucchini"
-msgstr[0] ""
+msgstr[0] "腌西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99519,7 +99519,7 @@ msgstr[0] "熟美国豆芋"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated Japanese knotweed"
 msgid_plural "rehydrated Japanese knotweed"
-msgstr[0] ""
+msgstr[0] "复水虎杖"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. bamboo_cooked
@@ -99528,42 +99528,42 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated bamboo shoots"
 msgid_plural "rehydrated bamboo shoots"
-msgstr[0] ""
+msgstr[0] "复水竹笋"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches bell_pepper
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated bell pepper"
 msgid_plural "rehydrated bell pepper"
-msgstr[0] ""
+msgstr[0] "复水甜椒"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches broccoli
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated broccoli"
 msgid_plural "rehydrated broccoli"
-msgstr[0] ""
+msgstr[0] "复水西兰花"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. raw_burdock
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated burdock"
 msgid_plural "rehydrated burdock"
-msgstr[0] ""
+msgstr[0] "复水牛蒡"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. burdock_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated burdock greens"
 msgid_plural "rehydrated burdock greens"
-msgstr[0] ""
+msgstr[0] "复水牛蒡叶"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches cabbage
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated cabbage"
 msgid_plural "rehydrated cabbage"
-msgstr[0] ""
+msgstr[0] "复水卷心菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. carrot
@@ -99572,21 +99572,21 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated carrot"
 msgid_plural "rehydrated carrot"
-msgstr[0] ""
+msgstr[0] "复水胡萝卜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. cattail_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated cattail stalk"
 msgid_plural "rehydrated cattail stalk"
-msgstr[0] ""
+msgstr[0] "复水香蒲茎"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches celery
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated celery"
 msgid_plural "rehydrated celery"
-msgstr[0] ""
+msgstr[0] "复水芹菜"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99599,7 +99599,7 @@ msgstr[0] "水发辣椒"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated cooking banana"
 msgid_plural "rehydrated cooking banana"
-msgstr[0] ""
+msgstr[0] "复水大蕉"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches corn_kernels
@@ -99614,21 +99614,21 @@ msgstr[0] "水发玉米粒"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated cucumber"
 msgid_plural "rehydrated cucumber"
-msgstr[0] ""
+msgstr[0] "复水黄瓜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. raw_dandelion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated dandelion"
 msgid_plural "rehydrated dandelion"
-msgstr[0] ""
+msgstr[0] "复水蒲公英"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. dandelion_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated dandelion greens"
 msgid_plural "rehydrated dandelion greens"
-msgstr[0] ""
+msgstr[0] "复水蒲公英叶"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99641,84 +99641,84 @@ msgstr[0] "水发蒜瓣"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated grape leaves"
 msgid_plural "rehydrated grape leaves"
-msgstr[0] ""
+msgstr[0] "复水葡萄叶"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated groundnut"
 msgid_plural "rehydrated groundnut"
-msgstr[0] ""
+msgstr[0] "复水花生"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. horseradish_greens
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated horseradish greens"
 msgid_plural "rehydrated horseradish greens"
-msgstr[0] ""
+msgstr[0] "复水辣根叶"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches lettuce
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated lettuce"
 msgid_plural "rehydrated lettuce"
-msgstr[0] ""
+msgstr[0] "复水生菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated onion"
 msgid_plural "rehydrated onion"
-msgstr[0] ""
+msgstr[0] "复水洋葱"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. plant_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated plant stalk"
 msgid_plural "rehydrated plant stalk"
-msgstr[0] ""
+msgstr[0] "复水植物茎"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated potato"
 msgid_plural "rehydrated potato"
-msgstr[0] ""
+msgstr[0] "复水土豆"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches rhubarb
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated rhubarb"
 msgid_plural "rehydrated rhubarb"
-msgstr[0] ""
+msgstr[0] "复水大黄"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. salsify_raw
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated salsify root"
 msgid_plural "rehydrated salsify root"
-msgstr[0] ""
+msgstr[0] "复水婆罗门参根"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. spinach
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated spinach"
 msgid_plural "rehydrated spinach"
-msgstr[0] ""
+msgstr[0] "复水菠菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. sugar_beet
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated sugar beet"
 msgid_plural "rehydrated sugar beet"
-msgstr[0] ""
+msgstr[0] "复水糖用甜菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated tomato"
 msgid_plural "rehydrated tomato"
-msgstr[0] ""
+msgstr[0] "复水番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99731,35 +99731,35 @@ msgstr[0] "水发蔬菜"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated wild garlic"
 msgid_plural "rehydrated wild garlic"
-msgstr[0] ""
+msgstr[0] "复水野蒜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. wild_herbs
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated wild herbs"
 msgid_plural "rehydrated wild herbs"
-msgstr[0] ""
+msgstr[0] "复水野生香草"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. carrot_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated wild root"
 msgid_plural "rehydrated wild root"
-msgstr[0] ""
+msgstr[0] "复水野生根茎"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated wild vegetables"
 msgid_plural "rehydrated wild vegetables"
-msgstr[0] ""
+msgstr[0] "复水野生蔬菜"
 
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "rehydrated zucchini"
 msgid_plural "rehydrated zucchini"
-msgstr[0] ""
+msgstr[0] "复水西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -99809,7 +99809,7 @@ msgstr[0] "萨尔萨辣酱"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted Japanese knotweed"
 msgid_plural "salted Japanese knotweed"
-msgstr[0] ""
+msgstr[0] "盐渍虎杖"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. bamboo_cooked
@@ -99818,42 +99818,42 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted bamboo shoots"
 msgid_plural "salted bamboo shoots"
-msgstr[0] ""
+msgstr[0] "盐渍竹笋"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches bell_pepper
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted bell pepper"
 msgid_plural "salted bell pepper"
-msgstr[0] ""
+msgstr[0] "盐渍甜椒"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches broccoli
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted broccoli"
 msgid_plural "salted broccoli"
-msgstr[0] ""
+msgstr[0] "盐渍西兰花"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. raw_burdock
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted burdock"
 msgid_plural "salted burdock"
-msgstr[0] ""
+msgstr[0] "盐渍牛蒡"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. burdock_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted burdock greens"
 msgid_plural "salted burdock greens"
-msgstr[0] ""
+msgstr[0] "盐渍牛蒡叶"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches cabbage
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted cabbage"
 msgid_plural "salted cabbage"
-msgstr[0] ""
+msgstr[0] "盐渍卷心菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. carrot
@@ -99862,28 +99862,28 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted carrot"
 msgid_plural "salted carrot"
-msgstr[0] ""
+msgstr[0] "盐渍胡萝卜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. cattail_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted cattail stalk"
 msgid_plural "salted cattail stalk"
-msgstr[0] ""
+msgstr[0] "盐渍香蒲茎"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches celery
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted celery"
 msgid_plural "salted celery"
-msgstr[0] ""
+msgstr[0] "盐渍芹菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. plantain
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted cooking banana"
 msgid_plural "salted cooking banana"
-msgstr[0] ""
+msgstr[0] "盐渍大蕉"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. can_corn
@@ -99894,119 +99894,119 @@ msgstr[0] ""
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted corn"
 msgid_plural "salted corn"
-msgstr[0] ""
+msgstr[0] "盐渍玉米"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches cucumber
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted cucumber"
 msgid_plural "salted cucumber"
-msgstr[0] ""
+msgstr[0] "盐渍黄瓜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. raw_dandelion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted dandelion"
 msgid_plural "salted dandelion"
-msgstr[0] ""
+msgstr[0] "盐渍蒲公英"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. dandelion_cooked
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted dandelion greens"
 msgid_plural "salted dandelion greens"
-msgstr[0] ""
+msgstr[0] "盐渍蒲公英叶"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. grape_leaves
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted grape leaves"
 msgid_plural "salted grape leaves"
-msgstr[0] ""
+msgstr[0] "盐渍葡萄叶"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. groundnut_prepared
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted groundnut"
 msgid_plural "salted groundnut"
-msgstr[0] ""
+msgstr[0] "盐渍花生"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. horseradish_greens
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted horseradish greens"
 msgid_plural "salted horseradish greens"
-msgstr[0] ""
+msgstr[0] "盐渍辣根叶"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches lettuce
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted lettuce"
 msgid_plural "salted lettuce"
-msgstr[0] ""
+msgstr[0] "盐渍生菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches onion
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted onion"
 msgid_plural "salted onion"
-msgstr[0] ""
+msgstr[0] "盐渍洋葱"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. plant_stalk
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted plant stalk"
 msgid_plural "salted plant stalk"
-msgstr[0] ""
+msgstr[0] "盐渍植物茎"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches potato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted potato"
 msgid_plural "salted potato"
-msgstr[0] ""
+msgstr[0] "盐渍土豆"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted pumpkin"
 msgid_plural "salted pumpkin"
-msgstr[0] ""
+msgstr[0] "盐渍南瓜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches rhubarb
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted rhubarb"
 msgid_plural "salted rhubarb"
-msgstr[0] ""
+msgstr[0] "盐渍大黄"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. salsify_raw
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted salsify root"
 msgid_plural "salted salsify root"
-msgstr[0] ""
+msgstr[0] "盐渍婆罗门参根"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. spinach
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted spinach"
 msgid_plural "salted spinach"
-msgstr[0] ""
+msgstr[0] "盐渍菠菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. sugar_beet
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted sugar beet"
 msgid_plural "salted sugar beet"
-msgstr[0] ""
+msgstr[0] "盐渍菠菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches tomato
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted tomato"
 msgid_plural "salted tomato"
-msgstr[0] ""
+msgstr[0] "盐渍番茄"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -100019,35 +100019,35 @@ msgstr[0] "腌菜块"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted wild garlic"
 msgid_plural "salted wild garlic"
-msgstr[0] ""
+msgstr[0] "盐渍野蒜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. wild_herbs
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted wild herbs"
 msgid_plural "salted wild herbs"
-msgstr[0] ""
+msgstr[0] "盐渍野生香草"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. carrot_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted wild root"
 msgid_plural "salted wild root"
-msgstr[0] ""
+msgstr[0] "盐渍野生根茎"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID matches
 #. vegetable_wild
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted wild vegetables"
 msgid_plural "salted wild vegetables"
-msgstr[0] ""
+msgstr[0] "盐渍野生蔬菜"
 
 #. ~ Conditional name for "salted vegetable chunk" when COMPONENT_ID_SUBSTRING
 #. matches zucchini
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "salted zucchini"
 msgid_plural "salted zucchini"
-msgstr[0] ""
+msgstr[0] "盐渍西葫芦"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -100192,7 +100192,7 @@ msgstr "新英格兰经典食物，饱肚子有营养。"
 #. ~ Description of "flour"
 #: data/json/items/comestibles/wheat.json
 msgid "A fine powder made of ground wheat.  It's great for baking, not so good raw."
-msgstr ""
+msgstr "一种由小麦研磨而成的细粉。适合烘焙，生吃则不太美味。"
 
 #. ~ Description of "raw lasagne pasta"
 #: data/json/items/comestibles/wheat.json
@@ -100810,7 +100810,7 @@ msgstr "一个用干葫芦做成的硬质水密容器。可以像水壶一样使
 #. ~ Description of "garbage bag"
 #: data/json/items/containers/containers.json
 msgid "A hefty plastic bag made to carry lots of trash."
-msgstr ""
+msgstr "一个用于装载大量垃圾的大号塑料袋。"
 
 #. ~ Description of "wooden box"
 #: data/json/items/containers/containers.json
@@ -100845,7 +100845,7 @@ msgstr "一个大型铝制油罐，一般用于储存燃料。"
 #. ~ Description of "woven plastic sack"
 #: data/json/items/containers/containers.json
 msgid "A large and sturdy bag made out of plastic canvas.  These are frequently used as sandbags, or for storing gravel."
-msgstr ""
+msgstr "一种由塑料帆布制成的大型耐用袋子。常被用作沙袋或用于存放砾石。"
 
 #. ~ Description of "canvas sack"
 #: data/json/items/containers/containers.json
@@ -101232,7 +101232,7 @@ msgstr "一个有金属螺旋盖的 3 升玻璃罐，一般用来做罐头。在
 #. ~ Description of "glass vial"
 #: data/json/items/containers/containers.json
 msgid "A tiny glass ampoule commonly used to store medication in liquid form."
-msgstr ""
+msgstr "一种用于储存液体药剂的小型玻璃安瓿瓶。"
 
 #. ~ Description of "large plastic bottle"
 #: data/json/items/containers/containers.json
@@ -101562,7 +101562,7 @@ msgstr[0] "纸板盒"
 #: data/json/items/containers/containers.json
 msgid "cement bag"
 msgid_plural "cement bags"
-msgstr[0] ""
+msgstr[0] "水泥袋"
 
 #. ~ Item name
 #: data/json/items/containers/containers.json
@@ -102283,7 +102283,7 @@ msgstr[0] "木制酒杯"
 #: data/json/items/containers/containers.json
 msgid "woven plastic sack"
 msgid_plural "woven plastic sacks"
-msgstr[0] ""
+msgstr[0] "编织塑料麻袋"
 
 #. ~ Item name
 #: data/json/items/containers/containers.json
@@ -105500,7 +105500,7 @@ msgstr "一个能够挂在脖子上的扁平袋子，用于携带货币、身份
 #. ~ Description of "mower blade"
 #: data/json/items/generic.json
 msgid "A flat steel blade with openings for fasteners and one tapered edge on either end.  It's meant to function as part of a machine and in its present state would make an awkward weapon."
-msgstr ""
+msgstr "一种扁平钢制刀片，两端各有紧固件孔，且各有一侧呈锥形边缘。其设计用途为机器部件，以其当前形态作为武器使用会相当笨拙。"
 
 #. ~ Description of "lanyard"
 #: data/json/items/generic.json
@@ -106263,7 +106263,7 @@ msgstr[0] "内存"
 #. ~ Description of "rough terrain"
 #: data/json/items/generic.json
 msgid "Seeing this is a bug."
-msgstr ""
+msgstr "看到此消息说明遇到了 bug。"
 
 #. ~ Description of "file"
 #: data/json/items/generic.json
@@ -107408,7 +107408,7 @@ msgstr[0] "灰泥"
 #: data/json/items/generic.json
 msgid "mower blade"
 msgid_plural "mower blades"
-msgstr[0] ""
+msgstr[0] "割草机刀片"
 
 #. ~ Item name
 #: data/json/items/generic.json
@@ -107582,7 +107582,7 @@ msgstr[0] "制冷剂罐"
 #: data/json/items/generic.json
 msgid "rough terrain"
 msgid_plural "rough terrain"
-msgstr[0] ""
+msgstr[0] "崎岖地形"
 
 #. ~ Item name
 #: data/json/items/generic.json
@@ -107932,7 +107932,7 @@ msgstr "一把带有折叠铰链的梳子，想当油头滑面的时髦少年就
 #. ~ Description of "tampon"
 #: data/json/items/generic/bathroom_house.json
 msgid "A cylindrical wad of fabric with a plastic applicator.  These are intended for menstrual hygiene, but could be taken apart for some cotton and string."
-msgstr ""
+msgstr "一种带有塑料导管的圆柱形织物棉条。专用于经期卫生，但也可拆解获取棉线和棉絮。"
 
 #. ~ Description of "comb"
 #: data/json/items/generic/bathroom_house.json
@@ -108012,7 +108012,7 @@ msgstr "一根采用耐热陶瓷制成的短棒。当插入插座后，它能够
 #. ~ Description of "menstrual pad"
 #: data/json/items/generic/bathroom_house.json
 msgid "An absorbent sanitary napkin."
-msgstr ""
+msgstr "一种吸收性卫生巾。"
 
 #. ~ Description of "hairbrush"
 #: data/json/items/generic/bathroom_house.json
@@ -108185,7 +108185,7 @@ msgstr ""
 #. ~ Description of "emergency blanket"
 #: data/json/items/generic/bedding.json
 msgid "A blanket made of reflective Mylar that covers your most important body parts.  It folds into a very compact form when not in use."
-msgstr ""
+msgstr "一条由反光聚酯薄膜制成的毯子，可覆盖身体最重要的部位。不使用时，可折叠成非常紧凑的形态。"
 
 #. ~ Description of "fur blanket"
 #: data/json/items/generic/bedding.json
