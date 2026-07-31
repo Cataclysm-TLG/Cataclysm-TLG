@@ -777,6 +777,12 @@ class Character : public Creature, public visitable
         void set_fatigue( fatigue_levels nfatigue );
         void set_sleep_deprivation( int nsleep_deprivation );
 
+        /** Cache helpers for eye_level() */
+        mutable int cached_tile_eye_level_bonus = 0;
+        mutable bool cached_tile_eye_level_bonus_dirty = true;
+        int tile_eye_level_bonus() const;
+        void invalidate_tile_eye_level_cache() const;
+
     protected:
 
         // These accept values in calories, 1/1000s of kcals (or Calories)
@@ -1716,7 +1722,7 @@ class Character : public Creature, public visitable
 
         /** Picks a random valid mutation and gives it to the Character, possibly removing/changing others along the way */
         void mutate( const int &true_random_chance, bool use_vitamins );
-        void mutate( );
+        void mutate();
         /** Returns true if the player doesn't have the mutation or a conflicting one and it complies with the allowed typing */
         bool mutation_ok( const trait_id &mutation, bool allow_good, bool allow_bad, bool allow_neutral,
                           const vitamin_id &mut_vit ) const;

@@ -2956,6 +2956,7 @@ bionic_uid Character::add_bionic( const bionic_id &b, bionic_uid parent_uid,
     update_bionic_power_capacity();
 
     calc_encumbrance();
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     if( is_avatar() && has_flag( json_flag_ENHANCED_VISION ) ) {
         // enhanced vision counts as optics for overmap sight range.
