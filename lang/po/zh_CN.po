@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-31 14:36+0800\n"
+"PO-Revision-Date: 2026-07-31 16:59+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -290759,7 +290759,7 @@ msgstr "智力/感知/安全"
 #. ~ Label of UI widget "legacy_labels_sidebar"
 #: data/json/ui/sidebar-legacy-labels.json
 msgid "Labels"
-msgstr ""
+msgstr "标签"
 
 #. ~ Label of UI widget "ll_str_dex_power_layout"
 #: data/json/ui/sidebar-legacy-labels.json
@@ -291959,7 +291959,7 @@ msgstr "疲惫惩罚"
 #. ~ Label of UI widget "snow_depth_desc"
 #: data/json/ui/weather.json
 msgid "Snow"
-msgstr ""
+msgstr "下雪"
 
 #. ~ Clause text "emaciated" of UI widget "weight_desc_label"
 #: data/json/ui/weight.json
@@ -291996,7 +291996,7 @@ msgstr "瘦骨伶仃"
 #. ~ Clause text "skinny" of UI widget "weight_desc_label"
 #: data/json/ui/weight.json
 msgid "Skinny"
-msgstr ""
+msgstr "紧凑"
 
 #. ~ Clause text "underweight" of UI widget "weight_desc_label"
 #: data/json/ui/weight.json
@@ -294392,7 +294392,7 @@ msgstr "一台巨大而沉重的电动机，其功率足以拉动火车。"
 #. ~ Description of vehicle part "blade"
 #: data/json/vehicleparts/rams.json
 msgid "A blade welded to the vehicle for cutting up zombies."
-msgstr ""
+msgstr "一把焊在车上的刀，用来切僵尸。"
 
 #. ~ Description of vehicle part "shredder"
 #: data/json/vehicleparts/rams.json
@@ -294407,7 +294407,7 @@ msgstr "一个绑到载具上的床垫，可以用来吸收冲击。"
 #. ~ Description of vehicle part "spike"
 #: data/json/vehicleparts/rams.json
 msgid "A metal spike welded to the vehicle to increase injury when crashing into things."
-msgstr ""
+msgstr "一个焊在车上的金属尖刺，用来在撞东西时增加伤害。"
 
 #. ~ Description of vehicle part ""
 #: data/json/vehicleparts/rams.json
@@ -294417,7 +294417,7 @@ msgstr "一个强化撞锤。将它安装在载具的边沿能减少碰撞对载
 #. ~ Description of vehicle part "wooden spike"
 #: data/json/vehicleparts/rams.json
 msgid "A wooden spike attached to the vehicle to increase injury when crashing into things."
-msgstr ""
+msgstr "一个木钉固定在车辆上，用来在撞东西时增加伤害。"
 
 #. ~ Vehicle part name
 #: data/json/vehicleparts/rams.json
@@ -294427,7 +294427,7 @@ msgstr "硅化甲壳撞锤"
 #. ~ Vehicle part name
 #: data/json/vehicleparts/rams.json
 msgid "blade"
-msgstr ""
+msgstr "刀片"
 
 #. ~ Vehicle part name
 #: data/json/vehicleparts/rams.json
@@ -295717,7 +295717,7 @@ msgstr "此处的照明物不能照亮附近的方格。"
 #. ~ Description of JSON flag "FURNITURE_LIFT_ASSIST"
 #: data/json/vehicleparts/vp_flags.json
 msgid "It's much easier to tie down a furniture here."
-msgstr ""
+msgstr "在这里把家具固定住要容易得多。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "CARGO_PASSABLE"
@@ -295925,7 +295925,7 @@ msgstr "你的载具需要至少一个转向轮来转向。"
 #. ~ Description of vehicle part "armored wheel"
 #: data/json/vehicleparts/wheel.json
 msgid "A heavy-duty wheel with a reinforced run-flat tire."
-msgstr ""
+msgstr "一个配有加固防爆轮胎的重型车轮。"
 
 #. ~ Description of vehicle part "skateboard trucks"
 #: data/json/vehicleparts/wheel.json
@@ -296095,7 +296095,7 @@ msgstr "由透明亚克力硬板制成的临时挡风玻璃。  它可以挡风�
 #. ~ Description of vehicle part "reinforced windshield"
 #: data/json/vehicleparts/windshields.json
 msgid "A sheet of glass that lets you see outside the vehicle.  Reinforced with metal brackets and slats to make it harder to break."
-msgstr ""
+msgstr "一块让你可以看向车外的玻璃。用金属支架和条纹加固，使其更难打破。"
 
 #. ~ Description of vehicle part "windshield"
 #: data/json/vehicleparts/windshields.json
@@ -297181,7 +297181,7 @@ msgstr "空样板"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Acetaminophen"
-msgstr ""
+msgstr "对乙酰氨基酚"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297196,7 +297196,7 @@ msgstr "新人类诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Amphetamine"
-msgstr ""
+msgstr "安非他命"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297236,7 +297236,7 @@ msgstr "牛科诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Caffeine"
-msgstr ""
+msgstr "咖啡因"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297251,7 +297251,7 @@ msgstr "犬类诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Cannabis"
-msgstr ""
+msgstr "大麻"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297271,7 +297271,7 @@ msgstr "蝙蝠诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Cocaine"
-msgstr ""
+msgstr "可卡因"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297291,12 +297291,12 @@ msgstr "寄生蜂幼体"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Dextromethorphan"
-msgstr ""
+msgstr "右美沙芬"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Diphenhydramine"
-msgstr ""
+msgstr "苯海拉明"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297341,7 +297341,7 @@ msgstr "奶"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Morphine Milligram Equivalent"
-msgstr ""
+msgstr "吗啡毫克当量"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297356,17 +297356,17 @@ msgstr "诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "NSAID (Blood Pressure)"
-msgstr ""
+msgstr "非甾体抗炎药（血压）"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Naloxone"
-msgstr ""
+msgstr "纳洛酮"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Naproxen Sodium"
-msgstr ""
+msgstr "萘普生钠"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297376,7 +297376,7 @@ msgstr "尼古丁"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Non-Steroidal Anti-Inflammatory Drug"
-msgstr ""
+msgstr "非甾体抗炎药"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297416,7 +297416,7 @@ msgstr "变形怪诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Slow-release Nicotine"
-msgstr ""
+msgstr "缓释尼古丁"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297436,7 +297436,7 @@ msgstr "毒素"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Tramadol"
-msgstr ""
+msgstr "曲马多"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297451,7 +297451,7 @@ msgstr "熊科诱变剂"
 #. ~ Vitamin name
 #: data/json/vitamin.json
 msgid "Vegetable"
-msgstr ""
+msgstr "蔬菜"
 
 #. ~ Vitamin name
 #: data/json/vitamin.json
@@ -297686,7 +297686,7 @@ msgstr "同伴调查噪音区域"
 #. ~ Field intensity level
 #: data/json/zone_field_type.json
 msgid "NPC no-go zone"
-msgstr ""
+msgstr "NPC 禁区"
 
 #. ~ Field intensity level
 #: data/json/zone_field_type.json
@@ -298151,7 +298151,7 @@ msgstr "同伴：噪音调查区"
 #. ~ Name of loot zone
 #: data/json/zones.json
 msgid "NPC No-Go Area"
-msgstr ""
+msgstr "NPC禁止的区域"
 
 #. ~ Name of loot zone
 #: data/json/zones.json
@@ -298161,7 +298161,7 @@ msgstr "同伴：撤退区"
 #. ~ Description of loot zone "NPC No-Go Area"
 #: data/json/zones.json
 msgid "NPCs of this faction will not seek needs-driven targets inside this zone."
-msgstr ""
+msgstr "这个阵营的NPC不会在这个区域内寻找基于需求的目标。"
 
 #. ~ Name of loot zone
 #: data/json/zones.json
@@ -302327,7 +302327,7 @@ msgstr "特大都市"
 #. ~ Description of MOD "Megacity"
 #: data/mods/Megacity/modinfo.json
 msgid "The world is entirely covered by a single, unending city.  NOTE: Expect long load times!"
-msgstr ""
+msgstr "整个世界都被一个单一的、无尽的城市覆盖。注意：加载时间可能会很长！"
 
 #. ~ Description of terrain "glyptodont-shell shelter"
 #: data/mods/Megafauna/furniture_and_terrain/terrain-manufactured.json
@@ -302816,7 +302816,7 @@ msgstr[0] "剑齿虎"
 #: data/mods/Megafauna/monsters/mf_predators.json
 msgid "saber-toothed cub"
 msgid_plural "saber-toothed cubs"
-msgstr[0] ""
+msgstr[0] "剑齿虎幼崽"
 
 #. ~ Monster name
 #: data/mods/Megafauna/monsters/mf_predators.json
@@ -312857,7 +312857,7 @@ msgstr "快速读取"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Quicksave (Warning: may cause save corruption!)"
-msgstr ""
+msgstr "快速保存（警告：可能会导致存档损坏！）"
 
 #. ~ Key binding name
 #: data/raw/keybindings.json
@@ -313657,7 +313657,7 @@ msgstr "切换自动清空"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Toggle automatic shutdown on empty fuel"
-msgstr ""
+msgstr "切换油空自动关机"
 
 #. ~ Key binding name
 #: data/raw/keybindings.json
@@ -314062,7 +314062,7 @@ msgstr "取消射击后是否卸载弓等"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Whitelist Contents"
-msgstr ""
+msgstr "白名单内容"
 
 #. ~ Key binding name
 #: data/raw/keybindings.json
@@ -314417,7 +314417,7 @@ msgstr "开/关充电器"
 #. ~ Key binding name
 #: data/raw/keybindings/vehicle.json
 msgid "Toggle rockwheel"
-msgstr ""
+msgstr "切换铣挖机"
 
 #. ~ Key binding name
 #: data/raw/keybindings/vehicle.json
@@ -314762,17 +314762,17 @@ msgstr "<npcname> 无法脱下自体护甲。"
 #: src/activity_actor.cpp:1764
 #, c-format
 msgid "You plug your %s into the %s."
-msgstr ""
+msgstr "你把你的%s插入%s。"
 
 #: src/activity_actor.cpp:1766
 #, c-format
 msgid "<npcname> plugs their %s into the %s."
-msgstr ""
+msgstr "<npcname> 把他们的%s插入%s。"
 
 #: src/activity_actor.cpp:1774
 #, c-format
 msgid "%1$s can't find a nearby power grid to plug their %2$s into."
-msgstr ""
+msgstr "%1$s 找不到附近的电网来给他们的 %2$s 插电。"
 
 #: src/activity_actor.cpp:1799 src/character.cpp:12830 src/npc.cpp:1381
 msgid "It's too dark to read!"
@@ -314854,42 +314854,42 @@ msgstr "%s 提升了他们的 %s 技能等级。"
 #: src/activity_actor.cpp:2228
 #, c-format
 msgid "You finish reading ebook %s."
-msgstr ""
+msgstr "你完成 %s 电子版的阅读。"
 
 #: src/activity_actor.cpp:2230
 #, c-format
 msgid "<npcname> finishes reading ebook %s."
-msgstr ""
+msgstr "<npcname> 完成 %s 电子版的阅读。"
 
 #: src/activity_actor.cpp:2234
 #, c-format
 msgid "You finish reading %s."
-msgstr ""
+msgstr "你完成 %s 的阅读。"
 
 #: src/activity_actor.cpp:2236
 #, c-format
 msgid "<npcname> finishes reading %s."
-msgstr ""
+msgstr "<npcname> 完成 %s 的阅读。"
 
 #: src/activity_actor.cpp:2250
 #, c-format
 msgid "You stop reading ebook %s."
-msgstr ""
+msgstr "你停止阅读 %s 电子版。"
 
 #: src/activity_actor.cpp:2252
 #, c-format
 msgid "<npcname> stops reading ebook %s."
-msgstr ""
+msgstr "<npcname> 停止阅读 %s 电子版。"
 
 #: src/activity_actor.cpp:2256
 #, c-format
 msgid "You stop reading %s."
-msgstr ""
+msgstr "你停止阅读 %s。"
 
 #: src/activity_actor.cpp:2258
 #, c-format
 msgid "<npcname> stops reading %s."
-msgstr ""
+msgstr "<npcname> 停止阅读 %s。"
 
 #. ~ skill_name current_skill_level -> next_skill_level (% to next level)
 #: src/activity_actor.cpp:2303
@@ -314900,11 +314900,11 @@ msgstr "%1$s %2$d -> %3$d（%4$d%%）"
 
 #: src/activity_actor.cpp:2424 src/handle_action.cpp:854
 msgid "You have lost track of what you were hauling."
-msgstr ""
+msgstr "你已失去搬运的东西。"
 
 #: src/activity_actor.cpp:2428
 msgid "You lose track of some items as there isn't room to haul them along."
-msgstr ""
+msgstr "你会丢失一些物品，因为没有空间带。"
 
 #: src/activity_actor.cpp:2483
 msgid "Moving canceled auto-pickup."
@@ -315495,7 +315495,7 @@ msgstr "%1$s（%2$d）"
 
 #: src/activity_actor.cpp:6371
 msgid "You can't disassemble an item while you're wearing it."
-msgstr ""
+msgstr "你没法拆解它因为你正穿着。"
 
 #: src/activity_actor.cpp:6377
 msgid "You no longer have the in progress disassembly in your possession.  You stop disassembling.  Reactivate the in progress disassembly to continue disassembling."
@@ -316716,22 +316716,22 @@ msgstr "完成%s任务所需的物品不可用。"
 #: src/activity_item_handling.cpp:3400
 #, c-format
 msgid "You start reading ebook %s."
-msgstr ""
+msgstr "你开始阅读 %s 电子版。"
 
 #: src/activity_item_handling.cpp:3401
 #, c-format
 msgid "<npcname> starts reading ebook %s."
-msgstr ""
+msgstr "<npcname> 开始阅读 %s 电子版。"
 
 #: src/activity_item_handling.cpp:3404
 #, c-format
 msgid "You start reading %s."
-msgstr ""
+msgstr "你开始阅读 %s。"
 
 #: src/activity_item_handling.cpp:3405
 #, c-format
 msgid "<npcname> starts reading %s."
-msgstr ""
+msgstr "<npcname> 开始阅读 %s。"
 
 #: src/activity_item_handling.cpp:3663
 msgid "It is too dark to work here."
@@ -318441,7 +318441,7 @@ msgstr "唰啦！"
 
 #: src/ballistics.cpp:535
 msgid "Your shot is blocked by the surface."
-msgstr ""
+msgstr "你的射击被表面挡住了。"
 
 #: src/ballistics.cpp:656
 #, c-format
@@ -318621,7 +318621,7 @@ msgstr "你没有足够能量激活%s。"
 #: src/bionics.cpp:833
 #, c-format
 msgid "You are unable to engage your %s."
-msgstr ""
+msgstr "你无法使用你的 %s 。"
 
 #: src/bionics.cpp:849
 #, c-format
@@ -318925,22 +318925,22 @@ msgstr "<npcname> 的 %s 燃料耗尽，停止工作。"
 #: src/bionics.cpp:1502
 #, c-format
 msgid "Your %s does not currently have enough fuel to produce energy."
-msgstr ""
+msgstr "你的 %s 目前燃料不足，无法产生能量。"
 
 #: src/bionics.cpp:1503
 #, c-format
 msgid "<npcname>'s %s does not currently have enough fuel to produce energy."
-msgstr ""
+msgstr "<npcname>的 %s 目前燃料不足，无法产生能量。"
 
 #: src/bionics.cpp:1595
 #, c-format
 msgid "Your %s runs out of fuel."
-msgstr ""
+msgstr "你的 %s 用完了燃料。"
 
 #: src/bionics.cpp:1596
 #, c-format
 msgid "<npcname>'s %s runs out of fuel."
-msgstr ""
+msgstr "<npcname>的 %s 用完了燃料。"
 
 #: src/bionics.cpp:1769
 #, c-format
@@ -319326,7 +319326,7 @@ msgstr "生化能量：<color_light_blue>%s</color>/<color_light_blue>%ikJ</colo
 #: src/bionics_ui.cpp:287
 #, c-format
 msgid "[<color_yellow>%s</color>] Reassign, [<color_yellow>%s</color>] Switch tabs, [<color_yellow>%s</color>] Toggle fuel saving mode, [<color_yellow>%s</color>] Toggle sprite visibility, [<color_yellow>%s</color>] Toggle shutdown on empty, "
-msgstr ""
+msgstr "[<color_yellow>%s</color>] 重新分配, [<color_yellow>%s</color>] 切换标签, [<color_yellow>%s</color>] 切换节能模式, [<color_yellow>%s</color>] 切换可见, [<color_yellow>%s</color>] 空时关闭, "
 
 #: src/bionics_ui.cpp:292
 #, c-format
@@ -319386,7 +319386,7 @@ msgstr "（失效）"
 
 #: src/bionics_ui.cpp:348
 msgid "(shutdown off)"
-msgstr ""
+msgstr "(关闭)"
 
 #: src/bionics_ui.cpp:351
 msgid "(hidden)"
@@ -319459,7 +319459,7 @@ msgstr "你不能在没有燃料的CBM上开关节能模式。"
 
 #: src/bionics_ui.cpp:885
 msgid "You can't toggle shutdown on empty mode on a non-fueled CBM."
-msgstr ""
+msgstr "你不能在没有燃料的 CBM 上切换无模式关机。"
 
 #: src/bionics_ui.cpp:953
 msgid "Select action"
@@ -320176,7 +320176,7 @@ msgstr "中世纪农夫"
 
 #: src/character.cpp:1042
 msgid "yeet"
-msgstr ""
+msgstr "扔"
 
 #: src/character.cpp:1044
 msgid "launch"
@@ -320422,7 +320422,7 @@ msgstr "你死于严重脱水。"
 
 #: src/character.cpp:5873
 msgid "You need water badly.  It's hard to think about anything else."
-msgstr ""
+msgstr "你非常需要水，除此之外不想要任何东西。"
 
 #: src/character.cpp:5875
 msgid "You are THIRSTY!"
@@ -320434,7 +320434,7 @@ msgstr "你感到嘴很干……"
 
 #: src/character.cpp:5884
 msgid "You're so sleepy, you can't help blacking out."
-msgstr ""
+msgstr "你太困了，不自觉地两眼发黑。"
 
 #: src/character.cpp:5889
 msgid "Anywhere would be a good place to sleep…"
@@ -320446,7 +320446,7 @@ msgstr "你觉得你好像好几天没有睡过觉了。"
 
 #: src/character.cpp:5900
 msgid "You need sleep."
-msgstr ""
+msgstr "你该睡下。"
 
 #: src/character.cpp:5910
 msgid "How much longer until bedtime?"
@@ -320458,7 +320458,7 @@ msgstr "*哈欠* 你真的该睡觉了。"
 
 #: src/character.cpp:5931
 msgid "It's been a while since you've slept well, it's fraying at your nerves."
-msgstr ""
+msgstr "你已经好久没睡好了，这让你神经绷紧。"
 
 #: src/character.cpp:5935
 msgid "Your mind feels foggy from a lack of good sleep, and your eyes keep trying to close against your will."
@@ -320466,19 +320466,19 @@ msgstr "你的头脑会因为睡眠不足而感到有些迷糊，你的眼睛总
 
 #: src/character.cpp:5942
 msgid "You feel dazed from lack of sleep."
-msgstr ""
+msgstr "你缺少睡眠而发困。"
 
 #: src/character.cpp:5950
 msgid "You can't concentrate.  You need sleep."
-msgstr ""
+msgstr "你无法集中精神。你该睡一下。"
 
 #: src/character.cpp:5966
 msgid "Your pass out, unable to go on without sleep."
-msgstr ""
+msgstr "你昏倒了，缺少睡眠而无法继续。"
 
 #: src/character.cpp:5967
 msgid "<npcname> passes out, unable to go on without sleep."
-msgstr ""
+msgstr "<npcname> 昏倒了，缺少睡眠而无法继续。"
 
 #: src/character.cpp:6093 src/character_guns.cpp:215
 #, c-format
@@ -320749,12 +320749,12 @@ msgstr "错误！"
 #: src/character.cpp:8093
 #, c-format
 msgid "Your %s comes free!"
-msgstr ""
+msgstr "你的 %s 挣脱束缚！"
 
 #: src/character.cpp:8094
 #, c-format
 msgid "<npcname>'s %s comes free!"
-msgstr ""
+msgstr "<npcname>的 %s 挣脱束缚！"
 
 #: src/character.cpp:8316
 msgid "You can't wield a part of your body."
@@ -320888,11 +320888,11 @@ msgstr "你的头发分开成 %s！"
 #: src/character.cpp:8622
 #, c-format
 msgid "The hit makes %1$s lose their balance!"
-msgstr ""
+msgstr "这一击让 %1$s 失去平衡！"
 
 #: src/character.cpp:8625
 msgid "The hit makes you lose your balance!"
-msgstr ""
+msgstr "这一击让你失去平衡！"
 
 #: src/character.cpp:8701
 #, c-format
@@ -321086,11 +321086,11 @@ msgstr "游泳脚蹼"
 
 #: src/character.cpp:10798
 msgid "Flat Ground"
-msgstr ""
+msgstr "平地"
 
 #: src/character.cpp:10804
 msgid "Rough Terrain"
-msgstr ""
+msgstr "崎岖地形"
 
 #: src/character.cpp:10811
 msgid "Bonuses Capped"
@@ -321126,7 +321126,7 @@ msgstr "右边没穿鞋"
 
 #: src/character.cpp:10895 src/character.cpp:10898 src/init.cpp:808
 msgid "Modifiers"
-msgstr ""
+msgstr "装饰"
 
 #: src/character.cpp:10905 src/options.cpp:1607
 msgid "Running"
@@ -321842,17 +321842,17 @@ msgstr "<npcname> 没有穿戴那件物品。"
 #: src/character_attire.cpp:1288
 #, c-format
 msgid "Can't wear more than one %s."
-msgstr ""
+msgstr "在 %s 之上不能再穿戴一件。"
 
 #: src/character_attire.cpp:1294
 #, c-format
 msgid "%1$s conflicts with %2$s."
-msgstr ""
+msgstr "%1$s 和 %2$s 相冲突。"
 
 #: src/character_attire.cpp:1348 src/character_attire.cpp:1362 src/character_attire.cpp:1382
 #, c-format
 msgid "Can't wear more than one rigid item on %s."
-msgstr ""
+msgstr "在 %s 之上无法再穿戴一件硬质物品。"
 
 #: src/character_attire.cpp:1947
 msgid "Droplets of"
@@ -321988,11 +321988,11 @@ msgstr "你感到你的%s开始升温。"
 
 #: src/character_body.cpp:898
 msgid "You are too cold to sleep."
-msgstr ""
+msgstr "你冷到睡不着。"
 
 #: src/character_body.cpp:901
 msgid "You are too cold.  If you sleep now, you might never wake up."
-msgstr ""
+msgstr "你感觉相当冷。如果现在睡恐怕一睡不起。"
 
 #: src/character_body.cpp:911
 #, c-format
@@ -322041,7 +322041,7 @@ msgstr "你 %s 上的已消毒伤口被完全污染了！"
 
 #: src/character_body.cpp:1333
 msgid "It is injured beyond use, but will recover on its own in time."
-msgstr ""
+msgstr "它受伤到残废，但时间久了会自行恢复。"
 
 #: src/character_body.cpp:1336
 msgid "It is broken, but has been set, and just needs time to heal."
@@ -322262,7 +322262,7 @@ msgstr "<npcname> 试着挣脱但是失败了！"
 #: src/character_escape.cpp:438
 #, c-format
 msgid "The %s struggles against its bonds!"
-msgstr ""
+msgstr "%s 正拼命挣脱束缚！"
 
 #: src/character_escape.cpp:457
 msgid "You free yourself!"
@@ -322274,7 +322274,7 @@ msgstr "<npcname> 挣脱了出来！"
 
 #: src/character_escape.cpp:460
 msgid "You only manage to partially break free."
-msgstr ""
+msgstr "你只能部分挣脱出来。"
 
 #: src/character_escape.cpp:462
 msgid "You try to free yourself, but can't!"
@@ -322442,11 +322442,11 @@ msgstr "无建筑"
 #: src/clzones.cpp:425
 #, c-format
 msgid "Custom Storage: %s"
-msgstr ""
+msgstr "自定义储放：%s"
 
 #: src/clzones.cpp:427
 msgid "Custom Storage: No Filter"
-msgstr ""
+msgstr "自定义储放：无过滤"
 
 #: src/clzones.cpp:448 src/clzones.cpp:495
 msgid "Unload: "
@@ -322910,15 +322910,15 @@ msgstr "错误：只能使用血液样品。"
 
 #: src/computer_session.cpp:1003
 msgid "Result: Human blood.  Results nominal."
-msgstr ""
+msgstr "结果：人类血型。结果正常。"
 
 #: src/computer_session.cpp:1006
 msgid "Result: Human blood.  Systemic necrosis detected."
-msgstr ""
+msgstr "结果：人类血型。检测到全身坏死。"
 
 #: src/computer_session.cpp:1008
 msgid "Result: Unknown blood type.  Systemic necrosis detected."
-msgstr ""
+msgstr "结果：血型不明。检测到全身坏死。"
 
 #: src/computer_session.cpp:1012
 msgid "Download data?"
@@ -323345,7 +323345,7 @@ msgstr "需求："
 #: src/construction.cpp:713
 #, c-format
 msgid "Required conditions: %s"
-msgstr ""
+msgstr "需要条件：%s"
 
 #: src/construction.cpp:716
 msgid "Annotation: "
@@ -323837,7 +323837,7 @@ msgstr "嗯，这是零食的味道。"
 #. with that information.
 #: src/consumption.cpp:1456
 msgid "A veritable smorgasbord!"
-msgstr ""
+msgstr "真正的美味大餐！"
 
 #: src/consumption.cpp:1458
 msgid "Snack attack!"
@@ -323968,15 +323968,15 @@ msgstr "你在驾驶载具时无法屠宰！"
 
 #: src/crafting.cpp:172
 msgid "<npcname> can't craft while driving!"
-msgstr ""
+msgstr "<npcname> 不能驾驶时制作！"
 
 #: src/crafting.cpp:179
 msgid "You can't craft while playing an instrument!"
-msgstr ""
+msgstr "你不能弹奏乐器时制作！"
 
 #: src/crafting.cpp:180
 msgid "<npcname> can't craft while playing an instrument!"
-msgstr ""
+msgstr "<npcname> 不能弹奏乐器时制作！"
 
 #: src/crafting.cpp:185
 msgid "Overmap terrain building recipes are not implemented yet!"
@@ -324115,37 +324115,39 @@ msgid ""
 "Step: %s (%s)\n"
 "What do you want to do?"
 msgstr ""
+"步骤：%s (%s)\n"
+"想做什么？"
 
 #: src/crafting.cpp:1099
 msgid "Wait for it to finish"
-msgstr ""
+msgstr "待其完成"
 
 #: src/crafting.cpp:1100
 msgid "Do something else"
-msgstr ""
+msgstr "做别的"
 
 #: src/crafting.cpp:1102
 msgid "Set a timer"
-msgstr ""
+msgstr "设置计时器"
 
 #: src/crafting.cpp:1118
 msgid "Set an alarm for when?"
-msgstr ""
+msgstr "设置什么时候的闹钟？"
 
 #: src/crafting.cpp:1124
 #, c-format
 msgid "When the step finishes (%s)"
-msgstr ""
+msgstr "什么单位时间结束（%s）"
 
 #: src/crafting.cpp:1127
 #, c-format
 msgid "5 minutes before (%s in)"
-msgstr ""
+msgstr "五分钟以前（%s 后）"
 
 #: src/crafting.cpp:1286 src/crafting.cpp:1328
 #, c-format
 msgid "%s is ready."
-msgstr ""
+msgstr "%s 准备待蓄。"
 
 #: src/crafting.cpp:1329
 #, c-format
@@ -324825,7 +324827,7 @@ msgstr "疼痛"
 
 #: src/crafting_gui.cpp:1482
 msgid "int bonus"
-msgstr ""
+msgstr "时效"
 
 #: src/crafting_gui.cpp:1532
 msgid "Searched"
@@ -361265,7 +361267,7 @@ msgstr "信心"
 
 #: src/ranged.cpp:2129
 msgid "Moves to load"
-msgstr ""
+msgstr "移动装填"
 
 #: src/ranged.cpp:2136
 msgid "Moves to fire"
