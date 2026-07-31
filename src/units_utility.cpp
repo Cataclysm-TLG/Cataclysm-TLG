@@ -124,7 +124,7 @@ double convert_velocity( int velocity, const units_type vel_units )
 double convert_weight( const units::mass &weight )
 {
     double ret = to_gram( weight );
-        ret /= 1000;
+    ret /= 1000;
     return ret;
 }
 
@@ -212,8 +212,8 @@ double convert_volume( int volume, int *out_scale )
 {
     double ret = volume;
     int scale = 0;
-        ret *= 0.001;
-        scale = 2;
+    ret *= 0.001;
+    scale = 2;
     if( out_scale != nullptr ) {
         *out_scale = scale;
     }

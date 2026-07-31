@@ -1790,7 +1790,7 @@ void options_manager::add_options_interface()
                                           to_translation( "Options regarding measurement units." ) ),
     [&]( const std::string & page_id ) {
         add( "USE_CELSIUS", page_id, to_translation( "Temperature units" ),
-             to_translation( "Switch between Fahrenheit, Celsius, and Kelvin." ),
+             to_translation( "Switch between Fahrenheit and Celsius." ),
         { { "fahrenheit", to_translation( "Fahrenheit" ) }, { "celsius", to_translation( "Celsius" ) } },
         "fahrenheit"
            );
