@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-08-01 14:31+0800\n"
+"PO-Revision-Date: 2026-08-01 22:22+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.8\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -335744,7 +335744,7 @@ msgstr "你越过了障碍物。"
 
 #: src/iexamine.cpp:1548
 msgid "You are too heavy to climb over."
-msgstr "你太重了，骑不上 %s"
+msgstr "你太重了，无法爬过去。"
 
 #: src/iexamine.cpp:1552
 msgid "Climbing this obstacle is trivial for one such as you."
@@ -352938,7 +352938,7 @@ msgstr "骑乘需要1级生存"
 #: src/monexamine.cpp:715
 #, c-format
 msgid "You are too heavy to mount %s"
-msgstr "你太重了，骑不上 %s"
+msgstr "你太重了，无法骑上 %s"
 
 #: src/monexamine.cpp:718
 msgid "You require survival skill 4 to ride without a saddle"
