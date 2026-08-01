@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-08-01 11:51+0800\n"
+"PO-Revision-Date: 2026-08-01 14:31+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -134545,7 +134545,7 @@ msgstr "你需要一个火源！"
 #: data/json/items/tool/explosives.json
 #, c-format
 msgid "You open the %s's release valve."
-msgstr ""
+msgstr "你打开了 %s 的排气阀。"
 
 #. ~ "msg" action message of item "packed M72 LAW"
 #: data/json/items/tool/explosives.json
@@ -134589,13 +134589,13 @@ msgstr[0] "酸液炸弹"
 #: data/json/items/tool/explosives.json
 msgid "barrel bomb"
 msgid_plural "barrel bombs"
-msgstr[0] ""
+msgstr[0] "桶装炸弹 "
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "bug bomb"
 msgid_plural "bug bombs"
-msgstr[0] ""
+msgstr[0] "杀虫炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -134631,7 +134631,7 @@ msgstr[0] "闪光弹"
 #: data/json/items/tool/explosives.json
 msgid "frag grenade"
 msgid_plural "frag grenades"
-msgstr[0] ""
+msgstr[0] "破片手榴弹 "
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -134649,43 +134649,43 @@ msgstr[0] "自制炸药包"
 #: data/json/items/tool/explosives.json
 msgid "improvised HE bomb"
 msgid_plural "improvised HE bombs"
-msgstr[0] ""
+msgstr[0] "自制高爆炸弹  "
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised HE grenade"
 msgid_plural "improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised bomb"
 msgid_plural "improvised bombs"
-msgstr[0] ""
+msgstr[0] "自制炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised fungicide grenade"
 msgid_plural "improvised fungicide grenades"
-msgstr[0] ""
+msgstr[0] "自制杀菌榴弹 "
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised gas grenade"
 msgid_plural "improvised gas grenades"
-msgstr[0] ""
+msgstr[0] "自制毒气榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised grenade"
 msgid_plural "improvised grenades"
-msgstr[0] ""
+msgstr[0] "自制榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised insecticide grenade"
 msgid_plural "improvised insecticide grenades"
-msgstr[0] ""
+msgstr[0] "自制杀虫榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -134697,193 +134697,193 @@ msgstr[0] "燃烧手雷"
 #: data/json/items/tool/explosives.json
 msgid "keg bomb"
 msgid_plural "keg bombs"
-msgstr[0] ""
+msgstr[0] "凯格炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit HE keg bomb"
 msgid_plural "lit HE keg bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的高爆凯格炸药"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit barrel bomb"
 msgid_plural "lit barrel bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的桶装炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit dynamite"
 msgid_plural "lit sticks of dynamite"
-msgstr[0] ""
+msgstr[0] "已点燃的炸药"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit dynamite bundle"
 msgid_plural "lit dynamite bundles"
-msgstr[0] ""
+msgstr[0] "已点燃的炸药束"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit firecracker"
 msgid_plural "lit firecrackers"
-msgstr[0] ""
+msgstr[0] "已点燃的鞭炮"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit homemade demolition charge"
 msgid_plural "lit homemade demolition charges"
-msgstr[0] ""
+msgstr[0] "已点燃的自制爆破炸药"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit homemade grenade"
 msgid_plural "lit homemade grenades"
-msgstr[0] ""
+msgstr[0] "已点燃的自制榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit improvised HE grenade"
 msgid_plural "lit improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "已点燃的自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit improvised bomb"
 msgid_plural "lit improvised bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的自制炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit keg bomb"
 msgid_plural "lit keg bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的桶装炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit pack of firecrackers"
 msgid_plural "lit packs of firecrackers"
-msgstr[0] ""
+msgstr[0] "已点燃的成串鞭炮"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit pipe bomb"
 msgid_plural "lit pipe bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的管状炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit small improvised HE grenade"
 msgid_plural "lit small improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "已点燃的小型自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit small improvised grenade"
 msgid_plural "lit small improvised grenades"
-msgstr[0] ""
+msgstr[0] "已点燃的小型自制榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live C-4 explosive"
 msgid_plural "live C-4 explosives"
-msgstr[0] ""
+msgstr[0] "待引爆的C-4炸药"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live EMP bomb"
 msgid_plural "live EMP bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的电磁脉冲炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live EMP grenade"
 msgid_plural "live EMP grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的电磁脉冲手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live HE pipe bomb"
 msgid_plural "live HE pipe bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的高爆管状炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live SADM mininuke"
 msgid_plural "live SADM mininukes"
-msgstr[0] ""
+msgstr[0] "待引爆的SADM微型核弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live bug bomb"
 msgid_plural "live bug bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的杀虫炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live flashbang"
 msgid_plural "live flashbangs"
-msgstr[0] ""
+msgstr[0] "待引爆的闪光弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live frag grenade"
 msgid_plural "live frag grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的破片手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live fungicidal gas canister"
 msgid_plural "live fungicidal gas canisters"
-msgstr[0] ""
+msgstr[0] "待引爆的杀菌毒气罐"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live improvised HE bomb"
 msgid_plural "live improvised HE bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的自制高爆炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live improvised fungicide grenade"
 msgid_plural "live improvised fungicide grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的自制杀菌榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live improvised gas grenade"
 msgid_plural "live improvised gas grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的自制毒气榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live improvised insecticide grenade"
 msgid_plural "live improvised insecticide grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的自制杀虫榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live incendiary grenade"
 msgid_plural "live incendiary grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的燃烧手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live scrambler grenade"
 msgid_plural "live scrambler grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的干扰手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live smoke bomb"
 msgid_plural "live smoke bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的烟雾弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live tear gas grenade"
 msgid_plural "live tear gas grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的催泪瓦斯手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -134919,13 +134919,13 @@ msgstr[0] "扰频手雷"
 #: data/json/items/tool/explosives.json
 msgid "small improvised HE grenade"
 msgid_plural "small improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "小型自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "small improvised grenade"
 msgid_plural "small improvised grenades"
-msgstr[0] ""
+msgstr[0] "小型自制榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -135602,12 +135602,12 @@ msgstr "老式农业工具，专门用来割杂草。尽管它的棍子末端装
 #. (on)"
 #: data/json/items/tool/landscaping.json
 msgid "The hedge trimmer rumbles."
-msgstr ""
+msgstr "绿篱修剪机隆隆作响。"
 
 #. ~ Description of "hedge trimmer (on)"
 #: data/json/items/tool/landscaping.json
 msgid "This hedge trimmer is on and making a lot of noise.  Use it to turn it off."
-msgstr ""
+msgstr "这台绿篱修剪机已开启，正发出很大噪音。使用它可以将其关闭。"
 
 #. ~ value of variable 'success_message' in effect in EoC
 #. "EOC_toolweapon_activate__trimmer" in use action of item "hedge trimmer
@@ -135795,7 +135795,7 @@ msgstr "一个小型的防水手电筒，配有铝制握柄，由电池供电。
 #. ~ Description of "LED strip (inactive)"
 #: data/json/items/tool/lighting.json
 msgid "A one meter strip of LED lights, usually used for decoration or accent lighting."
-msgstr ""
+msgstr "一条一米长的LED灯带，通常用于装饰或氛围照明。"
 
 #. ~ Description of "flare"
 #: data/json/items/tool/lighting.json
@@ -135909,7 +135909,7 @@ msgstr "打开灯罩"
 #. ~ Description of "atomic lamp"
 #: data/json/items/tool/lighting.json
 msgid "Powered by the magic of nuclear decay and low-energy LEDs, this device will provide just enough light to read by for at least a decade.  Use it to close the cover and hide the light."
-msgstr ""
+msgstr "由核衰变和低能耗LED灯的神奇力量驱动，这台装置能提供至少持续十年的阅读光线。使用它可以合上盖子以遮住光线。"
 
 #. ~ Description of "atomic lamp (covered)"
 #: data/json/items/tool/lighting.json
@@ -136310,7 +136310,7 @@ msgstr "一台用于切割混凝土或其他表面的建筑工具。它采用带
 #. ~ Description of "heavy masonry saw (off)"
 #: data/json/items/tool/masonry.json
 msgid "A heavy construction tool for cutting demolishing concrete.  It runs on gasoline.  Using this item will cause it to turn on, turning it into a formidable demolition tool, a terrible chainsaw, and an unwieldy melee weapon."
-msgstr ""
+msgstr "一种用于切割和拆除混凝土的重型施工工具。以汽油为燃料。使用此物品可将其启动，使其成为一台强大的拆解工具、一把可怕的链锯，以及一件笨重的近战武器。"
 
 #. ~ "menu_text" action message of item "electric masonry saw (off)"
 #. ~ "menu_text" action message of item "electric masonry saw (on)"
@@ -136325,28 +136325,28 @@ msgstr "插入/拔出"
 #: data/json/items/tool/masonry.json
 #, c-format
 msgid "The %s goes quiet."
-msgstr ""
+msgstr "%s 安静了下来。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__electric_masonrysaw" in use action of item
 #. "electric masonry saw (on)"
 #: data/json/items/tool/masonry.json
 msgid "The electric masonry saw buzzes."
-msgstr ""
+msgstr "电动砌体锯嗡嗡作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__heavy_masonrysaw" in use action of item "heavy
 #. masonry saw (on)"
 #: data/json/items/tool/masonry.json
 msgid "The heavy masonry saw buzzes."
-msgstr ""
+msgstr "重型砌体锯嗡嗡作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__masonrysaw" in use action of item "masonry saw
 #. (on)"
 #: data/json/items/tool/masonry.json
 msgid "The masonry saw buzzes."
-msgstr ""
+msgstr "砌体锯嗡嗡作响。"
 
 #. ~ Description of "electric masonry saw (on)"
 #: data/json/items/tool/masonry.json
@@ -136396,13 +136396,13 @@ msgstr[0] "角磨刀片"
 #: data/json/items/tool/masonry.json
 msgid "heavy masonry saw (off)"
 msgid_plural "heavy masonry saws (off)"
-msgstr[0] ""
+msgstr[0] "重型砌体锯（关闭）"
 
 #. ~ Item name
 #: data/json/items/tool/masonry.json
 msgid "heavy masonry saw (on)"
 msgid_plural "heavy masonry saws (on)"
-msgstr[0] ""
+msgstr[0] "重型砌体锯（开启）"
 
 #. ~ Item name
 #: data/json/items/tool/masonry.json
@@ -136579,7 +136579,7 @@ msgstr "你可以用它来减轻失血的症状。需要 4 级医疗技能。"
 #. action of item "huge saline infusion kit"
 #: data/json/items/tool/med.json
 msgid "You lack the medical skill to run an IV."
-msgstr ""
+msgstr "你缺乏操作静脉输液的医疗技能。"
 
 #. ~ "msg" action message of item "wrapped radiation badge"
 #: data/json/items/tool/med.json
@@ -136680,7 +136680,7 @@ msgstr[0] "输氧器"
 #: data/json/items/tool/med.json
 msgid "saline infusion kit"
 msgid_plural "saline infusion kits"
-msgstr[0] ""
+msgstr[0] "生理盐水输液套件"
 
 #. ~ Item name
 #: data/json/items/tool/med.json
@@ -137238,7 +137238,7 @@ msgstr "一个简单的小铃铛，许多自行车上都可以看到。激活它
 #. ~ Description of "grip hook"
 #: data/json/items/tool/misc.json
 msgid "A simple steel hook with a circular steel handle."
-msgstr ""
+msgstr "一种带有环形钢柄的简易钢钩。"
 
 #. ~ Description of "aluminum stepladder (folded)"
 #: data/json/items/tool/misc.json
@@ -137303,7 +137303,7 @@ msgstr "刻有火种凹槽的木棍，用来配合钻木取火器生火。"
 #. ~ Description of "bug spray"
 #: data/json/items/tool/misc.json
 msgid "An aerosol canister of pesticides that promises to kill ants, roaches, and spiders in seconds."
-msgstr ""
+msgstr "一罐气雾杀虫剂，宣称能在数秒内杀死蚂蚁、蟑螂和蜘蛛。"
 
 #. ~ Description of "rubber sealant spray"
 #: data/json/items/tool/misc.json
@@ -139643,7 +139643,7 @@ msgstr "一块约6英寸(约15厘米)见方的棉布片，可以用来修补或�
 #. ~ Description of "sponge"
 #: data/json/items/tool/toiletries.json
 msgid "A cleaning aid made of soft, porous material.  It will make cleaning hard objects much easier."
-msgstr ""
+msgstr "一种由柔软多孔材料制成的清洁用品。可使清洁硬质物品更加轻松。"
 
 #. ~ Description of "shaving kit"
 #: data/json/items/tool/toiletries.json
@@ -139683,7 +139683,7 @@ msgstr "一把简易剃须刀。如果你有肥皂，你可以用它刮胡子。
 #. ~ Description of "scrub brush"
 #: data/json/items/tool/toiletries.json
 msgid "A plastic scrub brush.  It will make cleaning hard objects much easier."
-msgstr ""
+msgstr "一把塑料刷子。它能让清洁硬质物品变得更容易。"
 
 #. ~ Description of "electric hair trimmer"
 #: data/json/items/tool/toiletries.json
@@ -139698,7 +139698,7 @@ msgstr "一个小型的浴室秤，用来称一个人裸体时的体重。"
 #. ~ Description of "washboard"
 #: data/json/items/tool/toiletries.json
 msgid "A wooden washboard.  It will make washing clothing and other soft items much easier."
-msgstr ""
+msgstr "一块木质搓衣板。它能让清洗衣物及其他软质物品变得更容易。"
 
 #. ~ Description of "mop"
 #: data/json/items/tool/toiletries.json
@@ -140155,33 +140155,33 @@ msgstr "兼职作为机会武器的砍树工具。  它有一根短电线，您�
 #. "EOC_toolweapon_running__chainsaw" in use action of item "chainsaw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The chainsaw rumbles."
-msgstr ""
+msgstr "链锯隆隆作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__circsaw" in use action of item "circular saw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The circular saw buzzes."
-msgstr ""
+msgstr "圆锯嗡嗡作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__elec_chainsaw_cord" in use action of item "corded
 #. electric chainsaw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The corded electric chainsaw rumbles."
-msgstr ""
+msgstr "有线电链锯隆隆作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__elec_chainsaw" in use action of item "electric
 #. chainsaw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The electric chainsaw rumbles."
-msgstr ""
+msgstr "电链锯隆隆作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__polesaw" in use action of item "pole saw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The pole saw rumbles."
-msgstr ""
+msgstr "高枝锯隆隆作响。"
 
 #. ~ Description of "chainsaw (on)"
 #: data/json/items/tool/woodworking.json
@@ -140354,7 +140354,7 @@ msgstr "一把外形简单的鲤鱼钳，只能用来做一些基本的机械工
 #. ~ Description of "reciprocating saw"
 #: data/json/items/tool/workshop.json
 msgid "A battery-powered tool, commonly known by the generic trademark Sawzall, that uses an electric motor to push a straight sawblade back and forth to rapidly cut wood or metal.  It is useful for heavy demolition and construction work, but poorly suited to precision tasks, and lacks the raw power of something like an angle grinder."
-msgstr ""
+msgstr "一种电池供电工具，常被称作“萨兹锯”，它通过电动机驱动直锯片往复运动，用于快速切割木材或金属。适用于重型拆除和施工工作，但不适合精密作业，且缺乏角磨机那样的原始动力。"
 
 #. ~ Description of "power drill"
 #: data/json/items/tool/workshop.json
@@ -140399,12 +140399,12 @@ msgstr "一个用于焊接和切割金属的小型工具包。这个便携式氧
 #. ~ Description of "electric jackhammer"
 #: data/json/items/tool/workshop.json
 msgid "A construction tool for breaking horizontal surfaces.  This model has a cord compatible with a UPS."
-msgstr ""
+msgstr "一种用于破坏水平表面的施工工具。该型号配有与UPS兼容的电源线。"
 
 #. ~ Description of "jackhammer"
 #: data/json/items/tool/workshop.json
 msgid "A construction tool for breaking horizontal surfaces.  This model runs on gasoline."
-msgstr ""
+msgstr "一种用于破坏水平表面的施工工具。该型号以汽油为燃料。"
 
 #. ~ Description of "cordless drill"
 #: data/json/items/tool/workshop.json
@@ -140579,7 +140579,7 @@ msgstr "一个便携式工具包，包括用于从原材料中精确替换部件
 #. ~ Description of "demolition jackhammer"
 #: data/json/items/tool/workshop.json
 msgid "A power tool made for demolishing vertical constructed surfaces by hand, somewhat similar to a handheld jackhammer.  It must be plugged in for use."
-msgstr ""
+msgstr "一种用于手工拆除垂直构筑表面的电动工具，类似于手持式风镐。使用时须插电。"
 
 #. ~ Description of "hand drill"
 #: data/json/items/tool/workshop.json
@@ -140861,7 +140861,7 @@ msgstr[0] "切盘"
 #: data/json/items/tool/workshop.json
 msgid "demolition jackhammer"
 msgid_plural "demolition jackhammers"
-msgstr[0] ""
+msgstr[0] "风镐"
 
 #. ~ Item name
 #: data/json/items/tool/workshop.json
@@ -141216,7 +141216,7 @@ msgstr "一台35mm的数码单反（单镜头反光）相机，使用普通电�
 #. ~ Description of "RX11 stimulant delivery system"
 #: data/json/items/tool_armor.json
 msgid "A Rivtech RX11 stimulant delivery system, a jet autoinjector system worn on the user's leg.  A simple press of its activator injects powerful chemical stimulants into the bloodstream without using a needle."
-msgstr ""
+msgstr "Rivtech RX11 兴奋剂注射系统，是一种佩戴在使用者腿部的喷射式自动注射装置。只需按下启动按钮，即可在不使用针头的情况下，将强效化学兴奋剂注入血液。"
 
 #. ~ Description of "malfunctioning five-point anchor"
 #: data/json/items/tool_armor.json
@@ -141404,7 +141404,7 @@ msgstr "一顶军用飞行头盔，上面的LED灯正不时地闪动着。配有
 #. ~ Description of "military flight helmet"
 #: data/json/items/tool_armor.json
 msgid "A military flight helmet.  Equipped with a visor, microphone, and an active noise dampening system.  The helmet is also fitted with plastic rails to allow for different loadouts."
-msgstr ""
+msgstr "一顶军用飞行头盔。配备有面罩、麦克风及主动降噪系统。头盔还装有塑料导轨，可挂载不同配件。"
 
 #. ~ Description of "combo cover"
 #: data/json/items/tool_armor.json
@@ -141414,7 +141414,7 @@ msgstr "一顶军官的鸭舌帽，或尖顶帽。它散发出一种权威感，
 #. ~ Description of "wearable RX12 jet injector"
 #: data/json/items/tool_armor.json
 msgid "A modified RX12 jet injector which can be worn on the user's leg.  A label on the side warns against using more than two doses per hour."
-msgstr ""
+msgstr "一种改装过的 RX12 喷射式注射器，可佩戴在使用者腿部。侧面的标签警告每小时使用不得超过两剂。"
 
 #. ~ Description of "infrared goggles (on)"
 #: data/json/items/tool_armor.json
@@ -141804,7 +141804,7 @@ msgstr "%s 关闭了。"
 #: data/json/items/tool_armor.json
 #, c-format
 msgid "The %s flicks on."
-msgstr ""
+msgstr "%s 打开了。"
 
 #. ~ "need_charges_msg" action message of item "rebreather mask"
 #. ~ "need_charges_msg" action message of item "survivor divemask"
@@ -142718,17 +142718,17 @@ msgstr "一只惹人喜爱的雪鸮，看起来很有智慧。它有着雪白的
 #. ~ Description of variant "blue whale plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cuddly blue whale plushie with soft blue-gray fur and a playful expression."
-msgstr ""
+msgstr "一个可爱的蓝鲸毛绒玩具，有着柔软蓝灰色的绒毛和俏皮的表情。"
 
 #. ~ Description of variant "dromedary plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cuddly camel plushie with a single humps, tan fur, and big soulful eyes."
-msgstr ""
+msgstr "一个可爱的骆驼毛绒玩具，有一个驼峰，浅棕色的绒毛，和一双充满深情的大眼睛。"
 
 #. ~ Description of variant "camel plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cuddly camel plushie with two soft humps, tan fur, and big soulful eyes."
-msgstr ""
+msgstr "一个可爱的双峰骆驼毛绒玩具，有两个柔软的驼峰，浅棕色的绒毛，和一双充满深情的大眼睛。"
 
 #. ~ Description of variant "common loon plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -142763,7 +142763,7 @@ msgstr "一只毛茸茸的可爱驼鹿，有着柔软的棕色皮毛、耷拉的
 #. ~ Description of variant "lobster plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cuddly red lobster plushie with a soft red shell and big playful eyes."
-msgstr ""
+msgstr "一个可爱的红色龙虾毛绒玩具，有着柔软的红色外壳和俏皮的大眼睛。"
 
 #. ~ Description of variant "alligator plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -142773,7 +142773,7 @@ msgstr "可爱的鳄鱼毛绒玩具，有着柔软的绿色皮肤、圆圆的大
 #. ~ Description of variant "alpaca plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cute alpaca plushie featuring soft, curly fur in shades of white and brown."
-msgstr ""
+msgstr "一个可爱的羊驼毛绒玩具，有着柔软卷曲的白色和棕色绒毛。"
 
 #. ~ Description of variant "gecko plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -142928,7 +142928,7 @@ msgstr "一只可爱的蜘蛛猴毛绒玩具，有着柔软的棕色皮毛和长
 #. ~ Description of variant "humpback whale plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A huggable humpback whale plushie with soft gray and white fur and big friendly eyes."
-msgstr ""
+msgstr "一个可爱的座头鲸毛绒玩具，有着柔软的灰白色绒毛和友善的大眼睛。"
 
 #. ~ Description of variant "jacare plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -143142,7 +143142,7 @@ msgstr "一种珍贵的洞穴蝙蝠毛绒玩具，有着柔软的黑色皮毛、
 #. ~ Description of variant "llama plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A precious llama plushie with soft, fluffy fur in grayish white.  It has expressive eyes and a tuft of fur on its head."
-msgstr ""
+msgstr "一个珍贵的羊驼毛绒玩具，有着柔软蓬松的灰白色绒毛。它有一双传神的眼睛，头顶还有一撮绒毛。"
 
 #. ~ Description of variant "chicken plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -143227,7 +143227,7 @@ msgstr "一个矮胖、可爱、非常讨人喜欢的板龙玩偶，有一个突
 #. ~ Description of variant "cow plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A stuffed dairy cow with soft, velvety fur spotted in Holstein black and white."
-msgstr ""
+msgstr "一只填充的荷斯坦奶牛毛绒玩具，有着柔软如天鹅绒般的黑白斑纹皮毛。"
 
 #. ~ Description of variant "superhero figurine" of item "figurine"
 #: data/json/items/toy.json
@@ -143357,7 +143357,7 @@ msgstr "这只果蝠毛绒玩具是棕褐色的，皮毛柔软、毛茸茸的。
 #. ~ Description of variant "sheep plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "This loving and fluffy sheep plushie features soft woolly fur in white, with cute floppy ears and expressive eyes."
-msgstr ""
+msgstr "这只可爱又蓬松的绵羊毛绒玩具，有着柔软的白色羊毛，可爱的垂耳和传神的眼睛。"
 
 #. ~ Description of variant "black sheep plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -145560,22 +145560,22 @@ msgstr[0] "轮椅手轮"
 #. ~ Description of "large wind turbine"
 #: data/json/items/vehicle/mills.json
 msgid "A large turbine driven by wind."
-msgstr ""
+msgstr "一种由风力驱动的大型涡轮机。"
 
 #. ~ Description of "large water wheel"
 #: data/json/items/vehicle/mills.json
 msgid "A large water wheel that could be used to grind grain if built over moving water."
-msgstr ""
+msgstr "一个大型水轮，如果建在流动的水面上，可用于研磨谷物。"
 
 #. ~ Description of "wind turbine"
 #: data/json/items/vehicle/mills.json
 msgid "A small turbine driven by wind."
-msgstr ""
+msgstr "一种由风力驱动的小型涡轮机。"
 
 #. ~ Description of "water wheel"
 #: data/json/items/vehicle/mills.json
 msgid "A water wheel that could be used to grind grain if built over moving water."
-msgstr ""
+msgstr "一个水轮，如果建在流动的水面上，可用于研磨谷物。"
 
 #. ~ Item name
 #: data/json/items/vehicle/mills.json
@@ -149052,7 +149052,7 @@ msgstr "R."
 #. ~ Signage placed on map
 #: data/json/mapgen/map_extras/grave.json
 msgid "The game was rigged from the start."
-msgstr ""
+msgstr "游戏从一开始就被操纵了。"
 
 #. ~ Signage placed on map
 #: data/json/mapgen/map_extras/grave.json
@@ -149522,12 +149522,12 @@ msgstr "当心脚下！"
 #. ~ Signage in mapgen palette
 #: data/json/mapgen/pig_farm_lab.json
 msgid "All pig carcasses and parts must be incinerated!  Removal of meat or remains from these premises is grounds for IMMEDIATE termination."
-msgstr ""
+msgstr "所有猪尸及部位必须焚烧！从本设施移走肉类或残骸将导致立即解雇。"
 
 #. ~ Signage in mapgen palette
 #: data/json/mapgen/pig_farm_lab.json
 msgid "Welcome to the Everwell test CAFO #37.  Please sign in with the receptionist."
-msgstr ""
+msgstr "欢迎来到恒健试验工厂化农场 #37。请在接待处签到。"
 
 #. ~ Computer name placed on map police
 #. ~ Computer name placed on map police_1
@@ -150371,6 +150371,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Blocked damage reduced by 100% of Dexterity."
 msgstr ""
+"一种敏捷的架势，让你能够格挡并减少受到的伤害。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 100% 敏捷值。"
 
 #. ~ Description of martial art "Capoeira"
 #: data/json/martialarts.json
@@ -150398,6 +150402,12 @@ msgid ""
 "-1 Dodge ability, -5% damage.\n"
 "Lasts 1 second.  Stacks 5 times."
 msgstr ""
+"利剑出鞘，斩击精准。\n"
+"然万物皆随时光消逝。\n"
+"克制之道，方能磨砺技艺。\n"
+"\n"
+"-1 闪避能力，-5% 伤害。\n"
+"持续1秒。可叠加5层。"
 
 #. ~ Description of buff "Boxing" in martial art "Boxing Stance"
 #: data/json/martialarts.json
@@ -150408,6 +150418,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 accuracy, blocked damage reduced by 50% of Strength."
 msgstr ""
+"稳固的架势让你能够比平时格挡更多伤害，并打出更有力的拳击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 命中，格挡伤害减免 50% 力量值。"
 
 #. ~ Description of martial art "Zui Quan"
 #: data/json/martialarts.json
@@ -150484,6 +150498,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 blocking effectiveness, +1 block attempt, +1 dodge attempt."
 msgstr ""
+"熟练的合气道练习者能够比普通人更有效地防御更多对手。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 格挡效果，+1 格挡尝试次数，+1 闪避尝试次数。"
 
 #. ~ Description of martial art "Pankration"
 #: data/json/martialarts.json
@@ -150499,6 +150517,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Blocked damage reduced by 100% of Dexterity, +1 blocking effectiveness, +1 block attempt, +1 dodge attempt."
 msgstr ""
+"中级合气道练习者能够抵御多个对手的攻击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 100% 敏捷值，+1 格挡效果，+1 格挡尝试次数，+1 闪避尝试次数。"
 
 #. ~ Description of buff "Bōjutsu" in martial art "Skilled Striking"
 #: data/json/martialarts.json
@@ -150508,6 +150530,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Melee skill increases bash damage cap."
 msgstr ""
+"随着技艺精进，你能够开始针对打击点进行攻击，以造成更多伤害。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"近战技能提升钝击伤害上限。"
 
 #. ~ Description of buff "Bōjutsu" in martial art "Rolling Staff"
 #: data/json/martialarts.json
@@ -174648,7 +174674,7 @@ msgstr "你的背上长出一对半透明的大翅膀。它们太小了，抬不
 #. ~ Description of mutation "Tentacles"
 #: data/json/mutations/mutations.json
 msgid "A long pair of tentacles like those of a squid grow from your shoulders in place of human arms.  The underside of the paddle-shaped tips are lined with suckers that aid in grasping tools and prey alike."
-msgstr ""
+msgstr "你的双肩上长出了一对长长的触手（类似乌贼的触手），取代了原本的人类手臂。这些触手末端呈桨状，其内侧布满吸盘，既有助于抓握工具，也能用来捕捉猎物。"
 
 #. ~ Description of mutation "Electroreceptors"
 #: data/json/mutations/mutations.json
@@ -174848,7 +174874,7 @@ msgstr "水下安生"
 #. ~ Description of mutation "Barbed Tentacles"
 #: data/json/mutations/mutations.json
 msgid "Arms?  No, you've got a pair of long tentacles with broad paddle-shaped structures at the tips, granting the ability to strike while prone at a reduced penalty.  Their grasping surface is lined with suckers and dozens of swiveling hooks that function like vicious claws."
-msgstr ""
+msgstr "手臂？不，你长着一对长触手，末端带有宽阔的桨状结构，使你即便在俯卧状态下也能发动攻击，且受到的惩罚较轻。触手的抓握面上布满了吸盘和数十个可灵活转动的钩刺，这些钩刺犹如凶猛的利爪一般。"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -174948,7 +174974,7 @@ msgstr "杀死所有呼吸者。"
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
 msgid "Barbed Tentacles"
-msgstr ""
+msgstr "带刺触手"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -175986,7 +176012,7 @@ msgstr "鸡皮疙瘩"
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
 msgid "Gorger"
-msgstr ""
+msgstr "戈尔格"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -176344,7 +176370,7 @@ msgstr "代替头发的是长长的草叶，它们在冬天休眠，变得像稻
 #. ~ Description of mutation "Gastropod Foot"
 #: data/json/mutations/mutations.json
 msgid "In place of legs you have a single muscular 'foot' like that of a snail.  You are slower, but your footing is stable, your movement nearly silent, and you are immune to the effects of sludge."
-msgstr ""
+msgstr "你没有腿，取而代之的是像蜗牛那样的一只肌肉质“足”。虽然你的移动速度较慢，但​​立足稳固，行进时几乎悄无声息，且不受淤泥的影响。"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -177921,7 +177947,7 @@ msgstr "触手吸盘"
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
 msgid "Tentacles"
-msgstr ""
+msgstr "触手"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -179146,17 +179172,17 @@ msgstr "你的嘴部周围出现了像啮齿动物般的显眼胡须。它可以
 #. ~ Description of mutation "Stubby Tail"
 #: data/json/mutations/mutations.json
 msgid "You have a short, stubby tail at the base of your spine, like a hamster.  It serves no purpose, but it's easy enough to hide under your clothes."
-msgstr ""
+msgstr "你的脊椎底部长着一条短而粗的尾巴，就像仓鼠那样。它没什么实际用途，不过藏在衣服下面倒也容易。"
 
 #. ~ Description of mutation "Cattle Tail"
 #: data/json/mutations/mutations.json
 msgid "You have a short, thin with a tuft on the end.  It's too small to aid your balance or interfere with equipment, but it's pretty handy for reflexively swatting away flies."
-msgstr ""
+msgstr "你有一条短而细的尾巴，末端带有一簇毛。它既不足以辅助平衡，也不会妨碍装备的使用，但在本能地拍打驱赶苍蝇时却相当好用。"
 
 #. ~ Description of mutation "Sweet Tooth"
 #: data/json/mutations/mutations.json
 msgid "You have a soft spot for sweets, snacks, and empty calories.  Junk food is more enjoyable, but everything else is a bit less so."
-msgstr ""
+msgstr "你对甜食、零食​​和那些“空热量”食品情有独钟。相比之下，垃圾食品吃起来更让人享受，而其他食物就没那么有吸引力了。"
 
 #. ~ Description of mutation "Crushing Beak"
 #: data/json/mutations/mutations.json
@@ -179326,7 +179352,7 @@ msgstr "绿色眼睛。"
 #. ~ Description of mutation "Melee Weapon Training"
 #: data/json/mutations/mutations.json
 msgid "You have practiced fighting with weapons.  You start with your choice of Barbaran Montante, Bōjutsu, Eskrima, Fencing, Fior Di Battaglia, Kalaripayattu, Medieval Swordsmanship, Niten Ichi-Ryu, Pencak Silat, or Sōjutsu."
-msgstr ""
+msgstr "你曾进行过武器格斗训练。开始前你可以从以下流派中选择一种：巴巴兰蒙坦特、棒术、埃斯克里马、击剑、菲奥尔·迪·巴塔利亚、卡拉里帕亚图、中世纪剑术、二天一流、班卡西拉或枪术。"
 
 #. ~ Description of mutation "Meat Intolerance"
 #: data/json/mutations/mutations.json
@@ -179592,12 +179618,12 @@ msgstr "你开始发光，即使在最黑暗的夜晚也能进行调试。"
 #. ~ Description of mutation "Chemical Imbalance"
 #: data/json/mutations/mutations.json
 msgid "You suffer from a minor chemical imbalance, whether mental or physical.  Minor changes to your internal chemistry will manifest themselves on occasion, such as hunger, fatigue, pain, etc."
-msgstr ""
+msgstr "你存在轻微的化学物质失衡，无论是在生理还是心理层面。这种体内化学环境的细微变化会不时显现出来，表现为饥饿、疲劳、疼痛等症状。"
 
 #. ~ Description of mutation "Jittery"
 #: data/json/mutations/mutations.json
 msgid "You tend to get a bad case of the shakes when you're hungry or under the effects of stimulants.  Nicotine can help, and benzodiazepines will stop the effect entirely."
-msgstr ""
+msgstr "当你感到饥饿或受到兴奋剂影响时，往往会出现严重的颤抖。尼古丁能起到缓解作用，而苯二氮卓类药物则能彻底消除这种症状。"
 
 #. ~ Description of mutation "Seasonal Allergies"
 #: data/json/mutations/mutations.json
@@ -179622,7 +179648,7 @@ msgstr "你的智力发展已经完美。"
 #. ~ Description of mutation "Charger"
 #: data/json/mutations/mutations.json
 msgid "You walk slowly, but can run with surprising speed.  Additionally, you can activate this mutation to perform a charging attack."
-msgstr ""
+msgstr "你平时步履缓慢，但奔跑速度却快得惊人。此外，你还可以激活这项变异，发动冲锋攻击。"
 
 #. ~ Description of mutation "Asthmatic"
 #: data/json/mutations/mutations.json
@@ -179859,7 +179885,7 @@ msgstr "你有一个短鼻子和一个抽搐的兔子鼻子。  如果您有匹�
 #. ~ Description of mutation "Chitin"
 #: data/json/mutations/mutations.json
 msgid "You've grown a chitin exoskeleton, much like that of an insect.  In addition to acting as armor, you are somewhat resistant to the harmful effects of radiation.  Somewhat reduces wet effects."
-msgstr ""
+msgstr "你长出了一层类似昆虫的几丁质外骨骼。这层外骨骼不仅能充当护甲，还能让你对辐射的有害影响产生一定的抵抗力。此外，它还能在一定程度上减轻潮湿环境带来的负面影响。"
 
 #. ~ Description of mutation "Gills"
 #: data/json/mutations/mutations.json
@@ -180070,7 +180096,7 @@ msgstr "你的身上覆盖着一层细腻的黏液，使你裸露的皮肤难以
 #. ~ Description of mutation "Crustacean Carapace"
 #: data/json/mutations/mutations.json
 msgid "Your body is covered with a durable carapace.  In addition to powerful physical protection, you are somewhat resistant to the harmful effects of radiation.  It reduces dexterity by 2 and greatly reduces wet effects."
-msgstr ""
+msgstr "你的身体覆盖着坚固的甲壳。除了提供强大的物理防护外，你还对辐射的有害影响具有一定的抵抗力。它会使敏捷降低 2 点，并大幅减轻潮湿带来的影响。"
 
 #. ~ Description of mutation "Quills"
 #: data/json/mutations/mutations.json
@@ -180628,7 +180654,7 @@ msgstr "你的四肢好像能够再主动\"伸远\"一点点。敏捷 +1。"
 #. ~ Description of mutation "Tentacle Bracing"
 #: data/json/mutations/mutations.json
 msgid "Your lower arms have developed strong suckers, perfect for walking along lake beds and ocean floors.  They make land movement marginally more tiring, but do a good job of keeping you set in place."
-msgstr ""
+msgstr "你的前臂长出了强健的吸盘，非常适合在湖底和海底行走。虽然这会让陆地移动稍微费力一些，但能让你稳稳地固定在原地。"
 
 #. ~ Description of mutation "Bow-legged"
 #: data/json/mutations/mutations.json
@@ -180653,12 +180679,12 @@ msgstr "你是顶级掠食者，你的意识和大脑已经适应了你在世界
 #. ~ Description of mutation "Mood Swings"
 #: data/json/mutations/mutations.json
 msgid "Your morale will shift up and down at random, often dramatically.  Lithium tablets can reduce the severity of this disorder."
-msgstr ""
+msgstr "你的情绪会随机波动，且往往起伏剧烈。锂盐片剂可以减轻这种病症的严重程度。"
 
 #. ~ Description of mutation "Proboscis"
 #: data/json/mutations/mutations.json
 msgid "Your mouth is now a long, flexible tube.  You can no longer consume solid food and must find liquid nourishment instead."
-msgstr ""
+msgstr "你的嘴现在变成了一根细长而灵活的管子。你无法再进食固体食物，必须寻找流质营养来维持生存。"
 
 #. ~ Description of mutation "Quick"
 #: data/json/mutations/mutations.json
@@ -180931,7 +180957,7 @@ msgstr "你的皮肤无法承受阳光中的紫外线辐射，暴露在阳光下
 #. ~ Description of mutation "Gorger"
 #: data/json/mutations/mutations.json
 msgid "Your stomach can expand quite a bit.  This comes in handy as you tend to swallow food whole."
-msgstr ""
+msgstr "你的胃能大幅扩张，这很管用，因为你往往会把食物整个吞下去。"
 
 #. ~ Description of mutation "Rabbit Tail"
 #: data/json/mutations/mutations.json
@@ -190357,7 +190383,7 @@ msgstr "关于训练。"
 #. ~ NPC dialogue line
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
 msgid "Yeah, I can perform first aid.  You give me some bandages or a bottle of antiseptic, and I'll treat your wounds as best I can.  I'll tend to use those items on myself first, then you, then any of your other friends."
-msgstr ""
+msgstr "没错，我会急救。只要给我绷带或消毒液，我就能尽力处理你的伤口。我会优先把这些用品用在自己身上，其次是你，最后才是你的其他朋友。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -193702,7 +193728,7 @@ msgstr "不要用手雷了。"
 #. ~ Negative response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
 msgid "Don't use loud weapons."
-msgstr ""
+msgstr "别用声响大的武器。"
 
 #. ~ Affirmative response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
@@ -199951,7 +199977,7 @@ msgstr "我刚刚意识到，我们已经认识了好一段时间，可我还不
 #. ~ NPC dialogue line
 #: data/json/npcs/hub01/NPC_Cranberry_Foster.json
 msgid "I kind of lost track of the days.  Every day was the same; eat, check the barricades, look on the Internet, play some games with the sound off to try and distract myself.  I filled up my bathtub, and once the water went out, I'd drink from there when I needed to hydrate.  Meal planning got easier after I was down to just my canned stuff.  The Internet didn't stay on for long, though, which I guess was a blessing because of how many people were sharing their fear and awful experiences in real time.  I did that routine every day until that emergency broadcast came through that no help was coming, and then I knew it was over."
-msgstr ""
+msgstr "我渐渐失去了日期的概念。生活天天重复着：吃饭、检查路障、上网浏览，再玩会儿静音游戏，试图以此分散注意。我把浴缸蓄满了水，一旦停水，口渴时就喝那里的水。当食物只剩下罐头储备时，安排饮食反而变得简单了。不过，网络没能维持多久——这倒未必是坏事，毕竟当时网上充斥着人们实时分享的恐惧与惨痛经历。我就这样日复一日地过着，直到那条紧急广播传来——告知救援不会到来——那一刻，我便明白一切都结束了。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/hub01/NPC_Cranberry_Foster.json
@@ -203095,7 +203121,7 @@ msgstr "[食人族] 周围有这么多美味的尸体，很难饿死。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/island_prison/prisoners.json
 msgid "[Ecology 2] I have some survival expertise!"
-msgstr ""
+msgstr "[生态学 2] 我掌握了一些生存方面的专业知识！"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/island_prison/prisoners.json
@@ -205002,7 +205028,7 @@ msgstr "随便一间办公楼应该都有成吨的铅笔。"
 #. ~ Dialogue line in mission "Get some oxycodone"
 #: data/json/npcs/necc/godco_missions.json
 msgid "An old doctor's office should have some.  Some of them have those fancy autodocs upstairs."
-msgstr ""
+msgstr "老式诊所里应该会有一些。有些诊所的楼上甚至配备了那种高级的自动医疗设备。"
 
 #. ~ Dialogue line in mission "Preservation of Sustenance"
 #: data/json/npcs/necc/godco_missions.json
@@ -207719,7 +207745,7 @@ msgstr "转念想想，我该走了。"
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
 msgid "All right, this is what I've got:  I can spare three packs of cucumber, barley or blackberry seeds for one icon; carrot, buckwheat or cranberry seeds for two icons; oat, sugar beet or potato seeds for three icons."
-msgstr ""
+msgstr "好了，情况是这样的：我可以拿出三包黄瓜、大麦或黑莓种子来换取一个图标；胡萝卜、荞麦或蔓越莓种子换取两个图标；燕麦、甜菜或土豆种子换取三个图标。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json data/json/npcs/scrap_trader/scrap_trader.json
@@ -207729,7 +207755,7 @@ msgstr "我能买些什么吗？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
 msgid "Can you spare anything?  You know how bad the food situation is."
-msgstr ""
+msgstr "你能匀出点什么吗？你知道现在的食品短缺情况有多严重。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json data/json/npcs/necc/members/foodguard.json
@@ -207839,7 +207865,7 @@ msgstr "听到你的损失我很难过。"
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
 msgid "I've got a wife, Gemma.  She's a grand lady, should be around here somewhere.  She used to teach biology, and we both love gardenin'; that's how we met, ya see.  She ain't been herself lately, I'm startin' to worry."
-msgstr ""
+msgstr "我有个妻子，叫杰玛。她是个很棒的女人，应该就在这附近。她以前教生物，我们俩都爱园艺——你看，我们就是这么认识的。她最近状态不太对劲，我开始有点担心了。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
@@ -207854,7 +207880,7 @@ msgstr "我能帮你什么忙吗？"
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
 msgid "It really isn't hard to earn your keep here.  Talk to folks, someone'll have something for you to do."
-msgstr ""
+msgstr "在这里想挣口饭吃真不难。跟大伙儿聊聊，总有人会给你安排点活儿干的。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
@@ -207904,7 +207930,7 @@ msgstr "坦白说，这种迷茫正在侵蚀我的内心。我是一个单纯的
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
 msgid "Took us two weeks and four hard-working hands to clear this humble little land.  It's a far cry from my old garden, it really is.  I heard theories, from Tom of course, that really messed with my head.  The earth don't yield like she used to, and maybe it's for the same reason the dead don't stay buried any more.  I s'pose it's no use worrying about it, we just have to work twice as hard."
-msgstr ""
+msgstr "我们花了整整两周时间，靠着一双手辛勤劳作，才把这块不起眼的小地给清理出来。这地方跟我以前那个花园简直没法比，真的。汤姆——当然又是他——跟我说了一些让人心里发毛的说法：说是这片土地不再像从前那样肥沃丰产了，而这背后的原因，或许跟死人如今不再安分地待在坟墓里是同一个道理。不过，我想操心这些也没用，咱们唯有加倍努力干活才行。"
 
 #. ~ NPC dialogue line
 #. ~ You don't need to translate genders that aren't in your language
@@ -207950,7 +207976,7 @@ msgstr "态度这么差是怎么回事？"
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
 msgctxt "u:f"
 msgid "Yeah, I surely do.  Here, it ain't much, but oats are easy enough, and good food too."
-msgstr ""
+msgstr "是啊，我确实很喜欢。来，虽然算不上什么大餐，但燕麦做起来简单，而且也是好东西。"
 
 #. ~ NPC dialogue line
 #. ~ You don't need to translate genders that aren't in your language
@@ -207959,7 +207985,7 @@ msgstr ""
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
 msgctxt "u:m"
 msgid "Yeah, I surely do.  Here, it ain't much, but oats are easy enough, and good food too."
-msgstr ""
+msgstr "是啊，我确实很喜欢。来，虽然算不上什么大餐，但燕麦做起来简单，而且也是好东西。"
 
 #. ~ NPC dialogue line
 #. ~ You don't need to translate genders that aren't in your language
@@ -207968,7 +207994,7 @@ msgstr ""
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
 msgctxt "u:n"
 msgid "Yeah, I surely do.  Here, it ain't much, but oats are easy enough, and good food too."
-msgstr ""
+msgstr "是啊，我确实很喜欢。来，虽然算不上什么大餐，但燕麦做起来简单，而且也是好东西。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/necc/members/NPC_Darryl_Johnstone.json
@@ -208854,7 +208880,7 @@ msgstr "当然，没什么不行的。反正我现在也得找些能消耗精力
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Jane_Schulz.json
 msgid "Sure, I've got some supplies on hand, just give me a minute and I'll look you over.  It'll cost ten icons."
-msgstr ""
+msgstr "没问题，我手头有些物资，稍等一下，我来给你检查一下。费用是十个图标。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Jane_Schulz.json
@@ -209762,7 +209788,7 @@ msgstr "我要一件夹克。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/necc/members/NPC_Maria_Serrano.json
 msgid "I'll have a longcoat."
-msgstr ""
+msgstr "我要一件长款外套。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/necc/members/NPC_Maria_Serrano.json
@@ -212679,7 +212705,7 @@ msgstr "找到气象学家坠毁的无人机"
 #. ~ Dialogue line in mission "Find scrap for the meteorologist"
 #: data/json/npcs/other/meteorologist.json
 msgid "Good.  I just need a little stuff: 50 scrap, 6 lithium batteries, 5 small high-quality lenses and a radio remote control.  Bring the scrap for now, but don't forget about the rest."
-msgstr ""
+msgstr "很好。我只需要一些东西：50份废料、6块锂电池、5个小型优质透镜，还有一个无线遥控器。先把废料带过来，但别忘了剩下的那些。"
 
 #. ~ Dialogue line in mission "Find batteries for the meteorologist"
 #: data/json/npcs/other/meteorologist.json
@@ -212912,7 +212938,7 @@ msgstr "非常感谢。我永远不会忘记你的好意，<name_g>。把这本�
 #. ~ Description of mission "Find batteries for the meteorologist"
 #: data/json/npcs/other/meteorologist.json
 msgid "The meteorologist asked to bring 6 lithium batteries."
-msgstr ""
+msgstr "气象学家要求携带6块锂电池。"
 
 #. ~ Description of mission "Find high-quality lenses for the meteorologist"
 #: data/json/npcs/other/meteorologist.json
@@ -212967,7 +212993,7 @@ msgstr "我需要些小型高清镜头来组装无人机……"
 #. ~ Dialogue line in mission "Find batteries for the meteorologist"
 #: data/json/npcs/other/meteorologist.json
 msgid "Well, what's next on the list… yeah, batteries.  6 lithium batteries would be enough."
-msgstr ""
+msgstr "嗯，清单上的下一项是……对，电池。6节锂电池就够了。"
 
 #. ~ Dialogue line in mission "Find high-quality lenses for the meteorologist"
 #: data/json/npcs/other/meteorologist.json
@@ -215813,7 +215839,7 @@ msgstr "阿隆索无法自拔，在如此优秀之人面前。"
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Alonso_Lautrec.json
 msgid "Alonso has many a tale to tell, all slow and drawn-out like, a sensual seduction of the -- how you say?  Ears.  The times, they are bad now, but perhaps together we can bring a little light?  Or at least a little heat.  This is a science joke I make for you.  Friction, it is the joke."
-msgstr ""
+msgstr "阿隆索有许多故事可讲，语调总是舒缓而悠长，仿佛一种感官上的诱惑，撩拨着……怎么说来着？……耳朵。如今时局艰难，但也许我们能携手带来一丝光亮？或者至少，带来一点热度。这是我特意讲给你们听的一个科学笑话——关于“摩擦力”的笑话。"
 
 #. ~ Mission name
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Alonso_Lautrec.json
@@ -216136,7 +216162,7 @@ msgstr "鲍里斯·波里申科"
 #. ~ Description of mission "Find someone to clean up the back bay."
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Boris_Borichenko.json
 msgid "Boris in the refugee center is looking for at least four people to help clean up the back bay"
-msgstr ""
+msgstr "难民中心的鲍里斯正在寻找至少四个人，协助清理后湾（Back Bay）区域。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Boris_Borichenko.json
@@ -220845,7 +220871,7 @@ msgstr "你好，公民……"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "Do you provide medical services?"
-msgstr ""
+msgstr "你提供医疗服务吗？"
 
 #. ~ Mission name
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
@@ -220932,7 +220958,7 @@ msgstr "有外界的消息吗？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "I have the money, let's get started."
-msgstr ""
+msgstr "我有钱了，我们开始吧。"
 
 #. ~ NPC dialogue line
 #. ~ You don't need to translate genders that aren't in your language
@@ -220964,7 +220990,7 @@ msgstr "我是名医生，前哨站里幸存下来的几个人之一。我们是
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "I'm not exactly turning a profit back here.  That money's going toward paying for more supplies so I can keep doing my job, and those supplies come from people like you, who expect to be paid for risking life and limb for bringing them here.  If you can't pay, then I'm sorry, but we are in the middle of an unprecedented calamity.  We should all thank heaven that we're still breathing at all."
-msgstr ""
+msgstr "我在这儿可没赚什么钱。那些钱都用来购买物资以维持运作了，而这些物资又是从像你们这样的人手里买来的——毕竟，你们冒着生命危险把东西运过来，理应获得报酬。如果你们付不起钱，那我也没办法；毕竟我们正身处一场史无前例的浩劫之中。我们都该谢天谢地，至少还能活着喘口气。"
 
 #. ~ Dialogue line in mission "Download Workstation Data"
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
@@ -220974,12 +221000,12 @@ msgstr "如果实验室上了锁，也许你可以从疏散中死亡的员工身
 #. ~ Dialogue line in mission "Find Lab Tunnels"
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "In the data we found a major contract for tunneling and train equipment, ordered four years before things went to hell.  It's the best lead we have.  Here's the address of the government lab where the equipment was delivered.  I want you to go there, find the tunnels that they dug, and download everything you can about the train network.  On the other hand, our sponsors were extremely impressed in getting this far without their direction, and would like to apologize by supporting this mission with a whole 300 merch!"
-msgstr ""
+msgstr "我们在数据中发现了一份关于隧道挖掘和列车设备的重大合同，这份合同是在局势彻底崩盘前四年签订的。这是我们目前掌握的最有价值的线索。这是接收那批设备的政府实验室地址。我要你去那里，找到他们挖掘的隧道，并尽可能多地下载关于列车网络的所有资料。另外，我们的赞助方对我们在没有他们指导的情况下取得如此进展印象深刻，为了表示歉意，他们决定全力支持这次任务——足足提供了300商品单位！"
 
 #. ~ Dialogue line in mission "Analyze Zombie Blood"
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "Necrosis?  It didn't detect a novel pathogen?  Maybe there's something else here we can use…"
-msgstr ""
+msgstr "坏死？没检测出新型病原体？也许这里还有什么别的东西我们可以利用……"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json data/mods/Sky_Island/dialog_statue.json
@@ -221009,7 +221035,7 @@ msgstr "那你现在在做什么？"
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "Supplies are stretched thin and you're not a resident here, but I could provide you with wound care and a physical for fifteen merch."
-msgstr ""
+msgstr "这里的物资很紧缺，而且你也不是本地居民，不过我可以为你提供伤口护理和体检，收费是十五个“商品单位”。"
 
 #. ~ Dialogue line in mission "Download Workstation Data"
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
@@ -221029,7 +221055,7 @@ msgstr "实验室一进门就会是接近结冰的温度，而你越深入气温
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "That's a little expensive."
-msgstr ""
+msgstr "那有点贵。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
@@ -221044,7 +221070,7 @@ msgstr "这些设备被要求能在地下50英尺(约15米)正常使用，因此
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "This isn't like in the movies.  The dead seem to be getting stronger as the days go on.  Some survivors too, come in here with… adaptations.  Maybe they're related."
-msgstr ""
+msgstr "这可不像电影里演的那样。随着日子一天天过去，那些死者似乎变得越来越强了。有些幸存者来到这里时，也带着……某种“适应性变化”。也许这两者之间有什么关联。"
 
 #. ~ Dialogue line in mission "Download Encryption Codes"
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
@@ -221054,7 +221080,7 @@ msgstr "不幸的是，你带回来的数据还不完整，而且大多被加密
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "We don't have spare medicine to sell, if that's what you're asking.  If you've got extra supplies and you want to be paid for them, go talk to Smokes at the other window, he'll get you all sorted out."
-msgstr ""
+msgstr "如果你是想买药的话，我们这儿可没有多余的存货。不过，要是你手头有多余的物资想换点报酬，那就去另一个窗口找 Smokes 谈谈，他会帮你把事情办妥的。"
 
 #. ~ Dialogue line in mission "Analyze Zombie Blood"
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
@@ -221069,7 +221095,7 @@ msgstr "什么样的消息？"
 #. ~ Dialogue line in mission "Download Workstation Data"
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
 msgid "When you analyzed that blood, the computer didn't pick up any virus or parasite that could be causing this, but something weird happened.  The computer you used triggered a government alert.  Medical staff was under orders to immediately drive any matching samples to the nearest laboratory.  That must mean the government knew!  We have the destination address.  Go there, get in, and bring back any records you can download off a computer.  Like last time, I can compensate you, and the Old Guard saw enough promise in this assignment to spare a larger sum of 60 merch.  I'm sure you're also free to lay claim to any valuables you might find at the target location."
-msgstr ""
+msgstr "当你分析那份血液样本时，电脑虽然没能检测出任何可能导致这种状况的病毒或寄生虫，但发生了件怪事：你使用的那台电脑触发了政府的警报。医务人员接到指令，必须立即将任何匹配的样本送往最近的实验室。这肯定意味着政府早就知情！我们已经掌握了目的地地址。去那里潜入内部，把能从电脑上下载下来的所有记录都带回来。和上次一样，我会给你报酬；“老卫队”也相当看重这次任务，特意拨出了一笔不菲的资款——60个商品单位（merch）。当然，如果你在目标地点发现了什么值钱的东西，尽可以据为己有。"
 
 #. ~ Dialogue line in mission "Download Encryption Codes"
 #: data/json/npcs/refugee_center/surface_staff/NPC_old_guard_doctor.json
@@ -221822,7 +221848,7 @@ msgstr "哦，商会币。它们只是我们自己当作现金使用的代币。
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/Smokes/free_merchant_shopkeep_talk_fluff.json
 msgid "Other than those people with the hard drive, none that I know of.  Scavengers share some odd things, but we can't exactly go check for ourselves."
-msgstr ""
+msgstr "除了那些持有硬盘的人，据我所知就没有别人了。拾荒者们会分享一些稀奇古怪的消息，但我们也没法亲自去核实。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/Smokes/free_merchant_shopkeep_talk_fluff.json
@@ -221920,7 +221946,7 @@ msgstr "你这里有什么工作给我吗？"
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
 msgid "Group?  You think they'd let someone like me live here?  Nah, I'm on my own and that's how I like it, I just come here to trade."
-msgstr ""
+msgstr "团体？你觉得他们会允许像我这样的人住在这儿吗？不，我独来独往，也自得其所，来这儿只是为了做点交易。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
@@ -221935,7 +221961,7 @@ msgstr "最近过得如何啊？"
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
 msgid "I burn down buildings and sell the materials.  Nails, rebar, wire, whatever metal I can pull out of the ashes."
-msgstr ""
+msgstr "我把建筑烧毁，然后变卖其中的材料——钉子、钢筋、铁丝，以及任何能从灰烬中扒拉出来的金属。"
 
 #. ~ Dialogue line in mission "Supply the arsonist"
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
@@ -221965,7 +221991,7 @@ msgstr "我用你给我的硝酸铵做了些好东西。来做笔交易吗？"
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
 msgid "I mean, there was a nuclear war and now the dead are walking, what do you want me to say?  The monsters are getting bigger and weirder, and there are fewer people every day.  Game over, man."
-msgstr ""
+msgstr "我是说，先是爆发了核战争，现在死人又开始到处游荡，你还想让我说什么？怪物变得越来越大、越来越怪异，活着的人也一天比一天少。彻底完了，伙计。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
@@ -221992,12 +222018,12 @@ msgstr "马卡拉·桑切斯"
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
 msgid "Nothing good.  Had a pal on the road with a ham radio, but she's gone like everyone else."
-msgstr ""
+msgstr "没什么好事。以前有个朋友在路上带着业余无线电台，但她也像其他人一样，不见了。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
 msgid "Nothing good?  So you have heard something"
-msgstr ""
+msgstr "没什么好事？看来你确实听到了一些消息"
 
 #. ~ Dialogue line in mission "Supply the arsonist"
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
@@ -222039,7 +222065,7 @@ msgstr "真抱歉不该问你"
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
 msgid "Ssh.  Some people in here hate mutants.  They just showed up one day, OK?"
-msgstr ""
+msgstr "嘘。这儿有些人讨厌变种人。他们就是某天突然出现的，懂吗？"
 
 #. ~ Mission name
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
@@ -222064,7 +222090,7 @@ msgstr "你的耳朵怎么了？"
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
 msgid "You should talk to the trader guy at the entrance.  He's usually dressed like a firefighter, has a shop in one of the booths."
-msgstr ""
+msgstr "你应该去和入口处那个商人谈谈。他通常穿着像消防员一样的制服，在其中一个摊位里经营。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_visitors/NPC_arsonist.json
@@ -223955,7 +223981,7 @@ msgstr "我需要你帮我移除生化插件……"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/tacoma_ranch/NPC_ranch_doctor.json data/json/npcs/tacoma_ranch/NPC_ranch_nurse.json
 msgid "I need medical attention."
-msgstr ""
+msgstr "我需要医疗救治。"
 
 #. ~ Dialogue line in mission "Anesthetic for the Doctor"
 #: data/json/npcs/tacoma_ranch/NPC_ranch_doctor.json
@@ -224949,7 +224975,7 @@ msgstr "我能帮你什么忙吗？"
 #. ~ NPC dialogue line
 #: data/json/npcs/tacoma_ranch/NPC_ranch_nurse.json
 msgid "I can take a look at you if you like.  I'm not a doctor, but I know my way around a clinic.  The cost is nine merch."
-msgstr ""
+msgstr "如果你愿意，我可以帮你看看。我虽然不是医生，但对诊所里的门道很熟悉。收费是九个“商品单位”。"
 
 #. ~ Dialogue line in mission "Find 2 Scalpels"
 #: data/json/npcs/tacoma_ranch/NPC_ranch_nurse.json
@@ -225812,7 +225838,7 @@ msgstr "是的，她会这么说。”他进行了强烈的目光接触。“不
 #. ~ Response to NPC dialogue
 #: data/json/npcs/tacoma_ranch/Nunez/NPC_Pablo_Tacoma.json
 msgid "[Ecology 4, Fabrication 4] I know how to build a good root cellar.  Here, let me show you."
-msgstr ""
+msgstr "[生态学 4，制造 4] 我知道怎么建造一个优质的地窖。来，我演示给你看。"
 
 #. ~ Name suffix of a male NPC
 #: data/json/npcs/tacoma_ranch/Nunez/NPC_Pablo_Tacoma.json
@@ -236499,7 +236525,7 @@ msgstr "水眠者"
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Augmentation Associate"
-msgstr ""
+msgstr "增补专员"
 
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -236574,7 +236600,7 @@ msgstr "杀意驱动"
 #. ~ Vitamin name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Lupine Mutagen (obsolete)"
-msgstr ""
+msgstr "羽扇豆诱变剂（废弃）"
 
 #. ~ Proficiency name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -236605,12 +236631,12 @@ msgstr "诱变剂迷恋"
 #. status
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Mutation Craving (obsolete)"
-msgstr ""
+msgstr "变异渴望（已废弃）"
 
 #. ~ Vitamin name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "NSAID vitamin (obsolete)"
-msgstr ""
+msgstr "NSAID维生素（已废弃）"
 
 #. ~ Description of mutation "Black Belt"
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -236625,7 +236651,7 @@ msgstr "竞技击剑运动员"
 #. ~ Description of mutation "Four Tentacles"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Obsoleted Four Tentacles mutation."
-msgstr ""
+msgstr "废除“四触手”变异。"
 
 #. ~ Description of mutation "Killer Drive"
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -236661,7 +236687,7 @@ msgstr "废弃的熊视觉突变。  熊现在获得中视和夜视能力。"
 #. player's status
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Obsoleted mutagen addiction."
-msgstr ""
+msgstr "废除诱变剂成瘾机制。"
 
 #. ~ Description of mutation "Metallassimophile"
 #. ~ Description of mutation "Boxer"
@@ -236969,7 +236995,7 @@ msgstr "你是真正的钉头锤大师，谈笑间就能让敌人的头颅灰飞
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "blanching acorns (obsolete)"
 msgid_plural "blanching acorns (obsolete)"
-msgstr[0] ""
+msgstr[0] "去涩橡实（废弃）"
 
 #. ~ Item name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -236981,7 +237007,7 @@ msgstr[0] "结晶糖（陈旧）"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "curing roe (obsolete)"
 msgid_plural "curing roe (obsolete)"
-msgstr[0] ""
+msgstr[0] "腌制鱼卵（废弃）"
 
 #. ~ Item name
 #. ~ Gun mod name
@@ -236994,7 +237020,7 @@ msgstr[0] "枪械防水套装"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "growing wild koji mold (obsolete)"
 msgid_plural "growing wild koji mold (obsolete)"
-msgstr[0] ""
+msgstr[0] "培育野生曲霉（废弃）"
 
 #. ~ Item name
 #. ~ Gun mod name
@@ -237026,25 +237052,25 @@ msgstr[0] "奶油罐（陈旧）"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "slab of raw curing porkbelly (obsolete)"
 msgid_plural "slabs of raw curing porkbelly (obsolete)"
-msgstr[0] ""
+msgstr[0] "整块待腌制的生五花肉（废弃）"
 
 #. ~ Item name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "soft adobe brick (obsolete)"
 msgid_plural "soft adobe brick (obsolete)s"
-msgstr[0] ""
+msgstr[0] "软质土坯砖（废弃）"
 
 #. ~ Item name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "soy and wheat dough (obsolete)"
 msgid_plural "soy and wheat dough (obsolete)"
-msgstr[0] ""
+msgstr[0] "大豆小麦面团（废弃）"
 
 #. ~ Item name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "unfinished koji rice (obsolete)"
 msgid_plural "unfinished koji rice (obsolete)"
-msgstr[0] ""
+msgstr[0] "未完成的米麹（废弃）"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json data/mods/innawood/npcs/missiondef.json
@@ -237059,27 +237085,27 @@ msgstr "把纵火狂带到“仇人”家，并带上至少200单位的汽油，
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Check out Hub-01"
-msgstr ""
+msgstr "调查Hub-01"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Collect Seeds"
-msgstr ""
+msgstr "收集种子"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Eddie's first mission"
-msgstr ""
+msgstr "埃迪的第一个任务"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Eddie's second mission"
-msgstr ""
+msgstr "埃迪的第二个任务"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Eddie's third mission"
-msgstr ""
+msgstr "埃迪的第三个任务"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
@@ -237099,7 +237125,7 @@ msgstr "寻找并捕获一只猫"
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Find scrap for the bone seer"
-msgstr ""
+msgstr "为“骨语者”寻找废料"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
@@ -237109,7 +237135,7 @@ msgstr "从神秘建筑中解救巴里"
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Investigate the shady trader."
-msgstr ""
+msgstr "调查那个行迹可疑的商人。"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
@@ -281813,7 +281839,7 @@ msgstr "蜈蚣"
 #. ~ Description of species "KRAKEN"
 #: data/json/species.json
 msgid "a cephalopod"
-msgstr ""
+msgstr "头足类动物"
 
 #. ~ Description of species "CYBORG"
 #: data/json/species.json
@@ -282058,7 +282084,7 @@ msgstr "\"从内心深处……燃烧……\""
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"C-can't…\""
-msgstr ""
+msgstr "“不……不行……”"
 
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor
 #: data/json/speech.json
@@ -282372,7 +282398,7 @@ msgstr "\"等会联系我。\""
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"Gllllrrrr…\""
-msgstr ""
+msgstr "“咕噜噜……”"
 
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor, mon_mi_go_myrmidon
@@ -282434,7 +282460,7 @@ msgstr "\"好极了。\""
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor
 #: data/json/speech.json
 msgid "\"G… get off me you… you bastard…\""
-msgstr ""
+msgstr "“……从我身上下去，你……你这个混蛋……”"
 
 #. ~ Speech from speaker mon_feral_cop, mon_mi_go, mon_mi_go_abductor
 #: data/json/speech.json
@@ -282450,7 +282476,7 @@ msgstr "\"救命！救命命命！\""
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"Hahaha!\""
-msgstr ""
+msgstr "“哈哈哈！”"
 
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor
 #: data/json/speech.json
@@ -282567,19 +282593,19 @@ msgstr "\"嘿，我们这其他的测试对象甚至能够承受榴弹的攻击�
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"He…he…haha…\""
-msgstr ""
+msgstr "“嘿……嘿……哈哈……”"
 
 #. ~ Speech from speaker mon_shoggoth, mon_mi_go, mon_mi_go_abductor,
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"He…lp…\""
-msgstr ""
+msgstr "“帮...我...”"
 
 #. ~ Speech from speaker mon_shoggoth, mon_mi_go, mon_mi_go_abductor,
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"HhhhHheee…\""
-msgstr ""
+msgstr "“哼哼啊啊啊..”"
 
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor, mon_mi_go_myrmidon
 #: data/json/speech.json
@@ -283218,7 +283244,7 @@ msgstr "\"再过几天就周末了。\""
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"Oooouuooooo…\""
-msgstr ""
+msgstr "“噢噢噢噢噢..”"
 
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor, mon_mi_go_myrmidon
 #: data/json/speech.json
@@ -283461,7 +283487,7 @@ msgstr "\"拉着我的手。\""
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"Tekeli-li!\""
-msgstr ""
+msgstr "\"Tekeli-Li!\""
 
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor
 #: data/json/speech.json
@@ -283585,7 +283611,7 @@ msgstr "\"直到有进一步的安排。\""
 #. mon_mi_go_surgeon, mon_mi_go_guard, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "\"U…uugh…\""
-msgstr ""
+msgstr "“呃……唔……”"
 
 #. ~ Speech from speaker mon_broken_cyborg, mon_mi_go, mon_mi_go_abductor
 #: data/json/speech.json
@@ -285804,7 +285830,7 @@ msgstr "<npcname> 无情地撕裂了%s！"
 #: data/json/techniques.json
 #, c-format
 msgid "<npcname> catches %s with their attack"
-msgstr ""
+msgstr "<npcname> 用攻击抓到了 %s"
 
 #. ~ Message of martial technique "Circle Kick"
 #: data/json/techniques.json
@@ -286656,7 +286682,7 @@ msgstr "你格挡并迅速膝击了%s！"
 #. ~ Martial technique name
 #: data/json/techniques.json
 msgid "Area Attack (secondary)"
-msgstr ""
+msgstr "范围攻击（次要）"
 
 #. ~ Martial technique name
 #: data/json/techniques.json
@@ -287122,7 +287148,7 @@ msgstr "拗步掌"
 #. ~ Description of martial technique "Block"
 #: data/json/techniques.json
 msgid "Poor blocking ability"
-msgstr ""
+msgstr "阻挡能力差"
 
 #. ~ Martial technique name
 #: data/json/techniques.json
