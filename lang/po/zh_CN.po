@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-31 16:59+0800\n"
+"PO-Revision-Date: 2026-08-01 10:09+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -111348,12 +111348,12 @@ msgstr "一个成人大小的人偶，和商场的展示柜里的一样。这个
 #. ~ Description of "hockey puck"
 #: data/json/items/generic/toys_and_sports.json
 msgid "A heavy circular block of solid rubber, normally used for playing hockey."
-msgstr ""
+msgstr "一块实心橡胶制成的厚重圆盘，通常用于打冰球。"
 
 #. ~ Description of "shuttlecock"
 #: data/json/items/generic/toys_and_sports.json
 msgid "A high-drag projectile used in the sport of badminton.  It's basically a little ball with a cone-shaped plastic net sticking out of one end."
-msgstr ""
+msgstr "一种用于羽毛球运动的高阻力抛射物。基本上就是一个小球，一端伸出锥形塑料网。"
 
 #. ~ Description of "basketball"
 #: data/json/items/generic/toys_and_sports.json
@@ -111476,7 +111476,7 @@ msgstr[0] "台球"
 #: data/json/items/generic/toys_and_sports.json
 msgid "shuttlecock"
 msgid_plural "shuttlecocks"
-msgstr[0] ""
+msgstr[0] "羽毛球"
 
 #. ~ Item name
 #: data/json/items/generic/toys_and_sports.json
@@ -111909,7 +111909,7 @@ msgstr "一把非常不寻常的自动武器，使用大容量的盘型弹匣供
 #. ~ Description of "Mossberg Brownie pistol"
 #: data/json/items/gun/22.json
 msgid "A four barreled pocket pistol that fires the minuscule .22 LR cartridge.  Produced in the early 20th century for trappers, its combat effectiveness is questionable to say the least."
-msgstr ""
+msgstr "一种四管口袋手枪，发射微小的 .22 LR 弹药。生产于20世纪早期，面向捕猎者，其战斗效能至少可以说是值得怀疑的。"
 
 #. ~ Description of gun "full-auto varmint rifle"
 #. ~ Description of "full-auto varmint rifle"
@@ -112227,7 +112227,7 @@ msgstr "瓦尔特 P22 手枪是一种采用反冲式枪机的半自动手枪，�
 #. ~ Description of "Marlin 39A rifle"
 #: data/json/items/gun/22.json
 msgid "The oldest and longest-produced shoulder gun in the world.  Though the .22 is not a powerful round, this lever-action rifle is highly accurate and has essentially no recoil."
-msgstr ""
+msgstr "世界上历史最悠久、生产时间最长的肩射步枪。虽然 .22 弹威力不大，但这款杠杆式步枪精度极高，且几乎没有后坐力。"
 
 #. ~ Description of variant "varmint pistol" of gun "Ruger 22 Charger pistol"
 #. ~ Description of variant "Ruger 22 Charger pistol" of item "varmint pistol"
@@ -112560,7 +112560,7 @@ msgstr[0] "M16A4 步枪"
 #: data/json/items/gun/223.json
 msgid "M231 firing port rifle"
 msgid_plural "M231 firing port rifles"
-msgstr[0] ""
+msgstr[0] "M231 射孔枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -112754,7 +112754,7 @@ msgstr "这把普及的步枪是 M16 步枪系列的前身，它重量轻，准�
 #: data/json/items/gun/223.json
 msgid "ZPAP 85 Mini Draco pistol"
 msgid_plural "ZPAP 85 Mini Draco pistols"
-msgstr[0] ""
+msgstr[0] "ZPAP 85 小型德拉科手枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -112787,7 +112787,7 @@ msgstr "一把经典的栓动步枪，使用.270温彻斯特弹，在猎人中�
 #. ~ Description of "bolt-action hunting rifle"
 #: data/json/items/gun/270win.json
 msgid "Featuring a handsome set of wooden furnishings, a classic design, and a no nonsense .270 caliber chambering, this is a powerful hunting rifle.  With a tried and proven pedigree dating back over 60 years, millions of such rugged arms have been made, exported, and used throughout the United States and the world at large.  Where hunting is concerned, this is a highly capable and well proven weapon in all respects."
-msgstr ""
+msgstr "这款步枪配有典雅的木制枪身，设计经典，采用实用可靠的 .270 口径，是一支强劲的猎枪。其血统可追溯至60多年前，久经考验，数百万支这种坚固的步枪在美国及世界各地被制造、出口和使用。在狩猎方面，这是一款各方面性能都非常出色且久经考验的武器。"
 
 #. ~ Variant name of gun "bolt-action hunting rifle"
 #. ~ Variant name of item "bolt-action hunting rifle"
@@ -114924,7 +114924,7 @@ msgstr "一把巨型肩扛式 .50 口径反器材步枪。其威力和射程足�
 #. ~ Description of "McMillan TAC-50 rifle"
 #: data/json/items/gun/50.json
 msgid "A long-range anti-materiel and anti-personnel sniper rifle made by McMillan Firearms, serving the Canadian Army since 2000 as the C15, and the Navy Seals as the Mk 15 Mod 0.  This .50 caliber bolt-action rifle is capable of defeating light vehicles, radar installations and crew-served weapons at extreme distances."
-msgstr ""
+msgstr "一款由麦克米兰枪械公司制造的长程反器材与反人员狙击步枪，自2000年起在加拿大军队中服役，编号为C15，在美国海军海豹突击队中则为Mk 15 Mod 0。这款 .50 口径栓动步枪能够在极远距离上有效对付轻型车辆、雷达设施和班组操作武器。"
 
 #. ~ Description of gun "Serbu BFG-50 rifle"
 #. ~ Description of "Serbu BFG-50 rifle"
@@ -115789,7 +115789,7 @@ msgstr "一把根据原始毛瑟再设计的现代手枪，这款型号的枪管
 #. ~ Description of "Beretta 90-two pistol"
 #: data/json/items/gun/9mm.json
 msgid "A more modern version of Beretta's popular 92 series of handguns, the 90-two performs largely the same.  The main difference is a sleeker, almost futuristic-looking design owed in large part to the polymer underbarrel rail cover.  This one is chambered in 9x19mm."
-msgstr ""
+msgstr "贝雷塔畅销92系列手枪的现代化版本，90-two在性能上基本无异。主要区别在于其更流畅、近乎未来感的设计，这在很大程度上归功于聚合物下挂导轨护盖。该枪发射9x19毫米弹药。"
 
 #. ~ Description of gun "SIG M18 pistol"
 #. ~ Description of "SIG M18 pistol"
@@ -116599,7 +116599,7 @@ msgstr "一台电力驱动的六管加特林霰弹枪，采用自制的布弹药
 #. ~ Description of "FN SLP MK I shotgun"
 #: data/json/items/gun/shot.json
 msgid "An eminently practical semi-automatic shotgun, Fabrique Nationale's Mk I iteration of their Self-Loading Police brings together an 8-round magazine tube, accessory-ready Picatinny rail, and comfortably rubber-padded grip surfaces."
-msgstr ""
+msgstr "一种极为实用的半自动霰弹枪，比利时国营赫斯塔尔公司（FN）的自装填警用 Mk I 型，结合了8发管状弹仓、可安装附件的皮卡汀尼导轨，以及舒适的橡胶衬垫握把表面。"
 
 #. ~ Description of gun "single barrel shotgun"
 #. ~ Description of "single barrel shotgun"
@@ -116847,13 +116847,13 @@ msgstr "莫斯伯格 590A1 霰弹枪是莫斯伯格 500 霰弹枪军用和警用
 #. ~ Description of "M1897 Trench Gun"
 #: data/json/items/gun/shot.json
 msgid "The Winchester 1897 was one of the first commercially-successful pump-action shotguns.  In its 'trench' configuration it has become a heavily-romanticized American icon of World War I.  With its barrel shroud, bayonet lug, and 17 inch bayonet, this shotgun is undeniably fearsome in appearance."
-msgstr ""
+msgstr "温彻斯特1897型是最早获得商业成功的泵动霰弹枪之一。其“堑壕”型号已成为一战期间被高度浪漫化的美国标志性武器。凭借其枪管护罩、刺刀座和17英寸刺刀，这款霰弹枪在外观上无疑是令人畏惧的。"
 
 #. ~ Description of gun "Mossberg 500 Field shotgun"
 #. ~ Description of "Mossberg 500 Field shotgun"
 #: data/json/items/gun/shot.json
 msgid "The faithful friend of law-enforcement officers, military personnel, and zombie-hunting action heroes alike, this quaint firearm with its over 20 inch long barrel, 6-round magazine tube, and iconic pump-action design is as simple as it is effective.  One of the most popular firearm designs in all of history, this weapon can be reliably counted upon to do the job."
-msgstr ""
+msgstr "这款经典武器是执法人员、军事人员和僵尸猎杀动作英雄的忠实伙伴。它拥有超过20英寸的枪管、6发管状弹仓和标志性的泵动设计，简单而高效。作为历史上最受欢迎的枪械设计之一，这款武器值得信赖，能够完成任务。"
 
 #. ~ Description of gun "Browning Auto 5 shotgun"
 #. ~ Description of "Browning Auto 5 shotgun"
@@ -116895,13 +116895,13 @@ msgstr "这把霰弹枪枪管很短，而且没有枪托，专门用来破门。
 #. ~ Description of "Cobray Streetsweeper shotgun"
 #: data/json/items/gun/shot.json
 msgid "This weapon looks like someone's Frankensteined a comically oversized revolver together with a shotgun, resulting in a weapon that looks cumbersome to fire and downright miserable to reload."
-msgstr ""
+msgstr "这件武器看起来像是有人把一支大得离谱的左轮手枪和一支霰弹枪缝合在了一起，结果导致这件武器看起来发射起来笨重不堪，装填起来更是痛苦万分。"
 
 #. ~ Description of gun "Benelli M2 Tactical shotgun"
 #. ~ Description of "Benelli M2 Tactical shotgun"
 #: data/json/items/gun/shot.json
 msgid "Where the full-sized Benelli M2 shotgun is a hefty stallion, this mission-oriented tactical iteration is a trim race horse.  Its dimpled grip surfaces and cryogenically-treated barrel come together to present a compact, reliable weapon for any kind of field work."
-msgstr ""
+msgstr "如果说全尺寸的贝内利 M2 霰弹枪是一匹健壮的战马，那么这款面向任务的战术改型则是一匹精干的赛马。其点状防滑握把表面与低温处理的枪管相结合，呈现出一种紧凑可靠、适用于各类野外作业的武器。"
 
 #. ~ Description of gun "Remington 870 Wingmaster shotgun"
 #. ~ Description of "Remington 870 Wingmaster shotgun"
@@ -118006,19 +118006,19 @@ msgstr "一条金属斜坡，安装在霰弹枪的装弹口附近，用来引导
 #. ~ Description of "speedloader chute, Benelli Super"
 #: data/json/items/gunmod/loading_port.json
 msgid "A metal ramp that is installed near a shotgun's feeding port to index speedloader tubes.  This one is for Benelli's Super line of shotguns."
-msgstr ""
+msgstr "一种安装在霰弹枪装弹口附近的金属斜坡，用于定位快速装弹管。这款适用于贝内利“超级”系列霰弹枪。"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/loading_port.json
 msgctxt "gun_type_type"
 msgid "m2"
-msgstr ""
+msgstr "贝内利 M2 霰弹枪"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/loading_port.json
 msgctxt "gun_type_type"
 msgid "m2_tac"
-msgstr ""
+msgstr "贝内利 M2 战术型"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/loading_port.json
@@ -118054,7 +118054,7 @@ msgstr "雷明顿_870_breacher"
 #: data/json/items/gunmod/loading_port.json
 msgctxt "gun_type_type"
 msgid "sbe"
-msgstr ""
+msgstr "贝内利 超级黑鹰 霰弹枪"
 
 #. ~ Item name
 #. ~ Gun mod name
@@ -118103,7 +118103,7 @@ msgstr[0] "9发紧凑霰弹枪"
 #: data/json/items/gunmod/loading_port.json
 msgid "speedloader chute, Benelli Super"
 msgid_plural "speedloader chute, Benelli Supers"
-msgstr[0] ""
+msgstr[0] "快速装弹滑槽，贝内利超级系列"
 
 #. ~ Description of gun mod "balanced recoil system"
 #. ~ Description of "balanced recoil system"
@@ -119760,7 +119760,7 @@ msgstr "一颗装好的火铳弹，装着许多金属或石子废料。"
 #: data/json/items/handloaded_bullets.json
 msgid "blunderbuss flechettes"
 msgid_plural "blunderbuss flechettes"
-msgstr[0] ""
+msgstr[0] "喇叭枪"
 
 #. ~ Item name
 #: data/json/items/handloaded_bullets.json
@@ -125210,7 +125210,7 @@ msgstr "一根弯曲的木棍，上面托着一个石头头。  它目前正浸�
 #. ~ Description of "stone war club"
 #: data/json/items/melee/bludgeons.json
 msgid "A curved wooden club cradling a stone head.  These weapons were once used by indigenous peoples across North America."
-msgstr ""
+msgstr "一种弯曲的木棍，前端嵌有石质杖头。这种武器曾被北美各地的原住民使用。"
 
 #. ~ Description of "soaking wooden war club"
 #: data/json/items/melee/bludgeons.json
@@ -125220,7 +125220,7 @@ msgstr "一种弯曲的木制球杆，其球头由根节雕刻而成。  这些�
 #. ~ Description of "wooden war club"
 #: data/json/items/melee/bludgeons.json
 msgid "A curved wooden club with a ball head carved from a root burl.  These weapons were once used by indigenous peoples across North America."
-msgstr ""
+msgstr "一种弯曲的木棍，杖头由树根瘤雕刻而成。这种武器曾被北美各地的原住民使用。"
 
 #. ~ Description of "hockey stick"
 #: data/json/items/melee/bludgeons.json
@@ -125360,7 +125360,7 @@ msgstr "一小段木头，钉子穿过其末端，打造出一种威胁性的武
 #. ~ Description of "jitte"
 #: data/json/items/melee/bludgeons.json
 msgid "A short steel baton employed by Japanese police in the 17th and 18th century.  A small hook forks from the weapon just above the hilt, intended to aid in snagging or disarming opponents."
-msgstr ""
+msgstr "一种17至18世纪日本警方使用的短钢制警棍。握柄上方分出一支小钩，用于钩挂或缴械对手。"
 
 #. ~ Description of "blackjack"
 #: data/json/items/melee/bludgeons.json
@@ -125494,7 +125494,7 @@ msgstr "展开"
 #. ~ Description of "goedendag"
 #: data/json/items/melee/bludgeons.json
 msgid "Halfway between a short spear and a long club, the goedendag consists of a heavy metal spike mounted to the end of an even heavier shaft.  It is unsophisticated, but was once a favorite among medieval infantry who needed a cheap, simple means to smash through enemy armor."
-msgstr ""
+msgstr "介于短矛与长棍之间的一种武器，由一根沉重的金属尖刺安装在更沉重的木杆末端构成。它结构简单，但曾是中世纪步兵的最爱，他们需要一种廉价而直接的方式来击穿敌人盔甲。"
 
 #. ~ Description of "cudgel"
 #: data/json/items/melee/bludgeons.json
@@ -125618,7 +125618,7 @@ msgstr[0] "阿兹特克玻璃锯剑"
 #: data/json/items/melee/bludgeons.json
 msgid "goedendag"
 msgid_plural "goedendags"
-msgstr[0] ""
+msgstr[0] "刺槌"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -125642,7 +125642,7 @@ msgstr[0] "镔铁长棍"
 #: data/json/items/melee/bludgeons.json
 msgid "jitte"
 msgid_plural "jitte"
-msgstr[0] ""
+msgstr[0] "十手"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -125769,7 +125769,7 @@ msgstr[0] "浸泡希拉"
 #: data/json/items/melee/bludgeons.json
 msgid "soaking stone war club"
 msgid_plural "soaking stone war clubs"
-msgstr[0] ""
+msgstr[0] "浸水石战棒"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -126605,7 +126605,7 @@ msgstr "一片长方形的塑料，一端被磨尖成匕首形状。"
 #. ~ Description of "sai"
 #: data/json/items/melee/short_blades.json
 msgid "An okinawan weapon consisting of a slender spike with two hooked tines just above the hilt."
-msgstr ""
+msgstr "一种冲绳武器，由一根细长尖刺组成，在握柄上方带有两个钩状分叉。"
 
 #. ~ Description of "F-S fighting knife"
 #: data/json/items/melee/short_blades.json
@@ -126837,7 +126837,7 @@ msgstr[0] "折叠刀"
 #: data/json/items/melee/short_blades.json
 msgid "sai"
 msgid_plural "sai"
-msgstr[0] ""
+msgstr[0] "铁尺（钗）"
 
 #. ~ Item name
 #: data/json/items/melee/short_blades.json
@@ -127024,7 +127024,7 @@ msgstr "这种短棒也称为火熨斗，具有尖头，一侧有钩子。  它�
 #. ~ Description of "pitchfork"
 #: data/json/items/melee/spears_and_polearms.json
 msgid "An agricultural tool with a long wooden shaft and four spikes.  It's normally used to lift hay, but the tines could do some damage in a fight."
-msgstr ""
+msgstr "一种带有长木柄和四根尖齿的农具。通常用于叉运干草，但其尖齿在战斗中也足以造成伤害。"
 
 #. ~ Description of "makeshift war scythe"
 #: data/json/items/melee/spears_and_polearms.json
@@ -127352,7 +127352,7 @@ msgstr "一根短杆，上面有一个用链条连接的尖刺钢球。"
 #. ~ Description of "grappling hook"
 #: data/json/items/melee/whips_and_flails.json
 msgid "A steel hook attached to a long rope.  Deploying this next to a wall might give you a way to climb up."
-msgstr ""
+msgstr "一种连接于长绳的钢制钩爪。在墙边使用，或许能提供一种攀爬途径。"
 
 #. ~ Description of "war flail"
 #: data/json/items/melee/whips_and_flails.json
@@ -127367,7 +127367,7 @@ msgstr "一根结实的杆子，末端用皮绳连接着一根木棒。这种农
 #. ~ Description of "urumi"
 #: data/json/items/melee/whips_and_flails.json
 msgid "A thin ribbon of flexible steel attached to a handle, the whip sword is an Indian weapon long renowned for its bizarre design and the skill required to properly use it."
-msgstr ""
+msgstr "一条连接于握柄的柔性钢制薄带，鞭剑是一种印度武器，长期以来以其奇特的设计及正确使用所需的技巧而闻名。"
 
 #. ~ Description of "bullwhip"
 #: data/json/items/melee/whips_and_flails.json
@@ -128715,7 +128715,7 @@ msgstr[0] "狐鼠气步枪"
 #. ~ Description of "slingshot"
 #: data/json/items/ranged/slings.json
 msgid "A children's toy consisting of a Y-shaped piece of wood with an elastic band between the arms.  It can be used fire gravel or other very small projectiles with surprising speed.  It's probably not fit for killing zombies, but might be useful for hunting smaller game."
-msgstr ""
+msgstr "一种儿童玩具，由Y形木叉和两端之间的弹力带构成。可用于发射砾石或其他极小的弹丸，速度相当惊人。大概不适合用来击杀丧尸，但或许可用于狩猎小型猎物。"
 
 #. ~ Description of gun "brace slingshot"
 #. ~ Description of "brace slingshot"
@@ -128727,13 +128727,13 @@ msgstr "一把带有腕带的现代弹弓，能比简单的木制弹弓更有力
 #. ~ Description of "staff sling"
 #: data/json/items/ranged/slings.json
 msgid "Also called a fustibalus, this is a wooden staff with a sling fastened to one end.  When swung, it acts like a trebuchet to hurl rocks much farther and faster than throwing them by hand."
-msgstr ""
+msgstr "也被称为投石杖，是一种一端固定有投索的木制长棍。挥动时，它像投石机一样，能将石头投掷得比徒手更远、更快。"
 
 #. ~ Description of gun "sling"
 #. ~ Description of "sling"
 #: data/json/items/ranged/slings.json
 msgid "Little more than a strip of leather, the sling is an ancient weapon that acts as an extension of the wielder's arm, allowing small stones and custom-made bullets to be fired much faster and farther than they could be thrown by hand."
-msgstr ""
+msgstr "投石索，本质上不过是一条皮索，是一种古老的武器，它作为使用者手臂的延伸，能使小型石块和特制弹丸以比徒手投掷快得多、远得多的速度发射。"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -128841,7 +128841,7 @@ msgstr ""
 #. ~ Description of "net"
 #: data/json/items/ranged/throwing.json
 msgid "A mesh of weights and cordage designed to entangle opponents in combat.  It probably won't work on anything too small or too big."
-msgstr ""
+msgstr "一种由配重块与绳索构成的网状物，设计用于在战斗中缠绕对手。可能对体型过大或过小的目标效果不佳。"
 
 #. ~ Description of "disc"
 #: data/json/items/ranged/throwing.json
@@ -128856,7 +128856,7 @@ msgstr "一种用于户外游戏的塑料飞盘。"
 #. ~ Description of "bolas"
 #: data/json/items/ranged/throwing.json
 msgid "A rope with stone weights at either end.  If thrown, these might trip a person or animal, provided it isn't too small or too big."
-msgstr ""
+msgstr "一种两端系有石质配重的绳索。若将其抛出，或许能绊倒体型适中的人或动物。"
 
 #. ~ Description of "throwing stick"
 #: data/json/items/ranged/throwing.json
@@ -130017,7 +130017,7 @@ msgstr "一堆碎玻璃。这些碎片虽然锋利，但因为太小，无法直
 #. ~ Description of "reinforced sheet of tempered glass"
 #: data/json/items/resources/glass.json
 msgid "A plate of safety glass reinforced with metal brackets and slats to give it a bit more durability without sacrificing too much visibility."
-msgstr ""
+msgstr "一种由金属支架和横条加固的安全玻璃板，在不牺牲太多透明度的情况下提供更强的耐用性。"
 
 #. ~ Description of "glass fragments"
 #: data/json/items/resources/glass.json
@@ -130046,7 +130046,7 @@ msgstr[0] "玻璃碎片(尖锐)"
 #: data/json/items/resources/glass.json
 msgid "reinforced sheet of tempered glass"
 msgid_plural "reinforced sheets of tempered glass"
-msgstr[0] ""
+msgstr[0] "加固钢化玻璃板"
 
 #. ~ Item name
 #: data/json/items/resources/glass.json
@@ -130093,7 +130093,7 @@ msgstr "一卷黄地毯。"
 #. ~ Description of "carpet scrap"
 #: data/json/items/resources/home_improvement.json
 msgid "A small piece of carpet."
-msgstr ""
+msgstr "一小块地毯。"
 
 #. ~ Item name
 #: data/json/items/resources/home_improvement.json
@@ -130188,7 +130188,7 @@ msgstr[0] "棕油漆"
 #: data/json/items/resources/home_improvement.json
 msgid "carpet scrap"
 msgid_plural "carpet scraps"
-msgstr[0] ""
+msgstr[0] "地毯碎料"
 
 #. ~ Item name
 #: data/json/items/resources/home_improvement.json
@@ -131070,7 +131070,7 @@ msgstr "一小段导火索，长度足够让你有时间逃离爆炸。"
 #. ~ Description of "triffid stinger"
 #: data/json/items/resources/misc.json
 msgid "A short wooden dart grown from a mutated plant."
-msgstr ""
+msgstr "一种由变异植物长成的短木制飞镖。"
 
 #. ~ Description of "down mattress"
 #: data/json/items/resources/misc.json
@@ -131216,7 +131216,7 @@ msgstr[0] "厚橡胶块"
 #: data/json/items/resources/misc.json
 msgid "triffid stinger"
 msgid_plural "triffid stingers"
-msgstr[0] ""
+msgstr[0] "三尖树毒刺"
 
 #. ~ Item name
 #: data/json/items/resources/misc.json
@@ -131337,12 +131337,12 @@ msgstr[0] "热塑树脂块"
 #. ~ Description of "flint"
 #: data/json/items/resources/stone.json
 msgid "A chunk of flint, the kind of rock that can make sparks if stuck against steel.  It chips in a semi-predictable way if struck, making it suitable for knapping itno edged tools."
-msgstr ""
+msgstr "一块燧石，一种与钢撞击时能产生火花的岩石。敲击时会以可预测的方式碎裂，因此适合用于打制出带刃工具。"
 
 #. ~ Description of "fiber insulation batt"
 #: data/json/items/resources/stone.json
 msgid "A foil-wrapped batt of fibrous insulation; fire and moisture resistant, it's used for hot appliances like dishwashers and ovens."
-msgstr ""
+msgstr "一种用箔纸包裹的纤维绝缘垫；具有防火防潮性能，用于洗碗机和烤箱等发热电器。"
 
 #. ~ Description of "bone fossil"
 #: data/json/items/resources/stone.json
@@ -131372,7 +131372,7 @@ msgstr "一块石膏大骨模型。"
 #. ~ Description of "flaking rock"
 #: data/json/items/resources/stone.json
 msgid "A rock the size of a baseball which chips in a semi-predictable way if struck, making it suitable for knapping into edged tools.  In its current state, it's about the right size for throwing."
-msgstr ""
+msgstr "一块棒球大小的岩石，敲击时能以可预测的方式碎裂，因此适合打制出带刃工具。以其当前形态，大小正好适合投掷。"
 
 #. ~ Item name
 #: data/json/items/resources/stone.json
@@ -131419,7 +131419,7 @@ msgstr[0] "大块岩石"
 #. ~ Description of "ballistic Kevlar panel"
 #: data/json/items/resources/tailoring.json
 msgid "16 layers of ballistic Kevlar sheets stacked and stitched together into a soft, flexible panel.  Ballistic Kevlar is precision-made by machine and features an extremely tight and uniform weave which cannot be replicated by hand.  Given that the material isn't useful for cut-resistant applications and relies on being stackeed in layers to function, there's no reason to try and take it apart."
-msgstr ""
+msgstr "16层防弹凯夫拉片堆叠缝合而成的柔软柔性面板。防弹凯夫拉由机器精密制造，具有极其紧密均匀的编织结构，无法手工复制。鉴于该材料不适用于防切割用途，且需多层堆叠才能发挥作用，因此没有必要尝试将其拆解。"
 
 #. ~ Description of "Kevlar plate"
 #: data/json/items/resources/tailoring.json
@@ -131813,7 +131813,7 @@ msgstr "一根由实木雕刻而成的巨大螺杆，一个简单的部件，用
 #. ~ Description of "log"
 #: data/json/items/resources/wood.json
 msgid "A large section of tree trunk."
-msgstr ""
+msgstr "一大段树干。"
 
 #. ~ Description of "soaking spear shaft"
 #: data/json/items/resources/wood.json
@@ -132267,7 +132267,7 @@ msgstr[0] "炮塔支架"
 #. ~ Description of "robOS"
 #: data/json/items/software.json
 msgid "A deceptively simple program that can be used to give autonomous robots complex preprogrammed instructions."
-msgstr ""
+msgstr "一个看似简单的程序，可用于向自主机器人下达复杂的预编程指令。"
 
 #. ~ Description of "misc software"
 #: data/json/items/software.json
@@ -132484,7 +132484,7 @@ msgstr[0] "配方"
 #: data/json/items/software.json
 msgid "robOS"
 msgid_plural "robOS"
-msgstr[0] ""
+msgstr[0] "机器人操作系统"
 
 #. ~ Item name
 #: data/json/items/software.json
@@ -132820,7 +132820,7 @@ msgstr "一张简易筛网，由较粗钢丝制成的硬质边框附着细钢网
 #. (on)"
 #: data/json/items/tool/cooking.json
 msgid "The electric carver buzzes."
-msgstr ""
+msgstr "电动雕刻刀嗡嗡作响。"
 
 #. ~ value of variable 'success_message' in effect in EoC
 #. "EOC_toolweapon_activate__carver" in use action of item "electric carver
@@ -134086,17 +134086,17 @@ msgstr "一瓶塞着一块破布的易燃液体。使用该物品将点燃它，
 #. ~ Description of "smoke bomb"
 #: data/json/items/tool/explosives.json
 msgid "A canister grenade filled with a variety of pyrotechnic chemicals.  Once its pin is pulled, there will be a five second delay before it begins to expel a thick cloud of smoke."
-msgstr ""
+msgstr "一种装有多种烟火化学物质的罐式榴弹。拔掉保险销后，将延迟五秒开始释放浓烟。"
 
 #. ~ Description of "fungicidal gas grenade"
 #: data/json/items/tool/explosives.json
 msgid "A canister grenade filled with fungicidal solution.  Once the pin is pulled, after five second delay it will begin to expel a volatile gas that is highly toxic to fungal life forms."
-msgstr ""
+msgstr "一种装有杀菌溶液的罐式榴弹。拔掉保险销后，延迟五秒便开始释放一种对真菌类生命形式具有高度毒性的挥发性气体。"
 
 #. ~ Description of "tear gas grenade"
 #: data/json/items/tool/explosives.json
 msgid "A canister grenade filled with noxious irritant.  Use this item to pull the pin and start the fuse.  Five seconds later, it will begin to expel a highly toxic gas for some time.  This gas damages and slows those who enter it, as well as obscuring vision and scent."
-msgstr ""
+msgstr "一种装有刺激性毒气的罐式榴弹。使用此物品可拔掉保险销并启动引信。五秒后，它将开始持续释放高毒性气体。该气体会对进入其中的生物造成伤害并减缓其速度，同时也会遮蔽视线和气味。"
 
 #. ~ Description of "burning rocket candy"
 #: data/json/items/tool/explosives.json
@@ -134106,12 +134106,12 @@ msgstr "这是块已经点着了的火箭软糖，在响亮的嘶嘶燃烧声中
 #. ~ Description of "improvised gas grenade"
 #: data/json/items/tool/explosives.json
 msgid "A crude gas bomb made using household chemicals.  Once the pin is pulled, it will begin emitting a highly toxic gas."
-msgstr ""
+msgstr "一种利用家用化学品制成的简易毒气弹。一旦拔掉保险销，它将开始释放高毒性气体。"
 
 #. ~ Description of "scrambler grenade"
 #: data/json/items/tool/explosives.json
 msgid "A device which, three seconds after being armed, will emit a short burst of microwave and radio interference which can briefly \"stun\" drones and other machines by overloading their electronics."
-msgstr ""
+msgstr "一种装置，在启动三秒后，会发出一阵短暂的微波和射频干扰，通过使电子设备过载来短暂“击晕”无人机及其他机器。"
 
 #. ~ Description of "lit firecracker"
 #: data/json/items/tool/explosives.json
@@ -134126,57 +134126,57 @@ msgstr "一个装满强酸的易碎容器。把它投掷出去会形成强酸池
 #. ~ Description of "EMP grenade"
 #: data/json/items/tool/explosives.json
 msgid "A grenade that generates an electromagnetic pulse with a low-inductance capacitor bank discharged into a single-loop antenna.  This will produce a powerful EMP field that can permanently damage electronics and drain bionic energy."
-msgstr ""
+msgstr "一种手榴弹，通过将低电感电容器组放电至单回路天线来产生电磁脉冲。这将产生强大的电磁脉冲场，可永久性损坏电子设备并消耗生化能量。"
 
 #. ~ Description of "improvised bomb"
 #: data/json/items/tool/explosives.json
 msgid "A homemade explosive device consisting of a large plastic jug filled with explosives and scrap metal, equipped with a long fuse.  Once lit, assuming nothing goes wrong, it should burn for about twenty seconds before going off."
-msgstr ""
+msgstr "一种自制爆炸装置，由一个装满炸药和废金属的大型塑料罐制成，并配有长引信。一旦点燃，假设一切顺利，它应该在燃烧约二十秒后爆炸。"
 
 #. ~ Description of "lit improvised bomb"
 #: data/json/items/tool/explosives.json
 msgid "A homemade explosive device consisting of a large plastic jug filled with explosives and scrap metal.  Its fuse has been lit, promising an imminent explosion."
-msgstr ""
+msgstr "一种自制爆炸装置，由一个大号塑料罐装入炸药和废金属制成。其引信已点燃，即将爆炸。"
 
 #. ~ Description of "improvised HE bomb"
 #: data/json/items/tool/explosives.json
 msgid "A homemade explosive device consisting of a large plastic jug filled with high explosive and scrap metal.  A pin waits at one sealed end; once pulled, the bomb will be armed and should go off after about twenty seconds."
-msgstr ""
+msgstr "一种自制爆炸装置，由一个大号塑料罐装入高爆炸药和废金属制成。一端密封处插有保险销；一旦拔出，炸弹将进入待发状态，约二十秒后爆炸。"
 
 #. ~ Description of "live improvised HE bomb"
 #: data/json/items/tool/explosives.json
 msgid "A homemade explosive device consisting of a large plastic jug filled with high explosive and scrap metal.  The pin has been pulled."
-msgstr ""
+msgstr "一种自制爆炸装置，由一个大号塑料罐装入高爆炸药和废金属制成。保险销已被拔除。"
 
 #. ~ Description of "improvised fungicide grenade"
 #: data/json/items/tool/explosives.json
 msgid "A makeshift canister grenade filled with fungicidal solution.  Once the pin is pulled, there will be a five second delay before it begins to expel a volatile gas that is highly toxic to fungal life forms."
-msgstr ""
+msgstr "一种装有杀菌溶液的自制罐式榴弹。拔掉保险销后，将延迟五秒开始释放一种对真菌类生命形式具有高度毒性的挥发性气体。"
 
 #. ~ Description of "improvised insecticide grenade"
 #: data/json/items/tool/explosives.json
 msgid "A makeshift canister grenade filled with insecticidal solution.  Use this item to pull the pin and start the fuse.  Five seconds later, it will begin to expel a volatile gas that is highly toxic to insect life forms."
-msgstr ""
+msgstr "一种装有杀虫溶液的自制罐式榴弹。使用此物品可拔掉保险销并启动引信。五秒后，它将开始释放一种对昆虫类生命形式具有高度毒性的挥发性气体。"
 
 #. ~ Description of "keg bomb"
 #: data/json/items/tool/explosives.json
 msgid "A metal keg filled with explosives and equipped with a long fuse.  Once lit, it should burn for about one hundred seconds before going off."
-msgstr ""
+msgstr "一种装满炸药并配有长引信的金属桶。一旦点燃，它应该在大约一百秒后爆炸。"
 
 #. ~ Description of "lit keg bomb"
 #: data/json/items/tool/explosives.json
 msgid "A metal keg filled with explosives.  The fuse has been lit."
-msgstr ""
+msgstr "一个装满炸药的金属桶。引信已被点燃。"
 
 #. ~ Description of "HE keg bomb"
 #: data/json/items/tool/explosives.json
 msgid "A metal keg filled with high explosive.  Once the fuse is lit, it will explode after one hundred seconds with enormous force and a great deal of shrapnel."
-msgstr ""
+msgstr "一种装满高爆炸药的金属桶。一旦点燃引信，它将在百秒后以巨大的威力和大量破片爆炸。"
 
 #. ~ Description of "lit HE keg bomb"
 #: data/json/items/tool/explosives.json
 msgid "A metal keg filled with high explosive.  The fuse is it and it will soon go off."
-msgstr ""
+msgstr "一种装满高爆炸药的金属桶。引信已点燃，不久将爆炸。"
 
 #. ~ Description of "frag grenade"
 #: data/json/items/tool/explosives.json
@@ -134206,7 +134206,7 @@ msgstr "梨形的火箭糖。加热硝石与糖的混合物熔融后凝固而成
 #. ~ Description of "bug bomb"
 #: data/json/items/tool/explosives.json
 msgid "A pest control device designed to kill bugs dead by fumigating an entire room.  The label instructs that you activate it, then drop it and quickly leave the area.  The fogger will dispense its payload over four minutes."
-msgstr ""
+msgstr "一种害虫防治装置，旨在通过熏蒸整个房间来杀死害虫。标签说明应将其激活，然后放下并迅速离开该区域。烟雾剂将在四分钟内释放其有效成分。"
 
 #. ~ Description of "60mm mortar propellant charge"
 #: data/json/items/tool/explosives.json
@@ -134216,17 +134216,17 @@ msgstr "装有推进剂的塑料环，可帮助迫击炮弹飞得更远。  它�
 #. ~ Description of "HE pipe bomb"
 #: data/json/items/tool/explosives.json
 msgid "A section of steel pipe filled with military-grade high explosive.  Use this item to pull the pin, giving you five seconds to get away from it before it detonates."
-msgstr ""
+msgstr "一段装满军用级高爆炸药的钢管。使用此物品可拔掉保险销，在爆炸前你将有五秒钟时间远离。"
 
 #. ~ Description of "pipe bomb"
 #: data/json/items/tool/explosives.json
 msgid "A sizable section of steel pipe filled with explosives.  Its fuse will only burn for only a few seconds before going off."
-msgstr ""
+msgstr "一段装满炸药的大号钢管。其引信在爆炸前仅能燃烧数秒。"
 
 #. ~ Description of "lit pipe bomb"
 #: data/json/items/tool/explosives.json
 msgid "A sizable section of steel pipe packed with explosives.  The lit fuse on one end indicates that it will probably go off any second now."
-msgstr ""
+msgstr "一段装满炸药的大号钢管。一端已点燃的引信表明，它随时可能爆炸。"
 
 #. ~ Description of "firecracker"
 #: data/json/items/tool/explosives.json
@@ -134236,22 +134236,22 @@ msgstr "一个鞭炮，引信短而且可以被点燃，当然，你还是要用
 #. ~ Description of "barrel bomb"
 #: data/json/items/tool/explosives.json
 msgid "A steel drum filled with explosives and equipped with a long fuse.  Once lit, it should go off after about one hundred seconds."
-msgstr ""
+msgstr "一个装满炸药并配有长引信的钢桶。一旦点燃，它应该在大约一百秒后爆炸。"
 
 #. ~ Description of "lit barrel bomb"
 #: data/json/items/tool/explosives.json
 msgid "A steel drum filled with explosives.  The fuse is lit."
-msgstr ""
+msgstr "一个装满炸药的钢桶。引信已点燃。"
 
 #. ~ Description of "HE barrel bomb"
 #: data/json/items/tool/explosives.json
 msgid "A steel drum filled with high explosive.  Once it has been activated it will explode after one hundred seconds with tremendous force and an enormous amount of shrapnel."
-msgstr ""
+msgstr "一种装满高爆炸药的钢桶。一旦激活，它将在百秒后以巨大的威力和大量的破片爆炸。"
 
 #. ~ Description of "lit barrel bomb"
 #: data/json/items/tool/explosives.json
 msgid "A steel drum filled with high explosive.  The fuse is lit and it will soon go off."
-msgstr ""
+msgstr "一种装满高爆炸药的钢桶。引信已点燃，不久将爆炸。"
 
 #. ~ Description of "dynamite"
 #: data/json/items/tool/explosives.json
@@ -134261,7 +134261,7 @@ msgstr "一根用蜡纸包裹的硝化甘油和填充物的棒，一端伸出一
 #. ~ Description of "flashbang"
 #: data/json/items/tool/explosives.json
 msgid "A stun grenade.  Once the pin is pulled, there will be five seconds before it detonates with intense light and sound, blinding, deafening, and disorienting anyone nearby."
-msgstr ""
+msgstr "一种震撼弹。拔掉保险销后，五秒后将以强烈的闪光和巨响引爆，致盲、震聋并眩晕附近所有人。"
 
 #. ~ Description of "packed M72 LAW"
 #: data/json/items/tool/explosives.json
@@ -134276,27 +134276,27 @@ msgstr "一个拔了插销的燃烧手雷，随时都会变成火焰地狱，赶
 #. ~ Description of "homemade demolition charge"
 #: data/json/items/tool/explosives.json
 msgid "An improvised demolition charge equipped with a twenty second fuse."
-msgstr ""
+msgstr "一种配备二十秒引信的自制爆破炸药。"
 
 #. ~ Description of "improvised grenade"
 #: data/json/items/tool/explosives.json
 msgid "An improvised explosive device consisting of a hefty metal canister sealed around an explosive payload.  Once lit, the fuse trailing from one end will burn for just a few seconds before it all goes off."
-msgstr ""
+msgstr "一种由厚重金属罐封装爆炸装药的自制爆炸装置。一旦点燃，一端拖曳的引信将在短短数秒内燃尽并引爆。"
 
 #. ~ Description of "small improvised grenade"
 #: data/json/items/tool/explosives.json
 msgid "An improvised explosive device consisting of a small metal canister sealed around an explosive payload.  A short fuse hangs trails from one end, and once lit will burn for only a few seconds before going off."
-msgstr ""
+msgstr "一种由小型金属罐封装爆炸装药的自制爆炸装置。一端拖曳着短引信，一旦点燃，将在短短数秒内燃尽并引爆。"
 
 #. ~ Description of "improvised HE grenade"
 #: data/json/items/tool/explosives.json
 msgid "An improvised grenade consisting of a hefty metal canister sealed around a sizeable quantity of military-grade high explosive.  A short fuse dangles from one end, ready to be lit."
-msgstr ""
+msgstr "一种由厚重金属罐封装大量军用级高爆炸药的自制榴弹。一端垂吊着短引信，随时可被点燃。"
 
 #. ~ Description of "small improvised HE grenade"
 #: data/json/items/tool/explosives.json
 msgid "An improvised grenade consisting of a small metal canister sealed around a quantity of military-grade high explosive.  A short fuse dangles from one end, ready to be lit."
-msgstr ""
+msgstr "一种由小型金属罐封装一定量军用级高爆炸药的自制榴弹。一端垂吊着短引信，随时可被点燃。"
 
 #. ~ "menu_text" action message of item "EMP bomb"
 #. ~ "menu_text" action message of item "flashbang"
@@ -134338,19 +134338,19 @@ msgstr[0] "EMP手雷"
 #: data/json/items/tool/explosives.json
 msgid "HE barrel bomb"
 msgid_plural "HE barrel bombs"
-msgstr[0] ""
+msgstr[0] "高爆桶装炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "HE keg bomb"
 msgid_plural "HE keg bombs"
-msgstr[0] ""
+msgstr[0] "高爆凯格炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "HE pipe bomb"
 msgid_plural "HE pipe bombs"
-msgstr[0] ""
+msgstr[0] "高爆管状炸弹"
 
 #. ~ "menu_text" action message of item "dynamite"
 #. ~ "menu_text" action message of item "dynamite bundle"
@@ -134403,7 +134403,7 @@ msgstr "引信嘶嘶地燃烧着，炸药随时都会爆炸！"
 #. ~ Description of "lit homemade grenade"
 #: data/json/items/tool/explosives.json
 msgid "The fuse on this improvised grenade is lit, and it will explode any second now."
-msgstr ""
+msgstr "这枚自制榴弹的引信已点燃，随时可能爆炸。"
 
 #. ~ Description of "lit small improvised HE grenade"
 #: data/json/items/tool/explosives.json
@@ -134413,7 +134413,7 @@ msgstr "一个已经点燃了的自制手雷，活脱脱的烫手山芋，赶紧
 #. ~ Description of "lit improvised HE grenade"
 #: data/json/items/tool/explosives.json
 msgid "The fuse on this improvised grenade is lit.  It will explode any second now."
-msgstr ""
+msgstr "这枚自制榴弹的引信已点燃。随时可能爆炸。"
 
 #. ~ Description of "lit homemade demolition charge"
 #: data/json/items/tool/explosives.json
@@ -134428,22 +134428,22 @@ msgstr "核弹从外观上看并没有什么不同，但你知道该装置已经
 #. ~ Description of "live EMP bomb"
 #: data/json/items/tool/explosives.json
 msgid "This EMP bomb is active and will shortly detonate.  In addition to the usual shrapnel and concussive force, it will create a large EMP field that can permanently damage electronics and drain bionic energy."
-msgstr ""
+msgstr "这枚电磁脉冲炸弹已激活，即将引爆。除了通常的破片与冲击波外，它还将产生一个强大的电磁脉冲场，可永久性损坏电子设备并消耗生化能量。"
 
 #. ~ Description of "live EMP grenade"
 #: data/json/items/tool/explosives.json
 msgid "This EMP grenade is active and will shortly detonate, creating a large EMP field that can permanently damage electronics and drain bionic energy."
-msgstr ""
+msgstr "这枚电磁脉冲手榴弹已激活，即将引爆，产生一个强大的电磁脉冲场，可永久性损坏电子设备并消耗生化能量。"
 
 #. ~ Description of "live bug bomb"
 #: data/json/items/tool/explosives.json
 msgid "This bug bomb has had its valve opened and is (or will shortly be) spraying a continuous stream of insecticidal gas.  While it's designed to kill bugs, it's probably not exactly healthy for anybody else."
-msgstr ""
+msgstr "这枚杀虫炸弹的阀门已被打开，正（或即将）持续喷洒杀虫气体。虽然其设计用于杀死昆虫，但对其他生物恐怕也并非无害。"
 
 #. ~ Description of "live improvised gas grenade"
 #: data/json/items/tool/explosives.json
 msgid "This canister of poison gas has been unsealed, and is (or will shortly be) expelling highly toxic gas.  You should consider getting rid of it soon."
-msgstr ""
+msgstr "这罐毒气已被开启，正（或即将）释放高毒性气体。你应当考虑尽快处理掉它。"
 
 #. ~ Description of "live flashbang"
 #: data/json/items/tool/explosives.json
@@ -134473,12 +134473,12 @@ msgstr "这个自制杀虫剂手雷的插销已被拔出，并且正在释放有
 #. ~ Description of "live HE pipe bomb"
 #: data/json/items/tool/explosives.json
 msgid "This pipebomb's pin is pulled, and it will explode any second now."
-msgstr ""
+msgstr "这根管状炸弹的保险销已被拔出，随时可能爆炸。"
 
 #. ~ Description of "live scrambler grenade"
 #: data/json/items/tool/explosives.json
 msgid "This scrambler grenade is active and will soon go off, releasing an electromagnetic burst that may temporarily stun drones and other machines in the area."
-msgstr ""
+msgstr "这枚干扰手榴弹已激活，即将引爆，释放出一阵电磁脉冲，可能暂时击晕区域内的无人机及其他机器。"
 
 #. ~ Description of "live smoke bomb"
 #: data/json/items/tool/explosives.json
@@ -134488,7 +134488,7 @@ msgstr "这个烟雾弹的插销已被拔出，并且正在释放浓烟。"
 #. ~ Description of "EMP bomb"
 #: data/json/items/tool/explosives.json
 msgid "This substantial device is a bomb that generates an electromagnetic pulse.  When activated, the plutonium fuel cell is drained into a flux compression generator, the detonation of which, in addition to the usual shrapnel and concussive force, creates a strong magnetic field.  When this magnetic field is fed into the antenna, it creates an electro-magnetic pulse which can permanently damage electronics and drain bionic energy."
-msgstr ""
+msgstr "这款体积可观的装置是一种用于产生电磁脉冲的炸弹。启动后，钚燃料电池的能量被注入磁通压缩发生器，其爆炸除了产生通常的破片与冲击波外，还会生成强磁场。该磁场通过天线转化为电磁脉冲，可永久性损坏电子设备并消耗生化能量。"
 
 #. ~ Description of "live tear gas grenade"
 #: data/json/items/tool/explosives.json
@@ -134499,7 +134499,7 @@ msgstr "这个催泪手雷的插销已被拔出，并且正在释放有毒气体
 #: data/json/items/tool/explosives.json
 #, c-format
 msgid "You arm the %s."
-msgstr ""
+msgstr "你启动了 %s。"
 
 #. ~ "msg" action message of item "rocket candy"
 #. ~ "msg" action message of item "small improvised HE grenade"
