@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-07-31 16:59+0800\n"
+"PO-Revision-Date: 2026-08-01 11:51+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -111348,12 +111348,12 @@ msgstr "一个成人大小的人偶，和商场的展示柜里的一样。这个
 #. ~ Description of "hockey puck"
 #: data/json/items/generic/toys_and_sports.json
 msgid "A heavy circular block of solid rubber, normally used for playing hockey."
-msgstr ""
+msgstr "一块实心橡胶制成的厚重圆盘，通常用于打冰球。"
 
 #. ~ Description of "shuttlecock"
 #: data/json/items/generic/toys_and_sports.json
 msgid "A high-drag projectile used in the sport of badminton.  It's basically a little ball with a cone-shaped plastic net sticking out of one end."
-msgstr ""
+msgstr "一种用于羽毛球运动的高阻力抛射物。基本上就是一个小球，一端伸出锥形塑料网。"
 
 #. ~ Description of "basketball"
 #: data/json/items/generic/toys_and_sports.json
@@ -111476,7 +111476,7 @@ msgstr[0] "台球"
 #: data/json/items/generic/toys_and_sports.json
 msgid "shuttlecock"
 msgid_plural "shuttlecocks"
-msgstr[0] ""
+msgstr[0] "羽毛球"
 
 #. ~ Item name
 #: data/json/items/generic/toys_and_sports.json
@@ -111909,7 +111909,7 @@ msgstr "一把非常不寻常的自动武器，使用大容量的盘型弹匣供
 #. ~ Description of "Mossberg Brownie pistol"
 #: data/json/items/gun/22.json
 msgid "A four barreled pocket pistol that fires the minuscule .22 LR cartridge.  Produced in the early 20th century for trappers, its combat effectiveness is questionable to say the least."
-msgstr ""
+msgstr "一种四管口袋手枪，发射微小的 .22 LR 弹药。生产于20世纪早期，面向捕猎者，其战斗效能至少可以说是值得怀疑的。"
 
 #. ~ Description of gun "full-auto varmint rifle"
 #. ~ Description of "full-auto varmint rifle"
@@ -112227,7 +112227,7 @@ msgstr "瓦尔特 P22 手枪是一种采用反冲式枪机的半自动手枪，�
 #. ~ Description of "Marlin 39A rifle"
 #: data/json/items/gun/22.json
 msgid "The oldest and longest-produced shoulder gun in the world.  Though the .22 is not a powerful round, this lever-action rifle is highly accurate and has essentially no recoil."
-msgstr ""
+msgstr "世界上历史最悠久、生产时间最长的肩射步枪。虽然 .22 弹威力不大，但这款杠杆式步枪精度极高，且几乎没有后坐力。"
 
 #. ~ Description of variant "varmint pistol" of gun "Ruger 22 Charger pistol"
 #. ~ Description of variant "Ruger 22 Charger pistol" of item "varmint pistol"
@@ -112560,7 +112560,7 @@ msgstr[0] "M16A4 步枪"
 #: data/json/items/gun/223.json
 msgid "M231 firing port rifle"
 msgid_plural "M231 firing port rifles"
-msgstr[0] ""
+msgstr[0] "M231 射孔枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -112754,7 +112754,7 @@ msgstr "这把普及的步枪是 M16 步枪系列的前身，它重量轻，准�
 #: data/json/items/gun/223.json
 msgid "ZPAP 85 Mini Draco pistol"
 msgid_plural "ZPAP 85 Mini Draco pistols"
-msgstr[0] ""
+msgstr[0] "ZPAP 85 小型德拉科手枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -112787,7 +112787,7 @@ msgstr "一把经典的栓动步枪，使用.270温彻斯特弹，在猎人中�
 #. ~ Description of "bolt-action hunting rifle"
 #: data/json/items/gun/270win.json
 msgid "Featuring a handsome set of wooden furnishings, a classic design, and a no nonsense .270 caliber chambering, this is a powerful hunting rifle.  With a tried and proven pedigree dating back over 60 years, millions of such rugged arms have been made, exported, and used throughout the United States and the world at large.  Where hunting is concerned, this is a highly capable and well proven weapon in all respects."
-msgstr ""
+msgstr "这款步枪配有典雅的木制枪身，设计经典，采用实用可靠的 .270 口径，是一支强劲的猎枪。其血统可追溯至60多年前，久经考验，数百万支这种坚固的步枪在美国及世界各地被制造、出口和使用。在狩猎方面，这是一款各方面性能都非常出色且久经考验的武器。"
 
 #. ~ Variant name of gun "bolt-action hunting rifle"
 #. ~ Variant name of item "bolt-action hunting rifle"
@@ -114924,7 +114924,7 @@ msgstr "一把巨型肩扛式 .50 口径反器材步枪。其威力和射程足�
 #. ~ Description of "McMillan TAC-50 rifle"
 #: data/json/items/gun/50.json
 msgid "A long-range anti-materiel and anti-personnel sniper rifle made by McMillan Firearms, serving the Canadian Army since 2000 as the C15, and the Navy Seals as the Mk 15 Mod 0.  This .50 caliber bolt-action rifle is capable of defeating light vehicles, radar installations and crew-served weapons at extreme distances."
-msgstr ""
+msgstr "一款由麦克米兰枪械公司制造的长程反器材与反人员狙击步枪，自2000年起在加拿大军队中服役，编号为C15，在美国海军海豹突击队中则为Mk 15 Mod 0。这款 .50 口径栓动步枪能够在极远距离上有效对付轻型车辆、雷达设施和班组操作武器。"
 
 #. ~ Description of gun "Serbu BFG-50 rifle"
 #. ~ Description of "Serbu BFG-50 rifle"
@@ -115789,7 +115789,7 @@ msgstr "一把根据原始毛瑟再设计的现代手枪，这款型号的枪管
 #. ~ Description of "Beretta 90-two pistol"
 #: data/json/items/gun/9mm.json
 msgid "A more modern version of Beretta's popular 92 series of handguns, the 90-two performs largely the same.  The main difference is a sleeker, almost futuristic-looking design owed in large part to the polymer underbarrel rail cover.  This one is chambered in 9x19mm."
-msgstr ""
+msgstr "贝雷塔畅销92系列手枪的现代化版本，90-two在性能上基本无异。主要区别在于其更流畅、近乎未来感的设计，这在很大程度上归功于聚合物下挂导轨护盖。该枪发射9x19毫米弹药。"
 
 #. ~ Description of gun "SIG M18 pistol"
 #. ~ Description of "SIG M18 pistol"
@@ -116599,7 +116599,7 @@ msgstr "一台电力驱动的六管加特林霰弹枪，采用自制的布弹药
 #. ~ Description of "FN SLP MK I shotgun"
 #: data/json/items/gun/shot.json
 msgid "An eminently practical semi-automatic shotgun, Fabrique Nationale's Mk I iteration of their Self-Loading Police brings together an 8-round magazine tube, accessory-ready Picatinny rail, and comfortably rubber-padded grip surfaces."
-msgstr ""
+msgstr "一种极为实用的半自动霰弹枪，比利时国营赫斯塔尔公司（FN）的自装填警用 Mk I 型，结合了8发管状弹仓、可安装附件的皮卡汀尼导轨，以及舒适的橡胶衬垫握把表面。"
 
 #. ~ Description of gun "single barrel shotgun"
 #. ~ Description of "single barrel shotgun"
@@ -116847,13 +116847,13 @@ msgstr "莫斯伯格 590A1 霰弹枪是莫斯伯格 500 霰弹枪军用和警用
 #. ~ Description of "M1897 Trench Gun"
 #: data/json/items/gun/shot.json
 msgid "The Winchester 1897 was one of the first commercially-successful pump-action shotguns.  In its 'trench' configuration it has become a heavily-romanticized American icon of World War I.  With its barrel shroud, bayonet lug, and 17 inch bayonet, this shotgun is undeniably fearsome in appearance."
-msgstr ""
+msgstr "温彻斯特1897型是最早获得商业成功的泵动霰弹枪之一。其“堑壕”型号已成为一战期间被高度浪漫化的美国标志性武器。凭借其枪管护罩、刺刀座和17英寸刺刀，这款霰弹枪在外观上无疑是令人畏惧的。"
 
 #. ~ Description of gun "Mossberg 500 Field shotgun"
 #. ~ Description of "Mossberg 500 Field shotgun"
 #: data/json/items/gun/shot.json
 msgid "The faithful friend of law-enforcement officers, military personnel, and zombie-hunting action heroes alike, this quaint firearm with its over 20 inch long barrel, 6-round magazine tube, and iconic pump-action design is as simple as it is effective.  One of the most popular firearm designs in all of history, this weapon can be reliably counted upon to do the job."
-msgstr ""
+msgstr "这款经典武器是执法人员、军事人员和僵尸猎杀动作英雄的忠实伙伴。它拥有超过20英寸的枪管、6发管状弹仓和标志性的泵动设计，简单而高效。作为历史上最受欢迎的枪械设计之一，这款武器值得信赖，能够完成任务。"
 
 #. ~ Description of gun "Browning Auto 5 shotgun"
 #. ~ Description of "Browning Auto 5 shotgun"
@@ -116895,13 +116895,13 @@ msgstr "这把霰弹枪枪管很短，而且没有枪托，专门用来破门。
 #. ~ Description of "Cobray Streetsweeper shotgun"
 #: data/json/items/gun/shot.json
 msgid "This weapon looks like someone's Frankensteined a comically oversized revolver together with a shotgun, resulting in a weapon that looks cumbersome to fire and downright miserable to reload."
-msgstr ""
+msgstr "这件武器看起来像是有人把一支大得离谱的左轮手枪和一支霰弹枪缝合在了一起，结果导致这件武器看起来发射起来笨重不堪，装填起来更是痛苦万分。"
 
 #. ~ Description of gun "Benelli M2 Tactical shotgun"
 #. ~ Description of "Benelli M2 Tactical shotgun"
 #: data/json/items/gun/shot.json
 msgid "Where the full-sized Benelli M2 shotgun is a hefty stallion, this mission-oriented tactical iteration is a trim race horse.  Its dimpled grip surfaces and cryogenically-treated barrel come together to present a compact, reliable weapon for any kind of field work."
-msgstr ""
+msgstr "如果说全尺寸的贝内利 M2 霰弹枪是一匹健壮的战马，那么这款面向任务的战术改型则是一匹精干的赛马。其点状防滑握把表面与低温处理的枪管相结合，呈现出一种紧凑可靠、适用于各类野外作业的武器。"
 
 #. ~ Description of gun "Remington 870 Wingmaster shotgun"
 #. ~ Description of "Remington 870 Wingmaster shotgun"
@@ -118006,19 +118006,19 @@ msgstr "一条金属斜坡，安装在霰弹枪的装弹口附近，用来引导
 #. ~ Description of "speedloader chute, Benelli Super"
 #: data/json/items/gunmod/loading_port.json
 msgid "A metal ramp that is installed near a shotgun's feeding port to index speedloader tubes.  This one is for Benelli's Super line of shotguns."
-msgstr ""
+msgstr "一种安装在霰弹枪装弹口附近的金属斜坡，用于定位快速装弹管。这款适用于贝内利“超级”系列霰弹枪。"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/loading_port.json
 msgctxt "gun_type_type"
 msgid "m2"
-msgstr ""
+msgstr "贝内利 M2 霰弹枪"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/loading_port.json
 msgctxt "gun_type_type"
 msgid "m2_tac"
-msgstr ""
+msgstr "贝内利 M2 战术型"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/loading_port.json
@@ -118054,7 +118054,7 @@ msgstr "雷明顿_870_breacher"
 #: data/json/items/gunmod/loading_port.json
 msgctxt "gun_type_type"
 msgid "sbe"
-msgstr ""
+msgstr "贝内利 超级黑鹰 霰弹枪"
 
 #. ~ Item name
 #. ~ Gun mod name
@@ -118103,7 +118103,7 @@ msgstr[0] "9发紧凑霰弹枪"
 #: data/json/items/gunmod/loading_port.json
 msgid "speedloader chute, Benelli Super"
 msgid_plural "speedloader chute, Benelli Supers"
-msgstr[0] ""
+msgstr[0] "快速装弹滑槽，贝内利超级系列"
 
 #. ~ Description of gun mod "balanced recoil system"
 #. ~ Description of "balanced recoil system"
@@ -119760,7 +119760,7 @@ msgstr "一颗装好的火铳弹，装着许多金属或石子废料。"
 #: data/json/items/handloaded_bullets.json
 msgid "blunderbuss flechettes"
 msgid_plural "blunderbuss flechettes"
-msgstr[0] ""
+msgstr[0] "喇叭枪"
 
 #. ~ Item name
 #: data/json/items/handloaded_bullets.json
@@ -125210,7 +125210,7 @@ msgstr "一根弯曲的木棍，上面托着一个石头头。  它目前正浸�
 #. ~ Description of "stone war club"
 #: data/json/items/melee/bludgeons.json
 msgid "A curved wooden club cradling a stone head.  These weapons were once used by indigenous peoples across North America."
-msgstr ""
+msgstr "一种弯曲的木棍，前端嵌有石质杖头。这种武器曾被北美各地的原住民使用。"
 
 #. ~ Description of "soaking wooden war club"
 #: data/json/items/melee/bludgeons.json
@@ -125220,7 +125220,7 @@ msgstr "一种弯曲的木制球杆，其球头由根节雕刻而成。  这些�
 #. ~ Description of "wooden war club"
 #: data/json/items/melee/bludgeons.json
 msgid "A curved wooden club with a ball head carved from a root burl.  These weapons were once used by indigenous peoples across North America."
-msgstr ""
+msgstr "一种弯曲的木棍，杖头由树根瘤雕刻而成。这种武器曾被北美各地的原住民使用。"
 
 #. ~ Description of "hockey stick"
 #: data/json/items/melee/bludgeons.json
@@ -125360,7 +125360,7 @@ msgstr "一小段木头，钉子穿过其末端，打造出一种威胁性的武
 #. ~ Description of "jitte"
 #: data/json/items/melee/bludgeons.json
 msgid "A short steel baton employed by Japanese police in the 17th and 18th century.  A small hook forks from the weapon just above the hilt, intended to aid in snagging or disarming opponents."
-msgstr ""
+msgstr "一种17至18世纪日本警方使用的短钢制警棍。握柄上方分出一支小钩，用于钩挂或缴械对手。"
 
 #. ~ Description of "blackjack"
 #: data/json/items/melee/bludgeons.json
@@ -125494,7 +125494,7 @@ msgstr "展开"
 #. ~ Description of "goedendag"
 #: data/json/items/melee/bludgeons.json
 msgid "Halfway between a short spear and a long club, the goedendag consists of a heavy metal spike mounted to the end of an even heavier shaft.  It is unsophisticated, but was once a favorite among medieval infantry who needed a cheap, simple means to smash through enemy armor."
-msgstr ""
+msgstr "介于短矛与长棍之间的一种武器，由一根沉重的金属尖刺安装在更沉重的木杆末端构成。它结构简单，但曾是中世纪步兵的最爱，他们需要一种廉价而直接的方式来击穿敌人盔甲。"
 
 #. ~ Description of "cudgel"
 #: data/json/items/melee/bludgeons.json
@@ -125618,7 +125618,7 @@ msgstr[0] "阿兹特克玻璃锯剑"
 #: data/json/items/melee/bludgeons.json
 msgid "goedendag"
 msgid_plural "goedendags"
-msgstr[0] ""
+msgstr[0] "刺槌"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -125642,7 +125642,7 @@ msgstr[0] "镔铁长棍"
 #: data/json/items/melee/bludgeons.json
 msgid "jitte"
 msgid_plural "jitte"
-msgstr[0] ""
+msgstr[0] "十手"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -125769,7 +125769,7 @@ msgstr[0] "浸泡希拉"
 #: data/json/items/melee/bludgeons.json
 msgid "soaking stone war club"
 msgid_plural "soaking stone war clubs"
-msgstr[0] ""
+msgstr[0] "浸水石战棒"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -126605,7 +126605,7 @@ msgstr "一片长方形的塑料，一端被磨尖成匕首形状。"
 #. ~ Description of "sai"
 #: data/json/items/melee/short_blades.json
 msgid "An okinawan weapon consisting of a slender spike with two hooked tines just above the hilt."
-msgstr ""
+msgstr "一种冲绳武器，由一根细长尖刺组成，在握柄上方带有两个钩状分叉。"
 
 #. ~ Description of "F-S fighting knife"
 #: data/json/items/melee/short_blades.json
@@ -126837,7 +126837,7 @@ msgstr[0] "折叠刀"
 #: data/json/items/melee/short_blades.json
 msgid "sai"
 msgid_plural "sai"
-msgstr[0] ""
+msgstr[0] "铁尺（钗）"
 
 #. ~ Item name
 #: data/json/items/melee/short_blades.json
@@ -127024,7 +127024,7 @@ msgstr "这种短棒也称为火熨斗，具有尖头，一侧有钩子。  它�
 #. ~ Description of "pitchfork"
 #: data/json/items/melee/spears_and_polearms.json
 msgid "An agricultural tool with a long wooden shaft and four spikes.  It's normally used to lift hay, but the tines could do some damage in a fight."
-msgstr ""
+msgstr "一种带有长木柄和四根尖齿的农具。通常用于叉运干草，但其尖齿在战斗中也足以造成伤害。"
 
 #. ~ Description of "makeshift war scythe"
 #: data/json/items/melee/spears_and_polearms.json
@@ -127352,7 +127352,7 @@ msgstr "一根短杆，上面有一个用链条连接的尖刺钢球。"
 #. ~ Description of "grappling hook"
 #: data/json/items/melee/whips_and_flails.json
 msgid "A steel hook attached to a long rope.  Deploying this next to a wall might give you a way to climb up."
-msgstr ""
+msgstr "一种连接于长绳的钢制钩爪。在墙边使用，或许能提供一种攀爬途径。"
 
 #. ~ Description of "war flail"
 #: data/json/items/melee/whips_and_flails.json
@@ -127367,7 +127367,7 @@ msgstr "一根结实的杆子，末端用皮绳连接着一根木棒。这种农
 #. ~ Description of "urumi"
 #: data/json/items/melee/whips_and_flails.json
 msgid "A thin ribbon of flexible steel attached to a handle, the whip sword is an Indian weapon long renowned for its bizarre design and the skill required to properly use it."
-msgstr ""
+msgstr "一条连接于握柄的柔性钢制薄带，鞭剑是一种印度武器，长期以来以其奇特的设计及正确使用所需的技巧而闻名。"
 
 #. ~ Description of "bullwhip"
 #: data/json/items/melee/whips_and_flails.json
@@ -128715,7 +128715,7 @@ msgstr[0] "狐鼠气步枪"
 #. ~ Description of "slingshot"
 #: data/json/items/ranged/slings.json
 msgid "A children's toy consisting of a Y-shaped piece of wood with an elastic band between the arms.  It can be used fire gravel or other very small projectiles with surprising speed.  It's probably not fit for killing zombies, but might be useful for hunting smaller game."
-msgstr ""
+msgstr "一种儿童玩具，由Y形木叉和两端之间的弹力带构成。可用于发射砾石或其他极小的弹丸，速度相当惊人。大概不适合用来击杀丧尸，但或许可用于狩猎小型猎物。"
 
 #. ~ Description of gun "brace slingshot"
 #. ~ Description of "brace slingshot"
@@ -128727,13 +128727,13 @@ msgstr "一把带有腕带的现代弹弓，能比简单的木制弹弓更有力
 #. ~ Description of "staff sling"
 #: data/json/items/ranged/slings.json
 msgid "Also called a fustibalus, this is a wooden staff with a sling fastened to one end.  When swung, it acts like a trebuchet to hurl rocks much farther and faster than throwing them by hand."
-msgstr ""
+msgstr "也被称为投石杖，是一种一端固定有投索的木制长棍。挥动时，它像投石机一样，能将石头投掷得比徒手更远、更快。"
 
 #. ~ Description of gun "sling"
 #. ~ Description of "sling"
 #: data/json/items/ranged/slings.json
 msgid "Little more than a strip of leather, the sling is an ancient weapon that acts as an extension of the wielder's arm, allowing small stones and custom-made bullets to be fired much faster and farther than they could be thrown by hand."
-msgstr ""
+msgstr "投石索，本质上不过是一条皮索，是一种古老的武器，它作为使用者手臂的延伸，能使小型石块和特制弹丸以比徒手投掷快得多、远得多的速度发射。"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -128841,7 +128841,7 @@ msgstr ""
 #. ~ Description of "net"
 #: data/json/items/ranged/throwing.json
 msgid "A mesh of weights and cordage designed to entangle opponents in combat.  It probably won't work on anything too small or too big."
-msgstr ""
+msgstr "一种由配重块与绳索构成的网状物，设计用于在战斗中缠绕对手。可能对体型过大或过小的目标效果不佳。"
 
 #. ~ Description of "disc"
 #: data/json/items/ranged/throwing.json
@@ -128856,7 +128856,7 @@ msgstr "一种用于户外游戏的塑料飞盘。"
 #. ~ Description of "bolas"
 #: data/json/items/ranged/throwing.json
 msgid "A rope with stone weights at either end.  If thrown, these might trip a person or animal, provided it isn't too small or too big."
-msgstr ""
+msgstr "一种两端系有石质配重的绳索。若将其抛出，或许能绊倒体型适中的人或动物。"
 
 #. ~ Description of "throwing stick"
 #: data/json/items/ranged/throwing.json
@@ -130017,7 +130017,7 @@ msgstr "一堆碎玻璃。这些碎片虽然锋利，但因为太小，无法直
 #. ~ Description of "reinforced sheet of tempered glass"
 #: data/json/items/resources/glass.json
 msgid "A plate of safety glass reinforced with metal brackets and slats to give it a bit more durability without sacrificing too much visibility."
-msgstr ""
+msgstr "一种由金属支架和横条加固的安全玻璃板，在不牺牲太多透明度的情况下提供更强的耐用性。"
 
 #. ~ Description of "glass fragments"
 #: data/json/items/resources/glass.json
@@ -130046,7 +130046,7 @@ msgstr[0] "玻璃碎片(尖锐)"
 #: data/json/items/resources/glass.json
 msgid "reinforced sheet of tempered glass"
 msgid_plural "reinforced sheets of tempered glass"
-msgstr[0] ""
+msgstr[0] "加固钢化玻璃板"
 
 #. ~ Item name
 #: data/json/items/resources/glass.json
@@ -130093,7 +130093,7 @@ msgstr "一卷黄地毯。"
 #. ~ Description of "carpet scrap"
 #: data/json/items/resources/home_improvement.json
 msgid "A small piece of carpet."
-msgstr ""
+msgstr "一小块地毯。"
 
 #. ~ Item name
 #: data/json/items/resources/home_improvement.json
@@ -130188,7 +130188,7 @@ msgstr[0] "棕油漆"
 #: data/json/items/resources/home_improvement.json
 msgid "carpet scrap"
 msgid_plural "carpet scraps"
-msgstr[0] ""
+msgstr[0] "地毯碎料"
 
 #. ~ Item name
 #: data/json/items/resources/home_improvement.json
@@ -131070,7 +131070,7 @@ msgstr "一小段导火索，长度足够让你有时间逃离爆炸。"
 #. ~ Description of "triffid stinger"
 #: data/json/items/resources/misc.json
 msgid "A short wooden dart grown from a mutated plant."
-msgstr ""
+msgstr "一种由变异植物长成的短木制飞镖。"
 
 #. ~ Description of "down mattress"
 #: data/json/items/resources/misc.json
@@ -131216,7 +131216,7 @@ msgstr[0] "厚橡胶块"
 #: data/json/items/resources/misc.json
 msgid "triffid stinger"
 msgid_plural "triffid stingers"
-msgstr[0] ""
+msgstr[0] "三尖树毒刺"
 
 #. ~ Item name
 #: data/json/items/resources/misc.json
@@ -131337,12 +131337,12 @@ msgstr[0] "热塑树脂块"
 #. ~ Description of "flint"
 #: data/json/items/resources/stone.json
 msgid "A chunk of flint, the kind of rock that can make sparks if stuck against steel.  It chips in a semi-predictable way if struck, making it suitable for knapping itno edged tools."
-msgstr ""
+msgstr "一块燧石，一种与钢撞击时能产生火花的岩石。敲击时会以可预测的方式碎裂，因此适合用于打制出带刃工具。"
 
 #. ~ Description of "fiber insulation batt"
 #: data/json/items/resources/stone.json
 msgid "A foil-wrapped batt of fibrous insulation; fire and moisture resistant, it's used for hot appliances like dishwashers and ovens."
-msgstr ""
+msgstr "一种用箔纸包裹的纤维绝缘垫；具有防火防潮性能，用于洗碗机和烤箱等发热电器。"
 
 #. ~ Description of "bone fossil"
 #: data/json/items/resources/stone.json
@@ -131372,7 +131372,7 @@ msgstr "一块石膏大骨模型。"
 #. ~ Description of "flaking rock"
 #: data/json/items/resources/stone.json
 msgid "A rock the size of a baseball which chips in a semi-predictable way if struck, making it suitable for knapping into edged tools.  In its current state, it's about the right size for throwing."
-msgstr ""
+msgstr "一块棒球大小的岩石，敲击时能以可预测的方式碎裂，因此适合打制出带刃工具。以其当前形态，大小正好适合投掷。"
 
 #. ~ Item name
 #: data/json/items/resources/stone.json
@@ -131419,7 +131419,7 @@ msgstr[0] "大块岩石"
 #. ~ Description of "ballistic Kevlar panel"
 #: data/json/items/resources/tailoring.json
 msgid "16 layers of ballistic Kevlar sheets stacked and stitched together into a soft, flexible panel.  Ballistic Kevlar is precision-made by machine and features an extremely tight and uniform weave which cannot be replicated by hand.  Given that the material isn't useful for cut-resistant applications and relies on being stackeed in layers to function, there's no reason to try and take it apart."
-msgstr ""
+msgstr "16层防弹凯夫拉片堆叠缝合而成的柔软柔性面板。防弹凯夫拉由机器精密制造，具有极其紧密均匀的编织结构，无法手工复制。鉴于该材料不适用于防切割用途，且需多层堆叠才能发挥作用，因此没有必要尝试将其拆解。"
 
 #. ~ Description of "Kevlar plate"
 #: data/json/items/resources/tailoring.json
@@ -131813,7 +131813,7 @@ msgstr "一根由实木雕刻而成的巨大螺杆，一个简单的部件，用
 #. ~ Description of "log"
 #: data/json/items/resources/wood.json
 msgid "A large section of tree trunk."
-msgstr ""
+msgstr "一大段树干。"
 
 #. ~ Description of "soaking spear shaft"
 #: data/json/items/resources/wood.json
@@ -132267,7 +132267,7 @@ msgstr[0] "炮塔支架"
 #. ~ Description of "robOS"
 #: data/json/items/software.json
 msgid "A deceptively simple program that can be used to give autonomous robots complex preprogrammed instructions."
-msgstr ""
+msgstr "一个看似简单的程序，可用于向自主机器人下达复杂的预编程指令。"
 
 #. ~ Description of "misc software"
 #: data/json/items/software.json
@@ -132484,7 +132484,7 @@ msgstr[0] "配方"
 #: data/json/items/software.json
 msgid "robOS"
 msgid_plural "robOS"
-msgstr[0] ""
+msgstr[0] "机器人操作系统"
 
 #. ~ Item name
 #: data/json/items/software.json
@@ -132820,7 +132820,7 @@ msgstr "一张简易筛网，由较粗钢丝制成的硬质边框附着细钢网
 #. (on)"
 #: data/json/items/tool/cooking.json
 msgid "The electric carver buzzes."
-msgstr ""
+msgstr "电动雕刻刀嗡嗡作响。"
 
 #. ~ value of variable 'success_message' in effect in EoC
 #. "EOC_toolweapon_activate__carver" in use action of item "electric carver
@@ -134086,17 +134086,17 @@ msgstr "一瓶塞着一块破布的易燃液体。使用该物品将点燃它，
 #. ~ Description of "smoke bomb"
 #: data/json/items/tool/explosives.json
 msgid "A canister grenade filled with a variety of pyrotechnic chemicals.  Once its pin is pulled, there will be a five second delay before it begins to expel a thick cloud of smoke."
-msgstr ""
+msgstr "一种装有多种烟火化学物质的罐式榴弹。拔掉保险销后，将延迟五秒开始释放浓烟。"
 
 #. ~ Description of "fungicidal gas grenade"
 #: data/json/items/tool/explosives.json
 msgid "A canister grenade filled with fungicidal solution.  Once the pin is pulled, after five second delay it will begin to expel a volatile gas that is highly toxic to fungal life forms."
-msgstr ""
+msgstr "一种装有杀菌溶液的罐式榴弹。拔掉保险销后，延迟五秒便开始释放一种对真菌类生命形式具有高度毒性的挥发性气体。"
 
 #. ~ Description of "tear gas grenade"
 #: data/json/items/tool/explosives.json
 msgid "A canister grenade filled with noxious irritant.  Use this item to pull the pin and start the fuse.  Five seconds later, it will begin to expel a highly toxic gas for some time.  This gas damages and slows those who enter it, as well as obscuring vision and scent."
-msgstr ""
+msgstr "一种装有刺激性毒气的罐式榴弹。使用此物品可拔掉保险销并启动引信。五秒后，它将开始持续释放高毒性气体。该气体会对进入其中的生物造成伤害并减缓其速度，同时也会遮蔽视线和气味。"
 
 #. ~ Description of "burning rocket candy"
 #: data/json/items/tool/explosives.json
@@ -134106,12 +134106,12 @@ msgstr "这是块已经点着了的火箭软糖，在响亮的嘶嘶燃烧声中
 #. ~ Description of "improvised gas grenade"
 #: data/json/items/tool/explosives.json
 msgid "A crude gas bomb made using household chemicals.  Once the pin is pulled, it will begin emitting a highly toxic gas."
-msgstr ""
+msgstr "一种利用家用化学品制成的简易毒气弹。一旦拔掉保险销，它将开始释放高毒性气体。"
 
 #. ~ Description of "scrambler grenade"
 #: data/json/items/tool/explosives.json
 msgid "A device which, three seconds after being armed, will emit a short burst of microwave and radio interference which can briefly \"stun\" drones and other machines by overloading their electronics."
-msgstr ""
+msgstr "一种装置，在启动三秒后，会发出一阵短暂的微波和射频干扰，通过使电子设备过载来短暂“击晕”无人机及其他机器。"
 
 #. ~ Description of "lit firecracker"
 #: data/json/items/tool/explosives.json
@@ -134126,57 +134126,57 @@ msgstr "一个装满强酸的易碎容器。把它投掷出去会形成强酸池
 #. ~ Description of "EMP grenade"
 #: data/json/items/tool/explosives.json
 msgid "A grenade that generates an electromagnetic pulse with a low-inductance capacitor bank discharged into a single-loop antenna.  This will produce a powerful EMP field that can permanently damage electronics and drain bionic energy."
-msgstr ""
+msgstr "一种手榴弹，通过将低电感电容器组放电至单回路天线来产生电磁脉冲。这将产生强大的电磁脉冲场，可永久性损坏电子设备并消耗生化能量。"
 
 #. ~ Description of "improvised bomb"
 #: data/json/items/tool/explosives.json
 msgid "A homemade explosive device consisting of a large plastic jug filled with explosives and scrap metal, equipped with a long fuse.  Once lit, assuming nothing goes wrong, it should burn for about twenty seconds before going off."
-msgstr ""
+msgstr "一种自制爆炸装置，由一个装满炸药和废金属的大型塑料罐制成，并配有长引信。一旦点燃，假设一切顺利，它应该在燃烧约二十秒后爆炸。"
 
 #. ~ Description of "lit improvised bomb"
 #: data/json/items/tool/explosives.json
 msgid "A homemade explosive device consisting of a large plastic jug filled with explosives and scrap metal.  Its fuse has been lit, promising an imminent explosion."
-msgstr ""
+msgstr "一种自制爆炸装置，由一个大号塑料罐装入炸药和废金属制成。其引信已点燃，即将爆炸。"
 
 #. ~ Description of "improvised HE bomb"
 #: data/json/items/tool/explosives.json
 msgid "A homemade explosive device consisting of a large plastic jug filled with high explosive and scrap metal.  A pin waits at one sealed end; once pulled, the bomb will be armed and should go off after about twenty seconds."
-msgstr ""
+msgstr "一种自制爆炸装置，由一个大号塑料罐装入高爆炸药和废金属制成。一端密封处插有保险销；一旦拔出，炸弹将进入待发状态，约二十秒后爆炸。"
 
 #. ~ Description of "live improvised HE bomb"
 #: data/json/items/tool/explosives.json
 msgid "A homemade explosive device consisting of a large plastic jug filled with high explosive and scrap metal.  The pin has been pulled."
-msgstr ""
+msgstr "一种自制爆炸装置，由一个大号塑料罐装入高爆炸药和废金属制成。保险销已被拔除。"
 
 #. ~ Description of "improvised fungicide grenade"
 #: data/json/items/tool/explosives.json
 msgid "A makeshift canister grenade filled with fungicidal solution.  Once the pin is pulled, there will be a five second delay before it begins to expel a volatile gas that is highly toxic to fungal life forms."
-msgstr ""
+msgstr "一种装有杀菌溶液的自制罐式榴弹。拔掉保险销后，将延迟五秒开始释放一种对真菌类生命形式具有高度毒性的挥发性气体。"
 
 #. ~ Description of "improvised insecticide grenade"
 #: data/json/items/tool/explosives.json
 msgid "A makeshift canister grenade filled with insecticidal solution.  Use this item to pull the pin and start the fuse.  Five seconds later, it will begin to expel a volatile gas that is highly toxic to insect life forms."
-msgstr ""
+msgstr "一种装有杀虫溶液的自制罐式榴弹。使用此物品可拔掉保险销并启动引信。五秒后，它将开始释放一种对昆虫类生命形式具有高度毒性的挥发性气体。"
 
 #. ~ Description of "keg bomb"
 #: data/json/items/tool/explosives.json
 msgid "A metal keg filled with explosives and equipped with a long fuse.  Once lit, it should burn for about one hundred seconds before going off."
-msgstr ""
+msgstr "一种装满炸药并配有长引信的金属桶。一旦点燃，它应该在大约一百秒后爆炸。"
 
 #. ~ Description of "lit keg bomb"
 #: data/json/items/tool/explosives.json
 msgid "A metal keg filled with explosives.  The fuse has been lit."
-msgstr ""
+msgstr "一个装满炸药的金属桶。引信已被点燃。"
 
 #. ~ Description of "HE keg bomb"
 #: data/json/items/tool/explosives.json
 msgid "A metal keg filled with high explosive.  Once the fuse is lit, it will explode after one hundred seconds with enormous force and a great deal of shrapnel."
-msgstr ""
+msgstr "一种装满高爆炸药的金属桶。一旦点燃引信，它将在百秒后以巨大的威力和大量破片爆炸。"
 
 #. ~ Description of "lit HE keg bomb"
 #: data/json/items/tool/explosives.json
 msgid "A metal keg filled with high explosive.  The fuse is it and it will soon go off."
-msgstr ""
+msgstr "一种装满高爆炸药的金属桶。引信已点燃，不久将爆炸。"
 
 #. ~ Description of "frag grenade"
 #: data/json/items/tool/explosives.json
@@ -134206,7 +134206,7 @@ msgstr "梨形的火箭糖。加热硝石与糖的混合物熔融后凝固而成
 #. ~ Description of "bug bomb"
 #: data/json/items/tool/explosives.json
 msgid "A pest control device designed to kill bugs dead by fumigating an entire room.  The label instructs that you activate it, then drop it and quickly leave the area.  The fogger will dispense its payload over four minutes."
-msgstr ""
+msgstr "一种害虫防治装置，旨在通过熏蒸整个房间来杀死害虫。标签说明应将其激活，然后放下并迅速离开该区域。烟雾剂将在四分钟内释放其有效成分。"
 
 #. ~ Description of "60mm mortar propellant charge"
 #: data/json/items/tool/explosives.json
@@ -134216,17 +134216,17 @@ msgstr "装有推进剂的塑料环，可帮助迫击炮弹飞得更远。  它�
 #. ~ Description of "HE pipe bomb"
 #: data/json/items/tool/explosives.json
 msgid "A section of steel pipe filled with military-grade high explosive.  Use this item to pull the pin, giving you five seconds to get away from it before it detonates."
-msgstr ""
+msgstr "一段装满军用级高爆炸药的钢管。使用此物品可拔掉保险销，在爆炸前你将有五秒钟时间远离。"
 
 #. ~ Description of "pipe bomb"
 #: data/json/items/tool/explosives.json
 msgid "A sizable section of steel pipe filled with explosives.  Its fuse will only burn for only a few seconds before going off."
-msgstr ""
+msgstr "一段装满炸药的大号钢管。其引信在爆炸前仅能燃烧数秒。"
 
 #. ~ Description of "lit pipe bomb"
 #: data/json/items/tool/explosives.json
 msgid "A sizable section of steel pipe packed with explosives.  The lit fuse on one end indicates that it will probably go off any second now."
-msgstr ""
+msgstr "一段装满炸药的大号钢管。一端已点燃的引信表明，它随时可能爆炸。"
 
 #. ~ Description of "firecracker"
 #: data/json/items/tool/explosives.json
@@ -134236,22 +134236,22 @@ msgstr "一个鞭炮，引信短而且可以被点燃，当然，你还是要用
 #. ~ Description of "barrel bomb"
 #: data/json/items/tool/explosives.json
 msgid "A steel drum filled with explosives and equipped with a long fuse.  Once lit, it should go off after about one hundred seconds."
-msgstr ""
+msgstr "一个装满炸药并配有长引信的钢桶。一旦点燃，它应该在大约一百秒后爆炸。"
 
 #. ~ Description of "lit barrel bomb"
 #: data/json/items/tool/explosives.json
 msgid "A steel drum filled with explosives.  The fuse is lit."
-msgstr ""
+msgstr "一个装满炸药的钢桶。引信已点燃。"
 
 #. ~ Description of "HE barrel bomb"
 #: data/json/items/tool/explosives.json
 msgid "A steel drum filled with high explosive.  Once it has been activated it will explode after one hundred seconds with tremendous force and an enormous amount of shrapnel."
-msgstr ""
+msgstr "一种装满高爆炸药的钢桶。一旦激活，它将在百秒后以巨大的威力和大量的破片爆炸。"
 
 #. ~ Description of "lit barrel bomb"
 #: data/json/items/tool/explosives.json
 msgid "A steel drum filled with high explosive.  The fuse is lit and it will soon go off."
-msgstr ""
+msgstr "一种装满高爆炸药的钢桶。引信已点燃，不久将爆炸。"
 
 #. ~ Description of "dynamite"
 #: data/json/items/tool/explosives.json
@@ -134261,7 +134261,7 @@ msgstr "一根用蜡纸包裹的硝化甘油和填充物的棒，一端伸出一
 #. ~ Description of "flashbang"
 #: data/json/items/tool/explosives.json
 msgid "A stun grenade.  Once the pin is pulled, there will be five seconds before it detonates with intense light and sound, blinding, deafening, and disorienting anyone nearby."
-msgstr ""
+msgstr "一种震撼弹。拔掉保险销后，五秒后将以强烈的闪光和巨响引爆，致盲、震聋并眩晕附近所有人。"
 
 #. ~ Description of "packed M72 LAW"
 #: data/json/items/tool/explosives.json
@@ -134276,27 +134276,27 @@ msgstr "一个拔了插销的燃烧手雷，随时都会变成火焰地狱，赶
 #. ~ Description of "homemade demolition charge"
 #: data/json/items/tool/explosives.json
 msgid "An improvised demolition charge equipped with a twenty second fuse."
-msgstr ""
+msgstr "一种配备二十秒引信的自制爆破炸药。"
 
 #. ~ Description of "improvised grenade"
 #: data/json/items/tool/explosives.json
 msgid "An improvised explosive device consisting of a hefty metal canister sealed around an explosive payload.  Once lit, the fuse trailing from one end will burn for just a few seconds before it all goes off."
-msgstr ""
+msgstr "一种由厚重金属罐封装爆炸装药的自制爆炸装置。一旦点燃，一端拖曳的引信将在短短数秒内燃尽并引爆。"
 
 #. ~ Description of "small improvised grenade"
 #: data/json/items/tool/explosives.json
 msgid "An improvised explosive device consisting of a small metal canister sealed around an explosive payload.  A short fuse hangs trails from one end, and once lit will burn for only a few seconds before going off."
-msgstr ""
+msgstr "一种由小型金属罐封装爆炸装药的自制爆炸装置。一端拖曳着短引信，一旦点燃，将在短短数秒内燃尽并引爆。"
 
 #. ~ Description of "improvised HE grenade"
 #: data/json/items/tool/explosives.json
 msgid "An improvised grenade consisting of a hefty metal canister sealed around a sizeable quantity of military-grade high explosive.  A short fuse dangles from one end, ready to be lit."
-msgstr ""
+msgstr "一种由厚重金属罐封装大量军用级高爆炸药的自制榴弹。一端垂吊着短引信，随时可被点燃。"
 
 #. ~ Description of "small improvised HE grenade"
 #: data/json/items/tool/explosives.json
 msgid "An improvised grenade consisting of a small metal canister sealed around a quantity of military-grade high explosive.  A short fuse dangles from one end, ready to be lit."
-msgstr ""
+msgstr "一种由小型金属罐封装一定量军用级高爆炸药的自制榴弹。一端垂吊着短引信，随时可被点燃。"
 
 #. ~ "menu_text" action message of item "EMP bomb"
 #. ~ "menu_text" action message of item "flashbang"
@@ -134338,19 +134338,19 @@ msgstr[0] "EMP手雷"
 #: data/json/items/tool/explosives.json
 msgid "HE barrel bomb"
 msgid_plural "HE barrel bombs"
-msgstr[0] ""
+msgstr[0] "高爆桶装炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "HE keg bomb"
 msgid_plural "HE keg bombs"
-msgstr[0] ""
+msgstr[0] "高爆凯格炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "HE pipe bomb"
 msgid_plural "HE pipe bombs"
-msgstr[0] ""
+msgstr[0] "高爆管状炸弹"
 
 #. ~ "menu_text" action message of item "dynamite"
 #. ~ "menu_text" action message of item "dynamite bundle"
@@ -134403,7 +134403,7 @@ msgstr "引信嘶嘶地燃烧着，炸药随时都会爆炸！"
 #. ~ Description of "lit homemade grenade"
 #: data/json/items/tool/explosives.json
 msgid "The fuse on this improvised grenade is lit, and it will explode any second now."
-msgstr ""
+msgstr "这枚自制榴弹的引信已点燃，随时可能爆炸。"
 
 #. ~ Description of "lit small improvised HE grenade"
 #: data/json/items/tool/explosives.json
@@ -134413,7 +134413,7 @@ msgstr "一个已经点燃了的自制手雷，活脱脱的烫手山芋，赶紧
 #. ~ Description of "lit improvised HE grenade"
 #: data/json/items/tool/explosives.json
 msgid "The fuse on this improvised grenade is lit.  It will explode any second now."
-msgstr ""
+msgstr "这枚自制榴弹的引信已点燃。随时可能爆炸。"
 
 #. ~ Description of "lit homemade demolition charge"
 #: data/json/items/tool/explosives.json
@@ -134428,22 +134428,22 @@ msgstr "核弹从外观上看并没有什么不同，但你知道该装置已经
 #. ~ Description of "live EMP bomb"
 #: data/json/items/tool/explosives.json
 msgid "This EMP bomb is active and will shortly detonate.  In addition to the usual shrapnel and concussive force, it will create a large EMP field that can permanently damage electronics and drain bionic energy."
-msgstr ""
+msgstr "这枚电磁脉冲炸弹已激活，即将引爆。除了通常的破片与冲击波外，它还将产生一个强大的电磁脉冲场，可永久性损坏电子设备并消耗生化能量。"
 
 #. ~ Description of "live EMP grenade"
 #: data/json/items/tool/explosives.json
 msgid "This EMP grenade is active and will shortly detonate, creating a large EMP field that can permanently damage electronics and drain bionic energy."
-msgstr ""
+msgstr "这枚电磁脉冲手榴弹已激活，即将引爆，产生一个强大的电磁脉冲场，可永久性损坏电子设备并消耗生化能量。"
 
 #. ~ Description of "live bug bomb"
 #: data/json/items/tool/explosives.json
 msgid "This bug bomb has had its valve opened and is (or will shortly be) spraying a continuous stream of insecticidal gas.  While it's designed to kill bugs, it's probably not exactly healthy for anybody else."
-msgstr ""
+msgstr "这枚杀虫炸弹的阀门已被打开，正（或即将）持续喷洒杀虫气体。虽然其设计用于杀死昆虫，但对其他生物恐怕也并非无害。"
 
 #. ~ Description of "live improvised gas grenade"
 #: data/json/items/tool/explosives.json
 msgid "This canister of poison gas has been unsealed, and is (or will shortly be) expelling highly toxic gas.  You should consider getting rid of it soon."
-msgstr ""
+msgstr "这罐毒气已被开启，正（或即将）释放高毒性气体。你应当考虑尽快处理掉它。"
 
 #. ~ Description of "live flashbang"
 #: data/json/items/tool/explosives.json
@@ -134473,12 +134473,12 @@ msgstr "这个自制杀虫剂手雷的插销已被拔出，并且正在释放有
 #. ~ Description of "live HE pipe bomb"
 #: data/json/items/tool/explosives.json
 msgid "This pipebomb's pin is pulled, and it will explode any second now."
-msgstr ""
+msgstr "这根管状炸弹的保险销已被拔出，随时可能爆炸。"
 
 #. ~ Description of "live scrambler grenade"
 #: data/json/items/tool/explosives.json
 msgid "This scrambler grenade is active and will soon go off, releasing an electromagnetic burst that may temporarily stun drones and other machines in the area."
-msgstr ""
+msgstr "这枚干扰手榴弹已激活，即将引爆，释放出一阵电磁脉冲，可能暂时击晕区域内的无人机及其他机器。"
 
 #. ~ Description of "live smoke bomb"
 #: data/json/items/tool/explosives.json
@@ -134488,7 +134488,7 @@ msgstr "这个烟雾弹的插销已被拔出，并且正在释放浓烟。"
 #. ~ Description of "EMP bomb"
 #: data/json/items/tool/explosives.json
 msgid "This substantial device is a bomb that generates an electromagnetic pulse.  When activated, the plutonium fuel cell is drained into a flux compression generator, the detonation of which, in addition to the usual shrapnel and concussive force, creates a strong magnetic field.  When this magnetic field is fed into the antenna, it creates an electro-magnetic pulse which can permanently damage electronics and drain bionic energy."
-msgstr ""
+msgstr "这款体积可观的装置是一种用于产生电磁脉冲的炸弹。启动后，钚燃料电池的能量被注入磁通压缩发生器，其爆炸除了产生通常的破片与冲击波外，还会生成强磁场。该磁场通过天线转化为电磁脉冲，可永久性损坏电子设备并消耗生化能量。"
 
 #. ~ Description of "live tear gas grenade"
 #: data/json/items/tool/explosives.json
@@ -134499,7 +134499,7 @@ msgstr "这个催泪手雷的插销已被拔出，并且正在释放有毒气体
 #: data/json/items/tool/explosives.json
 #, c-format
 msgid "You arm the %s."
-msgstr ""
+msgstr "你启动了 %s。"
 
 #. ~ "msg" action message of item "rocket candy"
 #. ~ "msg" action message of item "small improvised HE grenade"
@@ -237114,32 +237114,32 @@ msgstr ""
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Jack's first mission"
-msgstr ""
+msgstr "杰克的第一个任务"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Jack's second mission"
-msgstr ""
+msgstr "杰克的第二个任务"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Jesse's first mission"
-msgstr ""
+msgstr "杰西的第一个任务"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Jesse's second mission"
-msgstr ""
+msgstr "杰西的第二个任务"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Luke's first mission"
-msgstr ""
+msgstr "卢克的第一个任务"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Luke's second mission"
-msgstr ""
+msgstr "卢克的第二个任务"
 
 #. ~ Description of mission "Return Barry to Eddie at the dairy."
 #. ~ Description of mission "Find an anvil"
@@ -237158,18 +237158,18 @@ msgstr ""
 #. ~ Description of mission "Check out that farm"
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Obsolete mission from removed Isherwood faction content."
-msgstr ""
+msgstr "来自已移除的伊舍伍德（Isherwood）派系内容的废弃任务。"
 
 #. ~ Description of mission "Find scrap for the bone seer"
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Obsolete mission from removed Kindred faction content."
-msgstr ""
+msgstr "来自已移除的“同族”（Kindred）派系内容的废弃任务。"
 
 #. ~ Description of mission "Check out Hub-01"
 #. ~ Description of mission "Investigate the shady trader."
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Obsolete mission from removed Refugee Center teamster."
-msgstr ""
+msgstr "来自已被移除的难民中心运输员的已作废任务。"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
@@ -237240,7 +237240,7 @@ msgstr "卢克·伊舍伍德"
 #. ~ Job description of "Trader" NPC class
 #: data/json/obsoletion_and_migration/obsoletion_npc_classes.json
 msgid "Obsolete class from removed Hub 01 Ancilla Bar NPC."
-msgstr ""
+msgstr "来自已移除的 Hub 01 Ancilla Bar NPC 的废弃类。"
 
 #. ~ Job description of "Barry Isherwood" NPC class
 #. ~ Job description of "Carlos Isherwood" NPC class
@@ -237253,13 +237253,13 @@ msgstr ""
 #. ~ Job description of "Luke Isherwood" NPC class
 #: data/json/obsoletion_and_migration/obsoletion_npc_classes.json
 msgid "Obsolete class from removed Isherwood faction content."
-msgstr ""
+msgstr "来自已移除的伊舍伍德（Isherwood）派系内容的废弃类。"
 
 #. ~ Job description of "Bone Seer" NPC class
 #. ~ Job description of "Rogue Kindred" NPC class
 #: data/json/obsoletion_and_migration/obsoletion_npc_classes.json
 msgid "Obsolete class from removed Kindred faction content."
-msgstr ""
+msgstr "来自已移除的“同族”（Kindred）阵营内容的废弃职业。"
 
 #. ~ Name of an NPC class
 #: data/json/obsoletion_and_migration/obsoletion_npc_classes.json
@@ -237553,7 +237553,7 @@ msgstr "一个寄生蜂蜂巢。"
 #. ~ Description of map extra "Field"
 #: data/json/overmap/map_extras.json
 msgid "A field."
-msgstr ""
+msgstr "一片田野。"
 
 #. ~ Description of map extra "Grave"
 #: data/json/overmap/map_extras.json
@@ -238667,17 +238667,17 @@ msgstr "未完成的小屋"
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain.json
 msgid "industrial pig farm"
-msgstr ""
+msgstr "工业化养猪场"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain.json
 msgid "industrial pig farm parking"
-msgstr ""
+msgstr "工业化养猪场停车场"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain.json
 msgid "industrial pig farm roof"
-msgstr ""
+msgstr "工业化养猪场屋顶"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain.json data/mods/alt_map_key/overmap_terrain.json
@@ -242958,7 +242958,7 @@ msgstr "等待"
 #. ~ Verb in activity "ACT_CRAFT_WAIT"
 #: data/json/player_activities.json
 msgid "waiting for craft step"
-msgstr ""
+msgstr "等待制作步骤"
 
 #. ~ Verb in activity "ACT_WASH"
 #: data/json/player_activities.json
@@ -246634,7 +246634,7 @@ msgstr "滑冰"
 #. ~ Description of proficiency "Swimming"
 #: data/json/proficiencies/athletics.json
 msgid "You are acquainted with the principles of swimming and staying afloat.  This does not necessarily mean you can always swim in all conditions, but it certainly helps."
-msgstr ""
+msgstr "你了解游泳和保持浮力的原理。这并不意味着你在任何情况下都能游泳，但这无疑大有助益。"
 
 #. ~ Description of proficiency "Skating"
 #: data/json/proficiencies/athletics.json
@@ -246994,7 +246994,7 @@ msgstr "机器人编程"
 #. ~ Description of proficiency "Robotic Programming"
 #: data/json/proficiencies/computers.json
 msgid "You're familiar with software used to compel complex machines to move on their own."
-msgstr ""
+msgstr "你很熟悉那些用于驱动复杂机器自主运行的软件。"
 
 #. ~ Description of proficiency "Electromagnetics"
 #: data/json/proficiencies/electronics.json
@@ -247119,7 +247119,7 @@ msgstr "你了解如何制造各种经典的西部左轮手枪和类似枪械。
 #. ~ Description of proficiency "Surgery"
 #: data/json/proficiencies/health_care.json
 msgid "Beneath the skin, the body is merely an enormously complex machine.  A trained eye can guide a steady blade through the inner workings of that machine with minimal harm to the patient."
-msgstr ""
+msgstr "在皮肤之下，人体不过是一台极其复杂的机器。受过专业训练的目光，能引导稳健的手术刀穿行于这台机器的内部构造之中，并将对患者的伤害降至最低。"
 
 #. ~ Proficiency name
 #: data/json/proficiencies/health_care.json
@@ -247704,7 +247704,7 @@ msgstr "你知道如何用长柄武器与敌人保持距离，也能够用长柄
 #. ~ Description of proficiency "Unarmed Technique Familiarity"
 #: data/json/proficiencies/melee_weapons.json
 msgid "You know how to punch someone and make it hurt."
-msgstr ""
+msgstr "你知道怎么出拳，能把人打得很痛。"
 
 #. ~ Description of proficiency "Shiv Familiarity"
 #: data/json/proficiencies/melee_weapons.json
@@ -248319,7 +248319,7 @@ msgstr "开锁、破解保险箱和修补一般设备的专长。"
 #. ~ Description of proficiency category "Science"
 #: data/json/proficiencies/proficiency_categories.json
 msgid "Proficiencies for scientific understanding and safely working with certain chemicals and substances."
-msgstr ""
+msgstr "具备科学理解能力以及安全操作特定化学品与物质的能力。"
 
 #. ~ Description of proficiency category "Fabrics and Tailoring"
 #: data/json/proficiencies/proficiency_categories.json
@@ -248359,7 +248359,7 @@ msgstr "金属焊接、铸造和成型的专长。"
 #. ~ Description of proficiency category "Computers"
 #: data/json/proficiencies/proficiency_categories.json
 msgid "Proficiencies for working with specific types of software or computer systems."
-msgstr ""
+msgstr "使用特定类型软件或计算机系统的熟练程度。"
 
 #. ~ Description of proficiency category "Weakpoint"
 #: data/json/proficiencies/proficiency_categories.json
@@ -248829,12 +248829,12 @@ msgstr "人造护甲"
 #. ~ Description of proficiency "Undead Anatomy"
 #: data/json/proficiencies/weakpoints.json
 msgid "The so-called walking dead are in fact alive.  They do not breathe and most do not eat, but their hearts still pump putrid blood to their rotting muscles, and if they bleed, they can be killed."
-msgstr ""
+msgstr "所谓的“行尸”其实是活着的。它们不呼吸，大多数也不进食，但它们的心脏仍在向腐烂的肌肉输送污浊的血液；如果流血，它们便会被杀死。"
 
 #. ~ Description of proficiency "Anatomy of Amalgamations"
 #: data/json/proficiencies/weakpoints.json
 msgid "These twisted chimeras are each unique, yet follow a reliable set of underlying biological principles which can still be exploited."
-msgstr ""
+msgstr "这些扭曲的嵌合体虽各不相同，却遵循着一套可靠的底层生物学原理，而这些原理依然可资利用。"
 
 #. ~ Proficiency name
 #: data/json/proficiencies/weakpoints.json
@@ -248849,7 +248849,7 @@ msgstr "三尖树构造专精"
 #. ~ Proficiency name
 #: data/json/proficiencies/weakpoints.json
 msgid "Undead Anatomy"
-msgstr ""
+msgstr "不死生物解剖学"
 
 #. ~ Description of proficiency "Synthetic Armors"
 #: data/json/proficiencies/weakpoints.json
@@ -254317,7 +254317,7 @@ msgstr "各种木杆的配方。"
 #. ~ Description of the category "ballistic plates"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing ballistic armor inserts."
-msgstr ""
+msgstr "制作防弹装甲插板的配方。"
 
 #. ~ Description of the category "vehicle batteries"
 #: data/json/recipes/nested.json
@@ -254537,7 +254537,7 @@ msgstr "各种金属箱的配方。"
 #. ~ Description of the category "XL makeshift ballistic plates"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing oversized makeshift ESAPI plates."
-msgstr ""
+msgstr "制作超大尺寸简易 ESAPI 防弹板的配方。"
 
 #. ~ Description of the category "pikes"
 #: data/json/recipes/nested.json
@@ -254868,7 +254868,7 @@ msgstr "各种用于在战斗中喷洒出去的化学药剂的配方。"
 #. ~ Description of the category "slingshot ammunition"
 #: data/json/recipes/nested.json
 msgid "Recipes related to creating gravel, bearings, and other tiny ammunition for slingshots."
-msgstr ""
+msgstr "制作弹弓用碎石、轴承及其他微型弹药的配方。"
 
 #. ~ Description of the category "belts"
 #: data/json/recipes/nested.json
@@ -254878,7 +254878,7 @@ msgstr "各种系在腰间，用于固定裤子的带子的配方。"
 #. ~ Description of the category "sling ammunition"
 #: data/json/recipes/nested.json
 msgid "Recipes related to creating pebbles, pellets, and other small ammunition for slings."
-msgstr ""
+msgstr "制作投石索用的小石丸、弹丸及其他小型弹药的配方。"
 
 #. ~ Description of the category "scrap aluminum"
 #: data/json/recipes/nested.json
@@ -255113,7 +255113,7 @@ msgstr "各种用于止血，或减慢失血速度的医疗用品的配方。"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "XL makeshift ballistic plates"
-msgstr ""
+msgstr "简易防弹板（XL）"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
@@ -255158,7 +255158,7 @@ msgstr "副武器模组"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "ballistic plates"
-msgstr ""
+msgstr "防弹板"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
@@ -255648,7 +255648,7 @@ msgstr "短木杆"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "sling ammunition"
-msgstr ""
+msgstr "投掷弹药"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
@@ -256000,7 +256000,7 @@ msgstr "通过砍杀架子上由湿纸卷制成的假人来练习你的利刃武
 #. ~ Description of practice "stabbing"
 #: data/json/recipes/practice/melee.json
 msgid "Practice your stabbing weapon skill by stabbing a dummy made of rolls of wet paper on a stand."
-msgstr ""
+msgstr "通过刺击安装在支架上、由成卷湿纸制成的假人，来练习你的刺击武器技能。"
 
 #. ~ Practice name
 #: data/json/recipes/practice/melee.json
@@ -257938,32 +257938,32 @@ msgstr "远程技能"
 #. ~ Description of skill "handguns"
 #: data/json/skills.json
 msgid "Handguns have poor accuracy compared to rifles, but are usually quick to fire and reload faster than other guns.  Though they lack the punch and long-range capabilities of most rifles, a handgun may be fired one-handed."
-msgstr ""
+msgstr "与步枪相比，手枪的精度较差，但通常射击迅速，且装填速度快于其他枪械。尽管手枪缺乏大多数步枪所具备的强大威力和远程射击能力，但它有时可以单手射击。"
 
 #. ~ Description of skill "launchers"
 #: data/json/skills.json
 msgid "Heavy weapons like flamethrowers, grenade launchers, and mortars have a variety of applications and may carry immense destructive power, but they are cumbersome and difficult to manage."
-msgstr ""
+msgstr "火焰喷射器、榴弹发射器和迫击炮等重型武器用途广泛，且可能具有巨大的破坏力，但它们往往笨重且难以操控。"
 
 #. ~ Description of skill "rifles"
 #: data/json/skills.json
 msgid "Rifles have terrific range and accuracy compared to other firearms, but can prove difficult to use in in close combat."
-msgstr ""
+msgstr "与其他枪械相比，步枪拥有极佳的射程与精度，但在近距离战斗中可能难以使用。"
 
 #. ~ Description of skill "shotguns"
 #: data/json/skills.json
 msgid "Shotguns typically fire a burst of pellets which are surprisingly accurate and tremendously damaging to soft targets, but less effective against armor.  They make reliable hunting tools or close-quarters weapons."
-msgstr ""
+msgstr "霰弹枪通常发射一簇弹丸，其精度出人意料，对软目标杀伤力巨大，但对付装甲目标时效果较差。它们是可靠的狩猎工具或近距离作战武器。"
 
 #. ~ Description of skill "submachine guns"
 #: data/json/skills.json
 msgid "Submachine guns are lightweight and capable of operating with one hand, like pistols.  This makes them ideal for close-quarters engagements, where burst or fully automatic fire tends to make up for small caliber ammunition."
-msgstr ""
+msgstr "冲锋枪重量轻，且像手枪一样可以单手操作。这使其成为近距离交战的理想武器，在这种环境下，点射或全自动射击往往能弥补弹药口径较小的不足。"
 
 #. ~ Description of skill "dodging"
 #: data/json/skills.json
 msgid "Your ability to dodge an oncoming threat, be it an enemy's attack, a triggered trap, or a falling rock.  This skill is also used in attempts to fall gracefully, and for other acrobatic feats.  The number to the left is your total dodge score including modifiers, on the right are your raw ranks."
-msgstr ""
+msgstr "这是你躲避迎面而来的威胁（无论是敌人的攻击、触发的陷阱还是落石）的能力。该技能也可用于尝试优雅地着陆以及进行其他杂技动作。左侧的数值是包含修正值在内的总闪避评分，右侧则是你的基础等级。"
 
 #. ~ Description of skill "science"
 #: data/json/skills.json
@@ -257973,27 +257973,27 @@ msgstr "你能安全、有条理地处理实验室的实际工作，同时对物
 #. ~ Description of skill "athletics"
 #: data/json/skills.json
 msgid "Your athletic ability, including swimming, climbing, rowing, balancing, cycling, and how much you can carry.  Athletic skill governs general kinesthetics and also improves your overall cardio fitness and stamina."
-msgstr ""
+msgstr "这涵盖了你的运动能力，包括游泳、攀爬、划船、保持平衡、骑行以及负重能力。运动技能不仅决定了你的整体肢体协调与活动能力，还能提升你的心肺素质与耐力。"
 
 #. ~ Description of skill "marksmanship"
 #: data/json/skills.json
 msgid "Your overall skill in using ranged weapons of any kind.  With higher levels, this general experience increases accuracy with any bows or firearms, but is secondary to practice with the type of ranged weapon in question."
-msgstr ""
+msgstr "这是你使用各类远程武器的综合技能水平。随着等级提升，这种通用经验能提高使用任何弓箭或枪械时的精准度，但其重要性次于针对特定类型远程武器的专门练习。"
 
 #. ~ Description of skill "melee"
 #: data/json/skills.json
 msgid "Your skill and finesse in hand-to-hand combat, both with and without a weapon.  Higher levels can significantly increase the accuracy and effectiveness of your physical attacks, as well as improving your defenses."
-msgstr ""
+msgstr "你在徒手格斗（无论是否持械）方面的技巧与造诣。提升等级可显著增强你物理攻击的精准度与效力，并提升防御能力。"
 
 #. ~ Description of skill "ecology"
 #: data/json/skills.json
 msgid "Your skill at dealing with your environment.  This includes working with plants and animals, exploring, making fire, and scouting."
-msgstr ""
+msgstr "你应对环境的技能。这包括与动植物打交道、探索、生火以及侦察。"
 
 #. ~ Description of skill "computers"
 #: data/json/skills.json
 msgid "Your skill in accessing and manipulating computers.  Higher levels can allow a user to navigate complex software systems and even bypass their security, or program and operate drones and other robots."
-msgstr ""
+msgstr "你访问和操控计算机的技能。随着技能等级的提升，使用者将能够驾驭复杂的软件系统，甚至绕过其安全防护，或是对无人机及其他机器人进行编程与操作。"
 
 #. ~ Description of skill "cooking"
 #: data/json/skills.json
@@ -258013,37 +258013,37 @@ msgstr "医疗的技能。等级越高，使用绷带等急救箱内的药品的
 #. ~ Description of skill "mechanics"
 #: data/json/skills.json
 msgid "Your skill in engineering, plumbing, and working with simple or complex machines.  It's frequently useful for crafting and often essential for construction and vehicle work."
-msgstr ""
+msgstr "你所掌握的工程、管道以及操作各类机械（无论结构简单还是复杂）的技能。该技能在制作物品时往往大有裨益，而在进行建筑施工或车辆相关工作时则通常不可或缺。"
 
 #. ~ Description of skill "unarmed combat"
 #: data/json/skills.json
 msgid "Your skill in fighting empty-handed.  This includes basic punches and kicks as well as advanced martial arts techniques, grappling, and attacks made with mutated body parts such as horns, fangs, and claws.  Items like steel-toed boots, leather gloves, and brass knuckles may also be worn to increase unarmed damage."
-msgstr ""
+msgstr "你徒手格斗的技巧。这涵盖了基础的拳打脚踢，以及高阶武术招式、擒拿格斗，还有利用变异肢体部位（如角、獠牙和利爪）进行的攻击。此外，你还可以装备钢头靴、皮手套或指虎等物品，以增强徒手攻击造成的伤害。"
 
 #. ~ Description of skill "bashing weapons"
 #: data/json/skills.json
 msgid "Your skill in fighting with blunt weaponry, from rocks and sticks to baseball bats and the butts of rifles.  Bashing damage tends to be reliable even against many types of armor."
-msgstr ""
+msgstr "你使用钝器战斗的技巧，涵盖了从石块、木棍到棒球棒及步枪枪托等各类武器。钝击伤害往往相当可靠，即便面对多种类型的护甲也能发挥效力。"
 
 #. ~ Description of skill "cutting weapons"
 #: data/json/skills.json
 msgid "Your skill in fighting with weaponry designed to cut, hack and slash an opponent.  Cutting damage tends to be very high, but armor is especially effective against it.  High skill and knowledge of enemy weak points can overcome this."
-msgstr ""
+msgstr "这是你使用专用于劈砍对手的武器进行战斗的技艺。此类武器造成的斩击伤害通常极高，但护甲对这种伤害的防御效果尤为显著；若具备高超的技艺并了解敌人的弱点，便能克服这一劣势。"
 
 #. ~ Description of skill "stabbing weapons"
 #: data/json/skills.json
 msgid "Your skill in fighting with weapons designed to puncture.  Stabbing damage has many of the strengths of cut, but is better at overcoming armor.  In exchange, it requires more skill and stabbing weapons tend to be harder to use.  Skill and perception reduce the chance of your weapon lodging in an enemy."
-msgstr ""
+msgstr "这是你使用穿刺类武器进行战斗的技巧。穿刺伤害既具备许多劈砍伤害的优点，又更擅长穿透护甲。作为代价，它对技巧要求更高，且穿刺武器往往较难驾驭。提升技巧与感知能力可以降低武器卡在敌人体内的几率。"
 
 #. ~ Description of skill "vehicles"
 #: data/json/skills.json
 msgid "Your skill in operating and steering a vehicle in motion, from cars and boats to helicopters and horse-drawn carriages.  A higher level allows greater control over vehicles at higher speeds and reduces the penalty of shooting while driving."
-msgstr ""
+msgstr "你驾驶各类载具（从汽车、船只到直升机和马车）的技巧。更高的等级能让你在高速行驶时更好地控制载具，并降低驾驶时射击所受的惩罚。"
 
 #. ~ Description of skill "devices"
 #: data/json/skills.json
 msgid "Your skill in setting, detecting, disabling, repairing, and crafting fine devices like security systems, traps, locks, some firearm components, and explosives.."
-msgstr ""
+msgstr "你设置、侦测、解除、修理及制作精密装置（如安保系统、陷阱、锁具、部分枪械组件及爆炸物）的技能。"
 
 #. ~ Description of skill "social"
 #: data/json/skills.json
@@ -258058,7 +258058,7 @@ msgstr "制造和修复衣物、背包、毛毯和其他纺织品的技能。影
 #. ~ Description of skill "throwing"
 #: data/json/skills.json
 msgid "Your skill in throwing objects or creatures over a distance, or in operating weapons like slings which operate on similar principles.  Higher ranks allow farther, harder, and more accurate throws."
-msgstr ""
+msgstr "这项技能涵盖了将物体或生物投掷到远处的技巧，以及操作投石索等原理类似的武​​器的能力。更高的等级能让你投掷得更远、更有力且更精准。"
 
 #. ~ Description of skill "archery"
 #: data/json/skills.json
@@ -258068,7 +258068,7 @@ msgstr "使用弓的技能。从自制简易弓到结构复杂的复合弓，它
 #. ~ Description of skill "fabrication"
 #: data/json/skills.json
 msgid "Your skill in working with raw materials and shaping them into useful objects.  This skill covers the widest variety of crafting and construction projects."
-msgstr ""
+msgstr "你加工原材料并将其塑造成实用物品的技艺。这项技能涵盖了种类最为繁多的制作与建造项目。"
 
 #. ~ Skill name
 #: data/json/skills.json
@@ -258633,7 +258633,7 @@ msgstr "你打开一个应用程序，结果发现它是一款以太空为背景
 #. ~ Snippet in category "addict_cannabis_mild_awake"
 #: data/json/snippets/addiction.json
 msgid "A toke would level you out."
-msgstr ""
+msgstr "抽上一口就能让你平复下来。"
 
 #. ~ Snippet in category "addict_opioid_mild_awake"
 #: data/json/snippets/addiction.json
@@ -258648,7 +258648,7 @@ msgstr "你要是有瓶啤酒就好了……"
 #. ~ Snippet in category "addict_cannabis_mild_awake"
 #: data/json/snippets/addiction.json
 msgid "If only you had some weed…"
-msgstr ""
+msgstr "要是你有点大麻就好了……"
 
 #. ~ Snippet in category "addict_opioid_mild_awake"
 #: data/json/snippets/addiction.json
@@ -258658,12 +258658,12 @@ msgstr "如果你不尽快找到一些阿片类药物，你可能会开始做出
 #. ~ Snippet in category "addict_cannabis_strong_asleep"
 #: data/json/snippets/addiction.json
 msgid "Imagine all the world leaders passing a blunt around and just talking things out.  This could have all been avoided."
-msgstr ""
+msgstr "试想一下，如果各国领导人能围坐在一起，传着抽一支大麻烟，心平气和地把事情谈开——这一切本是可以避免的。"
 
 #. ~ Snippet in category "addict_nicotine_strong_asleep"
 #: data/json/snippets/addiction.json
 msgid "In your dream you brutally disanimate several zombies and then tear through their clothing looking for any unsmoked cigarettes."
-msgstr ""
+msgstr "在梦中，你无情地终结了几个丧尸的“生命”，随后撕开它们的衣物，搜寻未吸过的香烟。"
 
 #. ~ Snippet in category "addict_nicotine_mild_asleep"
 #: data/json/snippets/addiction.json
@@ -258678,7 +258678,7 @@ msgstr "站在建筑物边缘，手里拿着香烟，下面有一群僵尸在乱
 #. ~ Snippet in category "addict_alcohol_mild_asleep"
 #: data/json/snippets/addiction.json
 msgid "Talking to friends for hours while having a couple drinks…good times."
-msgstr ""
+msgstr "和朋友边喝几杯边聊天，一聊就是好几个小时……真是美好的时光。"
 
 #. ~ Snippet in category "addict_diazepam_strong_asleep"
 #: data/json/snippets/addiction.json
@@ -258708,7 +258708,7 @@ msgstr "同样的老梦想：一瓶羟考酮、一个拉链袋、一把锤子、
 #. ~ Snippet in category "addict_cannabis_mild_asleep"
 #: data/json/snippets/addiction.json
 msgid "The skunky taste of herb lingers in your memory."
-msgstr ""
+msgstr "大麻那股类似臭鼬的独特气味，久久萦绕在你的记忆中。"
 
 #. ~ Snippet in category "addict_coke_awake"
 #: data/json/snippets/addiction.json
@@ -258718,7 +258718,7 @@ msgstr "现在，你会为了找到些可卡因做什么？"
 #. ~ Snippet in category "addict_alcohol_mild_awake"
 #: data/json/snippets/addiction.json
 msgid "Wouldn't you rather be drunk right now?"
-msgstr ""
+msgstr "你难道不想现在就喝得醉醺醺的吗？"
 
 #. ~ Snippet in category "addict_amphetamine_paralysis_asleep"
 #: data/json/snippets/addiction.json
@@ -258733,7 +258733,7 @@ msgstr "你想喝一杯。"
 #. ~ Snippet in category "addict_diazepam_mild_awake"
 #: data/json/snippets/addiction.json
 msgid "You could use some benzos."
-msgstr ""
+msgstr "你或许可以用点苯二氮卓类药物。"
 
 #. ~ Snippet in category "addict_nicotine_mild_awake"
 #. ~ Snippet in category "addict_nicotine_mild_asleep"
@@ -258769,12 +258769,12 @@ msgstr "你梦到与死去的亲人彻夜漫谈，他们手里都拿着一支香
 #. ~ Snippet in category "addict_cannabis_strong_asleep"
 #: data/json/snippets/addiction.json
 msgid "You dream of being abducted by big pink aliens.  They flew across the galaxy in search of Earth's strongest weed."
-msgstr ""
+msgstr "你梦见自己被巨大的粉色外星人绑架了。它们穿越银河系，只为寻找地球上最劲的大麻。"
 
 #. ~ Snippet in category "addict_cannabis_mild_asleep"
 #: data/json/snippets/addiction.json
 msgid "You dream of rolling the perfect joint."
-msgstr ""
+msgstr "你梦见你卷出一支完美的大麻烟卷。"
 
 #. ~ Snippet in category "addict_alcohol_mild_asleep"
 #: data/json/snippets/addiction.json
@@ -258784,17 +258784,17 @@ msgstr "你梦到你坐在最喜欢的地方，享受着一杯美酒……"
 #. ~ Snippet in category "addict_diazepam_mild_asleep"
 #: data/json/snippets/addiction.json
 msgid "You dream that you reach into your pocket and pull out a bottle full of those wonderful sedatives…"
-msgstr ""
+msgstr "你梦见自己伸手探入衣袋，掏出了一瓶装满那种绝妙镇静剂的药瓶……"
 
 #. ~ Snippet in category "addict_cannabis_strong_asleep"
 #: data/json/snippets/addiction.json
 msgid "You drift in and out of sleep, uncertain whether your stash is all gone."
-msgstr ""
+msgstr "你处于半梦半醒之间，不确定自己藏的东西是否已经全部用光了。"
 
 #. ~ Snippet in category "addict_cannabis_strong_awake"
 #: data/json/snippets/addiction.json
 msgid "You feel anxious.  You know some marijuana would fix this."
-msgstr ""
+msgstr "你感到焦虑。你知道来点大麻就能解决。"
 
 #. ~ Snippet in category "addict_opioid_strong_awake"
 #. ~ Snippet in category "addict_opioid_strong_asleep"
@@ -258843,7 +258843,7 @@ msgstr "你突然停了下来，感觉世界如此陌生。"
 #. ~ Snippet in category "addict_nicotine_strong_asleep"
 #: data/json/snippets/addiction.json
 msgid "You taste smoke in your dreams."
-msgstr ""
+msgstr "梦里你品尝者香烟。"
 
 #. ~ Snippet in category "addict_alcohol_strong_awake"
 #: data/json/snippets/addiction.json
@@ -258858,12 +258858,12 @@ msgstr "你一直在纠结离上次喝酒到底有多久了。"
 #. ~ Snippet in category "addict_diazepam_strong_awake"
 #: data/json/snippets/addiction.json
 msgid "You're shaking… you need some benzos!"
-msgstr ""
+msgstr "你在发抖……来点苯二氮卓类药物！"
 
 #. ~ Snippet in category "addict_cannabis_strong_awake"
 #: data/json/snippets/addiction.json
 msgid "You're starting to think weed might actually be habit-forming."
-msgstr ""
+msgstr "你开始觉得，大麻或许真的会让人上瘾。"
 
 #. ~ Snippet in category "addict_alcohol_strong_awake"
 #: data/json/snippets/addiction.json
@@ -258885,7 +258885,7 @@ msgstr "你的双手开始颤抖……你需要一些止痛剂。"
 #. ~ Snippet in category "addict_cannabis_strong_awake"
 #: data/json/snippets/addiction.json
 msgid "Your stomach is doing flip-flops.  You NEED a toke."
-msgstr ""
+msgstr "你胃里翻江倒海的。你*必须*抽一口。"
 
 #. ~ Snippet in category "addict_alcohol_strong_asleep"
 #: data/json/snippets/addiction.json
@@ -263804,7 +263804,7 @@ msgstr "尽管肚子里有东西，你仍然感觉自己好像几天没吃东西
 #. ~ Snippet in category "health_bad"
 #: data/json/snippets/health_msgs.json
 msgid "Do you really need to get up yet?"
-msgstr ""
+msgstr "你真的有必要现在就起床吗？"
 
 #. ~ Snippet in category "starving"
 #: data/json/snippets/health_msgs.json
@@ -263983,7 +263983,7 @@ msgstr "当你想到血时，你会因欲望而脸红。"
 #. ~ Snippet in category "health_bad"
 #: data/json/snippets/health_msgs.json
 msgid "You feel stiff and a little out of it."
-msgstr ""
+msgstr "你感觉身体僵硬，而且有点脱离状态。"
 
 #. ~ Snippet in category "empty_malnourished"
 #: data/json/snippets/health_msgs.json
@@ -264018,7 +264018,7 @@ msgstr "你伸了个懒腰，然而今天你的肌肉运作状态似乎不甚理
 #. ~ Snippet in category "health_bad"
 #: data/json/snippets/health_msgs.json
 msgid "You wake up bleary-eyed and lethargic."
-msgstr ""
+msgstr "你醒来时睡眼惺忪，浑身无力。"
 
 #. ~ Snippet in category "health_good"
 #: data/json/snippets/health_msgs.json
@@ -264038,7 +264038,7 @@ msgstr "醒来时，您感觉所向披靡，准备好迎接任何挑战。"
 #. ~ Snippet in category "health_very_bad"
 #: data/json/snippets/health_msgs.json
 msgid "You wake up feeling like crap. Maybe you should take better care of yourself."
-msgstr ""
+msgstr "你醒来时感觉糟透了。也许你应该好好照顾一下自己。"
 
 #. ~ Snippet in category "health_horrible"
 #: data/json/snippets/health_msgs.json
@@ -265264,6 +265264,19 @@ msgid ""
 " Appearance of the first major phenotypic deviation at 78 minutes after first dosage as two asymmetric tentacles emerge from the gills and begin growing towards the water surface, followed shortly by two pairs of articulated legs penetrating the scales proximal from the tail.\n"
 " 92 minutes after first dosage the tentacles breach the water surface and their tips open up to reveal a matrix of exposed blood vessels held up by a cartilaginous matrix.  After the tentacles cease their adjustments subject begins moving towards the terrestrial area of the enclosure…"
 msgstr ""
+"对象：斑马鱼\n"
+"\n"
+"化合物：PE065\n"
+"\n"
+"目标：利用一种特性明确且无威胁性的实验对象，确定 PE065 诱导的表型变化范围。\n"
+"\n"
+"实验方案：使用配备夹层玻璃观察窗及小型陆地区域的大型水生饲养箱；提供三种剂量的含受试化合物营养颗粒。鉴于此前涉及 PE065 的实验经验，我们在水面上方设置了一个快速释放容器，内装大量未处理的营养颗粒，以便在需要提前终止实验时作为干扰诱饵。\n"
+"\n"
+"实时观察：实验对象在禁食 6 小时后勉强摄入第一剂量的饲料；给药后 25 分钟内未见异常，随后活动水平突然增加，并表现出觅食行为。随后提供第二、第三剂量的饲料以及 15 千克未处理的营养颗粒；实验对象在 15 分钟内将所有饲料食用完，同时体型显著增大。随后，实验对象停止进食，进入低活动状态，呈垂直漂浮姿态，并开始散发出微弱的紫罗兰色光芒。\n"
+"\n"
+"给药后 78 分钟出现首次重大表型变异：两条不对称的触手从鳃部伸出，向水面方向生长；紧接着，两对有关节的肢体穿透尾部附近的鳞片长出。\n"
+"\n"
+"给药后 92 分钟，触手穿出水面，其顶端张开，露出由软骨基质支撑的裸露血管网。触手停止调整姿态后，实验对象开始向饲养箱内的陆地区域移动……"
 
 #. ~ Snippet in category "log_mutagen_animal"
 #. ~ Long-form, low-level mutagen test logs - no human studies
@@ -270182,7 +270195,7 @@ msgstr "<male_given_name>·<family_name>"
 #. ~ Snippet in category "years_old_news"
 #: data/json/snippets/newspapers.json
 msgid "'MIRACLE DRUG' FACES UPHILL BATTLE.  It's called naloxone, and doctors are betting this unassuming bottle of nasal spray could turn the tide in the war against the opioid epidemic.  Tens of thousands of people are estimated to die every year due to accidental overdose.  Naloxone promises to change all of that.  Just one puff, and in seconds, opioids like fentanyl, oxycodone, and heroin are literally jostled out of the opioid receptors and blocked from re-entry.  But while it could save lives, some question whether making it available over the counter might encourage drug abuse.  \"They want to sell this stuff to children.  That's basically telling them, hey, you can do all the drugs you want, and there aren't going to be any consequences.  Well maybe there should be consequences.\"  This from Merrimack mayoral candidate Todd Hagel, whose campaign has been built on a zero tolerance attitude toward drugs and those who use them…"
-msgstr ""
+msgstr "“神药”面临严峻挑战。这种药名为纳洛酮（naloxone）；医生们寄望于这款看似不起眼的鼻喷剂，能扭转阿片类药物滥用危机这场战役的局势。据估计，每年有数万人因意外药物过量而丧生，而纳洛酮有望改变这一局面。只需喷入一次，短短几秒钟内，芬太尼、羟考酮和海洛因等阿片类药物就会被“挤”出阿片受体，并被阻挡无法再次结合。尽管它能挽救生命，但也有人质疑，将其作为非处方药销售是否会助长药物滥用。“他们想把这东西卖给孩子。这简直是在告诉他们：嘿，你们尽管去吸毒吧，反正不会有什么后果。可也许，人是该承担后果的。”此番话出自梅里马克（Merrimack）市长候选人托德·黑格尔（Todd Hagel），他的竞选主张建立在对毒品及吸毒者“零容忍”的态度上……"
 
 #. ~ Snippet in category "newest_news"
 #. ~ Around April 15/16
@@ -271921,7 +271934,7 @@ msgstr ""
 #. gone unnoticed by the former owner.
 #: data/json/snippets/photos.json
 msgid "Resplendent with the interior view of a nightclub, this photo's midground is dominated by a gaggle of young men and women gathered before the camera.  Judging by the way that they're clinging to one another, the spaced-out grins all around, and the presence of more than a few liquor bottles brandished like the holy grail, the assembly's probably halfway to being drunkenly sprawled on the floor.  The picture's edges have been blurred and messily cropped out in post, likely in an effort to hide the mountain range of \"sugar\" proudly rising from tables in the background.  It's just a shame that it only resulted in a worse photo."
-msgstr ""
+msgstr "这张照片展现了夜店的内部景象，画面中景处，一群年轻男女簇拥在镜头前。看他们彼此紧贴的姿态、脸上那恍惚的傻笑，以及手中像捧着“圣杯”般挥舞的数瓶烈酒，这群人显然已醉意上头，离瘫倒在地不远了。照片边缘经过了模糊处理和杂乱的裁剪——这很可能是为了遮挡背景桌面上那高高隆起、仿佛山峦般的“糖粉”堆。只可惜这种处理反而让照片的效果更糟糕了。"
 
 #. ~ Snippet in category "wallet_photos"
 #. ~ These are meant to be small pictures that people would have kept in their
@@ -272191,7 +272204,7 @@ msgstr "各位请注意，DJ Dustbowl 向所有正在收听的人发出紧急通
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "DJ Dustbowl back, you're listening to Revelation Radio.  Quick survivor tip: remember, killing a zombie isn't enough.  You've gotta smash that thing to a pulp or chop it into pieces if you don't want it getting back up.  Good news though, you don't need to worry about headshots!  Any major damage will lay a shambler out."
-msgstr ""
+msgstr "DJ Dustbowl 回来了，欢迎收听启示录电台（Revelation Radio）。给幸存者的小贴士：记住，光是“杀死”丧尸可不够。如果你不想让它再爬起来，就得把它砸成肉泥或者剁成碎块。不过好消息是，你不需要非得爆头！只要造成重创，就能彻底放倒那些蹒跚的家伙。"
 
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
@@ -272206,12 +272219,12 @@ msgstr "第一舰队：这是内华达号航空母舰，以 15 节的速度从�
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "Hey ladies and gentlemen of the apocalypse, you're listening to Revelation Radio, the last radio station on the Eastern Seaboard, I'm DJ Dustbowl here with our mascot Sam."
-msgstr ""
+msgstr "各位末世的幸存者，你们现在收听的是启示录电台——东海岸仅存的广播电台。我是DJ：Dustbowl；旁边是我们的吉祥物Sam。"
 
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "Hey ladies and gentlemen, it's DJ Dustbowl back with Revelation Radio, and today is going to be less of a survival tip and more of a \"survivor's lesson,\" cause we're going to be talking about guns.  Now, if you're hearing this, you've probably already had to pull some triggers, but in case you've been lucky, or you're just not that confident, I'm going to be walking through field maintenance, cleaning, proper safety, and good stances.  Knowing how to shoot a gun is worthless if you can't keep it running, and even more useless if you can't ensure that you won't accidentally put a bullet through yourself.  So, with Sam tucked safely away so she won't be nosing around the guns (that's rule one, folks: don't let your dogs play with your boom sticks), we can begin."
-msgstr ""
+msgstr "各位听众朋友，我是 DJ Dustbowl，欢迎收听启示录电台（Revelation Radio）。今天我们要聊的话题与其说是单纯的生存技巧，不如说是一堂“幸存者必修课”——因为我们要谈枪械。如果你正收听这档节目，想必你已经有过扣动扳机的经历了；但如果你至今运气不错，或者对自己还不太有信心，那我将带大家了解一下野外维护、枪械清洁、安全规范以及正确的射击姿势。如果无法保证枪械正常运作，学会射击也就毫无意义；而如果不能确保自己不会因操作不当而误伤自己，那这本事就更没用了。好了，现在 Sam 已经被妥善安置，不会跑来对枪械好奇地乱闻了（各位，记住第一条规则：别让你的狗玩弄这些“喷火家伙”），咱们这就开始吧。"
 
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
@@ -272227,6 +272240,11 @@ msgid ""
 "\n"
 "I unterstand now.  I understand why I heard you icn the… portal storm and why you told me to comme out.  Did you want revenge?  I'm so sorry.  I hate myself.  I fucking haatte myself.  I'm sorry, Anarchy."
 msgstr ""
+"嘿，各位，我是 DJ Dustbowl，我又在……启示录电台（Revelation Radio）上广播了。抱歉我今天说话含糊不清，因为我喝得烂醉如泥。不过也没差吧，反正也没人听这垃圾节目。你们大概都死光了。天知道，也许你们的死也是因为我。\n"
+"\n"
+"他在车里。他当时坐在车里。我真的很抱歉。有什么东西把它撕开了：我发现它的时候，它已经少了一半。比起以前那个……（滋滋声）……它的状况其实还算好的。他——或者说它——已经复活了，而且……（滋滋声）……长出了好多触手。天哪。为什么不能让尸体安安静静地腐烂呢？为什么要把它变成那个样子？这全都是我的错。我真不该叫他把它弄过来的。我把它烧了，又埋了。我真的、真的太抱歉了。我这个该死的、自以为是的 DJ，就因为自己寂寞，假装主持电台节目，结果害死了人。我活该孤独。我活该孤独地死去。\n"
+"\n"
+"我现在明白了。我明白了为什么我在……传送门风暴里听到了你的声音，也明白了你为什么要叫我出来。你是想复仇吗？我很抱歉。我恨我自己。我他妈的恨死我自己了。对不起，Anrchy。"
 
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
@@ -272236,7 +272254,7 @@ msgstr "嘿，世界末日的人们，DJ Dustbowl 回来了，这次带来了一
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "Hey, people of the wasteland, it's DJ Dustbowl on Revelation Radio, and I've got two words for y'all that are listening in: tear gas.  We've all heard of these giant bugs that are crawling around, and if you haven't… I hate to break it to you, my sweet summer child, but wake up and sniff the bug juice; they're a thing.  Regardless, people, keep cool if you've got some tear gas canisters on tap.  That crap lays a creepy crawler out like they got told their free trial of life was up.  Sam's now got a whole bunch of fresh bug meat to snack on after I had to try it out on some uninvited guests climbing across my front door."
-msgstr ""
+msgstr "嘿，废土上的各位，这里是启示录电台（Revelation Radio）的DJ Dustbowl。给正在收听的你们，我要提个东西：催泪瓦斯。大家都听说过那些到处乱爬的巨型虫子了吧？要是还没听说……哎，我真不忍心打破你的天真幻想，但醒醒吧，闻闻那股虫子味儿认清现实吧：这玩意儿可是真实存在的。总之，各位，要是手头有催泪瓦斯罐，可得沉住气。那玩意儿能把那些爬来爬去的恶心虫子放倒，就像给它们通报“生命免费试用期已到”一样干脆利落。我刚才在自家前门上试用了一下，结果Sam现在有一大堆新鲜虫肉当零食吃了——可亏那些不速之客当时正顺着门爬。"
 
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
@@ -272266,12 +272284,12 @@ msgstr "声音非常清晰。"
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "It's time to line up some fresh tracks and for y'all to crank up the volume (don't do that if you're in an infested area), because I'm DJ Dustbowl and you're rocking along to Revelation Radio.  It's just me and Sam in the studio again, folks.  Anarchy's on the road back home, and we just wanna say that it was a pleasure having him join us in manning Revelation Radio for a while.  So, Anarchy, if you're driving along and tuning in as well, have a safe trip in your death brick, you sheet metal-wearing lunatic.  Hallelujah to have had someone like you kick around the set, and hallelujah for all the new tracks you brought in for us!"
-msgstr ""
+msgstr "是时候来点新歌，把音量调大（当然，如果你身处怪物出没的危险区域，可千万别这么做）——我是 DJ Dustbowl，欢迎收听启示录电台（Revelation Radio）。各位，现在演播室又只剩下我和 Sam 了。Anarchy 正在回家路上，我们想说，很高兴这段时间能有他加入，一起主持启示录电台。所以，Anarchy，如果你正在开车收听节目，祝你那辆“死亡砖块”一路平安——你这个浑身裹着铁皮的疯子。感谢有你来节目里坐镇，也感谢你为我们带来那些新歌！"
 
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "Ok, ladies and gentlemen, this is DJ Dustbowl, you're tuned into Revelation Radio, and if you're hearing this, then let's have an amen because it means we all made it out of the storm.  That is, if the storm was a widespread thing and not just neatly centered atop my head.  If that's the case and y'all didn't catch my broadcast, the bottom line's that reality was breaking, just like when this nonsense started.  Now, I don't know if it'll happen again, but let's use today's survival tip slot to see what we can learn from it.  Number one, folks, if reality's shitting the bed, don't try to fight anything that appears.  If you're caught outside, my advice is to just run for cover, and you'd be best served by snuggling underground.  Failing that, closing all the curtains and barricading the doors will work in a pinch.  Most importantly, people, if you hear something outside, regardless of what it might be, stuff your ears and ignore it.  You'll hear things that will make you want to open the front door.  I heard… I opened up.  You don't want to see what'll be waiting for you."
-msgstr ""
+msgstr "各位听众朋友，大家好，我是 DJ Dustbowl，欢迎收听“启示广播”（Revelation Radio）。如果你能听到这段广播，那咱们不妨齐声喊句“阿门”——因为这意味着我们都从那场风暴中幸存了下来。当然，前提是风暴波及范围够广，而非仅是精准地笼罩在我头顶上。如果情况确实如此，而你们没能听到我当时的广播，那重点就在于：现实世界当时正在崩塌，就像这一切荒唐事刚开始时那样。我不知道这种事会不会重演，但咱们不妨利用今天的“生存小贴士”环节，来总结一下经验教训。首先，各位，如果现实世界开始崩坏，千万别试图去对抗任何现身的东西。如果你恰好身处户外，我的建议是赶紧找个地方躲起来——最好是钻到地下去。实在不行，拉上所有窗帘、把门堵死，也能在紧要关头救急。最重要的一点是，如果听到外面有什么动静——不管那是什么——一定要塞住耳朵，别去理会。你会听到一些声音，诱使你忍不住想去开门。我当时就听到了……然后我开了门。相信我，你绝不会想看到门外等着你的是什么东西。"
 
 #. ~ Snippet in category "radio_station_desc_noise_max"
 #: data/json/snippets/radio.json
@@ -272286,7 +272304,7 @@ msgstr "海鸥54号呼叫\"自由之鹰\"号航空母舰。正如我们所预料
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "The world may be ending, but the music plays on.  This is DJ Dustbowl, coming right back at you with Revelation Radio, the soundtrack to the apocalypse.  Tune in for a mix of classic hits, indie tracks, and post-apocalyptic jams.  And remember people, while we may be living in hell, we at least still got good tunes."
-msgstr ""
+msgstr "世界或许正走向终结，但音乐依然在回荡。我是 DJ Dustbowl，为您带来“启示录电台”（Revelation Radio）——这是末日降临时的背景乐。敬请收听，这里汇集了经典金曲、独立音乐以及末世风格的劲爆乐章。还有，各位听众请记住：尽管我们身处炼狱，但至少我们还有好音乐相伴。"
 
 #. ~ Snippet in category "radio_station_desc_noise_40"
 #: data/json/snippets/radio.json
@@ -272306,7 +272324,7 @@ msgstr "有一些杂音，但你能听得很清楚。"
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "This is DJ Dustbowl on Revelation Radio, saying hey to your eardrums with some good tunes and a bunch of news.  Mutant meat makes for good eating, folks.  Well, sort of.  While that stuff's packed with a whole bunch of trash, forking a moderate serving onto y'all's plates ain't going to do much harm, save for offending your taste buds.  It's a hell of a lot better than starving, provided that you're mindful of how much you eat and don't go ham on the mutants if you've got some other food on tap.  Like actual ham, for example.  Daft jokes aside, I'd also like to give a shout out to the group of Old Guard soldiers who served up a royal ass kicking to some raiders down by <city>.  Go get them, guys."
-msgstr ""
+msgstr "这里是“启示录电台”（Revelation Radio）的 DJ Dustbowl，用好听的音乐和一堆新闻来给大伙儿的耳朵“打招呼”。各位，变异生物的肉其实挺能填饱肚子的——嗯，某种意义上是这样。虽然那玩意儿里头掺了不少垃圾杂质，但只要别贪嘴，适量吃点儿也不会出什么大问题——顶多就是委屈了你的味蕾。毕竟这总比饿死强多了；当然，前提是你得控制好食量，要是手头还有别的吃的，就别光盯着变异生物肉猛啃了——比如真正的火腿肉，那才是好东西。玩笑归玩笑，我还得给“老卫队”（Old Guard）的那帮战士们点个赞，他们刚才在 <city> 附近把一伙掠夺者揍得落花流水。干得漂亮，伙计们！"
 
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
@@ -272376,6 +272394,25 @@ msgid ""
 "\n"
 "\"OK, so I'm going to be bringing you whatever music I feel like playing, as well as tips, tricks, and excerpts from whatever I've been writing in this apocalyptic hellscape.  But before we launch, I'd like to give some dad advice.  Don't forget to work on your personal projects, people.  I know you've got plenty of time sitting in those shelters of yours.\""
 msgstr ""
+"嘿，<the_cataclysm> 的各位！我是 DJ Dustbowl，这是我的搭档——那条狗“山姆”（Sam）。你们现在收听的是“启示录电台”（Revelation Radio），不过……我先闭嘴，把麦克风交给别人。\n"
+"\n"
+"“嘿嘿，我是 Anarchy。我以前是个写手，现在成了末世幸存者，还穿着一身用烤箱铁皮改造成的护甲。”\n"
+"\n"
+"你是不是忘了说：“还有，我是那辆被改造成‘死亡砖块’的两厢车的驾驶员”？\n"
+"\n"
+"“没错。那可是我碾压丧尸的资历里很重要的一环。”\n"
+"\n"
+"所以呢，各位听众，如果你们错过了我上次的广播，那我得告诉你们一个奇迹：我找到了——很可能是——东海岸唯一一个还在喘气、还在搞电台的极客同类。\n"
+"\n"
+"“说真的，我们简直是濒危物种了。”\n"
+"\n"
+"确实如此。不过，Anarchy，能不能给那些躲在避难所里的人讲讲，你是怎么来到这儿的？\n"
+"\n"
+"“这么说吧……很多丧尸都跟这辆‘死亡砖块’的车头格栅来了个亲密接触。”\n"
+"\n"
+"够硬核。好了各位，我出去抽根烟，把场子交给 Anarchy。接下来他说什么，我可概不负责。\n"
+"\n"
+"“行，接下来我会给你们放点我想听的音乐，分享一些生存小贴士和技巧，还会读读我在这个末世炼狱里写的东西。但在开始之前，我想给大伙儿来点‘老父亲式’的叮嘱：别忘了继续搞你们自己的个人项目，各位。我知道，你们窝在避难所里的时候，时间可多了。”"
 
 #. ~ Snippet in category "radio_station_desc_noise_80"
 #: data/json/snippets/radio.json
@@ -272395,7 +272432,7 @@ msgstr "您正在收听的是波士顿KDDA频道，我是珍妮·桑德斯，插
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
 msgid "You're listening to Revelation Radio, I'm DJ Dustbowl!  In with a quick tip for any survivors listening: one zombie is bad news, two are worse.  Don't go Rambo on me.  Tackle threats in small numbers or through bottlenecks.  You aren't tougher than a zombie but you are smarter, use that to your advantage… or just run away."
-msgstr ""
+msgstr "你正在收听《启示录电台》，我是DJ尘暴！给所有幸存者一个小建议：一个丧尸就够麻烦的了，两个就更糟。别自作主张去单打独斗。遇到威胁时，尽量分批处理或利用地形。你不比丧尸更强壮，但你更聪明，利用这一点……或者干脆跑掉吧。"
 
 #. ~ Snippet in category "radio_archive"
 #: data/json/snippets/radio.json
@@ -281104,7 +281141,7 @@ msgstr "一个不小心的举动，将一些残留的空气排出，导致不死
 #. ~ Snippet in category "tainted_innards_desc"
 #: data/json/snippets/zombie_anatomy.json
 msgid "A clump of rotten entrails.  The sallow membranes that link these lobes of flesh together are lined with veins and capillaries.  A caul of slime coats them all in a greasy sheen.  You should not put this anywhere near your mouth."
-msgstr ""
+msgstr "一坨腐烂的内脏。这些连接肉块的灰黄色薄膜上布满了血管和毛细血管。一层粘液覆盖在它们表面，闪着油腻的光。你最好不要把这个放到嘴边。"
 
 #. ~ Snippet in category "leg_zed_desc"
 #: data/json/snippets/zombie_anatomy.json
@@ -281196,7 +281233,7 @@ msgstr "在它的口鼻内，你会注意到奇怪的腺体和纤维生长，几
 #. ~ Snippet in category "<zombie_animal_harvest_general_deeper>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "Inside the chest is some unfamiliar organ, a hideous amalgam of disparate tissues and veins."
-msgstr ""
+msgstr "胸腔里有一些未知的器官，是由不同的组织和血管恶心拼凑而成的混合体。"
 
 #. ~ Snippet in category "<zombie_humanoid_harvest_general_deeper>"
 #. ~ Snippet in category "<zombie_humanoid_harvest_headless_deeper>"
@@ -281245,7 +281282,7 @@ msgstr "在这个生物的颈部区域，你会发现一个腐蚀的标签，上
 #. ~ Snippet in category "<zombie_animal_harvest_acid_general>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "Most cavities in its anatomy seem to have been filled with an acidic solution mixed with putrefied fat and pieces of its slowly melting tissues."
-msgstr ""
+msgstr "它体内的大部分空腔似乎都充满了酸性液体，混合着腐烂的脂肪和它慢慢融化的组织碎片。"
 
 #. ~ Snippet in category "<zombie_harvest_dog_general>"
 #: data/json/snippets/zombie_anatomy.json
@@ -281273,7 +281310,7 @@ msgstr "压在肝脏上的是一个高尔夫球大小的肿胀腺体，仍然有
 #. ~ Snippet in category "<zombie_animal_harvest_bone_general>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "Putrefied blood bubbles like tar in the places where you managed to remove its skeletal growths."
-msgstr ""
+msgstr "在你设法去除它骨骼生长的地方腐烂的血像焦油一样起泡。"
 
 #. ~ Snippet in category "<zombie_humanoid_harvest_general>"
 #. ~ Snippet in category "<zombie_animal_harvest_general>"
@@ -281328,7 +281365,7 @@ msgstr "大脑已经在这个被污染的头骨内僵化了。  它并没有明�
 #. ~ Snippet in category "<zombie_humanoid_harvest_headless_deeper>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "The brain stem is swollen and packed with what looks like new growth bulging along the cervical vertebrae."
-msgstr ""
+msgstr "脑干肿胀，看起来像是沿着颈椎鼓起的新生物。"
 
 #. ~ Snippet in category "<zombie_harvest_pupating_general>"
 #: data/json/snippets/zombie_anatomy.json
@@ -281360,7 +281397,7 @@ msgstr "心脏被大量瘘管和其他赘生物占据。"
 #. ~ Snippet in category "<zombie_animal_harvest_general_deeper>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "The heart is overtaken by a mass of fistulas and other growths.  Healthy-looking arteries still spiderweb out of the tumorous mass."
-msgstr ""
+msgstr "心脏被一堆瘘管和其他肿块占据。看起来健康的动脉仍然像蜘蛛网一样从肿瘤团块中堆出来。"
 
 #. ~ Snippet in category "<zombie_humanoid_harvest_general_deeper>"
 #. ~ Snippet in category "<zombie_humanoid_harvest_headless_deeper>"
@@ -281382,7 +281419,7 @@ msgstr "内部组织是一些正常的肉和与盔甲纤维交织的肉的镶嵌
 #. ~ Snippet in category "<zombie_humanoid_harvest_general_deeper>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "The inside of the torso is stuffed with hair, fingers, and a distorted face, as if the zombie was growing a twin inside of itself."
-msgstr ""
+msgstr "头发、手指和扭曲的脸往躯干内部塞满，就好像丧尸在自己体内孕育了个双胞胎。"
 
 #. ~ Snippet in category "<zombie_harvest_pupating_general>"
 #: data/json/snippets/zombie_anatomy.json
@@ -281392,7 +281429,7 @@ msgstr "这具尸体的内部更像是一条工业生产线，而不是任何模
 #. ~ Snippet in category "<zombie_humanoid_harvest_headless_deeper>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "The intestines have pushed their way up into the thoracic cavity.  Lined with teeth, they stretch up toward the throat like a swarm of eels."
-msgstr ""
+msgstr "肠子已经挤到胸腔里了。它们像是有牙齿，一群鳗鱼一般向喉咙方向伸展。"
 
 #. ~ Snippet in category "<zombie_humanoid_harvest_bone_general>"
 #. ~ Snippet in category "<zombie_animal_harvest_bone_general>"
@@ -281441,7 +281478,7 @@ msgstr "从你的切口漏出的腐烂的血液明显充满了孢子。"
 #. ~ Snippet in category "<zombie_harvest_electric_general>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "The putrid veins of the creature seem strangely rigid, and you see faint crackles of electricity course across them."
-msgstr ""
+msgstr "这只生物腐烂的血管看起来异常僵硬，你看到微弱的电流沿着它们闪烁。"
 
 #. ~ Snippet in category "<zombie_harvest_dog_general>"
 #: data/json/snippets/zombie_anatomy.json
@@ -281642,12 +281679,12 @@ msgstr "虽然它的各个手指似乎正在失去灵活性，但僵尸的屈肌
 #. ~ Snippet in category "<zombie_humanoid_harvest_general_deeper>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "While some parts of the brain have turned to mush, others appear healthy and pink."
-msgstr ""
+msgstr "虽然大脑某些部分已变成糨糊，但其他部分看还很健康，粉嫩嫩的。"
 
 #. ~ Snippet in category "<zombie_animal_harvest_general_deeper>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "While some parts of the brain have turned to mush, others appear pink and almost healthy."
-msgstr ""
+msgstr "虽然大脑某些部分已变成糨糊，但其他部分几乎还是很健康的粉红色。"
 
 #. ~ Snippet in category "<zombie_harvest_grabber_general>"
 #: data/json/snippets/zombie_anatomy.json
@@ -281714,7 +281751,7 @@ msgstr "你会注意到它的皮毛上有囊肿，你把它们切开，或者发
 #. ~ Snippet in category "<zombie_harvest_grabber_general>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "You realize the muscles of the zombie's arms are hollow, their marrow replaced by a thick reddish liquid.  You wonder if the ridiculous muscle mass surrounding them is the other half of a strange hydraulic system."
-msgstr ""
+msgstr "你意识到丧尸手臂的肌肉是空的，骨髓被一种浓稠的红色液体取代。你怀疑这些裹住骨髓的荒谬的肌肉，是不是充当某种奇特的液压系统的另一半。"
 
 #. ~ Snippet in category "<zombie_humanoid_harvest_general>"
 #: data/json/snippets/zombie_anatomy.json
@@ -281724,7 +281761,7 @@ msgstr "你在尸体里发现了一些苍蝇和蛆虫，它们选择的尸体似
 #. ~ Snippet in category "<zombie_animal_harvest_general>"
 #: data/json/snippets/zombie_anatomy.json
 msgid "You spot a few flies and maggots in the corpse.  Most are dead, but a few seem to be able to handle eating zombie flesh."
-msgstr ""
+msgstr "你看到尸体上有几只苍蝇和蛆虫。大多数都死了，但似乎还有几只还吃着丧尸的肉。"
 
 #. ~ Snippet in category "<zombie_humanoid_harvest_shadow_general>"
 #. ~ Snippet in category "<zombie_animal_harvest_shadow_general>"
@@ -287440,7 +287477,7 @@ msgstr "你无情地撕裂了%s！"
 #: data/json/techniques.json
 #, c-format
 msgid "You catch %s with your attack"
-msgstr ""
+msgstr "你用攻击抓到了 %s"
 
 #. ~ Message of martial technique "Circle Kick"
 #: data/json/techniques.json
@@ -288775,13 +288812,13 @@ msgstr "掉进一个尖刺陷坑。"
 #: data/json/traps.json
 msgctxt "memorial_female"
 msgid "Fell through thin ice into water."
-msgstr ""
+msgstr "掉进薄冰下的水里了。"
 
 #. ~ Memorial message of trap "tr_thin_ice"
 #: data/json/traps.json
 msgctxt "memorial_male"
 msgid "Fell through thin ice into water."
-msgstr ""
+msgstr "掉进薄冰下的水里了。"
 
 #. ~ Spell name
 #: data/json/traps.json
@@ -288958,7 +288995,7 @@ msgstr "时空漩涡"
 #. ~ Message when player triggers trap "tr_thin_ice"
 #: data/json/traps.json
 msgid "The ice cracks beneath you!"
-msgstr ""
+msgstr "你脚下的冰裂开了！"
 
 #. ~ Description of spell "Summon Trapdoor Spider"
 #: data/json/traps.json
@@ -290749,7 +290786,7 @@ msgstr "标签（窄）"
 #. ~ Label of UI widget "ll_limbs_sa_layout"
 #: data/json/ui/sidebar-legacy-labels.json
 msgid "Hit Points (Numerical)"
-msgstr ""
+msgstr "生命值（数值）"
 
 #. ~ Label of UI widget "ll_int_per_safe_layout"
 #: data/json/ui/sidebar-legacy-labels.json
