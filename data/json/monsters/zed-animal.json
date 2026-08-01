@@ -117,7 +117,20 @@
     "death_drops": "mon_dog_death_drops",
     "upgrades": { "half_life": 112, "into_group": "GROUP_ZOMBIE_DOG_UPGRADE" },
     "fungalize_into": "mon_zombie_dog_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "GRABS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "GRABS",
+      "STUMBLES",
+      "WARM",
+      "BASHES",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "BELLYUP"
+    ],
     "armor": { "electric": 1 }
   },
   {
@@ -165,7 +178,8 @@
       "REVIVES",
       "PUSH_MON",
       "FILTHY",
-      "KEENNOSE"
+      "KEENNOSE",
+      "BELLYUP"
     ],
     "armor": { "bash": 6, "cut": 6, "bullet": 5, "electric": 1 }
   },
@@ -214,7 +228,8 @@
       "NO_BREATHE",
       "REVIVES",
       "PUSH_MON",
-      "FILTHY"
+      "FILTHY",
+      "BELLYUP"
     ],
     "armor": { "electric": 1 }
   },

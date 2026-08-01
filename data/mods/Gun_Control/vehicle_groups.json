@@ -629,10 +629,7 @@
   {
     "type": "vehicle_group",
     "id": "military_vehicles",
-    "vehicles": [
-      [ "military_cargo_truck", 1000 ],
-      [ "military_cargo_truck_b", 1000 ]
-    ]
+    "vehicles": [ [ "military_cargo_truck", 1000 ], [ "military_cargo_truck_b", 1000 ] ]
   },
   {
     "type": "vehicle_group",

@@ -165,7 +165,8 @@
       "PUSH_MON",
       "CORNERED_FIGHTER",
       "EATS",
-      "CLIMBS"
+      "CLIMBS",
+      "BELLYUP"
     ],
     "armor": { "bash": 7, "cut": 8, "bullet": 7, "electric": 1 }
   },
@@ -200,7 +201,7 @@
     "zombify_into": "mon_zombeaver",
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "special_attacks": [ { "type": "bite", "cooldown": 15 } ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM", "WATER_CAMOUFLAGE" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM", "WATER_CAMOUFLAGE", "BELLYUP" ]
   },
   {
     "id": "mon_lab_rat",
@@ -252,7 +253,8 @@
       "PATH_AVOID_DANGER",
       "CAN_BE_CULLED",
       "EATS",
-      "SMALL_HIDER"
+      "SMALL_HIDER",
+      "BELLYUP"
     ]
   },
   {
@@ -288,7 +290,7 @@
     "upgrades": { "age_grow": 38, "into": "mon_boar_wild" },
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 7 },
     "special_attacks": [ [ "EAT_FOOD", 40 ], [ "EAT_CARRION", 60 ] ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "EATS", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "EATS", "SMALL_HIDER", "BELLYUP" ]
   },
   {
     "id": "mon_boar_wild",
@@ -336,7 +338,8 @@
       "WARM",
       "KEENNOSE",
       "CORNERED_FIGHTER",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 5, "bullet": 2, "electric": 1 }
   },
@@ -381,7 +384,8 @@
       "HIT_AND_RUN",
       "SMALL_HIDER",
       "CORNERED_FIGHTER",
-      "CLIMBS"
+      "CLIMBS",
+      "BELLYUP"
     ]
   },
   {
@@ -437,7 +441,8 @@
       "HIT_AND_RUN",
       "CORNERED_FIGHTER",
       "SMALL_HIDER",
-      "CAN_BE_CULLED"
+      "CAN_BE_CULLED",
+      "BELLYUP"
     ],
     "armor": { "cold": 2 }
   },
@@ -488,7 +493,7 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "ANIMAL", "PATH_AVOID_DANGER", "SMALL_HIDER" ]
+    "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "ANIMAL", "PATH_AVOID_DANGER", "SMALL_HIDER", "BELLYUP" ]
   },
   {
     "id": "mon_tiger",
@@ -535,7 +540,18 @@
     "dissect": "dissect_feline_sample_small",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
-    "flags": [ "SEES", "HEARS", "GOODHEARING", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "HIT_AND_RUN", "KEENNOSE" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "GOODHEARING",
+      "SMELLS",
+      "ANIMAL",
+      "PATH_AVOID_DANGER",
+      "WARM",
+      "HIT_AND_RUN",
+      "KEENNOSE",
+      "BELLYUP"
+    ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   },
   {
@@ -585,7 +601,8 @@
       "CANPLAY",
       "PET_WONT_FOLLOW",
       "CAN_BE_CULLED",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 2 }
   },
@@ -651,7 +668,8 @@
       "MILKABLE",
       "CAN_BE_CULLED",
       "CORNERED_FIGHTER",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 3, "cut": 3, "electric": 1 }
   },
@@ -686,7 +704,7 @@
     "harvest": "mammal_fur_canis",
     "dissect": "dissect_canine_sample_single",
     "families": [ "prof_intro_biology", "prof_physiology" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "HIT_AND_RUN", "KEENNOSE", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "HIT_AND_RUN", "KEENNOSE", "EATS", "BELLYUP" ],
     "armor": { "bash": 2, "cut": 3, "bullet": 3, "electric": 1 }
   },
   {
@@ -720,7 +738,7 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
     "upgrades": { "age_grow": 330, "into": "mon_deer" },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "BELLYUP" ]
   },
   {
     "id": "mon_deer",
@@ -759,7 +777,7 @@
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 12 },
     "baby_flags": [ "SPRING", "SUMMER" ],
     "special_attacks": [ [ "EAT_CROP", 60 ], [ "GRAZE", 60 ] ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "EATS", "BELLYUP" ],
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
   {
@@ -796,7 +814,7 @@
     "fear_triggers": [ "SOUND", "FIRE" ],
     "zombify_into": "mon_zeer_frail",
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 12 },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "BELLYUP" ],
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
   {
@@ -858,7 +876,8 @@
       "SWARMS",
       "WARM",
       "CORNERED_FIGHTER",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
@@ -1016,7 +1035,8 @@
       "WARM",
       "EATS",
       "SMALL_HIDER",
-      "CORNERED_FIGHTER"
+      "CORNERED_FIGHTER",
+      "BELLYUP"
     ]
   },
   {
@@ -1064,7 +1084,19 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED" ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "HIT_AND_RUN", "KEENNOSE", "CLIMBS", "SMALL_HIDER" ]
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "ANIMAL",
+      "PATH_AVOID_DANGER",
+      "WARM",
+      "HIT_AND_RUN",
+      "KEENNOSE",
+      "CLIMBS",
+      "SMALL_HIDER",
+      "BELLYUP"
+    ]
   },
   {
     "id": "mon_groundhog",
@@ -1095,7 +1127,7 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "special_attacks": [ [ "GRAZE", 100 ] ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "GOODHEARING", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "EATS", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "GOODHEARING", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "EATS", "SMALL_HIDER", "BELLYUP" ]
   },
   {
     "id": "mon_horse_foal",
@@ -1144,7 +1176,8 @@
       "WARM",
       "NO_BREED",
       "CAN_BE_CULLED",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 2, "electric": 1 }
   },
@@ -1200,7 +1233,8 @@
       "WARM",
       "MILKABLE",
       "EATS",
-      "CORNERED_FIGHTER"
+      "CORNERED_FIGHTER",
+      "BELLYUP"
     ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   },
@@ -1234,7 +1268,7 @@
     "dissect": "dissect_cattle_sample_single",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "zombify_into": "mon_zombie_horse_lame",
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "IMMOBILE", "CORNERED_FIGHTER" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "IMMOBILE", "CORNERED_FIGHTER", "BELLYUP" ],
     "armor": { "bash": 2, "cut": 4, "bullet": 5, "electric": 1 }
   },
   {
@@ -1274,7 +1308,7 @@
     "special_attacks": [ [ "GRAZE", 50 ] ],
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "ANIMAL", "PATH_AVOID_DANGER", "EATS" ]
+    "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "ANIMAL", "PATH_AVOID_DANGER", "EATS", "BELLYUP" ]
   },
   {
     "id": "mon_mink",
@@ -1303,7 +1337,19 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED" ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "HIT_AND_RUN", "KEENNOSE", "SWIMS", "SMALL_HIDER" ]
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "ANIMAL",
+      "PATH_AVOID_DANGER",
+      "WARM",
+      "HIT_AND_RUN",
+      "KEENNOSE",
+      "SWIMS",
+      "SMALL_HIDER",
+      "BELLYUP"
+    ]
   },
   {
     "id": "mon_moose",
@@ -1354,7 +1400,18 @@
       [ "EAT_CROP", 60 ],
       [ "GRAZE", 50 ]
     ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "PET_MOUNTABLE", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CORNERED_FIGHTER", "EATS" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "PET_MOUNTABLE",
+      "ANIMAL",
+      "PATH_AVOID_DANGER",
+      "WARM",
+      "CORNERED_FIGHTER",
+      "EATS",
+      "BELLYUP"
+    ],
     "armor": { "bash": 5, "cut": 6, "bullet": 8, "electric": 1 }
   },
   {
@@ -1392,7 +1449,7 @@
     "upgrades": { "age_grow": 180, "into": "mon_moose" },
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 7 },
     "special_attacks": [ [ "EAT_CROP", 60 ], [ "GRAZE", 50 ] ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "PET_WONT_FOLLOW", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "PET_WONT_FOLLOW", "EATS", "BELLYUP" ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   },
   {
@@ -1441,7 +1498,7 @@
     "dissect": "dissect_cattle_sample_large",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 8 },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CORNERED_FIGHTER", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CORNERED_FIGHTER", "EATS", "BELLYUP" ],
     "armor": { "bash": 8, "cut": 10, "bullet": 12, "electric": 1 }
   },
   {
@@ -1479,7 +1536,7 @@
     "upgrades": { "age_grow": 120, "into": "mon_tusked_moose" },
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 7 },
     "special_attacks": [ [ "EAT_CROP", 60 ], [ "GRAZE", 50 ] ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "PET_WONT_FOLLOW", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "PET_WONT_FOLLOW", "EATS", "BELLYUP" ],
     "armor": { "bash": 5, "cut": 7, "bullet": 8, "electric": 1 }
   },
   {
@@ -1510,7 +1567,7 @@
     "dissect": "dissect_rat_sample_single",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "ANIMAL", "PATH_AVOID_DANGER", "SMALL_HIDER" ]
+    "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "ANIMAL", "PATH_AVOID_DANGER", "SMALL_HIDER", "BELLYUP" ]
   },
   {
     "id": "mon_opossum",
@@ -1542,7 +1599,19 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "FRIEND_ATTACKED", "HURT" ],
     "fear_triggers": [ "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "CLIMBS", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "EATS", "SMALL_HIDER" ]
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "ANIMAL",
+      "CLIMBS",
+      "PATH_AVOID_DANGER",
+      "WARM",
+      "KEENNOSE",
+      "EATS",
+      "SMALL_HIDER",
+      "BELLYUP"
+    ]
   },
   {
     "id": "mon_skunk",
@@ -1596,7 +1665,8 @@
       "GOODHEARING",
       "EATS",
       "CORNERED_FIGHTER",
-      "SMALL_HIDER"
+      "SMALL_HIDER",
+      "BELLYUP"
     ]
   },
   {
@@ -1625,7 +1695,18 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM", "WATER_CAMOUFLAGE", "SMALL_HIDER" ]
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "ANIMAL",
+      "PATH_AVOID_DANGER",
+      "SWIMS",
+      "WARM",
+      "WATER_CAMOUFLAGE",
+      "SMALL_HIDER",
+      "BELLYUP"
+    ]
   },
   {
     "id": "mon_pig_piglet",
@@ -1671,7 +1752,8 @@
       "KEENNOSE",
       "CAN_BE_CULLED",
       "EATS",
-      "SMALL_HIDER"
+      "SMALL_HIDER",
+      "BELLYUP"
     ]
   },
   {
@@ -1721,7 +1803,8 @@
       "KEENNOSE",
       "CAN_BE_CULLED",
       "CORNERED_FIGHTER",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ]
   },
   {
@@ -1764,7 +1847,8 @@
       "CAN_BE_CULLED",
       "GOODHEARING",
       "EATS",
-      "SMALL_HIDER"
+      "SMALL_HIDER",
+      "BELLYUP"
     ]
   },
   {
@@ -1833,7 +1917,19 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "special_attacks": [ [ "EAT_FOOD", 60 ], [ "BROWSE", 50 ], [ "EAT_CARRION", 60 ] ],
     "anger_triggers": [ "FRIEND_ATTACKED", "HURT" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "CLIMBS", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "EATS", "SMALL_HIDER" ]
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "ANIMAL",
+      "CLIMBS",
+      "PATH_AVOID_DANGER",
+      "WARM",
+      "KEENNOSE",
+      "EATS",
+      "SMALL_HIDER",
+      "BELLYUP"
+    ]
   },
   {
     "id": "mon_rat",
@@ -1869,7 +1965,19 @@
     "upgrades": { "half_life": 70, "into_group": "GROUP_RATKIN_EVOLVED" },
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "anger_triggers": [ "PLAYER_WEAK", "FRIEND_ATTACKED", "FRIEND_DIED" ],
-    "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "ANIMAL", "PATH_AVOID_DANGER", "STUMBLES", "EATS", "SMALL_HIDER" ]
+    "flags": [
+      "SEES",
+      "SMELLS",
+      "HEARS",
+      "WARM",
+      "SWIMS",
+      "ANIMAL",
+      "PATH_AVOID_DANGER",
+      "STUMBLES",
+      "EATS",
+      "SMALL_HIDER",
+      "BELLYUP"
+    ]
   },
   {
     "id": "mon_sheep_lamb",
@@ -1906,7 +2014,7 @@
     "//": "Puberty reached in 6-9 months.",
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 7 },
     "petfood": { "food": [ "CATTLEFOOD" ], "feed": "The %s seems to like you!  It lets you pat its head and seems friendly." },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CAN_BE_CULLED", "EATS" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CAN_BE_CULLED", "EATS", "BELLYUP" ]
   },
   {
     "id": "mon_sheep",
@@ -1956,7 +2064,8 @@
       "PET_WONT_FOLLOW",
       "MILKABLE",
       "CAN_BE_CULLED",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ]
   },
   {
@@ -2004,7 +2113,8 @@
       "MILKABLE",
       "CLIMBS",
       "CAN_BE_CULLED",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 2, "cut": 3, "bullet": 3, "electric": 1 }
   },
@@ -2037,7 +2147,7 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "special_attacks": [ [ "BROWSE", 120 ] ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "SMALL_HIDER", "BELLYUP" ]
   },
   {
     "id": "mon_weasel",
@@ -2065,7 +2175,7 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM", "SMALL_HIDER" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM", "SMALL_HIDER", "BELLYUP" ]
   },
   {
     "id": "mon_wolf",
@@ -2100,7 +2210,7 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "anger_triggers": [ "STALK", "FRIEND_ATTACKED", "FRIEND_DIED", "PLAYER_WEAK", "PLAYER_CLOSE", "PLAYER_NEAR_BABY" ],
     "zombify_into": "mon_zolf",
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "CORNERED_FIGHTER" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "CORNERED_FIGHTER", "BELLYUP" ],
     "armor": { "bash": 3, "cut": 6, "bullet": 5, "electric": 1 }
   },
   {
@@ -2167,7 +2277,7 @@
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 12 },
     "baby_flags": [ "WINTER", "AUTUMN" ],
     "special_attacks": [ { "id": "smash", "throw_strength": 37 }, [ "EAT_CROP", 60 ], [ "GRAZE", 60 ] ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CORNERED_FIGHTER", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CORNERED_FIGHTER", "EATS", "BELLYUP" ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   },
   {
@@ -2227,7 +2337,7 @@
     "//": "Puberty reached in 6-9 months, copied from lamb but it probably applies the same on llamas.",
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 7 },
     "petfood": { "food": [ "CATTLEFOOD" ], "feed": "The %s seems to like you!  It lets you pat its head and seems friendly." },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "EATS" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "EATS", "BELLYUP" ]
   },
   {
     "id": "mon_llama",
@@ -2277,7 +2387,8 @@
       "MILKABLE",
       "CAN_BE_CULLED",
       "CORNERED_FIGHTER",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   },
@@ -2314,7 +2425,19 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "reproduction": { "baby_monster": "mon_ferret_kit", "baby_count": 5, "baby_timer": 100 },
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM", "CANPLAY", "CAN_BE_CULLED", "SMALL_HIDER" ]
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "ANIMAL",
+      "PATH_AVOID_DANGER",
+      "SWIMS",
+      "WARM",
+      "CANPLAY",
+      "CAN_BE_CULLED",
+      "SMALL_HIDER",
+      "BELLYUP"
+    ]
   },
   {
     "id": "mon_ferret_kit",
@@ -2329,7 +2452,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 1 } ],
     "dodge": 9,
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "CANPLAY", "PATH_AVOID_DANGER", "WARM", "HIT_AND_RUN", "NO_BREED" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "CANPLAY", "PATH_AVOID_DANGER", "WARM", "HIT_AND_RUN", "NO_BREED", "BELLYUP" ],
     "upgrades": { "age_grow": 90, "into": "mon_ferret" },
     "armor": { "cold": 0 }
   }

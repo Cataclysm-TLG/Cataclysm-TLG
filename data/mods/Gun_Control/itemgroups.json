@@ -350,8 +350,12 @@
     "type": "item_group",
     "id": "guns_pistol_collectible",
     "//": "Highly rare or collectable factory-made pistols that are possible for civilians to own; only likely to show up in gun collections, museums or similar.  Pistols that are of historic or collectors value and which fall under NFA regulations, i.e. pistols which are integrally supressed, have a burst or fully-automatic capability, or have a non-detachable buttstock, can be placed within this item group.  These weapons are always unloaded.",
-    "items": [ 
-      { "item": "null", "prob": 4000 },{ "item": "mauser_c96", "prob": 50 }, { "item": "colt_navy", "prob": 40 }, { "item": "colt_army", "prob": 40 } ]
+    "items": [
+      { "item": "null", "prob": 4000 },
+      { "item": "mauser_c96", "prob": 50 },
+      { "item": "colt_navy", "prob": 40 },
+      { "item": "colt_army", "prob": 40 }
+    ]
   },
   {
     "type": "item_group",
@@ -369,8 +373,11 @@
     "id": "guns_smg_common",
     "//": "Semi-auto civilian SMGs owned by citizens and found in many locations.",
     "//2": "Making the assumption any loaded gun will have additional ammo and mags with it.",
-    "items": [ 
-      { "item": "null", "prob": 4000 },{ "group": "nested_mp40semi", "prob": 10 }, { "group": "nested_hk_mp5_semi_pistol", "prob": 70 } ]
+    "items": [
+      { "item": "null", "prob": 4000 },
+      { "group": "nested_mp40semi", "prob": 10 },
+      { "group": "nested_hk_mp5_semi_pistol", "prob": 70 }
+    ]
   },
   {
     "type": "item_group",
@@ -388,8 +395,12 @@
     "subtype": "distribution",
     "id": "guns_smg_common_display",
     "//": "Empty Semi-auto civilian SMGs owned by citizens and found in many locations.",
-    "items": [ 
-      { "item": "null", "prob": 4000 },{ "item": "mp40semi", "prob": 10 }, { "item": "hk_mp5_semi_pistol", "prob": 70 }, { "item": "TDI_10", "prob": 70 } ]
+    "items": [
+      { "item": "null", "prob": 4000 },
+      { "item": "mp40semi", "prob": 10 },
+      { "item": "hk_mp5_semi_pistol", "prob": 70 },
+      { "item": "TDI_10", "prob": 70 }
+    ]
   },
   {
     "type": "item_group",
@@ -486,8 +497,7 @@
     "type": "item_group",
     "id": "guns_smg_collectible",
     "//": "Extremely rare factory-made submachine guns that are possible for civilians to own; only likely to show up in gun collections, museums or similar.  Always unloaded.",
-    "items": [ 
-      { "item": "null", "prob": 4000 },{ "item": "mp18", "variant": "mp18", "prob": 3 } ]
+    "items": [ { "item": "null", "prob": 4000 }, { "item": "mp18", "variant": "mp18", "prob": 3 } ]
   },
   {
     "type": "item_group",
@@ -883,8 +893,12 @@
     "type": "item_group",
     "id": "guns_rifle_improvised",
     "//": "Makeshift or otherwise poor quality rifles.",
-    "items": [ 
-      { "item": "null", "prob": 4000 },{ "item": "rifle_22", "prob": 60 }, { "item": "rifle_38", "prob": 30 }, { "item": "rifle_44", "prob": 5 } ]
+    "items": [
+      { "item": "null", "prob": 4000 },
+      { "item": "rifle_22", "prob": 60 },
+      { "item": "rifle_38", "prob": 30 },
+      { "item": "rifle_44", "prob": 5 }
+    ]
   },
   {
     "type": "item_group",
@@ -1094,8 +1108,7 @@
     "type": "item_group",
     "id": "guns_launcher_flame",
     "//": "Factory manufactured incendiary liquid projectors (excludes improvised weapons)",
-    "items": [ 
-      { "item": "null", "prob": 4000 },{ "item": "flamethrower", "prob": 50, "charges": [ 100, 8000 ] } ]
+    "items": [ { "item": "null", "prob": 4000 }, { "item": "flamethrower", "prob": 50, "charges": [ 100, 8000 ] } ]
   },
   {
     "type": "item_group",
@@ -1151,8 +1164,11 @@
     "type": "item_group",
     "id": "guns_launcher_improvised",
     "//": "Makeshift or otherwise poor quality grenade and rocket launchers",
-    "items": [ 
-      { "item": "null", "prob": 4000 },{ "item": "launcher_simple", "prob": 100 }, { "item": "triple_launcher_simple", "prob": 15, "charges": [ 0, 3 ] } ]
+    "items": [
+      { "item": "null", "prob": 4000 },
+      { "item": "launcher_simple", "prob": 100 },
+      { "item": "triple_launcher_simple", "prob": 15, "charges": [ 0, 3 ] }
+    ]
   },
   {
     "type": "item_group",
@@ -1268,7 +1284,13 @@
     "subtype": "distribution",
     "items": [
       { "item": "null", "prob": 4000 },
-      { "group": "ar15_223medium", "ammo-item": "223", "charges": [ 0, 30 ], "contents-item": "shoulder_strap", "prob": 90 },
+      {
+        "group": "ar15_223medium",
+        "ammo-item": "223",
+        "charges": [ 0, 30 ],
+        "contents-item": "shoulder_strap",
+        "prob": 90
+      },
       {
         "group": "ar15_223short",
         "ammo-item": "223",
@@ -2051,8 +2073,7 @@
     "type": "item_group",
     "id": "guns_cop",
     "//": "Police issue weapons of all types",
-    "items": [ 
-      { "item": "null", "prob": 4000 },{ "group": "longguns_cop", "prob": 20 }, { "group": "sidearms_cop", "prob": 80 } ]
+    "items": [ { "item": "null", "prob": 4000 }, { "group": "longguns_cop", "prob": 20 }, { "group": "sidearms_cop", "prob": 80 } ]
   },
   {
     "type": "item_group",
@@ -2073,7 +2094,9 @@
     "type": "item_group",
     "id": "longguns_operator",
     "items": [
-      { "item": "null", "prob": 4000 }, { "group": "modular_ar15", "prob": 20, "charges": [ 0, 30 ], "contents-item": "shoulder_strap_front" } ]
+      { "item": "null", "prob": 4000 },
+      { "group": "modular_ar15", "prob": 20, "charges": [ 0, 30 ], "contents-item": "shoulder_strap_front" }
+    ]
   },
   {
     "type": "item_group",
