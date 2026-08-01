@@ -130,6 +130,7 @@ static const bionic_id bio_shock_absorber( "bio_shock_absorber" );
 
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_bullet( "bullet" );
+static const damage_type_id damage_heat( "heat" );
 
 static const efftype_id effect_boomered( "boomered" );
 static const efftype_id effect_crushed( "crushed" );
@@ -3384,10 +3385,7 @@ void map::process_falling()
         support_cache_dirty.clear();
         return;
     }
-
     if( !support_cache_dirty.empty() ) {
-        add_msg_debug( debugmode::DF_MAP, "Checking %d tiles for falling objects",
-                       support_cache_dirty.size() );
         // We want the cache to stay constant, but falling can change it
         std::set<tripoint_bub_ms> last_cache = std::move( support_cache_dirty );
         support_cache_dirty.clear();
@@ -4485,15 +4483,16 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
             i++;
             continue;
         }
-
         // The volume check here pretty much only influences very large items
         const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
+        add_msg_debug( debugmode::DF_MAP,
+                       "manually_smash_items(): power %1s / volume factor %2s", power, volume_factor );
         float damage_chance = 10.f * power / volume_factor;
-
         if( i->is_soft() && damage_chance > 0.f ) {
             damage_chance /= 5.f;
         }
-
+        add_msg_debug( debugmode::DF_MAP,
+                       "manually_smash_items(): damage_chance for %1s is %2s", damage_chance, i->tname() );
         params.did_bash = true;
         params.bashed_solid = true;
         const bool by_charges = i->count_by_charges();
@@ -5550,36 +5549,36 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
         return;
     }
 
-    // Make sure the message is sensible for the ammo effects. Lasers aren't projectiles.
-    std::string damage_message;
-    if( ammo_effects.count( ammo_effect_LASER ) ) {
-        damage_message = _( "laser beam" );
-    } else if( ammo_effects.count( ammo_effect_LIGHTNING ) ) {
-        damage_message = _( "bolt of electricity" );
-    } else if( ammo_effects.count( ammo_effect_PLASMA ) ) {
-        damage_message = _( "bolt of plasma" );
-    } else {
-        damage_message = _( "flying projectile" );
-    }
-
     // Now, smash items on that tile.
-    // dam / 3, because bullets aren't all that good at destroying items...
     const auto &items_on_tile = i_at( p );
     units::volume total_volume = 0_ml;
 
     for( const item &it : items_on_tile ) {
         total_volume += it.volume();
     }
-
-    int chance = 150000 / std::max( 1, static_cast<int>( total_volume.value() ) );
-
-    // Cap max denominator at 100 to ensure minimum 1% chance
-    if( chance > 100 ) {
-        chance = 100;
+    if( total_volume == 0_ml ) {
+        return;
     }
-
-    if( one_in( chance ) ) {
-        smash_items( p, dam / 3, damage_message );
+    // Chance we hit anything is the total volume of items in tile / 1000 Liters (max tile vol).
+    float chance = total_volume.value() / 1000000.f;
+    if( chance == 0.f ) {
+        return;
+    }
+    chance = std::max( chance, 0.01f );
+    int percentage = static_cast<int>( std::round( chance * 100.f ) );
+    add_msg_debug( debugmode::DF_MAP,
+                   "shoot(): chance to hit item is %1$d%%.", percentage );
+    if( x_in_y( percentage, 100 ) ) {
+        if( main_damage_type != damage_bash && main_damage_type != damage_bullet ) {
+            // Arrows and (for now) lasers don't harm items.
+            // TODO: Lasers and ammo_effect_IGNITE should ignite TINDER items.
+            return;
+        }
+        int power = static_cast<int>( std::round( dam ) );
+        bash_params bsh{
+            power, true, false, false, false, 0.5f, false, false, false, false
+        };
+        manually_smash_items( p, power, false, bsh, false );
     }
 }
 
@@ -6825,6 +6824,9 @@ bool map::could_see_items( const tripoint_bub_ms &p, const Creature &who ) const
 {
     static const std::string container_string( "CONTAINER" );
     const bool container = has_flag_ter_or_furn( container_string, p );
+    if( !container ) {
+        return could_see_items( p, who.pos_bub() );
+    }
     const bool sealed = has_flag_ter_or_furn( ter_furn_flag::TFLAG_SEALED, p );
     if( sealed && container ) {
         // never see inside of sealed containers
@@ -8699,37 +8701,32 @@ int map::concealment( const tripoint &p ) const
 int map::concealment( const tripoint_bub_ms &p ) const
 {
     const furn_id obstacle_f = furn( p );
-    if( obstacle_f->concealment > 0 ) {
+    const optional_vpart_position vp = veh_at( p );
+    if( obstacle_f->concealment > 0 && !vp ) {
         return obstacle_f->concealment;
     }
-
-    if( const optional_vpart_position vp = veh_at( p ) ) {
-        const bool is_obstacle = vp->obstacle_at_part().has_value();
+    if( vp ) {
         const vehicle &veh = vp->vehicle();
         const point_rel_ms rel = vp->mount_pos();
         bool all_no_cover = true;
-        bool is_opaque = false;
         for( int idx : veh.parts_at_relative( rel, true ) ) {
             const vehicle_part &vp_here = veh.part( idx );
             const vpart_info &vpi_here = vp_here.info();
+            if( vpi_here.has_flag( "OPAQUE" ) &&
+                ( !vpi_here.has_flag( "OPENABLE" ) || !vp_here.open ) ) {
+                // We don't need to check anything else since it's fully opaque.
+                return 100;
+            }
             if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
                 vpi_here.location != "roof" ) {
                 all_no_cover = false;
             }
-            if( vpi_here.has_flag( "OPAQUE" ) &&
-                ( !vpi_here.has_flag( "OPENABLE" ) || !vp_here.open ) ) {
-                is_opaque = true;
-                break; // Early exit since something here is opaque and that's all that matters.
-            }
         }
-        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
         if( all_no_cover ) {
             return 0;
-        } else if( is_opaque ) {
-            return 100;
-        } else if( is_obstacle ) {
+        } else if( vp->obstacle_at_part().has_value() ) {
             return 60;
-        } else if( !is_aisle ) {
+        } else if( !vp->part_with_feature( VPFLAG_AISLE, true ).has_value() ) {
             return 45;
         }
     }
@@ -8739,13 +8736,11 @@ int map::concealment( const tripoint_bub_ms &p ) const
 int map::coverage( const tripoint_bub_ms &p ) const
 {
     const furn_id obstacle_f = furn( p );
-    if( obstacle_f != f_null && obstacle_f->coverage > 0 ) {
+    const optional_vpart_position vp = veh_at( p );
+    if( obstacle_f != f_null && obstacle_f->coverage > 0 && !vp ) {
         return obstacle_f->coverage;
     }
-    if( const optional_vpart_position vp = veh_at( p ) ) {
-        const bool is_quarterpanel = vp->part_with_feature( VPFLAG_HALF_BOARD, true ).has_value();
-        const bool is_obstacle = vp->obstacle_at_part().has_value();
-        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
+    if( vp ) {
         const vehicle &veh = vp->vehicle();
         const point_rel_ms rel = vp->mount_pos();
         bool all_no_cover = true;
@@ -8755,22 +8750,19 @@ int map::coverage( const tripoint_bub_ms &p ) const
             if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
                 vpi_here.location != "roof" ) {
                 all_no_cover = false;
-                break; // Early exit since at least one part provides cover.
+                break;
             }
         }
         if( all_no_cover ) {
             return 0;
-            // TODO: Quarterpanels are currently obstacles, but they shouldn't be. If we fix that, we'll
-            // need to check more rigorously for whether our bomb is inside the car.
-        } else if( is_quarterpanel ) {
+        } else if( vp->part_with_feature( VPFLAG_HALF_BOARD, true ).has_value() ) {
             return 60;
-        } else if( is_obstacle ) {
+        } else if( vp->obstacle_at_part().has_value() ) {
             return 100;
-        } else if( !is_aisle ) {
+        } else if( !vp->part_with_feature( VPFLAG_AISLE, true ).has_value() ) {
             return 45;
         }
     }
-
     return ter( p )->coverage;
 }
 
@@ -11774,7 +11766,7 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c )
     if( you->is_avatar() ) {
         if( ter( you->pos_bub() )->has_flag( "EMPTY_SPACE" ) ) {
             add_msg( m_bad, n_gettext( "You fall down %d story!", "You fall down %d stories!", height ),
-                    height );
+                     height );
             g->vertical_move( -height, true );
         }
     } else {
