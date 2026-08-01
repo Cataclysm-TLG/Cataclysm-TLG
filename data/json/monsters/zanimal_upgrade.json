@@ -31,7 +31,7 @@
     "special_attacks": [ { "id": "bite_grab", "attack_upper": false, "cooldown": 5 }, { "id": "scratch_grab_required", "max_mul": 1.5 } ],
     "death_drops": "mon_dog_death_drops",
     "upgrades": { "half_life": 168, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "WARM", "REVIVES", "POISON", "FILTHY", "BASHES" ],
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "WARM", "REVIVES", "POISON", "FILTHY", "BASHES", "BELLYUP" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 1 }
   },
   {
@@ -107,7 +107,7 @@
       { "id": "scratch_grab_required" },
       { "id": "bite_grab_required" }
     ],
-    "extend": { "flags": [ "DESTROYS" ] },
+    "extend": { "flags": [ "DESTROYS", "GROUP_BASH", "PUSH_VEH" ] },
     "armor": { "bash": 8, "cut": 10, "bullet": 10, "electric": 4 }
   },
   {
@@ -211,7 +211,7 @@
     "vision_night": 3,
     "harvest": "puppy_bones",
     "upgrades": { "half_life": 168, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "WARM", "POISON", "FILTHY", "BASHES" ],
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "WARM", "POISON", "FILTHY", "BASHES", "BELLYUP" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 3 }
   },
   {
@@ -346,7 +346,8 @@
       "ACID_BLOOD",
       "NO_BREATHE",
       "REVIVES",
-      "PUSH_MON"
+      "PUSH_MON",
+      "BELLYUP"
     ]
   },
   {
@@ -440,7 +441,8 @@
       "REVIVES",
       "PUSH_MON",
       "PUSH_VEH",
-      "FILTHY"
+      "FILTHY",
+      "BELLYUP"
     ],
     "armor": { "electric": 2, "bash": 10, "cut": 10, "bullet": 8 }
   },
@@ -480,7 +482,8 @@
       "FILTHY",
       "PATH_AVOID_FIRE",
       "PATH_AVOID_FALL",
-      "PARALYZEVENOM"
+      "PARALYZEVENOM",
+      "BELLYUP"
     ],
     "armor": { "electric": 2, "bash": 8, "cut": 8, "bullet": 6 }
   }

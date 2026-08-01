@@ -323,7 +323,8 @@
       "REVIVES",
       "FILTHY",
       "ACIDPROOF",
-      "ACID_BLOOD"
+      "ACID_BLOOD",
+      "BELLYUP"
     ],
     "armor": { "electric": 1 }
   },
