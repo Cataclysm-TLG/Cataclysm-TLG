@@ -79,31 +79,12 @@
           "tetanus",
           "poison",
           "badpoison",
-          "nsaid_analgesic",
-          "nsaid_bp",
-          "acetaminophen_analgesic",
-          "pkill2",
-          "pkill3",
-          "pkill_l",
-          "drunk",
-          "cig",
-          "high",
-          "hallu",
-          "visuals",
-          "pblue",
-          "iodine",
           "datura",
-          "took_xanax",
-          "took_prozac",
-          "took_prozac_bad",
-          "antifungal",
           "venom_weaken",
           "venom_dmg",
           "paralyzepoison"
         ]
       },
-      { "math": [ "u_val('pkill') = 0" ] },
-      { "math": [ "u_val('stim') = 0" ] },
       { "turn_cost": 1 }
     ]
   }

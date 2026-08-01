@@ -9154,7 +9154,7 @@ bool map::obscured_by_vehicle_rotation( const tripoint_bub_ms &from,
     }
 
     if( from.z() != to.z() ) {
-        //Split it into two checks, one for each z level
+        // Split it into two checks, one for each z level.
         const tripoint_bub_ms flattened( from.x(), from.y(), to.z() );
         if( obscured_by_vehicle_rotation( flattened, to ) ) {
             return true;
