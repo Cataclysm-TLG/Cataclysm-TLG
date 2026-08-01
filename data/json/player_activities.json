@@ -481,7 +481,7 @@
   {
     "id": "ACT_MOVE_ITEMS",
     "type": "activity_type",
-    "activity_level": "BRISK_EXERCISE",
+    "activity_level": "MODERATE_EXERCISE",
     "verb": "moving items",
     "based_on": "neither",
     "can_resume": false
@@ -513,7 +513,7 @@
   {
     "id": "ACT_MOVE_LOOT",
     "type": "activity_type",
-    "activity_level": "MODERATE_EXERCISE",
+    "activity_level": "BRISK_EXERCISE",
     "verb": "sorting out the loot",
     "based_on": "neither"
   },
