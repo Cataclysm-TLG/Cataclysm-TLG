@@ -1194,7 +1194,7 @@ void monster::move()
                     const tripoint_bub_ms upper = candidate.z() > pos_abs().z() ? candidate : pos_bub();
                     const tripoint_bub_ms lower = candidate.z() > pos_abs().z() ? pos_bub() : candidate;
                     if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, upper ) &&
-                        here.has_flag( ter_furn_flag::TFLAG_GOES_UP, lower ) ) {
+                        here.has_flag( ter_furn_flag::TFLAG_GOES_UP, lower ) && ( can_climb() || ( !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, upper ) && !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, lower ) ) ) ) {
                         can_z_move = true;
                     }
                 }
@@ -1903,11 +1903,11 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     // This is stair teleportation hackery.
     // TODO: Remove this in favor of stair alignment
     if( going_up ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos ) && ( can_climb() || !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos ) ) ) {
             destination = find_closest_stair( tripoint_bub_ms( p ), ter_furn_flag::TFLAG_GOES_DOWN );
         }
     } else if( z_move ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) && ( can_climb() || !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos ) ) ) {
             destination = find_closest_stair( tripoint_bub_ms( p ), ter_furn_flag::TFLAG_GOES_UP );
         }
     }
@@ -2354,6 +2354,7 @@ void monster::stumble()
             }
         }
     }
+    invalidate_tile_eye_level_cache();
 }
 
 void monster::knock_back_to( const tripoint_bub_ms &to )
