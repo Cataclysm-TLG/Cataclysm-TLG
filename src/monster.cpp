@@ -342,6 +342,7 @@ monster::monster( const mtype_id &id, const tripoint_bub_ms &p ) : monster( id )
     map &here = get_map();
 
     set_pos_bub_only( here, p );
+    invalidate_tile_eye_level_cache();
     unset_dest();
 }
 
@@ -367,6 +368,7 @@ void monster::on_move( const tripoint_abs_ms &old_pos )
     if( has_dest() && pos_abs() == get_dest() ) {
         unset_dest();
     }
+    invalidate_tile_eye_level_cache();
 }
 
 void monster::poly( const mtype_id &id )
@@ -392,6 +394,7 @@ void monster::poly( const mtype_id &id )
     reproduces = type->reproduces;
     biosignatures = type->biosignatures;
     aggro_character = type->aggro_character;
+    invalidate_tile_eye_level_cache();
 }
 
 bool monster::can_upgrade() const
@@ -730,6 +733,7 @@ void monster::spawn( const tripoint_bub_ms &p )
 
     set_pos_bub_only( here, p );
     unset_dest();
+    invalidate_tile_eye_level_cache();
     try_upgrade( false );
 }
 
@@ -737,6 +741,7 @@ void monster::spawn( const tripoint_abs_ms &loc )
 {
     set_pos_abs_only( loc );
     unset_dest();
+    invalidate_tile_eye_level_cache();
     try_upgrade( false );
 }
 
@@ -1365,15 +1370,28 @@ int monster::eye_level() const
                   type->bodytype == "kangaroo" || type->bodytype == "horse"
                   || type->bodytype == "elephant" || type->bodytype == "bird" || type->bodytype == "bear" ||
                   type->bodytype == "migo" );
-    float eye_level = static_cast<float>( enum_size() ) * 20;
-    if( has_effect( effect_downed ) ) {
-        eye_level *= 0.3;
-    } else if( !tall ) {
-        eye_level *= 0.6;
+    bool flat = has_effect( effect_downed );
+    // Standing:  Tiny = 20, Small = 40, Med = 60, Large = 80, Huge = 100
+    // Crouching: Tiny = 12, Small = 24, Med = 36, Large = 48, Huge = 60
+    // Prone:     Tiny = 6,  Small = 12, Med = 18, Large = 24, Huge = 30
+    static constexpr int tall_eye_level[]   = { 0, 20, 40, 60, 80, 100 };
+    static constexpr int middle_eye_level[]  = { 0, 12, 24, 36, 48, 60 };
+    static constexpr int prone_eye_level[]      = { 0, 6, 12, 18, 24, 30 };
+    const int size = static_cast<int>( enum_size() );
+    int eye_level = flat ? prone_eye_level[size] :
+                    tall ? tall_eye_level[size] :
+                    middle_eye_level[size];
+    return eye_level + tile_eye_level_bonus();
+}
+
+
+int monster::tile_eye_level_bonus() const
+{
+    if( !cached_tile_eye_level_bonus_dirty ) {
+        return cached_tile_eye_level_bonus;
     }
-
+    int bonus = 0;
     map &here = get_map();
-
     if( const optional_vpart_position vp = here.veh_at( pos_bub() ) ) {
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
         const vehicle &veh = vp->vehicle();
@@ -1385,36 +1403,40 @@ int monster::eye_level() const
             if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
                 vpi_here.location != "roof" ) {
                 all_no_cover = false;
-                break; // Early exit since at least one part provides cover.
+                break;
             }
         }
-        if( all_no_cover ) {
-            eye_level += 0;
-        } else if( !is_aisle ) {
-            // Non-aisle non-obstacle parts typically give 45 cover. We get less than that as we're inside the vehicle, not atop it.
-            // Return here to ensure we aren't stacking vehicle and furniture bonuses.
-            return eye_level += 20;
+        if( !all_no_cover && !is_aisle ) {
+            // Non-aisle non-obstacle parts typically give 45 cover. We get less than that as
+            // we're inside the vehicle, not atop it. Vehicle cover does not stack with furniture.
+            bonus = 20;
+            cached_tile_eye_level_bonus = bonus;
+            cached_tile_eye_level_bonus_dirty = false;
+            return bonus;
         }
     }
-
     const furn_id viewer_furn = here.furn( pos_bub() );
     const furn_t &furn = viewer_furn.obj();
-    if( !furn.id ) {
-        return eye_level;
-    }
-    if( furn.coverage <= 0 ) {
-        return eye_level;
-    }
-    if( ( furn.has_flag( ter_furn_flag::TFLAG_CAN_SIT ) ||
+    if( furn.id && furn.coverage > 0 &&
+        ( furn.has_flag( ter_furn_flag::TFLAG_CAN_SIT ) ||
           furn.has_flag( ter_furn_flag::TFLAG_MOUNTABLE ) ||
           furn.has_flag( ter_furn_flag::TFLAG_FLAT_SURF ) || furn.has_flag( ter_furn_flag::TFLAG_FLAT ) ||
           furn.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) &&
         !furn.has_flag( ter_furn_flag::TFLAG_HIDE_PLACE ) &&
         ( !furn.has_flag( ter_furn_flag::TFLAG_SMALL_HIDE ) && !this->has_flag( mon_flag_SMALL_HIDER ) ) ) {
-        eye_level += furn.coverage;
+        bonus = furn.coverage;
     }
-    return eye_level;
+
+    cached_tile_eye_level_bonus = bonus;
+    cached_tile_eye_level_bonus_dirty = false;
+    return bonus;
 }
+
+void monster::invalidate_tile_eye_level_cache() const
+{
+    cached_tile_eye_level_bonus_dirty = true;
+}
+
 
 bool monster::made_of( const material_id &m ) const
 {
@@ -1876,8 +1898,7 @@ bool monster::is_underwater() const
 
 bool monster::is_on_ground() const
 {
-    // TODO: actually make this work
-    return false;
+    return has_effect( effect_downed );
 }
 
 bool monster::has_weapon() const
@@ -3918,11 +3939,13 @@ void monster::init_from_item( item &itm )
             }
             itm.remove_item( *dissectable );
         }
+        invalidate_tile_eye_level_cache();
     } else {
         // Must be a robot.
         const int damfac = itm.max_damage() - std::max( 0, itm.damage() ) + 1;
         // One hp at least, everything else would be unfair (happens only to monster with *very* low hp).
         hp = std::max( 1, hp * damfac / ( itm.max_damage() + 1 ) );
+        invalidate_tile_eye_level_cache();
     }
 }
 
