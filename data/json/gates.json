@@ -4,7 +4,7 @@
     "id": "t_gates_mech_control",
     "door": "t_door_metal_locked",
     "floor": "t_floor",
-    "//": "An empty walls list matches anything with a WALL flag, while a list only matches the listed entries",
+    "//": "An empty walls list matches anything with a WALL flag, while a list only matches the listed entries.",
     "walls": [  ],
     "messages": {
       "pull": "You turn the handle…",
@@ -18,12 +18,16 @@
   {
     "type": "gate",
     "id": "t_gates_control_concrete",
-    "copy-from": "t_gates_mech_control"
+    "copy-from": "t_gates_mech_control",
+    "//": "This one is definitely a garage door.",
+    "bashing_damage": 3
   },
   {
     "type": "gate",
     "id": "t_gates_control_brick",
-    "copy-from": "t_gates_mech_control"
+    "copy-from": "t_gates_mech_control",
+    "//": "This one is definitely a garage door.",
+    "bashing_damage": 3
   },
   {
     "type": "gate",
