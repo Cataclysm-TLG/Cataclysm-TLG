@@ -2,14 +2,7 @@
   {
     "type": "SCENARIO_BLACKLIST",
     "subtype": "blacklist",
-    "scenarios": [
-      "heli_crash",
-      "overrun",
-      "lab_cargo_staff_1",
-      "lab_chal",
-      "lab_staff",
-      "overrun"
-    ]
+    "scenarios": [ "heli_crash", "overrun", "lab_cargo_staff_1", "lab_chal", "lab_staff", "overrun" ]
   },
   {
     "type": "EXTERNAL_OPTION",
