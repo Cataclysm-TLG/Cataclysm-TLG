@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-08-01 13:39+0800\n"
+"PO-Revision-Date: 2026-08-01 14:31+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -134545,7 +134545,7 @@ msgstr "你需要一个火源！"
 #: data/json/items/tool/explosives.json
 #, c-format
 msgid "You open the %s's release valve."
-msgstr ""
+msgstr "你打开了 %s 的排气阀。"
 
 #. ~ "msg" action message of item "packed M72 LAW"
 #: data/json/items/tool/explosives.json
@@ -134589,13 +134589,13 @@ msgstr[0] "酸液炸弹"
 #: data/json/items/tool/explosives.json
 msgid "barrel bomb"
 msgid_plural "barrel bombs"
-msgstr[0] ""
+msgstr[0] "桶装炸弹 "
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "bug bomb"
 msgid_plural "bug bombs"
-msgstr[0] ""
+msgstr[0] "杀虫炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -134631,7 +134631,7 @@ msgstr[0] "闪光弹"
 #: data/json/items/tool/explosives.json
 msgid "frag grenade"
 msgid_plural "frag grenades"
-msgstr[0] ""
+msgstr[0] "破片手榴弹 "
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -134649,43 +134649,43 @@ msgstr[0] "自制炸药包"
 #: data/json/items/tool/explosives.json
 msgid "improvised HE bomb"
 msgid_plural "improvised HE bombs"
-msgstr[0] ""
+msgstr[0] "自制高爆炸弹  "
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised HE grenade"
 msgid_plural "improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised bomb"
 msgid_plural "improvised bombs"
-msgstr[0] ""
+msgstr[0] "自制炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised fungicide grenade"
 msgid_plural "improvised fungicide grenades"
-msgstr[0] ""
+msgstr[0] "自制杀菌榴弹 "
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised gas grenade"
 msgid_plural "improvised gas grenades"
-msgstr[0] ""
+msgstr[0] "自制毒气榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised grenade"
 msgid_plural "improvised grenades"
-msgstr[0] ""
+msgstr[0] "自制榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "improvised insecticide grenade"
 msgid_plural "improvised insecticide grenades"
-msgstr[0] ""
+msgstr[0] "自制杀虫榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -134697,193 +134697,193 @@ msgstr[0] "燃烧手雷"
 #: data/json/items/tool/explosives.json
 msgid "keg bomb"
 msgid_plural "keg bombs"
-msgstr[0] ""
+msgstr[0] "凯格炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit HE keg bomb"
 msgid_plural "lit HE keg bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的高爆凯格炸药"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit barrel bomb"
 msgid_plural "lit barrel bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的桶装炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit dynamite"
 msgid_plural "lit sticks of dynamite"
-msgstr[0] ""
+msgstr[0] "已点燃的炸药"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit dynamite bundle"
 msgid_plural "lit dynamite bundles"
-msgstr[0] ""
+msgstr[0] "已点燃的炸药束"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit firecracker"
 msgid_plural "lit firecrackers"
-msgstr[0] ""
+msgstr[0] "已点燃的鞭炮"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit homemade demolition charge"
 msgid_plural "lit homemade demolition charges"
-msgstr[0] ""
+msgstr[0] "已点燃的自制爆破炸药"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit homemade grenade"
 msgid_plural "lit homemade grenades"
-msgstr[0] ""
+msgstr[0] "已点燃的自制榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit improvised HE grenade"
 msgid_plural "lit improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "已点燃的自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit improvised bomb"
 msgid_plural "lit improvised bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的自制炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit keg bomb"
 msgid_plural "lit keg bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的桶装炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit pack of firecrackers"
 msgid_plural "lit packs of firecrackers"
-msgstr[0] ""
+msgstr[0] "已点燃的成串鞭炮"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit pipe bomb"
 msgid_plural "lit pipe bombs"
-msgstr[0] ""
+msgstr[0] "已点燃的管状炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit small improvised HE grenade"
 msgid_plural "lit small improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "已点燃的小型自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "lit small improvised grenade"
 msgid_plural "lit small improvised grenades"
-msgstr[0] ""
+msgstr[0] "已点燃的小型自制榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live C-4 explosive"
 msgid_plural "live C-4 explosives"
-msgstr[0] ""
+msgstr[0] "待引爆的C-4炸药"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live EMP bomb"
 msgid_plural "live EMP bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的电磁脉冲炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live EMP grenade"
 msgid_plural "live EMP grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的电磁脉冲手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live HE pipe bomb"
 msgid_plural "live HE pipe bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的高爆管状炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live SADM mininuke"
 msgid_plural "live SADM mininukes"
-msgstr[0] ""
+msgstr[0] "待引爆的SADM微型核弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live bug bomb"
 msgid_plural "live bug bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的杀虫炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live flashbang"
 msgid_plural "live flashbangs"
-msgstr[0] ""
+msgstr[0] "待引爆的闪光弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live frag grenade"
 msgid_plural "live frag grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的破片手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live fungicidal gas canister"
 msgid_plural "live fungicidal gas canisters"
-msgstr[0] ""
+msgstr[0] "待引爆的杀菌毒气罐"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live improvised HE bomb"
 msgid_plural "live improvised HE bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的自制高爆炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live improvised fungicide grenade"
 msgid_plural "live improvised fungicide grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的自制杀菌榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live improvised gas grenade"
 msgid_plural "live improvised gas grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的自制毒气榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live improvised insecticide grenade"
 msgid_plural "live improvised insecticide grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的自制杀虫榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live incendiary grenade"
 msgid_plural "live incendiary grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的燃烧手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live scrambler grenade"
 msgid_plural "live scrambler grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的干扰手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live smoke bomb"
 msgid_plural "live smoke bombs"
-msgstr[0] ""
+msgstr[0] "待引爆的烟雾弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "live tear gas grenade"
 msgid_plural "live tear gas grenades"
-msgstr[0] ""
+msgstr[0] "待引爆的催泪瓦斯手榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -134919,13 +134919,13 @@ msgstr[0] "扰频手雷"
 #: data/json/items/tool/explosives.json
 msgid "small improvised HE grenade"
 msgid_plural "small improvised HE grenades"
-msgstr[0] ""
+msgstr[0] "小型自制高爆榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
 msgid "small improvised grenade"
 msgid_plural "small improvised grenades"
-msgstr[0] ""
+msgstr[0] "小型自制榴弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -135602,12 +135602,12 @@ msgstr "老式农业工具，专门用来割杂草。尽管它的棍子末端装
 #. (on)"
 #: data/json/items/tool/landscaping.json
 msgid "The hedge trimmer rumbles."
-msgstr ""
+msgstr "绿篱修剪机隆隆作响。"
 
 #. ~ Description of "hedge trimmer (on)"
 #: data/json/items/tool/landscaping.json
 msgid "This hedge trimmer is on and making a lot of noise.  Use it to turn it off."
-msgstr ""
+msgstr "这台绿篱修剪机已开启，正发出很大噪音。使用它可以将其关闭。"
 
 #. ~ value of variable 'success_message' in effect in EoC
 #. "EOC_toolweapon_activate__trimmer" in use action of item "hedge trimmer
@@ -135795,7 +135795,7 @@ msgstr "一个小型的防水手电筒，配有铝制握柄，由电池供电。
 #. ~ Description of "LED strip (inactive)"
 #: data/json/items/tool/lighting.json
 msgid "A one meter strip of LED lights, usually used for decoration or accent lighting."
-msgstr ""
+msgstr "一条一米长的LED灯带，通常用于装饰或氛围照明。"
 
 #. ~ Description of "flare"
 #: data/json/items/tool/lighting.json
@@ -135909,7 +135909,7 @@ msgstr "打开灯罩"
 #. ~ Description of "atomic lamp"
 #: data/json/items/tool/lighting.json
 msgid "Powered by the magic of nuclear decay and low-energy LEDs, this device will provide just enough light to read by for at least a decade.  Use it to close the cover and hide the light."
-msgstr ""
+msgstr "由核衰变和低能耗LED灯的神奇力量驱动，这台装置能提供至少持续十年的阅读光线。使用它可以合上盖子以遮住光线。"
 
 #. ~ Description of "atomic lamp (covered)"
 #: data/json/items/tool/lighting.json
@@ -136310,7 +136310,7 @@ msgstr "一台用于切割混凝土或其他表面的建筑工具。它采用带
 #. ~ Description of "heavy masonry saw (off)"
 #: data/json/items/tool/masonry.json
 msgid "A heavy construction tool for cutting demolishing concrete.  It runs on gasoline.  Using this item will cause it to turn on, turning it into a formidable demolition tool, a terrible chainsaw, and an unwieldy melee weapon."
-msgstr ""
+msgstr "一种用于切割和拆除混凝土的重型施工工具。以汽油为燃料。使用此物品可将其启动，使其成为一台强大的拆解工具、一把可怕的链锯，以及一件笨重的近战武器。"
 
 #. ~ "menu_text" action message of item "electric masonry saw (off)"
 #. ~ "menu_text" action message of item "electric masonry saw (on)"
@@ -136325,28 +136325,28 @@ msgstr "插入/拔出"
 #: data/json/items/tool/masonry.json
 #, c-format
 msgid "The %s goes quiet."
-msgstr ""
+msgstr "%s 安静了下来。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__electric_masonrysaw" in use action of item
 #. "electric masonry saw (on)"
 #: data/json/items/tool/masonry.json
 msgid "The electric masonry saw buzzes."
-msgstr ""
+msgstr "电动砌体锯嗡嗡作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__heavy_masonrysaw" in use action of item "heavy
 #. masonry saw (on)"
 #: data/json/items/tool/masonry.json
 msgid "The heavy masonry saw buzzes."
-msgstr ""
+msgstr "重型砌体锯嗡嗡作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__masonrysaw" in use action of item "masonry saw
 #. (on)"
 #: data/json/items/tool/masonry.json
 msgid "The masonry saw buzzes."
-msgstr ""
+msgstr "砌体锯嗡嗡作响。"
 
 #. ~ Description of "electric masonry saw (on)"
 #: data/json/items/tool/masonry.json
@@ -136396,13 +136396,13 @@ msgstr[0] "角磨刀片"
 #: data/json/items/tool/masonry.json
 msgid "heavy masonry saw (off)"
 msgid_plural "heavy masonry saws (off)"
-msgstr[0] ""
+msgstr[0] "重型砌体锯（关闭）"
 
 #. ~ Item name
 #: data/json/items/tool/masonry.json
 msgid "heavy masonry saw (on)"
 msgid_plural "heavy masonry saws (on)"
-msgstr[0] ""
+msgstr[0] "重型砌体锯（开启）"
 
 #. ~ Item name
 #: data/json/items/tool/masonry.json
@@ -136579,7 +136579,7 @@ msgstr "你可以用它来减轻失血的症状。需要 4 级医疗技能。"
 #. action of item "huge saline infusion kit"
 #: data/json/items/tool/med.json
 msgid "You lack the medical skill to run an IV."
-msgstr ""
+msgstr "你缺乏操作静脉输液的医疗技能。"
 
 #. ~ "msg" action message of item "wrapped radiation badge"
 #: data/json/items/tool/med.json
@@ -136680,7 +136680,7 @@ msgstr[0] "输氧器"
 #: data/json/items/tool/med.json
 msgid "saline infusion kit"
 msgid_plural "saline infusion kits"
-msgstr[0] ""
+msgstr[0] "生理盐水输液套件"
 
 #. ~ Item name
 #: data/json/items/tool/med.json
@@ -137238,7 +137238,7 @@ msgstr "一个简单的小铃铛，许多自行车上都可以看到。激活它
 #. ~ Description of "grip hook"
 #: data/json/items/tool/misc.json
 msgid "A simple steel hook with a circular steel handle."
-msgstr ""
+msgstr "一种带有环形钢柄的简易钢钩。"
 
 #. ~ Description of "aluminum stepladder (folded)"
 #: data/json/items/tool/misc.json
@@ -137303,7 +137303,7 @@ msgstr "刻有火种凹槽的木棍，用来配合钻木取火器生火。"
 #. ~ Description of "bug spray"
 #: data/json/items/tool/misc.json
 msgid "An aerosol canister of pesticides that promises to kill ants, roaches, and spiders in seconds."
-msgstr ""
+msgstr "一罐气雾杀虫剂，宣称能在数秒内杀死蚂蚁、蟑螂和蜘蛛。"
 
 #. ~ Description of "rubber sealant spray"
 #: data/json/items/tool/misc.json
@@ -139643,7 +139643,7 @@ msgstr "一块约6英寸(约15厘米)见方的棉布片，可以用来修补或�
 #. ~ Description of "sponge"
 #: data/json/items/tool/toiletries.json
 msgid "A cleaning aid made of soft, porous material.  It will make cleaning hard objects much easier."
-msgstr ""
+msgstr "一种由柔软多孔材料制成的清洁用品。可使清洁硬质物品更加轻松。"
 
 #. ~ Description of "shaving kit"
 #: data/json/items/tool/toiletries.json
@@ -139683,7 +139683,7 @@ msgstr "一把简易剃须刀。如果你有肥皂，你可以用它刮胡子。
 #. ~ Description of "scrub brush"
 #: data/json/items/tool/toiletries.json
 msgid "A plastic scrub brush.  It will make cleaning hard objects much easier."
-msgstr ""
+msgstr "一把塑料刷子。它能让清洁硬质物品变得更容易。"
 
 #. ~ Description of "electric hair trimmer"
 #: data/json/items/tool/toiletries.json
@@ -139698,7 +139698,7 @@ msgstr "一个小型的浴室秤，用来称一个人裸体时的体重。"
 #. ~ Description of "washboard"
 #: data/json/items/tool/toiletries.json
 msgid "A wooden washboard.  It will make washing clothing and other soft items much easier."
-msgstr ""
+msgstr "一块木质搓衣板。它能让清洗衣物及其他软质物品变得更容易。"
 
 #. ~ Description of "mop"
 #: data/json/items/tool/toiletries.json
@@ -140155,33 +140155,33 @@ msgstr "兼职作为机会武器的砍树工具。  它有一根短电线，您�
 #. "EOC_toolweapon_running__chainsaw" in use action of item "chainsaw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The chainsaw rumbles."
-msgstr ""
+msgstr "链锯隆隆作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__circsaw" in use action of item "circular saw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The circular saw buzzes."
-msgstr ""
+msgstr "圆锯嗡嗡作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__elec_chainsaw_cord" in use action of item "corded
 #. electric chainsaw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The corded electric chainsaw rumbles."
-msgstr ""
+msgstr "有线电链锯隆隆作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__elec_chainsaw" in use action of item "electric
 #. chainsaw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The electric chainsaw rumbles."
-msgstr ""
+msgstr "电链锯隆隆作响。"
 
 #. ~ value of variable 'sound_message' in effect in EoC
 #. "EOC_toolweapon_running__polesaw" in use action of item "pole saw (on)"
 #: data/json/items/tool/woodworking.json
 msgid "The pole saw rumbles."
-msgstr ""
+msgstr "高枝锯隆隆作响。"
 
 #. ~ Description of "chainsaw (on)"
 #: data/json/items/tool/woodworking.json
@@ -140354,7 +140354,7 @@ msgstr "一把外形简单的鲤鱼钳，只能用来做一些基本的机械工
 #. ~ Description of "reciprocating saw"
 #: data/json/items/tool/workshop.json
 msgid "A battery-powered tool, commonly known by the generic trademark Sawzall, that uses an electric motor to push a straight sawblade back and forth to rapidly cut wood or metal.  It is useful for heavy demolition and construction work, but poorly suited to precision tasks, and lacks the raw power of something like an angle grinder."
-msgstr ""
+msgstr "一种电池供电工具，常被称作“萨兹锯”，它通过电动机驱动直锯片往复运动，用于快速切割木材或金属。适用于重型拆除和施工工作，但不适合精密作业，且缺乏角磨机那样的原始动力。"
 
 #. ~ Description of "power drill"
 #: data/json/items/tool/workshop.json
@@ -140399,12 +140399,12 @@ msgstr "一个用于焊接和切割金属的小型工具包。这个便携式氧
 #. ~ Description of "electric jackhammer"
 #: data/json/items/tool/workshop.json
 msgid "A construction tool for breaking horizontal surfaces.  This model has a cord compatible with a UPS."
-msgstr ""
+msgstr "一种用于破坏水平表面的施工工具。该型号配有与UPS兼容的电源线。"
 
 #. ~ Description of "jackhammer"
 #: data/json/items/tool/workshop.json
 msgid "A construction tool for breaking horizontal surfaces.  This model runs on gasoline."
-msgstr ""
+msgstr "一种用于破坏水平表面的施工工具。该型号以汽油为燃料。"
 
 #. ~ Description of "cordless drill"
 #: data/json/items/tool/workshop.json
@@ -140579,7 +140579,7 @@ msgstr "一个便携式工具包，包括用于从原材料中精确替换部件
 #. ~ Description of "demolition jackhammer"
 #: data/json/items/tool/workshop.json
 msgid "A power tool made for demolishing vertical constructed surfaces by hand, somewhat similar to a handheld jackhammer.  It must be plugged in for use."
-msgstr ""
+msgstr "一种用于手工拆除垂直构筑表面的电动工具，类似于手持式风镐。使用时须插电。"
 
 #. ~ Description of "hand drill"
 #: data/json/items/tool/workshop.json
@@ -140861,7 +140861,7 @@ msgstr[0] "切盘"
 #: data/json/items/tool/workshop.json
 msgid "demolition jackhammer"
 msgid_plural "demolition jackhammers"
-msgstr[0] ""
+msgstr[0] "风镐"
 
 #. ~ Item name
 #: data/json/items/tool/workshop.json
@@ -141216,7 +141216,7 @@ msgstr "一台35mm的数码单反（单镜头反光）相机，使用普通电�
 #. ~ Description of "RX11 stimulant delivery system"
 #: data/json/items/tool_armor.json
 msgid "A Rivtech RX11 stimulant delivery system, a jet autoinjector system worn on the user's leg.  A simple press of its activator injects powerful chemical stimulants into the bloodstream without using a needle."
-msgstr ""
+msgstr "Rivtech RX11 兴奋剂注射系统，是一种佩戴在使用者腿部的喷射式自动注射装置。只需按下启动按钮，即可在不使用针头的情况下，将强效化学兴奋剂注入血液。"
 
 #. ~ Description of "malfunctioning five-point anchor"
 #: data/json/items/tool_armor.json
@@ -141404,7 +141404,7 @@ msgstr "一顶军用飞行头盔，上面的LED灯正不时地闪动着。配有
 #. ~ Description of "military flight helmet"
 #: data/json/items/tool_armor.json
 msgid "A military flight helmet.  Equipped with a visor, microphone, and an active noise dampening system.  The helmet is also fitted with plastic rails to allow for different loadouts."
-msgstr ""
+msgstr "一顶军用飞行头盔。配备有面罩、麦克风及主动降噪系统。头盔还装有塑料导轨，可挂载不同配件。"
 
 #. ~ Description of "combo cover"
 #: data/json/items/tool_armor.json
@@ -141414,7 +141414,7 @@ msgstr "一顶军官的鸭舌帽，或尖顶帽。它散发出一种权威感，
 #. ~ Description of "wearable RX12 jet injector"
 #: data/json/items/tool_armor.json
 msgid "A modified RX12 jet injector which can be worn on the user's leg.  A label on the side warns against using more than two doses per hour."
-msgstr ""
+msgstr "一种改装过的 RX12 喷射式注射器，可佩戴在使用者腿部。侧面的标签警告每小时使用不得超过两剂。"
 
 #. ~ Description of "infrared goggles (on)"
 #: data/json/items/tool_armor.json
@@ -141804,7 +141804,7 @@ msgstr "%s 关闭了。"
 #: data/json/items/tool_armor.json
 #, c-format
 msgid "The %s flicks on."
-msgstr ""
+msgstr "%s 打开了。"
 
 #. ~ "need_charges_msg" action message of item "rebreather mask"
 #. ~ "need_charges_msg" action message of item "survivor divemask"
@@ -142718,17 +142718,17 @@ msgstr "一只惹人喜爱的雪鸮，看起来很有智慧。它有着雪白的
 #. ~ Description of variant "blue whale plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cuddly blue whale plushie with soft blue-gray fur and a playful expression."
-msgstr ""
+msgstr "一个可爱的蓝鲸毛绒玩具，有着柔软蓝灰色的绒毛和俏皮的表情。"
 
 #. ~ Description of variant "dromedary plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cuddly camel plushie with a single humps, tan fur, and big soulful eyes."
-msgstr ""
+msgstr "一个可爱的骆驼毛绒玩具，有一个驼峰，浅棕色的绒毛，和一双充满深情的大眼睛。"
 
 #. ~ Description of variant "camel plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cuddly camel plushie with two soft humps, tan fur, and big soulful eyes."
-msgstr ""
+msgstr "一个可爱的双峰骆驼毛绒玩具，有两个柔软的驼峰，浅棕色的绒毛，和一双充满深情的大眼睛。"
 
 #. ~ Description of variant "common loon plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -142763,7 +142763,7 @@ msgstr "一只毛茸茸的可爱驼鹿，有着柔软的棕色皮毛、耷拉的
 #. ~ Description of variant "lobster plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cuddly red lobster plushie with a soft red shell and big playful eyes."
-msgstr ""
+msgstr "一个可爱的红色龙虾毛绒玩具，有着柔软的红色外壳和俏皮的大眼睛。"
 
 #. ~ Description of variant "alligator plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -142773,7 +142773,7 @@ msgstr "可爱的鳄鱼毛绒玩具，有着柔软的绿色皮肤、圆圆的大
 #. ~ Description of variant "alpaca plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A cute alpaca plushie featuring soft, curly fur in shades of white and brown."
-msgstr ""
+msgstr "一个可爱的羊驼毛绒玩具，有着柔软卷曲的白色和棕色绒毛。"
 
 #. ~ Description of variant "gecko plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -142928,7 +142928,7 @@ msgstr "一只可爱的蜘蛛猴毛绒玩具，有着柔软的棕色皮毛和长
 #. ~ Description of variant "humpback whale plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A huggable humpback whale plushie with soft gray and white fur and big friendly eyes."
-msgstr ""
+msgstr "一个可爱的座头鲸毛绒玩具，有着柔软的灰白色绒毛和友善的大眼睛。"
 
 #. ~ Description of variant "jacare plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -143142,7 +143142,7 @@ msgstr "一种珍贵的洞穴蝙蝠毛绒玩具，有着柔软的黑色皮毛、
 #. ~ Description of variant "llama plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A precious llama plushie with soft, fluffy fur in grayish white.  It has expressive eyes and a tuft of fur on its head."
-msgstr ""
+msgstr "一个珍贵的羊驼毛绒玩具，有着柔软蓬松的灰白色绒毛。它有一双传神的眼睛，头顶还有一撮绒毛。"
 
 #. ~ Description of variant "chicken plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -143227,7 +143227,7 @@ msgstr "一个矮胖、可爱、非常讨人喜欢的板龙玩偶，有一个突
 #. ~ Description of variant "cow plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "A stuffed dairy cow with soft, velvety fur spotted in Holstein black and white."
-msgstr ""
+msgstr "一只填充的荷斯坦奶牛毛绒玩具，有着柔软如天鹅绒般的黑白斑纹皮毛。"
 
 #. ~ Description of variant "superhero figurine" of item "figurine"
 #: data/json/items/toy.json
@@ -143357,7 +143357,7 @@ msgstr "这只果蝠毛绒玩具是棕褐色的，皮毛柔软、毛茸茸的。
 #. ~ Description of variant "sheep plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "This loving and fluffy sheep plushie features soft woolly fur in white, with cute floppy ears and expressive eyes."
-msgstr ""
+msgstr "这只可爱又蓬松的绵羊毛绒玩具，有着柔软的白色羊毛，可爱的垂耳和传神的眼睛。"
 
 #. ~ Description of variant "black sheep plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -145560,22 +145560,22 @@ msgstr[0] "轮椅手轮"
 #. ~ Description of "large wind turbine"
 #: data/json/items/vehicle/mills.json
 msgid "A large turbine driven by wind."
-msgstr ""
+msgstr "一种由风力驱动的大型涡轮机。"
 
 #. ~ Description of "large water wheel"
 #: data/json/items/vehicle/mills.json
 msgid "A large water wheel that could be used to grind grain if built over moving water."
-msgstr ""
+msgstr "一个大型水轮，如果建在流动的水面上，可用于研磨谷物。"
 
 #. ~ Description of "wind turbine"
 #: data/json/items/vehicle/mills.json
 msgid "A small turbine driven by wind."
-msgstr ""
+msgstr "一种由风力驱动的小型涡轮机。"
 
 #. ~ Description of "water wheel"
 #: data/json/items/vehicle/mills.json
 msgid "A water wheel that could be used to grind grain if built over moving water."
-msgstr ""
+msgstr "一个水轮，如果建在流动的水面上，可用于研磨谷物。"
 
 #. ~ Item name
 #: data/json/items/vehicle/mills.json
@@ -149052,7 +149052,7 @@ msgstr "R."
 #. ~ Signage placed on map
 #: data/json/mapgen/map_extras/grave.json
 msgid "The game was rigged from the start."
-msgstr ""
+msgstr "游戏从一开始就被操纵了。"
 
 #. ~ Signage placed on map
 #: data/json/mapgen/map_extras/grave.json
@@ -149522,12 +149522,12 @@ msgstr "当心脚下！"
 #. ~ Signage in mapgen palette
 #: data/json/mapgen/pig_farm_lab.json
 msgid "All pig carcasses and parts must be incinerated!  Removal of meat or remains from these premises is grounds for IMMEDIATE termination."
-msgstr ""
+msgstr "所有猪尸及部位必须焚烧！从本设施移走肉类或残骸将导致立即解雇。"
 
 #. ~ Signage in mapgen palette
 #: data/json/mapgen/pig_farm_lab.json
 msgid "Welcome to the Everwell test CAFO #37.  Please sign in with the receptionist."
-msgstr ""
+msgstr "欢迎来到恒健试验工厂化农场 #37。请在接待处签到。"
 
 #. ~ Computer name placed on map police
 #. ~ Computer name placed on map police_1
@@ -150371,6 +150371,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Blocked damage reduced by 100% of Dexterity."
 msgstr ""
+"一种敏捷的架势，让你能够格挡并减少受到的伤害。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 100% 敏捷值。"
 
 #. ~ Description of martial art "Capoeira"
 #: data/json/martialarts.json
@@ -150398,6 +150402,12 @@ msgid ""
 "-1 Dodge ability, -5% damage.\n"
 "Lasts 1 second.  Stacks 5 times."
 msgstr ""
+"利剑出鞘，斩击精准。\n"
+"然万物皆随时光消逝。\n"
+"克制之道，方能磨砺技艺。\n"
+"\n"
+"-1 闪避能力，-5% 伤害。\n"
+"持续1秒。可叠加5层。"
 
 #. ~ Description of buff "Boxing" in martial art "Boxing Stance"
 #: data/json/martialarts.json
@@ -150408,6 +150418,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 accuracy, blocked damage reduced by 50% of Strength."
 msgstr ""
+"稳固的架势让你能够比平时格挡更多伤害，并打出更有力的拳击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 命中，格挡伤害减免 50% 力量值。"
 
 #. ~ Description of martial art "Zui Quan"
 #: data/json/martialarts.json
@@ -150484,6 +150498,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 blocking effectiveness, +1 block attempt, +1 dodge attempt."
 msgstr ""
+"熟练的合气道练习者能够比普通人更有效地防御更多对手。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 格挡效果，+1 格挡尝试次数，+1 闪避尝试次数。"
 
 #. ~ Description of martial art "Pankration"
 #: data/json/martialarts.json
@@ -150499,6 +150517,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Blocked damage reduced by 100% of Dexterity, +1 blocking effectiveness, +1 block attempt, +1 dodge attempt."
 msgstr ""
+"中级合气道练习者能够抵御多个对手的攻击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 100% 敏捷值，+1 格挡效果，+1 格挡尝试次数，+1 闪避尝试次数。"
 
 #. ~ Description of buff "Bōjutsu" in martial art "Skilled Striking"
 #: data/json/martialarts.json
@@ -150508,6 +150530,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Melee skill increases bash damage cap."
 msgstr ""
+"随着技艺精进，你能够开始针对打击点进行攻击，以造成更多伤害。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"近战技能提升钝击伤害上限。"
 
 #. ~ Description of buff "Bōjutsu" in martial art "Rolling Staff"
 #: data/json/martialarts.json
