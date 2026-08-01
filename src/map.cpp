@@ -11772,9 +11772,11 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c )
     }
 
     if( you->is_avatar() ) {
-        add_msg( m_bad, n_gettext( "You fall down %d story!", "You fall down %d stories!", height ),
-                 height );
-        g->vertical_move( -height, true );
+        if( ter( you->pos_bub() )->has_flag( "EMPTY_SPACE" ) ) {
+            add_msg( m_bad, n_gettext( "You fall down %d story!", "You fall down %d stories!", height ),
+                    height );
+            g->vertical_move( -height, true );
+        }
     } else {
         you->setpos( *this, where );
     }
