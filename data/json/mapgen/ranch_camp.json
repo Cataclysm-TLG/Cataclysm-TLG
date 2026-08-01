@@ -692,6 +692,7 @@
         "....//////////////5...............................%....................."
       ],
       "palettes": [ "ranch_camp" ],
+      "place_npcs": [ { "class": "ranch_foreman", "x": 16, "y": 38 }, { "class": "ranch_construction_1", "x": 9, "y": 40 } ],
       "terrain": { "r": "t_dirtfloor", ";": "t_dirtfloor", "ƃ": "t_ramp_down_low", "|": "t_brick_wall", "-": "t_wall_w" },
       "furniture": { "±": "f_rack_wood" },
       "items": {
