@@ -134,7 +134,20 @@
       { "id": "grab" },
       { "id": "scratch_humanoid" },
       { "id": "bite_humanoid", "cooldown": 5, "min_mul": 0.8 },
-      [ "ACID_BARF", 10 ],
+      {
+        "type": "spell",
+        "spell_data": { "id": "acid_barf", "min_level": 6 },
+        "monster_message": "The %s barfs acid!",
+        "cooldown": 10,
+        "condition": {
+          "and": [
+            { "u_has_flag": "GRAB_FILTER" },
+            { "npc_has_flag": "GRAB" },
+            { "not": { "u_is_underwater": "true" } },
+            { "not": { "npc_is_underwater": "true" } }
+          ]
+        }
+      },
       {
         "type": "gun",
         "cooldown": 15,
@@ -160,7 +173,7 @@
     "id": "mon_zombie_soldier_acid_2",
     "type": "MONSTER",
     "name": { "str": "caustic soldier zombie" },
-    "description": "This zombie wears what appears to have once been a soldier's uniform and armor, now a series of cracked and melted plates that have fused to its skin and thickened hide.  Its face and arms blister with strange, mutated tubes that pulse and drip with acid.",
+    "description": "This zombie wears what appears to have once been a soldier's uniform and armor, now a series of cracked and melted plates that have fused to its skin and thickened hide.  It's riddled with wounds that might have once been bullet holes, puckering and drool an acrid slime.",
     "copy-from": "mon_zombie_soldier",
     "looks_like": "mon_zombie_soldier",
     "diff": 20,
@@ -172,20 +185,29 @@
       { "id": "grab" },
       { "id": "scratch_humanoid" },
       { "id": "bite_humanoid", "cooldown": 5, "min_mul": 0.8 },
-      [ "ACID_BARF", 5 ],
       { "id": "slam" },
       {
-        "type": "gun",
-        "cooldown": 4,
-        "move_cost": 50,
-        "gun_type": "acid_spray",
-        "fake_skills": [ [ "gun", 4 ], [ "rifle", 4 ] ],
-        "fake_dex": 8,
-        "fake_per": 8,
-        "require_targeting_player": false,
-        "target_moving_vehicles": true,
-        "description": "The %s launches a hail of corrosive darts!",
-        "ranges": [ [ 2, 8, "DEFAULT" ] ]
+        "type": "spell",
+        "id": "acid_barf",
+        "spell_data": { "id": "acid_barf", "min_level": 6 },
+        "monster_message": "The %s barfs acid!",
+        "cooldown": 10,
+        "condition": {
+          "and": [
+            { "u_has_flag": "GRAB_FILTER" },
+            { "npc_has_flag": "GRAB" },
+            { "not": { "u_is_underwater": "true" } },
+            { "not": { "npc_is_underwater": "true" } }
+          ]
+        }
+      },
+      {
+        "type": "spell",
+        "id": "acid_spray",
+        "spell_data": { "id": "acid_spray", "min_level": 6 },
+        "monster_message": "The %s sprays acid!",
+        "cooldown": 23,
+        "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
       }
     ],
     "death_function": {
