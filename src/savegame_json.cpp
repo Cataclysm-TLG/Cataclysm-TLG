@@ -4751,8 +4751,6 @@ void basecamp::serialize( JsonOut &json ) const
             json.end_object();
         }
         json.end_array();
-        json.start_array();
-        json.end_array();
         json.end_object();
 
     } else {
