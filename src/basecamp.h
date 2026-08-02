@@ -133,18 +133,6 @@ struct basecamp_upgrade {
     bool in_progress = false;
 };
 
-struct expansion_salt_water_pipe_segment {
-    tripoint_abs_omt point;
-    bool started;
-    bool finished;
-};
-
-struct expansion_salt_water_pipe {
-    point_rel_omt expansion;
-    point_rel_omt connection_direction;
-    std::vector<expansion_salt_water_pipe_segment> segments;
-};
-
 class basecamp_map
 {
         friend basecamp;
@@ -199,7 +187,6 @@ class basecamp
         std::vector<point_rel_omt> directions; // NOLINT(cata-serialize)
         std::vector<std::vector<ui_mission_id>> hidden_missions;
         std::vector<tripoint_abs_omt> fortifications;
-        std::vector<expansion_salt_water_pipe *> salt_water_pipes;
         std::string name;
         void faction_display( const catacurses::window &fac_w, int width ) const;
 
@@ -391,11 +378,6 @@ class basecamp
         /// Called when a companion is sent to start fortifications
         void start_fortifications( const mission_id &miss_id, float exertion_level );
         /// Called when a companion is sent to start digging down salt water pipes
-        bool common_salt_water_pipe_construction( const mission_id &miss_id,
-                expansion_salt_water_pipe *pipe,
-                int segment_number ); //  Code factored out from the two following operation, not intended to be used elsewhere.
-        void start_salt_water_pipe( const mission_id &miss_id );
-        void continue_salt_water_pipe( const mission_id &miss_id );
         void start_combat_mission( const mission_id &miss_id, float exertion_level );
         void start_farm_op( const point_rel_omt &dir, const mission_id &miss_id,
                             float exertion_level );
@@ -451,11 +433,6 @@ class basecamp
         std::pair<size_t, std::string> farm_action( const point_rel_omt &dir, farm_ops op,
                 const npc_ptr &comp = nullptr );
         void fortifications_return( const mission_id &miss_id );
-        bool salt_water_pipe_swamp_return( const mission_id &miss_id,
-                                           const comp_list &npc_list );
-        bool salt_water_pipe_return( const mission_id &miss_id,
-                                     const comp_list &npc_list );
-
         void combat_mission_return( const mission_id &miss_id );
         void validate_assignees();
         void add_assignee( character_id id );

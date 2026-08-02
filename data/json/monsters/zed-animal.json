@@ -769,7 +769,6 @@
     "id": "mon_zllama",
     "type": "MONSTER",
     "name": { "str": "zombie llama" },
-    "//": "The wild ancestor of the llama is called a vicuña.",
     "description": "This llama oozes a dark oil from a multitude of lesions and cuts.  Its wool has sloughed off with parts of its skin, revealing pulsating muscles and flesh.  Its mouth drips with a sickly green substance which it seems to be chewing on.",
     "default_faction": "zombie",
     "bodytype": "horse",
@@ -795,19 +794,12 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "special_attacks": [
       {
-        "type": "gun",
-        "cooldown": 5,
-        "move_cost": 50,
-        "gun_type": "acid_spit",
-        "fake_skills": [ [ "gun", 2 ], [ "rifle", 2 ] ],
-        "fake_dex": 4,
-        "fake_per": 4,
-        "require_targeting_player": false,
-        "target_moving_vehicles": true,
-        "description": "The vicious vicuña spits a glob of acid!",
-        "ranges": [ [ 2, 10, "DEFAULT" ] ]
-      },
-      [ "ACID_BARF", 5 ]
+        "type": "spell",
+        "spell_data": { "id": "acid_spit", "min_level": 7 },
+        "monster_message": "The %s spews acid!",
+        "cooldown": 10,
+        "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
+      }
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "BELLYUP" ]
   },
