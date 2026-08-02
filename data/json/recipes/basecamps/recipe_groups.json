@@ -6,7 +6,7 @@
     "recipes": [
       {
         "id": "faction_base_bare_bones_basecamp_0",
-        "description": "The faction camp system is largely deprecated as its functionality has been replaced with zones.  This bare-bones camp exists to support those remaining features which have not yet been migrated to another system.",
+        "description": "A basic settlement to support those remaining features which have not yet been moved to another system.",
         "om_terrains": [ "ANY" ]
       }
     ]
