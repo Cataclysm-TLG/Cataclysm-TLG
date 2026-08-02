@@ -143,11 +143,11 @@
     "type": "monstergroup",
     "is_animal": true,
     "monsters": [
-      { "monster": "mon_null", "weight": 60 },
-      { "group": "GROUP_HORSES", "weight": 40 },
+      { "monster": "mon_null", "weight": 100 },
+      { "group": "GROUP_HORSES", "weight": 30 },
       { "monster": "mon_zombie_horse_lame", "weight": 10 },
       { "monster": "mon_zombie_horse", "weight": 10 },
-      { "group": "GROUP_HORSES", "weight": 50, "ends": "6 days" },
+      { "group": "GROUP_HORSES", "weight": 30, "ends": "6 days" },
       { "monster": "mon_zombie_horse", "weight": 50, "starts": "6 days" },
       { "monster": "mon_zombie_horse", "weight": 50, "starts": "18 days" },
       { "monster": "mon_zombie_horse_lame", "weight": 10, "starts": "6 days" }

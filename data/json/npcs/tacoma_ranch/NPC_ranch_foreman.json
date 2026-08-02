@@ -2,9 +2,9 @@
   {
     "type": "npc",
     "id": "ranch_foreman",
-    "//": "Appears at the ranch after you progress in the refugee center quests.  Faction critical.",
+    "//": "The big boss at Tacoma ranch.  Faction critical.",
     "name_suffix": "Foreman",
-    "class": "NC_BOUNTY_HUNTER",
+    "class": "NC_RANCH_FOREMAN",
     "attitude": 0,
     "mission": 7,
     "chat": "TALK_RANCH_FOREMAN",
@@ -48,7 +48,7 @@
         "topic": "TALK_RANCH_FOREMAN_ANESTHETIC_FOR_DOCTOR",
         "condition": { "u_has_mission": "MISSION_RANCH_DOCTOR_MEDICAL_ANESTHETIC" }
       },
-      { "text": "I heard you were setting up an outpost out here.", "topic": "TALK_RANCH_FOREMAN_OUTPOST" },
+      { "text": "What is this place?.", "topic": "TALK_RANCH_FOREMAN_OUTPOST" },
       { "text": "What's your job here?", "topic": "TALK_RANCH_FOREMAN_JOB" },
       { "text": "What do you need done?", "topic": "TALK_MISSION_LIST" },
       {
@@ -132,22 +132,25 @@
   {
     "type": "talk_topic",
     "id": "TALK_RANCH_FOREMAN_OUTPOST",
-    "dynamic_line": "Ya, that representative from the Old Guard asked the two of us to come out here and begin fortifying this place as a refugee camp.  I'm not sure how fast he expects the two of us to get setup, but we were assured additional men were coming out here to assist us. ",
-    "responses": [ { "text": "How many refugees are you expecting?", "topic": "TALK_RANCH_FOREMAN_REFUGEES" } ]
+    "dynamic_line": "If you want a stupid answer, it's a ranch.  Man from FEMA had the idea for a couple of us to get started on the place, might be we could grow some food out here, there's a lot of hungry folks got bussed up a ways, and no way to feed 'em.",
+    "responses": [ { "text": "How many people can a farm like this feed?", "topic": "TALK_RANCH_FOREMAN_REFUGEES" } ]
   },
   {
     "type": "talk_topic",
     "id": "TALK_RANCH_FOREMAN_REFUGEES",
     "dynamic_line": {
-      "gendered_line": "Could easily be hundreds as far as I know.  They chose this ranch because of its rather remote location, decent fence, and huge cleared field.  With as much land as we have fenced off we could build a village if we had the materials.  We would have tried to secure a small town or something, but the lack of good farmland and number of undead makes it more practical for us to build from scratch.  The refugee center I came from is constantly facing starvation and undead assaults.",
+      "gendered_line": "We could grow enough food for twenty, maybe fifty people if we do it right.  Could be higher in a good year, but with the bugs as big as they are, the monsters, the fallout, the blight…well, we'll be counting ourselves lucky if we live long enough to starve.  No sense in worrying though, just got to put one foot in front of the other and keep on going.  Those refugees are counting on us.",
       "relevant_genders": [ "npc" ]
     },
-    "responses": [ { "text": "Hopefully moving out here was worth it…", "topic": "TALK_RANCH_FOREMAN" } ]
+    "responses": [
+      { "text": "Yeah, you're right.", "topic": "TALK_RANCH_FOREMAN" },
+      { "text": "Rebuilding seems pointless to me.", "topic": "TALK_RANCH_FOREMAN" }
+    ]
   },
   {
     "type": "talk_topic",
     "id": "TALK_RANCH_FOREMAN_JOB",
-    "dynamic_line": "I'm the engineer in charge of turning this place into a working camp.  This is going to be an uphill battle, we used most of our initial supplies getting here and boarding up the windows.  I've got a huge list of tasks that need to get done, so if you could help us keep supplied I'd appreciate it.  If you have material to drop off you can just back your vehicle into here and dump it on the ground, we'll sort it.",
+    "dynamic_line": "I'm the engineer in charge of turning this place into a working farm.  It's going to be an uphill battle, we used most of our initial supplies getting here and boarding up the windows.  I've got a huge list of tasks that need to get done, so if you could help us keep supplied I'd appreciate it.  If you have material to drop off you can just back your vehicle into here and dump it on the ground, we'll sort it.",
     "responses": [ { "text": "I'll keep that in mind.", "topic": "TALK_RANCH_FOREMAN" } ]
   },
   {

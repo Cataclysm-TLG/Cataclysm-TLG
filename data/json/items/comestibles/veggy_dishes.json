@@ -385,7 +385,7 @@
     "price": "45 cent",
     "price_postapoc": "2 cent",
     "material": [ "vegetable", "powder" ],
-    "volume": "24 ml",
+    "volume": "19 ml",
     "flags": [ "EDIBLE_FROZEN" ],
     "fun": -5
   },
