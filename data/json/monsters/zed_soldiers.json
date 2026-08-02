@@ -185,8 +185,10 @@
       { "id": "grab" },
       { "id": "scratch_humanoid" },
       { "id": "bite_humanoid", "cooldown": 5, "min_mul": 0.8 },
+      { "id": "slam" },
       {
         "type": "spell",
+        "id": "acid_barf",
         "spell_data": { "id": "acid_barf", "min_level": 6 },
         "monster_message": "The %s barfs acid!",
         "cooldown": 10,
@@ -199,9 +201,9 @@
           ]
         }
       },
-      { "id": "slam" },
       {
         "type": "spell",
+        "id": "acid_spray",
         "spell_data": { "id": "acid_spray", "min_level": 6 },
         "monster_message": "The %s sprays acid!",
         "cooldown": 23,

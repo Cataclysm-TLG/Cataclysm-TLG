@@ -1271,7 +1271,13 @@
     "description": "Covered in interlocking plates of reflective metal, this advanced suit resembles an astronaut's space suit.  Use it to turn it on.",
     "price": "1500 USD",
     "price_postapoc": "150 USD",
-    "material": [ {"type": "titanium_alloy", "portion": 14}, {"type": "lvl4ballisticglass", "portion": 1 }, { "type": "soft_rubber", "portion": 12 }, { "type": "nomex", "portion": 20 }, { "type": "rubber", "portion": 1 } ],
+    "material": [
+      { "type": "titanium_alloy", "portion": 14 },
+      { "type": "lvl4ballisticglass", "portion": 1 },
+      { "type": "soft_rubber", "portion": 12 },
+      { "type": "nomex", "portion": 20 },
+      { "type": "rubber", "portion": 1 }
+    ],
     "weight": "9500 g",
     "volume": "4500 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 7000 } } ],
