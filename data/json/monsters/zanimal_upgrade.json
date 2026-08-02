@@ -268,7 +268,20 @@
     "harvest": "zombie_animal_acid",
     "grab_strength": 45,
     "special_attacks": [
-      [ "ACID_BARF", 10 ],
+      {
+        "type": "spell",
+        "spell_data": { "id": "acid_barf", "min_level": 6 },
+        "monster_message": "The %s barfs acid!",
+        "cooldown": 10,
+        "condition": {
+          "and": [
+            { "u_has_flag": "GRAB_FILTER" },
+            { "npc_has_flag": "GRAB" },
+            { "not": { "u_is_underwater": "true" } },
+            { "not": { "npc_is_underwater": "true" } }
+          ]
+        }
+      },
       [ "scratch", 10 ],
       {
         "id": "bite_grab",
@@ -306,7 +319,7 @@
     "morale": 100,
     "melee_skill": 3,
     "melee_dice": 3,
-    "melee_dice_sides": 4,
+    "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 4 } ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "vision_day": 28,
@@ -331,7 +344,15 @@
     "color": "light_gray_yellow",
     "bleed_rate": 50,
     "harvest": "zombie_animal_acid",
-    "special_attacks": [ [ "ACID", 15 ] ],
+    "special_attacks": [
+      {
+        "type": "spell",
+        "spell_data": { "id": "acid_spit", "min_level": 7 },
+        "monster_message": "The %s spews acid!",
+        "cooldown": 10,
+        "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
+      }
+    ],
     "death_function": { "message": "The %s's body leaks acid.", "effect": { "id": "death_acid", "hit_self": true } },
     "flags": [
       "SEES",
@@ -359,7 +380,8 @@
     "diff": 5,
     "hp": 200,
     "color": "red",
-    "melee_dice": 4,
+    "melee_dice": 3,
+    "melee_sides": 8,
     "melee_damage": [ { "damage_type": "cut", "amount": 7 } ],
     "harvest": "zombie_animal",
     "special_attacks": [ { "id": "smash", "throw_strength": 91, "cooldown": 30 } ],
@@ -390,6 +412,7 @@
     "hp": 225,
     "color": "white",
     "melee_dice": 4,
+    "melee_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 8 } ],
     "weakpoint_sets": [ "wps_bone_armor" ],
     "families": [ "prof_intro_biology", "prof_wp_zombie", "prof_wp_skeleton" ],
