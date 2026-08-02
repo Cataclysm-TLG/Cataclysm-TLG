@@ -967,13 +967,12 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             }
 
             const lit_level ll = overmap_buffer.is_explored( omp ) ? lit_level::LOW : lit_level::LIT;
-            // light level is now used for choosing between grayscale filter and normal lit tiles.
-
-            draw_from_id_string( id, category,
+            // Light level is now used for choosing between grayscale filter and normal lit tiles.
+            draw_from_id_string_om( id, category,
                                  category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
                                  omp, subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
             if( !mx.is_empty() && mx->autonote ) {
-                draw_from_id_string( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp,
+                draw_from_id_string_om( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp,
                                      0, 0, ll, false, height_3d, 1.0f, 1.0f );
             }
 
@@ -1024,33 +1023,33 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
 
             //             if( find_tile_with_season( id ) ) {
             //                 // NOLINTNEXTLINE(cata-translate-string-literal)
-            //                 draw_from_id_string( string_format( "overmap_horde_%d", sprite_size ),
+            //                 draw_from_id_string_om( string_format( "overmap_horde_%d", sprite_size ),
             //                                      TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //             } else {
             //                 // a little bit of hardcoded fallbacks for hordes for
             //                 // tilesets that don't have overmap_horde_X sprites defined.
             //                 switch( sprite_size ) {
             //                     case 1:
-            //                         draw_from_id_string( "mon_zombie", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            //                         draw_from_id_string_om( "mon_zombie", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
             //                     case 2:
-            //                         draw_from_id_string( "mon_zombie_tough", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            //                         draw_from_id_string_om( "mon_zombie_tough", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
             //                     case 3:
-            //                         draw_from_id_string( "mon_zombie_brute", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            //                         draw_from_id_string_om( "mon_zombie_brute", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
             //                     case 4:
-            //                         draw_from_id_string( "mon_zombie_hulk", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            //                         draw_from_id_string_om( "mon_zombie_hulk", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
             //                     case 5:
-            //                         draw_from_id_string( "mon_zombie_necro", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            //                         draw_from_id_string_om( "mon_zombie_necro", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                         break;
             //                     case 6:
             //                     case 7:
             //                     case 8:
             //                     case 9:
             //                     case 10:
-            //                         draw_from_id_string( "mon_zombie_master", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            //                         draw_from_id_string_om( "mon_zombie_master", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             //                 };
             //             }
             //         }
@@ -1058,19 +1057,19 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             // }
             if( ( uistate.place_terrain || uistate.place_special ) &&
                 overmap_ui::is_generated_omt( omp.xy() ) ) {
-                // Highlight areas that already have been generated
+                // Highlight areas that already have been generated.
                 draw_from_id_string( "highlight", tripoint_bub_ms( omp.raw() ), 0, 0, lit_level::LIT, false );
             }
 
             if( draw_overlays && overmap_buffer.has_vehicle( omp ) ) {
                 const std::string tile_id = overmap_buffer.get_vehicle_tile_id( omp );
                 if( find_tile_looks_like( tile_id, TILE_CATEGORY::OVERMAP_NOTE, "" ) ) {
-                    draw_from_id_string( tile_id, TILE_CATEGORY::OVERMAP_NOTE,
+                    draw_from_id_string_om( tile_id, TILE_CATEGORY::OVERMAP_NOTE,
                                          "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 } else {
                     const std::string ter_sym = overmap_buffer.get_vehicle_ter_sym( omp );
                     std::string note_name = "note_" + ter_sym + "_cyan";
-                    draw_from_id_string( note_name, TILE_CATEGORY::OVERMAP_NOTE,
+                    draw_from_id_string_om( note_name, TILE_CATEGORY::OVERMAP_NOTE,
                                          "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 }
             }
@@ -1084,17 +1083,16 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                         overmap_ui::get_note_display_info( overmap_buffer.note( omp ) );
 
                     std::string note_name = "note_" + ter_sym + "_" + string_from_color( ter_color );
-                    draw_from_id_string( note_name, TILE_CATEGORY::OVERMAP_NOTE, "overmap_note",
+                    draw_from_id_string_om( note_name, TILE_CATEGORY::OVERMAP_NOTE, "overmap_note",
                                          omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 } else if( overmap_buffer.is_marked_dangerous( omp ) ) {
-                    draw_from_id_string( "note_X_red", TILE_CATEGORY::OVERMAP_NOTE, "overmap_note",
+                    draw_from_id_string_om( "note_X_red", TILE_CATEGORY::OVERMAP_NOTE, "overmap_note",
                                          omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
 
                 }
             }
         }
     }
-
     if( uistate.place_terrain ) {
         const oter_str_id &terrain_id = uistate.place_terrain->id;
         const oter_t &terrain = *terrain_id;
@@ -1108,7 +1106,6 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         opts.subcategory = "overmap_terrain";
         opts.scale_x = 1.0f;
         opts.scale_y = 1.0f;
-
         draw_from_id_string(
             id,
             tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ),
@@ -1130,15 +1127,12 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 int rotation;
                 int subtile;
                 terrain.get_rotation_and_subtile( rotation, subtile );
-
                 std::string overmap_subcat = "overmap_terrain";
-
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::OVERMAP_TERRAIN;
                 opts.subcategory = overmap_subcat;
                 opts.scale_x = 1.0f;
                 opts.scale_y = 1.0f;
-
                 int height_3d = 0;
                 draw_from_id_string(
                     id,
@@ -1167,7 +1161,6 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                                        height_3d, 1.0f, 1.0f );
         }
     }
-
     draw_entity_with_overlays( get_player_character(),
                                tripoint_bub_ms( global_omt_to_draw_position( avatar_pos ) ),
                                lit_level::LIT, height_3d, 1.0f, 1.0f );
@@ -1176,7 +1169,6 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                              lit_level::LIT,
                              false );
     }
-
     if( draw_overlays ) {
         for( const tripoint_abs_omt &pos : you.omt_path ) {
             if( pos.z() == center_pos.z() ) {
@@ -1187,7 +1179,6 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 );
             }
         }
-
         if( g->follower_path_to_show ) {
             for( const tripoint_abs_omt &pos : g->follower_path_to_show->omt_path ) {
                 if( pos.z() == center_pos.z() ) {
@@ -1199,9 +1190,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 }
             }
         }
-
-
-        // only draw in full tiles so it doesn't get cut off
+        // Only draw in full tiles so it doesn't get cut off.
         const std::optional<std::pair<tripoint_abs_omt, std::string>> mission_arrow =
                     get_mission_arrow( full_om_tile_area, center_pos );
         if( mission_arrow ) {
@@ -1210,9 +1199,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                                  0, lit_level::LIT, false );
         }
     }
-
     if( !viewing_weather && uistate.overmap_show_city_labels ) {
-
         const auto abs_sm_to_draw_label = [&]( const tripoint_abs_sm & city_pos, const int label_length ) {
             const point omt_pos = global_omt_to_draw_position( project_to<coords::omt>( city_pos ) ).xy();
             const point draw_point = player_to_screen( point_bub_ms( omt_pos ) );
@@ -1220,15 +1207,12 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             return draw_point + point( ( tile_width - label_length * fontwidth ) / 2,
                                        ( tile_height - fontheight ) / 2 );
         };
-
-        // draws a black rectangle behind a label for visibility and legibility
+        // Draws a black rectangle behind a label for visibility and legibility.
         const auto label_bg = [&]( const tripoint_abs_sm & pos, const std::string & name ) {
             const int name_length = utf8_width( name );
             const point draw_pos = abs_sm_to_draw_label( pos, name_length );
             SDL_Rect clipRect = { draw_pos.x, draw_pos.y, name_length * fontwidth, fontheight };
-
             geometry->rect( renderer, clipRect, SDL_Color() );
-
             draw_string( *font, renderer, geometry, name, draw_pos, 11 );
         };
 
