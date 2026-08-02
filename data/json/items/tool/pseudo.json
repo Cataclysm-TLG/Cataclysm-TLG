@@ -44,18 +44,6 @@
     "qualities": [ [ "SURFACE", 3 ] ]
   },
   {
-    "id": "fake_stove",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "basecamp stove" },
-    "description": "A fake stove used for basecamps.",
-    "copy-from": "fake_item",
-    "sub": "hotplate",
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "tinder": 50000 } } ],
-    "charge_factor": 10,
-    "tool_ammo": [ "tinder" ]
-  },
-  {
     "id": "brick_oven_pseudo",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],

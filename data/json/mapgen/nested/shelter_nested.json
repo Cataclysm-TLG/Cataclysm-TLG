@@ -182,13 +182,13 @@
       "place_item": [ { "item": "pot", "x": 1, "y": 4, "amount": 1 } ],
       "items": {
         "!": [
-          { "item": "faction_camp_tools", "chance": 95, "repeat": [ 2, 3 ], "faction": "your_followers" },
+          { "item": "construction_hand_tools", "chance": 95, "repeat": [ 2, 3 ], "faction": "your_followers" },
           { "item": "hardware_bulk", "chance": 95, "faction": "your_followers" },
           { "item": "tools_home", "chance": 95, "faction": "your_followers" },
           { "item": "dishes_utility", "chance": 80, "repeat": [ 2, 3 ], "faction": "your_followers" }
         ],
         "2": [
-          { "item": "faction_camp_misc", "chance": 80, "repeat": [ 1, 2 ], "faction": "your_followers" },
+          { "item": "wood_construction_materials", "chance": 80, "repeat": [ 1, 2 ], "faction": "your_followers" },
           { "item": "metal_wreckage", "chance": 80, "repeat": [ 6, 9 ], "faction": "your_followers" }
         ]
       }

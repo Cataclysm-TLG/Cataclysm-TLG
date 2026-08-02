@@ -81,21 +81,6 @@
   },
   {
     "type": "construction",
-    "id": "constr_bellows",
-    "skill": "fabrication",
-    "group": "build_a_bellow",
-    "//": "faction camp workshop recipe",
-    "category": "CONSTRUCT",
-    "difficulty": 1,
-    "time": "60m",
-    "on_display": false,
-    "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "2x4", 4 ] ], [ [ "leather_sheet", 2 ] ], [ [ "scrap", 20 ] ], [ [ "wire", 8 ] ] ],
-    "pre_flags": [ "FLAT" ],
-    "post_terrain": "f_bellows"
-  },
-  {
-    "type": "construction",
     "id": "constr_butcher_rack",
     "group": "build_butchering_rack",
     "category": "FURN",
@@ -196,21 +181,6 @@
     ],
     "pre_terrain": "t_pit",
     "post_terrain": "f_compost_empty"
-  },
-  {
-    "type": "construction",
-    "id": "constr_drophammer",
-    "skill": "fabrication",
-    "group": "build_a_drop_hammer",
-    "//": "faction camp workshop recipe",
-    "category": "CONSTRUCT",
-    "difficulty": 3,
-    "time": "120m",
-    "on_display": false,
-    "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "metal_tank", 2 ] ], [ [ "water_faucet", 2 ] ], [ [ "anvil", 1 ] ], [ [ "chain", 4 ] ], [ [ "pipe", 3 ] ] ],
-    "pre_flags": [ "FLAT" ],
-    "post_terrain": "f_drophammer"
   },
   {
     "type": "construction",
