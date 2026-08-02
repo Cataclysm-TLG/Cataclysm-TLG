@@ -258,7 +258,7 @@
     "name": { "str": "plague vector egg" },
     "description": "A fist-sized egg from a plague vector.  Incredibly gross.",
     "copy-from": "egg_roach",
-    "vitamins": [ [ "mutant_toxin", 50 ], [ "egg_allergen", 1 ]  ],
+    "vitamins": [ [ "mutant_toxin", 50 ], [ "egg_allergen", 1 ] ],
     "rot_spawn": { "group": "GROUP_EGG_ROACH_PLAGUE", "chance": 70 }
   },
   {
