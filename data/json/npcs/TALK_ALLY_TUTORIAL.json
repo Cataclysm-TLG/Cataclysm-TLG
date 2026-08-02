@@ -2,7 +2,7 @@
   {
     "id": "TALK_ALLY_TUTORIAL",
     "type": "talk_topic",
-    "dynamic_line": "I'm my own person, but I'm mostly willing to follow your lead.  I can do a lot of things for you: I can fight, I can train you or you can train me, I can carry stuff, I can bandage your wounds, I can build faction camps, I can do some other activities, I can ride horses, I can go places, I can guard things, I can use some bionics, I can even chit-chat with you or give you tips or talk about my background.  You can give me instructions in conversation or by radio or shout commands at me.\n  What do you want to know more about?",
+    "dynamic_line": "I'm my own person, but I'm mostly willing to follow your lead.  I can do a lot of things for you: I can fight, I can train you or you can train me, I can carry stuff, I can bandage your wounds, I can found settlements, I can do some other activities, I can ride horses, I can go places, I can guard things, I can use some bionics, I can even chit-chat with you or give you tips or talk about my background.  You can give me instructions in conversation or by radio or shout commands at me.\n  What do you want to know more about?",
     "responses": [
       { "text": "Forget I asked.", "topic": "TALK_FRIEND" },
       { "text": "Skip it, let's get going.", "topic": "TALK_DONE" },
@@ -24,7 +24,7 @@
         "success": { "topic": "TALK_SHELTER_DENY_ADVICE" },
         "failure": { "topic": "TALK_SHELTER_ADVICE", "effect": { "npc_add_effect": "asked_to_hint", "duration": 300 } }
       },
-      { "text": "Let's talk about faction camps.", "topic": "TALK_CAMP_GENERAL" },
+      { "text": "Let's talk about settlements.", "topic": "TALK_CAMP_GENERAL" },
       { "text": "What do you mean, \"mostly\" willing to follow my lead?", "topic": "TALK_ALLY_TUTORIAL_MUTINY" },
       { "text": "What's that about giving instructions?", "topic": "TALK_ALLY_TUTORIAL_TALK" },
       { "text": "We can talk with radios?", "topic": "TALK_ALLY_TUTORIAL_RADIO" },
@@ -33,11 +33,8 @@
       { "text": "What's that about training?", "topic": "TALK_ALLY_TUTORIAL_TRAINING" },
       { "text": "Tell me about you carrying stuff.", "topic": "TALK_ALLY_TUTORIAL_MULE" },
       { "text": "You can perform first aid?", "topic": "TALK_ALLY_TUTORIAL_MEDIC" },
-      { "text": "Tell me about faction camps.", "topic": "TALK_CAMP_TUTORIAL_INTRO" },
-      {
-        "text": "What's that about activities?  Like what, you can farm for me?",
-        "topic": "TALK_ALLY_TUTORIAL_ACTIVITIES"
-      },
+      { "text": "Teach me about settlements.", "topic": "TALK_CAMP_TUTORIAL_GENERAL" },
+      { "text": "What's that about activities?", "topic": "TALK_ALLY_TUTORIAL_ACTIVITIES" },
       { "text": "You can ride horses?", "topic": "TALK_ALLY_TUTORIAL_HORSES" },
       { "text": "What do you mean, you can go places?", "topic": "TALK_ALLY_TUTORIAL_MOVEMENT" },
       { "text": "What do you do as a guard?", "topic": "TALK_ALLY_TUTORIAL_GUARD" },
@@ -54,7 +51,7 @@
     "id": "TALK_ALLY_TUTORIAL_MUTINY",
     "type": "talk_topic",
     "dynamic_line": "You and me, we better stick together to survive, right?  But that doesn't mean I'll tolerate infinite abuse.  Mistreat me too much, or especially fail to keep me fed, and I'll like you less and less.  If it gets bad enough, I'll mutiny - and if you have anyone else following you, I may convince some of them to join my mutiny and we'll form our own little band.\n  Obviously, if I quit in a huff, there's going to be bad blood between us, and you're probably going to want to kill me for betrayal and I may need to kill you to get my fair share of the loot.  So keep me fed and satisfied so it doesn't come to that.",
-    "responses": [ { "text": "Sure.  Is there any easy way to keep you fed?", "topic": "TALK_CAMP_TUTORIAL_INTRO" } ]
+    "responses": [ { "text": "I see.", "topic": "TALK_FRIEND" } ]
   },
   {
     "id": "TALK_ALLY_TUTORIAL_TALK",
@@ -73,7 +70,7 @@
         {
           "is_by_radio": "Are you making a joke?  We're using two-way radios to talk right now.\n  Whatever, I'll go over it again in case you forgot.\n"
         },
-        "If you have a two-way radio and I have a two-way radio, you can use the faction interface (keybind '#') key to contact me.  I'll respond as long as I'm not too far away and the signal isn't blocked by the ground.  We can converse normally via a radio, but obviously we can't trade items and I can't train you.\n  You can tell me to come to you or go to any of your faction camps, or if I'm at a faction camp, you can tell me to perform actions at the camp."
+        "If you have a two-way radio and I have a two-way radio, you can use the faction interface (keybind '#') key to contact me.  I'll respond as long as I'm not too far away and the signal isn't blocked by the ground.  We can converse normally via a radio, but obviously we can't trade items and I can't train you.\n  You can tell me to come to you or go to any of our settlements.  You can also give settlement work orders over the radio."
       ]
     },
     "responses": [
@@ -128,17 +125,17 @@
     "responses": [
       { "text": "Good to know.  Can you perform first aid?", "topic": "TALK_ALLY_TUTORIAL_MEDIC" },
       { "text": "What about carrying stuff in general?", "topic": "TALK_ALLY_TUTORIAL_MULE" },
-      { "text": "What if I want you to build an organized camp?", "topic": "TALK_CAMP_TUTORIAL_INTRO" }
+      { "text": "What if I want you to build a settlement?", "topic": "TALK_CAMP_TUTORIAL_GENERAL" }
     ]
   },
   {
     "id": "TALK_ALLY_TUTORIAL_MOVEMENT",
     "type": "talk_topic",
-    "dynamic_line": "If you call me by radio, you can tell me to come to you.  If you've got some basecamps set up, you can tell me to go to one of them.  I'll start walking, and when I get to where I'm going, I'll guard it.\n  Now depending on where I am and where I'm going, it may take me a while to get there.  I'll dodge any dangers on the way, don't worry about that, but if you're way the heck away from me and tell me to come, it may be a while until I get to you.\n  I'll move faster if I'm horseback.",
+    "dynamic_line": "If you call me by radio, you can tell me to come to you.  If we have any settlements, you can tell me to go to one of them.  I'll start walking, and when I get to where I'm going, I'll guard it.\n  Depending on where I am and where I'm going, it may take me a while to get there.  I'll avoid any danger along the way, but traveling may take some time, especially if it's far.\n  I'll move faster if I'm horseback.",
     "responses": [
       { "text": "We can talk with radios?", "topic": "TALK_ALLY_TUTORIAL_RADIO" },
       { "text": "What do you do as a guard?", "topic": "TALK_ALLY_TUTORIAL_GUARD" },
-      { "text": "Tell me about faction camps.", "topic": "TALK_CAMP_TUTORIAL_INTRO" },
+      { "text": "Tell me about settlements.", "topic": "TALK_CAMP_TUTORIAL_GENERAL" },
       { "text": "You can ride a horse?", "topic": "TALK_ALLY_TUTORIAL_HORSES" }
     ]
   },
@@ -160,13 +157,13 @@
   {
     "id": "TALK_ALLY_TUTORIAL_CBMS",
     "type": "talk_topic",
-    "dynamic_line": "Bionics are augmentation packages, right?  They come in these installable Compact Bionic Modules or CBMs, and I can use some CBMs - if you examine a CBM, it will tell you if I can use it.\n  Find a programmable surgical installer or Autodoc, position me on the couch, and activate it, and you can install a suitable CBM to me - or if I think I'll do a better job, I'll do.  I'll take over installing CBMs into you if I'm better at it.\n  I can use almost all passive bionics and some active bionics.  If I have any active bionics, I'll try to use them sensibly, but if we're in danger, I'm going to activate anything that might give me an edge.  I'll use any weapon bionics if they're better than the weapons you gave me, but if you think I should reserve my bionic energy for my defensive and healing bionics, you can tell me how much to reserve.  I'll try to keep my bionic energy topped off, but if we're running low on supplies, you can tell me to stop recharging when I'm not full.\n  I'll tell you if I'm low on bionic energy and can't recharge, and what fuel I need.",
+    "dynamic_line": "Bionics are augmentation packages, right?  They come in these installable Compact Bionic Modules or CBMs, and I can use some CBMs - if you examine a CBM, it will tell you if I can use it.\n  Find a programmable surgical installer or Autodoc, position me on the couch, and activate it, and you can install a suitable CBM.  I'll take over installing CBMs into you if I'm better at it.\n  I can use almost all passive bionics and some active bionics.  If I have any active bionics, I'll try to use them sensibly, but if we're in danger, I'm going to activate anything that might give me an edge.  I'll use any weapon bionics if they're better than the weapons you gave me, but if you think I should save my bionic energy, you can tell me how much to reserve.  I'll try to keep my bionic energy topped off, but if we're running low on supplies, you can tell me to stop recharging when I'm not full.\n  I'll tell you if I'm low on bionic energy and can't recharge, and what fuel I need.",
     "responses": [ { "text": "Tell me how I give you fuel for your bionics.", "topic": "TALK_ALLY_TUTORIAL_MULE" } ]
   },
   {
     "id": "TALK_ALLY_TUTORIAL_SOCIAL",
     "type": "talk_topic",
-    "dynamic_line": "We can chit-chat, if you want.  People are social animals, right?  A little light conversation can do wonders for your mood.  But I don't want to be yapping all the time, so if we've chatted recently, I probably am not going to want to talk for a bit.\n  You can also ask me about my background.  I may not want to talk about it, though.\n  You can also ask me for advice - I've heard things here and there that may help us survive, but I don't usually give advice relevant to the situation.\n  I can also train you, and you can read books to me in order to train me.",
+    "dynamic_line": "We can chit-chat, if you want.  A little light conversation can do wonders for your mood.  But I don't want to be yapping all the time, so if we've chatted recently, I probably am not going to want to talk for a bit.\n  You can also ask me about my background.  I may not want to talk about it, though.\n  You can also ask me for advice - I've heard things here and there that may help us survive, but I don't usually give advice relevant to the situation.\n  I can also train you, and you can read books to me in order to train me.",
     "responses": [ { "text": "What's that about training?", "topic": "TALK_ALLY_TUTORIAL_TRAINING" } ]
   },
   {
@@ -194,22 +191,7 @@
     "dynamic_line": "Just about everyone is dead, but some people survived, right?  But just like you go around breaking into houses and taking whatever you think you need or want, well, other survivors do the same thing.  And that stack of loot you've been accumulating looks just like some random dead person's loot when it's left alone.  If some other scavenger comes around and sees that loot, and you or I or another ally isn't around to claim it, that other survivor is just going to take it.  So try to detail someone to watch your stuff - whether its at a base or in a vehicle.\n  Also, we've teamed up to better our chances of survival.  Other people are going to do the same, forming little factions just like we did.  If you open the faction manager (keybind '#'), you can see a list of all your allies, as well as all the other factions you've met so far.  Some factions are really just some guy trying to survive on his own, but other factions have dozens of members and fortified bases and such.  You might want to find some of them and try to make friends with them.",
     "responses": [
       { "text": "Anything else  I can do in the faction manager?", "topic": "TALK_ALLY_TUTORIAL_RADIO" },
-      { "text": "Is there any way we can build base for our faction?", "topic": "TALK_CAMP_TUTORIAL_INTRO" }
-    ]
-  },
-  {
-    "id": "TALK_ALLY_TUTORIAL_CHANGES",
-    "type": "talk_topic",
-    "dynamic_line": "Well, this conversation is pretty new!  But there's been some other changes.\n  I've been able to install CBMs on you, and have passive bionics installed in me, for a while.  But now I can use some active bionics, and I can explain some details on how I use bionics.\n  I can also ride horses, and you can give me orders to do things like farmwork, cutting trees, or even building houses from a blueprint.\n  I can even read books to improve my skills, so you don't have to spend time reading to me.\n  If you've got a faction camp, and we're near it, I'll eat from the camp's food reserves when I'm hungry.  And if the camp has a well, I'll drink from the well when thirsty.  Be careful, though - if other people are out on missions, I may eat the food they expected to eat when they got done!",
-    "responses": [
-      { "text": "You can use bionics?  How does that work?", "topic": "TALK_ALLY_TUTORIAL_CBMS" },
-      { "text": "You can ride horses?  Can I ride horses?", "topic": "TALK_ALLY_TUTORIAL_HORSES" },
-      { "text": "Tell me more about the activities you can do now.", "topic": "TALK_ALLY_TUTORIAL_ACTIVITIES" },
-      {
-        "text": "Hey, you can teach yourself from a book.  How does that work?",
-        "topic": "TALK_ALLY_TUTORIAL_TRAINING"
-      },
-      { "text": "Tell me about faction camps.", "topic": "TALK_CAMP_TUTORIAL_INTRO" }
+      { "text": "Is there any way we can build a base for our group?", "topic": "TALK_CAMP_TUTORIAL_GENERAL" }
     ]
   },
   {
@@ -230,8 +212,7 @@
       "TALK_ALLY_TUTORIAL_CBMS",
       "TALK_ALLY_TUTORIAL_SOCIAL",
       "TALK_ALLY_TUTORIAL_MISC",
-      "TALK_ALLY_TUTORIAL_COMMANDS",
-      "TALK_ALLY_TUTORIAL_CHANGES"
+      "TALK_ALLY_TUTORIAL_COMMANDS"
     ],
     "type": "talk_topic",
     "responses": [

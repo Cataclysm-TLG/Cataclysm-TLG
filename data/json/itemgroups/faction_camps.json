@@ -71,8 +71,8 @@
     "items": [ { "item": "cattail_rhizome", "count": [ 1, 4 ], "prob": 25 }, { "group": "forage_winter", "prob": 75 } ]
   },
   {
-    "id": "faction_camp_misc",
-    "//": "Miscellaneous stuff that faction camps need.  Should appear in and around areas that are faction-related camps.",
+    "id": "wood_construction_materials",
+    "//": "Miscellaneous construction materials.",
     "type": "item_group",
     "subtype": "distribution",
     "items": [
@@ -82,8 +82,8 @@
     ]
   },
   {
-    "id": "faction_camp_tools",
-    "//": "Tools that faction camps need.  Should appear in and around areas that are faction-related camps.",
+    "id": "construction_hand_tools",
+    "//": "Miscellaneous construction tools.",
     "type": "item_group",
     "subtype": "distribution",
     "items": [
