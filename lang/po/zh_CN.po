@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-08-01 22:22+0800\n"
+"PO-Revision-Date: 2026-08-02 10:32+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -164268,7 +164268,7 @@ msgstr[0] "多头熊"
 #. ~ Description of monster "destrier"
 #: data/json/monsters/mutant_mammal.json
 msgid "From a distance, this freak of nature could almost be taken for a draft horse but for its tufted ears and the set of its eyes, mounted at the front of its face beneath the cunning brow of a predator.  Its hooves are splayed out to form three-toed claws that grip rock and soil alike as it prowls the fields, and from time to time an overlong forked tongue slips out of its fanged maw to taste the air."
-msgstr ""
+msgstr "若从远处看，这只怪异的生物乍看之下颇像一匹挽马，但它那长着簇毛的耳朵，以及生在面部前方、位于捕食者那种狡黠眉骨之下的双眼，却暴露了它的真面目。它在原野上游荡时，蹄部向外张开，形成三趾状的利爪，能牢牢抓紧岩石与泥土；那长满獠牙的巨口中，不时探出一条细长分叉的舌头，探寻着空气中的气味。"
 
 #. ~ Description of monster "dextrous raccoon"
 #: data/json/monsters/mutant_mammal.json
@@ -164308,7 +164308,7 @@ msgstr "从大灾变之后，这只黑熊又多了两个脑袋。但这似乎没
 #: data/json/monsters/mutant_mammal.json
 #, c-format
 msgid "The %s devours the meat.  It growls low at you, but no longer seems quite as unfriendly."
-msgstr ""
+msgstr "那只 %s 吞食着肉块。它向你发出低沉的咆哮，但看起来似乎不再那么不友善了。"
 
 #. ~ Pet message of monster "Loper puppy"
 #. ~ Pet message of monster "Mauler puppy"
@@ -164395,7 +164395,7 @@ msgstr[0] "溃坝河狸"
 #: data/json/monsters/mutant_mammal.json
 msgid "destrier"
 msgid_plural "destriers"
-msgstr[0] ""
+msgstr[0] "骏马"
 
 #. ~ Monster name
 #: data/json/monsters/mutant_mammal.json
@@ -166055,7 +166055,7 @@ msgstr "曾经它是一条极富攻击性的饥肠辘辘的牛鲨，它现在丧
 #. ~ Description of monster "zombie pig"
 #: data/json/monsters/zed-animal.json
 msgid "The body of a stout, scruffy pig, reanimated now and somehow even angrier than it was in life."
-msgstr ""
+msgstr "那是一具粗壮、毛色杂乱的猪的躯体，如今已死而复生，且不知为何，竟比生前还要暴怒。"
 
 #. ~ Description of monster "zombie dog"
 #: data/json/monsters/zed-animal.json
@@ -166211,7 +166211,7 @@ msgstr[0] "丧尸驼鹿"
 #: data/json/monsters/zed-animal.json
 msgid "zombie pig"
 msgid_plural "zombie pigs"
-msgstr[0] ""
+msgstr[0] "丧尸猪"
 
 #. ~ Monster name
 #: data/json/monsters/zed-animal.json
@@ -167042,7 +167042,7 @@ msgstr "杀死伪僵尸"
 #: data/json/monsters/zed_dormant.json
 msgid "zombie crawler"
 msgid_plural "zombie crawlers"
-msgstr[0] ""
+msgstr[0] "爬行丧尸"
 
 #. ~ Description of monster "shocker brute"
 #: data/json/monsters/zed_electric.json
@@ -168041,7 +168041,7 @@ msgstr "这个不死士兵浑身穿着制式军装。以丧尸的标准来说，
 #. ~ Description of monster "zombie bio-operator"
 #: data/json/monsters/zed_soldiers.json
 msgid "This walking corpse is dressed in high-end tactical gear .  It jerks mechanically as it moves, as though something was merely puppeting the corpse."
-msgstr ""
+msgstr "这具行尸身穿高档战术装备。它移动时动作机械而生硬，仿佛有什么东西在操纵着这具尸体。"
 
 #. ~ Description of monster "Kevlar zombie"
 #: data/json/monsters/zed_soldiers.json
@@ -168227,7 +168227,7 @@ msgstr "在桌椅上进餐"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Butchered a human like an animal"
-msgstr ""
+msgstr "宰杀牲畜一样残忍地杀害了一个人"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168237,7 +168237,7 @@ msgstr "化学药物情绪波动"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Chimera mutation"
-msgstr ""
+msgstr "嵌合体突变"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168262,12 +168262,12 @@ msgstr "酒精上瘾"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Craving amphetamines"
-msgstr ""
+msgstr "渴望安非他命"
 
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Craving benzodiazepines"
-msgstr ""
+msgstr "渴望苯二氮卓类药物"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168277,7 +168277,7 @@ msgstr "咖啡因上瘾"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Craving cannabis"
-msgstr ""
+msgstr "渴望大麻"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168419,7 +168419,7 @@ msgstr "听到恐怖尖叫声"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Killed an ally"
-msgstr ""
+msgstr "杀死盟友"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168544,7 +168544,7 @@ msgstr "受到鼓励"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Sylvan mutation"
-msgstr ""
+msgstr "森林突变"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -173036,7 +173036,7 @@ msgstr "你所穿戴的装备有利于分散负重，让你能够携带更多物
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_1_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 1"
-msgstr ""
+msgstr "手臂1"
 
 #. ~ HP bar UI text of body part "second left arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_2_status_text"
@@ -173055,7 +173055,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_2_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 2"
-msgstr ""
+msgstr "手臂2"
 
 #. ~ HP bar UI text of body part "third left arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_3_status_text"
@@ -173074,7 +173074,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_3_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 3"
-msgstr ""
+msgstr "手臂3"
 
 #. ~ HP bar UI text of body part "first right arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_4_status_text"
@@ -173093,7 +173093,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_4_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 4"
-msgstr ""
+msgstr "手臂4"
 
 #. ~ HP bar UI text of body part "second right arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_5_status_text"
@@ -173112,7 +173112,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_5_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 5"
-msgstr ""
+msgstr "手臂5"
 
 #. ~ HP bar UI text of body part "third right arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_6_status_text"
@@ -173131,12 +173131,12 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_6_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 6"
-msgstr ""
+msgstr "手臂6"
 
 #. ~ Encumbrance text of body part "tail"
 #: data/json/mutations/mutation_limbs.json
 msgid "Balance is penalized."
-msgstr ""
+msgstr "平衡受困。"
 
 #. ~ Encumbrance text of body part "first left arm"
 #. ~ Encumbrance text of body part "second left arm"
@@ -173148,7 +173148,7 @@ msgstr ""
 #. ~ Encumbrance text of body part "right tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "Combat and movement are hampered."
-msgstr ""
+msgstr "战斗与移动受到阻碍。"
 
 #. ~ HP bar UI text of body part "foot"
 #. ~ Default clause of UI widget "bodypart_gastropod_foot_status_text"
@@ -173168,12 +173168,12 @@ msgstr ""
 #. ~ Label of UI widget "hp_gastropod_foot_num_label"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json data/json/ui/hp.json
 msgid "FOOT"
-msgstr ""
+msgstr "足"
 
 #. ~ HP bar UI text of body part "left tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "L TENT"
-msgstr ""
+msgstr "左触"
 
 #. ~ HP bar UI text of body part "left wing"
 #: data/json/mutations/mutation_limbs.json data/mods/Limb_WIP/mutations/mutation_limbs.json
@@ -173183,17 +173183,17 @@ msgstr "左翼"
 #. ~ HP bar UI text of body part "left foreleg"
 #: data/json/mutations/mutation_limbs.json
 msgid "LLEG1"
-msgstr ""
+msgstr "左腿1"
 
 #. ~ HP bar UI text of body part "left hind leg"
 #: data/json/mutations/mutation_limbs.json
 msgid "LLEG2"
-msgstr ""
+msgstr "左腿2"
 
 #. ~ HP bar UI text of body part "right tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "R TENT"
-msgstr ""
+msgstr "右触"
 
 #. ~ HP bar UI text of body part "right wing"
 #: data/json/mutations/mutation_limbs.json data/mods/Limb_WIP/mutations/mutation_limbs.json
@@ -173203,17 +173203,17 @@ msgstr "右翼"
 #. ~ HP bar UI text of body part "right foreleg"
 #: data/json/mutations/mutation_limbs.json
 msgid "RLEG1"
-msgstr ""
+msgstr "右腿1"
 
 #. ~ HP bar UI text of body part "right hind leg"
 #: data/json/mutations/mutation_limbs.json
 msgid "RLEG2"
-msgstr ""
+msgstr "右腿2"
 
 #. ~ Encumbrance text of body part "tail"
 #: data/json/mutations/mutation_limbs.json
 msgid "Swimming is slowed, balance is penalized."
-msgstr ""
+msgstr "游泳速度减慢，平衡受困。"
 
 #. ~ HP bar UI text of body part "tail"
 #. ~ Default clause of UI widget "bodypart_long_tail_status_text"
@@ -173240,7 +173240,7 @@ msgstr ""
 #. ~ Label of UI widget "hp_long_tail_num_label"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json data/json/ui/hp.json
 msgid "TAIL"
-msgstr ""
+msgstr "尾巴"
 
 #. ~ Smash message of body part "left wing"
 #. ~ Smash message of body part "right wing"
@@ -173256,7 +173256,7 @@ msgstr "你用翅膀拍打 %s"
 #: data/json/mutations/mutation_limbs.json
 #, c-format
 msgid "You scrabble at the %s."
-msgstr ""
+msgstr "你抓挠 %s。"
 
 #. ~ Smash message of body part "first left arm"
 #. ~ Smash message of body part "second left arm"
@@ -173269,7 +173269,7 @@ msgstr ""
 #: data/json/mutations/mutation_limbs.json
 #, c-format
 msgid "You smack the %s."
-msgstr ""
+msgstr "你猛击 %s。"
 
 #. ~ Smash message of body part "webbed left hand"
 #. ~ Smash message of body part "webbed right hand"
@@ -173284,13 +173284,13 @@ msgstr "你用一记重拳猛击了 %s。"
 #: data/json/mutations/mutation_limbs.json
 #, c-format
 msgid "You tail-slap the %s."
-msgstr ""
+msgstr "你用尾巴拍击 %s。"
 
 #. ~ Smash message of body part "tail"
 #: data/json/mutations/mutation_limbs.json
 #, c-format
 msgid "You tail-whip the %s."
-msgstr ""
+msgstr "你用尾巴抽打 %s。"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173300,37 +173300,37 @@ msgstr "蛙人"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "arm (draped)"
-msgstr ""
+msgstr "手臂（披覆织物）"
 
 #. ~ Heading of body part "first left arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 1"
-msgstr ""
+msgstr "手臂1"
 
 #. ~ Heading of body part "second left arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 2"
-msgstr ""
+msgstr "手臂2"
 
 #. ~ Heading of body part "third left arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 3"
-msgstr ""
+msgstr "手臂3"
 
 #. ~ Heading of body part "first right arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 4"
-msgstr ""
+msgstr "手臂4"
 
 #. ~ Heading of body part "second right arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 5"
-msgstr ""
+msgstr "手臂5"
 
 #. ~ Heading of body part "third right arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 6"
-msgstr ""
+msgstr "手臂6"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173340,57 +173340,57 @@ msgstr "蛙人"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "carpi"
-msgstr ""
+msgstr "腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "coxae"
-msgstr ""
+msgstr "基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "dactyli"
-msgstr ""
+msgstr "指（趾）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal first left arm"
-msgstr ""
+msgstr "左臂远端第一段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal first right arm"
-msgstr ""
+msgstr "右臂远端第一段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal left tentacle"
-msgstr ""
+msgstr "左触手远端"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal right tentacle"
-msgstr ""
+msgstr "右触手远端"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal second left arm"
-msgstr ""
+msgstr "左臂远端第二段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal second right arm"
-msgstr ""
+msgstr "右臂远端第二段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal third left arm"
-msgstr ""
+msgstr "左臂远端第三段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal third right arm"
-msgstr ""
+msgstr "右臂远端第三段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173400,52 +173400,52 @@ msgstr "燧发枪械"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "first left arm"
-msgstr ""
+msgstr "第一只左臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "first left arm"
-msgstr ""
+msgstr "第一只左臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "first left arm (draped)"
-msgstr ""
+msgstr "第一只左臂（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "first right arm"
-msgstr ""
+msgstr "第一只右臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "first right arm"
-msgstr ""
+msgstr "第一只右臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "first right arm (draped)"
-msgstr ""
+msgstr "第一只右臂（披覆织物）"
 
 #. ~ Name of body part
 #. ~ Heading of body part "foot"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "foot"
-msgstr ""
+msgstr "足"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "foot"
-msgstr ""
+msgstr "足"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "foot (draped)"
-msgstr ""
+msgstr "足（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173466,17 +173466,17 @@ msgstr "湖蹄"
 #. ~ Heading of body part "left foreleg"
 #: data/json/mutations/mutation_limbs.json
 msgid "l. leg 1"
-msgstr ""
+msgstr "左侧腿1"
 
 #. ~ Heading of body part "left hind leg"
 #: data/json/mutations/mutation_limbs.json
 msgid "l. leg 2"
-msgstr ""
+msgstr "左侧腿2"
 
 #. ~ Heading of body part "left tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "l. tent"
-msgstr ""
+msgstr "左触"
 
 #. ~ Heading of body part "left wing"
 #: data/json/mutations/mutation_limbs.json data/mods/Limb_WIP/mutations/mutation_limbs.json
@@ -173501,43 +173501,43 @@ msgstr "左肘"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first carpus"
-msgstr ""
+msgstr "左侧第一腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first coxa"
-msgstr ""
+msgstr "左侧第一基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first dactyl"
-msgstr ""
+msgstr "左侧第一指（趾）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first merus"
-msgstr ""
+msgstr "左侧第一长节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first propodus"
-msgstr ""
+msgstr "左侧第一掌节"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left foreleg"
-msgstr ""
+msgstr "左前肢"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "left foreleg"
-msgstr ""
+msgstr "左前肢"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left foreleg (draped)"
-msgstr ""
+msgstr "左前肢（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173547,18 +173547,18 @@ msgstr "左脚"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left hind leg"
-msgstr ""
+msgstr "左后肢"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "left hind leg"
-msgstr ""
+msgstr "左后肢"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left hind leg (draped)"
-msgstr ""
+msgstr "左后肢（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
@@ -173574,22 +173574,22 @@ msgstr "左脚"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second carpus"
-msgstr ""
+msgstr "左侧第二腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second coxa"
-msgstr ""
+msgstr "左侧第二基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second merus"
-msgstr ""
+msgstr "左侧第二长节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second propodus"
-msgstr ""
+msgstr "左侧第二掌节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173599,13 +173599,13 @@ msgstr "左腿"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left tentacle"
-msgstr ""
+msgstr "左触手"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "left tentacle"
-msgstr ""
+msgstr "左触手"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173637,62 +173637,62 @@ msgstr "左翼"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "lower foot"
-msgstr ""
+msgstr "下足"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "meri"
-msgstr ""
+msgstr "肱骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "pedal sole"
-msgstr ""
+msgstr "踏板底"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "propodi"
-msgstr ""
+msgstr "前脚"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal first left arm"
-msgstr ""
+msgstr "左臂近端第一段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal first right arm"
-msgstr ""
+msgstr "右臂近端第一段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal left tentacle"
-msgstr ""
+msgstr "左侧触手近端"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal right tentacle"
-msgstr ""
+msgstr "右侧触手近端"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal second left arm"
-msgstr ""
+msgstr "左臂近端第二段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal second right arm"
-msgstr ""
+msgstr "右臂近端第二段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal third left arm"
-msgstr ""
+msgstr "左臂近端第三段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal third right arm"
-msgstr ""
+msgstr "右臂近端第三段"
 
 #. ~ Heading of body part "right hoof"
 #: data/json/mutations/mutation_limbs.json
@@ -173702,17 +173702,17 @@ msgstr "雨帽"
 #. ~ Heading of body part "right foreleg"
 #: data/json/mutations/mutation_limbs.json
 msgid "r. leg 1"
-msgstr ""
+msgstr "右侧腿1"
 
 #. ~ Heading of body part "right hind leg"
 #: data/json/mutations/mutation_limbs.json
 msgid "r. leg 2"
-msgstr ""
+msgstr "右侧腿2"
 
 #. ~ Heading of body part "right tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "r. tent"
-msgstr ""
+msgstr "右触"
 
 #. ~ Heading of body part "right wing"
 #: data/json/mutations/mutation_limbs.json data/mods/Limb_WIP/mutations/mutation_limbs.json
@@ -173737,43 +173737,43 @@ msgstr "右肘"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first carpus"
-msgstr ""
+msgstr "右侧第一腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first coxa"
-msgstr ""
+msgstr "右侧第一基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first dactyl"
-msgstr ""
+msgstr "右侧第一指（趾）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first merus"
-msgstr ""
+msgstr "右侧第一长节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first propodus"
-msgstr ""
+msgstr "右侧第一掌节"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right foreleg"
-msgstr ""
+msgstr "右前肢"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "right foreleg"
-msgstr ""
+msgstr "右前肢"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right foreleg (draped)"
-msgstr ""
+msgstr "右前肢（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173783,18 +173783,18 @@ msgstr "右脚"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right hind leg"
-msgstr ""
+msgstr "右后肢"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "right hind leg"
-msgstr ""
+msgstr "右后肢"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right hind leg (draped)"
-msgstr ""
+msgstr "右后肢（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
@@ -173810,27 +173810,27 @@ msgstr "右脚"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second carpus"
-msgstr ""
+msgstr "右侧第二腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second coxa"
-msgstr ""
+msgstr "右侧第二基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second dactyl"
-msgstr ""
+msgstr "右侧第二指（趾）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second merus"
-msgstr ""
+msgstr "右侧第二长节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second propodus"
-msgstr ""
+msgstr "右侧第二掌节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173840,13 +173840,13 @@ msgstr "右腿"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right tentacle"
-msgstr ""
+msgstr "右触手"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "right tentacle"
-msgstr ""
+msgstr "右触手"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173878,34 +173878,34 @@ msgstr "右翼"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "second left arm"
-msgstr ""
+msgstr "第二只左臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "second left arm"
-msgstr ""
+msgstr "第二只左臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "second left arm (draped)"
-msgstr ""
+msgstr "第二只左臂（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "second right arm"
-msgstr ""
+msgstr "第二只右臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "second right arm"
-msgstr ""
+msgstr "第二只右臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "second right arm (draped)"
-msgstr ""
+msgstr "第二只右臂（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173922,33 +173922,33 @@ msgstr "吊带内衣"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail"
-msgstr ""
+msgstr "尾巴"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "tail"
-msgstr ""
+msgstr "尾巴"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail (draped)"
-msgstr ""
+msgstr "尾巴（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail base"
-msgstr ""
+msgstr "尾基"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail fin"
-msgstr ""
+msgstr "尾鳍"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail tip"
-msgstr ""
+msgstr "尾尖"
 
 #. ~ Name of body part
 #. ~ Heading of body part "left tentacle"
@@ -173956,50 +173956,50 @@ msgstr ""
 #. ~ Heading of body part "right tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "tentacles"
-msgstr ""
+msgstr "触手"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "tentacles"
-msgstr ""
+msgstr "触手"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "third left arm"
-msgstr ""
+msgstr "第三只左臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "third left arm"
-msgstr ""
+msgstr "第三只左臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "third left arm (draped)"
-msgstr ""
+msgstr "第三只左臂（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "third right arm"
-msgstr ""
+msgstr "第三只右臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "third right arm"
-msgstr ""
+msgstr "第三只右臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "third right arm (draped)"
-msgstr ""
+msgstr "第三只右臂（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "upper foot"
-msgstr ""
+msgstr "脚背"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -174138,7 +174138,7 @@ msgstr "爪跃"
 #. ~ Description of spell "Charging Knockback"
 #: data/json/mutations/mutation_spells.json
 msgid "The knockback procced by spell_bull_charge."
-msgstr ""
+msgstr "由 spell_bull_charge 触发的击退效果。"
 
 #. ~ Spell name
 #. ~ Mutation name
@@ -174216,7 +174216,7 @@ msgstr "<npcname>砍中%s"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "<npcname> clubs %s with their tail"
-msgstr ""
+msgstr "<npcname> 用尾巴重击 %s"
 
 #. ~ Message of martial technique "Pincer Crush"
 #: data/json/mutations/mutation_techs.json
@@ -174261,7 +174261,7 @@ msgstr "<npcname>割中%s"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "<npcname> lashes %s with their tail"
-msgstr ""
+msgstr "<npcname> 用尾巴猛击 %s"
 
 #. ~ Message of martial technique "Beak Bite With Mouth Tentacles"
 #: data/json/mutations/mutation_techs.json
@@ -174306,7 +174306,7 @@ msgstr "<npcname>用翅膀拍打了%s"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "<npcname> stings %s"
-msgstr ""
+msgstr "<npcname> 刺痛了 %s"
 
 #. ~ Message of martial technique "CHOMP"
 #: data/json/mutations/mutation_techs.json data/mods/Limb_WIP/mutations/mutation_techs.json
@@ -174454,17 +174454,17 @@ msgstr "鲨齿"
 #. ~ Martial technique name
 #: data/json/mutations/mutation_techs.json
 msgid "Sting"
-msgstr ""
+msgstr "蛰刺"
 
 #. ~ Martial technique name
 #: data/json/mutations/mutation_techs.json
 msgid "Tail Club"
-msgstr ""
+msgstr "尾部重击"
 
 #. ~ Martial technique name
 #: data/json/mutations/mutation_techs.json
 msgid "Tail Lash"
-msgstr ""
+msgstr "尾部猛击"
 
 #. ~ Martial technique name
 #: data/json/mutations/mutation_techs.json
@@ -174527,7 +174527,7 @@ msgstr "你施放了 %s！"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "You club %s with your tail"
-msgstr ""
+msgstr "你用尾巴重击 %s"
 
 #. ~ Message of martial technique "Pincer Crush"
 #: data/json/mutations/mutation_techs.json
@@ -174572,7 +174572,7 @@ msgstr "你割中 %s"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "You lash %s with your tail"
-msgstr ""
+msgstr "你用尾巴猛击 %s"
 
 #. ~ Message of martial technique "Beak Bite With Mouth Tentacles"
 #: data/json/mutations/mutation_techs.json data/mods/Limb_WIP/mutations/mutation_techs.json
@@ -174623,7 +174623,7 @@ msgstr "你用叉舌刺入 %s！"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "You sting %s"
-msgstr ""
+msgstr "你刺痛了 %s"
 
 #. ~ Message of martial technique "CHOMP"
 #: data/json/mutations/mutation_techs.json data/mods/Limb_WIP/mutations/mutation_techs.json
@@ -289633,7 +289633,7 @@ msgstr "头部"
 #. ~ Clause text "bitten" of UI widget "bodypart_crab_leg_1_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LEG 1"
-msgstr ""
+msgstr "腿 1"
 
 #. ~ Default clause of UI widget "bodypart_crab_leg_2_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289647,7 +289647,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_crab_leg_2_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LEG 2"
-msgstr ""
+msgstr "腿 2"
 
 #. ~ Default clause of UI widget "bodypart_crab_leg_3_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289661,7 +289661,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_crab_leg_3_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LEG 3"
-msgstr ""
+msgstr "腿 3"
 
 #. ~ Default clause of UI widget "bodypart_crab_leg_4_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289675,7 +289675,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_crab_leg_4_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LEG 4"
-msgstr ""
+msgstr "腿 4"
 
 #. ~ Default clause of UI widget "bodypart_cephalopod_tentacle_l_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289694,7 +289694,7 @@ msgstr ""
 #. "bodypart_cephalopod_tentacle_l_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LTENT"
-msgstr ""
+msgstr "左触"
 
 #. ~ Default clause of UI widget "bodypart_wing_bird_l_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289727,7 +289727,7 @@ msgstr "左翼"
 #. "bodypart_cephalopod_tentacle_r_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "RTENT"
-msgstr ""
+msgstr "右触"
 
 #. ~ Default clause of UI widget "bodypart_wing_bird_r_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
