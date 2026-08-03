@@ -3519,17 +3519,19 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
         const memorized_tile &mt = get_terrain_memory_at( here.get_abs( p ) );
         if( !mt.get_ter_id().empty() ) {
             if( memorize_only ) {
+                return false;
+            } else {
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::TERRAIN;
                 return draw_from_id_string(
-                           mt.get_ter_id(),
-                           p,
-                           mt.get_ter_subtile(),
-                           mt.get_ter_rotation(),
-                           lit_level::MEMORIZED,
-                           true,
-                           height_3d,
-                           opts
+                    mt.get_ter_id(),
+                    p,
+                    mt.get_ter_subtile(),
+                    mt.get_ter_rotation(),
+                    lit_level::MEMORIZED,
+                    true,
+                    height_3d,
+                    opts
                 );
             }
         }
@@ -3652,9 +3654,11 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
         // Try drawing memory if invisible and not overridden.
         const memorized_tile &mt = get_furniture_memory_at( here.get_abs( p ) );
         if( !mt.get_dec_id().empty() ) {
-            draw_options opts{};
-            opts.category = TILE_CATEGORY::FURNITURE;
             if( memorize_only ) {
+                return false;
+            } else {
+                draw_options opts{};
+                opts.category = TILE_CATEGORY::FURNITURE;
                 return draw_from_id_string(
                     mt.get_dec_id(),
                     p,
@@ -3768,7 +3772,7 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
             }
         }
     } else if( invisible[0] ) {
-        // try drawing memory if invisible and not overridden
+        // Try drawing memory if invisible and not overridden.
         const memorized_tile &mt = get_trap_memory_at( here.get_abs( p ) );
         if( !mt.get_dec_id().empty() ) {
             if( memorize_only ) {
@@ -3777,15 +3781,15 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::TRAP;
                 return draw_from_id_string(
-                           mt.get_dec_id(),
-                           p,
-                           mt.get_dec_subtile(),
-                           mt.get_dec_rotation(),
-                           lit_level::MEMORIZED,
-                           true,
-                           height_3d,
-                           opts
-                       );
+                    mt.get_dec_id(),
+                    p,
+                    mt.get_dec_subtile(),
+                    mt.get_dec_rotation(),
+                    lit_level::MEMORIZED,
+                    true,
+                    height_3d,
+                    opts
+                );
             }
         }
     }
