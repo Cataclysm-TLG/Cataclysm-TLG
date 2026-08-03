@@ -6741,7 +6741,7 @@ float Character::get_bmi_lean() const
 {
     int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
                             get_str_base() );
-    //strength BMIs decrease to zero as you starve (muscle atrophy)
+    // Strength BMI adjustment decreases to zero as you starve (muscle atrophy).
     if( get_bmi_fat() < character_weight_category::normal ) {
         const stat_mod wpen = get_weight_penalty();
         return 12.0f + strength_adjusted - wpen.strength;
