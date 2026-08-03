@@ -441,13 +441,29 @@ void suffer::while_grabbed( Character &you )
 
 void suffer::from_addictions( Character &you )
 {
-    time_duration timer = -50_hours;
-    if( you.has_trait( trait_ADDICTIVE ) ) {
-        timer = -60_hours;
-    } else if( you.has_trait( trait_NONADDICTIVE ) ) {
-        timer = -40_hours;
+    // Early return if we don't have any addictions.
+    if( you.addictions.empty() ) {
+        return;
     }
+    time_duration recovery_threshold = -60_hours;
+    const bool addictive = you.has_trait( trait_ADDICTIVE );
+    const bool nonaddictive = you.has_trait( trait_NONADDICTIVE );
+    if( addictive ) {
+        recovery_threshold = -70_hours;
+    } else if( nonaddictive ) {
+        recovery_threshold = -50_hours;
+    }
+    // Intelligence isn't just book smarts, it's willpower, patience, and long-term thinking.
+    time_duration int_adjustment = 1_hours * ( std::clamp( you.get_int(), 1, 30 ) );
+    // Add rather than subtract because timer is negative.
+    recovery_threshold += int_adjustment;
     for( addiction &cur_addiction : you.addictions ) {
+        for( const efftype_id &effect : cur_addiction.type->get_satisfying_effects() ) {
+            if( you.has_effect( effect ) ) {
+                cur_addiction.sated = cur_addiction.type->get_default_sated();
+                break;
+            }
+        }
         if( cur_addiction.sated <= 0_turns && cur_addiction.intensity >= MIN_ADDICTION_LEVEL ) {
             cur_addiction.run_effect( you );
         }
@@ -456,8 +472,8 @@ void suffer::from_addictions( Character &you )
         if( rng( 1, 60 ) < cur_addiction.intensity ) {
             cur_addiction.sated -= 4_minutes;
         }
-        // Higher intensity addictions heal faster.
-        if( cur_addiction.sated - 10_minutes * cur_addiction.intensity < timer ) {
+        // Addiction recovery is faster at higher intensities, most people will trend to a midpoint.
+        if( cur_addiction.sated - 10_minutes * cur_addiction.intensity < recovery_threshold ) {
             if( cur_addiction.intensity <= 2 ) {
                 you.rem_addiction( cur_addiction.type );
                 break;
