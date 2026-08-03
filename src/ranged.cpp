@@ -1122,7 +1122,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         // Add dispersion for shooting in close range.
         const Creature *victim = get_creature_tracker().creature_at( target, true );
         if( victim != nullptr ) {
-            get_tracking_dispersion( &gun, victim, true );
+            dispersion.add_range( get_tracking_dispersion( &gun, victim, true ).max() );
         }
         dealt_projectile_attack shot;
         projectile_attack( shot, proj, &here, pos_bub( here ), aim, dispersion, this, in_veh, wp_attack );
