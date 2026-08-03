@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-08-01 14:31+0800\n"
+"PO-Revision-Date: 2026-08-02 12:38+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -86838,7 +86838,6 @@ msgstr[0] "脱水桑葚"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated nannyberries"
 msgid_plural "dehydrated nannyberries"
 msgstr[0] "脱水荚蒾果"
@@ -86846,7 +86845,6 @@ msgstr[0] "脱水荚蒾果"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches orange
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated orange"
 msgid_plural "dehydrated orange"
 msgstr[0] "脱水橙子"
@@ -86854,7 +86852,6 @@ msgstr[0] "脱水橙子"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches papaya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated papaya"
 msgid_plural "dehydrated papaya"
 msgstr[0] "脱水木瓜"
@@ -86862,7 +86859,6 @@ msgstr[0] "脱水木瓜"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches maracuya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated passionfruit"
 msgid_plural "dehydrated passionfruit"
 msgstr[0] "脱水百香果"
@@ -86870,7 +86866,6 @@ msgstr[0] "脱水百香果"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches peach
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated peach"
 msgid_plural "dehydrated peach"
 msgstr[0] "脱水桃子"
@@ -86878,7 +86873,6 @@ msgstr[0] "脱水桃子"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pear
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated pear"
 msgid_plural "dehydrated pear"
 msgstr[0] "脱水梨"
@@ -86886,7 +86880,6 @@ msgstr[0] "脱水梨"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pineapple
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated pineapple"
 msgid_plural "dehydrated pineapple"
 msgstr[0] "脱水菠萝"
@@ -86894,7 +86887,6 @@ msgstr[0] "脱水菠萝"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches plums
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated plum"
 msgid_plural "dehydrated plum"
 msgstr[0] "脱水李子"
@@ -86902,7 +86894,6 @@ msgstr[0] "脱水李子"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated pomegranate"
 msgid_plural "dehydrated pomegranate"
 msgstr[0] "脱水石榴"
@@ -86912,7 +86903,6 @@ msgstr[0] "脱水石榴"
 #. ~ Conditional name for "dehydrated vegetable" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json data/json/items/comestibles/veggy_dishes.json
-#, fuzzy
 msgid "dehydrated pumpkin"
 msgid_plural "dehydrated pumpkin"
 msgstr[0] "脱水南瓜"
@@ -86920,7 +86910,6 @@ msgstr[0] "脱水南瓜"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches raspberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated raspberry"
 msgid_plural "dehydrated raspberry"
 msgstr[0] "脱水覆盆子"
@@ -86928,7 +86917,6 @@ msgstr[0] "脱水覆盆子"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated rose hip"
 msgid_plural "dehydrated rose hip"
 msgstr[0] "脱水玫瑰果"
@@ -86936,7 +86924,6 @@ msgstr[0] "脱水玫瑰果"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches strawberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated strawberry"
 msgid_plural "dehydrated strawberry"
 msgstr[0] "脱水草莓"
@@ -86944,7 +86931,6 @@ msgstr[0] "脱水草莓"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated tupelo fruit"
 msgid_plural "dehydrated tupelo fruit"
 msgstr[0] "脱水蓝果木果"
@@ -86952,7 +86938,6 @@ msgstr[0] "脱水蓝果木果"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches watermelon
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated watermelon"
 msgid_plural "dehydrated watermelon"
 msgstr[0] "脱水西瓜"
@@ -86960,7 +86945,6 @@ msgstr[0] "脱水西瓜"
 #. ~ Conditional name for "dehydrated fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "dehydrated wintergreen berry"
 msgid_plural "dehydrated wintergreen berry"
 msgstr[0] "脱水冬青莓"
@@ -86968,7 +86952,6 @@ msgstr[0] "脱水冬青莓"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "elderberries in syrup"
 msgid_plural "elderberries in syrup"
 msgstr[0] "糖渍接骨木果"
@@ -86976,7 +86959,6 @@ msgstr[0] "糖渍接骨木果"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "elderberry fruit leather"
 msgid_plural "elderberry fruit leather"
 msgstr[0] "接骨木果干"
@@ -86984,14 +86966,12 @@ msgstr[0] "接骨木果干"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. elderberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "elderberry jam"
 msgid_plural "elderberry jam"
 msgstr[0] "接骨木果酱"
 
 #. ~ Item name
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "fruit in syrup"
 msgid_plural "fruit in syrup"
 msgstr[0] "糖渍水果"
@@ -87011,7 +86991,6 @@ msgstr[0] "果丹皮"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. grapes
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "grape fruit leather"
 msgid_plural "grape fruit leather"
 msgstr[0] "葡萄果干"
@@ -87019,7 +86998,6 @@ msgstr[0] "葡萄果干"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. grapes
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "grape jam"
 msgid_plural "grape jam"
 msgstr[0] "葡萄果酱"
@@ -87027,7 +87005,6 @@ msgstr[0] "葡萄果酱"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "grapefruit in syrup"
 msgid_plural "grapefruit in syrup"
 msgstr[0] "糖渍西柚"
@@ -87035,7 +87012,6 @@ msgstr[0] "糖渍西柚"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "grapefruit jam"
 msgid_plural "grapefruit jam"
 msgstr[0] "西柚果酱"
@@ -87043,7 +87019,6 @@ msgstr[0] "西柚果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "grapefruit leather"
 msgid_plural "grapefruit leather"
 msgstr[0] "西柚果干"
@@ -87051,7 +87026,6 @@ msgstr[0] "西柚果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. grapes
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "grapes in syrup"
 msgid_plural "grapes in syrup"
 msgstr[0] "糖渍葡萄"
@@ -87059,7 +87033,6 @@ msgstr[0] "糖渍葡萄"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "guava fruit leather"
 msgid_plural "guava fruit leather"
 msgstr[0] "番石榴果干"
@@ -87067,7 +87040,6 @@ msgstr[0] "番石榴果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "guava in syrup"
 msgid_plural "guava in syrup"
 msgstr[0] "糖渍番石榴"
@@ -87075,7 +87047,6 @@ msgstr[0] "糖渍番石榴"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. guayaba
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "guava jam"
 msgid_plural "guava jam"
 msgstr[0] "番石榴果酱"
@@ -87089,7 +87060,6 @@ msgstr[0] "硬面饼布丁"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "hobbleberries in syrup"
 msgid_plural "hobbleberries in syrup"
 msgstr[0] "糖渍绊脚莓"
@@ -87097,14 +87067,12 @@ msgstr[0] "糖渍绊脚莓"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "hobbleberry fruit leather"
 msgid_plural "hobbleberry fruit leather"
 msgstr[0] "绊脚莓果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "hobbleberry jam"
 msgid_plural "hobbleberry jam"
 msgstr[0] "绊脚莓果酱"
@@ -87112,7 +87080,6 @@ msgstr[0] "绊脚莓果酱"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "huckleberries in syrup"
 msgid_plural "huckleberries in syrup"
 msgstr[0] "糖渍越橘"
@@ -87120,7 +87087,6 @@ msgstr[0] "糖渍越橘"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "huckleberry fruit leather"
 msgid_plural "huckleberry fruit leather"
 msgstr[0] "越橘果干"
@@ -87128,7 +87094,6 @@ msgstr[0] "越橘果干"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "huckleberry jam"
 msgid_plural "huckleberry jam"
 msgstr[0] "越橘果酱"
@@ -87136,7 +87101,6 @@ msgstr[0] "越橘果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "kiwi fruit leather"
 msgid_plural "kiwi fruit leather"
 msgstr[0] "猕猴桃果干"
@@ -87144,14 +87108,12 @@ msgstr[0] "猕猴桃果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. kiwi
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "kiwi in syrup"
 msgid_plural "kiwi in syrup"
 msgstr[0] "糖渍猕猴桃"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches kiwi
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "kiwi jam"
 msgid_plural "kiwi jam"
 msgstr[0] "猕猴桃果酱"
@@ -87165,7 +87127,6 @@ msgstr[0] "速溶柠檬粉"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "lulo fruit leather"
 msgid_plural "lulo fruit leather"
 msgstr[0] "露露果果干"
@@ -87173,14 +87134,12 @@ msgstr[0] "露露果果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. lulo
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "lulo in syrup"
 msgid_plural "lulo in syrup"
 msgstr[0] "糖渍露露果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches lulo
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "lulo jam"
 msgid_plural "lulo jam"
 msgstr[0] "露露果果酱"
@@ -87188,7 +87147,6 @@ msgstr[0] "露露果果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mang fruit leathero"
 msgid_plural "mang fruit leathero"
 msgstr[0] "芒果果干"
@@ -87196,7 +87154,6 @@ msgstr[0] "芒果果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mango in syrup"
 msgid_plural "mango in syrup"
 msgstr[0] "糖渍芒果"
@@ -87204,28 +87161,24 @@ msgstr[0] "糖渍芒果"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. mango
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mango jam"
 msgid_plural "mango jam"
 msgstr[0] "芒果果酱"
 
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mayapple fruit leather"
 msgid_plural "mayapple fruit leather"
 msgstr[0] "美洲曼陀罗果果干"
 
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mayapple in syrup"
 msgid_plural "mayapple in syrup"
 msgstr[0] "糖渍美洲曼陀罗果"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches mayapple
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mayapple jam"
 msgid_plural "mayapple jam"
 msgstr[0] "美洲曼陀罗果果酱"
@@ -87233,7 +87186,6 @@ msgstr[0] "美洲曼陀罗果果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "melon fruit leather"
 msgid_plural "melon fruit leather"
 msgstr[0] "甜瓜果干"
@@ -87241,14 +87193,12 @@ msgstr[0] "甜瓜果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "melon in syrup"
 msgid_plural "melon in syrup"
 msgstr[0] "糖渍甜瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "melon jam"
 msgid_plural "melon jam"
 msgstr[0] "甜瓜果酱"
@@ -87256,7 +87206,6 @@ msgstr[0] "甜瓜果酱"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mulberries in syrup"
 msgid_plural "mulberries in syrup"
 msgstr[0] "糖渍桑葚"
@@ -87264,7 +87213,6 @@ msgstr[0] "糖渍桑葚"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mulberry fruit leather"
 msgid_plural "mulberry fruit leather"
 msgstr[0] "桑葚果干"
@@ -87272,7 +87220,6 @@ msgstr[0] "桑葚果干"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. mulberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "mulberry jam"
 msgid_plural "mulberry jam"
 msgstr[0] "桑葚果酱"
@@ -87280,7 +87227,6 @@ msgstr[0] "桑葚果酱"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "nannyberries in syrup"
 msgid_plural "nannyberries in syrup"
 msgstr[0] "糖渍荚蒾果"
@@ -87288,14 +87234,12 @@ msgstr[0] "糖渍荚蒾果"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "nannyberry fruit leather"
 msgid_plural "nannyberry fruit leather"
 msgstr[0] "荚蒾果果干"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "nannyberry jam"
 msgid_plural "nannyberry jam"
 msgstr[0] "荚蒾果果酱"
@@ -87303,7 +87247,6 @@ msgstr[0] "荚蒾果果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "orange fruit leather"
 msgid_plural "orange fruit leather"
 msgstr[0] "橙子果干"
@@ -87311,7 +87254,6 @@ msgstr[0] "橙子果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "orange in syrup"
 msgid_plural "orange in syrup"
 msgstr[0] "糖渍橙子"
@@ -87319,7 +87261,6 @@ msgstr[0] "糖渍橙子"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. orange
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "orange jam"
 msgid_plural "orange jam"
 msgstr[0] "橙子果酱"
@@ -87327,7 +87268,6 @@ msgstr[0] "橙子果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "papaya fruit leather"
 msgid_plural "papaya fruit leather"
 msgstr[0] "木瓜果干"
@@ -87335,7 +87275,6 @@ msgstr[0] "木瓜果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "papaya in syrup"
 msgid_plural "papaya in syrup"
 msgstr[0] "糖渍木瓜"
@@ -87343,7 +87282,6 @@ msgstr[0] "糖渍木瓜"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. papaya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "papaya jam"
 msgid_plural "papaya jam"
 msgstr[0] "木瓜果酱"
@@ -87351,7 +87289,6 @@ msgstr[0] "木瓜果酱"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "passionfruit in syrup"
 msgid_plural "passionfruit in syrup"
 msgstr[0] "糖渍百香果"
@@ -87359,7 +87296,6 @@ msgstr[0] "糖渍百香果"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "passionfruit jam"
 msgid_plural "passionfruit jam"
 msgstr[0] "百香果果酱"
@@ -87367,7 +87303,6 @@ msgstr[0] "百香果果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. maracuya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "passionfruit leather"
 msgid_plural "passionfruit leather"
 msgstr[0] "百香果果干"
@@ -87375,7 +87310,6 @@ msgstr[0] "百香果果干"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "peach fruit leather"
 msgid_plural "peach fruit leather"
 msgstr[0] "桃子果干"
@@ -87383,7 +87317,6 @@ msgstr[0] "桃子果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "peach in syrup"
 msgid_plural "peach in syrup"
 msgstr[0] "糖渍桃子"
@@ -87391,7 +87324,6 @@ msgstr[0] "糖渍桃子"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. peach
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "peach jam"
 msgid_plural "peach jam"
 msgstr[0] "桃子果酱"
@@ -87405,7 +87337,6 @@ msgstr[0] "糖水黄桃"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pear fruit leather"
 msgid_plural "pear fruit leather"
 msgstr[0] "梨果干"
@@ -87413,14 +87344,12 @@ msgstr[0] "梨果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. pear
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pear in syrup"
 msgid_plural "pear in syrup"
 msgstr[0] "糖渍梨"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches pear
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pear jam"
 msgid_plural "pear jam"
 msgstr[0] "梨果酱"
@@ -87428,7 +87357,6 @@ msgstr[0] "梨果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pineapple fruit leather"
 msgid_plural "pineapple fruit leather"
 msgstr[0] "菠萝果干"
@@ -87436,7 +87364,6 @@ msgstr[0] "菠萝果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pineapple in syrup"
 msgid_plural "pineapple in syrup"
 msgstr[0] "糖渍菠萝"
@@ -87444,7 +87371,6 @@ msgstr[0] "糖渍菠萝"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches
 #. pineapple_chunks
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pineapple jam"
 msgid_plural "pineapple jam"
 msgstr[0] "菠萝果酱"
@@ -87452,7 +87378,6 @@ msgstr[0] "菠萝果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "plum fruit leather"
 msgid_plural "plum fruit leather"
 msgstr[0] "李子果干"
@@ -87460,7 +87385,6 @@ msgstr[0] "李子果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "plum in syrup"
 msgid_plural "plum in syrup"
 msgstr[0] "糖渍李子"
@@ -87468,7 +87392,6 @@ msgstr[0] "糖渍李子"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. plums
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "plum jam"
 msgid_plural "plum jam"
 msgstr[0] "李子果酱"
@@ -87476,7 +87399,6 @@ msgstr[0] "李子果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pomegranate fruit leather"
 msgid_plural "pomegranate fruit leather"
 msgstr[0] "石榴果干"
@@ -87484,7 +87406,6 @@ msgstr[0] "石榴果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pomegranate in syrup"
 msgid_plural "pomegranate in syrup"
 msgstr[0] "糖渍石榴"
@@ -87492,7 +87413,6 @@ msgstr[0] "糖渍石榴"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pomegranate jam"
 msgid_plural "pomegranate jam"
 msgstr[0] "石榴果酱"
@@ -87500,7 +87420,6 @@ msgstr[0] "石榴果酱"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pumpkin fruit leather"
 msgid_plural "pumpkin fruit leather"
 msgstr[0] "南瓜果干"
@@ -87508,14 +87427,12 @@ msgstr[0] "南瓜果干"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pumpkin in syrup"
 msgid_plural "pumpkin in syrup"
 msgstr[0] "糖渍南瓜"
 
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID matches pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "pumpkin jam"
 msgid_plural "pumpkin jam"
 msgstr[0] "南瓜果酱"
@@ -87529,7 +87446,6 @@ msgstr[0] "南瓜酵母面包"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "raspberries in syrup"
 msgid_plural "raspberries in syrup"
 msgstr[0] "糖渍覆盆子"
@@ -87537,7 +87453,6 @@ msgstr[0] "糖渍覆盆子"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "raspberry fruit leather"
 msgid_plural "raspberry fruit leather"
 msgstr[0] "覆盆子果干"
@@ -87545,7 +87460,6 @@ msgstr[0] "覆盆子果干"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. raspberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "raspberry jam"
 msgid_plural "raspberry jam"
 msgstr[0] "覆盆子果酱"
@@ -87553,7 +87467,6 @@ msgstr[0] "覆盆子果酱"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. m_stellatum_berries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated Solomon's seal"
 msgid_plural "rehydrated Solomon's seal"
 msgstr[0] "复水玉竹"
@@ -87562,7 +87475,6 @@ msgstr[0] "复水玉竹"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. irradiated_apple
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated apple"
 msgid_plural "rehydrated apple"
 msgstr[0] "复水苹果"
@@ -87570,7 +87482,6 @@ msgstr[0] "复水苹果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches apricot
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated apricot"
 msgid_plural "rehydrated apricot"
 msgstr[0] "复水杏"
@@ -87578,7 +87489,6 @@ msgstr[0] "复水杏"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches banana
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated banana"
 msgid_plural "rehydrated banana"
 msgstr[0] "复水香蕉"
@@ -87586,7 +87496,6 @@ msgstr[0] "复水香蕉"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blackberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated blackberry"
 msgid_plural "rehydrated blackberry"
 msgstr[0] "复水黑莓"
@@ -87594,7 +87503,6 @@ msgstr[0] "复水黑莓"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches blueberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated blueberry"
 msgid_plural "rehydrated blueberry"
 msgstr[0] "复水蓝莓"
@@ -87602,7 +87510,6 @@ msgstr[0] "复水蓝莓"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches cherries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated cherry"
 msgid_plural "rehydrated cherry"
 msgstr[0] "复水樱桃"
@@ -87610,7 +87517,6 @@ msgstr[0] "复水樱桃"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. chokeberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated chokeberries"
 msgid_plural "rehydrated chokeberries"
 msgstr[0] "复水野樱莓"
@@ -87618,7 +87524,6 @@ msgstr[0] "复水野樱莓"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. cholla_bud
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated cholla bud"
 msgid_plural "rehydrated cholla bud"
 msgstr[0] "复水仙人掌花蕾"
@@ -87626,7 +87531,6 @@ msgstr[0] "复水仙人掌花蕾"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches coconut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated coconut"
 msgid_plural "rehydrated coconut"
 msgstr[0] "复水椰子"
@@ -87634,7 +87538,6 @@ msgstr[0] "复水椰子"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches crabapple
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated crabapple"
 msgid_plural "rehydrated crabapple"
 msgstr[0] "复水海棠果"
@@ -87642,7 +87545,6 @@ msgstr[0] "复水海棠果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. cranberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated cranberry"
 msgid_plural "rehydrated cranberry"
 msgstr[0] "复水蔓越莓"
@@ -87650,7 +87552,6 @@ msgstr[0] "复水蔓越莓"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches elderberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated elderberry"
 msgid_plural "rehydrated elderberry"
 msgstr[0] "复水接骨木果"
@@ -87664,7 +87565,6 @@ msgstr[0] "水发果脯"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches grapes
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated grape"
 msgid_plural "rehydrated grape"
 msgstr[0] "复水葡萄"
@@ -87672,7 +87572,6 @@ msgstr[0] "复水葡萄"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches grapefruit
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated grapefruit"
 msgid_plural "rehydrated grapefruit"
 msgstr[0] "复水西柚"
@@ -87680,7 +87579,6 @@ msgstr[0] "复水西柚"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches guayaba
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated guava"
 msgid_plural "rehydrated guava"
 msgstr[0] "复水番石榴"
@@ -87688,7 +87586,6 @@ msgstr[0] "复水番石榴"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. hobbleberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated hobbleberry"
 msgid_plural "rehydrated hobbleberry"
 msgstr[0] "复水绊脚莓"
@@ -87696,7 +87593,6 @@ msgstr[0] "复水绊脚莓"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches huckleberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated huckleberry"
 msgid_plural "rehydrated huckleberry"
 msgstr[0] "复水越橘"
@@ -87704,7 +87600,6 @@ msgstr[0] "复水越橘"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. juice_pulp
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated juice pulp"
 msgid_plural "rehydrated juice pulp"
 msgstr[0] "复水果浆"
@@ -87712,14 +87607,12 @@ msgstr[0] "复水果浆"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches kiwi
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated kiwi"
 msgid_plural "rehydrated kiwi"
 msgstr[0] "复水猕猴桃"
 
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches lemon
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated lemon"
 msgid_plural "rehydrated lemon"
 msgstr[0] "复水柠檬"
@@ -87727,7 +87620,6 @@ msgstr[0] "复水柠檬"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches lulo
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated lulo"
 msgid_plural "rehydrated lulo"
 msgstr[0] "复水露露果"
@@ -87735,7 +87627,6 @@ msgstr[0] "复水露露果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mango
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated mango"
 msgid_plural "rehydrated mango"
 msgstr[0] "复水芒果"
@@ -87743,7 +87634,6 @@ msgstr[0] "复水芒果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. mayapple
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated mayapple"
 msgid_plural "rehydrated mayapple"
 msgstr[0] "复水美洲曼陀罗果"
@@ -87752,7 +87642,6 @@ msgstr[0] "复水美洲曼陀罗果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. melon_chunks
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated melon"
 msgid_plural "rehydrated melon"
 msgstr[0] "复水甜瓜"
@@ -87760,7 +87649,6 @@ msgstr[0] "复水甜瓜"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches mulberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated mulberry"
 msgid_plural "rehydrated mulberry"
 msgstr[0] "复水桑葚"
@@ -87768,7 +87656,6 @@ msgstr[0] "复水桑葚"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. nannyberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated nannyberries"
 msgid_plural "rehydrated nannyberries"
 msgstr[0] "复水荚蒾果"
@@ -87776,7 +87663,6 @@ msgstr[0] "复水荚蒾果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches orange
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated orange"
 msgid_plural "rehydrated orange"
 msgstr[0] "复水橙子"
@@ -87784,7 +87670,6 @@ msgstr[0] "复水橙子"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches papaya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated papaya"
 msgid_plural "rehydrated papaya"
 msgstr[0] "复水木瓜"
@@ -87792,7 +87677,6 @@ msgstr[0] "复水木瓜"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches maracuya
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated passionfruit"
 msgid_plural "rehydrated passionfruit"
 msgstr[0] "复水百香果"
@@ -87800,7 +87684,6 @@ msgstr[0] "复水百香果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches peach
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated peach"
 msgid_plural "rehydrated peach"
 msgstr[0] "复水桃子"
@@ -87808,7 +87691,6 @@ msgstr[0] "复水桃子"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pear
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated pear"
 msgid_plural "rehydrated pear"
 msgstr[0] "复水梨"
@@ -87816,7 +87698,6 @@ msgstr[0] "复水梨"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pineapple
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated pineapple"
 msgid_plural "rehydrated pineapple"
 msgstr[0] "复水菠萝"
@@ -87824,7 +87705,6 @@ msgstr[0] "复水菠萝"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches plums
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated plum"
 msgid_plural "rehydrated plum"
 msgstr[0] "复水李子"
@@ -87832,7 +87712,6 @@ msgstr[0] "复水李子"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches pomegranate
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated pomegranate"
 msgid_plural "rehydrated pomegranate"
 msgstr[0] "复水石榴"
@@ -87842,7 +87721,6 @@ msgstr[0] "复水石榴"
 #. ~ Conditional name for "rehydrated vegetable" when COMPONENT_ID matches
 #. pumpkin_cut
 #: data/json/items/comestibles/fruit_dishes.json data/json/items/comestibles/veggy_dishes.json
-#, fuzzy
 msgid "rehydrated pumpkin"
 msgid_plural "rehydrated pumpkin"
 msgstr[0] "复水南瓜"
@@ -87850,7 +87728,6 @@ msgstr[0] "复水南瓜"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches raspberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated raspberry"
 msgid_plural "rehydrated raspberry"
 msgstr[0] "复水覆盆子"
@@ -87858,7 +87735,6 @@ msgstr[0] "复水覆盆子"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated rose hip"
 msgid_plural "rehydrated rose hip"
 msgstr[0] "复水玫瑰果"
@@ -87866,7 +87742,6 @@ msgstr[0] "复水玫瑰果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches strawberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated strawberry"
 msgid_plural "rehydrated strawberry"
 msgstr[0] "复水草莓"
@@ -87874,7 +87749,6 @@ msgstr[0] "复水草莓"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. tupelo_fruit
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated tupelo fruit"
 msgid_plural "rehydrated tupelo fruit"
 msgstr[0] "复水蓝果木果"
@@ -87882,7 +87756,6 @@ msgstr[0] "复水蓝果木果"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID_SUBSTRING
 #. matches watermelon
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated watermelon"
 msgid_plural "rehydrated watermelon"
 msgstr[0] "复水西瓜"
@@ -87890,7 +87763,6 @@ msgstr[0] "复水西瓜"
 #. ~ Conditional name for "rehydrated fruit" when COMPONENT_ID matches
 #. wintergreen_berry
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rehydrated wintergreen berry"
 msgid_plural "rehydrated wintergreen berry"
 msgstr[0] "复水冬青莓"
@@ -87898,7 +87770,6 @@ msgstr[0] "复水冬青莓"
 #. ~ Conditional name for "fruit leather" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rose hip fruit leather"
 msgid_plural "rose hip fruit leather"
 msgstr[0] "玫瑰果果干"
@@ -87906,7 +87777,6 @@ msgstr[0] "玫瑰果果干"
 #. ~ Conditional name for "fruit jam" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rose hip jam"
 msgid_plural "rose hip jam"
 msgstr[0] "玫瑰果果酱"
@@ -87914,7 +87784,6 @@ msgstr[0] "玫瑰果果酱"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. rose_hips_cut
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "rose hips in syrup"
 msgid_plural "rose hips in syrup"
 msgstr[0] "糖渍玫瑰果"
@@ -87922,7 +87791,6 @@ msgstr[0] "糖渍玫瑰果"
 #. ~ Conditional name for "fruit in syrup" when COMPONENT_ID_SUBSTRING matches
 #. strawberries
 #: data/json/items/comestibles/fruit_dishes.json
-#, fuzzy
 msgid "strawberries in syrup"
 msgid_plural "strawberries in syrup"
 msgstr[0] "糖渍草莓"
@@ -150546,6 +150414,12 @@ msgid ""
 "Enables \"Rolling Strike\" technique.\n"
 "Lasts 1 second."
 msgstr ""
+"在移动时，你开始快速而流畅地双手转动你的长棍。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+10% 钝击伤害。\n"
+"解锁“回旋打击”技巧。\n"
+"持续 1 秒。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -150599,6 +150473,11 @@ msgid ""
 "+5% move speed.\n"
 "Lasts 3 seconds.  Stacks 2 times."
 msgstr ""
+"格挡住一次关键攻击将扭转战局。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+5% 移动速度。\n"
+"持续3秒。可叠加2层。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -150626,6 +150505,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Blocked damage reduced by 100% of Dexterity, +2 blocking effectiveness, +1 Dodge ability."
 msgstr ""
+"通过放弃进攻，专注于防御，你能够更好地保护自己。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 100% 敏捷值，+2 格挡效果，+1 闪避能力。"
 
 #. ~ Description of buff "Tai Chi" in martial art "Repulse the Monkey"
 #: data/json/martialarts.json
@@ -150637,6 +150520,11 @@ msgid ""
 "Accuracy increased by 20% of Perception, armor penetration increased by 50% of Perception.\n"
 "Lasts 2 seconds."
 msgstr ""
+"通过精准地调整你与对手的位置，你变得更为精准，并能绕过对手的防御。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"命中提升 20% 感知值，穿甲提升 50% 感知值。\n"
+"持续 2 秒。"
 
 #. ~ Description of buff "Brawling" in martial art "Wind-Up"
 #: data/json/martialarts.json
@@ -150645,6 +150533,9 @@ msgid ""
 "\n"
 "+1 accuracy.  Lasts 2 seconds.  Stacks 2 times"
 msgstr ""
+"花片刻酝酿你的挥击，可以让你对命中更有信心。\n"
+"\n"
+"+1 命中。持续 2 秒。可叠加 2 层。"
 
 #. ~ Description of buff "Tai Chi" in martial art "Cross Hands"
 #: data/json/martialarts.json
@@ -150658,6 +150549,13 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Lasts 3 seconds."
 msgstr ""
+"花片刻做好准备，你便能调动全身之力进行攻防。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+2 格挡效果，格挡伤害减免 50% 感知值。\n"
+"解锁“掌击”与“双掌击”技巧。\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"持续 3 秒。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -150714,6 +150612,12 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Armor penetration increased by 50% of Perception, blocked damage reduced by 100% of Perception."
 msgstr ""
+"警惕的目光审慎观察，\n"
+"衡量并展露你的技艺。\n"
+"熟能生巧。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"穿甲提升 50% 感知值，格挡伤害减免 100% 感知值。"
 
 #. ~ Buff name of martial art "Wing Chun"
 #. ~ Clause text "buff_wingchun_onhit" of UI widget
@@ -150892,6 +150796,11 @@ msgid ""
 "Armor penetration increased by 25% of Perception.\n"
 "Lasts 2 seconds.  Stacks 4 times."
 msgstr ""
+"每一次蛇击都比上一次更为痛彻。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"穿甲提升 25% 感知值。\n"
+"持续 2 秒。可叠加 4 层。"
 
 #. ~ Description of buff "Fior Di Battaglia" in martial art "Defense Break"
 #: data/json/martialarts.json
@@ -150903,6 +150812,12 @@ msgid ""
 "Enables \"Displace and Hook\" technique.\n"
 "Lasts 1 second.  Stacks 3 times."
 msgstr ""
+"每次成功格挡都会暴露对手防御中的破绽。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 命中。\n"
+"解锁“移步钩击”技巧。\n"
+"持续 1 秒。可叠加 3 层。"
 
 #. ~ Description of buff "Silat" in martial art "Silat Appraisal"
 #: data/json/martialarts.json
@@ -150914,6 +150829,11 @@ msgid ""
 "Accuracy increased by 15% of Dexterity.\n"
 "Lasts 2 seconds.  Stacks 3 times."
 msgstr ""
+"每次闪避一次攻击，你都会对对手的战斗风格有更多了解。这使你能对他们发动更精准的攻击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"命中提升 15% 敏捷值。\n"
+"持续 2 秒。可叠加 3 层。"
 
 #. ~ Description of buff "Zui Quan" in martial art "Drunken Dodging"
 #: data/json/martialarts.json
@@ -150982,6 +150902,11 @@ msgid ""
 "+1 accuracy, +1 blocking effectiveness, +5% critical hit chance.\n"
 "Lasts 4 seconds.  Stacks 3 times."
 msgstr ""
+"每条蛇都在等待完美的出击时机。在对手接近时瞄准，无情地攻击其弱点！\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 命中，+1 格挡效果，+5% 暴击几率。\n"
+"持续 4 秒。可叠加 3 层。"
 
 #. ~ Buff name of martial art "Niten Ichi-Ryu"
 #. ~ Clause text "buff_niten_onattack" of UI widget
@@ -151043,6 +150968,11 @@ msgid ""
 "+1 block attempt.\n"
 "Lasts 5 seconds."
 msgstr ""
+"正式获胜，心神澄明，得以专注于接下来的行动。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 格挡尝试次数。\n"
+"持续 5 秒。"
 
 #. ~ Buff name of martial art "Debug Mastery"
 #: data/json/martialarts.json
@@ -151058,6 +150988,10 @@ msgid ""
 "Effects lost if stunned or staggered.\n"
 "Critical hit chance increased by 100% of Dexterity."
 msgstr ""
+"直击要害，瞬间击倒你的敌人！\n"
+"\n"
+"若眩晕或失衡，则效果消失。\n"
+"暴击几率提升 100% 敏捷值。"
 
 #. ~ Buff name of martial art "Medieval Swordsmanship"
 #. ~ Clause text "buff_swordsmanship_onpause" of UI widget
@@ -151076,6 +151010,11 @@ msgid ""
 "+5% damage.\n"
 "Lasts 1 second.  Stacks 3 times."
 msgstr ""
+"命中或失误，都不过是这场舞蹈的一部分！而最精彩的部分即将开始！\n"
+"\n"
+"若眩晕或失衡，则效果消失。\n"
+"+5% 伤害。\n"
+"持续 1 秒。可叠加 3 层。"
 
 #. ~ Buff name of martial art "Aikido"
 #. ~ Clause text "buff_aikido_static2" of UI widget
@@ -151108,6 +151047,10 @@ msgid ""
 "+1 Dodge ability.\n"
 "Lasts 2 seconds."
 msgstr ""
+"正如猫一般，你迅捷、灵活，难以被锁定。\n"
+"\n"
+"+1 闪避能力。\n"
+"持续 2 秒。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -151176,6 +151119,11 @@ msgid ""
 "+1 block attempt, +1 dodge attempt, blocked damage reduced by 50% of Strength, +10% move speed.\n"
 "Lasts 2 seconds."
 msgstr ""
+"成功命中使你能完美调整自身位置，以最大化防御多名对手。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 格挡尝试次数，+1 闪避尝试次数，格挡伤害减免 50% 力量值，+10% 移动速度。\n"
+"持续 2 秒。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -151214,6 +151162,11 @@ msgid ""
 "+10% damage.\n"
 "Lasts 3 seconds."
 msgstr ""
+"生命与战斗皆如圆环。一次攻击引出反击，再引出下一次攻击。力求完成这个循环。\n"
+"\n"
+"若眩晕，则效果消失。\n"
+"+10% 伤害。\n"
+"持续 3 秒。"
 
 #. ~ Buff name of martial art "Debug Mastery"
 #: data/json/martialarts.json
@@ -151256,6 +151209,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+2.0 Dodging skill."
 msgstr ""
+"如优雅的鹤一般，你非常擅长规避危险。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+2.0 闪避技能。"
 
 #. ~ Buff name of martial art "Ninjutsu"
 #. ~ Clause text "buff_ninjutsu_onattack" of UI widget
@@ -151296,6 +151253,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+2 dodge attempts."
 msgstr ""
+"鹤形拳大师能轻松闪避多个对手的攻击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+2 闪避尝试次数。"
 
 #. ~ Description of martial art "Fior Di Battaglia"
 #: data/json/martialarts.json
@@ -151350,6 +151311,12 @@ msgid ""
 "Enables \"Crane Kick\" and \"Crane Strike\" techniques.\n"
 "Lasts 3 seconds."
 msgstr ""
+"如鹤一般，你迅速避开危险并予以反击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 命中，+1 闪避能力。\n"
+"解锁“鹤踢”与“鹤击”技巧。\n"
+"持续 3 秒。"
 
 #. ~ Description of buff "Ninjutsu" in martial art "Momentum Shift"
 #: data/json/martialarts.json
@@ -151361,6 +151328,11 @@ msgid ""
 "+1 Dodge ability, accuracy increased by 20% of Dexterity.\n"
 "Lasts 1 second."
 msgstr ""
+"忍者经受过训练，身手极其敏捷，移动迅捷。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 闪避能力，命中提升 20% 敏捷值。\n"
+"持续 1 秒。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -151468,7 +151440,7 @@ msgstr "招架"
 #. ~ Description of martial art "Silat"
 #: data/json/martialarts.json
 msgid "Pencak Silat, of Indonesian origin, is a fighting style that covers the use of short blades and batons.  Fighters stay low and mobile to avoid attacks, then unleash deadly critical hits."
-msgstr ""
+msgstr "源自印度尼西亚的潘查希拉武术，是一种涵盖短刀与短棍使用的格斗流派。习武者压低身形、保持机动以规避攻击，而后施以致命暴击。"
 
 #. ~ Buff name of martial art "Judo"
 #. ~ Clause text "buff_judo_ondodge" of UI widget "ma_buff_indicator_template"
@@ -151556,6 +151528,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Armor penetration increased by 50% of Strength."
 msgstr ""
+"滑步身法强化了你攻击的粉碎性连贯效果。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"穿甲提升 50% 力量值。"
 
 #. ~ Buff name of martial art "Snake Kung Fu"
 #. ~ Clause text "buff_snake_onhit" of UI widget "ma_buff_indicator_template"
@@ -151736,6 +151712,12 @@ msgid ""
 "Enables \"Close Combat\" buff.\n"
 "Lasts 1 second."
 msgstr ""
+"敌人在防御中暴露出了破绽。\n"
+"\n"
+"若眩晕或失衡，则效果消失。\n"
+"+10% 伤害。\n"
+"解锁“近身格斗”增益。\n"
+"持续 1 秒。"
 
 #. ~ Description of buff "Niten Ichi-Ryu" in martial art "Stillness"
 #: data/json/martialarts.json
@@ -151769,6 +151751,11 @@ msgid ""
 "+1 Dodge ability,\n"
 "+1 Dodge attempt."
 msgstr ""
+"进攻的步伐让你在寻觅战机时保持机动与重心稳固。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 闪避能力，\n"
+"+1 闪避尝试次数。"
 
 #. ~ Description of buff "Fior Di Battaglia" in martial art "Tactical
 #. Feinting"
@@ -151780,6 +151767,11 @@ msgid ""
 "Enables \"Hook and Drag\" technique.\n"
 "Lasts 1 second."
 msgstr ""
+"他们中了你的佯攻！\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"解锁“钩绊拖拽”技巧。\n"
+"持续 1 秒。"
 
 #. ~ Description of martial art "Tai Chi"
 #: data/json/martialarts.json
@@ -151796,6 +151788,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 block attempt, blocked damage reduced by 50% of Strength."
 msgstr ""
+"凭借骑士精神与警惕之心，你持剑的防御能力得以提升。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 格挡尝试次数，格挡伤害减免 50% 力量值。"
 
 #. ~ Description of buff "Wing Chun" in martial art "Biu Ji"
 #: data/json/martialarts.json
@@ -151838,6 +151834,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+25% critical hit chance."
 msgstr ""
+"对真正的忍者而言，第一击与最后一击本为一体。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+25% 暴击几率。"
 
 #. ~ Buff name of martial art "Taekwondo"
 #. ~ Clause text "buff_taekwondo_static2" of UI widget
@@ -151855,6 +151855,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Blocked damage reduced by 50% of Strength."
 msgstr ""
+"使用腿部攻击使你的双手得以空出用于更好的防御。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 50% 力量值。"
 
 #. ~ Buff name of martial art "Barbaran Montante"
 #. ~ Clause text "buff_barbaran_onpause" of UI widget
@@ -151884,7 +151888,7 @@ msgstr ""
 #. ~ Buff name of martial art "Brawling"
 #: data/json/martialarts.json
 msgid "Wind-Up"
-msgstr ""
+msgstr "蓄力"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -151904,6 +151908,10 @@ msgid ""
 "+1 Dodge ability.\n"
 "Lasts 1 second.  Stacks 2 times."
 msgstr ""
+"几步迅捷的移动，便能完全改变你的方向，更轻松地闪避攻击。\n"
+"\n"
+"+1 闪避能力。\n"
+"持续 1 秒。可叠加 2 层。"
 
 #. ~ Description of buff "Debug Mastery" in martial art "On Fire"
 #: data/json/martialarts.json
@@ -151953,6 +151961,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 block attempt, blocked damage reduced by 100% Perception."
 msgstr ""
+"你专注于防御，预判对手的攻击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 格挡尝试次数，格挡伤害减免 100% 感知值。"
 
 #. ~ Description of buff "Snake Kung Fu" in martial art "Snake's Sight"
 #: data/json/martialarts.json
@@ -151963,6 +151975,11 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Accuracy increased by 25% of Perception but decreased by 25% of Dexterity, bash damage increased by 75% of Perception but decreased by 75% of Strength."
 msgstr ""
+"你耐心沉稳，知晓攻击对手何处能取得最佳效果。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"命中提升 25% 感知值，但降低 25% 敏捷值；\n"
+"钝击伤害提升 75% 感知值，但降低 75% 力量值。"
 
 #. ~ Description of buff "Eskrima" in martial art "Eskrima Stance"
 #: data/json/martialarts.json
@@ -151972,6 +151989,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+2 accuracy."
 msgstr ""
+"你擅长最大限度地发挥武器的效能。所谓“武器”或许是个相当主观的概念。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+2 命中。"
 
 #. ~ Description of buff "Fior Di Battaglia" in martial art "Stand Your
 #. Ground"
@@ -151983,6 +152004,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+2 blocking effectiveness, +1 block attempt, -1 Dodge ability, blocked damage reduced by 50% of Strength."
 msgstr ""
+"你坚毅不屈，面对任何威胁都绝不退让。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+2 格挡效果，+1 格挡尝试次数，-1 闪避能力，格挡伤害减免 50% 力量值。"
 
 #. ~ Initiate message of martial art "Krav Maga"
 #: data/json/martialarts.json
@@ -152028,6 +152053,12 @@ msgid ""
 "Enables \"Spin Kick\" and \"Sweep Kick\" techniques.\n"
 "Lasts 3 seconds."
 msgstr ""
+"你在移动中能感受到那股节奏。你更难被击中，踢击也更加惊人！\n"
+"\n"
+"若眩晕或失衡，则效果消失。\n"
+"+1 闪避能力。\n"
+"解锁“旋转踢”与“扫堂腿”技巧。\n"
+"持续 3 秒。"
 
 #. ~ Description of buff "Eskrima" in martial art "Eskrima Combination"
 #: data/json/martialarts.json
@@ -152116,6 +152147,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Bash damage increased by 75% of Dexterity but decreased by 75% of Strength."
 msgstr ""
+"你以迅捷的连续攻击压垮对手，使其更难防御。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"钝击伤害提升 75% 敏捷值，但降低 75% 力量值。"
 
 #. ~ Initiate message of martial art "Force unarmed"
 #: data/json/martialarts.json
@@ -152164,6 +152199,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Dodging skill increased by 25% of Perception, blocked damage reduced by 50% of Perception."
 msgstr ""
+"你对平衡与技巧有了更深的理解。这让你有更好的机会避开对手的攻击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"闪避技能提升 25% 感知值，格挡伤害减免 50% 感知值。"
 
 #. ~ Description of buff "Kickboxing" in martial art "Kick stance"
 #: data/json/martialarts.json
@@ -152175,6 +152214,11 @@ msgid ""
 "Blocked damage reduced by 25% of Strength.\n"
 "+1 Dodge ability"
 msgstr ""
+"你摆出了一种提升机动性与稳定性的架势。双手置于格挡位，肘部前伸以保护自身。\n"
+"\n"
+"若眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 25% 力量值。\n"
+"+1 闪避能力"
 
 #. ~ Description of buff "Sōjutsu" in martial art "Superior Positioning"
 #: data/json/martialarts.json
@@ -152200,6 +152244,11 @@ msgid ""
 "+20% damage.\n"
 "Lasts 1 second."
 msgstr ""
+"对手正被你置于掌控之中！\n"
+"\n"
+"若眩晕或失衡，则效果消失。\n"
+"+20% 伤害。\n"
+"持续 1 秒。"
 
 #. ~ Initiate message of martial art "Barbaran Montante"
 #: data/json/martialarts.json
@@ -152216,6 +152265,11 @@ msgid ""
 "Armor penetration increased by 100% of Perception.\n"
 "Lasts 1 second."
 msgstr ""
+"你击中了弱点！你的下一次攻击将格外致命。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"穿甲提升 100% 感知值。\n"
+"持续 1 秒。"
 
 #. ~ Initiate message of martial art "Fior Di Battaglia"
 #: data/json/martialarts.json
@@ -152251,6 +152305,11 @@ msgid ""
 "+1 Dodge ability.\n"
 "Lasts 1 second.  Stacks 2 times."
 msgstr ""
+"你在移动中通过摇晃和闪避，让自己更难被击中。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 闪避能力。\n"
+"持续 1 秒。可叠加 2 层。"
 
 #. ~ Initiate message of martial art "Fencing"
 #: data/json/martialarts.json
@@ -152267,6 +152326,11 @@ msgid ""
 "Prevents \"High Round Strike\" technique.\n"
 "Lasts 2 seconds."
 msgstr ""
+"你移动了，抵消了“坚守阵地”的效果！\n"
+"\n"
+"-2 格挡效果，-1 格挡尝试次数，+1 闪避能力，格挡伤害增加 50% 力量值。\n"
+"禁用“高弧旋击”技巧。\n"
+"持续 2 秒。"
 
 #. ~ Description of buff "Capoeira" in martial art "Capoeira Stance"
 #: data/json/martialarts.json
@@ -152276,6 +152340,10 @@ msgid ""
 "Effects lost if stunned or staggered.\n"
 "+1 Dodge ability, +1 dodge attempt."
 msgstr ""
+"你执行金伽步法时从未停止移动。这让你在战斗中极为灵活。\n"
+"\n"
+"若眩晕或失衡，则效果消失。\n"
+"+1 闪避能力，+1 闪避尝试次数。"
 
 #. ~ Description of buff "Medieval Swordsmanship" in martial art "Mastercut"
 #: data/json/martialarts.json
@@ -152310,6 +152378,11 @@ msgid ""
 "Effects lost if stunned.\n"
 "Accuracy increased by 25% of Intelligence but decreased by 25% of Dexterity, bash damage increased by 75% of Intelligence but decreased by 75% of Strength."
 msgstr ""
+"你提前规划攻击，依靠直觉而非速度来确保精准命中。\n"
+"\n"
+"若眩晕，则效果消失。\n"
+"命中提升 25% 智力值，但降低 25% 敏捷值；\n"
+"钝击伤害提升 75% 智力值，但降低 75% 力量值。"
 
 #. ~ Initiate message of martial art "Bōjutsu"
 #: data/json/martialarts.json
@@ -152326,6 +152399,10 @@ msgid ""
 "Accuracy increased by 15% of Strength, armor penetration increased by 50% of Strength.\n"
 "Lasts 1 second."
 msgstr ""
+"你为最终粉碎性一击做好准备。\n"
+"\n"
+"命中提升 15% 力量值，穿甲提升 50% 力量值。\n"
+"持续 1 秒。"
 
 #. ~ Initiate message of martial art "Sōjutsu"
 #: data/json/martialarts.json
@@ -152367,6 +152444,11 @@ msgid ""
 "+5% critical hit chance.\n"
 "Lasts 1 second."
 msgstr ""
+"你压低身形移动，使敌人更难以防御你的攻击。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+5% 暴击几率。\n"
+"持续 1 秒。"
 
 #. ~ Description of buff "Barbaran Montante" in martial art "Ricasso Step"
 #: data/json/martialarts.json
@@ -152378,6 +152460,11 @@ msgid ""
 "Blocked damage reduced by 40% of Strength.\n"
 "Lasts 3 seconds.  Stacks 3 times."
 msgstr ""
+"你在步伐中切换或稳固握持方式，以辅助格挡。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 40% 力量值。\n"
+"持续 3 秒。可叠加 3 层。"
 
 #. ~ Description of buff "Dragon Kung Fu" in martial art "Dragon Power"
 #: data/json/martialarts.json
@@ -152389,6 +152476,11 @@ msgid ""
 "+2 blocking effectiveness, blocked damage reduced by 100% of Intelligence, +1 Dodge ability.\n"
 "Lasts 2 seconds."
 msgstr ""
+"你花片刻反思过往与未来的战斗。这份洞见将护佑你免受伤害。\n"
+"\n"
+"若眩晕，则效果消失。\n"
+"+2 格挡效果，格挡伤害减免 100% 智力值，+1 闪避能力。\n"
+"持续 2 秒。"
 
 #. ~ Initiate message of martial art "Medieval Swordsmanship"
 #: data/json/martialarts.json
@@ -152408,6 +152500,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 dodge attempt."
 msgstr ""
+"你在战斗中尽可能保持放松，以获得更多闪避机会。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 闪避尝试次数。"
 
 #. ~ Description of martial art "Brawling"
 #: data/json/martialarts.json
@@ -152451,6 +152547,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+33% damage when not using a weapon."
 msgstr ""
+"如果你手中空无一物，你的攻击将会更强。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"不持武器时，伤害 +33%。"
 
 #. ~ Description of buff "Crane Kung Fu" in martial art "Crane's Precision"
 #: data/json/martialarts.json
@@ -152461,6 +152561,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Bash damage increased by 75% of Dexterity but decreased by 75% of Strength."
 msgstr ""
+"你的攻击以速度与精准直击对手弱点，而非依赖蛮力。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"钝击伤害提升 75% 敏捷值，但降低 75% 力量值。"
 
 #. ~ Description of buff "Fencing" in martial art "Remise"
 #: data/json/martialarts.json
@@ -152506,6 +152610,11 @@ msgid ""
 "+1 accuracy.\n"
 "Lasts 1 second."
 msgstr ""
+"格挡后，你的下一次攻击将更容易命中目标。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 命中。\n"
+"持续 1 秒。"
 
 #. ~ Description of buff "Karate" in martial art "Karate Stance"
 #: data/json/martialarts.json
@@ -152515,6 +152624,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+2 accuracy."
 msgstr ""
+"你务实直接的架势使你攻击更加精准。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+2 命中。"
 
 #. ~ Description of buff "Wing Chun" in martial art "Chain Punch"
 #: data/json/martialarts.json
@@ -152539,6 +152652,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Blocked damage reduced by 50% of Dexterity."
 msgstr ""
+"你的侧身架势降低了你在战斗中被击中的几率。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"格挡伤害减免 50% 敏捷值。"
 
 #. ~ Description of buff "Ninjutsu" in martial art "Escape Plan"
 #: data/json/martialarts.json
@@ -152562,6 +152679,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "Melee and unarmed attacks generate 0 noise, moving generates 1/2 as much noise."
 msgstr ""
+"你的训练使你攻击时无声，移动时噪音减半。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"近战与徒手攻击不产生噪音，移动产生一半噪音。"
 
 #. ~ Description of buff "Sōjutsu" in martial art "Sōjutsu Stance"
 #: data/json/martialarts.json
@@ -152571,6 +152692,10 @@ msgid ""
 "Effects lost if downed, stunned, or staggered.\n"
 "+1 block attempt, +2 blocking effectiveness."
 msgstr ""
+"你的训练使你在使用长矛时获得更强的防御能力。\n"
+"\n"
+"若倒地、眩晕或失衡，则效果消失。\n"
+"+1 格挡尝试次数，+2 格挡效果。"
 
 #. ~ Description of buff "Krav Maga" in martial art "Krav Maga Stance"
 #: data/json/martialarts.json
@@ -152580,6 +152705,10 @@ msgid ""
 "Effects lost if stunned, or staggered.\n"
 "+1 accuracy, +1 block attempt."
 msgstr ""
+"你的训练使你更容易命中目标并应对多个对手。\n"
+"\n"
+"若眩晕或失衡，则效果消失。\n"
+"+1 命中，+1 格挡尝试次数。"
 
 #. ~ Name of martial art
 #: data/json/martialarts.json
@@ -152648,6 +152777,10 @@ msgid ""
 "+1 bash, cut, and stab armor.\n"
 "Lasts 4 turns.  Stacks 3 times."
 msgstr ""
+"调整架势以最优方式偏转来袭攻击。\n"
+"\n"
+"+1 钝击、切割与穿刺护甲。\n"
+"持续 4 回合。可叠加 3 层。"
 
 #. ~ Description of buff "Bionic Combatives" in martial art "Optimization"
 #: data/json/martialarts_fictional.json
@@ -152658,6 +152791,10 @@ msgid ""
 "+1 accuracy, +15% damage.\n"
 "Lasts 3 turns.  Stacks 3 times."
 msgstr ""
+"应用击败对手所获得的战斗数据。\n"
+"\n"
+"+1 命中，+15% 伤害。\n"
+"持续 3 回合。可叠加 3 层。"
 
 #. ~ Description of buff "Bionic Combatives" in martial art "CQC Program
 #. Alpha"
@@ -152667,6 +152804,9 @@ msgid ""
 "\n"
 "+1 block attempts, +1 accuracy."
 msgstr ""
+"以有条不紊的精准度进行攻防。\n"
+"\n"
+"+1 格挡尝试次数，+1 命中。"
 
 #. ~ Initiate message of martial art "Bionic Combatives"
 #: data/json/martialarts_fictional.json
@@ -152696,7 +152836,7 @@ msgstr "生化格斗术"
 #. ~ Buff name of martial art "Bionic Combatives"
 #: data/json/martialarts_fictional.json
 msgid "CQC Program Alpha"
-msgstr ""
+msgstr "近战格斗程序 Alpha"
 
 #. ~ Martial technique name
 #: data/json/martialarts_fictional.json data/json/techniques.json
@@ -152723,7 +152863,7 @@ msgstr "算法优化"
 #. ~ Buff name of martial art "Bionic Combatives"
 #: data/json/martialarts_fictional.json
 msgid "Reactive Defense"
-msgstr ""
+msgstr "反应式防御"
 
 #. ~ Message of martial technique "Biojutsu Impale"
 #: data/json/martialarts_fictional.json
@@ -154897,13 +155037,13 @@ msgstr "%1$s挥动枪刺猛地刺中了你的%2$s！"
 #: data/json/monster_special_attacks/feral_weapon_attacks.json
 #, c-format
 msgid "%1$s slashes <npcname>'s %2$s!"
-msgstr ""
+msgstr "%1$s 斩击了 <npcname> 的 %2$s！"
 
 #. ~ Monster attack "feral_weapon_makeshift_machete" message
 #: data/json/monster_special_attacks/feral_weapon_attacks.json
 #, c-format
 msgid "%1$s slashes your %2$s!"
-msgstr ""
+msgstr "%1$s 斩击了你的 %2$s！"
 
 #. ~ Monster attack "feral_unarmed" message
 #: data/json/monster_special_attacks/feral_weapon_attacks.json
@@ -155366,13 +155506,13 @@ msgstr "%1$s试图蛰刺你的%2$s，但没能穿透护甲。"
 #: data/json/monster_special_attacks/monster_attacks.json
 #, c-format
 msgid "%1$s sinks its fangs into <npcname>!"
-msgstr ""
+msgstr "%1$s 将尖牙咬入了 <npcname>！"
 
 #. ~ Monster attack "spider_bite" message
 #: data/json/monster_special_attacks/monster_attacks.json
 #, c-format
 msgid "%1$s sinks its fangs into your %2$s!"
-msgstr ""
+msgstr "%1$s 将尖牙咬入了你的 %2$s！"
 
 #. ~ Monster attack "slam" message
 #: data/json/monster_special_attacks/monster_attacks.json
@@ -155579,7 +155719,7 @@ msgstr "%1$s试图刺击 <npcname> ，但是没能穿透护甲！"
 #: data/json/monster_special_attacks/monster_attacks.json
 #, c-format
 msgid "%1$s tries to bite <npcname>, but it fails to penetrate their armor."
-msgstr ""
+msgstr "%1$s 试图咬 <npcname>，但未能穿透其护甲。"
 
 #. ~ Monster attack "bite_grab" message
 #. ~ Monster attack "mosquito_bite" message
@@ -155612,7 +155752,7 @@ msgstr "%1$s试图刺击你的%2$s，但没能穿透你的护甲。"
 #: data/json/monster_special_attacks/monster_attacks.json
 #, c-format
 msgid "%1$s tries to bite your %2$s, but it fails to penetrate your armor."
-msgstr ""
+msgstr "%1$s 试图咬你的 %2$s，但未能穿透你的护甲。"
 
 #. ~ Monster attack "scratch" message
 #. ~ Monster attack "scratch_humanoid" message
@@ -156798,7 +156938,7 @@ msgstr "柴薪丧尸死亡。"
 #. ~ Description of "molotov cocktail"
 #: data/json/monster_special_attacks/monster_gun.json
 msgid "A bottle of flammable liquid with a flaming rag stoppered in its neck."
-msgstr ""
+msgstr "一瓶易燃液体，瓶颈塞着燃烧的布条。"
 
 #. ~ Description of gun "mad militias' rifle"
 #. ~ Description of "mad militias' rifle"
@@ -157075,22 +157215,22 @@ msgstr "制造一些噪音。"
 #. ~ Spell name
 #: data/json/monster_special_attacks/spells.json data/json/mutations/mutation_spells.json
 msgid "Charge"
-msgstr ""
+msgstr "冲锋"
 
 #. ~ Description of spell "Charge"
 #: data/json/monster_special_attacks/spells.json data/json/mutations/mutation_spells.json
 msgid "Charge toward an enemy and attack."
-msgstr ""
+msgstr "向敌人冲锋并发动攻击。"
 
 #. ~ Spell name
 #: data/json/monster_special_attacks/spells.json data/json/mutations/mutation_spells.json
 msgid "Charging Attack"
-msgstr ""
+msgstr "冲锋攻击"
 
 #. ~ Spell name
 #: data/json/monster_special_attacks/spells.json data/json/mutations/mutation_spells.json
 msgid "Charging Knockback"
-msgstr ""
+msgstr "冲锋击退"
 
 #. ~ Description of spell "flatlander attack"
 #: data/json/monster_special_attacks/spells.json
@@ -157545,7 +157685,7 @@ msgstr "%s发出震耳欲聋的尖叫声。"
 #: data/json/monster_special_attacks/spells.json
 #, c-format
 msgid "The %s strikes!"
-msgstr ""
+msgstr "%s 发动了攻击！"
 
 #. ~ Message in effect in EoC "EOC_hive_raptor_spawn"
 #: data/json/monster_special_attacks/spells.json
@@ -157571,7 +157711,7 @@ msgstr "<npc_name>凝视着你，你感到一阵战栗。"
 #. ~ Description of spell "Charging Attack"
 #: data/json/monster_special_attacks/spells.json data/json/mutations/mutation_spells.json
 msgid "The attack procced by spell_charge."
-msgstr ""
+msgstr "由法术充能触发的攻击。"
 
 #. ~ Player message in nested effect in then statement in nested effect in
 #. else statement in nested effect in else statement in nested effect in else
@@ -157613,7 +157753,7 @@ msgstr "正在孵化的寄生蜂幼虫逃离宿主。"
 #. ~ Description of spell "Charging Knockback"
 #: data/json/monster_special_attacks/spells.json
 msgid "The knockback procced by spell_charge."
-msgstr ""
+msgstr "由法术充能触发的击退。"
 
 #. ~ Player sees monster spawns in effect in EoC "EOC_cellar_spider_leg"
 #: data/json/monster_special_attacks/spells.json
@@ -159110,7 +159250,7 @@ msgstr[0] "黄色雏鸟"
 #. ~ Description of monster "berserk cop"
 #: data/json/monsters/civilians.json
 msgid "Gun in hand, this police officer is determined to make a last stand against the horde.  Tattered gear and an unsteady gait suggest they're not all there anymore."
-msgstr ""
+msgstr "持枪在手，这位警官决心与尸群做最后的抵抗。破烂的装备和不稳的脚步表明，他们已神志不清。"
 
 #. ~ Description of special attack of monster "berserk cop"
 #: data/json/monsters/civilians.json
@@ -159120,63 +159260,63 @@ msgstr "警官用手中的格洛克 22进行了射击！"
 #. ~ Description of monster "catatonic victim"
 #: data/json/monsters/civilians.json
 msgid "This person is either one of the billions whose minds were shattered by the Cataclysm, or they have since experienced something that has left them in a similar state.  They remain still, barely breathing, and do not react in any way to their surroundings."
-msgstr ""
+msgstr "此人或是大灾变中数十亿心智被粉碎者之一，或是此后经历了某种使其陷入类似状态的遭遇。他们纹丝不动，呼吸微弱，对周围环境毫无反应。"
 
 #. ~ Description of monster "frenzied victim"
 #: data/json/monsters/civilians.json
 msgid "This person seems determined to fight off the undead hordes, but they won't calm down.  Something has broken in their brain, leaving them locked in a permanent state of terrified rage."
-msgstr ""
+msgstr "此人似乎决心击退亡灵大军，但无法平静下来。他们大脑中似乎有什么东西已经崩溃，使其陷入一种永久的恐惧狂怒状态。"
 
 #. ~ Description of monster "bedridden victim"
 #: data/json/monsters/civilians.json
 msgid "Wheezing softly, this person is suffering from some condition that would have required round the clock care before the Cataclysm.  There is nothing that can be done for them now."
-msgstr ""
+msgstr "这个人发出轻微的喘息声，正饱受某种疾病的折磨——这种病在大灾变前本需要全天候的护理。如今已无能为力。"
 
 #. ~ Description of monster "terrified victim"
 #: data/json/monsters/civilians.json
 msgid "When the Cataclysm struck, it broke something in a lot of people that could never be fixed.  Most went berserk, picking up whatever weapon was at hand and attacking their fellow man, but some, like this unfortunate individual, became trapped in a permanent state of senseless terror."
-msgstr ""
+msgstr "大灾变降临时，很多人的内心被彻底摧毁，永远无法修复。大多数人陷入狂暴，抓起手边任何武器攻击同类，但也有一些不幸的人，如同这个可怜的家伙，陷入了永恒的、无意义的恐惧之中。"
 
 #. ~ Description of monster "despondent victim"
 #: data/json/monsters/civilians.json
 msgid "When the Cataclysm struck, it broke something in a lot of people that could never be fixed.  This unfortunate wanders the wreckage of the world, calling out mindlessly for children they will never find."
-msgstr ""
+msgstr "大灾变降临时，很多人的内心被彻底摧毁，永远无法修复。这个不幸的人在世界的废墟中游荡，无意识地呼唤着他们永远也找不到的孩子。"
 
 #. ~ Monster name
 #: data/json/monsters/civilians.json
 msgid "bedridden victim"
 msgid_plural "bedridden victims"
-msgstr[0] ""
+msgstr[0] "卧床不起的受害者"
 
 #. ~ Monster name
 #: data/json/monsters/civilians.json
 msgid "berserk cop"
 msgid_plural "berserk cops"
-msgstr[0] ""
+msgstr[0] "狂暴警察"
 
 #. ~ Monster name
 #: data/json/monsters/civilians.json
 msgid "catatonic victim"
 msgid_plural "catatonic victims"
-msgstr[0] ""
+msgstr[0] "僵直受害者"
 
 #. ~ Monster name
 #: data/json/monsters/civilians.json
 msgid "despondent victim"
 msgid_plural "despondent victims"
-msgstr[0] ""
+msgstr[0] "绝望受害者"
 
 #. ~ Monster name
 #: data/json/monsters/civilians.json
 msgid "frenzied victim"
 msgid_plural "frenzied victims"
-msgstr[0] ""
+msgstr[0] "狂暴受害者"
 
 #. ~ Monster name
 #: data/json/monsters/civilians.json
 msgid "terrified victim"
 msgid_plural "terrified victims"
-msgstr[0] ""
+msgstr[0] "惊恐受害者"
 
 #. ~ Description of monster "prototype cyborg"
 #: data/json/monsters/cyborgs.json
@@ -159734,7 +159874,7 @@ msgstr[0] "疯人技工"
 #: data/json/monsters/feral_humans.json
 msgid "feral militia"
 msgid_plural "feral militia"
-msgstr[0] ""
+msgstr[0] "狂暴民兵"
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
@@ -160869,7 +161009,7 @@ msgstr "一具曾是人类的尸体，现在完全变成了怪物。真菌从它
 #: data/json/monsters/fungus_zombie.json
 #, c-format
 msgid "The %s bursts, releasing a cloud of spores."
-msgstr ""
+msgstr "%s 爆裂开来，释放出一团孢子。"
 
 #. ~ Description of monster "spore host"
 #: data/json/monsters/fungus_zombie.json
@@ -160939,7 +161079,7 @@ msgstr "透过一缕真菌孢子，一只小野兽奋力从这个可怜虫的腹
 #. ~ Description of monster "truffle pig"
 #: data/json/monsters/fungus_zombie.json
 msgid "What was once a pig is now covered in black mold.  Its eyes have been eaten away, but its nose still twitches and sniffs the air, and the tumorous fungal growth riddling its body make for formidable armor.  Its belly is worryingly distended."
-msgstr ""
+msgstr "这头曾经是猪的生物如今覆盖着黑色霉菌。它的眼睛已被侵蚀殆尽，但鼻子仍在抽动嗅闻着空气，遍布其身体的肿瘤状真菌生长物构成了坚固的护甲。它的腹部异常膨胀，令人担忧。"
 
 #. ~ Description of monster "bloated fungal zombie"
 #: data/json/monsters/fungus_zombie.json
@@ -161094,7 +161234,7 @@ msgstr "%s喷出一团孢子！"
 #: data/json/monsters/fungus_zombie.json
 msgid "truffle pig"
 msgid_plural "truffle pigs"
-msgstr[0] ""
+msgstr[0] "松露猪"
 
 #. ~ Monster message of special attack of monster "unstable fire ant"
 #: data/json/monsters/insect_spider.json
@@ -161240,7 +161380,7 @@ msgstr "一只更加庞大的巨型蜈蚣，尾部卷起并保护着一大堆卵
 #. ~ Description of monster "giant mosquito"
 #: data/json/monsters/insect_spider.json
 msgid "A giant mutant mosquito with a spindly body, it flutters erratically to keep its blood-swollen abdomen aloft.  Its face is dominated by a long, spear-tipped proboscis."
-msgstr ""
+msgstr "一只体型巨大的变异蚊子，身体细长，不规则地振翅以维持其因吸血而肿胀的腹部在空中。面部有一根长矛状的长喙，占据了大部分位置。"
 
 #. ~ Description of monster "giant web spider"
 #: data/json/monsters/insect_spider.json
@@ -161486,7 +161626,7 @@ msgstr "一只鹿大小的红黑蚂蚁。  它散发着石油的臭味，腹部�
 #. ~ Description of monster "oversized wolf spider"
 #: data/json/monsters/insect_spider.json
 msgid "A shaggy brown mutant spider with eight long legs.  Though it stands only knee-high to a grown man it moves quickly, and its big black eyes seem ever-alert."
-msgstr ""
+msgstr "一只毛茸茸的棕色变异蜘蛛，有着八条长腿。虽然它仅及成年人的膝盖高度，但行动迅速，那双黑色的大眼睛似乎永远保持着警觉。"
 
 #. ~ Description of monster "plague nymph"
 #: data/json/monsters/insect_spider.json
@@ -162655,12 +162795,12 @@ msgstr[0] "鼠妇若虫"
 #. ~ Description of monster "jabberwock"
 #: data/json/monsters/jabberwock.json
 msgid "A putrid amalgamation of body parts from man and beast have fused together in this aberration of healthy and rotting flesh.  The eyes of all the heads dart about rapidly and the mouths form a chorus of groaning screams."
-msgstr ""
+msgstr "一个由人与兽的肢体构成的腐臭集合体，健康与腐烂的血肉在此畸形融合。所有头颅上的眼睛急速转动，嘴中齐声发出呻吟与尖叫。"
 
 #. ~ Description of monster "protean giant"
 #: data/json/monsters/jabberwock.json
 msgid "A seeping conglomeration of spasming muscle and organs have fused together into this towering caricature of the human form.  Various organs fall off of its hulking body only to be reabsorbed moments later.  Despite the stench of death rolling off of it, its flesh looks vital, and in places almost healthy."
-msgstr ""
+msgstr "一个由痉挛的肌肉与器官构成的渗出融合体，聚合成这高大、扭曲的人形讽刺画。各种器官从其庞大的身躯上脱落，片刻后又重新被吸收。尽管散发着死亡的气息，它的血肉却看上去充满活力，甚至有些地方近乎健康。"
 
 #. ~ Description of monster "fleshy shambler"
 #: data/json/monsters/jabberwock.json
@@ -162683,7 +162823,7 @@ msgstr[0] "伽卜沃克"
 #: data/json/monsters/jabberwock.json
 msgid "protean giant"
 msgid_plural "protean giants"
-msgstr[0] ""
+msgstr[0] "千变巨兽"
 
 #. ~ Description of monster "octopus spawn"
 #: data/json/monsters/kraken_spawn.json
@@ -163118,7 +163258,7 @@ msgstr "这只突变的麋鹿幼崽比一只成年鹿还要高，长着一对弯
 #: data/json/monsters/mammal.json data/json/monsters/mutant.json data/json/monsters/mutant_mammal.json data/json/monsters/nether.json data/json/monsters/zanimal_upgrade.json data/json/monsters/zed-animal.json data/json/monsters/zed_ferrous.json
 #, c-format
 msgid "The %s charges!"
-msgstr ""
+msgstr "%s 冲锋了！"
 
 #. ~ Pet message of monster "dog"
 #. ~ Pet message of monster "attack dog"
@@ -163742,7 +163882,7 @@ msgstr "这只米·戈体型修长，比其它米·戈偏小。它身体正中�
 #: data/json/monsters/mi-go.json
 msgid "giant mi-go"
 msgid_plural "giant mi-gos"
-msgstr[0] ""
+msgstr[0] "巨型米戈"
 
 #. ~ Monster name
 #: data/json/monsters/mi-go.json
@@ -163754,13 +163894,13 @@ msgstr[0] "米·戈"
 #: data/json/monsters/mi-go.json
 msgid "mi-go abductor"
 msgid_plural "mi-go abductors"
-msgstr[0] ""
+msgstr[0] "米戈掳掠者"
 
 #. ~ Monster name
 #: data/json/monsters/mi-go.json
 msgid "mi-go defender"
 msgid_plural "mi-go defenders"
-msgstr[0] ""
+msgstr[0] "米戈守卫"
 
 #. ~ Monster name
 #: data/json/monsters/mi-go.json
@@ -163772,13 +163912,13 @@ msgstr[0] "米·戈侦察兵"
 #: data/json/monsters/mi-go.json
 msgid "mi-go vivisector"
 msgid_plural "mi-go vivisectors"
-msgstr[0] ""
+msgstr[0] "米戈活体解剖者"
 
 #. ~ Monster name
 #: data/json/monsters/mi-go.json
 msgid "vivisected mi-go"
 msgid_plural "vivisected mi-gos"
-msgstr[0] ""
+msgstr[0] "被解剖的米戈"
 
 #. ~ Description of monster "inflatable dragon"
 #: data/json/monsters/misc.json
@@ -164143,7 +164283,7 @@ msgstr "一个穿着破旧连身衣的畸形变种人，带着疯狂的仇恨盯
 #. ~ Description of monster "ungulate mutant"
 #: data/json/monsters/mutant.json
 msgid "A gigantic mutated test subject, still wearing the tattered remains of an orange jumpsuit.  They walk on four warped legs ending in hooves, and their head is dominated by a glistening, tangled crown of antlers."
-msgstr ""
+msgstr "一个体型庞大的变异实验对象，身上仍穿着破烂的橙色连体服残片。它们用四条扭曲的腿行走，腿部末端是蹄子，头部则有一顶由盘绕、闪闪发光的鹿角构成的冠冕。"
 
 #. ~ Description of monster "arthropod mutant"
 #: data/json/monsters/mutant.json
@@ -164268,7 +164408,7 @@ msgstr[0] "多头熊"
 #. ~ Description of monster "destrier"
 #: data/json/monsters/mutant_mammal.json
 msgid "From a distance, this freak of nature could almost be taken for a draft horse but for its tufted ears and the set of its eyes, mounted at the front of its face beneath the cunning brow of a predator.  Its hooves are splayed out to form three-toed claws that grip rock and soil alike as it prowls the fields, and from time to time an overlong forked tongue slips out of its fanged maw to taste the air."
-msgstr ""
+msgstr "若从远处看，这只怪异的生物乍看之下颇像一匹挽马，但它那长着簇毛的耳朵，以及生在面部前方、位于捕食者那种狡黠眉骨之下的双眼，却暴露了它的真面目。它在原野上游荡时，蹄部向外张开，形成三趾状的利爪，能牢牢抓紧岩石与泥土；那长满獠牙的巨口中，不时探出一条细长分叉的舌头，探寻着空气中的气味。"
 
 #. ~ Description of monster "dextrous raccoon"
 #: data/json/monsters/mutant_mammal.json
@@ -164308,7 +164448,7 @@ msgstr "从大灾变之后，这只黑熊又多了两个脑袋。但这似乎没
 #: data/json/monsters/mutant_mammal.json
 #, c-format
 msgid "The %s devours the meat.  It growls low at you, but no longer seems quite as unfriendly."
-msgstr ""
+msgstr "那只 %s 吞食着肉块。它向你发出低沉的咆哮，但看起来似乎不再那么不友善了。"
 
 #. ~ Pet message of monster "Loper puppy"
 #. ~ Pet message of monster "Mauler puppy"
@@ -164395,7 +164535,7 @@ msgstr[0] "溃坝河狸"
 #: data/json/monsters/mutant_mammal.json
 msgid "destrier"
 msgid_plural "destriers"
-msgstr[0] ""
+msgstr[0] "骏马"
 
 #. ~ Monster name
 #: data/json/monsters/mutant_mammal.json
@@ -166055,7 +166195,7 @@ msgstr "曾经它是一条极富攻击性的饥肠辘辘的牛鲨，它现在丧
 #. ~ Description of monster "zombie pig"
 #: data/json/monsters/zed-animal.json
 msgid "The body of a stout, scruffy pig, reanimated now and somehow even angrier than it was in life."
-msgstr ""
+msgstr "那是一具粗壮、毛色杂乱的猪的躯体，如今已死而复生，且不知为何，竟比生前还要暴怒。"
 
 #. ~ Description of monster "zombie dog"
 #: data/json/monsters/zed-animal.json
@@ -166211,7 +166351,7 @@ msgstr[0] "丧尸驼鹿"
 #: data/json/monsters/zed-animal.json
 msgid "zombie pig"
 msgid_plural "zombie pigs"
-msgstr[0] ""
+msgstr[0] "丧尸猪"
 
 #. ~ Monster name
 #: data/json/monsters/zed-animal.json
@@ -167042,7 +167182,7 @@ msgstr "杀死伪僵尸"
 #: data/json/monsters/zed_dormant.json
 msgid "zombie crawler"
 msgid_plural "zombie crawlers"
-msgstr[0] ""
+msgstr[0] "爬行丧尸"
 
 #. ~ Description of monster "shocker brute"
 #: data/json/monsters/zed_electric.json
@@ -168041,7 +168181,7 @@ msgstr "这个不死士兵浑身穿着制式军装。以丧尸的标准来说，
 #. ~ Description of monster "zombie bio-operator"
 #: data/json/monsters/zed_soldiers.json
 msgid "This walking corpse is dressed in high-end tactical gear .  It jerks mechanically as it moves, as though something was merely puppeting the corpse."
-msgstr ""
+msgstr "这具行尸身穿高档战术装备。它移动时动作机械而生硬，仿佛有什么东西在操纵着这具尸体。"
 
 #. ~ Description of monster "Kevlar zombie"
 #: data/json/monsters/zed_soldiers.json
@@ -168227,7 +168367,7 @@ msgstr "在桌椅上进餐"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Butchered a human like an animal"
-msgstr ""
+msgstr "宰杀牲畜一样残忍地杀害了一个人"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168237,7 +168377,7 @@ msgstr "化学药物情绪波动"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Chimera mutation"
-msgstr ""
+msgstr "嵌合体突变"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168262,12 +168402,12 @@ msgstr "酒精上瘾"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Craving amphetamines"
-msgstr ""
+msgstr "渴望安非他命"
 
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Craving benzodiazepines"
-msgstr ""
+msgstr "渴望苯二氮卓类药物"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168277,7 +168417,7 @@ msgstr "咖啡因上瘾"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Craving cannabis"
-msgstr ""
+msgstr "渴望大麻"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168419,7 +168559,7 @@ msgstr "听到恐怖尖叫声"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Killed an ally"
-msgstr ""
+msgstr "杀死盟友"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -168544,7 +168684,7 @@ msgstr "受到鼓励"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Sylvan mutation"
-msgstr ""
+msgstr "森林突变"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -173036,7 +173176,7 @@ msgstr "你所穿戴的装备有利于分散负重，让你能够携带更多物
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_1_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 1"
-msgstr ""
+msgstr "手臂1"
 
 #. ~ HP bar UI text of body part "second left arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_2_status_text"
@@ -173055,7 +173195,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_2_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 2"
-msgstr ""
+msgstr "手臂2"
 
 #. ~ HP bar UI text of body part "third left arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_3_status_text"
@@ -173074,7 +173214,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_3_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 3"
-msgstr ""
+msgstr "手臂3"
 
 #. ~ HP bar UI text of body part "first right arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_4_status_text"
@@ -173093,7 +173233,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_4_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 4"
-msgstr ""
+msgstr "手臂4"
 
 #. ~ HP bar UI text of body part "second right arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_5_status_text"
@@ -173112,7 +173252,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_5_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 5"
-msgstr ""
+msgstr "手臂5"
 
 #. ~ HP bar UI text of body part "third right arm"
 #. ~ Default clause of UI widget "bodypart_cephalopod_arm_6_status_text"
@@ -173131,12 +173271,12 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_cephalopod_arm_6_status_text"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json
 msgid "ARM 6"
-msgstr ""
+msgstr "手臂6"
 
 #. ~ Encumbrance text of body part "tail"
 #: data/json/mutations/mutation_limbs.json
 msgid "Balance is penalized."
-msgstr ""
+msgstr "平衡受困。"
 
 #. ~ Encumbrance text of body part "first left arm"
 #. ~ Encumbrance text of body part "second left arm"
@@ -173148,7 +173288,7 @@ msgstr ""
 #. ~ Encumbrance text of body part "right tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "Combat and movement are hampered."
-msgstr ""
+msgstr "战斗与移动受到阻碍。"
 
 #. ~ HP bar UI text of body part "foot"
 #. ~ Default clause of UI widget "bodypart_gastropod_foot_status_text"
@@ -173168,12 +173308,12 @@ msgstr ""
 #. ~ Label of UI widget "hp_gastropod_foot_num_label"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json data/json/ui/hp.json
 msgid "FOOT"
-msgstr ""
+msgstr "足"
 
 #. ~ HP bar UI text of body part "left tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "L TENT"
-msgstr ""
+msgstr "左触"
 
 #. ~ HP bar UI text of body part "left wing"
 #: data/json/mutations/mutation_limbs.json data/mods/Limb_WIP/mutations/mutation_limbs.json
@@ -173183,17 +173323,17 @@ msgstr "左翼"
 #. ~ HP bar UI text of body part "left foreleg"
 #: data/json/mutations/mutation_limbs.json
 msgid "LLEG1"
-msgstr ""
+msgstr "左腿1"
 
 #. ~ HP bar UI text of body part "left hind leg"
 #: data/json/mutations/mutation_limbs.json
 msgid "LLEG2"
-msgstr ""
+msgstr "左腿2"
 
 #. ~ HP bar UI text of body part "right tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "R TENT"
-msgstr ""
+msgstr "右触"
 
 #. ~ HP bar UI text of body part "right wing"
 #: data/json/mutations/mutation_limbs.json data/mods/Limb_WIP/mutations/mutation_limbs.json
@@ -173203,17 +173343,17 @@ msgstr "右翼"
 #. ~ HP bar UI text of body part "right foreleg"
 #: data/json/mutations/mutation_limbs.json
 msgid "RLEG1"
-msgstr ""
+msgstr "右腿1"
 
 #. ~ HP bar UI text of body part "right hind leg"
 #: data/json/mutations/mutation_limbs.json
 msgid "RLEG2"
-msgstr ""
+msgstr "右腿2"
 
 #. ~ Encumbrance text of body part "tail"
 #: data/json/mutations/mutation_limbs.json
 msgid "Swimming is slowed, balance is penalized."
-msgstr ""
+msgstr "游泳速度减慢，平衡受困。"
 
 #. ~ HP bar UI text of body part "tail"
 #. ~ Default clause of UI widget "bodypart_long_tail_status_text"
@@ -173240,7 +173380,7 @@ msgstr ""
 #. ~ Label of UI widget "hp_long_tail_num_label"
 #: data/json/mutations/mutation_limbs.json data/json/ui/bodypart_status_text.json data/json/ui/hp.json
 msgid "TAIL"
-msgstr ""
+msgstr "尾巴"
 
 #. ~ Smash message of body part "left wing"
 #. ~ Smash message of body part "right wing"
@@ -173256,7 +173396,7 @@ msgstr "你用翅膀拍打 %s"
 #: data/json/mutations/mutation_limbs.json
 #, c-format
 msgid "You scrabble at the %s."
-msgstr ""
+msgstr "你抓挠 %s。"
 
 #. ~ Smash message of body part "first left arm"
 #. ~ Smash message of body part "second left arm"
@@ -173269,7 +173409,7 @@ msgstr ""
 #: data/json/mutations/mutation_limbs.json
 #, c-format
 msgid "You smack the %s."
-msgstr ""
+msgstr "你猛击 %s。"
 
 #. ~ Smash message of body part "webbed left hand"
 #. ~ Smash message of body part "webbed right hand"
@@ -173284,13 +173424,13 @@ msgstr "你用一记重拳猛击了 %s。"
 #: data/json/mutations/mutation_limbs.json
 #, c-format
 msgid "You tail-slap the %s."
-msgstr ""
+msgstr "你用尾巴拍击 %s。"
 
 #. ~ Smash message of body part "tail"
 #: data/json/mutations/mutation_limbs.json
 #, c-format
 msgid "You tail-whip the %s."
-msgstr ""
+msgstr "你用尾巴抽打 %s。"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173300,37 +173440,37 @@ msgstr "蛙人"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "arm (draped)"
-msgstr ""
+msgstr "手臂（披覆织物）"
 
 #. ~ Heading of body part "first left arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 1"
-msgstr ""
+msgstr "手臂1"
 
 #. ~ Heading of body part "second left arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 2"
-msgstr ""
+msgstr "手臂2"
 
 #. ~ Heading of body part "third left arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 3"
-msgstr ""
+msgstr "手臂3"
 
 #. ~ Heading of body part "first right arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 4"
-msgstr ""
+msgstr "手臂4"
 
 #. ~ Heading of body part "second right arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 5"
-msgstr ""
+msgstr "手臂5"
 
 #. ~ Heading of body part "third right arm"
 #: data/json/mutations/mutation_limbs.json
 msgid "arm 6"
-msgstr ""
+msgstr "手臂6"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173340,57 +173480,57 @@ msgstr "蛙人"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "carpi"
-msgstr ""
+msgstr "腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "coxae"
-msgstr ""
+msgstr "基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "dactyli"
-msgstr ""
+msgstr "指（趾）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal first left arm"
-msgstr ""
+msgstr "左臂远端第一段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal first right arm"
-msgstr ""
+msgstr "右臂远端第一段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal left tentacle"
-msgstr ""
+msgstr "左触手远端"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal right tentacle"
-msgstr ""
+msgstr "右触手远端"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal second left arm"
-msgstr ""
+msgstr "左臂远端第二段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal second right arm"
-msgstr ""
+msgstr "右臂远端第二段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal third left arm"
-msgstr ""
+msgstr "左臂远端第三段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "distal third right arm"
-msgstr ""
+msgstr "右臂远端第三段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173400,52 +173540,52 @@ msgstr "燧发枪械"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "first left arm"
-msgstr ""
+msgstr "第一只左臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "first left arm"
-msgstr ""
+msgstr "第一只左臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "first left arm (draped)"
-msgstr ""
+msgstr "第一只左臂（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "first right arm"
-msgstr ""
+msgstr "第一只右臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "first right arm"
-msgstr ""
+msgstr "第一只右臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "first right arm (draped)"
-msgstr ""
+msgstr "第一只右臂（披覆织物）"
 
 #. ~ Name of body part
 #. ~ Heading of body part "foot"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "foot"
-msgstr ""
+msgstr "足"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "foot"
-msgstr ""
+msgstr "足"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "foot (draped)"
-msgstr ""
+msgstr "足（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173466,17 +173606,17 @@ msgstr "湖蹄"
 #. ~ Heading of body part "left foreleg"
 #: data/json/mutations/mutation_limbs.json
 msgid "l. leg 1"
-msgstr ""
+msgstr "左侧腿1"
 
 #. ~ Heading of body part "left hind leg"
 #: data/json/mutations/mutation_limbs.json
 msgid "l. leg 2"
-msgstr ""
+msgstr "左侧腿2"
 
 #. ~ Heading of body part "left tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "l. tent"
-msgstr ""
+msgstr "左触"
 
 #. ~ Heading of body part "left wing"
 #: data/json/mutations/mutation_limbs.json data/mods/Limb_WIP/mutations/mutation_limbs.json
@@ -173501,43 +173641,43 @@ msgstr "左肘"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first carpus"
-msgstr ""
+msgstr "左侧第一腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first coxa"
-msgstr ""
+msgstr "左侧第一基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first dactyl"
-msgstr ""
+msgstr "左侧第一指（趾）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first merus"
-msgstr ""
+msgstr "左侧第一长节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left first propodus"
-msgstr ""
+msgstr "左侧第一掌节"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left foreleg"
-msgstr ""
+msgstr "左前肢"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "left foreleg"
-msgstr ""
+msgstr "左前肢"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left foreleg (draped)"
-msgstr ""
+msgstr "左前肢（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173547,18 +173687,18 @@ msgstr "左脚"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left hind leg"
-msgstr ""
+msgstr "左后肢"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "left hind leg"
-msgstr ""
+msgstr "左后肢"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left hind leg (draped)"
-msgstr ""
+msgstr "左后肢（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
@@ -173574,22 +173714,22 @@ msgstr "左脚"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second carpus"
-msgstr ""
+msgstr "左侧第二腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second coxa"
-msgstr ""
+msgstr "左侧第二基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second merus"
-msgstr ""
+msgstr "左侧第二长节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second propodus"
-msgstr ""
+msgstr "左侧第二掌节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173599,13 +173739,13 @@ msgstr "左腿"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left tentacle"
-msgstr ""
+msgstr "左触手"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "left tentacle"
-msgstr ""
+msgstr "左触手"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173637,62 +173777,62 @@ msgstr "左翼"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "lower foot"
-msgstr ""
+msgstr "下足"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "meri"
-msgstr ""
+msgstr "肱骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "pedal sole"
-msgstr ""
+msgstr "踏板底"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "propodi"
-msgstr ""
+msgstr "前脚"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal first left arm"
-msgstr ""
+msgstr "左臂近端第一段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal first right arm"
-msgstr ""
+msgstr "右臂近端第一段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal left tentacle"
-msgstr ""
+msgstr "左侧触手近端"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal right tentacle"
-msgstr ""
+msgstr "右侧触手近端"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal second left arm"
-msgstr ""
+msgstr "左臂近端第二段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal second right arm"
-msgstr ""
+msgstr "右臂近端第二段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal third left arm"
-msgstr ""
+msgstr "左臂近端第三段"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "proximal third right arm"
-msgstr ""
+msgstr "右臂近端第三段"
 
 #. ~ Heading of body part "right hoof"
 #: data/json/mutations/mutation_limbs.json
@@ -173702,17 +173842,17 @@ msgstr "雨帽"
 #. ~ Heading of body part "right foreleg"
 #: data/json/mutations/mutation_limbs.json
 msgid "r. leg 1"
-msgstr ""
+msgstr "右侧腿1"
 
 #. ~ Heading of body part "right hind leg"
 #: data/json/mutations/mutation_limbs.json
 msgid "r. leg 2"
-msgstr ""
+msgstr "右侧腿2"
 
 #. ~ Heading of body part "right tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "r. tent"
-msgstr ""
+msgstr "右触"
 
 #. ~ Heading of body part "right wing"
 #: data/json/mutations/mutation_limbs.json data/mods/Limb_WIP/mutations/mutation_limbs.json
@@ -173737,43 +173877,43 @@ msgstr "右肘"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first carpus"
-msgstr ""
+msgstr "右侧第一腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first coxa"
-msgstr ""
+msgstr "右侧第一基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first dactyl"
-msgstr ""
+msgstr "右侧第一指（趾）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first merus"
-msgstr ""
+msgstr "右侧第一长节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right first propodus"
-msgstr ""
+msgstr "右侧第一掌节"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right foreleg"
-msgstr ""
+msgstr "右前肢"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "right foreleg"
-msgstr ""
+msgstr "右前肢"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right foreleg (draped)"
-msgstr ""
+msgstr "右前肢（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173783,18 +173923,18 @@ msgstr "右脚"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right hind leg"
-msgstr ""
+msgstr "右后肢"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "right hind leg"
-msgstr ""
+msgstr "右后肢"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right hind leg (draped)"
-msgstr ""
+msgstr "右后肢（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
@@ -173810,27 +173950,27 @@ msgstr "右脚"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second carpus"
-msgstr ""
+msgstr "右侧第二腕骨"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second coxa"
-msgstr ""
+msgstr "右侧第二基节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second dactyl"
-msgstr ""
+msgstr "右侧第二指（趾）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second merus"
-msgstr ""
+msgstr "右侧第二长节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right second propodus"
-msgstr ""
+msgstr "右侧第二掌节"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173840,13 +173980,13 @@ msgstr "右腿"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "right tentacle"
-msgstr ""
+msgstr "右触手"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "right tentacle"
-msgstr ""
+msgstr "右触手"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173878,34 +174018,34 @@ msgstr "右翼"
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "second left arm"
-msgstr ""
+msgstr "第二只左臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "second left arm"
-msgstr ""
+msgstr "第二只左臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "second left arm (draped)"
-msgstr ""
+msgstr "第二只左臂（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "second right arm"
-msgstr ""
+msgstr "第二只右臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "second right arm"
-msgstr ""
+msgstr "第二只右臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "second right arm (draped)"
-msgstr ""
+msgstr "第二只右臂（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -173922,33 +174062,33 @@ msgstr "吊带内衣"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail"
-msgstr ""
+msgstr "尾巴"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "tail"
-msgstr ""
+msgstr "尾巴"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail (draped)"
-msgstr ""
+msgstr "尾巴（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail base"
-msgstr ""
+msgstr "尾基"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail fin"
-msgstr ""
+msgstr "尾鳍"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "tail tip"
-msgstr ""
+msgstr "尾尖"
 
 #. ~ Name of body part
 #. ~ Heading of body part "left tentacle"
@@ -173956,50 +174096,50 @@ msgstr ""
 #. ~ Heading of body part "right tentacle"
 #: data/json/mutations/mutation_limbs.json
 msgid "tentacles"
-msgstr ""
+msgstr "触手"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "tentacles"
-msgstr ""
+msgstr "触手"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "third left arm"
-msgstr ""
+msgstr "第三只左臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "third left arm"
-msgstr ""
+msgstr "第三只左臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "third left arm (draped)"
-msgstr ""
+msgstr "第三只左臂（披覆织物）"
 
 #. ~ Name of body part
 #: data/json/mutations/mutation_limbs.json
 msgid "third right arm"
-msgstr ""
+msgstr "第三只右臂"
 
 #. ~ Accusative name of body part
 #: data/json/mutations/mutation_limbs.json
 msgctxt "bodypart_accusative"
 msgid "third right arm"
-msgstr ""
+msgstr "第三只右臂"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "third right arm (draped)"
-msgstr ""
+msgstr "第三只右臂（披覆织物）"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "upper foot"
-msgstr ""
+msgstr "脚背"
 
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
@@ -174138,7 +174278,7 @@ msgstr "爪跃"
 #. ~ Description of spell "Charging Knockback"
 #: data/json/mutations/mutation_spells.json
 msgid "The knockback procced by spell_bull_charge."
-msgstr ""
+msgstr "由 spell_bull_charge 触发的击退效果。"
 
 #. ~ Spell name
 #. ~ Mutation name
@@ -174216,7 +174356,7 @@ msgstr "<npcname>砍中%s"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "<npcname> clubs %s with their tail"
-msgstr ""
+msgstr "<npcname> 用尾巴重击 %s"
 
 #. ~ Message of martial technique "Pincer Crush"
 #: data/json/mutations/mutation_techs.json
@@ -174261,7 +174401,7 @@ msgstr "<npcname>割中%s"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "<npcname> lashes %s with their tail"
-msgstr ""
+msgstr "<npcname> 用尾巴猛击 %s"
 
 #. ~ Message of martial technique "Beak Bite With Mouth Tentacles"
 #: data/json/mutations/mutation_techs.json
@@ -174306,7 +174446,7 @@ msgstr "<npcname>用翅膀拍打了%s"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "<npcname> stings %s"
-msgstr ""
+msgstr "<npcname> 刺痛了 %s"
 
 #. ~ Message of martial technique "CHOMP"
 #: data/json/mutations/mutation_techs.json data/mods/Limb_WIP/mutations/mutation_techs.json
@@ -174454,17 +174594,17 @@ msgstr "鲨齿"
 #. ~ Martial technique name
 #: data/json/mutations/mutation_techs.json
 msgid "Sting"
-msgstr ""
+msgstr "蛰刺"
 
 #. ~ Martial technique name
 #: data/json/mutations/mutation_techs.json
 msgid "Tail Club"
-msgstr ""
+msgstr "尾部重击"
 
 #. ~ Martial technique name
 #: data/json/mutations/mutation_techs.json
 msgid "Tail Lash"
-msgstr ""
+msgstr "尾部猛击"
 
 #. ~ Martial technique name
 #: data/json/mutations/mutation_techs.json
@@ -174527,7 +174667,7 @@ msgstr "你施放了 %s！"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "You club %s with your tail"
-msgstr ""
+msgstr "你用尾巴重击 %s"
 
 #. ~ Message of martial technique "Pincer Crush"
 #: data/json/mutations/mutation_techs.json
@@ -174572,7 +174712,7 @@ msgstr "你割中 %s"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "You lash %s with your tail"
-msgstr ""
+msgstr "你用尾巴猛击 %s"
 
 #. ~ Message of martial technique "Beak Bite With Mouth Tentacles"
 #: data/json/mutations/mutation_techs.json data/mods/Limb_WIP/mutations/mutation_techs.json
@@ -174623,7 +174763,7 @@ msgstr "你用叉舌刺入 %s！"
 #: data/json/mutations/mutation_techs.json
 #, c-format
 msgid "You sting %s"
-msgstr ""
+msgstr "你刺痛了 %s"
 
 #. ~ Message of martial technique "CHOMP"
 #: data/json/mutations/mutation_techs.json data/mods/Limb_WIP/mutations/mutation_techs.json
@@ -289633,7 +289773,7 @@ msgstr "头部"
 #. ~ Clause text "bitten" of UI widget "bodypart_crab_leg_1_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LEG 1"
-msgstr ""
+msgstr "腿 1"
 
 #. ~ Default clause of UI widget "bodypart_crab_leg_2_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289647,7 +289787,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_crab_leg_2_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LEG 2"
-msgstr ""
+msgstr "腿 2"
 
 #. ~ Default clause of UI widget "bodypart_crab_leg_3_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289661,7 +289801,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_crab_leg_3_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LEG 3"
-msgstr ""
+msgstr "腿 3"
 
 #. ~ Default clause of UI widget "bodypart_crab_leg_4_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289675,7 +289815,7 @@ msgstr ""
 #. ~ Clause text "bitten" of UI widget "bodypart_crab_leg_4_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LEG 4"
-msgstr ""
+msgstr "腿 4"
 
 #. ~ Default clause of UI widget "bodypart_cephalopod_tentacle_l_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289694,7 +289834,7 @@ msgstr ""
 #. "bodypart_cephalopod_tentacle_l_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "LTENT"
-msgstr ""
+msgstr "左触"
 
 #. ~ Default clause of UI widget "bodypart_wing_bird_l_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -289727,7 +289867,7 @@ msgstr "左翼"
 #. "bodypart_cephalopod_tentacle_r_status_text"
 #: data/json/ui/bodypart_status_text.json
 msgid "RTENT"
-msgstr ""
+msgstr "右触"
 
 #. ~ Default clause of UI widget "bodypart_wing_bird_r_status_text"
 #. ~ Clause text "bleedingAndBitten3" of UI widget
@@ -335744,7 +335884,7 @@ msgstr "你越过了障碍物。"
 
 #: src/iexamine.cpp:1548
 msgid "You are too heavy to climb over."
-msgstr "你太重了，骑不上 %s"
+msgstr "你太重了，无法爬过去。"
 
 #: src/iexamine.cpp:1552
 msgid "Climbing this obstacle is trivial for one such as you."
@@ -352938,7 +353078,7 @@ msgstr "骑乘需要1级生存"
 #: src/monexamine.cpp:715
 #, c-format
 msgid "You are too heavy to mount %s"
-msgstr "你太重了，骑不上 %s"
+msgstr "你太重了，无法骑上 %s"
 
 #: src/monexamine.cpp:718
 msgid "You require survival skill 4 to ride without a saddle"
