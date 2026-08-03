@@ -2302,9 +2302,9 @@ bool cata_tiles::draw_from_id_string(
 
 // This one draws things on the overmap.
 bool cata_tiles::draw_from_id_string_om( const std::string &id, TILE_CATEGORY category,
-                                      const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
-                                      lit_level ll,
-                                      bool apply_visual_effects, int &height_3d, float scale_x, float scale_y )
+        const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
+        lit_level ll,
+        bool apply_visual_effects, int &height_3d, float scale_x, float scale_y )
 {
     draw_options opts{};
     opts.category = category;
@@ -2320,7 +2320,7 @@ bool cata_tiles::draw_from_id_string_om( const std::string &id, TILE_CATEGORY ca
                apply_visual_effects,
                height_3d,
                opts
-    );
+           );
 }
 
 std::optional<tile_lookup_res>
@@ -3463,15 +3463,15 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                 return false;
             } else {
                 return draw_from_id_string(
-                       tname,
-                       p,
-                       subtile,
-                       rotation,
-                       ll,
-                       true,
-                       height_3d,
-                       opts
-                );
+                           tname,
+                           p,
+                           subtile,
+                           rotation,
+                           ll,
+                           true,
+                           height_3d,
+                           opts
+                       );
             }
         }
     }
@@ -3512,7 +3512,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                        nv,
                        height_3d,
                        opts
-            );
+                   );
         }
     } else if( invisible[0] ) {
         // Try drawing memory if invisible and not overridden.
@@ -3524,15 +3524,15 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::TERRAIN;
                 return draw_from_id_string(
-                    mt.get_ter_id(),
-                    p,
-                    mt.get_ter_subtile(),
-                    mt.get_ter_rotation(),
-                    lit_level::MEMORIZED,
-                    true,
-                    height_3d,
-                    opts
-                );
+                           mt.get_ter_id(),
+                           p,
+                           mt.get_ter_subtile(),
+                           mt.get_ter_rotation(),
+                           lit_level::MEMORIZED,
+                           true,
+                           height_3d,
+                           opts
+                       );
             }
         }
     }
@@ -3596,7 +3596,7 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
                            true,
                            height_3d,
                            opts
-                );
+                       );
             }
         }
     }
@@ -3639,15 +3639,15 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
                 return false;
             } else {
                 return draw_from_id_string(
-                       fname,
-                       p,
-                       subtile,
-                       rotation,
-                       lit,
-                       nv,
-                       height_3d,
-                       opts
-                );
+                           fname,
+                           p,
+                           subtile,
+                           rotation,
+                           lit,
+                           nv,
+                           height_3d,
+                           opts
+                       );
             }
         }
     } else if( invisible[0] ) {
@@ -3660,15 +3660,15 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::FURNITURE;
                 return draw_from_id_string(
-                    mt.get_dec_id(),
-                    p,
-                    mt.get_dec_subtile(),
-                    mt.get_dec_rotation(),
-                    lit_level::MEMORIZED,
-                    true,
-                    height_3d,
-                    opts
-                );
+                           mt.get_dec_id(),
+                           p,
+                           mt.get_dec_subtile(),
+                           mt.get_dec_rotation(),
+                           lit_level::MEMORIZED,
+                           true,
+                           height_3d,
+                           opts
+                       );
             }
         }
     }
@@ -3781,15 +3781,15 @@ bool cata_tiles::draw_trap( const tripoint_bub_ms &p, const lit_level ll, int &h
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::TRAP;
                 return draw_from_id_string(
-                    mt.get_dec_id(),
-                    p,
-                    mt.get_dec_subtile(),
-                    mt.get_dec_rotation(),
-                    lit_level::MEMORIZED,
-                    true,
-                    height_3d,
-                    opts
-                );
+                           mt.get_dec_id(),
+                           p,
+                           mt.get_dec_subtile(),
+                           mt.get_dec_rotation(),
+                           lit_level::MEMORIZED,
+                           true,
+                           height_3d,
+                           opts
+                       );
             }
         }
     }
@@ -4341,7 +4341,7 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
                            true,
                            height_3d_temp,
                            opts
-                );
+                       );
             }
         }
     }
@@ -4456,7 +4456,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                            false,
                            height_3d,
                            opts
-                );
+                       );
             }
             return false;
         }
@@ -4589,7 +4589,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
                            false,
                            height_3d,
                            opts
-                );
+                       );
             } else {
                 return false;
             }
@@ -4737,7 +4737,7 @@ bool cata_tiles::draw_zone_mark( const tripoint_bub_ms &p, lit_level ll, int &he
                        true,
                        height_3d,
                        opts
-            );
+                   );
         }
     }
     return false;
@@ -4766,7 +4766,7 @@ bool cata_tiles::draw_zombie_revival_indicators( const tripoint_bub_ms &pos, con
                            false,
                            height_3d,
                            opts
-                );
+                       );
             }
         }
     }
@@ -5033,7 +5033,7 @@ bool cata_tiles::draw_item_highlight( const tripoint_bub_ms &pos, int &height_3d
                false,
                height_3d,
                opts
-    );
+           );
 }
 
 std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &tileset_id,

@@ -969,11 +969,11 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             const lit_level ll = overmap_buffer.is_explored( omp ) ? lit_level::LOW : lit_level::LIT;
             // Light level is now used for choosing between grayscale filter and normal lit tiles.
             draw_from_id_string_om( id, category,
-                                 category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
-                                 omp, subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
+                                    category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
+                                    omp, subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
             if( !mx.is_empty() && mx->autonote ) {
                 draw_from_id_string_om( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp,
-                                     0, 0, ll, false, height_3d, 1.0f, 1.0f );
+                                        0, 0, ll, false, height_3d, 1.0f, 1.0f );
             }
 
             if( draw_overlays && show_map_revealed ) {
@@ -1065,12 +1065,12 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 const std::string tile_id = overmap_buffer.get_vehicle_tile_id( omp );
                 if( find_tile_looks_like( tile_id, TILE_CATEGORY::OVERMAP_NOTE, "" ) ) {
                     draw_from_id_string_om( tile_id, TILE_CATEGORY::OVERMAP_NOTE,
-                                         "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                            "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 } else {
                     const std::string ter_sym = overmap_buffer.get_vehicle_ter_sym( omp );
                     std::string note_name = "note_" + ter_sym + "_cyan";
                     draw_from_id_string_om( note_name, TILE_CATEGORY::OVERMAP_NOTE,
-                                         "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                            "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 }
             }
 
@@ -1084,10 +1084,10 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
 
                     std::string note_name = "note_" + ter_sym + "_" + string_from_color( ter_color );
                     draw_from_id_string_om( note_name, TILE_CATEGORY::OVERMAP_NOTE, "overmap_note",
-                                         omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                            omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 } else if( overmap_buffer.is_marked_dangerous( omp ) ) {
                     draw_from_id_string_om( "note_X_red", TILE_CATEGORY::OVERMAP_NOTE, "overmap_note",
-                                         omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                            omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
 
                 }
             }
