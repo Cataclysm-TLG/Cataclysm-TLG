@@ -28,11 +28,13 @@
 
 static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
 static const efftype_id effect_cig( "cig" );
+static const efftype_id effect_cocaine( "cocaine" );
 static const efftype_id effect_nausea( "nausea" );
 static const efftype_id effect_opioid_eff( "opioid_eff" );
 static const efftype_id effect_withdrawal_alcohol( "withdrawal_alcohol" );
 static const efftype_id effect_withdrawal_alcohol_detoxed( "withdrawal_alcohol_detoxed" );
 static const efftype_id effect_withdrawal_alcohol_timer( "withdrawal_alcohol_timer" );
+static const efftype_id effect_high( "high" );
 static const efftype_id effect_withdrawal_nicotine( "withdrawal_nicotine" );
 static const efftype_id effect_withdrawal_nicotine_detoxed( "withdrawal_nicotine_detoxed" );
 static const efftype_id effect_withdrawal_nicotine_timer( "withdrawal_nicotine_timer" );
@@ -41,6 +43,8 @@ static const efftype_id effect_withdrawal_opioid_detoxed( "withdrawal_opioid_det
 static const efftype_id effect_withdrawal_opioid_timer( "withdrawal_opioid_timer" );
 static const efftype_id effect_hallu( "hallu" );
 static const efftype_id effect_shakes( "shakes" );
+static const efftype_id effect_took_xanax( "took_xanax" );
+static const efftype_id effect_valium( "valium" );
 
 static const morale_type morale_craving_alcohol( "morale_craving_alcohol" );
 static const morale_type morale_craving_cannabis( "morale_craving_cannabis" );
@@ -49,6 +53,10 @@ static const morale_type morale_craving_diazepam( "morale_craving_diazepam" );
 static const morale_type morale_craving_nicotine( "morale_craving_nicotine" );
 static const morale_type morale_craving_opioid( "morale_craving_opioid" );
 static const morale_type morale_craving_speed( "morale_craving_speed" );
+
+
+static const trait_id trait_ADDICTIVE( "ADDICTIVE" );
+static const trait_id trait_NONADDICTIVE( "NONADDICTIVE" );
 
 namespace
 {
@@ -206,7 +214,13 @@ static bool cocaine_add( Character &u, int in )
 static bool nicotine_effect( Character &u, addiction &add )
 {
     if( u.has_effect( effect_cig ) ) {
-        add.sated = 0_turns;
+        if( u.has_trait( trait_ADDICTIVE ) ) {
+            add.sated = 140_minutes;
+        } else if( u.has_trait( trait_NONADDICTIVE ) ) {
+            add.sated = 220_minutes;
+        } else {
+            add.sated = 180_minutes;
+        }
         return false;
     }
     static time_point last_dream = calendar::turn_zero;
@@ -248,6 +262,16 @@ static bool nicotine_effect( Character &u, addiction &add )
 
 static bool cannabis_effect( Character &u, addiction &add )
 {
+    if( u.has_effect( effect_high ) ) {
+        if( u.has_trait( trait_ADDICTIVE ) ) {
+            add.sated = 7_hours;
+        } else if( u.has_trait( trait_NONADDICTIVE ) ) {
+            add.sated = 9_hours;
+        } else {
+            add.sated = 8_hours;
+        }
+        return false;
+    }
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( 20, add.intensity );
 
@@ -282,12 +306,32 @@ static bool cannabis_effect( Character &u, addiction &add )
 
 static bool alcohol_effect( Character &u, addiction &add )
 {
+    if( u.has_effect( effect_cig ) ) {
+        if( u.has_trait( trait_ADDICTIVE ) ) {
+            add.sated = 310_minutes;
+        } else if( u.has_trait( trait_NONADDICTIVE ) ) {
+            add.sated = 410_minutes;
+        } else {
+            add.sated = 360_minutes;
+        }
+        return false;
+    }
     const int in = std::min( 20, add.intensity );
     return alcohol_add( u, in );
 }
 
 static bool diazepam_effect( Character &u, addiction &add )
 {
+    if( u.has_effect( effect_valium ) || u.has_effect( effect_took_xanax ) ) {
+        if( u.has_trait( trait_ADDICTIVE ) ) {
+            add.sated = 310_minutes;
+        } else if( u.has_trait( trait_NONADDICTIVE ) ) {
+            add.sated = 410_minutes;
+        } else {
+            add.sated = 360_minutes;
+        }
+        return false;
+    }
     const int in = std::min( 20, add.intensity );
     return benzodiazepine_add( u, in );
 }
@@ -295,7 +339,13 @@ static bool diazepam_effect( Character &u, addiction &add )
 static bool opioid_effect( Character &u, addiction &add )
 {
     if( u.has_effect( effect_opioid_eff ) ) {
-        add.sated = 0_turns;
+        if( u.has_trait( trait_ADDICTIVE ) ) {
+            add.sated = 310_minutes;
+        } else if( u.has_trait( trait_NONADDICTIVE ) ) {
+            add.sated = 410_minutes;
+        } else {
+            add.sated = 360_minutes;
+        }
         u.remove_effect( effect_shakes );
         return false;
     }
@@ -350,7 +400,13 @@ static bool opioid_effect( Character &u, addiction &add )
 static bool amphetamine_effect( Character &u, addiction &add )
 {
     if( u.has_effect( effect_amphetamine_eff ) ) {
-        add.sated = 0_turns;
+        if( u.has_trait( trait_ADDICTIVE ) ) {
+            add.sated = 310_minutes;
+        } else if( u.has_trait( trait_NONADDICTIVE ) ) {
+            add.sated = 410_minutes;
+        } else {
+            add.sated = 360_minutes;
+        }
         return false;
     }
     static time_point last_dream = calendar::turn_zero;
@@ -396,6 +452,16 @@ static bool amphetamine_effect( Character &u, addiction &add )
 
 static bool cocaine_effect( Character &u, addiction &add )
 {
+    if( u.has_effect( effect_cocaine ) ) {
+        if( u.has_trait( trait_ADDICTIVE ) ) {
+            add.sated = 105_minutes;
+        } else if( u.has_trait( trait_NONADDICTIVE ) ) {
+            add.sated = 135_minutes;
+        } else {
+            add.sated = 120_minutes;
+        }
+        return false;
+    }
     const int in = std::min( 20, add.intensity );
     return cocaine_add( u, in );
 }
