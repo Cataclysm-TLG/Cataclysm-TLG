@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-08-02 12:38+0800\n"
+"PO-Revision-Date: 2026-08-03 14:29+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -217957,7 +217957,7 @@ msgstr "你觉得有点奇怪。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Draco_Dune.json
 msgid "[Perform a decent dance.]"
-msgstr "%s 跳了一段战舞。"
+msgstr "[献上一支不错的舞蹈。]"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Draco_Dune.json
@@ -217967,7 +217967,7 @@ msgstr "[表演一段传奇舞蹈。]"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Draco_Dune.json
 msgid "[Perform a masterful dance.]"
-msgstr "%s 跳了一段战舞。"
+msgstr "[展现一支大师级的舞蹈。]"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Draco_Dune.json
@@ -254097,7 +254097,7 @@ msgstr "捕鱼：2级 鱼竿"
 #. ~ Description for recipe group
 #: data/json/recipes/basecamps/recipe_groups.json
 msgid " Hack & Download: IC datasheet archives, USB drive"
-msgstr "下载：IC数据库到U盘"
+msgstr "骇入并下载：IC数据手册档案，USB驱动器"
 
 #. ~ Description for recipe group
 #: data/json/recipes/basecamps/recipe_groups.json
@@ -292505,7 +292505,7 @@ msgstr "饱食超量"
 #. ~ Clause text "famished" of UI widget "zenfs_hunger_no_label"
 #: data/json/ui/zenfs/hunger.json
 msgid " FAMISHED"
-msgstr "濒临饿死！"
+msgstr "极度饥饿"
 
 #. ~ Clause text "hungry" of UI widget "zenfs_hunger_no_label"
 #: data/json/ui/zenfs/hunger.json
@@ -317379,15 +317379,15 @@ msgstr "<color_white_red>着火！</color>"
 
 #: src/advanced_inv_area.cpp:156
 msgid " DANGER"
-msgstr "危险！"
+msgstr "危险"
 
 #: src/advanced_inv_area.cpp:162
 msgid " TRAP"
-msgstr "陷阱！"
+msgstr "陷阱"
 
 #: src/advanced_inv_area.cpp:168
 msgid " WATER"
-msgstr "水！"
+msgstr "水"
 
 #: src/animation.cpp:59 src/game.cpp:12864
 msgid "Hang on a bit…"
@@ -317812,7 +317812,7 @@ msgstr "选择颜色："
 #, c-format
 msgctxt "note color"
 msgid "%1$s:%2$s, "
-msgstr "%1$s：%2$s。"
+msgstr "%1$s:%2$s, "
 
 #: src/auto_note.cpp:534
 msgctxt "color"
@@ -319200,7 +319200,7 @@ msgstr "你的%s被严重损伤！"
 #: src/bionics.cpp:1950 src/bionics.cpp:2041
 #, c-format
 msgid "<npcname>'s %s is severely damaged."
-msgstr "<npcname>的%s被严重损伤！"
+msgstr "<npcname> 的 %s 受到严重损坏。"
 
 #: src/bionics.cpp:1985
 #, c-format
@@ -322104,7 +322104,7 @@ msgstr "一条巨型鱼。"
 #: src/character_attire.cpp:2009
 #, c-format
 msgid "%1s %2s gets on %3s %4s."
-msgstr "%3$s%2$s发现%1$s%4$s"
+msgstr "%1s %2s 溅到了 %3s 的 %4s 上。"
 
 #: src/character_attire.cpp:2023
 #, c-format
@@ -333146,7 +333146,7 @@ msgstr "<npcname> 几乎要被甩飞了，但什么东西把他按在了原地�
 #: src/game.cpp:11574 src/game.cpp:11594
 #, c-format
 msgid "%1s collides with %2s!"
-msgstr "%s撞上了%s。"
+msgstr "%1s 撞上了 %2s！"
 
 #: src/game.cpp:11700 src/map.cpp:11821
 msgid "You dive into water."
@@ -339704,11 +339704,11 @@ msgstr "不同枪管长度的伤害和散布："
 
 #: src/item.cpp:2903 src/item.cpp:2910 src/item.cpp:2917
 msgid " damage:  <num>"
-msgstr "伤害:  "
+msgstr "伤害：<num>"
 
 #: src/item.cpp:2905 src/item.cpp:2912 src/item.cpp:2919
 msgid " dispersion:  <num>"
-msgstr "散布:  "
+msgstr "散布:  <num>"
 
 #: src/item.cpp:2929
 msgid "This ammo has been <bad>hand-loaded</bad>, resulting in slightly inferior performance compared to factory-produced ammo."
@@ -353741,7 +353741,7 @@ msgstr "%s挣脱了！"
 #: src/monster.cpp:2585 src/monster.cpp:2588
 #, c-format
 msgid "%1s breaks free from %2s grab!"
-msgstr "%s从%s的抓握中挣脱了出来！"
+msgstr "%1s 挣脱了 %2s 的抓握！"
 
 #: src/monster.cpp:2933
 msgid "hummmmm."
