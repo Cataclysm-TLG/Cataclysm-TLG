@@ -1980,7 +1980,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 3, "cut": 5, "acid": 8, "heat": 8, "bullet": 6 }
+    "resist": { "bash": 3, "cut": 5, "acid": 10, "heat": 8, "bullet": 6 }
   },
   {
     "type": "material",

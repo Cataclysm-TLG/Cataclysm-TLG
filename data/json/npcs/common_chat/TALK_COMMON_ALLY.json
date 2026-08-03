@@ -255,7 +255,7 @@
         "effect": "dismount"
       },
       { "text": "Let's talk about your current activity.", "topic": "TALK_ACTIVITIES" },
-      { "text": "Let's talk about the camp.", "topic": "TALK_CAMP" },
+      { "text": "Let's talk about settlements.", "topic": "TALK_CAMP" },
       { "text": "Change your martial arts style.", "topic": "TALK_DONE", "effect": "pick_style" },
       {
         "text": "You should take over for now.",
@@ -926,14 +926,14 @@
     "id": "TALK_RADIO",
     "type": "talk_topic",
     "responses": [
-      { "text": "Please go to this location…", "topic": "TALK_GOTO_LOCATION_RADIO", "effect": "goto_location" },
-      { "text": "Stay at your current position.", "topic": "TALK_DONE", "effect": "assign_guard" },
       {
-        "text": "Show me what needs to be done at the camp.",
+        "text": "I have some orders to give.",
         "topic": "TALK_DONE",
         "effect": "basecamp_mission",
         "condition": { "npc_at_om_location": "FACTION_CAMP_ANY" }
-      }
+      },
+      { "text": "Please go to this location…", "topic": "TALK_GOTO_LOCATION_RADIO", "effect": "goto_location" },
+      { "text": "Stay at your current position.", "topic": "TALK_DONE", "effect": "assign_guard" }
     ]
   },
   {
@@ -1071,22 +1071,28 @@
   {
     "id": "TALK_CAMP",
     "type": "talk_topic",
-    "dynamic_line": "What about the camp?",
+    "dynamic_line": "What's on your mind?",
     "responses": [
       {
-        "text": "I want to assign you to work at this camp.",
+        "text": "I have some orders to give.",
+        "topic": "TALK_DONE",
+        "effect": "basecamp_mission",
+        "condition": { "npc_at_om_location": "FACTION_CAMP_ANY" }
+      },
+      {
+        "text": "I want to station you at this settlement.",
         "condition": { "npc_at_om_location": "FACTION_CAMP_ANY" },
         "topic": "TALK_FRIEND_GUARD",
         "effect": "assign_camp"
       },
       {
-        "text": "I want you to build a camp here.",
+        "text": "I want you to found a settlement here.",
         "topic": "TALK_HALLU_CAMP",
         "condition": { "npc_has_trait": "HALLUCINATION" },
         "switch": true
       },
       {
-        "text": "I want you to build a camp here.",
+        "text": "I want you to found a settlement here.",
         "topic": "TALK_DONE",
         "effect": "start_camp",
         "condition": { "npc_at_om_location": "FACTION_CAMP_START" },
@@ -1094,22 +1100,9 @@
         "default": true
       },
       {
-        "text": "Since we can't build a camp here, I want you to tell me where can we build a camp?",
-        "topic": "TALK_CAMP_SITES",
-        "condition": { "not": { "npc_at_om_location": "FACTION_CAMP_START" } },
-        "switch": true,
-        "default": true
-      },
-      {
-        "text": "We need to abandon this camp.",
+        "text": "We need to abandon this settlement.",
         "condition": { "npc_at_om_location": "FACTION_CAMP_ANY" },
         "topic": "TALK_ABANDON"
-      },
-      {
-        "text": "Show me what needs to be done at the camp.",
-        "topic": "TALK_DONE",
-        "effect": "basecamp_mission",
-        "condition": { "npc_at_om_location": "FACTION_CAMP_ANY" }
       },
       { "text": "Never mind.", "topic": "TALK_NONE" }
     ]

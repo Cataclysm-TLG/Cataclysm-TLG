@@ -547,10 +547,10 @@ class cata_tiles
         );
 
         // Used by sdltiles for overmap drawing.
-        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
-                                  lit_level ll,
-                                  bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
+        bool draw_from_id_string_om( const std::string &id, TILE_CATEGORY category,
+                                     const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
+                                     lit_level ll,
+                                     bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
 
         // Wrapper for draw_sprite_at()
         bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,

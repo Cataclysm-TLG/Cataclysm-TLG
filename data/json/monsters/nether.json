@@ -745,7 +745,15 @@
     "harvest": "mutant_human",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "dissect": "dissect_gastropod_sample_large",
-    "special_attacks": [ [ "ACID", 15 ] ],
+    "special_attacks": [
+      {
+        "type": "spell",
+        "spell_data": { "id": "acid_spray", "min_level": 5 },
+        "monster_message": "The %s spews acid!",
+        "cooldown": 12,
+        "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
+      }
+    ],
     "anger_triggers": [ "PLAYER_WEAK", "FRIEND_DIED" ],
     "flags": [ "SEES", "SMELLS", "HEARS", "POISON", "ACIDPROOF", "ACID_BLOOD" ],
     "armor": { "bash": 6, "cut": 12, "bullet": 10 }
