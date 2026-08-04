@@ -127,6 +127,7 @@ void curtains( Character &you, const tripoint_bub_ms &examp );
 void sign( Character &you, const tripoint_bub_ms &examp );
 void pay_gas( Character &you, const tripoint_bub_ms &examp );
 void ledge( Character &you, const tripoint_bub_ms &examp );
+void ledge_ramp( Character &you, const tripoint_bub_ms &examp );
 void autodoc( Character &you, const tripoint_bub_ms &examp );
 void attunement_altar( Character &you, const tripoint_bub_ms &examp );
 void translocator( Character &you, const tripoint_bub_ms &examp );
