@@ -2,8 +2,8 @@
   {
     "id": "mon_civilian_panic",
     "type": "MONSTER",
-    "name": { "str": "panicked person" },
-    "description": "This hysterical individual has a faint, yet fading, glint of intelligence in their bloodshot eyes.  They sometimes scream in fear and behave clearly irrationally.  This will quite likely cause their demise at the hands of the undead horde rather quickly.",
+    "name": { "str": "terrified victim" },
+    "description": "When the Cataclysm struck, it broke something in a lot of people that could never be fixed.  Most went berserk, picking up whatever weapon was at hand and attacking their fellow man, but some, like this unfortunate individual, became trapped in a permanent state of senseless terror.",
     "looks_like": "mon_dementia",
     "default_faction": "human",
     "bodytype": "human",
@@ -12,7 +12,7 @@
     "weakpoint_sets": [ "wps_humanoid_body" ],
     "chat_topics": [ "TALK_CIVILIAN_PANIC" ],
     "volume": "75000 ml",
-    "weight": "74000 g",
+    "weight": "71000 g",
     "hp": 75,
     "speed": 90,
     "symbol": "@",
@@ -31,7 +31,7 @@
     "dissect": "dissect_human_sample_single",
     "death_function": { "effect": { "id": "death_guilt", "min_level": 6 } },
     "path_settings": { "max_dist": 30, "allow_open_doors": true, "avoid_traps": true, "avoid_sharp": true },
-    "upgrades": { "half_life": 4, "age_grow": 1, "into_group": "GROUP_CIVILIANS_UPGRADE" },
+    "upgrades": { "half_life": 4, "into_group": "GROUP_CIVILIANS_UPGRADE" },
     "dodge": 1,
     "death_drops": "default_zombie_death_drops",
     "zombify_into": "mon_zombie",
@@ -40,8 +40,8 @@
   {
     "id": "mon_civilian_stationary",
     "type": "MONSTER",
-    "name": { "str": "petrified person" },
-    "description": "They just stand there, staring into the void, with a vacant expression on their face.  Barely moving, they will probably fall to the undead horde soon.",
+    "name": { "str": "catatonic victim" },
+    "description": "This person is either one of the billions whose minds were shattered by the Cataclysm, or they have since experienced something that has left them in a similar state.  They remain still, barely breathing, and do not react in any way to their surroundings.",
     "//": "Will not be able to do this in their current mental state:",
     "path_settings": { "max_dist": 30, "allow_open_doors": false, "avoid_traps": false, "avoid_sharp": false },
     "speed": 20,
@@ -51,8 +51,8 @@
   {
     "id": "mon_civilian_police",
     "type": "MONSTER",
-    "name": { "str": "overconfident officer" },
-    "description": "Gun in hand, this police officer is determined to make a last stand against the horde.",
+    "name": { "str": "berserk cop" },
+    "description": "Gun in hand, this police officer is determined to make a last stand against the horde.  Tattered gear and an unsteady gait suggest they're not all there anymore.",
     "copy-from": "mon_civilian_panic",
     "diff": 5,
     "aggro_character": false,
@@ -64,7 +64,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_syn_armored" ],
     "chat_topics": [ "TALK_CIVILIAN_OFFICER" ],
     "//": "Copied from zombie cop",
-    "melee_skill": 6,
+    "melee_skill": 5,
     "melee_dice": 2,
     "melee_dice_sides": 4,
     "//2": "Uses a baton for melee attacks",
@@ -92,13 +92,13 @@
         "description": "The officer fires their Glock 22!"
       }
     ],
-    "armor": { "bash": 6, "cut": 6, "stab": 6, "bullet": 6, "electric": 2 }
+    "armor": { "bash": 4, "cut": 6, "stab": 6, "bullet": 6, "electric": 2 }
   },
   {
     "id": "mon_civilian_zombiefighter",
     "type": "MONSTER",
-    "name": { "str": "futile fighter" },
-    "description": "Obviously, this aggravated yet rallied human has lost their wits and tries to fight the undead with just a stick in their hands.",
+    "name": { "str": "frenzied victim" },
+    "description": "This person seems determined to fight off the undead hordes, but they won't calm down.  Something has broken in their brain, leaving them locked in a permanent state of terrified rage.",
     "copy-from": "mon_civilian_panic",
     "chat_topics": [ "TALK_CIVILIAN_FIGHTER" ],
     "diff": 3,
@@ -113,13 +113,13 @@
   {
     "id": "mon_civilian_icu",
     "type": "MONSTER",
-    "name": { "str": "hospitalized human" },
-    "description": "This being is severely ill in some form or another, requiring intensive care that is not available anymore after the Cataclysm.  There is nothing you can do for them.",
+    "name": { "str": "bedridden victim" },
+    "description": "Wheezing softly, this person is suffering from some condition that would have required round the clock care before the Cataclysm.  There is nothing that can be done for them now.",
     "chat_topics": [ "TALK_CIVILIAN_ICU" ],
     "speed": 0,
     "//": "So they are not perpetually fleeing despite lying in a hospital bed",
     "morale": 0,
-    "upgrades": { "into": "mon_zombie_crawler" },
+    "upgrades": { "half_life": 2, "into": "mon_zombie_crawler" },
     "zombify_into": "mon_zombie_crawler",
     "delete": { "flags": [ "SEES", "HEARS" ] },
     "copy-from": "mon_civilian_stationary"
@@ -127,9 +127,9 @@
   {
     "id": "mon_civilian_parent",
     "type": "MONSTER",
-    "name": { "str": "gawky guardian" },
+    "name": { "str": "despondent victim" },
     "special_attacks": [ [ "PARROT", 0 ] ],
-    "description": "Obsessed with finding their offspring, they scour the environment for certain death.",
+    "description": "When the Cataclysm struck, it broke something in a lot of people that could never be fixed.  This unfortunate wanders the wreckage of the world, calling out mindlessly for children they will never find.",
     "chat_topics": [ "TALK_CIVILIAN_PARENT" ],
     "copy-from": "mon_civilian_panic"
   },
@@ -164,7 +164,7 @@
       { "monster": "mon_civilian_panic", "weight": 40, "cost_multiplier": 0, "ends": "8 days", "pack_size": [ 1, 5 ] },
       {
         "monster": "mon_civilian_panic",
-        "weight": 60,
+        "weight": 40,
         "cost_multiplier": 0,
         "starts": "8 days",
         "ends": "16 days",

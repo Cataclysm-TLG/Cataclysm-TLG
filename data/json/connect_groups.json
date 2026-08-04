@@ -145,6 +145,10 @@
   },
   {
     "type": "connect_group",
-    "id": "RAMP"
+    "id": "RAMP_LOW"
+  },
+  {
+    "type": "connect_group",
+    "id": "RAMP_HIGH"
   }
 ]

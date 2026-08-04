@@ -41,6 +41,7 @@ int_id<ter_t> string_id<ter_t>::id() const;
 // size of connect groups bitset; increase if needed
 const int NUM_TERCONN = 256;
 connect_group get_connect_group( const std::string &name );
+const std::vector<ter_t> &get_all_terrain_types();
 
 template <typename E> struct enum_traits;
 

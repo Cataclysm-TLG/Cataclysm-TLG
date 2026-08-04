@@ -26,8 +26,8 @@ template<typename Point, typename Container>
 std::vector<Point> get_sorted_tiles_by_distance( const Point &center, const Container &tiles )
 {
     const auto cmp = [center]( const Point & a, const Point & b ) {
-        const int da = rl_dist( center, a );
-        const int db = rl_dist( center, b );
+        const int da = trig_dist( center, a );
+        const int db = trig_dist( center, b );
 
         return da < db;
     };

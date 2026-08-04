@@ -715,9 +715,9 @@
   {
     "type": "furniture",
     "id": "f_ladder",
-    "name": "wooden stepladder",
+    "name": "wooden folding ladder",
     "looks_like": "t_ladder_up",
-    "description": "A short, foldable wooden ladder.  Can help you climb to a rooftop, or maybe slow something down.",
+    "description": "A wooden ladder that folds up for easy transport.  Once deployed, it should be tall enough to get you onto a one-story roof.",
     "symbol": "H",
     "color": "brown",
     "move_cost_mod": 3,
@@ -742,8 +742,8 @@
   {
     "type": "furniture",
     "id": "f_aluminum_stepladder",
-    "name": "aluminum stepladder",
-    "description": "A short, foldable aluminum ladder.  Can help you climb to a rooftop, or maybe slow something down.",
+    "name": "aluminum folding ladder",
+    "description": "An aluminum ladder that folds up for easy transport.  Once deployed, it should be tall enough to get you onto a one-story roof.",
     "symbol": "H",
     "color": "light_gray",
     "move_cost_mod": 3,
@@ -1771,6 +1771,7 @@
       "EXAMINE_FROM_ABOVE",
       "DIFFICULT_Z",
       "ALLOW_ON_OPEN_AIR",
+      "FLOATS_IN_AIR",
       "DEPLOYED_FURNITURE_ABOVE"
     ],
     "deployed_item": "grapnel",

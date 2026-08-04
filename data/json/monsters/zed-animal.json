@@ -39,7 +39,19 @@
       { "id": "bite_grab_required" }
     ],
     "harvest": "zombie_leather",
-    "flags": [ "SEES", "HEARS", "SMELLS", "SWIMS", "AQUATIC", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "WATER_CAMOUFLAGE" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "SWIMS",
+      "AQUATIC",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "WATER_CAMOUFLAGE",
+      "BELLYUP"
+    ],
     "armor": { "bash": 6, "cut": 2, "bullet": 2 }
   },
   {
@@ -82,7 +94,19 @@
       { "id": "bite_grab_required" }
     ],
     "harvest": "zombie_leather",
-    "flags": [ "SEES", "HEARS", "SMELLS", "SWIMS", "AQUATIC", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "WATER_CAMOUFLAGE" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "SWIMS",
+      "AQUATIC",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "WATER_CAMOUFLAGE",
+      "BELLYUP"
+    ],
     "armor": { "bash": 8, "cut": 2, "bullet": 2 }
   },
   {
@@ -117,7 +141,20 @@
     "death_drops": "mon_dog_death_drops",
     "upgrades": { "half_life": 112, "into_group": "GROUP_ZOMBIE_DOG_UPGRADE" },
     "fungalize_into": "mon_zombie_dog_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "GRABS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "GRABS",
+      "STUMBLES",
+      "WARM",
+      "BASHES",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "BELLYUP"
+    ],
     "armor": { "electric": 1 }
   },
   {
@@ -165,7 +202,8 @@
       "REVIVES",
       "PUSH_MON",
       "FILTHY",
-      "KEENNOSE"
+      "KEENNOSE",
+      "BELLYUP"
     ],
     "armor": { "bash": 6, "cut": 6, "bullet": 5, "electric": 1 }
   },
@@ -214,7 +252,8 @@
       "NO_BREATHE",
       "REVIVES",
       "PUSH_MON",
-      "FILTHY"
+      "FILTHY",
+      "BELLYUP"
     ],
     "armor": { "electric": 1 }
   },
@@ -331,7 +370,8 @@
       "REVIVES",
       "PUSH_MON",
       "FILTHY",
-      "KEENNOSE"
+      "KEENNOSE",
+      "BELLYUP"
     ],
     "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 2 }
   },
@@ -345,7 +385,7 @@
     "species": [ "ZOMBIE" ],
     "volume": "75000 ml",
     "weight": "74000 g",
-    "hp": 55,
+    "hp": 60,
     "speed": 70,
     "attack_cost": 70,
     "material": [ "flesh" ],
@@ -364,10 +404,23 @@
     "harvest": "zombie_leather",
     "fungalize_into": "mon_zombie_pig_fungus",
     "path_settings": { "max_dist": 10 },
-    "special_attacks": [ { "type": "bite", "attack_upper": false, "cooldown": 2 } ],
+    "special_attacks": [ { "id": "low_charge", "cooldown": 12 }, { "type": "bite", "attack_upper": false, "cooldown": 2 } ],
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
     "upgrades": { "half_life": 200, "into_group": "GROUP_ZOMBIE_PIG_UPGRADE" },
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "KEENNOSE", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "STUMBLES",
+      "WARM",
+      "KEENNOSE",
+      "BASHES",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "BELLYUP"
+    ],
     "//": "1d8->2d5, minor bonus over 1d9",
     "armor": { "electric": 1 }
   },
@@ -400,7 +453,20 @@
     "vision_night": 5,
     "harvest": "zombie_fur",
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "SWIMS" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "STUMBLES",
+      "WARM",
+      "BASHES",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "SWIMS",
+      "BELLYUP"
+    ],
     "armor": { "electric": 1 }
   },
   {
@@ -442,7 +508,7 @@
         "cooldown": 45
       }
     ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "BELLYUP" ],
     "armor": { "bash": 6, "cut": 4, "bullet": 3, "electric": 2 }
   },
   {
@@ -475,7 +541,7 @@
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "upgrades": { "half_life": 188, "into_group": "GROUP_ZOMBIE_HORSE_UPGRADE" },
     "fungalize_into": "mon_zombie_horse_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "WARM", "BASHES", "NO_BREATHE", "REVIVES", "GOODHEARING" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "WARM", "BASHES", "NO_BREATHE", "REVIVES", "GOODHEARING", "BELLYUP" ],
     "armor": { "bash": 5, "cut": 1, "electric": 2 }
   },
   {
@@ -535,7 +601,8 @@
       "POISON",
       "NO_BREATHE",
       "REVIVES",
-      "FILTHY"
+      "FILTHY",
+      "BELLYUP"
     ],
     "armor": { "bash": 1, "electric": 2 }
   },
@@ -567,7 +634,7 @@
     "vision_night": 3,
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "harvest": "zombie_fur",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "NO_BREATHE", "REVIVES", "FILTHY", "BELLYUP" ],
     "armor": { "bash": 4, "cut": 1, "electric": 3 }
   },
   {
@@ -600,7 +667,7 @@
     "vision_night": 3,
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "harvest": "zombie_fur",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "NO_BREATHE", "REVIVES", "FILTHY", "BELLYUP" ],
     "armor": { "bash": 1, "cut": 2, "electric": 1 }
   },
   {
@@ -641,7 +708,7 @@
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "death_drops": { "subtype": "collection", "groups": [ [ "cow", 25 ] ], "//": "25% chance of an item from group cow" },
     "harvest": "zombie_leather",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "BELLYUP" ],
     "armor": { "bash": 3, "cut": 3, "electric": 3 }
   },
   {
@@ -693,7 +760,8 @@
       "REVIVES",
       "FILTHY",
       "PUSH_MON",
-      "PUSH_VEH"
+      "PUSH_VEH",
+      "BELLYUP"
     ],
     "armor": { "bash": 6, "cut": 4, "bullet": 3, "electric": 4 }
   },
@@ -701,7 +769,6 @@
     "id": "mon_zllama",
     "type": "MONSTER",
     "name": { "str": "zombie llama" },
-    "//": "The wild ancestor of the llama is called a vicuña.",
     "description": "This llama oozes a dark oil from a multitude of lesions and cuts.  Its wool has sloughed off with parts of its skin, revealing pulsating muscles and flesh.  Its mouth drips with a sickly green substance which it seems to be chewing on.",
     "default_faction": "zombie",
     "bodytype": "horse",
@@ -727,21 +794,14 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "special_attacks": [
       {
-        "type": "gun",
-        "cooldown": 5,
-        "move_cost": 50,
-        "gun_type": "acid_spit",
-        "fake_skills": [ [ "gun", 2 ], [ "rifle", 2 ] ],
-        "fake_dex": 4,
-        "fake_per": 4,
-        "require_targeting_player": false,
-        "target_moving_vehicles": true,
-        "description": "The vicious vicuña spits a glob of acid!",
-        "ranges": [ [ 2, 10, "DEFAULT" ] ]
-      },
-      [ "ACID_BARF", 5 ]
+        "type": "spell",
+        "spell_data": { "id": "acid_spit", "min_level": 7 },
+        "monster_message": "The %s spews acid!",
+        "cooldown": 10,
+        "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
+      }
     ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "BELLYUP" ]
   },
   {
     "id": "mon_zeer",
@@ -784,7 +844,8 @@
       "BASHES",
       "FILTHY",
       "KEENNOSE",
-      "GOODHEARING"
+      "GOODHEARING",
+      "BELLYUP"
     ],
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
@@ -829,7 +890,8 @@
       "BASHES",
       "FILTHY",
       "KEENNOSE",
-      "GOODHEARING"
+      "GOODHEARING",
+      "BELLYUP"
     ],
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
@@ -874,7 +936,8 @@
       "FILTHY",
       "BASHES",
       "KEENNOSE",
-      "GOODHEARING"
+      "GOODHEARING",
+      "BELLYUP"
     ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   }

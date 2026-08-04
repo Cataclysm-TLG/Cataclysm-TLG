@@ -8,7 +8,7 @@
     "color": "cyan_red",
     "move_cost": 0,
     "connect_groups": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 18,
@@ -28,7 +28,7 @@
     "color": "cyan_red",
     "move_cost": 0,
     "connect_groups": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 18,
@@ -48,7 +48,7 @@
     "color": "cyan_red",
     "move_cost": 0,
     "connect_groups": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 18,
@@ -68,7 +68,7 @@
     "color": "cyan_red",
     "move_cost": 0,
     "connect_groups": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 18,
@@ -88,7 +88,7 @@
     "color": "cyan_red",
     "move_cost": 0,
     "connect_groups": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 18,
@@ -108,7 +108,7 @@
     "color": "cyan_red",
     "move_cost": 0,
     "connect_groups": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 18,
@@ -127,7 +127,7 @@
     "symbol": "6",
     "color": "white",
     "move_cost": 0,
-    "flags": [ "TRANSPARENT", "NOITEM", "COLLAPSES", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "COLLAPSES", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 18,
@@ -146,7 +146,7 @@
     "symbol": "6",
     "color": "white",
     "move_cost": 0,
-    "flags": [ "TRANSPARENT", "NOITEM", "COLLAPSES", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "COLLAPSES", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 18,
@@ -166,7 +166,7 @@
     "color": "brown",
     "move_cost": 0,
     "connect_groups": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "INDOORS", "PERMEABLE", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 8,
@@ -200,7 +200,7 @@
     "symbol": "|",
     "color": "brown",
     "move_cost": 0,
-    "flags": [ "TRANSPARENT", "NOITEM", "SHORT", "PERMEABLE", "EASY_DECONSTRUCT", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "SHORT", "PERMEABLE", "EASY_DECONSTRUCT", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 8,
@@ -232,7 +232,7 @@
     "symbol": "|",
     "color": "brown",
     "move_cost": 0,
-    "flags": [ "TRANSPARENT", "NOITEM", "SHORT", "PERMEABLE", "EASY_DECONSTRUCT", "THIN_OBSTACLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "SHORT", "PERMEABLE", "EASY_DECONSTRUCT", "THIN_OBSTACLE", "FREE_TO_EXAMINE" ],
     "examine_action": "controls_gate",
     "bash": {
       "str_min": 8,
@@ -265,7 +265,7 @@
     "move_cost": 0,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM" ],
+    "flags": [ "NOITEM", "FREE_TO_EXAMINE" ],
     "//": "For the player to chat with an NPC through the intercom, the npc must have 'name_unique': 'the_intercom' and must be within 10 tiles of the intercom.",
     "examine_action": "intercom",
     "bash": {

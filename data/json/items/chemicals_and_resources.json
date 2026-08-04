@@ -106,7 +106,12 @@
     "volume": "5 ml",
     "weight": "8 g",
     "ammo_type": "gravel",
+    "damage": { "damage_type": "bash", "amount": 1 },
+    "range": 4,
+    "dispersion": 30,
+    "loudness": 0,
     "count": 1,
+    "recovery_chance": 70,
     "melee_damage": { "bash": 1 }
   },
   {

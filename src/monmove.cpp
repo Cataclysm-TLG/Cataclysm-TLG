@@ -68,6 +68,7 @@ static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_immobilization( "immobilization" );
 static const efftype_id effect_in_pit( "in_pit" );
+static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_invisibility( "invisibility" );
 static const efftype_id effect_led_by_leash( "led_by_leash" );
 static const efftype_id effect_no_sight( "no_sight" );
@@ -1193,7 +1194,9 @@ void monster::move()
                     const tripoint_bub_ms upper = candidate.z() > pos_abs().z() ? candidate : pos_bub();
                     const tripoint_bub_ms lower = candidate.z() > pos_abs().z() ? pos_bub() : candidate;
                     if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, upper ) &&
-                        here.has_flag( ter_furn_flag::TFLAG_GOES_UP, lower ) ) {
+                        here.has_flag( ter_furn_flag::TFLAG_GOES_UP, lower ) && ( can_climb() ||
+                                ( !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, upper ) &&
+                                  !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, lower ) ) ) ) {
                         can_z_move = true;
                     }
                 }
@@ -1419,47 +1422,58 @@ void monster::footsteps( const tripoint_bub_ms &p )
     if( is_hallucination() ) {
         return;
     }
-
+    // This just tracks if we've already run this function this turn.
     if( made_footstep ) {
         return;
     }
     made_footstep = true;
-    int volume = 6; // same as player's footsteps
-    if( flies() || has_flag( mon_flag_SILENTMOVES ) ) {
-        volume = 0;    // Flying monsters don't have footsteps!
+    int volume = 6; // Same as base sound for a character's footsteps.
+
+    if( has_flag( mon_flag_SILENTMOVES ) || has_effect( effect_incorporeal ) ) {
+        return;
     }
     if( digging() ) {
         volume = 10;
     }
-    switch( type->size ) {
-        case creature_size::tiny:
-            volume = 0; // No sound for the tinies
-            break;
-        case creature_size::small:
-            volume /= 3;
-            break;
-        case creature_size::medium:
-            break;
-        case creature_size::large:
-            volume *= 1.5;
-            break;
-        case creature_size::huge:
-            volume *= 2;
-            break;
-        default:
-            break;
+    bool flying = flies();
+    if( flying ) { // Flight gets really loud for big boys.
+        volume = static_cast<int>( type->size ) * 2;
+    } else {
+        switch( type->size ) {
+            case creature_size::tiny:
+                volume = 0; // No sound for the tinies
+                break;
+            case creature_size::small:
+                volume /= 3;
+                break;
+            case creature_size::medium:
+                break;
+            case creature_size::large:
+                volume *= 1.5;
+                break;
+            case creature_size::huge:
+                volume *= 2;
+                break;
+            default:
+                break;
+        }
     }
     if( has_flag( mon_flag_LOUDMOVES ) ) {
         volume += 6;
     } else if( has_flag( mon_flag_QUIETMOVES ) ) {
         volume -= 3;
     }
-    if( volume == 0 ) {
+
+    if( volume <= 0 ) {
         return;
     }
     int dist = trig_dist( p,
                           get_player_character().pos_bub() );
-    sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
+    if( flying ) {
+        sounds::add_footstep( p, volume, dist, this, type->get_flight_sound() );
+    } else {
+        sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
+    }
 }
 
 tripoint_bub_ms monster::scent_move()
@@ -1891,11 +1905,13 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     // This is stair teleportation hackery.
     // TODO: Remove this in favor of stair alignment
     if( going_up ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos ) && ( can_climb() ||
+                !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos ) ) ) {
             destination = find_closest_stair( tripoint_bub_ms( p ), ter_furn_flag::TFLAG_GOES_DOWN );
         }
     } else if( z_move ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) && ( can_climb() ||
+                !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos ) ) ) {
             destination = find_closest_stair( tripoint_bub_ms( p ), ter_furn_flag::TFLAG_GOES_UP );
         }
     }
@@ -2342,6 +2358,7 @@ void monster::stumble()
             }
         }
     }
+    invalidate_tile_eye_level_cache();
 }
 
 void monster::knock_back_to( const tripoint_bub_ms &to )

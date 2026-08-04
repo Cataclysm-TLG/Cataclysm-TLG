@@ -1509,8 +1509,8 @@
     "looks_like": "t_laminated_glass",
     "description": "A barrier made of laminated safety glass.  It's a lot tougher than regular glass, and is designed to break into fragments that are nowhere near as sharp.",
     "bash": {
-      "str_min": 20,
-      "str_max": 60,
+      "str_min": 12,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
@@ -1525,8 +1525,8 @@
     "id": "t_laminated_glass_lab",
     "copy-from": "t_laminated_glass",
     "bash": {
-      "str_min": 20,
-      "str_max": 60,
+      "str_min": 13,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
@@ -1545,7 +1545,7 @@
     "description": "A ballistic glass barrier, consisting of layers of laminated glass.  Its heavyweight construction is tough enough that even bullets that get through are unlikely to fully shatter it.",
     "bash": {
       "str_min": 25,
-      "str_max": 90,
+      "str_max": 100,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
@@ -1577,8 +1577,8 @@
     "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE", "MINEABLE", "BLOCK_WIND" ],
     "open": "t_laminated_glass_shutter_open",
     "bash": {
-      "str_min": 60,
-      "str_max": 210,
+      "str_min": 30,
+      "str_max": 100,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
@@ -1620,8 +1620,8 @@
     ],
     "close": "t_laminated_glass_shutter",
     "bash": {
-      "str_min": 20,
-      "str_max": 60,
+      "str_min": 12,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,

@@ -32,6 +32,7 @@ static const limb_score_id limb_score_swim( "swim" );
 
 static const skill_id skill_archery( "archery" );
 static const skill_id skill_swimming( "swimming" );
+static const skill_id skill_throw( "throw" );
 
 namespace
 {
@@ -270,12 +271,11 @@ float Character::get_limb_score( const limb_score_id &score, const body_part_typ
 }
 
 // Modifiers
-
 static float aim_speed_skill_modifier( const Character &c, const skill_id &gun_skill )
 {
     float skill_mult = 0.25f;
     float base_modifier = 0.0f;
-    if( gun_skill == skill_archery ) {
+    if( gun_skill == skill_archery || gun_skill == skill_throw ) {
         skill_mult = 0.5f;
         base_modifier = -1.5f;
     }
@@ -285,7 +285,8 @@ static float aim_speed_skill_modifier( const Character &c, const skill_id &gun_s
 
 static float aim_speed_dex_modifier( const Character &c, const skill_id & )
 {
-    return ( c.get_dex() - 8 ) * 0.5f;
+    // 9-10 is average, so that's where the bonus starts.
+    return ( c.get_dex() - 9 ) * 0.5f;
 }
 
 static float move_mode_move_cost_modifier( const Character &c, const skill_id & )

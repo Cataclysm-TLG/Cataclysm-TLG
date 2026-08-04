@@ -1320,7 +1320,12 @@
       "rotation": [ 0 ],
       "place_nested": [
         {
-          "chunks": [ [ "24x24_road_zombies_placement", 40 ], [ "24x24_road_zombies_dormant_placement", 5 ], [ "null", 55 ] ],
+          "chunks": [
+            [ "24x24_road_zombies_placement", 40 ],
+            [ "24x24_road_zombies_dormant_placement", 3 ],
+            [ "24x24_road_zombies_dormant_few_placement", 2 ],
+            [ "null", 55 ]
+          ],
           "x": 0,
           "y": 0,
           "flags_any": {
@@ -1353,6 +1358,15 @@
       "mapgensize": [ 24, 24 ],
       "rotation": [ 0 ],
       "place_monsters": [ { "monster": "GROUP_VANILLA_DORMANT", "x": [ 0, 23 ], "y": [ 0, 23 ] } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "24x24_road_zombies_dormant_few_placement",
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rotation": [ 0 ],
+      "place_monsters": [ { "monster": "GROUP_VANILLA_DORMANT", "x": [ 0, 23 ], "y": [ 0, 23 ], "density": 0.3 } ]
     }
   }
 ]

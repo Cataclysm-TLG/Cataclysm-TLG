@@ -102,7 +102,7 @@
       "Major blood loss?  Drink plenty, supplement iron, and rest to regenerate your red blood cells.",
       "Arterial bleeding from a gunshot?  A tourniquet can save you from death.",
       "No bandages nearby?  Empty your hands and let the time pass to apply pressure to the wound.",
-      "Adhesive bandages are much quicker to use, but not as effective.  Perfect for minor wounds.",
+      "Adhesive bandages are much quicker to use, but not as effective - perfect for minor wounds.",
       "The zone activity manager can make your life easier.  Do more in one go.",
       "Want less micro-management?  The zone manager can change your game.",
       "Every sensei was once a student.  NPCs can teach you and vice versa.",
@@ -174,9 +174,11 @@
       "Grenades create very fine shrapnel which isn't great against armor.  Pipebombs on the other hand…",
       "Use the fire, sludge, and acid some enemies spread to your advantage.",
       "Mutant meat isn't good for you, but if you're hungry, surely you can eat just a little…",
-      "NSAIDs are all the same type of drug and their effects don't stack, but they do with acetaminophen.",
+      "Aspirin and ibuprofen don't stack with each other, but most other pain medication does.",
       "Pain medication doesn't reduce pain, it is a buffer against it for the entirety of its duration.",
-      "Over the counter pain medication is weak, but it's not habit forming. It may keep you in the fight."
+      "Over the counter pain medication is weak, but it's not habit forming. It may keep you in the fight.",
+      "Construction can be a good way to gain your first rank of mechanics and electronics.",
+      "Injuries take longer to heal the worse they are.  Don't overdo it!"
     ]
   }
 ]

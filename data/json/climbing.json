@@ -49,10 +49,10 @@
   {
     "type": "climbing_aid",
     "abstract": "generic_stepladder",
-    "//": "TEMPLATE: Stepladders, not the bolted-down kind.  Very safe and easy unless you're reckless.",
+    "//": "TEMPLATE: Ladders, not the bolted-down kind.  Very safe and easy unless you're reckless.",
     "slip_chance_mod": -20,
     "down": {
-      "menu_text": "Climb down with this stepladder.",
+      "menu_text": "Climb down with this ladder.",
       "confirm_text": "Climb down the ladder?",
       "msg_after": "You climb down the ladder."
     },

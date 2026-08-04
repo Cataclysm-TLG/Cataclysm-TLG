@@ -842,7 +842,7 @@ struct sound_effect_handler {
         }
     }
 
-    // returns false if failed
+    // returns true if failed
     // note: nloops == 0 means sound plays once, 1 means twice, etc. -1 means loops for (not actually) forever
     static bool make_audio( int audioChannel, Mix_Chunk *audio_src, int nloops, int volume,
                             bool owns_audio, const sound_effect &effect, std::optional<units::angle> angle,
@@ -858,6 +858,17 @@ struct sound_effect_handler {
             }
             channels_to_end.clear();
             channels_to_end_mutex.unlock();
+        }
+
+        unsigned int chunk_already_playing_count = 0;
+        for( int ch = 0; ch <= 128; ch++ ) {
+            if( Mix_Playing( ch ) ) {
+                const Mix_Chunk *chunk = Mix_GetChunk( ch );
+                chunk_already_playing_count += static_cast<unsigned int>( chunk == audio_src );
+                if( chunk_already_playing_count == 2 ) {
+                    return false;
+                }
+            }
         }
 
         sound_effect_handler *handler = new sound_effect_handler();

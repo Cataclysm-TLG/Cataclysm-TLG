@@ -426,6 +426,7 @@
     "id": "tec_break",
     "name": "Grab Break",
     "melee_allowed": true,
+    "unarmed_allowed": true,
     "defensive": true,
     "grab_break": true,
     "messages": [
@@ -662,7 +663,6 @@
     ],
     "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
     "unarmed_allowed": true,
-    "melee_allowed": true,
     "defensive": true,
     "grab_break": true
   },
@@ -1641,7 +1641,6 @@
     "messages": [ "You were almost grabbed by %s, but you break free!", "<npcname> was almost grabbed by %s, but they break free!" ],
     "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
     "unarmed_allowed": true,
-    "melee_allowed": true,
     "defensive": true,
     "grab_break": true
   },
@@ -2377,7 +2376,6 @@
     ],
     "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
     "unarmed_allowed": true,
-    "melee_allowed": true,
     "defensive": true,
     "grab_break": true
   },
@@ -2849,6 +2847,7 @@
     "messages": [ "You were almost grabbed by %s, but you slither free!", "<npcname> was almost grabbed by %s, but they slither free!" ],
     "skill_requirements": [ { "name": "unarmed", "level": 4 } ],
     "unarmed_allowed": true,
+    "melee_allowed": true,
     "defensive": true,
     "grab_break": true
   },
@@ -3240,6 +3239,7 @@
       "<npcname> was almost grabbed by %s, but they are too powerful to be caged!"
     ],
     "unarmed_allowed": true,
+    "melee_allowed": true,
     "defensive": true,
     "grab_break": true
   },

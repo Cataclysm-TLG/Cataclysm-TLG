@@ -804,7 +804,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "to_hit": 1,
-    "material": [ "glass", "cotton" ],
+    "material": [ { "type": "glass", "portion": 10 }, { "type": "cotton", "portion": 1 } ],
     "symbol": "*",
     "color": "light_gray",
     "tick_action": [ "MOLOTOV_LIT" ],

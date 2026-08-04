@@ -24,7 +24,6 @@
 #include "ammo.h"
 #include "avatar.h"
 #include "bionics.h"
-#include "bodygraph.h"
 #include "bodypart.h"
 #include "calendar.h"
 #include "cata_assert.h"
@@ -135,8 +134,6 @@ static const ammotype ammo_plutonium( "plutonium" );
 
 static const bionic_id bio_digestion( "bio_digestion" );
 
-static const bodygraph_id bodygraph_full_body_iteminfo( "full_body_iteminfo" );
-
 static const damage_type_id damage_acid( "acid" );
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_bullet( "bullet" );
@@ -197,6 +194,7 @@ static const json_character_flag json_flag_SAPIOVORE( "SAPIOVORE" );
 
 static const matec_id RAPID( "RAPID" );
 
+static const material_id material_migo_flesh( "migo_flesh" );
 static const material_id material_wool( "wool" );
 
 static const mod_id MOD_INFORMATION_tlg( "tlg" );
@@ -2518,12 +2516,6 @@ void item::med_info( const item *med_item, std::vector<iteminfo> &info, const it
         info.emplace_back( "MED", _( "Health: " ), healthy_bar( med_com->healthy ) );
     }
 
-    if( med_com->stim != 0 && parts->test( iteminfo_parts::MED_STIMULATION ) ) {
-        std::string name = string_format( "%s<stat>%s</stat>", _( "Stimulation: " ),
-                                          med_com->stim > 0 ? _( "Upper" ) : _( "Downer" ) );
-        info.emplace_back( "MED", name );
-    }
-
     if( parts->test( iteminfo_parts::MED_PORTIONS ) ) {
         info.emplace_back( "MED", _( "Portions: " ),
                            std::abs( static_cast<int>( med_item->count() ) * batch ) );
@@ -4035,8 +4027,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         covered_parts.reset( bp );
     }
     bool covers_anything = covered_parts.any();
-    const bool show_bodygraph = get_option<bool>( "ITEM_BODYGRAPH" ) &&
-                                parts->test( iteminfo_parts::ARMOR_BODYGRAPH );
     if( parts->test( iteminfo_parts::ARMOR_BODYPARTS ) ) {
         insert_separation_line( info );
         std::vector<bodypart_id> covered;
@@ -4257,48 +4247,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     if( !info.empty() ) {
         info.back().bNewLine = true;
-    }
-
-    if( show_bodygraph ) {
-        insert_separation_line( info );
-        auto bg_cb = [this]( const bodygraph_part * bgp, const std::string & sym ) {
-            if( !bgp ) {
-                return colorize( sym, bodygraph_full_body_iteminfo->fill_color );
-            }
-            std::set<sub_bodypart_id> grp{ bgp->sub_bodyparts.begin(), bgp->sub_bodyparts.end() };
-            for( const bodypart_id &bid : bgp->bodyparts ) {
-                grp.insert( bid->sub_parts.begin(), bid->sub_parts.end() );
-            }
-            nc_color clr = c_dark_gray;
-            int cov_val = 0;
-            for( const sub_bodypart_id &sid : grp ) {
-                if( !sid.is_valid() ) {
-                    continue;
-                }
-                int tmp = get_coverage( sid );
-                cov_val = tmp > cov_val ? tmp : cov_val;
-            }
-            if( cov_val <= 5 ) {
-                clr = c_dark_gray;
-            } else if( cov_val <= 10 ) {
-                clr = c_light_gray;
-            } else if( cov_val <= 25 ) {
-                clr = c_light_red;
-            } else if( cov_val <= 60 ) {
-                clr = c_yellow;
-            } else if( cov_val <= 80 ) {
-                clr = c_green;
-            } else {
-                clr = c_light_green;
-            }
-            return colorize( sym, clr );
-        };
-        std::vector<std::string> bg_lines = get_bodygraph_lines( get_player_character(), bg_cb,
-                                            bodygraph_full_body_iteminfo );
-        for( const std::string &line : bg_lines ) {
-            info.emplace_back( "ARMOR", line );
-        }
-        insert_separation_line( info );
     }
 }
 
@@ -7085,11 +7033,11 @@ units::mass item::weight( bool include_contents, bool integral ) const
         if( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ) {
             ret_mul *= 0.75;
         }
-        if( has_flag( flag_GIBBED ) ) {
+        if( has_flag( flag_PULPED ) ) {
             ret_mul *= 0.85;
         }
         if( has_flag( flag_SKINNED ) ) {
-            ret_mul *= 0.85;
+            ret_mul *= 0.95;
         }
         if( has_flag( flag_QUARTERED ) ) {
             ret_mul *= 0.25;
@@ -7266,11 +7214,11 @@ units::volume item::corpse_volume( const mtype *corpse ) const
     if( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ) {
         corpse_volume *= 0.75;
     }
-    if( has_flag( flag_GIBBED ) ) {
+    if( has_flag( flag_PULPED ) ) {
         corpse_volume *= 0.85;
     }
     if( has_flag( flag_SKINNED ) ) {
-        corpse_volume *= 0.85;
+        corpse_volume *= 0.95;
     }
     if( corpse_volume > MAX_ITEM_VOLUME ) {
         // Silently set volume so the corpse can still spawn but a mtype can have a volume > MAX_ITEM_VOLUME
@@ -7963,9 +7911,9 @@ bool item::goes_bad() const
         return false;
     }
     if( is_corpse() ) {
-        // Corpses rot only if they are made of rotting materials
-        // They also only rot if they are not dormant
-        if( corpse->has_flag( mon_flag_DORMANT ) ) {
+        // Corpses rot only if they are made of rotting materials.
+        // Dormant and reviving corpses aren't actually dead.
+        if( corpse->has_flag( mon_flag_DORMANT ) || can_revive() ) {
             return false;
         }
         return made_of_any( materials::get_rotting() );
@@ -7979,6 +7927,10 @@ time_duration item::get_shelf_life() const
         if( is_comestible() ) {
             return get_comestible()->spoils;
         } else if( is_corpse() ) {
+            // Mi-go are aliens and nothing on earth eats them, so their corpses just sit there for a long time.
+            if( made_of( material_migo_flesh ) ) {
+                return 90_days;
+            }
             return 24_hours;
         }
     }
@@ -8777,7 +8729,7 @@ bool item::pulpable() const
            damage() < max_damage() &&
            !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
               has_flag( flag_QUARTERED ) ||
-              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) || has_flag( flag_GIBBED ) );
+              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) );
 }
 
 bool item::can_revive() const
@@ -8786,7 +8738,7 @@ bool item::can_revive() const
            damage() < max_damage() &&
            !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
               has_flag( flag_QUARTERED ) ||
-              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) || has_flag( flag_GIBBED ) ||
+              has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) ||
               ( has_flag( flag_FROZEN ) && !corpse->has_flag( mon_flag_DORMANT ) ) );
 }
 
@@ -8830,7 +8782,16 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
         }
     }
 
-    time_duration elapsed = calendar::turn - birthday();
+    time_duration frozen = time_duration::from_turns(
+                               std::stoi( get_var( "frozen_time_turns", "0" ) ) );
+
+    if( has_var( "frozen_start_turn" ) ) {
+        frozen += calendar::turn -
+                  ( calendar::turn_zero +
+                    std::stoi( get_var( "frozen_start_turn", "0" ) ) * 1_turns );
+    }
+
+    time_duration elapsed = calendar::turn - birthday() - frozen;
 
     /* If we're not cold, we can revive when the timer is half over. This allows
     refrigeration to slow revival without a lot of fuss when temperatures change. */
@@ -8865,7 +8826,7 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
     // REVIVE_SPECIAL is used by dormant zombies.
     const bool isReviveSpecial = has_flag( flag_REVIVE_SPECIAL );
     if( isReviveSpecial ) {
-        const int distance = rl_dist( pos, get_player_character().pos_bub() );
+        const int distance = trig_dist( pos, get_player_character().pos_bub() );
         if( distance > 3 ) {
             return false;
         }
@@ -9673,6 +9634,8 @@ std::string item::durability_indicator( bool include_intact ) const
                     return pgettext( "damage adjective", "damaged " );
                 case 3:
                     return pgettext( "damage adjective", "mangled " );
+                case 4:
+                    return pgettext( "damage adjective", "mutilated " );
                 default:
                     return pgettext( "damage adjective", "pulped " );
             }
@@ -11318,12 +11281,12 @@ units::mass item::gun_base_weight() const
 
 int item::gun_awkwardness( const Character &p ) const
 {
-    float gun_length = ( length() / 10_mm );
-    float length_ratio = gun_length / p.height();
-    float awkwardness = 1.f;
-    const float threshold = 0.75f;
-    awkwardness = length_ratio / threshold;
-    return std::max( 0, static_cast<int>( std::round( ( awkwardness - 1.f ) * 100.f ) ) );
+    double gun_length = length() / 10_mm;
+    double length_ratio = gun_length / p.height();
+    double threshold = 0.75;
+    double awkwardness = length_ratio / threshold;
+
+    return std::max( 0, static_cast<int>( std::round( ( awkwardness - 1.0 ) * 75.0 ) ) );
 }
 
 int item::gun_recoil( const Character &p, bool bipod, bool ideal_strength ) const
@@ -13957,8 +13920,9 @@ void item::set_temp_flags( units::temperature new_temperature, float freeze_perc
     } else if( new_temperature < temperatures::cold ) {
         set_flag( flag_COLD );
     }
-
-    // Convert water into clean water if it starts boiling
+    // Handle zombies thawing and freezing.
+    update_frozen_timer();
+    // Convert water into clean water if it starts boiling.
     if( typeId() == itype_water && new_temperature > temperatures::boiling ) {
         convert( itype_water_clean ).poison = 0;
     }
@@ -13977,6 +13941,8 @@ void item::heat_up()
     unset_flag( flag_SHREDDED );
     set_flag( flag_HOT );
     current_phase = type->phase;
+    // Did you just microwave a frozen zombie?
+    update_frozen_timer();
     // Set item temperature to 60 C (333.15 K, 122 F)
     // Also set the energy to match
     temperature = units::from_celsius( 60 );
@@ -13992,17 +13958,35 @@ void item::cold_up()
     unset_flag( flag_SHREDDED );
     set_flag( flag_COLD );
     current_phase = type->phase;
+    update_frozen_timer();
     // Set item temperature to 3 C (276.15 K, 37.4 F)
     // Also set the energy to match
     temperature = units::from_celsius( 3 );
     specific_energy = get_specific_energy_from_temperature( units::from_celsius( 3 ) );
-
     reset_temp_check();
 }
 
 void item::reset_temp_check()
 {
     last_temp_check = calendar::turn;
+}
+
+void item::update_frozen_timer()
+{
+    if( !can_revive() ) {
+        return;
+    }
+    if( has_own_flag( flag_FROZEN ) ) {
+        if( !has_var( "frozen_start_turn" ) ) {
+            set_var( "frozen_start_turn", to_turn<int>( calendar::turn ) );
+        }
+    } else if( has_var( "frozen_start_turn" ) ) {
+        const int frozen_start = std::stoi( get_var( "frozen_start_turn", "0" ) );
+        const int frozen_time = std::stoi( get_var( "frozen_time_turns", "0" ) ) +
+                                to_turn<int>( calendar::turn ) - frozen_start;
+        set_var( "frozen_time_turns", frozen_time );
+        erase_var( "frozen_start_turn" );
+    }
 }
 
 void item::overwrite_relic( const relic &nrelic )
@@ -14110,23 +14094,24 @@ bool item::process_fake_smoke( map &here, Character * /*carrier*/, const tripoin
 bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms &pos )
 {
     // cig dies out
-    if( item_counter == 0 ) {
+    if( item_counter <= 0 ) {
+        bool remove = false;
         if( carrier != nullptr ) {
             carrier->add_msg_if_player( m_neutral, _( "You finish your %s." ), type_name() );
         }
         if( type->transform_into ) {
             type->transform_into.value().transform( carrier, *this, true );
             if( !this->is_null() ) {
-                here.add_item_or_charges( carrier->pos_bub(), *this );
-                on_drop( carrier->pos_bub(), here );
-                carrier->i_rem( this );
+                here.add_item_or_charges( pos, *this );
+                on_drop( pos, here );
+                remove = true;
             }
         } else {
             type->invoke( carrier, *this, pos, "transform" );
             if( !this->is_null() ) {
-                here.add_item_or_charges( carrier->pos_bub(), *this );
-                on_drop( carrier->pos_bub(), here );
-                carrier->i_rem( this );
+                here.add_item_or_charges( pos, *this );
+                on_drop( pos, here );
+                remove = true;
             }
         }
         if( typeId() == itype_joint_lit && carrier != nullptr ) {
@@ -14135,7 +14120,7 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
             weed_msg( *carrier );
         }
         active = false;
-        return false;
+        return remove;
     }
 
     if( carrier != nullptr ) {
@@ -14164,11 +14149,15 @@ bool item::process_litcig( map &here, Character *carrier, const tripoint_bub_ms 
     }
     // if carried by someone:
     if( carrier != nullptr ) {
-        int puff_chance = 4;
+        int puff_chance = 24;
         if( has_flag( flag_TOBACCO ) ) {
-            // Try not to go over 3mg nicotine if we started at 0.
+            // Try not to go over 5mg nicotine if we started at 0.
             if( typeId() == itype_cigar_lit ) {
-                puff_chance = 14;
+                puff_chance = 36;
+            }
+            // Smokers reflexively puff more often if they need more nicotine.
+            if( carrier->vitamin_get( vitamin_nicotine ) < 5 ) {
+                puff_chance /= 6;
             }
             if( one_in( puff_chance ) ) {
                 carrier->vitamin_mod( vitamin_nicotine, 1 );

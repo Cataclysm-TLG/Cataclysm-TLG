@@ -67,6 +67,7 @@
 #include "mondefense.h"
 #include "monfaction.h"
 #include "monster.h"
+#include "mondeath.h"
 #include "mtype.h"
 #include "npc.h"
 #include "output.h"
@@ -237,6 +238,9 @@ static const trait_id trait_MARLOSS_BLUE( "MARLOSS_BLUE" );
 static const trait_id trait_PARAIMMUNE( "PARAIMMUNE" );
 static const trait_id trait_THRESH_MARLOSS( "THRESH_MARLOSS" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
+
+static const harvest_drop_type_id harvest_drop_bone( "bone" );
+static const harvest_drop_type_id harvest_drop_flesh( "flesh" );
 
 // shared utility functions
 static bool within_visual_range( monster *z, int max_range )
@@ -791,127 +795,6 @@ bool mattack::rattle( monster *z )
     return true;
 }
 
-bool mattack::acid( monster *z )
-{
-    if( !z->can_act() ) {
-        return false;
-    }
-
-    Creature *target = z->attack_target();
-    if( target == nullptr ) {
-        return false;
-    }
-
-    map &here = get_map();
-    // Can't see/reach target, no attack
-    if( !z->sees( here,  *target ) ||
-        !here.clear_path( z->pos_bub(), target->pos_bub(), 10, 1, 100 ) ) {
-        return false;
-    }
-    // It takes a while
-    z->mod_moves( -to_moves<int>( 3_seconds ) );
-    sounds::sound( z->pos_bub(), 4, sounds::sound_t::combat, _( "a spitting noise." ), false, "misc",
-                   "spitting" );
-
-    projectile proj;
-    proj.speed = 10;
-    // Mostly just for momentum
-    proj.impact.add_damage( damage_acid, 5 );
-    proj.range = 10;
-    proj.proj_effects.insert( ammo_effect_NO_OVERSHOOT );
-    dealt_projectile_attack dealt;
-    projectile_attack( dealt, proj, z->pos_bub(), target->pos_bub(),
-                       dispersion_sources{ 5400 }, z );
-    const tripoint_bub_ms &hitp = dealt.end_point ;
-    const Creature *hit_critter = dealt.last_hit_critter;
-    if( hit_critter == nullptr && here.hit_with_acid( hitp ) ) {
-        add_msg_if_player_sees( hitp,  _( "A glob of acid hits the %s!" ), here.tername( hitp ) );
-        if( here.impassable( hitp ) ) {
-            // TODO: Allow it to spill on the side it hit from
-            return true;
-        }
-    }
-
-    for( int i = -3; i <= 3; i++ ) {
-        for( int j = -3; j <= 3; j++ ) {
-            tripoint_bub_ms dest = hitp + tripoint_rel_ms( i, j, 0 );
-            if( here.passable( dest ) &&
-                here.clear_path( dest, hitp, 6, 1, 100 ) &&
-                ( ( one_in( std::abs( j ) ) && one_in( std::abs( i ) ) ) || ( i == 0 && j == 0 ) ) ) {
-                here.add_field( dest, fd_acid, 2 );
-            }
-        }
-    }
-
-    return true;
-}
-
-bool mattack::acid_barf( monster *z )
-{
-    map &here = get_map();
-
-    if( !z->can_act() ) {
-        return false;
-    }
-
-    // Let it be used on non-player creatures
-    Creature *target = z->attack_target();
-    if( target == nullptr || !z->is_adjacent( target, false ) ) {
-        return false;
-    }
-
-    z->mod_moves( -to_moves<int>( 1_seconds ) * 0.8 );
-    // Make sure it happens before uncanny dodge
-    here.add_field( target->pos_bub(), fd_acid, 1 );
-
-    bodypart_id hit = target->get_random_body_part();
-    damage_instance dam_inst = damage_instance( damage_acid, rng( 5, 12 ) );
-
-    // Can we dodge the attack? Uses player dodge function % chance (melee.cpp)
-    if( target->dodge_check( z, hit, dam_inst ) ) {
-        game_message_type msg_type = target->is_avatar() ? m_warning : m_info;
-        target->add_msg_player_or_npc( msg_type,
-                                       _( "The %s barfs acid at you, but you dodge!" ),
-                                       _( "The %s barfs acid at <npcname>, but they dodge!" ),
-                                       z->name() );
-
-        target->on_dodge( z, z->type->melee_skill * 2 );
-        return true;
-    }
-
-    target->block_hit( z, hit, dam_inst );
-
-    int dam = target->deal_damage( z,  hit, dam_inst ).total_damage();
-
-    target->add_env_effect( effect_corroding, hit, 5, time_duration::from_turns( dam / 2 + 5 ), hit );
-
-    if( dam > 0 ) {
-        game_message_type msg_type = target->is_avatar() ? m_bad : m_info;
-        target->add_msg_player_or_npc( msg_type,
-                                       //~ 1$s is monster name, 2$s bodypart in accusative
-                                       _( "The %1$s barfs acid on your %2$s for %3$d damage!" ),
-                                       //~ 1$s is monster name, 2$s bodypart in accusative
-                                       _( "The %1$s barfs acid on <npcname>'s %2$s for %3$d damage!" ),
-                                       z->name(),
-                                       body_part_name_accusative( hit ),
-                                       dam );
-
-        if( hit == bodypart_id( "eyes" ) ) {
-            target->add_env_effect( effect_blind, bodypart_id( "eyes" ), 3, 1_minutes );
-        }
-    } else {
-        target->add_msg_player_or_npc(
-            _( "The %1$s barfs acid on your %2$s, but it washes off the armor!" ),
-            _( "The %1$s barfs acid on <npcname>'s %2$s, but it washes off the armor!" ),
-            z->name(),
-            body_part_name_accusative( hit ) );
-    }
-
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
-
-    return true;
-}
-
 bool mattack::shockstorm( monster *z )
 {
     map &here = get_map();
@@ -1325,6 +1208,49 @@ bool mattack::resurrect( monster *z )
     // NOLINTNEXTLINE(clang-analyzer-core.CallAndMessage)
     float corpse_damage = raised.second->damage_level();
     creature_tracker &creatures = get_creature_tracker();
+    // Check is probably unnecessary, but let's be sure to limit critfails to actual attempts.
+    if( found_eligible_corpse ) {
+        // Sometimes we screw up.
+        if( one_in( 100 - ( corpse_damage * 2 ) ) ) {
+            add_msg_if_player_sees( raised.first, _( "The %s bursts apart in a shower of gore!" ),
+                                    raised.second->tname() );
+            // limit gibbing to 15%
+            int gibbed_weight = to_gram( raised.second->weight() * ( 15.0 / 100.0 ) );
+            int gib_distance = std::round( rng( 2, 4 ) );
+            const mtype *mt = raised.second->get_mtype();
+            units::mass corpse_weight = raised.second->weight();
+            if( mt ) {
+                for( const harvest_entry &entry : mt->harvest->entries() ) {
+                    // only flesh and bones survive.
+                    if( entry.type == harvest_drop_flesh || entry.type == harvest_drop_bone ) {
+                        // the larger the overflow damage, the less you get
+                        const int chunk_amt =
+                            entry.mass_ratio / 2.0f / 10.0 *
+                            corpse_weight / item::find_type( itype_id( entry.drop ) )->weight;
+                        mdeath::scatter_chunks( &here, itype_id( entry.drop ), chunk_amt, *mt, raised.first, gib_distance,
+                                                chunk_amt / ( gib_distance - 1 ) );
+                        gibbed_weight -= entry.mass_ratio / 2.0 / 20 * to_gram( corpse_weight );
+                    }
+                }
+                if( gibbed_weight > 0 ) {
+                    const itype_id &leftover_id = mt->harvest->leftovers;
+                    const int chunk_amount =
+                        gibbed_weight / to_gram( item::find_type( leftover_id )->weight );
+                    mdeath::scatter_chunks( &here, leftover_id, chunk_amount, *mt, raised.first, gib_distance,
+                                            chunk_amount / ( gib_distance + 1 ) );
+                }
+            }
+            raised.second->set_damage( 4000 );
+            return false;
+        }
+        // Sometimes we REALLY screw up.
+        if( one_in( 200 ) ) {
+            add_msg_if_player_sees( *z, _( "The %s bursts apart in a shower of gore!" ),
+                                    z->disp_name() );
+            z->deal_damage( z, bodypart_id( "torso" ), damage_instance( damage_bash, 400 ) );
+            return false;
+        }
+    }
     // Did we successfully raise something?
     if( g->revive_corpse( raised.first, *raised.second ) ) {
         here.i_rem( raised.first, raised.second );
@@ -1347,16 +1273,14 @@ bool mattack::resurrect( monster *z )
             debugmsg( "Misplaced or failed to revive a zombie corpse" );
             return true;
         }
-
         zed->make_ally( *z );
         if( player_character.sees( here, *zed ) ) {
-            add_msg( m_warning, _( "A nearby %s rises from the dead!" ), zed->name() );
+            add_msg( m_warning, _( "A %s rises from the dead!" ), zed->name() );
         } else if( sees_necromancer ) {
             // We saw the necromancer but not the revival
             add_msg( m_info, _( "But nothing seems to happen." ) );
         }
     }
-
     return true;
 }
 

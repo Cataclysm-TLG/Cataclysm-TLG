@@ -13,6 +13,11 @@ namespace mdeath
 item_location normal( map *here, monster &z );
 // Overkill splatter (also part of normal under conditions)
 item_location splatter( map *here, monster &z );
+
+void scatter_chunks( map *here, const itype_id &chunk_name, int chunk_amt,
+                     const mtype &z, const tripoint_bub_ms &pos,
+                     int distance, int pile_size = 1 );
+
 // Hallucination disappears
 void disappear( monster &z );
 // Broken robot drop

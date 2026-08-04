@@ -495,9 +495,7 @@ mtype MonsterGenerator::generate_fake_pseudo_dormant_monster( const mtype &mon )
     //        "description" : "Fake zombie used for spawning dormant zombies.  If you see this, open an issue on github.",
     //        "copy-from" : "mon_zombie",
     //        "looks_like" : "corpse_mon_zombie",
-    //        "hp" : 5,
-    //        "speed" : 1,
-    //        "flags" : ["FILTHY", "REVIVES", "DORMANT", "QUIETDEATH"] ,
+    //        "flags" : ["FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     //        "zombify_into" : "mon_zombie",
     //        "special_attacks" : [
     //    {
@@ -630,8 +628,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "SHRIEK_STUN", mattack::shriek_stun );
     add_hardcoded_attack( "RATTLE", mattack::rattle );
     add_hardcoded_attack( "HOWL", mattack::howl );
-    add_hardcoded_attack( "ACID", mattack::acid );
-    add_hardcoded_attack( "ACID_BARF", mattack::acid_barf );
     add_hardcoded_attack( "SHOCKSTORM", mattack::shockstorm );
     add_hardcoded_attack( "PULL_METAL_WEAPON", mattack::pull_metal_weapon );
     add_hardcoded_attack( "BOOMER", mattack::boomer );
@@ -1152,7 +1148,8 @@ void species_type::finalize_all()
 void species_type::load( const JsonObject &jo, std::string_view )
 {
     optional( jo, was_loaded, "description", description );
-    optional( jo, was_loaded, "footsteps", footsteps, to_translation( "footsteps." ) );
+    optional( jo, was_loaded, "footsteps", footsteps, to_translation( "movement." ) );
+    optional( jo, was_loaded, "flight_sound", flight_sound, to_translation( "movement." ) );
 
     optional( jo, was_loaded, "flags", flags, string_id_reader<mon_flag> {} );
 

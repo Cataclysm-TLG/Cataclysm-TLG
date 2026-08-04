@@ -243,7 +243,8 @@ constexpr inline int operator-( const T &lhs, const fatigue_levels &rhs )
     @details Sleep deprivation, distinct from fatigue, is defined in minutes. Although most
     calculations scale linearly, malus is bestowed only upon reaching the tiers defined below.
     Sleep deprivation is intended to scale with sleep-affecting mutations, but not generally
-    with stimulants. It is the mostly unavoidable consequence for avoiding sleep.
+    with drugs. A cat needs less sleep than a human. A meth addict, whatever they may believe,
+    does not. It is intended to be largely unavoidable.
     @note Sleep deprivation increases fatigue. Fatigue increase scales with the severity of sleep
     deprivation.
 */
@@ -416,8 +417,9 @@ struct aim_mods_cache {
     float aim_speed_dex_mod;
     float aim_speed_mod;
     int limit;
-    double aim_factor_from_volume;
     double aim_factor_from_length;
+    double aim_factor_from_volume;
+    double aim_factor_from_weight;
     parallax_cache parallaxes;
 };
 
@@ -775,6 +777,12 @@ class Character : public Creature, public visitable
         void set_fatigue( fatigue_levels nfatigue );
         void set_sleep_deprivation( int nsleep_deprivation );
 
+        /** Cache helpers for eye_level() */
+        mutable int cached_tile_eye_level_bonus = 0;
+        mutable bool cached_tile_eye_level_bonus_dirty = true;
+        int tile_eye_level_bonus() const;
+        void invalidate_tile_eye_level_cache() const;
+
     protected:
 
         // These accept values in calories, 1/1000s of kcals (or Calories)
@@ -860,8 +868,15 @@ class Character : public Creature, public visitable
                                             const Target_attributes &target_attributes = Target_attributes(),
                                             std::optional<std::reference_wrapper<const parallax_cache>> parallax_cache = std::nullopt ) const;
         int most_accurate_aiming_method_limit( const item &gun ) const;
-        double aim_factor_from_volume( const item &gun ) const;
+        /* Aim speed penalty from the general bulk of the weapon.
+           This scales with the shooter's size category. */
         double aim_factor_from_length( const item &gun ) const;
+        /* Length penalties to aim speed are only assessed when the shooter is in a vehicle or
+           against a wall. These do not scale with the shooter's height as it's more about gun
+           vs environment. Guns under 200mm (about 8 inches) are unaffected. */
+        double aim_factor_from_volume( const item &gun ) const;
+        // Heavier guns are slower to aim. This is checked against get_arm_str() and stamina.
+        double aim_factor_from_weight( const item &gun ) const;
         aim_mods_cache gen_aim_mods_cache( const item &gun )const;
 
         // Get the value of the specified character modifier.
@@ -1015,7 +1030,7 @@ class Character : public Creature, public visitable
         void update_needs( int rate_multiplier );
         needs_rates calc_needs_rates() const;
         void calc_sleep_recovery_rate( needs_rates &rates ) const;
-        /** Kills the player if too hungry, stimmed up etc., forces tired player to sleep and prints warnings. */
+        /** Kills the player if too hungry, forces tired player to sleep, and prints warnings. */
         void check_needs_extremes();
         /** Handles the chance to be infected by random diseases */
         void get_sick( bool is_flu = false );
@@ -1284,6 +1299,14 @@ class Character : public Creature, public visitable
          * @param obj Weapon to check dispersion on
          */
         dispersion_sources get_weapon_dispersion( const item &obj ) const;
+
+        /* Returns a dispersion value based on how difficult it is to keep a bead on the
+        target. Considerations whether the target is aware that the shooter is trying to
+        kill it, how close it is to the shooter, weapon length/handling plus strength/weight,
+        and target speed and dodge skill. The intent is to simulate the difficulty of trying
+        to shoot in a hectic melee without overly impacting things like shooting a bird at 25 meters. */
+        dispersion_sources get_tracking_dispersion( const item *obj, const Creature *target,
+                bool report = false, bool rng = true ) const;
 
         // If average == true, adds expected values of random rolls instead of rolling.
         /** Adds all 3 types of physical damage to instance */
@@ -1699,7 +1722,7 @@ class Character : public Creature, public visitable
 
         /** Picks a random valid mutation and gives it to the Character, possibly removing/changing others along the way */
         void mutate( const int &true_random_chance, bool use_vitamins );
-        void mutate( );
+        void mutate();
         /** Returns true if the player doesn't have the mutation or a conflicting one and it complies with the allowed typing */
         bool mutation_ok( const trait_id &mutation, bool allow_good, bool allow_bad, bool allow_neutral,
                           const vitamin_id &mut_vit ) const;
@@ -3200,10 +3223,6 @@ class Character : public Creature, public visitable
         std::map<bodypart_id, int> get_all_armor_type( const damage_type_id &dt,
                 const std::map<bodypart_id, std::vector<const item *>> &clothing_map ) const;
 
-        int get_stim() const;
-        void set_stim( int new_stim );
-        void mod_stim( int mod );
-
         int get_rad() const;
         void set_rad( int new_rad );
         void mod_rad( int mod );
@@ -3341,11 +3360,14 @@ class Character : public Creature, public visitable
         scenttype_id get_type_of_scent() const;
         /**restore scent after masked_scent effect run out or is removed by water*/
         void restore_scent();
-        /** Modifies intensity of painkillers  */
-        void mod_painkiller( int npkill );
-        /** Sets intensity of painkillers  */
+
+        /** Modifies intensity of painkillers from a given source.  */
+        void mod_painkiller( const efftype_id &source, int amount, int max );
+        /** Sets intensity of painkillers.  */
         void set_painkiller( int npkill );
-        /** Returns intensity of painkillers  */
+        /** Recalculates painkillers from all effects. */
+        void recalculate_painkiller();
+        /** Returns intensity of painkillers.  */
         int get_painkiller() const;
         void react_to_felt_pain( int intensity );
 
@@ -4292,8 +4314,13 @@ class Character : public Creature, public visitable
         bool cache_inventory_is_valid = false;
         mutable bool using_lifting_assist = false;
 
-        int stim;
-        int pkill;
+        struct pkill_source {
+            efftype_id source;
+            int amount;
+        };
+
+        int pkill;                 // Current overall painkiller value.
+        std::vector<pkill_source> pkill_sources;  // Contributions per effect.
 
         int bp_effect_mod = 0;
         int heart_rate_effect_mod = 0;

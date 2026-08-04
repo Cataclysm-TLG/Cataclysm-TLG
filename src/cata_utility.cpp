@@ -211,15 +211,11 @@ int bound_mod_to_vals( int val, int mod, int max, int min )
 
 const char *velocity_units( const units_type vel_units )
 {
-    if( get_option<std::string>( "UNIT_SYSTEM" ) == "imperial" ) {
-        return _( "mph" );
-    } else {
-        switch( vel_units ) {
-            case VU_VEHICLE:
-                return _( "km/h" );
-            case VU_WIND:
-                return _( "m/s" );
-        }
+    switch( vel_units ) {
+        case VU_VEHICLE:
+            return _( "km/h" );
+        case VU_WIND:
+            return _( "m/s" );
     }
     return "error: unknown units!";
 }

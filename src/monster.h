@@ -654,6 +654,12 @@ class monster : public Creature
         Character *find_dragged_foe();
         void nursebot_operate( Character *dragged_foe );
 
+        /** Cache helpers for eye_level() */
+        mutable int cached_tile_eye_level_bonus = 0;
+        mutable bool cached_tile_eye_level_bonus_dirty = true;
+        int tile_eye_level_bonus() const;
+        void invalidate_tile_eye_level_cache() const;
+
     protected:
         void store( JsonOut &json ) const;
         void load( const JsonObject &data );

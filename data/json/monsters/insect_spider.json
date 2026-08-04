@@ -2814,24 +2814,35 @@
   {
     "id": "mon_mantis_small",
     "type": "MONSTER",
-    "name": { "str": "oversized praying mantis", "str_pl": "oversized praying mantises" },
-    "description": "A green mutant insect with sharp grappling spikes on its front legs.  It's a little smaller than an adult person.",
+    "name": { "str": "mutant mantis", "str_pl": "mutant mantises" },
+    "description": "A spindly insect a bit taller than a man.  Its front legs remain folded in front of its body in a posture reminiscent of prayer, but the jagged hooks lining their grasping edge leave little doubt as to their purpose.",
     "copy-from": "mon_mantis_giant",
-    "proportional": { "hp": 0.5, "speed": 1.1, "morale": 0.67, "melee_dice_sides": 0.67, "melee_skill": 0.625 },
-    "volume": "60 L",
-    "weight": "80 kg",
+    "hp": 40,
+    "speed": 110,
+    "material": [ "iflesh" ],
+    "symbol": "M",
+    "color": "light_green",
+    "aggression": 20,
+    "morale": 16,
+    "melee_skill": 5,
+    "melee_dice": 1,
+    "melee_dice_sides": 6,
+    "dodge": 2,
+    "volume": "45 L",
+    "weight": "40 kg",
+    "weakpoint_sets": [ "wps_arthropod_winged" ],
     "melee_damage": [ { "damage_type": "cut", "amount": 8 } ],
     "dissect": "dissect_insect_sample_single",
     "extend": { "flags": [ "NO_BREED" ] },
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "upgrades": { "age_grow": 42, "into": "mon_mantis_giant" },
-    "armor": { "bash": 10, "cut": 16, "bullet": 13, "electric": 1, "acid": 2 }
+    "upgrades": { "half_life": 30, "into": "mon_mantis_giant" },
+    "armor": { "bash": 4, "cut": 7, "electric": 1, "acid": 2 }
   },
   {
     "id": "mon_mantis_giant",
     "type": "MONSTER",
     "name": { "str": "giant praying mantis", "str_pl": "giant praying mantises" },
-    "description": "An enormous green insect grown to about the size of a bear.  It moves in a weird, dance-like pattern and looks ready to chop your head off at any moment.",
+    "description": "A gigantic insect half-again the size of a man.  Its scythelike arms are covered in sawlike barbs and its complex mouthparts are always in motion, even when the rest of it remains deathly still.  The light reflects eerily off of its enormous eyes, so that no matter where you are, it appears to be looking directly at you.",
     "default_faction": "mantis",
     "bodytype": "insect",
     "species": [ "INSECT" ],
@@ -2849,7 +2860,7 @@
     "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 10.0, "armor_penetration": 12 } ],
     "dodge": 3,
-    "weakpoint_sets": [ "wps_arthropod" ],
+    "weakpoint_sets": [ "wps_arthropod_winged" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug" ],
     "vision_day": 8,
     "vision_night": 4,
@@ -2865,16 +2876,23 @@
     "special_attacks": [
       { "id": "ranged_pull", "cooldown": 12, "grab_data": { "pull_weight_ratio": 1.0 } },
       {
+        "type": "bite",
+        "cooldown": 5,
+        "accuracy": 5,
+        "infection_chance": 75,
+        "damage_max_instance": [ { "damage_type": "stab", "amount": 12, "armor_penetration": 6 } ]
+      },
+      {
         "type": "leap",
         "cooldown": 8,
         "max_range": 5,
         "allow_no_target": false,
-        "condition": { "not": { "u_has_effect": "maimed_leg" } }
+        "condition": { "and": [ { "not": { "u_has_effect": "maimed_wing" } }, { "not": { "u_has_effect": "maimed_leg" } } ] }
       }
     ],
-    "upgrades": { "age_grow": 42, "into": "mon_mantis_mega" },
+    "upgrades": { "half_life": 30, "into": "mon_mantis_mega" },
     "flags": [ "SEES", "HEARS", "CLIMBS", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 10, "cut": 16, "bullet": 13, "electric": 2, "acid": 4 }
+    "armor": { "bash": 8, "cut": 16, "bullet": 4, "electric": 2, "acid": 4 }
   },
   {
     "id": "mon_mantis_nymph",
@@ -2883,7 +2901,7 @@
     "description": "A mantis nymph about the size of a dog.  Even though its far smaller than the adults, you have a feeling it wouldn't take kindly to you coming too close.",
     "copy-from": "mon_larva_abstract",
     "default_faction": "mantis",
-    "volume": "20 L",
+    "volume": "9 L",
     "weight": "10 kg",
     "hp": 25,
     "speed": 80,
@@ -2897,6 +2915,7 @@
     "dodge": 3,
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
     "vision_night": 4,
+    "weakpoint_sets": [ "wps_arthropod_winged" ],
     "dissect": "dissect_insect_sample_single",
     "upgrades": { "age_grow": 30, "into": "mon_mantis_giant" },
     "special_attacks": [
@@ -2905,12 +2924,12 @@
         "cooldown": 8,
         "max_range": 3,
         "allow_no_target": false,
-        "condition": { "not": { "u_has_effect": "maimed_leg" } }
+        "condition": { "and": [ { "not": { "u_has_effect": "maimed_wing" } }, { "not": { "u_has_effect": "maimed_leg" } } ] }
       }
     ],
     "anger_triggers": [ "PLAYER_CLOSE" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 1, "cut": 2, "bullet": 1 }
+    "armor": { "bash": 1, "cut": 2 }
   },
   {
     "id": "mon_mantis_mega",

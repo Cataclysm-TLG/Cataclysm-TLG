@@ -632,7 +632,7 @@ double occupied_tile_fraction( creature_size target_size )
 {
     switch( target_size ) {
         case creature_size::tiny:
-            return 0.25;
+            return 0.2;
         case creature_size::small:
             return 0.35;
         case creature_size::medium:
@@ -665,7 +665,7 @@ double Creature::ranged_target_size() const
         }
     }
     if( has_flag( mon_flag_HARDTOSHOOT ) ) {
-        stance_factor -= 0.25;
+        stance_factor -= 0.15;
     }
     return std::clamp( ( stance_factor * occupied_tile_fraction( get_size() ) ), 0.1, 0.9 );
 }
@@ -1117,10 +1117,13 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         }
 
         dispersion_sources dispersion = total_gun_dispersion( gun, recoil_total(), proj.shot_spread );
-
         // Keeps shooting non-deterministic, but perception helps a lot.
         dispersion.add_range( dispersion_variance() );
-
+        // Add dispersion for shooting in close range.
+        const Creature *victim = get_creature_tracker().creature_at( target, true );
+        if( victim != nullptr ) {
+            dispersion.add_range( get_tracking_dispersion( &gun, victim, true ).max() );
+        }
         dealt_projectile_attack shot;
         projectile_attack( shot, proj, &here, pos_bub( here ), aim, dispersion, this, in_veh, wp_attack );
         if( !shot.targets_hit.empty() ) {
@@ -1314,12 +1317,12 @@ double calculate_aim_cap( const Character &you, const tripoint_bub_ms &target )
     enchant_cache::special_vision sees_with_special = you.enchantment_cache->get_vision( d );
 
     // you do not see it, but your sense it in other ways
-    if( !you.sees( here,  *victim ) && !sees_with_special.is_empty() ) {
+    if( !you.sees( here, *victim ) && !sees_with_special.is_empty() ) {
         if( sees_with_special.precise ) {
-            // your senses are precise enough to aim it with no issues
+            // Your senses are precise enough to aim it with no issues.
             return 0.0;
         } else {
-            // not as good as seeing it clearly, but still enough to pre-aim
+            // Not as good as seeing it clearly, but still enough to pre-aim.
             return calculate_aim_cap_without_target( you, target ) / 3;
         }
     }
@@ -1905,10 +1908,15 @@ static std::vector<aim_type_prediction> calculate_ranged_chances(
 {
     std::vector<aim_type> aim_types { get_default_aim_type() };
     std::vector<aim_type_prediction> aim_outputs;
-
+    bool tracking_dispersion = false;
+    dispersion_sources tracking_dispersion_average;
     if( mode != target_ui::TargetMode::Throw && mode != target_ui::TargetMode::ThrowBlind &&
         mode != target_ui::TargetMode::ThrowCreature ) {
         aim_types = you.get_aim_types( weapon );
+        tracking_dispersion = true;
+        Creature *target_creature = get_creature_tracker().creature_at( pos, true );
+        // Estimates regarding difficulty of shooting a creature in close quarters. Skip RNG so aim bar doesn't jitter.
+        tracking_dispersion_average = you.get_tracking_dispersion( &weapon, target_creature, false, false );
     }
 
     // predict how long it'll take to reach from current recoil
@@ -1961,6 +1969,9 @@ static std::vector<aim_type_prediction> calculate_ranged_chances(
         dispersion_sources current_dispersion = dispersion;
         current_dispersion.add_range( aim_type.has_threshold ? aim_type.threshold :
                                       aim_to_selected.recoil );
+        if( tracking_dispersion ) {
+            current_dispersion.add_range( tracking_dispersion_average.avg() );
+        }
 
         // This loop fills in the "confidence" values which fill out our aim level in the sidebar.
         prediction.confidence = confidence_estimate( target, current_dispersion );
@@ -2112,16 +2123,17 @@ static int print_ranged_chance( const catacurses::window &w, int line_number,
             mvwprintw( w, point( column_number, line_number ), label );
             column_number += utf8_width( label ) + 1; // 1 for whitespace after 'Symbols:'
         }
-
         print_confidence_ratings( w, sorted.front().ratings, line_number, width, column_number, col );
-
+        if( time != 0 ) {
+            std::string ras_time = string_format( "<color_light_gray>%1s</color>: %2s",
+                                                  _( "Moves to load" ), time );
+            print_colored_text( w, point( 1, line_number++ ), col, col, ras_time );
+        }
         for( const aim_type_prediction &out : sorted ) {
             std::string col_hl = out.is_default ? "light_green" : "light_gray";
-            std::string desc = time ==  0 ?
-                               string_format( "<color_white>[%s]</color> <color_%s>%s %s</color> | %s: <color_light_blue>%3d</color>",
-                                              out.hotkey, col_hl, out.name, _( "Aim" ), _( "Moves to fire" ), out.moves ) :
-                               string_format( "<color_white>[%s]</color> <color_%s>%s %s</color> | %s: <color_light_blue>%3d</color> (%d)",
-                                              out.hotkey, col_hl, out.name, _( "Aim" ), _( "Moves to fire" ), out.moves, time );
+            std::string desc =
+                string_format( "<color_white>[%s]</color> <color_%s>%s %s</color> | %s: <color_light_blue>%3d</color>",
+                               out.hotkey, col_hl, out.name, _( "Aim" ), _( "Moves to fire" ), out.moves );
 
             print_colored_text( w, point( 1, line_number++ ), col, col, desc );
 
@@ -2582,37 +2594,35 @@ item::sound_data item::gun_noise( const bool burst ) const
     return { 0, "" }; // silent weapons
 }
 
-static double dispersion_from_skill( double skill, double weapon_dispersion )
+// Returns dispersion added due to avg of marksmanship + weapon skill < 10.
+static double dispersion_from_skill( double skill, double weapon_baseline )
 {
     if( skill >= MAX_SKILL ) {
         return 0.0;
     }
     double skill_shortfall = static_cast<double>( MAX_SKILL ) - skill;
-    double dispersion_penalty = 10 * skill_shortfall;
+    double dispersion_penalty = skill_shortfall;
     double skill_threshold = 5;
     if( skill >= skill_threshold ) {
         double post_threshold_skill_shortfall = static_cast<double>( MAX_SKILL ) - skill;
         // Lack of mastery multiplies the dispersion of the weapon.
-        return dispersion_penalty + ( weapon_dispersion * post_threshold_skill_shortfall * 1.25 ) /
+        return dispersion_penalty + ( weapon_baseline * post_threshold_skill_shortfall * 1.25 ) /
                ( static_cast<double>( MAX_SKILL ) - skill_threshold );
     }
     // Unskilled shooters suffer greater penalties, still scaling with weapon penalties.
     double pre_threshold_skill_shortfall = skill_threshold - skill;
-    dispersion_penalty += weapon_dispersion *
-                          ( 1.25 + pre_threshold_skill_shortfall * 10.0 / skill_threshold );
-
+    dispersion_penalty += weapon_baseline *
+                          ( 1.25 + pre_threshold_skill_shortfall / skill_threshold );
     return dispersion_penalty;
 }
 
-// utility functions for projectile_attack
+// Utility functions for projectile_attack.
 dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
 {
     int weapon_dispersion = obj.gun_dispersion();
     dispersion_sources dispersion( weapon_dispersion );
     dispersion.add_range( ranged_dex_mod() );
-
     dispersion.add_range( get_modifier( character_modifier_ranged_dispersion_manip_mod ) );
-
     if( is_driving() ) {
         // get volume of gun (or for auxiliary gunmods the parent gun)
         const item *parent = has_item( obj ) ? find_parent( obj ) : nullptr;
@@ -2621,23 +2631,22 @@ dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
         /** @EFFECT_DRIVING reduces the inaccuracy penalty when using guns whilst driving */
         dispersion.add_range( std::max( vol - get_skill_level( skill_driving ), 1.0f ) * 20 );
     }
-
     /** @EFFECT_GUN improves usage of accurate weapons and sights */
     double avgSkill = static_cast<double>( get_skill_level( skill_gun ) +
                                            get_skill_level( obj.gun_skill() ) ) / 2.0;
     avgSkill = std::min( avgSkill, static_cast<double>( MAX_SKILL ) );
-    // If the value is affected by the accuracy of the firearm itself,
-    // then beginners will rely heavily on high-precision weapons, while experts are not.
-    // Obviously this is not true.
-    // So use a constant instead.
-    // FIXME: Move divider to global constant gun_dispersion_divider (deprecated option)
-    double divider = 18;
-    if( obj.gun_skill() == skill_archery ) {
-        dispersion.add_range( dispersion_from_skill( avgSkill,
-                              450 / divider ) );
+    /* If accuracy was entirely determined by how good the gun is, then beginners will rely
+    heavily on high-precision weapons, but experts will be extremely precise with anything.
+    Obviously this is not true, so dispersion_from_skill's second arg is a constant instead.
+    This funky design and arbitrary constants are an artifact of the above issue being patched
+    and there formerly being an external option for "how much dispersion is reduced by skill"
+    for some reason. */
+    double primitive_baseline = 25.0;
+    double gun_baseline = 16.67;
+    if( obj.gun_skill() == skill_archery || obj.gun_skill() == skill_throw ) {
+        dispersion.add_range( dispersion_from_skill( avgSkill, primitive_baseline ) );
     } else {
-        dispersion.add_range( dispersion_from_skill( avgSkill,
-                              300 / divider ) );
+        dispersion.add_range( dispersion_from_skill( avgSkill, gun_baseline ) );
     }
 
     float disperation_mod = enchantment_cache->modify_value( enchant_vals::mod::WEAPON_DISPERSION,
@@ -2648,11 +2657,61 @@ dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
 
     // Range is effectively four times longer when shooting unflagged/flagged guns underwater/out of water.
     if( is_underwater() != obj.has_flag( flag_UNDERWATER_GUN ) ) {
-        // Adding dispersion for additional debuff
+        // Adding dispersion for additional debuff.
         dispersion.add_range( 150 );
         dispersion.add_multiplier( 4 );
     }
 
+    return dispersion;
+}
+
+dispersion_sources Character::get_tracking_dispersion( const item *obj, const Creature *target,
+        bool report, bool rng ) const
+{
+    dispersion_sources dispersion;
+    if( !target || !obj ) {
+        return dispersion;
+    }
+    const int distance = trig_dist( pos_bub(), target->pos_bub() );
+    const double distance_factor = std::max( 0, 11 - distance ) / 10.0;
+    const double gun_length = ( obj->length() / 1_mm );
+    // x12 and 800 gram multiplier to length_factor and lifting_capacity are arbitrary figures used to produce a reasonable outcome.
+    const double length_factor = ( gun_length / this->height() ) * 12;
+    const double lifting_capacity = std::max( 0.0,
+                                    to_gram( static_cast<double>( get_arm_str() ) * 800_gram ) );
+    const double weight_factor = std::max( 0.0, to_gram( obj->weight() ) / lifting_capacity );
+    map &here = get_map();
+    bool aware = target->sees( here, *this );
+    std::string debug_awareness = aware ? _( "aware" ) : _( "unaware" );
+    bool mobile = !target->is_on_ground() && !target->has_flag( mon_flag_IMMOBILE ) &&
+                  !target->has_effect_with_flag( json_flag_CANNOT_MOVE ) && !target->in_sleep_state();
+    const int speed = target->get_speed();
+    const int dodge = target->get_dodge();
+    double tracking_dispersion = 0.0;
+    tracking_dispersion += length_factor;
+    tracking_dispersion += weight_factor;
+    if( aware && mobile ) {
+        tracking_dispersion += speed * 0.1;
+        tracking_dispersion += dodge * 10.0;
+    }
+    tracking_dispersion *= distance_factor;
+    if( rng ) {
+        // Weight RNG by range so close firefights are more chaotic.
+        const double rng_max = 1.0 + ( 1.75 * distance_factor );
+        tracking_dispersion *= rng_float( 0.25, rng_max );
+    }
+    if( report ) {
+        add_msg_debug( debugmode::DF_RANGED,
+                       "Tracking dispersion: At a distance of %d vs %s target with effective speed %d and dodge %d, length_factor %.1f and weight_factor %.2f contribute (with RNG) %.3f dispersion.",
+                       trig_dist( pos_bub(), target->pos_bub() ),
+                       debug_awareness,
+                       speed,
+                       dodge,
+                       length_factor,
+                       weight_factor,
+                       tracking_dispersion );
+    }
+    dispersion.add_range( tracking_dispersion );
     return dispersion;
 }
 
@@ -2879,6 +2938,7 @@ target_handler::trajectory target_ui::run()
     if( reentered ) {
         if( !try_reacquire_target( resume_critter, initial_dst ) ) {
             // Target lost
+            you->recoil = MAX_RECOIL;
             action.clear();
             attack_was_confirmed = false;
         }
@@ -2887,7 +2947,8 @@ target_handler::trajectory target_ui::run()
     }
     set_cursor_pos( initial_dst );
     if( dst != initial_dst ) {
-        // Our target moved out of range
+        // Our target moved out of range.
+        you->recoil = MAX_RECOIL;
         action.clear();
         attack_was_confirmed = false;
     }
@@ -2902,6 +2963,7 @@ target_handler::trajectory target_ui::run()
         if( !action.empty() && !prompt_friendlies_in_lof() ) {
             // A friendly creature moved into line of fire during aim-and-shoot,
             // and player decided to stop aiming
+            you->recoil = MAX_RECOIL;
             action.clear();
             attack_was_confirmed = false;
         }
@@ -3929,7 +3991,7 @@ bool target_ui::action_aim()
     for( int i = 0; i < 10; ++i ) {
         do_aim( *you, *relevant, min_recoil );
     }
-    add_msg_debug( debugmode::debug_filter::DF_BALLISTIC,
+    add_msg_debug( debugmode::debug_filter::DF_RANGED,
                    "you reduced recoil from %f to %f in 10 moves",
                    hold_recoil, you->recoil );
     // We've changed pc.recoil, update penalty

@@ -685,8 +685,6 @@ int Character::vitamin_mod( const vitamin_id &vit, int qty )
 
     if( qty > 0 ) {
         it->second = std::min( it->second + qty, v.max() );
-        update_vitamins( vit );
-
         // update the daily trackers too while here
         // prevent overflow
         constexpr int daily_vitamins_max = std::numeric_limits<int>::max();

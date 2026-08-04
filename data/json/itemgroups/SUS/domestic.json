@@ -842,7 +842,72 @@
       { "item": "menstrual_cup", "prob": 1 },
       { "item": "toothbrush_plain", "count": [ 1, 3 ], "prob": 45 },
       { "item": "dentures", "count": [ 1, 2 ], "prob": 5 },
-      { "item": "toothbrush_electric", "count": [ 1, 3 ], "prob": 25 }
+      { "item": "toothbrush_electric", "count": [ 1, 3 ], "prob": 25 },
+      { "item": "bug_spray_can", "prob": 7, "charges": [ 1, 5 ] }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "bathroom_medicine_pills",
+    "subtype": "distribution",
+    "entries": [
+      {
+        "item": "aspirin",
+        "prob": 50,
+        "count": [ 1, 30 ],
+        "container-item": "null",
+        "entry-wrapper": "bottle_plastic_pill_painkiller"
+      },
+      {
+        "item": "acetaminophen",
+        "prob": 70,
+        "count": [ 1, 30 ],
+        "container-item": "null",
+        "entry-wrapper": "bottle_plastic_pill_painkiller"
+      },
+      {
+        "item": "ibuprofen",
+        "prob": 80,
+        "count": [ 1, 30 ],
+        "container-item": "null",
+        "entry-wrapper": "bottle_plastic_pill_painkiller"
+      },
+      {
+        "item": "naproxen",
+        "prob": 20,
+        "count": [ 1, 30 ],
+        "container-item": "null",
+        "entry-wrapper": "bottle_plastic_pill_painkiller"
+      },
+      {
+        "item": "codeine",
+        "prob": 10,
+        "count": [ 1, 15 ],
+        "container-item": "null",
+        "entry-wrapper": "bottle_plastic_pill_painkiller"
+      },
+      {
+        "item": "tramadol",
+        "prob": 10,
+        "count": [ 1, 15 ],
+        "container-item": "null",
+        "entry-wrapper": "bottle_plastic_pill_painkiller"
+      },
+      {
+        "item": "oxycodone",
+        "prob": 10,
+        "count": [ 1, 7 ],
+        "container-item": "null",
+        "entry-wrapper": "bottle_plastic_pill_painkiller"
+      },
+      {
+        "item": "adderall",
+        "prob": 10,
+        "count": [ 1, 30 ],
+        "container-item": "null",
+        "entry-wrapper": "bottle_plastic_pill_prescription"
+      },
+      { "item": "bottle_plastic_pill_prescription", "prob": 5, "count": [ 1, 2 ] }
     ]
   },
   {
@@ -852,53 +917,10 @@
     "//2": "This group is for the medicine cabinet.",
     "subtype": "collection",
     "entries": [
-      {
-        "distribution": [
-          {
-            "item": "aspirin",
-            "prob": 50,
-            "count": [ 1, 30 ],
-            "container-item": "null",
-            "entry-wrapper": "bottle_plastic_pill_painkiller"
-          },
-          {
-            "item": "acetaminophen",
-            "prob": 70,
-            "count": [ 1, 30 ],
-            "container-item": "null",
-            "entry-wrapper": "bottle_plastic_pill_painkiller"
-          },
-          {
-            "item": "ibuprofen",
-            "prob": 80,
-            "count": [ 1, 30 ],
-            "container-item": "null",
-            "entry-wrapper": "bottle_plastic_pill_painkiller"
-          },
-          {
-            "item": "naproxen",
-            "prob": 20,
-            "count": [ 1, 30 ],
-            "container-item": "null",
-            "entry-wrapper": "bottle_plastic_pill_painkiller"
-          },
-          {
-            "item": "codeine",
-            "prob": 10,
-            "count": [ 1, 15 ],
-            "container-item": "null",
-            "entry-wrapper": "bottle_plastic_pill_painkiller"
-          },
-          {
-            "item": "tramadol",
-            "prob": 10,
-            "count": [ 1, 15 ],
-            "container-item": "null",
-            "entry-wrapper": "bottle_plastic_pill_painkiller"
-          }
-        ],
-        "prob": 65
-      },
+      { "group": "bathroom_medicine_pills", "prob": 65 },
+      { "group": "bathroom_medicine_pills", "prob": 20 },
+      { "group": "bathroom_medicine_pills", "prob": 5 },
+      { "group": "bathroom_medicine_pills", "prob": 1 },
       { "item": "comb_lice", "prob": 2 },
       { "item": "eyedrops", "prob": 15, "count": 10 },
       { "item": "pepto", "prob": 60, "charges": [ 1, -1 ], "container-item": "bottle_plastic_small" },
@@ -1105,7 +1127,8 @@
         "prob": 20
       },
       { "item": "toilet_paper", "prob": 80 },
-      { "item": "towel", "count": [ 1, 2 ], "prob": 75 }
+      { "item": "towel", "count": [ 1, 2 ], "prob": 75 },
+      { "item": "bug_spray_can", "prob": 2, "charges": [ 1, 5 ] }
     ]
   },
   {

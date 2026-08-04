@@ -36,6 +36,7 @@ static const material_id material_iflesh( "iflesh" );
 static const material_id material_vegetable( "vegetable" );
 
 static const species_id species_MOLLUSK( "MOLLUSK" );
+static const species_id species_KRAKEN( "KRAKEN" );
 
 // NOLINTNEXTLINE(cata-static-int_id-constants)
 mon_flag_id mon_flag_ACIDPROOF,
@@ -52,6 +53,7 @@ mon_flag_id mon_flag_ACIDPROOF,
             mon_flag_ATTACK_UPPER,
             mon_flag_BADVENOM,
             mon_flag_BASHES,
+            mon_flag_BELLYUP,
             mon_flag_BILE_BLOOD,
             mon_flag_BORES,
             mon_flag_CAMOUFLAGE,
@@ -175,6 +177,7 @@ void set_mon_flag_ids()
     mon_flag_ATTACK_UPPER = mon_flag_id( "ATTACK_UPPER" );
     mon_flag_BADVENOM = mon_flag_id( "BADVENOM" );
     mon_flag_BASHES = mon_flag_id( "BASHES" );
+    mon_flag_BELLYUP = mon_flag_id( "BELLYUP" );
     mon_flag_BILE_BLOOD = mon_flag_id( "BILE_BLOOD" );
     mon_flag_BORES = mon_flag_id( "BORES" );
     mon_flag_CAMOUFLAGE = mon_flag_id( "CAMOUFLAGE" );
@@ -256,12 +259,14 @@ void set_mon_flag_ids()
     mon_flag_PUSH_VEH = mon_flag_id( "PUSH_VEH" );
     mon_flag_QUEEN = mon_flag_id( "QUEEN" );
     mon_flag_QUIETDEATH = mon_flag_id( "QUIETDEATH" );
+    mon_flag_QUIETMOVES = mon_flag_id( "QUIETMOVES" );
     mon_flag_RANGED_ATTACKER = mon_flag_id( "RANGED_ATTACKER" );
     mon_flag_REVIVES = mon_flag_id( "REVIVES" );
     mon_flag_REVIVES_HEALTHY = mon_flag_id( "REVIVES_HEALTHY" );
     mon_flag_SEES = mon_flag_id( "SEES" );
     mon_flag_SHORTACIDTRAIL = mon_flag_id( "SHORTACIDTRAIL" );
     mon_flag_SILENT_DISAPPEAR = mon_flag_id( "SILENT_DISAPPEAR" );
+    mon_flag_SILENTMOVES = mon_flag_id( "SILENTMOVES" );
     mon_flag_SLUDGEPROOF = mon_flag_id( "SLUDGEPROOF" );
     mon_flag_SLUDGETRAIL = mon_flag_id( "SLUDGETRAIL" );
     mon_flag_SMALLSLUDGETRAIL = mon_flag_id( "SMALLSLUDGETRAIL" );
@@ -440,7 +445,7 @@ field_type_id mtype::bloodType() const
 
 field_type_id mtype::gibType() const
 {
-    if( in_species( species_MOLLUSK ) ) {
+    if( in_species( species_MOLLUSK ) || in_species( species_KRAKEN ) ) {
         return fd_gibs_invertebrate;
     }
     if( made_of( material_vegetable ) ) {
@@ -449,7 +454,7 @@ field_type_id mtype::gibType() const
     if( made_of( material_iflesh ) ) {
         return fd_gibs_insect;
     }
-    if( made_of( material_flesh ) ) {
+    if( made_of( material_flesh ) || made_of( material_hflesh ) ) {
         return fd_gibs_flesh;
     }
     // There are other materials not listed here like steel, protoplasmic, powder, null, stone, bone
@@ -501,13 +506,24 @@ std::string mtype::get_description() const
     return description.translated();
 }
 
-
 std::string mtype::get_footsteps() const
 {
     if( !species.empty() ) {
-        return species.begin()->obj().get_footsteps();
+        auto it = species.begin();
+        std::advance( it, rng( 0, static_cast<int>( species.size() ) - 1 ) );
+        return it->obj().get_footsteps();
     }
-    return _( "footsteps." );
+    return _( "movement." );
+}
+
+std::string mtype::get_flight_sound() const
+{
+    if( !species.empty() ) {
+        auto it = species.begin();
+        std::advance( it, rng( 0, static_cast<int>( species.size() ) - 1 ) );
+        return it->obj().get_flight_sound();
+    }
+    return _( "movement." );
 }
 
 void mtype::set_strategy()

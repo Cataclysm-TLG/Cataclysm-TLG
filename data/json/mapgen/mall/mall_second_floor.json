@@ -2107,8 +2107,8 @@
         "j": { "item": "SUS_dishes", "chance": 10, "repeat": [ 2, 4 ] },
         "n": { "item": "SUS_dishes", "chance": 30, "repeat": [ 2, 4 ] },
         "i": { "item": "oven", "chance": 30, "repeat": [ 1, 2 ] },
-        "z": { "item": "farming_seeds", "chance": 30, "repeat": [ 1, 2 ] },
-        "3": { "item": "farming_seeds", "chance": 30, "repeat": [ 1, 2 ] },
+        "z": { "item": "garden_seeds", "chance": 30, "repeat": [ 1, 2 ] },
+        "3": { "item": "garden_seeds", "chance": 30, "repeat": [ 1, 2 ] },
         "I": { "item": "SUS_office_desk", "chance": 30 },
         "S": { "item": "SUS_office_filing_cabinet", "chance": 30 }
       },
@@ -2164,7 +2164,7 @@
         "M": { "item": "mussto_windinst", "chance": 50 },
         "V": { "item": "mussto_stringinst", "chance": 50 },
         "P": { "item": "cleaning", "chance": 50 },
-        "3": { "item": "farming_seeds", "chance": 50 },
+        "3": { "item": "garden_seeds", "chance": 50 },
         "R": { "item": "novels", "chance": 50 },
         "4": { "item": "manuals", "chance": 50 }
       },
@@ -2538,7 +2538,7 @@
       "items": {
         "I": { "item": "office", "chance": 30 },
         "Q": { "item": "farming_tools", "chance": 30 },
-        "3": { "item": "farming_seeds", "chance": 20, "repeat": [ 2, 4 ] },
+        "3": { "item": "garden_seeds", "chance": 20, "repeat": [ 2, 4 ] },
         "V": { "item": "consumer_electronics", "chance": 30 },
         "M": { "item": "consumer_electronics", "chance": 30 },
         "K": { "item": "elecsto_diy", "chance": 30 },

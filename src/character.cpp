@@ -168,6 +168,7 @@ static const bionic_id bio_armor_torso( "bio_armor_torso" );
 static const bionic_id bio_ground_sonar( "bio_ground_sonar" );
 static const bionic_id bio_memory( "bio_memory" );
 static const bionic_id bio_ods( "bio_ods" );
+static const bionic_id bio_painkiller( "bio_painkiller" );
 static const bionic_id bio_railgun( "bio_railgun" );
 static const bionic_id bio_shock_absorber( "bio_shock_absorber" );
 static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
@@ -213,6 +214,7 @@ static const efftype_id effect_alarm_clock( "alarm_clock" );
 static const efftype_id effect_bandaged( "bandaged" );
 static const efftype_id effect_beartrap( "beartrap" );
 static const efftype_id effect_bile( "bile" );
+static const efftype_id effect_bionic_painkiller( "bionic_painkiller" );
 static const efftype_id effect_bite( "bite" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_blind( "blind" );
@@ -289,6 +291,7 @@ static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 static const field_type_str_id field_fd_clairvoyant( "fd_clairvoyant" );
 static const field_type_str_id field_fd_web( "fd_web" );
 
+static const flag_id json_flag_CROSSBOW( "CROSSBOW" );
 static const flag_id json_flag_PIT( "PIT" );
 
 static const itype_id fuel_type_animal( "animal" );
@@ -606,7 +609,6 @@ Character::Character() :
     continuous_sleep = 0_turns;
     radiation = 0;
     slow_rad = 0;
-    set_stim( 0 );
     arms_power_use = 0;
     legs_power_use = 0;
     arms_stam_mult = 1.0f;
@@ -661,6 +663,7 @@ Character::Character() :
     }
     // Only call these if game is initialized.
     if( !!g && json_flag::is_ready() ) {
+        invalidate_tile_eye_level_cache();
         recalc_sight_limits();
         trait_flag_cache.clear();
         bio_flag_cache.clear();
@@ -1036,7 +1039,9 @@ std::string Character::get_throw_descriptor( int throwforce )
         throw_descriptor = _( "throw" );
     } else if( throwforce < 70 ) {
         throw_descriptor = _( "hurl" );
-    } else if( throwforce > 71 ) {
+    } else if( one_in( 100 ) ) {
+        throw_descriptor = _( "yeet" );
+    } else {
         throw_descriptor = _( "launch" );
     }
     return throw_descriptor;
@@ -1074,7 +1079,7 @@ int Character::point_shooting_limit( const item &gun )const
 aim_mods_cache Character::gen_aim_mods_cache( const item &gun )const
 {
     parallax_cache parallaxes{ get_character_parallax( true ), get_character_parallax( false ) };
-    return { get_modifier( character_modifier_aim_speed_skill_mod, gun.gun_skill() ), get_modifier( character_modifier_aim_speed_dex_mod ), get_modifier( character_modifier_aim_speed_mod ), most_accurate_aiming_method_limit( gun ), aim_factor_from_volume( gun ), aim_factor_from_length( gun ), parallaxes };
+    return { get_modifier( character_modifier_aim_speed_skill_mod, gun.gun_skill() ), get_modifier( character_modifier_aim_speed_dex_mod ), get_modifier( character_modifier_aim_speed_mod ), most_accurate_aiming_method_limit( gun ), aim_factor_from_length( gun ), aim_factor_from_volume( gun ), aim_factor_from_weight( gun ), parallaxes };
 }
 
 double Character::fastest_aiming_method_speed( const item &gun, double recoil,
@@ -1183,21 +1188,65 @@ int Character::most_accurate_aiming_method_limit( const item &gun ) const
 
 double Character::aim_factor_from_volume( const item &gun ) const
 {
-    skill_id gun_skill = gun.gun_skill();
+    if( !is_wielding( gun ) ) {
+        return 1.0;
+    }
     double wielded_volume = gun.volume() / 1_ml;
-    // this is only here for mod support
+    // This is only here for mod support.
     if( gun.has_flag( flag_COLLAPSIBLE_STOCK ) ) {
-        // use the unfolded volume
+        // Use the unfolded volume.
         wielded_volume += gun.collapsed_volume_delta() / 1_ml;
     }
-
-    double factor = gun_skill == skill_pistol ? 4 : 1;
-    double min_volume_without_debuff =  800;
-    if( wielded_volume > min_volume_without_debuff ) {
-        factor *= std::pow( min_volume_without_debuff / wielded_volume, 0.333333 );
+    // Thresholds are cheaper than std::pow(), otherwise we'd just use that.
+    constexpr double volume_thresholds[] = { 200.0, 400.0, 800.0, 1600.0, 3200.0 };
+    const double max_volume_without_slowdown = volume_thresholds[get_size() - 1];
+    double factor = 1.0;
+    if( wielded_volume > max_volume_without_slowdown ) {
+        factor = std::cbrt( max_volume_without_slowdown / wielded_volume );
     }
+    return std::max( factor, 0.2 );
+}
 
-    return std::max( factor, 0.2 ) ;
+double Character::aim_factor_from_weight( const item &gun ) const
+{
+    if( !is_wielding( gun ) ) {
+        return 1.0;
+    }
+    double wielded_weight = gun.weight() / 1_gram;
+    const double effective_strength = get_arm_str() * std::clamp( ( static_cast<double>
+                                      ( get_stamina() ) / static_cast<double>( get_stamina_max() ) ), 0.4, 1.0 );
+    double weight_allowance_multiplier = 100.0;
+    if( gun.gun_skill() != skill_throw && ( gun.gun_skill() != skill_archery ||
+                                            gun.has_flag( json_flag_CROSSBOW ) ) ) {
+        bool using_bipod = false;
+        for( const item *mod : gun.gunmods() ) {
+            if( mod->has_flag( flag_BIPOD ) ) {
+                map &here = get_map();
+                if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, pos_bub( here ) ) ||
+                    is_prone() ) {
+                    using_bipod = true;
+                } else {
+                    const optional_vpart_position vp = here.veh_at( pos_abs( ) );
+                    if( vp ) {
+                        using_bipod = vp->vehicle().has_part( pos_abs( ), "MOUNTABLE" );
+                    }
+                }
+            }
+        }
+        if( using_bipod ) {
+            weight_allowance_multiplier = 200.0;
+        } else if( is_on_ground() ) {
+            weight_allowance_multiplier = 160.0;
+        } else if( is_crouching() ) {
+            weight_allowance_multiplier = 120.0;
+        }
+    }
+    const double max_weight_without_slowdown = effective_strength * weight_allowance_multiplier;
+    double factor = 1.0;
+    if( wielded_weight > max_weight_without_slowdown ) {
+        factor = std::cbrt( max_weight_without_slowdown / wielded_weight );
+    }
+    return std::max( factor, 0.2 );
 }
 
 static bool is_obstacle( tripoint_bub_ms pos )
@@ -1208,22 +1257,28 @@ static bool is_obstacle( tripoint_bub_ms pos )
 double Character::aim_factor_from_length( const item &gun ) const
 {
     tripoint_bub_ms cur_pos = pos_bub();
-    bool nw_to_se = is_obstacle( cur_pos + tripoint::south_east ) &&
-                    is_obstacle( cur_pos + tripoint::north_west );
-    bool w_to_e = is_obstacle( cur_pos + tripoint::west ) &&
-                  is_obstacle( cur_pos + tripoint::east );
-    bool sw_to_ne = is_obstacle( cur_pos + tripoint::south_west ) &&
-                    is_obstacle( cur_pos + tripoint::north_east );
-    bool n_to_s = is_obstacle( cur_pos + tripoint::north ) &&
-                  is_obstacle( cur_pos + tripoint::south );
-    double wielded_length = gun.length() / 1_mm;
-    double factor = 1.0;
-
-    if( nw_to_se || w_to_e || sw_to_ne || n_to_s ) {
-        factor = 1.0 - static_cast<float>( ( wielded_length - 300 ) / 1000 );
-        factor =  std::min( factor, 1.0 );
+    const int length = gun.length() / 1_mm;
+    if( length <= 200 ) {
+        return 1.0;
     }
-    return std::max( factor, 0.2 ) ;
+    const bool confined =
+        in_vehicle ||
+        ( is_obstacle( cur_pos + tripoint::south_east ) &&
+          is_obstacle( cur_pos + tripoint::north_west ) ) ||
+        ( is_obstacle( cur_pos + tripoint::west ) &&
+          is_obstacle( cur_pos + tripoint::east ) ) ||
+        ( is_obstacle( cur_pos + tripoint::south_west ) &&
+          is_obstacle( cur_pos + tripoint::north_east ) ) ||
+        ( is_obstacle( cur_pos + tripoint::north ) &&
+          is_obstacle( cur_pos + tripoint::south ) );
+
+    if( !confined ) {
+        return 1.0;
+    }
+    const double factor = std::clamp(
+                              1.0 - ( length - 200.0 ) / 1125.0,
+                              0.2, 1.0 );
+    return factor;
 }
 
 double Character::aim_per_move( const item &gun, double recoil,
@@ -1242,64 +1297,53 @@ double Character::aim_per_move( const item &gun, double recoil,
         // No suitable sights (already at maximum aim).
         return 0;
     }
-
     // Overall strategy for determining aim speed is to sum the factors that contribute to it,
     // then scale that speed by current recoil level.
     // Player capabilities make aiming faster, and aim speed slows down as it approaches 0.
     // Base speed is non-zero to prevent extreme rate changes as aim speed approaches 0.
     double aim_speed = 10.0;
-
     skill_id gun_skill = gun.gun_skill();
-
     aim_speed += sight_speed_modifier;
-
     if( !use_cache ) {
-        // Ranges [-1.5 - 3.5] for archery Ranges [0 - 2.5] for others
+        // Ranges [-1.5 - 3.5] for archery/throwing, ranges [0 - 2.5] for others.
         aim_speed += get_modifier( character_modifier_aim_speed_skill_mod, gun_skill );
 
         /** @EFFECT_DEX increases aiming speed */
-        // every DEX increases 0.5 aim_speed
+        // Every DEX above 9 adds 0.5 aim_speed.  This is hardcoded in character_modifiers.cpp.
         aim_speed += get_modifier( character_modifier_aim_speed_dex_mod );
 
         aim_speed *= get_modifier( character_modifier_aim_speed_mod );
     } else {
         aim_speed += aim_cache.value().get().aim_speed_skill_mod;
-
         aim_speed += aim_cache.value().get().aim_speed_dex_mod;
-
         aim_speed *= aim_cache.value().get().aim_speed_mod;
     }
-
-    // finally multiply everything by a harsh function that is eliminated by 7.5 gunskill
+    // Finally multiply everything by a harsh function that is eliminated by 7.5 weapon skill.
     aim_speed /= std::max( 1.0, 2.5 - 0.2 * get_skill_level( gun_skill ) );
-    // Use a milder attenuation function to replace the previous logarithmic attenuation function when recoil is closed to 0.
-    aim_speed *= std::max( recoil / MAX_RECOIL, 1 - logarithmic_range( 0, MAX_RECOIL, recoil ) );
-
-    // add 4 max aim speed per skill up to 5 skill, then 1 per skill for skill 5-10
+    // Getting some aim bar is fast, but it slows as you build it.
+    double recoil_factor =
+        std::max( recoil / MAX_RECOIL, 1 - logarithmic_range( 0, MAX_RECOIL, recoil ) );
+    recoil_factor = std::pow( recoil_factor, 1.05 );
+    aim_speed *= recoil_factor;
+    // Add 4 max aim speed per skill up to 5 skill, then 1 per skill for skill 5-10.
     double base_aim_speed_cap = 5.0 +  1.0 * get_skill_level( gun_skill ) + std::max( 10.0,
                                 3.0 * get_skill_level( gun_skill ) );
     if( !use_cache ) {
-        // This upper limit usually only affects the first half of the aiming process
-        // Pistols have a much higher aiming speed limit
-        aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_volume( gun ) );
-
-        // When the character is in an open area, it will not be affected by the length of the weapon.
-        // This upper limit usually only affects the first half of the aiming process
-        // Weapons shorter than carbine are usually not affected by it
         aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_length( gun ) );
+        aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_volume( gun ) );
+        aim_speed = std::min( aim_speed, base_aim_speed_cap * aim_factor_from_weight( gun ) );
     } else {
         aim_speed = std::min( aim_speed,
-                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_volume );
-
-        aim_speed = std::min( aim_speed,
                               base_aim_speed_cap * aim_cache.value().get().aim_factor_from_length );
+        aim_speed = std::min( aim_speed,
+                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_volume );
+        aim_speed = std::min( aim_speed,
+                              base_aim_speed_cap * aim_cache.value().get().aim_factor_from_weight );
     }
     // Just a raw scaling factor.
     aim_speed *= 2.4;
-
     // Minimum improvement is 0.01MoA.  This is just to prevent data anomalies
     aim_speed = std::max( aim_speed, MIN_RECOIL_IMPROVEMENT );
-
     // Never improve by more than the currently used sights permit.
     return std::min( aim_speed, recoil - limit );
 }
@@ -1417,15 +1461,24 @@ int Character::eye_level() const
     // Standing:  Tiny = 20, Small = 40, Med = 60, Large = 80, Huge = 100
     // Crouching: Tiny = 12, Small = 24, Med = 36, Large = 48, Huge = 60
     // Prone:     Tiny = 6,  Small = 12, Med = 18, Large = 24, Huge = 30
-    int eye_level = static_cast<float>( enum_size() ) * 20;
-    if( flat ) {
-        eye_level *= 0.3;
-    } else if( low_profile ) {
-        eye_level *= 0.6;
+    static constexpr int standing_eye_level[]   = { 0, 20, 40, 60, 80, 100 };
+    static constexpr int crouching_eye_level[]  = { 0, 12, 24, 36, 48, 60 };
+    static constexpr int prone_eye_level[]      = { 0, 6, 12, 18, 24, 30 };
+    const int size = static_cast<int>( enum_size() );
+    int eye_level = flat ? prone_eye_level[size] :
+                    low_profile ? crouching_eye_level[size] :
+                    standing_eye_level[size];
+    return eye_level + tile_eye_level_bonus();
+}
+
+
+int Character::tile_eye_level_bonus() const
+{
+    if( !cached_tile_eye_level_bonus_dirty ) {
+        return cached_tile_eye_level_bonus;
     }
-
+    int bonus = 0;
     map &here = get_map();
-
     if( const optional_vpart_position vp = here.veh_at( pos_bub() ) ) {
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
         const vehicle &veh = vp->vehicle();
@@ -1437,34 +1490,38 @@ int Character::eye_level() const
             if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
                 vpi_here.location != "roof" ) {
                 all_no_cover = false;
-                break; // Early exit since at least one part provides cover.
+                break;
             }
         }
-        if( all_no_cover ) {
-            eye_level += 0;
-        } else if( !is_aisle ) {
-            // Non-aisle non-obstacle parts typically give 45 cover. We get less than that as we're inside the vehicle, not atop it.
-            // Return here to ensure we aren't stacking vehicle and furniture bonuses.
-            return eye_level += 20;
+        if( !all_no_cover && !is_aisle ) {
+            // Non-aisle non-obstacle parts typically give 45 cover. We get less than that as
+            // we're inside the vehicle, not atop it. Vehicle cover does not stack with furniture.
+            bonus = 20;
+            cached_tile_eye_level_bonus = bonus;
+            cached_tile_eye_level_bonus_dirty = false;
+            return bonus;
         }
     }
-
     const furn_id viewer_furn = here.furn( pos_bub() );
     const furn_t &furn = viewer_furn.obj();
-    if( !furn.id ) {
-        return eye_level;
-    }
-    if( furn.coverage <= 0 ) {
-        return eye_level;
-    }
-    if( ( furn.has_flag( ter_furn_flag::TFLAG_CAN_SIT ) ||
+    if( furn.id && furn.coverage > 0 &&
+        ( furn.has_flag( ter_furn_flag::TFLAG_CAN_SIT ) ||
           furn.has_flag( ter_furn_flag::TFLAG_MOUNTABLE ) ||
-          furn.has_flag( ter_furn_flag::TFLAG_FLAT_SURF ) || furn.has_flag( ter_furn_flag::TFLAG_FLAT ) ||
+          furn.has_flag( ter_furn_flag::TFLAG_FLAT_SURF ) ||
+          furn.has_flag( ter_furn_flag::TFLAG_FLAT ) ||
           furn.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) &&
         !furn.has_flag( ter_furn_flag::TFLAG_HIDE_PLACE ) ) {
-        eye_level += furn.coverage;
+        bonus = furn.coverage;
     }
-    return eye_level;
+
+    cached_tile_eye_level_bonus = bonus;
+    cached_tile_eye_level_bonus_dirty = false;
+    return bonus;
+}
+
+void Character::invalidate_tile_eye_level_cache() const
+{
+    cached_tile_eye_level_bonus_dirty = true;
 }
 
 bool Character::overmap_los( const tripoint_abs_omt &omt, int sight_points ) const
@@ -1880,6 +1937,7 @@ void Character::mount_creature( monster &z )
         guy.setpos( here, pnt );
     }
     z.facing = facing;
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     mod_moves( -100 );
 }
@@ -2741,11 +2799,11 @@ void Character::process_turn()
         const time_point now = calendar::turn;
         time_duration decay_time = 0_days;
         if( has_trait( trait_NOMAD ) ) {
-            decay_time = 7_days;
+            decay_time = 2_days;
         } else if( has_trait( trait_NOMAD2 ) ) {
-            decay_time = 14_days;
+            decay_time = 5_days;
         } else if( has_trait( trait_NOMAD3 ) ) {
-            decay_time = 28_days;
+            decay_time = 10_days;
         }
         auto it = overmap_time.begin();
         while( it != overmap_time.end() ) {
@@ -3525,6 +3583,8 @@ void Character::remove_mission_items( int mission_id )
 void Character::on_move( const tripoint_abs_ms &old_pos )
 {
     Creature::on_move( old_pos );
+    // Update the eye_level_cache in case we step on or off something that raises our eye_level.
+    invalidate_tile_eye_level_cache();
     // Ugly to compare a tripoint_bub_ms with a tripoint_abs_ms, but the 'z' component
     // is the same regardless of the x/y reference point.
     if( this->posz() != old_pos.z() ) {
@@ -4606,9 +4666,20 @@ body_part_set Character::exclusive_flag_coverage( const flag_id &flag ) const
 
 double Character::dispersion_variance() const
 {
-    return rng( 900.0 - ( std::min( 800.0,
-                                    ( 40.0 * ( get_per() * ( ( get_limb_score( limb_score_manip ) + get_limb_score(
-                                            limb_score_vision ) ) / 2.0 ) ) ) ) ), -200 );
+    double ability = static_cast<double>( get_per() ) *
+                     ( ( get_limb_score( limb_score_manip ) +
+                         get_limb_score( limb_score_vision ) ) / 2.0 );
+    ability = std::clamp( ability, 0.01, 20.0 );
+    double low;
+    if( ability <= 10.0 ) {
+        low = -20.0 + ability;
+    } else {
+        low = -10.0 + ( ability - 10.0 ) * 0.5;
+    }
+    double high = 5.0 + ability * 0.5;
+    double variance = rng_float( low, high );
+    add_msg_debug( debugmode::DF_RANGED, "Semi-random variance adds %1f dispersion.", variance );
+    return variance;
 }
 
 double Character::expected_dispersion_variance() const
@@ -5481,7 +5552,6 @@ bool Character::needs_food() const
 
 void Character::update_needs( int rate_multiplier )
 {
-    const int current_stim = get_stim();
     // Hunger, thirst, & fatigue up every 5 minutes
     effect &sleep = get_effect( effect_sleep );
     // No food/thirst/fatigue clock at all
@@ -5587,14 +5657,26 @@ void Character::update_needs( int rate_multiplier )
         }
     }
 
-    if( current_stim < 0 ) {
-        set_stim( std::min( current_stim + rate_multiplier, 0 ) );
-    } else if( current_stim > 0 ) {
-        set_stim( std::max( current_stim - rate_multiplier, 0 ) );
-    }
-
-    if( get_painkiller() > 0 ) {
-        mod_painkiller( -std::min( get_painkiller(), rate_multiplier ) );
+    if( !pkill_sources.empty() ) {
+        for( pkill_source &source : pkill_sources ) {
+            source.amount = std::max( 0, source.amount - rate_multiplier );
+        }
+        pkill_sources.erase(
+            std::remove_if(
+                pkill_sources.begin(),
+                pkill_sources.end(),
+        []( const pkill_source & source ) {
+            return source.amount == 0;
+        }
+            ),
+        pkill_sources.end()
+        );
+        int total_pkill = 0;
+        for( const pkill_source &source : pkill_sources ) {
+            total_pkill += source.amount;
+        }
+        set_painkiller( total_pkill );
+        recalculate_painkiller();
     }
 
     if( get_bp_effect_mod() > 0 ) {
@@ -5855,7 +5937,7 @@ void Character::check_needs_extremes()
         }
     }
 
-    // Sleep deprivation kicks in if lack of sleep is avoided with stimulants or otherwise for long periods of time
+    // Fatigue is what helps you sleep.  Sleep deprivation is your punishment for not doing so.
     int sleep_deprivation = get_sleep_deprivation();
     float sleep_deprivation_pct = sleep_deprivation / static_cast<float>( SLEEP_DEPRIVATION_MASSIVE );
 
@@ -6659,7 +6741,7 @@ float Character::get_bmi_lean() const
 {
     int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
                             get_str_base() );
-    //strength BMIs decrease to zero as you starve (muscle atrophy)
+    // Strength BMI adjustment decreases to zero as you starve (muscle atrophy).
     if( get_bmi_fat() < character_weight_category::normal ) {
         const stat_mod wpen = get_weight_penalty();
         return 12.0f + strength_adjusted - wpen.strength;
@@ -6798,17 +6880,8 @@ void Character::mod_base_height( int mod )
 
 std::string Character::height_string() const
 {
-    const bool metric = get_option<std::string>( "UNIT_SYSTEM" ) == "metric";
-
-    if( metric ) {
-        std::string metric_string = _( "%d cm" );
-        return string_format( metric_string, height() );
-    }
-
-    int total_inches = std::round( height() / 2.54 );
-    int feet = std::floor( total_inches / 12 );
-    int remainder_inches = total_inches % 12;
-    return string_format( "%d\'%d\"", feet, remainder_inches );
+    std::string metric_string = _( "%d cm" );
+    return string_format( metric_string, height() );
 }
 
 int Character::height() const
@@ -6823,12 +6896,24 @@ int Character::height() const
 int Character::base_bmr() const
 {
     /**
-    Values are for males, and average!
+      The Mifflin–St Jeor equation would use +5 as equation_constant for men and -161 for women.
+      These are not magical sex-based constants, they're just general tendencies based on the
+      average differences in lean body mass between the sexes which are not otherwise accounted
+      for by body weight and height. We already track this via strength's effect on BMR elsewhere
+      in the code, so we use -78 to more accurately represent a midpoint which is later modified
+      by strength.
     */
-    const int equation_constant = 5;
+    const int equation_constant = -78;
     const int weight_factor = units::to_gram<int>( bodyweight() / 100.0 );
     const int height_factor = 6.25 * height();
-    const int age_factor = 5 * age();
+    /**
+      Age is clamped between 18 and 90 to avoid weird ages distorting the model. Younger characters
+      would be unduly penalized if it wasn't, and characters who somehow had their age set very high
+      would completely break the model. It might be more appropriate to use a different model for kids,
+      but clamping to 18 should be close enough that it doesn't really matter.
+    */
+    const int effective_age = std::clamp( age(), 18, 90 );
+    const int age_factor = 5 * effective_age;
     return metabolic_rate_base() * ( weight_factor + height_factor - age_factor + equation_constant );
 }
 
@@ -7034,21 +7119,6 @@ void Character::mend_item( item_location &&obj, bool interactive )
         activity.str_values.emplace_back( fix.id.str() );
         activity.targets.push_back( std::move( obj ) );
     }
-}
-
-int Character::get_stim() const
-{
-    return stim;
-}
-
-void Character::set_stim( int new_stim )
-{
-    stim = new_stim;
-}
-
-void Character::mod_stim( int mod )
-{
-    stim += mod;
 }
 
 int Character::get_rad() const
@@ -7340,7 +7410,7 @@ void Character::update_stamina( int turns )
     // But mouth encumbrance interferes, even with mutated stamina.
     stamina_recovery += stamina_multiplier * std::max( 1.0f,
                         effective_regen_rate * get_modifier( character_modifier_stamina_recovery_breathing_mod ) );
-    // only apply stim-related and mutant stamina boosts if you don't have bionic lungs
+    // Only apply stamina boosts from enchantments (i.e. mutations) if you don't have bionic lungs.
     if( !has_bionic( bio_synlungs ) ) {
         stamina_recovery = enchantment_cache->modify_value( enchant_vals::mod::REGEN_STAMINA,
                            stamina_recovery );
@@ -7670,11 +7740,11 @@ void Character::wake_up()
     if( has_effect( effect_alarm_clock ) ) {
         get_effect( effect_alarm_clock ).set_duration( 0_turns );
     }
-    recalc_sight_limits();
-
     if( movement_mode_is( move_mode_prone ) ) {
         set_movement_mode( move_mode_walk );
     }
+    invalidate_tile_eye_level_cache();
+    recalc_sight_limits();
 }
 
 int Character::get_shout_volume() const
@@ -10252,9 +10322,27 @@ bool Character::has_fire( const int quantity ) const
     return false;
 }
 
-void Character::mod_painkiller( int npkill )
+void Character::mod_painkiller( const efftype_id &source, int amount, int max )
 {
-    set_painkiller( pkill + npkill );
+    auto iter = std::find_if(
+                    pkill_sources.begin(),
+                    pkill_sources.end(),
+    [&]( const pkill_source & s ) {
+        return s.source == source;
+    }
+                );
+
+    if( iter == pkill_sources.end() ) {
+        pkill_sources.push_back( { source, 0 } );
+        iter = std::prev( pkill_sources.end() );
+    }
+
+    iter->amount = std::clamp( iter->amount + amount, 0, max );
+
+    pkill = 0;
+    for( const pkill_source &s : pkill_sources ) {
+        pkill += s.amount;
+    }
 }
 
 void Character::set_painkiller( int npkill )
@@ -10271,6 +10359,15 @@ void Character::set_painkiller( int npkill )
             on_stat_change( "perceived_pain", cur_pain );
         }
     }
+}
+
+void Character::recalculate_painkiller()
+{
+    int total = 0;
+    for( const pkill_source &source : pkill_sources ) {
+        total += source.amount;
+    }
+    set_painkiller( total );
 }
 
 int Character::get_painkiller() const
@@ -11178,6 +11275,7 @@ float Character::hearing_ability() const
 
     volume_multiplier = enchantment_cache->modify_value( enchant_vals::mod::HEARING_MULT,
                         volume_multiplier );
+    volume_multiplier += std::clamp( get_per() * 0.05f - 0.4f, 0.f, 0.5f );
 
     if( has_effect( effect_deaf ) ) {
         // Scale linearly up to 30 minutes
@@ -11277,17 +11375,6 @@ void Character::process_one_effect( effect &it, bool is_new )
                                               it.get_max_val( "HEALTH", reduced ), it.get_min_val( "HEALTH", reduced ) ) );
         }
     }
-
-    // Handle stim
-    val = get_effect( "STIM", reduced );
-    if( val != 0 ) {
-        mod = 1;
-        if( is_new || it.activated( calendar::turn, "STIM", val, reduced, mod ) ) {
-            mod_stim( bound_mod_to_vals( get_stim(), val, it.get_max_val( "STIM", reduced ),
-                                         it.get_min_val( "STIM", reduced ) ) );
-        }
-    }
-
 
     // Handle hunger
     val = get_effect( "HUNGER", reduced );
@@ -11435,8 +11522,13 @@ void Character::process_one_effect( effect &it, bool is_new )
     if( val != 0 ) {
         mod = it.get_addict_mod( "PKILL", addiction_level( addiction_opioid ) );
         if( is_new || it.activated( calendar::turn, "PKILL", val, reduced, mod ) ) {
-            mod_painkiller( bound_mod_to_vals( get_painkiller(), val, it.get_max_val( "PKILL", reduced ), 0 ) );
+            mod_painkiller(
+                it.get_id(),
+                val,
+                it.get_max_val( "PKILL", reduced )
+            );
         }
+        recalculate_painkiller();
     }
 
     // Handle Blood Pressure
@@ -11541,6 +11633,9 @@ void Character::process_effects()
     if( ( has_effect( effect_winded ) || in_sleep_state() ) &&
         has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
         release_grapple();
+    }
+    if( has_effect( effect_bionic_painkiller ) && !has_active_bionic( bio_painkiller ) ) {
+        remove_effect( effect_bionic_painkiller );
     }
     // Clear hardcoded bonuses from last turn
     // Recalculated in process_one_effect
@@ -12416,7 +12511,7 @@ int Character::book_fun_for( const item &book, const Character &p ) const
         return 0;
     }
 
-    // If you don't have a problem with eating humans, To Serve Man becomes rewarding
+    // Don't you like serving humans?!
     if( ( p.has_trait( trait_CANNIBAL ) || p.has_trait( trait_PSYCHOPATH ) ||
           p.has_trait( trait_SAPIOVORE ) ) &&
         book.typeId() == itype_cookbook_human ) {
@@ -12426,12 +12521,12 @@ int Character::book_fun_for( const item &book, const Character &p ) const
     }
 
     if( has_trait( trait_LOVES_BOOKS ) ) {
-        fun_bonus++;
+        fun_bonus = std::max( fun_bonus + 2, static_cast<int>( std::round( fun_bonus * 1.2 ) ) );
     } else if( has_trait( trait_HATES_BOOKS ) ) {
         if( book.type->book->fun > 0 ) {
-            fun_bonus = 0;
+            fun_bonus = std::min( fun_bonus - 2, fun_bonus / 2 );
         } else {
-            fun_bonus--;
+            fun_bonus -= 2;
         }
     }
 
@@ -12977,6 +13072,7 @@ void Character::set_underwater( bool u )
 {
     if( underwater != u ) {
         underwater = u;
+        invalidate_tile_eye_level_cache();
         recalc_sight_limits();
     }
 }
@@ -13890,11 +13986,11 @@ void Character::environmental_revert_effect()
     set_fatigue( 0 );
     set_lifestyle( 0 );
     set_daily_health( 0 );
-    set_stim( 0 );
     set_pain( 0 );
     set_painkiller( 0 );
     set_rad( 0 );
 
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     calc_encumbrance();
 }

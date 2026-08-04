@@ -72,7 +72,8 @@
       "PUSH_MON",
       "STUMBLES",
       "KEENNOSE",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 8, "cut": 12, "electric": 1 }
   },
@@ -104,8 +105,17 @@
     "dissect": "dissect_mouse_sample_large",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
+    "special_attacks": [
+      { "id": "low_charge", "cooldown": 12 },
+      {
+        "type": "bite",
+        "attack_upper": false,
+        "cooldown": 5,
+        "damage_max_instance": [ { "damage_type": "stab", "amount": 12, "armor_penetration": 6 } ]
+      }
+    ],
     "fear_triggers": [ "SOUND" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM", "BELLYUP" ],
     "armor": { "cut": 4 }
   },
   {
@@ -137,7 +147,16 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
     "fear_triggers": [ "SOUND" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM" ]
+    "special_attacks": [
+      { "id": "low_charge", "cooldown": 12 },
+      {
+        "type": "bite",
+        "attack_upper": false,
+        "cooldown": 5,
+        "damage_max_instance": [ { "damage_type": "stab", "amount": 8, "armor_penetration": 2 } ]
+      }
+    ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM", "BELLYUP" ]
   },
   {
     "id": "mon_coyote_mutant_shark",
@@ -180,7 +199,7 @@
     "path_settings": { "max_dist": 7 },
     "anger_triggers": [ "FRIEND_ATTACKED", "PLAYER_WEAK" ],
     "fear_triggers": [ "SOUND" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "GROUP_MORALE", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "GROUP_MORALE", "EATS", "BELLYUP" ],
     "armor": { "bash": 1 }
   },
   {
@@ -226,7 +245,8 @@
       "KEENNOSE",
       "BADVENOM",
       "GROUP_MORALE",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 1 }
   },
@@ -285,7 +305,7 @@
       { "id": "bite_grab_required" }
     ],
     "anger_triggers": [ "STALK", "FRIEND_ATTACKED", "FRIEND_DIED", "PLAYER_WEAK", "PLAYER_CLOSE" ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "EATS", "BELLYUP" ],
     "armor": { "bash": 8, "cut": 10, "electric": 1 }
   },
   {
@@ -323,7 +343,7 @@
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 12 },
     "baby_flags": [ "SPRING", "SUMMER" ],
     "special_attacks": [ [ "EAT_CROP", 60 ], [ "GRAZE", 60 ] ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "EATS" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "EATS", "BELLYUP" ]
   },
   {
     "id": "mon_deer_mutant_spider_fawn",
@@ -356,7 +376,7 @@
     "path_settings": { "max_dist": 10 },
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
     "upgrades": { "age_grow": 330, "into": "mon_deer_mutant_spider" },
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "STUMBLES" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "STUMBLES", "BELLYUP" ]
   },
   {
     "id": "mon_dog_mutant_mongrel",
@@ -415,7 +435,8 @@
       "SMELLS",
       "SWARMS",
       "WARM",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ]
   },
   {
@@ -476,7 +497,8 @@
       "SWARMS",
       "WARM",
       "CLIMBS",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 1, "cut": 1 }
   },
@@ -545,6 +567,7 @@
     "biosignature": { "biosig_item": "feces_dog", "biosig_timer": 6 },
     "anger_triggers": [ "HURT", "FRIEND_ATTACKED", "FRIEND_DIED" ],
     "special_attacks": [
+      { "id": "low_charge", "cooldown": 16 },
       {
         "type": "bite",
         "attack_upper": false,
@@ -572,7 +595,8 @@
       "SMELLS",
       "SWARMS",
       "WARM",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ]
   },
   {
@@ -666,7 +690,8 @@
       "SWARMS",
       "CAN_DIG",
       "WARM",
-      "EATS"
+      "EATS",
+      "BELLYUP"
     ],
     "armor": { "bash": 1, "cut": 1 }
   },
@@ -775,7 +800,8 @@
       "EATS",
       "CORNERED_FIGHTER",
       "COMBAT_MOUNT",
-      "NO_BREED"
+      "NO_BREED",
+      "BELLYUP"
     ],
     "armor": { "bash": 5, "cut": 6, "bullet": 8, "electric": 1 }
   }

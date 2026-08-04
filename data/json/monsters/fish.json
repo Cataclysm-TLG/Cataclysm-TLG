@@ -1296,7 +1296,7 @@
     "reproduction": { "baby_egg": "egg_fish", "baby_count": 2, "baby_timer": 19 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN", "WINTER" ],
     "path_settings": { "max_dist": 5 },
-    "flags": [ "SEES", "AQUATIC" ]
+    "flags": [ "SEES", "AQUATIC", "HIT_AND_RUN" ]
   },
   {
     "id": "mon_fish_mackerel",

@@ -1747,9 +1747,9 @@ void read_activity_actor::start( player_activity &act, Character &who )
                                   ereader->type->maximum_charges() : link_actor->cable_length;
             bool plugged_in = false;
             for( const tripoint_bub_ms &pt : here.points_in_radius( who.pos_bub(), cable_len ) ) {
-                // points_in_radius uses Chebyshev (square), but process_link uses rl_dist (Euclidean).
+                // points_in_radius uses Chebyshev (square), but process_link uses trig_dist (rounded Euclidean).
                 // Skip tiles that would immediately exceed max_length after plugging in.
-                if( rl_dist( who.pos_bub(), pt ) > cable_len ) {
+                if( trig_dist( who.pos_bub(), pt ) > cable_len ) {
                     continue;
                 }
                 const optional_vpart_position ovp = here.veh_at( pt );
@@ -2388,7 +2388,7 @@ void move_items_activity_actor::do_turn( player_activity &act, Character &who )
         // This is for hauling across zlevels, remove when going up and down stairs
         // is no longer teleportation
         const tripoint_bub_ms src = target.pos_bub( here );
-        const int distance = src.z() == dest.z() ? std::max( rl_dist( src, dest ), 1 ) : 1;
+        const int distance = src.z() == dest.z() ? std::max( trig_dist( src, dest ), 1 ) : 1;
         // Yuck, I'm sticking weariness scaling based on activity level here
         const float weary_mult = who.exertion_adjusted_move_multiplier( exertion_level() );
         who.mod_moves( -Pickup::cost_to_move_item( who, newit ) * distance / weary_mult );
@@ -3797,8 +3797,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
     map &here = get_map();
     constexpr auto caught_corpse = []( Character & who, map & here, const mtype & corpse_type ) {
         item corpse = item::make_corpse( corpse_type.id,
-                                         calendar::turn + rng( 0_turns,
-                                                 3_hours ) );
+                                         calendar::turn );
         corpse.set_var( "activity_var", who.name );
         item_location loc = here.add_item_or_charges_ret_loc( who.pos_bub(), corpse );
         if( who.is_avatar() ) {
@@ -3808,7 +3807,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
             who.may_activity_occupancy_after_end_items_loc.push_back( loc );
         }
     };
-    //if the vector is empty (no fish around) the player is still given a small chance to get a (let us say it was hidden) fish
+    // If the vector is empty (no fish around) the player is still given a small chance to get a (let us say it was hidden) fish.
     if( fishables.empty() ) {
         const std::vector<mtype_id> fish_group = MonsterGroupManager::GetMonstersFromGroup(
                     GROUP_FISH, true );
@@ -3819,7 +3818,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
         chosen_fish->fish_population -= 1;
         if( chosen_fish->fish_population <= 0 ) {
             Character *who_ptr = &who;
-            g->catch_a_monster( chosen_fish, who.pos_bub(), who_ptr, 50_hours );
+            g->catch_a_monster( chosen_fish, who.pos_bub(), who_ptr );
         } else {
             if( chosen_fish->type != nullptr ) {
                 caught_corpse( who, here, *( chosen_fish->type ) );
@@ -3982,10 +3981,8 @@ std::unique_ptr<activity_actor> open_gate_activity_actor::deserialize( JsonValue
 void consume_activity_actor::start( player_activity &act, Character &guy )
 {
     int moves = 0;
-    Character &player_character = get_player_character();
-    //TODO: why use both `player_character` and `guy`?
-    auto player_will_eat = [this, &moves, &player_character, &guy]( const item & it ) {
-        ret_val<edible_rating> ret = player_character.will_eat( it, true );
+    auto character_will_eat = [this, &moves, &guy]( const item & it ) {
+        ret_val<edible_rating> ret = guy.will_eat( it, true );
         if( !ret.success() ) {
             canceled = true;
             uistate.consume_uistate.clear();
@@ -3995,9 +3992,9 @@ void consume_activity_actor::start( player_activity &act, Character &guy )
     };
 
     if( consume_location ) {
-        player_will_eat( *consume_location );
+        character_will_eat( *consume_location );
     } else if( !consume_item.is_null() ) {
-        player_will_eat( consume_item );
+        character_will_eat( consume_item );
     } else {
         debugmsg( "Item/location to be consumed should not be null." );
         canceled = true;

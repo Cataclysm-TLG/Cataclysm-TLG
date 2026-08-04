@@ -1986,6 +1986,11 @@ void Creature::add_effect( const effect_source &source, const efftype_id &eff_id
     if( !force && is_immune_effect( eff_id ) ) {
         return;
     }
+    Character *guy = this->as_character();
+    if( guy ) {
+        // Update the eye_level_cache in case we step on or off something that raises our eye_level.
+        guy->invalidate_tile_eye_level_cache();
+    }
     if( eff_id == effect_downed && ( has_effect( effect_ridden ) ||
                                      has_effect( effect_riding ) ) ) {
         monster *mons = dynamic_cast<monster *>( this );
@@ -2062,8 +2067,8 @@ void Creature::add_effect( const effect_source &source, const efftype_id &eff_id
         effect e( effect_source( source ), &type, duration, bp.id(), permanent, intensity, calendar::turn );
 
         ( *effects )[eff_id][bp] = e;
-        if( Character *ch = as_character() ) {
-            get_event_bus().send<event_type::character_gains_effect>( ch->getID(), bp.id(), eff_id );
+        if( guy ) {
+            get_event_bus().send<event_type::character_gains_effect>( guy->getID(), bp.id(), eff_id );
             if( is_avatar() ) {
                 eff_id->add_apply_msg( e.get_intensity() );
             }
@@ -2177,16 +2182,20 @@ bool Creature::remove_effect( const efftype_id &eff_id, const bodypart_id &bp )
         //Effect doesn't exist, so do nothing
         return false;
     }
-    const effect_type &type = eff_id.obj();
 
-    if( Character *ch = as_character() ) {
+    const effect_type &type = eff_id.obj();
+    Character *guy = this->as_character();
+    if( guy ) {
+        // Update the eye_level_cache in case we step on or off something that raises our eye_level.
+        guy->invalidate_tile_eye_level_cache();
         if( is_avatar() ) {
             if( !type.get_remove_message().empty() ) {
                 add_msg( type.lose_game_message_type( get_effect( eff_id, bp.id() ).get_intensity() ),
                          type.get_remove_message() );
             }
         }
-        get_event_bus().send<event_type::character_loses_effect>( ch->getID(), bp.id(), eff_id );
+        get_event_bus().send<event_type::character_loses_effect>( guy->getID(), bp.id(), eff_id );
+        guy->recalculate_painkiller();
     }
 
     // bp_null means remove all of a given effect id
