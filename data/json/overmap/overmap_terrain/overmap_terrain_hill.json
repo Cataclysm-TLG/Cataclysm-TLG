@@ -35,12 +35,12 @@
   {
     "type": "overmap_terrain",
     "id": "hill_top_core",
-    "copy-from": "generic_hill",
+    "copy-from": "generic_hill_top",
     "extend": { "flags": [ "NO_ROTATE" ] }
   },
   {
     "type": "overmap_terrain",
     "id": "hill_top_end",
-    "copy-from": "generic_hill"
+    "copy-from": "generic_hill_top"
   }
 ]

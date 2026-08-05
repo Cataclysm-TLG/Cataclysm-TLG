@@ -32,15 +32,197 @@
       ],
       "terrain": { "1": "t_soil" },
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
-      "place_nested": [ { "chunks": [ "hill_top_core" ], "x": 0, "y": 0, "z": 1 } ]
+      "place_nested": [ { "chunks": [ "hill_top_core_nested" ], "x": 0, "y": 0, "z": 1 } ]
     }
   },
   {
     "om_terrain": "hill_end",
     "type": "mapgen",
-    "weight": 8,
+    "weight": 6,
     "object": {
       "fallback_predecessor_mapgen": "field",
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
+      "place_nested": [
+        { "chunks": [ "hill_end_1_nested" ], "x": 0, "y": 0, "z": 0 },
+        { "chunks": [ "hill_top_end_1_nested" ], "x": 0, "y": 0, "z": 1 }
+      ]
+    }
+  },
+  {
+    "om_terrain": "hill_end",
+    "type": "mapgen",
+    "weight": 1,
+    "object": {
+      "fallback_predecessor_mapgen": "field",
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
+      "place_nested": [
+        { "chunks": [ "hill_end_2_nested" ], "x": 0, "y": 0, "z": 0 },
+        { "chunks": [ "hill_top_end_2_nested" ], "x": 0, "y": 0, "z": 1 }
+      ]
+    }
+  },
+  {
+    "om_terrain": "hill_end",
+    "type": "mapgen",
+    "weight": 2,
+    "object": {
+      "fallback_predecessor_mapgen": "field",
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
+      "place_nested": [
+        { "chunks": [ "hill_end_3_nested" ], "x": 0, "y": 0, "z": 0 },
+        { "chunks": [ "hill_top_end_3_nested" ], "x": 0, "y": 0, "z": 1 }
+      ]
+    }
+  },
+  {
+    "om_terrain": "hill_top_end",
+    "type": "mapgen",
+    "object": {
+      "fallback_predecessor_mapgen": "open_air",
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ]
+    }
+  },
+  {
+    "om_terrain": "hill_top_core",
+    "type": "mapgen",
+    "object": {
+      "fallback_predecessor_mapgen": "open_air",
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "hill_end_1_nested",
+    "object": {
+      "mapgensize": [ 24, 24 ],
       "rows": [
         "111111111111111111111111",
         "311111111111111111111113",
@@ -69,15 +251,14 @@
       ],
       "terrain": { "1": "t_soil", "2": "t_earth_ramp_up_low", "3": "t_earth_ramp_up_high" },
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
-      "place_nested": [ { "chunks": [ "hill_top_end_1" ], "x": 0, "y": 0, "z": 1 } ]
+      "place_nested": [ { "chunks": [ "hill_top_end_1_nested" ], "x": 0, "y": 0, "z": 1 } ]
     }
   },
   {
-    "om_terrain": "hill_end",
     "type": "mapgen",
-    "weight": 4,
+    "nested_mapgen_id": "hill_end_2_nested",
     "object": {
-      "fallback_predecessor_mapgen": "field",
+      "mapgensize": [ 24, 24 ],
       "rows": [
         "111111111111111111111111",
         "231111111111111111111132",
@@ -104,18 +285,16 @@
         "                        ",
         "                        "
       ],
-      "terrain": {
-        "1": "t_soil", "2": "t_earth_ramp_up_low", "3": "t_earth_ramp_up_high" },
+      "terrain": { "1": "t_soil", "2": "t_earth_ramp_up_low", "3": "t_earth_ramp_up_high" },
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
-      "place_nested": [ { "chunks": [ "hill_top_end_2" ], "x": 0, "y": 0, "z": 1 } ]
+      "place_nested": [ { "chunks": [ "hill_top_end_2_nested" ], "x": 0, "y": 0, "z": 1 } ]
     }
   },
   {
-    "om_terrain": "hill_end",
     "type": "mapgen",
-    "weight": 2,
+    "nested_mapgen_id": "hill_end_3_nested",
     "object": {
-      "fallback_predecessor_mapgen": "field",
+      "mapgensize": [ 24, 24 ],
       "rows": [
         "311111111111111111111133",
         "231111111111111111113322",
@@ -142,17 +321,16 @@
         "                        ",
         "                        "
       ],
-      "terrain": {
-        "1": "t_soil", "2": "t_earth_ramp_up_low", "3": "t_earth_ramp_up_high" },
+      "terrain": { "1": "t_soil", "2": "t_earth_ramp_up_low", "3": "t_earth_ramp_up_high" },
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
-      "place_nested": [ { "chunks": [ "hill_top_end_3" ], "x": 0, "y": 0, "z": 1 } ]
+      "place_nested": [ { "chunks": [ "hill_top_end_3_nested" ], "x": 0, "y": 0, "z": 1 } ]
     }
   },
   {
     "type": "mapgen",
-    "nested_mapgen_id": "hill_top_core",
+    "nested_mapgen_id": "hill_top_core_nested",
     "object": {
-    "mapgensize":[ 24, 24 ],
+      "mapgensize": [ 24, 24 ],
       "rows": [
         "111111111111111111111111",
         "111111111111111111111111",
@@ -185,9 +363,9 @@
   },
   {
     "type": "mapgen",
-    "nested_mapgen_id": "hill_top_end_1",
+    "nested_mapgen_id": "hill_top_end_1_nested",
     "object": {
-    "mapgensize":[ 24, 24 ],
+      "mapgensize": [ 24, 24 ],
       "rows": [
         "111111111111111111111111",
         "311111111111111111111113",
@@ -214,23 +392,22 @@
         "                        ",
         "                        "
       ],
-      "terrain": { "1": "t_region_groundcover",
-       "2": "t_earth_ramp_down_low", "3": "t_earth_ramp_down_high" },
+      "terrain": { "1": "t_region_groundcover", "2": "t_earth_ramp_down_low", "3": "t_earth_ramp_down_high" },
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },
   {
     "type": "mapgen",
-    "nested_mapgen_id": "hill_top_end_2",
+    "nested_mapgen_id": "hill_top_end_2_nested",
     "object": {
-    "mapgensize":[ 24, 24 ],
+      "mapgensize": [ 24, 24 ],
       "rows": [
         "111111111111111111111111",
         "231111111111111111111132",
-        "232211111111111111112232",
-        "23222221111111111111132 ",
-        " 232222222222222222232  ",
-        "  2311111333333311132   ",
+        "231111111111111111111132",
+        "23111111111111111111132 ",
+        " 231111111111111111132  ",
+        "  2311111133333111132   ",
         "   231133322222311332   ",
         "   23132222   223322    ",
         "  231132        22      ",
@@ -256,9 +433,9 @@
   },
   {
     "type": "mapgen",
-    "nested_mapgen_id": "hill_top_end_3",
+    "nested_mapgen_id": "hill_top_end_3_nested",
     "object": {
-    "mapgensize":[ 24, 24 ],
+      "mapgensize": [ 24, 24 ],
       "rows": [
         "311111111111111111111133",
         "231111111111111111113322",
