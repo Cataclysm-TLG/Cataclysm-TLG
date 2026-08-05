@@ -1264,6 +1264,7 @@ static std::string assemble_stat_details( avatar &u, int sel )
 {
     std::string description_str;
     switch( sel ) {
+        // Strength
         case 0: {
             u.recalc_hp();
             u.set_stored_kcal( u.get_healthy_kcal() );
@@ -1292,18 +1293,19 @@ static std::string assemble_stat_details( avatar &u, int sel )
                        "\n- Grappling and escaping grabs and pull attacks"
                        "\n- Speed and effectiveness of smashing corpses and terrain"
                        "\n- Speed and effectiveness of prying things open, chopping wood, and mining"
-                       "\n- Chance of breaking out of snares and bear traps"
-                       "\n- Power produced by muscle-powered vehicles"
+                       "\n- Chance of breaking out of snares, webs, and other bindings"
+                       "\n- Power produced by muscle-powered vehicles like bicycles"
                        "\n- Most aspects of melee combat"
                        "\n- Resistance to many diseases and poisons"
                        "\n- Ability to drag heavy objects"
                        "\n- Ability to wield heavy weapons with one hand"
-                       "\n- Ability to manage gun recoil"
-                       "\n- Duration of action of various drugs and alcohol" ),
+                       "\n- Ability to manage gun recoil and heavier firearms"
+                       "\n- Duration of action of various drugs and alcohol"
+                       "\n- Resistance to drug withdrawals" ),
                     c_green );
         }
         break;
-
+        // Dexterity
         case 1: {
             description_str =
                 string_format(
@@ -1327,25 +1329,25 @@ static std::string assemble_stat_details( avatar &u, int sel )
                 + string_format( _( "\nMove cost while swimming: %i" ), u.swim_speed() )
                 + _( "\n\nAffects:" )
                 + colorize(
-                    _( "\n- Effectiveness of lockpicking"
-                       "\n- Chance of avoiding or escaping grabs and traps"
-                       "\n- Attack speed and accuracy in melee combat"
-                       "\n- Small bonus to melee critical hit chance"
-                       "\n- Chance of damaging melee weapon on attack"
-                       "\n- Effectiveness of disarming traps"
-                       "\n- Chance of success when manipulating with gun modifications"
-                       "\n- Effectiveness of repairing and modifying clothes and armor"
-                       "\n- Effectiveness of stealing"
-                       "\n- Throwing speed"
-                       "\n- Aiming speed"
-                       "\n- Speed and effectiveness of chopping wood with powered tools"
-                       "\n- Chance to get better results when butchering corpses or cutting items"
-                       "\n- Chance of losing control of vehicle when driving"
-                       "\n- Damage from falling" ),
+                    _(
+                        "\n- Attack speed and accuracy in melee and ranged combat"
+                        "\n- Aim and reload speed with ranged weapons"
+                        "\n- Small bonus to melee critical hit chance"
+                        "\n- Picking locks and disarming traps"
+                        "\n- Avoiding or escaping grabs and traps"
+                        "\n- Chance of preventing damage to weapons in melee combat"
+                        "\n- Chance of avoiding damage to items when making repairs"
+                        "\n- Bonus to success rate when modifying guns"
+                        "\n- Stealing success rate"
+                        "\n- Work speed when using powered tools"
+                        "\n- Chance to get better results when butchering corpses or cutting items"
+                        "\n- Maintaining control of vehicles while driving"
+                        "\n- Climbing success rate"
+                        "\n- Resisting fall damage" ),
                     c_green );
         }
         break;
-
+        // Intelligence
         case 2: {
             const int read_spd = u.read_speed();
             // It's actually a float, but we use a double here for legibility.
@@ -1370,8 +1372,8 @@ static std::string assemble_stat_details( avatar &u, int sel )
                             COL_STAT_BONUS )
                 + _( "\n\nAffects:" )
                 + colorize(
-                    _( "\n- Speed of 'catching up' practical experience to theoretical knowledge"
-                       "\n- Detection and disarming traps"
+                    _( "\n- Learning speed"
+                       "\n- Teaching ability"
                        "\n- Bandaging wounds and stopping blood loss"
                        "\n- Chance of success when installing bionics"
                        "\n- Chance of success when manipulating with gun modifications"
@@ -1380,11 +1382,12 @@ static std::string assemble_stat_details( avatar &u, int sel )
                        "\n- Chance of bypassing vehicle security system"
                        "\n- Chance to get better results when disassembling items"
                        "\n- Bash damage with whips and flails"
-                       "\n- Chance of being paralyzed by fear attack" ),
+                       "\n- Chance of being paralyzed by fear attack"
+                       "\n- Speed of recovery from addiction" ),
                     c_green );
         }
         break;
-
+        // Perception
         case 3: {
             description_str = string_format(
                                   _( "A measure of wits, proprioception, and acuity.  Perceptive characters excel at ranged accuracy, critical hits, and striking weakpoints.  Perception is broadly useful in combat, but most benefits stabbing weapons.\n\n" ) );
@@ -1402,19 +1405,16 @@ static std::string assemble_stat_details( avatar &u, int sel )
                 + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + _( "\n\nAffects:" )
                 + colorize(
-                    _( "\n- Speed of 'catching up' practical experience to theoretical knowledge"
-                       "\n- Precision and reliability with ranged attacks"
+                    _( "\n- Precision and reliability with all ranged attacks"
                        "\n- Large bonus to melee critical hit chance"
-                       "\n- Reduces chance for stabbing weapons to get stuck"
+                       "\n- Spotting hidden creatures and hazards"
+                       "\n- Preventing stabbing weapons from getting stuck in enemies"
                        "\n- Sight distance on overmap"
-                       "\n- Effectiveness of stealing"
-                       "\n- Throwing accuracy"
-                       "\n- Disinfecting your own wounds and using first aid on others"
-                       "\n- Chance of losing control of vehicle when driving"
-                       "\n- Chance of spotting hidden creatures and traps"
+                       "\n- Stealing success rate"
+                       "\n- Providing medical care, especially to others"
+                       "\n- Maintaining control of vehicles when driving"
                        "\n- Speed and effectiveness of lockpicking and foraging"
-                       "\n- Morale bonus when playing a musical instrument"
-                       "\n- Effectiveness of repairing and modifying clothes and armor" ),
+                       "\n- Morale bonus when playing a musical instrument" ),
                     c_green );
         }
         break;

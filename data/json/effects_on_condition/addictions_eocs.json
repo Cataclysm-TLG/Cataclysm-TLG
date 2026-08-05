@@ -10,7 +10,12 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_CAFFEINE_ADDICTION",
-    "condition": { "math": [ "rand(2000)", "<=", "addiction_rational(2000, 20, u_addiction_intensity('caffeine'))" ] },
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "caffeine_eff" } },
+        { "math": [ "rand(2000)", "<=", "addiction_rational(2000, 20, u_addiction_intensity('caffeine'))" ] }
+      ]
+    },
     "effect": [
       { "u_message": "You want some caffeine.", "type": "warning" },
       { "u_add_morale": "morale_craving_caffeine", "bonus": -5, "max_bonus": -25 },

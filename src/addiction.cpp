@@ -28,6 +28,7 @@
 
 static const efftype_id effect_amphetamine_eff( "amphetamine_eff" );
 static const efftype_id effect_cig( "cig" );
+static const efftype_id effect_cocaine( "cocaine" );
 static const efftype_id effect_nausea( "nausea" );
 static const efftype_id effect_opioid_eff( "opioid_eff" );
 static const efftype_id effect_withdrawal_alcohol( "withdrawal_alcohol" );
@@ -41,6 +42,8 @@ static const efftype_id effect_withdrawal_opioid_detoxed( "withdrawal_opioid_det
 static const efftype_id effect_withdrawal_opioid_timer( "withdrawal_opioid_timer" );
 static const efftype_id effect_hallu( "hallu" );
 static const efftype_id effect_shakes( "shakes" );
+static const efftype_id effect_took_xanax( "took_xanax" );
+static const efftype_id effect_valium( "valium" );
 
 static const morale_type morale_craving_alcohol( "morale_craving_alcohol" );
 static const morale_type morale_craving_cannabis( "morale_craving_cannabis" );
@@ -49,6 +52,10 @@ static const morale_type morale_craving_diazepam( "morale_craving_diazepam" );
 static const morale_type morale_craving_nicotine( "morale_craving_nicotine" );
 static const morale_type morale_craving_opioid( "morale_craving_opioid" );
 static const morale_type morale_craving_speed( "morale_craving_speed" );
+
+
+static const trait_id trait_ADDICTIVE( "ADDICTIVE" );
+static const trait_id trait_NONADDICTIVE( "NONADDICTIVE" );
 
 namespace
 {
@@ -100,7 +107,12 @@ static bool alcohol_add( Character &u, int in )
     int timer_int = std::min( in / 3, 3 );
 
     bool ret = false;
-    if( x_in_y( in, 24 ) && !u.in_sleep_state() ) {
+    int strength_adjusted = u.enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                            u.get_str_base() );
+    // Since we got str_base and not get_str(), make sure we don't forget any strength penalties.
+    int strength_penalty = std::min( u.get_str_bonus(), 0 );
+    strength_adjusted += strength_penalty;
+    if( x_in_y( in, 18 + std::max( strength_adjusted, -17 ) ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_alcohol_detoxed ) &&
             ( !u.has_effect( effect_withdrawal_alcohol_timer ) ) ) {
             u.add_effect( effect_withdrawal_alcohol_timer, 24_hours * timer_int, false, timer_int );
@@ -205,16 +217,24 @@ static bool cocaine_add( Character &u, int in )
 
 static bool nicotine_effect( Character &u, addiction &add )
 {
-    if( u.has_effect( effect_cig ) ) {
-        add.sated = 0_turns;
-        return false;
+    // We shouldn't be able to get here if we have the effect, but bail if we have.
+    for( const efftype_id &effect : add.type->get_satisfying_effects() ) {
+        if( u.has_effect( effect ) ) {
+            add.sated = add.type->get_default_sated();
+            return false;
+        }
     }
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( 20, add.intensity );
     int timer_int = std::min( in / 3, 3 );
 
     bool ret = false;
-    if( x_in_y( in, 48 ) && !u.in_sleep_state() ) {
+    int strength_adjusted = u.enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                            u.get_str_base() );
+    // Since we got str_base and not get_str(), make sure we don't forget any strength penalties.
+    int strength_penalty = std::min( u.get_str_bonus(), 0 );
+    strength_adjusted += strength_penalty;
+    if( x_in_y( in, 38 + std::max( strength_adjusted, -37 ) ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_nicotine_detoxed ) &&
             ( !u.has_effect( effect_withdrawal_nicotine_timer ) ) ) {
             u.add_effect( effect_withdrawal_nicotine_timer, 32_hours * timer_int, false, timer_int );
@@ -248,6 +268,13 @@ static bool nicotine_effect( Character &u, addiction &add )
 
 static bool cannabis_effect( Character &u, addiction &add )
 {
+    // We shouldn't be able to get here if we have the effect, but bail if we have.
+    for( const efftype_id &effect : add.type->get_satisfying_effects() ) {
+        if( u.has_effect( effect ) ) {
+            add.sated = add.type->get_default_sated();
+            return false;
+        }
+    }
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( 20, add.intensity );
 
@@ -282,30 +309,53 @@ static bool cannabis_effect( Character &u, addiction &add )
 
 static bool alcohol_effect( Character &u, addiction &add )
 {
+    // We shouldn't be able to get here if we have the effect, but bail if we have.
+    for( const efftype_id &effect : add.type->get_satisfying_effects() ) {
+        if( u.has_effect( effect ) ) {
+            add.sated = add.type->get_default_sated();
+            u.remove_effect( effect_shakes );
+            return false;
+        }
+    }
     const int in = std::min( 20, add.intensity );
     return alcohol_add( u, in );
 }
 
 static bool diazepam_effect( Character &u, addiction &add )
 {
+    // We shouldn't be able to get here if we have the effect, but bail if we have.
+    for( const efftype_id &effect : add.type->get_satisfying_effects() ) {
+        if( u.has_effect( effect ) ) {
+            add.sated = add.type->get_default_sated();
+            u.remove_effect( effect_shakes );
+            return false;
+        }
+    }
     const int in = std::min( 20, add.intensity );
     return benzodiazepine_add( u, in );
 }
 
 static bool opioid_effect( Character &u, addiction &add )
 {
-    if( u.has_effect( effect_opioid_eff ) ) {
-        add.sated = 0_turns;
-        u.remove_effect( effect_shakes );
-        return false;
+    // We shouldn't be able to get here if we have the effect, but bail if we have.
+    for( const efftype_id &effect : add.type->get_satisfying_effects() ) {
+        if( u.has_effect( effect ) ) {
+            add.sated = add.type->get_default_sated();
+            u.remove_effect( effect_shakes );
+            return false;
+        }
     }
 
     bool ret;
 
     const int in = std::min( 20, add.intensity );
     int timer_int = std::min( in / 3, 3 );
-
-    if( x_in_y( in, 24 ) && !u.in_sleep_state() ) {
+    int strength_adjusted = u.enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
+                            u.get_str_base() );
+    // Since we got str_base and not get_str(), make sure we don't forget any strength penalties.
+    int strength_penalty = std::min( u.get_str_bonus(), 0 );
+    strength_adjusted += strength_penalty;
+    if( x_in_y( in, 18 + std::max( strength_adjusted, -17 ) ) && !u.in_sleep_state() ) {
         if( !u.has_effect( effect_withdrawal_opioid_detoxed ) &&
             ( !u.has_effect( effect_withdrawal_opioid_timer ) ) ) {
             u.add_effect( effect_withdrawal_opioid_timer, 48_hours * timer_int, false, timer_int );
@@ -349,9 +399,12 @@ static bool opioid_effect( Character &u, addiction &add )
 
 static bool amphetamine_effect( Character &u, addiction &add )
 {
-    if( u.has_effect( effect_amphetamine_eff ) ) {
-        add.sated = 0_turns;
-        return false;
+    // We shouldn't be able to get here if we have the effect, but bail if we have.
+    for( const efftype_id &effect : add.type->get_satisfying_effects() ) {
+        if( u.has_effect( effect ) ) {
+            add.sated = add.type->get_default_sated();
+            return false;
+        }
     }
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( add.intensity, 20 );
@@ -396,6 +449,13 @@ static bool amphetamine_effect( Character &u, addiction &add )
 
 static bool cocaine_effect( Character &u, addiction &add )
 {
+    // We shouldn't be able to get here if we have the effect, but bail if we have.
+    for( const efftype_id &effect : add.type->get_satisfying_effects() ) {
+        if( u.has_effect( effect ) ) {
+            add.sated = add.type->get_default_sated();
+            return false;
+        }
+    }
     const int in = std::min( 20, add.intensity );
     return cocaine_add( u, in );
 }
@@ -434,6 +494,7 @@ void add_type::load( const JsonObject &jo, std::string_view )
     mandatory( jo, was_loaded, "name", _name );
     mandatory( jo, was_loaded, "type_name", _type_name );
     mandatory( jo, was_loaded, "description", _desc );
+    optional( jo, false, "satisfying_effects", _satisfying_effects );
     optional( jo, false, "sated", _sated, 2_hours );
     optional( jo, was_loaded, "craving_morale", _craving_morale, morale_type::NULL_ID() );
     optional( jo, was_loaded, "effect_on_condition", _effect );
