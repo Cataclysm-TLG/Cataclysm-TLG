@@ -5259,6 +5259,14 @@ void iexamine::pay_gas( Character &you, const tripoint_bub_ms &examp )
     }
 }
 
+void iexamine::ledge_ramp( Character &you, const tripoint_bub_ms &examp )
+{
+    map &here = get_map();
+    if( !here.has_flag_ter( "RAMP_DOWN_HIGH", you.pos_bub() ) ) {
+        ledge( you, examp );
+    }
+}
+
 void iexamine::ledge( Character &you, const tripoint_bub_ms &examp )
 {
     enum ledge_actions {
@@ -7321,6 +7329,7 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
             { "autoclave_full", &iexamine::autoclave_full },
             { "fireplace", &iexamine::fireplace },
             { "ledge", &iexamine::ledge },
+            { "ledge_ramp", &iexamine::ledge_ramp },
             { "autodoc", &iexamine::autodoc },
             { "quern_examine", &iexamine::quern_examine },
             { "smoker_options", &iexamine::smoker_options },

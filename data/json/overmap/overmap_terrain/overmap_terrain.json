@@ -431,6 +431,7 @@
     "name": "forest",
     "vision_levels": "forested",
     "sym": "F",
+    "looks_like": "forest",
     "color": "green",
     "see_cost": "spaced_high"
   },
@@ -440,6 +441,7 @@
     "vision_levels": "forested",
     "name": "forest",
     "sym": "F",
+    "looks_like": "forest_thick",
     "color": "green",
     "see_cost": "spaced_high"
   },
@@ -451,6 +453,7 @@
     "sym": "F",
     "color": "green",
     "see_cost": "high",
+    "looks_like": "cabin",
     "flags": [ "RISK_LOW", "SOURCE_SAFETY" ]
   },
   {
@@ -461,6 +464,7 @@
     "sym": "F",
     "color": "green",
     "see_cost": "high",
+    "looks_like": "desolatebarn",
     "flags": [ "RISK_LOW", "SOURCE_SAFETY" ]
   },
   {
@@ -470,6 +474,7 @@
     "name": "car corner",
     "sym": "F",
     "color": "green",
+    "looks_like": "forest",
     "see_cost": "spaced_high"
   },
   {
