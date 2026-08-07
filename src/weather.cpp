@@ -324,9 +324,13 @@ double trap::funnel_turns_per_charge( double rain_depth_mm_per_hour ) const
 /**
  * Main routine for filling funnels from weather effects.
  */
-static void fill_funnels( int rain_depth_mm_per_hour, const trap &tr )
+static void fill_funnels( double rain_depth_mm_per_hour, const trap &tr )
 {
     const double turns_per_charge_d = tr.funnel_turns_per_charge( rain_depth_mm_per_hour );
+    if( turns_per_charge_d == 0.0 ) {
+        return;
+    }
+    const double charges_per_turn = 1.0 / turns_per_charge_d;
 
     map &here = get_map();
     // Give each funnel on the map a chance to collect the rain.
@@ -342,28 +346,11 @@ static void fill_funnels( int rain_depth_mm_per_hour, const trap &tr )
             }
         }
 
-        if( container != items.end() && turns_per_charge_d > 0.0 ) {
-            int whole = static_cast<int>( std::floor( turns_per_charge_d ) );
-            double frac = turns_per_charge_d - whole;
-
-            // If turns_per_charge < 1, always fill (multiple charges per turn possible)
-            if( turns_per_charge_d < 1.0 ) {
-                int count = static_cast<int>( std::ceil( 1.0 / turns_per_charge_d ) );
-                for( int i = 0; i < count; i++ ) {
-                    container->add_rain_to_container( 1 );
-                }
+        if( container != items.end() ) {
+            int charges = roll_remainder( charges_per_turn );
+            if( charges > 0 ) {
+                container->add_rain_to_container( charges );
                 container->set_age( 0_turns );
-            } else {
-                // Base chance: one charge every 'whole' turns
-                if( one_in( whole ) ) {
-                    container->add_rain_to_container( 1 );
-                    container->set_age( 0_turns );
-                }
-                // Fractional chance to add an *extra* charge
-                if( frac > 0.0 && x_in_y( frac, 1.0 ) ) {
-                    container->add_rain_to_container( 1 );
-                    container->set_age( 0_turns );
-                }
             }
         }
     }
@@ -373,7 +360,7 @@ static void fill_funnels( int rain_depth_mm_per_hour, const trap &tr )
  * Fill funnels and makeshift funnels from weather effects.
  * @see fill_funnels
  */
-static void fill_water_collectors( int mmPerHour )
+static void fill_water_collectors( double mmPerHour )
 {
     for( const trap * const &e : trap::get_funnels() ) {
         fill_funnels( mmPerHour, *e );
