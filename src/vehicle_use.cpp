@@ -794,7 +794,7 @@ void vehicle::stop_engines( map &here )
 }
 
 void vehicle::start_engines( map &here, Character *driver, const bool take_control,
-                             const bool autodrive )
+                             const bool autodrive, const bool power_armor )
 {
     bool has_engine = std::any_of( engines.begin(), engines.end(), [&]( int idx ) {
         return parts[ idx ].enabled && !parts[ idx ].is_broken();
@@ -833,7 +833,11 @@ void vehicle::start_engines( map &here, Character *driver, const bool take_contr
     }
 
     if( take_control && driver && !driver->controlling_vehicle ) {
-        driver->controlling_vehicle = true;
+        if( power_armor ) {
+            driver->controlling_power_armor = true;
+        } else {
+            driver->controlling_vehicle = true;
+        }
         driver->add_msg_if_player( _( "You take control of the %s." ), name );
     }
     if( !autodrive && driver ) {

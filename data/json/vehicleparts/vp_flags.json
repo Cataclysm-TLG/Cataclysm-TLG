@@ -731,5 +731,9 @@
   {
     "id": "SMALL_HIDE",
     "type": "json_flag"
+  },
+  {
+    "id": "POWER_ARMOR_CONTROLS",
+    "type": "json_flag"
   }
 ]
