@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-07-27 02:24-0700\n"
-"PO-Revision-Date: 2026-08-02 12:38+0800\n"
+"PO-Revision-Date: 2026-08-07 18:34+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -169129,631 +169129,631 @@ msgstr "头发扎成两束。"
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: afro"
-msgstr "头发：非洲卷"
+msgstr "发型：爆炸头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: bald"
-msgstr "头发：秃头"
+msgstr "发型：秃头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: beaded hair"
-msgstr "头发：红，短发"
+msgstr "发型：串珠发"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, afro"
-msgstr "头发：黑，非洲卷"
+msgstr "发型：爆炸头（黑色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, beaded"
-msgstr "头发：黑，莫西干"
+msgstr "发型：串珠发（黑色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, body-length"
-msgstr "头发：黑，身长"
+msgstr "发型：等身长发（黑色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, bun"
-msgstr "头发：黑，长发"
+msgstr "发型：发髻（黑色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, buzz cut"
-msgstr "头发：黑，寸头"
+msgstr "发型：寸头（黑色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, crew-cut"
-msgstr "头发：黑，平头"
+msgstr "发型：平头（黑色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, curls"
-msgstr "头发：黑，鱼尾式发型"
+msgstr "发型：卷发（黑色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, detective"
-msgstr "头发：黑，平头"
+msgstr "发型：侦探发型（黑色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, extremely long"
-msgstr "头发：黑，超长"
+msgstr "发型：极长发（黑色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, long"
-msgstr "头发：黑，长发"
+msgstr "发型：长发（黑色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, long messy"
-msgstr "头发：黑，披散长发"
+msgstr "发型：凌乱长发（黑色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, long over-eye"
-msgstr "头发：黑，遮眼刘海长发"
+msgstr "发型：遮眼长发（黑色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, long punk"
-msgstr "头发：黑，长发"
+msgstr "发型：朋克长发（黑色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, medium-length"
-msgstr "头发：黑，中长发"
+msgstr "发型：现代发型（黑色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, modern"
-msgstr "头发：黑，长发"
+msgstr "发型：现代发型（黑色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, mohawk"
-msgstr "头发：黑，莫西干"
+msgstr "发型：莫西干头（黑色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, mullet"
-msgstr "头发：黑，鱼尾式发型"
+msgstr "发型：鲻鱼头（黑色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, ponytail"
-msgstr "头发：黑，单马尾"
+msgstr "发型：马尾（黑色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, princess braid"
-msgstr "头发：黑，单马尾"
+msgstr "发型：公主辫（黑色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, puffs"
-msgstr "头发：黑，短发"
+msgstr "发型：蓬蓬头（黑色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, short"
-msgstr "头发：黑，短发"
+msgstr "发型：短发（黑色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, short over-eye"
-msgstr "头发：黑，遮眼刘海短发"
+msgstr "发型：遮眼短发（黑色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, short without a fringe"
-msgstr "头发：黑，短发无刘海"
+msgstr "发型：无刘海短发（黑色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, super princess"
-msgstr "头发：黑，披散长发"
+msgstr "发型：超级公主头（黑色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, twin tails"
-msgstr "头发：黑，单马尾"
+msgstr "发型：双马尾（黑色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, very long"
-msgstr "头发：黑，很长"
+msgstr "发型：超长发（黑色）"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, afro"
-msgstr "头发：金，非洲卷"
+msgstr "发型：爆炸头（金色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, beaded"
-msgstr "头发：金，莫西干"
+msgstr "发型：串珠发（金色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, body-length"
-msgstr "头发：金，身长"
+msgstr "发型：等身长发（金色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, bun"
-msgstr "头发：金，长发"
+msgstr "发型：发髻（金色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, buzz cut"
-msgstr "头发：金，寸头"
+msgstr "发型：寸头（金色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, crew-cut"
-msgstr "头发：金，平头"
+msgstr "发型：平头（金色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, curls"
-msgstr "头发：金，鱼尾式发型"
+msgstr "发型：卷发（金色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, detective"
-msgstr "头发：金，平头"
+msgstr "发型：侦探发型（金色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, extremely long"
-msgstr "头发：金，超长"
+msgstr "发型：极长发（金色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, long"
-msgstr "头发：金，长发"
+msgstr "发型：长发（金色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, long messy"
-msgstr "头发：金，披散长发"
+msgstr "发型：凌乱长发（金色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, long over-eye"
-msgstr "头发：金，遮眼刘海长发"
+msgstr "发型：过眼长发（金色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, long punk"
-msgstr "头发：金，长发"
+msgstr "发型：朋克长发（金色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, medium-length"
-msgstr "头发：金，中长发"
+msgstr "发型：中长发（金色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, modern"
-msgstr "头发：金，长发"
+msgstr "发型：现代发型（金色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, mohawk"
-msgstr "头发：金，莫西干"
+msgstr "发型：莫西干头（金色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, mullet"
-msgstr "头发：金，鱼尾式发型"
+msgstr "发型：鲻鱼头（金色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, ponytail"
-msgstr "头发：金，单马尾"
+msgstr "发型：马尾（金色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, princess braid"
-msgstr "头发：金，单马尾"
+msgstr "发型：公主辫（金色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, puffs"
-msgstr "头发：金，短发"
+msgstr "发型：蓬蓬头（金色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, short"
-msgstr "头发：金，短发"
+msgstr "发型：短发（金色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, short over-eye"
-msgstr "头发：金，遮眼刘海短发"
+msgstr "发型：遮眼短发（金色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, short without a fringe"
-msgstr "头发：金，短发无刘海"
+msgstr "发型：无刘海短发（金色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, super princess"
-msgstr "头发：金，披散长发"
+msgstr "发型：超级公主头（金色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, twin tails"
-msgstr "头发：金，单马尾"
+msgstr "发型：双马尾（金色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, very long"
-msgstr "头发：金，很长"
+msgstr "发型：超长发（金色）"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, afro"
-msgstr "头发：蓝，非洲卷"
+msgstr "发型：爆炸头（蓝色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, beaded"
-msgstr "头发：蓝，莫西干"
+msgstr "发型：串珠发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, body-length"
-msgstr "头发：蓝，身长"
+msgstr "发型：等身长发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, bun"
-msgstr "头发：蓝，长发"
+msgstr "发型：发髻（蓝色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, buzz cut"
-msgstr "头发：蓝，寸头"
+msgstr "发型：寸头（蓝色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, crew-cut"
-msgstr "头发：蓝，平头"
+msgstr "发型：平头（蓝色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, curls"
-msgstr "头发：蓝，鱼尾式发型"
+msgstr "发型：卷发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, detective"
-msgstr "头发：蓝，平头"
+msgstr "发型：侦探发型（蓝色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, extremely long"
-msgstr "头发：蓝，超长"
+msgstr "发型：极长发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, long"
-msgstr "头发：蓝，长发"
+msgstr "发型：长发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, long messy"
-msgstr "头发：蓝，披散长发"
+msgstr "发型：凌乱长发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, long over-eye"
-msgstr "头发：蓝，遮眼刘海长发"
+msgstr "发型：遮眼长发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, long punk"
-msgstr "头发：蓝，长发"
+msgstr "发型：朋克长发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, medium-length"
-msgstr "头发：蓝，中长发"
+msgstr "发型：中长发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, modern"
-msgstr "头发：蓝，长发"
+msgstr "发型：现代发型（蓝色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, mohawk"
-msgstr "头发：蓝，莫西干"
+msgstr "发型：莫西干头（蓝色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, mullet"
-msgstr "头发：蓝，鱼尾式发型"
+msgstr "发型：鲻鱼头（蓝色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, ponytail"
-msgstr "头发：蓝，单马尾"
+msgstr "发型：马尾（蓝色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, princess braid"
-msgstr "头发：蓝，单马尾"
+msgstr "发型：公主辫（蓝色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, puffs"
-msgstr "头发：蓝，短发"
+msgstr "发型：蓬蓬头（蓝色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, short"
-msgstr "头发：蓝，短发"
+msgstr "发型：短发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, short over-eye"
-msgstr "头发：蓝，遮眼刘海短发"
+msgstr "发型：过眼短发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, short without a fringe"
-msgstr "头发：蓝，短发无刘海"
+msgstr "发型：无刘海短发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, super princess"
-msgstr "头发：蓝，披散长发"
+msgstr "发型：超级公主头（蓝色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, twin tails"
-msgstr "头发：蓝，单马尾"
+msgstr "发型：双马尾（蓝色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, very long"
-msgstr "头发：蓝，很长"
+msgstr "发型：超长发（蓝色）"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: body-length"
-msgstr "头发：身长"
+msgstr "发型：等身长发"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, afro"
-msgstr "头发：棕，非洲卷"
+msgstr "发型：爆炸头（棕色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, beaded"
-msgstr "头发：棕，莫西干"
+msgstr "发型：串珠发（棕色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, body-length"
-msgstr "头发：棕，身长"
+msgstr "发型：等身长发（棕色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, bun"
-msgstr "头发：棕，长发"
+msgstr "发型：发髻（棕色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, buzz cut"
-msgstr "头发：棕，寸头"
+msgstr "发型：寸头（棕色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, crew-cut"
-msgstr "头发：棕，平头"
+msgstr "发型：平头（棕色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, curls"
-msgstr "头发：棕，鱼尾式发型"
+msgstr "发型：卷发（棕色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, detective"
-msgstr "头发：棕，平头"
+msgstr "发型：侦探发型（棕色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, extremely long"
-msgstr "头发：棕，超长"
+msgstr "发型：极长发（棕色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, long"
-msgstr "头发：棕，长发"
+msgstr "发型：长发（棕色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, long messy"
-msgstr "头发：棕，披散长发"
+msgstr "发型：凌乱长发（棕色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, long over-eye"
-msgstr "头发：棕，遮眼刘海长发"
+msgstr "发型：遮眼长发（棕色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, long punk"
-msgstr "头发：棕，长发"
+msgstr "发型：朋克长发（棕色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, medium-length"
-msgstr "头发：棕，中长发"
+msgstr "发型：中长发（棕色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, modern"
-msgstr "头发：棕，长发"
+msgstr "发型：现代发型（棕色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, mohawk"
-msgstr "头发：棕，莫西干"
+msgstr "发型：莫西干头（棕色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, mullet"
-msgstr "头发：棕，鱼尾式发型"
+msgstr "发型：鲻鱼头（棕色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, ponytail"
-msgstr "头发：棕，单马尾"
+msgstr "发型：马尾（棕色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, princess braid"
-msgstr "头发：棕，单马尾"
+msgstr "发型：公主辫（棕色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, puffs"
-msgstr "头发：棕，短发"
+msgstr "发型：蓬蓬头（棕色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, short"
-msgstr "头发：棕，短发"
+msgstr "发型：短发（棕色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, short over-eye"
-msgstr "头发：棕，遮眼刘海短发"
+msgstr "发型：遮眼短发（棕色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, short without a fringe"
-msgstr "头发：棕，短发无刘海"
+msgstr "发型：无刘海短发（棕色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, super princess"
-msgstr "头发：棕，披散长发"
+msgstr "发型：超级公主头（棕色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, twin tails"
-msgstr "头发：棕，单马尾"
+msgstr "发型：双马尾（棕色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, very long"
-msgstr "头发：棕，很长"
+msgstr "发型：超长发（棕色）"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: bun"
-msgstr "头发：长发"
+msgstr "发型：发髻"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: buzz cut"
-msgstr "头发：寸头"
+msgstr "发型：寸头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: crew-cut"
-msgstr "头发：平头"
+msgstr "发型：平头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: curls"
-msgstr "头发：卷发"
+msgstr "发型：卷发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: detective"
-msgstr "头发：侦探风"
+msgstr "发型：侦探发型"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: extremely long"
-msgstr "头发：超长"
+msgstr "发型：极长发"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, afro"
-msgstr "头发：灰，非洲卷"
+msgstr "发型：爆炸头（灰色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, beaded"
-msgstr "头发：灰，莫西干"
+msgstr "发型：串珠发（灰色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, body-length"
-msgstr "头发：灰，身长"
+msgstr "发型：等身长发（灰色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, bun"
-msgstr "头发：灰，长发"
+msgstr "发型：发髻（灰色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, buzz cut"
-msgstr "头发：灰，寸头"
+msgstr "发型：寸头（灰色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, crew-cut"
-msgstr "头发：灰，平头"
+msgstr "发型：平头（灰色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, curls"
-msgstr "头发：灰，鱼尾式发型"
+msgstr "发型：卷发（灰色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, detective"
-msgstr "头发：灰，平头"
+msgstr "发型：侦探发型（灰色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, extremely long"
-msgstr "头发：灰，超长"
+msgstr "发型：极长发（灰色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, long"
-msgstr "头发：灰，长发"
+msgstr "发型：长发（灰色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, long messy"
-msgstr "头发：灰，披散长发"
+msgstr "发型：凌乱长发（灰色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
@@ -169763,818 +169763,818 @@ msgstr "灰色长发型。"
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, long punk"
-msgstr "头发：灰，长发"
+msgstr "发型：朋克长发（灰色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, medium-length"
-msgstr "头发：灰，中长发"
+msgstr "发型：中长发（灰色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, modern"
-msgstr "头发：灰，长发"
+msgstr "发型：现代发型（灰色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, mohawk"
-msgstr "头发：灰，莫西干"
+msgstr "发型：莫西干头（灰色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, mullet"
-msgstr "头发：灰，鱼尾式发型"
+msgstr "发型：鲻鱼头（灰色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, ponytail"
-msgstr "头发：灰，单马尾"
+msgstr "发型：马尾（灰色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, princess braid"
-msgstr "头发：灰，单马尾"
+msgstr "发型：公主辫（灰色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, puffs"
-msgstr "头发：灰，短发"
+msgstr "发型：蓬蓬头（灰色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, short"
-msgstr "头发：灰，短发"
+msgstr "发型：短发（灰色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, short over-eye"
-msgstr "头发：灰，遮眼刘海短发"
+msgstr "发型：遮眼短发（灰色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, short without a fringe"
-msgstr "头发：灰，短发无刘海"
+msgstr "发型：无刘海短发（灰色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, super princess"
-msgstr "头发：灰，披散长发"
+msgstr "发型：超级公主头（灰色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, twin tails"
-msgstr "头发：灰，单马尾"
+msgstr "发型：双马尾（灰色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, very long"
-msgstr "头发：灰，很长"
+msgstr "发型：超长发（灰色）"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, afro"
-msgstr "头发：绿，非洲卷"
+msgstr "发型：爆炸头（绿色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, beaded"
-msgstr "头发：绿，莫西干"
+msgstr "发型：串珠发（绿色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, body-length"
-msgstr "头发：绿，身长"
+msgstr "发型：等身长发（绿色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, bun"
-msgstr "头发：绿，长发"
+msgstr "发型：发髻（绿色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, buzz cut"
-msgstr "头发：绿，寸头"
+msgstr "发型：寸头（绿色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, crew-cut"
-msgstr "头发：绿，平头"
+msgstr "发型：平头（绿色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, curls"
-msgstr "头发：绿，鱼尾式发型"
+msgstr "发型：卷发（绿色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, detective"
-msgstr "头发：绿，平头"
+msgstr "发型：侦探发型（绿色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, extremely long"
-msgstr "头发：绿，超长"
+msgstr "发型：极长发（绿色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, long"
-msgstr "头发：绿，长发"
+msgstr "发型：长发（绿色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, long messy"
-msgstr "头发：绿，披散长发"
+msgstr "发型：凌乱长发（绿色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, long over-eye"
-msgstr "头发：绿，遮眼刘海长发"
+msgstr "发型：遮眼长发（绿色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, long punk"
-msgstr "头发：绿，长发"
+msgstr "发型：朋克长发（绿色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, medium-length"
-msgstr "头发：绿，中长发"
+msgstr "发型：中长发（绿色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, modern"
-msgstr "头发：绿，长发"
+msgstr "发型：现代发型（绿色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, mohawk"
-msgstr "头发：绿，莫西干"
+msgstr "发型：莫西干头（绿色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, mullet"
-msgstr "头发：绿，鱼尾式发型"
+msgstr "发型：鲻鱼头（绿色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, ponytail"
-msgstr "头发：绿，单马尾"
+msgstr "发型：马尾（绿色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, princess braid"
-msgstr "头发：绿，单马尾"
+msgstr "发型：公主辫（绿色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, puffs"
-msgstr "头发：绿，短发"
+msgstr "发型：蓬蓬头（绿色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, short"
-msgstr "头发：绿，短发"
+msgstr "发型：短发（绿色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, short over-eye"
-msgstr "头发：绿，遮眼刘海短发"
+msgstr "发型：遮眼短发（绿色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, short without a fringe"
-msgstr "头发：绿，短发无刘海"
+msgstr "发型：无刘海短发（绿色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, super princess"
-msgstr "头发：绿，披散长发"
+msgstr "发型：超级公主头（绿色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, twin tails"
-msgstr "头发：绿，单马尾"
+msgstr "发型：双马尾（绿色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: green, very long"
-msgstr "头发：绿，很长"
+msgstr "发型：超长发（绿色）"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: long"
-msgstr "头发：长发"
+msgstr "发型：长发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: long messy"
-msgstr "头发：披散长发"
+msgstr "发型：凌乱长发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: long mohawk"
-msgstr "头发：长莫西干"
+msgstr "发型：长莫西干头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: long over-eye"
-msgstr "头发：遮眼刘海长发"
+msgstr "发型：遮眼长发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: long punk"
-msgstr "头发：长发"
+msgstr "发型：朋克长发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: medium-length"
-msgstr "头发：中长发"
+msgstr "发型：中长发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: modern"
-msgstr "头发：长发"
+msgstr "发型：现代发型"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: mohawk"
-msgstr "头发：莫西干"
+msgstr "发型：莫西干头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: mullet"
-msgstr "头发：鱼尾式发型"
+msgstr "发型：鲻鱼头"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, afro"
-msgstr "头发：粉，非洲卷"
+msgstr "发型：爆炸头（粉色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, beaded"
-msgstr "头发：粉，莫西干"
+msgstr "发型：串珠发（粉色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, body-length"
-msgstr "头发：粉，身长"
+msgstr "发型：等身长发（粉色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, bun"
-msgstr "头发：粉，长发"
+msgstr "发型：发髻（粉色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, buzz cut"
-msgstr "头发：粉，寸头"
+msgstr "发型：寸头（粉色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, crew-cut"
-msgstr "头发：粉，平头"
+msgstr "发型：平头（粉色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, curls"
-msgstr "头发：粉，鱼尾式发型"
+msgstr "发型：卷发（粉色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, detective"
-msgstr "头发：粉，平头"
+msgstr "发型：侦探发型（粉色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, extremely long"
-msgstr "头发：粉，超长"
+msgstr "发型：极长发（粉色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, long"
-msgstr "头发：粉，长发"
+msgstr "发型：长发（粉色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, long messy"
-msgstr "头发：粉，披散长发"
+msgstr "发型：凌乱长发（粉色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, long over-eye"
-msgstr "头发：粉，遮眼刘海长发"
+msgstr "发型：遮眼长发（粉色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, long punk"
-msgstr "头发：粉，长发"
+msgstr "发型：朋克长发（粉色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, medium-length"
-msgstr "头发：粉，中长发"
+msgstr "发型：中长发（粉色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, modern"
-msgstr "头发：粉，长发"
+msgstr "发型：现代发型（粉色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, mohawk"
-msgstr "头发：粉，莫西干"
+msgstr "发型：莫西干头（粉色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, mullet"
-msgstr "头发：粉，鱼尾式发型"
+msgstr "发型：鲻鱼头（粉色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, ponytail"
-msgstr "头发：粉，单马尾"
+msgstr "发型：马尾（粉色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, princess braid"
-msgstr "头发：粉，单马尾"
+msgstr "发型：公主辫（粉色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, puffs"
-msgstr "头发：粉，短发"
+msgstr "发型：蓬蓬头（粉色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, short"
-msgstr "头发：粉，短发"
+msgstr "发型：短发（粉色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, short over-eye"
-msgstr "头发：粉，遮眼刘海短发"
+msgstr "发型：遮眼短发（粉色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, short without a fringe"
-msgstr "头发：粉，短发无刘海"
+msgstr "发型：无刘海短发（粉色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, super princess"
-msgstr "头发：粉，披散长发"
+msgstr "发型：超级公主头（粉色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, twin tails"
-msgstr "头发：粉，单马尾"
+msgstr "发型：双马尾（粉色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: pink, very long"
-msgstr "头发：粉，很长"
+msgstr "发型：超长发（粉色）"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: ponytail"
-msgstr "头发：单马尾"
+msgstr "发型：马尾"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: princess braid"
-msgstr "头发：粉，单马尾"
+msgstr "发型：公主辫"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: puffs"
-msgstr "头发：短发"
+msgstr "发型：蓬蓬头"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, afro"
-msgstr "头发：紫，非洲卷"
+msgstr "发型：爆炸头（紫色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, beaded"
-msgstr "头发：紫，莫西干"
+msgstr "发型：串珠发（紫色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, body-length"
-msgstr "头发：紫，身长"
+msgstr "发型：及地长发（紫色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, bun"
-msgstr "头发：紫，长发"
+msgstr "发型：发髻（紫色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, buzz cut"
-msgstr "头发：紫，寸头"
+msgstr "发型：寸头（紫色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, crew-cut"
-msgstr "头发：紫，平头"
+msgstr "发型：平头（紫色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, curls"
-msgstr "头发：紫，鱼尾式发型"
+msgstr "发型：卷发（紫色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, detective"
-msgstr "头发：紫，平头"
+msgstr "发型：侦探发型（紫色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, extremely long"
-msgstr "头发：紫，超长"
+msgstr "发型：极长发（紫色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, long"
-msgstr "头发：紫，长发"
+msgstr "发型：长发（紫色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, long messy"
-msgstr "头发：紫，披散长发"
+msgstr "发型：凌乱长发（紫色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, long over-eye"
-msgstr "头发：紫，遮眼刘海长发"
+msgstr "发型：过眼长发（紫色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, long punk"
-msgstr "头发：紫，长发"
+msgstr "发型：朋克长发（紫色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, medium-length"
-msgstr "头发：紫，中长发"
+msgstr "发型：中长发（紫色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, modern"
-msgstr "头发：紫，长发"
+msgstr "发型：现代发型（紫色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, mohawk"
-msgstr "头发：紫，莫西干"
+msgstr "发型：莫西干头（紫色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, mullet"
-msgstr "头发：紫，鱼尾式发型"
+msgstr "发型：鲻鱼头（紫色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, ponytail"
-msgstr "头发：紫，单马尾"
+msgstr "发型：马尾（紫色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, princess braid"
-msgstr "头发：紫，单马尾"
+msgstr "发型：公主辫（紫色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, puffs"
-msgstr "头发：紫，短发"
+msgstr "发型：蓬蓬头（紫色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, short"
-msgstr "头发：紫，短发"
+msgstr "发型：短发（紫色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, short over-eye"
-msgstr "头发：紫，遮眼刘海短发"
+msgstr "发型：过眼短发（紫色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, short without a fringe"
-msgstr "头发：紫，短发无刘海"
+msgstr "发型：无刘海短发（紫色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, super princess"
-msgstr "头发：紫，披散长发"
+msgstr "发型：超级公主头（紫色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, twin tails"
-msgstr "头发：紫，单马尾"
+msgstr "发型：双马尾（紫色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: purple, very long"
-msgstr "头发：紫，很长"
+msgstr "发型：超长发（紫色）"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, afro"
-msgstr "头发：红，非洲发"
+msgstr "发型：爆炸头（红色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, beaded"
-msgstr "头发：红，莫西干"
+msgstr "发型：串珠发（红色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, body-length"
-msgstr "头发：红，身长"
+msgstr "发型：及地长发（红色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, bun"
-msgstr "头发：红，长发"
+msgstr "发型：发髻（红色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, buzz cut"
-msgstr "头发：红，寸头"
+msgstr "发型：寸头（红色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, crew-cut"
-msgstr "头发：红，平头"
+msgstr "发型：平头（红色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, curls"
-msgstr "头发：红，鱼尾式发型"
+msgstr "发型：卷发（红色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, detective"
-msgstr "头发：红，平头"
+msgstr "发型：侦探发型（红色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, extremely long"
-msgstr "头发：红，超长"
+msgstr "发型：极长发（红色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, long"
-msgstr "头发：红，长发"
+msgstr "发型：长发（红色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, long messy"
-msgstr "头发：红，披散长发"
+msgstr "发型：凌乱长发（红色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, long over-eye"
-msgstr "头发：红，遮眼刘海长发"
+msgstr "发型：过眼长发（红色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, long punk"
-msgstr "头发：红，长发"
+msgstr "发型：朋克长发（红色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, medium-length"
-msgstr "头发：红，中长发"
+msgstr "发型：中长发（红色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, modern"
-msgstr "头发：红，长发"
+msgstr "发型：现代发型（红色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, mohawk"
-msgstr "头发：红，莫西干"
+msgstr "发型：莫西干头（红色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, mullet"
-msgstr "头发：红，鱼尾式发型"
+msgstr "发型：鲻鱼头（红色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, ponytail"
-msgstr "头发：红，单马尾"
+msgstr "发型：马尾（红色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, princess braid"
-msgstr "头发：红，单马尾"
+msgstr "发型：公主辫（红色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, puffs"
-msgstr "头发：红，短发"
+msgstr "发型：蓬蓬头（红色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, short"
-msgstr "头发：红，短发"
+msgstr "发型：短发（红色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, short over-eye"
-msgstr "头发：红，遮眼刘海短发"
+msgstr "发型：遮眼短发（红色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, short without a fringe"
-msgstr "头发：红，短发无刘海"
+msgstr "发型：无刘海短发（红色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, super princess"
-msgstr "头发：红，披散长发"
+msgstr "发型：超级公主头（红色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, twin tails"
-msgstr "头发：红，单马尾"
+msgstr "发型：双马尾（红色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: red, very long"
-msgstr "头发：红，很长"
+msgstr "发型：超长发（红色）"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: short"
-msgstr "头发：短发"
+msgstr "发型：短发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: short over-eye"
-msgstr "头发：遮眼刘海短发"
+msgstr "发型：遮眼短发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: short without a fringe"
-msgstr "头发：短发无刘海"
+msgstr "发型：无刘海短发"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: super princess"
-msgstr "头发：紫，披散长发"
+msgstr "发型：超级公主头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: twin tails"
-msgstr "头发：单马尾"
+msgstr "发型：双马尾"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: very long"
-msgstr "头发：长发"
+msgstr "发型：超长发"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, afro"
-msgstr "头发：白，非洲卷"
+msgstr "发型：爆炸头（白色）"
 
 #. ~ Variant name of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, beaded"
-msgstr "头发：白，莫西干"
+msgstr "发型：串珠发（白色）"
 
 #. ~ Variant name of mutation "Hair: body-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, body-length"
-msgstr "头发：白，身长"
+msgstr "发型：及地长发（白色）"
 
 #. ~ Variant name of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, bun"
-msgstr "头发：白，长发"
+msgstr "发型：发髻（白色）"
 
 #. ~ Variant name of mutation "Hair: buzz cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, buzz cut"
-msgstr "头发：白，寸头"
+msgstr "发型：寸头（白色）"
 
 #. ~ Variant name of mutation "Hair: crew-cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, crew-cut"
-msgstr "头发：白，平头"
+msgstr "发型：平头（白色）"
 
 #. ~ Variant name of mutation "Hair: curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, curls"
-msgstr "头发：白，鱼尾式发型"
+msgstr "发型：卷发（白色）"
 
 #. ~ Variant name of mutation "Hair: detective"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, detective"
-msgstr "头发：白，平头"
+msgstr "发型：侦探发型（白色）"
 
 #. ~ Variant name of mutation "Hair: extremely long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, extremely long"
-msgstr "头发：白，超长"
+msgstr "发型：极长发（白色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, long"
-msgstr "头发：白，长发"
+msgstr "发型：长发（白色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, long messy"
-msgstr "头发：白，披散长发"
+msgstr "发型：凌乱长发（白色）"
 
 #. ~ Variant name of mutation "Hair: long over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, long over-eye"
-msgstr "头发：白，遮眼刘海长发"
+msgstr "发型：过眼长发（白色）"
 
 #. ~ Variant name of mutation "Hair: long punk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, long punk"
-msgstr "头发：白，长发"
+msgstr "发型：朋克长发（白色）"
 
 #. ~ Variant name of mutation "Hair: medium-length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, medium-length"
-msgstr "头发：白，中长发"
+msgstr "发型：中长发（白色）"
 
 #. ~ Variant name of mutation "Hair: modern"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, modern"
-msgstr "头发：白，长发"
+msgstr "发型：现代发型（白色）"
 
 #. ~ Variant name of mutation "Hair: mohawk"
 #. ~ Variant name of mutation "Hair: long mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, mohawk"
-msgstr "头发：白，莫西干"
+msgstr "发型：莫西干头（白色）"
 
 #. ~ Variant name of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, mullet"
-msgstr "头发：白，鱼尾式发型"
+msgstr "发型：鲻鱼头（白色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, ponytail"
-msgstr "头发：白，单马尾"
+msgstr "发型：马尾（白色）"
 
 #. ~ Variant name of mutation "Hair: princess braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, princess braid"
-msgstr "头发：白，单马尾"
+msgstr "发型：公主辫（白色）"
 
 #. ~ Variant name of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, puffs"
-msgstr "头发：白，短发"
+msgstr "发型：蓬蓬头（白色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, short"
-msgstr "头发：白，短发"
+msgstr "发型：短发（白色）"
 
 #. ~ Variant name of mutation "Hair: short over-eye"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, short over-eye"
-msgstr "头发：白，遮眼刘海短发"
+msgstr "发型：遮眼短发（白色）"
 
 #. ~ Variant name of mutation "Hair: short without a fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, short without a fringe"
-msgstr "头发：白，短发无刘海"
+msgstr "发型：无刘海短发（白色）"
 
 #. ~ Variant name of mutation "Hair: super princess"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, super princess"
-msgstr "头发：白，披散长发"
+msgstr "发型：超级公主头（白色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, twin tails"
-msgstr "头发：白，单马尾"
+msgstr "发型：双马尾（白色）"
 
 #. ~ Variant name of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: white, very long"
-msgstr "头发：白，很长"
+msgstr "发型：超长发（白色）"
 
 #. ~ Description of variant "Hair: black, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
@@ -217957,7 +217957,7 @@ msgstr "你觉得有点奇怪。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Draco_Dune.json
 msgid "[Perform a decent dance.]"
-msgstr "%s 跳了一段战舞。"
+msgstr "[献上一支不错的舞蹈。]"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Draco_Dune.json
@@ -217967,7 +217967,7 @@ msgstr "[表演一段传奇舞蹈。]"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Draco_Dune.json
 msgid "[Perform a masterful dance.]"
-msgstr "%s 跳了一段战舞。"
+msgstr "[展现一支大师级的舞蹈。]"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Draco_Dune.json
@@ -254097,7 +254097,7 @@ msgstr "捕鱼：2级 鱼竿"
 #. ~ Description for recipe group
 #: data/json/recipes/basecamps/recipe_groups.json
 msgid " Hack & Download: IC datasheet archives, USB drive"
-msgstr "下载：IC数据库到U盘"
+msgstr "骇入并下载：IC数据手册档案，USB驱动器"
 
 #. ~ Description for recipe group
 #: data/json/recipes/basecamps/recipe_groups.json
@@ -292505,7 +292505,7 @@ msgstr "饱食超量"
 #. ~ Clause text "famished" of UI widget "zenfs_hunger_no_label"
 #: data/json/ui/zenfs/hunger.json
 msgid " FAMISHED"
-msgstr "濒临饿死！"
+msgstr "极度饥饿"
 
 #. ~ Clause text "hungry" of UI widget "zenfs_hunger_no_label"
 #: data/json/ui/zenfs/hunger.json
@@ -317379,15 +317379,15 @@ msgstr "<color_white_red>着火！</color>"
 
 #: src/advanced_inv_area.cpp:156
 msgid " DANGER"
-msgstr "危险！"
+msgstr "危险"
 
 #: src/advanced_inv_area.cpp:162
 msgid " TRAP"
-msgstr "陷阱！"
+msgstr "陷阱"
 
 #: src/advanced_inv_area.cpp:168
 msgid " WATER"
-msgstr "水！"
+msgstr "水"
 
 #: src/animation.cpp:59 src/game.cpp:12864
 msgid "Hang on a bit…"
@@ -317812,7 +317812,7 @@ msgstr "选择颜色："
 #, c-format
 msgctxt "note color"
 msgid "%1$s:%2$s, "
-msgstr "%1$s：%2$s。"
+msgstr "%1$s:%2$s, "
 
 #: src/auto_note.cpp:534
 msgctxt "color"
@@ -319200,7 +319200,7 @@ msgstr "你的%s被严重损伤！"
 #: src/bionics.cpp:1950 src/bionics.cpp:2041
 #, c-format
 msgid "<npcname>'s %s is severely damaged."
-msgstr "<npcname>的%s被严重损伤！"
+msgstr "<npcname> 的 %s 受到严重损坏。"
 
 #: src/bionics.cpp:1985
 #, c-format
@@ -322104,7 +322104,7 @@ msgstr "一条巨型鱼。"
 #: src/character_attire.cpp:2009
 #, c-format
 msgid "%1s %2s gets on %3s %4s."
-msgstr "%3$s%2$s发现%1$s%4$s"
+msgstr "%1s %2s 溅到了 %3s 的 %4s 上。"
 
 #: src/character_attire.cpp:2023
 #, c-format
@@ -333146,7 +333146,7 @@ msgstr "<npcname> 几乎要被甩飞了，但什么东西把他按在了原地�
 #: src/game.cpp:11574 src/game.cpp:11594
 #, c-format
 msgid "%1s collides with %2s!"
-msgstr "%s撞上了%s。"
+msgstr "%1s 撞上了 %2s！"
 
 #: src/game.cpp:11700 src/map.cpp:11821
 msgid "You dive into water."
@@ -339704,11 +339704,11 @@ msgstr "不同枪管长度的伤害和散布："
 
 #: src/item.cpp:2903 src/item.cpp:2910 src/item.cpp:2917
 msgid " damage:  <num>"
-msgstr "伤害:  "
+msgstr "伤害：<num>"
 
 #: src/item.cpp:2905 src/item.cpp:2912 src/item.cpp:2919
 msgid " dispersion:  <num>"
-msgstr "散布:  "
+msgstr "散布:  <num>"
 
 #: src/item.cpp:2929
 msgid "This ammo has been <bad>hand-loaded</bad>, resulting in slightly inferior performance compared to factory-produced ammo."
@@ -353741,7 +353741,7 @@ msgstr "%s挣脱了！"
 #: src/monster.cpp:2585 src/monster.cpp:2588
 #, c-format
 msgid "%1s breaks free from %2s grab!"
-msgstr "%s从%s的抓握中挣脱了出来！"
+msgstr "%1s 挣脱了 %2s 的抓握！"
 
 #: src/monster.cpp:2933
 msgid "hummmmm."
