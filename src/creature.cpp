@@ -556,10 +556,9 @@ static bool majority_rule( const bool a_vote, const bool b_vote, const bool c_vo
 bool Creature::sees( const map &here, const Creature &critter ) const
 {
     const Character *ch = critter.as_character();
-
+    bool critter_is_monster = critter.is_monster();
     const tripoint_bub_ms pos = pos_bub( here );
     const tripoint_bub_ms critter_pos = critter.pos_bub( here );
-
     // Creatures always see themselves (simplifies drawing).
     if( &critter == this ) {
         return true;
@@ -597,7 +596,6 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         here.has_field_at( critter_pos, field_fd_last_known ) && critter.is_avatar() ) {
         return true;
     }
-
     // This check is ridiculously expensive so defer it to after everything else.
     // REVIEW: Is this really expensive, or an old comment?
     auto visible = []( const Character * ch ) {
@@ -618,8 +616,8 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return false;
     }
 
-    // If we cannot see without any of the penalties below, bail now.
-    if( !sees( here, critter_pos, critter.is_avatar() ) ) {
+    // Do some geometry checks and also look at visibility from mutations and stuff.
+    if( !sees( here, critter_pos, !critter_is_monster ) ) {
         return false;
     }
 
@@ -632,12 +630,10 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     if( posz() != critter.posz() ) {
         different_levels = true;
     }
-
     bool has_camouflage = false;
     bool has_water_camouflage = false;
     bool has_night_invisibility = false;
-
-    if( critter.is_monster() ) {
+    if( critter_is_monster ) {
         has_camouflage = critter.has_flag( mon_flag_CAMOUFLAGE );
         has_water_camouflage = critter.has_flag( mon_flag_WATER_CAMOUFLAGE ) ||
                                ( critter.get_size() < creature_size::large && critter.has_flag( mon_flag_NO_BREATHE ) );
@@ -645,18 +641,15 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     }
     bool is_underwater = critter.is_likely_underwater( here );
     bool is_invisible = critter.has_effect( effect_invisibility );
-
     // Check if creature is digging and the tile is diggable
     if( target_range > 2 && critter.digging() &&
         here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, critter.pos_bub( here ) ) ) {
         return false;
     }
-
     // Camouflage or Water Camouflage checks
     if( has_camouflage && target_range > this->spot_check() ) {
         return false;
     }
-
     if( is_underwater || here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, critter.pos_bub( here ) ) ||
         ( here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, critter.pos_bub( here ) ) &&
           critter.get_size() < creature_size::medium ) ) {
@@ -664,17 +657,14 @@ bool Creature::sees( const map &here, const Creature &critter ) const
             return false;
         }
     }
-
     // Night Invisibility check
     if( has_night_invisibility && here.light_at( critter.pos_bub( here ) ) <= lit_level::LOW ) {
         return false;
     }
-
     // Invisible effect
     if( is_invisible ) {
         return false;
     }
-
     // Underwater visibility check with majority rule
     if( !is_likely_underwater( here ) && is_underwater &&
         majority_rule( critter.has_flag( mon_flag_WATER_CAMOUFLAGE ),
@@ -682,17 +672,14 @@ bool Creature::sees( const map &here, const Creature &critter ) const
                        different_levels ) ) {
         return false;
     }
-
     if( ( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_HIDE_PLACE, critter.pos_bub( here ) ) ) &&
         critter.get_size() < creature_size::large ) {
         return false;
     }
-
     if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_SMALL_HIDE, critter.pos_bub( here ) ) &&
         critter.has_flag( mon_flag_SMALL_HIDER ) ) {
         return false;
     }
-
     int ledge_concealment = 0;
     if( different_levels ) {
         ledge_concealment = ( here.ledge_concealment( pos_bub( here ), critter.pos_bub( here ) ) );
@@ -700,7 +687,7 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     visibility_result vis = here.sees_full( pos_bub( here ), critter.pos_bub( here ), target_range,
                                             true, false );
     const int concealment = std::max( vis.concealment, ledge_concealment );
-    if( ch != nullptr ) {
+    if( !critter_is_monster ) {
         if( concealment > critter.eye_level() ) {
             return false;
         } else {
@@ -723,7 +710,7 @@ int Creature::eye_level() const
     }
 }
 
-bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
+bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_character,
                      int range_mod ) const
 {
     if( std::abs( posz() - t.z() ) > fov_3d_z_range ) {
@@ -733,28 +720,25 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
     const tripoint_bub_ms pos = pos_bub( here );
 
     // Check for adjacent high-concealment tiles that would block vision.
-    if( rl_dist( pos, t ) > 2 ) {
+    // > 2 because any viewer can see over adjacent concealment.
+    if( square_dist( pos, t ) > 2 ) {
         // Get the direction to the target.
         const int dx = t.x() - pos.x();
         const int dy = t.y() - pos.y();
-
         const int adj_x = pos.x() + ( dx > 0 ? 1 : ( dx < 0 ? -1 : 0 ) );
         const int adj_y = pos.y() + ( dy > 0 ? 1 : ( dy < 0 ? -1 : 0 ) );
         const tripoint_bub_ms adjacent( adj_x, adj_y, pos.z() );
-
         if( adjacent != pos && here.inbounds( adjacent ) &&
             eye_level() < here.concealment( adjacent ) ) {
             return false;
         }
     }
-
     const int range_cur = sight_range( here.ambient_light_at( t ) );
     const int range_day = sight_range( default_daylight_level() );
     const int range_night = sight_range( 0 );
     const int range_max = std::max( range_day, range_night );
     const int range_min = std::min( range_cur, range_max );
     const int wanted_range = rl_dist( pos, t );
-
     if( wanted_range <= range_min ||
         ( wanted_range <= range_max &&
           here.ambient_light_at( t ) > here.get_cache_ref( t.z() ).natural_light_level_cache ) ) {
@@ -770,12 +754,16 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
         if( range_mod > 0 ) {
             range = std::min( range, range_mod );
         }
-        if( is_avatar ) {
-            // Special case monster -> player visibility, forcing it to be symmetric with player vision.
-            const float player_visibility_factor = get_player_character().visibility() / 100.0f;
-            int adj_range = std::floor( range * player_visibility_factor );
+        if( is_character ) {
+            // Special case monster -> character visibility, forcing it to be symmetric with player vision.
+            Creature *guy = get_creature_tracker().creature_at( t );
+            int adj_range = range;
+            if( guy != nullptr && !guy->is_monster() ) {
+                const float character_visibility_factor = guy->as_character()->visibility() / 100.0f;
+                adj_range = std::floor( range * character_visibility_factor );
+            }
             return adj_range >= wanted_range &&
-                   here.get_cache_ref( posz() ).seen_cache[pos.x()][pos.y()] > LIGHT_TRANSPARENCY_SOLID;
+                   here.get_cache_ref( t.z() ).seen_cache[ t.x()][t.y()] > LIGHT_TRANSPARENCY_SOLID;
         } else {
             return here.sees( pos, t, range );
         }
