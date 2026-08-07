@@ -1632,6 +1632,14 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
         movecost /= 2;
     } else {
         movecost = ( ( 50 * source_cost ) + ( 50 * dest_cost ) ) / 2.0;
+        // Snow depth movement penalty (outdoor, unroofed tiles only)
+        if( here.is_outside( pos_bub() ) && !here.is_roofed( pos_bub() ) ) {
+            const double snow_mm = get_weather().get_snow_depth_mm( pos_abs_omt() );
+            if( snow_mm >= 100 ) {
+                const int penalty = snow_mm >= 500 ? 100 : ( snow_mm >= 250 ? 50 : 20 );
+                movecost += penalty;
+            }
+        }
     }
 
     return movecost;

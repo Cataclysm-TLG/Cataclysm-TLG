@@ -5292,14 +5292,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [ "smallscrapyard_ocu" ],
-    "copy-from": "smallscrapyard_ocu",
-    "name": "scrap yard",
-    "sym": "s",
-    "color": "light_gray"
-  },
-  {
-    "type": "overmap_terrain",
     "id": "music_venue",
     "copy-from": "music_venue",
     "name": "music venue",

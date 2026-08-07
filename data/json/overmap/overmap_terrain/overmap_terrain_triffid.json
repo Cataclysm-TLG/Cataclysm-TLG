@@ -6,6 +6,7 @@
     "copy-from": "generic_forest",
     "vision_levels": "unusual_structure",
     "sym": "T",
+    "looks_like": "forest_thick",
     "color": "light_red",
     "see_cost": "high",
     "mondensity": 2,
@@ -41,6 +42,7 @@
     "sym": "T",
     "color": "red",
     "see_cost": "full_high",
+    "looks_like": "forest_thick",
     "mondensity": 2,
     "spawns": { "group": "GROUP_TRIFFID_HEARTGUARDS", "population": [ 50, 60 ], "chance": 80 },
     "flags": [ "KNOWN_UP", "RISK_EXTREME" ]
@@ -53,6 +55,7 @@
     "sym": "T",
     "color": "light_red",
     "see_cost": "full_high",
+    "looks_like": "forest_thick",
     "flags": [ "KNOWN_UP", "KNOWN_DOWN", "RISK_EXTREME" ]
   },
   {
@@ -63,6 +66,7 @@
     "sym": "T",
     "color": "light_red",
     "see_cost": "none",
+    "looks_like": "open_air",
     "flags": [ "KNOWN_DOWN", "RISK_EXTREME" ]
   },
   {
@@ -73,6 +77,7 @@
     "copy-from": "generic_forest",
     "sym": ".",
     "color": "green",
+    "looks_like": "meadow",
     "see_cost": "spaced_high",
     "mondensity": 2,
     "flags": [ "REQUIRES_PREDECESSOR" ]

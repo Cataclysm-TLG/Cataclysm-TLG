@@ -96,7 +96,7 @@
       { "group": "college_sports", "prob": 50 },
       { "group": "college_sports", "prob": 90 },
       { "group": "SUS_book_sports", "prob": 30 },
-      { "item": "pride_flag", "prob": 2 }
+      { "item": "pride_flag", "prob": 1 }
     ]
   },
   {
