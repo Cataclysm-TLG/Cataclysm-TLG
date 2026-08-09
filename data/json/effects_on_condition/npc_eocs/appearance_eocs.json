@@ -107,7 +107,9 @@
     "//2": "Currently beard changes traits every 14 days",
     "recurrence": { "math": [ "time('14 d')" ] },
     "global": false,
-    "condition": { "and": [ {"u_has_trait": "natural_hair_growth" }, { "or": [ { "not": "u_is_female" }, { "u_has_trait": "bearded_lady" } ] } ] },
+    "condition": {
+      "and": [ { "u_has_trait": "natural_hair_growth" }, { "or": [ { "not": "u_is_female" }, { "u_has_trait": "bearded_lady" } ] } ]
+    },
     "effect": [
       {
         "if": { "u_has_trait": "FACIAL_HAIR_NONE" },
