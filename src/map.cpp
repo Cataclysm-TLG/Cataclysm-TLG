@@ -4188,6 +4188,7 @@ int map::collapse_check( const tripoint_bub_ms &p ) const
         // is deemed not to be sufficient either.
         return 0;
     }
+
     int num_supports = p.z() == OVERMAP_DEPTH ? 0 : -5;
     // if there's support below, things are less likely to collapse
     if( p.z() > -OVERMAP_DEPTH ) {
@@ -8651,8 +8652,9 @@ int map::ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_
     if( viewer_p.z() == target_p.z() ) {
         return 0;
     }
-    // Find ledge between viewer and target.
-    // Only the first ledge found is calculated for performance reasons.
+
+    // Find ledge between viewer and target
+    // Only the first ledge found is calculated for performance reasons
     tripoint_bub_ms high_p;
     tripoint_bub_ms low_p;
     if( viewer_p.z() > target_p.z() ) {
@@ -8681,7 +8683,7 @@ int map::ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_
     // Similarly adjust relative Z comparisons.
     const float adjusted_viewer_z = viewer_p.z() * 2;
     // "Opposite" of the angle between the viewer level and ledge
-    const float adjusted_ledge_z_delta = ( ledge_p.z() * 2 ) - adjusted_viewer_z - 1;
+    const float adjusted_ledge_z_delta = ( ledge_p.z() ) - adjusted_viewer_z;
     const float tangent = adjusted_ledge_z_delta / dist_to_ledge_base;
     // Absolute level concealed by ledge, anything below this point is invisible
     const float covered_z = adjusted_viewer_z + ( tangent * flat_dist );

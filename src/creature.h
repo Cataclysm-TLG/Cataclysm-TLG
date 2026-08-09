@@ -404,8 +404,7 @@ class Creature : public viewer
          */
         /*@{*/
         bool sees( const map &here, const Creature &critter ) const override;
-        // is_character is used if the target is a character, not the viewer.
-        bool sees( const map &here, const tripoint_bub_ms &t, bool is_character = false,
+        bool sees( const map &here, const tripoint_bub_ms &t, bool is_avatar = false,
                    int range_mod = 0 ) const override;
         /*@}*/
 
