@@ -8524,72 +8524,82 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             last_point = new_point;
             return true;
         } );
-        // 3D Bresenham
-    } else {
-        tripoint_bub_ms last_point = F;
-        bresenham( F, T, offset, 0,
-                   [this, f_transparent, &visible, &T, &F, &last_point,
-              &found_concealment, &lowest_concealment, &allow_cached]( const tripoint_bub_ms & new_point ) {
-            // Skip starting position, stop before checking target tile.
-            if( new_point == F ) {
-                return true;
-            }
-            // Exit before checking the last square only if it's not a vertical transition.
-            if( new_point == T && last_point.z() == T.z() ) {
-                return false;
-            }
-            // Inbounds check because monster view can be OOB.
-            if( !inbounds( new_point ) ) {
-                visible = false;
-                return false;
-            }
-            // Concealment check only for tiles adjacent to target.
-            if( !allow_cached ) {
-                if( square_dist( new_point, T ) == 1 && square_dist( new_point, F ) > 1 ) {
-                    found_concealment = concealment( new_point );
-                    if( found_concealment == 0 || found_concealment == 100 ) {
-                        lowest_concealment = 0;
-                        return false;
-                    }
-                    if( lowest_concealment < 0 ) {
-                        lowest_concealment = found_concealment;
-                        return true;
-                    } else {
-                        if( found_concealment < lowest_concealment ) {
-                            lowest_concealment = found_concealment;
-                        }
-                        return true;
-                    }
-                }
-            }
-
-            if( new_point.z() == last_point.z() ) {
-                if( !( this->*f_transparent )( new_point ) ) {
-                    visible = false;
-                }
-            } else {
-                const int max_z = std::max( new_point.z(), last_point.z() );
-                if( ( has_floor_or_support( { point_bub_ms( new_point.xy() ), max_z } ) ||
-                      !( this->*f_transparent )( { point_bub_ms( new_point.xy() ), last_point.z()} ) ) &&
-                    ( has_floor_or_support( { point_bub_ms( last_point.xy() ), max_z } ) ||
-                      !( this->*f_transparent )( { point_bub_ms( last_point.xy() ), new_point.z()} ) ) ) {
-                    visible = false;
-                }
-            }
-            last_point = new_point;
+    // 3D Bresenham
+} else {
+    tripoint_bub_ms last_point = F;
+    bresenham( F, T, offset, 0,
+               [this, f_transparent, &visible, &T, &F, &last_point,
+                &found_concealment, &lowest_concealment, &allow_cached](
+                   const tripoint_bub_ms &new_point ) {
+        // Skip starting position, stop before checking target tile.
+        if( new_point == F ) {
             return true;
-        } );
-    }
-    skew_cache.insert( 100000, key, visible ? 1 : 0 );
-    result.visible = visible;
-    if( found_concealment == -1 ) {
-        found_concealment = 0;
-    }
-    if( lowest_concealment == -1 ) {
-        lowest_concealment = 0;
-    }
-    result.concealment = lowest_concealment;
-    return result;
+        }
+
+        // Exit before checking the last square only if it's not a vertical transition.
+        if( new_point == T && last_point.z() == T.z() ) {
+            return false;
+        }
+
+        // Inbounds check because monster view can be OOB.
+        if( !inbounds( new_point ) ) {
+            visible = false;
+            return false;
+        }
+        if( new_point.z() == last_point.z() ) {
+            if( !( this->*f_transparent )( new_point ) ) {
+                visible = false;
+            }
+        } else {
+            // Moving upward through a floor blocks visibility unless the floor
+            // is explicitly transparent.
+            if( new_point.z() > last_point.z() &&
+                       has_floor( new_point ) &&
+                       !has_flag_ter( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR, new_point ) ) {
+                visible = false;
+            }
+        }
+        last_point = new_point;
+
+        // Concealment check only for tiles adjacent to target on target's Z level.
+        if( !allow_cached ) {
+            if( square_dist( new_point, T ) == 1 &&
+                new_point.z() == T.z() &&
+                square_dist( new_point, F ) > 1 ) {
+                found_concealment = concealment( new_point );
+                if( found_concealment == 0 || found_concealment == 100 ) {
+                    lowest_concealment = 0;
+                    return false;
+                }
+                if( lowest_concealment < 0 ) {
+                    lowest_concealment = found_concealment;
+                    return true;
+                } else {
+                    if( found_concealment < lowest_concealment ) {
+                        lowest_concealment = found_concealment;
+                    }
+                    return true;
+                }
+            }
+        }
+
+        return true;
+    } );
+}
+
+skew_cache.insert( 100000, key, visible ? 1 : 0 );
+result.visible = visible;
+
+if( found_concealment == -1 ) {
+    found_concealment = 0;
+}
+
+if( lowest_concealment == -1 ) {
+    lowest_concealment = 0;
+}
+
+result.concealment = lowest_concealment;
+return result;
 }
 
 bool map::has_line_of_sight_IR( const tripoint_bub_ms &from, const tripoint_bub_ms &to, int range,

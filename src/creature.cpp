@@ -573,7 +573,7 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return false;
     }
 
-    if( critter.has_flag( mon_flag_ALWAYS_VISIBLE ) || ( has_flag( mon_flag_ALWAYS_SEES_YOU ) &&
+    if( ( ( critter.has_flag( mon_flag_ALWAYS_VISIBLE ) || ( has_flag( mon_flag_ALWAYS_SEES_YOU ) ) ) &&
             critter.is_avatar() ) ) {
         return true;
     }
@@ -602,7 +602,8 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return ch == nullptr || !ch->is_invisible();
     };
     // Can always see adjacent monsters on the same level, or vertically adjacent if there's LoS.
-    if( target_range < 2 && posz() == critter.posz() ) {
+    // Reminder: trig_dist returns 1 when adjacent on same level, 2 when xy matches but z is +/- 1.
+    if( target_range == 1 ) {
         return true;
     }
     if( target_range == 2 && pos_bub().xy() == critter.pos_bub().xy() &&
@@ -684,20 +685,25 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     if( different_levels ) {
         ledge_concealment = ( here.ledge_concealment( pos_bub( here ), critter.pos_bub( here ) ) );
     }
-    visibility_result vis = here.sees_full( pos_bub( here ), critter.pos_bub( here ), target_range,
+    visibility_result vis;
+    vis = here.sees_full( pos_bub( here ), critter.pos_bub( here ), target_range,
                                             true, false );
     const int concealment = std::max( vis.concealment, ledge_concealment );
     if( !critter_is_monster ) {
         if( concealment > critter.eye_level() ) {
             return false;
         } else {
-            return visible( ch );
+            if( vis.visible ) {
+                return visible( ch );
+            } else {
+                return false;
+            }
         }
     } else {
         if( concealment > critter.eye_level() ) {
             return false;
         }
-        return true;
+        return vis.visible;
     }
 }
 
@@ -833,7 +839,6 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
             // friendly to the player, not a target for us
             return static_cast<const npc *>( &critter )->get_attitude() == NPCATT_KILL;
         }
-        // TODO: what about g->u?
         return false;
     } );
     for( Creature *&m : targets ) {
@@ -841,7 +846,7 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
             // can't see nor sense it
             if( is_fake() && in_veh ) {
                 // If turret in the vehicle then
-                // Hack: trying yo avoid turret LOS blocking by frames bug by trying to see target from vehicle boundary
+                // Hack: trying to avoid turret LOS blocking by frames bug by trying to see target from vehicle boundary
                 // Or turret wallhack for turret's car
                 // TODO: to visibility checking another way, probably using 3D FOV
                 std::vector<tripoint_bub_ms> path_to_target = line_to( pos_bub( here ), m->pos_bub( here ) );
