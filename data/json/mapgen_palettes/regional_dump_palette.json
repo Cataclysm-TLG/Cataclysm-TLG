@@ -18,6 +18,7 @@
       "d": "t_floor",
       "^": "t_dirtmound",
       "p": "t_pit",
+      "P": "t_pit_shallow",
       "g": "t_pit_glass",
       "1": "t_dirtmound",
       "2": "t_dirtmound",
