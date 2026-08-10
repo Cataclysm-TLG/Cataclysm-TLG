@@ -617,9 +617,7 @@
       { "drop": "brain", "type": "flesh", "mass_ratio": 0.005 },
       { "drop": "bone", "type": "bone", "mass_ratio": 0.15 },
       { "drop": "animal_blood", "type": "blood", "mass_ratio": 0.1 },
-      { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 },
-      { "drop": "raw_fur", "type": "skin", "mass_ratio": 0.02 },
-      { "drop": "fat", "type": "flesh", "mass_ratio": 0.07 }
+      { "drop": "raw_fur", "type": "skin", "mass_ratio": 0.02 }
     ]
   },
   {
@@ -635,9 +633,7 @@
       { "drop": "mutant_liver", "type": "offal", "mass_ratio": 0.01 },
       { "drop": "mutant_brain", "type": "offal", "mass_ratio": 0.005 },
       { "drop": "bone", "type": "bone", "mass_ratio": 0.15 },
-      { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 },
-      { "drop": "raw_fur", "type": "skin", "mass_ratio": 0.02 },
-      { "drop": "mutant_fat", "type": "flesh", "mass_ratio": 0.07 }
+      { "drop": "raw_fur", "type": "skin", "mass_ratio": 0.02 }
     ]
   },
   {
@@ -2649,7 +2645,8 @@
     "entries": [
       { "drop": "skull_canis_small", "type": "bone", "scale_num": [ 1, 1 ], "max": 1 },
       { "drop": "meat_scrap", "type": "flesh", "mass_ratio": 0.5 },
-      { "drop": "animal_blood", "type": "blood", "mass_ratio": 0.1 }
+      { "drop": "animal_blood", "type": "blood", "mass_ratio": 0.1 },
+      { "drop": "raw_leather", "type": "skin", "mass_ratio": 0.02 }
     ]
   },
   {
