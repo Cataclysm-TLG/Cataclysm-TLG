@@ -8652,9 +8652,8 @@ int map::ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_
     if( viewer_p.z() == target_p.z() ) {
         return 0;
     }
-
-    // Find ledge between viewer and target
-    // Only the first ledge found is calculated for performance reasons
+    // Find ledge between viewer and target.
+    // For performance reasons, only the first ledge found is calculated.
     tripoint_bub_ms high_p;
     tripoint_bub_ms low_p;
     if( viewer_p.z() > target_p.z() ) {
@@ -8673,23 +8672,23 @@ int map::ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_
         }
         return true;
     } );
-
     float dist_to_ledge_base = trig_dist_precise( viewer_p, tripoint_bub_ms( ledge_p.x(), ledge_p.y(),
                                viewer_p.z() ) );
-    // Adjustment to ledge distance because ledge is assumed to be between two grids
+    // Adjustment to ledge distance because ledge is assumed to be between two grids.
     dist_to_ledge_base *= ( viewer_p.z() < target_p.z() ) ? -2.0f : 2.0f;
     const float flat_dist = trig_dist_precise( viewer_p, tripoint_bub_ms( target_p.xy(),
                             viewer_p.z() ) );
-    // Similarly adjust relative Z comparisons.
-    const float adjusted_viewer_z = viewer_p.z() * 2;
-    // "Opposite" of the angle between the viewer level and ledge
-    const float adjusted_ledge_z_delta = ( ledge_p.z() ) - adjusted_viewer_z;
+    // "Opposite" of the angle between the viewer level and ledge.
+    const float adjusted_ledge_z_delta =
+        ( ledge_p.z() - viewer_p.z() ) * 2 - 1;
     const float tangent = adjusted_ledge_z_delta / dist_to_ledge_base;
-    // Absolute level concealed by ledge, anything below this point is invisible
-    const float covered_z = adjusted_viewer_z + ( tangent * flat_dist );
+    // Relative to the viewer's Z level.
+    const float covered_z = tangent * flat_dist;
     // Compare adjusted target Z to covered area. Multiply by 100 to compare to eye_level().
-    int ledge_concealment = static_cast<int>( std::round( 100 * ( covered_z -
-                            ( target_p.z() * 2 ) ) ) );
+    const float target_z_delta = ( target_p.z() - viewer_p.z() ) * 2;
+    int ledge_concealment = static_cast<int>(
+                                std::round( 100.f * ( covered_z - target_z_delta ) )
+                            );
     return std::max( ledge_concealment, 0 );
 }
 

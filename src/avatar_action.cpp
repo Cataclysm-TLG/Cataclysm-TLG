@@ -248,7 +248,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
     }
     bool via_ramp = false;
     if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_UP_LOW, you_pos ) &&
-               m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
+        m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
         return false;
     } else if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, you_pos ) &&
                m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
