@@ -723,7 +723,7 @@ int Creature::eye_level() const
     }
 }
 
-bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
+bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_character,
                      int range_mod ) const
 {
     if( std::abs( posz() - t.z() ) > fov_3d_z_range ) {
@@ -770,18 +770,19 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
         if( range_mod > 0 ) {
             range = std::min( range, range_mod );
         }
-        if( is_avatar ) {
-            // Special case monster -> player visibility, forcing it to be symmetric with player vision.
-            const float player_visibility_factor = get_player_character().visibility() / 100.0f;
-            int adj_range = std::floor( range * player_visibility_factor );
-            return adj_range >= wanted_range &&
-                   here.get_cache_ref( posz() ).seen_cache[pos.x()][pos.y()] > LIGHT_TRANSPARENCY_SOLID;
+        if( is_character ) {
+            // Get character visibility from things like mutations.
+            Creature *ch = get_creature_tracker().creature_at( t );
+            if( ch != nullptr ) {
+                const float character_visibility_factor = ch->as_character()->visibility() / 100.0f;
+                int adj_range = std::floor( range * character_visibility_factor );
+                return adj_range >= wanted_range && here.sees( pos, t, range );
+            }
         } else {
             return here.sees( pos, t, range );
         }
-    } else {
-        return false;
     }
+    return false;
 }
 
 // Helper function to check if potential area of effect of a weapon overlaps vehicle
