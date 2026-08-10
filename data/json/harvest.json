@@ -666,7 +666,7 @@
     ]
   },
   {
-    "id": "animal_decay",
+    "id": "animal_antler_decay",
     "type": "harvest",
     "entries": [
       { "drop": "antler", "type": "bone", "base_num": [ 0, 2 ], "max": 2 },

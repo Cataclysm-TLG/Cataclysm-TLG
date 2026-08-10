@@ -240,13 +240,13 @@
       {
         "group": "smart_phone_maybe_locked",
         "prob": 17,
-        "charges": [ 0, 15 ],
+        "charges": 0,
         "contents-group": "civilian_smartphone_efiles"
       },
       {
         "group": "smart_phone_maybe_locked",
-        "prob": 1,
-        "charges": 100,
+        "prob": 83,
+        "charges": [ 0, 100 ],
         "contents-group": "civilian_smartphone_efiles"
       }
     ]
@@ -261,13 +261,13 @@
       {
         "group": "smart_phone_maybe_locked",
         "prob": 17,
-        "charges": [ 0, 15 ],
+        "charges": 0,
         "contents-group": "civilian_smartphone_efiles"
       },
       {
         "group": "smart_phone_maybe_locked",
-        "prob": 1,
-        "charges": 100,
+        "prob": 83,
+        "charges": [ 0, 100 ],
         "contents-group": "civilian_smartphone_efiles"
       }
     ]
@@ -276,8 +276,8 @@
     "type": "item_group",
     "id": "smart_phone_maybe_locked",
     "items": [
-      { "item": "smart_phone", "prob": 15, "charges": [ 0, 24 ] },
-      { "item": "smart_phone_locked", "prob": 85, "charges": [ 0, 24 ] }
+      { "item": "smart_phone", "prob": 17, "charges": [ 0, 100 ] },
+      { "item": "smart_phone_locked", "prob": 83, "charges": [ 0, 100 ] }
     ]
   },
   {
