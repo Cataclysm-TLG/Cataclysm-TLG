@@ -203,7 +203,7 @@
     "connects_to": "WATER",
     "examine_action": "water_source",
     "phase_targets": [ "t_ice_sh_thick", "t_ice_sh_thin", "t_pseudo_phase" ],
-    "phase_temps": [ -15, -10 ],
+    "phase_temps": [ -25, -20 ],
     "phase_method": "water_freeze"
   },
   {
@@ -241,7 +241,7 @@
     "connects_to": "WATER",
     "examine_action": "water_source",
     "phase_targets": [ "t_ice_dp_thick", "t_ice_dp_thin", "t_pseudo_phase" ],
-    "phase_temps": [ -15, -10 ],
+    "phase_temps": [ -30, -25 ],
     "phase_method": "water_freeze"
   },
   {
