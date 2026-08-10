@@ -532,7 +532,7 @@ bool mattack::eat_food( monster *z )
             continue;
         }
         // Don't snap up food RIGHT under the player's nose.
-        if( z->friendly && rl_dist( get_player_character().pos_bub(), p ) <= 2 ) {
+        if( z->friendly && square_dist( get_player_character().pos_bub(), p ) <= 2 ) {
             continue;
         }
         map_stack items = here.i_at( p );
@@ -568,7 +568,7 @@ bool mattack::eat_carrion( monster *z )
     map &here = get_map();
     for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 1 ) ) {
         // Don't snap up food RIGHT under the player's nose.
-        if( rl_dist( get_player_character().pos_bub(), p ) <= 2 ) {
+        if( square_dist( get_player_character().pos_bub(), p ) <= 2 ) {
             continue;
         }
         map_stack items = here.i_at( p );
@@ -594,10 +594,10 @@ bool mattack::eat_carrion( monster *z )
 bool mattack::graze( monster *z )
 {
     map &here = get_map();
-    //Grazers eat grass and entire plants or bushes. Toxic/inedible plants can be blacklisted with GRAZER_INEDIBLE.
+    // Grazers eat grass and entire plants or bushes. Toxic/inedible plants can be blacklisted with GRAZER_INEDIBLE.
     for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 1 ) ) {
-        //Don't eat grass right next to the player.
-        if( z->friendly && rl_dist( get_player_character().pos_bub(), p ) <= 2 ) {
+        // Don't eat grass right next to the player if we're not tame.
+        if( !z->friendly && square_dist( get_player_character().pos_bub(), p ) <= 2 ) {
             continue;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_FLOWER, p ) &&
@@ -632,8 +632,8 @@ bool mattack::browse( monster *z )
     map &here = get_map();
     //Browsers eat fruit/nuts/etc off of seasonally harvestable plants and trees.
     for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 1 ) ) {
-        // Don't forage for food if the player is right there.
-        if( z->friendly && rl_dist( get_player_character().pos_bub(), p ) <= 2 ) {
+        // Don't forage for food if the player is right there unless we're tame.
+        if( !z->friendly && square_dist( get_player_character().pos_bub(), p ) <= 2 ) {
             continue;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_BROWSABLE, p ) && ( z->amount_eaten <= z->stomach_size ) ) {
@@ -642,7 +642,7 @@ bool mattack::browse( monster *z )
                 add_msg_if_player_sees( *z, _( "The %1s eats from the %2s." ), z->name(), here.tername( p ) );
                 here.ter_set( p, here.get_ter_transforms_into( p ) );
                 z->amount_eaten += 174;
-                //Calorie amount is based on the "underbrush" dummy item, as with the grazer mutation.
+                // Calorie amount is based on the "underbrush" dummy item, as with the grazer mutation.
                 return true;
             }
         }
@@ -656,7 +656,7 @@ bool mattack::shriek( monster *z )
 
     Creature *target = z->attack_target();
     if( target == nullptr ||
-        rl_dist( z->pos_abs(), target->pos_abs() ) > 4 ||
+        trig_dist( z->pos_abs(), target->pos_abs() ) > 4 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -678,7 +678,7 @@ bool mattack::shriek_alert( monster *z )
 
     Creature *target = z->attack_target();
 
-    if( target == nullptr || rl_dist( z->pos_bub(), target->pos_bub() ) > 15 ||
+    if( target == nullptr || trig_dist( z->pos_bub(), target->pos_bub() ) > 15 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -745,7 +745,7 @@ bool mattack::howl( monster *z )
     Creature *target = z->attack_target();
     map &here = get_map();
     if( target == nullptr ||
-        rl_dist( z->pos_bub(), target->pos_bub() ) > 4 ||
+        trig_dist( z->pos_bub(), target->pos_bub() ) > 4 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -782,7 +782,7 @@ bool mattack::rattle( monster *z )
     const int min_dist = z->friendly != 0 ? 1 : 4;
     Creature *target = &get_player_character();
     // Can't use attack_target - the snake has no target
-    if( rl_dist( z->pos_abs(), target->pos_abs() ) > min_dist ||
+    if( trig_dist( z->pos_abs(), target->pos_abs() ) > min_dist ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -815,7 +815,7 @@ bool mattack::shockstorm( monster *z )
     Character &player_character = get_player_character();
     bool seen = player_character.sees( here, *z );
 
-    bool can_attack = z->sees( here, *target ) && rl_dist( z->pos_abs(), target->pos_abs() ) <= 12;
+    bool can_attack = z->sees( here, *target ) && trig_dist( z->pos_abs(), target->pos_abs() ) <= 12;
     std::vector<tripoint_bub_ms> path = here.find_clear_path( z_pos, target_pos );
     for( const tripoint_bub_ms &point : path ) {
         if( here.impassable( point ) &&
@@ -1007,7 +1007,7 @@ bool mattack::boomer( monster *z )
     }
 
     Creature *target = z->attack_target();
-    if( target == nullptr || rl_dist( z->pos_abs(), target->pos_abs() ) > 3 ||
+    if( target == nullptr || trig_dist( z->pos_abs(), target->pos_abs() ) > 3 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -1050,13 +1050,13 @@ bool mattack::boomer_glow( monster *z )
     }
 
     Creature *target = z->attack_target();
-    if( target == nullptr || rl_dist( z->pos_abs(), target->pos_abs() ) > 3 ||
+    if( target == nullptr || trig_dist( z->pos_abs(), target->pos_abs() ) > 3 ||
         !z->sees( here, *target ) ) {
         return false;
     }
 
     std::vector<tripoint_bub_ms> line = here.find_clear_path( z->pos_bub(), target->pos_bub() );
-    // It takes a while
+    // It takes a while.
     z->mod_moves( -to_moves<int>( 1_seconds ) * 2.5 );
     Character &player_character = get_player_character();
     bool u_see = player_character.sees( here,  *z );
@@ -1212,39 +1212,54 @@ bool mattack::resurrect( monster *z )
     if( found_eligible_corpse ) {
         // Sometimes we screw up.
         if( one_in( 100 - ( corpse_damage * 2 ) ) ) {
-            add_msg_if_player_sees( raised.first, _( "The %s bursts apart in a shower of gore!" ),
-                                    raised.second->tname() );
-            // limit gibbing to 15%
-            int gibbed_weight = to_gram( raised.second->weight() * ( 15.0 / 100.0 ) );
-            int gib_distance = std::round( rng( 2, 4 ) );
-            const mtype *mt = raised.second->get_mtype();
-            units::mass corpse_weight = raised.second->weight();
-            if( mt ) {
-                for( const harvest_entry &entry : mt->harvest->entries() ) {
-                    // only flesh and bones survive.
-                    if( entry.type == harvest_drop_flesh || entry.type == harvest_drop_bone ) {
-                        // the larger the overflow damage, the less you get
-                        const int chunk_amt =
-                            entry.mass_ratio / 2.0f / 10.0 *
-                            corpse_weight / item::find_type( itype_id( entry.drop ) )->weight;
-                        mdeath::scatter_chunks( &here, itype_id( entry.drop ), chunk_amt, *mt, raised.first, gib_distance,
-                                                chunk_amt / ( gib_distance - 1 ) );
-                        gibbed_weight -= entry.mass_ratio / 2.0 / 20 * to_gram( corpse_weight );
+            if( one_in( 2 ) ) {
+                if( one_in( 2 ) ) {
+                    add_msg_if_player_sees( raised.first, _( "The %s twitches and spasms." ),
+                        raised.second->tname() );
+                    raised.second->mod_damage( -750 );
+                } else {
+                    add_msg_if_player_sees( raised.first, _( "The %s thrashes so violently that it nearly tears itself apart!" ),
+                        raised.second->tname() );
+                    raised.second->mod_damage( 750 );
+                    if( raised.second->damage() >= raised.second->max_damage() ) {
+                        raised.second->set_flag( flag_PULPED );
                     }
                 }
-                if( gibbed_weight > 0 ) {
-                    const itype_id &leftover_id = mt->harvest->leftovers;
-                    const int chunk_amount =
-                        gibbed_weight / to_gram( item::find_type( leftover_id )->weight );
-                    mdeath::scatter_chunks( &here, leftover_id, chunk_amount, *mt, raised.first, gib_distance,
-                                            chunk_amount / ( gib_distance + 1 ) );
+            } else {
+                add_msg_if_player_sees( raised.first, _( "The %s bursts apart in a shower of gore!" ),
+                                        raised.second->tname() );
+                // limit gibbing to 15%
+                int gibbed_weight = to_gram( raised.second->weight() * ( 15.0 / 100.0 ) );
+                int gib_distance = std::round( rng( 2, 4 ) );
+                const mtype *mt = raised.second->get_mtype();
+                units::mass corpse_weight = raised.second->weight();
+                if( mt ) {
+                    for( const harvest_entry &entry : mt->harvest->entries() ) {
+                        // only flesh and bones survive.
+                        if( entry.type == harvest_drop_flesh || entry.type == harvest_drop_bone ) {
+                            // the larger the overflow damage, the less you get
+                            const int chunk_amt =
+                                entry.mass_ratio / 2.0f / 10.0 *
+                                corpse_weight / item::find_type( itype_id( entry.drop ) )->weight;
+                            mdeath::scatter_chunks( &here, itype_id( entry.drop ), chunk_amt, *mt, raised.first, gib_distance,
+                                                    chunk_amt / ( gib_distance - 1 ) );
+                            gibbed_weight -= entry.mass_ratio / 2.0 / 20 * to_gram( corpse_weight );
+                        }
+                    }
+                    if( gibbed_weight > 0 ) {
+                        const itype_id &leftover_id = mt->harvest->leftovers;
+                        const int chunk_amount =
+                            gibbed_weight / to_gram( item::find_type( leftover_id )->weight );
+                        mdeath::scatter_chunks( &here, leftover_id, chunk_amount, *mt, raised.first, gib_distance,
+                                                chunk_amount / ( gib_distance + 1 ) );
+                    }
                 }
+                raised.second->set_damage( 4000 );
+                return false;
             }
-            raised.second->set_damage( 4000 );
-            return false;
         }
         // Sometimes we REALLY screw up.
-        if( one_in( 200 ) ) {
+        if( one_in( 250 ) ) {
             add_msg_if_player_sees( *z, _( "The %s bursts apart in a shower of gore!" ),
                                     z->disp_name() );
             z->deal_damage( z, bodypart_id( "torso" ), damage_instance( damage_bash, 400 ) );
@@ -1514,7 +1529,7 @@ bool mattack::growplants( monster *z )
 bool mattack::grow_vine( monster *z )
 {
     if( z->friendly ) {
-        if( rl_dist( get_player_character().pos_bub(), z->pos_bub() ) <= 3 ) {
+        if( trig_dist( get_player_character().pos_bub(), z->pos_bub() ) <= 3 ) {
             // Friendly vines keep the area around you free, so you can move.
             return false;
         }
@@ -1582,7 +1597,7 @@ bool mattack::vine( monster *z )
         }
     }
     // Calculate distance from nearest hub
-    int dist_from_hub = rl_dist( z->pos_abs(), z->get_dest() );
+    int dist_from_hub = trig_dist( z->pos_abs(), z->get_dest() );
     if( dist_from_hub > 20 || vine_neighbors > 5 || one_in( 7 - vine_neighbors ) ||
         !one_in( dist_from_hub ) ) {
         return true;
@@ -1607,7 +1622,7 @@ bool mattack::spit_sap( monster *z )
 
     Creature *target = z->attack_target();
     if( target == nullptr ||
-        rl_dist( z->pos_abs(), target->pos_abs() ) > 12 ||
+        trig_dist( z->pos_abs(), target->pos_abs() ) > 12 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -1648,7 +1663,7 @@ bool mattack::triffid_heartbeat( monster *z )
     static pathfinding_settings root_pathfind( 10, 20, 50, 0, false, false, false, false, false,
             false );
     const pathfinding_target pf_t = pathfinding_target::point( z_pos );
-    if( rl_dist( z_pos, pos ) > 5 &&
+    if( trig_dist( z_pos, pos ) > 5 &&
         !here.route( pos, pf_t, root_pathfind ).empty() ) {
         add_msg( m_warning, _( "The root walls creak around you." ) );
         for( const tripoint_bub_ms &dest : here.points_in_radius( z_pos, 3 ) ) {
@@ -1667,7 +1682,7 @@ bool mattack::triffid_heartbeat( monster *z )
             tripoint_bub_ms dest( p, z->posz() );
             tries++;
             here.ter_set( dest, ter_t_dirt );
-            if( rl_dist( dest, pos ) > 3 && g->num_creatures() < 30 &&
+            if( trig_dist( dest, pos ) > 3 && g->num_creatures() < 30 &&
                 !creatures.creature_at( dest ) && one_in( 20 ) ) { // Spawn an extra monster
                 mtype_id montype = mon_triffid;
                 if( one_in( 4 ) ) {
@@ -1725,7 +1740,7 @@ bool mattack::fungus( monster *z )
         if( sporep == z->pos_bub() ) {
             continue;
         }
-        const int dist = rl_dist( z->pos_bub(), sporep );
+        const int dist = trig_dist( z->pos_bub(), sporep );
         if( !one_in( dist ) ||
             here.impassable( sporep ) ||
             ( dist > 1 && !here.clear_path( z->pos_bub(), sporep, 2, 1, 10 ) ) ) {
@@ -1798,7 +1813,7 @@ bool mattack::fungus_inject( monster *z )
     // For faster copy+paste
     Creature *target = &get_player_character();
     Character &player_character = get_player_character();
-    if( rl_dist( z->pos_bub(), player_character.pos_bub() ) > 1 ) {
+    if( trig_dist( z->pos_bub(), player_character.pos_bub() ) > 1 ) {
         return false;
     }
 

@@ -30,7 +30,7 @@
     "id": "mon_rattlesnake",
     "type": "MONSTER",
     "name": { "str": "rattlesnake" },
-    "description": "The timber rattlesnake, the most venomous viper native to New England.  Climatic changes have extended its range far into the north.",
+    "description": "The timber rattlesnake, the most venomous viper native to New England.  These animals prefer to avoid humans, but can be very dangerous if they bite.",
     "default_faction": "small_animal",
     "bodytype": "snake",
     "categories": [ "WILDLIFE" ],
@@ -89,6 +89,7 @@
     "reproduction": { "baby_monster": "mon_rattlesnake_s", "baby_count": 13, "baby_timer": 240 },
     "baby_flags": [ "AUTUMN", "SUMMER" ],
     "upgrades": { "half_life": 200, "into": "mon_rattlesnake_giant" },
+    "decay": "animal_decay",
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 },
     "delete": { "anger_triggers": [ "PLAYER_CLOSE" ] }
   },
@@ -111,26 +112,28 @@
     "upgrades": { "age_grow": 365, "into": "mon_rattlesnake_big" },
     "fear_triggers": [ "PLAYER_CLOSE", "SOUND" ],
     "harvest": "mutant_tiny",
-    "flags": [ "SEES", "HEARS", "SMELLS", "BADVENOM", "HARDTOSHOOT", "KEENNOSE", "CLIMBS", "PATH_AVOID_DANGER", "ANIMAL", "SWIMS" ]
+    "decay": "animal_decay",
+    "flags": [ "SEES", "SMELLS", "BADVENOM", "HARDTOSHOOT", "KEENNOSE", "CLIMBS", "PATH_AVOID_DANGER", "ANIMAL", "SWIMS" ]
   },
   {
     "id": "mon_rattlesnake_giant",
     "type": "MONSTER",
     "name": { "str": "giant rattlesnake" },
-    "description": "A large mutated timber rattlesnake, about six times as large as the norm.  While it still isn't big enough to regard humans as potential prey, it is much more aggressive and dangerous compared to a normal rattler.",
+    "description": "A timber rattlesnake grown to the size of an anaconda.  Ordinarily these animals are timid and prefer to avoid humans, but at this size it might be convinced to put up a fight.",
     "default_faction": "mutant",
     "bodytype": "snake",
     "categories": [ "WILDLIFE" ],
     "species": [ "REPTILE" ],
     "diff": 2,
-    "volume": "75000 ml",
-    "weight": "74000 g",
-    "hp": 64,
+    "volume": "60000 ml",
+    "weight": "50000 g",
+    "hp": 94,
     "speed": 100,
     "material": [ "flesh" ],
     "symbol": "s",
     "color": "brown",
     "morale": 60,
+    "aggression": 5,
     "aggro_character": false,
     "melee_skill": 6,
     "melee_dice": 2,
@@ -150,13 +153,12 @@
         "damage_max_instance": [ { "damage_type": "stab", "amount": 10, "armor_multiplier": 0.7 } ]
       }
     ],
-    "anger_triggers": [ "HURT", "PLAYER_CLOSE" ],
-    "placate_triggers": [ "PLAYER_WEAK" ],
+    "anger_triggers": [ "HURT", "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "reproduction": { "baby_monster": "mon_rattlesnake_big_s", "baby_count": 15, "baby_timer": 120 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "upgrades": { "half_life": 200, "into": "mon_rattlesnake_mega" },
-    "flags": [ "SEES", "HEARS", "SMELLS", "BADVENOM", "HARDTOSHOOT", "KEENNOSE", "CLIMBS", "PATH_AVOID_DANGER", "ANIMAL", "SWIMS" ],
-    "armor": { "bash": 2, "cut": 4, "bullet": 3, "electric": 1 }
+    "flags": [ "SEES", "SMELLS", "BADVENOM", "HARDTOSHOOT", "KEENNOSE", "CLIMBS", "PATH_AVOID_DANGER", "ANIMAL", "SWIMS" ],
+    "armor": { "bash": 4, "cut": 6, "bullet": 3, "electric": 1 }
   },
   {
     "id": "mon_rattlesnake_mega",
@@ -202,12 +204,12 @@
       }
     ],
     "regenerates": 2,
-    "anger_triggers": [ "HURT", "PLAYER_CLOSE" ],
+    "anger_triggers": [ "HURT", "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "reproduction": { "baby_monster": "mon_rattlesnake_big_s", "baby_count": 20, "baby_timer": 90 },
     "//babies": "Rattlesnake's gestation period is around 90 days, but it varies depending on the breed.  The timber rattlesnake has a gestation period of up to five months.",
     "//babies2": "Deathrattle is heavily mutated, so a short gestation period and all-year large clutch birth are plausible",
-    "flags": [ "SEES", "HEARS", "SMELLS", "BADVENOM", "KEENNOSE", "CLIMBS", "PATH_AVOID_DANGER", "ANIMAL", "PUSH_MON", "SWIMS" ],
-    "armor": { "bash": 6, "cut": 8, "bullet": 6, "electric": 3, "acid": 6 }
+    "flags": [ "SEES", "SMELLS", "BADVENOM", "KEENNOSE", "CLIMBS", "PATH_AVOID_DANGER", "ANIMAL", "PUSH_MON", "SWIMS" ],
+    "armor": { "bash": 6, "cut": 10, "bullet": 6, "electric": 3, "acid": 6 }
   },
   {
     "id": "mon_sewer_snake",
@@ -237,6 +239,7 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "harvest": "mutant_animal_large_noskin",
     "dissect": "dissect_lizard_sample_single",
+    "decay": "animal_decay",
     "path_settings": { "max_dist": 5 },
     "flags": [ "SEES", "SMELLS", "VENOM", "SWIMS", "SWARMS", "ANIMAL" ],
     "armor": { "bash": 2, "cut": 3 }
@@ -386,6 +389,7 @@
     "weakpoint_sets": [ "wps_amphibian_body", "wps_amphibian_frog" ],
     "dissect": "dissect_batrachian_sample_small",
     "harvest": "mutant_animal_large_noskin",
+    "decay": "animal_decay",
     "vision_night": 30,
     "path_settings": { "max_dist": 5 },
     "grab_strength": 20,
@@ -448,6 +452,7 @@
     "weakpoint_sets": [ "wps_amphibian_body", "wps_amphibian_frog" ],
     "dissect": "dissect_batrachian_sample_huge",
     "harvest": "mutant_animal_large_noskin",
+    "decay": "animal_decay",
     "vision_night": 10,
     "path_settings": { "max_dist": 5 },
     "grab_strength": 50,

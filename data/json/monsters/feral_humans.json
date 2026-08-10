@@ -25,6 +25,7 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "dodge": 1,
     "harvest": "human",
+    "decay": "human_decay",
     "dissect": "dissect_human_sample_single",
     "vision_day": 45,
     "vision_night": 3,

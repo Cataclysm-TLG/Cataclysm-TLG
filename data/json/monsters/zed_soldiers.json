@@ -27,6 +27,7 @@
     "vision_day": 30,
     "vision_night": 3,
     "harvest": "zombie_humanoid",
+    "decay": "zombie_decay",
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab" }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5, "min_mul": 0.8 } ],
     "death_drops": "mon_zombie_soldier_death_drops",
