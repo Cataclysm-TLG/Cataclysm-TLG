@@ -936,8 +936,8 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
 
             const om_vision_level vision = overmap_buffer.seen( omp );
             const bool los = overmap_buffer.seen_more_than( omp, om_vision_level::details ) &&
-                               ( you.overmap_los( omp, sight_points ) || uistate.overmap_debug_mongroup ||
-                                 you.has_trait( trait_DEBUG_CLAIRVOYANCE ) );
+                             ( you.overmap_los( omp, sight_points ) || uistate.overmap_debug_mongroup ||
+                               you.has_trait( trait_DEBUG_CLAIRVOYANCE ) );
 
             // the full string from the ter_id including _north etc.
             std::string id;
@@ -983,19 +983,20 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 }
             }
 
-             if( vision != om_vision_level::unseen ) {
-                 if( draw_overlays && uistate.overmap_debug_mongroup ) {
-                     std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> hordes = overmap_buffer.hordes_at(
-                                 omp );
-                     if( !hordes.empty() ) {
-                         static const std::string empty_string;
-                         draw_from_id_string_om( "mon_zombie", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
-                     }
-                 }
-                 if( showhordes && los ) {
-                         static const std::string empty_string;
-                     const int horde_size = overmap_buffer.get_horde_size( omp, horde_map_flavors::active );
-                     if( horde_size >= HORDE_VISIBILITY_SIZE ) {
+            if( vision != om_vision_level::unseen ) {
+                if( draw_overlays && uistate.overmap_debug_mongroup ) {
+                    std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> hordes = overmap_buffer.hordes_at(
+                                omp );
+                    if( !hordes.empty() ) {
+                        static const std::string empty_string;
+                        draw_from_id_string_om( "mon_zombie", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0,
+                                                lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                    }
+                }
+                if( showhordes && los ) {
+                    static const std::string empty_string;
+                    const int horde_size = overmap_buffer.get_horde_size( omp, horde_map_flavors::active );
+                    if( horde_size >= HORDE_VISIBILITY_SIZE ) {
                         // Scale down the range of horde population, which can be 1-576 to a range of 1-10.
                         static constexpr int horde_thresholds[] = {
                             5, 13, 27, 47, 73, 106, 147, 195, 251, 577
@@ -1008,38 +1009,44 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                         const std::string horde_id = string_format( "overmap_horde_%d", sprite_size );
                         if( find_tile_with_season( horde_id ) ) {
                             //NOLINTNEXTLINE(cata-translate-string-literal)
-                             draw_from_id_string_om( string_format( horde_id, sprite_size ),
-                                                  TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                            draw_from_id_string_om( string_format( horde_id, sprite_size ),
+                                                    TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                         } else {
-                             // a little bit of hardcoded fallbacks for hordes for
-                             // tilesets that don't have overmap_horde_X sprites defined.
-                             switch( sprite_size ) {
-                                 case 1:
-                                     draw_from_id_string_om( "mon_zombie", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
-                                     break;
-                                 case 2:
-                                     draw_from_id_string_om( "mon_zombie_tough", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
-                                     break;
-                                 case 3:
-                                     draw_from_id_string_om( "mon_zombie_brute", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
-                                     break;
-                                 case 4:
-                                     draw_from_id_string_om( "mon_zombie_hulk", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
-                                     break;
-                                 case 5:
-                                     draw_from_id_string_om( "mon_zombie_necro", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
-                                     break;
-                                 case 6:
-                                 case 7:
-                                 case 8:
-                                 case 9:
-                                 case 10:
-                                     draw_from_id_string_om( "mon_zombie_master", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
-                             };
-                         }
-                     }
-                 }
-             }
+                            // a little bit of hardcoded fallbacks for hordes for
+                            // tilesets that don't have overmap_horde_X sprites defined.
+                            switch( sprite_size ) {
+                                case 1:
+                                    draw_from_id_string_om( "mon_zombie", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0,
+                                                            lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                    break;
+                                case 2:
+                                    draw_from_id_string_om( "mon_zombie_tough", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0,
+                                                            lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                    break;
+                                case 3:
+                                    draw_from_id_string_om( "mon_zombie_brute", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0,
+                                                            lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                    break;
+                                case 4:
+                                    draw_from_id_string_om( "mon_zombie_hulk", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0,
+                                                            lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                    break;
+                                case 5:
+                                    draw_from_id_string_om( "mon_zombie_necro", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0,
+                                                            lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                                    break;
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    draw_from_id_string_om( "mon_zombie_master", TILE_CATEGORY::MONSTER, empty_string, omp, 0, 0,
+                                                            lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+                            };
+                        }
+                    }
+                }
+            }
             if( ( uistate.place_terrain || uistate.place_special ) &&
                 overmap_ui::is_generated_omt( omp.xy() ) ) {
                 // Highlight areas that already have been generated.

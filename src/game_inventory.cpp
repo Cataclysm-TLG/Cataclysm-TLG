@@ -1753,7 +1753,7 @@ drop_locations game_menus::inv::edevice_select( Character &who, item_location &u
         inv_title += _( " which device" ) + used_device_name;
         select_one_edevice.set_title( inv_title );
         if( select_one_edevice.empty() ) {
-        std::string eligible_devices = ( _( "You have no eligible devices to " ) );
+            std::string eligible_devices = ( _( "You have no eligible devices to " ) );
             popup( std::string( _( eligible_devices + action_name + "." ) ), PF_GET_KEY );
             return drop_locations();
         }
@@ -1771,7 +1771,7 @@ drop_locations game_menus::inv::edevice_select( Character &who, item_location &u
         inv_title += _( " which devices" ) + used_device_name;
         inv_s.set_title( inv_title );
         if( inv_s.empty() ) {
-        std::string eligible_devices = ( _( "You have no eligible devices to " ) );
+            std::string eligible_devices = ( _( "You have no eligible devices to " ) );
             popup( std::string( _( eligible_devices + action_name + "." ) ), PF_GET_KEY );
             return drop_locations();
         }
