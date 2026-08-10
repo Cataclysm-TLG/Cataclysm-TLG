@@ -1259,7 +1259,7 @@ bool mattack::resurrect( monster *z )
             }
         }
         // Sometimes we REALLY screw up.
-        if( one_in( 200 ) ) {
+        if( one_in( 250 ) ) {
             add_msg_if_player_sees( *z, _( "The %s bursts apart in a shower of gore!" ),
                                     z->disp_name() );
             z->deal_damage( z, bodypart_id( "torso" ), damage_instance( damage_bash, 400 ) );
