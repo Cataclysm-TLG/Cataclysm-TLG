@@ -208,6 +208,10 @@ item_location mdeath::splatter( map *here, monster &z )
             scatter_chunks( here, leftover_id, chunk_amount, *z.type, z.pos_bub(), gib_distance,
                             chunk_amount / ( gib_distance + 1 ) );
         }
+        // We did so much damage that there just isn't anything left.
+        if( overflow_ratio >= 15.0f ) {
+            return {};
+        }
         // Add pulped corpse.
         item corpse = item::make_corpse( z.type->id, calendar::turn, z.unique_name, z.get_upgrade_time() );
         if( corpse.is_null() ) {
