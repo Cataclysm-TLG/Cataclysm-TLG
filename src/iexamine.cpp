@@ -7367,9 +7367,9 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
 
 void iexamine::practice_survival_while_foraging( Character &who )
 {
-    ///\EFFECT_INT Intelligence caps survival skill gains from foraging
+    ///\EFFECT_INT Intelligence caps ecology skill gains from foraging
     const int max_forage_skill = who.int_cur / 3 + 1;
-    ///\EFFECT_SURVIVAL decreases survival skill gain from foraging (NEGATIVE)
+    ///\EFFECT_SURVIVAL decreases ecology skill gain from foraging (NEGATIVE)
     const int max_exp = 2 * ( max_forage_skill - static_cast<int>( who.get_skill_level(
                                   skill_survival ) ) );
     // Award experience for foraging attempt regardless of success
