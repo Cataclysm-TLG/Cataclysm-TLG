@@ -1627,12 +1627,10 @@ void Creature::deal_damage_handle_type( const effect_source &source, const damag
                                         bodypart_id bp, int &damage, int &pain )
 {
     const map &here = get_map();
-
     // Handles ACIDPROOF, electric immunity etc.
     if( is_immune_damage( du.type ) ) {
         return;
     }
-
     // Apply damage multiplier from skill, critical hits or grazes after all other modifications.
     const int adjusted_damage = du.amount * du.damage_multiplier * du.unconditional_damage_mult;
     if( adjusted_damage <= 0 ) {
@@ -1646,10 +1644,9 @@ void Creature::deal_damage_handle_type( const effect_source &source, const damag
         // Bashing damage is less painful
         div = 5.0f;
     } else if( du.type == damage_heat ) {
-        // heat damage sets us on fire sometimes
+        // Heat damage sets us on fire sometimes.
         if( rng( 0, 100 ) < adjusted_damage ) {
             add_effect( source, effect_onfire, rng( 1_turns, 3_turns ), bp );
-
             Character &player_character = get_player_character();
             if( player_character.has_trait( trait_PYROMANIA ) &&
                 !player_character.has_morale( morale_pyromania_startfire ) &&
@@ -1661,7 +1658,7 @@ void Creature::deal_damage_handle_type( const effect_source &source, const damag
             }
         }
     } else if( du.type == damage_electric ) {
-        // Electrical damage adds a major speed/dex debuff
+        // Electrical damage adds a major speed/dex debuff.
         double multiplier = 1.0;
         if( monster *mon = as_monster() ) {
             multiplier = mon->type->status_chance_multiplier;
@@ -1671,7 +1668,6 @@ void Creature::deal_damage_handle_type( const effect_source &source, const damag
             const int duration = std::max( adjusted_damage / 10.0 * multiplier, 2.0 );
             add_effect( source, effect_zapped, 1_turns * duration );
         }
-
         if( Character *ch = as_character() ) {
             const double pain_mult = ch->calculate_by_enchantment( 1.0, enchant_vals::mod::EXTRA_ELEC_PAIN );
             div /= pain_mult;
@@ -1684,11 +1680,10 @@ void Creature::deal_damage_handle_type( const effect_source &source, const damag
         // Acid damage and acid burns are more painful
         div = 3.0f;
     }
-
     on_damage_of_type( source, adjusted_damage, du.type, bp );
-
     damage += adjusted_damage;
-    pain += roll_remainder( adjusted_damage / div );
+    const int final_pain = static_cast<int>( std::round( roll_remainder( adjusted_damage / div ) * get_part_pain_multiplier( bp ) ) );
+    pain += final_pain;
 }
 
 void Creature::heal_bp( bodypart_id /* bp */, int /* dam */ )
@@ -2788,6 +2783,11 @@ int Creature::get_part_drench_capacity( const bodypart_id &id ) const
 int Creature::get_part_wetness( const bodypart_id &id ) const
 {
     return get_part_helper( *this, id, &bodypart::get_wetness );
+}
+
+float Creature::get_part_pain_multiplier( const bodypart_id &id ) const
+{
+    return get_part_helper( *this, id, &bodypart::get_pain_multiplier );
 }
 
 units::temperature Creature::get_part_temp_cur( const bodypart_id &id ) const

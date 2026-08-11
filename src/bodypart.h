@@ -302,18 +302,22 @@ struct body_part_type {
         // Ugliness that can't be covered (obviously nonstandard anatomy, even under bulky armor)
         int ugliness_mandatory = 0;
 
-        // Intrinsic temperature bonus of the bodypart
+        // Intrinsic temperature bonus of the bodypart.
         units::temperature_delta temp_min = 0_C_delta;
-        // Temperature bonus to apply when not overheated
+        // Temperature bonus to apply when not overheated.
         units::temperature_delta temp_max = 0_C_delta;
         int drench_max = 0;
         int drench_increment = 2;
         float drying_rate = 1.0f;
-        // Wetness morale bonus/malus of the limb
+        // Wetness morale bonus/malus of the limb.
         int wet_morale = 0;
+
+        // Multiplier for pain applied when this part takes damage in creature::deal_damage_handle_type().
+        float pain_multiplier = 1.0f;
+
         int technique_enc_limit = 50;
 
-        // this is the number of millijoules used per stamina point
+        // This is the number of millijoules used per stamina point.
         int power_efficiency = 0;
 
         // These limbs should be covered by armor covering this limb (1:1 coverage)
@@ -506,6 +510,7 @@ class bodypart
         int get_damage_bandaged() const;
         int get_damage_disinfected() const;
         int get_drench_capacity() const;
+        float get_pain_multiplier() const;
         int get_wetness() const;
         int get_frostbite_timer() const;
         units::temperature get_temp_cur() const;

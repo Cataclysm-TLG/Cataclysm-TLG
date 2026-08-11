@@ -888,6 +888,7 @@ class Creature : public viewer
         int get_part_damage_bandaged( const bodypart_id &id ) const;
         int get_part_drench_capacity( const bodypart_id &id ) const;
         int get_part_wetness( const bodypart_id &id ) const;
+        float get_part_pain_multiplier( const bodypart_id &id ) const;
         units::temperature get_part_temp_cur( const bodypart_id &id ) const;
         units::temperature get_part_temp_conv( const bodypart_id &id ) const;
         int get_part_frostbite_timer( const bodypart_id &id )const;
