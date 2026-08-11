@@ -661,9 +661,7 @@
   {
     "id": "animal_decay",
     "type": "harvest",
-    "entries": [
-      { "drop": "bone", "type": "bone", "mass_ratio": 0.15 }
-    ]
+    "entries": [ { "drop": "bone", "type": "bone", "mass_ratio": 0.15 } ]
   },
   {
     "id": "animal_antler_decay",
