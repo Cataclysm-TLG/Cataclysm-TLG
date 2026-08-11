@@ -1326,12 +1326,12 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
 #endif
 
     {
-        //set clipping to prevent drawing over stuff we shouldn't
+        // Set clipping to prevent drawing over stuff we shouldn't.
         SDL_Rect clipRect = {dest.x, dest.y, width, height};
         printErrorIf( SDL_RenderSetClipRect( renderer.get(), &clipRect ) != 0,
                       "SDL_RenderSetClipRect failed" );
 
-        //fill render area with black to prevent artifacts where no new pixels are drawn
+        // Fill render area with black to prevent artifacts where no new pixels are drawn.
         geometry->rect( renderer, clipRect, SDL_Color() );
     }
 
@@ -1729,8 +1729,13 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
 
                     here.draw_points_cache[zlevel][row].emplace_back( tile_render_info::common{ pos, 0},
                             tile_render_info::sprite{ ll, invisible } );
-                    // Stop building draw points below when floor reached
-                    if( here.dont_draw_lower_floor( pos ) ) {
+                    /* 
+                        Stop building draw points below when floor reached, unless terrain has DRAW_BELOW,
+                        which is not the same as TRANSPARENT_FLOOR. DRAW_BELOW simply draws whatever's below
+                        the tile but does not allow light to pass through or vision to extend beyond that.
+                        It is currently only used for treetops because of how they're rendered in MSXOtto+.
+                    */
+                    if( here.dont_draw_lower_floor( pos ) && !here.has_flag_ter( ter_furn_flag::TFLAG_DRAW_BELOW, pos ) ) {
                         break;
                     }
                 }
