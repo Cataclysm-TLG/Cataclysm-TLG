@@ -676,7 +676,7 @@
     "sym": "+",
     "color": "light_green",
     "see_cost": "spaced_high",
-    "spawns": { "group": "GROUP_FOREST", "population": [ 0, 1 ], "chance": 13 },
+    "spawns": { "group": "GROUP_FIELD", "population": [ 1, 2 ], "chance": 12 },
     "flags": [ "RISK_LOW", "SOURCE_SAFETY", "SOURCE_FOOD" ]
   },
   {
