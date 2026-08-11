@@ -55,7 +55,7 @@
     "byproducts": [ [ "jabberwock_heart_desiccated" ] ],
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_MUTAGEN",
-    "skill_used": "survival",
+    "skill_used": "cooking",
     "difficulty": 2,
     "time": "5 m",
     "autolearn": true,

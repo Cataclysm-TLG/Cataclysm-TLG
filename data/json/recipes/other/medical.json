@@ -226,7 +226,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
-    "skill_used": "survival",
+    "skill_used": "firstaid",
     "difficulty": 1,
     "time": "5 m",
     "book_learn": [
