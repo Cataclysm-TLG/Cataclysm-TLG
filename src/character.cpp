@@ -5598,7 +5598,6 @@ void Character::update_needs( int rate_multiplier )
                     recovered *= .5;
                 }
                 mod_fatigue( -recovered );
-
                 // Sleeping on the ground, no bionic = 1x rest_modifier
                 // Sleeping on a bed, no bionic      = 2x rest_modifier
                 // Sleeping on a comfy bed, no bionic= 3x rest_modifier
@@ -5619,7 +5618,6 @@ void Character::update_needs( int rate_multiplier )
                 } else if( comfort >= comfort_data::COMFORT_SLIGHTLY_COMFORTABLE ) {
                     rest_modifier *= 2;
                 }
-
                 // If we're just tired, we'll get a decent boost to our sleep quality.
                 // The opposite is true for very tired characters.
                 if( get_fatigue() < fatigue_levels::DEAD_TIRED ) {
@@ -5629,7 +5627,6 @@ void Character::update_needs( int rate_multiplier )
                 }
                 // Recovered is multiplied by 2 as well, since we spend 1/3 of the day sleeping
                 mod_sleep_deprivation( -rest_modifier * ( recovered * 2 ) );
-
             }
         }
         map &here = get_map();
@@ -9092,13 +9089,8 @@ void Character::blossoms()
 
 void Character::update_vitamins( const vitamin_id &vit )
 {
-    if( !needs_food() ) {
-        return; // NPCs can only develop vitamin diseases if their needs are enabled
-    }
-
     efftype_id def = vit.obj().deficiency();
     efftype_id exc = vit.obj().excess();
-
     int lvl = vit.obj().severity( vitamin_get( vit ) );
     if( lvl <= 0 ) {
         remove_effect( def );

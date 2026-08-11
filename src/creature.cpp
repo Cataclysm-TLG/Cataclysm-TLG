@@ -1587,8 +1587,7 @@ dealt_damage_instance Creature::deal_damage( Creature *source, bodypart_id bp,
     int total_damage = 0;
     int total_base_damage = 0;
     int total_pain = 0;
-    damage_instance d = dam; // copy, since we will mutate in absorb_hit
-
+    damage_instance d = dam; // Copy, since we will mutate in absorb_hit.
     dealt_damage_instance dealt_dams;
     weakpoint_attack attack_copy = attack;
     if( attack.accuracy == -1.0 ) {
@@ -1598,8 +1597,7 @@ dealt_damage_instance Creature::deal_damage( Creature *source, bodypart_id bp,
     }
     const weakpoint *wkpt = absorb_hit( attack_copy, bp, d, wp );
     dealt_dams.wp_hit = wkpt == nullptr ? "" : wkpt->get_name();
-
-    // Add up all the damage units dealt
+    // Add up all the damage units dealt.
     for( const damage_unit &it : d.damage_units ) {
         int cur_damage = 0;
         deal_damage_handle_type( effect_source( source ), it, bp, cur_damage, total_pain );
@@ -1609,9 +1607,8 @@ dealt_damage_instance Creature::deal_damage( Creature *source, bodypart_id bp,
             total_damage += cur_damage;
         }
     }
-    // get eocs for all damage effects
+    // Get eocs for all damage effects.
     d.ondamage_effects( source, this, dam, bp.id() );
-
     if( total_base_damage < total_damage ) {
         // Only deal more HP than remains if damage not including crit multipliers is higher.
         total_damage = clamp( get_hp( bp ), total_base_damage, total_damage );
@@ -1619,15 +1616,13 @@ dealt_damage_instance Creature::deal_damage( Creature *source, bodypart_id bp,
     if( !bp->has_flag( json_flag_BIONIC_LIMB ) ) {
         mod_pain( total_pain );
     }
-
     apply_damage( source, bp, total_damage );
-
     if( wkpt != nullptr ) {
         wkpt->apply_effects( *this, total_damage, attack );
     }
-
     return dealt_dams;
 }
+
 void Creature::deal_damage_handle_type( const effect_source &source, const damage_unit &du,
                                         bodypart_id bp, int &damage, int &pain )
 {

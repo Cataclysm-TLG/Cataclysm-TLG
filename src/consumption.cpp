@@ -682,7 +682,6 @@ int Character::vitamin_mod( const vitamin_id &vit, int qty )
     // (Okay, technically it returns a pair<iterator, bool>, the iterator is what we want)
     auto it = vitamin_levels.emplace( vit, 0 ).first;
     const vitamin &v = *it->first;
-
     if( qty > 0 ) {
         it->second = std::min( it->second + qty, v.max() );
         // update the daily trackers too while here
@@ -693,7 +692,6 @@ int Character::vitamin_mod( const vitamin_id &vit, int qty )
         } else {
             daily_vitamins[vit].second = daily_vitamins_max;
         }
-
     } else if( qty < 0 ) {
         it->second = std::max( it->second + qty, v.min() );
         update_vitamins( vit );
@@ -703,7 +701,8 @@ int Character::vitamin_mod( const vitamin_id &vit, int qty )
             }
         }
     }
-
+    // We must always call update_vitamins() because effects must be both applied and removed.
+    update_vitamins( vit );
     return it->second;
 }
 
