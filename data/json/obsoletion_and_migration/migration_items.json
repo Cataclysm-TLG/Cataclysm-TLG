@@ -4202,5 +4202,15 @@
     "type": "MIGRATION",
     "id": "leatherbone_armor_horse",
     "replace": "leather_armor_horse"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "javelin_fletched",
+    "replace": "javelin_iron"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "javelin_fletched_bronze",
+    "replace": "javelin"
   }
 ]
