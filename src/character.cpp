@@ -2196,7 +2196,7 @@ bool Character::is_dead_state() const
     }
 
     cached_dead_state = false;
-    // we want to warn the player with a debug message if they are invincible. this should be unimportant once wounds exist and bleeding is how you die.
+    // We want to warn the player with a debug message if they are invincible.
     bool has_vitals = false;
     for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
         if( bp->is_vital ) {

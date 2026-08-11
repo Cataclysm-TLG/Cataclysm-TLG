@@ -377,7 +377,6 @@
     "color": "dark_gray",
     "warmth": 10,
     "material_thickness": 3,
-    "environmental_protection": 1,
     "qualities": [ [ "GLARE", 1 ] ],
     "flags": [ "SUN_GLASSES", "FLASH_PROTECTION" ],
     "armor": [
@@ -388,7 +387,8 @@
         "specifically_covers": [ "head_forehead", "head_ear_r", "head_ear_l" ]
       },
       { "encumbrance": 0, "coverage": 30, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] },
-      { "encumbrance": 40, "coverage": 90, "covers": [ "eyes", "mouth" ], "rigid_layer_only": true }
+      { "encumbrance": 90, "coverage": 90, "covers": [ "eyes" ], "rigid_layer_only": true },
+      { "encumbrance": 5, "coverage": 90, "covers": [ "mouth" ], "rigid_layer_only": true }
     ]
   },
   {
@@ -413,7 +413,6 @@
     "color": "dark_gray",
     "warmth": 12,
     "material_thickness": 2,
-    "environmental_protection": 1,
     "qualities": [ [ "GLARE", 1 ] ],
     "flags": [ "SUN_SHADE", "FLASH_PROTECTION" ],
     "armor": [
@@ -424,7 +423,8 @@
         "specifically_covers": [ "head_forehead", "head_ear_r", "head_ear_l" ]
       },
       { "encumbrance": 0, "coverage": 30, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] },
-      { "encumbrance": 45, "coverage": 90, "covers": [ "eyes", "mouth" ], "rigid_layer_only": true }
+      { "encumbrance": 90, "coverage": 90, "covers": [ "eyes" ], "rigid_layer_only": true },
+      { "encumbrance": 5, "coverage": 90, "covers": [ "mouth" ], "rigid_layer_only": true }
     ]
   },
   {

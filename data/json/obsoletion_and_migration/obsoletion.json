@@ -266,6 +266,10 @@
     "type": "effect_on_condition"
   },
   {
+    "id": "chitin_carapace_molt_timer3",
+    "type": "effect_on_condition"
+  },
+  {
     "id": "chitin_carapace_molt_timer4",
     "type": "effect_on_condition"
   },

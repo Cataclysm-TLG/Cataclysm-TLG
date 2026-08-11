@@ -54,7 +54,7 @@
     "charges_per_use": 0,
     "revert_to": "masonrysaw_off",
     "techniques": [ "SWEEP" ],
-    "qualities": [ [ "AXE", 3 ], [ "BUTCHER", -100 ] ],
+    "qualities": [ [ "BUTCHER", -100 ] ],
     "use_action": {
       "type": "effect_on_conditions",
       "menu_text": "Turn off",
@@ -132,7 +132,7 @@
     "charges_per_use": 0,
     "revert_to": "electric_masonrysaw_off",
     "techniques": [ "SWEEP" ],
-    "qualities": [ [ "AXE", 3 ], [ "BUTCHER", -100 ] ],
+    "qualities": [ [ "BUTCHER", -100 ] ],
     "use_action": [
       {
         "type": "effect_on_conditions",
@@ -259,7 +259,7 @@
     "charges_per_use": 0,
     "revert_to": "heavy_masonrysaw_off",
     "techniques": [ "SWEEP" ],
-    "qualities": [ [ "AXE", 3 ], [ "BUTCHER", -100 ] ],
+    "qualities": [ [ "BUTCHER", -100 ] ],
     "use_action": { "target": "heavy_masonrysaw_off", "msg": "The %s goes quiet.", "menu_text": "Turn off", "type": "transform" },
     "tick_action": {
       "type": "effect_on_conditions",
