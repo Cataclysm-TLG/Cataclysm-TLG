@@ -8091,7 +8091,7 @@ void map::drawsq( const catacurses::window &w, const tripoint_bub_ms &p,
     draw_from_above( w, below, tile_below, params );
 }
 
-// a check to see if the lower floor needs to be rendered in tiles
+// A check to see if the lower floor needs to be rendered in tiles.
 bool map::dont_draw_lower_floor( const tripoint_bub_ms &p ) const
 {
     if( !zlevels || p.z() <= -OVERMAP_DEPTH ) {

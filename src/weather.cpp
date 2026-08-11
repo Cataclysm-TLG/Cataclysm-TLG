@@ -927,13 +927,13 @@ static bool has_sunlight_access( const tripoint_bub_ms &pos )
     tripoint_bub_ms checked_pnt = pos;
     const map &here = get_map();
     while( checked_pnt.z() < OVERMAP_HEIGHT ) {
-        const tripoint_bub_ms pnt_above = {checked_pnt.xy(), checked_pnt.z() + 1 };
+        const tripoint_bub_ms pnt_above = { checked_pnt.xy(), checked_pnt.z() + 1 };
         const bool should_check_above = pnt_above.z() < OVERMAP_HEIGHT;
-        // If checking above would take us outside of game bounds, just assume that it's all open air up there.
         const bool transparent_roof = should_check_above ?
-                                      here.has_flag_ter( "NO_FLOOR", pnt_above ) || here.has_flag_ter( "TRANSPARENT_FLOOR", pnt_above ) :
+                                      here.has_flag_ter( "NO_FLOOR", pnt_above ) ||
+                                      here.has_flag_ter( "TRANSPARENT_FLOOR", pnt_above ) :
                                       true;
-        if( !here.is_outside( checked_pnt ) && !transparent_roof ) {
+        if( !transparent_roof ) {
             return false;
         }
         checked_pnt = pnt_above;
