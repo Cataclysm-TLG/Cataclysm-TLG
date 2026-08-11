@@ -88,8 +88,6 @@ static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_wet( "wet" );
 
-
-
 static const json_character_flag json_flag_BARKY( "BARKY" );
 static const json_character_flag json_flag_CANNOT_CHANGE_TEMPERATURE( "CANNOT_CHANGE_TEMPERATURE" );
 static const json_character_flag json_flag_COLDBLOOD( "COLDBLOOD" );
@@ -128,6 +126,9 @@ static const trait_id trait_SLIMY( "SLIMY" );
 static const trait_id trait_URSINE_FUR( "URSINE_FUR" );
 
 static const vitamin_id vitamin_blood( "blood" );
+static const vitamin_id vitamin_calcium( "calcium" );
+static const vitamin_id vitamin_iron( "iron" );
+static const vitamin_id vitamin_vitC( "vitC" );
 
 void Character::update_body_wetness( const w_point &weather )
 {
@@ -262,7 +263,6 @@ void Character::update_body( const time_point &from, const time_point &to )
     const int five_mins = ticks_between( from, to, 5_minutes );
     if( five_mins > 0 ) {
         activity_history.try_reduce_weariness( base_bmr() );
-
         check_needs_extremes();
         update_needs( five_mins );
         regen( five_mins );
@@ -270,6 +270,17 @@ void Character::update_body( const time_point &from, const time_point &to )
         // TODO: change @ref mend to take time_duration
         mend( five_mins * to_turns<int>( 5_minutes ) );
         activity_history.reset_activity_level();
+        // Ensure that NPCs outside the player faction don't die of scurvy.
+        if( !needs_food() ) {
+            vitamin_set( vitamin_vitC, 0 );
+            vitamin_set( vitamin_iron, 0 );
+            vitamin_set( vitamin_calcium, 0 );
+        }
+        /* This is called in vitamin_mod, but we call it again here as a fallback so
+           hypovolemia etc don't get stuck on a character who should have recovered by now. */
+        for( const auto &v : vitamin::all() ) {
+            update_vitamins( v.first );
+        }
     }
     bool was_sleeping = get_value( "was_sleeping" ).str() == "true";
     if( in_sleep_state() && was_sleeping ) {
@@ -1110,7 +1121,7 @@ void Character::update_stomach( const time_point &from, const time_point &to )
             mod_stored_calories( -std::floor( five_mins * kcal_per_time * 1000 ) );
         }
     }
-    // if foodless no need to calc hunger, and set hunger_effect
+    // If foodless, no need to calc hunger, and set hunger_effect.
     if( foodless ) {
         return;
     }
