@@ -996,7 +996,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_SUIT",
-    "skill_used": "survival",
+    "skill_used": "tailor",
     "difficulty": 2,
     "reversible": true,
     "autolearn": true,

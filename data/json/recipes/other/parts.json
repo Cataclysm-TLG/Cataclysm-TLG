@@ -908,7 +908,7 @@
     "result": "sharp_rock",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
-    "skill_used": "survival",
+    "skill_used": "fabrication",
     "time": "2 m",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_knapping", "time_multiplier": 1.25, "skill_penalty": 0.1 } ],

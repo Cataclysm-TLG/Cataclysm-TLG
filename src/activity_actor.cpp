@@ -5294,7 +5294,7 @@ void harvest_activity_actor::finish( player_activity &act, Character &who )
     bool got_anything = false;
     for( const harvest_entry &entry : here.get_harvest( target ).obj() ) {
         /* Assuming perfect visibility and 10 perception, entry.difficulty is the
-           survival skill that would be required to reach the cap. 0 entry.difficulty
+           ecology skill that would be required to reach the cap. 0 entry.difficulty
            bypasses the hard cap. */
         int difficulty = entry.difficulty * 3 + 13;
         int forage_roll = rng( 0, difficulty );
@@ -9095,7 +9095,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
 
     float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
 
-    // Multiplier to get the chance right + some bonus for survival skill.
+    // Multiplier to get the chance right + some bonus for ecology skill.
     pulp_power *= 20 + you.get_skill_level( skill_survival ) * 5;
     int moves = 0;
     for( auto pos_iter = placement.cbegin(); pos_iter != placement.end();/*left - out*/ ) {
