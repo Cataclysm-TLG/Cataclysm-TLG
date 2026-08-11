@@ -74,7 +74,7 @@
     "type": "item_group",
     "id": "NC_NONE_HARDENED_throw",
     "subtype": "distribution",
-    "entries": [ { "group": "NC_NONE_throw", "prob": 50 }, { "item": "javelin_fletched", "prob": 50 } ]
+    "entries": [ { "group": "NC_NONE_throw", "prob": 50 } ]
   },
   {
     "type": "item_group",

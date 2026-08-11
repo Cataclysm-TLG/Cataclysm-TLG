@@ -1402,60 +1402,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
-    "result": "javelin_fletched",
-    "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_RANGED",
-    "skill_used": "fabrication",
-    "skills_required": [ "throw", 1 ],
-    "difficulty": 3,
-    "time": "2 h",
-    "autolearn": true,
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" },
-      { "proficiency": "prof_fletching" },
-      { "proficiency": "prof_carving" }
-    ],
-    "using": [ [ "blacksmithing_standard", 2 ], [ "steel_tiny", 2 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "leather_patch", 1 ], [ "fur_patch", 1 ], [ "cordage_short", 2, "LIST" ], [ "filament", 100, "LIST" ] ],
-      [ [ "stick_long", 1 ] ],
-      [ [ "fletching", 2, "LIST" ] ]
-    ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
-    "result": "javelin_fletched_bronze",
-    "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_RANGED",
-    "skill_used": "fabrication",
-    "skills_required": [ "throw", 1 ],
-    "difficulty": 3,
-    "time": "1 h",
-    "autolearn": true,
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_redsmithing" },
-      { "proficiency": "prof_fletching" },
-      { "proficiency": "prof_carving" }
-    ],
-    "using": [ [ "redsmithing_standard", 2 ] ],
-    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
-    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "GRIND", "level": 2 } ],
-    "components": [
-      [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "leather_patch", 1 ], [ "fur_patch", 1 ], [ "cordage_short", 2, "LIST" ], [ "filament", 100, "LIST" ] ],
-      [ [ "bronze_fragment", 2 ] ],
-      [ [ "stick_long", 1 ] ],
-      [ [ "fletching", 2, "LIST" ] ]
-    ]
-  },
-  {
-    "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
     "result": "air_launcher",
     "category": "CC_WEAPON",
