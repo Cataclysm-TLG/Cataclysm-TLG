@@ -3578,8 +3578,8 @@ void monster::process_effects()
         const float light = here.ambient_light_at( pos_bub() );
         // Magic number 10000 was chosen so that a floodlight prevents regeneration in a range of 20 tiles
         // TODO: Fix this horseshit
-        const float dHP = 50.0 * std::exp( - light * light / 10000 );
-        if( heal( static_cast<int>( dHP ) ) > 0 && one_in( 2 ) ) {
+        const int dHP = std::clamp( static_cast<int>( 30.0 * std::exp( - light * light / 10000 ) ), 0, 30 );
+        if( heal( dHP ) > 0 && one_in( 31 - dHP ) ) {
             add_msg_if_player_sees( *this, m_warning, _( "The %s uses the darkness to regenerate." ), name() );
         }
     }
