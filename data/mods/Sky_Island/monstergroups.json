@@ -176,7 +176,7 @@
     "monsters": [
       { "monster": "mon_mi_go", "weight": 200 },
       { "monster": "mon_mi_go_scout", "weight": 25 },
-      { "monster": "mon_mi_go_slaver", "weight": 15 },
+      { "monster": "mon_mi_go_abductor", "weight": 15 },
       { "monster": "mon_mi_go_surgeon", "weight": 10 }
     ]
   },
