@@ -149,6 +149,8 @@ class outfit
         int collar_warmth() const;
         /** Returns warmth provided by armor, etc. */
         std::map<bodypart_id, int> warmth( const Character &guy ) const;
+        /** Returns wind resistance provided by worn items. */
+        std::map<bodypart_id, int> wind_resistance( const Character &guy ) const;
         int get_env_resist( bodypart_id bp ) const;
         int sum_filthy_cover( bodypart_id bp ) const;
         bool is_wearing_active_optcloak() const;
