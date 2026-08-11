@@ -930,9 +930,9 @@ static bool has_sunlight_access( const tripoint_bub_ms &pos )
         const tripoint_bub_ms pnt_above = { checked_pnt.xy(), checked_pnt.z() + 1 };
         const bool should_check_above = pnt_above.z() < OVERMAP_HEIGHT;
         const bool transparent_roof = should_check_above ?
-                                    here.has_flag_ter( "NO_FLOOR", pnt_above ) ||
-                                    here.has_flag_ter( "TRANSPARENT_FLOOR", pnt_above ) :
-                                    true;
+                                      here.has_flag_ter( "NO_FLOOR", pnt_above ) ||
+                                      here.has_flag_ter( "TRANSPARENT_FLOOR", pnt_above ) :
+                                      true;
         if( !transparent_roof ) {
             return false;
         }

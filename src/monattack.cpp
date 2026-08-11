@@ -1215,11 +1215,12 @@ bool mattack::resurrect( monster *z )
             if( one_in( 2 ) ) {
                 if( one_in( 2 ) ) {
                     add_msg_if_player_sees( raised.first, _( "The %s twitches and spasms." ),
-                        raised.second->tname() );
+                                            raised.second->tname() );
                     raised.second->mod_damage( -750 );
                 } else {
-                    add_msg_if_player_sees( raised.first, _( "The %s thrashes so violently that it nearly tears itself apart!" ),
-                        raised.second->tname() );
+                    add_msg_if_player_sees( raised.first,
+                                            _( "The %s thrashes so violently that it nearly tears itself apart!" ),
+                                            raised.second->tname() );
                     raised.second->mod_damage( 750 );
                     if( raised.second->damage() >= raised.second->max_damage() ) {
                         raised.second->set_flag( flag_PULPED );
