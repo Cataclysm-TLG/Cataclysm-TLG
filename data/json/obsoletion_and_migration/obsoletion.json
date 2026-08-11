@@ -266,6 +266,10 @@
     "type": "effect_on_condition"
   },
   {
+    "id": "chitin_carapace_molt_timer4",
+    "type": "effect_on_condition"
+  },
+  {
     "type": "mutation",
     "id": "NO_CBM_INSTALLATION",
     "name": { "str": "Oversensitive System" },
@@ -1290,6 +1294,16 @@
     "name": { "str": "Hair: obsoleted" },
     "points": 0,
     "description": "Replaced with hair_medium_fringe.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "CHITIN_MOLTED",
+    "name": { "str": "Epicuticle (molted) (obsolete)" },
+    "points": 0,
+    "description": "There was never a reason for this mutation to molt.",
     "valid": false,
     "purifiable": false,
     "player_display": false
