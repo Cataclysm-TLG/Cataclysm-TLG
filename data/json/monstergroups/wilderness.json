@@ -92,36 +92,18 @@
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
         "starts": "360 days"
       },
-      {
-        "group": "GROUP_WILDERNESS_FOREST_ZOMBIE",
-        "weight": 50,
-        "starts": "12 days"
-      },
-      {
-        "group": "GROUP_WILDERNESS_FOREST_ZOMBIE",
-        "weight": 50,
-        "starts": "28 days"
-      },
-      {
-        "group": "GROUP_WILDERNESS_FOREST_ZOMBIE",
-        "weight": 20,
-        "starts": "112 days"
-      },
-      {
-        "group": "GROUP_WILDERNESS_FOREST_ZOMBIE",
-        "weight": 50,
-        "starts": "360 days"
-      },
+      { "group": "GROUP_WILDERNESS_FOREST_ZOMBIE", "weight": 50, "starts": "12 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_ZOMBIE", "weight": 50, "starts": "28 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_ZOMBIE", "weight": 20, "starts": "112 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_ZOMBIE", "weight": 50, "starts": "360 days" },
       {
         "monster": "mon_rattlesnake",
         "weight": 3,
         "cost_multiplier": 5,
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
       },
-      { "monster": "mon_bullfrog", "weight": 10,
-        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
-      { "monster": "mon_big_bullfrog", "weight": 7,
-        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] }
+      { "monster": "mon_bullfrog", "weight": 10, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      { "monster": "mon_big_bullfrog", "weight": 7, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] }
     ]
   },
   {
@@ -415,24 +397,9 @@
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
       },
       { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 5, "conditions": [ "WINTER" ] },
-      {
-        "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER",
-        "weight": 5,
-        "ends": "12 days",
-        "conditions": [ "WINTER" ]
-      },
-      {
-        "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER",
-        "weight": 5,
-        "ends": "112 days",
-        "conditions": [ "WINTER" ]
-      },
-      {
-        "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER",
-        "weight": 5,
-        "ends": "360 days",
-        "conditions": [ "WINTER" ]
-      },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 5, "ends": "12 days", "conditions": [ "WINTER" ] },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 5, "ends": "112 days", "conditions": [ "WINTER" ] },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 5, "ends": "360 days", "conditions": [ "WINTER" ] },
       { "group": "GROUP_WILDERNESS_FIELD_BIRD", "weight": 20 },
       {
         "group": "GROUP_WILDERNESS_FIELD_INSECT_HARMLESS",
@@ -458,11 +425,7 @@
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
         "starts": "360 days"
       },
-      {
-        "group": "GROUP_WILDERNESS_FIELD_ZOMBIE",
-        "weight": 3,
-        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
-      },
+      { "group": "GROUP_WILDERNESS_FIELD_ZOMBIE", "weight": 3, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
       {
         "group": "GROUP_WILDERNESS_FIELD_ZOMBIE",
         "weight": 3,
