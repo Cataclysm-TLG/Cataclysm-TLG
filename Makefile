@@ -577,11 +577,7 @@ ifeq ($(NATIVE), osx)
     endif
   endif
   ifdef FRAMEWORK
-    ifeq ($(SDL3), 1)
-      SDL_FRAMEWORK_GLOB := SDL3.*
-    else
-      SDL_FRAMEWORK_GLOB := SDL2.*
-    endif
+    SDL_FRAMEWORK_GLOB := SDL3.*
     ifeq ($(FRAMEWORKSDIR),)
       FRAMEWORKSDIR := $(strip $(if $(shell [ -d $(HOME)/Library/Frameworks ] && echo 1), \
                              $(if $(shell find $(HOME)/Library/Frameworks -name '$(SDL_FRAMEWORK_GLOB)'), \
@@ -714,27 +710,46 @@ endif
 PKG_CONFIG = $(CROSS)pkg-config
 
 # Utility targets should not require desktop SDL dependencies just because CI
-# exported SDL3=1 for build jobs.
+# exported TILES=1 for build jobs.
 NO_SDL_GOALS = clean clean-lang clean-tests distclean localization lang/mo_built.stamp
 ifneq ($(MAKECMDGOALS),)
   ifeq ($(filter-out $(NO_SDL_GOALS),$(MAKECMDGOALS)),)
-    override SDL3 = 0
     override SDL = 0
     override TILES = 0
     override SOUND = 0
   endif
 endif
 
-ifeq ($(TILES), 1)
-  ifeq ($(origin SDL3), undefined)
-    SDL3 = 1
+# SDL2 support was removed; SDL3 is the only tiles backend. SDL3=1 stays a
+# spelling of TILES=1 so old command lines keep working, and SDL3=0 is a hard
+# error rather than a silent switch to a curses build.
+ifeq ($(SDL3), 1)
+  TILES = 1
+endif
+ifeq ($(SDL3), 0)
+  ifeq ($(TILES), 1)
+    $(error SDL3=0 is no longer supported: SDL2 support was removed and SDL3 is the only tiles backend. Drop the flag, or build without TILES=1 for a text-only compilation)
   endif
 endif
 
-ifeq ($(SDL3), 1)
+ifeq ($(TILES), 1)
   SDL = 1
-  TILES = 1
-  DEFINES += -DUSE_SDL3
+  # SDL_SetGPURenderState and SDL_GetGPURendererDevice were added in SDL 3.4.0.
+  # macOS FRAMEWORK builds resolve SDL3 via Apple framework lookup rather than
+  # pkg-config, so skip the version check there; non-framework macOS still
+  # uses pkg-config and gets the check.
+  SDL3_DO_VERSION_CHECK := 1
+  ifeq ($(NATIVE),osx)
+    ifdef FRAMEWORK
+      SDL3_DO_VERSION_CHECK :=
+    endif
+  endif
+  ifeq ($(SDL3_DO_VERSION_CHECK),1)
+    SDL3_VERSION_OK := $(shell $(PKG_CONFIG) --atleast-version=3.4.0 sdl3 && echo ok)
+    ifneq ($(SDL3_VERSION_OK),ok)
+      $(error SDL3 >= 3.4.0 required for the GPU shader path; install or build a newer SDL3 (see doc/c++/COMPILING.md SDL3 section))
+    endif
+  endif
 endif
 
 ifeq ($(SDL), 1)
@@ -745,99 +760,43 @@ ifeq ($(TILES), 1)
   SDL = 1
   BINDIST_EXTRAS += gfx
   ifeq ($(NATIVE),osx)
-   ifeq ($(SDL3), 1)
-      ifdef FRAMEWORK
-        OSX_INC = -F$(FRAMEWORKSDIR) \
+    ifdef FRAMEWORK
+      OSX_INC = -F$(FRAMEWORKSDIR) \
 		-I$(FRAMEWORKSDIR)/SDL3.framework/Headers \
 		-I$(FRAMEWORKSDIR)/SDL3_image.framework/Headers \
 		-I$(FRAMEWORKSDIR)/SDL3_ttf.framework/Headers
-        LDFLAGS += -F$(FRAMEWORKSDIR) -rpath $(FRAMEWORKSDIR) \
+      LDFLAGS += -F$(FRAMEWORKSDIR) -rpath $(FRAMEWORKSDIR) \
 		 -framework SDL3 -framework SDL3_image -framework SDL3_ttf -framework Cocoa
-        CXXFLAGS += $(OSX_INC)
-      else
-        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3 sdl3-image sdl3-ttf))
-        LDFLAGS += -framework Cocoa $(shell $(PKG_CONFIG) --libs sdl3 sdl3-image sdl3-ttf)
-      endif
+      CXXFLAGS += $(OSX_INC)
     else
-      ifdef FRAMEWORK
-        OSX_INC = -F$(FRAMEWORKSDIR) \
-		-I$(FRAMEWORKSDIR)/SDL2.framework/Headers \
-		-I$(FRAMEWORKSDIR)/SDL2_image.framework/Headers \
-		-I$(FRAMEWORKSDIR)/SDL2_ttf.framework/Headers
-			ifeq ($(SOUND), 1)
-				OSX_INC += -I$(FRAMEWORKSDIR)/SDL2_mixer.framework/Headers
-			endif
-        LDFLAGS += -F$(FRAMEWORKSDIR) -rpath $(FRAMEWORKSDIR) \
-		 -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework Cocoa
-		 ifeq ($(SOUND), 1)
-		 	LDFLAGS += -framework SDL2_mixer
-		 endif
-        CXXFLAGS += $(OSX_INC)
-      else # libsdl build
-        DEFINES += -DOSX_SDL2_LIBS
-        # handle #include "SDL2/SDL.h" and "SDL.h"
-        CXXFLAGS += $(subst -I,-isystem ,$(shell sdl2-config --cflags)) \
-		  -I$(shell dirname $(shell sdl2-config --cflags | sed 's/-I\(.[^ ]*\) .*/\1/'))
-        LDFLAGS += -framework Cocoa $(shell sdl2-config --libs) -lSDL2_ttf
-        LDFLAGS += -lSDL2_image
-        ifeq ($(SOUND), 1)
-          LDFLAGS += -lSDL2_mixer
-        endif
-      endif
+      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3 sdl3-image sdl3-ttf))
+      LDFLAGS += -framework Cocoa $(shell $(PKG_CONFIG) --libs sdl3 sdl3-image sdl3-ttf)
     endif
     CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
     LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
   else ifneq ($(NATIVE),emscripten)
-    ifeq ($(SDL3), 1)
-      ifeq ($(MSYS2),1)
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl3)
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf)
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
-      else
-        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3))
-        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf))
-        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
-      endif
-      ifeq ($(STATIC), 1)
-        LDFLAGS += $(shell $(PKG_CONFIG) sdl3 --static --libs)
-      else
-        LDFLAGS += $(shell $(PKG_CONFIG) sdl3 --libs)
-      endif
+    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3))
+    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf))
+    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
 
-      LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-image sdl3-ttf)
-      LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
+    ifeq ($(STATIC), 1)
+      LDFLAGS += $(shell $(PKG_CONFIG) sdl3 --static --libs)
     else
-      ifeq ($(MSYS2),1)
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2)
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_image SDL2_ttf)
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
-      else
-        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl2))
-        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_image SDL2_ttf))
-        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
-      endif
-
-      ifeq ($(STATIC), 1)
-        LDFLAGS += $(shell $(PKG_CONFIG) sdl2 --static --libs)
-      else
-        LDFLAGS += $(shell $(PKG_CONFIG) sdl2 --libs)
-      endif
-
-      LDFLAGS += -lSDL2_ttf -lSDL2_image
-      LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
+      LDFLAGS += $(shell $(PKG_CONFIG) sdl3 --libs)
     endif
+
+    LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-image sdl3-ttf)
+    LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
   endif
 
   DEFINES += -DTILES
 
   ifeq ($(TARGETSYSTEM),WINDOWS)
     ifndef DYNAMIC_LINKING
-      # These differ depending on what SDL2 is configured to use.
+      # These differ depending on what SDL is configured to use.
       ifneq (,$(findstring mingw32,$(CROSS)))
         # We use pkg-config to find out which libs are needed with MXE
-        LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_image SDL2_ttf)
-        # We don't use SDL_main -- we have proper main()/WinMain()
-        LDFLAGS := $(filter-out -lSDL2main,$(LDFLAGS))
+        LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-image sdl3-ttf)
       else
         ifeq ($(MSYS2),1)
           LDFLAGS += -Wl,--start-group -lharfbuzz -lfreetype -Wl,--end-group -lgraphite2 -lpng -lz -ltiff -lbz2 -lglib-2.0 -llzma -lws2_32 -lwebp -ljpeg -luuid
@@ -846,7 +805,7 @@ ifeq ($(TILES), 1)
         endif
       endif
     else
-      # Currently none needed by the game itself (only used by SDL2 layer).
+      # Currently none needed by the game itself (only used by the SDL layer).
       # Placeholder for future use (savegame compression, etc).
       LDFLAGS +=
     endif
@@ -902,40 +861,10 @@ ifeq ($(MSYS2),1)
 endif
 
 ifeq ($(SOUND), 1)
-  ifeq ($(SDL3), 1)
-    ifeq ($(MSYS2),1)
-      CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl3-mixer)
-    else
-      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-mixer))
-    endif
-    LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-mixer)
-    ifneq ($(NATIVE),osx)
-      LDFLAGS += -lpthread
-    endif
-  else
-    ifeq ($(NATIVE),osx)
-      ifndef FRAMEWORK # libsdl build
-        ifeq ($(MACPORTS), 1)
-          LDFLAGS += -lSDL2_mixer -lvorbisfile -lvorbis -logg
-        else # homebrew
-          CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_mixer))
-          LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
-          LDFLAGS += -lvorbisfile -lvorbis -logg
-        endif
-      endif
-    else # not osx
-      ifeq ($(MSYS2),1)
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
-      else
-        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_mixer))
-      endif
-      LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
-      LDFLAGS += -lpthread
-    endif
-
-    ifeq ($(MSYS2),1)
-      LDFLAGS += -lmpg123 -lshlwapi -lvorbisfile -lvorbis -logg -lflac
-    endif
+  CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-mixer))
+  LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-mixer)
+  ifneq ($(NATIVE),osx)
+    LDFLAGS += -lpthread
   endif
 
   CXXFLAGS += -DSDL_SOUND
@@ -943,7 +872,6 @@ endif
 
 # We don't use SDL_main -- we have proper main()/WinMain()
 CXXFLAGS := $(filter-out -Dmain=SDL_main,$(CXXFLAGS))
-LDFLAGS := $(filter-out -lSDL2main,$(LDFLAGS))
 LDFLAGS := $(filter-out -lSDL3main,$(LDFLAGS))
 
 ifeq ($(BSD), 1)
@@ -987,19 +915,15 @@ ifeq ($(TARGETSYSTEM),LINUX)
   CFLAGS += -mcx16
   CXXFLAGS += -mcx16
   BINDIST_EXTRAS += cataclysm-launcher
-  ifeq ($(SDL3),1)
+  ifeq ($(TILES),1)
     # bundle-sdl3-linux.sh fills bindist/lib/; RUNPATH=$$ORIGIN/lib lets
     # the binary resolve bundled libs without the launcher.
     LDFLAGS += -Wl,-rpath,'$$ORIGIN/lib'
     BUNDLE_SDL3_LINUX = 1
   endif
   ifneq ("$(wildcard LICENSE-SDL.txt)","")
-    ifneq ($(SDL3),1)
-      SDL_solibs = $(shell ldd $(TARGET) | grep libSDL2-2\.0 | cut -d ' ' -f 3)
-      INSTALL_EXTRAS += $(SDL_solibs)
-    endif
     BINDIST_EXTRAS += LICENSE-SDL.txt
-    ifeq ($(SDL3),1)
+    ifeq ($(TILES),1)
       ifneq ("$(wildcard LICENSE-SDL3_image.txt)","")
         BINDIST_EXTRAS += LICENSE-SDL3_image.txt
       endif
@@ -1098,6 +1022,33 @@ ifdef LANGUAGES
   L10N = localization
 endif
 
+ifeq ($(TILES), 1)
+  SHADERS_DIR := data/shaders
+  SHADERS_SRC := $(wildcard $(SHADERS_DIR)/*.frag $(SHADERS_DIR)/*.vert)
+  # Default the shader format set to whatever the local GPU backend can
+  # consume: Vulkan on Linux (SPIR-V), Metal on macOS (MSL), D3D12 on
+  # Windows (DXIL). MSL and DXIL require shadercross; if it is missing the
+  # build errors out at the shader compile step rather than shipping
+  # artifacts the runtime variant_pass cannot load. Override
+  # BUILD_SHADER_FORMATS to add more formats when shipping a multi-platform
+  # bindist.
+  ifeq ($(NATIVE),osx)
+    BUILD_SHADER_FORMATS ?= msl
+  else ifeq ($(NATIVE),win64)
+    BUILD_SHADER_FORMATS ?= dxil
+  else ifeq ($(NATIVE),win32)
+    BUILD_SHADER_FORMATS ?= dxil
+  else
+    BUILD_SHADER_FORMATS ?= spv
+  endif
+  # Stamp filename encodes the format set so switching BUILD_SHADER_FORMATS
+  # invalidates the stamp and forces a rebuild. Hyphen-separated to avoid
+  # commas in filenames; matches the CMake and MSVC prebuild stamp names.
+  # Old stamps from different combos remain harmless; the clean rule wipes them.
+  comma := ,
+  SHADERS_STAMP := $(SHADERS_DIR)/build-$(subst $(comma),-,$(BUILD_SHADER_FORMATS)).stamp
+endif
+
 ifeq ($(TARGETSYSTEM), LINUX)
   ifneq ($(PREFIX),)
     DEFINES += -DPREFIX="$(PREFIX)" -DDATA_DIR_PREFIX
@@ -1153,7 +1104,12 @@ LDFLAGS += -lz
 all: $(CHECKS) $(TARGET) $(L10N) $(ZZIP_BIN)
 	@
 
-$(TARGET): $(OBJS)
+ifeq ($(TILES), 1)
+$(SHADERS_STAMP): $(SHADERS_SRC) tools/build_shaders.py
+	python3 tools/build_shaders.py --shader-dir $(SHADERS_DIR) --formats $(BUILD_SHADER_FORMATS) --stamp $@
+endif
+
+$(TARGET): $(OBJS) $(SHADERS_STAMP)
 	+$(LD) $(W32FLAGS) -o $(TARGET) $(OBJS) $(LDFLAGS)
 ifeq ($(RELEASE), 1)
   ifndef DEBUG_SYMBOLS
@@ -1277,6 +1233,9 @@ endif
 ifeq ($(SOUND), 1)
 	cp -R --no-preserve=ownership data/sound $(DATA_PREFIX)
 endif
+ifeq ($(TILES), 1)
+	cp -R --no-preserve=ownership data/shaders $(DATA_PREFIX)
+endif
 	install --mode=644 data/changelog.txt data/cataicon.ico data/fontdata.json \
                    LICENSE.txt LICENSE-OFL-Terminus-Font.txt -t $(DATA_PREFIX)
 ifdef LANGUAGES
@@ -1312,6 +1271,9 @@ endif
 ifeq ($(SOUND), 1)
 	cp -R --no-preserve=ownership data/sound $(DATA_PREFIX)
 endif
+ifeq ($(TILES), 1)
+	cp -R --no-preserve=ownership data/shaders $(DATA_PREFIX)
+endif
 	install --mode=644 data/changelog.txt data/cataicon.ico data/fontdata.json \
                    LICENSE.txt LICENSE-OFL-Terminus-Font.txt -t $(DATA_PREFIX)
 ifdef LANGUAGES
@@ -1324,10 +1286,6 @@ ifeq ($(NATIVE), osx)
 APPTARGETDIR=Cataclysm.app
 APPRESOURCESDIR=$(APPTARGETDIR)/Contents/Resources
 APPDATADIR=$(APPRESOURCESDIR)/data
-ifndef FRAMEWORK
-  SDLLIBSDIR=$(shell sdl2-config --libs | sed -n 's/.*-L\([^ ]*\) .*/\1/p')
-endif  # ifndef FRAMEWORK
-
 appclean:
 	rm -rf $(APPTARGETDIR)
 	rm -f data/options.txt
@@ -1372,20 +1330,14 @@ ifeq ($(TILES), 1)
 ifeq ($(SOUND), 1)
 	cp -R data/sound $(APPDATADIR)
 endif  # ifeq ($(SOUND), 1)
+ifeq ($(TILES), 1)
+	cp -R data/shaders $(APPDATADIR)
+endif  # ifeq ($(TILES), 1)
 	cp -R gfx $(APPRESOURCESDIR)/
 ifdef FRAMEWORK
-ifeq ($(SDL3), 1)
 	cp -R $(FRAMEWORKSDIR)/SDL3.framework $(APPRESOURCESDIR)/
 	cp -R $(FRAMEWORKSDIR)/SDL3_image.framework $(APPRESOURCESDIR)/
 	cp -R $(FRAMEWORKSDIR)/SDL3_ttf.framework $(APPRESOURCESDIR)/
-else
-	cp -R $(FRAMEWORKSDIR)/SDL2.framework $(APPRESOURCESDIR)/
-	cp -R $(FRAMEWORKSDIR)/SDL2_image.framework $(APPRESOURCESDIR)/
-	cp -R $(FRAMEWORKSDIR)/SDL2_ttf.framework $(APPRESOURCESDIR)/
-ifeq ($(SOUND), 1)
-	cp -R $(FRAMEWORKSDIR)/SDL2_mixer.framework $(APPRESOURCESDIR)/
-endif  # ifeq ($(SOUND), 1)
-endif  # ifeq ($(SDL3), 1)
 endif  # ifdef FRAMEWORK
 endif  # ifdef TILES
 ifeq ($(SDL3), 1)
@@ -1419,11 +1371,11 @@ ifdef OSXCROSS
 	rm Cataclysm-uncompressed.dmg
 else
 	plutil -convert binary1 Cataclysm.app/Contents/Info.plist
-ifeq ($(SDL3), 1)
+ifeq ($(TILES), 1)
 	# Sign AFTER plutil rewrites Info.plist; signing earlier would be
 	# invalidated by the plist edit. dmgbuild does not modify the bundle.
 	bash build-scripts/codesign-macos.sh $(APPTARGETDIR)
-endif  # ifeq ($(SDL3), 1)
+endif  # ifeq ($(TILES), 1)
 	dmgbuild -s build-data/osx/dmgsettings.py "Cataclysm TLG" Cataclysm.dmg
 endif
 

@@ -66,7 +66,6 @@ target_link_libraries(
         ghc-filesystem
         )
 
-
 # We use snmalloc in header only mode
 file(GLOB SNMALLOC_HEADERS snmalloc/**/*)
 
