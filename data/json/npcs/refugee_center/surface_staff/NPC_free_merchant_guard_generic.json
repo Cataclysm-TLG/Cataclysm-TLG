@@ -92,6 +92,6 @@
       "I dunno, I wasn't there but I overheard some guy talking about it.",
       "You know how it is, people talk, I mean sure, there was one of those weird storms at the time but the helicopter story?  I don't believe it."
     ],
-    "responses": [ { "text": "<end_talking_bye>", "topic": "TALK_DONE" } ]
+    "responses": [ { "text": "I see.", "topic": "TALK_DONE" } ]
   }
 ]
