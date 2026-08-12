@@ -35,7 +35,7 @@
 #include "calendar_ui.h"
 #include "cata_assert.h"
 #include "cata_path.h"
-#if defined(TILES) && defined(USE_SDL3)
+#if defined(TILES)
 #include "cata_shader.h"
 #endif
 #include "cata_utility.h"
