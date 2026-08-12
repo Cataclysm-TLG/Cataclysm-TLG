@@ -219,12 +219,10 @@ jobs:
         ZSTD_CLEVEL: 17
         CMAKE: ${{ matrix.cmake }}
         COMPILER: ${{ matrix.compiler }}
-        MXE_TARGET: ${{ matrix.mxe_target }}
-        WINE: ${{ matrix.wine }}
+        ANDROID: ${{ matrix.android }}
         OS: ${{ matrix.os }}
         TILES: ${{ matrix.tiles }}
         SOUND: ${{ matrix.sound }}
-        SDL3: ${{ matrix.sdl3 }}
         LOCALIZE: ${{ matrix.localize }}
         MODS: ${{ matrix.mods }}
         SANITIZE: ${{ matrix.sanitize }}
@@ -266,7 +264,7 @@ jobs:
       if: ${{ env.SKIP == 'false' && matrix.tiles == 1 }}
       uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
       with:
-        name: cdda-shaders
+        name: ctlg-shaders
         path: data/shaders
     - name: mark shader artifacts fresh
       if: ${{ env.SKIP == 'false' && matrix.tiles == 1 }}
