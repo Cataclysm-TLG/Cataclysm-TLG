@@ -74,7 +74,6 @@ static const mongroup_id GROUP_OCEAN_DEEP( "GROUP_OCEAN_DEEP" );
 static const mongroup_id GROUP_OCEAN_SHORE( "GROUP_OCEAN_SHORE" );
 static const mongroup_id GROUP_RIVER( "GROUP_RIVER" );
 static const mongroup_id GROUP_SUBWAY_CITY( "GROUP_SUBWAY_CITY" );
-static const mongroup_id GROUP_SWAMP( "GROUP_SWAMP" );
 static const mongroup_id GROUP_ZOMBIE_HORDE( "GROUP_ZOMBIE_HORDE" );
 
 static const oter_str_id oter_central_lab( "central_lab" );
@@ -6609,7 +6608,7 @@ void overmap::place_mongroups()
                 add_msg_debug( debugmode::DF_OVERMAP, "adding %i zombies in hordes to city %s centered at omt %s.",
                                desired_zombies, elem.name, city_center.to_string_writable() );
 
-                // if there aren't enough roads, we'll just reuse them, re-shuffled.
+                // If there aren't enough roads, we'll just reuse them, re-shuffled.
                 while( desired_zombies > 0 ) {
                     std::shuffle( submap_list.begin(), submap_list.end(), rng_get_engine() );
                     for( tripoint_om_sm const &s : submap_list ) {

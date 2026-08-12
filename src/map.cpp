@@ -4692,11 +4692,9 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
                 sounds::sound( p, 18, sounds::sound_t::combat, _( "thump!" ),
                                false, "smash_fail", "default" );
             }
-
             params.did_bash = true;
             params.bashed_solid = true;
         }
-
         return;
     }
 
@@ -4759,32 +4757,29 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
     }
 
     if( !params.destroy && !success ) {
-        if( sound_fail_vol == -1 ) {
-            sound_volume = 12;
-        } else {
-            sound_volume = sound_fail_vol;
-        }
-
         params.did_bash = true;
+        if( sound_fail_vol != -1 ) {
+            sound_volume = sound_fail_vol;
+        } else if( params.strength > 16 ) {
+            sound_volume = std::max( 50, rng( 16, params.strength ) );
+        } else {
+            sound_volume = 16;
+        }
         if( !params.silent ) {
             sounds::sound( p, sound_volume, sounds::sound_t::combat, bash->sound_fail, false,
-                           "smash_fail", soundfxvariant );
+                        "smash_fail", soundfxvariant );
         }
-
         return;
     }
-
-    // Clear out any partially grown seeds
+    // Clear out any partially grown seeds.
     if( has_flag_ter_or_furn( ter_furn_flag::TFLAG_PLANT, p ) ) {
         i_clear( p );
     }
-
     if( ( ( smash_furn && has_flag_furn( ter_furn_flag::TFLAG_FUNGUS, p ) ) ||
           ( smash_ter && has_flag_ter( ter_furn_flag::TFLAG_FUNGUS, p ) ) ) &&
         field_at( p ).find_field( fd_fire ) == nullptr ) {
         fungal_effects().create_spores( p );
     }
-
     if( params.destroy ) {
         sound_volume = smin * 2;
     } else {
@@ -4794,18 +4789,16 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
             sound_volume = sound_vol;
         }
     }
-
     soundfxid = "smash_success";
     const translation &sound = bash->sound;
     // Set this now in case the ter_set below changes this
-    const bool will_collapse = smash_ter &&
-                               has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p ) && !has_flag( ter_furn_flag::TFLAG_INDOORS, p );
+    const bool will_collapse = smash_ter && has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p ) && !has_flag( ter_furn_flag::TFLAG_INDOORS, p );
     const bool tent = smash_furn && !bash->tent_centers.empty();
     bool phased = false;
 
-    // Special code to collapse the tent if destroyed
+    // Special code to collapse the tent if destroyed.
     if( tent ) {
-        // Get ids of possible centers
+        // Get ids of possible centers.
         std::set<furn_id> centers;
         for( const auto &cur_id : bash->tent_centers ) {
             if( cur_id.is_valid() ) {
@@ -4815,28 +4808,28 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
 
         std::optional<std::pair<tripoint_bub_ms, furn_id>> tentp;
 
-        // Find the center of the tent
-        // First check if we're not currently bashing the center
+        // Find the center of the tent.
+        // First check if we're not currently bashing the center.
         if( centers.count( furn( p ) ) > 0 ) {
             tentp.emplace( p, furn( p ) );
         } else {
             for( const tripoint_bub_ms &pt : points_in_radius( p, bash->collapse_radius ) ) {
                 const furn_id &f_at = furn( pt );
-                // Check if we found the center of the current tent
+                // Check if we found the center of the current tent.
                 if( centers.count( f_at ) > 0 ) {
                     tentp.emplace( pt, f_at );
                     break;
                 }
             }
         }
-        // Didn't find any tent center, wreck the current tile
+        // Didn't find any tent center, wreck the current tile.
         if( !tentp ) {
             if( bash ) {
                 spawn_items( p, item_group::items_from( bash->drop_group, calendar::turn ) );
                 furn_set( p, furn_bash.furn_set );
             }
         } else {
-            // Take the tent down
+            // Take the tent down.
             const std::optional<map_furn_bash_info> &tent_bash = tentp->second.obj().bash;
             const int rad = tent_bash ? tent_bash->collapse_radius : 0;
             for( const tripoint_bub_ms &pt : points_in_radius( tentp->first, rad ) ) {
@@ -4871,7 +4864,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
         // writing from the submap.
         delete_signage( p );
     } else if( !smash_ter ) {
-        // Handle error earlier so that we can assume smash_ter is true below
+        // Handle error earlier so that we can assume smash_ter is true below.
         debugmsg( "data/json/terrain.json does not have %s.bash.ter_set set!",
                   ter( p ).obj().id.c_str() );
     } else if( has_original_terrain_at( p ) && ter( p )->has_flag( "PHASE_BACK" ) ) {
@@ -4880,7 +4873,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
         phased = true;
     } else if( params.bashing_from_above && ter_bash.ter_set_bashed_from_above ) {
         // If this terrain is being bashed from above and this terrain
-        // has a valid post-destroy bashed-from-above terrain, set it
+        // has a valid post-destroy bashed-from-above terrain, set it.
         ter_set( p, ter_bash.ter_set_bashed_from_above );
     } else if( ter_bash.ter_set ) {
         // If the terrain has a valid post-destroy terrain, set it.
@@ -5544,7 +5537,7 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
         impact.mult_damage( dam / static_cast<double>( initial_damage ) );
     }
 
-    // for now, shooting furniture or terrain protects any items
+    // for now, shooting furniture or terrain protects any items.
     if( !hit_items || hit_something ) {
         return;
     }
@@ -5559,12 +5552,11 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
     if( total_volume == 0_ml ) {
         return;
     }
-    // Chance we hit anything is the total volume of items in tile / 1000 Liters (max tile vol).
-    float chance = total_volume.value() / 1000000.f;
-    if( chance == 0.f ) {
-        return;
-    }
-    chance = std::max( chance, 0.01f );
+    // Base chance we hit anything is the total volume of items in tile / 1000 Liters (max tile vol).
+    float chance = total_volume.value() / 1000000.f; 
+    // /=(dispersion/1000)^4 to get a curve. Easy(ish) to shoot a bottle, not much easier to hit a corpse.
+    const double dispersion_factor = std::clamp( dispersion / 1000.0, 0.1, 1.0 );
+    chance /= dispersion_factor * dispersion_factor * dispersion_factor * dispersion_factor;
     int percentage = static_cast<int>( std::round( chance * 100.f ) );
     add_msg_debug( debugmode::DF_MAP,
                    "shoot(): chance to hit item is %1$d%%.", percentage );
