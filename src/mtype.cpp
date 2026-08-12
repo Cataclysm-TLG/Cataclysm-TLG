@@ -420,9 +420,8 @@ bool mtype::same_species( const mtype &other ) const
 
 field_type_id mtype::bloodType() const
 {
-    if( has_flag( mon_flag_ACID_BLOOD ) )
-        //A monster that has the death effect "ACID" does not need to have acid blood.
-    {
+    //A monster that has the death effect "ACID" does not need to have acid blood.
+    if( has_flag( mon_flag_ACID_BLOOD ) ) {
         return fd_acid;
     }
     if( has_flag( mon_flag_BILE_BLOOD ) ) {
