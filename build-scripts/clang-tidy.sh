@@ -15,13 +15,6 @@ BACKTRACE=${BACKTRACE:-1}
 LOCALIZE=${LOCALIZE:-1}
 TILES=${TILES:-1}
 SOUND=${SOUND:-1}
-cmake_sdl3=()
-make_sdl3=()
-if [ -n "${SDL3+x}" ]; then
-    cmake_sdl3=( "-DUSE_SDL3=${SDL3}" )
-    make_sdl3=( "SDL3=${SDL3}" )
-fi
-
 # create compilation database (compile_commands.json)
 mkdir -p "$build_dir"
 build_dir="$(cd "$build_dir" && pwd)"
@@ -35,7 +28,6 @@ cmake \
     -DLOCALIZE="${LOCALIZE}" \
     -DTILES="${TILES}" \
     -DSOUND="${SOUND}" \
-    "${cmake_sdl3[@]}" \
     "$repo_root"
 cd "$repo_root"
 ln --force --symbolic "${build_dir}/compile_commands.json" .
@@ -127,7 +119,6 @@ else
         LOCALIZE="${LOCALIZE}" \
         TILES="${TILES}" \
         SOUND="${SOUND}" \
-        "${make_sdl3[@]}" \
         includes
 
     tidyable_cpp_files="$( \

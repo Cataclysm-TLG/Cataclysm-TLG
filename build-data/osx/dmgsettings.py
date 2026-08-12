@@ -42,8 +42,8 @@ size = defines.get('size', '500M')
 
 # Files to include
 #
-# SDL3 builds stage LICENSE-SDL*.txt / LICENSE-vendored-*.txt at the repo
-# root (dmgbuild CWD); ship them in the DMG. Empty glob on SDL2/local.
+# Tiles builds stage LICENSE-SDL*.txt / LICENSE-vendored-*.txt at the repo
+# root (dmgbuild CWD); ship them in the DMG. Empty glob on a local build.
 license_files = sorted(
     glob.glob('LICENSE-SDL*.txt') + glob.glob('LICENSE-vendored-*.txt')
 )
