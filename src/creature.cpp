@@ -416,7 +416,9 @@ void Creature::reset()
 
 void Creature::bleed( map &here ) const
 {
-    here.add_splatter( bloodType(), pos_bub( here ) );
+    if( !is_hallucination() ) {
+        here.add_splatter( bloodType(), pos_bub( here ) );
+    }
 }
 
 void Creature::reset_bonuses()
