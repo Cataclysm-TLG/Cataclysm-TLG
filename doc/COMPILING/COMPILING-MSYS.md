@@ -1,6 +1,6 @@
 # Compilation guide for 64-bit Windows (using MSYS2)
 
-This guide contains instructions for compiling Cataclysm-DDA on Windows under MSYS2. **PLEASE NOTE:** These instructions *are not intended* to produce a redistributable copy of CDDA. Please download the official builds from the website or [cross-compile from Linux](https://github.com/CleverRaven/Cataclysm-DDA/blob/master/doc/COMPILING/COMPILING.md#cross-compile-to-windows-from-linux) if that is your intention.
+This guide contains instructions for compiling Cataclysm-TLG on Windows under MSYS2. **PLEASE NOTE:** These instructions *are not intended* to produce a redistributable copy of CTLG. Please download the official builds from the website or [cross-compile from Linux](https://github.com/Cataclysm-TLG/Cataclysm-TLG/blob/master/doc/COMPILING/COMPILING.md#cross-compile-to-windows-from-linux) if that is your intention.
 
 
 ## Prerequisites:
@@ -51,53 +51,38 @@ pacman -Su
 
 4. Install packages required for compilation:
 
--> Windows 7, 8, 8.1 (With SDL2)
-```bash
-pacman -S git make ncurses-devel gettext-devel mingw-w64-x86_64-{astyle,ccache,cmake,gcc,libmad,libwebp,pkgconf,SDL2,libzip,libavif} mingw-w64-x86_64-SDL2_{image,mixer,ttf}
-```
-
--> Windows 10 and later (With SDL3)
 ```bash
 pacman -S git make ncurses-devel gettext-devel mingw-w64-ucrt-x86_64-{astyle,ccache,cmake,freetype,gcc,libmad,libwebp,pkgconf,sdl3,libzip,libavif} mingw-w64-ucrt-x86_64-sdl3-{image,mixer,ttf} zlib-devel
 ```
 
--> Windows 10 and later (With SDL2)
-```bash
-pacman -S git make ncurses-devel gettext-devel mingw-w64-ucrt-x86_64-{astyle,ccache,cmake,freetype,gcc,libmad,libwebp,pkgconf,sdl3,libzip,libavif} mingw-w64-ucrt-x86_64-sdl3-{image,mixer,ttf} zlib-devel
-```
-
--> Windows 10 and later (With SDL2)
-```bash
-pacman -S git make ncurses-devel gettext-devel mingw-w64-ucrt-x86_64-{astyle,ccache,cmake,gcc,libmad,libwebp,pkgconf,SDL2,libzip,libavif} mingw-w64-ucrt-x86_64-SDL2_{image,mixer,ttf}
-```
+**Note:** The tiles build needs SDL3 >= 3.4.0, so a Windows version that the
+UCRT64 packages support is required.
 
 5. Close MSYS2.
 
 ## Cloning and compilation:
 
-1. Open MSYS2 and clone the Cataclysm-DDA repository:
+1. Open MSYS2 and clone the Cataclysm-TLG repository:
 
 ```bash
 cd /c/dev/
-git clone https://github.com/CleverRaven/Cataclysm-DDA.git ./Cataclysm-DDA
+git clone https://github.com/Cataclysm-TLG/Cataclysm-TLG.git ./Cataclysm-TLG
 ```
 
-**Note:** This will download the entire CDDA repository and all of its history (3GB). If you're just testing, you should probably add `--depth=1` (~350MB).
+**Note:** This will download the entire CTLG repository and all of its history (3GB). If you're just testing, you should probably add `--depth=1` (~350MB).
 
 **Note:** See `COMPILING-CMAKE.md` section `CMake Build for MSYS2 (MinGW)` for using the CMake build system.
 
 2. Compile with following command line:
 
 ```bash
-cd Cataclysm-DDA
-make -j$((`nproc`+0)) CCACHE=1 RELEASE=1 MSYS2=1 DYNAMIC_LINKING=1 SDL3=1 TILES=1 SOUND=1 LOCALIZE=1 LANGUAGES=all LINTJSON=0 ASTYLE=0 TESTS=0
+cd Cataclysm-TLG
+make -j$((`nproc`+0)) CCACHE=1 RELEASE=1 MSYS2=1 DYNAMIC_LINKING=1 TILES=1 SOUND=1 LOCALIZE=1 LANGUAGES=all LINTJSON=0 ASTYLE=0 TESTS=0
 ```
 
 You will receive warnings about unterminated character constants; they do not impact the compilation as far as this writer is aware.
 
 **Note**: This will compile a release version with Sound and Tiles support and all localization languages, skipping checks and tests, and using ccache for build acceleration. You can use other switches, but `MSYS2=1`, `DYNAMIC_LINKING=1` and probably `RELEASE=1` are required to compile without issues.
-
-It is now using `SDL3` flag to determine wether to use `SDL2` or `SDL3`, it is set to `SDL3=1` by default when you don't pass in this parameter, you can set it to `SDL3=0` to use SDL2 instead.
 
 It is now using `SDL3` flag to determine wether to use `SDL2` or `SDL3`, it is set to `SDL3=1` by default when you don't pass in this parameter, you can set it to `SDL3=0` to use SDL2 instead.
 

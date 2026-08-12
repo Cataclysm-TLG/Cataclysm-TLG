@@ -1,6 +1,6 @@
 #HOWTO:
-# run this from the root of the cdda repo using `docker build -f build-scripts/Dockerfile.debian-build . -t cdda`
-# (note: the -t cdda is optional but convenient. It tags the resulting image with `cdda`)
+# run this from the root of the ctlg repo using `docker build -f build-scripts/Dockerfile.debian-build . -t ctlg`
+# (note: the -t ctlg is optional but convenient. It tags the resulting image with `ctlg`)
 # (note: the `.` is required and orients Docker to the file/dir struture you want to bring into the image with COPY once the setup is done)
 
 # basing the build on debian testing is an easy way to bring in clang-6.0. Debian testing is quite stable.
@@ -21,18 +21,18 @@ RUN apt-fast -qq update
 # random convenience packages
 RUN apt-fast -qq install --no-install-recommends aptitude man software-properties-common gpg
 
-# CDDA: for building
+# CTLG: for building
 RUN apt-fast -qq install --no-install-recommends build-essential clang-6.0 cmake ccache
 # we probably don't want gcc/g++ so we don't accidentally build with them; note, we may find that we might actually want them
 RUN apt-get -qq remove gcc g++ && apt-get -qq autoremove
 
-# CDDA: general stuff; gettext is required for localization
+# CTLG: general stuff; gettext is required for localization
 RUN apt-fast -qq install --no-install-recommends gettext
 
-# CDDA: libraries for curses-based terminal cdda
+# CTLG: libraries for curses-based terminal ctlg
 RUN apt-fast -qq install --no-install-recommends libncurses5-dev libncursesw5-dev
 
-# CDDA: libraries for tiles build. Debian testing carries SDL3 >= 3.4.0 and its
+# ctlg: libraries for tiles build. Debian testing carries SDL3 >= 3.4.0 and its
 # satellites; on an older suite these packages are too old and the stack has to
 # be built from source instead, as described in doc/c++/COMPILING.md.
 RUN apt-fast -qq install --no-install-recommends libsdl3-dev libsdl3-image-dev libsdl3-ttf-dev libsdl3-mixer-dev libfreetype6-dev cmake pkg-config
@@ -54,41 +54,41 @@ RUN apt-fast install -qq --no-install-recommends xauth
 RUN apt-fast -qq install --no-install-recommends lldb-6.0
 
 
-# we prefer to build as a regular user (cdda) rather than root
-RUN mkdir /cdda
+# we prefer to build as a regular user (ctlg) rather than root
+RUN mkdir /ctlg
 # --disabled-password is a way to rush through the user generation (it's inelegant though), and then we set the password 'lol'
 #TODO: bring the password in as an ARG with an option
-RUN adduser cdda --disabled-password && echo cdda:lol | chpasswd
-USER cdda
-WORKDIR /home/cdda
+RUN adduser ctlg --disabled-password && echo ctlg:lol | chpasswd
+USER ctlg
+WORKDIR /home/ctlg
 
 # copy everything from the source directory on the host (the `.` in docker build) - except the contents of .dockerignore
-COPY --chown=cdda:cdda . .
+COPY --chown=ctlg:ctlg . .
 
 # we build in build dirs rather than at the repo root
 # TODO: move build dirs to a directory ABOVE the source so we can Docker mount in the source dir for 'live' builds of code you're hacking on on the host
 RUN mkdir cmake-build-debug cmake-build-debug-tiles
 
-WORKDIR /home/cdda/cmake-build-debug
+WORKDIR /home/ctlg/cmake-build-debug
 
 
-WORKDIR /home/cdda/cmake-build-debug
+WORKDIR /home/ctlg/cmake-build-debug
 
 RUN env CC=clang-6.0 CXX=clang++-6.0 cmake ..
 
 RUN echo `pwd` configured for build; to actually build, run "make -j`nproc --all`" here
 
-WORKDIR /home/cdda/cmake-build-debug-tiles
+WORKDIR /home/ctlg/cmake-build-debug-tiles
 
 RUN env CC=clang-6.0 CXX=clang++-6.0 cmake -DTILES=ON ..
 
 RUN echo `pwd` configured for build; to actually build, run "make -j`nproc --all`" here
 
 
-## ssh server stuff (experimental and not needed except for testing ssh stuff with CDDA! you don't need ssh to get a shell inside the container!)
+## ssh server stuff (experimental and not needed except for testing ssh stuff with ctlg! you don't need ssh to get a shell inside the container!)
 ## uncomment this to get ssh
 ##
-## tell Docker to expose port 22 by default on `docker run` (the result is that it's mapped to a random port on the host so you can ssh in with ssh cdda@localhost:{RANDOMPORT}. Running `docker ps` will reveal the external port.
+## tell Docker to expose port 22 by default on `docker run` (the result is that it's mapped to a random port on the host so you can ssh in with ssh ctlg@localhost:{RANDOMPORT}. Running `docker ps` will reveal the external port.
 ## Note that you DO NOT need SSH to get a shell inside the container. This is for testing only.
 ## Crash course: The usual way into the container is `docker {run or exec} -it {container/image name} bash` (or better yet, tmux or fish rather than bash). Docker run is to start a running container from an image, docker exec is to execute a process inside an already-started container.
 ## TODO: expose 22 to fixed port by default, perhaps with an ARG?
