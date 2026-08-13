@@ -1698,7 +1698,7 @@ bool game::cancel_activity_query( const std::string &text )
             u.remove_effect( effect_asked_to_train );
         } else if( u.activity.id() == ACT_TRAIN ) {
             for( npc &n : all_npcs() ) {
-                // If the player is the only student, cancel the teacher's activity
+                // If the player is the only student, cancel the teacher's activity.
                 if( n.getID().get_value() == u.activity.index && n.activity.values.size() == 1 ) {
                     n.cancel_activity();
                 }
