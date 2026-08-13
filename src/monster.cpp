@@ -149,6 +149,8 @@ static const efftype_id effect_worked_on( "worked_on" );
 static const emit_id emit_emit_shock_cloud( "emit_shock_cloud" );
 static const emit_id emit_emit_shock_cloud_big( "emit_shock_cloud_big" );
 
+static const faction_id faction_your_followers( "your_followers" );
+
 static const flag_id json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const flag_id json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
 static const flag_id json_flag_DISABLE_FLIGHT( "DISABLE_FLIGHT" );
@@ -562,6 +564,14 @@ void monster::try_reproduce()
     if( !reproduces ) {
         return;
     }
+    // Don't lay eggs if you're at Tacoma or something, the people who work there took them.
+    std::optional<basecamp *> bcp = overmap_buffer.find_camp( pos_abs_omt().xy() );
+    if( bcp ) {
+        basecamp *actual_camp = *bcp;
+        if( actual_camp->get_owner() != get_player_character().get_faction()->id ) {
+            return;
+        }
+    }
     // This can happen if the monster type has changed (from reproducing to non-reproducing monster).
     if( !type->baby_timer ) {
         return;
@@ -638,6 +648,14 @@ void monster::refill_udders()
     if( type->starting_ammo.empty() ) {
         debugmsg( "monster %s has no starting ammo to refill udders", get_name() );
         return;
+    }
+    // Don't produce milk if you're at Tacoma or something, the people who work there took it.
+    std::optional<basecamp *> bcp = overmap_buffer.find_camp( pos_abs_omt().xy() );
+    if( bcp ) {
+        basecamp *actual_camp = *bcp;
+        if( actual_camp->get_owner() != get_player_character().get_faction()->id ) {
+            return;
+        }
     }
     if( ammo.empty() ) {
         // Legacy animals got empty ammo map, fill them up now if needed.
@@ -3546,51 +3564,53 @@ void monster::process_effects()
     }
 
     Character &player_character = get_player_character();
-    //If this monster has the ability to heal in combat, do it now.
-    int regeneration_amount = type->regenerates;
-    //Apply effect-triggered regeneartion modifiers
-    for( const auto &regeneration_modifier : type->regeneration_modifiers ) {
-        if( has_effect( regeneration_modifier.first ) ) {
-            regeneration_amount += regeneration_modifier.second;
+    // If this monster is below full health and can regenerate, do it now.
+    if( hp < type->hp ) {
+        int regeneration_amount = type->regenerates;
+        //Apply effect-triggered regeneartion modifiers
+        for( const auto &regeneration_modifier : type->regeneration_modifiers ) {
+            if( has_effect( regeneration_modifier.first ) ) {
+                regeneration_amount += regeneration_modifier.second;
+            }
+        }
+        // Apply enchantment modifiers.
+        regeneration_amount = calculate_by_enchantment( regeneration_amount, enchant_vals::mod::REGEN_HP,
+                            true );
+        // Prevent negative regeneration.
+        if( regeneration_amount < 0 ) {
+            regeneration_amount = 0;
+        }
+        const int healed_amount = heal( regeneration_amount );
+        if( healed_amount > 0 && one_in( 2 ) ) {
+            std::string healing_format_string;
+            if( healed_amount >= 30 ) {
+                healing_format_string = _( "The %s is visibly regenerating!" );
+            } else if( healed_amount >= 10 ) {
+                healing_format_string = _( "The %s seems a little healthier." );
+            } else {
+                healing_format_string = _( "The %s is healing slowly." );
+            }
+            add_msg_if_player_sees( *this, m_warning, healing_format_string, name() );
+        }
+
+        if( type->regenerates_in_dark && !g->is_in_sunlight( pos_bub() ) ) {
+            const float light = here.ambient_light_at( pos_bub() );
+            const int dark_regen_amount = static_cast<int>( std::round( 30.f * std::clamp( 600.f - light, 0.f, 600.f ) / 600.f ) );
+            if( heal( dark_regen_amount ) > 20 && one_in( 31 - dark_regen_amount ) ) {
+                add_msg_if_player_sees( *this, m_warning, _( "The %s uses the darkness to regenerate." ), name() );
+            } else if( heal( dark_regen_amount ) > 0 && one_in( 31 - dark_regen_amount ) ) {
+                add_msg_if_player_sees( *this, m_warning, _( "The light seems to be slowing %s regeneration." ), disp_name( true ) );
+            }
+        }
+
+        if( has_effect( effect_critter_well_fed ) && one_in( 90 ) ) {
+            heal( 1 );
         }
     }
-    //Apply enchantment modifiers
-    regeneration_amount = calculate_by_enchantment( regeneration_amount, enchant_vals::mod::REGEN_HP,
-                          true );
-    //Prevent negative regeneration
-    if( regeneration_amount < 0 ) {
-        regeneration_amount = 0;
-    }
-    const int healed_amount = heal( regeneration_amount );
-    if( healed_amount > 0 && one_in( 2 ) ) {
-        std::string healing_format_string;
-        if( healed_amount >= 50 ) {
-            healing_format_string = _( "The %s is visibly regenerating!" );
-        } else if( healed_amount >= 10 ) {
-            healing_format_string = _( "The %s seems a little healthier." );
-        } else {
-            healing_format_string = _( "The %s is healing slowly." );
-        }
-        add_msg_if_player_sees( *this, m_warning, healing_format_string, name() );
-    }
 
-    if( type->regenerates_in_dark && !g->is_in_sunlight( pos_bub() ) ) {
-        const float light = here.ambient_light_at( pos_bub() );
-        // Magic number 10000 was chosen so that a floodlight prevents regeneration in a range of 20 tiles
-        // TODO: Fix this horseshit
-        const int dHP = std::clamp( static_cast<int>( 30.0 * std::exp( - light * light / 10000 ) ), 0, 30 );
-        if( heal( dHP ) > 0 && one_in( 31 - dHP ) ) {
-            add_msg_if_player_sees( *this, m_warning, _( "The %s uses the darkness to regenerate." ), name() );
-        }
-    }
-
-    if( has_effect( effect_critter_well_fed ) && one_in( 90 ) ) {
-        heal( 1 );
-    }
-
-    //We already check these timers on_load, but adding a random chance for them to go off here
-    //will make it so that the player needn't leave the area and return for critters to poop,
-    //become hungry, evolve, have babies, or refill udders.
+    // We already check these timers on_load, but adding a random chance for them to go off here
+    // will make it so that the player needn't leave the area and return for critters to poop,
+    // become hungry, evolve, have babies, or refill udders.
     if( one_in( 30000 ) ) {
         try_upgrade( false );
         try_reproduce();

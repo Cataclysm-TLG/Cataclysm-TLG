@@ -1082,17 +1082,15 @@ static void eff_fun_sleep( Character &u, effect &it )
     } else if( intense < 24 ) {
         it.mod_intensity( 1 );
     }
-
-    if( u.has_effect( effect_narcosis ) && u.get_fatigue() <= 25 ) {
-        u.set_fatigue( 25 ); //Prevent us from waking up naturally while under anesthesia
+    int current_fatigue = u.get_fatigue();
+    const bool anesthetized = u.has_effect( effect_narcosis );
+    if( anesthetized ) {
+        if( current_fatigue <= 25 ) {
+            u.set_fatigue( 25 ); // Prevent us from waking up while under anesthesia.
+            current_fatigue = 25;
+        }
     }
-
-    if( u.get_fatigue() < -25 && it.get_duration() > 3_minutes && !u.has_effect( effect_narcosis ) ) {
-        it.set_duration( 1_turns * dice( 3, 10 ) );
-    }
-
-    if( u.get_fatigue() <= 0 && u.get_fatigue() > -20 && !u.has_effect( effect_narcosis ) ) {
-        u.mod_fatigue( -25 );
+    if( !anesthetized && current_fatigue < 5 ) {
         if( u.get_sleep_deprivation() < SLEEP_DEPRIVATION_HARMLESS ) {
             u.add_msg_if_player( m_good, _( "You feel well rested." ) );
         } else {
@@ -1104,7 +1102,7 @@ static void eff_fun_sleep( Character &u, effect &it )
 
     // Check mutation category strengths to see if we're mutated enough to get a dream
     // If we've crossed a threshold, always show dreams for that category
-    // Otherwise, check for the category that we have the most vitamins in our blood for
+    // Otherwise, check for the category that we have the most mutagen in our blood for.
     mutation_category_id cat = u.get_threshold_category();
     weighted_int_list<mutation_category_id> cat_list = u.get_vitamin_weighted_categories();
     if( cat.is_null() && cat_list.get_weight() > 0 ) {
@@ -1112,89 +1110,81 @@ static void eff_fun_sleep( Character &u, effect &it )
     }
     int cat_strength = u.mutation_category_level[cat];
 
-    // Determine the strength of effects or dreams based upon category strength
-    int strength = 0; // Category too weak for any effect or dream
-    if( u.crossed_threshold() ) {
-        strength = 4; // Post-human.
-    } else if( cat_strength >= 15 && cat_strength < 22 ) {
-        strength = 1; // Low strength
-    } else if( cat_strength >= 22 && cat_strength < 30 ) {
-        strength = 2; // Medium strength
-    } else if( cat_strength >= 30 ) {
-        strength = 3; // High strength
-    }
+    if( cat_strength > 14 ) {
+        // Determine the strength of effects or dreams based upon category strength
+        int strength = 0; // Category too weak for any effect or dream
+        if( u.crossed_threshold() ) {
+            strength = 4; // Post-human.
+        } else if( cat_strength >= 15 && cat_strength < 22 ) {
+            strength = 1; // Low strength
+        } else if( cat_strength >= 22 && cat_strength < 30 ) {
+            strength = 2; // Medium strength
+        } else if( cat_strength >= 30 ) {
+            strength = 3; // High strength
+        }
 
-    // Get a dream if category strength is high enough.
-    if( strength != 0 ) {
-        //Once every 6 / 3 / 2 hours, with a bit of randomness
-        if( calendar::once_every( 6_hours / strength ) && one_in( 3 ) ) {
-            // Select a dream
-            std::string dream = u.get_category_dream( cat, strength );
-            if( !dream.empty() ) {
-                u.add_msg_if_player( dream );
-            }
-            // Mycus folks upgrade in their sleep.
-            if( u.has_trait( trait_THRESH_MYCUS ) ) {
-                if( one_in( 8 ) ) {
-                    u.mutate_category( mutation_category_MYCUS, false, true );
-                    u.mod_stored_kcal( -87 );
-                    u.mod_thirst( 10 );
-                    u.mod_fatigue( 5 );
+        // Get a dream if category strength is high enough.
+        if( strength != 0 ) {
+            //Once every 6 / 3 / 2 hours, with a bit of randomness.
+            if( calendar::once_every( 6_hours / strength ) && one_in( 6 ) ) {
+                // Select a dream.
+                std::string dream = u.get_category_dream( cat, strength );
+                if( !dream.empty() ) {
+                    u.add_msg_if_player( dream );
+                }
+                // Mycus folks upgrade in their sleep.
+                if( u.has_trait( trait_THRESH_MYCUS ) ) {
+                    if( one_in( 8 ) ) {
+                        u.mutate_category( mutation_category_MYCUS, false, true );
+                        u.mod_stored_kcal( -87 );
+                        u.mod_thirst( 10 );
+                        u.mod_fatigue( 5 );
+                        current_fatigue += 5;
+                    }
                 }
             }
         }
     }
 
     bool woke_up = false;
-    int tirednessVal = rng( 5, 200 ) + rng( 0, std::abs( u.get_fatigue() * 2 * 5 ) );
-    if( !u.is_blind() && !u.has_effect( effect_narcosis ) &&
-        !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
-        // People who can see while sleeping are acclimated to the light.
-        if( !u.has_flag( json_flag_SEESLEEP ) ) {
-            if( u.has_trait( trait_HEAVYSLEEPER2 ) && !u.has_trait( trait_HIBERNATE ) ) {
+    if( !anesthetized ) {
+        // Slightly wonky once_every() time so this isn't obviously every ten minutes.
+        if( calendar::once_every( 465_seconds ) && !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
+            // People who can see while sleeping are acclimated to the light.
+            if( !u.has_flag( json_flag_SEESLEEP ) ) {
+                int divisor = 5;
+                if( u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
+                    divisor = 4;
+                } else if( u.has_trait( trait_HEAVYSLEEPER ) ) {
+                    divisor = 3;
+                }
                 // So you can too sleep through noon.
-                if( ( tirednessVal * 1.25 ) < here.ambient_light_at( u.pos_bub() ) && ( u.get_fatigue() < 10 ||
-                        one_in( u.get_fatigue() / 2 ) ) ) {
+                int wake_chance = current_fatigue / divisor;
+                if( wake_chance <= here.ambient_light_at( u.pos_bub() ) || one_in( 1 + wake_chance ) ) {
                     u.add_msg_if_player( _( "It's too bright to sleep." ) );
-                    // Set ourselves up for removal
                     it.set_duration( 0_turns );
                     woke_up = true;
                 }
-                // Ursine hibernators would likely do so indoors.  Plants, though, might be in the sun.
-            } else if( u.has_trait( trait_HIBERNATE ) ) {
-                if( ( tirednessVal * 5 ) < here.ambient_light_at( u.pos_bub() ) && ( u.get_fatigue() < 10 ||
-                        one_in( u.get_fatigue() / 2 ) ) ) {
-                    u.add_msg_if_player( _( "It's too bright to sleep." ) );
-                    // Set ourselves up for removal
+            } else if( u.has_flag( json_flag_SEESLEEP ) ) {
+                Creature *hostile_critter = g->is_hostile_very_close();
+                if( hostile_critter != nullptr ) {
+                    u.add_msg_if_player( _( "You see %s approaching!" ),
+                                        hostile_critter->disp_name() );
                     it.set_duration( 0_turns );
                     woke_up = true;
                 }
-            } else if( tirednessVal < here.ambient_light_at( u.pos_bub() ) && ( u.get_fatigue() < 10 ||
-                       one_in( u.get_fatigue() / 2 ) ) ) {
-                u.add_msg_if_player( _( "It's too bright to sleep." ) );
-                // Set ourselves up for removal
-                it.set_duration( 0_turns );
-                woke_up = true;
-            }
-        } else if( u.has_flag( json_flag_SEESLEEP ) ) {
-            Creature *hostile_critter = g->is_hostile_very_close();
-            if( hostile_critter != nullptr ) {
-                u.add_msg_if_player( _( "You see %s approaching!" ),
-                                     hostile_critter->disp_name() );
-                it.set_duration( 0_turns );
-                woke_up = true;
             }
         }
     }
 
     // Have we already woken up?
-    if( !woke_up && !u.has_effect( effect_narcosis ) ) {
+    if( !woke_up && !anesthetized ) {
         // Cold or heat may wake you up.
         // Player will sleep through cold or heat if fatigued enough
         for( const bodypart_id &bp : u.get_all_body_parts() ) {
             const units::temperature curr_temp = u.get_part_temp_cur( bp );
             const units::temperature_delta fatigue_modifier = units::from_celsius_delta(
-                        u.get_fatigue() / 1000.0 );
+                        current_fatigue / 1000.0 );
             if( curr_temp < BODYTEMP_VERY_COLD - fatigue_modifier ) {
                 if( one_in( 30000 ) ) {
                     u.add_msg_if_player( _( "You toss and turn trying to keep warm." ) );
@@ -1225,7 +1215,7 @@ static void eff_fun_sleep( Character &u, effect &it )
 
     // A bit of a hack: check if we are about to wake up for any reason, including regular
     // timing out of sleep
-    if( it.get_duration() == 1_turns || woke_up ) {
+    if( it.get_duration() <= 1_turns || woke_up ) {
         u.wake_up();
     }
 }

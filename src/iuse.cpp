@@ -6185,20 +6185,16 @@ static void item_save_monsters( Character &p, item &it, const std::vector<monste
     if( monster_photos.empty() ) {
         monster_photos = ",";
     }
-
     for( monster * const &monster_p : monster_vec ) {
         const std::string mtype = monster_p->type->id.str();
         const std::string name = monster_p->name();
-
-        // position of <monster type string>
+        // Position of <monster type string>
         const size_t mon_str_pos = monster_photos.find( "," + mtype + "," );
-
-        // monster gets recorded by the character, add to known types
+        // Monster gets recorded by the character, add to known types.
         p.set_knows_creature_type( monster_p->type->id );
-
-        if( mon_str_pos == std::string::npos ) { // new monster
+        if( mon_str_pos == std::string::npos ) { // New monster.
             monster_photos += string_format( "%s,%d,", mtype, photo_quality );
-        } else { // replace quality character, if new photo is better
+        } else { // Replace quality character, if new photo is better.
             const size_t quality_num_pos = mon_str_pos + mtype.size() + 2;
             const size_t next_comma = monster_photos.find( ',', quality_num_pos );
             const int old_quality =
@@ -6369,7 +6365,6 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
         tripoint_bub_ms aim_point{ *aim_point_ };
         bool incorrect_focus = false;
         tripoint_range<tripoint_bub_ms> aim_bounds = here.points_in_radius( aim_point, 2 );
-
         std::vector<tripoint_bub_ms> trajectory = line_to( p->pos_bub(), aim_point, 0, 0 );
         trajectory.push_back( aim_point );
 
@@ -6395,8 +6390,7 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
             monster *const mon = creatures.creature_at<monster>( trajectory_point, true );
             Character *const guy = creatures.creature_at<Character>( trajectory_point );
             if( mon || guy || trajectory_point == aim_point ) {
-                int dist = rl_dist( p->pos_bub(), trajectory_point );
-
+                int dist = trig_dist( p->pos_bub(), trajectory_point );
                 int camera_bonus = it->has_flag( flag_CAMERA_PRO ) ? 10 : 0;
                 int photo_quality = 20 - rng( dist, dist * 2 ) * 2 + rng( camera_bonus / 2, camera_bonus );
                 if( photo_quality > 5 ) {
@@ -6408,10 +6402,8 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
                 if( p->is_blind() ) {
                     photo_quality /= 2;
                 }
-
                 if( mon ) {
                     monster &z = *mon;
-
                     // shoot past small monsters and hallucinations
                     if( trajectory_point != aim_point && ( z.type->size <= creature_size::small ||
                                                            z.is_hallucination() ||
@@ -6425,7 +6417,7 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
                     } else if( trajectory_point != aim_point ) { // shoot past mon that will be in photo anyway
                         continue;
                     }
-                    // get a special message if the target is a hallucination
+                    // Get a special message if the target is a hallucination.
                     if( trajectory_point == aim_point && ( z.is_hallucination() ||
                                                            z.type->in_species( species_HALLUCINATION ) ) ) {
                         p->add_msg_if_player( _( "Strange… there's nothing in the center of this picture?" ) );
@@ -6434,10 +6426,10 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
                     if( trajectory_point == aim_point && guy->is_hallucination() ) {
                         p->add_msg_if_player( _( "Strange… %s isn't visible on the picture?" ), guy->get_name() );
                     } else if( !aim_bounds.is_point_inside( trajectory_point ) ) {
-                        // take a photo of the monster that's in the way
+                        // Take a photo of the monster that's in the way.
                         p->add_msg_if_player( m_warning, _( "%s got in the way of your photo." ), guy->get_name() );
                         incorrect_focus = true;
-                    } else if( trajectory_point != aim_point ) {  // shoot past guy that will be in photo anyway
+                    } else if( trajectory_point != aim_point ) {  // Shoot past guy that will be in photo anyway.
                         continue;
                     }
                 }
@@ -6462,7 +6454,7 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
                 }
 
                 const bool selfie = std::find( character_vec.begin(), character_vec.end(),
-                                               p ) != character_vec.end();
+                                p ) != character_vec.end();
 
                 if( selfie ) {
                     p->add_msg_if_player( _( "You took a selfie." ) );
