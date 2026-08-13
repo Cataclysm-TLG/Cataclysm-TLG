@@ -171,6 +171,7 @@
       ]
     },
     "examine_action": "workbench",
+    "deployed_item": "workbench",
     "workbench": { "multiplier": 1.2, "mass": "500000 g", "volume": "200 L" }
   },
   {
