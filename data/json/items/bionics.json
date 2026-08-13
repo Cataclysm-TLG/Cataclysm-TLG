@@ -715,7 +715,7 @@
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Repair Nanobots CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "A fleet of tiny, dormant robots.  While activated, they will flit about the user's body, repairing damage and stopping bleeding at the cost of power.",
+    "description": "A fleet of tiny, dormant robots.  While activated, they will flit about the user's body, repairing damage and stopping bleeding at the cost of power.  Excessive use of this CBM can depress the immune system.",
     "price": "9500 USD",
     "price_postapoc": "100 USD",
     "weight": "200 g",
