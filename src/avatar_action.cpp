@@ -786,8 +786,21 @@ void avatar_action::fire_ranged_bionic( avatar &you, const item &fake_gun )
 
 bool avatar_action::fire_turret_manual( avatar &you, map &m, turret_data &turret )
 {
+    if( you.controlling_vehicle ) {
+        add_msg( m_warning, _( "You can't manually operate a turret while controlling a vehicle." ) );
+        return false;
+    }
+    if( you.in_vehicle ) {
+        if( const optional_vpart_position vp = m.veh_at( you.pos_bub() ) ) {
+            if( vp->is_inside() ) {
+                add_msg( m_warning, _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
+                return false;
+            }
+        }
+    }
+
     if( !turret.base()->is_gun() ) {
-        debugmsg( "Expected turret base to be a gun." );
+        debugmsg( "Expected turret.base() to be a gun." );
         return false;
     }
 
@@ -797,6 +810,9 @@ bool avatar_action::fire_turret_manual( avatar &you, map &m, turret_data &turret
             return false;
         case turret_data::status::no_power:
             add_msg( m_bad, _( "The %s is not powered." ), turret.name() );
+            return false;
+        case turret_data::status::invalid:
+            add_msg( m_bad, _( "The %s is inoperable." ), turret.name() );
             return false;
         case turret_data::status::ready:
             break;

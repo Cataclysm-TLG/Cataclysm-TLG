@@ -39,14 +39,14 @@
     "name": { "str": "Fused internals" },
     "description": "Excessive heat has rendered this weapon inoperable.",
     "item_prefix": "ruined",
-    "flags": [ "RUINED_GUN" ]
+    "flags": [ "RUINED_GUN", "NO_TURRET" ]
   },
   {
     "id": "fault_overheat_safety",
     "type": "fault",
     "name": { "str": "Overheat safety" },
     "description": "This weapon will attempt to enter a cooling cycle when overheated.",
-    "flags": [ "OVERHEATED_GUN" ]
+    "flags": [ "OVERHEATED_GUN", "NO_TURRET" ]
   },
   {
     "id": "fault_fail_to_feed",
@@ -55,7 +55,8 @@
     "fault_type": "gun_mechanical_simple",
     "name": { "str": "Fail to feed" },
     "description": "This gun did not load the round in the chamber properly.",
-    "item_prefix": "jammed"
+    "item_prefix": "jammed",
+    "flags": [ "NO_TURRET" ]
   },
   {
     "id": "fault_gun_chamber_spent",
@@ -64,7 +65,8 @@
     "fault_type": "gun_mechanical_simple",
     "name": { "str": "Spent casing in chamber" },
     "description": "This gun currently has an empty casing in the chamber.",
-    "item_prefix": "jammed"
+    "item_prefix": "jammed",
+    "flags": [ "NO_TURRET" ]
   },
   {
     "id": "fault_stovepipe",
@@ -73,7 +75,8 @@
     "fault_type": "gun_mechanical_simple",
     "name": { "str": "Stovepipe" },
     "description": "The casing of the cartridge is stuck in the ejection port without being properly ejected, forming an exhaust pipe shape.",
-    "item_prefix": "jammed"
+    "item_prefix": "jammed",
+    "flags": [ "NO_TURRET" ]
   },
   {
     "id": "fault_double_feed",
@@ -82,6 +85,7 @@
     "fault_type": "gun_mechanical_simple",
     "name": { "str": "Double feed" },
     "description": "Magazine of the gun tried to put two rounds in the chamber at once.",
-    "item_prefix": "jammed"
+    "item_prefix": "jammed",
+    "flags": [ "NO_TURRET" ]
   }
 ]

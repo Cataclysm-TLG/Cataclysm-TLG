@@ -1813,12 +1813,12 @@ static void fire()
         reach_attack( you );
         return;
     }
-    // try firing gun
+    // Try firing gun.
     if( weapon && weapon->is_gun() && !weapon->gun_current_mode().melee() ) {
         avatar_action::fire_wielded_weapon( you );
         return;
     }
-    // try firing turrets
+    // Try firing turrets.
     if( const optional_vpart_position ovp = here.veh_at( you.pos_abs() ) ) {
         if( turret_data turret_here = ovp->vehicle().turret_query( you.pos_abs() ) ) {
             if( avatar_action::fire_turret_manual( you, here, turret_here ) ) {
@@ -1830,7 +1830,7 @@ static void fire()
             }
         }
     }
-    // offer to draw a gun from worn holster
+    // Offer to draw a gun from worn holster.
     std::vector<std::string> options;
     std::vector<std::function<void()>> actions;
     you.worn.fire_options( you, options, actions );

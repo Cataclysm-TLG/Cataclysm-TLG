@@ -31,8 +31,6 @@ static const itype_id fuel_type_battery( "battery" );
 
 static const skill_id skill_gun( "gun" );
 
-static const trait_id trait_BRAWLER( "BRAWLER" );
-
 std::vector<vehicle_part *> vehicle::turrets()
 {
     std::vector<vehicle_part *> res;
@@ -137,27 +135,22 @@ itype_id turret_data::ammo_current() const
 std::set<itype_id> turret_data::ammo_options() const
 {
     std::set<itype_id> opts;
-
     if( !veh || !part ) {
         return opts;
     }
-
     if( !uses_vehicle_tanks_or_batteries() ) {
         if( !part->base.ammo_current().is_null() ) {
             opts.insert( part->base.ammo_current() );
         }
-
     } else {
         for( const auto &e : veh->fuels_left( ) ) {
             const itype *fuel = item::find_type( e.first );
             if( fuel->ammo && part->base.ammo_types().count( fuel->ammo->type ) &&
                 e.second >= part->base.ammo_required() ) {
-
                 opts.insert( fuel->get_id() );
             }
         }
     }
-
     return opts;
 }
 
@@ -201,7 +194,7 @@ bool turret_data::in_range( const tripoint_abs_ms &target ) const
         return false;
     }
     int range = veh->turret_query( *part ).range();
-    int dist = rl_dist( veh->abs_part_pos( *part ), target );
+    int dist = trig_dist( veh->abs_part_pos( *part ), target );
     return range >= dist;
 }
 
@@ -236,9 +229,10 @@ turret_data::status turret_data::query() const
     if( !veh || !part ) {
         return status::invalid;
     }
-
     const item &gun = part->base;
-
+    if( gun.has_fault_flag( "RUINED_GUN" ) || gun.has_fault_flag( "NO_TURRET" ) ) {
+        return status::invalid;
+    }
     if( uses_vehicle_tanks_or_batteries() ) {
         if( veh->fuel_left( here, ammo_current() ) < gun.ammo_required() ) {
             return status::no_ammo;
@@ -248,12 +242,10 @@ turret_data::status turret_data::query() const
             return status::no_ammo;
         }
     }
-
     const units::energy energy_drain = gun.get_gun_energy_drain() * gun.gun_current_mode().qty;
     if( energy_drain > units::from_kilojoule( veh->fuel_left( here, fuel_type_battery ) ) ) {
         return status::no_power;
     }
-
     return status::ready;
 }
 
@@ -324,10 +316,20 @@ int turret_data::fire( Character &c, map *here, const tripoint_bub_ms &target )
 
 void vehicle::turrets_aim_and_fire_single()
 {
+    const Character &you = get_player_character();
+    map &here = get_map();
+    if( you.in_vehicle ) {
+        if( const optional_vpart_position vp = here.veh_at( you.pos_bub() ) ) {
+            if( vp->is_inside() ) {
+                add_msg( m_warning, _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
+                return;
+            }
+        }
+    }
     std::vector<std::string> option_names;
     std::vector<vehicle_part *> options;
 
-    // Find all turrets that are ready to fire
+    // Find all turrets that are ready to fire.
     for( vehicle_part *&t : turrets() ) {
         turret_data data = turret_query( *t );
         if( data.query() == turret_data::status::ready ) {
@@ -336,7 +338,7 @@ void vehicle::turrets_aim_and_fire_single()
         }
     }
 
-    // Select one
+    // Select one.
     if( options.empty() ) {
         add_msg( m_warning, _( "None of the turrets are ready to fire." ) );
         return;
@@ -359,11 +361,24 @@ bool vehicle::turrets_aim_and_fire_all_manual( bool show_msg )
     if( turrets.empty() ) {
         if( show_msg ) {
             add_msg( m_warning,
-                     _( "Can't aim turrets: all turrets are offline or set to automatic targeting mode." ) );
+                     _( "All turrets are either offline or set to automatic targeting mode." ) );
         }
         return false;
     }
-
+    const Character &you = get_player_character();
+    if( you.controlling_vehicle ) {
+        add_msg( m_warning, _( "You can't manually operate a turret while controlling a vehicle." ) );
+        return false;
+    }
+    if( you.in_vehicle ) {
+        map &here = get_map();
+        if( const optional_vpart_position vp = here.veh_at( you.pos_bub() ) ) {
+            if( vp->is_inside() ) {
+                add_msg( m_warning, _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
+                return false;
+            }
+        }
+    }
     turrets_aim_and_fire( turrets );
     return true;
 }
@@ -371,10 +386,14 @@ bool vehicle::turrets_aim_and_fire_all_manual( bool show_msg )
 void vehicle::turrets_override_automatic_aim()
 {
     std::vector<vehicle_part *> turrets = find_all_ready_turrets( false, true );
-
+    if( get_player_character().controlling_vehicle ) {
+        add_msg( m_warning,
+             _( "You cannot take full control of a turret while operating a vehicle." ) );
+        return;
+    }
     if( turrets.empty() ) {
         add_msg( m_warning,
-                 _( "Can't aim turrets: all turrets are offline or set to manual targeting mode." ) );
+                 _( "All turrets are offline or set to manual targeting mode." ) );
         return;
     }
 
@@ -404,7 +423,7 @@ bool vehicle::turrets_aim( std::vector<vehicle_part *> &turrets )
 {
     map &here = get_map();
 
-    // Clear existing targets
+    // Clear existing targets.
     for( vehicle_part *t : turrets ) {
         if( !turret_query( *t ) ) {
             debugmsg( "Expected a valid vehicle turret" );
@@ -412,33 +431,25 @@ bool vehicle::turrets_aim( std::vector<vehicle_part *> &turrets )
         }
         t->reset_target( abs_part_pos( *t ) );
     }
-
     avatar &player_character = get_avatar();
-    if( player_character.has_trait( trait_BRAWLER ) ) {
-        player_character.add_msg_if_player(
-            _( "Pfft.  You are a brawler; using turrets is beneath you." ) );
-        return false;
-    }
-
-    // Get target
+    // Get target.
     target_handler::trajectory trajectory = target_handler::mode_turrets( player_character, *this,
                                             turrets );
-
     bool got_target = !trajectory.empty();
     if( got_target ) {
         tripoint_bub_ms target = trajectory.back();
         // Set target for any turret in range
         const tripoint_abs_ms abs_target = here.get_abs( target );
-
         for( vehicle_part *t : turrets ) {
             if( turret_query( *t ).in_range( abs_target ) ) {
                 t->target.second = abs_target;
             }
         }
 
-        ///\EFFECT_INT speeds up aiming of vehicle turrets
+        ///\EFFECT_DEX speeds up aiming of vehicle turrets.
+        // FIXME: Manually fired turrets need to actually aim.
         player_character.set_moves( std::min( 0,
-                                              player_character.get_moves() - 100 + ( 5 * player_character.int_cur ) ) );
+                                              player_character.get_moves() - 150 + ( 5 * player_character.dex_cur ) ) );
     }
     return got_target;
 }
@@ -574,7 +585,7 @@ npc &vehicle_part::get_targeting_npc( vehicle &veh )
         brain.set_fac( veh.get_owner() );
         brain.set_skill_level( skill_gun, 4 );
         brain.name = string_format( _( "The %s turret" ), get_base().tname( 1 ) );
-        brain.set_skill_level( get_base().gun_skill(), 8 );
+        brain.set_skill_level( get_base().gun_skill(), 6 );
     }
     cpu.brain->setpos( here, veh.bub_part_pos( here, *this ) );
     cpu.brain->recalc_sight_limits();
