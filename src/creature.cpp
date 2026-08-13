@@ -731,7 +731,6 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_characte
     if( std::abs( posz() - t.z() ) > fov_3d_z_range ) {
         return false;
     }
-
     const tripoint_bub_ms pos = pos_bub( here );
 
     // Check for adjacent high-concealment tiles that would block vision.
@@ -774,9 +773,9 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_characte
         }
         if( is_character ) {
             // Get character visibility from things like mutations.
-            Creature *ch = get_creature_tracker().creature_at( t );
+            Character *ch = get_creature_tracker().creature_at<Character>( t );
             if( ch != nullptr ) {
-                const float character_visibility_factor = ch->as_character()->visibility() / 100.0f;
+                const float character_visibility_factor = ch->visibility() / 100.0f;
                 int adj_range = std::floor( range * character_visibility_factor );
                 return adj_range >= wanted_range && here.sees( pos, t, range );
             }
