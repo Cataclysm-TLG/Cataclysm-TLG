@@ -369,16 +369,17 @@
   {
     "id": "ACT_TRAIN",
     "type": "activity_type",
-    "activity_level": "ACTIVE_EXERCISE",
+    "activity_level": "BRISK_EXERCISE",
     "verb": "training",
-    "based_on": "speed"
+    "based_on": "time",
+    "can_resume": false
   },
   {
     "id": "ACT_TRAIN_TEACHER",
     "type": "activity_type",
     "activity_level": "BRISK_EXERCISE",
     "verb": "teaching",
-    "based_on": "speed",
+    "based_on": "time",
     "can_resume": false
   },
   {
@@ -419,7 +420,7 @@
   {
     "id": "ACT_PICKAXE",
     "type": "activity_type",
-    "activity_level": "EXTRA_EXERCISE",
+    "activity_level": "EXPLOSIVE_EXERCISE",
     "verb": "mining",
     "based_on": "speed"
   },

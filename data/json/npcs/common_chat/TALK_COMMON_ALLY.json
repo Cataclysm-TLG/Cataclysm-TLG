@@ -152,43 +152,17 @@
     "dynamic_line": [ "I'm all ears, my friend.", "You gonna give me orders?", "What would you like?", "Just say the word." ],
     "responses": [
       {
-        "text": "Can you teach me anything?",
-        "condition": { "not": "is_by_radio" },
-        "trial": {
-          "type": "CONDITION",
-          "condition": {
-            "or": [
-              { "npc_need": "thirst", "amount": 80 },
-              { "npc_need": "hunger", "amount": 160 },
-              { "npc_need": "fatigue", "level": "TIRED" },
-              { "npc_has_effect": "asked_to_train" },
-              { "npc_has_trait": "HALLUCINATION" },
-              "u_driving",
-              "npc_driving"
-            ]
-          }
+        "text": "Can you teach something?",
+        "condition": {
+          "and": [
+            { "not": "u_driving" },
+            { "not": "npc_driving" },
+            { "not": "is_by_radio" },
+            { "not": { "u_has_effect": "asked_to_train" } },
+            { "not": { "npc_has_trait": "HALLUCINATION" } }
+          ]
         },
-        "success": { "topic": "TALK_DENY_TRAIN" },
-        "failure": { "topic": "TALK_TRAIN_PERSUADE" }
-      },
-      {
-        "text": "Can you host a training seminar?",
-        "condition": { "and": [ { "not": "is_by_radio" }, { "not": { "npc_has_trait": "HALLUCINATION" } } ] },
-        "trial": {
-          "type": "CONDITION",
-          "condition": {
-            "or": [
-              { "npc_need": "thirst", "amount": 80 },
-              { "npc_need": "hunger", "amount": 160 },
-              { "npc_need": "fatigue", "level": "TIRED" },
-              { "npc_has_effect": "asked_to_train" },
-              "u_driving",
-              "npc_driving"
-            ]
-          }
-        },
-        "success": { "topic": "TALK_DENY_TRAIN_SEMINAR" },
-        "failure": { "topic": "TALK_TRAIN_SEMINAR_PERSUADE" }
+        "topic": "TALK_TRAIN_SEMINAR"
       },
       {
         "text": "I have something to teach you.",
@@ -667,36 +641,6 @@
         "effect": { "set_npc_aim_rule": "AIM_STRICTLY_PRECISE" }
       },
       { "text": "Never mind.", "topic": "TALK_NONE" }
-    ]
-  },
-  {
-    "id": "TALK_TRAIN_PERSUADE",
-    "type": "talk_topic",
-    "dynamic_line": "Why should I teach you?",
-    "responses": [
-      {
-        "text": "Come on, we're friends.",
-        "trial": { "type": "PERSUADE", "difficulty": 0, "mod": [ [ "TRUST", 6 ], [ "VALUE", 2 ], [ "ANGER", -6 ] ] },
-        "success": { "topic": "TALK_TRAIN" },
-        "failure": { "topic": "TALK_DENY_PERSONAL", "effect": { "npc_add_effect": "asked_to_train", "duration": 21600 } }
-      },
-      { "text": "Never mind then.", "topic": "TALK_NONE" },
-      { "text": "Forget it, let's get going.", "topic": "TALK_DONE" }
-    ]
-  },
-  {
-    "id": "TALK_TRAIN_SEMINAR_PERSUADE",
-    "type": "talk_topic",
-    "dynamic_line": "Why should I host a training seminar?",
-    "responses": [
-      {
-        "text": "Come on, we're friends.",
-        "trial": { "type": "PERSUADE", "difficulty": 0, "mod": [ [ "TRUST", 6 ], [ "VALUE", 2 ], [ "ANGER", -6 ] ] },
-        "success": { "topic": "TALK_TRAIN_SEMINAR" },
-        "failure": { "topic": "TALK_DENY_PERSONAL", "effect": { "npc_add_effect": "asked_to_train", "duration": 21600 } }
-      },
-      { "text": "Never mind then.", "topic": "TALK_NONE" },
-      { "text": "Forget it, let's get going.", "topic": "TALK_DONE" }
     ]
   },
   {

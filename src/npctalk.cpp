@@ -491,7 +491,7 @@ load_eoc_vector_id_and_var(
 }
 
 
-/** Time (in turns) and cost (in cent) for training: */
+/** Time (in seconds) and cost (in cents) for training: */
 time_duration calc_skill_training_time_char( const Character &teacher, const Character &student,
         const skill_id &skill )
 {
@@ -505,7 +505,7 @@ int calc_skill_training_cost_char( const Character &teacher, const Character &st
     if( friendly_teacher( student, teacher ) ) {
         return 0;
     }
-    int skill_level = student.get_knowledge_level( skill );
+    int skill_level = student.get_skill_level( skill );
     return 1000 * ( 1 + skill_level ) * ( 1 + skill_level );
 }
 
@@ -1211,7 +1211,7 @@ void game::chat()
             if( sk.is_valid() ) {
                 selected = npcs_select_menu( clist, query_str, [&]( const Character * n ) {
                     return !n ||
-                           n->get_knowledge_level( sk ) >= static_cast<int>( player_character.get_skill_level( sk ) );
+                           n->get_skill_level( sk ) >= static_cast<int>( player_character.get_skill_level( sk ) );
                 } );
                 id_type = 0;
             }

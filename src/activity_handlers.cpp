@@ -2137,25 +2137,15 @@ void activity_handlers::train_finish( player_activity *act, Character *you )
     if( sk.is_valid() ) {
         const Skill &skill = sk.obj();
         std::string skill_name = skill.name();
-        int old_skill_level = you->get_knowledge_level( sk );
-        // Teacher intelligence, subject matter knowledge, and social skill matters most.
+        // Teacher intelligence, subject matter skill, and social skill matters most.
         // Student intelligence and social skill is secondary.
         int teacher_quality = ( teacher->get_int() + ( teacher->get_skill_level(
-                                    skill_social ) + teacher->get_knowledge_level( sk ) ) ) * 4;
-        int student_quality = ( you->get_int() + ( you->get_skill_level( skill_social ) * 2 ) ) * 4;
-        int teaching_effectiveness = std::min( 200, std::max( 10,
-                                               ( teacher_quality * 2 + student_quality ) / 2 ) );
-        you->practice( sk, teaching_effectiveness, old_skill_level + 2 );
-        int new_skill_level = you->get_knowledge_level( sk );
-        if( old_skill_level != new_skill_level ) {
-            if( you->is_avatar() ) {
-                add_msg( m_good, _( "You finish training %s to level %d." ),
-                         skill_name, new_skill_level );
-            }
-            get_event_bus().send<event_type::gains_skill_level>( you->getID(), sk, new_skill_level );
-        } else if( you->is_avatar() ) {
-            add_msg( m_good, _( "You get some training in %s." ), skill_name );
-        }
+                                    skill_social ) + teacher->get_skill_level( sk ) ) ) * 3;
+        int student_quality = ( you->get_int() + ( you->get_skill_level( skill_social ) * 2 ) ) * 3;
+        int teaching_effectiveness = std::min( 100, std::max( 10,
+                                               ( teacher_quality * 2 + student_quality ) / 3 ) );
+        you->add_msg_if_player( m_good, _( "You get some training in %s." ), sk->name() );
+        you->practice( sk, teaching_effectiveness );
         act->set_to_null();
         return;
     }

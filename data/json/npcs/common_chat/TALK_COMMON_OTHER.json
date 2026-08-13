@@ -263,13 +263,11 @@
         "switch": true
       },
       {
-        "text": "Okay.  Lead the way.",
-        "topic": "TALK_DONE",
+        "text": "I don't think it's safe enough to do any teaching here.",
+        "topic": "TALK_NONE",
         "switch": true,
-        "default": true,
-        "effect": "lead_to_safety"
+        "default": true
       },
-      { "text": "No, we'll be okay here.", "topic": "TALK_TRAIN_NPC_FORCE", "switch": true, "default": true },
       { "text": "On second thought, never mind.", "topic": "TALK_NONE" }
     ]
   },
@@ -284,6 +282,12 @@
         "condition": "at_safe_space",
         "effect": "start_training_seminar",
         "switch": true
+      },
+      {
+        "text": "I don't think it's safe enough to do any teaching here.",
+        "topic": "TALK_NONE",
+        "switch": true,
+        "default": true
       },
       { "text": "On second thought, never mind.", "topic": "TALK_NONE" }
     ]
@@ -301,100 +305,18 @@
         "switch": true
       },
       {
-        "text": "Okay.  Lead the way.",
-        "topic": "TALK_DONE",
+        "text": "I don't think it's safe enough to do any teaching here.",
+        "topic": "TALK_NONE",
         "switch": true,
-        "default": true,
-        "effect": "lead_to_safety"
+        "default": true
       },
-      { "text": "No, we'll be okay here.", "topic": "TALK_TRAIN_FORCE", "switch": true, "default": true },
-      { "text": "On second thought, never mind.", "topic": "TALK_NONE" }
-    ]
-  },
-  {
-    "id": "TALK_DENY_TRAIN",
-    "type": "talk_topic",
-    "dynamic_line": {
-      "u_driving": "I can't train you properly while you're operating a vehicle!",
-      "no": {
-        "npc_driving": "I can't train you properly while I'm operating a vehicle!",
-        "no": {
-          "npc_need": "thirst",
-          "amount": 80,
-          "no": {
-            "npc_need": "hunger",
-            "amount": 160,
-            "no": {
-              "npc_need": "fatigue",
-              "level": "TIRED",
-              "no": {
-                "npc_has_effect": "asked_to_train",
-                "no": "I have some reason for denying you training.",
-                "yes": "Give it some time, I'll show you something new later…"
-              },
-              "yes": { "gendered_line": "I'm too tired, let me rest first.", "relevant_genders": [ "npc" ] }
-            },
-            "yes": "I'm too hungry, give me something to eat."
-          },
-          "yes": "I'm too thirsty, give me something to drink."
-        }
-      }
-    },
-    "responses": [ { "text": "Ah, okay.", "topic": "TALK_NONE" } ]
-  },
-  {
-    "id": "TALK_DENY_TRAIN_SEMINAR",
-    "type": "talk_topic",
-    "dynamic_line": {
-      "u_driving": "We'll talk about a training seminar after you're done operating that vehicle.",
-      "no": {
-        "npc_driving": "I can't host a seminar while I'm operating a vehicle!",
-        "no": {
-          "npc_need": "thirst",
-          "amount": 80,
-          "no": {
-            "npc_need": "hunger",
-            "amount": 160,
-            "no": {
-              "npc_need": "fatigue",
-              "level": "TIRED",
-              "no": {
-                "npc_has_effect": "asked_to_train",
-                "no": "I have some reason to refuse hosting a training seminar.",
-                "yes": "Give it some time, we'll talk about a training seminar later…"
-              },
-              "yes": { "gendered_line": "I'm too tired, let me rest first.", "relevant_genders": [ "npc" ] }
-            },
-            "yes": "I'm too hungry, give me something to eat."
-          },
-          "yes": "I'm too thirsty, give me something to drink."
-        }
-      }
-    },
-    "responses": [ { "text": "Ah, okay.", "topic": "TALK_NONE" } ]
-  },
-  {
-    "id": "TALK_TRAIN_NPC_FORCE",
-    "type": "talk_topic",
-    "dynamic_line": "Alright, show me how it's done.",
-    "responses": [
-      { "text": "Okay, let's begin.", "topic": "TALK_DONE", "effect": "start_training_npc" },
-      { "text": "On second thought, never mind.", "topic": "TALK_NONE" }
-    ]
-  },
-  {
-    "id": "TALK_TRAIN_FORCE",
-    "type": "talk_topic",
-    "dynamic_line": "Alright, let's begin.",
-    "responses": [
-      { "text": "Sounds good.", "topic": "TALK_DONE", "effect": "start_training" },
       { "text": "On second thought, never mind.", "topic": "TALK_NONE" }
     ]
   },
   {
     "id": "TALK_DENY_GUARD",
     "type": "talk_topic",
-    "dynamic_line": "Not a bloody chance, I'm going to get left behind!",
+    "dynamic_line": "Not a chance, I'm going to get left behind!",
     "responses": [ { "text": "Fine.", "topic": "TALK_NONE" } ]
   },
   {
@@ -416,7 +338,7 @@
   {
     "id": "TALK_DENY_PERSONAL",
     "type": "talk_topic",
-    "dynamic_line": "I'd prefer to keep that to myself.",
+    "dynamic_line": "I would prefer not to.",
     "responses": [ { "text": "I understand…", "topic": "TALK_FRIEND" } ]
   },
   {
