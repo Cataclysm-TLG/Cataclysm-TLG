@@ -3595,7 +3595,7 @@ void monster::process_effects()
 
         if( type->regenerates_in_dark && !g->is_in_sunlight( pos_bub() ) ) {
             const float light = here.ambient_light_at( pos_bub() );
-            const int dark_regen_amount = static_cast<int>( std::round( 30.f * std::clamp( 600.f - light, 0.f, 600.f ) / 600.f ) );
+            const int dark_regen_amount = static_cast<int>( std::round( 30.f * std::clamp( 400.f - light, 0.f, 400.f ) / 400.f ) );
             if( heal( dark_regen_amount ) > 20 && one_in( 31 - dark_regen_amount ) ) {
                 add_msg_if_player_sees( *this, m_warning, _( "The %s uses the darkness to regenerate." ), name() );
             } else if( heal( dark_regen_amount ) > 0 && one_in( 31 - dark_regen_amount ) ) {
