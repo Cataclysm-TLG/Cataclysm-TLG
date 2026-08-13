@@ -89,19 +89,6 @@
         "topic": "TALK_TRAIN_SEMINAR_START"
       },
       {
-        "text": "I have something to teach you.",
-        "condition": {
-          "and": [
-            { "not": "u_driving" },
-            { "not": "npc_driving" },
-            { "not": "is_by_radio" },
-            { "not": { "u_has_effect": "asked_to_train" } },
-            { "not": { "npc_has_trait": "HALLUCINATION" } }
-          ]
-        },
-        "topic": "TALK_TRAIN_NPC_START"
-      },
-      {
         "text": "Let's trade items.",
         "condition": { "and": [ { "not": { "npc_has_trait": "HALLUCINATION" } }, { "not": "is_by_radio" } ] },
         "topic": "TALK_FRIEND_Luo",

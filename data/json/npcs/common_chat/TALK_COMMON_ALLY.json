@@ -149,7 +149,7 @@
   {
     "id": [ "TALK_ALLY_ORDERS" ],
     "type": "talk_topic",
-    "dynamic_line": [ "I'm all ears, my friend.", "You gonna give me orders?", "What would you like?", "Just say the word." ],
+    "dynamic_line": [ "I'm listening.", "Orders?", "What would you like?", "Just say the word." ],
     "responses": [
       {
         "text": "Can you teach something?",
@@ -163,19 +163,6 @@
           ]
         },
         "topic": "TALK_TRAIN_SEMINAR"
-      },
-      {
-        "text": "I have something to teach you.",
-        "condition": {
-          "and": [
-            { "not": "u_driving" },
-            { "not": "npc_driving" },
-            { "not": "is_by_radio" },
-            { "not": { "u_has_effect": "asked_to_train" } },
-            { "not": { "npc_has_trait": "HALLUCINATION" } }
-          ]
-        },
-        "topic": "TALK_TRAIN_NPC"
       },
       {
         "text": "Let's trade items.",
