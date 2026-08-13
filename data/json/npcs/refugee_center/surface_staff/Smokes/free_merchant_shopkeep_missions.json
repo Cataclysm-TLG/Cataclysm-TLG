@@ -229,14 +229,16 @@
     "id": "MISSION_FREE_MERCHANTS_EVAC_4",
     "type": "mission_definition",
     "name": { "str": "Solar Power" },
-    "description": "Deliver 10 solar panel arrays to help the Free Merchants set up a renewable power grid, in exchange for a handsome reward.",
-    "goal": "MGOAL_FIND_ITEM",
-    "difficulty": 5,
-    "value": 400000,
+    "description": "Deliver 10 solar panel arrays to help the Free Merchants set up a renewable power grid in exchange for a handsome reward.",
+    "value": 0,
+    "goal": "MGOAL_CONDITION",
     "goal_condition": {
-      "u_has_items_sum": [ { "item": "ground_solar_panel", "amount": 10 }, { "item": "ground_solar_panel_v2", "amount": 10 } ]
+      "u_has_items_sum": [
+        { "item": "ground_solar_panel", "amount": 10 },
+        { "item": "ground_solar_panel_v2", "amount": 10 }
+      ]
     },
-    "count": 10,
+    "difficulty": 2,
     "origins": [ "ORIGIN_SECONDARY" ],
     "has_generic_rewards": false,
     "followup": "MISSION_FREE_MERCHANTS_EVAC_5",
