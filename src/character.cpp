@@ -13002,7 +13002,6 @@ void Character::recalc_speed_bonus()
 double Character::recoil_vehicle() const
 {
     // TODO: vary penalty dependent upon vehicle part on which player is boarded
-
     if( in_vehicle ) {
         if( const optional_vpart_position vp = get_map().veh_at( pos_bub() ) ) {
             return static_cast<double>( std::abs( vp->vehicle().velocity ) ) * 3 / 100;

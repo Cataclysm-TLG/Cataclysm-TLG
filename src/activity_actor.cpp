@@ -365,13 +365,13 @@ bool aim_activity_actor::check_gun_ability_to_shoot( Character &who, item &it )
 {
 
     if( it.has_fault_flag( "RUINED_GUN" ) ) {
-        who.add_msg_if_player( m_bad, _( "Your %s is little more than an awkward club now." ), it.tname() );
+        who.add_msg_if_player( m_bad, _( "Your %s is completely ruined.  It will never fire again." ), it.tname() );
         return false;
     }
 
-    // if it's a simple fault, character can try to fix it on the fly
+    // If it's a simple fault, character can try to fix it on the fly.
     if( faults::random_of_type_item_has( it, gun_mechanical_simple ) != fault_id::NULL_ID() ) {
-        // fixing fault should cost more than 1 second
+        // Fixing fault should cost more than 1 second
         // but until game running the next activity actor without ever verifying
         // was the previous one successful or not will be resolved,
         // it would be safer to limit it somewhat
@@ -379,21 +379,22 @@ bool aim_activity_actor::check_gun_ability_to_shoot( Character &who, item &it )
         who.recoil = MAX_RECOIL;
         if( one_in( std::max( 7.0f, ( 15.0f - ( 4.0f * who.get_skill_level( skill_gun ) ) ) ) ) ) {
             who.add_msg_if_player( m_good,
-                                   _( "Your %s has some mechanical malfunction.  You tried to quickly fix it, and it works now!" ),
+                                   _( "You quickly fix your malfunctioning %s." ),
                                    it.tname() );
             it.remove_single_fault_of_type( gun_mechanical_simple );
             it.set_var( "u_know_round_in_chamber", true );
         } else {
             who.add_msg_if_player( m_bad,
-                                   _( "Your %s has some mechanical malfunction.  You tried to quickly fix it, but failed!" ),
+                                   _( "Your %s has a mechanical malfunction.  You try to quickly fix it, but fail!" ),
                                    it.tname() );
             return false;
         }
     }
-
+    // TODO: Add a cooling safety override mod.
+    // TODO ALSO: Add a craftable mod for a better cooling system.
     if( it.has_fault_flag( "OVERHEATED_GUN" ) ) {
         who.add_msg_if_player( m_warning,
-                               _( "Your %s is too hot, and little screen signalizes the gun is inoperable." ), it.tname() );
+                               _( "Your %s is too hot and will not fire until it has cooled." ), it.tname() );
         return false;
     }
 

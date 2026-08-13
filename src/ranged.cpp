@@ -180,7 +180,6 @@ static const skill_id skill_launcher( "launcher" );
 static const skill_id skill_swimming( "swimming" );
 static const skill_id skill_throw( "throw" );
 
-static const trait_id trait_BRAWLER( "BRAWLER" );
 static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
 
@@ -723,7 +722,7 @@ bool Character::handle_gun_damage( item &it )
 
     const auto &curammo_effects = it.ammo_effects();
     const islot_gun &firing = *it.type->gun;
-    // misfire chance based on dirt accumulation. Formula is designed to make chance of jam highly unlikely at low dirt levels, but levels increase geometrically as the dirt level reaches max (10,000). The number used is just a figure I found reasonable after plugging the number into excel and changing it until the probability made sense at high, medium, and low levels of dirt.
+    // Misfire chance based on dirt accumulation. Formula is designed to make chance of jam highly unlikely at low dirt levels, but levels increase geometrically as the dirt level reaches max (10,000). The number used is just a figure I found reasonable after plugging the number into excel and changing it until the probability made sense at high, medium, and low levels of dirt.
     if( !it.has_flag( flag_NEVER_JAMS ) &&
         x_in_y( dirt_dbl * dirt_dbl * dirt_dbl,
                 1000000000000.0 ) ) {
@@ -954,8 +953,8 @@ bool Character::handle_gun_overheat( item &it )
             return false;
         }
 
-        //Overall the durability of the gun greatly conditions what sort of failures are possible.
-        //A durability above 8 prevents the most serious failures
+        // Overall the durability of the gun greatly conditions what sort of failures are possible.
+        // A durability above 8 prevents the most serious failures.
         int fault_roll = rng( 5, 15 ) - gun_type.durability;
         if( it.faults_potential().count( fault_overheat_explosion ) && fault_roll > 9 ) {
             add_msg_if_player( m_bad,
@@ -2223,12 +2222,11 @@ static int print_aim( const target_ui &ui, Character &you, const catacurses::win
     // This is an accuracy estimate for the player.
     // TODO: push the calculations duplicated from Creature::deal_projectile_attack() and
     // Creature::projectile_attack() into shared methods.
-    // Dodge doesn't affect gun attacks
 
     dispersion_sources dispersion = you.get_weapon_dispersion( weapon );
     dispersion.add_range( you.recoil_vehicle() );
 
-    // This could be extracted, to allow more/less verbose displays
+    // This could be extracted, to allow more/less verbose displays.
     static const std::vector<confidence_rating> confidence_config = {{
             { accuracy_critical, '*', "green", translate_marker_context( "aim_confidence", "Great" ) },
             { accuracy_standard, '+', "light_gray", translate_marker_context( "aim_confidence", "Good" ) },
@@ -2692,7 +2690,8 @@ dispersion_sources Character::get_tracking_dispersion( const item *obj, const Cr
     tracking_dispersion += weight_factor;
     if( aware && mobile ) {
         tracking_dispersion += speed * 0.1;
-        tracking_dispersion += dodge * 10.0;
+        // Monsters have less dodge than characters due to fewer bonuses.
+        tracking_dispersion += dodge * ( target->is_monster() ? 15.0 : 10.0 );
     }
     tracking_dispersion *= distance_factor;
     if( rng ) {
@@ -4575,11 +4574,6 @@ bool gunmode_checks_common( avatar &you, const map &m, std::vector<std::string> 
                             const gun_mode &gmode )
 {
     bool result = true;
-    if( you.has_trait( trait_BRAWLER ) ) {
-        messages.push_back( string_format( _( "Pfft.  You are a brawler; using this %s is beneath you." ),
-                                           gmode->tname() ) );
-        result = false;
-    }
 
     // Check that passed gun mode is valid and we are able to use it
     if( !( gmode && you.can_use( *gmode ) ) ) {
