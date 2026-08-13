@@ -386,10 +386,14 @@ bool vehicle::turrets_aim_and_fire_all_manual( bool show_msg )
 void vehicle::turrets_override_automatic_aim()
 {
     std::vector<vehicle_part *> turrets = find_all_ready_turrets( false, true );
-
+    if( get_player_character().controlling_vehicle ) {
+        add_msg( m_warning,
+             _( "You cannot take full control of a turret while operating a vehicle." ) );
+        return;
+    }
     if( turrets.empty() ) {
         add_msg( m_warning,
-                 _( "Can't aim turrets: all turrets are offline or set to manual targeting mode." ) );
+                 _( "All turrets are offline or set to manual targeting mode." ) );
         return;
     }
 
