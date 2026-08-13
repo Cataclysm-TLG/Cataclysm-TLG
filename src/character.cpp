@@ -507,6 +507,7 @@ static const trait_id trait_ROOTS2( "ROOTS2" );
 static const trait_id trait_ROOTS3( "ROOTS3" );
 static const trait_id trait_SAPIOVORE( "SAPIOVORE" );
 static const trait_id trait_SAVANT( "SAVANT" );
+static const trait_id trait_SCREECH( "SCREECH" );
 static const trait_id trait_SHELL2( "SHELL2" );
 static const trait_id trait_SHELL3( "SHELL3" );
 static const trait_id trait_SHOUT2( "SHOUT2" );
@@ -7746,87 +7747,63 @@ void Character::wake_up()
 
 int Character::get_shout_volume() const
 {
-    int base = 10;
+    int base = 1 + get_size() * 3;
     int shout_multiplier = 2;
-
     base = enchantment_cache->modify_value( enchant_vals::mod::SHOUT_NOISE, base );
     shout_multiplier = enchantment_cache->modify_value( enchant_vals::mod::SHOUT_NOISE_STR_MULT,
                        shout_multiplier );
-
-    // Masks and such dampen the sound
-    // Balanced around whisper for wearing bondage mask
-    // and noise ~= 10 (door smashing) for wearing dust mask for character with strength = 8
-    /** @EFFECT_STR increases shouting volume */
     int noise = ( base + str_cur * shout_multiplier ) * get_limb_score( limb_score_breathing );
-
     // Minimum noise volume possible after all reductions.
     // Volume 1 can't be heard even by player
     constexpr int minimum_noise = 2;
-
     if( noise <= base ) {
         noise = std::max( minimum_noise, noise );
     }
-
-    // Screaming underwater is not good for oxygen and harder to do overall
+    // Screaming underwater is much quieter.
     if( underwater ) {
-        noise = std::max( minimum_noise, noise / 2 );
+        noise = std::max( minimum_noise, noise / 4 );
     }
     return noise;
 }
 
 void Character::shout( std::string msg, bool order )
 {
-    int base = 10;
-    std::string shout;
-
-    // Mutations make shouting louder, they also define the default message
+    std::string shout = "shout";
+    // Mutations make shouting louder or quieter, they also define the default message.
     if( has_trait( trait_SHOUT3 ) ) {
-        base = 20;
         if( msg.empty() ) {
             msg = is_avatar() ? _( "yourself let out a piercing howl!" ) : _( "a piercing howl!" );
             shout = "howl";
         }
     } else if( has_trait( trait_SHOUT2 ) ) {
-        base = 15;
         if( msg.empty() ) {
             msg = is_avatar() ? _( "yourself scream loudly!" ) : _( "a loud scream!" );
             shout = "scream";
         }
-    }
-
-    if( msg.empty() ) {
-        msg = is_avatar() ? _( "yourself shout loudly!" ) : _( "a loud shout!" );
-        shout = "default";
+    } else if( has_trait( trait_SCREECH ) ) {
+        if( msg.empty() ) {
+            msg = is_avatar() ? _( "yourself screech loudly!" ) : _( "a loud screech!" );
+            shout = "screech";
+        }
     }
     int noise = get_shout_volume();
-
-    // Minimum noise volume possible after all reductions.
-    // Volume 1 can't be heard even by player
-    constexpr int minimum_noise = 2;
-
-    if( noise <= base ) {
-        std::wstring wstr( utf8_to_wstr( msg ) );
-        std::transform( wstr.begin(), wstr.end(), wstr.begin(), towlower );
-        msg = wstr_to_utf8( wstr );
-    }
-
-    // Screaming underwater is not good for oxygen and harder to do overall
+    // Screaming underwater is a bad idea.  Volume was handled in get_shout_volume().
     if( underwater ) {
         if( !has_trait( trait_GILLS ) && !has_trait( trait_GILLS_CEPH ) ) {
             mod_stat( "oxygen", -noise );
         }
     }
-
-    // TODO: indistinct noise descriptions should be handled in the sounds code
-    if( noise <= minimum_noise ) {
-        add_msg_if_player( m_warning,
-                           _( "The sound of your voice is almost completely muffled!" ) );
-        msg = is_avatar() ? _( "your muffled shout" ) : _( "an indistinct voice" );
-    } else if( get_limb_score( limb_score_breathing ) < 0.5f ) {
+    if( underwater || get_limb_score( limb_score_breathing ) < 0.5f ) {
         // The shout's volume is 1/2 or lower of what it would be without the penalty
-        add_msg_if_player( m_warning, _( "The sound of your voice is significantly muffled!" ) );
+        add_msg_if_player( m_warning, _( "Your %s is significantly muffled!" ), shout );
     }
-
+    if( noise <= 2 ) {
+        add_msg_if_player( m_warning, _( "Your %s is barely audible!" ), shout );
+        msg = is_avatar() ? _( "your faint voice." ) : _( "an indistinct voice." );
+    }
+    if( msg.empty() ) {
+        msg = is_avatar() ? _( "yourself shout loudly!" ) : _( "a loud shout!" );
+    }
     sounds::sound( pos_bub(), noise, order ? sounds::sound_t::order : sounds::sound_t::alert, msg,
                    false,
                    "shout", shout );
@@ -9423,7 +9400,9 @@ void Character::set_knows_creature_type( const Creature *c )
 
 void Character::set_knows_creature_type( const mtype_id &c )
 {
-    known_monsters.emplace( c );
+    if( known_monsters.emplace( c ).second ) {
+        practice( skill_survival, 10 );
+    }
 }
 
 void Character::assign_activity( const activity_id &type, int moves, int index, int pos,

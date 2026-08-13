@@ -7739,7 +7739,7 @@
     "name": { "str": "Hissing Voice" },
     "mixed_effect": true,
     "points": 0,
-    "description": "You hiss when speaking.  Persuading people will be more difficult, but lying to or threatening them will be easier.",
+    "description": "You hiss when speaking, and your voice is a bit quieter.  Persuading people will be more difficult, but lying to or threatening them will be easier.",
     "types": [ "VOICE_TONE" ],
     "category": [ "LIZARD", "RAPTOR" ],
     "enchantments": [ { "values": [ { "value": "SHOUT_NOISE", "add": -2 } ] } ],

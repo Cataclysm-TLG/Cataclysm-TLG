@@ -881,8 +881,8 @@ static hack_result hack_attempt( Character &who, item_location &tool )
         who.practice( skill_computer, 20 );
     }
 
-    // only skilled supergenius never cause short circuits, but the odds are low for people
-    // with moderate skills
+    // Only skilled supergeniuses never cause short circuits, but the odds are low for people
+    // with moderate skills.
     const int hack_stddev = 5;
     int success = std::ceil( normal_roll( hack_level( who, tool ), hack_stddev ) );
     if( success < 0 ) {
