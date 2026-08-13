@@ -1298,6 +1298,7 @@ void debug_menu::wishskill( Character *you, bool change_theory )
                 you->set_knowledge_level( skill.ident(), skset );
             } else {
                 you->set_skill_level( skill.ident(), skset );
+                you->set_knowledge_level( skill.ident(), skset );
             }
             skmenu.textformatted[0] = string_format( _( "%s set to %d             " ),
                                       skill.name(),
@@ -1331,6 +1332,7 @@ void debug_menu::wishskill( Character *you, bool change_theory )
                         you->set_knowledge_level( skill.ident(), std::max( 0, changeto ) );
                     } else {
                         you->set_skill_level( skill.ident(), std::max( 0, changeto ) );
+                        you->set_knowledge_level( skill.ident(), std::max( 0, changeto ) );
                     }
 
                     skmenu.entries[skill_id + skoffset].txt = string_format( _( "@ %d: %s  " ),
