@@ -19,7 +19,7 @@
       "Ł": "t_metal_floor",
       "~": "t_sewage_underground",
       "_": [ [ "t_moss", 2 ], [ "t_dirtmound", 4 ], [ "t_sewage_underground", 4 ] ],
-      "-": "t_bridge",
+      "-": "t_bridge_underground",
       "#": "t_grate",
       "<": "t_ladder_up",
       "o": "t_sewage_pipe",

@@ -360,9 +360,7 @@
     "looks_like": "t_water_murky",
     "color": "light_green",
     "move_cost": 6,
-    "liquid_source": { "id": "water_sewage", "min_temp": 2.2 },
     "flags": [ "TRANSPARENT", "SWIMMABLE", "SHALLOW_WATER" ],
-    "examine_action": "water_source",
     "phase_targets": [ "t_ice_sh_thick", "t_ice_sh_thin", "t_pseudo_phase" ],
     "phase_temps": [ -15, -10 ],
     "phase_method": "water_freeze"
@@ -377,7 +375,8 @@
     "roof": "t_rock_roof",
     "color": "light_green",
     "move_cost": 6,
-    "liquid_source": { "id": "water_sewage" },
+    "phase_targets": [ "t_ice_sh_thick", "t_ice_sh_thin", "t_pseudo_phase" ],
+    "phase_temps": [ -15, -10 ],
     "flags": [ "TRANSPARENT", "SWIMMABLE", "SHALLOW_WATER", "INDOORS" ],
     "examine_action": "water_source"
   },
@@ -385,7 +384,7 @@
     "type": "terrain",
     "id": "t_lava",
     "name": "lava",
-    "description": "An extremely hot, glowing liquid, composed of molten rock and/or metal.  In some places, lava-grilled steak is a delicacy.",
+    "description": "An extremely hot, glowing liquid, composed of molten rock and/or metal.",
     "symbol": "~",
     "color": "red",
     "move_cost": 4,

@@ -793,7 +793,8 @@ bool avatar_action::fire_turret_manual( avatar &you, map &m, turret_data &turret
     if( you.in_vehicle ) {
         if( const optional_vpart_position vp = m.veh_at( you.pos_bub() ) ) {
             if( vp->is_inside() ) {
-                add_msg( m_warning, _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
+                add_msg( m_warning,
+                         _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
                 return false;
             }
         }

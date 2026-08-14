@@ -108,6 +108,7 @@ static const skill_id skill_stabbing( "stabbing" );
 static const skill_id skill_unarmed( "unarmed" );
 
 static const ter_str_id ter_t_bridge( "t_bridge" );
+static const ter_str_id ter_t_bridge_underground( "t_bridge_underground" );
 static const ter_str_id ter_t_chainfence( "t_chainfence" );
 static const ter_str_id ter_t_clay( "t_clay" );
 static const ter_str_id ter_t_claymound( "t_claymound" );
@@ -782,7 +783,7 @@ void sounds::process_sound_markers( Character *you )
             }
         } else {
             int offset_max = heard_volume < distance_to_sound ? 3 :
-                            heard_volume < distance_to_sound * 2 ? 2 : 1;
+                             heard_volume < distance_to_sound * 2 ? 2 : 1;
             err_offset = rng( 0, offset_max );
         }
 
@@ -1863,6 +1864,7 @@ void sfx::do_footstep( const Character &ch )
             ter_t_metal_floor,
             ter_t_grate,
             ter_t_bridge,
+            ter_t_bridge_underground,
             ter_t_elevator,
             ter_t_guardrail_bg_dp,
             ter_t_slide,

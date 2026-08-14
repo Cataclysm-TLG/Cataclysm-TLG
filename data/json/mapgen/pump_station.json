@@ -299,9 +299,9 @@
         "|": "t_concrete_wall",
         "^": "t_ladder_up",
         "-": "t_metal_railing",
-        "x": "t_bridge",
+        "x": "t_bridge_underground",
         "_": "t_grate",
-        "~": "t_sewage"
+        "~": "t_sewage_underground"
       },
       "furniture": { "L": "f_locker", "c": "f_utility_shelf" },
       "items": {

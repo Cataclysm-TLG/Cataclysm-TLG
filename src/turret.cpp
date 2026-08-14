@@ -321,7 +321,8 @@ void vehicle::turrets_aim_and_fire_single()
     if( you.in_vehicle ) {
         if( const optional_vpart_position vp = here.veh_at( you.pos_bub() ) ) {
             if( vp->is_inside() ) {
-                add_msg( m_warning, _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
+                add_msg( m_warning,
+                         _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
                 return;
             }
         }
@@ -374,7 +375,8 @@ bool vehicle::turrets_aim_and_fire_all_manual( bool show_msg )
         map &here = get_map();
         if( const optional_vpart_position vp = here.veh_at( you.pos_bub() ) ) {
             if( vp->is_inside() ) {
-                add_msg( m_warning, _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
+                add_msg( m_warning,
+                         _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
                 return false;
             }
         }
@@ -388,7 +390,7 @@ void vehicle::turrets_override_automatic_aim()
     std::vector<vehicle_part *> turrets = find_all_ready_turrets( false, true );
     if( get_player_character().controlling_vehicle ) {
         add_msg( m_warning,
-             _( "You cannot take full control of a turret while operating a vehicle." ) );
+                 _( "You cannot take full control of a turret while operating a vehicle." ) );
         return;
     }
     if( turrets.empty() ) {

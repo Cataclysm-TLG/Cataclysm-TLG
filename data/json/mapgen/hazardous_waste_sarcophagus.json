@@ -290,7 +290,7 @@
         "E": "t_elevator",
         "e": "t_elevator_control_off",
         "W": "t_water_dispenser",
-        "~": [ [ "t_sewage", 55 ], [ "t_dirtfloor", 25 ], [ "t_dirtmound", 20 ] ]
+        "~": [ [ "t_sewage_underground", 55 ], [ "t_dirtfloor", 25 ], [ "t_dirtmound", 20 ] ]
       },
       "furniture": {
         "s": "f_sink",
@@ -395,7 +395,6 @@
     "id": "hazardous_waste",
     "type": "item_group",
     "items": [
-      { "item": "water_sewage", "container-item": "55gal_drum", "charges": [ 26, 126 ], "prob": 40 },
       { "prob": 2, "group": "meat_tainted_55gal_drum_3_20" },
       { "group": "toxic_waste_mx_chems", "prob": 35 },
       { "item": "55gal_drum", "prob": 50 }

@@ -198,10 +198,9 @@
     "name": "skylight frame",
     "description": "A wooden skylight frame.",
     "looks_like": "t_window_empty",
-    "symbol": "0",
+    "symbol": " ",
     "color": "light_cyan",
     "move_cost": 2,
-    "coverage": 0,
     "examine_action": "ledge",
     "deconstruct": {
       "ter_set": "t_open_air",
@@ -221,7 +220,7 @@
         { "item": "nail", "charges": [ 3, 4 ] }
       ]
     },
-    "flags": [ "TRANSPARENT", "NO_FLOOR", "FLAMMABLE" ]
+    "flags": [ "TRANSPARENT", "NO_FLOOR", "FLAMMABLE", "EMPTY_SPACE", "FREE_TO_EXAMINE", "TRANSPARENT_FLOOR" ]
   },
   {
     "type": "terrain",

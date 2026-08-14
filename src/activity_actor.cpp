@@ -365,7 +365,8 @@ bool aim_activity_actor::check_gun_ability_to_shoot( Character &who, item &it )
 {
 
     if( it.has_fault_flag( "RUINED_GUN" ) ) {
-        who.add_msg_if_player( m_bad, _( "Your %s is completely ruined.  It will never fire again." ), it.tname() );
+        who.add_msg_if_player( m_bad, _( "Your %s is completely ruined.  It will never fire again." ),
+                               it.tname() );
         return false;
     }
 
