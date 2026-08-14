@@ -156,7 +156,6 @@
     "subtypes": [ "GUN" ],
     "name": { "str_sp": "Luty SMG" },
     "description": "A Luty pattern makeshift smoothbore SMG crudely constructed out of various steel parts using advanced powered hand tools; likely one of the most complex guns that is feasible to make outside of a machine shop, but still very unreliable.  This one is chambered for .40 S&W cartridges and accepts custom-made makeshift magazines.",
-    "//": "Crafting recipe must make use of angle grinder, bench grinder, set square and vise, which don't yet exist in game. No factory mags until UMP40, mp5/40, or other straight .40 mags are implemented.",
     "weight": "3520 g",
     "volume": "1110 ml",
     "longest_side": "538 mm",
