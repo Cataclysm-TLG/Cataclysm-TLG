@@ -67,6 +67,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "luminance": 4,
     "special_attacks": [ [ "SEARCHLIGHT", 1 ] ],
+    "upgrades": { "half_life": 14, "into_group": "GROUP_EMPTY" },
     "death_drops": { "groups": [ [ "robots", 1 ], [ "turret_searchlight", 1 ] ] },
     "death_function": {
       "effect": { "id": "death_focused_beam", "hit_self": true },
@@ -296,6 +297,7 @@
     "vision_night": 3,
     "weakpoint_sets": [ "wps_turret" ],
     "revert_to_itype": "bot_turret_riot",
+    "upgrades": { "half_life": 14, "into_group": "GROUP_EMPTY" },
     "starting_ammo": { "40x46mm_m1006": 6 },
     "special_attacks": [
       {

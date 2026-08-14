@@ -50,10 +50,9 @@
       "M": "f_machinery_heavy",
       "E": "f_machinery_electronic",
       "g": [
-        [ "f_generator_broken", 25 ],
+        [ "f_generator_broken", 30 ],
         [ "f_diesel_generator", 5 ],
-        [ "f_military_generator", 5 ],
-        [ "f_12000_gasoline_generator", 5 ]
+        [ "f_gasoline_generator", 5 ]
       ],
       "h": "f_chair",
       "T": "f_table",

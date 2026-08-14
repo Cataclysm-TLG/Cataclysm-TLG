@@ -102,7 +102,7 @@
     ]
   },
   {
-    "result": "12000_gasoline_generator",
+    "result": "gasoline_generator",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "2 h",

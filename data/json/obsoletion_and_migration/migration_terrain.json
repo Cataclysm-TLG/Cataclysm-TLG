@@ -148,5 +148,15 @@
     "type": "ter_furn_migration",
     "from_ter": "t_treetop_apricot",
     "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_furn": "f_12000_gasoline_generator",
+    "to_furn": "f_gasoline_generator"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "ap_12000_gasoline_generator",
+    "to": "ap_gasoline_generator"
   }
 ]
