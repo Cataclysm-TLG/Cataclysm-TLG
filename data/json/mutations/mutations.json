@@ -1384,6 +1384,15 @@
   },
   {
     "type": "mutation",
+    "id": "LIGHTSLEEPER",
+    "name": { "str": "Light Sleeper" },
+    "points": -1,
+    "description": "Noise, light, and other disturbances wake you up easily.  It used to be annoying, but now it might just save your life.",
+    "starting_trait": true,
+    "category": [ "MOUSE", "FELINE", "BOVOID", "LAGOMORPH" ]
+  },
+  {
+    "type": "mutation",
     "id": "SLEEPY",
     "name": { "str": "Sleepy" },
     "points": -1,
@@ -1530,7 +1539,7 @@
   {
     "type": "mutation",
     "id": "HATES_BOOKS",
-    "name": { "str": "Hates Books" },
+    "name": { "str": "Hates Reading" },
     "points": -1,
     "description": "Reading is for nerds!  Boring books are more boring, and you can't have fun by reading books.",
     "valid": false,
@@ -6980,6 +6989,7 @@
     "types": [ "SUNLIGHT" ],
     "changes_to": [ "TROGLO2" ],
     "cancels": [ "SEASONAL_AFFECTIVE" ],
+    "flags": [ "LIGHT_SENSITIVE" ],
     "category": [ "BEAST", "INSECT", "SLIME", "SPIDER", "BATRACHIAN", "RAT", "TROGLOBITE", "CHIROPTERAN" ]
   },
   {
@@ -6991,6 +7001,7 @@
     "types": [ "SUNLIGHT" ],
     "prereqs": [ "TROGLO" ],
     "changes_to": [ "TROGLO3" ],
+    "flags": [ "LIGHT_SENSITIVE" ],
     "category": [ "RAT", "TROGLOBITE" ]
   },
   {
@@ -7001,6 +7012,7 @@
     "description": "Sunlight makes you extremely uncomfortable, resulting in large penalties to all stats.",
     "types": [ "SUNLIGHT" ],
     "prereqs": [ "TROGLO2" ],
+    "flags": [ "LIGHT_SENSITIVE" ],
     "category": [ "TROGLOBITE" ]
   },
   {
