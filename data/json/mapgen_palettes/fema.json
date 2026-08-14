@@ -37,11 +37,11 @@
     },
     "furniture": {
       "'": [
-        [ "f_generator_broken", 25 ],
+        [ "f_generator_broken", 40 ],
         [ "f_portable_generator", 5 ],
         [ "f_diesel_generator", 5 ],
         [ "f_military_generator", 5 ],
-        [ "f_12000_gasoline_generator", 5 ]
+        [ "f_gasoline_generator", 5 ]
       ],
       "=": "f_canvas_wall",
       ",": "f_fema_groundsheet",

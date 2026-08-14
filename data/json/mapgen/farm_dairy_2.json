@@ -149,7 +149,7 @@
         "M": "f_bathtub",
         "O": "f_locker",
         "x": "f_utility_shelf",
-        "J": "f_active_backup_generator",
+        "J": "f_generator_broken",
         "y": "f_air_conditioner"
       },
       "item": {
@@ -179,13 +179,13 @@
         { "item": "salt_lick", "x": [ 14, 15 ], "y": [ 34, 35 ], "chance": 100, "repeat": 3 }
       ],
       "place_items": [ { "item": "tools_toolbox", "x": 48, "y": 33, "chance": 60 } ],
-      "signs": { "s": { "signage": "St. John Dairy.  555-0199 Daily Farm Tours" } },
+      "signs": { "s": { "signage": "St. John Dairy.  Daily Farm Tours" } },
       "traps": { "q": "tr_beartrap" },
       "monster": {
-        "q": { "monster": "mon_zombie", "name": "Danny" },
-        "Q": { "monster": "mon_zombie_tough", "name": "Andy" },
-        "Y": { "monster": "mon_cow", "name": "Maybelle" },
-        "u": { "monster": "mon_zombie_brainless", "name": "Larry" }
+        "q": { "monster": "mon_zombie" },
+        "Q": { "monster": "mon_zombie_tough" },
+        "Y": { "monster": "mon_zow" },
+        "u": { "monster": "mon_zombie_brainless" }
       },
       "fields": {
         "u": { "field": "fd_blood", "intensity": 1, "age": 10 },
@@ -237,12 +237,12 @@
         "`": "t_floor_noroof",
         "j": "t_floor_noroof"
       },
-      "place_monster": [ { "monster": "mon_zombie_fat", "name": "Brenda", "x": 25, "y": 20 } ],
+      "place_monster": [ { "monster": "mon_zombie_fat", "x": 25, "y": 20 } ],
       "items": {
         "q": [
           { "item": "tools_earthworking", "chance": 45 },
-          { "item": "mechanics", "chance": 40 },
-          { "item": "home_hw", "chance": 50 },
+          { "item": "mechanics", "chance": 35 },
+          { "item": "home_hw", "chance": 40 },
           { "item": "tools_common", "chance": 30 },
           { "item": "fertilizers", "chance": 60 }
         ]
@@ -289,7 +289,7 @@
         "'": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "-": "t_railing"
       },
-      "place_monster": [ { "monster": "mon_zombie_crawler", "name": "Mark", "x": 25, "y": 20 } ],
+      "place_monster": [ { "monster": "mon_zombie_crawler", "x": 25, "y": 20 } ],
       "place_fields": [
         { "field": "fd_blood", "intensity": 1, "age": 10, "x": 31, "y": [ 14, 16 ], "repeat": [ 1, 2 ] },
         { "field": "fd_blood", "intensity": 1, "age": 10, "x": [ 30, 35 ], "y": [ 12, 13 ], "repeat": [ 5, 8 ] }

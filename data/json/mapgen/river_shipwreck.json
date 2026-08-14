@@ -107,7 +107,7 @@
         "6": "f_machinery_light",
         "e": "f_machinery_heavy",
         "r": "f_console_broken",
-        "R": "f_active_backup_generator",
+        "R": [ [ "f_generator_broken", 4 ], [ "f_active_backup_generator", 1 ] ],
         "#": "f_wreckage",
         "9": "f_locker",
         "A": "f_standing_tank"

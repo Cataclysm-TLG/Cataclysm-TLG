@@ -72,10 +72,7 @@
       "furniture": {
         "@": [
           [ "f_generator_broken", 25 ],
-          [ "f_portable_generator", 5 ],
-          [ "f_diesel_generator", 5 ],
-          [ "f_military_generator", 5 ],
-          [ "f_12000_gasoline_generator", 5 ]
+          [ "f_portable_generator", 10 ]
         ],
         "0": "f_standing_tank",
         "r": "f_locker",

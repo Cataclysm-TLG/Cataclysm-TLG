@@ -3440,7 +3440,6 @@ void activity_handlers::atm_finish( player_activity *act, Character * )
     }
 }
 
-
 void activity_handlers::view_recipe_finish( player_activity *act, Character * )
 {
     act->set_to_null();

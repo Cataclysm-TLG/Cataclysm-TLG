@@ -296,7 +296,7 @@
       "А": "f_speaker_cabinet",
       "а": "f_fridge",
       "ё": "f_counter",
-      "Ё": "f_active_backup_generator",
+      "Ё": [ [ "f_generator_broken", 6 ], [ "f_active_backup_generator", 1 ] ],
       "З": "f_bookcase",
       "Н": "f_bookcase",
       "п": "f_bookcase",
