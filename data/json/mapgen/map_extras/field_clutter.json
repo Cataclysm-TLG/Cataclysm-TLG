@@ -62,7 +62,7 @@
             [ "null", 6 ]
           ],
           "x": 0,
-          "y": 0
+          "y": 0, "neighbors": { "below": [ "solid_earth" ] }
         }
       ]
     }
@@ -82,7 +82,7 @@
             [ "mudpuddle_5x5", 1 ]
           ],
           "x": 0,
-          "y": 0
+          "y": 0, "neighbors": { "below": [ "solid_earth" ] }
         }
       ]
     }
