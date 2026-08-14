@@ -1151,7 +1151,7 @@ static void eff_fun_sleep( Character &u, effect &it )
     bool woke_up = false;
     if( !anesthetized ) {
         // Slightly wonky once_every() time so this isn't obviously every ten minutes.
-        if( calendar::once_every( 465_seconds ) && !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
+        if( calendar::once_every( 465_seconds ) && current_fatigue < fatigue_levels::MASSIVE_FATIGUE && !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
             // People who can see while sleeping are acclimated to the light.
             if( !u.has_flag( json_flag_SEESLEEP ) ) {
                 int light = here.ambient_light_at( u.pos_bub() );
