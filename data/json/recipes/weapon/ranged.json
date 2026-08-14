@@ -551,7 +551,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "skill_used": "fabrication",
-    "skills_required": [ [ "gun", 2 ] ],
+    "skills_required": [ [ "devices", 3 ], [ "mechanics", 2 ], [ "gun", 2 ]  ],
     "difficulty": 5,
     "time": "16 h",
     "book_learn": [ [ "text_gunsmith", 3 ], [ "textbook_anarch", 4 ], [ "manual_smg", 4 ] ],
@@ -569,8 +569,8 @@
       [ [ "sheet_metal", 5 ] ],
       [ [ "nuts_bolts", 15 ] ],
       [ [ "scrap", 33 ] ],
-      [ [ "qt_wire", 1 ] ],
-      [ [ "spring_medium", 1 ] ]
+      [ [ "wire", 1 ] ],
+      [ [ "spring", 1 ] ]
     ]
   },
   {
@@ -580,7 +580,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "skill_used": "fabrication",
-    "skills_required": [ [ "gun", 2 ] ],
+    "skills_required": [ [ "devices", 3 ], [ "mechanics", 2 ], [ "gun", 2 ]  ],
     "difficulty": 5,
     "time": "16 h",
     "book_learn": [ [ "text_gunsmith", 3 ], [ "textbook_anarch", 4 ], [ "manual_smg", 4 ] ],
@@ -598,8 +598,8 @@
       [ [ "sheet_metal", 5 ] ],
       [ [ "nuts_bolts", 15 ] ],
       [ [ "scrap", 33 ] ],
-      [ [ "qt_wire", 1 ] ],
-      [ [ "spring_medium", 1 ] ]
+      [ [ "wire", 1 ] ],
+      [ [ "spring", 1 ] ]
     ]
   },
   {
@@ -609,7 +609,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "skill_used": "fabrication",
-    "skills_required": [ [ "gun", 2 ] ],
+    "skills_required": [ [ "devices", 3 ], [ "mechanics", 2 ], [ "gun", 2 ]  ],
     "difficulty": 5,
     "time": "16 h",
     "book_learn": [ [ "text_gunsmith", 3 ], [ "textbook_anarch", 4 ], [ "manual_smg", 4 ] ],
@@ -627,8 +627,8 @@
       [ [ "sheet_metal", 5 ] ],
       [ [ "nuts_bolts", 15 ] ],
       [ [ "scrap", 33 ] ],
-      [ [ "qt_wire", 1 ] ],
-      [ [ "spring_medium", 1 ] ]
+      [ [ "wire", 1 ] ],
+      [ [ "spring", 1 ] ]
     ]
   },
   {
