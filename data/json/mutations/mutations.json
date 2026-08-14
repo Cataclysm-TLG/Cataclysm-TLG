@@ -1379,6 +1379,7 @@
     "points": -1,
     "description": "You're quite the heavy sleeper.  Noises are unlikely to wake you up.",
     "changes_to": [ "HEAVYSLEEPER2" ],
+    "cancels": [ "LIGHTSLEEPER" ],
     "starting_trait": true,
     "category": [ "INSECT", "PLANT", "MEDICAL", "LUPINE", "BEAST", "URSINE" ]
   },
@@ -1388,6 +1389,7 @@
     "name": { "str": "Light Sleeper" },
     "points": -1,
     "description": "Noise, light, and other disturbances wake you up easily.  It used to be annoying, but now it might just save your life.",
+    "cancels": [ "HEAVYSLEEPER", "HEAVYSLEEPER2", "HIBERATE" ],
     "starting_trait": true,
     "category": [ "MOUSE", "FELINE", "BOVOID", "LAGOMORPH" ]
   },
@@ -4822,6 +4824,7 @@
     "prereqs2": [ "FAT" ],
     "threshreq": [ "THRESH_URSINE" ],
     "category": [ "URSINE" ],
+    "cancels": [ "LIGHTSLEEPER" ],
     "active": true,
     "cost": 0,
     "enchantments": [ { "values": [ { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 2 } ] } ]
@@ -6905,6 +6908,7 @@
     "points": -2,
     "description": "You could probably sleep through a firefight.",
     "prereqs": [ "HEAVYSLEEPER" ],
+    "cancels": [ "LIGHTSLEEPER" ],
     "category": [ "BEAST", "LUPINE", "URSINE" ]
   },
   {
