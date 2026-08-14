@@ -1090,13 +1090,15 @@ static void eff_fun_sleep( Character &u, effect &it )
             current_fatigue = 25;
         }
     }
-    if( !anesthetized && current_fatigue < 5 ) {
+    // If our sleep duration is almost up and we don't need any more rest, set duration to 3-5 minutes.
+    if( !anesthetized && current_fatigue <= 15 && it.get_duration() > 10_minutes ) {
         if( u.get_sleep_deprivation() < SLEEP_DEPRIVATION_HARMLESS ) {
             u.add_msg_if_player( m_good, _( "You feel well rested." ) );
         } else {
             u.add_msg_if_player( m_warning,
                                  _( "You feel physically rested, but you haven't been able to catch up on your missed sleep yet." ) );
         }
+        // This sets a wakeup timer.
         it.set_duration( 1_turns * dice( 3, 100 ) );
     }
 
@@ -1160,7 +1162,7 @@ static void eff_fun_sleep( Character &u, effect &it )
                 }
                 // So you can too sleep through noon.
                 int wake_chance = current_fatigue / divisor;
-                if( wake_chance <= here.ambient_light_at( u.pos_bub() ) || one_in( 1 + wake_chance ) ) {
+                if( wake_chance <= here.ambient_light_at( u.pos_bub() ) && one_in( 1 + wake_chance ) ) {
                     u.add_msg_if_player( _( "It's too bright to sleep." ) );
                     it.set_duration( 0_turns );
                     woke_up = true;
@@ -1178,9 +1180,9 @@ static void eff_fun_sleep( Character &u, effect &it )
     }
 
     // Have we already woken up?
-    if( !woke_up && !anesthetized ) {
+    if( !woke_up && !anesthetized && calendar::once_every( 20_seconds ) ) {
         // Cold or heat may wake you up.
-        // Player will sleep through cold or heat if fatigued enough
+        // Player will sleep through cold or heat if fatigued enough.
         for( const bodypart_id &bp : u.get_all_body_parts() ) {
             const units::temperature curr_temp = u.get_part_temp_cur( bp );
             const units::temperature_delta fatigue_modifier = units::from_celsius_delta(
@@ -1209,6 +1211,13 @@ static void eff_fun_sleep( Character &u, effect &it )
                     woke_up = true;
                     break;
                 }
+            }
+        }
+        if( !woke_up ) {
+            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE ) {
+                u.add_msg_if_player( m_bad, _( "You can't sleep, you are in desperate need of water!" ) );
+                it.set_duration( 0_turns );
+                woke_up = true;
             }
         }
     }

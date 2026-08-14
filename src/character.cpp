@@ -5637,7 +5637,7 @@ void Character::update_needs( int rate_multiplier )
                 // Spores happen!
                 if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FUNGUS, pos_bub() ) ) {
                     if( get_fatigue() >= 0 ) {
-                        mod_fatigue( -5 ); // Local guides need less sleep on fungal soil
+                        mod_fatigue( -5 ); // Fungal soil means we need less sleep.
                     }
                     if( calendar::once_every( 1_hours ) ) {
                         spores(); // spawn some P O O F Y   B O I S
