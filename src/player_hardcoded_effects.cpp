@@ -1154,18 +1154,23 @@ static void eff_fun_sleep( Character &u, effect &it )
         if( calendar::once_every( 465_seconds ) && !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
             // People who can see while sleeping are acclimated to the light.
             if( !u.has_flag( json_flag_SEESLEEP ) ) {
-                int divisor = 5;
-                if( u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
-                    divisor = 4;
-                } else if( u.has_trait( trait_HEAVYSLEEPER ) ) {
-                    divisor = 3;
-                }
-                // So you can too sleep through noon.
-                int wake_chance = current_fatigue / divisor;
-                if( wake_chance <= here.ambient_light_at( u.pos_bub() ) && one_in( 1 + wake_chance ) ) {
-                    u.add_msg_if_player( _( "It's too bright to sleep." ) );
-                    it.set_duration( 0_turns );
-                    woke_up = true;
+                int light = here.ambient_light_at( u.pos_bub() );
+                if( light > 29 ) {
+                    int divisor = 4;
+                    if( u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
+                        divisor = 2;
+                    } else if( u.has_trait( trait_HEAVYSLEEPER ) ) {
+                        divisor = 3;
+                    }
+                    // This establishes a light level threshold according to our current fatigue and traits.
+                    // Below that threshold, we sleep. Above it, we have a small chance to wake every time
+                    // the check is run. Brightness is only a threshold, it doesn't influence wake_chance.
+                    int wake_chance = current_fatigue * 2 / divisor;
+                    if( wake_chance <= light && one_in( ( 6 - divisor ) + wake_chance ) ) {
+                        u.add_msg_if_player( _( "It's too bright to sleep." ) );
+                        it.set_duration( 0_turns );
+                        woke_up = true;
+                    }
                 }
             } else if( u.has_flag( json_flag_SEESLEEP ) ) {
                 Creature *hostile_critter = g->is_hostile_very_close();
@@ -1214,7 +1219,7 @@ static void eff_fun_sleep( Character &u, effect &it )
             }
         }
         if( !woke_up ) {
-            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE && get_effect_int( effect_hypovolemia ) < 3 ) {
+            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE && u.get_effect_int( effect_hypovolemia ) < 3 ) {
                 u.add_msg_if_player( m_bad, _( "You can't sleep, you are in desperate need of water!" ) );
                 it.set_duration( 0_turns );
                 woke_up = true;
