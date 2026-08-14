@@ -43,6 +43,10 @@
 
 static const activity_id ACT_FIRSTAID( "ACT_FIRSTAID" );
 
+static const addiction_id addiction_alcohol( "alcohol" );
+static const addiction_id addiction_caffeine( "caffeine" );
+static const addiction_id addiction_sleeping_pill( "sleeping pill" );
+
 static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
 
 static const efftype_id effect_adrenaline( "adrenaline" );
@@ -107,6 +111,7 @@ static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 static const json_character_flag json_flag_BLEEDSLOW( "BLEEDSLOW" );
 static const json_character_flag json_flag_BLEEDSLOW2( "BLEEDSLOW2" );
 static const json_character_flag json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
+static const json_character_flag json_flag_LIGHT_SENSITIVE( "LIGHT_SENSITIVE" );
 static const json_character_flag json_flag_PAIN_IMMUNE( "PAIN_IMMUNE" );
 static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 
@@ -127,6 +132,7 @@ static const trait_id trait_HEAVYSLEEPER( "HEAVYSLEEPER" );
 static const trait_id trait_HEAVYSLEEPER2( "HEAVYSLEEPER2" );
 static const trait_id trait_HIBERNATE( "HIBERNATE" );
 static const trait_id trait_INFRESIST( "INFRESIST" );
+static const trait_id trait_LIGHTSLEEPER( "LIGHTSLEEPER" );
 static const trait_id trait_M_IMMUNE( "M_IMMUNE" );
 static const trait_id trait_POISRESIST( "POISRESIST" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
@@ -1090,18 +1096,19 @@ static void eff_fun_sleep( Character &u, effect &it )
             current_fatigue = 25;
         }
     }
-    // If our sleep duration is almost up and we don't need any more rest, set duration to 3-5 minutes.
-    if( !anesthetized && current_fatigue <= 15 && it.get_duration() > 10_minutes ) {
-        if( u.get_sleep_deprivation() < SLEEP_DEPRIVATION_HARMLESS ) {
-            u.add_msg_if_player( m_good, _( "You feel well rested." ) );
+    // If our sleep duration is almost up and we don't need any more rest, set a wakeup timer.
+    if( !anesthetized && current_fatigue <= 15 && it.get_duration() > 30_minutes ) {
+        int timer;
+        if( u.has_trait( trait_LIGHTSLEEPER ) ) {
+            timer = rng( 30, 180 );
+        // Some people have a hard time getting up in the morning.
+        } else if( u.get_lifestyle() < 10 || u.get_sleep_deprivation() > SLEEP_DEPRIVATION_HARMLESS || u.has_addiction( addiction_sleeping_pill ) || u.has_addiction( addiction_caffeine ) || u.has_addiction( addiction_alcohol ) || u.has_trait( trait_HEAVYSLEEPER ) || u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
+            timer = rng( 300, 1680 );
         } else {
-            u.add_msg_if_player( m_warning,
-                                 _( "You feel physically rested, but you haven't been able to catch up on your missed sleep yet." ) );
+            timer = rng( 60, 600 );
         }
-        // This sets a wakeup timer.
-        it.set_duration( 1_turns * dice( 3, 100 ) );
+        it.set_duration( 1_turns * timer );
     }
-
     // Check mutation category strengths to see if we're mutated enough to get a dream
     // If we've crossed a threshold, always show dreams for that category
     // Otherwise, check for the category that we have the most mutagen in our blood for.
@@ -1154,8 +1161,10 @@ static void eff_fun_sleep( Character &u, effect &it )
         if( calendar::once_every( 465_seconds ) && current_fatigue < fatigue_levels::MASSIVE_FATIGUE && !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
             // People who can see while sleeping are acclimated to the light.
             if( !u.has_flag( json_flag_SEESLEEP ) ) {
+                bool lightsleeper = u.has_trait( trait_LIGHTSLEEPER ) || u.has_flag( json_flag_LIGHT_SENSITIVE );
                 int light = here.ambient_light_at( u.pos_bub() );
-                if( light > 29 ) {
+                // >= 3.5 is dimly lit. >= 15 is "bright". 300 is a flashlight. 500 is a heavy-duty flashlight.
+                if( light > 14 || ( lightsleeper && light > 3 ) ) {
                     int divisor = 4;
                     if( u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
                         divisor = 2;
@@ -1166,7 +1175,11 @@ static void eff_fun_sleep( Character &u, effect &it )
                     // Below that threshold, we sleep. Above it, we have a small chance to wake every time
                     // the check is run. Brightness is only a threshold, it doesn't influence wake_chance.
                     int wake_chance = current_fatigue * 2 / divisor;
-                    if( wake_chance <= light && one_in( ( 6 - divisor ) + wake_chance ) ) {
+                    int penalty = 0;
+                    if( lightsleeper ) {
+                        penalty = 10;
+                    }
+                    if( wake_chance <= light && one_in( std::max( 3, ( 6 - divisor ) + wake_chance ) - penalty ) ) {
                         u.add_msg_if_player( _( "It's too bright to sleep." ) );
                         it.set_duration( 0_turns );
                         woke_up = true;
@@ -1185,7 +1198,7 @@ static void eff_fun_sleep( Character &u, effect &it )
     }
 
     // Have we already woken up?
-    if( !woke_up && !anesthetized && calendar::once_every( 20_seconds ) ) {
+    if( !woke_up && !anesthetized && calendar::once_every( 20_seconds ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
         // Cold or heat may wake you up.
         // Player will sleep through cold or heat if fatigued enough.
         for( const bodypart_id &bp : u.get_all_body_parts() ) {
@@ -1227,8 +1240,7 @@ static void eff_fun_sleep( Character &u, effect &it )
         }
     }
 
-    // A bit of a hack: check if we are about to wake up for any reason, including regular
-    // timing out of sleep
+    // Check if we are about to wake up for any reason, including regular timing out of sleep.
     if( it.get_duration() <= 1_turns || woke_up ) {
         u.wake_up();
     }

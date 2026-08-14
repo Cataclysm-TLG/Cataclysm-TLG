@@ -485,6 +485,7 @@ static const trait_id trait_INFRESIST( "INFRESIST" );
 static const trait_id trait_INSOMNIA( "INSOMNIA" );
 static const trait_id trait_LEG_TENT_BRACE( "LEG_TENT_BRACE" );
 static const trait_id trait_LIGHTSTEP( "LIGHTSTEP" );
+static const trait_id trait_LIGHTSLEEPER( "LIGHTSLEEPER" );
 static const trait_id trait_LOVES_BOOKS( "LOVES_BOOKS" );
 static const trait_id trait_MASOCHIST( "MASOCHIST" );
 static const trait_id trait_MUCUS_SECRETION( "MUCUS_SECRETION" );
@@ -1680,15 +1681,15 @@ void Character::react_to_felt_pain( int intensity )
     }
     // Only a large pain burst will actually wake people while sleeping.
     if( has_effect( effect_sleep ) && get_effect( effect_sleep ).get_duration() > 0_turns &&
-        !has_effect( effect_narcosis ) ) {
+        !has_effect( effect_narcosis ) && !has_active_bionic( bio_sleep_shutdown ) ) {
         int pain_thresh = rng( 3, 5 );
 
-        if( has_active_bionic( bio_sleep_shutdown ) ) {
-            pain_thresh += 999;
-        } else if( has_trait( trait_HEAVYSLEEPER ) ) {
+        if( has_trait( trait_HEAVYSLEEPER ) ) {
             pain_thresh += 2;
-        } else if( has_trait( trait_HEAVYSLEEPER2 ) ) {
+        } else if( has_trait( trait_HEAVYSLEEPER2 ) || has_trait( trait_HIBERNATE ) ) {
             pain_thresh += 5;
+        } else if( has_trait( trait_LIGHTSLEEPER ) ) {
+            pain_thresh -= 1;
         }
 
         if( intensity >= pain_thresh ) {
@@ -5458,7 +5459,6 @@ int Character::weariness_level() const
             ++level;
         }
     }
-
     return level;
 }
 

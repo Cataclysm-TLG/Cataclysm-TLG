@@ -184,6 +184,8 @@ static const ter_str_id ter_t_underbrush_harvested_winter( "t_underbrush_harvest
 
 static const trait_id trait_HEAVYSLEEPER( "HEAVYSLEEPER" );
 static const trait_id trait_HEAVYSLEEPER2( "HEAVYSLEEPER2" );
+static const trait_id trait_HIBERNATE( "HIBERNATE" );
+static const trait_id trait_LIGHTSLEEPER( "LIGHTSLEEPER" );
 
 struct monster_sound_event {
     int volume;
@@ -584,7 +586,6 @@ static bool describe_sound( sounds::sound_t category, bool from_player_position 
 void sounds::process_sound_markers( Character *you )
 {
     const map &here = get_map();
-
     bool is_deaf = you->is_deaf();
     const float volume_multiplier = you->hearing_ability();
     const int weather_vol = get_weather().weather_id->sound_attn;
@@ -610,7 +611,6 @@ void sounds::process_sound_markers( Character *you )
         // Deafening is based on the felt volume, as a player may be too deaf to
         // hear the deafening sound but still suffer additional hearing loss.
         const bool is_sound_deafening = rng( felt_volume / 2, felt_volume ) >= 150;
-
         // Deaf players hear no sound, but still are at risk of additional hearing loss.
         if( is_deaf ) {
             if( is_sound_deafening && !you->is_immune_effect( effect_deaf ) ) {
@@ -634,7 +634,12 @@ void sounds::process_sound_markers( Character *you )
                 continue;
             }
         }
-
+        if( is_deaf ) {
+            if( you->is_avatar() ) {
+                sounds_since_last_turn.clear();
+            }
+            return;
+        }
         // The heard volume of a sound is the player heard volume, regardless of true volume level.
         const int heard_volume = static_cast<int>( std::round( ( ( raw_volume - weather_vol ) *
                                  volume_multiplier ) - distance_to_sound ) );
@@ -651,7 +656,6 @@ void sounds::process_sound_markers( Character *you )
         if( you->controlling_vehicle ) {
             vehicle *veh = veh_pointer_or_null( here.veh_at( you->pos_abs() ) );
             const int noise = veh ? static_cast<int>( veh->vehicle_noise ) : 0;
-
             you->volume = std::max( you->volume, noise );
         }
 
@@ -659,13 +663,24 @@ void sounds::process_sound_markers( Character *you )
         bool slept_through = you->has_effect( effect_slept_through_alarm );
         // See if we need to wake someone up.
         if( you->in_sleep_state() ) {
-            if( ( ( !( you->has_trait( trait_HEAVYSLEEPER ) ||
-                       you->has_trait( trait_HEAVYSLEEPER2 ) ) && dice( 2, 15 ) < heard_volume ) ||
-                  ( you->has_trait( trait_HEAVYSLEEPER ) && dice( 3, 15 ) < heard_volume ) ||
-                  ( you->has_trait( trait_HEAVYSLEEPER2 ) && dice( 6, 15 ) < heard_volume ) ) &&
-                !you->has_effect( effect_narcosis ) &&
-                !you->has_bionic( bio_sleep_shutdown ) ) {
-                // Not kidding about sleep-through-firefight.
+            // Bail immediately if we're insensate.
+            if( you->has_effect( effect_narcosis ) && you->has_active_bionic( bio_sleep_shutdown ) ) {
+                continue;
+            }
+            int sound_insensitivity = 0;
+            if( you->has_trait( trait_HEAVYSLEEPER ) ) {
+                sound_insensitivity += 10;
+            } else if( you->has_trait( trait_HEAVYSLEEPER2 ) || you->has_trait( trait_HIBERNATE ) ) {
+                sound_insensitivity += 25;
+            } else if( you->has_trait( trait_LIGHTSLEEPER ) ) {
+                sound_insensitivity -= 5;
+            }
+            if( you->get_fatigue() > fatigue_levels::DEAD_TIRED ) {
+                sound_insensitivity += 10;
+            } else if( you->get_fatigue() > fatigue_levels::TIRED ) {
+                sound_insensitivity += 5;
+            }
+            if( rng( 0, 30 + sound_insensitivity ) < heard_volume ) {
                 you->wake_up();
                 you->add_msg_if_player( m_warning, _( "Something is making noise." ) );
             } else {
@@ -753,31 +768,25 @@ void sounds::process_sound_markers( Character *you )
         }
 
         int err_offset;
-        if( ( heard_volume + distance_to_sound ) / distance_to_sound < 2 ) {
-            err_offset = rng( 0, 3 );
-        } else if( ( heard_volume + distance_to_sound ) / distance_to_sound < 3 ) {
-            err_offset = rng( 0, 2 );
-        } else {
-            err_offset = rng( 0, 1 );
-        }
-
         // Echolocation has to be fairly precise or it's worse than useless.
         // However, it is never perfect.
         if( sound.category == sound_t::sensory ) {
-            if( ( heard_volume + distance_to_sound ) / distance_to_sound < 2 ) {
+            if( heard_volume < distance_to_sound ) {
                 err_offset = rng( 0, 3 );
-            } else if( ( heard_volume + distance_to_sound ) / distance_to_sound < 3 ) {
+            } else if( heard_volume < distance_to_sound * 2 ) {
                 err_offset = rng( 0, 2 );
+            } else if( one_in( 3 ) ) {
+                err_offset = rng( 0, 1 );
             } else {
-                if( one_in( 3 ) ) {
-                    err_offset = rng( 0, 1 );
-                } else {
-                    err_offset = 0;
-                }
+                err_offset = 0;
             }
+        } else {
+            int offset_max = heard_volume < distance_to_sound ? 3 :
+                            heard_volume < distance_to_sound * 2 ? 2 : 1;
+            err_offset = rng( 0, offset_max );
         }
 
-        // If Z-coordinate is different, draw even when you can see the source
+        // If Z-coordinate is different, draw even when you can see the source.
         const bool diff_z = pos.z() != you->posz();
 
         // Enumerate the valid points the player *cannot* see.
@@ -785,7 +794,7 @@ void sounds::process_sound_markers( Character *you )
         // Also show sensory sounds like SONAR even if we can see the point.
         std::vector<tripoint_bub_ms> unseen_points;
         for( const tripoint_bub_ms &newp : here.points_in_radius( pos, err_offset ) ) {
-            if( diff_z || sound.category == sound_t::sensory || !you->sees( here,  newp ) ) {
+            if( diff_z || sound.category == sound_t::sensory || !you->sees( here, newp ) ) {
                 unseen_points.emplace_back( newp );
             }
         }
