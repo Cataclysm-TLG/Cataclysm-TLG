@@ -1389,7 +1389,7 @@
     "name": { "str": "Light Sleeper" },
     "points": -1,
     "description": "Noise, light, and other disturbances wake you up easily.  It used to be annoying, but now it might just save your life.",
-    "cancels": [ "HEAVYSLEEPER", "HEAVYSLEEPER2", "HIBERATE" ],
+    "cancels": [ "HEAVYSLEEPER", "HEAVYSLEEPER2", "HIBERNATE" ],
     "starting_trait": true,
     "category": [ "MOUSE", "FELINE", "BOVOID", "LAGOMORPH" ]
   },
