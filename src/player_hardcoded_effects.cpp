@@ -1214,7 +1214,7 @@ static void eff_fun_sleep( Character &u, effect &it )
             }
         }
         if( !woke_up ) {
-            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE ) {
+            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE && get_effect_int( effect_hypovolemia ) < 3 ) {
                 u.add_msg_if_player( m_bad, _( "You can't sleep, you are in desperate need of water!" ) );
                 it.set_duration( 0_turns );
                 woke_up = true;
