@@ -328,7 +328,6 @@
     "symbol": "B",
     "color": "light_gray",
     "flags": [ "ALLOWS_REMOTE_USE", "WATER_BREAK" ],
-    "faults": [ { "fault_group": "electronic_general" } ],
     "charged_qualities": [ { "id": "GRIND", "level": 2, "speed": 0.4 }, { "id": "FILE", "level": 3, "speed": 0.3 } ],
     "charges_per_use": 25,
     "use_action": [ { "type": "link_up", "cable_length": 10, "charge_rate": "1600 W" } ],
