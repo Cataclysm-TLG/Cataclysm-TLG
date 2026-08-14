@@ -671,9 +671,9 @@ void sounds::process_sound_markers( Character *you )
             if( you->has_trait( trait_HEAVYSLEEPER ) ) {
                 sound_insensitivity += 10;
             } else if( you->has_trait( trait_HEAVYSLEEPER2 ) || you->has_trait( trait_HIBERNATE ) ) {
-                sound_insensitivity += 25;
+                sound_insensitivity += 15;
             } else if( you->has_trait( trait_LIGHTSLEEPER ) ) {
-                sound_insensitivity -= 5;
+                sound_insensitivity -= 10;
             }
             if( you->get_fatigue() > fatigue_levels::DEAD_TIRED ) {
                 sound_insensitivity += 10;
