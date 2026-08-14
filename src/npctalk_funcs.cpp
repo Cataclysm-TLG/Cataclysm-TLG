@@ -1279,7 +1279,8 @@ void talk_function::start_training_seminar( npc &p )
     std::vector<Character *> picked;
     std::function<bool( const Character * )> include_func = [&]( const Character * c ) {
         if( d.skill != skill_id() ) {
-            return static_cast<int>( c->get_skill_level( d.skill ) ) < static_cast<int>( p.get_skill_level( d.skill ) );
+            return static_cast<int>( c->get_skill_level( d.skill ) ) < static_cast<int>( p.get_skill_level(
+                        d.skill ) );
         } else if( d.style != matype_id() ) {
             return !c->martial_arts_data->has_martialart( d.style );
         } else if( d.prof != proficiency_id() ) {
@@ -1359,11 +1360,13 @@ void talk_function::start_training_gen( Character &teacher, std::vector<Characte
     time *= 1.0 + 0.1 * ( students.size() - 1 );
     std::string student_string = students.size() > 1 ? _( "students" ) : _( "student" );
     if( cost > 0 && !teacher.is_avatar() ) {
-        if( !query_yn( _( "This lesson for %1s %2s will cost %3s and take %4s.  Continue?" ), students.size(), student_string, static_cast<double>( cost ) / 100, to_string( time ) ) ) {
+        if( !query_yn( _( "This lesson for %1s %2s will cost %3s and take %4s.  Continue?" ),
+                       students.size(), student_string, static_cast<double>( cost ) / 100, to_string( time ) ) ) {
             return;
         }
     } else {
-        if( !query_yn( _( "This lesson for %1s %2s will take %3s.  Continue?" ), students.size(), student_string, to_string( time ) ) ) {
+        if( !query_yn( _( "This lesson for %1s %2s will take %3s.  Continue?" ), students.size(),
+                       student_string, to_string( time ) ) ) {
             return;
         }
     }

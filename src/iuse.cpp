@@ -6454,7 +6454,7 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
                 }
 
                 const bool selfie = std::find( character_vec.begin(), character_vec.end(),
-                                p ) != character_vec.end();
+                                               p ) != character_vec.end();
 
                 if( selfie ) {
                     p->add_msg_if_player( _( "You took a selfie." ) );

@@ -83,7 +83,6 @@ static const itype_id itype_mininuke( "mininuke" );
 static const itype_id itype_mininuke_act( "mininuke_act" );
 static const itype_id itype_radio_repeater_mod( "radio_repeater_mod" );
 static const itype_id itype_sarcophagus_access_code( "sarcophagus_access_code" );
-static const itype_id itype_sewage( "sewage" );
 static const itype_id itype_software_blood_data( "software_blood_data" );
 static const itype_id itype_usb_drive( "usb_drive" );
 static const itype_id itype_vacutainer( "vacutainer" );
@@ -130,6 +129,7 @@ static const ter_str_id ter_t_radio_tower( "t_radio_tower" );
 static const ter_str_id ter_t_laminated_glass_lab( "t_laminated_glass_lab" );
 static const ter_str_id ter_t_laminated_glass_shutter( "t_laminated_glass_shutter" );
 static const ter_str_id ter_t_laminated_glass_shutter_open( "t_laminated_glass_shutter_open" );
+static const ter_str_id ter_t_sewage_underground( "t_sewage_underground" );
 static const ter_str_id ter_t_sewage( "t_sewage" );
 static const ter_str_id ter_t_sewage_pipe( "t_sewage_pipe" );
 static const ter_str_id ter_t_sewage_pump( "t_sewage_pump" );
@@ -518,34 +518,7 @@ void computer_session::action_toll()
 void computer_session::action_sample()
 {
     get_player_character().mod_moves( -to_moves<int>( 1_seconds ) * 0.3 );
-    map &here = get_map();
-    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
-        if( here.ter( p ) != ter_t_sewage_pump ) {
-            continue;
-        }
-        for( const tripoint_bub_ms &n : here.points_in_radius( p, 1 ) ) {
-            if( here.furn( n ) != furn_f_counter ) {
-                continue;
-            }
-            bool found_item = false;
-            item sewage( itype_sewage, calendar::turn );
-            for( item &elem : here.i_at( n ) ) {
-                int capa = elem.get_remaining_capacity_for_liquid( sewage );
-                if( capa <= 0 ) {
-                    continue;
-                }
-                sewage.charges = std::min( sewage.charges, capa );
-                if( elem.can_contain( sewage ).success() ) {
-                    elem.put_in( sewage, pocket_type::CONTAINER );
-                }
-                found_item = true;
-                break;
-            }
-            if( !found_item ) {
-                here.add_item_or_charges( n, sewage );
-            }
-        }
-    }
+    add_msg( _( "No response from pump system.  Please contact a maintenance team." ) );
 }
 
 void computer_session::helper_release( float radius )
@@ -1173,7 +1146,7 @@ void computer_session::action_srcf_seal()
             here.make_rubble( p, furn_f_rubble_rock, true );
             explosion_handler::explosion( &get_player_character(), p, 40, 0.7, true );
         } else if( t == ter_t_wall_glass || t == ter_t_sewage_pipe ||
-                   t == ter_t_sewage || t == ter_t_grate ) {
+                   t == ter_t_sewage_underground || t == ter_t_sewage || t == ter_t_grate ) {
             here.make_rubble( p, furn_f_rubble_rock, true );
         } else if( t == ter_t_sewage_pump ) {
             here.make_rubble( p, furn_f_rubble_rock, true );
@@ -1632,7 +1605,7 @@ void computer_session::failure_pump_leak()
             if( next_move.empty() ) {
                 break;
             }
-            here.ter_set( random_entry( next_move ), ter_t_sewage );
+            here.ter_set( random_entry( next_move ), ter_t_sewage_underground );
         }
     }
 }

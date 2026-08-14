@@ -1683,7 +1683,8 @@ void Creature::deal_damage_handle_type( const effect_source &source, const damag
     }
     on_damage_of_type( source, adjusted_damage, du.type, bp );
     damage += adjusted_damage;
-    const int final_pain = static_cast<int>( std::round( roll_remainder( adjusted_damage / div ) * get_part_pain_multiplier( bp ) ) );
+    const int final_pain = static_cast<int>( std::round( roll_remainder( adjusted_damage / div ) *
+                           get_part_pain_multiplier( bp ) ) );
     pain += final_pain;
 }
 

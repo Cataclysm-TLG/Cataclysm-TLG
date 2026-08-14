@@ -19,7 +19,7 @@
       "e": "t_elevator",
       "E": "t_elevator_control",
       "s": "t_sidewalk",
-      "g": "t_bridge",
+      "g": "t_bridge_underground",
       "_": "t_pavement",
       "y": "t_pavement_y",
       "`": "t_open_air",

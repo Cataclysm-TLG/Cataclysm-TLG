@@ -1101,8 +1101,11 @@ static void eff_fun_sleep( Character &u, effect &it )
         int timer;
         if( u.has_trait( trait_LIGHTSLEEPER ) ) {
             timer = rng( 30, 180 );
-        // Some people have a hard time getting up in the morning.
-        } else if( u.get_lifestyle() < 10 || u.get_sleep_deprivation() > SLEEP_DEPRIVATION_HARMLESS || u.has_addiction( addiction_sleeping_pill ) || u.has_addiction( addiction_caffeine ) || u.has_addiction( addiction_alcohol ) || u.has_trait( trait_HEAVYSLEEPER ) || u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
+            // Some people have a hard time getting up in the morning.
+        } else if( u.get_lifestyle() < 10 || u.get_sleep_deprivation() > SLEEP_DEPRIVATION_HARMLESS ||
+                   u.has_addiction( addiction_sleeping_pill ) || u.has_addiction( addiction_caffeine ) ||
+                   u.has_addiction( addiction_alcohol ) || u.has_trait( trait_HEAVYSLEEPER ) ||
+                   u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
             timer = rng( 300, 1680 );
         } else {
             timer = rng( 60, 600 );
@@ -1158,7 +1161,9 @@ static void eff_fun_sleep( Character &u, effect &it )
     bool woke_up = false;
     if( !anesthetized ) {
         // Slightly wonky once_every() time so this isn't obviously every ten minutes.
-        if( calendar::once_every( 465_seconds ) && current_fatigue < fatigue_levels::MASSIVE_FATIGUE && !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
+        if( calendar::once_every( 465_seconds ) && current_fatigue < fatigue_levels::MASSIVE_FATIGUE &&
+            !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) &&
+            !u.has_active_bionic( bio_sleep_shutdown ) ) {
             // People who can see while sleeping are acclimated to the light.
             if( !u.has_flag( json_flag_SEESLEEP ) ) {
                 bool lightsleeper = u.has_trait( trait_LIGHTSLEEPER ) || u.has_flag( json_flag_LIGHT_SENSITIVE );
@@ -1189,7 +1194,7 @@ static void eff_fun_sleep( Character &u, effect &it )
                 Creature *hostile_critter = g->is_hostile_very_close();
                 if( hostile_critter != nullptr ) {
                     u.add_msg_if_player( _( "You see %s approaching!" ),
-                                        hostile_critter->disp_name() );
+                                         hostile_critter->disp_name() );
                     it.set_duration( 0_turns );
                     woke_up = true;
                 }
@@ -1198,7 +1203,8 @@ static void eff_fun_sleep( Character &u, effect &it )
     }
 
     // Have we already woken up?
-    if( !woke_up && !anesthetized && calendar::once_every( 20_seconds ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
+    if( !woke_up && !anesthetized && calendar::once_every( 20_seconds ) &&
+        !u.has_active_bionic( bio_sleep_shutdown ) ) {
         // Cold or heat may wake you up.
         // Player will sleep through cold or heat if fatigued enough.
         for( const bodypart_id &bp : u.get_all_body_parts() ) {
@@ -1232,7 +1238,8 @@ static void eff_fun_sleep( Character &u, effect &it )
             }
         }
         if( !woke_up ) {
-            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE && u.get_effect_int( effect_hypovolemia ) < 3 ) {
+            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE &&
+                u.get_effect_int( effect_hypovolemia ) < 3 ) {
                 u.add_msg_if_player( m_bad, _( "You can't sleep, you are in desperate need of water!" ) );
                 it.set_duration( 0_turns );
                 woke_up = true;

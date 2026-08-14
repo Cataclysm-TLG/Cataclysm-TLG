@@ -11,7 +11,7 @@
       ".": "t_metal_floor_no_roof",
       "=": "t_metal_ventilation_shutter",
       "`": "t_open_air",
-      "w": "t_bridge",
+      "w": "t_bridge_underground",
       "~": "t_water_pool_shallow",
       "<": "t_ladder_up",
       ">": "t_ladder_down",

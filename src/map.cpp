@@ -4767,7 +4767,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
         }
         if( !params.silent ) {
             sounds::sound( p, sound_volume, sounds::sound_t::combat, bash->sound_fail, false,
-                        "smash_fail", soundfxvariant );
+                           "smash_fail", soundfxvariant );
         }
         return;
     }
@@ -4792,7 +4792,8 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
     soundfxid = "smash_success";
     const translation &sound = bash->sound;
     // Set this now in case the ter_set below changes this
-    const bool will_collapse = smash_ter && has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p ) && !has_flag( ter_furn_flag::TFLAG_INDOORS, p );
+    const bool will_collapse = smash_ter && has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p ) &&
+                               !has_flag( ter_furn_flag::TFLAG_INDOORS, p );
     const bool tent = smash_furn && !bash->tent_centers.empty();
     bool phased = false;
 
@@ -5553,7 +5554,7 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
         return;
     }
     // Base chance we hit anything is the total volume of items in tile / 1000 Liters (max tile vol).
-    float chance = total_volume.value() / 1000000.f; 
+    float chance = total_volume.value() / 1000000.f;
     // /=(dispersion/1000)^4 to get a curve. Easy(ish) to shoot a bottle, not much easier to hit a corpse.
     const double dispersion_factor = std::clamp( dispersion / 1000.0, 0.1, 1.0 );
     chance /= dispersion_factor * dispersion_factor * dispersion_factor * dispersion_factor;
@@ -11102,15 +11103,12 @@ bool map::build_floor_cache( const int zlev )
         return false;
     }
     level_cache &ch = *ch_lazy;
-
     auto &floor_cache = ch.floor_cache;
     std::uninitialized_fill_n(
         &floor_cache[0][0], MAPSIZE_X * MAPSIZE_Y, true );
     bool &no_floor_gaps = ch.no_floor_gaps;
     no_floor_gaps = true;
-
     bool lowest_z_lev = zlev <= -OVERMAP_DEPTH;
-
     for( int smx = 0; smx < my_MAPSIZE; ++smx ) {
         for( int smy = 0; smy < my_MAPSIZE; ++smy ) {
             const submap *cur_submap = get_submap_at_grid( tripoint_rel_sm{ smx, smy, zlev } );
@@ -11131,10 +11129,20 @@ bool map::build_floor_cache( const int zlev )
                 for( int sy = 0; sy < SEEY; ++sy ) {
                     point_sm_ms sp( sx, sy );
                     const ter_t &terrain = cur_submap->get_ter( sp ).obj();
-                    if( terrain.has_flag( ter_furn_flag::TFLAG_NO_FLOOR ) ||
+                    const bool no_floor =
+                        terrain.has_flag( ter_furn_flag::TFLAG_NO_FLOOR ) ||
                         terrain.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER ) ||
-                        terrain.has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ||
-                        terrain.has_flag( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR ) ) {
+                        terrain.has_flag( ter_furn_flag::TFLAG_GOES_DOWN );
+                    const bool transparent_floor =
+                        terrain.has_flag( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR );
+                    if( no_floor || transparent_floor ) {
+                        // If below SUPPORTS_ROOF then there is indeed a floor. Skip for transparent floors so skylights work.
+                        if( below_submap &&
+                            ( below_submap->get_furn( sp ).obj().has_flag( ter_furn_flag::TFLAG_SUN_ROOF_ABOVE ) ||
+                              below_submap->get_ter( sp ).obj().roof ) &&
+                            !transparent_floor ) {
+                            continue;
+                        }
                         const point p( sx + smx * SEEX, sy + smy * SEEY );
                         floor_cache[p.x][p.y] = false;
                         no_floor_gaps = false;
