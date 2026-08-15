@@ -70,11 +70,7 @@
         "4": "t_region_groundcover_urban"
       },
       "furniture": {
-        "4": [
-          [ "f_generator_broken", 25 ],
-          [ "f_diesel_generator", 5 ],
-          [ "f_gasoline_generator", 5 ]
-        ],
+        "4": [ [ "f_generator_broken", 25 ], [ "f_diesel_generator", 5 ], [ "f_gasoline_generator", 5 ] ],
         "q": "f_dumpster",
         "e": "f_machinery_light",
         "f": "f_locker",
