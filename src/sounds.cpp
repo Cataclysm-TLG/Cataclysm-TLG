@@ -612,9 +612,9 @@ void sounds::process_sound_markers( Character *you )
         // Deafening is based on the felt volume, as a player may be too deaf to
         // hear the deafening sound but still suffer additional hearing loss.
         const bool is_sound_deafening = rng( felt_volume / 2, felt_volume ) >= 150;
-        // Deaf players hear no sound, but still are at risk of additional hearing loss.
-        if( is_deaf ) {
-            if( is_sound_deafening && !you->is_immune_effect( effect_deaf ) ) {
+        // Deaf characters hear no sound, but still are at risk of additional hearing loss.
+        if( is_sound_deafening && !you->is_immune_effect( effect_deaf ) ) {
+            if( is_deaf ) {
                 you->add_effect( effect_deaf, std::min( 4_minutes,
                                                         time_duration::from_turns( felt_volume - 130 ) / 8 ) );
                 if( !you->has_flag( json_flag_PAIN_IMMUNE ) ) {
@@ -623,16 +623,12 @@ void sounds::process_sound_markers( Character *you )
                         you->mod_pain( rng( 0, 2 ) );
                     }
                 }
-            }
-            continue;
-        }
-
-        if( is_sound_deafening && !you->is_immune_effect( effect_deaf ) ) {
-            const time_duration deafness_duration = time_duration::from_turns( felt_volume - 130 ) / 4;
-            you->add_effect( effect_deaf, deafness_duration );
-            if( you->is_deaf() && !is_deaf ) {
-                is_deaf = true;
-                continue;
+            } else {
+                const time_duration deafness_duration = time_duration::from_turns( felt_volume - 130 ) / 4;
+                you->add_effect( effect_deaf, deafness_duration );
+                if( you->is_deaf() && !is_deaf ) {
+                    is_deaf = true;
+                }
             }
         }
         if( is_deaf ) {
@@ -648,11 +644,11 @@ void sounds::process_sound_markers( Character *you )
         if( distance_to_sound < 1 && heard_volume > 0 ) {
             // Min here because good hearing doesn't overestimate sounds, but bad will underestimate.
             you->volume = std::min( you->volume, heard_volume );
-            continue;
         }
         if( heard_volume < 1 ) {
             continue;
         }
+
         // Noises from vehicle player is in.
         if( you->controlling_vehicle ) {
             vehicle *veh = veh_pointer_or_null( here.veh_at( you->pos_abs() ) );
