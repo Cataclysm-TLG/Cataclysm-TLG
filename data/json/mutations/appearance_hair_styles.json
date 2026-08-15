@@ -1287,7 +1287,7 @@
     "variants": [
       {
         "id": "black",
-        "name": { "str": "Hair: black, medum curls" },
+        "name": { "str": "Hair: black, medium curls" },
         "description": "Your face is framed by black curls.",
         "weight": 20
       },
