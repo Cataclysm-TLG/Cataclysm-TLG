@@ -12482,7 +12482,8 @@ int Character::book_fun_for( const item &book, const Character &p ) const
         return 0;
     }
 
-    if( p.has_trait( trait_LOVES_BOOKS ) || ( p.has_trait( trait_SPIRITUAL ) && book.has_flag( flag_INSPIRATIONAL ) ) ) {
+    if( p.has_trait( trait_LOVES_BOOKS ) || ( p.has_trait( trait_SPIRITUAL ) &&
+            book.has_flag( flag_INSPIRATIONAL ) ) ) {
         if( book.type->book->fun < 0 ) {
             fun_bonus = 0;
         } else {

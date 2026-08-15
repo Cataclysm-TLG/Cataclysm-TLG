@@ -1500,7 +1500,7 @@
     "color": "white",
     "//": "barren in winter, harvestable all year round",
     "move_cost": 0,
-    "flags": ["FLAMMABLE_HARD", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
     "examine_action": "harvest_ter",
     "transforms_into": "t_tree_birch_harvested",
     "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "birch_harv" } ],

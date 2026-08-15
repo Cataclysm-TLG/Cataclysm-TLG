@@ -86,11 +86,7 @@
       "ɱ": "f_machinery_electronic",
       "Ɱ": "f_electrical_conduit",
       "m̌": "f_electrical_conduit",
-      "G": [
-        [ "f_generator_broken", 4 ],
-        [ "f_diesel_generator", 1 ],
-        [ "f_gasoline_generator", 1 ]
-      ]
+      "G": [ [ "f_generator_broken", 4 ], [ "f_diesel_generator", 1 ], [ "f_gasoline_generator", 1 ] ]
     },
     "items": {
       "ß": { "item": "tools_workshop", "chance": 50 },

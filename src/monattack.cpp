@@ -1804,7 +1804,7 @@ bool mattack::fungus_big_blossom( monster *z )
         // Sound of a giant fungal blossom blowing out the fire.
         sounds::sound( z->pos_bub(), 20, sounds::sound_t::combat, _( "POUFF!" ), true, "misc", "exhale" );
         return true;
-    // No fire detected, routine haze-emission.
+        // No fire detected, routine haze-emission.
     } else if( !firealarm ) {
         if( chance > 24 ) {
             // Let's not make a huge cloud this turn, let's just make a small dense one.
