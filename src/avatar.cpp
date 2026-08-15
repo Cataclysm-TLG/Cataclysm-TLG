@@ -775,7 +775,7 @@ void avatar::identify( const item &item )
     if( reading->intel != 0 ) {
         add_msg( m_info, _( "Requires intelligence of %d to easily read." ), reading->intel );
     }
-    //It feels wrong to use a pointer to *this, but I can't find any other player pointers in this method.
+
     if( book_fun_for( book, *this ) != 0 ) {
         add_msg( m_info, _( "Reading this book affects your morale by %d." ), book_fun_for( book, *this ) );
     }

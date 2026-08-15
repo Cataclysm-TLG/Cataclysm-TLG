@@ -1806,7 +1806,7 @@ void read_activity_actor::do_turn( player_activity &act, Character &who )
         who.burn_energy_all( -1 );
     }
 
-    // do not spam the message log
+    // Do not spam the message log.
     if( calendar::once_every( 5_minutes ) ) {
         add_msg_debug( debugmode::DF_ACT_READ, "%s reading time = %s",
                        who.name, to_string_writable( time_duration::from_moves( act.moves_left ) ) );
@@ -1932,7 +1932,7 @@ bool read_activity_actor::player_read( avatar &you )
         const int book_fun = learner->book_fun_for( *book, *learner );
         if( book_fun != 0 ) {
             learner->add_morale( morale_book,
-                                 book_fun, book_fun * 10,
+                                 book_fun, book_fun,
                                  2_hours, 1_hours, true,
                                  book->type );
         }

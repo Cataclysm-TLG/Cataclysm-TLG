@@ -12482,18 +12482,13 @@ int Character::book_fun_for( const item &book, const Character &p ) const
         return 0;
     }
 
-    // Don't you like serving humans?!
-    if( ( p.has_trait( trait_CANNIBAL ) || p.has_trait( trait_PSYCHOPATH ) ||
-          p.has_trait( trait_SAPIOVORE ) ) &&
-        book.typeId() == itype_cookbook_human ) {
-        fun_bonus = std::abs( fun_bonus );
-    } else if( p.has_trait( trait_SPIRITUAL ) && book.has_flag( flag_INSPIRATIONAL ) ) {
-        fun_bonus = std::abs( fun_bonus * 3 );
-    }
-
-    if( has_trait( trait_LOVES_BOOKS ) ) {
-        fun_bonus = std::max( fun_bonus + 2, static_cast<int>( std::round( fun_bonus * 1.2 ) ) );
-    } else if( has_trait( trait_HATES_BOOKS ) ) {
+    if( p.has_trait( trait_LOVES_BOOKS ) || ( p.has_trait( trait_SPIRITUAL ) && book.has_flag( flag_INSPIRATIONAL ) ) ) {
+        if( book.type->book->fun < 0 ) {
+            fun_bonus = 0;
+        } else {
+            fun_bonus = std::max( fun_bonus + 2, static_cast<int>( std::round( fun_bonus * 1.2 ) ) );
+        }
+    } else if( p.has_trait( trait_HATES_BOOKS ) ) {
         if( book.type->book->fun > 0 ) {
             fun_bonus = std::min( fun_bonus - 2, fun_bonus / 2 );
         } else {
