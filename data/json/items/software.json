@@ -6,6 +6,7 @@
     "category": "software",
     "name": { "str_sp": "abstract software" },
     "description": "Copy from this for any software",
+    "flags": [ "E_COPIABLE", "ZERO_WEIGHT", "E_STORABLE_EXCLUSIVE", "NO_DROP", "IRREMOVABLE" ],
     "ememory_size": "1 KB"
   },
   {
@@ -62,7 +63,7 @@
     "id": "software_blood_data",
     "copy-from": "abstract_software",
     "type": "ITEM",
-    "name": { "str_sp": "infection data" },
+    "name": { "str_sp": "phlebotomy data" },
     "description": "Medical data on zombie blood.",
     "price": "2 USD",
     "price_postapoc": "0 cent",

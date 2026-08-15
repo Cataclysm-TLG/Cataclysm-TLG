@@ -383,10 +383,12 @@
     "id": "MISSION_GET_ZOMBIE_BLOOD_ANAL",
     "type": "mission_definition",
     "name": { "str": "Analyze Zombie Blood" },
-    "goal": "MGOAL_FIND_ITEM",
+    "goal": "MGOAL_CONDITION",
+    "goal_condition": {
+      "and": [ { "u_has_items": { "item": "software_blood_data", "count": 1 } } ]
+    },
     "difficulty": 8,
     "value": 250000,
-    "item": "software_blood_data",
     "start": {
       "effect": [ { "u_spawn_item": "vacutainer" }, { "u_spawn_item": "usb_drive" } ],
       "assign_mission_target": { "om_terrain": "hospital_2", "om_special": "hospital", "reveal_radius": 3 }
@@ -395,11 +397,11 @@
     "dialogue": {
       "describe": "It could be very informative to perform an analysis of zombie blood…",
       "offer": "I need someone to get a sample of zombie blood, take it to a hospital, and perform a centrifuge analysis of it.",
-      "accepted": "Excellent.  Take this blood draw kit; once you've produced a zombie corpse, use it to extract blood from the body, then take it to a hospital for analysis.",
+      "accepted": "Excellent.  Take this blood draw kit; once you've produced a zombie corpse, use it to extract blood from the body, then take it to a hospital for analysis.  After all that, bring the phlebotomy data back to me.",
       "rejected": "Are you sure?  The scientific value of that blood data could be priceless…",
       "advice": "The centrifuge is a bit technical; you might want to study up on the usage of computers before completing that part.",
       "inquire": "Well, do you have the data yet?",
-      "success": "Excellent!  This may be the key to removing the infection.",
+      "success": "Nicely done.  I've copied the data over, talk to me again when I've had some time to look at it.",
       "success_lie": "Wait, you couldn't possibly have the data!  Liar!",
       "failure": "What a shame, that data could have proved invaluable…"
     }
@@ -816,6 +818,7 @@
     "type": "mission_definition",
     "name": { "str": "Let Somebody Join" },
     "goal": "MGOAL_CONDITION",
+    "//": "Unfailable condition used here just to make it work.",
     "goal_condition": { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 0" ] },
     "difficulty": 1,
     "value": 0,

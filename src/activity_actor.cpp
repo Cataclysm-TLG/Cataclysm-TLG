@@ -3346,7 +3346,7 @@ void efile_activity_actor::completed_processing_current_efile( player_activity &
                 const item &new_efile = efile;
                 added_efile = new_efile;
             }
-            //instead of moving the recipe e-file, instead try to combine it with an existing one
+            // Instead of moving the recipe e-file, instead try to combine it with an existing one.
             if( added_efile.typeId()->memory_card_data ) {
                 item *edevice_recipe_catalog = edevice->get_recipe_catalog();
                 if( edevice_recipe_catalog != nullptr ) {
