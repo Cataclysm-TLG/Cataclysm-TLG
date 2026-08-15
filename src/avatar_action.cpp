@@ -112,7 +112,6 @@ static const ter_str_id ter_t_door_locked_interior( "t_door_locked_interior" );
 static const ter_str_id ter_t_door_locked_peep( "t_door_locked_peep" );
 static const ter_str_id ter_t_fault( "t_fault" );
 static const ter_str_id ter_t_grass( "t_grass" );
-static const ter_str_id ter_t_grass_alien( "t_grass_alien" );
 static const ter_str_id ter_t_grass_dead( "t_grass_dead" );
 static const ter_str_id ter_t_grass_golf( "t_grass_golf" );
 static const ter_str_id ter_t_grass_white( "t_grass_white" );
@@ -940,9 +939,6 @@ bool avatar_action::eat_here( avatar &you )
             return false;
         } else if( ter_underfoot == ter_t_grass_white ) {
             add_msg( _( "This grass is tainted with paint and thus inedible." ) );
-            return false;
-        } else if( ter_underfoot == ter_t_grass_alien ) {
-            add_msg( _( "This grass is razor sharp and would probably shred your mouth." ) );
             return false;
         }
     }
