@@ -785,7 +785,6 @@ std::optional<int> iuse::antiparasitic( Character *p, item *, const tripoint_bub
 
 std::optional<int> iuse::anticonvulsant( Character *p, item *, const tripoint_bub_ms & )
 {
-    p->add_msg_if_player( _( "You take some anticonvulsant medication." ) );
     /** @EFFECT_STR reduces duration of anticonvulsant medication */
     time_duration duration = 8_hours - p->str_cur * rng( 0_turns, 10_minutes );
     if( p->has_trait( trait_TOLERANCE ) ) {
