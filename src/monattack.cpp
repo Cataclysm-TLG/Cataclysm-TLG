@@ -1712,15 +1712,13 @@ bool mattack::triffid_heartbeat( monster *z )
 
 bool mattack::fungus( monster *z )
 {
-    // TODO: Infect NPCs?
-    // It takes a while
+    // It takes a while.
     z->mod_moves( -to_moves<int>( 2_seconds ) );
-
-    // Use less laggy methods of reproduction when there is a lot of mons around
+    // Use less laggy methods of reproduction when there is a lot of creatures around.
     double spore_chance = 0.25;
     int radius = 1;
     if( g->num_creatures() > 25 ) {
-        // Number of creatures in the bubble and the resulting average number of spores per puff":
+        // Number of creatures in the bubble and the resulting average number of spores per puff:
         // 0-25: 2
         // 50  : 0.5
         // 75  : 0.22
@@ -1734,7 +1732,6 @@ bool mattack::fungus( monster *z )
             spore_chance *= old_area / new_area;
         }
     }
-
     map &here = get_map();
     fungal_effects fe;
     for( const tripoint_bub_ms &sporep : here.points_in_radius( z->pos_bub(), radius ) ) {
@@ -1747,64 +1744,81 @@ bool mattack::fungus( monster *z )
             ( dist > 1 && !here.clear_path( z->pos_bub(), sporep, 2, 1, 10 ) ) ) {
             continue;
         }
-
         fe.fungalize( sporep, z, spore_chance );
     }
-
     return true;
 }
 
 bool mattack::fungus_haze( monster *z )
 {
-    z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
-    map &here = get_map();
-    for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 3 ) ) {
-        here.add_field( dest, fd_fungal_haze, rng( 1, 2 ) );
+    int chance = rng( 2, 10 );
+    // The puffs look weird if they happen every n seconds, so exit early sometimes to vary it.
+    if( chance > 6 ) {
+        return true;
     }
-
+    map &here = get_map();
+    if( chance == 2 ) {
+        // A small but denser cloud.
+        for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 2 ) ) {
+            here.add_field( dest, fd_fungal_haze, 2 );
+        }
+    } else {
+        for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), chance ) ) {
+            here.add_field( dest, fd_fungal_haze, 1 );
+        }
+    }
+    z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
     return true;
 }
 
 bool mattack::fungus_big_blossom( monster *z )
 {
+    int chance = rng( 2, 40 );
+    // The puffs look weird if they happen every n seconds, so exit early sometimes to vary it.
+    if( chance > 30 ) {
+        return true;
+    }
     map &here = get_map();
-
     bool firealarm = false;
     const bool u_see = get_player_view().sees( here, *z );
-    // Fungal fire-suppressor! >:D
-    for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 6 ) ) {
-        if( here.get_field_intensity( dest, fd_fire ) != 0 ) {
-            firealarm = true;
-        }
-        if( firealarm && one_in( 3 ) ) {
-            here.remove_field( dest, fd_fire );
-            here.remove_field( dest, fd_smoke );
-            here.add_field( dest, fd_fungal_haze, 3 );
+    // Only check for fire sometimes, to make firefighting a little more chaotic.
+    if( chance < 9 ) {
+        for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), chance ) ) {
+            if( here.get_field_intensity( dest, fd_fire ) != 0 ) {
+                firealarm = true;
+            }
+            // Don't uniformly put out fires.
+            if( firealarm && x_in_y( 2, chance ) ) {
+                here.remove_field( dest, fd_fire );
+                here.remove_field( dest, fd_smoke );
+            }
         }
     }
     // Special effects handled outside the loop
     if( firealarm ) {
-        if( u_see ) {
-            // Sucks up all the smoke
-            add_msg( m_warning, _( "The %s suddenly inhales!" ), z->name() );
-        }
-        //~Sound of a giant fungal blossom inhaling
         sounds::sound( z->pos_bub(), 20, sounds::sound_t::combat, _( "WOOOSH!" ), true, "misc", "inhale" );
         if( u_see ) {
             add_msg( m_bad, _( "The %s discharges an immense flow of spores, smothering the flames!" ),
                      z->name() );
         }
-        //~Sound of a giant fungal blossom blowing out the dangerous fire!
+        // Sound of a giant fungal blossom blowing out the fire.
         sounds::sound( z->pos_bub(), 20, sounds::sound_t::combat, _( "POUFF!" ), true, "misc", "exhale" );
         return true;
-    } else {
-        // No fire detected, routine haze-emission
-        z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
-        for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 12 ) ) {
-            here.add_field( dest, fd_fungal_haze, rng( 1, 2 ) );
+    // No fire detected, routine haze-emission.
+    } else if( !firealarm ) {
+        if( chance > 24 ) {
+            // Let's not make a huge cloud this turn, let's just make a small dense one.
+            z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
+            for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 4 ) ) {
+                here.add_field( dest, fd_fungal_haze, 2 );
+            }
+        } else {
+            z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
+            for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), chance / 2 ) ) {
+                here.add_field( dest, fd_fungal_haze, 1 );
+            }
         }
     }
-
     return true;
 }
 

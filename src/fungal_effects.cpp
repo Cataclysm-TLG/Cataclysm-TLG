@@ -51,9 +51,17 @@ static const ter_str_id ter_t_fungus_mound( "t_fungus_mound" );
 static const ter_str_id ter_t_fungus_wall( "t_fungus_wall" );
 static const ter_str_id ter_t_marloss( "t_marloss" );
 static const ter_str_id ter_t_marloss_tree( "t_marloss_tree" );
+static const ter_str_id ter_t_mega_fern( "t_mega_fern" );
 static const ter_str_id ter_t_shrub_fungal( "t_shrub_fungal" );
+static const ter_str_id ter_t_tree_dead( "t_tree_dead" );
+static const ter_str_id ter_t_tree_dead_warped( "t_tree_dead_warped" );
+static const ter_str_id ter_t_tree_deadpine( "t_tree_deadpine" );
+static const ter_str_id ter_t_tree_deadpine_warped( "t_tree_deadpine_warped" );
 static const ter_str_id ter_t_tree_fungal( "t_tree_fungal" );
 static const ter_str_id ter_t_tree_fungal_young( "t_tree_fungal_young" );
+static const ter_str_id ter_t_tree_marloss( "t_tree_marloss" );
+static const ter_str_id ter_t_tree_very_dead( "t_tree_very_dead" );
+static const ter_str_id ter_t_tree_young( "t_tree_young" );
 
 static const trait_id trait_TAIL_CATTLE( "TAIL_CATTLE" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
@@ -144,86 +152,94 @@ void fungal_effects::marlossify( const tripoint_bub_ms &p )
     }
 }
 
-void fungal_effects::spread_fungus_one_tile( const tripoint_bub_ms &p, const int growth )
+void fungal_effects::spread_fungus_one_tile( const tripoint_bub_ms &p, const int fungus_neighbors )
 {
     map &here = get_map();
     bool converted = false;
-    // Terrain conversion
+    // Terrain conversion.
     if( here.has_flag_ter( ter_furn_flag::TFLAG_DIGGABLE, p ) ) {
-        if( x_in_y( growth * 10, 100 ) ) {
+        if( x_in_y( fungus_neighbors, 12 ) ) {
             here.ter_set( p, ter_t_fungus );
             converted = true;
         }
     } else if( here.has_flag( ter_furn_flag::TFLAG_FLAT, p ) ) {
         if( here.has_flag( ter_furn_flag::TFLAG_INDOORS, p ) ) {
-            if( x_in_y( growth * 10, 500 ) ) {
+            if( x_in_y( fungus_neighbors, 30 ) ) {
                 here.ter_set( p, ter_t_fungus_floor_in );
                 converted = true;
             }
         } else if( here.has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p ) ) {
-            if( x_in_y( growth * 10, 1000 ) ) {
+            if( x_in_y( fungus_neighbors, 60 ) ) {
                 here.ter_set( p, ter_t_fungus_floor_sup );
                 converted = true;
             }
         } else {
-            if( x_in_y( growth * 10, 2500 ) ) {
+            if( x_in_y( fungus_neighbors, 250 ) ) {
                 here.ter_set( p, ter_t_fungus_floor_out );
                 converted = true;
             }
         }
     } else if( here.has_flag( ter_furn_flag::TFLAG_SHRUB, p ) ) {
-        if( x_in_y( growth * 10, 200 ) ) {
+        if( x_in_y( fungus_neighbors, 30 ) ) {
             here.ter_set( p, ter_t_shrub_fungal );
             converted = true;
-        } else if( x_in_y( growth, 1000 ) ) {
+        } else if( x_in_y( fungus_neighbors, 100 ) ) {
             here.ter_set( p, ter_t_marloss );
             converted = true;
         }
     } else if( here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE, p ) ) {
-        if( x_in_y( growth * 10, 150 ) ) {
+        if( x_in_y( fungus_neighbors, 15 ) ) {
             here.ter_set( p, ter_t_fungus_mound );
             converted = true;
         }
-    } else if( here.has_flag( ter_furn_flag::TFLAG_YOUNG, p ) ) {
-        if( x_in_y( growth * 10, 500 ) ) {
-            if( here.get_field_intensity( p, fd_fungal_haze ) != 0 ) {
-                if( x_in_y( growth * 10, 800 ) ) { // young trees are vulnerable
-                    here.ter_set( p, ter_t_fungus );
-                    if( g->place_critter_at( mon_fungal_blossom, p ) ) {
-                        add_msg_if_player_sees( p, m_warning, _( "The young tree blooms forth into a fungal blossom!" ) );
-                    }
-                } else if( x_in_y( growth * 10, 400 ) ) {
-                    here.ter_set( p, ter_t_marloss_tree );
-                }
-            } else {
-                here.ter_set( p, ter_t_tree_fungal_young );
-            }
+    } else if( here.has_flag( ter_furn_flag::TFLAG_WALL, p ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, p ) ) {
+            here.ter_set( p, ter_t_fungus_wall );
             converted = true;
-        }
-    } else if( here.has_flag( ter_furn_flag::TFLAG_TREE, p ) ) {
-        if( one_in( 10 ) ) {
-            if( here.get_field_intensity( p, fd_fungal_haze ) != 0 ) {
-                if( x_in_y( growth * 10, 100 ) ) {
-                    here.ter_set( p, ter_t_fungus );
-                    if( g->place_critter_at( mon_fungal_blossom, p ) ) {
-                        add_msg_if_player_sees( p, m_warning, _( "The tree blooms forth into a fungal blossom!" ) );
-                    }
-                } else if( x_in_y( growth * 10, 600 ) ) {
-                    here.ter_set( p, ter_t_marloss_tree );
-                }
-            } else {
-                here.ter_set( p, ter_t_tree_fungal );
-            }
-            converted = true;
-        }
-    } else if( here.has_flag( ter_furn_flag::TFLAG_WALL, p ) &&
-               here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE, p ) ) {
-        if( x_in_y( growth * 10, 5000 ) ) {
+        } else if( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE, p ) ||
+          ( here.has_flag( ter_furn_flag::TFLAG_FLAMMABLE_HARD, p ) && x_in_y( fungus_neighbors, 500 ) ) ) {
             here.ter_set( p, ter_t_fungus_wall );
             converted = true;
         }
+    } else {
+        const ter_id &t = here.ter( p );
+        if( t == ter_t_tree_young || t == ter_t_mega_fern ) {
+            const int chance = rng( 1, 100 - fungus_neighbors * 4 );
+            if( chance < 2 ) {
+                here.ter_set( p, ter_t_marloss_tree );
+                converted = true;
+            } else if( chance < 4 ) {
+                here.ter_set( p, ter_t_fungus );
+                if( g->place_critter_at( mon_fungal_blossom, p ) ) {
+                    add_msg_if_player_sees( p, m_warning,
+                                            _( "The young tree bulges and erupts into a fungal blossom!" ) );
+                }
+                converted = true;
+            } else if( chance < 8 ) {
+                here.ter_set( p, ter_t_tree_fungal_young );
+                converted = true;
+            }
+        } else if( t == ter_t_tree_dead || ter_t_tree_dead_warped || t == ter_t_tree_deadpine || t == ter_t_tree_deadpine_warped || t == ter_t_tree_very_dead ) {
+                here.ter_set( p, ter_t_tree_fungal );
+                converted = true;
+        } else if( t != ter_t_tree_marloss && t != ter_t_tree_fungal && here.has_flag( ter_furn_flag::TFLAG_TREE, p ) ) {
+            const int chance = rng( 1, 100 - fungus_neighbors );
+            if( chance < 2 ) {
+                here.ter_set( p, ter_t_marloss_tree );
+                converted = true;
+            } else if( chance < 6 ) {
+                here.ter_set( p, ter_t_fungus );
+                if( g->place_critter_at( mon_fungal_blossom, p ) ) {
+                    add_msg_if_player_sees( p, m_warning, _( "The tree bulges and sags, becoming a fungal blossom!" ) );
+                }
+                converted = true;
+            } else if( chance < 9 ) {
+                here.ter_set( p, ter_t_tree_fungal );
+                converted = true;
+            }
+        }
     }
-    // Furniture conversion
+    // Furniture conversion.
     if( converted ) {
         if( here.has_flag( ter_furn_flag::TFLAG_FLOWER, p ) ) {
             here.furn_set( p, furn_f_flower_fungal );
@@ -234,8 +250,8 @@ void fungal_effects::spread_fungus_one_tile( const tripoint_bub_ms &p, const int
                 here.furn_set( p, furn_f_fungal_clump );
             }
         } else if( here.has_flag( ter_furn_flag::TFLAG_PLANT, p ) ) {
-            // Replace the (already existing) seed
-            // Can't use item_stack::only_item() since there might be fertilizer
+            // Replace the (already existing) seed.
+            // Can't use item_stack::only_item() since there might be fertilizer.
             map_stack items = here.i_at( p );
             const map_stack::iterator seed = std::find_if( items.begin(), items.end(), []( const item & it ) {
                 return it.is_seed();
@@ -252,29 +268,26 @@ void fungal_effects::spread_fungus_one_tile( const tripoint_bub_ms &p, const int
 
 void fungal_effects::spread_fungus( const tripoint_bub_ms &p )
 {
-    int growth = 1;
+    int fungus_neighbors = 1;
     map &here = get_map();
     for( const tripoint_bub_ms &tmp : here.points_in_radius( p, 1 ) ) {
         if( tmp == p ) {
             continue;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_FUNGUS, tmp ) ) {
-            growth += 1;
+            fungus_neighbors += 1;
         }
     }
-
     if( !here.has_flag_ter( ter_furn_flag::TFLAG_FUNGUS, p ) ) {
-        spread_fungus_one_tile( p, growth );
+        spread_fungus_one_tile( p, fungus_neighbors );
     } else {
-        // Everything is already fungus
-        if( growth == 9 ) {
+        // Everything is already fungus.
+        if( fungus_neighbors == 9 ) {
             return;
         }
         for( const tripoint_bub_ms &dest : here.points_in_radius( p, 1 ) ) {
-            // One spread on average
-            if( !here.has_flag( ter_furn_flag::TFLAG_FUNGUS, dest ) && one_in( 9 - growth ) ) {
-                //growth chance is 100 in X simplified
-                spread_fungus_one_tile( dest, 10 );
+            if( !here.has_flag( ter_furn_flag::TFLAG_FUNGUS, dest ) && one_in( 9 - fungus_neighbors ) ) {
+                spread_fungus_one_tile( dest, fungus_neighbors );
             }
         }
     }

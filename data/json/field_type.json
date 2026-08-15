@@ -536,7 +536,7 @@
     "has_fume": true,
     "percent_spread": 90,
     "dirty_transparency_cache": true,
-    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] }
+    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 8 ] ] }
   },
   {
     "id": "fd_rubble",
@@ -1653,14 +1653,35 @@
     "substance_name": "spores",
     "legacy_enum_id": 40,
     "intensity_levels": [
-      { "name": "hazy cloud", "sym": ".", "dangerous": true, "concentration": 1 },
-      { "name": "fungal haze", "color": "cyan", "concentration": 2 },
-      { "name": "thick fungal haze", "transparent": false, "concentration": 4 }
+      { "name": "hazy cloud", "sym": ".", "dangerous": true, "concentration": 1,
+        "effects": [
+          {
+            "effect_id": "fungus",
+            "intensity": 4,
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 7 ] ] },
+            "immune_inside_vehicle": true
+          } ] },
+      { "name": "fungal haze", "color": "cyan", "concentration": 2,
+        "effects": [
+          {
+            "effect_id": "fungus",
+            "intensity": 4,
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 10 ], [ "sensor", 8 ] ] },
+            "immune_inside_vehicle": true
+          } ] },
+      { "name": "thick fungal haze", "transparent": false, "concentration": 4,
+        "effects": [
+          {
+            "effect_id": "fungus",
+            "intensity": 4,
+            "immunity_data": { "body_part_env_resistance": [ [ "mouth", 14 ], [ "sensor", 12 ] ] },
+            "immune_inside_vehicle": true
+          } ] }
     ],
     "decay_amount_factor": 5,
     "gas_absorption_factor": "80m",
     "percent_spread": 13,
-    "outdoor_age_speedup": "5 turns",
+    "outdoor_age_speedup": "4 turns",
     "dirty_transparency_cache": true,
     "has_fume": true,
     "immunity_data": { "flags": [ "MYCUS_IMMUNE" ], "body_part_env_resistance": [ [ "mouth", 15 ], [ "sensor", 15 ] ] },
@@ -1739,7 +1760,7 @@
     "outdoor_age_speedup": "4 minutes",
     "dirty_transparency_cache": true,
     "has_fume": true,
-    "immunity_data": { "flags": [ "MYCUS_IMMUNE" ], "body_part_env_resistance": [ [ "mouth", 15 ], [ "sensor", 15 ] ] },
+    "immunity_data": { "flags": [ "MYCUS_IMMUNE" ], "body_part_env_resistance": [ [ "mouth", 14 ], [ "sensor", 14 ] ] },
     "priority": 8,
     "half_life": "15 minutes",
     "phase": "gas",
@@ -1975,7 +1996,7 @@
     "outdoor_age_speedup": "1 minutes",
     "dirty_transparency_cache": true,
     "has_fume": true,
-    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] },
+    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 10 ] ] },
     "priority": 8,
     "half_life": "30 minutes",
     "phase": "gas",
@@ -1998,7 +2019,7 @@
     "outdoor_age_speedup": "1 minutes",
     "dirty_transparency_cache": true,
     "has_fume": true,
-    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] },
+    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 10 ] ] },
     "priority": 8,
     "half_life": "30 minutes",
     "phase": "gas",
