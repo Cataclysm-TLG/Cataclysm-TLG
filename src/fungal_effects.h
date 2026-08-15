@@ -13,9 +13,9 @@ class fungal_effects
         /** Makes spores at p. source is used for kill counting */
         void create_spores( const tripoint_bub_ms &p, Creature *origin = nullptr );
         void fungalize( const tripoint_bub_ms &p, Creature *origin = nullptr, double spore_chance = 0.0 );
-
+        // Spreads fungus to nearby tiles, counting fungal neighbors and passing that to _one_tile.
         void spread_fungus( const tripoint_bub_ms &p );
-        void spread_fungus_one_tile( const tripoint_bub_ms &p, int growth );
+        void spread_fungus_one_tile( const tripoint_bub_ms &p, int fungus_neighbors );
 };
 
 #endif // CATA_SRC_FUNGAL_EFFECTS_H

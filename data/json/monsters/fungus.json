@@ -26,7 +26,7 @@
     "regenerates": 2,
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "HEARS", "GOODHEARING", "NOHEAD", "POISON", "IMMOBILE", "NO_BREATHE" ],
-    "armor": { "bash": 4, "cut": 4, "bullet": 3, "electric": 4 }
+    "armor": { "bash": 4, "cut": 3, "stab": 15, "bullet": 40, "electric": 4, "heat": 2, "acid": 2 }
   },
   {
     "id": "mon_fungal_hedgerow",
@@ -56,7 +56,7 @@
     "special_attacks": [ [ "FUNGUS_BRISTLE", 10 ] ],
     "death_function": { "message": "The %s disintegrates!", "corpse_type": "NO_CORPSE" },
     "flags": [ "NOHEAD", "POISON", "NO_BREATHE", "IMMOBILE" ],
-    "armor": { "bash": 10, "cut": 10, "bullet": 8, "electric": 4 }
+    "armor": { "bash": 10, "cut": 4, "stab": 15, "bullet": 30, "electric": 4, "heat": 4 }
   },
   {
     "id": "mon_fungal_tendril",
@@ -86,7 +86,7 @@
     "special_attacks": [ [ "FUNGUS_INJECT", 10 ] ],
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "HEARS", "GOODHEARING", "NOHEAD", "POISON", "IMMOBILE", "NO_BREATHE", "HARDTOSHOOT" ],
-    "armor": { "bash": 10, "cut": 4, "bullet": 3, "electric": 4 }
+    "armor": { "bash": 10, "cut": 4, "stab": 15, "bullet": 30, "electric": 4, "heat": 2 }
   },
   {
     "id": "mon_fungal_wall",
@@ -116,7 +116,7 @@
     "special_attacks": [ [ "FUNGUS", 10 ] ],
     "death_function": { "message": "The %s disintegrates!", "corpse_type": "NO_CORPSE" },
     "flags": [ "NOHEAD", "POISON", "NO_BREATHE", "IMMOBILE" ],
-    "armor": { "bash": 10, "cut": 10, "bullet": 8, "electric": 8 }
+    "armor": { "bash": 12, "cut": 6, "stab": 15, "bullet": 35, "electric": 8, "heat": 4 }
   },
   {
     "id": "mon_fungaloid_queen",
@@ -128,7 +128,7 @@
     "diff": 2,
     "volume": "875000 ml",
     "weight": "200 kg",
-    "hp": 300,
+    "hp": 400,
     "speed": 100,
     "material": [ "stone" ],
     "symbol": "T",
@@ -143,7 +143,7 @@
     "harvest": "fungaloid_mass",
     "regenerates": 2,
     "flags": [ "HAS_MIND", "NOHEAD", "POISON", "IMMOBILE", "NO_BREATHE", "QUEEN" ],
-    "armor": { "bash": 10, "cut": 10, "bullet": 8, "electric": 5 }
+    "armor": { "bash": 10, "cut": 8, "stab": 15, "bullet": 55, "electric": 5, "heat": 2, "acid": 8 }
   },
   {
     "id": "mon_fungaloid_seeder",
@@ -164,14 +164,14 @@
     "morale": 100,
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "luminance": 200,
-    "special_attacks": [ [ "FUNGUS_BIG_BLOSSOM", 10 ], [ "FUNGUS", 60 ] ],
+    "special_attacks": [ [ "FUNGUS_BIG_BLOSSOM", 30 ], [ "FUNGUS", 60 ] ],
     "weakpoint_sets": [ "wps_fungaloid_structure" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_fungaloid_basic", "prof_wp_fungaloid_advanced" ],
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
     "harvest": "fungaloid_mass",
     "regenerates": 2,
     "flags": [ "NOHEAD", "POISON", "IMMOBILE", "NO_BREATHE", "QUEEN" ],
-    "armor": { "bash": 10, "cut": 10, "bullet": 8, "electric": 4 }
+    "armor": { "bash": 10, "cut": 6, "stab": 15, "bullet": 35, "electric": 4, "heat": 2, "acid": 8 }
   },
   {
     "id": "mon_fungaloid_tower",
@@ -203,7 +203,7 @@
     "harvest": "fungaloid_mass",
     "regenerates": 2,
     "flags": [ "HAS_MIND", "NOHEAD", "POISON", "IMMOBILE", "HARDTOSHOOT", "NO_BREATHE", "QUEEN" ],
-    "armor": { "bash": 20, "cut": 15, "bullet": 12, "electric": 7 }
+    "armor": { "bash": 20, "cut": 12, "stab": 15, "bullet": 40, "electric": 7, "heat": 2, "acid": 8 }
   },
   {
     "id": "mon_spore",
@@ -240,8 +240,8 @@
     "bodytype": "insect",
     "species": [ "FUNGUS" ],
     "diff": 2,
-    "volume": "62500 ml",
-    "weight": "81500 g",
+    "volume": "42500 ml",
+    "weight": "35000 g",
     "hp": 40,
     "speed": 60,
     "material": [ "vegetable" ],
@@ -264,7 +264,7 @@
     "scents_tracked": [ "sc_fetid", "sc_human" ],
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "SEES", "SMELLS", "POISON", "CLIMBS", "PATH_AVOID_FIRE", "PATH_AVOID_FALL" ],
-    "armor": { "bash": 1, "cut": 1, "bullet": 1, "electric": 2 }
+    "armor": { "bash": 1, "cut": 1, "stab": 15, "bullet": 12, "electric": 2 }
   },
   {
     "id": "mon_spider_fungus",
@@ -275,8 +275,8 @@
     "bodytype": "spider",
     "species": [ "FUNGUS" ],
     "diff": 2,
-    "volume": "62500 ml",
-    "weight": "81500 g",
+    "volume": "52500 ml",
+    "weight": "41500 g",
     "hp": 20,
     "speed": 60,
     "material": [ "iflesh" ],
@@ -298,7 +298,7 @@
     "special_attacks": [ [ "FUNGAL_TRAIL", 3 ] ],
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "SEES", "VENOM", "WEBWALK", "CLIMBS", "PATH_AVOID_FIRE", "INSECTICIDEPROOF" ],
-    "armor": { "bash": 2, "cut": 6, "bullet": 5, "electric": 2 }
+    "armor": { "bash": 2, "cut": 6, "stab": 15, "bullet": 12, "electric": 2 }
   },
   {
     "id": "mon_wasp_small_fungus",
@@ -310,7 +310,7 @@
     "species": [ "FUNGUS" ],
     "diff": 2,
     "volume": "10 L",
-    "weight": "10 kg",
+    "weight": "4 kg",
     "hp": 10,
     "speed": 70,
     "bleed_rate": 100,
@@ -350,7 +350,7 @@
     "scents_tracked": [ "sc_fetid", "sc_human" ],
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "SEES", "SMELLS", "HEARS", "HARDTOSHOOT", "PATH_AVOID_FIRE" ],
-    "armor": { "bash": 1, "cut": 4, "stab": 2 }
+    "armor": { "bash": 1, "cut": 2, "stab": 7, "bullet": 5 }
   },
   {
     "id": "mon_wasp_small_guard_fungus",
@@ -358,7 +358,11 @@
     "name": { "str": "fungal wasp guard" },
     "description": "A wasp worker split down the middle.  While it's condition looks fatal, it doesn't seem to die, supposedly by the large mushroom growing from once it's wings were.  It's emotionless face still seems to cry with pain and anger.",
     "copy-from": "mon_wasp_small_fungus",
-    "melee_skill": 4
+    "hp": 40,
+    "volume": "40 L",
+    "weight": "25 kg",
+    "melee_skill": 4,
+    "armor": { "bash": 4, "cut": 3, "stab": 8, "bullet": 10 }
   },
   {
     "id": "mon_wasp_queen_fungus",
@@ -367,8 +371,11 @@
     "description": "A mutated wasp queen that has been consumed by a sickly grey mold covering it's body.  Abandoning it's duty to laying eggs, it seemingly searches for anything to attack, as a mist of spores emit from it's mandibles.",
     "copy-from": "mon_wasp_small_guard_fungus",
     "harvest": "arachnid_wasp_queen",
+    "hp": 70,
+    "volume": "60 L",
+    "weight": "35 kg",
     "dissect": "dissect_insect_sample_large",
-    "armor": { "bash": 3, "cut": 10, "stab": 8, "bullet": 5, "electric": 2 }
+    "armor": { "bash": 3, "cut": 10, "stab": 15, "bullet": 10, "electric": 2 }
   },
   {
     "id": "mon_wasp_fungus",
@@ -379,7 +386,7 @@
     "bodytype": "flying insect",
     "species": [ "FUNGUS" ],
     "volume": "62500 ml",
-    "weight": "81500 g",
+    "weight": "31500 g",
     "hp": 70,
     "speed": 95,
     "attack_cost": 170,
@@ -413,7 +420,7 @@
     "dissect": "dissect_insect_sample_single",
     "death_function": { "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "SEES", "SMELLS", "HEARS", "PATH_AVOID_FIRE" ],
-    "armor": { "bash": 5, "cut": 14, "stab": 12, "bullet": 12 }
+    "armor": { "bash": 6, "cut": 3, "stab": 12, "bullet": 22 }
   },
   {
     "id": "mon_wasp_guard_fungus",
@@ -424,7 +431,7 @@
     "melee_skill": 6,
     "special_attacks": [ [ "FUNGUS_INJECT", 30 ] ],
     "dissect": "dissect_insect_sample_small",
-    "armor": { "bash": 5, "cut": 14, "stab": 12, "bullet": 12, "electric": 2 }
+    "armor": { "bash": 6, "cut": 3, "stab": 15, "bullet": 14, "electric": 2 }
   },
   {
     "id": "mon_wasp_mega_fungus",
@@ -457,7 +464,7 @@
     "vision_night": 5,
     "harvest": "arachnid_wasp_queen",
     "dissect": "dissect_insect_sample_huge",
-    "armor": { "bash": 6, "cut": 24, "stab": 14, "bullet": 18, "electric": 4 }
+    "armor": { "bash": 6, "cut": 4, "stab": 15, "bullet": 20, "electric": 4 }
   },
   {
     "id": "mon_bee_small_fungus",
@@ -503,7 +510,7 @@
     "scents_tracked": [ "sc_fetid", "sc_human" ],
     "dissect": "dissect_insect_sample_single",
     "flags": [ "SEES", "SMELLS", "PATH_AVOID_FIRE" ],
-    "armor": { "bash": 3, "cut": 5, "bullet": 4 }
+    "armor": { "bash": 5, "cut": 3, "stab": 15, "bullet": 15 }
   },
   {
     "id": "mon_bee_mega_fungus",
@@ -519,6 +526,6 @@
     "dissect": "dissect_insect_sample_small",
     "special_attacks": [ { "id": "impale" }, [ "FUNGUS", 50 ] ],
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
-    "armor": { "bash": 4, "cut": 6, "bullet": 5, "electric": 1 }
+    "armor": { "bash": 6, "cut": 4, "stab": 15, "bullet": 20, "electric": 1 }
   }
 ]

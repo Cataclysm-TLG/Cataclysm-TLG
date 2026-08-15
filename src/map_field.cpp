@@ -590,14 +590,14 @@ static void field_processor_fd_fungal_haze( const tripoint_bub_ms &p, field_entr
         field_proc_data &/*pd*/ )
 {
     // if( cur_fd_type_id == fd_fungal_haze ) {
-    if( one_in( 10 - 2 * cur.get_field_intensity() ) ) {
-        // Haze'd terrain
+    // There's already RNG in the function we call here, so a simple interval works fine here.
+    if( calendar::once_every( 1_seconds * ( 30 - 5 * cur.get_field_intensity() ) ) ) {
+        // The haze fungalizes terrain.
         fungal_effects().spread_fungus( p );
     }
 }
 
 // Process npc complaints moved to player_in_field
-
 static void field_processor_extra_radiation( const tripoint_bub_ms &p, field_entry &cur,
         field_proc_data &pd )
 {
@@ -1664,27 +1664,19 @@ void map::player_in_field( Character &you )
                                  intensity ) ) );
             }
         }
-
-        if( ft == fd_fungal_haze ) {
-            if( !you.has_trait( trait_M_IMMUNE ) && ( !inside || one_in( 4 ) ) ) {
-                you.add_env_effect( effect_fungus, bodypart_id( "mouth" ), 4, 10_minutes, true );
-                you.add_env_effect( effect_fungus, bodypart_id( "eyes" ), 4, 10_minutes, true );
-            }
-        }
-
+        // Old code used by fd_nuke_gas. Get rid of this once it's gone.
         if( cur.get_intensity_level().extra_radiation_min > 0 ) {
             const field_intensity_level &int_level = cur.get_intensity_level();
-            // Get irradiated by the nuclear fallout.
             const float rads = rng( int_level.extra_radiation_min + 1,
                                     int_level.extra_radiation_max * ( int_level.extra_radiation_max + 1 ) );
             const bool rad_proof = !you.irradiate( rads );
-            // TODO: Reduce damage for rad resistant?
             if( int_level.extra_radiation_min > 0 && !rad_proof ) {
                 you.add_msg_if_player( m_bad, int_level.radiation_hurt_message.translated() );
                 you.hurtall( rng( int_level.radiation_hurt_damage_min, int_level.radiation_hurt_damage_max ),
                              nullptr );
             }
         }
+        // What even uses this?
         if( ft == fd_flame_burst ) {
             // A burst of flame? Only hits the legs and torso.
             if( !inside ) {
