@@ -1776,7 +1776,7 @@ bool mattack::fungus_big_blossom( monster *z )
         if( here.get_field_intensity( dest, fd_fire ) != 0 ) {
             firealarm = true;
         }
-        if( firealarm ) {
+        if( firealarm && one_in( 3 ) ) {
             here.remove_field( dest, fd_fire );
             here.remove_field( dest, fd_smoke );
             here.add_field( dest, fd_fungal_haze, 3 );

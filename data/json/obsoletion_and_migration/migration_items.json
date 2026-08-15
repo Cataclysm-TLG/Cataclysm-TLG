@@ -4212,10 +4212,5 @@
     "type": "MIGRATION",
     "id": "javelin_fletched_bronze",
     "replace": "javelin"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "mon_zombie_tough_fungal",
-    "replace": "mon_zombie_fungal_bulk"
   }
 ]

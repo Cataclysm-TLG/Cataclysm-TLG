@@ -437,7 +437,7 @@
     "id": "mon_zombie_fungal_bulk",
     "type": "MONSTER",
     "name": { "str": "fungal bulk" },
-    "description": "This terrifying fungal construct seems to have lost all facial features, its face covered in thick fungal sprouts.  Its arms end in jagged points as fungal tendrils burst forth.",
+    "description": "Barely recognizable as human remains, this zombie's body is completely crusted over with mold, and its face is covered in thick fungal sprouts.  Its clublike arms end in jagged points, woody tendrils that have burst forth like mismatched sets of claws.",
     "default_faction": "fungus",
     "bodytype": "human",
     "species": [ "FUNGUS" ],
@@ -547,7 +547,7 @@
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
-    "armor": { "bash": 5, "cut": 3, "bullet": 20, "electric": 2 }
+    "armor": { "bash": 5, "cut": 3, "stab": 12, "bullet": 20, "electric": 2 }
   },
   {
     "id": "mon_beekeeper_fungal",
@@ -584,7 +584,7 @@
     },
     "burn_into": "mon_zombie_scorched",
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
-    "armor": { "bash": 6, "cut": 8, "bullet": 16, "electric": 1 }
+    "armor": { "bash": 6, "cut": 8, "stab": 12, "bullet": 16, "electric": 1 }
   },
   {
     "id": "mon_zombie_fungus_acidic",
@@ -640,7 +640,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "electric": 1, "bullet": 14 }
+    "armor": { "electric": 1, "stab": 8, "bullet": 14 }
   },
   {
     "id": "mon_zombie_dog_fungus",
@@ -673,7 +673,7 @@
     "special_attacks": [ [ "FUNGUS", 230 ], { "id": "bite_humanoid", "cooldown": 5 }, { "id": "scratch_humanoid" } ],
     "death_drops": "mon_dog_death_drops",
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON" ],
-    "armor": { "electric": 1, "bullet": 18 }
+    "armor": { "electric": 1, "stab": 8, "bullet": 18 }
   },
   {
     "id": "mon_zombie_pig_fungus",
@@ -714,7 +714,7 @@
       "message": "The %s bursts, releasing a cloud of spores."
     },
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "KEENNOSE", "BASHES", "NO_BREATHE", "FILTHY", "GOODHEARING" ],
-    "armor": { "bash": 6, "cut": 12, "bullet": 27, "electric": 2 }
+    "armor": { "bash": 6, "cut": 4, "stab": 16, "bullet": 27, "electric": 2 }
   },
   {
     "id": "mon_zoose_fungus",
@@ -746,7 +746,7 @@
     "harvest": "zombie_animal_mushroom",
     "special_attacks": [ { "id": "smash", "throw_strength": 49 }, [ "FUNGUS", 160 ] ],
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
-    "armor": { "bash": 6, "cut": 4, "bullet": 35, "electric": 2 }
+    "armor": { "bash": 6, "cut": 4, "stab": 20, "bullet": 35, "electric": 2 }
   },
   {
     "id": "mon_ziger_fungus",
@@ -778,7 +778,7 @@
     "harvest": "zombie_animal_mushroom",
     "special_attacks": [ [ "scratch", 10 ], { "type": "leap", "cooldown": 5, "max_range": 5 }, [ "FUNGUS", 190 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "FILTHY" ],
-    "armor": { "bash": 4, "cut": 2, "electric": 2, "bullet": 30 }
+    "armor": { "bash": 4, "cut": 2, "stab": 20, "electric": 2, "bullet": 30 }
   },
   {
     "id": "mon_zombie_horse_fungus",
@@ -810,7 +810,7 @@
     "harvest": "zombie_animal_mushroom",
     "special_attacks": [ [ "FUNGUS", 160 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "WARM", "NO_BREATHE" ],
-    "armor": { "bash": 5, "cut": 1, "electric": 2, "bullet": 38 }
+    "armor": { "bash": 5, "cut": 1, "stab": 22, "electric": 2, "bullet": 38 }
   },
   {
     "id": "mon_zeer_fungus",
@@ -843,7 +843,7 @@
     "harvest": "zombie_animal_mushroom",
     "special_attacks": [ [ "FUNGUS", 210 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "FILTHY" ],
-    "armor": { "bash": 1, "cut": 3, "electric": 1, "bullet": 24 }
+    "armor": { "bash": 1, "cut": 3, "stab": 15, "electric": 1, "bullet": 24 }
   },
   {
     "id": "mon_zeindeer_fungus",
@@ -876,6 +876,6 @@
     "harvest": "zombie_animal_mushroom",
     "special_attacks": [ [ "FUNGUS", 180 ] ],
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
-    "armor": { "bash": 5, "cut": 4, "electric": 1, "bullet": 26 }
+    "armor": { "bash": 5, "cut": 4, "stab": 16, "electric": 1, "bullet": 26 }
   }
 ]
