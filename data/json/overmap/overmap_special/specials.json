@@ -2452,8 +2452,8 @@
     "connections": [ { "point": [ 7, 15, 0 ], "terrain": "road", "connection": "local_road", "from": [ 7, 14, 0 ] } ],
     "locations": [ "wilderness" ],
     "city_distance": [ 3, -1 ],
-    "city_sizes": [ 4, -1 ],
-    "occurrences": [ 75, 100 ],
+    "city_sizes": [ -1, 8 ],
+    "occurrences": [ 90, 100 ],
     "priority": 1,
     "flags": [ "GLOBALLY_UNIQUE", "SAFE_AT_WORLDGEN", "MAN_MADE" ]
   },
