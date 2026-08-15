@@ -73,9 +73,9 @@
       {
         "id": [
           "BARK",
-          "BARK_2a",
-          "BARK_2b",
-          "BARK_2c",
+          "BARK2_a",
+          "BARK2_b",
+          "BARK2_c",
           "FEATHERS",
           "SHELL",
           "SHELL2",
@@ -188,12 +188,9 @@
       { "id": [ "BATEARS", "ELFA_EARS", "FELINE_EARS", "LUPINE_EARS", "RABBIT_EARS", "URSINE_EARS" ], "order": 5500 },
       { "id": [ "ANTENNAE", "ANTLERS", "HORNS_CURLED", "HORNS", "HORNS_POINTED" ], "order": 6000 },
       { "id": [ "COMPOUND_EYES", "ELFAEYES", "FEL_EYE", "LIZ_EYE", "BIRD_EYE" ], "order": 6500 },
+      { "id": [ "FANGS", "FANGS_VAMPIRE", "MANDIBLES", "SABER_TEETH", "BEAK", "DRILL_BEAK" ], "order": 7000 },
       {
         "id": [
-          "BEAK",
-          "DRILL_BEAK",
-          "BEAK_HUM",
-          "BEAK_PECK",
           "LYNX_FUR",
           "MUZZLE",
           "MUZZLE_BEAR",
@@ -203,17 +200,13 @@
           "MINOTAUR",
           "RABBIT_NOSE",
           "SLIT_NOSTRILS",
-          "SNOUT",
-          "WHISKERS",
-          "WHISKERS_RAT"
+          "SNOUT"
         ],
-        "order": 7000
+        "order": 7500
       },
-      { "id": [ "FANGS", "MANDIBLES", "SABER_TEETH" ], "order": 7500 },
-      { "id": [ "FORKED_TONGUE", "active_bio_ads", "active_bio_ods" ], "order": 8000 },
+      { "id": [ "FORKED_TONGUE", "MOUTH_TENTACLES", "active_bio_ads", "active_bio_ods", "WHISKERS", "WHISKERS_RAT" ], "order": 8000 },
       { "id": [ "PROF_FED", "PHEROMONE_INSECT" ], "order": 8500 },
-      { "id": [ "WINGS_BAT", "WINGS_BIRD" ], "order": 9000 },
-      { "id": [ "BEAK", "DRILL_BEAK", "BEAK_PECK" ], "order": 9500 }
+      { "id": [ "WINGS_BAT", "WINGS_BIRD" ], "order": 9000 }
     ]
   }
 ]
