@@ -1654,7 +1654,7 @@
     "legacy_enum_id": 40,
     "intensity_levels": [
       {
-        "name": "hazy cloud",
+        "name": "thin fungal haze",
         "sym": ".",
         "dangerous": true,
         "concentration": 1,
