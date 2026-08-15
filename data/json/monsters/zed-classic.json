@@ -490,7 +490,7 @@
     ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "fungalize_into": "mon_zombie_tough_fungal",
+    "fungalize_into": "mon_zombie_fungal_bulk",
     "upgrades": { "half_life": 120, "into_group": "GROUP_ZOMBIE_UPGRADE" },
     "flags": [
       "SEES",
