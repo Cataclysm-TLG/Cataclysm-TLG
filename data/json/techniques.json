@@ -3691,6 +3691,7 @@
     "name": "Hidden Claw",
     "melee_allowed": false,
     "messages": [ "You claw %s", "<npcname> claws %s" ],
+    "description": "An unarmed attack made with a worn weapon",
     "unarmed_allowed": true,
     "basic": true,
     "weighting": -2,

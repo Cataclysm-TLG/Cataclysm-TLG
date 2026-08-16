@@ -144,8 +144,11 @@ static const damage_type_id damage_stab( "stab" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_shakes( "shakes" );
 static const efftype_id effect_sleep( "sleep" );
+
 static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 static const fault_id fault_overheat_safety( "fault_overheat_safety" );
+
+static const flag_id flag_UNARMED_WEAPON( "UNARMED_WEAPON" );
 
 static const furn_str_id furn_f_metal_smoking_rack_active( "f_metal_smoking_rack_active" );
 static const furn_str_id furn_f_smoking_rack_active( "f_smoking_rack_active" );
@@ -5405,11 +5408,19 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
         if( !all_techniques.empty() ) {
             const std::vector<matec_id> all_tec_sorted = sorted_lex( all_techniques );
             insert_separation_line( info );
-            info.emplace_back( "DESCRIPTION", _( "<bold>Techniques when wielded</bold>: " ) +
-            enumerate_as_string( all_tec_sorted, []( const matec_id & tid ) {
-                return string_format( "<stat>%s</stat>: <info>%s</info> <info>%s</info>", tid.obj().name,
-                                      tid.obj().description, _( tid.obj().condition_desc ) );
-            } ) );
+            if( has_flag( flag_UNARMED_WEAPON ) ) {
+                info.emplace_back( "DESCRIPTION", _( "<bold>Techniques when worn</bold>: " ) +
+                enumerate_as_string( all_tec_sorted, []( const matec_id & tid ) {
+                    return string_format( "<stat>%s</stat>: <info>%s</info> <info>%s</info>", tid.obj().name,
+                                        tid.obj().description, _( tid.obj().condition_desc ) );
+                } ) ); 
+            } else {
+                info.emplace_back( "DESCRIPTION", _( "<bold>Techniques when wielded</bold>: " ) +
+                enumerate_as_string( all_tec_sorted, []( const matec_id & tid ) {
+                    return string_format( "<stat>%s</stat>: <info>%s</info> <info>%s</info>", tid.obj().name,
+                                        tid.obj().description, _( tid.obj().condition_desc ) );
+                } ) );
+            }
         }
     }
 
