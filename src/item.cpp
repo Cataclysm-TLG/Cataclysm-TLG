@@ -148,7 +148,7 @@ static const efftype_id effect_sleep( "sleep" );
 static const fault_id fault_emp_reboot( "fault_emp_reboot" );
 static const fault_id fault_overheat_safety( "fault_overheat_safety" );
 
-static const flag_id flag_UNARMED_WEAPON( "UNARMED_WEAPON" );
+static const flag_id flag_WORN_WEAPON( "WORN_WEAPON" );
 
 static const furn_str_id furn_f_metal_smoking_rack_active( "f_metal_smoking_rack_active" );
 static const furn_str_id furn_f_smoking_rack_active( "f_smoking_rack_active" );
@@ -5408,7 +5408,7 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
         if( !all_techniques.empty() ) {
             const std::vector<matec_id> all_tec_sorted = sorted_lex( all_techniques );
             insert_separation_line( info );
-            if( has_flag( flag_UNARMED_WEAPON ) ) {
+            if( has_flag( flag_WORN_WEAPON ) ) {
                 info.emplace_back( "DESCRIPTION", _( "<bold>Techniques when worn</bold>: " ) +
                 enumerate_as_string( all_tec_sorted, []( const matec_id & tid ) {
                     return string_format( "<stat>%s</stat>: <info>%s</info> <info>%s</info>", tid.obj().name,
