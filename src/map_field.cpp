@@ -74,6 +74,7 @@ static const damage_type_id damage_pure( "pure" );
 
 static const efftype_id effect_badpoison( "badpoison" );
 static const efftype_id effect_blind( "blind" );
+static const efftype_id effect_fungalpoison( "fungalpoison" );
 static const efftype_id effect_fungus( "fungus" );
 static const efftype_id effect_onfire( "onfire" );
 static const efftype_id effect_poison( "poison" );
@@ -2086,10 +2087,10 @@ void map::monster_in_field( monster &z )
             if( z.made_of_any( Creature::cmat_flameres ) ) {
                 dam += -15;
             }
-
-            if( cur.get_field_intensity() == 1 ) {
+            const int intensity = cur.get_field_intensity();
+            if( intensity == 1 ) {
                 dam += rng( 0, 3 );
-            } else if( cur.get_field_intensity() == 2 ) {
+            } else if( intensity == 2 ) {
                 dam += rng( 1, 9 );
                 if( !z.in_species( species_ZOMBIE ) && !z.in_species( species_ROBOT ) &&
                     !z.in_species( species_ROBOT_FLYING ) ) {
@@ -2098,7 +2099,7 @@ void map::monster_in_field( monster &z )
                 if( !z.made_of( phase_id::LIQUID ) && !z.made_of_any( Creature::cmat_flameres ) && one_in( 4 ) ) {
                     z.add_effect( effect_onfire, rng( 1_turns, 6_turns ) );
                 }
-            } else if( cur.get_field_intensity() == 3 ) {
+            } else {
                 dam += rng( 1, 15 );
                 if( !z.in_species( species_ZOMBIE ) && !z.in_species( species_ROBOT ) &&
                     !z.in_species( species_ROBOT_FLYING ) ) {
@@ -2116,22 +2117,32 @@ void map::monster_in_field( monster &z )
                 if( one_in( 5 - intensity ) ) {
                     dam += rng( 1, ( 10 - size_factor ) * intensity );
                     if( z.type->has_fear_trigger( mon_trigger::HURT ) ) {
-                        z.morale -= ( 2 * cur.get_field_intensity() );
+                        z.morale -= ( 2 * intensity );
                     }
                     if( z.type->has_anger_trigger( mon_trigger::HURT ) ) {
-                        z.anger += ( 2 * cur.get_field_intensity() );
+                        z.anger += ( 2 * intensity );
                     }
                 }
             }
         }
         if( cur_field_type == fd_fungal_haze ) {
-            if( !z.type->in_species( species_FUNGUS ) &&
-                !z.type->has_flag( mon_flag_NO_BREATHE ) &&
-                !z.make_fungus() ) {
-                // Don't insta-kill jabberwocks, that's silly
+            if( !z.type->in_species( species_FUNGUS ) ) {
                 const int intensity = cur.get_field_intensity();
-                z.mod_moves( -rng( ( 10 - size_factor ) * intensity, ( 30 - size_factor ) * intensity ) );
-                dam += rng( 0, ( 10 - size_factor ) * intensity );
+                if( one_in( 12 - intensity ) ) {
+                    // Mi-go aren't especially vulnerable to the mycus, but they do recognize it as a threat.
+                    if( !z.make_fungus() || z.type->in_species( species_MIGO ) ) {
+                        // Apply fungalpoison effect (stands in for fungal infection for monsters) if the
+                        // target is something the fungus can eat but not fungalize.
+                        z.add_effect( effect_stunned, intensity * 1_seconds );
+                        z.add_effect( effect_fungalpoison, intensity * 10_seconds );
+                        if( z.type->has_fear_trigger( mon_trigger::HURT ) ) {
+                            z.morale -= ( 2 * intensity );
+                        }
+                        if( z.type->has_anger_trigger( mon_trigger::HURT ) ) {
+                            z.anger += ( 2 * intensity );
+                        }
+                    }
+                }
             }
         }
         if( cur_field_type == fd_fungicidal_gas ) {

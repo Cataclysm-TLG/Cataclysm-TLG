@@ -1825,7 +1825,6 @@ bool mattack::fungus_big_blossom( monster *z )
 bool mattack::fungus_inject( monster *z )
 {
     map &here = get_map();
-    // For faster copy+paste
     Creature *target = &get_player_character();
     Character &player_character = get_player_character();
     if( trig_dist( z->pos_bub(), player_character.pos_bub() ) > 1 ) {
@@ -1840,7 +1839,6 @@ bool mattack::fungus_inject( monster *z )
     if( player_character.has_trait( trait_MARLOSS ) &&
         player_character.has_trait( trait_MARLOSS_BLUE ) &&
         !player_character.crossed_threshold() ) {
-        add_msg( m_info, _( "The %s seems to wave you toward the tower…" ), z->name() );
         z->anger = 0;
         return true;
     }
@@ -1855,28 +1853,22 @@ bool mattack::fungus_inject( monster *z )
     bodypart_id hit = target->get_random_body_part();
     damage_instance dam_inst = damage_instance( damage_cut, rng( 5, 11 ) );
 
-    // Can we dodge the attack? Uses player dodge function % chance (melee.cpp)
     if( target->dodge_check( z, hit, dam_inst ) ) {
         target->add_msg_player_or_npc( _( "You dodge it!" ),
                                        _( "<npcname> dodges it!" ) );
         target->on_dodge( z, z->type->melee_skill );
         return true;
     }
-
     target->block_hit( z, hit, dam_inst );
-
     int dam = player_character.deal_damage( z, hit, dam_inst ).total_damage();
     if( dam > 0 ) {
-        //~ 1$s is monster name, 2$s bodypart in accusative
         add_msg( m_bad, _( "The %1$s sinks its point into your %2$s!" ), z->name(),
                  body_part_name_accusative( hit ) );
-        // do not fungal infect a bionic limb
         if( !hit->has_flag( json_flag_BIONIC_LIMB ) && one_in( 10 - dam ) ) {
             player_character.add_effect( effect_fungus, 10_minutes, true );
-            add_msg( m_warning, _( "You feel thousands of live spores pumping into you…" ) );
+            add_msg( m_warning, _( "A sickly goo oozes from the wound." ) );
         }
     } else {
-        //~ 1$s is monster name, 2$s bodypart in accusative
         add_msg( _( "The %1$s strikes your %2$s, but your armor protects you." ), z->name(),
                  body_part_name_accusative( hit ) );
     }
