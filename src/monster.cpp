@@ -104,6 +104,7 @@ static const efftype_id effect_emp( "emp" );
 static const efftype_id effect_fake_common_cold( "fake_common_cold" );
 static const efftype_id effect_fake_flu( "fake_flu" );
 static const efftype_id effect_fallout( "fallout" );
+static const efftype_id effect_fungus( "fungus" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_has_bag( "has_bag" );
 static const efftype_id effect_heavysnare( "heavysnare" );
@@ -1943,8 +1944,8 @@ bool monster::is_elec_immune() const
 
 bool monster::is_immune_effect( const efftype_id &effect ) const
 {
-    // Currently monsters aren't affected by radiation.
-    if( effect == effect_bite || effect == effect_infected || effect == effect_fallout ) {
+    // Currently monsters aren't affected by radiation. Fungal effects are handled with the fungal_poison effect.
+    if( effect == effect_bite || effect == effect_infected || effect == effect_fallout || effect == effect_fungus ) {
         return true;
     }
 
