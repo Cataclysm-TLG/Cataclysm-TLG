@@ -24,6 +24,6 @@
     "name": { "str": "Swimming" },
     "description": "You are acquainted with the principles of swimming and staying afloat.  This does not necessarily mean you can always swim in all conditions, but it certainly helps.",
     "can_learn": true,
-    "time_to_learn": "2 h"
+    "time_to_learn": "1 h"
   }
 ]

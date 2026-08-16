@@ -609,9 +609,8 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
     g->water_affect_items( you );
 
     int movecost = you.swim_speed();
-    if( !you.has_proficiency( proficiency_prof_swimming ) ) {
-        you.practice_proficiency( proficiency_prof_swimming, 1_seconds );
-    }
+    int capped_movecost = std::min( movecost, 500 );
+    you.practice_proficiency( proficiency_prof_swimming, 1_seconds * ( 1 / movecost ) );
     you.practice( skill_swimming, you.is_underwater() ? 2 : 1 );
     if( movecost >= 500 || you.has_effect( effect_winded ) ) {
         if( !you.is_underwater() &&
@@ -652,7 +651,7 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
         m.board_vehicle( you.pos_bub(), &you );
     }
     // 500 means we can't swim, so for now that's the cap.
-    you.mod_moves( -( ( movecost > 500 ? 500 : movecost ) * ( diagonal ? M_SQRT2 : 1 ) ) );
+    you.mod_moves( -( ( capped_movecost ) * ( diagonal ? M_SQRT2 : 1 ) ) );
     you.inv->rust_iron_items();
 
     if( !you.is_mounted() ) {
