@@ -201,7 +201,7 @@
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 2 ] ],
     "weapon_category": [ "FENCING_WEAPONRY" ],
-    "melee_damage": { "stab": 16 }
+    "melee_damage": { "stab": 17 }
   },
   {
     "id": "switchblade",
