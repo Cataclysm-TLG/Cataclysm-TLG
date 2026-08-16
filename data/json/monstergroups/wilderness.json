@@ -346,8 +346,8 @@
     "is_animal": true,
     "monsters": [
       { "monster": "mon_zeer", "weight": 4, "cost_multiplier": 12, "pack_size": [ 1, 3 ] },
-      { "monster": "mon_zeer", "weight": 6, "cost_multiplier": 12, "pack_size": [ 1, 2 ] },
-      { "monster": "mon_zeer_frail", "weight": 2, "cost_multiplier": 5 },
+      { "monster": "mon_zeer", "weight": 7, "cost_multiplier": 9, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zeer_frail", "weight": 2, "cost_multiplier": 5, "pack_size": [ 1, 2 ] },
       { "monster": "mon_zombear", "weight": 2, "cost_multiplier": 10 },
       { "monster": "mon_zombie_dog", "weight": 2, "cost_multiplier": 2 },
       { "monster": "mon_zombie_horse", "weight": 1, "cost_multiplier": 19, "pack_size": [ 1, 2 ] },
@@ -362,8 +362,8 @@
     "is_animal": true,
     "monsters": [
       { "monster": "mon_zeer", "weight": 5, "cost_multiplier": 12, "pack_size": [ 1, 5 ] },
-      { "monster": "mon_zeer", "weight": 7, "cost_multiplier": 12, "pack_size": [ 1, 2 ] },
-      { "monster": "mon_zeer_frail", "weight": 3, "cost_multiplier": 5 },
+      { "monster": "mon_zeer", "weight": 7, "cost_multiplier": 9, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zeer_frail", "weight": 3, "cost_multiplier": 5, "pack_size": [ 1, 2 ] },
       { "monster": "mon_zombear", "weight": 3, "cost_multiplier": 10 },
       { "monster": "mon_zombie_dog", "weight": 3, "cost_multiplier": 2 },
       { "monster": "mon_zombie_horse", "weight": 1, "cost_multiplier": 19, "pack_size": [ 1, 2 ] },
