@@ -384,9 +384,7 @@
     "type": "mission_definition",
     "name": { "str": "Analyze Zombie Blood" },
     "goal": "MGOAL_CONDITION",
-    "goal_condition": {
-      "and": [ { "u_has_items": { "item": "software_blood_data", "count": 1 } } ]
-    },
+    "goal_condition": { "and": [ { "u_has_items": { "item": "software_blood_data", "count": 1 } } ] },
     "difficulty": 8,
     "value": 250000,
     "start": {

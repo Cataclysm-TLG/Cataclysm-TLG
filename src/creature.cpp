@@ -1373,7 +1373,6 @@ void Creature::messaging_projectile_attack( const Creature *source,
         const projectile_attack_results &hit_selection, const int total_damage ) const
 {
     const map &here = get_map();
-
     const tripoint_bub_ms pos = pos_bub( here );
     const tripoint_bub_ms source_pos = source->pos_bub( here );
     const viewer &player_view = get_player_view();
@@ -1397,14 +1396,14 @@ void Creature::messaging_projectile_attack( const Creature *source,
                          disp_name(), hit_selection.wp_hit );
             }
         } else if( is_avatar() ) {
-            //monster hits player ranged
+            // Monster hits the player with a ranged attack.
             //~ Hit message. 1$s is bodypart name in accusative. 2$d is damage value.
             add_msg_if_player( m_bad, _( "You were hit in the %1$s for %2$d damage." ),
                                body_part_name_accusative( hit_selection.bp_hit ),
                                total_damage );
         } else if( source != nullptr ) {
             if( source->is_avatar() ) {
-                //player hits monster ranged
+                // Player hits monster with a ranged attack.
                 SCT.add( pos.xy().raw(),
                          direction_from( point::zero, point( pos.x() - source_pos.x(), pos.y() - source_pos.y() ) ),
                          get_hp_bar( total_damage, get_hp_max(), true ).first,
@@ -1414,29 +1413,29 @@ void Creature::messaging_projectile_attack( const Creature *source,
                     SCT.add( pos.xy().raw(),
                              direction_from( point::zero, point( pos.x() - source_pos.x(), pos.y() - source_pos.y() ) ),
                              get_hp_bar( get_hp(), get_hp_max(), true ).first, m_good,
-                             //~ "hit points", used in scrolling combat text
+                             //~ "hit points", used in scrolling combat text.
                              _( "HP" ), m_neutral, "hp" );
                 } else {
                     SCT.removeCreatureHP();
                 }
-                // Move it here to show crit msg only when you actually hurt the target
+                // Move it here to show crit msg only when you actually hurt the target.
                 add_msg( m_good, hit_selection.message );
                 if( hit_selection.wp_hit.empty() ) {
-                    //~ %1$s: creature name, %2$d: damage value
+                    //~ %1$s: creature name, %2$d: damage value.
                     add_msg( m_good, _( "You hit %1$s for %2$d damage." ),
                              disp_name(), total_damage );
                 } else {
-                    //~ %1$s: creature name, %2$s: weakpoint hit, %3$d: damage value
+                    //~ %1$s: creature name, %2$s: weakpoint hit, %3$d: damage value.
                     add_msg( m_good, _( "You hit %1$s in %2$s for %3$d damage." ),
                              disp_name(), hit_selection.wp_hit, total_damage );
                 }
             } else if( source != this ) {
                 if( hit_selection.wp_hit.empty() ) {
-                    //~ 1$ - shooter, 2$ - target
+                    //~ 1$ - shooter, 2$ - target.
                     add_msg( _( "%1$s shoots %2$s." ),
                              source->disp_name(), disp_name() );
                 } else {
-                    //~ 1$ - shooter, 2$ - target, 3$ - weakpoint
+                    //~ 1$ - shooter, 2$ - target, 3$ - weakpoint.
                     add_msg( _( "%1$s shoots %2$s in %3$s." ),
                              source->disp_name(), disp_name(), hit_selection.wp_hit );
                 }
@@ -1449,8 +1448,8 @@ void Creature::print_proj_avoid_msg( Creature *source, viewer &player_view ) con
 {
     const map &here = get_map();
 
-    // "Avoid" rather than "dodge", because it includes removing self from the line of fire
-    //  rather than just Matrix-style bullet dodging
+    // "Avoid" rather than "dodge", because it includes removing self from the line of fire.
+    //  rather than just Matrix-style bullet dodging.
     if( source != nullptr && player_view.sees( here, *source ) ) {
         add_msg_player_or_npc(
             m_warning,
@@ -1479,7 +1478,7 @@ void Creature::deal_projectile_attack( map *here, Creature *source, dealt_projec
 {
     const bool magic = attack.proj.proj_effects.count( ammo_effect_MAGIC ) > 0;
     if( missed_by >= 1.0 && !magic ) {
-        // Total miss
+        // Total miss.
         return;
     }
     // If carrying a rider, there is a chance the hits may hit rider instead.
@@ -1539,8 +1538,8 @@ void Creature::deal_projectile_attack( map *here, Creature *source, dealt_projec
             magic, missed_by, wp_attack_copy );
     wp_attack_copy.is_crit = hit_selection.is_crit;
 
-    // copy it, since we're mutating.
-    // use shot_impact after point-blank
+    // Copy it, since we're mutating.
+    // Use shot_impact after point-blank.
     damage_instance impact = proj.multishot ? proj.shot_impact : proj.impact;
     if( hit_selection.damage_mult > 0.0f && proj_effects.count( ammo_effect_NO_DAMAGE_SCALING ) ) {
         hit_selection.damage_mult = 1.0f;

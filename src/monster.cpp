@@ -178,6 +178,7 @@ static const material_id material_iron( "iron" );
 static const material_id material_steel( "steel" );
 static const material_id material_stone( "stone" );
 static const material_id material_vegetable( "vegetable" );
+static const material_id material_wood( "wood" );
 
 static const mfaction_str_id monfaction_acid_ant( "acid_ant" );
 static const mfaction_str_id monfaction_ant( "ant" );
@@ -817,7 +818,6 @@ std::string monster::name_with_armor() const
             }
         }
     }
-
     return ret;
 }
 
@@ -2099,13 +2099,17 @@ bool monster::melee_attack( Creature &target )
 
 bool monster::melee_attack( Creature &target, float accuracy )
 {
-    map &here = get_map();
     // Note: currently this method must consume move even if attack hasn't actually happen
     // otherwise infinite loop will happen
     mod_moves( -type->attack_cost );
+    if( type->melee_dice == 0 ) {
+        // We don't hit, so just return.
+        return true;
+    }
     if( /*This happens sometimes*/ this == &target || !is_adjacent( &target, true ) ) {
         return false;
     }
+    map &here = get_map();
     if( !sees( here, target ) && !target.is_hallucination() ) {
         debugmsg( "Z-Level view violation: %s tried to attack %s.", disp_name(), target.disp_name() );
         return false;
@@ -2116,13 +2120,9 @@ bool monster::melee_attack( Creature &target, float accuracy )
           here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, target.pos_bub() ) ) ) {
         return false;
     }
-
     const int monster_hit_roll = melee::melee_hit_range( accuracy );
     int hitspread = target.deal_melee_attack( this, monster_hit_roll );
-    if( type->melee_dice == 0 ) {
-        // We don't hit, so just return
-        return true;
-    }
+
     if( !vehicle_not_blocking( target.pos_bub() ) ) {
         return false;
     }
@@ -2214,10 +2214,10 @@ bool monster::melee_attack( Creature &target, float accuracy )
                      body_part_name_accusative( dealt_dam.bp_hit ) );
         }
     } else {
-        // No damage dealt
+        // No damage dealt.
         if( u_see_my_spot ) {
             if( target.is_avatar() ) {
-                //~ 1$s is attacker name, 2$s is bodypart name in accusative, 3$s is armor name
+                //~ 1$s is attacker name, 2$s is bodypart name in accusative, 3$s is armor name.
                 add_msg( _( "%1$s hits your %2$s, but your %3$s protects you." ), u_see_me ? disp_name( false,
                          true ) : _( "Something" ),
                          body_part_name_accusative( dealt_dam.bp_hit ), target.skin_name() );
@@ -3746,31 +3746,29 @@ void monster::process_effects()
 
 bool monster::make_fungus()
 {
+    // Even though we can't fungalize these things, return true to avoid dealing damage in fungalize().
     if( is_hallucination() ) {
         return true;
     }
-    if( type->in_species( species_FUNGUS ) ) { // No friendly-fungalizing ;-)
+    if( type->in_species( species_FUNGUS ) ) {
         return true;
     }
-    if( !made_of( material_flesh ) && !made_of( material_hflesh ) &&
-        !made_of( material_vegetable ) && !made_of( material_iflesh ) &&
-        !made_of( material_bone ) ) {
-        // No fungalizing robots or weird stuff (mi-gos are technically fungi, blobs are goo)
+    if( !made_of( material_flesh ) && !made_of( material_hflesh ) && !made_of( material_vegetable )
+        && !made_of( material_wood ) && !made_of( material_iflesh ) && !made_of( material_bone ) ) {
         return true;
     }
     if( type->has_flag( mon_flag_NO_FUNG_DMG ) ) {
-        return true; // Return true when monster is immune to fungal damage.
+        return true;
     }
+    // Fungus can't transform it but it's a valid target for damage, so return false.
     if( type->fungalize_into.is_empty() ) {
         return false;
     }
-
     const std::string old_name = name();
     poly( type->fungalize_into );
-
     add_msg_if_player_sees( pos_bub(), m_info, _( "The spores transform %1$s into a %2$s!" ),
                             old_name, name() );
-
+    // Return true so we don't hurt our new friend.
     return true;
 }
 

@@ -340,9 +340,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
     "grab_strength": 25,
     "special_attacks": [
-      [ "EAT_FOOD", 20 ],
       { "type": "bite", "cooldown": 15, "infection_chance": 44 },
-      [ "BROWSE", 40 ],
       {
         "id": "bite_grab",
         "move_cost": 150,
@@ -361,6 +359,7 @@
     "vision_day": 30,
     "vision_night": 5,
     "harvest": "zombie_fur",
+    "fungalize_into": "mon_zombie_bear_fungus",
     "decay": "zombie_animal_decay",
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
     "upgrades": { "half_life": 168, "into_group": "GROUP_ZOMBEAR_UPGRADE" },
@@ -380,7 +379,7 @@
       "KEENNOSE",
       "BELLYUP"
     ],
-    "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 2 }
+    "armor": { "bash": 3, "cut": 9, "bullet": 16, "electric": 2 }
   },
   {
     "id": "mon_zombie_pig",
@@ -429,8 +428,7 @@
       "FILTHY",
       "BELLYUP"
     ],
-    "//": "1d8->2d5, minor bonus over 1d9",
-    "armor": { "electric": 1 }
+    "armor": { "bash": 3, "bullet": 12, "electric": 2 }
   },
   {
     "id": "mon_zombeaver",

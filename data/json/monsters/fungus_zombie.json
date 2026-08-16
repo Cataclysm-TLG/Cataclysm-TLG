@@ -28,7 +28,8 @@
     "vision_night": 5,
     "scents_tracked": [ "sc_human", "sc_fetid" ],
     "harvest": "zombie_humanoid_mushroom",
-    "special_attacks": [ [ "FUNGUS", 200 ], { "type": "bite", "cooldown": 5 } ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "10 s" } ],
+    "special_attacks": [ { "type": "bite", "cooldown": 5 } ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "flags": [ "SEES", "SMELLS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
@@ -63,7 +64,7 @@
     "vision_day": 5,
     "vision_night": 5,
     "harvest": "exempt",
-    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "1 s" } ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "5 s" } ],
     "special_attacks": [ [ "SUICIDE", 20 ], [ "scratch", 15 ] ],
     "death_function": {
       "effect": { "id": "death_fungalburst", "hit_self": true, "min_level": 3 },
@@ -77,7 +78,7 @@
   {
     "id": "mon_zombie_smoker_fungus",
     "type": "MONSTER",
-    "name": { "str": "pollinator zombie" },
+    "name": { "str": "spore zombie" },
     "description": "Every breath of this crooked, fungus-ridden zombie emits a fine dust of spores, and it constantly looks like it's emerging from a cloud of mist.",
     "default_faction": "fungus",
     "looks_like": "mon_zombie_smoker",
@@ -104,7 +105,7 @@
     "vision_day": 5,
     "vision_night": 3,
     "harvest": "zombie_humanoid_mushroom",
-    "emit_fields": [ { "emit_id": "emit_fungal_haze_plume", "delay": "1 s" } ],
+    "emit_fields": [ { "emit_id": "emit_fungal_haze_plume", "delay": "3 s" } ],
     "special_attacks": [ { "type": "bite", "cooldown": 5 }, [ "scratch", 15 ] ],
     "death_drops": { "subtype": "collection", "groups": [ [ "default_zombie_death_drops", 100 ], [ "explode_zed_fungal", 100 ] ] },
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
@@ -121,13 +122,9 @@
     "material": [ "bone" ],
     "description": "Fungi bloom from the crevices in the twisted bone growths that cover this creature.  Spores linger in the air around it.",
     "proportional": { "hp": 0.4, "speed": 0.875 },
-    "relative": {
-      "melee_dice": -1,
-      "melee_dice_sides": 3,
-      "melee_damage": [ { "damage_type": "bash", "amount": 4 } ]
-    },
-    "special_attacks": [ [ "FUNGUS", 200 ] ],
+    "relative": { "melee_dice": -1, "melee_dice_sides": 3, "melee_damage": [ { "damage_type": "bash", "amount": 4 } ] },
     "harvest": "moldy_bones",
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "9 s" } ],
     "death_drops": { "subtype": "collection", "groups": [ [ "default_zombie_death_drops", 100 ], [ "explode_zed_fungal_bone", 100 ] ] },
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "armor": { "bash": 6, "cut": 18, "stab": 30, "acid": 3, "bullet": 30 }
@@ -142,18 +139,24 @@
     "material": [ "bone" ],
     "description": "Fungi bloom from the crevices in the twisted bone growths that cover this creature.  Spores linger in the air around it.",
     "proportional": { "hp": 1.5, "speed": 1.5 },
-    "relative": {
-      "melee_dice": 1,
-      "melee_dice_sides": 5,
-      "melee_damage": [ { "damage_type": "bash", "amount": 2 } ]
-    },
-    "special_attacks": [ [ "SMASH", 30 ], [ "FUNGUS", 200 ] ],
+    "relative": { "melee_dice": 1, "melee_dice_sides": 5, "melee_damage": [ { "damage_type": "bash", "amount": 2 } ] },
+    "special_attacks": [
+      [ "SMASH", 30 ],
+      {
+        "type": "spell",
+        "id": "spore_spray",
+        "spell_data": { "id": "spore_spray", "min_level": 1 },
+        "monster_message": "The %s spews a cloud of spores!",
+        "cooldown": 150
+      }
+    ],
     "extend": {
       "flags": [ "GROUP_BASH", "PUSH_MON", "PUSH_VEH" ],
       "weakpoint_sets": [ "wps_bone_armor" ],
       "families": [ "prof_wp_skeleton" ]
     },
     "harvest": "moldy_bones",
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "14 s" } ],
     "death_drops": { "subtype": "collection", "groups": [ [ "default_zombie_death_drops", 100 ], [ "explode_zed_fungal_bone", 100 ] ] },
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "armor": { "bash": 6, "cut": 18, "stab": 30, "acid": 3, "bullet": 30 }
@@ -188,6 +191,7 @@
     "vision_night": 5,
     "harvest": "big_mr_bones",
     "special_attacks": [ { "id": "smash", "throw_strength": 54 } ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "12 s" } ],
     "death_drops": { "subtype": "collection", "groups": [ [ "mon_zombie_hulk_death_drops", 100 ], [ "explode_zed_fungal_bone", 100 ] ] },
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "burn_into": "mon_zombie_fiend",
@@ -223,12 +227,13 @@
     "vision_day": 30,
     "vision_night": 5,
     "harvest": "zombie_humanoid_mushroom",
-    "special_attacks": [ [ "scratch", 15 ], [ "FUNGUS", 200 ] ],
+    "special_attacks": [ [ "scratch", 15 ] ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "18 s" } ],
     "scents_tracked": [ "sc_fetid", "sc_human" ],
     "death_drops": {
       "subtype": "collection",
-      "groups": [ [ "default_zombie_children_clothes", 100 ], [ "child_items_pockets", 65 ] ],
-      "//": "cloth as any other zombie (always), additional items from child_items_pockets (sometimes)"
+      "//": "No pocket items since the candy has been eaten by mold.",
+      "groups": [ [ "default_zombie_children_clothes", 100 ] ]
     },
     "burn_into": "mon_zombie_child_scorched",
     "flags": [ "SEES", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "FILTHY" ],
@@ -263,7 +268,16 @@
     "vision_night": 3,
     "harvest": "zombie_humanoid",
     "scents_tracked": [ "sc_fetid", "sc_human" ],
-    "special_attacks": [ [ "FUNGUS", 100 ], [ "BOOMER", 20 ], [ "scratch", 20 ] ],
+    "special_attacks": [
+      {
+        "type": "spell",
+        "id": "spore_spray",
+        "spell_data": { "id": "spore_spray", "min_level": 1 },
+        "monster_message": "The %s spews a cloud of spores!",
+        "cooldown": 40
+      },
+      [ "scratch", 20 ]
+    ],
     "death_drops": { "subtype": "collection", "groups": [ [ "default_zombie_death_drops", 100 ], [ "explode_zed_fungal", 100 ] ] },
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "burn_into": "mon_zombie_scorched",
@@ -295,7 +309,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_child" ],
     "vision_day": 2,
     "vision_night": 2,
-    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "1 s" } ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "16 s" } ],
     "bleed_rate": 0,
     "harvest": "zombie_humanoid_mushroom",
     "scents_tracked": [ "sc_fetid", "sc_human" ],
@@ -392,10 +406,10 @@
         "id": "bite_humanoid",
         "cooldown": 5,
         "damage_max_instance": [ { "damage_type": "stab", "amount": 10, "armor_multiplier": 0.7 } ]
-      },
-      [ "FUNGUS", 170 ]
+      }
     ],
     "death_drops": "default_zombie_death_drops",
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "8 s" } ],
     "burn_into": "mon_zombie_scorched",
     "flags": [ "SEES", "SMELLS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
     "armor": { "electric": 1, "bullet": 16 }
@@ -426,10 +440,10 @@
     "weakpoint_sets": [ "wps_humanoid_body" ],
     "families": [ "prof_intro_biology", "prof_wp_zombie" ],
     "harvest": "zombie_humanoid_mushroom",
-    "special_attacks": [ { "id": "bite_humanoid" }, { "id": "scratch_humanoid" }, [ "FUNGUS", 210 ] ],
+    "special_attacks": [ { "id": "bite_humanoid" }, { "id": "scratch_humanoid" } ],
     "death_drops": "default_zombie_death_drops",
-    "burn_into": "mon_zombie_scorched",
     "scents_tracked": [ "sc_fetid", "sc_human" ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "4 s" } ],
     "flags": [ "SEES", "SMELLS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
     "armor": { "electric": 1, "bullet": 16 }
   },
@@ -461,9 +475,18 @@
     "vision_day": 5,
     "bleed_rate": 0,
     "harvest": "zombie_humanoid_mushroom",
-    "special_attacks": [ { "id": "bite_humanoid", "cooldown": 5, "min_mul": 0.7 }, { "id": "scratch_humanoid" }, [ "FUNGUS", 170 ] ],
+    "special_attacks": [
+      { "id": "bite_humanoid", "cooldown": 5, "min_mul": 0.7 },
+      { "id": "scratch_humanoid" },
+      {
+        "type": "spell",
+        "id": "spore_spray",
+        "spell_data": { "id": "spore_spray", "min_level": 1 },
+        "monster_message": "The %s spews a cloud of spores!",
+        "cooldown": 130
+      }
+    ],
     "death_drops": "default_zombie_death_drops",
-    "burn_into": "mon_zombie_scorched",
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
     "armor": { "bash": 5, "cut": 2, "bullet": 25, "electric": 2 }
   },
@@ -494,11 +517,8 @@
     "weakpoint_sets": [ "wps_humanoid_head_big" ],
     "families": [ "prof_intro_biology", "prof_wp_zombie" ],
     "harvest": "zombie_humanoid_mushroom",
-    "special_attacks": [
-      [ "FUNGUS", 200 ],
-      { "id": "bite_humanoid", "attack_upper": false, "cooldown": 5 },
-      { "id": "scratch_humanoid", "attack_upper": false }
-    ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "10 s" } ],
+    "special_attacks": [ { "id": "bite_humanoid", "attack_upper": false, "cooldown": 5 }, { "id": "scratch_humanoid", "attack_upper": false } ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "flags": [
@@ -543,9 +563,10 @@
     "vision_night": 3,
     "bleed_rate": 0,
     "harvest": "zombie_humanoid_mushroom",
-    "special_attacks": [ [ "FUNGUS", 200 ], { "id": "bite_humanoid", "cooldown": 5 }, { "id": "scratch_humanoid" } ],
+    "special_attacks": [ { "id": "bite_humanoid", "cooldown": 5 }, { "id": "scratch_humanoid" } ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "3 s" } ],
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
     "armor": { "bash": 5, "cut": 3, "stab": 12, "bullet": 20, "electric": 2 }
   },
@@ -576,12 +597,9 @@
     "vision_day": 5,
     "vision_night": 3,
     "bleed_rate": 0,
-    "special_attacks": [ [ "FUNGUS", 200 ], { "id": "bite_humanoid", "cooldown": 5 }, { "id": "scratch_humanoid" } ],
-    "death_drops": {
-      "subtype": "collection",
-      "groups": [ [ "default_zombie_clothes", 100 ], [ "hive", 80 ] ],
-      "//": "cloth as any other zombie (always), additional items from group hive (sometimes)"
-    },
+    "special_attacks": [ { "id": "scratch_humanoid" } ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "8 s" } ],
+    "death_drops": { "subtype": "collection", "groups": [ [ "default_zombie_clothes", 100 ] ] },
     "burn_into": "mon_zombie_scorched",
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
     "armor": { "bash": 6, "cut": 8, "stab": 12, "bullet": 16, "electric": 1 }
@@ -620,7 +638,7 @@
         "type": "spell",
         "spell_data": { "id": "spread_fungal_acid", "min_level": 1 },
         "cooldown": 3,
-        "monster_message": "the %s spews a cloud of spores!"
+        "monster_message": "The %s spews a cloud of spores!"
       }
     ],
     "emit_fields": [ { "emit_id": "emit_hallucinogenic_spores", "delay": "2 s" } ],
@@ -652,7 +670,7 @@
     "species": [ "FUNGUS" ],
     "volume": "30000 ml",
     "weight": "40750 g",
-    "hp": 50,
+    "hp": 40,
     "speed": 110,
     "material": [ "flesh" ],
     "symbol": "d",
@@ -670,7 +688,8 @@
     "vision_night": 4,
     "bleed_rate": 0,
     "harvest": "zombie_animal_mushroom",
-    "special_attacks": [ [ "FUNGUS", 230 ], { "id": "bite_humanoid", "cooldown": 5 }, { "id": "scratch_humanoid" } ],
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "9 s" } ],
+    "special_attacks": [ { "id": "bite_grab", "cooldown": 5 }, { "id": "scratch_grab_required" } ],
     "death_drops": "mon_dog_death_drops",
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON" ],
     "armor": { "electric": 1, "stab": 8, "bullet": 18 }
@@ -680,7 +699,7 @@
     "type": "MONSTER",
     "name": { "str": "truffle pig" },
     "description": "What was once a pig is now covered in black mold.  Its eyes have been eaten away, but its nose still twitches and sniffs the air, and the tumorous fungal growth riddling its body make for formidable armor.  Its belly is worryingly distended.",
-    "default_faction": "zombie",
+    "default_faction": "fungus",
     "bodytype": "pig",
     "species": [ "FUNGUS" ],
     "volume": "75000 ml",
@@ -703,18 +722,85 @@
     "vision_day": 5,
     "vision_night": 2,
     "harvest": "zombie_animal_mushroom",
-    "path_settings": { "max_dist": 10 },
-    "special_attacks": [ [ "FUNGUS", 230 ], { "type": "bite", "cooldown": 7 } ],
+    "special_attacks": [
+      {
+        "type": "spell",
+        "id": "spore_cloud",
+        "spell_data": { "id": "spore_cloud", "min_level": 1 },
+        "monster_message": "The %s releases a cloud of spores!",
+        "cooldown": 140
+      },
+      { "type": "bite", "cooldown": 12 }
+    ],
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
-    "upgrades": { "half_life": 200, "into_group": "GROUP_ZOMBIE_PIG_UPGRADE" },
     "death_drops": { "subtype": "collection", "groups": [ [ "explode_zed_fungal_animal", 100 ] ] },
     "death_function": {
       "effect": { "id": "death_fungalburst", "hit_self": true, "min_level": 2 },
       "corpse_type": "NO_CORPSE",
       "message": "The %s bursts, releasing a cloud of spores."
     },
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "KEENNOSE", "BASHES", "NO_BREATHE", "FILTHY", "GOODHEARING" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "STUMBLES",
+      "WARM",
+      "KEENNOSE",
+      "BASHES",
+      "NO_BREATHE",
+      "FILTHY",
+      "GOODHEARING",
+      "BELLYUP"
+    ],
     "armor": { "bash": 6, "cut": 4, "stab": 16, "bullet": 27, "electric": 2 }
+  },
+  {
+    "id": "mon_zombie_bear_fungus",
+    "type": "MONSTER",
+    "name": { "str": "fungal bear" },
+    "description": "The sorry remains of this bear, its shape nearly lost in the sloughing of its moldering flesh, still wield the claws and teeth that failed to protect it in life.",
+    "default_faction": "fungus",
+    "bodytype": "bear",
+    "species": [ "FUNGUS" ],
+    "volume": "75000 ml",
+    "weight": "74000 g",
+    "hp": 90,
+    "speed": 90,
+    "attack_cost": 110,
+    "material": [ "flesh" ],
+    "symbol": "p",
+    "color": "light_gray",
+    "scents_tracked": [ "sc_human", "sc_fetid" ],
+    "aggression": 100,
+    "morale": 100,
+    "melee_skill": 5,
+    "melee_dice": 4,
+    "melee_dice_sides": 4,
+    "melee_damage": [ { "damage_type": "cut", "amount": 4 } ],
+    "dodge": 1,
+    "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
+    "vision_day": 5,
+    "vision_night": 4,
+    "harvest": "zombie_animal_mushroom",
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "12 s" } ],
+    "special_attacks": [
+      { "type": "bite", "cooldown": 15 },
+      {
+        "id": "bite_grab",
+        "move_cost": 150,
+        "cooldown": 3,
+        "accuracy": 5,
+        "infection_chance": 2,
+        "min_mul": 1.0,
+        "max_mul": 2.0
+      },
+      { "id": "drag_followup" },
+      { "id": "scratch_grab_required" },
+      { "id": "bite_grab_required" }
+    ],
+    "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "NO_BREATHE", "FILTHY", "GOODHEARING", "BELLYUP" ],
+    "armor": { "bash": 4, "cut": 4, "stab": 16, "bullet": 27, "electric": 2 }
   },
   {
     "id": "mon_zoose_fungus",
@@ -744,7 +830,16 @@
     "vision_night": 5,
     "bleed_rate": 0,
     "harvest": "zombie_animal_mushroom",
-    "special_attacks": [ { "id": "smash", "throw_strength": 49 }, [ "FUNGUS", 160 ] ],
+    "special_attacks": [
+      { "id": "smash", "throw_strength": 49 },
+      {
+        "type": "spell",
+        "id": "spore_spray",
+        "spell_data": { "id": "spore_spray", "min_level": 1 },
+        "monster_message": "The %s spews a cloud of spores!",
+        "cooldown": 120
+      }
+    ],
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
     "armor": { "bash": 6, "cut": 4, "stab": 20, "bullet": 35, "electric": 2 }
   },
@@ -776,7 +871,17 @@
     "vision_night": 3,
     "bleed_rate": 0,
     "harvest": "zombie_animal_mushroom",
-    "special_attacks": [ [ "scratch", 10 ], { "type": "leap", "cooldown": 5, "max_range": 5 }, [ "FUNGUS", 190 ] ],
+    "special_attacks": [
+      [ "scratch", 10 ],
+      { "type": "leap", "cooldown": 5, "max_range": 5 },
+      {
+        "type": "spell",
+        "id": "spore_spray",
+        "spell_data": { "id": "spore_spray", "min_level": 1 },
+        "monster_message": "The %s spews a cloud of spores!",
+        "cooldown": 120
+      }
+    ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "FILTHY" ],
     "armor": { "bash": 4, "cut": 2, "stab": 20, "electric": 2, "bullet": 30 }
   },
@@ -808,7 +913,15 @@
     "vision_night": 3,
     "bleed_rate": 0,
     "harvest": "zombie_animal_mushroom",
-    "special_attacks": [ [ "FUNGUS", 160 ] ],
+    "special_attacks": [
+      {
+        "type": "spell",
+        "id": "spore_cloud",
+        "spell_data": { "id": "spore_cloud", "min_level": 1 },
+        "monster_message": "The %s releases a cloud of spores!",
+        "cooldown": 140
+      }
+    ],
     "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "WARM", "NO_BREATHE" ],
     "armor": { "bash": 5, "cut": 1, "stab": 22, "electric": 2, "bullet": 38 }
   },
@@ -840,8 +953,8 @@
     "vision_day": 7,
     "vision_night": 6,
     "bleed_rate": 0,
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "12 s" } ],
     "harvest": "zombie_animal_mushroom",
-    "special_attacks": [ [ "FUNGUS", 210 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "FILTHY" ],
     "armor": { "bash": 1, "cut": 3, "stab": 15, "electric": 1, "bullet": 24 }
   },
@@ -873,8 +986,8 @@
     "vision_day": 8,
     "vision_night": 6,
     "bleed_rate": 0,
+    "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "12 s" } ],
     "harvest": "zombie_animal_mushroom",
-    "special_attacks": [ [ "FUNGUS", 180 ] ],
     "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
     "armor": { "bash": 5, "cut": 4, "stab": 16, "electric": 1, "bullet": 26 }
   }
