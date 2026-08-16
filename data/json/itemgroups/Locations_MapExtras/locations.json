@@ -1248,6 +1248,8 @@
       { "item": "talwar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10, "damage": [ -1, 5 ] },
       { "item": "sword_xiphos", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3, "damage": [ -1, 5 ] },
       { "item": "khopesh", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3, "damage": [ -1, 5 ] },
+      { "item": "poignard", "prob": 3, "damage": [ -1, 5 ] },
+      { "item": "poignard", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3, "damage": [ -1, 5 ] },
       { "item": "broadsword", "prob": 6, "damage": [ -1, 5 ] },
       { "item": "longsword", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "cavalry_sabre", "prob": 10, "damage": [ -1, 5 ] },
