@@ -49,11 +49,7 @@
       "m": "f_machinery_light",
       "M": "f_machinery_heavy",
       "E": "f_machinery_electronic",
-      "g": [
-        [ "f_generator_broken", 30 ],
-        [ "f_diesel_generator", 5 ],
-        [ "f_gasoline_generator", 5 ]
-      ],
+      "g": [ [ "f_generator_broken", 30 ], [ "f_diesel_generator", 5 ], [ "f_gasoline_generator", 5 ] ],
       "h": "f_chair",
       "T": "f_table",
       "A": "f_air_conditioner",

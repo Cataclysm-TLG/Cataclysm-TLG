@@ -204,7 +204,10 @@
         ],
         "order": 7500
       },
-      { "id": [ "FORKED_TONGUE", "MOUTH_TENTACLES", "active_bio_ads", "active_bio_ods", "WHISKERS", "WHISKERS_RAT" ], "order": 8000 },
+      {
+        "id": [ "FORKED_TONGUE", "MOUTH_TENTACLES", "active_bio_ads", "active_bio_ods", "WHISKERS", "WHISKERS_RAT" ],
+        "order": 8000
+      },
       { "id": [ "PROF_FED", "PHEROMONE_INSECT" ], "order": 8500 },
       { "id": [ "WINGS_BAT", "WINGS_BIRD" ], "order": 9000 }
     ]
