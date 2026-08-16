@@ -82,7 +82,7 @@
         [ "real_flails", 1, "LIST" ],
         [ "real_great_hammers", 1, "LIST" ],
         [ "real_maces", 1, "LIST" ],
-        [ "real_quarterstaves", 1, "LIST" ]
+        [ "real_staffs", 1, "LIST" ]
       ],
       [ "pseudo_training_dummy_heavy" ]
     ],

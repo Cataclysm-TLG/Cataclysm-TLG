@@ -39,6 +39,7 @@ std::vector<iteminfo_parts> {
     iteminfo_parts::DESCRIPTION_MELEEDMG_CRIT,
     iteminfo_parts::DESCRIPTION_MELEEDMG_TYPES,
     iteminfo_parts::DESCRIPTION_MELEEDMG_MOVES,
+    iteminfo_parts::DESCRIPTION_WEAPON_CATEGORIES,
     iteminfo_parts::DESCRIPTION_APPLICABLEMARTIALARTS,
     iteminfo_parts::DESCRIPTION_REPAIREDWITH,
     iteminfo_parts::DESCRIPTION_CONDUCTIVITY,

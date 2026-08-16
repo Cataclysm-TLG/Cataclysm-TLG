@@ -28,7 +28,7 @@
     "symbol": "/",
     "material": [ "wood" ],
     "techniques": [ "WBLOCK_1" ],
-    "weapon_category": [ "QUARTERSTAVES" ],
+    "weapon_category": [ "STAFFS" ],
     "volume": "1250 ml",
     "price": "24 USD",
     "price_postapoc": "0 cent",

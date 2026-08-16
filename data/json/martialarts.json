@@ -148,7 +148,7 @@
       "tec_bojutsu_feint",
       "tec_bojutsu_disarm"
     ],
-    "weapon_category": [ "QUARTERSTAVES" ]
+    "weapon_category": [ "STAFFS" ]
   },
   {
     "type": "martial_art",
@@ -446,7 +446,7 @@
       "tec_kung_fu_rapid",
       "tec_kung_fu_feint"
     ],
-    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "QUARTERSTAVES", "BATONS", "KUNG_FU_WEAPONS" ]
+    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "STAFFS", "BATONS", "KUNG_FU_WEAPONS" ]
   },
   {
     "type": "martial_art",
@@ -521,7 +521,7 @@
       }
     ],
     "techniques": [ "tec_dragon_claw", "tec_dragon_tail", "tec_dragon_strike", "tec_kung_fu_rapid", "tec_kung_fu_feint" ],
-    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "QUARTERSTAVES", "BATONS", "CLAWS", "KUNG_FU_WEAPONS" ]
+    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "STAFFS", "BATONS", "CLAWS", "KUNG_FU_WEAPONS" ]
   },
   {
     "type": "martial_art",
@@ -774,7 +774,7 @@
       }
     ],
     "techniques": [ "tec_karate_rapid", "tec_karate_precise", "tec_karate_roundhouse", "tec_karate_weapon", "tec_karate_weapon_crit" ],
-    "weapon_category": [ "QUARTERSTAVES", "KARATE_WEAPONS" ]
+    "weapon_category": [ "STAFFS", "KARATE_WEAPONS" ]
   },
   {
     "type": "martial_art",
@@ -935,7 +935,7 @@
       "tec_kung_fu_rapid",
       "tec_kung_fu_feint"
     ],
-    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "QUARTERSTAVES", "BATONS", "CLAWS", "KUNG_FU_WEAPONS" ]
+    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "STAFFS", "BATONS", "CLAWS", "KUNG_FU_WEAPONS" ]
   },
   {
     "type": "martial_art",
@@ -1121,7 +1121,7 @@
       "tec_ninjutsu_staffdown",
       "tec_ninjutsu_downkill"
     ],
-    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "QUARTERSTAVES", "CLAWS", "NINJUTSU_WEAPONS" ]
+    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "STAFFS", "CLAWS", "NINJUTSU_WEAPONS" ]
   },
   {
     "type": "martial_art",
@@ -1296,7 +1296,7 @@
       }
     ],
     "techniques": [ "tec_silat_hamstring", "tec_silat_precise", "tec_silat_brutal", "tec_silat_dirty" ],
-    "weapon_category": [ "KNIVES", "BATONS", "QUARTERSTAVES", "SHORT_SWORDS", "POLEARMS" ]
+    "weapon_category": [ "KNIVES", "BATONS", "STAFFS", "SHORT_SWORDS", "POLEARMS" ]
   },
   {
     "type": "martial_art",
@@ -1380,7 +1380,7 @@
       "tec_kung_fu_rapid",
       "tec_kung_fu_feint"
     ],
-    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "QUARTERSTAVES", "BATONS", "KUNG_FU_WEAPONS" ]
+    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "STAFFS", "BATONS", "KUNG_FU_WEAPONS" ]
   },
   {
     "type": "martial_art",
@@ -1560,7 +1560,7 @@
       "tec_kung_fu_rapid",
       "tec_kung_fu_feint"
     ],
-    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "QUARTERSTAVES", "BATONS", "CLAWS", "KUNG_FU_WEAPONS" ]
+    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "STAFFS", "BATONS", "CLAWS", "KUNG_FU_WEAPONS" ]
   },
   {
     "type": "martial_art",
@@ -1672,7 +1672,7 @@
       "tec_kung_fu_rapid",
       "tec_kung_fu_feint"
     ],
-    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "QUARTERSTAVES", "BATONS", "CLAWS", "KUNG_FU_WEAPONS" ]
+    "weapon_category": [ "SHORT_SWORDS", "KNIVES", "POLEARMS", "STAFFS", "BATONS", "CLAWS", "KUNG_FU_WEAPONS" ]
   },
   {
     "type": "martial_art",

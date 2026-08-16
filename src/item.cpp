@@ -5413,6 +5413,17 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
         }
     }
 
+    if( parts->test( iteminfo_parts::DESCRIPTION_WEAPON_CATEGORIES ) &&
+    !type->weapon_category.empty() ) {
+    insert_separation_line( info );
+    info.emplace_back( "DESCRIPTION",
+                       _( "<bold>Weapon categories</bold>: " ) +
+                       enumerate_as_string( type->weapon_category,
+                           []( const weapon_category_id &id ) {
+                               return id->name().translated();
+                           } ) );
+    }
+
     // display which martial arts styles character can use with this weapon
     if( parts->test( iteminfo_parts::DESCRIPTION_APPLICABLEMARTIALARTS ) ) {
         const std::string valid_styles = player_character.martial_arts_data->enumerate_known_styles(

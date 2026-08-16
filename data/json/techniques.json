@@ -1718,7 +1718,7 @@
     "messages": [ "You strike %s", "<npcname> strikes %s" ],
     "skill_requirements": [ { "name": "melee", "level": 3 } ],
     "melee_allowed": true,
-    "weapon_categories_allowed": [ "QUARTERSTAVES", "KARATE_WEAPONS" ],
+    "weapon_categories_allowed": [ "STAFFS", "KARATE_WEAPONS" ],
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.9 } ],
     "attack_vectors": [ "vector_null" ]
   },
@@ -1729,7 +1729,7 @@
     "messages": [ "You swing hard at %s", "<npcname> swings hard at %s!" ],
     "skill_requirements": [ { "name": "melee", "level": 4 } ],
     "melee_allowed": true,
-    "weapon_categories_allowed": [ "QUARTERSTAVES", "KARATE_WEAPONS" ],
+    "weapon_categories_allowed": [ "STAFFS", "KARATE_WEAPONS" ],
     "crit_tec": true,
     "condition": {
       "and": [
@@ -2499,7 +2499,7 @@
     "skill_requirements": [ { "name": "melee", "level": 3 } ],
     "required_buffs_all": [ "buff_ninjutsu_onattack" ],
     "melee_allowed": true,
-    "weapon_categories_allowed": [ "QUARTERSTAVES", "WHIPS" ],
+    "weapon_categories_allowed": [ "STAFFS", "WHIPS" ],
     "crit_ok": true,
     "//condition": "Humanoids of similar size and no flying",
     "condition": {

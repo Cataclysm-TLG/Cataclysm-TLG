@@ -370,7 +370,7 @@
     ]
   },
   {
-    "id": "basic_quarterstaves",
+    "id": "basic_staffs",
     "type": "requirement",
     "//": "Any basic thing you can use like a quarterstaff.",
     "tools": [
@@ -385,7 +385,7 @@
     ]
   },
   {
-    "id": "real_quarterstaves",
+    "id": "real_staffs",
     "type": "requirement",
     "//": "Any real, pole-like weapons designed for bashing and smashing.  Reserved for quality items.",
     "tools": [ [ [ "i_staff", -1 ], [ "q_staff", -1 ], [ "bo", -1 ], [ "shock_staff", -1 ] ] ]
