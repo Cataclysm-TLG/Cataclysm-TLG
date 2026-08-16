@@ -70,6 +70,7 @@
       { "item": "lucerne_hammer", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
       { "item": "mace_bronze", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
       { "item": "spear_bronze", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
+      { "item": "poignard", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "group": "western_sword_fake", "prob": 80 }
     ]
   },
@@ -93,6 +94,7 @@
       { "item": "lucerne_hammer", "prob": 15 },
       { "item": "mace_bronze", "prob": 3 },
       { "item": "spear_bronze", "prob": 3 },
+      { "item": "poignard", "prob": 1 },
       { "group": "western_sword_real", "prob": 80 }
     ]
   },
@@ -131,6 +133,7 @@
       { "item": "arming_sword", "prob": 30 },
       { "item": "zweihander", "prob": 20 },
       { "item": "rapier", "prob": 25 },
+      { "item": "poignard", "prob": 3 },
       { "item": "cutlass", "prob": 25 },
       { "item": "kriegsmesser", "prob": 20 },
       { "item": "falx", "prob": 15 },

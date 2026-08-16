@@ -575,6 +575,8 @@
       { "item": "broadsword", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25 },
       [ "glaive", 1 ],
       [ "halberd", 1 ],
+      { "item": "poignard", "prob": 1 },
+      { "item": "poignard", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "item": "rapier", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "item": "cavalry_sabre", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "item": "estoc", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },

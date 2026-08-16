@@ -34,7 +34,7 @@
     "flags": [ "BELT_CLIP", "ALWAYS_TWOHAND" ],
     "weapon_category": [ "GREAT_SWORDS" ],
     "techniques": [ "WBLOCK_1", "SWEEP", "BRUTAL" ],
-    "melee_damage": { "bash": 16, "cut": 2 }
+    "melee_damage": { "bash": 15, "cut": 2 }
   },
   {
     "type": "ITEM",
@@ -636,7 +636,7 @@
     "volume": "200 ml",
     "longest_side": "100 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "point", "balance": "good" },
-    "techniques": [ "PRECISE", "RAPID", "WBLOCK_2" ],
+    "techniques": [ "WBLOCK_2" ],
     "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "FENCING_WEAPONRY" ],
     "melee_damage": { "bash": 1, "stab": 2 }
@@ -687,7 +687,7 @@
     "volume": "220 ml",
     "longest_side": "100 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "point", "balance": "good" },
-    "techniques": [ "PRECISE", "RAPID", "WBLOCK_2" ],
+    "techniques": [ "WBLOCK_2" ],
     "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "FENCING_WEAPONRY" ],
     "melee_damage": { "bash": 3, "stab": 7 }
@@ -740,7 +740,7 @@
     "volume": "240 ml",
     "longest_side": "100 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "point", "balance": "good" },
-    "techniques": [ "PRECISE", "RAPID", "WBLOCK_2" ],
+    "techniques": [ "WBLOCK_2" ],
     "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "FENCING_WEAPONRY" ],
     "melee_damage": { "bash": 1, "stab": 6 }
@@ -826,7 +826,7 @@
     "longest_side": "90 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "point", "balance": "good" },
     "looks_like": "rapier",
-    "techniques": [ "PRECISE", "RAPID", "WBLOCK_1" ],
+    "techniques": [ "WBLOCK_1" ],
     "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "FENCING_WEAPONRY" ],
     "melee_damage": { "bash": 1, "stab": 23 }
@@ -861,7 +861,7 @@
     "category": "weapons",
     "name": { "str": "rapier" },
     "description": "A thin, straight sword of the type once preferred by musketeers, masked gentlemen, and swashbucklers of all sorts.",
-    "weight": "1090 g",
+    "weight": "1190 g",
     "volume": "350 ml",
     "longest_side": "100 cm",
     "symbol": "/",
@@ -869,10 +869,10 @@
     "looks_like": "rapier",
     "price": "735 USD",
     "price_postapoc": "18 USD 75 cent",
-    "material": [ { "type": "leather", "portion": 1.1 }, { "type": "steel", "portion": 112 } ],
+    "material": [ { "type": "wood", "portion": 1 }, { "type": "steel", "portion": 25 } ],
     "repairs_with": [ "steel" ],
     "flags": [ "CONDUCTIVE", "SHEATH_SWORD" ],
-    "techniques": [ "RAPID", "WBLOCK_2", "PRECISE" ],
+    "techniques": [ "WBLOCK_2" ],
     "to_hit": { "grip": "weapon", "length": "long", "surface": "point", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
     "weapon_category": [ "FENCING_WEAPONRY" ],
