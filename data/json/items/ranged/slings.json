@@ -75,7 +75,7 @@
       "FIRE_TWOHAND",
       "WATERPROOF_GUN"
     ],
-    "weapon_category": [ "QUARTERSTAVES" ],
+    "weapon_category": [ "STAFFS" ],
     "ammo_effects": [ "NEVER_MISFIRES", "NO_PENETRATE_OBSTACLES" ],
     "techniques": [ "WBLOCK_2", "RAPID", "SWEEP" ],
     "skill": "throw",
