@@ -4913,7 +4913,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
     }
 
     if( will_collapse && !has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p ) ) {
-        collapse_at( tripoint_bub_ms( p ), params.silent, true, bash->explosive > 0 || rng( 1, 3 ) );
+        collapse_at( tripoint_bub_ms( p ), params.silent, true, bash->explosive > 0 );
     }
 
     params.did_bash = true;
