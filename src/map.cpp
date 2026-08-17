@@ -3596,7 +3596,6 @@ int map::bash_rating( const int str, const tripoint_bub_ms &p, const bool allow_
 }
 
 // End of 3D bashable
-
 void map::make_rubble( const tripoint_bub_ms &p, const furn_id &rubble_type, const bool items,
                        const ter_id &floor_type, bool overwrite )
 {
@@ -4892,7 +4891,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
             // When bashing the tile below, don't allow bashing its floor, otherwise we get huge recursive destruction.
             bash_params params_below = params; // Make a copy
             params_below.bashing_from_above = true;
-            // The roof tile will be destroyed, so the below tile should also be destroyed
+            // The roof tile will be destroyed, so the below tile should also be destroyed.
             params_below.destroy = true;
             bash_ter_furn( below, params_below );
         }
@@ -4914,7 +4913,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
     }
 
     if( will_collapse && !has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p ) ) {
-        collapse_at( tripoint_bub_ms( p ), params.silent, true, bash->explosive > 0 );
+        collapse_at( tripoint_bub_ms( p ), params.silent, true, bash->explosive > 0 || rng( 1, 3 ) );
     }
 
     params.did_bash = true;
@@ -4940,16 +4939,20 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
     bool smashed_sealed = false;
     bool smash_noitem = false;
 
-    if( has_flag( ter_furn_flag::TFLAG_SEALED, p ) ) {
-        bash_ter_furn( p, bsh );
-        smashed_sealed = true;
-    }
+    // Start with fields, e.g. webs.  Assume the player wants to remove these without
+    // destroying other stuff, or that zombies need to get the webs out of the way first.
+    bash_field( p, bsh );
 
     if( has_flag( ter_furn_flag::TFLAG_NOITEM, p ) ) {
         smash_noitem = true;
     }
 
-    bash_field( p, bsh );
+    // Smash early because we don't want to smash the item that's stored here,
+    // and a vehicle almost certainly can't be here if it's a sealed tile.
+    if( has_flag( ter_furn_flag::TFLAG_SEALED, p ) && !bsh.did_bash ) {
+        bash_ter_furn( p, bsh );
+        smashed_sealed = true;
+    }
 
     const furn_t &furnid = furn( p ).obj();
 
@@ -4957,19 +4960,19 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
         smash_furn = true;
     }
 
-    // Don't smash items if there's smashable furniture here. Don't smash items in SEALED or NOITEM tiles.
-    if( !smashed_sealed && !smash_furn && !smash_noitem ) {
-        manually_smash_items( p, str, false, bsh, crystalline_only );
-    }
-
-    // Don't smash the vehicle doing the smashing.
+    // Try vehicles first. Don't smash the vehicle doing the smashing.
     const vehicle *veh = veh_pointer_or_null( veh_at( p ) );
-    if( veh != nullptr && veh != bashing_vehicle ) {
+    if( veh != nullptr && veh != bashing_vehicle && !bsh.did_bash ) {
         bash_vehicle( p, bsh );
     }
 
+    // Don't smash items if there's smashable furniture here. Don't smash items in SEALED or NOITEM tiles.
+    if( !smashed_sealed && !smash_furn && !smash_noitem && !bsh.did_bash ) {
+        manually_smash_items( p, str, false, bsh, crystalline_only );
+    }
+
     // If we still didn't bash anything solid (a vehicle) or a tile with SEALED flag, bash ter/furn
-    if( !bsh.bashed_solid && !smashed_sealed ) {
+    if( !bsh.bashed_solid && !smashed_sealed && !bsh.did_bash ) {
         bash_ter_furn( p, bsh );
     }
 
@@ -5143,7 +5146,6 @@ void map::bash_field( const tripoint_bub_ms &p, bash_params &params )
     for( const std::pair<const field_type_id, field_entry> &fd : field_at( p ) ) {
         if( fd.first->bash_info ) {
             params.did_bash = true;
-            params.bashed_solid = true; // To prevent bashing furniture/vehicles
             to_remove.push_back( fd.first );
         }
     }
