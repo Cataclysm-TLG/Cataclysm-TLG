@@ -1945,7 +1945,8 @@ bool monster::is_elec_immune() const
 bool monster::is_immune_effect( const efftype_id &effect ) const
 {
     // Currently monsters aren't affected by radiation. Fungal effects are handled with the fungal_poison effect.
-    if( effect == effect_bite || effect == effect_infected || effect == effect_fallout || effect == effect_fungus ) {
+    if( effect == effect_bite || effect == effect_infected || effect == effect_fallout ||
+        effect == effect_fungus ) {
         return true;
     }
 

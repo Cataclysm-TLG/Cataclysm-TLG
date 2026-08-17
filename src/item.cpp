@@ -5412,27 +5412,27 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
                 info.emplace_back( "DESCRIPTION", _( "<bold>Techniques when worn</bold>: " ) +
                 enumerate_as_string( all_tec_sorted, []( const matec_id & tid ) {
                     return string_format( "<stat>%s</stat>: <info>%s</info> <info>%s</info>", tid.obj().name,
-                                        tid.obj().description, _( tid.obj().condition_desc ) );
-                } ) ); 
+                                          tid.obj().description, _( tid.obj().condition_desc ) );
+                } ) );
             } else {
                 info.emplace_back( "DESCRIPTION", _( "<bold>Techniques when wielded</bold>: " ) +
                 enumerate_as_string( all_tec_sorted, []( const matec_id & tid ) {
                     return string_format( "<stat>%s</stat>: <info>%s</info> <info>%s</info>", tid.obj().name,
-                                        tid.obj().description, _( tid.obj().condition_desc ) );
+                                          tid.obj().description, _( tid.obj().condition_desc ) );
                 } ) );
             }
         }
     }
 
     if( parts->test( iteminfo_parts::DESCRIPTION_WEAPON_CATEGORIES ) &&
-    !type->weapon_category.empty() ) {
-    insert_separation_line( info );
-    info.emplace_back( "DESCRIPTION",
-                       _( "<bold>Weapon categories</bold>: " ) +
-                       enumerate_as_string( type->weapon_category,
-                           []( const weapon_category_id &id ) {
-                               return id->name().translated();
-                           } ) );
+        !type->weapon_category.empty() ) {
+        insert_separation_line( info );
+        info.emplace_back( "DESCRIPTION",
+                           _( "<bold>Weapon categories</bold>: " ) +
+                           enumerate_as_string( type->weapon_category,
+        []( const weapon_category_id & id ) {
+            return id->name().translated();
+        } ) );
     }
 
     // display which martial arts styles character can use with this weapon
