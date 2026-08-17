@@ -1216,7 +1216,7 @@
   {
     "id": "mon_spider_cellar_mega",
     "type": "MONSTER",
-    "name": { "str": "warehouse spider" },
+    "name": { "str": "monstrous cellar spider" },
     "description": "A tangle of branching chitinous legs operating seemingly independently, somehow still managing to carry a cow-sized central body.  A number of malformed, twitching legs hang from the cephalothorax, but the head -and especially the mandibles- still seem to be in working order.",
     "copy-from": "mon_spider_cellar_giant",
     "proportional": { "hp": 7, "weight": 5, "volume": 5, "speed": 1.2, "attack_cost": 1.2 },
