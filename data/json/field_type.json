@@ -1654,7 +1654,7 @@
     "legacy_enum_id": 40,
     "intensity_levels": [
       {
-        "name": "thin spore cloud",
+        "name": "fine spore cloud",
         "sym": ".",
         "dangerous": true,
         "concentration": 1,
@@ -1681,7 +1681,7 @@
         ]
       },
       {
-        "name": "thick spore cloud",
+        "name": "dense spore cloud",
         "transparent": false,
         "concentration": 4,
         "effects": [
