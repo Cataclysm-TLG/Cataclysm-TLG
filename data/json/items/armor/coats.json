@@ -1127,7 +1127,7 @@
     "symbol": "[",
     "looks_like": "longcoat",
     "color": "blue",
-    "material_thickness": 2,
+    "material_thickness": 1.6,
     "armor": [
       { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 18, 24 ] },
       {
@@ -2622,7 +2622,7 @@
       }
     ],
     "warmth": 30,
-    "material_thickness": 1.5,
+    "material_thickness": 1.8,
     "environmental_protection": 3,
     "flags": [ "VARSIZE", "POCKETS", "OUTER", "STURDY", "RAINPROOF" ]
   },
@@ -2688,7 +2688,7 @@
       }
     ],
     "warmth": 50,
-    "material_thickness": 1.0,
+    "material_thickness": 1.2,
     "flags": [ "VARSIZE", "POCKETS", "COLLAR", "OUTER", "RAINPROOF" ]
   },
   {

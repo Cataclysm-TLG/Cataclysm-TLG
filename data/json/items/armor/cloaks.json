@@ -2515,7 +2515,7 @@
     "looks_like": "cloak",
     "color": "blue",
     "warmth": 50,
-    "material_thickness": 0.5,
+    "material_thickness": 0.6,
     "environmental_protection": 2,
     "flags": [ "OVERSIZE", "HOOD", "BELTED", "POCKETS" ],
     "armor": [
@@ -2796,7 +2796,7 @@
     "looks_like": "cloak",
     "color": "light_gray",
     "warmth": 35,
-    "material_thickness": 1,
+    "material_thickness": 0.6,
     "environmental_protection": 2,
     "flags": [ "BELTED", "OVERSIZE", "POCKETS" ],
     "armor": [

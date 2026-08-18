@@ -758,7 +758,7 @@
     "looks_like": "loincloth",
     "color": "blue",
     "warmth": 5,
-    "material_thickness": 1,
+    "material_thickness": 0.3,
     "flags": [ "VARSIZE", "SKINTIGHT", "OVERSIZE" ],
     "armor": [
       {
