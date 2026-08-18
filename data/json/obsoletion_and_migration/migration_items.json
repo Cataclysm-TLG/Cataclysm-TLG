@@ -4212,5 +4212,10 @@
     "type": "MIGRATION",
     "id": "javelin_fletched_bronze",
     "replace": "javelin"
+  },
+  {
+    "type": "field_type_migration",
+    "from_field": "fd_fungal_haze",
+    "to_field": "fd_spores"
   }
 ]

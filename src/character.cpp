@@ -9060,7 +9060,7 @@ void Character::blossoms()
     sounds::sound( pos_bub(), 10, sounds::sound_t::combat, _( "Pouf!" ), false, "misc", "puff" );
     map &here = get_map();
     for( const tripoint_bub_ms &tmp : here.points_in_radius( pos_bub(), 2 ) ) {
-        here.add_field( tmp, fd_fungal_haze, rng( 1, 2 ) );
+        here.add_field( tmp, fd_spores, rng( 1, 2 ) );
     }
 }
 

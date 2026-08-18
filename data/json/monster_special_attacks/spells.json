@@ -598,7 +598,7 @@
     "max_range": 14,
     "effect": "attack",
     "shape": "cone",
-    "field_id": "fd_fungal_haze",
+    "field_id": "fd_spores",
     "field_chance": 2,
     "min_field_intensity": 1,
     "max_field_intensity": 2
@@ -618,7 +618,7 @@
     "max_range": 0,
     "effect": "attack",
     "shape": "blast",
-    "field_id": "fd_fungal_haze",
+    "field_id": "fd_spores",
     "field_chance": 2,
     "min_field_intensity": 1,
     "max_field_intensity": 2

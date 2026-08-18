@@ -76,7 +76,7 @@ void fungal_effects::fungalize( const tripoint_bub_ms &p, Creature *origin, doub
             if( !mon.in_species( species_FUNGUS ) ) {
                 map &here = get_map();
                 for( const tripoint_bub_ms &dest : here.points_in_radius( p, 2 ) ) {
-                    here.add_field( dest, fd_fungal_haze, rng( 0, 2 ) );
+                    here.add_field( dest, fd_spores, rng( 0, 2 ) );
                 }
             }
             if( !mon.make_fungus() ) {
@@ -94,7 +94,7 @@ void fungal_effects::fungalize( const tripoint_bub_ms &p, Creature *origin, doub
         } else {
             map &here = get_map();
             for( const tripoint_bub_ms &dest : here.points_in_radius( p, 2 ) ) {
-                here.add_field( dest, fd_fungal_haze, rng( 0, 3 ) );
+                here.add_field( dest, fd_spores, rng( 0, 3 ) );
             }
         }
     } else if( g->num_creatures() < 250 && x_in_y( spore_chance, 1.0 ) ) {

@@ -148,7 +148,7 @@ extern const field_type_str_id fd_fatigue;
 extern const field_type_str_id fd_fire;
 extern const field_type_str_id fd_fire_vent;
 extern const field_type_str_id fd_flame_burst;
-extern const field_type_str_id fd_fungal_haze;
+extern const field_type_str_id fd_spores;
 extern const field_type_str_id fd_fungicidal_gas;
 extern const field_type_str_id fd_gas_vent;
 extern const field_type_str_id fd_gibs_flesh;

@@ -587,10 +587,10 @@ void field_processor_spread_gas( const tripoint_bub_ms &p, field_entry &cur, fie
                         pd.sblk, pd.om_ter );
 }
 
-static void field_processor_fd_fungal_haze( const tripoint_bub_ms &p, field_entry &cur,
+static void field_processor_fd_spores( const tripoint_bub_ms &p, field_entry &cur,
         field_proc_data &/*pd*/ )
 {
-    // if( cur_fd_type_id == fd_fungal_haze ) {
+    // if( cur_fd_type_id == fd_spores ) {
     // There's already RNG in the function we call here, so a simple interval works fine here.
     if( calendar::once_every( 1_seconds * ( 30 - 5 * cur.get_field_intensity() ) ) ) {
         // The haze fungalizes terrain.
@@ -2125,7 +2125,7 @@ void map::monster_in_field( monster &z )
                 }
             }
         }
-        if( cur_field_type == fd_fungal_haze ) {
+        if( cur_field_type == fd_spores ) {
             if( !z.type->in_species( species_FUNGUS ) ) {
                 const int intensity = cur.get_field_intensity();
                 if( one_in( 12 - intensity ) ) {
@@ -2341,8 +2341,8 @@ std::vector<FieldProcessorPtr> map_field_processing::processors_for_type( const 
     if( ft.id == fd_fire ) {
         processors.push_back( &field_processor_fd_fire );
     }
-    if( ft.id == fd_fungal_haze ) {
-        processors.push_back( &field_processor_fd_fungal_haze );
+    if( ft.id == fd_spores ) {
+        processors.push_back( &field_processor_fd_spores );
     }
     if( ft.id == fd_fire_vent ) {
         processors.push_back( &field_processor_fd_fire_vent );
