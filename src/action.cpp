@@ -771,7 +771,7 @@ action_id handle_action_menu( map &here )
     // Check if we're in a potential combat situation, if so, sort a few actions to the top.
     if( !player_character.get_hostile_creatures( MAX_VIEW_DISTANCE ).empty() ) {
         // Only prioritize movement options if we're not driving.
-        if( !player_character.controlling_vehicle ) {
+        if( !player_character.controlling_vehicle && !player_character.controlling_power_armor ) {
             action_weightings[ACTION_CYCLE_MOVE] = 400;
             action_weightings[ACTION_CYCLE_MOVE_REVERSE] = 400;
         }
