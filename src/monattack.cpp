@@ -1760,11 +1760,11 @@ bool mattack::fungus_haze( monster *z )
     if( chance == 2 ) {
         // A small but denser cloud.
         for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 2 ) ) {
-            here.add_field( dest, fd_fungal_haze, 2 );
+            here.add_field( dest, fd_spores, 2 );
         }
     } else {
         for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), chance ) ) {
-            here.add_field( dest, fd_fungal_haze, 1 );
+            here.add_field( dest, fd_spores, 1 );
         }
     }
     z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
@@ -1810,12 +1810,12 @@ bool mattack::fungus_big_blossom( monster *z )
             // Let's not make a huge cloud this turn, let's just make a small dense one.
             z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
             for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 4 ) ) {
-                here.add_field( dest, fd_fungal_haze, 2 );
+                here.add_field( dest, fd_spores, 2 );
             }
         } else {
             z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
             for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), chance / 2 ) ) {
-                here.add_field( dest, fd_fungal_haze, 1 );
+                here.add_field( dest, fd_spores, 1 );
             }
         }
     }

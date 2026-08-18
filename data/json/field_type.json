@@ -1648,13 +1648,13 @@
     "looks_like": "fd_smoke"
   },
   {
-    "id": "fd_fungal_haze",
+    "id": "fd_spores",
     "type": "field_type",
     "substance_name": "spores",
     "legacy_enum_id": 40,
     "intensity_levels": [
       {
-        "name": "thin fungal haze",
+        "name": "thin spore cloud",
         "sym": ".",
         "dangerous": true,
         "concentration": 1,
@@ -1668,7 +1668,7 @@
         ]
       },
       {
-        "name": "fungal haze",
+        "name": "spore cloud",
         "color": "cyan",
         "concentration": 2,
         "effects": [
@@ -1681,7 +1681,7 @@
         ]
       },
       {
-        "name": "thick fungal haze",
+        "name": "thick spore cloud",
         "transparent": false,
         "concentration": 4,
         "effects": [

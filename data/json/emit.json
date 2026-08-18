@@ -361,21 +361,21 @@
   {
     "id": "emit_fungal_haze_plume",
     "type": "emit",
-    "field": "fd_fungal_haze",
+    "field": "fd_spores",
     "intensity": 3,
     "qty": 3
   },
   {
     "id": "emit_fungal_leak",
     "type": "emit",
-    "field": "fd_fungal_haze",
+    "field": "fd_spores",
     "chance": 30,
     "qty": 3
   },
   {
     "id": "emit_fungal_blast",
     "type": "emit",
-    "field": "fd_fungal_haze",
+    "field": "fd_spores",
     "qty": 200
   },
   {
