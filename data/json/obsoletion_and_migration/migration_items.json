@@ -4187,5 +4187,40 @@
     "type": "MIGRATION",
     "id": "salted_mollusk",
     "replace": "mollusk_smoked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_harness_dog",
+    "replace": "leather_harness_dog"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_armor_cow",
+    "replace": "leather_armor_cow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_armor_horse",
+    "replace": "leather_armor_horse"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "javelin_fletched",
+    "replace": "javelin_iron"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "javelin_fletched_bronze",
+    "replace": "javelin"
+  },
+  {
+    "type": "field_type_migration",
+    "from_field": "fd_fungal_haze",
+    "to_field": "fd_spores"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bellyband",
+    "replace": "bellywrap"
   }
 ]

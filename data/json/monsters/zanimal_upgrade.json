@@ -28,10 +28,11 @@
     "bleed_rate": 50,
     "vision_night": 3,
     "harvest": "doggy_bones",
+    "decay": "zombie_animal_decay",
     "special_attacks": [ { "id": "bite_grab", "attack_upper": false, "cooldown": 5 }, { "id": "scratch_grab_required", "max_mul": 1.5 } ],
     "death_drops": "mon_dog_death_drops",
     "upgrades": { "half_life": 168, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "WARM", "REVIVES", "POISON", "FILTHY", "BASHES" ],
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "WARM", "REVIVES", "POISON", "FILTHY", "BASHES", "BELLYUP" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 1 }
   },
   {
@@ -40,6 +41,7 @@
     "name": { "str": "barghest" },
     "copy-from": "mon_dog_zombie_rot",
     "harvest": "zombie_dog",
+    "decay": "zombie_animal_decay",
     "description": "A zombie dog grown larger than most men.  Daggerlike teeth jut from its gaping maw at every angle, and its broad back ripples with unnatural arrangements of glistening muscle.",
     "volume": "108500 ml",
     "weight": "120 kg",
@@ -78,6 +80,7 @@
     "name": { "str": "hulking zombie dog" },
     "copy-from": "mon_dog_zombie_brute",
     "harvest": "zombie_dog",
+    "decay": "zombie_animal_decay",
     "description": "What may once have been a dog is now a grotesquely swollen monstrosity, standing on four limbs as wide as trash cans and showing massive, jagged teeth.",
     "diff": 5,
     "hp": 240,
@@ -107,7 +110,7 @@
       { "id": "scratch_grab_required" },
       { "id": "bite_grab_required" }
     ],
-    "extend": { "flags": [ "DESTROYS" ] },
+    "extend": { "flags": [ "DESTROYS", "GROUP_BASH", "PUSH_VEH" ] },
     "armor": { "bash": 8, "cut": 10, "bullet": 10, "electric": 4 }
   },
   {
@@ -115,6 +118,7 @@
     "type": "MONSTER",
     "copy-from": "mon_dog_skeleton",
     "harvest": "doggy_bones",
+    "decay": "zombie_animal_decay",
     "name": { "str": "bone-plated canine", "str_pl": "bone-plated canine" },
     "description": "A four-legged creature covered in fused bony plates.  Its shape recalls a big dog or perhaps a wolf, though the original anatomy is largely hidden by its burdensome armor.",
     "volume": "75000 ml",
@@ -158,7 +162,7 @@
     },
     "bleed_rate": 50,
     "fungalize_into": "mon_zombie_pig_fungus",
-    "special_attacks": [ [ "SMASH", 30 ], { "id": "impale" } ],
+    "special_attacks": [ { "id": "low_charge", "cooldown": 12 }, { "id": "impale" } ],
     "extend": { "flags": [ "GROUP_BASH", "PUSH_VEH", "HIT_AND_RUN" ] }
   },
   {
@@ -176,7 +180,7 @@
     "death_function": { "effect": { "id": "death_tearburst", "hit_self": true }, "message": "The %s explodes!", "corpse_type": "NO_CORPSE" },
     "death_drops": "explode_zed_beast",
     "fungalize_into": "mon_zombie_pig_fungus",
-    "special_attacks": [ { "id": "impale" } ],
+    "special_attacks": [ { "id": "low_charge", "cooldown": 12 }, { "id": "impale" } ],
     "extend": { "flags": [ "HIT_AND_RUN" ] }
   },
   {
@@ -209,9 +213,10 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_skeleton" ],
     "bleed_rate": 50,
     "vision_night": 3,
-    "harvest": "puppy_bones",
+    "harvest": "doggy_bones",
+    "decay": "zombie_animal_decay",
     "upgrades": { "half_life": 168, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "WARM", "POISON", "FILTHY", "BASHES" ],
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "WARM", "POISON", "FILTHY", "BASHES", "BELLYUP" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 3 }
   },
   {
@@ -221,7 +226,8 @@
     "copy-from": "mon_zombear",
     "description": "As if a zombified bear wasn't already a problem, this one is layered in thick bone growths that protect it from harm.  The irregular way the plates grow against each other has somewhat stifled its movement, but not enough to stop it from easily gaining up on you.",
     "hp": 170,
-    "speed": 100,
+    "speed": 90,
+    "attack_cost": 135,
     "material": [ "bone" ],
     "color": "white",
     "melee_dice": 5,
@@ -232,11 +238,13 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_skeleton" ],
     "bleed_rate": 20,
     "vision_day": 10,
-    "harvest": "puppy_bones",
+    "harvest": "doggy_bones",
+    "decay": "zombie_animal_decay",
     "grab_strength": 35,
     "special_attacks": [
       { "id": "scratch", "cooldown": 10, "min_mul": 1, "max_mul": 1.8 },
       { "id": "bite_grab", "move_cost": 150, "cooldown": 5, "min_mul": 1.0, "max_mul": 1.8 },
+      { "id": "low_charge", "cooldown": 15 },
       { "id": "drag_followup" },
       { "id": "scratch_grab_required" },
       { "id": "bite_grab_required" },
@@ -248,7 +256,7 @@
       }
     ],
     "flags": [ "SEES", "HEARS", "GRABS", "REVIVES", "WARM", "NO_BREATHE", "POISON", "FILTHY" ],
-    "armor": { "bash": 2, "cut": 17, "stab": 30, "acid": 3, "bullet": 32, "electric": 3 }
+    "armor": { "bash": 8, "cut": 17, "stab": 30, "acid": 3, "bullet": 32, "electric": 3 }
   },
   {
     "id": "mon_zombear_acidic",
@@ -258,7 +266,7 @@
     "description": "Most of this bear's fur has burnt off and its body looks to be falling apart, not entirely immune to its own acidic fluids.  Despite its weakened state, the strength of a bear hasn't left it.",
     "diff": 5,
     "hp": 145,
-    "speed": 135,
+    "speed": 125,
     "attack_cost": 135,
     "color": "light_gray_yellow",
     "melee_skill": 4,
@@ -268,7 +276,20 @@
     "harvest": "zombie_animal_acid",
     "grab_strength": 45,
     "special_attacks": [
-      [ "ACID_BARF", 10 ],
+      {
+        "type": "spell",
+        "spell_data": { "id": "acid_barf", "min_level": 6 },
+        "monster_message": "The %s barfs acid!",
+        "cooldown": 10,
+        "condition": {
+          "and": [
+            { "u_has_flag": "GRAB_FILTER" },
+            { "npc_has_flag": "GRAB" },
+            { "not": { "u_is_underwater": "true" } },
+            { "not": { "npc_is_underwater": "true" } }
+          ]
+        }
+      },
       [ "scratch", 10 ],
       {
         "id": "bite_grab",
@@ -306,7 +327,7 @@
     "morale": 100,
     "melee_skill": 3,
     "melee_dice": 3,
-    "melee_dice_sides": 4,
+    "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 4 } ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "vision_day": 28,
@@ -331,7 +352,15 @@
     "color": "light_gray_yellow",
     "bleed_rate": 50,
     "harvest": "zombie_animal_acid",
-    "special_attacks": [ [ "ACID", 15 ] ],
+    "special_attacks": [
+      {
+        "type": "spell",
+        "spell_data": { "id": "acid_spit", "min_level": 7 },
+        "monster_message": "The %s spews acid!",
+        "cooldown": 10,
+        "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
+      }
+    ],
     "death_function": { "message": "The %s's body leaks acid.", "effect": { "id": "death_acid", "hit_self": true } },
     "flags": [
       "SEES",
@@ -346,7 +375,8 @@
       "ACID_BLOOD",
       "NO_BREATHE",
       "REVIVES",
-      "PUSH_MON"
+      "PUSH_MON",
+      "BELLYUP"
     ]
   },
   {
@@ -358,7 +388,8 @@
     "diff": 5,
     "hp": 200,
     "color": "red",
-    "melee_dice": 4,
+    "melee_dice": 3,
+    "melee_dice_sides": 8,
     "melee_damage": [ { "damage_type": "cut", "amount": 7 } ],
     "harvest": "zombie_animal",
     "special_attacks": [ { "id": "smash", "throw_strength": 91, "cooldown": 30 } ],
@@ -389,10 +420,12 @@
     "hp": 225,
     "color": "white",
     "melee_dice": 4,
+    "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 8 } ],
     "weakpoint_sets": [ "wps_bone_armor" ],
     "families": [ "prof_intro_biology", "prof_wp_zombie", "prof_wp_skeleton" ],
-    "harvest": "puppy_bones",
+    "harvest": "doggy_bones",
+    "decay": "zombie_animal_decay",
     "special_attacks": [ { "id": "smash", "throw_strength": 91, "cooldown": 30 } ],
     "flags": [ "SEES", "HEARS", "BASHES", "GROUP_BASH", "WARM", "HARDTOSHOOT", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
     "armor": { "bash": 5, "electric": 2, "cut": 16, "stab": 30, "acid": 2, "bullet": 24 }
@@ -440,7 +473,8 @@
       "REVIVES",
       "PUSH_MON",
       "PUSH_VEH",
-      "FILTHY"
+      "FILTHY",
+      "BELLYUP"
     ],
     "armor": { "electric": 2, "bash": 10, "cut": 10, "bullet": 8 }
   },
@@ -480,7 +514,8 @@
       "FILTHY",
       "PATH_AVOID_FIRE",
       "PATH_AVOID_FALL",
-      "PARALYZEVENOM"
+      "PARALYZEVENOM",
+      "BELLYUP"
     ],
     "armor": { "electric": 2, "bash": 8, "cut": 8, "bullet": 6 }
   }

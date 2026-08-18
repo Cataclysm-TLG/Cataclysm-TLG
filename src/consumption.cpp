@@ -682,11 +682,8 @@ int Character::vitamin_mod( const vitamin_id &vit, int qty )
     // (Okay, technically it returns a pair<iterator, bool>, the iterator is what we want)
     auto it = vitamin_levels.emplace( vit, 0 ).first;
     const vitamin &v = *it->first;
-
     if( qty > 0 ) {
         it->second = std::min( it->second + qty, v.max() );
-        update_vitamins( vit );
-
         // update the daily trackers too while here
         // prevent overflow
         constexpr int daily_vitamins_max = std::numeric_limits<int>::max();
@@ -695,7 +692,6 @@ int Character::vitamin_mod( const vitamin_id &vit, int qty )
         } else {
             daily_vitamins[vit].second = daily_vitamins_max;
         }
-
     } else if( qty < 0 ) {
         it->second = std::max( it->second + qty, v.min() );
         update_vitamins( vit );
@@ -705,7 +701,8 @@ int Character::vitamin_mod( const vitamin_id &vit, int qty )
             }
         }
     }
-
+    // We must always call update_vitamins() because effects must be both applied and removed.
+    update_vitamins( vit );
     return it->second;
 }
 
@@ -905,7 +902,8 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
     }
 
     // Here's why PROBOSCIS is such a negative trait.
-    if( has_trait( trait_PROBOSCIS ) && !( drinkable || food.is_medication() ) ) {
+    if( has_trait( trait_PROBOSCIS ) && !drinkable && ( !food.is_medication() ||
+            food.has_flag( flag_CHEW ) ) ) {
         return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION, _( "Ugh, you can't drink that!" ) );
     }
 
@@ -1739,12 +1737,13 @@ bool Character::can_estimate_rot() const
 
 bool Character::can_consume_as_is( const item &it ) const
 {
-    if( it.is_comestible() ) {
-        return !it.has_flag( flag_NO_INGEST ) && ( !it.has_flag( flag_FROZEN ) ||
-                it.has_flag( flag_EDIBLE_FROZEN ) ||
-                it.has_flag( flag_MELTS ) );
+    if( !it.is_comestible() ) {
+        return false;
     }
-    return false;
+
+    return ( !it.has_flag( flag_NO_INGEST ) || it.get_comestible()->comesttype == "MED" ||
+             it.has_flag( flag_CHEW ) ) &&
+           ( !it.has_flag( flag_FROZEN ) || it.has_flag( flag_EDIBLE_FROZEN ) || it.has_flag( flag_MELTS ) );
 }
 
 bool Character::can_consume_rot() const

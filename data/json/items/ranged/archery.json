@@ -22,7 +22,6 @@
       "NEVER_JAMS"
     ],
     "ammo_effects": [ "NEVER_MISFIRES" ],
-    "weapon_category": [ "SHORT_BOWS" ],
     "reload_noise_volume": 4,
     "loudness": 9,
     "skill": "archery",
@@ -75,7 +74,6 @@
       "NEVER_JAMS"
     ],
     "ammo_effects": [ "NEVER_MISFIRES" ],
-    "weapon_category": [ "SHORT_BOWS" ],
     "skill": "archery",
     "min_strength": 9,
     "ammo": [ "arrow" ],
@@ -126,7 +124,6 @@
     "volume": "1500 ml",
     "longest_side": "150 cm",
     "price_postapoc": "35 USD",
-    "weapon_category": [ "LONG_BOWS" ],
     "to_hit": 1,
     "reload_noise_volume": 3,
     "loudness": 10,
@@ -200,7 +197,6 @@
     "description": "A heavily recurved short bow made of wood, bone, and horn laminated together.  Its shape and construction give it a formidable draw weight despite its size.",
     "price": "320 USD",
     "//": "100 lb draw weight, 28in draw, 110J, 0.598 slugs of momentum with a 32g arrow.",
-    "weapon_category": [ "SHORT_BOWS" ],
     "material": [ "wood", "bone" ],
     "flags": [
       "FIRE_TWOHAND",
@@ -257,7 +253,6 @@
     "price": "380 USD",
     "//": "52in Fiberglass recurved bow at 26in draw, 80lb draw, 82J, 0.51 slugs with 30g arrow.",
     "material": [ "steel", "fiberglass" ],
-    "weapon_category": [ "SHORT_BOWS" ],
     "flags": [
       "FIRE_TWOHAND",
       "RELOAD_AND_SHOOT",
@@ -351,7 +346,6 @@
     "name": { "str": "wooden target bow" },
     "description": "A wooden longbow nearly the height of a man.  Though it resembles a medieval weapon of war, the modest draw weight means this weapon is more suited for shooting targets or animals than penetrating chain mail.",
     "price": "500 USD",
-    "weapon_category": [ "LONG_BOWS" ],
     "//": "70in Yew Longbow at 28in, 65 lbs draw, 60J, 0.41 slugs with 30g arrow",
     "material": [ "wood" ],
     "flags": [
@@ -409,7 +403,6 @@
     "volume": "6250 ml",
     "longest_side": "198 cm",
     "price_postapoc": "20 USD",
-    "weapon_category": [ "LONG_BOWS" ],
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
@@ -447,7 +440,6 @@
       "NO_TURRET"
     ],
     "ammo_effects": [ "NEVER_MISFIRES" ],
-    "weapon_category": [ "LONG_BOWS" ],
     "skill": "archery",
     "min_strength": 19,
     "ammo": [ "arrow" ],

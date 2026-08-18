@@ -13,7 +13,7 @@
     "to_hit": -1,
     "material": [ "soft_rubber", "nylon", "kevlar" ],
     "symbol": "[",
-    "looks_like": "longcoat_leather",
+    "looks_like": "longcoat_survivor",
     "color": "brown",
     "armor": [
       {

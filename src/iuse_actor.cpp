@@ -138,6 +138,7 @@ static const itype_id itype_stock_none( "stock_none" );
 static const itype_id itype_syringe( "syringe" );
 
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
+static const json_character_flag json_flag_GRAPNEL( "GRAPNEL" );
 static const json_character_flag json_flag_MANUAL_CBM_INSTALLATION( "MANUAL_CBM_INSTALLATION" );
 
 static const morale_type morale_pyromania_nofire( "morale_pyromania_nofire" );
@@ -1215,6 +1216,7 @@ static ret_val<tripoint_bub_ms> check_deploy_square( Character *p, item &it,
         return ret_val<tripoint_bub_ms>::make_failure( pos );
     }
     tripoint_bub_ms pnt( pos );
+
     if( pos == p->pos_bub( *here ) ) {
         // TODO: Use map aware 'choose_adjacent' when available, or reject operation if not reality bubble map
         if( const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent( _( "Deploy where?" ) ) ) {
@@ -1227,6 +1229,34 @@ static ret_val<tripoint_bub_ms> check_deploy_square( Character *p, item &it,
     if( pnt == p->pos_bub( *here ) ) {
         return ret_val<tripoint_bub_ms>::make_failure( pos,
                 _( "You attempt to become one with the %s.  It doesn't work." ), it.tname() );
+    }
+
+
+    if( it.has_flag( json_flag_GRAPNEL ) ) {
+        if( pnt.z() != pos.z() ) {
+            return ret_val<tripoint_bub_ms>::make_failure( pos,
+                    _( "You must pick an adjacent tile on the same level." ) );
+        }
+        const tripoint_bub_ms above = pnt + tripoint::above;
+
+        // TODO: Hook onto ladders that don't reach down far enough.
+        if( !here->ter( above )->has_flag( "EMPTY_SPACE" ) ) {
+            return ret_val<tripoint_bub_ms>::make_failure(
+                       pos, _( "There needs to be open air up above." ) );
+        }
+
+        bool found_anchor = false;
+        for( const tripoint_bub_ms &adj : here->points_in_radius( above, 1 ) ) {
+            if( here->has_floor( adj ) && !here->impassable( adj ) ) {
+                found_anchor = true;
+                break;
+            }
+        }
+
+        if( !found_anchor ) {
+            return ret_val<tripoint_bub_ms>::make_failure(
+                       pos, _( "There is no ledge above to anchor it to." ) );
+        }
     }
 
     tripoint_bub_ms where = pnt;
@@ -1966,7 +1996,7 @@ void salvage_actor::cut_up( Character &p, item_location &cut ) const
     const bool filthy = cut.get_item()->is_filthy();
 
     // Clean up before removing the item.
-    remove_ammo( *cut.get_item(), p );
+    remove_ammo( *cut.get_item(), p, false );
     // Original item has been consumed.
     cut.remove_item();
     // Force an encumbrance update in case they were wearing that item.
@@ -3313,10 +3343,11 @@ static bool damage_item( Character &pl, item_location &fix )
     const std::string startdurability = fix->durability_indicator( true );
     const bool destroyed = fix->inc_damage();
     const std::string resultdurability = fix->durability_indicator( true );
-    pl.add_msg_if_player( m_bad, _( "You damage your %s!  ( %s-> %s)" ), fix->tname( 1, false ),
+    std::string iname = fix->tname( 1, false );
+    pl.add_msg_if_player( m_bad, _( "You damage your %s!  ( %s-> %s)" ), iname,
                           startdurability, resultdurability );
     if( destroyed ) {
-        pl.add_msg_if_player( m_bad, _( "You destroy it!" ) );
+        pl.add_msg_if_player( m_bad, _( "Your %s is destroyed!" ), iname );
         if( fix.where() == item_location::type::character ) {
             pl.i_rem_keep_contents( fix.get_item() );
         } else {

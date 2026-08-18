@@ -485,6 +485,17 @@
   },
   {
     "type": "overmap_special",
+    "id": "Scrapyard 1",
+    "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "smallscrapyard_north" } ],
+    "connections": [ { "point": [ -1, 0, 0 ], "terrain": "road", "from": [ 0, 0, 0 ] } ],
+    "locations": [ "forest", "field" ],
+    "city_distance": [ 30, -1 ],
+    "city_sizes": [ 0, 12 ],
+    "occurrences": [ 3, 100 ],
+    "flags": [ "CLASSIC", "MAN_MADE", "OVERMAP_UNIQUE" ]
+  },
+  {
+    "type": "overmap_special",
     "id": "Hunting Lodge",
     "overmaps": [
       { "point": [ 0, 0, 0 ], "overmap": "lodge_ground1_north" },
@@ -1546,7 +1557,7 @@
     "type": "overmap_special",
     "id": "Fungal Bloom",
     "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "fungal_bloom" } ],
-    "locations": [ "wilderness" ],
+    "locations": [ "land" ],
     "city_distance": [ 5, -1 ],
     "occurrences": [ 90, 100 ],
     "flags": [ "FUNGAL", "OVERMAP_UNIQUE", "WILDERNESS" ],
@@ -1557,7 +1568,7 @@
     "type": "overmap_special",
     "id": "Fungal Tower",
     "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "fungal_tower" } ],
-    "locations": [ "wilderness" ],
+    "locations": [ "land" ],
     "city_distance": [ 5, -1 ],
     "occurrences": [ 90, 100 ],
     "flags": [ "FUNGAL", "OVERMAP_UNIQUE", "WILDERNESS" ],
@@ -2441,8 +2452,8 @@
     "connections": [ { "point": [ 7, 15, 0 ], "terrain": "road", "connection": "local_road", "from": [ 7, 14, 0 ] } ],
     "locations": [ "wilderness" ],
     "city_distance": [ 3, -1 ],
-    "city_sizes": [ 4, -1 ],
-    "occurrences": [ 75, 100 ],
+    "city_sizes": [ -1, 8 ],
+    "occurrences": [ 90, 100 ],
     "priority": 1,
     "flags": [ "GLOBALLY_UNIQUE", "SAFE_AT_WORLDGEN", "MAN_MADE" ]
   },
@@ -6166,21 +6177,6 @@
   },
   {
     "type": "overmap_special",
-    "id": "Occupied Scrap Yard",
-    "overmaps": [
-      { "point": [ 0, 0, 0 ], "overmap": "smallscrapyard_ocu_north", "camp": "wasteland_scavengers", "camp_name": "Scrapper" },
-      { "point": [ 0, 0, 1 ], "overmap": "smallscrapyard_ocu_roof_north" },
-      { "point": [ 0, -1, 0 ], "locations": [ "land", "road" ] }
-    ],
-    "connections": [ { "point": [ 0, -1, 0 ], "terrain": "road", "connection": "local_road", "from": [ 0, 0, 0 ] } ],
-    "locations": [ "field" ],
-    "city_distance": [ 5, 40 ],
-    "city_sizes": [ 1, -1 ],
-    "occurrences": [ 1, 10 ],
-    "flags": [ "CLASSIC", "MAN_MADE", "GLOBALLY_UNIQUE" ]
-  },
-  {
-    "type": "overmap_special",
     "id": "Occupied Homeless Camp",
     "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "homelesscamp_npc_north" } ],
     "locations": [ "field" ],
@@ -6782,6 +6778,37 @@
     "locations": [ "land" ],
     "occurrences": [ 2, 8 ],
     "flags": [ "CLASSIC", "MAN_MADE" ]
+  },
+  {
+    "type": "overmap_special",
+    "id": "pig_farm_lab",
+    "overmaps": [
+      { "point": [ 0, 0, 0 ], "overmap": "pig_farm_lab_ground_NW_north" },
+      { "point": [ 1, 0, 0 ], "overmap": "pig_farm_lab_ground_N_north" },
+      { "point": [ 2, 0, 0 ], "overmap": "pig_farm_lab_ground_NE_north" },
+      { "point": [ 0, 1, 0 ], "overmap": "pig_farm_lab_ground_W_north" },
+      { "point": [ 1, 1, 0 ], "overmap": "pig_farm_lab_ground_M_north" },
+      { "point": [ 2, 1, 0 ], "overmap": "pig_farm_lab_ground_E_north" },
+      { "point": [ 0, 2, 0 ], "overmap": "pig_farm_lab_ground_SW_north" },
+      { "point": [ 1, 2, 0 ], "overmap": "pig_farm_lab_ground_S_north" },
+      { "point": [ 2, 2, 0 ], "overmap": "pig_farm_lab_ground_SE_north" },
+      { "point": [ 0, 0, 1 ], "overmap": "pig_farm_lab_roof_NW_north" },
+      { "point": [ 1, 0, 1 ], "overmap": "pig_farm_lab_roof_N_north" },
+      { "point": [ 2, 0, 1 ], "overmap": "pig_farm_lab_roof_NE_north" },
+      { "point": [ 0, 1, 1 ], "overmap": "pig_farm_lab_roof_W_north" },
+      { "point": [ 1, 1, 1 ], "overmap": "pig_farm_lab_roof_M_north" },
+      { "point": [ 2, 1, 1 ], "overmap": "pig_farm_lab_roof_E_north" },
+      { "point": [ 0, 2, 1 ], "overmap": "pig_farm_lab_roof_SW_north" },
+      { "point": [ 1, 2, 1 ], "overmap": "pig_farm_lab_roof_S_north" },
+      { "point": [ 2, 2, 1 ], "overmap": "pig_farm_lab_roof_SE_north" }
+    ],
+    "connections": [
+      { "point": [ 0, -1, 0 ], "terrain": "road", "connection": "local_road", "from": [ 0, 0, 0 ] },
+      { "point": [ 1, 3, 0 ], "terrain": "road", "connection": "local_road" }
+    ],
+    "locations": [ "land" ],
+    "occurrences": [ 1, 2 ],
+    "flags": [ "CLASSIC", "MAN_MADE", "GLOBALLY_UNIQUE", "LAB" ]
   },
   {
     "type": "overmap_special",

@@ -202,7 +202,7 @@ static const ter_str_id ter_t_laminated_door_glass_c( "t_laminated_door_glass_c"
 static const ter_str_id ter_t_laminated_glass( "t_laminated_glass" );
 static const ter_str_id ter_t_laminated_glass_lab( "t_laminated_glass_lab" );
 static const ter_str_id ter_t_rock_floor( "t_rock_floor" );
-static const ter_str_id ter_t_sewage( "t_sewage" );
+static const ter_str_id ter_t_sewage_underground( "t_sewage_underground" );
 static const ter_str_id ter_t_stairs_down( "t_stairs_down" );
 static const ter_str_id ter_t_stairs_up( "t_stairs_up" );
 static const ter_str_id ter_t_strconc_floor( "t_strconc_floor" );
@@ -211,7 +211,7 @@ static const ter_str_id ter_t_thconc_floor_olight( "t_thconc_floor_olight" );
 static const ter_str_id ter_t_vat( "t_vat" );
 static const ter_str_id ter_t_wall_burnt( "t_wall_burnt" );
 static const ter_str_id ter_t_water_dp( "t_water_dp" );
-static const ter_str_id ter_t_water_sh( "t_water_sh" );
+static const ter_str_id ter_t_water_sh_underground( "t_water_sh_underground" );
 
 static const trait_id trait_NPC_STATIC_NPC( "NPC_STATIC_NPC" );
 
@@ -6833,10 +6833,10 @@ void map::draw_lab( mapgendata &dat )
                     ter_set( point_bub_ms( i, j ), ter_t_thconc_floor );
                     if( ( ( i < lw || i > EAST_EDGE - rw ) && j > SEEY - 3 && j < SEEY + 2 ) ||
                         ( ( j < tw || j > SOUTH_EDGE - bw ) && i > SEEX - 3 && i < SEEX + 2 ) ) {
-                        ter_set( point_bub_ms( i, j ), ter_t_sewage );
+                        ter_set( point_bub_ms( i, j ), ter_t_sewage_underground );
                     }
                     if( ( i == 0 && is_ot_match( "lab", dat.east(), ot_match_type::contains ) ) || i == EAST_EDGE ) {
-                        if( ter( point_bub_ms( i, j ) ) == ter_t_sewage ) {
+                        if( ter( point_bub_ms( i, j ) ) == ter_t_sewage_underground ) {
                             ter_set( point_bub_ms( i, j ), ter_t_bars );
                         } else if( j == SEEY - 1 || j == SEEY ) {
                             ter_set( point_bub_ms( i, j ), ter_t_door_metal_c );
@@ -6845,7 +6845,7 @@ void map::draw_lab( mapgendata &dat )
                         }
                     } else if( ( j == 0 && is_ot_match( "lab", dat.north(), ot_match_type::contains ) ) ||
                                j == SOUTH_EDGE ) {
-                        if( ter( point_bub_ms( i, j ) ) == ter_t_sewage ) {
+                        if( ter( point_bub_ms( i, j ) ) == ter_t_sewage_underground ) {
                             ter_set( point_bub_ms( i, j ), ter_t_bars );
                         } else if( i == SEEX - 1 || i == SEEX ) {
                             ter_set( point_bub_ms( i, j ), ter_t_door_metal_c );
@@ -7263,7 +7263,7 @@ void map::draw_lab( mapgendata &dat )
                         // liquid floors.
                         break;
                     }
-                    const ter_id &fluid_type = one_in( 3 ) ? ter_t_sewage : ter_t_water_sh;
+                    const ter_id &fluid_type = one_in( 3 ) ? ter_t_sewage_underground : ter_t_water_sh_underground;
                     for( int i = 0; i < EAST_EDGE; i++ ) {
                         for( int j = 0; j < SOUTH_EDGE; j++ ) {
                             // We spare some terrain to make it look better visually.
@@ -7291,7 +7291,7 @@ void map::draw_lab( mapgendata &dat )
                         // liquid floors.
                         break;
                     }
-                    const ter_id &fluid_type = one_in( 3 ) ? ter_t_sewage : ter_t_water_sh;
+                    const ter_id &fluid_type = one_in( 3 ) ? ter_t_sewage_underground : ter_t_water_sh_underground;
                     for( int i = 0; i < 2; ++i ) {
                         draw_rough_circle( [this, fluid_type]( const point_bub_ms & p ) {
                             const ter_id &maybe_flood_ter = ter( p );

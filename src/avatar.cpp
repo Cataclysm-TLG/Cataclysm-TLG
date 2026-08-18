@@ -775,7 +775,7 @@ void avatar::identify( const item &item )
     if( reading->intel != 0 ) {
         add_msg( m_info, _( "Requires intelligence of %d to easily read." ), reading->intel );
     }
-    //It feels wrong to use a pointer to *this, but I can't find any other player pointers in this method.
+
     if( book_fun_for( book, *this ) != 0 ) {
         add_msg( m_info, _( "Reading this book affects your morale by %d." ), book_fun_for( book, *this ) );
     }
@@ -1085,7 +1085,7 @@ void avatar::reset_stats()
     }
 
     Character::reset_stats();
-
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
 
 }
@@ -1302,8 +1302,8 @@ void avatar::set_movement_mode( const move_mode_id &new_mode )
         move_mode = new_mode;
         // Enchantments based on move modes can stack inappropriately without a recalc here
         recalculate_enchantment_cache();
-        // crouching affects visibility
-        //TODO: Replace with dirtying vision_transparency_cache
+        // This potentially changes our eye level, so invalidate and dirty the relevant caches.
+        invalidate_tile_eye_level_cache();
         here.set_transparency_cache_dirty( pos_bub() );
         here.set_seen_cache_dirty( posz() );
         recoil = MAX_RECOIL;

@@ -23,28 +23,27 @@
               "or": [
                 { "u_has_trait": "hair_crewcut" },
                 { "u_has_trait": "hair_short" },
-                { "u_has_trait": "hair_short_no_fringe" },
-                { "u_has_trait": "hair_short_over_eye" },
-                { "u_has_trait": "hair_modern" },
-                { "u_has_trait": "hair_detective" },
+                { "u_has_trait": "hair_fade" },
+                { "u_has_trait": "hair_afro" },
+                { "u_has_trait": "hair_short_fringe" },
+                { "u_has_trait": "hair_short_curls" },
+                { "u_has_trait": "hair_side_part" },
                 { "u_has_trait": "hair_medium" },
                 { "u_has_trait": "hair_puff" },
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -70,28 +69,27 @@
             {
               "or": [
                 { "u_has_trait": "hair_short" },
-                { "u_has_trait": "hair_short_no_fringe" },
-                { "u_has_trait": "hair_short_over_eye" },
-                { "u_has_trait": "hair_modern" },
-                { "u_has_trait": "hair_detective" },
+                { "u_has_trait": "hair_fade" },
+                { "u_has_trait": "hair_short_fringe" },
+                { "u_has_trait": "hair_short_curls" },
+                { "u_has_trait": "hair_side_part" },
                 { "u_has_trait": "hair_medium" },
                 { "u_has_trait": "hair_puff" },
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -116,28 +114,27 @@
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
-                { "u_has_trait": "hair_short_no_fringe" },
-                { "u_has_trait": "hair_short_over_eye" },
-                { "u_has_trait": "hair_modern" },
-                { "u_has_trait": "hair_detective" },
+                { "u_has_trait": "hair_fade" },
+                { "u_has_trait": "hair_short_fringe" },
+                { "u_has_trait": "hair_short_curls" },
+                { "u_has_trait": "hair_side_part" },
                 { "u_has_trait": "hair_medium" },
                 { "u_has_trait": "hair_puff" },
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -156,33 +153,32 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a short cut (no fringe).",
+        "text": "Get a fade.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
-                { "u_has_trait": "hair_short_over_eye" },
-                { "u_has_trait": "hair_modern" },
-                { "u_has_trait": "hair_detective" },
+                { "u_has_trait": "hair_short_fringe" },
+                { "u_has_trait": "hair_short_curls" },
+                { "u_has_trait": "hair_side_part" },
                 { "u_has_trait": "hair_medium" },
                 { "u_has_trait": "hair_puff" },
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -196,37 +192,36 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_short_no_fringe" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_fade" } }
         ],
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a short cut (over eye).",
+        "text": "Get a short cut with a fringe.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
-                { "u_has_trait": "hair_modern" },
-                { "u_has_trait": "hair_detective" },
+                { "u_has_trait": "hair_short_curls" },
+                { "u_has_trait": "hair_side_part" },
                 { "u_has_trait": "hair_medium" },
                 { "u_has_trait": "hair_puff" },
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -240,7 +235,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_short_over_eye" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_short_fringe" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -251,25 +246,24 @@
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
-                { "u_has_trait": "hair_detective" },
+                { "u_has_trait": "hair_side_part" },
                 { "u_has_trait": "hair_medium" },
                 { "u_has_trait": "hair_puff" },
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -283,12 +277,12 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_modern" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_short_curls" } }
         ],
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a detective cut.",
+        "text": "Get a short cut parted on one side.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
@@ -298,20 +292,19 @@
                 { "u_has_trait": "hair_puff" },
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -325,7 +318,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_detective" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_side_part" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -339,20 +332,19 @@
                 { "u_has_trait": "hair_puff" },
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -371,7 +363,7 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a puff cut.",
+        "text": "Get your hair styled in puffs.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
@@ -379,20 +371,19 @@
               "or": [
                 { "u_has_trait": "hair_mohawk" },
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -418,20 +409,19 @@
             {
               "or": [
                 { "u_has_trait": "hair_beaded" },
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_afro" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -450,26 +440,25 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a beaded cut.",
+        "text": "Get it beaded.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
-                { "u_has_trait": "hair_curls" },
-                { "u_has_trait": "hair_super_princess" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
                 { "u_has_trait": "hair_long_mohawk" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -488,25 +477,25 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a curly cut.",
+        "text": "Get an afro.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
-                { "u_has_trait": "hair_super_princess" },
-                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_medium_curls" },
+                { "u_has_trait": "hair_long_feathered" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -520,12 +509,48 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_curls" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_afro" } }
         ],
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a super princess cut.",
+        "text": "Get medium-length curls.",
+        "condition": {
+          "and": [
+            { "u_has_trait": "natural_hair_growth" },
+            {
+              "or": [
+                { "u_has_trait": "hair_long_feathered" },
+                { "u_has_trait": "hair_long_mohawk" },
+                { "u_has_trait": "hair_long" },
+                { "u_has_trait": "hair_medium_fringe" },
+                { "u_has_trait": "hair_mullet" },
+                { "u_has_trait": "hair_bun" },
+                { "u_has_trait": "hair_messy" },
+                { "u_has_trait": "hair_side_shave" },
+                { "u_has_trait": "hair_very_long" },
+                { "u_has_trait": "hair_pigtails" },
+                { "u_has_trait": "hair_braid" },
+                { "u_has_trait": "hair_long_wavy" }
+              ]
+            }
+          ]
+        },
+        "effect": [
+          { "run_eocs": "reset_all_hair_types" },
+          {
+            "u_add_morale": "morale_haircut",
+            "bonus": 3,
+            "max_bonus": 5,
+            "duration": "30 minutes",
+            "decay_start": "30 minutes"
+          },
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_medium_curls" } }
+        ],
+        "topic": "TALK_DONE"
+      },
+      {
+        "text": "Get a long feathered cut.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
@@ -533,16 +558,15 @@
               "or": [
                 { "u_has_trait": "hair_long_mohawk" },
                 { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -556,42 +580,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_super_princess" } }
-        ],
-        "topic": "TALK_DONE"
-      },
-      {
-        "text": "Get a long mohawk.",
-        "condition": {
-          "and": [
-            { "u_has_trait": "natural_hair_growth" },
-            {
-              "or": [
-                { "u_has_trait": "hair_long" },
-                { "u_has_trait": "hair_long_over_eye" },
-                { "u_has_trait": "hair_mullet" },
-                { "u_has_trait": "hair_bun" },
-                { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
-                { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
-                { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
-              ]
-            }
-          ]
-        },
-        "effect": [
-          { "run_eocs": "reset_all_hair_types" },
-          {
-            "u_add_morale": "morale_haircut",
-            "bonus": 3,
-            "max_bonus": 5,
-            "duration": "30 minutes",
-            "decay_start": "30 minutes"
-          },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_long_mohawk" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_long_feathered" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -602,16 +591,15 @@
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
-                { "u_has_trait": "hair_long_over_eye" },
+                { "u_has_trait": "hair_medium_fringe" },
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -630,7 +618,7 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a long cut (over eye).",
+        "text": "Get a medium cut with a fringe.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
@@ -639,12 +627,11 @@
                 { "u_has_trait": "hair_mullet" },
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -658,7 +645,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_long_over_eye" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_medium_fringe" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -671,12 +658,11 @@
               "or": [
                 { "u_has_trait": "hair_bun" },
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -695,6 +681,36 @@
         "topic": "TALK_DONE"
       },
       {
+        "text": "Get pigtails.",
+        "condition": {
+          "and": [
+            { "u_has_trait": "natural_hair_growth" },
+            {
+              "or": [
+                { "u_has_trait": "hair_messy" },
+                { "u_has_trait": "hair_side_shave" },
+                { "u_has_trait": "hair_very_long" },
+                { "u_has_trait": "hair_pigtails" },
+                { "u_has_trait": "hair_braid" },
+                { "u_has_trait": "hair_long_wavy" }
+              ]
+            }
+          ]
+        },
+        "effect": [
+          { "run_eocs": "reset_all_hair_types" },
+          {
+            "u_add_morale": "morale_haircut",
+            "bonus": 3,
+            "max_bonus": 5,
+            "duration": "30 minutes",
+            "decay_start": "30 minutes"
+          },
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_pigtails" } }
+        ],
+        "topic": "TALK_DONE"
+      },
+      {
         "text": "Get a bun.",
         "condition": {
           "and": [
@@ -702,12 +718,11 @@
             {
               "or": [
                 { "u_has_trait": "hair_messy" },
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -732,12 +747,11 @@
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
-                { "u_has_trait": "hair_punk_long" },
+                { "u_has_trait": "hair_side_shave" },
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -756,17 +770,16 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a long punk cut.",
+        "text": "Get a long cut with a side shave.",
         "condition": {
           "and": [
             { "u_has_trait": "natural_hair_growth" },
             {
               "or": [
                 { "u_has_trait": "hair_very_long" },
-                { "u_has_trait": "hair_twintails" },
+                { "u_has_trait": "hair_pigtails" },
                 { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
+                { "u_has_trait": "hair_long_wavy" }
               ]
             }
           ]
@@ -780,7 +793,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_punk_long" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_side_shave" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -790,12 +803,7 @@
           "and": [
             { "u_has_trait": "natural_hair_growth" },
             {
-              "or": [
-                { "u_has_trait": "hair_twintails" },
-                { "u_has_trait": "hair_braid" },
-                { "u_has_trait": "hair_extremely_long" },
-                { "u_has_trait": "hair_body_length" }
-              ]
+              "or": [ { "u_has_trait": "hair_pigtails" }, { "u_has_trait": "hair_braid" }, { "u_has_trait": "hair_long_wavy" } ]
             }
           ]
         },
@@ -818,7 +826,7 @@
           "and": [
             { "u_has_trait": "natural_hair_growth" },
             {
-              "or": [ { "u_has_trait": "hair_braid" }, { "u_has_trait": "hair_extremely_long" }, { "u_has_trait": "hair_body_length" } ]
+              "or": [ { "u_has_trait": "hair_braid" }, { "u_has_trait": "hair_long_wavy" }, { "u_has_trait": "hair_very_long" } ]
             }
           ]
         },
@@ -837,12 +845,7 @@
       },
       {
         "text": "Get a braid.",
-        "condition": {
-          "and": [
-            { "u_has_trait": "natural_hair_growth" },
-            { "or": [ { "u_has_trait": "hair_extremely_long" }, { "u_has_trait": "hair_body_length" } ] }
-          ]
-        },
+        "condition": { "and": [ { "u_has_trait": "natural_hair_growth" }, { "or": [ { "u_has_trait": "hair_long_wavy" } ] } ] },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
           {
@@ -853,22 +856,6 @@
             "decay_start": "30 minutes"
           },
           { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_braid" } }
-        ],
-        "topic": "TALK_DONE"
-      },
-      {
-        "text": "Get an extremely long cut.",
-        "condition": { "and": [ { "u_has_trait": "natural_hair_growth" }, { "or": [ { "u_has_trait": "hair_body_length" } ] } ] },
-        "effect": [
-          { "run_eocs": "reset_all_hair_types" },
-          {
-            "u_add_morale": "morale_haircut",
-            "bonus": 3,
-            "max_bonus": 5,
-            "duration": "30 minutes",
-            "decay_start": "30 minutes"
-          },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_extremely_long" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -921,7 +908,7 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a short cut (no fringe).",
+        "text": "Get a fade.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
@@ -932,12 +919,12 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_short_no_fringe" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_fade" } }
         ],
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a short cut (over eye).",
+        "text": "Get a short cut with a fringe.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
@@ -948,7 +935,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_short_over_eye" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_short_fringe" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -964,7 +951,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_modern" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_short_curls" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -980,7 +967,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_detective" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_side_part" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -1033,7 +1020,7 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a beaded cut.",
+        "text": "Get it beaded.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
@@ -1049,6 +1036,22 @@
         "topic": "TALK_DONE"
       },
       {
+        "text": "Get an afro.",
+        "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
+        "effect": [
+          { "run_eocs": "reset_all_hair_types" },
+          {
+            "u_add_morale": "morale_haircut",
+            "bonus": 3,
+            "max_bonus": 5,
+            "duration": "30 minutes",
+            "decay_start": "30 minutes"
+          },
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_afro" } }
+        ],
+        "topic": "TALK_DONE"
+      },
+      {
         "text": "Get a curly cut.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
@@ -1060,12 +1063,12 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_curls" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_medium_curls" } }
         ],
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a super princess cut.",
+        "text": "Get a long feathered cut.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
@@ -1076,23 +1079,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_super_princess" } }
-        ],
-        "topic": "TALK_DONE"
-      },
-      {
-        "text": "Get a long mohawk.",
-        "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
-        "effect": [
-          { "run_eocs": "reset_all_hair_types" },
-          {
-            "u_add_morale": "morale_haircut",
-            "bonus": 3,
-            "max_bonus": 5,
-            "duration": "30 minutes",
-            "decay_start": "30 minutes"
-          },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_long_mohawk" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_long_feathered" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -1113,7 +1100,7 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a long cut (over eye).",
+        "text": "Get a medium cut with a fringe.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
@@ -1124,7 +1111,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_long_over_eye" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_medium_fringe" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -1177,7 +1164,7 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a long punk cut.",
+        "text": "Get a long cut with a side shave.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
@@ -1188,7 +1175,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_punk_long" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_side_shave" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -1209,7 +1196,7 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get an extremely long cut.",
+        "text": "Get pigtails.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
@@ -1220,7 +1207,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_extremely_long" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_pigtails" } }
         ],
         "topic": "TALK_DONE"
       },
@@ -1241,7 +1228,7 @@
         "topic": "TALK_DONE"
       },
       {
-        "text": "Get a braided cut.",
+        "text": "Get a long braid.",
         "condition": { "not": { "u_has_trait": "natural_hair_growth" } },
         "effect": [
           { "run_eocs": "reset_all_hair_types" },
@@ -1268,7 +1255,7 @@
             "duration": "30 minutes",
             "decay_start": "30 minutes"
           },
-          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_body_length" } }
+          { "run_eocs": "reset_natural_hair_color", "variables": { "trait_id": "hair_long_wavy" } }
         ],
         "topic": "TALK_DONE"
       },

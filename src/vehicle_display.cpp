@@ -115,13 +115,6 @@ vpart_display vehicle::get_display_of_tile( const point_rel_ms &dp, bool rotate,
         }
     }
 
-    // blood color override
-    if( vp.blood > 200 ) {
-        ret.color = c_red;
-    } else if( vp.blood > 0 ) {
-        ret.color = c_light_red;
-    }
-
     // if cargo has items color is inverted
     const int cargo_part = part_with_feature( dp, VPFLAG_CARGO, true );
     if( cargo_part >= 0 && !get_items( part( cargo_part ) ).empty() ) {
@@ -499,7 +492,7 @@ void vehicle::print_speed_gauge( map &here, const catacurses::window &win, const
                  static_cast<int>( std::log10( static_cast<double>( std::abs( value ) ) ) ) + 1 :
                  static_cast<int>( std::log10( static_cast<double>( std::abs( value ) ) ) ) + 2 );
     };
-    const std::string type = get_option<std::string>( "UNIT_SYSTEM" ) == "metric" ? "km/h" : "mph";
+    const std::string type = _( "km/h" );
     int t_offset = ndigits( t_speed );
     int c_offset = ndigits( c_speed );
 

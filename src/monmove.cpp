@@ -68,6 +68,7 @@ static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_immobilization( "immobilization" );
 static const efftype_id effect_in_pit( "in_pit" );
+static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_invisibility( "invisibility" );
 static const efftype_id effect_led_by_leash( "led_by_leash" );
 static const efftype_id effect_no_sight( "no_sight" );
@@ -103,7 +104,7 @@ static const ter_str_id ter_t_pit_spiked( "t_pit_spiked" );
 
 bool monster::is_immune_field( const field_type_id &fid ) const
 {
-    if( fid == fd_fungal_haze ) {
+    if( fid == fd_spores ) {
         return has_flag( mon_flag_NO_BREATHE ) || type->in_species( species_FUNGUS );
     }
     if( fid == fd_fungicidal_gas ) {
@@ -775,7 +776,7 @@ static float get_stagger_adjust( const tripoint_bub_ms &source, const tripoint_b
                                  const tripoint_bub_ms &next_step )
 {
     const float initial_dist =
-        trig_dist( source, destination );
+        trig_dist_precise( source, destination );
     const float new_dist =
         trig_dist_precise( next_step, destination );
     // If we return 0, it wil cancel the action.
@@ -934,7 +935,8 @@ void monster::move()
         !here.has_flag_ter( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) &&
         !here.has_flag( ter_furn_flag::TFLAG_LIQUID, pos_bub() )
         && has_flag( mon_flag_AQUATIC ) && !has_flag( mon_flag_NO_BREATHE ) && one_in( 20 ) ) {
-        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ), name() );
+        add_msg_if_player_sees( *this, _( "The %s flops around in a vain attempt to return to the water." ),
+                                name() );
         die( &here, nullptr );
     }
 
@@ -1192,7 +1194,9 @@ void monster::move()
                     const tripoint_bub_ms upper = candidate.z() > pos_abs().z() ? candidate : pos_bub();
                     const tripoint_bub_ms lower = candidate.z() > pos_abs().z() ? pos_bub() : candidate;
                     if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, upper ) &&
-                        here.has_flag( ter_furn_flag::TFLAG_GOES_UP, lower ) ) {
+                        here.has_flag( ter_furn_flag::TFLAG_GOES_UP, lower ) && ( can_climb() ||
+                                ( !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, upper ) &&
+                                  !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, lower ) ) ) ) {
                         can_z_move = true;
                     }
                 }
@@ -1418,47 +1422,58 @@ void monster::footsteps( const tripoint_bub_ms &p )
     if( is_hallucination() ) {
         return;
     }
-
+    // This just tracks if we've already run this function this turn.
     if( made_footstep ) {
         return;
     }
     made_footstep = true;
-    int volume = 6; // same as player's footsteps
-    if( flies() || has_flag( mon_flag_SILENTMOVES ) ) {
-        volume = 0;    // Flying monsters don't have footsteps!
+    int volume = 6; // Same as base sound for a character's footsteps.
+
+    if( has_flag( mon_flag_SILENTMOVES ) || has_effect( effect_incorporeal ) ) {
+        return;
     }
     if( digging() ) {
         volume = 10;
     }
-    switch( type->size ) {
-        case creature_size::tiny:
-            volume = 0; // No sound for the tinies
-            break;
-        case creature_size::small:
-            volume /= 3;
-            break;
-        case creature_size::medium:
-            break;
-        case creature_size::large:
-            volume *= 1.5;
-            break;
-        case creature_size::huge:
-            volume *= 2;
-            break;
-        default:
-            break;
+    bool flying = flies();
+    if( flying ) { // Flight gets really loud for big boys.
+        volume = static_cast<int>( type->size ) * 2;
+    } else {
+        switch( type->size ) {
+            case creature_size::tiny:
+                volume = 0; // No sound for the tinies
+                break;
+            case creature_size::small:
+                volume /= 3;
+                break;
+            case creature_size::medium:
+                break;
+            case creature_size::large:
+                volume *= 1.5;
+                break;
+            case creature_size::huge:
+                volume *= 2;
+                break;
+            default:
+                break;
+        }
     }
     if( has_flag( mon_flag_LOUDMOVES ) ) {
         volume += 6;
     } else if( has_flag( mon_flag_QUIETMOVES ) ) {
         volume -= 3;
     }
-    if( volume == 0 ) {
+
+    if( volume <= 0 ) {
         return;
     }
     int dist = trig_dist( p,
                           get_player_character().pos_bub() );
-    sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
+    if( flying ) {
+        sounds::add_footstep( p, volume, dist, this, type->get_flight_sound() );
+    } else {
+        sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
+    }
 }
 
 tripoint_bub_ms monster::scent_move()
@@ -1617,6 +1632,14 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
         movecost /= 2;
     } else {
         movecost = ( ( 50 * source_cost ) + ( 50 * dest_cost ) ) / 2.0;
+        // Snow depth movement penalty (outdoor, unroofed tiles only)
+        if( here.is_outside( pos_bub() ) && !here.is_roofed( pos_bub() ) ) {
+            const double snow_mm = get_weather().get_snow_depth_mm( pos_abs_omt() );
+            if( snow_mm >= 100 ) {
+                const int penalty = snow_mm >= 500 ? 100 : ( snow_mm >= 250 ? 50 : 20 );
+                movecost += penalty;
+            }
+        }
     }
 
     return movecost;
@@ -1890,11 +1913,13 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     // This is stair teleportation hackery.
     // TODO: Remove this in favor of stair alignment
     if( going_up ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos ) && ( can_climb() ||
+                !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos ) ) ) {
             destination = find_closest_stair( tripoint_bub_ms( p ), ter_furn_flag::TFLAG_GOES_DOWN );
         }
     } else if( z_move ) {
-        if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) && ( can_climb() ||
+                !here.has_flag( ter_furn_flag::TFLAG_DIFFICULT_Z, pos ) ) ) {
             destination = find_closest_stair( tripoint_bub_ms( p ), ter_furn_flag::TFLAG_GOES_UP );
         }
     }
@@ -2341,6 +2366,7 @@ void monster::stumble()
             }
         }
     }
+    invalidate_tile_eye_level_cache();
 }
 
 void monster::knock_back_to( const tripoint_bub_ms &to )
@@ -2419,81 +2445,6 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
         setpos( here, to );
     }
     check_dead_state( &here );
-}
-
-/* will_reach() is used for determining whether we'll get to stairs (and
- * potentially other locations of interest).  It is generally permissive.
- * TODO: Pathfinding;
-         Make sure that non-smashing monsters won't "teleport" through windows
-         Injure monsters if they're gonna be walking through pits or whatever
- */
-bool monster::will_reach( const point_bub_ms &p )
-{
-    const map &here = get_map();
-    const tripoint_bub_ms t = { p, posz() };
-
-    monster_attitude att = attitude( &get_player_character() );
-    if( att != MATT_FOLLOW && att != MATT_ATTACK && att != MATT_FRIEND ) {
-        return false;
-    }
-
-    if( digs() || has_flag( mon_flag_AQUATIC ) ) {
-        return false;
-    }
-
-    if( ( has_flag( mon_flag_IMMOBILE ) ||
-          has_flag( json_flag_CANNOT_MOVE ) ) &&
-        ( pos_bub().xy() != p ) ) {
-        return false;
-    }
-
-    const std::vector<tripoint_bub_ms> path = here.route( *this, pathfinding_target::point( t ) );
-    if( path.empty() ) {
-        return false;
-    }
-
-    if( has_flag( mon_flag_SMELLS ) && get_scent().get( pos_bub() ) > 0 &&
-        get_scent().get( tripoint_bub_ms( { p, posz() } ) ) > get_scent().get( pos_bub() ) ) {
-        return true;
-    }
-
-    if( can_hear() && wandf > 0 && rl_dist( here.get_bub( wander_pos ).xy(), p ) <= 2 &&
-        rl_dist( pos_abs().xy(), wander_pos.xy() ) <= wandf ) {
-        return true;
-    }
-
-    if( can_see() && sees( here, tripoint_bub_ms( p, posz() ) ) ) {
-        return true;
-    }
-
-    return false;
-}
-
-int monster::turns_to_reach( const point_bub_ms &p )
-{
-    map &here = get_map();
-    const tripoint_bub_ms t = { p, posz() };
-    // HACK: This function is a(n old) temporary hack that should soon be removed
-    const std::vector<tripoint_bub_ms> path = here.route( *this, pathfinding_target::point( t ) );
-    if( path.empty() ) {
-        return 999;
-    }
-
-    double turns = 0.;
-    for( size_t i = 0; i < path.size(); i++ ) {
-        const tripoint_bub_ms &next = path[i];
-        if( here.impassable( next ) ) {
-            // No bashing through, it looks stupid when you go back and find
-            // the doors intact.
-            return 999;
-        } else if( i == 0 ) {
-            turns += static_cast<double>( calc_movecost( pos_bub(), next ) ) / get_speed();
-        } else {
-            turns += static_cast<double>( calc_movecost( path[i - 1], next ) ) / get_speed();
-        }
-    }
-
-    return static_cast<int>( turns + .9 ); // Halve (to get turns) and round up
 }
 
 void monster::shove_vehicle( const tripoint_bub_ms &remote_destination,

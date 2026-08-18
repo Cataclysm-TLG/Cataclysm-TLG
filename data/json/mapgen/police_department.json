@@ -330,12 +330,7 @@
       "terrain": { "1": "t_ramp_up_high", "2": "t_ramp_up_low", " ": "t_soil" },
       "furniture": {
         "4": [ [ "f_barricade_road", 5 ], [ "f_null", 2 ] ],
-        "5": [
-          [ "f_generator_broken", 25 ],
-          [ "f_diesel_generator", 5 ],
-          [ "f_military_generator", 5 ],
-          [ "f_12000_gasoline_generator", 5 ]
-        ],
+        "5": [ [ "f_generator_broken", 30 ], [ "f_diesel_generator", 5 ], [ "f_gasoline_generator", 5 ] ],
         "3": "f_utility_shelf"
       },
       "items": { "3": [ { "item": "mechanics", "chance": 80 } ] },

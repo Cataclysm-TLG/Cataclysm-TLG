@@ -15,7 +15,7 @@
     "using": [ [ "soldering_standard", 10 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_robotic_programming" } ],
-    "tools": [ [ [ "laptop", 15 ] ], [ [ "software_robotics", -1 ] ] ],
+    "tools": [ [ [ "software_robotics", -1 ] ], [ [ "laptop", 15 ] ] ],
     "components": [
       [ [ "ai_module_basic", 1 ] ],
       [ [ "RAM", 1 ] ],

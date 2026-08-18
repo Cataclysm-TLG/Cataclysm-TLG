@@ -98,68 +98,10 @@
   },
   {
     "type": "construction",
-    "id": "constr_radio_controls",
-    "skill": "fabrication",
-    "group": "build_a_radio_tower_console",
-    "//": "faction camp workshop recipe",
-    "category": "CONSTRUCT",
-    "difficulty": 3,
-    "time": "24h",
-    "on_display": false,
-    "qualities": [ { "id": "SAW_M", "level": 1 }, { "id": "WRENCH", "level": 1 }, { "id": "SCREW", "level": 1 } ],
-    "components": [
-      [ [ "processor", 2 ] ],
-      [ [ "RAM", 2 ] ],
-      [ [ "large_lcd_screen", 1 ] ],
-      [ [ "e_scrap", 8 ] ],
-      [ [ "frame", 1 ] ],
-      [ [ "circuit", 4 ] ],
-      [ [ "power_supply", 2 ] ],
-      [ [ "amplifier", 2 ] ],
-      [ [ "cable", 80 ] ],
-      [ [ "motor_small", 1 ], [ "motor_tiny", 2 ] ]
-    ],
-    "pre_flags": [ "FLAT" ],
-    "post_terrain": "t_radio_controls"
-  },
-  {
-    "type": "construction",
-    "id": "constr_radio_tower",
-    "skill": "fabrication",
-    "group": "build_a_radio_tower",
-    "//": "faction camp workshop recipe",
-    "category": "CONSTRUCT",
-    "difficulty": 3,
-    "time": "24h",
-    "on_display": false,
-    "qualities": [
-      { "id": "HAMMER", "level": 2 },
-      { "id": "SAW_M", "level": 1 },
-      { "id": "WRENCH", "level": 1 },
-      { "id": "SCREW", "level": 1 }
-    ],
-    "components": [
-      [
-        [ "wind_turbine", 4 ],
-        [ "xl_wind_turbine", 1 ],
-        [ "solar_panel", 4 ],
-        [ "reinforced_solar_panel", 4 ],
-        [ "solar_panel_v2", 2 ],
-        [ "reinforced_solar_panel_v2", 2 ]
-      ],
-      [ [ "storage_battery", 1 ], [ "medium_storage_battery", 5 ], [ "small_storage_battery", 50 ] ],
-      [ [ "sheet_metal", 2 ], [ "wire", 8 ] ],
-      [ [ "pipe", 24 ] ]
-    ],
-    "pre_flags": [ "FLAT" ],
-    "post_terrain": "t_radio_tower"
-  },
-  {
-    "type": "construction",
     "id": "constr_rootcellar",
     "group": "build_root_cellar",
     "category": "CONSTRUCT",
-    "required_skills": [ [ "survival", 4 ], [ "fabrication", 4 ] ],
+    "required_skills": [ [ "survival", 4 ], [ "cooking", 4 ] ],
     "time": "130 m",
     "qualities": [ [ { "id": "DIG", "level": 2 } ], [ { "id": "HAMMER", "level": 2 } ] ],
     "components": [
@@ -181,7 +123,6 @@
     "time": "50m",
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "components": [ [ [ "pointy_stick", 4 ] ], [ [ "string_36", 1 ], [ "string_6", 4 ] ], [ [ "tarp", 1 ], [ "plastic_sheet", 1 ] ] ],
-    "pre_note": "Can be deconstructed without tools.",
     "pre_flags": [ "DIGGABLE", "FLAT" ],
     "post_terrain": "t_tarptent"
   },

@@ -774,7 +774,7 @@
         "S": "t_railroad_track",
         "C": "t_carpet_red",
         ",": "t_rock_floor_no_roof",
-        "W": "t_bridge"
+        "W": "t_bridge_underground"
       },
       "furniture": { "w": "f_table", "F": "f_rack", "7": "f_machinery_light", "8": "f_machinery_heavy", "&": "f_machinery_electronic" },
       "place_vehicles": [

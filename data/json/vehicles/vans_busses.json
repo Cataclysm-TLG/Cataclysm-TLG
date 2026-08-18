@@ -18,7 +18,7 @@
       { "x": 0, "y": -1, "parts": [ "hdframe#vertical_left", "hddoor#left", "door_lock", "plating_steel" ] },
       { "x": 0, "y": 1, "parts": [ "hdframe#cross", "seat", "seatbelt", "hdroof" ] },
       { "x": 0, "y": 1, "parts": [ "diesel_engine_v8", "alternator_truck", "battery_car" ] },
-      { "x": 0, "y": 2, "parts": [ "hdframe#cross", "hdroof" ] },
+      { "x": 0, "y": 2, "parts": [ "hdframe#cross" ] },
       { "x": 0, "y": 2, "parts": [ { "part": "tank", "fuel": "jp8" }, "seat", "seatbelt" ] },
       { "x": 0, "y": 2, "parts": [ "turret_mount" ] },
       {

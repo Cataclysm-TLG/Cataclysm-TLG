@@ -43,6 +43,10 @@
 
 static const activity_id ACT_FIRSTAID( "ACT_FIRSTAID" );
 
+static const addiction_id addiction_alcohol( "alcohol" );
+static const addiction_id addiction_caffeine( "caffeine" );
+static const addiction_id addiction_sleeping_pill( "sleeping pill" );
+
 static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
 
 static const efftype_id effect_adrenaline( "adrenaline" );
@@ -107,6 +111,7 @@ static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 static const json_character_flag json_flag_BLEEDSLOW( "BLEEDSLOW" );
 static const json_character_flag json_flag_BLEEDSLOW2( "BLEEDSLOW2" );
 static const json_character_flag json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
+static const json_character_flag json_flag_LIGHT_SENSITIVE( "LIGHT_SENSITIVE" );
 static const json_character_flag json_flag_PAIN_IMMUNE( "PAIN_IMMUNE" );
 static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 
@@ -127,7 +132,9 @@ static const trait_id trait_HEAVYSLEEPER( "HEAVYSLEEPER" );
 static const trait_id trait_HEAVYSLEEPER2( "HEAVYSLEEPER2" );
 static const trait_id trait_HIBERNATE( "HIBERNATE" );
 static const trait_id trait_INFRESIST( "INFRESIST" );
+static const trait_id trait_LIGHTSLEEPER( "LIGHTSLEEPER" );
 static const trait_id trait_M_IMMUNE( "M_IMMUNE" );
+static const trait_id trait_POISRESIST( "POISRESIST" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
 
 static const vitamin_id vitamin_blood( "blood" );
@@ -1081,29 +1088,33 @@ static void eff_fun_sleep( Character &u, effect &it )
     } else if( intense < 24 ) {
         it.mod_intensity( 1 );
     }
-
-    if( u.has_effect( effect_narcosis ) && u.get_fatigue() <= 25 ) {
-        u.set_fatigue( 25 ); //Prevent us from waking up naturally while under anesthesia
-    }
-
-    if( u.get_fatigue() < -25 && it.get_duration() > 3_minutes && !u.has_effect( effect_narcosis ) ) {
-        it.set_duration( 1_turns * dice( 3, 10 ) );
-    }
-
-    if( u.get_fatigue() <= 0 && u.get_fatigue() > -20 && !u.has_effect( effect_narcosis ) ) {
-        u.mod_fatigue( -25 );
-        if( u.get_sleep_deprivation() < SLEEP_DEPRIVATION_HARMLESS ) {
-            u.add_msg_if_player( m_good, _( "You feel well rested." ) );
-        } else {
-            u.add_msg_if_player( m_warning,
-                                 _( "You feel physically rested, but you haven't been able to catch up on your missed sleep yet." ) );
+    int current_fatigue = u.get_fatigue();
+    const bool anesthetized = u.has_effect( effect_narcosis );
+    if( anesthetized ) {
+        if( current_fatigue <= 25 ) {
+            u.set_fatigue( 25 ); // Prevent us from waking up while under anesthesia.
+            current_fatigue = 25;
         }
-        it.set_duration( 1_turns * dice( 3, 100 ) );
     }
-
+    // If our sleep duration is almost up and we don't need any more rest, set a wakeup timer.
+    if( !anesthetized && current_fatigue <= 15 && it.get_duration() > 30_minutes ) {
+        int timer;
+        if( u.has_trait( trait_LIGHTSLEEPER ) ) {
+            timer = rng( 30, 180 );
+            // Some people have a hard time getting up in the morning.
+        } else if( u.get_lifestyle() < 10 || u.get_sleep_deprivation() > SLEEP_DEPRIVATION_HARMLESS ||
+                   u.has_addiction( addiction_sleeping_pill ) || u.has_addiction( addiction_caffeine ) ||
+                   u.has_addiction( addiction_alcohol ) || u.has_trait( trait_HEAVYSLEEPER ) ||
+                   u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
+            timer = rng( 300, 1680 );
+        } else {
+            timer = rng( 60, 600 );
+        }
+        it.set_duration( 1_turns * timer );
+    }
     // Check mutation category strengths to see if we're mutated enough to get a dream
     // If we've crossed a threshold, always show dreams for that category
-    // Otherwise, check for the category that we have the most vitamins in our blood for
+    // Otherwise, check for the category that we have the most mutagen in our blood for.
     mutation_category_id cat = u.get_threshold_category();
     weighted_int_list<mutation_category_id> cat_list = u.get_vitamin_weighted_categories();
     if( cat.is_null() && cat_list.get_weight() > 0 ) {
@@ -1111,89 +1122,95 @@ static void eff_fun_sleep( Character &u, effect &it )
     }
     int cat_strength = u.mutation_category_level[cat];
 
-    // Determine the strength of effects or dreams based upon category strength
-    int strength = 0; // Category too weak for any effect or dream
-    if( u.crossed_threshold() ) {
-        strength = 4; // Post-human.
-    } else if( cat_strength >= 15 && cat_strength < 22 ) {
-        strength = 1; // Low strength
-    } else if( cat_strength >= 22 && cat_strength < 30 ) {
-        strength = 2; // Medium strength
-    } else if( cat_strength >= 30 ) {
-        strength = 3; // High strength
-    }
+    if( cat_strength > 14 ) {
+        // Determine the strength of effects or dreams based upon category strength
+        int strength = 0; // Category too weak for any effect or dream
+        if( u.crossed_threshold() ) {
+            strength = 4; // Post-human.
+        } else if( cat_strength >= 15 && cat_strength < 22 ) {
+            strength = 1; // Low strength
+        } else if( cat_strength >= 22 && cat_strength < 30 ) {
+            strength = 2; // Medium strength
+        } else if( cat_strength >= 30 ) {
+            strength = 3; // High strength
+        }
 
-    // Get a dream if category strength is high enough.
-    if( strength != 0 ) {
-        //Once every 6 / 3 / 2 hours, with a bit of randomness
-        if( calendar::once_every( 6_hours / strength ) && one_in( 3 ) ) {
-            // Select a dream
-            std::string dream = u.get_category_dream( cat, strength );
-            if( !dream.empty() ) {
-                u.add_msg_if_player( dream );
-            }
-            // Mycus folks upgrade in their sleep.
-            if( u.has_trait( trait_THRESH_MYCUS ) ) {
-                if( one_in( 8 ) ) {
-                    u.mutate_category( mutation_category_MYCUS, false, true );
-                    u.mod_stored_kcal( -87 );
-                    u.mod_thirst( 10 );
-                    u.mod_fatigue( 5 );
+        // Get a dream if category strength is high enough.
+        if( strength != 0 ) {
+            //Once every 6 / 3 / 2 hours, with a bit of randomness.
+            if( calendar::once_every( 6_hours / strength ) && one_in( 6 ) ) {
+                // Select a dream.
+                std::string dream = u.get_category_dream( cat, strength );
+                if( !dream.empty() ) {
+                    u.add_msg_if_player( dream );
+                }
+                // Mycus folks upgrade in their sleep.
+                if( u.has_trait( trait_THRESH_MYCUS ) ) {
+                    if( one_in( 8 ) ) {
+                        u.mutate_category( mutation_category_MYCUS, false, true );
+                        u.mod_stored_kcal( -87 );
+                        u.mod_thirst( 10 );
+                        u.mod_fatigue( 5 );
+                        current_fatigue += 5;
+                    }
                 }
             }
         }
     }
 
     bool woke_up = false;
-    int tirednessVal = rng( 5, 200 ) + rng( 0, std::abs( u.get_fatigue() * 2 * 5 ) );
-    if( !u.is_blind() && !u.has_effect( effect_narcosis ) &&
-        !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
-        // People who can see while sleeping are acclimated to the light.
-        if( !u.has_flag( json_flag_SEESLEEP ) ) {
-            if( u.has_trait( trait_HEAVYSLEEPER2 ) && !u.has_trait( trait_HIBERNATE ) ) {
-                // So you can too sleep through noon.
-                if( ( tirednessVal * 1.25 ) < here.ambient_light_at( u.pos_bub() ) && ( u.get_fatigue() < 10 ||
-                        one_in( u.get_fatigue() / 2 ) ) ) {
-                    u.add_msg_if_player( _( "It's too bright to sleep." ) );
-                    // Set ourselves up for removal
+    if( !anesthetized ) {
+        // Slightly wonky once_every() time so this isn't obviously every ten minutes.
+        if( calendar::once_every( 465_seconds ) && current_fatigue < fatigue_levels::MASSIVE_FATIGUE &&
+            !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) &&
+            !u.has_active_bionic( bio_sleep_shutdown ) ) {
+            // People who can see while sleeping are acclimated to the light.
+            if( !u.has_flag( json_flag_SEESLEEP ) ) {
+                bool lightsleeper = u.has_trait( trait_LIGHTSLEEPER ) || u.has_flag( json_flag_LIGHT_SENSITIVE );
+                int light = here.ambient_light_at( u.pos_bub() );
+                // >= 3.5 is dimly lit. >= 15 is "bright". 300 is a flashlight. 500 is a heavy-duty flashlight.
+                if( light > 14 || ( lightsleeper && light > 3 ) ) {
+                    int divisor = 4;
+                    if( u.has_trait( trait_HEAVYSLEEPER2 ) || u.has_trait( trait_HIBERNATE ) ) {
+                        divisor = 2;
+                    } else if( u.has_trait( trait_HEAVYSLEEPER ) ) {
+                        divisor = 3;
+                    }
+                    // This establishes a light level threshold according to our current fatigue and traits.
+                    // Below that threshold, we sleep. Above it, we have a small chance to wake every time
+                    // the check is run. Brightness is only a threshold, it doesn't influence wake_chance.
+                    int wake_chance = current_fatigue * 2 / divisor;
+                    int penalty = 0;
+                    if( lightsleeper ) {
+                        penalty = 10;
+                    }
+                    if( wake_chance <= light && one_in( std::max( 3, ( 6 - divisor ) + wake_chance ) - penalty ) ) {
+                        u.add_msg_if_player( _( "It's too bright to sleep." ) );
+                        it.set_duration( 0_turns );
+                        woke_up = true;
+                    }
+                }
+            } else if( u.has_flag( json_flag_SEESLEEP ) ) {
+                Creature *hostile_critter = g->is_hostile_very_close();
+                if( hostile_critter != nullptr ) {
+                    u.add_msg_if_player( _( "You see %s approaching!" ),
+                                         hostile_critter->disp_name() );
                     it.set_duration( 0_turns );
                     woke_up = true;
                 }
-                // Ursine hibernators would likely do so indoors.  Plants, though, might be in the sun.
-            } else if( u.has_trait( trait_HIBERNATE ) ) {
-                if( ( tirednessVal * 5 ) < here.ambient_light_at( u.pos_bub() ) && ( u.get_fatigue() < 10 ||
-                        one_in( u.get_fatigue() / 2 ) ) ) {
-                    u.add_msg_if_player( _( "It's too bright to sleep." ) );
-                    // Set ourselves up for removal
-                    it.set_duration( 0_turns );
-                    woke_up = true;
-                }
-            } else if( tirednessVal < here.ambient_light_at( u.pos_bub() ) && ( u.get_fatigue() < 10 ||
-                       one_in( u.get_fatigue() / 2 ) ) ) {
-                u.add_msg_if_player( _( "It's too bright to sleep." ) );
-                // Set ourselves up for removal
-                it.set_duration( 0_turns );
-                woke_up = true;
-            }
-        } else if( u.has_flag( json_flag_SEESLEEP ) ) {
-            Creature *hostile_critter = g->is_hostile_very_close();
-            if( hostile_critter != nullptr ) {
-                u.add_msg_if_player( _( "You see %s approaching!" ),
-                                     hostile_critter->disp_name() );
-                it.set_duration( 0_turns );
-                woke_up = true;
             }
         }
     }
 
     // Have we already woken up?
-    if( !woke_up && !u.has_effect( effect_narcosis ) ) {
+    if( !woke_up && !anesthetized && calendar::once_every( 20_seconds ) &&
+        !u.has_active_bionic( bio_sleep_shutdown ) ) {
         // Cold or heat may wake you up.
-        // Player will sleep through cold or heat if fatigued enough
+        // Player will sleep through cold or heat if fatigued enough.
         for( const bodypart_id &bp : u.get_all_body_parts() ) {
             const units::temperature curr_temp = u.get_part_temp_cur( bp );
             const units::temperature_delta fatigue_modifier = units::from_celsius_delta(
-                        u.get_fatigue() / 1000.0 );
+                        current_fatigue / 1000.0 );
             if( curr_temp < BODYTEMP_VERY_COLD - fatigue_modifier ) {
                 if( one_in( 30000 ) ) {
                     u.add_msg_if_player( _( "You toss and turn trying to keep warm." ) );
@@ -1220,11 +1237,18 @@ static void eff_fun_sleep( Character &u, effect &it )
                 }
             }
         }
+        if( !woke_up ) {
+            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE &&
+                u.get_effect_int( effect_hypovolemia ) < 3 ) {
+                u.add_msg_if_player( m_bad, _( "You can't sleep, you are in desperate need of water!" ) );
+                it.set_duration( 0_turns );
+                woke_up = true;
+            }
+        }
     }
 
-    // A bit of a hack: check if we are about to wake up for any reason, including regular
-    // timing out of sleep
-    if( it.get_duration() == 1_turns || woke_up ) {
+    // Check if we are about to wake up for any reason, including regular timing out of sleep.
+    if( it.get_duration() <= 1_turns || woke_up ) {
         u.wake_up();
     }
 }
@@ -1692,70 +1716,76 @@ void Character::hardcoded_effects( effect &it )
         switch( intense ) {
             case 3:
                 // Tonic-clonic seizure (full body convulsive seizure)
-                if( one_turn_in( 3_days ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
-                    add_msg_if_player( m_bad, _( "You lose control of your body as it begins to convulse!" ) );
-                    time_duration td = rng( 30_seconds, 4_minutes );
-                    schedule_effect( effect_motor_seizure, td );
-                    if( !is_on_ground() ) {
-                        schedule_effect( effect_downed, td );
-                    }
-                    schedule_effect( effect_stunned, td );
-                    if( one_in( 3 ) ) {
-                        add_msg_if_player( m_bad, _( "You lose consciousness!" ) );
-                        fall_asleep( td );
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 3_days ) && !has_effect( effect_valium ) && !has_effect( effect_took_xanax ) ) {
+                        add_msg_if_player( m_bad, _( "You lose control of your body as it begins to convulse!" ) );
+                        time_duration td = rng( 30_seconds, 4_minutes );
+                        schedule_effect( effect_motor_seizure, td );
+                        if( !is_on_ground() ) {
+                            schedule_effect( effect_downed, td );
+                        }
+                        schedule_effect( effect_stunned, td );
+                        if( one_in( 3 ) ) {
+                            add_msg_if_player( m_bad, _( "You lose consciousness!" ) );
+                            fall_asleep( td );
+                        }
                     }
                 }
                 mod *= 2;
             /* fallthrough */
             case 2:
                 // Myoclonic seizure (muscle spasm)
-                if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) &&
-                    !has_effect( effect_took_xanax ) ) {
-                    std::string limb = random_entry<std::vector<std::string>>( {
-                        translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
-                    } );
-                    add_msg_if_player( m_bad, string_format(
-                                           _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
-                    if( limb == "arm" ) {
-                        mod_dex_bonus( -8 );
-                        release_grapple();
-                        recoil = MAX_RECOIL;
-                    } else if( limb == "hand" ) {
-                        release_grapple();
-                        if( is_armed() && can_drop( *get_wielded_item() ).success() ) {
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 2_hours / mod ) && !has_effect( effect_valium ) &&
+                        !has_effect( effect_took_xanax ) ) {
+                        std::string limb = random_entry<std::vector<std::string>>( {
+                            translate_marker( "arm" ), translate_marker( "hand" ), translate_marker( "leg" )
+                        } );
+                        add_msg_if_player( m_bad, string_format(
+                                               _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
+                        if( limb == "arm" ) {
+                            mod_dex_bonus( -8 );
+                            release_grapple();
+                            recoil = MAX_RECOIL;
+                        } else if( limb == "hand" ) {
+                            release_grapple();
+                            if( is_armed() && can_drop( *get_wielded_item() ).success() ) {
+                                if( dice( 4, 4 ) > get_dex() ) {
+                                    cancel_activity();  //Prevent segfaults from activities trying to access missing item
+                                    put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
+                                } else {
+                                    add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
+                                                       get_wielded_item()->tname() );
+                                }
+                            }
+                        } else if( limb == "leg" && !is_on_ground() ) {
                             if( dice( 4, 4 ) > get_dex() ) {
-                                cancel_activity();  //Prevent segfaults from activities trying to access missing item
-                                put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
+                                schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
                             } else {
-                                add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
-                                                   get_wielded_item()->tname() );
+                                add_msg_if_player( m_neutral, _( "However, you manage to keep your footing." ) );
                             }
                         }
-                    } else if( limb == "leg" && !is_on_ground() ) {
-                        if( dice( 4, 4 ) > get_dex() ) {
-                            schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
-                        } else {
-                            add_msg_if_player( m_neutral, _( "However, you manage to keep your footing." ) );
-                        }
                     }
-                }
-                // Atonic seizure (a.k.a. drop seizure)
-                if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) &&
-                    !has_effect( effect_took_xanax ) ) {
-                    add_msg_if_player( m_bad,
-                                       _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
-                    schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
-                    if( !is_on_ground() ) {
-                        schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
+                    // Atonic seizure (a.k.a. drop seizure)
+                    if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) &&
+                        !has_effect( effect_took_xanax ) ) {
+                        add_msg_if_player( m_bad,
+                                           _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
+                        schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
+                        if( !is_on_ground() ) {
+                            schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
+                        }
                     }
                 }
                 mod *= 2;
             /* fallthrough */
             case 1:
                 // Migraine
-                if( one_turn_in( 2_days / mod ) ) {
-                    add_msg_if_player( m_bad, _( "You have a splitting headache." ) );
-                    mod_pain( 12 );
+                if( !has_trait( trait_POISRESIST ) || !one_in( 4 ) ) {
+                    if( one_turn_in( 2_days / mod ) ) {
+                        add_msg_if_player( m_bad, _( "You have a splitting headache." ) );
+                        mod_pain( 12 );
+                    }
                 }
                 break;
         }

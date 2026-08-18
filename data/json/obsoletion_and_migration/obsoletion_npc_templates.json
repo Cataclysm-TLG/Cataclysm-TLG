@@ -135,5 +135,13 @@
     "mission": 3,
     "chat": "TALK_DONE",
     "faction": "no_faction"
+  },
+  {
+    "type": "npc",
+    "id": "NPC_scrap_trader",
+    "class": "SCRAP_MERCHANT",
+    "attitude": 0,
+    "mission": 3,
+    "chat": "TALK_DONE"
   }
 ]

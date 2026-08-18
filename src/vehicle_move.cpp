@@ -1143,18 +1143,6 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
             // We know critter is set for this type.  Assert to inform static
             // analysis.
             cata_assert( critter );
-
-            // No blood from hallucinations
-            if( !critter->is_hallucination() ) {
-                if( vpi.has_flag( "SHARP" ) ) {
-                    vp.blood += 100 + 5 * dam;
-                } else if( dam > rng( 10, 30 ) ) {
-                    vp.blood += 50 + dam * 5 / 2;
-                }
-
-                check_environmental_effects = true;
-            }
-
             time_stunned = time_duration::from_turns( ( rng( 0, dam ) > 10 ) + ( rng( 0, dam ) > 40 ) );
             if( time_stunned > 0_turns ) {
                 critter->add_effect( effect_stunned, time_stunned );

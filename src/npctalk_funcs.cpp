@@ -1279,7 +1279,8 @@ void talk_function::start_training_seminar( npc &p )
     std::vector<Character *> picked;
     std::function<bool( const Character * )> include_func = [&]( const Character * c ) {
         if( d.skill != skill_id() ) {
-            return c->get_knowledge_level( d.skill ) < p.get_knowledge_level( d.skill );
+            return static_cast<int>( c->get_skill_level( d.skill ) ) < static_cast<int>( p.get_skill_level(
+                        d.skill ) );
         } else if( d.style != matype_id() ) {
             return !c->martial_arts_data->has_martialart( d.style );
         } else if( d.prof != proficiency_id() ) {
@@ -1316,9 +1317,8 @@ void talk_function::start_training_gen( Character &teacher, std::vector<Characte
     const matype_id &style = d.style;
     const spell_id &sp_id = d.spell;
     const proficiency_id &proficiency = d.prof;
-    int expert_multiplier = 1;
     bool player_is_student = false;
-
+    int expert_multiplier = 1;
     for( Character *student : students ) {
         if( student->is_avatar() ) {
             player_is_student = true;
@@ -1326,7 +1326,7 @@ void talk_function::start_training_gen( Character &teacher, std::vector<Characte
         int tmp_cost = 0;
         time_duration tmp_time = 0_turns;
         if( skill != skill_id() &&
-            student->get_knowledge_level( skill ) < teacher.get_knowledge_level( skill ) ) {
+            student->get_skill_level( skill ) < teacher.get_skill_level( skill ) ) {
             tmp_cost = calc_skill_training_cost_char( teacher, *student, skill );
             tmp_time = calc_skill_training_time_char( teacher, *student, skill );
             name = skill.str();
@@ -1352,21 +1352,32 @@ void talk_function::start_training_gen( Character &teacher, std::vector<Characte
             debugmsg( "start_training with no valid skill or style set" );
             return;
         }
-        // use the slowest common denominator and combine cost
-        cost += tmp_cost;
+        // Use the slowest and most expensive common denominator.
+        cost = std::max( cost, tmp_cost );
         time = std::max( time, tmp_time );
     }
-
-    if( !teacher.is_avatar() ) {
-        npc &p = static_cast<npc &>( teacher );
-        mission *miss = p.chatbin.mission_selected;
-        const character_id &pid = get_player_character().getID();
-        if( player_is_student && miss != nullptr &&
-            miss->get_assigned_player_id() == pid && miss->is_complete( pid ) ) {
-            clear_mission( p );
-        } else if( !npc_trading::pay_npc( p, cost ) ) {
+    // 10% slower and more expensive for each extra student involved.
+    time *= 1.0 + 0.1 * ( students.size() - 1 );
+    std::string student_string = students.size() > 1 ? _( "students" ) : _( "student" );
+    if( cost > 0 && !teacher.is_avatar() ) {
+        if( !query_yn( _( "This lesson for %1s %2s will cost %3s and take %4s.  Continue?" ),
+                       students.size(), student_string, static_cast<double>( cost ) / 100, to_string( time ) ) ) {
             return;
         }
+    } else {
+        if( !query_yn( _( "This lesson for %1s %2s will take %3s.  Continue?" ), students.size(),
+                       student_string, to_string( time ) ) ) {
+            return;
+        }
+    }
+    npc &p = static_cast<npc &>( teacher );
+    mission *miss = p.chatbin.mission_selected;
+    const character_id &pid = get_player_character().getID();
+    if( player_is_student && miss != nullptr &&
+        miss->get_assigned_player_id() == pid && miss->is_complete( pid ) ) {
+        clear_mission( p );
+    } else if( !npc_trading::pay_npc( p, cost ) ) {
+        return;
     }
     const int teacher_id = teacher.getID().get_value();
     player_activity tact( ACT_TRAIN_TEACHER, to_moves<int>( time ), teacher_id, 0, name );
@@ -1377,7 +1388,6 @@ void talk_function::start_training_gen( Character &teacher, std::vector<Characte
         tact.values.push_back( student->getID().get_value() );
     }
     teacher.assign_activity( tact );
-
     teacher.add_effect( effect_asked_to_train, 6_hours );
 }
 

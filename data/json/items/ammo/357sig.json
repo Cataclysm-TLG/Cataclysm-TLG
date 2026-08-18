@@ -18,7 +18,7 @@
     "stack_size": 50,
     "ammo_type": "357sig",
     "casing": "357sig_casing",
-    "range": 16,
+    "range": 17,
     "//": ".355in, 124gr, Speer HP GD 3998, 7.3gr Alliant UNIQUE",
     "damage": {
       "damage_type": "bullet",

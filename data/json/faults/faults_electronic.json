@@ -6,7 +6,7 @@
     "name": { "str": "Blown fuse" },
     "description": "Required for closing a protected electronic circuit.",
     "item_prefix": "shorted",
-    "flags": [ "ITEM_BROKEN" ]
+    "flags": [ "ITEM_BROKEN", "NO_TURRET" ]
   },
   {
     "type": "fault_fix",
@@ -25,7 +25,7 @@
     "name": { "str": "Blown capacitor" },
     "description": "Required for storing charge in an electronic circuit.",
     "item_prefix": "shorted",
-    "flags": [ "ITEM_BROKEN" ]
+    "flags": [ "ITEM_BROKEN", "NO_TURRET" ]
   },
   {
     "type": "fault_fix",
@@ -47,7 +47,7 @@
     "name": { "str": "Shorted electronic circuit" },
     "description": "An electronic circuit has been destroyed by overvoltage.",
     "item_prefix": "shorted",
-    "flags": [ "ITEM_BROKEN" ]
+    "flags": [ "ITEM_BROKEN", "NO_TURRET" ]
   },
   {
     "type": "fault_fix",
@@ -68,6 +68,6 @@
     "name": { "str": "rebooting" },
     "description": "This device is rebooting after being shorted by an EMP.",
     "item_prefix": "rebooting",
-    "flags": [ "ITEM_BROKEN" ]
+    "flags": [ "ITEM_BROKEN", "NO_TURRET" ]
   }
 ]

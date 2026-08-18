@@ -93,7 +93,7 @@
       { "monster": "mon_null", "weight": 5 },
       { "monster": "mon_ferret", "weight": 2, "cost_multiplier": 0 },
       { "monster": "mon_chicken", "weight": 1, "cost_multiplier": 0 },
-      { "monster": "mon_rabbit", "weight": 3, "cost_multiplier": 0 }
+      { "monster": "mon_rabbit_domestic", "weight": 3, "cost_multiplier": 0 }
     ]
   },
   {

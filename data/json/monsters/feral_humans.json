@@ -7,7 +7,7 @@
     "default_faction": "zombie",
     "looks_like": "chud",
     "bodytype": "human",
-    "species": [ "FERAL" ],
+    "species": [ "FERAL", "HUMAN" ],
     "volume": "75000 ml",
     "weight": "74000 g",
     "hp": 84,
@@ -20,10 +20,12 @@
     "melee_skill": 3,
     "melee_dice": 1,
     "melee_dice_sides": 6,
+    "diff": 2,
     "weakpoint_sets": [ "wps_humanoid_body" ],
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "dodge": 1,
     "harvest": "human",
+    "decay": "human_decay",
     "dissect": "dissect_human_sample_single",
     "vision_day": 45,
     "vision_night": 3,
@@ -81,7 +83,7 @@
   {
     "id": "mon_feral_sapien_spear",
     "type": "MONSTER",
-    "name": { "str": "cunning feral" },
+    "name": { "str": "manhunter" },
     "description": "This person is lost to the madness that killed the world, but their movements seem steadier than others of their kind.  They're carrying a crude spear, and have assembled some basic armor from whatever they could find.  Despite these signs of greater intelligence, this creature is still only a few steps away from being a zombie themself.",
     "copy-from": "mon_feral_human_pipe",
     "dodge": 3,
@@ -106,6 +108,7 @@
   {
     "id": "mon_feral_human_crowbar",
     "type": "MONSTER",
+    "name": { "str": "lunatic" },
     "description": "Their pupils are dilated and what can be seen of the iris and sclera are bloodshot.  This crowbar-wielding maniac still breathes, but the zombies treat them like one of their own.",
     "copy-from": "mon_feral_human_pipe",
     "special_attacks": [
@@ -128,7 +131,7 @@
         },
         "require_targeting_player": false,
         "ranges": [ [ 2, 5, "DEFAULT" ] ],
-        "description": "The feral human throws a rock!"
+        "description": "The lunatic throws a rock!"
       },
       { "id": "feral_weapon_crowbar" },
       { "id": "feral_unarmed" },
@@ -142,30 +145,10 @@
   {
     "id": "mon_feral_human_knife",
     "type": "MONSTER",
+    "name": { "str": "psycho killer" },
     "description": "The Cataclysm began as an outbreak of what then seemed like violent insanity, but there must be something more to it, as these lost souls freely walk among the undead without being attacked.  This one has got their hands on a kitchen knife, and they look eager to put it to use.",
     "copy-from": "mon_feral_human_pipe",
     "special_attacks": [
-      {
-        "type": "gun",
-        "cooldown": 5,
-        "move_cost": 150,
-        "gun_type": "feral_human_thrown_rock",
-        "ammo_type": "rock",
-        "no_ammo_sound": "",
-        "fake_skills": [ [ "throw", 3 ] ],
-        "fake_str": 8,
-        "condition": {
-          "and": [
-            { "not": { "u_has_effect": "maimed_arm" } },
-            { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } },
-            { "not": { "u_has_effect": "blind" } }
-          ]
-        },
-        "require_targeting_player": false,
-        "ranges": [ [ 2, 5, "DEFAULT" ] ],
-        "description": "The feral human throws a rock!"
-      },
       { "id": "feral_weapon_knife_chef" },
       { "id": "feral_unarmed" },
       { "id": "feral_bite" },
@@ -178,7 +161,7 @@
   {
     "id": "mon_feral_pyromaniac",
     "type": "MONSTER",
-    "name": { "str": "feral pyromaniac" },
+    "name": { "str": "pyromaniac" },
     "description": "Before the bombs fell, runaway fires were the biggest killers.  Now you behold one of their architects: a gibbering madman, reeking of fuel and painted all over with soot and ash that fail to conceal the glint of a knife.",
     "copy-from": "mon_feral_human_pipe",
     "dodge": 3,
@@ -204,7 +187,7 @@
         },
         "require_targeting_player": false,
         "ranges": [ [ 2, 5, "DEFAULT" ] ],
-        "description": "The feral pyromaniac throws a Molotov cocktail!"
+        "description": "The pyromaniac throws a Molotov cocktail!"
       },
       { "id": "feral_weapon_knife_chef" },
       { "id": "feral_unarmed" },
@@ -221,41 +204,21 @@
   {
     "id": "mon_feral_human_axe",
     "type": "MONSTER",
-    "name": { "str": "feral axe murderer", "str_pl": "feral axe murderers" },
+    "name": { "str": "axe murderer", "str_pl": "axe murderers" },
     "description": "They stumble along, clutching an axe.  Their face is twisted into a sadistic grin, and they walk among the dead as though already one of them.",
     "copy-from": "mon_feral_human_pipe",
     "special_attacks": [ { "id": "feral_weapon_axe" }, [ "BROWSE", 100 ], [ "EAT_FOOD", 100 ] ],
     "death_drops": "feral_humans_death_drops_axe",
+    "diff": 5,
     "fungalize_into": "mon_feral_human_axe_fungal_infected"
   },
   {
     "id": "mon_feral_human_tool",
     "type": "MONSTER",
-    "name": "feral mechanic",
-    "description": "This maniac was probably a mechanic before the Cataclysm.  Now, they're reduced to a mad thing, still wearing the remains of a work uniform and clutching a hammer that is now nothing more than a weapon.",
+    "name": "frenzied worker",
+    "description": "This person must have been some sort of technician before the Cataclysm.  Now, they're reduced to a mad thing, still wearing the remains of a work uniform and clutching a hammer that is now nothing more than a weapon.",
     "copy-from": "mon_feral_human_pipe",
     "special_attacks": [
-      {
-        "type": "gun",
-        "cooldown": 5,
-        "move_cost": 150,
-        "gun_type": "feral_human_thrown_rock",
-        "ammo_type": "rock",
-        "no_ammo_sound": "",
-        "fake_skills": [ [ "throw", 3 ] ],
-        "fake_str": 8,
-        "condition": {
-          "and": [
-            { "not": { "u_has_effect": "maimed_arm" } },
-            { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } },
-            { "not": { "u_has_effect": "blind" } }
-          ]
-        },
-        "require_targeting_player": false,
-        "ranges": [ [ 2, 5, "DEFAULT" ] ],
-        "description": "The feral human throws a rock!"
-      },
       { "id": "feral_weapon_hammer" },
       { "id": "feral_unarmed" },
       { "id": "feral_bite" },
@@ -356,14 +319,14 @@
   {
     "id": "mon_feral_labsecurity_9mm",
     "type": "MONSTER",
-    "name": { "str": "feral security guard" },
+    "name": { "str": "frenzied security guard" },
     "description": "This security guard still breathes, but has been lost to some terrible madness.  They move among the undead, handgun at the ready and saucer pupils scanning for threats in a mockery of their former duty.",
     "copy-from": "mon_feral_human_pipe",
     "default_faction": "science",
     "melee_skill": 6,
     "vision_day": 50,
     "vision_night": 4,
-    "diff": 5,
+    "diff": 8,
     "starting_ammo": { "9mm": 5 },
     "special_attacks": [
       {
@@ -385,7 +348,7 @@
           ]
         },
         "require_targeting_player": false,
-        "description": "The feral security guard fires their Beretta M9A1!"
+        "description": "The frenzied security guard fires a Beretta M9A1 pistol!"
       },
       { "id": "feral_weapon_feral_m9" },
       { "id": "feral_unarmed" },
@@ -402,6 +365,8 @@
     "id": "mon_feral_labsecurity_flashlight",
     "type": "MONSTER",
     "copy-from": "mon_feral_labsecurity_9mm",
+    "name": { "str": "raving security guard" },
+    "diff": 3,
     "description": "At first glance, this disheveled figure could almost pass for a survivor, but the bloodshot eyes give them away as one of the humans who have gone feral and joined the undead without dying.  Their uniform suggests that this was at some point a security guard, and they still carry a stun gun and a heavy-duty flashlight that looks like it could easily double as a club.",
     "special_attacks": [
       [ "TAZER", 10 ],
@@ -417,7 +382,7 @@
   {
     "id": "mon_feral_maid_broom",
     "type": "MONSTER",
-    "name": { "str": "feral servant" },
+    "name": { "str": "mad servant" },
     "description": "Once a fancy servant of some rich family, this maniac walks around with a broom in hand, searching for a victim to sweep off this mortal coil.",
     "copy-from": "mon_feral_human_pipe",
     "melee_skill": 2,
@@ -434,7 +399,7 @@
     "id": "mon_feral_maid_candlestick",
     "type": "MONSTER",
     "copy-from": "mon_feral_maid_broom",
-    "name": { "str": "feral servant" },
+    "name": { "str": "bloodthirsty servant" },
     "description": "Once a fancy servant of some rich family, this maniac walks around with a candlestick in hand, ready to snuff out your life.",
     "special_attacks": [
       { "id": "feral_weapon_candlestick" },
@@ -449,7 +414,7 @@
     "id": "mon_feral_maid_knife",
     "type": "MONSTER",
     "copy-from": "mon_feral_maid_broom",
-    "name": { "str": "feral servant" },
+    "name": { "str": "murderous servant" },
     "description": "Once a fancy servant of some rich family, this maniac walks around with a knife in hand, searching for some victims to butcher.",
     "melee_skill": 3,
     "special_attacks": [
@@ -465,7 +430,7 @@
     "id": "mon_feral_fancy_rapier",
     "type": "MONSTER",
     "copy-from": "mon_feral_maid_broom",
-    "name": { "str": "well dressed feral" },
+    "name": { "str": "well-dressed killer" },
     "description": "Wearing fancy clothes and with a rapier in hand, this maniac was once a socialite.  They smile with madness and seem like they want to invite you to dinner.",
     "melee_skill": 4,
     "special_attacks": [
@@ -481,7 +446,7 @@
     "id": "mon_feral_fancy_rapier_fake",
     "type": "MONSTER",
     "copy-from": "mon_feral_fancy_rapier",
-    "name": { "str": "well dressed feral" },
+    "name": { "str": "well-dressed killer" },
     "description": "Wearing fancy clothes and with a rapier in hand, this maniac was once a socialite.  They smile with madness and seem like they want to invite you to dinner.",
     "special_attacks": [
       { "id": "feral_weapon_rapier_fake" },
@@ -496,7 +461,7 @@
     "id": "mon_feral_fancy_crossbow",
     "type": "MONSTER",
     "copy-from": "mon_feral_maid_broom",
-    "name": { "str": "well dressed feral" },
+    "name": { "str": "well-dressed killer" },
     "description": "Wearing fancy clothes and with a crossbow in hand, this maniac was once a socialite.  Their hands caress the crossbow as if touching a loved one.",
     "starting_ammo": { "bolt_cf": 6 },
     "special_attacks": [
@@ -519,7 +484,7 @@
         },
         "require_targeting_player": false,
         "ranges": [ [ 2, 7, "DEFAULT" ] ],
-        "description": "The feral human shoots their crossbow!"
+        "description": "The well-dressed killer shoots their crossbow!"
       },
       { "id": "feral_weapon_crossbow_melee" },
       { "id": "feral_unarmed" },
@@ -533,7 +498,7 @@
     "id": "mon_feral_armored_mace",
     "type": "MONSTER",
     "copy-from": "mon_feral_maid_broom",
-    "name": { "str": "armored feral" },
+    "name": { "str": "armored madman" },
     "color": "i_magenta",
     "description": "Clad in ancient armor and with a mace in hand, this maniac walks around in search of their next prey.  You can see stains of dried blood all over their mace.",
     "melee_skill": 3,
@@ -555,7 +520,7 @@
     "type": "MONSTER",
     "copy-from": "mon_feral_armored_mace",
     "color": "i_magenta",
-    "name": { "str": "armored feral" },
+    "name": { "str": "armored madman" },
     "description": "Clad in ancient armor and with a battle axe in hand, this maniac walks around in search of their next prey.  You can see stains of dried blood all over their axe.",
     "special_attacks": [
       { "id": "feral_weapon_battleaxe" },
@@ -569,12 +534,13 @@
   {
     "id": "mon_feral_prepper",
     "type": "MONSTER",
-    "name": { "str": "feral prepper" },
+    "name": { "str": "disturbed prepper" },
     "description": "A quick glance at this person would suggest that they have prepared well enough for the apocalypse.  Unfortunately, they've been swept up in the tide of madness that killed the world.  One of their hands clasps the handle of a makeshift weapon, while the other grips a handgun.",
     "copy-from": "mon_feral_human_pipe",
     "aggression": 75,
     "dodge": 3,
     "vision_day": 50,
+    "diff": 6,
     "starting_ammo": { "9mm": 3 },
     "special_attacks": [
       {
@@ -597,7 +563,7 @@
           ]
         },
         "require_targeting_player": false,
-        "description": "The feral prepper haphazardly fires their firearm!"
+        "description": "The disturbed prepper fires a handgun!"
       },
       { "id": "feral_weapon_feral_m9" },
       { "id": "feral_unarmed" },
@@ -613,7 +579,7 @@
   {
     "id": "mon_feral_warden_prison_island",
     "type": "MONSTER",
-    "name": { "str": "feral warden" },
+    "name": { "str": "deranged warden" },
     "description": "The warden of this prison is somehow still alive, but that doesn't mean they haven't turned.  They still regard these surroundings with cold authority, even wielding a rifle to back it up, but their staring bloodshot eyes and eerie silence mark them as one of the billions whose minds shattered under the unbearable weight of the Cataclysm.",
     "copy-from": "mon_feral_militia",
     "special_attacks": [
@@ -637,7 +603,7 @@
         },
         "require_targeting_player": false,
         "target_moving_vehicles": true,
-        "description": "The feral warden fires their rifle!"
+        "description": "The deranged warden fires a rifle!"
       },
       { "id": "feral_weapon_feral_militia_gun" },
       { "id": "feral_unarmed" },
@@ -649,7 +615,7 @@
   {
     "id": "mon_feral_survivalist",
     "type": "MONSTER",
-    "name": { "str": "feral survivor" },
+    "name": { "str": "lost survivor" },
     "description": "If it weren't for the stooped posture and wild eyes, this person's gear and bladed weapon might mark them as another survivor of the Cataclysm.  Now they move among the dead like they're one of them, shaking like a rabid dog.",
     "copy-from": "mon_feral_human_pipe",
     "hp": 98,
@@ -681,8 +647,8 @@
   {
     "id": "mon_feral_militia",
     "type": "MONSTER",
-    "name": { "str_sp": "feral militia" },
-    "description": "Wearing a tactical getup with a Kevlar vest, this person seems to have been a militia member, now lost to madness.  They scan for threats with bloodshot eyes and a semi-automatic rifle, and a flashlight strapped to their helmet illuminates their surroundings.",
+    "name": { "str_sp": "militia lunatic" },
+    "description": "Judging by the patches on their mix and match tactical gear, this person seems to have belonged to one of the extremist groups that became all too common in the decade before the Cataclysm, though they are now lost to an even greater madness.  They scan for threats with bloodshot eyes and a semi-automatic rifle, and a flashlight strapped to their helmet illuminates their surroundings.",
     "copy-from": "mon_feral_human_pipe",
     "diff": 15,
     "aggression": 75,
@@ -713,7 +679,7 @@
         },
         "require_targeting_player": false,
         "target_moving_vehicles": true,
-        "description": "The feral militiaman fires their rifle!"
+        "description": "The militia lunatic fires a rifle!"
       },
       { "id": "feral_weapon_feral_militia_gun" },
       { "id": "feral_unarmed" },
@@ -735,7 +701,7 @@
   {
     "id": "mon_feral_soldier",
     "type": "MONSTER",
-    "name": { "str": "feral soldier" },
+    "name": { "str": "frenzied soldier" },
     "description": "What was once a service member has been lost to the madness that devoured the world.  Tense, dirty hands grip a combat knife as their bloodshot eyes scan for threats.",
     "copy-from": "mon_feral_human_pipe",
     "speed": 85,
@@ -757,7 +723,7 @@
   {
     "id": "mon_feral_jackboot",
     "type": "MONSTER",
-    "name": { "str": "feral biker" },
+    "name": { "str": "mad biker" },
     "description": "A rough-looking human, clad in black leather and wielding a pump-action shotgun.  It seems body-armor wasn't one of their priorities however.",
     "copy-from": "mon_feral_human_pipe",
     "aggression": 75,
@@ -786,7 +752,7 @@
         },
         "require_targeting_player": false,
         "target_moving_vehicles": true,
-        "description": "The feral biker fires their shotgun!"
+        "description": "The mad biker fires a shotgun!"
       },
       { "id": "feral_weapon_shotgun_melee" },
       { "id": "feral_unarmed" },
@@ -862,7 +828,7 @@
   {
     "id": "mon_feral_marine_bayonet",
     "type": "MONSTER",
-    "name": { "str": "feral marine" },
+    "name": { "str": "deranged marine" },
     "description": "This twitching, bloodied person is still clad in a ragged naval uniform, the insignia of the marines visible on their coat and a corresponding tattoo on their forearm.  Clutching a rifle in their quivering hands, you see them repeatedly pull the weapon's trigger, constantly muttering incoherently and yanking back on the gun's charging handle every time the rifle fails to fire.  Seemingly having lost the capability to comprehend that their weapon is empty, you'd feel relatively safe were it not for the gleaming bayonet still attached to the end of their firearm.",
     "copy-from": "mon_feral_human_pipe",
     "speed": 85,
@@ -890,13 +856,13 @@
     "id": "mon_feral_officer",
     "type": "MONSTER",
     "copy-from": "mon_feral_sailor_wrench",
-    "name": { "str": "feral officer" },
+    "name": { "str": "broken officer" },
     "description": "This person, clad in the tattered uniform of a naval officer, twitches erratically as their bloodshot eyes dart about and their breaths come in ragged pants.  The Cataclysm has clearly done something horrible to this military professional, inaudible mutterings emanating from their lips as they creep about like a skittish animal.  In their quivering hands they clutch a service pistol, the officer's fingers nervously fidgeting with the weapon.  They may not be an undead corpse, but you doubt that they're any more rational than the zombies which now infest the world.",
     "aggression": 30,
     "morale": 25,
     "color": "light_blue",
     "dodge": 3,
-    "diff": 4,
+    "diff": 6,
     "starting_ammo": { "9mm": 3 },
     "special_attacks": [
       {
@@ -919,7 +885,7 @@
         },
         "require_targeting_player": false,
         "target_moving_vehicles": true,
-        "description": "The feral officer fires their M18!"
+        "description": "The feral officer fires a SIG M18 pistol!"
       },
       { "id": "feral_weapon_m18" },
       { "id": "feral_unarmed" },
@@ -933,7 +899,7 @@
   {
     "id": "mon_feral_cop",
     "type": "MONSTER",
-    "name": { "str": "feral cop" },
+    "name": { "str": "berserk cop" },
     "description": "Another of the crazed humans among the dead.  This police officer angrily mutters to themself, wandering about with a baton in hand in search of someone to brutalize.",
     "copy-from": "mon_feral_human_pipe",
     "default_faction": "feral_police",

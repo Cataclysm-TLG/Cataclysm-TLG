@@ -162,7 +162,8 @@ struct bash_params {
     bool did_bash = false;
     // Was anything destroyed?
     bool success = false;
-    // Did we bash furniture, terrain or vehicle
+    /* Did we bash furniture, terrain or vehicle? Note: I think this might
+       actually be unused now, but we can keep it in case a need arises. */
     bool bashed_solid = false;
     /*
      * Are we bashing this location from above?

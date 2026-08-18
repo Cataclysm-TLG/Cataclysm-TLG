@@ -8,7 +8,7 @@ This extracts c++ and json text from the game and merges them into /lang/po/cata
 
 This takes the existing po files, preserving their translations where the parent text still matches the newly extracted text from step one, but discards translations which no longer match anything. It then updates all the .po files to reflect this.
 
-3) (may not be necessary anymore) run clear_fuzzy_translations.py.
+3) (not necessary anymore) run clear_fuzzy_translations.py.
 
 If we did everything correctly when we wrote this guide, fuzzy translations shouldn't be created anymore. If they are, running this after merge_po will fix them.
 

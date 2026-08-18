@@ -655,7 +655,7 @@
     "category": "container",
     "name": { "str": "glass vial" },
     "looks_like": "bottle_plastic",
-    "description": "A tiny glass ampuole commonly used to store medication in liquid form.",
+    "description": "A tiny glass ampoule commonly used to store medication in liquid form.",
     "weight": "12 g",
     "volume": "8 ml",
     "longest_side": "110 mm",

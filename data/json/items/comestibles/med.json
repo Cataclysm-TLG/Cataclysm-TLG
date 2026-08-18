@@ -296,9 +296,8 @@
     "symbol": "*",
     "color": "white",
     "fun": 1,
-    "flags": [ "NO_INGEST" ],
-    "vitamins": [ [ "caffeine", 90 ] ],
-    "use_action": [ "CHEW" ]
+    "flags": [ "NO_INGEST", "CHEW", "NO_TEMP" ],
+    "vitamins": [ [ "caffeine", 90 ] ]
   },
   {
     "id": "caffeine",
@@ -339,8 +338,7 @@
     "fun": 4,
     "addiction_potential": 40,
     "addiction_type": "nicotine",
-    "flags": [ "NO_INGEST" ],
-    "use_action": [ "CHEW" ]
+    "flags": [ "NO_INGEST", "CHEW" ]
   },
   {
     "id": "chem_hydrogen_peroxide",
@@ -956,6 +954,8 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "copy-from": "disinfectant",
+    "weight": "260 g",
+    "charges": 1,
     "description": "A makeshift antiseptic made from bleach and water.  The volatile chlorine compounds break down quickly, so it won't stay good for long.",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE", "DECAYS" ],
     "//": "Gentler but less effective than ethanol.",
@@ -1378,8 +1378,7 @@
     "addiction_type": "nicotine",
     "addiction_potential": 25,
     "vitamins": [ [ "nicotine_slow", 3 ] ],
-    "flags": [ "NO_INGEST" ],
-    "use_action": [ "CHEW" ]
+    "flags": [ "NO_INGEST", "CHEW", "NO_TEMP" ]
   },
   {
     "id": "nicotine_patch",

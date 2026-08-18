@@ -87,7 +87,7 @@
       " ": "t_soil",
       "^": "t_ladder_up",
       "*": "t_door_bar_locked",
-      "x": "t_bridge",
+      "x": "t_bridge_underground",
       "#": "t_grate",
       "b": "t_door_metal_pickable",
       "|": "t_concrete_wall",
@@ -124,9 +124,8 @@
     "id": "sewage_samples",
     "type": "item_group",
     "items": [
-      { "item": "water_sewage", "container-item": "flask_glass", "charges": 1, "prob": 50 },
       { "item": "water", "container-item": "flask_glass", "charges": 1, "prob": 50 },
-      { "item": "water_clean", "container-item": "flask_glass", "charges": 1, "prob": 30 },
+      { "item": "water_murky", "container-item": "flask_glass", "charges": 1, "prob": 30 },
       { "prob": 10, "group": "slime_scrap_flask_glass_1" }
     ]
   },

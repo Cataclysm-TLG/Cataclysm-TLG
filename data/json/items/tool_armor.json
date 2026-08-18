@@ -377,7 +377,6 @@
     "color": "dark_gray",
     "warmth": 10,
     "material_thickness": 3,
-    "environmental_protection": 1,
     "qualities": [ [ "GLARE", 1 ] ],
     "flags": [ "SUN_GLASSES", "FLASH_PROTECTION" ],
     "armor": [
@@ -388,7 +387,8 @@
         "specifically_covers": [ "head_forehead", "head_ear_r", "head_ear_l" ]
       },
       { "encumbrance": 0, "coverage": 30, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] },
-      { "encumbrance": 40, "coverage": 90, "covers": [ "eyes", "mouth" ], "rigid_layer_only": true }
+      { "encumbrance": 90, "coverage": 90, "covers": [ "eyes" ], "rigid_layer_only": true },
+      { "encumbrance": 5, "coverage": 90, "covers": [ "mouth" ], "rigid_layer_only": true }
     ]
   },
   {
@@ -413,7 +413,6 @@
     "color": "dark_gray",
     "warmth": 12,
     "material_thickness": 2,
-    "environmental_protection": 1,
     "qualities": [ [ "GLARE", 1 ] ],
     "flags": [ "SUN_SHADE", "FLASH_PROTECTION" ],
     "armor": [
@@ -424,7 +423,8 @@
         "specifically_covers": [ "head_forehead", "head_ear_r", "head_ear_l" ]
       },
       { "encumbrance": 0, "coverage": 30, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] },
-      { "encumbrance": 45, "coverage": 90, "covers": [ "eyes", "mouth" ], "rigid_layer_only": true }
+      { "encumbrance": 90, "coverage": 90, "covers": [ "eyes" ], "rigid_layer_only": true },
+      { "encumbrance": 5, "coverage": 90, "covers": [ "mouth" ], "rigid_layer_only": true }
     ]
   },
   {
@@ -1271,7 +1271,13 @@
     "description": "Covered in interlocking plates of reflective metal, this advanced suit resembles an astronaut's space suit.  Use it to turn it on.",
     "price": "1500 USD",
     "price_postapoc": "150 USD",
-    "material": [ "titanium_alloy", "lvl4ballisticglass", "soft_rubber", "nomex", "rubber" ],
+    "material": [
+      { "type": "titanium_alloy", "portion": 14 },
+      { "type": "lvl4ballisticglass", "portion": 1 },
+      { "type": "soft_rubber", "portion": 12 },
+      { "type": "nomex", "portion": 20 },
+      { "type": "rubber", "portion": 1 }
+    ],
     "weight": "9500 g",
     "volume": "4500 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 7000 } } ],
@@ -1306,8 +1312,8 @@
     "armor": [
       {
         "material": [
-          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.1 },
-          { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nomex", "covered_by_mat": 15, "thickness": 0.1 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -1318,9 +1324,9 @@
       },
       {
         "material": [
-          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "titanium_alloy", "covered_by_mat": 30, "thickness": 1.0 },
-          { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.1 }
         ],
         "encumbrance": 0,
         "coverage": 100,
@@ -1331,9 +1337,9 @@
       },
       {
         "material": [
-          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "titanium_alloy", "covered_by_mat": 80, "thickness": 1.0 },
-          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -1344,9 +1350,9 @@
       },
       {
         "material": [
-          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "titanium_alloy", "covered_by_mat": 50, "thickness": 1.0 },
-          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "encumbrance": 5,
         "coverage": 100,
@@ -1357,9 +1363,9 @@
       },
       {
         "material": [
-          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "titanium_alloy", "covered_by_mat": 60, "thickness": 2.0 },
-          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -1380,9 +1386,8 @@
       },
       {
         "material": [
-          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
-          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "rubber", "covered_by_mat": 100, "thickness": 3.0 }
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -1394,9 +1399,9 @@
       },
       {
         "material": [
-          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "titanium_alloy", "covered_by_mat": 75, "thickness": 1.0 },
-          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -2720,7 +2725,7 @@
     "volume": "250 ml",
     "warmth": 25,
     "flags": [ "VARSIZE", "SKINTIGHT", "COLLAR" ],
-    "material_thickness": 1,
+    "material_thickness": 0.6,
     "environmental_protection": 1,
     "armor": [ { "encumbrance": 4, "coverage": 20, "covers": [ "head" ], "specifically_covers": [ "head_nape", "head_throat" ] } ]
   },

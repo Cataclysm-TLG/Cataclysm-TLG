@@ -41,6 +41,7 @@ int_id<ter_t> string_id<ter_t>::id() const;
 // size of connect groups bitset; increase if needed
 const int NUM_TERCONN = 256;
 connect_group get_connect_group( const std::string &name );
+const std::vector<ter_t> &get_all_terrain_types();
 
 template <typename E> struct enum_traits;
 
@@ -282,7 +283,9 @@ enum class ter_furn_flag : int {
     TFLAG_ALLOW_ON_OPEN_AIR,
     TFLAG_SEEN_FROM_ABOVE,
     TFLAG_RAMP_DOWN,
+    TFLAG_RAMP_DOWN_HIGH,
     TFLAG_RAMP_UP,
+    TFLAG_RAMP_UP_LOW,
     TFLAG_RAMP,
     TFLAG_HIDE_PLACE,
     TFLAG_BLOCK_WIND,
@@ -362,6 +365,7 @@ enum class ter_furn_flag : int {
     TFLAG_MURKY,
     TFLAG_AMMOTYPE_RELOAD,
     TFLAG_TRANSPARENT_FLOOR,
+    TFLAG_DRAW_BELOW,
     TFLAG_ELEVATOR,
     TFLAG_ACTIVE_GENERATOR,
     TFLAG_SMALL_HIDE,

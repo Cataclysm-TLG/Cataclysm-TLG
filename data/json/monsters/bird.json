@@ -394,8 +394,8 @@
   {
     "id": "mon_crow_mutant_small",
     "type": "MONSTER",
-    "name": { "str": "oversized crow" },
-    "description": "A horrible bird grown three or four times bigger than ought to be possible and sporting a swollen gut that might look comical if it weren't for the razor sharp beak and the madness in its beady eyes.",
+    "name": { "str": "carrion bird" },
+    "description": "A crow or raven grown three or four times bigger than ought to be possible.  Its sharp beak, vicious talons, and insatiable hunger make it a threat to the living and the dead.",
     "bodytype": "bird",
     "default_faction": "corvid",
     "categories": [ "WILDLIFE" ],
@@ -437,21 +437,22 @@
       "SMALL_HIDER",
       "HIT_AND_RUN",
       "CORNERED_FIGHTER",
-      "SWARMS"
+      "SWARMS",
+      "ANIMAL"
     ]
   },
   {
     "id": "mon_crow_mutant",
     "type": "MONSTER",
-    "name": { "str": "bloated corvid" },
-    "description": "This may have once been a crow or a raven, but now it's a deformed monstrosity nearly the size of a man.  It heaves its sable bulk awkwardly along the ground, too overfed on carrion to fly.",
+    "name": { "str": "gluttonous carrion bird" },
+    "description": "This may have once been a crow or a raven, but now it's a deformed monstrosity nearly the size of a man.  It heaves its sable bulk awkwardly along the ground, too fat now to fly but still in constant search of more meat.",
     "bodytype": "bird",
     "default_faction": "corvid",
     "species": [ "MUTANT" ],
     "diff": 3,
     "volume": "55000 ml",
     "weight": "60000 g",
-    "hp": 75,
+    "hp": 70,
     "speed": 70,
     "material": [ "flesh" ],
     "symbol": "v",
@@ -461,6 +462,7 @@
     "melee_skill": 4,
     "melee_dice": 2,
     "melee_dice_sides": 8,
+    "dodge": 2,
     "melee_damage": [ { "damage_type": "cut", "amount": 14 } ],
     "vision_day": 50,
     "vision_night": 5,
@@ -477,7 +479,7 @@
       [ "EAT_CARRION", 40 ],
       [ "EAT_FOOD", 120 ]
     ],
-    "flags": [ "SEES", "HEARS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER" ]
+    "flags": [ "SEES", "HEARS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER", "ANIMAL" ]
   },
   {
     "id": "mon_pigeon",
@@ -513,30 +515,33 @@
     "description": "A waterfowl well known for its loud honking and aggressive behavior.",
     "volume": "4025 ml",
     "weight": "3900 g",
-    "hp": 22,
+    "hp": 18,
     "looks_like": "mon_goose",
     "aggression": 0,
     "morale": 12,
     "aggro_character": false,
-    "dodge": 3,
+    "dodge": 1,
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bird" ],
     "weakpoint_sets": [ "wps_bird_body" ],
-    "melee_damage": [ { "damage_type": "cut", "amount": 2 } ],
+    "melee_dice": 1,
+    "melee_dice_sides": 4,
+    "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "fear_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "FIRE", "HURT", "SOUND" ],
     "anger_triggers": [ "PLAYER_CLOSE" ],
+    "placate_triggers": [ "PLAYER_WEAK" ],
     "reproduction": { "baby_egg": "egg_goose", "baby_count": 5, "baby_timer": 10 },
     "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 4 },
-    "petfood": {
-      "food": [ "BIRDFOOD" ],
-      "feed": "The %s seems to like you!  It runs around your legs and seems friendly.",
-      "pet": "The %s runs around your leg."
-    },
     "flags": [ "SEES", "HEARS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CAN_BE_CULLED", "SMALL_HIDER" ]
   },
   {
     "id": "mon_goose_chick",
     "type": "MONSTER",
     "copy-from": "mon_duck_chick",
+    "petfood": {
+      "food": [ "CATTLEFOOD", "BIRDFOOD" ],
+      "feed": "The %s seems to like you!  It runs around your legs and seems friendly.",
+      "pet": "The %s runs around your leg."
+    },
     "upgrades": { "age_grow": 16, "into": "mon_goose" }
   },
   {

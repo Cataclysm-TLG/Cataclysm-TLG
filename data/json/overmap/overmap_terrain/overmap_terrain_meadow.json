@@ -7,7 +7,7 @@
     "sym": ",",
     "color": "brown",
     "travel_cost_type": "forest",
-    "spawns": { "group": "GROUP_FOREST", "population": [ 0, 1 ], "chance": 13 },
+    "spawns": { "group": "GROUP_FIELD", "population": [ 1, 2 ], "chance": 13 },
     "flags": [ "REQUIRES_PREDECESSOR" ]
   },
   {

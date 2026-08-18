@@ -24,8 +24,11 @@ merge_lang() {
 
     tmp=$(mktemp)
 
-    # merge against template (preserves fuzzy flags as-is)
-    msgmerge --sort-by-file "$o" lang/po/cataclysm-tlg.pot > "$tmp"
+    # COMMENTED OUT FOR A REASON: merge against template (preserves fuzzy flags as-is)
+    # msgmerge --sort-by-file "$o" lang/po/cataclysm-tlg.pot > "$tmp"
+
+    # msmerge with --no-fuzzy-matching so we don't ruin everything.
+    msgmerge --no-fuzzy-matching --sort-by-file "$o" lang/po/cataclysm-tlg.pot > "$tmp"
 
     # overwrite safely
     mv "$tmp" "$o"

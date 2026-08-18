@@ -98,9 +98,9 @@
       "byproducts": [ { "item": "pipe", "count": 6 }, { "item": "wire", "count": [ 4, 20 ] } ]
     },
     "bash": {
-      "str_min": 7,
+      "str_min": 8,
       "str_max": 30,
-      "str_min_blocked": 7,
+      "str_min_blocked": 8,
       "str_max_blocked": 30,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -134,9 +134,9 @@
       "byproducts": [ { "item": "pipe", "count": 6 }, { "item": "wire", "count": [ 4, 20 ] } ]
     },
     "bash": {
-      "str_min": 7,
+      "str_min": 8,
       "str_max": 30,
-      "str_min_blocked": 7,
+      "str_min_blocked": 8,
       "str_max_blocked": 30,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -173,7 +173,7 @@
       "byproducts": [ { "item": "pipe", "count": 6 }, { "item": "wire", "count": [ 4, 20 ] } ]
     },
     "bash": {
-      "str_min": 7,
+      "str_min": 8,
       "str_max": 30,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -639,7 +639,7 @@
       "byproducts": [ { "item": "pipe", "count": 6 }, { "item": "wire", "count": [ 4, 16 ] } ]
     },
     "bash": {
-      "str_min": 7,
+      "str_min": 8,
       "str_max": 30,
       "sound": "metal screeching!",
       "sound_fail": "clang!",

@@ -4,7 +4,7 @@
     "id": "constr_deconstruct",
     "group": "deconstruct_furniture",
     "category": "OTHER",
-    "required_skills": [ [ "fabrication", 0 ] ],
+    "required_skills": [ [ "fabrication", 0 ], [ "mechanics", 0 ] ],
     "time": "20 m",
     "qualities": [ [ { "id": "PRY", "level": 1 } ], [ { "id": "SCREW", "level": 1 } ] ],
     "pre_special": "check_deconstruct",

@@ -78,18 +78,6 @@
   {
     "type": "ITEM",
     "subtypes": [ "PET_ARMOR" ],
-    "id": "leatherbone_harness_dog",
-    "copy-from": "leather_harness_dog",
-    "name": { "str": "leather dog harness with bones", "str_pl": "leather dog harnesses with bones" },
-    "description": "Decorative bones affixed to a leather dog harness for that true post-apocalyptic style, including a skull bone headpiece!  You could put this on a friendly dog.",
-    "price": "190 USD",
-    "price_postapoc": "19 USD",
-    "material": [ "leather" ],
-    "weight": "2645 g"
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "PET_ARMOR" ],
     "id": "rubber_harness_dog",
     "copy-from": "kevlar_harness",
     "color": "dark_gray",

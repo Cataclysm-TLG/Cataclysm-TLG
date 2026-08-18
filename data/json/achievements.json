@@ -1,115 +1,44 @@
 [
   {
-    "id": "achievement_kill_zombie",
-    "type": "achievement",
-    "name": "One down, billions to go\u2026",
-    "requirements": [ { "event_statistic": "num_avatar_zombie_kills", "is": ">=", "target": 1 } ]
-  },
-  {
-    "id": "achievement_kill_cyborg",
-    "type": "achievement",
-    "name": "Resistance is not futile",
-    "requirements": [ { "event_statistic": "num_avatar_cyborg_kills", "is": ">=", "target": 1, "visible": "when_achievement_completed" } ]
-  },
-  {
-    "id": "achievement_kill_nether",
-    "type": "achievement",
-    "name": "Silence your nightmares",
-    "requirements": [ { "event_statistic": "num_avatar_nether_kills", "is": ">=", "target": 1, "visible": "when_achievement_completed" } ]
-  },
-  {
-    "id": "achievement_kill_fungus",
-    "type": "achievement",
-    "name": "Fungicide",
-    "requirements": [ { "event_statistic": "num_avatar_fungus_kills", "is": ">=", "target": 1, "visible": "when_achievement_completed" } ]
-  },
-  {
-    "id": "achievement_kill_insect",
-    "type": "achievement",
-    "name": "DDT",
-    "requirements": [ { "event_statistic": "num_avatar_insect_kills", "is": ">=", "target": 1, "visible": "when_achievement_completed" } ]
-  },
-  {
-    "id": "achievement_kill_robot",
-    "type": "achievement",
-    "name": "Disassemble Number Five!",
-    "requirements": [ { "event_statistic": "num_avatar_robot_kills", "is": ">=", "target": 1, "visible": "when_achievement_completed" } ]
-  },
-  {
-    "id": "achievement_kill_in_first_minute",
-    "type": "achievement",
-    "name": "Rude awakening",
-    "time_constraint": { "since": "game_start", "is": "<=", "target": "1 minute" },
-    "requirements": [ { "event_statistic": "num_avatar_monster_kills", "is": ">=", "target": 1 } ]
-  },
-  {
-    "id": "achievement_kill_10_monsters",
-    "type": "achievement",
-    "name": { "str": "Decamate", "//~": "Pun on 'deca-' prefix for 10 and 'decimate', with it's meaning for killing" },
-    "requirements": [ { "event_statistic": "num_avatar_monster_kills", "is": ">=", "target": 10 } ]
-  },
-  {
     "id": "achievement_kill_100_monsters",
     "type": "achievement",
-    "name": {
-      "str": "Centinel",
-      "//~": "Pun on 'cent-' prefix for 100 and 'sentinel', as in its connection to guarding or protection that may involve killing"
-    },
-    "hidden_by": [ "achievement_kill_10_monsters" ],
+    "name": { "str": "They won't stay dead", "//~": "Tagline for the 1968 film Night of the Living Dead" },
     "requirements": [ { "event_statistic": "num_avatar_monster_kills", "is": ">=", "target": 100 } ]
   },
   {
     "id": "achievement_kill_1000_monsters",
     "type": "achievement",
-    "name": { "str": "Killo", "//~": "Pun on 'kilo-' prefix for 1000 and 'kill'" },
+    "name": { "str": "No more room in hell", "//~": "Partial tagline from Romer's Dawn of the Dead" },
     "hidden_by": [ "achievement_kill_100_monsters" ],
     "requirements": [ { "event_statistic": "num_avatar_monster_kills", "is": ">=", "target": 1000 } ]
   },
   {
     "id": "achievement_kill_10000_monsters",
     "type": "achievement",
-    "name": { "str": "Murdyriad", "//~": "Pun on 'myriad' derived from the Ancient Greek for 10000 and 'murder'" },
+    "name": { "str": "Darkest day of horror", "//~": "Partial tagline from Romer's Day of the Dead" },
     "hidden_by": [ "achievement_kill_1000_monsters" ],
     "requirements": [ { "event_statistic": "num_avatar_monster_kills", "is": ">=", "target": 10000 } ]
   },
   {
     "id": "achievement_kill_100000_monsters",
     "type": "achievement",
-    "name": { "str": "Hitsy", "//~": "Pun on 'hetsy' meaning 100000 in Malagasy and 'hit' as the slang for kill" },
+    "name": { "str": "0.0012%", "//~": "100k people is about 0.0012% of the global population in 2026" },
     "hidden_by": [ "achievement_kill_10000_monsters" ],
     "requirements": [ { "event_statistic": "num_avatar_monster_kills", "is": ">=", "target": 100000 } ]
-  },
-  {
-    "id": "achievement_survive_one_day",
-    "type": "achievement",
-    "name": "The first day of the rest of their unlives",
-    "description": "Survive for a day and find a safe place to sleep",
-    "time_constraint": { "since": "game_start", "is": ">=", "target": "1 day" },
-    "requirements": [ { "event_statistic": "num_avatar_wake_ups", "is": "anything" } ]
-  },
-  {
-    "id": "achievement_survive_7_days",
-    "type": "achievement",
-    "name": "Thank God it's Friday",
-    "description": "Survive for a week",
-    "hidden_by": [ "achievement_survive_one_day" ],
-    "time_constraint": { "since": "game_start", "is": ">=", "target": "7 days" },
-    "requirements": [ { "event_statistic": "num_avatar_wake_ups", "is": "anything" } ]
   },
   {
     "id": "achievement_survive_28_days",
     "type": "achievement",
     "name": "28 days later",
-    "description": "Survive for a month",
-    "hidden_by": [ "achievement_survive_7_days" ],
+    "description": "Survive for one month",
     "time_constraint": { "since": "game_start", "is": ">=", "target": "28 days" },
     "requirements": [ { "event_statistic": "num_avatar_wake_ups", "is": "anything" } ]
   },
   {
     "id": "achievement_survive_91_days",
     "type": "achievement",
-    "name": "A time to every purpose under heaven",
-    "description": "Survive for a season",
+    "name": { "str": "Men seek death, and shall not find it", "//~": "Partial quote from Revelation 9:6 in the Bible" },
+    "description": "Survive for one season",
     "hidden_by": [ "achievement_survive_28_days" ],
     "time_constraint": { "since": "game_start", "is": ">=", "target": "91 days" },
     "requirements": [ { "event_statistic": "num_avatar_wake_ups", "is": "anything" } ]
@@ -117,7 +46,7 @@
   {
     "id": "achievement_survive_365_days",
     "type": "achievement",
-    "name": "Brighter days ahead?",
+    "name": "Now what?",
     "description": "Survive for a year",
     "hidden_by": [ "achievement_survive_91_days" ],
     "time_constraint": { "since": "game_start", "is": ">=", "target": "365 days" },
@@ -126,201 +55,16 @@
   {
     "id": "achievement_marathon",
     "type": "achievement",
-    "name": "Pheidippides was a hack",
+    "name": "Marathon",
     "description": "Run a marathon… plus a little more.",
     "requirements": [ { "event_statistic": "num_moves_ran", "is": ">=", "target": 42196 } ]
   },
   {
     "id": "achievement_walk_1000_miles",
     "type": "achievement",
-    "name": "Please don't fall down at my door",
-    "description": "Walk 500 miles, then walk 500 more.",
+    "name": "500 miles and 500 more",
+    "description": "Walk 1000 miles.",
     "requirements": [ { "event_statistic": "num_moves_walked", "is": ">=", "target": 1609340 } ]
-  },
-  {
-    "id": "achievement_traverse_sharp_terrain",
-    "type": "achievement",
-    "name": "Every rose has its thorn",
-    "requirements": [ { "event_statistic": "num_moves_sharp_terrain", "is": ">=", "target": 100 } ]
-  },
-  {
-    "id": "achievement_swim_merit_badge",
-    "type": "achievement",
-    "name": "Swimming merit badge",
-    "requirements": [
-      { "event_statistic": "num_moves_swam", "is": ">=", "target": 10000 },
-      { "event_statistic": "num_moves_swam_underwater", "is": ">=", "target": 1000 }
-    ]
-  },
-  {
-    "id": "achievement_reach_max_z_level",
-    "type": "achievement",
-    "name": "Ain't no mountain high enough",
-    "requirements": [ { "event_statistic": "max_move_z", "is": ">=", "target": 9 } ]
-  },
-  {
-    "id": "achievement_reach_min_z_level",
-    "type": "achievement",
-    "name": "Ain't no valley low enough",
-    "requirements": [ { "event_statistic": "min_move_z", "is": "<=", "target": -10 } ]
-  },
-  {
-    "id": "achievement_vehicle_distance_gndv_berthabenz",
-    "type": "achievement",
-    "name": "Test Drive",
-    "//": "Approx distance covered by Bertha Benz in 1888 drive",
-    "requirements": [ { "event_statistic": "num_moves_gndv_ctrl_direct", "is": ">=", "target": 106000 } ]
-  },
-  {
-    "id": "achievement_vehicle_distance_gndv_daytona",
-    "type": "achievement",
-    "name": "Daytona",
-    "//": "Daytona 500 race distance",
-    "requirements": [ { "event_statistic": "num_moves_gndv_ctrl_direct", "is": ">=", "target": 804672 } ],
-    "hidden_by": [ "achievement_vehicle_distance_gndv_berthabenz" ]
-  },
-  {
-    "id": "achievement_vehicle_distance_gndv_arcticsounds",
-    "type": "achievement",
-    "name": "Too Far Inside a Car",
-    "//": "From the song by Modest Mouse; 1100 miles = 1770278 m",
-    "requirements": [ { "event_statistic": "num_moves_gndv_onboard", "is": ">=", "target": 1770278 } ],
-    "hidden_by": [ "achievement_vehicle_distance_gndv_daytona" ]
-  },
-  {
-    "id": "achievement_vehicle_distance_gndv_route66",
-    "type": "achievement",
-    "name": "Chicago to L.A.",
-    "//": "From the song by Bobby Troup; 1926 alignment; 2448 miles = 3939674 m",
-    "requirements": [ { "event_statistic": "num_moves_gndv_onboard", "is": ">=", "target": 3939674 } ],
-    "hidden_by": [ "achievement_vehicle_distance_gndv_arcticsounds" ]
-  },
-  {
-    "id": "achievement_vehicle_distance_boat_hocr",
-    "type": "achievement",
-    "name": "Head of the Charles",
-    "//": "Prestigious rowing race held in Boston",
-    "requirements": [ { "event_statistic": "num_moves_boat_ctrl_direct", "is": ">=", "target": 4800 } ]
-  },
-  {
-    "id": "achievement_vehicle_distance_boat_mayflower",
-    "type": "achievement",
-    "name": "Plymouth to Plymouth",
-    "//": "Approx distance sailed by the Pilgrims",
-    "requirements": [ { "event_statistic": "num_moves_boat_onboard", "is": ">=", "target": 5200000 } ],
-    "hidden_by": [ "achievement_vehicle_distance_boat_hocr" ]
-  },
-  {
-    "id": "achievement_vehicle_distance_boat_circumnavigate",
-    "type": "achievement",
-    "name": "Circumnavigator",
-    "//": "Approx distance covered by the Magellan–Elcano expedition",
-    "requirements": [ { "event_statistic": "num_moves_boat_onboard", "is": ">=", "target": 60440000 } ],
-    "hidden_by": [ "achievement_vehicle_distance_boat_mayflower" ]
-  },
-  {
-    "id": "achievement_vehicle_distance_acft_wright",
-    "type": "achievement",
-    "name": "Flying Wright",
-    "requirements": [ { "event_statistic": "num_moves_acft_ctrl_direct", "is": ">=", "target": 279 } ]
-  },
-  {
-    "id": "achievement_vehicle_distance_acft_bleriot",
-    "type": "achievement",
-    "name": "Better than Blériot",
-    "requirements": [ { "event_statistic": "num_moves_acft_ctrl_direct", "is": ">=", "target": 39650 } ],
-    "hidden_by": [ "achievement_vehicle_distance_acft_wright" ]
-  },
-  {
-    "id": "achievement_vehicle_distance_acft_lindbergh",
-    "type": "achievement",
-    "name": "Lindbergh's Loss",
-    "requirements": [ { "event_statistic": "num_moves_acft_ctrl_direct", "is": ">=", "target": 5809000 } ],
-    "hidden_by": [ "achievement_vehicle_distance_acft_bleriot" ]
-  },
-  {
-    "id": "achievement_vehicle_distance_acft_fosset",
-    "type": "achievement",
-    "name": "Further than Fosset",
-    "requirements": [ { "event_statistic": "num_moves_acft_ctrl_direct", "is": ">=", "target": 41467460 } ],
-    "hidden_by": [ "achievement_vehicle_distance_acft_lindbergh" ]
-  },
-  {
-    "id": "achievement_vehicle_distance_acft_flyergold",
-    "type": "achievement",
-    "name": "Frequent Flyer",
-    "//": "40,000 miles to qualify for Star Alliance Gold status",
-    "requirements": [ { "event_statistic": "num_moves_acft_onboard", "is": ">=", "target": 64373760 } ],
-    "hidden_by": [ "achievement_vehicle_distance_acft_fosset" ]
-  },
-  {
-    "id": "achievement_vehicle_onboard_rc",
-    "type": "achievement",
-    "name": "Driver's seat optional",
-    "requirements": [ { "event_statistic": "num_moves_veh_onboard_ctrl_remote", "is": ">=", "target": 100 } ]
-  },
-  {
-    "id": "achievement_vehicle_distance_passenger",
-    "type": "achievement",
-    "name": "Are we there yet?",
-    "requirements": [ { "event_statistic": "num_moves_veh_onboard_ctrl_none", "is": ">=", "target": 100000 } ]
-  },
-  {
-    "id": "achievement_vehicle_distance_skidding",
-    "type": "achievement",
-    "name": "I have full control of the car, I swear.",
-    "requirements": [ { "event_statistic": "num_moves_gndv_skidding", "is": ">=", "target": 100000 } ]
-  },
-  {
-    "id": "achievement_vehicle_velocity_gndv_42mph",
-    "type": "achievement",
-    "name": "Model T",
-    "requirements": [ { "event_statistic": "max_velocity_gndv", "is": ">=", "target": 4200 } ]
-  },
-  {
-    "id": "achievement_vehicle_velocity_gndv_135mph",
-    "type": "achievement",
-    "name": "Charger",
-    "//": "General Lee",
-    "requirements": [ { "event_statistic": "max_velocity_gndv", "is": ">=", "target": 13500 } ],
-    "hidden_by": [ "achievement_vehicle_velocity_gndv_42mph" ]
-  },
-  {
-    "id": "achievement_vehicle_velocity_rail_150mph",
-    "type": "achievement",
-    "name": "Acela",
-    "requirements": [ { "event_statistic": "max_velocity_rail", "is": ">=", "target": 15000 } ]
-  },
-  {
-    "id": "achievement_vehicle_velocity_boat_71mph",
-    "type": "achievement",
-    "name": "Miss America",
-    "requirements": [ { "event_statistic": "max_velocity_boat", "is": ">=", "target": 7143 } ]
-  },
-  {
-    "id": "achievement_vehicle_velocity_boat_125mph",
-    "type": "achievement",
-    "name": "Miss America X",
-    "requirements": [ { "event_statistic": "max_velocity_boat", "is": ">=", "target": 12486 } ],
-    "hidden_by": [ "achievement_vehicle_velocity_boat_71mph" ]
-  },
-  {
-    "id": "achievement_vehicle_velocity_acft_mach1",
-    "type": "achievement",
-    "name": "Going Mach",
-    "requirements": [ { "event_statistic": "max_velocity_acft", "is": ">=", "target": 76727 } ]
-  },
-  {
-    "id": "achievement_vehicle_acft_max_z_level",
-    "type": "achievement",
-    "name": "Up Like Icarus",
-    "requirements": [ { "event_statistic": "max_move_acft_ctrl_direct_z", "is": ">=", "target": 9 } ]
-  },
-  {
-    "id": "achievement_vehicle_velocity_drift_50mph",
-    "type": "achievement",
-    "name": "KANSEI DORIFTO?!",
-    "requirements": [ { "event_statistic": "max_velocity_skidding", "is": ">=", "target": 5000, "visible": "when_achievement_completed" } ]
   },
   {
     "id": "achievement_vehicle_velocity_rail_human50mph",
@@ -334,20 +78,6 @@
         "is": "<=",
         "target": 0,
         "visible": "when_achievement_completed"
-      }
-    ]
-  },
-  {
-    "id": "achievement_wield_crowbar",
-    "type": "achievement",
-    "name": "Freeman's favorite",
-    "requirements": [
-      {
-        "event_statistic": "num_avatar_wields_crowbar",
-        "is": ">=",
-        "target": 1,
-        "visible": "when_achievement_completed",
-        "description": "Wield a crowbar"
       }
     ]
   },
@@ -395,43 +125,11 @@
     ]
   },
   {
-    "id": "achievement_cut_1_tree",
-    "type": "achievement",
-    "name": "Timber",
-    "description": "If a tree falls in a forest and no one is around to hear it, does it make a sound?",
-    "requirements": [ { "event_statistic": "num_cuts_tree", "is": ">=", "target": 1 } ],
-    "hidden_by": [ "achievement_cut_1_tree" ]
-  },
-  {
-    "id": "achievement_cut_100_trees",
-    "type": "achievement",
-    "name": "Lumberjack",
-    "description": "What is a forest for a man with an axe?",
-    "requirements": [ { "event_statistic": "num_cuts_tree", "is": ">=", "target": 100 } ],
-    "hidden_by": [ "achievement_cut_1_tree" ]
-  },
-  {
-    "id": "achievement_cut_1000_trees",
-    "type": "achievement",
-    "name": "Deforestation",
-    "description": "If you cut down the trees you will find the wolf.",
-    "requirements": [ { "event_statistic": "num_cuts_tree", "is": ">=", "target": 1000 } ],
-    "hidden_by": [ "achievement_cut_100_trees" ]
-  },
-  {
     "id": "achievement_exhume_1_grave",
     "type": "achievement",
     "name": "Grave Digger",
     "description": "That's exactly what we need: more dead bodies.",
     "requirements": [ { "event_statistic": "num_exhumed_graves", "is": ">=", "target": 1, "visible": "when_achievement_completed" } ],
-    "hidden_by": [ "achievement_exhume_1_grave" ]
-  },
-  {
-    "id": "achievement_exhume_10_graves",
-    "type": "achievement",
-    "name": "Grave Robber",
-    "description": "Hey, what if they turned down there?  You gotta check.",
-    "requirements": [ { "event_statistic": "num_exhumed_graves", "is": ">=", "target": 10 } ],
     "hidden_by": [ "achievement_exhume_1_grave" ]
   },
   {
@@ -443,49 +141,11 @@
     "hidden_by": [ "achievement_bury_1_corpse" ]
   },
   {
-    "id": "achievement_bury_10_corpses",
-    "type": "achievement",
-    "name": "Undertaker",
-    "description": "Leave no one to rot among the living dead.",
-    "requirements": [ { "event_statistic": "num_buried_corpses", "is": ">=", "target": 10 } ],
-    "hidden_by": [ "achievement_bury_1_corpse" ]
-  },
-  {
-    "id": "achievement_bury_100_corpses",
-    "type": "achievement",
-    "name": "Funeral House",
-    "description": "You cannot bury the whole world, can you?",
-    "requirements": [ { "event_statistic": "num_buried_corpses", "is": ">=", "target": 100 } ],
-    "hidden_by": [ "achievement_bury_10_corpses" ]
-  },
-  {
     "id": "achievement_install_1_cbm",
     "type": "achievement",
     "name": "Cyberpunk",
     "description": "Spiritus quidem promptus; caro vero infirma.",
     "requirements": [ { "event_statistic": "num_installs_cbm", "is": ">=", "target": 1, "visible": "when_achievement_completed" } ]
-  },
-  {
-    "id": "achievement_install_10_cbms",
-    "type": "achievement",
-    "name": "Clockwork Man",
-    "description": "By most mechanical and dirty hand.  I shall have such revenges on you… both.  The things I will do, what they are, yet I know not.  But they will be the terrors of the earth.",
-    "requirements": [ { "event_statistic": "num_installs_cbm", "is": ">=", "target": 10 } ],
-    "hidden_by": [ "achievement_install_1_cbm" ]
-  },
-  {
-    "id": "achievement_crosses_mutation_threshold",
-    "type": "achievement",
-    "name": "Homo Evolutis",
-    "description": "The world of man has ended.  Long live the world of transhumanity.",
-    "requirements": [
-      {
-        "event_statistic": "num_crosses_mutation_threshold",
-        "is": ">=",
-        "target": 1,
-        "visible": "when_achievement_completed"
-      }
-    ]
   },
   {
     "id": "achievement_mutation_threshold_plant",
@@ -1269,7 +929,7 @@
         "event_statistic": "num_gains_survival_level_4",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 4"
+        "description": "Gain ecology skill level 4"
       }
     ]
   },
@@ -1283,7 +943,7 @@
         "event_statistic": "num_gains_survival_level_7",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 7"
+        "description": "Gain ecology skill level 7"
       }
     ],
     "hidden_by": [ "achievement_lvl_4_survival" ]
@@ -1298,7 +958,7 @@
         "event_statistic": "num_gains_survival_level_10",
         "is": ">=",
         "target": 1,
-        "description": "Gain survival skill level 10"
+        "description": "Gain ecology skill level 10"
       }
     ],
     "hidden_by": [ "achievement_lvl_7_survival" ]

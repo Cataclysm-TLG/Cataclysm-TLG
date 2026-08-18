@@ -9,6 +9,7 @@
     "regenerates": 5,
     "melee_skill": 0,
     "harvest": "zombie_pupating",
+    "decay": "zombie_decay",
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF" ] },
     "delete": { "categories": [ "CLASSIC" ] },
     "upgrades": { "half_life": 4, "into": "mon_zombie_crawler_pupa" },
@@ -21,6 +22,7 @@
     "description": "This half of a human corpse is wrapped in sticky black fibers that cover everything from the neck down.  Beneath the wrapping there is a strange rhythmic movement, grotesque to behold.",
     "copy-from": "mon_zombie_crawler_pupa_decoy",
     "harvest": "zombie_pupating",
+    "decay": "zombie_decay",
     "extend": {
       "special_attacks": [
         {
@@ -39,6 +41,7 @@
     "description": "This human corpse is wrapped in sticky black fibers that cover everything from the neck down.  Beneath the wrapping there is a strange rhythmic movement, grotesque to behold.",
     "copy-from": "mon_zombie_fat",
     "harvest": "zombie_pupating",
+    "decay": "zombie_decay",
     "bodytype": "blob",
     "delete": { "categories": [ "CLASSIC" ] },
     "bleed_rate": 50,
@@ -56,6 +59,7 @@
     "description": "This human corpse is wrapped in sticky black fibers that cover everything from the neck down.  Beneath the wrapping there is a strange rhythmic movement, grotesque to behold.",
     "copy-from": "mon_zombie_pupa_decoy",
     "harvest": "zombie_pupating",
+    "decay": "zombie_decay",
     "extend": {
       "special_attacks": [
         {
@@ -75,6 +79,7 @@
     "copy-from": "mon_zombie_brute",
     "bodytype": "blob",
     "harvest": "zombie_pupating",
+    "decay": "zombie_decay",
     "speed": 95,
     "regenerates": 5,
     "upgrades": { "half_life": 168, "into_group": "GROUP_BRUTE_PUPA" },
@@ -87,6 +92,7 @@
     "description": "This muscular human corpse is wrapped in sticky black fibers that cover everything from the neck down.  Beneath the wrapping there is a strange rhythmic movement, grotesque to behold.",
     "copy-from": "mon_brute_pupa_decoy",
     "harvest": "zombie_pupating",
+    "decay": "zombie_decay",
     "extend": {
       "special_attacks": [
         {
@@ -128,6 +134,7 @@
     "vision_day": 83,
     "vision_night": 4,
     "harvest": "zombie_pupating_hulk",
+    "decay": "zombie_decay",
     "grab_strength": 35,
     "special_attacks": [
       { "id": "grab" },
@@ -186,6 +193,7 @@
     "vision_day": 83,
     "vision_night": 4,
     "harvest": "zombie_pupating_hulk",
+    "decay": "zombie_decay",
     "special_attacks": [
       { "id": "smash", "cooldown": 32 },
       {
@@ -232,6 +240,7 @@
     "vision_night": 15,
     "melee_skill": 0,
     "harvest": "zombie_humanoid_pupating_shadow",
+    "decay": "zombie_decay",
     "upgrades": { "half_life": 4, "into": "mon_zombie_pupa_shady" },
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF", "NIGHT_INVISIBILITY" ] },
     "armor": { "electric": 2, "bash": 8, "cut": 6, "bullet": 6 }

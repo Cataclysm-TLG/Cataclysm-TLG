@@ -29,7 +29,7 @@ const field_type_str_id fd_fatigue( "fd_fatigue" );
 const field_type_str_id fd_fire( "fd_fire" );
 const field_type_str_id fd_fire_vent( "fd_fire_vent" );
 const field_type_str_id fd_flame_burst( "fd_flame_burst" );
-const field_type_str_id fd_fungal_haze( "fd_fungal_haze" );
+const field_type_str_id fd_spores( "fd_spores" );
 const field_type_str_id fd_fungicidal_gas( "fd_fungicidal_gas" );
 const field_type_str_id fd_gas_vent( "fd_gas_vent" );
 const field_type_str_id fd_gibs_flesh( "fd_gibs_flesh" );

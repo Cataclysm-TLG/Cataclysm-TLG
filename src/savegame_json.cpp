@@ -773,7 +773,6 @@ void Character::load( const JsonObject &data )
     }
 
     //energy
-    data.read( "stim", stim );
     data.read( "stamina", stamina );
 
     // stats through kills
@@ -1090,6 +1089,7 @@ void Character::load( const JsonObject &data )
     on_stat_change( "pkill", pkill );
     on_stat_change( "perceived_pain", get_perceived_pain() );
     on_stat_change( "radiation", get_rad() );
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     calc_encumbrance();
 
@@ -1424,7 +1424,6 @@ void Character::store( JsonOut &json ) const
         json.member( "fetch_data", things_to_fetch );
     }
 
-    json.member( "stim", stim );
     json.member( "type_of_scent", type_of_scent );
     json.member( "focus_pool", focus_pool );
 
@@ -3599,7 +3598,6 @@ void vehicle_part::deserialize( const JsonObject &data )
     int direction_int;
     data.read( "direction", direction_int );
     direction = units::from_degrees( direction_int );
-    data.read( "blood", blood );
     data.read( "enabled", enabled );
     data.read( "flags", flags );
     data.read( "passenger_id", passenger_id );
@@ -3655,7 +3653,6 @@ void vehicle_part::serialize( JsonOut &json ) const
     json.member( "mount_dy", mount.y() );
     json.member( "open", open );
     json.member( "direction", std::lround( to_degrees( direction ) ) );
-    json.member( "blood", blood );
     json.member( "enabled", enabled );
     json.member( "flags", flags );
     if( !carried_stack.empty() ) {
@@ -4754,25 +4751,6 @@ void basecamp::serialize( JsonOut &json ) const
             json.end_object();
         }
         json.end_array();
-        json.member( "salt_water_pipes" );
-        json.start_array();
-        for( expansion_salt_water_pipe * const &pipe : salt_water_pipes ) {
-            json.start_object();
-            json.member( "expansion", pipe->expansion );
-            json.member( "connection_direction", pipe->connection_direction );
-            json.member( "segments" );
-            json.start_array();
-            for( const expansion_salt_water_pipe_segment &segment : pipe->segments ) {
-                json.start_object();
-                json.member( "point", segment.point );
-                json.member( "started", segment.started );
-                json.member( "finished", segment.finished );
-                json.end_object();
-            }
-            json.end_array();
-            json.end_object();
-        }
-        json.end_array();
         json.end_object();
 
     } else {
@@ -4855,22 +4833,6 @@ void basecamp::deserialize( const JsonObject &data )
         tripoint_abs_omt restore_pos;
         edata.read( "pos", restore_pos );
         fortifications.push_back( restore_pos );
-    }
-
-    for( JsonObject edata : data.get_array( "salt_water_pipes" ) ) {
-        edata.allow_omitted_members();
-        expansion_salt_water_pipe *pipe = new expansion_salt_water_pipe;
-        edata.read( "expansion", pipe->expansion );
-        edata.read( "connection_direction", pipe->connection_direction );
-        for( JsonObject seg : edata.get_array( "segments" ) ) {
-            seg.allow_omitted_members();
-            expansion_salt_water_pipe_segment segment;
-            seg.read( "point", segment.point );
-            seg.read( "started", segment.started );
-            seg.read( "finished", segment.finished );
-            pipe->segments.push_back( segment );
-        }
-        salt_water_pipes.push_back( pipe );
     }
 }
 

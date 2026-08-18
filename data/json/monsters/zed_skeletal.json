@@ -27,6 +27,7 @@
     "vision_day": 30,
     "vision_night": 3,
     "harvest": "mr_bones",
+    "decay": "zombie_bone_decay",
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab", "cooldown": 21 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
     "upgrades": { "half_life": 128, "into_group": "GROUP_SKELETON_UPGRADE" },
@@ -64,6 +65,7 @@
     "vision_day": 35,
     "vision_night": 3,
     "harvest": "mr_bones",
+    "decay": "zombie_bone_decay",
     "grab_strength": 35,
     "special_attacks": [
       { "id": "grab", "cooldown": 21 },
@@ -110,6 +112,7 @@
     "vision_day": 30,
     "vision_night": 3,
     "harvest": "mr_bones",
+    "decay": "zombie_bone_decay",
     "grab_strength": 20,
     "special_attacks": [
       { "id": "grab", "cooldown": 21 },
@@ -151,6 +154,7 @@
     "vision_day": 45,
     "vision_night": 4,
     "harvest": "big_mr_bones",
+    "decay": "zombie_bone_decay",
     "grab_strength": 50,
     "special_attacks": [
       { "id": "grab" },

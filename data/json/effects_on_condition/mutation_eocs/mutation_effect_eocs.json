@@ -27,7 +27,6 @@
         { "u_has_trait": "CHITIN2" },
         { "not": { "u_has_effect": "molting" } },
         { "not": { "u_has_effect": "molting_imminent" } },
-        { "not": { "u_has_trait": "CHITIN3" } },
         { "not": { "u_has_trait": "CRUSTACEAN_CARAPACE" } }
       ]
     },
@@ -39,9 +38,9 @@
     "recurrence": [ "1 days", "2 days" ],
     "condition": {
       "and": [
+        { "u_has_trait": "CHITIN2" },
         { "u_has_effect": "molting" },
         { "not": { "u_has_effect": "molting_imminent" } },
-        { "not": { "u_has_trait": "CHITIN3" } },
         { "not": { "u_has_trait": "CRUSTACEAN_CARAPACE" } }
       ]
     },
@@ -61,9 +60,9 @@
     "recurrence": [ "1 hours", "3 hours" ],
     "condition": {
       "and": [
+        { "u_has_trait": "CHITIN2" },
         { "u_has_effect": "molting_imminent" },
         { "not": { "u_has_effect": "molting" } },
-        { "not": { "u_has_trait": "CHITIN3" } },
         { "not": { "u_has_trait": "CRUSTACEAN_CARAPACE" } }
       ]
     },
@@ -76,10 +75,8 @@
         "popup": true
       },
       { "u_lose_trait": "CHITIN2" },
-      { "u_lose_trait": "CHITIN" },
       { "u_lose_effect": "molting_imminent" },
       { "u_spawn_item": "chitin_piece", "count": 3 },
-      { "u_add_trait": "CHITIN_MOLTED" },
       { "u_add_trait": "CHITIN2_MOLTED" }
     ]
   },
@@ -91,16 +88,12 @@
       "and": [
         { "u_has_trait": "CHITIN2_MOLTED" },
         { "not": { "u_has_effect": "molting" } },
-        { "not": { "u_has_effect": "molting_imminent" } },
-        { "not": { "u_has_trait": "CHITIN3_MOLTED" } },
-        { "not": { "u_has_trait": "CRUSTACEAN_CARAPACE_MOLTED" } }
+        { "not": { "u_has_effect": "molting_imminent" } }
       ]
     },
     "effect": [
       { "u_message": "Your exoskeleton has finished hardening.", "type": "good" },
-      { "u_lose_trait": "CHITIN_MOLTED" },
       { "u_lose_trait": "CHITIN2_MOLTED" },
-      { "u_add_trait": "CHITIN" },
       { "u_add_trait": "CHITIN2" }
     ]
   },
@@ -110,8 +103,7 @@
     "recurrence": [ "24 days", "42 days" ],
     "condition": {
       "and": [
-        { "u_has_trait": "CHITIN2" },
-        { "or": [ { "u_has_trait": "CHITIN3" }, { "u_has_trait": "CRUSTACEAN_CARAPACE" } ] },
+        { "u_has_trait": "CRUSTACEAN_CARAPACE" },
         { "not": { "u_has_effect": "molting" } },
         { "not": { "u_has_effect": "molting_imminent" } }
       ]
@@ -125,8 +117,7 @@
     "condition": {
       "and": [
         { "u_has_effect": "molting" },
-        { "u_has_trait": "CHITIN2" },
-        { "or": [ { "u_has_trait": "CHITIN3" }, { "u_has_trait": "CRUSTACEAN_CARAPACE" } ] },
+        { "u_has_trait": "CRUSTACEAN_CARAPACE" },
         { "not": { "u_has_effect": "molting_imminent" } }
       ]
     },
@@ -146,8 +137,7 @@
     "recurrence": [ "1 hours", "3 hours" ],
     "condition": {
       "and": [
-        { "u_has_trait": "CHITIN2" },
-        { "u_has_trait": "CHITIN3" },
+        { "u_has_trait": "CRUSTACEAN_CARAPACE" },
         { "u_has_effect": "molting_imminent" },
         { "not": { "u_has_effect": "molting" } }
       ]
@@ -160,14 +150,10 @@
         "type": "bad",
         "popup": true
       },
-      { "u_lose_trait": "CHITIN3" },
-      { "u_lose_trait": "CHITIN2" },
-      { "u_lose_trait": "CHITIN" },
+      { "u_lose_trait": "CRUSTACEAN" },
       { "u_lose_effect": "molting_imminent" },
       { "u_spawn_item": "chitin_piece", "count": 4 },
-      { "u_add_trait": "CHITIN_MOLTED" },
-      { "u_add_trait": "CHITIN2_MOLTED" },
-      { "u_add_trait": "CHITIN3_MOLTED" }
+      { "u_add_trait": "CRUSTACEAN_CARAPACE_MOLTED" }
     ]
   },
   {
@@ -176,58 +162,6 @@
     "recurrence": [ "8 hours", "12 hours" ],
     "condition": {
       "and": [
-        { "u_has_trait": "CHITIN2_MOLTED" },
-        { "u_has_trait": "CHITIN3_MOLTED" },
-        { "not": { "u_has_effect": "molting" } },
-        { "not": { "u_has_effect": "molting_imminent" } }
-      ]
-    },
-    "effect": [
-      { "u_message": "Your exoskeleton has finished hardening.", "type": "good" },
-      { "u_lose_trait": "CHITIN3_MOLTED" },
-      { "u_lose_trait": "CHITIN2_MOLTED" },
-      { "u_lose_trait": "CHITIN_MOLTED" },
-      { "u_add_trait": "CHITIN" },
-      { "u_add_trait": "CHITIN2" },
-      { "u_add_trait": "CHITIN3" }
-    ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "chitin_carapace_molt_timer3",
-    "recurrence": [ "1 hours", "3 hours" ],
-    "condition": {
-      "and": [
-        { "u_has_trait": "CHITIN2" },
-        { "u_has_trait": "CRUSTACEAN_CARAPACE" },
-        { "u_has_effect": "molting_imminent" },
-        { "not": { "u_has_effect": "molting" } }
-      ]
-    },
-    "effect": [
-      { "u_add_effect": "narcosis", "duration": "15 minutes" },
-      { "u_add_effect": "sleep", "duration": "15 minutes" },
-      {
-        "u_message": "Your exoskeleton locks up around you like a straitjacket, completely immobilizing you.  As you try to move, you begin to feel it painlessly rip, opening a hole through which you can slowly emerge, raw, soft, and vulnerable.",
-        "type": "bad"
-      },
-      { "u_lose_trait": "CRUSTACEAN_CARAPACE" },
-      { "u_lose_trait": "CHITIN2" },
-      { "u_lose_trait": "CHITIN" },
-      { "u_lose_effect": "molting_imminent" },
-      { "u_spawn_item": "chitin_piece", "count": 5 },
-      { "u_add_trait": "CHITIN_MOLTED" },
-      { "u_add_trait": "CHITIN2_MOLTED" },
-      { "u_add_trait": "CRUSTACEAN_CARAPACE_MOLTED" }
-    ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "chitin_carapace_molt_timer4",
-    "recurrence": [ "8 hours", "12 hours" ],
-    "condition": {
-      "and": [
-        { "u_has_trait": "CHITIN2_MOLTED" },
         { "u_has_trait": "CRUSTACEAN_CARAPACE_MOLTED" },
         { "not": { "u_has_effect": "molting" } },
         { "not": { "u_has_effect": "molting_imminent" } }
@@ -236,10 +170,6 @@
     "effect": [
       { "u_message": "Your exoskeleton has finished hardening.", "type": "good" },
       { "u_lose_trait": "CRUSTACEAN_CARAPACE_MOLTED" },
-      { "u_lose_trait": "CHITIN2_MOLTED" },
-      { "u_lose_trait": "CHITIN_MOLTED" },
-      { "u_add_trait": "CHITIN" },
-      { "u_add_trait": "CHITIN2" },
       { "u_add_trait": "CRUSTACEAN_CARAPACE" }
     ]
   },

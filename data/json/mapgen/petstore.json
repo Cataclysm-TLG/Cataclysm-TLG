@@ -165,8 +165,8 @@
       },
       "place_monster": [
         { "group": "GROUP_PET_CATS", "x": 2, "y": 3 },
-        { "monster": "mon_rabbit", "x": 2, "y": 7 },
-        { "monster": "mon_rabbit", "x": 3, "y": 7 },
+        { "monster": "mon_rabbit_domestic", "x": 2, "y": 7 },
+        { "monster": "mon_rabbit_domestic", "x": 3, "y": 7 },
         { "monster": "mon_dog_zombie_rot", "x": 2, "y": 9 },
         { "group": "GROUP_PET_DOGS", "x": 2, "y": 13 },
         { "group": "GROUP_PET_DOGS", "x": 2, "y": 15 },

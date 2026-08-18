@@ -127,6 +127,7 @@ static const bionic_id bio_water_extractor( "bio_water_extractor" );
 
 static const efftype_id effect_assisted( "assisted" );
 static const efftype_id effect_asthma( "asthma" );
+static const efftype_id effect_bionic_painkiller( "bionic_painkiller" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_heating_bionic( "heating_bionic" );
@@ -1724,13 +1725,11 @@ static bool attempt_recharge( Character &p, bionic &bio, units::energy &amount )
 
 void Character::process_bionic( bionic &bio )
 {
-
     // Only powered bionics should be processed
     if( !bio.powered ) {
         burn_fuel( bio );
         return;
     }
-
     if( bio.get_uid() == get_weapon_bionic_uid() ) {
         const bool wrong_weapon_wielded = weapon.typeId() != bio.get_weapon().typeId() ||
                                           !weapon.has_flag( flag_NO_UNWIELD );
@@ -1810,12 +1809,12 @@ void Character::process_bionic( bionic &bio )
             }
         }
         if( damaged_hp_parts.empty() && bleeding_bp_parts.empty() ) {
-            // Nothing to heal. Return the consumed power and exit early
+            // Nothing to heal. Return the consumed power and exit early.
             mod_power_level( cost );
             return;
         }
         for( const bodypart_id &i : bleeding_bp_parts ) {
-            // effectively reduces by 1 intensity level
+            // Effectively reduces by 1 intensity level.
             if( get_stored_kcal() >= 15 ) {
                 get_effect( effect_bleed, i ).mod_duration( -get_effect( effect_bleed, i ).get_int_dur_factor() );
                 mod_stored_kcal( -15 );
@@ -1824,23 +1823,23 @@ void Character::process_bionic( bionic &bio )
                 break;
             }
         }
-        if( calendar::once_every( 60_turns ) ) {
+        if( calendar::once_every( 5_minutes ) ) {
             if( get_stored_kcal() >= 5 && !damaged_hp_parts.empty() ) {
                 const bodypart_id part_to_heal = damaged_hp_parts[ rng( 0, damaged_hp_parts.size() - 1 ) ];
                 heal( part_to_heal, 1 );
-                mod_stored_kcal( -5 );
+                mod_stored_kcal( -10 );
+                if( one_in( 5 ) ) {
+                    mod_lifestyle( -1 );
+                }
             }
         }
     } else if( bio.id == bio_painkiller ) {
-        const int pkill = get_painkiller();
-        const int pain = get_pain();
+        const int pain = get_perceived_pain();
         const units::energy trigger_cost = bio.info().power_trigger;
-        int max_pkill = std::min( 150, pain );
-        if( pkill < max_pkill ) {
-            mod_painkiller( 1 );
-            if( one_in( 10 ) ) {
-                mod_fatigue( 1 );
-            }
+        int max_applied = std::min( 150, pain );
+        int painkiller_intensity = get_effect_int( effect_bionic_painkiller );
+        if( painkiller_intensity < max_applied ) {
+            add_effect( effect_bionic_painkiller, 1_seconds, true, 150 );
             mod_power_level( -trigger_cost );
         }
     } else if( bio.id == bio_evap ) {
@@ -2960,6 +2959,7 @@ bionic_uid Character::add_bionic( const bionic_id &b, bionic_uid parent_uid,
     update_bionic_power_capacity();
 
     calc_encumbrance();
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     if( is_avatar() && has_flag( json_flag_ENHANCED_VISION ) ) {
         // enhanced vision counts as optics for overmap sight range.

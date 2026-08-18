@@ -571,22 +571,6 @@
   },
   {
     "type": "scenario",
-    "id": "faction_camp_start",
-    "name": "Brave New World",
-    "points": 8,
-    "description": "It's been a year since the apocalypse, and winter is fast approaching.  You and your company have managed to gather up enough supplies to finally settle down somewhere, away from the death and destruction.  Life has been hard for you, but in your heart you still hold a vision of a bright future lying ahead.",
-    "start_name": "Old Evac Shelter",
-    "allowed_locs": [ "sloc_shelter_a", "sloc_shelter_b", "sloc_shelter_c" ],
-    "start_of_cataclysm": { "hour": 0, "day": 41, "season": "spring", "year": 1 },
-    "fall_of_civilization": { "hour": 0, "day": 61, "season": "spring", "year": 1 },
-    "start_of_game": { "hour": 8, "day": 1, "season": "autumn", "year": 2 },
-    "add_professions": true,
-    "professions": [ "sheltered_survivor", "sheltered_militia", "winter_scavenger", "winter_army" ],
-    "eoc": [ "faction_camp_start" ],
-    "flags": [ "CITY_START", "LONE_START" ]
-  },
-  {
-    "type": "scenario",
     "id": "alone",
     "name": "Sheltered",
     "points": -3,
@@ -621,7 +605,7 @@
     "description": "When the Cataclysm happened, you were convicted or working in a prison.  Now the inmates and guards alike have turned into mindless horrors and joined forces… you might need to expedite your escape plans.",
     "allowed_locs": [ "sloc_prison" ],
     "start_name": "Prison",
-    "professions": [ "convict", "convict_assassin", "convict_ratman", "k9_cop", "cop" ],
+    "professions": [ "convict", "convict_ratman", "k9_cop", "cop" ],
     "flags": [ "CITY_START", "LONE_START" ]
   },
   {
@@ -632,7 +616,7 @@
     "description": "You were convicted or working in a high-security prison before the Cataclysm.  Unfortunately, you're still in it, so you need to figure out how to escape.  It's located on a remote island to boot; you'll eventually need to escape that also.",
     "allowed_locs": [ "sloc_prison_alcatraz", "sloc_prison_island" ],
     "start_name": "Island prison",
-    "professions": [ "convict", "convict_assassin", "convict_ratman", "k9_cop", "cop" ],
+    "professions": [ "convict", "convict_ratman", "k9_cop", "cop" ],
     "reveal_locale": false,
     "flags": [ "LONE_START", "CHALLENGE" ]
   },

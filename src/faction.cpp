@@ -1039,7 +1039,7 @@ void faction_manager::display() const
 
     avatar &player_character = get_avatar();
     while( true ) {
-        // create a list of NPCs, visible and the ones on overmapbuffer
+        // Create a list of NPCs, visible and the ones on overmapbuffer.
         followers.clear();
         for( const character_id &elem : g->get_follower_list() ) {
             shared_ptr_fast<npc> npc_to_get = overmap_buffer.find_npc( elem );
@@ -1062,7 +1062,7 @@ void faction_manager::display() const
         interactable = false;
         radio_interactable = false;
         camp = nullptr;
-        // create a list of faction camps
+        // Create a list of faction camps.
         camps.clear();
         for( tripoint_abs_omt elem : player_character.camps ) {
             std::optional<basecamp *> p = overmap_buffer.find_camp( elem.xy() );
@@ -1071,7 +1071,7 @@ void faction_manager::display() const
             }
             basecamp *temp_camp = *p;
             if( temp_camp->get_owner() != player_character.get_faction()->id ) {
-                // Don't display NPC camps as ours
+                // Don't display NPC camps as ours.
                 continue;
             }
             camps.push_back( temp_camp );

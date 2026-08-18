@@ -431,6 +431,7 @@
     "name": "forest",
     "vision_levels": "forested",
     "sym": "F",
+    "looks_like": "forest",
     "color": "green",
     "see_cost": "spaced_high"
   },
@@ -440,6 +441,7 @@
     "vision_levels": "forested",
     "name": "forest",
     "sym": "F",
+    "looks_like": "forest_thick",
     "color": "green",
     "see_cost": "spaced_high"
   },
@@ -451,6 +453,7 @@
     "sym": "F",
     "color": "green",
     "see_cost": "high",
+    "looks_like": "cabin",
     "flags": [ "RISK_LOW", "SOURCE_SAFETY" ]
   },
   {
@@ -461,6 +464,7 @@
     "sym": "F",
     "color": "green",
     "see_cost": "high",
+    "looks_like": "desolatebarn",
     "flags": [ "RISK_LOW", "SOURCE_SAFETY" ]
   },
   {
@@ -470,6 +474,7 @@
     "name": "car corner",
     "sym": "F",
     "color": "green",
+    "looks_like": "forest",
     "see_cost": "spaced_high"
   },
   {
@@ -671,7 +676,7 @@
     "sym": "+",
     "color": "light_green",
     "see_cost": "spaced_high",
-    "spawns": { "group": "GROUP_FOREST", "population": [ 0, 1 ], "chance": 13 },
+    "spawns": { "group": "GROUP_FIELD", "population": [ 1, 2 ], "chance": 12 },
     "flags": [ "RISK_LOW", "SOURCE_SAFETY", "SOURCE_FOOD" ]
   },
   {
@@ -1098,24 +1103,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [ "smallscrapyard_ocu" ],
-    "vision_levels": "isolated_building",
-    "see_cost": "high",
-    "name": "scrap yard",
-    "sym": "s",
-    "color": "red"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": [ "smallscrapyard_ocu_roof" ],
-    "vision_levels": "roof_or_air",
-    "see_cost": "none",
-    "name": "scrap yard roof",
-    "sym": "s",
-    "color": "red"
-  },
-  {
-    "type": "overmap_terrain",
     "id": [
       "hive_edge_00",
       "hive_edge_10",
@@ -1178,6 +1165,69 @@
     "color": "yellow",
     "see_cost": "high",
     "vision_levels": "blends_till_outlines",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "pig_farm_lab_ground_NW" ],
+    "name": "industrial pig farm parking",
+    "sym": "O",
+    "color": "dark_gray",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "pig_farm_lab_ground_W", "pig_farm_lab_ground_SW", "pig_farm_lab_ground_S" ],
+    "name": "industrial pig farm",
+    "sym": "L",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_ground_N",
+      "pig_farm_lab_ground_NE",
+      "pig_farm_lab_ground_M",
+      "pig_farm_lab_ground_E",
+      "pig_farm_lab_ground_SE"
+    ],
+    "name": "industrial pig farm",
+    "sym": "#",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "pig_farm_lab_roof_W", "pig_farm_lab_roof_SW", "pig_farm_lab_roof_S" ],
+    "name": "industrial pig farm roof",
+    "sym": "L",
+    "color": "brown",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
+    "flags": [ "REQUIRES_PREDECESSOR" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "pig_farm_lab_roof_NW",
+      "pig_farm_lab_roof_N",
+      "pig_farm_lab_roof_NE",
+      "pig_farm_lab_roof_M",
+      "pig_farm_lab_roof_E",
+      "pig_farm_lab_roof_SE"
+    ],
+    "name": "open air",
+    "sym": ".",
+    "color": "blue",
+    "vision_levels": "blends_till_outlines",
+    "see_cost": "low",
     "flags": [ "REQUIRES_PREDECESSOR" ]
   },
   {

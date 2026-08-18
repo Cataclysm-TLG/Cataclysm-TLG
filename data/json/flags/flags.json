@@ -1612,6 +1612,10 @@
     "type": "json_flag"
   },
   {
+    "id": "MYCUS_IMMUNE",
+    "type": "json_flag"
+  },
+  {
     "id": "NEEDS_NO_LUBE",
     "type": "json_flag"
   },
@@ -2766,5 +2770,15 @@
     "id": "WASH_HARD",
     "type": "json_flag",
     "info": "This item makes it easier to wash rigid items using soap and water."
+  },
+  {
+    "id": "CHEW",
+    "type": "json_flag",
+    "//": "This item is gum or chewing tobacco or something else that you consume by chewing it, but it isn't food."
+  },
+  {
+    "id": "GRAPNEL",
+    "type": "json_flag",
+    "//": "Used on the grappling hook item to make it check for ledges above when deployed."
   }
 ]

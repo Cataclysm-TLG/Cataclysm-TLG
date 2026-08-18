@@ -237,6 +237,8 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_SEEN_FROM_ABOVE: return "SEEN_FROM_ABOVE";
         case ter_furn_flag::TFLAG_RAMP_DOWN: return "RAMP_DOWN";
         case ter_furn_flag::TFLAG_RAMP_UP: return "RAMP_UP";
+        case ter_furn_flag::TFLAG_RAMP_DOWN_HIGH: return "RAMP_DOWN_HIGH";
+        case ter_furn_flag::TFLAG_RAMP_UP_LOW: return "RAMP_UP_LOW";
         case ter_furn_flag::TFLAG_RAMP: return "RAMP";
         case ter_furn_flag::TFLAG_HIDE_PLACE: return "HIDE_PLACE";
         case ter_furn_flag::TFLAG_BLOCK_WIND: return "BLOCK_WIND";
@@ -314,6 +316,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_MURKY: return "MURKY";
         case ter_furn_flag::TFLAG_AMMOTYPE_RELOAD: return "AMMOTYPE_RELOAD";
         case ter_furn_flag::TFLAG_TRANSPARENT_FLOOR: return "TRANSPARENT_FLOOR";
+        case ter_furn_flag::TFLAG_DRAW_BELOW: return "DRAW_BELOW";
         case ter_furn_flag::TFLAG_ELEVATOR: return "ELEVATOR";
 		case ter_furn_flag::TFLAG_ACTIVE_GENERATOR: return "ACTIVE_GENERATOR";
 		case ter_furn_flag::TFLAG_NO_FLOOR_WATER: return "NO_FLOOR_WATER";
@@ -600,6 +603,12 @@ void load_season_array( const JsonObject &jo, const std::string &key, const std:
         jo.throw_error(
             string_format( "Expected '%s' member in %s but none was found", key, context ) );
     }
+}
+
+// Accessor for terrain_data.
+const std::vector<ter_t> &get_all_terrain_types()
+{
+    return terrain_data.get_all();
 }
 
 std::string map_data_common_t::name() const

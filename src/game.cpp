@@ -1574,18 +1574,16 @@ void game::set_driving_view_offset( const point_rel_ms &p )
         driving_view_offset.raw(); // TODO: Implement -= etc. for relative coordinates.
 }
 
-void game::catch_a_monster( monster *fish, const tripoint_bub_ms &pos, Character *p,
-                            const time_duration &catch_duration ) // catching function
+void game::catch_a_monster( monster *fish, const tripoint_bub_ms &pos, Character *p )
 {
     map &here = get_map();
 
-    //spawn the corpse, rotten by a part of the duration
-    here.add_item_or_charges( pos, item::make_corpse( fish->type->id, calendar::turn + rng( 0_turns,
-                              catch_duration ) ) );
+    // Apawn the corpse, rotten by a part of the duration.
+    here.add_item_or_charges( pos, item::make_corpse( fish->type->id, calendar::turn ) );
     if( u.sees( here, pos ) ) {
         u.add_msg_if_player( m_good, _( "You caught a %s." ), fish->type->nname() );
     }
-    //quietly kill the caught
+    // Quietly kill whatever we caught.
     fish->no_corpse_quiet = true;
     fish->die( &here, p );
 }
@@ -1700,7 +1698,7 @@ bool game::cancel_activity_query( const std::string &text )
             u.remove_effect( effect_asked_to_train );
         } else if( u.activity.id() == ACT_TRAIN ) {
             for( npc &n : all_npcs() ) {
-                // If the player is the only student, cancel the teacher's activity
+                // If the player is the only student, cancel the teacher's activity.
                 if( n.getID().get_value() == u.activity.index && n.activity.values.size() == 1 ) {
                     n.cancel_activity();
                 }
@@ -9072,21 +9070,20 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
             for( const harvest_entry &entry : dead_mon->harvest.obj() ) {
                 if( entry.type == harvest_drop_skin && !( corpses[index]->has_flag( flag_SKINNED ) ||
                         corpses[index]->damage() >= corpses[index]->max_damage() ||
-                        ( corpses[index]->has_flag( flag_QUARTERED ) ) || ( corpses[index]->has_flag( flag_PULPED ) ) ||
-                        ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
+                        ( corpses[index]->has_flag( flag_QUARTERED ) ) || corpses[index]->has_flag( flag_PULPED ) ) ) {
                     has_skin = true;
                 }
                 if( entry.type == harvest_drop_offal && !( corpses[index]->has_flag( flag_QUARTERED ) ||
                         corpses[index]->has_flag( flag_FIELD_DRESS ) ||
                         corpses[index]->has_flag( flag_FIELD_DRESS_FAILED ) ||
-                        ( corpses[index]->has_flag( flag_PULPED ) ) || ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
+                        corpses[index]->has_flag( flag_PULPED ) ) ) {
                     has_organs = true;
                 }
                 if( entry.type == harvest_drop_blood && dead_mon->bleed_rate > 0 &&
                     !( corpses[index]->has_flag( flag_QUARTERED ) ||
                        corpses[index]->has_flag( flag_FIELD_DRESS ) ||
                        corpses[index]->has_flag( flag_FIELD_DRESS_FAILED ) || corpses[index]->has_flag( flag_BLED ) ||
-                       ( corpses[index]->has_flag( flag_PULPED ) ) || ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
+                       corpses[index]->has_flag( flag_PULPED ) ) ) {
                     has_blood = true;
                 }
                 /*
@@ -9101,8 +9098,7 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
                        corpses[index]->damage() >= corpses[index]->max_damage() ||
                        corpses[index]->has_flag( flag_FIELD_DRESS ) ||
                        corpses[index]->has_flag( flag_FIELD_DRESS_FAILED ) ||
-                       ( corpses[index]->has_flag( flag_SKINNED ) ) || ( corpses[index]->has_flag( flag_PULPED ) ) ||
-                       ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
+                       corpses[index]->has_flag( flag_SKINNED ) || corpses[index]->has_flag( flag_PULPED ) ) ) {
                     intact = true;
                 }
             }
@@ -11578,7 +11574,8 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
                     const int damage = rng( force, force * 2.0f ) / 6;
                     // zed_damage uses flvel because they take damage based on c's velocity, not their own size.
                     int zed_damage = rng( flvel, flvel * 2.0f ) / 6;
-                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name(), critter.disp_name() );
+                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( false, true ),
+                                            critter.disp_name() );
                     c->impact( damage, pt );
                     zed_damage = std::max( 0, ( zed_damage - critter.get_armor_type( damage_bash,
                                                 bodypart_id( "torso" ) ) ) );
@@ -11598,7 +11595,8 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
                     const int damage = rng( force, force * 2.0f ) / 6;
                     // guy_damage uses flvel because they take damage based on c's velocity, not their own size.
                     int guy_damage = rng( flvel, flvel * 2.0f ) / 6;
-                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name(), guy.disp_name() );
+                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( false, true ),
+                                            guy.disp_name() );
                     c->impact( damage, pt );
                     guy_damage = std::max( 0, ( guy_damage - guy.get_armor_type( damage_bash,
                                                 bodypart_id( "torso" ) ) ) );
@@ -13087,7 +13085,7 @@ void game::autosave()
     if( std::time( nullptr ) < last_save_timestamp + 60 * get_option<int>( "AUTOSAVE_MINUTES" ) ) {
         return;
     }
-    quicksave();    //Driving checks are handled by quicksave()
+    quicksave();    // Driving checks are handled by quicksave()
 }
 
 void game::start_calendar()

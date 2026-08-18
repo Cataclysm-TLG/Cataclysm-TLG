@@ -34,8 +34,8 @@
 #  make RELEASE=1
 # Tiles (uses SDL rather than ncurses)
 #  make TILES=1
-# Sound (requires SDL, so TILES must be enabled)
-#  make TILES=1 SOUND=1
+# Sound
+#  make SOUND=1
 # Disable gettext, on some platforms the dependencies are hard to wrangle.
 #  make LOCALIZE=0
 # Disable backtrace support, not available on all platforms
@@ -692,9 +692,7 @@ endif
 PKG_CONFIG = $(CROSS)pkg-config
 
 ifeq ($(SOUND), 1)
-  ifneq ($(TILES),1)
-    $(error "SOUND=1 only works with TILES=1")
-  endif
+  SDL = 1
   ifeq ($(NATIVE),osx)
     ifndef FRAMEWORK # libsdl build
       ifeq ($(MACPORTS), 1)
@@ -716,10 +714,6 @@ ifeq ($(SOUND), 1)
   endif
 
   CXXFLAGS += -DSDL_SOUND
-endif
-
-ifeq ($(SDL), 1)
-  TILES = 1
 endif
 
 ifeq ($(TILES), 1)
@@ -1007,7 +1001,7 @@ endif
 
 LDFLAGS += -lz
 
-all: version prefix $(CHECKS) $(TARGET) $(L10N) $(ZZIP_BIN)
+all: $(CHECKS) $(TARGET) $(L10N) $(ZZIP_BIN)
 	@
 
 $(TARGET): $(OBJS)
@@ -1028,14 +1022,7 @@ $(PCH_P): $(PCH_H)
 $(BUILD_PREFIX)$(TARGET_NAME).a: $(OBJS)
 	$(AR) rcs $(BUILD_PREFIX)$(TARGET_NAME).a $(filter-out $(ODIR)/main.o $(ODIR)/messages.o,$(OBJS))
 
-.PHONY: version prefix
-version:
-	@( VERSION_STRING=$(VERSION) ; \
-            [ -e ".git" ] && GITVERSION=$$( git describe --tags --always --match "[0-9A-Z]*.[0-9A-Z]*" ) && DIRTYFLAG=$$( [ -z "$$(git diff --numstat | grep -v lang/po/)" ] || echo "-dirty") && VERSION_STRING=$$GITVERSION$$DIRTYFLAG ; \
-            [ -e "$(SRC_DIR)/version.h" ] && OLDVERSION=$$(grep VERSION $(SRC_DIR)/version.h|cut -d '"' -f2) ; \
-            if [ "x$$VERSION_STRING" != "x$$OLDVERSION" ]; then printf '// NOLINT(cata-header-guard)\n#define VERSION "%s"\n' "$$VERSION_STRING" | tee $(SRC_DIR)/version.h ; fi \
-         )
-
+.PHONY: prefix
 prefix:
 	@( PREFIX_STRING=$(PREFIX) ; \
             [ -e "$(SRC_DIR)/prefix.h" ] && OLDPREFIX=$$(grep PREFIX $(SRC_DIR)/prefix.h|cut -d '"' -f2) ; \
@@ -1061,6 +1048,7 @@ $(ODIR)/third-party/%.o: $(SRC_DIR)/third-party/%.cpp
 $(ODIR)/third-party/%.o: $(SRC_DIR)/third-party/%.c
 	$(CXX) -x c $(CPPFLAGS) $(DEFINES) $(CFLAGS) -w -MMD -MP $(MJFLAG) -c $< -o $@
 
+$(SRC_DIR)/main.cpp: prefix
 $(ODIR)/%.o: $(SRC_DIR)/%.cpp $(PCH_P)
 	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -MMD -MP $(PCHFLAGS) $(MJFLAG) -c $< -o $@
 
@@ -1068,10 +1056,6 @@ $(ODIR)/%.o: $(SRC_DIR)/%.rc
 	$(RC) $(RFLAGS) $< -o $@
 
 $(ODIR)/resource.o: data/cataicon.ico data/application_manifest.xml
-
-src/version.h: version
-
-src/version.cpp: src/version.h
 
 TEST_MO := data/mods/TEST_DATA/lang/mo/ru/LC_MESSAGES/TEST_DATA.mo
 
@@ -1120,7 +1104,7 @@ DATA_PREFIX=$(DESTDIR)$(PREFIX)/share/cataclysm-tlg/
 BIN_PREFIX=$(DESTDIR)$(PREFIX)/bin
 LOCALE_DIR=$(DESTDIR)$(PREFIX)/share/locale
 SHARE_DIR=$(DESTDIR)$(PREFIX)/share
-install: version $(TARGET) $(ZZIP_BIN)
+install: $(TARGET) $(ZZIP_BIN)
 	mkdir -p $(DATA_PREFIX)
 	mkdir -p $(BIN_PREFIX)
 	install --mode=755 $(TARGET) $(BIN_PREFIX)
@@ -1156,7 +1140,7 @@ DATA_PREFIX=$(DESTDIR)$(PREFIX)/share/cataclysm-tlg/
 BIN_PREFIX=$(DESTDIR)$(PREFIX)/bin
 LOCALE_DIR=$(DESTDIR)$(PREFIX)/share/locale
 SHARE_DIR=$(DESTDIR)$(PREFIX)/share
-install: version $(TARGET)
+install: $(TARGET)
 	mkdir -p $(DATA_PREFIX)
 	mkdir -p $(BIN_PREFIX)
 	install --mode=755 $(TARGET) $(BIN_PREFIX)
@@ -1206,9 +1190,9 @@ build-data/osx/AppIcon.icns: build-data/osx/AppIcon.iconset
 	iconutil -c icns $<
 
 ifdef OSXCROSS
-app: appclean version $(APPTARGET) $(ZZIP_BIN)
+app: appclean $(APPTARGET) $(ZZIP_BIN)
 else
-app: appclean version build-data/osx/AppIcon.icns $(APPTARGET) $(ZZIP_BIN)
+app: appclean build-data/osx/AppIcon.icns $(APPTARGET) $(ZZIP_BIN)
 endif
 	mkdir -p $(APPTARGETDIR)/Contents
 	cp build-data/osx/Info.plist $(APPTARGETDIR)/Contents/
@@ -1273,7 +1257,7 @@ endif
 
 endif  # ifeq ($(NATIVE), osx)
 
-$(BINDIST): distclean version $(TARGET) $(ZZIP_BIN) $(L10N) $(BINDIST_EXTRAS) $(BINDIST_LOCALE)
+$(BINDIST): distclean $(TARGET) $(ZZIP_BIN) $(L10N) $(BINDIST_EXTRAS) $(BINDIST_LOCALE)
 	mkdir -p $(BINDIST_DIR)
 	cp -R $(TARGET) $(ZZIP_BIN) $(BINDIST_EXTRAS) $(BINDIST_DIR)
 	$(foreach lib,$(INSTALL_EXTRAS), install --strip $(lib) $(BINDIST_DIR))
@@ -1363,10 +1347,10 @@ $(ZZIP_BIN): $(ZZIP_SOURCES) $(BUILD_PREFIX)zstd.a
 python-check:
 	flake8
 
-object_creator: version $(BUILD_PREFIX)cataclysm.a
+object_creator: $(BUILD_PREFIX)cataclysm.a
 	$(MAKE) -C object_creator
 
-object_creator.exe: version $(BUILD_PREFIX)cataclysm.a
+object_creator.exe: $(BUILD_PREFIX)cataclysm.a
 	$(MAKE) -C object_creator object_creator.exe
 
 clean-object_creator:

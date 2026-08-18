@@ -68,6 +68,24 @@
     "object": {
       "mapgensize": [ 2, 2 ],
       "place_terrain": [ { "ter": "t_grave_new", "x": 0, "y": 1 } ],
+      "place_loot": [ { "group": "nested_hi_power_9mm", "x": 0, "y": 1, "chance": 100 } ],
+      "place_item": [
+        { "item": "jumpsuit_long", "x": 0, "y": 1, "chance": 100 },
+        { "item": "boots", "x": 0, "y": 1, "chance": 100 },
+        { "item": "hairpin", "x": 0, "y": 1, "chance": 100, "repeat": 6 },
+        { "item": "rx12_injector", "x": 0, "y": 1, "chance": 100 },
+        { "item": "ampoule", "x": 0, "y": 1, "chance": 100, "repeat": 2 }
+      ],
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
+      "place_signs": [ { "signage": "The game was rigged from the start.", "x": 0, "y": 0 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "grave_easter_egg",
+    "object": {
+      "mapgensize": [ 2, 2 ],
+      "place_terrain": [ { "ter": "t_grave_new", "x": 0, "y": 1 } ],
       "place_item": [ { "item": "indoor_volleyball", "x": 0, "y": 1, "chance": 100 } ],
       "place_signs": [ { "signage": "Wilson", "x": 0, "y": 0 } ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
@@ -130,7 +148,7 @@
     "object": {
       "place_nested": [
         {
-          "chunks": [ [ "human_corpse", 95 ], [ "pet_corpse", 95 ], [ "grave_easter_egg", 5 ] ],
+          "chunks": [ [ "human_corpse", 25 ], [ "pet_corpse", 15 ], [ "grave_easter_egg", 1 ] ],
           "x": [ 0, 22 ],
           "y": [ 0, 22 ]
         }

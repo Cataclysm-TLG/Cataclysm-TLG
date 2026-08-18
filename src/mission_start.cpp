@@ -322,7 +322,9 @@ void mission_start::reveal_refugee_center( mission *miss )
             get_player_character().pos_abs_omt(), "road",
             3, false );
     const tripoint_abs_omt dest_road = overmap_buffer.find_closest( *target_pos, "road", 3, false );
-
+    avatar &player_character = get_avatar();
+    const tripoint_abs_omt target = player_character.get_active_mission_target();
+    const bool has_target = !target.is_invalid();
     if( overmap_buffer.reveal_route( source_road, dest_road, 1, true ) ) {
         //reset the mission target to the refugee center entrance and reveal path from the road
         t.overmap_terrain = "refctr_S3e";
@@ -333,8 +335,10 @@ void mission_start::reveal_refugee_center( mission *miss )
         overmap_buffer.reveal_route( dest_road, dest_refugee_center, 1, false );
 
         add_msg( _( "You mark the refugee center and the road that leads to it…" ) );
-    } else {
+    } else if( has_target ) {
         add_msg( _( "You mark the refugee center, but you have no idea how to get there by road…" ) );
+    } else {
+        add_msg( _( "You don't recognize this address.  It's surely out there somewhere, but it must be quite far away." ) );
     }
 }
 

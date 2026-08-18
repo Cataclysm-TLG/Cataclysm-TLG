@@ -19,7 +19,7 @@
     "stack_size": 50,
     "ammo_type": "30carbine",
     "casing": "30carbine_casing",
-    "range": 25,
+    "range": 28,
     "damage": {
       "damage_type": "bullet",
       "amount": 36,

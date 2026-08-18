@@ -616,7 +616,7 @@ void enchant_cache::load( const JsonObject &jo, std::string_view,
                 }
             } catch( ... ) {
                 if( legacy_values.find( value_obj.get_string( "value", "" ) ) == legacy_values.end() ) {
-                    debugmsg( "A relic attempted to load invalid enchantment %s.", value_obj.get_string( "value",
+                    debugmsg( "A relic attempted to load invalid modifier %s.", value_obj.get_string( "value",
                               "" ) );
                 }
             }

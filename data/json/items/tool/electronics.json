@@ -647,7 +647,7 @@
       { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" }
     ],
     "tick_action": [ "EPIC_MUSIC" ],
-    "light": 10,
+    "light": 15,
     "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ]
   },
   {

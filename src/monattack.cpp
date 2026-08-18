@@ -67,6 +67,7 @@
 #include "mondefense.h"
 #include "monfaction.h"
 #include "monster.h"
+#include "mondeath.h"
 #include "mtype.h"
 #include "npc.h"
 #include "output.h"
@@ -237,6 +238,9 @@ static const trait_id trait_MARLOSS_BLUE( "MARLOSS_BLUE" );
 static const trait_id trait_PARAIMMUNE( "PARAIMMUNE" );
 static const trait_id trait_THRESH_MARLOSS( "THRESH_MARLOSS" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
+
+static const harvest_drop_type_id harvest_drop_bone( "bone" );
+static const harvest_drop_type_id harvest_drop_flesh( "flesh" );
 
 // shared utility functions
 static bool within_visual_range( monster *z, int max_range )
@@ -528,7 +532,7 @@ bool mattack::eat_food( monster *z )
             continue;
         }
         // Don't snap up food RIGHT under the player's nose.
-        if( z->friendly && rl_dist( get_player_character().pos_bub(), p ) <= 2 ) {
+        if( z->friendly && square_dist( get_player_character().pos_bub(), p ) <= 2 ) {
             continue;
         }
         map_stack items = here.i_at( p );
@@ -564,7 +568,7 @@ bool mattack::eat_carrion( monster *z )
     map &here = get_map();
     for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 1 ) ) {
         // Don't snap up food RIGHT under the player's nose.
-        if( rl_dist( get_player_character().pos_bub(), p ) <= 2 ) {
+        if( square_dist( get_player_character().pos_bub(), p ) <= 2 ) {
             continue;
         }
         map_stack items = here.i_at( p );
@@ -590,10 +594,10 @@ bool mattack::eat_carrion( monster *z )
 bool mattack::graze( monster *z )
 {
     map &here = get_map();
-    //Grazers eat grass and entire plants or bushes. Toxic/inedible plants can be blacklisted with GRAZER_INEDIBLE.
+    // Grazers eat grass and entire plants or bushes. Toxic/inedible plants can be blacklisted with GRAZER_INEDIBLE.
     for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 1 ) ) {
-        //Don't eat grass right next to the player.
-        if( z->friendly && rl_dist( get_player_character().pos_bub(), p ) <= 2 ) {
+        // Don't eat grass right next to the player if we're not tame.
+        if( !z->friendly && square_dist( get_player_character().pos_bub(), p ) <= 2 ) {
             continue;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_FLOWER, p ) &&
@@ -628,8 +632,8 @@ bool mattack::browse( monster *z )
     map &here = get_map();
     //Browsers eat fruit/nuts/etc off of seasonally harvestable plants and trees.
     for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 1 ) ) {
-        // Don't forage for food if the player is right there.
-        if( z->friendly && rl_dist( get_player_character().pos_bub(), p ) <= 2 ) {
+        // Don't forage for food if the player is right there unless we're tame.
+        if( !z->friendly && square_dist( get_player_character().pos_bub(), p ) <= 2 ) {
             continue;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_BROWSABLE, p ) && ( z->amount_eaten <= z->stomach_size ) ) {
@@ -638,7 +642,7 @@ bool mattack::browse( monster *z )
                 add_msg_if_player_sees( *z, _( "The %1s eats from the %2s." ), z->name(), here.tername( p ) );
                 here.ter_set( p, here.get_ter_transforms_into( p ) );
                 z->amount_eaten += 174;
-                //Calorie amount is based on the "underbrush" dummy item, as with the grazer mutation.
+                // Calorie amount is based on the "underbrush" dummy item, as with the grazer mutation.
                 return true;
             }
         }
@@ -652,7 +656,7 @@ bool mattack::shriek( monster *z )
 
     Creature *target = z->attack_target();
     if( target == nullptr ||
-        rl_dist( z->pos_abs(), target->pos_abs() ) > 4 ||
+        trig_dist( z->pos_abs(), target->pos_abs() ) > 4 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -674,7 +678,7 @@ bool mattack::shriek_alert( monster *z )
 
     Creature *target = z->attack_target();
 
-    if( target == nullptr || rl_dist( z->pos_bub(), target->pos_bub() ) > 15 ||
+    if( target == nullptr || trig_dist( z->pos_bub(), target->pos_bub() ) > 15 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -741,7 +745,7 @@ bool mattack::howl( monster *z )
     Creature *target = z->attack_target();
     map &here = get_map();
     if( target == nullptr ||
-        rl_dist( z->pos_bub(), target->pos_bub() ) > 4 ||
+        trig_dist( z->pos_bub(), target->pos_bub() ) > 4 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -778,7 +782,7 @@ bool mattack::rattle( monster *z )
     const int min_dist = z->friendly != 0 ? 1 : 4;
     Creature *target = &get_player_character();
     // Can't use attack_target - the snake has no target
-    if( rl_dist( z->pos_abs(), target->pos_abs() ) > min_dist ||
+    if( trig_dist( z->pos_abs(), target->pos_abs() ) > min_dist ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -787,127 +791,6 @@ bool mattack::rattle( monster *z )
     z->mod_moves( -to_moves<int>( 1_seconds ) * 0.2 );
     sounds::sound( z->pos_bub(), 10, sounds::sound_t::alarm, _( "a sibilant rattling sound!" ), false,
                    "misc", "rattling" );
-
-    return true;
-}
-
-bool mattack::acid( monster *z )
-{
-    if( !z->can_act() ) {
-        return false;
-    }
-
-    Creature *target = z->attack_target();
-    if( target == nullptr ) {
-        return false;
-    }
-
-    map &here = get_map();
-    // Can't see/reach target, no attack
-    if( !z->sees( here,  *target ) ||
-        !here.clear_path( z->pos_bub(), target->pos_bub(), 10, 1, 100 ) ) {
-        return false;
-    }
-    // It takes a while
-    z->mod_moves( -to_moves<int>( 3_seconds ) );
-    sounds::sound( z->pos_bub(), 4, sounds::sound_t::combat, _( "a spitting noise." ), false, "misc",
-                   "spitting" );
-
-    projectile proj;
-    proj.speed = 10;
-    // Mostly just for momentum
-    proj.impact.add_damage( damage_acid, 5 );
-    proj.range = 10;
-    proj.proj_effects.insert( ammo_effect_NO_OVERSHOOT );
-    dealt_projectile_attack dealt;
-    projectile_attack( dealt, proj, z->pos_bub(), target->pos_bub(),
-                       dispersion_sources{ 5400 }, z );
-    const tripoint_bub_ms &hitp = dealt.end_point ;
-    const Creature *hit_critter = dealt.last_hit_critter;
-    if( hit_critter == nullptr && here.hit_with_acid( hitp ) ) {
-        add_msg_if_player_sees( hitp,  _( "A glob of acid hits the %s!" ), here.tername( hitp ) );
-        if( here.impassable( hitp ) ) {
-            // TODO: Allow it to spill on the side it hit from
-            return true;
-        }
-    }
-
-    for( int i = -3; i <= 3; i++ ) {
-        for( int j = -3; j <= 3; j++ ) {
-            tripoint_bub_ms dest = hitp + tripoint_rel_ms( i, j, 0 );
-            if( here.passable( dest ) &&
-                here.clear_path( dest, hitp, 6, 1, 100 ) &&
-                ( ( one_in( std::abs( j ) ) && one_in( std::abs( i ) ) ) || ( i == 0 && j == 0 ) ) ) {
-                here.add_field( dest, fd_acid, 2 );
-            }
-        }
-    }
-
-    return true;
-}
-
-bool mattack::acid_barf( monster *z )
-{
-    map &here = get_map();
-
-    if( !z->can_act() ) {
-        return false;
-    }
-
-    // Let it be used on non-player creatures
-    Creature *target = z->attack_target();
-    if( target == nullptr || !z->is_adjacent( target, false ) ) {
-        return false;
-    }
-
-    z->mod_moves( -to_moves<int>( 1_seconds ) * 0.8 );
-    // Make sure it happens before uncanny dodge
-    here.add_field( target->pos_bub(), fd_acid, 1 );
-
-    bodypart_id hit = target->get_random_body_part();
-    damage_instance dam_inst = damage_instance( damage_acid, rng( 5, 12 ) );
-
-    // Can we dodge the attack? Uses player dodge function % chance (melee.cpp)
-    if( target->dodge_check( z, hit, dam_inst ) ) {
-        game_message_type msg_type = target->is_avatar() ? m_warning : m_info;
-        target->add_msg_player_or_npc( msg_type,
-                                       _( "The %s barfs acid at you, but you dodge!" ),
-                                       _( "The %s barfs acid at <npcname>, but they dodge!" ),
-                                       z->name() );
-
-        target->on_dodge( z, z->type->melee_skill * 2 );
-        return true;
-    }
-
-    target->block_hit( z, hit, dam_inst );
-
-    int dam = target->deal_damage( z,  hit, dam_inst ).total_damage();
-
-    target->add_env_effect( effect_corroding, hit, 5, time_duration::from_turns( dam / 2 + 5 ), hit );
-
-    if( dam > 0 ) {
-        game_message_type msg_type = target->is_avatar() ? m_bad : m_info;
-        target->add_msg_player_or_npc( msg_type,
-                                       //~ 1$s is monster name, 2$s bodypart in accusative
-                                       _( "The %1$s barfs acid on your %2$s for %3$d damage!" ),
-                                       //~ 1$s is monster name, 2$s bodypart in accusative
-                                       _( "The %1$s barfs acid on <npcname>'s %2$s for %3$d damage!" ),
-                                       z->name(),
-                                       body_part_name_accusative( hit ),
-                                       dam );
-
-        if( hit == bodypart_id( "eyes" ) ) {
-            target->add_env_effect( effect_blind, bodypart_id( "eyes" ), 3, 1_minutes );
-        }
-    } else {
-        target->add_msg_player_or_npc(
-            _( "The %1$s barfs acid on your %2$s, but it washes off the armor!" ),
-            _( "The %1$s barfs acid on <npcname>'s %2$s, but it washes off the armor!" ),
-            z->name(),
-            body_part_name_accusative( hit ) );
-    }
-
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
 
     return true;
 }
@@ -932,7 +815,7 @@ bool mattack::shockstorm( monster *z )
     Character &player_character = get_player_character();
     bool seen = player_character.sees( here, *z );
 
-    bool can_attack = z->sees( here, *target ) && rl_dist( z->pos_abs(), target->pos_abs() ) <= 12;
+    bool can_attack = z->sees( here, *target ) && trig_dist( z->pos_abs(), target->pos_abs() ) <= 12;
     std::vector<tripoint_bub_ms> path = here.find_clear_path( z_pos, target_pos );
     for( const tripoint_bub_ms &point : path ) {
         if( here.impassable( point ) &&
@@ -1124,7 +1007,7 @@ bool mattack::boomer( monster *z )
     }
 
     Creature *target = z->attack_target();
-    if( target == nullptr || rl_dist( z->pos_abs(), target->pos_abs() ) > 3 ||
+    if( target == nullptr || trig_dist( z->pos_abs(), target->pos_abs() ) > 3 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -1167,13 +1050,13 @@ bool mattack::boomer_glow( monster *z )
     }
 
     Creature *target = z->attack_target();
-    if( target == nullptr || rl_dist( z->pos_abs(), target->pos_abs() ) > 3 ||
+    if( target == nullptr || trig_dist( z->pos_abs(), target->pos_abs() ) > 3 ||
         !z->sees( here, *target ) ) {
         return false;
     }
 
     std::vector<tripoint_bub_ms> line = here.find_clear_path( z->pos_bub(), target->pos_bub() );
-    // It takes a while
+    // It takes a while.
     z->mod_moves( -to_moves<int>( 1_seconds ) * 2.5 );
     Character &player_character = get_player_character();
     bool u_see = player_character.sees( here,  *z );
@@ -1325,6 +1208,65 @@ bool mattack::resurrect( monster *z )
     // NOLINTNEXTLINE(clang-analyzer-core.CallAndMessage)
     float corpse_damage = raised.second->damage_level();
     creature_tracker &creatures = get_creature_tracker();
+    // Check is probably unnecessary, but let's be sure to limit critfails to actual attempts.
+    if( found_eligible_corpse ) {
+        // Sometimes we screw up.
+        if( one_in( 100 - ( corpse_damage * 2 ) ) ) {
+            if( one_in( 2 ) ) {
+                if( one_in( 2 ) ) {
+                    add_msg_if_player_sees( raised.first, _( "The %s twitches and spasms." ),
+                                            raised.second->tname() );
+                    raised.second->mod_damage( -750 );
+                } else {
+                    add_msg_if_player_sees( raised.first,
+                                            _( "The %s thrashes so violently that it nearly tears itself apart!" ),
+                                            raised.second->tname() );
+                    raised.second->mod_damage( 750 );
+                    if( raised.second->damage() >= raised.second->max_damage() ) {
+                        raised.second->set_flag( flag_PULPED );
+                    }
+                }
+            } else {
+                add_msg_if_player_sees( raised.first, _( "The %s bursts apart in a shower of gore!" ),
+                                        raised.second->tname() );
+                // limit gibbing to 15%
+                int gibbed_weight = to_gram( raised.second->weight() * ( 15.0 / 100.0 ) );
+                int gib_distance = std::round( rng( 2, 4 ) );
+                const mtype *mt = raised.second->get_mtype();
+                units::mass corpse_weight = raised.second->weight();
+                if( mt ) {
+                    for( const harvest_entry &entry : mt->harvest->entries() ) {
+                        // only flesh and bones survive.
+                        if( entry.type == harvest_drop_flesh || entry.type == harvest_drop_bone ) {
+                            // the larger the overflow damage, the less you get
+                            const int chunk_amt =
+                                entry.mass_ratio / 2.0f / 10.0 *
+                                corpse_weight / item::find_type( itype_id( entry.drop ) )->weight;
+                            mdeath::scatter_chunks( &here, itype_id( entry.drop ), chunk_amt, *mt, raised.first, gib_distance,
+                                                    chunk_amt / ( gib_distance - 1 ) );
+                            gibbed_weight -= entry.mass_ratio / 2.0 / 20 * to_gram( corpse_weight );
+                        }
+                    }
+                    if( gibbed_weight > 0 ) {
+                        const itype_id &leftover_id = mt->harvest->leftovers;
+                        const int chunk_amount =
+                            gibbed_weight / to_gram( item::find_type( leftover_id )->weight );
+                        mdeath::scatter_chunks( &here, leftover_id, chunk_amount, *mt, raised.first, gib_distance,
+                                                chunk_amount / ( gib_distance + 1 ) );
+                    }
+                }
+                raised.second->set_damage( 4000 );
+                return false;
+            }
+        }
+        // Sometimes we REALLY screw up.
+        if( one_in( 250 ) ) {
+            add_msg_if_player_sees( *z, _( "The %s bursts apart in a shower of gore!" ),
+                                    z->disp_name() );
+            z->deal_damage( z, bodypart_id( "torso" ), damage_instance( damage_bash, 400 ) );
+            return false;
+        }
+    }
     // Did we successfully raise something?
     if( g->revive_corpse( raised.first, *raised.second ) ) {
         here.i_rem( raised.first, raised.second );
@@ -1347,16 +1289,14 @@ bool mattack::resurrect( monster *z )
             debugmsg( "Misplaced or failed to revive a zombie corpse" );
             return true;
         }
-
         zed->make_ally( *z );
         if( player_character.sees( here, *zed ) ) {
-            add_msg( m_warning, _( "A nearby %s rises from the dead!" ), zed->name() );
+            add_msg( m_warning, _( "A %s rises from the dead!" ), zed->name() );
         } else if( sees_necromancer ) {
             // We saw the necromancer but not the revival
             add_msg( m_info, _( "But nothing seems to happen." ) );
         }
     }
-
     return true;
 }
 
@@ -1590,7 +1530,7 @@ bool mattack::growplants( monster *z )
 bool mattack::grow_vine( monster *z )
 {
     if( z->friendly ) {
-        if( rl_dist( get_player_character().pos_bub(), z->pos_bub() ) <= 3 ) {
+        if( trig_dist( get_player_character().pos_bub(), z->pos_bub() ) <= 3 ) {
             // Friendly vines keep the area around you free, so you can move.
             return false;
         }
@@ -1658,7 +1598,7 @@ bool mattack::vine( monster *z )
         }
     }
     // Calculate distance from nearest hub
-    int dist_from_hub = rl_dist( z->pos_abs(), z->get_dest() );
+    int dist_from_hub = trig_dist( z->pos_abs(), z->get_dest() );
     if( dist_from_hub > 20 || vine_neighbors > 5 || one_in( 7 - vine_neighbors ) ||
         !one_in( dist_from_hub ) ) {
         return true;
@@ -1683,7 +1623,7 @@ bool mattack::spit_sap( monster *z )
 
     Creature *target = z->attack_target();
     if( target == nullptr ||
-        rl_dist( z->pos_abs(), target->pos_abs() ) > 12 ||
+        trig_dist( z->pos_abs(), target->pos_abs() ) > 12 ||
         !z->sees( here, *target ) ) {
         return false;
     }
@@ -1724,7 +1664,7 @@ bool mattack::triffid_heartbeat( monster *z )
     static pathfinding_settings root_pathfind( 10, 20, 50, 0, false, false, false, false, false,
             false );
     const pathfinding_target pf_t = pathfinding_target::point( z_pos );
-    if( rl_dist( z_pos, pos ) > 5 &&
+    if( trig_dist( z_pos, pos ) > 5 &&
         !here.route( pos, pf_t, root_pathfind ).empty() ) {
         add_msg( m_warning, _( "The root walls creak around you." ) );
         for( const tripoint_bub_ms &dest : here.points_in_radius( z_pos, 3 ) ) {
@@ -1743,7 +1683,7 @@ bool mattack::triffid_heartbeat( monster *z )
             tripoint_bub_ms dest( p, z->posz() );
             tries++;
             here.ter_set( dest, ter_t_dirt );
-            if( rl_dist( dest, pos ) > 3 && g->num_creatures() < 30 &&
+            if( trig_dist( dest, pos ) > 3 && g->num_creatures() < 30 &&
                 !creatures.creature_at( dest ) && one_in( 20 ) ) { // Spawn an extra monster
                 mtype_id montype = mon_triffid;
                 if( one_in( 4 ) ) {
@@ -1772,15 +1712,13 @@ bool mattack::triffid_heartbeat( monster *z )
 
 bool mattack::fungus( monster *z )
 {
-    // TODO: Infect NPCs?
-    // It takes a while
+    // It takes a while.
     z->mod_moves( -to_moves<int>( 2_seconds ) );
-
-    // Use less laggy methods of reproduction when there is a lot of mons around
+    // Use less laggy methods of reproduction when there is a lot of creatures around.
     double spore_chance = 0.25;
     int radius = 1;
     if( g->num_creatures() > 25 ) {
-        // Number of creatures in the bubble and the resulting average number of spores per puff":
+        // Number of creatures in the bubble and the resulting average number of spores per puff:
         // 0-25: 2
         // 50  : 0.5
         // 75  : 0.22
@@ -1794,87 +1732,102 @@ bool mattack::fungus( monster *z )
             spore_chance *= old_area / new_area;
         }
     }
-
     map &here = get_map();
     fungal_effects fe;
     for( const tripoint_bub_ms &sporep : here.points_in_radius( z->pos_bub(), radius ) ) {
         if( sporep == z->pos_bub() ) {
             continue;
         }
-        const int dist = rl_dist( z->pos_bub(), sporep );
+        const int dist = trig_dist( z->pos_bub(), sporep );
         if( !one_in( dist ) ||
             here.impassable( sporep ) ||
             ( dist > 1 && !here.clear_path( z->pos_bub(), sporep, 2, 1, 10 ) ) ) {
             continue;
         }
-
         fe.fungalize( sporep, z, spore_chance );
     }
-
     return true;
 }
 
 bool mattack::fungus_haze( monster *z )
 {
-    z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
-    map &here = get_map();
-    for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 3 ) ) {
-        here.add_field( dest, fd_fungal_haze, rng( 1, 2 ) );
+    int chance = rng( 2, 10 );
+    // The puffs look weird if they happen every n seconds, so exit early sometimes to vary it.
+    if( chance > 6 ) {
+        return true;
     }
-
+    map &here = get_map();
+    if( chance == 2 ) {
+        // A small but denser cloud.
+        for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 2 ) ) {
+            here.add_field( dest, fd_spores, 2 );
+        }
+    } else {
+        for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), chance ) ) {
+            here.add_field( dest, fd_spores, 1 );
+        }
+    }
+    z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
     return true;
 }
 
 bool mattack::fungus_big_blossom( monster *z )
 {
+    int chance = rng( 2, 40 );
+    // The puffs look weird if they happen every n seconds, so exit early sometimes to vary it.
+    if( chance > 30 ) {
+        return true;
+    }
     map &here = get_map();
-
     bool firealarm = false;
     const bool u_see = get_player_view().sees( here, *z );
-    // Fungal fire-suppressor! >:D
-    for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 6 ) ) {
-        if( here.get_field_intensity( dest, fd_fire ) != 0 ) {
-            firealarm = true;
-        }
-        if( firealarm ) {
-            here.remove_field( dest, fd_fire );
-            here.remove_field( dest, fd_smoke );
-            here.add_field( dest, fd_fungal_haze, 3 );
+    // Only check for fire sometimes, to make firefighting a little more chaotic.
+    if( chance < 9 ) {
+        for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), chance ) ) {
+            if( here.get_field_intensity( dest, fd_fire ) != 0 ) {
+                firealarm = true;
+            }
+            // Don't uniformly put out fires.
+            if( firealarm && x_in_y( 2, chance ) ) {
+                here.remove_field( dest, fd_fire );
+                here.remove_field( dest, fd_smoke );
+            }
         }
     }
     // Special effects handled outside the loop
     if( firealarm ) {
-        if( u_see ) {
-            // Sucks up all the smoke
-            add_msg( m_warning, _( "The %s suddenly inhales!" ), z->name() );
-        }
-        //~Sound of a giant fungal blossom inhaling
         sounds::sound( z->pos_bub(), 20, sounds::sound_t::combat, _( "WOOOSH!" ), true, "misc", "inhale" );
         if( u_see ) {
             add_msg( m_bad, _( "The %s discharges an immense flow of spores, smothering the flames!" ),
                      z->name() );
         }
-        //~Sound of a giant fungal blossom blowing out the dangerous fire!
+        // Sound of a giant fungal blossom blowing out the fire.
         sounds::sound( z->pos_bub(), 20, sounds::sound_t::combat, _( "POUFF!" ), true, "misc", "exhale" );
         return true;
-    } else {
-        // No fire detected, routine haze-emission
-        z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
-        for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 12 ) ) {
-            here.add_field( dest, fd_fungal_haze, rng( 1, 2 ) );
+        // No fire detected, routine haze-emission.
+    } else if( !firealarm ) {
+        if( chance > 24 ) {
+            // Let's not make a huge cloud this turn, let's just make a small dense one.
+            z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
+            for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 4 ) ) {
+                here.add_field( dest, fd_spores, 2 );
+            }
+        } else {
+            z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
+            for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), chance / 2 ) ) {
+                here.add_field( dest, fd_spores, 1 );
+            }
         }
     }
-
     return true;
 }
 
 bool mattack::fungus_inject( monster *z )
 {
     map &here = get_map();
-    // For faster copy+paste
     Creature *target = &get_player_character();
     Character &player_character = get_player_character();
-    if( rl_dist( z->pos_bub(), player_character.pos_bub() ) > 1 ) {
+    if( trig_dist( z->pos_bub(), player_character.pos_bub() ) > 1 ) {
         return false;
     }
 
@@ -1886,7 +1839,6 @@ bool mattack::fungus_inject( monster *z )
     if( player_character.has_trait( trait_MARLOSS ) &&
         player_character.has_trait( trait_MARLOSS_BLUE ) &&
         !player_character.crossed_threshold() ) {
-        add_msg( m_info, _( "The %s seems to wave you toward the tower…" ), z->name() );
         z->anger = 0;
         return true;
     }
@@ -1901,28 +1853,22 @@ bool mattack::fungus_inject( monster *z )
     bodypart_id hit = target->get_random_body_part();
     damage_instance dam_inst = damage_instance( damage_cut, rng( 5, 11 ) );
 
-    // Can we dodge the attack? Uses player dodge function % chance (melee.cpp)
     if( target->dodge_check( z, hit, dam_inst ) ) {
         target->add_msg_player_or_npc( _( "You dodge it!" ),
                                        _( "<npcname> dodges it!" ) );
         target->on_dodge( z, z->type->melee_skill );
         return true;
     }
-
     target->block_hit( z, hit, dam_inst );
-
     int dam = player_character.deal_damage( z, hit, dam_inst ).total_damage();
     if( dam > 0 ) {
-        //~ 1$s is monster name, 2$s bodypart in accusative
         add_msg( m_bad, _( "The %1$s sinks its point into your %2$s!" ), z->name(),
                  body_part_name_accusative( hit ) );
-        // do not fungal infect a bionic limb
         if( !hit->has_flag( json_flag_BIONIC_LIMB ) && one_in( 10 - dam ) ) {
             player_character.add_effect( effect_fungus, 10_minutes, true );
-            add_msg( m_warning, _( "You feel thousands of live spores pumping into you…" ) );
+            add_msg( m_warning, _( "A sickly goo oozes from the wound." ) );
         }
     } else {
-        //~ 1$s is monster name, 2$s bodypart in accusative
         add_msg( _( "The %1$s strikes your %2$s, but your armor protects you." ), z->name(),
                  body_part_name_accusative( hit ) );
     }

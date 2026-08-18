@@ -384,7 +384,7 @@ static nc_color construction_color( const construction_group_str_id &group, bool
                 int s_lvl = player_character.get_skill_level( pr.first );
                 if( s_lvl < pr.second ) {
                     col = c_red;
-                } else if( s_lvl < pr.second * 1.25 ) {
+                } else if( s_lvl <= pr.second * 1.25 && s_lvl < MAX_SKILL ) {
                     col = c_light_blue;
                 }
             }
@@ -676,7 +676,7 @@ construction_id construction_menu( const bool blueprint )
                         int s_lvl = player_character.get_skill_level( skill.first );
                         if( s_lvl < skill.second ) {
                             col = c_red;
-                        } else if( s_lvl < skill.second * 1.25 ) {
+                        } else if( s_lvl <= skill.second * 1.25 && s_lvl < MAX_SKILL ) {
                             col = c_light_blue;
                         } else {
                             col = c_green;

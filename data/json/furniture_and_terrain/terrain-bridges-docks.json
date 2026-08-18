@@ -8,6 +8,19 @@
     "looks_like": "t_pavement",
     "color": "yellow",
     "move_cost": 2,
+    "flags": [ "TRANSPARENT", "FLAT", "SWIM_UNDER" ],
+    "connect_groups": "WATER"
+  },
+  {
+    "type": "terrain",
+    "id": "t_bridge_underground",
+    "name": "walkway",
+    "description": "A metallic bridge commonly used in industrial settings to meet specified safety standards.",
+    "symbol": "#",
+    "looks_like": "t_pavement",
+    "roof": "t_rock_roof",
+    "color": "yellow",
+    "move_cost": 2,
     "flags": [ "TRANSPARENT", "FLAT", "SWIM_UNDER", "INDOORS" ],
     "connect_groups": "WATER"
   },

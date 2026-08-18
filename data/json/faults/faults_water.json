@@ -6,7 +6,7 @@
     "name": { "str": "Wet" },
     "description": "Item is too wet to use and has to be dried.",
     "item_prefix": "waterlogged",
-    "flags": [ "ITEM_BROKEN" ]
+    "flags": [ "ITEM_BROKEN", "NO_TURRET" ]
   },
   {
     "type": "fault_fix",

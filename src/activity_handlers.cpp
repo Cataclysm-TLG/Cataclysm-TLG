@@ -231,6 +231,7 @@ static const quality_id qual_FISHING_ROD( "FISHING_ROD" );
 
 static const skill_id skill_computer( "computer" );
 static const skill_id skill_firstaid( "firstaid" );
+static const skill_id skill_social( "social" );
 static const skill_id skill_survival( "survival" );
 
 static const species_id species_FERAL( "FERAL" );
@@ -464,8 +465,7 @@ void activity_handlers::butcher_do_turn( player_activity *act, Character * )
     }
     item &corpse_item = *target;
     if( action == butcher_type::DISSECT && ( corpse_item.has_flag( flag_QUARTERED ) ||
-            corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) || corpse_item.has_flag( flag_PULPED ) ||
-            corpse_item.has_flag( flag_GIBBED ) ) ) {
+            corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) || corpse_item.has_flag( flag_PULPED ) ) ) {
         add_msg( m_bad, _( "You back off from the ruined corpse, unable to continue." ) );
         act->set_to_null();
         return;
@@ -603,8 +603,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     }
 
     if( action == butcher_type::DISSECT && ( corpse_item.has_flag( flag_QUARTERED ) ||
-            corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) || corpse_item.has_flag( flag_PULPED ) ||
-            corpse_item.has_flag( flag_GIBBED ) ) ) {
+            corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) || corpse_item.has_flag( flag_PULPED ) ) ) {
         you.add_msg_if_player( m_info,
                                _( "It would be futile to dissect this badly damaged corpse." ) );
         act.targets.pop_back();
@@ -619,8 +618,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     }
 
     if( action == butcher_type::SKIN && ( corpse_item.has_flag( flag_SKINNED ) ||
-                                          corpse_item.has_flag( flag_QUARTERED ) || corpse_item.has_flag( flag_PULPED ) ||
-                                          corpse_item.has_flag( flag_GIBBED ) ) ) {
+                                          corpse_item.has_flag( flag_QUARTERED ) || corpse_item.has_flag( flag_PULPED ) ) ) {
         you.add_msg_if_player( m_info, _( "The corpse no longer has a salvageable skin." ) );
         act.targets.pop_back();
         return;
@@ -1015,7 +1013,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
     if( corpse_item->has_flag( flag_QUARTERED ) ) {
         monster_weight *= 0.95;
     }
-    if( corpse_item->has_flag( flag_GIBBED ) || corpse_item->has_flag( flag_PULPED ) ||
+    if( corpse_item->has_flag( flag_PULPED ) ||
         corpse_item->damage() >= corpse_item->max_damage() ) {
         monster_weight = std::round( 0.4 * monster_weight );
         if( action != butcher_type::FIELD_DRESS ) {
@@ -1032,7 +1030,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
         }
     }
     if( corpse_item->has_flag( flag_SKINNED ) ) {
-        monster_weight = std::round( 0.85 * monster_weight );
+        monster_weight = std::round( 0.95 * monster_weight );
     }
     const int entry_count = ( action == butcher_type::DISSECT &&
                               !mt.dissect.is_empty() ) ? mt.dissect->get_all().size() : mt.harvest->get_all().size();
@@ -1105,13 +1103,9 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
             roll = 0;
         }
 
-        // Check if monster was gibbed, starving, or skinned and handle accordingly
-        if( corpse_item->has_flag( flag_GIBBED ) && ( entry.type == harvest_drop_flesh ||
-                entry.type == harvest_drop_bone ) ) {
-            roll /= 2;
-        }
+        // Check if monster was starving, or skinned and handle accordingly
         if( corpse_item->has_flag( flag_UNDERFED ) && ( entry.type == harvest_drop_flesh ) ) {
-            roll /= 1.6;
+            roll *= 0.6;
         }
         if( corpse_item->has_flag( flag_SKINNED ) && entry.type == harvest_drop_skin ) {
             roll = 0;
@@ -1314,7 +1308,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                 monster_weight_remaining -= ( monster_weight - ( monster_weight * 3 / 4 / 4 ) );
             }
             if( corpse_item->has_flag( flag_SKINNED ) ) {
-                monster_weight_remaining -= monster_weight * 0.15;
+                monster_weight_remaining -= monster_weight * 0.5;
             }
         }
         const itype_id &leftover_id = mt.harvest->leftovers;
@@ -2143,18 +2137,15 @@ void activity_handlers::train_finish( player_activity *act, Character *you )
     if( sk.is_valid() ) {
         const Skill &skill = sk.obj();
         std::string skill_name = skill.name();
-        int old_skill_level = you->get_knowledge_level( sk );
-        you->practice( sk, 100, old_skill_level + 2 );
-        int new_skill_level = you->get_knowledge_level( sk );
-        if( old_skill_level != new_skill_level ) {
-            if( you->is_avatar() ) {
-                add_msg( m_good, _( "You finish training %s to level %d." ),
-                         skill_name, new_skill_level );
-            }
-            get_event_bus().send<event_type::gains_skill_level>( you->getID(), sk, new_skill_level );
-        } else if( you->is_avatar() ) {
-            add_msg( m_good, _( "You get some training in %s." ), skill_name );
-        }
+        // Teacher intelligence, subject matter skill, and social skill matters most.
+        // Student intelligence and social skill is secondary.
+        int teacher_quality = ( teacher->get_int() + ( teacher->get_skill_level(
+                                    skill_social ) + teacher->get_skill_level( sk ) ) ) * 3;
+        int student_quality = ( you->get_int() + ( you->get_skill_level( skill_social ) * 2 ) ) * 3;
+        int teaching_effectiveness = std::min( 100, std::max( 10,
+                                               ( teacher_quality * 2 + student_quality ) / 3 ) );
+        you->add_msg_if_player( m_good, _( "You get some training in %s." ), sk->name() );
+        you->practice( sk, teaching_effectiveness );
         act->set_to_null();
         return;
     }
@@ -2248,7 +2239,7 @@ void activity_handlers::hand_crank_do_turn( player_activity *act, Character *you
             add_msg( m_info, _( "You've charged the battery completely." ) );
         }
     }
-    if( you->get_fatigue() >= fatigue_levels::DEAD_TIRED ) {
+    if( you->get_fatigue() >= fatigue_levels::DEAD_TIRED || you->weariness_level() >= 4 ) {
         act->moves_left = 0;
         add_msg( m_info, _( "You're too exhausted to keep cranking." ) );
     }
@@ -3448,7 +3439,6 @@ void activity_handlers::atm_finish( player_activity *act, Character * )
         act->set_to_null();
     }
 }
-
 
 void activity_handlers::view_recipe_finish( player_activity *act, Character * )
 {

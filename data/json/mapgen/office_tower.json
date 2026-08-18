@@ -272,7 +272,7 @@
       "terrain": { "+": "t_door_locked", "'": "t_thconc_floor", "R": "t_railing" },
       "furniture": {
         "x": "f_console_broken",
-        "X": [ [ "f_generator_broken", 25 ], [ "f_diesel_generator", 5 ], [ "f_12000_gasoline_generator", 5 ] ],
+        "X": [ [ "f_generator_broken", 30 ], [ "f_diesel_generator", 5 ], [ "f_gasoline_generator", 5 ] ],
         "N": "f_machinery_heavy"
       },
       "place_nested": [

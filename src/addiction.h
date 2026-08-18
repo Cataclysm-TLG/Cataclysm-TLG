@@ -22,6 +22,7 @@ struct add_type {
         morale_type _craving_morale;
         effect_on_condition_id _effect;
         time_duration _sated = 2_hours;
+        std::vector<efftype_id> _satisfying_effects;
         std::string _builtin;
     public:
         addiction_id id;
@@ -52,6 +53,9 @@ struct add_type {
         const time_duration &get_default_sated() const {
             return _sated;
         }
+        const std::vector<efftype_id> &get_satisfying_effects() const {
+            return _satisfying_effects;
+        }
         const effect_on_condition_id &get_effect() const {
             return _effect;
         }
@@ -66,6 +70,7 @@ class addiction
         addiction_id type;
         int intensity = 0;
         time_duration sated = 2_hours;
+        std::vector<efftype_id> effects;
 
         addiction() = default;
         explicit addiction( const addiction_id &t, const int i = 1 )

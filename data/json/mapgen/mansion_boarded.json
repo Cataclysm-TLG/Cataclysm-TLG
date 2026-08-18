@@ -33,7 +33,7 @@
         "###++##############++###"
       ],
       "palettes": [ "standard_domestic_palette", "standard_domestic_landscaping_palette" ],
-      "terrain": { "?": "t_water_pool_shallow_outdoors", "o": "t_window_enhanced", "$": "t_door_metal_locked" },
+      "terrain": { "?": "t_water_pool_shallow_outdoors", "o": "t_window_bars_curtains", "$": "t_door_metal_locked" },
       "items": {
         " ": { "item": "clutter_mansion", "chance": 1 },
         "K": { "item": "crate_cleaning", "chance": 100 },
@@ -82,7 +82,7 @@
         "H": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
         "E": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
         "l": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { "&": "f_sofa" },
       "items": { " ": { "item": "clutter_mansion", "chance": 2 }, "c": { "item": "suit_of_armor", "chance": 50 } },
@@ -137,7 +137,7 @@
           [ "f_generator_broken", 35 ],
           [ "f_portable_generator", 10 ],
           [ "f_diesel_generator", 5 ],
-          [ "f_12000_gasoline_generator", 5 ]
+          [ "f_gasoline_generator", 5 ]
         ],
         "!": [ "f_crate_c", "f_cardboard_box" ]
       },
@@ -287,7 +287,7 @@
         "i": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
         "-": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
         ")": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { ")": "f_bed" },
       "place_loot": [ { "item": "television", "x": 4, "y": 16, "chance": 80 } ],
@@ -347,7 +347,7 @@
         ")": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
         ",": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
         "&": "t_door_metal_c",
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { ")": "f_bed" },
       "items": {
@@ -414,7 +414,7 @@
         "h": { "param": "carpet_color_type", "fallback": "t_carpet_purple" },
         "Y": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { "&": "f_bed" },
       "place_loot": [
@@ -473,7 +473,7 @@
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "Y": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { "&": "f_armchair" },
       "place_loot": [
@@ -528,7 +528,7 @@
         "f": { "param": "carpet_color_type", "fallback": "t_carpet_purple" },
         "h": { "param": "carpet_color_type", "fallback": "t_carpet_purple" },
         "Y": { "param": "linoleum_color_kitchen", "fallback": "t_linoleum_gray" },
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { ")": "f_speaker_cabinet" },
       "place_loot": [ { "item": "stereo", "x": 18, "y": 0, "chance": 80 } ],
@@ -579,7 +579,7 @@
         "=": "t_open_air_rooved",
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
-        "o": "t_window_enhanced",
+        "o": "t_window_bars_curtains",
         "$": "t_secretdoor_concrete_c"
       },
       "place_loot": [ { "item": "laptop", "x": 7, "y": 12, "chance": 80 }, { "item": "television", "x": 8, "y": 9, "chance": 80 } ],
@@ -688,7 +688,7 @@
         "³": "t_floor_waxed_y",
         "°": "t_floor_waxed",
         "₸": "t_floor_waxed",
-        "o": "t_window_enhanced",
+        "o": "t_window_bars_curtains",
         "+": "t_rdoor_boarded"
       },
       "furniture": { "&": "f_speaker_cabinet" },
@@ -751,7 +751,7 @@
         "e": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "Y": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": {
         "з": [ "f_treadmill", "f_treadmill_mechanical" ],
@@ -816,7 +816,7 @@
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
         ")": "t_glass_roof",
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { "&": "f_bed", "?": "f_chair" },
       "place_loot": [
@@ -878,7 +878,7 @@
         "E": { "param": "carpet_color_type", "fallback": "t_carpet_yellow" },
         "l": { "param": "carpet_color_type", "fallback": "t_carpet_yellow" },
         "r": { "param": "carpet_color_type", "fallback": "t_carpet_yellow" },
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { ")": "f_table" },
       "items": {
@@ -937,7 +937,7 @@
         "_": "t_floor_waxed_y",
         ";": "t_floor_waxed",
         "₸": "t_floor_waxed_y",
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { "&": "f_speaker_cabinet" },
       "place_loot": [ { "item": "stereo", "x": 22, "y": 15, "chance": 80 } ],
@@ -993,7 +993,7 @@
         "-": { "param": "carpet_color_type", "fallback": "t_carpet_purple" },
         "E": { "param": "carpet_color_type", "fallback": "t_carpet_purple" },
         ")": { "param": "carpet_color_type", "fallback": "t_carpet_purple" },
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { ")": "f_bed" },
       "items": {
@@ -1045,7 +1045,7 @@
         "=": "t_open_air_rooved",
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
-        "o": "t_window_enhanced"
+        "o": "t_window_bars_curtains"
       },
       "furniture": { "?": "f_dresser" },
       "items": {

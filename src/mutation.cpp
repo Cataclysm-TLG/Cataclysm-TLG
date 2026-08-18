@@ -322,6 +322,7 @@ void Character::set_mutation_unsafe( const trait_id &trait, const mutation_varia
 
 void Character::do_mutation_updates()
 {
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     calc_encumbrance();
 }
@@ -992,7 +993,7 @@ void Character::deactivate_mutation( const trait_id &mut )
 {
     cached_mutations[mut].powered = false;
     trait_flag_cache.clear();
-
+    invalidate_tile_eye_level_cache();
     recalc_sight_limits();
     const mutation_branch &mdata = mut.obj();
     if( mdata.transform ) {
@@ -1334,7 +1335,7 @@ void Character::mutate( const int &true_random_chance, bool use_vitamins )
     } while( valid.empty() );
 }
 
-void Character::mutate( )
+void Character::mutate()
 {
     mutate( 1, false );
 }
@@ -2347,7 +2348,8 @@ void Character::remove_mutation( const trait_id &mut, bool silent )
     if( !silent && uistate.distraction_mutation && is_avatar() ) {
         g->cancel_activity_or_ignore_query( distraction_type::mutation, _( "You mutate!" ) );
     }
-
+    // Clear eye level cache case we change size or something.
+    invalidate_tile_eye_level_cache();
     calc_mutation_levels();
     drench_mut_calc();
 }

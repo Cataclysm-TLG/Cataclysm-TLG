@@ -1993,7 +1993,6 @@ void Item_factory::init()
     add_iuse( "DIRECTIONAL_HOLOGRAM", &iuse::directional_hologram );
     add_iuse( "CAPTURE_MONSTER_ACT", &iuse::capture_monster_act );
     add_iuse( "CAPTURE_MONSTER_VEH", &iuse::capture_monster_veh );
-    add_iuse( "CHEW", &iuse::chew );
     add_iuse( "RPGDIE", &iuse::rpgdie );
     add_iuse( "CHANGE_EYES", &iuse::change_eyes );
     add_iuse( "CHANGE_SKIN", &iuse::change_skin );
@@ -3441,7 +3440,6 @@ void islot_comestible::deserialize( const JsonObject &jo )
     optional( jo, was_loaded, "stack_size", stack_size );
     optional( jo, was_loaded, "quench", quench );
     optional( jo, was_loaded, "fun", fun );
-    optional( jo, was_loaded, "stim", stim );
     optional( jo, was_loaded, "fatigue_mod", fatigue_mod );
     optional( jo, was_loaded, "healthy", healthy );
     optional( jo, was_loaded, "parasites", parasites, numeric_bound_reader<int> {0} );

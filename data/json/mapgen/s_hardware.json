@@ -334,9 +334,9 @@
         { "item": "hardware", "x": 20, "y": [ 17, 20 ], "chance": 80, "repeat": [ 1, 8 ] },
         { "item": "tools_construction", "x": 17, "y": [ 17, 20 ], "chance": 80, "repeat": [ 1, 4 ] },
         { "item": "construction_worker", "x": 14, "y": [ 17, 20 ], "chance": 80, "repeat": [ 1, 8 ] },
-        { "item": "farming_seeds", "x": 2, "y": [ 11, 14 ], "chance": 90, "repeat": [ 4, 16 ] },
+        { "item": "garden_seeds", "x": 2, "y": [ 11, 14 ], "chance": 90, "repeat": [ 4, 16 ] },
         { "item": "tools_earthworking", "x": 2, "y": [ 16, 20 ], "chance": 55, "repeat": [ 1, 4 ] },
-        { "item": "farming_seeds", "x": 5, "y": [ 11, 14 ], "chance": 80, "repeat": [ 4, 16 ] },
+        { "item": "garden_seeds", "x": 5, "y": [ 11, 14 ], "chance": 80, "repeat": [ 4, 16 ] },
         { "item": "supplies_farming", "x": 5, "y": [ 16, 20 ], "chance": 65, "repeat": [ 1, 8 ] },
         { "item": "trash", "x": 10, "y": 20, "chance": 75 }
       ],

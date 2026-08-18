@@ -88,8 +88,6 @@ static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_wet( "wet" );
 
-
-
 static const json_character_flag json_flag_BARKY( "BARKY" );
 static const json_character_flag json_flag_CANNOT_CHANGE_TEMPERATURE( "CANNOT_CHANGE_TEMPERATURE" );
 static const json_character_flag json_flag_COLDBLOOD( "COLDBLOOD" );
@@ -128,6 +126,9 @@ static const trait_id trait_SLIMY( "SLIMY" );
 static const trait_id trait_URSINE_FUR( "URSINE_FUR" );
 
 static const vitamin_id vitamin_blood( "blood" );
+static const vitamin_id vitamin_calcium( "calcium" );
+static const vitamin_id vitamin_iron( "iron" );
+static const vitamin_id vitamin_vitC( "vitC" );
 
 void Character::update_body_wetness( const w_point &weather )
 {
@@ -262,7 +263,6 @@ void Character::update_body( const time_point &from, const time_point &to )
     const int five_mins = ticks_between( from, to, 5_minutes );
     if( five_mins > 0 ) {
         activity_history.try_reduce_weariness( base_bmr() );
-
         check_needs_extremes();
         update_needs( five_mins );
         regen( five_mins );
@@ -270,15 +270,30 @@ void Character::update_body( const time_point &from, const time_point &to )
         // TODO: change @ref mend to take time_duration
         mend( five_mins * to_turns<int>( 5_minutes ) );
         activity_history.reset_activity_level();
+        // Ensure that NPCs outside the player faction don't die of scurvy.
+        if( !needs_food() ) {
+            vitamin_set( vitamin_vitC, 0 );
+            vitamin_set( vitamin_iron, 0 );
+            vitamin_set( vitamin_calcium, 0 );
+        }
+        /* This is called in vitamin_mod, but we call it again here as a fallback so
+           hypovolemia etc don't get stuck on a character who should have recovered by now. */
+        for( const auto &v : vitamin::all() ) {
+            update_vitamins( v.first );
+        }
     }
     bool was_sleeping = get_value( "was_sleeping" ).str() == "true";
     if( in_sleep_state() && was_sleeping ) {
         needs_rates tmp_rates;
         calc_sleep_recovery_rate( tmp_rates );
-        const int fatigue_regen_rate = tmp_rates.recovery;
-        const time_duration effective_time_slept = ( to - from ) * fatigue_regen_rate;
-        mod_daily_sleep( effective_time_slept );
-        mod_continuous_sleep( effective_time_slept );
+        const float fatigue_regen_rate = tmp_rates.recovery;
+        if( fatigue_regen_rate > 0.0f ) {
+            const int turns = to_turns<int>( to - from );
+            const time_duration effective_time_slept = time_duration::from_turns(
+                        roll_remainder( turns * fatigue_regen_rate ) );
+            mod_daily_sleep( effective_time_slept );
+            mod_continuous_sleep( effective_time_slept );
+        }
     }
     if( was_sleeping && !in_sleep_state() ) {
         if( get_continuous_sleep() >= 6_hours ) {
@@ -338,21 +353,24 @@ void Character::update_body( const time_point &from, const time_point &to )
             mod_daily_health( 1, 200 );
         }
 
+        // Low morale flags last a day, unless their morale still meets the threshold throughout days.
         if( !get_value( "got_to_low_morale" ).is_empty() ) {
             mod_daily_health( -1, -100 );
-        } else {
-            remove_value( "got_to_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_LOW ) {
+                remove_value( "got_to_low_morale" );
+            }
         }
         if( !get_value( "got_to_very_low_morale" ).is_empty() ) {
             mod_daily_health( -2, -200 );
-        } else {
-            remove_value( "got_to_very_low_morale" );
+            if( get_morale_level() > MORALE_UNHEALTHY_VERY_LOW ) {
+                remove_value( "got_to_very_low_morale" );
+            }
         }
 
         // Being badly injured is not healthy, though your immune system might be able to handle it.
         bool wounded = false;
         for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
-            if( get_part_hp_cur( bp ) < ( get_part_hp_cur( bp ) / 2 ) ) {
+            if( get_part_hp_cur( bp ) < ( get_part_hp_max( bp ) / 2 ) ) {
                 wounded = true;
             }
         }
@@ -409,7 +427,7 @@ void Character::update_body( const time_point &from, const time_point &to )
                 // "RDA" for our character and roll a chance to get a penalty tied to how much we ate.
                 if( ( toxin_RDA > 0 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
                     int toxin_malus = static_cast<int>( std::ceil( toxin_RDA / 10.0 ) );
-                    mod_daily_health( std::max( -5, toxin_malus ), -200 );
+                    mod_daily_health( std::max( -5, -toxin_malus ), -200 );
                 }
             }
 
@@ -494,7 +512,9 @@ std::map<bodypart_id, temp_warning_record> last_temp_warnings;
 
 void Character::update_bodytemp()
 {
-    if( has_trait( trait_DEBUG_NOTEMP ) ) {
+    npc *n = as_npc();
+    if( has_trait( trait_DEBUG_NOTEMP ) ||
+        ( !is_avatar() && n && !n->is_player_ally() ) ) {
         set_all_parts_temp_conv( BODYTEMP_NORM );
         set_all_parts_temp_cur( BODYTEMP_NORM );
         return;
@@ -1101,7 +1121,7 @@ void Character::update_stomach( const time_point &from, const time_point &to )
             mod_stored_calories( -std::floor( five_mins * kcal_per_time * 1000 ) );
         }
     }
-    // if foodless no need to calc hunger, and set hunger_effect
+    // If foodless, no need to calc hunger, and set hunger_effect.
     if( foodless ) {
         return;
     }

@@ -1475,9 +1475,9 @@ void iexamine::rubble( Character &you, const tripoint_bub_ms &examp )
     int moves;
     if( you.has_quality( qual_DIG, 3 ) || you.has_trait( trait_BURROW ) ||
         you.has_trait( trait_BURROWLARGE ) ) {
-        moves = to_moves<int>( 1_minutes );
+        moves = to_moves<int>( 6_minutes );
     } else if( you.has_quality( qual_DIG, 2 ) ) {
-        moves = to_moves<int>( 2_minutes );
+        moves = to_moves<int>( 12_minutes );
     } else {
         add_msg( m_info, _( "If only you had a shovel…" ) );
         return;
@@ -5259,6 +5259,14 @@ void iexamine::pay_gas( Character &you, const tripoint_bub_ms &examp )
     }
 }
 
+void iexamine::ledge_ramp( Character &you, const tripoint_bub_ms &examp )
+{
+    map &here = get_map();
+    if( !here.has_flag_ter( "RAMP_DOWN_HIGH", you.pos_bub() ) ) {
+        ledge( you, examp );
+    }
+}
+
 void iexamine::ledge( Character &you, const tripoint_bub_ms &examp )
 {
     enum ledge_actions {
@@ -7321,6 +7329,7 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
             { "autoclave_full", &iexamine::autoclave_full },
             { "fireplace", &iexamine::fireplace },
             { "ledge", &iexamine::ledge },
+            { "ledge_ramp", &iexamine::ledge_ramp },
             { "autodoc", &iexamine::autodoc },
             { "quern_examine", &iexamine::quern_examine },
             { "smoker_options", &iexamine::smoker_options },
@@ -7358,9 +7367,9 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
 
 void iexamine::practice_survival_while_foraging( Character &who )
 {
-    ///\EFFECT_INT Intelligence caps survival skill gains from foraging
+    ///\EFFECT_INT Intelligence caps ecology skill gains from foraging
     const int max_forage_skill = who.int_cur / 3 + 1;
-    ///\EFFECT_SURVIVAL decreases survival skill gain from foraging (NEGATIVE)
+    ///\EFFECT_SURVIVAL decreases ecology skill gain from foraging (NEGATIVE)
     const int max_exp = 2 * ( max_forage_skill - static_cast<int>( who.get_skill_level(
                                   skill_survival ) ) );
     // Award experience for foraging attempt regardless of success

@@ -112,7 +112,6 @@ static const ter_str_id ter_t_door_locked_interior( "t_door_locked_interior" );
 static const ter_str_id ter_t_door_locked_peep( "t_door_locked_peep" );
 static const ter_str_id ter_t_fault( "t_fault" );
 static const ter_str_id ter_t_grass( "t_grass" );
-static const ter_str_id ter_t_grass_alien( "t_grass_alien" );
 static const ter_str_id ter_t_grass_dead( "t_grass_dead" );
 static const ter_str_id ter_t_grass_golf( "t_grass_golf" );
 static const ter_str_id ter_t_grass_white( "t_grass_white" );
@@ -247,10 +246,15 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         return true;
     }
     bool via_ramp = false;
-    if( m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
+    if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_UP_LOW, you_pos ) &&
+        m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
+        return false;
+    } else if( !m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, you_pos ) &&
+               m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
         dest_loc.z() += 1;
         via_ramp = true;
-    } else if( m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest_loc ) ) {
+    } else if( m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN_HIGH, you_pos ) &&
+               m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest_loc ) ) {
         dest_loc.z() -= 1;
         via_ramp = true;
     }
@@ -605,9 +609,8 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
     g->water_affect_items( you );
 
     int movecost = you.swim_speed();
-    if( !you.has_proficiency( proficiency_prof_swimming ) ) {
-        you.practice_proficiency( proficiency_prof_swimming, 1_seconds );
-    }
+    int capped_movecost = std::min( movecost, 500 );
+    you.practice_proficiency( proficiency_prof_swimming, 1_seconds * ( 1 / movecost ) );
     you.practice( skill_swimming, you.is_underwater() ? 2 : 1 );
     if( movecost >= 500 || you.has_effect( effect_winded ) ) {
         if( !you.is_underwater() &&
@@ -648,7 +651,7 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
         m.board_vehicle( you.pos_bub(), &you );
     }
     // 500 means we can't swim, so for now that's the cap.
-    you.mod_moves( -( ( movecost > 500 ? 500 : movecost ) * ( diagonal ? M_SQRT2 : 1 ) ) );
+    you.mod_moves( -( ( capped_movecost ) * ( diagonal ? M_SQRT2 : 1 ) ) );
     you.inv->rust_iron_items();
 
     if( !you.is_mounted() ) {
@@ -781,8 +784,22 @@ void avatar_action::fire_ranged_bionic( avatar &you, const item &fake_gun )
 
 bool avatar_action::fire_turret_manual( avatar &you, map &m, turret_data &turret )
 {
+    if( you.controlling_vehicle ) {
+        add_msg( m_warning, _( "You can't manually operate a turret while controlling a vehicle." ) );
+        return false;
+    }
+    if( you.in_vehicle ) {
+        if( const optional_vpart_position vp = m.veh_at( you.pos_bub() ) ) {
+            if( vp->is_inside() ) {
+                add_msg( m_warning,
+                         _( "The turret is atop the vehicle.  You can't manually fire it while you are under a roof." ) );
+                return false;
+            }
+        }
+    }
+
     if( !turret.base()->is_gun() ) {
-        debugmsg( "Expected turret base to be a gun." );
+        debugmsg( "Expected turret.base() to be a gun." );
         return false;
     }
 
@@ -792,6 +809,9 @@ bool avatar_action::fire_turret_manual( avatar &you, map &m, turret_data &turret
             return false;
         case turret_data::status::no_power:
             add_msg( m_bad, _( "The %s is not powered." ), turret.name() );
+            return false;
+        case turret_data::status::invalid:
+            add_msg( m_bad, _( "The %s is inoperable." ), turret.name() );
             return false;
         case turret_data::status::ready:
             break;
@@ -918,9 +938,6 @@ bool avatar_action::eat_here( avatar &you )
             return false;
         } else if( ter_underfoot == ter_t_grass_white ) {
             add_msg( _( "This grass is tainted with paint and thus inedible." ) );
-            return false;
-        } else if( ter_underfoot == ter_t_grass_alien ) {
-            add_msg( _( "This grass is razor sharp and would probably shred your mouth." ) );
             return false;
         }
     }

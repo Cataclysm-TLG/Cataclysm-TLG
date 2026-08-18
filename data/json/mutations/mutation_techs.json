@@ -1471,6 +1471,7 @@
     "weighting": -2,
     "reach_ok": false,
     "crit_ok": true,
+    "description": "A basic claw attack",
     "condition": {
       "not": {
         "and": [
@@ -1498,6 +1499,7 @@
     "reach_ok": false,
     "crit_ok": true,
     "attack_vectors": [ "vector_claw" ],
+    "description": "A fast claw attack made against a grappled enemy",
     "condition": {
       "or": [
         { "and": [ { "u_has_flag": "GRAB_FILTER" }, { "npc_has_flag": "GRAB" } ] },
@@ -1513,6 +1515,7 @@
     "messages": [ "You crush %s with your pincer", "<npcname> crushes %s with their pincer" ],
     "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
     "unarmed_allowed": true,
+    "description": "A bash attack against a grappled enemy",
     "crit_ok": true,
     "condition": {
       "and": [
@@ -1550,6 +1553,7 @@
     "messages": [ "You crush the life out of %s with your pincer", "<npcname> crushes the life out of %s with their pincer" ],
     "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
     "unarmed_allowed": true,
+    "description": "A bash attack against a grappled enemy.  Suffocates creatures that need to breathe",
     "crit_ok": true,
     "condition": {
       "and": [
@@ -1634,6 +1638,7 @@
     "reach_ok": false,
     "crit_ok": true,
     "attack_vectors": [ "vector_claw" ],
+    "description": "A knockdown attack performed ith claws and broad paws",
     "condition": {
       "and": [
         { "u_has_trait": "PAWS_LARGE" },
@@ -1661,6 +1666,7 @@
     "reach_ok": false,
     "crit_ok": true,
     "attack_vectors": [ "vector_tongue" ],
+    "description": "A stabbing attack that can deliver venom, should you have any",
     "tech_effects": [
       {
         "id": "anticoagulant_draculin",
@@ -1694,6 +1700,7 @@
     "name": "Sting",
     "melee_allowed": true,
     "messages": [ "You sting %s", "<npcname> stings %s" ],
+    "description": "A stabbing attack that can deliver venom, should you have any",
     "unarmed_allowed": true,
     "basic": true,
     "weighting": -3,
@@ -1739,6 +1746,7 @@
     "reach_ok": false,
     "crit_ok": true,
     "condition": { "not": { "u_has_flag": "GRAB" } },
+    "description": "A bashing attack performed with the tail",
     "attack_vectors": [ "vector_tail_tip" ]
   },
   {
@@ -1753,6 +1761,7 @@
     "reach_ok": false,
     "crit_ok": true,
     "attack_vectors": [ "vector_tail_tip" ],
+    "description": "A bashing attack performed with the tail, can knock enemies down",
     "//": "Enemy must be of a similar size, logically downable, and not flying.",
     "tech_effects": [ { "id": "downed", "duration": 150, "on_damage": true, "message": "The attack knocks %s down!" } ],
     "condition": {
@@ -1782,6 +1791,7 @@
     "weighting": -8,
     "reach_ok": false,
     "crit_ok": true,
+    "description": "A bashing attack performed with the tail",
     "condition": { "and": [ { "u_has_trait": "THICK_TAIL" }, { "not": { "u_has_flag": "GRAB" } } ] },
     "attack_vectors": [ "vector_tail_tip" ]
   }

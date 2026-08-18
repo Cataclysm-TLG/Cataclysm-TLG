@@ -407,6 +407,7 @@ std::optional<std::list<item>::iterator> outfit::wear_item( Character &guy, cons
     }
 
     if( do_calc_encumbrance ) {
+        guy.invalidate_tile_eye_level_cache();
         guy.recalc_sight_limits();
         guy.calc_encumbrance();
         guy.calc_discomfort();
@@ -2748,7 +2749,7 @@ int outfit::clatter_sound() const
 {
     int max_volume = 0;
     for( const item &i : worn ) {
-        // if the item has noise making pockets we should check if they have clatered
+        // if the item has noise making pockets we should check if they have clattered.
         if( i.has_noisy_pockets() ) {
             for( const item_pocket *pocket : i.get_all_contained_pockets() ) {
                 int noise_chance = pocket->get_pocket_data()->activity_noise.chance;

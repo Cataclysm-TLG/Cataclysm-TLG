@@ -323,7 +323,7 @@ class Creature : public viewer
         void setpos( map &here, const tripoint_bub_ms &p, bool check_gravity = true );
         void setpos( const tripoint_abs_ms &p, bool check_gravity = true );
 
-        // Convert size to int. TODO: use this everywhere instead of enuming every time.
+        // Convert size to int. Useful when working in classes like avatar so we don't have to jump through hoops.
         int enum_size() const;
         /** Checks if the creature fits into a given tile. Set the boolean argument to true if the creature would barely fit. */
         bool can_move_to_vehicle_tile( const tripoint_abs_ms &loc, bool &cramped ) const;
@@ -404,7 +404,8 @@ class Creature : public viewer
          */
         /*@{*/
         bool sees( const map &here, const Creature &critter ) const override;
-        bool sees( const map &here, const tripoint_bub_ms &t, bool is_avatar = false,
+        // is_character means that the thing we are trying to see is a character, not that the viewer is one.
+        bool sees( const map &here, const tripoint_bub_ms &t, bool is_character = false,
                    int range_mod = 0 ) const override;
         /*@}*/
 
@@ -887,6 +888,7 @@ class Creature : public viewer
         int get_part_damage_bandaged( const bodypart_id &id ) const;
         int get_part_drench_capacity( const bodypart_id &id ) const;
         int get_part_wetness( const bodypart_id &id ) const;
+        float get_part_pain_multiplier( const bodypart_id &id ) const;
         units::temperature get_part_temp_cur( const bodypart_id &id ) const;
         units::temperature get_part_temp_conv( const bodypart_id &id ) const;
         int get_part_frostbite_timer( const bodypart_id &id )const;

@@ -93,5 +93,70 @@
     "type": "ter_furn_migration",
     "from_furn": "f_mutpoppy",
     "to_furn": "f_poppy"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_pit_corpsed_flesh",
+    "to_ter": "t_pit_corpsed"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_evergreen",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_dead",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_deadpine",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_hickory",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_fruit",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_giant_fern",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_maple",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_nut",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_willow",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_treetop_apricot",
+    "to_ter": "t_treetop"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_furn": "f_12000_gasoline_generator",
+    "to_furn": "f_gasoline_generator"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "ap_12000_gasoline_generator",
+    "to": "ap_gasoline_generator"
   }
 ]

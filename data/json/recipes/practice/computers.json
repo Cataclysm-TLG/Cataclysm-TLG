@@ -44,7 +44,7 @@
     "practice_data": { "min_difficulty": 5, "max_difficulty": 7 },
     "autolearn": [ [ "computer", 7 ] ],
     "book_learn": [ [ "SICP", 5 ], [ "textbook_computer", 6 ] ],
-    "tools": [ [ [ "laptop", 50 ] ], [ "software_hacking" ] ],
+    "tools": [ [ [ "laptop", 50 ] ], [ [ "software_hacking", -1 ] ] ],
     "flags": [ "BLIND_EASY" ]
   }
 ]

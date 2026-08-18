@@ -877,7 +877,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "thick wool onesie" },
-    "description": "An encumbering wool suit covered in nice patterns.  It looks like full body armor but it only protects against cold, sadly.",
+    "description": "A hefty bodysuit made of wool, perfect for the winter months.",
     "weight": "883 g",
     "volume": "3 L",
     "price": "80 USD",
@@ -888,13 +888,13 @@
     "looks_like": "touring_suit",
     "color": "dark_gray",
     "armor": [
-      { "covers": [ "torso", "leg_l", "leg_r" ], "coverage": 100, "encumbrance": 20 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 90, "encumbrance": 20 },
-      { "covers": [ "head" ], "coverage": 60, "encumbrance": 15 },
+      { "covers": [ "torso", "leg_l", "leg_r" ], "coverage": 100, "encumbrance": 15 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 90, "encumbrance": 15 },
+      { "covers": [ "head" ], "coverage": 60, "encumbrance": 10 },
       { "covers": [ "foot_l", "foot_r" ], "coverage": 100, "encumbrance": 15 }
     ],
     "warmth": 50,
-    "material_thickness": 1,
+    "material_thickness": 0.6,
     "flags": [ "VARSIZE" ]
   },
   {

@@ -6,7 +6,7 @@
     "description": "This cat-sized rat snuffles along the ground looking for things to eat.  It hisses at anything that comes near it, baring sizable teeth.",
     "default_faction": "ratkin",
     "bodytype": "pig",
-    "species": [ "MUTANT" ],
+    "species": [ "MUTANT", "MAMMAL" ],
     "volume": "4 L",
     "weight": "4 kg",
     "hp": 25,
@@ -84,6 +84,7 @@
     "attack_effs": [ { "id": "rat_bite_fever", "duration": 400, "chance": 20 } ],
     "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "PATH_AVOID_DANGER", "CAN_DIG", "EATS" ],
     "dissect": "dissect_rat_sample_small",
+    "decay": "animal_decay",
     "armor": { "bash": 5, "cut": 6, "bullet": 2 }
   },
   {
@@ -125,6 +126,7 @@
     ],
     "attack_effs": [ { "id": "rat_bite_fever", "duration": 400, "chance": 20 } ],
     "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "PATH_AVOID_DANGER", "CAN_DIG", "EATS" ],
+    "decay": "animal_decay",
     "armor": { "bash": 5, "cut": 6, "bullet": 2 }
   }
 ]

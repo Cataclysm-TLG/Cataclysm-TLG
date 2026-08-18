@@ -230,7 +230,8 @@
         "..%....................................................................."
       ],
       "palettes": [ "ranch_camp" ],
-      "place_monsters": [ { "monster": "GROUP_DOMESTIC", "x": [ 10, 23 ], "y": [ 3, 23 ], "repeat": [ 4, 6 ], "density": 0.1 } ]
+      "place_monsters": [ { "monster": "GROUP_DOMESTIC_SAFE", "x": [ 10, 19 ], "y": [ 3, 19 ], "repeat": [ 3, 5 ], "density": 0.1 } ],
+      "place_monster": [ { "monster": "mon_woodlouse", "x": 22, "y": 22, "name": "Durst", "chance": 100 } ]
     },
     "om_terrain": [ [ "ranch_camp_19", "ranch_camp_20", "ranch_camp_21" ], [ "ranch_camp_28", "ranch_camp_29", "ranch_camp_30" ] ],
     "type": "mapgen",
@@ -467,7 +468,7 @@
         "........xxxxxxx.................................x.............x........."
       ],
       "palettes": [ "ranch_camp" ],
-      "place_monsters": [ { "monster": "GROUP_DOMESTIC", "x": [ 3, 23 ], "y": [ 3, 23 ], "repeat": [ 4, 6 ], "density": 0.1 } ]
+      "place_monsters": [ { "monster": "GROUP_DOMESTIC_SAFE", "x": [ 3, 23 ], "y": [ 3, 23 ], "repeat": [ 4, 6 ], "density": 0.1 } ]
     },
     "om_terrain": [ [ "ranch_camp_40", "ranch_camp_41", "ranch_camp_42" ], [ "ranch_camp_49", "ranch_camp_50", "ranch_camp_51" ] ],
     "type": "mapgen",
@@ -620,14 +621,14 @@
         }
       ],
       "place_monster": [
-        { "monster": "mon_horse", "x": [ 42, 43 ], "y": [ 25, 47 ], "repeat": [ 1, 4 ], "chance": 8 },
-        { "monster": "mon_cow", "x": [ 67, 68 ], "y": [ 25, 47 ], "repeat": [ 1, 4 ], "chance": 8 },
-        { "monster": "mon_pig", "x": [ 52, 58 ], "y": [ 26, 28 ], "repeat": [ 1, 4 ], "chance": 8 },
-        { "monster": "mon_pig", "x": [ 52, 58 ], "y": [ 26, 28 ], "repeat": [ 1, 4 ], "chance": 8 },
-        { "monster": "mon_sheep", "x": [ 52, 58 ], "y": 36, "repeat": [ 1, 4 ], "chance": 8 },
-        { "monster": "mon_sheep", "x": [ 52, 58 ], "y": 36, "repeat": [ 1, 4 ], "chance": 8 },
-        { "monster": "mon_chicken", "x": [ 52, 58 ], "y": [ 44, 46 ], "repeat": [ 1, 6 ], "chance": 8 },
-        { "monster": "mon_chicken", "x": [ 52, 58 ], "y": [ 44, 46 ], "repeat": [ 1, 6 ], "chance": 8 }
+        { "monster": "mon_horse", "x": [ 42, 43 ], "y": [ 25, 47 ], "repeat": [ 1, 3 ], "chance": 8 },
+        { "monster": "mon_cow", "x": [ 67, 68 ], "y": [ 25, 47 ], "repeat": [ 1, 3 ], "chance": 8 },
+        { "monster": "mon_pig", "x": [ 52, 58 ], "y": [ 26, 28 ], "repeat": [ 1, 3 ], "chance": 8 },
+        { "monster": "mon_pig", "x": [ 52, 58 ], "y": [ 26, 28 ], "repeat": [ 1, 3 ], "chance": 8 },
+        { "monster": "mon_sheep", "x": [ 52, 58 ], "y": 36, "repeat": [ 1, 3 ], "chance": 8 },
+        { "monster": "mon_sheep", "x": [ 52, 58 ], "y": 36, "repeat": [ 1, 3 ], "chance": 8 },
+        { "monster": "mon_chicken", "x": [ 52, 58 ], "y": [ 44, 46 ], "repeat": [ 1, 5 ], "chance": 8 },
+        { "monster": "mon_chicken", "x": [ 52, 58 ], "y": [ 44, 46 ], "repeat": [ 1, 5 ], "chance": 8 }
       ]
     },
     "om_terrain": [ [ "ranch_camp_55", "ranch_camp_56", "ranch_camp_57" ], [ "ranch_camp_64", "ranch_camp_65", "ranch_camp_66" ] ],
@@ -675,7 +676,7 @@
         "../#################/............../..............%.....................",
         "..///////////////////............../..............%.....................",
         "../#################/............../....|||||+||4.%.....................",
-        "../#################/...........sssssss.|t B- ±|..%.....................",
+        "../#################/....?......sssssss.|t B- ±|..%.....................",
         "..///////////////////...|ƃ|.....sssssss.|Ŧ B- ±|..%.....................",
         "......WWWWWWWWWwwWWWW...|||www||||w+w||||-+----|..%.....................",
         "......W;;;rrr;;;;;;rW...|  hnh  -‡      -  @@  |..%.....................",
@@ -692,7 +693,15 @@
         "....//////////////5...............................%....................."
       ],
       "palettes": [ "ranch_camp" ],
-      "terrain": { "r": "t_dirtfloor", ";": "t_dirtfloor", "ƃ": "t_ramp_down_low", "|": "t_brick_wall", "-": "t_wall_w" },
+      "place_npcs": [ { "class": "ranch_foreman", "x": 16, "y": 38 }, { "class": "ranch_construction_1", "x": 9, "y": 40 } ],
+      "terrain": {
+        "r": "t_dirtfloor",
+        ";": "t_dirtfloor",
+        "?": "t_earth_ramp_down_high",
+        "ƃ": "t_earth_ramp_down_low",
+        "|": "t_brick_wall",
+        "-": "t_wall_w"
+      },
       "furniture": { "±": "f_rack_wood" },
       "items": {
         "d": [
@@ -1057,10 +1066,10 @@
         "                        ",
         "                        ",
         "                        ",
-        "                        ",
         "|||                     ",
+        "|?|                     ",
         "|ƃ|                     ",
-        "|.|||||||               ",
+        "|+|||||||               ",
         "|......X|               ",
         "|..a.r.H|               ",
         "|..a.r.b|               ",
@@ -1075,7 +1084,7 @@
         "                        "
       ],
       "palettes": [ "standard_domestic_basement_palette" ],
-      "terrain": { "ƃ": "t_ramp_up_high", ".": "t_dirtfloor", "|": "t_brick_wall" },
+      "terrain": { "ƃ": "t_earth_ramp_up_low", "?": "t_earth_ramp_up_high", ".": "t_dirtfloor", "|": "t_brick_wall" },
       "furniture": {
         "a": "f_rack_wood",
         "r": "f_rack_wood",

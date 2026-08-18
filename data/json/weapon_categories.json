@@ -2,192 +2,193 @@
   {
     "type": "weapon_category",
     "id": "AUTOMATIC_RIFLES",
-    "name": "AUTOMATIC RIFLES",
+    "name": "Automatic Rifles",
     "proficiencies": [ "prof_auto_rifles_familiar", "prof_auto_rifles_pro", "prof_auto_rifles_master" ]
   },
   {
     "type": "weapon_category",
     "id": "AUTOMATIC_PISTOLS",
-    "name": "AUTOMATIC PISTOLS",
+    "name": "Automatic Pistols",
     "proficiencies": [ "prof_auto_pistols_familiar", "prof_auto_pistols_pro", "prof_auto_pistols_master" ]
   },
   {
     "type": "weapon_category",
     "id": "KNIVES",
-    "name": "KNIVES",
+    "name": "Knives",
     "proficiencies": [ "prof_knives_familiar", "prof_knives_pro", "prof_knives_master" ]
   },
   {
     "type": "weapon_category",
     "id": "FLAILS",
-    "name": "FLAILS",
+    "name": "Flails",
     "proficiencies": [ "prof_flails_familiar", "prof_flails_pro", "prof_flails_master" ]
   },
   {
     "type": "weapon_category",
     "id": "HAMMERS",
     "//": "Hammers, maces, and other blunt weapons which concentrate force on a weighted head.",
-    "name": "HAMMERS",
+    "name": "Hammers and Maces",
     "proficiencies": [ "prof_hammers_familiar", "prof_hammers_pro", "prof_hammers_master" ]
   },
   {
     "type": "weapon_category",
     "id": "BATONS",
     "//": "Lightweight clubs that rely more on skill than brute force.",
-    "name": "BATONS",
+    "name": "Batons",
     "proficiencies": [ "prof_batons_familiar", "prof_batons_pro", "prof_batons_master" ]
   },
   {
     "type": "weapon_category",
     "id": "BLUDGEONS",
-    "//": "Sticks, bats, and other simple blunt weapons.",
-    "name": "BLUDGEONS",
+    "//": "Sticks, bats, and other simple blunt weapons. These are never used in martial arts, and are intended to be good anyway.",
+    "name": "Bludgeons",
     "proficiencies": [ "prof_bludgeons_familiar", "prof_bludgeons_pro", "prof_bludgeons_master" ]
   },
   {
     "type": "weapon_category",
     "id": "MEDIUM_SWORDS",
     "//": "One-handed swords above 60cm in length with a cutting edge.",
-    "name": "MEDIUM SWORDS",
+    "name": "Medium Swords",
     "proficiencies": [ "prof_medium_swords_familiar", "prof_medium_swords_pro", "prof_medium_swords_master" ]
   },
   {
     "type": "weapon_category",
     "id": "LONG_SWORDS",
     "//": "Hand-and-a-half swords, i.e. any sword that can be used one or two-handed fairly easily with a cutting edge.",
-    "name": "LONG SWORDS",
+    "name": "Long Swords",
     "proficiencies": [ "prof_long_swords_familiar", "prof_long_swords_pro", "prof_long_swords_master" ]
   },
   {
     "type": "weapon_category",
     "id": "SHORT_SWORDS",
     "//": "One-handed swords at or below 60cm in length with a cutting edge, such as machetes.",
-    "name": "SHORT SWORDS",
+    "name": "Short Swords",
     "proficiencies": [ "prof_short_swords_familiar", "prof_short_swords_pro", "prof_short_swords_master" ]
   },
   {
     "type": "weapon_category",
-    "id": "QUARTERSTAVES",
-    "name": "QUARTERSTAVES",
-    "proficiencies": [ "prof_quarterstaves_familiar", "prof_quarterstaves_pro", "prof_quarterstaves_master" ]
+    "id": "STAFFS",
+    "name": "Staffs",
+    "proficiencies": [ "prof_staffs_familiar", "prof_staffs_pro", "prof_staffs_master" ]
   },
   {
     "type": "weapon_category",
     "id": "CLAWS",
-    "name": "CLAWS",
+    "name": "Claws",
     "proficiencies": [ "prof_claws_familiar", "prof_claws_pro", "prof_claws_master" ]
   },
   {
     "type": "weapon_category",
     "id": "SHIVS",
-    "name": "SHIVS",
+    "//": "Simplistic stabbing weapons that are usually excluded from martial arts which use knives.",
+    "name": "Shivs",
     "proficiencies": [ "prof_shivs_familiar", "prof_shivs_pro", "prof_shivs_master" ]
   },
   {
     "type": "weapon_category",
     "id": "HOOKING_WEAPONRY",
-    "name": "HOOKING WEAPONRY",
+    "name": "Hooking Weaponry",
     "proficiencies": [ "prof_hooking_familiar", "prof_hooking_pro", "prof_hooking_master" ]
   },
   {
     "type": "weapon_category",
     "id": "SPEARS",
-    "name": "SPEARS",
+    "name": "Spears",
     "proficiencies": [ "prof_spears_familiar", "prof_spears_pro", "prof_spears_master" ]
   },
   {
     "//": "Fake category for unarmed - don't apply to any weapons",
     "type": "weapon_category",
     "id": "UNARMED",
-    "name": "UNARMED",
+    "name": "Unarmed",
     "proficiencies": [ "prof_unarmed_familiar", "prof_unarmed_pro", "prof_unarmed_master" ]
   },
   {
     "type": "weapon_category",
     "id": "POLEARMS",
-    "name": "POLEARMS",
+    "name": "Polearms",
     "proficiencies": [ "prof_polearms_familiar", "prof_polearms_pro", "prof_polearms_master" ]
   },
   {
     "type": "weapon_category",
     "id": "FENCING_WEAPONRY",
     "//": "One-handed featherlight straight swords built specifically for the sport of fencing.",
-    "name": "FENCING WEAPONRY",
+    "name": "Fencing Weaponry",
     "proficiencies": [ "prof_fencing_weapons_familiar", "prof_fencing_weapons_pro", "prof_fencing_weapons_master" ]
   },
   {
     "type": "weapon_category",
     "id": "LONG_THRUSTING_SWORDS",
     "//": "Hand-and-a-half or two-handed straight swords built for thrusting.  Cutting edge optional.",
-    "name": "LONG THRUSTING SWORDS",
+    "name": "Long Thrusting Swords",
     "proficiencies": [ "prof_thrusting_swords_familiar", "prof_thrusting_swords_pro", "prof_thrusting_swords_master" ]
   },
   {
     "type": "weapon_category",
     "id": "BIONIC_WEAPONRY",
-    "name": "BIONIC WEAPONRY",
+    "name": "Bionic Weaponry",
     "proficiencies": [ "prof_bionics_familiar", "prof_bionics_pro", "prof_bionics_master" ]
   },
   {
     "type": "weapon_category",
     "id": "BIONIC_SWORDS",
-    "name": "BIONIC SWORDS",
+    "name": "Bionic Swords",
     "proficiencies": [ "prof_bionic_swords_familiar", "prof_bionic_swords_pro", "prof_bionic_swords_master" ]
   },
   {
     "type": "weapon_category",
     "id": "GREAT_SWORDS",
     "//": "Swords with cutting edges that require two hands to use effectively.",
-    "name": "GREAT SWORDS",
+    "name": "Great Swords",
     "proficiencies": [ "prof_great_swords_familiar", "prof_great_swords_pro", "prof_great_swords_master" ]
   },
   {
     "type": "weapon_category",
     "id": "GREAT_HAMMERS",
     "//": "Two handed hammers.",
-    "name": "GREAT HAMMERS",
+    "name": "Great Hammers",
     "proficiencies": [ "prof_great_hammers_familiar", "prof_great_hammers_pro", "prof_great_hammers_master" ]
   },
   {
     "type": "weapon_category",
     "id": "GREAT_AXES",
-    "name": "GREAT AXES",
+    "name": "Great Axes",
     "proficiencies": [ "prof_great_axes_familiar", "prof_great_axes_pro", "prof_great_axes_master" ]
   },
   {
     "type": "weapon_category",
     "id": "HAND_AXES",
-    "name": "HAND AXES",
+    "name": "Hand Axes",
     "proficiencies": [ "prof_hand_axes_familiar", "prof_hand_axes_pro", "prof_hand_axes_master" ]
   },
   {
     "type": "weapon_category",
     "id": "WHIPS",
-    "name": "WHIPS"
+    "name": "Whips"
   },
   {
     "type": "weapon_category",
     "id": "KARATE_WEAPONS",
-    "name": "KARATE WEAPONS"
+    "name": "Karate Weapons"
   },
   {
     "type": "weapon_category",
     "id": "NINJUTSU_WEAPONS",
-    "name": "NINJUTSU WEAPONS"
+    "name": "Ninjutsu Weapons"
   },
   {
     "type": "weapon_category",
     "id": "KUNG_FU_WEAPONS",
-    "name": "KUNG FU WEAPONS"
+    "name": "Kung Fu Weapons"
   },
   {
     "type": "weapon_category",
     "id": "SHORT_BOWS",
-    "name": "SHORT BOWS"
+    "name": "Short Bows"
   },
   {
     "type": "weapon_category",
     "id": "LONG_BOWS",
-    "name": "LONG BOWS"
+    "name": "Long Bows"
   }
 ]

@@ -223,9 +223,6 @@ class monster : public Creature
         bool know_danger_at( const tripoint_bub_ms &p ) const;
         bool know_danger_at( map *here, const tripoint_bub_ms &p ) const;
 
-        bool will_reach( const point_bub_ms &p ); // Do we have plans to get to (x, y)?
-        int  turns_to_reach( const point_bub_ms &p ); // How long will it take?
-
         // Returns true if the monster has a current goal
         bool has_dest() const;
         // Returns point at the end of the monster's current plans
@@ -656,6 +653,12 @@ class monster : public Creature
 
         Character *find_dragged_foe();
         void nursebot_operate( Character *dragged_foe );
+
+        /** Cache helpers for eye_level() */
+        mutable int cached_tile_eye_level_bonus = 0;
+        mutable bool cached_tile_eye_level_bonus_dirty = true;
+        int tile_eye_level_bonus() const;
+        void invalidate_tile_eye_level_cache() const;
 
     protected:
         void store( JsonOut &json ) const;

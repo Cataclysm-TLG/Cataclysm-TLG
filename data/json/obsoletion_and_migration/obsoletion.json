@@ -266,6 +266,14 @@
     "type": "effect_on_condition"
   },
   {
+    "id": "chitin_carapace_molt_timer3",
+    "type": "effect_on_condition"
+  },
+  {
+    "id": "chitin_carapace_molt_timer4",
+    "type": "effect_on_condition"
+  },
+  {
     "type": "mutation",
     "id": "NO_CBM_INSTALLATION",
     "name": { "str": "Oversensitive System" },
@@ -1163,5 +1171,145 @@
     "description": "Obsoleted trait.",
     "random_at_chargen": false,
     "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_extremely_long",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Obsoleted hairstyle.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_super_princess",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_long_feathered.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_modern",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_short_curls.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_curls",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_medium_curls.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_body_length",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_long_wavy.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_detective",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_side_part.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_long_punk",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_side_shave.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_punk_long",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_side_shave.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_mohawk_long",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Never actually existed.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_fro",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_afro.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_short_no_fringe",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_fade.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_short_over_eye",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_short_fringe.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "hair_long_over_eye",
+    "name": { "str": "Hair: obsoleted" },
+    "points": 0,
+    "description": "Replaced with hair_medium_fringe.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "CHITIN_MOLTED",
+    "name": { "str": "Epicuticle (molted) (obsolete)" },
+    "points": 0,
+    "description": "There was never a reason for this mutation to molt.",
+    "valid": false,
+    "purifiable": false,
+    "player_display": false
   }
 ]

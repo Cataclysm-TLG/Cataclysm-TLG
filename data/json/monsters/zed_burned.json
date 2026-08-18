@@ -28,6 +28,7 @@
     "vision_day": 10,
     "vision_night": 3,
     "harvest": "zombie_humanoid",
+    "decay": "zombie_decay",
     "death_function": { "effect": { "id": "death_zombie_kinderling", "min_level": 4 }, "message": "The %s explodes!" },
     "flags": [
       "SEES",
@@ -73,6 +74,7 @@
     "vision_day": 10,
     "vision_night": 3,
     "harvest": "zombie_humanoid",
+    "decay": "zombie_decay",
     "death_function": { "effect": { "id": "death_smokeburst", "hit_self": true, "min_level": 4 }, "message": "The %s explodes!" },
     "special_attacks": [ { "id": "smash", "throw_strength": 30, "cooldown": 30 }, { "id": "grab", "cooldown": 7 } ],
     "flags": [
@@ -117,6 +119,7 @@
     "vision_day": 10,
     "vision_night": 3,
     "harvest": "zombie_humanoid",
+    "decay": "zombie_decay",
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab", "cooldown": 7 } ],
     "death_function": { "effect": { "id": "death_smokeburst", "hit_self": true, "min_level": 3 }, "message": "The %s explodes!" },

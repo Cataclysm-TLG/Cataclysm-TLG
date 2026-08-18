@@ -18,7 +18,7 @@
     "stack_size": 60,
     "ammo_type": "57",
     "casing": "57mm_casing",
-    "range": 14,
+    "range": 17,
     "damage": { "damage_type": "bullet", "amount": 20, "armor_penetration": 18 },
     "dispersion": 40,
     "recoil": 515,

@@ -423,7 +423,7 @@ class martialart
         std::set<matec_id> techniques; // all available techniques
         std::set<itype_id> weapons; // all style weapons
         std::set<weapon_category_id> weapon_category; // all style weapon categories
-        bool strictly_unarmed = false; // Punch daggers etc.
+        bool strictly_unarmed = false; // Must be wielding nothing.
         bool strictly_melee = false; // Must have a weapon.
         bool allow_all_weapons = false; // Can use unarmed or with ANY weapon
         bool force_unarmed = false; // Don't use ANY weapon - punch or kick if needed

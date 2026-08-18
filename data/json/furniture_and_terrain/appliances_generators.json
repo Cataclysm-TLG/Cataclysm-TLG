@@ -2,7 +2,7 @@
   {
     "type": "vehicle_part",
     "id": "ap_portable_generator",
-    "name": { "str": "portable gas-powered generator" },
+    "name": { "str": "portable gasoline generator" },
     "looks_like": "f_active_backup_generator",
     "categories": [ "energy" ],
     "color": "green_white",
@@ -31,6 +31,19 @@
   },
   {
     "type": "vehicle_part",
+    "id": "ap_gasoline_generator",
+    "copy-from": "ap_portable_generator",
+    "name": { "str": "gasoline generator" },
+    "description": "This 12,000 watt gasoline generator is enough to power an entire home.  It just needs to be plugged in, fueled up, and then turned on.",
+    "power": "8 W",
+    "epower": "12000 W",
+    "item": "gasoline_generator",
+    "breaks_into": [ { "item": "gasoline_generator", "damage": 4 } ],
+    "damage_reduction": { "all": 60 },
+    "variants": [ { "symbols": "0", "symbols_broken": "#" } ]
+  },
+  {
+    "type": "vehicle_part",
     "id": "ap_diesel_generator",
     "copy-from": "ap_portable_generator",
     "name": { "str": "diesel generator" },
@@ -46,25 +59,12 @@
     "type": "vehicle_part",
     "id": "ap_military_generator",
     "copy-from": "ap_portable_generator",
-    "name": { "str": "military diesel generator" },
+    "name": { "str": "huge diesel generator" },
     "description": "An enormous generator designed to run on diesel, kerosene, or other compatible fuels.",
     "power": "8 W",
     "epower": "10000 W",
     "item": "military_generator",
     "breaks_into": [ { "item": "military_generator", "damage": 4 } ],
-    "damage_reduction": { "all": 60 },
-    "variants": [ { "symbols": "0", "symbols_broken": "#" } ]
-  },
-  {
-    "type": "vehicle_part",
-    "id": "ap_12000_gasoline_generator",
-    "copy-from": "ap_portable_generator",
-    "name": { "str": "gas-powered generator" },
-    "description": "This 12,000 watt gasoline generator is enough to power an entire home.  It just needs to be plugged in, fueled up, and then turned on.",
-    "power": "8 W",
-    "epower": "12000 W",
-    "item": "12000_gasoline_generator",
-    "breaks_into": [ { "item": "12000_gasoline_generator", "damage": 4 } ],
     "damage_reduction": { "all": 60 },
     "variants": [ { "symbols": "0", "symbols_broken": "#" } ]
   }
