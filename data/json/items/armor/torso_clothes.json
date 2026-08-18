@@ -301,7 +301,7 @@
       }
     ],
     "warmth": 25,
-    "material_thickness": 1.5,
+    "material_thickness": 1.2,
     "flags": [ "VARSIZE", "FANCY", "OUTER" ]
   },
   {
@@ -745,7 +745,7 @@
     "looks_like": "sweater",
     "color": "white",
     "warmth": 30,
-    "material_thickness": 0.5,
+    "material_thickness": 0.3,
     "environmental_protection": 2,
     "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS", "COLLAR" ],
     "armor": [
@@ -1294,7 +1294,7 @@
     "looks_like": "longshirt",
     "color": "blue",
     "warmth": 35,
-    "material_thickness": 1,
+    "material_thickness": 0.6,
     "flags": [ "VARSIZE" ],
     "armor": [
       {
@@ -1536,7 +1536,7 @@
       }
     ],
     "warmth": 35,
-    "material_thickness": 1,
+    "material_thickness": 0.6,
     "flags": [ "VARSIZE", "POCKETS", "HOOD" ]
   },
   {
@@ -1582,7 +1582,7 @@
       }
     ],
     "warmth": 25,
-    "material_thickness": 1.5,
+    "material_thickness": 0.3,
     "flags": [ "VARSIZE", "OUTER" ]
   }
 ]

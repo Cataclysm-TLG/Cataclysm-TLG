@@ -3500,7 +3500,7 @@
           { "item": "socks" },
           { "item": "dress_shoes" },
           { "item": "knit_scarf" },
-          { "item": "bellyband" },
+          { "item": "bellywrap" },
           { "item": "dentures" },
           { "group": "charged_ref_lighter" },
           { "item": "cane", "custom-flags": [ "auto_wield" ] }
