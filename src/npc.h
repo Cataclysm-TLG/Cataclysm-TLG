@@ -961,7 +961,7 @@ class npc : public Character
         bool wield( item &it );
         bool wield( item_location loc, bool remove_old = true );
         void drop( const drop_locations &what, const tripoint_bub_ms &target,
-                   bool stash ) override;
+                   bool stash, bool peeking = false ) override;
         bool adjust_worn();
         bool has_healing_item( healing_options try_to_fix );
         healing_options patient_assessment( const Character &c );

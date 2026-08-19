@@ -1638,9 +1638,9 @@ bool npc::wield( item_location loc, bool remove_old )
 }
 
 void npc::drop( const drop_locations &what, const tripoint_bub_ms &target,
-                bool stash )
+                bool stash, bool peeking )
 {
-    Character::drop( what, target, stash );
+    Character::drop( what, target, stash, peeking );
     // TODO: Remove the hack. Its here because npcs didn't process activities, but they do now
     // so is this necessary?
     activity.do_turn( *this );

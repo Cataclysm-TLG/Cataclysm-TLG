@@ -2511,8 +2511,9 @@ class Character : public Creature, public visitable
         /** Returns all items that must be taken off before taking off this item */
         std::list<item *> get_dependent_worn_items( const item &it );
         /** Drops an item to the specified location */
-        void drop( item_location loc, const tripoint_bub_ms &where );
-        virtual void drop( const drop_locations &what, const tripoint_bub_ms &target, bool stash = false );
+        void drop( item_location loc, const tripoint_bub_ms &where, bool peeking = false );
+        virtual void drop( const drop_locations &what, const tripoint_bub_ms &target, bool stash = false,
+                           bool peeking = false );
         /** Assigns character activity to pick up items from the given drop_locations.
          *  Requires sufficient storage; items cannot be wielded or worn from this activity.
          */

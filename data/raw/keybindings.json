@@ -2578,6 +2578,13 @@
   },
   {
     "type": "keybinding",
+    "name": "Drop items while peeking",
+    "category": "LOOK",
+    "id": "peek_drop",
+    "bindings": [ { "input_method": "keyboard_any", "key": "d" } ]
+  },
+  {
+    "type": "keybinding",
     "name": "Fire wielded item",
     "category": "DEFAULTMODE",
     "id": "fire",
