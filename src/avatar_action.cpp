@@ -968,7 +968,8 @@ void avatar_action::eat_or_use( avatar &you, item_location loc )
     }
 }
 
-void avatar_action::peek_drop( const drop_locations &what, const std::optional<tripoint_bub_ms> &peek_pos )
+void avatar_action::peek_drop( const drop_locations &what,
+                               const std::optional<tripoint_bub_ms> &peek_pos )
 {
     if( peek_pos ) {
         Character &player = get_player_character();

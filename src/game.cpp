@@ -2412,7 +2412,7 @@ int game::inventory_item_menu( item_location locThisItem,
                     u.takeoff( locThisItem.obtain( u ) );
                     break;
                 case 'd':
-                
+
                     u.drop( locThisItem, u.pos_bub() );
                     break;
                 case 'U':
