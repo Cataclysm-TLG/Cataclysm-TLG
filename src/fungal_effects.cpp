@@ -206,7 +206,7 @@ void fungal_effects::spread_fungus_one_tile( const tripoint_bub_ms &p, const int
                 here.ter_set( p, ter_t_tree_fungal_young );
                 converted = true;
             }
-        } else if( t == ter_t_tree_dead || ter_t_tree_dead_warped || t == ter_t_tree_deadpine ||
+        } else if( t == ter_t_tree_dead || t == ter_t_tree_dead_warped || t == ter_t_tree_deadpine ||
                    t == ter_t_tree_deadpine_warped || t == ter_t_tree_very_dead ) {
             here.ter_set( p, ter_t_tree_fungal );
             converted = true;
