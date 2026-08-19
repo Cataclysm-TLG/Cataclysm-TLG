@@ -2412,6 +2412,7 @@ int game::inventory_item_menu( item_location locThisItem,
                     u.takeoff( locThisItem.obtain( u ) );
                     break;
                 case 'd':
+                
                     u.drop( locThisItem, u.pos_bub() );
                     break;
                 case 'U':
@@ -6582,8 +6583,8 @@ void game::pickup( const tripoint_bub_ms &p )
     u.pick_up( game_menus::inv::pickup( p ) );
 }
 
-//Shift player by one tile, look_around(), then restore previous position.
-//represents carefully peeking around a corner, hence the large move cost.
+// Shift player by one tile, look_around(), then restore previous position.
+// represents carefully peeking around a corner, hence the large move cost.
 void game::peek()
 {
     map &here = get_map();
@@ -6641,6 +6642,9 @@ void game::peek( const tripoint_bub_ms &p )
     if( result.peek_action && *result.peek_action == PA_BLIND_THROW ) {
         item_location loc;
         avatar_action::plthrow( u, loc, p );
+    }
+    if( result.peek_action && *result.peek_action == PA_PEEK_DROP ) {
+        avatar_action::peek_drop( game_menus::inv::multidrop( u ), p );
     }
     here.invalidate_map_cache( p.z() );
     here.invalidate_visibility_cache();
@@ -7311,6 +7315,7 @@ look_around_result game::look_around(
     ctxt.register_action( "EXTENDED_DESCRIPTION" );
     ctxt.register_action( "SELECT" );
     if( peeking ) {
+        ctxt.register_action( "peek_drop" );
         ctxt.register_action( "throw_blind" );
     }
     if( !select_zone ) {
@@ -7563,6 +7568,8 @@ look_around_result game::look_around(
             ly = ly + vec->y();
             center.x() = center.x() + vec->x();
             center.y() = center.y() + vec->y();
+        } else if( action == "peek_drop" ) {
+            result.peek_action = PA_PEEK_DROP;
         } else if( action == "throw_blind" ) {
             result.peek_action = PA_BLIND_THROW;
         } else if( action == "zoom_in" ) {
@@ -7575,7 +7582,7 @@ look_around_result game::look_around(
             mark_main_ui_adaptor_resize();
         }
     } while( action != "QUIT" && action != "CONFIRM" && action != "SELECT" && action != "TRAVEL_TO" &&
-             action != "throw_blind" );
+             action != "peek_drop" && action != "throw_blind" );
 
     if( center.z() != old_levz ) {
         here.invalidate_map_cache( old_levz );

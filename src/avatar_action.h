@@ -7,6 +7,7 @@
 
 #include "activity_type.h"
 #include "coordinates.h"
+#include "item_location.h"
 #include "point.h"
 
 class Character;
@@ -63,6 +64,10 @@ void fire_ranged_bionic( avatar &you, const item &fake_gun );
  * @return true if attempt to fire was successful (aim then cancel is also considered success)
  */
 bool fire_turret_manual( avatar &you, map &m, turret_data &turret );
+
+// Called when dropping an item while peeking.
+void peek_drop( const drop_locations &what,
+              const std::optional<tripoint_bub_ms> &peek_pos = std::nullopt );
 
 // Throw an item  't'
 void plthrow( avatar &you, item_location loc,
