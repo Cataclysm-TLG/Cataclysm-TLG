@@ -11790,8 +11790,13 @@ void game::vertical_move( int movez, bool force, bool peeking )
             }
         }
 
-        const int cost = u.climbing_cost( pos, stairs );
-        add_msg_debug( debugmode::DF_GAME, "Climb cost %d", cost );
+        int cost = u.climbing_cost( pos, stairs );
+        add_msg_debug( debugmode::DF_GAME, "Climb cost: %d", cost );
+
+        if( cost == 0 ) {
+            return;
+        }
+
         std::vector<tripoint_bub_ms> pts;
         for( const tripoint_bub_ms &pt : here.points_in_radius( stairs, 1 ) ) {
             if( here.passable_through( pt ) &&

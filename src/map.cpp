@@ -2955,7 +2955,8 @@ int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
     }
 
     for( const tripoint_bub_ms &pt : points_in_radius( p, 1 ) ) {
-        if( impassable_ter_furn( pt ) ) {
+        bool climb_adjacent = has_flag( ter_furn_flag::TFLAG_CLIMB_ADJACENT, pt );
+        if( impassable_ter_furn( pt ) && !climb_adjacent ) {
             // TODO: Non-hardcoded climbability
             best_difficulty = std::min( best_difficulty, 10 );
             blocks_movement++;
@@ -2964,7 +2965,7 @@ int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
             // TODO: Some definitely shouldn't be.
             best_difficulty = std::min( best_difficulty, 7 );
             // Climb a tree.
-        } else if( has_flag( ter_furn_flag::TFLAG_CLIMB_ADJACENT, p ) ) {
+        } else if( climb_adjacent ) {
             best_difficulty = std::min( best_difficulty, 5 );
         }
         if( best_difficulty > 1 && ( has_flag( ter_furn_flag::TFLAG_CLIMBABLE, pt ) ||
