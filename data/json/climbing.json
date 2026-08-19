@@ -115,7 +115,7 @@
   {
     "type": "climbing_aid",
     "id": "furn_LADDER",
-    "//": "currently applies to placeable stepladders, not constructed stair-like ladders",
+    "//": "currently applies to placeable ladders, not constructed fixed ladders",
     "copy-from": "generic_stepladder",
     "down": {
       "menu_text": "Climb down %s here.",

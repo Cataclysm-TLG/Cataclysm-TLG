@@ -81,7 +81,9 @@
       },
       "exterior_highrise_wall_type": {
         "type": "ter_str_id",
-        "default": { "distribution": [ [ "t_strconc_wall", 1 ], [ "t_strconc_wall_w", 3 ], [ "t_strconc_wall_gray", 1 ], [ "t_brick_wall", 6 ] ] }
+        "default": {
+          "distribution": [ [ "t_strconc_wall", 1 ], [ "t_strconc_wall_w", 3 ], [ "t_strconc_wall_gray", 1 ], [ "t_brick_wall", 6 ] ]
+        }
       }
     },
     "terrain": {

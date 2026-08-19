@@ -588,7 +588,7 @@ void field_processor_spread_gas( const tripoint_bub_ms &p, field_entry &cur, fie
 }
 
 static void field_processor_fd_spores( const tripoint_bub_ms &p, field_entry &cur,
-        field_proc_data &/*pd*/ )
+                                       field_proc_data &/*pd*/ )
 {
     // if( cur_fd_type_id == fd_spores ) {
     // There's already RNG in the function we call here, so a simple interval works fine here.

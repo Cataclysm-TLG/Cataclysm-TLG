@@ -61,7 +61,6 @@ static const ter_str_id ter_t_tree_deadpine( "t_tree_deadpine" );
 static const ter_str_id ter_t_tree_deadpine_warped( "t_tree_deadpine_warped" );
 static const ter_str_id ter_t_tree_fungal( "t_tree_fungal" );
 static const ter_str_id ter_t_tree_fungal_young( "t_tree_fungal_young" );
-static const ter_str_id ter_t_tree_marloss( "t_tree_marloss" );
 static const ter_str_id ter_t_tree_very_dead( "t_tree_very_dead" );
 static const ter_str_id ter_t_tree_young( "t_tree_young" );
 
@@ -210,7 +209,7 @@ void fungal_effects::spread_fungus_one_tile( const tripoint_bub_ms &p, const int
                    t == ter_t_tree_deadpine_warped || t == ter_t_tree_very_dead ) {
             here.ter_set( p, ter_t_tree_fungal );
             converted = true;
-        } else if( t != ter_t_tree_marloss && t != ter_t_tree_fungal &&
+        } else if( t != ter_t_marloss_tree && t != ter_t_tree_fungal &&
                    here.has_flag( ter_furn_flag::TFLAG_TREE, p ) ) {
             const int chance = rng( 1, 100 - fungus_neighbors );
             if( chance < 2 ) {

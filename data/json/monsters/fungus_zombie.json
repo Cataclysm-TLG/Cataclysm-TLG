@@ -29,10 +29,11 @@
     "scents_tracked": [ "sc_human", "sc_fetid" ],
     "harvest": "zombie_humanoid_mushroom",
     "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "10 s" } ],
-    "special_attacks": [ 
+    "special_attacks": [
       { "id": "grab", "cooldown": 8 },
       { "id": "bite_humanoid", "cooldown": 8 },
-      { "id": "scratch_humanoid", "cooldown": 6 } ],
+      { "id": "scratch_humanoid", "cooldown": 6 }
+    ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "flags": [ "SEES", "SMELLS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
@@ -109,9 +110,11 @@
     "vision_night": 3,
     "harvest": "zombie_humanoid_mushroom",
     "emit_fields": [ { "emit_id": "emit_fungal_haze_plume", "delay": "3 s" } ],
-    "special_attacks": [ { "id": "grab", "cooldown": 8 },
+    "special_attacks": [
+      { "id": "grab", "cooldown": 8 },
       { "id": "bite_humanoid", "cooldown": 8 },
-      { "id": "scratch_humanoid", "cooldown": 6 } ],
+      { "id": "scratch_humanoid", "cooldown": 6 }
+    ],
     "death_drops": { "subtype": "collection", "groups": [ [ "default_zombie_death_drops", 100 ], [ "explode_zed_fungal", 100 ] ] },
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "SEES", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "HARDTOSHOOT", "NO_BREATHE", "PUSH_MON", "FILTHY" ],
@@ -200,10 +203,12 @@
     "vision_night": 5,
     "harvest": "big_mr_bones",
     "grab_strength": 44,
-    "special_attacks": [ { "id": "smash", "throw_strength": 54 },
-        { "id": "grab", "cooldown": 8 },
+    "special_attacks": [
+      { "id": "smash", "throw_strength": 54 },
+      { "id": "grab", "cooldown": 8 },
       { "id": "bite_humanoid", "cooldown": 8 },
-      { "id": "scratch_humanoid", "cooldown": 6 } ],
+      { "id": "scratch_humanoid", "cooldown": 6 }
+    ],
     "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "12 s" } ],
     "death_drops": { "subtype": "collection", "groups": [ [ "mon_zombie_hulk_death_drops", 100 ], [ "explode_zed_fungal_bone", 100 ] ] },
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
@@ -241,9 +246,11 @@
     "vision_night": 5,
     "harvest": "zombie_humanoid_mushroom",
     "grab_strength": 10,
-    "special_attacks": [ { "id": "grab", "cooldown": 8 },
+    "special_attacks": [
+      { "id": "grab", "cooldown": 8 },
       { "id": "bite_humanoid", "cooldown": 8 },
-      { "id": "scratch_humanoid", "cooldown": 6 } ],
+      { "id": "scratch_humanoid", "cooldown": 6 }
+    ],
     "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "18 s" } ],
     "scents_tracked": [ "sc_fetid", "sc_human" ],
     "death_drops": {
@@ -292,7 +299,8 @@
         "spell_data": { "id": "spore_spray", "min_level": 1 },
         "monster_message": "The %s spews a cloud of spores!",
         "cooldown": 40
-      },        { "id": "grab", "cooldown": 8 },
+      },
+      { "id": "grab", "cooldown": 8 },
       { "id": "bite_humanoid", "cooldown": 8 },
       { "id": "scratch_humanoid", "cooldown": 6 }
     ],
@@ -462,7 +470,8 @@
     "special_attacks": [
       { "id": "grab", "cooldown": 8 },
       { "id": "bite_humanoid", "cooldown": 8 },
-      { "id": "scratch_humanoid", "cooldown": 12 } ],
+      { "id": "scratch_humanoid", "cooldown": 12 }
+    ],
     "death_drops": "default_zombie_death_drops",
     "scents_tracked": [ "sc_fetid", "sc_human" ],
     "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "4 s" } ],
@@ -544,7 +553,11 @@
     "harvest": "zombie_humanoid_mushroom",
     "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "10 s" } ],
     "grab_strength": 15,
-    "special_attacks": [ { "id": "grab" }, { "id": "bite_humanoid", "attack_upper": false, "cooldown": 5 }, { "id": "scratch_humanoid", "attack_upper": false } ],
+    "special_attacks": [
+      { "id": "grab" },
+      { "id": "bite_humanoid", "attack_upper": false, "cooldown": 5 },
+      { "id": "scratch_humanoid", "attack_upper": false }
+    ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "flags": [
@@ -592,7 +605,8 @@
     "special_attacks": [
       { "id": "grab", "cooldown": 8 },
       { "id": "bite_humanoid", "cooldown": 8 },
-      { "id": "scratch_humanoid", "cooldown": 6 } ],
+      { "id": "scratch_humanoid", "cooldown": 6 }
+    ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "emit_fields": [ { "emit_id": "emit_fungal_leak", "delay": "3 s" } ],

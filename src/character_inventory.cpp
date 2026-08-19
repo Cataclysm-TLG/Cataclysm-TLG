@@ -810,7 +810,6 @@ bool Character::dispose_item( item_location &&obj, const std::string &prompt )
     menu.text = prompt.empty() ? string_format( _( "Dispose of %s" ), obj->tname() ) : prompt;
     std::vector<dispose_option> opts;
 
-
     const bool bucket = obj->will_spill() && !obj->is_container_empty();
 
     opts.emplace_back( dispose_option{
