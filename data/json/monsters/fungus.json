@@ -19,11 +19,11 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "bleed_rate": 0,
     "weakpoint_sets": [ "wps_fungaloid_structure" ],
-    "emit_fields": [ { "emit_id": "emit_fungal_haze_plume", "delay": "5 s" } ],
+    "emit_fields": [ { "emit_id": "emit_fungal_haze_plume", "delay": "4 s" } ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_fungaloid_basic", "prof_wp_fungaloid_advanced" ],
     "luminance": 40,
     "harvest": "exempt",
-    "special_attacks": [ { "type": "spell", "id": "spore_cloud", "spell_data": { "id": "spore_cloud", "min_level": 2 }, "cooldown": 10 } ],
+    "special_attacks": [ { "type": "spell", "id": "spore_cloud", "spell_data": { "id": "spore_cloud", "min_level": 2 }, "cooldown": 8 } ],
     "regenerates": 2,
     "death_function": { "corpse_type": "NO_CORPSE", "effect": { "id": "death_fungus", "hit_self": true } },
     "flags": [ "HEARS", "GOODHEARING", "NOHEAD", "POISON", "IMMOBILE", "NO_BREATHE" ],
@@ -167,8 +167,8 @@
     "luminance": 200,
     "emit_fields": [ { "emit_id": "emit_fungal_haze_plume", "delay": "3 s" } ],
     "special_attacks": [
-      [ "FUNGUS_BIG_BLOSSOM", 40 ],
-      { "type": "spell", "id": "spore_cloud", "spell_data": { "id": "spore_cloud", "min_level": 3 }, "cooldown": 10 }
+      [ "FUNGUS_BIG_BLOSSOM", 30 ],
+      { "type": "spell", "id": "spore_cloud", "spell_data": { "id": "spore_cloud", "min_level": 3 }, "cooldown": 6 }
     ],
     "weakpoint_sets": [ "wps_fungaloid_structure" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_fungaloid_basic", "prof_wp_fungaloid_advanced" ],
