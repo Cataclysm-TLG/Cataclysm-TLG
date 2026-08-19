@@ -614,7 +614,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "FOOD",
     "name": { "str": "sponge cake" },
-    "description": "Plain, fluffy cake for the proletariat.",
+    "description": "Plain, fluffy cake.",
     "container": "box_small",
     "weight": "68 g",
     "volume": "187 ml",
@@ -635,7 +635,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "comestible_type": "FOOD",
     "name": { "str": "space cake" },
-    "description": "This cake's destiny is to take you on a gnarly trip.",
+    "description": "This cake's destiny is to take you on a gnarly trip.  There is cake, and you will be baked.",
     "container": "box_small",
     "weight": "68 g",
     "volume": "187 ml",
@@ -647,7 +647,7 @@
     "calories": 278,
     "fun": 18,
     "spoils_in": "17 days",
-    "vitamins": [ [ "calcium", 2 ], [ "iron", 5 ], [ "wheat_allergen", 1 ], [ "egg_allergen", 1 ], [ "cannabis", 10 ] ],
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 5 ], [ "wheat_allergen", 1 ], [ "egg_allergen", 1 ], [ "cannabis", 14 ] ],
     "flags": [ "EATEN_HOT" ]
   },
   {
@@ -680,7 +680,7 @@
     "calories": 278,
     "fun": 18,
     "spoils_in": "17 days",
-    "vitamins": [ [ "calcium", 2 ], [ "iron", 5 ], [ "wheat_allergen", 1 ], [ "egg_allergen", 1 ], [ "cannabis", 10 ] ],
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 5 ], [ "wheat_allergen", 1 ], [ "egg_allergen", 1 ], [ "cannabis", 14 ] ],
     "flags": [ "EATEN_HOT" ]
   }
 ]

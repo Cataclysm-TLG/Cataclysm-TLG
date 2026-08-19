@@ -1924,6 +1924,7 @@
     "addiction_type": "cannabis",
     "material": [ "vegetable" ],
     "flags": [ "NO_INGEST", "NO_TEMP" ],
+    "vitamins": [ [ "cannabis", 7 ] ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You smoke some weed.",

@@ -300,7 +300,7 @@
     "price": "20 USD",
     "price_postapoc": "2 USD 50 cent",
     "qualities": [ [ "HAMMER", 1 ], [ "COOK", 1 ] ],
-    "weapon_category": [ "HOOKING_WEAPONS" ],
+    "weapon_category": [ "HOOKING_WEAPONRY" ],
     "melee_damage": { "bash": 3, "stab": 6 }
   },
   {
