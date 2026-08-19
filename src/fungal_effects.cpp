@@ -222,7 +222,7 @@ void fungal_effects::spread_fungus_one_tile( const tripoint_bub_ms &p, const int
                     add_msg_if_player_sees( p, m_warning, _( "The tree bulges and sags, becoming a fungal blossom!" ) );
                 }
                 converted = true;
-            } else if( chance < 9 ) {
+            } else if( chance < 11 ) {
                 here.ter_set( p, ter_t_tree_fungal );
                 converted = true;
             }
