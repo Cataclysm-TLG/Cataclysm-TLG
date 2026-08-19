@@ -389,6 +389,6 @@
     "symbol": "#",
     "color": [ "light_green", "green", "yellow_yellow", "brown" ],
     "move_cost": 8,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "CLIMBABLE", "SINGLE_SUPPORT", "DRAW_BELOW" ]
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "UNSTABLE", "CLIMBABLE", "SINGLE_SUPPORT", "DRAW_BELOW", "NOITEM" ]
   }
 ]

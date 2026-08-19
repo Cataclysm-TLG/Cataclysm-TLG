@@ -11775,15 +11775,9 @@ void game::vertical_move( int movez, bool force, bool peeking )
     int move_cost = 100;
     tripoint_bub_ms stairs( pos.xy(), pos.z() + movez );
     bool wall_cling = u.has_flag( json_flag_WALL_CLING );
-    bool adjacent_climb = false;
     if( !force && movez == 1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos ) &&
         !u.is_underwater() ) {
         // Climbing
-        for( const tripoint_bub_ms &p : here.points_in_radius( pos, 1 ) ) {
-            if( here.has_flag( ter_furn_flag::TFLAG_CLIMB_ADJACENT, p ) ) {
-                adjacent_climb = true;
-            }
-        }
         if( here.has_floor_or_support( stairs ) ) {
             tripoint_bub_ms dest_phase = pos;
             dest_phase.z() += 1;
@@ -11796,34 +11790,8 @@ void game::vertical_move( int movez, bool force, bool peeking )
             }
         }
 
-        if( u.get_working_arm_count() < 1 && !here.has_flag( ter_furn_flag::TFLAG_LADDER, pos ) ) {
-            add_msg( m_info, _( "You can't climb because your arms are too damaged or encumbered." ) );
-            return;
-        }
-
         const int cost = u.climbing_cost( pos, stairs );
         add_msg_debug( debugmode::DF_GAME, "Climb cost %d", cost );
-        const bool can_climb_here = cost > 0 ||
-                                    u.has_flag( json_flag_CLIMB_NO_LADDER ) || wall_cling;
-        if( !can_climb_here && !adjacent_climb ) {
-            add_msg( m_info, _( "You can't climb here - you need walls and/or furniture to brace against." ) );
-            return;
-        }
-
-        const item_location weapon = u.get_wielded_item();
-        if( !here.has_flag( ter_furn_flag::TFLAG_LADDER, pos ) && weapon &&
-            weapon->is_two_handed( u ) ) {
-            if( query_yn(
-                    _( "You can't climb because you have to wield a %s with both hands.\n\nPut it away?" ),
-                    weapon->tname() ) ) {
-                if( !u.unwield() ) {
-                    return;
-                }
-            } else {
-                return;
-            }
-        }
-
         std::vector<tripoint_bub_ms> pts;
         for( const tripoint_bub_ms &pt : here.points_in_radius( stairs, 1 ) ) {
             if( here.passable_through( pt ) &&
