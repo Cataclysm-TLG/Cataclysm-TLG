@@ -3884,7 +3884,7 @@
       [ [ "any_butter_or_oil", 4, "LIST" ] ],
       [ [ "sugar_standard", 1, "LIST" ] ],
       [ [ "eggs_any_shape", 1, "LIST" ] ],
-      [ [ "weed", 5 ] ]
+      [ [ "weed", 8 ] ]
     ],
     "charges": 4
   },
@@ -3921,7 +3921,7 @@
       [ [ "sugar_standard", 1, "LIST" ] ],
       [ [ "chocolate", 1 ] ],
       [ [ "eggs_any_shape", 1, "LIST" ] ],
-      [ [ "weed", 5 ] ]
+      [ [ "weed", 8 ] ]
     ],
     "charges": 4
   },

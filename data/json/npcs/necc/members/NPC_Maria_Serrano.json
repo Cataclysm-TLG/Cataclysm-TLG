@@ -199,16 +199,6 @@
         ],
         "topic": "TALK_GODCO_Maria_Tailor_Start"
       },
-      {
-        "text": "I'll have a gambeson.",
-        "condition": { "u_has_items": { "item": "icon", "count": 15 } },
-        "effect": [
-          { "npc_add_var": "general_trade_u_want_gambeson", "value": "yes" },
-          { "math": [ "n_timer_trade_knitting = time('now')" ] },
-          { "u_sell_item": "icon", "count": 15 }
-        ],
-        "topic": "TALK_GODCO_Maria_Tailor_Start"
-      },
       { "text": "What can you sew?", "topic": "TALK_GODCO_Maria_Tailor_What" },
       { "text": "How long does it take you to make these?", "topic": "TALK_GODCO_Maria_Tailor_Time" },
       { "text": "What's the price?", "topic": "TALK_GODCO_Maria_Tailor_Price" },
@@ -311,21 +301,6 @@
         ],
         "topic": "TALK_GODCO_Maria_Tailor_Done"
       },
-      {
-        "text": "I ordered a gambeson.",
-        "condition": {
-          "and": [
-            { "npc_has_var": "general_trade_u_want_gambeson", "value": "yes" },
-            { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('4 d')" ] }
-          ]
-        },
-        "effect": [
-          { "npc_lose_var": "general_trade_u_want_gambeson" },
-          { "npc_lose_var": "timer_trade_knitting" },
-          { "u_spawn_item": "gambeson" }
-        ],
-        "topic": "TALK_GODCO_Maria_Tailor_Done"
-      },
       { "text": "Nevermind.  Let's talk about something else.", "topic": "TALK_GODCO_Maria_2" },
       { "text": "Nevermind, I have to leave.", "topic": "TALK_DONE" }
     ]
@@ -333,7 +308,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_GODCO_Maria_Tailor_What",
-    "dynamic_line": "I sure can!  For now, I can make t-shirts, pants, dresses, longcoats, backpacks, jackets, and a gambeson; if that's your thing.",
+    "dynamic_line": "I sure can!  For now, I can make t-shirts, pants, dresses, longcoats, backpacks, and jackets.",
     "responses": [
       { "text": "Let's get to it.", "topic": "TALK_GODCO_Maria_Tailor_Something" },
       { "text": "How long does it take you to make these?", "topic": "TALK_GODCO_Maria_Tailor_Time" },
@@ -345,7 +320,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_GODCO_Maria_Tailor_Price",
-    "dynamic_line": "T-shirts, pants, jackets, and dresses are four icons.  Longcoats and backpacks are six icons.  A gambeson is fifteen.",
+    "dynamic_line": "T-shirts, pants, jackets, and dresses are four icons.  Longcoats and backpacks are six icons.",
     "responses": [
       { "text": "Let's get to it.", "topic": "TALK_GODCO_Maria_Tailor_Something" },
       { "text": "How long does it take you to make these?", "topic": "TALK_GODCO_Maria_Tailor_Time" },
@@ -356,7 +331,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_GODCO_Maria_Tailor_Time",
-    "dynamic_line": "T-shirts, pants, jackets, and dresses take me two days.  Longcoats and backpacks take four days, while a gambeson takes six days.",
+    "dynamic_line": "T-shirts, pants, jackets, and dresses take me two days.  Longcoats and backpacks take four days.",
     "responses": [
       { "text": "Let's get to it.", "topic": "TALK_GODCO_Maria_Tailor_Something" },
       { "text": "What's the price?", "topic": "TALK_GODCO_Maria_Tailor_Price" },

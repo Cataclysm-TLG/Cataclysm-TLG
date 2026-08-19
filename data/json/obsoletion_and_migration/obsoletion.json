@@ -1311,5 +1311,35 @@
     "valid": false,
     "purifiable": false,
     "player_display": false
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_quarterstaves_familiar",
+    "category": "prof_combat",
+    "name": { "str": "Quarterstaff Proficiency (Familiar)" },
+    "description": "Obsoleted proficiency.  This has been replaced with staff proficiency and exists here only to prevent error messages.",
+    "default_time_multiplier": 1.5,
+    "default_skill_penalty": 0.2,
+    "can_learn": false
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_quarterstaves_pro",
+    "category": "prof_combat",
+    "name": { "str": "Quarterstaff Proficiency (Pro)" },
+    "description": "Obsoleted proficiency.  This has been replaced with staff proficiency and exists here only to prevent error messages.",
+    "default_time_multiplier": 1.5,
+    "default_skill_penalty": 0.2,
+    "can_learn": false
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_quarterstaves_master",
+    "category": "prof_combat",
+    "name": { "str": "Quarterstaff Proficiency (Master)" },
+    "description": "Obsoleted proficiency.  This has been replaced with staff proficiency and exists here only to prevent error messages.",
+    "default_time_multiplier": 1.5,
+    "default_skill_penalty": 0.2,
+    "can_learn": false
   }
 ]
