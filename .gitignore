@@ -259,3 +259,4 @@ VERSION.txt
 
 dda-backport-tracked-pr
 dda-backports
+/tools/.venv
