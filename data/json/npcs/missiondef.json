@@ -363,14 +363,29 @@
     "description": "Retrieve the software in their computer marked on your map.",
     "goal": "MGOAL_CONDITION",
     "goal_condition": {
-      "and": [ {
-        "or": [ 
-          { "and": [ { "u_has_software": { "item": "software_hacking", "device": "usb_drive" } }, { "npc_has_class": "NC_HACKER" } ] },
-          { "and": [ { "u_has_software": { "item": "software_medical", "device": "usb_drive" } }, { "npc_has_class": "NC_DOCTOR" } ] },
-          { "and": [ { "u_has_software": { "item": "software_math", "device": "usb_drive" } }, { "npc_has_class": "NC_SCIENTIST" } ] },
-          { "and": [ { "u_has_software": { "item": "software_useless", "device": "usb_drive" } }, { "not": { "or": [ { "npc_has_class": "NC_HACKER" }, { "npc_has_class": "NC_DOCTOR" }, { "npc_has_class": "NC_SCIENTIST" } ] } } ] }
-        ]
-      } ]
+      "and": [
+        {
+          "or": [
+            {
+              "and": [ { "u_has_software": { "item": "software_hacking", "device": "usb_drive" } }, { "npc_has_class": "NC_HACKER" } ]
+            },
+            {
+              "and": [ { "u_has_software": { "item": "software_medical", "device": "usb_drive" } }, { "npc_has_class": "NC_DOCTOR" } ]
+            },
+            {
+              "and": [ { "u_has_software": { "item": "software_math", "device": "usb_drive" } }, { "npc_has_class": "NC_SCIENTIST" } ]
+            },
+            {
+              "and": [
+                { "u_has_software": { "item": "software_useless", "device": "usb_drive" } },
+                {
+                  "not": { "or": [ { "npc_has_class": "NC_HACKER" }, { "npc_has_class": "NC_DOCTOR" }, { "npc_has_class": "NC_SCIENTIST" } ] }
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     "difficulty": 2,
     "value": 80000,

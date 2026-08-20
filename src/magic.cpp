@@ -142,6 +142,7 @@ std::string enum_to_string<spell_flag>( spell_flag data )
         case spell_flag::LIQUID_DAMAGE_TARGET: return "LIQUID_DAMAGE_TARGET";
         case spell_flag::LOUD: return "LOUD";
         case spell_flag::MAKE_FILTHY: return "MAKE_FILTHY";
+        case spell_flag::MAX_RANGE_ONLY: return "MAX_RANGE_ONLY";
         case spell_flag::MUST_HAVE_CLASS_TO_LEARN: return "MUST_HAVE_CLASS_TO_LEARN";
         case spell_flag::MUTATE_TRAIT: return "MUTATE_TRAIT";
         case spell_flag::NO_BLOCK_MITIGATION: return "NO_BLOCK_MITIGATION";
@@ -858,7 +859,14 @@ std::vector<tripoint_bub_ms> spell::targetable_locations( const Character &sourc
     };
 
     std::vector<tripoint_bub_ms> selectable_targets;
-    for( const tripoint_bub_ms &query : here.points_in_radius( char_pos, range( source ) ) ) {
+    const bool max_range_only = has_flag( spell_flag::MAX_RANGE_ONLY );
+    const int spell_range = range( source );
+
+    for( const tripoint_bub_ms &query : here.points_in_radius( char_pos, spell_range ) ) {
+        if( max_range_only && trig_dist( char_pos, query ) != spell_range ) {
+            continue;
+        }
+
         if( !ignore_walls && has_obstruction( query ) ) {
             // it's blocked somewhere!
             continue;
