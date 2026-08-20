@@ -51,7 +51,7 @@
   {
     "id": "mon_civilian_police",
     "type": "MONSTER",
-    "name": { "str": "berserk cop" },
+    "name": { "str": "fanatic cop" },
     "description": "Gun in hand, this police officer is determined to make a last stand against the horde.  Tattered gear and an unsteady gait suggest they're not all there anymore.",
     "copy-from": "mon_civilian_panic",
     "diff": 5,
@@ -79,6 +79,15 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
+          ]
+        },
         "cooldown": 10,
         "move_cost": 150,
         "gun_type": "civilian_cop_glock22",
@@ -87,7 +96,6 @@
         "fake_dex": 8,
         "fake_per": 10,
         "ranges": [ [ 2, 14, "DEFAULT" ] ],
-        "condition": { "test_eoc": "is_disarmed" },
         "require_targeting_player": false,
         "description": "The officer fires their Glock 22!"
       }

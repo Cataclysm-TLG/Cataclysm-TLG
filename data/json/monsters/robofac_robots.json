@@ -21,6 +21,15 @@
         "type": "gun",
         "cooldown": 1,
         "gun_type": "v29_turret",
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
+          ]
+        },
         "fake_skills": [ [ "gun", 4 ], [ "pistol", 4 ] ],
         "target_moving_vehicles": true,
         "ranges": [ [ 0, 30, "DEFAULT" ] ]
@@ -105,6 +114,15 @@
         "type": "gun",
         "cooldown": 1,
         "move_cost": 150,
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
+          ]
+        },
         "gun_type": "fn_fal_semi",
         "ammo_type": "762_51",
         "fake_skills": [ [ "gun", 8 ], [ "rifle", 8 ] ],

@@ -130,6 +130,15 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
+          ]
+        },
         "cooldown": 1,
         "move_cost": 350,
         "gun_type": "m110a1",

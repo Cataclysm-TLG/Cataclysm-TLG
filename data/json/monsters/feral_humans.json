@@ -44,6 +44,7 @@
         "fake_str": 8,
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -103,7 +104,7 @@
       "weakpoint_sets": [ "wps_humanoid_body_armor" ],
       "families": [ "prof_wp_syn_armored" ]
     },
-    "armor": { "bash": 9, "cut": 14, "acid": 6, "heat": 2, "bullet": 18 }
+    "armor": { "bash": 9, "cut": 12, "acid": 6, "heat": 2, "bullet": 14 }
   },
   {
     "id": "mon_feral_human_crowbar",
@@ -123,6 +124,7 @@
         "fake_str": 8,
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -179,6 +181,7 @@
         "fake_str": 8,
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -341,6 +344,7 @@
         "ranges": [ [ 2, 14, "DEFAULT" ] ],
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -359,7 +363,7 @@
     "death_drops": "feral_security_death_drops_9mm",
     "zombify_into": "mon_zombie_labsecurity",
     "extend": { "weakpoint_sets": [ "wps_humanoid_body_armor" ], "families": [ "prof_wp_syn_armored" ] },
-    "armor": { "bash": 4, "cut": 6, "stab": 4, "bullet": 4 }
+    "armor": { "bash": 4, "cut": 6, "stab": 4, "bullet": 16, "heat": 1, "acid": 1 }
   },
   {
     "id": "mon_feral_labsecurity_flashlight",
@@ -472,10 +476,11 @@
         "gun_type": "rep_crossbow",
         "ammo_type": "bolt_cf",
         "fake_skills": [ [ "gun", 1 ], [ "smg", 1 ] ],
-        "fake_dex": 6,
-        "fake_per": 6,
+        "fake_dex": 8,
+        "fake_per": 8,
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -534,8 +539,8 @@
   {
     "id": "mon_feral_prepper",
     "type": "MONSTER",
-    "name": { "str": "disturbed prepper" },
-    "description": "A quick glance at this person would suggest that they have prepared well enough for the apocalypse.  Unfortunately, they've been swept up in the tide of madness that killed the world.  One of their hands clasps the handle of a makeshift weapon, while the other grips a handgun.",
+    "name": { "str": "paranoiac" },
+    "description": "Pathological suspicion drove this person to prepare for a coming apocalypse that few believed in.  Unfortunately, they've been swept up in the tide of madness that killed the world.  Equipped with a handgun and survival gear, they now wander among the dead, never realizing the irony of their fate.",
     "copy-from": "mon_feral_human_pipe",
     "aggression": 75,
     "dodge": 3,
@@ -546,16 +551,16 @@
       {
         "type": "gun",
         "cooldown": 10,
-        "move_cost": 50,
-        "//": "(movecost is 50 to show that the feral prepper doesn't take time to aim)",
+        "move_cost": 100,
         "gun_type": "feral_m9",
         "ammo_type": "9mm",
-        "fake_skills": [ [ "gun", 0 ], [ "pistol", 0 ] ],
+        "fake_skills": [ [ "gun", 1 ], [ "pistol", 1 ] ],
         "fake_dex": 8,
         "fake_per": 9,
         "ranges": [ [ 2, 14, "DEFAULT" ], [ 10, 35, "DEFAULT" ] ],
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -574,7 +579,7 @@
     "death_drops": "mon_feral_prepper_death_drops",
     "zombify_into": "mon_zombie_survivor",
     "extend": { "weakpoint_sets": [ "wps_humanoid_light_armor" ], "families": [ "prof_wp_syn_armored" ] },
-    "armor": { "bash": 4, "cut": 4, "acid": 7, "bullet": 4 }
+    "armor": { "bash": 4, "cut": 6, "acid": 7, "bullet": 8, "heat": 2 }
   },
   {
     "id": "mon_feral_warden_prison_island",
@@ -595,6 +600,7 @@
         "ranges": [ [ 2, 35, "DEFAULT" ] ],
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -642,7 +648,7 @@
       "families": [ "prof_wp_syn_armored" ]
     },
     "fear_triggers": [ "HURT" ],
-    "armor": { "bash": 4, "cut": 4, "acid": 8, "bullet": 4, "electric": 3 }
+    "armor": { "bash": 10, "cut": 6, "acid": 8, "bullet": 11, "electric": 3, "heat": 4 }
   },
   {
     "id": "mon_feral_militia",
@@ -671,6 +677,7 @@
         "ranges": [ [ 2, 35, "DEFAULT" ] ],
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -696,13 +703,13 @@
       "families": [ "prof_wp_syn_armored" ]
     },
     "fear_triggers": [ "HURT" ],
-    "armor": { "bash": 5, "cut": 7, "acid": 8, "bullet": 10, "electric": 4 }
+    "armor": { "bash": 6, "cut": 11, "acid": 8, "bullet": 16, "electric": 4, "heat": 2 }
   },
   {
     "id": "mon_feral_soldier",
     "type": "MONSTER",
     "name": { "str": "frenzied soldier" },
-    "description": "What was once a service member has been lost to the madness that devoured the world.  Tense, dirty hands grip a combat knife as their bloodshot eyes scan for threats.",
+    "description": "What was once a service member has been lost to the crushing madness of the Cataclysm.  Tense, dirty hands grip a combat knife as their bloodshot eyes scan for threats.",
     "copy-from": "mon_feral_human_pipe",
     "speed": 85,
     "aggression": 40,
@@ -718,7 +725,7 @@
     ],
     "zombify_into": "mon_zombie_soldier",
     "extend": { "weakpoint_sets": [ "wps_humanoid_body_armor", "wps_humanoid_open_helmet" ], "families": [ "prof_wp_syn_armored" ] },
-    "armor": { "bash": 4, "cut": 9, "bullet": 7, "acid": 8, "electric": 3 }
+    "armor": { "bash": 8, "cut": 2, "bullet":17, "acid": 8, "electric": 3, "heat": 2 }
   },
   {
     "id": "mon_feral_jackboot",
@@ -740,10 +747,10 @@
         "fake_skills": [ [ "gun", 2 ], [ "shotgun", 2 ] ],
         "fake_dex": 8,
         "fake_per": 9,
-        "//": "(ferals don't care about max effective range.)",
         "ranges": [ [ 2, 25, "DEFAULT" ] ],
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -760,7 +767,7 @@
       [ "BROWSE", 100 ],
       [ "EAT_FOOD", 100 ]
     ],
-    "armor": { "bash": 4, "cut": 9, "bullet": 7, "acid": 7, "electric": 3 },
+    "armor": { "bash": 8, "cut": 6, "bullet": 7, "acid": 7, "electric": 3, "heat": 1 },
     "death_drops": "mon_feral_jackboot_death_drops"
   },
   {
@@ -877,6 +884,7 @@
         "ranges": [ [ 2, 14, "DEFAULT" ] ],
         "condition": {
           "and": [
+            { "test_eoc": "is_disarmed" },
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
@@ -899,7 +907,7 @@
   {
     "id": "mon_feral_cop",
     "type": "MONSTER",
-    "name": { "str": "berserk cop" },
+    "name": { "str": "killer cop" },
     "description": "Another of the crazed humans among the dead.  This police officer angrily mutters to themself, wandering about with a baton in hand in search of someone to brutalize.",
     "copy-from": "mon_feral_human_pipe",
     "default_faction": "feral_police",
