@@ -639,14 +639,14 @@ int Character::get_item_position( const item *it ) const
     return inv->position_by_item( it );
 }
 
-void Character::drop( item_location loc, const tripoint_bub_ms &where )
+void Character::drop( item_location loc, const tripoint_bub_ms &where, bool peeking )
 {
-    drop( { std::make_pair( loc, loc->count() ) }, where );
+    drop( { std::make_pair( loc, loc->count() ) }, where, peeking );
     invalidate_inventory_validity_cache();
 }
 
 void Character::drop( const drop_locations &what, const tripoint_bub_ms &target,
-                      bool stash )
+                      bool stash, bool peeking )
 {
     map &here = get_map();
 
@@ -655,7 +655,8 @@ void Character::drop( const drop_locations &what, const tripoint_bub_ms &target,
     }
     invalidate_leak_level_cache();
     const std::optional<vpart_reference> vp = here.veh_at( target ).cargo();
-    if( rl_dist( pos_bub(), target ) > 1 || !( stash || here.can_put_items( target ) )
+    if( ( !peeking && square_dist( pos_bub(), target ) > 1 ) || square_dist( pos_bub(), target ) > 2 ||
+        !( stash || here.can_put_items( target ) )
         || ( vp.has_value() && vp->part().is_cleaner_on() ) ) {
         add_msg_player_or_npc( m_info, _( "You can't place items here!" ),
                                _( "<npcname> can't place items here!" ) );
@@ -809,7 +810,6 @@ bool Character::dispose_item( item_location &&obj, const std::string &prompt )
     uilist menu;
     menu.text = prompt.empty() ? string_format( _( "Dispose of %s" ), obj->tname() ) : prompt;
     std::vector<dispose_option> opts;
-
 
     const bool bucket = obj->will_spill() && !obj->is_container_empty();
 

@@ -2412,6 +2412,7 @@ int game::inventory_item_menu( item_location locThisItem,
                     u.takeoff( locThisItem.obtain( u ) );
                     break;
                 case 'd':
+
                     u.drop( locThisItem, u.pos_bub() );
                     break;
                 case 'U':
@@ -6587,8 +6588,8 @@ void game::pickup( const tripoint_bub_ms &p )
     u.pick_up( game_menus::inv::pickup( p ) );
 }
 
-//Shift player by one tile, look_around(), then restore previous position.
-//represents carefully peeking around a corner, hence the large move cost.
+// Shift player by one tile, look_around(), then restore previous position.
+// represents carefully peeking around a corner, hence the large move cost.
 void game::peek()
 {
     map &here = get_map();
@@ -6646,6 +6647,9 @@ void game::peek( const tripoint_bub_ms &p )
     if( result.peek_action && *result.peek_action == PA_BLIND_THROW ) {
         item_location loc;
         avatar_action::plthrow( u, loc, p );
+    }
+    if( result.peek_action && *result.peek_action == PA_PEEK_DROP ) {
+        avatar_action::peek_drop( game_menus::inv::multidrop( u ), p );
     }
     here.invalidate_map_cache( p.z() );
     here.invalidate_visibility_cache();
@@ -7316,6 +7320,7 @@ look_around_result game::look_around(
     ctxt.register_action( "EXTENDED_DESCRIPTION" );
     ctxt.register_action( "SELECT" );
     if( peeking ) {
+        ctxt.register_action( "peek_drop" );
         ctxt.register_action( "throw_blind" );
     }
     if( !select_zone ) {
@@ -7568,6 +7573,8 @@ look_around_result game::look_around(
             ly = ly + vec->y();
             center.x() = center.x() + vec->x();
             center.y() = center.y() + vec->y();
+        } else if( action == "peek_drop" ) {
+            result.peek_action = PA_PEEK_DROP;
         } else if( action == "throw_blind" ) {
             result.peek_action = PA_BLIND_THROW;
         } else if( action == "zoom_in" ) {
@@ -7580,7 +7587,7 @@ look_around_result game::look_around(
             mark_main_ui_adaptor_resize();
         }
     } while( action != "QUIT" && action != "CONFIRM" && action != "SELECT" && action != "TRAVEL_TO" &&
-             action != "throw_blind" );
+             action != "peek_drop" && action != "throw_blind" );
 
     if( center.z() != old_levz ) {
         here.invalidate_map_cache( old_levz );
@@ -11780,15 +11787,9 @@ void game::vertical_move( int movez, bool force, bool peeking )
     int move_cost = 100;
     tripoint_bub_ms stairs( pos.xy(), pos.z() + movez );
     bool wall_cling = u.has_flag( json_flag_WALL_CLING );
-    bool adjacent_climb = false;
     if( !force && movez == 1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_UP, pos ) &&
         !u.is_underwater() ) {
         // Climbing
-        for( const tripoint_bub_ms &p : here.points_in_radius( pos, 1 ) ) {
-            if( here.has_flag( ter_furn_flag::TFLAG_CLIMB_ADJACENT, p ) ) {
-                adjacent_climb = true;
-            }
-        }
         if( here.has_floor_or_support( stairs ) ) {
             tripoint_bub_ms dest_phase = pos;
             dest_phase.z() += 1;
@@ -11801,32 +11802,11 @@ void game::vertical_move( int movez, bool force, bool peeking )
             }
         }
 
-        if( u.get_working_arm_count() < 1 && !here.has_flag( ter_furn_flag::TFLAG_LADDER, pos ) ) {
-            add_msg( m_info, _( "You can't climb because your arms are too damaged or encumbered." ) );
-            return;
-        }
+        int cost = u.climbing_cost( pos, stairs );
+        add_msg_debug( debugmode::DF_GAME, "Climb cost: %d", cost );
 
-        const int cost = u.climbing_cost( pos, stairs );
-        add_msg_debug( debugmode::DF_GAME, "Climb cost %d", cost );
-        const bool can_climb_here = cost > 0 ||
-                                    u.has_flag( json_flag_CLIMB_NO_LADDER ) || wall_cling;
-        if( !can_climb_here && !adjacent_climb ) {
-            add_msg( m_info, _( "You can't climb here - you need walls and/or furniture to brace against." ) );
+        if( cost == 0 ) {
             return;
-        }
-
-        const item_location weapon = u.get_wielded_item();
-        if( !here.has_flag( ter_furn_flag::TFLAG_LADDER, pos ) && weapon &&
-            weapon->is_two_handed( u ) ) {
-            if( query_yn(
-                    _( "You can't climb because you have to wield a %s with both hands.\n\nPut it away?" ),
-                    weapon->tname() ) ) {
-                if( !u.unwield() ) {
-                    return;
-                }
-            } else {
-                return;
-            }
         }
 
         std::vector<tripoint_bub_ms> pts;

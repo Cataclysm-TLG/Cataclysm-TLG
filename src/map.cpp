@@ -2931,22 +2931,42 @@ int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
         debugmsg( "climb_difficulty on out of bounds point: %d, %d, %d", p.x(), p.y(), p.z() );
         return INT_MAX;
     }
-
     int best_difficulty = INT_MAX;
     int blocks_movement = 0;
-    // TODO: Weight checks for ladders.
-    if( has_flag( ter_furn_flag::TFLAG_LADDER, p ) ) {
-        // Really easy, but you have to stand on the tile
-        return 1;
-    } else if( has_flag( ter_furn_flag::TFLAG_RAMP, p ) ||
-               has_flag( ter_furn_flag::TFLAG_RAMP_UP, p ) ||
-               has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, p ) ) {
-        // We're on something stair-like, so halfway there already
+    if( !you.is_monster() ) {
+        const Character &guy = *you.as_character();
+        item_location wielding = guy.get_wielded_item();
+        bool item_twohand = wielding && wielding->is_two_handed( guy );
+        if( wielding && item_twohand ) {
+            if( guy.is_avatar() ) {
+                if( query_yn(
+                        _( "You can't climb because you have to wield a %s with both hands.\n\nPut it away?" ),
+                        wielding->tname() ) ) {
+                    if( !get_avatar().unwield() ) {
+                        return INT_MAX;
+                    }
+                } else {
+                    return INT_MAX;
+                }
+            } else {
+                return INT_MAX;
+            }
+        }
+        bool armor_restricts_hands = guy.worn_with_flag( flag_RESTRICT_HANDS );
+        bool missing_arms = !guy.has_two_arms_lifting();
+        if( armor_restricts_hands || missing_arms ) {
+            you.add_msg_if_player( _( "You need the use of at least one hand to climb." ) );
+            return INT_MAX;
+        }
+    }
+    if( has_flag( ter_furn_flag::TFLAG_RAMP_UP_LOW, p ) ) {
+        // We're on something stair-like, so halfway there already.
         best_difficulty = 7;
     }
 
     for( const tripoint_bub_ms &pt : points_in_radius( p, 1 ) ) {
-        if( impassable_ter_furn( pt ) ) {
+        bool climb_adjacent = has_flag( ter_furn_flag::TFLAG_CLIMB_ADJACENT, pt );
+        if( impassable_ter_furn( pt ) && !climb_adjacent ) {
             // TODO: Non-hardcoded climbability
             best_difficulty = std::min( best_difficulty, 10 );
             blocks_movement++;
@@ -2954,42 +2974,51 @@ int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
             // Vehicle tiles are quite good for climbing.
             // TODO: Some definitely shouldn't be.
             best_difficulty = std::min( best_difficulty, 7 );
+            // Climb a tree.
+        } else if( climb_adjacent ) {
+            best_difficulty = std::min( best_difficulty, 5 );
         }
-        if( best_difficulty > 5 && ( has_flag( ter_furn_flag::TFLAG_CLIMBABLE, pt ) ) ) {
+        if( best_difficulty > 1 && ( has_flag( ter_furn_flag::TFLAG_CLIMBABLE, pt ) ||
+                                     has_flag( ter_furn_flag::TFLAG_LADDER, pt ) ) ) {
             map &here = get_map();
             bool furn_supports_weight = true;
             bool ter_supports_weight = true;
             if( !veh_at( pt ) ) {
                 // Specifically check for climbable furniture so that we don't get irrelevant messages about nonclimbable furniture.
+                bool ladder_furn = false;
                 if( here.has_furn( pt ) ) {
                     const furn_id &climbing_furniture = furn( pt );
-                    // I don't think we need this null guard, but it can hardly hurt.
-                    if( climbing_furniture != furn_str_id::NULL_ID() ) {
-                        if( climbing_furniture.obj().bash &&
-                            ( climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ||
-                              climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_LADDER ) ) ) {
-                            if( you.get_weight() / 10000_gram > here.furn( pt ).obj().bash->str_min ) {
-                                you.add_msg_if_player( _( "The %s can't support your weight." ), here.furn( pt ).obj().name() );
-                                furn_supports_weight = false;
-                            }
+                    ladder_furn = climbing_furniture &&
+                                  climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_LADDER );
+                    if( climbing_furniture.obj().bash &&
+                        ( climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ||
+                          ladder_furn ) ) {
+                        if( you.get_weight() / 10000_gram > here.furn( pt ).obj().bash->str_min ) {
+                            you.add_msg_if_player( _( "The %s can't support your weight." ), here.furn( pt ).obj().name() );
+                            furn_supports_weight = false;
                         }
                     }
                 }
                 ter_t climbing_terrain = here.ter( pt ).obj();
-                if( climbing_terrain.bash && ( ( climbing_terrain.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ||
-                                                 climbing_terrain.has_flag( ter_furn_flag::TFLAG_LADDER ) ) &&
+                bool ladder_ter = climbing_terrain.has_flag( ter_furn_flag::TFLAG_LADDER );
+                if( climbing_terrain.bash && ( ( ladder_ter ||
+                                                 ( climbing_terrain.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) ) &&
                                                you.get_weight() / 10000_gram > here.ter( pt ).obj().bash->str_min ) ) {
                     you.add_msg_if_player( _( "The %s can't support your weight." ), here.ter( pt ).obj().name() );
                     ter_supports_weight = false;
                 }
                 if( furn_supports_weight && ter_supports_weight ) {
-                    best_difficulty = 5;
+                    if( ( ladder_furn && furn_supports_weight ) || ( ladder_ter && ter_supports_weight ) ) {
+                        best_difficulty = 1;
+                    } else {
+                        best_difficulty = 5;
+                    }
                 }
             }
         }
     }
 
-    // TODO: Make this more sensible - check opposite sides, not just movement blocker count
+    // TODO: Make this more sensible - check opposite sides, not just movement blocker count.
     return std::max( 0, best_difficulty - blocks_movement );
 }
 

@@ -82,7 +82,7 @@
     "techniques": [ "WBLOCK_1" ],
     "weight": "2500 g",
     "volume": "4000 ml",
-    "longest_side": "305 cm",
+    "longest_side": "435 cm",
     "flags": [ "POLEARM", "SPEAR", "REACH_ATTACK", "REACH3", "NONCONDUCTIVE", "ALWAYS_TWOHAND", "SPAWN_ACTIVE" ],
     "weapon_category": [ "STAFFS" ],
     "to_hit": { "grip": "none", "length": "long", "surface": "any", "balance": "clumsy" },
@@ -91,7 +91,7 @@
     "countdown_interval": "4 hours",
     "revert_to": "long_pole",
     "qualities": [ [ "HAMMER", 1 ] ],
-    "melee_damage": { "bash": 18 }
+    "melee_damage": { "bash": 16 }
   },
   {
     "type": "ITEM",
@@ -104,14 +104,14 @@
     "techniques": [ "WBLOCK_1" ],
     "weight": "2500 g",
     "volume": "4000 ml",
-    "longest_side": "305 cm",
+    "longest_side": "435 cm",
     "flags": [ "POLEARM", "SPEAR", "REACH_ATTACK", "REACH3", "NONCONDUCTIVE", "ALWAYS_TWOHAND", "DURABLE_MELEE" ],
     "weapon_category": [ "STAFFS" ],
     "to_hit": { "grip": "weapon", "length": "long", "surface": "any", "balance": "clumsy" },
     "price": "40 USD",
     "price_postapoc": "50 cent",
     "qualities": [ [ "HAMMER", 1 ] ],
-    "melee_damage": { "bash": 18 }
+    "melee_damage": { "bash": 16 }
   },
   {
     "type": "ITEM",

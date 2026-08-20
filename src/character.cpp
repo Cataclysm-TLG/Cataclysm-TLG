@@ -13929,7 +13929,16 @@ int Character::climbing_cost( const tripoint_bub_ms &from, const tripoint_bub_ms
 {
     map &here = get_map();
     if( !here.valid_move( from, to, false, true ) ) {
-        return 0;
+        bool can_climb = false;
+        for( const tripoint_bub_ms &pt : points_in_radius( from, 1 ) ) {
+            if( here.has_flag( ter_furn_flag::TFLAG_CLIMB_ADJACENT, pt ) ) {
+                can_climb = true;
+                break;
+            }
+        }
+        if( !can_climb ) {
+            return 0;
+        }
     }
 
     const int diff = here.climb_difficulty( from, *this );

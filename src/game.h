@@ -112,8 +112,8 @@ using item_filter = std::function<bool ( const item & )>;
 using item_location_filter = std::function<bool ( const item_location & )>;
 
 enum peek_act : int {
-    PA_BLIND_THROW
-    // obvious future additional value is PA_BLIND_FIRE
+    PA_BLIND_THROW,
+    PA_PEEK_DROP
 };
 
 struct look_around_result {

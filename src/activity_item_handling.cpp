@@ -361,7 +361,6 @@ std::vector<item_location> drop_on_map( Character &you, item_drop_reason reason,
         const item &it = items.front();
         const int dropcount = items.size() * it.count();
         const std::string it_name = it.tname( dropcount );
-
         switch( reason ) {
             case item_drop_reason::deliberate:
                 if( can_move_there ) {
@@ -459,7 +458,6 @@ void put_into_vehicle_or_drop( Character &you, item_drop_reason reason,
                                const std::list<item> &items )
 {
     map &here = get_map();
-
     put_into_vehicle_or_drop( you, reason, items, &here, you.pos_bub( here ) );
 }
 
@@ -472,7 +470,17 @@ void put_into_vehicle_or_drop( Character &you, item_drop_reason reason,
         try_to_put_into_vehicle( you, reason, items, *vp );
         return;
     }
-    drop_on_map( you, reason, items, here, where );
+    if( !here->can_put_items_ter_furn( where ) ) {
+        for( const tripoint_bub_ms &pos : here->points_in_radius( where, 1 ) ) {
+            if( here->can_put_items_ter_furn( pos ) ) {
+                drop_on_map( you, reason, items, here, pos );
+                return;
+            }
+            debugmsg( _( "A dropped item was lost because there was no valid tile to contain it." ) );
+        }
+    } else {
+        drop_on_map( you, reason, items, here, where );
+    }
 }
 
 std::vector<item_location> put_into_vehicle_or_drop_ret_locs( Character &you,
