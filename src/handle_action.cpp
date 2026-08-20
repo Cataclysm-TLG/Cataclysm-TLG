@@ -2368,11 +2368,27 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                 vehicle *veh = ( !vp ) ? nullptr : &vp->vehicle();
                 if( veh != nullptr ) {
                     const point_rel_ms delta = { get_delta_from_movement_action( act, iso_rotate::yes ) };
-                    veh->velocity = 200;
-                    here.move_vehicle( *veh, { delta.x(), delta.y(), 0 }, veh->face );
+                    const tripoint_bub_ms target = { pos.x() + delta.x(), pos.y() + delta.y(), pos.z() };
+                    const Creature *critter = get_creature_tracker().creature_at( target );
+                    if( critter ) {
+
+
+                        // Check if monster or player, determine if hostile, then attack or not.
+
+
+                        if( !player_character.move_effects( true, target ) ) {
+                            // Move_effects determined we could not move, waste all moves.
+                            player_character.set_moves( 0 );
+                            return false;
+                        } else {
+                            player_character.melee_attack( *critter, true );
+                        }
+                    } else if( !player_character.move_effects( false, target ) ) {
+                        veh->velocity = 200;
+                        here.move_vehicle( *veh, { delta.x(), delta.y(), 0 }, veh->face );
+                    }
+                    break;
                 }
-                break;
-            }
             if( player_character.maybe_get_value( "remote_controlling" ) &&
                 ( player_character.has_active_item( itype_radiocontrol ) ||
                   player_character.has_active_bionic( bio_remote ) ) ) {
