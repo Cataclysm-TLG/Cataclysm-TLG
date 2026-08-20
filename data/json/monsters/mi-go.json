@@ -48,7 +48,7 @@
       "PRIORITIZE_TARGETS",
       "CORNERED_FIGHTER"
     ],
-    "armor": { "bash": 4, "cut": 12, "bullet": 10, "electric": 2 }
+    "armor": { "bash": 4, "cut": 12, "bullet": 10, "electric": 2, "heat": 3, "acid": 3 }
   },
   {
     "id": "mon_mi_go_abductor",
@@ -107,7 +107,7 @@
       "CORNERED_FIGHTER",
       "PATH_AVOID_FIRE"
     ],
-    "armor": { "bash": 4, "cut": 12, "bullet": 10, "electric": 3 }
+    "armor": { "bash": 4, "cut": 12, "bullet": 10, "electric": 3, "heat": 5, "acid": 3 }
   },
   {
     "id": "mon_mi_go_surgeon",
@@ -159,7 +159,7 @@
       "CORNERED_FIGHTER",
       "PATH_AVOID_FIRE"
     ],
-    "armor": { "bash": 5, "cut": 13, "bullet": 10, "electric": 3 }
+    "armor": { "bash": 5, "cut": 13, "bullet": 10, "electric": 3, "heat": 4, "acid": 3 }
   },
   {
     "id": "mon_mi_go_guard",
@@ -221,7 +221,7 @@
       "CORNERED_FIGHTER",
       "PATH_AVOID_FIRE"
     ],
-    "armor": { "bash": 17, "cut": 22, "bullet": 18, "electric": 4 }
+    "armor": { "bash": 17, "cut": 22, "bullet": 18, "electric": 4, "heat": 7 }
   },
   {
     "id": "mon_mi_go_myrmidon",
@@ -327,7 +327,7 @@
     "id": "mon_mi_go_scout",
     "type": "MONSTER",
     "name": { "str": "mi-go scout" },
-    "description": "This slender mi-go is a little smaller than most others of its kind.  It has a weird, oblong thing attached to the center of its body with some sort of a diaphragm or a membrane on the end.  The thing seems like an integral part of the mi-go's body, and all its appendages are supporting it to prevent swaying.",
+    "description": "This slender mi-go is a little smaller than most others of its kind.  It has a weird, oblong device attached to the center of its body with some sort of a diaphragm or a membrane on the end.  The thing seems like an integral part of the mi-go's body, and all its appendages are supporting it to prevent swaying.",
     "default_faction": "mi-go",
     "bodytype": "migo",
     "species": [ "MIGO" ],
@@ -361,6 +361,15 @@
         "move_cost": 50,
         "gun_type": "migo_bio_gun",
         "fake_skills": [ [ "gun", 8 ], [ "rifle", 8 ] ],
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
+          ]
+        },
         "fake_dex": 8,
         "fake_per": 8,
         "require_targeting_player": false,
@@ -384,6 +393,6 @@
       "PRIORITIZE_TARGETS",
       "PATH_AVOID_FIRE"
     ],
-    "armor": { "bash": 4, "cut": 5, "bullet": 4, "electric": 2 }
+    "armor": { "bash": 4, "cut": 5, "bullet": 4, "electric": 2, "heat": 2 }
   }
 ]

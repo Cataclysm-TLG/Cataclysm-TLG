@@ -31,6 +31,15 @@
         "cooldown": 1,
         "move_cost": 200,
         "gun_type": "yrax_deterrent_laser",
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
+          ]
+        },
         "fake_skills": [ [ "gun", 5 ] ],
         "fake_dex": 12,
         "ranges": [ [ 0, 25, "DEFAULT" ] ],

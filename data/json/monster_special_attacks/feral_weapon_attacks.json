@@ -603,8 +603,8 @@
     "//": "Feral melee skill + weapon's to hit, so 6-2=4",
     "damage_max_instance": [ { "damage_type": "bash", "amount": 7 } ],
     "condition": { "and": [ { "test_eoc": "is_disarmed" }, { "not": { "u_has_effect": "maimed_arm" } } ] },
-    "hit_dmg_u": "%1$s hits your %2$s with a gun!",
-    "hit_dmg_npc": "%1$s hits <npcname>'s %2$s with a gun!",
+    "hit_dmg_u": "%1$s pistol whips your %2$s!",
+    "hit_dmg_npc": "%1$s pistol whips <npcname>'s %2$s!",
     "miss_msg_u": "%1$s tries to hit you, but you dodge!",
     "miss_msg_npc": "%1$s tries to hit <npcname>, but they dodge!",
     "no_dmg_msg_u": "%1$s hits your %2$s without penetrating your armor.",
@@ -661,7 +661,6 @@
         { "not": { "u_has_effect": "maimed_arm" } }
       ]
     },
-    "//2": "Stats based on AR-15/M4 Carbine (they are identical in melee), since that's what mad militia drops. Move cost was tested on a 10 in all stats character ingame, since HHG doesn't account for the default attachments",
     "hit_dmg_u": "%1$s hits your %2$s with a rifle!",
     "hit_dmg_npc": "%1$s hits <npcname>'s %2$s with a rifle!",
     "miss_msg_u": "%1$s tries to hit you, but you dodge!",
