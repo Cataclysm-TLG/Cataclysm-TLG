@@ -1433,6 +1433,9 @@
     "symbol": "4",
     "color": "brown",
     "move_cost": 0,
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "tree_dead_harv" } ],
+    "transforms_into": "t_tree_very_dead",
     "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
     "bash": {
       "str_min": 60,

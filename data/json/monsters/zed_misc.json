@@ -1633,7 +1633,7 @@
     "death_drops": "mon_zombie_drowned_death_drops",
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_fungal",
-    "upgrades": { "half_life": 120, "into": "mon_zombie_drowned" },
+    "upgrades": { "half_life": 96, "into": "mon_zombie_swimmer" },
     "categories": [ "CLASSIC" ],
     "flags": [
       "SEES",
@@ -1653,11 +1653,12 @@
     "armor": { "electric": 1 }
   },
   {
-    "id": "mon_zombie_drowned",
+    "id": "mon_zombie_swimmer",
     "type": "MONSTER",
     "name": { "str": "swimmer zombie" },
     "description": "A slick and glistening human body, face and belly bloated from what must have been a watery death.  Its hands and feet are elongated and webbed, suggesting some kind of rapid aquatic evolution.",
     "default_faction": "zombie",
+    "looks_like": "mon_zombie_drowned",
     "bodytype": "human",
     "species": [ "ZOMBIE", "HUMAN" ],
     "volume": "75000 ml",
