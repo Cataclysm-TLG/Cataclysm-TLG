@@ -1587,11 +1587,16 @@ void npc::stow_item( item &it )
             add_msg_if_npc( m_info, _( "<npcname> puts away the %s." ), ret->tname() );
         }
         mod_moves( -item_handling_cost( it ) );
-    } else { // No room for weapon, so we drop it
+    } else { // No room for weapon, so we drop it.
         if( avatar_sees ) {
             add_msg_if_npc( m_info, _( "<npcname> drops the %s." ), it.tname() );
         }
-        here.add_item_or_charges( pos_bub( here ), remove_item( it ) );
+        if( !is_hallucination() ) {
+            // We're a hallucination, so get rid of the item without actually placing anything on the ground.
+            remove_item( it );
+        } else {
+            here.add_item_or_charges( pos_bub( here ), remove_item( it ) );
+        }
     }
 }
 

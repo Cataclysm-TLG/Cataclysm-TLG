@@ -3776,7 +3776,7 @@ void npc::worker_downtime()
 void npc::move_pause()
 
 {
-    // make sure we're using the best weapon
+    // Make sure we're using the best weapon.
     if( calendar::once_every( 1_hours ) ) {
         deactivate_bionic_by_id( bio_sleep_shutdown );
         for( const bionic_id &bio_id : health_cbms ) {
@@ -4533,7 +4533,7 @@ item *npc::evaluate_best_weapon() const
 
 bool npc::wield_better_weapon()
 {
-    // These are also assigned here so npc::evaluate_best_weapon() can be called by itself
+    // These are also assigned here so npc::evaluate_best_weapon() can be called by itself.
     bool can_use_gun = !is_player_ally() || rules.has_flag( ally_rule::use_guns );
     bool use_silent = is_player_ally() && rules.has_flag( ally_rule::use_silent );
 
@@ -4553,7 +4553,7 @@ bool npc::wield_better_weapon()
     add_msg_debug( debugmode::DF_NPC, "Wielding %s at value %.1f", better_weapon->type->get_id().str(),
                    evaluate_weapon( *better_weapon, can_use_gun, use_silent ) );
 
-    // Always returns true, but future proof
+    // Always returns true, but future proof.
     bool wield_success = wield( *better_weapon );
     if( !wield_success ) {
         debugmsg( "NPC failed to wield better weapon %s", better_weapon->tname() );
