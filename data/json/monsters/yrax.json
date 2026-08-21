@@ -37,7 +37,9 @@
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
-            { "not": { "u_has_effect": "blind" } }
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
           ]
         },
         "fake_skills": [ [ "gun", 5 ] ],
