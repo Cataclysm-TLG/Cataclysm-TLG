@@ -209,7 +209,7 @@ void fungal_effects::spread_fungus_one_tile( const tripoint_bub_ms &p, const int
                    t == ter_t_tree_deadpine_warped ) {
             here.ter_set( p, ter_t_tree_fungal );
             converted = true;
-        } else if( t != ter_t_marloss_tree && t != ter_t_tree_fungal &&
+        } else if( t != ter_t_tree_very_dead && t != ter_t_marloss_tree && t != ter_t_tree_fungal &&
                    here.has_flag( ter_furn_flag::TFLAG_TREE, p ) ) {
             const int chance = rng( 1, 100 - fungus_neighbors );
             if( chance < 2 ) {
