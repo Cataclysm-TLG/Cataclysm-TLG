@@ -121,7 +121,7 @@
       { "monster": "mon_zombie_medical", "weight": 100, "cost_multiplier": 2 },
       { "monster": "mon_zombie_hazmat", "weight": 100, "cost_multiplier": 3 },
       { "monster": "mon_zombie_fireman", "weight": 100, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 100, "cost_multiplier": 5 },
+      { "monster": "mon_zombie_drowned", "weight": 100, "cost_multiplier": 5 },
       { "monster": "mon_zombie_static", "weight": 5, "cost_multiplier": 5 },
       { "monster": "mon_zombie_magnetic", "weight": 3 },
       { "monster": "mon_zombie_paramilitary", "weight": 3, "cost_multiplier": 25 },
@@ -164,7 +164,7 @@
       { "monster": "mon_zombie_medical", "weight": 100, "cost_multiplier": 2 },
       { "monster": "mon_zombie_hazmat", "weight": 100, "cost_multiplier": 3 },
       { "monster": "mon_zombie_fireman", "weight": 100, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 100, "cost_multiplier": 5 },
+      { "monster": "mon_zombie_drowned", "weight": 100, "cost_multiplier": 5 },
       { "monster": "mon_zombie_static", "weight": 5, "cost_multiplier": 5 },
       { "monster": "mon_zombie_magnetic", "weight": 3 },
       { "monster": "mon_zombie_paramilitary", "weight": 3, "cost_multiplier": 25 },
@@ -207,7 +207,7 @@
       { "monster": "mon_zombie_medical", "weight": 10, "cost_multiplier": 2 },
       { "monster": "mon_zombie_hazmat", "weight": 10, "cost_multiplier": 3 },
       { "monster": "mon_zombie_fireman", "weight": 10, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 10, "cost_multiplier": 5 },
+      { "monster": "mon_zombie_drowned", "weight": 10, "cost_multiplier": 5 },
       { "monster": "mon_zombie_static", "weight": 2, "cost_multiplier": 5 },
       { "monster": "mon_zombie_paramilitary", "weight": 1, "cost_multiplier": 25 },
       { "monster": "mon_zombie_survivor", "weight": 1, "cost_multiplier": 25, "starts": "120 days" },
@@ -332,7 +332,7 @@
       { "monster": "mon_dog_zombie_cop", "weight": 40, "cost_multiplier": 2 },
       { "monster": "mon_zombie_dog", "weight": 10, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_rot", "weight": 5, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 20, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 20, "cost_multiplier": 2 },
       { "monster": "mon_zombie_static", "weight": 6, "cost_multiplier": 5 },
       { "monster": "mon_zombie_paramilitary", "weight": 2, "cost_multiplier": 25 },
       { "monster": "mon_zombie_survivor", "weight": 1, "cost_multiplier": 25, "starts": "120 days" },
@@ -372,7 +372,7 @@
       { "monster": "mon_zombie_dog", "weight": 40, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_cop", "weight": 10, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_rot", "weight": 10, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 20, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 20, "cost_multiplier": 2 },
       { "monster": "mon_zombie_static", "weight": 6, "cost_multiplier": 5 },
       { "monster": "mon_feral_prepper", "weight": 1, "cost_multiplier": 2, "starts": "40 days" },
       { "monster": "mon_feral_survivalist", "weight": 1, "cost_multiplier": 2, "starts": "20 days" },
@@ -429,7 +429,7 @@
       { "monster": "mon_zombie_dog", "weight": 130, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_cop", "weight": 15, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_rot", "weight": 40, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 20, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 20, "cost_multiplier": 2 },
       { "monster": "mon_zombie_static", "weight": 6, "cost_multiplier": 5 },
       { "monster": "mon_zombie_paramilitary", "weight": 1, "cost_multiplier": 25 },
       { "monster": "mon_zombie_survivor", "weight": 1, "cost_multiplier": 25, "starts": "45 days" },
@@ -457,7 +457,7 @@
       { "monster": "mon_zombie_dog", "weight": 40, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_cop", "weight": 10, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_rot", "weight": 10, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 20, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 20, "cost_multiplier": 2 },
       { "monster": "mon_zombie_static", "weight": 180, "cost_multiplier": 5 },
       { "monster": "mon_zombie_magnetic", "weight": 30 },
       { "monster": "mon_zombie_paramilitary", "weight": 1, "cost_multiplier": 25 },
@@ -486,7 +486,7 @@
       { "monster": "mon_zombie_dog", "weight": 40, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_cop", "weight": 10, "cost_multiplier": 2 },
       { "monster": "mon_dog_zombie_rot", "weight": 10, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 20, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 20, "cost_multiplier": 2 },
       { "monster": "mon_zombie_static", "weight": 6, "cost_multiplier": 5 },
       { "monster": "mon_zombie_paramilitary", "weight": 1, "cost_multiplier": 25 },
       { "monster": "mon_zombie_survivor", "weight": 1, "cost_multiplier": 25, "starts": "45 days" },
@@ -593,7 +593,7 @@
       { "monster": "mon_feral_sailor_lug_wrench", "weight": 6, "cost_multiplier": 3, "starts": "14 days" },
       { "monster": "mon_zombie_static", "weight": 4, "cost_multiplier": 2, "starts": "14 days" },
       { "monster": "mon_zombie_magnetic", "weight": 20 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 40 },
+      { "monster": "mon_zombie_drowned", "weight": 40 },
       { "monster": "mon_gas_zombie", "weight": 1, "cost_multiplier": 8 },
       { "monster": "mon_zombie_survivor", "weight": 4, "cost_multiplier": 5, "starts": "30 days" },
       { "monster": "mon_zombie_survivor_elite", "weight": 2, "cost_multiplier": 5, "starts": "90 days" },
@@ -721,8 +721,8 @@
     "type": "monstergroup",
     "name": "GROUP_MANSION_POOL",
     "monsters": [
-      { "monster": "mon_zombie_swimmer_base", "weight": 850 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 250, "cost_multiplier": 10, "pack_size": [ 2, 3 ] },
+      { "monster": "mon_zombie_drowned", "weight": 850 },
+      { "monster": "mon_zombie_drowned", "weight": 250, "cost_multiplier": 10, "pack_size": [ 2, 3 ] },
       { "monster": "mon_zombie_child", "weight": 250 },
       { "monster": "mon_zombie", "weight": 100 },
       { "monster": "mon_zombie_tough", "weight": 100 }
@@ -751,7 +751,7 @@
       { "monster": "mon_zombie_cop", "weight": 30, "cost_multiplier": 3 },
       { "monster": "mon_zombie_hazmat", "weight": 10, "cost_multiplier": 3 },
       { "monster": "mon_zombie_fireman", "weight": 10, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 10, "cost_multiplier": 5 },
+      { "monster": "mon_zombie_drowned", "weight": 10, "cost_multiplier": 5 },
       { "monster": "mon_zombie_static", "weight": 10, "cost_multiplier": 5 },
       { "monster": "mon_zombie_paramilitary", "weight": 1, "cost_multiplier": 25 },
       { "monster": "mon_zombie_survivor", "weight": 1, "cost_multiplier": 25, "starts": "120 days" },
@@ -847,7 +847,7 @@
       { "monster": "mon_zombie_medical", "weight": 50, "cost_multiplier": 2 },
       { "monster": "mon_zombie", "weight": 325 },
       {
-        "monster": "mon_zombie_swimmer_base",
+        "monster": "mon_zombie_drowned",
         "weight": 150,
         "cost_multiplier": 0,
         "ends": "660 days",
@@ -862,7 +862,7 @@
     "default": "mon_zombie",
     "monsters": [
       { "monster": "mon_zombie", "weight": 250 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 500 },
+      { "monster": "mon_zombie_drowned", "weight": 500 },
       { "monster": "mon_zombie_resort_dancer", "weight": 500 }
     ]
   },
@@ -928,9 +928,9 @@
     "name": "GROUP_HOTEL_POOL",
     "type": "monstergroup",
     "monsters": [
-      { "monster": "mon_zombie_swimmer", "weight": 100, "cost_multiplier": 2, "starts": "20 days" },
-      { "monster": "mon_zombie_swimmer_base", "weight": 815 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 50, "cost_multiplier": 10, "pack_size": [ 3, 8 ] },
+      { "monster": "mon_zombie_drowned", "weight": 100, "cost_multiplier": 2, "starts": "20 days" },
+      { "monster": "mon_zombie_drowned", "weight": 815 },
+      { "monster": "mon_zombie_drowned", "weight": 50, "cost_multiplier": 10, "pack_size": [ 3, 8 ] },
       { "monster": "mon_zombie_child", "weight": 35 }
     ]
   },
@@ -985,7 +985,7 @@
     "default": "mon_zombie",
     "monsters": [
       { "monster": "mon_zombie", "weight": 350 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 500, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 500, "cost_multiplier": 2 },
       { "monster": "mon_zombie_child", "weight": 150 }
     ]
   },
@@ -993,8 +993,8 @@
     "name": "GROUP_POOL_NOKIDS",
     "type": "monstergroup",
     "monsters": [
-      { "monster": "mon_zombie_swimmer_base", "weight": 950, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 50, "cost_multiplier": 10, "pack_size": [ 3, 8 ] }
+      { "monster": "mon_zombie_drowned", "weight": 950, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 50, "cost_multiplier": 10, "pack_size": [ 3, 8 ] }
     ]
   },
   {
@@ -1003,8 +1003,8 @@
     "//": "Zombies/ferals that could be found on a diving related place.",
     "monsters": [
       { "group": "GROUP_CIVILIANS_STANDARD", "weight": 20, "cost_multiplier": 0 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 100, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 50, "cost_multiplier": 10, "pack_size": [ 3, 8 ] },
+      { "monster": "mon_zombie_drowned", "weight": 100, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 50, "cost_multiplier": 10, "pack_size": [ 3, 8 ] },
       { "monster": "mon_zombie", "weight": 50, "cost_multiplier": 3 }
     ]
   },
@@ -1014,8 +1014,8 @@
     "//": "Zombies/ferals that could be found on the beach/riverside.",
     "monsters": [
       { "group": "GROUP_CIVILIANS_STANDARD", "weight": 100, "cost_multiplier": 0 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 500, "cost_multiplier": 2 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 50, "cost_multiplier": 10, "pack_size": [ 3, 8 ] },
+      { "monster": "mon_zombie_drowned", "weight": 500, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_drowned", "weight": 50, "cost_multiplier": 10, "pack_size": [ 3, 8 ] },
       { "monster": "mon_zombie", "weight": 5, "cost_multiplier": 3 },
       { "monster": "mon_zombie", "weight": 1, "cost_multiplier": 10, "pack_size": [ 2, 5 ] },
       { "monster": "mon_zombie_child", "weight": 15 },
@@ -1109,7 +1109,7 @@
       { "monster": "mon_zombie_child", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_zombie_tough", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_zombie_brainless", "weight": 30, "cost_multiplier": 0 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 10, "cost_multiplier": 0 },
+      { "monster": "mon_zombie_drowned", "weight": 10, "cost_multiplier": 0 },
       { "monster": "mon_zombie_dog", "weight": 10, "cost_multiplier": 0 },
       { "monster": "mon_dog_zombie_rot", "weight": 5, "cost_multiplier": 0 }
     ]
