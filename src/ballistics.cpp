@@ -427,7 +427,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         }
         // Range can be 0.
         size_t traj_len = t_copy.size();
-        while( traj_len > 0 && trig_dist_precise( source, t_copy[traj_len - 1] ) > proj_arg.range ) {
+        while( traj_len > 0 && trig_dist( source, t_copy[traj_len - 1] ) > proj_arg.range ) {
             --traj_len;
         }
 
