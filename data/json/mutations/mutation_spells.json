@@ -191,6 +191,18 @@
     "max_range": 5
   },
   {
+    "type": "SPELL",
+    "id": "spell_insect_leap",
+    "name": "Insect Flight",
+    "description": "A wing-assisted jump.",
+    "valid_targets": [ "ground" ],
+    "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "NO_EXPLOSION_SFX", "AIRBORNE", "MAX_RANGE_ONLY" ],
+    "effect": "dash",
+    "shape": "line",
+    "min_range": 5,
+    "max_range": 5
+  },
+  {
     "id": "ink_gland_spray_primer",
     "type": "SPELL",
     "name": { "str": "Blinding spray primer" },
