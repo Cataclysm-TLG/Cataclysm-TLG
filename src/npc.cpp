@@ -3565,11 +3565,11 @@ void npc::process_turn()
 
     // NPCs shouldn't be using stamina, but if they have, set it back to max
     // If the stamina is higher than the max (Languorous), set it back to max
+    // FIXME: NPCs should really be using stamina!
     if( calendar::once_every( 1_minutes ) && get_stamina() != get_stamina_max() ) {
-        set_stamina( get_stamina_max() );
+         set_stamina( get_stamina_max() );
     }
 
-    // TODO: Probably ought to get rid of this if needs are disabled.
     if( is_player_ally() && calendar::once_every( 1_hours ) &&
         get_hunger() < 200 && get_thirst() < 100 && op_of_u.trust < 5 ) {
         // Friends who are well fed will like you more
@@ -3580,7 +3580,7 @@ void npc::process_turn()
         int op_penalty = std::max( 0, op_of_u.anger ) +
                          std::max( 0, -op_of_u.value ) +
                          std::max( 0, op_of_u.fear );
-        // Being barely hungry and thirsty, not in pain and not wounded means good care
+        // Being barely hungry and thirsty, not in pain and not wounded means good care.
         int state_penalty = get_hunger() + get_thirst() + ( 100 - hp_percentage() ) + get_pain();
         if( x_in_y( trust_chance, 240 + 10 * op_penalty + state_penalty ) ) {
             op_of_u.trust++;
