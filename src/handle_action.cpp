@@ -2362,6 +2362,33 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
         case ACTION_MOVE_BACK_LEFT:
         case ACTION_MOVE_LEFT:
         case ACTION_MOVE_FORTH_LEFT:
+            if( player_character.controlling_power_armor ) {
+                tripoint_bub_ms pos = player_character.pos_bub();
+                optional_vpart_position vp = here.veh_at( pos );
+                vehicle *veh = ( !vp ) ? nullptr : &vp->vehicle();
+                if( veh != nullptr ) {
+                    const point_rel_ms delta = { get_delta_from_movement_action( act, iso_rotate::yes ) };
+                    const tripoint_bub_ms target = { pos.x() + delta.x(), pos.y() + delta.y(), pos.z() };
+                    const Creature *critter = get_creature_tracker().creature_at( target );
+                    if( critter ) {
+
+
+                        // Check if monster or player, determine if hostile, then attack or not.
+
+
+                        if( !player_character.move_effects( true, target ) ) {
+                            // Move_effects determined we could not move, waste all moves.
+                            player_character.set_moves( 0 );
+                            return false;
+                        } else {
+                            player_character.melee_attack( *critter, true );
+                        }
+                    } else if( !player_character.move_effects( false, target ) ) {
+                        veh->velocity = 200;
+                        here.move_vehicle( *veh, { delta.x(), delta.y(), 0 }, veh->face );
+                    }
+                    break;
+                }
             if( player_character.maybe_get_value( "remote_controlling" ) &&
                 ( player_character.has_active_item( itype_radiocontrol ) ||
                   player_character.has_active_bionic( bio_remote ) ) ) {
@@ -2449,7 +2476,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                             break;
                         }
 
-                        // If player selected direction, climb down there, and exit from the whole ACTION_MOVE_DOWN case
+                        // If player selected direction, climb down there, and exit from the whole _DOWN case
                         climb_down( *pnt );
                         break;
                     }
