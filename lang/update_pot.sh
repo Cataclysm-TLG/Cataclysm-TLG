@@ -12,6 +12,7 @@ then
 fi
 
 
+
 echo "> Extracting strings from C++ code"
 xgettext --default-domain="cataclysm-tlg" \
          --add-comments="~" \
