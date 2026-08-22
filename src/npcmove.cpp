@@ -2750,7 +2750,8 @@ npc_action npc::address_needs( float danger )
     // Extreme food/water pathing: the pre-gate block only consumed adjacent
     // resources. If extreme need persists and we passed the danger gate,
     // path to distant ground food or water deterministically.
-    if( get_thirst() > 80 || get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 || has_effect( effect_scurvy ) || has_effect( effect_anemia ) ) {
+    if( get_thirst() > 80 || get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ||
+        has_effect( effect_scurvy ) || has_effect( effect_anemia ) ) {
         if( consume_food_from_camp() ) {
             add_msg_debug( debugmode::DF_NPC_NEEDS,
                            "NPC %s consuming food or drink from camp due to extreme need.", get_name() );
@@ -4901,7 +4902,7 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
 
     // TODO: Use the actual nutrition for this food, rather than the default?
     nutrients food_nutrients = compute_effective_nutrients( it );
-    const units::volume water_vol = masticated_volume( it).first;
+    const units::volume water_vol = masticated_volume( it ).first;
     units::volume food_vol = masticated_volume( it ).second;
     const double ratio = compute_effective_food_volume_ratio( it );
     const int nutr = nutrition_for( it );
@@ -4930,7 +4931,7 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
     // deficient/wanted vitamin.
     int calcium_estimate = 0;
     int iron_estimate = 0;
-    int vitC_estimate = 0;    
+    int vitC_estimate = 0;
     for( const auto &v : food_nutrients.vitamins() ) {
         // Update the estimated values for daily vitamins.
         // Actual vitamins happen during digestion.
@@ -4947,8 +4948,8 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
 
     for( const auto &method : it.type->use_methods ) {
         const auto *drug = dynamic_cast<const consume_drug_iuse *>(
-            method.second.get_actor_ptr()
-        );
+                               method.second.get_actor_ptr()
+                           );
 
         if( !drug ) {
             continue;

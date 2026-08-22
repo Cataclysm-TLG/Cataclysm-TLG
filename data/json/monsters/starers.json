@@ -7,9 +7,7 @@
     "copy-from": "mon_feral_human_pipe",
     "looks_like": "mon_zombie_scorched",
     "default_faction": "fungus",
-    "special_attacks": [
-      { "id": "feral_weapon_pipe" }
-    ],
+    "special_attacks": [ { "id": "feral_weapon_pipe" } ],
     "death_drops": "starer_death_drops_pipe",
     "harvest": "exempt",
     "death_function": { "effect": { "id": "death_smokeburst", "hit_self": true }, "message": "The %s explodes!", "corpse_type": "NO_CORPSE" },
@@ -33,9 +31,7 @@
     "type": "MONSTER",
     "description": "A horribly burned human, reeking of charred meat.  Their flesh has mended into a leathery shell, and the pupils of their wide-open eyes are dilated and the iris and sclera are bloodshot.  Somehow they still breathe, in deep, ragged gulps.",
     "copy-from": "mon_starer_pipe",
-    "special_attacks": [
-      { "id": "feral_weapon_crowbar" }
-    ],
+    "special_attacks": [ { "id": "feral_weapon_crowbar" } ],
     "death_drops": "starer_death_drops_crowbar"
   },
   {

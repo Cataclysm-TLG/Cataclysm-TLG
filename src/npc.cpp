@@ -3567,7 +3567,7 @@ void npc::process_turn()
     // If the stamina is higher than the max (Languorous), set it back to max
     // FIXME: NPCs should really be using stamina!
     if( calendar::once_every( 1_minutes ) && get_stamina() != get_stamina_max() ) {
-         set_stamina( get_stamina_max() );
+        set_stamina( get_stamina_max() );
     }
 
     if( is_player_ally() && calendar::once_every( 1_hours ) &&

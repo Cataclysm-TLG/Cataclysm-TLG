@@ -306,7 +306,6 @@
     "death_function": { "message": "The %s disappears.", "corpse_type": "NO_CORPSE" },
     "flags": [ "SEES", "HEARS", "NO_BREATHE" ]
   },
-
   {
     "id": "mon_hallu_mannequin",
     "type": "MONSTER",
