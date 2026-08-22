@@ -3901,14 +3901,20 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
     int order;
     std::string overlay_id;
     std::string variant;
-    // first get effects
     if( show_creature_overlay_icons ) {
         for( const auto &eff_pr : *effects ) {
-            rval.emplace_back( "effect_" + eff_pr.first.str(), "" );
+            std::string effect_id = "effect_" + eff_pr.first.str();
+            const int intensity = get_effect_int( eff_pr.first );
+
+            if( intensity > 1 ) {
+                effect_id += "_int" + std::to_string( intensity );
+            }
+
+            rval.emplace_back( effect_id, "" );
         }
     }
 
-    // then get mutations
+    // Then get mutations.
     for( const auto &mut : cached_mutations ) {
         if( mut.second.corrupted > 0 || !mut.second.show_sprite ) {
             continue;
