@@ -1532,7 +1532,7 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "army jacket" },
     "//": "Vietnam Jungle Jacket, DBDU jacket, etc.",
-    "description": "A vintage piece of a military uniform from the 20th century, or possibly a newer reproduction of one.  It's a comfortable jacket made of lightweight poplin",
+    "description": "A vintage piece of a military uniform from the 20th century, or possibly a newer reproduction of one.  It's a comfortable jacket made of lightweight poplin.",
     "weight": "340 g",
     "volume": "2 L",
     "price": "35 USD",
@@ -4342,14 +4342,14 @@
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 100,
-        "thickness": 0.5,
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
         "encumbrance": [ 13, 13 ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 92,
-        "thickness": 0.5,
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
         "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
       },
       {
@@ -4453,14 +4453,13 @@
     "symbol": "[",
     "looks_like": "coat_winter",
     "color": "green",
-    "material_thickness": "3",
     "armor": [
       {
         "covers": [ "torso" ],
         "coverage": 100,
         "encumbrance": [ 16, 28 ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       },
@@ -4469,7 +4468,7 @@
         "coverage": 100,
         "encumbrance": [ 16, 16 ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       },
@@ -4479,7 +4478,7 @@
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
         "encumbrance": [ 16, 16 ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       },
@@ -4488,7 +4487,7 @@
         "coverage": 94,
         "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       },
@@ -4499,7 +4498,7 @@
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       },
@@ -4510,7 +4509,7 @@
         "specifically_covers": [ "gastropod_foot_draped" ],
         "layers": [ "BELTED" ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       },
@@ -4521,7 +4520,7 @@
         "specifically_covers": [ "long_tail_draped" ],
         "layers": [ "BELTED" ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       },
@@ -4546,7 +4545,7 @@
         ],
         "layers": [ "BELTED" ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       },
@@ -4557,7 +4556,7 @@
         "specifically_covers": [ "crab_leg_1_draped", "crab_leg_2_draped", "crab_leg_3_draped", "crab_leg_4_draped" ],
         "layers": [ "BELTED" ],
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.55 },
           { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
         ]
       }

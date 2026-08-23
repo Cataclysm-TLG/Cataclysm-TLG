@@ -70,7 +70,9 @@
         "weight": 1
       },
       {
-        "id": "toy_plush_trex", "name": { "str": "T-rex plushie" }, "description": "A large plush t-rex.",
+        "id": "toy_plush_trex",
+        "name": { "str": "T-rex plushie" },
+        "description": "A large plush t-rex.",
         "weight": 3
       },
       {
@@ -225,7 +227,7 @@
       },
       {
         "id": "toy_plush_irri",
-        "name": { "str": "irritator plushie" }, "//~": "This is a spinosaurid dinosaur from genus Irritator.  To my knowledge taxonomic names stay the same when translated, so you may need to reword the item's description to make sense in your language.",
+        "name": { "str": "irritator plushie" },
         "description": "A stuffed dinosaur modeled after genus Irritator, a close relative of spinosaurus.  It is named for the way paleontologists felt when they discovered the original fossils had been mistreated by collectors.",
         "weight": 1
       },
@@ -263,9 +265,14 @@
         "id": "toy_plush_penguin",
         "name": { "str": "penguin plushie" },
         "description": "A velvety-soft plush penguin.  It makes a funny noise when you hug it.",
-                "weight": 1
+        "weight": 1
       },
-      { "id": "toy_plush_rabbit", "name": { "str": "rabbit plushie" }, "description": "A soft plush bunny.", "weight": 8 },
+      {
+        "id": "toy_plush_rabbit",
+        "name": { "str": "rabbit plushie" },
+        "description": "A soft plush bunny.",
+        "weight": 8
+      },
       {
         "id": "toy_plush_remora",
         "name": { "str": "remora plushie" },

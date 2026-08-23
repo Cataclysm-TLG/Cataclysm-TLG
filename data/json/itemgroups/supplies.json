@@ -54,10 +54,18 @@
       { "item": "faux_fur_sheet", "prob": 50 },
       { "item": "neoprene_sheet", "prob": 10 },
       { "item": "leather_sheet", "prob": 50 },
+      { "group": "synthetic_fluff_bag", "prob": 90 },
+      { "group": "cotton_ball_bag_full", "prob": 90 },
       { "item": "fur_sheet", "prob": 20 },
       { "item": "kevlar_sheet", "prob": 6 },
       { "item": "nomex_sheet", "prob": 3 }
     ]
+  },
+  {
+    "id": "synthetic_fluff_bag",
+    "type": "item_group",
+    "container-item": "bag_plastic",
+    "items": [ { "item": "nylon_fliff", "count": 200 } ]
   },
   {
     "id": "sandbag",
