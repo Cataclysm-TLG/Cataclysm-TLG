@@ -730,7 +730,13 @@
       { "proficiency": "prof_welding_basic", "skill_penalty": 0.5 },
       { "proficiency": "prof_welding" }
     ],
-    "components": [ [ [ "pipe", 4 ] ], [ [ "spring", 2 ] ], [ [ "synthetic_fluff", 1200 ] ], [ [ "nylon_patch", 48 ], [ "nylon_sheet", 6 ] ], [ [ "pipe_fittings", 4 ] ] ]
+    "components": [
+      [ [ "pipe", 4 ] ],
+      [ [ "spring", 2 ] ],
+      [ [ "synthetic_fluff", 1200 ] ],
+      [ [ "nylon_patch", 48 ], [ "nylon_sheet", 6 ] ],
+      [ [ "pipe_fittings", 4 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -779,7 +785,13 @@
       { "proficiency": "prof_welding_basic", "skill_penalty": 0.5 },
       { "proficiency": "prof_welding" }
     ],
-    "components": [ [ [ "pipe", 4 ] ], [ [ "spring", 2 ] ], [ [ "synthetic_fluff", 1200 ] ], [ [ "nylon_patch", 64 ], [ "nylon_sheet", 8 ] ], [ [ "pipe_fittings", 4 ] ] ]
+    "components": [
+      [ [ "pipe", 4 ] ],
+      [ [ "spring", 2 ] ],
+      [ [ "synthetic_fluff", 1200 ] ],
+      [ [ "nylon_patch", 64 ], [ "nylon_sheet", 8 ] ],
+      [ [ "pipe_fittings", 4 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -805,7 +817,8 @@
       [ [ "pipe", 4 ] ],
       [ [ "spring", 2 ] ],
       [ [ "leather_patch", 64 ], [ "leather_sheet", 8 ] ],
-      [ [ "pipe_fittings", 4 ] ], [ [ "synthetic_fluff", 1200 ] ],
+      [ [ "pipe_fittings", 4 ] ],
+      [ [ "synthetic_fluff", 1200 ] ],
       [ [ "nylon_patch", 8 ] ]
     ]
   },

@@ -65,7 +65,7 @@
     "id": "synthetic_fluff_bag",
     "type": "item_group",
     "container-item": "bag_plastic",
-    "items": [ { "item": "nylon_fliff", "count": 200 } ]
+    "items": [ { "item": "synthetic_fluff", "count": 200 } ]
   },
   {
     "id": "sandbag",
