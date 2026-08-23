@@ -99,11 +99,27 @@
     "volume": "25 ml",
     "price": "50 cent",
     "price_postapoc": "5 cent",
-    "material": [ "cotton" ],
+    "material": [ "cotton_fluff" ],
     "symbol": "*",
     "color": "white",
     "flags": [ "SINGLE_USE", "TINDER" ],
     "use_action": { "type": "heal", "bandages_power": 1, "bleed": 3, "move_cost": 3000 }
+  },
+  {
+    "id": "synthetic_fluff",
+    "type": "ITEM",
+    "name": { "str_sp": "synthetic fluff" },
+    "description": "A spongy wad of synthetic fiber, probably polyester, used for padding or insulation in everything from car seats to winter coats.  While it has many advantages over cotton, its lack of absorbency makes it a poor choice for first aid applications.",
+    "category": "spare_parts",
+    "weight": "22 g",
+    "volume": "25 ml",
+    "price": "25 cent",
+    "price_postapoc": "1 cent",
+    "material": [ "synthetic_fluff" ],
+    "symbol": "*",
+    "color": "white",
+    "flags": [ "SINGLE_USE" ],
+    "use_action": { "type": "heal", "bandages_power": 1, "bleed": 1, "move_cost": 3000 }
   },
   {
     "id": "inhaler",

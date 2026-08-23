@@ -184,7 +184,7 @@
     "color": "green",
     "warmth": 10,
     "material_thickness": 1,
-    "environmental_protection": 0,
+    "environmental_protection": 1,
     "flags": [ "OVERSIZE", "COLLAR", "ALLOWS_NATURAL_ATTACKS", "HOOD", "UNRESTRICTED" ],
     "armor": [ { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] } ]
   },

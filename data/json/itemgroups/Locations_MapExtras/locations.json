@@ -2650,6 +2650,7 @@
       [ "sweatshirt", 75 ],
       [ "sweater", 75 ],
       [ "coat_winter", 50 ],
+      [ "coat_winter_xs", 10 ],
       [ "gloves_wool", 33 ],
       [ "gloves_wool_fingerless", 10 ],
       [ "thermal_socks", 2 ],

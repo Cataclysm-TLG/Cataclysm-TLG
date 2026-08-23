@@ -105,7 +105,7 @@
     ],
     "warmth": 30,
     "material_thickness": 2,
-    "environmental_protection": 6,
+    "environmental_protection": 8,
     "flags": [ "VARSIZE", "POCKETS", "STURDY", "RAINPROOF", "OUTER" ]
   },
   {
@@ -297,6 +297,7 @@
     ],
     "warmth": 15,
     "material_thickness": 0.25,
+    "environmental_protection": 8,
     "flags": [ "VARSIZE", "POCKETS", "OUTER" ]
   },
   {
@@ -439,7 +440,7 @@
       }
     ],
     "warmth": 10,
-    "environmental_protection": 3,
+    "environmental_protection": 6,
     "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "HOOD", "OUTER" ]
   },
   {
@@ -542,44 +543,80 @@
     "price": "140 USD",
     "price_postapoc": "7 USD 50 cent",
     "to_hit": -2,
-    "material": [ "cotton" ],
+    "material": [ "nylon", "synthetic_fluff" ],
     "symbol": "[",
     "looks_like": "coat_rain",
     "color": "light_red",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 18, 27 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 18, 21 ] },
+      {
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 27 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 21 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 100,
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
-        "encumbrance": [ 18, 21 ]
+        "encumbrance": [ 18, 21 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 94,
-        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
         "encumbrance": [ 8, 8 ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
-        "layers": [ "BELTED" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "gastropod_foot" ],
         "coverage": 50,
         "encumbrance": 6,
         "specifically_covers": [ "gastropod_foot_draped" ],
-        "layers": [ "BELTED" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "long_tail" ],
         "coverage": 65,
         "encumbrance": 8,
         "specifically_covers": [ "long_tail_draped" ],
-        "layers": [ "BELTED" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "coverage": 65,
@@ -600,7 +637,11 @@
           "cephalopod_arm_5_draped",
           "cephalopod_arm_6_draped"
         ],
-        "layers": [ "BELTED" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "coverage": 65,
@@ -642,8 +683,147 @@
     ],
     "warmth": 70,
     "material_thickness": 2,
-    "environmental_protection": 1,
+    "environmental_protection": 5,
     "flags": [ "VARSIZE", "POCKETS", "HOOD", "COLLAR", "OUTER" ]
+  },
+  {
+    "id": "coat_winter_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "winter coat" },
+    "description": "A bulky winter coat sized for a toddler.",
+    "weight": "400 g",
+    "volume": "1700 ml",
+    "price": "110 USD",
+    "price_postapoc": "2 USD",
+    "to_hit": -2,
+    "material": [ "nylon", "synthetic_fluff" ],
+    "symbol": "[",
+    "looks_like": "coat_rain",
+    "color": "light_red",
+    "armor": [
+      {
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 27 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 21 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 18, 21 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 94,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 65,
+        "encumbrance": [ 8, 8 ],
+        "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 50,
+        "encumbrance": 6,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 65,
+        "encumbrance": 8,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 8,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped"
+        ],
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "coverage": 65,
+        "encumbrance": 8,
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "specifically_covers": [ "crab_leg_1_draped", "crab_leg_2_draped", "crab_leg_3_draped", "crab_leg_4_draped" ],
+        "layers": [ "BELTED" ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "750 g",
+        "max_item_length": "7 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "750 g",
+        "max_item_length": "7 cm",
+        "moves": 80
+      }
+    ],
+    "warmth": 70,
+    "environmental_protection": 5,
+    "flags": [ "VARSIZE", "POCKETS", "HOOD", "COLLAR", "OUTER", "UNDERSIZE", "PREFIX_XS" ]
   },
   {
     "id": "longcoat",
@@ -1352,7 +1532,7 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "army jacket" },
     "//": "Vietnam Jungle Jacket, DBDU jacket, etc.",
-    "description": "A vintage piece of a military uniform from the 20th century, or possibly a newer reproduction of one.  It's a comfortable jacket made of lightweight poplin",
+    "description": "A vintage piece of a military uniform from the 20th century, or possibly a newer reproduction of one.  It's a comfortable jacket made of lightweight poplin.",
     "weight": "340 g",
     "volume": "2 L",
     "price": "35 USD",
@@ -1666,6 +1846,7 @@
     ],
     "warmth": 35,
     "material_thickness": 0.7,
+    "environmental_protection": 2,
     "flags": [ "VARSIZE", "POCKETS", "OUTER" ]
   },
   {
@@ -2689,6 +2870,7 @@
     ],
     "warmth": 50,
     "material_thickness": 1.2,
+    "environmental_protection": 3,
     "flags": [ "VARSIZE", "POCKETS", "COLLAR", "OUTER", "RAINPROOF" ]
   },
   {
@@ -3341,7 +3523,7 @@
     "volume": "5 L",
     "price": "180 USD",
     "price_postapoc": "5 USD",
-    "material": [ "nylon", "cotton" ],
+    "material": [ "nylon", "synthetic_fluff", "cotton" ],
     "symbol": "[",
     "looks_like": "coat_winter",
     "color": "light_blue",
@@ -3352,10 +3534,41 @@
         "encumbrance": [ 15, 22 ],
         "material": [
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 },
-          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.2 }
+          { "type": "synthetic_fluff", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 }
         ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 15, 15 ] }
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 15, 15 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "synthetic_fluff", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 90,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "synthetic_fluff", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 }
+        ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 95,
+        "encumbrance": [ 15, 15 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "synthetic_fluff", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 }
+        ]
+      }
     ],
     "pocket_data": [
       {
@@ -3388,7 +3601,7 @@
       }
     ],
     "warmth": 80,
-    "environmental_protection": 3,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "POCKETS", "HOOD", "COLLAR", "OUTER", "RAINPROOF" ]
   },
   {
@@ -4097,7 +4310,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "tuxedo" },
-    "description": "A full-body tuxedo.  Makes the apocalypse feel a little more classy.",
+    "description": "A full-body tuxedo, because even now, life is more than mere survival.",
     "weight": "1587 g",
     "volume": "5500 ml",
     "price": "210 USD",
@@ -4110,38 +4323,40 @@
       {
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_lower" ],
-        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
         "coverage": 100,
         "encumbrance": [ 13, 16 ]
       },
       {
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
-        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 } ],
-        "coverage": 90
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "coverage": 95
       },
       {
         "covers": [ "arm_l", "arm_r" ],
-        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
         "coverage": 95,
         "encumbrance": [ 13, 13 ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 100,
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
         "encumbrance": [ 13, 13 ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
-        "coverage": 94,
+        "coverage": 92,
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
         "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
       },
       {
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r", "leg_knee_l", "leg_knee_r", "leg_lower_l", "leg_lower_r", "leg_hip_l", "leg_hip_r" ],
         "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": [ 13, 13 ]
       }
     ],
@@ -4177,7 +4392,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "waistcoat" },
-    "description": "An elegant waistcoat.  Ideal for those occasions when wearing only a shirt would be too casual and a suit would be overdoing it.",
+    "description": "An elegant waistcoat, ideal for those occasions when wearing only a shirt would be too casual and a suit would be overdoing it.",
     "weight": "516 g",
     "volume": "1 L",
     "price": "50 USD",
@@ -4227,123 +4442,91 @@
     "id": "winter_jacket_army",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "army winter jacket" },
-    "description": "A hooded jacket with lots of pockets, thickly padded for warmth.  Favored by the military.",
-    "weight": "1000 g",
-    "volume": "3 L",
+    "name": { "str": "military parka" },
+    "//": "Roughly based on the N-3B, but could be any similar coat.",
+    "description": "A military-style cold weather coat made of tough synthetics, ",
+    "weight": "1200 g",
+    "volume": "10 L",
     "price": "43 USD 75 cent",
     "price_postapoc": "7 USD 50 cent",
-    "material": [ "nylon" ],
+    "material": [ "nylon", "synthetic_fluff" ],
     "symbol": "[",
     "looks_like": "coat_winter",
-    "color": "white",
+    "color": "green",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 20, 26 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 20, 20 ] },
+      {
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": [ 16, 28 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 100,
+        "encumbrance": [ 16, 16 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
+      },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 100,
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
-        "encumbrance": [ 20, 20 ]
+        "encumbrance": [ 16, 16 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 94,
-        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
-      }
-    ],
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "1 L",
-        "max_contains_weight": "2 kg",
-        "max_item_length": "15 cm",
-        "moves": 80
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "1 L",
-        "max_contains_weight": "2 kg",
-        "max_item_length": "15 cm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "900 ml",
-        "max_contains_weight": "2 kg",
-        "max_item_length": "15 cm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "900 ml",
-        "max_contains_weight": "2 kg",
-        "max_item_length": "15 cm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "1 kg",
-        "max_item_length": "13 cm",
-        "moves": 120
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "1 kg",
-        "max_item_length": "13 cm",
-        "moves": 120
-      }
-    ],
-    "warmth": 50,
-    "material_thickness": 1,
-    "flags": [ "VARSIZE", "POCKETS", "HOOD", "OUTER", "RAINPROOF" ]
-  },
-  {
-    "id": "plaguedoctor_robe",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "plague robe" },
-    "description": "A dark robbed cassock worn by plague doctors.",
-    "weight": "1300 g",
-    "volume": "5 L",
-    "price": "8 USD",
-    "price_postapoc": "60 cent",
-    "to_hit": -5,
-    "material": [ "cotton" ],
-    "symbol": "[",
-    "looks_like": "cassock",
-    "color": "dark_gray",
-    "warmth": 24,
-    "material_thickness": 1,
-    "flags": [ "VARSIZE" ],
-    "armor": [
-      { "covers": [ "torso" ], "specifically_covers": [ "torso_upper", "torso_lower" ], "coverage": 100, "encumbrance": 12 },
       {
         "covers": [ "leg_l", "leg_r" ],
-        "coverage": 95,
-        "encumbrance": 12,
+        "coverage": 50,
+        "encumbrance": 6,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
-        "layers": [ "BELTED" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "covers": [ "gastropod_foot" ],
-        "coverage": 80,
-        "encumbrance": 9,
+        "coverage": 40,
+        "encumbrance": 4,
         "specifically_covers": [ "gastropod_foot_draped" ],
-        "layers": [ "BELTED" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "covers": [ "long_tail" ],
-        "coverage": 95,
-        "encumbrance": 12,
+        "coverage": 42,
+        "encumbrance": 6,
         "specifically_covers": [ "long_tail_draped" ],
-        "layers": [ "BELTED" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
-        "coverage": 95,
-        "encumbrance": 12,
+        "coverage": 42,
+        "encumbrance": 6,
         "covers": [
           "cephalopod_arm_1",
           "cephalopod_arm_2",
@@ -4360,28 +4543,57 @@
           "cephalopod_arm_5_draped",
           "cephalopod_arm_6_draped"
         ],
-        "layers": [ "BELTED" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
-        "coverage": 95,
-        "encumbrance": 12,
+        "coverage": 42,
+        "encumbrance": 4,
         "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
         "specifically_covers": [ "crab_leg_1_draped", "crab_leg_2_draped", "crab_leg_3_draped", "crab_leg_4_draped" ],
-        "layers": [ "BELTED" ]
-      },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 12 },
-      {
-        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
-        "coverage": 100,
-        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
-        "encumbrance": 12
-      },
-      {
-        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
-        "coverage": 94,
-        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.55 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       }
-    ]
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1200 ml",
+        "max_contains_weight": "4000 g",
+        "max_item_length": "25 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1200 ml",
+        "max_contains_weight": "4000 g",
+        "max_item_length": "25 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "900 ml",
+        "max_contains_weight": "2000 g",
+        "max_item_length": "18 cm",
+        "moves": 120
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "900 ml",
+        "max_contains_weight": "2000 g",
+        "max_item_length": "18 cm",
+        "moves": 120
+      }
+    ],
+    "warmth": 50,
+    "environmental_protection": 6,
+    "flags": [ "VARSIZE", "POCKETS", "HOOD", "OUTER", "RAINPROOF", "COLLAR" ]
   },
   {
     "id": "nun_habit",

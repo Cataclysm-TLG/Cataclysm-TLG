@@ -3902,7 +3902,7 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
     std::string overlay_id;
     std::string variant;
 
-    // This function controls the order that overlays are drawn. We want to 
+    // This function controls the order that overlays are drawn. We want to
     // go from skin layer to the outermost layer.
 
     // First, get mutations.
