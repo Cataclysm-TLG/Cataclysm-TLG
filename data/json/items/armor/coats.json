@@ -548,46 +548,75 @@
     "looks_like": "coat_rain",
     "color": "light_red",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 18, 27 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]  },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 18, 21 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ] },
+      {
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 27 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 21 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 100,
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
-        "encumbrance": [ 18, 21 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "encumbrance": [ 18, 21 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 94,
-        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
         "encumbrance": [ 8, 8 ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "gastropod_foot" ],
         "coverage": 50,
         "encumbrance": 6,
         "specifically_covers": [ "gastropod_foot_draped" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "long_tail" ],
         "coverage": 65,
         "encumbrance": 8,
         "specifically_covers": [ "long_tail_draped" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "coverage": 65,
@@ -608,8 +637,11 @@
           "cephalopod_arm_5_draped",
           "cephalopod_arm_6_draped"
         ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "coverage": 65,
@@ -670,46 +702,75 @@
     "looks_like": "coat_rain",
     "color": "light_red",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 18, 27 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]  },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 18, 21 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ] },
+      {
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 27 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 21 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
+      },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 100,
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
-        "encumbrance": [ 18, 21 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "encumbrance": [ 18, 21 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 94,
-        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
         "encumbrance": [ 8, 8 ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "gastropod_foot" ],
         "coverage": 50,
         "encumbrance": 6,
         "specifically_covers": [ "gastropod_foot_draped" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "covers": [ "long_tail" ],
         "coverage": 65,
         "encumbrance": 8,
         "specifically_covers": [ "long_tail_draped" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "coverage": 65,
@@ -730,8 +791,11 @@
           "cephalopod_arm_5_draped",
           "cephalopod_arm_6_draped"
         ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.25 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.25 }
+        ]
       },
       {
         "coverage": 65,
@@ -3495,12 +3559,16 @@
           { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 }
         ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 15, 15 ],
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 95,
+        "encumbrance": [ 15, 15 ],
         "material": [
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "synthetic_fluff", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 }
-        ] }
+        ]
+      }
     ],
     "pocket_data": [
       {
@@ -4273,13 +4341,15 @@
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
-        "coverage": 100, "thickness": 0.5,
+        "coverage": 100,
+        "thickness": 0.5,
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
         "encumbrance": [ 13, 13 ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
-        "coverage": 92, "thickness": 0.5,
+        "coverage": 92,
+        "thickness": 0.5,
         "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ]
       },
       {
@@ -4385,46 +4455,75 @@
     "color": "green",
     "material_thickness": "3",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 16, 28 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 16, 16 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ] },
+      {
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": [ 16, 28 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 100,
+        "encumbrance": [ 16, 16 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
+      },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 100,
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
-        "encumbrance": [ 16, 16 ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ]
+        "encumbrance": [ 16, 16 ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "coverage": 94,
-        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ]
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 50,
         "encumbrance": 6,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "covers": [ "gastropod_foot" ],
         "coverage": 40,
         "encumbrance": 4,
         "specifically_covers": [ "gastropod_foot_draped" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "covers": [ "long_tail" ],
         "coverage": 42,
         "encumbrance": 6,
         "specifically_covers": [ "long_tail_draped" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "coverage": 42,
@@ -4445,16 +4544,22 @@
           "cephalopod_arm_5_draped",
           "cephalopod_arm_6_draped"
         ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       },
       {
         "coverage": 42,
         "encumbrance": 4,
         "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
         "specifically_covers": [ "crab_leg_1_draped", "crab_leg_2_draped", "crab_leg_3_draped", "crab_leg_4_draped" ],
-        "layers": [ "BELTED" ], 
-        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 }, { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 } ]
+        "layers": [ "BELTED" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.45 },
+          { "type": "synthetic_fluff", "covered_by_mat": 95, "thickness": 5.0 }
+        ]
       }
     ],
     "pocket_data": [

@@ -186,7 +186,7 @@
     "color": "white",
     "warmth": 5,
     "material_thickness": 0.1,
-    "environmental_protection": 3,
+    "environmental_protection": 4,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
     "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "mouth" ] } ]
   },
@@ -208,7 +208,6 @@
     "color": "white",
     "warmth": 5,
     "material_thickness": 0.2,
-    "environmental_protection": 1,
     "flags": [ "WATER_FRIENDLY" ],
     "armor": [ { "encumbrance": 12, "coverage": 95, "covers": [ "eyes", "mouth" ] } ]
   },
@@ -231,7 +230,6 @@
     "color": "white",
     "warmth": 5,
     "material_thickness": 2,
-    "environmental_protection": 1,
     "flags": [ "WATER_FRIENDLY", "STURDY" ],
     "armor": [ { "encumbrance": 10, "coverage": 95, "covers": [ "eyes", "mouth" ], "rigid_layer_only": true } ]
   },
@@ -287,30 +285,37 @@
         "append": true
       },
       {
+        "id": "president_plastic_mask",
+        "name": { "str": "plastic president mask" },
+        "description": "A cheap plastic mask depicting a United States president.",
+        "weight": 25,
+        "append": true
+      },
+      {
+        "id": "ghost_plastic_mask",
+        "name": { "str": "plastic ghost mask" },
+        "description": "A white plastic mask molded in an eternal howl of terror.",
+        "weight": 25,
+        "append": true
+      },
+      {
+        "id": "ghost_plastic_mask",
+        "name": { "str": "white plastic mask" },
+        "description": "A mask molded in the shape of a human face but left unpainted.",
+        "weight": 25,
+        "append": true
+      },
+      {
         "id": "goblin_plastic_mask",
         "name": { "str": "plastic goblin mask" },
-        "description": "It's modeled after a green goblin.",
+        "description": "A cheap plastic mask modeled after a green goblin.",
         "weight": 20,
-        "append": true
-      },
-      {
-        "id": "unicorn_plastic_mask",
-        "name": { "str": "plastic unicorn mask" },
-        "description": "It's a mask of a unicorn with a plastic piece sticking out as a horn.",
-        "weight": 15,
-        "append": true
-      },
-      {
-        "id": "bear_plastic_mask",
-        "name": { "str": "plastic bear mask" },
-        "description": "It's modeled after an American black bear.",
-        "weight": 15,
         "append": true
       },
       {
         "id": "zombie_plastic_mask",
         "name": { "str": "plastic zombie mask" },
-        "description": "It's a cheesy plastic zombie mask.  You miss when they were just fiction.",
+        "description": "It's a cheesy plastic zombie mask.  You have a feeling this wouldn't fool the undead.",
         "weight": 15,
         "append": true
       }
