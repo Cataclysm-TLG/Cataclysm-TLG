@@ -356,8 +356,13 @@
     "difficulty": 1,
     "time": "22 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "nylon_sheet", 12 ] ], [ [ "nylon_patch", 96 ] ], 
-      [ [ "synthetic_fluff", 2000 ] ], [ [ "spring", 9 ] ], [ [ "wire", 20 ] ] ]
+    "components": [
+      [ [ "nylon_sheet", 12 ] ],
+      [ [ "nylon_patch", 96 ] ],
+      [ [ "synthetic_fluff", 2000 ] ],
+      [ [ "spring", 9 ] ],
+      [ [ "wire", 20 ] ]
+    ]
   },
   {
     "result": "character_sheet",
