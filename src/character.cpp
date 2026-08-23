@@ -3901,20 +3901,11 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
     int order;
     std::string overlay_id;
     std::string variant;
-    if( show_creature_overlay_icons ) {
-        for( const auto &eff_pr : *effects ) {
-            std::string effect_id = "effect_" + eff_pr.first.str();
-            const int intensity = get_effect_int( eff_pr.first );
 
-            if( intensity > 1 ) {
-                effect_id += "_int" + std::to_string( intensity );
-            }
+    // This function controls the order that overlays are drawn. We want to 
+    // go from skin layer to the outermost layer.
 
-            rval.emplace_back( effect_id, "" );
-        }
-    }
-
-    // Then get mutations.
+    // First, get mutations.
     for( const auto &mut : cached_mutations ) {
         if( mut.second.corrupted > 0 || !mut.second.show_sprite ) {
             continue;
@@ -3927,7 +3918,7 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
         mutation_sorting.emplace( order, std::pair<std::string, std::string> { overlay_id, variant } );
     }
 
-    // then get bionics
+    // Then get bionics.
     for( const bionic &bio : *my_bionics ) {
         if( !bio.show_sprite ) {
             continue;
@@ -3941,11 +3932,24 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
         rval.emplace_back( "mutation_" + mutorder.second.first, mutorder.second.second );
     }
 
-    // next clothing
+    // Next, clothing.
     worn.get_overlay_ids( rval );
 
-    // last weapon
-    // TODO: might there be clothing that covers the weapon?
+    // Then effects.
+    if( show_creature_overlay_icons ) {
+        for( const auto &eff_pr : *effects ) {
+            std::string effect_id = "effect_" + eff_pr.first.str();
+            const int intensity = get_effect_int( eff_pr.first );
+
+            if( intensity > 1 ) {
+                effect_id += "_int" + std::to_string( intensity );
+            }
+
+            rval.emplace_back( effect_id, "" );
+        }
+    }
+
+    // Last, we do weapon.
     if( is_armed() ) {
         const std::string variant = weapon.has_itype_variant() ? weapon.itype_variant().id : "";
         rval.emplace_back( "wielded_" + weapon.typeId().str(), variant );
