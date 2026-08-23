@@ -4222,5 +4222,10 @@
     "type": "MIGRATION",
     "id": "bellyband",
     "replace": "bellywrap"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plaguedoctor_robe",
+    "replace": "cassock"
   }
 ]

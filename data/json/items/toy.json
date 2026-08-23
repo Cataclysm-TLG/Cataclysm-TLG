@@ -5,7 +5,7 @@
     "name": { "str": "plush toy" },
     "description": "A manufactured plush toy.  This is the default variant, if you see it something went wrong.",
     "category": "other",
-    "material": [ "cotton" ],
+    "material": [ { "type": "faux_fur", "portion": 1 }, { "type": "synthetic_fluff", "portion": 15 } ],
     "weight": "900 g",
     "volume": "3 L",
     "price": "20 USD",
@@ -18,25 +18,26 @@
       {
         "id": "toy_plush_teddy",
         "name": { "str": "teddy bear" },
-        "description": "A mass-produced plush teddy bear.  It is wearing a little red t-shirt but no pants."
+        "description": "A mass-produced plush teddy bear.  It is wearing a little red t-shirt but no pants.",
+        "weight": 8
       },
       {
         "id": "toy_plush_gteddy",
         "name": { "str": "grizzly teddy bear" },
         "description": "A mass-produced plush brown teddy bear.  It is wearing a little red t-shirt but no pants.",
-        "weight": 1
+        "weight": 5
       },
       {
         "id": "toy_plush_pteddy",
         "name": { "str": "polar teddy bear" },
         "description": "A mass-produced plush white teddy bear.  It is wearing a little white puffer jacket, holding a glass of soda, but is wearing no pants.",
-        "weight": 1
+        "weight": 5
       },
       {
         "id": "toy_plush_bteddy",
         "name": { "str": "black teddy bear" },
         "description": "A mass-produced plush black teddy bear.  It is wearing a little white t-shirt, but no pants.",
-        "weight": 1
+        "weight": 5
       },
       {
         "id": "toy_plush_steddy",
@@ -54,36 +55,41 @@
         "id": "toy_plush_pteddy",
         "name": { "str": "panda teddy bear" },
         "description": "A mass-produced plush panda teddy bear.  It is wearing a little gray t-shirt, but no pants.",
-        "weight": 1
+        "weight": 10
       },
       {
         "id": "toy_plush_teddy_zombie",
         "name": { "str": "zombie teddy bear" },
-        "description": "A dark green teddy bear with stylized stitches all over and X's for eyes.  The perfect size for a small child to hug the unlife out of.  Looks like the zombie apocalypse hit the toy store shelves first."
+        "description": "A dark green teddy bear with stylized stitches all over and X's for eyes.  The perfect size for a small child to hug the unlife out of.  Looks like the zombie apocalypse hit the toy store shelves first.",
+        "weight": 1
       },
       {
         "id": "toy_plush_ferret",
         "name": { "str": "ferret plushie" },
-        "description": "A large plush ferret with cute beady eyes."
+        "description": "A large plush ferret with cute beady eyes.",
+        "weight": 1
       },
-      { "id": "toy_plush_trex", "name": { "str": "T-rex plushie" }, "description": "A large plush t-rex." },
+      {
+        "id": "toy_plush_trex", "name": { "str": "T-rex plushie" }, "description": "A large plush t-rex.",
+        "weight": 3
+      },
       {
         "id": "toy_plush_trice",
         "name": { "str": "triceratops plushie" },
         "description": "A large, round, cuddly dinosaur plushie with soft horns and a sturdy build.",
-        "weight": 1
+        "weight": 2
       },
       {
         "id": "toy_plush_stego",
         "name": { "str": "stegosaurus plushie" },
         "description": "A large stegosaurus plushie with a spiky back and soft, huggable body.  Don't worry, it is completely docile!",
-        "weight": 1
+        "weight": 2
       },
       {
         "id": "toy_plush_ankylo",
         "name": { "str": "ankylosaurus plushie" },
         "description": "A cute, squat ankylosaurus plushie with a spiky tail and soft plating.",
-        "weight": 1
+        "weight": 2
       },
       {
         "id": "toy_plush_vel",
@@ -101,7 +107,7 @@
         "id": "toy_plush_brachio",
         "name": { "str": "brachiosaurus plushie" },
         "description": "A sweet-faced brachiosaurus plushie with a long neck and oversized head.  It looks very wise!",
-        "weight": 1
+        "weight": 2
       },
       {
         "id": "toy_plush_spino",
@@ -113,7 +119,7 @@
         "id": "toy_plush_pteranodon",
         "name": { "str": "pteranodon plushie" },
         "description": "A large pteranodon plushie with big wings and adorable eyes.",
-        "weight": 1
+        "weight": 2
       },
       {
         "id": "toy_plush_allo",
@@ -219,8 +225,8 @@
       },
       {
         "id": "toy_plush_irri",
-        "name": { "str": "irritator plushie" },
-        "description": "A large, soft and colorful reddish orange irritator plushie with a long snout and playful expression.",
+        "name": { "str": "irritator plushie" }, "//~": "This is a spinosaurid dinosaur from genus Irritator.  To my knowledge taxonomic names stay the same when translated, so you may need to reword the item's description to make sense in your language.",
+        "description": "A stuffed dinosaur modeled after genus Irritator, a close relative of spinosaurus.  It is named for the way paleontologists felt when they discovered the original fossils had been mistreated by collectors.",
         "weight": 1
       },
       {
@@ -232,66 +238,84 @@
       {
         "id": "toy_plush_tik",
         "name": { "str": "tiktaalik plushie" },
-        "description": "A large plushie of your ancestor, the tiktaalik!  It has a soft, huggable fish-like body, stubby legs, and paddle-like soft fins.  Its color is a mix of blue-gray soft scales pattern on the back and a plush beige belly.  It has large eyes and a friendly expression.",
+        "description": "A large plushie of your ancestor, the tiktaalik!  It is a prehistoric fish with a soft, huggable fish-like body, stubby legs, and paddle-like soft fins.  Its color is a mix of blue-gray soft scales pattern on the back and a plush beige belly.  If these creatures had never decided to venture onto dry land, would you be in this mess now?",
         "weight": 1
       },
       {
         "id": "toy_plush_ichth",
         "name": { "str": "ichthyostega plushie" },
-        "description": "A large plushie of your ancestor, the ichthyostega!  It has a long, sturdy, soft body, four soft, fat legs, and a soft fish-like tail.  Its body is extremely soft and fluffy, and has bumpy green skin with lighter green stripes as details.  It presents a cute expression with big, wise eyes.",
+        "description": "A large plushie of your ancestor, the ichthyostega!  It is a fish, but more closely resembles some sort of lizard with its bulky body and fat legs.",
         "weight": 1
       },
       {
         "id": "toy_plush_sancta",
         "name": { "str": "sanctacaris plushie" },
-        "description": "A fluffy and colorful sanctacaris plushie, the great great grandfather of all arthropods.  It has a soft, chubby body, multiple soft legs, and eyes on stalks.  Its plush is light blue colored, with accents of shimmering purple on its legs and details on the body.  It has big, round eyes with a cute and friendly expression.",
+        "description": "Somewhat resembling a trilobite with its segmented body and bulky head, sanctataris was the great great grandfather of all arthropods.  What would it think if it could see them now?",
         "weight": 1
       },
       {
         "id": "toy_plush_opal",
         "name": { "str": "opabinia plushie" },
-        "description": "A fluffy and colorful opabinia plushie with a cute, unconventional design, with a lengthy hollow proboscis ending in a single, long and soft 'claw' extending out of its head that's topped with five eyes on stalks.  Its segmented body is colored a mix of light pink and white while its tail bears purple stripes.",
+        "description": "A cute rendition of a bizarre animal even by today's standards.  It has a segmented body with a tail fin like an isopod, five eyestalks, and a flexible proboscis with a grasping claw at the tip.",
         "weight": 1
       },
       {
         "id": "toy_plush_penguin",
         "name": { "str": "penguin plushie" },
-        "description": "A velvety-soft plush penguin.  It makes a funny noise when you hug it."
+        "description": "A velvety-soft plush penguin.  It makes a funny noise when you hug it.",
+                "weight": 1
       },
-      { "id": "toy_plush_rabbit", "name": { "str": "rabbit plushie" }, "description": "A large plush rabbit." },
+      { "id": "toy_plush_rabbit", "name": { "str": "rabbit plushie" }, "description": "A soft plush bunny.", "weight": 8 },
       {
         "id": "toy_plush_remora",
         "name": { "str": "remora plushie" },
-        "description": "A large plush remora, a fish commonly seen alongside sharks.  Wait, wasn't there a shark plushie somewhere here…"
+        "description": "For some reason, someone at some point decided to manufacture a plush toy designed to resemble one of those fish that sticks to sharks.  The modified dorsal fin it uses as a suction cup is a patch of Velcro."
       },
       {
         "id": "toy_plush_fox",
-        "name": { "str": "fox plushie" },
-        "description": "A large plush fox.  It isn't realistic enough to trick a zombie into going after it, but it's very cute and makes a comforting bedtime companion."
+        "name": { "str": "red fox plushie" },
+        "description": "A soft toy fox with bright orange synthetic fur."
+      },
+      {
+        "id": "toy_plush_fox_arctic",
+        "name": { "str": "arctic fox plushie" },
+        "description": "This plush fox doll is pure white except for its shiny black eyes and nose."
+      },
+      {
+        "id": "toy_plush_fox_gray",
+        "name": { "str": "gray fox plushie" },
+        "description": "The elusive gray fox, one of only two canids (the other being the Asian raccoon dog) that has adapted to climb trees.",
+        "weight": 2
+      },
+      {
+        "id": "toy_plush_tanuki",
+        "name": { "str": "tanuki plushie" },
+        "description": "Also known as a raccoon dog, this canid is surprisingly adept at climbing trees.  It is prominent in Japanese folklore and art.",
+        "weight": 1
       },
       {
         "id": "toy_plush_moose",
         "name": { "str": "moose plushie" },
-        "description": "A cuddly plushie of the mighty moose, with soft brown fur, floppy ears, and big antlers.  It has a special huggability feature that makes it delightfully squishy, perfect for comforting cuddles.",
-        "weight": 1
+        "description": "A cuddly plushie of the mighty moose, with soft brown fur, floppy ears, and big antlers.",
+        "weight": 3
       },
       {
         "id": "toy_plush_blackbear",
         "name": { "str": "black bear plushie" },
-        "description": "A somewhat realistic, but still childish black bear plushie with soft, black fur, round ears, and a sweet expression.  It has a warm and fuzzy texture that makes it the perfect companion for snuggles during evenings.",
-        "weight": 1
+        "description": "Despite being friend shaped, black bears are wild animals and should not be approached or fed.  This one, however, is a stuffed toy for children and you can do whatever you like with it.",
+        "weight": 5
       },
       {
         "id": "toy_plush_bobcat",
         "name": { "str": "bobcat plushie" },
-        "description": "A soft, cute bobcat plushie with a cute, tufted pair of ears, a fluffy tail and soft brown fur.  It has embroidered both soft whiskers and claws that add a touch of realism to its cute and playful design.",
-        "weight": 1
+        "description": "A species of lynx that dwells throughout North America, bobcats have tawny fur with black spots and a distinctive ruff of fur framing their face.  They are named for their \"bobbed\" tails, which are naturally very short.",
+        "weight": 2
       },
       {
         "id": "toy_plush_balde",
         "name": { "str": "bald eagle plushie" },
-        "description": "A cuddly and majestic bald eagle plushie with soft, brown and white cotton faux feathers, a hooked, soft beak, and a patriotic expression.  It has a pair of special eyes that glow as brightly as the stars and stripes of Old Glory, the perfect partner to fend off your enemies in the Cataclysm.",
-        "weight": 1
+        "description": "Named for the white feathers on its head, the bald eagle is a symbol of the United States of America.  This one is not quite as majestic because it is a toy for children.",
+        "weight": 4
       },
       {
         "id": "toy_plush_hseal",
@@ -327,13 +351,13 @@
         "id": "toy_plush_wdeer",
         "name": { "str": "deer plushie" },
         "description": "A very huggable white-tailed deer plushie with soft, brown fur and a cute expression with adorable antlers.",
-        "weight": 1
+        "weight": 2
       },
       {
         "id": "toy_plush_skunk",
         "name": { "str": "striped skunk plushie" },
         "description": "A cute striped skunk plushie with soft, black-and-white fur and a playful expression.  Ironically, it has a weak, pleasant pine scent.",
-        "weight": 1
+        "weight": 2
       },
       {
         "id": "toy_plush_fsquirell",
@@ -357,7 +381,7 @@
         "id": "toy_plush_racoon",
         "name": { "str": "racoon plushie" },
         "description": "A plushie with soft, black-gray-and-white fur and a curious expression with its iconic bandit mask.  It has a special feature that makes its tails emerge from its hiding spot in the toy, reminiscent of one of the raccoon's greatest attributes.",
-        "weight": 1
+        "weight": 5
       },
       {
         "id": "toy_plush_scowl",
@@ -465,7 +489,7 @@
         "id": "toy_plush_domestickitty",
         "name": { "str": "kitty plushie" },
         "description": "A cute and lovable domestic kitty plushie with soft, plush fur, big, round eyes, and a gentle expression.  You can't tell if it is a short-haired one or a long-haired one.",
-        "weight": 1
+        "weight": 5
       },
       {
         "id": "toy_plush_walrus",
@@ -507,7 +531,7 @@
         "id": "toy_plush_gorilla",
         "name": { "str": "gorilla plushie" },
         "description": "A cuddly and adorable gorilla plushie with soft, black fur, big eyes, and a friendly expression.",
-        "weight": 1
+        "weight": 2
       },
       {
         "id": "toy_plush_orangutan",
