@@ -155,6 +155,30 @@
     "description": "The Cataclysm began as an outbreak of what then seemed like violent insanity, but there must be something more to it, as these lost souls freely walk among the undead without being attacked.  This one has got their hands on a kitchen knife, and they look eager to put it to use.",
     "copy-from": "mon_feral_human_pipe",
     "special_attacks": [
+      {
+        "type": "gun",
+        "cooldown": 5,
+        "move_cost": 150,
+        "gun_type": "feral_human_thrown_rock",
+        "ammo_type": "rock",
+        "no_ammo_sound": "",
+        "fake_skills": [ [ "throw", 3 ] ],
+        "fake_str": 8,
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
+          ]
+        },
+        "require_targeting_player": false,
+        "ranges": [ [ 2, 5, "DEFAULT" ] ],
+        "description": "The psycho killer throws a rock!"
+      },
       { "id": "feral_weapon_knife_chef" },
       { "id": "feral_unarmed" },
       { "id": "feral_bite" },
@@ -228,6 +252,30 @@
     "description": "This person must have been some sort of technician before the Cataclysm.  Now, they're reduced to a mad thing, still wearing the remains of a work uniform and clutching a hammer that is now nothing more than a weapon.",
     "copy-from": "mon_feral_human_pipe",
     "special_attacks": [
+      {
+        "type": "gun",
+        "cooldown": 5,
+        "move_cost": 150,
+        "gun_type": "feral_human_thrown_rock",
+        "ammo_type": "rock",
+        "no_ammo_sound": "",
+        "fake_skills": [ [ "throw", 3 ] ],
+        "fake_str": 8,
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
+          ]
+        },
+        "require_targeting_player": false,
+        "ranges": [ [ 2, 5, "DEFAULT" ] ],
+        "description": "The frenzied worker throws a rock!"
+      },
       { "id": "feral_weapon_hammer" },
       { "id": "feral_unarmed" },
       { "id": "feral_bite" },
