@@ -331,7 +331,7 @@
     "qualities": [ { "id": "COOK", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 1, "LIST" ] ] ],
     "//": "fish scrap weighs 1/2 meat scrap = 1u energy",
-    "components": [ [ [ "fish_scrap", 1 ] ] ]
+    "components": [ [ [ "fish_scrap", 1 ], [ "fish_scrap_freshwater", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -479,7 +479,7 @@
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "//": "half weight of a meat chunk so 10u power.",
     "proficiencies": [ { "proficiency": "prof_food_prep" } ],
-    "components": [ [ [ "fish", 1 ] ] ]
+    "components": [ [ [ "fish", 1 ], [ "fish_freshwater", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -973,7 +973,7 @@
     "tools": [ [ [ "smoking_heat", 15, "LIST" ] ] ],
     "//": "150g of meat would be 15 smoking_heats",
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_preservation" }, { "proficiency": "prof_food_curing" } ],
-    "components": [ [ [ "fish", 1 ] ] ]
+    "components": [ [ [ "fish", 1 ], [ "fish_freshwater", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1053,7 +1053,7 @@
       { "proficiency": "prof_frying" },
       { "proficiency": "prof_frying_bread" }
     ],
-    "components": [ [ [ "fish", 2 ] ], [ [ "any_butter_or_oil", 1, "LIST" ] ], [ [ "batter", 1, "LIST" ] ] ]
+    "components": [ [ [ "fish", 2 ], [ "fish_freshwater", 2 ] ], [ [ "any_butter_or_oil", 1, "LIST" ] ], [ [ "batter", 1, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -1690,7 +1690,14 @@
     "//": "dogs can eat raw meat, but should cook this just to be safe. 2u for vegetable, 10u for meat (red meat will be undercooked, not a big deal)",
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_knife_skills" } ],
     "components": [
-      [ [ "meat_nofish", 1, "LIST" ], [ "fish", 1 ], [ "lobster", 1 ] ],
+      [
+        [ "meat_nofish", 1, "LIST" ],
+        [ "fish", 1 ],
+        [ "fish_freshwater", 1 ],
+        [ "fish_scrap", 10 ],
+        [ "fish_scrap_freshwater", 10 ],
+        [ "lobster", 1 ]
+      ],
       [ [ "vegetable_green", 1, "LIST" ] ],
       [ [ "water", 1 ], [ "water_clean", 1 ] ]
     ]
@@ -1709,7 +1716,17 @@
     "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "//": "cats can eat raw meat, but should cook this just to be safe. 20u for meat (red meat will be undercooked, not a big deal)",
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_knife_skills" } ],
-    "components": [ [ [ "meat_nofish", 2, "LIST" ], [ "fish", 2 ], [ "lobster", 2 ] ], [ [ "water", 1 ], [ "water_clean", 1 ] ] ]
+    "components": [
+      [
+        [ "meat_nofish", 2, "LIST" ],
+        [ "fish", 2 ],
+        [ "fish_freshwater", 2 ],
+        [ "fish_scrap", 20 ],
+        [ "fish_scrap_freshwater", 20 ],
+        [ "lobster", 2 ]
+      ],
+      [ [ "water", 1 ], [ "water_clean", 1 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -3191,6 +3208,7 @@
         [ "can_salmon", 2 ],
         [ "can_herring", 2 ],
         [ "fish", 2 ],
+        [ "fish_freshwater", 2 ],
         [ "fish_cooked", 2 ],
         [ "lobster", 2 ],
         [ "lobster_cooked", 2 ],
@@ -4258,6 +4276,7 @@
         [ "can_chicken", 1 ],
         [ "can_spam", 2 ],
         [ "fish", 1 ],
+        [ "fish_freshwater", 1 ],
         [ "fish_smoked", 1 ],
         [ "dry_fish", 1 ],
         [ "rehydrated_fish", 1 ],
@@ -5486,6 +5505,7 @@
         [ "dry_meat", 1 ],
         [ "can_chicken", 1 ],
         [ "fish", 1 ],
+        [ "fish_freshwater", 1 ],
         [ "rehydrated_fish", 1 ],
         [ "dry_fish", 1 ],
         [ "fish_canned", 1 ],
@@ -5709,6 +5729,7 @@
         [ "can_chicken", 2 ],
         [ "dry_meat", 2 ],
         [ "fish", 2 ],
+        [ "fish_freshwater", 2 ],
         [ "fish_canned", 2 ],
         [ "can_tuna", 2 ],
         [ "rehydrated_fish", 2 ],
@@ -5810,6 +5831,7 @@
         [ "can_chicken", 2 ],
         [ "dry_meat", 2 ],
         [ "fish", 2 ],
+        [ "fish_freshwater", 2 ],
         [ "fish_canned", 2 ],
         [ "can_tuna", 2 ],
         [ "rehydrated_fish", 2 ],
@@ -6276,7 +6298,7 @@
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 21, "LIST" ] ] ],
     "//": "10u to cook the 150g fish, the rest is just the lye.",
-    "components": [ [ [ "fish", 1 ] ], [ [ "water_clean", 2 ] ], [ [ "lye_powder", 5 ] ] ]
+    "components": [ [ [ "fish", 1 ], [ "fish_freshwater", 1 ] ], [ [ "water_clean", 2 ] ], [ [ "lye_powder", 5 ] ] ]
   },
   {
     "type": "recipe",

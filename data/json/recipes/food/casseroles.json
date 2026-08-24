@@ -73,7 +73,16 @@
     "tools": [ [ [ "surface_heat", 49, "LIST" ] ], [ [ "casserole", -1 ] ] ],
     "//": "20u for the fish (300g), 9u for the pasta (120g), 8u for the beans/corn, 4u for the broth, 2u for the carrot, 4u for the milk, 1u for the oil, 1u for bread",
     "components": [
-      [ [ "fish", 2 ], [ "can_tuna", 2 ], [ "can_salmon", 2 ], [ "can_herring", 2 ], [ "fish_canned", 2 ] ],
+      [
+        [ "fish", 2 ],
+        [ "can_tuna", 2 ],
+        [ "can_salmon", 2 ],
+        [ "can_herring", 2 ],
+        [ "fish_canned", 2 ],
+        [ "fish_freshwater", 2 ],
+        [ "fish_scrap", 20 ],
+        [ "fish_scrap_freshwater", 20 ]
+      ],
       [ [ "spaghetti_raw", 2 ], [ "macaroni_raw", 2 ], [ "noodles_fast", 2 ] ],
       [ [ "corn", 2 ], [ "dry_beans", 2 ], [ "raw_beans", 2 ] ],
       [ [ "broth", 2 ] ],

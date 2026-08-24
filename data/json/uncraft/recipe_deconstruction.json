@@ -5639,6 +5639,14 @@
     "components": [ [ [ "fish_scrap", 10 ] ] ]
   },
   {
+    "result": "fish_freshwater",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "time": "20 s",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "fish_scrap_freshwater", 10 ] ] ]
+  },
+  {
     "result": "meat",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",

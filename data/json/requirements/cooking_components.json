@@ -705,12 +705,14 @@
       ],
       [
         [ "fish", 2 ],
+        [ "fish_freshwater", 2 ],
         [ "dry_fish", 2 ],
         [ "fish_smoked", 2 ],
         [ "fish_pickled", 2 ],
         [ "fish_canned", 2 ],
         [ "can_salmon", 2 ],
         [ "fish_scrap", 20 ],
+        [ "fish_scrap_freshwater", 20 ],
         [ "can_tuna", 2 ]
       ]
     ]

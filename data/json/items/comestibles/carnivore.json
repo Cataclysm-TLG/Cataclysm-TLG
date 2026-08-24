@@ -50,7 +50,7 @@
     "spoils_in": "1 day",
     "fun": 3,
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [  [ "calcium", 2 ], [ "iron", 19 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 19 ], [ "meat_allergen", 1 ] ],
     "calories": 60
   },
   {
@@ -787,7 +787,7 @@
     "parasites": 0,
     "calories": 800,
     "fun": 2,
-    "vitamins": [ [ "junkfood_allergen", 1 ] , [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "junkfood_allergen", 1 ], [ "meat_allergen", 1 ] ],
     "flags": [ "EATEN_HOT" ]
   },
   {
