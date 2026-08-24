@@ -434,6 +434,7 @@
     "price_postapoc": "1 USD",
     "spoils_in": "14 days",
     "parasites": 30,
+    "fun": -15,
     "vitamins": [ [ "junkfood_allergen", 1 ], [ "meat_allergen", 1 ] ],
     "flags": [ "SMOKABLE", "RAW" ],
     "smoking_result": "bacon_uncut"
