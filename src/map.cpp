@@ -5289,7 +5289,6 @@ int map::calculate_vehicle_coverage( const tripoint_bub_ms &pt ) const
     return coverage;
 }
 
-
 void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
                  const bool hit_items, double dispersion )
 {
@@ -5315,23 +5314,25 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
         return a.second < b.second;
     } )->first;
 
-    // damage value that may be reduced by vehicles, furniture, terrain or fields
+    // Damage value that may be reduced by vehicles, furniture, terrain or fields.
     float dam = initial_damage;
-
     const auto &ammo_effects = proj.proj_effects;
     const bool incendiary = ammo_effects.count( ammo_effect_INCENDIARY );
     const bool ignite = ammo_effects.count( ammo_effect_IGNITE );
     const bool laser = ammo_effects.count( ammo_effect_LASER );
-
+    bool ter_hit_without_cover = false;
+    bool furn_hit_without_cover = false;
     int dist = trig_dist( source, p );
     // Manually check coverage sources as coverage() isn't smart enough.
     int furn_coverage = 0;
     if( furn( p ) != f_null ) {
         furn_coverage = furn( p )->coverage;
+        furn_hit_without_cover = furn( p )->has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER );
     }
     int ter_coverage = 0;
     if( ter( p ) != t_null ) {
         ter_coverage = ter( p )->coverage;
+        ter_hit_without_cover = ter( p )->has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER );
     }
     int veh_coverage = 0;
     if( const optional_vpart_position vp = veh_at( p ) ) {
@@ -5404,15 +5405,15 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
         } else {
             veh_coverage = 0;
         }
-
         if( furn( p ) != f_null ) {
             furn_coverage = furn( p )->coverage;
+            furn_hit_without_cover = furn( p )->has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER );
         } else {
             furn_coverage = 0;
         }
-
         if( ter( p ) != t_null ) {
             ter_coverage = ter( p )->coverage;
+            ter_hit_without_cover = ter( p )->has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER );
         } else {
             ter_coverage = 0;
         }
@@ -5423,9 +5424,9 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
     bool ter_hit = false;
     if( veh_coverage == coverage && coverage != 0 ) {
         veh_hit = true;
-    } else if( furn_coverage == coverage && coverage != 0 ) {
+    } else if( furn_hit_without_cover || ( furn_coverage == coverage && coverage != 0 ) ) {
         furn_hit = true;
-    } else if( ter_coverage == coverage && coverage != 0 ) {
+    } else if( ter_hit_without_cover || ( ter_coverage == coverage && coverage != 0 ) ) {
         ter_hit = true;
     }
 
@@ -5449,20 +5450,16 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
             coverage *= 0.75;
         }
     }
-    /**
-    * Shot accuracy helps us bypass cover. 1000.0f is a reasonable midpoint between "good"
-    * and "bad" shots, with 0.0f being perfect and 2000.0f being a pure gamble. See ranged.cpp
-    * for more details on dispersion.
-    */
+    // Shot accuracy helps us bypass cover.
     if( coverage > 0 && coverage < 100 && dispersion < 1000.0f ) {
         coverage *= dispersion / 1000.0f;
     }
     bool hit_something = false;
     // Check again so we can skip if the result was zero.
-    if( coverage > 0 || ter( p )->has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER ) ) {
+    if( coverage > 0 || furn_hit_without_cover || ter_hit_without_cover ) {
         int coverage_roll = rng( 1, 100 );
-        if( ( coverage > 0 && coverage_roll <= coverage ) ||
-            ter( p )->has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER ) ) {
+        if( furn_hit_without_cover || ter_hit_without_cover || ( coverage > 0 &&
+                coverage_roll <= coverage ) ) {
             furn_id furniture = furn( p );
             ter_id terrain = ter( p );
             // Did we hit the ter/furn/veh?
