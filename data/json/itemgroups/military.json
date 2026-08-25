@@ -401,7 +401,7 @@
       { "item": "shot_00", "charges": [ 0, 12 ], "prob": 1, "container-item": "bandolier_shotgun" },
       { "item": "shot_00", "charges": [ 0, 12 ], "prob": 2, "container-item": "ammo_box" },
       { "item": "9mmP", "charges": [ 0, 30 ], "prob": 5, "container-item": "ammo_box" },
-      { "item": "556", "charges": [ 0, 30 ], "prob": 5, "container-item": "ammo_box" },
+      { "item": "556", "charges": [ 0, 20 ], "prob": 5, "container-item": "ammo_box" },
       { "item": "762_51", "charges": [ 0, 12 ], "prob": 1, "container-item": "ammo_box" },
       { "item": "762_51", "charges": [ 1, 12 ], "prob": 2 },
       { "item": "shot_00", "charges": [ 1, 12 ], "prob": 4 },

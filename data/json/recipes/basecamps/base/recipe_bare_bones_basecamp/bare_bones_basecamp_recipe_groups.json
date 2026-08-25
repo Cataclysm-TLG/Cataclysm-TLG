@@ -80,7 +80,6 @@
       { "id": "wire", "description": " Craft: Wire" },
       { "id": "swage", "description": " Craft: Swage and Die Set" },
       { "id": "blade", "description": " Craft: Blade" },
-      { "id": "bearing", "description": " Craft: Bearings" },
       { "id": "caltrops", "description": " Craft: Caltrops" },
       { "id": "hand_drill", "description": " Craft: Hand Drill" },
       { "id": "sheet_metal", "description": " Craft: Sheet Metal" },
