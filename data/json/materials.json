@@ -656,7 +656,7 @@
       { "fuel": 2, "smoke": 1, "burn": 0.04 },
       { "fuel": 3, "smoke": 1, "burn": 0.06 }
     ],
-    "resist": { "bash": 2, "cut": 2.5, "acid": 4, "heat": 2, "bullet": 2 },
+    "resist": { "bash": 2, "cut": 2.5, "acid": 8, "heat": 2, "bullet": 2 },
     "repair_difficulty": 2
   },
   {
@@ -667,7 +667,7 @@
     "copy-from": "canvas",
     "repaired_with": "null",
     "wind_resist": 90,
-    "resist": { "bash": 2, "cut": 3, "acid": 4, "heat": 2, "bullet": 2 }
+    "resist": { "bash": 2, "cut": 3, "acid": 7, "heat": 2, "bullet": 2 }
   },
   {
     "type": "material",
@@ -690,7 +690,7 @@
     "bash_dmg_verb": "chipped",
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 5, "cut": 5, "acid": 10, "heat": 3, "bullet": 2 }
+    "resist": { "bash": 5, "cut": 5, "acid": 15, "heat": 3, "bullet": 2 }
   },
   {
     "type": "material",
@@ -706,7 +706,7 @@
     "bash_dmg_verb": "chipped",
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 5, "cut": 5, "acid": 10, "heat": 3, "bullet": 2 }
+    "resist": { "bash": 5, "cut": 5, "acid": 15, "heat": 3, "bullet": 2 }
   },
   {
     "type": "material",
@@ -830,7 +830,7 @@
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "ceramic_shard", 0.5 ] ],
-    "resist": { "bash": 1, "cut": 1, "acid": 4, "heat": 3, "bullet": 1 }
+    "resist": { "bash": 1, "cut": 1, "acid": 20, "heat": 3, "bullet": 1 }
   },
   {
     "type": "material",
@@ -1318,7 +1318,7 @@
     "bash_dmg_verb": "ripped",
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "burned",
-    "resist": { "bash": 0.5, "cut": 2.5, "acid": 5, "heat": 1, "bullet": 2, "stab": 3 },
+    "resist": { "bash": 0.5, "cut": 2.5, "acid": 6, "heat": 1, "bullet": 2, "stab": 3 },
     "repair_difficulty": 4
   },
   {
@@ -1339,7 +1339,7 @@
     "bash_dmg_verb": "ripped",
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "burned",
-    "resist": { "bash": 1.5, "cut": 1.5, "acid": 5, "heat": 3, "bullet": 5 },
+    "resist": { "bash": 1.5, "cut": 1.5, "acid": 6, "heat": 3, "bullet": 5 },
     "repair_difficulty": 5
   },
   {
@@ -1357,7 +1357,7 @@
     "bash_dmg_verb": "ripped",
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "burned",
-    "resist": { "bash": 3, "cut": 4, "acid": 5, "heat": 3, "bullet": 5 },
+    "resist": { "bash": 3, "cut": 4, "acid": 6, "heat": 3, "bullet": 5 },
     "repair_difficulty": 5
   },
   {
@@ -1577,7 +1577,7 @@
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "burned",
     "burn_data": [ { "immune": true }, { "immune": true }, { "immune": true } ],
-    "resist": { "bash": 1, "cut": 1, "acid": 5, "heat": 20, "bullet": 1 },
+    "resist": { "bash": 1, "cut": 1, "acid": 10, "heat": 20, "bullet": 1 },
     "repair_difficulty": 4
   },
   {
@@ -2763,7 +2763,7 @@
       { "fuel": 1.8, "smoke": 1, "burn": 0.075 }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1, "cut": 1, "acid": 4, "heat": 1, "bullet": 1 },
+    "resist": { "bash": 1, "cut": 1, "acid": 6, "heat": 1, "bullet": 1 },
     "repair_difficulty": 1
   },
   {
@@ -2774,7 +2774,7 @@
     "copy-from": "wool",
     "repaired_with": "null",
     "wind_resist": 65,
-    "resist": { "bash": 2, "cut": 2, "acid": 4, "heat": 1, "bullet": 1.5 }
+    "resist": { "bash": 2, "cut": 2, "acid": 6, "heat": 1, "bullet": 1.5 }
   },
   {
     "type": "material",
@@ -2932,7 +2932,7 @@
     "bash_dmg_verb": "damaged",
     "cut_dmg_verb": "damaged",
     "acid_dmg_verb": "damaged",
-    "resist": { "bash": 1, "cut": 1, "acid": 0, "heat": 20, "bullet": 1 }
+    "resist": { "bash": 1, "cut": 1, "acid": 20, "heat": 20, "bullet": 1 }
   },
   {
     "type": "material",
@@ -2956,7 +2956,7 @@
     "bash_dmg_verb": "dented",
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 4, "cut": 3, "acid": 4, "heat": 1, "bullet": 2 },
+    "resist": { "bash": 4, "cut": 3, "acid": 12, "heat": 1, "bullet": 2 },
     "repair_difficulty": 4
   },
   {
@@ -3077,7 +3077,7 @@
     "bash_dmg_verb": "damaged",
     "cut_dmg_verb": "damaged",
     "acid_dmg_verb": "damaged",
-    "resist": { "bash": 2, "cut": 5, "acid": 10, "heat": 20, "bullet": 2 }
+    "resist": { "bash": 2, "cut": 5, "acid": 15, "heat": 20, "bullet": 2 }
   },
   {
     "type": "material",
