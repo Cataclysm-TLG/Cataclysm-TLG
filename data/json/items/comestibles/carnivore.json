@@ -412,7 +412,7 @@
     "calories": 1190,
     "fun": -10,
     "parasites": 32,
-    "vitamins": [ [ "meat_allergen", 1 ], [ "junkfood_allergen", 1 ] ],
+    "vitamins": [ [ "meat_allergen", 1 ], [ "junk_allergen", 1 ] ],
     "flags": [ "SMOKABLE", "RAW", "PREDATOR_FUN" ],
     "use_action": [ "PETFOOD" ],
     "smoking_result": "meat_smoked",
@@ -435,7 +435,7 @@
     "spoils_in": "14 days",
     "parasites": 30,
     "fun": -15,
-    "vitamins": [ [ "junkfood_allergen", 1 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "junk_allergen", 1 ], [ "meat_allergen", 1 ] ],
     "flags": [ "SMOKABLE", "RAW" ],
     "smoking_result": "bacon_uncut"
   },
@@ -456,7 +456,7 @@
     "spoils_in": "42 days",
     "fun": 6,
     "quench": -9,
-    "vitamins": [ [ "junkfood_allergen", 1 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "junk_allergen", 1 ], [ "meat_allergen", 1 ] ],
     "flags": [ "EATEN_HOT", "SMOKED" ]
   },
   {
@@ -801,7 +801,7 @@
     "parasites": 0,
     "calories": 1190,
     "fun": 2,
-    "vitamins": [ [ "junkfood_allergen", 1 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "junk_allergen", 1 ], [ "meat_allergen", 1 ] ],
     "flags": [ "EATEN_HOT" ]
   },
   {

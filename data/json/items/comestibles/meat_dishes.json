@@ -198,7 +198,7 @@
     "price_postapoc": "4 USD",
     "material": [ "flesh" ],
     "flags": [ "EATEN_HOT", "SMOKED" ],
-    "vitamins": [ [ "junkfood_allergen", 1 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "junk_allergen", 1 ], [ "meat_allergen", 1 ] ],
     "quench": -3,
     "fun": 5
   },
