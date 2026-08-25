@@ -228,8 +228,8 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
     // We copy the damage unit here since it will be mutated by mitigate_damage()
     damage_unit pre_mitigation = du;
 
-    // reduce the damage
-    // -1 is passed as roll so that each material is rolled individually
+    // Reduce the damage
+    // -1 is passed as roll so that each material is rolled individually.
     armor.mitigate_damage( du, sbp, -1 );
 
     // check if the armor was damaged
