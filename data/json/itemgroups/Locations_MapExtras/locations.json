@@ -896,7 +896,6 @@
       { "item": "frame", "prob": 20, "damage": [ -1, 5 ] },
       [ "basket", 25 ],
       { "item": "wrench", "prob": 10, "damage": [ -1, 5 ] },
-      [ "wrench_large", 5 ],
       { "item": "shovel", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "claw_bar", "prob": 5, "damage": [ -1, 5 ] },
       { "item": "crowbar", "prob": 15, "damage": [ -1, 5 ] },

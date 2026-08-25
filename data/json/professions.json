@@ -1343,7 +1343,7 @@
           { "group": "charged_two_way_radio" },
           { "item": "tank_top" },
           { "item": "pants_army" },
-          { "item": "wrench_large" },
+          { "item": "wrench" },
           { "item": "screwdriver" },
           { "item": "hacksaw" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] }
