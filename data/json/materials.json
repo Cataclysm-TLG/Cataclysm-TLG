@@ -2006,7 +2006,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 3, "cut": 5, "acid": 15, "heat": 8, "bullet": 6 }
+    "resist": { "bash": 3, "cut": 5, "acid": 18, "heat": 8, "bullet": 6 }
   },
   {
     "type": "material",
@@ -2026,7 +2026,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "//": "Should have 15 acid, 5 cut, 8 fire, and no listed stab, but it's internal, so...",
+    "//": "Should have 18 acid, 5 cut, 8 fire, and no listed stab, but it's internal, so...",
     "resist": { "bash": 3, "cut": 1, "stab": 2, "acid": 0, "heat": 0, "bullet": 6 }
   },
   {
@@ -2049,7 +2049,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 1.25, "cut": 4, "acid": 8, "heat": 3, "bullet": 2 },
+    "resist": { "bash": 1.25, "cut": 4, "acid": 6, "heat": 3, "bullet": 2 },
     "repair_difficulty": 2
   },
   {
