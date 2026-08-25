@@ -26,17 +26,23 @@
         "-    .........|....#   -",
         "-    |........|....|    ",
         "     ||||##|||||||||    ",
-        "-  @@@                 -",
+        "-  @@@           ?     -",
         "-  @@@@  sss           -",
         "  @@@@  ssss            ",
         "   @@@   ss             ",
         "   --  --  --  --  --   "
       ],
       "palettes": [ "construction_site_palette" ],
-      "place_loot": [
-        { "item": "con_mix_foldable", "x": [ 12, 22 ], "y": [ 19, 22 ] },
-        { "item": "diesel_generator", "x": [ 12, 22 ], "y": [ 19, 22 ], "chance": 70 }
-      ],
+      "furniture": {
+        "?": [
+          [ "f_generator_broken", 50 ],
+          [ "f_portable_generator", 10 ],
+          [ "f_diesel_generator", 2 ],
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
+        ]
+      },
+      "place_loot": [ { "item": "con_mix_foldable", "x": [ 12, 22 ], "y": [ 19, 22 ], "chance": 30 } ],
       "place_vehicles": [ { "vehicle": "small_utility_vehicles", "x": 11, "y": 2, "chance": 70, "rotation": 0 } ]
     }
   },
@@ -61,7 +67,7 @@
         "  |..................|  ",
         "- |||||..............| -",
         "- |..................| -",
-        "  |...|..............|{ ",
+        " ?|...|..............|{ ",
         "  ||||||.|||||.||.||||{ ",
         "          |.....|....|{ ",
         "-         #.....|....# -",
@@ -74,10 +80,16 @@
         "   @@  sss   11 22 22   "
       ],
       "palettes": [ "construction_site_palette" ],
-      "place_loot": [
-        { "item": "con_mix_foldable", "x": [ 1, 9 ], "y": [ 16, 19 ] },
-        { "item": "diesel_generator", "x": [ 1, 9 ], "y": [ 16, 19 ], "chance": 70 }
-      ],
+      "furniture": {
+        "?": [
+          [ "f_generator_broken", 50 ],
+          [ "f_portable_generator", 10 ],
+          [ "f_diesel_generator", 2 ],
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
+        ]
+      },
+      "place_loot": [ { "item": "con_mix_foldable", "x": [ 1, 9 ], "y": [ 16, 19 ], "chance": 30 } ],
       "place_vehicles": [ { "vehicle": "small_utility_vehicles", "x": 20, "y": 2, "chance": 70, "rotation": 0 } ]
     }
   },
@@ -93,7 +105,7 @@
         " -     . c  c   @@@@ {{ ",
         " -     . TTT    @@@  {{ ",
         "       .   c  ||##|| {{ ",
-        " XX    .      |....|    ",
+        " XX    .     ?|....|    ",
         " XX |||.||##|||....#    ",
         "    |..............#  - ",
         "-   |.........|....|  - ",
@@ -115,10 +127,16 @@
         " ss      --   --        "
       ],
       "palettes": [ "construction_site_palette" ],
-      "place_loot": [
-        { "item": "con_mix_foldable", "x": [ 2, 8 ], "y": [ 19, 21 ] },
-        { "item": "diesel_generator", "x": [ 2, 8 ], "y": [ 19, 21 ], "chance": 70 }
-      ],
+      "furniture": {
+        "?": [
+          [ "f_generator_broken", 50 ],
+          [ "f_portable_generator", 10 ],
+          [ "f_diesel_generator", 2 ],
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
+        ]
+      },
+      "place_loot": [ { "item": "con_mix_foldable", "x": [ 2, 8 ], "y": [ 19, 21 ], "chance": 30 } ],
       "place_vehicles": [ { "vehicle": "small_utility_vehicles", "x": 5, "y": 2, "chance": 70, "rotation": 0 } ]
     }
   },
@@ -135,7 +153,7 @@
         "               TTc   X  ",
         "              cTT  @   X",
         "                c @@@   ",
-        "     ss            @    ",
+        "     ss     ?      @    ",
         " 11 sss |||||||..||##|| ",
         " 11 ss  |.....|..|....| ",
         "        |.....|..|....| ",
@@ -156,10 +174,16 @@
         "                        "
       ],
       "palettes": [ "construction_site_palette" ],
-      "place_loot": [
-        { "item": "con_mix_foldable", "x": [ 7, 13 ], "y": [ 1, 5 ] },
-        { "item": "diesel_generator", "x": [ 7, 13 ], "y": [ 1, 5 ], "chance": 70 }
-      ],
+      "furniture": {
+        "?": [
+          [ "f_generator_broken", 50 ],
+          [ "f_portable_generator", 10 ],
+          [ "f_diesel_generator", 2 ],
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
+        ]
+      },
+      "place_loot": [ { "item": "con_mix_foldable", "x": [ 7, 13 ], "y": [ 1, 5 ], "chance": 30 } ],
       "place_vehicles": [ { "vehicle": "small_utility_vehicles", "x": 4, "y": 4, "chance": 70, "rotation": 90 } ]
     }
   }

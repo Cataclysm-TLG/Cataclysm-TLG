@@ -37,7 +37,8 @@
           [ "f_generator_broken", 50 ],
           [ "f_portable_generator", 10 ],
           [ "f_diesel_generator", 2 ],
-          [ "f_gasoline_generator", 2 ]
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
         ]
       },
       "place_loot": [ { "item": "con_mix_foldable", "x": [ 0, 8 ], "y": [ 5, 7 ], "chance": 40 } ],
@@ -82,7 +83,8 @@
           [ "f_generator_broken", 50 ],
           [ "f_portable_generator", 10 ],
           [ "f_diesel_generator", 2 ],
-          [ "f_gasoline_generator", 2 ]
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
         ]
       },
       "place_loot": [ { "item": "con_mix_foldable", "x": [ 5, 9 ], "y": [ 4, 7 ], "chance": 40 } ],
@@ -117,11 +119,20 @@
         "     |...........|      ",
         "     |||||||||||||  @@  ",
         "  c   XX           @@@@ ",
-        "  TTc XX        ss @@@@ ",
+        "  TTc XX ?      ss @@@@ ",
         " cTT           ssss @@  ",
         "   c            ss      "
       ],
       "palettes": [ "construction_site_palette" ],
+      "furniture": {
+        "?": [
+          [ "f_generator_broken", 50 ],
+          [ "f_portable_generator", 10 ],
+          [ "f_diesel_generator", 2 ],
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
+        ]
+      },
       "place_loot": [ { "item": "con_mix_foldable", "x": [ 0, 4 ], "y": [ 17, 19 ], "chance": 40 } ],
       "place_vehicles": [
         { "vehicle": "small_utility_vehicles", "x": 22, "y": 4, "chance": 66, "rotation": 270 },
@@ -167,7 +178,8 @@
           [ "f_generator_broken", 50 ],
           [ "f_portable_generator", 10 ],
           [ "f_diesel_generator", 2 ],
-          [ "f_gasoline_generator", 2 ]
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
         ]
       },
       "place_loot": [ { "item": "con_mix_foldable", "x": [ 0, 17 ], "y": 1, "chance": 40 } ],
@@ -212,7 +224,8 @@
           [ "f_generator_broken", 50 ],
           [ "f_portable_generator", 10 ],
           [ "f_diesel_generator", 2 ],
-          [ "f_gasoline_generator", 2 ]
+          [ "f_gasoline_generator", 2 ],
+          [ "f_null", 80 ]
         ]
       },
       "place_loot": [ { "item": "con_mix_foldable", "x": [ 5, 11 ], "y": [ 20, 23 ], "chance": 40 } ],
