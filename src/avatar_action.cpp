@@ -610,7 +610,7 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
 
     int movecost = you.swim_speed();
     int capped_movecost = std::min( movecost, 500 );
-    you.practice_proficiency( proficiency_prof_swimming, 1_seconds * ( 1 / movecost ) );
+    you.practice_proficiency( proficiency_prof_swimming, 1_seconds * ( capped_movecost / 100 ) );
     you.practice( skill_swimming, you.is_underwater() ? 2 : 1 );
     if( movecost >= 500 || you.has_effect( effect_winded ) ) {
         if( !you.is_underwater() &&
