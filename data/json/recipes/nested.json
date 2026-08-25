@@ -2062,9 +2062,9 @@
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_OTHER",
     "name": "slingshot ammunition",
-    "description": "Recipes related to creating gravel, bearings, and other tiny ammunition for slingshots.",
+    "description": "Recipes related to creating gravel and other tiny ammunition for slingshots.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "gravel", "marble", "bearing" ]
+    "nested_category_data": [ "gravel", "marble" ]
   },
   {
     "id": "nested_adjustable_wrenches",
