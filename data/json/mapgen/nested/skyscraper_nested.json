@@ -299,10 +299,10 @@
       "set": [ { "square": "terrain", "id": "t_linoleum_white", "x": 4, "y": 5, "x2": 19, "y2": 14 } ],
       "items": {
         "b": { "item": "behindcounter", "chance": 60 },
-        "$": { "item": "cash_register_random", "chance": 100 },
-        "r": { "item": "beauty", "chance": 100, "repeat": [ 1, 4 ] },
-        "C": { "item": "SUS_hair_drawer", "chance": 100, "repeat": [ 1 ] },
-        "t": { "item": "magazines", "chance": 100, "repeat": [ 2, 4 ] },
+        "$": { "item": "cash_register_random", "chance": 80 },
+        "r": { "item": "beauty", "chance": 80, "repeat": [ 1, 4 ] },
+        "C": { "item": "SUS_hair_drawer", "chance": 80, "repeat": [ 1 ] },
+        "t": { "item": "magazines", "chance": 70, "repeat": [ 2, 4 ] },
         "&": { "item": "trash", "chance": 70, "repeat": [ 2, 5 ] }
       },
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
