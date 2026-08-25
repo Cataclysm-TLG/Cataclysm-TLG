@@ -317,7 +317,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "bronze_fragment", 0.5 ] ],
-    "resist": { "bash": 3.5, "cut": 4.5, "acid": 1, "heat": 2, "bullet": 2 },
+    "resist": { "bash": 3.5, "cut": 4.5, "acid": 2, "heat": 2, "bullet": 2 },
     "repair_difficulty": 4
   },
   {
@@ -352,7 +352,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 6, "cut": 6, "acid": 7, "heat": 3, "bullet": 2 },
+    "resist": { "bash": 6, "cut": 6, "acid": 9, "heat": 3, "bullet": 2 },
     "repair_difficulty": 2
   },
   {
@@ -393,14 +393,14 @@
     "bash_dmg_verb": "cracked",
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 0.4, "cut": 0.6, "acid": 10, "heat": 10, "bullet": 2 }
+    "resist": { "bash": 0.4, "cut": 0.6, "acid": 18, "heat": 10, "bullet": 2 }
   },
   {
     "type": "material",
     "id": "damaged_ceramic",
     "name": "Compromised Ceramic",
     "copy-from": "ceramic",
-    "resist": { "bash": 0.2, "cut": 0.5, "acid": 10, "heat": 10, "bullet": 0.8 }
+    "resist": { "bash": 0.2, "cut": 0.5, "acid": 16, "heat": 10, "bullet": 0.8 }
   },
   {
     "type": "material",
@@ -507,7 +507,7 @@
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "burned",
     "burn_products": [ [ "ceramic_shard", 0.5 ] ],
-    "resist": { "bash": 2, "cut": 3, "acid": 6, "heat": 3, "bullet": 2 }
+    "resist": { "bash": 2, "cut": 3, "acid": 10, "heat": 3, "bullet": 2 }
   },
   {
     "type": "material",
@@ -521,8 +521,8 @@
     "dmg_adj": [ "chipped", "scratched", "cracked", "shattered" ],
     "bash_dmg_verb": "cracked",
     "cut_dmg_verb": "cut",
-    "acid_dmg_verb": "burned",
-    "resist": { "bash": 2, "cut": 3, "acid": 6, "heat": 3, "bullet": 2 }
+    "acid_dmg_verb": "etched",
+    "resist": { "bash": 2, "cut": 3, "acid": 15, "heat": 3, "bullet": 2 }
   },
   {
     "type": "material",
@@ -540,7 +540,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "burned",
     "burn_products": [ [ "copper", 0.5 ] ],
-    "resist": { "bash": 2, "cut": 3, "acid": 0, "heat": 3, "bullet": 2 },
+    "resist": { "bash": 2, "cut": 3, "acid": 13, "heat": 3, "bullet": 2 },
     "repair_difficulty": 3
   },
   {
@@ -1235,7 +1235,7 @@
       { "fuel": 0.35, "smoke": 5, "burn": 0.004, "volume_per_turn": "1 L" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1, "cut": 1, "acid": 1, "heat": 1, "bullet": 1 }
+    "resist": { "bash": 1, "cut": 1, "acid": 1, "heat": 0, "bullet": 1 }
   },
   {
     "type": "material",
@@ -1430,7 +1430,7 @@
       { "fuel": 0.2, "smoke": 10, "burn": 0.004, "volume_per_turn": "1 L" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1.2, "cut": 2, "acid": 8, "heat": 2.2, "bullet": 2 },
+    "resist": { "bash": 1.2, "cut": 2, "acid": 12, "heat": 2.2, "bullet": 2 },
     "repair_difficulty": 3
   },
   {
@@ -1639,7 +1639,7 @@
       { "fuel": 0.4, "smoke": 1, "burn": 0.003 },
       { "fuel": 1, "smoke": 2, "burn": 0.008 }
     ],
-    "resist": { "bash": 0, "cut": 0, "acid": 0, "heat": 0, "bullet": 0 }
+    "resist": { "bash": 2, "cut": 1, "acid": 10, "heat": 0, "bullet": 0 }
   },
   {
     "type": "material",
@@ -1661,7 +1661,7 @@
       { "fuel": 300, "smoke": 0, "burn": 2 },
       { "fuel": 450, "smoke": 0, "burn": 3 }
     ],
-    "resist": { "bash": 0, "cut": 0, "acid": 0, "heat": 0, "bullet": 0 }
+    "resist": { "bash": 2, "cut": 1, "acid": 12, "heat": 0, "bullet": 0 }
   },
   {
     "type": "material",
@@ -1922,7 +1922,7 @@
       { "fuel": 1, "smoke": 3, "burn": 0.2 },
       { "fuel": 1, "smoke": 4, "burn": 0.3 }
     ],
-    "resist": { "bash": 5, "cut": 1, "acid": 10, "heat": 2, "bullet": 1 },
+    "resist": { "bash": 5, "cut": 1, "acid": 20, "heat": 2, "bullet": 1 },
     "repair_difficulty": 3
   },
   {
@@ -1947,7 +1947,7 @@
       { "fuel": 1, "smoke": 3, "burn": 0.2 },
       { "fuel": 1, "smoke": 4, "burn": 0.3 }
     ],
-    "resist": { "bash": 3, "cut": 1, "acid": 10, "heat": 3, "bullet": 1 },
+    "resist": { "bash": 3, "cut": 1, "acid": 20, "heat": 3, "bullet": 1 },
     "repair_difficulty": 3
   },
   {
@@ -1973,7 +1973,7 @@
       { "fuel": 1, "smoke": 3, "burn": 0.2 },
       { "fuel": 1, "smoke": 4, "burn": 0.3 }
     ],
-    "resist": { "bash": 1, "cut": 1, "acid": 7, "heat": 1, "bullet": 1 },
+    "resist": { "bash": 1, "cut": 1, "acid": 18, "heat": 1, "bullet": 1 },
     "repair_difficulty": 3
   },
   {
@@ -2006,7 +2006,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 3, "cut": 5, "acid": 10, "heat": 8, "bullet": 6 }
+    "resist": { "bash": 3, "cut": 5, "acid": 18, "heat": 8, "bullet": 6 }
   },
   {
     "type": "material",
@@ -2026,7 +2026,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "//": "Should have 8 acid, 5 cut, 8 fire, and no listed stab, but it's internal, so...",
+    "//": "Should have 18 acid, 5 cut, 8 fire, and no listed stab, but it's internal, so...",
     "resist": { "bash": 3, "cut": 1, "stab": 2, "acid": 0, "heat": 0, "bullet": 6 }
   },
   {
@@ -2072,7 +2072,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 1.75, "cut": 7.5, "acid": 7, "heat": 3, "bullet": 4 },
+    "resist": { "bash": 1.75, "cut": 7.5, "acid": 10, "heat": 3, "bullet": 4 },
     "repair_difficulty": 2
   },
   {
@@ -2091,7 +2091,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 6, "cut": 6, "acid": 7, "heat": 3, "bullet": 5.8 },
+    "resist": { "bash": 6, "cut": 6, "acid": 12, "heat": 3, "bullet": 5.8 },
     "repair_difficulty": 4
   },
   {
@@ -2327,23 +2327,6 @@
   },
   {
     "type": "material",
-    "id": "carbide",
-    "//": "Based on tungsten carbide",
-    "density": 16.0,
-    "name": "Layered Carbide",
-    "breathability": "SECOND_SKIN",
-    "specific_heat_liquid": 0.82,
-    "specific_heat_solid": 0.45,
-    "latent_heat": 273,
-    "chip_resist": 12,
-    "dmg_adj": [ "marked", "dented", "smashed", "shattered" ],
-    "bash_dmg_verb": "dented",
-    "cut_dmg_verb": "scratched",
-    "acid_dmg_verb": "corroded",
-    "resist": { "bash": 6, "cut": 6, "acid": 30, "heat": 30, "bullet": 5 }
-  },
-  {
-    "type": "material",
     "id": "nylon",
     "name": "Synthetic Fabric",
     "//": "Fabrics like nylon 6 or polyester.",
@@ -2366,7 +2349,7 @@
       { "fuel": 0.05, "smoke": 2, "burn": 0.03 },
       { "fuel": 0.15, "smoke": 5, "burn": 0.5 }
     ],
-    "resist": { "bash": 0.8, "cut": 1, "acid": 9, "heat": 2, "bullet": 2 },
+    "resist": { "bash": 0.8, "cut": 1, "acid": 18, "heat": 2, "bullet": 2 },
     "repair_difficulty": 2
   },
   {
@@ -2401,7 +2384,7 @@
       { "fuel": 0.05, "smoke": 2, "burn": 0.03 },
       { "fuel": 0.15, "smoke": 5, "burn": 0.5 }
     ],
-    "resist": { "bash": 0.3, "cut": 0.15, "acid": 9, "heat": 1, "bullet": 0 },
+    "resist": { "bash": 0.3, "cut": 0.15, "acid": 14, "heat": 1, "bullet": 0 },
     "repair_difficulty": 0
   },
   {
@@ -2416,7 +2399,7 @@
       { "fuel": 2, "smoke": 1, "burn": 0.04 },
       { "fuel": 3, "smoke": 1, "burn": 0.06 }
     ],
-    "resist": { "bash": 1.0, "cut": 0.4, "acid": 6, "heat": 2, "bullet": 1 },
+    "resist": { "bash": 1.0, "cut": 0.4, "acid": 10, "heat": 2, "bullet": 1 },
     "repair_difficulty": 1
   },
   {
@@ -2439,7 +2422,7 @@
     "bash_dmg_verb": "dented",
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 0, "cut": 0, "acid": 2, "heat": 3, "bullet": 0 },
+    "resist": { "bash": 0, "cut": 0, "acid": 5, "heat": 3, "bullet": 0 },
     "repair_difficulty": 4
   },
   {
@@ -3118,7 +3101,7 @@
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
     "wind_resist": 100,
-    "resist": { "bash": 0.5, "cut": 0.1, "bullet": 0.1, "acid": 0, "heat": 0 }
+    "resist": { "bash": 0.5, "cut": 0.1, "bullet": 0.1, "acid": 0, "heat": 2 }
   },
   {
     "type": "material",

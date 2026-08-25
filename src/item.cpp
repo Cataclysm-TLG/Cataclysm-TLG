@@ -9491,7 +9491,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
         if( shield_hp > 0 ) {
             return armor_status::UNDAMAGED;
         } else {
-            //Shields deliberately ignore the enchantment multiplier, as the health mechanic wouldn't make sense otherwise.
+            // Shields deliberately ignore the enchantment multiplier, as the health mechanic wouldn't make sense otherwise.
             mod_damage( itype::damage_scale * 6 );
             return armor_status::DESTROYED;
         }
