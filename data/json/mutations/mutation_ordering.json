@@ -30,7 +30,12 @@
           "SKIN_LIGHT",
           "SKIN_MEDIUM",
           "SKIN_PINK",
-          "SKIN_TAN",
+          "SKIN_TAN"
+        ],
+        "order": 1100
+      },
+      {
+        "id": [
           "CHITIN",
           "PLANTSKIN",
           "SPARSE_SCALES",
@@ -41,7 +46,14 @@
           "SORES",
           "SUNBURN"
         ],
-        "order": 1100
+        "order": 1110
+      },
+      {
+        "id": [
+          "SORES",
+          "SUNBURN"
+        ],
+        "order": 1120
       },
       {
         "id": [
