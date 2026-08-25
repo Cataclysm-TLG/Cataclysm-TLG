@@ -810,7 +810,7 @@
     "special_attacks": [
       {
         "type": "spell",
-        "spell_data": { "id": "acid_spit", "min_level": 7 },
+        "spell_data": { "id": "acid_spit", "min_level": 6 },
         "monster_message": "The %s spews acid!",
         "cooldown": 10,
         "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
