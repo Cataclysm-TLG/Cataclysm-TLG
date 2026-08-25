@@ -161,7 +161,6 @@
       [ "pliers_locking", 40 ],
       [ "big_pliers", 5 ],
       [ "wrench", 75 ],
-      [ "wrench_large", 20 ],
       [ "socket_wrench_set", 20 ],
       [ "funnel", 50 ],
       [ "metal_file", 40 ],
@@ -291,7 +290,6 @@
     "items": [
       { "group": "tools_common_small", "prob": 90 },
       [ "wrench", 190 ],
-      [ "wrench_large", 20 ],
       [ "big_pliers", 10 ],
       [ "claw_bar", 4 ],
       [ "crowbar", 10 ],
@@ -966,8 +964,7 @@
       [ "wrench_small", 35 ],
       [ "hammer", 20 ],
       [ "multitool", 20 ],
-      [ "pliers_locking", 15 ],
-      [ "wrench_large", 5 ]
+      [ "pliers_locking", 15 ]
     ]
   },
   {

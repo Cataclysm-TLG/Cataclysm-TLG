@@ -1407,26 +1407,6 @@
     "melee_damage": { "bash": 10 }
   },
   {
-    "id": "wrench_large",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "large adjustable wrench", "str_pl": "large adjustable wrenches" },
-    "description": "An unusually large adjustable crescent wrench, with a long handle and jaws that widen over two inches.  This could easily turn most bolts, and should even work on wheel lug nuts.",
-    "//": "WESTWARD 31D018 from Walmart, 18-inch length, 2-3/8-inch jaws, 4.23 lb, assume 8g/ml steel density with some margin for mechanism and other empty space.",
-    "looks_like": "wrench",
-    "weight": "1900 g",
-    "volume": "250 ml",
-    "longest_side": "46 cm",
-    "price": "12 USD",
-    "price_postapoc": "1 USD",
-    "material": [ "steel" ],
-    "symbol": ";",
-    "color": "light_gray",
-    "qualities": [ [ "WRENCH", 2 ], [ "WHEEL_FAST", 1 ] ],
-    "flags": [ "BELT_CLIP" ],
-    "melee_damage": { "bash": 12 }
-  },
-  {
     "id": "makeshift_hose",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],

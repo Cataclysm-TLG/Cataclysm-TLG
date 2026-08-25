@@ -5591,14 +5591,6 @@
     "components": [ [ [ "copper", 49 ] ] ]
   },
   {
-    "result": "wrench_large",
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
-    "time": "15 m",
-    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "steel_chunk", 1 ] ], [ [ "steel_fragment", 3 ] ] ]
-  },
-  {
     "result": "wheel_rim_bicycle",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
