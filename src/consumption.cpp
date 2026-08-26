@@ -1490,9 +1490,9 @@ void Character::modify_morale( item &food, const int nutr )
         }
         int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
                                 get_str_base() );
-        if( strength_adjusted > 10 ) {
-            nausea_chance -= ( std::min( get_str(), strength_adjusted ) / 2 );
-        }
+        // Nausea chance is not reduced at strength 9.
+        // Nausea chance reduction ranges from 1 to 10 for strength 10 through 19.
+        nausea_chance -= std::clamp( std::min( get_str(), strength_adjusted ) - 9, 0, 10 );
         if( nausea_chance > 0 && x_in_y( std::min( 100, nausea_chance ), 100 ) ) {
             const double nausea_severity = nausea_chance * rng_float( 1.25, 0.5 );
             // 15 minutes is the max duration, and the effect's intensity automatically scales with duration.
