@@ -11214,7 +11214,7 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
 
         ///\EFFECT_STR determines ability to drag furniture
     } else if( str_req > str &&
-               one_in( std::max( 20 - str_req - str, 2 ) ) ) {
+               one_in( std::max( 20 - ( str_req - str ), 2 ) ) ) {
         add_msg( m_bad, _( "You strain yourself trying to move the heavy %s!" ),
                  furntype.name() );
         u.mod_pain( 1 ); // Hurt ourselves.
