@@ -139,5 +139,34 @@
     "location": "belt clip",
     "mod_targets": [ "rugerlcp", "kp32", "kp3at", "kpf9", "cop_38", "moss_brownie" ],
     "flags": [ "IS_ARMOR", "SKINTIGHT", "WATER_FRIENDLY" ]
+  },
+  {
+    "id": "electric_spanner",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "GUNMOD" ],
+    "name": { "str": "electric spanner" },
+    "description": "A homemade device consisting of a little electric motor that spools a pair of cables with hooks at the end.  When attached to a crossbow and powered on, the motor reels these cables in, drawing the bowstring without requiring that the user to be strong enough to do it on their own.  This mod is not compatible with crossbows of unusual design, nor those which are spanned with a lever or some other device.",
+    "weight": "68 g",
+    "volume": "150 ml",
+    "longest_side": "63 mm",
+    "price": "50 USD",
+    "price_postapoc": "4 USD",
+    "install_time": "4 m",
+    "material": [ "steel", "plastic" ],
+    "symbol": ":",
+    "color": "brown",
+    "location": "mechanism",
+    "mod_targets": [ "crossbow" ],
+    "min_skills": [ [ "archery", 1 ], [ "mechanics", 2 ] ],
+    "charges_per_use": 1,
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE_WELL",
+        "rigid": true,
+        "flag_restriction": [ "BATTERY_MEDIUM" ],
+        "default_magazine": "medium_battery_cell"
+      }
+    ],
+    "tool_ammo": [ "battery" ]
   }
 ]
